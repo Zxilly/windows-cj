@@ -6,7 +6,6 @@ package windows.Win32.System.Time
 import std.collection.*
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 
@@ -136,45 +135,172 @@ extend TIME_ZONE_INFORMATION <: windows_core.CopyType & windows_core.RuntimeType
     }
 }
 
-@When[ADVAPI32 == "on"]
+@When[Windows_Win32_System_Time == "on" && ADVAPI32 == "on" && Windows_Win32_System_Time_EnumDynamicTimeZoneInformation == "on"]
 foreign {
     func EnumDynamicTimeZoneInformation(dwIndex: UInt32, lpTimeZoneInformation: CPointer<DYNAMIC_TIME_ZONE_INFORMATIONAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Time == "on" && ADVAPI32 == "on" && Windows_Win32_System_Time_EnumDynamicTimeZoneInformation == "on"]
+public unsafe func Windows_EnumDynamicTimeZoneInformation(dwIndex: UInt32, lpTimeZoneInformation: CPointer<DYNAMIC_TIME_ZONE_INFORMATIONAbi>): UInt32 {
+    return EnumDynamicTimeZoneInformation(dwIndex, lpTimeZoneInformation)
+}
+
+@When[Windows_Win32_System_Time == "on" && ADVAPI32 == "on" && Windows_Win32_System_Time_GetDynamicTimeZoneInformationEffectiveYears == "on"]
+foreign {
     func GetDynamicTimeZoneInformationEffectiveYears(lpTimeZoneInformation: CPointer<DYNAMIC_TIME_ZONE_INFORMATIONAbi>, FirstYear: CPointer<UInt32>, LastYear: CPointer<UInt32>): UInt32
 }
 
-@When[KERNEL32 == "on"]
+@When[Windows_Win32_System_Time == "on" && ADVAPI32 == "on" && Windows_Win32_System_Time_GetDynamicTimeZoneInformationEffectiveYears == "on"]
+public unsafe func Windows_GetDynamicTimeZoneInformationEffectiveYears(lpTimeZoneInformation: CPointer<DYNAMIC_TIME_ZONE_INFORMATIONAbi>, FirstYear: CPointer<UInt32>, LastYear: CPointer<UInt32>): UInt32 {
+    return GetDynamicTimeZoneInformationEffectiveYears(lpTimeZoneInformation, FirstYear, LastYear)
+}
+
+@When[Windows_Win32_System_Time == "on" && KERNEL32 == "on" && Windows_Win32_System_Time_FileTimeToSystemTime == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func FileTimeToSystemTime(lpFileTime: CPointer<Win32_Foundation.FILETIMEAbi>, lpSystemTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>): Int32
+}
+
+@When[Windows_Win32_System_Time == "on" && KERNEL32 == "on" && Windows_Win32_System_Time_FileTimeToSystemTime == "on"]
+public unsafe func Windows_FileTimeToSystemTime(lpFileTime: CPointer<Win32_Foundation.FILETIMEAbi>, lpSystemTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>): Int32 {
+    return FileTimeToSystemTime(lpFileTime, lpSystemTime)
+}
+
+@When[Windows_Win32_System_Time == "on" && KERNEL32 == "on" && Windows_Win32_System_Time_GetDynamicTimeZoneInformation == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetDynamicTimeZoneInformation(pTimeZoneInformation: CPointer<DYNAMIC_TIME_ZONE_INFORMATIONAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Time == "on" && KERNEL32 == "on" && Windows_Win32_System_Time_GetDynamicTimeZoneInformation == "on"]
+public unsafe func Windows_GetDynamicTimeZoneInformation(pTimeZoneInformation: CPointer<DYNAMIC_TIME_ZONE_INFORMATIONAbi>): UInt32 {
+    return GetDynamicTimeZoneInformation(pTimeZoneInformation)
+}
+
+@When[Windows_Win32_System_Time == "on" && KERNEL32 == "on" && Windows_Win32_System_Time_GetTimeZoneInformation == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetTimeZoneInformation(lpTimeZoneInformation: CPointer<TIME_ZONE_INFORMATIONAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Time == "on" && KERNEL32 == "on" && Windows_Win32_System_Time_GetTimeZoneInformation == "on"]
+public unsafe func Windows_GetTimeZoneInformation(lpTimeZoneInformation: CPointer<TIME_ZONE_INFORMATIONAbi>): UInt32 {
+    return GetTimeZoneInformation(lpTimeZoneInformation)
+}
+
+@When[Windows_Win32_System_Time == "on" && KERNEL32 == "on" && Windows_Win32_System_Time_GetTimeZoneInformationForYear == "on"]
+foreign {
     // param-hint: pdtzi optional
     // pinvoke-hint: SetLastError
     func GetTimeZoneInformationForYear(wYear: UInt16, pdtzi: CPointer<DYNAMIC_TIME_ZONE_INFORMATIONAbi>, ptzi: CPointer<TIME_ZONE_INFORMATIONAbi>): Int32
+}
+
+@When[Windows_Win32_System_Time == "on" && KERNEL32 == "on" && Windows_Win32_System_Time_GetTimeZoneInformationForYear == "on"]
+public unsafe func Windows_GetTimeZoneInformationForYear(wYear: UInt16, pdtzi: CPointer<DYNAMIC_TIME_ZONE_INFORMATIONAbi>, ptzi: CPointer<TIME_ZONE_INFORMATIONAbi>): Int32 {
+    return GetTimeZoneInformationForYear(wYear, pdtzi, ptzi)
+}
+
+@When[Windows_Win32_System_Time == "on" && KERNEL32 == "on" && Windows_Win32_System_Time_LocalFileTimeToLocalSystemTime == "on"]
+foreign {
     // param-hint: timeZoneInformation optional
     func LocalFileTimeToLocalSystemTime(timeZoneInformation: CPointer<TIME_ZONE_INFORMATIONAbi>, localFileTime: CPointer<Win32_Foundation.FILETIMEAbi>, localSystemTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>): Int32
+}
+
+@When[Windows_Win32_System_Time == "on" && KERNEL32 == "on" && Windows_Win32_System_Time_LocalFileTimeToLocalSystemTime == "on"]
+public unsafe func Windows_LocalFileTimeToLocalSystemTime(timeZoneInformation: CPointer<TIME_ZONE_INFORMATIONAbi>, localFileTime: CPointer<Win32_Foundation.FILETIMEAbi>, localSystemTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>): Int32 {
+    return LocalFileTimeToLocalSystemTime(timeZoneInformation, localFileTime, localSystemTime)
+}
+
+@When[Windows_Win32_System_Time == "on" && KERNEL32 == "on" && Windows_Win32_System_Time_LocalSystemTimeToLocalFileTime == "on"]
+foreign {
     // param-hint: timeZoneInformation optional
     func LocalSystemTimeToLocalFileTime(timeZoneInformation: CPointer<TIME_ZONE_INFORMATIONAbi>, localSystemTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, localFileTime: CPointer<Win32_Foundation.FILETIMEAbi>): Int32
+}
+
+@When[Windows_Win32_System_Time == "on" && KERNEL32 == "on" && Windows_Win32_System_Time_LocalSystemTimeToLocalFileTime == "on"]
+public unsafe func Windows_LocalSystemTimeToLocalFileTime(timeZoneInformation: CPointer<TIME_ZONE_INFORMATIONAbi>, localSystemTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, localFileTime: CPointer<Win32_Foundation.FILETIMEAbi>): Int32 {
+    return LocalSystemTimeToLocalFileTime(timeZoneInformation, localSystemTime, localFileTime)
+}
+
+@When[Windows_Win32_System_Time == "on" && KERNEL32 == "on" && Windows_Win32_System_Time_SetDynamicTimeZoneInformation == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetDynamicTimeZoneInformation(lpTimeZoneInformation: CPointer<DYNAMIC_TIME_ZONE_INFORMATIONAbi>): Int32
+}
+
+@When[Windows_Win32_System_Time == "on" && KERNEL32 == "on" && Windows_Win32_System_Time_SetDynamicTimeZoneInformation == "on"]
+public unsafe func Windows_SetDynamicTimeZoneInformation(lpTimeZoneInformation: CPointer<DYNAMIC_TIME_ZONE_INFORMATIONAbi>): Int32 {
+    return SetDynamicTimeZoneInformation(lpTimeZoneInformation)
+}
+
+@When[Windows_Win32_System_Time == "on" && KERNEL32 == "on" && Windows_Win32_System_Time_SetTimeZoneInformation == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetTimeZoneInformation(lpTimeZoneInformation: CPointer<TIME_ZONE_INFORMATIONAbi>): Int32
+}
+
+@When[Windows_Win32_System_Time == "on" && KERNEL32 == "on" && Windows_Win32_System_Time_SetTimeZoneInformation == "on"]
+public unsafe func Windows_SetTimeZoneInformation(lpTimeZoneInformation: CPointer<TIME_ZONE_INFORMATIONAbi>): Int32 {
+    return SetTimeZoneInformation(lpTimeZoneInformation)
+}
+
+@When[Windows_Win32_System_Time == "on" && KERNEL32 == "on" && Windows_Win32_System_Time_SystemTimeToFileTime == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SystemTimeToFileTime(lpSystemTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, lpFileTime: CPointer<Win32_Foundation.FILETIMEAbi>): Int32
+}
+
+@When[Windows_Win32_System_Time == "on" && KERNEL32 == "on" && Windows_Win32_System_Time_SystemTimeToFileTime == "on"]
+public unsafe func Windows_SystemTimeToFileTime(lpSystemTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, lpFileTime: CPointer<Win32_Foundation.FILETIMEAbi>): Int32 {
+    return SystemTimeToFileTime(lpSystemTime, lpFileTime)
+}
+
+@When[Windows_Win32_System_Time == "on" && KERNEL32 == "on" && Windows_Win32_System_Time_SystemTimeToTzSpecificLocalTime == "on"]
+foreign {
     // param-hint: lpTimeZoneInformation optional
     // pinvoke-hint: SetLastError
     func SystemTimeToTzSpecificLocalTime(lpTimeZoneInformation: CPointer<TIME_ZONE_INFORMATIONAbi>, lpUniversalTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, lpLocalTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>): Int32
+}
+
+@When[Windows_Win32_System_Time == "on" && KERNEL32 == "on" && Windows_Win32_System_Time_SystemTimeToTzSpecificLocalTime == "on"]
+public unsafe func Windows_SystemTimeToTzSpecificLocalTime(lpTimeZoneInformation: CPointer<TIME_ZONE_INFORMATIONAbi>, lpUniversalTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, lpLocalTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>): Int32 {
+    return SystemTimeToTzSpecificLocalTime(lpTimeZoneInformation, lpUniversalTime, lpLocalTime)
+}
+
+@When[Windows_Win32_System_Time == "on" && KERNEL32 == "on" && Windows_Win32_System_Time_SystemTimeToTzSpecificLocalTimeEx == "on"]
+foreign {
     // param-hint: lpTimeZoneInformation optional
     // pinvoke-hint: SetLastError
     func SystemTimeToTzSpecificLocalTimeEx(lpTimeZoneInformation: CPointer<DYNAMIC_TIME_ZONE_INFORMATIONAbi>, lpUniversalTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, lpLocalTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>): Int32
+}
+
+@When[Windows_Win32_System_Time == "on" && KERNEL32 == "on" && Windows_Win32_System_Time_SystemTimeToTzSpecificLocalTimeEx == "on"]
+public unsafe func Windows_SystemTimeToTzSpecificLocalTimeEx(lpTimeZoneInformation: CPointer<DYNAMIC_TIME_ZONE_INFORMATIONAbi>, lpUniversalTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, lpLocalTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>): Int32 {
+    return SystemTimeToTzSpecificLocalTimeEx(lpTimeZoneInformation, lpUniversalTime, lpLocalTime)
+}
+
+@When[Windows_Win32_System_Time == "on" && KERNEL32 == "on" && Windows_Win32_System_Time_TzSpecificLocalTimeToSystemTime == "on"]
+foreign {
     // param-hint: lpTimeZoneInformation optional
     // pinvoke-hint: SetLastError
     func TzSpecificLocalTimeToSystemTime(lpTimeZoneInformation: CPointer<TIME_ZONE_INFORMATIONAbi>, lpLocalTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, lpUniversalTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>): Int32
+}
+
+@When[Windows_Win32_System_Time == "on" && KERNEL32 == "on" && Windows_Win32_System_Time_TzSpecificLocalTimeToSystemTime == "on"]
+public unsafe func Windows_TzSpecificLocalTimeToSystemTime(lpTimeZoneInformation: CPointer<TIME_ZONE_INFORMATIONAbi>, lpLocalTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, lpUniversalTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>): Int32 {
+    return TzSpecificLocalTimeToSystemTime(lpTimeZoneInformation, lpLocalTime, lpUniversalTime)
+}
+
+@When[Windows_Win32_System_Time == "on" && KERNEL32 == "on" && Windows_Win32_System_Time_TzSpecificLocalTimeToSystemTimeEx == "on"]
+foreign {
     // param-hint: lpTimeZoneInformation optional
     // pinvoke-hint: SetLastError
     func TzSpecificLocalTimeToSystemTimeEx(lpTimeZoneInformation: CPointer<DYNAMIC_TIME_ZONE_INFORMATIONAbi>, lpLocalTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, lpUniversalTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>): Int32
+}
+
+@When[Windows_Win32_System_Time == "on" && KERNEL32 == "on" && Windows_Win32_System_Time_TzSpecificLocalTimeToSystemTimeEx == "on"]
+public unsafe func Windows_TzSpecificLocalTimeToSystemTimeEx(lpTimeZoneInformation: CPointer<DYNAMIC_TIME_ZONE_INFORMATIONAbi>, lpLocalTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, lpUniversalTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>): Int32 {
+    return TzSpecificLocalTimeToSystemTimeEx(lpTimeZoneInformation, lpLocalTime, lpUniversalTime)
 }
 
 @When[Windows_Win32_System_Time == "on"]

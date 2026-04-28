@@ -5,22 +5,14 @@ import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrap
 import windows_interface as windows_interface
 import windows_polyfill.{packedReadInt32, packedReadUInt16, packedReadUInt32, packedReadUInt64, packedReadUInt8, packedReadValue, packedWriteInt32, packedWriteUInt16, packedWriteUInt32, packedWriteUInt64, packedWriteUInt8, packedWriteValue, unionReadInt32, unionWriteInt32}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Direct3D9 == "on"]
 import windows_sys.Win32.Graphics.Direct3D9 as Win32_Graphics_Direct3D9
-@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows_sys.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-@When[Windows_Win32_Media_Audio_DirectSound == "on"]
 import windows_sys.Win32.Media.Audio.DirectSound as Win32_Media_Audio_DirectSound
-@When[Windows_Win32_Media_MediaFoundation == "on"]
 import windows_sys.Win32.Media.MediaFoundation as Win32_Media_MediaFoundation
-@When[Windows_Win32_Media_WindowsMediaFormat == "on"]
 import windows_sys.Win32.Media.WindowsMediaFormat as Win32_Media_WindowsMediaFormat
 import windows_sys.Win32.Media._impl_l0 as Win32_Media__impl_l0
-@When[Windows_Win32_System_Diagnostics_Etw == "on"]
 import windows_sys.Win32.System.Diagnostics.Etw as Win32_System_Diagnostics_Etw
-@When[Windows_Win32_System_Registry == "on"]
 import windows_sys.Win32.System.Registry as Win32_System_Registry
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
@@ -38114,12 +38106,26 @@ public struct PIN_INFO {
     public init() {}
 }
 
-@When[QUARTZ == "on"]
+@When[Windows_Win32_Media_DirectShow == "on" && QUARTZ == "on" && Windows_Win32_Media_DirectShow_AMGetErrorTextA == "on"]
 foreign {
     // param-hint: pbuffer len=param[2]
     func AMGetErrorTextA(hr: Int32, pbuffer: CPointer<UInt8>, MaxLen: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_DirectShow == "on" && QUARTZ == "on" && Windows_Win32_Media_DirectShow_AMGetErrorTextA == "on"]
+public unsafe func Windows_AMGetErrorTextA(hr: Int32, pbuffer: CPointer<UInt8>, MaxLen: UInt32): UInt32 {
+    return AMGetErrorTextA(hr, pbuffer, MaxLen)
+}
+
+@When[Windows_Win32_Media_DirectShow == "on" && QUARTZ == "on" && Windows_Win32_Media_DirectShow_AMGetErrorTextW == "on"]
+foreign {
     // param-hint: pbuffer len=param[2]
     func AMGetErrorTextW(hr: Int32, pbuffer: CPointer<UInt16>, MaxLen: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_DirectShow == "on" && QUARTZ == "on" && Windows_Win32_Media_DirectShow_AMGetErrorTextW == "on"]
+public unsafe func Windows_AMGetErrorTextW(hr: Int32, pbuffer: CPointer<UInt16>, MaxLen: UInt32): UInt32 {
+    return AMGetErrorTextW(hr, pbuffer, MaxLen)
 }
 
 @When[Windows_Win32_Media_DirectShow == "on"]

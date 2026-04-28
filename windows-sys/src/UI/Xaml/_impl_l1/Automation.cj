@@ -479,7 +479,7 @@ public struct IAutomationPropertiesStatics2Vtbl {
     public var SetAccessibilityView: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32) -> Int32> = { _, _, _ => 0 }
     @When[Windows_UI_Xaml == "on"]
     public var ControlledPeersProperty: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public var GetControlledPeers: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -552,7 +552,7 @@ public class IAutomationPropertiesStatics2 <: InterfaceWrapperBase & ComInterfac
         return __vt.ControlledPeersProperty(__liveRaw, result__)
     }
 
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public unsafe func GetControlledPeers(element: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -584,7 +584,7 @@ public struct IAutomationPropertiesStatics3Vtbl {
     public var SetLevel: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32) -> Int32> = { _, _, _ => 0 }
     @When[Windows_UI_Xaml == "on"]
     public var AnnotationsProperty: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public var GetAnnotations: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -699,7 +699,7 @@ public class IAutomationPropertiesStatics3 <: InterfaceWrapperBase & ComInterfac
         return __vt.AnnotationsProperty(__liveRaw, result__)
     }
 
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public unsafe func GetAnnotations(element: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

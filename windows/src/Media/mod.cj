@@ -10,13 +10,9 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Graphics_DirectX == "on"]
 import windows.Graphics.DirectX as Graphics_DirectX
-@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
 import windows.Graphics.DirectX.Direct3D11 as Graphics_DirectX_Direct3D11
-@When[Windows_Graphics_Imaging == "on"]
 import windows.Graphics.Imaging as Graphics_Imaging
 import windows._impl_l1 as _impl_l1
 import windows._impl_l2 as _impl_l2
@@ -1598,14 +1594,25 @@ extend IMediaMarkerTypesStatics <: windows_core.Interface<IMediaMarkerTypesStati
 @C
 public struct IMediaMarkersVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Markers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Markers: UIntNative = UIntNative(0)
     public init() {}
 
+    @When[Windows_Foundation_Collections == "on"]
     public static func new<Identity>(offset!: Int64 = 0): IMediaMarkersVtbl where Identity <: IMediaMarkers_Impl {
         let _ = offset
         var vtbl = IMediaMarkersVtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.Markers = { instanceRaw, result__ =>
+        vtbl = IMediaMarkersVtbl.__assignMarkers<Identity>(vtbl)
+        return vtbl
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections == "on"]
+    public static func __assignMarkers<Identity>(vtbl: IMediaMarkersVtbl): IMediaMarkersVtbl where Identity <: IMediaMarkers_Impl {
+        var next = vtbl
+        next.Markers = { instanceRaw, result__ =>
             match (unsafe { asImplFromRaw<IMediaMarkers_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
                     impl.__winrtThunk_Markers(result__)
@@ -1613,6 +1620,11 @@ public struct IMediaMarkersVtbl {
                     E_NOINTERFACE.value
             }
         }
+        return next
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections != "on"]
+    public static func __assignMarkers<Identity>(vtbl: IMediaMarkersVtbl): IMediaMarkersVtbl where Identity <: IMediaMarkers_Impl {
         return vtbl
     }
 
@@ -1624,12 +1636,12 @@ public struct IMediaMarkersVtbl {
     }
 }
 
-@When[Windows_Media == "on"]
+@When[Windows_Media == "on" && Windows_Foundation_Collections == "on"]
 public interface IMediaMarkers_ImplErased {
     public func __winrtThunk_Markers(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Media == "on"]
+@When[Windows_Media == "on" && Windows_Foundation_Collections == "on"]
 public interface IMediaMarkers_Impl <: IMediaMarkers_ImplErased {
     public func Markers(): windows_core.Result<windows_collections.IVectorView<IMediaMarker>>
 
@@ -1717,6 +1729,7 @@ public class IMediaMarkers <: InterfaceWrapperBase & ComInterface & RuntimeName 
         readVtbl<IMediaMarkersVtbl>(IMediaMarkersVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Markers(): windows_collections.IVectorView<IMediaMarker> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2035,7 +2048,10 @@ public struct IMusicDisplayProperties2Vtbl {
     public var SetAlbumTitle: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var TrackNumber: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetTrackNumber: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Genres: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Genres: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2132,6 +2148,7 @@ public class IMusicDisplayProperties2 <: InterfaceWrapperBase & ComInterface & R
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Genres(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2759,7 +2776,10 @@ extend IVideoDisplayProperties <: windows_core.Interface<IVideoDisplayProperties
 @C
 public struct IVideoDisplayProperties2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Genres: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Genres: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2828,6 +2848,7 @@ public class IVideoDisplayProperties2 <: InterfaceWrapperBase & ComInterface & R
         readVtbl<IVideoDisplayProperties2Vtbl>(IVideoDisplayProperties2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Genres(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5314,9 +5335,9 @@ public struct ISystemMediaTransportControlsDisplayUpdaterVtbl {
     public var MusicProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var VideoProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ImageProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var CopyFromFileAsync: CFunc<(CPointer<Unit>, MediaPlaybackTypeAbi, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var CopyFromFileAsync: UIntNative = UIntNative(0)
     public var ClearAll: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
     public var Update: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
@@ -5456,7 +5477,7 @@ public class ISystemMediaTransportControlsDisplayUpdater <: InterfaceWrapperBase
         return ImageDisplayProperties.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func CopyFromFileAsync(type_: MediaPlaybackType, source: _impl_l1.StorageFile): windows_future.IAsyncOperation<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6085,7 +6106,7 @@ public class SystemMediaTransportControlsDisplayUpdater <: InterfaceWrapperBase 
         return defaultInterface().ImageProperties()
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func CopyFromFileAsync(type_: MediaPlaybackType, source: _impl_l1.StorageFile): windows_future.IAsyncOperation<Bool> {
         return defaultInterface().CopyFromFileAsync(type_, source)
     }

@@ -8,7 +8,6 @@ import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeTy
 import windows_core as windows_core
 import windows_polyfill.{unionReadUInt32, unionWriteUInt32}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 
@@ -1269,33 +1268,119 @@ public struct RID_DEVICE_INFO__Anonymous_e__Union {
     public init() {}
 }
 
-@When[USER32 == "on"]
+@When[Windows_Win32_UI_Input == "on" && USER32 == "on" && Windows_Win32_UI_Input_DefRawInputProc == "on"]
 foreign {
     // param-hint: paRawInput len=param[1]
     func DefRawInputProc(paRawInput: CPointer<CPointer<RAWINPUTAbi>>, nInput: Int32, cbSizeHeader: UInt32): IntNative
+}
+
+@When[Windows_Win32_UI_Input == "on" && USER32 == "on" && Windows_Win32_UI_Input_DefRawInputProc == "on"]
+public unsafe func Windows_DefRawInputProc(paRawInput: CPointer<CPointer<RAWINPUTAbi>>, nInput: Int32, cbSizeHeader: UInt32): IntNative {
+    return DefRawInputProc(paRawInput, nInput, cbSizeHeader)
+}
+
+@When[Windows_Win32_UI_Input == "on" && USER32 == "on" && Windows_Win32_UI_Input_GetCIMSSM == "on"]
+foreign {
     func GetCIMSSM(inputMessageSource: CPointer<INPUT_MESSAGE_SOURCEAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Input == "on" && USER32 == "on" && Windows_Win32_UI_Input_GetCIMSSM == "on"]
+public unsafe func Windows_GetCIMSSM(inputMessageSource: CPointer<INPUT_MESSAGE_SOURCEAbi>): Int32 {
+    return GetCIMSSM(inputMessageSource)
+}
+
+@When[Windows_Win32_UI_Input == "on" && USER32 == "on" && Windows_Win32_UI_Input_GetCurrentInputMessageSource == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetCurrentInputMessageSource(inputMessageSource: CPointer<INPUT_MESSAGE_SOURCEAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Input == "on" && USER32 == "on" && Windows_Win32_UI_Input_GetCurrentInputMessageSource == "on"]
+public unsafe func Windows_GetCurrentInputMessageSource(inputMessageSource: CPointer<INPUT_MESSAGE_SOURCEAbi>): Int32 {
+    return GetCurrentInputMessageSource(inputMessageSource)
+}
+
+@When[Windows_Win32_UI_Input == "on" && USER32 == "on" && Windows_Win32_UI_Input_GetRawInputBuffer == "on"]
+foreign {
     // param-hint: pData bytes=param[1] optional
     // pinvoke-hint: SetLastError
     func GetRawInputBuffer(pData: CPointer<RAWINPUTAbi>, pcbSize: CPointer<UInt32>, cbSizeHeader: UInt32): UInt32
+}
+
+@When[Windows_Win32_UI_Input == "on" && USER32 == "on" && Windows_Win32_UI_Input_GetRawInputBuffer == "on"]
+public unsafe func Windows_GetRawInputBuffer(pData: CPointer<RAWINPUTAbi>, pcbSize: CPointer<UInt32>, cbSizeHeader: UInt32): UInt32 {
+    return GetRawInputBuffer(pData, pcbSize, cbSizeHeader)
+}
+
+@When[Windows_Win32_UI_Input == "on" && USER32 == "on" && Windows_Win32_UI_Input_GetRawInputData == "on"]
+foreign {
     // param-hint: pData bytes=param[3] optional
     func GetRawInputData(hRawInput: HRAWINPUT, uiCommand: RAW_INPUT_DATA_COMMAND_FLAGSAbi, pData: CPointer<Unit>, pcbSize: CPointer<UInt32>, cbSizeHeader: UInt32): UInt32
+}
+
+@When[Windows_Win32_UI_Input == "on" && USER32 == "on" && Windows_Win32_UI_Input_GetRawInputData == "on"]
+public unsafe func Windows_GetRawInputData(hRawInput: HRAWINPUT, uiCommand: RAW_INPUT_DATA_COMMAND_FLAGSAbi, pData: CPointer<Unit>, pcbSize: CPointer<UInt32>, cbSizeHeader: UInt32): UInt32 {
+    return GetRawInputData(hRawInput, uiCommand, pData, pcbSize, cbSizeHeader)
+}
+
+@When[Windows_Win32_UI_Input == "on" && USER32 == "on" && Windows_Win32_UI_Input_GetRawInputDeviceInfoA == "on"]
+foreign {
     // param-hint: hDevice optional
     // param-hint: pData bytes=param[3] optional
     // pinvoke-hint: SetLastError
     func GetRawInputDeviceInfoA(hDevice: CPointer<Unit>, uiCommand: RAW_INPUT_DEVICE_INFO_COMMANDAbi, pData: CPointer<Unit>, pcbSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_UI_Input == "on" && USER32 == "on" && Windows_Win32_UI_Input_GetRawInputDeviceInfoA == "on"]
+public unsafe func Windows_GetRawInputDeviceInfoA(hDevice: CPointer<Unit>, uiCommand: RAW_INPUT_DEVICE_INFO_COMMANDAbi, pData: CPointer<Unit>, pcbSize: CPointer<UInt32>): UInt32 {
+    return GetRawInputDeviceInfoA(hDevice, uiCommand, pData, pcbSize)
+}
+
+@When[Windows_Win32_UI_Input == "on" && USER32 == "on" && Windows_Win32_UI_Input_GetRawInputDeviceInfoW == "on"]
+foreign {
     // param-hint: hDevice optional
     // param-hint: pData bytes=param[3] optional
     // pinvoke-hint: SetLastError
     func GetRawInputDeviceInfoW(hDevice: CPointer<Unit>, uiCommand: RAW_INPUT_DEVICE_INFO_COMMANDAbi, pData: CPointer<Unit>, pcbSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_UI_Input == "on" && USER32 == "on" && Windows_Win32_UI_Input_GetRawInputDeviceInfoW == "on"]
+public unsafe func Windows_GetRawInputDeviceInfoW(hDevice: CPointer<Unit>, uiCommand: RAW_INPUT_DEVICE_INFO_COMMANDAbi, pData: CPointer<Unit>, pcbSize: CPointer<UInt32>): UInt32 {
+    return GetRawInputDeviceInfoW(hDevice, uiCommand, pData, pcbSize)
+}
+
+@When[Windows_Win32_UI_Input == "on" && USER32 == "on" && Windows_Win32_UI_Input_GetRawInputDeviceList == "on"]
+foreign {
     // param-hint: pRawInputDeviceList len=param[1] optional
     // pinvoke-hint: SetLastError
     func GetRawInputDeviceList(pRawInputDeviceList: CPointer<RAWINPUTDEVICELISTAbi>, puiNumDevices: CPointer<UInt32>, cbSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_UI_Input == "on" && USER32 == "on" && Windows_Win32_UI_Input_GetRawInputDeviceList == "on"]
+public unsafe func Windows_GetRawInputDeviceList(pRawInputDeviceList: CPointer<RAWINPUTDEVICELISTAbi>, puiNumDevices: CPointer<UInt32>, cbSize: UInt32): UInt32 {
+    return GetRawInputDeviceList(pRawInputDeviceList, puiNumDevices, cbSize)
+}
+
+@When[Windows_Win32_UI_Input == "on" && USER32 == "on" && Windows_Win32_UI_Input_GetRegisteredRawInputDevices == "on"]
+foreign {
     // param-hint: pRawInputDevices len=param[1] optional
     // pinvoke-hint: SetLastError
     func GetRegisteredRawInputDevices(pRawInputDevices: CPointer<RAWINPUTDEVICEAbi>, puiNumDevices: CPointer<UInt32>, cbSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_UI_Input == "on" && USER32 == "on" && Windows_Win32_UI_Input_GetRegisteredRawInputDevices == "on"]
+public unsafe func Windows_GetRegisteredRawInputDevices(pRawInputDevices: CPointer<RAWINPUTDEVICEAbi>, puiNumDevices: CPointer<UInt32>, cbSize: UInt32): UInt32 {
+    return GetRegisteredRawInputDevices(pRawInputDevices, puiNumDevices, cbSize)
+}
+
+@When[Windows_Win32_UI_Input == "on" && USER32 == "on" && Windows_Win32_UI_Input_RegisterRawInputDevices == "on"]
+foreign {
     // param-hint: pRawInputDevices len=param[1]
     // pinvoke-hint: SetLastError
     func RegisterRawInputDevices(pRawInputDevices: CPointer<RAWINPUTDEVICEAbi>, uiNumDevices: UInt32, cbSize: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Input == "on" && USER32 == "on" && Windows_Win32_UI_Input_RegisterRawInputDevices == "on"]
+public unsafe func Windows_RegisterRawInputDevices(pRawInputDevices: CPointer<RAWINPUTDEVICEAbi>, uiNumDevices: UInt32, cbSize: UInt32): Int32 {
+    return RegisterRawInputDevices(pRawInputDevices, uiNumDevices, cbSize)
 }

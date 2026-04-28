@@ -506,6 +506,7 @@ public let WiFiDirectPairingProcedure_Invitation: WiFiDirectPairingProcedure = W
 @C
 public struct IWiFiDirectAdvertisement2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedConfigurationMethods: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -550,6 +551,7 @@ public class IWiFiDirectAdvertisement2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IWiFiDirectAdvertisement2Vtbl>(IWiFiDirectAdvertisement2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedConfigurationMethods(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -623,6 +625,7 @@ public class IWiFiDirectAdvertisementPublisherStatusChangedEventArgs <: Interfac
 @C
 public struct IWiFiDirectConnectionParameters2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var PreferenceOrderedConfigurationMethods: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var PreferredPairingProcedure: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetPreferredPairingProcedure: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -669,6 +672,7 @@ public class IWiFiDirectConnectionParameters2 <: InterfaceWrapperBase & ComInter
         readVtbl<IWiFiDirectConnectionParameters2Vtbl>(IWiFiDirectConnectionParameters2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PreferenceOrderedConfigurationMethods(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -804,7 +808,9 @@ public class IWiFiDirectConnectionRequestedEventArgs <: InterfaceWrapperBase & C
 @C
 public struct IWiFiDirectAdvertisementVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var InformationElements: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetInformationElements: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var ListenStateDiscoverability: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetListenStateDiscoverability: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -854,12 +860,14 @@ public class IWiFiDirectAdvertisement <: InterfaceWrapperBase & ComInterface {
         readVtbl<IWiFiDirectAdvertisementVtbl>(IWiFiDirectAdvertisementVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InformationElements(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.InformationElements(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetInformationElements(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1057,7 +1065,7 @@ public struct IWiFiDirectDeviceVtbl {
     public var DeviceId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ConnectionStatusChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveConnectionStatusChanged: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public var GetConnectionEndpointPairs: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1126,7 +1134,7 @@ public class IWiFiDirectDevice <: InterfaceWrapperBase & ComInterface {
         return __vt.RemoveConnectionStatusChanged(__liveRaw, token)
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func GetConnectionEndpointPairs(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1262,9 +1270,9 @@ public class IWiFiDirectDeviceStatics2 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IWiFiDirectInformationElementStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var CreateFromBuffer: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
-    @When[Windows_Devices_Enumeration == "on"]
+    @When[Windows_Devices_Enumeration == "on" && Windows_Foundation_Collections == "on"]
     public var CreateFromDeviceInformation: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -1309,14 +1317,14 @@ public class IWiFiDirectInformationElementStatics <: InterfaceWrapperBase & ComI
         readVtbl<IWiFiDirectInformationElementStaticsVtbl>(IWiFiDirectInformationElementStaticsVtbl())
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func CreateFromBuffer(buffer: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateFromBuffer(__liveRaw, buffer, result__)
     }
 
-    @When[Windows_Devices_Enumeration == "on"]
+    @When[Windows_Devices_Enumeration == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromDeviceInformation(deviceInformation: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

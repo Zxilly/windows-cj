@@ -15,6 +15,7 @@ public struct IContactPickerUIVtbl {
     public var AddContact: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _, _, _ => 0 }
     public var RemoveContact: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var ContainsContact: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var DesiredFields: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_ApplicationModel_Contacts == "on"]
     public var SelectionMode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -82,6 +83,7 @@ public class IContactPickerUI <: InterfaceWrapperBase & ComInterface {
         return __vt.ContainsContact(__liveRaw, id, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DesiredFields(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -114,7 +116,7 @@ public struct IContactPickerUI2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     @When[Windows_ApplicationModel_Contacts == "on"]
     public var AddContact: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
-    @When[Windows_ApplicationModel_Contacts == "on"]
+    @When[Windows_ApplicationModel_Contacts == "on" && Windows_Foundation_Collections == "on"]
     public var DesiredFieldsWithContactFieldType: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -166,7 +168,7 @@ public class IContactPickerUI2 <: InterfaceWrapperBase & ComInterface {
         return __vt.AddContact(__liveRaw, contact, result__)
     }
 
-    @When[Windows_ApplicationModel_Contacts == "on"]
+    @When[Windows_ApplicationModel_Contacts == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func DesiredFieldsWithContactFieldType(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

@@ -86,6 +86,7 @@ public class GattCharacteristic <: InterfaceWrapperBase & ComInterface & windows
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetDescriptors(descriptorUuid: GuidValue): windows_collections.IVectorView<GattDescriptor> {
         return defaultInterface().GetDescriptors(descriptorUuid)
     }
@@ -114,6 +115,7 @@ public class GattCharacteristic <: InterfaceWrapperBase & ComInterface & windows
         return defaultInterface().AttributeHandle()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PresentationFormats(): windows_collections.IVectorView<_impl_l0.GattPresentationFormat> {
         return defaultInterface().PresentationFormats()
     }
@@ -260,6 +262,7 @@ public class GattCharacteristicsResult <: InterfaceWrapperBase & ComInterface & 
         return defaultInterface().ProtocolError()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Characteristics(): windows_collections.IVectorView<GattCharacteristic> {
         return defaultInterface().Characteristics()
     }
@@ -589,6 +592,7 @@ public class GattDescriptorsResult <: InterfaceWrapperBase & ComInterface & wind
         return defaultInterface().ProtocolError()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Descriptors(): windows_collections.IVectorView<GattDescriptor> {
         return defaultInterface().Descriptors()
     }
@@ -688,10 +692,12 @@ public class GattDeviceService <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetCharacteristics(characteristicUuid: GuidValue): windows_collections.IVectorView<GattCharacteristic> {
         return defaultInterface().GetCharacteristics(characteristicUuid)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetIncludedServices(serviceUuid: GuidValue): windows_collections.IVectorView<GattDeviceService> {
         return defaultInterface().GetIncludedServices(serviceUuid)
     }
@@ -911,6 +917,7 @@ public class GattDeviceServicesResult <: InterfaceWrapperBase & ComInterface & w
         return defaultInterface().ProtocolError()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Services(): windows_collections.IVectorView<GattDeviceService> {
         return defaultInterface().Services()
     }
@@ -1028,6 +1035,7 @@ public class GattLocalCharacteristic <: InterfaceWrapperBase & ComInterface & wi
         return defaultInterface().CreateDescriptorAsync(descriptorUuid, parameters)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Descriptors(): windows_collections.IVectorView<GattLocalDescriptor> {
         return defaultInterface().Descriptors()
     }
@@ -1036,10 +1044,12 @@ public class GattLocalCharacteristic <: InterfaceWrapperBase & ComInterface & wi
         return defaultInterface().UserDescription()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PresentationFormats(): windows_collections.IVectorView<_impl_l0.GattPresentationFormat> {
         return defaultInterface().PresentationFormats()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SubscribedClients(): windows_collections.IVectorView<GattSubscribedClient> {
         return defaultInterface().SubscribedClients()
     }
@@ -1068,7 +1078,7 @@ public class GattLocalCharacteristic <: InterfaceWrapperBase & ComInterface & wi
         defaultInterface().RemoveWriteRequested(token)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func NotifyValueAsync(value: _impl_l0.IBuffer): windows_future.IAsyncOperation<windows_collections.IVectorView<GattClientNotificationResult>> {
         return defaultInterface().NotifyValueAsync(value)
     }
@@ -1219,6 +1229,7 @@ public class GattLocalCharacteristicParameters <: InterfaceWrapperBase & ComInte
         return defaultInterface().UserDescription()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PresentationFormats(): windows_collections.IVector<_impl_l0.GattPresentationFormat> {
         return defaultInterface().PresentationFormats()
     }
@@ -1759,6 +1770,7 @@ public class GattLocalService <: InterfaceWrapperBase & ComInterface & windows_i
         return defaultInterface().CreateCharacteristicAsync(characteristicUuid, parameters)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Characteristics(): windows_collections.IVectorView<GattLocalCharacteristic> {
         return defaultInterface().Characteristics()
     }
@@ -3604,14 +3616,20 @@ extend GattWriteResult <: windows_core.HandleWinrtType<GattWriteResult> {
 @C
 public struct IGattCharacteristicVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetDescriptors: CFunc<(CPointer<Unit>, GUID, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetDescriptors: UIntNative = UIntNative(0)
     public var CharacteristicProperties: CFunc<(CPointer<Unit>, CPointer<_impl_l0.GattCharacteristicPropertiesAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ProtectionLevel: CFunc<(CPointer<Unit>, CPointer<_impl_l0.GattProtectionLevelAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetProtectionLevel: CFunc<(CPointer<Unit>, _impl_l0.GattProtectionLevelAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var UserDescription: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Uuid: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var AttributeHandle: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var PresentationFormats: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var PresentationFormats: UIntNative = UIntNative(0)
     public var ReadValueAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Bluetooth == "on"]
     public var ReadValueWithCacheModeAsync: CFunc<(CPointer<Unit>, _impl_l0.BluetoothCacheModeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -3697,6 +3715,7 @@ public class IGattCharacteristic <: InterfaceWrapperBase & ComInterface & Runtim
         readVtbl<IGattCharacteristicVtbl>(IGattCharacteristicVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetDescriptors(descriptorUuid: GuidValue): windows_collections.IVectorView<GattDescriptor> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3751,6 +3770,7 @@ public class IGattCharacteristic <: InterfaceWrapperBase & ComInterface & Runtim
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PresentationFormats(): windows_collections.IVectorView<_impl_l0.GattPresentationFormat> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3833,7 +3853,10 @@ extend IGattCharacteristic <: windows_core.Interface<IGattCharacteristic> {}
 public struct IGattCharacteristic2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Service: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAllDescriptors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAllDescriptors: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3922,6 +3945,7 @@ public class IGattCharacteristic2 <: InterfaceWrapperBase & ComInterface & Runti
         return GattDeviceService.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAllDescriptors(): windows_collections.IVectorView<GattDescriptor> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4095,7 +4119,10 @@ public struct IGattCharacteristicsResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Status: CFunc<(CPointer<Unit>, CPointer<_impl_l0.GattCommunicationStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ProtocolError: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Characteristics: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Characteristics: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4180,6 +4207,7 @@ public class IGattCharacteristicsResult <: InterfaceWrapperBase & ComInterface &
         return Foundation.IReference<UInt8>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Characteristics(): windows_collections.IVectorView<GattCharacteristic> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4535,7 +4563,10 @@ public struct IGattDescriptorsResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Status: CFunc<(CPointer<Unit>, CPointer<_impl_l0.GattCommunicationStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ProtocolError: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Descriptors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Descriptors: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4620,6 +4651,7 @@ public class IGattDescriptorsResult <: InterfaceWrapperBase & ComInterface & Run
         return Foundation.IReference<UInt8>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Descriptors(): windows_collections.IVectorView<GattDescriptor> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4636,8 +4668,14 @@ extend IGattDescriptorsResult <: windows_core.Interface<IGattDescriptorsResult> 
 @C
 public struct IGattDeviceServiceVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetCharacteristics: CFunc<(CPointer<Unit>, GUID, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetCharacteristics: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetIncludedServices: CFunc<(CPointer<Unit>, GUID, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetIncludedServices: UIntNative = UIntNative(0)
     public var DeviceId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Uuid: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var AttributeHandle: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -4721,6 +4759,7 @@ public class IGattDeviceService <: InterfaceWrapperBase & ComInterface & Runtime
         readVtbl<IGattDeviceServiceVtbl>(IGattDeviceServiceVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetCharacteristics(characteristicUuid: GuidValue): windows_collections.IVectorView<GattCharacteristic> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4729,6 +4768,7 @@ public class IGattDeviceService <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_collections.IVectorView<GattCharacteristic>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetIncludedServices(serviceUuid: GuidValue): windows_collections.IVectorView<GattDeviceService> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4773,9 +4813,18 @@ public struct IGattDeviceService2Vtbl {
     public var Device: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Bluetooth != "on"]
     public var Device: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var ParentServices: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ParentServices: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAllCharacteristics: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAllCharacteristics: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAllIncludedServices: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAllIncludedServices: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4872,6 +4921,7 @@ public class IGattDeviceService2 <: InterfaceWrapperBase & ComInterface & Runtim
         return BluetoothLEDevice.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ParentServices(): windows_collections.IVectorView<GattDeviceService> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4880,6 +4930,7 @@ public class IGattDeviceService2 <: InterfaceWrapperBase & ComInterface & Runtim
         return windows_collections.IVectorView<GattDeviceService>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAllCharacteristics(): windows_collections.IVectorView<GattCharacteristic> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4888,6 +4939,7 @@ public class IGattDeviceService2 <: InterfaceWrapperBase & ComInterface & Runtim
         return windows_collections.IVectorView<GattCharacteristic>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAllIncludedServices(): windows_collections.IVectorView<GattDeviceService> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5372,7 +5424,10 @@ public struct IGattDeviceServicesResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Status: CFunc<(CPointer<Unit>, CPointer<_impl_l0.GattCommunicationStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ProtocolError: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Services: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Services: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -5457,6 +5512,7 @@ public class IGattDeviceServicesResult <: InterfaceWrapperBase & ComInterface & 
         return Foundation.IReference<UInt8>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Services(): windows_collections.IVectorView<GattDeviceService> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5482,19 +5538,28 @@ public struct IGattLocalCharacteristicVtbl {
     public var ReadProtectionLevel: CFunc<(CPointer<Unit>, CPointer<_impl_l0.GattProtectionLevelAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var WriteProtectionLevel: CFunc<(CPointer<Unit>, CPointer<_impl_l0.GattProtectionLevelAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CreateDescriptorAsync: CFunc<(CPointer<Unit>, GUID, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Descriptors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Descriptors: UIntNative = UIntNative(0)
     public var UserDescription: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var PresentationFormats: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var PresentationFormats: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SubscribedClients: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SubscribedClients: UIntNative = UIntNative(0)
     public var SubscribedClientsChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveSubscribedClientsChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ReadRequested: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveReadRequested: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var WriteRequested: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveWriteRequested: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var NotifyValueAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
     public var NotifyValueAsync: UIntNative = UIntNative(0)
     @When[Windows_Storage_Streams == "on"]
     public var NotifyValueForSubscribedClientAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
@@ -5617,6 +5682,7 @@ public class IGattLocalCharacteristic <: InterfaceWrapperBase & ComInterface & R
         return windows_future.IAsyncOperation<GattLocalDescriptorResult>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Descriptors(): windows_collections.IVectorView<GattLocalDescriptor> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5633,6 +5699,7 @@ public class IGattLocalCharacteristic <: InterfaceWrapperBase & ComInterface & R
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PresentationFormats(): windows_collections.IVectorView<_impl_l0.GattPresentationFormat> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5641,6 +5708,7 @@ public class IGattLocalCharacteristic <: InterfaceWrapperBase & ComInterface & R
         return windows_collections.IVectorView<_impl_l0.GattPresentationFormat>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SubscribedClients(): windows_collections.IVectorView<GattSubscribedClient> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5691,7 +5759,7 @@ public class IGattLocalCharacteristic <: InterfaceWrapperBase & ComInterface & R
         HRESULT(hr).ok()
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func NotifyValueAsync(value: _impl_l0.IBuffer): windows_future.IAsyncOperation<windows_collections.IVectorView<GattClientNotificationResult>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5733,7 +5801,10 @@ public struct IGattLocalCharacteristicParametersVtbl {
     public var WriteProtectionLevel: CFunc<(CPointer<Unit>, CPointer<_impl_l0.GattProtectionLevelAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetUserDescription: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var UserDescription: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var PresentationFormats: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var PresentationFormats: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -5874,6 +5945,7 @@ public class IGattLocalCharacteristicParameters <: InterfaceWrapperBase & ComInt
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PresentationFormats(): windows_collections.IVector<_impl_l0.GattPresentationFormat> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6236,7 +6308,10 @@ public struct IGattLocalServiceVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Uuid: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CreateCharacteristicAsync: CFunc<(CPointer<Unit>, GUID, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Characteristics: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Characteristics: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -6321,6 +6396,7 @@ public class IGattLocalService <: InterfaceWrapperBase & ComInterface & RuntimeN
         return windows_future.IAsyncOperation<GattLocalCharacteristicResult>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Characteristics(): windows_collections.IVectorView<GattLocalCharacteristic> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

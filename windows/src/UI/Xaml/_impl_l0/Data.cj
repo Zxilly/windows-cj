@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 @When[Windows_UI_Xaml_Interop == "on"]
 import windows.UI.Xaml.Interop as UI_Xaml_Interop
@@ -470,12 +469,14 @@ public class CurrentChangingEventHandler <: InterfaceWrapperBase & ComInterface 
 @When[Windows_UI_Xaml_Data == "on"]
 extend CurrentChangingEventHandler <: windows_core.Interface<CurrentChangingEventHandler> {}
 
+@When[Windows_UI_Xaml_Data == "on"]
 private open class CurrentChangingEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Data == "on"]
 private open class CurrentChangingEventHandlerInvoker <: CurrentChangingEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<CurrentChangingEventArgs>): Unit {
         ()
@@ -487,6 +488,7 @@ private open class CurrentChangingEventHandlerInvoker <: CurrentChangingEventHan
     }
 }
 
+@When[Windows_UI_Xaml_Data == "on"]
 private class CurrentChangingEventHandlerBox <: CurrentChangingEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<CurrentChangingEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<CurrentChangingEventHandlerVtbl>
@@ -505,6 +507,7 @@ private class CurrentChangingEventHandlerBox <: CurrentChangingEventHandlerInvok
     }
 }
 
+@When[Windows_UI_Xaml_Data == "on"]
 func buildCurrentChangingEventHandlerBoxVtbl(): CurrentChangingEventHandlerVtbl {
     var vtbl = CurrentChangingEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -1415,7 +1418,10 @@ public struct ICollectionViewVtbl {
     public var CurrentPosition: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsCurrentAfterLast: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsCurrentBeforeFirst: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var CollectionGroups: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CollectionGroups: UIntNative = UIntNative(0)
     public var HasMoreItems: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CurrentChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveCurrentChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1467,14 +1473,7 @@ public struct ICollectionViewVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.CollectionGroups = { instanceRaw, result__ =>
-            match (unsafe { asImplFromRaw<ICollectionView_ImplErased>(instanceRaw) }) {
-                case Some(impl) =>
-                    impl.__winrtThunk_CollectionGroups(result__)
-                case None =>
-                    E_NOINTERFACE.value
-            }
-        }
+        vtbl = ICollectionViewVtbl.__assignCollectionGroups<Identity>(vtbl)
         vtbl.HasMoreItems = { instanceRaw, result__ =>
             match (unsafe { asImplFromRaw<ICollectionView_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
@@ -1571,6 +1570,25 @@ public struct ICollectionViewVtbl {
                     E_NOINTERFACE.value
             }
         }
+        return vtbl
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections == "on"]
+    public static func __assignCollectionGroups<Identity>(vtbl: ICollectionViewVtbl): ICollectionViewVtbl where Identity <: ICollectionView_Impl {
+        var next = vtbl
+        next.CollectionGroups = { instanceRaw, result__ =>
+            match (unsafe { asImplFromRaw<ICollectionView_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_CollectionGroups(result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        return next
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections != "on"]
+    public static func __assignCollectionGroups<Identity>(vtbl: ICollectionViewVtbl): ICollectionViewVtbl where Identity <: ICollectionView_Impl {
         return vtbl
     }
 
@@ -2190,6 +2208,7 @@ public class ICollectionView <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CollectionGroups(): windows_collections.IObservableVector<IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2442,9 +2461,13 @@ extend ICollectionViewFactory <: windows_core.Interface<ICollectionViewFactory> 
 public struct ICollectionViewGroupVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Group: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GroupItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GroupItems: UIntNative = UIntNative(0)
     public init() {}
 
+    @When[Windows_Foundation_Collections == "on"]
     public static func new<Identity>(offset!: Int64 = 0): ICollectionViewGroupVtbl where Identity <: ICollectionViewGroup_Impl {
         let _ = offset
         var vtbl = ICollectionViewGroupVtbl()
@@ -2457,7 +2480,14 @@ public struct ICollectionViewGroupVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GroupItems = { instanceRaw, result__ =>
+        vtbl = ICollectionViewGroupVtbl.__assignGroupItems<Identity>(vtbl)
+        return vtbl
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections == "on"]
+    public static func __assignGroupItems<Identity>(vtbl: ICollectionViewGroupVtbl): ICollectionViewGroupVtbl where Identity <: ICollectionViewGroup_Impl {
+        var next = vtbl
+        next.GroupItems = { instanceRaw, result__ =>
             match (unsafe { asImplFromRaw<ICollectionViewGroup_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
                     impl.__winrtThunk_GroupItems(result__)
@@ -2465,6 +2495,11 @@ public struct ICollectionViewGroupVtbl {
                     E_NOINTERFACE.value
             }
         }
+        return next
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections != "on"]
+    public static func __assignGroupItems<Identity>(vtbl: ICollectionViewGroupVtbl): ICollectionViewGroupVtbl where Identity <: ICollectionViewGroup_Impl {
         return vtbl
     }
 
@@ -2476,14 +2511,14 @@ public struct ICollectionViewGroupVtbl {
     }
 }
 
-@When[Windows_UI_Xaml_Data == "on"]
+@When[Windows_UI_Xaml_Data == "on" && Windows_Foundation_Collections == "on"]
 public interface ICollectionViewGroup_ImplErased {
     public func __winrtThunk_Group(result__: CPointer<CPointer<Unit>>): Int32
 
     public func __winrtThunk_GroupItems(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_UI_Xaml_Data == "on"]
+@When[Windows_UI_Xaml_Data == "on" && Windows_Foundation_Collections == "on"]
 public interface ICollectionViewGroup_Impl <: ICollectionViewGroup_ImplErased {
     public func Group(): windows_core.Result<IInspectable>
 
@@ -2599,6 +2634,7 @@ public class ICollectionViewGroup <: InterfaceWrapperBase & ComInterface & Runti
         return IInspectable.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GroupItems(): windows_collections.IObservableVector<IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3935,14 +3971,25 @@ extend IItemIndexRangeFactory <: windows_core.Interface<IItemIndexRangeFactory> 
 @C
 public struct IItemsRangeInfoVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var RangesChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RangesChanged: UIntNative = UIntNative(0)
     public init() {}
 
+    @When[Windows_Foundation_Collections == "on"]
     public static func new<Identity>(offset!: Int64 = 0): IItemsRangeInfoVtbl where Identity <: IItemsRangeInfo_Impl {
         let _ = offset
         var vtbl = IItemsRangeInfoVtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.RangesChanged = { instanceRaw, arg0, arg1 =>
+        vtbl = IItemsRangeInfoVtbl.__assignRangesChanged<Identity>(vtbl)
+        return vtbl
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections == "on"]
+    public static func __assignRangesChanged<Identity>(vtbl: IItemsRangeInfoVtbl): IItemsRangeInfoVtbl where Identity <: IItemsRangeInfo_Impl {
+        var next = vtbl
+        next.RangesChanged = { instanceRaw, arg0, arg1 =>
             match (unsafe { asImplFromRaw<IItemsRangeInfo_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
                     impl.__winrtThunk_RangesChanged(arg0, arg1)
@@ -3950,6 +3997,11 @@ public struct IItemsRangeInfoVtbl {
                     E_NOINTERFACE.value
             }
         }
+        return next
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections != "on"]
+    public static func __assignRangesChanged<Identity>(vtbl: IItemsRangeInfoVtbl): IItemsRangeInfoVtbl where Identity <: IItemsRangeInfo_Impl {
         return vtbl
     }
 
@@ -3966,12 +4018,12 @@ public struct IItemsRangeInfoVtbl {
     }
 }
 
-@When[Windows_UI_Xaml_Data == "on"]
+@When[Windows_UI_Xaml_Data == "on" && Windows_Foundation_Collections == "on"]
 public interface IItemsRangeInfo_ImplErased {
     public func __winrtThunk_RangesChanged(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32
 }
 
-@When[Windows_UI_Xaml_Data == "on"]
+@When[Windows_UI_Xaml_Data == "on" && Windows_Foundation_Collections == "on"]
 public interface IItemsRangeInfo_Impl <: IItemsRangeInfo_ImplErased & Foundation.IClosable_Impl {
     public func RangesChanged(visibleRange: InParam<ItemIndexRange>, trackedItems: InParam<windows_collections.IVectorView<ItemIndexRange>>): windows_core.Result<Unit>
 
@@ -4071,6 +4123,7 @@ public class IItemsRangeInfo <: InterfaceWrapperBase & ComInterface & RuntimeNam
         readVtbl<IItemsRangeInfoVtbl>(IItemsRangeInfoVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RangesChanged(visibleRange: ItemIndexRange, trackedItems: windows_collections.IVectorView<ItemIndexRange>): Unit {
         let v = vtbl()
         let hr = v.RangesChanged(asRaw(), visibleRange.asRaw(), trackedItems.asRaw())
@@ -4593,9 +4646,13 @@ public struct ISelectionInfoVtbl {
     public var SelectRange: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var DeselectRange: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsSelected: CFunc<(CPointer<Unit>, Int32, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSelectedRanges: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetSelectedRanges: UIntNative = UIntNative(0)
     public init() {}
 
+    @When[Windows_Foundation_Collections == "on"]
     public static func new<Identity>(offset!: Int64 = 0): ISelectionInfoVtbl where Identity <: ISelectionInfo_Impl {
         let _ = offset
         var vtbl = ISelectionInfoVtbl()
@@ -4624,7 +4681,14 @@ public struct ISelectionInfoVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetSelectedRanges = { instanceRaw, result__ =>
+        vtbl = ISelectionInfoVtbl.__assignGetSelectedRanges<Identity>(vtbl)
+        return vtbl
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections == "on"]
+    public static func __assignGetSelectedRanges<Identity>(vtbl: ISelectionInfoVtbl): ISelectionInfoVtbl where Identity <: ISelectionInfo_Impl {
+        var next = vtbl
+        next.GetSelectedRanges = { instanceRaw, result__ =>
             match (unsafe { asImplFromRaw<ISelectionInfo_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
                     impl.__winrtThunk_GetSelectedRanges(result__)
@@ -4632,6 +4696,11 @@ public struct ISelectionInfoVtbl {
                     E_NOINTERFACE.value
             }
         }
+        return next
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections != "on"]
+    public static func __assignGetSelectedRanges<Identity>(vtbl: ISelectionInfoVtbl): ISelectionInfoVtbl where Identity <: ISelectionInfo_Impl {
         return vtbl
     }
 
@@ -4643,7 +4712,7 @@ public struct ISelectionInfoVtbl {
     }
 }
 
-@When[Windows_UI_Xaml_Data == "on"]
+@When[Windows_UI_Xaml_Data == "on" && Windows_Foundation_Collections == "on"]
 public interface ISelectionInfo_ImplErased {
     public func __winrtThunk_SelectRange(arg0: CPointer<Unit>): Int32
 
@@ -4654,7 +4723,7 @@ public interface ISelectionInfo_ImplErased {
     public func __winrtThunk_GetSelectedRanges(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_UI_Xaml_Data == "on"]
+@When[Windows_UI_Xaml_Data == "on" && Windows_Foundation_Collections == "on"]
 public interface ISelectionInfo_Impl <: ISelectionInfo_ImplErased {
     public func SelectRange(itemIndexRange: InParam<ItemIndexRange>): windows_core.Result<Unit>
 
@@ -4799,6 +4868,7 @@ public class ISelectionInfo <: InterfaceWrapperBase & ComInterface & RuntimeName
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSelectedRanges(): windows_collections.IVectorView<ItemIndexRange> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5514,12 +5584,14 @@ public class PropertyChangedEventHandler <: InterfaceWrapperBase & ComInterface 
 @When[Windows_UI_Xaml_Data == "on"]
 extend PropertyChangedEventHandler <: windows_core.Interface<PropertyChangedEventHandler> {}
 
+@When[Windows_UI_Xaml_Data == "on"]
 private open class PropertyChangedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Data == "on"]
 private open class PropertyChangedEventHandlerInvoker <: PropertyChangedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<PropertyChangedEventArgs>): Unit {
         ()
@@ -5531,6 +5603,7 @@ private open class PropertyChangedEventHandlerInvoker <: PropertyChangedEventHan
     }
 }
 
+@When[Windows_UI_Xaml_Data == "on"]
 private class PropertyChangedEventHandlerBox <: PropertyChangedEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<PropertyChangedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<PropertyChangedEventHandlerVtbl>
@@ -5549,6 +5622,7 @@ private class PropertyChangedEventHandlerBox <: PropertyChangedEventHandlerInvok
     }
 }
 
+@When[Windows_UI_Xaml_Data == "on"]
 func buildPropertyChangedEventHandlerBoxVtbl(): PropertyChangedEventHandlerVtbl {
     var vtbl = PropertyChangedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()

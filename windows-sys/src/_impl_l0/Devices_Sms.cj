@@ -37,18 +37,29 @@ public let CellularClass_Cdma: CellularClass = CellularClass(2)
 public struct ISmsFilterRuleVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var MessageType: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ImsiPrefixes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var DeviceIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SenderNumbers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var TextMessagePrefixes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var PortNumbers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CellularClass: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetCellularClass: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ProtocolIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var TeleserviceIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var WapApplicationIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var WapContentTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var BroadcastTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var BroadcastChannels: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -99,30 +110,35 @@ public class ISmsFilterRule <: InterfaceWrapperBase & ComInterface {
         return __vt.MessageType(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ImsiPrefixes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ImsiPrefixes(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DeviceIds(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DeviceIds(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SenderNumbers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SenderNumbers(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TextMessagePrefixes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TextMessagePrefixes(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PortNumbers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -141,36 +157,42 @@ public class ISmsFilterRule <: InterfaceWrapperBase & ComInterface {
         return __vt.SetCellularClass(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ProtocolIds(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ProtocolIds(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TeleserviceIds(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TeleserviceIds(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func WapApplicationIds(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.WapApplicationIds(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func WapContentTypes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.WapContentTypes(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func BroadcastTypes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.BroadcastTypes(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func BroadcastChannels(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -390,6 +412,7 @@ public class ISmsReceivedEventDetails <: InterfaceWrapperBase & ComInterface {
 public struct ISmsSendMessageResultVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var IsSuccessful: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var MessageReferenceNumbers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CellularClass: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var ModemErrorCode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -445,6 +468,7 @@ public class ISmsSendMessageResult <: InterfaceWrapperBase & ComInterface {
         return __vt.IsSuccessful(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MessageReferenceNumbers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

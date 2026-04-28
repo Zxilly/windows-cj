@@ -18,104 +18,1117 @@ import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
 
 
-@When[COMCTL32 == "on"]
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_CreateMappedBitmap == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    // param-hint: lpColorMap optional
+    // pinvoke-hint: SetLastError
+    func CreateMappedBitmap(hInstance: CPointer<Unit>, idBitmap: IntNative, wFlags: UInt32, lpColorMap: CPointer<Win32__impl_l0.COLORMAPAbi>, iNumMaps: Int32): Win32_Graphics_Gdi.HBITMAP
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_CreateMappedBitmap == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_CreateMappedBitmap(hInstance: CPointer<Unit>, idBitmap: IntNative, wFlags: UInt32, lpColorMap: CPointer<Win32__impl_l0.COLORMAPAbi>, iNumMaps: Int32): Win32_Graphics_Gdi.HBITMAP {
+    return CreateMappedBitmap(hInstance, idBitmap, wFlags, lpColorMap, iNumMaps)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_CreatePropertySheetPageA == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    func CreatePropertySheetPageA(constPropSheetPagePointer: CPointer<Win32__impl_l1.PROPSHEETPAGEAAbi>): Win32__impl_l0.HPROPSHEETPAGE
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_CreatePropertySheetPageA == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_CreatePropertySheetPageA(constPropSheetPagePointer: CPointer<Win32__impl_l1.PROPSHEETPAGEAAbi>): Win32__impl_l0.HPROPSHEETPAGE {
+    return CreatePropertySheetPageA(constPropSheetPagePointer)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_CreatePropertySheetPageW == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    func CreatePropertySheetPageW(constPropSheetPagePointer: CPointer<Win32__impl_l1.PROPSHEETPAGEWAbi>): Win32__impl_l0.HPROPSHEETPAGE
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_CreatePropertySheetPageW == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_CreatePropertySheetPageW(constPropSheetPagePointer: CPointer<Win32__impl_l1.PROPSHEETPAGEWAbi>): Win32__impl_l0.HPROPSHEETPAGE {
+    return CreatePropertySheetPageW(constPropSheetPagePointer)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_CreateStatusWindowA == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func CreateStatusWindowA(style: Int32, lpszText: CPointer<UInt8>, hwndParent: CPointer<Unit>, wID: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_CreateStatusWindowA == "on"]
+public unsafe func Windows_CreateStatusWindowA(style: Int32, lpszText: CPointer<UInt8>, hwndParent: CPointer<Unit>, wID: UInt32): CPointer<Unit> {
+    return CreateStatusWindowA(style, lpszText, hwndParent, wID)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_CreateStatusWindowW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CreateStatusWindowW(style: Int32, lpszText: CPointer<UInt16>, hwndParent: CPointer<Unit>, wID: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_CreateStatusWindowW == "on"]
+public unsafe func Windows_CreateStatusWindowW(style: Int32, lpszText: CPointer<UInt16>, hwndParent: CPointer<Unit>, wID: UInt32): CPointer<Unit> {
+    return CreateStatusWindowW(style, lpszText, hwndParent, wID)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_CreateToolbarEx == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func CreateToolbarEx(hwnd: CPointer<Unit>, ws: UInt32, wID: UInt32, nBitmaps: Int32, hBMInst: CPointer<Unit>, wBMID: UIntNative, lpButtons: CPointer<Win32__impl_l0.TBBUTTONAbi>, iNumButtons: Int32, dxButton: Int32, dyButton: Int32, dxBitmap: Int32, dyBitmap: Int32, uStructSize: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_CreateToolbarEx == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_CreateToolbarEx(hwnd: CPointer<Unit>, ws: UInt32, wID: UInt32, nBitmaps: Int32, hBMInst: CPointer<Unit>, wBMID: UIntNative, lpButtons: CPointer<Win32__impl_l0.TBBUTTONAbi>, iNumButtons: Int32, dxButton: Int32, dyButton: Int32, dxBitmap: Int32, dyBitmap: Int32, uStructSize: UInt32): CPointer<Unit> {
+    return CreateToolbarEx(hwnd, ws, wID, nBitmaps, hBMInst, wBMID, lpButtons, iNumButtons, dxButton, dyButton, dxBitmap, dyBitmap, uStructSize)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_CreateUpDownControl == "on"]
+foreign {
     func CreateUpDownControl(dwStyle: UInt32, x: Int32, y: Int32, cx: Int32, cy: Int32, hParent: CPointer<Unit>, nID: Int32, hInst: CPointer<Unit>, hBuddy: CPointer<Unit>, nUpper: Int32, nLower: Int32, nPos: Int32): CPointer<Unit>
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_CreateUpDownControl == "on"]
+public unsafe func Windows_CreateUpDownControl(dwStyle: UInt32, x: Int32, y: Int32, cx: Int32, cy: Int32, hParent: CPointer<Unit>, nID: Int32, hInst: CPointer<Unit>, hBuddy: CPointer<Unit>, nUpper: Int32, nLower: Int32, nPos: Int32): CPointer<Unit> {
+    return CreateUpDownControl(dwStyle, x, y, cx, cy, hParent, nID, hInst, hBuddy, nUpper, nLower, nPos)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_Clone == "on"]
+foreign {
     // param-hint: hdpaNew optional
     func DPA_Clone(hdpa: Win32__impl_l0.HDPA, hdpaNew: Win32__impl_l0.HDPA): Win32__impl_l0.HDPA
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_Clone == "on"]
+public unsafe func Windows_DPA_Clone(hdpa: Win32__impl_l0.HDPA, hdpaNew: Win32__impl_l0.HDPA): Win32__impl_l0.HDPA {
+    return DPA_Clone(hdpa, hdpaNew)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_Create == "on"]
+foreign {
     func DPA_Create(cItemGrow: Int32): Win32__impl_l0.HDPA
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_Create == "on"]
+public unsafe func Windows_DPA_Create(cItemGrow: Int32): Win32__impl_l0.HDPA {
+    return DPA_Create(cItemGrow)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_CreateEx == "on"]
+foreign {
     // param-hint: hheap optional
     func DPA_CreateEx(cpGrow: Int32, hheap: CPointer<Unit>): Win32__impl_l0.HDPA
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_CreateEx == "on"]
+public unsafe func Windows_DPA_CreateEx(cpGrow: Int32, hheap: CPointer<Unit>): Win32__impl_l0.HDPA {
+    return DPA_CreateEx(cpGrow, hheap)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_DeleteAllPtrs == "on"]
+foreign {
     func DPA_DeleteAllPtrs(hdpa: Win32__impl_l0.HDPA): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_DeleteAllPtrs == "on"]
+public unsafe func Windows_DPA_DeleteAllPtrs(hdpa: Win32__impl_l0.HDPA): Int32 {
+    return DPA_DeleteAllPtrs(hdpa)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_DeletePtr == "on"]
+foreign {
     func DPA_DeletePtr(hdpa: Win32__impl_l0.HDPA, i: Int32): CPointer<Unit>
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_DeletePtr == "on"]
+public unsafe func Windows_DPA_DeletePtr(hdpa: Win32__impl_l0.HDPA, i: Int32): CPointer<Unit> {
+    return DPA_DeletePtr(hdpa, i)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_Destroy == "on"]
+foreign {
     // param-hint: hdpa optional
     func DPA_Destroy(hdpa: Win32__impl_l0.HDPA): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_Destroy == "on"]
+public unsafe func Windows_DPA_Destroy(hdpa: Win32__impl_l0.HDPA): Int32 {
+    return DPA_Destroy(hdpa)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_DestroyCallback == "on"]
+foreign {
     // param-hint: hdpa optional
     // param-hint: pData optional
     func DPA_DestroyCallback(hdpa: Win32__impl_l0.HDPA, pfnCB: Win32__impl_l0.PFNDAENUMCALLBACK, pData: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_DestroyCallback == "on"]
+public unsafe func Windows_DPA_DestroyCallback(hdpa: Win32__impl_l0.HDPA, pfnCB: Win32__impl_l0.PFNDAENUMCALLBACK, pData: CPointer<Unit>): Unit {
+    DPA_DestroyCallback(hdpa, pfnCB, pData)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_EnumCallback == "on"]
+foreign {
     // param-hint: hdpa optional
     // param-hint: pfnCB optional
     // param-hint: pData optional
     func DPA_EnumCallback(hdpa: Win32__impl_l0.HDPA, pfnCB: Win32__impl_l0.PFNDAENUMCALLBACK, pData: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_EnumCallback == "on"]
+public unsafe func Windows_DPA_EnumCallback(hdpa: Win32__impl_l0.HDPA, pfnCB: Win32__impl_l0.PFNDAENUMCALLBACK, pData: CPointer<Unit>): Unit {
+    DPA_EnumCallback(hdpa, pfnCB, pData)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_GetPtr == "on"]
+foreign {
     func DPA_GetPtr(hdpa: Win32__impl_l0.HDPA, i: IntNative): CPointer<Unit>
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_GetPtr == "on"]
+public unsafe func Windows_DPA_GetPtr(hdpa: Win32__impl_l0.HDPA, i: IntNative): CPointer<Unit> {
+    return DPA_GetPtr(hdpa, i)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_GetPtrIndex == "on"]
+foreign {
     // param-hint: p optional
     func DPA_GetPtrIndex(hdpa: Win32__impl_l0.HDPA, p: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_GetPtrIndex == "on"]
+public unsafe func Windows_DPA_GetPtrIndex(hdpa: Win32__impl_l0.HDPA, p: CPointer<Unit>): Int32 {
+    return DPA_GetPtrIndex(hdpa, p)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_GetSize == "on"]
+foreign {
     // param-hint: hdpa optional
     func DPA_GetSize(hdpa: Win32__impl_l0.HDPA): UInt64
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_GetSize == "on"]
+public unsafe func Windows_DPA_GetSize(hdpa: Win32__impl_l0.HDPA): UInt64 {
+    return DPA_GetSize(hdpa)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_Grow == "on"]
+foreign {
     func DPA_Grow(pdpa: Win32__impl_l0.HDPA, cp: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_Grow == "on"]
+public unsafe func Windows_DPA_Grow(pdpa: Win32__impl_l0.HDPA, cp: Int32): Int32 {
+    return DPA_Grow(pdpa, cp)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_InsertPtr == "on"]
+foreign {
     // param-hint: p optional
     func DPA_InsertPtr(hdpa: Win32__impl_l0.HDPA, i: Int32, p: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_InsertPtr == "on"]
+public unsafe func Windows_DPA_InsertPtr(hdpa: Win32__impl_l0.HDPA, i: Int32, p: CPointer<Unit>): Int32 {
+    return DPA_InsertPtr(hdpa, i, p)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_LoadStream == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: pvInstData optional
+    func DPA_LoadStream(phdpa: CPointer<Win32__impl_l0.HDPA>, pfn: PFNDPASTREAM, pstream: CPointer<Unit>, pvInstData: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_LoadStream == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_DPA_LoadStream(phdpa: CPointer<Win32__impl_l0.HDPA>, pfn: PFNDPASTREAM, pstream: CPointer<Unit>, pvInstData: CPointer<Unit>): Int32 {
+    return DPA_LoadStream(phdpa, pfn, pstream, pvInstData)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_Merge == "on"]
+foreign {
     func DPA_Merge(hdpaDest: Win32__impl_l0.HDPA, hdpaSrc: Win32__impl_l0.HDPA, dwFlags: UInt32, pfnCompare: Win32__impl_l0.PFNDACOMPARE, pfnMerge: Win32__impl_l1.PFNDPAMERGE, lParam: IntNative): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_Merge == "on"]
+public unsafe func Windows_DPA_Merge(hdpaDest: Win32__impl_l0.HDPA, hdpaSrc: Win32__impl_l0.HDPA, dwFlags: UInt32, pfnCompare: Win32__impl_l0.PFNDACOMPARE, pfnMerge: Win32__impl_l1.PFNDPAMERGE, lParam: IntNative): Int32 {
+    return DPA_Merge(hdpaDest, hdpaSrc, dwFlags, pfnCompare, pfnMerge, lParam)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_SaveStream == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: pvInstData optional
+    func DPA_SaveStream(hdpa: Win32__impl_l0.HDPA, pfn: PFNDPASTREAM, pstream: CPointer<Unit>, pvInstData: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_SaveStream == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_DPA_SaveStream(hdpa: Win32__impl_l0.HDPA, pfn: PFNDPASTREAM, pstream: CPointer<Unit>, pvInstData: CPointer<Unit>): Int32 {
+    return DPA_SaveStream(hdpa, pfn, pstream, pvInstData)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_Search == "on"]
+foreign {
     // param-hint: pFind optional
     func DPA_Search(hdpa: Win32__impl_l0.HDPA, pFind: CPointer<Unit>, iStart: Int32, pfnCompare: Win32__impl_l0.PFNDACOMPARE, lParam: IntNative, options: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_Search == "on"]
+public unsafe func Windows_DPA_Search(hdpa: Win32__impl_l0.HDPA, pFind: CPointer<Unit>, iStart: Int32, pfnCompare: Win32__impl_l0.PFNDACOMPARE, lParam: IntNative, options: UInt32): Int32 {
+    return DPA_Search(hdpa, pFind, iStart, pfnCompare, lParam, options)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_SetPtr == "on"]
+foreign {
     // param-hint: p optional
     func DPA_SetPtr(hdpa: Win32__impl_l0.HDPA, i: Int32, p: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_SetPtr == "on"]
+public unsafe func Windows_DPA_SetPtr(hdpa: Win32__impl_l0.HDPA, i: Int32, p: CPointer<Unit>): Int32 {
+    return DPA_SetPtr(hdpa, i, p)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_Sort == "on"]
+foreign {
     func DPA_Sort(hdpa: Win32__impl_l0.HDPA, pfnCompare: Win32__impl_l0.PFNDACOMPARE, lParam: IntNative): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_Sort == "on"]
+public unsafe func Windows_DPA_Sort(hdpa: Win32__impl_l0.HDPA, pfnCompare: Win32__impl_l0.PFNDACOMPARE, lParam: IntNative): Int32 {
+    return DPA_Sort(hdpa, pfnCompare, lParam)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_Clone == "on"]
+foreign {
     func DSA_Clone(hdsa: Win32__impl_l0.HDSA): Win32__impl_l0.HDSA
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_Clone == "on"]
+public unsafe func Windows_DSA_Clone(hdsa: Win32__impl_l0.HDSA): Win32__impl_l0.HDSA {
+    return DSA_Clone(hdsa)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_Create == "on"]
+foreign {
     func DSA_Create(cbItem: Int32, cItemGrow: Int32): Win32__impl_l0.HDSA
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_Create == "on"]
+public unsafe func Windows_DSA_Create(cbItem: Int32, cItemGrow: Int32): Win32__impl_l0.HDSA {
+    return DSA_Create(cbItem, cItemGrow)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_DeleteAllItems == "on"]
+foreign {
     func DSA_DeleteAllItems(hdsa: Win32__impl_l0.HDSA): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_DeleteAllItems == "on"]
+public unsafe func Windows_DSA_DeleteAllItems(hdsa: Win32__impl_l0.HDSA): Int32 {
+    return DSA_DeleteAllItems(hdsa)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_DeleteItem == "on"]
+foreign {
     func DSA_DeleteItem(hdsa: Win32__impl_l0.HDSA, i: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_DeleteItem == "on"]
+public unsafe func Windows_DSA_DeleteItem(hdsa: Win32__impl_l0.HDSA, i: Int32): Int32 {
+    return DSA_DeleteItem(hdsa, i)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_Destroy == "on"]
+foreign {
     // param-hint: hdsa optional
     func DSA_Destroy(hdsa: Win32__impl_l0.HDSA): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_Destroy == "on"]
+public unsafe func Windows_DSA_Destroy(hdsa: Win32__impl_l0.HDSA): Int32 {
+    return DSA_Destroy(hdsa)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_DestroyCallback == "on"]
+foreign {
     // param-hint: hdsa optional
     // param-hint: pData optional
     func DSA_DestroyCallback(hdsa: Win32__impl_l0.HDSA, pfnCB: Win32__impl_l0.PFNDAENUMCALLBACK, pData: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_DestroyCallback == "on"]
+public unsafe func Windows_DSA_DestroyCallback(hdsa: Win32__impl_l0.HDSA, pfnCB: Win32__impl_l0.PFNDAENUMCALLBACK, pData: CPointer<Unit>): Unit {
+    DSA_DestroyCallback(hdsa, pfnCB, pData)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_EnumCallback == "on"]
+foreign {
     // param-hint: pData optional
     func DSA_EnumCallback(hdsa: Win32__impl_l0.HDSA, pfnCB: Win32__impl_l0.PFNDAENUMCALLBACK, pData: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_EnumCallback == "on"]
+public unsafe func Windows_DSA_EnumCallback(hdsa: Win32__impl_l0.HDSA, pfnCB: Win32__impl_l0.PFNDAENUMCALLBACK, pData: CPointer<Unit>): Unit {
+    DSA_EnumCallback(hdsa, pfnCB, pData)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_GetItem == "on"]
+foreign {
     func DSA_GetItem(hdsa: Win32__impl_l0.HDSA, i: Int32, pitem: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_GetItem == "on"]
+public unsafe func Windows_DSA_GetItem(hdsa: Win32__impl_l0.HDSA, i: Int32, pitem: CPointer<Unit>): Int32 {
+    return DSA_GetItem(hdsa, i, pitem)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_GetItemPtr == "on"]
+foreign {
     func DSA_GetItemPtr(hdsa: Win32__impl_l0.HDSA, i: Int32): CPointer<Unit>
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_GetItemPtr == "on"]
+public unsafe func Windows_DSA_GetItemPtr(hdsa: Win32__impl_l0.HDSA, i: Int32): CPointer<Unit> {
+    return DSA_GetItemPtr(hdsa, i)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_GetSize == "on"]
+foreign {
     // param-hint: hdsa optional
     func DSA_GetSize(hdsa: Win32__impl_l0.HDSA): UInt64
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_GetSize == "on"]
+public unsafe func Windows_DSA_GetSize(hdsa: Win32__impl_l0.HDSA): UInt64 {
+    return DSA_GetSize(hdsa)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_InsertItem == "on"]
+foreign {
     func DSA_InsertItem(hdsa: Win32__impl_l0.HDSA, i: Int32, pitem: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_InsertItem == "on"]
+public unsafe func Windows_DSA_InsertItem(hdsa: Win32__impl_l0.HDSA, i: Int32, pitem: CPointer<Unit>): Int32 {
+    return DSA_InsertItem(hdsa, i, pitem)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_SetItem == "on"]
+foreign {
     func DSA_SetItem(hdsa: Win32__impl_l0.HDSA, i: Int32, pitem: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_SetItem == "on"]
+public unsafe func Windows_DSA_SetItem(hdsa: Win32__impl_l0.HDSA, i: Int32, pitem: CPointer<Unit>): Int32 {
+    return DSA_SetItem(hdsa, i, pitem)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_Sort == "on"]
+foreign {
     func DSA_Sort(pdsa: Win32__impl_l0.HDSA, pfnCompare: Win32__impl_l0.PFNDACOMPARE, lParam: IntNative): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_Sort == "on"]
+public unsafe func Windows_DSA_Sort(pdsa: Win32__impl_l0.HDSA, pfnCompare: Win32__impl_l0.PFNDACOMPARE, lParam: IntNative): Int32 {
+    return DSA_Sort(pdsa, pfnCompare, lParam)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DestroyPropertySheetPage == "on"]
+foreign {
     func DestroyPropertySheetPage(param0: Win32__impl_l0.HPROPSHEETPAGE): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DestroyPropertySheetPage == "on"]
+public unsafe func Windows_DestroyPropertySheetPage(param0: Win32__impl_l0.HPROPSHEETPAGE): Int32 {
+    return DestroyPropertySheetPage(param0)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DrawInsert == "on"]
+foreign {
     func DrawInsert(handParent: CPointer<Unit>, hLB: CPointer<Unit>, nItem: Int32): Unit
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DrawInsert == "on"]
+public unsafe func Windows_DrawInsert(handParent: CPointer<Unit>, hLB: CPointer<Unit>, nItem: Int32): Unit {
+    DrawInsert(handParent, hLB, nItem)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DrawShadowText == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    // param-hint: pszText len=param[2]
+    func DrawShadowText(hdc: Win32_Graphics_Gdi.HDC, pszText: CPointer<UInt16>, cch: UInt32, prc: CPointer<Win32_Foundation.RECTAbi>, dwFlags: UInt32, crText: UInt32, crShadow: UInt32, ixOffset: Int32, iyOffset: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DrawShadowText == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DrawShadowText(hdc: Win32_Graphics_Gdi.HDC, pszText: CPointer<UInt16>, cch: UInt32, prc: CPointer<Win32_Foundation.RECTAbi>, dwFlags: UInt32, crText: UInt32, crShadow: UInt32, ixOffset: Int32, iyOffset: Int32): Int32 {
+    return DrawShadowText(hdc, pszText, cch, prc, dwFlags, crText, crShadow, ixOffset, iyOffset)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DrawStatusTextA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func DrawStatusTextA(hDC: Win32_Graphics_Gdi.HDC, lprc: CPointer<Win32_Foundation.RECTAbi>, pszText: CPointer<UInt8>, uFlags: UInt32): Unit
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DrawStatusTextA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DrawStatusTextA(hDC: Win32_Graphics_Gdi.HDC, lprc: CPointer<Win32_Foundation.RECTAbi>, pszText: CPointer<UInt8>, uFlags: UInt32): Unit {
+    DrawStatusTextA(hDC, lprc, pszText, uFlags)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DrawStatusTextW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func DrawStatusTextW(hDC: Win32_Graphics_Gdi.HDC, lprc: CPointer<Win32_Foundation.RECTAbi>, pszText: CPointer<UInt16>, uFlags: UInt32): Unit
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DrawStatusTextW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DrawStatusTextW(hDC: Win32_Graphics_Gdi.HDC, lprc: CPointer<Win32_Foundation.RECTAbi>, pszText: CPointer<UInt16>, uFlags: UInt32): Unit {
+    DrawStatusTextW(hDC, lprc, pszText, uFlags)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_FlatSB_EnableScrollBar == "on"]
+foreign {
     func FlatSB_EnableScrollBar(param0: CPointer<Unit>, param1: Int32, param2: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_FlatSB_EnableScrollBar == "on"]
+public unsafe func Windows_FlatSB_EnableScrollBar(param0: CPointer<Unit>, param1: Int32, param2: UInt32): Int32 {
+    return FlatSB_EnableScrollBar(param0, param1, param2)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_FlatSB_GetScrollInfo == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    func FlatSB_GetScrollInfo(param0: CPointer<Unit>, code: Win32__impl_l0.SCROLLBAR_CONSTANTSAbi, param2: CPointer<Win32__impl_l1.SCROLLINFOAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_FlatSB_GetScrollInfo == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_FlatSB_GetScrollInfo(param0: CPointer<Unit>, code: Win32__impl_l0.SCROLLBAR_CONSTANTSAbi, param2: CPointer<Win32__impl_l1.SCROLLINFOAbi>): Int32 {
+    return FlatSB_GetScrollInfo(param0, code, param2)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_FlatSB_GetScrollPos == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    func FlatSB_GetScrollPos(param0: CPointer<Unit>, code: Win32__impl_l0.SCROLLBAR_CONSTANTSAbi): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_FlatSB_GetScrollPos == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_FlatSB_GetScrollPos(param0: CPointer<Unit>, code: Win32__impl_l0.SCROLLBAR_CONSTANTSAbi): Int32 {
+    return FlatSB_GetScrollPos(param0, code)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_FlatSB_GetScrollProp == "on"]
+foreign {
     func FlatSB_GetScrollProp(param0: CPointer<Unit>, propIndex: Win32__impl_l0.WSB_PROPAbi, param2: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_FlatSB_GetScrollProp == "on"]
+public unsafe func Windows_FlatSB_GetScrollProp(param0: CPointer<Unit>, propIndex: Win32__impl_l0.WSB_PROPAbi, param2: CPointer<Int32>): Int32 {
+    return FlatSB_GetScrollProp(param0, propIndex, param2)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_FlatSB_GetScrollRange == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    func FlatSB_GetScrollRange(param0: CPointer<Unit>, code: Win32__impl_l0.SCROLLBAR_CONSTANTSAbi, param2: CPointer<Int32>, param3: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_FlatSB_GetScrollRange == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_FlatSB_GetScrollRange(param0: CPointer<Unit>, code: Win32__impl_l0.SCROLLBAR_CONSTANTSAbi, param2: CPointer<Int32>, param3: CPointer<Int32>): Int32 {
+    return FlatSB_GetScrollRange(param0, code, param2, param3)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_FlatSB_SetScrollInfo == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    func FlatSB_SetScrollInfo(param0: CPointer<Unit>, code: Win32__impl_l0.SCROLLBAR_CONSTANTSAbi, psi: CPointer<Win32__impl_l1.SCROLLINFOAbi>, fRedraw: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_FlatSB_SetScrollInfo == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_FlatSB_SetScrollInfo(param0: CPointer<Unit>, code: Win32__impl_l0.SCROLLBAR_CONSTANTSAbi, psi: CPointer<Win32__impl_l1.SCROLLINFOAbi>, fRedraw: Int32): Int32 {
+    return FlatSB_SetScrollInfo(param0, code, psi, fRedraw)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_FlatSB_SetScrollPos == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    func FlatSB_SetScrollPos(param0: CPointer<Unit>, code: Win32__impl_l0.SCROLLBAR_CONSTANTSAbi, pos: Int32, fRedraw: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_FlatSB_SetScrollPos == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_FlatSB_SetScrollPos(param0: CPointer<Unit>, code: Win32__impl_l0.SCROLLBAR_CONSTANTSAbi, pos: Int32, fRedraw: Int32): Int32 {
+    return FlatSB_SetScrollPos(param0, code, pos, fRedraw)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_FlatSB_SetScrollProp == "on"]
+foreign {
     func FlatSB_SetScrollProp(param0: CPointer<Unit>, index: UInt32, newValue: IntNative, param3: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_FlatSB_SetScrollProp == "on"]
+public unsafe func Windows_FlatSB_SetScrollProp(param0: CPointer<Unit>, index: UInt32, newValue: IntNative, param3: Int32): Int32 {
+    return FlatSB_SetScrollProp(param0, index, newValue, param3)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_FlatSB_SetScrollRange == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    func FlatSB_SetScrollRange(param0: CPointer<Unit>, code: Win32__impl_l0.SCROLLBAR_CONSTANTSAbi, min: Int32, max: Int32, fRedraw: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_FlatSB_SetScrollRange == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_FlatSB_SetScrollRange(param0: CPointer<Unit>, code: Win32__impl_l0.SCROLLBAR_CONSTANTSAbi, min: Int32, max: Int32, fRedraw: Int32): Int32 {
+    return FlatSB_SetScrollRange(param0, code, min, max, fRedraw)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_FlatSB_ShowScrollBar == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    func FlatSB_ShowScrollBar(param0: CPointer<Unit>, code: Win32__impl_l0.SCROLLBAR_CONSTANTSAbi, param2: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_FlatSB_ShowScrollBar == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_FlatSB_ShowScrollBar(param0: CPointer<Unit>, code: Win32__impl_l0.SCROLLBAR_CONSTANTSAbi, param2: Int32): Int32 {
+    return FlatSB_ShowScrollBar(param0, code, param2)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_GetEffectiveClientRect == "on"]
+foreign {
     func GetEffectiveClientRect(hWnd: CPointer<Unit>, lprc: CPointer<Win32_Foundation.RECTAbi>, lpInfo: CPointer<Int32>): Unit
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_GetEffectiveClientRect == "on"]
+public unsafe func Windows_GetEffectiveClientRect(hWnd: CPointer<Unit>, lprc: CPointer<Win32_Foundation.RECTAbi>, lpInfo: CPointer<Int32>): Unit {
+    GetEffectiveClientRect(hWnd, lprc, lpInfo)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_GetMUILanguage == "on"]
+foreign {
     func GetMUILanguage(): UInt16
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_GetMUILanguage == "on"]
+public unsafe func Windows_GetMUILanguage(): UInt16 {
+    return GetMUILanguage()
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_HIMAGELIST_QueryInterface == "on"]
+foreign {
     func HIMAGELIST_QueryInterface(himl: Win32__impl_l0.HIMAGELIST, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_HIMAGELIST_QueryInterface == "on"]
+public unsafe func Windows_HIMAGELIST_QueryInterface(himl: Win32__impl_l0.HIMAGELIST, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return HIMAGELIST_QueryInterface(himl, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_Add == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    // param-hint: hbmMask optional
+    func ImageList_Add(himl: Win32__impl_l0.HIMAGELIST, hbmImage: Win32_Graphics_Gdi.HBITMAP, hbmMask: Win32_Graphics_Gdi.HBITMAP): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_Add == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_ImageList_Add(himl: Win32__impl_l0.HIMAGELIST, hbmImage: Win32_Graphics_Gdi.HBITMAP, hbmMask: Win32_Graphics_Gdi.HBITMAP): Int32 {
+    return ImageList_Add(himl, hbmImage, hbmMask)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_AddMasked == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func ImageList_AddMasked(himl: Win32__impl_l0.HIMAGELIST, hbmImage: Win32_Graphics_Gdi.HBITMAP, crMask: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_AddMasked == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_ImageList_AddMasked(himl: Win32__impl_l0.HIMAGELIST, hbmImage: Win32_Graphics_Gdi.HBITMAP, crMask: UInt32): Int32 {
+    return ImageList_AddMasked(himl, hbmImage, crMask)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_BeginDrag == "on"]
+foreign {
     func ImageList_BeginDrag(himlTrack: Win32__impl_l0.HIMAGELIST, iTrack: Int32, dxHotspot: Int32, dyHotspot: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_BeginDrag == "on"]
+public unsafe func Windows_ImageList_BeginDrag(himlTrack: Win32__impl_l0.HIMAGELIST, iTrack: Int32, dxHotspot: Int32, dyHotspot: Int32): Int32 {
+    return ImageList_BeginDrag(himlTrack, iTrack, dxHotspot, dyHotspot)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_CoCreateInstance == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: punkOuter optional
+    func ImageList_CoCreateInstance(rclsid: CPointer<GUID>, punkOuter: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_CoCreateInstance == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_ImageList_CoCreateInstance(rclsid: CPointer<GUID>, punkOuter: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return ImageList_CoCreateInstance(rclsid, punkOuter, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_Copy == "on"]
+foreign {
     func ImageList_Copy(himlDst: Win32__impl_l0.HIMAGELIST, iDst: Int32, himlSrc: Win32__impl_l0.HIMAGELIST, iSrc: Int32, uFlags: Win32__impl_l0.IMAGE_LIST_COPY_FLAGSAbi): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_Copy == "on"]
+public unsafe func Windows_ImageList_Copy(himlDst: Win32__impl_l0.HIMAGELIST, iDst: Int32, himlSrc: Win32__impl_l0.HIMAGELIST, iSrc: Int32, uFlags: Win32__impl_l0.IMAGE_LIST_COPY_FLAGSAbi): Int32 {
+    return ImageList_Copy(himlDst, iDst, himlSrc, iSrc, uFlags)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_Create == "on"]
+foreign {
     func ImageList_Create(cx: Int32, cy: Int32, flags: Win32__impl_l0.IMAGELIST_CREATION_FLAGSAbi, cInitial: Int32, cGrow: Int32): Win32__impl_l0.HIMAGELIST
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_Create == "on"]
+public unsafe func Windows_ImageList_Create(cx: Int32, cy: Int32, flags: Win32__impl_l0.IMAGELIST_CREATION_FLAGSAbi, cInitial: Int32, cGrow: Int32): Win32__impl_l0.HIMAGELIST {
+    return ImageList_Create(cx, cy, flags, cInitial, cGrow)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_Destroy == "on"]
+foreign {
     // param-hint: himl optional
     func ImageList_Destroy(himl: Win32__impl_l0.HIMAGELIST): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_Destroy == "on"]
+public unsafe func Windows_ImageList_Destroy(himl: Win32__impl_l0.HIMAGELIST): Int32 {
+    return ImageList_Destroy(himl)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_DragEnter == "on"]
+foreign {
     func ImageList_DragEnter(hwndLock: CPointer<Unit>, x: Int32, y: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_DragEnter == "on"]
+public unsafe func Windows_ImageList_DragEnter(hwndLock: CPointer<Unit>, x: Int32, y: Int32): Int32 {
+    return ImageList_DragEnter(hwndLock, x, y)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_DragLeave == "on"]
+foreign {
     func ImageList_DragLeave(hwndLock: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_DragLeave == "on"]
+public unsafe func Windows_ImageList_DragLeave(hwndLock: CPointer<Unit>): Int32 {
+    return ImageList_DragLeave(hwndLock)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_DragMove == "on"]
+foreign {
     func ImageList_DragMove(x: Int32, y: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_DragMove == "on"]
+public unsafe func Windows_ImageList_DragMove(x: Int32, y: Int32): Int32 {
+    return ImageList_DragMove(x, y)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_DragShowNolock == "on"]
+foreign {
     func ImageList_DragShowNolock(fShow: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_DragShowNolock == "on"]
+public unsafe func Windows_ImageList_DragShowNolock(fShow: Int32): Int32 {
+    return ImageList_DragShowNolock(fShow)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_Draw == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func ImageList_Draw(himl: Win32__impl_l0.HIMAGELIST, i: Int32, hdcDst: Win32_Graphics_Gdi.HDC, x: Int32, y: Int32, fStyle: Win32__impl_l0.IMAGE_LIST_DRAW_STYLEAbi): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_Draw == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_ImageList_Draw(himl: Win32__impl_l0.HIMAGELIST, i: Int32, hdcDst: Win32_Graphics_Gdi.HDC, x: Int32, y: Int32, fStyle: Win32__impl_l0.IMAGE_LIST_DRAW_STYLEAbi): Int32 {
+    return ImageList_Draw(himl, i, hdcDst, x, y, fStyle)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_DrawEx == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func ImageList_DrawEx(himl: Win32__impl_l0.HIMAGELIST, i: Int32, hdcDst: Win32_Graphics_Gdi.HDC, x: Int32, y: Int32, dx: Int32, dy: Int32, rgbBk: UInt32, rgbFg: UInt32, fStyle: Win32__impl_l0.IMAGE_LIST_DRAW_STYLEAbi): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_DrawEx == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_ImageList_DrawEx(himl: Win32__impl_l0.HIMAGELIST, i: Int32, hdcDst: Win32_Graphics_Gdi.HDC, x: Int32, y: Int32, dx: Int32, dy: Int32, rgbBk: UInt32, rgbFg: UInt32, fStyle: Win32__impl_l0.IMAGE_LIST_DRAW_STYLEAbi): Int32 {
+    return ImageList_DrawEx(himl, i, hdcDst, x, y, dx, dy, rgbBk, rgbFg, fStyle)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_DrawIndirect == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func ImageList_DrawIndirect(pimldp: CPointer<Win32__impl_l1.IMAGELISTDRAWPARAMSAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_DrawIndirect == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_ImageList_DrawIndirect(pimldp: CPointer<Win32__impl_l1.IMAGELISTDRAWPARAMSAbi>): Int32 {
+    return ImageList_DrawIndirect(pimldp)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_Duplicate == "on"]
+foreign {
     func ImageList_Duplicate(himl: Win32__impl_l0.HIMAGELIST): Win32__impl_l0.HIMAGELIST
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_Duplicate == "on"]
+public unsafe func Windows_ImageList_Duplicate(himl: Win32__impl_l0.HIMAGELIST): Win32__impl_l0.HIMAGELIST {
+    return ImageList_Duplicate(himl)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_EndDrag == "on"]
+foreign {
     func ImageList_EndDrag(): Unit
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_EndDrag == "on"]
+public unsafe func Windows_ImageList_EndDrag(): Unit {
+    ImageList_EndDrag()
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_GetBkColor == "on"]
+foreign {
     func ImageList_GetBkColor(himl: Win32__impl_l0.HIMAGELIST): UInt32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_GetBkColor == "on"]
+public unsafe func Windows_ImageList_GetBkColor(himl: Win32__impl_l0.HIMAGELIST): UInt32 {
+    return ImageList_GetBkColor(himl)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_GetDragImage == "on"]
+foreign {
     // param-hint: ppt optional
     // param-hint: pptHotspot optional
     func ImageList_GetDragImage(ppt: CPointer<Win32_Foundation.POINTAbi>, pptHotspot: CPointer<Win32_Foundation.POINTAbi>): Win32__impl_l0.HIMAGELIST
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_GetDragImage == "on"]
+public unsafe func Windows_ImageList_GetDragImage(ppt: CPointer<Win32_Foundation.POINTAbi>, pptHotspot: CPointer<Win32_Foundation.POINTAbi>): Win32__impl_l0.HIMAGELIST {
+    return ImageList_GetDragImage(ppt, pptHotspot)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_GetIcon == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    func ImageList_GetIcon(himl: Win32__impl_l0.HIMAGELIST, i: Int32, flags: Win32__impl_l0.IMAGE_LIST_DRAW_STYLEAbi): Win32__impl_l0.HICON
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_GetIcon == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_ImageList_GetIcon(himl: Win32__impl_l0.HIMAGELIST, i: Int32, flags: Win32__impl_l0.IMAGE_LIST_DRAW_STYLEAbi): Win32__impl_l0.HICON {
+    return ImageList_GetIcon(himl, i, flags)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_GetIconSize == "on"]
+foreign {
     // param-hint: cx optional
     // param-hint: cy optional
     func ImageList_GetIconSize(himl: Win32__impl_l0.HIMAGELIST, cx: CPointer<Int32>, cy: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_GetIconSize == "on"]
+public unsafe func Windows_ImageList_GetIconSize(himl: Win32__impl_l0.HIMAGELIST, cx: CPointer<Int32>, cy: CPointer<Int32>): Int32 {
+    return ImageList_GetIconSize(himl, cx, cy)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_GetImageCount == "on"]
+foreign {
     func ImageList_GetImageCount(himl: Win32__impl_l0.HIMAGELIST): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_GetImageCount == "on"]
+public unsafe func Windows_ImageList_GetImageCount(himl: Win32__impl_l0.HIMAGELIST): Int32 {
+    return ImageList_GetImageCount(himl)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_GetImageInfo == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func ImageList_GetImageInfo(himl: Win32__impl_l0.HIMAGELIST, i: Int32, pImageInfo: CPointer<Win32__impl_l0.IMAGEINFOAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_GetImageInfo == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_ImageList_GetImageInfo(himl: Win32__impl_l0.HIMAGELIST, i: Int32, pImageInfo: CPointer<Win32__impl_l0.IMAGEINFOAbi>): Int32 {
+    return ImageList_GetImageInfo(himl, i, pImageInfo)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_LoadImageA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    func ImageList_LoadImageA(hi: CPointer<Unit>, lpbmp: CPointer<UInt8>, cx: Int32, cGrow: Int32, crMask: UInt32, uType: UInt32, uFlags: Win32__impl_l0.IMAGE_FLAGSAbi): Win32__impl_l0.HIMAGELIST
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_LoadImageA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_ImageList_LoadImageA(hi: CPointer<Unit>, lpbmp: CPointer<UInt8>, cx: Int32, cGrow: Int32, crMask: UInt32, uType: UInt32, uFlags: Win32__impl_l0.IMAGE_FLAGSAbi): Win32__impl_l0.HIMAGELIST {
+    return ImageList_LoadImageA(hi, lpbmp, cx, cGrow, crMask, uType, uFlags)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_LoadImageW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    func ImageList_LoadImageW(hi: CPointer<Unit>, lpbmp: CPointer<UInt16>, cx: Int32, cGrow: Int32, crMask: UInt32, uType: UInt32, uFlags: Win32__impl_l0.IMAGE_FLAGSAbi): Win32__impl_l0.HIMAGELIST
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_LoadImageW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_ImageList_LoadImageW(hi: CPointer<Unit>, lpbmp: CPointer<UInt16>, cx: Int32, cGrow: Int32, crMask: UInt32, uType: UInt32, uFlags: Win32__impl_l0.IMAGE_FLAGSAbi): Win32__impl_l0.HIMAGELIST {
+    return ImageList_LoadImageW(hi, lpbmp, cx, cGrow, crMask, uType, uFlags)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_Merge == "on"]
+foreign {
     func ImageList_Merge(himl1: Win32__impl_l0.HIMAGELIST, i1: Int32, himl2: Win32__impl_l0.HIMAGELIST, i2: Int32, dx: Int32, dy: Int32): Win32__impl_l0.HIMAGELIST
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_Merge == "on"]
+public unsafe func Windows_ImageList_Merge(himl1: Win32__impl_l0.HIMAGELIST, i1: Int32, himl2: Win32__impl_l0.HIMAGELIST, i2: Int32, dx: Int32, dy: Int32): Win32__impl_l0.HIMAGELIST {
+    return ImageList_Merge(himl1, i1, himl2, i2, dx, dy)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_Read == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func ImageList_Read(pstm: CPointer<Unit>): Win32__impl_l0.HIMAGELIST
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_Read == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_ImageList_Read(pstm: CPointer<Unit>): Win32__impl_l0.HIMAGELIST {
+    return ImageList_Read(pstm)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_ReadEx == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func ImageList_ReadEx(dwFlags: UInt32, pstm: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_ReadEx == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_ImageList_ReadEx(dwFlags: UInt32, pstm: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return ImageList_ReadEx(dwFlags, pstm, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_Remove == "on"]
+foreign {
     func ImageList_Remove(himl: Win32__impl_l0.HIMAGELIST, i: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_Remove == "on"]
+public unsafe func Windows_ImageList_Remove(himl: Win32__impl_l0.HIMAGELIST, i: Int32): Int32 {
+    return ImageList_Remove(himl, i)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_Replace == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    // param-hint: hbmMask optional
+    func ImageList_Replace(himl: Win32__impl_l0.HIMAGELIST, i: Int32, hbmImage: Win32_Graphics_Gdi.HBITMAP, hbmMask: Win32_Graphics_Gdi.HBITMAP): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_Replace == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_ImageList_Replace(himl: Win32__impl_l0.HIMAGELIST, i: Int32, hbmImage: Win32_Graphics_Gdi.HBITMAP, hbmMask: Win32_Graphics_Gdi.HBITMAP): Int32 {
+    return ImageList_Replace(himl, i, hbmImage, hbmMask)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_ReplaceIcon == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    func ImageList_ReplaceIcon(himl: Win32__impl_l0.HIMAGELIST, i: Int32, hicon: Win32__impl_l0.HICON): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_ReplaceIcon == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_ImageList_ReplaceIcon(himl: Win32__impl_l0.HIMAGELIST, i: Int32, hicon: Win32__impl_l0.HICON): Int32 {
+    return ImageList_ReplaceIcon(himl, i, hicon)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_SetBkColor == "on"]
+foreign {
     func ImageList_SetBkColor(himl: Win32__impl_l0.HIMAGELIST, clrBk: UInt32): UInt32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_SetBkColor == "on"]
+public unsafe func Windows_ImageList_SetBkColor(himl: Win32__impl_l0.HIMAGELIST, clrBk: UInt32): UInt32 {
+    return ImageList_SetBkColor(himl, clrBk)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_SetDragCursorImage == "on"]
+foreign {
     func ImageList_SetDragCursorImage(himlDrag: Win32__impl_l0.HIMAGELIST, iDrag: Int32, dxHotspot: Int32, dyHotspot: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_SetDragCursorImage == "on"]
+public unsafe func Windows_ImageList_SetDragCursorImage(himlDrag: Win32__impl_l0.HIMAGELIST, iDrag: Int32, dxHotspot: Int32, dyHotspot: Int32): Int32 {
+    return ImageList_SetDragCursorImage(himlDrag, iDrag, dxHotspot, dyHotspot)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_SetIconSize == "on"]
+foreign {
     func ImageList_SetIconSize(himl: Win32__impl_l0.HIMAGELIST, cx: Int32, cy: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_SetIconSize == "on"]
+public unsafe func Windows_ImageList_SetIconSize(himl: Win32__impl_l0.HIMAGELIST, cx: Int32, cy: Int32): Int32 {
+    return ImageList_SetIconSize(himl, cx, cy)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_SetImageCount == "on"]
+foreign {
     func ImageList_SetImageCount(himl: Win32__impl_l0.HIMAGELIST, uNewCount: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_SetImageCount == "on"]
+public unsafe func Windows_ImageList_SetImageCount(himl: Win32__impl_l0.HIMAGELIST, uNewCount: UInt32): Int32 {
+    return ImageList_SetImageCount(himl, uNewCount)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_SetOverlayImage == "on"]
+foreign {
     func ImageList_SetOverlayImage(himl: Win32__impl_l0.HIMAGELIST, iImage: Int32, iOverlay: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_SetOverlayImage == "on"]
+public unsafe func Windows_ImageList_SetOverlayImage(himl: Win32__impl_l0.HIMAGELIST, iImage: Int32, iOverlay: Int32): Int32 {
+    return ImageList_SetOverlayImage(himl, iImage, iOverlay)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_Write == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func ImageList_Write(himl: Win32__impl_l0.HIMAGELIST, pstm: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_Write == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_ImageList_Write(himl: Win32__impl_l0.HIMAGELIST, pstm: CPointer<Unit>): Int32 {
+    return ImageList_Write(himl, pstm)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_WriteEx == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func ImageList_WriteEx(himl: Win32__impl_l0.HIMAGELIST, dwFlags: Win32__impl_l0.IMAGE_LIST_WRITE_STREAM_FLAGSAbi, pstm: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_WriteEx == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_ImageList_WriteEx(himl: Win32__impl_l0.HIMAGELIST, dwFlags: Win32__impl_l0.IMAGE_LIST_WRITE_STREAM_FLAGSAbi, pstm: CPointer<Unit>): Int32 {
+    return ImageList_WriteEx(himl, dwFlags, pstm)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_InitCommonControls == "on"]
+foreign {
     func InitCommonControls(): Unit
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_InitCommonControls == "on"]
+public unsafe func Windows_InitCommonControls(): Unit {
+    InitCommonControls()
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_InitCommonControlsEx == "on"]
+foreign {
     func InitCommonControlsEx(picce: CPointer<Win32__impl_l1.INITCOMMONCONTROLSEXAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_InitCommonControlsEx == "on"]
+public unsafe func Windows_InitCommonControlsEx(picce: CPointer<Win32__impl_l1.INITCOMMONCONTROLSEXAbi>): Int32 {
+    return InitCommonControlsEx(picce)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_InitMUILanguage == "on"]
+foreign {
     func InitMUILanguage(uiLang: UInt16): Unit
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_InitMUILanguage == "on"]
+public unsafe func Windows_InitMUILanguage(uiLang: UInt16): Unit {
+    InitMUILanguage(uiLang)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_InitializeFlatSB == "on"]
+foreign {
     func InitializeFlatSB(param0: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_InitializeFlatSB == "on"]
+public unsafe func Windows_InitializeFlatSB(param0: CPointer<Unit>): Int32 {
+    return InitializeFlatSB(param0)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_LBItemFromPt == "on"]
+foreign {
     func LBItemFromPt(hLB: CPointer<Unit>, pt: Win32_Foundation.POINTAbi, bAutoScroll: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_LBItemFromPt == "on"]
+public unsafe func Windows_LBItemFromPt(hLB: CPointer<Unit>, pt: Win32_Foundation.POINTAbi, bAutoScroll: Int32): Int32 {
+    return LBItemFromPt(hLB, pt, bAutoScroll)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_LoadIconMetric == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    // param-hint: hinst optional
+    func LoadIconMetric(hinst: CPointer<Unit>, pszName: CPointer<UInt16>, lims: Win32__impl_l0._LI_METRICAbi, phico: CPointer<Win32__impl_l0.HICON>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_LoadIconMetric == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_LoadIconMetric(hinst: CPointer<Unit>, pszName: CPointer<UInt16>, lims: Win32__impl_l0._LI_METRICAbi, phico: CPointer<Win32__impl_l0.HICON>): Int32 {
+    return LoadIconMetric(hinst, pszName, lims, phico)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_LoadIconWithScaleDown == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    // param-hint: hinst optional
+    func LoadIconWithScaleDown(hinst: CPointer<Unit>, pszName: CPointer<UInt16>, cx: Int32, cy: Int32, phico: CPointer<Win32__impl_l0.HICON>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_LoadIconWithScaleDown == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_LoadIconWithScaleDown(hinst: CPointer<Unit>, pszName: CPointer<UInt16>, cx: Int32, cy: Int32, phico: CPointer<Win32__impl_l0.HICON>): Int32 {
+    return LoadIconWithScaleDown(hinst, pszName, cx, cy, phico)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_MakeDragList == "on"]
+foreign {
     func MakeDragList(hLB: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_MakeDragList == "on"]
+public unsafe func Windows_MakeDragList(hLB: CPointer<Unit>): Int32 {
+    return MakeDragList(hLB)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_MenuHelp == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    func MenuHelp(uMsg: UInt32, wParam: UIntNative, lParam: IntNative, hMainMenu: Win32__impl_l0.HMENU, hInst: CPointer<Unit>, hwndStatus: CPointer<Unit>, lpwIDs: CPointer<UInt32>): Unit
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_MenuHelp == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_MenuHelp(uMsg: UInt32, wParam: UIntNative, lParam: IntNative, hMainMenu: Win32__impl_l0.HMENU, hInst: CPointer<Unit>, hwndStatus: CPointer<Unit>, lpwIDs: CPointer<UInt32>): Unit {
+    MenuHelp(uMsg, wParam, lParam, hMainMenu, hInst, hwndStatus, lpwIDs)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_PropertySheetA == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func PropertySheetA(param0: CPointer<Win32__impl_l1.PROPSHEETHEADERA_V2Abi>): IntNative
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_PropertySheetA == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_PropertySheetA(param0: CPointer<Win32__impl_l1.PROPSHEETHEADERA_V2Abi>): IntNative {
+    return PropertySheetA(param0)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_PropertySheetW == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func PropertySheetW(param0: CPointer<Win32__impl_l1.PROPSHEETHEADERW_V2Abi>): IntNative
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_PropertySheetW == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_PropertySheetW(param0: CPointer<Win32__impl_l1.PROPSHEETHEADERW_V2Abi>): IntNative {
+    return PropertySheetW(param0)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ShowHideMenuCtl == "on"]
+foreign {
     func ShowHideMenuCtl(hWnd: CPointer<Unit>, uFlags: UIntNative, lpInfo: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ShowHideMenuCtl == "on"]
+public unsafe func Windows_ShowHideMenuCtl(hWnd: CPointer<Unit>, uFlags: UIntNative, lpInfo: CPointer<Int32>): Int32 {
+    return ShowHideMenuCtl(hWnd, uFlags, lpInfo)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_Str_SetPtrW == "on"]
+foreign {
     // param-hint: psz optional
     func Str_SetPtrW(ppsz: CPointer<CPointer<UInt16>>, psz: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_Str_SetPtrW == "on"]
+public unsafe func Windows_Str_SetPtrW(ppsz: CPointer<CPointer<UInt16>>, psz: CPointer<UInt16>): Int32 {
+    return Str_SetPtrW(ppsz, psz)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_TaskDialog == "on"]
+foreign {
     // param-hint: hwndOwner optional
     // param-hint: hInstance optional
     // param-hint: pszWindowTitle optional
@@ -124,289 +1137,1128 @@ foreign {
     // param-hint: pszIcon optional
     // param-hint: pnButton optional
     func TaskDialog(hwndOwner: CPointer<Unit>, hInstance: CPointer<Unit>, pszWindowTitle: CPointer<UInt16>, pszMainInstruction: CPointer<UInt16>, pszContent: CPointer<UInt16>, dwCommonButtons: Win32__impl_l0.TASKDIALOG_COMMON_BUTTON_FLAGSAbi, pszIcon: CPointer<UInt16>, pnButton: CPointer<Int32>): Int32
-    func UninitializeFlatSB(param0: CPointer<Unit>): Int32
 }
 
-@When[COMCTL32 == "on" && ((arch == "x86_64" || arch == "aarch64"))]
-foreign {
-    // pinvoke-hint: SetLastError
-    func CreateToolbarEx(hwnd: CPointer<Unit>, ws: UInt32, wID: UInt32, nBitmaps: Int32, hBMInst: CPointer<Unit>, wBMID: UIntNative, lpButtons: CPointer<Win32__impl_l0.TBBUTTONAbi>, iNumButtons: Int32, dxButton: Int32, dyButton: Int32, dxBitmap: Int32, dyBitmap: Int32, uStructSize: UInt32): CPointer<Unit>
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_TaskDialog == "on"]
+public unsafe func Windows_TaskDialog(hwndOwner: CPointer<Unit>, hInstance: CPointer<Unit>, pszWindowTitle: CPointer<UInt16>, pszMainInstruction: CPointer<UInt16>, pszContent: CPointer<UInt16>, dwCommonButtons: Win32__impl_l0.TASKDIALOG_COMMON_BUTTON_FLAGSAbi, pszIcon: CPointer<UInt16>, pnButton: CPointer<Int32>): Int32 {
+    return TaskDialog(hwndOwner, hInstance, pszWindowTitle, pszMainInstruction, pszContent, dwCommonButtons, pszIcon, pnButton)
 }
 
-@When[COMCTL32 == "on" && (Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_WindowsAndMessaging == "on")]
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_TaskDialogIndirect == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
-    // pinvoke-hint: SetLastError
-    func PropertySheetA(param0: CPointer<Win32__impl_l1.PROPSHEETHEADERA_V2Abi>): IntNative
-    // pinvoke-hint: SetLastError
-    func PropertySheetW(param0: CPointer<Win32__impl_l1.PROPSHEETHEADERW_V2Abi>): IntNative
-}
-
-@When[COMCTL32 == "on" && (Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on")]
-foreign {
-    func CreatePropertySheetPageA(constPropSheetPagePointer: CPointer<Win32__impl_l1.PROPSHEETPAGEAAbi>): Win32__impl_l0.HPROPSHEETPAGE
-    func CreatePropertySheetPageW(constPropSheetPagePointer: CPointer<Win32__impl_l1.PROPSHEETPAGEWAbi>): Win32__impl_l0.HPROPSHEETPAGE
-}
-
-@When[COMCTL32 == "on" && Windows_Win32_Graphics_Gdi == "on"]
-foreign {
-    // param-hint: lpColorMap optional
-    // pinvoke-hint: SetLastError
-    func CreateMappedBitmap(hInstance: CPointer<Unit>, idBitmap: IntNative, wFlags: UInt32, lpColorMap: CPointer<Win32__impl_l0.COLORMAPAbi>, iNumMaps: Int32): Win32_Graphics_Gdi.HBITMAP
-    // param-hint: pszText len=param[2]
-    func DrawShadowText(hdc: Win32_Graphics_Gdi.HDC, pszText: CPointer<UInt16>, cch: UInt32, prc: CPointer<Win32_Foundation.RECTAbi>, dwFlags: UInt32, crText: UInt32, crShadow: UInt32, ixOffset: Int32, iyOffset: Int32): Int32
-    func DrawStatusTextA(hDC: Win32_Graphics_Gdi.HDC, lprc: CPointer<Win32_Foundation.RECTAbi>, pszText: CPointer<UInt8>, uFlags: UInt32): Unit
-    func DrawStatusTextW(hDC: Win32_Graphics_Gdi.HDC, lprc: CPointer<Win32_Foundation.RECTAbi>, pszText: CPointer<UInt16>, uFlags: UInt32): Unit
-    // param-hint: hbmMask optional
-    func ImageList_Add(himl: Win32__impl_l0.HIMAGELIST, hbmImage: Win32_Graphics_Gdi.HBITMAP, hbmMask: Win32_Graphics_Gdi.HBITMAP): Int32
-    func ImageList_AddMasked(himl: Win32__impl_l0.HIMAGELIST, hbmImage: Win32_Graphics_Gdi.HBITMAP, crMask: UInt32): Int32
-    func ImageList_Draw(himl: Win32__impl_l0.HIMAGELIST, i: Int32, hdcDst: Win32_Graphics_Gdi.HDC, x: Int32, y: Int32, fStyle: Win32__impl_l0.IMAGE_LIST_DRAW_STYLEAbi): Int32
-    func ImageList_DrawEx(himl: Win32__impl_l0.HIMAGELIST, i: Int32, hdcDst: Win32_Graphics_Gdi.HDC, x: Int32, y: Int32, dx: Int32, dy: Int32, rgbBk: UInt32, rgbFg: UInt32, fStyle: Win32__impl_l0.IMAGE_LIST_DRAW_STYLEAbi): Int32
-    func ImageList_DrawIndirect(pimldp: CPointer<Win32__impl_l1.IMAGELISTDRAWPARAMSAbi>): Int32
-    func ImageList_GetImageInfo(himl: Win32__impl_l0.HIMAGELIST, i: Int32, pImageInfo: CPointer<Win32__impl_l0.IMAGEINFOAbi>): Int32
-    // param-hint: hbmMask optional
-    func ImageList_Replace(himl: Win32__impl_l0.HIMAGELIST, i: Int32, hbmImage: Win32_Graphics_Gdi.HBITMAP, hbmMask: Win32_Graphics_Gdi.HBITMAP): Int32
-}
-
-@When[COMCTL32 == "on" && Windows_Win32_System_Com == "on"]
-foreign {
-    // param-hint: pvInstData optional
-    func DPA_LoadStream(phdpa: CPointer<Win32__impl_l0.HDPA>, pfn: PFNDPASTREAM, pstream: CPointer<Unit>, pvInstData: CPointer<Unit>): Int32
-    // param-hint: pvInstData optional
-    func DPA_SaveStream(hdpa: Win32__impl_l0.HDPA, pfn: PFNDPASTREAM, pstream: CPointer<Unit>, pvInstData: CPointer<Unit>): Int32
-    // param-hint: punkOuter optional
-    func ImageList_CoCreateInstance(rclsid: CPointer<GUID>, punkOuter: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
-    func ImageList_Read(pstm: CPointer<Unit>): Win32__impl_l0.HIMAGELIST
-    func ImageList_ReadEx(dwFlags: UInt32, pstm: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
-    func ImageList_Write(himl: Win32__impl_l0.HIMAGELIST, pstm: CPointer<Unit>): Int32
-    func ImageList_WriteEx(himl: Win32__impl_l0.HIMAGELIST, dwFlags: Win32__impl_l0.IMAGE_LIST_WRITE_STREAM_FLAGSAbi, pstm: CPointer<Unit>): Int32
-}
-
-@When[COMCTL32 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-foreign {
-    func FlatSB_GetScrollInfo(param0: CPointer<Unit>, code: Win32__impl_l0.SCROLLBAR_CONSTANTSAbi, param2: CPointer<Win32__impl_l1.SCROLLINFOAbi>): Int32
-    func FlatSB_GetScrollPos(param0: CPointer<Unit>, code: Win32__impl_l0.SCROLLBAR_CONSTANTSAbi): Int32
-    func FlatSB_GetScrollRange(param0: CPointer<Unit>, code: Win32__impl_l0.SCROLLBAR_CONSTANTSAbi, param2: CPointer<Int32>, param3: CPointer<Int32>): Int32
-    func FlatSB_SetScrollInfo(param0: CPointer<Unit>, code: Win32__impl_l0.SCROLLBAR_CONSTANTSAbi, psi: CPointer<Win32__impl_l1.SCROLLINFOAbi>, fRedraw: Int32): Int32
-    func FlatSB_SetScrollPos(param0: CPointer<Unit>, code: Win32__impl_l0.SCROLLBAR_CONSTANTSAbi, pos: Int32, fRedraw: Int32): Int32
-    func FlatSB_SetScrollRange(param0: CPointer<Unit>, code: Win32__impl_l0.SCROLLBAR_CONSTANTSAbi, min: Int32, max: Int32, fRedraw: Int32): Int32
-    func FlatSB_ShowScrollBar(param0: CPointer<Unit>, code: Win32__impl_l0.SCROLLBAR_CONSTANTSAbi, param2: Int32): Int32
-    func ImageList_GetIcon(himl: Win32__impl_l0.HIMAGELIST, i: Int32, flags: Win32__impl_l0.IMAGE_LIST_DRAW_STYLEAbi): Win32__impl_l0.HICON
-    func ImageList_LoadImageA(hi: CPointer<Unit>, lpbmp: CPointer<UInt8>, cx: Int32, cGrow: Int32, crMask: UInt32, uType: UInt32, uFlags: Win32__impl_l0.IMAGE_FLAGSAbi): Win32__impl_l0.HIMAGELIST
-    func ImageList_LoadImageW(hi: CPointer<Unit>, lpbmp: CPointer<UInt16>, cx: Int32, cGrow: Int32, crMask: UInt32, uType: UInt32, uFlags: Win32__impl_l0.IMAGE_FLAGSAbi): Win32__impl_l0.HIMAGELIST
-    func ImageList_ReplaceIcon(himl: Win32__impl_l0.HIMAGELIST, i: Int32, hicon: Win32__impl_l0.HICON): Int32
-    // param-hint: hinst optional
-    func LoadIconMetric(hinst: CPointer<Unit>, pszName: CPointer<UInt16>, lims: Win32__impl_l0._LI_METRICAbi, phico: CPointer<Win32__impl_l0.HICON>): Int32
-    // param-hint: hinst optional
-    func LoadIconWithScaleDown(hinst: CPointer<Unit>, pszName: CPointer<UInt16>, cx: Int32, cy: Int32, phico: CPointer<Win32__impl_l0.HICON>): Int32
-    func MenuHelp(uMsg: UInt32, wParam: UIntNative, lParam: IntNative, hMainMenu: Win32__impl_l0.HMENU, hInst: CPointer<Unit>, hwndStatus: CPointer<Unit>, lpwIDs: CPointer<UInt32>): Unit
     // param-hint: pnButton optional
     // param-hint: pnRadioButton optional
     // param-hint: pfVerificationFlagChecked optional
     func TaskDialogIndirect(pTaskConfig: CPointer<Win32__impl_l1.TASKDIALOGCONFIG>, pnButton: CPointer<Int32>, pnRadioButton: CPointer<Int32>, pfVerificationFlagChecked: CPointer<Int32>): Int32
 }
 
-@When[USER32 == "on"]
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_TaskDialogIndirect == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_TaskDialogIndirect(pTaskConfig: CPointer<Win32__impl_l1.TASKDIALOGCONFIG>, pnButton: CPointer<Int32>, pnRadioButton: CPointer<Int32>, pfVerificationFlagChecked: CPointer<Int32>): Int32 {
+    return TaskDialogIndirect(pTaskConfig, pnButton, pnRadioButton, pfVerificationFlagChecked)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_UninitializeFlatSB == "on"]
+foreign {
+    func UninitializeFlatSB(param0: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_UninitializeFlatSB == "on"]
+public unsafe func Windows_UninitializeFlatSB(param0: CPointer<Unit>): Int32 {
+    return UninitializeFlatSB(param0)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_CheckDlgButton == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func CheckDlgButton(hDlg: CPointer<Unit>, nIDButton: Int32, uCheck: Win32__impl_l0.DLG_BUTTON_CHECK_STATEAbi): Int32
-    // pinvoke-hint: SetLastError
-    func CheckRadioButton(hDlg: CPointer<Unit>, nIDFirstButton: Int32, nIDLastButton: Int32, nIDCheckButton: Int32): Int32
-    func DlgDirListA(hDlg: CPointer<Unit>, lpPathSpec: CPointer<UInt8>, nIDListBox: Int32, nIDStaticPath: Int32, uFileType: Win32__impl_l0.DLG_DIR_LIST_FILE_TYPEAbi): Int32
-    // pinvoke-hint: SetLastError
-    func DlgDirListComboBoxA(hDlg: CPointer<Unit>, lpPathSpec: CPointer<UInt8>, nIDComboBox: Int32, nIDStaticPath: Int32, uFiletype: Win32__impl_l0.DLG_DIR_LIST_FILE_TYPEAbi): Int32
-    // pinvoke-hint: SetLastError
-    func DlgDirListComboBoxW(hDlg: CPointer<Unit>, lpPathSpec: CPointer<UInt16>, nIDComboBox: Int32, nIDStaticPath: Int32, uFiletype: Win32__impl_l0.DLG_DIR_LIST_FILE_TYPEAbi): Int32
-    func DlgDirListW(hDlg: CPointer<Unit>, lpPathSpec: CPointer<UInt16>, nIDListBox: Int32, nIDStaticPath: Int32, uFileType: Win32__impl_l0.DLG_DIR_LIST_FILE_TYPEAbi): Int32
-    // param-hint: lpString len=param[2]
-    // pinvoke-hint: SetLastError
-    func DlgDirSelectComboBoxExA(hwndDlg: CPointer<Unit>, lpString: CPointer<UInt8>, cchOut: Int32, idComboBox: Int32): Int32
-    // param-hint: lpString len=param[2]
-    // pinvoke-hint: SetLastError
-    func DlgDirSelectComboBoxExW(hwndDlg: CPointer<Unit>, lpString: CPointer<UInt16>, cchOut: Int32, idComboBox: Int32): Int32
-    // param-hint: lpString len=param[2]
-    // pinvoke-hint: SetLastError
-    func DlgDirSelectExA(hwndDlg: CPointer<Unit>, lpString: CPointer<UInt8>, chCount: Int32, idListBox: Int32): Int32
-    // param-hint: lpString len=param[2]
-    // pinvoke-hint: SetLastError
-    func DlgDirSelectExW(hwndDlg: CPointer<Unit>, lpString: CPointer<UInt16>, chCount: Int32, idListBox: Int32): Int32
-    // pinvoke-hint: SetLastError
-    func EnableScrollBar(hWnd: CPointer<Unit>, wSBflags: UInt32, wArrows: Win32__impl_l0.ENABLE_SCROLL_BAR_ARROWSAbi): Int32
-    // param-hint: controlPolygon len=param[0]
-    // pinvoke-hint: SetLastError
-    func EvaluateProximityToPolygon(numVertices: UInt32, controlPolygon: CPointer<Win32_Foundation.POINTAbi>, pHitTestingInput: CPointer<Win32__impl_l0.TOUCH_HIT_TESTING_INPUTAbi>, pProximityEval: CPointer<Win32__impl_l0.TOUCH_HIT_TESTING_PROXIMITY_EVALUATIONAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func EvaluateProximityToRect(controlBoundingBox: CPointer<Win32_Foundation.RECTAbi>, pHitTestingInput: CPointer<Win32__impl_l0.TOUCH_HIT_TESTING_INPUTAbi>, pProximityEval: CPointer<Win32__impl_l0.TOUCH_HIT_TESTING_PROXIMITY_EVALUATIONAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func GetComboBoxInfo(hwndCombo: CPointer<Unit>, pcbi: CPointer<Win32__impl_l1.COMBOBOXINFOAbi>): Int32
-    func GetListBoxInfo(hwnd: CPointer<Unit>): UInt32
-    // param-hint: config bytes=param[3] optional
-    func GetWindowFeedbackSetting(hwnd: CPointer<Unit>, feedback: Win32__impl_l0.FEEDBACK_TYPEAbi, dwFlags: UInt32, pSize: CPointer<UInt32>, config: CPointer<Unit>): Int32
-    func IsDlgButtonChecked(hDlg: CPointer<Unit>, nIDButton: Int32): UInt32
-    // pinvoke-hint: SetLastError
-    func PackTouchHitTestingProximityEvaluation(pHitTestingInput: CPointer<Win32__impl_l0.TOUCH_HIT_TESTING_INPUTAbi>, pProximityEval: CPointer<Win32__impl_l0.TOUCH_HIT_TESTING_PROXIMITY_EVALUATIONAbi>): IntNative
-    // pinvoke-hint: SetLastError
-    func RegisterPointerDeviceNotifications(window: CPointer<Unit>, notifyRange: Int32): Int32
-    // pinvoke-hint: SetLastError
-    func RegisterTouchHitTestingWindow(hwnd: CPointer<Unit>, value: UInt32): Int32
-    // param-hint: configuration bytes=param[3] optional
-    func SetWindowFeedbackSetting(hwnd: CPointer<Unit>, feedback: Win32__impl_l0.FEEDBACK_TYPEAbi, dwFlags: UInt32, size: UInt32, configuration: CPointer<Unit>): Int32
 }
 
-@When[USER32 == "on" && (Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_WindowsAndMessaging == "on")]
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_CheckDlgButton == "on"]
+public unsafe func Windows_CheckDlgButton(hDlg: CPointer<Unit>, nIDButton: Int32, uCheck: Win32__impl_l0.DLG_BUTTON_CHECK_STATEAbi): Int32 {
+    return CheckDlgButton(hDlg, nIDButton, uCheck)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_CheckRadioButton == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func CheckRadioButton(hDlg: CPointer<Unit>, nIDFirstButton: Int32, nIDLastButton: Int32, nIDCheckButton: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_CheckRadioButton == "on"]
+public unsafe func Windows_CheckRadioButton(hDlg: CPointer<Unit>, nIDFirstButton: Int32, nIDLastButton: Int32, nIDCheckButton: Int32): Int32 {
+    return CheckRadioButton(hDlg, nIDFirstButton, nIDLastButton, nIDCheckButton)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_CreateSyntheticPointerDevice == "on" && Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func CreateSyntheticPointerDevice(pointerType: Win32__impl_l0.POINTER_INPUT_TYPEAbi, maxCount: UInt32, mode: Win32__impl_l0.POINTER_FEEDBACK_MODEAbi): Win32__impl_l0.HSYNTHETICPOINTERDEVICE
 }
 
-@When[USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_CreateSyntheticPointerDevice == "on" && Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_CreateSyntheticPointerDevice(pointerType: Win32__impl_l0.POINTER_INPUT_TYPEAbi, maxCount: UInt32, mode: Win32__impl_l0.POINTER_FEEDBACK_MODEAbi): Win32__impl_l0.HSYNTHETICPOINTERDEVICE {
+    return CreateSyntheticPointerDevice(pointerType, maxCount, mode)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_DlgDirListA == "on"]
+foreign {
+    func DlgDirListA(hDlg: CPointer<Unit>, lpPathSpec: CPointer<UInt8>, nIDListBox: Int32, nIDStaticPath: Int32, uFileType: Win32__impl_l0.DLG_DIR_LIST_FILE_TYPEAbi): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_DlgDirListA == "on"]
+public unsafe func Windows_DlgDirListA(hDlg: CPointer<Unit>, lpPathSpec: CPointer<UInt8>, nIDListBox: Int32, nIDStaticPath: Int32, uFileType: Win32__impl_l0.DLG_DIR_LIST_FILE_TYPEAbi): Int32 {
+    return DlgDirListA(hDlg, lpPathSpec, nIDListBox, nIDStaticPath, uFileType)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_DlgDirListComboBoxA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func DlgDirListComboBoxA(hDlg: CPointer<Unit>, lpPathSpec: CPointer<UInt8>, nIDComboBox: Int32, nIDStaticPath: Int32, uFiletype: Win32__impl_l0.DLG_DIR_LIST_FILE_TYPEAbi): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_DlgDirListComboBoxA == "on"]
+public unsafe func Windows_DlgDirListComboBoxA(hDlg: CPointer<Unit>, lpPathSpec: CPointer<UInt8>, nIDComboBox: Int32, nIDStaticPath: Int32, uFiletype: Win32__impl_l0.DLG_DIR_LIST_FILE_TYPEAbi): Int32 {
+    return DlgDirListComboBoxA(hDlg, lpPathSpec, nIDComboBox, nIDStaticPath, uFiletype)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_DlgDirListComboBoxW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func DlgDirListComboBoxW(hDlg: CPointer<Unit>, lpPathSpec: CPointer<UInt16>, nIDComboBox: Int32, nIDStaticPath: Int32, uFiletype: Win32__impl_l0.DLG_DIR_LIST_FILE_TYPEAbi): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_DlgDirListComboBoxW == "on"]
+public unsafe func Windows_DlgDirListComboBoxW(hDlg: CPointer<Unit>, lpPathSpec: CPointer<UInt16>, nIDComboBox: Int32, nIDStaticPath: Int32, uFiletype: Win32__impl_l0.DLG_DIR_LIST_FILE_TYPEAbi): Int32 {
+    return DlgDirListComboBoxW(hDlg, lpPathSpec, nIDComboBox, nIDStaticPath, uFiletype)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_DlgDirListW == "on"]
+foreign {
+    func DlgDirListW(hDlg: CPointer<Unit>, lpPathSpec: CPointer<UInt16>, nIDListBox: Int32, nIDStaticPath: Int32, uFileType: Win32__impl_l0.DLG_DIR_LIST_FILE_TYPEAbi): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_DlgDirListW == "on"]
+public unsafe func Windows_DlgDirListW(hDlg: CPointer<Unit>, lpPathSpec: CPointer<UInt16>, nIDListBox: Int32, nIDStaticPath: Int32, uFileType: Win32__impl_l0.DLG_DIR_LIST_FILE_TYPEAbi): Int32 {
+    return DlgDirListW(hDlg, lpPathSpec, nIDListBox, nIDStaticPath, uFileType)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_DlgDirSelectComboBoxExA == "on"]
+foreign {
+    // param-hint: lpString len=param[2]
+    // pinvoke-hint: SetLastError
+    func DlgDirSelectComboBoxExA(hwndDlg: CPointer<Unit>, lpString: CPointer<UInt8>, cchOut: Int32, idComboBox: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_DlgDirSelectComboBoxExA == "on"]
+public unsafe func Windows_DlgDirSelectComboBoxExA(hwndDlg: CPointer<Unit>, lpString: CPointer<UInt8>, cchOut: Int32, idComboBox: Int32): Int32 {
+    return DlgDirSelectComboBoxExA(hwndDlg, lpString, cchOut, idComboBox)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_DlgDirSelectComboBoxExW == "on"]
+foreign {
+    // param-hint: lpString len=param[2]
+    // pinvoke-hint: SetLastError
+    func DlgDirSelectComboBoxExW(hwndDlg: CPointer<Unit>, lpString: CPointer<UInt16>, cchOut: Int32, idComboBox: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_DlgDirSelectComboBoxExW == "on"]
+public unsafe func Windows_DlgDirSelectComboBoxExW(hwndDlg: CPointer<Unit>, lpString: CPointer<UInt16>, cchOut: Int32, idComboBox: Int32): Int32 {
+    return DlgDirSelectComboBoxExW(hwndDlg, lpString, cchOut, idComboBox)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_DlgDirSelectExA == "on"]
+foreign {
+    // param-hint: lpString len=param[2]
+    // pinvoke-hint: SetLastError
+    func DlgDirSelectExA(hwndDlg: CPointer<Unit>, lpString: CPointer<UInt8>, chCount: Int32, idListBox: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_DlgDirSelectExA == "on"]
+public unsafe func Windows_DlgDirSelectExA(hwndDlg: CPointer<Unit>, lpString: CPointer<UInt8>, chCount: Int32, idListBox: Int32): Int32 {
+    return DlgDirSelectExA(hwndDlg, lpString, chCount, idListBox)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_DlgDirSelectExW == "on"]
+foreign {
+    // param-hint: lpString len=param[2]
+    // pinvoke-hint: SetLastError
+    func DlgDirSelectExW(hwndDlg: CPointer<Unit>, lpString: CPointer<UInt16>, chCount: Int32, idListBox: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_DlgDirSelectExW == "on"]
+public unsafe func Windows_DlgDirSelectExW(hwndDlg: CPointer<Unit>, lpString: CPointer<UInt16>, chCount: Int32, idListBox: Int32): Int32 {
+    return DlgDirSelectExW(hwndDlg, lpString, chCount, idListBox)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_EnableScrollBar == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func EnableScrollBar(hWnd: CPointer<Unit>, wSBflags: UInt32, wArrows: Win32__impl_l0.ENABLE_SCROLL_BAR_ARROWSAbi): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_EnableScrollBar == "on"]
+public unsafe func Windows_EnableScrollBar(hWnd: CPointer<Unit>, wSBflags: UInt32, wArrows: Win32__impl_l0.ENABLE_SCROLL_BAR_ARROWSAbi): Int32 {
+    return EnableScrollBar(hWnd, wSBflags, wArrows)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_EvaluateProximityToPolygon == "on"]
+foreign {
+    // param-hint: controlPolygon len=param[0]
+    // pinvoke-hint: SetLastError
+    func EvaluateProximityToPolygon(numVertices: UInt32, controlPolygon: CPointer<Win32_Foundation.POINTAbi>, pHitTestingInput: CPointer<Win32__impl_l0.TOUCH_HIT_TESTING_INPUTAbi>, pProximityEval: CPointer<Win32__impl_l0.TOUCH_HIT_TESTING_PROXIMITY_EVALUATIONAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_EvaluateProximityToPolygon == "on"]
+public unsafe func Windows_EvaluateProximityToPolygon(numVertices: UInt32, controlPolygon: CPointer<Win32_Foundation.POINTAbi>, pHitTestingInput: CPointer<Win32__impl_l0.TOUCH_HIT_TESTING_INPUTAbi>, pProximityEval: CPointer<Win32__impl_l0.TOUCH_HIT_TESTING_PROXIMITY_EVALUATIONAbi>): Int32 {
+    return EvaluateProximityToPolygon(numVertices, controlPolygon, pHitTestingInput, pProximityEval)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_EvaluateProximityToRect == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func EvaluateProximityToRect(controlBoundingBox: CPointer<Win32_Foundation.RECTAbi>, pHitTestingInput: CPointer<Win32__impl_l0.TOUCH_HIT_TESTING_INPUTAbi>, pProximityEval: CPointer<Win32__impl_l0.TOUCH_HIT_TESTING_PROXIMITY_EVALUATIONAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_EvaluateProximityToRect == "on"]
+public unsafe func Windows_EvaluateProximityToRect(controlBoundingBox: CPointer<Win32_Foundation.RECTAbi>, pHitTestingInput: CPointer<Win32__impl_l0.TOUCH_HIT_TESTING_INPUTAbi>, pProximityEval: CPointer<Win32__impl_l0.TOUCH_HIT_TESTING_PROXIMITY_EVALUATIONAbi>): Int32 {
+    return EvaluateProximityToRect(controlBoundingBox, pHitTestingInput, pProximityEval)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_GetComboBoxInfo == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func GetComboBoxInfo(hwndCombo: CPointer<Unit>, pcbi: CPointer<Win32__impl_l1.COMBOBOXINFOAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_GetComboBoxInfo == "on"]
+public unsafe func Windows_GetComboBoxInfo(hwndCombo: CPointer<Unit>, pcbi: CPointer<Win32__impl_l1.COMBOBOXINFOAbi>): Int32 {
+    return GetComboBoxInfo(hwndCombo, pcbi)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_GetListBoxInfo == "on"]
+foreign {
+    func GetListBoxInfo(hwnd: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_GetListBoxInfo == "on"]
+public unsafe func Windows_GetListBoxInfo(hwnd: CPointer<Unit>): UInt32 {
+    return GetListBoxInfo(hwnd)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_GetWindowFeedbackSetting == "on"]
+foreign {
+    // param-hint: config bytes=param[3] optional
+    func GetWindowFeedbackSetting(hwnd: CPointer<Unit>, feedback: Win32__impl_l0.FEEDBACK_TYPEAbi, dwFlags: UInt32, pSize: CPointer<UInt32>, config: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_GetWindowFeedbackSetting == "on"]
+public unsafe func Windows_GetWindowFeedbackSetting(hwnd: CPointer<Unit>, feedback: Win32__impl_l0.FEEDBACK_TYPEAbi, dwFlags: UInt32, pSize: CPointer<UInt32>, config: CPointer<Unit>): Int32 {
+    return GetWindowFeedbackSetting(hwnd, feedback, dwFlags, pSize, config)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_IsDlgButtonChecked == "on"]
+foreign {
+    func IsDlgButtonChecked(hDlg: CPointer<Unit>, nIDButton: Int32): UInt32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_IsDlgButtonChecked == "on"]
+public unsafe func Windows_IsDlgButtonChecked(hDlg: CPointer<Unit>, nIDButton: Int32): UInt32 {
+    return IsDlgButtonChecked(hDlg, nIDButton)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_PackTouchHitTestingProximityEvaluation == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func PackTouchHitTestingProximityEvaluation(pHitTestingInput: CPointer<Win32__impl_l0.TOUCH_HIT_TESTING_INPUTAbi>, pProximityEval: CPointer<Win32__impl_l0.TOUCH_HIT_TESTING_PROXIMITY_EVALUATIONAbi>): IntNative
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_PackTouchHitTestingProximityEvaluation == "on"]
+public unsafe func Windows_PackTouchHitTestingProximityEvaluation(pHitTestingInput: CPointer<Win32__impl_l0.TOUCH_HIT_TESTING_INPUTAbi>, pProximityEval: CPointer<Win32__impl_l0.TOUCH_HIT_TESTING_PROXIMITY_EVALUATIONAbi>): IntNative {
+    return PackTouchHitTestingProximityEvaluation(pHitTestingInput, pProximityEval)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_RegisterPointerDeviceNotifications == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func RegisterPointerDeviceNotifications(window: CPointer<Unit>, notifyRange: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_RegisterPointerDeviceNotifications == "on"]
+public unsafe func Windows_RegisterPointerDeviceNotifications(window: CPointer<Unit>, notifyRange: Int32): Int32 {
+    return RegisterPointerDeviceNotifications(window, notifyRange)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_RegisterTouchHitTestingWindow == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func RegisterTouchHitTestingWindow(hwnd: CPointer<Unit>, value: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_RegisterTouchHitTestingWindow == "on"]
+public unsafe func Windows_RegisterTouchHitTestingWindow(hwnd: CPointer<Unit>, value: UInt32): Int32 {
+    return RegisterTouchHitTestingWindow(hwnd, value)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_SetScrollInfo == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
     func SetScrollInfo(hwnd: CPointer<Unit>, nBar: Win32__impl_l0.SCROLLBAR_CONSTANTSAbi, lpsi: CPointer<Win32__impl_l1.SCROLLINFOAbi>, redraw: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_SetScrollInfo == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_SetScrollInfo(hwnd: CPointer<Unit>, nBar: Win32__impl_l0.SCROLLBAR_CONSTANTSAbi, lpsi: CPointer<Win32__impl_l1.SCROLLINFOAbi>, redraw: Int32): Int32 {
+    return SetScrollInfo(hwnd, nBar, lpsi, redraw)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_SetScrollPos == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetScrollPos(hWnd: CPointer<Unit>, nBar: Win32__impl_l0.SCROLLBAR_CONSTANTSAbi, nPos: Int32, bRedraw: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_SetScrollPos == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_SetScrollPos(hWnd: CPointer<Unit>, nBar: Win32__impl_l0.SCROLLBAR_CONSTANTSAbi, nPos: Int32, bRedraw: Int32): Int32 {
+    return SetScrollPos(hWnd, nBar, nPos, bRedraw)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_SetScrollRange == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetScrollRange(hWnd: CPointer<Unit>, nBar: Win32__impl_l0.SCROLLBAR_CONSTANTSAbi, nMinPos: Int32, nMaxPos: Int32, bRedraw: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_SetScrollRange == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_SetScrollRange(hWnd: CPointer<Unit>, nBar: Win32__impl_l0.SCROLLBAR_CONSTANTSAbi, nMinPos: Int32, nMaxPos: Int32, bRedraw: Int32): Int32 {
+    return SetScrollRange(hWnd, nBar, nMinPos, nMaxPos, bRedraw)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_SetWindowFeedbackSetting == "on"]
+foreign {
+    // param-hint: configuration bytes=param[3] optional
+    func SetWindowFeedbackSetting(hwnd: CPointer<Unit>, feedback: Win32__impl_l0.FEEDBACK_TYPEAbi, dwFlags: UInt32, size: UInt32, configuration: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_SetWindowFeedbackSetting == "on"]
+public unsafe func Windows_SetWindowFeedbackSetting(hwnd: CPointer<Unit>, feedback: Win32__impl_l0.FEEDBACK_TYPEAbi, dwFlags: UInt32, size: UInt32, configuration: CPointer<Unit>): Int32 {
+    return SetWindowFeedbackSetting(hwnd, feedback, dwFlags, size, configuration)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_ShowScrollBar == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ShowScrollBar(hWnd: CPointer<Unit>, wBar: Win32__impl_l0.SCROLLBAR_CONSTANTSAbi, bShow: Int32): Int32
 }
 
-@When[UXTHEME == "on"]
-foreign {
-    // param-hint: prc optional
-    func BufferedPaintClear(hBufferedPaint: IntNative, prc: CPointer<Win32_Foundation.RECTAbi>): Int32
-    func BufferedPaintInit(): Int32
-    func BufferedPaintStopAllAnimations(hwnd: CPointer<Unit>): Int32
-    func BufferedPaintUnInit(): Int32
-    func CloseThemeData(hTheme: Win32__impl_l0.HTHEME): Int32
-    func EndBufferedPaint(hBufferedPaint: IntNative, fUpdateTarget: Int32): Int32
-    // param-hint: pszThemeFileName len=param[1]
-    // param-hint: pszColorBuff len=param[3] optional
-    // param-hint: pszSizeBuff len=param[5] optional
-    func GetCurrentThemeName(pszThemeFileName: CPointer<UInt16>, cchMaxNameChars: Int32, pszColorBuff: CPointer<UInt16>, cchMaxColorChars: Int32, pszSizeBuff: CPointer<UInt16>, cchMaxSizeChars: Int32): Int32
-    // param-hint: pvProperty bytes=param[5] optional
-    func GetThemeAnimationProperty(hTheme: Win32__impl_l0.HTHEME, iStoryboardId: Int32, iTargetId: Int32, eProperty: Win32__impl_l0.TA_PROPERTYAbi, pvProperty: CPointer<Unit>, cbSize: UInt32, pcbSizeOut: CPointer<UInt32>): Int32
-    // param-hint: pTransform bytes=param[5] optional
-    func GetThemeAnimationTransform(hTheme: Win32__impl_l0.HTHEME, iStoryboardId: Int32, iTargetId: Int32, dwTransformIndex: UInt32, pTransform: CPointer<Win32__impl_l1.TA_TRANSFORMAbi>, cbSize: UInt32, pcbSizeOut: CPointer<UInt32>): Int32
-    func GetThemeAppProperties(): Win32__impl_l0.SET_THEME_APP_PROPERTIES_FLAGSAbi
-    func GetThemeColor(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, pColor: CPointer<UInt32>): Int32
-    func GetThemeEnumValue(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, piVal: CPointer<Int32>): Int32
-    func GetThemeInt(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, piVal: CPointer<Int32>): Int32
-    func GetThemePosition(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, pPoint: CPointer<Win32_Foundation.POINTAbi>): Int32
-    func GetThemeRect(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, pRect: CPointer<Win32_Foundation.RECTAbi>): Int32
-    // param-hint: pcbStream optional
-    // param-hint: hInst optional
-    func GetThemeStream(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, ppvStream: CPointer<CPointer<Unit>>, pcbStream: CPointer<UInt32>, hInst: CPointer<Unit>): Int32
-    // param-hint: pTimingFunction bytes=param[3] optional
-    func GetThemeTimingFunction(hTheme: Win32__impl_l0.HTHEME, iTimingFunctionId: Int32, pTimingFunction: CPointer<Win32__impl_l1.TA_TIMINGFUNCTIONAbi>, cbSize: UInt32, pcbSizeOut: CPointer<UInt32>): Int32
-    func GetWindowTheme(hwnd: CPointer<Unit>): Win32__impl_l0.HTHEME
-    func IsAppThemed(): Int32
-    func IsCompositionActive(): Int32
-    func IsThemeActive(): Int32
-    func IsThemePartDefined(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32): Int32
-    // param-hint: hwnd optional
-    func OpenThemeData(hwnd: CPointer<Unit>, pszClassList: CPointer<UInt16>): Win32__impl_l0.HTHEME
-    // param-hint: hwnd optional
-    func OpenThemeDataEx(hwnd: CPointer<Unit>, pszClassList: CPointer<UInt16>, dwFlags: Win32__impl_l0.OPEN_THEME_DATA_FLAGSAbi): Win32__impl_l0.HTHEME
-    // param-hint: pszSubAppName optional
-    // param-hint: pszSubIdList optional
-    func SetWindowTheme(hwnd: CPointer<Unit>, pszSubAppName: CPointer<UInt16>, pszSubIdList: CPointer<UInt16>): Int32
-    // param-hint: pvAttribute bytes=param[3]
-    func SetWindowThemeAttribute(hwnd: CPointer<Unit>, eAttribute: Win32__impl_l0.WINDOWTHEMEATTRIBUTETYPEAbi, pvAttribute: CPointer<Unit>, cbAttribute: UInt32): Int32
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_ShowScrollBar == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_ShowScrollBar(hWnd: CPointer<Unit>, wBar: Win32__impl_l0.SCROLLBAR_CONSTANTSAbi, bShow: Int32): Int32 {
+    return ShowScrollBar(hWnd, wBar, bShow)
 }
 
-@When[UXTHEME == "on" && Windows_Win32_Graphics_Gdi == "on"]
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_BeginBufferedPaint == "on" && Windows_Win32_Graphics_Gdi == "on"]
 foreign {
     // param-hint: pPaintParams optional
     // pinvoke-hint: SetLastError
     func BeginBufferedPaint(hdcTarget: Win32_Graphics_Gdi.HDC, prcTarget: CPointer<Win32_Foundation.RECTAbi>, dwFormat: Win32__impl_l0.BP_BUFFERFORMATAbi, pPaintParams: CPointer<Win32__impl_l1.BP_PAINTPARAMSAbi>, phdc: CPointer<Win32_Graphics_Gdi.HDC>): IntNative
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_BeginBufferedPaint == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_BeginBufferedPaint(hdcTarget: Win32_Graphics_Gdi.HDC, prcTarget: CPointer<Win32_Foundation.RECTAbi>, dwFormat: Win32__impl_l0.BP_BUFFERFORMATAbi, pPaintParams: CPointer<Win32__impl_l1.BP_PAINTPARAMSAbi>, phdc: CPointer<Win32_Graphics_Gdi.HDC>): IntNative {
+    return BeginBufferedPaint(hdcTarget, prcTarget, dwFormat, pPaintParams, phdc)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_BufferedPaintClear == "on"]
+foreign {
+    // param-hint: prc optional
+    func BufferedPaintClear(hBufferedPaint: IntNative, prc: CPointer<Win32_Foundation.RECTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_BufferedPaintClear == "on"]
+public unsafe func Windows_BufferedPaintClear(hBufferedPaint: IntNative, prc: CPointer<Win32_Foundation.RECTAbi>): Int32 {
+    return BufferedPaintClear(hBufferedPaint, prc)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_BufferedPaintInit == "on"]
+foreign {
+    func BufferedPaintInit(): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_BufferedPaintInit == "on"]
+public unsafe func Windows_BufferedPaintInit(): Int32 {
+    return BufferedPaintInit()
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_BufferedPaintStopAllAnimations == "on"]
+foreign {
+    func BufferedPaintStopAllAnimations(hwnd: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_BufferedPaintStopAllAnimations == "on"]
+public unsafe func Windows_BufferedPaintStopAllAnimations(hwnd: CPointer<Unit>): Int32 {
+    return BufferedPaintStopAllAnimations(hwnd)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_BufferedPaintUnInit == "on"]
+foreign {
+    func BufferedPaintUnInit(): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_BufferedPaintUnInit == "on"]
+public unsafe func Windows_BufferedPaintUnInit(): Int32 {
+    return BufferedPaintUnInit()
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_CloseThemeData == "on"]
+foreign {
+    func CloseThemeData(hTheme: Win32__impl_l0.HTHEME): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_CloseThemeData == "on"]
+public unsafe func Windows_CloseThemeData(hTheme: Win32__impl_l0.HTHEME): Int32 {
+    return CloseThemeData(hTheme)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_DrawThemeBackground == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: pClipRect optional
     func DrawThemeBackground(hTheme: Win32__impl_l0.HTHEME, hdc: Win32_Graphics_Gdi.HDC, iPartId: Int32, iStateId: Int32, pRect: CPointer<Win32_Foundation.RECTAbi>, pClipRect: CPointer<Win32_Foundation.RECTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_DrawThemeBackground == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DrawThemeBackground(hTheme: Win32__impl_l0.HTHEME, hdc: Win32_Graphics_Gdi.HDC, iPartId: Int32, iStateId: Int32, pRect: CPointer<Win32_Foundation.RECTAbi>, pClipRect: CPointer<Win32_Foundation.RECTAbi>): Int32 {
+    return DrawThemeBackground(hTheme, hdc, iPartId, iStateId, pRect, pClipRect)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_DrawThemeBackgroundEx == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: pOptions optional
     func DrawThemeBackgroundEx(hTheme: Win32__impl_l0.HTHEME, hdc: Win32_Graphics_Gdi.HDC, iPartId: Int32, iStateId: Int32, pRect: CPointer<Win32_Foundation.RECTAbi>, pOptions: CPointer<Win32__impl_l0.DTBGOPTSAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_DrawThemeBackgroundEx == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DrawThemeBackgroundEx(hTheme: Win32__impl_l0.HTHEME, hdc: Win32_Graphics_Gdi.HDC, iPartId: Int32, iStateId: Int32, pRect: CPointer<Win32_Foundation.RECTAbi>, pOptions: CPointer<Win32__impl_l0.DTBGOPTSAbi>): Int32 {
+    return DrawThemeBackgroundEx(hTheme, hdc, iPartId, iStateId, pRect, pOptions)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_DrawThemeParentBackground == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: prc optional
     func DrawThemeParentBackground(hwnd: CPointer<Unit>, hdc: Win32_Graphics_Gdi.HDC, prc: CPointer<Win32_Foundation.RECTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_DrawThemeParentBackground == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DrawThemeParentBackground(hwnd: CPointer<Unit>, hdc: Win32_Graphics_Gdi.HDC, prc: CPointer<Win32_Foundation.RECTAbi>): Int32 {
+    return DrawThemeParentBackground(hwnd, hdc, prc)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_DrawThemeTextEx == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: pszText len=param[5]
     // param-hint: pOptions optional
     func DrawThemeTextEx(hTheme: Win32__impl_l0.HTHEME, hdc: Win32_Graphics_Gdi.HDC, iPartId: Int32, iStateId: Int32, pszText: CPointer<UInt16>, cchText: Int32, dwTextFlags: Win32_Graphics_Gdi.DRAW_TEXT_FORMATAbi, pRect: CPointer<Win32_Foundation.RECTAbi>, pOptions: CPointer<Win32__impl_l1.DTTOPTSAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_DrawThemeTextEx == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DrawThemeTextEx(hTheme: Win32__impl_l0.HTHEME, hdc: Win32_Graphics_Gdi.HDC, iPartId: Int32, iStateId: Int32, pszText: CPointer<UInt16>, cchText: Int32, dwTextFlags: Win32_Graphics_Gdi.DRAW_TEXT_FORMATAbi, pRect: CPointer<Win32_Foundation.RECTAbi>, pOptions: CPointer<Win32__impl_l1.DTTOPTSAbi>): Int32 {
+    return DrawThemeTextEx(hTheme, hdc, iPartId, iStateId, pszText, cchText, dwTextFlags, pRect, pOptions)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_EndBufferedPaint == "on"]
+foreign {
+    func EndBufferedPaint(hBufferedPaint: IntNative, fUpdateTarget: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_EndBufferedPaint == "on"]
+public unsafe func Windows_EndBufferedPaint(hBufferedPaint: IntNative, fUpdateTarget: Int32): Int32 {
+    return EndBufferedPaint(hBufferedPaint, fUpdateTarget)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetBufferedPaintBits == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func GetBufferedPaintBits(hBufferedPaint: IntNative, ppbBuffer: CPointer<CPointer<Win32_Graphics_Gdi.RGBQUADAbi>>, pcxRow: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetBufferedPaintBits == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GetBufferedPaintBits(hBufferedPaint: IntNative, ppbBuffer: CPointer<CPointer<Win32_Graphics_Gdi.RGBQUADAbi>>, pcxRow: CPointer<Int32>): Int32 {
+    return GetBufferedPaintBits(hBufferedPaint, ppbBuffer, pcxRow)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetCurrentThemeName == "on"]
+foreign {
+    // param-hint: pszThemeFileName len=param[1]
+    // param-hint: pszColorBuff len=param[3] optional
+    // param-hint: pszSizeBuff len=param[5] optional
+    func GetCurrentThemeName(pszThemeFileName: CPointer<UInt16>, cchMaxNameChars: Int32, pszColorBuff: CPointer<UInt16>, cchMaxColorChars: Int32, pszSizeBuff: CPointer<UInt16>, cchMaxSizeChars: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetCurrentThemeName == "on"]
+public unsafe func Windows_GetCurrentThemeName(pszThemeFileName: CPointer<UInt16>, cchMaxNameChars: Int32, pszColorBuff: CPointer<UInt16>, cchMaxColorChars: Int32, pszSizeBuff: CPointer<UInt16>, cchMaxSizeChars: Int32): Int32 {
+    return GetCurrentThemeName(pszThemeFileName, cchMaxNameChars, pszColorBuff, cchMaxColorChars, pszSizeBuff, cchMaxSizeChars)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeAnimationProperty == "on"]
+foreign {
+    // param-hint: pvProperty bytes=param[5] optional
+    func GetThemeAnimationProperty(hTheme: Win32__impl_l0.HTHEME, iStoryboardId: Int32, iTargetId: Int32, eProperty: Win32__impl_l0.TA_PROPERTYAbi, pvProperty: CPointer<Unit>, cbSize: UInt32, pcbSizeOut: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeAnimationProperty == "on"]
+public unsafe func Windows_GetThemeAnimationProperty(hTheme: Win32__impl_l0.HTHEME, iStoryboardId: Int32, iTargetId: Int32, eProperty: Win32__impl_l0.TA_PROPERTYAbi, pvProperty: CPointer<Unit>, cbSize: UInt32, pcbSizeOut: CPointer<UInt32>): Int32 {
+    return GetThemeAnimationProperty(hTheme, iStoryboardId, iTargetId, eProperty, pvProperty, cbSize, pcbSizeOut)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeAnimationTransform == "on"]
+foreign {
+    // param-hint: pTransform bytes=param[5] optional
+    func GetThemeAnimationTransform(hTheme: Win32__impl_l0.HTHEME, iStoryboardId: Int32, iTargetId: Int32, dwTransformIndex: UInt32, pTransform: CPointer<Win32__impl_l1.TA_TRANSFORMAbi>, cbSize: UInt32, pcbSizeOut: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeAnimationTransform == "on"]
+public unsafe func Windows_GetThemeAnimationTransform(hTheme: Win32__impl_l0.HTHEME, iStoryboardId: Int32, iTargetId: Int32, dwTransformIndex: UInt32, pTransform: CPointer<Win32__impl_l1.TA_TRANSFORMAbi>, cbSize: UInt32, pcbSizeOut: CPointer<UInt32>): Int32 {
+    return GetThemeAnimationTransform(hTheme, iStoryboardId, iTargetId, dwTransformIndex, pTransform, cbSize, pcbSizeOut)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeAppProperties == "on"]
+foreign {
+    func GetThemeAppProperties(): Win32__impl_l0.SET_THEME_APP_PROPERTIES_FLAGSAbi
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeAppProperties == "on"]
+public unsafe func Windows_GetThemeAppProperties(): Win32__impl_l0.SET_THEME_APP_PROPERTIES_FLAGSAbi {
+    return GetThemeAppProperties()
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeBackgroundContentRect == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: hdc optional
     func GetThemeBackgroundContentRect(hTheme: Win32__impl_l0.HTHEME, hdc: Win32_Graphics_Gdi.HDC, iPartId: Int32, iStateId: Int32, pBoundingRect: CPointer<Win32_Foundation.RECTAbi>, pContentRect: CPointer<Win32_Foundation.RECTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeBackgroundContentRect == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GetThemeBackgroundContentRect(hTheme: Win32__impl_l0.HTHEME, hdc: Win32_Graphics_Gdi.HDC, iPartId: Int32, iStateId: Int32, pBoundingRect: CPointer<Win32_Foundation.RECTAbi>, pContentRect: CPointer<Win32_Foundation.RECTAbi>): Int32 {
+    return GetThemeBackgroundContentRect(hTheme, hdc, iPartId, iStateId, pBoundingRect, pContentRect)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeBackgroundExtent == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: hdc optional
     func GetThemeBackgroundExtent(hTheme: Win32__impl_l0.HTHEME, hdc: Win32_Graphics_Gdi.HDC, iPartId: Int32, iStateId: Int32, pContentRect: CPointer<Win32_Foundation.RECTAbi>, pExtentRect: CPointer<Win32_Foundation.RECTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeBackgroundExtent == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GetThemeBackgroundExtent(hTheme: Win32__impl_l0.HTHEME, hdc: Win32_Graphics_Gdi.HDC, iPartId: Int32, iStateId: Int32, pContentRect: CPointer<Win32_Foundation.RECTAbi>, pExtentRect: CPointer<Win32_Foundation.RECTAbi>): Int32 {
+    return GetThemeBackgroundExtent(hTheme, hdc, iPartId, iStateId, pContentRect, pExtentRect)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeBitmap == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func GetThemeBitmap(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, dwFlags: Win32__impl_l0.GET_THEME_BITMAP_FLAGSAbi, phBitmap: CPointer<Win32_Graphics_Gdi.HBITMAP>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeBitmap == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GetThemeBitmap(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, dwFlags: Win32__impl_l0.GET_THEME_BITMAP_FLAGSAbi, phBitmap: CPointer<Win32_Graphics_Gdi.HBITMAP>): Int32 {
+    return GetThemeBitmap(hTheme, iPartId, iStateId, iPropId, dwFlags, phBitmap)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeColor == "on"]
+foreign {
+    func GetThemeColor(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, pColor: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeColor == "on"]
+public unsafe func Windows_GetThemeColor(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, pColor: CPointer<UInt32>): Int32 {
+    return GetThemeColor(hTheme, iPartId, iStateId, iPropId, pColor)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeEnumValue == "on"]
+foreign {
+    func GetThemeEnumValue(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, piVal: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeEnumValue == "on"]
+public unsafe func Windows_GetThemeEnumValue(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, piVal: CPointer<Int32>): Int32 {
+    return GetThemeEnumValue(hTheme, iPartId, iStateId, iPropId, piVal)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeFont == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: hdc optional
     func GetThemeFont(hTheme: Win32__impl_l0.HTHEME, hdc: Win32_Graphics_Gdi.HDC, iPartId: Int32, iStateId: Int32, iPropId: Int32, pFont: CPointer<Win32_Graphics_Gdi.LOGFONTWAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeFont == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GetThemeFont(hTheme: Win32__impl_l0.HTHEME, hdc: Win32_Graphics_Gdi.HDC, iPartId: Int32, iStateId: Int32, iPropId: Int32, pFont: CPointer<Win32_Graphics_Gdi.LOGFONTWAbi>): Int32 {
+    return GetThemeFont(hTheme, hdc, iPartId, iStateId, iPropId, pFont)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeInt == "on"]
+foreign {
+    func GetThemeInt(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, piVal: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeInt == "on"]
+public unsafe func Windows_GetThemeInt(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, piVal: CPointer<Int32>): Int32 {
+    return GetThemeInt(hTheme, iPartId, iStateId, iPropId, piVal)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeMargins == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: hdc optional
     // param-hint: prc optional
     func GetThemeMargins(hTheme: Win32__impl_l0.HTHEME, hdc: Win32_Graphics_Gdi.HDC, iPartId: Int32, iStateId: Int32, iPropId: Int32, prc: CPointer<Win32_Foundation.RECTAbi>, pMargins: CPointer<Win32__impl_l0.MARGINSAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeMargins == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GetThemeMargins(hTheme: Win32__impl_l0.HTHEME, hdc: Win32_Graphics_Gdi.HDC, iPartId: Int32, iStateId: Int32, iPropId: Int32, prc: CPointer<Win32_Foundation.RECTAbi>, pMargins: CPointer<Win32__impl_l0.MARGINSAbi>): Int32 {
+    return GetThemeMargins(hTheme, hdc, iPartId, iStateId, iPropId, prc, pMargins)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeMetric == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: hdc optional
     func GetThemeMetric(hTheme: Win32__impl_l0.HTHEME, hdc: Win32_Graphics_Gdi.HDC, iPartId: Int32, iStateId: Int32, iPropId: Int32, piVal: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeMetric == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GetThemeMetric(hTheme: Win32__impl_l0.HTHEME, hdc: Win32_Graphics_Gdi.HDC, iPartId: Int32, iStateId: Int32, iPropId: Int32, piVal: CPointer<Int32>): Int32 {
+    return GetThemeMetric(hTheme, hdc, iPartId, iStateId, iPropId, piVal)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemePartSize == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: hdc optional
     // param-hint: prc optional
     func GetThemePartSize(hTheme: Win32__impl_l0.HTHEME, hdc: Win32_Graphics_Gdi.HDC, iPartId: Int32, iStateId: Int32, prc: CPointer<Win32_Foundation.RECTAbi>, eSize: Win32__impl_l0.THEMESIZEAbi, psz: CPointer<Win32_Foundation.SIZEAbi>): Int32
 }
 
-@When[UXTHEME == "on"]
-foreign {
-    func BeginPanningFeedback(hwnd: CPointer<Unit>): Int32
-    // param-hint: prc optional
-    func BufferedPaintSetAlpha(hBufferedPaint: IntNative, prc: CPointer<Win32_Foundation.RECTAbi>, alpha: UInt8): Int32
-    func EnableThemeDialogTexture(hwnd: CPointer<Unit>, dwFlags: UInt32): Int32
-    func EnableTheming(fEnable: Int32): Int32
-    func EndBufferedAnimation(hbpAnimation: IntNative, fUpdateTarget: Int32): Int32
-    func EndPanningFeedback(hwnd: CPointer<Unit>, fAnimateBack: Int32): Int32
-    func GetBufferedPaintTargetRect(hBufferedPaint: IntNative, prc: CPointer<Win32_Foundation.RECTAbi>): Int32
-    func GetThemeBool(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, pfVal: CPointer<Int32>): Int32
-    // param-hint: pszValueBuff len=param[3]
-    func GetThemeDocumentationProperty(pszThemeName: CPointer<UInt16>, pszPropertyName: CPointer<UInt16>, pszValueBuff: CPointer<UInt16>, cchMaxValChars: Int32): Int32
-    // param-hint: pszThemeFileName len=param[5]
-    func GetThemeFilename(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, pszThemeFileName: CPointer<UInt16>, cchMaxBuffChars: Int32): Int32
-    func GetThemeIntList(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, pIntList: CPointer<Win32__impl_l0.INTLISTAbi>): Int32
-    func GetThemePropertyOrigin(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, pOrigin: CPointer<Win32__impl_l0.PROPERTYORIGINAbi>): Int32
-    // param-hint: pszBuff len=param[5]
-    func GetThemeString(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, pszBuff: CPointer<UInt16>, cchMaxBuffChars: Int32): Int32
-    // param-hint: hTheme optional
-    func GetThemeSysBool(hTheme: Win32__impl_l0.HTHEME, iBoolId: Int32): Int32
-    // param-hint: hTheme optional
-    func GetThemeSysColor(hTheme: Win32__impl_l0.HTHEME, iColorId: Int32): UInt32
-    func GetThemeSysInt(hTheme: Win32__impl_l0.HTHEME, iIntId: Int32, piValue: CPointer<Int32>): Int32
-    // param-hint: hTheme optional
-    func GetThemeSysSize(hTheme: Win32__impl_l0.HTHEME, iSizeId: Int32): Int32
-    // param-hint: pszStringBuff len=param[3]
-    func GetThemeSysString(hTheme: Win32__impl_l0.HTHEME, iStringId: Int32, pszStringBuff: CPointer<UInt16>, cchMaxStringChars: Int32): Int32
-    func GetThemeTransitionDuration(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateIdFrom: Int32, iStateIdTo: Int32, iPropId: Int32, pdwDuration: CPointer<UInt32>): Int32
-    func IsThemeBackgroundPartiallyTransparent(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32): Int32
-    func IsThemeDialogTextureEnabled(hwnd: CPointer<Unit>): Int32
-    func SetThemeAppProperties(dwFlags: Win32__impl_l0.SET_THEME_APP_PROPERTIES_FLAGSAbi): Unit
-    func UpdatePanningFeedback(hwnd: CPointer<Unit>, lTotalOverpanOffsetX: Int32, lTotalOverpanOffsetY: Int32, fInInertia: Int32): Int32
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemePartSize == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GetThemePartSize(hTheme: Win32__impl_l0.HTHEME, hdc: Win32_Graphics_Gdi.HDC, iPartId: Int32, iStateId: Int32, prc: CPointer<Win32_Foundation.RECTAbi>, eSize: Win32__impl_l0.THEMESIZEAbi, psz: CPointer<Win32_Foundation.SIZEAbi>): Int32 {
+    return GetThemePartSize(hTheme, hdc, iPartId, iStateId, prc, eSize, psz)
 }
 
-@When[UXTHEME == "on" && Windows_Win32_Graphics_Gdi == "on"]
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemePosition == "on"]
+foreign {
+    func GetThemePosition(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, pPoint: CPointer<Win32_Foundation.POINTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemePosition == "on"]
+public unsafe func Windows_GetThemePosition(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, pPoint: CPointer<Win32_Foundation.POINTAbi>): Int32 {
+    return GetThemePosition(hTheme, iPartId, iStateId, iPropId, pPoint)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeRect == "on"]
+foreign {
+    func GetThemeRect(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, pRect: CPointer<Win32_Foundation.RECTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeRect == "on"]
+public unsafe func Windows_GetThemeRect(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, pRect: CPointer<Win32_Foundation.RECTAbi>): Int32 {
+    return GetThemeRect(hTheme, iPartId, iStateId, iPropId, pRect)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeStream == "on"]
+foreign {
+    // param-hint: pcbStream optional
+    // param-hint: hInst optional
+    func GetThemeStream(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, ppvStream: CPointer<CPointer<Unit>>, pcbStream: CPointer<UInt32>, hInst: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeStream == "on"]
+public unsafe func Windows_GetThemeStream(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, ppvStream: CPointer<CPointer<Unit>>, pcbStream: CPointer<UInt32>, hInst: CPointer<Unit>): Int32 {
+    return GetThemeStream(hTheme, iPartId, iStateId, iPropId, ppvStream, pcbStream, hInst)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeTimingFunction == "on"]
+foreign {
+    // param-hint: pTimingFunction bytes=param[3] optional
+    func GetThemeTimingFunction(hTheme: Win32__impl_l0.HTHEME, iTimingFunctionId: Int32, pTimingFunction: CPointer<Win32__impl_l1.TA_TIMINGFUNCTIONAbi>, cbSize: UInt32, pcbSizeOut: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeTimingFunction == "on"]
+public unsafe func Windows_GetThemeTimingFunction(hTheme: Win32__impl_l0.HTHEME, iTimingFunctionId: Int32, pTimingFunction: CPointer<Win32__impl_l1.TA_TIMINGFUNCTIONAbi>, cbSize: UInt32, pcbSizeOut: CPointer<UInt32>): Int32 {
+    return GetThemeTimingFunction(hTheme, iTimingFunctionId, pTimingFunction, cbSize, pcbSizeOut)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetWindowTheme == "on"]
+foreign {
+    func GetWindowTheme(hwnd: CPointer<Unit>): Win32__impl_l0.HTHEME
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetWindowTheme == "on"]
+public unsafe func Windows_GetWindowTheme(hwnd: CPointer<Unit>): Win32__impl_l0.HTHEME {
+    return GetWindowTheme(hwnd)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_IsAppThemed == "on"]
+foreign {
+    func IsAppThemed(): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_IsAppThemed == "on"]
+public unsafe func Windows_IsAppThemed(): Int32 {
+    return IsAppThemed()
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_IsCompositionActive == "on"]
+foreign {
+    func IsCompositionActive(): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_IsCompositionActive == "on"]
+public unsafe func Windows_IsCompositionActive(): Int32 {
+    return IsCompositionActive()
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_IsThemeActive == "on"]
+foreign {
+    func IsThemeActive(): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_IsThemeActive == "on"]
+public unsafe func Windows_IsThemeActive(): Int32 {
+    return IsThemeActive()
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_IsThemePartDefined == "on"]
+foreign {
+    func IsThemePartDefined(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_IsThemePartDefined == "on"]
+public unsafe func Windows_IsThemePartDefined(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32): Int32 {
+    return IsThemePartDefined(hTheme, iPartId, iStateId)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_OpenThemeData == "on"]
+foreign {
+    // param-hint: hwnd optional
+    func OpenThemeData(hwnd: CPointer<Unit>, pszClassList: CPointer<UInt16>): Win32__impl_l0.HTHEME
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_OpenThemeData == "on"]
+public unsafe func Windows_OpenThemeData(hwnd: CPointer<Unit>, pszClassList: CPointer<UInt16>): Win32__impl_l0.HTHEME {
+    return OpenThemeData(hwnd, pszClassList)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_OpenThemeDataEx == "on"]
+foreign {
+    // param-hint: hwnd optional
+    func OpenThemeDataEx(hwnd: CPointer<Unit>, pszClassList: CPointer<UInt16>, dwFlags: Win32__impl_l0.OPEN_THEME_DATA_FLAGSAbi): Win32__impl_l0.HTHEME
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_OpenThemeDataEx == "on"]
+public unsafe func Windows_OpenThemeDataEx(hwnd: CPointer<Unit>, pszClassList: CPointer<UInt16>, dwFlags: Win32__impl_l0.OPEN_THEME_DATA_FLAGSAbi): Win32__impl_l0.HTHEME {
+    return OpenThemeDataEx(hwnd, pszClassList, dwFlags)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_SetWindowTheme == "on"]
+foreign {
+    // param-hint: pszSubAppName optional
+    // param-hint: pszSubIdList optional
+    func SetWindowTheme(hwnd: CPointer<Unit>, pszSubAppName: CPointer<UInt16>, pszSubIdList: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_SetWindowTheme == "on"]
+public unsafe func Windows_SetWindowTheme(hwnd: CPointer<Unit>, pszSubAppName: CPointer<UInt16>, pszSubIdList: CPointer<UInt16>): Int32 {
+    return SetWindowTheme(hwnd, pszSubAppName, pszSubIdList)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_SetWindowThemeAttribute == "on"]
+foreign {
+    // param-hint: pvAttribute bytes=param[3]
+    func SetWindowThemeAttribute(hwnd: CPointer<Unit>, eAttribute: Win32__impl_l0.WINDOWTHEMEATTRIBUTETYPEAbi, pvAttribute: CPointer<Unit>, cbAttribute: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_SetWindowThemeAttribute == "on"]
+public unsafe func Windows_SetWindowThemeAttribute(hwnd: CPointer<Unit>, eAttribute: Win32__impl_l0.WINDOWTHEMEATTRIBUTETYPEAbi, pvAttribute: CPointer<Unit>, cbAttribute: UInt32): Int32 {
+    return SetWindowThemeAttribute(hwnd, eAttribute, pvAttribute, cbAttribute)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_BeginBufferedAnimation == "on" && Windows_Win32_Graphics_Gdi == "on"]
 foreign {
     // param-hint: pPaintParams optional
     func BeginBufferedAnimation(hwnd: CPointer<Unit>, hdcTarget: Win32_Graphics_Gdi.HDC, prcTarget: CPointer<Win32_Foundation.RECTAbi>, dwFormat: Win32__impl_l0.BP_BUFFERFORMATAbi, pPaintParams: CPointer<Win32__impl_l1.BP_PAINTPARAMSAbi>, pAnimationParams: CPointer<Win32__impl_l1.BP_ANIMATIONPARAMSAbi>, phdcFrom: CPointer<Win32_Graphics_Gdi.HDC>, phdcTo: CPointer<Win32_Graphics_Gdi.HDC>): IntNative
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_BeginBufferedAnimation == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_BeginBufferedAnimation(hwnd: CPointer<Unit>, hdcTarget: Win32_Graphics_Gdi.HDC, prcTarget: CPointer<Win32_Foundation.RECTAbi>, dwFormat: Win32__impl_l0.BP_BUFFERFORMATAbi, pPaintParams: CPointer<Win32__impl_l1.BP_PAINTPARAMSAbi>, pAnimationParams: CPointer<Win32__impl_l1.BP_ANIMATIONPARAMSAbi>, phdcFrom: CPointer<Win32_Graphics_Gdi.HDC>, phdcTo: CPointer<Win32_Graphics_Gdi.HDC>): IntNative {
+    return BeginBufferedAnimation(hwnd, hdcTarget, prcTarget, dwFormat, pPaintParams, pAnimationParams, phdcFrom, phdcTo)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_BeginPanningFeedback == "on"]
+foreign {
+    func BeginPanningFeedback(hwnd: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_BeginPanningFeedback == "on"]
+public unsafe func Windows_BeginPanningFeedback(hwnd: CPointer<Unit>): Int32 {
+    return BeginPanningFeedback(hwnd)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_BufferedPaintRenderAnimation == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func BufferedPaintRenderAnimation(hwnd: CPointer<Unit>, hdcTarget: Win32_Graphics_Gdi.HDC): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_BufferedPaintRenderAnimation == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_BufferedPaintRenderAnimation(hwnd: CPointer<Unit>, hdcTarget: Win32_Graphics_Gdi.HDC): Int32 {
+    return BufferedPaintRenderAnimation(hwnd, hdcTarget)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_BufferedPaintSetAlpha == "on"]
+foreign {
+    // param-hint: prc optional
+    func BufferedPaintSetAlpha(hBufferedPaint: IntNative, prc: CPointer<Win32_Foundation.RECTAbi>, alpha: UInt8): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_BufferedPaintSetAlpha == "on"]
+public unsafe func Windows_BufferedPaintSetAlpha(hBufferedPaint: IntNative, prc: CPointer<Win32_Foundation.RECTAbi>, alpha: UInt8): Int32 {
+    return BufferedPaintSetAlpha(hBufferedPaint, prc, alpha)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_DrawThemeEdge == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: pContentRect optional
     func DrawThemeEdge(hTheme: Win32__impl_l0.HTHEME, hdc: Win32_Graphics_Gdi.HDC, iPartId: Int32, iStateId: Int32, pDestRect: CPointer<Win32_Foundation.RECTAbi>, uEdge: Win32_Graphics_Gdi.DRAWEDGE_FLAGSAbi, uFlags: Win32_Graphics_Gdi.DRAW_EDGE_FLAGSAbi, pContentRect: CPointer<Win32_Foundation.RECTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_DrawThemeEdge == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DrawThemeEdge(hTheme: Win32__impl_l0.HTHEME, hdc: Win32_Graphics_Gdi.HDC, iPartId: Int32, iStateId: Int32, pDestRect: CPointer<Win32_Foundation.RECTAbi>, uEdge: Win32_Graphics_Gdi.DRAWEDGE_FLAGSAbi, uFlags: Win32_Graphics_Gdi.DRAW_EDGE_FLAGSAbi, pContentRect: CPointer<Win32_Foundation.RECTAbi>): Int32 {
+    return DrawThemeEdge(hTheme, hdc, iPartId, iStateId, pDestRect, uEdge, uFlags, pContentRect)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_DrawThemeIcon == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func DrawThemeIcon(hTheme: Win32__impl_l0.HTHEME, hdc: Win32_Graphics_Gdi.HDC, iPartId: Int32, iStateId: Int32, pRect: CPointer<Win32_Foundation.RECTAbi>, himl: Win32__impl_l0.HIMAGELIST, iImageIndex: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_DrawThemeIcon == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DrawThemeIcon(hTheme: Win32__impl_l0.HTHEME, hdc: Win32_Graphics_Gdi.HDC, iPartId: Int32, iStateId: Int32, pRect: CPointer<Win32_Foundation.RECTAbi>, himl: Win32__impl_l0.HIMAGELIST, iImageIndex: Int32): Int32 {
+    return DrawThemeIcon(hTheme, hdc, iPartId, iStateId, pRect, himl, iImageIndex)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_DrawThemeParentBackgroundEx == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: prc optional
     func DrawThemeParentBackgroundEx(hwnd: CPointer<Unit>, hdc: Win32_Graphics_Gdi.HDC, dwFlags: Win32__impl_l0.DRAW_THEME_PARENT_BACKGROUND_FLAGSAbi, prc: CPointer<Win32_Foundation.RECTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_DrawThemeParentBackgroundEx == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DrawThemeParentBackgroundEx(hwnd: CPointer<Unit>, hdc: Win32_Graphics_Gdi.HDC, dwFlags: Win32__impl_l0.DRAW_THEME_PARENT_BACKGROUND_FLAGSAbi, prc: CPointer<Win32_Foundation.RECTAbi>): Int32 {
+    return DrawThemeParentBackgroundEx(hwnd, hdc, dwFlags, prc)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_DrawThemeText == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: pszText len=param[5]
     func DrawThemeText(hTheme: Win32__impl_l0.HTHEME, hdc: Win32_Graphics_Gdi.HDC, iPartId: Int32, iStateId: Int32, pszText: CPointer<UInt16>, cchText: Int32, dwTextFlags: Win32_Graphics_Gdi.DRAW_TEXT_FORMATAbi, dwTextFlags2: UInt32, pRect: CPointer<Win32_Foundation.RECTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_DrawThemeText == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DrawThemeText(hTheme: Win32__impl_l0.HTHEME, hdc: Win32_Graphics_Gdi.HDC, iPartId: Int32, iStateId: Int32, pszText: CPointer<UInt16>, cchText: Int32, dwTextFlags: Win32_Graphics_Gdi.DRAW_TEXT_FORMATAbi, dwTextFlags2: UInt32, pRect: CPointer<Win32_Foundation.RECTAbi>): Int32 {
+    return DrawThemeText(hTheme, hdc, iPartId, iStateId, pszText, cchText, dwTextFlags, dwTextFlags2, pRect)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_EnableThemeDialogTexture == "on"]
+foreign {
+    func EnableThemeDialogTexture(hwnd: CPointer<Unit>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_EnableThemeDialogTexture == "on"]
+public unsafe func Windows_EnableThemeDialogTexture(hwnd: CPointer<Unit>, dwFlags: UInt32): Int32 {
+    return EnableThemeDialogTexture(hwnd, dwFlags)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_EnableTheming == "on"]
+foreign {
+    func EnableTheming(fEnable: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_EnableTheming == "on"]
+public unsafe func Windows_EnableTheming(fEnable: Int32): Int32 {
+    return EnableTheming(fEnable)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_EndBufferedAnimation == "on"]
+foreign {
+    func EndBufferedAnimation(hbpAnimation: IntNative, fUpdateTarget: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_EndBufferedAnimation == "on"]
+public unsafe func Windows_EndBufferedAnimation(hbpAnimation: IntNative, fUpdateTarget: Int32): Int32 {
+    return EndBufferedAnimation(hbpAnimation, fUpdateTarget)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_EndPanningFeedback == "on"]
+foreign {
+    func EndPanningFeedback(hwnd: CPointer<Unit>, fAnimateBack: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_EndPanningFeedback == "on"]
+public unsafe func Windows_EndPanningFeedback(hwnd: CPointer<Unit>, fAnimateBack: Int32): Int32 {
+    return EndPanningFeedback(hwnd, fAnimateBack)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetBufferedPaintDC == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func GetBufferedPaintDC(hBufferedPaint: IntNative): Win32_Graphics_Gdi.HDC
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetBufferedPaintDC == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GetBufferedPaintDC(hBufferedPaint: IntNative): Win32_Graphics_Gdi.HDC {
+    return GetBufferedPaintDC(hBufferedPaint)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetBufferedPaintTargetDC == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func GetBufferedPaintTargetDC(hBufferedPaint: IntNative): Win32_Graphics_Gdi.HDC
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetBufferedPaintTargetDC == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GetBufferedPaintTargetDC(hBufferedPaint: IntNative): Win32_Graphics_Gdi.HDC {
+    return GetBufferedPaintTargetDC(hBufferedPaint)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetBufferedPaintTargetRect == "on"]
+foreign {
+    func GetBufferedPaintTargetRect(hBufferedPaint: IntNative, prc: CPointer<Win32_Foundation.RECTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetBufferedPaintTargetRect == "on"]
+public unsafe func Windows_GetBufferedPaintTargetRect(hBufferedPaint: IntNative, prc: CPointer<Win32_Foundation.RECTAbi>): Int32 {
+    return GetBufferedPaintTargetRect(hBufferedPaint, prc)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeBackgroundRegion == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: hdc optional
     func GetThemeBackgroundRegion(hTheme: Win32__impl_l0.HTHEME, hdc: Win32_Graphics_Gdi.HDC, iPartId: Int32, iStateId: Int32, pRect: CPointer<Win32_Foundation.RECTAbi>, pRegion: CPointer<Win32_Graphics_Gdi.HRGN>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeBackgroundRegion == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GetThemeBackgroundRegion(hTheme: Win32__impl_l0.HTHEME, hdc: Win32_Graphics_Gdi.HDC, iPartId: Int32, iStateId: Int32, pRect: CPointer<Win32_Foundation.RECTAbi>, pRegion: CPointer<Win32_Graphics_Gdi.HRGN>): Int32 {
+    return GetThemeBackgroundRegion(hTheme, hdc, iPartId, iStateId, pRect, pRegion)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeBool == "on"]
+foreign {
+    func GetThemeBool(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, pfVal: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeBool == "on"]
+public unsafe func Windows_GetThemeBool(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, pfVal: CPointer<Int32>): Int32 {
+    return GetThemeBool(hTheme, iPartId, iStateId, iPropId, pfVal)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeDocumentationProperty == "on"]
+foreign {
+    // param-hint: pszValueBuff len=param[3]
+    func GetThemeDocumentationProperty(pszThemeName: CPointer<UInt16>, pszPropertyName: CPointer<UInt16>, pszValueBuff: CPointer<UInt16>, cchMaxValChars: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeDocumentationProperty == "on"]
+public unsafe func Windows_GetThemeDocumentationProperty(pszThemeName: CPointer<UInt16>, pszPropertyName: CPointer<UInt16>, pszValueBuff: CPointer<UInt16>, cchMaxValChars: Int32): Int32 {
+    return GetThemeDocumentationProperty(pszThemeName, pszPropertyName, pszValueBuff, cchMaxValChars)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeFilename == "on"]
+foreign {
+    // param-hint: pszThemeFileName len=param[5]
+    func GetThemeFilename(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, pszThemeFileName: CPointer<UInt16>, cchMaxBuffChars: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeFilename == "on"]
+public unsafe func Windows_GetThemeFilename(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, pszThemeFileName: CPointer<UInt16>, cchMaxBuffChars: Int32): Int32 {
+    return GetThemeFilename(hTheme, iPartId, iStateId, iPropId, pszThemeFileName, cchMaxBuffChars)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeIntList == "on"]
+foreign {
+    func GetThemeIntList(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, pIntList: CPointer<Win32__impl_l0.INTLISTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeIntList == "on"]
+public unsafe func Windows_GetThemeIntList(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, pIntList: CPointer<Win32__impl_l0.INTLISTAbi>): Int32 {
+    return GetThemeIntList(hTheme, iPartId, iStateId, iPropId, pIntList)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemePropertyOrigin == "on"]
+foreign {
+    func GetThemePropertyOrigin(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, pOrigin: CPointer<Win32__impl_l0.PROPERTYORIGINAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemePropertyOrigin == "on"]
+public unsafe func Windows_GetThemePropertyOrigin(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, pOrigin: CPointer<Win32__impl_l0.PROPERTYORIGINAbi>): Int32 {
+    return GetThemePropertyOrigin(hTheme, iPartId, iStateId, iPropId, pOrigin)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeString == "on"]
+foreign {
+    // param-hint: pszBuff len=param[5]
+    func GetThemeString(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, pszBuff: CPointer<UInt16>, cchMaxBuffChars: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeString == "on"]
+public unsafe func Windows_GetThemeString(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32, iPropId: Int32, pszBuff: CPointer<UInt16>, cchMaxBuffChars: Int32): Int32 {
+    return GetThemeString(hTheme, iPartId, iStateId, iPropId, pszBuff, cchMaxBuffChars)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeSysBool == "on"]
+foreign {
+    // param-hint: hTheme optional
+    func GetThemeSysBool(hTheme: Win32__impl_l0.HTHEME, iBoolId: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeSysBool == "on"]
+public unsafe func Windows_GetThemeSysBool(hTheme: Win32__impl_l0.HTHEME, iBoolId: Int32): Int32 {
+    return GetThemeSysBool(hTheme, iBoolId)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeSysColor == "on"]
+foreign {
+    // param-hint: hTheme optional
+    func GetThemeSysColor(hTheme: Win32__impl_l0.HTHEME, iColorId: Int32): UInt32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeSysColor == "on"]
+public unsafe func Windows_GetThemeSysColor(hTheme: Win32__impl_l0.HTHEME, iColorId: Int32): UInt32 {
+    return GetThemeSysColor(hTheme, iColorId)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeSysColorBrush == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: hTheme optional
     func GetThemeSysColorBrush(hTheme: Win32__impl_l0.HTHEME, iColorId: Int32): Win32_Graphics_Gdi.HBRUSH
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeSysColorBrush == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GetThemeSysColorBrush(hTheme: Win32__impl_l0.HTHEME, iColorId: Int32): Win32_Graphics_Gdi.HBRUSH {
+    return GetThemeSysColorBrush(hTheme, iColorId)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeSysFont == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: hTheme optional
     func GetThemeSysFont(hTheme: Win32__impl_l0.HTHEME, iFontId: Int32, plf: CPointer<Win32_Graphics_Gdi.LOGFONTWAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeSysFont == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GetThemeSysFont(hTheme: Win32__impl_l0.HTHEME, iFontId: Int32, plf: CPointer<Win32_Graphics_Gdi.LOGFONTWAbi>): Int32 {
+    return GetThemeSysFont(hTheme, iFontId, plf)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeSysInt == "on"]
+foreign {
+    func GetThemeSysInt(hTheme: Win32__impl_l0.HTHEME, iIntId: Int32, piValue: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeSysInt == "on"]
+public unsafe func Windows_GetThemeSysInt(hTheme: Win32__impl_l0.HTHEME, iIntId: Int32, piValue: CPointer<Int32>): Int32 {
+    return GetThemeSysInt(hTheme, iIntId, piValue)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeSysSize == "on"]
+foreign {
+    // param-hint: hTheme optional
+    func GetThemeSysSize(hTheme: Win32__impl_l0.HTHEME, iSizeId: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeSysSize == "on"]
+public unsafe func Windows_GetThemeSysSize(hTheme: Win32__impl_l0.HTHEME, iSizeId: Int32): Int32 {
+    return GetThemeSysSize(hTheme, iSizeId)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeSysString == "on"]
+foreign {
+    // param-hint: pszStringBuff len=param[3]
+    func GetThemeSysString(hTheme: Win32__impl_l0.HTHEME, iStringId: Int32, pszStringBuff: CPointer<UInt16>, cchMaxStringChars: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeSysString == "on"]
+public unsafe func Windows_GetThemeSysString(hTheme: Win32__impl_l0.HTHEME, iStringId: Int32, pszStringBuff: CPointer<UInt16>, cchMaxStringChars: Int32): Int32 {
+    return GetThemeSysString(hTheme, iStringId, pszStringBuff, cchMaxStringChars)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeTextExtent == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: pszText len=param[5]
     // param-hint: pBoundingRect optional
     func GetThemeTextExtent(hTheme: Win32__impl_l0.HTHEME, hdc: Win32_Graphics_Gdi.HDC, iPartId: Int32, iStateId: Int32, pszText: CPointer<UInt16>, cchCharCount: Int32, dwTextFlags: Win32_Graphics_Gdi.DRAW_TEXT_FORMATAbi, pBoundingRect: CPointer<Win32_Foundation.RECTAbi>, pExtentRect: CPointer<Win32_Foundation.RECTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeTextExtent == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GetThemeTextExtent(hTheme: Win32__impl_l0.HTHEME, hdc: Win32_Graphics_Gdi.HDC, iPartId: Int32, iStateId: Int32, pszText: CPointer<UInt16>, cchCharCount: Int32, dwTextFlags: Win32_Graphics_Gdi.DRAW_TEXT_FORMATAbi, pBoundingRect: CPointer<Win32_Foundation.RECTAbi>, pExtentRect: CPointer<Win32_Foundation.RECTAbi>): Int32 {
+    return GetThemeTextExtent(hTheme, hdc, iPartId, iStateId, pszText, cchCharCount, dwTextFlags, pBoundingRect, pExtentRect)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeTextMetrics == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func GetThemeTextMetrics(hTheme: Win32__impl_l0.HTHEME, hdc: Win32_Graphics_Gdi.HDC, iPartId: Int32, iStateId: Int32, ptm: CPointer<Win32_Graphics_Gdi.TEXTMETRICWAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeTextMetrics == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GetThemeTextMetrics(hTheme: Win32__impl_l0.HTHEME, hdc: Win32_Graphics_Gdi.HDC, iPartId: Int32, iStateId: Int32, ptm: CPointer<Win32_Graphics_Gdi.TEXTMETRICWAbi>): Int32 {
+    return GetThemeTextMetrics(hTheme, hdc, iPartId, iStateId, ptm)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeTransitionDuration == "on"]
+foreign {
+    func GetThemeTransitionDuration(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateIdFrom: Int32, iStateIdTo: Int32, iPropId: Int32, pdwDuration: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeTransitionDuration == "on"]
+public unsafe func Windows_GetThemeTransitionDuration(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateIdFrom: Int32, iStateIdTo: Int32, iPropId: Int32, pdwDuration: CPointer<UInt32>): Int32 {
+    return GetThemeTransitionDuration(hTheme, iPartId, iStateIdFrom, iStateIdTo, iPropId, pdwDuration)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_HitTestThemeBackground == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: hdc optional
     // param-hint: hrgn optional
     func HitTestThemeBackground(hTheme: Win32__impl_l0.HTHEME, hdc: Win32_Graphics_Gdi.HDC, iPartId: Int32, iStateId: Int32, dwOptions: Win32__impl_l0.HIT_TEST_BACKGROUND_OPTIONSAbi, pRect: CPointer<Win32_Foundation.RECTAbi>, hrgn: Win32_Graphics_Gdi.HRGN, ptTest: Win32_Foundation.POINTAbi, pwHitTestCode: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_HitTestThemeBackground == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_HitTestThemeBackground(hTheme: Win32__impl_l0.HTHEME, hdc: Win32_Graphics_Gdi.HDC, iPartId: Int32, iStateId: Int32, dwOptions: Win32__impl_l0.HIT_TEST_BACKGROUND_OPTIONSAbi, pRect: CPointer<Win32_Foundation.RECTAbi>, hrgn: Win32_Graphics_Gdi.HRGN, ptTest: Win32_Foundation.POINTAbi, pwHitTestCode: CPointer<UInt16>): Int32 {
+    return HitTestThemeBackground(hTheme, hdc, iPartId, iStateId, dwOptions, pRect, hrgn, ptTest, pwHitTestCode)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_IsThemeBackgroundPartiallyTransparent == "on"]
+foreign {
+    func IsThemeBackgroundPartiallyTransparent(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_IsThemeBackgroundPartiallyTransparent == "on"]
+public unsafe func Windows_IsThemeBackgroundPartiallyTransparent(hTheme: Win32__impl_l0.HTHEME, iPartId: Int32, iStateId: Int32): Int32 {
+    return IsThemeBackgroundPartiallyTransparent(hTheme, iPartId, iStateId)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_IsThemeDialogTextureEnabled == "on"]
+foreign {
+    func IsThemeDialogTextureEnabled(hwnd: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_IsThemeDialogTextureEnabled == "on"]
+public unsafe func Windows_IsThemeDialogTextureEnabled(hwnd: CPointer<Unit>): Int32 {
+    return IsThemeDialogTextureEnabled(hwnd)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_SetThemeAppProperties == "on"]
+foreign {
+    func SetThemeAppProperties(dwFlags: Win32__impl_l0.SET_THEME_APP_PROPERTIES_FLAGSAbi): Unit
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_SetThemeAppProperties == "on"]
+public unsafe func Windows_SetThemeAppProperties(dwFlags: Win32__impl_l0.SET_THEME_APP_PROPERTIES_FLAGSAbi): Unit {
+    SetThemeAppProperties(dwFlags)
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_UpdatePanningFeedback == "on"]
+foreign {
+    func UpdatePanningFeedback(hwnd: CPointer<Unit>, lTotalOverpanOffsetX: Int32, lTotalOverpanOffsetY: Int32, fInInertia: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_UpdatePanningFeedback == "on"]
+public unsafe func Windows_UpdatePanningFeedback(hwnd: CPointer<Unit>, lTotalOverpanOffsetX: Int32, lTotalOverpanOffsetY: Int32, fInInertia: Int32): Int32 {
+    return UpdatePanningFeedback(hwnd, lTotalOverpanOffsetX, lTotalOverpanOffsetY, fInInertia)
 }
 
 @When[Windows_Win32_UI_Controls == "on"]

@@ -7,75 +7,20 @@ import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
 
 
-@When[WINTRUST == "on"]
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAdminAcquireContext == "on"]
 foreign {
     // param-hint: pgSubsystem optional
     // param-hint: dwFlags optional reserved
     // pinvoke-hint: SetLastError
     func CryptCATAdminAcquireContext(phCatAdmin: CPointer<IntNative>, pgSubsystem: CPointer<GUID>, dwFlags: UInt32): Int32
-    // param-hint: pwszSelectBaseName optional
-    // pinvoke-hint: SetLastError
-    func CryptCATAdminAddCatalog(hCatAdmin: IntNative, pwszCatalogFile: CPointer<UInt16>, pwszSelectBaseName: CPointer<UInt16>, dwFlags: UInt32): IntNative
-    // param-hint: pbHash bytes=param[1] optional
-    // param-hint: dwFlags optional reserved
-    func CryptCATAdminCalcHashFromFileHandle(hFile: CPointer<Unit>, pcbHash: CPointer<UInt32>, pbHash: CPointer<UInt8>, dwFlags: UInt32): Int32
-    // param-hint: pbHash bytes=param[2] optional
-    // param-hint: dwFlags optional reserved
-    // pinvoke-hint: SetLastError
-    func CryptCATAdminCalcHashFromFileHandle2(hCatAdmin: IntNative, hFile: CPointer<Unit>, pcbHash: CPointer<UInt32>, pbHash: CPointer<UInt8>, dwFlags: UInt32): Int32
-    // param-hint: pbHash bytes=param[2]
-    // param-hint: dwFlags optional reserved
-    // param-hint: phPrevCatInfo optional
-    // pinvoke-hint: SetLastError
-    func CryptCATAdminEnumCatalogFromHash(hCatAdmin: IntNative, pbHash: CPointer<UInt8>, cbHash: UInt32, dwFlags: UInt32, phPrevCatInfo: CPointer<IntNative>): IntNative
-    func CryptCATAdminPauseServiceForBackup(dwFlags: UInt32, fResume: Int32): Int32
-    func CryptCATAdminReleaseCatalogContext(hCatAdmin: IntNative, hCatInfo: IntNative, dwFlags: UInt32): Int32
-    func CryptCATAdminReleaseContext(hCatAdmin: IntNative, dwFlags: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func CryptCATAdminRemoveCatalog(hCatAdmin: IntNative, pwszCatalogFile: CPointer<UInt16>, dwFlags: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func CryptCATAdminResolveCatalogPath(hCatAdmin: IntNative, pwszCatalogFile: CPointer<UInt16>, psCatInfo: CPointer<Win32__impl_l0.CATALOG_INFO>, dwFlags: UInt32): Int32
-    func CryptCATCDFClose(pCDF: CPointer<Win32__impl_l0.CRYPTCATCDF>): Int32
-    func CryptCATCDFEnumCatAttributes(pCDF: CPointer<Win32__impl_l0.CRYPTCATCDF>, pPrevAttr: CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE>, pfnParseError: Win32__impl_l0.PFN_CDF_PARSE_ERROR_CALLBACK): CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE>
-    // param-hint: pfnParseError optional
-    func CryptCATCDFOpen(pwszFilePath: CPointer<UInt16>, pfnParseError: Win32__impl_l0.PFN_CDF_PARSE_ERROR_CALLBACK): CPointer<Win32__impl_l0.CRYPTCATCDF>
-    // pinvoke-hint: SetLastError
-    func CryptCATCatalogInfoFromContext(hCatInfo: IntNative, psCatInfo: CPointer<Win32__impl_l0.CATALOG_INFO>, dwFlags: UInt32): Int32
-    func CryptCATClose(hCatalog: CPointer<Unit>): Int32
-    func CryptCATEnumerateCatAttr(hCatalog: CPointer<Unit>, pPrevAttr: CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE>): CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE>
-    func CryptCATGetCatAttrInfo(hCatalog: CPointer<Unit>, pwszReferenceTag: CPointer<UInt16>): CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE>
-    func CryptCATHandleFromStore(pCatStore: CPointer<Win32__impl_l1.CRYPTCATSTORE>): CPointer<Unit>
-    func CryptCATOpen(pwszFileName: CPointer<UInt16>, fdwOpenFlags: UInt32, hProv: UIntNative, dwPublicVersion: UInt32, dwEncodingType: UInt32): CPointer<Unit>
-    // pinvoke-hint: SetLastError
-    func CryptCATPersistStore(hCatalog: CPointer<Unit>): Int32
-    // pinvoke-hint: SetLastError
-    func CryptCATPutCatAttrInfo(hCatalog: CPointer<Unit>, pwszReferenceTag: CPointer<UInt16>, dwAttrTypeAndAction: UInt32, cbData: UInt32, pbData: CPointer<UInt8>): CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE>
-    func CryptCATStoreFromHandle(hCatalog: CPointer<Unit>): CPointer<Win32__impl_l1.CRYPTCATSTORE>
-    // param-hint: pwszFileName optional
-    func IsCatalogFile(hFile: CPointer<Unit>, pwszFileName: CPointer<UInt16>): Int32
 }
 
-@When[WINTRUST == "on" && (Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on")]
-foreign {
-    func CryptCATAllocSortedMemberInfo(hCatalog: CPointer<Unit>, pwszReferenceTag: CPointer<UInt16>): CPointer<CRYPTCATMEMBER>
-    func CryptCATCDFEnumAttributes(pCDF: CPointer<Win32__impl_l0.CRYPTCATCDF>, pMember: CPointer<CRYPTCATMEMBER>, pPrevAttr: CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE>, pfnParseError: Win32__impl_l0.PFN_CDF_PARSE_ERROR_CALLBACK): CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE>
-    func CryptCATCDFEnumAttributesWithCDFTag(pCDF: CPointer<Win32__impl_l0.CRYPTCATCDF>, pwszMemberTag: CPointer<UInt16>, pMember: CPointer<CRYPTCATMEMBER>, pPrevAttr: CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE>, pfnParseError: Win32__impl_l0.PFN_CDF_PARSE_ERROR_CALLBACK): CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE>
-    func CryptCATCDFEnumMembers(pCDF: CPointer<Win32__impl_l0.CRYPTCATCDF>, pPrevMember: CPointer<CRYPTCATMEMBER>, pfnParseError: Win32__impl_l0.PFN_CDF_PARSE_ERROR_CALLBACK): CPointer<CRYPTCATMEMBER>
-    func CryptCATCDFEnumMembersByCDFTagEx(pCDF: CPointer<Win32__impl_l0.CRYPTCATCDF>, pwszPrevCDFTag: CPointer<UInt16>, pfnParseError: Win32__impl_l0.PFN_CDF_PARSE_ERROR_CALLBACK, ppMember: CPointer<CPointer<CRYPTCATMEMBER>>, fContinueOnError: Int32, pvReserved: CPointer<Unit>): CPointer<UInt16>
-    func CryptCATEnumerateAttr(hCatalog: CPointer<Unit>, pCatMember: CPointer<CRYPTCATMEMBER>, pPrevAttr: CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE>): CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE>
-    func CryptCATEnumerateMember(hCatalog: CPointer<Unit>, pPrevMember: CPointer<CRYPTCATMEMBER>): CPointer<CRYPTCATMEMBER>
-    func CryptCATFreeSortedMemberInfo(hCatalog: CPointer<Unit>, pCatMember: CPointer<CRYPTCATMEMBER>): Unit
-    // pinvoke-hint: SetLastError
-    func CryptCATGetAttrInfo(hCatalog: CPointer<Unit>, pCatMember: CPointer<CRYPTCATMEMBER>, pwszReferenceTag: CPointer<UInt16>): CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE>
-    func CryptCATGetMemberInfo(hCatalog: CPointer<Unit>, pwszReferenceTag: CPointer<UInt16>): CPointer<CRYPTCATMEMBER>
-    // pinvoke-hint: SetLastError
-    func CryptCATPutAttrInfo(hCatalog: CPointer<Unit>, pCatMember: CPointer<CRYPTCATMEMBER>, pwszReferenceTag: CPointer<UInt16>, dwAttrTypeAndAction: UInt32, cbData: UInt32, pbData: CPointer<UInt8>): CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE>
-    // param-hint: pwszFileName optional
-    // pinvoke-hint: SetLastError
-    func CryptCATPutMemberInfo(hCatalog: CPointer<Unit>, pwszFileName: CPointer<UInt16>, pwszReferenceTag: CPointer<UInt16>, pgSubjectType: CPointer<GUID>, dwCertVersion: UInt32, cbSIPIndirectData: UInt32, pbSIPIndirectData: CPointer<UInt8>): CPointer<CRYPTCATMEMBER>
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAdminAcquireContext == "on"]
+public unsafe func Windows_CryptCATAdminAcquireContext(phCatAdmin: CPointer<IntNative>, pgSubsystem: CPointer<GUID>, dwFlags: UInt32): Int32 {
+    return CryptCATAdminAcquireContext(phCatAdmin, pgSubsystem, dwFlags)
 }
 
-@When[WINTRUST == "on" && Windows_Win32_Security_Cryptography == "on"]
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAdminAcquireContext2 == "on" && Windows_Win32_Security_Cryptography == "on"]
 foreign {
     // param-hint: pgSubsystem optional
     // param-hint: pwszHashAlgorithm optional
@@ -83,6 +28,373 @@ foreign {
     // param-hint: dwFlags optional reserved
     // pinvoke-hint: SetLastError
     func CryptCATAdminAcquireContext2(phCatAdmin: CPointer<IntNative>, pgSubsystem: CPointer<GUID>, pwszHashAlgorithm: CPointer<UInt16>, pStrongHashPolicy: CPointer<Win32__impl_l1.CERT_STRONG_SIGN_PARA>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAdminAcquireContext2 == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_CryptCATAdminAcquireContext2(phCatAdmin: CPointer<IntNative>, pgSubsystem: CPointer<GUID>, pwszHashAlgorithm: CPointer<UInt16>, pStrongHashPolicy: CPointer<Win32__impl_l1.CERT_STRONG_SIGN_PARA>, dwFlags: UInt32): Int32 {
+    return CryptCATAdminAcquireContext2(phCatAdmin, pgSubsystem, pwszHashAlgorithm, pStrongHashPolicy, dwFlags)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAdminAddCatalog == "on"]
+foreign {
+    // param-hint: pwszSelectBaseName optional
+    // pinvoke-hint: SetLastError
+    func CryptCATAdminAddCatalog(hCatAdmin: IntNative, pwszCatalogFile: CPointer<UInt16>, pwszSelectBaseName: CPointer<UInt16>, dwFlags: UInt32): IntNative
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAdminAddCatalog == "on"]
+public unsafe func Windows_CryptCATAdminAddCatalog(hCatAdmin: IntNative, pwszCatalogFile: CPointer<UInt16>, pwszSelectBaseName: CPointer<UInt16>, dwFlags: UInt32): IntNative {
+    return CryptCATAdminAddCatalog(hCatAdmin, pwszCatalogFile, pwszSelectBaseName, dwFlags)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAdminCalcHashFromFileHandle == "on"]
+foreign {
+    // param-hint: pbHash bytes=param[1] optional
+    // param-hint: dwFlags optional reserved
+    func CryptCATAdminCalcHashFromFileHandle(hFile: CPointer<Unit>, pcbHash: CPointer<UInt32>, pbHash: CPointer<UInt8>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAdminCalcHashFromFileHandle == "on"]
+public unsafe func Windows_CryptCATAdminCalcHashFromFileHandle(hFile: CPointer<Unit>, pcbHash: CPointer<UInt32>, pbHash: CPointer<UInt8>, dwFlags: UInt32): Int32 {
+    return CryptCATAdminCalcHashFromFileHandle(hFile, pcbHash, pbHash, dwFlags)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAdminCalcHashFromFileHandle2 == "on"]
+foreign {
+    // param-hint: pbHash bytes=param[2] optional
+    // param-hint: dwFlags optional reserved
+    // pinvoke-hint: SetLastError
+    func CryptCATAdminCalcHashFromFileHandle2(hCatAdmin: IntNative, hFile: CPointer<Unit>, pcbHash: CPointer<UInt32>, pbHash: CPointer<UInt8>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAdminCalcHashFromFileHandle2 == "on"]
+public unsafe func Windows_CryptCATAdminCalcHashFromFileHandle2(hCatAdmin: IntNative, hFile: CPointer<Unit>, pcbHash: CPointer<UInt32>, pbHash: CPointer<UInt8>, dwFlags: UInt32): Int32 {
+    return CryptCATAdminCalcHashFromFileHandle2(hCatAdmin, hFile, pcbHash, pbHash, dwFlags)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAdminEnumCatalogFromHash == "on"]
+foreign {
+    // param-hint: pbHash bytes=param[2]
+    // param-hint: dwFlags optional reserved
+    // param-hint: phPrevCatInfo optional
+    // pinvoke-hint: SetLastError
+    func CryptCATAdminEnumCatalogFromHash(hCatAdmin: IntNative, pbHash: CPointer<UInt8>, cbHash: UInt32, dwFlags: UInt32, phPrevCatInfo: CPointer<IntNative>): IntNative
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAdminEnumCatalogFromHash == "on"]
+public unsafe func Windows_CryptCATAdminEnumCatalogFromHash(hCatAdmin: IntNative, pbHash: CPointer<UInt8>, cbHash: UInt32, dwFlags: UInt32, phPrevCatInfo: CPointer<IntNative>): IntNative {
+    return CryptCATAdminEnumCatalogFromHash(hCatAdmin, pbHash, cbHash, dwFlags, phPrevCatInfo)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAdminPauseServiceForBackup == "on"]
+foreign {
+    func CryptCATAdminPauseServiceForBackup(dwFlags: UInt32, fResume: Int32): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAdminPauseServiceForBackup == "on"]
+public unsafe func Windows_CryptCATAdminPauseServiceForBackup(dwFlags: UInt32, fResume: Int32): Int32 {
+    return CryptCATAdminPauseServiceForBackup(dwFlags, fResume)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAdminReleaseCatalogContext == "on"]
+foreign {
+    func CryptCATAdminReleaseCatalogContext(hCatAdmin: IntNative, hCatInfo: IntNative, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAdminReleaseCatalogContext == "on"]
+public unsafe func Windows_CryptCATAdminReleaseCatalogContext(hCatAdmin: IntNative, hCatInfo: IntNative, dwFlags: UInt32): Int32 {
+    return CryptCATAdminReleaseCatalogContext(hCatAdmin, hCatInfo, dwFlags)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAdminReleaseContext == "on"]
+foreign {
+    func CryptCATAdminReleaseContext(hCatAdmin: IntNative, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAdminReleaseContext == "on"]
+public unsafe func Windows_CryptCATAdminReleaseContext(hCatAdmin: IntNative, dwFlags: UInt32): Int32 {
+    return CryptCATAdminReleaseContext(hCatAdmin, dwFlags)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAdminRemoveCatalog == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func CryptCATAdminRemoveCatalog(hCatAdmin: IntNative, pwszCatalogFile: CPointer<UInt16>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAdminRemoveCatalog == "on"]
+public unsafe func Windows_CryptCATAdminRemoveCatalog(hCatAdmin: IntNative, pwszCatalogFile: CPointer<UInt16>, dwFlags: UInt32): Int32 {
+    return CryptCATAdminRemoveCatalog(hCatAdmin, pwszCatalogFile, dwFlags)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAdminResolveCatalogPath == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func CryptCATAdminResolveCatalogPath(hCatAdmin: IntNative, pwszCatalogFile: CPointer<UInt16>, psCatInfo: CPointer<Win32__impl_l0.CATALOG_INFO>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAdminResolveCatalogPath == "on"]
+public unsafe func Windows_CryptCATAdminResolveCatalogPath(hCatAdmin: IntNative, pwszCatalogFile: CPointer<UInt16>, psCatInfo: CPointer<Win32__impl_l0.CATALOG_INFO>, dwFlags: UInt32): Int32 {
+    return CryptCATAdminResolveCatalogPath(hCatAdmin, pwszCatalogFile, psCatInfo, dwFlags)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAllocSortedMemberInfo == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+foreign {
+    func CryptCATAllocSortedMemberInfo(hCatalog: CPointer<Unit>, pwszReferenceTag: CPointer<UInt16>): CPointer<CRYPTCATMEMBER>
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAllocSortedMemberInfo == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public unsafe func Windows_CryptCATAllocSortedMemberInfo(hCatalog: CPointer<Unit>, pwszReferenceTag: CPointer<UInt16>): CPointer<CRYPTCATMEMBER> {
+    return CryptCATAllocSortedMemberInfo(hCatalog, pwszReferenceTag)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATCDFClose == "on"]
+foreign {
+    func CryptCATCDFClose(pCDF: CPointer<Win32__impl_l0.CRYPTCATCDF>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATCDFClose == "on"]
+public unsafe func Windows_CryptCATCDFClose(pCDF: CPointer<Win32__impl_l0.CRYPTCATCDF>): Int32 {
+    return CryptCATCDFClose(pCDF)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATCDFEnumAttributes == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+foreign {
+    func CryptCATCDFEnumAttributes(pCDF: CPointer<Win32__impl_l0.CRYPTCATCDF>, pMember: CPointer<CRYPTCATMEMBER>, pPrevAttr: CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE>, pfnParseError: Win32__impl_l0.PFN_CDF_PARSE_ERROR_CALLBACK): CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE>
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATCDFEnumAttributes == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public unsafe func Windows_CryptCATCDFEnumAttributes(pCDF: CPointer<Win32__impl_l0.CRYPTCATCDF>, pMember: CPointer<CRYPTCATMEMBER>, pPrevAttr: CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE>, pfnParseError: Win32__impl_l0.PFN_CDF_PARSE_ERROR_CALLBACK): CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE> {
+    return CryptCATCDFEnumAttributes(pCDF, pMember, pPrevAttr, pfnParseError)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATCDFEnumAttributesWithCDFTag == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+foreign {
+    func CryptCATCDFEnumAttributesWithCDFTag(pCDF: CPointer<Win32__impl_l0.CRYPTCATCDF>, pwszMemberTag: CPointer<UInt16>, pMember: CPointer<CRYPTCATMEMBER>, pPrevAttr: CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE>, pfnParseError: Win32__impl_l0.PFN_CDF_PARSE_ERROR_CALLBACK): CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE>
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATCDFEnumAttributesWithCDFTag == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public unsafe func Windows_CryptCATCDFEnumAttributesWithCDFTag(pCDF: CPointer<Win32__impl_l0.CRYPTCATCDF>, pwszMemberTag: CPointer<UInt16>, pMember: CPointer<CRYPTCATMEMBER>, pPrevAttr: CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE>, pfnParseError: Win32__impl_l0.PFN_CDF_PARSE_ERROR_CALLBACK): CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE> {
+    return CryptCATCDFEnumAttributesWithCDFTag(pCDF, pwszMemberTag, pMember, pPrevAttr, pfnParseError)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATCDFEnumCatAttributes == "on"]
+foreign {
+    func CryptCATCDFEnumCatAttributes(pCDF: CPointer<Win32__impl_l0.CRYPTCATCDF>, pPrevAttr: CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE>, pfnParseError: Win32__impl_l0.PFN_CDF_PARSE_ERROR_CALLBACK): CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE>
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATCDFEnumCatAttributes == "on"]
+public unsafe func Windows_CryptCATCDFEnumCatAttributes(pCDF: CPointer<Win32__impl_l0.CRYPTCATCDF>, pPrevAttr: CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE>, pfnParseError: Win32__impl_l0.PFN_CDF_PARSE_ERROR_CALLBACK): CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE> {
+    return CryptCATCDFEnumCatAttributes(pCDF, pPrevAttr, pfnParseError)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATCDFEnumMembers == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+foreign {
+    func CryptCATCDFEnumMembers(pCDF: CPointer<Win32__impl_l0.CRYPTCATCDF>, pPrevMember: CPointer<CRYPTCATMEMBER>, pfnParseError: Win32__impl_l0.PFN_CDF_PARSE_ERROR_CALLBACK): CPointer<CRYPTCATMEMBER>
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATCDFEnumMembers == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public unsafe func Windows_CryptCATCDFEnumMembers(pCDF: CPointer<Win32__impl_l0.CRYPTCATCDF>, pPrevMember: CPointer<CRYPTCATMEMBER>, pfnParseError: Win32__impl_l0.PFN_CDF_PARSE_ERROR_CALLBACK): CPointer<CRYPTCATMEMBER> {
+    return CryptCATCDFEnumMembers(pCDF, pPrevMember, pfnParseError)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATCDFEnumMembersByCDFTagEx == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+foreign {
+    func CryptCATCDFEnumMembersByCDFTagEx(pCDF: CPointer<Win32__impl_l0.CRYPTCATCDF>, pwszPrevCDFTag: CPointer<UInt16>, pfnParseError: Win32__impl_l0.PFN_CDF_PARSE_ERROR_CALLBACK, ppMember: CPointer<CPointer<CRYPTCATMEMBER>>, fContinueOnError: Int32, pvReserved: CPointer<Unit>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATCDFEnumMembersByCDFTagEx == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public unsafe func Windows_CryptCATCDFEnumMembersByCDFTagEx(pCDF: CPointer<Win32__impl_l0.CRYPTCATCDF>, pwszPrevCDFTag: CPointer<UInt16>, pfnParseError: Win32__impl_l0.PFN_CDF_PARSE_ERROR_CALLBACK, ppMember: CPointer<CPointer<CRYPTCATMEMBER>>, fContinueOnError: Int32, pvReserved: CPointer<Unit>): CPointer<UInt16> {
+    return CryptCATCDFEnumMembersByCDFTagEx(pCDF, pwszPrevCDFTag, pfnParseError, ppMember, fContinueOnError, pvReserved)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATCDFOpen == "on"]
+foreign {
+    // param-hint: pfnParseError optional
+    func CryptCATCDFOpen(pwszFilePath: CPointer<UInt16>, pfnParseError: Win32__impl_l0.PFN_CDF_PARSE_ERROR_CALLBACK): CPointer<Win32__impl_l0.CRYPTCATCDF>
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATCDFOpen == "on"]
+public unsafe func Windows_CryptCATCDFOpen(pwszFilePath: CPointer<UInt16>, pfnParseError: Win32__impl_l0.PFN_CDF_PARSE_ERROR_CALLBACK): CPointer<Win32__impl_l0.CRYPTCATCDF> {
+    return CryptCATCDFOpen(pwszFilePath, pfnParseError)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATCatalogInfoFromContext == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func CryptCATCatalogInfoFromContext(hCatInfo: IntNative, psCatInfo: CPointer<Win32__impl_l0.CATALOG_INFO>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATCatalogInfoFromContext == "on"]
+public unsafe func Windows_CryptCATCatalogInfoFromContext(hCatInfo: IntNative, psCatInfo: CPointer<Win32__impl_l0.CATALOG_INFO>, dwFlags: UInt32): Int32 {
+    return CryptCATCatalogInfoFromContext(hCatInfo, psCatInfo, dwFlags)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATClose == "on"]
+foreign {
+    func CryptCATClose(hCatalog: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATClose == "on"]
+public unsafe func Windows_CryptCATClose(hCatalog: CPointer<Unit>): Int32 {
+    return CryptCATClose(hCatalog)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATEnumerateAttr == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+foreign {
+    func CryptCATEnumerateAttr(hCatalog: CPointer<Unit>, pCatMember: CPointer<CRYPTCATMEMBER>, pPrevAttr: CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE>): CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE>
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATEnumerateAttr == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public unsafe func Windows_CryptCATEnumerateAttr(hCatalog: CPointer<Unit>, pCatMember: CPointer<CRYPTCATMEMBER>, pPrevAttr: CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE>): CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE> {
+    return CryptCATEnumerateAttr(hCatalog, pCatMember, pPrevAttr)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATEnumerateCatAttr == "on"]
+foreign {
+    func CryptCATEnumerateCatAttr(hCatalog: CPointer<Unit>, pPrevAttr: CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE>): CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE>
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATEnumerateCatAttr == "on"]
+public unsafe func Windows_CryptCATEnumerateCatAttr(hCatalog: CPointer<Unit>, pPrevAttr: CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE>): CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE> {
+    return CryptCATEnumerateCatAttr(hCatalog, pPrevAttr)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATEnumerateMember == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+foreign {
+    func CryptCATEnumerateMember(hCatalog: CPointer<Unit>, pPrevMember: CPointer<CRYPTCATMEMBER>): CPointer<CRYPTCATMEMBER>
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATEnumerateMember == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public unsafe func Windows_CryptCATEnumerateMember(hCatalog: CPointer<Unit>, pPrevMember: CPointer<CRYPTCATMEMBER>): CPointer<CRYPTCATMEMBER> {
+    return CryptCATEnumerateMember(hCatalog, pPrevMember)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATFreeSortedMemberInfo == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+foreign {
+    func CryptCATFreeSortedMemberInfo(hCatalog: CPointer<Unit>, pCatMember: CPointer<CRYPTCATMEMBER>): Unit
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATFreeSortedMemberInfo == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public unsafe func Windows_CryptCATFreeSortedMemberInfo(hCatalog: CPointer<Unit>, pCatMember: CPointer<CRYPTCATMEMBER>): Unit {
+    CryptCATFreeSortedMemberInfo(hCatalog, pCatMember)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATGetAttrInfo == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func CryptCATGetAttrInfo(hCatalog: CPointer<Unit>, pCatMember: CPointer<CRYPTCATMEMBER>, pwszReferenceTag: CPointer<UInt16>): CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE>
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATGetAttrInfo == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public unsafe func Windows_CryptCATGetAttrInfo(hCatalog: CPointer<Unit>, pCatMember: CPointer<CRYPTCATMEMBER>, pwszReferenceTag: CPointer<UInt16>): CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE> {
+    return CryptCATGetAttrInfo(hCatalog, pCatMember, pwszReferenceTag)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATGetCatAttrInfo == "on"]
+foreign {
+    func CryptCATGetCatAttrInfo(hCatalog: CPointer<Unit>, pwszReferenceTag: CPointer<UInt16>): CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE>
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATGetCatAttrInfo == "on"]
+public unsafe func Windows_CryptCATGetCatAttrInfo(hCatalog: CPointer<Unit>, pwszReferenceTag: CPointer<UInt16>): CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE> {
+    return CryptCATGetCatAttrInfo(hCatalog, pwszReferenceTag)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATGetMemberInfo == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+foreign {
+    func CryptCATGetMemberInfo(hCatalog: CPointer<Unit>, pwszReferenceTag: CPointer<UInt16>): CPointer<CRYPTCATMEMBER>
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATGetMemberInfo == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public unsafe func Windows_CryptCATGetMemberInfo(hCatalog: CPointer<Unit>, pwszReferenceTag: CPointer<UInt16>): CPointer<CRYPTCATMEMBER> {
+    return CryptCATGetMemberInfo(hCatalog, pwszReferenceTag)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATHandleFromStore == "on"]
+foreign {
+    func CryptCATHandleFromStore(pCatStore: CPointer<Win32__impl_l1.CRYPTCATSTORE>): CPointer<Unit>
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATHandleFromStore == "on"]
+public unsafe func Windows_CryptCATHandleFromStore(pCatStore: CPointer<Win32__impl_l1.CRYPTCATSTORE>): CPointer<Unit> {
+    return CryptCATHandleFromStore(pCatStore)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATOpen == "on"]
+foreign {
+    func CryptCATOpen(pwszFileName: CPointer<UInt16>, fdwOpenFlags: UInt32, hProv: UIntNative, dwPublicVersion: UInt32, dwEncodingType: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATOpen == "on"]
+public unsafe func Windows_CryptCATOpen(pwszFileName: CPointer<UInt16>, fdwOpenFlags: UInt32, hProv: UIntNative, dwPublicVersion: UInt32, dwEncodingType: UInt32): CPointer<Unit> {
+    return CryptCATOpen(pwszFileName, fdwOpenFlags, hProv, dwPublicVersion, dwEncodingType)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATPersistStore == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func CryptCATPersistStore(hCatalog: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATPersistStore == "on"]
+public unsafe func Windows_CryptCATPersistStore(hCatalog: CPointer<Unit>): Int32 {
+    return CryptCATPersistStore(hCatalog)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATPutAttrInfo == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func CryptCATPutAttrInfo(hCatalog: CPointer<Unit>, pCatMember: CPointer<CRYPTCATMEMBER>, pwszReferenceTag: CPointer<UInt16>, dwAttrTypeAndAction: UInt32, cbData: UInt32, pbData: CPointer<UInt8>): CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE>
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATPutAttrInfo == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public unsafe func Windows_CryptCATPutAttrInfo(hCatalog: CPointer<Unit>, pCatMember: CPointer<CRYPTCATMEMBER>, pwszReferenceTag: CPointer<UInt16>, dwAttrTypeAndAction: UInt32, cbData: UInt32, pbData: CPointer<UInt8>): CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE> {
+    return CryptCATPutAttrInfo(hCatalog, pCatMember, pwszReferenceTag, dwAttrTypeAndAction, cbData, pbData)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATPutCatAttrInfo == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func CryptCATPutCatAttrInfo(hCatalog: CPointer<Unit>, pwszReferenceTag: CPointer<UInt16>, dwAttrTypeAndAction: UInt32, cbData: UInt32, pbData: CPointer<UInt8>): CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE>
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATPutCatAttrInfo == "on"]
+public unsafe func Windows_CryptCATPutCatAttrInfo(hCatalog: CPointer<Unit>, pwszReferenceTag: CPointer<UInt16>, dwAttrTypeAndAction: UInt32, cbData: UInt32, pbData: CPointer<UInt8>): CPointer<Win32__impl_l1.CRYPTCATATTRIBUTE> {
+    return CryptCATPutCatAttrInfo(hCatalog, pwszReferenceTag, dwAttrTypeAndAction, cbData, pbData)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATPutMemberInfo == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+foreign {
+    // param-hint: pwszFileName optional
+    // pinvoke-hint: SetLastError
+    func CryptCATPutMemberInfo(hCatalog: CPointer<Unit>, pwszFileName: CPointer<UInt16>, pwszReferenceTag: CPointer<UInt16>, pgSubjectType: CPointer<GUID>, dwCertVersion: UInt32, cbSIPIndirectData: UInt32, pbSIPIndirectData: CPointer<UInt8>): CPointer<CRYPTCATMEMBER>
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATPutMemberInfo == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public unsafe func Windows_CryptCATPutMemberInfo(hCatalog: CPointer<Unit>, pwszFileName: CPointer<UInt16>, pwszReferenceTag: CPointer<UInt16>, pgSubjectType: CPointer<GUID>, dwCertVersion: UInt32, cbSIPIndirectData: UInt32, pbSIPIndirectData: CPointer<UInt8>): CPointer<CRYPTCATMEMBER> {
+    return CryptCATPutMemberInfo(hCatalog, pwszFileName, pwszReferenceTag, pgSubjectType, dwCertVersion, cbSIPIndirectData, pbSIPIndirectData)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATStoreFromHandle == "on"]
+foreign {
+    func CryptCATStoreFromHandle(hCatalog: CPointer<Unit>): CPointer<Win32__impl_l1.CRYPTCATSTORE>
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATStoreFromHandle == "on"]
+public unsafe func Windows_CryptCATStoreFromHandle(hCatalog: CPointer<Unit>): CPointer<Win32__impl_l1.CRYPTCATSTORE> {
+    return CryptCATStoreFromHandle(hCatalog)
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_IsCatalogFile == "on"]
+foreign {
+    // param-hint: pwszFileName optional
+    func IsCatalogFile(hFile: CPointer<Unit>, pwszFileName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_IsCatalogFile == "on"]
+public unsafe func Windows_IsCatalogFile(hFile: CPointer<Unit>, pwszFileName: CPointer<UInt16>): Int32 {
+    return IsCatalogFile(hFile, pwszFileName)
 }
 
 @When[Windows_Win32_Security_Cryptography_Catalog == "on"]

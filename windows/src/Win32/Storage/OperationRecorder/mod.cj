@@ -6,7 +6,6 @@ package windows.Win32.Storage.OperationRecorder
 import std.collection.*
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 
@@ -226,8 +225,22 @@ extend OPERATION_END_PARAMETERS <: windows_core.CopyType & windows_core.RuntimeT
     }
 }
 
-@When[ADVAPI32 == "on"]
+@When[Windows_Win32_Storage_OperationRecorder == "on" && ADVAPI32 == "on" && Windows_Win32_Storage_OperationRecorder_OperationEnd == "on"]
 foreign {
     func OperationEnd(OperationEndParams: CPointer<OPERATION_END_PARAMETERSAbi>): Int32
+}
+
+@When[Windows_Win32_Storage_OperationRecorder == "on" && ADVAPI32 == "on" && Windows_Win32_Storage_OperationRecorder_OperationEnd == "on"]
+public unsafe func Windows_OperationEnd(OperationEndParams: CPointer<OPERATION_END_PARAMETERSAbi>): Int32 {
+    return OperationEnd(OperationEndParams)
+}
+
+@When[Windows_Win32_Storage_OperationRecorder == "on" && ADVAPI32 == "on" && Windows_Win32_Storage_OperationRecorder_OperationStart == "on"]
+foreign {
     func OperationStart(OperationStartParams: CPointer<OPERATION_START_PARAMETERSAbi>): Int32
+}
+
+@When[Windows_Win32_Storage_OperationRecorder == "on" && ADVAPI32 == "on" && Windows_Win32_Storage_OperationRecorder_OperationStart == "on"]
+public unsafe func Windows_OperationStart(OperationStartParams: CPointer<OPERATION_START_PARAMETERSAbi>): Int32 {
+    return OperationStart(OperationStartParams)
 }

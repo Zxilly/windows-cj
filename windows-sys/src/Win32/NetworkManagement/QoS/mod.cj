@@ -5,11 +5,8 @@ import windows_interface.{GUID}
 import windows_interface as windows_interface
 import windows_polyfill.{packedReadInt64, packedReadUInt16, packedReadUInt32, packedReadUInt64, packedReadValue, packedWriteInt64, packedWriteUInt16, packedWriteUInt32, packedWriteUInt64, packedWriteValue, unionReadUInt32, unionWriteUInt32}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_NetworkManagement_Ndis == "on"]
 import windows_sys.Win32.NetworkManagement.Ndis as Win32_NetworkManagement_Ndis
-@When[Windows_Win32_System_IO == "on"]
 import windows_sys.Win32.System.IO as Win32_System_IO
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
@@ -2236,84 +2233,339 @@ public struct RSVP_RESERVE_INFO {
     public init() {}
 }
 
-@When[TRAFFIC == "on"]
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcAddFilter == "on"]
 foreign {
     func TcAddFilter(FlowHandle: CPointer<Unit>, pGenericFilter: CPointer<TC_GEN_FILTER>, pFilterHandle: CPointer<CPointer<Unit>>): UInt32
-    func TcCloseInterface(IfcHandle: CPointer<Unit>): UInt32
-    func TcDeleteFilter(FilterHandle: CPointer<Unit>): UInt32
-    func TcDeleteFlow(FlowHandle: CPointer<Unit>): UInt32
-    func TcDeregisterClient(ClientHandle: CPointer<Unit>): UInt32
-    // param-hint: pFlowName len=param[1]
-    func TcGetFlowNameA(FlowHandle: CPointer<Unit>, StrSize: UInt32, pFlowName: CPointer<UInt8>): UInt32
-    // param-hint: pFlowName len=param[1]
-    func TcGetFlowNameW(FlowHandle: CPointer<Unit>, StrSize: UInt32, pFlowName: CPointer<UInt16>): UInt32
-    func TcOpenInterfaceA(pInterfaceName: CPointer<UInt8>, ClientHandle: CPointer<Unit>, ClIfcCtx: CPointer<Unit>, pIfcHandle: CPointer<CPointer<Unit>>): UInt32
-    func TcOpenInterfaceW(pInterfaceName: CPointer<UInt16>, ClientHandle: CPointer<Unit>, ClIfcCtx: CPointer<Unit>, pIfcHandle: CPointer<CPointer<Unit>>): UInt32
-    // param-hint: Buffer bytes=param[2]
-    func TcQueryFlowA(pFlowName: CPointer<UInt8>, pGuidParam: CPointer<GUID>, pBufferSize: CPointer<UInt32>, Buffer: CPointer<Unit>): UInt32
-    // param-hint: Buffer bytes=param[2]
-    func TcQueryFlowW(pFlowName: CPointer<UInt16>, pGuidParam: CPointer<GUID>, pBufferSize: CPointer<UInt32>, Buffer: CPointer<Unit>): UInt32
-    // param-hint: Buffer bytes=param[3]
-    func TcQueryInterface(IfcHandle: CPointer<Unit>, pGuidParam: CPointer<GUID>, NotifyChange: UInt8, pBufferSize: CPointer<UInt32>, Buffer: CPointer<Unit>): UInt32
-    func TcRegisterClient(TciVersion: UInt32, ClRegCtx: CPointer<Unit>, ClientHandlerList: CPointer<TCI_CLIENT_FUNC_LIST>, pClientHandle: CPointer<CPointer<Unit>>): UInt32
-    // param-hint: Buffer bytes=param[2]
-    func TcSetFlowA(pFlowName: CPointer<UInt8>, pGuidParam: CPointer<GUID>, BufferSize: UInt32, Buffer: CPointer<Unit>): UInt32
-    // param-hint: Buffer bytes=param[2]
-    func TcSetFlowW(pFlowName: CPointer<UInt16>, pGuidParam: CPointer<GUID>, BufferSize: UInt32, Buffer: CPointer<Unit>): UInt32
-    // param-hint: Buffer bytes=param[2]
-    func TcSetInterface(IfcHandle: CPointer<Unit>, pGuidParam: CPointer<GUID>, BufferSize: UInt32, Buffer: CPointer<Unit>): UInt32
 }
 
-@When[TRAFFIC == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcAddFilter == "on"]
+public unsafe func Windows_TcAddFilter(FlowHandle: CPointer<Unit>, pGenericFilter: CPointer<TC_GEN_FILTER>, pFilterHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return TcAddFilter(FlowHandle, pGenericFilter, pFilterHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcAddFlow == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func TcAddFlow(IfcHandle: CPointer<Unit>, ClFlowCtx: CPointer<Unit>, Flags: UInt32, pGenericFlow: CPointer<TC_GEN_FLOW>, pFlowHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcAddFlow == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_TcAddFlow(IfcHandle: CPointer<Unit>, ClFlowCtx: CPointer<Unit>, Flags: UInt32, pGenericFlow: CPointer<TC_GEN_FLOW>, pFlowHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return TcAddFlow(IfcHandle, ClFlowCtx, Flags, pGenericFlow, pFlowHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcCloseInterface == "on"]
+foreign {
+    func TcCloseInterface(IfcHandle: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcCloseInterface == "on"]
+public unsafe func Windows_TcCloseInterface(IfcHandle: CPointer<Unit>): UInt32 {
+    return TcCloseInterface(IfcHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcDeleteFilter == "on"]
+foreign {
+    func TcDeleteFilter(FilterHandle: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcDeleteFilter == "on"]
+public unsafe func Windows_TcDeleteFilter(FilterHandle: CPointer<Unit>): UInt32 {
+    return TcDeleteFilter(FilterHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcDeleteFlow == "on"]
+foreign {
+    func TcDeleteFlow(FlowHandle: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcDeleteFlow == "on"]
+public unsafe func Windows_TcDeleteFlow(FlowHandle: CPointer<Unit>): UInt32 {
+    return TcDeleteFlow(FlowHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcDeregisterClient == "on"]
+foreign {
+    func TcDeregisterClient(ClientHandle: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcDeregisterClient == "on"]
+public unsafe func Windows_TcDeregisterClient(ClientHandle: CPointer<Unit>): UInt32 {
+    return TcDeregisterClient(ClientHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcEnumerateFlows == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func TcEnumerateFlows(IfcHandle: CPointer<Unit>, pEnumHandle: CPointer<CPointer<Unit>>, pFlowCount: CPointer<UInt32>, pBufSize: CPointer<UInt32>, Buffer: CPointer<ENUMERATION_BUFFER>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcEnumerateFlows == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_TcEnumerateFlows(IfcHandle: CPointer<Unit>, pEnumHandle: CPointer<CPointer<Unit>>, pFlowCount: CPointer<UInt32>, pBufSize: CPointer<UInt32>, Buffer: CPointer<ENUMERATION_BUFFER>): UInt32 {
+    return TcEnumerateFlows(IfcHandle, pEnumHandle, pFlowCount, pBufSize, Buffer)
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcEnumerateInterfaces == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
 foreign {
     func TcEnumerateInterfaces(ClientHandle: CPointer<Unit>, pBufferSize: CPointer<UInt32>, InterfaceBuffer: CPointer<TC_IFC_DESCRIPTOR>): UInt32
 }
 
-@When[TRAFFIC == "on" && Windows_Win32_Networking_WinSock == "on"]
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcEnumerateInterfaces == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public unsafe func Windows_TcEnumerateInterfaces(ClientHandle: CPointer<Unit>, pBufferSize: CPointer<UInt32>, InterfaceBuffer: CPointer<TC_IFC_DESCRIPTOR>): UInt32 {
+    return TcEnumerateInterfaces(ClientHandle, pBufferSize, InterfaceBuffer)
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcGetFlowNameA == "on"]
 foreign {
-    func TcAddFlow(IfcHandle: CPointer<Unit>, ClFlowCtx: CPointer<Unit>, Flags: UInt32, pGenericFlow: CPointer<TC_GEN_FLOW>, pFlowHandle: CPointer<CPointer<Unit>>): UInt32
-    func TcEnumerateFlows(IfcHandle: CPointer<Unit>, pEnumHandle: CPointer<CPointer<Unit>>, pFlowCount: CPointer<UInt32>, pBufSize: CPointer<UInt32>, Buffer: CPointer<ENUMERATION_BUFFER>): UInt32
+    // param-hint: pFlowName len=param[1]
+    func TcGetFlowNameA(FlowHandle: CPointer<Unit>, StrSize: UInt32, pFlowName: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcGetFlowNameA == "on"]
+public unsafe func Windows_TcGetFlowNameA(FlowHandle: CPointer<Unit>, StrSize: UInt32, pFlowName: CPointer<UInt8>): UInt32 {
+    return TcGetFlowNameA(FlowHandle, StrSize, pFlowName)
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcGetFlowNameW == "on"]
+foreign {
+    // param-hint: pFlowName len=param[1]
+    func TcGetFlowNameW(FlowHandle: CPointer<Unit>, StrSize: UInt32, pFlowName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcGetFlowNameW == "on"]
+public unsafe func Windows_TcGetFlowNameW(FlowHandle: CPointer<Unit>, StrSize: UInt32, pFlowName: CPointer<UInt16>): UInt32 {
+    return TcGetFlowNameW(FlowHandle, StrSize, pFlowName)
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcModifyFlow == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
     func TcModifyFlow(FlowHandle: CPointer<Unit>, pGenericFlow: CPointer<TC_GEN_FLOW>): UInt32
 }
 
-@When[QWAVE == "on"]
-foreign {
-    func QOSCloseHandle(QOSHandle: CPointer<Unit>): Int32
-    func QOSCreateHandle(Version: CPointer<QOS_VERSION>, QOSHandle: CPointer<CPointer<Unit>>): Int32
-    // param-hint: Buffer bytes=param[1]
-    func QOSEnumerateFlows(QOSHandle: CPointer<Unit>, Size: CPointer<UInt32>, Buffer: CPointer<Unit>): Int32
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcModifyFlow == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_TcModifyFlow(FlowHandle: CPointer<Unit>, pGenericFlow: CPointer<TC_GEN_FLOW>): UInt32 {
+    return TcModifyFlow(FlowHandle, pGenericFlow)
 }
 
-@When[QWAVE == "on" && Windows_Win32_Networking_WinSock == "on"]
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcOpenInterfaceA == "on"]
+foreign {
+    func TcOpenInterfaceA(pInterfaceName: CPointer<UInt8>, ClientHandle: CPointer<Unit>, ClIfcCtx: CPointer<Unit>, pIfcHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcOpenInterfaceA == "on"]
+public unsafe func Windows_TcOpenInterfaceA(pInterfaceName: CPointer<UInt8>, ClientHandle: CPointer<Unit>, ClIfcCtx: CPointer<Unit>, pIfcHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return TcOpenInterfaceA(pInterfaceName, ClientHandle, ClIfcCtx, pIfcHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcOpenInterfaceW == "on"]
+foreign {
+    func TcOpenInterfaceW(pInterfaceName: CPointer<UInt16>, ClientHandle: CPointer<Unit>, ClIfcCtx: CPointer<Unit>, pIfcHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcOpenInterfaceW == "on"]
+public unsafe func Windows_TcOpenInterfaceW(pInterfaceName: CPointer<UInt16>, ClientHandle: CPointer<Unit>, ClIfcCtx: CPointer<Unit>, pIfcHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return TcOpenInterfaceW(pInterfaceName, ClientHandle, ClIfcCtx, pIfcHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcQueryFlowA == "on"]
+foreign {
+    // param-hint: Buffer bytes=param[2]
+    func TcQueryFlowA(pFlowName: CPointer<UInt8>, pGuidParam: CPointer<GUID>, pBufferSize: CPointer<UInt32>, Buffer: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcQueryFlowA == "on"]
+public unsafe func Windows_TcQueryFlowA(pFlowName: CPointer<UInt8>, pGuidParam: CPointer<GUID>, pBufferSize: CPointer<UInt32>, Buffer: CPointer<Unit>): UInt32 {
+    return TcQueryFlowA(pFlowName, pGuidParam, pBufferSize, Buffer)
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcQueryFlowW == "on"]
+foreign {
+    // param-hint: Buffer bytes=param[2]
+    func TcQueryFlowW(pFlowName: CPointer<UInt16>, pGuidParam: CPointer<GUID>, pBufferSize: CPointer<UInt32>, Buffer: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcQueryFlowW == "on"]
+public unsafe func Windows_TcQueryFlowW(pFlowName: CPointer<UInt16>, pGuidParam: CPointer<GUID>, pBufferSize: CPointer<UInt32>, Buffer: CPointer<Unit>): UInt32 {
+    return TcQueryFlowW(pFlowName, pGuidParam, pBufferSize, Buffer)
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcQueryInterface == "on"]
+foreign {
+    // param-hint: Buffer bytes=param[3]
+    func TcQueryInterface(IfcHandle: CPointer<Unit>, pGuidParam: CPointer<GUID>, NotifyChange: UInt8, pBufferSize: CPointer<UInt32>, Buffer: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcQueryInterface == "on"]
+public unsafe func Windows_TcQueryInterface(IfcHandle: CPointer<Unit>, pGuidParam: CPointer<GUID>, NotifyChange: UInt8, pBufferSize: CPointer<UInt32>, Buffer: CPointer<Unit>): UInt32 {
+    return TcQueryInterface(IfcHandle, pGuidParam, NotifyChange, pBufferSize, Buffer)
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcRegisterClient == "on"]
+foreign {
+    func TcRegisterClient(TciVersion: UInt32, ClRegCtx: CPointer<Unit>, ClientHandlerList: CPointer<TCI_CLIENT_FUNC_LIST>, pClientHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcRegisterClient == "on"]
+public unsafe func Windows_TcRegisterClient(TciVersion: UInt32, ClRegCtx: CPointer<Unit>, ClientHandlerList: CPointer<TCI_CLIENT_FUNC_LIST>, pClientHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return TcRegisterClient(TciVersion, ClRegCtx, ClientHandlerList, pClientHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcSetFlowA == "on"]
+foreign {
+    // param-hint: Buffer bytes=param[2]
+    func TcSetFlowA(pFlowName: CPointer<UInt8>, pGuidParam: CPointer<GUID>, BufferSize: UInt32, Buffer: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcSetFlowA == "on"]
+public unsafe func Windows_TcSetFlowA(pFlowName: CPointer<UInt8>, pGuidParam: CPointer<GUID>, BufferSize: UInt32, Buffer: CPointer<Unit>): UInt32 {
+    return TcSetFlowA(pFlowName, pGuidParam, BufferSize, Buffer)
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcSetFlowW == "on"]
+foreign {
+    // param-hint: Buffer bytes=param[2]
+    func TcSetFlowW(pFlowName: CPointer<UInt16>, pGuidParam: CPointer<GUID>, BufferSize: UInt32, Buffer: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcSetFlowW == "on"]
+public unsafe func Windows_TcSetFlowW(pFlowName: CPointer<UInt16>, pGuidParam: CPointer<GUID>, BufferSize: UInt32, Buffer: CPointer<Unit>): UInt32 {
+    return TcSetFlowW(pFlowName, pGuidParam, BufferSize, Buffer)
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcSetInterface == "on"]
+foreign {
+    // param-hint: Buffer bytes=param[2]
+    func TcSetInterface(IfcHandle: CPointer<Unit>, pGuidParam: CPointer<GUID>, BufferSize: UInt32, Buffer: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && TRAFFIC == "on" && Windows_Win32_NetworkManagement_QoS_TcSetInterface == "on"]
+public unsafe func Windows_TcSetInterface(IfcHandle: CPointer<Unit>, pGuidParam: CPointer<GUID>, BufferSize: UInt32, Buffer: CPointer<Unit>): UInt32 {
+    return TcSetInterface(IfcHandle, pGuidParam, BufferSize, Buffer)
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && QWAVE == "on" && Windows_Win32_NetworkManagement_QoS_QOSAddSocketToFlow == "on" && Windows_Win32_Networking_WinSock == "on"]
 foreign {
     // param-hint: DestAddr optional
     // param-hint: Flags optional
     func QOSAddSocketToFlow(QOSHandle: CPointer<Unit>, Socket: Win32__impl_l0.SOCKET, DestAddr: CPointer<Win32__impl_l1.SOCKADDR>, TrafficType: Int32, Flags: UInt32, FlowId: CPointer<UInt32>): Int32
-    // param-hint: Socket optional
-    // param-hint: Flags optional reserved
-    func QOSRemoveSocketFromFlow(QOSHandle: CPointer<Unit>, Socket: Win32__impl_l0.SOCKET, FlowId: UInt32, Flags: UInt32): Int32
-    // param-hint: Flags optional reserved
-    func QOSStartTrackingClient(QOSHandle: CPointer<Unit>, DestAddr: CPointer<Win32__impl_l1.SOCKADDR>, Flags: UInt32): Int32
-    // param-hint: Flags optional reserved
-    func QOSStopTrackingClient(QOSHandle: CPointer<Unit>, DestAddr: CPointer<Win32__impl_l1.SOCKADDR>, Flags: UInt32): Int32
 }
 
-@When[QWAVE == "on" && Windows_Win32_System_IO == "on"]
+@When[Windows_Win32_NetworkManagement_QoS == "on" && QWAVE == "on" && Windows_Win32_NetworkManagement_QoS_QOSAddSocketToFlow == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_QOSAddSocketToFlow(QOSHandle: CPointer<Unit>, Socket: Win32__impl_l0.SOCKET, DestAddr: CPointer<Win32__impl_l1.SOCKADDR>, TrafficType: Int32, Flags: UInt32, FlowId: CPointer<UInt32>): Int32 {
+    return QOSAddSocketToFlow(QOSHandle, Socket, DestAddr, TrafficType, Flags, FlowId)
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && QWAVE == "on" && Windows_Win32_NetworkManagement_QoS_QOSCancel == "on" && Windows_Win32_System_IO == "on"]
 foreign {
     func QOSCancel(QOSHandle: CPointer<Unit>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && QWAVE == "on" && Windows_Win32_NetworkManagement_QoS_QOSCancel == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_QOSCancel(QOSHandle: CPointer<Unit>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32 {
+    return QOSCancel(QOSHandle, Overlapped)
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && QWAVE == "on" && Windows_Win32_NetworkManagement_QoS_QOSCloseHandle == "on"]
+foreign {
+    func QOSCloseHandle(QOSHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && QWAVE == "on" && Windows_Win32_NetworkManagement_QoS_QOSCloseHandle == "on"]
+public unsafe func Windows_QOSCloseHandle(QOSHandle: CPointer<Unit>): Int32 {
+    return QOSCloseHandle(QOSHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && QWAVE == "on" && Windows_Win32_NetworkManagement_QoS_QOSCreateHandle == "on"]
+foreign {
+    func QOSCreateHandle(Version: CPointer<QOS_VERSION>, QOSHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && QWAVE == "on" && Windows_Win32_NetworkManagement_QoS_QOSCreateHandle == "on"]
+public unsafe func Windows_QOSCreateHandle(Version: CPointer<QOS_VERSION>, QOSHandle: CPointer<CPointer<Unit>>): Int32 {
+    return QOSCreateHandle(Version, QOSHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && QWAVE == "on" && Windows_Win32_NetworkManagement_QoS_QOSEnumerateFlows == "on"]
+foreign {
+    // param-hint: Buffer bytes=param[1]
+    func QOSEnumerateFlows(QOSHandle: CPointer<Unit>, Size: CPointer<UInt32>, Buffer: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && QWAVE == "on" && Windows_Win32_NetworkManagement_QoS_QOSEnumerateFlows == "on"]
+public unsafe func Windows_QOSEnumerateFlows(QOSHandle: CPointer<Unit>, Size: CPointer<UInt32>, Buffer: CPointer<Unit>): Int32 {
+    return QOSEnumerateFlows(QOSHandle, Size, Buffer)
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && QWAVE == "on" && Windows_Win32_NetworkManagement_QoS_QOSNotifyFlow == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: Size optional
     // param-hint: Buffer bytes=param[3] optional
     // param-hint: Flags optional reserved
     // param-hint: Overlapped optional
     func QOSNotifyFlow(QOSHandle: CPointer<Unit>, FlowId: UInt32, Operation: Int32, Size: CPointer<UInt32>, Buffer: CPointer<Unit>, Flags: UInt32, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && QWAVE == "on" && Windows_Win32_NetworkManagement_QoS_QOSNotifyFlow == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_QOSNotifyFlow(QOSHandle: CPointer<Unit>, FlowId: UInt32, Operation: Int32, Size: CPointer<UInt32>, Buffer: CPointer<Unit>, Flags: UInt32, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32 {
+    return QOSNotifyFlow(QOSHandle, FlowId, Operation, Size, Buffer, Flags, Overlapped)
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && QWAVE == "on" && Windows_Win32_NetworkManagement_QoS_QOSQueryFlow == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: Buffer bytes=param[3]
     // param-hint: Flags optional
     // param-hint: Overlapped optional
     func QOSQueryFlow(QOSHandle: CPointer<Unit>, FlowId: UInt32, Operation: Int32, Size: CPointer<UInt32>, Buffer: CPointer<Unit>, Flags: UInt32, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && QWAVE == "on" && Windows_Win32_NetworkManagement_QoS_QOSQueryFlow == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_QOSQueryFlow(QOSHandle: CPointer<Unit>, FlowId: UInt32, Operation: Int32, Size: CPointer<UInt32>, Buffer: CPointer<Unit>, Flags: UInt32, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32 {
+    return QOSQueryFlow(QOSHandle, FlowId, Operation, Size, Buffer, Flags, Overlapped)
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && QWAVE == "on" && Windows_Win32_NetworkManagement_QoS_QOSRemoveSocketFromFlow == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: Socket optional
+    // param-hint: Flags optional reserved
+    func QOSRemoveSocketFromFlow(QOSHandle: CPointer<Unit>, Socket: Win32__impl_l0.SOCKET, FlowId: UInt32, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && QWAVE == "on" && Windows_Win32_NetworkManagement_QoS_QOSRemoveSocketFromFlow == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_QOSRemoveSocketFromFlow(QOSHandle: CPointer<Unit>, Socket: Win32__impl_l0.SOCKET, FlowId: UInt32, Flags: UInt32): Int32 {
+    return QOSRemoveSocketFromFlow(QOSHandle, Socket, FlowId, Flags)
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && QWAVE == "on" && Windows_Win32_NetworkManagement_QoS_QOSSetFlow == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: Buffer bytes=param[3]
     // param-hint: Flags optional reserved
     // param-hint: Overlapped optional
     func QOSSetFlow(QOSHandle: CPointer<Unit>, FlowId: UInt32, Operation: Int32, Size: UInt32, Buffer: CPointer<Unit>, Flags: UInt32, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && QWAVE == "on" && Windows_Win32_NetworkManagement_QoS_QOSSetFlow == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_QOSSetFlow(QOSHandle: CPointer<Unit>, FlowId: UInt32, Operation: Int32, Size: UInt32, Buffer: CPointer<Unit>, Flags: UInt32, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32 {
+    return QOSSetFlow(QOSHandle, FlowId, Operation, Size, Buffer, Flags, Overlapped)
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && QWAVE == "on" && Windows_Win32_NetworkManagement_QoS_QOSStartTrackingClient == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: Flags optional reserved
+    func QOSStartTrackingClient(QOSHandle: CPointer<Unit>, DestAddr: CPointer<Win32__impl_l1.SOCKADDR>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && QWAVE == "on" && Windows_Win32_NetworkManagement_QoS_QOSStartTrackingClient == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_QOSStartTrackingClient(QOSHandle: CPointer<Unit>, DestAddr: CPointer<Win32__impl_l1.SOCKADDR>, Flags: UInt32): Int32 {
+    return QOSStartTrackingClient(QOSHandle, DestAddr, Flags)
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && QWAVE == "on" && Windows_Win32_NetworkManagement_QoS_QOSStopTrackingClient == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: Flags optional reserved
+    func QOSStopTrackingClient(QOSHandle: CPointer<Unit>, DestAddr: CPointer<Win32__impl_l1.SOCKADDR>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_QoS == "on" && QWAVE == "on" && Windows_Win32_NetworkManagement_QoS_QOSStopTrackingClient == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_QOSStopTrackingClient(QOSHandle: CPointer<Unit>, DestAddr: CPointer<Win32__impl_l1.SOCKADDR>, Flags: UInt32): Int32 {
+    return QOSStopTrackingClient(QOSHandle, DestAddr, Flags)
 }
 
 @When[Windows_Win32_NetworkManagement_QoS == "on"]

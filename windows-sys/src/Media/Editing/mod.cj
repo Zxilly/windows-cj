@@ -3,4 +3,3 @@ package windows_sys.Media.Editing
 
 @When[Windows_Media_Editing == "on"]
 public import windows_sys.Media._impl_l0.{IBackgroundAudioTrack, IBackgroundAudioTrackStatics, IBackgroundAudioTrackStaticsVtbl, IBackgroundAudioTrackVtbl, IEmbeddedAudioTrack, IEmbeddedAudioTrackVtbl, IMediaClip, IMediaClipStatics, IMediaClipStatics2, IMediaClipStatics2Vtbl, IMediaClipStaticsVtbl, IMediaClipVtbl, IMediaComposition, IMediaComposition2, IMediaComposition2Vtbl, IMediaCompositionStatics, IMediaCompositionStaticsVtbl, IMediaCompositionVtbl, IMediaOverlay, IMediaOverlayFactory, IMediaOverlayFactoryVtbl, IMediaOverlayLayer, IMediaOverlayLayerFactory, IMediaOverlayLayerFactoryVtbl, IMediaOverlayLayerVtbl, IMediaOverlayVtbl, MediaTrimmingPreference, MediaTrimmingPreference_Fast, MediaTrimmingPreference_Precise, VideoFramePrecision, VideoFramePrecision_NearestFrame, VideoFramePrecision_NearestKeyFrame}
-

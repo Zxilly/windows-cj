@@ -623,6 +623,7 @@ public class IStorePrice2 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IStoreProductOptionsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ActionFilters: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -667,6 +668,7 @@ public class IStoreProductOptions <: InterfaceWrapperBase & ComInterface {
         readVtbl<IStoreProductOptionsVtbl>(IStoreProductOptionsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ActionFilters(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1328,6 +1330,7 @@ public struct IStoreAppLicenseVtbl {
     public var IsTrial: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var ExpirationDate: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.DateTime>) -> Int32> = { _, _ => 0 }
     public var ExtendedJsonData: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var AddOnLicenses: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var TrialTimeRemaining: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.TimeSpan>) -> Int32> = { _, _ => 0 }
     public var IsTrialOwnedByThisUser: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
@@ -1405,6 +1408,7 @@ public class IStoreAppLicense <: InterfaceWrapperBase & ComInterface {
         return __vt.ExtendedJsonData(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AddOnLicenses(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1580,6 +1584,7 @@ public class IStoreConsumableResult <: InterfaceWrapperBase & ComInterface {
 public struct IStorePackageUpdateResultVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var OverallState: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var StorePackageUpdateStatuses: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1630,6 +1635,7 @@ public class IStorePackageUpdateResult <: InterfaceWrapperBase & ComInterface {
         return __vt.OverallState(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StorePackageUpdateStatuses(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2305,10 +2311,15 @@ public struct IStoreContextVtbl {
     public var GetCustomerCollectionsIdAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var GetAppLicenseAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetStoreProductForCurrentAppAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetStoreProductsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAssociatedStoreProductsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAssociatedStoreProductsWithPagingAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetUserCollectionAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetUserCollectionWithPagingAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var ReportConsumableFulfillmentAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, GUID, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var GetConsumableBalanceRemainingAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -2316,9 +2327,13 @@ public struct IStoreContextVtbl {
     public var AcquireStoreLicenseForOptionalPackageAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var RequestPurchaseAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var RequestPurchaseWithPurchasePropertiesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAppAndOptionalStorePackageUpdatesAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var RequestDownloadStorePackageUpdatesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var RequestDownloadAndInstallStorePackageUpdatesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var RequestDownloadAndInstallStorePackagesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -2406,30 +2421,35 @@ public class IStoreContext <: InterfaceWrapperBase & ComInterface {
         return __vt.GetStoreProductForCurrentAppAsync(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetStoreProductsAsync(productKinds: CPointer<Unit>, storeIds: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetStoreProductsAsync(__liveRaw, productKinds, storeIds, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAssociatedStoreProductsAsync(productKinds: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAssociatedStoreProductsAsync(__liveRaw, productKinds, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAssociatedStoreProductsWithPagingAsync(productKinds: CPointer<Unit>, maxItemsToRetrievePerPage: UInt32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAssociatedStoreProductsWithPagingAsync(__liveRaw, productKinds, maxItemsToRetrievePerPage, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetUserCollectionAsync(productKinds: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetUserCollectionAsync(__liveRaw, productKinds, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetUserCollectionWithPagingAsync(productKinds: CPointer<Unit>, maxItemsToRetrievePerPage: UInt32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2467,24 +2487,28 @@ public class IStoreContext <: InterfaceWrapperBase & ComInterface {
         return __vt.RequestPurchaseWithPurchasePropertiesAsync(__liveRaw, storeId, storePurchaseProperties, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAppAndOptionalStorePackageUpdatesAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAppAndOptionalStorePackageUpdatesAsync(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RequestDownloadStorePackageUpdatesAsync(storePackageUpdates: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RequestDownloadStorePackageUpdatesAsync(__liveRaw, storePackageUpdates, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RequestDownloadAndInstallStorePackageUpdatesAsync(storePackageUpdates: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RequestDownloadAndInstallStorePackageUpdatesAsync(__liveRaw, storePackageUpdates, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RequestDownloadAndInstallStorePackagesAsync(storeIds: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2496,7 +2520,7 @@ public class IStoreContext <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IStoreContext2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindStoreProductForPackageAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -2541,7 +2565,7 @@ public class IStoreContext2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IStoreContext2Vtbl>(IStoreContext2Vtbl())
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindStoreProductForPackageAsync(productKinds: CPointer<Unit>, package_: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2554,15 +2578,22 @@ public class IStoreContext2 <: InterfaceWrapperBase & ComInterface {
 public struct IStoreContext3Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var CanSilentlyDownloadStorePackageUpdates: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var TrySilentDownloadStorePackageUpdatesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var TrySilentDownloadAndInstallStorePackageUpdatesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_ApplicationModel == "on"]
     public var CanAcquireStoreLicenseForOptionalPackageAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var CanAcquireStoreLicenseAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetStoreProductsWithOptionsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAssociatedStoreQueueItemsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetStoreQueueItemsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var RequestDownloadAndInstallStorePackagesWithInstallOptionsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var DownloadAndInstallStorePackagesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_ApplicationModel == "on"]
     public var RequestUninstallStorePackageAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -2619,12 +2650,14 @@ public class IStoreContext3 <: InterfaceWrapperBase & ComInterface {
         return __vt.CanSilentlyDownloadStorePackageUpdates(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TrySilentDownloadStorePackageUpdatesAsync(storePackageUpdates: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TrySilentDownloadStorePackageUpdatesAsync(__liveRaw, storePackageUpdates, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TrySilentDownloadAndInstallStorePackageUpdatesAsync(storePackageUpdates: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2644,30 +2677,35 @@ public class IStoreContext3 <: InterfaceWrapperBase & ComInterface {
         return __vt.CanAcquireStoreLicenseAsync(__liveRaw, productStoreId, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetStoreProductsWithOptionsAsync(productKinds: CPointer<Unit>, storeIds: CPointer<Unit>, storeProductOptions: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetStoreProductsWithOptionsAsync(__liveRaw, productKinds, storeIds, storeProductOptions, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAssociatedStoreQueueItemsAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAssociatedStoreQueueItemsAsync(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetStoreQueueItemsAsync(storeIds: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetStoreQueueItemsAsync(__liveRaw, storeIds, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RequestDownloadAndInstallStorePackagesWithInstallOptionsAsync(storeIds: CPointer<Unit>, storePackageInstallOptions: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RequestDownloadAndInstallStorePackagesWithInstallOptionsAsync(__liveRaw, storeIds, storePackageInstallOptions, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DownloadAndInstallStorePackagesAsync(storeIds: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2706,6 +2744,7 @@ public class IStoreContext3 <: InterfaceWrapperBase & ComInterface {
 public struct IStoreContext4Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var RequestRateAndReviewAppAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetInstallOrderForAssociatedStoreQueueItemsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -2756,6 +2795,7 @@ public class IStoreContext4 <: InterfaceWrapperBase & ComInterface {
         return __vt.RequestRateAndReviewAppAsync(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetInstallOrderForAssociatedStoreQueueItemsAsync(items: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2767,7 +2807,9 @@ public class IStoreContext4 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IStoreContext5Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetUserPurchaseHistoryAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAssociatedStoreProductsByInAppOfferTokenAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var RequestPurchaseByInAppOfferTokenAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -2813,12 +2855,14 @@ public class IStoreContext5 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IStoreContext5Vtbl>(IStoreContext5Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetUserPurchaseHistoryAsync(productKinds: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetUserPurchaseHistoryAsync(__liveRaw, productKinds, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAssociatedStoreProductsByInAppOfferTokenAsync(inAppOfferTokens: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2985,6 +3029,7 @@ public class IStorePackageLicense <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IStorePackageUpdateResult2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var StoreQueueItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -3029,6 +3074,7 @@ public class IStorePackageUpdateResult2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IStorePackageUpdateResult2Vtbl>(IStorePackageUpdateResult2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StoreQueueItems(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3046,9 +3092,13 @@ public struct IStoreProductVtbl {
     public var Description: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ProductKind: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var HasDigitalDownload: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Keywords: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Images: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Videos: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Skus: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IsInUserCollection: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var Price: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -3137,24 +3187,28 @@ public class IStoreProduct <: InterfaceWrapperBase & ComInterface {
         return __vt.HasDigitalDownload(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Keywords(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Keywords(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Images(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Images(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Videos(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Videos(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Skus(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3214,6 +3268,7 @@ public class IStoreProduct <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IStoreProductPagedQueryResultVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Products: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var HasMoreResults: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var ExtendedError: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.HResult>) -> Int32> = { _, _ => 0 }
@@ -3261,6 +3316,7 @@ public class IStoreProductPagedQueryResult <: InterfaceWrapperBase & ComInterfac
         readVtbl<IStoreProductPagedQueryResultVtbl>(IStoreProductPagedQueryResultVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Products(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3290,6 +3346,7 @@ public class IStoreProductPagedQueryResult <: InterfaceWrapperBase & ComInterfac
 @C
 public struct IStoreProductQueryResultVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Products: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ExtendedError: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.HResult>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -3335,6 +3392,7 @@ public class IStoreProductQueryResult <: InterfaceWrapperBase & ComInterface {
         readVtbl<IStoreProductQueryResultVtbl>(IStoreProductQueryResultVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Products(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3634,12 +3692,16 @@ public struct IStoreSkuVtbl {
     public var Description: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IsTrial: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var CustomDeveloperData: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Images: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Videos: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Availabilities: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Price: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ExtendedJsonData: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IsInUserCollection: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var BundledSkus: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CollectionData: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetIsInstalledAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -3726,18 +3788,21 @@ public class IStoreSku <: InterfaceWrapperBase & ComInterface {
         return __vt.CustomDeveloperData(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Images(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Images(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Videos(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Videos(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Availabilities(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3762,6 +3827,7 @@ public class IStoreSku <: InterfaceWrapperBase & ComInterface {
         return __vt.IsInUserCollection(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func BundledSkus(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

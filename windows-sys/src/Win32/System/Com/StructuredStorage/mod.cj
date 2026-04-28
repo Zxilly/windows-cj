@@ -17,4 +17,251 @@ public import windows_sys.Win32._impl_l2.{IPersistStorage, IPersistStorageVtbl, 
 public import windows_sys.Win32._impl_l1.{PROPBAG2, STATPROPSTG}
 @When[Windows_Win32_System_Com_StructuredStorage == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on")]
 public import windows_sys.Win32._impl_l2.PROPVARIANT
-
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_ClearPropVariantArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ClearPropVariantArray
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_CoGetInstanceFromFile == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoGetInstanceFromFile
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_CoGetInstanceFromIStorage == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoGetInstanceFromIStorage
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_CoGetInterfaceAndReleaseStream == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoGetInterfaceAndReleaseStream
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_CreateILockBytesOnHGlobal == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateILockBytesOnHGlobal
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_CreateStreamOnHGlobal == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateStreamOnHGlobal
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_FmtIdToPropStgName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FmtIdToPropStgName
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_FreePropVariantArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FreePropVariantArray
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_GetConvertStg == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetConvertStg
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_GetHGlobalFromILockBytes == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetHGlobalFromILockBytes
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_GetHGlobalFromStream == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetHGlobalFromStream
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromBooleanVector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitPropVariantFromBooleanVector
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromBuffer == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitPropVariantFromBuffer
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromCLSID == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitPropVariantFromCLSID
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromDoubleVector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitPropVariantFromDoubleVector
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromFileTime == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitPropVariantFromFileTime
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromFileTimeVector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitPropVariantFromFileTimeVector
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromGUIDAsString == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitPropVariantFromGUIDAsString
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromInt16Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitPropVariantFromInt16Vector
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromInt32Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitPropVariantFromInt32Vector
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromInt64Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitPropVariantFromInt64Vector
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromPropVariantVectorElem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitPropVariantFromPropVariantVectorElem
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromResource == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitPropVariantFromResource
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromStringAsVector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitPropVariantFromStringAsVector
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromStringVector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitPropVariantFromStringVector
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromUInt16Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitPropVariantFromUInt16Vector
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromUInt32Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitPropVariantFromUInt32Vector
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromUInt64Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitPropVariantFromUInt64Vector
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantVectorFromPropVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitPropVariantVectorFromPropVariant
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_OleConvertIStorageToOLESTREAM == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleConvertIStorageToOLESTREAM
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_OleConvertIStorageToOLESTREAMEx == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleConvertIStorageToOLESTREAMEx
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_OleConvertOLESTREAMToIStorage == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleConvertOLESTREAMToIStorage
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_OleConvertOLESTREAMToIStorageEx == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleConvertOLESTREAMToIStorageEx
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_PropStgNameToFmtId == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropStgNameToFmtId
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantChangeType == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantChangeType
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantClear == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantClear
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantCompareEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantCompareEx
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantCopy == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantCopy
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantGetBooleanElem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantGetBooleanElem
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantGetDoubleElem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantGetDoubleElem
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantGetElementCount == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantGetElementCount
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantGetFileTimeElem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantGetFileTimeElem
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantGetInt16Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantGetInt16Elem
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantGetInt32Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantGetInt32Elem
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantGetInt64Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantGetInt64Elem
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantGetStringElem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantGetStringElem
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantGetUInt16Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantGetUInt16Elem
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantGetUInt32Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantGetUInt32Elem
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantGetUInt64Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantGetUInt64Elem
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToBSTR == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToBSTR
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToBoolean == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToBoolean
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToBooleanVector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToBooleanVector
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToBooleanVectorAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToBooleanVectorAlloc
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToBooleanWithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToBooleanWithDefault
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToBuffer == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToBuffer
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToDouble == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToDouble
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToDoubleVector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToDoubleVector
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToDoubleVectorAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToDoubleVectorAlloc
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToDoubleWithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToDoubleWithDefault
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToFileTime == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToFileTime
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToFileTimeVector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToFileTimeVector
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToFileTimeVectorAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToFileTimeVectorAlloc
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToGUID == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToGUID
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt16 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToInt16
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt16Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToInt16Vector
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt16VectorAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToInt16VectorAlloc
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt16WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToInt16WithDefault
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt32 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToInt32
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt32Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToInt32Vector
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt32VectorAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToInt32VectorAlloc
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt32WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToInt32WithDefault
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt64 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToInt64
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt64Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToInt64Vector
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt64VectorAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToInt64VectorAlloc
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt64WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToInt64WithDefault
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToString == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToString
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToStringAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToStringAlloc
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToStringVector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToStringVector
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToStringVectorAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToStringVectorAlloc
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToStringWithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToStringWithDefault
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt16 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToUInt16
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt16Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToUInt16Vector
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt16VectorAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToUInt16VectorAlloc
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt16WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToUInt16WithDefault
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt32 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToUInt32
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt32Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToUInt32Vector
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt32VectorAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToUInt32VectorAlloc
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt32WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToUInt32WithDefault
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt64 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToUInt64
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt64Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToUInt64Vector
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt64VectorAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToUInt64VectorAlloc
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt64WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToUInt64WithDefault
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToVariant
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToWinRTPropertyValue == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToWinRTPropertyValue
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_ReadClassStg == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReadClassStg
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_ReadClassStm == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReadClassStm
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_ReadFmtUserTypeStg == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReadFmtUserTypeStg
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_SetConvertStg == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetConvertStg
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgConvertPropertyToVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StgConvertPropertyToVariant
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgConvertVariantToProperty == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StgConvertVariantToProperty
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgCreateDocfile == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StgCreateDocfile
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgCreateDocfileOnILockBytes == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StgCreateDocfileOnILockBytes
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgCreatePropSetStg == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StgCreatePropSetStg
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgCreatePropStg == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StgCreatePropStg
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgCreateStorageEx == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StgCreateStorageEx
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_StgDeserializePropVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StgDeserializePropVariant
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgGetIFillLockBytesOnFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StgGetIFillLockBytesOnFile
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgGetIFillLockBytesOnILockBytes == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StgGetIFillLockBytesOnILockBytes
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgIsStorageFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StgIsStorageFile
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgIsStorageILockBytes == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StgIsStorageILockBytes
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgOpenAsyncDocfileOnIFillLockBytes == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StgOpenAsyncDocfileOnIFillLockBytes
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && DFLAYOUT == "on" && Windows_Win32_System_Com_StructuredStorage_StgOpenLayoutDocfile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StgOpenLayoutDocfile
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgOpenPropStg == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StgOpenPropStg
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgOpenStorage == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StgOpenStorage
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgOpenStorageEx == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StgOpenStorageEx
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgOpenStorageOnILockBytes == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StgOpenStorageOnILockBytes
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgPropertyLengthAsVariant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StgPropertyLengthAsVariant
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_StgSerializePropVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StgSerializePropVariant
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgSetTimes == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StgSetTimes
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_VariantToPropVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VariantToPropVariant
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_WinRTPropertyValueToPropVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WinRTPropertyValueToPropVariant
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_WriteClassStg == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WriteClassStg
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_WriteClassStm == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WriteClassStm
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_WriteFmtUserTypeStg == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WriteFmtUserTypeStg

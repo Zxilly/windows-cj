@@ -4,7 +4,6 @@ package windows_sys.UI.Xaml._impl_l1
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_UI == "on"]
 import windows_sys.UI as UI
 @When[Windows_UI_Xaml_Interop == "on"]
 import windows_sys.UI.Xaml.Interop as UI_Xaml_Interop
@@ -29,7 +28,7 @@ public struct IAnchorRequestedEventArgsVtbl {
     public var Anchor: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Xaml == "on"]
     public var SetAnchor: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public var AnchorCandidates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -88,7 +87,7 @@ public class IAnchorRequestedEventArgs <: InterfaceWrapperBase & ComInterface {
         return __vt.SetAnchor(__liveRaw, value)
     }
 
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public unsafe func AnchorCandidates(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -943,9 +942,9 @@ public struct IBorderVtbl {
     public var Child: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Xaml == "on"]
     public var SetChild: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public var ChildTransitions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public var SetChildTransitions: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1074,14 +1073,14 @@ public class IBorder <: InterfaceWrapperBase & ComInterface {
         return __vt.SetChild(__liveRaw, value)
     }
 
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public unsafe func ChildTransitions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ChildTransitions(__liveRaw, result__)
     }
 
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public unsafe func SetChildTransitions(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1645,6 +1644,7 @@ public struct ICalendarViewVtbl {
     public var SetMinDate: CFunc<(CPointer<Unit>, Foundation__impl_l0.DateTime) -> Int32> = { _, _ => 0 }
     public var NumberOfWeeksInView: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetNumberOfWeeksInView: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SelectedDates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SelectionMode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetSelectionMode: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -1965,6 +1965,7 @@ public class ICalendarView <: InterfaceWrapperBase & ComInterface {
         return __vt.SetNumberOfWeeksInView(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SelectedDates(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -5099,9 +5100,9 @@ public struct IContentControlVtbl {
     public var SetContentTemplate: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var ContentTemplateSelector: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetContentTemplateSelector: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public var ContentTransitions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public var SetContentTransitions: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -5184,14 +5185,14 @@ public class IContentControl <: InterfaceWrapperBase & ComInterface {
         return __vt.SetContentTemplateSelector(__liveRaw, value)
     }
 
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public unsafe func ContentTransitions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ContentTransitions(__liveRaw, result__)
     }
 
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public unsafe func SetContentTransitions(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -5923,9 +5924,9 @@ public struct IContentPresenterVtbl {
     public var SetContentTemplate: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var ContentTemplateSelector: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetContentTemplateSelector: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public var ContentTransitions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public var SetContentTransitions: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var FontSize: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => 0 }
     public var SetFontSize: CFunc<(CPointer<Unit>, Float64) -> Int32> = { _, _ => 0 }
@@ -6032,14 +6033,14 @@ public class IContentPresenter <: InterfaceWrapperBase & ComInterface {
         return __vt.SetContentTemplateSelector(__liveRaw, value)
     }
 
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public unsafe func ContentTransitions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ContentTransitions(__liveRaw, result__)
     }
 
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public unsafe func SetContentTransitions(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -9084,9 +9085,9 @@ public class IFrame <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IFrame2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_UI_Xaml_Navigation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Navigation == "on"]
     public var BackStack: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Navigation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Navigation == "on"]
     public var ForwardStack: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Xaml_Interop == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public var Navigate: CFunc<(CPointer<Unit>, UI_Xaml_Interop.TypeName, CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _, _, _ => 0 }
@@ -9133,14 +9134,14 @@ public class IFrame2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IFrame2Vtbl>(IFrame2Vtbl())
     }
 
-    @When[Windows_UI_Xaml_Navigation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Navigation == "on"]
     public unsafe func BackStack(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.BackStack(__liveRaw, result__)
     }
 
-    @When[Windows_UI_Xaml_Navigation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Navigation == "on"]
     public unsafe func ForwardStack(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -9285,7 +9286,9 @@ public class IFrameFactory <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IGridVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var RowDefinitions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ColumnDefinitions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -9330,12 +9333,14 @@ public class IGrid <: InterfaceWrapperBase & ComInterface {
         readVtbl<IGridVtbl>(IGridVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RowDefinitions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RowDefinitions(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ColumnDefinitions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -10479,6 +10484,7 @@ public struct IHandwritingView2Vtbl {
     public var RemoveCandidatesChanged: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
     public var TextSubmitted: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveTextSubmitted: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetCandidates: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var SelectCandidate: CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -10586,6 +10592,7 @@ public class IHandwritingView2 <: InterfaceWrapperBase & ComInterface {
         return __vt.RemoveTextSubmitted(__liveRaw, token)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetCandidates(candidatesSessionId: UInt32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -10668,8 +10675,11 @@ public struct IHubVtbl {
     public var SetOrientation: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var DefaultSectionIndex: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetDefaultSectionIndex: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Sections: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SectionsInView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SectionHeaders: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SectionHeaderClick: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveSectionHeaderClick: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
@@ -10769,18 +10779,21 @@ public class IHub <: InterfaceWrapperBase & ComInterface {
         return __vt.SetDefaultSectionIndex(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Sections(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Sections(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SectionsInView(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SectionsInView(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SectionHeaders(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -11460,7 +11473,7 @@ public struct IInkToolbarVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var InitialControls: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetInitialControls: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public var Children: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ActiveTool: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetActiveTool: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -11535,7 +11548,7 @@ public class IInkToolbar <: InterfaceWrapperBase & ComInterface {
         return __vt.SetInitialControls(__liveRaw, value)
     }
 
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public unsafe func Children(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -12682,9 +12695,9 @@ public class IInkToolbarIsStencilButtonCheckedChangedEventArgs <: InterfaceWrapp
 @C
 public struct IInkToolbarPenButtonVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public var Palette: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public var SetPalette: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var MinStrokeWidth: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => 0 }
     public var SetMinStrokeWidth: CFunc<(CPointer<Unit>, Float64) -> Int32> = { _, _ => 0 }
@@ -12739,14 +12752,14 @@ public class IInkToolbarPenButton <: InterfaceWrapperBase & ComInterface {
         readVtbl<IInkToolbarPenButtonVtbl>(IInkToolbarPenButtonVtbl())
     }
 
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public unsafe func Palette(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Palette(__liveRaw, result__)
     }
 
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public unsafe func SetPalette(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -13274,6 +13287,7 @@ public struct IItemsControlVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var ItemsSource: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetItemsSource: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Items: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Xaml == "on"]
     public var ItemTemplate: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -13292,10 +13306,11 @@ public struct IItemsControlVtbl {
     public var ItemContainerStyleSelector: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetItemContainerStyleSelector: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var ItemContainerGenerator: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public var ItemContainerTransitions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public var SetItemContainerTransitions: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GroupStyle: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GroupStyleSelector: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetGroupStyleSelector: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -13355,6 +13370,7 @@ public class IItemsControl <: InterfaceWrapperBase & ComInterface {
         return __vt.SetItemsSource(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -13443,20 +13459,21 @@ public class IItemsControl <: InterfaceWrapperBase & ComInterface {
         return __vt.ItemContainerGenerator(__liveRaw, result__)
     }
 
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public unsafe func ItemContainerTransitions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ItemContainerTransitions(__liveRaw, result__)
     }
 
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public unsafe func SetItemContainerTransitions(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetItemContainerTransitions(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GroupStyle(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -13886,9 +13903,9 @@ public struct IItemsPresenterVtbl {
     public var HeaderTemplate: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Xaml == "on"]
     public var SetHeaderTemplate: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public var HeaderTransitions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public var SetHeaderTransitions: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Xaml == "on"]
     public var Padding: CFunc<(CPointer<Unit>, CPointer<UI_Xaml__impl_l0.Thickness>) -> Int32> = { _, _ => 0 }
@@ -13963,14 +13980,14 @@ public class IItemsPresenter <: InterfaceWrapperBase & ComInterface {
         return __vt.SetHeaderTemplate(__liveRaw, value)
     }
 
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public unsafe func HeaderTransitions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.HeaderTransitions(__liveRaw, result__)
     }
 
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public unsafe func SetHeaderTransitions(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -14002,9 +14019,9 @@ public struct IItemsPresenter2Vtbl {
     public var FooterTemplate: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Xaml == "on"]
     public var SetFooterTemplate: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public var FooterTransitions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public var SetFooterTransitions: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -14075,14 +14092,14 @@ public class IItemsPresenter2 <: InterfaceWrapperBase & ComInterface {
         return __vt.SetFooterTemplate(__liveRaw, value)
     }
 
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public unsafe func FooterTransitions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FooterTransitions(__liveRaw, result__)
     }
 
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public unsafe func SetFooterTransitions(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -14222,10 +14239,11 @@ public struct IListPickerFlyoutVtbl {
     public var SetSelectedValue: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var SelectedValuePath: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetSelectedValuePath: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SelectedItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ItemsPicked: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveItemsPicked: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public var ShowAtAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -14368,6 +14386,7 @@ public class IListPickerFlyout <: InterfaceWrapperBase & ComInterface {
         return __vt.SetSelectedValuePath(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SelectedItems(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -14386,7 +14405,7 @@ public class IListPickerFlyout <: InterfaceWrapperBase & ComInterface {
         return __vt.RemoveItemsPicked(__liveRaw, token)
     }
 
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public unsafe func ShowAtAsync(target: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -14398,6 +14417,7 @@ public class IListPickerFlyout <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IListViewBaseVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SelectedItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SelectionMode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetSelectionMode: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -14430,9 +14450,9 @@ public struct IListViewBaseVtbl {
     public var HeaderTemplate: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Xaml == "on"]
     public var SetHeaderTemplate: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public var HeaderTransitions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public var SetHeaderTransitions: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -14477,6 +14497,7 @@ public class IListViewBase <: InterfaceWrapperBase & ComInterface {
         readVtbl<IListViewBaseVtbl>(IListViewBaseVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SelectedItems(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -14654,14 +14675,14 @@ public class IListViewBase <: InterfaceWrapperBase & ComInterface {
         return __vt.SetHeaderTemplate(__liveRaw, value)
     }
 
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public unsafe func HeaderTransitions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.HeaderTransitions(__liveRaw, result__)
     }
 
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public unsafe func SetHeaderTransitions(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -14684,9 +14705,9 @@ public struct IListViewBase2Vtbl {
     public var FooterTemplate: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Xaml == "on"]
     public var SetFooterTemplate: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public var FooterTransitions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public var SetFooterTransitions: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -14787,14 +14808,14 @@ public class IListViewBase2 <: InterfaceWrapperBase & ComInterface {
         return __vt.SetFooterTemplate(__liveRaw, value)
     }
 
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public unsafe func FooterTransitions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FooterTransitions(__liveRaw, result__)
     }
 
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public unsafe func SetFooterTransitions(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -14806,7 +14827,7 @@ public class IListViewBase2 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IListViewBase4Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_UI_Xaml_Data == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Data == "on"]
     public var SelectedRanges: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IsMultiSelectCheckBoxEnabled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var SetIsMultiSelectCheckBoxEnabled: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
@@ -14863,7 +14884,7 @@ public class IListViewBase4 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IListViewBase4Vtbl>(IListViewBase4Vtbl())
     }
 
-    @When[Windows_UI_Xaml_Data == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Data == "on"]
     public unsafe func SelectedRanges(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -15311,7 +15332,7 @@ public struct IMediaElementVtbl {
     public var DownloadProgressOffset: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Xaml_Media == "on"]
     public var CurrentState: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public var Markers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CanSeek: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var CanPause: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
@@ -15575,7 +15596,7 @@ public class IMediaElement <: InterfaceWrapperBase & ComInterface {
         return __vt.CurrentState(__liveRaw, result__)
     }
 
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public unsafe func Markers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -16633,6 +16654,7 @@ public class IMediaTransportControlsHelperStatics <: InterfaceWrapperBase & ComI
 @C
 public struct IMenuBarVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Items: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -16677,6 +16699,7 @@ public class IMenuBar <: InterfaceWrapperBase & ComInterface {
         readVtbl<IMenuBarVtbl>(IMenuBarVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -16745,6 +16768,7 @@ public struct IMenuBarItemVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Title: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetTitle: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Items: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -16801,6 +16825,7 @@ public class IMenuBarItem <: InterfaceWrapperBase & ComInterface {
         return __vt.SetTitle(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -16922,6 +16947,7 @@ public class IMenuBarItemFlyoutFactory <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IMenuFlyoutVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Items: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Xaml == "on"]
     public var MenuFlyoutPresenterStyle: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -16970,6 +16996,7 @@ public class IMenuFlyout <: InterfaceWrapperBase & ComInterface {
         readVtbl<IMenuFlyoutVtbl>(IMenuFlyoutVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -17334,6 +17361,7 @@ public class IMenuFlyoutSeparatorFactory <: InterfaceWrapperBase & ComInterface 
 @C
 public struct IMenuFlyoutSubItemVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Items: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Text: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetText: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -17380,6 +17408,7 @@ public class IMenuFlyoutSubItem <: InterfaceWrapperBase & ComInterface {
         readVtbl<IMenuFlyoutSubItemVtbl>(IMenuFlyoutSubItemVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -17498,6 +17527,7 @@ public struct INavigationViewVtbl {
     public var SetPaneToggleButtonStyle: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var SelectedItem: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetSelectedItem: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var MenuItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var MenuItemsSource: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetMenuItemsSource: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -17737,6 +17767,7 @@ public class INavigationView <: InterfaceWrapperBase & ComInterface {
         return __vt.SetSelectedItem(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MenuItems(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -18922,15 +18953,16 @@ public class IPageOverrides <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IPanelVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Children: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Xaml_Media == "on"]
     public var Background: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Xaml_Media == "on"]
     public var SetBackground: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var IsItemsHost: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public var ChildrenTransitions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public var SetChildrenTransitions: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -18975,6 +19007,7 @@ public class IPanel <: InterfaceWrapperBase & ComInterface {
         readVtbl<IPanelVtbl>(IPanelVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Children(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -19001,14 +19034,14 @@ public class IPanel <: InterfaceWrapperBase & ComInterface {
         return __vt.IsItemsHost(__liveRaw, result__)
     }
 
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public unsafe func ChildrenTransitions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ChildrenTransitions(__liveRaw, result__)
     }
 
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public unsafe func SetChildrenTransitions(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -23307,7 +23340,7 @@ public struct IRichTextBlockVtbl {
     public var TextAlignment: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Xaml == "on"]
     public var SetTextAlignment: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Documents == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Documents == "on"]
     public var Blocks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Xaml == "on"]
     public var Padding: CFunc<(CPointer<Unit>, CPointer<UI_Xaml__impl_l0.Thickness>) -> Int32> = { _, _ => 0 }
@@ -23517,7 +23550,7 @@ public class IRichTextBlock <: InterfaceWrapperBase & ComInterface {
         return __vt.SetTextAlignment(__liveRaw, value)
     }
 
-    @When[Windows_UI_Xaml_Documents == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Documents == "on"]
     public unsafe func Blocks(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -23868,7 +23901,7 @@ public struct IRichTextBlock5Vtbl {
     public var HorizontalTextAlignment: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Xaml == "on"]
     public var SetHorizontalTextAlignment: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Documents == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Documents == "on"]
     public var TextHighlighters: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IsTextTrimmedChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveIsTextTrimmedChanged: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
@@ -23935,7 +23968,7 @@ public class IRichTextBlock5 <: InterfaceWrapperBase & ComInterface {
         return __vt.SetHorizontalTextAlignment(__liveRaw, value)
     }
 
-    @When[Windows_UI_Xaml_Documents == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Documents == "on"]
     public unsafe func TextHighlighters(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -25068,7 +25101,9 @@ public class ISearchBoxFactory <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ISectionsInViewChangedEventArgsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AddedSections: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var RemovedSections: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -25113,12 +25148,14 @@ public class ISectionsInViewChangedEventArgs <: InterfaceWrapperBase & ComInterf
         readVtbl<ISectionsInViewChangedEventArgsVtbl>(ISectionsInViewChangedEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AddedSections(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AddedSections(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RemovedSections(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -27524,7 +27561,7 @@ public struct ITextBlockVtbl {
     public var SetTextAlignment: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var Text: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetText: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Documents == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Documents == "on"]
     public var Inlines: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Xaml == "on"]
     public var Padding: CFunc<(CPointer<Unit>, CPointer<UI_Xaml__impl_l0.Thickness>) -> Int32> = { _, _ => 0 }
@@ -27749,7 +27786,7 @@ public class ITextBlock <: InterfaceWrapperBase & ComInterface {
         return __vt.SetText(__liveRaw, value)
     }
 
-    @When[Windows_UI_Xaml_Documents == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Documents == "on"]
     public unsafe func Inlines(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -28051,7 +28088,7 @@ public struct ITextBlock6Vtbl {
     public var HorizontalTextAlignment: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Xaml == "on"]
     public var SetHorizontalTextAlignment: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Documents == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Documents == "on"]
     public var TextHighlighters: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IsTextTrimmedChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveIsTextTrimmedChanged: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
@@ -28118,7 +28155,7 @@ public class ITextBlock6 <: InterfaceWrapperBase & ComInterface {
         return __vt.SetHorizontalTextAlignment(__liveRaw, value)
     }
 
-    @When[Windows_UI_Xaml_Documents == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Documents == "on"]
     public unsafe func TextHighlighters(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -30525,9 +30562,11 @@ public class IToolTipServiceStatics <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ITreeViewVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var RootNodes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SelectionMode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetSelectionMode: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SelectedNodes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Expand: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Collapse: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -30581,6 +30620,7 @@ public class ITreeView <: InterfaceWrapperBase & ComInterface {
         readVtbl<ITreeViewVtbl>(ITreeViewVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RootNodes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -30599,6 +30639,7 @@ public class ITreeView <: InterfaceWrapperBase & ComInterface {
         return __vt.SetSelectionMode(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SelectedNodes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -30688,9 +30729,9 @@ public struct ITreeView2Vtbl {
     public var SetItemContainerStyle: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var ItemContainerStyleSelector: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetItemContainerStyleSelector: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public var ItemContainerTransitions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public var SetItemContainerTransitions: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var ItemsSource: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetItemsSource: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -30845,14 +30886,14 @@ public class ITreeView2 <: InterfaceWrapperBase & ComInterface {
         return __vt.SetItemContainerStyleSelector(__liveRaw, value)
     }
 
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public unsafe func ItemContainerTransitions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ItemContainerTransitions(__liveRaw, result__)
     }
 
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public unsafe func SetItemContainerTransitions(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -32234,7 +32275,9 @@ public struct IWebViewVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Source: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetSource: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var AllowedScriptNotifyUris: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetAllowedScriptNotifyUris: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_ApplicationModel_DataTransfer == "on"]
     public var DataTransferPackage: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -32303,12 +32346,14 @@ public class IWebView <: InterfaceWrapperBase & ComInterface {
         return __vt.SetSource(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AllowedScriptNotifyUris(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AllowedScriptNotifyUris(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetAllowedScriptNotifyUris(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -32397,6 +32442,7 @@ public struct IWebView2Vtbl {
     public var Stop: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Storage_Streams == "on"]
     public var CapturePreviewToStreamAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var InvokeScriptAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_ApplicationModel_DataTransfer == "on"]
     public var CaptureSelectedContentToDataPackageAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -32555,6 +32601,7 @@ public class IWebView2 <: InterfaceWrapperBase & ComInterface {
         return __vt.CapturePreviewToStreamAsync(__liveRaw, stream, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InvokeScriptAsync(scriptName: CPointer<Unit>, arguments: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -32780,6 +32827,7 @@ public class IWebView3 <: InterfaceWrapperBase & ComInterface {
 public struct IWebView4Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var ExecutionMode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var DeferredPermissionRequests: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Settings: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var UnsupportedUriSchemeIdentified: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
@@ -32839,6 +32887,7 @@ public class IWebView4 <: InterfaceWrapperBase & ComInterface {
         return __vt.ExecutionMode(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DeferredPermissionRequests(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

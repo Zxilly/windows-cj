@@ -12,6 +12,7 @@ import windows_sys._impl_l0 as _impl_l0
 public struct ICoreTextCompositionCompletedEventArgsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var IsCanceled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CompositionSegments: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetDeferral: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -63,6 +64,7 @@ public class ICoreTextCompositionCompletedEventArgs <: InterfaceWrapperBase & Co
         return __vt.IsCanceled(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CompositionSegments(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

@@ -2254,6 +2254,7 @@ public class IRadialControllerButtonClickedEventArgs2 <: InterfaceWrapperBase & 
 @C
 public struct IRadialControllerConfigurationVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SetDefaultMenuItems: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var ResetToDefaultMenuItems: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var TrySelectDefaultMenuItem: CFunc<(CPointer<Unit>, Int32, CPointer<Bool>) -> Int32> = { _, _, _ => 0 }
@@ -2300,6 +2301,7 @@ public class IRadialControllerConfiguration <: InterfaceWrapperBase & ComInterfa
         readVtbl<IRadialControllerConfigurationVtbl>(IRadialControllerConfigurationVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetDefaultMenuItems(buttons: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

@@ -4,11 +4,8 @@ package windows_sys.UI.Shell
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_Graphics_Imaging == "on"]
 import windows_sys.Graphics.Imaging as Graphics_Imaging
-@When[Windows_UI == "on"]
 import windows_sys.UI as UI
-@When[Windows_UI_StartScreen == "on"]
 import windows_sys.UI.StartScreen as UI_StartScreen
 import windows_sys._impl_l1 as _impl_l1
 import windows_sys._impl_l2 as _impl_l2

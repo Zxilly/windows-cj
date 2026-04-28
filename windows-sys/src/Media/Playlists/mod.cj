@@ -45,12 +45,12 @@ public struct PlaylistsContract {
 @C
 public struct IPlaylistVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var Files: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SaveAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var SaveAsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var SaveAsWithFormatAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Int32, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -95,7 +95,7 @@ public class IPlaylist <: InterfaceWrapperBase & ComInterface {
         readVtbl<IPlaylistVtbl>(IPlaylistVtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func Files(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -108,14 +108,14 @@ public class IPlaylist <: InterfaceWrapperBase & ComInterface {
         return __vt.SaveAsync(__liveRaw, result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func SaveAsAsync(saveLocation: CPointer<Unit>, desiredName: CPointer<Unit>, option: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SaveAsAsync(__liveRaw, saveLocation, desiredName, option, result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func SaveAsWithFormatAsync(saveLocation: CPointer<Unit>, desiredName: CPointer<Unit>, option: Int32, playlistFormat: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

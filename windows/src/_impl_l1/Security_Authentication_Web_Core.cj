@@ -86,7 +86,7 @@ public class FindAllAccountsResult <: InterfaceWrapperBase & ComInterface & wind
         }
     }
 
-    @When[Windows_Security_Credentials == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Credentials == "on"]
     public unsafe func Accounts(): windows_collections.IVectorView<WebAccount> {
         return defaultInterface().Accounts()
     }
@@ -122,9 +122,9 @@ extend FindAllAccountsResult <: windows_core.HandleWinrtType<FindAllAccountsResu
 @C
 public struct IFindAllAccountsResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Security_Credentials == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Credentials == "on"]
     public var Accounts: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Security_Credentials != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Security_Credentials != "on"]
     public var Accounts: UIntNative = UIntNative(0)
     public var Status: CFunc<(CPointer<Unit>, CPointer<_impl_l0.FindAllWebAccountsStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ProviderError: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -196,7 +196,7 @@ public class IFindAllAccountsResult <: InterfaceWrapperBase & ComInterface & Run
         readVtbl<IFindAllAccountsResultVtbl>(IFindAllAccountsResultVtbl())
     }
 
-    @When[Windows_Security_Credentials == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Credentials == "on"]
     public unsafe func Accounts(): windows_collections.IVectorView<WebAccount> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -538,7 +538,10 @@ public struct IWebAuthenticationAddAccountResponseVtbl {
     public var get_WebAccount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Security_Credentials != "on"]
     public var get_WebAccount: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -616,6 +619,7 @@ public class IWebAuthenticationAddAccountResponse <: InterfaceWrapperBase & ComI
         return WebAccount.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMap<windows_core.HString, windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -830,7 +834,10 @@ public struct IWebAuthenticationTransferTokenRequestVtbl {
     public var get_WebAccountProvider: UIntNative = UIntNative(0)
     public var TransferToken: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetTransferToken: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     public var CorrelationId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetCorrelationId: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -924,6 +931,7 @@ public class IWebAuthenticationTransferTokenRequest <: InterfaceWrapperBase & Co
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMap<windows_core.HString, windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1063,7 +1071,10 @@ public struct IWebTokenRequestVtbl {
     public var Scope: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ClientId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var PromptType: CFunc<(CPointer<Unit>, CPointer<_impl_l0.WebTokenRequestPromptTypeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1165,6 +1176,7 @@ public class IWebTokenRequest <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.WebTokenRequestPromptType>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMap<windows_core.HString, windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1309,7 +1321,10 @@ extend IWebTokenRequestFactory <: windows_core.Interface<IWebTokenRequestFactory
 @C
 public struct IWebTokenRequestResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ResponseData: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ResponseData: UIntNative = UIntNative(0)
     public var ResponseStatus: CFunc<(CPointer<Unit>, CPointer<_impl_l0.WebTokenRequestStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ResponseError: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var InvalidateCacheAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1381,6 +1396,7 @@ public class IWebTokenRequestResult <: InterfaceWrapperBase & ComInterface & Run
         readVtbl<IWebTokenRequestResultVtbl>(IWebTokenRequestResultVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ResponseData(): windows_collections.IVectorView<WebTokenResponse> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1427,7 +1443,10 @@ public struct IWebTokenResponseVtbl {
     public var get_WebAccount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Security_Credentials != "on"]
     public var get_WebAccount: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1521,6 +1540,7 @@ public class IWebTokenResponse <: InterfaceWrapperBase & ComInterface & RuntimeN
         return WebAccount.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMap<windows_core.HString, windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1923,6 +1943,7 @@ public class WebAuthenticationAddAccountResponse <: InterfaceWrapperBase & ComIn
         return defaultInterface().get_WebAccount()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMap<windows_core.HString, windows_core.HString> {
         return defaultInterface().Properties()
     }
@@ -2040,6 +2061,7 @@ public class WebAuthenticationTransferTokenRequest <: InterfaceWrapperBase & Com
         defaultInterface().SetTransferToken(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMap<windows_core.HString, windows_core.HString> {
         return defaultInterface().Properties()
     }
@@ -2181,6 +2203,7 @@ public class WebTokenRequest <: InterfaceWrapperBase & ComInterface & windows_in
         return defaultInterface().PromptType()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMap<windows_core.HString, windows_core.HString> {
         return defaultInterface().Properties()
     }
@@ -2345,6 +2368,7 @@ public class WebTokenResponse <: InterfaceWrapperBase & ComInterface & windows_i
         return defaultInterface().get_WebAccount()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMap<windows_core.HString, windows_core.HString> {
         return defaultInterface().Properties()
     }

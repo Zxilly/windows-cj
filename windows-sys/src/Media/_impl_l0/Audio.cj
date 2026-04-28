@@ -3,7 +3,6 @@ package windows_sys.Media._impl_l0
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Foundation_Numerics == "on"]
 import windows_sys.Foundation.Numerics as Foundation_Numerics
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
 
@@ -575,7 +574,7 @@ public struct IAudioFileInputNodeVtbl {
     public var LoopCount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetLoopCount: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Duration: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.TimeSpan>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var SourceFile: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var FileCompleted: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveFileCompleted: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
@@ -688,7 +687,7 @@ public class IAudioFileInputNode <: InterfaceWrapperBase & ComInterface {
         return __vt.Duration(__liveRaw, result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func SourceFile(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1373,9 +1372,9 @@ public class IAudioGraph2 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IAudioGraph3Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Media_Core == "on" && Windows_Media_Core == "on" && Windows_Media_Playback == "on"]
     public var CreateMediaSourceAudioInputNodeAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Media_Core == "on" && Windows_Media_Core == "on" && Windows_Media_Playback == "on"]
     public var CreateMediaSourceAudioInputNodeWithEmitterAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -1420,14 +1419,14 @@ public class IAudioGraph3 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IAudioGraph3Vtbl>(IAudioGraph3Vtbl())
     }
 
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Media_Core == "on" && Windows_Media_Core == "on" && Windows_Media_Playback == "on"]
     public unsafe func CreateMediaSourceAudioInputNodeAsync(mediaSource: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateMediaSourceAudioInputNodeAsync(__liveRaw, mediaSource, result__)
     }
 
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Media_Core == "on" && Windows_Media_Core == "on" && Windows_Media_Playback == "on"]
     public unsafe func CreateMediaSourceAudioInputNodeWithEmitterAsync(mediaSource: CPointer<Unit>, emitter: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1885,6 +1884,7 @@ public class IAudioGraphUnrecoverableErrorOccurredEventArgs <: InterfaceWrapperB
 @C
 public struct IAudioInputNodeVtbl {
     public var base_: IAudioNodeVtbl = IAudioNodeVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var OutgoingConnections: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var AddOutgoingConnection: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var AddOutgoingConnectionWithGain: CFunc<(CPointer<Unit>, CPointer<Unit>, Float64) -> Int32> = { _, _, _ => 0 }
@@ -1932,6 +1932,7 @@ public class IAudioInputNode <: InterfaceWrapperBase & ComInterface {
         readVtbl<IAudioInputNodeVtbl>(IAudioInputNodeVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OutgoingConnections(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2016,7 +2017,7 @@ public class IAudioInputNode2 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IAudioNodeVtbl {
     public var base_: Foundation__impl_l0.IClosableVtbl = Foundation__impl_l0.IClosableVtbl()
-    @When[Windows_Media_Effects == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on"]
     public var EffectDefinitions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetOutgoingGain: CFunc<(CPointer<Unit>, Float64) -> Int32> = { _, _ => 0 }
     public var OutgoingGain: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => 0 }
@@ -2074,7 +2075,7 @@ public class IAudioNode <: InterfaceWrapperBase & ComInterface {
         readVtbl<IAudioNodeVtbl>(IAudioNodeVtbl())
     }
 
-    @When[Windows_Media_Effects == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on"]
     public unsafe func EffectDefinitions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4209,6 +4210,7 @@ public class IEchoEffectDefinition <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IEchoEffectDefinitionFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Media_Effects == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -4253,6 +4255,7 @@ public class IEchoEffectDefinitionFactory <: InterfaceWrapperBase & ComInterface
         readVtbl<IEchoEffectDefinitionFactoryVtbl>(IEchoEffectDefinitionFactoryVtbl())
     }
 
+    @When[Windows_Media_Effects == "on"]
     public unsafe func Create(audioGraph: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4354,6 +4357,7 @@ public class IEqualizerBand <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IEqualizerEffectDefinitionVtbl {
     public var base_: IAudioEffectDefinitionVtbl = IAudioEffectDefinitionVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Bands: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -4398,6 +4402,7 @@ public class IEqualizerEffectDefinition <: InterfaceWrapperBase & ComInterface {
         readVtbl<IEqualizerEffectDefinitionVtbl>(IEqualizerEffectDefinitionVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Bands(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4409,6 +4414,7 @@ public class IEqualizerEffectDefinition <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IEqualizerEffectDefinitionFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Media_Effects == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -4453,6 +4459,7 @@ public class IEqualizerEffectDefinitionFactory <: InterfaceWrapperBase & ComInte
         readVtbl<IEqualizerEffectDefinitionFactoryVtbl>(IEqualizerEffectDefinitionFactoryVtbl())
     }
 
+    @When[Windows_Media_Effects == "on"]
     public unsafe func Create(audioGraph: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4595,6 +4602,7 @@ public class ILimiterEffectDefinition <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ILimiterEffectDefinitionFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Media_Effects == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -4639,6 +4647,7 @@ public class ILimiterEffectDefinitionFactory <: InterfaceWrapperBase & ComInterf
         readVtbl<ILimiterEffectDefinitionFactoryVtbl>(ILimiterEffectDefinitionFactoryVtbl())
     }
 
+    @When[Windows_Media_Effects == "on"]
     public unsafe func Create(audioGraph: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4661,7 +4670,7 @@ public struct IMediaSourceAudioInputNodeVtbl {
     public var LoopCount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetLoopCount: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Duration: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.TimeSpan>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Media_Core == "on" && Windows_Media_Core == "on" && Windows_Media_Playback == "on"]
     public var MediaSource: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var MediaSourceCompleted: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveMediaSourceCompleted: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
@@ -4774,7 +4783,7 @@ public class IMediaSourceAudioInputNode <: InterfaceWrapperBase & ComInterface {
         return __vt.Duration(__liveRaw, result__)
     }
 
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Media_Core == "on" && Windows_Media_Core == "on" && Windows_Media_Playback == "on"]
     public unsafe func MediaSource(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -5168,6 +5177,7 @@ public class IReverbEffectDefinition <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IReverbEffectDefinitionFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Media_Effects == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -5212,6 +5222,7 @@ public class IReverbEffectDefinitionFactory <: InterfaceWrapperBase & ComInterfa
         readVtbl<IReverbEffectDefinitionFactoryVtbl>(IReverbEffectDefinitionFactoryVtbl())
     }
 
+    @When[Windows_Media_Effects == "on"]
     public unsafe func Create(audioGraph: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

@@ -5,13 +5,9 @@ import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrap
 import windows_interface as windows_interface
 import windows_polyfill.{packedReadUInt16, packedReadValue, packedWriteUInt16, packedWriteValue, unionReadInt32, unionReadUInt32, unionWriteInt32, unionWriteUInt32}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_NetworkManagement_Ndis == "on"]
 import windows_sys.Win32.NetworkManagement.Ndis as Win32_NetworkManagement_Ndis
-@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on"]
 import windows_sys.Win32.Security.ExtensibleAuthenticationProtocol as Win32_Security_ExtensibleAuthenticationProtocol
-@When[Windows_Win32_System_RemoteDesktop == "on"]
 import windows_sys.Win32.System.RemoteDesktop as Win32_System_RemoteDesktop
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 
@@ -7738,169 +7734,702 @@ public class IEnumDot11AdHocNetworks <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[WLANAPI == "on"]
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WFDCancelOpenSession == "on"]
 foreign {
     func WFDCancelOpenSession(hSessionHandle: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WFDCancelOpenSession == "on"]
+public unsafe func Windows_WFDCancelOpenSession(hSessionHandle: CPointer<Unit>): UInt32 {
+    return WFDCancelOpenSession(hSessionHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WFDCloseHandle == "on"]
+foreign {
     func WFDCloseHandle(hClientHandle: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WFDCloseHandle == "on"]
+public unsafe func Windows_WFDCloseHandle(hClientHandle: CPointer<Unit>): UInt32 {
+    return WFDCloseHandle(hClientHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WFDCloseSession == "on"]
+foreign {
     func WFDCloseSession(hSessionHandle: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WFDCloseSession == "on"]
+public unsafe func Windows_WFDCloseSession(hSessionHandle: CPointer<Unit>): UInt32 {
+    return WFDCloseSession(hSessionHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WFDOpenHandle == "on"]
+foreign {
     func WFDOpenHandle(dwClientVersion: UInt32, pdwNegotiatedVersion: CPointer<UInt32>, phClientHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WFDOpenHandle == "on"]
+public unsafe func Windows_WFDOpenHandle(dwClientVersion: UInt32, pdwNegotiatedVersion: CPointer<UInt32>, phClientHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return WFDOpenHandle(dwClientVersion, pdwNegotiatedVersion, phClientHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WFDOpenLegacySession == "on"]
+foreign {
     func WFDOpenLegacySession(hClientHandle: CPointer<Unit>, pLegacyMacAddress: CPointer<CPointer<UInt8>>, phSessionHandle: CPointer<CPointer<Unit>>, pGuidSessionInterface: CPointer<GUID>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WFDOpenLegacySession == "on"]
+public unsafe func Windows_WFDOpenLegacySession(hClientHandle: CPointer<Unit>, pLegacyMacAddress: CPointer<CPointer<UInt8>>, phSessionHandle: CPointer<CPointer<Unit>>, pGuidSessionInterface: CPointer<GUID>): UInt32 {
+    return WFDOpenLegacySession(hClientHandle, pLegacyMacAddress, phSessionHandle, pGuidSessionInterface)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WFDStartOpenSession == "on"]
+foreign {
     // param-hint: pvContext optional
     func WFDStartOpenSession(hClientHandle: CPointer<Unit>, pDeviceAddress: CPointer<CPointer<UInt8>>, pvContext: CPointer<Unit>, pfnCallback: WFD_OPEN_SESSION_COMPLETE_CALLBACK, phSessionHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WFDStartOpenSession == "on"]
+public unsafe func Windows_WFDStartOpenSession(hClientHandle: CPointer<Unit>, pDeviceAddress: CPointer<CPointer<UInt8>>, pvContext: CPointer<Unit>, pfnCallback: WFD_OPEN_SESSION_COMPLETE_CALLBACK, phSessionHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return WFDStartOpenSession(hClientHandle, pDeviceAddress, pvContext, pfnCallback, phSessionHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WFDUpdateDeviceVisibility == "on"]
+foreign {
     func WFDUpdateDeviceVisibility(pDeviceAddress: CPointer<CPointer<UInt8>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WFDUpdateDeviceVisibility == "on"]
+public unsafe func Windows_WFDUpdateDeviceVisibility(pDeviceAddress: CPointer<CPointer<UInt8>>): UInt32 {
+    return WFDUpdateDeviceVisibility(pDeviceAddress)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanAllocateMemory == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func WlanAllocateMemory(dwMemorySize: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanAllocateMemory == "on"]
+public unsafe func Windows_WlanAllocateMemory(dwMemorySize: UInt32): CPointer<Unit> {
+    return WlanAllocateMemory(dwMemorySize)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanCloseHandle == "on"]
+foreign {
     // param-hint: pReserved optional reserved
     func WlanCloseHandle(hClientHandle: CPointer<Unit>, pReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanCloseHandle == "on"]
+public unsafe func Windows_WlanCloseHandle(hClientHandle: CPointer<Unit>, pReserved: CPointer<Unit>): UInt32 {
+    return WlanCloseHandle(hClientHandle, pReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanConnect == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+foreign {
+    // param-hint: pReserved optional reserved
+    func WlanConnect(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, pConnectionParameters: CPointer<WLAN_CONNECTION_PARAMETERS>, pReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanConnect == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public unsafe func Windows_WlanConnect(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, pConnectionParameters: CPointer<WLAN_CONNECTION_PARAMETERS>, pReserved: CPointer<Unit>): UInt32 {
+    return WlanConnect(hClientHandle, pInterfaceGuid, pConnectionParameters, pReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanConnect2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+foreign {
+    // param-hint: pReserved optional reserved
+    func WlanConnect2(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, pConnectionParameters: CPointer<WLAN_CONNECTION_PARAMETERS_V2>, pReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanConnect2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public unsafe func Windows_WlanConnect2(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, pConnectionParameters: CPointer<WLAN_CONNECTION_PARAMETERS_V2>, pReserved: CPointer<Unit>): UInt32 {
+    return WlanConnect2(hClientHandle, pInterfaceGuid, pConnectionParameters, pReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanDeleteProfile == "on"]
+foreign {
     // param-hint: pReserved optional reserved
     func WlanDeleteProfile(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, strProfileName: CPointer<UInt16>, pReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanDeleteProfile == "on"]
+public unsafe func Windows_WlanDeleteProfile(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, strProfileName: CPointer<UInt16>, pReserved: CPointer<Unit>): UInt32 {
+    return WlanDeleteProfile(hClientHandle, pInterfaceGuid, strProfileName, pReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanDeviceServiceCommand == "on"]
+foreign {
     // param-hint: pInBuffer bytes=param[4] optional
     // param-hint: pOutBuffer bytes=param[6] optional
     func WlanDeviceServiceCommand(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, pDeviceServiceGuid: CPointer<GUID>, dwOpCode: UInt32, dwInBufferSize: UInt32, pInBuffer: CPointer<Unit>, dwOutBufferSize: UInt32, pOutBuffer: CPointer<Unit>, pdwBytesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanDeviceServiceCommand == "on"]
+public unsafe func Windows_WlanDeviceServiceCommand(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, pDeviceServiceGuid: CPointer<GUID>, dwOpCode: UInt32, dwInBufferSize: UInt32, pInBuffer: CPointer<Unit>, dwOutBufferSize: UInt32, pOutBuffer: CPointer<Unit>, pdwBytesReturned: CPointer<UInt32>): UInt32 {
+    return WlanDeviceServiceCommand(hClientHandle, pInterfaceGuid, pDeviceServiceGuid, dwOpCode, dwInBufferSize, pInBuffer, dwOutBufferSize, pOutBuffer, pdwBytesReturned)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanDisconnect == "on"]
+foreign {
     // param-hint: pReserved optional reserved
     func WlanDisconnect(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, pReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanDisconnect == "on"]
+public unsafe func Windows_WlanDisconnect(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, pReserved: CPointer<Unit>): UInt32 {
+    return WlanDisconnect(hClientHandle, pInterfaceGuid, pReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanEnumInterfaces == "on"]
+foreign {
     // param-hint: pReserved optional reserved
     func WlanEnumInterfaces(hClientHandle: CPointer<Unit>, pReserved: CPointer<Unit>, ppInterfaceList: CPointer<CPointer<WLAN_INTERFACE_INFO_LIST>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanEnumInterfaces == "on"]
+public unsafe func Windows_WlanEnumInterfaces(hClientHandle: CPointer<Unit>, pReserved: CPointer<Unit>, ppInterfaceList: CPointer<CPointer<WLAN_INTERFACE_INFO_LIST>>): UInt32 {
+    return WlanEnumInterfaces(hClientHandle, pReserved, ppInterfaceList)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanExtractPsdIEDataList == "on"]
+foreign {
     // param-hint: pRawIeData bytes=param[1]
     // param-hint: pReserved optional reserved
     func WlanExtractPsdIEDataList(hClientHandle: CPointer<Unit>, dwIeDataSize: UInt32, pRawIeData: CPointer<UInt8>, strFormat: CPointer<UInt16>, pReserved: CPointer<Unit>, ppPsdIEDataList: CPointer<CPointer<WLAN_RAW_DATA_LIST>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanExtractPsdIEDataList == "on"]
+public unsafe func Windows_WlanExtractPsdIEDataList(hClientHandle: CPointer<Unit>, dwIeDataSize: UInt32, pRawIeData: CPointer<UInt8>, strFormat: CPointer<UInt16>, pReserved: CPointer<Unit>, ppPsdIEDataList: CPointer<CPointer<WLAN_RAW_DATA_LIST>>): UInt32 {
+    return WlanExtractPsdIEDataList(hClientHandle, dwIeDataSize, pRawIeData, strFormat, pReserved, ppPsdIEDataList)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanFreeMemory == "on"]
+foreign {
     func WlanFreeMemory(pMemory: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanFreeMemory == "on"]
+public unsafe func Windows_WlanFreeMemory(pMemory: CPointer<Unit>): Unit {
+    WlanFreeMemory(pMemory)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanGetAvailableNetworkList == "on"]
+foreign {
     // param-hint: pReserved optional reserved
     func WlanGetAvailableNetworkList(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, dwFlags: UInt32, pReserved: CPointer<Unit>, ppAvailableNetworkList: CPointer<CPointer<WLAN_AVAILABLE_NETWORK_LIST>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanGetAvailableNetworkList == "on"]
+public unsafe func Windows_WlanGetAvailableNetworkList(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, dwFlags: UInt32, pReserved: CPointer<Unit>, ppAvailableNetworkList: CPointer<CPointer<WLAN_AVAILABLE_NETWORK_LIST>>): UInt32 {
+    return WlanGetAvailableNetworkList(hClientHandle, pInterfaceGuid, dwFlags, pReserved, ppAvailableNetworkList)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanGetAvailableNetworkList2 == "on"]
+foreign {
     // param-hint: pReserved optional reserved
     func WlanGetAvailableNetworkList2(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, dwFlags: UInt32, pReserved: CPointer<Unit>, ppAvailableNetworkList: CPointer<CPointer<WLAN_AVAILABLE_NETWORK_LIST_V2>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanGetAvailableNetworkList2 == "on"]
+public unsafe func Windows_WlanGetAvailableNetworkList2(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, dwFlags: UInt32, pReserved: CPointer<Unit>, ppAvailableNetworkList: CPointer<CPointer<WLAN_AVAILABLE_NETWORK_LIST_V2>>): UInt32 {
+    return WlanGetAvailableNetworkList2(hClientHandle, pInterfaceGuid, dwFlags, pReserved, ppAvailableNetworkList)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanGetFilterList == "on"]
+foreign {
     // param-hint: pReserved optional reserved
     func WlanGetFilterList(hClientHandle: CPointer<Unit>, wlanFilterListType: Int32, pReserved: CPointer<Unit>, ppNetworkList: CPointer<CPointer<DOT11_NETWORK_LIST>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanGetFilterList == "on"]
+public unsafe func Windows_WlanGetFilterList(hClientHandle: CPointer<Unit>, wlanFilterListType: Int32, pReserved: CPointer<Unit>, ppNetworkList: CPointer<CPointer<DOT11_NETWORK_LIST>>): UInt32 {
+    return WlanGetFilterList(hClientHandle, wlanFilterListType, pReserved, ppNetworkList)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanGetInterfaceCapability == "on"]
+foreign {
     // param-hint: pReserved optional reserved
     func WlanGetInterfaceCapability(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, pReserved: CPointer<Unit>, ppCapability: CPointer<CPointer<WLAN_INTERFACE_CAPABILITY>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanGetInterfaceCapability == "on"]
+public unsafe func Windows_WlanGetInterfaceCapability(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, pReserved: CPointer<Unit>, ppCapability: CPointer<CPointer<WLAN_INTERFACE_CAPABILITY>>): UInt32 {
+    return WlanGetInterfaceCapability(hClientHandle, pInterfaceGuid, pReserved, ppCapability)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanGetNetworkBssList == "on"]
+foreign {
     // param-hint: pDot11Ssid optional
     // param-hint: pReserved optional reserved
     func WlanGetNetworkBssList(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, pDot11Ssid: CPointer<DOT11_SSID>, dot11BssType: Int32, bSecurityEnabled: Int32, pReserved: CPointer<Unit>, ppWlanBssList: CPointer<CPointer<WLAN_BSS_LIST>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanGetNetworkBssList == "on"]
+public unsafe func Windows_WlanGetNetworkBssList(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, pDot11Ssid: CPointer<DOT11_SSID>, dot11BssType: Int32, bSecurityEnabled: Int32, pReserved: CPointer<Unit>, ppWlanBssList: CPointer<CPointer<WLAN_BSS_LIST>>): UInt32 {
+    return WlanGetNetworkBssList(hClientHandle, pInterfaceGuid, pDot11Ssid, dot11BssType, bSecurityEnabled, pReserved, ppWlanBssList)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanGetProfile == "on"]
+foreign {
     // param-hint: pReserved optional reserved
     // param-hint: pdwFlags optional
     // param-hint: pdwGrantedAccess optional
     func WlanGetProfile(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, strProfileName: CPointer<UInt16>, pReserved: CPointer<Unit>, pstrProfileXml: CPointer<CPointer<UInt16>>, pdwFlags: CPointer<UInt32>, pdwGrantedAccess: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanGetProfile == "on"]
+public unsafe func Windows_WlanGetProfile(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, strProfileName: CPointer<UInt16>, pReserved: CPointer<Unit>, pstrProfileXml: CPointer<CPointer<UInt16>>, pdwFlags: CPointer<UInt32>, pdwGrantedAccess: CPointer<UInt32>): UInt32 {
+    return WlanGetProfile(hClientHandle, pInterfaceGuid, strProfileName, pReserved, pstrProfileXml, pdwFlags, pdwGrantedAccess)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanGetProfileCustomUserData == "on"]
+foreign {
     // param-hint: pReserved optional reserved
     func WlanGetProfileCustomUserData(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, strProfileName: CPointer<UInt16>, pReserved: CPointer<Unit>, pdwDataSize: CPointer<UInt32>, ppData: CPointer<CPointer<UInt8>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanGetProfileCustomUserData == "on"]
+public unsafe func Windows_WlanGetProfileCustomUserData(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, strProfileName: CPointer<UInt16>, pReserved: CPointer<Unit>, pdwDataSize: CPointer<UInt32>, ppData: CPointer<CPointer<UInt8>>): UInt32 {
+    return WlanGetProfileCustomUserData(hClientHandle, pInterfaceGuid, strProfileName, pReserved, pdwDataSize, ppData)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanGetProfileList == "on"]
+foreign {
     // param-hint: pReserved optional reserved
     func WlanGetProfileList(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, pReserved: CPointer<Unit>, ppProfileList: CPointer<CPointer<WLAN_PROFILE_INFO_LIST>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanGetProfileList == "on"]
+public unsafe func Windows_WlanGetProfileList(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, pReserved: CPointer<Unit>, ppProfileList: CPointer<CPointer<WLAN_PROFILE_INFO_LIST>>): UInt32 {
+    return WlanGetProfileList(hClientHandle, pInterfaceGuid, pReserved, ppProfileList)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanGetSecuritySettings == "on"]
+foreign {
     // param-hint: pValueType optional
     func WlanGetSecuritySettings(hClientHandle: CPointer<Unit>, SecurableObject: Int32, pValueType: CPointer<Int32>, pstrCurrentSDDL: CPointer<CPointer<UInt16>>, pdwGrantedAccess: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanGetSecuritySettings == "on"]
+public unsafe func Windows_WlanGetSecuritySettings(hClientHandle: CPointer<Unit>, SecurableObject: Int32, pValueType: CPointer<Int32>, pstrCurrentSDDL: CPointer<CPointer<UInt16>>, pdwGrantedAccess: CPointer<UInt32>): UInt32 {
+    return WlanGetSecuritySettings(hClientHandle, SecurableObject, pValueType, pstrCurrentSDDL, pdwGrantedAccess)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanGetSupportedDeviceServices == "on"]
+foreign {
     func WlanGetSupportedDeviceServices(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, ppDevSvcGuidList: CPointer<CPointer<WLAN_DEVICE_SERVICE_GUID_LIST>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanGetSupportedDeviceServices == "on"]
+public unsafe func Windows_WlanGetSupportedDeviceServices(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, ppDevSvcGuidList: CPointer<CPointer<WLAN_DEVICE_SERVICE_GUID_LIST>>): UInt32 {
+    return WlanGetSupportedDeviceServices(hClientHandle, pInterfaceGuid, ppDevSvcGuidList)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanHostedNetworkForceStart == "on"]
+foreign {
     // param-hint: pFailReason optional
     // param-hint: pvReserved optional reserved
     func WlanHostedNetworkForceStart(hClientHandle: CPointer<Unit>, pFailReason: CPointer<Int32>, pvReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanHostedNetworkForceStart == "on"]
+public unsafe func Windows_WlanHostedNetworkForceStart(hClientHandle: CPointer<Unit>, pFailReason: CPointer<Int32>, pvReserved: CPointer<Unit>): UInt32 {
+    return WlanHostedNetworkForceStart(hClientHandle, pFailReason, pvReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanHostedNetworkForceStop == "on"]
+foreign {
     // param-hint: pFailReason optional
     // param-hint: pvReserved optional reserved
     func WlanHostedNetworkForceStop(hClientHandle: CPointer<Unit>, pFailReason: CPointer<Int32>, pvReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanHostedNetworkForceStop == "on"]
+public unsafe func Windows_WlanHostedNetworkForceStop(hClientHandle: CPointer<Unit>, pFailReason: CPointer<Int32>, pvReserved: CPointer<Unit>): UInt32 {
+    return WlanHostedNetworkForceStop(hClientHandle, pFailReason, pvReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanHostedNetworkInitSettings == "on"]
+foreign {
     // param-hint: pFailReason optional
     // param-hint: pvReserved optional reserved
     func WlanHostedNetworkInitSettings(hClientHandle: CPointer<Unit>, pFailReason: CPointer<Int32>, pvReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanHostedNetworkInitSettings == "on"]
+public unsafe func Windows_WlanHostedNetworkInitSettings(hClientHandle: CPointer<Unit>, pFailReason: CPointer<Int32>, pvReserved: CPointer<Unit>): UInt32 {
+    return WlanHostedNetworkInitSettings(hClientHandle, pFailReason, pvReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanHostedNetworkQueryProperty == "on"]
+foreign {
     // param-hint: pvReserved optional reserved
     func WlanHostedNetworkQueryProperty(hClientHandle: CPointer<Unit>, OpCode: Int32, pdwDataSize: CPointer<UInt32>, ppvData: CPointer<CPointer<Unit>>, pWlanOpcodeValueType: CPointer<Int32>, pvReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanHostedNetworkQueryProperty == "on"]
+public unsafe func Windows_WlanHostedNetworkQueryProperty(hClientHandle: CPointer<Unit>, OpCode: Int32, pdwDataSize: CPointer<UInt32>, ppvData: CPointer<CPointer<Unit>>, pWlanOpcodeValueType: CPointer<Int32>, pvReserved: CPointer<Unit>): UInt32 {
+    return WlanHostedNetworkQueryProperty(hClientHandle, OpCode, pdwDataSize, ppvData, pWlanOpcodeValueType, pvReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanHostedNetworkQuerySecondaryKey == "on"]
+foreign {
     // param-hint: pFailReason optional
     // param-hint: pvReserved optional reserved
     func WlanHostedNetworkQuerySecondaryKey(hClientHandle: CPointer<Unit>, pdwKeyLength: CPointer<UInt32>, ppucKeyData: CPointer<CPointer<UInt8>>, pbIsPassPhrase: CPointer<Int32>, pbPersistent: CPointer<Int32>, pFailReason: CPointer<Int32>, pvReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanHostedNetworkQuerySecondaryKey == "on"]
+public unsafe func Windows_WlanHostedNetworkQuerySecondaryKey(hClientHandle: CPointer<Unit>, pdwKeyLength: CPointer<UInt32>, ppucKeyData: CPointer<CPointer<UInt8>>, pbIsPassPhrase: CPointer<Int32>, pbPersistent: CPointer<Int32>, pFailReason: CPointer<Int32>, pvReserved: CPointer<Unit>): UInt32 {
+    return WlanHostedNetworkQuerySecondaryKey(hClientHandle, pdwKeyLength, ppucKeyData, pbIsPassPhrase, pbPersistent, pFailReason, pvReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanHostedNetworkQueryStatus == "on"]
+foreign {
     // param-hint: pvReserved optional reserved
     func WlanHostedNetworkQueryStatus(hClientHandle: CPointer<Unit>, ppWlanHostedNetworkStatus: CPointer<CPointer<WLAN_HOSTED_NETWORK_STATUS>>, pvReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanHostedNetworkQueryStatus == "on"]
+public unsafe func Windows_WlanHostedNetworkQueryStatus(hClientHandle: CPointer<Unit>, ppWlanHostedNetworkStatus: CPointer<CPointer<WLAN_HOSTED_NETWORK_STATUS>>, pvReserved: CPointer<Unit>): UInt32 {
+    return WlanHostedNetworkQueryStatus(hClientHandle, ppWlanHostedNetworkStatus, pvReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanHostedNetworkRefreshSecuritySettings == "on"]
+foreign {
     // param-hint: pFailReason optional
     // param-hint: pvReserved optional reserved
     func WlanHostedNetworkRefreshSecuritySettings(hClientHandle: CPointer<Unit>, pFailReason: CPointer<Int32>, pvReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanHostedNetworkRefreshSecuritySettings == "on"]
+public unsafe func Windows_WlanHostedNetworkRefreshSecuritySettings(hClientHandle: CPointer<Unit>, pFailReason: CPointer<Int32>, pvReserved: CPointer<Unit>): UInt32 {
+    return WlanHostedNetworkRefreshSecuritySettings(hClientHandle, pFailReason, pvReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanHostedNetworkSetProperty == "on"]
+foreign {
     // param-hint: pvData bytes=param[2]
     // param-hint: pFailReason optional
     // param-hint: pvReserved optional reserved
     func WlanHostedNetworkSetProperty(hClientHandle: CPointer<Unit>, OpCode: Int32, dwDataSize: UInt32, pvData: CPointer<Unit>, pFailReason: CPointer<Int32>, pvReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanHostedNetworkSetProperty == "on"]
+public unsafe func Windows_WlanHostedNetworkSetProperty(hClientHandle: CPointer<Unit>, OpCode: Int32, dwDataSize: UInt32, pvData: CPointer<Unit>, pFailReason: CPointer<Int32>, pvReserved: CPointer<Unit>): UInt32 {
+    return WlanHostedNetworkSetProperty(hClientHandle, OpCode, dwDataSize, pvData, pFailReason, pvReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanHostedNetworkSetSecondaryKey == "on"]
+foreign {
     // param-hint: pucKeyData bytes=param[1]
     // param-hint: pFailReason optional
     // param-hint: pvReserved optional reserved
     func WlanHostedNetworkSetSecondaryKey(hClientHandle: CPointer<Unit>, dwKeyLength: UInt32, pucKeyData: CPointer<UInt8>, bIsPassPhrase: Int32, bPersistent: Int32, pFailReason: CPointer<Int32>, pvReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanHostedNetworkSetSecondaryKey == "on"]
+public unsafe func Windows_WlanHostedNetworkSetSecondaryKey(hClientHandle: CPointer<Unit>, dwKeyLength: UInt32, pucKeyData: CPointer<UInt8>, bIsPassPhrase: Int32, bPersistent: Int32, pFailReason: CPointer<Int32>, pvReserved: CPointer<Unit>): UInt32 {
+    return WlanHostedNetworkSetSecondaryKey(hClientHandle, dwKeyLength, pucKeyData, bIsPassPhrase, bPersistent, pFailReason, pvReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanHostedNetworkStartUsing == "on"]
+foreign {
     // param-hint: pFailReason optional
     // param-hint: pvReserved optional reserved
     func WlanHostedNetworkStartUsing(hClientHandle: CPointer<Unit>, pFailReason: CPointer<Int32>, pvReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanHostedNetworkStartUsing == "on"]
+public unsafe func Windows_WlanHostedNetworkStartUsing(hClientHandle: CPointer<Unit>, pFailReason: CPointer<Int32>, pvReserved: CPointer<Unit>): UInt32 {
+    return WlanHostedNetworkStartUsing(hClientHandle, pFailReason, pvReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanHostedNetworkStopUsing == "on"]
+foreign {
     // param-hint: pFailReason optional
     // param-hint: pvReserved optional reserved
     func WlanHostedNetworkStopUsing(hClientHandle: CPointer<Unit>, pFailReason: CPointer<Int32>, pvReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanHostedNetworkStopUsing == "on"]
+public unsafe func Windows_WlanHostedNetworkStopUsing(hClientHandle: CPointer<Unit>, pFailReason: CPointer<Int32>, pvReserved: CPointer<Unit>): UInt32 {
+    return WlanHostedNetworkStopUsing(hClientHandle, pFailReason, pvReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanIhvControl == "on"]
+foreign {
     // param-hint: pInBuffer bytes=param[3]
     // param-hint: pOutBuffer bytes=param[5] optional
     func WlanIhvControl(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, Type: Int32, dwInBufferSize: UInt32, pInBuffer: CPointer<Unit>, dwOutBufferSize: UInt32, pOutBuffer: CPointer<Unit>, pdwBytesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanIhvControl == "on"]
+public unsafe func Windows_WlanIhvControl(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, Type: Int32, dwInBufferSize: UInt32, pInBuffer: CPointer<Unit>, dwOutBufferSize: UInt32, pOutBuffer: CPointer<Unit>, pdwBytesReturned: CPointer<UInt32>): UInt32 {
+    return WlanIhvControl(hClientHandle, pInterfaceGuid, Type, dwInBufferSize, pInBuffer, dwOutBufferSize, pOutBuffer, pdwBytesReturned)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanOpenHandle == "on"]
+foreign {
     // param-hint: pReserved optional reserved
     func WlanOpenHandle(dwClientVersion: UInt32, pReserved: CPointer<Unit>, pdwNegotiatedVersion: CPointer<UInt32>, phClientHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanOpenHandle == "on"]
+public unsafe func Windows_WlanOpenHandle(dwClientVersion: UInt32, pReserved: CPointer<Unit>, pdwNegotiatedVersion: CPointer<UInt32>, phClientHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return WlanOpenHandle(dwClientVersion, pReserved, pdwNegotiatedVersion, phClientHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanQueryAutoConfigParameter == "on"]
+foreign {
     // param-hint: pReserved optional reserved
     // param-hint: pWlanOpcodeValueType optional
     func WlanQueryAutoConfigParameter(hClientHandle: CPointer<Unit>, OpCode: Int32, pReserved: CPointer<Unit>, pdwDataSize: CPointer<UInt32>, ppData: CPointer<CPointer<Unit>>, pWlanOpcodeValueType: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanQueryAutoConfigParameter == "on"]
+public unsafe func Windows_WlanQueryAutoConfigParameter(hClientHandle: CPointer<Unit>, OpCode: Int32, pReserved: CPointer<Unit>, pdwDataSize: CPointer<UInt32>, ppData: CPointer<CPointer<Unit>>, pWlanOpcodeValueType: CPointer<Int32>): UInt32 {
+    return WlanQueryAutoConfigParameter(hClientHandle, OpCode, pReserved, pdwDataSize, ppData, pWlanOpcodeValueType)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanQueryInterface == "on"]
+foreign {
     // param-hint: pReserved optional reserved
     // param-hint: pWlanOpcodeValueType optional
     func WlanQueryInterface(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, OpCode: Int32, pReserved: CPointer<Unit>, pdwDataSize: CPointer<UInt32>, ppData: CPointer<CPointer<Unit>>, pWlanOpcodeValueType: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanQueryInterface == "on"]
+public unsafe func Windows_WlanQueryInterface(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, OpCode: Int32, pReserved: CPointer<Unit>, pdwDataSize: CPointer<UInt32>, ppData: CPointer<CPointer<Unit>>, pWlanOpcodeValueType: CPointer<Int32>): UInt32 {
+    return WlanQueryInterface(hClientHandle, pInterfaceGuid, OpCode, pReserved, pdwDataSize, ppData, pWlanOpcodeValueType)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanReasonCodeToString == "on"]
+foreign {
     // param-hint: pStringBuffer len=param[1]
     // param-hint: pReserved optional reserved
     func WlanReasonCodeToString(dwReasonCode: UInt32, dwBufferSize: UInt32, pStringBuffer: CPointer<UInt16>, pReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanReasonCodeToString == "on"]
+public unsafe func Windows_WlanReasonCodeToString(dwReasonCode: UInt32, dwBufferSize: UInt32, pStringBuffer: CPointer<UInt16>, pReserved: CPointer<Unit>): UInt32 {
+    return WlanReasonCodeToString(dwReasonCode, dwBufferSize, pStringBuffer, pReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanRegisterDeviceServiceNotification == "on"]
+foreign {
     // param-hint: pDevSvcGuidList optional
     func WlanRegisterDeviceServiceNotification(hClientHandle: CPointer<Unit>, pDevSvcGuidList: CPointer<WLAN_DEVICE_SERVICE_GUID_LIST>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanRegisterDeviceServiceNotification == "on"]
+public unsafe func Windows_WlanRegisterDeviceServiceNotification(hClientHandle: CPointer<Unit>, pDevSvcGuidList: CPointer<WLAN_DEVICE_SERVICE_GUID_LIST>): UInt32 {
+    return WlanRegisterDeviceServiceNotification(hClientHandle, pDevSvcGuidList)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanRegisterNotification == "on"]
+foreign {
     // param-hint: funcCallback optional
     // param-hint: pCallbackContext optional
     // param-hint: pReserved optional reserved
     // param-hint: pdwPrevNotifSource optional
     func WlanRegisterNotification(hClientHandle: CPointer<Unit>, dwNotifSource: UInt32, bIgnoreDuplicate: Int32, funcCallback: WLAN_NOTIFICATION_CALLBACK, pCallbackContext: CPointer<Unit>, pReserved: CPointer<Unit>, pdwPrevNotifSource: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanRegisterNotification == "on"]
+public unsafe func Windows_WlanRegisterNotification(hClientHandle: CPointer<Unit>, dwNotifSource: UInt32, bIgnoreDuplicate: Int32, funcCallback: WLAN_NOTIFICATION_CALLBACK, pCallbackContext: CPointer<Unit>, pReserved: CPointer<Unit>, pdwPrevNotifSource: CPointer<UInt32>): UInt32 {
+    return WlanRegisterNotification(hClientHandle, dwNotifSource, bIgnoreDuplicate, funcCallback, pCallbackContext, pReserved, pdwPrevNotifSource)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanRegisterVirtualStationNotification == "on"]
+foreign {
     // param-hint: pReserved optional reserved
     func WlanRegisterVirtualStationNotification(hClientHandle: CPointer<Unit>, bRegister: Int32, pReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanRegisterVirtualStationNotification == "on"]
+public unsafe func Windows_WlanRegisterVirtualStationNotification(hClientHandle: CPointer<Unit>, bRegister: Int32, pReserved: CPointer<Unit>): UInt32 {
+    return WlanRegisterVirtualStationNotification(hClientHandle, bRegister, pReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanRenameProfile == "on"]
+foreign {
     // param-hint: pReserved optional reserved
     func WlanRenameProfile(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, strOldProfileName: CPointer<UInt16>, strNewProfileName: CPointer<UInt16>, pReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanRenameProfile == "on"]
+public unsafe func Windows_WlanRenameProfile(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, strOldProfileName: CPointer<UInt16>, strNewProfileName: CPointer<UInt16>, pReserved: CPointer<Unit>): UInt32 {
+    return WlanRenameProfile(hClientHandle, pInterfaceGuid, strOldProfileName, strNewProfileName, pReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanSaveTemporaryProfile == "on"]
+foreign {
     // param-hint: strAllUserProfileSecurity optional
     // param-hint: pReserved optional reserved
     func WlanSaveTemporaryProfile(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, strProfileName: CPointer<UInt16>, strAllUserProfileSecurity: CPointer<UInt16>, dwFlags: UInt32, bOverWrite: Int32, pReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanSaveTemporaryProfile == "on"]
+public unsafe func Windows_WlanSaveTemporaryProfile(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, strProfileName: CPointer<UInt16>, strAllUserProfileSecurity: CPointer<UInt16>, dwFlags: UInt32, bOverWrite: Int32, pReserved: CPointer<Unit>): UInt32 {
+    return WlanSaveTemporaryProfile(hClientHandle, pInterfaceGuid, strProfileName, strAllUserProfileSecurity, dwFlags, bOverWrite, pReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanScan == "on"]
+foreign {
     // param-hint: pDot11Ssid optional
     // param-hint: pIeData optional
     // param-hint: pReserved optional reserved
     func WlanScan(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, pDot11Ssid: CPointer<DOT11_SSID>, pIeData: CPointer<WLAN_RAW_DATA>, pReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanScan == "on"]
+public unsafe func Windows_WlanScan(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, pDot11Ssid: CPointer<DOT11_SSID>, pIeData: CPointer<WLAN_RAW_DATA>, pReserved: CPointer<Unit>): UInt32 {
+    return WlanScan(hClientHandle, pInterfaceGuid, pDot11Ssid, pIeData, pReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanSetAutoConfigParameter == "on"]
+foreign {
     // param-hint: pData bytes=param[2]
     // param-hint: pReserved optional reserved
     func WlanSetAutoConfigParameter(hClientHandle: CPointer<Unit>, OpCode: Int32, dwDataSize: UInt32, pData: CPointer<Unit>, pReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanSetAutoConfigParameter == "on"]
+public unsafe func Windows_WlanSetAutoConfigParameter(hClientHandle: CPointer<Unit>, OpCode: Int32, dwDataSize: UInt32, pData: CPointer<Unit>, pReserved: CPointer<Unit>): UInt32 {
+    return WlanSetAutoConfigParameter(hClientHandle, OpCode, dwDataSize, pData, pReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanSetFilterList == "on"]
+foreign {
     // param-hint: pNetworkList optional
     // param-hint: pReserved optional reserved
     func WlanSetFilterList(hClientHandle: CPointer<Unit>, wlanFilterListType: Int32, pNetworkList: CPointer<DOT11_NETWORK_LIST>, pReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanSetFilterList == "on"]
+public unsafe func Windows_WlanSetFilterList(hClientHandle: CPointer<Unit>, wlanFilterListType: Int32, pNetworkList: CPointer<DOT11_NETWORK_LIST>, pReserved: CPointer<Unit>): UInt32 {
+    return WlanSetFilterList(hClientHandle, wlanFilterListType, pNetworkList, pReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanSetInterface == "on"]
+foreign {
     // param-hint: pData bytes=param[3]
     // param-hint: pReserved optional reserved
     func WlanSetInterface(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, OpCode: Int32, dwDataSize: UInt32, pData: CPointer<Unit>, pReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanSetInterface == "on"]
+public unsafe func Windows_WlanSetInterface(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, OpCode: Int32, dwDataSize: UInt32, pData: CPointer<Unit>, pReserved: CPointer<Unit>): UInt32 {
+    return WlanSetInterface(hClientHandle, pInterfaceGuid, OpCode, dwDataSize, pData, pReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanSetProfile == "on"]
+foreign {
     // param-hint: strAllUserProfileSecurity optional
     // param-hint: pReserved optional reserved
     func WlanSetProfile(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, dwFlags: UInt32, strProfileXml: CPointer<UInt16>, strAllUserProfileSecurity: CPointer<UInt16>, bOverwrite: Int32, pReserved: CPointer<Unit>, pdwReasonCode: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanSetProfile == "on"]
+public unsafe func Windows_WlanSetProfile(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, dwFlags: UInt32, strProfileXml: CPointer<UInt16>, strAllUserProfileSecurity: CPointer<UInt16>, bOverwrite: Int32, pReserved: CPointer<Unit>, pdwReasonCode: CPointer<UInt32>): UInt32 {
+    return WlanSetProfile(hClientHandle, pInterfaceGuid, dwFlags, strProfileXml, strAllUserProfileSecurity, bOverwrite, pReserved, pdwReasonCode)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanSetProfileCustomUserData == "on"]
+foreign {
     // param-hint: pData bytes=param[3]
     // param-hint: pReserved optional reserved
     func WlanSetProfileCustomUserData(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, strProfileName: CPointer<UInt16>, dwDataSize: UInt32, pData: CPointer<UInt8>, pReserved: CPointer<Unit>): UInt32
-    // param-hint: pReserved optional reserved
-    func WlanSetProfileEapXmlUserData(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, strProfileName: CPointer<UInt16>, dwFlags: UInt32, strEapXmlUserData: CPointer<UInt16>, pReserved: CPointer<Unit>): UInt32
-    // param-hint: strProfileNames len=param[2]
-    // param-hint: pReserved optional reserved
-    func WlanSetProfileList(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, dwItems: UInt32, strProfileNames: CPointer<CPointer<UInt16>>, pReserved: CPointer<Unit>): UInt32
-    // param-hint: pReserved optional reserved
-    func WlanSetProfilePosition(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, strProfileName: CPointer<UInt16>, dwPosition: UInt32, pReserved: CPointer<Unit>): UInt32
-    // param-hint: strFormat optional
-    // param-hint: pPsdIEDataList optional
-    // param-hint: pReserved optional reserved
-    func WlanSetPsdIEDataList(hClientHandle: CPointer<Unit>, strFormat: CPointer<UInt16>, pPsdIEDataList: CPointer<WLAN_RAW_DATA_LIST>, pReserved: CPointer<Unit>): UInt32
-    func WlanSetSecuritySettings(hClientHandle: CPointer<Unit>, SecurableObject: Int32, strModifiedSDDL: CPointer<UInt16>): UInt32
 }
 
-@When[WLANAPI == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
-foreign {
-    // param-hint: pReserved optional reserved
-    func WlanConnect(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, pConnectionParameters: CPointer<WLAN_CONNECTION_PARAMETERS>, pReserved: CPointer<Unit>): UInt32
-    // param-hint: pReserved optional reserved
-    func WlanConnect2(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, pConnectionParameters: CPointer<WLAN_CONNECTION_PARAMETERS_V2>, pReserved: CPointer<Unit>): UInt32
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanSetProfileCustomUserData == "on"]
+public unsafe func Windows_WlanSetProfileCustomUserData(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, strProfileName: CPointer<UInt16>, dwDataSize: UInt32, pData: CPointer<UInt8>, pReserved: CPointer<Unit>): UInt32 {
+    return WlanSetProfileCustomUserData(hClientHandle, pInterfaceGuid, strProfileName, dwDataSize, pData, pReserved)
 }
 
-@When[WLANAPI == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on"]
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanSetProfileEapUserData == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on"]
 foreign {
     // param-hint: pbEapUserData bytes=param[5] optional
     // param-hint: pReserved optional reserved
     func WlanSetProfileEapUserData(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, strProfileName: CPointer<UInt16>, eapType: Win32_Security_ExtensibleAuthenticationProtocol.EAP_METHOD_TYPE, dwFlags: UInt32, dwEapUserDataSize: UInt32, pbEapUserData: CPointer<UInt8>, pReserved: CPointer<Unit>): UInt32
 }
 
-@When[WLANUI == "on"]
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanSetProfileEapUserData == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on"]
+public unsafe func Windows_WlanSetProfileEapUserData(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, strProfileName: CPointer<UInt16>, eapType: Win32_Security_ExtensibleAuthenticationProtocol.EAP_METHOD_TYPE, dwFlags: UInt32, dwEapUserDataSize: UInt32, pbEapUserData: CPointer<UInt8>, pReserved: CPointer<Unit>): UInt32 {
+    return WlanSetProfileEapUserData(hClientHandle, pInterfaceGuid, strProfileName, eapType, dwFlags, dwEapUserDataSize, pbEapUserData, pReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanSetProfileEapXmlUserData == "on"]
+foreign {
+    // param-hint: pReserved optional reserved
+    func WlanSetProfileEapXmlUserData(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, strProfileName: CPointer<UInt16>, dwFlags: UInt32, strEapXmlUserData: CPointer<UInt16>, pReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanSetProfileEapXmlUserData == "on"]
+public unsafe func Windows_WlanSetProfileEapXmlUserData(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, strProfileName: CPointer<UInt16>, dwFlags: UInt32, strEapXmlUserData: CPointer<UInt16>, pReserved: CPointer<Unit>): UInt32 {
+    return WlanSetProfileEapXmlUserData(hClientHandle, pInterfaceGuid, strProfileName, dwFlags, strEapXmlUserData, pReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanSetProfileList == "on"]
+foreign {
+    // param-hint: strProfileNames len=param[2]
+    // param-hint: pReserved optional reserved
+    func WlanSetProfileList(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, dwItems: UInt32, strProfileNames: CPointer<CPointer<UInt16>>, pReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanSetProfileList == "on"]
+public unsafe func Windows_WlanSetProfileList(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, dwItems: UInt32, strProfileNames: CPointer<CPointer<UInt16>>, pReserved: CPointer<Unit>): UInt32 {
+    return WlanSetProfileList(hClientHandle, pInterfaceGuid, dwItems, strProfileNames, pReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanSetProfilePosition == "on"]
+foreign {
+    // param-hint: pReserved optional reserved
+    func WlanSetProfilePosition(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, strProfileName: CPointer<UInt16>, dwPosition: UInt32, pReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanSetProfilePosition == "on"]
+public unsafe func Windows_WlanSetProfilePosition(hClientHandle: CPointer<Unit>, pInterfaceGuid: CPointer<GUID>, strProfileName: CPointer<UInt16>, dwPosition: UInt32, pReserved: CPointer<Unit>): UInt32 {
+    return WlanSetProfilePosition(hClientHandle, pInterfaceGuid, strProfileName, dwPosition, pReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanSetPsdIEDataList == "on"]
+foreign {
+    // param-hint: strFormat optional
+    // param-hint: pPsdIEDataList optional
+    // param-hint: pReserved optional reserved
+    func WlanSetPsdIEDataList(hClientHandle: CPointer<Unit>, strFormat: CPointer<UInt16>, pPsdIEDataList: CPointer<WLAN_RAW_DATA_LIST>, pReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanSetPsdIEDataList == "on"]
+public unsafe func Windows_WlanSetPsdIEDataList(hClientHandle: CPointer<Unit>, strFormat: CPointer<UInt16>, pPsdIEDataList: CPointer<WLAN_RAW_DATA_LIST>, pReserved: CPointer<Unit>): UInt32 {
+    return WlanSetPsdIEDataList(hClientHandle, strFormat, pPsdIEDataList, pReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanSetSecuritySettings == "on"]
+foreign {
+    func WlanSetSecuritySettings(hClientHandle: CPointer<Unit>, SecurableObject: Int32, strModifiedSDDL: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANAPI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanSetSecuritySettings == "on"]
+public unsafe func Windows_WlanSetSecuritySettings(hClientHandle: CPointer<Unit>, SecurableObject: Int32, strModifiedSDDL: CPointer<UInt16>): UInt32 {
+    return WlanSetSecuritySettings(hClientHandle, SecurableObject, strModifiedSDDL)
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANUI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanUIEditProfile == "on"]
 foreign {
     // param-hint: pReserved optional reserved
     // param-hint: pWlanReasonCode optional
     func WlanUIEditProfile(dwClientVersion: UInt32, wstrProfileName: CPointer<UInt16>, pInterfaceGuid: CPointer<GUID>, hWnd: CPointer<Unit>, wlStartPage: Int32, pReserved: CPointer<Unit>, pWlanReasonCode: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WiFi == "on" && WLANUI == "on" && Windows_Win32_NetworkManagement_WiFi_WlanUIEditProfile == "on"]
+public unsafe func Windows_WlanUIEditProfile(dwClientVersion: UInt32, wstrProfileName: CPointer<UInt16>, pInterfaceGuid: CPointer<GUID>, hWnd: CPointer<Unit>, wlStartPage: Int32, pReserved: CPointer<Unit>, pWlanReasonCode: CPointer<UInt32>): UInt32 {
+    return WlanUIEditProfile(dwClientVersion, wstrProfileName, pInterfaceGuid, hWnd, wlStartPage, pReserved, pWlanReasonCode)
 }
 
 @When[Windows_Win32_NetworkManagement_WiFi == "on"]

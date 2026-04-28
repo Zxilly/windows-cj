@@ -638,6 +638,7 @@ public class GestureRecognizer <: InterfaceWrapperBase & ComInterface & windows_
         defaultInterface().ProcessDownEvent(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ProcessMoveEvents(value: windows_collections.IVector<PointerPoint>): Unit {
         defaultInterface().ProcessMoveEvents(value)
     }
@@ -1094,7 +1095,10 @@ public struct IGestureRecognizerVtbl {
     public var get_MouseWheelParameters: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CanBeDoubleTap: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var ProcessDownEvent: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var ProcessMoveEvents: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ProcessMoveEvents: UIntNative = UIntNative(0)
     public var ProcessUpEvent: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ProcessMouseWheelEvent: CFunc<(CPointer<Unit>, CPointer<Unit>, Bool, Bool) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var ProcessInertia: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
@@ -1433,6 +1437,7 @@ public class IGestureRecognizer <: InterfaceWrapperBase & ComInterface & Runtime
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ProcessMoveEvents(value: windows_collections.IVector<PointerPoint>): Unit {
         let v = vtbl()
         let hr = v.ProcessMoveEvents(asRaw(), value.asRaw())
@@ -1935,7 +1940,10 @@ public struct IPhysicalGestureRecognizerVtbl {
     public var TranslationMaxContactCount: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetTranslationMaxContactCount: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ProcessDownEvent: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var ProcessMoveEvents: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ProcessMoveEvents: UIntNative = UIntNative(0)
     public var ProcessUpEvent: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CompleteGesture: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
     public var ManipulationStarted: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -2156,6 +2164,7 @@ public class IPhysicalGestureRecognizer <: InterfaceWrapperBase & ComInterface &
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ProcessMoveEvents(value: windows_collections.IVector<PointerPoint>): Unit {
         let v = vtbl()
         let hr = v.ProcessMoveEvents(asRaw(), value.asRaw())
@@ -2405,9 +2414,15 @@ extend IPointerPoint <: windows_core.Interface<IPointerPoint> {}
 public struct IPointerPointStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var GetCurrentPoint: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetIntermediatePoints: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetIntermediatePoints: UIntNative = UIntNative(0)
     public var GetCurrentPointTransformed: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetIntermediatePointsTransformed: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetIntermediatePointsTransformed: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2484,6 +2499,7 @@ public class IPointerPointStatics <: InterfaceWrapperBase & ComInterface & Runti
         return PointerPoint.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetIntermediatePoints(pointerId: UInt32): windows_collections.IVector<PointerPoint> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2500,6 +2516,7 @@ public class IPointerPointStatics <: InterfaceWrapperBase & ComInterface & Runti
         return PointerPoint.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetIntermediatePointsTransformed(pointerId: UInt32, transform: _impl_l0.IPointerPointTransform): windows_collections.IVector<PointerPoint> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2980,7 +2997,10 @@ extend IRadialControllerControlAcquiredEventArgs <: windows_core.Interface<IRadi
 @C
 public struct IRadialControllerMenuVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Items: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Items: UIntNative = UIntNative(0)
     public var IsEnabled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetIsEnabled: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetSelectedMenuItem: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -3054,6 +3074,7 @@ public class IRadialControllerMenu <: InterfaceWrapperBase & ComInterface & Runt
         readVtbl<IRadialControllerMenuVtbl>(IRadialControllerMenuVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVector<RadialControllerMenuItem> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5081,6 +5102,7 @@ public class PhysicalGestureRecognizer <: InterfaceWrapperBase & ComInterface & 
         defaultInterface().ProcessDownEvent(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ProcessMoveEvents(value: windows_collections.IVector<PointerPoint>): Unit {
         defaultInterface().ProcessMoveEvents(value)
     }
@@ -5261,6 +5283,7 @@ public class PointerPoint <: InterfaceWrapperBase & ComInterface & windows_inter
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetIntermediatePoints(pointerId: UInt32): windows_collections.IVector<PointerPoint> {
         var result__: Option<windows_collections.IVector<PointerPoint>> = Option<windows_collections.IVector<PointerPoint>>.None
         try (factory__ = windows_core.factory<PointerPoint, IPointerPointStatics>().unwrap()) {
@@ -5283,6 +5306,7 @@ public class PointerPoint <: InterfaceWrapperBase & ComInterface & windows_inter
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetIntermediatePointsTransformed(pointerId: UInt32, transform: _impl_l0.IPointerPointTransform): windows_collections.IVector<PointerPoint> {
         var result__: Option<windows_collections.IVector<PointerPoint>> = Option<windows_collections.IVector<PointerPoint>>.None
         try (factory__ = windows_core.factory<PointerPoint, IPointerPointStatics>().unwrap()) {
@@ -6037,6 +6061,7 @@ public class RadialControllerMenu <: InterfaceWrapperBase & ComInterface & windo
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVector<RadialControllerMenuItem> {
         return defaultInterface().Items()
     }

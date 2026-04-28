@@ -17,4 +17,675 @@ public import windows_sys.Win32._impl_l1.PROCESS_MACHINE_INFORMATION
 public import windows_sys.Win32._impl_l1.{PRTL_UMS_SCHEDULER_ENTRY_POINT, UMS_SCHEDULER_STARTUP_INFO}
 @When[Windows_Win32_System_Threading == "on" && Windows_Win32_System_Com == "on"]
 public import windows_sys.Win32._impl_l1.RTWQPERIODICCALLBACK
-
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_AcquireSRWLockExclusive == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AcquireSRWLockExclusive
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_AcquireSRWLockShared == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AcquireSRWLockShared
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_AddIntegrityLabelToBoundaryDescriptor == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AddIntegrityLabelToBoundaryDescriptor
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_AddSIDToBoundaryDescriptor == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AddSIDToBoundaryDescriptor
+@When[Windows_Win32_System_Threading == "on" && USER32 == "on" && Windows_Win32_System_Threading_AttachThreadInput == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AttachThreadInput
+@When[Windows_Win32_System_Threading == "on" && AVRT == "on" && Windows_Win32_System_Threading_AvQuerySystemResponsiveness == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AvQuerySystemResponsiveness
+@When[Windows_Win32_System_Threading == "on" && AVRT == "on" && Windows_Win32_System_Threading_AvRevertMmThreadCharacteristics == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AvRevertMmThreadCharacteristics
+@When[Windows_Win32_System_Threading == "on" && AVRT == "on" && Windows_Win32_System_Threading_AvRtCreateThreadOrderingGroup == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AvRtCreateThreadOrderingGroup
+@When[Windows_Win32_System_Threading == "on" && AVRT == "on" && Windows_Win32_System_Threading_AvRtCreateThreadOrderingGroupExA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AvRtCreateThreadOrderingGroupExA
+@When[Windows_Win32_System_Threading == "on" && AVRT == "on" && Windows_Win32_System_Threading_AvRtCreateThreadOrderingGroupExW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AvRtCreateThreadOrderingGroupExW
+@When[Windows_Win32_System_Threading == "on" && AVRT == "on" && Windows_Win32_System_Threading_AvRtDeleteThreadOrderingGroup == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AvRtDeleteThreadOrderingGroup
+@When[Windows_Win32_System_Threading == "on" && AVRT == "on" && Windows_Win32_System_Threading_AvRtJoinThreadOrderingGroup == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AvRtJoinThreadOrderingGroup
+@When[Windows_Win32_System_Threading == "on" && AVRT == "on" && Windows_Win32_System_Threading_AvRtLeaveThreadOrderingGroup == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AvRtLeaveThreadOrderingGroup
+@When[Windows_Win32_System_Threading == "on" && AVRT == "on" && Windows_Win32_System_Threading_AvRtWaitOnThreadOrderingGroup == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AvRtWaitOnThreadOrderingGroup
+@When[Windows_Win32_System_Threading == "on" && AVRT == "on" && Windows_Win32_System_Threading_AvSetMmMaxThreadCharacteristicsA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AvSetMmMaxThreadCharacteristicsA
+@When[Windows_Win32_System_Threading == "on" && AVRT == "on" && Windows_Win32_System_Threading_AvSetMmMaxThreadCharacteristicsW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AvSetMmMaxThreadCharacteristicsW
+@When[Windows_Win32_System_Threading == "on" && AVRT == "on" && Windows_Win32_System_Threading_AvSetMmThreadCharacteristicsA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AvSetMmThreadCharacteristicsA
+@When[Windows_Win32_System_Threading == "on" && AVRT == "on" && Windows_Win32_System_Threading_AvSetMmThreadCharacteristicsW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AvSetMmThreadCharacteristicsW
+@When[Windows_Win32_System_Threading == "on" && AVRT == "on" && Windows_Win32_System_Threading_AvSetMmThreadPriority == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AvSetMmThreadPriority
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CallbackMayRunLong == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CallbackMayRunLong
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CancelThreadpoolIo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CancelThreadpoolIo
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CancelTimerQueueTimer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CancelTimerQueueTimer
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CancelWaitableTimer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CancelWaitableTimer
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_ChangeTimerQueueTimer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ChangeTimerQueueTimer
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_ClosePrivateNamespace == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ClosePrivateNamespace
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CloseThreadpool == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CloseThreadpool
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CloseThreadpoolCleanupGroup == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CloseThreadpoolCleanupGroup
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CloseThreadpoolCleanupGroupMembers == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CloseThreadpoolCleanupGroupMembers
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CloseThreadpoolIo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CloseThreadpoolIo
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CloseThreadpoolTimer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CloseThreadpoolTimer
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CloseThreadpoolWait == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CloseThreadpoolWait
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CloseThreadpoolWork == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CloseThreadpoolWork
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_ConvertFiberToThread == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ConvertFiberToThread
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_ConvertThreadToFiber == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ConvertThreadToFiber
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_ConvertThreadToFiberEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ConvertThreadToFiberEx
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateBoundaryDescriptorA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateBoundaryDescriptorA
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateBoundaryDescriptorW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateBoundaryDescriptorW
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateEventA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateEventA
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateEventExA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateEventExA
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateEventExW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateEventExW
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateEventW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateEventW
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateFiber == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateFiber
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateFiberEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateFiberEx
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateMutexA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateMutexA
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateMutexExA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateMutexExA
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateMutexExW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateMutexExW
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateMutexW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateMutexW
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreatePrivateNamespaceA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreatePrivateNamespaceA
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreatePrivateNamespaceW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreatePrivateNamespaceW
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateProcessA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateProcessA
+@When[Windows_Win32_System_Threading == "on" && ADVAPI32 == "on" && Windows_Win32_System_Threading_CreateProcessAsUserA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateProcessAsUserA
+@When[Windows_Win32_System_Threading == "on" && ADVAPI32 == "on" && Windows_Win32_System_Threading_CreateProcessAsUserW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateProcessAsUserW
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateProcessW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateProcessW
+@When[Windows_Win32_System_Threading == "on" && ADVAPI32 == "on" && Windows_Win32_System_Threading_CreateProcessWithLogonW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateProcessWithLogonW
+@When[Windows_Win32_System_Threading == "on" && ADVAPI32 == "on" && Windows_Win32_System_Threading_CreateProcessWithTokenW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateProcessWithTokenW
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateRemoteThread == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateRemoteThread
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateRemoteThreadEx == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateRemoteThreadEx
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateSemaphoreA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateSemaphoreA
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateSemaphoreExA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateSemaphoreExA
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateSemaphoreExW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateSemaphoreExW
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateSemaphoreW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateSemaphoreW
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateThread == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateThread
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateThreadpool == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateThreadpool
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateThreadpoolCleanupGroup == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateThreadpoolCleanupGroup
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateThreadpoolIo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateThreadpoolIo
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateThreadpoolTimer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateThreadpoolTimer
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateThreadpoolWait == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateThreadpoolWait
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateThreadpoolWork == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateThreadpoolWork
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateTimerQueue == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateTimerQueue
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateTimerQueueTimer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateTimerQueueTimer
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateUmsCompletionList == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateUmsCompletionList
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateUmsThreadContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateUmsThreadContext
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateWaitableTimerA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateWaitableTimerA
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateWaitableTimerExA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateWaitableTimerExA
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateWaitableTimerExW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateWaitableTimerExW
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_CreateWaitableTimerW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateWaitableTimerW
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_DeleteBoundaryDescriptor == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteBoundaryDescriptor
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_DeleteCriticalSection == "on" && Windows_Win32_System_Kernel == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteCriticalSection
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_DeleteFiber == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteFiber
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_DeleteProcThreadAttributeList == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteProcThreadAttributeList
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_DeleteSynchronizationBarrier == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteSynchronizationBarrier
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_DeleteTimerQueue == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteTimerQueue
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_DeleteTimerQueueEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteTimerQueueEx
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_DeleteTimerQueueTimer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteTimerQueueTimer
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_DeleteUmsCompletionList == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteUmsCompletionList
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_DeleteUmsThreadContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteUmsThreadContext
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_DequeueUmsCompletionListItems == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DequeueUmsCompletionListItems
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_DisassociateCurrentThreadFromCallback == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DisassociateCurrentThreadFromCallback
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_EnterCriticalSection == "on" && Windows_Win32_System_Kernel == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EnterCriticalSection
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_EnterSynchronizationBarrier == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EnterSynchronizationBarrier
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_EnterUmsSchedulingMode == "on" && Windows_Win32_System_SystemServices == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EnterUmsSchedulingMode
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_ExecuteUmsThread == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ExecuteUmsThread
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_ExitProcess == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ExitProcess
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_ExitThread == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ExitThread
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_FlsAlloc == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FlsAlloc
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_FlsFree == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FlsFree
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_FlsGetValue == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FlsGetValue
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_FlsGetValue2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FlsGetValue2
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_FlsSetValue == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FlsSetValue
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_FlushProcessWriteBuffers == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FlushProcessWriteBuffers
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_FreeLibraryWhenCallbackReturns == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FreeLibraryWhenCallbackReturns
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetActiveProcessorCount == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetActiveProcessorCount
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetActiveProcessorGroupCount == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetActiveProcessorGroupCount
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetCurrentProcess == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetCurrentProcess
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetCurrentProcessId == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetCurrentProcessId
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetCurrentProcessorNumber == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetCurrentProcessorNumber
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetCurrentProcessorNumberEx == "on" && Windows_Win32_System_Kernel == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetCurrentProcessorNumberEx
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetCurrentThread == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetCurrentThread
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetCurrentThreadId == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetCurrentThreadId
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetCurrentThreadStackLimits == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetCurrentThreadStackLimits
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetCurrentUmsThread == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetCurrentUmsThread
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetExitCodeProcess == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetExitCodeProcess
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetExitCodeThread == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetExitCodeThread
+@When[Windows_Win32_System_Threading == "on" && USER32 == "on" && Windows_Win32_System_Threading_GetGuiResources == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetGuiResources
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetMachineTypeAttributes == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetMachineTypeAttributes
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetMaximumProcessorCount == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetMaximumProcessorCount
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetMaximumProcessorGroupCount == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetMaximumProcessorGroupCount
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetNextUmsListItem == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetNextUmsListItem
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetNumaAvailableMemoryNode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetNumaAvailableMemoryNode
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetNumaAvailableMemoryNodeEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetNumaAvailableMemoryNodeEx
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetNumaHighestNodeNumber == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetNumaHighestNodeNumber
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetNumaNodeNumberFromHandle == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetNumaNodeNumberFromHandle
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetNumaNodeProcessorMask == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetNumaNodeProcessorMask
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetNumaNodeProcessorMask2 == "on" && Windows_Win32_System_SystemInformation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetNumaNodeProcessorMask2
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetNumaNodeProcessorMaskEx == "on" && Windows_Win32_System_SystemInformation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetNumaNodeProcessorMaskEx
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetNumaProcessorNode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetNumaProcessorNode
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetNumaProcessorNodeEx == "on" && Windows_Win32_System_Kernel == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetNumaProcessorNodeEx
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetNumaProximityNode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetNumaProximityNode
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetNumaProximityNodeEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetNumaProximityNodeEx
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetPriorityClass == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetPriorityClass
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetProcessAffinityMask == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetProcessAffinityMask
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetProcessDEPPolicy == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetProcessDEPPolicy
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetProcessDefaultCpuSetMasks == "on" && Windows_Win32_System_SystemInformation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetProcessDefaultCpuSetMasks
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetProcessDefaultCpuSets == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetProcessDefaultCpuSets
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetProcessGroupAffinity == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetProcessGroupAffinity
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetProcessHandleCount == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetProcessHandleCount
+@When[Windows_Win32_System_Threading == "on" && OLEACC == "on" && Windows_Win32_System_Threading_GetProcessHandleFromHwnd == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetProcessHandleFromHwnd
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetProcessId == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetProcessId
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetProcessIdOfThread == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetProcessIdOfThread
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetProcessInformation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetProcessInformation
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetProcessIoCounters == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetProcessIoCounters
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetProcessMitigationPolicy == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetProcessMitigationPolicy
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetProcessPriorityBoost == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetProcessPriorityBoost
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetProcessShutdownParameters == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetProcessShutdownParameters
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetProcessTimes == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetProcessTimes
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetProcessVersion == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetProcessVersion
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetProcessWorkingSetSize == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetProcessWorkingSetSize
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetStartupInfoA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetStartupInfoA
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetStartupInfoW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetStartupInfoW
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetSystemTimes == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetSystemTimes
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetThreadDescription == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThreadDescription
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetThreadGroupAffinity == "on" && Windows_Win32_System_SystemInformation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThreadGroupAffinity
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetThreadIOPendingFlag == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThreadIOPendingFlag
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetThreadId == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThreadId
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetThreadIdealProcessorEx == "on" && Windows_Win32_System_Kernel == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThreadIdealProcessorEx
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetThreadInformation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThreadInformation
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetThreadPriority == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThreadPriority
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetThreadPriorityBoost == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThreadPriorityBoost
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetThreadSelectedCpuSetMasks == "on" && Windows_Win32_System_SystemInformation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThreadSelectedCpuSetMasks
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetThreadSelectedCpuSets == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThreadSelectedCpuSets
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetThreadTimes == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThreadTimes
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetUmsCompletionListEvent == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetUmsCompletionListEvent
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_GetUmsSystemThreadInformation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetUmsSystemThreadInformation
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_InitOnceBeginInitialize == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitOnceBeginInitialize
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_InitOnceComplete == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitOnceComplete
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_InitOnceExecuteOnce == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitOnceExecuteOnce
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_InitOnceInitialize == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitOnceInitialize
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_InitializeConditionVariable == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitializeConditionVariable
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_InitializeCriticalSection == "on" && Windows_Win32_System_Kernel == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitializeCriticalSection
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_InitializeCriticalSectionAndSpinCount == "on" && Windows_Win32_System_Kernel == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitializeCriticalSectionAndSpinCount
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_InitializeCriticalSectionEx == "on" && Windows_Win32_System_Kernel == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitializeCriticalSectionEx
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_InitializeProcThreadAttributeList == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitializeProcThreadAttributeList
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_InitializeSListHead == "on" && ((arch == "aarch64" || arch == "x86_64") && Windows_Win32_System_Kernel == "on")]
+public import windows_sys.Win32._impl_l2.Windows_InitializeSListHead
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_InitializeSRWLock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitializeSRWLock
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_InitializeSynchronizationBarrier == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitializeSynchronizationBarrier
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_InterlockedFlushSList == "on" && ((arch == "aarch64" || arch == "x86_64") && Windows_Win32_System_Kernel == "on")]
+public import windows_sys.Win32._impl_l2.Windows_InterlockedFlushSList
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_InterlockedPopEntrySList == "on" && ((arch == "aarch64" || arch == "x86_64") && Windows_Win32_System_Kernel == "on")]
+public import windows_sys.Win32._impl_l2.Windows_InterlockedPopEntrySList
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_InterlockedPushEntrySList == "on" && ((arch == "aarch64" || arch == "x86_64") && Windows_Win32_System_Kernel == "on")]
+public import windows_sys.Win32._impl_l2.Windows_InterlockedPushEntrySList
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_InterlockedPushListSListEx == "on" && ((arch == "aarch64" || arch == "x86_64") && Windows_Win32_System_Kernel == "on")]
+public import windows_sys.Win32._impl_l2.Windows_InterlockedPushListSListEx
+@When[Windows_Win32_System_Threading == "on" && USER32 == "on" && Windows_Win32_System_Threading_IsImmersiveProcess == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsImmersiveProcess
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_IsProcessCritical == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsProcessCritical
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_IsProcessorFeaturePresent == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsProcessorFeaturePresent
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_IsThreadAFiber == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsThreadAFiber
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_IsThreadpoolTimerSet == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsThreadpoolTimerSet
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_IsWow64Process == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsWow64Process
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_IsWow64Process2 == "on" && Windows_Win32_System_SystemInformation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsWow64Process2
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_LeaveCriticalSection == "on" && Windows_Win32_System_Kernel == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LeaveCriticalSection
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_LeaveCriticalSectionWhenCallbackReturns == "on" && Windows_Win32_System_Kernel == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LeaveCriticalSectionWhenCallbackReturns
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_OpenEventA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OpenEventA
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_OpenEventW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OpenEventW
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_OpenMutexW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OpenMutexW
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_OpenPrivateNamespaceA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OpenPrivateNamespaceA
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_OpenPrivateNamespaceW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OpenPrivateNamespaceW
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_OpenProcess == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OpenProcess
+@When[Windows_Win32_System_Threading == "on" && ADVAPI32 == "on" && Windows_Win32_System_Threading_OpenProcessToken == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OpenProcessToken
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_OpenSemaphoreW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OpenSemaphoreW
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_OpenThread == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OpenThread
+@When[Windows_Win32_System_Threading == "on" && ADVAPI32 == "on" && Windows_Win32_System_Threading_OpenThreadToken == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OpenThreadToken
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_OpenWaitableTimerA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OpenWaitableTimerA
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_OpenWaitableTimerW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OpenWaitableTimerW
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_PulseEvent == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PulseEvent
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_QueryDepthSList == "on" && ((arch == "aarch64" || arch == "x86_64") && Windows_Win32_System_Kernel == "on")]
+public import windows_sys.Win32._impl_l2.Windows_QueryDepthSList
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_QueryFullProcessImageNameA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_QueryFullProcessImageNameA
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_QueryFullProcessImageNameW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_QueryFullProcessImageNameW
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_QueryProcessAffinityUpdateMode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_QueryProcessAffinityUpdateMode
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_QueryProtectedPolicy == "on"]
+public import windows_sys.Win32._impl_l2.Windows_QueryProtectedPolicy
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_QueryThreadpoolStackInformation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_QueryThreadpoolStackInformation
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_QueryUmsThreadInformation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_QueryUmsThreadInformation
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_QueueUserAPC == "on"]
+public import windows_sys.Win32._impl_l2.Windows_QueueUserAPC
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_QueueUserAPC2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_QueueUserAPC2
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_QueueUserWorkItem == "on"]
+public import windows_sys.Win32._impl_l2.Windows_QueueUserWorkItem
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_RegisterWaitForSingleObject == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RegisterWaitForSingleObject
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_ReleaseMutex == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReleaseMutex
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_ReleaseMutexWhenCallbackReturns == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReleaseMutexWhenCallbackReturns
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_ReleaseSRWLockExclusive == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReleaseSRWLockExclusive
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_ReleaseSRWLockShared == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReleaseSRWLockShared
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_ReleaseSemaphore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReleaseSemaphore
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_ReleaseSemaphoreWhenCallbackReturns == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReleaseSemaphoreWhenCallbackReturns
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_ResetEvent == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ResetEvent
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_ResumeThread == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ResumeThread
+@When[Windows_Win32_System_Threading == "on" && RTWORKQ == "on" && Windows_Win32_System_Threading_RtwqAddPeriodicCallback == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtwqAddPeriodicCallback
+@When[Windows_Win32_System_Threading == "on" && RTWORKQ == "on" && Windows_Win32_System_Threading_RtwqAllocateSerialWorkQueue == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtwqAllocateSerialWorkQueue
+@When[Windows_Win32_System_Threading == "on" && RTWORKQ == "on" && Windows_Win32_System_Threading_RtwqAllocateWorkQueue == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtwqAllocateWorkQueue
+@When[Windows_Win32_System_Threading == "on" && RTWORKQ == "on" && Windows_Win32_System_Threading_RtwqBeginRegisterWorkQueueWithMMCSS == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtwqBeginRegisterWorkQueueWithMMCSS
+@When[Windows_Win32_System_Threading == "on" && RTWORKQ == "on" && Windows_Win32_System_Threading_RtwqBeginUnregisterWorkQueueWithMMCSS == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtwqBeginUnregisterWorkQueueWithMMCSS
+@When[Windows_Win32_System_Threading == "on" && RTWORKQ == "on" && Windows_Win32_System_Threading_RtwqCancelDeadline == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtwqCancelDeadline
+@When[Windows_Win32_System_Threading == "on" && RTWORKQ == "on" && Windows_Win32_System_Threading_RtwqCancelWorkItem == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtwqCancelWorkItem
+@When[Windows_Win32_System_Threading == "on" && RTWORKQ == "on" && Windows_Win32_System_Threading_RtwqCreateAsyncResult == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtwqCreateAsyncResult
+@When[Windows_Win32_System_Threading == "on" && RTWORKQ == "on" && Windows_Win32_System_Threading_RtwqEndRegisterWorkQueueWithMMCSS == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtwqEndRegisterWorkQueueWithMMCSS
+@When[Windows_Win32_System_Threading == "on" && RTWORKQ == "on" && Windows_Win32_System_Threading_RtwqGetWorkQueueMMCSSClass == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtwqGetWorkQueueMMCSSClass
+@When[Windows_Win32_System_Threading == "on" && RTWORKQ == "on" && Windows_Win32_System_Threading_RtwqGetWorkQueueMMCSSPriority == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtwqGetWorkQueueMMCSSPriority
+@When[Windows_Win32_System_Threading == "on" && RTWORKQ == "on" && Windows_Win32_System_Threading_RtwqGetWorkQueueMMCSSTaskId == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtwqGetWorkQueueMMCSSTaskId
+@When[Windows_Win32_System_Threading == "on" && RTWORKQ == "on" && Windows_Win32_System_Threading_RtwqInvokeCallback == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtwqInvokeCallback
+@When[Windows_Win32_System_Threading == "on" && RTWORKQ == "on" && Windows_Win32_System_Threading_RtwqJoinWorkQueue == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtwqJoinWorkQueue
+@When[Windows_Win32_System_Threading == "on" && RTWORKQ == "on" && Windows_Win32_System_Threading_RtwqLockPlatform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtwqLockPlatform
+@When[Windows_Win32_System_Threading == "on" && RTWORKQ == "on" && Windows_Win32_System_Threading_RtwqLockSharedWorkQueue == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtwqLockSharedWorkQueue
+@When[Windows_Win32_System_Threading == "on" && RTWORKQ == "on" && Windows_Win32_System_Threading_RtwqLockWorkQueue == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtwqLockWorkQueue
+@When[Windows_Win32_System_Threading == "on" && RTWORKQ == "on" && Windows_Win32_System_Threading_RtwqPutWaitingWorkItem == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtwqPutWaitingWorkItem
+@When[Windows_Win32_System_Threading == "on" && RTWORKQ == "on" && Windows_Win32_System_Threading_RtwqPutWorkItem == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtwqPutWorkItem
+@When[Windows_Win32_System_Threading == "on" && RTWORKQ == "on" && Windows_Win32_System_Threading_RtwqRegisterPlatformEvents == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtwqRegisterPlatformEvents
+@When[Windows_Win32_System_Threading == "on" && RTWORKQ == "on" && Windows_Win32_System_Threading_RtwqRegisterPlatformWithMMCSS == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtwqRegisterPlatformWithMMCSS
+@When[Windows_Win32_System_Threading == "on" && RTWORKQ == "on" && Windows_Win32_System_Threading_RtwqRemovePeriodicCallback == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtwqRemovePeriodicCallback
+@When[Windows_Win32_System_Threading == "on" && RTWORKQ == "on" && Windows_Win32_System_Threading_RtwqScheduleWorkItem == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtwqScheduleWorkItem
+@When[Windows_Win32_System_Threading == "on" && RTWORKQ == "on" && Windows_Win32_System_Threading_RtwqSetDeadline == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtwqSetDeadline
+@When[Windows_Win32_System_Threading == "on" && RTWORKQ == "on" && Windows_Win32_System_Threading_RtwqSetDeadline2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtwqSetDeadline2
+@When[Windows_Win32_System_Threading == "on" && RTWORKQ == "on" && Windows_Win32_System_Threading_RtwqSetLongRunning == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtwqSetLongRunning
+@When[Windows_Win32_System_Threading == "on" && RTWORKQ == "on" && Windows_Win32_System_Threading_RtwqShutdown == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtwqShutdown
+@When[Windows_Win32_System_Threading == "on" && RTWORKQ == "on" && Windows_Win32_System_Threading_RtwqStartup == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtwqStartup
+@When[Windows_Win32_System_Threading == "on" && RTWORKQ == "on" && Windows_Win32_System_Threading_RtwqUnjoinWorkQueue == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtwqUnjoinWorkQueue
+@When[Windows_Win32_System_Threading == "on" && RTWORKQ == "on" && Windows_Win32_System_Threading_RtwqUnlockPlatform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtwqUnlockPlatform
+@When[Windows_Win32_System_Threading == "on" && RTWORKQ == "on" && Windows_Win32_System_Threading_RtwqUnlockWorkQueue == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtwqUnlockWorkQueue
+@When[Windows_Win32_System_Threading == "on" && RTWORKQ == "on" && Windows_Win32_System_Threading_RtwqUnregisterPlatformEvents == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtwqUnregisterPlatformEvents
+@When[Windows_Win32_System_Threading == "on" && RTWORKQ == "on" && Windows_Win32_System_Threading_RtwqUnregisterPlatformFromMMCSS == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtwqUnregisterPlatformFromMMCSS
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetCriticalSectionSpinCount == "on" && Windows_Win32_System_Kernel == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetCriticalSectionSpinCount
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetEvent == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetEvent
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetEventWhenCallbackReturns == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetEventWhenCallbackReturns
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetPriorityClass == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetPriorityClass
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetProcessAffinityMask == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetProcessAffinityMask
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetProcessAffinityUpdateMode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetProcessAffinityUpdateMode
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetProcessDEPPolicy == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetProcessDEPPolicy
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetProcessDefaultCpuSetMasks == "on" && Windows_Win32_System_SystemInformation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetProcessDefaultCpuSetMasks
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetProcessDefaultCpuSets == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetProcessDefaultCpuSets
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetProcessDynamicEHContinuationTargets == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetProcessDynamicEHContinuationTargets
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetProcessDynamicEnforcedCetCompatibleRanges == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetProcessDynamicEnforcedCetCompatibleRanges
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetProcessInformation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetProcessInformation
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetProcessMitigationPolicy == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetProcessMitigationPolicy
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetProcessPriorityBoost == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetProcessPriorityBoost
+@When[Windows_Win32_System_Threading == "on" && USER32 == "on" && Windows_Win32_System_Threading_SetProcessRestrictionExemption == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetProcessRestrictionExemption
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetProcessShutdownParameters == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetProcessShutdownParameters
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetProcessWorkingSetSize == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetProcessWorkingSetSize
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetProtectedPolicy == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetProtectedPolicy
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetThreadAffinityMask == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetThreadAffinityMask
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetThreadDescription == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetThreadDescription
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetThreadGroupAffinity == "on" && Windows_Win32_System_SystemInformation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetThreadGroupAffinity
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetThreadIdealProcessor == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetThreadIdealProcessor
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetThreadIdealProcessorEx == "on" && Windows_Win32_System_Kernel == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetThreadIdealProcessorEx
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetThreadInformation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetThreadInformation
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetThreadPriority == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetThreadPriority
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetThreadPriorityBoost == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetThreadPriorityBoost
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetThreadSelectedCpuSetMasks == "on" && Windows_Win32_System_SystemInformation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetThreadSelectedCpuSetMasks
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetThreadSelectedCpuSets == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetThreadSelectedCpuSets
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetThreadStackGuarantee == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetThreadStackGuarantee
+@When[Windows_Win32_System_Threading == "on" && ADVAPI32 == "on" && Windows_Win32_System_Threading_SetThreadToken == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetThreadToken
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetThreadpoolStackInformation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetThreadpoolStackInformation
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetThreadpoolThreadMaximum == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetThreadpoolThreadMaximum
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetThreadpoolThreadMinimum == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetThreadpoolThreadMinimum
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetThreadpoolTimer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetThreadpoolTimer
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetThreadpoolTimerEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetThreadpoolTimerEx
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetThreadpoolWait == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetThreadpoolWait
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetThreadpoolWaitEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetThreadpoolWaitEx
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetTimerQueueTimer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetTimerQueueTimer
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetUmsThreadInformation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetUmsThreadInformation
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetWaitableTimer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetWaitableTimer
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SetWaitableTimerEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetWaitableTimerEx
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SignalObjectAndWait == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SignalObjectAndWait
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_Sleep == "on"]
+public import windows_sys.Win32._impl_l2.Windows_Sleep
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SleepConditionVariableCS == "on" && Windows_Win32_System_Kernel == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SleepConditionVariableCS
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SleepConditionVariableSRW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SleepConditionVariableSRW
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SleepEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SleepEx
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_StartThreadpoolIo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StartThreadpoolIo
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SubmitThreadpoolWork == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SubmitThreadpoolWork
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SuspendThread == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SuspendThread
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SwitchToFiber == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SwitchToFiber
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_SwitchToThread == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SwitchToThread
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_TerminateProcess == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TerminateProcess
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_TerminateThread == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TerminateThread
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_TlsAlloc == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TlsAlloc
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_TlsFree == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TlsFree
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_TlsGetValue == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TlsGetValue
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_TlsGetValue2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TlsGetValue2
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_TlsSetValue == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TlsSetValue
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_TryAcquireSRWLockExclusive == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TryAcquireSRWLockExclusive
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_TryAcquireSRWLockShared == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TryAcquireSRWLockShared
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_TryEnterCriticalSection == "on" && Windows_Win32_System_Kernel == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TryEnterCriticalSection
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_TrySubmitThreadpoolCallback == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TrySubmitThreadpoolCallback
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_UmsThreadYield == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UmsThreadYield
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_UnregisterWait == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UnregisterWait
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_UnregisterWaitEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UnregisterWaitEx
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_UpdateProcThreadAttribute == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UpdateProcThreadAttribute
+@When[Windows_Win32_System_Threading == "on" && USER32 == "on" && Windows_Win32_System_Threading_WaitForInputIdle == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WaitForInputIdle
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_WaitForMultipleObjects == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WaitForMultipleObjects
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_WaitForMultipleObjectsEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WaitForMultipleObjectsEx
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_WaitForSingleObject == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WaitForSingleObject
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_WaitForSingleObjectEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WaitForSingleObjectEx
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_WaitForThreadpoolIoCallbacks == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WaitForThreadpoolIoCallbacks
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_WaitForThreadpoolTimerCallbacks == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WaitForThreadpoolTimerCallbacks
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_WaitForThreadpoolWaitCallbacks == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WaitForThreadpoolWaitCallbacks
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_WaitForThreadpoolWorkCallbacks == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WaitForThreadpoolWorkCallbacks
+@When[Windows_Win32_System_Threading == "on" && API_MS_WIN_CORE_SYNCH_L1_2_0 == "on" && Windows_Win32_System_Threading_WaitOnAddress == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WaitOnAddress
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_WakeAllConditionVariable == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WakeAllConditionVariable
+@When[Windows_Win32_System_Threading == "on" && API_MS_WIN_CORE_SYNCH_L1_2_0 == "on" && Windows_Win32_System_Threading_WakeByAddressAll == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WakeByAddressAll
+@When[Windows_Win32_System_Threading == "on" && API_MS_WIN_CORE_SYNCH_L1_2_0 == "on" && Windows_Win32_System_Threading_WakeByAddressSingle == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WakeByAddressSingle
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_WakeConditionVariable == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WakeConditionVariable
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_WinExec == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WinExec
+@When[Windows_Win32_System_Threading == "on" && API_MS_WIN_CORE_WOW64_L1_1_1 == "on" && Windows_Win32_System_Threading_Wow64SetThreadDefaultGuestMachine == "on"]
+public import windows_sys.Win32._impl_l2.Windows_Wow64SetThreadDefaultGuestMachine
+@When[Windows_Win32_System_Threading == "on" && KERNEL32 == "on" && Windows_Win32_System_Threading_Wow64SuspendThread == "on"]
+public import windows_sys.Win32._impl_l2.Windows_Wow64SuspendThread

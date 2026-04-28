@@ -127,6 +127,7 @@ public class ICharacterGroupings <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ICharacterGroupingsFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -171,6 +172,7 @@ public class ICharacterGroupingsFactory <: InterfaceWrapperBase & ComInterface {
         readVtbl<ICharacterGroupingsFactoryVtbl>(ICharacterGroupingsFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create(language: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

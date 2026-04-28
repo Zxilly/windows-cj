@@ -1364,7 +1364,10 @@ public struct IPrintTicketFeatureVtbl {
     public var XmlNode: UIntNative = UIntNative(0)
     public var DisplayName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetOption: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Options: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Options: UIntNative = UIntNative(0)
     public var GetSelectedOption: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetSelectedOption: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SelectionType: CFunc<(CPointer<Unit>, CPointer<PrintTicketFeatureSelectionTypeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1477,6 +1480,7 @@ public class IPrintTicketFeature <: InterfaceWrapperBase & ComInterface & Runtim
         return PrintTicketOption.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Options(): windows_collections.IVectorView<PrintTicketOption> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1601,6 +1605,7 @@ public class PrintTicketFeature <: InterfaceWrapperBase & ComInterface & windows
         return defaultInterface().GetOption(name, xmlNamespace)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Options(): windows_collections.IVectorView<PrintTicketOption> {
         return defaultInterface().Options()
     }

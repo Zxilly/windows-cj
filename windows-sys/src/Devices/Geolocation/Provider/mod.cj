@@ -3,7 +3,6 @@ package windows_sys.Devices.Geolocation.Provider
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Devices_Geolocation == "on"]
 import windows_sys.Devices.Geolocation as Devices_Geolocation
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
 

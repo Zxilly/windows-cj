@@ -3,7 +3,6 @@ package windows_sys.Devices.Adc
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Devices_Adc_Provider == "on"]
 import windows_sys.Devices.Adc.Provider as Devices_Adc_Provider
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
 
@@ -209,7 +208,7 @@ public class IAdcController <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IAdcControllerStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Devices_Adc_Provider == "on"]
+    @When[Windows_Devices_Adc_Provider == "on" && Windows_Foundation_Collections == "on"]
     public var GetControllersAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -254,7 +253,7 @@ public class IAdcControllerStatics <: InterfaceWrapperBase & ComInterface {
         readVtbl<IAdcControllerStaticsVtbl>(IAdcControllerStaticsVtbl())
     }
 
-    @When[Windows_Devices_Adc_Provider == "on"]
+    @When[Windows_Devices_Adc_Provider == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func GetControllersAsync(provider: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

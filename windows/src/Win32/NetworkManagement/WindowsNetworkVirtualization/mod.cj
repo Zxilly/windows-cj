@@ -6,9 +6,7 @@ package windows.Win32.NetworkManagement.WindowsNetworkVirtualization
 import std.collection.*
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_System_IO == "on"]
 import windows.Win32.System.IO as Win32_System_IO
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
@@ -699,14 +697,24 @@ public struct WNV_OBJECT_CHANGE_PARAM__ObjectParam_e__Union {
     public init() {}
 }
 
-@When[WNVAPI == "on"]
+@When[Windows_Win32_NetworkManagement_WindowsNetworkVirtualization == "on" && WNVAPI == "on" && Windows_Win32_NetworkManagement_WindowsNetworkVirtualization_WnvOpen == "on"]
 foreign {
     func WnvOpen(): CPointer<Unit>
 }
 
-@When[WNVAPI == "on" && Windows_Win32_System_IO == "on"]
+@When[Windows_Win32_NetworkManagement_WindowsNetworkVirtualization == "on" && WNVAPI == "on" && Windows_Win32_NetworkManagement_WindowsNetworkVirtualization_WnvOpen == "on"]
+public unsafe func Windows_WnvOpen(): CPointer<Unit> {
+    return WnvOpen()
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsNetworkVirtualization == "on" && WNVAPI == "on" && Windows_Win32_NetworkManagement_WindowsNetworkVirtualization_WnvRequestNotification == "on" && Windows_Win32_System_IO == "on"]
 foreign {
     func WnvRequestNotification(WnvHandle: CPointer<Unit>, NotificationParam: CPointer<WNV_NOTIFICATION_PARAMAbi>, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, BytesTransferred: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsNetworkVirtualization == "on" && WNVAPI == "on" && Windows_Win32_NetworkManagement_WindowsNetworkVirtualization_WnvRequestNotification == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_WnvRequestNotification(WnvHandle: CPointer<Unit>, NotificationParam: CPointer<WNV_NOTIFICATION_PARAMAbi>, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, BytesTransferred: CPointer<UInt32>): UInt32 {
+    return WnvRequestNotification(WnvHandle, NotificationParam, Overlapped, BytesTransferred)
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsNetworkVirtualization == "on"]

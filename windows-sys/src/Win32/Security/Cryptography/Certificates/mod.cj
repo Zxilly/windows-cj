@@ -3,9 +3,7 @@ package windows_sys.Win32.Security.Cryptography.Certificates
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Security_Authentication_Identity == "on"]
 import windows_sys.Win32.Security.Authentication.Identity as Win32_Security_Authentication_Identity
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
@@ -21097,50 +21095,272 @@ public class IX509SCEPEnrollmentHelper <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[CERTADM == "on"]
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvBackupClose == "on"]
 foreign {
     func CertSrvBackupClose(hbc: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvBackupClose == "on"]
+public unsafe func Windows_CertSrvBackupClose(hbc: CPointer<Unit>): Int32 {
+    return CertSrvBackupClose(hbc)
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvBackupEnd == "on"]
+foreign {
     func CertSrvBackupEnd(hbc: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvBackupEnd == "on"]
+public unsafe func Windows_CertSrvBackupEnd(hbc: CPointer<Unit>): Int32 {
+    return CertSrvBackupEnd(hbc)
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvBackupFree == "on"]
+foreign {
     func CertSrvBackupFree(pv: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvBackupFree == "on"]
+public unsafe func Windows_CertSrvBackupFree(pv: CPointer<Unit>): Unit {
+    CertSrvBackupFree(pv)
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvBackupGetBackupLogsW == "on"]
+foreign {
     func CertSrvBackupGetBackupLogsW(hbc: CPointer<Unit>, ppwszzBackupLogFiles: CPointer<CPointer<UInt16>>, pcbSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvBackupGetBackupLogsW == "on"]
+public unsafe func Windows_CertSrvBackupGetBackupLogsW(hbc: CPointer<Unit>, ppwszzBackupLogFiles: CPointer<CPointer<UInt16>>, pcbSize: CPointer<UInt32>): Int32 {
+    return CertSrvBackupGetBackupLogsW(hbc, ppwszzBackupLogFiles, pcbSize)
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvBackupGetDatabaseNamesW == "on"]
+foreign {
     func CertSrvBackupGetDatabaseNamesW(hbc: CPointer<Unit>, ppwszzAttachmentInformation: CPointer<CPointer<UInt16>>, pcbSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvBackupGetDatabaseNamesW == "on"]
+public unsafe func Windows_CertSrvBackupGetDatabaseNamesW(hbc: CPointer<Unit>, ppwszzAttachmentInformation: CPointer<CPointer<UInt16>>, pcbSize: CPointer<UInt32>): Int32 {
+    return CertSrvBackupGetDatabaseNamesW(hbc, ppwszzAttachmentInformation, pcbSize)
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvBackupGetDynamicFileListW == "on"]
+foreign {
     func CertSrvBackupGetDynamicFileListW(hbc: CPointer<Unit>, ppwszzFileList: CPointer<CPointer<UInt16>>, pcbSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvBackupGetDynamicFileListW == "on"]
+public unsafe func Windows_CertSrvBackupGetDynamicFileListW(hbc: CPointer<Unit>, ppwszzFileList: CPointer<CPointer<UInt16>>, pcbSize: CPointer<UInt32>): Int32 {
+    return CertSrvBackupGetDynamicFileListW(hbc, ppwszzFileList, pcbSize)
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvBackupOpenFileW == "on"]
+foreign {
     func CertSrvBackupOpenFileW(hbc: CPointer<Unit>, pwszAttachmentName: CPointer<UInt16>, cbReadHintSize: UInt32, pliFileSize: CPointer<Int64>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvBackupOpenFileW == "on"]
+public unsafe func Windows_CertSrvBackupOpenFileW(hbc: CPointer<Unit>, pwszAttachmentName: CPointer<UInt16>, cbReadHintSize: UInt32, pliFileSize: CPointer<Int64>): Int32 {
+    return CertSrvBackupOpenFileW(hbc, pwszAttachmentName, cbReadHintSize, pliFileSize)
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvBackupPrepareW == "on"]
+foreign {
     func CertSrvBackupPrepareW(pwszServerName: CPointer<UInt16>, grbitJet: UInt32, dwBackupFlags: UInt32, phbc: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvBackupPrepareW == "on"]
+public unsafe func Windows_CertSrvBackupPrepareW(pwszServerName: CPointer<UInt16>, grbitJet: UInt32, dwBackupFlags: UInt32, phbc: CPointer<CPointer<Unit>>): Int32 {
+    return CertSrvBackupPrepareW(pwszServerName, grbitJet, dwBackupFlags, phbc)
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvBackupRead == "on"]
+foreign {
     func CertSrvBackupRead(hbc: CPointer<Unit>, pvBuffer: CPointer<Unit>, cbBuffer: UInt32, pcbRead: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvBackupRead == "on"]
+public unsafe func Windows_CertSrvBackupRead(hbc: CPointer<Unit>, pvBuffer: CPointer<Unit>, cbBuffer: UInt32, pcbRead: CPointer<UInt32>): Int32 {
+    return CertSrvBackupRead(hbc, pvBuffer, cbBuffer, pcbRead)
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvBackupTruncateLogs == "on"]
+foreign {
     func CertSrvBackupTruncateLogs(hbc: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvBackupTruncateLogs == "on"]
+public unsafe func Windows_CertSrvBackupTruncateLogs(hbc: CPointer<Unit>): Int32 {
+    return CertSrvBackupTruncateLogs(hbc)
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvIsServerOnlineW == "on"]
+foreign {
     func CertSrvIsServerOnlineW(pwszServerName: CPointer<UInt16>, pfServerOnline: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvIsServerOnlineW == "on"]
+public unsafe func Windows_CertSrvIsServerOnlineW(pwszServerName: CPointer<UInt16>, pfServerOnline: CPointer<Int32>): Int32 {
+    return CertSrvIsServerOnlineW(pwszServerName, pfServerOnline)
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvRestoreEnd == "on"]
+foreign {
     func CertSrvRestoreEnd(hbc: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvRestoreEnd == "on"]
+public unsafe func Windows_CertSrvRestoreEnd(hbc: CPointer<Unit>): Int32 {
+    return CertSrvRestoreEnd(hbc)
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvRestoreGetDatabaseLocationsW == "on"]
+foreign {
     func CertSrvRestoreGetDatabaseLocationsW(hbc: CPointer<Unit>, ppwszzDatabaseLocationList: CPointer<CPointer<UInt16>>, pcbSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvRestoreGetDatabaseLocationsW == "on"]
+public unsafe func Windows_CertSrvRestoreGetDatabaseLocationsW(hbc: CPointer<Unit>, ppwszzDatabaseLocationList: CPointer<CPointer<UInt16>>, pcbSize: CPointer<UInt32>): Int32 {
+    return CertSrvRestoreGetDatabaseLocationsW(hbc, ppwszzDatabaseLocationList, pcbSize)
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvRestorePrepareW == "on"]
+foreign {
     func CertSrvRestorePrepareW(pwszServerName: CPointer<UInt16>, dwRestoreFlags: UInt32, phbc: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvRestorePrepareW == "on"]
+public unsafe func Windows_CertSrvRestorePrepareW(pwszServerName: CPointer<UInt16>, dwRestoreFlags: UInt32, phbc: CPointer<CPointer<Unit>>): Int32 {
+    return CertSrvRestorePrepareW(pwszServerName, dwRestoreFlags, phbc)
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvRestoreRegisterComplete == "on"]
+foreign {
     func CertSrvRestoreRegisterComplete(hbc: CPointer<Unit>, hrRestoreState: Int32): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvRestoreRegisterComplete == "on"]
+public unsafe func Windows_CertSrvRestoreRegisterComplete(hbc: CPointer<Unit>, hrRestoreState: Int32): Int32 {
+    return CertSrvRestoreRegisterComplete(hbc, hrRestoreState)
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvRestoreRegisterThroughFile == "on"]
+foreign {
     func CertSrvRestoreRegisterThroughFile(hbc: CPointer<Unit>, pwszCheckPointFilePath: CPointer<UInt16>, pwszLogPath: CPointer<UInt16>, rgrstmap: CPointer<CSEDB_RSTMAPW>, crstmap: Int32, pwszBackupLogPath: CPointer<UInt16>, genLow: UInt32, genHigh: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvRestoreRegisterThroughFile == "on"]
+public unsafe func Windows_CertSrvRestoreRegisterThroughFile(hbc: CPointer<Unit>, pwszCheckPointFilePath: CPointer<UInt16>, pwszLogPath: CPointer<UInt16>, rgrstmap: CPointer<CSEDB_RSTMAPW>, crstmap: Int32, pwszBackupLogPath: CPointer<UInt16>, genLow: UInt32, genHigh: UInt32): Int32 {
+    return CertSrvRestoreRegisterThroughFile(hbc, pwszCheckPointFilePath, pwszLogPath, rgrstmap, crstmap, pwszBackupLogPath, genLow, genHigh)
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvRestoreRegisterW == "on"]
+foreign {
     func CertSrvRestoreRegisterW(hbc: CPointer<Unit>, pwszCheckPointFilePath: CPointer<UInt16>, pwszLogPath: CPointer<UInt16>, rgrstmap: CPointer<CSEDB_RSTMAPW>, crstmap: Int32, pwszBackupLogPath: CPointer<UInt16>, genLow: UInt32, genHigh: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvRestoreRegisterW == "on"]
+public unsafe func Windows_CertSrvRestoreRegisterW(hbc: CPointer<Unit>, pwszCheckPointFilePath: CPointer<UInt16>, pwszLogPath: CPointer<UInt16>, rgrstmap: CPointer<CSEDB_RSTMAPW>, crstmap: Int32, pwszBackupLogPath: CPointer<UInt16>, genLow: UInt32, genHigh: UInt32): Int32 {
+    return CertSrvRestoreRegisterW(hbc, pwszCheckPointFilePath, pwszLogPath, rgrstmap, crstmap, pwszBackupLogPath, genLow, genHigh)
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvServerControlW == "on"]
+foreign {
     func CertSrvServerControlW(pwszServerName: CPointer<UInt16>, dwControlFlags: UInt32, pcbOut: CPointer<UInt32>, ppbOut: CPointer<CPointer<UInt8>>): Int32
 }
 
-@When[CERTPOLENG == "on" && (Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Cryptography == "on")]
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTADM == "on" && Windows_Win32_Security_Cryptography_Certificates_CertSrvServerControlW == "on"]
+public unsafe func Windows_CertSrvServerControlW(pwszServerName: CPointer<UInt16>, dwControlFlags: UInt32, pcbOut: CPointer<UInt32>, ppbOut: CPointer<CPointer<UInt8>>): Int32 {
+    return CertSrvServerControlW(pwszServerName, dwControlFlags, pcbOut, ppbOut)
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTPOLENG == "on" && Windows_Win32_Security_Cryptography_Certificates_PstAcquirePrivateKey == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
+    func PstAcquirePrivateKey(pCert: CPointer<Win32__impl_l2.CERT_CONTEXT>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTPOLENG == "on" && Windows_Win32_Security_Cryptography_Certificates_PstAcquirePrivateKey == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_PstAcquirePrivateKey(pCert: CPointer<Win32__impl_l2.CERT_CONTEXT>): Int32 {
+    return PstAcquirePrivateKey(pCert)
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTPOLENG == "on" && Windows_Win32_Security_Cryptography_Certificates_PstGetCertificateChain == "on" && Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Cryptography == "on"]
 foreign {
     func PstGetCertificateChain(pCert: CPointer<Win32__impl_l2.CERT_CONTEXT>, pTrustedIssuers: CPointer<Win32_Security_Authentication_Identity.SecPkgContext_IssuerListInfoEx>, ppCertChainContext: CPointer<CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXT>>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTPOLENG == "on" && Windows_Win32_Security_Cryptography_Certificates_PstGetCertificateChain == "on" && Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_PstGetCertificateChain(pCert: CPointer<Win32__impl_l2.CERT_CONTEXT>, pTrustedIssuers: CPointer<Win32_Security_Authentication_Identity.SecPkgContext_IssuerListInfoEx>, ppCertChainContext: CPointer<CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXT>>): Int32 {
+    return PstGetCertificateChain(pCert, pTrustedIssuers, ppCertChainContext)
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTPOLENG == "on" && Windows_Win32_Security_Cryptography_Certificates_PstGetCertificates == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
+    // param-hint: rgpCriteria len=param[1] optional
+    func PstGetCertificates(pTargetName: CPointer<Win32_Foundation.UNICODE_STRING>, cCriteria: UInt32, rgpCriteria: CPointer<Win32__impl_l1.CERT_SELECT_CRITERIA>, bIsClient: Int32, pdwCertChainContextCount: CPointer<UInt32>, ppCertChainContexts: CPointer<CPointer<CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXT>>>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTPOLENG == "on" && Windows_Win32_Security_Cryptography_Certificates_PstGetCertificates == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_PstGetCertificates(pTargetName: CPointer<Win32_Foundation.UNICODE_STRING>, cCriteria: UInt32, rgpCriteria: CPointer<Win32__impl_l1.CERT_SELECT_CRITERIA>, bIsClient: Int32, pdwCertChainContextCount: CPointer<UInt32>, ppCertChainContexts: CPointer<CPointer<CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXT>>>): Int32 {
+    return PstGetCertificates(pTargetName, cCriteria, rgpCriteria, bIsClient, pdwCertChainContextCount, ppCertChainContexts)
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTPOLENG == "on" && Windows_Win32_Security_Cryptography_Certificates_PstGetTrustAnchors == "on" && Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
     // param-hint: rgpCriteria len=param[1] optional
     func PstGetTrustAnchors(pTargetName: CPointer<Win32_Foundation.UNICODE_STRING>, cCriteria: UInt32, rgpCriteria: CPointer<Win32__impl_l1.CERT_SELECT_CRITERIA>, ppTrustedIssuers: CPointer<CPointer<Win32_Security_Authentication_Identity.SecPkgContext_IssuerListInfoEx>>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTPOLENG == "on" && Windows_Win32_Security_Cryptography_Certificates_PstGetTrustAnchors == "on" && Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_PstGetTrustAnchors(pTargetName: CPointer<Win32_Foundation.UNICODE_STRING>, cCriteria: UInt32, rgpCriteria: CPointer<Win32__impl_l1.CERT_SELECT_CRITERIA>, ppTrustedIssuers: CPointer<CPointer<Win32_Security_Authentication_Identity.SecPkgContext_IssuerListInfoEx>>): Int32 {
+    return PstGetTrustAnchors(pTargetName, cCriteria, rgpCriteria, ppTrustedIssuers)
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTPOLENG == "on" && Windows_Win32_Security_Cryptography_Certificates_PstGetTrustAnchorsEx == "on" && Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
     // param-hint: rgpCriteria len=param[1] optional
     // param-hint: pCertContext optional
     func PstGetTrustAnchorsEx(pTargetName: CPointer<Win32_Foundation.UNICODE_STRING>, cCriteria: UInt32, rgpCriteria: CPointer<Win32__impl_l1.CERT_SELECT_CRITERIA>, pCertContext: CPointer<Win32__impl_l2.CERT_CONTEXT>, ppTrustedIssuers: CPointer<CPointer<Win32_Security_Authentication_Identity.SecPkgContext_IssuerListInfoEx>>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTPOLENG == "on" && Windows_Win32_Security_Cryptography_Certificates_PstGetTrustAnchorsEx == "on" && Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_PstGetTrustAnchorsEx(pTargetName: CPointer<Win32_Foundation.UNICODE_STRING>, cCriteria: UInt32, rgpCriteria: CPointer<Win32__impl_l1.CERT_SELECT_CRITERIA>, pCertContext: CPointer<Win32__impl_l2.CERT_CONTEXT>, ppTrustedIssuers: CPointer<CPointer<Win32_Security_Authentication_Identity.SecPkgContext_IssuerListInfoEx>>): Int32 {
+    return PstGetTrustAnchorsEx(pTargetName, cCriteria, rgpCriteria, pCertContext, ppTrustedIssuers)
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTPOLENG == "on" && Windows_Win32_Security_Cryptography_Certificates_PstGetUserNameForCertificate == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
+    func PstGetUserNameForCertificate(pCertContext: CPointer<Win32__impl_l2.CERT_CONTEXT>, UserName: CPointer<Win32_Foundation.UNICODE_STRING>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTPOLENG == "on" && Windows_Win32_Security_Cryptography_Certificates_PstGetUserNameForCertificate == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_PstGetUserNameForCertificate(pCertContext: CPointer<Win32__impl_l2.CERT_CONTEXT>, UserName: CPointer<Win32_Foundation.UNICODE_STRING>): Int32 {
+    return PstGetUserNameForCertificate(pCertContext, UserName)
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTPOLENG == "on" && Windows_Win32_Security_Cryptography_Certificates_PstMapCertificate == "on" && Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
     func PstMapCertificate(pCert: CPointer<Win32__impl_l2.CERT_CONTEXT>, pTokenInformationType: CPointer<Int32>, ppTokenInformation: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[CERTPOLENG == "on" && Windows_Win32_Security_Cryptography == "on"]
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTPOLENG == "on" && Windows_Win32_Security_Cryptography_Certificates_PstMapCertificate == "on" && Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_PstMapCertificate(pCert: CPointer<Win32__impl_l2.CERT_CONTEXT>, pTokenInformationType: CPointer<Int32>, ppTokenInformation: CPointer<CPointer<Unit>>): Int32 {
+    return PstMapCertificate(pCert, pTokenInformationType, ppTokenInformation)
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTPOLENG == "on" && Windows_Win32_Security_Cryptography_Certificates_PstValidate == "on" && Windows_Win32_Security_Cryptography == "on"]
 foreign {
-    func PstAcquirePrivateKey(pCert: CPointer<Win32__impl_l2.CERT_CONTEXT>): Int32
-    // param-hint: rgpCriteria len=param[1] optional
-    func PstGetCertificates(pTargetName: CPointer<Win32_Foundation.UNICODE_STRING>, cCriteria: UInt32, rgpCriteria: CPointer<Win32__impl_l1.CERT_SELECT_CRITERIA>, bIsClient: Int32, pdwCertChainContextCount: CPointer<UInt32>, ppCertChainContexts: CPointer<CPointer<CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXT>>>): Int32
-    func PstGetUserNameForCertificate(pCertContext: CPointer<Win32__impl_l2.CERT_CONTEXT>, UserName: CPointer<Win32_Foundation.UNICODE_STRING>): Int32
     // param-hint: pTargetName optional
     // param-hint: pRequestedIssuancePolicy optional
     // param-hint: phAdditionalCertStore optional
     // param-hint: pProvGUID optional
     func PstValidate(pTargetName: CPointer<Win32_Foundation.UNICODE_STRING>, bIsClient: Int32, pRequestedIssuancePolicy: CPointer<Win32__impl_l1.CERT_USAGE_MATCH>, phAdditionalCertStore: CPointer<Win32__impl_l0.HCERTSTORE>, pCert: CPointer<Win32__impl_l2.CERT_CONTEXT>, pProvGUID: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Certificates == "on" && CERTPOLENG == "on" && Windows_Win32_Security_Cryptography_Certificates_PstValidate == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_PstValidate(pTargetName: CPointer<Win32_Foundation.UNICODE_STRING>, bIsClient: Int32, pRequestedIssuancePolicy: CPointer<Win32__impl_l1.CERT_USAGE_MATCH>, phAdditionalCertStore: CPointer<Win32__impl_l0.HCERTSTORE>, pCert: CPointer<Win32__impl_l2.CERT_CONTEXT>, pProvGUID: CPointer<GUID>): Int32 {
+    return PstValidate(pTargetName, bIsClient, pRequestedIssuancePolicy, phAdditionalCertStore, pCert, pProvGUID)
 }
 
 @When[Windows_Win32_Security_Cryptography_Certificates == "on"]

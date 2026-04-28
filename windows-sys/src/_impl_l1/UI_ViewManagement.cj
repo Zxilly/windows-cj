@@ -438,7 +438,7 @@ public struct IApplicationView9Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     @When[Windows_UI_WindowManagement == "on"]
     public var WindowingEnvironment: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_WindowManagement == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_WindowManagement == "on"]
     public var GetDisplayRegions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -490,7 +490,7 @@ public class IApplicationView9 <: InterfaceWrapperBase & ComInterface {
         return __vt.WindowingEnvironment(__liveRaw, result__)
     }
 
-    @When[Windows_UI_WindowManagement == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_WindowManagement == "on"]
     public unsafe func GetDisplayRegions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

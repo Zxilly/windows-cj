@@ -7,4 +7,205 @@ public import windows_sys.Win32._impl_l0.{ACPI_REAL_TIME, ACPI_TIME_RESOLUTION, 
 public import windows_sys.Win32._impl_l2.{ACPI_TIME_ADJUST_DAYLIGHT, ACPI_TIME_IN_DAYLIGHT, ACPI_TIME_ZONE_UNKNOWN, ACTIVE_COOLING, ADAPTER_CLASS_MAJOR_VERSION, ADAPTER_CLASS_MINOR_VERSION, BATTERY_CAPACITY_RELATIVE, BATTERY_CHARGING, BATTERY_CLASS_MAJOR_VERSION, BATTERY_CLASS_MINOR_VERSION, BATTERY_CLASS_MINOR_VERSION_1, BATTERY_CLASS_MINOR_VERSION_2, BATTERY_CRITICAL, BATTERY_DISCHARGING, BATTERY_IS_SHORT_TERM, BATTERY_MINIPORT_UPDATE_DATA_VER_1, BATTERY_MINIPORT_UPDATE_DATA_VER_2, BATTERY_NOTIFY_VERSION_1, BATTERY_NOTIFY_VERSION_2, BATTERY_POWER_ON_LINE, BATTERY_SEALED, BATTERY_SET_CHARGER_ID_SUPPORTED, BATTERY_SET_CHARGE_SUPPORTED, BATTERY_SET_CHARGINGSOURCE_SUPPORTED, BATTERY_SET_DISCHARGE_SUPPORTED, BATTERY_SYSTEM_BATTERY, BATTERY_TAG_INVALID, BATTERY_UNKNOWN_CAPACITY, BATTERY_UNKNOWN_CURRENT, BATTERY_UNKNOWN_RATE, BATTERY_UNKNOWN_TIME, BATTERY_UNKNOWN_VOLTAGE, BATTERY_USB_CHARGER_STATUS_FN_DEFAULT_USB, BATTERY_USB_CHARGER_STATUS_UCM_PD, CHARGE_REQUIREMENT_MAX_POWER_SOURCE_TYPES, DEVICEPOWER_AND_OPERATION, DEVICEPOWER_CLEAR_WAKEENABLED, DEVICEPOWER_FILTER_DEVICES_PRESENT, DEVICEPOWER_FILTER_HARDWARE, DEVICEPOWER_FILTER_ON_NAME, DEVICEPOWER_FILTER_WAKEENABLED, DEVICEPOWER_FILTER_WAKEPROGRAMMABLE, DEVICEPOWER_HARDWAREID, DEVICEPOWER_SET_WAKEENABLED, EFFECTIVE_POWER_MODE_V1, EFFECTIVE_POWER_MODE_V2, EMI_NAME_MAX, EMI_VERSION_V1, EMI_VERSION_V2, EnableMultiBatteryDisplay, EnablePasswordLogon, EnableSysTrayBatteryMeter, EnableVideoDimDisplay, EnableWakeOnRing, GLOBAL_POWER_POLICY, GLOBAL_USER_POWER_POLICY, IOCTL_ACPI_GET_REAL_TIME, IOCTL_ACPI_SET_REAL_TIME, IOCTL_BATTERY_CHARGING_SOURCE_CHANGE, IOCTL_BATTERY_QUERY_INFORMATION, IOCTL_BATTERY_QUERY_STATUS, IOCTL_BATTERY_QUERY_TAG, IOCTL_BATTERY_SET_INFORMATION, IOCTL_EMI_GET_MEASUREMENT, IOCTL_EMI_GET_METADATA, IOCTL_EMI_GET_METADATA_SIZE, IOCTL_EMI_GET_VERSION, IOCTL_GET_ACPI_TIME_AND_ALARM_CAPABILITIES, IOCTL_GET_PROCESSOR_OBJ_INFO, IOCTL_GET_SYS_BUTTON_CAPS, IOCTL_GET_SYS_BUTTON_EVENT, IOCTL_GET_WAKE_ALARM_POLICY, IOCTL_GET_WAKE_ALARM_SYSTEM_POWERSTATE, IOCTL_GET_WAKE_ALARM_VALUE, IOCTL_NOTIFY_SWITCH_EVENT, IOCTL_QUERY_CUSTOMIZED_INPUT_FROM_PLATFORM, IOCTL_QUERY_CUSTOMIZED_IO_CAPABILITIES, IOCTL_QUERY_LID, IOCTL_RUN_ACTIVE_COOLING_METHOD, IOCTL_SEND_CUSTOMIZED_OUTPUT_TO_PLATFORM, IOCTL_SET_SYS_MESSAGE_INDICATOR, IOCTL_SET_WAKE_ALARM_POLICY, IOCTL_SET_WAKE_ALARM_VALUE, IOCTL_THERMAL_QUERY_INFORMATION, IOCTL_THERMAL_READ_POLICY, IOCTL_THERMAL_READ_TEMPERATURE, IOCTL_THERMAL_SET_COOLING_POLICY, IOCTL_THERMAL_SET_PASSIVE_LIMIT, MAX_ACTIVE_COOLING_LEVELS, MAX_BATTERY_STRING_SIZE, PASSIVE_COOLING, POWER_ATTRIBUTE_HIDE, POWER_ATTRIBUTE_SHOW_AOAC, POWER_LIMIT_INTERFACE_VERSION, POWER_POLICY, PPM_FIRMWARE_ACPI1C2, PPM_FIRMWARE_ACPI1C3, PPM_FIRMWARE_ACPI1TSTATES, PPM_FIRMWARE_CPC, PPM_FIRMWARE_CSD, PPM_FIRMWARE_CST, PPM_FIRMWARE_LPI, PPM_FIRMWARE_OSC, PPM_FIRMWARE_PCCH, PPM_FIRMWARE_PCCP, PPM_FIRMWARE_PCT, PPM_FIRMWARE_PDC, PPM_FIRMWARE_PPC, PPM_FIRMWARE_PSD, PPM_FIRMWARE_PSS, PPM_FIRMWARE_PTC, PPM_FIRMWARE_TPC, PPM_FIRMWARE_TSD, PPM_FIRMWARE_TSS, PPM_FIRMWARE_XPSS, PPM_IDLE_IMPLEMENTATION_CSTATES, PPM_IDLE_IMPLEMENTATION_LPISTATES, PPM_IDLE_IMPLEMENTATION_MICROPEP, PPM_IDLE_IMPLEMENTATION_NONE, PPM_IDLE_IMPLEMENTATION_PEP, PPM_PERFORMANCE_IMPLEMENTATION_CPPC, PPM_PERFORMANCE_IMPLEMENTATION_NONE, PPM_PERFORMANCE_IMPLEMENTATION_PCCV1, PPM_PERFORMANCE_IMPLEMENTATION_PEP, PPM_PERFORMANCE_IMPLEMENTATION_PSTATES, PWRSCHEMESENUMPROC, PWRSCHEMESENUMPROC_V1, SYSTEM_POWER_POLICY, SYS_BUTTON_LID, SYS_BUTTON_LID_CHANGED, SYS_BUTTON_LID_CLOSED, SYS_BUTTON_LID_INITIAL, SYS_BUTTON_LID_OPEN, SYS_BUTTON_LID_STATE_MASK, SYS_BUTTON_POWER, SYS_BUTTON_SLEEP, SYS_BUTTON_WAKE, THERMAL_COOLING_INTERFACE_VERSION, THERMAL_DEVICE_INTERFACE_VERSION, THERMAL_EVENT_VERSION, THERMAL_POLICY_VERSION_1, THERMAL_POLICY_VERSION_2, THERMAL_WAIT_READ_TIMEOUT_IMMEDIATE, THERMAL_WAIT_READ_TIMEOUT_NONE, TZ_ACTIVATION_REASON_CURRENT, TZ_ACTIVATION_REASON_THERMAL, UNKNOWN_CAPACITY, UNKNOWN_CURRENT, UNKNOWN_RATE, UNKNOWN_VOLTAGE}
 @When[Windows_Win32_System_Power == "on"]
 public import windows_sys.Win32._impl_l1.{ACPI_TIME_AND_ALARM_CAPABILITIES, ADMINISTRATOR_POWER_POLICY, BATTERY_CHARGER_STATUS, BATTERY_CHARGING_SOURCE, BATTERY_CHARGING_SOURCE_INFORMATION, BATTERY_QUERY_INFORMATION, BATTERY_SET_INFORMATION, BATTERY_USB_CHARGER_STATUS, CM_POWER_DATA, DEVICE_NOTIFY_SUBSCRIBE_PARAMETERS, EFFECTIVE_POWER_MODE_CALLBACK, EMI_CHANNEL_V2, EMI_MEASUREMENT_DATA_V2, EMI_METADATA_V1, EMI_METADATA_V2, GLOBAL_MACHINE_POWER_POLICY, MACHINE_POWER_POLICY, MACHINE_PROCESSOR_POWER_POLICY, POWER_ACTION_POLICY, POWER_ADAPTER_STATUS, POWER_MONITOR_INVOCATION, POWER_USER_PRESENCE, PPM_IDLE_ACCOUNTING, PPM_IDLE_ACCOUNTING_EX, PPM_IDLE_STATE_ACCOUNTING_EX, PPM_WMI_IDLE_STATES, PPM_WMI_IDLE_STATES_EX, PPM_WMI_PERF_STATES, PPM_WMI_PERF_STATES_EX, PROCESSOR_POWER_POLICY, SET_POWER_SETTING_VALUE, SYSTEM_POWER_CAPABILITIES, SYSTEM_POWER_INFORMATION, SYSTEM_POWER_LEVEL, USER_POWER_POLICY}
-
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_CallNtPowerInformation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CallNtPowerInformation
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_CanUserWritePwrScheme == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CanUserWritePwrScheme
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_DeletePwrScheme == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeletePwrScheme
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_DevicePowerClose == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DevicePowerClose
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_DevicePowerEnumDevices == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DevicePowerEnumDevices
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_DevicePowerOpen == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DevicePowerOpen
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_DevicePowerSetDeviceState == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DevicePowerSetDeviceState
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_EnumPwrSchemes == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EnumPwrSchemes
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_GetActivePwrScheme == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetActivePwrScheme
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_GetCurrentPowerPolicies == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetCurrentPowerPolicies
+@When[Windows_Win32_System_Power == "on" && KERNEL32 == "on" && Windows_Win32_System_Power_GetDevicePowerState == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetDevicePowerState
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_GetPwrCapabilities == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetPwrCapabilities
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_GetPwrDiskSpindownRange == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetPwrDiskSpindownRange
+@When[Windows_Win32_System_Power == "on" && KERNEL32 == "on" && Windows_Win32_System_Power_GetSystemPowerStatus == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetSystemPowerStatus
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_IsAdminOverrideActive == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsAdminOverrideActive
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_IsPwrHibernateAllowed == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsPwrHibernateAllowed
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_IsPwrShutdownAllowed == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsPwrShutdownAllowed
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_IsPwrSuspendAllowed == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsPwrSuspendAllowed
+@When[Windows_Win32_System_Power == "on" && KERNEL32 == "on" && Windows_Win32_System_Power_IsSystemResumeAutomatic == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsSystemResumeAutomatic
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerCanRestoreIndividualDefaultPowerScheme == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerCanRestoreIndividualDefaultPowerScheme
+@When[Windows_Win32_System_Power == "on" && KERNEL32 == "on" && Windows_Win32_System_Power_PowerClearRequest == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerClearRequest
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerCreatePossibleSetting == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerCreatePossibleSetting
+@When[Windows_Win32_System_Power == "on" && KERNEL32 == "on" && Windows_Win32_System_Power_PowerCreateRequest == "on" && Windows_Win32_System_Threading == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerCreateRequest
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerCreateSetting == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerCreateSetting
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerDeleteScheme == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerDeleteScheme
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerDeterminePlatformRole == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerDeterminePlatformRole
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerDeterminePlatformRoleEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerDeterminePlatformRoleEx
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerDuplicateScheme == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerDuplicateScheme
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerEnumerate == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerEnumerate
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerGetActiveScheme == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerGetActiveScheme
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerGetUserConfiguredACPowerMode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerGetUserConfiguredACPowerMode
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerGetUserConfiguredDCPowerMode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerGetUserConfiguredDCPowerMode
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerImportPowerScheme == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerImportPowerScheme
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerIsSettingRangeDefined == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerIsSettingRangeDefined
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerOpenSystemPowerKey == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerOpenSystemPowerKey
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerOpenUserPowerKey == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerOpenUserPowerKey
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadACDefaultIndex == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerReadACDefaultIndex
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadACValue == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerReadACValue
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadACValueIndex == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerReadACValueIndex
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadDCDefaultIndex == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerReadDCDefaultIndex
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadDCValue == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerReadDCValue
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadDCValueIndex == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerReadDCValueIndex
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadDescription == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerReadDescription
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadFriendlyName == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerReadFriendlyName
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadIconResourceSpecifier == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerReadIconResourceSpecifier
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadPossibleDescription == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerReadPossibleDescription
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadPossibleFriendlyName == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerReadPossibleFriendlyName
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadPossibleValue == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerReadPossibleValue
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadSettingAttributes == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerReadSettingAttributes
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadValueIncrement == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerReadValueIncrement
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadValueMax == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerReadValueMax
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadValueMin == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerReadValueMin
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadValueUnitsSpecifier == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerReadValueUnitsSpecifier
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerRegisterForEffectivePowerModeNotifications == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerRegisterForEffectivePowerModeNotifications
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerRegisterSuspendResumeNotification == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerRegisterSuspendResumeNotification
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerRemovePowerSetting == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerRemovePowerSetting
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReplaceDefaultPowerSchemes == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerReplaceDefaultPowerSchemes
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReportThermalEvent == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerReportThermalEvent
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerRestoreDefaultPowerSchemes == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerRestoreDefaultPowerSchemes
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerRestoreIndividualDefaultPowerScheme == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerRestoreIndividualDefaultPowerScheme
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerSetActiveScheme == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerSetActiveScheme
+@When[Windows_Win32_System_Power == "on" && KERNEL32 == "on" && Windows_Win32_System_Power_PowerSetRequest == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerSetRequest
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerSetUserConfiguredACPowerMode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerSetUserConfiguredACPowerMode
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerSetUserConfiguredDCPowerMode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerSetUserConfiguredDCPowerMode
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerSettingAccessCheck == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerSettingAccessCheck
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerSettingAccessCheckEx == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerSettingAccessCheckEx
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerSettingRegisterNotification == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerSettingRegisterNotification
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerSettingUnregisterNotification == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerSettingUnregisterNotification
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerUnregisterFromEffectivePowerModeNotifications == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerUnregisterFromEffectivePowerModeNotifications
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerUnregisterSuspendResumeNotification == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerUnregisterSuspendResumeNotification
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteACDefaultIndex == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerWriteACDefaultIndex
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteACValueIndex == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerWriteACValueIndex
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteDCDefaultIndex == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerWriteDCDefaultIndex
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteDCValueIndex == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerWriteDCValueIndex
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteDescription == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerWriteDescription
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteFriendlyName == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerWriteFriendlyName
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteIconResourceSpecifier == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerWriteIconResourceSpecifier
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWritePossibleDescription == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerWritePossibleDescription
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWritePossibleFriendlyName == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerWritePossibleFriendlyName
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWritePossibleValue == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerWritePossibleValue
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteSettingAttributes == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerWriteSettingAttributes
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteValueIncrement == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerWriteValueIncrement
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteValueMax == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerWriteValueMax
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteValueMin == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerWriteValueMin
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteValueUnitsSpecifier == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PowerWriteValueUnitsSpecifier
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_ReadGlobalPwrPolicy == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReadGlobalPwrPolicy
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_ReadProcessorPwrScheme == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReadProcessorPwrScheme
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_ReadPwrScheme == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReadPwrScheme
+@When[Windows_Win32_System_Power == "on" && USER32 == "on" && Windows_Win32_System_Power_RegisterPowerSettingNotification == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RegisterPowerSettingNotification
+@When[Windows_Win32_System_Power == "on" && USER32 == "on" && Windows_Win32_System_Power_RegisterSuspendResumeNotification == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RegisterSuspendResumeNotification
+@When[Windows_Win32_System_Power == "on" && KERNEL32 == "on" && Windows_Win32_System_Power_RequestWakeupLatency == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RequestWakeupLatency
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_SetActivePwrScheme == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetActivePwrScheme
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_SetSuspendState == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetSuspendState
+@When[Windows_Win32_System_Power == "on" && KERNEL32 == "on" && Windows_Win32_System_Power_SetSystemPowerState == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetSystemPowerState
+@When[Windows_Win32_System_Power == "on" && KERNEL32 == "on" && Windows_Win32_System_Power_SetThreadExecutionState == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetThreadExecutionState
+@When[Windows_Win32_System_Power == "on" && USER32 == "on" && Windows_Win32_System_Power_UnregisterPowerSettingNotification == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UnregisterPowerSettingNotification
+@When[Windows_Win32_System_Power == "on" && USER32 == "on" && Windows_Win32_System_Power_UnregisterSuspendResumeNotification == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UnregisterSuspendResumeNotification
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_ValidatePowerPolicies == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ValidatePowerPolicies
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_WriteGlobalPwrPolicy == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WriteGlobalPwrPolicy
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_WriteProcessorPwrScheme == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WriteProcessorPwrScheme
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_WritePwrScheme == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WritePwrScheme

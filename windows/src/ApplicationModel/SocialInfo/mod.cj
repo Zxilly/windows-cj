@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Graphics_Imaging == "on"]
 import windows.Graphics.Imaging as Graphics_Imaging
 import windows._impl_l0 as _impl_l0
 import windows_collections as windows_collections
@@ -1338,7 +1336,10 @@ public struct ISocialFeedChildItemVtbl {
     public var SetTimestamp: CFunc<(CPointer<Unit>, windows_future.DateTimeAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var TargetUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetTargetUri: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Thumbnails: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Thumbnails: UIntNative = UIntNative(0)
     public var SharedItem: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetSharedItem: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -1461,6 +1462,7 @@ public class ISocialFeedChildItem <: InterfaceWrapperBase & ComInterface & Runti
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Thumbnails(): windows_collections.IVector<SocialItemThumbnail> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1595,6 +1597,7 @@ public class SocialFeedChildItem <: InterfaceWrapperBase & ComInterface & window
         defaultInterface().SetTargetUri(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Thumbnails(): windows_collections.IVector<SocialItemThumbnail> {
         return defaultInterface().Thumbnails()
     }
@@ -1637,7 +1640,10 @@ public struct ISocialFeedItemVtbl {
     public var SetTimestamp: CFunc<(CPointer<Unit>, windows_future.DateTimeAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var TargetUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetTargetUri: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Thumbnails: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Thumbnails: UIntNative = UIntNative(0)
     public var SharedItem: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetSharedItem: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var BadgeStyle: CFunc<(CPointer<Unit>, CPointer<SocialItemBadgeStyleAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1770,6 +1776,7 @@ public class ISocialFeedItem <: InterfaceWrapperBase & ComInterface & RuntimeNam
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Thumbnails(): windows_collections.IVector<SocialItemThumbnail> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1974,6 +1981,7 @@ public class SocialFeedItem <: InterfaceWrapperBase & ComInterface & windows_int
         defaultInterface().SetTargetUri(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Thumbnails(): windows_collections.IVector<SocialItemThumbnail> {
         return defaultInterface().Thumbnails()
     }

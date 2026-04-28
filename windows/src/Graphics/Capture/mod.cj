@@ -10,17 +10,11 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Graphics == "on"]
 import windows.Graphics as Graphics
-@When[Windows_Graphics_DirectX == "on"]
 import windows.Graphics.DirectX as Graphics_DirectX
-@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
 import windows.Graphics.DirectX.Direct3D11 as Graphics_DirectX_Direct3D11
-@When[Windows_Security_Authorization_AppCapabilityAccess == "on"]
 import windows.Security.Authorization.AppCapabilityAccess as Security_Authorization_AppCapabilityAccess
-@When[Windows_UI == "on"]
 import windows.UI as UI
 import windows._impl_l1 as _impl_l1
 import windows_collections as windows_collections
@@ -250,9 +244,9 @@ extend IDirect3D11CaptureFrame <: windows_core.Interface<IDirect3D11CaptureFrame
 @C
 public struct IDirect3D11CaptureFrame2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Graphics == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics == "on"]
     public var DirtyRegions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Graphics != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Graphics != "on"]
     public var DirtyRegions: UIntNative = UIntNative(0)
     public var DirtyRegionMode: CFunc<(CPointer<Unit>, CPointer<GraphicsCaptureDirtyRegionModeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -323,7 +317,7 @@ public class IDirect3D11CaptureFrame2 <: InterfaceWrapperBase & ComInterface & R
         readVtbl<IDirect3D11CaptureFrame2Vtbl>(IDirect3D11CaptureFrame2Vtbl())
     }
 
-    @When[Windows_Graphics == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics == "on"]
     public unsafe func DirtyRegions(): windows_collections.IVectorView<Graphics.RectInt32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

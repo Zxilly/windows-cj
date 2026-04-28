@@ -5,7 +5,6 @@ import windows_interface.{GUID}
 import windows_interface as windows_interface
 import windows_polyfill.{packedReadUInt16, packedReadUInt32, packedReadUInt64, packedReadUInt8, packedReadValue, packedWriteUInt16, packedWriteUInt32, packedWriteUInt64, packedWriteUInt8, packedWriteValue, unionReadUInt16, unionReadUInt32, unionReadUInt64, unionReadUInt8, unionWriteUInt16, unionWriteUInt32, unionWriteUInt64, unionWriteUInt8}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 
 

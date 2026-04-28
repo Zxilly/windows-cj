@@ -389,6 +389,7 @@ public struct ISourceChangeRequestedEventArgsVtbl {
     @When[Windows_Storage_Streams == "on"]
     public var Thumbnail: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Rating: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -489,6 +490,7 @@ public class ISourceChangeRequestedEventArgs <: InterfaceWrapperBase & ComInterf
         return __vt.Rating(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

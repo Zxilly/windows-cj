@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_UI_Input_Inking == "on"]
 import windows.UI.Input.Inking as UI_Input_Inking
 import windows._impl_l1 as _impl_l1
 import windows_collections as windows_collections
@@ -81,9 +79,9 @@ extend CoreWetStrokeDisposition <: windows_core.CopyType & windows_core.RuntimeT
 @C
 public struct ICoreIncrementalInkStrokeVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_UI_Input_Inking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Input_Inking == "on"]
     public var AppendInkPoints: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_future.RectAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Input_Inking != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_UI_Input_Inking != "on"]
     public var AppendInkPoints: UIntNative = UIntNative(0)
     @When[Windows_UI_Input_Inking == "on"]
     public var CreateInkStroke: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -166,7 +164,7 @@ public class ICoreIncrementalInkStroke <: InterfaceWrapperBase & ComInterface & 
         readVtbl<ICoreIncrementalInkStrokeVtbl>(ICoreIncrementalInkStrokeVtbl())
     }
 
-    @When[Windows_UI_Input_Inking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Input_Inking == "on"]
     public unsafe func AppendInkPoints(inkPoints: windows_collections.IIterable<UI_Input_Inking.InkPoint>): windows_future.Rect {
         let v = vtbl()
         var result__ = windows_future.RectAbi()
@@ -431,9 +429,9 @@ extend ICoreInkPresenterHost <: windows_core.Interface<ICoreInkPresenterHost> {}
 @C
 public struct ICoreWetStrokeUpdateEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_UI_Input_Inking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Input_Inking == "on"]
     public var NewInkPoints: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Input_Inking != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_UI_Input_Inking != "on"]
     public var NewInkPoints: UIntNative = UIntNative(0)
     public var PointerId: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Disposition: CFunc<(CPointer<Unit>, CPointer<CoreWetStrokeDispositionAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -506,7 +504,7 @@ public class ICoreWetStrokeUpdateEventArgs <: InterfaceWrapperBase & ComInterfac
         readVtbl<ICoreWetStrokeUpdateEventArgsVtbl>(ICoreWetStrokeUpdateEventArgsVtbl())
     }
 
-    @When[Windows_UI_Input_Inking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Input_Inking == "on"]
     public unsafe func NewInkPoints(): windows_collections.IVector<UI_Input_Inking.InkPoint> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -724,7 +722,7 @@ public class CoreWetStrokeUpdateEventArgs <: InterfaceWrapperBase & ComInterface
         }
     }
 
-    @When[Windows_UI_Input_Inking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Input_Inking == "on"]
     public unsafe func NewInkPoints(): windows_collections.IVector<UI_Input_Inking.InkPoint> {
         return defaultInterface().NewInkPoints()
     }
@@ -829,7 +827,7 @@ public class CoreIncrementalInkStroke <: InterfaceWrapperBase & ComInterface & w
         }
     }
 
-    @When[Windows_UI_Input_Inking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Input_Inking == "on"]
     public unsafe func AppendInkPoints(inkPoints: windows_collections.IIterable<UI_Input_Inking.InkPoint>): windows_future.Rect {
         return defaultInterface().AppendInkPoints(inkPoints)
     }

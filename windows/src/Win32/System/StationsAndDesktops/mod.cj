@@ -6,11 +6,8 @@ package windows.Win32.System.StationsAndDesktops
 import std.collection.*
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-@When[Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
 import windows.Win32._impl_l0 as Win32__impl_l0
 
@@ -496,90 +493,123 @@ extend BSMINFO <: windows_core.CopyType & windows_core.RuntimeType & windows_cor
     }
 }
 
-@When[USER32 == "on"]
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_BroadcastSystemMessageA == "on"]
 foreign {
     // param-hint: lpInfo optional
     func BroadcastSystemMessageA(flags: UInt32, lpInfo: CPointer<UInt32>, Msg: UInt32, wParam: UIntNative, lParam: IntNative): Int32
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_BroadcastSystemMessageA == "on"]
+public unsafe func Windows_BroadcastSystemMessageA(flags: UInt32, lpInfo: CPointer<UInt32>, Msg: UInt32, wParam: UIntNative, lParam: IntNative): Int32 {
+    return BroadcastSystemMessageA(flags, lpInfo, Msg, wParam, lParam)
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_BroadcastSystemMessageExA == "on"]
+foreign {
     // param-hint: lpInfo optional
     // param-hint: pbsmInfo optional
     // pinvoke-hint: SetLastError
     func BroadcastSystemMessageExA(flags: BROADCAST_SYSTEM_MESSAGE_FLAGSAbi, lpInfo: CPointer<BROADCAST_SYSTEM_MESSAGE_INFOAbi>, Msg: UInt32, wParam: UIntNative, lParam: IntNative, pbsmInfo: CPointer<BSMINFOAbi>): Int32
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_BroadcastSystemMessageExA == "on"]
+public unsafe func Windows_BroadcastSystemMessageExA(flags: BROADCAST_SYSTEM_MESSAGE_FLAGSAbi, lpInfo: CPointer<BROADCAST_SYSTEM_MESSAGE_INFOAbi>, Msg: UInt32, wParam: UIntNative, lParam: IntNative, pbsmInfo: CPointer<BSMINFOAbi>): Int32 {
+    return BroadcastSystemMessageExA(flags, lpInfo, Msg, wParam, lParam, pbsmInfo)
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_BroadcastSystemMessageExW == "on"]
+foreign {
     // param-hint: lpInfo optional
     // param-hint: pbsmInfo optional
     // pinvoke-hint: SetLastError
     func BroadcastSystemMessageExW(flags: BROADCAST_SYSTEM_MESSAGE_FLAGSAbi, lpInfo: CPointer<BROADCAST_SYSTEM_MESSAGE_INFOAbi>, Msg: UInt32, wParam: UIntNative, lParam: IntNative, pbsmInfo: CPointer<BSMINFOAbi>): Int32
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_BroadcastSystemMessageExW == "on"]
+public unsafe func Windows_BroadcastSystemMessageExW(flags: BROADCAST_SYSTEM_MESSAGE_FLAGSAbi, lpInfo: CPointer<BROADCAST_SYSTEM_MESSAGE_INFOAbi>, Msg: UInt32, wParam: UIntNative, lParam: IntNative, pbsmInfo: CPointer<BSMINFOAbi>): Int32 {
+    return BroadcastSystemMessageExW(flags, lpInfo, Msg, wParam, lParam, pbsmInfo)
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_BroadcastSystemMessageW == "on"]
+foreign {
     // param-hint: lpInfo optional
     // pinvoke-hint: SetLastError
     func BroadcastSystemMessageW(flags: BROADCAST_SYSTEM_MESSAGE_FLAGSAbi, lpInfo: CPointer<BROADCAST_SYSTEM_MESSAGE_INFOAbi>, Msg: UInt32, wParam: UIntNative, lParam: IntNative): Int32
-    // pinvoke-hint: SetLastError
-    func CloseDesktop(hDesktop: HDESK): Int32
-    // pinvoke-hint: SetLastError
-    func CloseWindowStation(hWinSta: HWINSTA): Int32
-    // param-hint: hwinsta optional
-    // pinvoke-hint: SetLastError
-    func EnumDesktopsA(hwinsta: HWINSTA, lpEnumFunc: DESKTOPENUMPROCA, lParam: IntNative): Int32
-    // param-hint: hwinsta optional
-    // pinvoke-hint: SetLastError
-    func EnumDesktopsW(hwinsta: HWINSTA, lpEnumFunc: DESKTOPENUMPROCW, lParam: IntNative): Int32
-    // pinvoke-hint: SetLastError
-    func EnumWindowStationsA(lpEnumFunc: WINSTAENUMPROCA, lParam: IntNative): Int32
-    // pinvoke-hint: SetLastError
-    func EnumWindowStationsW(lpEnumFunc: WINSTAENUMPROCW, lParam: IntNative): Int32
-    // pinvoke-hint: SetLastError
-    func GetProcessWindowStation(): HWINSTA
-    // pinvoke-hint: SetLastError
-    func GetThreadDesktop(dwThreadId: UInt32): HDESK
-    // param-hint: pvInfo bytes=param[3] optional
-    // param-hint: lpnLengthNeeded optional
-    // pinvoke-hint: SetLastError
-    func GetUserObjectInformationA(hObj: CPointer<Unit>, nIndex: USER_OBJECT_INFORMATION_INDEXAbi, pvInfo: CPointer<Unit>, nLength: UInt32, lpnLengthNeeded: CPointer<UInt32>): Int32
-    // param-hint: pvInfo bytes=param[3] optional
-    // param-hint: lpnLengthNeeded optional
-    // pinvoke-hint: SetLastError
-    func GetUserObjectInformationW(hObj: CPointer<Unit>, nIndex: USER_OBJECT_INFORMATION_INDEXAbi, pvInfo: CPointer<Unit>, nLength: UInt32, lpnLengthNeeded: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func OpenDesktopA(lpszDesktop: CPointer<UInt8>, dwFlags: DESKTOP_CONTROL_FLAGSAbi, fInherit: Int32, dwDesiredAccess: UInt32): HDESK
-    // pinvoke-hint: SetLastError
-    func OpenDesktopW(lpszDesktop: CPointer<UInt16>, dwFlags: DESKTOP_CONTROL_FLAGSAbi, fInherit: Int32, dwDesiredAccess: UInt32): HDESK
-    // pinvoke-hint: SetLastError
-    func OpenInputDesktop(dwFlags: DESKTOP_CONTROL_FLAGSAbi, fInherit: Int32, dwDesiredAccess: DESKTOP_ACCESS_FLAGSAbi): HDESK
-    // pinvoke-hint: SetLastError
-    func OpenWindowStationA(lpszWinSta: CPointer<UInt8>, fInherit: Int32, dwDesiredAccess: UInt32): HWINSTA
-    // pinvoke-hint: SetLastError
-    func OpenWindowStationW(lpszWinSta: CPointer<UInt16>, fInherit: Int32, dwDesiredAccess: UInt32): HWINSTA
-    // pinvoke-hint: SetLastError
-    func SetProcessWindowStation(hWinSta: HWINSTA): Int32
-    // pinvoke-hint: SetLastError
-    func SetThreadDesktop(hDesktop: HDESK): Int32
-    // param-hint: pvInfo bytes=param[3]
-    // pinvoke-hint: SetLastError
-    func SetUserObjectInformationA(hObj: CPointer<Unit>, nIndex: Int32, pvInfo: CPointer<Unit>, nLength: UInt32): Int32
-    // param-hint: pvInfo bytes=param[3]
-    // pinvoke-hint: SetLastError
-    func SetUserObjectInformationW(hObj: CPointer<Unit>, nIndex: Int32, pvInfo: CPointer<Unit>, nLength: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func SwitchDesktop(hDesktop: HDESK): Int32
 }
 
-@When[USER32 == "on" && (Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Security == "on")]
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_BroadcastSystemMessageW == "on"]
+public unsafe func Windows_BroadcastSystemMessageW(flags: BROADCAST_SYSTEM_MESSAGE_FLAGSAbi, lpInfo: CPointer<BROADCAST_SYSTEM_MESSAGE_INFOAbi>, Msg: UInt32, wParam: UIntNative, lParam: IntNative): Int32 {
+    return BroadcastSystemMessageW(flags, lpInfo, Msg, wParam, lParam)
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_CloseDesktop == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func CloseDesktop(hDesktop: HDESK): Int32
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_CloseDesktop == "on"]
+public unsafe func Windows_CloseDesktop(hDesktop: HDESK): Int32 {
+    return CloseDesktop(hDesktop)
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_CloseWindowStation == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func CloseWindowStation(hWinSta: HWINSTA): Int32
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_CloseWindowStation == "on"]
+public unsafe func Windows_CloseWindowStation(hWinSta: HWINSTA): Int32 {
+    return CloseWindowStation(hWinSta)
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_CreateDesktopA == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Security == "on"]
 foreign {
     // param-hint: lpszDevice optional reserved
     // param-hint: pDevmode optional reserved
     // param-hint: lpsa optional
     // pinvoke-hint: SetLastError
     func CreateDesktopA(lpszDesktop: CPointer<UInt8>, lpszDevice: CPointer<UInt8>, pDevmode: CPointer<Win32_Graphics_Gdi.DEVMODEAAbi>, dwFlags: DESKTOP_CONTROL_FLAGSAbi, dwDesiredAccess: UInt32, lpsa: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): HDESK
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_CreateDesktopA == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_CreateDesktopA(lpszDesktop: CPointer<UInt8>, lpszDevice: CPointer<UInt8>, pDevmode: CPointer<Win32_Graphics_Gdi.DEVMODEAAbi>, dwFlags: DESKTOP_CONTROL_FLAGSAbi, dwDesiredAccess: UInt32, lpsa: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): HDESK {
+    return CreateDesktopA(lpszDesktop, lpszDevice, pDevmode, dwFlags, dwDesiredAccess, lpsa)
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_CreateDesktopExA == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: lpszDevice optional reserved
     // param-hint: pDevmode optional reserved
     // param-hint: lpsa optional
     // param-hint: pvoid optional reserved
     // pinvoke-hint: SetLastError
     func CreateDesktopExA(lpszDesktop: CPointer<UInt8>, lpszDevice: CPointer<UInt8>, pDevmode: CPointer<Win32_Graphics_Gdi.DEVMODEAAbi>, dwFlags: DESKTOP_CONTROL_FLAGSAbi, dwDesiredAccess: UInt32, lpsa: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, ulHeapSize: UInt32, pvoid: CPointer<Unit>): HDESK
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_CreateDesktopExA == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_CreateDesktopExA(lpszDesktop: CPointer<UInt8>, lpszDevice: CPointer<UInt8>, pDevmode: CPointer<Win32_Graphics_Gdi.DEVMODEAAbi>, dwFlags: DESKTOP_CONTROL_FLAGSAbi, dwDesiredAccess: UInt32, lpsa: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, ulHeapSize: UInt32, pvoid: CPointer<Unit>): HDESK {
+    return CreateDesktopExA(lpszDesktop, lpszDevice, pDevmode, dwFlags, dwDesiredAccess, lpsa, ulHeapSize, pvoid)
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_CreateDesktopExW == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: lpszDevice optional reserved
     // param-hint: pDevmode optional reserved
     // param-hint: lpsa optional
     // param-hint: pvoid optional reserved
     // pinvoke-hint: SetLastError
     func CreateDesktopExW(lpszDesktop: CPointer<UInt16>, lpszDevice: CPointer<UInt16>, pDevmode: CPointer<Win32_Graphics_Gdi.DEVMODEWAbi>, dwFlags: DESKTOP_CONTROL_FLAGSAbi, dwDesiredAccess: UInt32, lpsa: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, ulHeapSize: UInt32, pvoid: CPointer<Unit>): HDESK
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_CreateDesktopExW == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_CreateDesktopExW(lpszDesktop: CPointer<UInt16>, lpszDevice: CPointer<UInt16>, pDevmode: CPointer<Win32_Graphics_Gdi.DEVMODEWAbi>, dwFlags: DESKTOP_CONTROL_FLAGSAbi, dwDesiredAccess: UInt32, lpsa: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, ulHeapSize: UInt32, pvoid: CPointer<Unit>): HDESK {
+    return CreateDesktopExW(lpszDesktop, lpszDevice, pDevmode, dwFlags, dwDesiredAccess, lpsa, ulHeapSize, pvoid)
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_CreateDesktopW == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: lpszDevice optional reserved
     // param-hint: pDevmode optional reserved
     // param-hint: lpsa optional
@@ -587,21 +617,251 @@ foreign {
     func CreateDesktopW(lpszDesktop: CPointer<UInt16>, lpszDevice: CPointer<UInt16>, pDevmode: CPointer<Win32_Graphics_Gdi.DEVMODEWAbi>, dwFlags: DESKTOP_CONTROL_FLAGSAbi, dwDesiredAccess: UInt32, lpsa: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): HDESK
 }
 
-@When[USER32 == "on" && Windows_Win32_Security == "on"]
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_CreateDesktopW == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_CreateDesktopW(lpszDesktop: CPointer<UInt16>, lpszDevice: CPointer<UInt16>, pDevmode: CPointer<Win32_Graphics_Gdi.DEVMODEWAbi>, dwFlags: DESKTOP_CONTROL_FLAGSAbi, dwDesiredAccess: UInt32, lpsa: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): HDESK {
+    return CreateDesktopW(lpszDesktop, lpszDevice, pDevmode, dwFlags, dwDesiredAccess, lpsa)
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_CreateWindowStationA == "on" && Windows_Win32_Security == "on"]
 foreign {
     // param-hint: lpwinsta optional
     // param-hint: lpsa optional
     // pinvoke-hint: SetLastError
     func CreateWindowStationA(lpwinsta: CPointer<UInt8>, dwFlags: UInt32, dwDesiredAccess: UInt32, lpsa: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): HWINSTA
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_CreateWindowStationA == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_CreateWindowStationA(lpwinsta: CPointer<UInt8>, dwFlags: UInt32, dwDesiredAccess: UInt32, lpsa: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): HWINSTA {
+    return CreateWindowStationA(lpwinsta, dwFlags, dwDesiredAccess, lpsa)
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_CreateWindowStationW == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: lpwinsta optional
     // param-hint: lpsa optional
     // pinvoke-hint: SetLastError
     func CreateWindowStationW(lpwinsta: CPointer<UInt16>, dwFlags: UInt32, dwDesiredAccess: UInt32, lpsa: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): HWINSTA
 }
 
-@When[USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_CreateWindowStationW == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_CreateWindowStationW(lpwinsta: CPointer<UInt16>, dwFlags: UInt32, dwDesiredAccess: UInt32, lpsa: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): HWINSTA {
+    return CreateWindowStationW(lpwinsta, dwFlags, dwDesiredAccess, lpsa)
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_EnumDesktopWindows == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
     // param-hint: hDesktop optional
     // pinvoke-hint: SetLastError
     func EnumDesktopWindows(hDesktop: HDESK, lpfn: Win32__impl_l0.WNDENUMPROC, lParam: IntNative): Int32
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_EnumDesktopWindows == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_EnumDesktopWindows(hDesktop: HDESK, lpfn: Win32__impl_l0.WNDENUMPROC, lParam: IntNative): Int32 {
+    return EnumDesktopWindows(hDesktop, lpfn, lParam)
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_EnumDesktopsA == "on"]
+foreign {
+    // param-hint: hwinsta optional
+    // pinvoke-hint: SetLastError
+    func EnumDesktopsA(hwinsta: HWINSTA, lpEnumFunc: DESKTOPENUMPROCA, lParam: IntNative): Int32
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_EnumDesktopsA == "on"]
+public unsafe func Windows_EnumDesktopsA(hwinsta: HWINSTA, lpEnumFunc: DESKTOPENUMPROCA, lParam: IntNative): Int32 {
+    return EnumDesktopsA(hwinsta, lpEnumFunc, lParam)
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_EnumDesktopsW == "on"]
+foreign {
+    // param-hint: hwinsta optional
+    // pinvoke-hint: SetLastError
+    func EnumDesktopsW(hwinsta: HWINSTA, lpEnumFunc: DESKTOPENUMPROCW, lParam: IntNative): Int32
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_EnumDesktopsW == "on"]
+public unsafe func Windows_EnumDesktopsW(hwinsta: HWINSTA, lpEnumFunc: DESKTOPENUMPROCW, lParam: IntNative): Int32 {
+    return EnumDesktopsW(hwinsta, lpEnumFunc, lParam)
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_EnumWindowStationsA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func EnumWindowStationsA(lpEnumFunc: WINSTAENUMPROCA, lParam: IntNative): Int32
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_EnumWindowStationsA == "on"]
+public unsafe func Windows_EnumWindowStationsA(lpEnumFunc: WINSTAENUMPROCA, lParam: IntNative): Int32 {
+    return EnumWindowStationsA(lpEnumFunc, lParam)
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_EnumWindowStationsW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func EnumWindowStationsW(lpEnumFunc: WINSTAENUMPROCW, lParam: IntNative): Int32
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_EnumWindowStationsW == "on"]
+public unsafe func Windows_EnumWindowStationsW(lpEnumFunc: WINSTAENUMPROCW, lParam: IntNative): Int32 {
+    return EnumWindowStationsW(lpEnumFunc, lParam)
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_GetProcessWindowStation == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func GetProcessWindowStation(): HWINSTA
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_GetProcessWindowStation == "on"]
+public unsafe func Windows_GetProcessWindowStation(): HWINSTA {
+    return GetProcessWindowStation()
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_GetThreadDesktop == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func GetThreadDesktop(dwThreadId: UInt32): HDESK
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_GetThreadDesktop == "on"]
+public unsafe func Windows_GetThreadDesktop(dwThreadId: UInt32): HDESK {
+    return GetThreadDesktop(dwThreadId)
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_GetUserObjectInformationA == "on"]
+foreign {
+    // param-hint: pvInfo bytes=param[3] optional
+    // param-hint: lpnLengthNeeded optional
+    // pinvoke-hint: SetLastError
+    func GetUserObjectInformationA(hObj: CPointer<Unit>, nIndex: USER_OBJECT_INFORMATION_INDEXAbi, pvInfo: CPointer<Unit>, nLength: UInt32, lpnLengthNeeded: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_GetUserObjectInformationA == "on"]
+public unsafe func Windows_GetUserObjectInformationA(hObj: CPointer<Unit>, nIndex: USER_OBJECT_INFORMATION_INDEXAbi, pvInfo: CPointer<Unit>, nLength: UInt32, lpnLengthNeeded: CPointer<UInt32>): Int32 {
+    return GetUserObjectInformationA(hObj, nIndex, pvInfo, nLength, lpnLengthNeeded)
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_GetUserObjectInformationW == "on"]
+foreign {
+    // param-hint: pvInfo bytes=param[3] optional
+    // param-hint: lpnLengthNeeded optional
+    // pinvoke-hint: SetLastError
+    func GetUserObjectInformationW(hObj: CPointer<Unit>, nIndex: USER_OBJECT_INFORMATION_INDEXAbi, pvInfo: CPointer<Unit>, nLength: UInt32, lpnLengthNeeded: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_GetUserObjectInformationW == "on"]
+public unsafe func Windows_GetUserObjectInformationW(hObj: CPointer<Unit>, nIndex: USER_OBJECT_INFORMATION_INDEXAbi, pvInfo: CPointer<Unit>, nLength: UInt32, lpnLengthNeeded: CPointer<UInt32>): Int32 {
+    return GetUserObjectInformationW(hObj, nIndex, pvInfo, nLength, lpnLengthNeeded)
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_OpenDesktopA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func OpenDesktopA(lpszDesktop: CPointer<UInt8>, dwFlags: DESKTOP_CONTROL_FLAGSAbi, fInherit: Int32, dwDesiredAccess: UInt32): HDESK
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_OpenDesktopA == "on"]
+public unsafe func Windows_OpenDesktopA(lpszDesktop: CPointer<UInt8>, dwFlags: DESKTOP_CONTROL_FLAGSAbi, fInherit: Int32, dwDesiredAccess: UInt32): HDESK {
+    return OpenDesktopA(lpszDesktop, dwFlags, fInherit, dwDesiredAccess)
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_OpenDesktopW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func OpenDesktopW(lpszDesktop: CPointer<UInt16>, dwFlags: DESKTOP_CONTROL_FLAGSAbi, fInherit: Int32, dwDesiredAccess: UInt32): HDESK
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_OpenDesktopW == "on"]
+public unsafe func Windows_OpenDesktopW(lpszDesktop: CPointer<UInt16>, dwFlags: DESKTOP_CONTROL_FLAGSAbi, fInherit: Int32, dwDesiredAccess: UInt32): HDESK {
+    return OpenDesktopW(lpszDesktop, dwFlags, fInherit, dwDesiredAccess)
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_OpenInputDesktop == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func OpenInputDesktop(dwFlags: DESKTOP_CONTROL_FLAGSAbi, fInherit: Int32, dwDesiredAccess: DESKTOP_ACCESS_FLAGSAbi): HDESK
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_OpenInputDesktop == "on"]
+public unsafe func Windows_OpenInputDesktop(dwFlags: DESKTOP_CONTROL_FLAGSAbi, fInherit: Int32, dwDesiredAccess: DESKTOP_ACCESS_FLAGSAbi): HDESK {
+    return OpenInputDesktop(dwFlags, fInherit, dwDesiredAccess)
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_OpenWindowStationA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func OpenWindowStationA(lpszWinSta: CPointer<UInt8>, fInherit: Int32, dwDesiredAccess: UInt32): HWINSTA
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_OpenWindowStationA == "on"]
+public unsafe func Windows_OpenWindowStationA(lpszWinSta: CPointer<UInt8>, fInherit: Int32, dwDesiredAccess: UInt32): HWINSTA {
+    return OpenWindowStationA(lpszWinSta, fInherit, dwDesiredAccess)
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_OpenWindowStationW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func OpenWindowStationW(lpszWinSta: CPointer<UInt16>, fInherit: Int32, dwDesiredAccess: UInt32): HWINSTA
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_OpenWindowStationW == "on"]
+public unsafe func Windows_OpenWindowStationW(lpszWinSta: CPointer<UInt16>, fInherit: Int32, dwDesiredAccess: UInt32): HWINSTA {
+    return OpenWindowStationW(lpszWinSta, fInherit, dwDesiredAccess)
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_SetProcessWindowStation == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetProcessWindowStation(hWinSta: HWINSTA): Int32
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_SetProcessWindowStation == "on"]
+public unsafe func Windows_SetProcessWindowStation(hWinSta: HWINSTA): Int32 {
+    return SetProcessWindowStation(hWinSta)
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_SetThreadDesktop == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetThreadDesktop(hDesktop: HDESK): Int32
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_SetThreadDesktop == "on"]
+public unsafe func Windows_SetThreadDesktop(hDesktop: HDESK): Int32 {
+    return SetThreadDesktop(hDesktop)
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_SetUserObjectInformationA == "on"]
+foreign {
+    // param-hint: pvInfo bytes=param[3]
+    // pinvoke-hint: SetLastError
+    func SetUserObjectInformationA(hObj: CPointer<Unit>, nIndex: Int32, pvInfo: CPointer<Unit>, nLength: UInt32): Int32
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_SetUserObjectInformationA == "on"]
+public unsafe func Windows_SetUserObjectInformationA(hObj: CPointer<Unit>, nIndex: Int32, pvInfo: CPointer<Unit>, nLength: UInt32): Int32 {
+    return SetUserObjectInformationA(hObj, nIndex, pvInfo, nLength)
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_SetUserObjectInformationW == "on"]
+foreign {
+    // param-hint: pvInfo bytes=param[3]
+    // pinvoke-hint: SetLastError
+    func SetUserObjectInformationW(hObj: CPointer<Unit>, nIndex: Int32, pvInfo: CPointer<Unit>, nLength: UInt32): Int32
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_SetUserObjectInformationW == "on"]
+public unsafe func Windows_SetUserObjectInformationW(hObj: CPointer<Unit>, nIndex: Int32, pvInfo: CPointer<Unit>, nLength: UInt32): Int32 {
+    return SetUserObjectInformationW(hObj, nIndex, pvInfo, nLength)
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_SwitchDesktop == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SwitchDesktop(hDesktop: HDESK): Int32
+}
+
+@When[Windows_Win32_System_StationsAndDesktops == "on" && USER32 == "on" && Windows_Win32_System_StationsAndDesktops_SwitchDesktop == "on"]
+public unsafe func Windows_SwitchDesktop(hDesktop: HDESK): Int32 {
+    return SwitchDesktop(hDesktop)
 }

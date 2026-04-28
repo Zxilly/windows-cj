@@ -11,4 +11,17 @@ public import windows_sys.Win32._impl_l0.FLOATING_SAVE_AREA
 public import windows_sys.Win32._impl_l1.{MAXUCHAR, MAXULONG, MAXUSHORT, NULL64, OBJ_HANDLE_TAGBITS, RTL_BALANCED_NODE_RESERVED_PARENT_MASK}
 @When[Windows_Win32_System_Kernel == "on" && (arch == "aarch64" || arch == "x86_64")]
 public import windows_sys.Win32._impl_l1.SLIST_HEADER
-
+@When[Windows_Win32_System_Kernel == "on" && NTDLL == "on" && Windows_Win32_System_Kernel_RtlFirstEntrySList == "on" && (arch == "aarch64" || arch == "x86_64")]
+public import windows_sys.Win32._impl_l1.Windows_RtlFirstEntrySList
+@When[Windows_Win32_System_Kernel == "on" && NTDLL == "on" && Windows_Win32_System_Kernel_RtlInitializeSListHead == "on" && (arch == "aarch64" || arch == "x86_64")]
+public import windows_sys.Win32._impl_l1.Windows_RtlInitializeSListHead
+@When[Windows_Win32_System_Kernel == "on" && NTDLL == "on" && Windows_Win32_System_Kernel_RtlInterlockedFlushSList == "on" && (arch == "aarch64" || arch == "x86_64")]
+public import windows_sys.Win32._impl_l1.Windows_RtlInterlockedFlushSList
+@When[Windows_Win32_System_Kernel == "on" && NTDLL == "on" && Windows_Win32_System_Kernel_RtlInterlockedPopEntrySList == "on" && (arch == "aarch64" || arch == "x86_64")]
+public import windows_sys.Win32._impl_l1.Windows_RtlInterlockedPopEntrySList
+@When[Windows_Win32_System_Kernel == "on" && NTDLL == "on" && Windows_Win32_System_Kernel_RtlInterlockedPushEntrySList == "on" && (arch == "aarch64" || arch == "x86_64")]
+public import windows_sys.Win32._impl_l1.Windows_RtlInterlockedPushEntrySList
+@When[Windows_Win32_System_Kernel == "on" && NTDLL == "on" && Windows_Win32_System_Kernel_RtlInterlockedPushListSListEx == "on" && (arch == "aarch64" || arch == "x86_64")]
+public import windows_sys.Win32._impl_l1.Windows_RtlInterlockedPushListSListEx
+@When[Windows_Win32_System_Kernel == "on" && NTDLL == "on" && Windows_Win32_System_Kernel_RtlQueryDepthSList == "on" && (arch == "aarch64" || arch == "x86_64")]
+public import windows_sys.Win32._impl_l1.Windows_RtlQueryDepthSList

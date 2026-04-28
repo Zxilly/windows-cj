@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l1 as _impl_l1
 import windows._impl_l2 as _impl_l2
@@ -394,7 +393,10 @@ public struct IDnssdServiceInstanceVtbl {
     public var SetPriority: CFunc<(CPointer<Unit>, UInt16) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Weight: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetWeight: CFunc<(CPointer<Unit>, UInt16) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var TextAttributes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var TextAttributes: UIntNative = UIntNative(0)
     @When[Windows_Networking_Sockets == "on"]
     public var RegisterStreamSocketListenerAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_Networking_Sockets != "on"]
@@ -551,6 +553,7 @@ public class IDnssdServiceInstance <: InterfaceWrapperBase & ComInterface & Runt
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TextAttributes(): windows_collections.IMap<windows_core.HString, windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -717,6 +720,7 @@ public class DnssdServiceInstance <: InterfaceWrapperBase & ComInterface & windo
         defaultInterface().SetWeight(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TextAttributes(): windows_collections.IMap<windows_core.HString, windows_core.HString> {
         return defaultInterface().TextAttributes()
     }
@@ -776,7 +780,7 @@ extend DnssdServiceInstance <: windows_core.HandleWinrtType<DnssdServiceInstance
     }
 }
 
-@When[Windows_Networking_ServiceDiscovery_Dnssd == "on"]
+@When[Windows_Networking_ServiceDiscovery_Dnssd == "on" && Windows_Foundation_Collections == "on"]
 public class DnssdServiceInstanceCollection <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -881,7 +885,7 @@ public class DnssdServiceInstanceCollection <: InterfaceWrapperBase & ComInterfa
     }
 }
 
-@When[Windows_Networking_ServiceDiscovery_Dnssd == "on"]
+@When[Windows_Networking_ServiceDiscovery_Dnssd == "on" && Windows_Foundation_Collections == "on"]
 extend DnssdServiceInstanceCollection <: windows_core.HandleWinrtType<DnssdServiceInstanceCollection> {
     public static func intoWinrtHandle(value: DnssdServiceInstanceCollection): CPointer<Unit> {
         value.asRaw()

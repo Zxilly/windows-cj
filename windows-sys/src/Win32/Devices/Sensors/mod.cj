@@ -3,11 +3,8 @@ package windows_sys.Win32.Devices.Sensors
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Devices_PortableDevices == "on"]
 import windows_sys.Win32.Devices.PortableDevices as Win32_Devices_PortableDevices
-@When[Windows_Win32_Devices_Properties == "on"]
 import windows_sys.Win32.Devices.Properties as Win32_Devices_Properties
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l2 as Win32__impl_l2
@@ -1423,21 +1420,351 @@ public class ISensorManagerEvents <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[SENSORSUTILSV2 == "on"]
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_CollectionsListAllocateBufferAndSerialize == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
 foreign {
-    func CollectionsListGetFillableCount(BufferSizeBytes: UInt32): UInt32
-    func GetPerformanceTime(TimeMs: CPointer<UInt32>): Int32
-    // param-hint: guidArray len=param[1]
-    func IsGUIDPresentInList(guidArray: CPointer<GUID>, arrayLength: UInt32, guidElem: CPointer<GUID>): UInt8
-    func IsKeyPresentInPropertyList(pList: CPointer<SENSOR_PROPERTY_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>): UInt8
-    func PropertiesListCopy(Target: CPointer<SENSOR_PROPERTY_LIST>, Source: CPointer<SENSOR_PROPERTY_LIST>): Int32
-    func PropertiesListGetFillableCount(BufferSizeBytes: UInt32): UInt32
-    func SerializationBufferAllocate(SizeInBytes: UInt32, pBuffer: CPointer<CPointer<UInt8>>): Int32
-    // param-hint: Buffer optional
-    func SerializationBufferFree(Buffer: CPointer<UInt8>): Unit
+    func CollectionsListAllocateBufferAndSerialize(SourceCollection: CPointer<SENSOR_COLLECTION_LIST>, pTargetBufferSizeInBytes: CPointer<UInt32>, pTargetBuffer: CPointer<CPointer<UInt8>>): Int32
 }
 
-@When[SENSORSUTILSV2 == "on" && (Windows_Win32_Devices_Properties == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on")]
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_CollectionsListAllocateBufferAndSerialize == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_CollectionsListAllocateBufferAndSerialize(SourceCollection: CPointer<SENSOR_COLLECTION_LIST>, pTargetBufferSizeInBytes: CPointer<UInt32>, pTargetBuffer: CPointer<CPointer<UInt8>>): Int32 {
+    return CollectionsListAllocateBufferAndSerialize(SourceCollection, pTargetBufferSizeInBytes, pTargetBuffer)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_CollectionsListCopyAndMarshall == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func CollectionsListCopyAndMarshall(Target: CPointer<SENSOR_COLLECTION_LIST>, Source: CPointer<SENSOR_COLLECTION_LIST>): Int32
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_CollectionsListCopyAndMarshall == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_CollectionsListCopyAndMarshall(Target: CPointer<SENSOR_COLLECTION_LIST>, Source: CPointer<SENSOR_COLLECTION_LIST>): Int32 {
+    return CollectionsListCopyAndMarshall(Target, Source)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_CollectionsListDeserializeFromBuffer == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    // param-hint: SourceBuffer bytes=param[0]
+    func CollectionsListDeserializeFromBuffer(SourceBufferSizeInBytes: UInt32, SourceBuffer: CPointer<UInt8>, TargetCollection: CPointer<SENSOR_COLLECTION_LIST>): Int32
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_CollectionsListDeserializeFromBuffer == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_CollectionsListDeserializeFromBuffer(SourceBufferSizeInBytes: UInt32, SourceBuffer: CPointer<UInt8>, TargetCollection: CPointer<SENSOR_COLLECTION_LIST>): Int32 {
+    return CollectionsListDeserializeFromBuffer(SourceBufferSizeInBytes, SourceBuffer, TargetCollection)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_CollectionsListGetFillableCount == "on"]
+foreign {
+    func CollectionsListGetFillableCount(BufferSizeBytes: UInt32): UInt32
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_CollectionsListGetFillableCount == "on"]
+public unsafe func Windows_CollectionsListGetFillableCount(BufferSizeBytes: UInt32): UInt32 {
+    return CollectionsListGetFillableCount(BufferSizeBytes)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_CollectionsListGetMarshalledSize == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func CollectionsListGetMarshalledSize(Collection: CPointer<SENSOR_COLLECTION_LIST>): UInt32
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_CollectionsListGetMarshalledSize == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_CollectionsListGetMarshalledSize(Collection: CPointer<SENSOR_COLLECTION_LIST>): UInt32 {
+    return CollectionsListGetMarshalledSize(Collection)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_CollectionsListGetMarshalledSizeWithoutSerialization == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func CollectionsListGetMarshalledSizeWithoutSerialization(Collection: CPointer<SENSOR_COLLECTION_LIST>): UInt32
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_CollectionsListGetMarshalledSizeWithoutSerialization == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_CollectionsListGetMarshalledSizeWithoutSerialization(Collection: CPointer<SENSOR_COLLECTION_LIST>): UInt32 {
+    return CollectionsListGetMarshalledSizeWithoutSerialization(Collection)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_CollectionsListGetSerializedSize == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func CollectionsListGetSerializedSize(Collection: CPointer<SENSOR_COLLECTION_LIST>): UInt32
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_CollectionsListGetSerializedSize == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_CollectionsListGetSerializedSize(Collection: CPointer<SENSOR_COLLECTION_LIST>): UInt32 {
+    return CollectionsListGetSerializedSize(Collection)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_CollectionsListMarshall == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func CollectionsListMarshall(Target: CPointer<SENSOR_COLLECTION_LIST>): Int32
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_CollectionsListMarshall == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_CollectionsListMarshall(Target: CPointer<SENSOR_COLLECTION_LIST>): Int32 {
+    return CollectionsListMarshall(Target)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_CollectionsListSerializeToBuffer == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    // param-hint: TargetBuffer bytes=param[1]
+    func CollectionsListSerializeToBuffer(SourceCollection: CPointer<SENSOR_COLLECTION_LIST>, TargetBufferSizeInBytes: UInt32, TargetBuffer: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_CollectionsListSerializeToBuffer == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_CollectionsListSerializeToBuffer(SourceCollection: CPointer<SENSOR_COLLECTION_LIST>, TargetBufferSizeInBytes: UInt32, TargetBuffer: CPointer<UInt8>): Int32 {
+    return CollectionsListSerializeToBuffer(SourceCollection, TargetBufferSizeInBytes, TargetBuffer)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_CollectionsListSortSubscribedActivitiesByConfidence == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func CollectionsListSortSubscribedActivitiesByConfidence(thresholds: CPointer<SENSOR_COLLECTION_LIST>, pCollection: CPointer<SENSOR_COLLECTION_LIST>): Int32
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_CollectionsListSortSubscribedActivitiesByConfidence == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_CollectionsListSortSubscribedActivitiesByConfidence(thresholds: CPointer<SENSOR_COLLECTION_LIST>, pCollection: CPointer<SENSOR_COLLECTION_LIST>): Int32 {
+    return CollectionsListSortSubscribedActivitiesByConfidence(thresholds, pCollection)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_CollectionsListUpdateMarshalledPointer == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func CollectionsListUpdateMarshalledPointer(Collection: CPointer<SENSOR_COLLECTION_LIST>): Int32
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_CollectionsListUpdateMarshalledPointer == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_CollectionsListUpdateMarshalledPointer(Collection: CPointer<SENSOR_COLLECTION_LIST>): Int32 {
+    return CollectionsListUpdateMarshalledPointer(Collection)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_EvaluateActivityThresholds == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func EvaluateActivityThresholds(newSample: CPointer<SENSOR_COLLECTION_LIST>, oldSample: CPointer<SENSOR_COLLECTION_LIST>, thresholds: CPointer<SENSOR_COLLECTION_LIST>): UInt8
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_EvaluateActivityThresholds == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_EvaluateActivityThresholds(newSample: CPointer<SENSOR_COLLECTION_LIST>, oldSample: CPointer<SENSOR_COLLECTION_LIST>, thresholds: CPointer<SENSOR_COLLECTION_LIST>): UInt8 {
+    return EvaluateActivityThresholds(newSample, oldSample, thresholds)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_GetPerformanceTime == "on"]
+foreign {
+    func GetPerformanceTime(TimeMs: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_GetPerformanceTime == "on"]
+public unsafe func Windows_GetPerformanceTime(TimeMs: CPointer<UInt32>): Int32 {
+    return GetPerformanceTime(TimeMs)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_InitPropVariantFromCLSIDArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    // param-hint: members len=param[1]
+    func InitPropVariantFromCLSIDArray(members: CPointer<GUID>, size: UInt32, ppropvar: CPointer<Win32__impl_l2.PROPVARIANT>): Int32
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_InitPropVariantFromCLSIDArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_InitPropVariantFromCLSIDArray(members: CPointer<GUID>, size: UInt32, ppropvar: CPointer<Win32__impl_l2.PROPVARIANT>): Int32 {
+    return InitPropVariantFromCLSIDArray(members, size, ppropvar)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_InitPropVariantFromFloat == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func InitPropVariantFromFloat(fltVal: Float32, ppropvar: CPointer<Win32__impl_l2.PROPVARIANT>): Int32
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_InitPropVariantFromFloat == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_InitPropVariantFromFloat(fltVal: Float32, ppropvar: CPointer<Win32__impl_l2.PROPVARIANT>): Int32 {
+    return InitPropVariantFromFloat(fltVal, ppropvar)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_IsCollectionListSame == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func IsCollectionListSame(ListA: CPointer<SENSOR_COLLECTION_LIST>, ListB: CPointer<SENSOR_COLLECTION_LIST>): UInt8
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_IsCollectionListSame == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_IsCollectionListSame(ListA: CPointer<SENSOR_COLLECTION_LIST>, ListB: CPointer<SENSOR_COLLECTION_LIST>): UInt8 {
+    return IsCollectionListSame(ListA, ListB)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_IsGUIDPresentInList == "on"]
+foreign {
+    // param-hint: guidArray len=param[1]
+    func IsGUIDPresentInList(guidArray: CPointer<GUID>, arrayLength: UInt32, guidElem: CPointer<GUID>): UInt8
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_IsGUIDPresentInList == "on"]
+public unsafe func Windows_IsGUIDPresentInList(guidArray: CPointer<GUID>, arrayLength: UInt32, guidElem: CPointer<GUID>): UInt8 {
+    return IsGUIDPresentInList(guidArray, arrayLength, guidElem)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_IsKeyPresentInCollectionList == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func IsKeyPresentInCollectionList(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>): UInt8
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_IsKeyPresentInCollectionList == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_IsKeyPresentInCollectionList(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>): UInt8 {
+    return IsKeyPresentInCollectionList(pList, pKey)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_IsKeyPresentInPropertyList == "on"]
+foreign {
+    func IsKeyPresentInPropertyList(pList: CPointer<SENSOR_PROPERTY_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>): UInt8
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_IsKeyPresentInPropertyList == "on"]
+public unsafe func Windows_IsKeyPresentInPropertyList(pList: CPointer<SENSOR_PROPERTY_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>): UInt8 {
+    return IsKeyPresentInPropertyList(pList, pKey)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_IsSensorSubscribed == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func IsSensorSubscribed(subscriptionList: CPointer<SENSOR_COLLECTION_LIST>, currentType: GUID): UInt8
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_IsSensorSubscribed == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_IsSensorSubscribed(subscriptionList: CPointer<SENSOR_COLLECTION_LIST>, currentType: GUID): UInt8 {
+    return IsSensorSubscribed(subscriptionList, currentType)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropKeyFindKeyGetBool == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func PropKeyFindKeyGetBool(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, pRetValue: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropKeyFindKeyGetBool == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PropKeyFindKeyGetBool(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, pRetValue: CPointer<Int32>): Int32 {
+    return PropKeyFindKeyGetBool(pList, pKey, pRetValue)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropKeyFindKeyGetDouble == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func PropKeyFindKeyGetDouble(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, pRetValue: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropKeyFindKeyGetDouble == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PropKeyFindKeyGetDouble(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, pRetValue: CPointer<Float64>): Int32 {
+    return PropKeyFindKeyGetDouble(pList, pKey, pRetValue)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropKeyFindKeyGetFileTime == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func PropKeyFindKeyGetFileTime(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, pRetValue: CPointer<Win32_Foundation.FILETIME>): Int32
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropKeyFindKeyGetFileTime == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PropKeyFindKeyGetFileTime(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, pRetValue: CPointer<Win32_Foundation.FILETIME>): Int32 {
+    return PropKeyFindKeyGetFileTime(pList, pKey, pRetValue)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropKeyFindKeyGetFloat == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func PropKeyFindKeyGetFloat(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, pRetValue: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropKeyFindKeyGetFloat == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PropKeyFindKeyGetFloat(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, pRetValue: CPointer<Float32>): Int32 {
+    return PropKeyFindKeyGetFloat(pList, pKey, pRetValue)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropKeyFindKeyGetGuid == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func PropKeyFindKeyGetGuid(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, pRetValue: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropKeyFindKeyGetGuid == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PropKeyFindKeyGetGuid(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, pRetValue: CPointer<GUID>): Int32 {
+    return PropKeyFindKeyGetGuid(pList, pKey, pRetValue)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropKeyFindKeyGetInt32 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func PropKeyFindKeyGetInt32(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, pRetValue: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropKeyFindKeyGetInt32 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PropKeyFindKeyGetInt32(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, pRetValue: CPointer<Int32>): Int32 {
+    return PropKeyFindKeyGetInt32(pList, pKey, pRetValue)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropKeyFindKeyGetInt64 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func PropKeyFindKeyGetInt64(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, pRetValue: CPointer<Int64>): Int32
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropKeyFindKeyGetInt64 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PropKeyFindKeyGetInt64(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, pRetValue: CPointer<Int64>): Int32 {
+    return PropKeyFindKeyGetInt64(pList, pKey, pRetValue)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropKeyFindKeyGetNthInt64 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func PropKeyFindKeyGetNthInt64(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, Occurrence: UInt32, pRetValue: CPointer<Int64>): Int32
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropKeyFindKeyGetNthInt64 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PropKeyFindKeyGetNthInt64(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, Occurrence: UInt32, pRetValue: CPointer<Int64>): Int32 {
+    return PropKeyFindKeyGetNthInt64(pList, pKey, Occurrence, pRetValue)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropKeyFindKeyGetNthUlong == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func PropKeyFindKeyGetNthUlong(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, Occurrence: UInt32, pRetValue: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropKeyFindKeyGetNthUlong == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PropKeyFindKeyGetNthUlong(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, Occurrence: UInt32, pRetValue: CPointer<UInt32>): Int32 {
+    return PropKeyFindKeyGetNthUlong(pList, pKey, Occurrence, pRetValue)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropKeyFindKeyGetNthUshort == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func PropKeyFindKeyGetNthUshort(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, Occurrence: UInt32, pRetValue: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropKeyFindKeyGetNthUshort == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PropKeyFindKeyGetNthUshort(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, Occurrence: UInt32, pRetValue: CPointer<UInt16>): Int32 {
+    return PropKeyFindKeyGetNthUshort(pList, pKey, Occurrence, pRetValue)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropKeyFindKeyGetPropVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func PropKeyFindKeyGetPropVariant(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, TypeCheck: UInt8, pValue: CPointer<Win32__impl_l2.PROPVARIANT>): Int32
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropKeyFindKeyGetPropVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PropKeyFindKeyGetPropVariant(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, TypeCheck: UInt8, pValue: CPointer<Win32__impl_l2.PROPVARIANT>): Int32 {
+    return PropKeyFindKeyGetPropVariant(pList, pKey, TypeCheck, pValue)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropKeyFindKeyGetUlong == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func PropKeyFindKeyGetUlong(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, pRetValue: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropKeyFindKeyGetUlong == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PropKeyFindKeyGetUlong(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, pRetValue: CPointer<UInt32>): Int32 {
+    return PropKeyFindKeyGetUlong(pList, pKey, pRetValue)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropKeyFindKeyGetUshort == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func PropKeyFindKeyGetUshort(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, pRetValue: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropKeyFindKeyGetUshort == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PropKeyFindKeyGetUshort(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, pRetValue: CPointer<UInt16>): Int32 {
+    return PropKeyFindKeyGetUshort(pList, pKey, pRetValue)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropKeyFindKeySetPropVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func PropKeyFindKeySetPropVariant(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, TypeCheck: UInt8, pValue: CPointer<Win32__impl_l2.PROPVARIANT>): Int32
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropKeyFindKeySetPropVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PropKeyFindKeySetPropVariant(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, TypeCheck: UInt8, pValue: CPointer<Win32__impl_l2.PROPVARIANT>): Int32 {
+    return PropKeyFindKeySetPropVariant(pList, pKey, TypeCheck, pValue)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropVariantGetInformation == "on" && Windows_Win32_Devices_Properties == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
 foreign {
     // param-hint: PropVariantOffset optional
     // param-hint: PropVariantSize optional
@@ -1446,48 +1773,62 @@ foreign {
     func PropVariantGetInformation(PropVariantValue: CPointer<Win32__impl_l2.PROPVARIANT>, PropVariantOffset: CPointer<UInt32>, PropVariantSize: CPointer<UInt32>, PropVariantPointer: CPointer<CPointer<Unit>>, RemappedType: CPointer<UInt32>): Int32
 }
 
-@When[SENSORSUTILSV2 == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com_StructuredStorage == "on")]
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropVariantGetInformation == "on" && Windows_Win32_Devices_Properties == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PropVariantGetInformation(PropVariantValue: CPointer<Win32__impl_l2.PROPVARIANT>, PropVariantOffset: CPointer<UInt32>, PropVariantSize: CPointer<UInt32>, PropVariantPointer: CPointer<CPointer<Unit>>, RemappedType: CPointer<UInt32>): Int32 {
+    return PropVariantGetInformation(PropVariantValue, PropVariantOffset, PropVariantSize, PropVariantPointer, RemappedType)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropertiesListCopy == "on"]
 foreign {
-    func PropKeyFindKeyGetPropVariant(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, TypeCheck: UInt8, pValue: CPointer<Win32__impl_l2.PROPVARIANT>): Int32
-    func PropKeyFindKeySetPropVariant(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, TypeCheck: UInt8, pValue: CPointer<Win32__impl_l2.PROPVARIANT>): Int32
+    func PropertiesListCopy(Target: CPointer<SENSOR_PROPERTY_LIST>, Source: CPointer<SENSOR_PROPERTY_LIST>): Int32
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropertiesListCopy == "on"]
+public unsafe func Windows_PropertiesListCopy(Target: CPointer<SENSOR_PROPERTY_LIST>, Source: CPointer<SENSOR_PROPERTY_LIST>): Int32 {
+    return PropertiesListCopy(Target, Source)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropertiesListGetFillableCount == "on"]
+foreign {
+    func PropertiesListGetFillableCount(BufferSizeBytes: UInt32): UInt32
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_PropertiesListGetFillableCount == "on"]
+public unsafe func Windows_PropertiesListGetFillableCount(BufferSizeBytes: UInt32): UInt32 {
+    return PropertiesListGetFillableCount(BufferSizeBytes)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_SensorCollectionGetAt == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
     // param-hint: pKey optional
     // param-hint: pValue optional
     func SensorCollectionGetAt(Index: UInt32, pSensorsList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, pValue: CPointer<Win32__impl_l2.PROPVARIANT>): Int32
 }
 
-@When[SENSORSUTILSV2 == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on")]
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_SensorCollectionGetAt == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_SensorCollectionGetAt(Index: UInt32, pSensorsList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, pValue: CPointer<Win32__impl_l2.PROPVARIANT>): Int32 {
+    return SensorCollectionGetAt(Index, pSensorsList, pKey, pValue)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_SerializationBufferAllocate == "on"]
 foreign {
-    func CollectionsListAllocateBufferAndSerialize(SourceCollection: CPointer<SENSOR_COLLECTION_LIST>, pTargetBufferSizeInBytes: CPointer<UInt32>, pTargetBuffer: CPointer<CPointer<UInt8>>): Int32
-    func CollectionsListCopyAndMarshall(Target: CPointer<SENSOR_COLLECTION_LIST>, Source: CPointer<SENSOR_COLLECTION_LIST>): Int32
-    // param-hint: SourceBuffer bytes=param[0]
-    func CollectionsListDeserializeFromBuffer(SourceBufferSizeInBytes: UInt32, SourceBuffer: CPointer<UInt8>, TargetCollection: CPointer<SENSOR_COLLECTION_LIST>): Int32
-    func CollectionsListGetMarshalledSize(Collection: CPointer<SENSOR_COLLECTION_LIST>): UInt32
-    func CollectionsListGetMarshalledSizeWithoutSerialization(Collection: CPointer<SENSOR_COLLECTION_LIST>): UInt32
-    func CollectionsListGetSerializedSize(Collection: CPointer<SENSOR_COLLECTION_LIST>): UInt32
-    func CollectionsListMarshall(Target: CPointer<SENSOR_COLLECTION_LIST>): Int32
-    // param-hint: TargetBuffer bytes=param[1]
-    func CollectionsListSerializeToBuffer(SourceCollection: CPointer<SENSOR_COLLECTION_LIST>, TargetBufferSizeInBytes: UInt32, TargetBuffer: CPointer<UInt8>): Int32
-    func CollectionsListSortSubscribedActivitiesByConfidence(thresholds: CPointer<SENSOR_COLLECTION_LIST>, pCollection: CPointer<SENSOR_COLLECTION_LIST>): Int32
-    func CollectionsListUpdateMarshalledPointer(Collection: CPointer<SENSOR_COLLECTION_LIST>): Int32
-    func EvaluateActivityThresholds(newSample: CPointer<SENSOR_COLLECTION_LIST>, oldSample: CPointer<SENSOR_COLLECTION_LIST>, thresholds: CPointer<SENSOR_COLLECTION_LIST>): UInt8
-    // param-hint: members len=param[1]
-    func InitPropVariantFromCLSIDArray(members: CPointer<GUID>, size: UInt32, ppropvar: CPointer<Win32__impl_l2.PROPVARIANT>): Int32
-    func InitPropVariantFromFloat(fltVal: Float32, ppropvar: CPointer<Win32__impl_l2.PROPVARIANT>): Int32
-    func IsCollectionListSame(ListA: CPointer<SENSOR_COLLECTION_LIST>, ListB: CPointer<SENSOR_COLLECTION_LIST>): UInt8
-    func IsKeyPresentInCollectionList(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>): UInt8
-    func IsSensorSubscribed(subscriptionList: CPointer<SENSOR_COLLECTION_LIST>, currentType: GUID): UInt8
-    func PropKeyFindKeyGetBool(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, pRetValue: CPointer<Int32>): Int32
-    func PropKeyFindKeyGetDouble(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, pRetValue: CPointer<Float64>): Int32
-    func PropKeyFindKeyGetFileTime(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, pRetValue: CPointer<Win32_Foundation.FILETIME>): Int32
-    func PropKeyFindKeyGetFloat(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, pRetValue: CPointer<Float32>): Int32
-    func PropKeyFindKeyGetGuid(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, pRetValue: CPointer<GUID>): Int32
-    func PropKeyFindKeyGetInt32(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, pRetValue: CPointer<Int32>): Int32
-    func PropKeyFindKeyGetInt64(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, pRetValue: CPointer<Int64>): Int32
-    func PropKeyFindKeyGetNthInt64(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, Occurrence: UInt32, pRetValue: CPointer<Int64>): Int32
-    func PropKeyFindKeyGetNthUlong(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, Occurrence: UInt32, pRetValue: CPointer<UInt32>): Int32
-    func PropKeyFindKeyGetNthUshort(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, Occurrence: UInt32, pRetValue: CPointer<UInt16>): Int32
-    func PropKeyFindKeyGetUlong(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, pRetValue: CPointer<UInt32>): Int32
-    func PropKeyFindKeyGetUshort(pList: CPointer<SENSOR_COLLECTION_LIST>, pKey: CPointer<Win32_Foundation.PROPERTYKEY>, pRetValue: CPointer<UInt16>): Int32
+    func SerializationBufferAllocate(SizeInBytes: UInt32, pBuffer: CPointer<CPointer<UInt8>>): Int32
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_SerializationBufferAllocate == "on"]
+public unsafe func Windows_SerializationBufferAllocate(SizeInBytes: UInt32, pBuffer: CPointer<CPointer<UInt8>>): Int32 {
+    return SerializationBufferAllocate(SizeInBytes, pBuffer)
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_SerializationBufferFree == "on"]
+foreign {
+    // param-hint: Buffer optional
+    func SerializationBufferFree(Buffer: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_Devices_Sensors == "on" && SENSORSUTILSV2 == "on" && Windows_Win32_Devices_Sensors_SerializationBufferFree == "on"]
+public unsafe func Windows_SerializationBufferFree(Buffer: CPointer<UInt8>): Unit {
+    SerializationBufferFree(Buffer)
 }
 
 @When[Windows_Win32_Devices_Sensors == "on"]

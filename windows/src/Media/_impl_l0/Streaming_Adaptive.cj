@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l0 as _impl_l0
 import windows._impl_l2 as _impl_l2
@@ -18,7 +17,7 @@ import windows_collections as windows_collections
 import windows_future as windows_future
 
 
-@When[Windows_Media_Streaming_Adaptive == "on"]
+@When[Windows_Media_Streaming_Adaptive == "on" && Windows_Media_Core == "on"]
 public class AdaptiveMediaSource <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -136,7 +135,7 @@ public class AdaptiveMediaSource <: InterfaceWrapperBase & ComInterface & window
         return defaultInterface().CurrentPlaybackBitrate()
     }
 
-    @When[Windows_Media_Core == "on"]
+    @When[(Windows_Foundation_Collections == "on") && (Windows_Media_Core == "on")]
     public unsafe func AvailableBitrates(): windows_collections.IVectorView<UInt32> {
         return defaultInterface().AvailableBitrates()
     }
@@ -294,7 +293,7 @@ public class AdaptiveMediaSource <: InterfaceWrapperBase & ComInterface & window
     }
 }
 
-@When[Windows_Media_Streaming_Adaptive == "on"]
+@When[Windows_Media_Streaming_Adaptive == "on" && Windows_Media_Core == "on"]
 extend AdaptiveMediaSource <: windows_core.HandleWinrtType<AdaptiveMediaSource> {
     public static func intoWinrtHandle(value: AdaptiveMediaSource): CPointer<Unit> {
         value.asRaw()
@@ -597,6 +596,7 @@ public class AdaptiveMediaSourceCreationResult <: InterfaceWrapperBase & ComInte
         return defaultInterface().Status()
     }
 
+    @When[Windows_Media_Core == "on"]
     public unsafe func MediaSource(): AdaptiveMediaSource {
         return defaultInterface().MediaSource()
     }
@@ -1989,7 +1989,10 @@ public struct IAdaptiveMediaSourceVtbl {
     public var SetInitialBitrate: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CurrentDownloadBitrate: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CurrentPlaybackBitrate: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var AvailableBitrates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AvailableBitrates: UIntNative = UIntNative(0)
     public var DesiredMinBitrate: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetDesiredMinBitrate: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var DesiredMaxBitrate: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1998,15 +2001,30 @@ public struct IAdaptiveMediaSourceVtbl {
     public var InboundBitsPerSecond: CFunc<(CPointer<Unit>, CPointer<UInt64>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var InboundBitsPerSecondWindow: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetInboundBitsPerSecondWindow: CFunc<(CPointer<Unit>, windows_future.TimeSpanAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Media_Core == "on"]
     public var DownloadBitrateChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Media_Core != "on"]
+    public var DownloadBitrateChanged: UIntNative = UIntNative(0)
     public var RemoveDownloadBitrateChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Media_Core == "on"]
     public var PlaybackBitrateChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Media_Core != "on"]
+    public var PlaybackBitrateChanged: UIntNative = UIntNative(0)
     public var RemovePlaybackBitrateChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Media_Core == "on"]
     public var DownloadRequested: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Media_Core != "on"]
+    public var DownloadRequested: UIntNative = UIntNative(0)
     public var RemoveDownloadRequested: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Media_Core == "on"]
     public var DownloadCompleted: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Media_Core != "on"]
+    public var DownloadCompleted: UIntNative = UIntNative(0)
     public var RemoveDownloadCompleted: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Media_Core == "on"]
     public var DownloadFailed: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Media_Core != "on"]
+    public var DownloadFailed: UIntNative = UIntNative(0)
     public var RemoveDownloadFailed: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -2140,6 +2158,7 @@ public class IAdaptiveMediaSource <: InterfaceWrapperBase & ComInterface & Runti
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AvailableBitrates(): windows_collections.IVectorView<UInt32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2206,6 +2225,7 @@ public class IAdaptiveMediaSource <: InterfaceWrapperBase & ComInterface & Runti
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Media_Core == "on"]
     public unsafe func DownloadBitrateChanged(handler: Foundation.TypedEventHandler<AdaptiveMediaSource, AdaptiveMediaSourceDownloadBitrateChangedEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
@@ -2220,6 +2240,7 @@ public class IAdaptiveMediaSource <: InterfaceWrapperBase & ComInterface & Runti
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Media_Core == "on"]
     public unsafe func PlaybackBitrateChanged(handler: Foundation.TypedEventHandler<AdaptiveMediaSource, AdaptiveMediaSourcePlaybackBitrateChangedEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
@@ -2234,6 +2255,7 @@ public class IAdaptiveMediaSource <: InterfaceWrapperBase & ComInterface & Runti
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Media_Core == "on"]
     public unsafe func DownloadRequested(handler: Foundation.TypedEventHandler<AdaptiveMediaSource, AdaptiveMediaSourceDownloadRequestedEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
@@ -2248,6 +2270,7 @@ public class IAdaptiveMediaSource <: InterfaceWrapperBase & ComInterface & Runti
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Media_Core == "on"]
     public unsafe func DownloadCompleted(handler: Foundation.TypedEventHandler<AdaptiveMediaSource, AdaptiveMediaSourceDownloadCompletedEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
@@ -2262,6 +2285,7 @@ public class IAdaptiveMediaSource <: InterfaceWrapperBase & ComInterface & Runti
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Media_Core == "on"]
     public unsafe func DownloadFailed(handler: Foundation.TypedEventHandler<AdaptiveMediaSource, AdaptiveMediaSourceDownloadFailedEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
@@ -2725,7 +2749,10 @@ extend IAdaptiveMediaSourceCorrelatedTimes <: windows_core.Interface<IAdaptiveMe
 public struct IAdaptiveMediaSourceCreationResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Status: CFunc<(CPointer<Unit>, CPointer<AdaptiveMediaSourceCreationStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Media_Core == "on"]
     public var MediaSource: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Media_Core != "on"]
+    public var MediaSource: UIntNative = UIntNative(0)
     @When[Windows_Web_Http == "on"]
     public var get_HttpResponseMessage: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Web_Http != "on"]
@@ -2806,6 +2833,7 @@ public class IAdaptiveMediaSourceCreationResult <: InterfaceWrapperBase & ComInt
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<AdaptiveMediaSourceCreationStatus>()).unwrap()
     }
 
+    @When[Windows_Media_Core == "on"]
     public unsafe func MediaSource(): AdaptiveMediaSource {
         let v = vtbl()
         var result__ = CPointer<Unit>()

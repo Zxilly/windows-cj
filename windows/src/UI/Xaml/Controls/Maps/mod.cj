@@ -10,15 +10,10 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Devices_Geolocation == "on"]
 import windows.Devices.Geolocation as Devices_Geolocation
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Services_Maps == "on"]
 import windows.Services.Maps as Services_Maps
-@When[Windows_Services_Maps_LocalSearch == "on"]
 import windows.Services.Maps.LocalSearch as Services_Maps_LocalSearch
-@When[Windows_UI == "on"]
 import windows.UI as UI
 import windows.UI.Xaml._impl_l0 as UI_Xaml__impl_l0
 import windows.UI.Xaml._impl_l1 as UI_Xaml__impl_l1
@@ -516,9 +511,9 @@ extend IMapControl8 <: windows_core.Interface<IMapControl8> {}
 @C
 public struct IMapControlBusinessLandmarkClickEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Services_Maps_LocalSearch == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Services_Maps_LocalSearch == "on"]
     public var LocalLocations: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Services_Maps_LocalSearch != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Services_Maps_LocalSearch != "on"]
     public var LocalLocations: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -588,7 +583,7 @@ public class IMapControlBusinessLandmarkClickEventArgs <: InterfaceWrapperBase &
         readVtbl<IMapControlBusinessLandmarkClickEventArgsVtbl>(IMapControlBusinessLandmarkClickEventArgsVtbl())
     }
 
-    @When[Windows_Services_Maps_LocalSearch == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Services_Maps_LocalSearch == "on"]
     public unsafe func LocalLocations(): windows_collections.IVectorView<Services_Maps_LocalSearch.LocalLocation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -605,9 +600,9 @@ extend IMapControlBusinessLandmarkClickEventArgs <: windows_core.Interface<IMapC
 @C
 public struct IMapControlBusinessLandmarkPointerEnteredEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Services_Maps_LocalSearch == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Services_Maps_LocalSearch == "on"]
     public var LocalLocations: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Services_Maps_LocalSearch != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Services_Maps_LocalSearch != "on"]
     public var LocalLocations: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -677,7 +672,7 @@ public class IMapControlBusinessLandmarkPointerEnteredEventArgs <: InterfaceWrap
         readVtbl<IMapControlBusinessLandmarkPointerEnteredEventArgsVtbl>(IMapControlBusinessLandmarkPointerEnteredEventArgsVtbl())
     }
 
-    @When[Windows_Services_Maps_LocalSearch == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Services_Maps_LocalSearch == "on"]
     public unsafe func LocalLocations(): windows_collections.IVectorView<Services_Maps_LocalSearch.LocalLocation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -694,9 +689,9 @@ extend IMapControlBusinessLandmarkPointerEnteredEventArgs <: windows_core.Interf
 @C
 public struct IMapControlBusinessLandmarkPointerExitedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Services_Maps_LocalSearch == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Services_Maps_LocalSearch == "on"]
     public var LocalLocations: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Services_Maps_LocalSearch != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Services_Maps_LocalSearch != "on"]
     public var LocalLocations: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -766,7 +761,7 @@ public class IMapControlBusinessLandmarkPointerExitedEventArgs <: InterfaceWrapp
         readVtbl<IMapControlBusinessLandmarkPointerExitedEventArgsVtbl>(IMapControlBusinessLandmarkPointerExitedEventArgsVtbl())
     }
 
-    @When[Windows_Services_Maps_LocalSearch == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Services_Maps_LocalSearch == "on"]
     public unsafe func LocalLocations(): windows_collections.IVectorView<Services_Maps_LocalSearch.LocalLocation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -783,9 +778,9 @@ extend IMapControlBusinessLandmarkPointerExitedEventArgs <: windows_core.Interfa
 @C
 public struct IMapControlBusinessLandmarkRightTappedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Services_Maps_LocalSearch == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Services_Maps_LocalSearch == "on"]
     public var LocalLocations: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Services_Maps_LocalSearch != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Services_Maps_LocalSearch != "on"]
     public var LocalLocations: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -855,7 +850,7 @@ public class IMapControlBusinessLandmarkRightTappedEventArgs <: InterfaceWrapper
         readVtbl<IMapControlBusinessLandmarkRightTappedEventArgsVtbl>(IMapControlBusinessLandmarkRightTappedEventArgsVtbl())
     }
 
-    @When[Windows_Services_Maps_LocalSearch == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Services_Maps_LocalSearch == "on"]
     public unsafe func LocalLocations(): windows_collections.IVectorView<Services_Maps_LocalSearch.LocalLocation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1977,7 +1972,10 @@ public struct IMapControlTransitFeatureClickEventArgsVtbl {
     public var Location: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Geolocation != "on"]
     public var Location: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var TransitProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var TransitProperties: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2063,6 +2061,7 @@ public class IMapControlTransitFeatureClickEventArgs <: InterfaceWrapperBase & C
         return Devices_Geolocation.Geopoint.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TransitProperties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2084,7 +2083,10 @@ public struct IMapControlTransitFeaturePointerEnteredEventArgsVtbl {
     public var Location: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Geolocation != "on"]
     public var Location: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var TransitProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var TransitProperties: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2170,6 +2172,7 @@ public class IMapControlTransitFeaturePointerEnteredEventArgs <: InterfaceWrappe
         return Devices_Geolocation.Geopoint.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TransitProperties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2191,7 +2194,10 @@ public struct IMapControlTransitFeaturePointerExitedEventArgsVtbl {
     public var Location: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Geolocation != "on"]
     public var Location: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var TransitProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var TransitProperties: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2277,6 +2283,7 @@ public class IMapControlTransitFeaturePointerExitedEventArgs <: InterfaceWrapper
         return Devices_Geolocation.Geopoint.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TransitProperties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2298,7 +2305,10 @@ public struct IMapControlTransitFeatureRightTappedEventArgsVtbl {
     public var Location: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Geolocation != "on"]
     public var Location: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var TransitProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var TransitProperties: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2384,6 +2394,7 @@ public class IMapControlTransitFeatureRightTappedEventArgs <: InterfaceWrapperBa
         return Devices_Geolocation.Geopoint.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TransitProperties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4053,9 +4064,9 @@ public struct IMapItemsControlVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var ItemsSource: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetItemsSource: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public var Items: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Xaml != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_UI_Xaml != "on"]
     public var Items: UIntNative = UIntNative(0)
     @When[Windows_UI_Xaml == "on"]
     public var ItemTemplate: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -4147,7 +4158,7 @@ public class IMapItemsControl <: InterfaceWrapperBase & ComInterface & RuntimeNa
         HRESULT(hr).ok()
     }
 
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public unsafe func Items(): windows_collections.IVector<UI_Xaml__impl_l0.DependencyObject> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4790,9 +4801,9 @@ extend IMapPolygon <: windows_core.Interface<IMapPolygon> {}
 @C
 public struct IMapPolygon2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Devices_Geolocation == "on"]
+    @When[Windows_Devices_Geolocation == "on" && Windows_Foundation_Collections == "on"]
     public var Paths: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Devices_Geolocation != "on"]
+    @When[Windows_Devices_Geolocation != "on" || Windows_Foundation_Collections != "on"]
     public var Paths: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -4862,7 +4873,7 @@ public class IMapPolygon2 <: InterfaceWrapperBase & ComInterface & RuntimeName &
         readVtbl<IMapPolygon2Vtbl>(IMapPolygon2Vtbl())
     }
 
-    @When[Windows_Devices_Geolocation == "on"]
+    @When[Windows_Devices_Geolocation == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func Paths(): windows_collections.IVector<Devices_Geolocation.Geopath> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7585,7 +7596,7 @@ public class MapControlBusinessLandmarkClickEventArgs <: InterfaceWrapperBase & 
         }
     }
 
-    @When[Windows_Services_Maps_LocalSearch == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Services_Maps_LocalSearch == "on"]
     public unsafe func LocalLocations(): windows_collections.IVectorView<Services_Maps_LocalSearch.LocalLocation> {
         return defaultInterface().LocalLocations()
     }
@@ -7689,7 +7700,7 @@ public class MapControlBusinessLandmarkPointerEnteredEventArgs <: InterfaceWrapp
         }
     }
 
-    @When[Windows_Services_Maps_LocalSearch == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Services_Maps_LocalSearch == "on"]
     public unsafe func LocalLocations(): windows_collections.IVectorView<Services_Maps_LocalSearch.LocalLocation> {
         return defaultInterface().LocalLocations()
     }
@@ -7793,7 +7804,7 @@ public class MapControlBusinessLandmarkPointerExitedEventArgs <: InterfaceWrappe
         }
     }
 
-    @When[Windows_Services_Maps_LocalSearch == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Services_Maps_LocalSearch == "on"]
     public unsafe func LocalLocations(): windows_collections.IVectorView<Services_Maps_LocalSearch.LocalLocation> {
         return defaultInterface().LocalLocations()
     }
@@ -7897,7 +7908,7 @@ public class MapControlBusinessLandmarkRightTappedEventArgs <: InterfaceWrapperB
         }
     }
 
-    @When[Windows_Services_Maps_LocalSearch == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Services_Maps_LocalSearch == "on"]
     public unsafe func LocalLocations(): windows_collections.IVectorView<Services_Maps_LocalSearch.LocalLocation> {
         return defaultInterface().LocalLocations()
     }
@@ -8010,6 +8021,7 @@ public class MapControlTransitFeatureClickEventArgs <: InterfaceWrapperBase & Co
         return defaultInterface().Location()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TransitProperties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         return defaultInterface().TransitProperties()
     }
@@ -8122,6 +8134,7 @@ public class MapControlTransitFeaturePointerEnteredEventArgs <: InterfaceWrapper
         return defaultInterface().Location()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TransitProperties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         return defaultInterface().TransitProperties()
     }
@@ -8234,6 +8247,7 @@ public class MapControlTransitFeaturePointerExitedEventArgs <: InterfaceWrapperB
         return defaultInterface().Location()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TransitProperties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         return defaultInterface().TransitProperties()
     }
@@ -8346,6 +8360,7 @@ public class MapControlTransitFeatureRightTappedEventArgs <: InterfaceWrapperBas
         return defaultInterface().Location()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TransitProperties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         return defaultInterface().TransitProperties()
     }
@@ -8804,7 +8819,7 @@ public class MapItemsControl <: InterfaceWrapperBase & ComInterface & windows_in
         defaultInterface().SetItemsSource(value)
     }
 
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public unsafe func Items(): windows_collections.IVector<UI_Xaml__impl_l0.DependencyObject> {
         return defaultInterface().Items()
     }
@@ -12254,6 +12269,7 @@ public class HttpMapTileDataSource <: InterfaceWrapperBase & ComInterface & wind
         defaultInterface().SetUriFormatString(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AdditionalRequestHeaders(): windows_collections.IMap<windows_core.HString, windows_core.HString> {
         return defaultInterface().AdditionalRequestHeaders()
     }
@@ -12500,7 +12516,10 @@ public struct IHttpMapTileDataSourceVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var UriFormatString: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetUriFormatString: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var AdditionalRequestHeaders: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AdditionalRequestHeaders: UIntNative = UIntNative(0)
     public var AllowCaching: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetAllowCaching: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var UriRequested: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -12587,6 +12606,7 @@ public class IHttpMapTileDataSource <: InterfaceWrapperBase & ComInterface & Run
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AdditionalRequestHeaders(): windows_collections.IMap<windows_core.HString, windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -13480,7 +13500,10 @@ public struct IMapContextRequestedEventArgsVtbl {
     public var Location: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Geolocation != "on"]
     public var Location: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var MapElements: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var MapElements: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -13566,6 +13589,7 @@ public class IMapContextRequestedEventArgs <: InterfaceWrapperBase & ComInterfac
         return Devices_Geolocation.Geopoint.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MapElements(): windows_collections.IVectorView<MapElement> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -13590,9 +13614,9 @@ public struct IMapControlVtbl {
     public var SetCenter: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Geolocation != "on"]
     public var SetCenter: UIntNative = UIntNative(0)
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public var Children: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Xaml != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_UI_Xaml != "on"]
     public var Children: UIntNative = UIntNative(0)
     public var ColorScheme: CFunc<(CPointer<Unit>, CPointer<MapColorSchemeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetColorScheme: CFunc<(CPointer<Unit>, MapColorSchemeAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -13620,9 +13644,18 @@ public struct IMapControlVtbl {
     public var SetWatermarkMode: CFunc<(CPointer<Unit>, MapWatermarkModeAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ZoomLevel: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetZoomLevel: CFunc<(CPointer<Unit>, Float64) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var MapElements: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var MapElements: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Routes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Routes: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var TileSources: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var TileSources: UIntNative = UIntNative(0)
     public var CenterChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveCenterChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var HeadingChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -13641,7 +13674,10 @@ public struct IMapControlVtbl {
     public var RemoveTransformOriginChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ZoomLevelChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveZoomLevelChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindMapElementsAtOffset: CFunc<(CPointer<Unit>, windows_future.PointAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindMapElementsAtOffset: UIntNative = UIntNative(0)
     @When[Windows_Devices_Geolocation == "on"]
     public var GetLocationFromOffset: CFunc<(CPointer<Unit>, windows_future.PointAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Geolocation != "on"]
@@ -13758,7 +13794,7 @@ public class IMapControl <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         HRESULT(hr).ok()
     }
 
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public unsafe func Children(): windows_collections.IVector<UI_Xaml__impl_l0.DependencyObject> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -13953,6 +13989,7 @@ public class IMapControl <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MapElements(): windows_collections.IVector<MapElement> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -13961,6 +13998,7 @@ public class IMapControl <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         return windows_collections.IVector<MapElement>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Routes(): windows_collections.IVector<MapRouteView> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -13969,6 +14007,7 @@ public class IMapControl <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         return windows_collections.IVector<MapRouteView>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TileSources(): windows_collections.IVector<MapTileSource> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -14103,6 +14142,7 @@ public class IMapControl <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindMapElementsAtOffset(offset: windows_future.Point): windows_collections.IVectorView<MapElement> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -14766,7 +14806,10 @@ public struct IMapControl5Vtbl {
     public var SetViewPadding: UIntNative = UIntNative(0)
     public var MapContextRequested: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveMapContextRequested: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindMapElementsAtOffsetWithRadius: CFunc<(CPointer<Unit>, windows_future.PointAbi, Float64, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindMapElementsAtOffsetWithRadius: UIntNative = UIntNative(0)
     @When[Windows_Devices_Geolocation == "on"]
     public var GetLocationFromOffsetWithReferenceSystem: CFunc<(CPointer<Unit>, windows_future.PointAbi, Devices_Geolocation.AltitudeReferenceSystemAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Geolocation != "on"]
@@ -14904,6 +14947,7 @@ public class IMapControl5 <: InterfaceWrapperBase & ComInterface & RuntimeName &
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindMapElementsAtOffsetWithRadius(offset: windows_future.Point, radius: Float64): windows_collections.IVectorView<MapElement> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -14956,8 +15000,14 @@ extend IMapControl5 <: windows_core.Interface<IMapControl5> {}
 @C
 public struct IMapControl6Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Layers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Layers: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SetLayers: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SetLayers: UIntNative = UIntNative(0)
     @When[Windows_Devices_Geolocation == "on"]
     public var TryGetLocationFromOffset: CFunc<(CPointer<Unit>, windows_future.PointAbi, CPointer<CPointer<Unit>>, CPointer<Bool>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Geolocation != "on"]
@@ -15034,6 +15084,7 @@ public class IMapControl6 <: InterfaceWrapperBase & ComInterface & RuntimeName &
         readVtbl<IMapControl6Vtbl>(IMapControl6Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Layers(): windows_collections.IVector<MapLayer> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -15042,6 +15093,7 @@ public class IMapControl6 <: InterfaceWrapperBase & ComInterface & RuntimeName &
         return windows_collections.IVector<MapLayer>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetLayers(value: windows_collections.IVector<MapLayer>): Unit {
         let v = vtbl()
         let hr = v.SetLayers(asRaw(), value.asRaw())
@@ -15802,7 +15854,10 @@ public struct IMapElementClickEventArgsVtbl {
     public var Location: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Geolocation != "on"]
     public var Location: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var MapElements: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var MapElements: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -15888,6 +15943,7 @@ public class IMapElementClickEventArgs <: InterfaceWrapperBase & ComInterface & 
         return Devices_Geolocation.Geopoint.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MapElements(): windows_collections.IVector<MapElement> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -16203,8 +16259,14 @@ extend IMapElementPointerExitedEventArgs <: windows_core.Interface<IMapElementPo
 @C
 public struct IMapElementsLayerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var MapElements: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var MapElements: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SetMapElements: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SetMapElements: UIntNative = UIntNative(0)
     public var MapElementClick: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveMapElementClick: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var MapElementPointerEntered: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -16281,6 +16343,7 @@ public class IMapElementsLayer <: InterfaceWrapperBase & ComInterface & RuntimeN
         readVtbl<IMapElementsLayerVtbl>(IMapElementsLayerVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MapElements(): windows_collections.IVector<MapElement> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -16289,6 +16352,7 @@ public class IMapElementsLayer <: InterfaceWrapperBase & ComInterface & RuntimeN
         return windows_collections.IVector<MapElement>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetMapElements(value: windows_collections.IVector<MapElement>): Unit {
         let v = vtbl()
         let hr = v.SetMapElements(asRaw(), value.asRaw())
@@ -16364,7 +16428,10 @@ public struct IMapElementsLayerClickEventArgsVtbl {
     public var Location: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Geolocation != "on"]
     public var Location: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var MapElements: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var MapElements: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -16450,6 +16517,7 @@ public class IMapElementsLayerClickEventArgs <: InterfaceWrapperBase & ComInterf
         return Devices_Geolocation.Geopoint.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MapElements(): windows_collections.IVector<MapElement> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -16471,7 +16539,10 @@ public struct IMapElementsLayerContextRequestedEventArgsVtbl {
     public var Location: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Geolocation != "on"]
     public var Location: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var MapElements: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var MapElements: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -16557,6 +16628,7 @@ public class IMapElementsLayerContextRequestedEventArgs <: InterfaceWrapperBase 
         return Devices_Geolocation.Geopoint.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MapElements(): windows_collections.IVectorView<MapElement> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -17274,13 +17346,13 @@ public struct IMapSceneStaticsVtbl {
     public var CreateFromLocationAndRadiusWithHeadingAndPitch: CFunc<(CPointer<Unit>, CPointer<Unit>, Float64, Float64, Float64, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Geolocation != "on"]
     public var CreateFromLocationAndRadiusWithHeadingAndPitch: UIntNative = UIntNative(0)
-    @When[Windows_Devices_Geolocation == "on"]
+    @When[Windows_Devices_Geolocation == "on" && Windows_Foundation_Collections == "on"]
     public var CreateFromLocations: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Devices_Geolocation != "on"]
+    @When[Windows_Devices_Geolocation != "on" || Windows_Foundation_Collections != "on"]
     public var CreateFromLocations: UIntNative = UIntNative(0)
-    @When[Windows_Devices_Geolocation == "on"]
+    @When[Windows_Devices_Geolocation == "on" && Windows_Foundation_Collections == "on"]
     public var CreateFromLocationsWithHeadingAndPitch: CFunc<(CPointer<Unit>, CPointer<Unit>, Float64, Float64, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Devices_Geolocation != "on"]
+    @When[Windows_Devices_Geolocation != "on" || Windows_Foundation_Collections != "on"]
     public var CreateFromLocationsWithHeadingAndPitch: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -17412,7 +17484,7 @@ public class IMapSceneStatics <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return MapScene.fromAbiTake(result__)
     }
 
-    @When[Windows_Devices_Geolocation == "on"]
+    @When[Windows_Devices_Geolocation == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromLocations(locations: windows_collections.IIterable<Devices_Geolocation.Geopoint>): MapScene {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -17421,7 +17493,7 @@ public class IMapSceneStatics <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return MapScene.fromAbiTake(result__)
     }
 
-    @When[Windows_Devices_Geolocation == "on"]
+    @When[Windows_Devices_Geolocation == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromLocationsWithHeadingAndPitch(locations: windows_collections.IIterable<Devices_Geolocation.Geopoint>, headingInDegrees: Float64, pitchInDegrees: Float64): MapScene {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -17444,7 +17516,10 @@ public struct IMapStyleSheetStaticsVtbl {
     public var RoadDark: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var RoadHighContrastLight: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var RoadHighContrastDark: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Combine: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Combine: UIntNative = UIntNative(0)
     public var ParseFromJson: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var TryParseFromJson: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<Bool>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public init() {}
@@ -17563,6 +17638,7 @@ public class IMapStyleSheetStatics <: InterfaceWrapperBase & ComInterface & Runt
         return MapStyleSheet.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Combine(styleSheets: windows_collections.IIterable<MapStyleSheet>): MapStyleSheet {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -19157,6 +19233,7 @@ public class MapContextRequestedEventArgs <: InterfaceWrapperBase & ComInterface
         return defaultInterface().Location()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MapElements(): windows_collections.IVectorView<MapElement> {
         return defaultInterface().MapElements()
     }
@@ -19312,7 +19389,7 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
         defaultInterface().SetCenter(value)
     }
 
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public unsafe func Children(): windows_collections.IVector<UI_Xaml__impl_l0.DependencyObject> {
         return defaultInterface().Children()
     }
@@ -19421,14 +19498,17 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
         defaultInterface().SetZoomLevel(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MapElements(): windows_collections.IVector<MapElement> {
         return defaultInterface().MapElements()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Routes(): windows_collections.IVector<MapRouteView> {
         return defaultInterface().Routes()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TileSources(): windows_collections.IVector<MapTileSource> {
         return defaultInterface().TileSources()
     }
@@ -19505,6 +19585,7 @@ public class MapControl <: InterfaceWrapperBase & ComInterface & windows_interfa
         defaultInterface().RemoveZoomLevelChanged(token)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindMapElementsAtOffset(offset: windows_future.Point): windows_collections.IVectorView<MapElement> {
         return defaultInterface().FindMapElementsAtOffset(offset)
     }
@@ -20869,6 +20950,7 @@ public class MapElementClickEventArgs <: InterfaceWrapperBase & ComInterface & w
         return defaultInterface().Location()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MapElements(): windows_collections.IVector<MapElement> {
         return defaultInterface().MapElements()
     }
@@ -21210,10 +21292,12 @@ public class MapElementsLayer <: InterfaceWrapperBase & ComInterface & windows_i
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MapElements(): windows_collections.IVector<MapElement> {
         return defaultInterface().MapElements()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetMapElements(value: windows_collections.IVector<MapElement>): Unit {
         defaultInterface().SetMapElements(value)
     }
@@ -21370,6 +21454,7 @@ public class MapElementsLayerClickEventArgs <: InterfaceWrapperBase & ComInterfa
         return defaultInterface().Location()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MapElements(): windows_collections.IVector<MapElement> {
         return defaultInterface().MapElements()
     }
@@ -21482,6 +21567,7 @@ public class MapElementsLayerContextRequestedEventArgs <: InterfaceWrapperBase &
         return defaultInterface().Location()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MapElements(): windows_collections.IVectorView<MapElement> {
         return defaultInterface().MapElements()
     }
@@ -22896,7 +22982,7 @@ public class MapScene <: InterfaceWrapperBase & ComInterface & windows_interface
         }
     }
 
-    @When[Windows_Devices_Geolocation == "on"]
+    @When[Windows_Devices_Geolocation == "on" && Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromLocations(locations: windows_collections.IIterable<Devices_Geolocation.Geopoint>): MapScene {
         var result__: Option<MapScene> = Option<MapScene>.None
         try (factory__ = windows_core.factory<MapScene, IMapSceneStatics>().unwrap()) {
@@ -22908,7 +22994,7 @@ public class MapScene <: InterfaceWrapperBase & ComInterface & windows_interface
         }
     }
 
-    @When[Windows_Devices_Geolocation == "on"]
+    @When[Windows_Devices_Geolocation == "on" && Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromLocationsWithHeadingAndPitch(locations: windows_collections.IIterable<Devices_Geolocation.Geopoint>, headingInDegrees: Float64, pitchInDegrees: Float64): MapScene {
         var result__: Option<MapScene> = Option<MapScene>.None
         try (factory__ = windows_core.factory<MapScene, IMapSceneStatics>().unwrap()) {
@@ -23081,6 +23167,7 @@ public class MapStyleSheet <: InterfaceWrapperBase & ComInterface & windows_inte
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Combine(styleSheets: windows_collections.IIterable<MapStyleSheet>): MapStyleSheet {
         var result__: Option<MapStyleSheet> = Option<MapStyleSheet>.None
         try (factory__ = windows_core.factory<MapStyleSheet, IMapStyleSheetStatics>().unwrap()) {

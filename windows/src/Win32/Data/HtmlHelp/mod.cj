@@ -10,19 +10,32 @@ import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrap
 import windows_interface as windows_interface
 import windows_polyfill.{unionReadUInt32, unionWriteUInt32}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
 import windows.Win32._impl_l2 as Win32__impl_l2
 
 
-@When[HHCTRL_OCX == "on"]
+@When[Windows_Win32_Data_HtmlHelp == "on" && HHCTRL_OCX == "on" && Windows_Win32_Data_HtmlHelp_HtmlHelpA == "on"]
 foreign {
     // param-hint: hwndCaller optional
     func HtmlHelpA(hwndCaller: CPointer<Unit>, pszFile: CPointer<UInt8>, uCommand: UInt32, dwData: UIntNative): CPointer<Unit>
+}
+
+@When[Windows_Win32_Data_HtmlHelp == "on" && HHCTRL_OCX == "on" && Windows_Win32_Data_HtmlHelp_HtmlHelpA == "on"]
+public unsafe func Windows_HtmlHelpA(hwndCaller: CPointer<Unit>, pszFile: CPointer<UInt8>, uCommand: UInt32, dwData: UIntNative): CPointer<Unit> {
+    return HtmlHelpA(hwndCaller, pszFile, uCommand, dwData)
+}
+
+@When[Windows_Win32_Data_HtmlHelp == "on" && HHCTRL_OCX == "on" && Windows_Win32_Data_HtmlHelp_HtmlHelpW == "on"]
+foreign {
     // param-hint: hwndCaller optional
     func HtmlHelpW(hwndCaller: CPointer<Unit>, pszFile: CPointer<UInt16>, uCommand: UInt32, dwData: UIntNative): CPointer<Unit>
+}
+
+@When[Windows_Win32_Data_HtmlHelp == "on" && HHCTRL_OCX == "on" && Windows_Win32_Data_HtmlHelp_HtmlHelpW == "on"]
+public unsafe func Windows_HtmlHelpW(hwndCaller: CPointer<Unit>, pszFile: CPointer<UInt16>, uCommand: UInt32, dwData: UIntNative): CPointer<Unit> {
+    return HtmlHelpW(hwndCaller, pszFile, uCommand, dwData)
 }
 
 @When[Windows_Win32_Data_HtmlHelp == "on"]

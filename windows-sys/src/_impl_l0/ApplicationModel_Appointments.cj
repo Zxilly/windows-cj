@@ -887,6 +887,7 @@ public struct IAppointmentPropertiesStaticsVtbl {
     public var Recurrence: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Uri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Invitees: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var DefaultProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1063,6 +1064,7 @@ public class IAppointmentPropertiesStatics <: InterfaceWrapperBase & ComInterfac
         return __vt.Invitees(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DefaultProperties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1461,7 +1463,9 @@ public class IAppointmentStoreNotificationTriggerDetails <: InterfaceWrapperBase
 @C
 public struct IFindAppointmentsOptionsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CalendarIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FetchProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IncludeHidden: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var SetIncludeHidden: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
@@ -1510,12 +1514,14 @@ public class IFindAppointmentsOptions <: InterfaceWrapperBase & ComInterface {
         readVtbl<IFindAppointmentsOptionsVtbl>(IFindAppointmentsOptionsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CalendarIds(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CalendarIds(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FetchProperties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

@@ -4,7 +4,6 @@ package windows_sys.UI.Input.Preview.Injection
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_Gaming_Input == "on"]
 import windows_sys.Gaming.Input as Gaming_Input
 
 
@@ -1098,9 +1097,12 @@ public class IInjectedInputTouchInfo <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IInputInjectorVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var InjectKeyboardInput: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var InjectMouseInput: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var InitializeTouchInjection: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var InjectTouchInput: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var UninitializeTouchInjection: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var InitializePenInjection: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -1150,12 +1152,14 @@ public class IInputInjector <: InterfaceWrapperBase & ComInterface {
         readVtbl<IInputInjectorVtbl>(IInputInjectorVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InjectKeyboardInput(input: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.InjectKeyboardInput(__liveRaw, input)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InjectMouseInput(input: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1168,6 +1172,7 @@ public class IInputInjector <: InterfaceWrapperBase & ComInterface {
         return __vt.InitializeTouchInjection(__liveRaw, visualMode)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InjectTouchInput(input: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

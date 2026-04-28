@@ -10,13 +10,9 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Devices_Haptics == "on"]
 import windows.Devices.Haptics as Devices_Haptics
-@When[Windows_Devices_Power == "on"]
 import windows.Devices.Power as Devices_Power
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Gaming_Input_ForceFeedback == "on"]
 import windows.Gaming.Input.ForceFeedback as Gaming_Input_ForceFeedback
 import windows._impl_l1 as _impl_l1
 import windows_collections as windows_collections
@@ -2534,9 +2530,9 @@ public struct IRawGameControllerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var AxisCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ButtonCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Gaming_Input_ForceFeedback == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Gaming_Input_ForceFeedback == "on"]
     public var ForceFeedbackMotors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Gaming_Input_ForceFeedback != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Gaming_Input_ForceFeedback != "on"]
     public var ForceFeedbackMotors: UIntNative = UIntNative(0)
     public var HardwareProductId: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var HardwareVendorId: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -2640,7 +2636,7 @@ public class IRawGameController <: InterfaceWrapperBase & ComInterface & Runtime
         return result__
     }
 
-    @When[Windows_Gaming_Input_ForceFeedback == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Gaming_Input_ForceFeedback == "on"]
     public unsafe func ForceFeedbackMotors(): windows_collections.IVectorView<Gaming_Input_ForceFeedback.ForceFeedbackMotor> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2705,9 +2701,9 @@ extend IRawGameController <: windows_core.Interface<IRawGameController> {}
 @C
 public struct IRawGameController2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Devices_Haptics == "on"]
+    @When[Windows_Devices_Haptics == "on" && Windows_Foundation_Collections == "on"]
     public var SimpleHapticsControllers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Devices_Haptics != "on"]
+    @When[Windows_Devices_Haptics != "on" || Windows_Foundation_Collections != "on"]
     public var SimpleHapticsControllers: UIntNative = UIntNative(0)
     public var NonRoamableId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var DisplayName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -2798,7 +2794,7 @@ public class IRawGameController2 <: InterfaceWrapperBase & ComInterface & Runtim
         readVtbl<IRawGameController2Vtbl>(IRawGameController2Vtbl())
     }
 
-    @When[Windows_Devices_Haptics == "on"]
+    @When[Windows_Devices_Haptics == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func SimpleHapticsControllers(): windows_collections.IVectorView<Devices_Haptics.SimpleHapticsController> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3344,6 +3340,7 @@ public class ArcadeStick <: InterfaceWrapperBase & ComInterface & windows_interf
         return ()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func ArcadeSticks(): windows_collections.IVectorView<ArcadeStick> {
         var result__: Option<windows_collections.IVectorView<ArcadeStick>> = Option<windows_collections.IVectorView<ArcadeStick>>.None
         try (factory__ = windows_core.factory<ArcadeStick, IArcadeStickStatics>().unwrap()) {
@@ -3548,6 +3545,7 @@ public class FlightStick <: InterfaceWrapperBase & ComInterface & windows_interf
         return ()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FlightSticks(): windows_collections.IVectorView<FlightStick> {
         var result__: Option<windows_collections.IVectorView<FlightStick>> = Option<windows_collections.IVectorView<FlightStick>>.None
         try (factory__ = windows_core.factory<FlightStick, IFlightStickStatics>().unwrap()) {
@@ -3763,6 +3761,7 @@ public class Gamepad <: InterfaceWrapperBase & ComInterface & windows_interface.
         return ()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Gamepads(): windows_collections.IVectorView<Gamepad> {
         var result__: Option<windows_collections.IVectorView<Gamepad>> = Option<windows_collections.IVectorView<Gamepad>>.None
         try (factory__ = windows_core.factory<Gamepad, IGamepadStatics>().unwrap()) {
@@ -3812,7 +3811,10 @@ public struct IArcadeStickStaticsVtbl {
     public var RemoveArcadeStickAdded: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ArcadeStickRemoved: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveArcadeStickRemoved: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var ArcadeSticks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ArcadeSticks: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3909,6 +3911,7 @@ public class IArcadeStickStatics <: InterfaceWrapperBase & ComInterface & Runtim
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ArcadeSticks(): windows_collections.IVectorView<ArcadeStick> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4026,7 +4029,10 @@ public struct IFlightStickStaticsVtbl {
     public var RemoveFlightStickAdded: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var FlightStickRemoved: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveFlightStickRemoved: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var FlightSticks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FlightSticks: UIntNative = UIntNative(0)
     public var FromGameController: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -4124,6 +4130,7 @@ public class IFlightStickStatics <: InterfaceWrapperBase & ComInterface & Runtim
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FlightSticks(): windows_collections.IVectorView<FlightStick> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4152,7 +4159,10 @@ public struct IGamepadStaticsVtbl {
     public var RemoveGamepadAdded: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GamepadRemoved: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveGamepadRemoved: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Gamepads: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Gamepads: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4249,6 +4259,7 @@ public class IGamepadStatics <: InterfaceWrapperBase & ComInterface & RuntimeNam
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Gamepads(): windows_collections.IVectorView<Gamepad> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4366,7 +4377,10 @@ public struct IRacingWheelStaticsVtbl {
     public var RemoveRacingWheelAdded: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var RacingWheelRemoved: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveRacingWheelRemoved: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var RacingWheels: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RacingWheels: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4463,6 +4477,7 @@ public class IRacingWheelStatics <: InterfaceWrapperBase & ComInterface & Runtim
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RacingWheels(): windows_collections.IVectorView<RacingWheel> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4580,7 +4595,10 @@ public struct IRawGameControllerStaticsVtbl {
     public var RemoveRawGameControllerAdded: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var RawGameControllerRemoved: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveRawGameControllerRemoved: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var RawGameControllers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RawGameControllers: UIntNative = UIntNative(0)
     public var FromGameController: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -4678,6 +4696,7 @@ public class IRawGameControllerStatics <: InterfaceWrapperBase & ComInterface & 
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RawGameControllers(): windows_collections.IVectorView<RawGameController> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4706,7 +4725,10 @@ public struct IUINavigationControllerStaticsVtbl {
     public var RemoveUINavigationControllerAdded: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var UINavigationControllerRemoved: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveUINavigationControllerRemoved: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var UINavigationControllers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var UINavigationControllers: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4803,6 +4825,7 @@ public class IUINavigationControllerStatics <: InterfaceWrapperBase & ComInterfa
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UINavigationControllers(): windows_collections.IVectorView<UINavigationController> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5107,6 +5130,7 @@ public class RacingWheel <: InterfaceWrapperBase & ComInterface & windows_interf
         return ()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func RacingWheels(): windows_collections.IVectorView<RacingWheel> {
         var result__: Option<windows_collections.IVectorView<RacingWheel>> = Option<windows_collections.IVectorView<RacingWheel>>.None
         try (factory__ = windows_core.factory<RacingWheel, IRacingWheelStatics>().unwrap()) {
@@ -5239,7 +5263,7 @@ public class RawGameController <: InterfaceWrapperBase & ComInterface & windows_
         return defaultInterface().ButtonCount()
     }
 
-    @When[Windows_Gaming_Input_ForceFeedback == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Gaming_Input_ForceFeedback == "on"]
     public unsafe func ForceFeedbackMotors(): windows_collections.IVectorView<Gaming_Input_ForceFeedback.ForceFeedbackMotor> {
         return defaultInterface().ForceFeedbackMotors()
     }
@@ -5347,6 +5371,7 @@ public class RawGameController <: InterfaceWrapperBase & ComInterface & windows_
         return ()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func RawGameControllers(): windows_collections.IVectorView<RawGameController> {
         var result__: Option<windows_collections.IVectorView<RawGameController>> = Option<windows_collections.IVectorView<RawGameController>>.None
         try (factory__ = windows_core.factory<RawGameController, IRawGameControllerStatics>().unwrap()) {
@@ -5573,6 +5598,7 @@ public class UINavigationController <: InterfaceWrapperBase & ComInterface & win
         return ()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func UINavigationControllers(): windows_collections.IVectorView<UINavigationController> {
         var result__: Option<windows_collections.IVectorView<UINavigationController>> = Option<windows_collections.IVectorView<UINavigationController>>.None
         try (factory__ = windows_core.factory<UINavigationController, IUINavigationControllerStatics>().unwrap()) {

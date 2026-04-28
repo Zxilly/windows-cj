@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
 import windows.Graphics.DirectX.Direct3D11 as Graphics_DirectX_Direct3D11
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -745,9 +743,15 @@ extend IBitmapBuffer <: windows_core.Interface<IBitmapBuffer> {}
 public struct IBitmapCodecInformationVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var CodecId: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var FileExtensions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FileExtensions: UIntNative = UIntNative(0)
     public var FriendlyName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var MimeTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var MimeTypes: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -824,6 +828,7 @@ public class IBitmapCodecInformation <: InterfaceWrapperBase & ComInterface & Ru
         return GuidValue(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FileExtensions(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -840,6 +845,7 @@ public class IBitmapCodecInformation <: InterfaceWrapperBase & ComInterface & Ru
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MimeTypes(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1383,7 +1389,7 @@ public class IPixelDataProvider <: InterfaceWrapperBase & ComInterface & Runtime
 @When[Windows_Graphics_Imaging == "on"]
 extend IPixelDataProvider <: windows_core.Interface<IPixelDataProvider> {}
 
-@When[Windows_Graphics_Imaging == "on"]
+@When[Windows_Graphics_Imaging == "on" && Windows_Storage_Streams == "on"]
 public class ImageStream <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1544,7 +1550,7 @@ public class ImageStream <: InterfaceWrapperBase & ComInterface & windows_interf
     }
 }
 
-@When[Windows_Graphics_Imaging == "on"]
+@When[Windows_Graphics_Imaging == "on" && Windows_Storage_Streams == "on"]
 extend ImageStream <: windows_core.HandleWinrtType<ImageStream> {
     public static func intoWinrtHandle(value: ImageStream): CPointer<Unit> {
         value.asRaw()
@@ -2046,6 +2052,7 @@ public class BitmapCodecInformation <: InterfaceWrapperBase & ComInterface & win
         return defaultInterface().CodecId()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FileExtensions(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().FileExtensions()
     }
@@ -2054,6 +2061,7 @@ public class BitmapCodecInformation <: InterfaceWrapperBase & ComInterface & win
         return defaultInterface().FriendlyName()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MimeTypes(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().MimeTypes()
     }
@@ -2319,6 +2327,7 @@ public class BitmapDecoder <: InterfaceWrapperBase & ComInterface & windows_inte
         return defaultInterface().FrameCount()
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func GetPreviewAsync(): windows_future.IAsyncOperation<ImageStream> {
         return defaultInterface().GetPreviewAsync()
     }
@@ -2327,6 +2336,7 @@ public class BitmapDecoder <: InterfaceWrapperBase & ComInterface & windows_inte
         return defaultInterface().GetFrameAsync(frameIndex)
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func GetThumbnailAsync(): windows_future.IAsyncOperation<ImageStream> {
         return asIBitmapFrame().GetThumbnailAsync()
     }
@@ -2486,6 +2496,7 @@ public class BitmapDecoder <: InterfaceWrapperBase & ComInterface & windows_inte
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetDecoderInformationEnumerator(): windows_collections.IVectorView<BitmapCodecInformation> {
         var result__: Option<windows_collections.IVectorView<BitmapCodecInformation>> = Option<windows_collections.IVectorView<BitmapCodecInformation>>.None
         try (factory__ = windows_core.factory<BitmapDecoder, IBitmapDecoderStatics>().unwrap()) {
@@ -2657,6 +2668,7 @@ public class BitmapEncoder <: InterfaceWrapperBase & ComInterface & windows_inte
         return defaultInterface().GoToNextFrameAsync()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GoToNextFrameWithEncodingOptionsAsync(encodingOptions: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, BitmapTypedValue>>): windows_future.IAsyncAction {
         return defaultInterface().GoToNextFrameWithEncodingOptionsAsync(encodingOptions)
     }
@@ -2742,6 +2754,7 @@ public class BitmapEncoder <: InterfaceWrapperBase & ComInterface & windows_inte
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetEncoderInformationEnumerator(): windows_collections.IVectorView<BitmapCodecInformation> {
         var result__: Option<windows_collections.IVectorView<BitmapCodecInformation>> = Option<windows_collections.IVectorView<BitmapCodecInformation>>.None
         try (factory__ = windows_core.factory<BitmapEncoder, IBitmapEncoderStatics>().unwrap()) {
@@ -2765,7 +2778,7 @@ public class BitmapEncoder <: InterfaceWrapperBase & ComInterface & windows_inte
         }
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public static unsafe func CreateWithEncodingOptionsAsync(encoderId: GuidValue, stream: _impl_l1.IRandomAccessStream, encodingOptions: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, BitmapTypedValue>>): windows_future.IAsyncOperation<BitmapEncoder> {
         var result__: Option<windows_future.IAsyncOperation<BitmapEncoder>> = Option<windows_future.IAsyncOperation<BitmapEncoder>>.None
         try (factory__ = windows_core.factory<BitmapEncoder, IBitmapEncoderStatics>().unwrap()) {
@@ -2895,6 +2908,7 @@ public class BitmapFrame <: InterfaceWrapperBase & ComInterface & windows_interf
         }
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func GetThumbnailAsync(): windows_future.IAsyncOperation<ImageStream> {
         return defaultInterface().GetThumbnailAsync()
     }
@@ -3050,10 +3064,12 @@ public class BitmapProperties <: InterfaceWrapperBase & ComInterface & windows_i
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetPropertiesAsync(propertiesToSet: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, BitmapTypedValue>>): windows_future.IAsyncAction {
         return defaultInterface().SetPropertiesAsync(propertiesToSet)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetPropertiesAsync(propertiesToRetrieve: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<BitmapPropertySet> {
         return asIBitmapPropertiesView().GetPropertiesAsync(propertiesToRetrieve)
     }
@@ -3146,6 +3162,7 @@ public class BitmapPropertiesView <: InterfaceWrapperBase & ComInterface & windo
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetPropertiesAsync(propertiesToRetrieve: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<BitmapPropertySet> {
         return defaultInterface().GetPropertiesAsync(propertiesToRetrieve)
     }
@@ -3169,7 +3186,7 @@ extend BitmapPropertiesView <: windows_core.HandleWinrtType<BitmapPropertiesView
     }
 }
 
-@When[Windows_Graphics_Imaging == "on"]
+@When[Windows_Graphics_Imaging == "on" && Windows_Foundation_Collections == "on"]
 public class BitmapPropertySet <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -3297,7 +3314,7 @@ public class BitmapPropertySet <: InterfaceWrapperBase & ComInterface & windows_
     }
 }
 
-@When[Windows_Graphics_Imaging == "on"]
+@When[Windows_Graphics_Imaging == "on" && Windows_Foundation_Collections == "on"]
 extend BitmapPropertySet <: windows_core.HandleWinrtType<BitmapPropertySet> {
     public static func intoWinrtHandle(value: BitmapPropertySet): CPointer<Unit> {
         value.asRaw()
@@ -3429,7 +3446,10 @@ public struct IBitmapDecoderVtbl {
     public var BitmapContainerProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var DecoderInformation: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var FrameCount: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Storage_Streams == "on"]
     public var GetPreviewAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Storage_Streams != "on"]
+    public var GetPreviewAsync: UIntNative = UIntNative(0)
     public var GetFrameAsync: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -3523,6 +3543,7 @@ public class IBitmapDecoder <: InterfaceWrapperBase & ComInterface & RuntimeName
         return result__
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func GetPreviewAsync(): windows_future.IAsyncOperation<ImageStream> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3554,7 +3575,10 @@ public struct IBitmapDecoderStaticsVtbl {
     public var GifDecoderId: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var JpegXRDecoderId: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IcoDecoderId: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetDecoderInformationEnumerator: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetDecoderInformationEnumerator: UIntNative = UIntNative(0)
     @When[Windows_Storage_Streams == "on"]
     public var CreateAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams != "on"]
@@ -3687,6 +3711,7 @@ public class IBitmapDecoderStatics <: InterfaceWrapperBase & ComInterface & Runt
         return GuidValue(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetDecoderInformationEnumerator(): windows_collections.IVectorView<BitmapCodecInformation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3733,7 +3758,10 @@ public struct IBitmapEncoderVtbl {
     public var get_BitmapTransform: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetPixelData: CFunc<(CPointer<Unit>, BitmapPixelFormatAbi, BitmapAlphaModeAbi, UInt32, UInt32, Float64, Float64, UInt32, CPointer<UInt8>) -> Int32> = { _, _, _, _, _, _, _, _, _ => E_NOTIMPL.value }
     public var GoToNextFrameAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GoToNextFrameWithEncodingOptionsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GoToNextFrameWithEncodingOptionsAsync: UIntNative = UIntNative(0)
     public var FlushAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -3891,6 +3919,7 @@ public class IBitmapEncoder <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GoToNextFrameWithEncodingOptionsAsync(encodingOptions: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, BitmapTypedValue>>): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3921,14 +3950,17 @@ public struct IBitmapEncoderStaticsVtbl {
     public var TiffEncoderId: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GifEncoderId: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var JpegXREncoderId: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetEncoderInformationEnumerator: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetEncoderInformationEnumerator: UIntNative = UIntNative(0)
     @When[Windows_Storage_Streams == "on"]
     public var CreateAsync: CFunc<(CPointer<Unit>, GUID, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams != "on"]
     public var CreateAsync: UIntNative = UIntNative(0)
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var CreateWithEncodingOptionsAsync: CFunc<(CPointer<Unit>, GUID, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
     public var CreateWithEncodingOptionsAsync: UIntNative = UIntNative(0)
     @When[Windows_Storage_Streams == "on"]
     public var CreateForTranscodingAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
@@ -4051,6 +4083,7 @@ public class IBitmapEncoderStatics <: InterfaceWrapperBase & ComInterface & Runt
         return GuidValue(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetEncoderInformationEnumerator(): windows_collections.IVectorView<BitmapCodecInformation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4068,7 +4101,7 @@ public class IBitmapEncoderStatics <: InterfaceWrapperBase & ComInterface & Runt
         return windows_future.IAsyncOperation<BitmapEncoder>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func CreateWithEncodingOptionsAsync(encoderId: GuidValue, stream: _impl_l1.IRandomAccessStream, encodingOptions: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, BitmapTypedValue>>): windows_future.IAsyncOperation<BitmapEncoder> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4185,7 +4218,10 @@ extend IBitmapEncoderWithSoftwareBitmap <: windows_core.Interface<IBitmapEncoder
 @C
 public struct IBitmapFrameVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Storage_Streams == "on"]
     public var GetThumbnailAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Storage_Streams != "on"]
+    public var GetThumbnailAsync: UIntNative = UIntNative(0)
     public var BitmapProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var get_BitmapPixelFormat: CFunc<(CPointer<Unit>, CPointer<BitmapPixelFormatAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var get_BitmapAlphaMode: CFunc<(CPointer<Unit>, CPointer<BitmapAlphaModeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -4199,18 +4235,12 @@ public struct IBitmapFrameVtbl {
     public var GetPixelDataTransformedAsync: CFunc<(CPointer<Unit>, BitmapPixelFormatAbi, BitmapAlphaModeAbi, CPointer<Unit>, ExifOrientationModeAbi, ColorManagementModeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => E_NOTIMPL.value }
     public init() {}
 
+    @When[Windows_Storage_Streams == "on"]
     public static func new<Identity>(offset!: Int64 = 0): IBitmapFrameVtbl where Identity <: IBitmapFrame_Impl {
         let _ = offset
         var vtbl = IBitmapFrameVtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.GetThumbnailAsync = { instanceRaw, result__ =>
-            match (unsafe { asImplFromRaw<IBitmapFrame_ImplErased>(instanceRaw) }) {
-                case Some(impl) =>
-                    impl.__winrtThunk_GetThumbnailAsync(result__)
-                case None =>
-                    E_NOINTERFACE.value
-            }
-        }
+        vtbl = IBitmapFrameVtbl.__assignGetThumbnailAsync<Identity>(vtbl)
         vtbl.BitmapProperties = { instanceRaw, result__ =>
             match (unsafe { asImplFromRaw<IBitmapFrame_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
@@ -4302,6 +4332,25 @@ public struct IBitmapFrameVtbl {
         return vtbl
     }
 
+    @When[Windows_Storage_Streams == "on" && Windows_Storage_Streams == "on"]
+    public static func __assignGetThumbnailAsync<Identity>(vtbl: IBitmapFrameVtbl): IBitmapFrameVtbl where Identity <: IBitmapFrame_Impl {
+        var next = vtbl
+        next.GetThumbnailAsync = { instanceRaw, result__ =>
+            match (unsafe { asImplFromRaw<IBitmapFrame_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_GetThumbnailAsync(result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        return next
+    }
+
+    @When[Windows_Storage_Streams == "on" && Windows_Storage_Streams != "on"]
+    public static func __assignGetThumbnailAsync<Identity>(vtbl: IBitmapFrameVtbl): IBitmapFrameVtbl where Identity <: IBitmapFrame_Impl {
+        return vtbl
+    }
+
     public static func matches(iid: GUID): Bool {
         if (iid == IBitmapFrame.iid()) {
             return true
@@ -4310,7 +4359,7 @@ public struct IBitmapFrameVtbl {
     }
 }
 
-@When[Windows_Graphics_Imaging == "on"]
+@When[Windows_Graphics_Imaging == "on" && Windows_Storage_Streams == "on"]
 public interface IBitmapFrame_ImplErased {
     public func __winrtThunk_GetThumbnailAsync(result__: CPointer<CPointer<Unit>>): Int32
 
@@ -4337,7 +4386,7 @@ public interface IBitmapFrame_ImplErased {
     public func __winrtThunk_GetPixelDataTransformedAsync(arg0: BitmapPixelFormatAbi, arg1: BitmapAlphaModeAbi, arg2: CPointer<Unit>, arg3: ExifOrientationModeAbi, arg4: ColorManagementModeAbi, result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Graphics_Imaging == "on"]
+@When[Windows_Graphics_Imaging == "on" && Windows_Storage_Streams == "on"]
 public interface IBitmapFrame_Impl <: IBitmapFrame_ImplErased {
     public func GetThumbnailAsync(): windows_core.Result<windows_future.IAsyncOperation<ImageStream>>
 
@@ -4605,6 +4654,7 @@ public class IBitmapFrame <: InterfaceWrapperBase & ComInterface & RuntimeName &
         readVtbl<IBitmapFrameVtbl>(IBitmapFrameVtbl())
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func GetThumbnailAsync(): windows_future.IAsyncOperation<ImageStream> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4714,6 +4764,7 @@ public struct IBitmapFrameWithSoftwareBitmapVtbl {
     public var GetSoftwareBitmapTransformedAsync: CFunc<(CPointer<Unit>, BitmapPixelFormatAbi, BitmapAlphaModeAbi, CPointer<Unit>, ExifOrientationModeAbi, ColorManagementModeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => E_NOTIMPL.value }
     public init() {}
 
+    @When[Windows_Storage_Streams == "on"]
     public static func new<Identity>(offset!: Int64 = 0): IBitmapFrameWithSoftwareBitmapVtbl where Identity <: IBitmapFrameWithSoftwareBitmap_Impl {
         let _ = offset
         var vtbl = IBitmapFrameWithSoftwareBitmapVtbl()
@@ -4758,7 +4809,7 @@ public struct IBitmapFrameWithSoftwareBitmapVtbl {
     }
 }
 
-@When[Windows_Graphics_Imaging == "on"]
+@When[Windows_Graphics_Imaging == "on" && Windows_Storage_Streams == "on"]
 public interface IBitmapFrameWithSoftwareBitmap_ImplErased {
     public func __winrtThunk_GetSoftwareBitmapAsync(result__: CPointer<CPointer<Unit>>): Int32
 
@@ -4767,7 +4818,7 @@ public interface IBitmapFrameWithSoftwareBitmap_ImplErased {
     public func __winrtThunk_GetSoftwareBitmapTransformedAsync(arg0: BitmapPixelFormatAbi, arg1: BitmapAlphaModeAbi, arg2: CPointer<Unit>, arg3: ExifOrientationModeAbi, arg4: ColorManagementModeAbi, result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Graphics_Imaging == "on"]
+@When[Windows_Graphics_Imaging == "on" && Windows_Storage_Streams == "on"]
 public interface IBitmapFrameWithSoftwareBitmap_Impl <: IBitmapFrameWithSoftwareBitmap_ImplErased & IBitmapFrame_Impl {
     public func GetSoftwareBitmapAsync(): windows_core.Result<windows_future.IAsyncOperation<SoftwareBitmap>>
 
@@ -5115,7 +5166,10 @@ extend IBitmapFrameWithSoftwareBitmap <: windows_core.Interface<IBitmapFrameWith
 @C
 public struct IBitmapPropertiesVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SetPropertiesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SetPropertiesAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -5196,6 +5250,7 @@ public class IBitmapProperties <: InterfaceWrapperBase & ComInterface & RuntimeN
         readVtbl<IBitmapPropertiesVtbl>(IBitmapPropertiesVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetPropertiesAsync(propertiesToSet: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, BitmapTypedValue>>): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5212,14 +5267,25 @@ extend IBitmapProperties <: windows_core.Interface<IBitmapProperties> {}
 @C
 public struct IBitmapPropertiesViewVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetPropertiesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetPropertiesAsync: UIntNative = UIntNative(0)
     public init() {}
 
+    @When[Windows_Foundation_Collections == "on"]
     public static func new<Identity>(offset!: Int64 = 0): IBitmapPropertiesViewVtbl where Identity <: IBitmapPropertiesView_Impl {
         let _ = offset
         var vtbl = IBitmapPropertiesViewVtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.GetPropertiesAsync = { instanceRaw, arg0, result__ =>
+        vtbl = IBitmapPropertiesViewVtbl.__assignGetPropertiesAsync<Identity>(vtbl)
+        return vtbl
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections == "on"]
+    public static func __assignGetPropertiesAsync<Identity>(vtbl: IBitmapPropertiesViewVtbl): IBitmapPropertiesViewVtbl where Identity <: IBitmapPropertiesView_Impl {
+        var next = vtbl
+        next.GetPropertiesAsync = { instanceRaw, arg0, result__ =>
             match (unsafe { asImplFromRaw<IBitmapPropertiesView_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
                     impl.__winrtThunk_GetPropertiesAsync(arg0, result__)
@@ -5227,6 +5293,11 @@ public struct IBitmapPropertiesViewVtbl {
                     E_NOINTERFACE.value
             }
         }
+        return next
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections != "on"]
+    public static func __assignGetPropertiesAsync<Identity>(vtbl: IBitmapPropertiesViewVtbl): IBitmapPropertiesViewVtbl where Identity <: IBitmapPropertiesView_Impl {
         return vtbl
     }
 
@@ -5238,12 +5309,12 @@ public struct IBitmapPropertiesViewVtbl {
     }
 }
 
-@When[Windows_Graphics_Imaging == "on"]
+@When[Windows_Graphics_Imaging == "on" && Windows_Foundation_Collections == "on"]
 public interface IBitmapPropertiesView_ImplErased {
     public func __winrtThunk_GetPropertiesAsync(arg0: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Graphics_Imaging == "on"]
+@When[Windows_Graphics_Imaging == "on" && Windows_Foundation_Collections == "on"]
 public interface IBitmapPropertiesView_Impl <: IBitmapPropertiesView_ImplErased {
     public func GetPropertiesAsync(propertiesToRetrieve: InParam<windows_collections.IIterable<windows_core.HString>>): windows_core.Result<windows_future.IAsyncOperation<BitmapPropertySet>>
 
@@ -5331,6 +5402,7 @@ public class IBitmapPropertiesView <: InterfaceWrapperBase & ComInterface & Runt
         readVtbl<IBitmapPropertiesViewVtbl>(IBitmapPropertiesViewVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetPropertiesAsync(propertiesToRetrieve: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<BitmapPropertySet> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

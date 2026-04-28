@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l0 as _impl_l0
 import windows_collections as windows_collections
@@ -2828,9 +2827,15 @@ extend IUsbBulkOutPipe <: windows_core.Interface<IUsbBulkOutPipe> {}
 @C
 public struct IUsbConfigurationVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var UsbInterfaces: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var UsbInterfaces: UIntNative = UIntNative(0)
     public var ConfigurationDescriptor: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Descriptors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Descriptors: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2899,6 +2904,7 @@ public class IUsbConfiguration <: InterfaceWrapperBase & ComInterface & RuntimeN
         readVtbl<IUsbConfigurationVtbl>(IUsbConfigurationVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UsbInterfaces(): windows_collections.IVectorView<UsbInterface> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2915,6 +2921,7 @@ public class IUsbConfiguration <: InterfaceWrapperBase & ComInterface & RuntimeN
         return UsbConfigurationDescriptor.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Descriptors(): windows_collections.IVectorView<UsbDescriptor> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3542,13 +3549,31 @@ extend IUsbEndpointDescriptorStatics <: windows_core.Interface<IUsbEndpointDescr
 @C
 public struct IUsbInterfaceVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var BulkInPipes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var BulkInPipes: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var InterruptInPipes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var InterruptInPipes: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var BulkOutPipes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var BulkOutPipes: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var InterruptOutPipes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var InterruptOutPipes: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var InterfaceSettings: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var InterfaceSettings: UIntNative = UIntNative(0)
     public var InterfaceNumber: CFunc<(CPointer<Unit>, CPointer<UInt8>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Descriptors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Descriptors: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3617,6 +3642,7 @@ public class IUsbInterface <: InterfaceWrapperBase & ComInterface & RuntimeName 
         readVtbl<IUsbInterfaceVtbl>(IUsbInterfaceVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func BulkInPipes(): windows_collections.IVectorView<UsbBulkInPipe> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3625,6 +3651,7 @@ public class IUsbInterface <: InterfaceWrapperBase & ComInterface & RuntimeName 
         return windows_collections.IVectorView<UsbBulkInPipe>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InterruptInPipes(): windows_collections.IVectorView<UsbInterruptInPipe> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3633,6 +3660,7 @@ public class IUsbInterface <: InterfaceWrapperBase & ComInterface & RuntimeName 
         return windows_collections.IVectorView<UsbInterruptInPipe>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func BulkOutPipes(): windows_collections.IVectorView<UsbBulkOutPipe> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3641,6 +3669,7 @@ public class IUsbInterface <: InterfaceWrapperBase & ComInterface & RuntimeName 
         return windows_collections.IVectorView<UsbBulkOutPipe>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InterruptOutPipes(): windows_collections.IVectorView<UsbInterruptOutPipe> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3649,6 +3678,7 @@ public class IUsbInterface <: InterfaceWrapperBase & ComInterface & RuntimeName 
         return windows_collections.IVectorView<UsbInterruptOutPipe>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InterfaceSettings(): windows_collections.IVectorView<UsbInterfaceSetting> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3665,6 +3695,7 @@ public class IUsbInterface <: InterfaceWrapperBase & ComInterface & RuntimeName 
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Descriptors(): windows_collections.IVectorView<UsbDescriptor> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3775,14 +3806,29 @@ extend IUsbInterfaceDescriptorStatics <: windows_core.Interface<IUsbInterfaceDes
 @C
 public struct IUsbInterfaceSettingVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var BulkInEndpoints: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var BulkInEndpoints: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var InterruptInEndpoints: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var InterruptInEndpoints: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var BulkOutEndpoints: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var BulkOutEndpoints: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var InterruptOutEndpoints: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var InterruptOutEndpoints: UIntNative = UIntNative(0)
     public var Selected: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SelectSettingAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var get_InterfaceDescriptor: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Descriptors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Descriptors: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3851,6 +3897,7 @@ public class IUsbInterfaceSetting <: InterfaceWrapperBase & ComInterface & Runti
         readVtbl<IUsbInterfaceSettingVtbl>(IUsbInterfaceSettingVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func BulkInEndpoints(): windows_collections.IVectorView<UsbBulkInEndpointDescriptor> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3859,6 +3906,7 @@ public class IUsbInterfaceSetting <: InterfaceWrapperBase & ComInterface & Runti
         return windows_collections.IVectorView<UsbBulkInEndpointDescriptor>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InterruptInEndpoints(): windows_collections.IVectorView<UsbInterruptInEndpointDescriptor> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3867,6 +3915,7 @@ public class IUsbInterfaceSetting <: InterfaceWrapperBase & ComInterface & Runti
         return windows_collections.IVectorView<UsbInterruptInEndpointDescriptor>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func BulkOutEndpoints(): windows_collections.IVectorView<UsbBulkOutEndpointDescriptor> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3875,6 +3924,7 @@ public class IUsbInterfaceSetting <: InterfaceWrapperBase & ComInterface & Runti
         return windows_collections.IVectorView<UsbBulkOutEndpointDescriptor>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InterruptOutEndpoints(): windows_collections.IVectorView<UsbInterruptOutEndpointDescriptor> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3907,6 +3957,7 @@ public class IUsbInterfaceSetting <: InterfaceWrapperBase & ComInterface & Runti
         return UsbInterfaceDescriptor.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Descriptors(): windows_collections.IVectorView<UsbDescriptor> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4960,6 +5011,7 @@ public class UsbConfiguration <: InterfaceWrapperBase & ComInterface & windows_i
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UsbInterfaces(): windows_collections.IVectorView<UsbInterface> {
         return defaultInterface().UsbInterfaces()
     }
@@ -4968,6 +5020,7 @@ public class UsbConfiguration <: InterfaceWrapperBase & ComInterface & windows_i
         return defaultInterface().ConfigurationDescriptor()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Descriptors(): windows_collections.IVectorView<UsbDescriptor> {
         return defaultInterface().Descriptors()
     }
@@ -5509,22 +5562,27 @@ public class UsbInterface <: InterfaceWrapperBase & ComInterface & windows_inter
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func BulkInPipes(): windows_collections.IVectorView<UsbBulkInPipe> {
         return defaultInterface().BulkInPipes()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InterruptInPipes(): windows_collections.IVectorView<UsbInterruptInPipe> {
         return defaultInterface().InterruptInPipes()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func BulkOutPipes(): windows_collections.IVectorView<UsbBulkOutPipe> {
         return defaultInterface().BulkOutPipes()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InterruptOutPipes(): windows_collections.IVectorView<UsbInterruptOutPipe> {
         return defaultInterface().InterruptOutPipes()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InterfaceSettings(): windows_collections.IVectorView<UsbInterfaceSetting> {
         return defaultInterface().InterfaceSettings()
     }
@@ -5533,6 +5591,7 @@ public class UsbInterface <: InterfaceWrapperBase & ComInterface & windows_inter
         return defaultInterface().InterfaceNumber()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Descriptors(): windows_collections.IVectorView<UsbDescriptor> {
         return defaultInterface().Descriptors()
     }
@@ -5755,18 +5814,22 @@ public class UsbInterfaceSetting <: InterfaceWrapperBase & ComInterface & window
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func BulkInEndpoints(): windows_collections.IVectorView<UsbBulkInEndpointDescriptor> {
         return defaultInterface().BulkInEndpoints()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InterruptInEndpoints(): windows_collections.IVectorView<UsbInterruptInEndpointDescriptor> {
         return defaultInterface().InterruptInEndpoints()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func BulkOutEndpoints(): windows_collections.IVectorView<UsbBulkOutEndpointDescriptor> {
         return defaultInterface().BulkOutEndpoints()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InterruptOutEndpoints(): windows_collections.IVectorView<UsbInterruptOutEndpointDescriptor> {
         return defaultInterface().InterruptOutEndpoints()
     }
@@ -5783,6 +5846,7 @@ public class UsbInterfaceSetting <: InterfaceWrapperBase & ComInterface & window
         return defaultInterface().get_InterfaceDescriptor()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Descriptors(): windows_collections.IVectorView<UsbDescriptor> {
         return defaultInterface().Descriptors()
     }

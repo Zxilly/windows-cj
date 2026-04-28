@@ -8,7 +8,6 @@ import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result
 import windows_core as windows_core
 import windows_interface.{GUID}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 import windows.Win32._impl_l1 as Win32__impl_l1
 
@@ -64,14 +63,42 @@ extend UAL_DATA_BLOB <: windows_core.CopyType & windows_core.RuntimeType & windo
     }
 }
 
-@When[UALAPI == "on"]
+@When[Windows_Win32_System_UserAccessLogging == "on" && UALAPI == "on" && Windows_Win32_System_UserAccessLogging_UalInstrument == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func UalInstrument(Data: CPointer<UAL_DATA_BLOBAbi>): Int32
+}
+
+@When[Windows_Win32_System_UserAccessLogging == "on" && UALAPI == "on" && Windows_Win32_System_UserAccessLogging_UalInstrument == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_UalInstrument(Data: CPointer<UAL_DATA_BLOBAbi>): Int32 {
+    return UalInstrument(Data)
+}
+
+@When[Windows_Win32_System_UserAccessLogging == "on" && UALAPI == "on" && Windows_Win32_System_UserAccessLogging_UalRegisterProduct == "on"]
 foreign {
     func UalRegisterProduct(wszProductName: CPointer<UInt16>, wszRoleName: CPointer<UInt16>, wszGuid: CPointer<UInt16>): Int32
 }
 
-@When[UALAPI == "on" && Windows_Win32_Networking_WinSock == "on"]
+@When[Windows_Win32_System_UserAccessLogging == "on" && UALAPI == "on" && Windows_Win32_System_UserAccessLogging_UalRegisterProduct == "on"]
+public unsafe func Windows_UalRegisterProduct(wszProductName: CPointer<UInt16>, wszRoleName: CPointer<UInt16>, wszGuid: CPointer<UInt16>): Int32 {
+    return UalRegisterProduct(wszProductName, wszRoleName, wszGuid)
+}
+
+@When[Windows_Win32_System_UserAccessLogging == "on" && UALAPI == "on" && Windows_Win32_System_UserAccessLogging_UalStart == "on" && Windows_Win32_Networking_WinSock == "on"]
 foreign {
-    func UalInstrument(Data: CPointer<UAL_DATA_BLOBAbi>): Int32
     func UalStart(Data: CPointer<UAL_DATA_BLOBAbi>): Int32
+}
+
+@When[Windows_Win32_System_UserAccessLogging == "on" && UALAPI == "on" && Windows_Win32_System_UserAccessLogging_UalStart == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_UalStart(Data: CPointer<UAL_DATA_BLOBAbi>): Int32 {
+    return UalStart(Data)
+}
+
+@When[Windows_Win32_System_UserAccessLogging == "on" && UALAPI == "on" && Windows_Win32_System_UserAccessLogging_UalStop == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
     func UalStop(Data: CPointer<UAL_DATA_BLOBAbi>): Int32
+}
+
+@When[Windows_Win32_System_UserAccessLogging == "on" && UALAPI == "on" && Windows_Win32_System_UserAccessLogging_UalStop == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_UalStop(Data: CPointer<UAL_DATA_BLOBAbi>): Int32 {
+    return UalStop(Data)
 }

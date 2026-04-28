@@ -3,11 +3,8 @@ package windows_sys.Win32.Storage.CloudFilters
 
 import windows_interface.{GUID}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_System_CorrelationVector == "on"]
 import windows_sys.Win32.System.CorrelationVector as Win32_System_CorrelationVector
-@When[Windows_Win32_System_IO == "on"]
 import windows_sys.Win32.System.IO as Win32_System_IO
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 
@@ -2877,49 +2874,367 @@ public struct CF_CALLBACK_REGISTRATION {
     public init() {}
 }
 
-@When[CLDAPI == "on"]
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfCloseHandle == "on"]
 foreign {
     func CfCloseHandle(FileHandle: CPointer<Unit>): Unit
-    func CfDisconnectSyncRoot(ConnectionKey: CF_CONNECTION_KEY): Int32
-    // param-hint: InfoBuffer bytes=param[3]
-    // param-hint: ReturnedLength optional
-    func CfGetPlaceholderInfo(FileHandle: CPointer<Unit>, InfoClass: Int32, InfoBuffer: CPointer<Unit>, InfoBufferLength: UInt32, ReturnedLength: CPointer<UInt32>): Int32
-    // param-hint: InfoBuffer bytes=param[5]
-    // param-hint: ReturnedLength optional
-    func CfGetPlaceholderRangeInfo(FileHandle: CPointer<Unit>, InfoClass: Int32, StartingOffset: Int64, Length: Int64, InfoBuffer: CPointer<Unit>, InfoBufferLength: UInt32, ReturnedLength: CPointer<UInt32>): Int32
-    // param-hint: InfoBuffer bytes=param[7]
-    // param-hint: InfoBufferWritten optional
-    func CfGetPlaceholderRangeInfoForHydration(ConnectionKey: CF_CONNECTION_KEY, TransferKey: Int64, FileId: Int64, InfoClass: Int32, StartingOffset: Int64, RangeLength: Int64, InfoBuffer: CPointer<Unit>, InfoBufferSize: UInt32, InfoBufferWritten: CPointer<UInt32>): Int32
-    func CfGetPlaceholderStateFromAttributeTag(FileAttributes: UInt32, ReparseTag: UInt32): UInt32
-    func CfGetPlatformInfo(PlatformVersion: CPointer<CF_PLATFORM_INFO>): Int32
-    // param-hint: ReturnedLength optional
-    func CfGetSyncRootInfoByHandle(FileHandle: CPointer<Unit>, InfoClass: Int32, InfoBuffer: CPointer<Unit>, InfoBufferLength: UInt32, ReturnedLength: CPointer<UInt32>): Int32
-    // param-hint: ReturnedLength optional
-    func CfGetSyncRootInfoByPath(FilePath: CPointer<UInt16>, InfoClass: Int32, InfoBuffer: CPointer<Unit>, InfoBufferLength: UInt32, ReturnedLength: CPointer<UInt32>): Int32
-    func CfGetTransferKey(FileHandle: CPointer<Unit>, TransferKey: CPointer<Int64>): Int32
-    func CfGetWin32HandleFromProtectedHandle(ProtectedHandle: CPointer<Unit>): CPointer<Unit>
-    func CfOpenFileWithOplock(FilePath: CPointer<UInt16>, Flags: Int32, ProtectedHandle: CPointer<CPointer<Unit>>): Int32
-    func CfQuerySyncProviderStatus(ConnectionKey: CF_CONNECTION_KEY, ProviderStatus: CPointer<UInt32>): Int32
-    func CfReferenceProtectedHandle(ProtectedHandle: CPointer<Unit>): UInt8
-    func CfRegisterSyncRoot(SyncRootPath: CPointer<UInt16>, Registration: CPointer<CF_SYNC_REGISTRATION>, Policies: CPointer<CF_SYNC_POLICIES>, RegisterFlags: Int32): Int32
-    func CfReleaseProtectedHandle(ProtectedHandle: CPointer<Unit>): Unit
-    func CfReleaseTransferKey(FileHandle: CPointer<Unit>, TransferKey: CPointer<Int64>): Unit
-    func CfReportProviderProgress(ConnectionKey: CF_CONNECTION_KEY, TransferKey: Int64, ProviderProgressTotal: Int64, ProviderProgressCompleted: Int64): Int32
-    func CfReportProviderProgress2(ConnectionKey: CF_CONNECTION_KEY, TransferKey: Int64, RequestKey: Int64, ProviderProgressTotal: Int64, ProviderProgressCompleted: Int64, TargetSessionId: UInt32): Int32
-    // param-hint: SyncStatus optional
-    func CfReportSyncStatus(SyncRootPath: CPointer<UInt16>, SyncStatus: CPointer<CF_SYNC_STATUS>): Int32
-    // param-hint: InSyncUsn optional
-    func CfSetInSyncState(FileHandle: CPointer<Unit>, InSyncState: Int32, InSyncFlags: Int32, InSyncUsn: CPointer<Int64>): Int32
-    func CfUnregisterSyncRoot(SyncRootPath: CPointer<UInt16>): Int32
-    func CfUpdateSyncProviderStatus(ConnectionKey: CF_CONNECTION_KEY, ProviderStatus: UInt32): Int32
 }
 
-@When[CLDAPI == "on" && (Windows_Win32_Storage_FileSystem == "on" && Windows_Win32_System_CorrelationVector == "on")]
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfCloseHandle == "on"]
+public unsafe func Windows_CfCloseHandle(FileHandle: CPointer<Unit>): Unit {
+    CfCloseHandle(FileHandle)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfConnectSyncRoot == "on" && Windows_Win32_System_CorrelationVector == "on"]
+foreign {
+    // param-hint: CallbackContext optional
+    func CfConnectSyncRoot(SyncRootPath: CPointer<UInt16>, CallbackTable: CPointer<CF_CALLBACK_REGISTRATION>, CallbackContext: CPointer<Unit>, ConnectFlags: Int32, ConnectionKey: CPointer<CF_CONNECTION_KEY>): Int32
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfConnectSyncRoot == "on" && Windows_Win32_System_CorrelationVector == "on"]
+public unsafe func Windows_CfConnectSyncRoot(SyncRootPath: CPointer<UInt16>, CallbackTable: CPointer<CF_CALLBACK_REGISTRATION>, CallbackContext: CPointer<Unit>, ConnectFlags: Int32, ConnectionKey: CPointer<CF_CONNECTION_KEY>): Int32 {
+    return CfConnectSyncRoot(SyncRootPath, CallbackTable, CallbackContext, ConnectFlags, ConnectionKey)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfConvertToPlaceholder == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    // param-hint: FileIdentity bytes=param[2] optional
+    // param-hint: ConvertUsn optional
+    // param-hint: Overlapped optional
+    func CfConvertToPlaceholder(FileHandle: CPointer<Unit>, FileIdentity: CPointer<Unit>, FileIdentityLength: UInt32, ConvertFlags: Int32, ConvertUsn: CPointer<Int64>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfConvertToPlaceholder == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_CfConvertToPlaceholder(FileHandle: CPointer<Unit>, FileIdentity: CPointer<Unit>, FileIdentityLength: UInt32, ConvertFlags: Int32, ConvertUsn: CPointer<Int64>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32 {
+    return CfConvertToPlaceholder(FileHandle, FileIdentity, FileIdentityLength, ConvertFlags, ConvertUsn, Overlapped)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfCreatePlaceholders == "on" && Windows_Win32_Storage_FileSystem == "on"]
+foreign {
+    // param-hint: PlaceholderArray len=param[2]
+    // param-hint: EntriesProcessed optional
+    func CfCreatePlaceholders(BaseDirectoryPath: CPointer<UInt16>, PlaceholderArray: CPointer<CF_PLACEHOLDER_CREATE_INFO>, PlaceholderCount: UInt32, CreateFlags: Int32, EntriesProcessed: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfCreatePlaceholders == "on" && Windows_Win32_Storage_FileSystem == "on"]
+public unsafe func Windows_CfCreatePlaceholders(BaseDirectoryPath: CPointer<UInt16>, PlaceholderArray: CPointer<CF_PLACEHOLDER_CREATE_INFO>, PlaceholderCount: UInt32, CreateFlags: Int32, EntriesProcessed: CPointer<UInt32>): Int32 {
+    return CfCreatePlaceholders(BaseDirectoryPath, PlaceholderArray, PlaceholderCount, CreateFlags, EntriesProcessed)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfDehydratePlaceholder == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    // param-hint: Overlapped optional
+    func CfDehydratePlaceholder(FileHandle: CPointer<Unit>, StartingOffset: Int64, Length: Int64, DehydrateFlags: Int32, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfDehydratePlaceholder == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_CfDehydratePlaceholder(FileHandle: CPointer<Unit>, StartingOffset: Int64, Length: Int64, DehydrateFlags: Int32, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32 {
+    return CfDehydratePlaceholder(FileHandle, StartingOffset, Length, DehydrateFlags, Overlapped)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfDisconnectSyncRoot == "on"]
+foreign {
+    func CfDisconnectSyncRoot(ConnectionKey: CF_CONNECTION_KEY): Int32
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfDisconnectSyncRoot == "on"]
+public unsafe func Windows_CfDisconnectSyncRoot(ConnectionKey: CF_CONNECTION_KEY): Int32 {
+    return CfDisconnectSyncRoot(ConnectionKey)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfExecute == "on" && Windows_Win32_Storage_FileSystem == "on" && Windows_Win32_System_CorrelationVector == "on"]
 foreign {
     func CfExecute(OpInfo: CPointer<CF_OPERATION_INFO>, OpParams: CPointer<CF_OPERATION_PARAMETERS>): Int32
 }
 
-@When[CLDAPI == "on" && (Windows_Win32_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on")]
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfExecute == "on" && Windows_Win32_Storage_FileSystem == "on" && Windows_Win32_System_CorrelationVector == "on"]
+public unsafe func Windows_CfExecute(OpInfo: CPointer<CF_OPERATION_INFO>, OpParams: CPointer<CF_OPERATION_PARAMETERS>): Int32 {
+    return CfExecute(OpInfo, OpParams)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfGetCorrelationVector == "on" && Windows_Win32_System_CorrelationVector == "on"]
+foreign {
+    func CfGetCorrelationVector(FileHandle: CPointer<Unit>, CorrelationVector: CPointer<Win32_System_CorrelationVector.CORRELATION_VECTOR>): Int32
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfGetCorrelationVector == "on" && Windows_Win32_System_CorrelationVector == "on"]
+public unsafe func Windows_CfGetCorrelationVector(FileHandle: CPointer<Unit>, CorrelationVector: CPointer<Win32_System_CorrelationVector.CORRELATION_VECTOR>): Int32 {
+    return CfGetCorrelationVector(FileHandle, CorrelationVector)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfGetPlaceholderInfo == "on"]
+foreign {
+    // param-hint: InfoBuffer bytes=param[3]
+    // param-hint: ReturnedLength optional
+    func CfGetPlaceholderInfo(FileHandle: CPointer<Unit>, InfoClass: Int32, InfoBuffer: CPointer<Unit>, InfoBufferLength: UInt32, ReturnedLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfGetPlaceholderInfo == "on"]
+public unsafe func Windows_CfGetPlaceholderInfo(FileHandle: CPointer<Unit>, InfoClass: Int32, InfoBuffer: CPointer<Unit>, InfoBufferLength: UInt32, ReturnedLength: CPointer<UInt32>): Int32 {
+    return CfGetPlaceholderInfo(FileHandle, InfoClass, InfoBuffer, InfoBufferLength, ReturnedLength)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfGetPlaceholderRangeInfo == "on"]
+foreign {
+    // param-hint: InfoBuffer bytes=param[5]
+    // param-hint: ReturnedLength optional
+    func CfGetPlaceholderRangeInfo(FileHandle: CPointer<Unit>, InfoClass: Int32, StartingOffset: Int64, Length: Int64, InfoBuffer: CPointer<Unit>, InfoBufferLength: UInt32, ReturnedLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfGetPlaceholderRangeInfo == "on"]
+public unsafe func Windows_CfGetPlaceholderRangeInfo(FileHandle: CPointer<Unit>, InfoClass: Int32, StartingOffset: Int64, Length: Int64, InfoBuffer: CPointer<Unit>, InfoBufferLength: UInt32, ReturnedLength: CPointer<UInt32>): Int32 {
+    return CfGetPlaceholderRangeInfo(FileHandle, InfoClass, StartingOffset, Length, InfoBuffer, InfoBufferLength, ReturnedLength)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfGetPlaceholderRangeInfoForHydration == "on"]
+foreign {
+    // param-hint: InfoBuffer bytes=param[7]
+    // param-hint: InfoBufferWritten optional
+    func CfGetPlaceholderRangeInfoForHydration(ConnectionKey: CF_CONNECTION_KEY, TransferKey: Int64, FileId: Int64, InfoClass: Int32, StartingOffset: Int64, RangeLength: Int64, InfoBuffer: CPointer<Unit>, InfoBufferSize: UInt32, InfoBufferWritten: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfGetPlaceholderRangeInfoForHydration == "on"]
+public unsafe func Windows_CfGetPlaceholderRangeInfoForHydration(ConnectionKey: CF_CONNECTION_KEY, TransferKey: Int64, FileId: Int64, InfoClass: Int32, StartingOffset: Int64, RangeLength: Int64, InfoBuffer: CPointer<Unit>, InfoBufferSize: UInt32, InfoBufferWritten: CPointer<UInt32>): Int32 {
+    return CfGetPlaceholderRangeInfoForHydration(ConnectionKey, TransferKey, FileId, InfoClass, StartingOffset, RangeLength, InfoBuffer, InfoBufferSize, InfoBufferWritten)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfGetPlaceholderStateFromAttributeTag == "on"]
+foreign {
+    func CfGetPlaceholderStateFromAttributeTag(FileAttributes: UInt32, ReparseTag: UInt32): UInt32
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfGetPlaceholderStateFromAttributeTag == "on"]
+public unsafe func Windows_CfGetPlaceholderStateFromAttributeTag(FileAttributes: UInt32, ReparseTag: UInt32): UInt32 {
+    return CfGetPlaceholderStateFromAttributeTag(FileAttributes, ReparseTag)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfGetPlaceholderStateFromFileInfo == "on" && Windows_Win32_Storage_FileSystem == "on"]
+foreign {
+    func CfGetPlaceholderStateFromFileInfo(InfoBuffer: CPointer<Unit>, InfoClass: Int32): UInt32
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfGetPlaceholderStateFromFileInfo == "on" && Windows_Win32_Storage_FileSystem == "on"]
+public unsafe func Windows_CfGetPlaceholderStateFromFileInfo(InfoBuffer: CPointer<Unit>, InfoClass: Int32): UInt32 {
+    return CfGetPlaceholderStateFromFileInfo(InfoBuffer, InfoClass)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfGetPlaceholderStateFromFindData == "on" && Windows_Win32_Storage_FileSystem == "on"]
+foreign {
+    func CfGetPlaceholderStateFromFindData(FindData: CPointer<Win32__impl_l0.WIN32_FIND_DATAA>): UInt32
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfGetPlaceholderStateFromFindData == "on" && Windows_Win32_Storage_FileSystem == "on"]
+public unsafe func Windows_CfGetPlaceholderStateFromFindData(FindData: CPointer<Win32__impl_l0.WIN32_FIND_DATAA>): UInt32 {
+    return CfGetPlaceholderStateFromFindData(FindData)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfGetPlatformInfo == "on"]
+foreign {
+    func CfGetPlatformInfo(PlatformVersion: CPointer<CF_PLATFORM_INFO>): Int32
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfGetPlatformInfo == "on"]
+public unsafe func Windows_CfGetPlatformInfo(PlatformVersion: CPointer<CF_PLATFORM_INFO>): Int32 {
+    return CfGetPlatformInfo(PlatformVersion)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfGetSyncRootInfoByHandle == "on"]
+foreign {
+    // param-hint: ReturnedLength optional
+    func CfGetSyncRootInfoByHandle(FileHandle: CPointer<Unit>, InfoClass: Int32, InfoBuffer: CPointer<Unit>, InfoBufferLength: UInt32, ReturnedLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfGetSyncRootInfoByHandle == "on"]
+public unsafe func Windows_CfGetSyncRootInfoByHandle(FileHandle: CPointer<Unit>, InfoClass: Int32, InfoBuffer: CPointer<Unit>, InfoBufferLength: UInt32, ReturnedLength: CPointer<UInt32>): Int32 {
+    return CfGetSyncRootInfoByHandle(FileHandle, InfoClass, InfoBuffer, InfoBufferLength, ReturnedLength)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfGetSyncRootInfoByPath == "on"]
+foreign {
+    // param-hint: ReturnedLength optional
+    func CfGetSyncRootInfoByPath(FilePath: CPointer<UInt16>, InfoClass: Int32, InfoBuffer: CPointer<Unit>, InfoBufferLength: UInt32, ReturnedLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfGetSyncRootInfoByPath == "on"]
+public unsafe func Windows_CfGetSyncRootInfoByPath(FilePath: CPointer<UInt16>, InfoClass: Int32, InfoBuffer: CPointer<Unit>, InfoBufferLength: UInt32, ReturnedLength: CPointer<UInt32>): Int32 {
+    return CfGetSyncRootInfoByPath(FilePath, InfoClass, InfoBuffer, InfoBufferLength, ReturnedLength)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfGetTransferKey == "on"]
+foreign {
+    func CfGetTransferKey(FileHandle: CPointer<Unit>, TransferKey: CPointer<Int64>): Int32
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfGetTransferKey == "on"]
+public unsafe func Windows_CfGetTransferKey(FileHandle: CPointer<Unit>, TransferKey: CPointer<Int64>): Int32 {
+    return CfGetTransferKey(FileHandle, TransferKey)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfGetWin32HandleFromProtectedHandle == "on"]
+foreign {
+    func CfGetWin32HandleFromProtectedHandle(ProtectedHandle: CPointer<Unit>): CPointer<Unit>
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfGetWin32HandleFromProtectedHandle == "on"]
+public unsafe func Windows_CfGetWin32HandleFromProtectedHandle(ProtectedHandle: CPointer<Unit>): CPointer<Unit> {
+    return CfGetWin32HandleFromProtectedHandle(ProtectedHandle)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfHydratePlaceholder == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    // param-hint: Overlapped optional
+    func CfHydratePlaceholder(FileHandle: CPointer<Unit>, StartingOffset: Int64, Length: Int64, HydrateFlags: Int32, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfHydratePlaceholder == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_CfHydratePlaceholder(FileHandle: CPointer<Unit>, StartingOffset: Int64, Length: Int64, HydrateFlags: Int32, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32 {
+    return CfHydratePlaceholder(FileHandle, StartingOffset, Length, HydrateFlags, Overlapped)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfOpenFileWithOplock == "on"]
+foreign {
+    func CfOpenFileWithOplock(FilePath: CPointer<UInt16>, Flags: Int32, ProtectedHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfOpenFileWithOplock == "on"]
+public unsafe func Windows_CfOpenFileWithOplock(FilePath: CPointer<UInt16>, Flags: Int32, ProtectedHandle: CPointer<CPointer<Unit>>): Int32 {
+    return CfOpenFileWithOplock(FilePath, Flags, ProtectedHandle)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfQuerySyncProviderStatus == "on"]
+foreign {
+    func CfQuerySyncProviderStatus(ConnectionKey: CF_CONNECTION_KEY, ProviderStatus: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfQuerySyncProviderStatus == "on"]
+public unsafe func Windows_CfQuerySyncProviderStatus(ConnectionKey: CF_CONNECTION_KEY, ProviderStatus: CPointer<UInt32>): Int32 {
+    return CfQuerySyncProviderStatus(ConnectionKey, ProviderStatus)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfReferenceProtectedHandle == "on"]
+foreign {
+    func CfReferenceProtectedHandle(ProtectedHandle: CPointer<Unit>): UInt8
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfReferenceProtectedHandle == "on"]
+public unsafe func Windows_CfReferenceProtectedHandle(ProtectedHandle: CPointer<Unit>): UInt8 {
+    return CfReferenceProtectedHandle(ProtectedHandle)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfRegisterSyncRoot == "on"]
+foreign {
+    func CfRegisterSyncRoot(SyncRootPath: CPointer<UInt16>, Registration: CPointer<CF_SYNC_REGISTRATION>, Policies: CPointer<CF_SYNC_POLICIES>, RegisterFlags: Int32): Int32
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfRegisterSyncRoot == "on"]
+public unsafe func Windows_CfRegisterSyncRoot(SyncRootPath: CPointer<UInt16>, Registration: CPointer<CF_SYNC_REGISTRATION>, Policies: CPointer<CF_SYNC_POLICIES>, RegisterFlags: Int32): Int32 {
+    return CfRegisterSyncRoot(SyncRootPath, Registration, Policies, RegisterFlags)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfReleaseProtectedHandle == "on"]
+foreign {
+    func CfReleaseProtectedHandle(ProtectedHandle: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfReleaseProtectedHandle == "on"]
+public unsafe func Windows_CfReleaseProtectedHandle(ProtectedHandle: CPointer<Unit>): Unit {
+    CfReleaseProtectedHandle(ProtectedHandle)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfReleaseTransferKey == "on"]
+foreign {
+    func CfReleaseTransferKey(FileHandle: CPointer<Unit>, TransferKey: CPointer<Int64>): Unit
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfReleaseTransferKey == "on"]
+public unsafe func Windows_CfReleaseTransferKey(FileHandle: CPointer<Unit>, TransferKey: CPointer<Int64>): Unit {
+    CfReleaseTransferKey(FileHandle, TransferKey)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfReportProviderProgress == "on"]
+foreign {
+    func CfReportProviderProgress(ConnectionKey: CF_CONNECTION_KEY, TransferKey: Int64, ProviderProgressTotal: Int64, ProviderProgressCompleted: Int64): Int32
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfReportProviderProgress == "on"]
+public unsafe func Windows_CfReportProviderProgress(ConnectionKey: CF_CONNECTION_KEY, TransferKey: Int64, ProviderProgressTotal: Int64, ProviderProgressCompleted: Int64): Int32 {
+    return CfReportProviderProgress(ConnectionKey, TransferKey, ProviderProgressTotal, ProviderProgressCompleted)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfReportProviderProgress2 == "on"]
+foreign {
+    func CfReportProviderProgress2(ConnectionKey: CF_CONNECTION_KEY, TransferKey: Int64, RequestKey: Int64, ProviderProgressTotal: Int64, ProviderProgressCompleted: Int64, TargetSessionId: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfReportProviderProgress2 == "on"]
+public unsafe func Windows_CfReportProviderProgress2(ConnectionKey: CF_CONNECTION_KEY, TransferKey: Int64, RequestKey: Int64, ProviderProgressTotal: Int64, ProviderProgressCompleted: Int64, TargetSessionId: UInt32): Int32 {
+    return CfReportProviderProgress2(ConnectionKey, TransferKey, RequestKey, ProviderProgressTotal, ProviderProgressCompleted, TargetSessionId)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfReportSyncStatus == "on"]
+foreign {
+    // param-hint: SyncStatus optional
+    func CfReportSyncStatus(SyncRootPath: CPointer<UInt16>, SyncStatus: CPointer<CF_SYNC_STATUS>): Int32
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfReportSyncStatus == "on"]
+public unsafe func Windows_CfReportSyncStatus(SyncRootPath: CPointer<UInt16>, SyncStatus: CPointer<CF_SYNC_STATUS>): Int32 {
+    return CfReportSyncStatus(SyncRootPath, SyncStatus)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfRevertPlaceholder == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    // param-hint: Overlapped optional
+    func CfRevertPlaceholder(FileHandle: CPointer<Unit>, RevertFlags: Int32, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfRevertPlaceholder == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_CfRevertPlaceholder(FileHandle: CPointer<Unit>, RevertFlags: Int32, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32 {
+    return CfRevertPlaceholder(FileHandle, RevertFlags, Overlapped)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfSetCorrelationVector == "on" && Windows_Win32_System_CorrelationVector == "on"]
+foreign {
+    func CfSetCorrelationVector(FileHandle: CPointer<Unit>, CorrelationVector: CPointer<Win32_System_CorrelationVector.CORRELATION_VECTOR>): Int32
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfSetCorrelationVector == "on" && Windows_Win32_System_CorrelationVector == "on"]
+public unsafe func Windows_CfSetCorrelationVector(FileHandle: CPointer<Unit>, CorrelationVector: CPointer<Win32_System_CorrelationVector.CORRELATION_VECTOR>): Int32 {
+    return CfSetCorrelationVector(FileHandle, CorrelationVector)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfSetInSyncState == "on"]
+foreign {
+    // param-hint: InSyncUsn optional
+    func CfSetInSyncState(FileHandle: CPointer<Unit>, InSyncState: Int32, InSyncFlags: Int32, InSyncUsn: CPointer<Int64>): Int32
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfSetInSyncState == "on"]
+public unsafe func Windows_CfSetInSyncState(FileHandle: CPointer<Unit>, InSyncState: Int32, InSyncFlags: Int32, InSyncUsn: CPointer<Int64>): Int32 {
+    return CfSetInSyncState(FileHandle, InSyncState, InSyncFlags, InSyncUsn)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfSetPinState == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    // param-hint: Overlapped optional
+    func CfSetPinState(FileHandle: CPointer<Unit>, PinState: Int32, PinFlags: Int32, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfSetPinState == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_CfSetPinState(FileHandle: CPointer<Unit>, PinState: Int32, PinFlags: Int32, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32 {
+    return CfSetPinState(FileHandle, PinState, PinFlags, Overlapped)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfUnregisterSyncRoot == "on"]
+foreign {
+    func CfUnregisterSyncRoot(SyncRootPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfUnregisterSyncRoot == "on"]
+public unsafe func Windows_CfUnregisterSyncRoot(SyncRootPath: CPointer<UInt16>): Int32 {
+    return CfUnregisterSyncRoot(SyncRootPath)
+}
+
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfUpdatePlaceholder == "on" && Windows_Win32_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on"]
 foreign {
     // param-hint: FsMetadata optional
     // param-hint: FileIdentity bytes=param[3] optional
@@ -2929,37 +3244,19 @@ foreign {
     func CfUpdatePlaceholder(FileHandle: CPointer<Unit>, FsMetadata: CPointer<CF_FS_METADATA>, FileIdentity: CPointer<Unit>, FileIdentityLength: UInt32, DehydrateRangeArray: CPointer<CF_FILE_RANGE>, DehydrateRangeCount: UInt32, UpdateFlags: Int32, UpdateUsn: CPointer<Int64>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
 }
 
-@When[CLDAPI == "on" && Windows_Win32_Storage_FileSystem == "on"]
-foreign {
-    // param-hint: PlaceholderArray len=param[2]
-    // param-hint: EntriesProcessed optional
-    func CfCreatePlaceholders(BaseDirectoryPath: CPointer<UInt16>, PlaceholderArray: CPointer<CF_PLACEHOLDER_CREATE_INFO>, PlaceholderCount: UInt32, CreateFlags: Int32, EntriesProcessed: CPointer<UInt32>): Int32
-    func CfGetPlaceholderStateFromFileInfo(InfoBuffer: CPointer<Unit>, InfoClass: Int32): UInt32
-    func CfGetPlaceholderStateFromFindData(FindData: CPointer<Win32__impl_l0.WIN32_FIND_DATAA>): UInt32
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfUpdatePlaceholder == "on" && Windows_Win32_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_CfUpdatePlaceholder(FileHandle: CPointer<Unit>, FsMetadata: CPointer<CF_FS_METADATA>, FileIdentity: CPointer<Unit>, FileIdentityLength: UInt32, DehydrateRangeArray: CPointer<CF_FILE_RANGE>, DehydrateRangeCount: UInt32, UpdateFlags: Int32, UpdateUsn: CPointer<Int64>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32 {
+    return CfUpdatePlaceholder(FileHandle, FsMetadata, FileIdentity, FileIdentityLength, DehydrateRangeArray, DehydrateRangeCount, UpdateFlags, UpdateUsn, Overlapped)
 }
 
-@When[CLDAPI == "on" && Windows_Win32_System_CorrelationVector == "on"]
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfUpdateSyncProviderStatus == "on"]
 foreign {
-    // param-hint: CallbackContext optional
-    func CfConnectSyncRoot(SyncRootPath: CPointer<UInt16>, CallbackTable: CPointer<CF_CALLBACK_REGISTRATION>, CallbackContext: CPointer<Unit>, ConnectFlags: Int32, ConnectionKey: CPointer<CF_CONNECTION_KEY>): Int32
-    func CfGetCorrelationVector(FileHandle: CPointer<Unit>, CorrelationVector: CPointer<Win32_System_CorrelationVector.CORRELATION_VECTOR>): Int32
-    func CfSetCorrelationVector(FileHandle: CPointer<Unit>, CorrelationVector: CPointer<Win32_System_CorrelationVector.CORRELATION_VECTOR>): Int32
+    func CfUpdateSyncProviderStatus(ConnectionKey: CF_CONNECTION_KEY, ProviderStatus: UInt32): Int32
 }
 
-@When[CLDAPI == "on" && Windows_Win32_System_IO == "on"]
-foreign {
-    // param-hint: FileIdentity bytes=param[2] optional
-    // param-hint: ConvertUsn optional
-    // param-hint: Overlapped optional
-    func CfConvertToPlaceholder(FileHandle: CPointer<Unit>, FileIdentity: CPointer<Unit>, FileIdentityLength: UInt32, ConvertFlags: Int32, ConvertUsn: CPointer<Int64>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
-    // param-hint: Overlapped optional
-    func CfDehydratePlaceholder(FileHandle: CPointer<Unit>, StartingOffset: Int64, Length: Int64, DehydrateFlags: Int32, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
-    // param-hint: Overlapped optional
-    func CfHydratePlaceholder(FileHandle: CPointer<Unit>, StartingOffset: Int64, Length: Int64, HydrateFlags: Int32, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
-    // param-hint: Overlapped optional
-    func CfRevertPlaceholder(FileHandle: CPointer<Unit>, RevertFlags: Int32, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
-    // param-hint: Overlapped optional
-    func CfSetPinState(FileHandle: CPointer<Unit>, PinState: Int32, PinFlags: Int32, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
+@When[Windows_Win32_Storage_CloudFilters == "on" && CLDAPI == "on" && Windows_Win32_Storage_CloudFilters_CfUpdateSyncProviderStatus == "on"]
+public unsafe func Windows_CfUpdateSyncProviderStatus(ConnectionKey: CF_CONNECTION_KEY, ProviderStatus: UInt32): Int32 {
+    return CfUpdateSyncProviderStatus(ConnectionKey, ProviderStatus)
 }
 
 @When[Windows_Win32_Storage_CloudFilters == "on"]

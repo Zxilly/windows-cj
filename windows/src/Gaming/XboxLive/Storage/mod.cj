@@ -114,9 +114,9 @@ extend GameSaveErrorStatus <: windows_core.CopyType & windows_core.RuntimeType &
 public struct IGameSaveBlobGetResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Status: CFunc<(CPointer<Unit>, CPointer<GameSaveErrorStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var Value: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
     public var Value: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -194,7 +194,7 @@ public class IGameSaveBlobGetResult <: InterfaceWrapperBase & ComInterface & Run
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<GameSaveErrorStatus>()).unwrap()
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func Value(): windows_collections.IMapView<windows_core.HString, _impl_l0.IBuffer> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -580,7 +580,7 @@ public class GameSaveBlobGetResult <: InterfaceWrapperBase & ComInterface & wind
         return defaultInterface().Status()
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func Value(): windows_collections.IMapView<windows_core.HString, _impl_l0.IBuffer> {
         return defaultInterface().Value()
     }
@@ -905,7 +905,10 @@ extend GameSaveOperationResult <: windows_core.HandleWinrtType<GameSaveOperation
 public struct IGameSaveBlobInfoGetResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Status: CFunc<(CPointer<Unit>, CPointer<GameSaveErrorStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Value: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Value: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -982,6 +985,7 @@ public class IGameSaveBlobInfoGetResult <: InterfaceWrapperBase & ComInterface &
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<GameSaveErrorStatus>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Value(): windows_collections.IVectorView<GameSaveBlobInfo> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -999,7 +1003,10 @@ extend IGameSaveBlobInfoGetResult <: windows_core.Interface<IGameSaveBlobInfoGet
 public struct IGameSaveContainerInfoGetResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Status: CFunc<(CPointer<Unit>, CPointer<GameSaveErrorStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Value: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Value: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1076,6 +1083,7 @@ public class IGameSaveContainerInfoGetResult <: InterfaceWrapperBase & ComInterf
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<GameSaveErrorStatus>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Value(): windows_collections.IVectorView<GameSaveContainerInfo> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1161,6 +1169,7 @@ public class GameSaveBlobInfoGetResult <: InterfaceWrapperBase & ComInterface & 
         return defaultInterface().Status()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Value(): windows_collections.IVectorView<GameSaveBlobInfo> {
         return defaultInterface().Value()
     }
@@ -1257,6 +1266,7 @@ public class GameSaveContainerInfoGetResult <: InterfaceWrapperBase & ComInterfa
         return defaultInterface().Status()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Value(): windows_collections.IVectorView<GameSaveContainerInfo> {
         return defaultInterface().Value()
     }
@@ -1763,16 +1773,17 @@ public class GameSaveContainer <: InterfaceWrapperBase & ComInterface & windows_
         return defaultInterface().Provider()
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func SubmitUpdatesAsync(blobsToWrite: windows_collections.IMapView<windows_core.HString, _impl_l0.IBuffer>, blobsToDelete: windows_collections.IIterable<windows_core.HString>, displayName: windows_core.HString): windows_future.IAsyncOperation<GameSaveOperationResult> {
         return defaultInterface().SubmitUpdatesAsync(blobsToWrite, blobsToDelete, displayName)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func ReadAsync(blobsToRead: windows_collections.IMapView<windows_core.HString, _impl_l0.IBuffer>): windows_future.IAsyncOperation<GameSaveOperationResult> {
         return defaultInterface().ReadAsync(blobsToRead)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsync(blobsToRead: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<GameSaveBlobGetResult> {
         return defaultInterface().GetAsync(blobsToRead)
     }
@@ -1899,6 +1910,7 @@ public class GameSaveProvider <: InterfaceWrapperBase & ComInterface & windows_i
         return defaultInterface().GetRemainingBytesInQuotaAsync()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ContainersChangedSinceLastSync(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().ContainersChangedSinceLastSync()
     }
@@ -2048,15 +2060,18 @@ public struct IGameSaveContainerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Provider: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var SubmitUpdatesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
     public var SubmitUpdatesAsync: UIntNative = UIntNative(0)
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var ReadAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
     public var ReadAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAsync: UIntNative = UIntNative(0)
     @When[Windows_Foundation_Collections == "on"]
     public var SubmitPropertySetUpdatesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_Foundation_Collections != "on"]
@@ -2146,7 +2161,7 @@ public class IGameSaveContainer <: InterfaceWrapperBase & ComInterface & Runtime
         return GameSaveProvider.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func SubmitUpdatesAsync(blobsToWrite: windows_collections.IMapView<windows_core.HString, _impl_l0.IBuffer>, blobsToDelete: windows_collections.IIterable<windows_core.HString>, displayName: windows_core.HString): windows_future.IAsyncOperation<GameSaveOperationResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2155,7 +2170,7 @@ public class IGameSaveContainer <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_future.IAsyncOperation<GameSaveOperationResult>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func ReadAsync(blobsToRead: windows_collections.IMapView<windows_core.HString, _impl_l0.IBuffer>): windows_future.IAsyncOperation<GameSaveOperationResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2164,6 +2179,7 @@ public class IGameSaveContainer <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_future.IAsyncOperation<GameSaveOperationResult>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsync(blobsToRead: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<GameSaveBlobGetResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2206,7 +2222,10 @@ public struct IGameSaveProviderVtbl {
     public var CreateContainerInfoQuery: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CreateContainerInfoQueryWithName: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var GetRemainingBytesInQuotaAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var ContainersChangedSinceLastSync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ContainersChangedSinceLastSync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2324,6 +2343,7 @@ public class IGameSaveProvider <: InterfaceWrapperBase & ComInterface & RuntimeN
         return windows_future.IAsyncOperation<Int64>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ContainersChangedSinceLastSync(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

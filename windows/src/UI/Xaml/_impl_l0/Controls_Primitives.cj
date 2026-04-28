@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_UI == "on"]
 import windows.UI as UI
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -1215,12 +1213,14 @@ public class DragCompletedEventHandler <: InterfaceWrapperBase & ComInterface & 
 @When[Windows_UI_Xaml_Controls_Primitives == "on"]
 extend DragCompletedEventHandler <: windows_core.Interface<DragCompletedEventHandler> {}
 
+@When[Windows_UI_Xaml_Controls_Primitives == "on"]
 private open class DragCompletedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Controls_Primitives == "on"]
 private open class DragCompletedEventHandlerInvoker <: DragCompletedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<DragCompletedEventArgs>): Unit {
         ()
@@ -1232,6 +1232,7 @@ private open class DragCompletedEventHandlerInvoker <: DragCompletedEventHandler
     }
 }
 
+@When[Windows_UI_Xaml_Controls_Primitives == "on"]
 private class DragCompletedEventHandlerBox <: DragCompletedEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<DragCompletedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<DragCompletedEventHandlerVtbl>
@@ -1250,6 +1251,7 @@ private class DragCompletedEventHandlerBox <: DragCompletedEventHandlerInvoker {
     }
 }
 
+@When[Windows_UI_Xaml_Controls_Primitives == "on"]
 func buildDragCompletedEventHandlerBoxVtbl(): DragCompletedEventHandlerVtbl {
     var vtbl = DragCompletedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -1455,12 +1457,14 @@ public class DragDeltaEventHandler <: InterfaceWrapperBase & ComInterface & wind
 @When[Windows_UI_Xaml_Controls_Primitives == "on"]
 extend DragDeltaEventHandler <: windows_core.Interface<DragDeltaEventHandler> {}
 
+@When[Windows_UI_Xaml_Controls_Primitives == "on"]
 private open class DragDeltaEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Controls_Primitives == "on"]
 private open class DragDeltaEventHandlerInvoker <: DragDeltaEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<DragDeltaEventArgs>): Unit {
         ()
@@ -1472,6 +1476,7 @@ private open class DragDeltaEventHandlerInvoker <: DragDeltaEventHandlerInvokerE
     }
 }
 
+@When[Windows_UI_Xaml_Controls_Primitives == "on"]
 private class DragDeltaEventHandlerBox <: DragDeltaEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<DragDeltaEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<DragDeltaEventHandlerVtbl>
@@ -1490,6 +1495,7 @@ private class DragDeltaEventHandlerBox <: DragDeltaEventHandlerInvoker {
     }
 }
 
+@When[Windows_UI_Xaml_Controls_Primitives == "on"]
 func buildDragDeltaEventHandlerBoxVtbl(): DragDeltaEventHandlerVtbl {
     var vtbl = DragDeltaEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -1695,12 +1701,14 @@ public class DragStartedEventHandler <: InterfaceWrapperBase & ComInterface & wi
 @When[Windows_UI_Xaml_Controls_Primitives == "on"]
 extend DragStartedEventHandler <: windows_core.Interface<DragStartedEventHandler> {}
 
+@When[Windows_UI_Xaml_Controls_Primitives == "on"]
 private open class DragStartedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Controls_Primitives == "on"]
 private open class DragStartedEventHandlerInvoker <: DragStartedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<DragStartedEventArgs>): Unit {
         ()
@@ -1712,6 +1720,7 @@ private open class DragStartedEventHandlerInvoker <: DragStartedEventHandlerInvo
     }
 }
 
+@When[Windows_UI_Xaml_Controls_Primitives == "on"]
 private class DragStartedEventHandlerBox <: DragStartedEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<DragStartedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<DragStartedEventHandlerVtbl>
@@ -1730,6 +1739,7 @@ private class DragStartedEventHandlerBox <: DragStartedEventHandlerInvoker {
     }
 }
 
+@When[Windows_UI_Xaml_Controls_Primitives == "on"]
 func buildDragStartedEventHandlerBoxVtbl(): DragStartedEventHandlerVtbl {
     var vtbl = DragStartedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -11917,9 +11927,9 @@ public struct IScrollSnapPointsInfoVtbl {
     public var RemoveHorizontalSnapPointsChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var VerticalSnapPointsChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveVerticalSnapPointsChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Xaml_Controls == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Controls == "on"]
     public var GetIrregularSnapPoints: CFunc<(CPointer<Unit>, OrientationAbi, SnapPointsAlignmentAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Xaml_Controls != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_UI_Xaml_Controls != "on"]
     public var GetIrregularSnapPoints: UIntNative = UIntNative(0)
     @When[Windows_UI_Xaml_Controls == "on"]
     public var GetRegularSnapPoints: CFunc<(CPointer<Unit>, OrientationAbi, SnapPointsAlignmentAbi, CPointer<Float32>, CPointer<Float32>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
@@ -11927,7 +11937,7 @@ public struct IScrollSnapPointsInfoVtbl {
     public var GetRegularSnapPoints: UIntNative = UIntNative(0)
     public init() {}
 
-    @When[Windows_UI_Xaml_Controls == "on"]
+    @When[(Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Controls == "on") && (Windows_UI_Xaml_Controls == "on")]
     public static func new<Identity>(offset!: Int64 = 0): IScrollSnapPointsInfoVtbl where Identity <: IScrollSnapPointsInfo_Impl {
         let _ = offset
         var vtbl = IScrollSnapPointsInfoVtbl()
@@ -11985,7 +11995,7 @@ public struct IScrollSnapPointsInfoVtbl {
         return vtbl
     }
 
-    @When[Windows_UI_Xaml_Controls == "on" && Windows_UI_Xaml_Controls == "on"]
+    @When[((Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Controls == "on") && (Windows_UI_Xaml_Controls == "on")) && (Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Controls == "on")]
     public static func __assignGetIrregularSnapPoints<Identity>(vtbl: IScrollSnapPointsInfoVtbl): IScrollSnapPointsInfoVtbl where Identity <: IScrollSnapPointsInfo_Impl {
         var next = vtbl
         next.GetIrregularSnapPoints = { instanceRaw, arg0, arg1, result__ =>
@@ -11999,12 +12009,12 @@ public struct IScrollSnapPointsInfoVtbl {
         return next
     }
 
-    @When[Windows_UI_Xaml_Controls == "on" && Windows_UI_Xaml_Controls != "on"]
+    @When[((Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Controls == "on") && (Windows_UI_Xaml_Controls == "on")) && (Windows_Foundation_Collections != "on" || Windows_UI_Xaml_Controls != "on")]
     public static func __assignGetIrregularSnapPoints<Identity>(vtbl: IScrollSnapPointsInfoVtbl): IScrollSnapPointsInfoVtbl where Identity <: IScrollSnapPointsInfo_Impl {
         return vtbl
     }
 
-    @When[Windows_UI_Xaml_Controls == "on" && Windows_UI_Xaml_Controls == "on"]
+    @When[((Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Controls == "on") && (Windows_UI_Xaml_Controls == "on")) && Windows_UI_Xaml_Controls == "on"]
     public static func __assignGetRegularSnapPoints<Identity>(vtbl: IScrollSnapPointsInfoVtbl): IScrollSnapPointsInfoVtbl where Identity <: IScrollSnapPointsInfo_Impl {
         var next = vtbl
         next.GetRegularSnapPoints = { instanceRaw, arg0, arg1, arg2, result__ =>
@@ -12018,7 +12028,7 @@ public struct IScrollSnapPointsInfoVtbl {
         return next
     }
 
-    @When[Windows_UI_Xaml_Controls == "on" && Windows_UI_Xaml_Controls != "on"]
+    @When[((Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Controls == "on") && (Windows_UI_Xaml_Controls == "on")) && Windows_UI_Xaml_Controls != "on"]
     public static func __assignGetRegularSnapPoints<Identity>(vtbl: IScrollSnapPointsInfoVtbl): IScrollSnapPointsInfoVtbl where Identity <: IScrollSnapPointsInfo_Impl {
         return vtbl
     }
@@ -12031,7 +12041,7 @@ public struct IScrollSnapPointsInfoVtbl {
     }
 }
 
-@When[Windows_UI_Xaml_Controls_Primitives == "on" && Windows_UI_Xaml_Controls == "on"]
+@When[Windows_UI_Xaml_Controls_Primitives == "on" && ((Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Controls == "on") && (Windows_UI_Xaml_Controls == "on"))]
 public interface IScrollSnapPointsInfo_ImplErased {
     public func __winrtThunk_AreHorizontalSnapPointsRegular(result__: CPointer<Bool>): Int32
 
@@ -12050,7 +12060,7 @@ public interface IScrollSnapPointsInfo_ImplErased {
     public func __winrtThunk_GetRegularSnapPoints(arg0: OrientationAbi, arg1: SnapPointsAlignmentAbi, arg2: CPointer<Float32>, result__: CPointer<Float32>): Int32
 }
 
-@When[Windows_UI_Xaml_Controls_Primitives == "on" && Windows_UI_Xaml_Controls == "on"]
+@When[Windows_UI_Xaml_Controls_Primitives == "on" && ((Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Controls == "on") && (Windows_UI_Xaml_Controls == "on"))]
 public interface IScrollSnapPointsInfo_Impl <: IScrollSnapPointsInfo_ImplErased {
     public func AreHorizontalSnapPointsRegular(): windows_core.Result<Bool>
 
@@ -12279,7 +12289,7 @@ public class IScrollSnapPointsInfo <: InterfaceWrapperBase & ComInterface & Runt
         HRESULT(hr).ok()
     }
 
-    @When[Windows_UI_Xaml_Controls == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Controls == "on"]
     public unsafe func GetIrregularSnapPoints(orientation: Orientation, alignment: SnapPointsAlignment): windows_collections.IVectorView<Float32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -14123,12 +14133,14 @@ public class ItemsChangedEventHandler <: InterfaceWrapperBase & ComInterface & w
 @When[Windows_UI_Xaml_Controls_Primitives == "on"]
 extend ItemsChangedEventHandler <: windows_core.Interface<ItemsChangedEventHandler> {}
 
+@When[Windows_UI_Xaml_Controls_Primitives == "on"]
 private open class ItemsChangedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Controls_Primitives == "on"]
 private open class ItemsChangedEventHandlerInvoker <: ItemsChangedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<ItemsChangedEventArgs>): Unit {
         ()
@@ -14140,6 +14152,7 @@ private open class ItemsChangedEventHandlerInvoker <: ItemsChangedEventHandlerIn
     }
 }
 
+@When[Windows_UI_Xaml_Controls_Primitives == "on"]
 private class ItemsChangedEventHandlerBox <: ItemsChangedEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<ItemsChangedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<ItemsChangedEventHandlerVtbl>
@@ -14158,6 +14171,7 @@ private class ItemsChangedEventHandlerBox <: ItemsChangedEventHandlerInvoker {
     }
 }
 
+@When[Windows_UI_Xaml_Controls_Primitives == "on"]
 func buildItemsChangedEventHandlerBoxVtbl(): ItemsChangedEventHandlerVtbl {
     var vtbl = ItemsChangedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -15137,12 +15151,14 @@ public class RangeBaseValueChangedEventHandler <: InterfaceWrapperBase & ComInte
 @When[Windows_UI_Xaml_Controls_Primitives == "on"]
 extend RangeBaseValueChangedEventHandler <: windows_core.Interface<RangeBaseValueChangedEventHandler> {}
 
+@When[Windows_UI_Xaml_Controls_Primitives == "on"]
 private open class RangeBaseValueChangedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Controls_Primitives == "on"]
 private open class RangeBaseValueChangedEventHandlerInvoker <: RangeBaseValueChangedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<RangeBaseValueChangedEventArgs>): Unit {
         ()
@@ -15154,6 +15170,7 @@ private open class RangeBaseValueChangedEventHandlerInvoker <: RangeBaseValueCha
     }
 }
 
+@When[Windows_UI_Xaml_Controls_Primitives == "on"]
 private class RangeBaseValueChangedEventHandlerBox <: RangeBaseValueChangedEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<RangeBaseValueChangedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<RangeBaseValueChangedEventHandlerVtbl>
@@ -15172,6 +15189,7 @@ private class RangeBaseValueChangedEventHandlerBox <: RangeBaseValueChangedEvent
     }
 }
 
+@When[Windows_UI_Xaml_Controls_Primitives == "on"]
 func buildRangeBaseValueChangedEventHandlerBoxVtbl(): RangeBaseValueChangedEventHandlerVtbl {
     var vtbl = RangeBaseValueChangedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -15376,12 +15394,14 @@ public class ScrollEventHandler <: InterfaceWrapperBase & ComInterface & windows
 @When[Windows_UI_Xaml_Controls_Primitives == "on"]
 extend ScrollEventHandler <: windows_core.Interface<ScrollEventHandler> {}
 
+@When[Windows_UI_Xaml_Controls_Primitives == "on"]
 private open class ScrollEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Controls_Primitives == "on"]
 private open class ScrollEventHandlerInvoker <: ScrollEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<ScrollEventArgs>): Unit {
         ()
@@ -15393,6 +15413,7 @@ private open class ScrollEventHandlerInvoker <: ScrollEventHandlerInvokerErased 
     }
 }
 
+@When[Windows_UI_Xaml_Controls_Primitives == "on"]
 private class ScrollEventHandlerBox <: ScrollEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<ScrollEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<ScrollEventHandlerVtbl>
@@ -15411,6 +15432,7 @@ private class ScrollEventHandlerBox <: ScrollEventHandlerInvoker {
     }
 }
 
+@When[Windows_UI_Xaml_Controls_Primitives == "on"]
 func buildScrollEventHandlerBoxVtbl(): ScrollEventHandlerVtbl {
     var vtbl = ScrollEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()

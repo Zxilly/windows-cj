@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -331,7 +330,10 @@ extend IRadio <: windows_core.Interface<IRadio> {}
 @C
 public struct IRadioStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetRadiosAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetRadiosAsync: UIntNative = UIntNative(0)
     public var GetDeviceSelector: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var FromIdAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RequestAccessAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -403,6 +405,7 @@ public class IRadioStatics <: InterfaceWrapperBase & ComInterface & RuntimeName 
         readVtbl<IRadioStaticsVtbl>(IRadioStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetRadiosAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<Radio>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -532,6 +535,7 @@ public class Radio <: InterfaceWrapperBase & ComInterface & windows_interface.Ru
         return defaultInterface().Kind()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetRadiosAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<Radio>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<Radio>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<Radio>>>.None
         try (factory__ = windows_core.factory<Radio, IRadioStatics>().unwrap()) {

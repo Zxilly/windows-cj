@@ -216,9 +216,9 @@ extend IAppRecordingResult <: windows_core.Interface<IAppRecordingResult> {}
 @C
 public struct IAppRecordingSavedScreenshotInfoVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var File: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var File: UIntNative = UIntNative(0)
     public var MediaEncodingSubtype: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -289,7 +289,7 @@ public class IAppRecordingSavedScreenshotInfo <: InterfaceWrapperBase & ComInter
         readVtbl<IAppRecordingSavedScreenshotInfoVtbl>(IAppRecordingSavedScreenshotInfoVtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func File(): _impl_l1.StorageFile {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -640,7 +640,7 @@ public class AppRecordingSavedScreenshotInfo <: InterfaceWrapperBase & ComInterf
         }
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func File(): _impl_l1.StorageFile {
         return defaultInterface().File()
     }
@@ -798,7 +798,10 @@ public struct IAppRecordingSaveScreenshotResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Succeeded: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ExtendedError: CFunc<(CPointer<Unit>, CPointer<windows_future.HResultAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SavedScreenshotInfos: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SavedScreenshotInfos: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -883,6 +886,7 @@ public class IAppRecordingSaveScreenshotResult <: InterfaceWrapperBase & ComInte
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<windows_future.HResult>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SavedScreenshotInfos(): windows_collections.IVectorView<AppRecordingSavedScreenshotInfo> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1084,6 +1088,7 @@ public class AppRecordingSaveScreenshotResult <: InterfaceWrapperBase & ComInter
         return defaultInterface().ExtendedError()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SavedScreenshotInfos(): windows_collections.IVectorView<AppRecordingSavedScreenshotInfo> {
         return defaultInterface().SavedScreenshotInfos()
     }
@@ -1216,18 +1221,21 @@ extend AppRecordingStatus <: windows_core.HandleWinrtType<AppRecordingStatus> {
 public struct IAppRecordingManagerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var GetStatus: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var StartRecordingToFileAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var StartRecordingToFileAsync: UIntNative = UIntNative(0)
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var RecordTimeSpanToFileAsync: CFunc<(CPointer<Unit>, windows_future.DateTimeAbi, windows_future.TimeSpanAbi, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var RecordTimeSpanToFileAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedScreenshotMediaEncodingSubtypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedScreenshotMediaEncodingSubtypes: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var SaveScreenshotToFilesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, AppRecordingSaveScreenshotOptionAbi, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage != "on"]
     public var SaveScreenshotToFilesAsync: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -1305,7 +1313,7 @@ public class IAppRecordingManager <: InterfaceWrapperBase & ComInterface & Runti
         return AppRecordingStatus.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func StartRecordingToFileAsync(file: _impl_l1.StorageFile): windows_future.IAsyncOperation<AppRecordingResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1314,7 +1322,7 @@ public class IAppRecordingManager <: InterfaceWrapperBase & ComInterface & Runti
         return windows_future.IAsyncOperation<AppRecordingResult>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func RecordTimeSpanToFileAsync(startTime: windows_future.DateTime, duration: windows_future.TimeSpan, file: _impl_l1.StorageFile): windows_future.IAsyncOperation<AppRecordingResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1323,6 +1331,7 @@ public class IAppRecordingManager <: InterfaceWrapperBase & ComInterface & Runti
         return windows_future.IAsyncOperation<AppRecordingResult>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedScreenshotMediaEncodingSubtypes(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1331,7 +1340,7 @@ public class IAppRecordingManager <: InterfaceWrapperBase & ComInterface & Runti
         return windows_collections.IVectorView<windows_core.HString>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func SaveScreenshotToFilesAsync(folder: _impl_l1.StorageFolder, filenamePrefix: windows_core.HString, option: AppRecordingSaveScreenshotOption, requestedFormats: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<AppRecordingSaveScreenshotResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1417,21 +1426,22 @@ public class AppRecordingManager <: InterfaceWrapperBase & ComInterface & window
         return defaultInterface().GetStatus()
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func StartRecordingToFileAsync(file: _impl_l1.StorageFile): windows_future.IAsyncOperation<AppRecordingResult> {
         return defaultInterface().StartRecordingToFileAsync(file)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func RecordTimeSpanToFileAsync(startTime: windows_future.DateTime, duration: windows_future.TimeSpan, file: _impl_l1.StorageFile): windows_future.IAsyncOperation<AppRecordingResult> {
         return defaultInterface().RecordTimeSpanToFileAsync(startTime, duration, file)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedScreenshotMediaEncodingSubtypes(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().SupportedScreenshotMediaEncodingSubtypes()
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func SaveScreenshotToFilesAsync(folder: _impl_l1.StorageFolder, filenamePrefix: windows_core.HString, option: AppRecordingSaveScreenshotOption, requestedFormats: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<AppRecordingSaveScreenshotResult> {
         return defaultInterface().SaveScreenshotToFilesAsync(folder, filenamePrefix, option, requestedFormats)
     }

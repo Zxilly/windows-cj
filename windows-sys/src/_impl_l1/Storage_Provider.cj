@@ -71,7 +71,7 @@ public class ICachedFileUpdaterStatics <: InterfaceWrapperBase & ComInterface {
 public struct IFileUpdateRequestVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var ContentId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var File: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Status: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetStatus: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -127,7 +127,7 @@ public class IFileUpdateRequest <: InterfaceWrapperBase & ComInterface {
         return __vt.ContentId(__liveRaw, result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func File(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -281,7 +281,7 @@ public class IFileUpdateRequestedEventArgs <: InterfaceWrapperBase & ComInterfac
 @C
 public struct IStorageProviderItemPropertiesStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var SetAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -326,7 +326,7 @@ public class IStorageProviderItemPropertiesStatics <: InterfaceWrapperBase & Com
         readVtbl<IStorageProviderItemPropertiesStaticsVtbl>(IStorageProviderItemPropertiesStaticsVtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func SetAsync(item: CPointer<Unit>, itemProperties: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -338,6 +338,7 @@ public class IStorageProviderItemPropertiesStatics <: InterfaceWrapperBase & Com
 @C
 public struct IStorageProviderItemPropertySourceVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetItemProperties: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -382,6 +383,7 @@ public class IStorageProviderItemPropertySource <: InterfaceWrapperBase & ComInt
         readVtbl<IStorageProviderItemPropertySourceVtbl>(IStorageProviderItemPropertySourceVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetItemProperties(itemPath: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -395,6 +397,7 @@ public struct IStorageProviderKnownFolderSyncInfoVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var ProviderDisplayName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetProviderDisplayName: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var KnownFolderEntries: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SyncRequested: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetSyncRequested: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -453,6 +456,7 @@ public class IStorageProviderKnownFolderSyncInfo <: InterfaceWrapperBase & ComIn
         return __vt.SetProviderDisplayName(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func KnownFolderEntries(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -476,6 +480,7 @@ public class IStorageProviderKnownFolderSyncInfo <: InterfaceWrapperBase & ComIn
 @C
 public struct IStorageProviderKnownFolderSyncRequestArgsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var KnownFolders: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Storage == "on"]
     public var Source: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -522,6 +527,7 @@ public class IStorageProviderKnownFolderSyncRequestArgs <: InterfaceWrapperBase 
         readVtbl<IStorageProviderKnownFolderSyncRequestArgsVtbl>(IStorageProviderKnownFolderSyncRequestArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func KnownFolders(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -871,11 +877,11 @@ public class IStorageProviderSearchHandlerFactory <: InterfaceWrapperBase & ComI
 @C
 public struct IStorageProviderShareLinkSourceVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var CreateLinkAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var GetDefaultAccessControlStringAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var GetState: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -920,21 +926,21 @@ public class IStorageProviderShareLinkSource <: InterfaceWrapperBase & ComInterf
         readVtbl<IStorageProviderShareLinkSourceVtbl>(IStorageProviderShareLinkSourceVtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func CreateLinkAsync(storageItemList: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateLinkAsync(__liveRaw, storageItemList, result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func GetDefaultAccessControlStringAsync(storageItemList: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetDefaultAccessControlStringAsync(__liveRaw, storageItemList, result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func GetState(storageItemList: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -960,7 +966,9 @@ public struct IStorageProviderStatusUIVtbl {
     public var SetMoreInfoUI: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var ProviderPrimaryCommand: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetProviderPrimaryCommand: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ProviderSecondaryCommands: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetProviderSecondaryCommands: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1089,12 +1097,14 @@ public class IStorageProviderStatusUI <: InterfaceWrapperBase & ComInterface {
         return __vt.SetProviderPrimaryCommand(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ProviderSecondaryCommands(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ProviderSecondaryCommands(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetProviderSecondaryCommands(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1400,6 +1410,7 @@ public struct IStorageProviderSyncRootInfoVtbl {
     public var SetProtectionMode: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var AllowPinning: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var SetAllowPinning: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var StorageProviderItemPropertyDefinitions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var RecycleBinUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetRecycleBinUri: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -1618,6 +1629,7 @@ public class IStorageProviderSyncRootInfo <: InterfaceWrapperBase & ComInterface
         return __vt.SetAllowPinning(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StorageProviderItemPropertyDefinitions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1641,6 +1653,7 @@ public class IStorageProviderSyncRootInfo <: InterfaceWrapperBase & ComInterface
 @C
 public struct IStorageProviderSyncRootInfo3Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var FallbackFileTypeInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1685,6 +1698,7 @@ public class IStorageProviderSyncRootInfo3 <: InterfaceWrapperBase & ComInterfac
         readVtbl<IStorageProviderSyncRootInfo3Vtbl>(IStorageProviderSyncRootInfo3Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FallbackFileTypeInfo(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1701,6 +1715,7 @@ public struct IStorageProviderSyncRootManagerStaticsVtbl {
     @When[Windows_Storage == "on"]
     public var GetSyncRootInformationForFolder: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetSyncRootInformationForId: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetCurrentSyncRoots: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1770,6 +1785,7 @@ public class IStorageProviderSyncRootManagerStatics <: InterfaceWrapperBase & Co
         return __vt.GetSyncRootInformationForId(__liveRaw, id, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetCurrentSyncRoots(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

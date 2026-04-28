@@ -569,6 +569,7 @@ public class IAccelerometerReading <: InterfaceWrapperBase & ComInterface {
 public struct IAccelerometerReading2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var PerformanceCount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -619,6 +620,7 @@ public class IAccelerometerReading2 <: InterfaceWrapperBase & ComInterface {
         return __vt.PerformanceCount(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -948,6 +950,7 @@ public class IAltimeterReading <: InterfaceWrapperBase & ComInterface {
 public struct IAltimeterReading2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var PerformanceCount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -998,6 +1001,7 @@ public class IAltimeterReading2 <: InterfaceWrapperBase & ComInterface {
         return __vt.PerformanceCount(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1203,6 +1207,7 @@ public class IBarometerReading <: InterfaceWrapperBase & ComInterface {
 public struct IBarometerReading2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var PerformanceCount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1253,6 +1258,7 @@ public class IBarometerReading2 <: InterfaceWrapperBase & ComInterface {
         return __vt.PerformanceCount(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1586,6 +1592,7 @@ public class ICompassReading <: InterfaceWrapperBase & ComInterface {
 public struct ICompassReading2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var PerformanceCount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1636,6 +1643,7 @@ public class ICompassReading2 <: InterfaceWrapperBase & ComInterface {
         return __vt.PerformanceCount(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2059,6 +2067,7 @@ public class IGyrometerReading <: InterfaceWrapperBase & ComInterface {
 public struct IGyrometerReading2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var PerformanceCount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -2109,6 +2118,7 @@ public class IGyrometerReading2 <: InterfaceWrapperBase & ComInterface {
         return __vt.PerformanceCount(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2253,6 +2263,7 @@ public struct IHingeAngleReadingVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Timestamp: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.DateTime>) -> Int32> = { _, _ => 0 }
     public var AngleInDegrees: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -2309,6 +2320,7 @@ public class IHingeAngleReading <: InterfaceWrapperBase & ComInterface {
         return __vt.AngleInDegrees(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2321,6 +2333,7 @@ public class IHingeAngleReading <: InterfaceWrapperBase & ComInterface {
 public struct IHumanPresenceFeaturesVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var SensorId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedWakeOrLockDistancesInMillimeters: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IsWakeOnApproachSupported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var IsLockOnLeaveSupported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
@@ -2374,6 +2387,7 @@ public class IHumanPresenceFeatures <: InterfaceWrapperBase & ComInterface {
         return __vt.SensorId(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedWakeOrLockDistancesInMillimeters(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2734,6 +2748,7 @@ public class IHumanPresenceSensorReading <: InterfaceWrapperBase & ComInterface 
 @C
 public struct IHumanPresenceSensorReading2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -2778,6 +2793,7 @@ public class IHumanPresenceSensorReading2 <: InterfaceWrapperBase & ComInterface
         readVtbl<IHumanPresenceSensorReading2Vtbl>(IHumanPresenceSensorReading2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3465,6 +3481,7 @@ public class IInclinometerReading <: InterfaceWrapperBase & ComInterface {
 public struct IInclinometerReading2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var PerformanceCount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -3515,6 +3532,7 @@ public class IInclinometerReading2 <: InterfaceWrapperBase & ComInterface {
         return __vt.PerformanceCount(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3961,6 +3979,7 @@ public class ILightSensorReading <: InterfaceWrapperBase & ComInterface {
 public struct ILightSensorReading2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var PerformanceCount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -4011,6 +4030,7 @@ public class ILightSensorReading2 <: InterfaceWrapperBase & ComInterface {
         return __vt.PerformanceCount(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4503,6 +4523,7 @@ public class IMagnetometerReading <: InterfaceWrapperBase & ComInterface {
 public struct IMagnetometerReading2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var PerformanceCount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -4553,6 +4574,7 @@ public class IMagnetometerReading2 <: InterfaceWrapperBase & ComInterface {
         return __vt.PerformanceCount(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4838,6 +4860,7 @@ public class IOrientationSensorDeviceId <: InterfaceWrapperBase & ComInterface {
 public struct IOrientationSensorReading2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var PerformanceCount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -4888,6 +4911,7 @@ public class IOrientationSensorReading2 <: InterfaceWrapperBase & ComInterface {
         return __vt.PerformanceCount(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

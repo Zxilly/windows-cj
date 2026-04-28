@@ -3624,7 +3624,10 @@ extend IRadialControllerButtonClickedEventArgs2 <: windows_core.Interface<IRadia
 @C
 public struct IRadialControllerConfigurationVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SetDefaultMenuItems: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SetDefaultMenuItems: UIntNative = UIntNative(0)
     public var ResetToDefaultMenuItems: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
     public var TrySelectDefaultMenuItem: CFunc<(CPointer<Unit>, RadialControllerSystemMenuItemKindAbi, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
@@ -3695,6 +3698,7 @@ public class IRadialControllerConfiguration <: InterfaceWrapperBase & ComInterfa
         readVtbl<IRadialControllerConfigurationVtbl>(IRadialControllerConfigurationVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetDefaultMenuItems(buttons: windows_collections.IIterable<RadialControllerSystemMenuItemKind>): Unit {
         let v = vtbl()
         let hr = v.SetDefaultMenuItems(asRaw(), buttons.asRaw())

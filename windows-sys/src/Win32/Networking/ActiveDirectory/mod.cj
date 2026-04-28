@@ -5,13 +5,9 @@ import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrap
 import windows_interface as windows_interface
 import windows_polyfill.{unionReadInt64, unionReadUInt32, unionWriteInt64, unionWriteUInt32}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Security == "on"]
 import windows_sys.Win32.Security as Win32_Security
-@When[Windows_Win32_Security_Authentication_Identity == "on"]
 import windows_sys.Win32.Security.Authentication.Identity as Win32_Security_Authentication_Identity
-@When[Windows_Win32_System_Registry == "on"]
 import windows_sys.Win32.System.Registry as Win32_System_Registry
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
@@ -12518,53 +12514,231 @@ public type LPCQADDPAGESPROC = CFunc<(IntNative, CPointer<GUID>, CPointer<CQPAGE
 @When[Windows_Win32_Networking_ActiveDirectory == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 public type LPCQPAGEPROC = CFunc<(CPointer<CQPAGE>, CPointer<Unit>, UInt32, UIntNative, IntNative) -> Int32>
 
-@When[ACTIVEDS == "on"]
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_ADsBuildEnumerator == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
+    func ADsBuildEnumerator(pADsContainer: CPointer<Unit>, ppEnumVariant: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_ADsBuildEnumerator == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_ADsBuildEnumerator(pADsContainer: CPointer<Unit>, ppEnumVariant: CPointer<CPointer<Unit>>): Int32 {
+    return ADsBuildEnumerator(pADsContainer, ppEnumVariant)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_ADsBuildVarArrayInt == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func ADsBuildVarArrayInt(lpdwObjectTypes: CPointer<UInt32>, dwObjectTypes: UInt32, pVar: CPointer<Win32__impl_l2.VARIANT>): Int32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_ADsBuildVarArrayInt == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_ADsBuildVarArrayInt(lpdwObjectTypes: CPointer<UInt32>, dwObjectTypes: UInt32, pVar: CPointer<Win32__impl_l2.VARIANT>): Int32 {
+    return ADsBuildVarArrayInt(lpdwObjectTypes, dwObjectTypes, pVar)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_ADsBuildVarArrayStr == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    // param-hint: lppPathNames len=param[1]
+    func ADsBuildVarArrayStr(lppPathNames: CPointer<CPointer<UInt16>>, dwPathNames: UInt32, pVar: CPointer<Win32__impl_l2.VARIANT>): Int32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_ADsBuildVarArrayStr == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_ADsBuildVarArrayStr(lppPathNames: CPointer<CPointer<UInt16>>, dwPathNames: UInt32, pVar: CPointer<Win32__impl_l2.VARIANT>): Int32 {
+    return ADsBuildVarArrayStr(lppPathNames, dwPathNames, pVar)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_ADsDecodeBinaryData == "on"]
 foreign {
     func ADsDecodeBinaryData(szSrcData: CPointer<UInt16>, ppbDestData: CPointer<CPointer<UInt8>>, pdwDestLen: CPointer<UInt32>): Int32
-    func ADsEncodeBinaryData(pbSrcData: CPointer<UInt8>, dwSrcLen: UInt32, ppszDestData: CPointer<CPointer<UInt16>>): Int32
-    // param-hint: lpErrorBuf len=param[2]
-    // param-hint: lpNameBuf len=param[4]
-    // pinvoke-hint: SetLastError
-    func ADsGetLastError(lpError: CPointer<UInt32>, lpErrorBuf: CPointer<UInt16>, dwErrorBufLen: UInt32, lpNameBuf: CPointer<UInt16>, dwNameBufLen: UInt32): Int32
-    func ADsGetObject(lpszPathName: CPointer<UInt16>, riid: CPointer<GUID>, ppObject: CPointer<CPointer<Unit>>): Int32
-    func ADsOpenObject(lpszPathName: CPointer<UInt16>, lpszUserName: CPointer<UInt16>, lpszPassword: CPointer<UInt16>, dwReserved: UInt32, riid: CPointer<GUID>, ppObject: CPointer<CPointer<Unit>>): Int32
-    func ADsSetLastError(dwErr: UInt32, pszError: CPointer<UInt16>, pszProvider: CPointer<UInt16>): Unit
-    func AdsFreeAdsValues(pAdsValues: CPointer<ADSVALUE>, dwNumValues: UInt32): Unit
-    func AllocADsMem(cb: UInt32): CPointer<Unit>
-    func AllocADsStr(pStr: CPointer<UInt16>): CPointer<UInt16>
-    func FreeADsMem(pMem: CPointer<Unit>): Int32
-    func FreeADsStr(pStr: CPointer<UInt16>): Int32
-    func ReallocADsMem(pOldMem: CPointer<Unit>, cbOld: UInt32, cbNew: UInt32): CPointer<Unit>
-    func ReallocADsStr(ppStr: CPointer<CPointer<UInt16>>, pStr: CPointer<UInt16>): Int32
 }
 
-@When[ACTIVEDS == "on" && (Windows_Win32_Security == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on")]
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_ADsDecodeBinaryData == "on"]
+public unsafe func Windows_ADsDecodeBinaryData(szSrcData: CPointer<UInt16>, ppbDestData: CPointer<CPointer<UInt8>>, pdwDestLen: CPointer<UInt32>): Int32 {
+    return ADsDecodeBinaryData(szSrcData, ppbDestData, pdwDestLen)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_ADsEncodeBinaryData == "on"]
 foreign {
-    func BinarySDToSecurityDescriptor(pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, pVarsec: CPointer<Win32__impl_l2.VARIANT>, pszServerName: CPointer<UInt16>, userName: CPointer<UInt16>, passWord: CPointer<UInt16>, dwFlags: UInt32): Int32
-    func SecurityDescriptorToBinarySD(vVarSecDes: Win32__impl_l2.VARIANT, ppSecurityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>, pdwSDLength: CPointer<UInt32>, pszServerName: CPointer<UInt16>, userName: CPointer<UInt16>, passWord: CPointer<UInt16>, dwFlags: UInt32): Int32
+    func ADsEncodeBinaryData(pbSrcData: CPointer<UInt8>, dwSrcLen: UInt32, ppszDestData: CPointer<CPointer<UInt16>>): Int32
 }
 
-@When[ACTIVEDS == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on")]
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_ADsEncodeBinaryData == "on"]
+public unsafe func Windows_ADsEncodeBinaryData(pbSrcData: CPointer<UInt8>, dwSrcLen: UInt32, ppszDestData: CPointer<CPointer<UInt16>>): Int32 {
+    return ADsEncodeBinaryData(pbSrcData, dwSrcLen, ppszDestData)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_ADsEnumerateNext == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on"]
 foreign {
     func ADsEnumerateNext(pEnumVariant: CPointer<Unit>, cElements: UInt32, pvar: CPointer<Win32__impl_l2.VARIANT>, pcElementsFetched: CPointer<UInt32>): Int32
 }
 
-@When[ACTIVEDS == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on")]
-foreign {
-    func ADsBuildVarArrayInt(lpdwObjectTypes: CPointer<UInt32>, dwObjectTypes: UInt32, pVar: CPointer<Win32__impl_l2.VARIANT>): Int32
-    // param-hint: lppPathNames len=param[1]
-    func ADsBuildVarArrayStr(lppPathNames: CPointer<CPointer<UInt16>>, dwPathNames: UInt32, pVar: CPointer<Win32__impl_l2.VARIANT>): Int32
-    func AdsTypeToPropVariant(pAdsValues: CPointer<ADSVALUE>, dwNumValues: UInt32, pVariant: CPointer<Win32__impl_l2.VARIANT>): Int32
-    func PropVariantToAdsType(pVariant: CPointer<Win32__impl_l2.VARIANT>, dwNumVariant: UInt32, ppAdsValues: CPointer<CPointer<ADSVALUE>>, pdwNumValues: CPointer<UInt32>): Int32
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_ADsEnumerateNext == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_ADsEnumerateNext(pEnumVariant: CPointer<Unit>, cElements: UInt32, pvar: CPointer<Win32__impl_l2.VARIANT>, pcElementsFetched: CPointer<UInt32>): Int32 {
+    return ADsEnumerateNext(pEnumVariant, cElements, pvar, pcElementsFetched)
 }
 
-@When[ACTIVEDS == "on" && Windows_Win32_System_Ole == "on"]
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_ADsFreeEnumerator == "on" && Windows_Win32_System_Ole == "on"]
 foreign {
-    func ADsBuildEnumerator(pADsContainer: CPointer<Unit>, ppEnumVariant: CPointer<CPointer<Unit>>): Int32
     func ADsFreeEnumerator(pEnumVariant: CPointer<Unit>): Int32
 }
 
-@When[DSPARSE == "on"]
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_ADsFreeEnumerator == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_ADsFreeEnumerator(pEnumVariant: CPointer<Unit>): Int32 {
+    return ADsFreeEnumerator(pEnumVariant)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_ADsGetLastError == "on"]
+foreign {
+    // param-hint: lpErrorBuf len=param[2]
+    // param-hint: lpNameBuf len=param[4]
+    // pinvoke-hint: SetLastError
+    func ADsGetLastError(lpError: CPointer<UInt32>, lpErrorBuf: CPointer<UInt16>, dwErrorBufLen: UInt32, lpNameBuf: CPointer<UInt16>, dwNameBufLen: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_ADsGetLastError == "on"]
+public unsafe func Windows_ADsGetLastError(lpError: CPointer<UInt32>, lpErrorBuf: CPointer<UInt16>, dwErrorBufLen: UInt32, lpNameBuf: CPointer<UInt16>, dwNameBufLen: UInt32): Int32 {
+    return ADsGetLastError(lpError, lpErrorBuf, dwErrorBufLen, lpNameBuf, dwNameBufLen)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_ADsGetObject == "on"]
+foreign {
+    func ADsGetObject(lpszPathName: CPointer<UInt16>, riid: CPointer<GUID>, ppObject: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_ADsGetObject == "on"]
+public unsafe func Windows_ADsGetObject(lpszPathName: CPointer<UInt16>, riid: CPointer<GUID>, ppObject: CPointer<CPointer<Unit>>): Int32 {
+    return ADsGetObject(lpszPathName, riid, ppObject)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_ADsOpenObject == "on"]
+foreign {
+    func ADsOpenObject(lpszPathName: CPointer<UInt16>, lpszUserName: CPointer<UInt16>, lpszPassword: CPointer<UInt16>, dwReserved: UInt32, riid: CPointer<GUID>, ppObject: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_ADsOpenObject == "on"]
+public unsafe func Windows_ADsOpenObject(lpszPathName: CPointer<UInt16>, lpszUserName: CPointer<UInt16>, lpszPassword: CPointer<UInt16>, dwReserved: UInt32, riid: CPointer<GUID>, ppObject: CPointer<CPointer<Unit>>): Int32 {
+    return ADsOpenObject(lpszPathName, lpszUserName, lpszPassword, dwReserved, riid, ppObject)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_ADsSetLastError == "on"]
+foreign {
+    func ADsSetLastError(dwErr: UInt32, pszError: CPointer<UInt16>, pszProvider: CPointer<UInt16>): Unit
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_ADsSetLastError == "on"]
+public unsafe func Windows_ADsSetLastError(dwErr: UInt32, pszError: CPointer<UInt16>, pszProvider: CPointer<UInt16>): Unit {
+    ADsSetLastError(dwErr, pszError, pszProvider)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_AdsFreeAdsValues == "on"]
+foreign {
+    func AdsFreeAdsValues(pAdsValues: CPointer<ADSVALUE>, dwNumValues: UInt32): Unit
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_AdsFreeAdsValues == "on"]
+public unsafe func Windows_AdsFreeAdsValues(pAdsValues: CPointer<ADSVALUE>, dwNumValues: UInt32): Unit {
+    AdsFreeAdsValues(pAdsValues, dwNumValues)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_AdsTypeToPropVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func AdsTypeToPropVariant(pAdsValues: CPointer<ADSVALUE>, dwNumValues: UInt32, pVariant: CPointer<Win32__impl_l2.VARIANT>): Int32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_AdsTypeToPropVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_AdsTypeToPropVariant(pAdsValues: CPointer<ADSVALUE>, dwNumValues: UInt32, pVariant: CPointer<Win32__impl_l2.VARIANT>): Int32 {
+    return AdsTypeToPropVariant(pAdsValues, dwNumValues, pVariant)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_AllocADsMem == "on"]
+foreign {
+    func AllocADsMem(cb: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_AllocADsMem == "on"]
+public unsafe func Windows_AllocADsMem(cb: UInt32): CPointer<Unit> {
+    return AllocADsMem(cb)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_AllocADsStr == "on"]
+foreign {
+    func AllocADsStr(pStr: CPointer<UInt16>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_AllocADsStr == "on"]
+public unsafe func Windows_AllocADsStr(pStr: CPointer<UInt16>): CPointer<UInt16> {
+    return AllocADsStr(pStr)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_BinarySDToSecurityDescriptor == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func BinarySDToSecurityDescriptor(pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, pVarsec: CPointer<Win32__impl_l2.VARIANT>, pszServerName: CPointer<UInt16>, userName: CPointer<UInt16>, passWord: CPointer<UInt16>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_BinarySDToSecurityDescriptor == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_BinarySDToSecurityDescriptor(pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, pVarsec: CPointer<Win32__impl_l2.VARIANT>, pszServerName: CPointer<UInt16>, userName: CPointer<UInt16>, passWord: CPointer<UInt16>, dwFlags: UInt32): Int32 {
+    return BinarySDToSecurityDescriptor(pSecurityDescriptor, pVarsec, pszServerName, userName, passWord, dwFlags)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_FreeADsMem == "on"]
+foreign {
+    func FreeADsMem(pMem: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_FreeADsMem == "on"]
+public unsafe func Windows_FreeADsMem(pMem: CPointer<Unit>): Int32 {
+    return FreeADsMem(pMem)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_FreeADsStr == "on"]
+foreign {
+    func FreeADsStr(pStr: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_FreeADsStr == "on"]
+public unsafe func Windows_FreeADsStr(pStr: CPointer<UInt16>): Int32 {
+    return FreeADsStr(pStr)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_PropVariantToAdsType == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantToAdsType(pVariant: CPointer<Win32__impl_l2.VARIANT>, dwNumVariant: UInt32, ppAdsValues: CPointer<CPointer<ADSVALUE>>, pdwNumValues: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_PropVariantToAdsType == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToAdsType(pVariant: CPointer<Win32__impl_l2.VARIANT>, dwNumVariant: UInt32, ppAdsValues: CPointer<CPointer<ADSVALUE>>, pdwNumValues: CPointer<UInt32>): Int32 {
+    return PropVariantToAdsType(pVariant, dwNumVariant, ppAdsValues, pdwNumValues)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_ReallocADsMem == "on"]
+foreign {
+    func ReallocADsMem(pOldMem: CPointer<Unit>, cbOld: UInt32, cbNew: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_ReallocADsMem == "on"]
+public unsafe func Windows_ReallocADsMem(pOldMem: CPointer<Unit>, cbOld: UInt32, cbNew: UInt32): CPointer<Unit> {
+    return ReallocADsMem(pOldMem, cbOld, cbNew)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_ReallocADsStr == "on"]
+foreign {
+    func ReallocADsStr(ppStr: CPointer<CPointer<UInt16>>, pStr: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_ReallocADsStr == "on"]
+public unsafe func Windows_ReallocADsStr(ppStr: CPointer<CPointer<UInt16>>, pStr: CPointer<UInt16>): Int32 {
+    return ReallocADsStr(ppStr, pStr)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_SecurityDescriptorToBinarySD == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func SecurityDescriptorToBinarySD(vVarSecDes: Win32__impl_l2.VARIANT, ppSecurityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>, pdwSDLength: CPointer<UInt32>, pszServerName: CPointer<UInt16>, userName: CPointer<UInt16>, passWord: CPointer<UInt16>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && ACTIVEDS == "on" && Windows_Win32_Networking_ActiveDirectory_SecurityDescriptorToBinarySD == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_SecurityDescriptorToBinarySD(vVarSecDes: Win32__impl_l2.VARIANT, ppSecurityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>, pdwSDLength: CPointer<UInt32>, pszServerName: CPointer<UInt16>, userName: CPointer<UInt16>, passWord: CPointer<UInt16>, dwFlags: UInt32): Int32 {
+    return SecurityDescriptorToBinarySD(vVarSecDes, ppSecurityDescriptor, pdwSDLength, pszServerName, userName, passWord, dwFlags)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsCrackSpn2A == "on"]
 foreign {
     // param-hint: pszSpn len=param[1]
     // param-hint: pcServiceClass optional
@@ -12575,6 +12749,15 @@ foreign {
     // param-hint: InstanceName len=param[6] optional
     // param-hint: pInstancePort optional
     func DsCrackSpn2A(pszSpn: CPointer<UInt8>, cSpn: UInt32, pcServiceClass: CPointer<UInt32>, ServiceClass: CPointer<UInt8>, pcServiceName: CPointer<UInt32>, ServiceName: CPointer<UInt8>, pcInstanceName: CPointer<UInt32>, InstanceName: CPointer<UInt8>, pInstancePort: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsCrackSpn2A == "on"]
+public unsafe func Windows_DsCrackSpn2A(pszSpn: CPointer<UInt8>, cSpn: UInt32, pcServiceClass: CPointer<UInt32>, ServiceClass: CPointer<UInt8>, pcServiceName: CPointer<UInt32>, ServiceName: CPointer<UInt8>, pcInstanceName: CPointer<UInt32>, InstanceName: CPointer<UInt8>, pInstancePort: CPointer<UInt16>): UInt32 {
+    return DsCrackSpn2A(pszSpn, cSpn, pcServiceClass, ServiceClass, pcServiceName, ServiceName, pcInstanceName, InstanceName, pInstancePort)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsCrackSpn2W == "on"]
+foreign {
     // param-hint: pszSpn len=param[1]
     // param-hint: pcServiceClass optional
     // param-hint: ServiceClass len=param[2] optional
@@ -12584,17 +12767,44 @@ foreign {
     // param-hint: InstanceName len=param[6] optional
     // param-hint: pInstancePort optional
     func DsCrackSpn2W(pszSpn: CPointer<UInt16>, cSpn: UInt32, pcServiceClass: CPointer<UInt32>, ServiceClass: CPointer<UInt16>, pcServiceName: CPointer<UInt32>, ServiceName: CPointer<UInt16>, pcInstanceName: CPointer<UInt32>, InstanceName: CPointer<UInt16>, pInstancePort: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsCrackSpn2W == "on"]
+public unsafe func Windows_DsCrackSpn2W(pszSpn: CPointer<UInt16>, cSpn: UInt32, pcServiceClass: CPointer<UInt32>, ServiceClass: CPointer<UInt16>, pcServiceName: CPointer<UInt32>, ServiceName: CPointer<UInt16>, pcInstanceName: CPointer<UInt32>, InstanceName: CPointer<UInt16>, pInstancePort: CPointer<UInt16>): UInt32 {
+    return DsCrackSpn2W(pszSpn, cSpn, pcServiceClass, ServiceClass, pcServiceName, ServiceName, pcInstanceName, InstanceName, pInstancePort)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsCrackSpn3W == "on"]
+foreign {
     // param-hint: HostName len=param[2]
     // param-hint: InstanceName len=param[4]
     // param-hint: DomainName len=param[7]
     // param-hint: RealmName len=param[9]
     func DsCrackSpn3W(pszSpn: CPointer<UInt16>, cSpn: UInt32, pcHostName: CPointer<UInt32>, HostName: CPointer<UInt16>, pcInstanceName: CPointer<UInt32>, InstanceName: CPointer<UInt16>, pPortNumber: CPointer<UInt16>, pcDomainName: CPointer<UInt32>, DomainName: CPointer<UInt16>, pcRealmName: CPointer<UInt32>, RealmName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsCrackSpn3W == "on"]
+public unsafe func Windows_DsCrackSpn3W(pszSpn: CPointer<UInt16>, cSpn: UInt32, pcHostName: CPointer<UInt32>, HostName: CPointer<UInt16>, pcInstanceName: CPointer<UInt32>, InstanceName: CPointer<UInt16>, pPortNumber: CPointer<UInt16>, pcDomainName: CPointer<UInt32>, DomainName: CPointer<UInt16>, pcRealmName: CPointer<UInt32>, RealmName: CPointer<UInt16>): UInt32 {
+    return DsCrackSpn3W(pszSpn, cSpn, pcHostName, HostName, pcInstanceName, InstanceName, pPortNumber, pcDomainName, DomainName, pcRealmName, RealmName)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsCrackSpn4W == "on"]
+foreign {
     // param-hint: HostName len=param[2]
     // param-hint: InstanceName len=param[4]
     // param-hint: PortName len=param[6]
     // param-hint: DomainName len=param[8]
     // param-hint: RealmName len=param[10]
     func DsCrackSpn4W(pszSpn: CPointer<UInt16>, cSpn: UInt32, pcHostName: CPointer<UInt32>, HostName: CPointer<UInt16>, pcInstanceName: CPointer<UInt32>, InstanceName: CPointer<UInt16>, pcPortName: CPointer<UInt32>, PortName: CPointer<UInt16>, pcDomainName: CPointer<UInt32>, DomainName: CPointer<UInt16>, pcRealmName: CPointer<UInt32>, RealmName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsCrackSpn4W == "on"]
+public unsafe func Windows_DsCrackSpn4W(pszSpn: CPointer<UInt16>, cSpn: UInt32, pcHostName: CPointer<UInt32>, HostName: CPointer<UInt16>, pcInstanceName: CPointer<UInt32>, InstanceName: CPointer<UInt16>, pcPortName: CPointer<UInt32>, PortName: CPointer<UInt16>, pcDomainName: CPointer<UInt32>, DomainName: CPointer<UInt16>, pcRealmName: CPointer<UInt32>, RealmName: CPointer<UInt16>): UInt32 {
+    return DsCrackSpn4W(pszSpn, cSpn, pcHostName, HostName, pcInstanceName, InstanceName, pcPortName, PortName, pcDomainName, DomainName, pcRealmName, RealmName)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsCrackSpnA == "on"]
+foreign {
     // param-hint: pcServiceClass optional
     // param-hint: ServiceClass len=param[1] optional
     // param-hint: pcServiceName optional
@@ -12603,6 +12813,15 @@ foreign {
     // param-hint: InstanceName len=param[5] optional
     // param-hint: pInstancePort optional
     func DsCrackSpnA(pszSpn: CPointer<UInt8>, pcServiceClass: CPointer<UInt32>, ServiceClass: CPointer<UInt8>, pcServiceName: CPointer<UInt32>, ServiceName: CPointer<UInt8>, pcInstanceName: CPointer<UInt32>, InstanceName: CPointer<UInt8>, pInstancePort: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsCrackSpnA == "on"]
+public unsafe func Windows_DsCrackSpnA(pszSpn: CPointer<UInt8>, pcServiceClass: CPointer<UInt32>, ServiceClass: CPointer<UInt8>, pcServiceName: CPointer<UInt32>, ServiceName: CPointer<UInt8>, pcInstanceName: CPointer<UInt32>, InstanceName: CPointer<UInt8>, pInstancePort: CPointer<UInt16>): UInt32 {
+    return DsCrackSpnA(pszSpn, pcServiceClass, ServiceClass, pcServiceName, ServiceName, pcInstanceName, InstanceName, pInstancePort)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsCrackSpnW == "on"]
+foreign {
     // param-hint: pcServiceClass optional
     // param-hint: ServiceClass len=param[1] optional
     // param-hint: pcServiceName optional
@@ -12611,143 +12830,501 @@ foreign {
     // param-hint: InstanceName len=param[5] optional
     // param-hint: pInstancePort optional
     func DsCrackSpnW(pszSpn: CPointer<UInt16>, pcServiceClass: CPointer<UInt32>, ServiceClass: CPointer<UInt16>, pcServiceName: CPointer<UInt32>, ServiceName: CPointer<UInt16>, pcInstanceName: CPointer<UInt32>, InstanceName: CPointer<UInt16>, pInstancePort: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsCrackSpnW == "on"]
+public unsafe func Windows_DsCrackSpnW(pszSpn: CPointer<UInt16>, pcServiceClass: CPointer<UInt32>, ServiceClass: CPointer<UInt16>, pcServiceName: CPointer<UInt32>, ServiceName: CPointer<UInt16>, pcInstanceName: CPointer<UInt32>, InstanceName: CPointer<UInt16>, pInstancePort: CPointer<UInt16>): UInt32 {
+    return DsCrackSpnW(pszSpn, pcServiceClass, ServiceClass, pcServiceName, ServiceName, pcInstanceName, InstanceName, pInstancePort)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsCrackUnquotedMangledRdnA == "on"]
+foreign {
     // param-hint: pszRDN len=param[1]
     // param-hint: pGuid optional
     // param-hint: peDsMangleFor optional
     func DsCrackUnquotedMangledRdnA(pszRDN: CPointer<UInt8>, cchRDN: UInt32, pGuid: CPointer<GUID>, peDsMangleFor: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsCrackUnquotedMangledRdnA == "on"]
+public unsafe func Windows_DsCrackUnquotedMangledRdnA(pszRDN: CPointer<UInt8>, cchRDN: UInt32, pGuid: CPointer<GUID>, peDsMangleFor: CPointer<Int32>): Int32 {
+    return DsCrackUnquotedMangledRdnA(pszRDN, cchRDN, pGuid, peDsMangleFor)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsCrackUnquotedMangledRdnW == "on"]
+foreign {
     // param-hint: pszRDN len=param[1]
     // param-hint: pGuid optional
     // param-hint: peDsMangleFor optional
     func DsCrackUnquotedMangledRdnW(pszRDN: CPointer<UInt16>, cchRDN: UInt32, pGuid: CPointer<GUID>, peDsMangleFor: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsCrackUnquotedMangledRdnW == "on"]
+public unsafe func Windows_DsCrackUnquotedMangledRdnW(pszRDN: CPointer<UInt16>, cchRDN: UInt32, pGuid: CPointer<GUID>, peDsMangleFor: CPointer<Int32>): Int32 {
+    return DsCrackUnquotedMangledRdnW(pszRDN, cchRDN, pGuid, peDsMangleFor)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetRdnW == "on"]
+foreign {
     // param-hint: ppDN len=param[1]
     func DsGetRdnW(ppDN: CPointer<CPointer<UInt16>>, pcDN: CPointer<UInt32>, ppKey: CPointer<CPointer<UInt16>>, pcKey: CPointer<UInt32>, ppVal: CPointer<CPointer<UInt16>>, pcVal: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetRdnW == "on"]
+public unsafe func Windows_DsGetRdnW(ppDN: CPointer<CPointer<UInt16>>, pcDN: CPointer<UInt32>, ppKey: CPointer<CPointer<UInt16>>, pcKey: CPointer<UInt32>, ppVal: CPointer<CPointer<UInt16>>, pcVal: CPointer<UInt32>): UInt32 {
+    return DsGetRdnW(ppDN, pcDN, ppKey, pcKey, ppVal, pcVal)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsIsMangledDnA == "on"]
+foreign {
     func DsIsMangledDnA(pszDn: CPointer<UInt8>, eDsMangleFor: Int32): Int32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsIsMangledDnA == "on"]
+public unsafe func Windows_DsIsMangledDnA(pszDn: CPointer<UInt8>, eDsMangleFor: Int32): Int32 {
+    return DsIsMangledDnA(pszDn, eDsMangleFor)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsIsMangledDnW == "on"]
+foreign {
     func DsIsMangledDnW(pszDn: CPointer<UInt16>, eDsMangleFor: Int32): Int32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsIsMangledDnW == "on"]
+public unsafe func Windows_DsIsMangledDnW(pszDn: CPointer<UInt16>, eDsMangleFor: Int32): Int32 {
+    return DsIsMangledDnW(pszDn, eDsMangleFor)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsIsMangledRdnValueA == "on"]
+foreign {
     // param-hint: pszRdn len=param[1]
     func DsIsMangledRdnValueA(pszRdn: CPointer<UInt8>, cRdn: UInt32, eDsMangleForDesired: Int32): Int32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsIsMangledRdnValueA == "on"]
+public unsafe func Windows_DsIsMangledRdnValueA(pszRdn: CPointer<UInt8>, cRdn: UInt32, eDsMangleForDesired: Int32): Int32 {
+    return DsIsMangledRdnValueA(pszRdn, cRdn, eDsMangleForDesired)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsIsMangledRdnValueW == "on"]
+foreign {
     // param-hint: pszRdn len=param[1]
     func DsIsMangledRdnValueW(pszRdn: CPointer<UInt16>, cRdn: UInt32, eDsMangleForDesired: Int32): Int32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsIsMangledRdnValueW == "on"]
+public unsafe func Windows_DsIsMangledRdnValueW(pszRdn: CPointer<UInt16>, cRdn: UInt32, eDsMangleForDesired: Int32): Int32 {
+    return DsIsMangledRdnValueW(pszRdn, cRdn, eDsMangleForDesired)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsMakeSpnA == "on"]
+foreign {
     // param-hint: InstanceName optional
     // param-hint: Referrer optional
     // param-hint: pszSpn len=param[5] optional
     func DsMakeSpnA(ServiceClass: CPointer<UInt8>, ServiceName: CPointer<UInt8>, InstanceName: CPointer<UInt8>, InstancePort: UInt16, Referrer: CPointer<UInt8>, pcSpnLength: CPointer<UInt32>, pszSpn: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsMakeSpnA == "on"]
+public unsafe func Windows_DsMakeSpnA(ServiceClass: CPointer<UInt8>, ServiceName: CPointer<UInt8>, InstanceName: CPointer<UInt8>, InstancePort: UInt16, Referrer: CPointer<UInt8>, pcSpnLength: CPointer<UInt32>, pszSpn: CPointer<UInt8>): UInt32 {
+    return DsMakeSpnA(ServiceClass, ServiceName, InstanceName, InstancePort, Referrer, pcSpnLength, pszSpn)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsMakeSpnW == "on"]
+foreign {
     // param-hint: InstanceName optional
     // param-hint: Referrer optional
     // param-hint: pszSpn len=param[5] optional
     func DsMakeSpnW(ServiceClass: CPointer<UInt16>, ServiceName: CPointer<UInt16>, InstanceName: CPointer<UInt16>, InstancePort: UInt16, Referrer: CPointer<UInt16>, pcSpnLength: CPointer<UInt32>, pszSpn: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsMakeSpnW == "on"]
+public unsafe func Windows_DsMakeSpnW(ServiceClass: CPointer<UInt16>, ServiceName: CPointer<UInt16>, InstanceName: CPointer<UInt16>, InstancePort: UInt16, Referrer: CPointer<UInt16>, pcSpnLength: CPointer<UInt32>, pszSpn: CPointer<UInt16>): UInt32 {
+    return DsMakeSpnW(ServiceClass, ServiceName, InstanceName, InstancePort, Referrer, pcSpnLength, pszSpn)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsQuoteRdnValueA == "on"]
+foreign {
     // param-hint: psUnquotedRdnValue len=param[0]
     // param-hint: psQuotedRdnValue len=param[2]
     func DsQuoteRdnValueA(cUnquotedRdnValueLength: UInt32, psUnquotedRdnValue: CPointer<UInt8>, pcQuotedRdnValueLength: CPointer<UInt32>, psQuotedRdnValue: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsQuoteRdnValueA == "on"]
+public unsafe func Windows_DsQuoteRdnValueA(cUnquotedRdnValueLength: UInt32, psUnquotedRdnValue: CPointer<UInt8>, pcQuotedRdnValueLength: CPointer<UInt32>, psQuotedRdnValue: CPointer<UInt8>): UInt32 {
+    return DsQuoteRdnValueA(cUnquotedRdnValueLength, psUnquotedRdnValue, pcQuotedRdnValueLength, psQuotedRdnValue)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsQuoteRdnValueW == "on"]
+foreign {
     // param-hint: psUnquotedRdnValue len=param[0]
     // param-hint: psQuotedRdnValue len=param[2]
     func DsQuoteRdnValueW(cUnquotedRdnValueLength: UInt32, psUnquotedRdnValue: CPointer<UInt16>, pcQuotedRdnValueLength: CPointer<UInt32>, psQuotedRdnValue: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsQuoteRdnValueW == "on"]
+public unsafe func Windows_DsQuoteRdnValueW(cUnquotedRdnValueLength: UInt32, psUnquotedRdnValue: CPointer<UInt16>, pcQuotedRdnValueLength: CPointer<UInt32>, psQuotedRdnValue: CPointer<UInt16>): UInt32 {
+    return DsQuoteRdnValueW(cUnquotedRdnValueLength, psUnquotedRdnValue, pcQuotedRdnValueLength, psQuotedRdnValue)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsUnquoteRdnValueA == "on"]
+foreign {
     // param-hint: psQuotedRdnValue len=param[0]
     // param-hint: psUnquotedRdnValue len=param[2]
     func DsUnquoteRdnValueA(cQuotedRdnValueLength: UInt32, psQuotedRdnValue: CPointer<UInt8>, pcUnquotedRdnValueLength: CPointer<UInt32>, psUnquotedRdnValue: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsUnquoteRdnValueA == "on"]
+public unsafe func Windows_DsUnquoteRdnValueA(cQuotedRdnValueLength: UInt32, psQuotedRdnValue: CPointer<UInt8>, pcUnquotedRdnValueLength: CPointer<UInt32>, psUnquotedRdnValue: CPointer<UInt8>): UInt32 {
+    return DsUnquoteRdnValueA(cQuotedRdnValueLength, psQuotedRdnValue, pcUnquotedRdnValueLength, psUnquotedRdnValue)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsUnquoteRdnValueW == "on"]
+foreign {
     // param-hint: psQuotedRdnValue len=param[0]
     // param-hint: psUnquotedRdnValue len=param[2]
     func DsUnquoteRdnValueW(cQuotedRdnValueLength: UInt32, psQuotedRdnValue: CPointer<UInt16>, pcUnquotedRdnValueLength: CPointer<UInt32>, psUnquotedRdnValue: CPointer<UInt16>): UInt32
 }
 
-@When[NETAPI32 == "on"]
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPARSE == "on" && Windows_Win32_Networking_ActiveDirectory_DsUnquoteRdnValueW == "on"]
+public unsafe func Windows_DsUnquoteRdnValueW(cQuotedRdnValueLength: UInt32, psQuotedRdnValue: CPointer<UInt16>, pcUnquotedRdnValueLength: CPointer<UInt32>, psUnquotedRdnValue: CPointer<UInt16>): UInt32 {
+    return DsUnquoteRdnValueW(cQuotedRdnValueLength, psQuotedRdnValue, pcUnquotedRdnValueLength, psUnquotedRdnValue)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsAddressToSiteNamesA == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: ComputerName optional
+    // param-hint: SocketAddresses len=param[1]
+    func DsAddressToSiteNamesA(ComputerName: CPointer<UInt8>, EntryCount: UInt32, SocketAddresses: CPointer<Win32__impl_l1.SOCKET_ADDRESS>, SiteNames: CPointer<CPointer<CPointer<UInt8>>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsAddressToSiteNamesA == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_DsAddressToSiteNamesA(ComputerName: CPointer<UInt8>, EntryCount: UInt32, SocketAddresses: CPointer<Win32__impl_l1.SOCKET_ADDRESS>, SiteNames: CPointer<CPointer<CPointer<UInt8>>>): UInt32 {
+    return DsAddressToSiteNamesA(ComputerName, EntryCount, SocketAddresses, SiteNames)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsAddressToSiteNamesExA == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: ComputerName optional
+    // param-hint: SocketAddresses len=param[1]
+    func DsAddressToSiteNamesExA(ComputerName: CPointer<UInt8>, EntryCount: UInt32, SocketAddresses: CPointer<Win32__impl_l1.SOCKET_ADDRESS>, SiteNames: CPointer<CPointer<CPointer<UInt8>>>, SubnetNames: CPointer<CPointer<CPointer<UInt8>>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsAddressToSiteNamesExA == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_DsAddressToSiteNamesExA(ComputerName: CPointer<UInt8>, EntryCount: UInt32, SocketAddresses: CPointer<Win32__impl_l1.SOCKET_ADDRESS>, SiteNames: CPointer<CPointer<CPointer<UInt8>>>, SubnetNames: CPointer<CPointer<CPointer<UInt8>>>): UInt32 {
+    return DsAddressToSiteNamesExA(ComputerName, EntryCount, SocketAddresses, SiteNames, SubnetNames)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsAddressToSiteNamesExW == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: ComputerName optional
+    // param-hint: SocketAddresses len=param[1]
+    func DsAddressToSiteNamesExW(ComputerName: CPointer<UInt16>, EntryCount: UInt32, SocketAddresses: CPointer<Win32__impl_l1.SOCKET_ADDRESS>, SiteNames: CPointer<CPointer<CPointer<UInt16>>>, SubnetNames: CPointer<CPointer<CPointer<UInt16>>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsAddressToSiteNamesExW == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_DsAddressToSiteNamesExW(ComputerName: CPointer<UInt16>, EntryCount: UInt32, SocketAddresses: CPointer<Win32__impl_l1.SOCKET_ADDRESS>, SiteNames: CPointer<CPointer<CPointer<UInt16>>>, SubnetNames: CPointer<CPointer<CPointer<UInt16>>>): UInt32 {
+    return DsAddressToSiteNamesExW(ComputerName, EntryCount, SocketAddresses, SiteNames, SubnetNames)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsAddressToSiteNamesW == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: ComputerName optional
+    // param-hint: SocketAddresses len=param[1]
+    func DsAddressToSiteNamesW(ComputerName: CPointer<UInt16>, EntryCount: UInt32, SocketAddresses: CPointer<Win32__impl_l1.SOCKET_ADDRESS>, SiteNames: CPointer<CPointer<CPointer<UInt16>>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsAddressToSiteNamesW == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_DsAddressToSiteNamesW(ComputerName: CPointer<UInt16>, EntryCount: UInt32, SocketAddresses: CPointer<Win32__impl_l1.SOCKET_ADDRESS>, SiteNames: CPointer<CPointer<CPointer<UInt16>>>): UInt32 {
+    return DsAddressToSiteNamesW(ComputerName, EntryCount, SocketAddresses, SiteNames)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsDeregisterDnsHostRecordsA == "on"]
 foreign {
     // param-hint: ServerName optional
     // param-hint: DnsDomainName optional
     // param-hint: DomainGuid optional
     // param-hint: DsaGuid optional
     func DsDeregisterDnsHostRecordsA(ServerName: CPointer<UInt8>, DnsDomainName: CPointer<UInt8>, DomainGuid: CPointer<GUID>, DsaGuid: CPointer<GUID>, DnsHostName: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsDeregisterDnsHostRecordsA == "on"]
+public unsafe func Windows_DsDeregisterDnsHostRecordsA(ServerName: CPointer<UInt8>, DnsDomainName: CPointer<UInt8>, DomainGuid: CPointer<GUID>, DsaGuid: CPointer<GUID>, DnsHostName: CPointer<UInt8>): UInt32 {
+    return DsDeregisterDnsHostRecordsA(ServerName, DnsDomainName, DomainGuid, DsaGuid, DnsHostName)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsDeregisterDnsHostRecordsW == "on"]
+foreign {
     // param-hint: ServerName optional
     // param-hint: DnsDomainName optional
     // param-hint: DomainGuid optional
     // param-hint: DsaGuid optional
     func DsDeregisterDnsHostRecordsW(ServerName: CPointer<UInt16>, DnsDomainName: CPointer<UInt16>, DomainGuid: CPointer<GUID>, DsaGuid: CPointer<GUID>, DnsHostName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsDeregisterDnsHostRecordsW == "on"]
+public unsafe func Windows_DsDeregisterDnsHostRecordsW(ServerName: CPointer<UInt16>, DnsDomainName: CPointer<UInt16>, DomainGuid: CPointer<GUID>, DsaGuid: CPointer<GUID>, DnsHostName: CPointer<UInt16>): UInt32 {
+    return DsDeregisterDnsHostRecordsW(ServerName, DnsDomainName, DomainGuid, DsaGuid, DnsHostName)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsEnumerateDomainTrustsA == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: ServerName optional
+    func DsEnumerateDomainTrustsA(ServerName: CPointer<UInt8>, Flags: UInt32, Domains: CPointer<CPointer<DS_DOMAIN_TRUSTSA>>, DomainCount: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsEnumerateDomainTrustsA == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_DsEnumerateDomainTrustsA(ServerName: CPointer<UInt8>, Flags: UInt32, Domains: CPointer<CPointer<DS_DOMAIN_TRUSTSA>>, DomainCount: CPointer<UInt32>): UInt32 {
+    return DsEnumerateDomainTrustsA(ServerName, Flags, Domains, DomainCount)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsEnumerateDomainTrustsW == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: ServerName optional
+    func DsEnumerateDomainTrustsW(ServerName: CPointer<UInt16>, Flags: UInt32, Domains: CPointer<CPointer<DS_DOMAIN_TRUSTSW>>, DomainCount: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsEnumerateDomainTrustsW == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_DsEnumerateDomainTrustsW(ServerName: CPointer<UInt16>, Flags: UInt32, Domains: CPointer<CPointer<DS_DOMAIN_TRUSTSW>>, DomainCount: CPointer<UInt32>): UInt32 {
+    return DsEnumerateDomainTrustsW(ServerName, Flags, Domains, DomainCount)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetDcCloseW == "on"]
+foreign {
     func DsGetDcCloseW(GetDcContextHandle: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetDcCloseW == "on"]
+public unsafe func Windows_DsGetDcCloseW(GetDcContextHandle: CPointer<Unit>): Unit {
+    DsGetDcCloseW(GetDcContextHandle)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetDcNameA == "on"]
+foreign {
     // param-hint: ComputerName optional
     // param-hint: DomainName optional
     // param-hint: DomainGuid optional
     // param-hint: SiteName optional
     func DsGetDcNameA(ComputerName: CPointer<UInt8>, DomainName: CPointer<UInt8>, DomainGuid: CPointer<GUID>, SiteName: CPointer<UInt8>, Flags: UInt32, DomainControllerInfo: CPointer<CPointer<DOMAIN_CONTROLLER_INFOA>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetDcNameA == "on"]
+public unsafe func Windows_DsGetDcNameA(ComputerName: CPointer<UInt8>, DomainName: CPointer<UInt8>, DomainGuid: CPointer<GUID>, SiteName: CPointer<UInt8>, Flags: UInt32, DomainControllerInfo: CPointer<CPointer<DOMAIN_CONTROLLER_INFOA>>): UInt32 {
+    return DsGetDcNameA(ComputerName, DomainName, DomainGuid, SiteName, Flags, DomainControllerInfo)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetDcNameW == "on"]
+foreign {
     // param-hint: ComputerName optional
     // param-hint: DomainName optional
     // param-hint: DomainGuid optional
     // param-hint: SiteName optional
     func DsGetDcNameW(ComputerName: CPointer<UInt16>, DomainName: CPointer<UInt16>, DomainGuid: CPointer<GUID>, SiteName: CPointer<UInt16>, Flags: UInt32, DomainControllerInfo: CPointer<CPointer<DOMAIN_CONTROLLER_INFOW>>): UInt32
-    // param-hint: SiteName optional
-    // param-hint: DomainGuid optional
-    // param-hint: DnsForestName optional
-    func DsGetDcOpenA(DnsName: CPointer<UInt8>, OptionFlags: UInt32, SiteName: CPointer<UInt8>, DomainGuid: CPointer<GUID>, DnsForestName: CPointer<UInt8>, DcFlags: UInt32, RetGetDcContext: CPointer<CPointer<Unit>>): UInt32
-    // param-hint: SiteName optional
-    // param-hint: DomainGuid optional
-    // param-hint: DnsForestName optional
-    func DsGetDcOpenW(DnsName: CPointer<UInt16>, OptionFlags: UInt32, SiteName: CPointer<UInt16>, DomainGuid: CPointer<GUID>, DnsForestName: CPointer<UInt16>, DcFlags: UInt32, RetGetDcContext: CPointer<CPointer<Unit>>): UInt32
-    // param-hint: ServerName optional
-    func DsGetDcSiteCoverageA(ServerName: CPointer<UInt8>, EntryCount: CPointer<UInt32>, SiteNames: CPointer<CPointer<CPointer<UInt8>>>): UInt32
-    // param-hint: ServerName optional
-    func DsGetDcSiteCoverageW(ServerName: CPointer<UInt16>, EntryCount: CPointer<UInt32>, SiteNames: CPointer<CPointer<CPointer<UInt16>>>): UInt32
-    // param-hint: ComputerName optional
-    func DsGetSiteNameA(ComputerName: CPointer<UInt8>, SiteName: CPointer<CPointer<UInt8>>): UInt32
-    // param-hint: ComputerName optional
-    func DsGetSiteNameW(ComputerName: CPointer<UInt16>, SiteName: CPointer<CPointer<UInt16>>): UInt32
-    func DsRoleFreeMemory(Buffer: CPointer<Unit>): Unit
-    func DsRoleGetPrimaryDomainInformation(lpServer: CPointer<UInt16>, InfoLevel: Int32, Buffer: CPointer<CPointer<UInt8>>): UInt32
-    func DsValidateSubnetNameA(SubnetName: CPointer<UInt8>): UInt32
-    func DsValidateSubnetNameW(SubnetName: CPointer<UInt16>): UInt32
 }
 
-@When[NETAPI32 == "on" && (Windows_Win32_Security == "on" && Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Authentication_Identity == "on")]
-foreign {
-    // param-hint: ServerName optional
-    // param-hint: TrustedDomainName optional
-    func DsGetForestTrustInformationW(ServerName: CPointer<UInt16>, TrustedDomainName: CPointer<UInt16>, Flags: UInt32, ForestTrustInfo: CPointer<CPointer<Win32_Security_Authentication_Identity.LSA_FOREST_TRUST_INFORMATION>>): UInt32
-    // param-hint: OldForestTrustInfo optional
-    func DsMergeForestTrustInformationW(DomainName: CPointer<UInt16>, NewForestTrustInfo: CPointer<Win32_Security_Authentication_Identity.LSA_FOREST_TRUST_INFORMATION>, OldForestTrustInfo: CPointer<Win32_Security_Authentication_Identity.LSA_FOREST_TRUST_INFORMATION>, MergedForestTrustInfo: CPointer<CPointer<Win32_Security_Authentication_Identity.LSA_FOREST_TRUST_INFORMATION>>): UInt32
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetDcNameW == "on"]
+public unsafe func Windows_DsGetDcNameW(ComputerName: CPointer<UInt16>, DomainName: CPointer<UInt16>, DomainGuid: CPointer<GUID>, SiteName: CPointer<UInt16>, Flags: UInt32, DomainControllerInfo: CPointer<CPointer<DOMAIN_CONTROLLER_INFOW>>): UInt32 {
+    return DsGetDcNameW(ComputerName, DomainName, DomainGuid, SiteName, Flags, DomainControllerInfo)
 }
 
-@When[NETAPI32 == "on" && Windows_Win32_Networking_WinSock == "on"]
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetDcNextA == "on" && Windows_Win32_Networking_WinSock == "on"]
 foreign {
-    // param-hint: ComputerName optional
-    // param-hint: SocketAddresses len=param[1]
-    func DsAddressToSiteNamesA(ComputerName: CPointer<UInt8>, EntryCount: UInt32, SocketAddresses: CPointer<Win32__impl_l1.SOCKET_ADDRESS>, SiteNames: CPointer<CPointer<CPointer<UInt8>>>): UInt32
-    // param-hint: ComputerName optional
-    // param-hint: SocketAddresses len=param[1]
-    func DsAddressToSiteNamesExA(ComputerName: CPointer<UInt8>, EntryCount: UInt32, SocketAddresses: CPointer<Win32__impl_l1.SOCKET_ADDRESS>, SiteNames: CPointer<CPointer<CPointer<UInt8>>>, SubnetNames: CPointer<CPointer<CPointer<UInt8>>>): UInt32
-    // param-hint: ComputerName optional
-    // param-hint: SocketAddresses len=param[1]
-    func DsAddressToSiteNamesExW(ComputerName: CPointer<UInt16>, EntryCount: UInt32, SocketAddresses: CPointer<Win32__impl_l1.SOCKET_ADDRESS>, SiteNames: CPointer<CPointer<CPointer<UInt16>>>, SubnetNames: CPointer<CPointer<CPointer<UInt16>>>): UInt32
-    // param-hint: ComputerName optional
-    // param-hint: SocketAddresses len=param[1]
-    func DsAddressToSiteNamesW(ComputerName: CPointer<UInt16>, EntryCount: UInt32, SocketAddresses: CPointer<Win32__impl_l1.SOCKET_ADDRESS>, SiteNames: CPointer<CPointer<CPointer<UInt16>>>): UInt32
     // param-hint: SockAddressCount optional
     // param-hint: SockAddresses optional
     // param-hint: DnsHostName optional
     func DsGetDcNextA(GetDcContextHandle: CPointer<Unit>, SockAddressCount: CPointer<UInt32>, SockAddresses: CPointer<CPointer<Win32__impl_l1.SOCKET_ADDRESS>>, DnsHostName: CPointer<CPointer<UInt8>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetDcNextA == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_DsGetDcNextA(GetDcContextHandle: CPointer<Unit>, SockAddressCount: CPointer<UInt32>, SockAddresses: CPointer<CPointer<Win32__impl_l1.SOCKET_ADDRESS>>, DnsHostName: CPointer<CPointer<UInt8>>): UInt32 {
+    return DsGetDcNextA(GetDcContextHandle, SockAddressCount, SockAddresses, DnsHostName)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetDcNextW == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
     // param-hint: SockAddressCount optional
     // param-hint: SockAddresses optional
     // param-hint: DnsHostName optional
     func DsGetDcNextW(GetDcContextHandle: CPointer<Unit>, SockAddressCount: CPointer<UInt32>, SockAddresses: CPointer<CPointer<Win32__impl_l1.SOCKET_ADDRESS>>, DnsHostName: CPointer<CPointer<UInt16>>): UInt32
 }
 
-@When[NETAPI32 == "on" && Windows_Win32_Security == "on"]
-foreign {
-    // param-hint: ServerName optional
-    func DsEnumerateDomainTrustsA(ServerName: CPointer<UInt8>, Flags: UInt32, Domains: CPointer<CPointer<DS_DOMAIN_TRUSTSA>>, DomainCount: CPointer<UInt32>): UInt32
-    // param-hint: ServerName optional
-    func DsEnumerateDomainTrustsW(ServerName: CPointer<UInt16>, Flags: UInt32, Domains: CPointer<CPointer<DS_DOMAIN_TRUSTSW>>, DomainCount: CPointer<UInt32>): UInt32
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetDcNextW == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_DsGetDcNextW(GetDcContextHandle: CPointer<Unit>, SockAddressCount: CPointer<UInt32>, SockAddresses: CPointer<CPointer<Win32__impl_l1.SOCKET_ADDRESS>>, DnsHostName: CPointer<CPointer<UInt16>>): UInt32 {
+    return DsGetDcNextW(GetDcContextHandle, SockAddressCount, SockAddresses, DnsHostName)
 }
 
-@When[NTDSAPI == "on"]
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetDcOpenA == "on"]
+foreign {
+    // param-hint: SiteName optional
+    // param-hint: DomainGuid optional
+    // param-hint: DnsForestName optional
+    func DsGetDcOpenA(DnsName: CPointer<UInt8>, OptionFlags: UInt32, SiteName: CPointer<UInt8>, DomainGuid: CPointer<GUID>, DnsForestName: CPointer<UInt8>, DcFlags: UInt32, RetGetDcContext: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetDcOpenA == "on"]
+public unsafe func Windows_DsGetDcOpenA(DnsName: CPointer<UInt8>, OptionFlags: UInt32, SiteName: CPointer<UInt8>, DomainGuid: CPointer<GUID>, DnsForestName: CPointer<UInt8>, DcFlags: UInt32, RetGetDcContext: CPointer<CPointer<Unit>>): UInt32 {
+    return DsGetDcOpenA(DnsName, OptionFlags, SiteName, DomainGuid, DnsForestName, DcFlags, RetGetDcContext)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetDcOpenW == "on"]
+foreign {
+    // param-hint: SiteName optional
+    // param-hint: DomainGuid optional
+    // param-hint: DnsForestName optional
+    func DsGetDcOpenW(DnsName: CPointer<UInt16>, OptionFlags: UInt32, SiteName: CPointer<UInt16>, DomainGuid: CPointer<GUID>, DnsForestName: CPointer<UInt16>, DcFlags: UInt32, RetGetDcContext: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetDcOpenW == "on"]
+public unsafe func Windows_DsGetDcOpenW(DnsName: CPointer<UInt16>, OptionFlags: UInt32, SiteName: CPointer<UInt16>, DomainGuid: CPointer<GUID>, DnsForestName: CPointer<UInt16>, DcFlags: UInt32, RetGetDcContext: CPointer<CPointer<Unit>>): UInt32 {
+    return DsGetDcOpenW(DnsName, OptionFlags, SiteName, DomainGuid, DnsForestName, DcFlags, RetGetDcContext)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetDcSiteCoverageA == "on"]
+foreign {
+    // param-hint: ServerName optional
+    func DsGetDcSiteCoverageA(ServerName: CPointer<UInt8>, EntryCount: CPointer<UInt32>, SiteNames: CPointer<CPointer<CPointer<UInt8>>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetDcSiteCoverageA == "on"]
+public unsafe func Windows_DsGetDcSiteCoverageA(ServerName: CPointer<UInt8>, EntryCount: CPointer<UInt32>, SiteNames: CPointer<CPointer<CPointer<UInt8>>>): UInt32 {
+    return DsGetDcSiteCoverageA(ServerName, EntryCount, SiteNames)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetDcSiteCoverageW == "on"]
+foreign {
+    // param-hint: ServerName optional
+    func DsGetDcSiteCoverageW(ServerName: CPointer<UInt16>, EntryCount: CPointer<UInt32>, SiteNames: CPointer<CPointer<CPointer<UInt16>>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetDcSiteCoverageW == "on"]
+public unsafe func Windows_DsGetDcSiteCoverageW(ServerName: CPointer<UInt16>, EntryCount: CPointer<UInt32>, SiteNames: CPointer<CPointer<CPointer<UInt16>>>): UInt32 {
+    return DsGetDcSiteCoverageW(ServerName, EntryCount, SiteNames)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetForestTrustInformationW == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Authentication_Identity == "on"]
+foreign {
+    // param-hint: ServerName optional
+    // param-hint: TrustedDomainName optional
+    func DsGetForestTrustInformationW(ServerName: CPointer<UInt16>, TrustedDomainName: CPointer<UInt16>, Flags: UInt32, ForestTrustInfo: CPointer<CPointer<Win32_Security_Authentication_Identity.LSA_FOREST_TRUST_INFORMATION>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetForestTrustInformationW == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Authentication_Identity == "on"]
+public unsafe func Windows_DsGetForestTrustInformationW(ServerName: CPointer<UInt16>, TrustedDomainName: CPointer<UInt16>, Flags: UInt32, ForestTrustInfo: CPointer<CPointer<Win32_Security_Authentication_Identity.LSA_FOREST_TRUST_INFORMATION>>): UInt32 {
+    return DsGetForestTrustInformationW(ServerName, TrustedDomainName, Flags, ForestTrustInfo)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetSiteNameA == "on"]
+foreign {
+    // param-hint: ComputerName optional
+    func DsGetSiteNameA(ComputerName: CPointer<UInt8>, SiteName: CPointer<CPointer<UInt8>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetSiteNameA == "on"]
+public unsafe func Windows_DsGetSiteNameA(ComputerName: CPointer<UInt8>, SiteName: CPointer<CPointer<UInt8>>): UInt32 {
+    return DsGetSiteNameA(ComputerName, SiteName)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetSiteNameW == "on"]
+foreign {
+    // param-hint: ComputerName optional
+    func DsGetSiteNameW(ComputerName: CPointer<UInt16>, SiteName: CPointer<CPointer<UInt16>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetSiteNameW == "on"]
+public unsafe func Windows_DsGetSiteNameW(ComputerName: CPointer<UInt16>, SiteName: CPointer<CPointer<UInt16>>): UInt32 {
+    return DsGetSiteNameW(ComputerName, SiteName)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsMergeForestTrustInformationW == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Authentication_Identity == "on"]
+foreign {
+    // param-hint: OldForestTrustInfo optional
+    func DsMergeForestTrustInformationW(DomainName: CPointer<UInt16>, NewForestTrustInfo: CPointer<Win32_Security_Authentication_Identity.LSA_FOREST_TRUST_INFORMATION>, OldForestTrustInfo: CPointer<Win32_Security_Authentication_Identity.LSA_FOREST_TRUST_INFORMATION>, MergedForestTrustInfo: CPointer<CPointer<Win32_Security_Authentication_Identity.LSA_FOREST_TRUST_INFORMATION>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsMergeForestTrustInformationW == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Authentication_Identity == "on"]
+public unsafe func Windows_DsMergeForestTrustInformationW(DomainName: CPointer<UInt16>, NewForestTrustInfo: CPointer<Win32_Security_Authentication_Identity.LSA_FOREST_TRUST_INFORMATION>, OldForestTrustInfo: CPointer<Win32_Security_Authentication_Identity.LSA_FOREST_TRUST_INFORMATION>, MergedForestTrustInfo: CPointer<CPointer<Win32_Security_Authentication_Identity.LSA_FOREST_TRUST_INFORMATION>>): UInt32 {
+    return DsMergeForestTrustInformationW(DomainName, NewForestTrustInfo, OldForestTrustInfo, MergedForestTrustInfo)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsRoleFreeMemory == "on"]
+foreign {
+    func DsRoleFreeMemory(Buffer: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsRoleFreeMemory == "on"]
+public unsafe func Windows_DsRoleFreeMemory(Buffer: CPointer<Unit>): Unit {
+    DsRoleFreeMemory(Buffer)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsRoleGetPrimaryDomainInformation == "on"]
+foreign {
+    func DsRoleGetPrimaryDomainInformation(lpServer: CPointer<UInt16>, InfoLevel: Int32, Buffer: CPointer<CPointer<UInt8>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsRoleGetPrimaryDomainInformation == "on"]
+public unsafe func Windows_DsRoleGetPrimaryDomainInformation(lpServer: CPointer<UInt16>, InfoLevel: Int32, Buffer: CPointer<CPointer<UInt8>>): UInt32 {
+    return DsRoleGetPrimaryDomainInformation(lpServer, InfoLevel, Buffer)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsValidateSubnetNameA == "on"]
+foreign {
+    func DsValidateSubnetNameA(SubnetName: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsValidateSubnetNameA == "on"]
+public unsafe func Windows_DsValidateSubnetNameA(SubnetName: CPointer<UInt8>): UInt32 {
+    return DsValidateSubnetNameA(SubnetName)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsValidateSubnetNameW == "on"]
+foreign {
+    func DsValidateSubnetNameW(SubnetName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NETAPI32 == "on" && Windows_Win32_Networking_ActiveDirectory_DsValidateSubnetNameW == "on"]
+public unsafe func Windows_DsValidateSubnetNameW(SubnetName: CPointer<UInt16>): UInt32 {
+    return DsValidateSubnetNameW(SubnetName)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsAddSidHistoryA == "on"]
 foreign {
     // param-hint: Flags optional reserved
     // param-hint: SrcDomainController optional
     // param-hint: SrcDomainCreds optional
     func DsAddSidHistoryA(hDS: CPointer<Unit>, Flags: UInt32, SrcDomain: CPointer<UInt8>, SrcPrincipal: CPointer<UInt8>, SrcDomainController: CPointer<UInt8>, SrcDomainCreds: CPointer<Unit>, DstDomain: CPointer<UInt8>, DstPrincipal: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsAddSidHistoryA == "on"]
+public unsafe func Windows_DsAddSidHistoryA(hDS: CPointer<Unit>, Flags: UInt32, SrcDomain: CPointer<UInt8>, SrcPrincipal: CPointer<UInt8>, SrcDomainController: CPointer<UInt8>, SrcDomainCreds: CPointer<Unit>, DstDomain: CPointer<UInt8>, DstPrincipal: CPointer<UInt8>): UInt32 {
+    return DsAddSidHistoryA(hDS, Flags, SrcDomain, SrcPrincipal, SrcDomainController, SrcDomainCreds, DstDomain, DstPrincipal)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsAddSidHistoryW == "on"]
+foreign {
     // param-hint: Flags optional reserved
     // param-hint: SrcDomainController optional
     // param-hint: SrcDomainCreds optional
     func DsAddSidHistoryW(hDS: CPointer<Unit>, Flags: UInt32, SrcDomain: CPointer<UInt16>, SrcPrincipal: CPointer<UInt16>, SrcDomainController: CPointer<UInt16>, SrcDomainCreds: CPointer<Unit>, DstDomain: CPointer<UInt16>, DstPrincipal: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsAddSidHistoryW == "on"]
+public unsafe func Windows_DsAddSidHistoryW(hDS: CPointer<Unit>, Flags: UInt32, SrcDomain: CPointer<UInt16>, SrcPrincipal: CPointer<UInt16>, SrcDomainController: CPointer<UInt16>, SrcDomainCreds: CPointer<Unit>, DstDomain: CPointer<UInt16>, DstPrincipal: CPointer<UInt16>): UInt32 {
+    return DsAddSidHistoryW(hDS, Flags, SrcDomain, SrcPrincipal, SrcDomainController, SrcDomainCreds, DstDomain, DstPrincipal)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsBindA == "on"]
+foreign {
     // param-hint: DomainControllerName optional
     // param-hint: DnsDomainName optional
     func DsBindA(DomainControllerName: CPointer<UInt8>, DnsDomainName: CPointer<UInt8>, phDS: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsBindA == "on"]
+public unsafe func Windows_DsBindA(DomainControllerName: CPointer<UInt8>, DnsDomainName: CPointer<UInt8>, phDS: CPointer<CPointer<Unit>>): UInt32 {
+    return DsBindA(DomainControllerName, DnsDomainName, phDS)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsBindByInstanceA == "on"]
+foreign {
     // param-hint: ServerName optional
     // param-hint: Annotation optional
     // param-hint: InstanceGuid optional
@@ -12756,6 +13333,15 @@ foreign {
     // param-hint: ServicePrincipalName optional
     // param-hint: BindFlags optional
     func DsBindByInstanceA(ServerName: CPointer<UInt8>, Annotation: CPointer<UInt8>, InstanceGuid: CPointer<GUID>, DnsDomainName: CPointer<UInt8>, AuthIdentity: CPointer<Unit>, ServicePrincipalName: CPointer<UInt8>, BindFlags: UInt32, phDS: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsBindByInstanceA == "on"]
+public unsafe func Windows_DsBindByInstanceA(ServerName: CPointer<UInt8>, Annotation: CPointer<UInt8>, InstanceGuid: CPointer<GUID>, DnsDomainName: CPointer<UInt8>, AuthIdentity: CPointer<Unit>, ServicePrincipalName: CPointer<UInt8>, BindFlags: UInt32, phDS: CPointer<CPointer<Unit>>): UInt32 {
+    return DsBindByInstanceA(ServerName, Annotation, InstanceGuid, DnsDomainName, AuthIdentity, ServicePrincipalName, BindFlags, phDS)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsBindByInstanceW == "on"]
+foreign {
     // param-hint: ServerName optional
     // param-hint: Annotation optional
     // param-hint: InstanceGuid optional
@@ -12764,199 +13350,967 @@ foreign {
     // param-hint: ServicePrincipalName optional
     // param-hint: BindFlags optional
     func DsBindByInstanceW(ServerName: CPointer<UInt16>, Annotation: CPointer<UInt16>, InstanceGuid: CPointer<GUID>, DnsDomainName: CPointer<UInt16>, AuthIdentity: CPointer<Unit>, ServicePrincipalName: CPointer<UInt16>, BindFlags: UInt32, phDS: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsBindByInstanceW == "on"]
+public unsafe func Windows_DsBindByInstanceW(ServerName: CPointer<UInt16>, Annotation: CPointer<UInt16>, InstanceGuid: CPointer<GUID>, DnsDomainName: CPointer<UInt16>, AuthIdentity: CPointer<Unit>, ServicePrincipalName: CPointer<UInt16>, BindFlags: UInt32, phDS: CPointer<CPointer<Unit>>): UInt32 {
+    return DsBindByInstanceW(ServerName, Annotation, InstanceGuid, DnsDomainName, AuthIdentity, ServicePrincipalName, BindFlags, phDS)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsBindToISTGA == "on"]
+foreign {
     // param-hint: SiteName optional
     func DsBindToISTGA(SiteName: CPointer<UInt8>, phDS: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsBindToISTGA == "on"]
+public unsafe func Windows_DsBindToISTGA(SiteName: CPointer<UInt8>, phDS: CPointer<CPointer<Unit>>): UInt32 {
+    return DsBindToISTGA(SiteName, phDS)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsBindToISTGW == "on"]
+foreign {
     // param-hint: SiteName optional
     func DsBindToISTGW(SiteName: CPointer<UInt16>, phDS: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsBindToISTGW == "on"]
+public unsafe func Windows_DsBindToISTGW(SiteName: CPointer<UInt16>, phDS: CPointer<CPointer<Unit>>): UInt32 {
+    return DsBindToISTGW(SiteName, phDS)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsBindW == "on"]
+foreign {
     // param-hint: DomainControllerName optional
     // param-hint: DnsDomainName optional
     func DsBindW(DomainControllerName: CPointer<UInt16>, DnsDomainName: CPointer<UInt16>, phDS: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsBindW == "on"]
+public unsafe func Windows_DsBindW(DomainControllerName: CPointer<UInt16>, DnsDomainName: CPointer<UInt16>, phDS: CPointer<CPointer<Unit>>): UInt32 {
+    return DsBindW(DomainControllerName, DnsDomainName, phDS)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsBindWithCredA == "on"]
+foreign {
     // param-hint: DomainControllerName optional
     // param-hint: DnsDomainName optional
     // param-hint: AuthIdentity optional
     func DsBindWithCredA(DomainControllerName: CPointer<UInt8>, DnsDomainName: CPointer<UInt8>, AuthIdentity: CPointer<Unit>, phDS: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsBindWithCredA == "on"]
+public unsafe func Windows_DsBindWithCredA(DomainControllerName: CPointer<UInt8>, DnsDomainName: CPointer<UInt8>, AuthIdentity: CPointer<Unit>, phDS: CPointer<CPointer<Unit>>): UInt32 {
+    return DsBindWithCredA(DomainControllerName, DnsDomainName, AuthIdentity, phDS)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsBindWithCredW == "on"]
+foreign {
     // param-hint: DomainControllerName optional
     // param-hint: DnsDomainName optional
     // param-hint: AuthIdentity optional
     func DsBindWithCredW(DomainControllerName: CPointer<UInt16>, DnsDomainName: CPointer<UInt16>, AuthIdentity: CPointer<Unit>, phDS: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsBindWithCredW == "on"]
+public unsafe func Windows_DsBindWithCredW(DomainControllerName: CPointer<UInt16>, DnsDomainName: CPointer<UInt16>, AuthIdentity: CPointer<Unit>, phDS: CPointer<CPointer<Unit>>): UInt32 {
+    return DsBindWithCredW(DomainControllerName, DnsDomainName, AuthIdentity, phDS)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsBindWithSpnA == "on"]
+foreign {
     // param-hint: DomainControllerName optional
     // param-hint: DnsDomainName optional
     // param-hint: AuthIdentity optional
     // param-hint: ServicePrincipalName optional
     func DsBindWithSpnA(DomainControllerName: CPointer<UInt8>, DnsDomainName: CPointer<UInt8>, AuthIdentity: CPointer<Unit>, ServicePrincipalName: CPointer<UInt8>, phDS: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsBindWithSpnA == "on"]
+public unsafe func Windows_DsBindWithSpnA(DomainControllerName: CPointer<UInt8>, DnsDomainName: CPointer<UInt8>, AuthIdentity: CPointer<Unit>, ServicePrincipalName: CPointer<UInt8>, phDS: CPointer<CPointer<Unit>>): UInt32 {
+    return DsBindWithSpnA(DomainControllerName, DnsDomainName, AuthIdentity, ServicePrincipalName, phDS)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsBindWithSpnExA == "on"]
+foreign {
     // param-hint: DomainControllerName optional
     // param-hint: DnsDomainName optional
     // param-hint: AuthIdentity optional
     // param-hint: ServicePrincipalName optional
     // param-hint: BindFlags optional
     func DsBindWithSpnExA(DomainControllerName: CPointer<UInt8>, DnsDomainName: CPointer<UInt8>, AuthIdentity: CPointer<Unit>, ServicePrincipalName: CPointer<UInt8>, BindFlags: UInt32, phDS: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsBindWithSpnExA == "on"]
+public unsafe func Windows_DsBindWithSpnExA(DomainControllerName: CPointer<UInt8>, DnsDomainName: CPointer<UInt8>, AuthIdentity: CPointer<Unit>, ServicePrincipalName: CPointer<UInt8>, BindFlags: UInt32, phDS: CPointer<CPointer<Unit>>): UInt32 {
+    return DsBindWithSpnExA(DomainControllerName, DnsDomainName, AuthIdentity, ServicePrincipalName, BindFlags, phDS)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsBindWithSpnExW == "on"]
+foreign {
     // param-hint: DomainControllerName optional
     // param-hint: DnsDomainName optional
     // param-hint: AuthIdentity optional
     // param-hint: ServicePrincipalName optional
     // param-hint: BindFlags optional
     func DsBindWithSpnExW(DomainControllerName: CPointer<UInt16>, DnsDomainName: CPointer<UInt16>, AuthIdentity: CPointer<Unit>, ServicePrincipalName: CPointer<UInt16>, BindFlags: UInt32, phDS: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsBindWithSpnExW == "on"]
+public unsafe func Windows_DsBindWithSpnExW(DomainControllerName: CPointer<UInt16>, DnsDomainName: CPointer<UInt16>, AuthIdentity: CPointer<Unit>, ServicePrincipalName: CPointer<UInt16>, BindFlags: UInt32, phDS: CPointer<CPointer<Unit>>): UInt32 {
+    return DsBindWithSpnExW(DomainControllerName, DnsDomainName, AuthIdentity, ServicePrincipalName, BindFlags, phDS)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsBindWithSpnW == "on"]
+foreign {
     // param-hint: DomainControllerName optional
     // param-hint: DnsDomainName optional
     // param-hint: AuthIdentity optional
     // param-hint: ServicePrincipalName optional
     func DsBindWithSpnW(DomainControllerName: CPointer<UInt16>, DnsDomainName: CPointer<UInt16>, AuthIdentity: CPointer<Unit>, ServicePrincipalName: CPointer<UInt16>, phDS: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsBindWithSpnW == "on"]
+public unsafe func Windows_DsBindWithSpnW(DomainControllerName: CPointer<UInt16>, DnsDomainName: CPointer<UInt16>, AuthIdentity: CPointer<Unit>, ServicePrincipalName: CPointer<UInt16>, phDS: CPointer<CPointer<Unit>>): UInt32 {
+    return DsBindWithSpnW(DomainControllerName, DnsDomainName, AuthIdentity, ServicePrincipalName, phDS)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsBindingSetTimeout == "on"]
+foreign {
     func DsBindingSetTimeout(hDS: CPointer<Unit>, cTimeoutSecs: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsBindingSetTimeout == "on"]
+public unsafe func Windows_DsBindingSetTimeout(hDS: CPointer<Unit>, cTimeoutSecs: UInt32): UInt32 {
+    return DsBindingSetTimeout(hDS, cTimeoutSecs)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsClientMakeSpnForTargetServerA == "on"]
+foreign {
     // param-hint: pszSpn len=param[2]
     func DsClientMakeSpnForTargetServerA(ServiceClass: CPointer<UInt8>, ServiceName: CPointer<UInt8>, pcSpnLength: CPointer<UInt32>, pszSpn: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsClientMakeSpnForTargetServerA == "on"]
+public unsafe func Windows_DsClientMakeSpnForTargetServerA(ServiceClass: CPointer<UInt8>, ServiceName: CPointer<UInt8>, pcSpnLength: CPointer<UInt32>, pszSpn: CPointer<UInt8>): UInt32 {
+    return DsClientMakeSpnForTargetServerA(ServiceClass, ServiceName, pcSpnLength, pszSpn)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsClientMakeSpnForTargetServerW == "on"]
+foreign {
     // param-hint: pszSpn len=param[2]
     func DsClientMakeSpnForTargetServerW(ServiceClass: CPointer<UInt16>, ServiceName: CPointer<UInt16>, pcSpnLength: CPointer<UInt32>, pszSpn: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsClientMakeSpnForTargetServerW == "on"]
+public unsafe func Windows_DsClientMakeSpnForTargetServerW(ServiceClass: CPointer<UInt16>, ServiceName: CPointer<UInt16>, pcSpnLength: CPointer<UInt32>, pszSpn: CPointer<UInt16>): UInt32 {
+    return DsClientMakeSpnForTargetServerW(ServiceClass, ServiceName, pcSpnLength, pszSpn)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsCrackNamesA == "on"]
+foreign {
     // param-hint: hDS optional
     // param-hint: rpNames len=param[4]
     func DsCrackNamesA(hDS: CPointer<Unit>, flags: Int32, formatOffered: Int32, formatDesired: Int32, cNames: UInt32, rpNames: CPointer<CPointer<UInt8>>, ppResult: CPointer<CPointer<DS_NAME_RESULTA>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsCrackNamesA == "on"]
+public unsafe func Windows_DsCrackNamesA(hDS: CPointer<Unit>, flags: Int32, formatOffered: Int32, formatDesired: Int32, cNames: UInt32, rpNames: CPointer<CPointer<UInt8>>, ppResult: CPointer<CPointer<DS_NAME_RESULTA>>): UInt32 {
+    return DsCrackNamesA(hDS, flags, formatOffered, formatDesired, cNames, rpNames, ppResult)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsCrackNamesW == "on"]
+foreign {
     // param-hint: hDS optional
     // param-hint: rpNames len=param[4]
     func DsCrackNamesW(hDS: CPointer<Unit>, flags: Int32, formatOffered: Int32, formatDesired: Int32, cNames: UInt32, rpNames: CPointer<CPointer<UInt16>>, ppResult: CPointer<CPointer<DS_NAME_RESULTW>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsCrackNamesW == "on"]
+public unsafe func Windows_DsCrackNamesW(hDS: CPointer<Unit>, flags: Int32, formatOffered: Int32, formatDesired: Int32, cNames: UInt32, rpNames: CPointer<CPointer<UInt16>>, ppResult: CPointer<CPointer<DS_NAME_RESULTW>>): UInt32 {
+    return DsCrackNamesW(hDS, flags, formatOffered, formatDesired, cNames, rpNames, ppResult)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsFreeDomainControllerInfoA == "on"]
+foreign {
     // param-hint: pInfo len=param[1]
     func DsFreeDomainControllerInfoA(InfoLevel: UInt32, cInfo: UInt32, pInfo: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsFreeDomainControllerInfoA == "on"]
+public unsafe func Windows_DsFreeDomainControllerInfoA(InfoLevel: UInt32, cInfo: UInt32, pInfo: CPointer<Unit>): Unit {
+    DsFreeDomainControllerInfoA(InfoLevel, cInfo, pInfo)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsFreeDomainControllerInfoW == "on"]
+foreign {
     // param-hint: pInfo len=param[1]
     func DsFreeDomainControllerInfoW(InfoLevel: UInt32, cInfo: UInt32, pInfo: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsFreeDomainControllerInfoW == "on"]
+public unsafe func Windows_DsFreeDomainControllerInfoW(InfoLevel: UInt32, cInfo: UInt32, pInfo: CPointer<Unit>): Unit {
+    DsFreeDomainControllerInfoW(InfoLevel, cInfo, pInfo)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsFreeNameResultA == "on"]
+foreign {
     func DsFreeNameResultA(pResult: CPointer<DS_NAME_RESULTA>): Unit
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsFreeNameResultA == "on"]
+public unsafe func Windows_DsFreeNameResultA(pResult: CPointer<DS_NAME_RESULTA>): Unit {
+    DsFreeNameResultA(pResult)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsFreeNameResultW == "on"]
+foreign {
     func DsFreeNameResultW(pResult: CPointer<DS_NAME_RESULTW>): Unit
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsFreeNameResultW == "on"]
+public unsafe func Windows_DsFreeNameResultW(pResult: CPointer<DS_NAME_RESULTW>): Unit {
+    DsFreeNameResultW(pResult)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsFreePasswordCredentials == "on"]
+foreign {
     func DsFreePasswordCredentials(AuthIdentity: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsFreePasswordCredentials == "on"]
+public unsafe func Windows_DsFreePasswordCredentials(AuthIdentity: CPointer<Unit>): Unit {
+    DsFreePasswordCredentials(AuthIdentity)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsFreeSchemaGuidMapA == "on"]
+foreign {
     func DsFreeSchemaGuidMapA(pGuidMap: CPointer<DS_SCHEMA_GUID_MAPA>): Unit
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsFreeSchemaGuidMapA == "on"]
+public unsafe func Windows_DsFreeSchemaGuidMapA(pGuidMap: CPointer<DS_SCHEMA_GUID_MAPA>): Unit {
+    DsFreeSchemaGuidMapA(pGuidMap)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsFreeSchemaGuidMapW == "on"]
+foreign {
     func DsFreeSchemaGuidMapW(pGuidMap: CPointer<DS_SCHEMA_GUID_MAPW>): Unit
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsFreeSchemaGuidMapW == "on"]
+public unsafe func Windows_DsFreeSchemaGuidMapW(pGuidMap: CPointer<DS_SCHEMA_GUID_MAPW>): Unit {
+    DsFreeSchemaGuidMapW(pGuidMap)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsFreeSpnArrayA == "on"]
+foreign {
     // param-hint: rpszSpn len=param[0]
     func DsFreeSpnArrayA(cSpn: UInt32, rpszSpn: CPointer<CPointer<UInt8>>): Unit
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsFreeSpnArrayA == "on"]
+public unsafe func Windows_DsFreeSpnArrayA(cSpn: UInt32, rpszSpn: CPointer<CPointer<UInt8>>): Unit {
+    DsFreeSpnArrayA(cSpn, rpszSpn)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsFreeSpnArrayW == "on"]
+foreign {
     // param-hint: rpszSpn len=param[0]
     func DsFreeSpnArrayW(cSpn: UInt32, rpszSpn: CPointer<CPointer<UInt16>>): Unit
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsFreeSpnArrayW == "on"]
+public unsafe func Windows_DsFreeSpnArrayW(cSpn: UInt32, rpszSpn: CPointer<CPointer<UInt16>>): Unit {
+    DsFreeSpnArrayW(cSpn, rpszSpn)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetDomainControllerInfoA == "on"]
+foreign {
     func DsGetDomainControllerInfoA(hDs: CPointer<Unit>, DomainName: CPointer<UInt8>, InfoLevel: UInt32, pcOut: CPointer<UInt32>, ppInfo: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetDomainControllerInfoA == "on"]
+public unsafe func Windows_DsGetDomainControllerInfoA(hDs: CPointer<Unit>, DomainName: CPointer<UInt8>, InfoLevel: UInt32, pcOut: CPointer<UInt32>, ppInfo: CPointer<CPointer<Unit>>): UInt32 {
+    return DsGetDomainControllerInfoA(hDs, DomainName, InfoLevel, pcOut, ppInfo)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetDomainControllerInfoW == "on"]
+foreign {
     func DsGetDomainControllerInfoW(hDs: CPointer<Unit>, DomainName: CPointer<UInt16>, InfoLevel: UInt32, pcOut: CPointer<UInt32>, ppInfo: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetDomainControllerInfoW == "on"]
+public unsafe func Windows_DsGetDomainControllerInfoW(hDs: CPointer<Unit>, DomainName: CPointer<UInt16>, InfoLevel: UInt32, pcOut: CPointer<UInt32>, ppInfo: CPointer<CPointer<Unit>>): UInt32 {
+    return DsGetDomainControllerInfoW(hDs, DomainName, InfoLevel, pcOut, ppInfo)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetSpnA == "on"]
+foreign {
     // param-hint: ServiceName optional
     // param-hint: pInstanceNames len=param[4] optional
     // param-hint: pInstancePorts len=param[4] optional
     func DsGetSpnA(ServiceType: Int32, ServiceClass: CPointer<UInt8>, ServiceName: CPointer<UInt8>, InstancePort: UInt16, cInstanceNames: UInt16, pInstanceNames: CPointer<CPointer<UInt8>>, pInstancePorts: CPointer<UInt16>, pcSpn: CPointer<UInt32>, prpszSpn: CPointer<CPointer<CPointer<UInt8>>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetSpnA == "on"]
+public unsafe func Windows_DsGetSpnA(ServiceType: Int32, ServiceClass: CPointer<UInt8>, ServiceName: CPointer<UInt8>, InstancePort: UInt16, cInstanceNames: UInt16, pInstanceNames: CPointer<CPointer<UInt8>>, pInstancePorts: CPointer<UInt16>, pcSpn: CPointer<UInt32>, prpszSpn: CPointer<CPointer<CPointer<UInt8>>>): UInt32 {
+    return DsGetSpnA(ServiceType, ServiceClass, ServiceName, InstancePort, cInstanceNames, pInstanceNames, pInstancePorts, pcSpn, prpszSpn)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetSpnW == "on"]
+foreign {
     // param-hint: ServiceName optional
     // param-hint: pInstanceNames len=param[4] optional
     // param-hint: pInstancePorts len=param[4] optional
     func DsGetSpnW(ServiceType: Int32, ServiceClass: CPointer<UInt16>, ServiceName: CPointer<UInt16>, InstancePort: UInt16, cInstanceNames: UInt16, pInstanceNames: CPointer<CPointer<UInt16>>, pInstancePorts: CPointer<UInt16>, pcSpn: CPointer<UInt32>, prpszSpn: CPointer<CPointer<CPointer<UInt16>>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetSpnW == "on"]
+public unsafe func Windows_DsGetSpnW(ServiceType: Int32, ServiceClass: CPointer<UInt16>, ServiceName: CPointer<UInt16>, InstancePort: UInt16, cInstanceNames: UInt16, pInstanceNames: CPointer<CPointer<UInt16>>, pInstancePorts: CPointer<UInt16>, pcSpn: CPointer<UInt32>, prpszSpn: CPointer<CPointer<CPointer<UInt16>>>): UInt32 {
+    return DsGetSpnW(ServiceType, ServiceClass, ServiceName, InstancePort, cInstanceNames, pInstanceNames, pInstancePorts, pcSpn, prpszSpn)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsInheritSecurityIdentityA == "on"]
+foreign {
     // param-hint: Flags optional reserved
     func DsInheritSecurityIdentityA(hDS: CPointer<Unit>, Flags: UInt32, SrcPrincipal: CPointer<UInt8>, DstPrincipal: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsInheritSecurityIdentityA == "on"]
+public unsafe func Windows_DsInheritSecurityIdentityA(hDS: CPointer<Unit>, Flags: UInt32, SrcPrincipal: CPointer<UInt8>, DstPrincipal: CPointer<UInt8>): UInt32 {
+    return DsInheritSecurityIdentityA(hDS, Flags, SrcPrincipal, DstPrincipal)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsInheritSecurityIdentityW == "on"]
+foreign {
     // param-hint: Flags optional reserved
     func DsInheritSecurityIdentityW(hDS: CPointer<Unit>, Flags: UInt32, SrcPrincipal: CPointer<UInt16>, DstPrincipal: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsInheritSecurityIdentityW == "on"]
+public unsafe func Windows_DsInheritSecurityIdentityW(hDS: CPointer<Unit>, Flags: UInt32, SrcPrincipal: CPointer<UInt16>, DstPrincipal: CPointer<UInt16>): UInt32 {
+    return DsInheritSecurityIdentityW(hDS, Flags, SrcPrincipal, DstPrincipal)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsListDomainsInSiteA == "on"]
+foreign {
     func DsListDomainsInSiteA(hDs: CPointer<Unit>, site: CPointer<UInt8>, ppDomains: CPointer<CPointer<DS_NAME_RESULTA>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsListDomainsInSiteA == "on"]
+public unsafe func Windows_DsListDomainsInSiteA(hDs: CPointer<Unit>, site: CPointer<UInt8>, ppDomains: CPointer<CPointer<DS_NAME_RESULTA>>): UInt32 {
+    return DsListDomainsInSiteA(hDs, site, ppDomains)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsListDomainsInSiteW == "on"]
+foreign {
     func DsListDomainsInSiteW(hDs: CPointer<Unit>, site: CPointer<UInt16>, ppDomains: CPointer<CPointer<DS_NAME_RESULTW>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsListDomainsInSiteW == "on"]
+public unsafe func Windows_DsListDomainsInSiteW(hDs: CPointer<Unit>, site: CPointer<UInt16>, ppDomains: CPointer<CPointer<DS_NAME_RESULTW>>): UInt32 {
+    return DsListDomainsInSiteW(hDs, site, ppDomains)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsListInfoForServerA == "on"]
+foreign {
     func DsListInfoForServerA(hDs: CPointer<Unit>, server: CPointer<UInt8>, ppInfo: CPointer<CPointer<DS_NAME_RESULTA>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsListInfoForServerA == "on"]
+public unsafe func Windows_DsListInfoForServerA(hDs: CPointer<Unit>, server: CPointer<UInt8>, ppInfo: CPointer<CPointer<DS_NAME_RESULTA>>): UInt32 {
+    return DsListInfoForServerA(hDs, server, ppInfo)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsListInfoForServerW == "on"]
+foreign {
     func DsListInfoForServerW(hDs: CPointer<Unit>, server: CPointer<UInt16>, ppInfo: CPointer<CPointer<DS_NAME_RESULTW>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsListInfoForServerW == "on"]
+public unsafe func Windows_DsListInfoForServerW(hDs: CPointer<Unit>, server: CPointer<UInt16>, ppInfo: CPointer<CPointer<DS_NAME_RESULTW>>): UInt32 {
+    return DsListInfoForServerW(hDs, server, ppInfo)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsListRolesA == "on"]
+foreign {
     func DsListRolesA(hDs: CPointer<Unit>, ppRoles: CPointer<CPointer<DS_NAME_RESULTA>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsListRolesA == "on"]
+public unsafe func Windows_DsListRolesA(hDs: CPointer<Unit>, ppRoles: CPointer<CPointer<DS_NAME_RESULTA>>): UInt32 {
+    return DsListRolesA(hDs, ppRoles)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsListRolesW == "on"]
+foreign {
     func DsListRolesW(hDs: CPointer<Unit>, ppRoles: CPointer<CPointer<DS_NAME_RESULTW>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsListRolesW == "on"]
+public unsafe func Windows_DsListRolesW(hDs: CPointer<Unit>, ppRoles: CPointer<CPointer<DS_NAME_RESULTW>>): UInt32 {
+    return DsListRolesW(hDs, ppRoles)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsListServersForDomainInSiteA == "on"]
+foreign {
     func DsListServersForDomainInSiteA(hDs: CPointer<Unit>, domain: CPointer<UInt8>, site: CPointer<UInt8>, ppServers: CPointer<CPointer<DS_NAME_RESULTA>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsListServersForDomainInSiteA == "on"]
+public unsafe func Windows_DsListServersForDomainInSiteA(hDs: CPointer<Unit>, domain: CPointer<UInt8>, site: CPointer<UInt8>, ppServers: CPointer<CPointer<DS_NAME_RESULTA>>): UInt32 {
+    return DsListServersForDomainInSiteA(hDs, domain, site, ppServers)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsListServersForDomainInSiteW == "on"]
+foreign {
     func DsListServersForDomainInSiteW(hDs: CPointer<Unit>, domain: CPointer<UInt16>, site: CPointer<UInt16>, ppServers: CPointer<CPointer<DS_NAME_RESULTW>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsListServersForDomainInSiteW == "on"]
+public unsafe func Windows_DsListServersForDomainInSiteW(hDs: CPointer<Unit>, domain: CPointer<UInt16>, site: CPointer<UInt16>, ppServers: CPointer<CPointer<DS_NAME_RESULTW>>): UInt32 {
+    return DsListServersForDomainInSiteW(hDs, domain, site, ppServers)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsListServersInSiteA == "on"]
+foreign {
     func DsListServersInSiteA(hDs: CPointer<Unit>, site: CPointer<UInt8>, ppServers: CPointer<CPointer<DS_NAME_RESULTA>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsListServersInSiteA == "on"]
+public unsafe func Windows_DsListServersInSiteA(hDs: CPointer<Unit>, site: CPointer<UInt8>, ppServers: CPointer<CPointer<DS_NAME_RESULTA>>): UInt32 {
+    return DsListServersInSiteA(hDs, site, ppServers)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsListServersInSiteW == "on"]
+foreign {
     func DsListServersInSiteW(hDs: CPointer<Unit>, site: CPointer<UInt16>, ppServers: CPointer<CPointer<DS_NAME_RESULTW>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsListServersInSiteW == "on"]
+public unsafe func Windows_DsListServersInSiteW(hDs: CPointer<Unit>, site: CPointer<UInt16>, ppServers: CPointer<CPointer<DS_NAME_RESULTW>>): UInt32 {
+    return DsListServersInSiteW(hDs, site, ppServers)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsListSitesA == "on"]
+foreign {
     func DsListSitesA(hDs: CPointer<Unit>, ppSites: CPointer<CPointer<DS_NAME_RESULTA>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsListSitesA == "on"]
+public unsafe func Windows_DsListSitesA(hDs: CPointer<Unit>, ppSites: CPointer<CPointer<DS_NAME_RESULTA>>): UInt32 {
+    return DsListSitesA(hDs, ppSites)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsListSitesW == "on"]
+foreign {
     func DsListSitesW(hDs: CPointer<Unit>, ppSites: CPointer<CPointer<DS_NAME_RESULTW>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsListSitesW == "on"]
+public unsafe func Windows_DsListSitesW(hDs: CPointer<Unit>, ppSites: CPointer<CPointer<DS_NAME_RESULTW>>): UInt32 {
+    return DsListSitesW(hDs, ppSites)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsMakePasswordCredentialsA == "on"]
+foreign {
     // param-hint: User optional
     // param-hint: Domain optional
     // param-hint: Password optional
     func DsMakePasswordCredentialsA(User: CPointer<UInt8>, Domain: CPointer<UInt8>, Password: CPointer<UInt8>, pAuthIdentity: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsMakePasswordCredentialsA == "on"]
+public unsafe func Windows_DsMakePasswordCredentialsA(User: CPointer<UInt8>, Domain: CPointer<UInt8>, Password: CPointer<UInt8>, pAuthIdentity: CPointer<CPointer<Unit>>): UInt32 {
+    return DsMakePasswordCredentialsA(User, Domain, Password, pAuthIdentity)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsMakePasswordCredentialsW == "on"]
+foreign {
     // param-hint: User optional
     // param-hint: Domain optional
     // param-hint: Password optional
     func DsMakePasswordCredentialsW(User: CPointer<UInt16>, Domain: CPointer<UInt16>, Password: CPointer<UInt16>, pAuthIdentity: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsMakePasswordCredentialsW == "on"]
+public unsafe func Windows_DsMakePasswordCredentialsW(User: CPointer<UInt16>, Domain: CPointer<UInt16>, Password: CPointer<UInt16>, pAuthIdentity: CPointer<CPointer<Unit>>): UInt32 {
+    return DsMakePasswordCredentialsW(User, Domain, Password, pAuthIdentity)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsMapSchemaGuidsA == "on"]
+foreign {
     // param-hint: rGuids len=param[1]
     func DsMapSchemaGuidsA(hDs: CPointer<Unit>, cGuids: UInt32, rGuids: CPointer<GUID>, ppGuidMap: CPointer<CPointer<DS_SCHEMA_GUID_MAPA>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsMapSchemaGuidsA == "on"]
+public unsafe func Windows_DsMapSchemaGuidsA(hDs: CPointer<Unit>, cGuids: UInt32, rGuids: CPointer<GUID>, ppGuidMap: CPointer<CPointer<DS_SCHEMA_GUID_MAPA>>): UInt32 {
+    return DsMapSchemaGuidsA(hDs, cGuids, rGuids, ppGuidMap)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsMapSchemaGuidsW == "on"]
+foreign {
     // param-hint: rGuids len=param[1]
     func DsMapSchemaGuidsW(hDs: CPointer<Unit>, cGuids: UInt32, rGuids: CPointer<GUID>, ppGuidMap: CPointer<CPointer<DS_SCHEMA_GUID_MAPW>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsMapSchemaGuidsW == "on"]
+public unsafe func Windows_DsMapSchemaGuidsW(hDs: CPointer<Unit>, cGuids: UInt32, rGuids: CPointer<GUID>, ppGuidMap: CPointer<CPointer<DS_SCHEMA_GUID_MAPW>>): UInt32 {
+    return DsMapSchemaGuidsW(hDs, cGuids, rGuids, ppGuidMap)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsQuerySitesByCostA == "on"]
+foreign {
     // param-hint: rgszToSites len=param[3]
     // param-hint: dwFlags optional reserved
     func DsQuerySitesByCostA(hDS: CPointer<Unit>, pszFromSite: CPointer<UInt8>, rgszToSites: CPointer<CPointer<UInt8>>, cToSites: UInt32, dwFlags: UInt32, prgSiteInfo: CPointer<CPointer<DS_SITE_COST_INFO>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsQuerySitesByCostA == "on"]
+public unsafe func Windows_DsQuerySitesByCostA(hDS: CPointer<Unit>, pszFromSite: CPointer<UInt8>, rgszToSites: CPointer<CPointer<UInt8>>, cToSites: UInt32, dwFlags: UInt32, prgSiteInfo: CPointer<CPointer<DS_SITE_COST_INFO>>): UInt32 {
+    return DsQuerySitesByCostA(hDS, pszFromSite, rgszToSites, cToSites, dwFlags, prgSiteInfo)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsQuerySitesByCostW == "on"]
+foreign {
     // param-hint: rgwszToSites len=param[3]
     // param-hint: dwFlags optional reserved
     func DsQuerySitesByCostW(hDS: CPointer<Unit>, pwszFromSite: CPointer<UInt16>, rgwszToSites: CPointer<CPointer<UInt16>>, cToSites: UInt32, dwFlags: UInt32, prgSiteInfo: CPointer<CPointer<DS_SITE_COST_INFO>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsQuerySitesByCostW == "on"]
+public unsafe func Windows_DsQuerySitesByCostW(hDS: CPointer<Unit>, pwszFromSite: CPointer<UInt16>, rgwszToSites: CPointer<CPointer<UInt16>>, cToSites: UInt32, dwFlags: UInt32, prgSiteInfo: CPointer<CPointer<DS_SITE_COST_INFO>>): UInt32 {
+    return DsQuerySitesByCostW(hDS, pwszFromSite, rgwszToSites, cToSites, dwFlags, prgSiteInfo)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsQuerySitesFree == "on"]
+foreign {
     func DsQuerySitesFree(rgSiteInfo: CPointer<DS_SITE_COST_INFO>): Unit
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsQuerySitesFree == "on"]
+public unsafe func Windows_DsQuerySitesFree(rgSiteInfo: CPointer<DS_SITE_COST_INFO>): Unit {
+    DsQuerySitesFree(rgSiteInfo)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsRemoveDsDomainA == "on"]
+foreign {
     func DsRemoveDsDomainA(hDs: CPointer<Unit>, DomainDN: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsRemoveDsDomainA == "on"]
+public unsafe func Windows_DsRemoveDsDomainA(hDs: CPointer<Unit>, DomainDN: CPointer<UInt8>): UInt32 {
+    return DsRemoveDsDomainA(hDs, DomainDN)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsRemoveDsDomainW == "on"]
+foreign {
     func DsRemoveDsDomainW(hDs: CPointer<Unit>, DomainDN: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsRemoveDsDomainW == "on"]
+public unsafe func Windows_DsRemoveDsDomainW(hDs: CPointer<Unit>, DomainDN: CPointer<UInt16>): UInt32 {
+    return DsRemoveDsDomainW(hDs, DomainDN)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsRemoveDsServerA == "on"]
+foreign {
     // param-hint: DomainDN optional
     // param-hint: fLastDcInDomain optional
     func DsRemoveDsServerA(hDs: CPointer<Unit>, ServerDN: CPointer<UInt8>, DomainDN: CPointer<UInt8>, fLastDcInDomain: CPointer<Int32>, fCommit: Int32): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsRemoveDsServerA == "on"]
+public unsafe func Windows_DsRemoveDsServerA(hDs: CPointer<Unit>, ServerDN: CPointer<UInt8>, DomainDN: CPointer<UInt8>, fLastDcInDomain: CPointer<Int32>, fCommit: Int32): UInt32 {
+    return DsRemoveDsServerA(hDs, ServerDN, DomainDN, fLastDcInDomain, fCommit)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsRemoveDsServerW == "on"]
+foreign {
     // param-hint: DomainDN optional
     // param-hint: fLastDcInDomain optional
     func DsRemoveDsServerW(hDs: CPointer<Unit>, ServerDN: CPointer<UInt16>, DomainDN: CPointer<UInt16>, fLastDcInDomain: CPointer<Int32>, fCommit: Int32): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsRemoveDsServerW == "on"]
+public unsafe func Windows_DsRemoveDsServerW(hDs: CPointer<Unit>, ServerDN: CPointer<UInt16>, DomainDN: CPointer<UInt16>, fLastDcInDomain: CPointer<Int32>, fCommit: Int32): UInt32 {
+    return DsRemoveDsServerW(hDs, ServerDN, DomainDN, fLastDcInDomain, fCommit)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaAddA == "on"]
+foreign {
     // param-hint: pSchedule optional
     func DsReplicaAddA(hDS: CPointer<Unit>, NameContext: CPointer<UInt8>, SourceDsaDn: CPointer<UInt8>, TransportDn: CPointer<UInt8>, SourceDsaAddress: CPointer<UInt8>, pSchedule: CPointer<SCHEDULE>, Options: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaAddA == "on"]
+public unsafe func Windows_DsReplicaAddA(hDS: CPointer<Unit>, NameContext: CPointer<UInt8>, SourceDsaDn: CPointer<UInt8>, TransportDn: CPointer<UInt8>, SourceDsaAddress: CPointer<UInt8>, pSchedule: CPointer<SCHEDULE>, Options: UInt32): UInt32 {
+    return DsReplicaAddA(hDS, NameContext, SourceDsaDn, TransportDn, SourceDsaAddress, pSchedule, Options)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaAddW == "on"]
+foreign {
     // param-hint: pSchedule optional
     func DsReplicaAddW(hDS: CPointer<Unit>, NameContext: CPointer<UInt16>, SourceDsaDn: CPointer<UInt16>, TransportDn: CPointer<UInt16>, SourceDsaAddress: CPointer<UInt16>, pSchedule: CPointer<SCHEDULE>, Options: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaAddW == "on"]
+public unsafe func Windows_DsReplicaAddW(hDS: CPointer<Unit>, NameContext: CPointer<UInt16>, SourceDsaDn: CPointer<UInt16>, TransportDn: CPointer<UInt16>, SourceDsaAddress: CPointer<UInt16>, pSchedule: CPointer<SCHEDULE>, Options: UInt32): UInt32 {
+    return DsReplicaAddW(hDS, NameContext, SourceDsaDn, TransportDn, SourceDsaAddress, pSchedule, Options)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaConsistencyCheck == "on"]
+foreign {
     func DsReplicaConsistencyCheck(hDS: CPointer<Unit>, TaskID: Int32, dwFlags: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaConsistencyCheck == "on"]
+public unsafe func Windows_DsReplicaConsistencyCheck(hDS: CPointer<Unit>, TaskID: Int32, dwFlags: UInt32): UInt32 {
+    return DsReplicaConsistencyCheck(hDS, TaskID, dwFlags)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaDelA == "on"]
+foreign {
     func DsReplicaDelA(hDS: CPointer<Unit>, NameContext: CPointer<UInt8>, DsaSrc: CPointer<UInt8>, Options: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaDelA == "on"]
+public unsafe func Windows_DsReplicaDelA(hDS: CPointer<Unit>, NameContext: CPointer<UInt8>, DsaSrc: CPointer<UInt8>, Options: UInt32): UInt32 {
+    return DsReplicaDelA(hDS, NameContext, DsaSrc, Options)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaDelW == "on"]
+foreign {
     func DsReplicaDelW(hDS: CPointer<Unit>, NameContext: CPointer<UInt16>, DsaSrc: CPointer<UInt16>, Options: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaDelW == "on"]
+public unsafe func Windows_DsReplicaDelW(hDS: CPointer<Unit>, NameContext: CPointer<UInt16>, DsaSrc: CPointer<UInt16>, Options: UInt32): UInt32 {
+    return DsReplicaDelW(hDS, NameContext, DsaSrc, Options)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaFreeInfo == "on"]
+foreign {
     func DsReplicaFreeInfo(InfoType: Int32, pInfo: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaFreeInfo == "on"]
+public unsafe func Windows_DsReplicaFreeInfo(InfoType: Int32, pInfo: CPointer<Unit>): Unit {
+    DsReplicaFreeInfo(InfoType, pInfo)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaGetInfo2W == "on"]
+foreign {
     // param-hint: pszObject optional
     // param-hint: puuidForSourceDsaObjGuid optional
     // param-hint: pszAttributeName optional
     // param-hint: pszValue optional
     func DsReplicaGetInfo2W(hDS: CPointer<Unit>, InfoType: Int32, pszObject: CPointer<UInt16>, puuidForSourceDsaObjGuid: CPointer<GUID>, pszAttributeName: CPointer<UInt16>, pszValue: CPointer<UInt16>, dwFlags: UInt32, dwEnumerationContext: UInt32, ppInfo: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaGetInfo2W == "on"]
+public unsafe func Windows_DsReplicaGetInfo2W(hDS: CPointer<Unit>, InfoType: Int32, pszObject: CPointer<UInt16>, puuidForSourceDsaObjGuid: CPointer<GUID>, pszAttributeName: CPointer<UInt16>, pszValue: CPointer<UInt16>, dwFlags: UInt32, dwEnumerationContext: UInt32, ppInfo: CPointer<CPointer<Unit>>): UInt32 {
+    return DsReplicaGetInfo2W(hDS, InfoType, pszObject, puuidForSourceDsaObjGuid, pszAttributeName, pszValue, dwFlags, dwEnumerationContext, ppInfo)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaGetInfoW == "on"]
+foreign {
     // param-hint: pszObject optional
     // param-hint: puuidForSourceDsaObjGuid optional
     func DsReplicaGetInfoW(hDS: CPointer<Unit>, InfoType: Int32, pszObject: CPointer<UInt16>, puuidForSourceDsaObjGuid: CPointer<GUID>, ppInfo: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaGetInfoW == "on"]
+public unsafe func Windows_DsReplicaGetInfoW(hDS: CPointer<Unit>, InfoType: Int32, pszObject: CPointer<UInt16>, puuidForSourceDsaObjGuid: CPointer<GUID>, ppInfo: CPointer<CPointer<Unit>>): UInt32 {
+    return DsReplicaGetInfoW(hDS, InfoType, pszObject, puuidForSourceDsaObjGuid, ppInfo)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaModifyA == "on"]
+foreign {
     // param-hint: pUuidSourceDsa optional
     // param-hint: TransportDn optional reserved
     // param-hint: pSchedule optional
     // param-hint: ReplicaFlags optional reserved
     func DsReplicaModifyA(hDS: CPointer<Unit>, NameContext: CPointer<UInt8>, pUuidSourceDsa: CPointer<GUID>, TransportDn: CPointer<UInt8>, SourceDsaAddress: CPointer<UInt8>, pSchedule: CPointer<SCHEDULE>, ReplicaFlags: UInt32, ModifyFields: UInt32, Options: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaModifyA == "on"]
+public unsafe func Windows_DsReplicaModifyA(hDS: CPointer<Unit>, NameContext: CPointer<UInt8>, pUuidSourceDsa: CPointer<GUID>, TransportDn: CPointer<UInt8>, SourceDsaAddress: CPointer<UInt8>, pSchedule: CPointer<SCHEDULE>, ReplicaFlags: UInt32, ModifyFields: UInt32, Options: UInt32): UInt32 {
+    return DsReplicaModifyA(hDS, NameContext, pUuidSourceDsa, TransportDn, SourceDsaAddress, pSchedule, ReplicaFlags, ModifyFields, Options)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaModifyW == "on"]
+foreign {
     // param-hint: pUuidSourceDsa optional
     // param-hint: TransportDn optional reserved
     // param-hint: pSchedule optional
     func DsReplicaModifyW(hDS: CPointer<Unit>, NameContext: CPointer<UInt16>, pUuidSourceDsa: CPointer<GUID>, TransportDn: CPointer<UInt16>, SourceDsaAddress: CPointer<UInt16>, pSchedule: CPointer<SCHEDULE>, ReplicaFlags: UInt32, ModifyFields: UInt32, Options: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaModifyW == "on"]
+public unsafe func Windows_DsReplicaModifyW(hDS: CPointer<Unit>, NameContext: CPointer<UInt16>, pUuidSourceDsa: CPointer<GUID>, TransportDn: CPointer<UInt16>, SourceDsaAddress: CPointer<UInt16>, pSchedule: CPointer<SCHEDULE>, ReplicaFlags: UInt32, ModifyFields: UInt32, Options: UInt32): UInt32 {
+    return DsReplicaModifyW(hDS, NameContext, pUuidSourceDsa, TransportDn, SourceDsaAddress, pSchedule, ReplicaFlags, ModifyFields, Options)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaSyncA == "on"]
+foreign {
     func DsReplicaSyncA(hDS: CPointer<Unit>, NameContext: CPointer<UInt8>, pUuidDsaSrc: CPointer<GUID>, Options: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaSyncA == "on"]
+public unsafe func Windows_DsReplicaSyncA(hDS: CPointer<Unit>, NameContext: CPointer<UInt8>, pUuidDsaSrc: CPointer<GUID>, Options: UInt32): UInt32 {
+    return DsReplicaSyncA(hDS, NameContext, pUuidDsaSrc, Options)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaSyncAllA == "on"]
+foreign {
     // param-hint: pCallbackData optional
     // param-hint: pErrors optional
     func DsReplicaSyncAllA(hDS: CPointer<Unit>, pszNameContext: CPointer<UInt8>, ulFlags: UInt32, pFnCallBack: IntNative, pCallbackData: CPointer<Unit>, pErrors: CPointer<CPointer<CPointer<DS_REPSYNCALL_ERRINFOA>>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaSyncAllA == "on"]
+public unsafe func Windows_DsReplicaSyncAllA(hDS: CPointer<Unit>, pszNameContext: CPointer<UInt8>, ulFlags: UInt32, pFnCallBack: IntNative, pCallbackData: CPointer<Unit>, pErrors: CPointer<CPointer<CPointer<DS_REPSYNCALL_ERRINFOA>>>): UInt32 {
+    return DsReplicaSyncAllA(hDS, pszNameContext, ulFlags, pFnCallBack, pCallbackData, pErrors)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaSyncAllW == "on"]
+foreign {
     // param-hint: pCallbackData optional
     // param-hint: pErrors optional
     func DsReplicaSyncAllW(hDS: CPointer<Unit>, pszNameContext: CPointer<UInt16>, ulFlags: UInt32, pFnCallBack: IntNative, pCallbackData: CPointer<Unit>, pErrors: CPointer<CPointer<CPointer<DS_REPSYNCALL_ERRINFOW>>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaSyncAllW == "on"]
+public unsafe func Windows_DsReplicaSyncAllW(hDS: CPointer<Unit>, pszNameContext: CPointer<UInt16>, ulFlags: UInt32, pFnCallBack: IntNative, pCallbackData: CPointer<Unit>, pErrors: CPointer<CPointer<CPointer<DS_REPSYNCALL_ERRINFOW>>>): UInt32 {
+    return DsReplicaSyncAllW(hDS, pszNameContext, ulFlags, pFnCallBack, pCallbackData, pErrors)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaSyncW == "on"]
+foreign {
     func DsReplicaSyncW(hDS: CPointer<Unit>, NameContext: CPointer<UInt16>, pUuidDsaSrc: CPointer<GUID>, Options: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaSyncW == "on"]
+public unsafe func Windows_DsReplicaSyncW(hDS: CPointer<Unit>, NameContext: CPointer<UInt16>, pUuidDsaSrc: CPointer<GUID>, Options: UInt32): UInt32 {
+    return DsReplicaSyncW(hDS, NameContext, pUuidDsaSrc, Options)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaUpdateRefsA == "on"]
+foreign {
     func DsReplicaUpdateRefsA(hDS: CPointer<Unit>, NameContext: CPointer<UInt8>, DsaDest: CPointer<UInt8>, pUuidDsaDest: CPointer<GUID>, Options: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaUpdateRefsA == "on"]
+public unsafe func Windows_DsReplicaUpdateRefsA(hDS: CPointer<Unit>, NameContext: CPointer<UInt8>, DsaDest: CPointer<UInt8>, pUuidDsaDest: CPointer<GUID>, Options: UInt32): UInt32 {
+    return DsReplicaUpdateRefsA(hDS, NameContext, DsaDest, pUuidDsaDest, Options)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaUpdateRefsW == "on"]
+foreign {
     func DsReplicaUpdateRefsW(hDS: CPointer<Unit>, NameContext: CPointer<UInt16>, DsaDest: CPointer<UInt16>, pUuidDsaDest: CPointer<GUID>, Options: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaUpdateRefsW == "on"]
+public unsafe func Windows_DsReplicaUpdateRefsW(hDS: CPointer<Unit>, NameContext: CPointer<UInt16>, DsaDest: CPointer<UInt16>, pUuidDsaDest: CPointer<GUID>, Options: UInt32): UInt32 {
+    return DsReplicaUpdateRefsW(hDS, NameContext, DsaDest, pUuidDsaDest, Options)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaVerifyObjectsA == "on"]
+foreign {
     func DsReplicaVerifyObjectsA(hDS: CPointer<Unit>, NameContext: CPointer<UInt8>, pUuidDsaSrc: CPointer<GUID>, ulOptions: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaVerifyObjectsA == "on"]
+public unsafe func Windows_DsReplicaVerifyObjectsA(hDS: CPointer<Unit>, NameContext: CPointer<UInt8>, pUuidDsaSrc: CPointer<GUID>, ulOptions: UInt32): UInt32 {
+    return DsReplicaVerifyObjectsA(hDS, NameContext, pUuidDsaSrc, ulOptions)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaVerifyObjectsW == "on"]
+foreign {
     func DsReplicaVerifyObjectsW(hDS: CPointer<Unit>, NameContext: CPointer<UInt16>, pUuidDsaSrc: CPointer<GUID>, ulOptions: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsReplicaVerifyObjectsW == "on"]
+public unsafe func Windows_DsReplicaVerifyObjectsW(hDS: CPointer<Unit>, NameContext: CPointer<UInt16>, pUuidDsaSrc: CPointer<GUID>, ulOptions: UInt32): UInt32 {
+    return DsReplicaVerifyObjectsW(hDS, NameContext, pUuidDsaSrc, ulOptions)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsServerRegisterSpnA == "on"]
+foreign {
     // param-hint: UserObjectDN optional
     func DsServerRegisterSpnA(Operation: Int32, ServiceClass: CPointer<UInt8>, UserObjectDN: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsServerRegisterSpnA == "on"]
+public unsafe func Windows_DsServerRegisterSpnA(Operation: Int32, ServiceClass: CPointer<UInt8>, UserObjectDN: CPointer<UInt8>): UInt32 {
+    return DsServerRegisterSpnA(Operation, ServiceClass, UserObjectDN)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsServerRegisterSpnW == "on"]
+foreign {
     // param-hint: UserObjectDN optional
     func DsServerRegisterSpnW(Operation: Int32, ServiceClass: CPointer<UInt16>, UserObjectDN: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsServerRegisterSpnW == "on"]
+public unsafe func Windows_DsServerRegisterSpnW(Operation: Int32, ServiceClass: CPointer<UInt16>, UserObjectDN: CPointer<UInt16>): UInt32 {
+    return DsServerRegisterSpnW(Operation, ServiceClass, UserObjectDN)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsUnBindA == "on"]
+foreign {
     func DsUnBindA(phDS: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsUnBindA == "on"]
+public unsafe func Windows_DsUnBindA(phDS: CPointer<CPointer<Unit>>): UInt32 {
+    return DsUnBindA(phDS)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsUnBindW == "on"]
+foreign {
     func DsUnBindW(phDS: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsUnBindW == "on"]
+public unsafe func Windows_DsUnBindW(phDS: CPointer<CPointer<Unit>>): UInt32 {
+    return DsUnBindW(phDS)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsWriteAccountSpnA == "on"]
+foreign {
     // param-hint: rpszSpn len=param[3]
     func DsWriteAccountSpnA(hDS: CPointer<Unit>, Operation: Int32, pszAccount: CPointer<UInt8>, cSpn: UInt32, rpszSpn: CPointer<CPointer<UInt8>>): UInt32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsWriteAccountSpnA == "on"]
+public unsafe func Windows_DsWriteAccountSpnA(hDS: CPointer<Unit>, Operation: Int32, pszAccount: CPointer<UInt8>, cSpn: UInt32, rpszSpn: CPointer<CPointer<UInt8>>): UInt32 {
+    return DsWriteAccountSpnA(hDS, Operation, pszAccount, cSpn, rpszSpn)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsWriteAccountSpnW == "on"]
+foreign {
     // param-hint: rpszSpn len=param[3]
     func DsWriteAccountSpnW(hDS: CPointer<Unit>, Operation: Int32, pszAccount: CPointer<UInt16>, cSpn: UInt32, rpszSpn: CPointer<CPointer<UInt16>>): UInt32
 }
 
-@When[DSPROP == "on"]
-foreign {
-    func ADsPropCheckIfWritable(pwzAttr: CPointer<UInt16>, pWritableAttrs: CPointer<ADS_ATTR_INFO>): Int32
-    func ADsPropGetInitInfo(hNotifyObj: CPointer<Unit>, pInitParams: CPointer<ADSPROPINITPARAMS>): Int32
-    func ADsPropSendErrorMessage(hNotifyObj: CPointer<Unit>, pError: CPointer<ADSPROPERROR>): Int32
-    func ADsPropSetHwnd(hNotifyObj: CPointer<Unit>, hPage: CPointer<Unit>): Int32
-    func ADsPropSetHwndWithTitle(hNotifyObj: CPointer<Unit>, hPage: CPointer<Unit>, ptzTitle: CPointer<Int8>): Int32
-    func ADsPropShowErrorDialog(hNotifyObj: CPointer<Unit>, hPage: CPointer<Unit>): Int32
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && NTDSAPI == "on" && Windows_Win32_Networking_ActiveDirectory_DsWriteAccountSpnW == "on"]
+public unsafe func Windows_DsWriteAccountSpnW(hDS: CPointer<Unit>, Operation: Int32, pszAccount: CPointer<UInt16>, cSpn: UInt32, rpszSpn: CPointer<CPointer<UInt16>>): UInt32 {
+    return DsWriteAccountSpnW(hDS, Operation, pszAccount, cSpn, rpszSpn)
 }
 
-@When[DSPROP == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPROP == "on" && Windows_Win32_Networking_ActiveDirectory_ADsPropCheckIfWritable == "on"]
+foreign {
+    func ADsPropCheckIfWritable(pwzAttr: CPointer<UInt16>, pWritableAttrs: CPointer<ADS_ATTR_INFO>): Int32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPROP == "on" && Windows_Win32_Networking_ActiveDirectory_ADsPropCheckIfWritable == "on"]
+public unsafe func Windows_ADsPropCheckIfWritable(pwzAttr: CPointer<UInt16>, pWritableAttrs: CPointer<ADS_ATTR_INFO>): Int32 {
+    return ADsPropCheckIfWritable(pwzAttr, pWritableAttrs)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPROP == "on" && Windows_Win32_Networking_ActiveDirectory_ADsPropCreateNotifyObj == "on" && Windows_Win32_System_Com == "on"]
 foreign {
     func ADsPropCreateNotifyObj(pAppThdDataObj: CPointer<Unit>, pwzADsObjName: CPointer<UInt16>, phNotifyObj: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[DSUIEXT == "on"]
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPROP == "on" && Windows_Win32_Networking_ActiveDirectory_ADsPropCreateNotifyObj == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_ADsPropCreateNotifyObj(pAppThdDataObj: CPointer<Unit>, pwzADsObjName: CPointer<UInt16>, phNotifyObj: CPointer<CPointer<Unit>>): Int32 {
+    return ADsPropCreateNotifyObj(pAppThdDataObj, pwzADsObjName, phNotifyObj)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPROP == "on" && Windows_Win32_Networking_ActiveDirectory_ADsPropGetInitInfo == "on"]
+foreign {
+    func ADsPropGetInitInfo(hNotifyObj: CPointer<Unit>, pInitParams: CPointer<ADSPROPINITPARAMS>): Int32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPROP == "on" && Windows_Win32_Networking_ActiveDirectory_ADsPropGetInitInfo == "on"]
+public unsafe func Windows_ADsPropGetInitInfo(hNotifyObj: CPointer<Unit>, pInitParams: CPointer<ADSPROPINITPARAMS>): Int32 {
+    return ADsPropGetInitInfo(hNotifyObj, pInitParams)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPROP == "on" && Windows_Win32_Networking_ActiveDirectory_ADsPropSendErrorMessage == "on"]
+foreign {
+    func ADsPropSendErrorMessage(hNotifyObj: CPointer<Unit>, pError: CPointer<ADSPROPERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPROP == "on" && Windows_Win32_Networking_ActiveDirectory_ADsPropSendErrorMessage == "on"]
+public unsafe func Windows_ADsPropSendErrorMessage(hNotifyObj: CPointer<Unit>, pError: CPointer<ADSPROPERROR>): Int32 {
+    return ADsPropSendErrorMessage(hNotifyObj, pError)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPROP == "on" && Windows_Win32_Networking_ActiveDirectory_ADsPropSetHwnd == "on"]
+foreign {
+    func ADsPropSetHwnd(hNotifyObj: CPointer<Unit>, hPage: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPROP == "on" && Windows_Win32_Networking_ActiveDirectory_ADsPropSetHwnd == "on"]
+public unsafe func Windows_ADsPropSetHwnd(hNotifyObj: CPointer<Unit>, hPage: CPointer<Unit>): Int32 {
+    return ADsPropSetHwnd(hNotifyObj, hPage)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPROP == "on" && Windows_Win32_Networking_ActiveDirectory_ADsPropSetHwndWithTitle == "on"]
+foreign {
+    func ADsPropSetHwndWithTitle(hNotifyObj: CPointer<Unit>, hPage: CPointer<Unit>, ptzTitle: CPointer<Int8>): Int32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPROP == "on" && Windows_Win32_Networking_ActiveDirectory_ADsPropSetHwndWithTitle == "on"]
+public unsafe func Windows_ADsPropSetHwndWithTitle(hNotifyObj: CPointer<Unit>, hPage: CPointer<Unit>, ptzTitle: CPointer<Int8>): Int32 {
+    return ADsPropSetHwndWithTitle(hNotifyObj, hPage, ptzTitle)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPROP == "on" && Windows_Win32_Networking_ActiveDirectory_ADsPropShowErrorDialog == "on"]
+foreign {
+    func ADsPropShowErrorDialog(hNotifyObj: CPointer<Unit>, hPage: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSPROP == "on" && Windows_Win32_Networking_ActiveDirectory_ADsPropShowErrorDialog == "on"]
+public unsafe func Windows_ADsPropShowErrorDialog(hNotifyObj: CPointer<Unit>, hPage: CPointer<Unit>): Int32 {
+    return ADsPropShowErrorDialog(hNotifyObj, hPage)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSUIEXT == "on" && Windows_Win32_Networking_ActiveDirectory_DsBrowseForContainerA == "on" && Windows_Win32_UI_Shell == "on"]
+foreign {
+    func DsBrowseForContainerA(pInfo: CPointer<DSBROWSEINFOA>): Int32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSUIEXT == "on" && Windows_Win32_Networking_ActiveDirectory_DsBrowseForContainerA == "on" && Windows_Win32_UI_Shell == "on"]
+public unsafe func Windows_DsBrowseForContainerA(pInfo: CPointer<DSBROWSEINFOA>): Int32 {
+    return DsBrowseForContainerA(pInfo)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSUIEXT == "on" && Windows_Win32_Networking_ActiveDirectory_DsBrowseForContainerW == "on" && Windows_Win32_UI_Shell == "on"]
+foreign {
+    func DsBrowseForContainerW(pInfo: CPointer<DSBROWSEINFOW>): Int32
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSUIEXT == "on" && Windows_Win32_Networking_ActiveDirectory_DsBrowseForContainerW == "on" && Windows_Win32_UI_Shell == "on"]
+public unsafe func Windows_DsBrowseForContainerW(pInfo: CPointer<DSBROWSEINFOW>): Int32 {
+    return DsBrowseForContainerW(pInfo)
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSUIEXT == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetFriendlyClassName == "on"]
 foreign {
     // param-hint: pszBuffer len=param[2]
     func DsGetFriendlyClassName(pszObjectClass: CPointer<UInt16>, pszBuffer: CPointer<UInt16>, cchBuffer: UInt32): Int32
 }
 
-@When[DSUIEXT == "on" && Windows_Win32_UI_Shell == "on"]
-foreign {
-    func DsBrowseForContainerA(pInfo: CPointer<DSBROWSEINFOA>): Int32
-    func DsBrowseForContainerW(pInfo: CPointer<DSBROWSEINFOW>): Int32
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSUIEXT == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetFriendlyClassName == "on"]
+public unsafe func Windows_DsGetFriendlyClassName(pszObjectClass: CPointer<UInt16>, pszBuffer: CPointer<UInt16>, cchBuffer: UInt32): Int32 {
+    return DsGetFriendlyClassName(pszObjectClass, pszBuffer, cchBuffer)
 }
 
-@When[DSUIEXT == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSUIEXT == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetIcon == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
     func DsGetIcon(dwFlags: UInt32, pszObjectClass: CPointer<UInt16>, cxImage: Int32, cyImage: Int32): Win32__impl_l0.HICON
+}
+
+@When[Windows_Win32_Networking_ActiveDirectory == "on" && DSUIEXT == "on" && Windows_Win32_Networking_ActiveDirectory_DsGetIcon == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_DsGetIcon(dwFlags: UInt32, pszObjectClass: CPointer<UInt16>, cxImage: Int32, cyImage: Int32): Win32__impl_l0.HICON {
+    return DsGetIcon(dwFlags, pszObjectClass, cxImage, cyImage)
 }
 
 @When[Windows_Win32_Networking_ActiveDirectory == "on"]

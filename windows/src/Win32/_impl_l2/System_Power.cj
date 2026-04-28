@@ -4,6 +4,7 @@
 package windows.Win32._impl_l2
 
 import std.collection.*
+import windows_libloading
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
 import windows_interface.{GUID}
@@ -17,135 +18,430 @@ import windows.Win32._impl_l1 as Win32__impl_l1
 import windows_core as windows_core
 
 
-@When[KERNEL32 == "on"]
+@When[Windows_Win32_System_Power == "on" && KERNEL32 == "on" && Windows_Win32_System_Power_GetDevicePowerState == "on"]
 foreign {
     func GetDevicePowerState(hDevice: CPointer<Unit>, pfOn: CPointer<Int32>): Int32
-    // pinvoke-hint: SetLastError
-    func GetSystemPowerStatus(lpSystemPowerStatus: CPointer<Win32__impl_l0.SYSTEM_POWER_STATUSAbi>): Int32
-    func IsSystemResumeAutomatic(): Int32
-    // pinvoke-hint: SetLastError
-    func PowerClearRequest(PowerRequest: CPointer<Unit>, RequestType: Win32__impl_l0.POWER_REQUEST_TYPEAbi): Int32
-    // pinvoke-hint: SetLastError
-    func PowerSetRequest(PowerRequest: CPointer<Unit>, RequestType: Win32__impl_l0.POWER_REQUEST_TYPEAbi): Int32
-    func RequestWakeupLatency(latency: Win32__impl_l0.LATENCY_TIMEAbi): Int32
-    // pinvoke-hint: SetLastError
-    func SetSystemPowerState(fSuspend: Int32, fForce: Int32): Int32
-    func SetThreadExecutionState(esFlags: Win32__impl_l0.EXECUTION_STATEAbi): Win32__impl_l0.EXECUTION_STATEAbi
 }
 
-@When[KERNEL32 == "on" && Windows_Win32_System_Threading == "on"]
+@When[Windows_Win32_System_Power == "on" && KERNEL32 == "on" && Windows_Win32_System_Power_GetDevicePowerState == "on"]
+public unsafe func Windows_GetDevicePowerState(hDevice: CPointer<Unit>, pfOn: CPointer<Int32>): Int32 {
+    return GetDevicePowerState(hDevice, pfOn)
+}
+
+@When[Windows_Win32_System_Power == "on" && KERNEL32 == "on" && Windows_Win32_System_Power_GetSystemPowerStatus == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func GetSystemPowerStatus(lpSystemPowerStatus: CPointer<Win32__impl_l0.SYSTEM_POWER_STATUSAbi>): Int32
+}
+
+@When[Windows_Win32_System_Power == "on" && KERNEL32 == "on" && Windows_Win32_System_Power_GetSystemPowerStatus == "on"]
+public unsafe func Windows_GetSystemPowerStatus(lpSystemPowerStatus: CPointer<Win32__impl_l0.SYSTEM_POWER_STATUSAbi>): Int32 {
+    return GetSystemPowerStatus(lpSystemPowerStatus)
+}
+
+@When[Windows_Win32_System_Power == "on" && KERNEL32 == "on" && Windows_Win32_System_Power_IsSystemResumeAutomatic == "on"]
+foreign {
+    func IsSystemResumeAutomatic(): Int32
+}
+
+@When[Windows_Win32_System_Power == "on" && KERNEL32 == "on" && Windows_Win32_System_Power_IsSystemResumeAutomatic == "on"]
+public unsafe func Windows_IsSystemResumeAutomatic(): Int32 {
+    return IsSystemResumeAutomatic()
+}
+
+@When[Windows_Win32_System_Power == "on" && KERNEL32 == "on" && Windows_Win32_System_Power_PowerClearRequest == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func PowerClearRequest(PowerRequest: CPointer<Unit>, RequestType: Win32__impl_l0.POWER_REQUEST_TYPEAbi): Int32
+}
+
+@When[Windows_Win32_System_Power == "on" && KERNEL32 == "on" && Windows_Win32_System_Power_PowerClearRequest == "on"]
+public unsafe func Windows_PowerClearRequest(PowerRequest: CPointer<Unit>, RequestType: Win32__impl_l0.POWER_REQUEST_TYPEAbi): Int32 {
+    return PowerClearRequest(PowerRequest, RequestType)
+}
+
+@When[Windows_Win32_System_Power == "on" && KERNEL32 == "on" && Windows_Win32_System_Power_PowerCreateRequest == "on" && Windows_Win32_System_Threading == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func PowerCreateRequest(Context: CPointer<Win32__impl_l1.REASON_CONTEXTAbi>): CPointer<Unit>
 }
 
-@When[POWRPROF == "on"]
+@When[Windows_Win32_System_Power == "on" && KERNEL32 == "on" && Windows_Win32_System_Power_PowerCreateRequest == "on" && Windows_Win32_System_Threading == "on"]
+public unsafe func Windows_PowerCreateRequest(Context: CPointer<Win32__impl_l1.REASON_CONTEXTAbi>): CPointer<Unit> {
+    return PowerCreateRequest(Context)
+}
+
+@When[Windows_Win32_System_Power == "on" && KERNEL32 == "on" && Windows_Win32_System_Power_PowerSetRequest == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func PowerSetRequest(PowerRequest: CPointer<Unit>, RequestType: Win32__impl_l0.POWER_REQUEST_TYPEAbi): Int32
+}
+
+@When[Windows_Win32_System_Power == "on" && KERNEL32 == "on" && Windows_Win32_System_Power_PowerSetRequest == "on"]
+public unsafe func Windows_PowerSetRequest(PowerRequest: CPointer<Unit>, RequestType: Win32__impl_l0.POWER_REQUEST_TYPEAbi): Int32 {
+    return PowerSetRequest(PowerRequest, RequestType)
+}
+
+@When[Windows_Win32_System_Power == "on" && KERNEL32 == "on" && Windows_Win32_System_Power_RequestWakeupLatency == "on"]
+foreign {
+    func RequestWakeupLatency(latency: Win32__impl_l0.LATENCY_TIMEAbi): Int32
+}
+
+@When[Windows_Win32_System_Power == "on" && KERNEL32 == "on" && Windows_Win32_System_Power_RequestWakeupLatency == "on"]
+public unsafe func Windows_RequestWakeupLatency(latency: Win32__impl_l0.LATENCY_TIMEAbi): Int32 {
+    return RequestWakeupLatency(latency)
+}
+
+@When[Windows_Win32_System_Power == "on" && KERNEL32 == "on" && Windows_Win32_System_Power_SetSystemPowerState == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetSystemPowerState(fSuspend: Int32, fForce: Int32): Int32
+}
+
+@When[Windows_Win32_System_Power == "on" && KERNEL32 == "on" && Windows_Win32_System_Power_SetSystemPowerState == "on"]
+public unsafe func Windows_SetSystemPowerState(fSuspend: Int32, fForce: Int32): Int32 {
+    return SetSystemPowerState(fSuspend, fForce)
+}
+
+@When[Windows_Win32_System_Power == "on" && KERNEL32 == "on" && Windows_Win32_System_Power_SetThreadExecutionState == "on"]
+foreign {
+    func SetThreadExecutionState(esFlags: Win32__impl_l0.EXECUTION_STATEAbi): Win32__impl_l0.EXECUTION_STATEAbi
+}
+
+@When[Windows_Win32_System_Power == "on" && KERNEL32 == "on" && Windows_Win32_System_Power_SetThreadExecutionState == "on"]
+public unsafe func Windows_SetThreadExecutionState(esFlags: Win32__impl_l0.EXECUTION_STATEAbi): Win32__impl_l0.EXECUTION_STATEAbi {
+    return SetThreadExecutionState(esFlags)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_CallNtPowerInformation == "on"]
 foreign {
     // param-hint: InputBuffer bytes=param[2] optional
     // param-hint: OutputBuffer bytes=param[4] optional
     func CallNtPowerInformation(InformationLevel: Win32__impl_l0.POWER_INFORMATION_LEVELAbi, InputBuffer: CPointer<Unit>, InputBufferLength: UInt32, OutputBuffer: CPointer<Unit>, OutputBufferLength: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_CallNtPowerInformation == "on"]
+public unsafe func Windows_CallNtPowerInformation(InformationLevel: Win32__impl_l0.POWER_INFORMATION_LEVELAbi, InputBuffer: CPointer<Unit>, InputBufferLength: UInt32, OutputBuffer: CPointer<Unit>, OutputBufferLength: UInt32): Int32 {
+    return CallNtPowerInformation(InformationLevel, InputBuffer, InputBufferLength, OutputBuffer, OutputBufferLength)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_CanUserWritePwrScheme == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CanUserWritePwrScheme(): UInt8
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_CanUserWritePwrScheme == "on"]
+public unsafe func Windows_CanUserWritePwrScheme(): UInt8 {
+    return CanUserWritePwrScheme()
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_DeletePwrScheme == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func DeletePwrScheme(uiID: UInt32): UInt8
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_DeletePwrScheme == "on"]
+public unsafe func Windows_DeletePwrScheme(uiID: UInt32): UInt8 {
+    return DeletePwrScheme(uiID)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_DevicePowerClose == "on"]
+foreign {
     func DevicePowerClose(): UInt8
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_DevicePowerClose == "on"]
+public unsafe func Windows_DevicePowerClose(): UInt8 {
+    return DevicePowerClose()
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_DevicePowerEnumDevices == "on"]
+foreign {
     // param-hint: pReturnBuffer bytes=param[4] optional
     func DevicePowerEnumDevices(QueryIndex: UInt32, QueryInterpretationFlags: UInt32, QueryFlags: UInt32, pReturnBuffer: CPointer<UInt8>, pBufferSize: CPointer<UInt32>): UInt8
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_DevicePowerEnumDevices == "on"]
+public unsafe func Windows_DevicePowerEnumDevices(QueryIndex: UInt32, QueryInterpretationFlags: UInt32, QueryFlags: UInt32, pReturnBuffer: CPointer<UInt8>, pBufferSize: CPointer<UInt32>): UInt8 {
+    return DevicePowerEnumDevices(QueryIndex, QueryInterpretationFlags, QueryFlags, pReturnBuffer, pBufferSize)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_DevicePowerOpen == "on"]
+foreign {
     // param-hint: DebugMask optional
     func DevicePowerOpen(DebugMask: UInt32): UInt8
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_DevicePowerOpen == "on"]
+public unsafe func Windows_DevicePowerOpen(DebugMask: UInt32): UInt8 {
+    return DevicePowerOpen(DebugMask)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_DevicePowerSetDeviceState == "on"]
+foreign {
     // param-hint: SetData optional
     // pinvoke-hint: SetLastError
     func DevicePowerSetDeviceState(DeviceDescription: CPointer<UInt16>, SetFlags: UInt32, SetData: CPointer<Unit>): UInt32
-    // pinvoke-hint: SetLastError
-    func EnumPwrSchemes(lpfn: PWRSCHEMESENUMPROC, lParam: IntNative): UInt8
-    // pinvoke-hint: SetLastError
-    func GetActivePwrScheme(puiID: CPointer<UInt32>): UInt8
-    // pinvoke-hint: SetLastError
-    func GetCurrentPowerPolicies(pGlobalPowerPolicy: CPointer<GLOBAL_POWER_POLICYAbi>, pPowerPolicy: CPointer<POWER_POLICYAbi>): UInt8
-    // pinvoke-hint: SetLastError
-    func GetPwrCapabilities(lpspc: CPointer<Win32__impl_l1.SYSTEM_POWER_CAPABILITIESAbi>): UInt8
-    // pinvoke-hint: SetLastError
-    func GetPwrDiskSpindownRange(puiMax: CPointer<UInt32>, puiMin: CPointer<UInt32>): UInt8
-    func IsAdminOverrideActive(papp: CPointer<Win32__impl_l1.ADMINISTRATOR_POWER_POLICYAbi>): UInt8
-    func IsPwrHibernateAllowed(): UInt8
-    func IsPwrShutdownAllowed(): UInt8
-    func IsPwrSuspendAllowed(): UInt8
-    func PowerCanRestoreIndividualDefaultPowerScheme(SchemeGuid: CPointer<GUID>): windows_core.WIN32_ERROR
-    func PowerDeterminePlatformRole(): Win32__impl_l0.POWER_PLATFORM_ROLEAbi
-    func PowerDeterminePlatformRoleEx(Version: Win32__impl_l0.POWER_PLATFORM_ROLE_VERSIONAbi): Win32__impl_l0.POWER_PLATFORM_ROLEAbi
-    func PowerGetUserConfiguredACPowerMode(PowerModeGuid: CPointer<GUID>): UInt32
-    func PowerGetUserConfiguredDCPowerMode(PowerModeGuid: CPointer<GUID>): UInt32
-    // param-hint: SubKeyGuid optional
-    // param-hint: SettingGuid optional
-    func PowerIsSettingRangeDefined(SubKeyGuid: CPointer<GUID>, SettingGuid: CPointer<GUID>): UInt8
-    // param-hint: SubGroupGuid optional
-    // param-hint: PowerSettingGuid optional
-    func PowerReadSettingAttributes(SubGroupGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>): UInt32
-    // param-hint: Context optional
-    func PowerRegisterForEffectivePowerModeNotifications(Version: UInt32, Callback: Win32__impl_l1.EFFECTIVE_POWER_MODE_CALLBACK, Context: CPointer<Unit>, RegistrationHandle: CPointer<CPointer<Unit>>): Int32
-    func PowerRemovePowerSetting(PowerSettingSubKeyGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>): windows_core.WIN32_ERROR
-    func PowerReplaceDefaultPowerSchemes(): UInt32
-    func PowerReportThermalEvent(Event: CPointer<Win32__impl_l0.THERMAL_EVENTAbi>): windows_core.WIN32_ERROR
-    func PowerRestoreDefaultPowerSchemes(): windows_core.WIN32_ERROR
-    func PowerRestoreIndividualDefaultPowerScheme(SchemeGuid: CPointer<GUID>): windows_core.WIN32_ERROR
-    func PowerSetUserConfiguredACPowerMode(PowerModeGuid: CPointer<GUID>): UInt32
-    func PowerSetUserConfiguredDCPowerMode(PowerModeGuid: CPointer<GUID>): UInt32
-    // param-hint: PowerGuid optional
-    func PowerSettingAccessCheck(AccessFlags: Win32__impl_l0.POWER_DATA_ACCESSORAbi, PowerGuid: CPointer<GUID>): windows_core.WIN32_ERROR
-    func PowerSettingUnregisterNotification(RegistrationHandle: Win32__impl_l0.HPOWERNOTIFY): windows_core.WIN32_ERROR
-    func PowerUnregisterFromEffectivePowerModeNotifications(RegistrationHandle: CPointer<Unit>): Int32
-    func PowerUnregisterSuspendResumeNotification(RegistrationHandle: Win32__impl_l0.HPOWERNOTIFY): windows_core.WIN32_ERROR
-    // param-hint: SubGroupGuid optional
-    // param-hint: PowerSettingGuid optional
-    func PowerWriteSettingAttributes(SubGroupGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, Attributes: UInt32): windows_core.WIN32_ERROR
-    // pinvoke-hint: SetLastError
-    func ReadGlobalPwrPolicy(pGlobalPowerPolicy: CPointer<GLOBAL_POWER_POLICYAbi>): UInt8
-    // pinvoke-hint: SetLastError
-    func ReadProcessorPwrScheme(uiID: UInt32, pMachineProcessorPowerPolicy: CPointer<Win32__impl_l1.MACHINE_PROCESSOR_POWER_POLICYAbi>): UInt8
-    // pinvoke-hint: SetLastError
-    func ReadPwrScheme(uiID: UInt32, pPowerPolicy: CPointer<POWER_POLICYAbi>): UInt8
-    // param-hint: pGlobalPowerPolicy optional
-    // param-hint: pPowerPolicy optional
-    // pinvoke-hint: SetLastError
-    func SetActivePwrScheme(uiID: UInt32, pGlobalPowerPolicy: CPointer<GLOBAL_POWER_POLICYAbi>, pPowerPolicy: CPointer<POWER_POLICYAbi>): UInt8
-    // pinvoke-hint: SetLastError
-    func SetSuspendState(bHibernate: UInt8, bForce: UInt8, bWakeupEventsDisabled: UInt8): UInt8
-    // param-hint: pGlobalPowerPolicy optional
-    // param-hint: pPowerPolicy optional
-    func ValidatePowerPolicies(pGlobalPowerPolicy: CPointer<GLOBAL_POWER_POLICYAbi>, pPowerPolicy: CPointer<POWER_POLICYAbi>): UInt8
-    // pinvoke-hint: SetLastError
-    func WriteGlobalPwrPolicy(pGlobalPowerPolicy: CPointer<GLOBAL_POWER_POLICYAbi>): UInt8
-    // pinvoke-hint: SetLastError
-    func WriteProcessorPwrScheme(uiID: UInt32, pMachineProcessorPowerPolicy: CPointer<Win32__impl_l1.MACHINE_PROCESSOR_POWER_POLICYAbi>): UInt8
-    // param-hint: lpszDescription optional
-    // pinvoke-hint: SetLastError
-    func WritePwrScheme(puiID: CPointer<UInt32>, lpszSchemeName: CPointer<UInt16>, lpszDescription: CPointer<UInt16>, lpScheme: CPointer<POWER_POLICYAbi>): UInt8
 }
 
-@When[POWRPROF == "on" && Windows_Win32_System_Registry == "on"]
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_DevicePowerSetDeviceState == "on"]
+public unsafe func Windows_DevicePowerSetDeviceState(DeviceDescription: CPointer<UInt16>, SetFlags: UInt32, SetData: CPointer<Unit>): UInt32 {
+    return DevicePowerSetDeviceState(DeviceDescription, SetFlags, SetData)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_EnumPwrSchemes == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func EnumPwrSchemes(lpfn: PWRSCHEMESENUMPROC, lParam: IntNative): UInt8
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_EnumPwrSchemes == "on"]
+public unsafe func Windows_EnumPwrSchemes(lpfn: PWRSCHEMESENUMPROC, lParam: IntNative): UInt8 {
+    return EnumPwrSchemes(lpfn, lParam)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_GetActivePwrScheme == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func GetActivePwrScheme(puiID: CPointer<UInt32>): UInt8
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_GetActivePwrScheme == "on"]
+public unsafe func Windows_GetActivePwrScheme(puiID: CPointer<UInt32>): UInt8 {
+    return GetActivePwrScheme(puiID)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_GetCurrentPowerPolicies == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func GetCurrentPowerPolicies(pGlobalPowerPolicy: CPointer<GLOBAL_POWER_POLICYAbi>, pPowerPolicy: CPointer<POWER_POLICYAbi>): UInt8
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_GetCurrentPowerPolicies == "on"]
+public unsafe func Windows_GetCurrentPowerPolicies(pGlobalPowerPolicy: CPointer<GLOBAL_POWER_POLICYAbi>, pPowerPolicy: CPointer<POWER_POLICYAbi>): UInt8 {
+    return GetCurrentPowerPolicies(pGlobalPowerPolicy, pPowerPolicy)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_GetPwrCapabilities == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func GetPwrCapabilities(lpspc: CPointer<Win32__impl_l1.SYSTEM_POWER_CAPABILITIESAbi>): UInt8
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_GetPwrCapabilities == "on"]
+public unsafe func Windows_GetPwrCapabilities(lpspc: CPointer<Win32__impl_l1.SYSTEM_POWER_CAPABILITIESAbi>): UInt8 {
+    return GetPwrCapabilities(lpspc)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_GetPwrDiskSpindownRange == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func GetPwrDiskSpindownRange(puiMax: CPointer<UInt32>, puiMin: CPointer<UInt32>): UInt8
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_GetPwrDiskSpindownRange == "on"]
+public unsafe func Windows_GetPwrDiskSpindownRange(puiMax: CPointer<UInt32>, puiMin: CPointer<UInt32>): UInt8 {
+    return GetPwrDiskSpindownRange(puiMax, puiMin)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_IsAdminOverrideActive == "on"]
+foreign {
+    func IsAdminOverrideActive(papp: CPointer<Win32__impl_l1.ADMINISTRATOR_POWER_POLICYAbi>): UInt8
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_IsAdminOverrideActive == "on"]
+public unsafe func Windows_IsAdminOverrideActive(papp: CPointer<Win32__impl_l1.ADMINISTRATOR_POWER_POLICYAbi>): UInt8 {
+    return IsAdminOverrideActive(papp)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_IsPwrHibernateAllowed == "on"]
+foreign {
+    func IsPwrHibernateAllowed(): UInt8
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_IsPwrHibernateAllowed == "on"]
+public unsafe func Windows_IsPwrHibernateAllowed(): UInt8 {
+    return IsPwrHibernateAllowed()
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_IsPwrShutdownAllowed == "on"]
+foreign {
+    func IsPwrShutdownAllowed(): UInt8
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_IsPwrShutdownAllowed == "on"]
+public unsafe func Windows_IsPwrShutdownAllowed(): UInt8 {
+    return IsPwrShutdownAllowed()
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_IsPwrSuspendAllowed == "on"]
+foreign {
+    func IsPwrSuspendAllowed(): UInt8
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_IsPwrSuspendAllowed == "on"]
+public unsafe func Windows_IsPwrSuspendAllowed(): UInt8 {
+    return IsPwrSuspendAllowed()
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerCanRestoreIndividualDefaultPowerScheme == "on"]
+foreign {
+    func PowerCanRestoreIndividualDefaultPowerScheme(SchemeGuid: CPointer<GUID>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerCanRestoreIndividualDefaultPowerScheme == "on"]
+public unsafe func Windows_PowerCanRestoreIndividualDefaultPowerScheme(SchemeGuid: CPointer<GUID>): windows_core.WIN32_ERROR {
+    return PowerCanRestoreIndividualDefaultPowerScheme(SchemeGuid)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerCreatePossibleSetting == "on" && Windows_Win32_System_Registry == "on"]
 foreign {
     // param-hint: RootSystemPowerKey optional
     func PowerCreatePossibleSetting(RootSystemPowerKey: Win32_System_Registry.HKEY, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, PossibleSettingIndex: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerCreatePossibleSetting == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerCreatePossibleSetting(RootSystemPowerKey: Win32_System_Registry.HKEY, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, PossibleSettingIndex: UInt32): windows_core.WIN32_ERROR {
+    return PowerCreatePossibleSetting(RootSystemPowerKey, SubGroupOfPowerSettingsGuid, PowerSettingGuid, PossibleSettingIndex)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerCreateSetting == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootSystemPowerKey optional
     func PowerCreateSetting(RootSystemPowerKey: Win32_System_Registry.HKEY, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerCreateSetting == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerCreateSetting(RootSystemPowerKey: Win32_System_Registry.HKEY, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>): windows_core.WIN32_ERROR {
+    return PowerCreateSetting(RootSystemPowerKey, SubGroupOfPowerSettingsGuid, PowerSettingGuid)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerDeleteScheme == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootPowerKey optional
     func PowerDeleteScheme(RootPowerKey: Win32_System_Registry.HKEY, SchemeGuid: CPointer<GUID>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerDeleteScheme == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerDeleteScheme(RootPowerKey: Win32_System_Registry.HKEY, SchemeGuid: CPointer<GUID>): windows_core.WIN32_ERROR {
+    return PowerDeleteScheme(RootPowerKey, SchemeGuid)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerDeterminePlatformRole == "on"]
+foreign {
+    func PowerDeterminePlatformRole(): Win32__impl_l0.POWER_PLATFORM_ROLEAbi
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerDeterminePlatformRole == "on"]
+public unsafe func Windows_PowerDeterminePlatformRole(): Win32__impl_l0.POWER_PLATFORM_ROLEAbi {
+    return PowerDeterminePlatformRole()
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerDeterminePlatformRoleEx == "on"]
+foreign {
+    func PowerDeterminePlatformRoleEx(Version: Win32__impl_l0.POWER_PLATFORM_ROLE_VERSIONAbi): Win32__impl_l0.POWER_PLATFORM_ROLEAbi
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerDeterminePlatformRoleEx == "on"]
+public unsafe func Windows_PowerDeterminePlatformRoleEx(Version: Win32__impl_l0.POWER_PLATFORM_ROLE_VERSIONAbi): Win32__impl_l0.POWER_PLATFORM_ROLEAbi {
+    return PowerDeterminePlatformRoleEx(Version)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerDuplicateScheme == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootPowerKey optional
     func PowerDuplicateScheme(RootPowerKey: Win32_System_Registry.HKEY, SourceSchemeGuid: CPointer<GUID>, DestinationSchemeGuid: CPointer<CPointer<GUID>>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerDuplicateScheme == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerDuplicateScheme(RootPowerKey: Win32_System_Registry.HKEY, SourceSchemeGuid: CPointer<GUID>, DestinationSchemeGuid: CPointer<CPointer<GUID>>): windows_core.WIN32_ERROR {
+    return PowerDuplicateScheme(RootPowerKey, SourceSchemeGuid, DestinationSchemeGuid)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerEnumerate == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootPowerKey optional
     // param-hint: SchemeGuid optional
     // param-hint: SubGroupOfPowerSettingsGuid optional
     // param-hint: Buffer bytes=param[6] optional
     func PowerEnumerate(RootPowerKey: Win32_System_Registry.HKEY, SchemeGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, AccessFlags: Win32__impl_l0.POWER_DATA_ACCESSORAbi, Index: UInt32, Buffer: CPointer<UInt8>, BufferSize: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerEnumerate == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerEnumerate(RootPowerKey: Win32_System_Registry.HKEY, SchemeGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, AccessFlags: Win32__impl_l0.POWER_DATA_ACCESSORAbi, Index: UInt32, Buffer: CPointer<UInt8>, BufferSize: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return PowerEnumerate(RootPowerKey, SchemeGuid, SubGroupOfPowerSettingsGuid, AccessFlags, Index, Buffer, BufferSize)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerGetActiveScheme == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: UserRootPowerKey optional
     func PowerGetActiveScheme(UserRootPowerKey: Win32_System_Registry.HKEY, ActivePolicyGuid: CPointer<CPointer<GUID>>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerGetActiveScheme == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerGetActiveScheme(UserRootPowerKey: Win32_System_Registry.HKEY, ActivePolicyGuid: CPointer<CPointer<GUID>>): windows_core.WIN32_ERROR {
+    return PowerGetActiveScheme(UserRootPowerKey, ActivePolicyGuid)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerImportPowerScheme == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootPowerKey optional
     func PowerImportPowerScheme(RootPowerKey: Win32_System_Registry.HKEY, ImportFileNamePath: CPointer<UInt16>, DestinationSchemeGuid: CPointer<CPointer<GUID>>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerImportPowerScheme == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerImportPowerScheme(RootPowerKey: Win32_System_Registry.HKEY, ImportFileNamePath: CPointer<UInt16>, DestinationSchemeGuid: CPointer<CPointer<GUID>>): windows_core.WIN32_ERROR {
+    return PowerImportPowerScheme(RootPowerKey, ImportFileNamePath, DestinationSchemeGuid)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerIsSettingRangeDefined == "on"]
+foreign {
+    // param-hint: SubKeyGuid optional
+    // param-hint: SettingGuid optional
+    func PowerIsSettingRangeDefined(SubKeyGuid: CPointer<GUID>, SettingGuid: CPointer<GUID>): UInt8
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerIsSettingRangeDefined == "on"]
+public unsafe func Windows_PowerIsSettingRangeDefined(SubKeyGuid: CPointer<GUID>, SettingGuid: CPointer<GUID>): UInt8 {
+    return PowerIsSettingRangeDefined(SubKeyGuid, SettingGuid)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerOpenSystemPowerKey == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     func PowerOpenSystemPowerKey(phSystemPowerKey: CPointer<Win32_System_Registry.HKEY>, Access: UInt32, OpenExisting: Int32): UInt32
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerOpenSystemPowerKey == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerOpenSystemPowerKey(phSystemPowerKey: CPointer<Win32_System_Registry.HKEY>, Access: UInt32, OpenExisting: Int32): UInt32 {
+    return PowerOpenSystemPowerKey(phSystemPowerKey, Access, OpenExisting)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerOpenUserPowerKey == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     func PowerOpenUserPowerKey(phUserPowerKey: CPointer<Win32_System_Registry.HKEY>, Access: UInt32, OpenExisting: Int32): UInt32
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerOpenUserPowerKey == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerOpenUserPowerKey(phUserPowerKey: CPointer<Win32_System_Registry.HKEY>, Access: UInt32, OpenExisting: Int32): UInt32 {
+    return PowerOpenUserPowerKey(phUserPowerKey, Access, OpenExisting)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadACDefaultIndex == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootPowerKey optional
     // param-hint: SubGroupOfPowerSettingsGuid optional
     func PowerReadACDefaultIndex(RootPowerKey: Win32_System_Registry.HKEY, SchemePersonalityGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, AcDefaultIndex: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadACDefaultIndex == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerReadACDefaultIndex(RootPowerKey: Win32_System_Registry.HKEY, SchemePersonalityGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, AcDefaultIndex: CPointer<UInt32>): UInt32 {
+    return PowerReadACDefaultIndex(RootPowerKey, SchemePersonalityGuid, SubGroupOfPowerSettingsGuid, PowerSettingGuid, AcDefaultIndex)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadACValue == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootPowerKey optional
     // param-hint: SchemeGuid optional
     // param-hint: SubGroupOfPowerSettingsGuid optional
@@ -154,14 +450,41 @@ foreign {
     // param-hint: Buffer bytes=param[6] optional
     // param-hint: BufferSize optional
     func PowerReadACValue(RootPowerKey: Win32_System_Registry.HKEY, SchemeGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, Type: CPointer<UInt32>, Buffer: CPointer<UInt8>, BufferSize: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadACValue == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerReadACValue(RootPowerKey: Win32_System_Registry.HKEY, SchemeGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, Type: CPointer<UInt32>, Buffer: CPointer<UInt8>, BufferSize: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return PowerReadACValue(RootPowerKey, SchemeGuid, SubGroupOfPowerSettingsGuid, PowerSettingGuid, Type, Buffer, BufferSize)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadACValueIndex == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootPowerKey optional
     // param-hint: SchemeGuid optional
     // param-hint: SubGroupOfPowerSettingsGuid optional
     // param-hint: PowerSettingGuid optional
     func PowerReadACValueIndex(RootPowerKey: Win32_System_Registry.HKEY, SchemeGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, AcValueIndex: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadACValueIndex == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerReadACValueIndex(RootPowerKey: Win32_System_Registry.HKEY, SchemeGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, AcValueIndex: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return PowerReadACValueIndex(RootPowerKey, SchemeGuid, SubGroupOfPowerSettingsGuid, PowerSettingGuid, AcValueIndex)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadDCDefaultIndex == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootPowerKey optional
     // param-hint: SubGroupOfPowerSettingsGuid optional
     func PowerReadDCDefaultIndex(RootPowerKey: Win32_System_Registry.HKEY, SchemePersonalityGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, DcDefaultIndex: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadDCDefaultIndex == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerReadDCDefaultIndex(RootPowerKey: Win32_System_Registry.HKEY, SchemePersonalityGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, DcDefaultIndex: CPointer<UInt32>): UInt32 {
+    return PowerReadDCDefaultIndex(RootPowerKey, SchemePersonalityGuid, SubGroupOfPowerSettingsGuid, PowerSettingGuid, DcDefaultIndex)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadDCValue == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootPowerKey optional
     // param-hint: SchemeGuid optional
     // param-hint: SubGroupOfPowerSettingsGuid optional
@@ -169,123 +492,512 @@ foreign {
     // param-hint: Type optional
     // param-hint: Buffer bytes=param[6] optional
     func PowerReadDCValue(RootPowerKey: Win32_System_Registry.HKEY, SchemeGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, Type: CPointer<UInt32>, Buffer: CPointer<UInt8>, BufferSize: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadDCValue == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerReadDCValue(RootPowerKey: Win32_System_Registry.HKEY, SchemeGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, Type: CPointer<UInt32>, Buffer: CPointer<UInt8>, BufferSize: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return PowerReadDCValue(RootPowerKey, SchemeGuid, SubGroupOfPowerSettingsGuid, PowerSettingGuid, Type, Buffer, BufferSize)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadDCValueIndex == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootPowerKey optional
     // param-hint: SchemeGuid optional
     // param-hint: SubGroupOfPowerSettingsGuid optional
     // param-hint: PowerSettingGuid optional
     func PowerReadDCValueIndex(RootPowerKey: Win32_System_Registry.HKEY, SchemeGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, DcValueIndex: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadDCValueIndex == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerReadDCValueIndex(RootPowerKey: Win32_System_Registry.HKEY, SchemeGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, DcValueIndex: CPointer<UInt32>): UInt32 {
+    return PowerReadDCValueIndex(RootPowerKey, SchemeGuid, SubGroupOfPowerSettingsGuid, PowerSettingGuid, DcValueIndex)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadDescription == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootPowerKey optional
     // param-hint: SchemeGuid optional
     // param-hint: SubGroupOfPowerSettingsGuid optional
     // param-hint: PowerSettingGuid optional
     // param-hint: Buffer bytes=param[5] optional
     func PowerReadDescription(RootPowerKey: Win32_System_Registry.HKEY, SchemeGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, Buffer: CPointer<UInt8>, BufferSize: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadDescription == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerReadDescription(RootPowerKey: Win32_System_Registry.HKEY, SchemeGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, Buffer: CPointer<UInt8>, BufferSize: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return PowerReadDescription(RootPowerKey, SchemeGuid, SubGroupOfPowerSettingsGuid, PowerSettingGuid, Buffer, BufferSize)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadFriendlyName == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootPowerKey optional
     // param-hint: SchemeGuid optional
     // param-hint: SubGroupOfPowerSettingsGuid optional
     // param-hint: PowerSettingGuid optional
     // param-hint: Buffer bytes=param[5] optional
     func PowerReadFriendlyName(RootPowerKey: Win32_System_Registry.HKEY, SchemeGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, Buffer: CPointer<UInt8>, BufferSize: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadFriendlyName == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerReadFriendlyName(RootPowerKey: Win32_System_Registry.HKEY, SchemeGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, Buffer: CPointer<UInt8>, BufferSize: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return PowerReadFriendlyName(RootPowerKey, SchemeGuid, SubGroupOfPowerSettingsGuid, PowerSettingGuid, Buffer, BufferSize)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadIconResourceSpecifier == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootPowerKey optional
     // param-hint: SchemeGuid optional
     // param-hint: SubGroupOfPowerSettingsGuid optional
     // param-hint: PowerSettingGuid optional
     // param-hint: Buffer bytes=param[5] optional
     func PowerReadIconResourceSpecifier(RootPowerKey: Win32_System_Registry.HKEY, SchemeGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, Buffer: CPointer<UInt8>, BufferSize: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadIconResourceSpecifier == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerReadIconResourceSpecifier(RootPowerKey: Win32_System_Registry.HKEY, SchemeGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, Buffer: CPointer<UInt8>, BufferSize: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return PowerReadIconResourceSpecifier(RootPowerKey, SchemeGuid, SubGroupOfPowerSettingsGuid, PowerSettingGuid, Buffer, BufferSize)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadPossibleDescription == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootPowerKey optional
     // param-hint: SubGroupOfPowerSettingsGuid optional
     // param-hint: PowerSettingGuid optional
     // param-hint: Buffer bytes=param[5] optional
     func PowerReadPossibleDescription(RootPowerKey: Win32_System_Registry.HKEY, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, PossibleSettingIndex: UInt32, Buffer: CPointer<UInt8>, BufferSize: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadPossibleDescription == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerReadPossibleDescription(RootPowerKey: Win32_System_Registry.HKEY, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, PossibleSettingIndex: UInt32, Buffer: CPointer<UInt8>, BufferSize: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return PowerReadPossibleDescription(RootPowerKey, SubGroupOfPowerSettingsGuid, PowerSettingGuid, PossibleSettingIndex, Buffer, BufferSize)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadPossibleFriendlyName == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootPowerKey optional
     // param-hint: SubGroupOfPowerSettingsGuid optional
     // param-hint: PowerSettingGuid optional
     // param-hint: Buffer bytes=param[5] optional
     func PowerReadPossibleFriendlyName(RootPowerKey: Win32_System_Registry.HKEY, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, PossibleSettingIndex: UInt32, Buffer: CPointer<UInt8>, BufferSize: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadPossibleFriendlyName == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerReadPossibleFriendlyName(RootPowerKey: Win32_System_Registry.HKEY, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, PossibleSettingIndex: UInt32, Buffer: CPointer<UInt8>, BufferSize: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return PowerReadPossibleFriendlyName(RootPowerKey, SubGroupOfPowerSettingsGuid, PowerSettingGuid, PossibleSettingIndex, Buffer, BufferSize)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadPossibleValue == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootPowerKey optional
     // param-hint: SubGroupOfPowerSettingsGuid optional
     // param-hint: PowerSettingGuid optional
     // param-hint: Type optional
     // param-hint: Buffer bytes=param[6] optional
     func PowerReadPossibleValue(RootPowerKey: Win32_System_Registry.HKEY, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, Type: CPointer<UInt32>, PossibleSettingIndex: UInt32, Buffer: CPointer<UInt8>, BufferSize: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadPossibleValue == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerReadPossibleValue(RootPowerKey: Win32_System_Registry.HKEY, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, Type: CPointer<UInt32>, PossibleSettingIndex: UInt32, Buffer: CPointer<UInt8>, BufferSize: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return PowerReadPossibleValue(RootPowerKey, SubGroupOfPowerSettingsGuid, PowerSettingGuid, Type, PossibleSettingIndex, Buffer, BufferSize)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadSettingAttributes == "on"]
+foreign {
+    // param-hint: SubGroupGuid optional
+    // param-hint: PowerSettingGuid optional
+    func PowerReadSettingAttributes(SubGroupGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>): UInt32
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadSettingAttributes == "on"]
+public unsafe func Windows_PowerReadSettingAttributes(SubGroupGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>): UInt32 {
+    return PowerReadSettingAttributes(SubGroupGuid, PowerSettingGuid)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadValueIncrement == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootPowerKey optional
     // param-hint: SubGroupOfPowerSettingsGuid optional
     // param-hint: PowerSettingGuid optional
     func PowerReadValueIncrement(RootPowerKey: Win32_System_Registry.HKEY, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, ValueIncrement: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadValueIncrement == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerReadValueIncrement(RootPowerKey: Win32_System_Registry.HKEY, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, ValueIncrement: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return PowerReadValueIncrement(RootPowerKey, SubGroupOfPowerSettingsGuid, PowerSettingGuid, ValueIncrement)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadValueMax == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootPowerKey optional
     // param-hint: SubGroupOfPowerSettingsGuid optional
     // param-hint: PowerSettingGuid optional
     func PowerReadValueMax(RootPowerKey: Win32_System_Registry.HKEY, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, ValueMaximum: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadValueMax == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerReadValueMax(RootPowerKey: Win32_System_Registry.HKEY, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, ValueMaximum: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return PowerReadValueMax(RootPowerKey, SubGroupOfPowerSettingsGuid, PowerSettingGuid, ValueMaximum)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadValueMin == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootPowerKey optional
     // param-hint: SubGroupOfPowerSettingsGuid optional
     // param-hint: PowerSettingGuid optional
     func PowerReadValueMin(RootPowerKey: Win32_System_Registry.HKEY, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, ValueMinimum: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadValueMin == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerReadValueMin(RootPowerKey: Win32_System_Registry.HKEY, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, ValueMinimum: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return PowerReadValueMin(RootPowerKey, SubGroupOfPowerSettingsGuid, PowerSettingGuid, ValueMinimum)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadValueUnitsSpecifier == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootPowerKey optional
     // param-hint: SubGroupOfPowerSettingsGuid optional
     // param-hint: PowerSettingGuid optional
     // param-hint: Buffer bytes=param[4] optional
     func PowerReadValueUnitsSpecifier(RootPowerKey: Win32_System_Registry.HKEY, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, Buffer: CPointer<UInt8>, BufferSize: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReadValueUnitsSpecifier == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerReadValueUnitsSpecifier(RootPowerKey: Win32_System_Registry.HKEY, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, Buffer: CPointer<UInt8>, BufferSize: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return PowerReadValueUnitsSpecifier(RootPowerKey, SubGroupOfPowerSettingsGuid, PowerSettingGuid, Buffer, BufferSize)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerRegisterForEffectivePowerModeNotifications == "on"]
+foreign {
+    // param-hint: Context optional
+    func PowerRegisterForEffectivePowerModeNotifications(Version: UInt32, Callback: Win32__impl_l1.EFFECTIVE_POWER_MODE_CALLBACK, Context: CPointer<Unit>, RegistrationHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerRegisterForEffectivePowerModeNotifications == "on"]
+public unsafe func Windows_PowerRegisterForEffectivePowerModeNotifications(Version: UInt32, Callback: Win32__impl_l1.EFFECTIVE_POWER_MODE_CALLBACK, Context: CPointer<Unit>, RegistrationHandle: CPointer<CPointer<Unit>>): Int32 {
+    return PowerRegisterForEffectivePowerModeNotifications(Version, Callback, Context, RegistrationHandle)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerRegisterSuspendResumeNotification == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    func PowerRegisterSuspendResumeNotification(Flags: Win32__impl_l0.REGISTER_NOTIFICATION_FLAGSAbi, Recipient: CPointer<Unit>, RegistrationHandle: CPointer<CPointer<Unit>>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerRegisterSuspendResumeNotification == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_PowerRegisterSuspendResumeNotification(Flags: Win32__impl_l0.REGISTER_NOTIFICATION_FLAGSAbi, Recipient: CPointer<Unit>, RegistrationHandle: CPointer<CPointer<Unit>>): windows_core.WIN32_ERROR {
+    return PowerRegisterSuspendResumeNotification(Flags, Recipient, RegistrationHandle)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerRemovePowerSetting == "on"]
+foreign {
+    func PowerRemovePowerSetting(PowerSettingSubKeyGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerRemovePowerSetting == "on"]
+public unsafe func Windows_PowerRemovePowerSetting(PowerSettingSubKeyGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>): windows_core.WIN32_ERROR {
+    return PowerRemovePowerSetting(PowerSettingSubKeyGuid, PowerSettingGuid)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReplaceDefaultPowerSchemes == "on"]
+foreign {
+    func PowerReplaceDefaultPowerSchemes(): UInt32
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReplaceDefaultPowerSchemes == "on"]
+public unsafe func Windows_PowerReplaceDefaultPowerSchemes(): UInt32 {
+    return PowerReplaceDefaultPowerSchemes()
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReportThermalEvent == "on"]
+foreign {
+    func PowerReportThermalEvent(Event: CPointer<Win32__impl_l0.THERMAL_EVENTAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerReportThermalEvent == "on"]
+public unsafe func Windows_PowerReportThermalEvent(Event: CPointer<Win32__impl_l0.THERMAL_EVENTAbi>): windows_core.WIN32_ERROR {
+    return PowerReportThermalEvent(Event)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerRestoreDefaultPowerSchemes == "on"]
+foreign {
+    func PowerRestoreDefaultPowerSchemes(): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerRestoreDefaultPowerSchemes == "on"]
+public unsafe func Windows_PowerRestoreDefaultPowerSchemes(): windows_core.WIN32_ERROR {
+    return PowerRestoreDefaultPowerSchemes()
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerRestoreIndividualDefaultPowerScheme == "on"]
+foreign {
+    func PowerRestoreIndividualDefaultPowerScheme(SchemeGuid: CPointer<GUID>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerRestoreIndividualDefaultPowerScheme == "on"]
+public unsafe func Windows_PowerRestoreIndividualDefaultPowerScheme(SchemeGuid: CPointer<GUID>): windows_core.WIN32_ERROR {
+    return PowerRestoreIndividualDefaultPowerScheme(SchemeGuid)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerSetActiveScheme == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: UserRootPowerKey optional
     // param-hint: SchemeGuid optional
     func PowerSetActiveScheme(UserRootPowerKey: Win32_System_Registry.HKEY, SchemeGuid: CPointer<GUID>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerSetActiveScheme == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerSetActiveScheme(UserRootPowerKey: Win32_System_Registry.HKEY, SchemeGuid: CPointer<GUID>): windows_core.WIN32_ERROR {
+    return PowerSetActiveScheme(UserRootPowerKey, SchemeGuid)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerSettingAccessCheck == "on"]
+foreign {
+    // param-hint: PowerGuid optional
+    func PowerSettingAccessCheck(AccessFlags: Win32__impl_l0.POWER_DATA_ACCESSORAbi, PowerGuid: CPointer<GUID>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerSettingAccessCheck == "on"]
+public unsafe func Windows_PowerSettingAccessCheck(AccessFlags: Win32__impl_l0.POWER_DATA_ACCESSORAbi, PowerGuid: CPointer<GUID>): windows_core.WIN32_ERROR {
+    return PowerSettingAccessCheck(AccessFlags, PowerGuid)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerSettingAccessCheckEx == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: PowerGuid optional
     func PowerSettingAccessCheckEx(AccessFlags: Win32__impl_l0.POWER_DATA_ACCESSORAbi, PowerGuid: CPointer<GUID>, AccessType: Win32_System_Registry.REG_SAM_FLAGSAbi): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerSettingAccessCheckEx == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerSettingAccessCheckEx(AccessFlags: Win32__impl_l0.POWER_DATA_ACCESSORAbi, PowerGuid: CPointer<GUID>, AccessType: Win32_System_Registry.REG_SAM_FLAGSAbi): windows_core.WIN32_ERROR {
+    return PowerSettingAccessCheckEx(AccessFlags, PowerGuid, AccessType)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerSettingRegisterNotification == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    func PowerSettingRegisterNotification(SettingGuid: CPointer<GUID>, Flags: Win32__impl_l0.REGISTER_NOTIFICATION_FLAGSAbi, Recipient: CPointer<Unit>, RegistrationHandle: CPointer<CPointer<Unit>>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerSettingRegisterNotification == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_PowerSettingRegisterNotification(SettingGuid: CPointer<GUID>, Flags: Win32__impl_l0.REGISTER_NOTIFICATION_FLAGSAbi, Recipient: CPointer<Unit>, RegistrationHandle: CPointer<CPointer<Unit>>): windows_core.WIN32_ERROR {
+    return PowerSettingRegisterNotification(SettingGuid, Flags, Recipient, RegistrationHandle)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerSettingUnregisterNotification == "on"]
+foreign {
+    func PowerSettingUnregisterNotification(RegistrationHandle: Win32__impl_l0.HPOWERNOTIFY): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerSettingUnregisterNotification == "on"]
+public unsafe func Windows_PowerSettingUnregisterNotification(RegistrationHandle: Win32__impl_l0.HPOWERNOTIFY): windows_core.WIN32_ERROR {
+    return PowerSettingUnregisterNotification(RegistrationHandle)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerUnregisterFromEffectivePowerModeNotifications == "on"]
+foreign {
+    func PowerUnregisterFromEffectivePowerModeNotifications(RegistrationHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerUnregisterFromEffectivePowerModeNotifications == "on"]
+public unsafe func Windows_PowerUnregisterFromEffectivePowerModeNotifications(RegistrationHandle: CPointer<Unit>): Int32 {
+    return PowerUnregisterFromEffectivePowerModeNotifications(RegistrationHandle)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerUnregisterSuspendResumeNotification == "on"]
+foreign {
+    func PowerUnregisterSuspendResumeNotification(RegistrationHandle: Win32__impl_l0.HPOWERNOTIFY): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerUnregisterSuspendResumeNotification == "on"]
+public unsafe func Windows_PowerUnregisterSuspendResumeNotification(RegistrationHandle: Win32__impl_l0.HPOWERNOTIFY): windows_core.WIN32_ERROR {
+    return PowerUnregisterSuspendResumeNotification(RegistrationHandle)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteACDefaultIndex == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootSystemPowerKey optional
     // param-hint: SubGroupOfPowerSettingsGuid optional
     func PowerWriteACDefaultIndex(RootSystemPowerKey: Win32_System_Registry.HKEY, SchemePersonalityGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, DefaultAcIndex: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteACDefaultIndex == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerWriteACDefaultIndex(RootSystemPowerKey: Win32_System_Registry.HKEY, SchemePersonalityGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, DefaultAcIndex: UInt32): UInt32 {
+    return PowerWriteACDefaultIndex(RootSystemPowerKey, SchemePersonalityGuid, SubGroupOfPowerSettingsGuid, PowerSettingGuid, DefaultAcIndex)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteACValueIndex == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootPowerKey optional
     // param-hint: SubGroupOfPowerSettingsGuid optional
     // param-hint: PowerSettingGuid optional
     func PowerWriteACValueIndex(RootPowerKey: Win32_System_Registry.HKEY, SchemeGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, AcValueIndex: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteACValueIndex == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerWriteACValueIndex(RootPowerKey: Win32_System_Registry.HKEY, SchemeGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, AcValueIndex: UInt32): windows_core.WIN32_ERROR {
+    return PowerWriteACValueIndex(RootPowerKey, SchemeGuid, SubGroupOfPowerSettingsGuid, PowerSettingGuid, AcValueIndex)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteDCDefaultIndex == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootSystemPowerKey optional
     // param-hint: SubGroupOfPowerSettingsGuid optional
     func PowerWriteDCDefaultIndex(RootSystemPowerKey: Win32_System_Registry.HKEY, SchemePersonalityGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, DefaultDcIndex: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteDCDefaultIndex == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerWriteDCDefaultIndex(RootSystemPowerKey: Win32_System_Registry.HKEY, SchemePersonalityGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, DefaultDcIndex: UInt32): UInt32 {
+    return PowerWriteDCDefaultIndex(RootSystemPowerKey, SchemePersonalityGuid, SubGroupOfPowerSettingsGuid, PowerSettingGuid, DefaultDcIndex)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteDCValueIndex == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootPowerKey optional
     // param-hint: SubGroupOfPowerSettingsGuid optional
     // param-hint: PowerSettingGuid optional
     func PowerWriteDCValueIndex(RootPowerKey: Win32_System_Registry.HKEY, SchemeGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, DcValueIndex: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteDCValueIndex == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerWriteDCValueIndex(RootPowerKey: Win32_System_Registry.HKEY, SchemeGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, DcValueIndex: UInt32): UInt32 {
+    return PowerWriteDCValueIndex(RootPowerKey, SchemeGuid, SubGroupOfPowerSettingsGuid, PowerSettingGuid, DcValueIndex)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteDescription == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootPowerKey optional
     // param-hint: SubGroupOfPowerSettingsGuid optional
     // param-hint: PowerSettingGuid optional
     // param-hint: Buffer bytes=param[5]
     func PowerWriteDescription(RootPowerKey: Win32_System_Registry.HKEY, SchemeGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, Buffer: CPointer<UInt8>, BufferSize: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteDescription == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerWriteDescription(RootPowerKey: Win32_System_Registry.HKEY, SchemeGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, Buffer: CPointer<UInt8>, BufferSize: UInt32): windows_core.WIN32_ERROR {
+    return PowerWriteDescription(RootPowerKey, SchemeGuid, SubGroupOfPowerSettingsGuid, PowerSettingGuid, Buffer, BufferSize)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteFriendlyName == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootPowerKey optional
     // param-hint: SubGroupOfPowerSettingsGuid optional
     // param-hint: PowerSettingGuid optional
     // param-hint: Buffer bytes=param[5]
     func PowerWriteFriendlyName(RootPowerKey: Win32_System_Registry.HKEY, SchemeGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, Buffer: CPointer<UInt8>, BufferSize: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteFriendlyName == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerWriteFriendlyName(RootPowerKey: Win32_System_Registry.HKEY, SchemeGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, Buffer: CPointer<UInt8>, BufferSize: UInt32): windows_core.WIN32_ERROR {
+    return PowerWriteFriendlyName(RootPowerKey, SchemeGuid, SubGroupOfPowerSettingsGuid, PowerSettingGuid, Buffer, BufferSize)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteIconResourceSpecifier == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootPowerKey optional
     // param-hint: SubGroupOfPowerSettingsGuid optional
     // param-hint: PowerSettingGuid optional
     // param-hint: Buffer bytes=param[5]
     func PowerWriteIconResourceSpecifier(RootPowerKey: Win32_System_Registry.HKEY, SchemeGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, Buffer: CPointer<UInt8>, BufferSize: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteIconResourceSpecifier == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerWriteIconResourceSpecifier(RootPowerKey: Win32_System_Registry.HKEY, SchemeGuid: CPointer<GUID>, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, Buffer: CPointer<UInt8>, BufferSize: UInt32): windows_core.WIN32_ERROR {
+    return PowerWriteIconResourceSpecifier(RootPowerKey, SchemeGuid, SubGroupOfPowerSettingsGuid, PowerSettingGuid, Buffer, BufferSize)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWritePossibleDescription == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootPowerKey optional
     // param-hint: SubGroupOfPowerSettingsGuid optional
     // param-hint: PowerSettingGuid optional
     // param-hint: Buffer bytes=param[5]
     func PowerWritePossibleDescription(RootPowerKey: Win32_System_Registry.HKEY, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, PossibleSettingIndex: UInt32, Buffer: CPointer<UInt8>, BufferSize: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWritePossibleDescription == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerWritePossibleDescription(RootPowerKey: Win32_System_Registry.HKEY, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, PossibleSettingIndex: UInt32, Buffer: CPointer<UInt8>, BufferSize: UInt32): windows_core.WIN32_ERROR {
+    return PowerWritePossibleDescription(RootPowerKey, SubGroupOfPowerSettingsGuid, PowerSettingGuid, PossibleSettingIndex, Buffer, BufferSize)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWritePossibleFriendlyName == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootPowerKey optional
     // param-hint: SubGroupOfPowerSettingsGuid optional
     // param-hint: PowerSettingGuid optional
     // param-hint: Buffer bytes=param[5]
     func PowerWritePossibleFriendlyName(RootPowerKey: Win32_System_Registry.HKEY, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, PossibleSettingIndex: UInt32, Buffer: CPointer<UInt8>, BufferSize: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWritePossibleFriendlyName == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerWritePossibleFriendlyName(RootPowerKey: Win32_System_Registry.HKEY, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, PossibleSettingIndex: UInt32, Buffer: CPointer<UInt8>, BufferSize: UInt32): windows_core.WIN32_ERROR {
+    return PowerWritePossibleFriendlyName(RootPowerKey, SubGroupOfPowerSettingsGuid, PowerSettingGuid, PossibleSettingIndex, Buffer, BufferSize)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWritePossibleValue == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootPowerKey optional
     // param-hint: SubGroupOfPowerSettingsGuid optional
     // param-hint: PowerSettingGuid optional
     // param-hint: Buffer bytes=param[6]
     func PowerWritePossibleValue(RootPowerKey: Win32_System_Registry.HKEY, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, Type: UInt32, PossibleSettingIndex: UInt32, Buffer: CPointer<UInt8>, BufferSize: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWritePossibleValue == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerWritePossibleValue(RootPowerKey: Win32_System_Registry.HKEY, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, Type: UInt32, PossibleSettingIndex: UInt32, Buffer: CPointer<UInt8>, BufferSize: UInt32): windows_core.WIN32_ERROR {
+    return PowerWritePossibleValue(RootPowerKey, SubGroupOfPowerSettingsGuid, PowerSettingGuid, Type, PossibleSettingIndex, Buffer, BufferSize)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteSettingAttributes == "on"]
+foreign {
+    // param-hint: SubGroupGuid optional
+    // param-hint: PowerSettingGuid optional
+    func PowerWriteSettingAttributes(SubGroupGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, Attributes: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteSettingAttributes == "on"]
+public unsafe func Windows_PowerWriteSettingAttributes(SubGroupGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, Attributes: UInt32): windows_core.WIN32_ERROR {
+    return PowerWriteSettingAttributes(SubGroupGuid, PowerSettingGuid, Attributes)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteValueIncrement == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootPowerKey optional
     // param-hint: SubGroupOfPowerSettingsGuid optional
     // param-hint: PowerSettingGuid optional
     func PowerWriteValueIncrement(RootPowerKey: Win32_System_Registry.HKEY, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, ValueIncrement: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteValueIncrement == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerWriteValueIncrement(RootPowerKey: Win32_System_Registry.HKEY, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, ValueIncrement: UInt32): windows_core.WIN32_ERROR {
+    return PowerWriteValueIncrement(RootPowerKey, SubGroupOfPowerSettingsGuid, PowerSettingGuid, ValueIncrement)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteValueMax == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootPowerKey optional
     // param-hint: SubGroupOfPowerSettingsGuid optional
     // param-hint: PowerSettingGuid optional
     func PowerWriteValueMax(RootPowerKey: Win32_System_Registry.HKEY, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, ValueMaximum: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteValueMax == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerWriteValueMax(RootPowerKey: Win32_System_Registry.HKEY, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, ValueMaximum: UInt32): windows_core.WIN32_ERROR {
+    return PowerWriteValueMax(RootPowerKey, SubGroupOfPowerSettingsGuid, PowerSettingGuid, ValueMaximum)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteValueMin == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootPowerKey optional
     // param-hint: SubGroupOfPowerSettingsGuid optional
     // param-hint: PowerSettingGuid optional
     func PowerWriteValueMin(RootPowerKey: Win32_System_Registry.HKEY, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, ValueMinimum: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteValueMin == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerWriteValueMin(RootPowerKey: Win32_System_Registry.HKEY, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, ValueMinimum: UInt32): windows_core.WIN32_ERROR {
+    return PowerWriteValueMin(RootPowerKey, SubGroupOfPowerSettingsGuid, PowerSettingGuid, ValueMinimum)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteValueUnitsSpecifier == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: RootPowerKey optional
     // param-hint: SubGroupOfPowerSettingsGuid optional
     // param-hint: PowerSettingGuid optional
@@ -293,26 +1005,220 @@ foreign {
     func PowerWriteValueUnitsSpecifier(RootPowerKey: Win32_System_Registry.HKEY, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, Buffer: CPointer<UInt8>, BufferSize: UInt32): windows_core.WIN32_ERROR
 }
 
-@When[POWRPROF == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-foreign {
-    func PowerRegisterSuspendResumeNotification(Flags: Win32__impl_l0.REGISTER_NOTIFICATION_FLAGSAbi, Recipient: CPointer<Unit>, RegistrationHandle: CPointer<CPointer<Unit>>): windows_core.WIN32_ERROR
-    func PowerSettingRegisterNotification(SettingGuid: CPointer<GUID>, Flags: Win32__impl_l0.REGISTER_NOTIFICATION_FLAGSAbi, Recipient: CPointer<Unit>, RegistrationHandle: CPointer<CPointer<Unit>>): windows_core.WIN32_ERROR
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerWriteValueUnitsSpecifier == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PowerWriteValueUnitsSpecifier(RootPowerKey: Win32_System_Registry.HKEY, SubGroupOfPowerSettingsGuid: CPointer<GUID>, PowerSettingGuid: CPointer<GUID>, Buffer: CPointer<UInt8>, BufferSize: UInt32): windows_core.WIN32_ERROR {
+    return PowerWriteValueUnitsSpecifier(RootPowerKey, SubGroupOfPowerSettingsGuid, PowerSettingGuid, Buffer, BufferSize)
 }
 
-@When[USER32 == "on"]
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_ReadGlobalPwrPolicy == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func ReadGlobalPwrPolicy(pGlobalPowerPolicy: CPointer<GLOBAL_POWER_POLICYAbi>): UInt8
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_ReadGlobalPwrPolicy == "on"]
+public unsafe func Windows_ReadGlobalPwrPolicy(pGlobalPowerPolicy: CPointer<GLOBAL_POWER_POLICYAbi>): UInt8 {
+    return ReadGlobalPwrPolicy(pGlobalPowerPolicy)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_ReadProcessorPwrScheme == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func ReadProcessorPwrScheme(uiID: UInt32, pMachineProcessorPowerPolicy: CPointer<Win32__impl_l1.MACHINE_PROCESSOR_POWER_POLICYAbi>): UInt8
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_ReadProcessorPwrScheme == "on"]
+public unsafe func Windows_ReadProcessorPwrScheme(uiID: UInt32, pMachineProcessorPowerPolicy: CPointer<Win32__impl_l1.MACHINE_PROCESSOR_POWER_POLICYAbi>): UInt8 {
+    return ReadProcessorPwrScheme(uiID, pMachineProcessorPowerPolicy)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_ReadPwrScheme == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func ReadPwrScheme(uiID: UInt32, pPowerPolicy: CPointer<POWER_POLICYAbi>): UInt8
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_ReadPwrScheme == "on"]
+public unsafe func Windows_ReadPwrScheme(uiID: UInt32, pPowerPolicy: CPointer<POWER_POLICYAbi>): UInt8 {
+    return ReadPwrScheme(uiID, pPowerPolicy)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_SetActivePwrScheme == "on"]
+foreign {
+    // param-hint: pGlobalPowerPolicy optional
+    // param-hint: pPowerPolicy optional
+    // pinvoke-hint: SetLastError
+    func SetActivePwrScheme(uiID: UInt32, pGlobalPowerPolicy: CPointer<GLOBAL_POWER_POLICYAbi>, pPowerPolicy: CPointer<POWER_POLICYAbi>): UInt8
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_SetActivePwrScheme == "on"]
+public unsafe func Windows_SetActivePwrScheme(uiID: UInt32, pGlobalPowerPolicy: CPointer<GLOBAL_POWER_POLICYAbi>, pPowerPolicy: CPointer<POWER_POLICYAbi>): UInt8 {
+    return SetActivePwrScheme(uiID, pGlobalPowerPolicy, pPowerPolicy)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_SetSuspendState == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetSuspendState(bHibernate: UInt8, bForce: UInt8, bWakeupEventsDisabled: UInt8): UInt8
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_SetSuspendState == "on"]
+public unsafe func Windows_SetSuspendState(bHibernate: UInt8, bForce: UInt8, bWakeupEventsDisabled: UInt8): UInt8 {
+    return SetSuspendState(bHibernate, bForce, bWakeupEventsDisabled)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_ValidatePowerPolicies == "on"]
+foreign {
+    // param-hint: pGlobalPowerPolicy optional
+    // param-hint: pPowerPolicy optional
+    func ValidatePowerPolicies(pGlobalPowerPolicy: CPointer<GLOBAL_POWER_POLICYAbi>, pPowerPolicy: CPointer<POWER_POLICYAbi>): UInt8
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_ValidatePowerPolicies == "on"]
+public unsafe func Windows_ValidatePowerPolicies(pGlobalPowerPolicy: CPointer<GLOBAL_POWER_POLICYAbi>, pPowerPolicy: CPointer<POWER_POLICYAbi>): UInt8 {
+    return ValidatePowerPolicies(pGlobalPowerPolicy, pPowerPolicy)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_WriteGlobalPwrPolicy == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WriteGlobalPwrPolicy(pGlobalPowerPolicy: CPointer<GLOBAL_POWER_POLICYAbi>): UInt8
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_WriteGlobalPwrPolicy == "on"]
+public unsafe func Windows_WriteGlobalPwrPolicy(pGlobalPowerPolicy: CPointer<GLOBAL_POWER_POLICYAbi>): UInt8 {
+    return WriteGlobalPwrPolicy(pGlobalPowerPolicy)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_WriteProcessorPwrScheme == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WriteProcessorPwrScheme(uiID: UInt32, pMachineProcessorPowerPolicy: CPointer<Win32__impl_l1.MACHINE_PROCESSOR_POWER_POLICYAbi>): UInt8
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_WriteProcessorPwrScheme == "on"]
+public unsafe func Windows_WriteProcessorPwrScheme(uiID: UInt32, pMachineProcessorPowerPolicy: CPointer<Win32__impl_l1.MACHINE_PROCESSOR_POWER_POLICYAbi>): UInt8 {
+    return WriteProcessorPwrScheme(uiID, pMachineProcessorPowerPolicy)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_WritePwrScheme == "on"]
+foreign {
+    // param-hint: lpszDescription optional
+    // pinvoke-hint: SetLastError
+    func WritePwrScheme(puiID: CPointer<UInt32>, lpszSchemeName: CPointer<UInt16>, lpszDescription: CPointer<UInt16>, lpScheme: CPointer<POWER_POLICYAbi>): UInt8
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_WritePwrScheme == "on"]
+public unsafe func Windows_WritePwrScheme(puiID: CPointer<UInt32>, lpszSchemeName: CPointer<UInt16>, lpszDescription: CPointer<UInt16>, lpScheme: CPointer<POWER_POLICYAbi>): UInt8 {
+    return WritePwrScheme(puiID, lpszSchemeName, lpszDescription, lpScheme)
+}
+
+@When[Windows_Win32_System_Power == "on" && USER32 == "on" && Windows_Win32_System_Power_RegisterPowerSettingNotification == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func RegisterPowerSettingNotification(hRecipient: CPointer<Unit>, PowerSettingGuid: CPointer<GUID>, Flags: Win32__impl_l0.REGISTER_NOTIFICATION_FLAGSAbi): Win32__impl_l0.HPOWERNOTIFY
+}
+
+@When[Windows_Win32_System_Power == "on" && USER32 == "on" && Windows_Win32_System_Power_RegisterPowerSettingNotification == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_RegisterPowerSettingNotification(hRecipient: CPointer<Unit>, PowerSettingGuid: CPointer<GUID>, Flags: Win32__impl_l0.REGISTER_NOTIFICATION_FLAGSAbi): Win32__impl_l0.HPOWERNOTIFY {
+    return RegisterPowerSettingNotification(hRecipient, PowerSettingGuid, Flags)
+}
+
+@When[Windows_Win32_System_Power == "on" && USER32 == "on" && Windows_Win32_System_Power_RegisterSuspendResumeNotification == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func RegisterSuspendResumeNotification(hRecipient: CPointer<Unit>, Flags: Win32__impl_l0.REGISTER_NOTIFICATION_FLAGSAbi): Win32__impl_l0.HPOWERNOTIFY
+}
+
+@When[Windows_Win32_System_Power == "on" && USER32 == "on" && Windows_Win32_System_Power_RegisterSuspendResumeNotification == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_RegisterSuspendResumeNotification(hRecipient: CPointer<Unit>, Flags: Win32__impl_l0.REGISTER_NOTIFICATION_FLAGSAbi): Win32__impl_l0.HPOWERNOTIFY {
+    return RegisterSuspendResumeNotification(hRecipient, Flags)
+}
+
+@When[Windows_Win32_System_Power == "on" && USER32 == "on" && Windows_Win32_System_Power_UnregisterPowerSettingNotification == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func UnregisterPowerSettingNotification(Handle: Win32__impl_l0.HPOWERNOTIFY): Int32
+}
+
+@When[Windows_Win32_System_Power == "on" && USER32 == "on" && Windows_Win32_System_Power_UnregisterPowerSettingNotification == "on"]
+public unsafe func Windows_UnregisterPowerSettingNotification(Handle: Win32__impl_l0.HPOWERNOTIFY): Int32 {
+    return UnregisterPowerSettingNotification(Handle)
+}
+
+@When[Windows_Win32_System_Power == "on" && USER32 == "on" && Windows_Win32_System_Power_UnregisterSuspendResumeNotification == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func UnregisterSuspendResumeNotification(Handle: Win32__impl_l0.HPOWERNOTIFY): Int32
 }
 
-@When[USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-foreign {
-    // pinvoke-hint: SetLastError
-    func RegisterPowerSettingNotification(hRecipient: CPointer<Unit>, PowerSettingGuid: CPointer<GUID>, Flags: Win32__impl_l0.REGISTER_NOTIFICATION_FLAGSAbi): Win32__impl_l0.HPOWERNOTIFY
-    // pinvoke-hint: SetLastError
-    func RegisterSuspendResumeNotification(hRecipient: CPointer<Unit>, Flags: Win32__impl_l0.REGISTER_NOTIFICATION_FLAGSAbi): Win32__impl_l0.HPOWERNOTIFY
+@When[Windows_Win32_System_Power == "on" && USER32 == "on" && Windows_Win32_System_Power_UnregisterSuspendResumeNotification == "on"]
+public unsafe func Windows_UnregisterSuspendResumeNotification(Handle: Win32__impl_l0.HPOWERNOTIFY): Int32 {
+    return UnregisterSuspendResumeNotification(Handle)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerGetUserConfiguredACPowerMode == "on"]
+func __windowsBindgen_PowerGetUserConfiguredACPowerModeProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("POWRPROF.dll", "PowerGetUserConfiguredACPowerMode")
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerGetUserConfiguredACPowerMode == "on"]
+unsafe func PowerGetUserConfiguredACPowerMode(PowerModeGuid: CPointer<GUID>): UInt32 {
+    let call = CFunc<(CPointer<GUID>) -> UInt32>(__windowsBindgen_PowerGetUserConfiguredACPowerModeProc())
+    return unsafe { call(PowerModeGuid) }
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerGetUserConfiguredACPowerMode == "on"]
+public unsafe func Windows_PowerGetUserConfiguredACPowerMode(PowerModeGuid: CPointer<GUID>): UInt32 {
+    return PowerGetUserConfiguredACPowerMode(PowerModeGuid)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerGetUserConfiguredDCPowerMode == "on"]
+func __windowsBindgen_PowerGetUserConfiguredDCPowerModeProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("POWRPROF.dll", "PowerGetUserConfiguredDCPowerMode")
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerGetUserConfiguredDCPowerMode == "on"]
+unsafe func PowerGetUserConfiguredDCPowerMode(PowerModeGuid: CPointer<GUID>): UInt32 {
+    let call = CFunc<(CPointer<GUID>) -> UInt32>(__windowsBindgen_PowerGetUserConfiguredDCPowerModeProc())
+    return unsafe { call(PowerModeGuid) }
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerGetUserConfiguredDCPowerMode == "on"]
+public unsafe func Windows_PowerGetUserConfiguredDCPowerMode(PowerModeGuid: CPointer<GUID>): UInt32 {
+    return PowerGetUserConfiguredDCPowerMode(PowerModeGuid)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerSetUserConfiguredACPowerMode == "on"]
+func __windowsBindgen_PowerSetUserConfiguredACPowerModeProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("POWRPROF.dll", "PowerSetUserConfiguredACPowerMode")
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerSetUserConfiguredACPowerMode == "on"]
+unsafe func PowerSetUserConfiguredACPowerMode(PowerModeGuid: CPointer<GUID>): UInt32 {
+    let call = CFunc<(CPointer<GUID>) -> UInt32>(__windowsBindgen_PowerSetUserConfiguredACPowerModeProc())
+    return unsafe { call(PowerModeGuid) }
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerSetUserConfiguredACPowerMode == "on"]
+public unsafe func Windows_PowerSetUserConfiguredACPowerMode(PowerModeGuid: CPointer<GUID>): UInt32 {
+    return PowerSetUserConfiguredACPowerMode(PowerModeGuid)
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerSetUserConfiguredDCPowerMode == "on"]
+func __windowsBindgen_PowerSetUserConfiguredDCPowerModeProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("POWRPROF.dll", "PowerSetUserConfiguredDCPowerMode")
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerSetUserConfiguredDCPowerMode == "on"]
+unsafe func PowerSetUserConfiguredDCPowerMode(PowerModeGuid: CPointer<GUID>): UInt32 {
+    let call = CFunc<(CPointer<GUID>) -> UInt32>(__windowsBindgen_PowerSetUserConfiguredDCPowerModeProc())
+    return unsafe { call(PowerModeGuid) }
+}
+
+@When[Windows_Win32_System_Power == "on" && POWRPROF == "on" && Windows_Win32_System_Power_PowerSetUserConfiguredDCPowerMode == "on"]
+public unsafe func Windows_PowerSetUserConfiguredDCPowerMode(PowerModeGuid: CPointer<GUID>): UInt32 {
+    return PowerSetUserConfiguredDCPowerMode(PowerModeGuid)
 }
 
 @When[Windows_Win32_System_Power == "on"]

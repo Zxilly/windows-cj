@@ -3,7 +3,6 @@ package windows_sys.Win32.System.VirtualDosMachines
 
 import windows_polyfill.{packedReadInt32, packedReadUInt16, packedReadUInt32, packedReadValue, packedWriteInt32, packedWriteUInt16, packedWriteUInt32, packedWriteValue}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1

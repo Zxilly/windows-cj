@@ -3,19 +3,12 @@ package windows_sys.Win32.Web.InternetExplorer
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Dxgi_Common == "on"]
 import windows_sys.Win32.Graphics.Dxgi.Common as Win32_Graphics_Dxgi_Common
-@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows_sys.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-@When[Windows_Win32_Security == "on"]
 import windows_sys.Win32.Security as Win32_Security
-@When[Windows_Win32_System_Registry == "on"]
 import windows_sys.Win32.System.Registry as Win32_System_Registry
-@When[Windows_Win32_System_WinRT == "on"]
 import windows_sys.Win32.System.WinRT as Win32_System_WinRT
-@When[Windows_Win32_Web_MsHtml == "on"]
 import windows_sys.Win32.Web.MsHtml as Win32_Web_MsHtml
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
@@ -6086,137 +6079,606 @@ public class IOpenServiceActivityManager <: InterfaceWrapperBase & ComInterface 
     }
 }
 
-@When[IEFRAME == "on"]
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEAssociateThreadWithTab == "on"]
 foreign {
     func IEAssociateThreadWithTab(dwTabThreadID: UInt32, dwAssociatedThreadID: UInt32): Int32
-    func IECancelSaveFile(hState: CPointer<Unit>): Int32
-    func IEDeleteFile(lpFileName: CPointer<UInt16>): Int32
-    func IEDisassociateThreadWithTab(dwTabThreadID: UInt32, dwAssociatedThreadID: UInt32): Int32
-    // param-hint: lpszCookieData len=param[3]
-    func IEGetProtectedModeCookie(lpszURL: CPointer<UInt16>, lpszCookieName: CPointer<UInt16>, lpszCookieData: CPointer<UInt16>, pcchCookieData: CPointer<UInt32>, dwFlags: UInt32): Int32
-    func IEGetWriteableFolderPath(clsidFolderID: CPointer<GUID>, lppwstrPath: CPointer<CPointer<UInt16>>): Int32
-    func IEInPrivateFilteringEnabled(): Int32
-    func IEIsInPrivateBrowsing(): Int32
-    func IEIsProtectedModeProcess(pbResult: CPointer<Int32>): Int32
-    func IEIsProtectedModeURL(lpwstrUrl: CPointer<UInt16>): Int32
-    func IEMoveFileEx(lpExistingFileName: CPointer<UInt16>, lpNewFileName: CPointer<UInt16>, dwFlags: UInt32): Int32
-    func IERefreshElevationPolicy(): Int32
-    // param-hint: lpData bytes=param[5]
-    func IERegSetValueEx(lpSubKey: CPointer<UInt16>, lpValueName: CPointer<UInt16>, Reserved: UInt32, dwType: UInt32, lpData: CPointer<UInt8>, cbData: UInt32): Int32
-    func IERegisterWritableRegistryKey(guid: GUID, lpSubkey: CPointer<UInt16>, fSubkeyAllowed: Int32): Int32
-    // param-hint: lpData bytes=param[5] optional
-    func IERegisterWritableRegistryValue(guid: GUID, lpPath: CPointer<UInt16>, lpValueName: CPointer<UInt16>, dwType: UInt32, lpData: CPointer<UInt8>, cbMaxData: UInt32): Int32
-    func IERemoveDirectory(lpPathName: CPointer<UInt16>): Int32
-    func IESaveFile(hState: CPointer<Unit>, lpwstrSourceFile: CPointer<UInt16>): Int32
-    func IESetProtectedModeCookie(lpszURL: CPointer<UInt16>, lpszCookieName: CPointer<UInt16>, lpszCookieData: CPointer<UInt16>, dwFlags: UInt32): Int32
-    // param-hint: lpwstrFileName len=param[2]
-    // param-hint: lpwstrInitialDir optional
-    // param-hint: lpwstrFilter optional
-    // param-hint: lpwstrDefExt optional
-    func IEShowOpenFileDialog(hwnd: CPointer<Unit>, lpwstrFileName: CPointer<UInt16>, cchMaxFileName: UInt32, lpwstrInitialDir: CPointer<UInt16>, lpwstrFilter: CPointer<UInt16>, lpwstrDefExt: CPointer<UInt16>, dwFilterIndex: UInt32, dwFlags: UInt32, phFile: CPointer<CPointer<Unit>>): Int32
-    // param-hint: lpwstrInitialDir optional
-    // param-hint: lpwstrFilter optional
-    // param-hint: lpwstrDefExt optional
-    func IEShowSaveFileDialog(hwnd: CPointer<Unit>, lpwstrInitialFileName: CPointer<UInt16>, lpwstrInitialDir: CPointer<UInt16>, lpwstrFilter: CPointer<UInt16>, lpwstrDefExt: CPointer<UInt16>, dwFilterIndex: UInt32, dwFlags: UInt32, lppwstrDestinationFilePath: CPointer<CPointer<UInt16>>, phState: CPointer<CPointer<Unit>>): Int32
-    func IETrackingProtectionEnabled(): Int32
-    func IEUnregisterWritableRegistry(guid: GUID): Int32
 }
 
-@When[IEFRAME == "on" && (Windows_Win32_Security == "on" && Windows_Win32_System_Registry == "on")]
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEAssociateThreadWithTab == "on"]
+public unsafe func Windows_IEAssociateThreadWithTab(dwTabThreadID: UInt32, dwAssociatedThreadID: UInt32): Int32 {
+    return IEAssociateThreadWithTab(dwTabThreadID, dwAssociatedThreadID)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IECancelSaveFile == "on"]
+foreign {
+    func IECancelSaveFile(hState: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IECancelSaveFile == "on"]
+public unsafe func Windows_IECancelSaveFile(hState: CPointer<Unit>): Int32 {
+    return IECancelSaveFile(hState)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IECreateDirectory == "on" && Windows_Win32_Security == "on"]
+foreign {
+    func IECreateDirectory(lpPathName: CPointer<UInt16>, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTES>): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IECreateDirectory == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_IECreateDirectory(lpPathName: CPointer<UInt16>, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTES>): Int32 {
+    return IECreateDirectory(lpPathName, lpSecurityAttributes)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IECreateFile == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: hTemplateFile optional
+    func IECreateFile(lpFileName: CPointer<UInt16>, dwDesiredAccess: UInt32, dwShareMode: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTES>, dwCreationDisposition: UInt32, dwFlagsAndAttributes: UInt32, hTemplateFile: CPointer<Unit>): CPointer<Unit>
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IECreateFile == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_IECreateFile(lpFileName: CPointer<UInt16>, dwDesiredAccess: UInt32, dwShareMode: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTES>, dwCreationDisposition: UInt32, dwFlagsAndAttributes: UInt32, hTemplateFile: CPointer<Unit>): CPointer<Unit> {
+    return IECreateFile(lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEDeleteFile == "on"]
+foreign {
+    func IEDeleteFile(lpFileName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEDeleteFile == "on"]
+public unsafe func Windows_IEDeleteFile(lpFileName: CPointer<UInt16>): Int32 {
+    return IEDeleteFile(lpFileName)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEDisassociateThreadWithTab == "on"]
+foreign {
+    func IEDisassociateThreadWithTab(dwTabThreadID: UInt32, dwAssociatedThreadID: UInt32): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEDisassociateThreadWithTab == "on"]
+public unsafe func Windows_IEDisassociateThreadWithTab(dwTabThreadID: UInt32, dwAssociatedThreadID: UInt32): Int32 {
+    return IEDisassociateThreadWithTab(dwTabThreadID, dwAssociatedThreadID)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEFindFirstFile == "on" && Windows_Win32_Storage_FileSystem == "on"]
+foreign {
+    func IEFindFirstFile(lpFileName: CPointer<UInt16>, lpFindFileData: CPointer<Win32__impl_l0.WIN32_FIND_DATAA>): CPointer<Unit>
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEFindFirstFile == "on" && Windows_Win32_Storage_FileSystem == "on"]
+public unsafe func Windows_IEFindFirstFile(lpFileName: CPointer<UInt16>, lpFindFileData: CPointer<Win32__impl_l0.WIN32_FIND_DATAA>): CPointer<Unit> {
+    return IEFindFirstFile(lpFileName, lpFindFileData)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEGetFileAttributesEx == "on" && Windows_Win32_Storage_FileSystem == "on"]
+foreign {
+    func IEGetFileAttributesEx(lpFileName: CPointer<UInt16>, fInfoLevelId: Int32, lpFileInformation: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEGetFileAttributesEx == "on" && Windows_Win32_Storage_FileSystem == "on"]
+public unsafe func Windows_IEGetFileAttributesEx(lpFileName: CPointer<UInt16>, fInfoLevelId: Int32, lpFileInformation: CPointer<Unit>): Int32 {
+    return IEGetFileAttributesEx(lpFileName, fInfoLevelId, lpFileInformation)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEGetProtectedModeCookie == "on"]
+foreign {
+    // param-hint: lpszCookieData len=param[3]
+    func IEGetProtectedModeCookie(lpszURL: CPointer<UInt16>, lpszCookieName: CPointer<UInt16>, lpszCookieData: CPointer<UInt16>, pcchCookieData: CPointer<UInt32>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEGetProtectedModeCookie == "on"]
+public unsafe func Windows_IEGetProtectedModeCookie(lpszURL: CPointer<UInt16>, lpszCookieName: CPointer<UInt16>, lpszCookieData: CPointer<UInt16>, pcchCookieData: CPointer<UInt32>, dwFlags: UInt32): Int32 {
+    return IEGetProtectedModeCookie(lpszURL, lpszCookieName, lpszCookieData, pcchCookieData, dwFlags)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEGetWriteableFolderPath == "on"]
+foreign {
+    func IEGetWriteableFolderPath(clsidFolderID: CPointer<GUID>, lppwstrPath: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEGetWriteableFolderPath == "on"]
+public unsafe func Windows_IEGetWriteableFolderPath(clsidFolderID: CPointer<GUID>, lppwstrPath: CPointer<CPointer<UInt16>>): Int32 {
+    return IEGetWriteableFolderPath(clsidFolderID, lppwstrPath)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEGetWriteableLowHKCU == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    func IEGetWriteableLowHKCU(pHKey: CPointer<Win32_System_Registry.HKEY>): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEGetWriteableLowHKCU == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_IEGetWriteableLowHKCU(pHKey: CPointer<Win32_System_Registry.HKEY>): Int32 {
+    return IEGetWriteableLowHKCU(pHKey)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEInPrivateFilteringEnabled == "on"]
+foreign {
+    func IEInPrivateFilteringEnabled(): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEInPrivateFilteringEnabled == "on"]
+public unsafe func Windows_IEInPrivateFilteringEnabled(): Int32 {
+    return IEInPrivateFilteringEnabled()
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEIsInPrivateBrowsing == "on"]
+foreign {
+    func IEIsInPrivateBrowsing(): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEIsInPrivateBrowsing == "on"]
+public unsafe func Windows_IEIsInPrivateBrowsing(): Int32 {
+    return IEIsInPrivateBrowsing()
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEIsProtectedModeProcess == "on"]
+foreign {
+    func IEIsProtectedModeProcess(pbResult: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEIsProtectedModeProcess == "on"]
+public unsafe func Windows_IEIsProtectedModeProcess(pbResult: CPointer<Int32>): Int32 {
+    return IEIsProtectedModeProcess(pbResult)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEIsProtectedModeURL == "on"]
+foreign {
+    func IEIsProtectedModeURL(lpwstrUrl: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEIsProtectedModeURL == "on"]
+public unsafe func Windows_IEIsProtectedModeURL(lpwstrUrl: CPointer<UInt16>): Int32 {
+    return IEIsProtectedModeURL(lpwstrUrl)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IELaunchURL == "on" && Windows_Win32_System_Threading == "on"]
+foreign {
+    // param-hint: lpInfo optional
+    func IELaunchURL(lpwstrUrl: CPointer<UInt16>, lpProcInfo: CPointer<Win32__impl_l0.PROCESS_INFORMATION>, lpInfo: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IELaunchURL == "on" && Windows_Win32_System_Threading == "on"]
+public unsafe func Windows_IELaunchURL(lpwstrUrl: CPointer<UInt16>, lpProcInfo: CPointer<Win32__impl_l0.PROCESS_INFORMATION>, lpInfo: CPointer<Unit>): Int32 {
+    return IELaunchURL(lpwstrUrl, lpProcInfo, lpInfo)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEMoveFileEx == "on"]
+foreign {
+    func IEMoveFileEx(lpExistingFileName: CPointer<UInt16>, lpNewFileName: CPointer<UInt16>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEMoveFileEx == "on"]
+public unsafe func Windows_IEMoveFileEx(lpExistingFileName: CPointer<UInt16>, lpNewFileName: CPointer<UInt16>, dwFlags: UInt32): Int32 {
+    return IEMoveFileEx(lpExistingFileName, lpNewFileName, dwFlags)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IERefreshElevationPolicy == "on"]
+foreign {
+    func IERefreshElevationPolicy(): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IERefreshElevationPolicy == "on"]
+public unsafe func Windows_IERefreshElevationPolicy(): Int32 {
+    return IERefreshElevationPolicy()
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IERegCreateKeyEx == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Registry == "on"]
 foreign {
     // param-hint: lpClass optional
     // param-hint: lpSecurityAttributes optional
     func IERegCreateKeyEx(lpSubKey: CPointer<UInt16>, Reserved: UInt32, lpClass: CPointer<UInt16>, dwOptions: UInt32, samDesired: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTES>, phkResult: CPointer<Win32_System_Registry.HKEY>, lpdwDisposition: CPointer<UInt32>): Int32
 }
 
-@When[IEFRAME == "on" && Windows_Win32_Security == "on"]
-foreign {
-    func IECreateDirectory(lpPathName: CPointer<UInt16>, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTES>): Int32
-    // param-hint: hTemplateFile optional
-    func IECreateFile(lpFileName: CPointer<UInt16>, dwDesiredAccess: UInt32, dwShareMode: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTES>, dwCreationDisposition: UInt32, dwFlagsAndAttributes: UInt32, hTemplateFile: CPointer<Unit>): CPointer<Unit>
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IERegCreateKeyEx == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_IERegCreateKeyEx(lpSubKey: CPointer<UInt16>, Reserved: UInt32, lpClass: CPointer<UInt16>, dwOptions: UInt32, samDesired: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTES>, phkResult: CPointer<Win32_System_Registry.HKEY>, lpdwDisposition: CPointer<UInt32>): Int32 {
+    return IERegCreateKeyEx(lpSubKey, Reserved, lpClass, dwOptions, samDesired, lpSecurityAttributes, phkResult, lpdwDisposition)
 }
 
-@When[IEFRAME == "on" && Windows_Win32_Storage_FileSystem == "on"]
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IERegSetValueEx == "on"]
 foreign {
-    func IEFindFirstFile(lpFileName: CPointer<UInt16>, lpFindFileData: CPointer<Win32__impl_l0.WIN32_FIND_DATAA>): CPointer<Unit>
-    func IEGetFileAttributesEx(lpFileName: CPointer<UInt16>, fInfoLevelId: Int32, lpFileInformation: CPointer<Unit>): Int32
+    // param-hint: lpData bytes=param[5]
+    func IERegSetValueEx(lpSubKey: CPointer<UInt16>, lpValueName: CPointer<UInt16>, Reserved: UInt32, dwType: UInt32, lpData: CPointer<UInt8>, cbData: UInt32): Int32
 }
 
-@When[IEFRAME == "on" && Windows_Win32_System_Registry == "on"]
-foreign {
-    func IEGetWriteableLowHKCU(pHKey: CPointer<Win32_System_Registry.HKEY>): Int32
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IERegSetValueEx == "on"]
+public unsafe func Windows_IERegSetValueEx(lpSubKey: CPointer<UInt16>, lpValueName: CPointer<UInt16>, Reserved: UInt32, dwType: UInt32, lpData: CPointer<UInt8>, cbData: UInt32): Int32 {
+    return IERegSetValueEx(lpSubKey, lpValueName, Reserved, dwType, lpData, cbData)
 }
 
-@When[IEFRAME == "on" && Windows_Win32_System_Threading == "on"]
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IERegisterWritableRegistryKey == "on"]
 foreign {
-    // param-hint: lpInfo optional
-    func IELaunchURL(lpwstrUrl: CPointer<UInt16>, lpProcInfo: CPointer<Win32__impl_l0.PROCESS_INFORMATION>, lpInfo: CPointer<Unit>): Int32
+    func IERegisterWritableRegistryKey(guid: GUID, lpSubkey: CPointer<UInt16>, fSubkeyAllowed: Int32): Int32
 }
 
-@When[IMGUTIL == "on"]
-foreign {
-    func CreateMIMEMap(ppMap: CPointer<CPointer<Unit>>): Int32
-    func GetMaxMIMEIDBytes(pnMaxBytes: CPointer<UInt32>): Int32
-    func IdentifyMIMEType(pbBytes: CPointer<UInt8>, nBytes: UInt32, pnFormat: CPointer<UInt32>): Int32
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IERegisterWritableRegistryKey == "on"]
+public unsafe func Windows_IERegisterWritableRegistryKey(guid: GUID, lpSubkey: CPointer<UInt16>, fSubkeyAllowed: Int32): Int32 {
+    return IERegisterWritableRegistryKey(guid, lpSubkey, fSubkeyAllowed)
 }
 
-@When[IMGUTIL == "on" && (Windows_Win32_Graphics_DirectDraw == "on" && Windows_Win32_Graphics_Gdi == "on")]
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IERegisterWritableRegistryValue == "on"]
+foreign {
+    // param-hint: lpData bytes=param[5] optional
+    func IERegisterWritableRegistryValue(guid: GUID, lpPath: CPointer<UInt16>, lpValueName: CPointer<UInt16>, dwType: UInt32, lpData: CPointer<UInt8>, cbMaxData: UInt32): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IERegisterWritableRegistryValue == "on"]
+public unsafe func Windows_IERegisterWritableRegistryValue(guid: GUID, lpPath: CPointer<UInt16>, lpValueName: CPointer<UInt16>, dwType: UInt32, lpData: CPointer<UInt8>, cbMaxData: UInt32): Int32 {
+    return IERegisterWritableRegistryValue(guid, lpPath, lpValueName, dwType, lpData, cbMaxData)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IERemoveDirectory == "on"]
+foreign {
+    func IERemoveDirectory(lpPathName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IERemoveDirectory == "on"]
+public unsafe func Windows_IERemoveDirectory(lpPathName: CPointer<UInt16>): Int32 {
+    return IERemoveDirectory(lpPathName)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IESaveFile == "on"]
+foreign {
+    func IESaveFile(hState: CPointer<Unit>, lpwstrSourceFile: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IESaveFile == "on"]
+public unsafe func Windows_IESaveFile(hState: CPointer<Unit>, lpwstrSourceFile: CPointer<UInt16>): Int32 {
+    return IESaveFile(hState, lpwstrSourceFile)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IESetProtectedModeCookie == "on"]
+foreign {
+    func IESetProtectedModeCookie(lpszURL: CPointer<UInt16>, lpszCookieName: CPointer<UInt16>, lpszCookieData: CPointer<UInt16>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IESetProtectedModeCookie == "on"]
+public unsafe func Windows_IESetProtectedModeCookie(lpszURL: CPointer<UInt16>, lpszCookieName: CPointer<UInt16>, lpszCookieData: CPointer<UInt16>, dwFlags: UInt32): Int32 {
+    return IESetProtectedModeCookie(lpszURL, lpszCookieName, lpszCookieData, dwFlags)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEShowOpenFileDialog == "on"]
+foreign {
+    // param-hint: lpwstrFileName len=param[2]
+    // param-hint: lpwstrInitialDir optional
+    // param-hint: lpwstrFilter optional
+    // param-hint: lpwstrDefExt optional
+    func IEShowOpenFileDialog(hwnd: CPointer<Unit>, lpwstrFileName: CPointer<UInt16>, cchMaxFileName: UInt32, lpwstrInitialDir: CPointer<UInt16>, lpwstrFilter: CPointer<UInt16>, lpwstrDefExt: CPointer<UInt16>, dwFilterIndex: UInt32, dwFlags: UInt32, phFile: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEShowOpenFileDialog == "on"]
+public unsafe func Windows_IEShowOpenFileDialog(hwnd: CPointer<Unit>, lpwstrFileName: CPointer<UInt16>, cchMaxFileName: UInt32, lpwstrInitialDir: CPointer<UInt16>, lpwstrFilter: CPointer<UInt16>, lpwstrDefExt: CPointer<UInt16>, dwFilterIndex: UInt32, dwFlags: UInt32, phFile: CPointer<CPointer<Unit>>): Int32 {
+    return IEShowOpenFileDialog(hwnd, lpwstrFileName, cchMaxFileName, lpwstrInitialDir, lpwstrFilter, lpwstrDefExt, dwFilterIndex, dwFlags, phFile)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEShowSaveFileDialog == "on"]
+foreign {
+    // param-hint: lpwstrInitialDir optional
+    // param-hint: lpwstrFilter optional
+    // param-hint: lpwstrDefExt optional
+    func IEShowSaveFileDialog(hwnd: CPointer<Unit>, lpwstrInitialFileName: CPointer<UInt16>, lpwstrInitialDir: CPointer<UInt16>, lpwstrFilter: CPointer<UInt16>, lpwstrDefExt: CPointer<UInt16>, dwFilterIndex: UInt32, dwFlags: UInt32, lppwstrDestinationFilePath: CPointer<CPointer<UInt16>>, phState: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEShowSaveFileDialog == "on"]
+public unsafe func Windows_IEShowSaveFileDialog(hwnd: CPointer<Unit>, lpwstrInitialFileName: CPointer<UInt16>, lpwstrInitialDir: CPointer<UInt16>, lpwstrFilter: CPointer<UInt16>, lpwstrDefExt: CPointer<UInt16>, dwFilterIndex: UInt32, dwFlags: UInt32, lppwstrDestinationFilePath: CPointer<CPointer<UInt16>>, phState: CPointer<CPointer<Unit>>): Int32 {
+    return IEShowSaveFileDialog(hwnd, lpwstrInitialFileName, lpwstrInitialDir, lpwstrFilter, lpwstrDefExt, dwFilterIndex, dwFlags, lppwstrDestinationFilePath, phState)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IETrackingProtectionEnabled == "on"]
+foreign {
+    func IETrackingProtectionEnabled(): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IETrackingProtectionEnabled == "on"]
+public unsafe func Windows_IETrackingProtectionEnabled(): Int32 {
+    return IETrackingProtectionEnabled()
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEUnregisterWritableRegistry == "on"]
+foreign {
+    func IEUnregisterWritableRegistry(guid: GUID): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IEFRAME == "on" && Windows_Win32_Web_InternetExplorer_IEUnregisterWritableRegistry == "on"]
+public unsafe func Windows_IEUnregisterWritableRegistry(guid: GUID): Int32 {
+    return IEUnregisterWritableRegistry(guid)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IMGUTIL == "on" && Windows_Win32_Web_InternetExplorer_ComputeInvCMAP == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func ComputeInvCMAP(pRGBColors: CPointer<Win32_Graphics_Gdi.RGBQUAD>, nColors: UInt32, pInvTable: CPointer<UInt8>, cbTable: UInt32): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IMGUTIL == "on" && Windows_Win32_Web_InternetExplorer_ComputeInvCMAP == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_ComputeInvCMAP(pRGBColors: CPointer<Win32_Graphics_Gdi.RGBQUAD>, nColors: UInt32, pInvTable: CPointer<UInt8>, cbTable: UInt32): Int32 {
+    return ComputeInvCMAP(pRGBColors, nColors, pInvTable, cbTable)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IMGUTIL == "on" && Windows_Win32_Web_InternetExplorer_CreateDDrawSurfaceOnDIB == "on" && Windows_Win32_Graphics_DirectDraw == "on" && Windows_Win32_Graphics_Gdi == "on"]
 foreign {
     func CreateDDrawSurfaceOnDIB(hbmDib: Win32_Graphics_Gdi.HBITMAP, ppSurface: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[IMGUTIL == "on" && Windows_Win32_Graphics_Gdi == "on"]
+@When[Windows_Win32_Web_InternetExplorer == "on" && IMGUTIL == "on" && Windows_Win32_Web_InternetExplorer_CreateDDrawSurfaceOnDIB == "on" && Windows_Win32_Graphics_DirectDraw == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_CreateDDrawSurfaceOnDIB(hbmDib: Win32_Graphics_Gdi.HBITMAP, ppSurface: CPointer<CPointer<Unit>>): Int32 {
+    return CreateDDrawSurfaceOnDIB(hbmDib, ppSurface)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IMGUTIL == "on" && Windows_Win32_Web_InternetExplorer_CreateMIMEMap == "on"]
 foreign {
-    func ComputeInvCMAP(pRGBColors: CPointer<Win32_Graphics_Gdi.RGBQUAD>, nColors: UInt32, pInvTable: CPointer<UInt8>, cbTable: UInt32): Int32
+    func CreateMIMEMap(ppMap: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IMGUTIL == "on" && Windows_Win32_Web_InternetExplorer_CreateMIMEMap == "on"]
+public unsafe func Windows_CreateMIMEMap(ppMap: CPointer<CPointer<Unit>>): Int32 {
+    return CreateMIMEMap(ppMap)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IMGUTIL == "on" && Windows_Win32_Web_InternetExplorer_DecodeImage == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func DecodeImage(pStream: CPointer<Unit>, pMap: CPointer<Unit>, pEventSink: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IMGUTIL == "on" && Windows_Win32_Web_InternetExplorer_DecodeImage == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_DecodeImage(pStream: CPointer<Unit>, pMap: CPointer<Unit>, pEventSink: CPointer<Unit>): Int32 {
+    return DecodeImage(pStream, pMap, pEventSink)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IMGUTIL == "on" && Windows_Win32_Web_InternetExplorer_DecodeImageEx == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func DecodeImageEx(pStream: CPointer<Unit>, pMap: CPointer<Unit>, pEventSink: CPointer<Unit>, pszMIMETypeParam: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IMGUTIL == "on" && Windows_Win32_Web_InternetExplorer_DecodeImageEx == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_DecodeImageEx(pStream: CPointer<Unit>, pMap: CPointer<Unit>, pEventSink: CPointer<Unit>, pszMIMETypeParam: CPointer<UInt16>): Int32 {
+    return DecodeImageEx(pStream, pMap, pEventSink, pszMIMETypeParam)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IMGUTIL == "on" && Windows_Win32_Web_InternetExplorer_DitherTo8 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func DitherTo8(pDestBits: CPointer<UInt8>, nDestPitch: Int32, pSrcBits: CPointer<UInt8>, nSrcPitch: Int32, bfidSrc: CPointer<GUID>, prgbDestColors: CPointer<Win32_Graphics_Gdi.RGBQUAD>, prgbSrcColors: CPointer<Win32_Graphics_Gdi.RGBQUAD>, pbDestInvMap: CPointer<UInt8>, x: Int32, y: Int32, cx: Int32, cy: Int32, lDestTrans: Int32, lSrcTrans: Int32): Int32
 }
 
-@When[IMGUTIL == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_Web_InternetExplorer == "on" && IMGUTIL == "on" && Windows_Win32_Web_InternetExplorer_DitherTo8 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DitherTo8(pDestBits: CPointer<UInt8>, nDestPitch: Int32, pSrcBits: CPointer<UInt8>, nSrcPitch: Int32, bfidSrc: CPointer<GUID>, prgbDestColors: CPointer<Win32_Graphics_Gdi.RGBQUAD>, prgbSrcColors: CPointer<Win32_Graphics_Gdi.RGBQUAD>, pbDestInvMap: CPointer<UInt8>, x: Int32, y: Int32, cx: Int32, cy: Int32, lDestTrans: Int32, lSrcTrans: Int32): Int32 {
+    return DitherTo8(pDestBits, nDestPitch, pSrcBits, nSrcPitch, bfidSrc, prgbDestColors, prgbSrcColors, pbDestInvMap, x, y, cx, cy, lDestTrans, lSrcTrans)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IMGUTIL == "on" && Windows_Win32_Web_InternetExplorer_GetMaxMIMEIDBytes == "on"]
 foreign {
-    func DecodeImage(pStream: CPointer<Unit>, pMap: CPointer<Unit>, pEventSink: CPointer<Unit>): Int32
-    func DecodeImageEx(pStream: CPointer<Unit>, pMap: CPointer<Unit>, pEventSink: CPointer<Unit>, pszMIMETypeParam: CPointer<UInt16>): Int32
+    func GetMaxMIMEIDBytes(pnMaxBytes: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IMGUTIL == "on" && Windows_Win32_Web_InternetExplorer_GetMaxMIMEIDBytes == "on"]
+public unsafe func Windows_GetMaxMIMEIDBytes(pnMaxBytes: CPointer<UInt32>): Int32 {
+    return GetMaxMIMEIDBytes(pnMaxBytes)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IMGUTIL == "on" && Windows_Win32_Web_InternetExplorer_IdentifyMIMEType == "on"]
+foreign {
+    func IdentifyMIMEType(pbBytes: CPointer<UInt8>, nBytes: UInt32, pnFormat: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IMGUTIL == "on" && Windows_Win32_Web_InternetExplorer_IdentifyMIMEType == "on"]
+public unsafe func Windows_IdentifyMIMEType(pbBytes: CPointer<UInt8>, nBytes: UInt32, pnFormat: CPointer<UInt32>): Int32 {
+    return IdentifyMIMEType(pbBytes, nBytes, pnFormat)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && IMGUTIL == "on" && Windows_Win32_Web_InternetExplorer_SniffStream == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func SniffStream(pInStream: CPointer<Unit>, pnFormat: CPointer<UInt32>, ppOutStream: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[MSRATING == "on"]
+@When[Windows_Win32_Web_InternetExplorer == "on" && IMGUTIL == "on" && Windows_Win32_Web_InternetExplorer_SniffStream == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SniffStream(pInStream: CPointer<Unit>, pnFormat: CPointer<UInt32>, ppOutStream: CPointer<CPointer<Unit>>): Int32 {
+    return SniffStream(pInStream, pnFormat, ppOutStream)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingAccessDeniedDialog == "on"]
 foreign {
     // param-hint: pszUsername optional
     func RatingAccessDeniedDialog(hDlg: CPointer<Unit>, pszUsername: CPointer<UInt8>, pszContentDescription: CPointer<UInt8>, pRatingDetails: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingAccessDeniedDialog == "on"]
+public unsafe func Windows_RatingAccessDeniedDialog(hDlg: CPointer<Unit>, pszUsername: CPointer<UInt8>, pszContentDescription: CPointer<UInt8>, pRatingDetails: CPointer<Unit>): Int32 {
+    return RatingAccessDeniedDialog(hDlg, pszUsername, pszContentDescription, pRatingDetails)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingAccessDeniedDialog2 == "on"]
+foreign {
     // param-hint: pszUsername optional
     func RatingAccessDeniedDialog2(hDlg: CPointer<Unit>, pszUsername: CPointer<UInt8>, pRatingDetails: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingAccessDeniedDialog2 == "on"]
+public unsafe func Windows_RatingAccessDeniedDialog2(hDlg: CPointer<Unit>, pszUsername: CPointer<UInt8>, pRatingDetails: CPointer<Unit>): Int32 {
+    return RatingAccessDeniedDialog2(hDlg, pszUsername, pRatingDetails)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingAccessDeniedDialog2W == "on"]
+foreign {
     // param-hint: pszUsername optional
     func RatingAccessDeniedDialog2W(hDlg: CPointer<Unit>, pszUsername: CPointer<UInt16>, pRatingDetails: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingAccessDeniedDialog2W == "on"]
+public unsafe func Windows_RatingAccessDeniedDialog2W(hDlg: CPointer<Unit>, pszUsername: CPointer<UInt16>, pRatingDetails: CPointer<Unit>): Int32 {
+    return RatingAccessDeniedDialog2W(hDlg, pszUsername, pRatingDetails)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingAccessDeniedDialogW == "on"]
+foreign {
     // param-hint: pszUsername optional
     func RatingAccessDeniedDialogW(hDlg: CPointer<Unit>, pszUsername: CPointer<UInt16>, pszContentDescription: CPointer<UInt16>, pRatingDetails: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingAccessDeniedDialogW == "on"]
+public unsafe func Windows_RatingAccessDeniedDialogW(hDlg: CPointer<Unit>, pszUsername: CPointer<UInt16>, pszContentDescription: CPointer<UInt16>, pRatingDetails: CPointer<Unit>): Int32 {
+    return RatingAccessDeniedDialogW(hDlg, pszUsername, pszContentDescription, pRatingDetails)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingAddToApprovedSites == "on"]
+foreign {
     // param-hint: pbPasswordBlob bytes=param[1]
     func RatingAddToApprovedSites(hDlg: CPointer<Unit>, cbPasswordBlob: UInt32, pbPasswordBlob: CPointer<UInt8>, lpszUrl: CPointer<UInt16>, fAlwaysNever: Int32, fSitePage: Int32, fApprovedSitesEnforced: Int32): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingAddToApprovedSites == "on"]
+public unsafe func Windows_RatingAddToApprovedSites(hDlg: CPointer<Unit>, cbPasswordBlob: UInt32, pbPasswordBlob: CPointer<UInt8>, lpszUrl: CPointer<UInt16>, fAlwaysNever: Int32, fSitePage: Int32, fApprovedSitesEnforced: Int32): Int32 {
+    return RatingAddToApprovedSites(hDlg, cbPasswordBlob, pbPasswordBlob, lpszUrl, fAlwaysNever, fSitePage, fApprovedSitesEnforced)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingCheckUserAccess == "on"]
+foreign {
     // param-hint: pszUsername optional
     // param-hint: pszURL optional
     // param-hint: pszRatingInfo optional
     // param-hint: pData bytes=param[4] optional
     // param-hint: ppRatingDetails optional
     func RatingCheckUserAccess(pszUsername: CPointer<UInt8>, pszURL: CPointer<UInt8>, pszRatingInfo: CPointer<UInt8>, pData: CPointer<UInt8>, cbData: UInt32, ppRatingDetails: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingCheckUserAccess == "on"]
+public unsafe func Windows_RatingCheckUserAccess(pszUsername: CPointer<UInt8>, pszURL: CPointer<UInt8>, pszRatingInfo: CPointer<UInt8>, pData: CPointer<UInt8>, cbData: UInt32, ppRatingDetails: CPointer<CPointer<Unit>>): Int32 {
+    return RatingCheckUserAccess(pszUsername, pszURL, pszRatingInfo, pData, cbData, ppRatingDetails)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingCheckUserAccessW == "on"]
+foreign {
     // param-hint: pszUsername optional
     // param-hint: pszURL optional
     // param-hint: pszRatingInfo optional
     // param-hint: pData bytes=param[4] optional
     // param-hint: ppRatingDetails optional
     func RatingCheckUserAccessW(pszUsername: CPointer<UInt16>, pszURL: CPointer<UInt16>, pszRatingInfo: CPointer<UInt16>, pData: CPointer<UInt8>, cbData: UInt32, ppRatingDetails: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingCheckUserAccessW == "on"]
+public unsafe func Windows_RatingCheckUserAccessW(pszUsername: CPointer<UInt16>, pszURL: CPointer<UInt16>, pszRatingInfo: CPointer<UInt16>, pData: CPointer<UInt8>, cbData: UInt32, ppRatingDetails: CPointer<CPointer<Unit>>): Int32 {
+    return RatingCheckUserAccessW(pszUsername, pszURL, pszRatingInfo, pData, cbData, ppRatingDetails)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingClickedOnPRFInternal == "on"]
+foreign {
     func RatingClickedOnPRFInternal(hWndOwner: CPointer<Unit>, param1: CPointer<Unit>, lpszFileName: CPointer<UInt8>, nShow: Int32): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingClickedOnPRFInternal == "on"]
+public unsafe func Windows_RatingClickedOnPRFInternal(hWndOwner: CPointer<Unit>, param1: CPointer<Unit>, lpszFileName: CPointer<UInt8>, nShow: Int32): Int32 {
+    return RatingClickedOnPRFInternal(hWndOwner, param1, lpszFileName, nShow)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingClickedOnRATInternal == "on"]
+foreign {
     func RatingClickedOnRATInternal(hWndOwner: CPointer<Unit>, param1: CPointer<Unit>, lpszFileName: CPointer<UInt8>, nShow: Int32): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingClickedOnRATInternal == "on"]
+public unsafe func Windows_RatingClickedOnRATInternal(hWndOwner: CPointer<Unit>, param1: CPointer<Unit>, lpszFileName: CPointer<UInt8>, nShow: Int32): Int32 {
+    return RatingClickedOnRATInternal(hWndOwner, param1, lpszFileName, nShow)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingEnable == "on"]
+foreign {
     func RatingEnable(hwndParent: CPointer<Unit>, pszUsername: CPointer<UInt8>, fEnable: Int32): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingEnable == "on"]
+public unsafe func Windows_RatingEnable(hwndParent: CPointer<Unit>, pszUsername: CPointer<UInt8>, fEnable: Int32): Int32 {
+    return RatingEnable(hwndParent, pszUsername, fEnable)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingEnableW == "on"]
+foreign {
     func RatingEnableW(hwndParent: CPointer<Unit>, pszUsername: CPointer<UInt16>, fEnable: Int32): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingEnableW == "on"]
+public unsafe func Windows_RatingEnableW(hwndParent: CPointer<Unit>, pszUsername: CPointer<UInt16>, fEnable: Int32): Int32 {
+    return RatingEnableW(hwndParent, pszUsername, fEnable)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingEnabledQuery == "on"]
+foreign {
     func RatingEnabledQuery(): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingEnabledQuery == "on"]
+public unsafe func Windows_RatingEnabledQuery(): Int32 {
+    return RatingEnabledQuery()
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingFreeDetails == "on"]
+foreign {
     // param-hint: pRatingDetails optional
     func RatingFreeDetails(pRatingDetails: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingFreeDetails == "on"]
+public unsafe func Windows_RatingFreeDetails(pRatingDetails: CPointer<Unit>): Int32 {
+    return RatingFreeDetails(pRatingDetails)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingInit == "on"]
+foreign {
     func RatingInit(): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingInit == "on"]
+public unsafe func Windows_RatingInit(): Int32 {
+    return RatingInit()
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingObtainCancel == "on"]
+foreign {
     func RatingObtainCancel(hRatingObtainQuery: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingObtainCancel == "on"]
+public unsafe func Windows_RatingObtainCancel(hRatingObtainQuery: CPointer<Unit>): Int32 {
+    return RatingObtainCancel(hRatingObtainQuery)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingObtainQuery == "on"]
+foreign {
     // param-hint: phRatingObtainQuery optional
     func RatingObtainQuery(pszTargetUrl: CPointer<UInt8>, dwUserData: UInt32, fCallback: IntNative, phRatingObtainQuery: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingObtainQuery == "on"]
+public unsafe func Windows_RatingObtainQuery(pszTargetUrl: CPointer<UInt8>, dwUserData: UInt32, fCallback: IntNative, phRatingObtainQuery: CPointer<CPointer<Unit>>): Int32 {
+    return RatingObtainQuery(pszTargetUrl, dwUserData, fCallback, phRatingObtainQuery)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingObtainQueryW == "on"]
+foreign {
     // param-hint: phRatingObtainQuery optional
     func RatingObtainQueryW(pszTargetUrl: CPointer<UInt16>, dwUserData: UInt32, fCallback: IntNative, phRatingObtainQuery: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingObtainQueryW == "on"]
+public unsafe func Windows_RatingObtainQueryW(pszTargetUrl: CPointer<UInt16>, dwUserData: UInt32, fCallback: IntNative, phRatingObtainQuery: CPointer<CPointer<Unit>>): Int32 {
+    return RatingObtainQueryW(pszTargetUrl, dwUserData, fCallback, phRatingObtainQuery)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingSetupUI == "on"]
+foreign {
     func RatingSetupUI(hDlg: CPointer<Unit>, pszUsername: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingSetupUI == "on"]
+public unsafe func Windows_RatingSetupUI(hDlg: CPointer<Unit>, pszUsername: CPointer<UInt8>): Int32 {
+    return RatingSetupUI(hDlg, pszUsername)
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingSetupUIW == "on"]
+foreign {
     func RatingSetupUIW(hDlg: CPointer<Unit>, pszUsername: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Web_InternetExplorer == "on" && MSRATING == "on" && Windows_Win32_Web_InternetExplorer_RatingSetupUIW == "on"]
+public unsafe func Windows_RatingSetupUIW(hDlg: CPointer<Unit>, pszUsername: CPointer<UInt16>): Int32 {
+    return RatingSetupUIW(hDlg, pszUsername)
 }
 
 @When[Windows_Win32_Web_InternetExplorer == "on"]

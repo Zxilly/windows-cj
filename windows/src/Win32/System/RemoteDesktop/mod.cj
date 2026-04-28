@@ -4,20 +4,17 @@
 package windows.Win32.System.RemoteDesktop
 
 import std.collection.*
+import windows_libloading
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_polyfill.{packedReadInt32, packedReadUInt16, packedReadUInt32, packedReadValue, packedWriteInt32, packedWriteUInt16, packedWriteUInt32, packedWriteValue, unionReadUInt32, unionWriteUInt32}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Media_Audio_Apo == "on"]
 import windows.Win32.Media.Audio.Apo as Win32_Media_Audio_Apo
 import windows.Win32.Media._impl_l0 as Win32_Media__impl_l0
-@When[Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
-@When[Windows_Win32_System_WinRT == "on"]
 import windows.Win32.System.WinRT as Win32_System_WinRT
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
@@ -10464,190 +10461,863 @@ extend AE_CURRENT_POSITION <: windows_core.CopyType & windows_core.RuntimeType &
     }
 }
 
-@When[KERNEL32 == "on"]
+@When[Windows_Win32_System_RemoteDesktop == "on" && KERNEL32 == "on" && Windows_Win32_System_RemoteDesktop_ProcessIdToSessionId == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func ProcessIdToSessionId(dwProcessId: UInt32, pSessionId: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && KERNEL32 == "on" && Windows_Win32_System_RemoteDesktop_ProcessIdToSessionId == "on"]
+public unsafe func Windows_ProcessIdToSessionId(dwProcessId: UInt32, pSessionId: CPointer<UInt32>): Int32 {
+    return ProcessIdToSessionId(dwProcessId, pSessionId)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && KERNEL32 == "on" && Windows_Win32_System_RemoteDesktop_WTSGetActiveConsoleSessionId == "on"]
+foreign {
     func WTSGetActiveConsoleSessionId(): UInt32
 }
 
-@When[WTSAPI32 == "on"]
+@When[Windows_Win32_System_RemoteDesktop == "on" && KERNEL32 == "on" && Windows_Win32_System_RemoteDesktop_WTSGetActiveConsoleSessionId == "on"]
+public unsafe func Windows_WTSGetActiveConsoleSessionId(): UInt32 {
+    return WTSGetActiveConsoleSessionId()
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSCloseServer == "on"]
 foreign {
-    func WTSActiveSessionExists(pbActiveSessionExists: CPointer<Int32>): Int32
     func WTSCloseServer(hServer: CPointer<Unit>): Unit
-    func WTSCloudAuthClose(cloudAuthHandle: WTS_CLOUD_AUTH_HANDLE): Unit
-    // param-hint: assertion bytes=param[2]
-    func WTSCloudAuthConvertAssertionToSerializedUserCredential(cloudAuthHandle: WTS_CLOUD_AUTH_HANDLE, assertion: CPointer<UInt8>, assertionLength: UInt32, resourceId: CPointer<UInt16>, userCredential: CPointer<CPointer<WTS_SERIALIZED_USER_CREDENTIALAbi>>): Int32
-    func WTSCloudAuthDuplicateSerializedUserCredential(userCredential: CPointer<WTS_SERIALIZED_USER_CREDENTIALAbi>, duplicatedUserCredential: CPointer<CPointer<WTS_SERIALIZED_USER_CREDENTIALAbi>>): Int32
-    func WTSCloudAuthGetServerNonce(cloudAuthHandle: WTS_CLOUD_AUTH_HANDLE, serverNonce: CPointer<CPointer<UInt16>>): Int32
-    func WTSCloudAuthNetworkLogonWithSerializedCredential(cloudAuthHandle: WTS_CLOUD_AUTH_HANDLE, userCredential: CPointer<WTS_SERIALIZED_USER_CREDENTIALAbi>, token: CPointer<CPointer<Unit>>): Int32
-    func WTSCloudAuthOpen(activityId: CPointer<GUID>): WTS_CLOUD_AUTH_HANDLE
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSCloseServer == "on"]
+public unsafe func Windows_WTSCloseServer(hServer: CPointer<Unit>): Unit {
+    WTSCloseServer(hServer)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSConnectSessionA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func WTSConnectSessionA(LogonId: UInt32, TargetLogonId: UInt32, pPassword: CPointer<UInt8>, bWait: Int32): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSConnectSessionA == "on"]
+public unsafe func Windows_WTSConnectSessionA(LogonId: UInt32, TargetLogonId: UInt32, pPassword: CPointer<UInt8>, bWait: Int32): Int32 {
+    return WTSConnectSessionA(LogonId, TargetLogonId, pPassword, bWait)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSConnectSessionW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func WTSConnectSessionW(LogonId: UInt32, TargetLogonId: UInt32, pPassword: CPointer<UInt16>, bWait: Int32): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSConnectSessionW == "on"]
+public unsafe func Windows_WTSConnectSessionW(LogonId: UInt32, TargetLogonId: UInt32, pPassword: CPointer<UInt16>, bWait: Int32): Int32 {
+    return WTSConnectSessionW(LogonId, TargetLogonId, pPassword, bWait)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSCreateListenerA == "on"]
+foreign {
     // param-hint: hServer optional reserved
     // pinvoke-hint: SetLastError
     func WTSCreateListenerA(hServer: CPointer<Unit>, pReserved: CPointer<Unit>, Reserved: UInt32, pListenerName: CPointer<UInt8>, pBuffer: CPointer<WTSLISTENERCONFIGAAbi>, flag: UInt32): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSCreateListenerA == "on"]
+public unsafe func Windows_WTSCreateListenerA(hServer: CPointer<Unit>, pReserved: CPointer<Unit>, Reserved: UInt32, pListenerName: CPointer<UInt8>, pBuffer: CPointer<WTSLISTENERCONFIGAAbi>, flag: UInt32): Int32 {
+    return WTSCreateListenerA(hServer, pReserved, Reserved, pListenerName, pBuffer, flag)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSCreateListenerW == "on"]
+foreign {
     // param-hint: hServer optional reserved
     // pinvoke-hint: SetLastError
     func WTSCreateListenerW(hServer: CPointer<Unit>, pReserved: CPointer<Unit>, Reserved: UInt32, pListenerName: CPointer<UInt16>, pBuffer: CPointer<WTSLISTENERCONFIGWAbi>, flag: UInt32): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSCreateListenerW == "on"]
+public unsafe func Windows_WTSCreateListenerW(hServer: CPointer<Unit>, pReserved: CPointer<Unit>, Reserved: UInt32, pListenerName: CPointer<UInt16>, pBuffer: CPointer<WTSLISTENERCONFIGWAbi>, flag: UInt32): Int32 {
+    return WTSCreateListenerW(hServer, pReserved, Reserved, pListenerName, pBuffer, flag)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSDisconnectSession == "on"]
+foreign {
     // param-hint: hServer optional
     // pinvoke-hint: SetLastError
     func WTSDisconnectSession(hServer: CPointer<Unit>, SessionId: UInt32, bWait: Int32): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSDisconnectSession == "on"]
+public unsafe func Windows_WTSDisconnectSession(hServer: CPointer<Unit>, SessionId: UInt32, bWait: Int32): Int32 {
+    return WTSDisconnectSession(hServer, SessionId, bWait)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSEnableChildSessions == "on"]
+foreign {
     func WTSEnableChildSessions(bEnable: Int32): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSEnableChildSessions == "on"]
+public unsafe func Windows_WTSEnableChildSessions(bEnable: Int32): Int32 {
+    return WTSEnableChildSessions(bEnable)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSEnumerateListenersA == "on"]
+foreign {
     // param-hint: hServer optional reserved
     // param-hint: pListeners len=param[4] optional
     // pinvoke-hint: SetLastError
     func WTSEnumerateListenersA(hServer: CPointer<Unit>, pReserved: CPointer<Unit>, Reserved: UInt32, pListeners: CPointer<CPointer<Int8>>, pCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSEnumerateListenersA == "on"]
+public unsafe func Windows_WTSEnumerateListenersA(hServer: CPointer<Unit>, pReserved: CPointer<Unit>, Reserved: UInt32, pListeners: CPointer<CPointer<Int8>>, pCount: CPointer<UInt32>): Int32 {
+    return WTSEnumerateListenersA(hServer, pReserved, Reserved, pListeners, pCount)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSEnumerateListenersW == "on"]
+foreign {
     // param-hint: hServer optional reserved
     // param-hint: pListeners len=param[4] optional
     // pinvoke-hint: SetLastError
     func WTSEnumerateListenersW(hServer: CPointer<Unit>, pReserved: CPointer<Unit>, Reserved: UInt32, pListeners: CPointer<CPointer<UInt16>>, pCount: CPointer<UInt32>): Int32
-    // param-hint: hServer optional
-    // pinvoke-hint: SetLastError
-    func WTSEnumerateProcessesExA(hServer: CPointer<Unit>, pLevel: CPointer<UInt32>, SessionId: UInt32, ppProcessInfo: CPointer<CPointer<UInt8>>, pCount: CPointer<UInt32>): Int32
-    // param-hint: hServer optional
-    // pinvoke-hint: SetLastError
-    func WTSEnumerateProcessesExW(hServer: CPointer<Unit>, pLevel: CPointer<UInt32>, SessionId: UInt32, ppProcessInfo: CPointer<CPointer<UInt16>>, pCount: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func WTSEnumerateServersA(pDomainName: CPointer<UInt8>, Reserved: UInt32, Version: UInt32, ppServerInfo: CPointer<CPointer<WTS_SERVER_INFOAAbi>>, pCount: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func WTSEnumerateServersW(pDomainName: CPointer<UInt16>, Reserved: UInt32, Version: UInt32, ppServerInfo: CPointer<CPointer<WTS_SERVER_INFOWAbi>>, pCount: CPointer<UInt32>): Int32
-    // param-hint: hServer optional
-    // pinvoke-hint: SetLastError
-    func WTSEnumerateSessionsA(hServer: CPointer<Unit>, Reserved: UInt32, Version: UInt32, ppSessionInfo: CPointer<CPointer<WTS_SESSION_INFOAAbi>>, pCount: CPointer<UInt32>): Int32
-    // param-hint: hServer optional
-    // pinvoke-hint: SetLastError
-    func WTSEnumerateSessionsExA(hServer: CPointer<Unit>, pLevel: CPointer<UInt32>, Filter: UInt32, ppSessionInfo: CPointer<CPointer<WTS_SESSION_INFO_1AAbi>>, pCount: CPointer<UInt32>): Int32
-    // param-hint: hServer optional
-    // pinvoke-hint: SetLastError
-    func WTSEnumerateSessionsExW(hServer: CPointer<Unit>, pLevel: CPointer<UInt32>, Filter: UInt32, ppSessionInfo: CPointer<CPointer<WTS_SESSION_INFO_1WAbi>>, pCount: CPointer<UInt32>): Int32
-    // param-hint: hServer optional
-    // pinvoke-hint: SetLastError
-    func WTSEnumerateSessionsW(hServer: CPointer<Unit>, Reserved: UInt32, Version: UInt32, ppSessionInfo: CPointer<CPointer<WTS_SESSION_INFOWAbi>>, pCount: CPointer<UInt32>): Int32
-    func WTSFreeMemory(pMemory: CPointer<Unit>): Unit
-    // pinvoke-hint: SetLastError
-    func WTSFreeMemoryExA(WTSTypeClass: WTS_TYPE_CLASSAbi, pMemory: CPointer<Unit>, NumberOfEntries: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func WTSFreeMemoryExW(WTSTypeClass: WTS_TYPE_CLASSAbi, pMemory: CPointer<Unit>, NumberOfEntries: UInt32): Int32
-    func WTSGetChildSessionId(pSessionId: CPointer<UInt32>): Int32
-    func WTSIsChildSessionsEnabled(pbEnabled: CPointer<Int32>): Int32
-    // param-hint: hServer optional
-    // pinvoke-hint: SetLastError
-    func WTSLogoffSession(hServer: CPointer<Unit>, SessionId: UInt32, bWait: Int32): Int32
-    func WTSOpenServerA(pServerName: CPointer<UInt8>): CPointer<Unit>
-    func WTSOpenServerExA(pServerName: CPointer<UInt8>): CPointer<Unit>
-    func WTSOpenServerExW(pServerName: CPointer<UInt16>): CPointer<Unit>
-    func WTSOpenServerW(pServerName: CPointer<UInt16>): CPointer<Unit>
-    // param-hint: hServer optional reserved
-    // pinvoke-hint: SetLastError
-    func WTSQueryListenerConfigA(hServer: CPointer<Unit>, pReserved: CPointer<Unit>, Reserved: UInt32, pListenerName: CPointer<UInt8>, pBuffer: CPointer<WTSLISTENERCONFIGAAbi>): Int32
-    // param-hint: hServer optional reserved
-    // pinvoke-hint: SetLastError
-    func WTSQueryListenerConfigW(hServer: CPointer<Unit>, pReserved: CPointer<Unit>, Reserved: UInt32, pListenerName: CPointer<UInt16>, pBuffer: CPointer<WTSLISTENERCONFIGWAbi>): Int32
-    // param-hint: hServer optional
-    // pinvoke-hint: SetLastError
-    func WTSQuerySessionInformationA(hServer: CPointer<Unit>, SessionId: UInt32, WTSInfoClass: WTS_INFO_CLASSAbi, ppBuffer: CPointer<CPointer<UInt8>>, pBytesReturned: CPointer<UInt32>): Int32
-    // param-hint: hServer optional
-    // pinvoke-hint: SetLastError
-    func WTSQuerySessionInformationW(hServer: CPointer<Unit>, SessionId: UInt32, WTSInfoClass: WTS_INFO_CLASSAbi, ppBuffer: CPointer<CPointer<UInt16>>, pBytesReturned: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func WTSQueryUserConfigA(pServerName: CPointer<UInt8>, pUserName: CPointer<UInt8>, WTSConfigClass: WTS_CONFIG_CLASSAbi, ppBuffer: CPointer<CPointer<UInt8>>, pBytesReturned: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func WTSQueryUserConfigW(pServerName: CPointer<UInt16>, pUserName: CPointer<UInt16>, WTSConfigClass: WTS_CONFIG_CLASSAbi, ppBuffer: CPointer<CPointer<UInt16>>, pBytesReturned: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func WTSQueryUserToken(SessionId: UInt32, phToken: CPointer<CPointer<Unit>>): Int32
-    // pinvoke-hint: SetLastError
-    func WTSRegisterSessionNotification(hWnd: CPointer<Unit>, dwFlags: UInt32): Int32
-    // param-hint: hServer optional
-    // pinvoke-hint: SetLastError
-    func WTSRegisterSessionNotificationEx(hServer: CPointer<Unit>, hWnd: CPointer<Unit>, dwFlags: UInt32): Int32
-    // param-hint: pHintData bytes=param[3] optional
-    func WTSSetRenderHint(pRenderHintID: CPointer<UInt64>, hwndOwner: CPointer<Unit>, renderHintType: UInt32, cbHintDataLength: UInt32, pHintData: CPointer<UInt8>): Int32
-    // param-hint: pBuffer bytes=param[4]
-    // pinvoke-hint: SetLastError
-    func WTSSetUserConfigA(pServerName: CPointer<UInt8>, pUserName: CPointer<UInt8>, WTSConfigClass: WTS_CONFIG_CLASSAbi, pBuffer: CPointer<UInt8>, DataLength: UInt32): Int32
-    // param-hint: pBuffer bytes=param[4]
-    // pinvoke-hint: SetLastError
-    func WTSSetUserConfigW(pServerName: CPointer<UInt16>, pUserName: CPointer<UInt16>, WTSConfigClass: WTS_CONFIG_CLASSAbi, pBuffer: CPointer<UInt16>, DataLength: UInt32): Int32
-    // param-hint: hServer optional
-    // pinvoke-hint: SetLastError
-    func WTSShutdownSystem(hServer: CPointer<Unit>, ShutdownFlag: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func WTSStartRemoteControlSessionA(pTargetServerName: CPointer<UInt8>, TargetLogonId: UInt32, HotkeyVk: UInt8, HotkeyModifiers: UInt16): Int32
-    // pinvoke-hint: SetLastError
-    func WTSStartRemoteControlSessionW(pTargetServerName: CPointer<UInt16>, TargetLogonId: UInt32, HotkeyVk: UInt8, HotkeyModifiers: UInt16): Int32
-    // pinvoke-hint: SetLastError
-    func WTSStopRemoteControlSession(LogonId: UInt32): Int32
-    // param-hint: hServer optional
-    // pinvoke-hint: SetLastError
-    func WTSTerminateProcess(hServer: CPointer<Unit>, ProcessId: UInt32, ExitCode: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func WTSUnRegisterSessionNotification(hWnd: CPointer<Unit>): Int32
-    // param-hint: hServer optional
-    // pinvoke-hint: SetLastError
-    func WTSUnRegisterSessionNotificationEx(hServer: CPointer<Unit>, hWnd: CPointer<Unit>): Int32
-    // pinvoke-hint: SetLastError
-    func WTSVirtualChannelClose(hChannelHandle: CPointer<Unit>): Int32
-    // param-hint: hServer optional reserved
-    // pinvoke-hint: SetLastError
-    func WTSVirtualChannelOpen(hServer: CPointer<Unit>, SessionId: UInt32, pVirtualName: CPointer<UInt8>): CPointer<Unit>
-    // pinvoke-hint: SetLastError
-    func WTSVirtualChannelOpenEx(SessionId: UInt32, pVirtualName: CPointer<UInt8>, flags: UInt32): CPointer<Unit>
-    // pinvoke-hint: SetLastError
-    func WTSVirtualChannelPurgeInput(hChannelHandle: CPointer<Unit>): Int32
-    // pinvoke-hint: SetLastError
-    func WTSVirtualChannelPurgeOutput(hChannelHandle: CPointer<Unit>): Int32
-    // pinvoke-hint: SetLastError
-    func WTSVirtualChannelQuery(hChannelHandle: CPointer<Unit>, param1: WTS_VIRTUAL_CLASSAbi, ppBuffer: CPointer<CPointer<Unit>>, pBytesReturned: CPointer<UInt32>): Int32
-    // param-hint: Buffer bytes=param[3]
-    // pinvoke-hint: SetLastError
-    func WTSVirtualChannelRead(hChannelHandle: CPointer<Unit>, TimeOut: UInt32, Buffer: CPointer<UInt8>, BufferSize: UInt32, pBytesRead: CPointer<UInt32>): Int32
-    // param-hint: Buffer bytes=param[2]
-    // pinvoke-hint: SetLastError
-    func WTSVirtualChannelWrite(hChannelHandle: CPointer<Unit>, Buffer: CPointer<UInt8>, Length: UInt32, pBytesWritten: CPointer<UInt32>): Int32
-    // param-hint: hServer optional
-    // pinvoke-hint: SetLastError
-    func WTSWaitSystemEvent(hServer: CPointer<Unit>, EventMask: UInt32, pEventFlags: CPointer<UInt32>): Int32
 }
 
-@When[WTSAPI32 == "on" && Windows_Win32_Security == "on"]
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSEnumerateListenersW == "on"]
+public unsafe func Windows_WTSEnumerateListenersW(hServer: CPointer<Unit>, pReserved: CPointer<Unit>, Reserved: UInt32, pListeners: CPointer<CPointer<UInt16>>, pCount: CPointer<UInt32>): Int32 {
+    return WTSEnumerateListenersW(hServer, pReserved, Reserved, pListeners, pCount)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSEnumerateProcessesA == "on" && Windows_Win32_Security == "on"]
 foreign {
     // param-hint: hServer optional
     // pinvoke-hint: SetLastError
     func WTSEnumerateProcessesA(hServer: CPointer<Unit>, Reserved: UInt32, Version: UInt32, ppProcessInfo: CPointer<CPointer<WTS_PROCESS_INFOAAbi>>, pCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSEnumerateProcessesA == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_WTSEnumerateProcessesA(hServer: CPointer<Unit>, Reserved: UInt32, Version: UInt32, ppProcessInfo: CPointer<CPointer<WTS_PROCESS_INFOAAbi>>, pCount: CPointer<UInt32>): Int32 {
+    return WTSEnumerateProcessesA(hServer, Reserved, Version, ppProcessInfo, pCount)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSEnumerateProcessesExA == "on"]
+foreign {
+    // param-hint: hServer optional
+    // pinvoke-hint: SetLastError
+    func WTSEnumerateProcessesExA(hServer: CPointer<Unit>, pLevel: CPointer<UInt32>, SessionId: UInt32, ppProcessInfo: CPointer<CPointer<UInt8>>, pCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSEnumerateProcessesExA == "on"]
+public unsafe func Windows_WTSEnumerateProcessesExA(hServer: CPointer<Unit>, pLevel: CPointer<UInt32>, SessionId: UInt32, ppProcessInfo: CPointer<CPointer<UInt8>>, pCount: CPointer<UInt32>): Int32 {
+    return WTSEnumerateProcessesExA(hServer, pLevel, SessionId, ppProcessInfo, pCount)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSEnumerateProcessesExW == "on"]
+foreign {
+    // param-hint: hServer optional
+    // pinvoke-hint: SetLastError
+    func WTSEnumerateProcessesExW(hServer: CPointer<Unit>, pLevel: CPointer<UInt32>, SessionId: UInt32, ppProcessInfo: CPointer<CPointer<UInt16>>, pCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSEnumerateProcessesExW == "on"]
+public unsafe func Windows_WTSEnumerateProcessesExW(hServer: CPointer<Unit>, pLevel: CPointer<UInt32>, SessionId: UInt32, ppProcessInfo: CPointer<CPointer<UInt16>>, pCount: CPointer<UInt32>): Int32 {
+    return WTSEnumerateProcessesExW(hServer, pLevel, SessionId, ppProcessInfo, pCount)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSEnumerateProcessesW == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: hServer optional
     // pinvoke-hint: SetLastError
     func WTSEnumerateProcessesW(hServer: CPointer<Unit>, Reserved: UInt32, Version: UInt32, ppProcessInfo: CPointer<CPointer<WTS_PROCESS_INFOWAbi>>, pCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSEnumerateProcessesW == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_WTSEnumerateProcessesW(hServer: CPointer<Unit>, Reserved: UInt32, Version: UInt32, ppProcessInfo: CPointer<CPointer<WTS_PROCESS_INFOWAbi>>, pCount: CPointer<UInt32>): Int32 {
+    return WTSEnumerateProcessesW(hServer, Reserved, Version, ppProcessInfo, pCount)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSEnumerateServersA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WTSEnumerateServersA(pDomainName: CPointer<UInt8>, Reserved: UInt32, Version: UInt32, ppServerInfo: CPointer<CPointer<WTS_SERVER_INFOAAbi>>, pCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSEnumerateServersA == "on"]
+public unsafe func Windows_WTSEnumerateServersA(pDomainName: CPointer<UInt8>, Reserved: UInt32, Version: UInt32, ppServerInfo: CPointer<CPointer<WTS_SERVER_INFOAAbi>>, pCount: CPointer<UInt32>): Int32 {
+    return WTSEnumerateServersA(pDomainName, Reserved, Version, ppServerInfo, pCount)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSEnumerateServersW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WTSEnumerateServersW(pDomainName: CPointer<UInt16>, Reserved: UInt32, Version: UInt32, ppServerInfo: CPointer<CPointer<WTS_SERVER_INFOWAbi>>, pCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSEnumerateServersW == "on"]
+public unsafe func Windows_WTSEnumerateServersW(pDomainName: CPointer<UInt16>, Reserved: UInt32, Version: UInt32, ppServerInfo: CPointer<CPointer<WTS_SERVER_INFOWAbi>>, pCount: CPointer<UInt32>): Int32 {
+    return WTSEnumerateServersW(pDomainName, Reserved, Version, ppServerInfo, pCount)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSEnumerateSessionsA == "on"]
+foreign {
+    // param-hint: hServer optional
+    // pinvoke-hint: SetLastError
+    func WTSEnumerateSessionsA(hServer: CPointer<Unit>, Reserved: UInt32, Version: UInt32, ppSessionInfo: CPointer<CPointer<WTS_SESSION_INFOAAbi>>, pCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSEnumerateSessionsA == "on"]
+public unsafe func Windows_WTSEnumerateSessionsA(hServer: CPointer<Unit>, Reserved: UInt32, Version: UInt32, ppSessionInfo: CPointer<CPointer<WTS_SESSION_INFOAAbi>>, pCount: CPointer<UInt32>): Int32 {
+    return WTSEnumerateSessionsA(hServer, Reserved, Version, ppSessionInfo, pCount)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSEnumerateSessionsExA == "on"]
+foreign {
+    // param-hint: hServer optional
+    // pinvoke-hint: SetLastError
+    func WTSEnumerateSessionsExA(hServer: CPointer<Unit>, pLevel: CPointer<UInt32>, Filter: UInt32, ppSessionInfo: CPointer<CPointer<WTS_SESSION_INFO_1AAbi>>, pCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSEnumerateSessionsExA == "on"]
+public unsafe func Windows_WTSEnumerateSessionsExA(hServer: CPointer<Unit>, pLevel: CPointer<UInt32>, Filter: UInt32, ppSessionInfo: CPointer<CPointer<WTS_SESSION_INFO_1AAbi>>, pCount: CPointer<UInt32>): Int32 {
+    return WTSEnumerateSessionsExA(hServer, pLevel, Filter, ppSessionInfo, pCount)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSEnumerateSessionsExW == "on"]
+foreign {
+    // param-hint: hServer optional
+    // pinvoke-hint: SetLastError
+    func WTSEnumerateSessionsExW(hServer: CPointer<Unit>, pLevel: CPointer<UInt32>, Filter: UInt32, ppSessionInfo: CPointer<CPointer<WTS_SESSION_INFO_1WAbi>>, pCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSEnumerateSessionsExW == "on"]
+public unsafe func Windows_WTSEnumerateSessionsExW(hServer: CPointer<Unit>, pLevel: CPointer<UInt32>, Filter: UInt32, ppSessionInfo: CPointer<CPointer<WTS_SESSION_INFO_1WAbi>>, pCount: CPointer<UInt32>): Int32 {
+    return WTSEnumerateSessionsExW(hServer, pLevel, Filter, ppSessionInfo, pCount)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSEnumerateSessionsW == "on"]
+foreign {
+    // param-hint: hServer optional
+    // pinvoke-hint: SetLastError
+    func WTSEnumerateSessionsW(hServer: CPointer<Unit>, Reserved: UInt32, Version: UInt32, ppSessionInfo: CPointer<CPointer<WTS_SESSION_INFOWAbi>>, pCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSEnumerateSessionsW == "on"]
+public unsafe func Windows_WTSEnumerateSessionsW(hServer: CPointer<Unit>, Reserved: UInt32, Version: UInt32, ppSessionInfo: CPointer<CPointer<WTS_SESSION_INFOWAbi>>, pCount: CPointer<UInt32>): Int32 {
+    return WTSEnumerateSessionsW(hServer, Reserved, Version, ppSessionInfo, pCount)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSFreeMemory == "on"]
+foreign {
+    func WTSFreeMemory(pMemory: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSFreeMemory == "on"]
+public unsafe func Windows_WTSFreeMemory(pMemory: CPointer<Unit>): Unit {
+    WTSFreeMemory(pMemory)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSFreeMemoryExA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WTSFreeMemoryExA(WTSTypeClass: WTS_TYPE_CLASSAbi, pMemory: CPointer<Unit>, NumberOfEntries: UInt32): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSFreeMemoryExA == "on"]
+public unsafe func Windows_WTSFreeMemoryExA(WTSTypeClass: WTS_TYPE_CLASSAbi, pMemory: CPointer<Unit>, NumberOfEntries: UInt32): Int32 {
+    return WTSFreeMemoryExA(WTSTypeClass, pMemory, NumberOfEntries)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSFreeMemoryExW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WTSFreeMemoryExW(WTSTypeClass: WTS_TYPE_CLASSAbi, pMemory: CPointer<Unit>, NumberOfEntries: UInt32): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSFreeMemoryExW == "on"]
+public unsafe func Windows_WTSFreeMemoryExW(WTSTypeClass: WTS_TYPE_CLASSAbi, pMemory: CPointer<Unit>, NumberOfEntries: UInt32): Int32 {
+    return WTSFreeMemoryExW(WTSTypeClass, pMemory, NumberOfEntries)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSGetChildSessionId == "on"]
+foreign {
+    func WTSGetChildSessionId(pSessionId: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSGetChildSessionId == "on"]
+public unsafe func Windows_WTSGetChildSessionId(pSessionId: CPointer<UInt32>): Int32 {
+    return WTSGetChildSessionId(pSessionId)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSGetListenerSecurityA == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: hServer optional reserved
     // param-hint: pSecurityDescriptor optional
     // pinvoke-hint: SetLastError
     func WTSGetListenerSecurityA(hServer: CPointer<Unit>, pReserved: CPointer<Unit>, Reserved: UInt32, pListenerName: CPointer<UInt8>, SecurityInformation: Win32_Security.OBJECT_SECURITY_INFORMATIONAbi, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, nLength: UInt32, lpnLengthNeeded: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSGetListenerSecurityA == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_WTSGetListenerSecurityA(hServer: CPointer<Unit>, pReserved: CPointer<Unit>, Reserved: UInt32, pListenerName: CPointer<UInt8>, SecurityInformation: Win32_Security.OBJECT_SECURITY_INFORMATIONAbi, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, nLength: UInt32, lpnLengthNeeded: CPointer<UInt32>): Int32 {
+    return WTSGetListenerSecurityA(hServer, pReserved, Reserved, pListenerName, SecurityInformation, pSecurityDescriptor, nLength, lpnLengthNeeded)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSGetListenerSecurityW == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: hServer optional reserved
     // param-hint: pSecurityDescriptor optional
     // pinvoke-hint: SetLastError
     func WTSGetListenerSecurityW(hServer: CPointer<Unit>, pReserved: CPointer<Unit>, Reserved: UInt32, pListenerName: CPointer<UInt16>, SecurityInformation: Win32_Security.OBJECT_SECURITY_INFORMATIONAbi, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, nLength: UInt32, lpnLengthNeeded: CPointer<UInt32>): Int32
-    // param-hint: hServer optional reserved
-    // pinvoke-hint: SetLastError
-    func WTSSetListenerSecurityA(hServer: CPointer<Unit>, pReserved: CPointer<Unit>, Reserved: UInt32, pListenerName: CPointer<UInt8>, SecurityInformation: Win32_Security.OBJECT_SECURITY_INFORMATIONAbi, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): Int32
-    // param-hint: hServer optional reserved
-    // pinvoke-hint: SetLastError
-    func WTSSetListenerSecurityW(hServer: CPointer<Unit>, pReserved: CPointer<Unit>, Reserved: UInt32, pListenerName: CPointer<UInt16>, SecurityInformation: Win32_Security.OBJECT_SECURITY_INFORMATIONAbi, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): Int32
 }
 
-@When[WTSAPI32 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSGetListenerSecurityW == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_WTSGetListenerSecurityW(hServer: CPointer<Unit>, pReserved: CPointer<Unit>, Reserved: UInt32, pListenerName: CPointer<UInt16>, SecurityInformation: Win32_Security.OBJECT_SECURITY_INFORMATIONAbi, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, nLength: UInt32, lpnLengthNeeded: CPointer<UInt32>): Int32 {
+    return WTSGetListenerSecurityW(hServer, pReserved, Reserved, pListenerName, SecurityInformation, pSecurityDescriptor, nLength, lpnLengthNeeded)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSIsChildSessionsEnabled == "on"]
+foreign {
+    func WTSIsChildSessionsEnabled(pbEnabled: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSIsChildSessionsEnabled == "on"]
+public unsafe func Windows_WTSIsChildSessionsEnabled(pbEnabled: CPointer<Int32>): Int32 {
+    return WTSIsChildSessionsEnabled(pbEnabled)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSLogoffSession == "on"]
+foreign {
+    // param-hint: hServer optional
+    // pinvoke-hint: SetLastError
+    func WTSLogoffSession(hServer: CPointer<Unit>, SessionId: UInt32, bWait: Int32): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSLogoffSession == "on"]
+public unsafe func Windows_WTSLogoffSession(hServer: CPointer<Unit>, SessionId: UInt32, bWait: Int32): Int32 {
+    return WTSLogoffSession(hServer, SessionId, bWait)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSOpenServerA == "on"]
+foreign {
+    func WTSOpenServerA(pServerName: CPointer<UInt8>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSOpenServerA == "on"]
+public unsafe func Windows_WTSOpenServerA(pServerName: CPointer<UInt8>): CPointer<Unit> {
+    return WTSOpenServerA(pServerName)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSOpenServerExA == "on"]
+foreign {
+    func WTSOpenServerExA(pServerName: CPointer<UInt8>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSOpenServerExA == "on"]
+public unsafe func Windows_WTSOpenServerExA(pServerName: CPointer<UInt8>): CPointer<Unit> {
+    return WTSOpenServerExA(pServerName)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSOpenServerExW == "on"]
+foreign {
+    func WTSOpenServerExW(pServerName: CPointer<UInt16>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSOpenServerExW == "on"]
+public unsafe func Windows_WTSOpenServerExW(pServerName: CPointer<UInt16>): CPointer<Unit> {
+    return WTSOpenServerExW(pServerName)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSOpenServerW == "on"]
+foreign {
+    func WTSOpenServerW(pServerName: CPointer<UInt16>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSOpenServerW == "on"]
+public unsafe func Windows_WTSOpenServerW(pServerName: CPointer<UInt16>): CPointer<Unit> {
+    return WTSOpenServerW(pServerName)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSQueryListenerConfigA == "on"]
+foreign {
+    // param-hint: hServer optional reserved
+    // pinvoke-hint: SetLastError
+    func WTSQueryListenerConfigA(hServer: CPointer<Unit>, pReserved: CPointer<Unit>, Reserved: UInt32, pListenerName: CPointer<UInt8>, pBuffer: CPointer<WTSLISTENERCONFIGAAbi>): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSQueryListenerConfigA == "on"]
+public unsafe func Windows_WTSQueryListenerConfigA(hServer: CPointer<Unit>, pReserved: CPointer<Unit>, Reserved: UInt32, pListenerName: CPointer<UInt8>, pBuffer: CPointer<WTSLISTENERCONFIGAAbi>): Int32 {
+    return WTSQueryListenerConfigA(hServer, pReserved, Reserved, pListenerName, pBuffer)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSQueryListenerConfigW == "on"]
+foreign {
+    // param-hint: hServer optional reserved
+    // pinvoke-hint: SetLastError
+    func WTSQueryListenerConfigW(hServer: CPointer<Unit>, pReserved: CPointer<Unit>, Reserved: UInt32, pListenerName: CPointer<UInt16>, pBuffer: CPointer<WTSLISTENERCONFIGWAbi>): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSQueryListenerConfigW == "on"]
+public unsafe func Windows_WTSQueryListenerConfigW(hServer: CPointer<Unit>, pReserved: CPointer<Unit>, Reserved: UInt32, pListenerName: CPointer<UInt16>, pBuffer: CPointer<WTSLISTENERCONFIGWAbi>): Int32 {
+    return WTSQueryListenerConfigW(hServer, pReserved, Reserved, pListenerName, pBuffer)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSQuerySessionInformationA == "on"]
+foreign {
+    // param-hint: hServer optional
+    // pinvoke-hint: SetLastError
+    func WTSQuerySessionInformationA(hServer: CPointer<Unit>, SessionId: UInt32, WTSInfoClass: WTS_INFO_CLASSAbi, ppBuffer: CPointer<CPointer<UInt8>>, pBytesReturned: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSQuerySessionInformationA == "on"]
+public unsafe func Windows_WTSQuerySessionInformationA(hServer: CPointer<Unit>, SessionId: UInt32, WTSInfoClass: WTS_INFO_CLASSAbi, ppBuffer: CPointer<CPointer<UInt8>>, pBytesReturned: CPointer<UInt32>): Int32 {
+    return WTSQuerySessionInformationA(hServer, SessionId, WTSInfoClass, ppBuffer, pBytesReturned)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSQuerySessionInformationW == "on"]
+foreign {
+    // param-hint: hServer optional
+    // pinvoke-hint: SetLastError
+    func WTSQuerySessionInformationW(hServer: CPointer<Unit>, SessionId: UInt32, WTSInfoClass: WTS_INFO_CLASSAbi, ppBuffer: CPointer<CPointer<UInt16>>, pBytesReturned: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSQuerySessionInformationW == "on"]
+public unsafe func Windows_WTSQuerySessionInformationW(hServer: CPointer<Unit>, SessionId: UInt32, WTSInfoClass: WTS_INFO_CLASSAbi, ppBuffer: CPointer<CPointer<UInt16>>, pBytesReturned: CPointer<UInt32>): Int32 {
+    return WTSQuerySessionInformationW(hServer, SessionId, WTSInfoClass, ppBuffer, pBytesReturned)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSQueryUserConfigA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WTSQueryUserConfigA(pServerName: CPointer<UInt8>, pUserName: CPointer<UInt8>, WTSConfigClass: WTS_CONFIG_CLASSAbi, ppBuffer: CPointer<CPointer<UInt8>>, pBytesReturned: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSQueryUserConfigA == "on"]
+public unsafe func Windows_WTSQueryUserConfigA(pServerName: CPointer<UInt8>, pUserName: CPointer<UInt8>, WTSConfigClass: WTS_CONFIG_CLASSAbi, ppBuffer: CPointer<CPointer<UInt8>>, pBytesReturned: CPointer<UInt32>): Int32 {
+    return WTSQueryUserConfigA(pServerName, pUserName, WTSConfigClass, ppBuffer, pBytesReturned)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSQueryUserConfigW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WTSQueryUserConfigW(pServerName: CPointer<UInt16>, pUserName: CPointer<UInt16>, WTSConfigClass: WTS_CONFIG_CLASSAbi, ppBuffer: CPointer<CPointer<UInt16>>, pBytesReturned: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSQueryUserConfigW == "on"]
+public unsafe func Windows_WTSQueryUserConfigW(pServerName: CPointer<UInt16>, pUserName: CPointer<UInt16>, WTSConfigClass: WTS_CONFIG_CLASSAbi, ppBuffer: CPointer<CPointer<UInt16>>, pBytesReturned: CPointer<UInt32>): Int32 {
+    return WTSQueryUserConfigW(pServerName, pUserName, WTSConfigClass, ppBuffer, pBytesReturned)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSQueryUserToken == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WTSQueryUserToken(SessionId: UInt32, phToken: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSQueryUserToken == "on"]
+public unsafe func Windows_WTSQueryUserToken(SessionId: UInt32, phToken: CPointer<CPointer<Unit>>): Int32 {
+    return WTSQueryUserToken(SessionId, phToken)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSRegisterSessionNotification == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WTSRegisterSessionNotification(hWnd: CPointer<Unit>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSRegisterSessionNotification == "on"]
+public unsafe func Windows_WTSRegisterSessionNotification(hWnd: CPointer<Unit>, dwFlags: UInt32): Int32 {
+    return WTSRegisterSessionNotification(hWnd, dwFlags)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSRegisterSessionNotificationEx == "on"]
+foreign {
+    // param-hint: hServer optional
+    // pinvoke-hint: SetLastError
+    func WTSRegisterSessionNotificationEx(hServer: CPointer<Unit>, hWnd: CPointer<Unit>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSRegisterSessionNotificationEx == "on"]
+public unsafe func Windows_WTSRegisterSessionNotificationEx(hServer: CPointer<Unit>, hWnd: CPointer<Unit>, dwFlags: UInt32): Int32 {
+    return WTSRegisterSessionNotificationEx(hServer, hWnd, dwFlags)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSSendMessageA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
     // param-hint: hServer optional
     // param-hint: pTitle bytes=param[3]
     // param-hint: pMessage bytes=param[5]
     // pinvoke-hint: SetLastError
     func WTSSendMessageA(hServer: CPointer<Unit>, SessionId: UInt32, pTitle: CPointer<UInt8>, TitleLength: UInt32, pMessage: CPointer<UInt8>, MessageLength: UInt32, Style: Win32__impl_l0.MESSAGEBOX_STYLEAbi, Timeout: UInt32, pResponse: CPointer<Win32__impl_l0.MESSAGEBOX_RESULTAbi>, bWait: Int32): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSSendMessageA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_WTSSendMessageA(hServer: CPointer<Unit>, SessionId: UInt32, pTitle: CPointer<UInt8>, TitleLength: UInt32, pMessage: CPointer<UInt8>, MessageLength: UInt32, Style: Win32__impl_l0.MESSAGEBOX_STYLEAbi, Timeout: UInt32, pResponse: CPointer<Win32__impl_l0.MESSAGEBOX_RESULTAbi>, bWait: Int32): Int32 {
+    return WTSSendMessageA(hServer, SessionId, pTitle, TitleLength, pMessage, MessageLength, Style, Timeout, pResponse, bWait)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSSendMessageW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
     // param-hint: hServer optional
     // param-hint: pTitle bytes=param[3]
     // param-hint: pMessage bytes=param[5]
     // pinvoke-hint: SetLastError
     func WTSSendMessageW(hServer: CPointer<Unit>, SessionId: UInt32, pTitle: CPointer<UInt16>, TitleLength: UInt32, pMessage: CPointer<UInt16>, MessageLength: UInt32, Style: Win32__impl_l0.MESSAGEBOX_STYLEAbi, Timeout: UInt32, pResponse: CPointer<Win32__impl_l0.MESSAGEBOX_RESULTAbi>, bWait: Int32): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSSendMessageW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_WTSSendMessageW(hServer: CPointer<Unit>, SessionId: UInt32, pTitle: CPointer<UInt16>, TitleLength: UInt32, pMessage: CPointer<UInt16>, MessageLength: UInt32, Style: Win32__impl_l0.MESSAGEBOX_STYLEAbi, Timeout: UInt32, pResponse: CPointer<Win32__impl_l0.MESSAGEBOX_RESULTAbi>, bWait: Int32): Int32 {
+    return WTSSendMessageW(hServer, SessionId, pTitle, TitleLength, pMessage, MessageLength, Style, Timeout, pResponse, bWait)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSSetListenerSecurityA == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: hServer optional reserved
+    // pinvoke-hint: SetLastError
+    func WTSSetListenerSecurityA(hServer: CPointer<Unit>, pReserved: CPointer<Unit>, Reserved: UInt32, pListenerName: CPointer<UInt8>, SecurityInformation: Win32_Security.OBJECT_SECURITY_INFORMATIONAbi, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSSetListenerSecurityA == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_WTSSetListenerSecurityA(hServer: CPointer<Unit>, pReserved: CPointer<Unit>, Reserved: UInt32, pListenerName: CPointer<UInt8>, SecurityInformation: Win32_Security.OBJECT_SECURITY_INFORMATIONAbi, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): Int32 {
+    return WTSSetListenerSecurityA(hServer, pReserved, Reserved, pListenerName, SecurityInformation, pSecurityDescriptor)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSSetListenerSecurityW == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: hServer optional reserved
+    // pinvoke-hint: SetLastError
+    func WTSSetListenerSecurityW(hServer: CPointer<Unit>, pReserved: CPointer<Unit>, Reserved: UInt32, pListenerName: CPointer<UInt16>, SecurityInformation: Win32_Security.OBJECT_SECURITY_INFORMATIONAbi, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSSetListenerSecurityW == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_WTSSetListenerSecurityW(hServer: CPointer<Unit>, pReserved: CPointer<Unit>, Reserved: UInt32, pListenerName: CPointer<UInt16>, SecurityInformation: Win32_Security.OBJECT_SECURITY_INFORMATIONAbi, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): Int32 {
+    return WTSSetListenerSecurityW(hServer, pReserved, Reserved, pListenerName, SecurityInformation, pSecurityDescriptor)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSSetRenderHint == "on"]
+foreign {
+    // param-hint: pHintData bytes=param[3] optional
+    func WTSSetRenderHint(pRenderHintID: CPointer<UInt64>, hwndOwner: CPointer<Unit>, renderHintType: UInt32, cbHintDataLength: UInt32, pHintData: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSSetRenderHint == "on"]
+public unsafe func Windows_WTSSetRenderHint(pRenderHintID: CPointer<UInt64>, hwndOwner: CPointer<Unit>, renderHintType: UInt32, cbHintDataLength: UInt32, pHintData: CPointer<UInt8>): Int32 {
+    return WTSSetRenderHint(pRenderHintID, hwndOwner, renderHintType, cbHintDataLength, pHintData)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSSetUserConfigA == "on"]
+foreign {
+    // param-hint: pBuffer bytes=param[4]
+    // pinvoke-hint: SetLastError
+    func WTSSetUserConfigA(pServerName: CPointer<UInt8>, pUserName: CPointer<UInt8>, WTSConfigClass: WTS_CONFIG_CLASSAbi, pBuffer: CPointer<UInt8>, DataLength: UInt32): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSSetUserConfigA == "on"]
+public unsafe func Windows_WTSSetUserConfigA(pServerName: CPointer<UInt8>, pUserName: CPointer<UInt8>, WTSConfigClass: WTS_CONFIG_CLASSAbi, pBuffer: CPointer<UInt8>, DataLength: UInt32): Int32 {
+    return WTSSetUserConfigA(pServerName, pUserName, WTSConfigClass, pBuffer, DataLength)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSSetUserConfigW == "on"]
+foreign {
+    // param-hint: pBuffer bytes=param[4]
+    // pinvoke-hint: SetLastError
+    func WTSSetUserConfigW(pServerName: CPointer<UInt16>, pUserName: CPointer<UInt16>, WTSConfigClass: WTS_CONFIG_CLASSAbi, pBuffer: CPointer<UInt16>, DataLength: UInt32): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSSetUserConfigW == "on"]
+public unsafe func Windows_WTSSetUserConfigW(pServerName: CPointer<UInt16>, pUserName: CPointer<UInt16>, WTSConfigClass: WTS_CONFIG_CLASSAbi, pBuffer: CPointer<UInt16>, DataLength: UInt32): Int32 {
+    return WTSSetUserConfigW(pServerName, pUserName, WTSConfigClass, pBuffer, DataLength)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSShutdownSystem == "on"]
+foreign {
+    // param-hint: hServer optional
+    // pinvoke-hint: SetLastError
+    func WTSShutdownSystem(hServer: CPointer<Unit>, ShutdownFlag: UInt32): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSShutdownSystem == "on"]
+public unsafe func Windows_WTSShutdownSystem(hServer: CPointer<Unit>, ShutdownFlag: UInt32): Int32 {
+    return WTSShutdownSystem(hServer, ShutdownFlag)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSStartRemoteControlSessionA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WTSStartRemoteControlSessionA(pTargetServerName: CPointer<UInt8>, TargetLogonId: UInt32, HotkeyVk: UInt8, HotkeyModifiers: UInt16): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSStartRemoteControlSessionA == "on"]
+public unsafe func Windows_WTSStartRemoteControlSessionA(pTargetServerName: CPointer<UInt8>, TargetLogonId: UInt32, HotkeyVk: UInt8, HotkeyModifiers: UInt16): Int32 {
+    return WTSStartRemoteControlSessionA(pTargetServerName, TargetLogonId, HotkeyVk, HotkeyModifiers)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSStartRemoteControlSessionW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WTSStartRemoteControlSessionW(pTargetServerName: CPointer<UInt16>, TargetLogonId: UInt32, HotkeyVk: UInt8, HotkeyModifiers: UInt16): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSStartRemoteControlSessionW == "on"]
+public unsafe func Windows_WTSStartRemoteControlSessionW(pTargetServerName: CPointer<UInt16>, TargetLogonId: UInt32, HotkeyVk: UInt8, HotkeyModifiers: UInt16): Int32 {
+    return WTSStartRemoteControlSessionW(pTargetServerName, TargetLogonId, HotkeyVk, HotkeyModifiers)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSStopRemoteControlSession == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WTSStopRemoteControlSession(LogonId: UInt32): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSStopRemoteControlSession == "on"]
+public unsafe func Windows_WTSStopRemoteControlSession(LogonId: UInt32): Int32 {
+    return WTSStopRemoteControlSession(LogonId)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSTerminateProcess == "on"]
+foreign {
+    // param-hint: hServer optional
+    // pinvoke-hint: SetLastError
+    func WTSTerminateProcess(hServer: CPointer<Unit>, ProcessId: UInt32, ExitCode: UInt32): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSTerminateProcess == "on"]
+public unsafe func Windows_WTSTerminateProcess(hServer: CPointer<Unit>, ProcessId: UInt32, ExitCode: UInt32): Int32 {
+    return WTSTerminateProcess(hServer, ProcessId, ExitCode)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSUnRegisterSessionNotification == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WTSUnRegisterSessionNotification(hWnd: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSUnRegisterSessionNotification == "on"]
+public unsafe func Windows_WTSUnRegisterSessionNotification(hWnd: CPointer<Unit>): Int32 {
+    return WTSUnRegisterSessionNotification(hWnd)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSUnRegisterSessionNotificationEx == "on"]
+foreign {
+    // param-hint: hServer optional
+    // pinvoke-hint: SetLastError
+    func WTSUnRegisterSessionNotificationEx(hServer: CPointer<Unit>, hWnd: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSUnRegisterSessionNotificationEx == "on"]
+public unsafe func Windows_WTSUnRegisterSessionNotificationEx(hServer: CPointer<Unit>, hWnd: CPointer<Unit>): Int32 {
+    return WTSUnRegisterSessionNotificationEx(hServer, hWnd)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSVirtualChannelClose == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WTSVirtualChannelClose(hChannelHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSVirtualChannelClose == "on"]
+public unsafe func Windows_WTSVirtualChannelClose(hChannelHandle: CPointer<Unit>): Int32 {
+    return WTSVirtualChannelClose(hChannelHandle)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSVirtualChannelOpen == "on"]
+foreign {
+    // param-hint: hServer optional reserved
+    // pinvoke-hint: SetLastError
+    func WTSVirtualChannelOpen(hServer: CPointer<Unit>, SessionId: UInt32, pVirtualName: CPointer<UInt8>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSVirtualChannelOpen == "on"]
+public unsafe func Windows_WTSVirtualChannelOpen(hServer: CPointer<Unit>, SessionId: UInt32, pVirtualName: CPointer<UInt8>): CPointer<Unit> {
+    return WTSVirtualChannelOpen(hServer, SessionId, pVirtualName)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSVirtualChannelOpenEx == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WTSVirtualChannelOpenEx(SessionId: UInt32, pVirtualName: CPointer<UInt8>, flags: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSVirtualChannelOpenEx == "on"]
+public unsafe func Windows_WTSVirtualChannelOpenEx(SessionId: UInt32, pVirtualName: CPointer<UInt8>, flags: UInt32): CPointer<Unit> {
+    return WTSVirtualChannelOpenEx(SessionId, pVirtualName, flags)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSVirtualChannelPurgeInput == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WTSVirtualChannelPurgeInput(hChannelHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSVirtualChannelPurgeInput == "on"]
+public unsafe func Windows_WTSVirtualChannelPurgeInput(hChannelHandle: CPointer<Unit>): Int32 {
+    return WTSVirtualChannelPurgeInput(hChannelHandle)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSVirtualChannelPurgeOutput == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WTSVirtualChannelPurgeOutput(hChannelHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSVirtualChannelPurgeOutput == "on"]
+public unsafe func Windows_WTSVirtualChannelPurgeOutput(hChannelHandle: CPointer<Unit>): Int32 {
+    return WTSVirtualChannelPurgeOutput(hChannelHandle)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSVirtualChannelQuery == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WTSVirtualChannelQuery(hChannelHandle: CPointer<Unit>, param1: WTS_VIRTUAL_CLASSAbi, ppBuffer: CPointer<CPointer<Unit>>, pBytesReturned: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSVirtualChannelQuery == "on"]
+public unsafe func Windows_WTSVirtualChannelQuery(hChannelHandle: CPointer<Unit>, param1: WTS_VIRTUAL_CLASSAbi, ppBuffer: CPointer<CPointer<Unit>>, pBytesReturned: CPointer<UInt32>): Int32 {
+    return WTSVirtualChannelQuery(hChannelHandle, param1, ppBuffer, pBytesReturned)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSVirtualChannelRead == "on"]
+foreign {
+    // param-hint: Buffer bytes=param[3]
+    // pinvoke-hint: SetLastError
+    func WTSVirtualChannelRead(hChannelHandle: CPointer<Unit>, TimeOut: UInt32, Buffer: CPointer<UInt8>, BufferSize: UInt32, pBytesRead: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSVirtualChannelRead == "on"]
+public unsafe func Windows_WTSVirtualChannelRead(hChannelHandle: CPointer<Unit>, TimeOut: UInt32, Buffer: CPointer<UInt8>, BufferSize: UInt32, pBytesRead: CPointer<UInt32>): Int32 {
+    return WTSVirtualChannelRead(hChannelHandle, TimeOut, Buffer, BufferSize, pBytesRead)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSVirtualChannelWrite == "on"]
+foreign {
+    // param-hint: Buffer bytes=param[2]
+    // pinvoke-hint: SetLastError
+    func WTSVirtualChannelWrite(hChannelHandle: CPointer<Unit>, Buffer: CPointer<UInt8>, Length: UInt32, pBytesWritten: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSVirtualChannelWrite == "on"]
+public unsafe func Windows_WTSVirtualChannelWrite(hChannelHandle: CPointer<Unit>, Buffer: CPointer<UInt8>, Length: UInt32, pBytesWritten: CPointer<UInt32>): Int32 {
+    return WTSVirtualChannelWrite(hChannelHandle, Buffer, Length, pBytesWritten)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSWaitSystemEvent == "on"]
+foreign {
+    // param-hint: hServer optional
+    // pinvoke-hint: SetLastError
+    func WTSWaitSystemEvent(hServer: CPointer<Unit>, EventMask: UInt32, pEventFlags: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSWaitSystemEvent == "on"]
+public unsafe func Windows_WTSWaitSystemEvent(hServer: CPointer<Unit>, EventMask: UInt32, pEventFlags: CPointer<UInt32>): Int32 {
+    return WTSWaitSystemEvent(hServer, EventMask, pEventFlags)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSActiveSessionExists == "on"]
+func __windowsBindgen_WTSActiveSessionExistsProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("WTSAPI32.dll", "WTSActiveSessionExists")
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSActiveSessionExists == "on"]
+unsafe func WTSActiveSessionExists(pbActiveSessionExists: CPointer<Int32>): Int32 {
+    let call = CFunc<(CPointer<Int32>) -> Int32>(__windowsBindgen_WTSActiveSessionExistsProc())
+    return unsafe { call(pbActiveSessionExists) }
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSActiveSessionExists == "on"]
+public unsafe func Windows_WTSActiveSessionExists(pbActiveSessionExists: CPointer<Int32>): Int32 {
+    return WTSActiveSessionExists(pbActiveSessionExists)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSCloudAuthClose == "on"]
+func __windowsBindgen_WTSCloudAuthCloseProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("WTSAPI32.dll", "WTSCloudAuthClose")
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSCloudAuthClose == "on"]
+unsafe func WTSCloudAuthClose(cloudAuthHandle: WTS_CLOUD_AUTH_HANDLE): Unit {
+    let call = CFunc<(WTS_CLOUD_AUTH_HANDLE) -> Unit>(__windowsBindgen_WTSCloudAuthCloseProc())
+    unsafe { call(cloudAuthHandle) }
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSCloudAuthClose == "on"]
+public unsafe func Windows_WTSCloudAuthClose(cloudAuthHandle: WTS_CLOUD_AUTH_HANDLE): Unit {
+    WTSCloudAuthClose(cloudAuthHandle)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSCloudAuthConvertAssertionToSerializedUserCredential == "on"]
+func __windowsBindgen_WTSCloudAuthConvertAssertionToSerializedUserCredentialProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("WTSAPI32.dll", "WTSCloudAuthConvertAssertionToSerializedUserCredential")
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSCloudAuthConvertAssertionToSerializedUserCredential == "on"]
+unsafe func WTSCloudAuthConvertAssertionToSerializedUserCredential(cloudAuthHandle: WTS_CLOUD_AUTH_HANDLE, assertion: CPointer<UInt8>, assertionLength: UInt32, resourceId: CPointer<UInt16>, userCredential: CPointer<CPointer<WTS_SERIALIZED_USER_CREDENTIALAbi>>): Int32 {
+    let call = CFunc<(WTS_CLOUD_AUTH_HANDLE, CPointer<UInt8>, UInt32, CPointer<UInt16>, CPointer<CPointer<WTS_SERIALIZED_USER_CREDENTIALAbi>>) -> Int32>(__windowsBindgen_WTSCloudAuthConvertAssertionToSerializedUserCredentialProc())
+    return unsafe { call(cloudAuthHandle, assertion, assertionLength, resourceId, userCredential) }
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSCloudAuthConvertAssertionToSerializedUserCredential == "on"]
+public unsafe func Windows_WTSCloudAuthConvertAssertionToSerializedUserCredential(cloudAuthHandle: WTS_CLOUD_AUTH_HANDLE, assertion: CPointer<UInt8>, assertionLength: UInt32, resourceId: CPointer<UInt16>, userCredential: CPointer<CPointer<WTS_SERIALIZED_USER_CREDENTIALAbi>>): Int32 {
+    return WTSCloudAuthConvertAssertionToSerializedUserCredential(cloudAuthHandle, assertion, assertionLength, resourceId, userCredential)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSCloudAuthDuplicateSerializedUserCredential == "on"]
+func __windowsBindgen_WTSCloudAuthDuplicateSerializedUserCredentialProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("WTSAPI32.dll", "WTSCloudAuthDuplicateSerializedUserCredential")
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSCloudAuthDuplicateSerializedUserCredential == "on"]
+unsafe func WTSCloudAuthDuplicateSerializedUserCredential(userCredential: CPointer<WTS_SERIALIZED_USER_CREDENTIALAbi>, duplicatedUserCredential: CPointer<CPointer<WTS_SERIALIZED_USER_CREDENTIALAbi>>): Int32 {
+    let call = CFunc<(CPointer<WTS_SERIALIZED_USER_CREDENTIALAbi>, CPointer<CPointer<WTS_SERIALIZED_USER_CREDENTIALAbi>>) -> Int32>(__windowsBindgen_WTSCloudAuthDuplicateSerializedUserCredentialProc())
+    return unsafe { call(userCredential, duplicatedUserCredential) }
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSCloudAuthDuplicateSerializedUserCredential == "on"]
+public unsafe func Windows_WTSCloudAuthDuplicateSerializedUserCredential(userCredential: CPointer<WTS_SERIALIZED_USER_CREDENTIALAbi>, duplicatedUserCredential: CPointer<CPointer<WTS_SERIALIZED_USER_CREDENTIALAbi>>): Int32 {
+    return WTSCloudAuthDuplicateSerializedUserCredential(userCredential, duplicatedUserCredential)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSCloudAuthGetServerNonce == "on"]
+func __windowsBindgen_WTSCloudAuthGetServerNonceProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("WTSAPI32.dll", "WTSCloudAuthGetServerNonce")
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSCloudAuthGetServerNonce == "on"]
+unsafe func WTSCloudAuthGetServerNonce(cloudAuthHandle: WTS_CLOUD_AUTH_HANDLE, serverNonce: CPointer<CPointer<UInt16>>): Int32 {
+    let call = CFunc<(WTS_CLOUD_AUTH_HANDLE, CPointer<CPointer<UInt16>>) -> Int32>(__windowsBindgen_WTSCloudAuthGetServerNonceProc())
+    return unsafe { call(cloudAuthHandle, serverNonce) }
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSCloudAuthGetServerNonce == "on"]
+public unsafe func Windows_WTSCloudAuthGetServerNonce(cloudAuthHandle: WTS_CLOUD_AUTH_HANDLE, serverNonce: CPointer<CPointer<UInt16>>): Int32 {
+    return WTSCloudAuthGetServerNonce(cloudAuthHandle, serverNonce)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSCloudAuthNetworkLogonWithSerializedCredential == "on"]
+func __windowsBindgen_WTSCloudAuthNetworkLogonWithSerializedCredentialProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("WTSAPI32.dll", "WTSCloudAuthNetworkLogonWithSerializedCredential")
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSCloudAuthNetworkLogonWithSerializedCredential == "on"]
+unsafe func WTSCloudAuthNetworkLogonWithSerializedCredential(cloudAuthHandle: WTS_CLOUD_AUTH_HANDLE, userCredential: CPointer<WTS_SERIALIZED_USER_CREDENTIALAbi>, token: CPointer<CPointer<Unit>>): Int32 {
+    let call = CFunc<(WTS_CLOUD_AUTH_HANDLE, CPointer<WTS_SERIALIZED_USER_CREDENTIALAbi>, CPointer<CPointer<Unit>>) -> Int32>(__windowsBindgen_WTSCloudAuthNetworkLogonWithSerializedCredentialProc())
+    return unsafe { call(cloudAuthHandle, userCredential, token) }
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSCloudAuthNetworkLogonWithSerializedCredential == "on"]
+public unsafe func Windows_WTSCloudAuthNetworkLogonWithSerializedCredential(cloudAuthHandle: WTS_CLOUD_AUTH_HANDLE, userCredential: CPointer<WTS_SERIALIZED_USER_CREDENTIALAbi>, token: CPointer<CPointer<Unit>>): Int32 {
+    return WTSCloudAuthNetworkLogonWithSerializedCredential(cloudAuthHandle, userCredential, token)
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSCloudAuthOpen == "on"]
+func __windowsBindgen_WTSCloudAuthOpenProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("WTSAPI32.dll", "WTSCloudAuthOpen")
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSCloudAuthOpen == "on"]
+unsafe func WTSCloudAuthOpen(activityId: CPointer<GUID>): WTS_CLOUD_AUTH_HANDLE {
+    let call = CFunc<(CPointer<GUID>) -> WTS_CLOUD_AUTH_HANDLE>(__windowsBindgen_WTSCloudAuthOpenProc())
+    return unsafe { call(activityId) }
+}
+
+@When[Windows_Win32_System_RemoteDesktop == "on" && WTSAPI32 == "on" && Windows_Win32_System_RemoteDesktop_WTSCloudAuthOpen == "on"]
+public unsafe func Windows_WTSCloudAuthOpen(activityId: CPointer<GUID>): WTS_CLOUD_AUTH_HANDLE {
+    return WTSCloudAuthOpen(activityId)
 }
 
 @When[Windows_Win32_System_RemoteDesktop == "on"]

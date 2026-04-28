@@ -390,6 +390,7 @@ public class CertificateStores <: windows_interface.RuntimeName & windows_core.R
         windows_core.activationFactory<CertificateStores>().ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindAllAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.Certificate>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.Certificate>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.Certificate>>>.None
         try (factory__ = windows_core.factory<CertificateStores, ICertificateStoresStatics>().unwrap()) {
@@ -401,6 +402,7 @@ public class CertificateStores <: windows_interface.RuntimeName & windows_core.R
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindAllWithQueryAsync(query: _impl_l0.CertificateQuery): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.Certificate>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.Certificate>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.Certificate>>>.None
         try (factory__ = windows_core.factory<CertificateStores, ICertificateStoresStatics>().unwrap()) {
@@ -526,6 +528,7 @@ public class CmsAttachedSignature <: InterfaceWrapperBase & ComInterface & windo
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Certificates(): windows_collections.IVectorView<_impl_l1.Certificate> {
         return defaultInterface().Certificates()
     }
@@ -534,6 +537,7 @@ public class CmsAttachedSignature <: InterfaceWrapperBase & ComInterface & windo
         return defaultInterface().Content()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Signers(): windows_collections.IVectorView<CmsSignerInfo> {
         return defaultInterface().Signers()
     }
@@ -542,7 +546,7 @@ public class CmsAttachedSignature <: InterfaceWrapperBase & ComInterface & windo
         return defaultInterface().VerifySignature()
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public static unsafe func GenerateSignatureAsync(data: _impl_l0.IBuffer, signers: windows_collections.IIterable<CmsSignerInfo>, certificates: windows_collections.IIterable<_impl_l1.Certificate>): windows_future.IAsyncOperation<_impl_l0.IBuffer> {
         var result__: Option<windows_future.IAsyncOperation<_impl_l0.IBuffer>> = Option<windows_future.IAsyncOperation<_impl_l0.IBuffer>>.None
         try (factory__ = windows_core.factory<CmsAttachedSignature, ICmsAttachedSignatureStatics>().unwrap()) {
@@ -654,10 +658,12 @@ public class CmsDetachedSignature <: InterfaceWrapperBase & ComInterface & windo
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Certificates(): windows_collections.IVectorView<_impl_l1.Certificate> {
         return defaultInterface().Certificates()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Signers(): windows_collections.IVectorView<CmsSignerInfo> {
         return defaultInterface().Signers()
     }
@@ -667,7 +673,7 @@ public class CmsDetachedSignature <: InterfaceWrapperBase & ComInterface & windo
         return defaultInterface().VerifySignatureAsync(data)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public static unsafe func GenerateSignatureAsync(data: _impl_l0.IInputStream, signers: windows_collections.IIterable<CmsSignerInfo>, certificates: windows_collections.IIterable<_impl_l1.Certificate>): windows_future.IAsyncOperation<_impl_l0.IBuffer> {
         var result__: Option<windows_future.IAsyncOperation<_impl_l0.IBuffer>> = Option<windows_future.IAsyncOperation<_impl_l0.IBuffer>>.None
         try (factory__ = windows_core.factory<CmsDetachedSignature, ICmsDetachedSignatureStatics>().unwrap()) {
@@ -902,6 +908,7 @@ public class CmsTimestampInfo <: InterfaceWrapperBase & ComInterface & windows_i
         return defaultInterface().SigningCertificate()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Certificates(): windows_collections.IVectorView<_impl_l1.Certificate> {
         return defaultInterface().Certificates()
     }
@@ -1344,8 +1351,14 @@ extend ICertificateStore <: windows_core.Interface<ICertificateStore> {}
 @C
 public struct ICertificateStoresStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllWithQueryAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllWithQueryAsync: UIntNative = UIntNative(0)
     public var TrustedRootCertificationAuthorities: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IntermediateCertificationAuthorities: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetStoreByName: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -1417,6 +1430,7 @@ public class ICertificateStoresStatics <: InterfaceWrapperBase & ComInterface & 
         readVtbl<ICertificateStoresStaticsVtbl>(ICertificateStoresStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.Certificate>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1425,6 +1439,7 @@ public class ICertificateStoresStatics <: InterfaceWrapperBase & ComInterface & 
         return windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.Certificate>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllWithQueryAsync(query: _impl_l0.CertificateQuery): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.Certificate>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1550,9 +1565,15 @@ extend ICertificateStoresStatics2 <: windows_core.Interface<ICertificateStoresSt
 @C
 public struct ICmsAttachedSignatureVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Certificates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Certificates: UIntNative = UIntNative(0)
     public var Content: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<UInt8>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Signers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Signers: UIntNative = UIntNative(0)
     public var VerifySignature: CFunc<(CPointer<Unit>, CPointer<_impl_l0.SignatureValidationResultAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -1622,6 +1643,7 @@ public class ICmsAttachedSignature <: InterfaceWrapperBase & ComInterface & Runt
         readVtbl<ICmsAttachedSignatureVtbl>(ICmsAttachedSignatureVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Certificates(): windows_collections.IVectorView<_impl_l1.Certificate> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1639,6 +1661,7 @@ public class ICmsAttachedSignature <: InterfaceWrapperBase & ComInterface & Runt
         return (resultSize__, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Signers(): windows_collections.IVectorView<CmsSignerInfo> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1752,9 +1775,9 @@ extend ICmsAttachedSignatureFactory <: windows_core.Interface<ICmsAttachedSignat
 @C
 public struct ICmsAttachedSignatureStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var GenerateSignatureAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
     public var GenerateSignatureAsync: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -1824,7 +1847,7 @@ public class ICmsAttachedSignatureStatics <: InterfaceWrapperBase & ComInterface
         readVtbl<ICmsAttachedSignatureStaticsVtbl>(ICmsAttachedSignatureStaticsVtbl())
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GenerateSignatureAsync(data: _impl_l0.IBuffer, signers: windows_collections.IIterable<CmsSignerInfo>, certificates: windows_collections.IIterable<_impl_l1.Certificate>): windows_future.IAsyncOperation<_impl_l0.IBuffer> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1841,8 +1864,14 @@ extend ICmsAttachedSignatureStatics <: windows_core.Interface<ICmsAttachedSignat
 @C
 public struct ICmsDetachedSignatureVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Certificates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Certificates: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Signers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Signers: UIntNative = UIntNative(0)
     @When[Windows_Storage_Streams == "on"]
     public var VerifySignatureAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams != "on"]
@@ -1915,6 +1944,7 @@ public class ICmsDetachedSignature <: InterfaceWrapperBase & ComInterface & Runt
         readVtbl<ICmsDetachedSignatureVtbl>(ICmsDetachedSignatureVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Certificates(): windows_collections.IVectorView<_impl_l1.Certificate> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1923,6 +1953,7 @@ public class ICmsDetachedSignature <: InterfaceWrapperBase & ComInterface & Runt
         return windows_collections.IVectorView<_impl_l1.Certificate>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Signers(): windows_collections.IVectorView<CmsSignerInfo> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2037,9 +2068,9 @@ extend ICmsDetachedSignatureFactory <: windows_core.Interface<ICmsDetachedSignat
 @C
 public struct ICmsDetachedSignatureStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var GenerateSignatureAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
     public var GenerateSignatureAsync: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -2109,7 +2140,7 @@ public class ICmsDetachedSignatureStatics <: InterfaceWrapperBase & ComInterface
         readVtbl<ICmsDetachedSignatureStaticsVtbl>(ICmsDetachedSignatureStaticsVtbl())
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GenerateSignatureAsync(data: _impl_l0.IInputStream, signers: windows_collections.IIterable<CmsSignerInfo>, certificates: windows_collections.IIterable<_impl_l1.Certificate>): windows_future.IAsyncOperation<_impl_l0.IBuffer> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2244,7 +2275,10 @@ extend ICmsSignerInfo <: windows_core.Interface<ICmsSignerInfo> {}
 public struct ICmsTimestampInfoVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var SigningCertificate: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Certificates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Certificates: UIntNative = UIntNative(0)
     public var Timestamp: CFunc<(CPointer<Unit>, CPointer<windows_future.DateTimeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -2322,6 +2356,7 @@ public class ICmsTimestampInfo <: InterfaceWrapperBase & ComInterface & RuntimeN
         return _impl_l1.Certificate.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Certificates(): windows_collections.IVectorView<_impl_l1.Certificate> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

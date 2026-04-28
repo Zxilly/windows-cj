@@ -592,6 +592,7 @@ public struct IAgentProvisioningProgressReportVtbl {
     public var SetDisplayProgress: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var DisplayProgressSecondary: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetDisplayProgressSecondary: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Batches: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CurrentBatchIndex: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var SetCurrentBatchIndex: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
@@ -698,6 +699,7 @@ public class IAgentProvisioningProgressReport <: InterfaceWrapperBase & ComInter
         return __vt.SetDisplayProgressSecondary(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Batches(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -724,6 +726,7 @@ public struct IDeploymentWorkloadBatchVtbl {
     public var Id: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var DisplayCategoryTitle: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetDisplayCategoryTitle: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var BatchWorkloads: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -786,6 +789,7 @@ public class IDeploymentWorkloadBatch <: InterfaceWrapperBase & ComInterface {
         return __vt.SetDisplayCategoryTitle(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func BatchWorkloads(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

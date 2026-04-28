@@ -152,6 +152,7 @@ public class IAdcControllerProvider <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IAdcProviderVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetControllers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -196,6 +197,7 @@ public class IAdcProvider <: InterfaceWrapperBase & ComInterface {
         readVtbl<IAdcProviderVtbl>(IAdcProviderVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetControllers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

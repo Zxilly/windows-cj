@@ -216,11 +216,15 @@ public struct IWalletItemVtbl {
     public var SetRelevantDate: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var RelevantDateDisplayMessage: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetRelevantDateDisplayMessage: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var TransactionHistory: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var RelevantLocations: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IsMoreTransactionHistoryLaunchable: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var SetIsMoreTransactionHistoryLaunchable: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var DisplayProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Verbs: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -563,12 +567,14 @@ public class IWalletItem <: InterfaceWrapperBase & ComInterface {
         return __vt.SetRelevantDateDisplayMessage(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TransactionHistory(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TransactionHistory(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RelevantLocations(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -587,12 +593,14 @@ public class IWalletItem <: InterfaceWrapperBase & ComInterface {
         return __vt.SetIsMoreTransactionHistoryLaunchable(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DisplayProperties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DisplayProperties(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Verbs(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -717,7 +725,9 @@ public struct IWalletItemStoreVtbl {
     public var AddAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var ClearAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetWalletItemAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetItemsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetItemsWithKindAsync: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Storage_Streams == "on"]
     public var ImportItemAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -786,12 +796,14 @@ public class IWalletItemStore <: InterfaceWrapperBase & ComInterface {
         return __vt.GetWalletItemAsync(__liveRaw, id, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetItemsAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetItemsAsync(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetItemsWithKindAsync(kind: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

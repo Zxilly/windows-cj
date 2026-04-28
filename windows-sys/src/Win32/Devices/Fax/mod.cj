@@ -3,13 +3,9 @@ package windows_sys.Win32.Devices.Fax
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows_sys.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-@When[Windows_Win32_System_IO == "on"]
 import windows_sys.Win32.System.IO as Win32_System_IO
-@When[Windows_Win32_System_Registry == "on"]
 import windows_sys.Win32.System.Registry as Win32_System_Registry
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l2 as Win32__impl_l2
@@ -9880,125 +9876,640 @@ public class IFaxAccountNotify <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[STI == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_Devices_Fax == "on" && STI == "on" && Windows_Win32_Devices_Fax_StiCreateInstanceW == "on" && Windows_Win32_System_Com == "on"]
 foreign {
     func StiCreateInstanceW(hinst: CPointer<Unit>, dwVer: UInt32, ppSti: CPointer<CPointer<Unit>>, punkOuter: CPointer<Unit>): Int32
 }
 
-@When[WINFAX == "on"]
-foreign {
-    func FaxAbort(FaxHandle: CPointer<Unit>, JobId: UInt32): Int32
-    func FaxAccessCheck(FaxHandle: CPointer<Unit>, AccessMask: UInt32): Int32
-    func FaxClose(FaxHandle: CPointer<Unit>): Int32
-    func FaxCompleteJobParamsA(JobParams: CPointer<CPointer<FAX_JOB_PARAMA>>, CoverpageInfo: CPointer<CPointer<FAX_COVERPAGE_INFOA>>): Int32
-    func FaxCompleteJobParamsW(JobParams: CPointer<CPointer<FAX_JOB_PARAMW>>, CoverpageInfo: CPointer<CPointer<FAX_COVERPAGE_INFOW>>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxConnectFaxServerA(MachineName: CPointer<UInt8>, FaxHandle: CPointer<CPointer<Unit>>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxConnectFaxServerW(MachineName: CPointer<UInt16>, FaxHandle: CPointer<CPointer<Unit>>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxEnableRoutingMethodA(FaxPortHandle: CPointer<Unit>, RoutingGuid: CPointer<UInt8>, Enabled: Int32): Int32
-    // pinvoke-hint: SetLastError
-    func FaxEnableRoutingMethodW(FaxPortHandle: CPointer<Unit>, RoutingGuid: CPointer<UInt16>, Enabled: Int32): Int32
-    // pinvoke-hint: SetLastError
-    func FaxEnumGlobalRoutingInfoA(FaxHandle: CPointer<Unit>, RoutingInfo: CPointer<CPointer<FAX_GLOBAL_ROUTING_INFOA>>, MethodsReturned: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxEnumGlobalRoutingInfoW(FaxHandle: CPointer<Unit>, RoutingInfo: CPointer<CPointer<FAX_GLOBAL_ROUTING_INFOW>>, MethodsReturned: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxEnumJobsA(FaxHandle: CPointer<Unit>, JobEntry: CPointer<CPointer<FAX_JOB_ENTRYA>>, JobsReturned: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxEnumJobsW(FaxHandle: CPointer<Unit>, JobEntry: CPointer<CPointer<FAX_JOB_ENTRYW>>, JobsReturned: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxEnumPortsA(FaxHandle: CPointer<Unit>, PortInfo: CPointer<CPointer<FAX_PORT_INFOA>>, PortsReturned: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxEnumPortsW(FaxHandle: CPointer<Unit>, PortInfo: CPointer<CPointer<FAX_PORT_INFOW>>, PortsReturned: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxEnumRoutingMethodsA(FaxPortHandle: CPointer<Unit>, RoutingMethod: CPointer<CPointer<FAX_ROUTING_METHODA>>, MethodsReturned: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxEnumRoutingMethodsW(FaxPortHandle: CPointer<Unit>, RoutingMethod: CPointer<CPointer<FAX_ROUTING_METHODW>>, MethodsReturned: CPointer<UInt32>): Int32
-    func FaxFreeBuffer(Buffer: CPointer<Unit>): Unit
-    // pinvoke-hint: SetLastError
-    func FaxGetConfigurationA(FaxHandle: CPointer<Unit>, FaxConfig: CPointer<CPointer<FAX_CONFIGURATIONA>>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxGetConfigurationW(FaxHandle: CPointer<Unit>, FaxConfig: CPointer<CPointer<FAX_CONFIGURATIONW>>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxGetDeviceStatusA(FaxPortHandle: CPointer<Unit>, DeviceStatus: CPointer<CPointer<FAX_DEVICE_STATUSA>>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxGetDeviceStatusW(FaxPortHandle: CPointer<Unit>, DeviceStatus: CPointer<CPointer<FAX_DEVICE_STATUSW>>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxGetJobA(FaxHandle: CPointer<Unit>, JobId: UInt32, JobEntry: CPointer<CPointer<FAX_JOB_ENTRYA>>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxGetJobW(FaxHandle: CPointer<Unit>, JobId: UInt32, JobEntry: CPointer<CPointer<FAX_JOB_ENTRYW>>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxGetLoggingCategoriesA(FaxHandle: CPointer<Unit>, Categories: CPointer<CPointer<FAX_LOG_CATEGORYA>>, NumberCategories: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxGetLoggingCategoriesW(FaxHandle: CPointer<Unit>, Categories: CPointer<CPointer<FAX_LOG_CATEGORYW>>, NumberCategories: CPointer<UInt32>): Int32
-    func FaxGetPageData(FaxHandle: CPointer<Unit>, JobId: UInt32, Buffer: CPointer<CPointer<UInt8>>, BufferSize: CPointer<UInt32>, ImageWidth: CPointer<UInt32>, ImageHeight: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxGetPortA(FaxPortHandle: CPointer<Unit>, PortInfo: CPointer<CPointer<FAX_PORT_INFOA>>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxGetPortW(FaxPortHandle: CPointer<Unit>, PortInfo: CPointer<CPointer<FAX_PORT_INFOW>>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxGetRoutingInfoA(FaxPortHandle: CPointer<Unit>, RoutingGuid: CPointer<UInt8>, RoutingInfoBuffer: CPointer<CPointer<UInt8>>, RoutingInfoBufferSize: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxGetRoutingInfoW(FaxPortHandle: CPointer<Unit>, RoutingGuid: CPointer<UInt16>, RoutingInfoBuffer: CPointer<CPointer<UInt8>>, RoutingInfoBufferSize: CPointer<UInt32>): Int32
-    func FaxInitializeEventQueue(FaxHandle: CPointer<Unit>, CompletionPort: CPointer<Unit>, CompletionKey: UIntNative, hWnd: CPointer<Unit>, MessageStart: UInt32): Int32
-    func FaxOpenPort(FaxHandle: CPointer<Unit>, DeviceId: UInt32, Flags: UInt32, FaxPortHandle: CPointer<CPointer<Unit>>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxRegisterRoutingExtensionW(FaxHandle: CPointer<Unit>, ExtensionName: CPointer<UInt16>, FriendlyName: CPointer<UInt16>, ImageName: CPointer<UInt16>, CallBack: PFAX_ROUTING_INSTALLATION_CALLBACKW, Context: CPointer<Unit>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxRegisterServiceProviderW(DeviceProvider: CPointer<UInt16>, FriendlyName: CPointer<UInt16>, ImageName: CPointer<UInt16>, TspName: CPointer<UInt16>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxSendDocumentA(FaxHandle: CPointer<Unit>, FileName: CPointer<UInt8>, JobParams: CPointer<FAX_JOB_PARAMA>, CoverpageInfo: CPointer<FAX_COVERPAGE_INFOA>, FaxJobId: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxSendDocumentForBroadcastA(FaxHandle: CPointer<Unit>, FileName: CPointer<UInt8>, FaxJobId: CPointer<UInt32>, FaxRecipientCallback: PFAX_RECIPIENT_CALLBACKA, Context: CPointer<Unit>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxSendDocumentForBroadcastW(FaxHandle: CPointer<Unit>, FileName: CPointer<UInt16>, FaxJobId: CPointer<UInt32>, FaxRecipientCallback: PFAX_RECIPIENT_CALLBACKW, Context: CPointer<Unit>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxSendDocumentW(FaxHandle: CPointer<Unit>, FileName: CPointer<UInt16>, JobParams: CPointer<FAX_JOB_PARAMW>, CoverpageInfo: CPointer<FAX_COVERPAGE_INFOW>, FaxJobId: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxSetConfigurationA(FaxHandle: CPointer<Unit>, FaxConfig: CPointer<FAX_CONFIGURATIONA>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxSetConfigurationW(FaxHandle: CPointer<Unit>, FaxConfig: CPointer<FAX_CONFIGURATIONW>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxSetGlobalRoutingInfoA(FaxHandle: CPointer<Unit>, RoutingInfo: CPointer<FAX_GLOBAL_ROUTING_INFOA>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxSetGlobalRoutingInfoW(FaxHandle: CPointer<Unit>, RoutingInfo: CPointer<FAX_GLOBAL_ROUTING_INFOW>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxSetJobA(FaxHandle: CPointer<Unit>, JobId: UInt32, Command: UInt32, JobEntry: CPointer<FAX_JOB_ENTRYA>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxSetJobW(FaxHandle: CPointer<Unit>, JobId: UInt32, Command: UInt32, JobEntry: CPointer<FAX_JOB_ENTRYW>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxSetLoggingCategoriesA(FaxHandle: CPointer<Unit>, Categories: CPointer<FAX_LOG_CATEGORYA>, NumberCategories: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func FaxSetLoggingCategoriesW(FaxHandle: CPointer<Unit>, Categories: CPointer<FAX_LOG_CATEGORYW>, NumberCategories: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func FaxSetPortA(FaxPortHandle: CPointer<Unit>, PortInfo: CPointer<FAX_PORT_INFOA>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxSetPortW(FaxPortHandle: CPointer<Unit>, PortInfo: CPointer<FAX_PORT_INFOW>): Int32
-    // pinvoke-hint: SetLastError
-    func FaxSetRoutingInfoA(FaxPortHandle: CPointer<Unit>, RoutingGuid: CPointer<UInt8>, RoutingInfoBuffer: CPointer<UInt8>, RoutingInfoBufferSize: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func FaxSetRoutingInfoW(FaxPortHandle: CPointer<Unit>, RoutingGuid: CPointer<UInt16>, RoutingInfoBuffer: CPointer<UInt8>, RoutingInfoBufferSize: UInt32): Int32
-    func FaxUnregisterServiceProviderW(DeviceProvider: CPointer<UInt16>): Int32
+@When[Windows_Win32_Devices_Fax == "on" && STI == "on" && Windows_Win32_Devices_Fax_StiCreateInstanceW == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_StiCreateInstanceW(hinst: CPointer<Unit>, dwVer: UInt32, ppSti: CPointer<CPointer<Unit>>, punkOuter: CPointer<Unit>): Int32 {
+    return StiCreateInstanceW(hinst, dwVer, ppSti, punkOuter)
 }
 
-@When[WINFAX == "on" && Windows_Win32_Graphics_Gdi == "on"]
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxAbort == "on"]
+foreign {
+    func FaxAbort(FaxHandle: CPointer<Unit>, JobId: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxAbort == "on"]
+public unsafe func Windows_FaxAbort(FaxHandle: CPointer<Unit>, JobId: UInt32): Int32 {
+    return FaxAbort(FaxHandle, JobId)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxAccessCheck == "on"]
+foreign {
+    func FaxAccessCheck(FaxHandle: CPointer<Unit>, AccessMask: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxAccessCheck == "on"]
+public unsafe func Windows_FaxAccessCheck(FaxHandle: CPointer<Unit>, AccessMask: UInt32): Int32 {
+    return FaxAccessCheck(FaxHandle, AccessMask)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxClose == "on"]
+foreign {
+    func FaxClose(FaxHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxClose == "on"]
+public unsafe func Windows_FaxClose(FaxHandle: CPointer<Unit>): Int32 {
+    return FaxClose(FaxHandle)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxCompleteJobParamsA == "on"]
+foreign {
+    func FaxCompleteJobParamsA(JobParams: CPointer<CPointer<FAX_JOB_PARAMA>>, CoverpageInfo: CPointer<CPointer<FAX_COVERPAGE_INFOA>>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxCompleteJobParamsA == "on"]
+public unsafe func Windows_FaxCompleteJobParamsA(JobParams: CPointer<CPointer<FAX_JOB_PARAMA>>, CoverpageInfo: CPointer<CPointer<FAX_COVERPAGE_INFOA>>): Int32 {
+    return FaxCompleteJobParamsA(JobParams, CoverpageInfo)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxCompleteJobParamsW == "on"]
+foreign {
+    func FaxCompleteJobParamsW(JobParams: CPointer<CPointer<FAX_JOB_PARAMW>>, CoverpageInfo: CPointer<CPointer<FAX_COVERPAGE_INFOW>>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxCompleteJobParamsW == "on"]
+public unsafe func Windows_FaxCompleteJobParamsW(JobParams: CPointer<CPointer<FAX_JOB_PARAMW>>, CoverpageInfo: CPointer<CPointer<FAX_COVERPAGE_INFOW>>): Int32 {
+    return FaxCompleteJobParamsW(JobParams, CoverpageInfo)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxConnectFaxServerA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxConnectFaxServerA(MachineName: CPointer<UInt8>, FaxHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxConnectFaxServerA == "on"]
+public unsafe func Windows_FaxConnectFaxServerA(MachineName: CPointer<UInt8>, FaxHandle: CPointer<CPointer<Unit>>): Int32 {
+    return FaxConnectFaxServerA(MachineName, FaxHandle)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxConnectFaxServerW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxConnectFaxServerW(MachineName: CPointer<UInt16>, FaxHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxConnectFaxServerW == "on"]
+public unsafe func Windows_FaxConnectFaxServerW(MachineName: CPointer<UInt16>, FaxHandle: CPointer<CPointer<Unit>>): Int32 {
+    return FaxConnectFaxServerW(MachineName, FaxHandle)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxEnableRoutingMethodA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxEnableRoutingMethodA(FaxPortHandle: CPointer<Unit>, RoutingGuid: CPointer<UInt8>, Enabled: Int32): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxEnableRoutingMethodA == "on"]
+public unsafe func Windows_FaxEnableRoutingMethodA(FaxPortHandle: CPointer<Unit>, RoutingGuid: CPointer<UInt8>, Enabled: Int32): Int32 {
+    return FaxEnableRoutingMethodA(FaxPortHandle, RoutingGuid, Enabled)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxEnableRoutingMethodW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxEnableRoutingMethodW(FaxPortHandle: CPointer<Unit>, RoutingGuid: CPointer<UInt16>, Enabled: Int32): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxEnableRoutingMethodW == "on"]
+public unsafe func Windows_FaxEnableRoutingMethodW(FaxPortHandle: CPointer<Unit>, RoutingGuid: CPointer<UInt16>, Enabled: Int32): Int32 {
+    return FaxEnableRoutingMethodW(FaxPortHandle, RoutingGuid, Enabled)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxEnumGlobalRoutingInfoA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxEnumGlobalRoutingInfoA(FaxHandle: CPointer<Unit>, RoutingInfo: CPointer<CPointer<FAX_GLOBAL_ROUTING_INFOA>>, MethodsReturned: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxEnumGlobalRoutingInfoA == "on"]
+public unsafe func Windows_FaxEnumGlobalRoutingInfoA(FaxHandle: CPointer<Unit>, RoutingInfo: CPointer<CPointer<FAX_GLOBAL_ROUTING_INFOA>>, MethodsReturned: CPointer<UInt32>): Int32 {
+    return FaxEnumGlobalRoutingInfoA(FaxHandle, RoutingInfo, MethodsReturned)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxEnumGlobalRoutingInfoW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxEnumGlobalRoutingInfoW(FaxHandle: CPointer<Unit>, RoutingInfo: CPointer<CPointer<FAX_GLOBAL_ROUTING_INFOW>>, MethodsReturned: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxEnumGlobalRoutingInfoW == "on"]
+public unsafe func Windows_FaxEnumGlobalRoutingInfoW(FaxHandle: CPointer<Unit>, RoutingInfo: CPointer<CPointer<FAX_GLOBAL_ROUTING_INFOW>>, MethodsReturned: CPointer<UInt32>): Int32 {
+    return FaxEnumGlobalRoutingInfoW(FaxHandle, RoutingInfo, MethodsReturned)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxEnumJobsA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxEnumJobsA(FaxHandle: CPointer<Unit>, JobEntry: CPointer<CPointer<FAX_JOB_ENTRYA>>, JobsReturned: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxEnumJobsA == "on"]
+public unsafe func Windows_FaxEnumJobsA(FaxHandle: CPointer<Unit>, JobEntry: CPointer<CPointer<FAX_JOB_ENTRYA>>, JobsReturned: CPointer<UInt32>): Int32 {
+    return FaxEnumJobsA(FaxHandle, JobEntry, JobsReturned)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxEnumJobsW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxEnumJobsW(FaxHandle: CPointer<Unit>, JobEntry: CPointer<CPointer<FAX_JOB_ENTRYW>>, JobsReturned: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxEnumJobsW == "on"]
+public unsafe func Windows_FaxEnumJobsW(FaxHandle: CPointer<Unit>, JobEntry: CPointer<CPointer<FAX_JOB_ENTRYW>>, JobsReturned: CPointer<UInt32>): Int32 {
+    return FaxEnumJobsW(FaxHandle, JobEntry, JobsReturned)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxEnumPortsA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxEnumPortsA(FaxHandle: CPointer<Unit>, PortInfo: CPointer<CPointer<FAX_PORT_INFOA>>, PortsReturned: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxEnumPortsA == "on"]
+public unsafe func Windows_FaxEnumPortsA(FaxHandle: CPointer<Unit>, PortInfo: CPointer<CPointer<FAX_PORT_INFOA>>, PortsReturned: CPointer<UInt32>): Int32 {
+    return FaxEnumPortsA(FaxHandle, PortInfo, PortsReturned)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxEnumPortsW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxEnumPortsW(FaxHandle: CPointer<Unit>, PortInfo: CPointer<CPointer<FAX_PORT_INFOW>>, PortsReturned: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxEnumPortsW == "on"]
+public unsafe func Windows_FaxEnumPortsW(FaxHandle: CPointer<Unit>, PortInfo: CPointer<CPointer<FAX_PORT_INFOW>>, PortsReturned: CPointer<UInt32>): Int32 {
+    return FaxEnumPortsW(FaxHandle, PortInfo, PortsReturned)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxEnumRoutingMethodsA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxEnumRoutingMethodsA(FaxPortHandle: CPointer<Unit>, RoutingMethod: CPointer<CPointer<FAX_ROUTING_METHODA>>, MethodsReturned: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxEnumRoutingMethodsA == "on"]
+public unsafe func Windows_FaxEnumRoutingMethodsA(FaxPortHandle: CPointer<Unit>, RoutingMethod: CPointer<CPointer<FAX_ROUTING_METHODA>>, MethodsReturned: CPointer<UInt32>): Int32 {
+    return FaxEnumRoutingMethodsA(FaxPortHandle, RoutingMethod, MethodsReturned)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxEnumRoutingMethodsW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxEnumRoutingMethodsW(FaxPortHandle: CPointer<Unit>, RoutingMethod: CPointer<CPointer<FAX_ROUTING_METHODW>>, MethodsReturned: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxEnumRoutingMethodsW == "on"]
+public unsafe func Windows_FaxEnumRoutingMethodsW(FaxPortHandle: CPointer<Unit>, RoutingMethod: CPointer<CPointer<FAX_ROUTING_METHODW>>, MethodsReturned: CPointer<UInt32>): Int32 {
+    return FaxEnumRoutingMethodsW(FaxPortHandle, RoutingMethod, MethodsReturned)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxFreeBuffer == "on"]
+foreign {
+    func FaxFreeBuffer(Buffer: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxFreeBuffer == "on"]
+public unsafe func Windows_FaxFreeBuffer(Buffer: CPointer<Unit>): Unit {
+    FaxFreeBuffer(Buffer)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxGetConfigurationA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxGetConfigurationA(FaxHandle: CPointer<Unit>, FaxConfig: CPointer<CPointer<FAX_CONFIGURATIONA>>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxGetConfigurationA == "on"]
+public unsafe func Windows_FaxGetConfigurationA(FaxHandle: CPointer<Unit>, FaxConfig: CPointer<CPointer<FAX_CONFIGURATIONA>>): Int32 {
+    return FaxGetConfigurationA(FaxHandle, FaxConfig)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxGetConfigurationW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxGetConfigurationW(FaxHandle: CPointer<Unit>, FaxConfig: CPointer<CPointer<FAX_CONFIGURATIONW>>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxGetConfigurationW == "on"]
+public unsafe func Windows_FaxGetConfigurationW(FaxHandle: CPointer<Unit>, FaxConfig: CPointer<CPointer<FAX_CONFIGURATIONW>>): Int32 {
+    return FaxGetConfigurationW(FaxHandle, FaxConfig)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxGetDeviceStatusA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxGetDeviceStatusA(FaxPortHandle: CPointer<Unit>, DeviceStatus: CPointer<CPointer<FAX_DEVICE_STATUSA>>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxGetDeviceStatusA == "on"]
+public unsafe func Windows_FaxGetDeviceStatusA(FaxPortHandle: CPointer<Unit>, DeviceStatus: CPointer<CPointer<FAX_DEVICE_STATUSA>>): Int32 {
+    return FaxGetDeviceStatusA(FaxPortHandle, DeviceStatus)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxGetDeviceStatusW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxGetDeviceStatusW(FaxPortHandle: CPointer<Unit>, DeviceStatus: CPointer<CPointer<FAX_DEVICE_STATUSW>>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxGetDeviceStatusW == "on"]
+public unsafe func Windows_FaxGetDeviceStatusW(FaxPortHandle: CPointer<Unit>, DeviceStatus: CPointer<CPointer<FAX_DEVICE_STATUSW>>): Int32 {
+    return FaxGetDeviceStatusW(FaxPortHandle, DeviceStatus)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxGetJobA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxGetJobA(FaxHandle: CPointer<Unit>, JobId: UInt32, JobEntry: CPointer<CPointer<FAX_JOB_ENTRYA>>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxGetJobA == "on"]
+public unsafe func Windows_FaxGetJobA(FaxHandle: CPointer<Unit>, JobId: UInt32, JobEntry: CPointer<CPointer<FAX_JOB_ENTRYA>>): Int32 {
+    return FaxGetJobA(FaxHandle, JobId, JobEntry)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxGetJobW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxGetJobW(FaxHandle: CPointer<Unit>, JobId: UInt32, JobEntry: CPointer<CPointer<FAX_JOB_ENTRYW>>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxGetJobW == "on"]
+public unsafe func Windows_FaxGetJobW(FaxHandle: CPointer<Unit>, JobId: UInt32, JobEntry: CPointer<CPointer<FAX_JOB_ENTRYW>>): Int32 {
+    return FaxGetJobW(FaxHandle, JobId, JobEntry)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxGetLoggingCategoriesA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxGetLoggingCategoriesA(FaxHandle: CPointer<Unit>, Categories: CPointer<CPointer<FAX_LOG_CATEGORYA>>, NumberCategories: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxGetLoggingCategoriesA == "on"]
+public unsafe func Windows_FaxGetLoggingCategoriesA(FaxHandle: CPointer<Unit>, Categories: CPointer<CPointer<FAX_LOG_CATEGORYA>>, NumberCategories: CPointer<UInt32>): Int32 {
+    return FaxGetLoggingCategoriesA(FaxHandle, Categories, NumberCategories)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxGetLoggingCategoriesW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxGetLoggingCategoriesW(FaxHandle: CPointer<Unit>, Categories: CPointer<CPointer<FAX_LOG_CATEGORYW>>, NumberCategories: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxGetLoggingCategoriesW == "on"]
+public unsafe func Windows_FaxGetLoggingCategoriesW(FaxHandle: CPointer<Unit>, Categories: CPointer<CPointer<FAX_LOG_CATEGORYW>>, NumberCategories: CPointer<UInt32>): Int32 {
+    return FaxGetLoggingCategoriesW(FaxHandle, Categories, NumberCategories)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxGetPageData == "on"]
+foreign {
+    func FaxGetPageData(FaxHandle: CPointer<Unit>, JobId: UInt32, Buffer: CPointer<CPointer<UInt8>>, BufferSize: CPointer<UInt32>, ImageWidth: CPointer<UInt32>, ImageHeight: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxGetPageData == "on"]
+public unsafe func Windows_FaxGetPageData(FaxHandle: CPointer<Unit>, JobId: UInt32, Buffer: CPointer<CPointer<UInt8>>, BufferSize: CPointer<UInt32>, ImageWidth: CPointer<UInt32>, ImageHeight: CPointer<UInt32>): Int32 {
+    return FaxGetPageData(FaxHandle, JobId, Buffer, BufferSize, ImageWidth, ImageHeight)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxGetPortA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxGetPortA(FaxPortHandle: CPointer<Unit>, PortInfo: CPointer<CPointer<FAX_PORT_INFOA>>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxGetPortA == "on"]
+public unsafe func Windows_FaxGetPortA(FaxPortHandle: CPointer<Unit>, PortInfo: CPointer<CPointer<FAX_PORT_INFOA>>): Int32 {
+    return FaxGetPortA(FaxPortHandle, PortInfo)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxGetPortW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxGetPortW(FaxPortHandle: CPointer<Unit>, PortInfo: CPointer<CPointer<FAX_PORT_INFOW>>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxGetPortW == "on"]
+public unsafe func Windows_FaxGetPortW(FaxPortHandle: CPointer<Unit>, PortInfo: CPointer<CPointer<FAX_PORT_INFOW>>): Int32 {
+    return FaxGetPortW(FaxPortHandle, PortInfo)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxGetRoutingInfoA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxGetRoutingInfoA(FaxPortHandle: CPointer<Unit>, RoutingGuid: CPointer<UInt8>, RoutingInfoBuffer: CPointer<CPointer<UInt8>>, RoutingInfoBufferSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxGetRoutingInfoA == "on"]
+public unsafe func Windows_FaxGetRoutingInfoA(FaxPortHandle: CPointer<Unit>, RoutingGuid: CPointer<UInt8>, RoutingInfoBuffer: CPointer<CPointer<UInt8>>, RoutingInfoBufferSize: CPointer<UInt32>): Int32 {
+    return FaxGetRoutingInfoA(FaxPortHandle, RoutingGuid, RoutingInfoBuffer, RoutingInfoBufferSize)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxGetRoutingInfoW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxGetRoutingInfoW(FaxPortHandle: CPointer<Unit>, RoutingGuid: CPointer<UInt16>, RoutingInfoBuffer: CPointer<CPointer<UInt8>>, RoutingInfoBufferSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxGetRoutingInfoW == "on"]
+public unsafe func Windows_FaxGetRoutingInfoW(FaxPortHandle: CPointer<Unit>, RoutingGuid: CPointer<UInt16>, RoutingInfoBuffer: CPointer<CPointer<UInt8>>, RoutingInfoBufferSize: CPointer<UInt32>): Int32 {
+    return FaxGetRoutingInfoW(FaxPortHandle, RoutingGuid, RoutingInfoBuffer, RoutingInfoBufferSize)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxInitializeEventQueue == "on"]
+foreign {
+    func FaxInitializeEventQueue(FaxHandle: CPointer<Unit>, CompletionPort: CPointer<Unit>, CompletionKey: UIntNative, hWnd: CPointer<Unit>, MessageStart: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxInitializeEventQueue == "on"]
+public unsafe func Windows_FaxInitializeEventQueue(FaxHandle: CPointer<Unit>, CompletionPort: CPointer<Unit>, CompletionKey: UIntNative, hWnd: CPointer<Unit>, MessageStart: UInt32): Int32 {
+    return FaxInitializeEventQueue(FaxHandle, CompletionPort, CompletionKey, hWnd, MessageStart)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxOpenPort == "on"]
+foreign {
+    func FaxOpenPort(FaxHandle: CPointer<Unit>, DeviceId: UInt32, Flags: UInt32, FaxPortHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxOpenPort == "on"]
+public unsafe func Windows_FaxOpenPort(FaxHandle: CPointer<Unit>, DeviceId: UInt32, Flags: UInt32, FaxPortHandle: CPointer<CPointer<Unit>>): Int32 {
+    return FaxOpenPort(FaxHandle, DeviceId, Flags, FaxPortHandle)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxPrintCoverPageA == "on" && Windows_Win32_Graphics_Gdi == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func FaxPrintCoverPageA(FaxContextInfo: CPointer<FAX_CONTEXT_INFOA>, CoverPageInfo: CPointer<FAX_COVERPAGE_INFOA>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxPrintCoverPageA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_FaxPrintCoverPageA(FaxContextInfo: CPointer<FAX_CONTEXT_INFOA>, CoverPageInfo: CPointer<FAX_COVERPAGE_INFOA>): Int32 {
+    return FaxPrintCoverPageA(FaxContextInfo, CoverPageInfo)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxPrintCoverPageW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func FaxPrintCoverPageW(FaxContextInfo: CPointer<FAX_CONTEXT_INFOW>, CoverPageInfo: CPointer<FAX_COVERPAGE_INFOW>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxPrintCoverPageW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_FaxPrintCoverPageW(FaxContextInfo: CPointer<FAX_CONTEXT_INFOW>, CoverPageInfo: CPointer<FAX_COVERPAGE_INFOW>): Int32 {
+    return FaxPrintCoverPageW(FaxContextInfo, CoverPageInfo)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxRegisterRoutingExtensionW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxRegisterRoutingExtensionW(FaxHandle: CPointer<Unit>, ExtensionName: CPointer<UInt16>, FriendlyName: CPointer<UInt16>, ImageName: CPointer<UInt16>, CallBack: PFAX_ROUTING_INSTALLATION_CALLBACKW, Context: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxRegisterRoutingExtensionW == "on"]
+public unsafe func Windows_FaxRegisterRoutingExtensionW(FaxHandle: CPointer<Unit>, ExtensionName: CPointer<UInt16>, FriendlyName: CPointer<UInt16>, ImageName: CPointer<UInt16>, CallBack: PFAX_ROUTING_INSTALLATION_CALLBACKW, Context: CPointer<Unit>): Int32 {
+    return FaxRegisterRoutingExtensionW(FaxHandle, ExtensionName, FriendlyName, ImageName, CallBack, Context)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxRegisterServiceProviderW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxRegisterServiceProviderW(DeviceProvider: CPointer<UInt16>, FriendlyName: CPointer<UInt16>, ImageName: CPointer<UInt16>, TspName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxRegisterServiceProviderW == "on"]
+public unsafe func Windows_FaxRegisterServiceProviderW(DeviceProvider: CPointer<UInt16>, FriendlyName: CPointer<UInt16>, ImageName: CPointer<UInt16>, TspName: CPointer<UInt16>): Int32 {
+    return FaxRegisterServiceProviderW(DeviceProvider, FriendlyName, ImageName, TspName)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxSendDocumentA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxSendDocumentA(FaxHandle: CPointer<Unit>, FileName: CPointer<UInt8>, JobParams: CPointer<FAX_JOB_PARAMA>, CoverpageInfo: CPointer<FAX_COVERPAGE_INFOA>, FaxJobId: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxSendDocumentA == "on"]
+public unsafe func Windows_FaxSendDocumentA(FaxHandle: CPointer<Unit>, FileName: CPointer<UInt8>, JobParams: CPointer<FAX_JOB_PARAMA>, CoverpageInfo: CPointer<FAX_COVERPAGE_INFOA>, FaxJobId: CPointer<UInt32>): Int32 {
+    return FaxSendDocumentA(FaxHandle, FileName, JobParams, CoverpageInfo, FaxJobId)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxSendDocumentForBroadcastA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxSendDocumentForBroadcastA(FaxHandle: CPointer<Unit>, FileName: CPointer<UInt8>, FaxJobId: CPointer<UInt32>, FaxRecipientCallback: PFAX_RECIPIENT_CALLBACKA, Context: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxSendDocumentForBroadcastA == "on"]
+public unsafe func Windows_FaxSendDocumentForBroadcastA(FaxHandle: CPointer<Unit>, FileName: CPointer<UInt8>, FaxJobId: CPointer<UInt32>, FaxRecipientCallback: PFAX_RECIPIENT_CALLBACKA, Context: CPointer<Unit>): Int32 {
+    return FaxSendDocumentForBroadcastA(FaxHandle, FileName, FaxJobId, FaxRecipientCallback, Context)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxSendDocumentForBroadcastW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxSendDocumentForBroadcastW(FaxHandle: CPointer<Unit>, FileName: CPointer<UInt16>, FaxJobId: CPointer<UInt32>, FaxRecipientCallback: PFAX_RECIPIENT_CALLBACKW, Context: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxSendDocumentForBroadcastW == "on"]
+public unsafe func Windows_FaxSendDocumentForBroadcastW(FaxHandle: CPointer<Unit>, FileName: CPointer<UInt16>, FaxJobId: CPointer<UInt32>, FaxRecipientCallback: PFAX_RECIPIENT_CALLBACKW, Context: CPointer<Unit>): Int32 {
+    return FaxSendDocumentForBroadcastW(FaxHandle, FileName, FaxJobId, FaxRecipientCallback, Context)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxSendDocumentW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxSendDocumentW(FaxHandle: CPointer<Unit>, FileName: CPointer<UInt16>, JobParams: CPointer<FAX_JOB_PARAMW>, CoverpageInfo: CPointer<FAX_COVERPAGE_INFOW>, FaxJobId: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxSendDocumentW == "on"]
+public unsafe func Windows_FaxSendDocumentW(FaxHandle: CPointer<Unit>, FileName: CPointer<UInt16>, JobParams: CPointer<FAX_JOB_PARAMW>, CoverpageInfo: CPointer<FAX_COVERPAGE_INFOW>, FaxJobId: CPointer<UInt32>): Int32 {
+    return FaxSendDocumentW(FaxHandle, FileName, JobParams, CoverpageInfo, FaxJobId)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxSetConfigurationA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxSetConfigurationA(FaxHandle: CPointer<Unit>, FaxConfig: CPointer<FAX_CONFIGURATIONA>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxSetConfigurationA == "on"]
+public unsafe func Windows_FaxSetConfigurationA(FaxHandle: CPointer<Unit>, FaxConfig: CPointer<FAX_CONFIGURATIONA>): Int32 {
+    return FaxSetConfigurationA(FaxHandle, FaxConfig)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxSetConfigurationW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxSetConfigurationW(FaxHandle: CPointer<Unit>, FaxConfig: CPointer<FAX_CONFIGURATIONW>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxSetConfigurationW == "on"]
+public unsafe func Windows_FaxSetConfigurationW(FaxHandle: CPointer<Unit>, FaxConfig: CPointer<FAX_CONFIGURATIONW>): Int32 {
+    return FaxSetConfigurationW(FaxHandle, FaxConfig)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxSetGlobalRoutingInfoA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxSetGlobalRoutingInfoA(FaxHandle: CPointer<Unit>, RoutingInfo: CPointer<FAX_GLOBAL_ROUTING_INFOA>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxSetGlobalRoutingInfoA == "on"]
+public unsafe func Windows_FaxSetGlobalRoutingInfoA(FaxHandle: CPointer<Unit>, RoutingInfo: CPointer<FAX_GLOBAL_ROUTING_INFOA>): Int32 {
+    return FaxSetGlobalRoutingInfoA(FaxHandle, RoutingInfo)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxSetGlobalRoutingInfoW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxSetGlobalRoutingInfoW(FaxHandle: CPointer<Unit>, RoutingInfo: CPointer<FAX_GLOBAL_ROUTING_INFOW>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxSetGlobalRoutingInfoW == "on"]
+public unsafe func Windows_FaxSetGlobalRoutingInfoW(FaxHandle: CPointer<Unit>, RoutingInfo: CPointer<FAX_GLOBAL_ROUTING_INFOW>): Int32 {
+    return FaxSetGlobalRoutingInfoW(FaxHandle, RoutingInfo)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxSetJobA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxSetJobA(FaxHandle: CPointer<Unit>, JobId: UInt32, Command: UInt32, JobEntry: CPointer<FAX_JOB_ENTRYA>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxSetJobA == "on"]
+public unsafe func Windows_FaxSetJobA(FaxHandle: CPointer<Unit>, JobId: UInt32, Command: UInt32, JobEntry: CPointer<FAX_JOB_ENTRYA>): Int32 {
+    return FaxSetJobA(FaxHandle, JobId, Command, JobEntry)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxSetJobW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxSetJobW(FaxHandle: CPointer<Unit>, JobId: UInt32, Command: UInt32, JobEntry: CPointer<FAX_JOB_ENTRYW>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxSetJobW == "on"]
+public unsafe func Windows_FaxSetJobW(FaxHandle: CPointer<Unit>, JobId: UInt32, Command: UInt32, JobEntry: CPointer<FAX_JOB_ENTRYW>): Int32 {
+    return FaxSetJobW(FaxHandle, JobId, Command, JobEntry)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxSetLoggingCategoriesA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxSetLoggingCategoriesA(FaxHandle: CPointer<Unit>, Categories: CPointer<FAX_LOG_CATEGORYA>, NumberCategories: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxSetLoggingCategoriesA == "on"]
+public unsafe func Windows_FaxSetLoggingCategoriesA(FaxHandle: CPointer<Unit>, Categories: CPointer<FAX_LOG_CATEGORYA>, NumberCategories: UInt32): Int32 {
+    return FaxSetLoggingCategoriesA(FaxHandle, Categories, NumberCategories)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxSetLoggingCategoriesW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxSetLoggingCategoriesW(FaxHandle: CPointer<Unit>, Categories: CPointer<FAX_LOG_CATEGORYW>, NumberCategories: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxSetLoggingCategoriesW == "on"]
+public unsafe func Windows_FaxSetLoggingCategoriesW(FaxHandle: CPointer<Unit>, Categories: CPointer<FAX_LOG_CATEGORYW>, NumberCategories: UInt32): Int32 {
+    return FaxSetLoggingCategoriesW(FaxHandle, Categories, NumberCategories)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxSetPortA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxSetPortA(FaxPortHandle: CPointer<Unit>, PortInfo: CPointer<FAX_PORT_INFOA>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxSetPortA == "on"]
+public unsafe func Windows_FaxSetPortA(FaxPortHandle: CPointer<Unit>, PortInfo: CPointer<FAX_PORT_INFOA>): Int32 {
+    return FaxSetPortA(FaxPortHandle, PortInfo)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxSetPortW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxSetPortW(FaxPortHandle: CPointer<Unit>, PortInfo: CPointer<FAX_PORT_INFOW>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxSetPortW == "on"]
+public unsafe func Windows_FaxSetPortW(FaxPortHandle: CPointer<Unit>, PortInfo: CPointer<FAX_PORT_INFOW>): Int32 {
+    return FaxSetPortW(FaxPortHandle, PortInfo)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxSetRoutingInfoA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxSetRoutingInfoA(FaxPortHandle: CPointer<Unit>, RoutingGuid: CPointer<UInt8>, RoutingInfoBuffer: CPointer<UInt8>, RoutingInfoBufferSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxSetRoutingInfoA == "on"]
+public unsafe func Windows_FaxSetRoutingInfoA(FaxPortHandle: CPointer<Unit>, RoutingGuid: CPointer<UInt8>, RoutingInfoBuffer: CPointer<UInt8>, RoutingInfoBufferSize: UInt32): Int32 {
+    return FaxSetRoutingInfoA(FaxPortHandle, RoutingGuid, RoutingInfoBuffer, RoutingInfoBufferSize)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxSetRoutingInfoW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func FaxSetRoutingInfoW(FaxPortHandle: CPointer<Unit>, RoutingGuid: CPointer<UInt16>, RoutingInfoBuffer: CPointer<UInt8>, RoutingInfoBufferSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxSetRoutingInfoW == "on"]
+public unsafe func Windows_FaxSetRoutingInfoW(FaxPortHandle: CPointer<Unit>, RoutingGuid: CPointer<UInt16>, RoutingInfoBuffer: CPointer<UInt8>, RoutingInfoBufferSize: UInt32): Int32 {
+    return FaxSetRoutingInfoW(FaxPortHandle, RoutingGuid, RoutingInfoBuffer, RoutingInfoBufferSize)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxStartPrintJobA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func FaxStartPrintJobA(PrinterName: CPointer<UInt8>, PrintInfo: CPointer<FAX_PRINT_INFOA>, FaxJobId: CPointer<UInt32>, FaxContextInfo: CPointer<FAX_CONTEXT_INFOA>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxStartPrintJobA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_FaxStartPrintJobA(PrinterName: CPointer<UInt8>, PrintInfo: CPointer<FAX_PRINT_INFOA>, FaxJobId: CPointer<UInt32>, FaxContextInfo: CPointer<FAX_CONTEXT_INFOA>): Int32 {
+    return FaxStartPrintJobA(PrinterName, PrintInfo, FaxJobId, FaxContextInfo)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxStartPrintJobW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func FaxStartPrintJobW(PrinterName: CPointer<UInt16>, PrintInfo: CPointer<FAX_PRINT_INFOW>, FaxJobId: CPointer<UInt32>, FaxContextInfo: CPointer<FAX_CONTEXT_INFOW>): Int32
 }
 
-@When[FXSUTILITY == "on"]
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxStartPrintJobW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_FaxStartPrintJobW(PrinterName: CPointer<UInt16>, PrintInfo: CPointer<FAX_PRINT_INFOW>, FaxJobId: CPointer<UInt32>, FaxContextInfo: CPointer<FAX_CONTEXT_INFOW>): Int32 {
+    return FaxStartPrintJobW(PrinterName, PrintInfo, FaxJobId, FaxContextInfo)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxUnregisterServiceProviderW == "on"]
+foreign {
+    func FaxUnregisterServiceProviderW(DeviceProvider: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && WINFAX == "on" && Windows_Win32_Devices_Fax_FaxUnregisterServiceProviderW == "on"]
+public unsafe func Windows_FaxUnregisterServiceProviderW(DeviceProvider: CPointer<UInt16>): Int32 {
+    return FaxUnregisterServiceProviderW(DeviceProvider)
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && FXSUTILITY == "on" && Windows_Win32_Devices_Fax_CanSendToFaxRecipient == "on"]
 foreign {
     func CanSendToFaxRecipient(): Int32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && FXSUTILITY == "on" && Windows_Win32_Devices_Fax_CanSendToFaxRecipient == "on"]
+public unsafe func Windows_CanSendToFaxRecipient(): Int32 {
+    return CanSendToFaxRecipient()
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && FXSUTILITY == "on" && Windows_Win32_Devices_Fax_SendToFaxRecipient == "on"]
+foreign {
     func SendToFaxRecipient(sndMode: Int32, lpFileName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Devices_Fax == "on" && FXSUTILITY == "on" && Windows_Win32_Devices_Fax_SendToFaxRecipient == "on"]
+public unsafe func Windows_SendToFaxRecipient(sndMode: Int32, lpFileName: CPointer<UInt16>): UInt32 {
+    return SendToFaxRecipient(sndMode, lpFileName)
 }
 
 @When[Windows_Win32_Devices_Fax == "on"]

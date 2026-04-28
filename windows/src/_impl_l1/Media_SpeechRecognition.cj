@@ -282,9 +282,9 @@ extend ISpeechContinuousRecognitionSession <: windows_core.Interface<ISpeechCont
 @C
 public struct ISpeechRecognitionGrammarFileConstraintVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var GrammarFile: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var GrammarFile: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -366,7 +366,7 @@ public class ISpeechRecognitionGrammarFileConstraint <: InterfaceWrapperBase & C
         readVtbl<ISpeechRecognitionGrammarFileConstraintVtbl>(ISpeechRecognitionGrammarFileConstraintVtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GrammarFile(): StorageFile {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -383,13 +383,13 @@ extend ISpeechRecognitionGrammarFileConstraint <: windows_core.Interface<ISpeech
 @C
 public struct ISpeechRecognitionGrammarFileConstraintFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var Create: UIntNative = UIntNative(0)
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var CreateWithTag: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var CreateWithTag: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -459,7 +459,7 @@ public class ISpeechRecognitionGrammarFileConstraintFactory <: InterfaceWrapperB
         readVtbl<ISpeechRecognitionGrammarFileConstraintFactoryVtbl>(ISpeechRecognitionGrammarFileConstraintFactoryVtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func Create(file: StorageFile): SpeechRecognitionGrammarFileConstraint {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -468,7 +468,7 @@ public class ISpeechRecognitionGrammarFileConstraintFactory <: InterfaceWrapperB
         return SpeechRecognitionGrammarFileConstraint.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func CreateWithTag(file: StorageFile, tag: windows_core.HString): SpeechRecognitionGrammarFileConstraint {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -570,7 +570,10 @@ extend ISpeechRecognitionHypothesisGeneratedEventArgs <: windows_core.Interface<
 @C
 public struct ISpeechRecognitionListConstraintVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Commands: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Commands: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -651,6 +654,7 @@ public class ISpeechRecognitionListConstraint <: InterfaceWrapperBase & ComInter
         readVtbl<ISpeechRecognitionListConstraintVtbl>(ISpeechRecognitionListConstraintVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Commands(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -667,8 +671,14 @@ extend ISpeechRecognitionListConstraint <: windows_core.Interface<ISpeechRecogni
 @C
 public struct ISpeechRecognitionListConstraintFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Create: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateWithTag: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateWithTag: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -737,6 +747,7 @@ public class ISpeechRecognitionListConstraintFactory <: InterfaceWrapperBase & C
         readVtbl<ISpeechRecognitionListConstraintFactoryVtbl>(ISpeechRecognitionListConstraintFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create(commands: windows_collections.IIterable<windows_core.HString>): SpeechRecognitionListConstraint {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -745,6 +756,7 @@ public class ISpeechRecognitionListConstraintFactory <: InterfaceWrapperBase & C
         return SpeechRecognitionListConstraint.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateWithTag(commands: windows_collections.IIterable<windows_core.HString>, tag: windows_core.HString): SpeechRecognitionListConstraint {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -765,9 +777,15 @@ public struct ISpeechRecognitionResultVtbl {
     public var Text: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Confidence: CFunc<(CPointer<Unit>, CPointer<_impl_l0.SpeechRecognitionConfidenceAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SemanticInterpretation: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAlternates: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAlternates: UIntNative = UIntNative(0)
     public var Constraint: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var RulePath: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RulePath: UIntNative = UIntNative(0)
     public var RawConfidence: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -869,6 +887,7 @@ public class ISpeechRecognitionResult <: InterfaceWrapperBase & ComInterface & R
         return _impl_l0.SpeechRecognitionSemanticInterpretation.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAlternates(maxAlternates: UInt32): windows_collections.IVectorView<SpeechRecognitionResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -885,6 +904,7 @@ public class ISpeechRecognitionResult <: InterfaceWrapperBase & ComInterface & R
         return _impl_l0.ISpeechRecognitionConstraint.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RulePath(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1201,7 +1221,10 @@ public struct ISpeechRecognizerVtbl {
     public var CurrentLanguage: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Globalization != "on"]
     public var CurrentLanguage: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Constraints: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Constraints: UIntNative = UIntNative(0)
     public var Timeouts: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var UIOptions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CompileConstraintsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1300,6 +1323,7 @@ public class ISpeechRecognizer <: InterfaceWrapperBase & ComInterface & RuntimeN
         return Language.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Constraints(): windows_collections.IVector<_impl_l0.ISpeechRecognitionConstraint> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1596,13 +1620,13 @@ public struct ISpeechRecognizerStaticsVtbl {
     public var SystemSpeechLanguage: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Globalization != "on"]
     public var SystemSpeechLanguage: UIntNative = UIntNative(0)
-    @When[Windows_Globalization == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Globalization == "on"]
     public var SupportedTopicLanguages: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Globalization != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Globalization != "on"]
     public var SupportedTopicLanguages: UIntNative = UIntNative(0)
-    @When[Windows_Globalization == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Globalization == "on"]
     public var SupportedGrammarLanguages: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Globalization != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Globalization != "on"]
     public var SupportedGrammarLanguages: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -1681,7 +1705,7 @@ public class ISpeechRecognizerStatics <: InterfaceWrapperBase & ComInterface & R
         return Language.fromAbiTake(result__)
     }
 
-    @When[Windows_Globalization == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Globalization == "on"]
     public unsafe func SupportedTopicLanguages(): windows_collections.IVectorView<Language> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1690,7 +1714,7 @@ public class ISpeechRecognizerStatics <: InterfaceWrapperBase & ComInterface & R
         return windows_collections.IVectorView<Language>.fromAbiTake(result__)
     }
 
-    @When[Windows_Globalization == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Globalization == "on"]
     public unsafe func SupportedGrammarLanguages(): windows_collections.IVectorView<Language> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2280,7 +2304,7 @@ public class SpeechRecognitionGrammarFileConstraint <: InterfaceWrapperBase & Co
         }
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GrammarFile(): StorageFile {
         return defaultInterface().GrammarFile()
     }
@@ -2313,7 +2337,7 @@ public class SpeechRecognitionGrammarFileConstraint <: InterfaceWrapperBase & Co
         asISpeechRecognitionConstraint().SetProbability(value)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public static unsafe func Create(file: StorageFile): SpeechRecognitionGrammarFileConstraint {
         var result__: Option<SpeechRecognitionGrammarFileConstraint> = Option<SpeechRecognitionGrammarFileConstraint>.None
         try (factory__ = windows_core.factory<SpeechRecognitionGrammarFileConstraint, ISpeechRecognitionGrammarFileConstraintFactory>().unwrap()) {
@@ -2325,7 +2349,7 @@ public class SpeechRecognitionGrammarFileConstraint <: InterfaceWrapperBase & Co
         }
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public static unsafe func CreateWithTag(file: StorageFile, tag: windows_core.HString): SpeechRecognitionGrammarFileConstraint {
         var result__: Option<SpeechRecognitionGrammarFileConstraint> = Option<SpeechRecognitionGrammarFileConstraint>.None
         try (factory__ = windows_core.factory<SpeechRecognitionGrammarFileConstraint, ISpeechRecognitionGrammarFileConstraintFactory>().unwrap()) {
@@ -2524,6 +2548,7 @@ public class SpeechRecognitionListConstraint <: InterfaceWrapperBase & ComInterf
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Commands(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().Commands()
     }
@@ -2556,6 +2581,7 @@ public class SpeechRecognitionListConstraint <: InterfaceWrapperBase & ComInterf
         asISpeechRecognitionConstraint().SetProbability(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Create(commands: windows_collections.IIterable<windows_core.HString>): SpeechRecognitionListConstraint {
         var result__: Option<SpeechRecognitionListConstraint> = Option<SpeechRecognitionListConstraint>.None
         try (factory__ = windows_core.factory<SpeechRecognitionListConstraint, ISpeechRecognitionListConstraintFactory>().unwrap()) {
@@ -2567,6 +2593,7 @@ public class SpeechRecognitionListConstraint <: InterfaceWrapperBase & ComInterf
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateWithTag(commands: windows_collections.IIterable<windows_core.HString>, tag: windows_core.HString): SpeechRecognitionListConstraint {
         var result__: Option<SpeechRecognitionListConstraint> = Option<SpeechRecognitionListConstraint>.None
         try (factory__ = windows_core.factory<SpeechRecognitionListConstraint, ISpeechRecognitionListConstraintFactory>().unwrap()) {
@@ -2774,6 +2801,7 @@ public class SpeechRecognitionResult <: InterfaceWrapperBase & ComInterface & wi
         return defaultInterface().SemanticInterpretation()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAlternates(maxAlternates: UInt32): windows_collections.IVectorView<SpeechRecognitionResult> {
         return defaultInterface().GetAlternates(maxAlternates)
     }
@@ -2782,6 +2810,7 @@ public class SpeechRecognitionResult <: InterfaceWrapperBase & ComInterface & wi
         return defaultInterface().Constraint()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RulePath(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().RulePath()
     }
@@ -3177,6 +3206,7 @@ public class SpeechRecognizer <: InterfaceWrapperBase & ComInterface & windows_i
         return defaultInterface().CurrentLanguage()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Constraints(): windows_collections.IVector<_impl_l0.ISpeechRecognitionConstraint> {
         return defaultInterface().Constraints()
     }
@@ -3245,7 +3275,7 @@ public class SpeechRecognizer <: InterfaceWrapperBase & ComInterface & windows_i
         }
     }
 
-    @When[Windows_Globalization == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Globalization == "on"]
     public static unsafe func SupportedTopicLanguages(): windows_collections.IVectorView<Language> {
         var result__: Option<windows_collections.IVectorView<Language>> = Option<windows_collections.IVectorView<Language>>.None
         try (factory__ = windows_core.factory<SpeechRecognizer, ISpeechRecognizerStatics>().unwrap()) {
@@ -3257,7 +3287,7 @@ public class SpeechRecognizer <: InterfaceWrapperBase & ComInterface & windows_i
         }
     }
 
-    @When[Windows_Globalization == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Globalization == "on"]
     public static unsafe func SupportedGrammarLanguages(): windows_collections.IVectorView<Language> {
         var result__: Option<windows_collections.IVectorView<Language>> = Option<windows_collections.IVectorView<Language>>.None
         try (factory__ = windows_core.factory<SpeechRecognizer, ISpeechRecognizerStatics>().unwrap()) {

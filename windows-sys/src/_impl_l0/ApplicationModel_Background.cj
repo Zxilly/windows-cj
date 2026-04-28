@@ -334,10 +334,10 @@ public let EnergyUseLevel_OverBudget: EnergyUseLevel = EnergyUseLevel(3)
 @C
 public struct IActivitySensorTriggerVtbl {
     public var base_: IBackgroundTriggerVtbl = IBackgroundTriggerVtbl()
-    @When[Windows_Devices_Sensors == "on"]
+    @When[Windows_Devices_Sensors == "on" && Windows_Foundation_Collections == "on"]
     public var SubscribedActivities: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ReportInterval: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Devices_Sensors == "on"]
+    @When[Windows_Devices_Sensors == "on" && Windows_Foundation_Collections == "on"]
     public var SupportedActivities: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var MinimumReportInterval: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -383,7 +383,7 @@ public class IActivitySensorTrigger <: InterfaceWrapperBase & ComInterface {
         readVtbl<IActivitySensorTriggerVtbl>(IActivitySensorTriggerVtbl())
     }
 
-    @When[Windows_Devices_Sensors == "on"]
+    @When[Windows_Devices_Sensors == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func SubscribedActivities(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -396,7 +396,7 @@ public class IActivitySensorTrigger <: InterfaceWrapperBase & ComInterface {
         return __vt.ReportInterval(__liveRaw, result__)
     }
 
-    @When[Windows_Devices_Sensors == "on"]
+    @When[Windows_Devices_Sensors == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func SupportedActivities(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

@@ -13,6 +13,7 @@ import windows_sys._impl_l0 as _impl_l0
 @C
 public struct IAcceptedVoipPhoneCallOptionsFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateInstance: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -57,6 +58,7 @@ public class IAcceptedVoipPhoneCallOptionsFactory <: InterfaceWrapperBase & ComI
         readVtbl<IAcceptedVoipPhoneCallOptionsFactoryVtbl>(IAcceptedVoipPhoneCallOptionsFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateInstance(associatedDeviceIds: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -68,6 +70,7 @@ public class IAcceptedVoipPhoneCallOptionsFactory <: InterfaceWrapperBase & ComI
 @C
 public struct IAppInitiatedVoipPhoneCallOptionsFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateInstance: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -112,6 +115,7 @@ public class IAppInitiatedVoipPhoneCallOptionsFactory <: InterfaceWrapperBase & 
         readVtbl<IAppInitiatedVoipPhoneCallOptionsFactoryVtbl>(IAppInitiatedVoipPhoneCallOptionsFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateInstance(associatedDeviceIds: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -123,6 +127,7 @@ public class IAppInitiatedVoipPhoneCallOptionsFactory <: InterfaceWrapperBase & 
 @C
 public struct IIncomingVoipPhoneCallOptionsFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateInstance: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -167,6 +172,7 @@ public class IIncomingVoipPhoneCallOptionsFactory <: InterfaceWrapperBase & ComI
         readVtbl<IIncomingVoipPhoneCallOptionsFactoryVtbl>(IIncomingVoipPhoneCallOptionsFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateInstance(associatedDeviceIds: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -337,6 +343,7 @@ public class ILockScreenCallUI <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IOutgoingVoipPhoneCallOptionsFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateInstance: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -381,6 +388,7 @@ public class IOutgoingVoipPhoneCallOptionsFactory <: InterfaceWrapperBase & ComI
         readVtbl<IOutgoingVoipPhoneCallOptionsFactoryVtbl>(IOutgoingVoipPhoneCallOptionsFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateInstance(associatedDeviceIds: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -991,6 +999,7 @@ public class IPhoneCallHistoryEntryAddressFactory <: InterfaceWrapperBase & ComI
 @C
 public struct IPhoneCallHistoryEntryReaderVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ReadBatchAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1035,6 +1044,7 @@ public class IPhoneCallHistoryEntryReader <: InterfaceWrapperBase & ComInterface
         readVtbl<IPhoneCallHistoryEntryReaderVtbl>(IPhoneCallHistoryEntryReaderVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReadBatchAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1227,12 +1237,16 @@ public struct IPhoneCallHistoryStoreVtbl {
     public var GetEntryReaderWithOptions: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var SaveEntryAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var DeleteEntryAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var DeleteEntriesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var MarkEntryAsSeenAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var MarkEntriesAsSeenAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetUnseenCountAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var MarkAllAsSeenAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSourcesUnseenCountAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var MarkSourcesAsSeenAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -1307,6 +1321,7 @@ public class IPhoneCallHistoryStore <: InterfaceWrapperBase & ComInterface {
         return __vt.DeleteEntryAsync(__liveRaw, callHistoryEntry, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DeleteEntriesAsync(callHistoryEntries: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1319,6 +1334,7 @@ public class IPhoneCallHistoryStore <: InterfaceWrapperBase & ComInterface {
         return __vt.MarkEntryAsSeenAsync(__liveRaw, callHistoryEntry, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MarkEntriesAsSeenAsync(callHistoryEntries: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1337,12 +1353,14 @@ public class IPhoneCallHistoryStore <: InterfaceWrapperBase & ComInterface {
         return __vt.MarkAllAsSeenAsync(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSourcesUnseenCountAsync(sourceIds: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetSourcesUnseenCountAsync(__liveRaw, sourceIds, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MarkSourcesAsSeenAsync(sourceIds: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1624,6 +1642,7 @@ public class IPhoneCallVideoCapabilitiesManagerStatics <: InterfaceWrapperBase &
 public struct IPhoneCallsResultVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var OperationStatus: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var AllActivePhoneCalls: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1674,6 +1693,7 @@ public class IPhoneCallsResult <: InterfaceWrapperBase & ComInterface {
         return __vt.OperationStatus(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AllActivePhoneCalls(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

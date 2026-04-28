@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -1297,7 +1296,10 @@ extend IWiFiOnDemandHotspotNetworkProperties <: windows_core.Interface<IWiFiOnDe
 public struct IWiFiWpsConfigurationResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Status: CFunc<(CPointer<Unit>, CPointer<WiFiWpsConfigurationStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedWpsKinds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedWpsKinds: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1374,6 +1376,7 @@ public class IWiFiWpsConfigurationResult <: InterfaceWrapperBase & ComInterface 
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<WiFiWpsConfigurationStatus>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedWpsKinds(): windows_collections.IVectorView<WiFiWpsKind> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1922,6 +1925,7 @@ public class WiFiWpsConfigurationResult <: InterfaceWrapperBase & ComInterface &
         return defaultInterface().Status()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedWpsKinds(): windows_collections.IVectorView<WiFiWpsKind> {
         return defaultInterface().SupportedWpsKinds()
     }
@@ -2048,7 +2052,10 @@ extend IWiFiAdapter2 <: windows_core.Interface<IWiFiAdapter2> {}
 public struct IWiFiNetworkReportVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Timestamp: CFunc<(CPointer<Unit>, CPointer<windows_future.DateTimeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var AvailableNetworks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AvailableNetworks: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2125,6 +2132,7 @@ public class IWiFiNetworkReport <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<windows_future.DateTime>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AvailableNetworks(): windows_collections.IVectorView<WiFiAvailableNetwork> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2311,6 +2319,7 @@ public class WiFiNetworkReport <: InterfaceWrapperBase & ComInterface & windows_
         return defaultInterface().Timestamp()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AvailableNetworks(): windows_collections.IVectorView<WiFiAvailableNetwork> {
         return defaultInterface().AvailableNetworks()
     }
@@ -2503,7 +2512,10 @@ extend IWiFiAdapter <: windows_core.Interface<IWiFiAdapter> {}
 @C
 public struct IWiFiAdapterStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllAdaptersAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllAdaptersAsync: UIntNative = UIntNative(0)
     public var GetDeviceSelector: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var FromIdAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RequestAccessAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -2575,6 +2587,7 @@ public class IWiFiAdapterStatics <: InterfaceWrapperBase & ComInterface & Runtim
         readVtbl<IWiFiAdapterStaticsVtbl>(IWiFiAdapterStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAdaptersAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<WiFiAdapter>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2914,6 +2927,7 @@ public class WiFiAdapter <: InterfaceWrapperBase & ComInterface & windows_interf
         defaultInterface().Disconnect()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindAllAdaptersAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<WiFiAdapter>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<WiFiAdapter>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<WiFiAdapter>>>.None
         try (factory__ = windows_core.factory<WiFiAdapter, IWiFiAdapterStatics>().unwrap()) {

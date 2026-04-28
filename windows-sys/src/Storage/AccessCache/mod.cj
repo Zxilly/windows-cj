@@ -131,13 +131,13 @@ public struct IStorageItemAccessListVtbl {
     public var AddOrReplace: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Storage == "on"]
     public var GetItemAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var GetFileAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Storage == "on"]
     public var GetFolderAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Storage == "on"]
     public var GetItemWithOptionsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var GetFileWithOptionsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Storage == "on"]
     public var GetFolderWithOptionsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
@@ -146,6 +146,7 @@ public struct IStorageItemAccessListVtbl {
     public var Clear: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Storage == "on"]
     public var CheckAccess: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Entries: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var MaximumItemsAllowed: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -226,7 +227,7 @@ public class IStorageItemAccessList <: InterfaceWrapperBase & ComInterface {
         return __vt.GetItemAsync(__liveRaw, token, result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetFileAsync(token: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -247,7 +248,7 @@ public class IStorageItemAccessList <: InterfaceWrapperBase & ComInterface {
         return __vt.GetItemWithOptionsAsync(__liveRaw, token, options, result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetFileWithOptionsAsync(token: CPointer<Unit>, options: UInt32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -286,6 +287,7 @@ public class IStorageItemAccessList <: InterfaceWrapperBase & ComInterface {
         return __vt.CheckAccess(__liveRaw, file, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Entries(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

@@ -576,6 +576,7 @@ public struct IHttpRequestMessageVtbl {
     public var Headers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Method: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetMethod: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var RequestUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetRequestUri: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -654,6 +655,7 @@ public class IHttpRequestMessage <: InterfaceWrapperBase & ComInterface {
         return __vt.SetMethod(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1028,9 +1030,9 @@ public struct IHttpTransportInformationVtbl {
     public var ServerCertificate: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Networking_Sockets == "on"]
     public var ServerCertificateErrorSeverity: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public var ServerCertificateErrors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public var ServerIntermediateCertificates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1089,14 +1091,14 @@ public class IHttpTransportInformation <: InterfaceWrapperBase & ComInterface {
         return __vt.ServerCertificateErrorSeverity(__liveRaw, result__)
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func ServerCertificateErrors(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ServerCertificateErrors(__liveRaw, result__)
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func ServerIntermediateCertificates(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

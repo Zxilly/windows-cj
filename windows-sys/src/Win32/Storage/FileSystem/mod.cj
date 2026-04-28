@@ -17,4 +17,851 @@ public import windows_sys.Win32._impl_l2.ENCRYPTED_FILE_METADATA_SIGNATURE
 public import windows_sys.Win32._impl_l1.{ENCRYPTION_CERTIFICATE, ENCRYPTION_CERTIFICATE_HASH, ENCRYPTION_CERTIFICATE_HASH_LIST, ENCRYPTION_CERTIFICATE_LIST, ENCRYPTION_PROTECTOR_LIST, SHARE_INFO_502, SHARE_INFO_503}
 @When[Windows_Win32_Storage_FileSystem == "on" && Windows_Win32_System_Com == "on"]
 public import windows_sys.Win32._impl_l2.{IDiskQuotaControl, IDiskQuotaControlVtbl}
-
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_AddLogContainer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AddLogContainer
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_AddLogContainerSet == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AddLogContainerSet
+@When[Windows_Win32_Storage_FileSystem == "on" && ADVAPI32 == "on" && Windows_Win32_Storage_FileSystem_AddUsersToEncryptedFile == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AddUsersToEncryptedFile
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_AdvanceLogBase == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AdvanceLogBase
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_AlignReservedLog == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AlignReservedLog
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_AllocReservedLog == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AllocReservedLog
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_AreFileApisANSI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AreFileApisANSI
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_AreShortNamesEnabled == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AreShortNamesEnabled
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_BackupRead == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BackupRead
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_BackupSeek == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BackupSeek
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_BackupWrite == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BackupWrite
+@When[Windows_Win32_Storage_FileSystem == "on" && API_MS_WIN_CORE_IORING_L1_1_0 == "on" && Windows_Win32_Storage_FileSystem_BuildIoRingCancelRequest == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BuildIoRingCancelRequest
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_BuildIoRingFlushFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BuildIoRingFlushFile
+@When[Windows_Win32_Storage_FileSystem == "on" && API_MS_WIN_CORE_IORING_L1_1_0 == "on" && Windows_Win32_Storage_FileSystem_BuildIoRingReadFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BuildIoRingReadFile
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_BuildIoRingReadFileScatter == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BuildIoRingReadFileScatter
+@When[Windows_Win32_Storage_FileSystem == "on" && API_MS_WIN_CORE_IORING_L1_1_0 == "on" && Windows_Win32_Storage_FileSystem_BuildIoRingRegisterBuffers == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BuildIoRingRegisterBuffers
+@When[Windows_Win32_Storage_FileSystem == "on" && API_MS_WIN_CORE_IORING_L1_1_0 == "on" && Windows_Win32_Storage_FileSystem_BuildIoRingRegisterFileHandles == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BuildIoRingRegisterFileHandles
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_BuildIoRingWriteFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BuildIoRingWriteFile
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_BuildIoRingWriteFileGather == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BuildIoRingWriteFileGather
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CheckNameLegalDOS8Dot3A == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CheckNameLegalDOS8Dot3A
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CheckNameLegalDOS8Dot3W == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CheckNameLegalDOS8Dot3W
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_CloseAndResetLogFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CloseAndResetLogFile
+@When[Windows_Win32_Storage_FileSystem == "on" && ADVAPI32 == "on" && Windows_Win32_Storage_FileSystem_CloseEncryptedFileRaw == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CloseEncryptedFileRaw
+@When[Windows_Win32_Storage_FileSystem == "on" && API_MS_WIN_CORE_IORING_L1_1_0 == "on" && Windows_Win32_Storage_FileSystem_CloseIoRing == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CloseIoRing
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_CommitComplete == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CommitComplete
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_CommitEnlistment == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CommitEnlistment
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_CommitTransaction == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CommitTransaction
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_CommitTransactionAsync == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CommitTransactionAsync
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CompareFileTime == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CompareFileTime
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CopyFile2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CopyFile2
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CopyFileA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CopyFileA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CopyFileExA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CopyFileExA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CopyFileExW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CopyFileExW
+@When[Windows_Win32_Storage_FileSystem == "on" && API_MS_WIN_CORE_FILE_FROMAPP_L1_1_0 == "on" && Windows_Win32_Storage_FileSystem_CopyFileFromAppW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CopyFileFromAppW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CopyFileTransactedA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CopyFileTransactedA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CopyFileTransactedW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CopyFileTransactedW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CopyFileW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CopyFileW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CopyLZFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CopyLZFile
+@When[Windows_Win32_Storage_FileSystem == "on" && BINDFLTAPI == "on" && Windows_Win32_Storage_FileSystem_CreateBindLink == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateBindLink
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CreateDirectory2A == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateDirectory2A
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CreateDirectory2W == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateDirectory2W
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CreateDirectoryA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateDirectoryA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CreateDirectoryExA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateDirectoryExA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CreateDirectoryExW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateDirectoryExW
+@When[Windows_Win32_Storage_FileSystem == "on" && API_MS_WIN_CORE_FILE_FROMAPP_L1_1_0 == "on" && Windows_Win32_Storage_FileSystem_CreateDirectoryFromAppW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateDirectoryFromAppW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CreateDirectoryTransactedA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateDirectoryTransactedA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CreateDirectoryTransactedW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateDirectoryTransactedW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CreateDirectoryW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateDirectoryW
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_CreateEnlistment == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateEnlistment
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CreateFile2 == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateFile2
+@When[Windows_Win32_Storage_FileSystem == "on" && API_MS_WIN_CORE_FILE_FROMAPP_L1_1_0 == "on" && Windows_Win32_Storage_FileSystem_CreateFile2FromAppW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateFile2FromAppW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CreateFile3 == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateFile3
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CreateFileA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateFileA
+@When[Windows_Win32_Storage_FileSystem == "on" && API_MS_WIN_CORE_FILE_FROMAPP_L1_1_0 == "on" && Windows_Win32_Storage_FileSystem_CreateFileFromAppW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateFileFromAppW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CreateFileTransactedA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateFileTransactedA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CreateFileTransactedW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateFileTransactedW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CreateFileW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateFileW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CreateHardLinkA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateHardLinkA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CreateHardLinkTransactedA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateHardLinkTransactedA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CreateHardLinkTransactedW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateHardLinkTransactedW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CreateHardLinkW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateHardLinkW
+@When[Windows_Win32_Storage_FileSystem == "on" && API_MS_WIN_CORE_IORING_L1_1_0 == "on" && Windows_Win32_Storage_FileSystem_CreateIoRing == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateIoRing
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_CreateLogContainerScanContext == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateLogContainerScanContext
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_CreateLogFile == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateLogFile
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_CreateLogMarshallingArea == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateLogMarshallingArea
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_CreateResourceManager == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateResourceManager
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CreateSymbolicLinkA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateSymbolicLinkA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CreateSymbolicLinkTransactedA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateSymbolicLinkTransactedA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CreateSymbolicLinkTransactedW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateSymbolicLinkTransactedW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CreateSymbolicLinkW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateSymbolicLinkW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_CreateTapePartition == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateTapePartition
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_CreateTransaction == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateTransaction
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_CreateTransactionManager == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateTransactionManager
+@When[Windows_Win32_Storage_FileSystem == "on" && ADVAPI32 == "on" && Windows_Win32_Storage_FileSystem_DecryptFileA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DecryptFileA
+@When[Windows_Win32_Storage_FileSystem == "on" && ADVAPI32 == "on" && Windows_Win32_Storage_FileSystem_DecryptFileW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DecryptFileW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_DefineDosDeviceA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DefineDosDeviceA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_DefineDosDeviceW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DefineDosDeviceW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_DeleteFile2A == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteFile2A
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_DeleteFile2W == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteFile2W
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_DeleteFileA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteFileA
+@When[Windows_Win32_Storage_FileSystem == "on" && API_MS_WIN_CORE_FILE_FROMAPP_L1_1_0 == "on" && Windows_Win32_Storage_FileSystem_DeleteFileFromAppW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteFileFromAppW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_DeleteFileTransactedA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteFileTransactedA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_DeleteFileTransactedW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteFileTransactedW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_DeleteFileW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteFileW
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_DeleteLogByHandle == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteLogByHandle
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_DeleteLogFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteLogFile
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_DeleteLogMarshallingArea == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteLogMarshallingArea
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_DeleteVolumeMountPointA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteVolumeMountPointA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_DeleteVolumeMountPointW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteVolumeMountPointW
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_DeregisterManageableLogClient == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeregisterManageableLogClient
+@When[Windows_Win32_Storage_FileSystem == "on" && ADVAPI32 == "on" && Windows_Win32_Storage_FileSystem_DuplicateEncryptionInfoFile == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DuplicateEncryptionInfoFile
+@When[Windows_Win32_Storage_FileSystem == "on" && ADVAPI32 == "on" && Windows_Win32_Storage_FileSystem_EncryptFileA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EncryptFileA
+@When[Windows_Win32_Storage_FileSystem == "on" && ADVAPI32 == "on" && Windows_Win32_Storage_FileSystem_EncryptFileW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EncryptFileW
+@When[Windows_Win32_Storage_FileSystem == "on" && ADVAPI32 == "on" && Windows_Win32_Storage_FileSystem_EncryptionDisable == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EncryptionDisable
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_EraseTape == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EraseTape
+@When[Windows_Win32_Storage_FileSystem == "on" && ADVAPI32 == "on" && Windows_Win32_Storage_FileSystem_FileEncryptionStatusA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FileEncryptionStatusA
+@When[Windows_Win32_Storage_FileSystem == "on" && ADVAPI32 == "on" && Windows_Win32_Storage_FileSystem_FileEncryptionStatusW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FileEncryptionStatusW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_FileTimeToLocalFileTime == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FileTimeToLocalFileTime
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_FindClose == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindClose
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_FindCloseChangeNotification == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindCloseChangeNotification
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_FindFirstChangeNotificationA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindFirstChangeNotificationA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_FindFirstChangeNotificationW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindFirstChangeNotificationW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_FindFirstFileA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindFirstFileA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_FindFirstFileExA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindFirstFileExA
+@When[Windows_Win32_Storage_FileSystem == "on" && API_MS_WIN_CORE_FILE_FROMAPP_L1_1_0 == "on" && Windows_Win32_Storage_FileSystem_FindFirstFileExFromAppW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindFirstFileExFromAppW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_FindFirstFileExW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindFirstFileExW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_FindFirstFileNameTransactedW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindFirstFileNameTransactedW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_FindFirstFileNameW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindFirstFileNameW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_FindFirstFileTransactedA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindFirstFileTransactedA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_FindFirstFileTransactedW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindFirstFileTransactedW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_FindFirstFileW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindFirstFileW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_FindFirstStreamTransactedW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindFirstStreamTransactedW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_FindFirstStreamW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindFirstStreamW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_FindFirstVolumeA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindFirstVolumeA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_FindFirstVolumeMountPointA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindFirstVolumeMountPointA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_FindFirstVolumeMountPointW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindFirstVolumeMountPointW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_FindFirstVolumeW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindFirstVolumeW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_FindNextChangeNotification == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindNextChangeNotification
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_FindNextFileA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindNextFileA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_FindNextFileNameW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindNextFileNameW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_FindNextFileW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindNextFileW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_FindNextStreamW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindNextStreamW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_FindNextVolumeA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindNextVolumeA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_FindNextVolumeMountPointA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindNextVolumeMountPointA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_FindNextVolumeMountPointW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindNextVolumeMountPointW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_FindNextVolumeW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindNextVolumeW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_FindVolumeClose == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindVolumeClose
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_FindVolumeMountPointClose == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindVolumeMountPointClose
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_FlushFileBuffers == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FlushFileBuffers
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_FlushLogBuffers == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FlushLogBuffers
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_FlushLogToLsn == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FlushLogToLsn
+@When[Windows_Win32_Storage_FileSystem == "on" && ADVAPI32 == "on" && Windows_Win32_Storage_FileSystem_FreeEncryptedFileMetadata == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FreeEncryptedFileMetadata
+@When[Windows_Win32_Storage_FileSystem == "on" && ADVAPI32 == "on" && Windows_Win32_Storage_FileSystem_FreeEncryptionCertificateHashList == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FreeEncryptionCertificateHashList
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_FreeReservedLog == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FreeReservedLog
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetBinaryTypeA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetBinaryTypeA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetBinaryTypeW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetBinaryTypeW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetCompressedFileSizeA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetCompressedFileSizeA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetCompressedFileSizeTransactedA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetCompressedFileSizeTransactedA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetCompressedFileSizeTransactedW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetCompressedFileSizeTransactedW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetCompressedFileSizeW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetCompressedFileSizeW
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_GetCurrentClockTransactionManager == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetCurrentClockTransactionManager
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetDiskFreeSpaceA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetDiskFreeSpaceA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetDiskFreeSpaceExA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetDiskFreeSpaceExA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetDiskFreeSpaceExW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetDiskFreeSpaceExW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetDiskFreeSpaceW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetDiskFreeSpaceW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetDiskSpaceInformationA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetDiskSpaceInformationA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetDiskSpaceInformationW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetDiskSpaceInformationW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetDriveTypeA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetDriveTypeA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetDriveTypeW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetDriveTypeW
+@When[Windows_Win32_Storage_FileSystem == "on" && ADVAPI32 == "on" && Windows_Win32_Storage_FileSystem_GetEncryptedFileMetadata == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetEncryptedFileMetadata
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_GetEnlistmentId == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetEnlistmentId
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_GetEnlistmentRecoveryInformation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetEnlistmentRecoveryInformation
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetExpandedNameA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetExpandedNameA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetExpandedNameW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetExpandedNameW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetFileAttributesA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetFileAttributesA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetFileAttributesExA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetFileAttributesExA
+@When[Windows_Win32_Storage_FileSystem == "on" && API_MS_WIN_CORE_FILE_FROMAPP_L1_1_0 == "on" && Windows_Win32_Storage_FileSystem_GetFileAttributesExFromAppW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetFileAttributesExFromAppW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetFileAttributesExW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetFileAttributesExW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetFileAttributesTransactedA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetFileAttributesTransactedA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetFileAttributesTransactedW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetFileAttributesTransactedW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetFileAttributesW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetFileAttributesW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetFileBandwidthReservation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetFileBandwidthReservation
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetFileInformationByHandle == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetFileInformationByHandle
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetFileInformationByHandleEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetFileInformationByHandleEx
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetFileInformationByName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetFileInformationByName
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetFileSize == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetFileSize
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetFileSizeEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetFileSizeEx
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetFileTime == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetFileTime
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetFileType == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetFileType
+@When[Windows_Win32_Storage_FileSystem == "on" && VERSION == "on" && Windows_Win32_Storage_FileSystem_GetFileVersionInfoA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetFileVersionInfoA
+@When[Windows_Win32_Storage_FileSystem == "on" && VERSION == "on" && Windows_Win32_Storage_FileSystem_GetFileVersionInfoExA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetFileVersionInfoExA
+@When[Windows_Win32_Storage_FileSystem == "on" && VERSION == "on" && Windows_Win32_Storage_FileSystem_GetFileVersionInfoExW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetFileVersionInfoExW
+@When[Windows_Win32_Storage_FileSystem == "on" && VERSION == "on" && Windows_Win32_Storage_FileSystem_GetFileVersionInfoSizeA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetFileVersionInfoSizeA
+@When[Windows_Win32_Storage_FileSystem == "on" && VERSION == "on" && Windows_Win32_Storage_FileSystem_GetFileVersionInfoSizeExA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetFileVersionInfoSizeExA
+@When[Windows_Win32_Storage_FileSystem == "on" && VERSION == "on" && Windows_Win32_Storage_FileSystem_GetFileVersionInfoSizeExW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetFileVersionInfoSizeExW
+@When[Windows_Win32_Storage_FileSystem == "on" && VERSION == "on" && Windows_Win32_Storage_FileSystem_GetFileVersionInfoSizeW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetFileVersionInfoSizeW
+@When[Windows_Win32_Storage_FileSystem == "on" && VERSION == "on" && Windows_Win32_Storage_FileSystem_GetFileVersionInfoW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetFileVersionInfoW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetFinalPathNameByHandleA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetFinalPathNameByHandleA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetFinalPathNameByHandleW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetFinalPathNameByHandleW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetFullPathNameA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetFullPathNameA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetFullPathNameTransactedA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetFullPathNameTransactedA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetFullPathNameTransactedW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetFullPathNameTransactedW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetFullPathNameW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetFullPathNameW
+@When[Windows_Win32_Storage_FileSystem == "on" && API_MS_WIN_CORE_IORING_L1_1_0 == "on" && Windows_Win32_Storage_FileSystem_GetIoRingInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetIoRingInfo
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_GetLogContainerName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetLogContainerName
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_GetLogFileInformation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetLogFileInformation
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_GetLogIoStatistics == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetLogIoStatistics
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_GetLogReservationInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetLogReservationInfo
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetLogicalDriveStringsA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetLogicalDriveStringsA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetLogicalDriveStringsW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetLogicalDriveStringsW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetLogicalDrives == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetLogicalDrives
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetLongPathNameA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetLongPathNameA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetLongPathNameTransactedA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetLongPathNameTransactedA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetLongPathNameTransactedW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetLongPathNameTransactedW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetLongPathNameW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetLongPathNameW
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_GetNextLogArchiveExtent == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetNextLogArchiveExtent
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_GetNotificationResourceManager == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetNotificationResourceManager
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_GetNotificationResourceManagerAsync == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetNotificationResourceManagerAsync
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetShortPathNameA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetShortPathNameA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetShortPathNameW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetShortPathNameW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetTapeParameters == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetTapeParameters
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetTapePosition == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetTapePosition
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetTapeStatus == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetTapeStatus
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetTempFileNameA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetTempFileNameA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetTempFileNameW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetTempFileNameW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetTempPath2A == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetTempPath2A
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetTempPath2W == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetTempPath2W
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetTempPathA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetTempPathA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetTempPathW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetTempPathW
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_GetTransactionId == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetTransactionId
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_GetTransactionInformation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetTransactionInformation
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_GetTransactionManagerId == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetTransactionManagerId
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetVolumeInformationA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetVolumeInformationA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetVolumeInformationByHandleW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetVolumeInformationByHandleW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetVolumeInformationW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetVolumeInformationW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetVolumeNameForVolumeMountPointA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetVolumeNameForVolumeMountPointA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetVolumeNameForVolumeMountPointW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetVolumeNameForVolumeMountPointW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetVolumePathNameA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetVolumePathNameA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetVolumePathNameW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetVolumePathNameW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetVolumePathNamesForVolumeNameA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetVolumePathNamesForVolumeNameA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_GetVolumePathNamesForVolumeNameW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetVolumePathNamesForVolumeNameW
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_HandleLogFull == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HandleLogFull
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_InstallLogPolicy == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InstallLogPolicy
+@When[Windows_Win32_Storage_FileSystem == "on" && API_MS_WIN_CORE_IORING_L1_1_0 == "on" && Windows_Win32_Storage_FileSystem_IsIoRingOpSupported == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsIoRingOpSupported
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_LZClose == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LZClose
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_LZCopy == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LZCopy
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_LZDone == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LZDone
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_LZInit == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LZInit
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_LZOpenFileA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LZOpenFileA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_LZOpenFileW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LZOpenFileW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_LZRead == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LZRead
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_LZSeek == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LZSeek
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_LZStart == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LZStart
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_LocalFileTimeToFileTime == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LocalFileTimeToFileTime
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_LockFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LockFile
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_LockFileEx == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LockFileEx
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_LogTailAdvanceFailure == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LogTailAdvanceFailure
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_LsnBlockOffset == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LsnBlockOffset
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_LsnContainer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LsnContainer
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_LsnCreate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LsnCreate
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_LsnEqual == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LsnEqual
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_LsnGreater == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LsnGreater
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_LsnIncrement == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LsnIncrement
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_LsnInvalid == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LsnInvalid
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_LsnLess == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LsnLess
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_LsnNull == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LsnNull
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_LsnRecordSequence == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LsnRecordSequence
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_MoveFileA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MoveFileA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_MoveFileExA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MoveFileExA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_MoveFileExW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MoveFileExW
+@When[Windows_Win32_Storage_FileSystem == "on" && API_MS_WIN_CORE_FILE_FROMAPP_L1_1_0 == "on" && Windows_Win32_Storage_FileSystem_MoveFileFromAppW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MoveFileFromAppW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_MoveFileTransactedA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MoveFileTransactedA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_MoveFileTransactedW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MoveFileTransactedW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_MoveFileW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MoveFileW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_MoveFileWithProgressA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MoveFileWithProgressA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_MoveFileWithProgressW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MoveFileWithProgressW
+@When[Windows_Win32_Storage_FileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_FileSystem_NetConnectionEnum == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NetConnectionEnum
+@When[Windows_Win32_Storage_FileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_FileSystem_NetFileClose == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NetFileClose
+@When[Windows_Win32_Storage_FileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_FileSystem_NetFileEnum == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NetFileEnum
+@When[Windows_Win32_Storage_FileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_FileSystem_NetFileGetInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NetFileGetInfo
+@When[Windows_Win32_Storage_FileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_FileSystem_NetServerAliasAdd == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NetServerAliasAdd
+@When[Windows_Win32_Storage_FileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_FileSystem_NetServerAliasDel == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NetServerAliasDel
+@When[Windows_Win32_Storage_FileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_FileSystem_NetServerAliasEnum == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NetServerAliasEnum
+@When[Windows_Win32_Storage_FileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_FileSystem_NetSessionDel == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NetSessionDel
+@When[Windows_Win32_Storage_FileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_FileSystem_NetSessionEnum == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NetSessionEnum
+@When[Windows_Win32_Storage_FileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_FileSystem_NetSessionGetInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NetSessionGetInfo
+@When[Windows_Win32_Storage_FileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_FileSystem_NetShareAdd == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NetShareAdd
+@When[Windows_Win32_Storage_FileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_FileSystem_NetShareCheck == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NetShareCheck
+@When[Windows_Win32_Storage_FileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_FileSystem_NetShareDel == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NetShareDel
+@When[Windows_Win32_Storage_FileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_FileSystem_NetShareDelEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NetShareDelEx
+@When[Windows_Win32_Storage_FileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_FileSystem_NetShareDelSticky == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NetShareDelSticky
+@When[Windows_Win32_Storage_FileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_FileSystem_NetShareEnum == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NetShareEnum
+@When[Windows_Win32_Storage_FileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_FileSystem_NetShareEnumSticky == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NetShareEnumSticky
+@When[Windows_Win32_Storage_FileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_FileSystem_NetShareGetInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NetShareGetInfo
+@When[Windows_Win32_Storage_FileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_FileSystem_NetShareSetInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NetShareSetInfo
+@When[Windows_Win32_Storage_FileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_FileSystem_NetStatisticsGet == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NetStatisticsGet
+@When[Windows_Win32_Storage_FileSystem == "on" && ADVAPI32 == "on" && Windows_Win32_Storage_FileSystem_OpenEncryptedFileRawA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OpenEncryptedFileRawA
+@When[Windows_Win32_Storage_FileSystem == "on" && ADVAPI32 == "on" && Windows_Win32_Storage_FileSystem_OpenEncryptedFileRawW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OpenEncryptedFileRawW
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_OpenEnlistment == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OpenEnlistment
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_OpenFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OpenFile
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_OpenFileById == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OpenFileById
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_OpenResourceManager == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OpenResourceManager
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_OpenTransaction == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OpenTransaction
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_OpenTransactionManager == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OpenTransactionManager
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_OpenTransactionManagerById == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OpenTransactionManagerById
+@When[Windows_Win32_Storage_FileSystem == "on" && API_MS_WIN_CORE_IORING_L1_1_0 == "on" && Windows_Win32_Storage_FileSystem_PopIoRingCompletion == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PopIoRingCompletion
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_PrePrepareComplete == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PrePrepareComplete
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_PrePrepareEnlistment == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PrePrepareEnlistment
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_PrepareComplete == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PrepareComplete
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_PrepareEnlistment == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PrepareEnlistment
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_PrepareLogArchive == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PrepareLogArchive
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_PrepareTape == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PrepareTape
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_QueryDosDeviceA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_QueryDosDeviceA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_QueryDosDeviceW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_QueryDosDeviceW
+@When[Windows_Win32_Storage_FileSystem == "on" && API_MS_WIN_CORE_IORING_L1_1_0 == "on" && Windows_Win32_Storage_FileSystem_QueryIoRingCapabilities == "on"]
+public import windows_sys.Win32._impl_l2.Windows_QueryIoRingCapabilities
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_QueryLogPolicy == "on"]
+public import windows_sys.Win32._impl_l2.Windows_QueryLogPolicy
+@When[Windows_Win32_Storage_FileSystem == "on" && ADVAPI32 == "on" && Windows_Win32_Storage_FileSystem_QueryRecoveryAgentsOnEncryptedFile == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_QueryRecoveryAgentsOnEncryptedFile
+@When[Windows_Win32_Storage_FileSystem == "on" && ADVAPI32 == "on" && Windows_Win32_Storage_FileSystem_QueryUsersOnEncryptedFile == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_QueryUsersOnEncryptedFile
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_ReOpenFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReOpenFile
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_ReadDirectoryChangesExW == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReadDirectoryChangesExW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_ReadDirectoryChangesW == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReadDirectoryChangesW
+@When[Windows_Win32_Storage_FileSystem == "on" && ADVAPI32 == "on" && Windows_Win32_Storage_FileSystem_ReadEncryptedFileRaw == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReadEncryptedFileRaw
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_ReadFile == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReadFile
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_ReadFileEx == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReadFileEx
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_ReadFileScatter == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReadFileScatter
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_ReadLogArchiveMetadata == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReadLogArchiveMetadata
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_ReadLogNotification == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReadLogNotification
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_ReadLogRecord == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReadLogRecord
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_ReadLogRestartArea == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReadLogRestartArea
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_ReadNextLogRecord == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReadNextLogRecord
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_ReadOnlyEnlistment == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReadOnlyEnlistment
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_ReadPreviousLogRestartArea == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReadPreviousLogRestartArea
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_RecoverEnlistment == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RecoverEnlistment
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_RecoverResourceManager == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RecoverResourceManager
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_RecoverTransactionManager == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RecoverTransactionManager
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_RegisterForLogWriteNotification == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RegisterForLogWriteNotification
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_RegisterManageableLogClient == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RegisterManageableLogClient
+@When[Windows_Win32_Storage_FileSystem == "on" && BINDFLTAPI == "on" && Windows_Win32_Storage_FileSystem_RemoveBindLink == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RemoveBindLink
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_RemoveDirectory2A == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RemoveDirectory2A
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_RemoveDirectory2W == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RemoveDirectory2W
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_RemoveDirectoryA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RemoveDirectoryA
+@When[Windows_Win32_Storage_FileSystem == "on" && API_MS_WIN_CORE_FILE_FROMAPP_L1_1_0 == "on" && Windows_Win32_Storage_FileSystem_RemoveDirectoryFromAppW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RemoveDirectoryFromAppW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_RemoveDirectoryTransactedA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RemoveDirectoryTransactedA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_RemoveDirectoryTransactedW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RemoveDirectoryTransactedW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_RemoveDirectoryW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RemoveDirectoryW
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_RemoveLogContainer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RemoveLogContainer
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_RemoveLogContainerSet == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RemoveLogContainerSet
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_RemoveLogPolicy == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RemoveLogPolicy
+@When[Windows_Win32_Storage_FileSystem == "on" && ADVAPI32 == "on" && Windows_Win32_Storage_FileSystem_RemoveUsersFromEncryptedFile == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RemoveUsersFromEncryptedFile
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_RenameTransactionManager == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RenameTransactionManager
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_ReplaceFileA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReplaceFileA
+@When[Windows_Win32_Storage_FileSystem == "on" && API_MS_WIN_CORE_FILE_FROMAPP_L1_1_0 == "on" && Windows_Win32_Storage_FileSystem_ReplaceFileFromAppW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReplaceFileFromAppW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_ReplaceFileW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReplaceFileW
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_ReserveAndAppendLog == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReserveAndAppendLog
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_ReserveAndAppendLogAligned == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReserveAndAppendLogAligned
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_RollbackComplete == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RollbackComplete
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_RollbackEnlistment == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RollbackEnlistment
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_RollbackTransaction == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RollbackTransaction
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_RollbackTransactionAsync == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RollbackTransactionAsync
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_RollforwardTransactionManager == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RollforwardTransactionManager
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_ScanLogContainers == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ScanLogContainers
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_SearchPathA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SearchPathA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_SearchPathW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SearchPathW
+@When[Windows_Win32_Storage_FileSystem == "on" && ADVAPI32 == "on" && Windows_Win32_Storage_FileSystem_SetEncryptedFileMetadata == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetEncryptedFileMetadata
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_SetEndOfFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetEndOfFile
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_SetEndOfLog == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetEndOfLog
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_SetEnlistmentRecoveryInformation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetEnlistmentRecoveryInformation
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_SetFileApisToANSI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetFileApisToANSI
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_SetFileApisToOEM == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetFileApisToOEM
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_SetFileAttributesA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetFileAttributesA
+@When[Windows_Win32_Storage_FileSystem == "on" && API_MS_WIN_CORE_FILE_FROMAPP_L1_1_0 == "on" && Windows_Win32_Storage_FileSystem_SetFileAttributesFromAppW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetFileAttributesFromAppW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_SetFileAttributesTransactedA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetFileAttributesTransactedA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_SetFileAttributesTransactedW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetFileAttributesTransactedW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_SetFileAttributesW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetFileAttributesW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_SetFileBandwidthReservation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetFileBandwidthReservation
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_SetFileCompletionNotificationModes == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetFileCompletionNotificationModes
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_SetFileInformationByHandle == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetFileInformationByHandle
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_SetFileIoOverlappedRange == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetFileIoOverlappedRange
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_SetFilePointer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetFilePointer
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_SetFilePointerEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetFilePointerEx
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_SetFileShortNameA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetFileShortNameA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_SetFileShortNameW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetFileShortNameW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_SetFileTime == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetFileTime
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_SetFileValidData == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetFileValidData
+@When[Windows_Win32_Storage_FileSystem == "on" && API_MS_WIN_CORE_IORING_L1_1_0 == "on" && Windows_Win32_Storage_FileSystem_SetIoRingCompletionEvent == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetIoRingCompletionEvent
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_SetLogArchiveMode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetLogArchiveMode
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_SetLogArchiveTail == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetLogArchiveTail
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_SetLogFileSizeWithPolicy == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetLogFileSizeWithPolicy
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_SetResourceManagerCompletionPort == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetResourceManagerCompletionPort
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_SetSearchPathMode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetSearchPathMode
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_SetTapeParameters == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetTapeParameters
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_SetTapePosition == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetTapePosition
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_SetTransactionInformation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetTransactionInformation
+@When[Windows_Win32_Storage_FileSystem == "on" && ADVAPI32 == "on" && Windows_Win32_Storage_FileSystem_SetUserFileEncryptionKey == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetUserFileEncryptionKey
+@When[Windows_Win32_Storage_FileSystem == "on" && ADVAPI32 == "on" && Windows_Win32_Storage_FileSystem_SetUserFileEncryptionKeyEx == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetUserFileEncryptionKeyEx
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_SetVolumeLabelA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetVolumeLabelA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_SetVolumeLabelW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetVolumeLabelW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_SetVolumeMountPointA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetVolumeMountPointA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_SetVolumeMountPointW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetVolumeMountPointW
+@When[Windows_Win32_Storage_FileSystem == "on" && KTMW32 == "on" && Windows_Win32_Storage_FileSystem_SinglePhaseReject == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SinglePhaseReject
+@When[Windows_Win32_Storage_FileSystem == "on" && API_MS_WIN_CORE_IORING_L1_1_0 == "on" && Windows_Win32_Storage_FileSystem_SubmitIoRing == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SubmitIoRing
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_TerminateLogArchive == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TerminateLogArchive
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_TerminateReadLog == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TerminateReadLog
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_TruncateLog == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TruncateLog
+@When[Windows_Win32_Storage_FileSystem == "on" && TXFW32 == "on" && Windows_Win32_Storage_FileSystem_TxfGetThreadMiniVersionForCreate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TxfGetThreadMiniVersionForCreate
+@When[Windows_Win32_Storage_FileSystem == "on" && TXFW32 == "on" && Windows_Win32_Storage_FileSystem_TxfLogCreateFileReadContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TxfLogCreateFileReadContext
+@When[Windows_Win32_Storage_FileSystem == "on" && TXFW32 == "on" && Windows_Win32_Storage_FileSystem_TxfLogCreateRangeReadContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TxfLogCreateRangeReadContext
+@When[Windows_Win32_Storage_FileSystem == "on" && TXFW32 == "on" && Windows_Win32_Storage_FileSystem_TxfLogDestroyReadContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TxfLogDestroyReadContext
+@When[Windows_Win32_Storage_FileSystem == "on" && TXFW32 == "on" && Windows_Win32_Storage_FileSystem_TxfLogReadRecords == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TxfLogReadRecords
+@When[Windows_Win32_Storage_FileSystem == "on" && TXFW32 == "on" && Windows_Win32_Storage_FileSystem_TxfLogRecordGetFileName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TxfLogRecordGetFileName
+@When[Windows_Win32_Storage_FileSystem == "on" && TXFW32 == "on" && Windows_Win32_Storage_FileSystem_TxfLogRecordGetGenericType == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TxfLogRecordGetGenericType
+@When[Windows_Win32_Storage_FileSystem == "on" && TXFW32 == "on" && Windows_Win32_Storage_FileSystem_TxfReadMetadataInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TxfReadMetadataInfo
+@When[Windows_Win32_Storage_FileSystem == "on" && TXFW32 == "on" && Windows_Win32_Storage_FileSystem_TxfSetThreadMiniVersionForCreate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TxfSetThreadMiniVersionForCreate
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_UnlockFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UnlockFile
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_UnlockFileEx == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UnlockFileEx
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_ValidateLog == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ValidateLog
+@When[Windows_Win32_Storage_FileSystem == "on" && VERSION == "on" && Windows_Win32_Storage_FileSystem_VerFindFileA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VerFindFileA
+@When[Windows_Win32_Storage_FileSystem == "on" && VERSION == "on" && Windows_Win32_Storage_FileSystem_VerFindFileW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VerFindFileW
+@When[Windows_Win32_Storage_FileSystem == "on" && VERSION == "on" && Windows_Win32_Storage_FileSystem_VerInstallFileA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VerInstallFileA
+@When[Windows_Win32_Storage_FileSystem == "on" && VERSION == "on" && Windows_Win32_Storage_FileSystem_VerInstallFileW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VerInstallFileW
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_VerLanguageNameA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VerLanguageNameA
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_VerLanguageNameW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VerLanguageNameW
+@When[Windows_Win32_Storage_FileSystem == "on" && VERSION == "on" && Windows_Win32_Storage_FileSystem_VerQueryValueA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VerQueryValueA
+@When[Windows_Win32_Storage_FileSystem == "on" && VERSION == "on" && Windows_Win32_Storage_FileSystem_VerQueryValueW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VerQueryValueW
+@When[Windows_Win32_Storage_FileSystem == "on" && WOFUTIL == "on" && Windows_Win32_Storage_FileSystem_WofEnumEntries == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WofEnumEntries
+@When[Windows_Win32_Storage_FileSystem == "on" && WOFUTIL == "on" && Windows_Win32_Storage_FileSystem_WofFileEnumFiles == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WofFileEnumFiles
+@When[Windows_Win32_Storage_FileSystem == "on" && WOFUTIL == "on" && Windows_Win32_Storage_FileSystem_WofGetDriverVersion == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WofGetDriverVersion
+@When[Windows_Win32_Storage_FileSystem == "on" && WOFUTIL == "on" && Windows_Win32_Storage_FileSystem_WofIsExternalFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WofIsExternalFile
+@When[Windows_Win32_Storage_FileSystem == "on" && WOFUTIL == "on" && Windows_Win32_Storage_FileSystem_WofSetFileDataLocation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WofSetFileDataLocation
+@When[Windows_Win32_Storage_FileSystem == "on" && WOFUTIL == "on" && Windows_Win32_Storage_FileSystem_WofShouldCompressBinaries == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WofShouldCompressBinaries
+@When[Windows_Win32_Storage_FileSystem == "on" && WOFUTIL == "on" && Windows_Win32_Storage_FileSystem_WofWimAddEntry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WofWimAddEntry
+@When[Windows_Win32_Storage_FileSystem == "on" && WOFUTIL == "on" && Windows_Win32_Storage_FileSystem_WofWimEnumFiles == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WofWimEnumFiles
+@When[Windows_Win32_Storage_FileSystem == "on" && WOFUTIL == "on" && Windows_Win32_Storage_FileSystem_WofWimRemoveEntry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WofWimRemoveEntry
+@When[Windows_Win32_Storage_FileSystem == "on" && WOFUTIL == "on" && Windows_Win32_Storage_FileSystem_WofWimSuspendEntry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WofWimSuspendEntry
+@When[Windows_Win32_Storage_FileSystem == "on" && WOFUTIL == "on" && Windows_Win32_Storage_FileSystem_WofWimUpdateEntry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WofWimUpdateEntry
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_Wow64DisableWow64FsRedirection == "on"]
+public import windows_sys.Win32._impl_l2.Windows_Wow64DisableWow64FsRedirection
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_Wow64EnableWow64FsRedirection == "on"]
+public import windows_sys.Win32._impl_l2.Windows_Wow64EnableWow64FsRedirection
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_Wow64RevertWow64FsRedirection == "on"]
+public import windows_sys.Win32._impl_l2.Windows_Wow64RevertWow64FsRedirection
+@When[Windows_Win32_Storage_FileSystem == "on" && ADVAPI32 == "on" && Windows_Win32_Storage_FileSystem_WriteEncryptedFileRaw == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WriteEncryptedFileRaw
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_WriteFile == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WriteFile
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_WriteFileEx == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WriteFileEx
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_WriteFileGather == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WriteFileGather
+@When[Windows_Win32_Storage_FileSystem == "on" && CLFSW32 == "on" && Windows_Win32_Storage_FileSystem_WriteLogRestartArea == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WriteLogRestartArea
+@When[Windows_Win32_Storage_FileSystem == "on" && KERNEL32 == "on" && Windows_Win32_Storage_FileSystem_WriteTapemark == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WriteTapemark

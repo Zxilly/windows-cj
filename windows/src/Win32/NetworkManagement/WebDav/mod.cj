@@ -6,7 +6,6 @@ package windows.Win32.NetworkManagement.WebDav
 import std.collection.*
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 
@@ -210,30 +209,121 @@ public type PFNDAVAUTHCALLBACK_FREECRED = CFunc<(CPointer<Unit>) -> UInt32>
 @When[Windows_Win32_NetworkManagement_WebDav == "on"]
 public type PFNDAVAUTHCALLBACK = CFunc<(CPointer<UInt16>, CPointer<UInt16>, UInt32, UInt32, CPointer<DAV_CALLBACK_CREDAbi>, CPointer<AUTHNEXTSTEPAbi>, CPointer<PFNDAVAUTHCALLBACK_FREECRED>) -> UInt32>
 
-@When[NETAPI32 == "on"]
+@When[Windows_Win32_NetworkManagement_WebDav == "on" && NETAPI32 == "on" && Windows_Win32_NetworkManagement_WebDav_DavAddConnection == "on"]
 foreign {
     // param-hint: UserName optional
     // param-hint: Password optional
     // param-hint: ClientCert bytes=param[5]
     func DavAddConnection(ConnectionHandle: CPointer<CPointer<Unit>>, RemoteName: CPointer<UInt16>, UserName: CPointer<UInt16>, Password: CPointer<UInt16>, ClientCert: CPointer<UInt8>, CertSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WebDav == "on" && NETAPI32 == "on" && Windows_Win32_NetworkManagement_WebDav_DavAddConnection == "on"]
+public unsafe func Windows_DavAddConnection(ConnectionHandle: CPointer<CPointer<Unit>>, RemoteName: CPointer<UInt16>, UserName: CPointer<UInt16>, Password: CPointer<UInt16>, ClientCert: CPointer<UInt8>, CertSize: UInt32): UInt32 {
+    return DavAddConnection(ConnectionHandle, RemoteName, UserName, Password, ClientCert, CertSize)
+}
+
+@When[Windows_Win32_NetworkManagement_WebDav == "on" && NETAPI32 == "on" && Windows_Win32_NetworkManagement_WebDav_DavDeleteConnection == "on"]
+foreign {
     func DavDeleteConnection(ConnectionHandle: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WebDav == "on" && NETAPI32 == "on" && Windows_Win32_NetworkManagement_WebDav_DavDeleteConnection == "on"]
+public unsafe func Windows_DavDeleteConnection(ConnectionHandle: CPointer<Unit>): UInt32 {
+    return DavDeleteConnection(ConnectionHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WebDav == "on" && NETAPI32 == "on" && Windows_Win32_NetworkManagement_WebDav_DavFlushFile == "on"]
+foreign {
     func DavFlushFile(hFile: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WebDav == "on" && NETAPI32 == "on" && Windows_Win32_NetworkManagement_WebDav_DavFlushFile == "on"]
+public unsafe func Windows_DavFlushFile(hFile: CPointer<Unit>): UInt32 {
+    return DavFlushFile(hFile)
+}
+
+@When[Windows_Win32_NetworkManagement_WebDav == "on" && NETAPI32 == "on" && Windows_Win32_NetworkManagement_WebDav_DavGetExtendedError == "on"]
+foreign {
     // param-hint: ExtErrorString len=param[3]
     func DavGetExtendedError(hFile: CPointer<Unit>, ExtError: CPointer<UInt32>, ExtErrorString: CPointer<UInt16>, cChSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WebDav == "on" && NETAPI32 == "on" && Windows_Win32_NetworkManagement_WebDav_DavGetExtendedError == "on"]
+public unsafe func Windows_DavGetExtendedError(hFile: CPointer<Unit>, ExtError: CPointer<UInt32>, ExtErrorString: CPointer<UInt16>, cChSize: CPointer<UInt32>): UInt32 {
+    return DavGetExtendedError(hFile, ExtError, ExtErrorString, cChSize)
+}
+
+@When[Windows_Win32_NetworkManagement_WebDav == "on" && NETAPI32 == "on" && Windows_Win32_NetworkManagement_WebDav_DavGetHTTPFromUNCPath == "on"]
+foreign {
     // param-hint: Url len=param[2] optional
     func DavGetHTTPFromUNCPath(UncPath: CPointer<UInt16>, Url: CPointer<UInt16>, lpSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WebDav == "on" && NETAPI32 == "on" && Windows_Win32_NetworkManagement_WebDav_DavGetHTTPFromUNCPath == "on"]
+public unsafe func Windows_DavGetHTTPFromUNCPath(UncPath: CPointer<UInt16>, Url: CPointer<UInt16>, lpSize: CPointer<UInt32>): UInt32 {
+    return DavGetHTTPFromUNCPath(UncPath, Url, lpSize)
+}
+
+@When[Windows_Win32_NetworkManagement_WebDav == "on" && NETAPI32 == "on" && Windows_Win32_NetworkManagement_WebDav_DavGetUNCFromHTTPPath == "on"]
+foreign {
     // param-hint: UncPath len=param[2] optional
     func DavGetUNCFromHTTPPath(Url: CPointer<UInt16>, UncPath: CPointer<UInt16>, lpSize: CPointer<UInt32>): UInt32
 }
 
-@When[DAVCLNT == "on"]
+@When[Windows_Win32_NetworkManagement_WebDav == "on" && NETAPI32 == "on" && Windows_Win32_NetworkManagement_WebDav_DavGetUNCFromHTTPPath == "on"]
+public unsafe func Windows_DavGetUNCFromHTTPPath(Url: CPointer<UInt16>, UncPath: CPointer<UInt16>, lpSize: CPointer<UInt32>): UInt32 {
+    return DavGetUNCFromHTTPPath(Url, UncPath, lpSize)
+}
+
+@When[Windows_Win32_NetworkManagement_WebDav == "on" && DAVCLNT == "on" && Windows_Win32_NetworkManagement_WebDav_DavCancelConnectionsToServer == "on"]
 foreign {
     func DavCancelConnectionsToServer(lpName: CPointer<UInt16>, fForce: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WebDav == "on" && DAVCLNT == "on" && Windows_Win32_NetworkManagement_WebDav_DavCancelConnectionsToServer == "on"]
+public unsafe func Windows_DavCancelConnectionsToServer(lpName: CPointer<UInt16>, fForce: Int32): UInt32 {
+    return DavCancelConnectionsToServer(lpName, fForce)
+}
+
+@When[Windows_Win32_NetworkManagement_WebDav == "on" && DAVCLNT == "on" && Windows_Win32_NetworkManagement_WebDav_DavGetTheLockOwnerOfTheFile == "on"]
+foreign {
     // param-hint: LockOwnerName bytes=param[2] optional
     func DavGetTheLockOwnerOfTheFile(FileName: CPointer<UInt16>, LockOwnerName: CPointer<UInt16>, LockOwnerNameLengthInBytes: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WebDav == "on" && DAVCLNT == "on" && Windows_Win32_NetworkManagement_WebDav_DavGetTheLockOwnerOfTheFile == "on"]
+public unsafe func Windows_DavGetTheLockOwnerOfTheFile(FileName: CPointer<UInt16>, LockOwnerName: CPointer<UInt16>, LockOwnerNameLengthInBytes: CPointer<UInt32>): UInt32 {
+    return DavGetTheLockOwnerOfTheFile(FileName, LockOwnerName, LockOwnerNameLengthInBytes)
+}
+
+@When[Windows_Win32_NetworkManagement_WebDav == "on" && DAVCLNT == "on" && Windows_Win32_NetworkManagement_WebDav_DavInvalidateCache == "on"]
+foreign {
     func DavInvalidateCache(URLName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WebDav == "on" && DAVCLNT == "on" && Windows_Win32_NetworkManagement_WebDav_DavInvalidateCache == "on"]
+public unsafe func Windows_DavInvalidateCache(URLName: CPointer<UInt16>): UInt32 {
+    return DavInvalidateCache(URLName)
+}
+
+@When[Windows_Win32_NetworkManagement_WebDav == "on" && DAVCLNT == "on" && Windows_Win32_NetworkManagement_WebDav_DavRegisterAuthCallback == "on"]
+foreign {
     func DavRegisterAuthCallback(CallBack: PFNDAVAUTHCALLBACK, Version: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WebDav == "on" && DAVCLNT == "on" && Windows_Win32_NetworkManagement_WebDav_DavRegisterAuthCallback == "on"]
+public unsafe func Windows_DavRegisterAuthCallback(CallBack: PFNDAVAUTHCALLBACK, Version: UInt32): UInt32 {
+    return DavRegisterAuthCallback(CallBack, Version)
+}
+
+@When[Windows_Win32_NetworkManagement_WebDav == "on" && DAVCLNT == "on" && Windows_Win32_NetworkManagement_WebDav_DavUnregisterAuthCallback == "on"]
+foreign {
     func DavUnregisterAuthCallback(hCallback: UInt32): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_WebDav == "on" && DAVCLNT == "on" && Windows_Win32_NetworkManagement_WebDav_DavUnregisterAuthCallback == "on"]
+public unsafe func Windows_DavUnregisterAuthCallback(hCallback: UInt32): Unit {
+    DavUnregisterAuthCallback(hCallback)
 }
 
 @When[Windows_Win32_NetworkManagement_WebDav == "on"]

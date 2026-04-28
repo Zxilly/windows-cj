@@ -10,7 +10,6 @@ import windows_interface.{GUID}
 import windows_interface as windows_interface
 import windows_polyfill.{unionReadInt64, unionWriteInt64}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 import windows_core as windows_core
 
@@ -5827,32 +5826,86 @@ extend TOKEN_ACCESS_INFORMATION <: windows_core.CopyType & windows_core.RuntimeT
     }
 }
 
-@When[ADVAPI32 == "on"]
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AccessCheck == "on"]
 foreign {
     // param-hint: PrivilegeSet bytes=param[5] optional
     // pinvoke-hint: SetLastError
     func AccessCheck(pSecurityDescriptor: PSECURITY_DESCRIPTOR, ClientToken: CPointer<Unit>, DesiredAccess: UInt32, GenericMapping: CPointer<GENERIC_MAPPINGAbi>, PrivilegeSet: CPointer<PRIVILEGE_SETAbi>, PrivilegeSetLength: CPointer<UInt32>, GrantedAccess: CPointer<UInt32>, AccessStatus: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AccessCheck == "on"]
+public unsafe func Windows_AccessCheck(pSecurityDescriptor: PSECURITY_DESCRIPTOR, ClientToken: CPointer<Unit>, DesiredAccess: UInt32, GenericMapping: CPointer<GENERIC_MAPPINGAbi>, PrivilegeSet: CPointer<PRIVILEGE_SETAbi>, PrivilegeSetLength: CPointer<UInt32>, GrantedAccess: CPointer<UInt32>, AccessStatus: CPointer<Int32>): Int32 {
+    return AccessCheck(pSecurityDescriptor, ClientToken, DesiredAccess, GenericMapping, PrivilegeSet, PrivilegeSetLength, GrantedAccess, AccessStatus)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AccessCheckAndAuditAlarmA == "on"]
+foreign {
     // param-hint: HandleId optional
     // param-hint: ObjectName optional
     // pinvoke-hint: SetLastError
     func AccessCheckAndAuditAlarmA(SubsystemName: CPointer<UInt8>, HandleId: CPointer<Unit>, ObjectTypeName: CPointer<UInt8>, ObjectName: CPointer<UInt8>, SecurityDescriptor: PSECURITY_DESCRIPTOR, DesiredAccess: UInt32, GenericMapping: CPointer<GENERIC_MAPPINGAbi>, ObjectCreation: Int32, GrantedAccess: CPointer<UInt32>, AccessStatus: CPointer<Int32>, pfGenerateOnClose: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AccessCheckAndAuditAlarmA == "on"]
+public unsafe func Windows_AccessCheckAndAuditAlarmA(SubsystemName: CPointer<UInt8>, HandleId: CPointer<Unit>, ObjectTypeName: CPointer<UInt8>, ObjectName: CPointer<UInt8>, SecurityDescriptor: PSECURITY_DESCRIPTOR, DesiredAccess: UInt32, GenericMapping: CPointer<GENERIC_MAPPINGAbi>, ObjectCreation: Int32, GrantedAccess: CPointer<UInt32>, AccessStatus: CPointer<Int32>, pfGenerateOnClose: CPointer<Int32>): Int32 {
+    return AccessCheckAndAuditAlarmA(SubsystemName, HandleId, ObjectTypeName, ObjectName, SecurityDescriptor, DesiredAccess, GenericMapping, ObjectCreation, GrantedAccess, AccessStatus, pfGenerateOnClose)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AccessCheckAndAuditAlarmW == "on"]
+foreign {
     // param-hint: HandleId optional
     // param-hint: ObjectName optional
     func AccessCheckAndAuditAlarmW(SubsystemName: CPointer<UInt16>, HandleId: CPointer<Unit>, ObjectTypeName: CPointer<UInt16>, ObjectName: CPointer<UInt16>, SecurityDescriptor: PSECURITY_DESCRIPTOR, DesiredAccess: UInt32, GenericMapping: CPointer<GENERIC_MAPPINGAbi>, ObjectCreation: Int32, GrantedAccess: CPointer<UInt32>, AccessStatus: CPointer<Int32>, pfGenerateOnClose: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AccessCheckAndAuditAlarmW == "on"]
+public unsafe func Windows_AccessCheckAndAuditAlarmW(SubsystemName: CPointer<UInt16>, HandleId: CPointer<Unit>, ObjectTypeName: CPointer<UInt16>, ObjectName: CPointer<UInt16>, SecurityDescriptor: PSECURITY_DESCRIPTOR, DesiredAccess: UInt32, GenericMapping: CPointer<GENERIC_MAPPINGAbi>, ObjectCreation: Int32, GrantedAccess: CPointer<UInt32>, AccessStatus: CPointer<Int32>, pfGenerateOnClose: CPointer<Int32>): Int32 {
+    return AccessCheckAndAuditAlarmW(SubsystemName, HandleId, ObjectTypeName, ObjectName, SecurityDescriptor, DesiredAccess, GenericMapping, ObjectCreation, GrantedAccess, AccessStatus, pfGenerateOnClose)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AccessCheckByType == "on"]
+foreign {
     // param-hint: PrincipalSelfSid optional
     // param-hint: ObjectTypeList len=param[5] optional
     // param-hint: PrivilegeSet bytes=param[8] optional
     // pinvoke-hint: SetLastError
     func AccessCheckByType(pSecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, ClientToken: CPointer<Unit>, DesiredAccess: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LISTAbi>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPINGAbi>, PrivilegeSet: CPointer<PRIVILEGE_SETAbi>, PrivilegeSetLength: CPointer<UInt32>, GrantedAccess: CPointer<UInt32>, AccessStatus: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AccessCheckByType == "on"]
+public unsafe func Windows_AccessCheckByType(pSecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, ClientToken: CPointer<Unit>, DesiredAccess: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LISTAbi>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPINGAbi>, PrivilegeSet: CPointer<PRIVILEGE_SETAbi>, PrivilegeSetLength: CPointer<UInt32>, GrantedAccess: CPointer<UInt32>, AccessStatus: CPointer<Int32>): Int32 {
+    return AccessCheckByType(pSecurityDescriptor, PrincipalSelfSid, ClientToken, DesiredAccess, ObjectTypeList, ObjectTypeListLength, GenericMapping, PrivilegeSet, PrivilegeSetLength, GrantedAccess, AccessStatus)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AccessCheckByTypeAndAuditAlarmA == "on"]
+foreign {
     // param-hint: ObjectName optional
     // param-hint: PrincipalSelfSid optional
     // param-hint: ObjectTypeList len=param[10] optional
     // pinvoke-hint: SetLastError
     func AccessCheckByTypeAndAuditAlarmA(SubsystemName: CPointer<UInt8>, HandleId: CPointer<Unit>, ObjectTypeName: CPointer<UInt8>, ObjectName: CPointer<UInt8>, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: UInt32, AuditType: AUDIT_EVENT_TYPEAbi, Flags: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LISTAbi>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPINGAbi>, ObjectCreation: Int32, GrantedAccess: CPointer<UInt32>, AccessStatus: CPointer<Int32>, pfGenerateOnClose: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AccessCheckByTypeAndAuditAlarmA == "on"]
+public unsafe func Windows_AccessCheckByTypeAndAuditAlarmA(SubsystemName: CPointer<UInt8>, HandleId: CPointer<Unit>, ObjectTypeName: CPointer<UInt8>, ObjectName: CPointer<UInt8>, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: UInt32, AuditType: AUDIT_EVENT_TYPEAbi, Flags: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LISTAbi>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPINGAbi>, ObjectCreation: Int32, GrantedAccess: CPointer<UInt32>, AccessStatus: CPointer<Int32>, pfGenerateOnClose: CPointer<Int32>): Int32 {
+    return AccessCheckByTypeAndAuditAlarmA(SubsystemName, HandleId, ObjectTypeName, ObjectName, SecurityDescriptor, PrincipalSelfSid, DesiredAccess, AuditType, Flags, ObjectTypeList, ObjectTypeListLength, GenericMapping, ObjectCreation, GrantedAccess, AccessStatus, pfGenerateOnClose)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AccessCheckByTypeAndAuditAlarmW == "on"]
+foreign {
     // param-hint: ObjectName optional
     // param-hint: PrincipalSelfSid optional
     // param-hint: ObjectTypeList len=param[10] optional
     func AccessCheckByTypeAndAuditAlarmW(SubsystemName: CPointer<UInt16>, HandleId: CPointer<Unit>, ObjectTypeName: CPointer<UInt16>, ObjectName: CPointer<UInt16>, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: UInt32, AuditType: AUDIT_EVENT_TYPEAbi, Flags: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LISTAbi>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPINGAbi>, ObjectCreation: Int32, GrantedAccess: CPointer<UInt32>, AccessStatus: CPointer<Int32>, pfGenerateOnClose: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AccessCheckByTypeAndAuditAlarmW == "on"]
+public unsafe func Windows_AccessCheckByTypeAndAuditAlarmW(SubsystemName: CPointer<UInt16>, HandleId: CPointer<Unit>, ObjectTypeName: CPointer<UInt16>, ObjectName: CPointer<UInt16>, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: UInt32, AuditType: AUDIT_EVENT_TYPEAbi, Flags: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LISTAbi>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPINGAbi>, ObjectCreation: Int32, GrantedAccess: CPointer<UInt32>, AccessStatus: CPointer<Int32>, pfGenerateOnClose: CPointer<Int32>): Int32 {
+    return AccessCheckByTypeAndAuditAlarmW(SubsystemName, HandleId, ObjectTypeName, ObjectName, SecurityDescriptor, PrincipalSelfSid, DesiredAccess, AuditType, Flags, ObjectTypeList, ObjectTypeListLength, GenericMapping, ObjectCreation, GrantedAccess, AccessStatus, pfGenerateOnClose)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AccessCheckByTypeResultList == "on"]
+foreign {
     // param-hint: PrincipalSelfSid optional
     // param-hint: ObjectTypeList len=param[5] optional
     // param-hint: PrivilegeSet bytes=param[8] optional
@@ -5860,6 +5913,15 @@ foreign {
     // param-hint: AccessStatusList len=param[5]
     // pinvoke-hint: SetLastError
     func AccessCheckByTypeResultList(pSecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, ClientToken: CPointer<Unit>, DesiredAccess: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LISTAbi>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPINGAbi>, PrivilegeSet: CPointer<PRIVILEGE_SETAbi>, PrivilegeSetLength: CPointer<UInt32>, GrantedAccessList: CPointer<UInt32>, AccessStatusList: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AccessCheckByTypeResultList == "on"]
+public unsafe func Windows_AccessCheckByTypeResultList(pSecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, ClientToken: CPointer<Unit>, DesiredAccess: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LISTAbi>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPINGAbi>, PrivilegeSet: CPointer<PRIVILEGE_SETAbi>, PrivilegeSetLength: CPointer<UInt32>, GrantedAccessList: CPointer<UInt32>, AccessStatusList: CPointer<UInt32>): Int32 {
+    return AccessCheckByTypeResultList(pSecurityDescriptor, PrincipalSelfSid, ClientToken, DesiredAccess, ObjectTypeList, ObjectTypeListLength, GenericMapping, PrivilegeSet, PrivilegeSetLength, GrantedAccessList, AccessStatusList)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AccessCheckByTypeResultListAndAuditAlarmA == "on"]
+foreign {
     // param-hint: ObjectName optional
     // param-hint: PrincipalSelfSid optional
     // param-hint: ObjectTypeList len=param[10] optional
@@ -5867,6 +5929,15 @@ foreign {
     // param-hint: AccessStatusList len=param[10]
     // pinvoke-hint: SetLastError
     func AccessCheckByTypeResultListAndAuditAlarmA(SubsystemName: CPointer<UInt8>, HandleId: CPointer<Unit>, ObjectTypeName: CPointer<UInt8>, ObjectName: CPointer<UInt8>, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: UInt32, AuditType: AUDIT_EVENT_TYPEAbi, Flags: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LISTAbi>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPINGAbi>, ObjectCreation: Int32, GrantedAccess: CPointer<UInt32>, AccessStatusList: CPointer<UInt32>, pfGenerateOnClose: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AccessCheckByTypeResultListAndAuditAlarmA == "on"]
+public unsafe func Windows_AccessCheckByTypeResultListAndAuditAlarmA(SubsystemName: CPointer<UInt8>, HandleId: CPointer<Unit>, ObjectTypeName: CPointer<UInt8>, ObjectName: CPointer<UInt8>, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: UInt32, AuditType: AUDIT_EVENT_TYPEAbi, Flags: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LISTAbi>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPINGAbi>, ObjectCreation: Int32, GrantedAccess: CPointer<UInt32>, AccessStatusList: CPointer<UInt32>, pfGenerateOnClose: CPointer<Int32>): Int32 {
+    return AccessCheckByTypeResultListAndAuditAlarmA(SubsystemName, HandleId, ObjectTypeName, ObjectName, SecurityDescriptor, PrincipalSelfSid, DesiredAccess, AuditType, Flags, ObjectTypeList, ObjectTypeListLength, GenericMapping, ObjectCreation, GrantedAccess, AccessStatusList, pfGenerateOnClose)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AccessCheckByTypeResultListAndAuditAlarmByHandleA == "on"]
+foreign {
     // param-hint: ObjectName optional
     // param-hint: PrincipalSelfSid optional
     // param-hint: ObjectTypeList len=param[11] optional
@@ -5874,185 +5945,815 @@ foreign {
     // param-hint: AccessStatusList len=param[11]
     // pinvoke-hint: SetLastError
     func AccessCheckByTypeResultListAndAuditAlarmByHandleA(SubsystemName: CPointer<UInt8>, HandleId: CPointer<Unit>, ClientToken: CPointer<Unit>, ObjectTypeName: CPointer<UInt8>, ObjectName: CPointer<UInt8>, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: UInt32, AuditType: AUDIT_EVENT_TYPEAbi, Flags: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LISTAbi>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPINGAbi>, ObjectCreation: Int32, GrantedAccess: CPointer<UInt32>, AccessStatusList: CPointer<UInt32>, pfGenerateOnClose: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AccessCheckByTypeResultListAndAuditAlarmByHandleA == "on"]
+public unsafe func Windows_AccessCheckByTypeResultListAndAuditAlarmByHandleA(SubsystemName: CPointer<UInt8>, HandleId: CPointer<Unit>, ClientToken: CPointer<Unit>, ObjectTypeName: CPointer<UInt8>, ObjectName: CPointer<UInt8>, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: UInt32, AuditType: AUDIT_EVENT_TYPEAbi, Flags: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LISTAbi>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPINGAbi>, ObjectCreation: Int32, GrantedAccess: CPointer<UInt32>, AccessStatusList: CPointer<UInt32>, pfGenerateOnClose: CPointer<Int32>): Int32 {
+    return AccessCheckByTypeResultListAndAuditAlarmByHandleA(SubsystemName, HandleId, ClientToken, ObjectTypeName, ObjectName, SecurityDescriptor, PrincipalSelfSid, DesiredAccess, AuditType, Flags, ObjectTypeList, ObjectTypeListLength, GenericMapping, ObjectCreation, GrantedAccess, AccessStatusList, pfGenerateOnClose)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AccessCheckByTypeResultListAndAuditAlarmByHandleW == "on"]
+foreign {
     // param-hint: ObjectName optional
     // param-hint: PrincipalSelfSid optional
     // param-hint: ObjectTypeList len=param[11] optional
     // param-hint: GrantedAccessList len=param[11]
     // param-hint: AccessStatusList len=param[11]
     func AccessCheckByTypeResultListAndAuditAlarmByHandleW(SubsystemName: CPointer<UInt16>, HandleId: CPointer<Unit>, ClientToken: CPointer<Unit>, ObjectTypeName: CPointer<UInt16>, ObjectName: CPointer<UInt16>, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: UInt32, AuditType: AUDIT_EVENT_TYPEAbi, Flags: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LISTAbi>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPINGAbi>, ObjectCreation: Int32, GrantedAccessList: CPointer<UInt32>, AccessStatusList: CPointer<UInt32>, pfGenerateOnClose: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AccessCheckByTypeResultListAndAuditAlarmByHandleW == "on"]
+public unsafe func Windows_AccessCheckByTypeResultListAndAuditAlarmByHandleW(SubsystemName: CPointer<UInt16>, HandleId: CPointer<Unit>, ClientToken: CPointer<Unit>, ObjectTypeName: CPointer<UInt16>, ObjectName: CPointer<UInt16>, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: UInt32, AuditType: AUDIT_EVENT_TYPEAbi, Flags: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LISTAbi>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPINGAbi>, ObjectCreation: Int32, GrantedAccessList: CPointer<UInt32>, AccessStatusList: CPointer<UInt32>, pfGenerateOnClose: CPointer<Int32>): Int32 {
+    return AccessCheckByTypeResultListAndAuditAlarmByHandleW(SubsystemName, HandleId, ClientToken, ObjectTypeName, ObjectName, SecurityDescriptor, PrincipalSelfSid, DesiredAccess, AuditType, Flags, ObjectTypeList, ObjectTypeListLength, GenericMapping, ObjectCreation, GrantedAccessList, AccessStatusList, pfGenerateOnClose)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AccessCheckByTypeResultListAndAuditAlarmW == "on"]
+foreign {
     // param-hint: ObjectName optional
     // param-hint: PrincipalSelfSid optional
     // param-hint: ObjectTypeList len=param[10] optional
     // param-hint: GrantedAccessList len=param[10]
     // param-hint: AccessStatusList len=param[10]
     func AccessCheckByTypeResultListAndAuditAlarmW(SubsystemName: CPointer<UInt16>, HandleId: CPointer<Unit>, ObjectTypeName: CPointer<UInt16>, ObjectName: CPointer<UInt16>, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: UInt32, AuditType: AUDIT_EVENT_TYPEAbi, Flags: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LISTAbi>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPINGAbi>, ObjectCreation: Int32, GrantedAccessList: CPointer<UInt32>, AccessStatusList: CPointer<UInt32>, pfGenerateOnClose: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AccessCheckByTypeResultListAndAuditAlarmW == "on"]
+public unsafe func Windows_AccessCheckByTypeResultListAndAuditAlarmW(SubsystemName: CPointer<UInt16>, HandleId: CPointer<Unit>, ObjectTypeName: CPointer<UInt16>, ObjectName: CPointer<UInt16>, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: UInt32, AuditType: AUDIT_EVENT_TYPEAbi, Flags: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LISTAbi>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPINGAbi>, ObjectCreation: Int32, GrantedAccessList: CPointer<UInt32>, AccessStatusList: CPointer<UInt32>, pfGenerateOnClose: CPointer<Int32>): Int32 {
+    return AccessCheckByTypeResultListAndAuditAlarmW(SubsystemName, HandleId, ObjectTypeName, ObjectName, SecurityDescriptor, PrincipalSelfSid, DesiredAccess, AuditType, Flags, ObjectTypeList, ObjectTypeListLength, GenericMapping, ObjectCreation, GrantedAccessList, AccessStatusList, pfGenerateOnClose)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AddAccessAllowedAce == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func AddAccessAllowedAce(pAcl: CPointer<ACLAbi>, dwAceRevision: ACE_REVISIONAbi, AccessMask: UInt32, pSid: PSID): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AddAccessAllowedAce == "on"]
+public unsafe func Windows_AddAccessAllowedAce(pAcl: CPointer<ACLAbi>, dwAceRevision: ACE_REVISIONAbi, AccessMask: UInt32, pSid: PSID): Int32 {
+    return AddAccessAllowedAce(pAcl, dwAceRevision, AccessMask, pSid)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AddAccessAllowedAceEx == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func AddAccessAllowedAceEx(pAcl: CPointer<ACLAbi>, dwAceRevision: ACE_REVISIONAbi, AceFlags: ACE_FLAGSAbi, AccessMask: UInt32, pSid: PSID): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AddAccessAllowedAceEx == "on"]
+public unsafe func Windows_AddAccessAllowedAceEx(pAcl: CPointer<ACLAbi>, dwAceRevision: ACE_REVISIONAbi, AceFlags: ACE_FLAGSAbi, AccessMask: UInt32, pSid: PSID): Int32 {
+    return AddAccessAllowedAceEx(pAcl, dwAceRevision, AceFlags, AccessMask, pSid)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AddAccessAllowedObjectAce == "on"]
+foreign {
     // param-hint: ObjectTypeGuid optional
     // param-hint: InheritedObjectTypeGuid optional
     // pinvoke-hint: SetLastError
     func AddAccessAllowedObjectAce(pAcl: CPointer<ACLAbi>, dwAceRevision: ACE_REVISIONAbi, AceFlags: ACE_FLAGSAbi, AccessMask: UInt32, ObjectTypeGuid: CPointer<GUID>, InheritedObjectTypeGuid: CPointer<GUID>, pSid: PSID): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AddAccessAllowedObjectAce == "on"]
+public unsafe func Windows_AddAccessAllowedObjectAce(pAcl: CPointer<ACLAbi>, dwAceRevision: ACE_REVISIONAbi, AceFlags: ACE_FLAGSAbi, AccessMask: UInt32, ObjectTypeGuid: CPointer<GUID>, InheritedObjectTypeGuid: CPointer<GUID>, pSid: PSID): Int32 {
+    return AddAccessAllowedObjectAce(pAcl, dwAceRevision, AceFlags, AccessMask, ObjectTypeGuid, InheritedObjectTypeGuid, pSid)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AddAccessDeniedAce == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func AddAccessDeniedAce(pAcl: CPointer<ACLAbi>, dwAceRevision: ACE_REVISIONAbi, AccessMask: UInt32, pSid: PSID): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AddAccessDeniedAce == "on"]
+public unsafe func Windows_AddAccessDeniedAce(pAcl: CPointer<ACLAbi>, dwAceRevision: ACE_REVISIONAbi, AccessMask: UInt32, pSid: PSID): Int32 {
+    return AddAccessDeniedAce(pAcl, dwAceRevision, AccessMask, pSid)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AddAccessDeniedAceEx == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func AddAccessDeniedAceEx(pAcl: CPointer<ACLAbi>, dwAceRevision: ACE_REVISIONAbi, AceFlags: ACE_FLAGSAbi, AccessMask: UInt32, pSid: PSID): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AddAccessDeniedAceEx == "on"]
+public unsafe func Windows_AddAccessDeniedAceEx(pAcl: CPointer<ACLAbi>, dwAceRevision: ACE_REVISIONAbi, AceFlags: ACE_FLAGSAbi, AccessMask: UInt32, pSid: PSID): Int32 {
+    return AddAccessDeniedAceEx(pAcl, dwAceRevision, AceFlags, AccessMask, pSid)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AddAccessDeniedObjectAce == "on"]
+foreign {
     // param-hint: ObjectTypeGuid optional
     // param-hint: InheritedObjectTypeGuid optional
     // pinvoke-hint: SetLastError
     func AddAccessDeniedObjectAce(pAcl: CPointer<ACLAbi>, dwAceRevision: ACE_REVISIONAbi, AceFlags: ACE_FLAGSAbi, AccessMask: UInt32, ObjectTypeGuid: CPointer<GUID>, InheritedObjectTypeGuid: CPointer<GUID>, pSid: PSID): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AddAccessDeniedObjectAce == "on"]
+public unsafe func Windows_AddAccessDeniedObjectAce(pAcl: CPointer<ACLAbi>, dwAceRevision: ACE_REVISIONAbi, AceFlags: ACE_FLAGSAbi, AccessMask: UInt32, ObjectTypeGuid: CPointer<GUID>, InheritedObjectTypeGuid: CPointer<GUID>, pSid: PSID): Int32 {
+    return AddAccessDeniedObjectAce(pAcl, dwAceRevision, AceFlags, AccessMask, ObjectTypeGuid, InheritedObjectTypeGuid, pSid)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AddAce == "on"]
+foreign {
     // param-hint: pAceList bytes=param[4]
     // pinvoke-hint: SetLastError
     func AddAce(pAcl: CPointer<ACLAbi>, dwAceRevision: ACE_REVISIONAbi, dwStartingAceIndex: UInt32, pAceList: CPointer<Unit>, nAceListLength: UInt32): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AddAce == "on"]
+public unsafe func Windows_AddAce(pAcl: CPointer<ACLAbi>, dwAceRevision: ACE_REVISIONAbi, dwStartingAceIndex: UInt32, pAceList: CPointer<Unit>, nAceListLength: UInt32): Int32 {
+    return AddAce(pAcl, dwAceRevision, dwStartingAceIndex, pAceList, nAceListLength)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AddAuditAccessAce == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func AddAuditAccessAce(pAcl: CPointer<ACLAbi>, dwAceRevision: ACE_REVISIONAbi, dwAccessMask: UInt32, pSid: PSID, bAuditSuccess: Int32, bAuditFailure: Int32): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AddAuditAccessAce == "on"]
+public unsafe func Windows_AddAuditAccessAce(pAcl: CPointer<ACLAbi>, dwAceRevision: ACE_REVISIONAbi, dwAccessMask: UInt32, pSid: PSID, bAuditSuccess: Int32, bAuditFailure: Int32): Int32 {
+    return AddAuditAccessAce(pAcl, dwAceRevision, dwAccessMask, pSid, bAuditSuccess, bAuditFailure)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AddAuditAccessAceEx == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func AddAuditAccessAceEx(pAcl: CPointer<ACLAbi>, dwAceRevision: ACE_REVISIONAbi, AceFlags: ACE_FLAGSAbi, dwAccessMask: UInt32, pSid: PSID, bAuditSuccess: Int32, bAuditFailure: Int32): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AddAuditAccessAceEx == "on"]
+public unsafe func Windows_AddAuditAccessAceEx(pAcl: CPointer<ACLAbi>, dwAceRevision: ACE_REVISIONAbi, AceFlags: ACE_FLAGSAbi, dwAccessMask: UInt32, pSid: PSID, bAuditSuccess: Int32, bAuditFailure: Int32): Int32 {
+    return AddAuditAccessAceEx(pAcl, dwAceRevision, AceFlags, dwAccessMask, pSid, bAuditSuccess, bAuditFailure)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AddAuditAccessObjectAce == "on"]
+foreign {
     // param-hint: ObjectTypeGuid optional
     // param-hint: InheritedObjectTypeGuid optional
     // pinvoke-hint: SetLastError
     func AddAuditAccessObjectAce(pAcl: CPointer<ACLAbi>, dwAceRevision: ACE_REVISIONAbi, AceFlags: ACE_FLAGSAbi, AccessMask: UInt32, ObjectTypeGuid: CPointer<GUID>, InheritedObjectTypeGuid: CPointer<GUID>, pSid: PSID, bAuditSuccess: Int32, bAuditFailure: Int32): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AddAuditAccessObjectAce == "on"]
+public unsafe func Windows_AddAuditAccessObjectAce(pAcl: CPointer<ACLAbi>, dwAceRevision: ACE_REVISIONAbi, AceFlags: ACE_FLAGSAbi, AccessMask: UInt32, ObjectTypeGuid: CPointer<GUID>, InheritedObjectTypeGuid: CPointer<GUID>, pSid: PSID, bAuditSuccess: Int32, bAuditFailure: Int32): Int32 {
+    return AddAuditAccessObjectAce(pAcl, dwAceRevision, AceFlags, AccessMask, ObjectTypeGuid, InheritedObjectTypeGuid, pSid, bAuditSuccess, bAuditFailure)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AddConditionalAce == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func AddConditionalAce(pAcl: CPointer<ACLAbi>, dwAceRevision: ACE_REVISIONAbi, AceFlags: ACE_FLAGSAbi, AceType: UInt8, AccessMask: UInt32, pSid: PSID, ConditionStr: CPointer<UInt16>, ReturnLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AddConditionalAce == "on"]
+public unsafe func Windows_AddConditionalAce(pAcl: CPointer<ACLAbi>, dwAceRevision: ACE_REVISIONAbi, AceFlags: ACE_FLAGSAbi, AceType: UInt8, AccessMask: UInt32, pSid: PSID, ConditionStr: CPointer<UInt16>, ReturnLength: CPointer<UInt32>): Int32 {
+    return AddConditionalAce(pAcl, dwAceRevision, AceFlags, AceType, AccessMask, pSid, ConditionStr, ReturnLength)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AddMandatoryAce == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func AddMandatoryAce(pAcl: CPointer<ACLAbi>, dwAceRevision: ACE_REVISIONAbi, AceFlags: ACE_FLAGSAbi, MandatoryPolicy: UInt32, pLabelSid: PSID): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AddMandatoryAce == "on"]
+public unsafe func Windows_AddMandatoryAce(pAcl: CPointer<ACLAbi>, dwAceRevision: ACE_REVISIONAbi, AceFlags: ACE_FLAGSAbi, MandatoryPolicy: UInt32, pLabelSid: PSID): Int32 {
+    return AddMandatoryAce(pAcl, dwAceRevision, AceFlags, MandatoryPolicy, pLabelSid)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AdjustTokenGroups == "on"]
+foreign {
     // param-hint: NewState optional
     // param-hint: PreviousState bytes=param[3] optional
     // param-hint: ReturnLength optional
     // pinvoke-hint: SetLastError
     func AdjustTokenGroups(TokenHandle: CPointer<Unit>, ResetToDefault: Int32, NewState: CPointer<TOKEN_GROUPSAbi>, BufferLength: UInt32, PreviousState: CPointer<TOKEN_GROUPSAbi>, ReturnLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AdjustTokenGroups == "on"]
+public unsafe func Windows_AdjustTokenGroups(TokenHandle: CPointer<Unit>, ResetToDefault: Int32, NewState: CPointer<TOKEN_GROUPSAbi>, BufferLength: UInt32, PreviousState: CPointer<TOKEN_GROUPSAbi>, ReturnLength: CPointer<UInt32>): Int32 {
+    return AdjustTokenGroups(TokenHandle, ResetToDefault, NewState, BufferLength, PreviousState, ReturnLength)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AdjustTokenPrivileges == "on"]
+foreign {
     // param-hint: NewState optional
     // param-hint: PreviousState bytes=param[3] optional
     // param-hint: ReturnLength optional
     // pinvoke-hint: SetLastError
     func AdjustTokenPrivileges(TokenHandle: CPointer<Unit>, DisableAllPrivileges: Int32, NewState: CPointer<TOKEN_PRIVILEGESAbi>, BufferLength: UInt32, PreviousState: CPointer<TOKEN_PRIVILEGESAbi>, ReturnLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AdjustTokenPrivileges == "on"]
+public unsafe func Windows_AdjustTokenPrivileges(TokenHandle: CPointer<Unit>, DisableAllPrivileges: Int32, NewState: CPointer<TOKEN_PRIVILEGESAbi>, BufferLength: UInt32, PreviousState: CPointer<TOKEN_PRIVILEGESAbi>, ReturnLength: CPointer<UInt32>): Int32 {
+    return AdjustTokenPrivileges(TokenHandle, DisableAllPrivileges, NewState, BufferLength, PreviousState, ReturnLength)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AllocateAndInitializeSid == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func AllocateAndInitializeSid(pIdentifierAuthority: CPointer<SID_IDENTIFIER_AUTHORITYAbi>, nSubAuthorityCount: UInt8, nSubAuthority0: UInt32, nSubAuthority1: UInt32, nSubAuthority2: UInt32, nSubAuthority3: UInt32, nSubAuthority4: UInt32, nSubAuthority5: UInt32, nSubAuthority6: UInt32, nSubAuthority7: UInt32, pSid: CPointer<PSID>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AllocateAndInitializeSid == "on"]
+public unsafe func Windows_AllocateAndInitializeSid(pIdentifierAuthority: CPointer<SID_IDENTIFIER_AUTHORITYAbi>, nSubAuthorityCount: UInt8, nSubAuthority0: UInt32, nSubAuthority1: UInt32, nSubAuthority2: UInt32, nSubAuthority3: UInt32, nSubAuthority4: UInt32, nSubAuthority5: UInt32, nSubAuthority6: UInt32, nSubAuthority7: UInt32, pSid: CPointer<PSID>): Int32 {
+    return AllocateAndInitializeSid(pIdentifierAuthority, nSubAuthorityCount, nSubAuthority0, nSubAuthority1, nSubAuthority2, nSubAuthority3, nSubAuthority4, nSubAuthority5, nSubAuthority6, nSubAuthority7, pSid)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AllocateLocallyUniqueId == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func AllocateLocallyUniqueId(Luid: CPointer<Win32_Foundation.LUIDAbi>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AllocateLocallyUniqueId == "on"]
+public unsafe func Windows_AllocateLocallyUniqueId(Luid: CPointer<Win32_Foundation.LUIDAbi>): Int32 {
+    return AllocateLocallyUniqueId(Luid)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AreAllAccessesGranted == "on"]
+foreign {
     func AreAllAccessesGranted(GrantedAccess: UInt32, DesiredAccess: UInt32): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AreAllAccessesGranted == "on"]
+public unsafe func Windows_AreAllAccessesGranted(GrantedAccess: UInt32, DesiredAccess: UInt32): Int32 {
+    return AreAllAccessesGranted(GrantedAccess, DesiredAccess)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AreAnyAccessesGranted == "on"]
+foreign {
     func AreAnyAccessesGranted(GrantedAccess: UInt32, DesiredAccess: UInt32): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AreAnyAccessesGranted == "on"]
+public unsafe func Windows_AreAnyAccessesGranted(GrantedAccess: UInt32, DesiredAccess: UInt32): Int32 {
+    return AreAnyAccessesGranted(GrantedAccess, DesiredAccess)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_CheckTokenMembership == "on"]
+foreign {
     // param-hint: TokenHandle optional
     // pinvoke-hint: SetLastError
     func CheckTokenMembership(TokenHandle: CPointer<Unit>, SidToCheck: PSID, IsMember: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_CheckTokenMembership == "on"]
+public unsafe func Windows_CheckTokenMembership(TokenHandle: CPointer<Unit>, SidToCheck: PSID, IsMember: CPointer<Int32>): Int32 {
+    return CheckTokenMembership(TokenHandle, SidToCheck, IsMember)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_ConvertToAutoInheritPrivateObjectSecurity == "on"]
+foreign {
     // param-hint: ParentDescriptor optional
     // param-hint: ObjectType optional
     // pinvoke-hint: SetLastError
     func ConvertToAutoInheritPrivateObjectSecurity(ParentDescriptor: PSECURITY_DESCRIPTOR, CurrentSecurityDescriptor: PSECURITY_DESCRIPTOR, NewSecurityDescriptor: CPointer<PSECURITY_DESCRIPTOR>, ObjectType: CPointer<GUID>, IsDirectoryObject: UInt8, GenericMapping: CPointer<GENERIC_MAPPINGAbi>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_ConvertToAutoInheritPrivateObjectSecurity == "on"]
+public unsafe func Windows_ConvertToAutoInheritPrivateObjectSecurity(ParentDescriptor: PSECURITY_DESCRIPTOR, CurrentSecurityDescriptor: PSECURITY_DESCRIPTOR, NewSecurityDescriptor: CPointer<PSECURITY_DESCRIPTOR>, ObjectType: CPointer<GUID>, IsDirectoryObject: UInt8, GenericMapping: CPointer<GENERIC_MAPPINGAbi>): Int32 {
+    return ConvertToAutoInheritPrivateObjectSecurity(ParentDescriptor, CurrentSecurityDescriptor, NewSecurityDescriptor, ObjectType, IsDirectoryObject, GenericMapping)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_CopySid == "on"]
+foreign {
     // param-hint: pDestinationSid bytes=param[0]
     // pinvoke-hint: SetLastError
     func CopySid(nDestinationSidLength: UInt32, pDestinationSid: PSID, pSourceSid: PSID): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_CopySid == "on"]
+public unsafe func Windows_CopySid(nDestinationSidLength: UInt32, pDestinationSid: PSID, pSourceSid: PSID): Int32 {
+    return CopySid(nDestinationSidLength, pDestinationSid, pSourceSid)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_CreatePrivateObjectSecurity == "on"]
+foreign {
     // param-hint: ParentDescriptor optional
     // param-hint: CreatorDescriptor optional
     // param-hint: Token optional
     // pinvoke-hint: SetLastError
     func CreatePrivateObjectSecurity(ParentDescriptor: PSECURITY_DESCRIPTOR, CreatorDescriptor: PSECURITY_DESCRIPTOR, NewDescriptor: CPointer<PSECURITY_DESCRIPTOR>, IsDirectoryObject: Int32, Token: CPointer<Unit>, GenericMapping: CPointer<GENERIC_MAPPINGAbi>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_CreatePrivateObjectSecurity == "on"]
+public unsafe func Windows_CreatePrivateObjectSecurity(ParentDescriptor: PSECURITY_DESCRIPTOR, CreatorDescriptor: PSECURITY_DESCRIPTOR, NewDescriptor: CPointer<PSECURITY_DESCRIPTOR>, IsDirectoryObject: Int32, Token: CPointer<Unit>, GenericMapping: CPointer<GENERIC_MAPPINGAbi>): Int32 {
+    return CreatePrivateObjectSecurity(ParentDescriptor, CreatorDescriptor, NewDescriptor, IsDirectoryObject, Token, GenericMapping)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_CreatePrivateObjectSecurityEx == "on"]
+foreign {
     // param-hint: ParentDescriptor optional
     // param-hint: CreatorDescriptor optional
     // param-hint: ObjectType optional
     // param-hint: Token optional
     // pinvoke-hint: SetLastError
     func CreatePrivateObjectSecurityEx(ParentDescriptor: PSECURITY_DESCRIPTOR, CreatorDescriptor: PSECURITY_DESCRIPTOR, NewDescriptor: CPointer<PSECURITY_DESCRIPTOR>, ObjectType: CPointer<GUID>, IsContainerObject: Int32, AutoInheritFlags: SECURITY_AUTO_INHERIT_FLAGSAbi, Token: CPointer<Unit>, GenericMapping: CPointer<GENERIC_MAPPINGAbi>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_CreatePrivateObjectSecurityEx == "on"]
+public unsafe func Windows_CreatePrivateObjectSecurityEx(ParentDescriptor: PSECURITY_DESCRIPTOR, CreatorDescriptor: PSECURITY_DESCRIPTOR, NewDescriptor: CPointer<PSECURITY_DESCRIPTOR>, ObjectType: CPointer<GUID>, IsContainerObject: Int32, AutoInheritFlags: SECURITY_AUTO_INHERIT_FLAGSAbi, Token: CPointer<Unit>, GenericMapping: CPointer<GENERIC_MAPPINGAbi>): Int32 {
+    return CreatePrivateObjectSecurityEx(ParentDescriptor, CreatorDescriptor, NewDescriptor, ObjectType, IsContainerObject, AutoInheritFlags, Token, GenericMapping)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_CreatePrivateObjectSecurityWithMultipleInheritance == "on"]
+foreign {
     // param-hint: ParentDescriptor optional
     // param-hint: CreatorDescriptor optional
     // param-hint: ObjectTypes len=param[4] optional
     // param-hint: Token optional
     // pinvoke-hint: SetLastError
     func CreatePrivateObjectSecurityWithMultipleInheritance(ParentDescriptor: PSECURITY_DESCRIPTOR, CreatorDescriptor: PSECURITY_DESCRIPTOR, NewDescriptor: CPointer<PSECURITY_DESCRIPTOR>, ObjectTypes: CPointer<CPointer<GUID>>, GuidCount: UInt32, IsContainerObject: Int32, AutoInheritFlags: SECURITY_AUTO_INHERIT_FLAGSAbi, Token: CPointer<Unit>, GenericMapping: CPointer<GENERIC_MAPPINGAbi>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_CreatePrivateObjectSecurityWithMultipleInheritance == "on"]
+public unsafe func Windows_CreatePrivateObjectSecurityWithMultipleInheritance(ParentDescriptor: PSECURITY_DESCRIPTOR, CreatorDescriptor: PSECURITY_DESCRIPTOR, NewDescriptor: CPointer<PSECURITY_DESCRIPTOR>, ObjectTypes: CPointer<CPointer<GUID>>, GuidCount: UInt32, IsContainerObject: Int32, AutoInheritFlags: SECURITY_AUTO_INHERIT_FLAGSAbi, Token: CPointer<Unit>, GenericMapping: CPointer<GENERIC_MAPPINGAbi>): Int32 {
+    return CreatePrivateObjectSecurityWithMultipleInheritance(ParentDescriptor, CreatorDescriptor, NewDescriptor, ObjectTypes, GuidCount, IsContainerObject, AutoInheritFlags, Token, GenericMapping)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_CreateRestrictedToken == "on"]
+foreign {
     // param-hint: SidsToDisable len=param[2] optional
     // param-hint: PrivilegesToDelete len=param[4] optional
     // param-hint: SidsToRestrict len=param[6] optional
     // pinvoke-hint: SetLastError
     func CreateRestrictedToken(ExistingTokenHandle: CPointer<Unit>, Flags: CREATE_RESTRICTED_TOKEN_FLAGSAbi, DisableSidCount: UInt32, SidsToDisable: CPointer<SID_AND_ATTRIBUTESAbi>, DeletePrivilegeCount: UInt32, PrivilegesToDelete: CPointer<LUID_AND_ATTRIBUTESAbi>, RestrictedSidCount: UInt32, SidsToRestrict: CPointer<SID_AND_ATTRIBUTESAbi>, NewTokenHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_CreateRestrictedToken == "on"]
+public unsafe func Windows_CreateRestrictedToken(ExistingTokenHandle: CPointer<Unit>, Flags: CREATE_RESTRICTED_TOKEN_FLAGSAbi, DisableSidCount: UInt32, SidsToDisable: CPointer<SID_AND_ATTRIBUTESAbi>, DeletePrivilegeCount: UInt32, PrivilegesToDelete: CPointer<LUID_AND_ATTRIBUTESAbi>, RestrictedSidCount: UInt32, SidsToRestrict: CPointer<SID_AND_ATTRIBUTESAbi>, NewTokenHandle: CPointer<CPointer<Unit>>): Int32 {
+    return CreateRestrictedToken(ExistingTokenHandle, Flags, DisableSidCount, SidsToDisable, DeletePrivilegeCount, PrivilegesToDelete, RestrictedSidCount, SidsToRestrict, NewTokenHandle)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_CreateWellKnownSid == "on"]
+foreign {
     // param-hint: DomainSid optional
     // param-hint: pSid bytes=param[3] optional
     // pinvoke-hint: SetLastError
     func CreateWellKnownSid(WellKnownSidType: WELL_KNOWN_SID_TYPEAbi, DomainSid: PSID, pSid: PSID, cbSid: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_CreateWellKnownSid == "on"]
+public unsafe func Windows_CreateWellKnownSid(WellKnownSidType: WELL_KNOWN_SID_TYPEAbi, DomainSid: PSID, pSid: PSID, cbSid: CPointer<UInt32>): Int32 {
+    return CreateWellKnownSid(WellKnownSidType, DomainSid, pSid, cbSid)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_DeleteAce == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func DeleteAce(pAcl: CPointer<ACLAbi>, dwAceIndex: UInt32): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_DeleteAce == "on"]
+public unsafe func Windows_DeleteAce(pAcl: CPointer<ACLAbi>, dwAceIndex: UInt32): Int32 {
+    return DeleteAce(pAcl, dwAceIndex)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_DestroyPrivateObjectSecurity == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func DestroyPrivateObjectSecurity(ObjectDescriptor: CPointer<PSECURITY_DESCRIPTOR>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_DestroyPrivateObjectSecurity == "on"]
+public unsafe func Windows_DestroyPrivateObjectSecurity(ObjectDescriptor: CPointer<PSECURITY_DESCRIPTOR>): Int32 {
+    return DestroyPrivateObjectSecurity(ObjectDescriptor)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_DuplicateToken == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func DuplicateToken(ExistingTokenHandle: CPointer<Unit>, ImpersonationLevel: SECURITY_IMPERSONATION_LEVELAbi, DuplicateTokenHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_DuplicateToken == "on"]
+public unsafe func Windows_DuplicateToken(ExistingTokenHandle: CPointer<Unit>, ImpersonationLevel: SECURITY_IMPERSONATION_LEVELAbi, DuplicateTokenHandle: CPointer<CPointer<Unit>>): Int32 {
+    return DuplicateToken(ExistingTokenHandle, ImpersonationLevel, DuplicateTokenHandle)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_DuplicateTokenEx == "on"]
+foreign {
     // param-hint: lpTokenAttributes optional
     // pinvoke-hint: SetLastError
     func DuplicateTokenEx(hExistingToken: CPointer<Unit>, dwDesiredAccess: TOKEN_ACCESS_MASKAbi, lpTokenAttributes: CPointer<SECURITY_ATTRIBUTESAbi>, ImpersonationLevel: SECURITY_IMPERSONATION_LEVELAbi, TokenType: TOKEN_TYPEAbi, phNewToken: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_DuplicateTokenEx == "on"]
+public unsafe func Windows_DuplicateTokenEx(hExistingToken: CPointer<Unit>, dwDesiredAccess: TOKEN_ACCESS_MASKAbi, lpTokenAttributes: CPointer<SECURITY_ATTRIBUTESAbi>, ImpersonationLevel: SECURITY_IMPERSONATION_LEVELAbi, TokenType: TOKEN_TYPEAbi, phNewToken: CPointer<CPointer<Unit>>): Int32 {
+    return DuplicateTokenEx(hExistingToken, dwDesiredAccess, lpTokenAttributes, ImpersonationLevel, TokenType, phNewToken)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_EqualDomainSid == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func EqualDomainSid(pSid1: PSID, pSid2: PSID, pfEqual: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_EqualDomainSid == "on"]
+public unsafe func Windows_EqualDomainSid(pSid1: PSID, pSid2: PSID, pfEqual: CPointer<Int32>): Int32 {
+    return EqualDomainSid(pSid1, pSid2, pfEqual)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_EqualPrefixSid == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func EqualPrefixSid(pSid1: PSID, pSid2: PSID): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_EqualPrefixSid == "on"]
+public unsafe func Windows_EqualPrefixSid(pSid1: PSID, pSid2: PSID): Int32 {
+    return EqualPrefixSid(pSid1, pSid2)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_EqualSid == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func EqualSid(pSid1: PSID, pSid2: PSID): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_EqualSid == "on"]
+public unsafe func Windows_EqualSid(pSid1: PSID, pSid2: PSID): Int32 {
+    return EqualSid(pSid1, pSid2)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_FindFirstFreeAce == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func FindFirstFreeAce(pAcl: CPointer<ACLAbi>, pAce: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_FindFirstFreeAce == "on"]
+public unsafe func Windows_FindFirstFreeAce(pAcl: CPointer<ACLAbi>, pAce: CPointer<CPointer<Unit>>): Int32 {
+    return FindFirstFreeAce(pAcl, pAce)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_FreeSid == "on"]
+foreign {
     func FreeSid(pSid: PSID): CPointer<Unit>
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_FreeSid == "on"]
+public unsafe func Windows_FreeSid(pSid: PSID): CPointer<Unit> {
+    return FreeSid(pSid)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetAce == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetAce(pAcl: CPointer<ACLAbi>, dwAceIndex: UInt32, pAce: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetAce == "on"]
+public unsafe func Windows_GetAce(pAcl: CPointer<ACLAbi>, dwAceIndex: UInt32, pAce: CPointer<CPointer<Unit>>): Int32 {
+    return GetAce(pAcl, dwAceIndex, pAce)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetAclInformation == "on"]
+foreign {
     // param-hint: pAclInformation bytes=param[2]
     // pinvoke-hint: SetLastError
     func GetAclInformation(pAcl: CPointer<ACLAbi>, pAclInformation: CPointer<Unit>, nAclInformationLength: UInt32, dwAclInformationClass: ACL_INFORMATION_CLASSAbi): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetAclInformation == "on"]
+public unsafe func Windows_GetAclInformation(pAcl: CPointer<ACLAbi>, pAclInformation: CPointer<Unit>, nAclInformationLength: UInt32, dwAclInformationClass: ACL_INFORMATION_CLASSAbi): Int32 {
+    return GetAclInformation(pAcl, pAclInformation, nAclInformationLength, dwAclInformationClass)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetFileSecurityA == "on"]
+foreign {
     // param-hint: pSecurityDescriptor bytes=param[3] optional
     // pinvoke-hint: SetLastError
     func GetFileSecurityA(lpFileName: CPointer<UInt8>, RequestedInformation: UInt32, pSecurityDescriptor: PSECURITY_DESCRIPTOR, nLength: UInt32, lpnLengthNeeded: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetFileSecurityA == "on"]
+public unsafe func Windows_GetFileSecurityA(lpFileName: CPointer<UInt8>, RequestedInformation: UInt32, pSecurityDescriptor: PSECURITY_DESCRIPTOR, nLength: UInt32, lpnLengthNeeded: CPointer<UInt32>): Int32 {
+    return GetFileSecurityA(lpFileName, RequestedInformation, pSecurityDescriptor, nLength, lpnLengthNeeded)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetFileSecurityW == "on"]
+foreign {
     // param-hint: pSecurityDescriptor bytes=param[3] optional
     // pinvoke-hint: SetLastError
     func GetFileSecurityW(lpFileName: CPointer<UInt16>, RequestedInformation: UInt32, pSecurityDescriptor: PSECURITY_DESCRIPTOR, nLength: UInt32, lpnLengthNeeded: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetFileSecurityW == "on"]
+public unsafe func Windows_GetFileSecurityW(lpFileName: CPointer<UInt16>, RequestedInformation: UInt32, pSecurityDescriptor: PSECURITY_DESCRIPTOR, nLength: UInt32, lpnLengthNeeded: CPointer<UInt32>): Int32 {
+    return GetFileSecurityW(lpFileName, RequestedInformation, pSecurityDescriptor, nLength, lpnLengthNeeded)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetKernelObjectSecurity == "on"]
+foreign {
     // param-hint: pSecurityDescriptor bytes=param[3] optional
     // pinvoke-hint: SetLastError
     func GetKernelObjectSecurity(Handle: CPointer<Unit>, RequestedInformation: UInt32, pSecurityDescriptor: PSECURITY_DESCRIPTOR, nLength: UInt32, lpnLengthNeeded: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetKernelObjectSecurity == "on"]
+public unsafe func Windows_GetKernelObjectSecurity(Handle: CPointer<Unit>, RequestedInformation: UInt32, pSecurityDescriptor: PSECURITY_DESCRIPTOR, nLength: UInt32, lpnLengthNeeded: CPointer<UInt32>): Int32 {
+    return GetKernelObjectSecurity(Handle, RequestedInformation, pSecurityDescriptor, nLength, lpnLengthNeeded)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetLengthSid == "on"]
+foreign {
     func GetLengthSid(pSid: PSID): UInt32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetLengthSid == "on"]
+public unsafe func Windows_GetLengthSid(pSid: PSID): UInt32 {
+    return GetLengthSid(pSid)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetPrivateObjectSecurity == "on"]
+foreign {
     // param-hint: ResultantDescriptor bytes=param[3] optional
     // pinvoke-hint: SetLastError
     func GetPrivateObjectSecurity(ObjectDescriptor: PSECURITY_DESCRIPTOR, SecurityInformation: OBJECT_SECURITY_INFORMATIONAbi, ResultantDescriptor: PSECURITY_DESCRIPTOR, DescriptorLength: UInt32, ReturnLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetPrivateObjectSecurity == "on"]
+public unsafe func Windows_GetPrivateObjectSecurity(ObjectDescriptor: PSECURITY_DESCRIPTOR, SecurityInformation: OBJECT_SECURITY_INFORMATIONAbi, ResultantDescriptor: PSECURITY_DESCRIPTOR, DescriptorLength: UInt32, ReturnLength: CPointer<UInt32>): Int32 {
+    return GetPrivateObjectSecurity(ObjectDescriptor, SecurityInformation, ResultantDescriptor, DescriptorLength, ReturnLength)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetSecurityDescriptorControl == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetSecurityDescriptorControl(pSecurityDescriptor: PSECURITY_DESCRIPTOR, pControl: CPointer<UInt16>, lpdwRevision: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetSecurityDescriptorControl == "on"]
+public unsafe func Windows_GetSecurityDescriptorControl(pSecurityDescriptor: PSECURITY_DESCRIPTOR, pControl: CPointer<UInt16>, lpdwRevision: CPointer<UInt32>): Int32 {
+    return GetSecurityDescriptorControl(pSecurityDescriptor, pControl, lpdwRevision)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetSecurityDescriptorDacl == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetSecurityDescriptorDacl(pSecurityDescriptor: PSECURITY_DESCRIPTOR, lpbDaclPresent: CPointer<Int32>, pDacl: CPointer<CPointer<ACLAbi>>, lpbDaclDefaulted: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetSecurityDescriptorDacl == "on"]
+public unsafe func Windows_GetSecurityDescriptorDacl(pSecurityDescriptor: PSECURITY_DESCRIPTOR, lpbDaclPresent: CPointer<Int32>, pDacl: CPointer<CPointer<ACLAbi>>, lpbDaclDefaulted: CPointer<Int32>): Int32 {
+    return GetSecurityDescriptorDacl(pSecurityDescriptor, lpbDaclPresent, pDacl, lpbDaclDefaulted)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetSecurityDescriptorGroup == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetSecurityDescriptorGroup(pSecurityDescriptor: PSECURITY_DESCRIPTOR, pGroup: CPointer<PSID>, lpbGroupDefaulted: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetSecurityDescriptorGroup == "on"]
+public unsafe func Windows_GetSecurityDescriptorGroup(pSecurityDescriptor: PSECURITY_DESCRIPTOR, pGroup: CPointer<PSID>, lpbGroupDefaulted: CPointer<Int32>): Int32 {
+    return GetSecurityDescriptorGroup(pSecurityDescriptor, pGroup, lpbGroupDefaulted)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetSecurityDescriptorLength == "on"]
+foreign {
     func GetSecurityDescriptorLength(pSecurityDescriptor: PSECURITY_DESCRIPTOR): UInt32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetSecurityDescriptorLength == "on"]
+public unsafe func Windows_GetSecurityDescriptorLength(pSecurityDescriptor: PSECURITY_DESCRIPTOR): UInt32 {
+    return GetSecurityDescriptorLength(pSecurityDescriptor)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetSecurityDescriptorOwner == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetSecurityDescriptorOwner(pSecurityDescriptor: PSECURITY_DESCRIPTOR, pOwner: CPointer<PSID>, lpbOwnerDefaulted: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetSecurityDescriptorOwner == "on"]
+public unsafe func Windows_GetSecurityDescriptorOwner(pSecurityDescriptor: PSECURITY_DESCRIPTOR, pOwner: CPointer<PSID>, lpbOwnerDefaulted: CPointer<Int32>): Int32 {
+    return GetSecurityDescriptorOwner(pSecurityDescriptor, pOwner, lpbOwnerDefaulted)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetSecurityDescriptorRMControl == "on"]
+foreign {
     func GetSecurityDescriptorRMControl(SecurityDescriptor: PSECURITY_DESCRIPTOR, RMControl: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetSecurityDescriptorRMControl == "on"]
+public unsafe func Windows_GetSecurityDescriptorRMControl(SecurityDescriptor: PSECURITY_DESCRIPTOR, RMControl: CPointer<UInt8>): UInt32 {
+    return GetSecurityDescriptorRMControl(SecurityDescriptor, RMControl)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetSecurityDescriptorSacl == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetSecurityDescriptorSacl(pSecurityDescriptor: PSECURITY_DESCRIPTOR, lpbSaclPresent: CPointer<Int32>, pSacl: CPointer<CPointer<ACLAbi>>, lpbSaclDefaulted: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetSecurityDescriptorSacl == "on"]
+public unsafe func Windows_GetSecurityDescriptorSacl(pSecurityDescriptor: PSECURITY_DESCRIPTOR, lpbSaclPresent: CPointer<Int32>, pSacl: CPointer<CPointer<ACLAbi>>, lpbSaclDefaulted: CPointer<Int32>): Int32 {
+    return GetSecurityDescriptorSacl(pSecurityDescriptor, lpbSaclPresent, pSacl, lpbSaclDefaulted)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetSidIdentifierAuthority == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetSidIdentifierAuthority(pSid: PSID): CPointer<SID_IDENTIFIER_AUTHORITYAbi>
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetSidIdentifierAuthority == "on"]
+public unsafe func Windows_GetSidIdentifierAuthority(pSid: PSID): CPointer<SID_IDENTIFIER_AUTHORITYAbi> {
+    return GetSidIdentifierAuthority(pSid)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetSidLengthRequired == "on"]
+foreign {
     func GetSidLengthRequired(nSubAuthorityCount: UInt8): UInt32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetSidLengthRequired == "on"]
+public unsafe func Windows_GetSidLengthRequired(nSubAuthorityCount: UInt8): UInt32 {
+    return GetSidLengthRequired(nSubAuthorityCount)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetSidSubAuthority == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetSidSubAuthority(pSid: PSID, nSubAuthority: UInt32): CPointer<UInt32>
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetSidSubAuthority == "on"]
+public unsafe func Windows_GetSidSubAuthority(pSid: PSID, nSubAuthority: UInt32): CPointer<UInt32> {
+    return GetSidSubAuthority(pSid, nSubAuthority)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetSidSubAuthorityCount == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetSidSubAuthorityCount(pSid: PSID): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetSidSubAuthorityCount == "on"]
+public unsafe func Windows_GetSidSubAuthorityCount(pSid: PSID): CPointer<UInt8> {
+    return GetSidSubAuthorityCount(pSid)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetTokenInformation == "on"]
+foreign {
     // param-hint: TokenInformation bytes=param[3] optional
     // pinvoke-hint: SetLastError
     func GetTokenInformation(TokenHandle: CPointer<Unit>, TokenInformationClass: TOKEN_INFORMATION_CLASSAbi, TokenInformation: CPointer<Unit>, TokenInformationLength: UInt32, ReturnLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetTokenInformation == "on"]
+public unsafe func Windows_GetTokenInformation(TokenHandle: CPointer<Unit>, TokenInformationClass: TOKEN_INFORMATION_CLASSAbi, TokenInformation: CPointer<Unit>, TokenInformationLength: UInt32, ReturnLength: CPointer<UInt32>): Int32 {
+    return GetTokenInformation(TokenHandle, TokenInformationClass, TokenInformation, TokenInformationLength, ReturnLength)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetWindowsAccountDomainSid == "on"]
+foreign {
     // param-hint: pDomainSid bytes=param[2] optional
     // pinvoke-hint: SetLastError
     func GetWindowsAccountDomainSid(pSid: PSID, pDomainSid: PSID, cbDomainSid: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_GetWindowsAccountDomainSid == "on"]
+public unsafe func Windows_GetWindowsAccountDomainSid(pSid: PSID, pDomainSid: PSID, cbDomainSid: CPointer<UInt32>): Int32 {
+    return GetWindowsAccountDomainSid(pSid, pDomainSid, cbDomainSid)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_ImpersonateAnonymousToken == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ImpersonateAnonymousToken(ThreadHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_ImpersonateAnonymousToken == "on"]
+public unsafe func Windows_ImpersonateAnonymousToken(ThreadHandle: CPointer<Unit>): Int32 {
+    return ImpersonateAnonymousToken(ThreadHandle)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_ImpersonateLoggedOnUser == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ImpersonateLoggedOnUser(hToken: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_ImpersonateLoggedOnUser == "on"]
+public unsafe func Windows_ImpersonateLoggedOnUser(hToken: CPointer<Unit>): Int32 {
+    return ImpersonateLoggedOnUser(hToken)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_ImpersonateSelf == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ImpersonateSelf(ImpersonationLevel: SECURITY_IMPERSONATION_LEVELAbi): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_ImpersonateSelf == "on"]
+public unsafe func Windows_ImpersonateSelf(ImpersonationLevel: SECURITY_IMPERSONATION_LEVELAbi): Int32 {
+    return ImpersonateSelf(ImpersonationLevel)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_InitializeAcl == "on"]
+foreign {
     // param-hint: pAcl bytes=param[1]
     // pinvoke-hint: SetLastError
     func InitializeAcl(pAcl: CPointer<ACLAbi>, nAclLength: UInt32, dwAclRevision: ACE_REVISIONAbi): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_InitializeAcl == "on"]
+public unsafe func Windows_InitializeAcl(pAcl: CPointer<ACLAbi>, nAclLength: UInt32, dwAclRevision: ACE_REVISIONAbi): Int32 {
+    return InitializeAcl(pAcl, nAclLength, dwAclRevision)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_InitializeSecurityDescriptor == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func InitializeSecurityDescriptor(pSecurityDescriptor: PSECURITY_DESCRIPTOR, dwRevision: UInt32): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_InitializeSecurityDescriptor == "on"]
+public unsafe func Windows_InitializeSecurityDescriptor(pSecurityDescriptor: PSECURITY_DESCRIPTOR, dwRevision: UInt32): Int32 {
+    return InitializeSecurityDescriptor(pSecurityDescriptor, dwRevision)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_InitializeSid == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func InitializeSid(Sid: PSID, pIdentifierAuthority: CPointer<SID_IDENTIFIER_AUTHORITYAbi>, nSubAuthorityCount: UInt8): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_InitializeSid == "on"]
+public unsafe func Windows_InitializeSid(Sid: PSID, pIdentifierAuthority: CPointer<SID_IDENTIFIER_AUTHORITYAbi>, nSubAuthorityCount: UInt8): Int32 {
+    return InitializeSid(Sid, pIdentifierAuthority, nSubAuthorityCount)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_IsTokenRestricted == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func IsTokenRestricted(TokenHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_IsTokenRestricted == "on"]
+public unsafe func Windows_IsTokenRestricted(TokenHandle: CPointer<Unit>): Int32 {
+    return IsTokenRestricted(TokenHandle)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_IsValidAcl == "on"]
+foreign {
     func IsValidAcl(pAcl: CPointer<ACLAbi>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_IsValidAcl == "on"]
+public unsafe func Windows_IsValidAcl(pAcl: CPointer<ACLAbi>): Int32 {
+    return IsValidAcl(pAcl)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_IsValidSecurityDescriptor == "on"]
+foreign {
     func IsValidSecurityDescriptor(pSecurityDescriptor: PSECURITY_DESCRIPTOR): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_IsValidSecurityDescriptor == "on"]
+public unsafe func Windows_IsValidSecurityDescriptor(pSecurityDescriptor: PSECURITY_DESCRIPTOR): Int32 {
+    return IsValidSecurityDescriptor(pSecurityDescriptor)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_IsValidSid == "on"]
+foreign {
     func IsValidSid(pSid: PSID): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_IsValidSid == "on"]
+public unsafe func Windows_IsValidSid(pSid: PSID): Int32 {
+    return IsValidSid(pSid)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_IsWellKnownSid == "on"]
+foreign {
     func IsWellKnownSid(pSid: PSID, WellKnownSidType: WELL_KNOWN_SID_TYPEAbi): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_IsWellKnownSid == "on"]
+public unsafe func Windows_IsWellKnownSid(pSid: PSID, WellKnownSidType: WELL_KNOWN_SID_TYPEAbi): Int32 {
+    return IsWellKnownSid(pSid, WellKnownSidType)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_LogonUserA == "on"]
+foreign {
     // param-hint: lpszDomain optional
     // param-hint: lpszPassword optional
     // pinvoke-hint: SetLastError
     func LogonUserA(lpszUsername: CPointer<UInt8>, lpszDomain: CPointer<UInt8>, lpszPassword: CPointer<UInt8>, dwLogonType: LOGON32_LOGONAbi, dwLogonProvider: LOGON32_PROVIDERAbi, phToken: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_LogonUserA == "on"]
+public unsafe func Windows_LogonUserA(lpszUsername: CPointer<UInt8>, lpszDomain: CPointer<UInt8>, lpszPassword: CPointer<UInt8>, dwLogonType: LOGON32_LOGONAbi, dwLogonProvider: LOGON32_PROVIDERAbi, phToken: CPointer<CPointer<Unit>>): Int32 {
+    return LogonUserA(lpszUsername, lpszDomain, lpszPassword, dwLogonType, dwLogonProvider, phToken)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_LogonUserExA == "on"]
+foreign {
     // param-hint: lpszDomain optional
     // param-hint: lpszPassword optional
     // param-hint: phToken optional
@@ -6062,6 +6763,15 @@ foreign {
     // param-hint: pQuotaLimits optional
     // pinvoke-hint: SetLastError
     func LogonUserExA(lpszUsername: CPointer<UInt8>, lpszDomain: CPointer<UInt8>, lpszPassword: CPointer<UInt8>, dwLogonType: LOGON32_LOGONAbi, dwLogonProvider: LOGON32_PROVIDERAbi, phToken: CPointer<CPointer<Unit>>, ppLogonSid: CPointer<PSID>, ppProfileBuffer: CPointer<CPointer<Unit>>, pdwProfileLength: CPointer<UInt32>, pQuotaLimits: CPointer<QUOTA_LIMITSAbi>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_LogonUserExA == "on"]
+public unsafe func Windows_LogonUserExA(lpszUsername: CPointer<UInt8>, lpszDomain: CPointer<UInt8>, lpszPassword: CPointer<UInt8>, dwLogonType: LOGON32_LOGONAbi, dwLogonProvider: LOGON32_PROVIDERAbi, phToken: CPointer<CPointer<Unit>>, ppLogonSid: CPointer<PSID>, ppProfileBuffer: CPointer<CPointer<Unit>>, pdwProfileLength: CPointer<UInt32>, pQuotaLimits: CPointer<QUOTA_LIMITSAbi>): Int32 {
+    return LogonUserExA(lpszUsername, lpszDomain, lpszPassword, dwLogonType, dwLogonProvider, phToken, ppLogonSid, ppProfileBuffer, pdwProfileLength, pQuotaLimits)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_LogonUserExW == "on"]
+foreign {
     // param-hint: lpszDomain optional
     // param-hint: lpszPassword optional
     // param-hint: phToken optional
@@ -6071,52 +6781,160 @@ foreign {
     // param-hint: pQuotaLimits optional
     // pinvoke-hint: SetLastError
     func LogonUserExW(lpszUsername: CPointer<UInt16>, lpszDomain: CPointer<UInt16>, lpszPassword: CPointer<UInt16>, dwLogonType: LOGON32_LOGONAbi, dwLogonProvider: LOGON32_PROVIDERAbi, phToken: CPointer<CPointer<Unit>>, ppLogonSid: CPointer<PSID>, ppProfileBuffer: CPointer<CPointer<Unit>>, pdwProfileLength: CPointer<UInt32>, pQuotaLimits: CPointer<QUOTA_LIMITSAbi>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_LogonUserExW == "on"]
+public unsafe func Windows_LogonUserExW(lpszUsername: CPointer<UInt16>, lpszDomain: CPointer<UInt16>, lpszPassword: CPointer<UInt16>, dwLogonType: LOGON32_LOGONAbi, dwLogonProvider: LOGON32_PROVIDERAbi, phToken: CPointer<CPointer<Unit>>, ppLogonSid: CPointer<PSID>, ppProfileBuffer: CPointer<CPointer<Unit>>, pdwProfileLength: CPointer<UInt32>, pQuotaLimits: CPointer<QUOTA_LIMITSAbi>): Int32 {
+    return LogonUserExW(lpszUsername, lpszDomain, lpszPassword, dwLogonType, dwLogonProvider, phToken, ppLogonSid, ppProfileBuffer, pdwProfileLength, pQuotaLimits)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_LogonUserW == "on"]
+foreign {
     // param-hint: lpszDomain optional
     // param-hint: lpszPassword optional
     // pinvoke-hint: SetLastError
     func LogonUserW(lpszUsername: CPointer<UInt16>, lpszDomain: CPointer<UInt16>, lpszPassword: CPointer<UInt16>, dwLogonType: LOGON32_LOGONAbi, dwLogonProvider: LOGON32_PROVIDERAbi, phToken: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_LogonUserW == "on"]
+public unsafe func Windows_LogonUserW(lpszUsername: CPointer<UInt16>, lpszDomain: CPointer<UInt16>, lpszPassword: CPointer<UInt16>, dwLogonType: LOGON32_LOGONAbi, dwLogonProvider: LOGON32_PROVIDERAbi, phToken: CPointer<CPointer<Unit>>): Int32 {
+    return LogonUserW(lpszUsername, lpszDomain, lpszPassword, dwLogonType, dwLogonProvider, phToken)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_LookupAccountNameA == "on"]
+foreign {
     // param-hint: lpSystemName optional
     // param-hint: Sid bytes=param[3] optional
     // param-hint: ReferencedDomainName len=param[5] optional
     // pinvoke-hint: SetLastError
     func LookupAccountNameA(lpSystemName: CPointer<UInt8>, lpAccountName: CPointer<UInt8>, Sid: PSID, cbSid: CPointer<UInt32>, ReferencedDomainName: CPointer<UInt8>, cchReferencedDomainName: CPointer<UInt32>, peUse: CPointer<SID_NAME_USEAbi>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_LookupAccountNameA == "on"]
+public unsafe func Windows_LookupAccountNameA(lpSystemName: CPointer<UInt8>, lpAccountName: CPointer<UInt8>, Sid: PSID, cbSid: CPointer<UInt32>, ReferencedDomainName: CPointer<UInt8>, cchReferencedDomainName: CPointer<UInt32>, peUse: CPointer<SID_NAME_USEAbi>): Int32 {
+    return LookupAccountNameA(lpSystemName, lpAccountName, Sid, cbSid, ReferencedDomainName, cchReferencedDomainName, peUse)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_LookupAccountNameW == "on"]
+foreign {
     // param-hint: lpSystemName optional
     // param-hint: Sid bytes=param[3] optional
     // param-hint: ReferencedDomainName len=param[5] optional
     // pinvoke-hint: SetLastError
     func LookupAccountNameW(lpSystemName: CPointer<UInt16>, lpAccountName: CPointer<UInt16>, Sid: PSID, cbSid: CPointer<UInt32>, ReferencedDomainName: CPointer<UInt16>, cchReferencedDomainName: CPointer<UInt32>, peUse: CPointer<SID_NAME_USEAbi>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_LookupAccountNameW == "on"]
+public unsafe func Windows_LookupAccountNameW(lpSystemName: CPointer<UInt16>, lpAccountName: CPointer<UInt16>, Sid: PSID, cbSid: CPointer<UInt32>, ReferencedDomainName: CPointer<UInt16>, cchReferencedDomainName: CPointer<UInt32>, peUse: CPointer<SID_NAME_USEAbi>): Int32 {
+    return LookupAccountNameW(lpSystemName, lpAccountName, Sid, cbSid, ReferencedDomainName, cchReferencedDomainName, peUse)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_LookupAccountSidA == "on"]
+foreign {
     // param-hint: lpSystemName optional
     // param-hint: Name len=param[3] optional
     // param-hint: ReferencedDomainName len=param[5] optional
     // pinvoke-hint: SetLastError
     func LookupAccountSidA(lpSystemName: CPointer<UInt8>, Sid: PSID, Name: CPointer<UInt8>, cchName: CPointer<UInt32>, ReferencedDomainName: CPointer<UInt8>, cchReferencedDomainName: CPointer<UInt32>, peUse: CPointer<SID_NAME_USEAbi>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_LookupAccountSidA == "on"]
+public unsafe func Windows_LookupAccountSidA(lpSystemName: CPointer<UInt8>, Sid: PSID, Name: CPointer<UInt8>, cchName: CPointer<UInt32>, ReferencedDomainName: CPointer<UInt8>, cchReferencedDomainName: CPointer<UInt32>, peUse: CPointer<SID_NAME_USEAbi>): Int32 {
+    return LookupAccountSidA(lpSystemName, Sid, Name, cchName, ReferencedDomainName, cchReferencedDomainName, peUse)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_LookupAccountSidW == "on"]
+foreign {
     // param-hint: lpSystemName optional
     // param-hint: Name len=param[3] optional
     // param-hint: ReferencedDomainName len=param[5] optional
     // pinvoke-hint: SetLastError
     func LookupAccountSidW(lpSystemName: CPointer<UInt16>, Sid: PSID, Name: CPointer<UInt16>, cchName: CPointer<UInt32>, ReferencedDomainName: CPointer<UInt16>, cchReferencedDomainName: CPointer<UInt32>, peUse: CPointer<SID_NAME_USEAbi>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_LookupAccountSidW == "on"]
+public unsafe func Windows_LookupAccountSidW(lpSystemName: CPointer<UInt16>, Sid: PSID, Name: CPointer<UInt16>, cchName: CPointer<UInt32>, ReferencedDomainName: CPointer<UInt16>, cchReferencedDomainName: CPointer<UInt32>, peUse: CPointer<SID_NAME_USEAbi>): Int32 {
+    return LookupAccountSidW(lpSystemName, Sid, Name, cchName, ReferencedDomainName, cchReferencedDomainName, peUse)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_LookupPrivilegeDisplayNameA == "on"]
+foreign {
     // param-hint: lpSystemName optional
     // param-hint: lpDisplayName len=param[3] optional
     // pinvoke-hint: SetLastError
     func LookupPrivilegeDisplayNameA(lpSystemName: CPointer<UInt8>, lpName: CPointer<UInt8>, lpDisplayName: CPointer<UInt8>, cchDisplayName: CPointer<UInt32>, lpLanguageId: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_LookupPrivilegeDisplayNameA == "on"]
+public unsafe func Windows_LookupPrivilegeDisplayNameA(lpSystemName: CPointer<UInt8>, lpName: CPointer<UInt8>, lpDisplayName: CPointer<UInt8>, cchDisplayName: CPointer<UInt32>, lpLanguageId: CPointer<UInt32>): Int32 {
+    return LookupPrivilegeDisplayNameA(lpSystemName, lpName, lpDisplayName, cchDisplayName, lpLanguageId)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_LookupPrivilegeDisplayNameW == "on"]
+foreign {
     // param-hint: lpSystemName optional
     // param-hint: lpDisplayName len=param[3] optional
     // pinvoke-hint: SetLastError
     func LookupPrivilegeDisplayNameW(lpSystemName: CPointer<UInt16>, lpName: CPointer<UInt16>, lpDisplayName: CPointer<UInt16>, cchDisplayName: CPointer<UInt32>, lpLanguageId: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_LookupPrivilegeDisplayNameW == "on"]
+public unsafe func Windows_LookupPrivilegeDisplayNameW(lpSystemName: CPointer<UInt16>, lpName: CPointer<UInt16>, lpDisplayName: CPointer<UInt16>, cchDisplayName: CPointer<UInt32>, lpLanguageId: CPointer<UInt32>): Int32 {
+    return LookupPrivilegeDisplayNameW(lpSystemName, lpName, lpDisplayName, cchDisplayName, lpLanguageId)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_LookupPrivilegeNameA == "on"]
+foreign {
     // param-hint: lpSystemName optional
     // param-hint: lpName len=param[3] optional
     // pinvoke-hint: SetLastError
     func LookupPrivilegeNameA(lpSystemName: CPointer<UInt8>, lpLuid: CPointer<Win32_Foundation.LUIDAbi>, lpName: CPointer<UInt8>, cchName: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_LookupPrivilegeNameA == "on"]
+public unsafe func Windows_LookupPrivilegeNameA(lpSystemName: CPointer<UInt8>, lpLuid: CPointer<Win32_Foundation.LUIDAbi>, lpName: CPointer<UInt8>, cchName: CPointer<UInt32>): Int32 {
+    return LookupPrivilegeNameA(lpSystemName, lpLuid, lpName, cchName)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_LookupPrivilegeNameW == "on"]
+foreign {
     // param-hint: lpSystemName optional
     // param-hint: lpName len=param[3] optional
     // pinvoke-hint: SetLastError
     func LookupPrivilegeNameW(lpSystemName: CPointer<UInt16>, lpLuid: CPointer<Win32_Foundation.LUIDAbi>, lpName: CPointer<UInt16>, cchName: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_LookupPrivilegeNameW == "on"]
+public unsafe func Windows_LookupPrivilegeNameW(lpSystemName: CPointer<UInt16>, lpLuid: CPointer<Win32_Foundation.LUIDAbi>, lpName: CPointer<UInt16>, cchName: CPointer<UInt32>): Int32 {
+    return LookupPrivilegeNameW(lpSystemName, lpLuid, lpName, cchName)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_LookupPrivilegeValueA == "on"]
+foreign {
     // param-hint: lpSystemName optional
     // pinvoke-hint: SetLastError
     func LookupPrivilegeValueA(lpSystemName: CPointer<UInt8>, lpName: CPointer<UInt8>, lpLuid: CPointer<Win32_Foundation.LUIDAbi>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_LookupPrivilegeValueA == "on"]
+public unsafe func Windows_LookupPrivilegeValueA(lpSystemName: CPointer<UInt8>, lpName: CPointer<UInt8>, lpLuid: CPointer<Win32_Foundation.LUIDAbi>): Int32 {
+    return LookupPrivilegeValueA(lpSystemName, lpName, lpLuid)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_LookupPrivilegeValueW == "on"]
+foreign {
     // param-hint: lpSystemName optional
     // pinvoke-hint: SetLastError
     func LookupPrivilegeValueW(lpSystemName: CPointer<UInt16>, lpName: CPointer<UInt16>, lpLuid: CPointer<Win32_Foundation.LUIDAbi>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_LookupPrivilegeValueW == "on"]
+public unsafe func Windows_LookupPrivilegeValueW(lpSystemName: CPointer<UInt16>, lpName: CPointer<UInt16>, lpLuid: CPointer<Win32_Foundation.LUIDAbi>): Int32 {
+    return LookupPrivilegeValueW(lpSystemName, lpName, lpLuid)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_MakeAbsoluteSD == "on"]
+foreign {
     // param-hint: pAbsoluteSecurityDescriptor bytes=param[2] optional
     // param-hint: pDacl bytes=param[4] optional
     // param-hint: pSacl bytes=param[6] optional
@@ -6124,114 +6942,472 @@ foreign {
     // param-hint: pPrimaryGroup bytes=param[10] optional
     // pinvoke-hint: SetLastError
     func MakeAbsoluteSD(pSelfRelativeSecurityDescriptor: PSECURITY_DESCRIPTOR, pAbsoluteSecurityDescriptor: PSECURITY_DESCRIPTOR, lpdwAbsoluteSecurityDescriptorSize: CPointer<UInt32>, pDacl: CPointer<ACLAbi>, lpdwDaclSize: CPointer<UInt32>, pSacl: CPointer<ACLAbi>, lpdwSaclSize: CPointer<UInt32>, pOwner: PSID, lpdwOwnerSize: CPointer<UInt32>, pPrimaryGroup: PSID, lpdwPrimaryGroupSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_MakeAbsoluteSD == "on"]
+public unsafe func Windows_MakeAbsoluteSD(pSelfRelativeSecurityDescriptor: PSECURITY_DESCRIPTOR, pAbsoluteSecurityDescriptor: PSECURITY_DESCRIPTOR, lpdwAbsoluteSecurityDescriptorSize: CPointer<UInt32>, pDacl: CPointer<ACLAbi>, lpdwDaclSize: CPointer<UInt32>, pSacl: CPointer<ACLAbi>, lpdwSaclSize: CPointer<UInt32>, pOwner: PSID, lpdwOwnerSize: CPointer<UInt32>, pPrimaryGroup: PSID, lpdwPrimaryGroupSize: CPointer<UInt32>): Int32 {
+    return MakeAbsoluteSD(pSelfRelativeSecurityDescriptor, pAbsoluteSecurityDescriptor, lpdwAbsoluteSecurityDescriptorSize, pDacl, lpdwDaclSize, pSacl, lpdwSaclSize, pOwner, lpdwOwnerSize, pPrimaryGroup, lpdwPrimaryGroupSize)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_MakeSelfRelativeSD == "on"]
+foreign {
     // param-hint: pSelfRelativeSecurityDescriptor bytes=param[2] optional
     // pinvoke-hint: SetLastError
     func MakeSelfRelativeSD(pAbsoluteSecurityDescriptor: PSECURITY_DESCRIPTOR, pSelfRelativeSecurityDescriptor: PSECURITY_DESCRIPTOR, lpdwBufferLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_MakeSelfRelativeSD == "on"]
+public unsafe func Windows_MakeSelfRelativeSD(pAbsoluteSecurityDescriptor: PSECURITY_DESCRIPTOR, pSelfRelativeSecurityDescriptor: PSECURITY_DESCRIPTOR, lpdwBufferLength: CPointer<UInt32>): Int32 {
+    return MakeSelfRelativeSD(pAbsoluteSecurityDescriptor, pSelfRelativeSecurityDescriptor, lpdwBufferLength)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_MapGenericMask == "on"]
+foreign {
     func MapGenericMask(AccessMask: CPointer<UInt32>, GenericMapping: CPointer<GENERIC_MAPPINGAbi>): Unit
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_MapGenericMask == "on"]
+public unsafe func Windows_MapGenericMask(AccessMask: CPointer<UInt32>, GenericMapping: CPointer<GENERIC_MAPPINGAbi>): Unit {
+    MapGenericMask(AccessMask, GenericMapping)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_ObjectCloseAuditAlarmA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ObjectCloseAuditAlarmA(SubsystemName: CPointer<UInt8>, HandleId: CPointer<Unit>, GenerateOnClose: Int32): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_ObjectCloseAuditAlarmA == "on"]
+public unsafe func Windows_ObjectCloseAuditAlarmA(SubsystemName: CPointer<UInt8>, HandleId: CPointer<Unit>, GenerateOnClose: Int32): Int32 {
+    return ObjectCloseAuditAlarmA(SubsystemName, HandleId, GenerateOnClose)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_ObjectCloseAuditAlarmW == "on"]
+foreign {
     func ObjectCloseAuditAlarmW(SubsystemName: CPointer<UInt16>, HandleId: CPointer<Unit>, GenerateOnClose: Int32): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_ObjectCloseAuditAlarmW == "on"]
+public unsafe func Windows_ObjectCloseAuditAlarmW(SubsystemName: CPointer<UInt16>, HandleId: CPointer<Unit>, GenerateOnClose: Int32): Int32 {
+    return ObjectCloseAuditAlarmW(SubsystemName, HandleId, GenerateOnClose)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_ObjectDeleteAuditAlarmA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ObjectDeleteAuditAlarmA(SubsystemName: CPointer<UInt8>, HandleId: CPointer<Unit>, GenerateOnClose: Int32): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_ObjectDeleteAuditAlarmA == "on"]
+public unsafe func Windows_ObjectDeleteAuditAlarmA(SubsystemName: CPointer<UInt8>, HandleId: CPointer<Unit>, GenerateOnClose: Int32): Int32 {
+    return ObjectDeleteAuditAlarmA(SubsystemName, HandleId, GenerateOnClose)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_ObjectDeleteAuditAlarmW == "on"]
+foreign {
     func ObjectDeleteAuditAlarmW(SubsystemName: CPointer<UInt16>, HandleId: CPointer<Unit>, GenerateOnClose: Int32): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_ObjectDeleteAuditAlarmW == "on"]
+public unsafe func Windows_ObjectDeleteAuditAlarmW(SubsystemName: CPointer<UInt16>, HandleId: CPointer<Unit>, GenerateOnClose: Int32): Int32 {
+    return ObjectDeleteAuditAlarmW(SubsystemName, HandleId, GenerateOnClose)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_ObjectOpenAuditAlarmA == "on"]
+foreign {
     // param-hint: ObjectName optional
     // param-hint: Privileges optional
     // pinvoke-hint: SetLastError
     func ObjectOpenAuditAlarmA(SubsystemName: CPointer<UInt8>, HandleId: CPointer<Unit>, ObjectTypeName: CPointer<UInt8>, ObjectName: CPointer<UInt8>, pSecurityDescriptor: PSECURITY_DESCRIPTOR, ClientToken: CPointer<Unit>, DesiredAccess: UInt32, GrantedAccess: UInt32, Privileges: CPointer<PRIVILEGE_SETAbi>, ObjectCreation: Int32, AccessGranted: Int32, GenerateOnClose: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_ObjectOpenAuditAlarmA == "on"]
+public unsafe func Windows_ObjectOpenAuditAlarmA(SubsystemName: CPointer<UInt8>, HandleId: CPointer<Unit>, ObjectTypeName: CPointer<UInt8>, ObjectName: CPointer<UInt8>, pSecurityDescriptor: PSECURITY_DESCRIPTOR, ClientToken: CPointer<Unit>, DesiredAccess: UInt32, GrantedAccess: UInt32, Privileges: CPointer<PRIVILEGE_SETAbi>, ObjectCreation: Int32, AccessGranted: Int32, GenerateOnClose: CPointer<Int32>): Int32 {
+    return ObjectOpenAuditAlarmA(SubsystemName, HandleId, ObjectTypeName, ObjectName, pSecurityDescriptor, ClientToken, DesiredAccess, GrantedAccess, Privileges, ObjectCreation, AccessGranted, GenerateOnClose)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_ObjectOpenAuditAlarmW == "on"]
+foreign {
     // param-hint: ObjectName optional
     // param-hint: Privileges optional
     func ObjectOpenAuditAlarmW(SubsystemName: CPointer<UInt16>, HandleId: CPointer<Unit>, ObjectTypeName: CPointer<UInt16>, ObjectName: CPointer<UInt16>, pSecurityDescriptor: PSECURITY_DESCRIPTOR, ClientToken: CPointer<Unit>, DesiredAccess: UInt32, GrantedAccess: UInt32, Privileges: CPointer<PRIVILEGE_SETAbi>, ObjectCreation: Int32, AccessGranted: Int32, GenerateOnClose: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_ObjectOpenAuditAlarmW == "on"]
+public unsafe func Windows_ObjectOpenAuditAlarmW(SubsystemName: CPointer<UInt16>, HandleId: CPointer<Unit>, ObjectTypeName: CPointer<UInt16>, ObjectName: CPointer<UInt16>, pSecurityDescriptor: PSECURITY_DESCRIPTOR, ClientToken: CPointer<Unit>, DesiredAccess: UInt32, GrantedAccess: UInt32, Privileges: CPointer<PRIVILEGE_SETAbi>, ObjectCreation: Int32, AccessGranted: Int32, GenerateOnClose: CPointer<Int32>): Int32 {
+    return ObjectOpenAuditAlarmW(SubsystemName, HandleId, ObjectTypeName, ObjectName, pSecurityDescriptor, ClientToken, DesiredAccess, GrantedAccess, Privileges, ObjectCreation, AccessGranted, GenerateOnClose)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_ObjectPrivilegeAuditAlarmA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ObjectPrivilegeAuditAlarmA(SubsystemName: CPointer<UInt8>, HandleId: CPointer<Unit>, ClientToken: CPointer<Unit>, DesiredAccess: UInt32, Privileges: CPointer<PRIVILEGE_SETAbi>, AccessGranted: Int32): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_ObjectPrivilegeAuditAlarmA == "on"]
+public unsafe func Windows_ObjectPrivilegeAuditAlarmA(SubsystemName: CPointer<UInt8>, HandleId: CPointer<Unit>, ClientToken: CPointer<Unit>, DesiredAccess: UInt32, Privileges: CPointer<PRIVILEGE_SETAbi>, AccessGranted: Int32): Int32 {
+    return ObjectPrivilegeAuditAlarmA(SubsystemName, HandleId, ClientToken, DesiredAccess, Privileges, AccessGranted)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_ObjectPrivilegeAuditAlarmW == "on"]
+foreign {
     func ObjectPrivilegeAuditAlarmW(SubsystemName: CPointer<UInt16>, HandleId: CPointer<Unit>, ClientToken: CPointer<Unit>, DesiredAccess: UInt32, Privileges: CPointer<PRIVILEGE_SETAbi>, AccessGranted: Int32): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_ObjectPrivilegeAuditAlarmW == "on"]
+public unsafe func Windows_ObjectPrivilegeAuditAlarmW(SubsystemName: CPointer<UInt16>, HandleId: CPointer<Unit>, ClientToken: CPointer<Unit>, DesiredAccess: UInt32, Privileges: CPointer<PRIVILEGE_SETAbi>, AccessGranted: Int32): Int32 {
+    return ObjectPrivilegeAuditAlarmW(SubsystemName, HandleId, ClientToken, DesiredAccess, Privileges, AccessGranted)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_PrivilegeCheck == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func PrivilegeCheck(ClientToken: CPointer<Unit>, RequiredPrivileges: CPointer<PRIVILEGE_SETAbi>, pfResult: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_PrivilegeCheck == "on"]
+public unsafe func Windows_PrivilegeCheck(ClientToken: CPointer<Unit>, RequiredPrivileges: CPointer<PRIVILEGE_SETAbi>, pfResult: CPointer<Int32>): Int32 {
+    return PrivilegeCheck(ClientToken, RequiredPrivileges, pfResult)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_PrivilegedServiceAuditAlarmA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func PrivilegedServiceAuditAlarmA(SubsystemName: CPointer<UInt8>, ServiceName: CPointer<UInt8>, ClientToken: CPointer<Unit>, Privileges: CPointer<PRIVILEGE_SETAbi>, AccessGranted: Int32): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_PrivilegedServiceAuditAlarmA == "on"]
+public unsafe func Windows_PrivilegedServiceAuditAlarmA(SubsystemName: CPointer<UInt8>, ServiceName: CPointer<UInt8>, ClientToken: CPointer<Unit>, Privileges: CPointer<PRIVILEGE_SETAbi>, AccessGranted: Int32): Int32 {
+    return PrivilegedServiceAuditAlarmA(SubsystemName, ServiceName, ClientToken, Privileges, AccessGranted)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_PrivilegedServiceAuditAlarmW == "on"]
+foreign {
     func PrivilegedServiceAuditAlarmW(SubsystemName: CPointer<UInt16>, ServiceName: CPointer<UInt16>, ClientToken: CPointer<Unit>, Privileges: CPointer<PRIVILEGE_SETAbi>, AccessGranted: Int32): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_PrivilegedServiceAuditAlarmW == "on"]
+public unsafe func Windows_PrivilegedServiceAuditAlarmW(SubsystemName: CPointer<UInt16>, ServiceName: CPointer<UInt16>, ClientToken: CPointer<Unit>, Privileges: CPointer<PRIVILEGE_SETAbi>, AccessGranted: Int32): Int32 {
+    return PrivilegedServiceAuditAlarmW(SubsystemName, ServiceName, ClientToken, Privileges, AccessGranted)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_QuerySecurityAccessMask == "on"]
+foreign {
     func QuerySecurityAccessMask(SecurityInformation: OBJECT_SECURITY_INFORMATIONAbi, DesiredAccess: CPointer<UInt32>): Unit
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_QuerySecurityAccessMask == "on"]
+public unsafe func Windows_QuerySecurityAccessMask(SecurityInformation: OBJECT_SECURITY_INFORMATIONAbi, DesiredAccess: CPointer<UInt32>): Unit {
+    QuerySecurityAccessMask(SecurityInformation, DesiredAccess)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_RevertToSelf == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func RevertToSelf(): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_RevertToSelf == "on"]
+public unsafe func Windows_RevertToSelf(): Int32 {
+    return RevertToSelf()
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_SetAclInformation == "on"]
+foreign {
     // param-hint: pAclInformation bytes=param[2]
     // pinvoke-hint: SetLastError
     func SetAclInformation(pAcl: CPointer<ACLAbi>, pAclInformation: CPointer<Unit>, nAclInformationLength: UInt32, dwAclInformationClass: ACL_INFORMATION_CLASSAbi): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_SetAclInformation == "on"]
+public unsafe func Windows_SetAclInformation(pAcl: CPointer<ACLAbi>, pAclInformation: CPointer<Unit>, nAclInformationLength: UInt32, dwAclInformationClass: ACL_INFORMATION_CLASSAbi): Int32 {
+    return SetAclInformation(pAcl, pAclInformation, nAclInformationLength, dwAclInformationClass)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_SetFileSecurityA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetFileSecurityA(lpFileName: CPointer<UInt8>, SecurityInformation: OBJECT_SECURITY_INFORMATIONAbi, pSecurityDescriptor: PSECURITY_DESCRIPTOR): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_SetFileSecurityA == "on"]
+public unsafe func Windows_SetFileSecurityA(lpFileName: CPointer<UInt8>, SecurityInformation: OBJECT_SECURITY_INFORMATIONAbi, pSecurityDescriptor: PSECURITY_DESCRIPTOR): Int32 {
+    return SetFileSecurityA(lpFileName, SecurityInformation, pSecurityDescriptor)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_SetFileSecurityW == "on"]
+foreign {
     func SetFileSecurityW(lpFileName: CPointer<UInt16>, SecurityInformation: OBJECT_SECURITY_INFORMATIONAbi, pSecurityDescriptor: PSECURITY_DESCRIPTOR): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_SetFileSecurityW == "on"]
+public unsafe func Windows_SetFileSecurityW(lpFileName: CPointer<UInt16>, SecurityInformation: OBJECT_SECURITY_INFORMATIONAbi, pSecurityDescriptor: PSECURITY_DESCRIPTOR): Int32 {
+    return SetFileSecurityW(lpFileName, SecurityInformation, pSecurityDescriptor)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_SetKernelObjectSecurity == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetKernelObjectSecurity(Handle: CPointer<Unit>, SecurityInformation: OBJECT_SECURITY_INFORMATIONAbi, SecurityDescriptor: PSECURITY_DESCRIPTOR): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_SetKernelObjectSecurity == "on"]
+public unsafe func Windows_SetKernelObjectSecurity(Handle: CPointer<Unit>, SecurityInformation: OBJECT_SECURITY_INFORMATIONAbi, SecurityDescriptor: PSECURITY_DESCRIPTOR): Int32 {
+    return SetKernelObjectSecurity(Handle, SecurityInformation, SecurityDescriptor)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_SetPrivateObjectSecurity == "on"]
+foreign {
     // param-hint: Token optional
     // pinvoke-hint: SetLastError
     func SetPrivateObjectSecurity(SecurityInformation: OBJECT_SECURITY_INFORMATIONAbi, ModificationDescriptor: PSECURITY_DESCRIPTOR, ObjectsSecurityDescriptor: CPointer<PSECURITY_DESCRIPTOR>, GenericMapping: CPointer<GENERIC_MAPPINGAbi>, Token: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_SetPrivateObjectSecurity == "on"]
+public unsafe func Windows_SetPrivateObjectSecurity(SecurityInformation: OBJECT_SECURITY_INFORMATIONAbi, ModificationDescriptor: PSECURITY_DESCRIPTOR, ObjectsSecurityDescriptor: CPointer<PSECURITY_DESCRIPTOR>, GenericMapping: CPointer<GENERIC_MAPPINGAbi>, Token: CPointer<Unit>): Int32 {
+    return SetPrivateObjectSecurity(SecurityInformation, ModificationDescriptor, ObjectsSecurityDescriptor, GenericMapping, Token)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_SetPrivateObjectSecurityEx == "on"]
+foreign {
     // param-hint: Token optional
     // pinvoke-hint: SetLastError
     func SetPrivateObjectSecurityEx(SecurityInformation: OBJECT_SECURITY_INFORMATIONAbi, ModificationDescriptor: PSECURITY_DESCRIPTOR, ObjectsSecurityDescriptor: CPointer<PSECURITY_DESCRIPTOR>, AutoInheritFlags: SECURITY_AUTO_INHERIT_FLAGSAbi, GenericMapping: CPointer<GENERIC_MAPPINGAbi>, Token: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_SetPrivateObjectSecurityEx == "on"]
+public unsafe func Windows_SetPrivateObjectSecurityEx(SecurityInformation: OBJECT_SECURITY_INFORMATIONAbi, ModificationDescriptor: PSECURITY_DESCRIPTOR, ObjectsSecurityDescriptor: CPointer<PSECURITY_DESCRIPTOR>, AutoInheritFlags: SECURITY_AUTO_INHERIT_FLAGSAbi, GenericMapping: CPointer<GENERIC_MAPPINGAbi>, Token: CPointer<Unit>): Int32 {
+    return SetPrivateObjectSecurityEx(SecurityInformation, ModificationDescriptor, ObjectsSecurityDescriptor, AutoInheritFlags, GenericMapping, Token)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_SetSecurityAccessMask == "on"]
+foreign {
     func SetSecurityAccessMask(SecurityInformation: OBJECT_SECURITY_INFORMATIONAbi, DesiredAccess: CPointer<UInt32>): Unit
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_SetSecurityAccessMask == "on"]
+public unsafe func Windows_SetSecurityAccessMask(SecurityInformation: OBJECT_SECURITY_INFORMATIONAbi, DesiredAccess: CPointer<UInt32>): Unit {
+    SetSecurityAccessMask(SecurityInformation, DesiredAccess)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_SetSecurityDescriptorControl == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetSecurityDescriptorControl(pSecurityDescriptor: PSECURITY_DESCRIPTOR, ControlBitsOfInterest: SECURITY_DESCRIPTOR_CONTROLAbi, ControlBitsToSet: SECURITY_DESCRIPTOR_CONTROLAbi): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_SetSecurityDescriptorControl == "on"]
+public unsafe func Windows_SetSecurityDescriptorControl(pSecurityDescriptor: PSECURITY_DESCRIPTOR, ControlBitsOfInterest: SECURITY_DESCRIPTOR_CONTROLAbi, ControlBitsToSet: SECURITY_DESCRIPTOR_CONTROLAbi): Int32 {
+    return SetSecurityDescriptorControl(pSecurityDescriptor, ControlBitsOfInterest, ControlBitsToSet)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_SetSecurityDescriptorDacl == "on"]
+foreign {
     // param-hint: pDacl optional
     // pinvoke-hint: SetLastError
     func SetSecurityDescriptorDacl(pSecurityDescriptor: PSECURITY_DESCRIPTOR, bDaclPresent: Int32, pDacl: CPointer<ACLAbi>, bDaclDefaulted: Int32): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_SetSecurityDescriptorDacl == "on"]
+public unsafe func Windows_SetSecurityDescriptorDacl(pSecurityDescriptor: PSECURITY_DESCRIPTOR, bDaclPresent: Int32, pDacl: CPointer<ACLAbi>, bDaclDefaulted: Int32): Int32 {
+    return SetSecurityDescriptorDacl(pSecurityDescriptor, bDaclPresent, pDacl, bDaclDefaulted)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_SetSecurityDescriptorGroup == "on"]
+foreign {
     // param-hint: pGroup optional
     // pinvoke-hint: SetLastError
     func SetSecurityDescriptorGroup(pSecurityDescriptor: PSECURITY_DESCRIPTOR, pGroup: PSID, bGroupDefaulted: Int32): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_SetSecurityDescriptorGroup == "on"]
+public unsafe func Windows_SetSecurityDescriptorGroup(pSecurityDescriptor: PSECURITY_DESCRIPTOR, pGroup: PSID, bGroupDefaulted: Int32): Int32 {
+    return SetSecurityDescriptorGroup(pSecurityDescriptor, pGroup, bGroupDefaulted)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_SetSecurityDescriptorOwner == "on"]
+foreign {
     // param-hint: pOwner optional
     // pinvoke-hint: SetLastError
     func SetSecurityDescriptorOwner(pSecurityDescriptor: PSECURITY_DESCRIPTOR, pOwner: PSID, bOwnerDefaulted: Int32): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_SetSecurityDescriptorOwner == "on"]
+public unsafe func Windows_SetSecurityDescriptorOwner(pSecurityDescriptor: PSECURITY_DESCRIPTOR, pOwner: PSID, bOwnerDefaulted: Int32): Int32 {
+    return SetSecurityDescriptorOwner(pSecurityDescriptor, pOwner, bOwnerDefaulted)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_SetSecurityDescriptorRMControl == "on"]
+foreign {
     // param-hint: RMControl optional
     func SetSecurityDescriptorRMControl(SecurityDescriptor: PSECURITY_DESCRIPTOR, RMControl: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_SetSecurityDescriptorRMControl == "on"]
+public unsafe func Windows_SetSecurityDescriptorRMControl(SecurityDescriptor: PSECURITY_DESCRIPTOR, RMControl: CPointer<UInt8>): UInt32 {
+    return SetSecurityDescriptorRMControl(SecurityDescriptor, RMControl)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_SetSecurityDescriptorSacl == "on"]
+foreign {
     // param-hint: pSacl optional
     // pinvoke-hint: SetLastError
     func SetSecurityDescriptorSacl(pSecurityDescriptor: PSECURITY_DESCRIPTOR, bSaclPresent: Int32, pSacl: CPointer<ACLAbi>, bSaclDefaulted: Int32): Int32
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_SetSecurityDescriptorSacl == "on"]
+public unsafe func Windows_SetSecurityDescriptorSacl(pSecurityDescriptor: PSECURITY_DESCRIPTOR, bSaclPresent: Int32, pSacl: CPointer<ACLAbi>, bSaclDefaulted: Int32): Int32 {
+    return SetSecurityDescriptorSacl(pSecurityDescriptor, bSaclPresent, pSacl, bSaclDefaulted)
+}
+
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_SetTokenInformation == "on"]
+foreign {
     // param-hint: TokenInformation bytes=param[3]
     // pinvoke-hint: SetLastError
     func SetTokenInformation(TokenHandle: CPointer<Unit>, TokenInformationClass: TOKEN_INFORMATION_CLASSAbi, TokenInformation: CPointer<Unit>, TokenInformationLength: UInt32): Int32
 }
 
-@When[KERNEL32 == "on"]
+@When[Windows_Win32_Security == "on" && ADVAPI32 == "on" && Windows_Win32_Security_SetTokenInformation == "on"]
+public unsafe func Windows_SetTokenInformation(TokenHandle: CPointer<Unit>, TokenInformationClass: TOKEN_INFORMATION_CLASSAbi, TokenInformation: CPointer<Unit>, TokenInformationLength: UInt32): Int32 {
+    return SetTokenInformation(TokenHandle, TokenInformationClass, TokenInformation, TokenInformationLength)
+}
+
+@When[Windows_Win32_Security == "on" && KERNEL32 == "on" && Windows_Win32_Security_AddResourceAttributeAce == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func AddResourceAttributeAce(pAcl: CPointer<ACLAbi>, dwAceRevision: ACE_REVISIONAbi, AceFlags: ACE_FLAGSAbi, AccessMask: UInt32, pSid: PSID, pAttributeInfo: CPointer<CLAIM_SECURITY_ATTRIBUTES_INFORMATIONAbi>, pReturnLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && KERNEL32 == "on" && Windows_Win32_Security_AddResourceAttributeAce == "on"]
+public unsafe func Windows_AddResourceAttributeAce(pAcl: CPointer<ACLAbi>, dwAceRevision: ACE_REVISIONAbi, AceFlags: ACE_FLAGSAbi, AccessMask: UInt32, pSid: PSID, pAttributeInfo: CPointer<CLAIM_SECURITY_ATTRIBUTES_INFORMATIONAbi>, pReturnLength: CPointer<UInt32>): Int32 {
+    return AddResourceAttributeAce(pAcl, dwAceRevision, AceFlags, AccessMask, pSid, pAttributeInfo, pReturnLength)
+}
+
+@When[Windows_Win32_Security == "on" && KERNEL32 == "on" && Windows_Win32_Security_AddScopedPolicyIDAce == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func AddScopedPolicyIDAce(pAcl: CPointer<ACLAbi>, dwAceRevision: ACE_REVISIONAbi, AceFlags: ACE_FLAGSAbi, AccessMask: UInt32, pSid: PSID): Int32
+}
+
+@When[Windows_Win32_Security == "on" && KERNEL32 == "on" && Windows_Win32_Security_AddScopedPolicyIDAce == "on"]
+public unsafe func Windows_AddScopedPolicyIDAce(pAcl: CPointer<ACLAbi>, dwAceRevision: ACE_REVISIONAbi, AceFlags: ACE_FLAGSAbi, AccessMask: UInt32, pSid: PSID): Int32 {
+    return AddScopedPolicyIDAce(pAcl, dwAceRevision, AceFlags, AccessMask, pSid)
+}
+
+@When[Windows_Win32_Security == "on" && KERNEL32 == "on" && Windows_Win32_Security_CheckTokenCapability == "on"]
+foreign {
     // param-hint: TokenHandle optional
     // pinvoke-hint: SetLastError
     func CheckTokenCapability(TokenHandle: CPointer<Unit>, CapabilitySidToCheck: PSID, HasCapability: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && KERNEL32 == "on" && Windows_Win32_Security_CheckTokenCapability == "on"]
+public unsafe func Windows_CheckTokenCapability(TokenHandle: CPointer<Unit>, CapabilitySidToCheck: PSID, HasCapability: CPointer<Int32>): Int32 {
+    return CheckTokenCapability(TokenHandle, CapabilitySidToCheck, HasCapability)
+}
+
+@When[Windows_Win32_Security == "on" && KERNEL32 == "on" && Windows_Win32_Security_CheckTokenMembershipEx == "on"]
+foreign {
     // param-hint: TokenHandle optional
     // pinvoke-hint: SetLastError
     func CheckTokenMembershipEx(TokenHandle: CPointer<Unit>, SidToCheck: PSID, Flags: UInt32, IsMember: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && KERNEL32 == "on" && Windows_Win32_Security_CheckTokenMembershipEx == "on"]
+public unsafe func Windows_CheckTokenMembershipEx(TokenHandle: CPointer<Unit>, SidToCheck: PSID, Flags: UInt32, IsMember: CPointer<Int32>): Int32 {
+    return CheckTokenMembershipEx(TokenHandle, SidToCheck, Flags, IsMember)
+}
+
+@When[Windows_Win32_Security == "on" && KERNEL32 == "on" && Windows_Win32_Security_GetAppContainerAce == "on"]
+foreign {
     // param-hint: AppContainerAceIndex optional
     func GetAppContainerAce(Acl: CPointer<ACLAbi>, StartingAceIndex: UInt32, AppContainerAce: CPointer<CPointer<Unit>>, AppContainerAceIndex: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && KERNEL32 == "on" && Windows_Win32_Security_GetAppContainerAce == "on"]
+public unsafe func Windows_GetAppContainerAce(Acl: CPointer<ACLAbi>, StartingAceIndex: UInt32, AppContainerAce: CPointer<CPointer<Unit>>, AppContainerAceIndex: CPointer<UInt32>): Int32 {
+    return GetAppContainerAce(Acl, StartingAceIndex, AppContainerAce, AppContainerAceIndex)
+}
+
+@When[Windows_Win32_Security == "on" && KERNEL32 == "on" && Windows_Win32_Security_GetCachedSigningLevel == "on"]
+foreign {
     // param-hint: Thumbprint bytes=param[4] optional
     // param-hint: ThumbprintSize optional
     // param-hint: ThumbprintAlgorithm optional
     func GetCachedSigningLevel(File: CPointer<Unit>, Flags: CPointer<UInt32>, SigningLevel: CPointer<UInt32>, Thumbprint: CPointer<UInt8>, ThumbprintSize: CPointer<UInt32>, ThumbprintAlgorithm: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && KERNEL32 == "on" && Windows_Win32_Security_GetCachedSigningLevel == "on"]
+public unsafe func Windows_GetCachedSigningLevel(File: CPointer<Unit>, Flags: CPointer<UInt32>, SigningLevel: CPointer<UInt32>, Thumbprint: CPointer<UInt8>, ThumbprintSize: CPointer<UInt32>, ThumbprintAlgorithm: CPointer<UInt32>): Int32 {
+    return GetCachedSigningLevel(File, Flags, SigningLevel, Thumbprint, ThumbprintSize, ThumbprintAlgorithm)
+}
+
+@When[Windows_Win32_Security == "on" && KERNEL32 == "on" && Windows_Win32_Security_SetCachedSigningLevel == "on"]
+foreign {
     // param-hint: SourceFiles len=param[1]
     // param-hint: TargetFile optional
     func SetCachedSigningLevel(SourceFiles: CPointer<CPointer<Unit>>, SourceFileCount: UInt32, Flags: UInt32, TargetFile: CPointer<Unit>): Int32
 }
 
-@When[USER32 == "on"]
+@When[Windows_Win32_Security == "on" && KERNEL32 == "on" && Windows_Win32_Security_SetCachedSigningLevel == "on"]
+public unsafe func Windows_SetCachedSigningLevel(SourceFiles: CPointer<CPointer<Unit>>, SourceFileCount: UInt32, Flags: UInt32, TargetFile: CPointer<Unit>): Int32 {
+    return SetCachedSigningLevel(SourceFiles, SourceFileCount, Flags, TargetFile)
+}
+
+@When[Windows_Win32_Security == "on" && USER32 == "on" && Windows_Win32_Security_GetUserObjectSecurity == "on"]
 foreign {
     // param-hint: pSID bytes=param[3] optional
     // pinvoke-hint: SetLastError
     func GetUserObjectSecurity(hObj: CPointer<Unit>, pSIRequested: CPointer<UInt32>, pSID: PSECURITY_DESCRIPTOR, nLength: UInt32, lpnLengthNeeded: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security == "on" && USER32 == "on" && Windows_Win32_Security_GetUserObjectSecurity == "on"]
+public unsafe func Windows_GetUserObjectSecurity(hObj: CPointer<Unit>, pSIRequested: CPointer<UInt32>, pSID: PSECURITY_DESCRIPTOR, nLength: UInt32, lpnLengthNeeded: CPointer<UInt32>): Int32 {
+    return GetUserObjectSecurity(hObj, pSIRequested, pSID, nLength, lpnLengthNeeded)
+}
+
+@When[Windows_Win32_Security == "on" && USER32 == "on" && Windows_Win32_Security_SetUserObjectSecurity == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetUserObjectSecurity(hObj: CPointer<Unit>, pSIRequested: CPointer<OBJECT_SECURITY_INFORMATIONAbi>, pSID: PSECURITY_DESCRIPTOR): Int32
 }
 
-@When[API_MS_WIN_SECURITY_BASE_L1_2_2 == "on"]
+@When[Windows_Win32_Security == "on" && USER32 == "on" && Windows_Win32_Security_SetUserObjectSecurity == "on"]
+public unsafe func Windows_SetUserObjectSecurity(hObj: CPointer<Unit>, pSIRequested: CPointer<OBJECT_SECURITY_INFORMATIONAbi>, pSID: PSECURITY_DESCRIPTOR): Int32 {
+    return SetUserObjectSecurity(hObj, pSIRequested, pSID)
+}
+
+@When[Windows_Win32_Security == "on" && API_MS_WIN_SECURITY_BASE_L1_2_2 == "on" && Windows_Win32_Security_DeriveCapabilitySidsFromName == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func DeriveCapabilitySidsFromName(CapName: CPointer<UInt16>, CapabilityGroupSids: CPointer<CPointer<PSID>>, CapabilityGroupSidCount: CPointer<UInt32>, CapabilitySids: CPointer<CPointer<PSID>>, CapabilitySidCount: CPointer<UInt32>): Int32
 }
 
-@When[NTDLL == "on"]
+@When[Windows_Win32_Security == "on" && API_MS_WIN_SECURITY_BASE_L1_2_2 == "on" && Windows_Win32_Security_DeriveCapabilitySidsFromName == "on"]
+public unsafe func Windows_DeriveCapabilitySidsFromName(CapName: CPointer<UInt16>, CapabilityGroupSids: CPointer<CPointer<PSID>>, CapabilityGroupSidCount: CPointer<UInt32>, CapabilitySids: CPointer<CPointer<PSID>>, CapabilitySidCount: CPointer<UInt32>): Int32 {
+    return DeriveCapabilitySidsFromName(CapName, CapabilityGroupSids, CapabilityGroupSidCount, CapabilitySids, CapabilitySidCount)
+}
+
+@When[Windows_Win32_Security == "on" && NTDLL == "on" && Windows_Win32_Security_RtlConvertSidToUnicodeString == "on"]
 foreign {
     func RtlConvertSidToUnicodeString(UnicodeString: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, Sid: PSID, AllocateDestinationString: UInt8): Int32
+}
+
+@When[Windows_Win32_Security == "on" && NTDLL == "on" && Windows_Win32_Security_RtlConvertSidToUnicodeString == "on"]
+public unsafe func Windows_RtlConvertSidToUnicodeString(UnicodeString: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, Sid: PSID, AllocateDestinationString: UInt8): Int32 {
+    return RtlConvertSidToUnicodeString(UnicodeString, Sid, AllocateDestinationString)
+}
+
+@When[Windows_Win32_Security == "on" && NTDLL == "on" && Windows_Win32_Security_RtlNormalizeSecurityDescriptor == "on"]
+foreign {
     // param-hint: NewSecurityDescriptor optional
     // param-hint: NewSecurityDescriptorLength optional
     func RtlNormalizeSecurityDescriptor(SecurityDescriptor: CPointer<PSECURITY_DESCRIPTOR>, SecurityDescriptorLength: UInt32, NewSecurityDescriptor: CPointer<PSECURITY_DESCRIPTOR>, NewSecurityDescriptorLength: CPointer<UInt32>, CheckOnly: UInt8): UInt8
+}
+
+@When[Windows_Win32_Security == "on" && NTDLL == "on" && Windows_Win32_Security_RtlNormalizeSecurityDescriptor == "on"]
+public unsafe func Windows_RtlNormalizeSecurityDescriptor(SecurityDescriptor: CPointer<PSECURITY_DESCRIPTOR>, SecurityDescriptorLength: UInt32, NewSecurityDescriptor: CPointer<PSECURITY_DESCRIPTOR>, NewSecurityDescriptorLength: CPointer<UInt32>, CheckOnly: UInt8): UInt8 {
+    return RtlNormalizeSecurityDescriptor(SecurityDescriptor, SecurityDescriptorLength, NewSecurityDescriptor, NewSecurityDescriptorLength, CheckOnly)
 }
 
 @When[Windows_Win32_Security == "on"]

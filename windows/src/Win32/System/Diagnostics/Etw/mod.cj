@@ -4,17 +4,15 @@
 package windows.Win32.System.Diagnostics.Etw
 
 import std.collection.*
+import windows_libloading
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_polyfill.{unionReadInt32, unionReadInt64, unionReadUInt16, unionReadUInt32, unionReadUInt64, unionWriteInt32, unionWriteInt64, unionWriteUInt16, unionWriteUInt32, unionWriteUInt64}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
-@When[Windows_Win32_System_Time == "on"]
 import windows.Win32.System.Time as Win32_System_Time
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows_core as windows_core
@@ -9174,203 +9172,971 @@ extend ETW_OPEN_TRACE_OPTIONS <: windows_core.CopyType & windows_core.RuntimeTyp
     }
 }
 
-@When[ADVAPI32 == "on"]
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_TraceMessage == "on"]
 @CallingConv[CDECL]
 foreign {
     // pinvoke-hint: cc=cdecl
     func TraceMessage(LoggerHandle: UInt64, MessageFlags: TRACE_MESSAGE_FLAGSAbi, MessageGuid: CPointer<GUID>, MessageNumber: UInt16, ...): windows_core.WIN32_ERROR
 }
 
-@When[ADVAPI32 == "on"]
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_CloseTrace == "on"]
 foreign {
     func CloseTrace(TraceHandle: PROCESSTRACE_HANDLE): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_CloseTrace == "on"]
+public unsafe func Windows_CloseTrace(TraceHandle: PROCESSTRACE_HANDLE): windows_core.WIN32_ERROR {
+    return CloseTrace(TraceHandle)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_ControlTraceA == "on"]
+foreign {
     // param-hint: InstanceName optional
     func ControlTraceA(TraceId: UInt64, InstanceName: CPointer<UInt8>, Properties: CPointer<EVENT_TRACE_PROPERTIESAbi>, ControlCode: EVENT_TRACE_CONTROLAbi): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_ControlTraceA == "on"]
+public unsafe func Windows_ControlTraceA(TraceId: UInt64, InstanceName: CPointer<UInt8>, Properties: CPointer<EVENT_TRACE_PROPERTIESAbi>, ControlCode: EVENT_TRACE_CONTROLAbi): windows_core.WIN32_ERROR {
+    return ControlTraceA(TraceId, InstanceName, Properties, ControlCode)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_ControlTraceW == "on"]
+foreign {
     // param-hint: InstanceName optional
     func ControlTraceW(TraceId: UInt64, InstanceName: CPointer<UInt16>, Properties: CPointer<EVENT_TRACE_PROPERTIESAbi>, ControlCode: EVENT_TRACE_CONTROLAbi): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_ControlTraceW == "on"]
+public unsafe func Windows_ControlTraceW(TraceId: UInt64, InstanceName: CPointer<UInt16>, Properties: CPointer<EVENT_TRACE_PROPERTIESAbi>, ControlCode: EVENT_TRACE_CONTROLAbi): windows_core.WIN32_ERROR {
+    return ControlTraceW(TraceId, InstanceName, Properties, ControlCode)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_CreateTraceInstanceId == "on"]
+foreign {
     func CreateTraceInstanceId(RegHandle: CPointer<Unit>, InstInfo: CPointer<EVENT_INSTANCE_INFOAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_CreateTraceInstanceId == "on"]
+public unsafe func Windows_CreateTraceInstanceId(RegHandle: CPointer<Unit>, InstInfo: CPointer<EVENT_INSTANCE_INFOAbi>): windows_core.WIN32_ERROR {
+    return CreateTraceInstanceId(RegHandle, InstInfo)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_CveEventWrite == "on"]
+foreign {
     // param-hint: AdditionalDetails optional
     func CveEventWrite(CveId: CPointer<UInt16>, AdditionalDetails: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_CveEventWrite == "on"]
+public unsafe func Windows_CveEventWrite(CveId: CPointer<UInt16>, AdditionalDetails: CPointer<UInt16>): Int32 {
+    return CveEventWrite(CveId, AdditionalDetails)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EnableTrace == "on"]
+foreign {
     func EnableTrace(Enable: UInt32, EnableFlag: UInt32, EnableLevel: UInt32, ControlGuid: CPointer<GUID>, TraceId: UInt64): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EnableTrace == "on"]
+public unsafe func Windows_EnableTrace(Enable: UInt32, EnableFlag: UInt32, EnableLevel: UInt32, ControlGuid: CPointer<GUID>, TraceId: UInt64): windows_core.WIN32_ERROR {
+    return EnableTrace(Enable, EnableFlag, EnableLevel, ControlGuid, TraceId)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EnableTraceEx == "on"]
+foreign {
     // param-hint: SourceId optional
     // param-hint: EnableFilterDesc optional
     func EnableTraceEx(ProviderId: CPointer<GUID>, SourceId: CPointer<GUID>, TraceId: UInt64, IsEnabled: UInt32, Level: UInt8, MatchAnyKeyword: UInt64, MatchAllKeyword: UInt64, EnableProperty: UInt32, EnableFilterDesc: CPointer<EVENT_FILTER_DESCRIPTORAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EnableTraceEx == "on"]
+public unsafe func Windows_EnableTraceEx(ProviderId: CPointer<GUID>, SourceId: CPointer<GUID>, TraceId: UInt64, IsEnabled: UInt32, Level: UInt8, MatchAnyKeyword: UInt64, MatchAllKeyword: UInt64, EnableProperty: UInt32, EnableFilterDesc: CPointer<EVENT_FILTER_DESCRIPTORAbi>): windows_core.WIN32_ERROR {
+    return EnableTraceEx(ProviderId, SourceId, TraceId, IsEnabled, Level, MatchAnyKeyword, MatchAllKeyword, EnableProperty, EnableFilterDesc)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EnableTraceEx2 == "on"]
+foreign {
     // param-hint: EnableParameters optional
     func EnableTraceEx2(TraceId: UInt64, ProviderId: CPointer<GUID>, ControlCode: UInt32, Level: UInt8, MatchAnyKeyword: UInt64, MatchAllKeyword: UInt64, Timeout: UInt32, EnableParameters: CPointer<ENABLE_TRACE_PARAMETERSAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EnableTraceEx2 == "on"]
+public unsafe func Windows_EnableTraceEx2(TraceId: UInt64, ProviderId: CPointer<GUID>, ControlCode: UInt32, Level: UInt8, MatchAnyKeyword: UInt64, MatchAllKeyword: UInt64, Timeout: UInt32, EnableParameters: CPointer<ENABLE_TRACE_PARAMETERSAbi>): windows_core.WIN32_ERROR {
+    return EnableTraceEx2(TraceId, ProviderId, ControlCode, Level, MatchAnyKeyword, MatchAllKeyword, Timeout, EnableParameters)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EnumerateTraceGuids == "on"]
+foreign {
     // param-hint: GuidPropertiesArray len=param[1]
     func EnumerateTraceGuids(GuidPropertiesArray: CPointer<CPointer<TRACE_GUID_PROPERTIESAbi>>, PropertyArrayCount: UInt32, GuidCount: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EnumerateTraceGuids == "on"]
+public unsafe func Windows_EnumerateTraceGuids(GuidPropertiesArray: CPointer<CPointer<TRACE_GUID_PROPERTIESAbi>>, PropertyArrayCount: UInt32, GuidCount: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return EnumerateTraceGuids(GuidPropertiesArray, PropertyArrayCount, GuidCount)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EnumerateTraceGuidsEx == "on"]
+foreign {
     // param-hint: InBuffer bytes=param[2] optional
     // param-hint: OutBuffer bytes=param[4] optional
     func EnumerateTraceGuidsEx(TraceQueryInfoClass: TRACE_QUERY_INFO_CLASSAbi, InBuffer: CPointer<Unit>, InBufferSize: UInt32, OutBuffer: CPointer<Unit>, OutBufferSize: UInt32, ReturnLength: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EnumerateTraceGuidsEx == "on"]
+public unsafe func Windows_EnumerateTraceGuidsEx(TraceQueryInfoClass: TRACE_QUERY_INFO_CLASSAbi, InBuffer: CPointer<Unit>, InBufferSize: UInt32, OutBuffer: CPointer<Unit>, OutBufferSize: UInt32, ReturnLength: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return EnumerateTraceGuidsEx(TraceQueryInfoClass, InBuffer, InBufferSize, OutBuffer, OutBufferSize, ReturnLength)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EventAccessControl == "on" && Windows_Win32_Security == "on"]
+foreign {
+    func EventAccessControl(Guid: CPointer<GUID>, Operation: UInt32, Sid: Win32_Security.PSID, Rights: UInt32, AllowOrDeny: UInt8): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EventAccessControl == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_EventAccessControl(Guid: CPointer<GUID>, Operation: UInt32, Sid: Win32_Security.PSID, Rights: UInt32, AllowOrDeny: UInt8): UInt32 {
+    return EventAccessControl(Guid, Operation, Sid, Rights, AllowOrDeny)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EventAccessQuery == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: Buffer bytes=param[2] optional
+    func EventAccessQuery(Guid: CPointer<GUID>, Buffer: Win32_Security.PSECURITY_DESCRIPTOR, BufferSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EventAccessQuery == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_EventAccessQuery(Guid: CPointer<GUID>, Buffer: Win32_Security.PSECURITY_DESCRIPTOR, BufferSize: CPointer<UInt32>): UInt32 {
+    return EventAccessQuery(Guid, Buffer, BufferSize)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EventAccessRemove == "on"]
+foreign {
     func EventAccessRemove(Guid: CPointer<GUID>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EventAccessRemove == "on"]
+public unsafe func Windows_EventAccessRemove(Guid: CPointer<GUID>): UInt32 {
+    return EventAccessRemove(Guid)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EventActivityIdControl == "on"]
+foreign {
     func EventActivityIdControl(ControlCode: UInt32, ActivityId: CPointer<GUID>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EventActivityIdControl == "on"]
+public unsafe func Windows_EventActivityIdControl(ControlCode: UInt32, ActivityId: CPointer<GUID>): UInt32 {
+    return EventActivityIdControl(ControlCode, ActivityId)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EventEnabled == "on"]
+foreign {
     func EventEnabled(RegHandle: REGHANDLE, EventDescriptor: CPointer<EVENT_DESCRIPTORAbi>): UInt8
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EventEnabled == "on"]
+public unsafe func Windows_EventEnabled(RegHandle: REGHANDLE, EventDescriptor: CPointer<EVENT_DESCRIPTORAbi>): UInt8 {
+    return EventEnabled(RegHandle, EventDescriptor)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EventProviderEnabled == "on"]
+foreign {
     func EventProviderEnabled(RegHandle: REGHANDLE, Level: UInt8, Keyword: UInt64): UInt8
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EventProviderEnabled == "on"]
+public unsafe func Windows_EventProviderEnabled(RegHandle: REGHANDLE, Level: UInt8, Keyword: UInt64): UInt8 {
+    return EventProviderEnabled(RegHandle, Level, Keyword)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EventRegister == "on"]
+foreign {
     // param-hint: EnableCallback optional
     // param-hint: CallbackContext optional
     func EventRegister(ProviderId: CPointer<GUID>, EnableCallback: PENABLECALLBACK, CallbackContext: CPointer<Unit>, RegHandle: CPointer<REGHANDLE>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EventRegister == "on"]
+public unsafe func Windows_EventRegister(ProviderId: CPointer<GUID>, EnableCallback: PENABLECALLBACK, CallbackContext: CPointer<Unit>, RegHandle: CPointer<REGHANDLE>): UInt32 {
+    return EventRegister(ProviderId, EnableCallback, CallbackContext, RegHandle)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EventSetInformation == "on"]
+foreign {
     // param-hint: EventInformation bytes=param[3]
     func EventSetInformation(RegHandle: REGHANDLE, InformationClass: EVENT_INFO_CLASSAbi, EventInformation: CPointer<Unit>, InformationLength: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EventSetInformation == "on"]
+public unsafe func Windows_EventSetInformation(RegHandle: REGHANDLE, InformationClass: EVENT_INFO_CLASSAbi, EventInformation: CPointer<Unit>, InformationLength: UInt32): UInt32 {
+    return EventSetInformation(RegHandle, InformationClass, EventInformation, InformationLength)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EventUnregister == "on"]
+foreign {
     func EventUnregister(RegHandle: REGHANDLE): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EventUnregister == "on"]
+public unsafe func Windows_EventUnregister(RegHandle: REGHANDLE): UInt32 {
+    return EventUnregister(RegHandle)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EventWrite == "on"]
+foreign {
     // param-hint: UserData len=param[2] optional
     func EventWrite(RegHandle: REGHANDLE, EventDescriptor: CPointer<EVENT_DESCRIPTORAbi>, UserDataCount: UInt32, UserData: CPointer<EVENT_DATA_DESCRIPTORAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EventWrite == "on"]
+public unsafe func Windows_EventWrite(RegHandle: REGHANDLE, EventDescriptor: CPointer<EVENT_DESCRIPTORAbi>, UserDataCount: UInt32, UserData: CPointer<EVENT_DATA_DESCRIPTORAbi>): UInt32 {
+    return EventWrite(RegHandle, EventDescriptor, UserDataCount, UserData)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EventWriteEx == "on"]
+foreign {
     // param-hint: ActivityId optional
     // param-hint: RelatedActivityId optional
     // param-hint: UserData len=param[6] optional
     func EventWriteEx(RegHandle: REGHANDLE, EventDescriptor: CPointer<EVENT_DESCRIPTORAbi>, Filter: UInt64, Flags: UInt32, ActivityId: CPointer<GUID>, RelatedActivityId: CPointer<GUID>, UserDataCount: UInt32, UserData: CPointer<EVENT_DATA_DESCRIPTORAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EventWriteEx == "on"]
+public unsafe func Windows_EventWriteEx(RegHandle: REGHANDLE, EventDescriptor: CPointer<EVENT_DESCRIPTORAbi>, Filter: UInt64, Flags: UInt32, ActivityId: CPointer<GUID>, RelatedActivityId: CPointer<GUID>, UserDataCount: UInt32, UserData: CPointer<EVENT_DATA_DESCRIPTORAbi>): UInt32 {
+    return EventWriteEx(RegHandle, EventDescriptor, Filter, Flags, ActivityId, RelatedActivityId, UserDataCount, UserData)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EventWriteString == "on"]
+foreign {
     func EventWriteString(RegHandle: REGHANDLE, Level: UInt8, Keyword: UInt64, String: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EventWriteString == "on"]
+public unsafe func Windows_EventWriteString(RegHandle: REGHANDLE, Level: UInt8, Keyword: UInt64, String: CPointer<UInt16>): UInt32 {
+    return EventWriteString(RegHandle, Level, Keyword, String)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EventWriteTransfer == "on"]
+foreign {
     // param-hint: ActivityId optional
     // param-hint: RelatedActivityId optional
     // param-hint: UserData len=param[4] optional
     func EventWriteTransfer(RegHandle: REGHANDLE, EventDescriptor: CPointer<EVENT_DESCRIPTORAbi>, ActivityId: CPointer<GUID>, RelatedActivityId: CPointer<GUID>, UserDataCount: UInt32, UserData: CPointer<EVENT_DATA_DESCRIPTORAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_EventWriteTransfer == "on"]
+public unsafe func Windows_EventWriteTransfer(RegHandle: REGHANDLE, EventDescriptor: CPointer<EVENT_DESCRIPTORAbi>, ActivityId: CPointer<GUID>, RelatedActivityId: CPointer<GUID>, UserDataCount: UInt32, UserData: CPointer<EVENT_DATA_DESCRIPTORAbi>): UInt32 {
+    return EventWriteTransfer(RegHandle, EventDescriptor, ActivityId, RelatedActivityId, UserDataCount, UserData)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_FlushTraceA == "on"]
+foreign {
     // param-hint: InstanceName optional
     func FlushTraceA(TraceId: UInt64, InstanceName: CPointer<UInt8>, Properties: CPointer<EVENT_TRACE_PROPERTIESAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_FlushTraceA == "on"]
+public unsafe func Windows_FlushTraceA(TraceId: UInt64, InstanceName: CPointer<UInt8>, Properties: CPointer<EVENT_TRACE_PROPERTIESAbi>): windows_core.WIN32_ERROR {
+    return FlushTraceA(TraceId, InstanceName, Properties)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_FlushTraceW == "on"]
+foreign {
     // param-hint: InstanceName optional
     func FlushTraceW(TraceId: UInt64, InstanceName: CPointer<UInt16>, Properties: CPointer<EVENT_TRACE_PROPERTIESAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_FlushTraceW == "on"]
+public unsafe func Windows_FlushTraceW(TraceId: UInt64, InstanceName: CPointer<UInt16>, Properties: CPointer<EVENT_TRACE_PROPERTIESAbi>): windows_core.WIN32_ERROR {
+    return FlushTraceW(TraceId, InstanceName, Properties)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_GetTraceEnableFlags == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetTraceEnableFlags(TraceHandle: UInt64): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_GetTraceEnableFlags == "on"]
+public unsafe func Windows_GetTraceEnableFlags(TraceHandle: UInt64): UInt32 {
+    return GetTraceEnableFlags(TraceHandle)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_GetTraceEnableLevel == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetTraceEnableLevel(TraceHandle: UInt64): UInt8
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_GetTraceEnableLevel == "on"]
+public unsafe func Windows_GetTraceEnableLevel(TraceHandle: UInt64): UInt8 {
+    return GetTraceEnableLevel(TraceHandle)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_GetTraceLoggerHandle == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetTraceLoggerHandle(Buffer: CPointer<Unit>): UInt64
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_GetTraceLoggerHandle == "on"]
+public unsafe func Windows_GetTraceLoggerHandle(Buffer: CPointer<Unit>): UInt64 {
+    return GetTraceLoggerHandle(Buffer)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_OpenTraceA == "on" && Windows_Win32_System_Time == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func OpenTraceA(Logfile: CPointer<EVENT_TRACE_LOGFILEAAbi>): PROCESSTRACE_HANDLE
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_OpenTraceA == "on" && Windows_Win32_System_Time == "on"]
+public unsafe func Windows_OpenTraceA(Logfile: CPointer<EVENT_TRACE_LOGFILEAAbi>): PROCESSTRACE_HANDLE {
+    return OpenTraceA(Logfile)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_OpenTraceFromBufferStream == "on" && Windows_Win32_System_Time == "on"]
+foreign {
+    // param-hint: BufferCompletionContext optional
+    func OpenTraceFromBufferStream(Options: CPointer<ETW_OPEN_TRACE_OPTIONSAbi>, BufferCompletionCallback: PETW_BUFFER_COMPLETION_CALLBACK, BufferCompletionContext: CPointer<Unit>): PROCESSTRACE_HANDLE
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_OpenTraceFromBufferStream == "on" && Windows_Win32_System_Time == "on"]
+public unsafe func Windows_OpenTraceFromBufferStream(Options: CPointer<ETW_OPEN_TRACE_OPTIONSAbi>, BufferCompletionCallback: PETW_BUFFER_COMPLETION_CALLBACK, BufferCompletionContext: CPointer<Unit>): PROCESSTRACE_HANDLE {
+    return OpenTraceFromBufferStream(Options, BufferCompletionCallback, BufferCompletionContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_OpenTraceFromFile == "on" && Windows_Win32_System_Time == "on"]
+foreign {
+    // param-hint: LogFileHeader optional
+    func OpenTraceFromFile(LogFileName: CPointer<UInt16>, Options: CPointer<ETW_OPEN_TRACE_OPTIONSAbi>, LogFileHeader: CPointer<TRACE_LOGFILE_HEADERAbi>): PROCESSTRACE_HANDLE
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_OpenTraceFromFile == "on" && Windows_Win32_System_Time == "on"]
+public unsafe func Windows_OpenTraceFromFile(LogFileName: CPointer<UInt16>, Options: CPointer<ETW_OPEN_TRACE_OPTIONSAbi>, LogFileHeader: CPointer<TRACE_LOGFILE_HEADERAbi>): PROCESSTRACE_HANDLE {
+    return OpenTraceFromFile(LogFileName, Options, LogFileHeader)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_OpenTraceFromRealTimeLogger == "on" && Windows_Win32_System_Time == "on"]
+foreign {
+    // param-hint: LogFileHeader optional
+    func OpenTraceFromRealTimeLogger(LoggerName: CPointer<UInt16>, Options: CPointer<ETW_OPEN_TRACE_OPTIONSAbi>, LogFileHeader: CPointer<TRACE_LOGFILE_HEADERAbi>): PROCESSTRACE_HANDLE
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_OpenTraceFromRealTimeLogger == "on" && Windows_Win32_System_Time == "on"]
+public unsafe func Windows_OpenTraceFromRealTimeLogger(LoggerName: CPointer<UInt16>, Options: CPointer<ETW_OPEN_TRACE_OPTIONSAbi>, LogFileHeader: CPointer<TRACE_LOGFILE_HEADERAbi>): PROCESSTRACE_HANDLE {
+    return OpenTraceFromRealTimeLogger(LoggerName, Options, LogFileHeader)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_OpenTraceFromRealTimeLoggerWithAllocationOptions == "on" && Windows_Win32_System_Time == "on"]
+foreign {
+    // param-hint: MemoryPartitionHandle optional
+    // param-hint: LogFileHeader optional
+    func OpenTraceFromRealTimeLoggerWithAllocationOptions(LoggerName: CPointer<UInt16>, Options: CPointer<ETW_OPEN_TRACE_OPTIONSAbi>, AllocationSize: UIntNative, MemoryPartitionHandle: CPointer<Unit>, LogFileHeader: CPointer<TRACE_LOGFILE_HEADERAbi>): PROCESSTRACE_HANDLE
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_OpenTraceFromRealTimeLoggerWithAllocationOptions == "on" && Windows_Win32_System_Time == "on"]
+public unsafe func Windows_OpenTraceFromRealTimeLoggerWithAllocationOptions(LoggerName: CPointer<UInt16>, Options: CPointer<ETW_OPEN_TRACE_OPTIONSAbi>, AllocationSize: UIntNative, MemoryPartitionHandle: CPointer<Unit>, LogFileHeader: CPointer<TRACE_LOGFILE_HEADERAbi>): PROCESSTRACE_HANDLE {
+    return OpenTraceFromRealTimeLoggerWithAllocationOptions(LoggerName, Options, AllocationSize, MemoryPartitionHandle, LogFileHeader)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_OpenTraceW == "on" && Windows_Win32_System_Time == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func OpenTraceW(Logfile: CPointer<EVENT_TRACE_LOGFILEWAbi>): PROCESSTRACE_HANDLE
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_OpenTraceW == "on" && Windows_Win32_System_Time == "on"]
+public unsafe func Windows_OpenTraceW(Logfile: CPointer<EVENT_TRACE_LOGFILEWAbi>): PROCESSTRACE_HANDLE {
+    return OpenTraceW(Logfile)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_ProcessTrace == "on"]
+foreign {
     // param-hint: HandleArray len=param[1]
     // param-hint: StartTime optional
     // param-hint: EndTime optional
     func ProcessTrace(HandleArray: CPointer<PROCESSTRACE_HANDLE>, HandleCount: UInt32, StartTime: CPointer<Win32_Foundation.FILETIMEAbi>, EndTime: CPointer<Win32_Foundation.FILETIMEAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_ProcessTrace == "on"]
+public unsafe func Windows_ProcessTrace(HandleArray: CPointer<PROCESSTRACE_HANDLE>, HandleCount: UInt32, StartTime: CPointer<Win32_Foundation.FILETIMEAbi>, EndTime: CPointer<Win32_Foundation.FILETIMEAbi>): windows_core.WIN32_ERROR {
+    return ProcessTrace(HandleArray, HandleCount, StartTime, EndTime)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_ProcessTraceAddBufferToBufferStream == "on"]
+foreign {
     // param-hint: Buffer bytes=param[2]
     func ProcessTraceAddBufferToBufferStream(TraceHandle: PROCESSTRACE_HANDLE, Buffer: CPointer<ETW_BUFFER_HEADERAbi>, BufferSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_ProcessTraceAddBufferToBufferStream == "on"]
+public unsafe func Windows_ProcessTraceAddBufferToBufferStream(TraceHandle: PROCESSTRACE_HANDLE, Buffer: CPointer<ETW_BUFFER_HEADERAbi>, BufferSize: UInt32): UInt32 {
+    return ProcessTraceAddBufferToBufferStream(TraceHandle, Buffer, BufferSize)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_ProcessTraceBufferDecrementReference == "on"]
+foreign {
     func ProcessTraceBufferDecrementReference(Buffer: CPointer<ETW_BUFFER_HEADERAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_ProcessTraceBufferDecrementReference == "on"]
+public unsafe func Windows_ProcessTraceBufferDecrementReference(Buffer: CPointer<ETW_BUFFER_HEADERAbi>): UInt32 {
+    return ProcessTraceBufferDecrementReference(Buffer)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_ProcessTraceBufferIncrementReference == "on"]
+foreign {
     func ProcessTraceBufferIncrementReference(TraceHandle: PROCESSTRACE_HANDLE, Buffer: CPointer<ETW_BUFFER_HEADERAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_ProcessTraceBufferIncrementReference == "on"]
+public unsafe func Windows_ProcessTraceBufferIncrementReference(TraceHandle: PROCESSTRACE_HANDLE, Buffer: CPointer<ETW_BUFFER_HEADERAbi>): UInt32 {
+    return ProcessTraceBufferIncrementReference(TraceHandle, Buffer)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_QueryAllTracesA == "on"]
+foreign {
     // param-hint: PropertyArray len=param[1]
     func QueryAllTracesA(PropertyArray: CPointer<CPointer<EVENT_TRACE_PROPERTIESAbi>>, PropertyArrayCount: UInt32, LoggerCount: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_QueryAllTracesA == "on"]
+public unsafe func Windows_QueryAllTracesA(PropertyArray: CPointer<CPointer<EVENT_TRACE_PROPERTIESAbi>>, PropertyArrayCount: UInt32, LoggerCount: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return QueryAllTracesA(PropertyArray, PropertyArrayCount, LoggerCount)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_QueryAllTracesW == "on"]
+foreign {
     // param-hint: PropertyArray len=param[1]
     func QueryAllTracesW(PropertyArray: CPointer<CPointer<EVENT_TRACE_PROPERTIESAbi>>, PropertyArrayCount: UInt32, LoggerCount: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_QueryAllTracesW == "on"]
+public unsafe func Windows_QueryAllTracesW(PropertyArray: CPointer<CPointer<EVENT_TRACE_PROPERTIESAbi>>, PropertyArrayCount: UInt32, LoggerCount: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return QueryAllTracesW(PropertyArray, PropertyArrayCount, LoggerCount)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_QueryTraceA == "on"]
+foreign {
     // param-hint: InstanceName optional
     func QueryTraceA(TraceId: UInt64, InstanceName: CPointer<UInt8>, Properties: CPointer<EVENT_TRACE_PROPERTIESAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_QueryTraceA == "on"]
+public unsafe func Windows_QueryTraceA(TraceId: UInt64, InstanceName: CPointer<UInt8>, Properties: CPointer<EVENT_TRACE_PROPERTIESAbi>): windows_core.WIN32_ERROR {
+    return QueryTraceA(TraceId, InstanceName, Properties)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_QueryTraceProcessingHandle == "on"]
+foreign {
     // param-hint: InBuffer optional
     // param-hint: OutBuffer optional
     func QueryTraceProcessingHandle(ProcessingHandle: PROCESSTRACE_HANDLE, InformationClass: ETW_PROCESS_HANDLE_INFO_TYPEAbi, InBuffer: CPointer<Unit>, InBufferSize: UInt32, OutBuffer: CPointer<Unit>, OutBufferSize: UInt32, ReturnLength: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_QueryTraceProcessingHandle == "on"]
+public unsafe func Windows_QueryTraceProcessingHandle(ProcessingHandle: PROCESSTRACE_HANDLE, InformationClass: ETW_PROCESS_HANDLE_INFO_TYPEAbi, InBuffer: CPointer<Unit>, InBufferSize: UInt32, OutBuffer: CPointer<Unit>, OutBufferSize: UInt32, ReturnLength: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return QueryTraceProcessingHandle(ProcessingHandle, InformationClass, InBuffer, InBufferSize, OutBuffer, OutBufferSize, ReturnLength)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_QueryTraceW == "on"]
+foreign {
     // param-hint: InstanceName optional
     func QueryTraceW(TraceId: UInt64, InstanceName: CPointer<UInt16>, Properties: CPointer<EVENT_TRACE_PROPERTIESAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_QueryTraceW == "on"]
+public unsafe func Windows_QueryTraceW(TraceId: UInt64, InstanceName: CPointer<UInt16>, Properties: CPointer<EVENT_TRACE_PROPERTIESAbi>): windows_core.WIN32_ERROR {
+    return QueryTraceW(TraceId, InstanceName, Properties)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_RegisterTraceGuidsA == "on"]
+foreign {
     // param-hint: RequestContext optional
     // param-hint: TraceGuidReg len=param[3] optional
     // param-hint: MofImagePath optional
     // param-hint: MofResourceName optional
     func RegisterTraceGuidsA(RequestAddress: WMIDPREQUEST, RequestContext: CPointer<Unit>, ControlGuid: CPointer<GUID>, GuidCount: UInt32, TraceGuidReg: CPointer<TRACE_GUID_REGISTRATIONAbi>, MofImagePath: CPointer<UInt8>, MofResourceName: CPointer<UInt8>, RegistrationHandle: CPointer<UInt64>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_RegisterTraceGuidsA == "on"]
+public unsafe func Windows_RegisterTraceGuidsA(RequestAddress: WMIDPREQUEST, RequestContext: CPointer<Unit>, ControlGuid: CPointer<GUID>, GuidCount: UInt32, TraceGuidReg: CPointer<TRACE_GUID_REGISTRATIONAbi>, MofImagePath: CPointer<UInt8>, MofResourceName: CPointer<UInt8>, RegistrationHandle: CPointer<UInt64>): UInt32 {
+    return RegisterTraceGuidsA(RequestAddress, RequestContext, ControlGuid, GuidCount, TraceGuidReg, MofImagePath, MofResourceName, RegistrationHandle)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_RegisterTraceGuidsW == "on"]
+foreign {
     // param-hint: RequestContext optional
     // param-hint: TraceGuidReg len=param[3] optional
     // param-hint: MofImagePath optional
     // param-hint: MofResourceName optional
     func RegisterTraceGuidsW(RequestAddress: WMIDPREQUEST, RequestContext: CPointer<Unit>, ControlGuid: CPointer<GUID>, GuidCount: UInt32, TraceGuidReg: CPointer<TRACE_GUID_REGISTRATIONAbi>, MofImagePath: CPointer<UInt16>, MofResourceName: CPointer<UInt16>, RegistrationHandle: CPointer<UInt64>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_RegisterTraceGuidsW == "on"]
+public unsafe func Windows_RegisterTraceGuidsW(RequestAddress: WMIDPREQUEST, RequestContext: CPointer<Unit>, ControlGuid: CPointer<GUID>, GuidCount: UInt32, TraceGuidReg: CPointer<TRACE_GUID_REGISTRATIONAbi>, MofImagePath: CPointer<UInt16>, MofResourceName: CPointer<UInt16>, RegistrationHandle: CPointer<UInt64>): UInt32 {
+    return RegisterTraceGuidsW(RequestAddress, RequestContext, ControlGuid, GuidCount, TraceGuidReg, MofImagePath, MofResourceName, RegistrationHandle)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_RemoveTraceCallback == "on"]
+foreign {
     func RemoveTraceCallback(pGuid: CPointer<GUID>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_RemoveTraceCallback == "on"]
+public unsafe func Windows_RemoveTraceCallback(pGuid: CPointer<GUID>): windows_core.WIN32_ERROR {
+    return RemoveTraceCallback(pGuid)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_SetTraceCallback == "on"]
+foreign {
     func SetTraceCallback(pGuid: CPointer<GUID>, EventCallback: PEVENT_CALLBACK): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_SetTraceCallback == "on"]
+public unsafe func Windows_SetTraceCallback(pGuid: CPointer<GUID>, EventCallback: PEVENT_CALLBACK): windows_core.WIN32_ERROR {
+    return SetTraceCallback(pGuid, EventCallback)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_StartTraceA == "on"]
+foreign {
     func StartTraceA(TraceId: CPointer<UInt64>, InstanceName: CPointer<UInt8>, Properties: CPointer<EVENT_TRACE_PROPERTIESAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_StartTraceA == "on"]
+public unsafe func Windows_StartTraceA(TraceId: CPointer<UInt64>, InstanceName: CPointer<UInt8>, Properties: CPointer<EVENT_TRACE_PROPERTIESAbi>): windows_core.WIN32_ERROR {
+    return StartTraceA(TraceId, InstanceName, Properties)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_StartTraceW == "on"]
+foreign {
     func StartTraceW(TraceId: CPointer<UInt64>, InstanceName: CPointer<UInt16>, Properties: CPointer<EVENT_TRACE_PROPERTIESAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_StartTraceW == "on"]
+public unsafe func Windows_StartTraceW(TraceId: CPointer<UInt64>, InstanceName: CPointer<UInt16>, Properties: CPointer<EVENT_TRACE_PROPERTIESAbi>): windows_core.WIN32_ERROR {
+    return StartTraceW(TraceId, InstanceName, Properties)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_StopTraceA == "on"]
+foreign {
     // param-hint: InstanceName optional
     func StopTraceA(TraceId: UInt64, InstanceName: CPointer<UInt8>, Properties: CPointer<EVENT_TRACE_PROPERTIESAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_StopTraceA == "on"]
+public unsafe func Windows_StopTraceA(TraceId: UInt64, InstanceName: CPointer<UInt8>, Properties: CPointer<EVENT_TRACE_PROPERTIESAbi>): windows_core.WIN32_ERROR {
+    return StopTraceA(TraceId, InstanceName, Properties)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_StopTraceW == "on"]
+foreign {
     // param-hint: InstanceName optional
     func StopTraceW(TraceId: UInt64, InstanceName: CPointer<UInt16>, Properties: CPointer<EVENT_TRACE_PROPERTIESAbi>): windows_core.WIN32_ERROR
-    // param-hint: Events len=param[3]
-    func TraceConfigureLastBranchRecord(TraceId: UInt64, LbrConfiguration: TRACE_LBR_CONFIGURATIONAbi, Events: CPointer<CLASSIC_EVENT_IDAbi>, EventCount: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_StopTraceW == "on"]
+public unsafe func Windows_StopTraceW(TraceId: UInt64, InstanceName: CPointer<UInt16>, Properties: CPointer<EVENT_TRACE_PROPERTIESAbi>): windows_core.WIN32_ERROR {
+    return StopTraceW(TraceId, InstanceName, Properties)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_TraceEvent == "on"]
+foreign {
     func TraceEvent(TraceHandle: UInt64, EventTrace: CPointer<EVENT_TRACE_HEADERAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_TraceEvent == "on"]
+public unsafe func Windows_TraceEvent(TraceHandle: UInt64, EventTrace: CPointer<EVENT_TRACE_HEADERAbi>): windows_core.WIN32_ERROR {
+    return TraceEvent(TraceHandle, EventTrace)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_TraceEventInstance == "on"]
+foreign {
     // param-hint: ParentInstInfo optional
     func TraceEventInstance(TraceHandle: UInt64, EventTrace: CPointer<EVENT_INSTANCE_HEADERAbi>, InstInfo: CPointer<EVENT_INSTANCE_INFOAbi>, ParentInstInfo: CPointer<EVENT_INSTANCE_INFOAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_TraceEventInstance == "on"]
+public unsafe func Windows_TraceEventInstance(TraceHandle: UInt64, EventTrace: CPointer<EVENT_INSTANCE_HEADERAbi>, InstInfo: CPointer<EVENT_INSTANCE_INFOAbi>, ParentInstInfo: CPointer<EVENT_INSTANCE_INFOAbi>): UInt32 {
+    return TraceEventInstance(TraceHandle, EventTrace, InstInfo, ParentInstInfo)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_TraceMessageVa == "on"]
+foreign {
     func TraceMessageVa(LoggerHandle: UInt64, MessageFlags: TRACE_MESSAGE_FLAGSAbi, MessageGuid: CPointer<GUID>, MessageNumber: UInt16, MessageArgList: CPointer<Int8>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_TraceMessageVa == "on"]
+public unsafe func Windows_TraceMessageVa(LoggerHandle: UInt64, MessageFlags: TRACE_MESSAGE_FLAGSAbi, MessageGuid: CPointer<GUID>, MessageNumber: UInt16, MessageArgList: CPointer<Int8>): windows_core.WIN32_ERROR {
+    return TraceMessageVa(LoggerHandle, MessageFlags, MessageGuid, MessageNumber, MessageArgList)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_TraceQueryInformation == "on"]
+foreign {
     // param-hint: TraceInformation bytes=param[3]
     // param-hint: ReturnLength optional
     func TraceQueryInformation(TraceId: UInt64, InformationClass: TRACE_QUERY_INFO_CLASSAbi, TraceInformation: CPointer<Unit>, InformationLength: UInt32, ReturnLength: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_TraceQueryInformation == "on"]
+public unsafe func Windows_TraceQueryInformation(TraceId: UInt64, InformationClass: TRACE_QUERY_INFO_CLASSAbi, TraceInformation: CPointer<Unit>, InformationLength: UInt32, ReturnLength: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return TraceQueryInformation(TraceId, InformationClass, TraceInformation, InformationLength, ReturnLength)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_TraceSetInformation == "on"]
+foreign {
     // param-hint: TraceInformation bytes=param[3]
     func TraceSetInformation(TraceId: UInt64, InformationClass: TRACE_QUERY_INFO_CLASSAbi, TraceInformation: CPointer<Unit>, InformationLength: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_TraceSetInformation == "on"]
+public unsafe func Windows_TraceSetInformation(TraceId: UInt64, InformationClass: TRACE_QUERY_INFO_CLASSAbi, TraceInformation: CPointer<Unit>, InformationLength: UInt32): windows_core.WIN32_ERROR {
+    return TraceSetInformation(TraceId, InformationClass, TraceInformation, InformationLength)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_UnregisterTraceGuids == "on"]
+foreign {
     func UnregisterTraceGuids(RegistrationHandle: UInt64): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_UnregisterTraceGuids == "on"]
+public unsafe func Windows_UnregisterTraceGuids(RegistrationHandle: UInt64): UInt32 {
+    return UnregisterTraceGuids(RegistrationHandle)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_UpdateTraceA == "on"]
+foreign {
     // param-hint: InstanceName optional
     func UpdateTraceA(TraceId: UInt64, InstanceName: CPointer<UInt8>, Properties: CPointer<EVENT_TRACE_PROPERTIESAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_UpdateTraceA == "on"]
+public unsafe func Windows_UpdateTraceA(TraceId: UInt64, InstanceName: CPointer<UInt8>, Properties: CPointer<EVENT_TRACE_PROPERTIESAbi>): windows_core.WIN32_ERROR {
+    return UpdateTraceA(TraceId, InstanceName, Properties)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_UpdateTraceW == "on"]
+foreign {
     // param-hint: InstanceName optional
     func UpdateTraceW(TraceId: UInt64, InstanceName: CPointer<UInt16>, Properties: CPointer<EVENT_TRACE_PROPERTIESAbi>): windows_core.WIN32_ERROR
 }
 
-@When[ADVAPI32 == "on" && Windows_Win32_Security == "on"]
-foreign {
-    func EventAccessControl(Guid: CPointer<GUID>, Operation: UInt32, Sid: Win32_Security.PSID, Rights: UInt32, AllowOrDeny: UInt8): UInt32
-    // param-hint: Buffer bytes=param[2] optional
-    func EventAccessQuery(Guid: CPointer<GUID>, Buffer: Win32_Security.PSECURITY_DESCRIPTOR, BufferSize: CPointer<UInt32>): UInt32
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_UpdateTraceW == "on"]
+public unsafe func Windows_UpdateTraceW(TraceId: UInt64, InstanceName: CPointer<UInt16>, Properties: CPointer<EVENT_TRACE_PROPERTIESAbi>): windows_core.WIN32_ERROR {
+    return UpdateTraceW(TraceId, InstanceName, Properties)
 }
 
-@When[ADVAPI32 == "on" && Windows_Win32_System_Time == "on"]
-foreign {
-    // pinvoke-hint: SetLastError
-    func OpenTraceA(Logfile: CPointer<EVENT_TRACE_LOGFILEAAbi>): PROCESSTRACE_HANDLE
-    // param-hint: BufferCompletionContext optional
-    func OpenTraceFromBufferStream(Options: CPointer<ETW_OPEN_TRACE_OPTIONSAbi>, BufferCompletionCallback: PETW_BUFFER_COMPLETION_CALLBACK, BufferCompletionContext: CPointer<Unit>): PROCESSTRACE_HANDLE
-    // param-hint: LogFileHeader optional
-    func OpenTraceFromFile(LogFileName: CPointer<UInt16>, Options: CPointer<ETW_OPEN_TRACE_OPTIONSAbi>, LogFileHeader: CPointer<TRACE_LOGFILE_HEADERAbi>): PROCESSTRACE_HANDLE
-    // param-hint: LogFileHeader optional
-    func OpenTraceFromRealTimeLogger(LoggerName: CPointer<UInt16>, Options: CPointer<ETW_OPEN_TRACE_OPTIONSAbi>, LogFileHeader: CPointer<TRACE_LOGFILE_HEADERAbi>): PROCESSTRACE_HANDLE
-    // param-hint: MemoryPartitionHandle optional
-    // param-hint: LogFileHeader optional
-    func OpenTraceFromRealTimeLoggerWithAllocationOptions(LoggerName: CPointer<UInt16>, Options: CPointer<ETW_OPEN_TRACE_OPTIONSAbi>, AllocationSize: UIntNative, MemoryPartitionHandle: CPointer<Unit>, LogFileHeader: CPointer<TRACE_LOGFILE_HEADERAbi>): PROCESSTRACE_HANDLE
-    // pinvoke-hint: SetLastError
-    func OpenTraceW(Logfile: CPointer<EVENT_TRACE_LOGFILEWAbi>): PROCESSTRACE_HANDLE
-}
-
-@When[TDH == "on"]
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhEnumerateManifestProviderEvents == "on"]
 foreign {
     // param-hint: Buffer bytes=param[2] optional
     func TdhEnumerateManifestProviderEvents(ProviderGuid: CPointer<GUID>, Buffer: CPointer<PROVIDER_EVENT_INFOAbi>, BufferSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhEnumerateManifestProviderEvents == "on"]
+public unsafe func Windows_TdhEnumerateManifestProviderEvents(ProviderGuid: CPointer<GUID>, Buffer: CPointer<PROVIDER_EVENT_INFOAbi>, BufferSize: CPointer<UInt32>): UInt32 {
+    return TdhEnumerateManifestProviderEvents(ProviderGuid, Buffer, BufferSize)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhEnumerateProviderFieldInformation == "on"]
+foreign {
     // param-hint: pBuffer bytes=param[3] optional
     func TdhEnumerateProviderFieldInformation(pGuid: CPointer<GUID>, EventFieldType: EVENT_FIELD_TYPEAbi, pBuffer: CPointer<PROVIDER_FIELD_INFOARRAYAbi>, pBufferSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhEnumerateProviderFieldInformation == "on"]
+public unsafe func Windows_TdhEnumerateProviderFieldInformation(pGuid: CPointer<GUID>, EventFieldType: EVENT_FIELD_TYPEAbi, pBuffer: CPointer<PROVIDER_FIELD_INFOARRAYAbi>, pBufferSize: CPointer<UInt32>): UInt32 {
+    return TdhEnumerateProviderFieldInformation(pGuid, EventFieldType, pBuffer, pBufferSize)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhEnumerateProviders == "on"]
+foreign {
     // param-hint: pBuffer bytes=param[1] optional
     func TdhEnumerateProviders(pBuffer: CPointer<PROVIDER_ENUMERATION_INFOAbi>, pBufferSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhEnumerateProviders == "on"]
+public unsafe func Windows_TdhEnumerateProviders(pBuffer: CPointer<PROVIDER_ENUMERATION_INFOAbi>, pBufferSize: CPointer<UInt32>): UInt32 {
+    return TdhEnumerateProviders(pBuffer, pBufferSize)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhFormatProperty == "on"]
+foreign {
     // param-hint: MapInfo optional
     // param-hint: UserData bytes=param[6]
     // param-hint: Buffer bytes=param[8] optional
     func TdhFormatProperty(EventInfo: CPointer<TRACE_EVENT_INFOAbi>, MapInfo: CPointer<EVENT_MAP_INFOAbi>, PointerSize: UInt32, PropertyInType: UInt16, PropertyOutType: UInt16, PropertyLength: UInt16, UserDataLength: UInt16, UserData: CPointer<UInt8>, BufferSize: CPointer<UInt32>, Buffer: CPointer<UInt16>, UserDataConsumed: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhFormatProperty == "on"]
+public unsafe func Windows_TdhFormatProperty(EventInfo: CPointer<TRACE_EVENT_INFOAbi>, MapInfo: CPointer<EVENT_MAP_INFOAbi>, PointerSize: UInt32, PropertyInType: UInt16, PropertyOutType: UInt16, PropertyLength: UInt16, UserDataLength: UInt16, UserData: CPointer<UInt8>, BufferSize: CPointer<UInt32>, Buffer: CPointer<UInt16>, UserDataConsumed: CPointer<UInt16>): UInt32 {
+    return TdhFormatProperty(EventInfo, MapInfo, PointerSize, PropertyInType, PropertyOutType, PropertyLength, UserDataLength, UserData, BufferSize, Buffer, UserDataConsumed)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhGetEventInformation == "on"]
+foreign {
     // param-hint: TdhContext len=param[1] optional
     // param-hint: Buffer bytes=param[4] optional
     func TdhGetEventInformation(Event: CPointer<EVENT_RECORDAbi>, TdhContextCount: UInt32, TdhContext: CPointer<TDH_CONTEXTAbi>, Buffer: CPointer<TRACE_EVENT_INFOAbi>, BufferSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhGetEventInformation == "on"]
+public unsafe func Windows_TdhGetEventInformation(Event: CPointer<EVENT_RECORDAbi>, TdhContextCount: UInt32, TdhContext: CPointer<TDH_CONTEXTAbi>, Buffer: CPointer<TRACE_EVENT_INFOAbi>, BufferSize: CPointer<UInt32>): UInt32 {
+    return TdhGetEventInformation(Event, TdhContextCount, TdhContext, Buffer, BufferSize)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhGetEventMapInformation == "on"]
+foreign {
     // param-hint: pBuffer bytes=param[3] optional
     func TdhGetEventMapInformation(pEvent: CPointer<EVENT_RECORDAbi>, pMapName: CPointer<UInt16>, pBuffer: CPointer<EVENT_MAP_INFOAbi>, pBufferSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhGetEventMapInformation == "on"]
+public unsafe func Windows_TdhGetEventMapInformation(pEvent: CPointer<EVENT_RECORDAbi>, pMapName: CPointer<UInt16>, pBuffer: CPointer<EVENT_MAP_INFOAbi>, pBufferSize: CPointer<UInt32>): UInt32 {
+    return TdhGetEventMapInformation(pEvent, pMapName, pBuffer, pBufferSize)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhGetManifestEventInformation == "on"]
+foreign {
     // param-hint: Buffer bytes=param[3] optional
     func TdhGetManifestEventInformation(ProviderGuid: CPointer<GUID>, EventDescriptor: CPointer<EVENT_DESCRIPTORAbi>, Buffer: CPointer<TRACE_EVENT_INFOAbi>, BufferSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhGetManifestEventInformation == "on"]
+public unsafe func Windows_TdhGetManifestEventInformation(ProviderGuid: CPointer<GUID>, EventDescriptor: CPointer<EVENT_DESCRIPTORAbi>, Buffer: CPointer<TRACE_EVENT_INFOAbi>, BufferSize: CPointer<UInt32>): UInt32 {
+    return TdhGetManifestEventInformation(ProviderGuid, EventDescriptor, Buffer, BufferSize)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhGetProperty == "on"]
+foreign {
     // param-hint: pTdhContext len=param[1] optional
     // param-hint: pPropertyData len=param[3]
     // param-hint: pBuffer bytes=param[5]
     func TdhGetProperty(pEvent: CPointer<EVENT_RECORDAbi>, TdhContextCount: UInt32, pTdhContext: CPointer<TDH_CONTEXTAbi>, PropertyDataCount: UInt32, pPropertyData: CPointer<PROPERTY_DATA_DESCRIPTORAbi>, BufferSize: UInt32, pBuffer: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhGetProperty == "on"]
+public unsafe func Windows_TdhGetProperty(pEvent: CPointer<EVENT_RECORDAbi>, TdhContextCount: UInt32, pTdhContext: CPointer<TDH_CONTEXTAbi>, PropertyDataCount: UInt32, pPropertyData: CPointer<PROPERTY_DATA_DESCRIPTORAbi>, BufferSize: UInt32, pBuffer: CPointer<UInt8>): UInt32 {
+    return TdhGetProperty(pEvent, TdhContextCount, pTdhContext, PropertyDataCount, pPropertyData, BufferSize, pBuffer)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhGetPropertySize == "on"]
+foreign {
     // param-hint: pTdhContext len=param[1] optional
     // param-hint: pPropertyData len=param[3]
     func TdhGetPropertySize(pEvent: CPointer<EVENT_RECORDAbi>, TdhContextCount: UInt32, pTdhContext: CPointer<TDH_CONTEXTAbi>, PropertyDataCount: UInt32, pPropertyData: CPointer<PROPERTY_DATA_DESCRIPTORAbi>, pPropertySize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhGetPropertySize == "on"]
+public unsafe func Windows_TdhGetPropertySize(pEvent: CPointer<EVENT_RECORDAbi>, TdhContextCount: UInt32, pTdhContext: CPointer<TDH_CONTEXTAbi>, PropertyDataCount: UInt32, pPropertyData: CPointer<PROPERTY_DATA_DESCRIPTORAbi>, pPropertySize: CPointer<UInt32>): UInt32 {
+    return TdhGetPropertySize(pEvent, TdhContextCount, pTdhContext, PropertyDataCount, pPropertyData, pPropertySize)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhLoadManifest == "on"]
+foreign {
     func TdhLoadManifest(Manifest: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhLoadManifest == "on"]
+public unsafe func Windows_TdhLoadManifest(Manifest: CPointer<UInt16>): UInt32 {
+    return TdhLoadManifest(Manifest)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhLoadManifestFromMemory == "on"]
+foreign {
     // param-hint: pData bytes=param[1]
     func TdhLoadManifestFromMemory(pData: CPointer<Unit>, cbData: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhLoadManifestFromMemory == "on"]
+public unsafe func Windows_TdhLoadManifestFromMemory(pData: CPointer<Unit>, cbData: UInt32): UInt32 {
+    return TdhLoadManifestFromMemory(pData, cbData)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhQueryProviderFieldInformation == "on"]
+foreign {
     // param-hint: pBuffer bytes=param[4] optional
     func TdhQueryProviderFieldInformation(pGuid: CPointer<GUID>, EventFieldValue: UInt64, EventFieldType: EVENT_FIELD_TYPEAbi, pBuffer: CPointer<PROVIDER_FIELD_INFOARRAYAbi>, pBufferSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhQueryProviderFieldInformation == "on"]
+public unsafe func Windows_TdhQueryProviderFieldInformation(pGuid: CPointer<GUID>, EventFieldValue: UInt64, EventFieldType: EVENT_FIELD_TYPEAbi, pBuffer: CPointer<PROVIDER_FIELD_INFOARRAYAbi>, pBufferSize: CPointer<UInt32>): UInt32 {
+    return TdhQueryProviderFieldInformation(pGuid, EventFieldValue, EventFieldType, pBuffer, pBufferSize)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhUnloadManifest == "on"]
+foreign {
     func TdhUnloadManifest(Manifest: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhUnloadManifest == "on"]
+public unsafe func Windows_TdhUnloadManifest(Manifest: CPointer<UInt16>): UInt32 {
+    return TdhUnloadManifest(Manifest)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhUnloadManifestFromMemory == "on"]
+foreign {
     // param-hint: pData bytes=param[1]
     func TdhUnloadManifestFromMemory(pData: CPointer<Unit>, cbData: UInt32): UInt32
 }
 
-@When[TDH == "on"]
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhUnloadManifestFromMemory == "on"]
+public unsafe func Windows_TdhUnloadManifestFromMemory(pData: CPointer<Unit>, cbData: UInt32): UInt32 {
+    return TdhUnloadManifestFromMemory(pData, cbData)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhAggregatePayloadFilters == "on"]
 foreign {
     // param-hint: PayloadFilterPtrs len=param[0]
     // param-hint: EventMatchALLFlags len=param[0] optional
     func TdhAggregatePayloadFilters(PayloadFilterCount: UInt32, PayloadFilterPtrs: CPointer<CPointer<Unit>>, EventMatchALLFlags: CPointer<UInt8>, EventFilterDescriptor: CPointer<EVENT_FILTER_DESCRIPTORAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhAggregatePayloadFilters == "on"]
+public unsafe func Windows_TdhAggregatePayloadFilters(PayloadFilterCount: UInt32, PayloadFilterPtrs: CPointer<CPointer<Unit>>, EventMatchALLFlags: CPointer<UInt8>, EventFilterDescriptor: CPointer<EVENT_FILTER_DESCRIPTORAbi>): UInt32 {
+    return TdhAggregatePayloadFilters(PayloadFilterCount, PayloadFilterPtrs, EventMatchALLFlags, EventFilterDescriptor)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhCleanupPayloadEventFilterDescriptor == "on"]
+foreign {
     func TdhCleanupPayloadEventFilterDescriptor(EventFilterDescriptor: CPointer<EVENT_FILTER_DESCRIPTORAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhCleanupPayloadEventFilterDescriptor == "on"]
+public unsafe func Windows_TdhCleanupPayloadEventFilterDescriptor(EventFilterDescriptor: CPointer<EVENT_FILTER_DESCRIPTORAbi>): UInt32 {
+    return TdhCleanupPayloadEventFilterDescriptor(EventFilterDescriptor)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhCloseDecodingHandle == "on"]
+foreign {
     func TdhCloseDecodingHandle(Handle: TDH_HANDLE): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhCloseDecodingHandle == "on"]
+public unsafe func Windows_TdhCloseDecodingHandle(Handle: TDH_HANDLE): UInt32 {
+    return TdhCloseDecodingHandle(Handle)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhCreatePayloadFilter == "on"]
+foreign {
     // param-hint: PayloadPredicates len=param[3]
     func TdhCreatePayloadFilter(ProviderGuid: CPointer<GUID>, EventDescriptor: CPointer<EVENT_DESCRIPTORAbi>, EventMatchANY: UInt8, PayloadPredicateCount: UInt32, PayloadPredicates: CPointer<PAYLOAD_FILTER_PREDICATEAbi>, PayloadFilter: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhCreatePayloadFilter == "on"]
+public unsafe func Windows_TdhCreatePayloadFilter(ProviderGuid: CPointer<GUID>, EventDescriptor: CPointer<EVENT_DESCRIPTORAbi>, EventMatchANY: UInt8, PayloadPredicateCount: UInt32, PayloadPredicates: CPointer<PAYLOAD_FILTER_PREDICATEAbi>, PayloadFilter: CPointer<CPointer<Unit>>): UInt32 {
+    return TdhCreatePayloadFilter(ProviderGuid, EventDescriptor, EventMatchANY, PayloadPredicateCount, PayloadPredicates, PayloadFilter)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhDeletePayloadFilter == "on"]
+foreign {
     func TdhDeletePayloadFilter(PayloadFilter: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhDeletePayloadFilter == "on"]
+public unsafe func Windows_TdhDeletePayloadFilter(PayloadFilter: CPointer<CPointer<Unit>>): UInt32 {
+    return TdhDeletePayloadFilter(PayloadFilter)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhEnumerateProviderFilters == "on"]
+foreign {
     // param-hint: TdhContext len=param[1] optional
     // param-hint: Buffer bytes=param[5] optional
     func TdhEnumerateProviderFilters(Guid: CPointer<GUID>, TdhContextCount: UInt32, TdhContext: CPointer<TDH_CONTEXTAbi>, FilterCount: CPointer<UInt32>, Buffer: CPointer<CPointer<PROVIDER_FILTER_INFOAbi>>, BufferSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhEnumerateProviderFilters == "on"]
+public unsafe func Windows_TdhEnumerateProviderFilters(Guid: CPointer<GUID>, TdhContextCount: UInt32, TdhContext: CPointer<TDH_CONTEXTAbi>, FilterCount: CPointer<UInt32>, Buffer: CPointer<CPointer<PROVIDER_FILTER_INFOAbi>>, BufferSize: CPointer<UInt32>): UInt32 {
+    return TdhEnumerateProviderFilters(Guid, TdhContextCount, TdhContext, FilterCount, Buffer, BufferSize)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhEnumerateProvidersForDecodingSource == "on"]
+foreign {
     // param-hint: buffer bytes=param[2] optional
     func TdhEnumerateProvidersForDecodingSource(filter: DECODING_SOURCEAbi, buffer: CPointer<PROVIDER_ENUMERATION_INFOAbi>, bufferSize: UInt32, bufferRequired: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhEnumerateProvidersForDecodingSource == "on"]
+public unsafe func Windows_TdhEnumerateProvidersForDecodingSource(filter: DECODING_SOURCEAbi, buffer: CPointer<PROVIDER_ENUMERATION_INFOAbi>, bufferSize: UInt32, bufferRequired: CPointer<UInt32>): UInt32 {
+    return TdhEnumerateProvidersForDecodingSource(filter, buffer, bufferSize, bufferRequired)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhGetDecodingParameter == "on"]
+foreign {
     func TdhGetDecodingParameter(Handle: TDH_HANDLE, TdhContext: CPointer<TDH_CONTEXTAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhGetDecodingParameter == "on"]
+public unsafe func Windows_TdhGetDecodingParameter(Handle: TDH_HANDLE, TdhContext: CPointer<TDH_CONTEXTAbi>): UInt32 {
+    return TdhGetDecodingParameter(Handle, TdhContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhGetWppMessage == "on"]
+foreign {
     // param-hint: Buffer bytes=param[2]
     func TdhGetWppMessage(Handle: TDH_HANDLE, EventRecord: CPointer<EVENT_RECORDAbi>, BufferSize: CPointer<UInt32>, Buffer: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhGetWppMessage == "on"]
+public unsafe func Windows_TdhGetWppMessage(Handle: TDH_HANDLE, EventRecord: CPointer<EVENT_RECORDAbi>, BufferSize: CPointer<UInt32>, Buffer: CPointer<UInt8>): UInt32 {
+    return TdhGetWppMessage(Handle, EventRecord, BufferSize, Buffer)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhGetWppProperty == "on"]
+foreign {
     // param-hint: Buffer bytes=param[3]
     func TdhGetWppProperty(Handle: TDH_HANDLE, EventRecord: CPointer<EVENT_RECORDAbi>, PropertyName: CPointer<UInt16>, BufferSize: CPointer<UInt32>, Buffer: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhGetWppProperty == "on"]
+public unsafe func Windows_TdhGetWppProperty(Handle: TDH_HANDLE, EventRecord: CPointer<EVENT_RECORDAbi>, PropertyName: CPointer<UInt16>, BufferSize: CPointer<UInt32>, Buffer: CPointer<UInt8>): UInt32 {
+    return TdhGetWppProperty(Handle, EventRecord, PropertyName, BufferSize, Buffer)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhLoadManifestFromBinary == "on"]
+foreign {
     func TdhLoadManifestFromBinary(BinaryPath: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhLoadManifestFromBinary == "on"]
+public unsafe func Windows_TdhLoadManifestFromBinary(BinaryPath: CPointer<UInt16>): UInt32 {
+    return TdhLoadManifestFromBinary(BinaryPath)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhOpenDecodingHandle == "on"]
+foreign {
     func TdhOpenDecodingHandle(Handle: CPointer<TDH_HANDLE>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhOpenDecodingHandle == "on"]
+public unsafe func Windows_TdhOpenDecodingHandle(Handle: CPointer<TDH_HANDLE>): UInt32 {
+    return TdhOpenDecodingHandle(Handle)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhSetDecodingParameter == "on"]
+foreign {
     func TdhSetDecodingParameter(Handle: TDH_HANDLE, TdhContext: CPointer<TDH_CONTEXTAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && TDH == "on" && Windows_Win32_System_Diagnostics_Etw_TdhSetDecodingParameter == "on"]
+public unsafe func Windows_TdhSetDecodingParameter(Handle: TDH_HANDLE, TdhContext: CPointer<TDH_CONTEXTAbi>): UInt32 {
+    return TdhSetDecodingParameter(Handle, TdhContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_TraceConfigureLastBranchRecord == "on"]
+func __windowsBindgen_TraceConfigureLastBranchRecordProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("ADVAPI32.dll", "TraceConfigureLastBranchRecord")
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_TraceConfigureLastBranchRecord == "on"]
+unsafe func TraceConfigureLastBranchRecord(TraceId: UInt64, LbrConfiguration: TRACE_LBR_CONFIGURATIONAbi, Events: CPointer<CLASSIC_EVENT_IDAbi>, EventCount: UInt32): UInt32 {
+    let call = CFunc<(UInt64, TRACE_LBR_CONFIGURATIONAbi, CPointer<CLASSIC_EVENT_IDAbi>, UInt32) -> UInt32>(__windowsBindgen_TraceConfigureLastBranchRecordProc())
+    return unsafe { call(TraceId, LbrConfiguration, Events, EventCount) }
+}
+
+@When[Windows_Win32_System_Diagnostics_Etw == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Etw_TraceConfigureLastBranchRecord == "on"]
+public unsafe func Windows_TraceConfigureLastBranchRecord(TraceId: UInt64, LbrConfiguration: TRACE_LBR_CONFIGURATIONAbi, Events: CPointer<CLASSIC_EVENT_IDAbi>, EventCount: UInt32): UInt32 {
+    return TraceConfigureLastBranchRecord(TraceId, LbrConfiguration, Events, EventCount)
 }
 
 @When[Windows_Win32_System_Diagnostics_Etw == "on"]

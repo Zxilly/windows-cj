@@ -8,13 +8,9 @@ import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeTy
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Graphics_Effects == "on"]
 import windows.Graphics.Effects as Graphics_Effects
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Direct2D == "on"]
 import windows.Win32.Graphics.Direct2D as Win32_Graphics_Direct2D
 import windows.Win32._impl_l0 as Win32__impl_l0
 

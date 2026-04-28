@@ -6,7 +6,6 @@ package windows.Win32.UI.Input.XboxController
 import std.collection.*
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 
@@ -1070,20 +1069,79 @@ extend XINPUT_CAPABILITIES <: windows_core.CopyType & windows_core.RuntimeType &
     }
 }
 
-@When[XINPUT1_4 == "on"]
+@When[Windows_Win32_UI_Input_XboxController == "on" && XINPUT1_4 == "on" && Windows_Win32_UI_Input_XboxController_XInputEnable == "on"]
 foreign {
     func XInputEnable(enable: Int32): Unit
+}
+
+@When[Windows_Win32_UI_Input_XboxController == "on" && XINPUT1_4 == "on" && Windows_Win32_UI_Input_XboxController_XInputEnable == "on"]
+public unsafe func Windows_XInputEnable(enable: Int32): Unit {
+    XInputEnable(enable)
+}
+
+@When[Windows_Win32_UI_Input_XboxController == "on" && XINPUT1_4 == "on" && Windows_Win32_UI_Input_XboxController_XInputGetAudioDeviceIds == "on"]
+foreign {
     // param-hint: pRenderDeviceId len=param[2] optional
     // param-hint: pRenderCount optional
     // param-hint: pCaptureDeviceId len=param[4] optional
     // param-hint: pCaptureCount optional
     func XInputGetAudioDeviceIds(dwUserIndex: UInt32, pRenderDeviceId: CPointer<UInt16>, pRenderCount: CPointer<UInt32>, pCaptureDeviceId: CPointer<UInt16>, pCaptureCount: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_UI_Input_XboxController == "on" && XINPUT1_4 == "on" && Windows_Win32_UI_Input_XboxController_XInputGetAudioDeviceIds == "on"]
+public unsafe func Windows_XInputGetAudioDeviceIds(dwUserIndex: UInt32, pRenderDeviceId: CPointer<UInt16>, pRenderCount: CPointer<UInt32>, pCaptureDeviceId: CPointer<UInt16>, pCaptureCount: CPointer<UInt32>): UInt32 {
+    return XInputGetAudioDeviceIds(dwUserIndex, pRenderDeviceId, pRenderCount, pCaptureDeviceId, pCaptureCount)
+}
+
+@When[Windows_Win32_UI_Input_XboxController == "on" && XINPUT1_4 == "on" && Windows_Win32_UI_Input_XboxController_XInputGetBatteryInformation == "on"]
+foreign {
     func XInputGetBatteryInformation(dwUserIndex: UInt32, devType: BATTERY_DEVTYPEAbi, pBatteryInformation: CPointer<XINPUT_BATTERY_INFORMATIONAbi>): UInt32
+}
+
+@When[Windows_Win32_UI_Input_XboxController == "on" && XINPUT1_4 == "on" && Windows_Win32_UI_Input_XboxController_XInputGetBatteryInformation == "on"]
+public unsafe func Windows_XInputGetBatteryInformation(dwUserIndex: UInt32, devType: BATTERY_DEVTYPEAbi, pBatteryInformation: CPointer<XINPUT_BATTERY_INFORMATIONAbi>): UInt32 {
+    return XInputGetBatteryInformation(dwUserIndex, devType, pBatteryInformation)
+}
+
+@When[Windows_Win32_UI_Input_XboxController == "on" && XINPUT1_4 == "on" && Windows_Win32_UI_Input_XboxController_XInputGetCapabilities == "on"]
+foreign {
     func XInputGetCapabilities(dwUserIndex: UInt32, dwFlags: XINPUT_FLAGAbi, pCapabilities: CPointer<XINPUT_CAPABILITIESAbi>): UInt32
+}
+
+@When[Windows_Win32_UI_Input_XboxController == "on" && XINPUT1_4 == "on" && Windows_Win32_UI_Input_XboxController_XInputGetCapabilities == "on"]
+public unsafe func Windows_XInputGetCapabilities(dwUserIndex: UInt32, dwFlags: XINPUT_FLAGAbi, pCapabilities: CPointer<XINPUT_CAPABILITIESAbi>): UInt32 {
+    return XInputGetCapabilities(dwUserIndex, dwFlags, pCapabilities)
+}
+
+@When[Windows_Win32_UI_Input_XboxController == "on" && XINPUT1_4 == "on" && Windows_Win32_UI_Input_XboxController_XInputGetKeystroke == "on"]
+foreign {
     // param-hint: dwReserved optional reserved
     func XInputGetKeystroke(dwUserIndex: UInt32, dwReserved: UInt32, pKeystroke: CPointer<XINPUT_KEYSTROKEAbi>): UInt32
+}
+
+@When[Windows_Win32_UI_Input_XboxController == "on" && XINPUT1_4 == "on" && Windows_Win32_UI_Input_XboxController_XInputGetKeystroke == "on"]
+public unsafe func Windows_XInputGetKeystroke(dwUserIndex: UInt32, dwReserved: UInt32, pKeystroke: CPointer<XINPUT_KEYSTROKEAbi>): UInt32 {
+    return XInputGetKeystroke(dwUserIndex, dwReserved, pKeystroke)
+}
+
+@When[Windows_Win32_UI_Input_XboxController == "on" && XINPUT1_4 == "on" && Windows_Win32_UI_Input_XboxController_XInputGetState == "on"]
+foreign {
     func XInputGetState(dwUserIndex: UInt32, pState: CPointer<XINPUT_STATEAbi>): UInt32
+}
+
+@When[Windows_Win32_UI_Input_XboxController == "on" && XINPUT1_4 == "on" && Windows_Win32_UI_Input_XboxController_XInputGetState == "on"]
+public unsafe func Windows_XInputGetState(dwUserIndex: UInt32, pState: CPointer<XINPUT_STATEAbi>): UInt32 {
+    return XInputGetState(dwUserIndex, pState)
+}
+
+@When[Windows_Win32_UI_Input_XboxController == "on" && XINPUT1_4 == "on" && Windows_Win32_UI_Input_XboxController_XInputSetState == "on"]
+foreign {
     func XInputSetState(dwUserIndex: UInt32, pVibration: CPointer<XINPUT_VIBRATIONAbi>): UInt32
+}
+
+@When[Windows_Win32_UI_Input_XboxController == "on" && XINPUT1_4 == "on" && Windows_Win32_UI_Input_XboxController_XInputSetState == "on"]
+public unsafe func Windows_XInputSetState(dwUserIndex: UInt32, pVibration: CPointer<XINPUT_VIBRATIONAbi>): UInt32 {
+    return XInputSetState(dwUserIndex, pVibration)
 }
 
 @When[Windows_Win32_UI_Input_XboxController == "on"]

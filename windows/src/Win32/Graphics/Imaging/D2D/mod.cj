@@ -6,11 +6,8 @@ package windows.Win32.Graphics.Imaging.D2D
 import std.collection.*
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Direct2D == "on"]
 import windows.Win32.Graphics.Direct2D as Win32_Graphics_Direct2D
-@When[Windows_Win32_Graphics_Imaging == "on"]
 import windows.Win32.Graphics.Imaging as Win32_Graphics_Imaging
 import windows.Win32._impl_l0 as Win32__impl_l0
 

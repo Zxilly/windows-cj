@@ -4,7 +4,6 @@ package windows_sys.Media.DialProtocol
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_UI_Popups == "on"]
 import windows_sys.UI.Popups as UI_Popups
 import windows_sys._impl_l0 as _impl_l0
 import windows_sys._impl_l1 as _impl_l1
@@ -266,6 +265,7 @@ public class IDialDevice2 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IDialDevicePickerFilterVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedAppNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -310,6 +310,7 @@ public class IDialDevicePickerFilter <: InterfaceWrapperBase & ComInterface {
         readVtbl<IDialDevicePickerFilterVtbl>(IDialDevicePickerFilterVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedAppNames(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -321,7 +322,9 @@ public class IDialDevicePickerFilter <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IDialReceiverAppVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAdditionalDataAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetAdditionalDataAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -366,12 +369,14 @@ public class IDialReceiverApp <: InterfaceWrapperBase & ComInterface {
         readVtbl<IDialReceiverAppVtbl>(IDialReceiverAppVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAdditionalDataAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAdditionalDataAsync(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetAdditionalDataAsync(additionalData: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

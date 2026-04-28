@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -1098,7 +1097,10 @@ extend WiFiDirectPairingProcedure <: windows_core.CopyType & windows_core.Runtim
 @C
 public struct IWiFiDirectAdvertisement2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedConfigurationMethods: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedConfigurationMethods: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1167,6 +1169,7 @@ public class IWiFiDirectAdvertisement2 <: InterfaceWrapperBase & ComInterface & 
         readVtbl<IWiFiDirectAdvertisement2Vtbl>(IWiFiDirectAdvertisement2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedConfigurationMethods(): windows_collections.IVector<WiFiDirectConfigurationMethod> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1277,7 +1280,10 @@ extend IWiFiDirectAdvertisementPublisherStatusChangedEventArgs <: windows_core.I
 @C
 public struct IWiFiDirectConnectionParameters2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var PreferenceOrderedConfigurationMethods: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var PreferenceOrderedConfigurationMethods: UIntNative = UIntNative(0)
     public var PreferredPairingProcedure: CFunc<(CPointer<Unit>, CPointer<WiFiDirectPairingProcedureAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetPreferredPairingProcedure: CFunc<(CPointer<Unit>, WiFiDirectPairingProcedureAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -1348,6 +1354,7 @@ public class IWiFiDirectConnectionParameters2 <: InterfaceWrapperBase & ComInter
         readVtbl<IWiFiDirectConnectionParameters2Vtbl>(IWiFiDirectConnectionParameters2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PreferenceOrderedConfigurationMethods(): windows_collections.IVector<WiFiDirectConfigurationMethod> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1866,8 +1873,14 @@ extend WiFiDirectConnectionRequestedEventArgs <: windows_core.HandleWinrtType<Wi
 @C
 public struct IWiFiDirectAdvertisementVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var InformationElements: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var InformationElements: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SetInformationElements: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SetInformationElements: UIntNative = UIntNative(0)
     public var ListenStateDiscoverability: CFunc<(CPointer<Unit>, CPointer<WiFiDirectAdvertisementListenStateDiscoverabilityAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetListenStateDiscoverability: CFunc<(CPointer<Unit>, WiFiDirectAdvertisementListenStateDiscoverabilityAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsAutonomousGroupOwnerEnabled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1941,6 +1954,7 @@ public class IWiFiDirectAdvertisement <: InterfaceWrapperBase & ComInterface & R
         readVtbl<IWiFiDirectAdvertisementVtbl>(IWiFiDirectAdvertisementVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InformationElements(): windows_collections.IVector<WiFiDirectInformationElement> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1949,6 +1963,7 @@ public class IWiFiDirectAdvertisement <: InterfaceWrapperBase & ComInterface & R
         return windows_collections.IVector<WiFiDirectInformationElement>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetInformationElements(value: windows_collections.IVector<WiFiDirectInformationElement>): Unit {
         let v = vtbl()
         let hr = v.SetInformationElements(asRaw(), value.asRaw())
@@ -2219,9 +2234,9 @@ public struct IWiFiDirectDeviceVtbl {
     public var DeviceId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ConnectionStatusChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveConnectionStatusChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public var GetConnectionEndpointPairs: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Networking != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Networking != "on"]
     public var GetConnectionEndpointPairs: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -2333,7 +2348,7 @@ public class IWiFiDirectDevice <: InterfaceWrapperBase & ComInterface & RuntimeN
         HRESULT(hr).ok()
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func GetConnectionEndpointPairs(): windows_collections.IVectorView<_impl_l1.EndpointPair> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2538,13 +2553,13 @@ extend IWiFiDirectDeviceStatics2 <: windows_core.Interface<IWiFiDirectDeviceStat
 @C
 public struct IWiFiDirectInformationElementStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var CreateFromBuffer: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
     public var CreateFromBuffer: UIntNative = UIntNative(0)
-    @When[Windows_Devices_Enumeration == "on"]
+    @When[Windows_Devices_Enumeration == "on" && Windows_Foundation_Collections == "on"]
     public var CreateFromDeviceInformation: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Devices_Enumeration != "on"]
+    @When[Windows_Devices_Enumeration != "on" || Windows_Foundation_Collections != "on"]
     public var CreateFromDeviceInformation: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -2614,7 +2629,7 @@ public class IWiFiDirectInformationElementStatics <: InterfaceWrapperBase & ComI
         readVtbl<IWiFiDirectInformationElementStaticsVtbl>(IWiFiDirectInformationElementStaticsVtbl())
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func CreateFromBuffer(buffer: _impl_l0.IBuffer): windows_collections.IVector<WiFiDirectInformationElement> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2623,7 +2638,7 @@ public class IWiFiDirectInformationElementStatics <: InterfaceWrapperBase & ComI
         return windows_collections.IVector<WiFiDirectInformationElement>.fromAbiTake(result__)
     }
 
-    @When[Windows_Devices_Enumeration == "on"]
+    @When[Windows_Devices_Enumeration == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromDeviceInformation(deviceInformation: _impl_l1.DeviceInformation): windows_collections.IVector<WiFiDirectInformationElement> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2705,10 +2720,12 @@ public class WiFiDirectAdvertisement <: InterfaceWrapperBase & ComInterface & wi
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InformationElements(): windows_collections.IVector<WiFiDirectInformationElement> {
         return defaultInterface().InformationElements()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetInformationElements(value: windows_collections.IVector<WiFiDirectInformationElement>): Unit {
         defaultInterface().SetInformationElements(value)
     }
@@ -3074,7 +3091,7 @@ public class WiFiDirectDevice <: InterfaceWrapperBase & ComInterface & windows_i
         defaultInterface().RemoveConnectionStatusChanged(token)
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func GetConnectionEndpointPairs(): windows_collections.IVectorView<_impl_l1.EndpointPair> {
         return defaultInterface().GetConnectionEndpointPairs()
     }
@@ -3254,7 +3271,7 @@ public class WiFiDirectInformationElement <: InterfaceWrapperBase & ComInterface
         defaultInterface().SetValue(value)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public static unsafe func CreateFromBuffer(buffer: _impl_l0.IBuffer): windows_collections.IVector<WiFiDirectInformationElement> {
         var result__: Option<windows_collections.IVector<WiFiDirectInformationElement>> = Option<windows_collections.IVector<WiFiDirectInformationElement>>.None
         try (factory__ = windows_core.factory<WiFiDirectInformationElement, IWiFiDirectInformationElementStatics>().unwrap()) {
@@ -3266,7 +3283,7 @@ public class WiFiDirectInformationElement <: InterfaceWrapperBase & ComInterface
         }
     }
 
-    @When[Windows_Devices_Enumeration == "on"]
+    @When[Windows_Devices_Enumeration == "on" && Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromDeviceInformation(deviceInformation: _impl_l1.DeviceInformation): windows_collections.IVector<WiFiDirectInformationElement> {
         var result__: Option<windows_collections.IVector<WiFiDirectInformationElement>> = Option<windows_collections.IVector<WiFiDirectInformationElement>>.None
         try (factory__ = windows_core.factory<WiFiDirectInformationElement, IWiFiDirectInformationElementStatics>().unwrap()) {

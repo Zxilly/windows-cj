@@ -22,13 +22,16 @@ public struct ILocalContentSuggestionSettingsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var SetEnabled: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Enabled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var Locations: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage != "on"]
     public var Locations: UIntNative = UIntNative(0)
     public var SetAqsFilter: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var AqsFilter: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var PropertiesToMatch: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var PropertiesToMatch: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -111,7 +114,7 @@ public class ILocalContentSuggestionSettings <: InterfaceWrapperBase & ComInterf
         return result__
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func Locations(): windows_collections.IVector<StorageFolder> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -134,6 +137,7 @@ public class ILocalContentSuggestionSettings <: InterfaceWrapperBase & ComInterf
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PropertiesToMatch(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1012,7 +1016,10 @@ public struct ISearchSuggestionCollectionVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Size: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var AppendQuerySuggestion: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var AppendQuerySuggestions: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AppendQuerySuggestions: UIntNative = UIntNative(0)
     @When[Windows_Storage_Streams == "on"]
     public var AppendResultSuggestion: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams != "on"]
@@ -1100,6 +1107,7 @@ public class ISearchSuggestionCollection <: InterfaceWrapperBase & ComInterface 
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AppendQuerySuggestions(suggestions: windows_collections.IIterable<windows_core.HString>): Unit {
         let v = vtbl()
         let hr = v.AppendQuerySuggestions(asRaw(), suggestions.asRaw())
@@ -1310,7 +1318,7 @@ public class LocalContentSuggestionSettings <: InterfaceWrapperBase & ComInterfa
         return defaultInterface().Enabled()
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func Locations(): windows_collections.IVector<StorageFolder> {
         return defaultInterface().Locations()
     }
@@ -1323,6 +1331,7 @@ public class LocalContentSuggestionSettings <: InterfaceWrapperBase & ComInterfa
         return defaultInterface().AqsFilter()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PropertiesToMatch(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().PropertiesToMatch()
     }
@@ -2032,6 +2041,7 @@ public class SearchSuggestionCollection <: InterfaceWrapperBase & ComInterface &
         defaultInterface().AppendQuerySuggestion(text)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AppendQuerySuggestions(suggestions: windows_collections.IIterable<windows_core.HString>): Unit {
         defaultInterface().AppendQuerySuggestions(suggestions)
     }

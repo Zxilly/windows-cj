@@ -79,9 +79,11 @@ public class IBasicProperties <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IDocumentPropertiesVtbl {
     public var base_: IStorageItemExtraPropertiesVtbl = IStorageItemExtraPropertiesVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Author: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Title: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetTitle: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Keywords: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Comment: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetComment: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -128,6 +130,7 @@ public class IDocumentProperties <: InterfaceWrapperBase & ComInterface {
         readVtbl<IDocumentPropertiesVtbl>(IDocumentPropertiesVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Author(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -146,6 +149,7 @@ public class IDocumentProperties <: InterfaceWrapperBase & ComInterface {
         return __vt.SetTitle(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Keywords(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -171,6 +175,7 @@ public struct IImagePropertiesVtbl {
     public var base_: IStorageItemExtraPropertiesVtbl = IStorageItemExtraPropertiesVtbl()
     public var Rating: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var SetRating: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Keywords: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var DateTaken: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.DateTime>) -> Int32> = { _, _ => 0 }
     public var SetDateTaken: CFunc<(CPointer<Unit>, Foundation__impl_l0.DateTime) -> Int32> = { _, _ => 0 }
@@ -185,6 +190,7 @@ public struct IImagePropertiesVtbl {
     public var CameraModel: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetCameraModel: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Orientation: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var PeopleNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -241,6 +247,7 @@ public class IImageProperties <: InterfaceWrapperBase & ComInterface {
         return __vt.SetRating(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Keywords(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -325,6 +332,7 @@ public class IImageProperties <: InterfaceWrapperBase & ComInterface {
         return __vt.Orientation(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PeopleNames(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -340,6 +348,7 @@ public struct IMusicPropertiesVtbl {
     public var SetAlbum: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Artist: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetArtist: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Genre: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var TrackNumber: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var SetTrackNumber: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
@@ -351,13 +360,17 @@ public struct IMusicPropertiesVtbl {
     public var Bitrate: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var AlbumArtist: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetAlbumArtist: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Composers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Conductors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Subtitle: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetSubtitle: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Producers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Publisher: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetPublisher: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Writers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Year: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var SetYear: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
@@ -428,6 +441,7 @@ public class IMusicProperties <: InterfaceWrapperBase & ComInterface {
         return __vt.SetArtist(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Genre(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -494,12 +508,14 @@ public class IMusicProperties <: InterfaceWrapperBase & ComInterface {
         return __vt.SetAlbumArtist(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Composers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Composers(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Conductors(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -518,6 +534,7 @@ public class IMusicProperties <: InterfaceWrapperBase & ComInterface {
         return __vt.SetSubtitle(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Producers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -536,6 +553,7 @@ public class IMusicProperties <: InterfaceWrapperBase & ComInterface {
         return __vt.SetPublisher(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Writers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -559,7 +577,9 @@ public class IMusicProperties <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IStorageItemExtraPropertiesVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var RetrievePropertiesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SavePropertiesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var SavePropertiesAsyncOverloadDefault: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -605,12 +625,14 @@ public class IStorageItemExtraProperties <: InterfaceWrapperBase & ComInterface 
         readVtbl<IStorageItemExtraPropertiesVtbl>(IStorageItemExtraPropertiesVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RetrievePropertiesAsync(propertiesToRetrieve: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RetrievePropertiesAsync(__liveRaw, propertiesToRetrieve, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SavePropertiesAsync(propertiesToSave: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -706,6 +728,7 @@ public struct IVideoPropertiesVtbl {
     public var base_: IStorageItemExtraPropertiesVtbl = IStorageItemExtraPropertiesVtbl()
     public var Rating: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var SetRating: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Keywords: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Width: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var Height: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
@@ -716,13 +739,16 @@ public struct IVideoPropertiesVtbl {
     public var SetTitle: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Subtitle: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetSubtitle: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Producers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Publisher: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetPublisher: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Writers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Year: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var SetYear: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     public var Bitrate: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Directors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Orientation: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -780,6 +806,7 @@ public class IVideoProperties <: InterfaceWrapperBase & ComInterface {
         return __vt.SetRating(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Keywords(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -840,6 +867,7 @@ public class IVideoProperties <: InterfaceWrapperBase & ComInterface {
         return __vt.SetSubtitle(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Producers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -858,6 +886,7 @@ public class IVideoProperties <: InterfaceWrapperBase & ComInterface {
         return __vt.SetPublisher(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Writers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -882,6 +911,7 @@ public class IVideoProperties <: InterfaceWrapperBase & ComInterface {
         return __vt.Bitrate(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Directors(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

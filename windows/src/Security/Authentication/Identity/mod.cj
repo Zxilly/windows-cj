@@ -247,7 +247,10 @@ extend EnterpriseKeyCredentialRegistrationInfo <: windows_core.HandleWinrtType<E
 @C
 public struct IEnterpriseKeyCredentialRegistrationManagerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetRegistrationsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetRegistrationsAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -316,6 +319,7 @@ public class IEnterpriseKeyCredentialRegistrationManager <: InterfaceWrapperBase
         readVtbl<IEnterpriseKeyCredentialRegistrationManagerVtbl>(IEnterpriseKeyCredentialRegistrationManagerVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetRegistrationsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<EnterpriseKeyCredentialRegistrationInfo>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -397,6 +401,7 @@ public class EnterpriseKeyCredentialRegistrationManager <: InterfaceWrapperBase 
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetRegistrationsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<EnterpriseKeyCredentialRegistrationInfo>> {
         return defaultInterface().GetRegistrationsAsync()
     }

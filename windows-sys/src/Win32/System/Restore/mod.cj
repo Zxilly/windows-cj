@@ -3,7 +3,6 @@ package windows_sys.Win32.System.Restore
 
 import windows_polyfill.{packedReadInt64, packedReadUInt32, packedReadValue, packedWriteInt64, packedWriteUInt32, packedWriteValue}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 
 
@@ -376,15 +375,34 @@ public struct RESTOREPOINTINFOW {
     public init() {}
 }
 
-@When[SRCLIENT == "on"]
+@When[Windows_Win32_System_Restore == "on" && SRCLIENT == "on" && Windows_Win32_System_Restore_SRRemoveRestorePoint == "on"]
 foreign {
     func SRRemoveRestorePoint(dwRPNum: UInt32): UInt32
 }
 
-@When[SFC == "on"]
+@When[Windows_Win32_System_Restore == "on" && SRCLIENT == "on" && Windows_Win32_System_Restore_SRRemoveRestorePoint == "on"]
+public unsafe func Windows_SRRemoveRestorePoint(dwRPNum: UInt32): UInt32 {
+    return SRRemoveRestorePoint(dwRPNum)
+}
+
+@When[Windows_Win32_System_Restore == "on" && SFC == "on" && Windows_Win32_System_Restore_SRSetRestorePointA == "on"]
 foreign {
     func SRSetRestorePointA(pRestorePtSpec: CPointer<RESTOREPOINTINFOA>, pSMgrStatus: CPointer<STATEMGRSTATUS>): Int32
+}
+
+@When[Windows_Win32_System_Restore == "on" && SFC == "on" && Windows_Win32_System_Restore_SRSetRestorePointA == "on"]
+public unsafe func Windows_SRSetRestorePointA(pRestorePtSpec: CPointer<RESTOREPOINTINFOA>, pSMgrStatus: CPointer<STATEMGRSTATUS>): Int32 {
+    return SRSetRestorePointA(pRestorePtSpec, pSMgrStatus)
+}
+
+@When[Windows_Win32_System_Restore == "on" && SFC == "on" && Windows_Win32_System_Restore_SRSetRestorePointW == "on"]
+foreign {
     func SRSetRestorePointW(pRestorePtSpec: CPointer<RESTOREPOINTINFOW>, pSMgrStatus: CPointer<STATEMGRSTATUS>): Int32
+}
+
+@When[Windows_Win32_System_Restore == "on" && SFC == "on" && Windows_Win32_System_Restore_SRSetRestorePointW == "on"]
+public unsafe func Windows_SRSetRestorePointW(pRestorePtSpec: CPointer<RESTOREPOINTINFOW>, pSMgrStatus: CPointer<STATEMGRSTATUS>): Int32 {
+    return SRSetRestorePointW(pRestorePtSpec, pSMgrStatus)
 }
 
 @When[Windows_Win32_System_Restore == "on"]

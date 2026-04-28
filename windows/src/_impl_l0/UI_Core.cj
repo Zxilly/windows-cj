@@ -1495,12 +1495,14 @@ public class DispatchedHandler <: InterfaceWrapperBase & ComInterface & windows_
 @When[Windows_UI_Core == "on"]
 extend DispatchedHandler <: windows_core.Interface<DispatchedHandler> {}
 
+@When[Windows_UI_Core == "on"]
 private open class DispatchedHandlerInvokerErased {
     public open func __winrtThunk_Invoke(): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Core == "on"]
 private open class DispatchedHandlerInvoker <: DispatchedHandlerInvokerErased {
     public open func Invoke(): Unit {
         ()
@@ -1512,6 +1514,7 @@ private open class DispatchedHandlerInvoker <: DispatchedHandlerInvokerErased {
     }
 }
 
+@When[Windows_UI_Core == "on"]
 private class DispatchedHandlerBox <: DispatchedHandlerInvoker {
     public let invoke_: () -> Unit
     private let vtblHandle: CPointerHandle<DispatchedHandlerVtbl>
@@ -1530,6 +1533,7 @@ private class DispatchedHandlerBox <: DispatchedHandlerInvoker {
     }
 }
 
+@When[Windows_UI_Core == "on"]
 func buildDispatchedHandlerBoxVtbl(): DispatchedHandlerVtbl {
     var vtbl = DispatchedHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()

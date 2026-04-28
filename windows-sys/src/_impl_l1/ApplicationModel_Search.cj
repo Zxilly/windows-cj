@@ -13,10 +13,11 @@ public struct ILocalContentSuggestionSettingsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var SetEnabled: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
     public var Enabled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var Locations: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetAqsFilter: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var AqsFilter: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var PropertiesToMatch: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -73,7 +74,7 @@ public class ILocalContentSuggestionSettings <: InterfaceWrapperBase & ComInterf
         return __vt.Enabled(__liveRaw, result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func Locations(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -92,6 +93,7 @@ public class ILocalContentSuggestionSettings <: InterfaceWrapperBase & ComInterf
         return __vt.AqsFilter(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PropertiesToMatch(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -631,6 +633,7 @@ public struct ISearchSuggestionCollectionVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Size: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var AppendQuerySuggestion: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var AppendQuerySuggestions: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Storage_Streams == "on"]
     public var AppendResultSuggestion: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _, _, _, _ => 0 }
@@ -690,6 +693,7 @@ public class ISearchSuggestionCollection <: InterfaceWrapperBase & ComInterface 
         return __vt.AppendQuerySuggestion(__liveRaw, text)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AppendQuerySuggestions(suggestions: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

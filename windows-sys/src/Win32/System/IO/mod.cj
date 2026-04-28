@@ -3,7 +3,6 @@ package windows_sys.Win32.System.IO
 
 import windows_polyfill.{unionReadInt32, unionWriteInt32}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 
 
@@ -151,36 +150,131 @@ public type PIO_APC_ROUTINE = CFunc<(CPointer<Unit>, CPointer<IO_STATUS_BLOCK>, 
 @When[Windows_Win32_System_IO == "on"]
 public type LPOVERLAPPED_COMPLETION_ROUTINE = CFunc<(UInt32, UInt32, CPointer<OVERLAPPED>) -> Unit>
 
-@When[KERNEL32 == "on"]
+@When[Windows_Win32_System_IO == "on" && KERNEL32 == "on" && Windows_Win32_System_IO_BindIoCompletionCallback == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func BindIoCompletionCallback(FileHandle: CPointer<Unit>, Function: LPOVERLAPPED_COMPLETION_ROUTINE, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_IO == "on" && KERNEL32 == "on" && Windows_Win32_System_IO_BindIoCompletionCallback == "on"]
+public unsafe func Windows_BindIoCompletionCallback(FileHandle: CPointer<Unit>, Function: LPOVERLAPPED_COMPLETION_ROUTINE, Flags: UInt32): Int32 {
+    return BindIoCompletionCallback(FileHandle, Function, Flags)
+}
+
+@When[Windows_Win32_System_IO == "on" && KERNEL32 == "on" && Windows_Win32_System_IO_CancelIo == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CancelIo(hFile: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_IO == "on" && KERNEL32 == "on" && Windows_Win32_System_IO_CancelIo == "on"]
+public unsafe func Windows_CancelIo(hFile: CPointer<Unit>): Int32 {
+    return CancelIo(hFile)
+}
+
+@When[Windows_Win32_System_IO == "on" && KERNEL32 == "on" && Windows_Win32_System_IO_CancelIoEx == "on"]
+foreign {
     // param-hint: lpOverlapped optional
     // pinvoke-hint: SetLastError
     func CancelIoEx(hFile: CPointer<Unit>, lpOverlapped: CPointer<OVERLAPPED>): Int32
+}
+
+@When[Windows_Win32_System_IO == "on" && KERNEL32 == "on" && Windows_Win32_System_IO_CancelIoEx == "on"]
+public unsafe func Windows_CancelIoEx(hFile: CPointer<Unit>, lpOverlapped: CPointer<OVERLAPPED>): Int32 {
+    return CancelIoEx(hFile, lpOverlapped)
+}
+
+@When[Windows_Win32_System_IO == "on" && KERNEL32 == "on" && Windows_Win32_System_IO_CancelSynchronousIo == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CancelSynchronousIo(hThread: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_IO == "on" && KERNEL32 == "on" && Windows_Win32_System_IO_CancelSynchronousIo == "on"]
+public unsafe func Windows_CancelSynchronousIo(hThread: CPointer<Unit>): Int32 {
+    return CancelSynchronousIo(hThread)
+}
+
+@When[Windows_Win32_System_IO == "on" && KERNEL32 == "on" && Windows_Win32_System_IO_CreateIoCompletionPort == "on"]
+foreign {
     // param-hint: ExistingCompletionPort optional
     // pinvoke-hint: SetLastError
     func CreateIoCompletionPort(FileHandle: CPointer<Unit>, ExistingCompletionPort: CPointer<Unit>, CompletionKey: UIntNative, NumberOfConcurrentThreads: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_IO == "on" && KERNEL32 == "on" && Windows_Win32_System_IO_CreateIoCompletionPort == "on"]
+public unsafe func Windows_CreateIoCompletionPort(FileHandle: CPointer<Unit>, ExistingCompletionPort: CPointer<Unit>, CompletionKey: UIntNative, NumberOfConcurrentThreads: UInt32): CPointer<Unit> {
+    return CreateIoCompletionPort(FileHandle, ExistingCompletionPort, CompletionKey, NumberOfConcurrentThreads)
+}
+
+@When[Windows_Win32_System_IO == "on" && KERNEL32 == "on" && Windows_Win32_System_IO_DeviceIoControl == "on"]
+foreign {
     // param-hint: lpInBuffer bytes=param[3] optional
     // param-hint: lpOutBuffer bytes=param[5] optional
     // param-hint: lpBytesReturned optional
     // param-hint: lpOverlapped optional
     // pinvoke-hint: SetLastError
     func DeviceIoControl(hDevice: CPointer<Unit>, dwIoControlCode: UInt32, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>, lpOverlapped: CPointer<OVERLAPPED>): Int32
+}
+
+@When[Windows_Win32_System_IO == "on" && KERNEL32 == "on" && Windows_Win32_System_IO_DeviceIoControl == "on"]
+public unsafe func Windows_DeviceIoControl(hDevice: CPointer<Unit>, dwIoControlCode: UInt32, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>, lpOverlapped: CPointer<OVERLAPPED>): Int32 {
+    return DeviceIoControl(hDevice, dwIoControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned, lpOverlapped)
+}
+
+@When[Windows_Win32_System_IO == "on" && KERNEL32 == "on" && Windows_Win32_System_IO_GetOverlappedResult == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetOverlappedResult(hFile: CPointer<Unit>, lpOverlapped: CPointer<OVERLAPPED>, lpNumberOfBytesTransferred: CPointer<UInt32>, bWait: Int32): Int32
+}
+
+@When[Windows_Win32_System_IO == "on" && KERNEL32 == "on" && Windows_Win32_System_IO_GetOverlappedResult == "on"]
+public unsafe func Windows_GetOverlappedResult(hFile: CPointer<Unit>, lpOverlapped: CPointer<OVERLAPPED>, lpNumberOfBytesTransferred: CPointer<UInt32>, bWait: Int32): Int32 {
+    return GetOverlappedResult(hFile, lpOverlapped, lpNumberOfBytesTransferred, bWait)
+}
+
+@When[Windows_Win32_System_IO == "on" && KERNEL32 == "on" && Windows_Win32_System_IO_GetOverlappedResultEx == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetOverlappedResultEx(hFile: CPointer<Unit>, lpOverlapped: CPointer<OVERLAPPED>, lpNumberOfBytesTransferred: CPointer<UInt32>, dwMilliseconds: UInt32, bAlertable: Int32): Int32
+}
+
+@When[Windows_Win32_System_IO == "on" && KERNEL32 == "on" && Windows_Win32_System_IO_GetOverlappedResultEx == "on"]
+public unsafe func Windows_GetOverlappedResultEx(hFile: CPointer<Unit>, lpOverlapped: CPointer<OVERLAPPED>, lpNumberOfBytesTransferred: CPointer<UInt32>, dwMilliseconds: UInt32, bAlertable: Int32): Int32 {
+    return GetOverlappedResultEx(hFile, lpOverlapped, lpNumberOfBytesTransferred, dwMilliseconds, bAlertable)
+}
+
+@When[Windows_Win32_System_IO == "on" && KERNEL32 == "on" && Windows_Win32_System_IO_GetQueuedCompletionStatus == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetQueuedCompletionStatus(CompletionPort: CPointer<Unit>, lpNumberOfBytesTransferred: CPointer<UInt32>, lpCompletionKey: CPointer<UIntNative>, lpOverlapped: CPointer<CPointer<OVERLAPPED>>, dwMilliseconds: UInt32): Int32
+}
+
+@When[Windows_Win32_System_IO == "on" && KERNEL32 == "on" && Windows_Win32_System_IO_GetQueuedCompletionStatus == "on"]
+public unsafe func Windows_GetQueuedCompletionStatus(CompletionPort: CPointer<Unit>, lpNumberOfBytesTransferred: CPointer<UInt32>, lpCompletionKey: CPointer<UIntNative>, lpOverlapped: CPointer<CPointer<OVERLAPPED>>, dwMilliseconds: UInt32): Int32 {
+    return GetQueuedCompletionStatus(CompletionPort, lpNumberOfBytesTransferred, lpCompletionKey, lpOverlapped, dwMilliseconds)
+}
+
+@When[Windows_Win32_System_IO == "on" && KERNEL32 == "on" && Windows_Win32_System_IO_GetQueuedCompletionStatusEx == "on"]
+foreign {
     // param-hint: lpCompletionPortEntries len=param[2]
     // pinvoke-hint: SetLastError
     func GetQueuedCompletionStatusEx(CompletionPort: CPointer<Unit>, lpCompletionPortEntries: CPointer<OVERLAPPED_ENTRY>, ulCount: UInt32, ulNumEntriesRemoved: CPointer<UInt32>, dwMilliseconds: UInt32, fAlertable: Int32): Int32
+}
+
+@When[Windows_Win32_System_IO == "on" && KERNEL32 == "on" && Windows_Win32_System_IO_GetQueuedCompletionStatusEx == "on"]
+public unsafe func Windows_GetQueuedCompletionStatusEx(CompletionPort: CPointer<Unit>, lpCompletionPortEntries: CPointer<OVERLAPPED_ENTRY>, ulCount: UInt32, ulNumEntriesRemoved: CPointer<UInt32>, dwMilliseconds: UInt32, fAlertable: Int32): Int32 {
+    return GetQueuedCompletionStatusEx(CompletionPort, lpCompletionPortEntries, ulCount, ulNumEntriesRemoved, dwMilliseconds, fAlertable)
+}
+
+@When[Windows_Win32_System_IO == "on" && KERNEL32 == "on" && Windows_Win32_System_IO_PostQueuedCompletionStatus == "on"]
+foreign {
     // param-hint: lpOverlapped optional
     // pinvoke-hint: SetLastError
     func PostQueuedCompletionStatus(CompletionPort: CPointer<Unit>, dwNumberOfBytesTransferred: UInt32, dwCompletionKey: UIntNative, lpOverlapped: CPointer<OVERLAPPED>): Int32
+}
+
+@When[Windows_Win32_System_IO == "on" && KERNEL32 == "on" && Windows_Win32_System_IO_PostQueuedCompletionStatus == "on"]
+public unsafe func Windows_PostQueuedCompletionStatus(CompletionPort: CPointer<Unit>, dwNumberOfBytesTransferred: UInt32, dwCompletionKey: UIntNative, lpOverlapped: CPointer<OVERLAPPED>): Int32 {
+    return PostQueuedCompletionStatus(CompletionPort, dwNumberOfBytesTransferred, dwCompletionKey, lpOverlapped)
 }

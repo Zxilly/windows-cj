@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -188,12 +187,14 @@ public class ComponentLoadFailedEventHandler <: InterfaceWrapperBase & ComInterf
 @When[Windows_Media_Protection == "on"]
 extend ComponentLoadFailedEventHandler <: windows_core.Interface<ComponentLoadFailedEventHandler> {}
 
+@When[Windows_Media_Protection == "on"]
 private open class ComponentLoadFailedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_Media_Protection == "on"]
 private open class ComponentLoadFailedEventHandlerInvoker <: ComponentLoadFailedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<MediaProtectionManager>, e: InParam<ComponentLoadFailedEventArgs>): Unit {
         ()
@@ -205,6 +206,7 @@ private open class ComponentLoadFailedEventHandlerInvoker <: ComponentLoadFailed
     }
 }
 
+@When[Windows_Media_Protection == "on"]
 private class ComponentLoadFailedEventHandlerBox <: ComponentLoadFailedEventHandlerInvoker {
     public let invoke_: (InParam<MediaProtectionManager>, InParam<ComponentLoadFailedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<ComponentLoadFailedEventHandlerVtbl>
@@ -223,6 +225,7 @@ private class ComponentLoadFailedEventHandlerBox <: ComponentLoadFailedEventHand
     }
 }
 
+@When[Windows_Media_Protection == "on"]
 func buildComponentLoadFailedEventHandlerBoxVtbl(): ComponentLoadFailedEventHandlerVtbl {
     var vtbl = ComponentLoadFailedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -1543,7 +1546,10 @@ extend IProtectionCapabilities <: windows_core.Interface<IProtectionCapabilities
 @C
 public struct IRevocationAndRenewalInformationVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Items: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Items: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1612,6 +1618,7 @@ public class IRevocationAndRenewalInformation <: InterfaceWrapperBase & ComInter
         readVtbl<IRevocationAndRenewalInformationVtbl>(IRevocationAndRenewalInformationVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVector<RevocationAndRenewalItem> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2520,12 +2527,14 @@ public class RebootNeededEventHandler <: InterfaceWrapperBase & ComInterface & w
 @When[Windows_Media_Protection == "on"]
 extend RebootNeededEventHandler <: windows_core.Interface<RebootNeededEventHandler> {}
 
+@When[Windows_Media_Protection == "on"]
 private open class RebootNeededEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_Media_Protection == "on"]
 private open class RebootNeededEventHandlerInvoker <: RebootNeededEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<MediaProtectionManager>): Unit {
         ()
@@ -2537,6 +2546,7 @@ private open class RebootNeededEventHandlerInvoker <: RebootNeededEventHandlerIn
     }
 }
 
+@When[Windows_Media_Protection == "on"]
 private class RebootNeededEventHandlerBox <: RebootNeededEventHandlerInvoker {
     public let invoke_: (InParam<MediaProtectionManager>) -> Unit
     private let vtblHandle: CPointerHandle<RebootNeededEventHandlerVtbl>
@@ -2555,6 +2565,7 @@ private class RebootNeededEventHandlerBox <: RebootNeededEventHandlerInvoker {
     }
 }
 
+@When[Windows_Media_Protection == "on"]
 func buildRebootNeededEventHandlerBoxVtbl(): RebootNeededEventHandlerVtbl {
     var vtbl = RebootNeededEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -2701,6 +2712,7 @@ public class RevocationAndRenewalInformation <: InterfaceWrapperBase & ComInterf
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVector<RevocationAndRenewalItem> {
         return defaultInterface().Items()
     }
@@ -3111,12 +3123,14 @@ public class ServiceRequestedEventHandler <: InterfaceWrapperBase & ComInterface
 @When[Windows_Media_Protection == "on"]
 extend ServiceRequestedEventHandler <: windows_core.Interface<ServiceRequestedEventHandler> {}
 
+@When[Windows_Media_Protection == "on"]
 private open class ServiceRequestedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_Media_Protection == "on"]
 private open class ServiceRequestedEventHandlerInvoker <: ServiceRequestedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<MediaProtectionManager>, e: InParam<ServiceRequestedEventArgs>): Unit {
         ()
@@ -3128,6 +3142,7 @@ private open class ServiceRequestedEventHandlerInvoker <: ServiceRequestedEventH
     }
 }
 
+@When[Windows_Media_Protection == "on"]
 private class ServiceRequestedEventHandlerBox <: ServiceRequestedEventHandlerInvoker {
     public let invoke_: (InParam<MediaProtectionManager>, InParam<ServiceRequestedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<ServiceRequestedEventHandlerVtbl>
@@ -3146,6 +3161,7 @@ private class ServiceRequestedEventHandlerBox <: ServiceRequestedEventHandlerInv
     }
 }
 
+@When[Windows_Media_Protection == "on"]
 func buildServiceRequestedEventHandlerBoxVtbl(): ServiceRequestedEventHandlerVtbl {
     var vtbl = ServiceRequestedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()

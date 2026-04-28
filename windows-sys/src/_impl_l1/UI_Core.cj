@@ -1788,7 +1788,7 @@ public struct ICoreWindowDialogVtbl {
     public var SetTitle: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var IsInteractionDelayed: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetIsInteractionDelayed: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Popups == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Popups == "on"]
     public var Commands: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var DefaultCommandIndex: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var SetDefaultCommandIndex: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
@@ -1891,7 +1891,7 @@ public class ICoreWindowDialog <: InterfaceWrapperBase & ComInterface {
         return __vt.SetIsInteractionDelayed(__liveRaw, value)
     }
 
-    @When[Windows_UI_Popups == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Popups == "on"]
     public unsafe func Commands(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2011,7 +2011,7 @@ public struct ICoreWindowFlyoutVtbl {
     public var SetTitle: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var IsInteractionDelayed: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetIsInteractionDelayed: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Popups == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Popups == "on"]
     public var Commands: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var DefaultCommandIndex: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var SetDefaultCommandIndex: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
@@ -2112,7 +2112,7 @@ public class ICoreWindowFlyout <: InterfaceWrapperBase & ComInterface {
         return __vt.SetIsInteractionDelayed(__liveRaw, value)
     }
 
-    @When[Windows_UI_Popups == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Popups == "on"]
     public unsafe func Commands(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2333,7 +2333,7 @@ public struct IPointerEventArgsVtbl {
     public var CurrentPoint: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_System == "on"]
     public var KeyModifiers: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Input == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Input == "on"]
     public var GetIntermediatePoints: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -2392,7 +2392,7 @@ public class IPointerEventArgs <: InterfaceWrapperBase & ComInterface {
         return __vt.KeyModifiers(__liveRaw, result__)
     }
 
-    @When[Windows_UI_Input == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Input == "on"]
     public unsafe func GetIntermediatePoints(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

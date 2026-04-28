@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_UI_Popups == "on"]
 import windows.UI.Popups as UI_Popups
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -614,7 +612,10 @@ public struct ICastingDevicePickerFilterVtbl {
     public var SetSupportsVideo: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SupportsPictures: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetSupportsPictures: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedCastingSources: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedCastingSources: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -725,6 +726,7 @@ public class ICastingDevicePickerFilter <: InterfaceWrapperBase & ComInterface &
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedCastingSources(): windows_collections.IVector<CastingSource> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -830,6 +832,7 @@ public class CastingDevicePickerFilter <: InterfaceWrapperBase & ComInterface & 
         defaultInterface().SetSupportsPictures(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedCastingSources(): windows_collections.IVector<CastingSource> {
         return defaultInterface().SupportedCastingSources()
     }

@@ -11,20 +11,44 @@ import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
 
 
-@When[QUERY == "on"]
-foreign {
-    func LoadIFilterEx(pwcsPath: CPointer<UInt16>, dwFlags: UInt32, riid: CPointer<GUID>, ppIUnk: CPointer<CPointer<Unit>>): Int32
-}
-
-@When[QUERY == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on")]
+@When[Windows_Win32_Storage_IndexServer == "on" && QUERY == "on" && Windows_Win32_Storage_IndexServer_BindIFilterFromStorage == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
 foreign {
     func BindIFilterFromStorage(pStg: CPointer<Unit>, pUnkOuter: CPointer<Unit>, ppIUnk: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[QUERY == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_Storage_IndexServer == "on" && QUERY == "on" && Windows_Win32_Storage_IndexServer_BindIFilterFromStorage == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_BindIFilterFromStorage(pStg: CPointer<Unit>, pUnkOuter: CPointer<Unit>, ppIUnk: CPointer<CPointer<Unit>>): Int32 {
+    return BindIFilterFromStorage(pStg, pUnkOuter, ppIUnk)
+}
+
+@When[Windows_Win32_Storage_IndexServer == "on" && QUERY == "on" && Windows_Win32_Storage_IndexServer_BindIFilterFromStream == "on" && Windows_Win32_System_Com == "on"]
 foreign {
     func BindIFilterFromStream(pStm: CPointer<Unit>, pUnkOuter: CPointer<Unit>, ppIUnk: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Storage_IndexServer == "on" && QUERY == "on" && Windows_Win32_Storage_IndexServer_BindIFilterFromStream == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_BindIFilterFromStream(pStm: CPointer<Unit>, pUnkOuter: CPointer<Unit>, ppIUnk: CPointer<CPointer<Unit>>): Int32 {
+    return BindIFilterFromStream(pStm, pUnkOuter, ppIUnk)
+}
+
+@When[Windows_Win32_Storage_IndexServer == "on" && QUERY == "on" && Windows_Win32_Storage_IndexServer_LoadIFilter == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func LoadIFilter(pwcsPath: CPointer<UInt16>, pUnkOuter: CPointer<Unit>, ppIUnk: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Storage_IndexServer == "on" && QUERY == "on" && Windows_Win32_Storage_IndexServer_LoadIFilter == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_LoadIFilter(pwcsPath: CPointer<UInt16>, pUnkOuter: CPointer<Unit>, ppIUnk: CPointer<CPointer<Unit>>): Int32 {
+    return LoadIFilter(pwcsPath, pUnkOuter, ppIUnk)
+}
+
+@When[Windows_Win32_Storage_IndexServer == "on" && QUERY == "on" && Windows_Win32_Storage_IndexServer_LoadIFilterEx == "on"]
+foreign {
+    func LoadIFilterEx(pwcsPath: CPointer<UInt16>, dwFlags: UInt32, riid: CPointer<GUID>, ppIUnk: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Storage_IndexServer == "on" && QUERY == "on" && Windows_Win32_Storage_IndexServer_LoadIFilterEx == "on"]
+public unsafe func Windows_LoadIFilterEx(pwcsPath: CPointer<UInt16>, dwFlags: UInt32, riid: CPointer<GUID>, ppIUnk: CPointer<CPointer<Unit>>): Int32 {
+    return LoadIFilterEx(pwcsPath, dwFlags, riid, ppIUnk)
 }
 
 @When[Windows_Win32_Storage_IndexServer == "on"]

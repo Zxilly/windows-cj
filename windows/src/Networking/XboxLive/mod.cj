@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -1589,7 +1588,10 @@ public struct IXboxLiveEndpointPairTemplateVtbl {
     public var InitiatorBoundPortRangeUpper: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var AcceptorBoundPortRangeLower: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var AcceptorBoundPortRangeUpper: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var EndpointPairs: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var EndpointPairs: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1752,6 +1754,7 @@ public class IXboxLiveEndpointPairTemplate <: InterfaceWrapperBase & ComInterfac
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func EndpointPairs(): windows_collections.IVectorView<XboxLiveEndpointPair> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1769,7 +1772,10 @@ extend IXboxLiveEndpointPairTemplate <: windows_core.Interface<IXboxLiveEndpoint
 public struct IXboxLiveEndpointPairTemplateStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var GetTemplateByName: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Templates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Templates: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1846,6 +1852,7 @@ public class IXboxLiveEndpointPairTemplateStatics <: InterfaceWrapperBase & ComI
         return XboxLiveEndpointPairTemplate.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Templates(): windows_collections.IVectorView<XboxLiveEndpointPairTemplate> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1948,12 +1955,24 @@ extend IXboxLiveInboundEndpointPairCreatedEventArgs <: windows_core.Interface<IX
 public struct IXboxLiveQualityOfServiceMeasurementVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var MeasureAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetMetricResultsForDevice: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetMetricResultsForDevice: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetMetricResultsForMetric: CFunc<(CPointer<Unit>, XboxLiveQualityOfServiceMetricAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetMetricResultsForMetric: UIntNative = UIntNative(0)
     public var GetMetricResult: CFunc<(CPointer<Unit>, CPointer<Unit>, XboxLiveQualityOfServiceMetricAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var GetPrivatePayloadResult: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Metrics: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Metrics: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var DeviceAddresses: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var DeviceAddresses: UIntNative = UIntNative(0)
     public var ShouldRequestPrivatePayloads: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetShouldRequestPrivatePayloads: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var TimeoutInMilliseconds: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1961,8 +1980,14 @@ public struct IXboxLiveQualityOfServiceMeasurementVtbl {
     public var NumberOfProbesToAttempt: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetNumberOfProbesToAttempt: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var NumberOfResultsPending: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var MetricResults: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var MetricResults: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var PrivatePayloadResults: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var PrivatePayloadResults: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2039,6 +2064,7 @@ public class IXboxLiveQualityOfServiceMeasurement <: InterfaceWrapperBase & ComI
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetMetricResultsForDevice(deviceAddress: XboxLiveDeviceAddress): windows_collections.IVectorView<XboxLiveQualityOfServiceMetricResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2047,6 +2073,7 @@ public class IXboxLiveQualityOfServiceMeasurement <: InterfaceWrapperBase & ComI
         return windows_collections.IVectorView<XboxLiveQualityOfServiceMetricResult>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetMetricResultsForMetric(metric: XboxLiveQualityOfServiceMetric): windows_collections.IVectorView<XboxLiveQualityOfServiceMetricResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2071,6 +2098,7 @@ public class IXboxLiveQualityOfServiceMeasurement <: InterfaceWrapperBase & ComI
         return XboxLiveQualityOfServicePrivatePayloadResult.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Metrics(): windows_collections.IVector<XboxLiveQualityOfServiceMetric> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2079,6 +2107,7 @@ public class IXboxLiveQualityOfServiceMeasurement <: InterfaceWrapperBase & ComI
         return windows_collections.IVector<XboxLiveQualityOfServiceMetric>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DeviceAddresses(): windows_collections.IVector<XboxLiveDeviceAddress> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2137,6 +2166,7 @@ public class IXboxLiveQualityOfServiceMeasurement <: InterfaceWrapperBase & ComI
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MetricResults(): windows_collections.IVectorView<XboxLiveQualityOfServiceMetricResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2145,6 +2175,7 @@ public class IXboxLiveQualityOfServiceMeasurement <: InterfaceWrapperBase & ComI
         return windows_collections.IVectorView<XboxLiveQualityOfServiceMetricResult>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PrivatePayloadResults(): windows_collections.IVectorView<XboxLiveQualityOfServicePrivatePayloadResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2939,6 +2970,7 @@ public class XboxLiveEndpointPairTemplate <: InterfaceWrapperBase & ComInterface
         return defaultInterface().AcceptorBoundPortRangeUpper()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func EndpointPairs(): windows_collections.IVectorView<XboxLiveEndpointPair> {
         return defaultInterface().EndpointPairs()
     }
@@ -2954,6 +2986,7 @@ public class XboxLiveEndpointPairTemplate <: InterfaceWrapperBase & ComInterface
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Templates(): windows_collections.IVectorView<XboxLiveEndpointPairTemplate> {
         var result__: Option<windows_collections.IVectorView<XboxLiveEndpointPairTemplate>> = Option<windows_collections.IVectorView<XboxLiveEndpointPairTemplate>>.None
         try (factory__ = windows_core.factory<XboxLiveEndpointPairTemplate, IXboxLiveEndpointPairTemplateStatics>().unwrap()) {
@@ -3160,10 +3193,12 @@ public class XboxLiveQualityOfServiceMeasurement <: InterfaceWrapperBase & ComIn
         return defaultInterface().MeasureAsync()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetMetricResultsForDevice(deviceAddress: XboxLiveDeviceAddress): windows_collections.IVectorView<XboxLiveQualityOfServiceMetricResult> {
         return defaultInterface().GetMetricResultsForDevice(deviceAddress)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetMetricResultsForMetric(metric: XboxLiveQualityOfServiceMetric): windows_collections.IVectorView<XboxLiveQualityOfServiceMetricResult> {
         return defaultInterface().GetMetricResultsForMetric(metric)
     }
@@ -3176,10 +3211,12 @@ public class XboxLiveQualityOfServiceMeasurement <: InterfaceWrapperBase & ComIn
         return defaultInterface().GetPrivatePayloadResult(deviceAddress)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Metrics(): windows_collections.IVector<XboxLiveQualityOfServiceMetric> {
         return defaultInterface().Metrics()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DeviceAddresses(): windows_collections.IVector<XboxLiveDeviceAddress> {
         return defaultInterface().DeviceAddresses()
     }
@@ -3212,10 +3249,12 @@ public class XboxLiveQualityOfServiceMeasurement <: InterfaceWrapperBase & ComIn
         return defaultInterface().NumberOfResultsPending()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MetricResults(): windows_collections.IVectorView<XboxLiveQualityOfServiceMetricResult> {
         return defaultInterface().MetricResults()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PrivatePayloadResults(): windows_collections.IVectorView<XboxLiveQualityOfServicePrivatePayloadResult> {
         return defaultInterface().PrivatePayloadResults()
     }

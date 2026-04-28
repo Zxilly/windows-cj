@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Graphics_Printing == "on"]
 import windows.Graphics.Printing as Graphics_Printing
 import windows.UI.Xaml._impl_l0 as UI_Xaml__impl_l0
 import windows.UI.Xaml._impl_l1 as UI_Xaml__impl_l1
@@ -562,12 +561,14 @@ public class PaginateEventHandler <: InterfaceWrapperBase & ComInterface & windo
 @When[Windows_UI_Xaml_Printing == "on"]
 extend PaginateEventHandler <: windows_core.Interface<PaginateEventHandler> {}
 
+@When[Windows_UI_Xaml_Printing == "on"]
 private open class PaginateEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Printing == "on"]
 private open class PaginateEventHandlerInvoker <: PaginateEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<PaginateEventArgs>): Unit {
         ()
@@ -579,6 +580,7 @@ private open class PaginateEventHandlerInvoker <: PaginateEventHandlerInvokerEra
     }
 }
 
+@When[Windows_UI_Xaml_Printing == "on"]
 private class PaginateEventHandlerBox <: PaginateEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<PaginateEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<PaginateEventHandlerVtbl>
@@ -597,6 +599,7 @@ private class PaginateEventHandlerBox <: PaginateEventHandlerInvoker {
     }
 }
 
+@When[Windows_UI_Xaml_Printing == "on"]
 func buildPaginateEventHandlerBoxVtbl(): PaginateEventHandlerVtbl {
     var vtbl = PaginateEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -845,12 +848,14 @@ public class AddPagesEventHandler <: InterfaceWrapperBase & ComInterface & windo
 @When[Windows_UI_Xaml_Printing == "on"]
 extend AddPagesEventHandler <: windows_core.Interface<AddPagesEventHandler> {}
 
+@When[Windows_UI_Xaml_Printing == "on"]
 private open class AddPagesEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Printing == "on"]
 private open class AddPagesEventHandlerInvoker <: AddPagesEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<AddPagesEventArgs>): Unit {
         ()
@@ -862,6 +867,7 @@ private open class AddPagesEventHandlerInvoker <: AddPagesEventHandlerInvokerEra
     }
 }
 
+@When[Windows_UI_Xaml_Printing == "on"]
 private class AddPagesEventHandlerBox <: AddPagesEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<AddPagesEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<AddPagesEventHandlerVtbl>
@@ -880,6 +886,7 @@ private class AddPagesEventHandlerBox <: AddPagesEventHandlerInvoker {
     }
 }
 
+@When[Windows_UI_Xaml_Printing == "on"]
 func buildAddPagesEventHandlerBoxVtbl(): AddPagesEventHandlerVtbl {
     var vtbl = AddPagesEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -1073,12 +1080,14 @@ public class GetPreviewPageEventHandler <: InterfaceWrapperBase & ComInterface &
 @When[Windows_UI_Xaml_Printing == "on"]
 extend GetPreviewPageEventHandler <: windows_core.Interface<GetPreviewPageEventHandler> {}
 
+@When[Windows_UI_Xaml_Printing == "on"]
 private open class GetPreviewPageEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Printing == "on"]
 private open class GetPreviewPageEventHandlerInvoker <: GetPreviewPageEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<GetPreviewPageEventArgs>): Unit {
         ()
@@ -1090,6 +1099,7 @@ private open class GetPreviewPageEventHandlerInvoker <: GetPreviewPageEventHandl
     }
 }
 
+@When[Windows_UI_Xaml_Printing == "on"]
 private class GetPreviewPageEventHandlerBox <: GetPreviewPageEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<GetPreviewPageEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<GetPreviewPageEventHandlerVtbl>
@@ -1108,6 +1118,7 @@ private class GetPreviewPageEventHandlerBox <: GetPreviewPageEventHandlerInvoker
     }
 }
 
+@When[Windows_UI_Xaml_Printing == "on"]
 func buildGetPreviewPageEventHandlerBoxVtbl(): GetPreviewPageEventHandlerVtbl {
     var vtbl = GetPreviewPageEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()

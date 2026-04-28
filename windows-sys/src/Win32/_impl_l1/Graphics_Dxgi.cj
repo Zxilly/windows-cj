@@ -10,14 +10,64 @@ import windows_sys.Win32.Graphics.Dxgi.Common as Win32_Graphics_Dxgi_Common
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 
 
-@When[DXGI == "on"]
+@When[Windows_Win32_Graphics_Dxgi == "on" && DXGI == "on" && Windows_Win32_Graphics_Dxgi_CreateDXGIFactory == "on"]
 foreign {
     func CreateDXGIFactory(riid: CPointer<GUID>, ppFactory: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Dxgi == "on" && DXGI == "on" && Windows_Win32_Graphics_Dxgi_CreateDXGIFactory == "on"]
+public unsafe func Windows_CreateDXGIFactory(riid: CPointer<GUID>, ppFactory: CPointer<CPointer<Unit>>): Int32 {
+    return CreateDXGIFactory(riid, ppFactory)
+}
+
+@When[Windows_Win32_Graphics_Dxgi == "on" && DXGI == "on" && Windows_Win32_Graphics_Dxgi_CreateDXGIFactory1 == "on"]
+foreign {
     func CreateDXGIFactory1(riid: CPointer<GUID>, ppFactory: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Dxgi == "on" && DXGI == "on" && Windows_Win32_Graphics_Dxgi_CreateDXGIFactory1 == "on"]
+public unsafe func Windows_CreateDXGIFactory1(riid: CPointer<GUID>, ppFactory: CPointer<CPointer<Unit>>): Int32 {
+    return CreateDXGIFactory1(riid, ppFactory)
+}
+
+@When[Windows_Win32_Graphics_Dxgi == "on" && DXGI == "on" && Windows_Win32_Graphics_Dxgi_CreateDXGIFactory2 == "on"]
+foreign {
     func CreateDXGIFactory2(Flags: UInt32, riid: CPointer<GUID>, ppFactory: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Dxgi == "on" && DXGI == "on" && Windows_Win32_Graphics_Dxgi_CreateDXGIFactory2 == "on"]
+public unsafe func Windows_CreateDXGIFactory2(Flags: UInt32, riid: CPointer<GUID>, ppFactory: CPointer<CPointer<Unit>>): Int32 {
+    return CreateDXGIFactory2(Flags, riid, ppFactory)
+}
+
+@When[Windows_Win32_Graphics_Dxgi == "on" && DXGI == "on" && Windows_Win32_Graphics_Dxgi_DXGIDeclareAdapterRemovalSupport == "on"]
+foreign {
     func DXGIDeclareAdapterRemovalSupport(): Int32
+}
+
+@When[Windows_Win32_Graphics_Dxgi == "on" && DXGI == "on" && Windows_Win32_Graphics_Dxgi_DXGIDeclareAdapterRemovalSupport == "on"]
+public unsafe func Windows_DXGIDeclareAdapterRemovalSupport(): Int32 {
+    return DXGIDeclareAdapterRemovalSupport()
+}
+
+@When[Windows_Win32_Graphics_Dxgi == "on" && DXGI == "on" && Windows_Win32_Graphics_Dxgi_DXGIDisableVBlankVirtualization == "on"]
+foreign {
     func DXGIDisableVBlankVirtualization(): Int32
+}
+
+@When[Windows_Win32_Graphics_Dxgi == "on" && DXGI == "on" && Windows_Win32_Graphics_Dxgi_DXGIDisableVBlankVirtualization == "on"]
+public unsafe func Windows_DXGIDisableVBlankVirtualization(): Int32 {
+    return DXGIDisableVBlankVirtualization()
+}
+
+@When[Windows_Win32_Graphics_Dxgi == "on" && DXGI == "on" && Windows_Win32_Graphics_Dxgi_DXGIGetDebugInterface1 == "on"]
+foreign {
     func DXGIGetDebugInterface1(Flags: UInt32, riid: CPointer<GUID>, pDebug: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Dxgi == "on" && DXGI == "on" && Windows_Win32_Graphics_Dxgi_DXGIGetDebugInterface1 == "on"]
+public unsafe func Windows_DXGIGetDebugInterface1(Flags: UInt32, riid: CPointer<GUID>, pDebug: CPointer<CPointer<Unit>>): Int32 {
+    return DXGIGetDebugInterface1(Flags, riid, pDebug)
 }
 
 @When[Windows_Win32_Graphics_Dxgi == "on"]

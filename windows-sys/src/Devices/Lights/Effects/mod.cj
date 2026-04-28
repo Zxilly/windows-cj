@@ -3,12 +3,9 @@ package windows_sys.Devices.Lights.Effects
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Devices_Lights == "on"]
 import windows_sys.Devices.Lights as Devices_Lights
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_Graphics_Imaging == "on"]
 import windows_sys.Graphics.Imaging as Graphics_Imaging
-@When[Windows_UI == "on"]
 import windows_sys.UI as UI
 
 
@@ -1239,8 +1236,11 @@ public class ILampArrayCustomEffectFactory <: InterfaceWrapperBase & ComInterfac
 @C
 public struct ILampArrayEffectPlaylistStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var StartAll: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var StopAll: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var PauseAll: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1285,18 +1285,21 @@ public class ILampArrayEffectPlaylistStatics <: InterfaceWrapperBase & ComInterf
         readVtbl<ILampArrayEffectPlaylistStaticsVtbl>(ILampArrayEffectPlaylistStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StartAll(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.StartAll(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StopAll(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.StopAll(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PauseAll(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_ApplicationModel_SocialInfo == "on"]
 import windows.ApplicationModel.SocialInfo as ApplicationModel_SocialInfo
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -190,9 +188,9 @@ public struct ISocialFeedUpdaterVtbl {
     public var Kind: CFunc<(CPointer<Unit>, CPointer<ApplicationModel_SocialInfo.SocialFeedKindAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel_SocialInfo != "on"]
     public var Kind: UIntNative = UIntNative(0)
-    @When[Windows_ApplicationModel_SocialInfo == "on"]
+    @When[Windows_ApplicationModel_SocialInfo == "on" && Windows_Foundation_Collections == "on"]
     public var Items: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel_SocialInfo != "on"]
+    @When[Windows_ApplicationModel_SocialInfo != "on" || Windows_Foundation_Collections != "on"]
     public var Items: UIntNative = UIntNative(0)
     public var CommitAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -280,7 +278,7 @@ public class ISocialFeedUpdater <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<ApplicationModel_SocialInfo.SocialFeedKind>()).unwrap()
     }
 
-    @When[Windows_ApplicationModel_SocialInfo == "on"]
+    @When[Windows_ApplicationModel_SocialInfo == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVector<ApplicationModel_SocialInfo.SocialFeedItem> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -506,7 +504,7 @@ public class SocialFeedUpdater <: InterfaceWrapperBase & ComInterface & windows_
         return defaultInterface().Kind()
     }
 
-    @When[Windows_ApplicationModel_SocialInfo == "on"]
+    @When[Windows_ApplicationModel_SocialInfo == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVector<ApplicationModel_SocialInfo.SocialFeedItem> {
         return defaultInterface().Items()
     }

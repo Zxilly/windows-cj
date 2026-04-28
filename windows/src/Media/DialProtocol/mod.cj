@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_UI_Popups == "on"]
 import windows.UI.Popups as UI_Popups
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -462,7 +460,10 @@ extend IDialDevice2 <: windows_core.Interface<IDialDevice2> {}
 @C
 public struct IDialDevicePickerFilterVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedAppNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedAppNames: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -531,6 +532,7 @@ public class IDialDevicePickerFilter <: InterfaceWrapperBase & ComInterface & Ru
         readVtbl<IDialDevicePickerFilterVtbl>(IDialDevicePickerFilterVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedAppNames(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -547,8 +549,14 @@ extend IDialDevicePickerFilter <: windows_core.Interface<IDialDevicePickerFilter
 @C
 public struct IDialReceiverAppVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAdditionalDataAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAdditionalDataAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SetAdditionalDataAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SetAdditionalDataAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -617,6 +625,7 @@ public class IDialReceiverApp <: InterfaceWrapperBase & ComInterface & RuntimeNa
         readVtbl<IDialReceiverAppVtbl>(IDialReceiverAppVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAdditionalDataAsync(): windows_future.IAsyncOperation<windows_collections.IMap<windows_core.HString, windows_core.HString>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -625,6 +634,7 @@ public class IDialReceiverApp <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_future.IAsyncOperation<windows_collections.IMap<windows_core.HString, windows_core.HString>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetAdditionalDataAsync(additionalData: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, windows_core.HString>>): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -887,6 +897,7 @@ public class DialDevicePickerFilter <: InterfaceWrapperBase & ComInterface & win
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedAppNames(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().SupportedAppNames()
     }
@@ -1761,10 +1772,12 @@ public class DialReceiverApp <: InterfaceWrapperBase & ComInterface & windows_in
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAdditionalDataAsync(): windows_future.IAsyncOperation<windows_collections.IMap<windows_core.HString, windows_core.HString>> {
         return defaultInterface().GetAdditionalDataAsync()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetAdditionalDataAsync(additionalData: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, windows_core.HString>>): windows_future.IAsyncAction {
         return defaultInterface().SetAdditionalDataAsync(additionalData)
     }

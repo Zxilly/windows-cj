@@ -7,4 +7,3 @@ public import windows_sys._impl_l1.{IQuickLink, IQuickLinkVtbl, IShareOperation3
 public import windows_sys._impl_l2.{IShareOperation, IShareOperationVtbl}
 @When[Windows_ApplicationModel_DataTransfer_ShareTarget == "on"]
 public import windows_sys._impl_l0.{IShareOperation2, IShareOperation2Vtbl}
-

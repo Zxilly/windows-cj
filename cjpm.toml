@@ -3,7 +3,9 @@ members = [
     "windows-metadata",
     "windows-bindgen",
     "windows-cfggen",
+    "windows-libloading",
     "windows-sys",
+    "windows-webview2-sys",
     "windows-result",
     "windows-strings",
     "windows-interface",
@@ -18,6 +20,9 @@ members = [
     "windows-targets",
     "windows-registry",
     "windows-services",
+    "windows-webview2",
+    "windows-appsdk-sys",
+    "windows-appsdk",
     "windows"
 ]
 

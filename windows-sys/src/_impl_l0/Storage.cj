@@ -285,6 +285,7 @@ public struct IApplicationDataContainerVtbl {
     public var Locality: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Foundation_Collections == "on"]
     public var Values: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Containers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CreateContainer: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var DeleteContainer: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -350,6 +351,7 @@ public class IApplicationDataContainer <: InterfaceWrapperBase & ComInterface {
         return __vt.Values(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Containers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -382,14 +384,17 @@ public struct IPathIOStaticsVtbl {
     public var AppendTextAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Storage_Streams == "on"]
     public var AppendTextWithEncodingAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ReadLinesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var ReadLinesWithEncodingAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var WriteLinesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var WriteLinesWithEncodingAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var AppendLinesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var AppendLinesWithEncodingAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Storage_Streams == "on"]
     public var ReadBufferAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -478,39 +483,42 @@ public class IPathIOStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.AppendTextWithEncodingAsync(__liveRaw, absolutePath, contents, encoding, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReadLinesAsync(absolutePath: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ReadLinesAsync(__liveRaw, absolutePath, result__)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func ReadLinesWithEncodingAsync(absolutePath: CPointer<Unit>, encoding: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ReadLinesWithEncodingAsync(__liveRaw, absolutePath, encoding, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func WriteLinesAsync(absolutePath: CPointer<Unit>, lines: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.WriteLinesAsync(__liveRaw, absolutePath, lines, result__)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func WriteLinesWithEncodingAsync(absolutePath: CPointer<Unit>, lines: CPointer<Unit>, encoding: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.WriteLinesWithEncodingAsync(__liveRaw, absolutePath, lines, encoding, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AppendLinesAsync(absolutePath: CPointer<Unit>, lines: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AppendLinesAsync(__liveRaw, absolutePath, lines, result__)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func AppendLinesWithEncodingAsync(absolutePath: CPointer<Unit>, lines: CPointer<Unit>, encoding: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

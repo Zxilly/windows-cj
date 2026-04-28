@@ -2,10 +2,82 @@
 package windows.Win32.Security.Cryptography.Catalog
 
 @When[Windows_Win32_Security_Cryptography_Catalog == "on"]
-public import windows.Win32._impl_l0.{CATALOG_INFO, CRYPTCATATTRIBUTE_FLAGS, CRYPTCATATTRIBUTE_FLAGS_CRYPTCAT_ATTR_AUTHENTICATED, CRYPTCATATTRIBUTE_FLAGS_CRYPTCAT_ATTR_DATAASCII, CRYPTCATATTRIBUTE_FLAGS_CRYPTCAT_ATTR_DATABASE64, CRYPTCATATTRIBUTE_FLAGS_CRYPTCAT_ATTR_DATAREPLACE, CRYPTCATATTRIBUTE_FLAGS_CRYPTCAT_ATTR_NAMEASCII, CRYPTCATATTRIBUTE_FLAGS_CRYPTCAT_ATTR_NAMEOBJID, CRYPTCATATTRIBUTE_FLAGS_CRYPTCAT_ATTR_NO_AUTO_COMPAT_ENTRY, CRYPTCATATTRIBUTE_FLAGS_CRYPTCAT_ATTR_UNAUTHENTICATED, CRYPTCATCDF, CRYPTCAT_OPEN_FLAGS, CRYPTCAT_OPEN_FLAGS_CRYPTCAT_OPEN_ALWAYS, CRYPTCAT_OPEN_FLAGS_CRYPTCAT_OPEN_CREATENEW, CRYPTCAT_OPEN_FLAGS_CRYPTCAT_OPEN_EXCLUDE_PAGE_HASHES, CRYPTCAT_OPEN_FLAGS_CRYPTCAT_OPEN_EXISTING, CRYPTCAT_OPEN_FLAGS_CRYPTCAT_OPEN_FLAGS_MASK, CRYPTCAT_OPEN_FLAGS_CRYPTCAT_OPEN_INCLUDE_PAGE_HASHES, CRYPTCAT_OPEN_FLAGS_CRYPTCAT_OPEN_NO_CONTENT_HCRYPTMSG, CRYPTCAT_OPEN_FLAGS_CRYPTCAT_OPEN_SORTED, CRYPTCAT_OPEN_FLAGS_CRYPTCAT_OPEN_VERIFYSIGHASH, CRYPTCAT_VERSION, CRYPTCAT_VERSION_CRYPTCAT_VERSION_1, CRYPTCAT_VERSION_CRYPTCAT_VERSION_2, PFN_CDF_PARSE_ERROR_CALLBACK}
+public import windows.Win32._impl_l0.{CATALOG_INFO, CATALOG_INFOAbi, CRYPTCATATTRIBUTE_FLAGS, CRYPTCATATTRIBUTE_FLAGSAbi, CRYPTCATATTRIBUTE_FLAGS_CRYPTCAT_ATTR_AUTHENTICATED, CRYPTCATATTRIBUTE_FLAGS_CRYPTCAT_ATTR_DATAASCII, CRYPTCATATTRIBUTE_FLAGS_CRYPTCAT_ATTR_DATABASE64, CRYPTCATATTRIBUTE_FLAGS_CRYPTCAT_ATTR_DATAREPLACE, CRYPTCATATTRIBUTE_FLAGS_CRYPTCAT_ATTR_NAMEASCII, CRYPTCATATTRIBUTE_FLAGS_CRYPTCAT_ATTR_NAMEOBJID, CRYPTCATATTRIBUTE_FLAGS_CRYPTCAT_ATTR_NO_AUTO_COMPAT_ENTRY, CRYPTCATATTRIBUTE_FLAGS_CRYPTCAT_ATTR_UNAUTHENTICATED, CRYPTCATCDF, CRYPTCATCDFAbi, CRYPTCAT_OPEN_FLAGS, CRYPTCAT_OPEN_FLAGSAbi, CRYPTCAT_OPEN_FLAGS_CRYPTCAT_OPEN_ALWAYS, CRYPTCAT_OPEN_FLAGS_CRYPTCAT_OPEN_CREATENEW, CRYPTCAT_OPEN_FLAGS_CRYPTCAT_OPEN_EXCLUDE_PAGE_HASHES, CRYPTCAT_OPEN_FLAGS_CRYPTCAT_OPEN_EXISTING, CRYPTCAT_OPEN_FLAGS_CRYPTCAT_OPEN_FLAGS_MASK, CRYPTCAT_OPEN_FLAGS_CRYPTCAT_OPEN_INCLUDE_PAGE_HASHES, CRYPTCAT_OPEN_FLAGS_CRYPTCAT_OPEN_NO_CONTENT_HCRYPTMSG, CRYPTCAT_OPEN_FLAGS_CRYPTCAT_OPEN_SORTED, CRYPTCAT_OPEN_FLAGS_CRYPTCAT_OPEN_VERIFYSIGHASH, CRYPTCAT_VERSION, CRYPTCAT_VERSIONAbi, CRYPTCAT_VERSION_CRYPTCAT_VERSION_1, CRYPTCAT_VERSION_CRYPTCAT_VERSION_2, PFN_CDF_PARSE_ERROR_CALLBACK}
 @When[Windows_Win32_Security_Cryptography_Catalog == "on"]
-public import windows.Win32._impl_l1.{CRYPTCATATTRIBUTE, CRYPTCATSTORE}
+public import windows.Win32._impl_l1.{CRYPTCATATTRIBUTE, CRYPTCATATTRIBUTEAbi, CRYPTCATSTORE, CRYPTCATSTOREAbi}
 @When[Windows_Win32_Security_Cryptography_Catalog == "on" && (Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on")]
-public import windows.Win32._impl_l2.{CRYPTCATMEMBER, MS_ADDINFO_CATALOGMEMBER}
+public import windows.Win32._impl_l2.{CRYPTCATMEMBER, CRYPTCATMEMBERAbi, MS_ADDINFO_CATALOGMEMBER, MS_ADDINFO_CATALOGMEMBERAbi}
 @When[Windows_Win32_Security_Cryptography_Catalog == "on"]
 public import windows.Win32._impl_l2.{CRYPTCAT_ADDCATALOG_HARDLINK, CRYPTCAT_ADDCATALOG_NONE, CRYPTCAT_E_AREA_ATTRIBUTE, CRYPTCAT_E_AREA_HEADER, CRYPTCAT_E_AREA_MEMBER, CRYPTCAT_E_CDF_ATTR_TOOFEWVALUES, CRYPTCAT_E_CDF_ATTR_TYPECOMBO, CRYPTCAT_E_CDF_BAD_GUID_CONV, CRYPTCAT_E_CDF_DUPLICATE, CRYPTCAT_E_CDF_MEMBER_FILENOTFOUND, CRYPTCAT_E_CDF_MEMBER_FILE_PATH, CRYPTCAT_E_CDF_MEMBER_INDIRECTDATA, CRYPTCAT_E_CDF_TAGNOTFOUND, CRYPTCAT_E_CDF_UNSUPPORTED, CRYPTCAT_FILEEXT, CRYPTCAT_MAX_MEMBERTAG, CRYPTCAT_MEMBER_SORTED, szOID_CATALOG_LIST, szOID_CATALOG_LIST_MEMBER, szOID_CATALOG_LIST_MEMBER2}
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAdminAcquireContext == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATAdminAcquireContext
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAdminAcquireContext2 == "on" && Windows_Win32_Security_Cryptography == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATAdminAcquireContext2
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAdminAddCatalog == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATAdminAddCatalog
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAdminCalcHashFromFileHandle == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATAdminCalcHashFromFileHandle
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAdminCalcHashFromFileHandle2 == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATAdminCalcHashFromFileHandle2
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAdminEnumCatalogFromHash == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATAdminEnumCatalogFromHash
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAdminPauseServiceForBackup == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATAdminPauseServiceForBackup
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAdminReleaseCatalogContext == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATAdminReleaseCatalogContext
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAdminReleaseContext == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATAdminReleaseContext
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAdminRemoveCatalog == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATAdminRemoveCatalog
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAdminResolveCatalogPath == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATAdminResolveCatalogPath
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATAllocSortedMemberInfo == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATAllocSortedMemberInfo
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATCDFClose == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATCDFClose
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATCDFEnumAttributes == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATCDFEnumAttributes
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATCDFEnumAttributesWithCDFTag == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATCDFEnumAttributesWithCDFTag
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATCDFEnumCatAttributes == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATCDFEnumCatAttributes
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATCDFEnumMembers == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATCDFEnumMembers
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATCDFEnumMembersByCDFTagEx == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATCDFEnumMembersByCDFTagEx
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATCDFOpen == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATCDFOpen
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATCatalogInfoFromContext == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATCatalogInfoFromContext
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATClose == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATClose
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATEnumerateAttr == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATEnumerateAttr
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATEnumerateCatAttr == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATEnumerateCatAttr
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATEnumerateMember == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATEnumerateMember
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATFreeSortedMemberInfo == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATFreeSortedMemberInfo
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATGetAttrInfo == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATGetAttrInfo
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATGetCatAttrInfo == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATGetCatAttrInfo
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATGetMemberInfo == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATGetMemberInfo
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATHandleFromStore == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATHandleFromStore
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATOpen == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATOpen
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATPersistStore == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATPersistStore
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATPutAttrInfo == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATPutAttrInfo
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATPutCatAttrInfo == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATPutCatAttrInfo
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATPutMemberInfo == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATPutMemberInfo
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_CryptCATStoreFromHandle == "on"]
+public import windows.Win32._impl_l2.Windows_CryptCATStoreFromHandle
+@When[Windows_Win32_Security_Cryptography_Catalog == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Catalog_IsCatalogFile == "on"]
+public import windows.Win32._impl_l2.Windows_IsCatalogFile

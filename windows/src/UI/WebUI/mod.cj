@@ -10,17 +10,11 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Devices_Printers_Extensions == "on"]
 import windows.Devices.Printers.Extensions as Devices_Printers_Extensions
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Graphics_Printing == "on"]
 import windows.Graphics.Printing as Graphics_Printing
-@When[Windows_Security_Authentication_Web == "on"]
 import windows.Security.Authentication.Web as Security_Authentication_Web
-@When[Windows_UI == "on"]
 import windows.UI as UI
-@When[Windows_Web_UI == "on"]
 import windows.Web.UI as Web_UI
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -107,12 +101,14 @@ public class ActivatedEventHandler <: InterfaceWrapperBase & ComInterface & wind
 @When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend ActivatedEventHandler <: windows_core.Interface<ActivatedEventHandler> {}
 
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 private open class ActivatedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 private open class ActivatedEventHandlerInvoker <: ActivatedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, eventArgs: InParam<_impl_l0.IActivatedEventArgs>): Unit {
         ()
@@ -124,6 +120,7 @@ private open class ActivatedEventHandlerInvoker <: ActivatedEventHandlerInvokerE
     }
 }
 
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 private class ActivatedEventHandlerBox <: ActivatedEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<_impl_l0.IActivatedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<ActivatedEventHandlerVtbl>
@@ -142,6 +139,7 @@ private class ActivatedEventHandlerBox <: ActivatedEventHandlerInvoker {
     }
 }
 
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 func buildActivatedEventHandlerBoxVtbl(): ActivatedEventHandlerVtbl {
     var vtbl = ActivatedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -156,7 +154,7 @@ func buildActivatedEventHandlerBoxVtbl(): ActivatedEventHandlerVtbl {
     return vtbl
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class BackgroundActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -231,7 +229,7 @@ public class BackgroundActivatedEventArgs <: InterfaceWrapperBase & ComInterface
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend BackgroundActivatedEventArgs <: windows_core.HandleWinrtType<BackgroundActivatedEventArgs> {
     public static func intoWinrtHandle(value: BackgroundActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -327,12 +325,14 @@ public class BackgroundActivatedEventHandler <: InterfaceWrapperBase & ComInterf
 @When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend BackgroundActivatedEventHandler <: windows_core.Interface<BackgroundActivatedEventHandler> {}
 
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 private open class BackgroundActivatedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 private open class BackgroundActivatedEventHandlerInvoker <: BackgroundActivatedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, eventArgs: InParam<_impl_l1.IBackgroundActivatedEventArgs>): Unit {
         ()
@@ -344,6 +344,7 @@ private open class BackgroundActivatedEventHandlerInvoker <: BackgroundActivated
     }
 }
 
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 private class BackgroundActivatedEventHandlerBox <: BackgroundActivatedEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<_impl_l1.IBackgroundActivatedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<BackgroundActivatedEventHandlerVtbl>
@@ -362,6 +363,7 @@ private class BackgroundActivatedEventHandlerBox <: BackgroundActivatedEventHand
     }
 }
 
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 func buildBackgroundActivatedEventHandlerBoxVtbl(): BackgroundActivatedEventHandlerVtbl {
     var vtbl = BackgroundActivatedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -376,7 +378,7 @@ func buildBackgroundActivatedEventHandlerBoxVtbl(): BackgroundActivatedEventHand
     return vtbl
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
 public class EnteredBackgroundEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -450,7 +452,7 @@ public class EnteredBackgroundEventArgs <: InterfaceWrapperBase & ComInterface &
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
 extend EnteredBackgroundEventArgs <: windows_core.HandleWinrtType<EnteredBackgroundEventArgs> {
     public static func intoWinrtHandle(value: EnteredBackgroundEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -546,12 +548,14 @@ public class EnteredBackgroundEventHandler <: InterfaceWrapperBase & ComInterfac
 @When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
 extend EnteredBackgroundEventHandler <: windows_core.Interface<EnteredBackgroundEventHandler> {}
 
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
 private open class EnteredBackgroundEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
 private open class EnteredBackgroundEventHandlerInvoker <: EnteredBackgroundEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<_impl_l0.IEnteredBackgroundEventArgs>): Unit {
         ()
@@ -563,6 +567,7 @@ private open class EnteredBackgroundEventHandlerInvoker <: EnteredBackgroundEven
     }
 }
 
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
 private class EnteredBackgroundEventHandlerBox <: EnteredBackgroundEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<_impl_l0.IEnteredBackgroundEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<EnteredBackgroundEventHandlerVtbl>
@@ -581,6 +586,7 @@ private class EnteredBackgroundEventHandlerBox <: EnteredBackgroundEventHandlerI
     }
 }
 
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
 func buildEnteredBackgroundEventHandlerBoxVtbl(): EnteredBackgroundEventHandlerVtbl {
     var vtbl = EnteredBackgroundEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -1106,7 +1112,7 @@ public class IWebUINavigatedDeferral <: InterfaceWrapperBase & ComInterface & Ru
 @When[Windows_UI_WebUI == "on"]
 extend IWebUINavigatedDeferral <: windows_core.Interface<IWebUINavigatedDeferral> {}
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
 public class LeavingBackgroundEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1180,7 +1186,7 @@ public class LeavingBackgroundEventArgs <: InterfaceWrapperBase & ComInterface &
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
 extend LeavingBackgroundEventArgs <: windows_core.HandleWinrtType<LeavingBackgroundEventArgs> {
     public static func intoWinrtHandle(value: LeavingBackgroundEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -1276,12 +1282,14 @@ public class LeavingBackgroundEventHandler <: InterfaceWrapperBase & ComInterfac
 @When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
 extend LeavingBackgroundEventHandler <: windows_core.Interface<LeavingBackgroundEventHandler> {}
 
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
 private open class LeavingBackgroundEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
 private open class LeavingBackgroundEventHandlerInvoker <: LeavingBackgroundEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<_impl_l0.ILeavingBackgroundEventArgs>): Unit {
         ()
@@ -1293,6 +1301,7 @@ private open class LeavingBackgroundEventHandlerInvoker <: LeavingBackgroundEven
     }
 }
 
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
 private class LeavingBackgroundEventHandlerBox <: LeavingBackgroundEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<_impl_l0.ILeavingBackgroundEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<LeavingBackgroundEventHandlerVtbl>
@@ -1311,6 +1320,7 @@ private class LeavingBackgroundEventHandlerBox <: LeavingBackgroundEventHandlerI
     }
 }
 
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
 func buildLeavingBackgroundEventHandlerBoxVtbl(): LeavingBackgroundEventHandlerVtbl {
     var vtbl = LeavingBackgroundEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -1461,12 +1471,14 @@ public class ResumingEventHandler <: InterfaceWrapperBase & ComInterface & windo
 @When[Windows_UI_WebUI == "on"]
 extend ResumingEventHandler <: windows_core.Interface<ResumingEventHandler> {}
 
+@When[Windows_UI_WebUI == "on"]
 private open class ResumingEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_WebUI == "on"]
 private open class ResumingEventHandlerInvoker <: ResumingEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>): Unit {
         ()
@@ -1478,6 +1490,7 @@ private open class ResumingEventHandlerInvoker <: ResumingEventHandlerInvokerEra
     }
 }
 
+@When[Windows_UI_WebUI == "on"]
 private class ResumingEventHandlerBox <: ResumingEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>) -> Unit
     private let vtblHandle: CPointerHandle<ResumingEventHandlerVtbl>
@@ -1496,6 +1509,7 @@ private class ResumingEventHandlerBox <: ResumingEventHandlerInvoker {
     }
 }
 
+@When[Windows_UI_WebUI == "on"]
 func buildResumingEventHandlerBoxVtbl(): ResumingEventHandlerVtbl {
     var vtbl = ResumingEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -1510,7 +1524,7 @@ func buildResumingEventHandlerBoxVtbl(): ResumingEventHandlerVtbl {
     return vtbl
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
 public class SuspendingDeferral <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1580,7 +1594,7 @@ public class SuspendingDeferral <: InterfaceWrapperBase & ComInterface & windows
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
 extend SuspendingDeferral <: windows_core.HandleWinrtType<SuspendingDeferral> {
     public static func intoWinrtHandle(value: SuspendingDeferral): CPointer<Unit> {
         value.asRaw()
@@ -1598,7 +1612,7 @@ extend SuspendingDeferral <: windows_core.HandleWinrtType<SuspendingDeferral> {
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
 public class SuspendingEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1668,7 +1682,7 @@ public class SuspendingEventArgs <: InterfaceWrapperBase & ComInterface & window
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
 extend SuspendingEventArgs <: windows_core.HandleWinrtType<SuspendingEventArgs> {
     public static func intoWinrtHandle(value: SuspendingEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -1764,12 +1778,14 @@ public class SuspendingEventHandler <: InterfaceWrapperBase & ComInterface & win
 @When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
 extend SuspendingEventHandler <: windows_core.Interface<SuspendingEventHandler> {}
 
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
 private open class SuspendingEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
 private open class SuspendingEventHandlerInvoker <: SuspendingEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<_impl_l1.ISuspendingEventArgs>): Unit {
         ()
@@ -1781,6 +1797,7 @@ private open class SuspendingEventHandlerInvoker <: SuspendingEventHandlerInvoke
     }
 }
 
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
 private class SuspendingEventHandlerBox <: SuspendingEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<_impl_l1.ISuspendingEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<SuspendingEventHandlerVtbl>
@@ -1799,6 +1816,7 @@ private class SuspendingEventHandlerBox <: SuspendingEventHandlerInvoker {
     }
 }
 
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
 func buildSuspendingEventHandlerBoxVtbl(): SuspendingEventHandlerVtbl {
     var vtbl = SuspendingEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -1813,7 +1831,7 @@ func buildSuspendingEventHandlerBoxVtbl(): SuspendingEventHandlerVtbl {
     return vtbl
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
 public class SuspendingOperation <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1887,7 +1905,7 @@ public class SuspendingOperation <: InterfaceWrapperBase & ComInterface & window
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel == "on"]
 extend SuspendingOperation <: windows_core.HandleWinrtType<SuspendingOperation> {
     public static func intoWinrtHandle(value: SuspendingOperation): CPointer<Unit> {
         value.asRaw()
@@ -2951,7 +2969,7 @@ extend ActivatedOperation <: windows_core.HandleWinrtType<ActivatedOperation> {
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_Graphics_Printing == "on"]
 public class HtmlPrintDocumentSource <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -3129,7 +3147,7 @@ public class HtmlPrintDocumentSource <: InterfaceWrapperBase & ComInterface & wi
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_Graphics_Printing == "on"]
 extend HtmlPrintDocumentSource <: windows_core.HandleWinrtType<HtmlPrintDocumentSource> {
     public static func intoWinrtHandle(value: HtmlPrintDocumentSource): CPointer<Unit> {
         value.asRaw()
@@ -3493,12 +3511,14 @@ public class NavigatedEventHandler <: InterfaceWrapperBase & ComInterface & wind
 @When[Windows_UI_WebUI == "on"]
 extend NavigatedEventHandler <: windows_core.Interface<NavigatedEventHandler> {}
 
+@When[Windows_UI_WebUI == "on"]
 private open class NavigatedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_WebUI == "on"]
 private open class NavigatedEventHandlerInvoker <: NavigatedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<IWebUINavigatedEventArgs>): Unit {
         ()
@@ -3510,6 +3530,7 @@ private open class NavigatedEventHandlerInvoker <: NavigatedEventHandlerInvokerE
     }
 }
 
+@When[Windows_UI_WebUI == "on"]
 private class NavigatedEventHandlerBox <: NavigatedEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<IWebUINavigatedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<NavigatedEventHandlerVtbl>
@@ -3528,6 +3549,7 @@ private class NavigatedEventHandlerBox <: NavigatedEventHandlerInvoker {
     }
 }
 
+@When[Windows_UI_WebUI == "on"]
 func buildNavigatedEventHandlerBoxVtbl(): NavigatedEventHandlerVtbl {
     var vtbl = NavigatedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -3542,7 +3564,7 @@ func buildNavigatedEventHandlerBoxVtbl(): NavigatedEventHandlerVtbl {
     return vtbl
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIAppointmentsProviderAddAppointmentActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -3666,7 +3688,7 @@ public class WebUIAppointmentsProviderAddAppointmentActivatedEventArgs <: Interf
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIAppointmentsProviderAddAppointmentActivatedEventArgs <: windows_core.HandleWinrtType<WebUIAppointmentsProviderAddAppointmentActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUIAppointmentsProviderAddAppointmentActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -3684,7 +3706,7 @@ extend WebUIAppointmentsProviderAddAppointmentActivatedEventArgs <: windows_core
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIAppointmentsProviderRemoveAppointmentActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -3808,7 +3830,7 @@ public class WebUIAppointmentsProviderRemoveAppointmentActivatedEventArgs <: Int
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIAppointmentsProviderRemoveAppointmentActivatedEventArgs <: windows_core.HandleWinrtType<WebUIAppointmentsProviderRemoveAppointmentActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUIAppointmentsProviderRemoveAppointmentActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -3826,7 +3848,7 @@ extend WebUIAppointmentsProviderRemoveAppointmentActivatedEventArgs <: windows_c
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIAppointmentsProviderReplaceAppointmentActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -3950,7 +3972,7 @@ public class WebUIAppointmentsProviderReplaceAppointmentActivatedEventArgs <: In
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIAppointmentsProviderReplaceAppointmentActivatedEventArgs <: windows_core.HandleWinrtType<WebUIAppointmentsProviderReplaceAppointmentActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUIAppointmentsProviderReplaceAppointmentActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -3968,7 +3990,7 @@ extend WebUIAppointmentsProviderReplaceAppointmentActivatedEventArgs <: windows_
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIAppointmentsProviderShowAppointmentDetailsActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -4099,7 +4121,7 @@ public class WebUIAppointmentsProviderShowAppointmentDetailsActivatedEventArgs <
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIAppointmentsProviderShowAppointmentDetailsActivatedEventArgs <: windows_core.HandleWinrtType<WebUIAppointmentsProviderShowAppointmentDetailsActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUIAppointmentsProviderShowAppointmentDetailsActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -4117,7 +4139,7 @@ extend WebUIAppointmentsProviderShowAppointmentDetailsActivatedEventArgs <: wind
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIAppointmentsProviderShowTimeFrameActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -4244,7 +4266,7 @@ public class WebUIAppointmentsProviderShowTimeFrameActivatedEventArgs <: Interfa
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIAppointmentsProviderShowTimeFrameActivatedEventArgs <: windows_core.HandleWinrtType<WebUIAppointmentsProviderShowTimeFrameActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUIAppointmentsProviderShowTimeFrameActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -4262,7 +4284,7 @@ extend WebUIAppointmentsProviderShowTimeFrameActivatedEventArgs <: windows_core.
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIBarcodeScannerPreviewActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -4378,7 +4400,7 @@ public class WebUIBarcodeScannerPreviewActivatedEventArgs <: InterfaceWrapperBas
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIBarcodeScannerPreviewActivatedEventArgs <: windows_core.HandleWinrtType<WebUIBarcodeScannerPreviewActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUIBarcodeScannerPreviewActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -4396,7 +4418,7 @@ extend WebUIBarcodeScannerPreviewActivatedEventArgs <: windows_core.HandleWinrtT
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUICachedFileUpdaterActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -4509,7 +4531,7 @@ public class WebUICachedFileUpdaterActivatedEventArgs <: InterfaceWrapperBase & 
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUICachedFileUpdaterActivatedEventArgs <: windows_core.HandleWinrtType<WebUICachedFileUpdaterActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUICachedFileUpdaterActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -4527,7 +4549,7 @@ extend WebUICachedFileUpdaterActivatedEventArgs <: windows_core.HandleWinrtType<
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUICameraSettingsActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -4631,7 +4653,7 @@ public class WebUICameraSettingsActivatedEventArgs <: InterfaceWrapperBase & Com
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUICameraSettingsActivatedEventArgs <: windows_core.HandleWinrtType<WebUICameraSettingsActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUICameraSettingsActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -4649,7 +4671,7 @@ extend WebUICameraSettingsActivatedEventArgs <: windows_core.HandleWinrtType<Web
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUICommandLineActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -4765,7 +4787,7 @@ public class WebUICommandLineActivatedEventArgs <: InterfaceWrapperBase & ComInt
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUICommandLineActivatedEventArgs <: windows_core.HandleWinrtType<WebUICommandLineActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUICommandLineActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -4783,7 +4805,7 @@ extend WebUICommandLineActivatedEventArgs <: windows_core.HandleWinrtType<WebUIC
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIContactCallActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -4903,7 +4925,7 @@ public class WebUIContactCallActivatedEventArgs <: InterfaceWrapperBase & ComInt
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIContactCallActivatedEventArgs <: windows_core.HandleWinrtType<WebUIContactCallActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUIContactCallActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -4921,7 +4943,7 @@ extend WebUIContactCallActivatedEventArgs <: windows_core.HandleWinrtType<WebUIC
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIContactMapActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -5038,7 +5060,7 @@ public class WebUIContactMapActivatedEventArgs <: InterfaceWrapperBase & ComInte
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIContactMapActivatedEventArgs <: windows_core.HandleWinrtType<WebUIContactMapActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUIContactMapActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -5056,7 +5078,7 @@ extend WebUIContactMapActivatedEventArgs <: windows_core.HandleWinrtType<WebUICo
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIContactMessageActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -5176,7 +5198,7 @@ public class WebUIContactMessageActivatedEventArgs <: InterfaceWrapperBase & Com
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIContactMessageActivatedEventArgs <: windows_core.HandleWinrtType<WebUIContactMessageActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUIContactMessageActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -5194,7 +5216,7 @@ extend WebUIContactMessageActivatedEventArgs <: windows_core.HandleWinrtType<Web
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIContactPanelActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -5316,7 +5338,7 @@ public class WebUIContactPanelActivatedEventArgs <: InterfaceWrapperBase & ComIn
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIContactPanelActivatedEventArgs <: windows_core.HandleWinrtType<WebUIContactPanelActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUIContactPanelActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -5334,7 +5356,7 @@ extend WebUIContactPanelActivatedEventArgs <: windows_core.HandleWinrtType<WebUI
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIContactPickerActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -5435,7 +5457,7 @@ public class WebUIContactPickerActivatedEventArgs <: InterfaceWrapperBase & ComI
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIContactPickerActivatedEventArgs <: windows_core.HandleWinrtType<WebUIContactPickerActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUIContactPickerActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -5453,7 +5475,7 @@ extend WebUIContactPickerActivatedEventArgs <: windows_core.HandleWinrtType<WebU
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIContactPostActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -5573,7 +5595,7 @@ public class WebUIContactPostActivatedEventArgs <: InterfaceWrapperBase & ComInt
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIContactPostActivatedEventArgs <: windows_core.HandleWinrtType<WebUIContactPostActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUIContactPostActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -5591,7 +5613,7 @@ extend WebUIContactPostActivatedEventArgs <: windows_core.HandleWinrtType<WebUIC
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIContactVideoCallActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -5711,7 +5733,7 @@ public class WebUIContactVideoCallActivatedEventArgs <: InterfaceWrapperBase & C
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIContactVideoCallActivatedEventArgs <: windows_core.HandleWinrtType<WebUIContactVideoCallActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUIContactVideoCallActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -5729,7 +5751,7 @@ extend WebUIContactVideoCallActivatedEventArgs <: windows_core.HandleWinrtType<W
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIDeviceActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -5856,7 +5878,7 @@ public class WebUIDeviceActivatedEventArgs <: InterfaceWrapperBase & ComInterfac
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIDeviceActivatedEventArgs <: windows_core.HandleWinrtType<WebUIDeviceActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUIDeviceActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -5874,7 +5896,7 @@ extend WebUIDeviceActivatedEventArgs <: windows_core.HandleWinrtType<WebUIDevice
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIDevicePairingActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -5987,7 +6009,7 @@ public class WebUIDevicePairingActivatedEventArgs <: InterfaceWrapperBase & ComI
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIDevicePairingActivatedEventArgs <: windows_core.HandleWinrtType<WebUIDevicePairingActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUIDevicePairingActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -6005,7 +6027,7 @@ extend WebUIDevicePairingActivatedEventArgs <: windows_core.HandleWinrtType<WebU
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIDialReceiverActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -6143,7 +6165,7 @@ public class WebUIDialReceiverActivatedEventArgs <: InterfaceWrapperBase & ComIn
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIDialReceiverActivatedEventArgs <: windows_core.HandleWinrtType<WebUIDialReceiverActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUIDialReceiverActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -6161,7 +6183,7 @@ extend WebUIDialReceiverActivatedEventArgs <: windows_core.HandleWinrtType<WebUI
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIFileActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -6261,7 +6283,7 @@ public class WebUIFileActivatedEventArgs <: InterfaceWrapperBase & ComInterface 
         }
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func Files(): windows_collections.IVectorView<_impl_l1.IStorageItem> {
         return defaultInterface().Files()
     }
@@ -6301,7 +6323,7 @@ public class WebUIFileActivatedEventArgs <: InterfaceWrapperBase & ComInterface 
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIFileActivatedEventArgs <: windows_core.HandleWinrtType<WebUIFileActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUIFileActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -6319,7 +6341,7 @@ extend WebUIFileActivatedEventArgs <: windows_core.HandleWinrtType<WebUIFileActi
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIFileOpenPickerActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -6443,7 +6465,7 @@ public class WebUIFileOpenPickerActivatedEventArgs <: InterfaceWrapperBase & Com
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIFileOpenPickerActivatedEventArgs <: windows_core.HandleWinrtType<WebUIFileOpenPickerActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUIFileOpenPickerActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -6461,7 +6483,7 @@ extend WebUIFileOpenPickerActivatedEventArgs <: windows_core.HandleWinrtType<Web
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIFileOpenPickerContinuationEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -6554,7 +6576,7 @@ public class WebUIFileOpenPickerContinuationEventArgs <: InterfaceWrapperBase & 
         }
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func Files(): windows_collections.IVectorView<_impl_l1.StorageFile> {
         return defaultInterface().Files()
     }
@@ -6586,7 +6608,7 @@ public class WebUIFileOpenPickerContinuationEventArgs <: InterfaceWrapperBase & 
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIFileOpenPickerContinuationEventArgs <: windows_core.HandleWinrtType<WebUIFileOpenPickerContinuationEventArgs> {
     public static func intoWinrtHandle(value: WebUIFileOpenPickerContinuationEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -6604,7 +6626,7 @@ extend WebUIFileOpenPickerContinuationEventArgs <: windows_core.HandleWinrtType<
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIFileSavePickerActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -6732,7 +6754,7 @@ public class WebUIFileSavePickerActivatedEventArgs <: InterfaceWrapperBase & Com
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIFileSavePickerActivatedEventArgs <: windows_core.HandleWinrtType<WebUIFileSavePickerActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUIFileSavePickerActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -6750,7 +6772,7 @@ extend WebUIFileSavePickerActivatedEventArgs <: windows_core.HandleWinrtType<Web
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIFileSavePickerContinuationEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -6843,7 +6865,7 @@ public class WebUIFileSavePickerContinuationEventArgs <: InterfaceWrapperBase & 
         }
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func File(): _impl_l1.StorageFile {
         return defaultInterface().File()
     }
@@ -6875,7 +6897,7 @@ public class WebUIFileSavePickerContinuationEventArgs <: InterfaceWrapperBase & 
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIFileSavePickerContinuationEventArgs <: windows_core.HandleWinrtType<WebUIFileSavePickerContinuationEventArgs> {
     public static func intoWinrtHandle(value: WebUIFileSavePickerContinuationEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -6893,7 +6915,7 @@ extend WebUIFileSavePickerContinuationEventArgs <: windows_core.HandleWinrtType<
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIFolderPickerContinuationEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -7018,7 +7040,7 @@ public class WebUIFolderPickerContinuationEventArgs <: InterfaceWrapperBase & Co
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIFolderPickerContinuationEventArgs <: windows_core.HandleWinrtType<WebUIFolderPickerContinuationEventArgs> {
     public static func intoWinrtHandle(value: WebUIFolderPickerContinuationEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -7036,7 +7058,7 @@ extend WebUIFolderPickerContinuationEventArgs <: windows_core.HandleWinrtType<We
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUILaunchActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -7185,7 +7207,7 @@ public class WebUILaunchActivatedEventArgs <: InterfaceWrapperBase & ComInterfac
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUILaunchActivatedEventArgs <: windows_core.HandleWinrtType<WebUILaunchActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUILaunchActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -7203,7 +7225,7 @@ extend WebUILaunchActivatedEventArgs <: windows_core.HandleWinrtType<WebUILaunch
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUILockScreenActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -7326,7 +7348,7 @@ public class WebUILockScreenActivatedEventArgs <: InterfaceWrapperBase & ComInte
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUILockScreenActivatedEventArgs <: windows_core.HandleWinrtType<WebUILockScreenActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUILockScreenActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -7344,7 +7366,7 @@ extend WebUILockScreenActivatedEventArgs <: windows_core.HandleWinrtType<WebUILo
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUILockScreenCallActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -7471,7 +7493,7 @@ public class WebUILockScreenCallActivatedEventArgs <: InterfaceWrapperBase & Com
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUILockScreenCallActivatedEventArgs <: windows_core.HandleWinrtType<WebUILockScreenCallActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUILockScreenCallActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -7489,7 +7511,7 @@ extend WebUILockScreenCallActivatedEventArgs <: windows_core.HandleWinrtType<Web
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUILockScreenComponentActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -7578,7 +7600,7 @@ public class WebUILockScreenComponentActivatedEventArgs <: InterfaceWrapperBase 
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUILockScreenComponentActivatedEventArgs <: windows_core.HandleWinrtType<WebUILockScreenComponentActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUILockScreenComponentActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -7684,7 +7706,7 @@ extend WebUINavigatedEventArgs <: windows_core.HandleWinrtType<WebUINavigatedEve
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIPhoneCallActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -7800,7 +7822,7 @@ public class WebUIPhoneCallActivatedEventArgs <: InterfaceWrapperBase & ComInter
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIPhoneCallActivatedEventArgs <: windows_core.HandleWinrtType<WebUIPhoneCallActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUIPhoneCallActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -7818,7 +7840,7 @@ extend WebUIPhoneCallActivatedEventArgs <: windows_core.HandleWinrtType<WebUIPho
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIPrint3DWorkflowActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -7919,7 +7941,7 @@ public class WebUIPrint3DWorkflowActivatedEventArgs <: InterfaceWrapperBase & Co
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIPrint3DWorkflowActivatedEventArgs <: windows_core.HandleWinrtType<WebUIPrint3DWorkflowActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUIPrint3DWorkflowActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -7937,7 +7959,7 @@ extend WebUIPrint3DWorkflowActivatedEventArgs <: windows_core.HandleWinrtType<We
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIPrintTaskSettingsActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8038,7 +8060,7 @@ public class WebUIPrintTaskSettingsActivatedEventArgs <: InterfaceWrapperBase & 
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIPrintTaskSettingsActivatedEventArgs <: windows_core.HandleWinrtType<WebUIPrintTaskSettingsActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUIPrintTaskSettingsActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -8056,7 +8078,7 @@ extend WebUIPrintTaskSettingsActivatedEventArgs <: windows_core.HandleWinrtType<
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIPrintWorkflowForegroundTaskActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8145,7 +8167,7 @@ public class WebUIPrintWorkflowForegroundTaskActivatedEventArgs <: InterfaceWrap
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIPrintWorkflowForegroundTaskActivatedEventArgs <: windows_core.HandleWinrtType<WebUIPrintWorkflowForegroundTaskActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUIPrintWorkflowForegroundTaskActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -8163,7 +8185,7 @@ extend WebUIPrintWorkflowForegroundTaskActivatedEventArgs <: windows_core.Handle
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIProtocolActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8302,7 +8324,7 @@ public class WebUIProtocolActivatedEventArgs <: InterfaceWrapperBase & ComInterf
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIProtocolActivatedEventArgs <: windows_core.HandleWinrtType<WebUIProtocolActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUIProtocolActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -8320,7 +8342,7 @@ extend WebUIProtocolActivatedEventArgs <: windows_core.HandleWinrtType<WebUIProt
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIProtocolForResultsActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8471,7 +8493,7 @@ public class WebUIProtocolForResultsActivatedEventArgs <: InterfaceWrapperBase &
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIProtocolForResultsActivatedEventArgs <: windows_core.HandleWinrtType<WebUIProtocolForResultsActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUIProtocolForResultsActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -8489,7 +8511,7 @@ extend WebUIProtocolForResultsActivatedEventArgs <: windows_core.HandleWinrtType
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIRestrictedLaunchActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8601,7 +8623,7 @@ public class WebUIRestrictedLaunchActivatedEventArgs <: InterfaceWrapperBase & C
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIRestrictedLaunchActivatedEventArgs <: windows_core.HandleWinrtType<WebUIRestrictedLaunchActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUIRestrictedLaunchActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -8619,7 +8641,7 @@ extend WebUIRestrictedLaunchActivatedEventArgs <: windows_core.HandleWinrtType<W
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUISearchActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8746,7 +8768,7 @@ public class WebUISearchActivatedEventArgs <: InterfaceWrapperBase & ComInterfac
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUISearchActivatedEventArgs <: windows_core.HandleWinrtType<WebUISearchActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUISearchActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -8764,7 +8786,7 @@ extend WebUISearchActivatedEventArgs <: windows_core.HandleWinrtType<WebUISearch
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIShareTargetActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8877,7 +8899,7 @@ public class WebUIShareTargetActivatedEventArgs <: InterfaceWrapperBase & ComInt
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIShareTargetActivatedEventArgs <: windows_core.HandleWinrtType<WebUIShareTargetActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUIShareTargetActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -8895,7 +8917,7 @@ extend WebUIShareTargetActivatedEventArgs <: windows_core.HandleWinrtType<WebUIS
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIStartupTaskActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -9011,7 +9033,7 @@ public class WebUIStartupTaskActivatedEventArgs <: InterfaceWrapperBase & ComInt
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIStartupTaskActivatedEventArgs <: windows_core.HandleWinrtType<WebUIStartupTaskActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUIStartupTaskActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -9029,7 +9051,7 @@ extend WebUIStartupTaskActivatedEventArgs <: windows_core.HandleWinrtType<WebUIS
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIToastNotificationActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -9146,7 +9168,7 @@ public class WebUIToastNotificationActivatedEventArgs <: InterfaceWrapperBase & 
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIToastNotificationActivatedEventArgs <: windows_core.HandleWinrtType<WebUIToastNotificationActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUIToastNotificationActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -9164,7 +9186,7 @@ extend WebUIToastNotificationActivatedEventArgs <: windows_core.HandleWinrtType<
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIUserDataAccountProviderActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -9265,7 +9287,7 @@ public class WebUIUserDataAccountProviderActivatedEventArgs <: InterfaceWrapperB
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIUserDataAccountProviderActivatedEventArgs <: windows_core.HandleWinrtType<WebUIUserDataAccountProviderActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUIUserDataAccountProviderActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -9283,7 +9305,7 @@ extend WebUIUserDataAccountProviderActivatedEventArgs <: windows_core.HandleWinr
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIVoiceCommandActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -9396,7 +9418,7 @@ public class WebUIVoiceCommandActivatedEventArgs <: InterfaceWrapperBase & ComIn
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIVoiceCommandActivatedEventArgs <: windows_core.HandleWinrtType<WebUIVoiceCommandActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUIVoiceCommandActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -9414,7 +9436,7 @@ extend WebUIVoiceCommandActivatedEventArgs <: windows_core.HandleWinrtType<WebUI
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIWalletActionActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -9523,7 +9545,7 @@ public class WebUIWalletActionActivatedEventArgs <: InterfaceWrapperBase & ComIn
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIWalletActionActivatedEventArgs <: windows_core.HandleWinrtType<WebUIWalletActionActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUIWalletActionActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -9541,7 +9563,7 @@ extend WebUIWalletActionActivatedEventArgs <: windows_core.HandleWinrtType<WebUI
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIWebAccountProviderActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -9654,7 +9676,7 @@ public class WebUIWebAccountProviderActivatedEventArgs <: InterfaceWrapperBase &
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIWebAccountProviderActivatedEventArgs <: windows_core.HandleWinrtType<WebUIWebAccountProviderActivatedEventArgs> {
     public static func intoWinrtHandle(value: WebUIWebAccountProviderActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -9672,7 +9694,7 @@ extend WebUIWebAccountProviderActivatedEventArgs <: windows_core.HandleWinrtType
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class WebUIWebAuthenticationBrokerContinuationEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -9785,7 +9807,7 @@ public class WebUIWebAuthenticationBrokerContinuationEventArgs <: InterfaceWrapp
     }
 }
 
-@When[Windows_UI_WebUI == "on"]
+@When[Windows_UI_WebUI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend WebUIWebAuthenticationBrokerContinuationEventArgs <: windows_core.HandleWinrtType<WebUIWebAuthenticationBrokerContinuationEventArgs> {
     public static func intoWinrtHandle(value: WebUIWebAuthenticationBrokerContinuationEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -10858,6 +10880,7 @@ public class WebUIView <: InterfaceWrapperBase & ComInterface & windows_interfac
         return asIWebViewControl().Settings()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DeferredPermissionRequests(): windows_collections.IVectorView<Web_UI.WebViewControlDeferredPermissionRequest> {
         return asIWebViewControl().DeferredPermissionRequests()
     }
@@ -10896,6 +10919,7 @@ public class WebUIView <: InterfaceWrapperBase & ComInterface & windows_interfac
         asIWebViewControl().NavigateWithHttpRequestMessage(requestMessage)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InvokeScriptAsync(scriptName: windows_core.HString, arguments: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<windows_core.HString> {
         return asIWebViewControl().InvokeScriptAsync(scriptName, arguments)
     }

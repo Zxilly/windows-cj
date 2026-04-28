@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -2307,7 +2306,10 @@ extend IGeocoordinateWithPositionData <: windows_core.Interface<IGeocoordinateWi
 @C
 public struct IGeopathVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Positions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Positions: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2388,6 +2390,7 @@ public class IGeopath <: InterfaceWrapperBase & ComInterface & RuntimeName & win
         readVtbl<IGeopathVtbl>(IGeopathVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Positions(): windows_collections.IVectorView<BasicGeoposition> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2782,6 +2785,7 @@ public class GeoboundingBox <: InterfaceWrapperBase & ComInterface & windows_int
         return asIGeoshape().get_AltitudeReferenceSystem()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func TryCompute(positions: windows_collections.IIterable<BasicGeoposition>): GeoboundingBox {
         var result__: Option<GeoboundingBox> = Option<GeoboundingBox>.None
         try (factory__ = windows_core.factory<GeoboundingBox, IGeoboundingBoxStatics>().unwrap()) {
@@ -2793,6 +2797,7 @@ public class GeoboundingBox <: InterfaceWrapperBase & ComInterface & windows_int
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func TryComputeWithAltitudeReference(positions: windows_collections.IIterable<BasicGeoposition>, altitudeRefSystem: AltitudeReferenceSystem): GeoboundingBox {
         var result__: Option<GeoboundingBox> = Option<GeoboundingBox>.None
         try (factory__ = windows_core.factory<GeoboundingBox, IGeoboundingBoxStatics>().unwrap()) {
@@ -2804,6 +2809,7 @@ public class GeoboundingBox <: InterfaceWrapperBase & ComInterface & windows_int
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func TryComputeWithAltitudeReferenceAndSpatialReference(positions: windows_collections.IIterable<BasicGeoposition>, altitudeRefSystem: AltitudeReferenceSystem, spatialReferenceId: UInt32): GeoboundingBox {
         var result__: Option<GeoboundingBox> = Option<GeoboundingBox>.None
         try (factory__ = windows_core.factory<GeoboundingBox, IGeoboundingBoxStatics>().unwrap()) {
@@ -3307,6 +3313,7 @@ public class Geolocator <: InterfaceWrapperBase & ComInterface & windows_interfa
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetGeopositionHistoryAsync(startTime: windows_future.DateTime): windows_future.IAsyncOperation<windows_collections.IVectorView<Geoposition>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<Geoposition>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<Geoposition>>>.None
         try (factory__ = windows_core.factory<Geolocator, IGeolocatorStatics>().unwrap()) {
@@ -3318,6 +3325,7 @@ public class Geolocator <: InterfaceWrapperBase & ComInterface & windows_interfa
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetGeopositionHistoryWithDurationAsync(startTime: windows_future.DateTime, duration: windows_future.TimeSpan): windows_future.IAsyncOperation<windows_collections.IVectorView<Geoposition>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<Geoposition>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<Geoposition>>>.None
         try (factory__ = windows_core.factory<Geolocator, IGeolocatorStatics>().unwrap()) {
@@ -3424,6 +3432,7 @@ public class Geopath <: InterfaceWrapperBase & ComInterface & windows_interface.
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Positions(): windows_collections.IVectorView<BasicGeoposition> {
         return defaultInterface().Positions()
     }
@@ -3440,6 +3449,7 @@ public class Geopath <: InterfaceWrapperBase & ComInterface & windows_interface.
         return asIGeoshape().get_AltitudeReferenceSystem()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Create(positions: windows_collections.IIterable<BasicGeoposition>): Geopath {
         var result__: Option<Geopath> = Option<Geopath>.None
         try (factory__ = windows_core.factory<Geopath, IGeopathFactory>().unwrap()) {
@@ -3451,6 +3461,7 @@ public class Geopath <: InterfaceWrapperBase & ComInterface & windows_interface.
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateWithAltitudeReference(positions: windows_collections.IIterable<BasicGeoposition>, altitudeReferenceSystem: AltitudeReferenceSystem): Geopath {
         var result__: Option<Geopath> = Option<Geopath>.None
         try (factory__ = windows_core.factory<Geopath, IGeopathFactory>().unwrap()) {
@@ -3462,6 +3473,7 @@ public class Geopath <: InterfaceWrapperBase & ComInterface & windows_interface.
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateWithAltitudeReferenceAndSpatialReference(positions: windows_collections.IIterable<BasicGeoposition>, altitudeReferenceSystem: AltitudeReferenceSystem, spatialReferenceId: UInt32): Geopath {
         var result__: Option<Geopath> = Option<Geopath>.None
         try (factory__ = windows_core.factory<Geopath, IGeopathFactory>().unwrap()) {
@@ -4123,6 +4135,7 @@ public class GeovisitTriggerDetails <: InterfaceWrapperBase & ComInterface & win
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReadReports(): windows_collections.IVectorView<Geovisit> {
         return defaultInterface().ReadReports()
     }
@@ -4253,9 +4266,18 @@ extend IGeoboundingBoxFactory <: windows_core.Interface<IGeoboundingBoxFactory> 
 @C
 public struct IGeoboundingBoxStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var TryCompute: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var TryCompute: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var TryComputeWithAltitudeReference: CFunc<(CPointer<Unit>, CPointer<Unit>, AltitudeReferenceSystemAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var TryComputeWithAltitudeReference: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var TryComputeWithAltitudeReferenceAndSpatialReference: CFunc<(CPointer<Unit>, CPointer<Unit>, AltitudeReferenceSystemAbi, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var TryComputeWithAltitudeReferenceAndSpatialReference: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4324,6 +4346,7 @@ public class IGeoboundingBoxStatics <: InterfaceWrapperBase & ComInterface & Run
         readVtbl<IGeoboundingBoxStaticsVtbl>(IGeoboundingBoxStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TryCompute(positions: windows_collections.IIterable<BasicGeoposition>): GeoboundingBox {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4332,6 +4355,7 @@ public class IGeoboundingBoxStatics <: InterfaceWrapperBase & ComInterface & Run
         return GeoboundingBox.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TryComputeWithAltitudeReference(positions: windows_collections.IIterable<BasicGeoposition>, altitudeRefSystem: AltitudeReferenceSystem): GeoboundingBox {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4340,6 +4364,7 @@ public class IGeoboundingBoxStatics <: InterfaceWrapperBase & ComInterface & Run
         return GeoboundingBox.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TryComputeWithAltitudeReferenceAndSpatialReference(positions: windows_collections.IIterable<BasicGeoposition>, altitudeRefSystem: AltitudeReferenceSystem, spatialReferenceId: UInt32): GeoboundingBox {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4728,8 +4753,14 @@ extend IGeolocator <: windows_core.Interface<IGeolocator> {}
 public struct IGeolocatorStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var RequestAccessAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetGeopositionHistoryAsync: CFunc<(CPointer<Unit>, windows_future.DateTimeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetGeopositionHistoryAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetGeopositionHistoryWithDurationAsync: CFunc<(CPointer<Unit>, windows_future.DateTimeAbi, windows_future.TimeSpanAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetGeopositionHistoryWithDurationAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4806,6 +4837,7 @@ public class IGeolocatorStatics <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_future.IAsyncOperation<GeolocationAccessStatus>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetGeopositionHistoryAsync(startTime: windows_future.DateTime): windows_future.IAsyncOperation<windows_collections.IVectorView<Geoposition>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4814,6 +4846,7 @@ public class IGeolocatorStatics <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_future.IAsyncOperation<windows_collections.IVectorView<Geoposition>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetGeopositionHistoryWithDurationAsync(startTime: windows_future.DateTime, duration: windows_future.TimeSpan): windows_future.IAsyncOperation<windows_collections.IVectorView<Geoposition>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4934,9 +4967,18 @@ extend IGeolocatorWithScalarAccuracy <: windows_core.Interface<IGeolocatorWithSc
 @C
 public struct IGeopathFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Create: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateWithAltitudeReference: CFunc<(CPointer<Unit>, CPointer<Unit>, AltitudeReferenceSystemAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateWithAltitudeReference: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateWithAltitudeReferenceAndSpatialReference: CFunc<(CPointer<Unit>, CPointer<Unit>, AltitudeReferenceSystemAbi, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateWithAltitudeReferenceAndSpatialReference: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -5005,6 +5047,7 @@ public class IGeopathFactory <: InterfaceWrapperBase & ComInterface & RuntimeNam
         readVtbl<IGeopathFactoryVtbl>(IGeopathFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create(positions: windows_collections.IIterable<BasicGeoposition>): Geopath {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5013,6 +5056,7 @@ public class IGeopathFactory <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return Geopath.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateWithAltitudeReference(positions: windows_collections.IIterable<BasicGeoposition>, altitudeReferenceSystem: AltitudeReferenceSystem): Geopath {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5021,6 +5065,7 @@ public class IGeopathFactory <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return Geopath.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateWithAltitudeReferenceAndSpatialReference(positions: windows_collections.IIterable<BasicGeoposition>, altitudeReferenceSystem: AltitudeReferenceSystem, spatialReferenceId: UInt32): Geopath {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5719,7 +5764,10 @@ extend IGeovisitStateChangedEventArgs <: windows_core.Interface<IGeovisitStateCh
 @C
 public struct IGeovisitTriggerDetailsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ReadReports: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ReadReports: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -5788,6 +5836,7 @@ public class IGeovisitTriggerDetails <: InterfaceWrapperBase & ComInterface & Ru
         readVtbl<IGeovisitTriggerDetailsVtbl>(IGeovisitTriggerDetailsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReadReports(): windows_collections.IVectorView<Geovisit> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

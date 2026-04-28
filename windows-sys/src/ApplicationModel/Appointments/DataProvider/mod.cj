@@ -120,6 +120,7 @@ public struct IAppointmentCalendarCreateOrUpdateAppointmentRequestVtbl {
     @When[Windows_ApplicationModel_Appointments == "on"]
     public var Appointment: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var NotifyInvitees: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ChangedProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_ApplicationModel_Appointments == "on"]
     public var ReportCompletedAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -186,6 +187,7 @@ public class IAppointmentCalendarCreateOrUpdateAppointmentRequest <: InterfaceWr
         return __vt.NotifyInvitees(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ChangedProperties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -213,7 +215,7 @@ public struct IAppointmentCalendarForwardMeetingRequestVtbl {
     public var AppointmentCalendarLocalId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var AppointmentLocalId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var AppointmentOriginalStartTime: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_ApplicationModel_Appointments == "on"]
+    @When[Windows_ApplicationModel_Appointments == "on" && Windows_Foundation_Collections == "on"]
     public var Invitees: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Subject: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ForwardHeader: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -281,7 +283,7 @@ public class IAppointmentCalendarForwardMeetingRequest <: InterfaceWrapperBase &
         return __vt.AppointmentOriginalStartTime(__liveRaw, result__)
     }
 
-    @When[Windows_ApplicationModel_Appointments == "on"]
+    @When[Windows_ApplicationModel_Appointments == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func Invitees(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

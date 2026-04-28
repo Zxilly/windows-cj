@@ -23,4 +23,409 @@ public import windows_sys.Win32._impl_l2.{LPNSPSTARTUP, NSP_ROUTINE}
 public import windows_sys.Win32._impl_l0.{SERVENT, WSADATA}
 @When[Windows_Win32_Networking_WinSock == "on" && Windows_Win32_System_Com == "on"]
 public import windows_sys.Win32._impl_l1.{SERVICE_INFOA, SERVICE_INFOW, WSANAMESPACE_INFOEXA, WSANAMESPACE_INFOEXW}
-
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_AcceptEx == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AcceptEx
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_EnumProtocolsA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EnumProtocolsA
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_EnumProtocolsW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EnumProtocolsW
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_FreeAddrInfoEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FreeAddrInfoEx
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_FreeAddrInfoExW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FreeAddrInfoExW
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_FreeAddrInfoW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FreeAddrInfoW
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_GetAcceptExSockaddrs == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetAcceptExSockaddrs
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_GetAddrInfoExA == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetAddrInfoExA
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_GetAddrInfoExCancel == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetAddrInfoExCancel
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_GetAddrInfoExOverlappedResult == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetAddrInfoExOverlappedResult
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_GetAddrInfoExW == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetAddrInfoExW
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_GetAddrInfoW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetAddrInfoW
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_GetAddressByNameA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetAddressByNameA
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_GetAddressByNameW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetAddressByNameW
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_GetHostNameW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetHostNameW
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_GetNameByTypeA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetNameByTypeA
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_GetNameByTypeW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetNameByTypeW
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_GetNameInfoW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetNameInfoW
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_GetServiceA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetServiceA
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_GetServiceW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetServiceW
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_GetTypeByNameA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetTypeByNameA
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_GetTypeByNameW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetTypeByNameW
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_InetNtopW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InetNtopW
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_InetPtonW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InetPtonW
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_ProcessSocketNotifications == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ProcessSocketNotifications
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlEthernetAddressToStringA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtlEthernetAddressToStringA
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlEthernetAddressToStringW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtlEthernetAddressToStringW
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlEthernetStringToAddressA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtlEthernetStringToAddressA
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlEthernetStringToAddressW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtlEthernetStringToAddressW
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv4AddressToStringA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtlIpv4AddressToStringA
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv4AddressToStringExA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtlIpv4AddressToStringExA
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv4AddressToStringExW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtlIpv4AddressToStringExW
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv4AddressToStringW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtlIpv4AddressToStringW
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv4StringToAddressA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtlIpv4StringToAddressA
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv4StringToAddressExA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtlIpv4StringToAddressExA
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv4StringToAddressExW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtlIpv4StringToAddressExW
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv4StringToAddressW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtlIpv4StringToAddressW
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv6AddressToStringA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtlIpv6AddressToStringA
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv6AddressToStringExA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtlIpv6AddressToStringExA
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv6AddressToStringExW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtlIpv6AddressToStringExW
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv6AddressToStringW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtlIpv6AddressToStringW
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv6StringToAddressA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtlIpv6StringToAddressA
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv6StringToAddressExA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtlIpv6StringToAddressExA
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv6StringToAddressExW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtlIpv6StringToAddressExW
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv6StringToAddressW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtlIpv6StringToAddressW
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_SetAddrInfoExA == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetAddrInfoExA
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_SetAddrInfoExW == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetAddrInfoExW
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_SetServiceA == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetServiceA
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_SetServiceW == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetServiceW
+@When[Windows_Win32_Networking_WinSock == "on" && WINDOWS_NETWORKING == "on" && Windows_Win32_Networking_WinSock_SetSocketMediaStreamingMode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetSocketMediaStreamingMode
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_TransmitFile == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TransmitFile
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WPUCompleteOverlappedRequest == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WPUCompleteOverlappedRequest
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAAccept == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAAccept
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAAddressToStringA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAAddressToStringA
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAAddressToStringW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAAddressToStringW
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAAdvertiseProvider == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAAdvertiseProvider
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAAsyncGetHostByAddr == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAAsyncGetHostByAddr
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAAsyncGetHostByName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAAsyncGetHostByName
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAAsyncGetProtoByName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAAsyncGetProtoByName
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAAsyncGetProtoByNumber == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAAsyncGetProtoByNumber
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAAsyncGetServByName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAAsyncGetServByName
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAAsyncGetServByPort == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAAsyncGetServByPort
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAAsyncSelect == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAAsyncSelect
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSACancelAsyncRequest == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSACancelAsyncRequest
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSACancelBlockingCall == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSACancelBlockingCall
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSACleanup == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSACleanup
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSACloseEvent == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSACloseEvent
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAConnect == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAConnect
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAConnectByList == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAConnectByList
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAConnectByNameA == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAConnectByNameA
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAConnectByNameW == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAConnectByNameW
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSACreateEvent == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSACreateEvent
+@When[Windows_Win32_Networking_WinSock == "on" && FWPUCLNT == "on" && Windows_Win32_Networking_WinSock_WSADeleteSocketPeerTargetName == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSADeleteSocketPeerTargetName
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSADuplicateSocketA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSADuplicateSocketA
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSADuplicateSocketW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSADuplicateSocketW
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAEnumNameSpaceProvidersA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAEnumNameSpaceProvidersA
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAEnumNameSpaceProvidersExA == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAEnumNameSpaceProvidersExA
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAEnumNameSpaceProvidersExW == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAEnumNameSpaceProvidersExW
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAEnumNameSpaceProvidersW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAEnumNameSpaceProvidersW
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAEnumNetworkEvents == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAEnumNetworkEvents
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAEnumProtocolsA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAEnumProtocolsA
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAEnumProtocolsW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAEnumProtocolsW
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAEventSelect == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAEventSelect
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAGetLastError == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAGetLastError
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAGetOverlappedResult == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAGetOverlappedResult
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAGetQOSByName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAGetQOSByName
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAGetServiceClassInfoA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAGetServiceClassInfoA
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAGetServiceClassInfoW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAGetServiceClassInfoW
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAGetServiceClassNameByClassIdA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAGetServiceClassNameByClassIdA
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAGetServiceClassNameByClassIdW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAGetServiceClassNameByClassIdW
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAHtonl == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAHtonl
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAHtons == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAHtons
+@When[Windows_Win32_Networking_WinSock == "on" && FWPUCLNT == "on" && Windows_Win32_Networking_WinSock_WSAImpersonateSocketPeer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAImpersonateSocketPeer
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAInstallServiceClassA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAInstallServiceClassA
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAInstallServiceClassW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAInstallServiceClassW
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAIoctl == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAIoctl
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAIsBlocking == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAIsBlocking
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAJoinLeaf == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAJoinLeaf
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSALookupServiceBeginA == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSALookupServiceBeginA
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSALookupServiceBeginW == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSALookupServiceBeginW
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSALookupServiceEnd == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSALookupServiceEnd
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSALookupServiceNextA == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSALookupServiceNextA
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSALookupServiceNextW == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSALookupServiceNextW
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSANSPIoctl == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSANSPIoctl
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSANtohl == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSANtohl
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSANtohs == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSANtohs
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAPoll == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAPoll
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAProviderCompleteAsyncCall == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAProviderCompleteAsyncCall
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAProviderConfigChange == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAProviderConfigChange
+@When[Windows_Win32_Networking_WinSock == "on" && FWPUCLNT == "on" && Windows_Win32_Networking_WinSock_WSAQuerySocketSecurity == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAQuerySocketSecurity
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSARecv == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSARecv
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSARecvDisconnect == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSARecvDisconnect
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_WSARecvEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSARecvEx
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSARecvFrom == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSARecvFrom
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSARemoveServiceClass == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSARemoveServiceClass
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAResetEvent == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAResetEvent
+@When[Windows_Win32_Networking_WinSock == "on" && FWPUCLNT == "on" && Windows_Win32_Networking_WinSock_WSARevertImpersonation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSARevertImpersonation
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSASend == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSASend
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSASendDisconnect == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSASendDisconnect
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSASendMsg == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSASendMsg
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSASendTo == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSASendTo
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSASetBlockingHook == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSASetBlockingHook
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSASetEvent == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSASetEvent
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSASetLastError == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSASetLastError
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSASetServiceA == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSASetServiceA
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSASetServiceW == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSASetServiceW
+@When[Windows_Win32_Networking_WinSock == "on" && FWPUCLNT == "on" && Windows_Win32_Networking_WinSock_WSASetSocketPeerTargetName == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSASetSocketPeerTargetName
+@When[Windows_Win32_Networking_WinSock == "on" && FWPUCLNT == "on" && Windows_Win32_Networking_WinSock_WSASetSocketSecurity == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSASetSocketSecurity
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSASocketA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSASocketA
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSASocketW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSASocketW
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAStartup == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_WSAStartup
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAStringToAddressA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAStringToAddressA
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAStringToAddressW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAStringToAddressW
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAUnadvertiseProvider == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAUnadvertiseProvider
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAUnhookBlockingHook == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAUnhookBlockingHook
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAWaitForMultipleEvents == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSAWaitForMultipleEvents
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCDeinstallProvider == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSCDeinstallProvider
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCDeinstallProvider32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_WSCDeinstallProvider32
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCEnableNSProvider == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSCEnableNSProvider
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCEnableNSProvider32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_WSCEnableNSProvider32
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCEnumNameSpaceProviders32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_WSCEnumNameSpaceProviders32
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCEnumNameSpaceProvidersEx32 == "on" && (arch == "x86_64" && Windows_Win32_System_Com == "on" || arch == "aarch64" && Windows_Win32_System_Com == "on")]
+public import windows_sys.Win32._impl_l2.Windows_WSCEnumNameSpaceProvidersEx32
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCEnumProtocols == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSCEnumProtocols
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCEnumProtocols32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_WSCEnumProtocols32
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCGetApplicationCategory == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSCGetApplicationCategory
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCGetProviderInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSCGetProviderInfo
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCGetProviderInfo32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_WSCGetProviderInfo32
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCGetProviderPath == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSCGetProviderPath
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCGetProviderPath32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_WSCGetProviderPath32
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCInstallNameSpace == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSCInstallNameSpace
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCInstallNameSpace32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_WSCInstallNameSpace32
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCInstallNameSpaceEx == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSCInstallNameSpaceEx
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCInstallNameSpaceEx32 == "on" && (arch == "x86_64" && Windows_Win32_System_Com == "on" || arch == "aarch64" && Windows_Win32_System_Com == "on")]
+public import windows_sys.Win32._impl_l2.Windows_WSCInstallNameSpaceEx32
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCInstallProvider == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSCInstallProvider
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCInstallProvider64_32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_WSCInstallProvider64_32
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCInstallProviderAndChains64_32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_WSCInstallProviderAndChains64_32
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCSetApplicationCategory == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSCSetApplicationCategory
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCSetProviderInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSCSetProviderInfo
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCSetProviderInfo32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_WSCSetProviderInfo32
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCUnInstallNameSpace == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSCUnInstallNameSpace
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCUnInstallNameSpace32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_WSCUnInstallNameSpace32
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCUpdateProvider == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSCUpdateProvider
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCUpdateProvider32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_WSCUpdateProvider32
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCWriteNameSpaceOrder == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSCWriteNameSpaceOrder
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCWriteNameSpaceOrder32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_WSCWriteNameSpaceOrder32
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCWriteProviderOrder == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WSCWriteProviderOrder
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCWriteProviderOrder32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_WSCWriteProviderOrder32
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock___WSAFDIsSet == "on"]
+public import windows_sys.Win32._impl_l2.Windows___WSAFDIsSet
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_accept == "on"]
+public import windows_sys.Win32._impl_l2.Windows_accept
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_bind == "on"]
+public import windows_sys.Win32._impl_l2.Windows_bind
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_closesocket == "on"]
+public import windows_sys.Win32._impl_l2.Windows_closesocket
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_connect == "on"]
+public import windows_sys.Win32._impl_l2.Windows_connect
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_freeaddrinfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_freeaddrinfo
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_getaddrinfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_getaddrinfo
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_gethostbyaddr == "on"]
+public import windows_sys.Win32._impl_l2.Windows_gethostbyaddr
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_gethostbyname == "on"]
+public import windows_sys.Win32._impl_l2.Windows_gethostbyname
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_gethostname == "on"]
+public import windows_sys.Win32._impl_l2.Windows_gethostname
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_getnameinfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_getnameinfo
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_getpeername == "on"]
+public import windows_sys.Win32._impl_l2.Windows_getpeername
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_getprotobyname == "on"]
+public import windows_sys.Win32._impl_l2.Windows_getprotobyname
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_getprotobynumber == "on"]
+public import windows_sys.Win32._impl_l2.Windows_getprotobynumber
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_getservbyname == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_getservbyname
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_getservbyport == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_getservbyport
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_getsockname == "on"]
+public import windows_sys.Win32._impl_l2.Windows_getsockname
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_getsockopt == "on"]
+public import windows_sys.Win32._impl_l2.Windows_getsockopt
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_htonl == "on"]
+public import windows_sys.Win32._impl_l2.Windows_htonl
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_htons == "on"]
+public import windows_sys.Win32._impl_l2.Windows_htons
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_inet_addr == "on"]
+public import windows_sys.Win32._impl_l2.Windows_inet_addr
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_inet_ntoa == "on"]
+public import windows_sys.Win32._impl_l2.Windows_inet_ntoa
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_inet_ntop == "on"]
+public import windows_sys.Win32._impl_l2.Windows_inet_ntop
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_inet_pton == "on"]
+public import windows_sys.Win32._impl_l2.Windows_inet_pton
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_ioctlsocket == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ioctlsocket
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_listen == "on"]
+public import windows_sys.Win32._impl_l2.Windows_listen
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_ntohl == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ntohl
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_ntohs == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ntohs
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_recv == "on"]
+public import windows_sys.Win32._impl_l2.Windows_recv
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_recvfrom == "on"]
+public import windows_sys.Win32._impl_l2.Windows_recvfrom
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_select == "on"]
+public import windows_sys.Win32._impl_l2.Windows_select
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_send == "on"]
+public import windows_sys.Win32._impl_l2.Windows_send
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_sendto == "on"]
+public import windows_sys.Win32._impl_l2.Windows_sendto
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_setsockopt == "on"]
+public import windows_sys.Win32._impl_l2.Windows_setsockopt
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_shutdown == "on"]
+public import windows_sys.Win32._impl_l2.Windows_shutdown
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_socket == "on"]
+public import windows_sys.Win32._impl_l2.Windows_socket

@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Graphics_DirectX == "on"]
 import windows.Graphics.DirectX as Graphics_DirectX
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -2402,7 +2400,7 @@ extend SceneComponent <: windows_core.HandleWinrtType<SceneComponent> {
     }
 }
 
-@When[Windows_UI_Composition_Scenes == "on"]
+@When[Windows_UI_Composition_Scenes == "on" && Windows_Foundation_Collections == "on"]
 public class SceneComponentCollection <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -2575,7 +2573,7 @@ public class SceneComponentCollection <: InterfaceWrapperBase & ComInterface & w
     }
 }
 
-@When[Windows_UI_Composition_Scenes == "on"]
+@When[Windows_UI_Composition_Scenes == "on" && Windows_Foundation_Collections == "on"]
 extend SceneComponentCollection <: windows_core.HandleWinrtType<SceneComponentCollection> {
     public static func intoWinrtHandle(value: SceneComponentCollection): CPointer<Unit> {
         value.asRaw()
@@ -4255,8 +4253,14 @@ extend ISceneMetallicRoughnessMaterialStatics <: windows_core.Interface<ISceneMe
 @C
 public struct ISceneNodeVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Children: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Children: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Components: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Components: UIntNative = UIntNative(0)
     public var Parent: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Transform: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var FindFirstComponentOfType: CFunc<(CPointer<Unit>, SceneComponentTypeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -4328,6 +4332,7 @@ public class ISceneNode <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         readVtbl<ISceneNodeVtbl>(ISceneNodeVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Children(): SceneNodeCollection {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4336,6 +4341,7 @@ public class ISceneNode <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         return SceneNodeCollection.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Components(): SceneComponentCollection {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5345,10 +5351,12 @@ public class SceneNode <: InterfaceWrapperBase & ComInterface & windows_interfac
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Children(): SceneNodeCollection {
         return defaultInterface().Children()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Components(): SceneComponentCollection {
         return defaultInterface().Components()
     }
@@ -5404,7 +5412,7 @@ extend SceneNode <: windows_core.HandleWinrtType<SceneNode> {
     }
 }
 
-@When[Windows_UI_Composition_Scenes == "on"]
+@When[Windows_UI_Composition_Scenes == "on" && Windows_Foundation_Collections == "on"]
 public class SceneNodeCollection <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -5577,7 +5585,7 @@ public class SceneNodeCollection <: InterfaceWrapperBase & ComInterface & window
     }
 }
 
-@When[Windows_UI_Composition_Scenes == "on"]
+@When[Windows_UI_Composition_Scenes == "on" && Windows_Foundation_Collections == "on"]
 extend SceneNodeCollection <: windows_core.HandleWinrtType<SceneNodeCollection> {
     public static func intoWinrtHandle(value: SceneNodeCollection): CPointer<Unit> {
         value.asRaw()

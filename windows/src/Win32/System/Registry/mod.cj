@@ -6,9 +6,7 @@ package windows.Win32.System.Registry
 import std.collection.*
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
 import windows_core as windows_core
 
@@ -937,139 +935,658 @@ extend val_context <: windows_core.CopyType & windows_core.RuntimeType & windows
     }
 }
 
-@When[ADVAPI32 == "on"]
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegCloseKey == "on"]
 foreign {
     func RegCloseKey(hKey: HKEY): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegCloseKey == "on"]
+public unsafe func Windows_RegCloseKey(hKey: HKEY): windows_core.WIN32_ERROR {
+    return RegCloseKey(hKey)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegConnectRegistryA == "on"]
+foreign {
     // param-hint: lpMachineName optional
     func RegConnectRegistryA(lpMachineName: CPointer<UInt8>, hKey: HKEY, phkResult: CPointer<HKEY>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegConnectRegistryA == "on"]
+public unsafe func Windows_RegConnectRegistryA(lpMachineName: CPointer<UInt8>, hKey: HKEY, phkResult: CPointer<HKEY>): windows_core.WIN32_ERROR {
+    return RegConnectRegistryA(lpMachineName, hKey, phkResult)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegConnectRegistryExA == "on"]
+foreign {
     // param-hint: lpMachineName optional
     func RegConnectRegistryExA(lpMachineName: CPointer<UInt8>, hKey: HKEY, Flags: UInt32, phkResult: CPointer<HKEY>): Int32
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegConnectRegistryExA == "on"]
+public unsafe func Windows_RegConnectRegistryExA(lpMachineName: CPointer<UInt8>, hKey: HKEY, Flags: UInt32, phkResult: CPointer<HKEY>): Int32 {
+    return RegConnectRegistryExA(lpMachineName, hKey, Flags, phkResult)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegConnectRegistryExW == "on"]
+foreign {
     // param-hint: lpMachineName optional
     func RegConnectRegistryExW(lpMachineName: CPointer<UInt16>, hKey: HKEY, Flags: UInt32, phkResult: CPointer<HKEY>): Int32
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegConnectRegistryExW == "on"]
+public unsafe func Windows_RegConnectRegistryExW(lpMachineName: CPointer<UInt16>, hKey: HKEY, Flags: UInt32, phkResult: CPointer<HKEY>): Int32 {
+    return RegConnectRegistryExW(lpMachineName, hKey, Flags, phkResult)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegConnectRegistryW == "on"]
+foreign {
     // param-hint: lpMachineName optional
     func RegConnectRegistryW(lpMachineName: CPointer<UInt16>, hKey: HKEY, phkResult: CPointer<HKEY>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegConnectRegistryW == "on"]
+public unsafe func Windows_RegConnectRegistryW(lpMachineName: CPointer<UInt16>, hKey: HKEY, phkResult: CPointer<HKEY>): windows_core.WIN32_ERROR {
+    return RegConnectRegistryW(lpMachineName, hKey, phkResult)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegCopyTreeA == "on"]
+foreign {
     // param-hint: lpSubKey optional
     func RegCopyTreeA(hKeySrc: HKEY, lpSubKey: CPointer<UInt8>, hKeyDest: HKEY): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegCopyTreeA == "on"]
+public unsafe func Windows_RegCopyTreeA(hKeySrc: HKEY, lpSubKey: CPointer<UInt8>, hKeyDest: HKEY): windows_core.WIN32_ERROR {
+    return RegCopyTreeA(hKeySrc, lpSubKey, hKeyDest)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegCopyTreeW == "on"]
+foreign {
     // param-hint: lpSubKey optional
     func RegCopyTreeW(hKeySrc: HKEY, lpSubKey: CPointer<UInt16>, hKeyDest: HKEY): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegCopyTreeW == "on"]
+public unsafe func Windows_RegCopyTreeW(hKeySrc: HKEY, lpSubKey: CPointer<UInt16>, hKeyDest: HKEY): windows_core.WIN32_ERROR {
+    return RegCopyTreeW(hKeySrc, lpSubKey, hKeyDest)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegCreateKeyA == "on"]
+foreign {
     // param-hint: lpSubKey optional
     func RegCreateKeyA(hKey: HKEY, lpSubKey: CPointer<UInt8>, phkResult: CPointer<HKEY>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegCreateKeyA == "on"]
+public unsafe func Windows_RegCreateKeyA(hKey: HKEY, lpSubKey: CPointer<UInt8>, phkResult: CPointer<HKEY>): windows_core.WIN32_ERROR {
+    return RegCreateKeyA(hKey, lpSubKey, phkResult)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegCreateKeyExA == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: Reserved optional reserved
+    // param-hint: lpClass optional
+    // param-hint: lpSecurityAttributes optional
+    // param-hint: lpdwDisposition optional
+    func RegCreateKeyExA(hKey: HKEY, lpSubKey: CPointer<UInt8>, Reserved: UInt32, lpClass: CPointer<UInt8>, dwOptions: REG_OPEN_CREATE_OPTIONSAbi, samDesired: REG_SAM_FLAGSAbi, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, phkResult: CPointer<HKEY>, lpdwDisposition: CPointer<REG_CREATE_KEY_DISPOSITIONAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegCreateKeyExA == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_RegCreateKeyExA(hKey: HKEY, lpSubKey: CPointer<UInt8>, Reserved: UInt32, lpClass: CPointer<UInt8>, dwOptions: REG_OPEN_CREATE_OPTIONSAbi, samDesired: REG_SAM_FLAGSAbi, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, phkResult: CPointer<HKEY>, lpdwDisposition: CPointer<REG_CREATE_KEY_DISPOSITIONAbi>): windows_core.WIN32_ERROR {
+    return RegCreateKeyExA(hKey, lpSubKey, Reserved, lpClass, dwOptions, samDesired, lpSecurityAttributes, phkResult, lpdwDisposition)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegCreateKeyExW == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: Reserved optional reserved
+    // param-hint: lpClass optional
+    // param-hint: lpSecurityAttributes optional
+    // param-hint: lpdwDisposition optional
+    func RegCreateKeyExW(hKey: HKEY, lpSubKey: CPointer<UInt16>, Reserved: UInt32, lpClass: CPointer<UInt16>, dwOptions: REG_OPEN_CREATE_OPTIONSAbi, samDesired: REG_SAM_FLAGSAbi, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, phkResult: CPointer<HKEY>, lpdwDisposition: CPointer<REG_CREATE_KEY_DISPOSITIONAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegCreateKeyExW == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_RegCreateKeyExW(hKey: HKEY, lpSubKey: CPointer<UInt16>, Reserved: UInt32, lpClass: CPointer<UInt16>, dwOptions: REG_OPEN_CREATE_OPTIONSAbi, samDesired: REG_SAM_FLAGSAbi, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, phkResult: CPointer<HKEY>, lpdwDisposition: CPointer<REG_CREATE_KEY_DISPOSITIONAbi>): windows_core.WIN32_ERROR {
+    return RegCreateKeyExW(hKey, lpSubKey, Reserved, lpClass, dwOptions, samDesired, lpSecurityAttributes, phkResult, lpdwDisposition)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegCreateKeyTransactedA == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: Reserved optional reserved
+    // param-hint: lpClass optional
+    // param-hint: lpSecurityAttributes optional
+    // param-hint: lpdwDisposition optional
+    // param-hint: pExtendedParemeter optional reserved
+    func RegCreateKeyTransactedA(hKey: HKEY, lpSubKey: CPointer<UInt8>, Reserved: UInt32, lpClass: CPointer<UInt8>, dwOptions: REG_OPEN_CREATE_OPTIONSAbi, samDesired: REG_SAM_FLAGSAbi, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, phkResult: CPointer<HKEY>, lpdwDisposition: CPointer<REG_CREATE_KEY_DISPOSITIONAbi>, hTransaction: CPointer<Unit>, pExtendedParemeter: CPointer<Unit>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegCreateKeyTransactedA == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_RegCreateKeyTransactedA(hKey: HKEY, lpSubKey: CPointer<UInt8>, Reserved: UInt32, lpClass: CPointer<UInt8>, dwOptions: REG_OPEN_CREATE_OPTIONSAbi, samDesired: REG_SAM_FLAGSAbi, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, phkResult: CPointer<HKEY>, lpdwDisposition: CPointer<REG_CREATE_KEY_DISPOSITIONAbi>, hTransaction: CPointer<Unit>, pExtendedParemeter: CPointer<Unit>): windows_core.WIN32_ERROR {
+    return RegCreateKeyTransactedA(hKey, lpSubKey, Reserved, lpClass, dwOptions, samDesired, lpSecurityAttributes, phkResult, lpdwDisposition, hTransaction, pExtendedParemeter)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegCreateKeyTransactedW == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: Reserved optional reserved
+    // param-hint: lpClass optional
+    // param-hint: lpSecurityAttributes optional
+    // param-hint: lpdwDisposition optional
+    // param-hint: pExtendedParemeter optional reserved
+    func RegCreateKeyTransactedW(hKey: HKEY, lpSubKey: CPointer<UInt16>, Reserved: UInt32, lpClass: CPointer<UInt16>, dwOptions: REG_OPEN_CREATE_OPTIONSAbi, samDesired: REG_SAM_FLAGSAbi, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, phkResult: CPointer<HKEY>, lpdwDisposition: CPointer<REG_CREATE_KEY_DISPOSITIONAbi>, hTransaction: CPointer<Unit>, pExtendedParemeter: CPointer<Unit>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegCreateKeyTransactedW == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_RegCreateKeyTransactedW(hKey: HKEY, lpSubKey: CPointer<UInt16>, Reserved: UInt32, lpClass: CPointer<UInt16>, dwOptions: REG_OPEN_CREATE_OPTIONSAbi, samDesired: REG_SAM_FLAGSAbi, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, phkResult: CPointer<HKEY>, lpdwDisposition: CPointer<REG_CREATE_KEY_DISPOSITIONAbi>, hTransaction: CPointer<Unit>, pExtendedParemeter: CPointer<Unit>): windows_core.WIN32_ERROR {
+    return RegCreateKeyTransactedW(hKey, lpSubKey, Reserved, lpClass, dwOptions, samDesired, lpSecurityAttributes, phkResult, lpdwDisposition, hTransaction, pExtendedParemeter)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegCreateKeyW == "on"]
+foreign {
     // param-hint: lpSubKey optional
     func RegCreateKeyW(hKey: HKEY, lpSubKey: CPointer<UInt16>, phkResult: CPointer<HKEY>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegCreateKeyW == "on"]
+public unsafe func Windows_RegCreateKeyW(hKey: HKEY, lpSubKey: CPointer<UInt16>, phkResult: CPointer<HKEY>): windows_core.WIN32_ERROR {
+    return RegCreateKeyW(hKey, lpSubKey, phkResult)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegDeleteKeyA == "on"]
+foreign {
     func RegDeleteKeyA(hKey: HKEY, lpSubKey: CPointer<UInt8>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegDeleteKeyA == "on"]
+public unsafe func Windows_RegDeleteKeyA(hKey: HKEY, lpSubKey: CPointer<UInt8>): windows_core.WIN32_ERROR {
+    return RegDeleteKeyA(hKey, lpSubKey)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegDeleteKeyExA == "on"]
+foreign {
     // param-hint: Reserved optional reserved
     func RegDeleteKeyExA(hKey: HKEY, lpSubKey: CPointer<UInt8>, samDesired: UInt32, Reserved: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegDeleteKeyExA == "on"]
+public unsafe func Windows_RegDeleteKeyExA(hKey: HKEY, lpSubKey: CPointer<UInt8>, samDesired: UInt32, Reserved: UInt32): windows_core.WIN32_ERROR {
+    return RegDeleteKeyExA(hKey, lpSubKey, samDesired, Reserved)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegDeleteKeyExW == "on"]
+foreign {
     // param-hint: Reserved optional reserved
     func RegDeleteKeyExW(hKey: HKEY, lpSubKey: CPointer<UInt16>, samDesired: UInt32, Reserved: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegDeleteKeyExW == "on"]
+public unsafe func Windows_RegDeleteKeyExW(hKey: HKEY, lpSubKey: CPointer<UInt16>, samDesired: UInt32, Reserved: UInt32): windows_core.WIN32_ERROR {
+    return RegDeleteKeyExW(hKey, lpSubKey, samDesired, Reserved)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegDeleteKeyTransactedA == "on"]
+foreign {
     // param-hint: Reserved optional reserved
     // param-hint: pExtendedParameter optional reserved
     func RegDeleteKeyTransactedA(hKey: HKEY, lpSubKey: CPointer<UInt8>, samDesired: UInt32, Reserved: UInt32, hTransaction: CPointer<Unit>, pExtendedParameter: CPointer<Unit>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegDeleteKeyTransactedA == "on"]
+public unsafe func Windows_RegDeleteKeyTransactedA(hKey: HKEY, lpSubKey: CPointer<UInt8>, samDesired: UInt32, Reserved: UInt32, hTransaction: CPointer<Unit>, pExtendedParameter: CPointer<Unit>): windows_core.WIN32_ERROR {
+    return RegDeleteKeyTransactedA(hKey, lpSubKey, samDesired, Reserved, hTransaction, pExtendedParameter)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegDeleteKeyTransactedW == "on"]
+foreign {
     // param-hint: Reserved optional reserved
     // param-hint: pExtendedParameter optional reserved
     func RegDeleteKeyTransactedW(hKey: HKEY, lpSubKey: CPointer<UInt16>, samDesired: UInt32, Reserved: UInt32, hTransaction: CPointer<Unit>, pExtendedParameter: CPointer<Unit>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegDeleteKeyTransactedW == "on"]
+public unsafe func Windows_RegDeleteKeyTransactedW(hKey: HKEY, lpSubKey: CPointer<UInt16>, samDesired: UInt32, Reserved: UInt32, hTransaction: CPointer<Unit>, pExtendedParameter: CPointer<Unit>): windows_core.WIN32_ERROR {
+    return RegDeleteKeyTransactedW(hKey, lpSubKey, samDesired, Reserved, hTransaction, pExtendedParameter)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegDeleteKeyValueA == "on"]
+foreign {
     // param-hint: lpSubKey optional
     // param-hint: lpValueName optional
     func RegDeleteKeyValueA(hKey: HKEY, lpSubKey: CPointer<UInt8>, lpValueName: CPointer<UInt8>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegDeleteKeyValueA == "on"]
+public unsafe func Windows_RegDeleteKeyValueA(hKey: HKEY, lpSubKey: CPointer<UInt8>, lpValueName: CPointer<UInt8>): windows_core.WIN32_ERROR {
+    return RegDeleteKeyValueA(hKey, lpSubKey, lpValueName)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegDeleteKeyValueW == "on"]
+foreign {
     // param-hint: lpSubKey optional
     // param-hint: lpValueName optional
     func RegDeleteKeyValueW(hKey: HKEY, lpSubKey: CPointer<UInt16>, lpValueName: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegDeleteKeyValueW == "on"]
+public unsafe func Windows_RegDeleteKeyValueW(hKey: HKEY, lpSubKey: CPointer<UInt16>, lpValueName: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return RegDeleteKeyValueW(hKey, lpSubKey, lpValueName)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegDeleteKeyW == "on"]
+foreign {
     func RegDeleteKeyW(hKey: HKEY, lpSubKey: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegDeleteKeyW == "on"]
+public unsafe func Windows_RegDeleteKeyW(hKey: HKEY, lpSubKey: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return RegDeleteKeyW(hKey, lpSubKey)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegDeleteTreeA == "on"]
+foreign {
     // param-hint: lpSubKey optional
     func RegDeleteTreeA(hKey: HKEY, lpSubKey: CPointer<UInt8>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegDeleteTreeA == "on"]
+public unsafe func Windows_RegDeleteTreeA(hKey: HKEY, lpSubKey: CPointer<UInt8>): windows_core.WIN32_ERROR {
+    return RegDeleteTreeA(hKey, lpSubKey)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegDeleteTreeW == "on"]
+foreign {
     // param-hint: lpSubKey optional
     func RegDeleteTreeW(hKey: HKEY, lpSubKey: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegDeleteTreeW == "on"]
+public unsafe func Windows_RegDeleteTreeW(hKey: HKEY, lpSubKey: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return RegDeleteTreeW(hKey, lpSubKey)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegDeleteValueA == "on"]
+foreign {
     // param-hint: lpValueName optional
     func RegDeleteValueA(hKey: HKEY, lpValueName: CPointer<UInt8>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegDeleteValueA == "on"]
+public unsafe func Windows_RegDeleteValueA(hKey: HKEY, lpValueName: CPointer<UInt8>): windows_core.WIN32_ERROR {
+    return RegDeleteValueA(hKey, lpValueName)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegDeleteValueW == "on"]
+foreign {
     // param-hint: lpValueName optional
     func RegDeleteValueW(hKey: HKEY, lpValueName: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegDeleteValueW == "on"]
+public unsafe func Windows_RegDeleteValueW(hKey: HKEY, lpValueName: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return RegDeleteValueW(hKey, lpValueName)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegDisablePredefinedCache == "on"]
+foreign {
     func RegDisablePredefinedCache(): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegDisablePredefinedCache == "on"]
+public unsafe func Windows_RegDisablePredefinedCache(): windows_core.WIN32_ERROR {
+    return RegDisablePredefinedCache()
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegDisablePredefinedCacheEx == "on"]
+foreign {
     func RegDisablePredefinedCacheEx(): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegDisablePredefinedCacheEx == "on"]
+public unsafe func Windows_RegDisablePredefinedCacheEx(): windows_core.WIN32_ERROR {
+    return RegDisablePredefinedCacheEx()
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegDisableReflectionKey == "on"]
+foreign {
     func RegDisableReflectionKey(hBase: HKEY): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegDisableReflectionKey == "on"]
+public unsafe func Windows_RegDisableReflectionKey(hBase: HKEY): windows_core.WIN32_ERROR {
+    return RegDisableReflectionKey(hBase)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegEnableReflectionKey == "on"]
+foreign {
     func RegEnableReflectionKey(hBase: HKEY): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegEnableReflectionKey == "on"]
+public unsafe func Windows_RegEnableReflectionKey(hBase: HKEY): windows_core.WIN32_ERROR {
+    return RegEnableReflectionKey(hBase)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegEnumKeyA == "on"]
+foreign {
     // param-hint: lpName len=param[3] optional
     func RegEnumKeyA(hKey: HKEY, dwIndex: UInt32, lpName: CPointer<UInt8>, cchName: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegEnumKeyA == "on"]
+public unsafe func Windows_RegEnumKeyA(hKey: HKEY, dwIndex: UInt32, lpName: CPointer<UInt8>, cchName: UInt32): windows_core.WIN32_ERROR {
+    return RegEnumKeyA(hKey, dwIndex, lpName, cchName)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegEnumKeyExA == "on"]
+foreign {
     // param-hint: lpName len=param[3] optional
     // param-hint: lpReserved optional reserved
     // param-hint: lpClass len=param[6] optional
     // param-hint: lpcchClass optional
     // param-hint: lpftLastWriteTime optional
     func RegEnumKeyExA(hKey: HKEY, dwIndex: UInt32, lpName: CPointer<UInt8>, lpcchName: CPointer<UInt32>, lpReserved: CPointer<UInt32>, lpClass: CPointer<UInt8>, lpcchClass: CPointer<UInt32>, lpftLastWriteTime: CPointer<Win32_Foundation.FILETIMEAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegEnumKeyExA == "on"]
+public unsafe func Windows_RegEnumKeyExA(hKey: HKEY, dwIndex: UInt32, lpName: CPointer<UInt8>, lpcchName: CPointer<UInt32>, lpReserved: CPointer<UInt32>, lpClass: CPointer<UInt8>, lpcchClass: CPointer<UInt32>, lpftLastWriteTime: CPointer<Win32_Foundation.FILETIMEAbi>): windows_core.WIN32_ERROR {
+    return RegEnumKeyExA(hKey, dwIndex, lpName, lpcchName, lpReserved, lpClass, lpcchClass, lpftLastWriteTime)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegEnumKeyExW == "on"]
+foreign {
     // param-hint: lpName len=param[3] optional
     // param-hint: lpReserved optional reserved
     // param-hint: lpClass len=param[6] optional
     // param-hint: lpcchClass optional
     // param-hint: lpftLastWriteTime optional
     func RegEnumKeyExW(hKey: HKEY, dwIndex: UInt32, lpName: CPointer<UInt16>, lpcchName: CPointer<UInt32>, lpReserved: CPointer<UInt32>, lpClass: CPointer<UInt16>, lpcchClass: CPointer<UInt32>, lpftLastWriteTime: CPointer<Win32_Foundation.FILETIMEAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegEnumKeyExW == "on"]
+public unsafe func Windows_RegEnumKeyExW(hKey: HKEY, dwIndex: UInt32, lpName: CPointer<UInt16>, lpcchName: CPointer<UInt32>, lpReserved: CPointer<UInt32>, lpClass: CPointer<UInt16>, lpcchClass: CPointer<UInt32>, lpftLastWriteTime: CPointer<Win32_Foundation.FILETIMEAbi>): windows_core.WIN32_ERROR {
+    return RegEnumKeyExW(hKey, dwIndex, lpName, lpcchName, lpReserved, lpClass, lpcchClass, lpftLastWriteTime)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegEnumKeyW == "on"]
+foreign {
     // param-hint: lpName len=param[3] optional
     func RegEnumKeyW(hKey: HKEY, dwIndex: UInt32, lpName: CPointer<UInt16>, cchName: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegEnumKeyW == "on"]
+public unsafe func Windows_RegEnumKeyW(hKey: HKEY, dwIndex: UInt32, lpName: CPointer<UInt16>, cchName: UInt32): windows_core.WIN32_ERROR {
+    return RegEnumKeyW(hKey, dwIndex, lpName, cchName)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegEnumValueA == "on"]
+foreign {
     // param-hint: lpValueName len=param[3] optional
     // param-hint: lpReserved optional reserved
     // param-hint: lpType optional
     // param-hint: lpData bytes=param[7] optional
     // param-hint: lpcbData optional
     func RegEnumValueA(hKey: HKEY, dwIndex: UInt32, lpValueName: CPointer<UInt8>, lpcchValueName: CPointer<UInt32>, lpReserved: CPointer<UInt32>, lpType: CPointer<UInt32>, lpData: CPointer<UInt8>, lpcbData: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegEnumValueA == "on"]
+public unsafe func Windows_RegEnumValueA(hKey: HKEY, dwIndex: UInt32, lpValueName: CPointer<UInt8>, lpcchValueName: CPointer<UInt32>, lpReserved: CPointer<UInt32>, lpType: CPointer<UInt32>, lpData: CPointer<UInt8>, lpcbData: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return RegEnumValueA(hKey, dwIndex, lpValueName, lpcchValueName, lpReserved, lpType, lpData, lpcbData)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegEnumValueW == "on"]
+foreign {
     // param-hint: lpValueName len=param[3] optional
     // param-hint: lpReserved optional reserved
     // param-hint: lpType optional
     // param-hint: lpData bytes=param[7] optional
     // param-hint: lpcbData optional
     func RegEnumValueW(hKey: HKEY, dwIndex: UInt32, lpValueName: CPointer<UInt16>, lpcchValueName: CPointer<UInt32>, lpReserved: CPointer<UInt32>, lpType: CPointer<UInt32>, lpData: CPointer<UInt8>, lpcbData: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegEnumValueW == "on"]
+public unsafe func Windows_RegEnumValueW(hKey: HKEY, dwIndex: UInt32, lpValueName: CPointer<UInt16>, lpcchValueName: CPointer<UInt32>, lpReserved: CPointer<UInt32>, lpType: CPointer<UInt32>, lpData: CPointer<UInt8>, lpcbData: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return RegEnumValueW(hKey, dwIndex, lpValueName, lpcchValueName, lpReserved, lpType, lpData, lpcbData)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegFlushKey == "on"]
+foreign {
     func RegFlushKey(hKey: HKEY): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegFlushKey == "on"]
+public unsafe func Windows_RegFlushKey(hKey: HKEY): windows_core.WIN32_ERROR {
+    return RegFlushKey(hKey)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegGetKeySecurity == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: pSecurityDescriptor bytes=param[3] optional
+    func RegGetKeySecurity(hKey: HKEY, SecurityInformation: Win32_Security.OBJECT_SECURITY_INFORMATIONAbi, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, lpcbSecurityDescriptor: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegGetKeySecurity == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_RegGetKeySecurity(hKey: HKEY, SecurityInformation: Win32_Security.OBJECT_SECURITY_INFORMATIONAbi, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, lpcbSecurityDescriptor: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return RegGetKeySecurity(hKey, SecurityInformation, pSecurityDescriptor, lpcbSecurityDescriptor)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegGetValueA == "on"]
+foreign {
     // param-hint: lpSubKey optional
     // param-hint: lpValue optional
     // param-hint: pdwType optional
     // param-hint: pvData bytes=param[6] optional
     // param-hint: pcbData optional
     func RegGetValueA(hkey: HKEY, lpSubKey: CPointer<UInt8>, lpValue: CPointer<UInt8>, dwFlags: REG_ROUTINE_FLAGSAbi, pdwType: CPointer<REG_VALUE_TYPEAbi>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegGetValueA == "on"]
+public unsafe func Windows_RegGetValueA(hkey: HKEY, lpSubKey: CPointer<UInt8>, lpValue: CPointer<UInt8>, dwFlags: REG_ROUTINE_FLAGSAbi, pdwType: CPointer<REG_VALUE_TYPEAbi>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return RegGetValueA(hkey, lpSubKey, lpValue, dwFlags, pdwType, pvData, pcbData)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegGetValueW == "on"]
+foreign {
     // param-hint: lpSubKey optional
     // param-hint: lpValue optional
     // param-hint: pdwType optional
     // param-hint: pvData bytes=param[6] optional
     // param-hint: pcbData optional
     func RegGetValueW(hkey: HKEY, lpSubKey: CPointer<UInt16>, lpValue: CPointer<UInt16>, dwFlags: REG_ROUTINE_FLAGSAbi, pdwType: CPointer<REG_VALUE_TYPEAbi>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegGetValueW == "on"]
+public unsafe func Windows_RegGetValueW(hkey: HKEY, lpSubKey: CPointer<UInt16>, lpValue: CPointer<UInt16>, dwFlags: REG_ROUTINE_FLAGSAbi, pdwType: CPointer<REG_VALUE_TYPEAbi>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return RegGetValueW(hkey, lpSubKey, lpValue, dwFlags, pdwType, pvData, pcbData)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegLoadAppKeyA == "on"]
+foreign {
     // param-hint: Reserved optional reserved
     func RegLoadAppKeyA(lpFile: CPointer<UInt8>, phkResult: CPointer<HKEY>, samDesired: UInt32, dwOptions: UInt32, Reserved: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegLoadAppKeyA == "on"]
+public unsafe func Windows_RegLoadAppKeyA(lpFile: CPointer<UInt8>, phkResult: CPointer<HKEY>, samDesired: UInt32, dwOptions: UInt32, Reserved: UInt32): windows_core.WIN32_ERROR {
+    return RegLoadAppKeyA(lpFile, phkResult, samDesired, dwOptions, Reserved)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegLoadAppKeyW == "on"]
+foreign {
     // param-hint: Reserved optional reserved
     func RegLoadAppKeyW(lpFile: CPointer<UInt16>, phkResult: CPointer<HKEY>, samDesired: UInt32, dwOptions: UInt32, Reserved: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegLoadAppKeyW == "on"]
+public unsafe func Windows_RegLoadAppKeyW(lpFile: CPointer<UInt16>, phkResult: CPointer<HKEY>, samDesired: UInt32, dwOptions: UInt32, Reserved: UInt32): windows_core.WIN32_ERROR {
+    return RegLoadAppKeyW(lpFile, phkResult, samDesired, dwOptions, Reserved)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegLoadKeyA == "on"]
+foreign {
     // param-hint: lpSubKey optional
     func RegLoadKeyA(hKey: HKEY, lpSubKey: CPointer<UInt8>, lpFile: CPointer<UInt8>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegLoadKeyA == "on"]
+public unsafe func Windows_RegLoadKeyA(hKey: HKEY, lpSubKey: CPointer<UInt8>, lpFile: CPointer<UInt8>): windows_core.WIN32_ERROR {
+    return RegLoadKeyA(hKey, lpSubKey, lpFile)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegLoadKeyW == "on"]
+foreign {
     // param-hint: lpSubKey optional
     func RegLoadKeyW(hKey: HKEY, lpSubKey: CPointer<UInt16>, lpFile: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegLoadKeyW == "on"]
+public unsafe func Windows_RegLoadKeyW(hKey: HKEY, lpSubKey: CPointer<UInt16>, lpFile: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return RegLoadKeyW(hKey, lpSubKey, lpFile)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegLoadMUIStringA == "on"]
+foreign {
     // param-hint: pszValue optional
     // param-hint: pszOutBuf bytes=param[3] optional
     // param-hint: pcbData optional
     // param-hint: pszDirectory optional
     func RegLoadMUIStringA(hKey: HKEY, pszValue: CPointer<UInt8>, pszOutBuf: CPointer<UInt8>, cbOutBuf: UInt32, pcbData: CPointer<UInt32>, Flags: UInt32, pszDirectory: CPointer<UInt8>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegLoadMUIStringA == "on"]
+public unsafe func Windows_RegLoadMUIStringA(hKey: HKEY, pszValue: CPointer<UInt8>, pszOutBuf: CPointer<UInt8>, cbOutBuf: UInt32, pcbData: CPointer<UInt32>, Flags: UInt32, pszDirectory: CPointer<UInt8>): windows_core.WIN32_ERROR {
+    return RegLoadMUIStringA(hKey, pszValue, pszOutBuf, cbOutBuf, pcbData, Flags, pszDirectory)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegLoadMUIStringW == "on"]
+foreign {
     // param-hint: pszValue optional
     // param-hint: pszOutBuf bytes=param[3] optional
     // param-hint: pcbData optional
     // param-hint: pszDirectory optional
     func RegLoadMUIStringW(hKey: HKEY, pszValue: CPointer<UInt16>, pszOutBuf: CPointer<UInt16>, cbOutBuf: UInt32, pcbData: CPointer<UInt32>, Flags: UInt32, pszDirectory: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegLoadMUIStringW == "on"]
+public unsafe func Windows_RegLoadMUIStringW(hKey: HKEY, pszValue: CPointer<UInt16>, pszOutBuf: CPointer<UInt16>, cbOutBuf: UInt32, pcbData: CPointer<UInt32>, Flags: UInt32, pszDirectory: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return RegLoadMUIStringW(hKey, pszValue, pszOutBuf, cbOutBuf, pcbData, Flags, pszDirectory)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegNotifyChangeKeyValue == "on"]
+foreign {
     // param-hint: hEvent optional
     func RegNotifyChangeKeyValue(hKey: HKEY, bWatchSubtree: Int32, dwNotifyFilter: REG_NOTIFY_FILTERAbi, hEvent: CPointer<Unit>, fAsynchronous: Int32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegNotifyChangeKeyValue == "on"]
+public unsafe func Windows_RegNotifyChangeKeyValue(hKey: HKEY, bWatchSubtree: Int32, dwNotifyFilter: REG_NOTIFY_FILTERAbi, hEvent: CPointer<Unit>, fAsynchronous: Int32): windows_core.WIN32_ERROR {
+    return RegNotifyChangeKeyValue(hKey, bWatchSubtree, dwNotifyFilter, hEvent, fAsynchronous)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegOpenCurrentUser == "on"]
+foreign {
     func RegOpenCurrentUser(samDesired: UInt32, phkResult: CPointer<HKEY>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegOpenCurrentUser == "on"]
+public unsafe func Windows_RegOpenCurrentUser(samDesired: UInt32, phkResult: CPointer<HKEY>): windows_core.WIN32_ERROR {
+    return RegOpenCurrentUser(samDesired, phkResult)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegOpenKeyA == "on"]
+foreign {
     // param-hint: lpSubKey optional
     func RegOpenKeyA(hKey: HKEY, lpSubKey: CPointer<UInt8>, phkResult: CPointer<HKEY>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegOpenKeyA == "on"]
+public unsafe func Windows_RegOpenKeyA(hKey: HKEY, lpSubKey: CPointer<UInt8>, phkResult: CPointer<HKEY>): windows_core.WIN32_ERROR {
+    return RegOpenKeyA(hKey, lpSubKey, phkResult)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegOpenKeyExA == "on"]
+foreign {
     // param-hint: lpSubKey optional
     // param-hint: ulOptions optional
     func RegOpenKeyExA(hKey: HKEY, lpSubKey: CPointer<UInt8>, ulOptions: UInt32, samDesired: REG_SAM_FLAGSAbi, phkResult: CPointer<HKEY>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegOpenKeyExA == "on"]
+public unsafe func Windows_RegOpenKeyExA(hKey: HKEY, lpSubKey: CPointer<UInt8>, ulOptions: UInt32, samDesired: REG_SAM_FLAGSAbi, phkResult: CPointer<HKEY>): windows_core.WIN32_ERROR {
+    return RegOpenKeyExA(hKey, lpSubKey, ulOptions, samDesired, phkResult)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegOpenKeyExW == "on"]
+foreign {
     // param-hint: lpSubKey optional
     // param-hint: ulOptions optional
     func RegOpenKeyExW(hKey: HKEY, lpSubKey: CPointer<UInt16>, ulOptions: UInt32, samDesired: REG_SAM_FLAGSAbi, phkResult: CPointer<HKEY>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegOpenKeyExW == "on"]
+public unsafe func Windows_RegOpenKeyExW(hKey: HKEY, lpSubKey: CPointer<UInt16>, ulOptions: UInt32, samDesired: REG_SAM_FLAGSAbi, phkResult: CPointer<HKEY>): windows_core.WIN32_ERROR {
+    return RegOpenKeyExW(hKey, lpSubKey, ulOptions, samDesired, phkResult)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegOpenKeyTransactedA == "on"]
+foreign {
     // param-hint: lpSubKey optional
     // param-hint: ulOptions optional
     // param-hint: pExtendedParemeter optional reserved
     func RegOpenKeyTransactedA(hKey: HKEY, lpSubKey: CPointer<UInt8>, ulOptions: UInt32, samDesired: REG_SAM_FLAGSAbi, phkResult: CPointer<HKEY>, hTransaction: CPointer<Unit>, pExtendedParemeter: CPointer<Unit>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegOpenKeyTransactedA == "on"]
+public unsafe func Windows_RegOpenKeyTransactedA(hKey: HKEY, lpSubKey: CPointer<UInt8>, ulOptions: UInt32, samDesired: REG_SAM_FLAGSAbi, phkResult: CPointer<HKEY>, hTransaction: CPointer<Unit>, pExtendedParemeter: CPointer<Unit>): windows_core.WIN32_ERROR {
+    return RegOpenKeyTransactedA(hKey, lpSubKey, ulOptions, samDesired, phkResult, hTransaction, pExtendedParemeter)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegOpenKeyTransactedW == "on"]
+foreign {
     // param-hint: lpSubKey optional
     // param-hint: ulOptions optional
     // param-hint: pExtendedParemeter optional reserved
     func RegOpenKeyTransactedW(hKey: HKEY, lpSubKey: CPointer<UInt16>, ulOptions: UInt32, samDesired: REG_SAM_FLAGSAbi, phkResult: CPointer<HKEY>, hTransaction: CPointer<Unit>, pExtendedParemeter: CPointer<Unit>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegOpenKeyTransactedW == "on"]
+public unsafe func Windows_RegOpenKeyTransactedW(hKey: HKEY, lpSubKey: CPointer<UInt16>, ulOptions: UInt32, samDesired: REG_SAM_FLAGSAbi, phkResult: CPointer<HKEY>, hTransaction: CPointer<Unit>, pExtendedParemeter: CPointer<Unit>): windows_core.WIN32_ERROR {
+    return RegOpenKeyTransactedW(hKey, lpSubKey, ulOptions, samDesired, phkResult, hTransaction, pExtendedParemeter)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegOpenKeyW == "on"]
+foreign {
     // param-hint: lpSubKey optional
     func RegOpenKeyW(hKey: HKEY, lpSubKey: CPointer<UInt16>, phkResult: CPointer<HKEY>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegOpenKeyW == "on"]
+public unsafe func Windows_RegOpenKeyW(hKey: HKEY, lpSubKey: CPointer<UInt16>, phkResult: CPointer<HKEY>): windows_core.WIN32_ERROR {
+    return RegOpenKeyW(hKey, lpSubKey, phkResult)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegOpenUserClassesRoot == "on"]
+foreign {
     // param-hint: dwOptions optional reserved
     func RegOpenUserClassesRoot(hToken: CPointer<Unit>, dwOptions: UInt32, samDesired: UInt32, phkResult: CPointer<HKEY>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegOpenUserClassesRoot == "on"]
+public unsafe func Windows_RegOpenUserClassesRoot(hToken: CPointer<Unit>, dwOptions: UInt32, samDesired: UInt32, phkResult: CPointer<HKEY>): windows_core.WIN32_ERROR {
+    return RegOpenUserClassesRoot(hToken, dwOptions, samDesired, phkResult)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegOverridePredefKey == "on"]
+foreign {
     // param-hint: hNewHKey optional
     func RegOverridePredefKey(hKey: HKEY, hNewHKey: HKEY): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegOverridePredefKey == "on"]
+public unsafe func Windows_RegOverridePredefKey(hKey: HKEY, hNewHKey: HKEY): windows_core.WIN32_ERROR {
+    return RegOverridePredefKey(hKey, hNewHKey)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegQueryInfoKeyA == "on"]
+foreign {
     // param-hint: lpClass len=param[2] optional
     // param-hint: lpcchClass optional
     // param-hint: lpReserved optional reserved
@@ -1082,6 +1599,15 @@ foreign {
     // param-hint: lpcbSecurityDescriptor optional
     // param-hint: lpftLastWriteTime optional
     func RegQueryInfoKeyA(hKey: HKEY, lpClass: CPointer<UInt8>, lpcchClass: CPointer<UInt32>, lpReserved: CPointer<UInt32>, lpcSubKeys: CPointer<UInt32>, lpcbMaxSubKeyLen: CPointer<UInt32>, lpcbMaxClassLen: CPointer<UInt32>, lpcValues: CPointer<UInt32>, lpcbMaxValueNameLen: CPointer<UInt32>, lpcbMaxValueLen: CPointer<UInt32>, lpcbSecurityDescriptor: CPointer<UInt32>, lpftLastWriteTime: CPointer<Win32_Foundation.FILETIMEAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegQueryInfoKeyA == "on"]
+public unsafe func Windows_RegQueryInfoKeyA(hKey: HKEY, lpClass: CPointer<UInt8>, lpcchClass: CPointer<UInt32>, lpReserved: CPointer<UInt32>, lpcSubKeys: CPointer<UInt32>, lpcbMaxSubKeyLen: CPointer<UInt32>, lpcbMaxClassLen: CPointer<UInt32>, lpcValues: CPointer<UInt32>, lpcbMaxValueNameLen: CPointer<UInt32>, lpcbMaxValueLen: CPointer<UInt32>, lpcbSecurityDescriptor: CPointer<UInt32>, lpftLastWriteTime: CPointer<Win32_Foundation.FILETIMEAbi>): windows_core.WIN32_ERROR {
+    return RegQueryInfoKeyA(hKey, lpClass, lpcchClass, lpReserved, lpcSubKeys, lpcbMaxSubKeyLen, lpcbMaxClassLen, lpcValues, lpcbMaxValueNameLen, lpcbMaxValueLen, lpcbSecurityDescriptor, lpftLastWriteTime)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegQueryInfoKeyW == "on"]
+foreign {
     // param-hint: lpClass len=param[2] optional
     // param-hint: lpcchClass optional
     // param-hint: lpReserved optional reserved
@@ -1094,109 +1620,311 @@ foreign {
     // param-hint: lpcbSecurityDescriptor optional
     // param-hint: lpftLastWriteTime optional
     func RegQueryInfoKeyW(hKey: HKEY, lpClass: CPointer<UInt16>, lpcchClass: CPointer<UInt32>, lpReserved: CPointer<UInt32>, lpcSubKeys: CPointer<UInt32>, lpcbMaxSubKeyLen: CPointer<UInt32>, lpcbMaxClassLen: CPointer<UInt32>, lpcValues: CPointer<UInt32>, lpcbMaxValueNameLen: CPointer<UInt32>, lpcbMaxValueLen: CPointer<UInt32>, lpcbSecurityDescriptor: CPointer<UInt32>, lpftLastWriteTime: CPointer<Win32_Foundation.FILETIMEAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegQueryInfoKeyW == "on"]
+public unsafe func Windows_RegQueryInfoKeyW(hKey: HKEY, lpClass: CPointer<UInt16>, lpcchClass: CPointer<UInt32>, lpReserved: CPointer<UInt32>, lpcSubKeys: CPointer<UInt32>, lpcbMaxSubKeyLen: CPointer<UInt32>, lpcbMaxClassLen: CPointer<UInt32>, lpcValues: CPointer<UInt32>, lpcbMaxValueNameLen: CPointer<UInt32>, lpcbMaxValueLen: CPointer<UInt32>, lpcbSecurityDescriptor: CPointer<UInt32>, lpftLastWriteTime: CPointer<Win32_Foundation.FILETIMEAbi>): windows_core.WIN32_ERROR {
+    return RegQueryInfoKeyW(hKey, lpClass, lpcchClass, lpReserved, lpcSubKeys, lpcbMaxSubKeyLen, lpcbMaxClassLen, lpcValues, lpcbMaxValueNameLen, lpcbMaxValueLen, lpcbSecurityDescriptor, lpftLastWriteTime)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegQueryMultipleValuesA == "on"]
+foreign {
     // param-hint: val_list len=param[2]
     // param-hint: lpValueBuf bytes=param[4] optional
     // param-hint: ldwTotsize optional
     func RegQueryMultipleValuesA(hKey: HKEY, val_list: CPointer<VALENTAAbi>, num_vals: UInt32, lpValueBuf: CPointer<UInt8>, ldwTotsize: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegQueryMultipleValuesA == "on"]
+public unsafe func Windows_RegQueryMultipleValuesA(hKey: HKEY, val_list: CPointer<VALENTAAbi>, num_vals: UInt32, lpValueBuf: CPointer<UInt8>, ldwTotsize: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return RegQueryMultipleValuesA(hKey, val_list, num_vals, lpValueBuf, ldwTotsize)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegQueryMultipleValuesW == "on"]
+foreign {
     // param-hint: val_list len=param[2]
     // param-hint: lpValueBuf bytes=param[4] optional
     // param-hint: ldwTotsize optional
     func RegQueryMultipleValuesW(hKey: HKEY, val_list: CPointer<VALENTWAbi>, num_vals: UInt32, lpValueBuf: CPointer<UInt16>, ldwTotsize: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegQueryMultipleValuesW == "on"]
+public unsafe func Windows_RegQueryMultipleValuesW(hKey: HKEY, val_list: CPointer<VALENTWAbi>, num_vals: UInt32, lpValueBuf: CPointer<UInt16>, ldwTotsize: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return RegQueryMultipleValuesW(hKey, val_list, num_vals, lpValueBuf, ldwTotsize)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegQueryReflectionKey == "on"]
+foreign {
     func RegQueryReflectionKey(hBase: HKEY, bIsReflectionDisabled: CPointer<Int32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegQueryReflectionKey == "on"]
+public unsafe func Windows_RegQueryReflectionKey(hBase: HKEY, bIsReflectionDisabled: CPointer<Int32>): windows_core.WIN32_ERROR {
+    return RegQueryReflectionKey(hBase, bIsReflectionDisabled)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegQueryValueA == "on"]
+foreign {
     // param-hint: lpSubKey optional
     // param-hint: lpData bytes=param[3] optional
     // param-hint: lpcbData optional
     func RegQueryValueA(hKey: HKEY, lpSubKey: CPointer<UInt8>, lpData: CPointer<UInt8>, lpcbData: CPointer<Int32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegQueryValueA == "on"]
+public unsafe func Windows_RegQueryValueA(hKey: HKEY, lpSubKey: CPointer<UInt8>, lpData: CPointer<UInt8>, lpcbData: CPointer<Int32>): windows_core.WIN32_ERROR {
+    return RegQueryValueA(hKey, lpSubKey, lpData, lpcbData)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegQueryValueExA == "on"]
+foreign {
     // param-hint: lpValueName optional
     // param-hint: lpReserved optional reserved
     // param-hint: lpType optional
     // param-hint: lpData bytes=param[5] optional
     // param-hint: lpcbData optional
     func RegQueryValueExA(hKey: HKEY, lpValueName: CPointer<UInt8>, lpReserved: CPointer<UInt32>, lpType: CPointer<REG_VALUE_TYPEAbi>, lpData: CPointer<UInt8>, lpcbData: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegQueryValueExA == "on"]
+public unsafe func Windows_RegQueryValueExA(hKey: HKEY, lpValueName: CPointer<UInt8>, lpReserved: CPointer<UInt32>, lpType: CPointer<REG_VALUE_TYPEAbi>, lpData: CPointer<UInt8>, lpcbData: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return RegQueryValueExA(hKey, lpValueName, lpReserved, lpType, lpData, lpcbData)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegQueryValueExW == "on"]
+foreign {
     // param-hint: lpValueName optional
     // param-hint: lpReserved optional reserved
     // param-hint: lpType optional
     // param-hint: lpData bytes=param[5] optional
     // param-hint: lpcbData optional
     func RegQueryValueExW(hKey: HKEY, lpValueName: CPointer<UInt16>, lpReserved: CPointer<UInt32>, lpType: CPointer<REG_VALUE_TYPEAbi>, lpData: CPointer<UInt8>, lpcbData: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegQueryValueExW == "on"]
+public unsafe func Windows_RegQueryValueExW(hKey: HKEY, lpValueName: CPointer<UInt16>, lpReserved: CPointer<UInt32>, lpType: CPointer<REG_VALUE_TYPEAbi>, lpData: CPointer<UInt8>, lpcbData: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return RegQueryValueExW(hKey, lpValueName, lpReserved, lpType, lpData, lpcbData)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegQueryValueW == "on"]
+foreign {
     // param-hint: lpSubKey optional
     // param-hint: lpData bytes=param[3] optional
     // param-hint: lpcbData optional
     func RegQueryValueW(hKey: HKEY, lpSubKey: CPointer<UInt16>, lpData: CPointer<UInt16>, lpcbData: CPointer<Int32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegQueryValueW == "on"]
+public unsafe func Windows_RegQueryValueW(hKey: HKEY, lpSubKey: CPointer<UInt16>, lpData: CPointer<UInt16>, lpcbData: CPointer<Int32>): windows_core.WIN32_ERROR {
+    return RegQueryValueW(hKey, lpSubKey, lpData, lpcbData)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegRenameKey == "on"]
+foreign {
     // param-hint: lpSubKeyName optional
     func RegRenameKey(hKey: HKEY, lpSubKeyName: CPointer<UInt16>, lpNewKeyName: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegRenameKey == "on"]
+public unsafe func Windows_RegRenameKey(hKey: HKEY, lpSubKeyName: CPointer<UInt16>, lpNewKeyName: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return RegRenameKey(hKey, lpSubKeyName, lpNewKeyName)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegReplaceKeyA == "on"]
+foreign {
     // param-hint: lpSubKey optional
     func RegReplaceKeyA(hKey: HKEY, lpSubKey: CPointer<UInt8>, lpNewFile: CPointer<UInt8>, lpOldFile: CPointer<UInt8>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegReplaceKeyA == "on"]
+public unsafe func Windows_RegReplaceKeyA(hKey: HKEY, lpSubKey: CPointer<UInt8>, lpNewFile: CPointer<UInt8>, lpOldFile: CPointer<UInt8>): windows_core.WIN32_ERROR {
+    return RegReplaceKeyA(hKey, lpSubKey, lpNewFile, lpOldFile)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegReplaceKeyW == "on"]
+foreign {
     // param-hint: lpSubKey optional
     func RegReplaceKeyW(hKey: HKEY, lpSubKey: CPointer<UInt16>, lpNewFile: CPointer<UInt16>, lpOldFile: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegReplaceKeyW == "on"]
+public unsafe func Windows_RegReplaceKeyW(hKey: HKEY, lpSubKey: CPointer<UInt16>, lpNewFile: CPointer<UInt16>, lpOldFile: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return RegReplaceKeyW(hKey, lpSubKey, lpNewFile, lpOldFile)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegRestoreKeyA == "on"]
+foreign {
     func RegRestoreKeyA(hKey: HKEY, lpFile: CPointer<UInt8>, dwFlags: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegRestoreKeyA == "on"]
+public unsafe func Windows_RegRestoreKeyA(hKey: HKEY, lpFile: CPointer<UInt8>, dwFlags: UInt32): windows_core.WIN32_ERROR {
+    return RegRestoreKeyA(hKey, lpFile, dwFlags)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegRestoreKeyW == "on"]
+foreign {
     func RegRestoreKeyW(hKey: HKEY, lpFile: CPointer<UInt16>, dwFlags: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegRestoreKeyW == "on"]
+public unsafe func Windows_RegRestoreKeyW(hKey: HKEY, lpFile: CPointer<UInt16>, dwFlags: UInt32): windows_core.WIN32_ERROR {
+    return RegRestoreKeyW(hKey, lpFile, dwFlags)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegSaveKeyA == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: lpSecurityAttributes optional
+    func RegSaveKeyA(hKey: HKEY, lpFile: CPointer<UInt8>, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegSaveKeyA == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_RegSaveKeyA(hKey: HKEY, lpFile: CPointer<UInt8>, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): windows_core.WIN32_ERROR {
+    return RegSaveKeyA(hKey, lpFile, lpSecurityAttributes)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegSaveKeyExA == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: lpSecurityAttributes optional
+    func RegSaveKeyExA(hKey: HKEY, lpFile: CPointer<UInt8>, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, Flags: REG_SAVE_FORMATAbi): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegSaveKeyExA == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_RegSaveKeyExA(hKey: HKEY, lpFile: CPointer<UInt8>, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, Flags: REG_SAVE_FORMATAbi): windows_core.WIN32_ERROR {
+    return RegSaveKeyExA(hKey, lpFile, lpSecurityAttributes, Flags)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegSaveKeyExW == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: lpSecurityAttributes optional
+    func RegSaveKeyExW(hKey: HKEY, lpFile: CPointer<UInt16>, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, Flags: REG_SAVE_FORMATAbi): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegSaveKeyExW == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_RegSaveKeyExW(hKey: HKEY, lpFile: CPointer<UInt16>, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, Flags: REG_SAVE_FORMATAbi): windows_core.WIN32_ERROR {
+    return RegSaveKeyExW(hKey, lpFile, lpSecurityAttributes, Flags)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegSaveKeyW == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: lpSecurityAttributes optional
+    func RegSaveKeyW(hKey: HKEY, lpFile: CPointer<UInt16>, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegSaveKeyW == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_RegSaveKeyW(hKey: HKEY, lpFile: CPointer<UInt16>, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): windows_core.WIN32_ERROR {
+    return RegSaveKeyW(hKey, lpFile, lpSecurityAttributes)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegSetKeySecurity == "on" && Windows_Win32_Security == "on"]
+foreign {
+    func RegSetKeySecurity(hKey: HKEY, SecurityInformation: Win32_Security.OBJECT_SECURITY_INFORMATIONAbi, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegSetKeySecurity == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_RegSetKeySecurity(hKey: HKEY, SecurityInformation: Win32_Security.OBJECT_SECURITY_INFORMATIONAbi, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): windows_core.WIN32_ERROR {
+    return RegSetKeySecurity(hKey, SecurityInformation, pSecurityDescriptor)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegSetKeyValueA == "on"]
+foreign {
     // param-hint: lpSubKey optional
     // param-hint: lpValueName optional
     // param-hint: lpData bytes=param[5] optional
     func RegSetKeyValueA(hKey: HKEY, lpSubKey: CPointer<UInt8>, lpValueName: CPointer<UInt8>, dwType: UInt32, lpData: CPointer<Unit>, cbData: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegSetKeyValueA == "on"]
+public unsafe func Windows_RegSetKeyValueA(hKey: HKEY, lpSubKey: CPointer<UInt8>, lpValueName: CPointer<UInt8>, dwType: UInt32, lpData: CPointer<Unit>, cbData: UInt32): windows_core.WIN32_ERROR {
+    return RegSetKeyValueA(hKey, lpSubKey, lpValueName, dwType, lpData, cbData)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegSetKeyValueW == "on"]
+foreign {
     // param-hint: lpSubKey optional
     // param-hint: lpValueName optional
     // param-hint: lpData bytes=param[5] optional
     func RegSetKeyValueW(hKey: HKEY, lpSubKey: CPointer<UInt16>, lpValueName: CPointer<UInt16>, dwType: UInt32, lpData: CPointer<Unit>, cbData: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegSetKeyValueW == "on"]
+public unsafe func Windows_RegSetKeyValueW(hKey: HKEY, lpSubKey: CPointer<UInt16>, lpValueName: CPointer<UInt16>, dwType: UInt32, lpData: CPointer<Unit>, cbData: UInt32): windows_core.WIN32_ERROR {
+    return RegSetKeyValueW(hKey, lpSubKey, lpValueName, dwType, lpData, cbData)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegSetValueA == "on"]
+foreign {
     // param-hint: lpSubKey optional
     // param-hint: lpData bytes=param[4] optional
     func RegSetValueA(hKey: HKEY, lpSubKey: CPointer<UInt8>, dwType: REG_VALUE_TYPEAbi, lpData: CPointer<UInt8>, cbData: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegSetValueA == "on"]
+public unsafe func Windows_RegSetValueA(hKey: HKEY, lpSubKey: CPointer<UInt8>, dwType: REG_VALUE_TYPEAbi, lpData: CPointer<UInt8>, cbData: UInt32): windows_core.WIN32_ERROR {
+    return RegSetValueA(hKey, lpSubKey, dwType, lpData, cbData)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegSetValueExA == "on"]
+foreign {
     // param-hint: lpValueName optional
     // param-hint: Reserved optional reserved
     // param-hint: lpData bytes=param[5] optional
     func RegSetValueExA(hKey: HKEY, lpValueName: CPointer<UInt8>, Reserved: UInt32, dwType: REG_VALUE_TYPEAbi, lpData: CPointer<UInt8>, cbData: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegSetValueExA == "on"]
+public unsafe func Windows_RegSetValueExA(hKey: HKEY, lpValueName: CPointer<UInt8>, Reserved: UInt32, dwType: REG_VALUE_TYPEAbi, lpData: CPointer<UInt8>, cbData: UInt32): windows_core.WIN32_ERROR {
+    return RegSetValueExA(hKey, lpValueName, Reserved, dwType, lpData, cbData)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegSetValueExW == "on"]
+foreign {
     // param-hint: lpValueName optional
     // param-hint: Reserved optional reserved
     // param-hint: lpData bytes=param[5] optional
     func RegSetValueExW(hKey: HKEY, lpValueName: CPointer<UInt16>, Reserved: UInt32, dwType: REG_VALUE_TYPEAbi, lpData: CPointer<UInt8>, cbData: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegSetValueExW == "on"]
+public unsafe func Windows_RegSetValueExW(hKey: HKEY, lpValueName: CPointer<UInt16>, Reserved: UInt32, dwType: REG_VALUE_TYPEAbi, lpData: CPointer<UInt8>, cbData: UInt32): windows_core.WIN32_ERROR {
+    return RegSetValueExW(hKey, lpValueName, Reserved, dwType, lpData, cbData)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegSetValueW == "on"]
+foreign {
     // param-hint: lpSubKey optional
     // param-hint: lpData bytes=param[4] optional
     func RegSetValueW(hKey: HKEY, lpSubKey: CPointer<UInt16>, dwType: REG_VALUE_TYPEAbi, lpData: CPointer<UInt16>, cbData: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegSetValueW == "on"]
+public unsafe func Windows_RegSetValueW(hKey: HKEY, lpSubKey: CPointer<UInt16>, dwType: REG_VALUE_TYPEAbi, lpData: CPointer<UInt16>, cbData: UInt32): windows_core.WIN32_ERROR {
+    return RegSetValueW(hKey, lpSubKey, dwType, lpData, cbData)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegUnLoadKeyA == "on"]
+foreign {
     // param-hint: lpSubKey optional
     func RegUnLoadKeyA(hKey: HKEY, lpSubKey: CPointer<UInt8>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegUnLoadKeyA == "on"]
+public unsafe func Windows_RegUnLoadKeyA(hKey: HKEY, lpSubKey: CPointer<UInt8>): windows_core.WIN32_ERROR {
+    return RegUnLoadKeyA(hKey, lpSubKey)
+}
+
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegUnLoadKeyW == "on"]
+foreign {
     // param-hint: lpSubKey optional
     func RegUnLoadKeyW(hKey: HKEY, lpSubKey: CPointer<UInt16>): windows_core.WIN32_ERROR
 }
 
-@When[ADVAPI32 == "on" && Windows_Win32_Security == "on"]
-foreign {
-    // param-hint: Reserved optional reserved
-    // param-hint: lpClass optional
-    // param-hint: lpSecurityAttributes optional
-    // param-hint: lpdwDisposition optional
-    func RegCreateKeyExA(hKey: HKEY, lpSubKey: CPointer<UInt8>, Reserved: UInt32, lpClass: CPointer<UInt8>, dwOptions: REG_OPEN_CREATE_OPTIONSAbi, samDesired: REG_SAM_FLAGSAbi, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, phkResult: CPointer<HKEY>, lpdwDisposition: CPointer<REG_CREATE_KEY_DISPOSITIONAbi>): windows_core.WIN32_ERROR
-    // param-hint: Reserved optional reserved
-    // param-hint: lpClass optional
-    // param-hint: lpSecurityAttributes optional
-    // param-hint: lpdwDisposition optional
-    func RegCreateKeyExW(hKey: HKEY, lpSubKey: CPointer<UInt16>, Reserved: UInt32, lpClass: CPointer<UInt16>, dwOptions: REG_OPEN_CREATE_OPTIONSAbi, samDesired: REG_SAM_FLAGSAbi, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, phkResult: CPointer<HKEY>, lpdwDisposition: CPointer<REG_CREATE_KEY_DISPOSITIONAbi>): windows_core.WIN32_ERROR
-    // param-hint: Reserved optional reserved
-    // param-hint: lpClass optional
-    // param-hint: lpSecurityAttributes optional
-    // param-hint: lpdwDisposition optional
-    // param-hint: pExtendedParemeter optional reserved
-    func RegCreateKeyTransactedA(hKey: HKEY, lpSubKey: CPointer<UInt8>, Reserved: UInt32, lpClass: CPointer<UInt8>, dwOptions: REG_OPEN_CREATE_OPTIONSAbi, samDesired: REG_SAM_FLAGSAbi, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, phkResult: CPointer<HKEY>, lpdwDisposition: CPointer<REG_CREATE_KEY_DISPOSITIONAbi>, hTransaction: CPointer<Unit>, pExtendedParemeter: CPointer<Unit>): windows_core.WIN32_ERROR
-    // param-hint: Reserved optional reserved
-    // param-hint: lpClass optional
-    // param-hint: lpSecurityAttributes optional
-    // param-hint: lpdwDisposition optional
-    // param-hint: pExtendedParemeter optional reserved
-    func RegCreateKeyTransactedW(hKey: HKEY, lpSubKey: CPointer<UInt16>, Reserved: UInt32, lpClass: CPointer<UInt16>, dwOptions: REG_OPEN_CREATE_OPTIONSAbi, samDesired: REG_SAM_FLAGSAbi, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, phkResult: CPointer<HKEY>, lpdwDisposition: CPointer<REG_CREATE_KEY_DISPOSITIONAbi>, hTransaction: CPointer<Unit>, pExtendedParemeter: CPointer<Unit>): windows_core.WIN32_ERROR
-    // param-hint: pSecurityDescriptor bytes=param[3] optional
-    func RegGetKeySecurity(hKey: HKEY, SecurityInformation: Win32_Security.OBJECT_SECURITY_INFORMATIONAbi, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, lpcbSecurityDescriptor: CPointer<UInt32>): windows_core.WIN32_ERROR
-    // param-hint: lpSecurityAttributes optional
-    func RegSaveKeyA(hKey: HKEY, lpFile: CPointer<UInt8>, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): windows_core.WIN32_ERROR
-    // param-hint: lpSecurityAttributes optional
-    func RegSaveKeyExA(hKey: HKEY, lpFile: CPointer<UInt8>, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, Flags: REG_SAVE_FORMATAbi): windows_core.WIN32_ERROR
-    // param-hint: lpSecurityAttributes optional
-    func RegSaveKeyExW(hKey: HKEY, lpFile: CPointer<UInt16>, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, Flags: REG_SAVE_FORMATAbi): windows_core.WIN32_ERROR
-    // param-hint: lpSecurityAttributes optional
-    func RegSaveKeyW(hKey: HKEY, lpFile: CPointer<UInt16>, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): windows_core.WIN32_ERROR
-    func RegSetKeySecurity(hKey: HKEY, SecurityInformation: Win32_Security.OBJECT_SECURITY_INFORMATIONAbi, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): windows_core.WIN32_ERROR
+@When[Windows_Win32_System_Registry == "on" && ADVAPI32 == "on" && Windows_Win32_System_Registry_RegUnLoadKeyW == "on"]
+public unsafe func Windows_RegUnLoadKeyW(hKey: HKEY, lpSubKey: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return RegUnLoadKeyW(hKey, lpSubKey)
 }
 
-@When[API_MS_WIN_CORE_STATE_HELPERS_L1_1_0 == "on"]
+@When[Windows_Win32_System_Registry == "on" && API_MS_WIN_CORE_STATE_HELPERS_L1_1_0 == "on" && Windows_Win32_System_Registry_GetRegistryValueWithFallbackW == "on"]
 foreign {
     // param-hint: hkeyPrimary optional
     // param-hint: pwszPrimarySubKey optional
@@ -1206,6 +1934,11 @@ foreign {
     // param-hint: pvData bytes=param[8] optional
     // param-hint: pcbDataOut optional
     func GetRegistryValueWithFallbackW(hkeyPrimary: HKEY, pwszPrimarySubKey: CPointer<UInt16>, hkeyFallback: HKEY, pwszFallbackSubKey: CPointer<UInt16>, pwszValue: CPointer<UInt16>, dwFlags: UInt32, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, cbDataIn: UInt32, pcbDataOut: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_Registry == "on" && API_MS_WIN_CORE_STATE_HELPERS_L1_1_0 == "on" && Windows_Win32_System_Registry_GetRegistryValueWithFallbackW == "on"]
+public unsafe func Windows_GetRegistryValueWithFallbackW(hkeyPrimary: HKEY, pwszPrimarySubKey: CPointer<UInt16>, hkeyFallback: HKEY, pwszFallbackSubKey: CPointer<UInt16>, pwszValue: CPointer<UInt16>, dwFlags: UInt32, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, cbDataIn: UInt32, pcbDataOut: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return GetRegistryValueWithFallbackW(hkeyPrimary, pwszPrimarySubKey, hkeyFallback, pwszFallbackSubKey, pwszValue, dwFlags, pdwType, pvData, cbDataIn, pcbDataOut)
 }
 
 @When[Windows_Win32_System_Registry == "on"]

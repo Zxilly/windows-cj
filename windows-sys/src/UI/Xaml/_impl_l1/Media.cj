@@ -4,7 +4,6 @@ package windows_sys.UI.Xaml._impl_l1
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_UI == "on"]
 import windows_sys.UI as UI
 import windows_sys.UI.Xaml._impl_l0 as UI_Xaml__impl_l0
 import windows_sys._impl_l0 as _impl_l0
@@ -285,7 +284,9 @@ public struct IGeometryGroupVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var FillRule: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetFillRule: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Children: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetChildren: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -342,12 +343,14 @@ public class IGeometryGroup <: InterfaceWrapperBase & ComInterface {
         return __vt.SetFillRule(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Children(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Children(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetChildren(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -436,7 +439,9 @@ public struct IGradientBrushVtbl {
     public var SetMappingMode: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var ColorInterpolationMode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetColorInterpolationMode: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GradientStops: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetGradientStops: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -517,12 +522,14 @@ public class IGradientBrush <: InterfaceWrapperBase & ComInterface {
         return __vt.SetColorInterpolationMode(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GradientStops(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GradientStops(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetGradientStops(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -589,6 +596,7 @@ public class IGradientBrushFactory <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ILinearGradientBrushFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateInstanceWithGradientStopCollectionAndAngle: CFunc<(CPointer<Unit>, CPointer<Unit>, Float64, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -633,6 +641,7 @@ public class ILinearGradientBrushFactory <: InterfaceWrapperBase & ComInterface 
         readVtbl<ILinearGradientBrushFactoryVtbl>(ILinearGradientBrushFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateInstanceWithGradientStopCollectionAndAngle(gradientStopCollection: CPointer<Unit>, angle: Float64, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -644,7 +653,9 @@ public class ILinearGradientBrushFactory <: InterfaceWrapperBase & ComInterface 
 @C
 public struct IPathFigureVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Segments: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetSegments: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var StartPoint: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.Point>) -> Int32> = { _, _ => 0 }
     public var SetStartPoint: CFunc<(CPointer<Unit>, Foundation__impl_l0.Point) -> Int32> = { _, _ => 0 }
@@ -695,12 +706,14 @@ public class IPathFigure <: InterfaceWrapperBase & ComInterface {
         readVtbl<IPathFigureVtbl>(IPathFigureVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Segments(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Segments(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetSegments(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -750,7 +763,9 @@ public struct IPathGeometryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var FillRule: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetFillRule: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Figures: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetFigures: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -807,12 +822,14 @@ public class IPathGeometry <: InterfaceWrapperBase & ComInterface {
         return __vt.SetFillRule(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Figures(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Figures(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetFigures(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1377,7 +1394,9 @@ public class ITimelineMarkerRoutedEventArgs <: InterfaceWrapperBase & ComInterfa
 @C
 public struct ITransformGroupVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Children: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetChildren: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Value: CFunc<(CPointer<Unit>, CPointer<UI_Xaml__impl_l0.Matrix>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -1423,12 +1442,14 @@ public class ITransformGroup <: InterfaceWrapperBase & ComInterface {
         readVtbl<ITransformGroupVtbl>(ITransformGroupVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Children(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Children(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetChildren(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1446,13 +1467,13 @@ public class ITransformGroup <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IVisualTreeHelperStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public var FindElementsInHostCoordinatesPoint: CFunc<(CPointer<Unit>, Foundation__impl_l0.Point, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public var FindElementsInHostCoordinatesRect: CFunc<(CPointer<Unit>, Foundation__impl_l0.Rect, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public var FindAllElementsInHostCoordinatesPoint: CFunc<(CPointer<Unit>, Foundation__impl_l0.Point, CPointer<Unit>, Bool, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public var FindAllElementsInHostCoordinatesRect: CFunc<(CPointer<Unit>, Foundation__impl_l0.Rect, CPointer<Unit>, Bool, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_UI_Xaml == "on"]
     public var GetChild: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
@@ -1505,28 +1526,28 @@ public class IVisualTreeHelperStatics <: InterfaceWrapperBase & ComInterface {
         readVtbl<IVisualTreeHelperStaticsVtbl>(IVisualTreeHelperStaticsVtbl())
     }
 
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public unsafe func FindElementsInHostCoordinatesPoint(intersectingPoint: Foundation__impl_l0.Point, subtree: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindElementsInHostCoordinatesPoint(__liveRaw, intersectingPoint, subtree, result__)
     }
 
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public unsafe func FindElementsInHostCoordinatesRect(intersectingRect: Foundation__impl_l0.Rect, subtree: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindElementsInHostCoordinatesRect(__liveRaw, intersectingRect, subtree, result__)
     }
 
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public unsafe func FindAllElementsInHostCoordinatesPoint(intersectingPoint: Foundation__impl_l0.Point, subtree: CPointer<Unit>, includeAllElements: Bool, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindAllElementsInHostCoordinatesPoint(__liveRaw, intersectingPoint, subtree, includeAllElements, result__)
     }
 
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public unsafe func FindAllElementsInHostCoordinatesRect(intersectingRect: Foundation__impl_l0.Rect, subtree: CPointer<Unit>, includeAllElements: Bool, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1566,7 +1587,7 @@ public class IVisualTreeHelperStatics <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IVisualTreeHelperStatics2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_UI_Xaml == "on" && Windows_UI_Xaml_Controls_Primitives == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on" && Windows_UI_Xaml_Controls_Primitives == "on"]
     public var GetOpenPopups: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -1611,7 +1632,7 @@ public class IVisualTreeHelperStatics2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IVisualTreeHelperStatics2Vtbl>(IVisualTreeHelperStatics2Vtbl())
     }
 
-    @When[Windows_UI_Xaml == "on" && Windows_UI_Xaml_Controls_Primitives == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on" && Windows_UI_Xaml_Controls_Primitives == "on"]
     public unsafe func GetOpenPopups(window: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1623,7 +1644,7 @@ public class IVisualTreeHelperStatics2 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IVisualTreeHelperStatics3Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_UI_Xaml == "on" && Windows_UI_Xaml_Controls_Primitives == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on" && Windows_UI_Xaml_Controls_Primitives == "on"]
     public var GetOpenPopupsForXamlRoot: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -1668,7 +1689,7 @@ public class IVisualTreeHelperStatics3 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IVisualTreeHelperStatics3Vtbl>(IVisualTreeHelperStatics3Vtbl())
     }
 
-    @When[Windows_UI_Xaml == "on" && Windows_UI_Xaml_Controls_Primitives == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on" && Windows_UI_Xaml_Controls_Primitives == "on"]
     public unsafe func GetOpenPopupsForXamlRoot(xamlRoot: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

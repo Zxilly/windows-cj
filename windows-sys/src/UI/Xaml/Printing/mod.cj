@@ -4,7 +4,6 @@ package windows_sys.UI.Xaml.Printing
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_Graphics_Printing == "on"]
 import windows_sys.Graphics.Printing as Graphics_Printing
 import windows_sys.UI.Xaml._impl_l0 as UI_Xaml__impl_l0
 import windows_sys.UI.Xaml._impl_l1 as UI_Xaml__impl_l1

@@ -3,7 +3,6 @@ package windows_sys.Win32.Devices.WebServicesOnDevices
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
@@ -3669,58 +3668,342 @@ public struct WSD_UNKNOWN_LOOKUP {
     public init() {}
 }
 
-@When[WSDAPI == "on"]
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDAllocateLinkedMemory == "on"]
 foreign {
     func WSDAllocateLinkedMemory(pParent: CPointer<Unit>, cbSize: UIntNative): CPointer<Unit>
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDAllocateLinkedMemory == "on"]
+public unsafe func Windows_WSDAllocateLinkedMemory(pParent: CPointer<Unit>, cbSize: UIntNative): CPointer<Unit> {
+    return WSDAllocateLinkedMemory(pParent, cbSize)
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDAttachLinkedMemory == "on"]
+foreign {
     func WSDAttachLinkedMemory(pParent: CPointer<Unit>, pChild: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDAttachLinkedMemory == "on"]
+public unsafe func Windows_WSDAttachLinkedMemory(pParent: CPointer<Unit>, pChild: CPointer<Unit>): Unit {
+    WSDAttachLinkedMemory(pParent, pChild)
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDCreateDeviceHost == "on"]
+foreign {
     func WSDCreateDeviceHost(pszLocalId: CPointer<UInt16>, pContext: CPointer<Unit>, ppDeviceHost: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDCreateDeviceHost == "on"]
+public unsafe func Windows_WSDCreateDeviceHost(pszLocalId: CPointer<UInt16>, pContext: CPointer<Unit>, ppDeviceHost: CPointer<CPointer<Unit>>): Int32 {
+    return WSDCreateDeviceHost(pszLocalId, pContext, ppDeviceHost)
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDCreateDeviceHost2 == "on"]
+foreign {
     // param-hint: pConfigParams len=param[3] optional
     func WSDCreateDeviceHost2(pszLocalId: CPointer<UInt16>, pContext: CPointer<Unit>, pConfigParams: CPointer<WSD_CONFIG_PARAM>, dwConfigParamCount: UInt32, ppDeviceHost: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDCreateDeviceHost2 == "on"]
+public unsafe func Windows_WSDCreateDeviceHost2(pszLocalId: CPointer<UInt16>, pContext: CPointer<Unit>, pConfigParams: CPointer<WSD_CONFIG_PARAM>, dwConfigParamCount: UInt32, ppDeviceHost: CPointer<CPointer<Unit>>): Int32 {
+    return WSDCreateDeviceHost2(pszLocalId, pContext, pConfigParams, dwConfigParamCount, ppDeviceHost)
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDCreateDeviceHostAdvanced == "on"]
+foreign {
     // param-hint: ppHostAddresses len=param[3] optional
     func WSDCreateDeviceHostAdvanced(pszLocalId: CPointer<UInt16>, pContext: CPointer<Unit>, ppHostAddresses: CPointer<CPointer<Unit>>, dwHostAddressCount: UInt32, ppDeviceHost: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDCreateDeviceHostAdvanced == "on"]
+public unsafe func Windows_WSDCreateDeviceHostAdvanced(pszLocalId: CPointer<UInt16>, pContext: CPointer<Unit>, ppHostAddresses: CPointer<CPointer<Unit>>, dwHostAddressCount: UInt32, ppDeviceHost: CPointer<CPointer<Unit>>): Int32 {
+    return WSDCreateDeviceHostAdvanced(pszLocalId, pContext, ppHostAddresses, dwHostAddressCount, ppDeviceHost)
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDCreateDeviceProxy == "on"]
+foreign {
     func WSDCreateDeviceProxy(pszDeviceId: CPointer<UInt16>, pszLocalId: CPointer<UInt16>, pContext: CPointer<Unit>, ppDeviceProxy: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDCreateDeviceProxy == "on"]
+public unsafe func Windows_WSDCreateDeviceProxy(pszDeviceId: CPointer<UInt16>, pszLocalId: CPointer<UInt16>, pContext: CPointer<Unit>, ppDeviceProxy: CPointer<CPointer<Unit>>): Int32 {
+    return WSDCreateDeviceProxy(pszDeviceId, pszLocalId, pContext, ppDeviceProxy)
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDCreateDeviceProxy2 == "on"]
+foreign {
     // param-hint: pConfigParams len=param[4] optional
     func WSDCreateDeviceProxy2(pszDeviceId: CPointer<UInt16>, pszLocalId: CPointer<UInt16>, pContext: CPointer<Unit>, pConfigParams: CPointer<WSD_CONFIG_PARAM>, dwConfigParamCount: UInt32, ppDeviceProxy: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDCreateDeviceProxy2 == "on"]
+public unsafe func Windows_WSDCreateDeviceProxy2(pszDeviceId: CPointer<UInt16>, pszLocalId: CPointer<UInt16>, pContext: CPointer<Unit>, pConfigParams: CPointer<WSD_CONFIG_PARAM>, dwConfigParamCount: UInt32, ppDeviceProxy: CPointer<CPointer<Unit>>): Int32 {
+    return WSDCreateDeviceProxy2(pszDeviceId, pszLocalId, pContext, pConfigParams, dwConfigParamCount, ppDeviceProxy)
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDCreateDeviceProxyAdvanced == "on"]
+foreign {
     func WSDCreateDeviceProxyAdvanced(pszDeviceId: CPointer<UInt16>, pDeviceAddress: CPointer<Unit>, pszLocalId: CPointer<UInt16>, pContext: CPointer<Unit>, ppDeviceProxy: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDCreateDeviceProxyAdvanced == "on"]
+public unsafe func Windows_WSDCreateDeviceProxyAdvanced(pszDeviceId: CPointer<UInt16>, pDeviceAddress: CPointer<Unit>, pszLocalId: CPointer<UInt16>, pContext: CPointer<Unit>, ppDeviceProxy: CPointer<CPointer<Unit>>): Int32 {
+    return WSDCreateDeviceProxyAdvanced(pszDeviceId, pDeviceAddress, pszLocalId, pContext, ppDeviceProxy)
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDCreateDiscoveryProvider == "on"]
+foreign {
     func WSDCreateDiscoveryProvider(pContext: CPointer<Unit>, ppProvider: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDCreateDiscoveryProvider == "on"]
+public unsafe func Windows_WSDCreateDiscoveryProvider(pContext: CPointer<Unit>, ppProvider: CPointer<CPointer<Unit>>): Int32 {
+    return WSDCreateDiscoveryProvider(pContext, ppProvider)
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDCreateDiscoveryProvider2 == "on"]
+foreign {
     // param-hint: pConfigParams len=param[2] optional
     func WSDCreateDiscoveryProvider2(pContext: CPointer<Unit>, pConfigParams: CPointer<WSD_CONFIG_PARAM>, dwConfigParamCount: UInt32, ppProvider: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDCreateDiscoveryProvider2 == "on"]
+public unsafe func Windows_WSDCreateDiscoveryProvider2(pContext: CPointer<Unit>, pConfigParams: CPointer<WSD_CONFIG_PARAM>, dwConfigParamCount: UInt32, ppProvider: CPointer<CPointer<Unit>>): Int32 {
+    return WSDCreateDiscoveryProvider2(pContext, pConfigParams, dwConfigParamCount, ppProvider)
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDCreateDiscoveryPublisher == "on"]
+foreign {
     func WSDCreateDiscoveryPublisher(pContext: CPointer<Unit>, ppPublisher: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDCreateDiscoveryPublisher == "on"]
+public unsafe func Windows_WSDCreateDiscoveryPublisher(pContext: CPointer<Unit>, ppPublisher: CPointer<CPointer<Unit>>): Int32 {
+    return WSDCreateDiscoveryPublisher(pContext, ppPublisher)
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDCreateDiscoveryPublisher2 == "on"]
+foreign {
     // param-hint: pConfigParams len=param[2] optional
     func WSDCreateDiscoveryPublisher2(pContext: CPointer<Unit>, pConfigParams: CPointer<WSD_CONFIG_PARAM>, dwConfigParamCount: UInt32, ppPublisher: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDCreateDiscoveryPublisher2 == "on"]
+public unsafe func Windows_WSDCreateDiscoveryPublisher2(pContext: CPointer<Unit>, pConfigParams: CPointer<WSD_CONFIG_PARAM>, dwConfigParamCount: UInt32, ppPublisher: CPointer<CPointer<Unit>>): Int32 {
+    return WSDCreateDiscoveryPublisher2(pContext, pConfigParams, dwConfigParamCount, ppPublisher)
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDCreateHttpAddress == "on"]
+foreign {
     func WSDCreateHttpAddress(ppAddress: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDCreateHttpAddress == "on"]
+public unsafe func Windows_WSDCreateHttpAddress(ppAddress: CPointer<CPointer<Unit>>): Int32 {
+    return WSDCreateHttpAddress(ppAddress)
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDCreateHttpMessageParameters == "on"]
+foreign {
     func WSDCreateHttpMessageParameters(ppTxParams: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDCreateHttpMessageParameters == "on"]
+public unsafe func Windows_WSDCreateHttpMessageParameters(ppTxParams: CPointer<CPointer<Unit>>): Int32 {
+    return WSDCreateHttpMessageParameters(ppTxParams)
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDCreateOutboundAttachment == "on"]
+foreign {
     func WSDCreateOutboundAttachment(ppAttachment: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDCreateOutboundAttachment == "on"]
+public unsafe func Windows_WSDCreateOutboundAttachment(ppAttachment: CPointer<CPointer<Unit>>): Int32 {
+    return WSDCreateOutboundAttachment(ppAttachment)
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDCreateUdpAddress == "on"]
+foreign {
     func WSDCreateUdpAddress(ppAddress: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDCreateUdpAddress == "on"]
+public unsafe func Windows_WSDCreateUdpAddress(ppAddress: CPointer<CPointer<Unit>>): Int32 {
+    return WSDCreateUdpAddress(ppAddress)
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDCreateUdpMessageParameters == "on"]
+foreign {
     func WSDCreateUdpMessageParameters(ppTxParams: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDCreateUdpMessageParameters == "on"]
+public unsafe func Windows_WSDCreateUdpMessageParameters(ppTxParams: CPointer<CPointer<Unit>>): Int32 {
+    return WSDCreateUdpMessageParameters(ppTxParams)
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDDetachLinkedMemory == "on"]
+foreign {
     func WSDDetachLinkedMemory(pVoid: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDDetachLinkedMemory == "on"]
+public unsafe func Windows_WSDDetachLinkedMemory(pVoid: CPointer<Unit>): Unit {
+    WSDDetachLinkedMemory(pVoid)
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDFreeLinkedMemory == "on"]
+foreign {
     func WSDFreeLinkedMemory(pVoid: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDFreeLinkedMemory == "on"]
+public unsafe func Windows_WSDFreeLinkedMemory(pVoid: CPointer<Unit>): Unit {
+    WSDFreeLinkedMemory(pVoid)
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDGenerateFault == "on"]
+foreign {
     // param-hint: pszSubCode optional
     // param-hint: pszDetail optional
     func WSDGenerateFault(pszCode: CPointer<UInt16>, pszSubCode: CPointer<UInt16>, pszReason: CPointer<UInt16>, pszDetail: CPointer<UInt16>, pContext: CPointer<Unit>, ppFault: CPointer<CPointer<WSD_SOAP_FAULT>>): Int32
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDGenerateFault == "on"]
+public unsafe func Windows_WSDGenerateFault(pszCode: CPointer<UInt16>, pszSubCode: CPointer<UInt16>, pszReason: CPointer<UInt16>, pszDetail: CPointer<UInt16>, pContext: CPointer<Unit>, ppFault: CPointer<CPointer<WSD_SOAP_FAULT>>): Int32 {
+    return WSDGenerateFault(pszCode, pszSubCode, pszReason, pszDetail, pContext, ppFault)
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDGenerateFaultEx == "on"]
+foreign {
     // param-hint: pSubCode optional
     // param-hint: pszDetail optional
     func WSDGenerateFaultEx(pCode: CPointer<WSDXML_NAME>, pSubCode: CPointer<WSDXML_NAME>, pReasons: CPointer<WSD_LOCALIZED_STRING_LIST>, pszDetail: CPointer<UInt16>, ppFault: CPointer<CPointer<WSD_SOAP_FAULT>>): Int32
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDGenerateFaultEx == "on"]
+public unsafe func Windows_WSDGenerateFaultEx(pCode: CPointer<WSDXML_NAME>, pSubCode: CPointer<WSDXML_NAME>, pReasons: CPointer<WSD_LOCALIZED_STRING_LIST>, pszDetail: CPointer<UInt16>, ppFault: CPointer<CPointer<WSD_SOAP_FAULT>>): Int32 {
+    return WSDGenerateFaultEx(pCode, pSubCode, pReasons, pszDetail, ppFault)
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDGetConfigurationOption == "on"]
+foreign {
     // param-hint: pVoid bytes=param[2]
     func WSDGetConfigurationOption(dwOption: UInt32, pVoid: CPointer<Unit>, cbOutBuffer: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDGetConfigurationOption == "on"]
+public unsafe func Windows_WSDGetConfigurationOption(dwOption: UInt32, pVoid: CPointer<Unit>, cbOutBuffer: UInt32): Int32 {
+    return WSDGetConfigurationOption(dwOption, pVoid, cbOutBuffer)
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDSetConfigurationOption == "on"]
+foreign {
     // param-hint: pVoid bytes=param[2]
     func WSDSetConfigurationOption(dwOption: UInt32, pVoid: CPointer<Unit>, cbInBuffer: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDSetConfigurationOption == "on"]
+public unsafe func Windows_WSDSetConfigurationOption(dwOption: UInt32, pVoid: CPointer<Unit>, cbInBuffer: UInt32): Int32 {
+    return WSDSetConfigurationOption(dwOption, pVoid, cbInBuffer)
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDUriDecode == "on"]
+foreign {
     // param-hint: source len=param[1]
     // param-hint: destOut len=param[3]
     // param-hint: cchDestOut optional
     func WSDUriDecode(source: CPointer<UInt16>, cchSource: UInt32, destOut: CPointer<CPointer<UInt16>>, cchDestOut: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDUriDecode == "on"]
+public unsafe func Windows_WSDUriDecode(source: CPointer<UInt16>, cchSource: UInt32, destOut: CPointer<CPointer<UInt16>>, cchDestOut: CPointer<UInt32>): Int32 {
+    return WSDUriDecode(source, cchSource, destOut, cchDestOut)
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDUriEncode == "on"]
+foreign {
     // param-hint: source len=param[1]
     // param-hint: destOut len=param[3]
     // param-hint: cchDestOut optional
     func WSDUriEncode(source: CPointer<UInt16>, cchSource: UInt32, destOut: CPointer<CPointer<UInt16>>, cchDestOut: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDUriEncode == "on"]
+public unsafe func Windows_WSDUriEncode(source: CPointer<UInt16>, cchSource: UInt32, destOut: CPointer<CPointer<UInt16>>, cchDestOut: CPointer<UInt32>): Int32 {
+    return WSDUriEncode(source, cchSource, destOut, cchDestOut)
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDXMLAddChild == "on"]
+foreign {
     func WSDXMLAddChild(pParent: CPointer<WSDXML_ELEMENT>, pChild: CPointer<WSDXML_ELEMENT>): Int32
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDXMLAddChild == "on"]
+public unsafe func Windows_WSDXMLAddChild(pParent: CPointer<WSDXML_ELEMENT>, pChild: CPointer<WSDXML_ELEMENT>): Int32 {
+    return WSDXMLAddChild(pParent, pChild)
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDXMLAddSibling == "on"]
+foreign {
     func WSDXMLAddSibling(pFirst: CPointer<WSDXML_ELEMENT>, pSecond: CPointer<WSDXML_ELEMENT>): Int32
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDXMLAddSibling == "on"]
+public unsafe func Windows_WSDXMLAddSibling(pFirst: CPointer<WSDXML_ELEMENT>, pSecond: CPointer<WSDXML_ELEMENT>): Int32 {
+    return WSDXMLAddSibling(pFirst, pSecond)
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDXMLBuildAnyForSingleElement == "on"]
+foreign {
     // param-hint: pszText optional
     func WSDXMLBuildAnyForSingleElement(pElementName: CPointer<WSDXML_NAME>, pszText: CPointer<UInt16>, ppAny: CPointer<CPointer<WSDXML_ELEMENT>>): Int32
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDXMLBuildAnyForSingleElement == "on"]
+public unsafe func Windows_WSDXMLBuildAnyForSingleElement(pElementName: CPointer<WSDXML_NAME>, pszText: CPointer<UInt16>, ppAny: CPointer<CPointer<WSDXML_ELEMENT>>): Int32 {
+    return WSDXMLBuildAnyForSingleElement(pElementName, pszText, ppAny)
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDXMLCleanupElement == "on"]
+foreign {
     func WSDXMLCleanupElement(pAny: CPointer<WSDXML_ELEMENT>): Int32
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDXMLCleanupElement == "on"]
+public unsafe func Windows_WSDXMLCleanupElement(pAny: CPointer<WSDXML_ELEMENT>): Int32 {
+    return WSDXMLCleanupElement(pAny)
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDXMLCreateContext == "on"]
+foreign {
     func WSDXMLCreateContext(ppContext: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDXMLCreateContext == "on"]
+public unsafe func Windows_WSDXMLCreateContext(ppContext: CPointer<CPointer<Unit>>): Int32 {
+    return WSDXMLCreateContext(ppContext)
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDXMLGetNameFromBuiltinNamespace == "on"]
+foreign {
     func WSDXMLGetNameFromBuiltinNamespace(pszNamespace: CPointer<UInt16>, pszName: CPointer<UInt16>, ppName: CPointer<CPointer<WSDXML_NAME>>): Int32
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDXMLGetNameFromBuiltinNamespace == "on"]
+public unsafe func Windows_WSDXMLGetNameFromBuiltinNamespace(pszNamespace: CPointer<UInt16>, pszName: CPointer<UInt16>, ppName: CPointer<CPointer<WSDXML_NAME>>): Int32 {
+    return WSDXMLGetNameFromBuiltinNamespace(pszNamespace, pszName, ppName)
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDXMLGetValueFromAny == "on"]
+foreign {
     func WSDXMLGetValueFromAny(pszNamespace: CPointer<UInt16>, pszName: CPointer<UInt16>, pAny: CPointer<WSDXML_ELEMENT>, ppszValue: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_Devices_WebServicesOnDevices == "on" && WSDAPI == "on" && Windows_Win32_Devices_WebServicesOnDevices_WSDXMLGetValueFromAny == "on"]
+public unsafe func Windows_WSDXMLGetValueFromAny(pszNamespace: CPointer<UInt16>, pszName: CPointer<UInt16>, pAny: CPointer<WSDXML_ELEMENT>, ppszValue: CPointer<CPointer<UInt16>>): Int32 {
+    return WSDXMLGetValueFromAny(pszNamespace, pszName, pAny, ppszValue)
 }
 
 @When[Windows_Win32_Devices_WebServicesOnDevices == "on"]

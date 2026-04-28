@@ -17,9 +17,9 @@ public struct IRfcommDeviceServiceVtbl {
     public var ProtectionLevel: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Networking_Sockets == "on"]
     public var MaxProtectionLevel: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var GetSdpRawAttributesAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Devices_Bluetooth == "on" && Windows_Storage_Streams == "on"]
+    @When[Windows_Devices_Bluetooth == "on" && Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var GetSdpRawAttributesWithCacheModeAsync: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -97,14 +97,14 @@ public class IRfcommDeviceService <: InterfaceWrapperBase & ComInterface {
         return __vt.MaxProtectionLevel(__liveRaw, result__)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetSdpRawAttributesAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetSdpRawAttributesAsync(__liveRaw, result__)
     }
 
-    @When[Windows_Devices_Bluetooth == "on" && Windows_Storage_Streams == "on"]
+    @When[Windows_Devices_Bluetooth == "on" && Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetSdpRawAttributesWithCacheModeAsync(cacheMode: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -387,6 +387,7 @@ public struct IRfcommDeviceServicesResultVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     @When[Windows_Devices_Bluetooth == "on"]
     public var Error: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Services: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -438,6 +439,7 @@ public class IRfcommDeviceServicesResult <: InterfaceWrapperBase & ComInterface 
         return __vt.Error(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Services(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

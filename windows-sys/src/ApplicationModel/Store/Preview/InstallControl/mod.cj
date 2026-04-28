@@ -4,7 +4,6 @@ package windows_sys.ApplicationModel.Store.Preview.InstallControl
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_Management_Deployment == "on"]
 import windows_sys.Management.Deployment as Management_Deployment
 import windows_sys._impl_l1 as _impl_l1
 
@@ -1478,6 +1477,7 @@ public class IAppInstallItem <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IAppInstallItem3Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Children: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ItemOperationsMightAffectOtherItems: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -1523,6 +1523,7 @@ public class IAppInstallItem3 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IAppInstallItem3Vtbl>(IAppInstallItem3Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Children(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1540,6 +1541,7 @@ public class IAppInstallItem3 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IAppInstallManagerVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AppInstallItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Cancel: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Pause: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -1556,6 +1558,7 @@ public struct IAppInstallManagerVtbl {
     public var StartAppInstallAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Bool, Bool, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var UpdateAppByPackageFamilyNameAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var SearchForUpdatesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SearchForAllUpdatesAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IsStoreBlockedByPolicyAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var GetIsAppAllowedToInstallAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -1602,6 +1605,7 @@ public class IAppInstallManager <: InterfaceWrapperBase & ComInterface {
         readVtbl<IAppInstallManagerVtbl>(IAppInstallManagerVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AppInstallItems(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1698,6 +1702,7 @@ public class IAppInstallManager <: InterfaceWrapperBase & ComInterface {
         return __vt.SearchForUpdatesAsync(__liveRaw, productId, skuId, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SearchForAllUpdatesAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1724,6 +1729,7 @@ public struct IAppInstallManager2Vtbl {
     public var StartAppInstallWithTelemetryAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Bool, Bool, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _ => 0 }
     public var UpdateAppByPackageFamilyNameWithTelemetryAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var SearchForUpdatesWithTelemetryAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SearchForAllUpdatesWithTelemetryAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetIsAppAllowedToInstallWithTelemetryAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var CancelWithTelemetry: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
@@ -1790,6 +1796,7 @@ public class IAppInstallManager2 <: InterfaceWrapperBase & ComInterface {
         return __vt.SearchForUpdatesWithTelemetryAsync(__liveRaw, productId, skuId, catalogId, correlationVector, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SearchForAllUpdatesWithTelemetryAsync(correlationVector: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1825,15 +1832,15 @@ public class IAppInstallManager2 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IAppInstallManager3Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Management_Deployment == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Management_Deployment == "on"]
     public var StartProductInstallAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Bool, Bool, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _, _ => 0 }
-    @When[Windows_Management_Deployment == "on" && Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Management_Deployment == "on" && Windows_System == "on"]
     public var StartProductInstallForUserAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Bool, Bool, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _ => 0 }
     @When[Windows_System == "on"]
     public var UpdateAppByPackageFamilyNameForUserAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_System == "on"]
     public var SearchForUpdatesForUserAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
-    @When[Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
     public var SearchForAllUpdatesForUserAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_System == "on"]
     public var GetIsAppAllowedToInstallForUserAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
@@ -1883,14 +1890,14 @@ public class IAppInstallManager3 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IAppInstallManager3Vtbl>(IAppInstallManager3Vtbl())
     }
 
-    @When[Windows_Management_Deployment == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Management_Deployment == "on"]
     public unsafe func StartProductInstallAsync(productId: CPointer<Unit>, catalogId: CPointer<Unit>, flightId: CPointer<Unit>, clientId: CPointer<Unit>, repair: Bool, forceUseOfNonRemovableStorage: Bool, correlationVector: CPointer<Unit>, targetVolume: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.StartProductInstallAsync(__liveRaw, productId, catalogId, flightId, clientId, repair, forceUseOfNonRemovableStorage, correlationVector, targetVolume, result__)
     }
 
-    @When[Windows_Management_Deployment == "on" && Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Management_Deployment == "on" && Windows_System == "on"]
     public unsafe func StartProductInstallForUserAsync(user: CPointer<Unit>, productId: CPointer<Unit>, catalogId: CPointer<Unit>, flightId: CPointer<Unit>, clientId: CPointer<Unit>, repair: Bool, forceUseOfNonRemovableStorage: Bool, correlationVector: CPointer<Unit>, targetVolume: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1911,7 +1918,7 @@ public class IAppInstallManager3 <: InterfaceWrapperBase & ComInterface {
         return __vt.SearchForUpdatesForUserAsync(__liveRaw, user, productId, skuId, catalogId, correlationVector, result__)
     }
 
-    @When[Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
     public unsafe func SearchForAllUpdatesForUserAsync(user: CPointer<Unit>, correlationVector: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1943,6 +1950,7 @@ public class IAppInstallManager3 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IAppInstallManager5Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AppInstallItemsWithGroupSupport: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1987,6 +1995,7 @@ public class IAppInstallManager5 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IAppInstallManager5Vtbl>(IAppInstallManager5Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AppInstallItemsWithGroupSupport(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1998,14 +2007,16 @@ public class IAppInstallManager5 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IAppInstallManager6Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SearchForAllUpdatesWithUpdateOptionsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
-    @When[Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
     public var SearchForAllUpdatesWithUpdateOptionsForUserAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var SearchForUpdatesWithUpdateOptionsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     @When[Windows_System == "on"]
     public var SearchForUpdatesWithUpdateOptionsForUserAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var StartProductInstallWithOptionsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
-    @When[Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
     public var StartProductInstallWithOptionsForUserAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
     public var GetIsPackageIdentityAllowedToInstallAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_System == "on"]
@@ -2053,13 +2064,14 @@ public class IAppInstallManager6 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IAppInstallManager6Vtbl>(IAppInstallManager6Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SearchForAllUpdatesWithUpdateOptionsAsync(correlationVector: CPointer<Unit>, clientId: CPointer<Unit>, updateOptions: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SearchForAllUpdatesWithUpdateOptionsAsync(__liveRaw, correlationVector, clientId, updateOptions, result__)
     }
 
-    @When[Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
     public unsafe func SearchForAllUpdatesWithUpdateOptionsForUserAsync(user: CPointer<Unit>, correlationVector: CPointer<Unit>, clientId: CPointer<Unit>, updateOptions: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2079,13 +2091,14 @@ public class IAppInstallManager6 <: InterfaceWrapperBase & ComInterface {
         return __vt.SearchForUpdatesWithUpdateOptionsForUserAsync(__liveRaw, user, productId, skuId, correlationVector, clientId, updateOptions, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StartProductInstallWithOptionsAsync(productId: CPointer<Unit>, flightId: CPointer<Unit>, clientId: CPointer<Unit>, correlationVector: CPointer<Unit>, installOptions: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.StartProductInstallWithOptionsAsync(__liveRaw, productId, flightId, clientId, correlationVector, installOptions, result__)
     }
 
-    @When[Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
     public unsafe func StartProductInstallWithOptionsForUserAsync(user: CPointer<Unit>, productId: CPointer<Unit>, flightId: CPointer<Unit>, clientId: CPointer<Unit>, correlationVector: CPointer<Unit>, installOptions: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

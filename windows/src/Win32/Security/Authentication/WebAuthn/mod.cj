@@ -4,11 +4,11 @@
 package windows.Win32.Security.Authentication.WebAuthn
 
 import std.collection.*
+import windows_libloading
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 import windows.Win32._impl_l0 as Win32__impl_l0
 
@@ -4344,28 +4344,170 @@ extend WEBAUTHN_AUTHENTICATOR_GET_ASSERTION_OPTIONS <: windows_core.CopyType & w
     }
 }
 
-@When[WEBAUTHN == "on"]
+@When[Windows_Win32_Security_Authentication_WebAuthn == "on" && WEBAUTHN == "on" && Windows_Win32_Security_Authentication_WebAuthn_WebAuthNAuthenticatorGetAssertion == "on"]
 foreign {
     // param-hint: pWebAuthNGetAssertionOptions optional
     func WebAuthNAuthenticatorGetAssertion(hWnd: CPointer<Unit>, pwszRpId: CPointer<UInt16>, pWebAuthNClientData: CPointer<WEBAUTHN_CLIENT_DATAAbi>, pWebAuthNGetAssertionOptions: CPointer<WEBAUTHN_AUTHENTICATOR_GET_ASSERTION_OPTIONSAbi>, ppWebAuthNAssertion: CPointer<CPointer<WEBAUTHN_ASSERTIONAbi>>): Int32
+}
+
+@When[Windows_Win32_Security_Authentication_WebAuthn == "on" && WEBAUTHN == "on" && Windows_Win32_Security_Authentication_WebAuthn_WebAuthNAuthenticatorGetAssertion == "on"]
+public unsafe func Windows_WebAuthNAuthenticatorGetAssertion(hWnd: CPointer<Unit>, pwszRpId: CPointer<UInt16>, pWebAuthNClientData: CPointer<WEBAUTHN_CLIENT_DATAAbi>, pWebAuthNGetAssertionOptions: CPointer<WEBAUTHN_AUTHENTICATOR_GET_ASSERTION_OPTIONSAbi>, ppWebAuthNAssertion: CPointer<CPointer<WEBAUTHN_ASSERTIONAbi>>): Int32 {
+    return WebAuthNAuthenticatorGetAssertion(hWnd, pwszRpId, pWebAuthNClientData, pWebAuthNGetAssertionOptions, ppWebAuthNAssertion)
+}
+
+@When[Windows_Win32_Security_Authentication_WebAuthn == "on" && WEBAUTHN == "on" && Windows_Win32_Security_Authentication_WebAuthn_WebAuthNAuthenticatorMakeCredential == "on"]
+foreign {
     // param-hint: pWebAuthNMakeCredentialOptions optional
     func WebAuthNAuthenticatorMakeCredential(hWnd: CPointer<Unit>, pRpInformation: CPointer<WEBAUTHN_RP_ENTITY_INFORMATIONAbi>, pUserInformation: CPointer<WEBAUTHN_USER_ENTITY_INFORMATIONAbi>, pPubKeyCredParams: CPointer<WEBAUTHN_COSE_CREDENTIAL_PARAMETERSAbi>, pWebAuthNClientData: CPointer<WEBAUTHN_CLIENT_DATAAbi>, pWebAuthNMakeCredentialOptions: CPointer<WEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONSAbi>, ppWebAuthNCredentialAttestation: CPointer<CPointer<WEBAUTHN_CREDENTIAL_ATTESTATIONAbi>>): Int32
+}
+
+@When[Windows_Win32_Security_Authentication_WebAuthn == "on" && WEBAUTHN == "on" && Windows_Win32_Security_Authentication_WebAuthn_WebAuthNAuthenticatorMakeCredential == "on"]
+public unsafe func Windows_WebAuthNAuthenticatorMakeCredential(hWnd: CPointer<Unit>, pRpInformation: CPointer<WEBAUTHN_RP_ENTITY_INFORMATIONAbi>, pUserInformation: CPointer<WEBAUTHN_USER_ENTITY_INFORMATIONAbi>, pPubKeyCredParams: CPointer<WEBAUTHN_COSE_CREDENTIAL_PARAMETERSAbi>, pWebAuthNClientData: CPointer<WEBAUTHN_CLIENT_DATAAbi>, pWebAuthNMakeCredentialOptions: CPointer<WEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONSAbi>, ppWebAuthNCredentialAttestation: CPointer<CPointer<WEBAUTHN_CREDENTIAL_ATTESTATIONAbi>>): Int32 {
+    return WebAuthNAuthenticatorMakeCredential(hWnd, pRpInformation, pUserInformation, pPubKeyCredParams, pWebAuthNClientData, pWebAuthNMakeCredentialOptions, ppWebAuthNCredentialAttestation)
+}
+
+@When[Windows_Win32_Security_Authentication_WebAuthn == "on" && WEBAUTHN == "on" && Windows_Win32_Security_Authentication_WebAuthn_WebAuthNCancelCurrentOperation == "on"]
+foreign {
     func WebAuthNCancelCurrentOperation(pCancellationId: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Security_Authentication_WebAuthn == "on" && WEBAUTHN == "on" && Windows_Win32_Security_Authentication_WebAuthn_WebAuthNCancelCurrentOperation == "on"]
+public unsafe func Windows_WebAuthNCancelCurrentOperation(pCancellationId: CPointer<GUID>): Int32 {
+    return WebAuthNCancelCurrentOperation(pCancellationId)
+}
+
+@When[Windows_Win32_Security_Authentication_WebAuthn == "on" && WEBAUTHN == "on" && Windows_Win32_Security_Authentication_WebAuthn_WebAuthNDeletePlatformCredential == "on"]
+foreign {
     // param-hint: pbCredentialId bytes=param[0]
     func WebAuthNDeletePlatformCredential(cbCredentialId: UInt32, pbCredentialId: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Security_Authentication_WebAuthn == "on" && WEBAUTHN == "on" && Windows_Win32_Security_Authentication_WebAuthn_WebAuthNDeletePlatformCredential == "on"]
+public unsafe func Windows_WebAuthNDeletePlatformCredential(cbCredentialId: UInt32, pbCredentialId: CPointer<UInt8>): Int32 {
+    return WebAuthNDeletePlatformCredential(cbCredentialId, pbCredentialId)
+}
+
+@When[Windows_Win32_Security_Authentication_WebAuthn == "on" && WEBAUTHN == "on" && Windows_Win32_Security_Authentication_WebAuthn_WebAuthNFreeAssertion == "on"]
+foreign {
     func WebAuthNFreeAssertion(pWebAuthNAssertion: CPointer<WEBAUTHN_ASSERTIONAbi>): Unit
-    func WebAuthNFreeAuthenticatorList(pAuthenticatorDetailsList: CPointer<WEBAUTHN_AUTHENTICATOR_DETAILS_LISTAbi>): Unit
+}
+
+@When[Windows_Win32_Security_Authentication_WebAuthn == "on" && WEBAUTHN == "on" && Windows_Win32_Security_Authentication_WebAuthn_WebAuthNFreeAssertion == "on"]
+public unsafe func Windows_WebAuthNFreeAssertion(pWebAuthNAssertion: CPointer<WEBAUTHN_ASSERTIONAbi>): Unit {
+    WebAuthNFreeAssertion(pWebAuthNAssertion)
+}
+
+@When[Windows_Win32_Security_Authentication_WebAuthn == "on" && WEBAUTHN == "on" && Windows_Win32_Security_Authentication_WebAuthn_WebAuthNFreeCredentialAttestation == "on"]
+foreign {
     // param-hint: pWebAuthNCredentialAttestation optional
     func WebAuthNFreeCredentialAttestation(pWebAuthNCredentialAttestation: CPointer<WEBAUTHN_CREDENTIAL_ATTESTATIONAbi>): Unit
+}
+
+@When[Windows_Win32_Security_Authentication_WebAuthn == "on" && WEBAUTHN == "on" && Windows_Win32_Security_Authentication_WebAuthn_WebAuthNFreeCredentialAttestation == "on"]
+public unsafe func Windows_WebAuthNFreeCredentialAttestation(pWebAuthNCredentialAttestation: CPointer<WEBAUTHN_CREDENTIAL_ATTESTATIONAbi>): Unit {
+    WebAuthNFreeCredentialAttestation(pWebAuthNCredentialAttestation)
+}
+
+@When[Windows_Win32_Security_Authentication_WebAuthn == "on" && WEBAUTHN == "on" && Windows_Win32_Security_Authentication_WebAuthn_WebAuthNFreePlatformCredentialList == "on"]
+foreign {
     func WebAuthNFreePlatformCredentialList(pCredentialDetailsList: CPointer<WEBAUTHN_CREDENTIAL_DETAILS_LISTAbi>): Unit
+}
+
+@When[Windows_Win32_Security_Authentication_WebAuthn == "on" && WEBAUTHN == "on" && Windows_Win32_Security_Authentication_WebAuthn_WebAuthNFreePlatformCredentialList == "on"]
+public unsafe func Windows_WebAuthNFreePlatformCredentialList(pCredentialDetailsList: CPointer<WEBAUTHN_CREDENTIAL_DETAILS_LISTAbi>): Unit {
+    WebAuthNFreePlatformCredentialList(pCredentialDetailsList)
+}
+
+@When[Windows_Win32_Security_Authentication_WebAuthn == "on" && WEBAUTHN == "on" && Windows_Win32_Security_Authentication_WebAuthn_WebAuthNGetApiVersionNumber == "on"]
+foreign {
     func WebAuthNGetApiVersionNumber(): UInt32
-    // param-hint: pWebAuthNGetAuthenticatorListOptions optional
-    func WebAuthNGetAuthenticatorList(pWebAuthNGetAuthenticatorListOptions: CPointer<WEBAUTHN_AUTHENTICATOR_DETAILS_OPTIONSAbi>, ppAuthenticatorDetailsList: CPointer<CPointer<WEBAUTHN_AUTHENTICATOR_DETAILS_LISTAbi>>): Int32
+}
+
+@When[Windows_Win32_Security_Authentication_WebAuthn == "on" && WEBAUTHN == "on" && Windows_Win32_Security_Authentication_WebAuthn_WebAuthNGetApiVersionNumber == "on"]
+public unsafe func Windows_WebAuthNGetApiVersionNumber(): UInt32 {
+    return WebAuthNGetApiVersionNumber()
+}
+
+@When[Windows_Win32_Security_Authentication_WebAuthn == "on" && WEBAUTHN == "on" && Windows_Win32_Security_Authentication_WebAuthn_WebAuthNGetCancellationId == "on"]
+foreign {
     func WebAuthNGetCancellationId(pCancellationId: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Security_Authentication_WebAuthn == "on" && WEBAUTHN == "on" && Windows_Win32_Security_Authentication_WebAuthn_WebAuthNGetCancellationId == "on"]
+public unsafe func Windows_WebAuthNGetCancellationId(pCancellationId: CPointer<GUID>): Int32 {
+    return WebAuthNGetCancellationId(pCancellationId)
+}
+
+@When[Windows_Win32_Security_Authentication_WebAuthn == "on" && WEBAUTHN == "on" && Windows_Win32_Security_Authentication_WebAuthn_WebAuthNGetErrorName == "on"]
+foreign {
     func WebAuthNGetErrorName(hr: Int32): CPointer<UInt16>
+}
+
+@When[Windows_Win32_Security_Authentication_WebAuthn == "on" && WEBAUTHN == "on" && Windows_Win32_Security_Authentication_WebAuthn_WebAuthNGetErrorName == "on"]
+public unsafe func Windows_WebAuthNGetErrorName(hr: Int32): CPointer<UInt16> {
+    return WebAuthNGetErrorName(hr)
+}
+
+@When[Windows_Win32_Security_Authentication_WebAuthn == "on" && WEBAUTHN == "on" && Windows_Win32_Security_Authentication_WebAuthn_WebAuthNGetPlatformCredentialList == "on"]
+foreign {
     func WebAuthNGetPlatformCredentialList(pGetCredentialsOptions: CPointer<WEBAUTHN_GET_CREDENTIALS_OPTIONSAbi>, ppCredentialDetailsList: CPointer<CPointer<WEBAUTHN_CREDENTIAL_DETAILS_LISTAbi>>): Int32
+}
+
+@When[Windows_Win32_Security_Authentication_WebAuthn == "on" && WEBAUTHN == "on" && Windows_Win32_Security_Authentication_WebAuthn_WebAuthNGetPlatformCredentialList == "on"]
+public unsafe func Windows_WebAuthNGetPlatformCredentialList(pGetCredentialsOptions: CPointer<WEBAUTHN_GET_CREDENTIALS_OPTIONSAbi>, ppCredentialDetailsList: CPointer<CPointer<WEBAUTHN_CREDENTIAL_DETAILS_LISTAbi>>): Int32 {
+    return WebAuthNGetPlatformCredentialList(pGetCredentialsOptions, ppCredentialDetailsList)
+}
+
+@When[Windows_Win32_Security_Authentication_WebAuthn == "on" && WEBAUTHN == "on" && Windows_Win32_Security_Authentication_WebAuthn_WebAuthNGetW3CExceptionDOMError == "on"]
+foreign {
     func WebAuthNGetW3CExceptionDOMError(hr: Int32): Int32
+}
+
+@When[Windows_Win32_Security_Authentication_WebAuthn == "on" && WEBAUTHN == "on" && Windows_Win32_Security_Authentication_WebAuthn_WebAuthNGetW3CExceptionDOMError == "on"]
+public unsafe func Windows_WebAuthNGetW3CExceptionDOMError(hr: Int32): Int32 {
+    return WebAuthNGetW3CExceptionDOMError(hr)
+}
+
+@When[Windows_Win32_Security_Authentication_WebAuthn == "on" && WEBAUTHN == "on" && Windows_Win32_Security_Authentication_WebAuthn_WebAuthNIsUserVerifyingPlatformAuthenticatorAvailable == "on"]
+foreign {
     func WebAuthNIsUserVerifyingPlatformAuthenticatorAvailable(pbIsUserVerifyingPlatformAuthenticatorAvailable: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Security_Authentication_WebAuthn == "on" && WEBAUTHN == "on" && Windows_Win32_Security_Authentication_WebAuthn_WebAuthNIsUserVerifyingPlatformAuthenticatorAvailable == "on"]
+public unsafe func Windows_WebAuthNIsUserVerifyingPlatformAuthenticatorAvailable(pbIsUserVerifyingPlatformAuthenticatorAvailable: CPointer<Int32>): Int32 {
+    return WebAuthNIsUserVerifyingPlatformAuthenticatorAvailable(pbIsUserVerifyingPlatformAuthenticatorAvailable)
+}
+
+@When[Windows_Win32_Security_Authentication_WebAuthn == "on" && WEBAUTHN == "on" && Windows_Win32_Security_Authentication_WebAuthn_WebAuthNFreeAuthenticatorList == "on"]
+func __windowsBindgen_WebAuthNFreeAuthenticatorListProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("webauthn.dll", "WebAuthNFreeAuthenticatorList")
+}
+
+@When[Windows_Win32_Security_Authentication_WebAuthn == "on" && WEBAUTHN == "on" && Windows_Win32_Security_Authentication_WebAuthn_WebAuthNFreeAuthenticatorList == "on"]
+unsafe func WebAuthNFreeAuthenticatorList(pAuthenticatorDetailsList: CPointer<WEBAUTHN_AUTHENTICATOR_DETAILS_LISTAbi>): Unit {
+    let call = CFunc<(CPointer<WEBAUTHN_AUTHENTICATOR_DETAILS_LISTAbi>) -> Unit>(__windowsBindgen_WebAuthNFreeAuthenticatorListProc())
+    unsafe { call(pAuthenticatorDetailsList) }
+}
+
+@When[Windows_Win32_Security_Authentication_WebAuthn == "on" && WEBAUTHN == "on" && Windows_Win32_Security_Authentication_WebAuthn_WebAuthNFreeAuthenticatorList == "on"]
+public unsafe func Windows_WebAuthNFreeAuthenticatorList(pAuthenticatorDetailsList: CPointer<WEBAUTHN_AUTHENTICATOR_DETAILS_LISTAbi>): Unit {
+    WebAuthNFreeAuthenticatorList(pAuthenticatorDetailsList)
+}
+
+@When[Windows_Win32_Security_Authentication_WebAuthn == "on" && WEBAUTHN == "on" && Windows_Win32_Security_Authentication_WebAuthn_WebAuthNGetAuthenticatorList == "on"]
+func __windowsBindgen_WebAuthNGetAuthenticatorListProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("webauthn.dll", "WebAuthNGetAuthenticatorList")
+}
+
+@When[Windows_Win32_Security_Authentication_WebAuthn == "on" && WEBAUTHN == "on" && Windows_Win32_Security_Authentication_WebAuthn_WebAuthNGetAuthenticatorList == "on"]
+unsafe func WebAuthNGetAuthenticatorList(pWebAuthNGetAuthenticatorListOptions: CPointer<WEBAUTHN_AUTHENTICATOR_DETAILS_OPTIONSAbi>, ppAuthenticatorDetailsList: CPointer<CPointer<WEBAUTHN_AUTHENTICATOR_DETAILS_LISTAbi>>): Int32 {
+    let call = CFunc<(CPointer<WEBAUTHN_AUTHENTICATOR_DETAILS_OPTIONSAbi>, CPointer<CPointer<WEBAUTHN_AUTHENTICATOR_DETAILS_LISTAbi>>) -> Int32>(__windowsBindgen_WebAuthNGetAuthenticatorListProc())
+    return unsafe { call(pWebAuthNGetAuthenticatorListOptions, ppAuthenticatorDetailsList) }
+}
+
+@When[Windows_Win32_Security_Authentication_WebAuthn == "on" && WEBAUTHN == "on" && Windows_Win32_Security_Authentication_WebAuthn_WebAuthNGetAuthenticatorList == "on"]
+public unsafe func Windows_WebAuthNGetAuthenticatorList(pWebAuthNGetAuthenticatorListOptions: CPointer<WEBAUTHN_AUTHENTICATOR_DETAILS_OPTIONSAbi>, ppAuthenticatorDetailsList: CPointer<CPointer<WEBAUTHN_AUTHENTICATOR_DETAILS_LISTAbi>>): Int32 {
+    return WebAuthNGetAuthenticatorList(pWebAuthNGetAuthenticatorListOptions, ppAuthenticatorDetailsList)
 }
 
 @When[Windows_Win32_Security_Authentication_WebAuthn == "on"]

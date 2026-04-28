@@ -9,4 +9,1261 @@ public import windows_sys.Win32._impl_l0.{Bitmap, BitmapData, BlurParams, Bright
 public import windows_sys.Win32._impl_l1.{Blur, BrightnessContrast, ColorBalance, ColorCurve, ColorCurveParams, ColorLUT, ColorMap, ColorMatrixEffect, DebugEventProc, Effect, EncoderParameters, EnumerateMetafileProc, GdiplusStartupInputEx, HueSaturationLightness, IImageBytes, IImageBytesVtbl, Levels, NotificationHookProc, RedEyeCorrection, Sharpen, Tint, WmfPlaceableFileHeader}
 @When[Windows_Win32_Graphics_GdiPlus == "on" && Windows_Win32_Graphics_Gdi == "on"]
 public import windows_sys.Win32._impl_l1.MetafileHeader
-
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathArc == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAddPathArc
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathArcI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAddPathArcI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathBezier == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAddPathBezier
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathBezierI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAddPathBezierI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathBeziers == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAddPathBeziers
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathBeziersI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAddPathBeziersI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathClosedCurve == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAddPathClosedCurve
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathClosedCurve2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAddPathClosedCurve2
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathClosedCurve2I == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAddPathClosedCurve2I
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathClosedCurveI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAddPathClosedCurveI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathCurve == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAddPathCurve
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathCurve2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAddPathCurve2
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathCurve2I == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAddPathCurve2I
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathCurve3 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAddPathCurve3
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathCurve3I == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAddPathCurve3I
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathCurveI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAddPathCurveI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathEllipse == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAddPathEllipse
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathEllipseI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAddPathEllipseI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathLine == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAddPathLine
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathLine2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAddPathLine2
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathLine2I == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAddPathLine2I
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathLineI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAddPathLineI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathPath == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAddPathPath
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathPie == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAddPathPie
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathPieI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAddPathPieI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathPolygon == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAddPathPolygon
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathPolygonI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAddPathPolygonI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathRectangle == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAddPathRectangle
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathRectangleI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAddPathRectangleI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathRectangles == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAddPathRectangles
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathRectanglesI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAddPathRectanglesI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathString == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAddPathString
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathStringI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAddPathStringI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAlloc == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipAlloc
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBeginContainer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipBeginContainer
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBeginContainer2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipBeginContainer2
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBeginContainerI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipBeginContainerI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBitmapApplyEffect == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipBitmapApplyEffect
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBitmapConvertFormat == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipBitmapConvertFormat
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBitmapCreateApplyEffect == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipBitmapCreateApplyEffect
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBitmapGetHistogram == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipBitmapGetHistogram
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBitmapGetHistogramSize == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipBitmapGetHistogramSize
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBitmapGetPixel == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipBitmapGetPixel
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBitmapLockBits == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipBitmapLockBits
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBitmapSetPixel == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipBitmapSetPixel
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBitmapSetResolution == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipBitmapSetResolution
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBitmapUnlockBits == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipBitmapUnlockBits
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipClearPathMarkers == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipClearPathMarkers
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCloneBitmapArea == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCloneBitmapArea
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCloneBitmapAreaI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCloneBitmapAreaI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCloneBrush == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCloneBrush
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCloneCustomLineCap == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCloneCustomLineCap
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCloneFont == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCloneFont
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCloneFontFamily == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCloneFontFamily
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCloneImage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCloneImage
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCloneImageAttributes == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCloneImageAttributes
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCloneMatrix == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCloneMatrix
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipClonePath == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipClonePath
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipClonePen == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipClonePen
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCloneRegion == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCloneRegion
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCloneStringFormat == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCloneStringFormat
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipClosePathFigure == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipClosePathFigure
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipClosePathFigures == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipClosePathFigures
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCombineRegionPath == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCombineRegionPath
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCombineRegionRect == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCombineRegionRect
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCombineRegionRectI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCombineRegionRectI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCombineRegionRegion == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCombineRegionRegion
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipComment == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipComment
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipConvertToEmfPlus == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipConvertToEmfPlus
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipConvertToEmfPlusToFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipConvertToEmfPlusToFile
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipConvertToEmfPlusToStream == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipConvertToEmfPlusToStream
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateAdjustableArrowCap == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateAdjustableArrowCap
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateBitmapFromDirectDrawSurface == "on" && Windows_Win32_Graphics_DirectDraw == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateBitmapFromDirectDrawSurface
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateBitmapFromFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateBitmapFromFile
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateBitmapFromFileICM == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateBitmapFromFileICM
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateBitmapFromGdiDib == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateBitmapFromGdiDib
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateBitmapFromGraphics == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateBitmapFromGraphics
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateBitmapFromHBITMAP == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateBitmapFromHBITMAP
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateBitmapFromHICON == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateBitmapFromHICON
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateBitmapFromResource == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateBitmapFromResource
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateBitmapFromScan0 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateBitmapFromScan0
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateBitmapFromStream == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateBitmapFromStream
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateBitmapFromStreamICM == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateBitmapFromStreamICM
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateCachedBitmap == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateCachedBitmap
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateCustomLineCap == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateCustomLineCap
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateEffect == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateEffect
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateFont == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateFont
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateFontFamilyFromName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateFontFamilyFromName
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateFontFromDC == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateFontFromDC
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateFontFromLogfontA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateFontFromLogfontA
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateFontFromLogfontW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateFontFromLogfontW
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateFromHDC == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateFromHDC
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateFromHDC2 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateFromHDC2
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateFromHWND == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateFromHWND
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateFromHWNDICM == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateFromHWNDICM
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateHBITMAPFromBitmap == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateHBITMAPFromBitmap
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateHICONFromBitmap == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateHICONFromBitmap
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateHalftonePalette == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateHalftonePalette
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateHatchBrush == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateHatchBrush
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateImageAttributes == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateImageAttributes
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateLineBrush == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateLineBrush
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateLineBrushFromRect == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateLineBrushFromRect
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateLineBrushFromRectI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateLineBrushFromRectI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateLineBrushFromRectWithAngle == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateLineBrushFromRectWithAngle
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateLineBrushFromRectWithAngleI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateLineBrushFromRectWithAngleI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateLineBrushI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateLineBrushI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateMatrix == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateMatrix
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateMatrix2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateMatrix2
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateMatrix3 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateMatrix3
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateMatrix3I == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateMatrix3I
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateMetafileFromEmf == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateMetafileFromEmf
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateMetafileFromFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateMetafileFromFile
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateMetafileFromStream == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateMetafileFromStream
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateMetafileFromWmf == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateMetafileFromWmf
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateMetafileFromWmfFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateMetafileFromWmfFile
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreatePath == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreatePath
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreatePath2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreatePath2
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreatePath2I == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreatePath2I
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreatePathGradient == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreatePathGradient
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreatePathGradientFromPath == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreatePathGradientFromPath
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreatePathGradientI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreatePathGradientI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreatePathIter == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreatePathIter
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreatePen1 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreatePen1
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreatePen2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreatePen2
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateRegion == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateRegion
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateRegionHrgn == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateRegionHrgn
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateRegionPath == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateRegionPath
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateRegionRect == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateRegionRect
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateRegionRectI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateRegionRectI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateRegionRgnData == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateRegionRgnData
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateSolidFill == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateSolidFill
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateStreamOnFile == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateStreamOnFile
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateStringFormat == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateStringFormat
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateTexture == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateTexture
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateTexture2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateTexture2
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateTexture2I == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateTexture2I
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateTextureIA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateTextureIA
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateTextureIAI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipCreateTextureIAI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeleteBrush == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDeleteBrush
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeleteCachedBitmap == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDeleteCachedBitmap
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeleteCustomLineCap == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDeleteCustomLineCap
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeleteEffect == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDeleteEffect
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeleteFont == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDeleteFont
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeleteFontFamily == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDeleteFontFamily
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeleteGraphics == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDeleteGraphics
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeleteMatrix == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDeleteMatrix
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeletePath == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDeletePath
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeletePathIter == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDeletePathIter
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeletePen == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDeletePen
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeletePrivateFontCollection == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDeletePrivateFontCollection
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeleteRegion == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDeleteRegion
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeleteStringFormat == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDeleteStringFormat
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDisposeImage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDisposeImage
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDisposeImageAttributes == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDisposeImageAttributes
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawArc == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawArc
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawArcI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawArcI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawBezier == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawBezier
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawBezierI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawBezierI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawBeziers == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawBeziers
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawBeziersI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawBeziersI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawCachedBitmap == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawCachedBitmap
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawClosedCurve == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawClosedCurve
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawClosedCurve2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawClosedCurve2
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawClosedCurve2I == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawClosedCurve2I
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawClosedCurveI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawClosedCurveI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawCurve == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawCurve
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawCurve2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawCurve2
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawCurve2I == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawCurve2I
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawCurve3 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawCurve3
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawCurve3I == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawCurve3I
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawCurveI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawCurveI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawDriverString == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawDriverString
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawEllipse == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawEllipse
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawEllipseI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawEllipseI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawImage
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImageFX == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawImageFX
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImageI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawImageI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImagePointRect == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawImagePointRect
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImagePointRectI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawImagePointRectI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImagePoints == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawImagePoints
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImagePointsI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawImagePointsI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImagePointsRect == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawImagePointsRect
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImagePointsRectI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawImagePointsRectI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImageRect == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawImageRect
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImageRectI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawImageRectI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImageRectRect == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawImageRectRect
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImageRectRectI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawImageRectRectI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawLine == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawLine
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawLineI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawLineI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawLines == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawLines
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawLinesI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawLinesI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawPath == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawPath
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawPie == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawPie
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawPieI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawPieI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawPolygon == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawPolygon
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawPolygonI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawPolygonI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawRectangle == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawRectangle
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawRectangleI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawRectangleI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawRectangles == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawRectangles
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawRectanglesI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawRectanglesI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawString == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipDrawString
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEmfToWmfBits == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipEmfToWmfBits
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEndContainer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipEndContainer
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileDestPoint == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipEnumerateMetafileDestPoint
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileDestPointI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipEnumerateMetafileDestPointI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileDestPoints == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipEnumerateMetafileDestPoints
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileDestPointsI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipEnumerateMetafileDestPointsI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileDestRect == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipEnumerateMetafileDestRect
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileDestRectI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipEnumerateMetafileDestRectI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileSrcRectDestPoint == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipEnumerateMetafileSrcRectDestPoint
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileSrcRectDestPointI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipEnumerateMetafileSrcRectDestPointI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileSrcRectDestPoints == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipEnumerateMetafileSrcRectDestPoints
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileSrcRectDestPointsI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipEnumerateMetafileSrcRectDestPointsI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileSrcRectDestRect == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipEnumerateMetafileSrcRectDestRect
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileSrcRectDestRectI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipEnumerateMetafileSrcRectDestRectI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillClosedCurve == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipFillClosedCurve
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillClosedCurve2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipFillClosedCurve2
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillClosedCurve2I == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipFillClosedCurve2I
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillClosedCurveI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipFillClosedCurveI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillEllipse == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipFillEllipse
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillEllipseI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipFillEllipseI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillPath == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipFillPath
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillPie == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipFillPie
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillPieI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipFillPieI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillPolygon == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipFillPolygon
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillPolygon2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipFillPolygon2
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillPolygon2I == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipFillPolygon2I
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillPolygonI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipFillPolygonI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillRectangle == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipFillRectangle
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillRectangleI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipFillRectangleI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillRectangles == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipFillRectangles
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillRectanglesI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipFillRectanglesI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillRegion == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipFillRegion
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFindFirstImageItem == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipFindFirstImageItem
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFindNextImageItem == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipFindNextImageItem
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFlattenPath == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipFlattenPath
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFlush == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipFlush
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFree == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipFree
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetAdjustableArrowCapFillState == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetAdjustableArrowCapFillState
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetAdjustableArrowCapHeight == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetAdjustableArrowCapHeight
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetAdjustableArrowCapMiddleInset == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetAdjustableArrowCapMiddleInset
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetAdjustableArrowCapWidth == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetAdjustableArrowCapWidth
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetAllPropertyItems == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetAllPropertyItems
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetBrushType == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetBrushType
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetCellAscent == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetCellAscent
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetCellDescent == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetCellDescent
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetClip == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetClip
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetClipBounds == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetClipBounds
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetClipBoundsI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetClipBoundsI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetCompositingMode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetCompositingMode
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetCompositingQuality == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetCompositingQuality
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetCustomLineCapBaseCap == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetCustomLineCapBaseCap
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetCustomLineCapBaseInset == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetCustomLineCapBaseInset
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetCustomLineCapStrokeCaps == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetCustomLineCapStrokeCaps
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetCustomLineCapStrokeJoin == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetCustomLineCapStrokeJoin
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetCustomLineCapType == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetCustomLineCapType
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetCustomLineCapWidthScale == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetCustomLineCapWidthScale
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetDC == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetDC
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetDpiX == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetDpiX
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetDpiY == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetDpiY
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetEffectParameterSize == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetEffectParameterSize
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetEffectParameters == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetEffectParameters
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetEmHeight == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetEmHeight
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetEncoderParameterList == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetEncoderParameterList
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetEncoderParameterListSize == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetEncoderParameterListSize
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetFamily == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetFamily
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetFamilyName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetFamilyName
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetFontCollectionFamilyCount == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetFontCollectionFamilyCount
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetFontCollectionFamilyList == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetFontCollectionFamilyList
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetFontHeight == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetFontHeight
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetFontHeightGivenDPI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetFontHeightGivenDPI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetFontSize == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetFontSize
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetFontStyle == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetFontStyle
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetFontUnit == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetFontUnit
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetGenericFontFamilyMonospace == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetGenericFontFamilyMonospace
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetGenericFontFamilySansSerif == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetGenericFontFamilySansSerif
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetGenericFontFamilySerif == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetGenericFontFamilySerif
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetHatchBackgroundColor == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetHatchBackgroundColor
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetHatchForegroundColor == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetHatchForegroundColor
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetHatchStyle == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetHatchStyle
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetHemfFromMetafile == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetHemfFromMetafile
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageAttributesAdjustedPalette == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetImageAttributesAdjustedPalette
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageBounds == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetImageBounds
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageDecoders == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetImageDecoders
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageDecodersSize == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetImageDecodersSize
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageDimension == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetImageDimension
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageEncoders == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetImageEncoders
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageEncodersSize == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetImageEncodersSize
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageFlags == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetImageFlags
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageGraphicsContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetImageGraphicsContext
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageHeight == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetImageHeight
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageHorizontalResolution == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetImageHorizontalResolution
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageItemData == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetImageItemData
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImagePalette == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetImagePalette
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImagePaletteSize == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetImagePaletteSize
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImagePixelFormat == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetImagePixelFormat
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageRawFormat == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetImageRawFormat
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageThumbnail == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetImageThumbnail
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageType == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetImageType
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageVerticalResolution == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetImageVerticalResolution
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageWidth == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetImageWidth
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetInterpolationMode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetInterpolationMode
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLineBlend == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetLineBlend
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLineBlendCount == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetLineBlendCount
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLineColors == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetLineColors
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLineGammaCorrection == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetLineGammaCorrection
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLinePresetBlend == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetLinePresetBlend
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLinePresetBlendCount == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetLinePresetBlendCount
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLineRect == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetLineRect
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLineRectI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetLineRectI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLineSpacing == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetLineSpacing
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLineTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetLineTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLineWrapMode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetLineWrapMode
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLogFontA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetLogFontA
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLogFontW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetLogFontW
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetMatrixElements == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetMatrixElements
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetMetafileDownLevelRasterizationLimit == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetMetafileDownLevelRasterizationLimit
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetMetafileHeaderFromEmf == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetMetafileHeaderFromEmf
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetMetafileHeaderFromFile == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetMetafileHeaderFromFile
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetMetafileHeaderFromMetafile == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetMetafileHeaderFromMetafile
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetMetafileHeaderFromStream == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetMetafileHeaderFromStream
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetMetafileHeaderFromWmf == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetMetafileHeaderFromWmf
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetNearestColor == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetNearestColor
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPageScale == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPageScale
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPageUnit == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPageUnit
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathData == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPathData
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathFillMode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPathFillMode
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientBlend == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPathGradientBlend
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientBlendCount == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPathGradientBlendCount
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientCenterColor == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPathGradientCenterColor
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientCenterPoint == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPathGradientCenterPoint
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientCenterPointI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPathGradientCenterPointI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientFocusScales == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPathGradientFocusScales
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientGammaCorrection == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPathGradientGammaCorrection
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientPath == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPathGradientPath
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientPointCount == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPathGradientPointCount
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientPresetBlend == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPathGradientPresetBlend
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientPresetBlendCount == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPathGradientPresetBlendCount
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientRect == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPathGradientRect
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientRectI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPathGradientRectI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientSurroundColorCount == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPathGradientSurroundColorCount
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientSurroundColorsWithCount == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPathGradientSurroundColorsWithCount
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPathGradientTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientWrapMode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPathGradientWrapMode
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathLastPoint == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPathLastPoint
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathPoints == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPathPoints
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathPointsI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPathPointsI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathTypes == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPathTypes
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathWorldBounds == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPathWorldBounds
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathWorldBoundsI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPathWorldBoundsI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenBrushFill == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPenBrushFill
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenColor == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPenColor
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenCompoundArray == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPenCompoundArray
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenCompoundCount == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPenCompoundCount
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenCustomEndCap == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPenCustomEndCap
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenCustomStartCap == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPenCustomStartCap
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenDashArray == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPenDashArray
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenDashCap197819 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPenDashCap197819
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenDashCount == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPenDashCount
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenDashOffset == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPenDashOffset
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenDashStyle == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPenDashStyle
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenEndCap == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPenEndCap
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenFillType == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPenFillType
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenLineJoin == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPenLineJoin
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenMiterLimit == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPenMiterLimit
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenMode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPenMode
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenStartCap == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPenStartCap
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPenTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenUnit == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPenUnit
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenWidth == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPenWidth
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPixelOffsetMode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPixelOffsetMode
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPointCount == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPointCount
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPropertyCount == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPropertyCount
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPropertyIdList == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPropertyIdList
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPropertyItem == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPropertyItem
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPropertyItemSize == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPropertyItemSize
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPropertySize == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetPropertySize
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetRegionBounds == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetRegionBounds
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetRegionBoundsI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetRegionBoundsI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetRegionData == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetRegionData
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetRegionDataSize == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetRegionDataSize
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetRegionHRgn == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetRegionHRgn
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetRegionScans == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetRegionScans
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetRegionScansCount == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetRegionScansCount
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetRegionScansI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetRegionScansI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetRenderingOrigin == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetRenderingOrigin
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetSmoothingMode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetSmoothingMode
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetSolidFillColor == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetSolidFillColor
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetStringFormatAlign == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetStringFormatAlign
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetStringFormatDigitSubstitution == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetStringFormatDigitSubstitution
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetStringFormatFlags == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetStringFormatFlags
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetStringFormatHotkeyPrefix == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetStringFormatHotkeyPrefix
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetStringFormatLineAlign == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetStringFormatLineAlign
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetStringFormatMeasurableCharacterRangeCount == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetStringFormatMeasurableCharacterRangeCount
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetStringFormatTabStopCount == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetStringFormatTabStopCount
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetStringFormatTabStops == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetStringFormatTabStops
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetStringFormatTrimming == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetStringFormatTrimming
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetTextContrast == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetTextContrast
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetTextRenderingHint == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetTextRenderingHint
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetTextureImage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetTextureImage
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetTextureTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetTextureTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetTextureWrapMode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetTextureWrapMode
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetVisibleClipBounds == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetVisibleClipBounds
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetVisibleClipBoundsI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetVisibleClipBoundsI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetWorldTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGetWorldTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGraphicsClear == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGraphicsClear
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGraphicsSetAbort == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipGraphicsSetAbort
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipImageForceValidation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipImageForceValidation
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipImageGetFrameCount == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipImageGetFrameCount
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipImageGetFrameDimensionsCount == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipImageGetFrameDimensionsCount
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipImageGetFrameDimensionsList == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipImageGetFrameDimensionsList
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipImageRotateFlip == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipImageRotateFlip
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipImageSelectActiveFrame == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipImageSelectActiveFrame
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipImageSetAbort == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipImageSetAbort
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipInitializePalette == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipInitializePalette
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipInvertMatrix == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipInvertMatrix
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsClipEmpty == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipIsClipEmpty
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsEmptyRegion == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipIsEmptyRegion
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsEqualRegion == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipIsEqualRegion
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsInfiniteRegion == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipIsInfiniteRegion
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsMatrixEqual == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipIsMatrixEqual
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsMatrixIdentity == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipIsMatrixIdentity
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsMatrixInvertible == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipIsMatrixInvertible
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsOutlineVisiblePathPoint == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipIsOutlineVisiblePathPoint
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsOutlineVisiblePathPointI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipIsOutlineVisiblePathPointI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsStyleAvailable == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipIsStyleAvailable
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsVisibleClipEmpty == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipIsVisibleClipEmpty
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsVisiblePathPoint == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipIsVisiblePathPoint
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsVisiblePathPointI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipIsVisiblePathPointI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsVisiblePoint == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipIsVisiblePoint
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsVisiblePointI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipIsVisiblePointI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsVisibleRect == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipIsVisibleRect
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsVisibleRectI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipIsVisibleRectI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsVisibleRegionPoint == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipIsVisibleRegionPoint
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsVisibleRegionPointI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipIsVisibleRegionPointI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsVisibleRegionRect == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipIsVisibleRegionRect
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsVisibleRegionRectI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipIsVisibleRegionRectI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipLoadImageFromFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipLoadImageFromFile
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipLoadImageFromFileICM == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipLoadImageFromFileICM
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipLoadImageFromStream == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipLoadImageFromStream
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipLoadImageFromStreamICM == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipLoadImageFromStreamICM
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipMeasureCharacterRanges == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipMeasureCharacterRanges
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipMeasureDriverString == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipMeasureDriverString
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipMeasureString == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipMeasureString
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipMultiplyLineTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipMultiplyLineTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipMultiplyMatrix == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipMultiplyMatrix
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipMultiplyPathGradientTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipMultiplyPathGradientTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipMultiplyPenTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipMultiplyPenTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipMultiplyTextureTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipMultiplyTextureTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipMultiplyWorldTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipMultiplyWorldTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipNewInstalledFontCollection == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipNewInstalledFontCollection
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipNewPrivateFontCollection == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipNewPrivateFontCollection
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterCopyData == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipPathIterCopyData
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterEnumerate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipPathIterEnumerate
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterGetCount == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipPathIterGetCount
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterGetSubpathCount == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipPathIterGetSubpathCount
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterHasCurve == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipPathIterHasCurve
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterIsValid == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipPathIterIsValid
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterNextMarker == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipPathIterNextMarker
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterNextMarkerPath == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipPathIterNextMarkerPath
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterNextPathType == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipPathIterNextPathType
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterNextSubpath == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipPathIterNextSubpath
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterNextSubpathPath == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipPathIterNextSubpathPath
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterRewind == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipPathIterRewind
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPlayMetafileRecord == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipPlayMetafileRecord
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPrivateAddFontFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipPrivateAddFontFile
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPrivateAddMemoryFont == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipPrivateAddMemoryFont
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRecordMetafile == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipRecordMetafile
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRecordMetafileFileName == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipRecordMetafileFileName
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRecordMetafileFileNameI == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipRecordMetafileFileNameI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRecordMetafileI == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipRecordMetafileI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRecordMetafileStream == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipRecordMetafileStream
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRecordMetafileStreamI == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipRecordMetafileStreamI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipReleaseDC == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipReleaseDC
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRemovePropertyItem == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipRemovePropertyItem
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipResetClip == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipResetClip
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipResetImageAttributes == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipResetImageAttributes
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipResetLineTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipResetLineTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipResetPageTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipResetPageTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipResetPath == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipResetPath
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipResetPathGradientTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipResetPathGradientTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipResetPenTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipResetPenTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipResetTextureTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipResetTextureTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipResetWorldTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipResetWorldTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRestoreGraphics == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipRestoreGraphics
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipReversePath == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipReversePath
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRotateLineTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipRotateLineTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRotateMatrix == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipRotateMatrix
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRotatePathGradientTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipRotatePathGradientTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRotatePenTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipRotatePenTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRotateTextureTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipRotateTextureTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRotateWorldTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipRotateWorldTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSaveAdd == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSaveAdd
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSaveAddImage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSaveAddImage
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSaveGraphics == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSaveGraphics
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSaveImageToFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSaveImageToFile
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSaveImageToStream == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSaveImageToStream
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipScaleLineTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipScaleLineTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipScaleMatrix == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipScaleMatrix
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipScalePathGradientTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipScalePathGradientTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipScalePenTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipScalePenTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipScaleTextureTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipScaleTextureTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipScaleWorldTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipScaleWorldTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetAdjustableArrowCapFillState == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetAdjustableArrowCapFillState
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetAdjustableArrowCapHeight == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetAdjustableArrowCapHeight
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetAdjustableArrowCapMiddleInset == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetAdjustableArrowCapMiddleInset
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetAdjustableArrowCapWidth == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetAdjustableArrowCapWidth
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetClipGraphics == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetClipGraphics
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetClipHrgn == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetClipHrgn
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetClipPath == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetClipPath
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetClipRect == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetClipRect
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetClipRectI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetClipRectI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetClipRegion == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetClipRegion
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetCompositingMode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetCompositingMode
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetCompositingQuality == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetCompositingQuality
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetCustomLineCapBaseCap == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetCustomLineCapBaseCap
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetCustomLineCapBaseInset == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetCustomLineCapBaseInset
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetCustomLineCapStrokeCaps == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetCustomLineCapStrokeCaps
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetCustomLineCapStrokeJoin == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetCustomLineCapStrokeJoin
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetCustomLineCapWidthScale == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetCustomLineCapWidthScale
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetEffectParameters == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetEffectParameters
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetEmpty == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetEmpty
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImageAttributesCachedBackground == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetImageAttributesCachedBackground
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImageAttributesColorKeys == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetImageAttributesColorKeys
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImageAttributesColorMatrix == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetImageAttributesColorMatrix
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImageAttributesGamma == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetImageAttributesGamma
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImageAttributesNoOp == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetImageAttributesNoOp
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImageAttributesOutputChannel == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetImageAttributesOutputChannel
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImageAttributesOutputChannelColorProfile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetImageAttributesOutputChannelColorProfile
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImageAttributesRemapTable == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetImageAttributesRemapTable
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImageAttributesThreshold == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetImageAttributesThreshold
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImageAttributesToIdentity == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetImageAttributesToIdentity
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImageAttributesWrapMode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetImageAttributesWrapMode
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImagePalette == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetImagePalette
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetInfinite == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetInfinite
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetInterpolationMode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetInterpolationMode
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetLineBlend == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetLineBlend
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetLineColors == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetLineColors
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetLineGammaCorrection == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetLineGammaCorrection
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetLineLinearBlend == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetLineLinearBlend
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetLinePresetBlend == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetLinePresetBlend
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetLineSigmaBlend == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetLineSigmaBlend
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetLineTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetLineTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetLineWrapMode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetLineWrapMode
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetMatrixElements == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetMatrixElements
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetMetafileDownLevelRasterizationLimit == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetMetafileDownLevelRasterizationLimit
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPageScale == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPageScale
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPageUnit == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPageUnit
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathFillMode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPathFillMode
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientBlend == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPathGradientBlend
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientCenterColor == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPathGradientCenterColor
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientCenterPoint == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPathGradientCenterPoint
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientCenterPointI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPathGradientCenterPointI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientFocusScales == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPathGradientFocusScales
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientGammaCorrection == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPathGradientGammaCorrection
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientLinearBlend == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPathGradientLinearBlend
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientPath == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPathGradientPath
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientPresetBlend == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPathGradientPresetBlend
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientSigmaBlend == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPathGradientSigmaBlend
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientSurroundColorsWithCount == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPathGradientSurroundColorsWithCount
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPathGradientTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientWrapMode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPathGradientWrapMode
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathMarker == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPathMarker
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenBrushFill == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPenBrushFill
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenColor == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPenColor
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenCompoundArray == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPenCompoundArray
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenCustomEndCap == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPenCustomEndCap
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenCustomStartCap == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPenCustomStartCap
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenDashArray == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPenDashArray
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenDashCap197819 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPenDashCap197819
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenDashOffset == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPenDashOffset
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenDashStyle == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPenDashStyle
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenEndCap == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPenEndCap
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenLineCap197819 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPenLineCap197819
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenLineJoin == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPenLineJoin
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenMiterLimit == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPenMiterLimit
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenMode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPenMode
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenStartCap == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPenStartCap
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPenTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenUnit == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPenUnit
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenWidth == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPenWidth
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPixelOffsetMode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPixelOffsetMode
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPropertyItem == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetPropertyItem
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetRenderingOrigin == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetRenderingOrigin
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetSmoothingMode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetSmoothingMode
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetSolidFillColor == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetSolidFillColor
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetStringFormatAlign == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetStringFormatAlign
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetStringFormatDigitSubstitution == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetStringFormatDigitSubstitution
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetStringFormatFlags == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetStringFormatFlags
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetStringFormatHotkeyPrefix == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetStringFormatHotkeyPrefix
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetStringFormatLineAlign == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetStringFormatLineAlign
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetStringFormatMeasurableCharacterRanges == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetStringFormatMeasurableCharacterRanges
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetStringFormatTabStops == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetStringFormatTabStops
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetStringFormatTrimming == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetStringFormatTrimming
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetTextContrast == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetTextContrast
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetTextRenderingHint == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetTextRenderingHint
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetTextureTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetTextureTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetTextureWrapMode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetTextureWrapMode
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetWorldTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipSetWorldTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipShearMatrix == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipShearMatrix
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipStartPathFigure == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipStartPathFigure
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipStringFormatGetGenericDefault == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipStringFormatGetGenericDefault
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipStringFormatGetGenericTypographic == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipStringFormatGetGenericTypographic
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTestControl == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipTestControl
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTransformMatrixPoints == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipTransformMatrixPoints
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTransformMatrixPointsI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipTransformMatrixPointsI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTransformPath == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipTransformPath
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTransformPoints == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipTransformPoints
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTransformPointsI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipTransformPointsI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTransformRegion == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipTransformRegion
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTranslateClip == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipTranslateClip
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTranslateClipI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipTranslateClipI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTranslateLineTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipTranslateLineTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTranslateMatrix == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipTranslateMatrix
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTranslatePathGradientTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipTranslatePathGradientTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTranslatePenTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipTranslatePenTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTranslateRegion == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipTranslateRegion
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTranslateRegionI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipTranslateRegionI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTranslateTextureTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipTranslateTextureTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTranslateWorldTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipTranslateWorldTransform
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipVectorTransformMatrixPoints == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipVectorTransformMatrixPoints
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipVectorTransformMatrixPointsI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipVectorTransformMatrixPointsI
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipWarpPath == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipWarpPath
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipWidenPath == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipWidenPath
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipWindingModeOutline == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdipWindingModeOutline
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdiplusNotificationHook == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdiplusNotificationHook
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdiplusNotificationUnhook == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdiplusNotificationUnhook
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdiplusShutdown == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdiplusShutdown
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdiplusStartup == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GdiplusStartup

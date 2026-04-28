@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l2 as _impl_l2
 import windows_collections as windows_collections
@@ -837,7 +836,10 @@ public struct IHttpDiagnosticProviderRequestResponseCompletedEventArgsVtbl {
     public var ProcessId: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ThreadId: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Initiator: CFunc<(CPointer<Unit>, CPointer<HttpDiagnosticRequestInitiatorAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SourceLocations: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SourceLocations: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -954,6 +956,7 @@ public class IHttpDiagnosticProviderRequestResponseCompletedEventArgs <: Interfa
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<HttpDiagnosticRequestInitiator>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SourceLocations(): windows_collections.IVectorView<HttpDiagnosticSourceLocation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -979,7 +982,10 @@ public struct IHttpDiagnosticProviderRequestSentEventArgsVtbl {
     public var ProcessId: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ThreadId: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Initiator: CFunc<(CPointer<Unit>, CPointer<HttpDiagnosticRequestInitiatorAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SourceLocations: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SourceLocations: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1097,6 +1103,7 @@ public class IHttpDiagnosticProviderRequestSentEventArgs <: InterfaceWrapperBase
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<HttpDiagnosticRequestInitiator>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SourceLocations(): windows_collections.IVectorView<HttpDiagnosticSourceLocation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1202,6 +1209,7 @@ public class HttpDiagnosticProviderRequestResponseCompletedEventArgs <: Interfac
         return defaultInterface().Initiator()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SourceLocations(): windows_collections.IVectorView<HttpDiagnosticSourceLocation> {
         return defaultInterface().SourceLocations()
     }
@@ -1319,6 +1327,7 @@ public class HttpDiagnosticProviderRequestSentEventArgs <: InterfaceWrapperBase 
         return defaultInterface().Initiator()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SourceLocations(): windows_collections.IVectorView<HttpDiagnosticSourceLocation> {
         return defaultInterface().SourceLocations()
     }

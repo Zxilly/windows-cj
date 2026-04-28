@@ -5,9 +5,7 @@ import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrap
 import windows_interface as windows_interface
 import windows_polyfill.{packedReadUInt16, packedReadUInt32, packedReadUInt8, packedReadValue, packedWriteUInt16, packedWriteUInt32, packedWriteUInt8, packedWriteValue, unionReadUInt32, unionReadUInt8, unionWriteUInt32, unionWriteUInt8}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_System_Registry == "on"]
 import windows_sys.Win32.System.Registry as Win32_System_Registry
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 
@@ -4417,121 +4415,522 @@ public class IDirectInput8W <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[DINPUT8 == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && DINPUT8 == "on" && Windows_Win32_Devices_HumanInterfaceDevice_DirectInput8Create == "on" && Windows_Win32_System_Com == "on"]
 foreign {
     func DirectInput8Create(hinst: CPointer<Unit>, dwVersion: UInt32, riidltf: CPointer<GUID>, ppvOut: CPointer<CPointer<Unit>>, punkOuter: CPointer<Unit>): Int32
 }
 
-@When[HID == "on"]
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && DINPUT8 == "on" && Windows_Win32_Devices_HumanInterfaceDevice_DirectInput8Create == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_DirectInput8Create(hinst: CPointer<Unit>, dwVersion: UInt32, riidltf: CPointer<GUID>, ppvOut: CPointer<CPointer<Unit>>, punkOuter: CPointer<Unit>): Int32 {
+    return DirectInput8Create(hinst, dwVersion, riidltf, ppvOut, punkOuter)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_FlushQueue == "on"]
 foreign {
     func HidD_FlushQueue(HidDeviceObject: CPointer<Unit>): UInt8
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_FlushQueue == "on"]
+public unsafe func Windows_HidD_FlushQueue(HidDeviceObject: CPointer<Unit>): UInt8 {
+    return HidD_FlushQueue(HidDeviceObject)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_FreePreparsedData == "on"]
+foreign {
     func HidD_FreePreparsedData(PreparsedData: PHIDP_PREPARSED_DATA): UInt8
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_FreePreparsedData == "on"]
+public unsafe func Windows_HidD_FreePreparsedData(PreparsedData: PHIDP_PREPARSED_DATA): UInt8 {
+    return HidD_FreePreparsedData(PreparsedData)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_GetAttributes == "on"]
+foreign {
     func HidD_GetAttributes(HidDeviceObject: CPointer<Unit>, Attributes: CPointer<HIDD_ATTRIBUTES>): UInt8
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_GetAttributes == "on"]
+public unsafe func Windows_HidD_GetAttributes(HidDeviceObject: CPointer<Unit>, Attributes: CPointer<HIDD_ATTRIBUTES>): UInt8 {
+    return HidD_GetAttributes(HidDeviceObject, Attributes)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_GetConfiguration == "on"]
+foreign {
     // param-hint: Configuration bytes=param[2]
     func HidD_GetConfiguration(HidDeviceObject: CPointer<Unit>, Configuration: CPointer<HIDD_CONFIGURATION>, ConfigurationLength: UInt32): UInt8
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_GetConfiguration == "on"]
+public unsafe func Windows_HidD_GetConfiguration(HidDeviceObject: CPointer<Unit>, Configuration: CPointer<HIDD_CONFIGURATION>, ConfigurationLength: UInt32): UInt8 {
+    return HidD_GetConfiguration(HidDeviceObject, Configuration, ConfigurationLength)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_GetFeature == "on"]
+foreign {
     // param-hint: ReportBuffer bytes=param[2]
     func HidD_GetFeature(HidDeviceObject: CPointer<Unit>, ReportBuffer: CPointer<Unit>, ReportBufferLength: UInt32): UInt8
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_GetFeature == "on"]
+public unsafe func Windows_HidD_GetFeature(HidDeviceObject: CPointer<Unit>, ReportBuffer: CPointer<Unit>, ReportBufferLength: UInt32): UInt8 {
+    return HidD_GetFeature(HidDeviceObject, ReportBuffer, ReportBufferLength)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_GetHidGuid == "on"]
+foreign {
     func HidD_GetHidGuid(HidGuid: CPointer<GUID>): Unit
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_GetHidGuid == "on"]
+public unsafe func Windows_HidD_GetHidGuid(HidGuid: CPointer<GUID>): Unit {
+    HidD_GetHidGuid(HidGuid)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_GetIndexedString == "on"]
+foreign {
     // param-hint: Buffer bytes=param[3]
     func HidD_GetIndexedString(HidDeviceObject: CPointer<Unit>, StringIndex: UInt32, Buffer: CPointer<Unit>, BufferLength: UInt32): UInt8
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_GetIndexedString == "on"]
+public unsafe func Windows_HidD_GetIndexedString(HidDeviceObject: CPointer<Unit>, StringIndex: UInt32, Buffer: CPointer<Unit>, BufferLength: UInt32): UInt8 {
+    return HidD_GetIndexedString(HidDeviceObject, StringIndex, Buffer, BufferLength)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_GetInputReport == "on"]
+foreign {
     // param-hint: ReportBuffer bytes=param[2]
     func HidD_GetInputReport(HidDeviceObject: CPointer<Unit>, ReportBuffer: CPointer<Unit>, ReportBufferLength: UInt32): UInt8
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_GetInputReport == "on"]
+public unsafe func Windows_HidD_GetInputReport(HidDeviceObject: CPointer<Unit>, ReportBuffer: CPointer<Unit>, ReportBufferLength: UInt32): UInt8 {
+    return HidD_GetInputReport(HidDeviceObject, ReportBuffer, ReportBufferLength)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_GetManufacturerString == "on"]
+foreign {
     // param-hint: Buffer bytes=param[2]
     func HidD_GetManufacturerString(HidDeviceObject: CPointer<Unit>, Buffer: CPointer<Unit>, BufferLength: UInt32): UInt8
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_GetManufacturerString == "on"]
+public unsafe func Windows_HidD_GetManufacturerString(HidDeviceObject: CPointer<Unit>, Buffer: CPointer<Unit>, BufferLength: UInt32): UInt8 {
+    return HidD_GetManufacturerString(HidDeviceObject, Buffer, BufferLength)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_GetMsGenreDescriptor == "on"]
+foreign {
     // param-hint: Buffer bytes=param[2]
     func HidD_GetMsGenreDescriptor(HidDeviceObject: CPointer<Unit>, Buffer: CPointer<Unit>, BufferLength: UInt32): UInt8
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_GetMsGenreDescriptor == "on"]
+public unsafe func Windows_HidD_GetMsGenreDescriptor(HidDeviceObject: CPointer<Unit>, Buffer: CPointer<Unit>, BufferLength: UInt32): UInt8 {
+    return HidD_GetMsGenreDescriptor(HidDeviceObject, Buffer, BufferLength)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_GetNumInputBuffers == "on"]
+foreign {
     func HidD_GetNumInputBuffers(HidDeviceObject: CPointer<Unit>, NumberBuffers: CPointer<UInt32>): UInt8
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_GetNumInputBuffers == "on"]
+public unsafe func Windows_HidD_GetNumInputBuffers(HidDeviceObject: CPointer<Unit>, NumberBuffers: CPointer<UInt32>): UInt8 {
+    return HidD_GetNumInputBuffers(HidDeviceObject, NumberBuffers)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_GetPhysicalDescriptor == "on"]
+foreign {
     // param-hint: Buffer bytes=param[2]
     func HidD_GetPhysicalDescriptor(HidDeviceObject: CPointer<Unit>, Buffer: CPointer<Unit>, BufferLength: UInt32): UInt8
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_GetPhysicalDescriptor == "on"]
+public unsafe func Windows_HidD_GetPhysicalDescriptor(HidDeviceObject: CPointer<Unit>, Buffer: CPointer<Unit>, BufferLength: UInt32): UInt8 {
+    return HidD_GetPhysicalDescriptor(HidDeviceObject, Buffer, BufferLength)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_GetPreparsedData == "on"]
+foreign {
     func HidD_GetPreparsedData(HidDeviceObject: CPointer<Unit>, PreparsedData: CPointer<PHIDP_PREPARSED_DATA>): UInt8
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_GetPreparsedData == "on"]
+public unsafe func Windows_HidD_GetPreparsedData(HidDeviceObject: CPointer<Unit>, PreparsedData: CPointer<PHIDP_PREPARSED_DATA>): UInt8 {
+    return HidD_GetPreparsedData(HidDeviceObject, PreparsedData)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_GetProductString == "on"]
+foreign {
     // param-hint: Buffer bytes=param[2]
     func HidD_GetProductString(HidDeviceObject: CPointer<Unit>, Buffer: CPointer<Unit>, BufferLength: UInt32): UInt8
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_GetProductString == "on"]
+public unsafe func Windows_HidD_GetProductString(HidDeviceObject: CPointer<Unit>, Buffer: CPointer<Unit>, BufferLength: UInt32): UInt8 {
+    return HidD_GetProductString(HidDeviceObject, Buffer, BufferLength)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_GetSerialNumberString == "on"]
+foreign {
     // param-hint: Buffer bytes=param[2]
     func HidD_GetSerialNumberString(HidDeviceObject: CPointer<Unit>, Buffer: CPointer<Unit>, BufferLength: UInt32): UInt8
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_GetSerialNumberString == "on"]
+public unsafe func Windows_HidD_GetSerialNumberString(HidDeviceObject: CPointer<Unit>, Buffer: CPointer<Unit>, BufferLength: UInt32): UInt8 {
+    return HidD_GetSerialNumberString(HidDeviceObject, Buffer, BufferLength)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_SetConfiguration == "on"]
+foreign {
     // param-hint: Configuration bytes=param[2]
     func HidD_SetConfiguration(HidDeviceObject: CPointer<Unit>, Configuration: CPointer<HIDD_CONFIGURATION>, ConfigurationLength: UInt32): UInt8
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_SetConfiguration == "on"]
+public unsafe func Windows_HidD_SetConfiguration(HidDeviceObject: CPointer<Unit>, Configuration: CPointer<HIDD_CONFIGURATION>, ConfigurationLength: UInt32): UInt8 {
+    return HidD_SetConfiguration(HidDeviceObject, Configuration, ConfigurationLength)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_SetFeature == "on"]
+foreign {
     // param-hint: ReportBuffer bytes=param[2]
     func HidD_SetFeature(HidDeviceObject: CPointer<Unit>, ReportBuffer: CPointer<Unit>, ReportBufferLength: UInt32): UInt8
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_SetFeature == "on"]
+public unsafe func Windows_HidD_SetFeature(HidDeviceObject: CPointer<Unit>, ReportBuffer: CPointer<Unit>, ReportBufferLength: UInt32): UInt8 {
+    return HidD_SetFeature(HidDeviceObject, ReportBuffer, ReportBufferLength)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_SetNumInputBuffers == "on"]
+foreign {
     func HidD_SetNumInputBuffers(HidDeviceObject: CPointer<Unit>, NumberBuffers: UInt32): UInt8
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_SetNumInputBuffers == "on"]
+public unsafe func Windows_HidD_SetNumInputBuffers(HidDeviceObject: CPointer<Unit>, NumberBuffers: UInt32): UInt8 {
+    return HidD_SetNumInputBuffers(HidDeviceObject, NumberBuffers)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_SetOutputReport == "on"]
+foreign {
     // param-hint: ReportBuffer bytes=param[2]
     func HidD_SetOutputReport(HidDeviceObject: CPointer<Unit>, ReportBuffer: CPointer<Unit>, ReportBufferLength: UInt32): UInt8
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidD_SetOutputReport == "on"]
+public unsafe func Windows_HidD_SetOutputReport(HidDeviceObject: CPointer<Unit>, ReportBuffer: CPointer<Unit>, ReportBufferLength: UInt32): UInt8 {
+    return HidD_SetOutputReport(HidDeviceObject, ReportBuffer, ReportBufferLength)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_GetButtonArray == "on"]
+foreign {
     // param-hint: LinkCollection optional
     // param-hint: ButtonData len=param[5]
     // param-hint: Report bytes=param[8]
     func HidP_GetButtonArray(ReportType: Int32, UsagePage: UInt16, LinkCollection: UInt16, Usage: UInt16, ButtonData: CPointer<HIDP_BUTTON_ARRAY_DATA>, ButtonDataLength: CPointer<UInt16>, PreparsedData: PHIDP_PREPARSED_DATA, Report: CPointer<UInt8>, ReportLength: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_GetButtonArray == "on"]
+public unsafe func Windows_HidP_GetButtonArray(ReportType: Int32, UsagePage: UInt16, LinkCollection: UInt16, Usage: UInt16, ButtonData: CPointer<HIDP_BUTTON_ARRAY_DATA>, ButtonDataLength: CPointer<UInt16>, PreparsedData: PHIDP_PREPARSED_DATA, Report: CPointer<UInt8>, ReportLength: UInt32): Int32 {
+    return HidP_GetButtonArray(ReportType, UsagePage, LinkCollection, Usage, ButtonData, ButtonDataLength, PreparsedData, Report, ReportLength)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_GetButtonCaps == "on"]
+foreign {
     // param-hint: ButtonCaps len=param[2]
     func HidP_GetButtonCaps(ReportType: Int32, ButtonCaps: CPointer<HIDP_BUTTON_CAPS>, ButtonCapsLength: CPointer<UInt16>, PreparsedData: PHIDP_PREPARSED_DATA): Int32
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_GetButtonCaps == "on"]
+public unsafe func Windows_HidP_GetButtonCaps(ReportType: Int32, ButtonCaps: CPointer<HIDP_BUTTON_CAPS>, ButtonCapsLength: CPointer<UInt16>, PreparsedData: PHIDP_PREPARSED_DATA): Int32 {
+    return HidP_GetButtonCaps(ReportType, ButtonCaps, ButtonCapsLength, PreparsedData)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_GetCaps == "on"]
+foreign {
     func HidP_GetCaps(PreparsedData: PHIDP_PREPARSED_DATA, Capabilities: CPointer<HIDP_CAPS>): Int32
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_GetCaps == "on"]
+public unsafe func Windows_HidP_GetCaps(PreparsedData: PHIDP_PREPARSED_DATA, Capabilities: CPointer<HIDP_CAPS>): Int32 {
+    return HidP_GetCaps(PreparsedData, Capabilities)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_GetData == "on"]
+foreign {
     // param-hint: DataList len=param[2]
     // param-hint: Report bytes=param[5]
     func HidP_GetData(ReportType: Int32, DataList: CPointer<HIDP_DATA>, DataLength: CPointer<UInt32>, PreparsedData: PHIDP_PREPARSED_DATA, Report: CPointer<UInt8>, ReportLength: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_GetData == "on"]
+public unsafe func Windows_HidP_GetData(ReportType: Int32, DataList: CPointer<HIDP_DATA>, DataLength: CPointer<UInt32>, PreparsedData: PHIDP_PREPARSED_DATA, Report: CPointer<UInt8>, ReportLength: UInt32): Int32 {
+    return HidP_GetData(ReportType, DataList, DataLength, PreparsedData, Report, ReportLength)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_GetExtendedAttributes == "on"]
+foreign {
     // param-hint: Attributes len=param[4]
     func HidP_GetExtendedAttributes(ReportType: Int32, DataIndex: UInt16, PreparsedData: PHIDP_PREPARSED_DATA, Attributes: CPointer<HIDP_EXTENDED_ATTRIBUTES>, LengthAttributes: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_GetExtendedAttributes == "on"]
+public unsafe func Windows_HidP_GetExtendedAttributes(ReportType: Int32, DataIndex: UInt16, PreparsedData: PHIDP_PREPARSED_DATA, Attributes: CPointer<HIDP_EXTENDED_ATTRIBUTES>, LengthAttributes: CPointer<UInt32>): Int32 {
+    return HidP_GetExtendedAttributes(ReportType, DataIndex, PreparsedData, Attributes, LengthAttributes)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_GetLinkCollectionNodes == "on"]
+foreign {
     // param-hint: LinkCollectionNodes len=param[1]
     func HidP_GetLinkCollectionNodes(LinkCollectionNodes: CPointer<HIDP_LINK_COLLECTION_NODE>, LinkCollectionNodesLength: CPointer<UInt32>, PreparsedData: PHIDP_PREPARSED_DATA): Int32
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_GetLinkCollectionNodes == "on"]
+public unsafe func Windows_HidP_GetLinkCollectionNodes(LinkCollectionNodes: CPointer<HIDP_LINK_COLLECTION_NODE>, LinkCollectionNodesLength: CPointer<UInt32>, PreparsedData: PHIDP_PREPARSED_DATA): Int32 {
+    return HidP_GetLinkCollectionNodes(LinkCollectionNodes, LinkCollectionNodesLength, PreparsedData)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_GetScaledUsageValue == "on"]
+foreign {
     // param-hint: LinkCollection optional
     // param-hint: Report bytes=param[7]
     func HidP_GetScaledUsageValue(ReportType: Int32, UsagePage: UInt16, LinkCollection: UInt16, Usage: UInt16, UsageValue: CPointer<Int32>, PreparsedData: PHIDP_PREPARSED_DATA, Report: CPointer<UInt8>, ReportLength: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_GetScaledUsageValue == "on"]
+public unsafe func Windows_HidP_GetScaledUsageValue(ReportType: Int32, UsagePage: UInt16, LinkCollection: UInt16, Usage: UInt16, UsageValue: CPointer<Int32>, PreparsedData: PHIDP_PREPARSED_DATA, Report: CPointer<UInt8>, ReportLength: UInt32): Int32 {
+    return HidP_GetScaledUsageValue(ReportType, UsagePage, LinkCollection, Usage, UsageValue, PreparsedData, Report, ReportLength)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_GetSpecificButtonCaps == "on"]
+foreign {
     // param-hint: UsagePage optional
     // param-hint: LinkCollection optional
     // param-hint: Usage optional
     // param-hint: ButtonCaps len=param[5]
     func HidP_GetSpecificButtonCaps(ReportType: Int32, UsagePage: UInt16, LinkCollection: UInt16, Usage: UInt16, ButtonCaps: CPointer<HIDP_BUTTON_CAPS>, ButtonCapsLength: CPointer<UInt16>, PreparsedData: PHIDP_PREPARSED_DATA): Int32
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_GetSpecificButtonCaps == "on"]
+public unsafe func Windows_HidP_GetSpecificButtonCaps(ReportType: Int32, UsagePage: UInt16, LinkCollection: UInt16, Usage: UInt16, ButtonCaps: CPointer<HIDP_BUTTON_CAPS>, ButtonCapsLength: CPointer<UInt16>, PreparsedData: PHIDP_PREPARSED_DATA): Int32 {
+    return HidP_GetSpecificButtonCaps(ReportType, UsagePage, LinkCollection, Usage, ButtonCaps, ButtonCapsLength, PreparsedData)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_GetSpecificValueCaps == "on"]
+foreign {
     // param-hint: UsagePage optional
     // param-hint: LinkCollection optional
     // param-hint: Usage optional
     // param-hint: ValueCaps len=param[5]
     func HidP_GetSpecificValueCaps(ReportType: Int32, UsagePage: UInt16, LinkCollection: UInt16, Usage: UInt16, ValueCaps: CPointer<HIDP_VALUE_CAPS>, ValueCapsLength: CPointer<UInt16>, PreparsedData: PHIDP_PREPARSED_DATA): Int32
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_GetSpecificValueCaps == "on"]
+public unsafe func Windows_HidP_GetSpecificValueCaps(ReportType: Int32, UsagePage: UInt16, LinkCollection: UInt16, Usage: UInt16, ValueCaps: CPointer<HIDP_VALUE_CAPS>, ValueCapsLength: CPointer<UInt16>, PreparsedData: PHIDP_PREPARSED_DATA): Int32 {
+    return HidP_GetSpecificValueCaps(ReportType, UsagePage, LinkCollection, Usage, ValueCaps, ValueCapsLength, PreparsedData)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_GetUsageValue == "on"]
+foreign {
     // param-hint: LinkCollection optional
     // param-hint: Report bytes=param[7]
     func HidP_GetUsageValue(ReportType: Int32, UsagePage: UInt16, LinkCollection: UInt16, Usage: UInt16, UsageValue: CPointer<UInt32>, PreparsedData: PHIDP_PREPARSED_DATA, Report: CPointer<UInt8>, ReportLength: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_GetUsageValue == "on"]
+public unsafe func Windows_HidP_GetUsageValue(ReportType: Int32, UsagePage: UInt16, LinkCollection: UInt16, Usage: UInt16, UsageValue: CPointer<UInt32>, PreparsedData: PHIDP_PREPARSED_DATA, Report: CPointer<UInt8>, ReportLength: UInt32): Int32 {
+    return HidP_GetUsageValue(ReportType, UsagePage, LinkCollection, Usage, UsageValue, PreparsedData, Report, ReportLength)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_GetUsageValueArray == "on"]
+foreign {
     // param-hint: LinkCollection optional
     // param-hint: UsageValue bytes=param[5]
     // param-hint: Report bytes=param[8]
     func HidP_GetUsageValueArray(ReportType: Int32, UsagePage: UInt16, LinkCollection: UInt16, Usage: UInt16, UsageValue: CPointer<UInt8>, UsageValueByteLength: UInt16, PreparsedData: PHIDP_PREPARSED_DATA, Report: CPointer<UInt8>, ReportLength: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_GetUsageValueArray == "on"]
+public unsafe func Windows_HidP_GetUsageValueArray(ReportType: Int32, UsagePage: UInt16, LinkCollection: UInt16, Usage: UInt16, UsageValue: CPointer<UInt8>, UsageValueByteLength: UInt16, PreparsedData: PHIDP_PREPARSED_DATA, Report: CPointer<UInt8>, ReportLength: UInt32): Int32 {
+    return HidP_GetUsageValueArray(ReportType, UsagePage, LinkCollection, Usage, UsageValue, UsageValueByteLength, PreparsedData, Report, ReportLength)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_GetUsages == "on"]
+foreign {
     // param-hint: LinkCollection optional
     // param-hint: UsageList len=param[4]
     // param-hint: Report bytes=param[7]
     func HidP_GetUsages(ReportType: Int32, UsagePage: UInt16, LinkCollection: UInt16, UsageList: CPointer<UInt16>, UsageLength: CPointer<UInt32>, PreparsedData: PHIDP_PREPARSED_DATA, Report: CPointer<UInt8>, ReportLength: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_GetUsages == "on"]
+public unsafe func Windows_HidP_GetUsages(ReportType: Int32, UsagePage: UInt16, LinkCollection: UInt16, UsageList: CPointer<UInt16>, UsageLength: CPointer<UInt32>, PreparsedData: PHIDP_PREPARSED_DATA, Report: CPointer<UInt8>, ReportLength: UInt32): Int32 {
+    return HidP_GetUsages(ReportType, UsagePage, LinkCollection, UsageList, UsageLength, PreparsedData, Report, ReportLength)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_GetUsagesEx == "on"]
+foreign {
     // param-hint: LinkCollection optional
     // param-hint: ButtonList len=param[3]
     // param-hint: Report bytes=param[6]
     func HidP_GetUsagesEx(ReportType: Int32, LinkCollection: UInt16, ButtonList: CPointer<USAGE_AND_PAGE>, UsageLength: CPointer<UInt32>, PreparsedData: PHIDP_PREPARSED_DATA, Report: CPointer<UInt8>, ReportLength: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_GetUsagesEx == "on"]
+public unsafe func Windows_HidP_GetUsagesEx(ReportType: Int32, LinkCollection: UInt16, ButtonList: CPointer<USAGE_AND_PAGE>, UsageLength: CPointer<UInt32>, PreparsedData: PHIDP_PREPARSED_DATA, Report: CPointer<UInt8>, ReportLength: UInt32): Int32 {
+    return HidP_GetUsagesEx(ReportType, LinkCollection, ButtonList, UsageLength, PreparsedData, Report, ReportLength)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_GetValueCaps == "on"]
+foreign {
     // param-hint: ValueCaps len=param[2]
     func HidP_GetValueCaps(ReportType: Int32, ValueCaps: CPointer<HIDP_VALUE_CAPS>, ValueCapsLength: CPointer<UInt16>, PreparsedData: PHIDP_PREPARSED_DATA): Int32
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_GetValueCaps == "on"]
+public unsafe func Windows_HidP_GetValueCaps(ReportType: Int32, ValueCaps: CPointer<HIDP_VALUE_CAPS>, ValueCapsLength: CPointer<UInt16>, PreparsedData: PHIDP_PREPARSED_DATA): Int32 {
+    return HidP_GetValueCaps(ReportType, ValueCaps, ValueCapsLength, PreparsedData)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_InitializeReportForID == "on"]
+foreign {
     // param-hint: Report bytes=param[4]
     func HidP_InitializeReportForID(ReportType: Int32, ReportID: UInt8, PreparsedData: PHIDP_PREPARSED_DATA, Report: CPointer<UInt8>, ReportLength: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_InitializeReportForID == "on"]
+public unsafe func Windows_HidP_InitializeReportForID(ReportType: Int32, ReportID: UInt8, PreparsedData: PHIDP_PREPARSED_DATA, Report: CPointer<UInt8>, ReportLength: UInt32): Int32 {
+    return HidP_InitializeReportForID(ReportType, ReportID, PreparsedData, Report, ReportLength)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_MaxDataListLength == "on"]
+foreign {
     func HidP_MaxDataListLength(ReportType: Int32, PreparsedData: PHIDP_PREPARSED_DATA): UInt32
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_MaxDataListLength == "on"]
+public unsafe func Windows_HidP_MaxDataListLength(ReportType: Int32, PreparsedData: PHIDP_PREPARSED_DATA): UInt32 {
+    return HidP_MaxDataListLength(ReportType, PreparsedData)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_MaxUsageListLength == "on"]
+foreign {
     // param-hint: UsagePage optional
     func HidP_MaxUsageListLength(ReportType: Int32, UsagePage: UInt16, PreparsedData: PHIDP_PREPARSED_DATA): UInt32
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_MaxUsageListLength == "on"]
+public unsafe func Windows_HidP_MaxUsageListLength(ReportType: Int32, UsagePage: UInt16, PreparsedData: PHIDP_PREPARSED_DATA): UInt32 {
+    return HidP_MaxUsageListLength(ReportType, UsagePage, PreparsedData)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_SetButtonArray == "on"]
+foreign {
     // param-hint: LinkCollection optional
     // param-hint: ButtonData len=param[5]
     // param-hint: Report bytes=param[8]
     func HidP_SetButtonArray(ReportType: Int32, UsagePage: UInt16, LinkCollection: UInt16, Usage: UInt16, ButtonData: CPointer<HIDP_BUTTON_ARRAY_DATA>, ButtonDataLength: UInt16, PreparsedData: PHIDP_PREPARSED_DATA, Report: CPointer<UInt8>, ReportLength: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_SetButtonArray == "on"]
+public unsafe func Windows_HidP_SetButtonArray(ReportType: Int32, UsagePage: UInt16, LinkCollection: UInt16, Usage: UInt16, ButtonData: CPointer<HIDP_BUTTON_ARRAY_DATA>, ButtonDataLength: UInt16, PreparsedData: PHIDP_PREPARSED_DATA, Report: CPointer<UInt8>, ReportLength: UInt32): Int32 {
+    return HidP_SetButtonArray(ReportType, UsagePage, LinkCollection, Usage, ButtonData, ButtonDataLength, PreparsedData, Report, ReportLength)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_SetData == "on"]
+foreign {
     // param-hint: DataList len=param[2]
     // param-hint: Report bytes=param[5]
     func HidP_SetData(ReportType: Int32, DataList: CPointer<HIDP_DATA>, DataLength: CPointer<UInt32>, PreparsedData: PHIDP_PREPARSED_DATA, Report: CPointer<UInt8>, ReportLength: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_SetData == "on"]
+public unsafe func Windows_HidP_SetData(ReportType: Int32, DataList: CPointer<HIDP_DATA>, DataLength: CPointer<UInt32>, PreparsedData: PHIDP_PREPARSED_DATA, Report: CPointer<UInt8>, ReportLength: UInt32): Int32 {
+    return HidP_SetData(ReportType, DataList, DataLength, PreparsedData, Report, ReportLength)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_SetScaledUsageValue == "on"]
+foreign {
     // param-hint: LinkCollection optional
     // param-hint: Report bytes=param[7]
     func HidP_SetScaledUsageValue(ReportType: Int32, UsagePage: UInt16, LinkCollection: UInt16, Usage: UInt16, UsageValue: Int32, PreparsedData: PHIDP_PREPARSED_DATA, Report: CPointer<UInt8>, ReportLength: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_SetScaledUsageValue == "on"]
+public unsafe func Windows_HidP_SetScaledUsageValue(ReportType: Int32, UsagePage: UInt16, LinkCollection: UInt16, Usage: UInt16, UsageValue: Int32, PreparsedData: PHIDP_PREPARSED_DATA, Report: CPointer<UInt8>, ReportLength: UInt32): Int32 {
+    return HidP_SetScaledUsageValue(ReportType, UsagePage, LinkCollection, Usage, UsageValue, PreparsedData, Report, ReportLength)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_SetUsageValue == "on"]
+foreign {
     // param-hint: LinkCollection optional
     // param-hint: Report bytes=param[7]
     func HidP_SetUsageValue(ReportType: Int32, UsagePage: UInt16, LinkCollection: UInt16, Usage: UInt16, UsageValue: UInt32, PreparsedData: PHIDP_PREPARSED_DATA, Report: CPointer<UInt8>, ReportLength: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_SetUsageValue == "on"]
+public unsafe func Windows_HidP_SetUsageValue(ReportType: Int32, UsagePage: UInt16, LinkCollection: UInt16, Usage: UInt16, UsageValue: UInt32, PreparsedData: PHIDP_PREPARSED_DATA, Report: CPointer<UInt8>, ReportLength: UInt32): Int32 {
+    return HidP_SetUsageValue(ReportType, UsagePage, LinkCollection, Usage, UsageValue, PreparsedData, Report, ReportLength)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_SetUsageValueArray == "on"]
+foreign {
     // param-hint: LinkCollection optional
     // param-hint: UsageValue bytes=param[5]
     // param-hint: Report bytes=param[8]
     func HidP_SetUsageValueArray(ReportType: Int32, UsagePage: UInt16, LinkCollection: UInt16, Usage: UInt16, UsageValue: CPointer<UInt8>, UsageValueByteLength: UInt16, PreparsedData: PHIDP_PREPARSED_DATA, Report: CPointer<UInt8>, ReportLength: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_SetUsageValueArray == "on"]
+public unsafe func Windows_HidP_SetUsageValueArray(ReportType: Int32, UsagePage: UInt16, LinkCollection: UInt16, Usage: UInt16, UsageValue: CPointer<UInt8>, UsageValueByteLength: UInt16, PreparsedData: PHIDP_PREPARSED_DATA, Report: CPointer<UInt8>, ReportLength: UInt32): Int32 {
+    return HidP_SetUsageValueArray(ReportType, UsagePage, LinkCollection, Usage, UsageValue, UsageValueByteLength, PreparsedData, Report, ReportLength)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_SetUsages == "on"]
+foreign {
     // param-hint: LinkCollection optional
     // param-hint: UsageList len=param[4]
     // param-hint: Report bytes=param[7]
     func HidP_SetUsages(ReportType: Int32, UsagePage: UInt16, LinkCollection: UInt16, UsageList: CPointer<UInt16>, UsageLength: CPointer<UInt32>, PreparsedData: PHIDP_PREPARSED_DATA, Report: CPointer<UInt8>, ReportLength: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_SetUsages == "on"]
+public unsafe func Windows_HidP_SetUsages(ReportType: Int32, UsagePage: UInt16, LinkCollection: UInt16, UsageList: CPointer<UInt16>, UsageLength: CPointer<UInt32>, PreparsedData: PHIDP_PREPARSED_DATA, Report: CPointer<UInt8>, ReportLength: UInt32): Int32 {
+    return HidP_SetUsages(ReportType, UsagePage, LinkCollection, UsageList, UsageLength, PreparsedData, Report, ReportLength)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_TranslateUsagesToI8042ScanCodes == "on"]
+foreign {
     // param-hint: ChangedUsageList len=param[1]
     // param-hint: InsertCodesContext optional
     func HidP_TranslateUsagesToI8042ScanCodes(ChangedUsageList: CPointer<UInt16>, UsageListLength: UInt32, KeyAction: Int32, ModifierState: CPointer<HIDP_KEYBOARD_MODIFIER_STATE>, InsertCodesProcedure: PHIDP_INSERT_SCANCODES, InsertCodesContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_TranslateUsagesToI8042ScanCodes == "on"]
+public unsafe func Windows_HidP_TranslateUsagesToI8042ScanCodes(ChangedUsageList: CPointer<UInt16>, UsageListLength: UInt32, KeyAction: Int32, ModifierState: CPointer<HIDP_KEYBOARD_MODIFIER_STATE>, InsertCodesProcedure: PHIDP_INSERT_SCANCODES, InsertCodesContext: CPointer<Unit>): Int32 {
+    return HidP_TranslateUsagesToI8042ScanCodes(ChangedUsageList, UsageListLength, KeyAction, ModifierState, InsertCodesProcedure, InsertCodesContext)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_UnsetUsages == "on"]
+foreign {
     // param-hint: LinkCollection optional
     // param-hint: UsageList len=param[4]
     // param-hint: Report bytes=param[7]
     func HidP_UnsetUsages(ReportType: Int32, UsagePage: UInt16, LinkCollection: UInt16, UsageList: CPointer<UInt16>, UsageLength: CPointer<UInt32>, PreparsedData: PHIDP_PREPARSED_DATA, Report: CPointer<UInt8>, ReportLength: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_UnsetUsages == "on"]
+public unsafe func Windows_HidP_UnsetUsages(ReportType: Int32, UsagePage: UInt16, LinkCollection: UInt16, UsageList: CPointer<UInt16>, UsageLength: CPointer<UInt32>, PreparsedData: PHIDP_PREPARSED_DATA, Report: CPointer<UInt8>, ReportLength: UInt32): Int32 {
+    return HidP_UnsetUsages(ReportType, UsagePage, LinkCollection, UsageList, UsageLength, PreparsedData, Report, ReportLength)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_UsageListDifference == "on"]
+foreign {
     // param-hint: PreviousUsageList len=param[4]
     // param-hint: CurrentUsageList len=param[4]
     // param-hint: BreakUsageList len=param[4]
@@ -4539,9 +4938,19 @@ foreign {
     func HidP_UsageListDifference(PreviousUsageList: CPointer<UInt16>, CurrentUsageList: CPointer<UInt16>, BreakUsageList: CPointer<UInt16>, MakeUsageList: CPointer<UInt16>, UsageListLength: UInt32): Int32
 }
 
-@When[WINMM == "on"]
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && HID == "on" && Windows_Win32_Devices_HumanInterfaceDevice_HidP_UsageListDifference == "on"]
+public unsafe func Windows_HidP_UsageListDifference(PreviousUsageList: CPointer<UInt16>, CurrentUsageList: CPointer<UInt16>, BreakUsageList: CPointer<UInt16>, MakeUsageList: CPointer<UInt16>, UsageListLength: UInt32): Int32 {
+    return HidP_UsageListDifference(PreviousUsageList, CurrentUsageList, BreakUsageList, MakeUsageList, UsageListLength)
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && WINMM == "on" && Windows_Win32_Devices_HumanInterfaceDevice_joyConfigChanged == "on"]
 foreign {
     func joyConfigChanged(dwFlags: UInt32): UInt32
+}
+
+@When[Windows_Win32_Devices_HumanInterfaceDevice == "on" && WINMM == "on" && Windows_Win32_Devices_HumanInterfaceDevice_joyConfigChanged == "on"]
+public unsafe func Windows_joyConfigChanged(dwFlags: UInt32): UInt32 {
+    return joyConfigChanged(dwFlags)
 }
 
 @When[Windows_Win32_Devices_HumanInterfaceDevice == "on"]

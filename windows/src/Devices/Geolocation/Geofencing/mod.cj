@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Devices_Geolocation == "on"]
 import windows.Devices.Geolocation as Devices_Geolocation
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -667,6 +665,7 @@ public class GeofenceMonitor <: InterfaceWrapperBase & ComInterface & windows_in
         return defaultInterface().Status()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Geofences(): windows_collections.IVector<Geofence> {
         return defaultInterface().Geofences()
     }
@@ -684,6 +683,7 @@ public class GeofenceMonitor <: InterfaceWrapperBase & ComInterface & windows_in
         defaultInterface().RemoveGeofenceStateChanged(token)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReadReports(): windows_collections.IVectorView<GeofenceStateChangeReport> {
         return defaultInterface().ReadReports()
     }
@@ -964,14 +964,20 @@ extend IGeofenceFactory <: windows_core.Interface<IGeofenceFactory> {}
 public struct IGeofenceMonitorVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Status: CFunc<(CPointer<Unit>, CPointer<GeofenceMonitorStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Geofences: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Geofences: UIntNative = UIntNative(0)
     @When[Windows_Devices_Geolocation == "on"]
     public var LastKnownGeoposition: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Geolocation != "on"]
     public var LastKnownGeoposition: UIntNative = UIntNative(0)
     public var GeofenceStateChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveGeofenceStateChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var ReadReports: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ReadReports: UIntNative = UIntNative(0)
     public var StatusChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveStatusChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -1050,6 +1056,7 @@ public class IGeofenceMonitor <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<GeofenceMonitorStatus>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Geofences(): windows_collections.IVector<Geofence> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1081,6 +1088,7 @@ public class IGeofenceMonitor <: InterfaceWrapperBase & ComInterface & RuntimeNa
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReadReports(): windows_collections.IVectorView<GeofenceStateChangeReport> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

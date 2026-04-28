@@ -398,9 +398,11 @@ public class IAccelerometerStatics3 <: InterfaceWrapperBase & ComInterface {
 public struct IActivitySensorVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var GetCurrentReadingAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SubscribedActivities: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var PowerInMilliwatts: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => 0 }
     public var DeviceId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedActivities: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var MinimumReportInterval: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var ReadingChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
@@ -454,6 +456,7 @@ public class IActivitySensor <: InterfaceWrapperBase & ComInterface {
         return __vt.GetCurrentReadingAsync(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SubscribedActivities(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -472,6 +475,7 @@ public class IActivitySensor <: InterfaceWrapperBase & ComInterface {
         return __vt.DeviceId(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedActivities(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -614,7 +618,9 @@ public struct IActivitySensorStaticsVtbl {
     public var GetDefaultAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetDeviceSelector: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var FromIdAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSystemHistoryAsync: CFunc<(CPointer<Unit>, Foundation__impl_l0.DateTime, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSystemHistoryWithDurationAsync: CFunc<(CPointer<Unit>, Foundation__impl_l0.DateTime, Foundation__impl_l0.TimeSpan, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -677,12 +683,14 @@ public class IActivitySensorStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.FromIdAsync(__liveRaw, deviceId, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSystemHistoryAsync(fromTime: Foundation__impl_l0.DateTime, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetSystemHistoryAsync(__liveRaw, fromTime, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSystemHistoryWithDurationAsync(fromTime: Foundation__impl_l0.DateTime, duration: Foundation__impl_l0.TimeSpan, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -694,6 +702,7 @@ public class IActivitySensorStatics <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IActivitySensorTriggerDetailsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ReadReports: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -738,6 +747,7 @@ public class IActivitySensorTriggerDetails <: InterfaceWrapperBase & ComInterfac
         readVtbl<IActivitySensorTriggerDetailsVtbl>(IActivitySensorTriggerDetailsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReadReports(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2413,6 +2423,7 @@ public class IHumanPresenceSensorExtension <: InterfaceWrapperBase & ComInterfac
 public struct IHumanPresenceSensorReading3Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var OnlookerPresence: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var DetectedPersons: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -2463,6 +2474,7 @@ public class IHumanPresenceSensorReading3 <: InterfaceWrapperBase & ComInterface
         return __vt.OnlookerPresence(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DetectedPersons(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2818,6 +2830,7 @@ public struct IHumanPresenceSettingsStaticsVtbl {
     public var UpdateSettings: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var GetSupportedFeaturesForSensorIdAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetSupportedFeaturesForSensorId: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSupportedLockOnLeaveTimeouts: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SettingsChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveSettingsChanged: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
@@ -2900,6 +2913,7 @@ public class IHumanPresenceSettingsStatics <: InterfaceWrapperBase & ComInterfac
         return __vt.GetSupportedFeaturesForSensorId(__liveRaw, sensorId, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSupportedLockOnLeaveTimeouts(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4536,6 +4550,7 @@ public class IPedometer <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IPedometer2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetCurrentReadings: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -4580,6 +4595,7 @@ public class IPedometer2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IPedometer2Vtbl>(IPedometer2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetCurrentReadings(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4704,7 +4720,9 @@ public struct IPedometerStaticsVtbl {
     public var FromIdAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetDefaultAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetDeviceSelector: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSystemHistoryAsync: CFunc<(CPointer<Unit>, Foundation__impl_l0.DateTime, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSystemHistoryWithDurationAsync: CFunc<(CPointer<Unit>, Foundation__impl_l0.DateTime, Foundation__impl_l0.TimeSpan, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -4767,12 +4785,14 @@ public class IPedometerStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.GetDeviceSelector(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSystemHistoryAsync(fromTime: Foundation__impl_l0.DateTime, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetSystemHistoryAsync(__liveRaw, fromTime, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSystemHistoryWithDurationAsync(fromTime: Foundation__impl_l0.DateTime, duration: Foundation__impl_l0.TimeSpan, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4784,6 +4804,7 @@ public class IPedometerStatics <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IPedometerStatics2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetReadingsFromTriggerDetails: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -4828,6 +4849,7 @@ public class IPedometerStatics2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IPedometerStatics2Vtbl>(IPedometerStatics2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetReadingsFromTriggerDetails(triggerDetails: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -5108,6 +5130,7 @@ public class IProximitySensorStatics <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IProximitySensorStatics2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetReadingsFromTriggerDetails: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -5152,6 +5175,7 @@ public class IProximitySensorStatics2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IProximitySensorStatics2Vtbl>(IProximitySensorStatics2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetReadingsFromTriggerDetails(triggerDetails: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

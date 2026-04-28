@@ -4,7 +4,6 @@ package windows_sys.System.Threading.Core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_System_Threading == "on"]
 import windows_sys.System.Threading as System_Threading
 
 

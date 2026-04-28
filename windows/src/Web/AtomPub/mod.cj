@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Web_Syndication == "on"]
 import windows.Web.Syndication as Web_Syndication
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -29,11 +27,14 @@ public struct IResourceCollectionVtbl {
     @When[Windows_Web_Syndication != "on"]
     public var Title: UIntNative = UIntNative(0)
     public var get_Uri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Web_Syndication == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Web_Syndication == "on"]
     public var Categories: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Web_Syndication != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Web_Syndication != "on"]
     public var Categories: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Accepts: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Accepts: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -131,7 +132,7 @@ public class IResourceCollection <: InterfaceWrapperBase & ComInterface & Runtim
         return Foundation.Uri.fromAbiTake(result__)
     }
 
-    @When[Windows_Web_Syndication == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Web_Syndication == "on"]
     public unsafe func Categories(): windows_collections.IVectorView<Web_Syndication.SyndicationCategory> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -140,6 +141,7 @@ public class IResourceCollection <: InterfaceWrapperBase & ComInterface & Runtim
         return windows_collections.IVectorView<Web_Syndication.SyndicationCategory>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Accepts(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -152,7 +154,7 @@ public class IResourceCollection <: InterfaceWrapperBase & ComInterface & Runtim
 @When[Windows_Web_AtomPub == "on"]
 extend IResourceCollection <: windows_core.Interface<IResourceCollection> {}
 
-@When[Windows_Web_AtomPub == "on"]
+@When[Windows_Web_AtomPub == "on" && Windows_Web_Syndication == "on"]
 public class ResourceCollection <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -238,12 +240,12 @@ public class ResourceCollection <: InterfaceWrapperBase & ComInterface & windows
         return defaultInterface().get_Uri()
     }
 
-    @When[Windows_Web_Syndication == "on"]
+    @When[(Windows_Foundation_Collections == "on" && Windows_Web_Syndication == "on") && (Windows_Web_Syndication == "on")]
     public unsafe func Categories(): windows_collections.IVectorView<Web_Syndication.SyndicationCategory> {
         return defaultInterface().Categories()
     }
 
-    @When[Windows_Web_Syndication == "on"]
+    @When[(Windows_Foundation_Collections == "on") && (Windows_Web_Syndication == "on")]
     public unsafe func Accepts(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().Accepts()
     }
@@ -288,10 +290,12 @@ public class ResourceCollection <: InterfaceWrapperBase & ComInterface & windows
         asISyndicationNode().SetBaseUri(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AttributeExtensions(): windows_collections.IVector<Web_Syndication.SyndicationAttribute> {
         return asISyndicationNode().AttributeExtensions()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ElementExtensions(): windows_collections.IVector<Web_Syndication.ISyndicationNode> {
         return asISyndicationNode().ElementExtensions()
     }
@@ -302,7 +306,7 @@ public class ResourceCollection <: InterfaceWrapperBase & ComInterface & windows
     }
 }
 
-@When[Windows_Web_AtomPub == "on"]
+@When[Windows_Web_AtomPub == "on" && Windows_Web_Syndication == "on"]
 extend ResourceCollection <: windows_core.HandleWinrtType<ResourceCollection> {
     public static func intoWinrtHandle(value: ResourceCollection): CPointer<Unit> {
         value.asRaw()
@@ -328,7 +332,10 @@ public struct IWorkspaceVtbl {
     public var Title: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Web_Syndication != "on"]
     public var Title: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on" && Windows_Web_Syndication == "on"]
     public var Collections: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on" || Windows_Web_Syndication != "on"]
+    public var Collections: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -418,6 +425,7 @@ public class IWorkspace <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         return Web_Syndication.ISyndicationText.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on" && Windows_Web_Syndication == "on"]
     public unsafe func Collections(): windows_collections.IVectorView<ResourceCollection> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -430,7 +438,7 @@ public class IWorkspace <: InterfaceWrapperBase & ComInterface & RuntimeName & w
 @When[Windows_Web_AtomPub == "on"]
 extend IWorkspace <: windows_core.Interface<IWorkspace> {}
 
-@When[Windows_Web_AtomPub == "on"]
+@When[Windows_Web_AtomPub == "on" && Windows_Web_Syndication == "on"]
 public class Workspace <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -511,7 +519,7 @@ public class Workspace <: InterfaceWrapperBase & ComInterface & windows_interfac
         return defaultInterface().Title()
     }
 
-    @When[Windows_Web_Syndication == "on"]
+    @When[(Windows_Foundation_Collections == "on" && Windows_Web_Syndication == "on") && (Windows_Web_Syndication == "on")]
     public unsafe func Collections(): windows_collections.IVectorView<ResourceCollection> {
         return defaultInterface().Collections()
     }
@@ -556,10 +564,12 @@ public class Workspace <: InterfaceWrapperBase & ComInterface & windows_interfac
         asISyndicationNode().SetBaseUri(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AttributeExtensions(): windows_collections.IVector<Web_Syndication.SyndicationAttribute> {
         return asISyndicationNode().AttributeExtensions()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ElementExtensions(): windows_collections.IVector<Web_Syndication.ISyndicationNode> {
         return asISyndicationNode().ElementExtensions()
     }
@@ -570,7 +580,7 @@ public class Workspace <: InterfaceWrapperBase & ComInterface & windows_interfac
     }
 }
 
-@When[Windows_Web_AtomPub == "on"]
+@When[Windows_Web_AtomPub == "on" && Windows_Web_Syndication == "on"]
 extend Workspace <: windows_core.HandleWinrtType<Workspace> {
     public static func intoWinrtHandle(value: Workspace): CPointer<Unit> {
         value.asRaw()
@@ -592,7 +602,10 @@ extend Workspace <: windows_core.HandleWinrtType<Workspace> {
 @C
 public struct IServiceDocumentVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on" && Windows_Web_Syndication == "on"]
     public var Workspaces: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on" || Windows_Web_Syndication != "on"]
+    public var Workspaces: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -673,6 +686,7 @@ public class IServiceDocument <: InterfaceWrapperBase & ComInterface & RuntimeNa
         readVtbl<IServiceDocumentVtbl>(IServiceDocumentVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on" && Windows_Web_Syndication == "on"]
     public unsafe func Workspaces(): windows_collections.IVectorView<Workspace> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -685,7 +699,7 @@ public class IServiceDocument <: InterfaceWrapperBase & ComInterface & RuntimeNa
 @When[Windows_Web_AtomPub == "on"]
 extend IServiceDocument <: windows_core.Interface<IServiceDocument> {}
 
-@When[Windows_Web_AtomPub == "on"]
+@When[Windows_Web_AtomPub == "on" && Windows_Web_Syndication == "on"]
 public class ServiceDocument <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -761,7 +775,7 @@ public class ServiceDocument <: InterfaceWrapperBase & ComInterface & windows_in
         }
     }
 
-    @When[Windows_Web_Syndication == "on"]
+    @When[(Windows_Foundation_Collections == "on" && Windows_Web_Syndication == "on") && (Windows_Web_Syndication == "on")]
     public unsafe func Workspaces(): windows_collections.IVectorView<Workspace> {
         return defaultInterface().Workspaces()
     }
@@ -806,10 +820,12 @@ public class ServiceDocument <: InterfaceWrapperBase & ComInterface & windows_in
         asISyndicationNode().SetBaseUri(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AttributeExtensions(): windows_collections.IVector<Web_Syndication.SyndicationAttribute> {
         return asISyndicationNode().AttributeExtensions()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ElementExtensions(): windows_collections.IVector<Web_Syndication.ISyndicationNode> {
         return asISyndicationNode().ElementExtensions()
     }
@@ -820,7 +836,7 @@ public class ServiceDocument <: InterfaceWrapperBase & ComInterface & windows_in
     }
 }
 
-@When[Windows_Web_AtomPub == "on"]
+@When[Windows_Web_AtomPub == "on" && Windows_Web_Syndication == "on"]
 extend ServiceDocument <: windows_core.HandleWinrtType<ServiceDocument> {
     public static func intoWinrtHandle(value: ServiceDocument): CPointer<Unit> {
         value.asRaw()
@@ -1063,7 +1079,7 @@ public class IAtomPubClient <: InterfaceWrapperBase & ComInterface & RuntimeName
 @When[Windows_Web_AtomPub == "on"]
 extend IAtomPubClient <: windows_core.Interface<IAtomPubClient> {}
 
-@When[Windows_Web_AtomPub == "on"]
+@When[Windows_Web_AtomPub == "on" && Windows_Web_Syndication == "on"]
 public class AtomPubClient <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1257,7 +1273,7 @@ public class AtomPubClient <: InterfaceWrapperBase & ComInterface & windows_inte
         return asISyndicationClient().RetrieveFeedAsync(uri)
     }
 
-    @When[Windows_Security_Credentials == "on"]
+    @When[Windows_Security_Credentials == "on" && Windows_Web_Syndication == "on"]
     public static unsafe func CreateAtomPubClientWithCredentials(serverCredential: _impl_l0.PasswordCredential): AtomPubClient {
         var result__: Option<AtomPubClient> = Option<AtomPubClient>.None
         try (factory__ = windows_core.factory<AtomPubClient, IAtomPubClientFactory>().unwrap()) {
@@ -1270,7 +1286,7 @@ public class AtomPubClient <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 }
 
-@When[Windows_Web_AtomPub == "on"]
+@When[Windows_Web_AtomPub == "on" && Windows_Web_Syndication == "on"]
 extend AtomPubClient <: windows_core.HandleWinrtType<AtomPubClient> {
     public static func intoWinrtHandle(value: AtomPubClient): CPointer<Unit> {
         value.asRaw()
@@ -1292,9 +1308,9 @@ extend AtomPubClient <: windows_core.HandleWinrtType<AtomPubClient> {
 @C
 public struct IAtomPubClientFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Security_Credentials == "on"]
+    @When[Windows_Security_Credentials == "on" && Windows_Web_Syndication == "on"]
     public var CreateAtomPubClientWithCredentials: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Security_Credentials != "on"]
+    @When[Windows_Security_Credentials != "on" || Windows_Web_Syndication != "on"]
     public var CreateAtomPubClientWithCredentials: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -1364,7 +1380,7 @@ public class IAtomPubClientFactory <: InterfaceWrapperBase & ComInterface & Runt
         readVtbl<IAtomPubClientFactoryVtbl>(IAtomPubClientFactoryVtbl())
     }
 
-    @When[Windows_Security_Credentials == "on"]
+    @When[Windows_Security_Credentials == "on" && Windows_Web_Syndication == "on"]
     public unsafe func CreateAtomPubClientWithCredentials(serverCredential: _impl_l0.PasswordCredential): AtomPubClient {
         let v = vtbl()
         var result__ = CPointer<Unit>()

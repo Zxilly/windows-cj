@@ -10,15 +10,11 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
 import windows.Graphics.DirectX.Direct3D11 as Graphics_DirectX_Direct3D11
-@When[Windows_Media == "on"]
 import windows.Media as Media
 @When[Windows_Media_Render == "on"]
 import windows.Media.Render as Media_Render
-@When[Windows_UI == "on"]
 import windows.UI as UI
 import windows._impl_l1 as _impl_l1
 import windows_collections as windows_collections
@@ -195,6 +191,7 @@ public class AudioCaptureEffectsManager <: InterfaceWrapperBase & ComInterface &
         defaultInterface().RemoveAudioCaptureEffectsChanged(token)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAudioCaptureEffects(): windows_collections.IVectorView<AudioEffect> {
         return defaultInterface().GetAudioCaptureEffects()
     }
@@ -738,6 +735,7 @@ public class AudioRenderEffectsManager <: InterfaceWrapperBase & ComInterface & 
         defaultInterface().RemoveAudioRenderEffectsChanged(token)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAudioRenderEffects(): windows_collections.IVectorView<AudioEffect> {
         return defaultInterface().GetAudioRenderEffects()
     }
@@ -830,7 +828,7 @@ public class CompositeVideoFrameContext <: InterfaceWrapperBase & ComInterface &
         }
     }
 
-    @When[Windows_Graphics_DirectX_Direct3D11 == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_DirectX_Direct3D11 == "on"]
     public unsafe func SurfacesToOverlay(): windows_collections.IVectorView<Graphics_DirectX_Direct3D11.IDirect3DSurface> {
         return defaultInterface().SurfacesToOverlay()
     }
@@ -958,7 +956,10 @@ public struct IAudioCaptureEffectsManagerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var AudioCaptureEffectsChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveAudioCaptureEffectsChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAudioCaptureEffects: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAudioCaptureEffects: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1041,6 +1042,7 @@ public class IAudioCaptureEffectsManager <: InterfaceWrapperBase & ComInterface 
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAudioCaptureEffects(): windows_collections.IVectorView<AudioEffect> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1671,7 +1673,10 @@ public struct IAudioRenderEffectsManagerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var AudioRenderEffectsChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveAudioRenderEffectsChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAudioRenderEffects: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAudioRenderEffects: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1754,6 +1759,7 @@ public class IAudioRenderEffectsManager <: InterfaceWrapperBase & ComInterface &
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAudioRenderEffects(): windows_collections.IVectorView<AudioEffect> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1876,9 +1882,9 @@ extend IAudioRenderEffectsManager2 <: windows_core.Interface<IAudioRenderEffects
 public struct IBasicAudioEffectVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var UseInputFrameForOutput: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Media_MediaProperties == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_MediaProperties == "on"]
     public var SupportedEncodingProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Media_MediaProperties != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Media_MediaProperties != "on"]
     public var SupportedEncodingProperties: UIntNative = UIntNative(0)
     @When[Windows_Media_MediaProperties == "on"]
     public var SetEncodingProperties: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1889,7 +1895,7 @@ public struct IBasicAudioEffectVtbl {
     public var DiscardQueuedFrames: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
     public init() {}
 
-    @When[(((Windows_Media == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_MediaProperties == "on")) && (Windows_Foundation_Collections == "on")]
+    @When[(((Windows_Media == "on") && (Windows_Foundation_Collections == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Media_MediaProperties == "on")) && (Windows_Foundation_Collections == "on")]
     public static func new<Identity>(offset!: Int64 = 0): IBasicAudioEffectVtbl where Identity <: IBasicAudioEffect_Impl {
         let _ = offset
         var vtbl = IBasicAudioEffectVtbl()
@@ -1931,7 +1937,7 @@ public struct IBasicAudioEffectVtbl {
         return vtbl
     }
 
-    @When[((((Windows_Media == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_MediaProperties == "on")) && (Windows_Foundation_Collections == "on")) && Windows_Media_MediaProperties == "on"]
+    @When[((((Windows_Media == "on") && (Windows_Foundation_Collections == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Media_MediaProperties == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Foundation_Collections == "on" && Windows_Media_MediaProperties == "on")]
     public static func __assignSupportedEncodingProperties<Identity>(vtbl: IBasicAudioEffectVtbl): IBasicAudioEffectVtbl where Identity <: IBasicAudioEffect_Impl {
         var next = vtbl
         next.SupportedEncodingProperties = { instanceRaw, result__ =>
@@ -1945,12 +1951,12 @@ public struct IBasicAudioEffectVtbl {
         return next
     }
 
-    @When[((((Windows_Media == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_MediaProperties == "on")) && (Windows_Foundation_Collections == "on")) && Windows_Media_MediaProperties != "on"]
+    @When[((((Windows_Media == "on") && (Windows_Foundation_Collections == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Media_MediaProperties == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Foundation_Collections != "on" || Windows_Media_MediaProperties != "on")]
     public static func __assignSupportedEncodingProperties<Identity>(vtbl: IBasicAudioEffectVtbl): IBasicAudioEffectVtbl where Identity <: IBasicAudioEffect_Impl {
         return vtbl
     }
 
-    @When[((((Windows_Media == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_MediaProperties == "on")) && (Windows_Foundation_Collections == "on")) && Windows_Media_MediaProperties == "on"]
+    @When[((((Windows_Media == "on") && (Windows_Foundation_Collections == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Media_MediaProperties == "on")) && (Windows_Foundation_Collections == "on")) && Windows_Media_MediaProperties == "on"]
     public static func __assignSetEncodingProperties<Identity>(vtbl: IBasicAudioEffectVtbl): IBasicAudioEffectVtbl where Identity <: IBasicAudioEffect_Impl {
         var next = vtbl
         next.SetEncodingProperties = { instanceRaw, arg0 =>
@@ -1964,7 +1970,7 @@ public struct IBasicAudioEffectVtbl {
         return next
     }
 
-    @When[((((Windows_Media == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_MediaProperties == "on")) && (Windows_Foundation_Collections == "on")) && Windows_Media_MediaProperties != "on"]
+    @When[((((Windows_Media == "on") && (Windows_Foundation_Collections == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Media_MediaProperties == "on")) && (Windows_Foundation_Collections == "on")) && Windows_Media_MediaProperties != "on"]
     public static func __assignSetEncodingProperties<Identity>(vtbl: IBasicAudioEffectVtbl): IBasicAudioEffectVtbl where Identity <: IBasicAudioEffect_Impl {
         return vtbl
     }
@@ -1982,7 +1988,7 @@ public struct IBasicAudioEffectVtbl {
     }
 }
 
-@When[Windows_Media_Effects == "on" && ((((Windows_Media == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_MediaProperties == "on")) && (Windows_Foundation_Collections == "on"))]
+@When[Windows_Media_Effects == "on" && ((((Windows_Media == "on") && (Windows_Foundation_Collections == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Media_MediaProperties == "on")) && (Windows_Foundation_Collections == "on"))]
 public interface IBasicAudioEffect_ImplErased {
     public func __winrtThunk_UseInputFrameForOutput(result__: CPointer<Bool>): Int32
 
@@ -1997,7 +2003,7 @@ public interface IBasicAudioEffect_ImplErased {
     public func __winrtThunk_DiscardQueuedFrames(): Int32
 }
 
-@When[Windows_Media_Effects == "on" && ((((Windows_Media == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_MediaProperties == "on")) && (Windows_Foundation_Collections == "on"))]
+@When[Windows_Media_Effects == "on" && ((((Windows_Media == "on") && (Windows_Foundation_Collections == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Media_MediaProperties == "on")) && (Windows_Foundation_Collections == "on"))]
 public interface IBasicAudioEffect_Impl <: IBasicAudioEffect_ImplErased & Media.IMediaExtension_Impl {
     public func UseInputFrameForOutput(): windows_core.Result<Bool>
 
@@ -2173,7 +2179,7 @@ public class IBasicAudioEffect <: InterfaceWrapperBase & ComInterface & RuntimeN
         return result__
     }
 
-    @When[Windows_Media_MediaProperties == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_MediaProperties == "on"]
     public unsafe func SupportedEncodingProperties(): windows_collections.IVectorView<AudioEncodingProperties> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2218,9 +2224,9 @@ public struct IBasicVideoEffectVtbl {
     public var IsReadOnly: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SupportedMemoryTypes: CFunc<(CPointer<Unit>, CPointer<MediaMemoryTypesAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var TimeIndependent: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Media_MediaProperties == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_MediaProperties == "on"]
     public var SupportedEncodingProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Media_MediaProperties != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Media_MediaProperties != "on"]
     public var SupportedEncodingProperties: UIntNative = UIntNative(0)
     @When[Windows_Graphics_DirectX_Direct3D11 == "on" && Windows_Media_MediaProperties == "on"]
     public var SetEncodingProperties: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -2231,7 +2237,7 @@ public struct IBasicVideoEffectVtbl {
     public var DiscardQueuedFrames: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
     public init() {}
 
-    @When[(((Windows_Media == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Graphics_DirectX_Direct3D11 == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Foundation_Collections == "on")]
+    @When[(((Windows_Media == "on") && (Windows_Foundation_Collections == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Graphics_DirectX_Direct3D11 == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Foundation_Collections == "on")]
     public static func new<Identity>(offset!: Int64 = 0): IBasicVideoEffectVtbl where Identity <: IBasicVideoEffect_Impl {
         let _ = offset
         var vtbl = IBasicVideoEffectVtbl()
@@ -2289,7 +2295,7 @@ public struct IBasicVideoEffectVtbl {
         return vtbl
     }
 
-    @When[((((Windows_Media == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Graphics_DirectX_Direct3D11 == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Foundation_Collections == "on")) && Windows_Media_MediaProperties == "on"]
+    @When[((((Windows_Media == "on") && (Windows_Foundation_Collections == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Graphics_DirectX_Direct3D11 == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Foundation_Collections == "on" && Windows_Media_MediaProperties == "on")]
     public static func __assignSupportedEncodingProperties<Identity>(vtbl: IBasicVideoEffectVtbl): IBasicVideoEffectVtbl where Identity <: IBasicVideoEffect_Impl {
         var next = vtbl
         next.SupportedEncodingProperties = { instanceRaw, result__ =>
@@ -2303,12 +2309,12 @@ public struct IBasicVideoEffectVtbl {
         return next
     }
 
-    @When[((((Windows_Media == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Graphics_DirectX_Direct3D11 == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Foundation_Collections == "on")) && Windows_Media_MediaProperties != "on"]
+    @When[((((Windows_Media == "on") && (Windows_Foundation_Collections == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Graphics_DirectX_Direct3D11 == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Foundation_Collections != "on" || Windows_Media_MediaProperties != "on")]
     public static func __assignSupportedEncodingProperties<Identity>(vtbl: IBasicVideoEffectVtbl): IBasicVideoEffectVtbl where Identity <: IBasicVideoEffect_Impl {
         return vtbl
     }
 
-    @When[((((Windows_Media == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Graphics_DirectX_Direct3D11 == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Graphics_DirectX_Direct3D11 == "on" && Windows_Media_MediaProperties == "on")]
+    @When[((((Windows_Media == "on") && (Windows_Foundation_Collections == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Graphics_DirectX_Direct3D11 == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Graphics_DirectX_Direct3D11 == "on" && Windows_Media_MediaProperties == "on")]
     public static func __assignSetEncodingProperties<Identity>(vtbl: IBasicVideoEffectVtbl): IBasicVideoEffectVtbl where Identity <: IBasicVideoEffect_Impl {
         var next = vtbl
         next.SetEncodingProperties = { instanceRaw, arg0, arg1 =>
@@ -2322,7 +2328,7 @@ public struct IBasicVideoEffectVtbl {
         return next
     }
 
-    @When[((((Windows_Media == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Graphics_DirectX_Direct3D11 == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Graphics_DirectX_Direct3D11 != "on" || Windows_Media_MediaProperties != "on")]
+    @When[((((Windows_Media == "on") && (Windows_Foundation_Collections == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Graphics_DirectX_Direct3D11 == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Graphics_DirectX_Direct3D11 != "on" || Windows_Media_MediaProperties != "on")]
     public static func __assignSetEncodingProperties<Identity>(vtbl: IBasicVideoEffectVtbl): IBasicVideoEffectVtbl where Identity <: IBasicVideoEffect_Impl {
         return vtbl
     }
@@ -2340,7 +2346,7 @@ public struct IBasicVideoEffectVtbl {
     }
 }
 
-@When[Windows_Media_Effects == "on" && ((((Windows_Media == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Graphics_DirectX_Direct3D11 == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Foundation_Collections == "on"))]
+@When[Windows_Media_Effects == "on" && ((((Windows_Media == "on") && (Windows_Foundation_Collections == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Graphics_DirectX_Direct3D11 == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Foundation_Collections == "on"))]
 public interface IBasicVideoEffect_ImplErased {
     public func __winrtThunk_IsReadOnly(result__: CPointer<Bool>): Int32
 
@@ -2359,7 +2365,7 @@ public interface IBasicVideoEffect_ImplErased {
     public func __winrtThunk_DiscardQueuedFrames(): Int32
 }
 
-@When[Windows_Media_Effects == "on" && ((((Windows_Media == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Graphics_DirectX_Direct3D11 == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Foundation_Collections == "on"))]
+@When[Windows_Media_Effects == "on" && ((((Windows_Media == "on") && (Windows_Foundation_Collections == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Graphics_DirectX_Direct3D11 == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Foundation_Collections == "on"))]
 public interface IBasicVideoEffect_Impl <: IBasicVideoEffect_ImplErased & Media.IMediaExtension_Impl {
     public func IsReadOnly(): windows_core.Result<Bool>
 
@@ -2581,7 +2587,7 @@ public class IBasicVideoEffect <: InterfaceWrapperBase & ComInterface & RuntimeN
         return result__
     }
 
-    @When[Windows_Media_MediaProperties == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_MediaProperties == "on"]
     public unsafe func SupportedEncodingProperties(): windows_collections.IVectorView<VideoEncodingProperties> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2623,9 +2629,9 @@ extend IBasicVideoEffect <: windows_core.Interface<IBasicVideoEffect> {}
 @C
 public struct ICompositeVideoFrameContextVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Graphics_DirectX_Direct3D11 == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_DirectX_Direct3D11 == "on"]
     public var SurfacesToOverlay: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Graphics_DirectX_Direct3D11 != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Graphics_DirectX_Direct3D11 != "on"]
     public var SurfacesToOverlay: UIntNative = UIntNative(0)
     @When[Windows_Media == "on"]
     public var BackgroundFrame: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -2707,7 +2713,7 @@ public class ICompositeVideoFrameContext <: InterfaceWrapperBase & ComInterface 
         readVtbl<ICompositeVideoFrameContextVtbl>(ICompositeVideoFrameContextVtbl())
     }
 
-    @When[Windows_Graphics_DirectX_Direct3D11 == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_DirectX_Direct3D11 == "on"]
     public unsafe func SurfacesToOverlay(): windows_collections.IVectorView<Graphics_DirectX_Direct3D11.IDirect3DSurface> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

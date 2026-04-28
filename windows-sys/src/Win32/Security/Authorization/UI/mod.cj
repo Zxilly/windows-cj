@@ -3,9 +3,7 @@ package windows_sys.Win32.Security.Authorization.UI
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Security == "on"]
 import windows_sys.Win32.Security as Win32_Security
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
@@ -736,17 +734,36 @@ public class ISecurityInformation <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[ACLUI == "on"]
-foreign {
-    // pinvoke-hint: SetLastError
-    func EditSecurity(hwndOwner: CPointer<Unit>, psi: CPointer<Unit>): Int32
-    func EditSecurityAdvanced(hwndOwner: CPointer<Unit>, psi: CPointer<Unit>, uSIPage: Int32): Int32
-}
-
-@When[ACLUI == "on" && Windows_Win32_UI_Controls == "on"]
+@When[Windows_Win32_Security_Authorization_UI == "on" && ACLUI == "on" && Windows_Win32_Security_Authorization_UI_CreateSecurityPage == "on" && Windows_Win32_UI_Controls == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func CreateSecurityPage(psi: CPointer<Unit>): Win32__impl_l0.HPROPSHEETPAGE
+}
+
+@When[Windows_Win32_Security_Authorization_UI == "on" && ACLUI == "on" && Windows_Win32_Security_Authorization_UI_CreateSecurityPage == "on" && Windows_Win32_UI_Controls == "on"]
+public unsafe func Windows_CreateSecurityPage(psi: CPointer<Unit>): Win32__impl_l0.HPROPSHEETPAGE {
+    return CreateSecurityPage(psi)
+}
+
+@When[Windows_Win32_Security_Authorization_UI == "on" && ACLUI == "on" && Windows_Win32_Security_Authorization_UI_EditSecurity == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func EditSecurity(hwndOwner: CPointer<Unit>, psi: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Security_Authorization_UI == "on" && ACLUI == "on" && Windows_Win32_Security_Authorization_UI_EditSecurity == "on"]
+public unsafe func Windows_EditSecurity(hwndOwner: CPointer<Unit>, psi: CPointer<Unit>): Int32 {
+    return EditSecurity(hwndOwner, psi)
+}
+
+@When[Windows_Win32_Security_Authorization_UI == "on" && ACLUI == "on" && Windows_Win32_Security_Authorization_UI_EditSecurityAdvanced == "on"]
+foreign {
+    func EditSecurityAdvanced(hwndOwner: CPointer<Unit>, psi: CPointer<Unit>, uSIPage: Int32): Int32
+}
+
+@When[Windows_Win32_Security_Authorization_UI == "on" && ACLUI == "on" && Windows_Win32_Security_Authorization_UI_EditSecurityAdvanced == "on"]
+public unsafe func Windows_EditSecurityAdvanced(hwndOwner: CPointer<Unit>, psi: CPointer<Unit>, uSIPage: Int32): Int32 {
+    return EditSecurityAdvanced(hwndOwner, psi, uSIPage)
 }
 
 @When[Windows_Win32_Security_Authorization_UI == "on"]

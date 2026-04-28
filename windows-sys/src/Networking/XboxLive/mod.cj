@@ -970,6 +970,7 @@ public struct IXboxLiveEndpointPairTemplateVtbl {
     public var InitiatorBoundPortRangeUpper: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var AcceptorBoundPortRangeLower: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var AcceptorBoundPortRangeUpper: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var EndpointPairs: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1086,6 +1087,7 @@ public class IXboxLiveEndpointPairTemplate <: InterfaceWrapperBase & ComInterfac
         return __vt.AcceptorBoundPortRangeUpper(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func EndpointPairs(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1098,6 +1100,7 @@ public class IXboxLiveEndpointPairTemplate <: InterfaceWrapperBase & ComInterfac
 public struct IXboxLiveEndpointPairTemplateStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var GetTemplateByName: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Templates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1148,6 +1151,7 @@ public class IXboxLiveEndpointPairTemplateStatics <: InterfaceWrapperBase & ComI
         return __vt.GetTemplateByName(__liveRaw, name, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Templates(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1215,11 +1219,15 @@ public class IXboxLiveInboundEndpointPairCreatedEventArgs <: InterfaceWrapperBas
 public struct IXboxLiveQualityOfServiceMeasurementVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var MeasureAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetMetricResultsForDevice: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetMetricResultsForMetric: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetMetricResult: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var GetPrivatePayloadResult: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Metrics: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var DeviceAddresses: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ShouldRequestPrivatePayloads: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var SetShouldRequestPrivatePayloads: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
@@ -1228,7 +1236,9 @@ public struct IXboxLiveQualityOfServiceMeasurementVtbl {
     public var NumberOfProbesToAttempt: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var SetNumberOfProbesToAttempt: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     public var NumberOfResultsPending: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var MetricResults: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var PrivatePayloadResults: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1279,12 +1289,14 @@ public class IXboxLiveQualityOfServiceMeasurement <: InterfaceWrapperBase & ComI
         return __vt.MeasureAsync(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetMetricResultsForDevice(deviceAddress: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetMetricResultsForDevice(__liveRaw, deviceAddress, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetMetricResultsForMetric(metric: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1303,12 +1315,14 @@ public class IXboxLiveQualityOfServiceMeasurement <: InterfaceWrapperBase & ComI
         return __vt.GetPrivatePayloadResult(__liveRaw, deviceAddress, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Metrics(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Metrics(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DeviceAddresses(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1357,12 +1371,14 @@ public class IXboxLiveQualityOfServiceMeasurement <: InterfaceWrapperBase & ComI
         return __vt.NumberOfResultsPending(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MetricResults(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.MetricResults(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PrivatePayloadResults(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

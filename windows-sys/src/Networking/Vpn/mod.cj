@@ -70,7 +70,7 @@ public class IVpnChannel6 <: InterfaceWrapperBase & ComInterface {
 public struct IVpnChannelConfigurationVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var ServerServiceName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public var ServerHostNameList: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CustomField: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -122,7 +122,7 @@ public class IVpnChannelConfiguration <: InterfaceWrapperBase & ComInterface {
         return __vt.ServerServiceName(__liveRaw, result__)
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func ServerHostNameList(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -140,6 +140,7 @@ public class IVpnChannelConfiguration <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IVpnChannelConfiguration2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ServerUris: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -184,6 +185,7 @@ public class IVpnChannelConfiguration2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IVpnChannelConfiguration2Vtbl>(IVpnChannelConfiguration2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ServerUris(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -512,6 +514,7 @@ public class IVpnCustomPromptElement <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IVpnCustomPromptOptionSelectorVtbl {
     public var base_: IVpnCustomPromptElementVtbl = IVpnCustomPromptElementVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Options: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SelectedIndex: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -557,6 +560,7 @@ public class IVpnCustomPromptOptionSelector <: InterfaceWrapperBase & ComInterfa
         readVtbl<IVpnCustomPromptOptionSelectorVtbl>(IVpnCustomPromptOptionSelectorVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Options(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -781,6 +785,7 @@ public class IVpnCustomTextBox <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IVpnDomainNameInfo2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var WebProxyUris: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -825,6 +830,7 @@ public class IVpnDomainNameInfo2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IVpnDomainNameInfo2Vtbl>(IVpnDomainNameInfo2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func WebProxyUris(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -950,13 +956,13 @@ public struct IVpnNamespaceInfoVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var SetNamespace: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Namespace: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public var SetDnsServers: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public var DnsServers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public var SetWebProxyServers: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public var WebProxyServers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1013,28 +1019,28 @@ public class IVpnNamespaceInfo <: InterfaceWrapperBase & ComInterface {
         return __vt.Namespace(__liveRaw, result__)
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func SetDnsServers(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetDnsServers(__liveRaw, value)
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func DnsServers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DnsServers(__liveRaw, result__)
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func SetWebProxyServers(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetWebProxyServers(__liveRaw, value)
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func WebProxyServers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2004,7 +2010,9 @@ public class IVpnCustomCheckBox <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IVpnCustomComboBoxVtbl {
     public var base_: IVpnCustomPromptVtbl = IVpnCustomPromptVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SetOptionsText: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var OptionsText: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Selected: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -2050,12 +2058,14 @@ public class IVpnCustomComboBox <: InterfaceWrapperBase & ComInterface {
         readVtbl<IVpnCustomComboBoxVtbl>(IVpnCustomComboBoxVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetOptionsText(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetOptionsText(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OptionsText(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2279,9 +2289,9 @@ public struct IVpnDomainNameInfoVtbl {
     public var DomainName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetDomainNameType: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var DomainNameType: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public var DnsServers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public var WebProxyServers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -2352,14 +2362,14 @@ public class IVpnDomainNameInfo <: InterfaceWrapperBase & ComInterface {
         return __vt.DomainNameType(__liveRaw, result__)
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func DnsServers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DnsServers(__liveRaw, result__)
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func WebProxyServers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2652,7 +2662,7 @@ public class IVpnAppIdFactory <: InterfaceWrapperBase & ComInterface {
 public struct IVpnChannelVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var AssociateTransport: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public var Start: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32, UInt32, Bool, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _ => 0 }
     public var Stop: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     @When[Windows_Security_Cryptography_Certificates == "on"]
@@ -2666,6 +2676,7 @@ public struct IVpnChannelVtbl {
     public var SetPlugInContext: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var PlugInContext: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SystemHealth: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var RequestCustomPrompt: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var SetErrorMessage: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var SetAllowedSslTlsVersions: CFunc<(CPointer<Unit>, CPointer<Unit>, Bool) -> Int32> = { _, _, _ => 0 }
@@ -2718,7 +2729,7 @@ public class IVpnChannel <: InterfaceWrapperBase & ComInterface {
         return __vt.AssociateTransport(__liveRaw, mainOuterTunnelTransport, optionalOuterTunnelTransport)
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func Start(assignedClientIPv4list: CPointer<Unit>, assignedClientIPv6list: CPointer<Unit>, vpnInterfaceId: CPointer<Unit>, routeScope: CPointer<Unit>, namespaceScope: CPointer<Unit>, mtuSize: UInt32, maxFrameSize: UInt32, optimizeForLowCostNetwork: Bool, mainOuterTunnelTransport: CPointer<Unit>, optionalOuterTunnelTransport: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2792,6 +2803,7 @@ public class IVpnChannel <: InterfaceWrapperBase & ComInterface {
         return __vt.SystemHealth(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RequestCustomPrompt(customPrompt: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2815,21 +2827,22 @@ public class IVpnChannel <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IVpnChannel2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public var StartWithMainTransport: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32, UInt32, Bool, CPointer<Unit>) -> Int32> = { _, _, _, _, _, _, _, _, _, _ => 0 }
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public var StartExistingTransports: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32, UInt32, Bool) -> Int32> = { _, _, _, _, _, _, _, _, _ => 0 }
     public var ActivityStateChange: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveActivityStateChange: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
     public var GetVpnSendPacketBuffer: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetVpnReceivePacketBuffer: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var RequestCustomPromptAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Security_Cryptography_Certificates == "on"]
     public var RequestCredentialsWithCertificateAsync: CFunc<(CPointer<Unit>, Int32, UInt32, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var RequestCredentialsWithOptionsAsync: CFunc<(CPointer<Unit>, Int32, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var RequestCredentialsSimpleAsync: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var TerminateConnection: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public var StartWithTrafficFilter: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32, UInt32, Bool, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -2874,14 +2887,14 @@ public class IVpnChannel2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IVpnChannel2Vtbl>(IVpnChannel2Vtbl())
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func StartWithMainTransport(assignedClientIPv4list: CPointer<Unit>, assignedClientIPv6list: CPointer<Unit>, vpnInterfaceId: CPointer<Unit>, assignedRoutes: CPointer<Unit>, assignedDomainName: CPointer<Unit>, mtuSize: UInt32, maxFrameSize: UInt32, Reserved: Bool, mainOuterTunnelTransport: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.StartWithMainTransport(__liveRaw, assignedClientIPv4list, assignedClientIPv6list, vpnInterfaceId, assignedRoutes, assignedDomainName, mtuSize, maxFrameSize, Reserved, mainOuterTunnelTransport)
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func StartExistingTransports(assignedClientIPv4list: CPointer<Unit>, assignedClientIPv6list: CPointer<Unit>, vpnInterfaceId: CPointer<Unit>, assignedRoutes: CPointer<Unit>, assignedDomainName: CPointer<Unit>, mtuSize: UInt32, maxFrameSize: UInt32, Reserved: Bool): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2912,6 +2925,7 @@ public class IVpnChannel2 <: InterfaceWrapperBase & ComInterface {
         return __vt.GetVpnReceivePacketBuffer(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RequestCustomPromptAsync(customPromptElement: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2943,7 +2957,7 @@ public class IVpnChannel2 <: InterfaceWrapperBase & ComInterface {
         return __vt.TerminateConnection(__liveRaw, message)
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func StartWithTrafficFilter(assignedClientIpv4List: CPointer<Unit>, assignedClientIpv6List: CPointer<Unit>, vpnInterfaceId: CPointer<Unit>, assignedRoutes: CPointer<Unit>, assignedNamespace: CPointer<Unit>, mtuSize: UInt32, maxFrameSize: UInt32, reserved: Bool, mainOuterTunnelTransport: CPointer<Unit>, optionalOuterTunnelTransport: CPointer<Unit>, assignedTrafficFilters: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2956,7 +2970,7 @@ public class IVpnChannel2 <: InterfaceWrapperBase & ComInterface {
 public struct IVpnChannel4Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var AddAndAssociateTransport: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public var StartWithMultipleTransports: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32, UInt32, Bool, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _ => 0 }
     public var ReplaceAndAssociateTransport: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     public var StartReconnectingTransport: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
@@ -3012,7 +3026,7 @@ public class IVpnChannel4 <: InterfaceWrapperBase & ComInterface {
         return __vt.AddAndAssociateTransport(__liveRaw, transport, context)
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func StartWithMultipleTransports(assignedClientIpv4Addresses: CPointer<Unit>, assignedClientIpv6Addresses: CPointer<Unit>, vpninterfaceId: CPointer<Unit>, assignedRoutes: CPointer<Unit>, assignedNamespace: CPointer<Unit>, mtuSize: UInt32, maxFrameSize: UInt32, reserved: Bool, transports: CPointer<Unit>, assignedTrafficFilters: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3125,6 +3139,7 @@ public class IVpnChannel5 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IVpnDomainNameAssignmentVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var DomainNameList: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetProxyAutoConfigurationUri: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var ProxyAutoConfigurationUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -3171,6 +3186,7 @@ public class IVpnDomainNameAssignment <: InterfaceWrapperBase & ComInterface {
         readVtbl<IVpnDomainNameAssignmentVtbl>(IVpnDomainNameAssignmentVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DomainNameList(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3194,7 +3210,7 @@ public class IVpnDomainNameAssignment <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IVpnDomainNameInfoFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public var CreateVpnDomainNameInfo: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -3239,7 +3255,7 @@ public class IVpnDomainNameInfoFactory <: InterfaceWrapperBase & ComInterface {
         readVtbl<IVpnDomainNameInfoFactoryVtbl>(IVpnDomainNameInfoFactoryVtbl())
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func CreateVpnDomainNameInfo(name: CPointer<Unit>, nameType: Int32, dnsServerList: CPointer<Unit>, proxyServerList: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3310,6 +3326,7 @@ public struct IVpnManagementAgentVtbl {
     public var AddProfileFromObjectAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var UpdateProfileFromXmlAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var UpdateProfileFromObjectAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetProfilesAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var DeleteProfileAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var ConnectProfileAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -3383,6 +3400,7 @@ public class IVpnManagementAgent <: InterfaceWrapperBase & ComInterface {
         return __vt.UpdateProfileFromObjectAsync(__liveRaw, profile, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetProfilesAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3419,7 +3437,9 @@ public class IVpnManagementAgent <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IVpnNamespaceAssignmentVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SetNamespaceList: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var NamespaceList: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetProxyAutoConfigUri: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var ProxyAutoConfigUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -3466,12 +3486,14 @@ public class IVpnNamespaceAssignment <: InterfaceWrapperBase & ComInterface {
         readVtbl<IVpnNamespaceAssignmentVtbl>(IVpnNamespaceAssignmentVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetNamespaceList(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetNamespaceList(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func NamespaceList(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3495,7 +3517,7 @@ public class IVpnNamespaceAssignment <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IVpnNamespaceInfoFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public var CreateVpnNamespaceInfo: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -3540,7 +3562,7 @@ public class IVpnNamespaceInfoFactory <: InterfaceWrapperBase & ComInterface {
         readVtbl<IVpnNamespaceInfoFactoryVtbl>(IVpnNamespaceInfoFactoryVtbl())
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func CreateVpnNamespaceInfo(name: CPointer<Unit>, dnsServerList: CPointer<Unit>, proxyServerList: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3552,6 +3574,7 @@ public class IVpnNamespaceInfoFactory <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IVpnNativeProfileVtbl {
     public var base_: IVpnProfileVtbl = IVpnProfileVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Servers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var RoutingPolicyType: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetRoutingPolicyType: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -3606,6 +3629,7 @@ public class IVpnNativeProfile <: InterfaceWrapperBase & ComInterface {
         readVtbl<IVpnNativeProfileVtbl>(IVpnNativeProfileVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Servers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3970,7 +3994,9 @@ public struct IVpnPlugInVtbl {
     public var Connect: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Disconnect: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var GetKeepAlivePayload: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Encapsulate: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Decapsulate: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -4033,12 +4059,14 @@ public class IVpnPlugIn <: InterfaceWrapperBase & ComInterface {
         return __vt.GetKeepAlivePayload(__liveRaw, channel, keepAlivePacket)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Encapsulate(channel: CPointer<Unit>, packets: CPointer<Unit>, encapulatedPackets: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Encapsulate(__liveRaw, channel, packets, encapulatedPackets)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Decapsulate(channel: CPointer<Unit>, encapBuffer: CPointer<Unit>, decapsulatedPackets: CPointer<Unit>, controlPacketsToSend: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4050,6 +4078,7 @@ public class IVpnPlugIn <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IVpnPlugInProfileVtbl {
     public var base_: IVpnProfileVtbl = IVpnProfileVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ServerUris: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CustomConfiguration: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetCustomConfiguration: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -4098,6 +4127,7 @@ public class IVpnPlugInProfile <: InterfaceWrapperBase & ComInterface {
         readVtbl<IVpnPlugInProfileVtbl>(IVpnPlugInProfileVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ServerUris(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4259,9 +4289,13 @@ public struct IVpnProfileVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var ProfileName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetProfileName: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var AppTriggers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Routes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var DomainNameInfoList: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var TrafficFilters: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var RememberCredentials: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var SetRememberCredentials: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
@@ -4322,24 +4356,28 @@ public class IVpnProfile <: InterfaceWrapperBase & ComInterface {
         return __vt.SetProfileName(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AppTriggers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AppTriggers(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Routes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Routes(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DomainNameInfoList(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DomainNameInfoList(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TrafficFilters(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4375,13 +4413,21 @@ public class IVpnProfile <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IVpnRouteAssignmentVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SetIpv4InclusionRoutes: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetIpv6InclusionRoutes: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Ipv4InclusionRoutes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Ipv6InclusionRoutes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetIpv4ExclusionRoutes: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetIpv6ExclusionRoutes: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Ipv4ExclusionRoutes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Ipv6ExclusionRoutes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetExcludeLocalSubnets: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
     public var ExcludeLocalSubnets: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
@@ -4428,48 +4474,56 @@ public class IVpnRouteAssignment <: InterfaceWrapperBase & ComInterface {
         readVtbl<IVpnRouteAssignmentVtbl>(IVpnRouteAssignmentVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetIpv4InclusionRoutes(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetIpv4InclusionRoutes(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetIpv6InclusionRoutes(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetIpv6InclusionRoutes(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Ipv4InclusionRoutes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Ipv4InclusionRoutes(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Ipv6InclusionRoutes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Ipv6InclusionRoutes(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetIpv4ExclusionRoutes(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetIpv4ExclusionRoutes(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetIpv6ExclusionRoutes(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetIpv6ExclusionRoutes(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Ipv4ExclusionRoutes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Ipv4ExclusionRoutes(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Ipv6ExclusionRoutes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4552,12 +4606,17 @@ public struct IVpnTrafficFilterVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var AppId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetAppId: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var AppClaims: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Protocol: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetProtocol: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var LocalPortRanges: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var RemotePortRanges: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var LocalAddressRanges: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var RemoteAddressRanges: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var RoutingPolicyType: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetRoutingPolicyType: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -4616,6 +4675,7 @@ public class IVpnTrafficFilter <: InterfaceWrapperBase & ComInterface {
         return __vt.SetAppId(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AppClaims(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4634,24 +4694,28 @@ public class IVpnTrafficFilter <: InterfaceWrapperBase & ComInterface {
         return __vt.SetProtocol(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func LocalPortRanges(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.LocalPortRanges(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RemotePortRanges(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RemotePortRanges(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func LocalAddressRanges(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.LocalAddressRanges(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RemoteAddressRanges(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4675,6 +4739,7 @@ public class IVpnTrafficFilter <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IVpnTrafficFilterAssignmentVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var TrafficFilterList: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var AllowOutbound: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var SetAllowOutbound: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
@@ -4723,6 +4788,7 @@ public class IVpnTrafficFilterAssignment <: InterfaceWrapperBase & ComInterface 
         readVtbl<IVpnTrafficFilterAssignmentVtbl>(IVpnTrafficFilterAssignmentVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TrafficFilterList(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

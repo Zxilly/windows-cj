@@ -1714,7 +1714,7 @@ public class CoreWindowDialog <: InterfaceWrapperBase & ComInterface & windows_i
         defaultInterface().SetIsInteractionDelayed(value)
     }
 
-    @When[Windows_UI_Popups == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Popups == "on"]
     public unsafe func Commands(): windows_collections.IVector<UI_Popups.IUICommand> {
         return defaultInterface().Commands()
     }
@@ -1877,7 +1877,7 @@ public class CoreWindowFlyout <: InterfaceWrapperBase & ComInterface & windows_i
         defaultInterface().SetIsInteractionDelayed(value)
     }
 
-    @When[Windows_UI_Popups == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Popups == "on"]
     public unsafe func Commands(): windows_collections.IVector<UI_Popups.IUICommand> {
         return defaultInterface().Commands()
     }
@@ -6840,9 +6840,9 @@ public struct ICoreWindowDialogVtbl {
     public var SetTitle: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsInteractionDelayed: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetIsInteractionDelayed: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Popups == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Popups == "on"]
     public var Commands: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Popups != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_UI_Popups != "on"]
     public var Commands: UIntNative = UIntNative(0)
     public var DefaultCommandIndex: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetDefaultCommandIndex: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -6986,7 +6986,7 @@ public class ICoreWindowDialog <: InterfaceWrapperBase & ComInterface & RuntimeN
         HRESULT(hr).ok()
     }
 
-    @When[Windows_UI_Popups == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Popups == "on"]
     public unsafe func Commands(): windows_collections.IVector<UI_Popups.IUICommand> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7149,9 +7149,9 @@ public struct ICoreWindowFlyoutVtbl {
     public var SetTitle: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsInteractionDelayed: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetIsInteractionDelayed: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Popups == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Popups == "on"]
     public var Commands: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Popups != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_UI_Popups != "on"]
     public var Commands: UIntNative = UIntNative(0)
     public var DefaultCommandIndex: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetDefaultCommandIndex: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -7293,7 +7293,7 @@ public class ICoreWindowFlyout <: InterfaceWrapperBase & ComInterface & RuntimeN
         HRESULT(hr).ok()
     }
 
-    @When[Windows_UI_Popups == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Popups == "on"]
     public unsafe func Commands(): windows_collections.IVector<UI_Popups.IUICommand> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7660,9 +7660,9 @@ public struct IPointerEventArgsVtbl {
     public var KeyModifiers: CFunc<(CPointer<Unit>, CPointer<_impl_l0.VirtualKeyModifiersAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_System != "on"]
     public var KeyModifiers: UIntNative = UIntNative(0)
-    @When[Windows_UI_Input == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Input == "on"]
     public var GetIntermediatePoints: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Input != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_UI_Input != "on"]
     public var GetIntermediatePoints: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -7762,7 +7762,7 @@ public class IPointerEventArgs <: InterfaceWrapperBase & ComInterface & RuntimeN
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.VirtualKeyModifiers>()).unwrap()
     }
 
-    @When[Windows_UI_Input == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Input == "on"]
     public unsafe func GetIntermediatePoints(): windows_collections.IVector<PointerPoint> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -8028,12 +8028,14 @@ public class IdleDispatchedHandler <: InterfaceWrapperBase & ComInterface & wind
 @When[Windows_UI_Core == "on"]
 extend IdleDispatchedHandler <: windows_core.Interface<IdleDispatchedHandler> {}
 
+@When[Windows_UI_Core == "on"]
 private open class IdleDispatchedHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Core == "on"]
 private open class IdleDispatchedHandlerInvoker <: IdleDispatchedHandlerInvokerErased {
     public open func Invoke(e: InParam<_impl_l0.IdleDispatchedHandlerArgs>): Unit {
         ()
@@ -8045,6 +8047,7 @@ private open class IdleDispatchedHandlerInvoker <: IdleDispatchedHandlerInvokerE
     }
 }
 
+@When[Windows_UI_Core == "on"]
 private class IdleDispatchedHandlerBox <: IdleDispatchedHandlerInvoker {
     public let invoke_: (InParam<_impl_l0.IdleDispatchedHandlerArgs>) -> Unit
     private let vtblHandle: CPointerHandle<IdleDispatchedHandlerVtbl>
@@ -8063,6 +8066,7 @@ private class IdleDispatchedHandlerBox <: IdleDispatchedHandlerInvoker {
     }
 }
 
+@When[Windows_UI_Core == "on"]
 func buildIdleDispatchedHandlerBoxVtbl(): IdleDispatchedHandlerVtbl {
     var vtbl = IdleDispatchedHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -8370,7 +8374,7 @@ public class PointerEventArgs <: InterfaceWrapperBase & ComInterface & windows_i
         return defaultInterface().KeyModifiers()
     }
 
-    @When[Windows_UI_Input == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Input == "on"]
     public unsafe func GetIntermediatePoints(): windows_collections.IVector<PointerPoint> {
         return defaultInterface().GetIntermediatePoints()
     }

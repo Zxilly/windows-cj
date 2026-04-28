@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_ApplicationModel_Payments == "on"]
 import windows.ApplicationModel.Payments as ApplicationModel_Payments
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -120,7 +119,10 @@ extend IPaymentAppCanMakePaymentTriggerDetails <: windows_core.Interface<IPaymen
 @C
 public struct IPaymentAppManagerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var RegisterAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RegisterAsync: UIntNative = UIntNative(0)
     public var UnregisterAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -190,6 +192,7 @@ public class IPaymentAppManager <: InterfaceWrapperBase & ComInterface & Runtime
         readVtbl<IPaymentAppManagerVtbl>(IPaymentAppManagerVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RegisterAsync(supportedPaymentMethodIds: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -912,6 +915,7 @@ public class PaymentAppManager <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RegisterAsync(supportedPaymentMethodIds: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncAction {
         return defaultInterface().RegisterAsync(supportedPaymentMethodIds)
     }

@@ -4,7 +4,6 @@ package windows_sys.UI.Xaml._impl_l0
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_UI == "on"]
 import windows_sys.UI as UI
 @When[Windows_UI_Xaml_Interop == "on"]
 import windows_sys.UI.Xaml.Interop as UI_Xaml_Interop
@@ -4273,7 +4272,7 @@ public struct ICalendarViewDayItemVtbl {
     public var IsBlackout: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var SetIsBlackout: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
     public var Date: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.DateTime>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI == "on"]
     public var SetDensityColors: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -4336,7 +4335,7 @@ public class ICalendarViewDayItem <: InterfaceWrapperBase & ComInterface {
         return __vt.Date(__liveRaw, result__)
     }
 
-    @When[Windows_UI == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI == "on"]
     public unsafe func SetDensityColors(colors: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4414,7 +4413,9 @@ public class ICalendarViewDayItemStatics <: InterfaceWrapperBase & ComInterface 
 @C
 public struct ICalendarViewSelectedDatesChangedEventArgsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AddedDates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var RemovedDates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -4459,12 +4460,14 @@ public class ICalendarViewSelectedDatesChangedEventArgs <: InterfaceWrapperBase 
         readVtbl<ICalendarViewSelectedDatesChangedEventArgsVtbl>(ICalendarViewSelectedDatesChangedEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AddedDates(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AddedDates(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RemovedDates(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -6731,7 +6734,9 @@ public class IComboBoxTextSubmittedEventArgs <: InterfaceWrapperBase & ComInterf
 @C
 public struct ICommandBarVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var PrimaryCommands: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SecondaryCommands: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -6776,12 +6781,14 @@ public class ICommandBar <: InterfaceWrapperBase & ComInterface {
         readVtbl<ICommandBarVtbl>(ICommandBarVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PrimaryCommands(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PrimaryCommands(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SecondaryCommands(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -6924,7 +6931,9 @@ public class ICommandBarElement2 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ICommandBarFlyoutVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var PrimaryCommands: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SecondaryCommands: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -6969,12 +6978,14 @@ public class ICommandBarFlyout <: InterfaceWrapperBase & ComInterface {
         readVtbl<ICommandBarFlyoutVtbl>(ICommandBarFlyoutVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PrimaryCommands(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PrimaryCommands(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SecondaryCommands(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -10981,6 +10992,7 @@ public class IDatePickerValueChangedEventArgs <: InterfaceWrapperBase & ComInter
 @C
 public struct IDragItemsCompletedEventArgsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Items: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_ApplicationModel_DataTransfer == "on"]
     public var DropResult: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
@@ -11027,6 +11039,7 @@ public class IDragItemsCompletedEventArgs <: InterfaceWrapperBase & ComInterface
         readVtbl<IDragItemsCompletedEventArgsVtbl>(IDragItemsCompletedEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -11047,6 +11060,7 @@ public struct IDragItemsStartingEventArgsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Cancel: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var SetCancel: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Items: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_ApplicationModel_DataTransfer == "on"]
     public var Data: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -11105,6 +11119,7 @@ public class IDragItemsStartingEventArgs <: InterfaceWrapperBase & ComInterface 
         return __vt.SetCancel(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -16989,7 +17004,9 @@ public class IItemsPanelTemplate <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IItemsPickedEventArgsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AddedItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var RemovedItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -17034,12 +17051,14 @@ public class IItemsPickedEventArgs <: InterfaceWrapperBase & ComInterface {
         readVtbl<IItemsPickedEventArgsVtbl>(IItemsPickedEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AddedItems(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AddedItems(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RemovedItems(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -17993,6 +18012,7 @@ public class IItemsWrapGridStatics2 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IListBoxVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SelectedItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SelectionMode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetSelectionMode: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -18041,6 +18061,7 @@ public class IListBox <: InterfaceWrapperBase & ComInterface {
         readVtbl<IListBoxVtbl>(IListBoxVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SelectedItems(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -27310,6 +27331,7 @@ public class IRelativePanelStatics2 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IRichEditBox4Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetLinguisticAlternativesAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ClipboardCopyFormat: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetClipboardCopyFormat: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -27356,6 +27378,7 @@ public class IRichEditBox4 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IRichEditBox4Vtbl>(IRichEditBox4Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetLinguisticAlternativesAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -29504,6 +29527,7 @@ public struct IScrollViewerVtbl {
     public var MaxZoomFactor: CFunc<(CPointer<Unit>, CPointer<Float32>) -> Int32> = { _, _ => 0 }
     public var SetMaxZoomFactor: CFunc<(CPointer<Unit>, Float32) -> Int32> = { _, _ => 0 }
     public var ZoomFactor: CFunc<(CPointer<Unit>, CPointer<Float32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ZoomSnapPoints: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ViewChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveViewChanged: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
@@ -29858,6 +29882,7 @@ public class IScrollViewer <: InterfaceWrapperBase & ComInterface {
         return __vt.ZoomFactor(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ZoomSnapPoints(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -31417,7 +31442,9 @@ public class ISectionsInViewChangedEventArgsFactory <: InterfaceWrapperBase & Co
 @C
 public struct ISelectionChangedEventArgsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AddedItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var RemovedItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -31462,12 +31489,14 @@ public class ISelectionChangedEventArgs <: InterfaceWrapperBase & ComInterface {
         readVtbl<ISelectionChangedEventArgsVtbl>(ISelectionChangedEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AddedItems(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AddedItems(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RemovedItems(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -31479,6 +31508,7 @@ public class ISelectionChangedEventArgs <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ISelectionChangedEventArgsFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateInstanceWithRemovedItemsAndAddedItems: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -31523,6 +31553,7 @@ public class ISelectionChangedEventArgsFactory <: InterfaceWrapperBase & ComInte
         readVtbl<ISelectionChangedEventArgsFactoryVtbl>(ISelectionChangedEventArgsFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateInstanceWithRemovedItemsAndAddedItems(removedItems: CPointer<Unit>, addedItems: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -34642,6 +34673,7 @@ public class ITextBlockStatics7 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ITextBox4Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetLinguisticAlternativesAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -34686,6 +34718,7 @@ public class ITextBox4 <: InterfaceWrapperBase & ComInterface {
         readVtbl<ITextBox4Vtbl>(ITextBox4Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetLinguisticAlternativesAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -37426,6 +37459,7 @@ public struct ITreeViewDragItemsCompletedEventArgsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     @When[Windows_ApplicationModel_DataTransfer == "on"]
     public var DropResult: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Items: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -37477,6 +37511,7 @@ public class ITreeViewDragItemsCompletedEventArgs <: InterfaceWrapperBase & ComI
         return __vt.DropResult(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -37492,6 +37527,7 @@ public struct ITreeViewDragItemsStartingEventArgsVtbl {
     public var SetCancel: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
     @When[Windows_ApplicationModel_DataTransfer == "on"]
     public var Data: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Items: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -37555,6 +37591,7 @@ public class ITreeViewDragItemsStartingEventArgs <: InterfaceWrapperBase & ComIn
         return __vt.Data(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -38221,6 +38258,7 @@ public struct ITreeViewNodeVtbl {
     public var Depth: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var HasUnrealizedChildren: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var SetHasUnrealizedChildren: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Children: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -38319,6 +38357,7 @@ public class ITreeViewNode <: InterfaceWrapperBase & ComInterface {
         return __vt.SetHasUnrealizedChildren(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Children(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -40327,6 +40366,7 @@ public class IWebViewSettings <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IWebViewStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AnyScriptNotifyUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Xaml == "on"]
     public var SourceProperty: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -40377,6 +40417,7 @@ public class IWebViewStatics <: InterfaceWrapperBase & ComInterface {
         readVtbl<IWebViewStaticsVtbl>(IWebViewStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AnyScriptNotifyUri(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

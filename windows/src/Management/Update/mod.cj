@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -4595,7 +4594,10 @@ public struct IWindowsUpdateAdministratorVtbl {
     public var RevokeWindowsUpdateActionApproval: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var ApproveWindowsUpdate: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RevokeWindowsUpdateApproval: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetUpdates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetUpdates: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4694,6 +4696,7 @@ public class IWindowsUpdateAdministrator <: InterfaceWrapperBase & ComInterface 
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetUpdates(): windows_collections.IVectorView<WindowsUpdate> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4901,7 +4904,10 @@ public struct IWindowsUpdateScanCompletedEventArgsVtbl {
     public var ProviderId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Succeeded: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ExtendedError: CFunc<(CPointer<Unit>, CPointer<windows_future.HResultAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Updates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Updates: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4994,6 +5000,7 @@ public class IWindowsUpdateScanCompletedEventArgs <: InterfaceWrapperBase & ComI
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<windows_future.HResult>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Updates(): windows_collections.IVectorView<WindowsUpdate> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5383,6 +5390,7 @@ public class WindowsUpdateScanCompletedEventArgs <: InterfaceWrapperBase & ComIn
         return defaultInterface().ExtendedError()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Updates(): windows_collections.IVectorView<WindowsUpdate> {
         return defaultInterface().Updates()
     }
@@ -5521,7 +5529,10 @@ public struct IWindowsSoftwareUpdateVtbl {
     public var CurrentAction: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ActionResultInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ApprovalInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var ApprovedActions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ApprovedActions: UIntNative = UIntNative(0)
     public var AttentionRequiredInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ActionProgress: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var RestartReason: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -5732,6 +5743,7 @@ public class IWindowsSoftwareUpdate <: InterfaceWrapperBase & ComInterface & Run
         return WindowsSoftwareUpdateApprovalInfo.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ApprovedActions(): windows_collections.IVectorView<WindowsSoftwareUpdateActionType> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6624,7 +6636,10 @@ extend IWindowsSoftwareUpdateOptionalActionInfoFactory <: windows_core.Interface
 @C
 public struct IWindowsSoftwareUpdateOptionalInfoVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var LocalizationInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var LocalizationInfo: UIntNative = UIntNative(0)
     public var ComplianceDeadlineInDays: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ComplianceGracePeriodInDays: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -6695,6 +6710,7 @@ public class IWindowsSoftwareUpdateOptionalInfo <: InterfaceWrapperBase & ComInt
         readVtbl<IWindowsSoftwareUpdateOptionalInfoVtbl>(IWindowsSoftwareUpdateOptionalInfoVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func LocalizationInfo(): windows_collections.IVectorView<WindowsSoftwareUpdateLocalizationInfo> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6728,7 +6744,10 @@ extend IWindowsSoftwareUpdateOptionalInfo <: windows_core.Interface<IWindowsSoft
 public struct IWindowsSoftwareUpdateOptionalInfoFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var CreateInstance: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateInstance2: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateInstance2: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -6805,6 +6824,7 @@ public class IWindowsSoftwareUpdateOptionalInfoFactory <: InterfaceWrapperBase &
         return WindowsSoftwareUpdateOptionalInfo.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateInstance2(localizationInfo: windows_collections.IIterable<WindowsSoftwareUpdateLocalizationInfo>, complianceDeadlineInDays: Foundation.IReference<Int32>, complianceGracePeriodInDays: Foundation.IReference<Int32>): WindowsSoftwareUpdateOptionalInfo {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6831,7 +6851,10 @@ public struct IWindowsSoftwareUpdateProviderVtbl {
     public var ScanFileName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ScanFileArguments: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Type: CFunc<(CPointer<Unit>, CPointer<WindowsSoftwareUpdateProviderTypeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var PayloadFiles: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var PayloadFiles: UIntNative = UIntNative(0)
     public var TrustState: CFunc<(CPointer<Unit>, CPointer<WindowsSoftwareUpdateProviderTrustStateAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var RegistrationType: CFunc<(CPointer<Unit>, CPointer<WindowsSoftwareUpdateProviderRegistrationTypeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Foundation_Collections == "on"]
@@ -6987,6 +7010,7 @@ public class IWindowsSoftwareUpdateProvider <: InterfaceWrapperBase & ComInterfa
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<WindowsSoftwareUpdateProviderType>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PayloadFiles(): windows_collections.IVectorView<WindowsSoftwareUpdateProviderPayloadFileInfo> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7208,7 +7232,10 @@ public struct IWindowsSoftwareUpdateProviderStatusVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var CancelRequested: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveCancelRequested: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetScanResult: CFunc<(CPointer<Unit>, Bool, UInt32, UInt64, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SetScanResult: UIntNative = UIntNative(0)
     public var SetActionProgress: CFunc<(CPointer<Unit>, UInt64, UInt64, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var SetActionResult: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
@@ -7293,6 +7320,7 @@ public class IWindowsSoftwareUpdateProviderStatus <: InterfaceWrapperBase & ComI
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetScanResult(succeeded: Bool, resultCode: UInt32, extendedError: UInt64, updates: windows_collections.IIterable<WindowsSoftwareUpdate>): WindowsSoftwareUpdateResult {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7516,7 +7544,10 @@ public struct IWindowsSoftwareUpdateScanResultVtbl {
     public var Succeeded: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ResultCode: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ExtendedError: CFunc<(CPointer<Unit>, CPointer<UInt64>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Updates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Updates: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -7609,6 +7640,7 @@ public class IWindowsSoftwareUpdateScanResult <: InterfaceWrapperBase & ComInter
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Updates(): windows_collections.IVectorView<WindowsSoftwareUpdate> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7625,8 +7657,14 @@ extend IWindowsSoftwareUpdateScanResult <: windows_core.Interface<IWindowsSoftwa
 @C
 public struct IWindowsSoftwareUpdateScanResultFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateInstance: CFunc<(CPointer<Unit>, Bool, UInt32, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateInstance: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateInstance2: CFunc<(CPointer<Unit>, Bool, UInt32, UInt64, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateInstance2: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -7695,6 +7733,7 @@ public class IWindowsSoftwareUpdateScanResultFactory <: InterfaceWrapperBase & C
         readVtbl<IWindowsSoftwareUpdateScanResultFactoryVtbl>(IWindowsSoftwareUpdateScanResultFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateInstance(succeeded: Bool, resultCode: UInt32, updates: windows_collections.IIterable<WindowsSoftwareUpdate>): WindowsSoftwareUpdateScanResult {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7703,6 +7742,7 @@ public class IWindowsSoftwareUpdateScanResultFactory <: InterfaceWrapperBase & C
         return WindowsSoftwareUpdateScanResult.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateInstance2(succeeded: Bool, resultCode: UInt32, extendedError: UInt64, updates: windows_collections.IIterable<WindowsSoftwareUpdate>): WindowsSoftwareUpdateScanResult {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -8041,9 +8081,18 @@ public struct IWindowsUpdateManagerVtbl {
     public var IsScanning: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsWorking: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var LastSuccessfulScanTimestamp: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetApplicableUpdates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetApplicableUpdates: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetMostRecentCompletedUpdates: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetMostRecentCompletedUpdates: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetMostRecentCompletedUpdatesAsync: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetMostRecentCompletedUpdatesAsync: UIntNative = UIntNative(0)
     public var StartScan: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -8221,6 +8270,7 @@ public class IWindowsUpdateManager <: InterfaceWrapperBase & ComInterface & Runt
         return Foundation.IReference<windows_future.DateTime>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetApplicableUpdates(): windows_collections.IVectorView<WindowsUpdate> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -8229,6 +8279,7 @@ public class IWindowsUpdateManager <: InterfaceWrapperBase & ComInterface & Runt
         return windows_collections.IVectorView<WindowsUpdate>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetMostRecentCompletedUpdates(count: Int32): windows_collections.IVectorView<WindowsUpdateItem> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -8237,6 +8288,7 @@ public class IWindowsUpdateManager <: InterfaceWrapperBase & ComInterface & Runt
         return windows_collections.IVectorView<WindowsUpdateItem>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetMostRecentCompletedUpdatesAsync(count: Int32): windows_future.IAsyncOperation<windows_collections.IVectorView<WindowsUpdateItem>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -8261,7 +8313,10 @@ public struct IWindowsUpdateManager2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var GetProvider: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var ProviderIds: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<CPointer<Unit>>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetApplicableSoftwareUpdates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetApplicableSoftwareUpdates: UIntNative = UIntNative(0)
     public var PerformScan: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -8348,6 +8403,7 @@ public class IWindowsUpdateManager2 <: InterfaceWrapperBase & ComInterface & Run
         return (resultSize__, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetApplicableSoftwareUpdates(): windows_collections.IVectorView<WindowsSoftwareUpdate> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -8971,6 +9027,7 @@ public class WindowsSoftwareUpdate <: InterfaceWrapperBase & ComInterface & wind
         return defaultInterface().ApprovalInfo()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ApprovedActions(): windows_collections.IVectorView<WindowsSoftwareUpdateActionType> {
         return defaultInterface().ApprovedActions()
     }
@@ -9798,6 +9855,7 @@ public class WindowsSoftwareUpdateOptionalInfo <: InterfaceWrapperBase & ComInte
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func LocalizationInfo(): windows_collections.IVectorView<WindowsSoftwareUpdateLocalizationInfo> {
         return defaultInterface().LocalizationInfo()
     }
@@ -9821,6 +9879,7 @@ public class WindowsSoftwareUpdateOptionalInfo <: InterfaceWrapperBase & ComInte
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateInstance2(localizationInfo: windows_collections.IIterable<WindowsSoftwareUpdateLocalizationInfo>, complianceDeadlineInDays: Foundation.IReference<Int32>, complianceGracePeriodInDays: Foundation.IReference<Int32>): WindowsSoftwareUpdateOptionalInfo {
         var result__: Option<WindowsSoftwareUpdateOptionalInfo> = Option<WindowsSoftwareUpdateOptionalInfo>.None
         try (factory__ = windows_core.factory<WindowsSoftwareUpdateOptionalInfo, IWindowsSoftwareUpdateOptionalInfoFactory>().unwrap()) {
@@ -9960,6 +10019,7 @@ public class WindowsSoftwareUpdateProvider <: InterfaceWrapperBase & ComInterfac
         return defaultInterface().Type()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PayloadFiles(): windows_collections.IVectorView<WindowsSoftwareUpdateProviderPayloadFileInfo> {
         return defaultInterface().PayloadFiles()
     }
@@ -10203,6 +10263,7 @@ public class WindowsSoftwareUpdateProviderStatus <: InterfaceWrapperBase & ComIn
         defaultInterface().RemoveCancelRequested(token)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetScanResult(succeeded: Bool, resultCode: UInt32, extendedError: UInt64, updates: windows_collections.IIterable<WindowsSoftwareUpdate>): WindowsSoftwareUpdateResult {
         return defaultInterface().SetScanResult(succeeded, resultCode, extendedError, updates)
     }
@@ -10463,10 +10524,12 @@ public class WindowsSoftwareUpdateScanResult <: InterfaceWrapperBase & ComInterf
         return defaultInterface().ExtendedError()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Updates(): windows_collections.IVectorView<WindowsSoftwareUpdate> {
         return defaultInterface().Updates()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateInstance(succeeded: Bool, resultCode: UInt32, updates: windows_collections.IIterable<WindowsSoftwareUpdate>): WindowsSoftwareUpdateScanResult {
         var result__: Option<WindowsSoftwareUpdateScanResult> = Option<WindowsSoftwareUpdateScanResult>.None
         try (factory__ = windows_core.factory<WindowsSoftwareUpdateScanResult, IWindowsSoftwareUpdateScanResultFactory>().unwrap()) {
@@ -10478,6 +10541,7 @@ public class WindowsSoftwareUpdateScanResult <: InterfaceWrapperBase & ComInterf
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateInstance2(succeeded: Bool, resultCode: UInt32, extendedError: UInt64, updates: windows_collections.IIterable<WindowsSoftwareUpdate>): WindowsSoftwareUpdateScanResult {
         var result__: Option<WindowsSoftwareUpdateScanResult> = Option<WindowsSoftwareUpdateScanResult>.None
         try (factory__ = windows_core.factory<WindowsSoftwareUpdateScanResult, IWindowsSoftwareUpdateScanResultFactory>().unwrap()) {
@@ -10712,6 +10776,7 @@ public class WindowsUpdateAdministrator <: InterfaceWrapperBase & ComInterface &
         defaultInterface().RevokeWindowsUpdateApproval(updateId)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetUpdates(): windows_collections.IVectorView<WindowsUpdate> {
         return defaultInterface().GetUpdates()
     }
@@ -11022,14 +11087,17 @@ public class WindowsUpdateManager <: InterfaceWrapperBase & ComInterface & windo
         return defaultInterface().LastSuccessfulScanTimestamp()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetApplicableUpdates(): windows_collections.IVectorView<WindowsUpdate> {
         return defaultInterface().GetApplicableUpdates()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetMostRecentCompletedUpdates(count: Int32): windows_collections.IVectorView<WindowsUpdateItem> {
         return defaultInterface().GetMostRecentCompletedUpdates(count)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetMostRecentCompletedUpdatesAsync(count: Int32): windows_future.IAsyncOperation<windows_collections.IVectorView<WindowsUpdateItem>> {
         return defaultInterface().GetMostRecentCompletedUpdatesAsync(count)
     }

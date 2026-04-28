@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -87,9 +86,9 @@ public struct IUserNotificationListenerVtbl {
     @When[Windows_UI_Notifications != "on"]
     public var NotificationChanged: UIntNative = UIntNative(0)
     public var RemoveNotificationChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Notifications == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Notifications == "on"]
     public var GetNotificationsAsync: CFunc<(CPointer<Unit>, _impl_l0.NotificationKindsAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Notifications != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_UI_Notifications != "on"]
     public var GetNotificationsAsync: UIntNative = UIntNative(0)
     @When[Windows_UI_Notifications == "on"]
     public var GetNotification: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -196,7 +195,7 @@ public class IUserNotificationListener <: InterfaceWrapperBase & ComInterface & 
         HRESULT(hr).ok()
     }
 
-    @When[Windows_UI_Notifications == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Notifications == "on"]
     public unsafe func GetNotificationsAsync(kinds: _impl_l0.NotificationKinds): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l2.UserNotification>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -401,7 +400,7 @@ public class UserNotificationListener <: InterfaceWrapperBase & ComInterface & w
         defaultInterface().RemoveNotificationChanged(token)
     }
 
-    @When[Windows_UI_Notifications == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Notifications == "on"]
     public unsafe func GetNotificationsAsync(kinds: _impl_l0.NotificationKinds): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l2.UserNotification>> {
         return defaultInterface().GetNotificationsAsync(kinds)
     }

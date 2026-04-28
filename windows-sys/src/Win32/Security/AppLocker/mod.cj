@@ -3,9 +3,7 @@ package windows_sys.Win32.Security.AppLocker
 
 import windows_interface.{GUID}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Security == "on"]
 import windows_sys.Win32.Security as Win32_Security
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 
@@ -286,20 +284,68 @@ public struct SAFER_HASH_IDENTIFICATION2 {
     public init() {}
 }
 
-@When[ADVAPI32 == "on"]
+@When[Windows_Win32_Security_AppLocker == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AppLocker_SaferCloseLevel == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SaferCloseLevel(hLevelHandle: Win32_Security.SAFER_LEVEL_HANDLE): Int32
+}
+
+@When[Windows_Win32_Security_AppLocker == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AppLocker_SaferCloseLevel == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_SaferCloseLevel(hLevelHandle: Win32_Security.SAFER_LEVEL_HANDLE): Int32 {
+    return SaferCloseLevel(hLevelHandle)
+}
+
+@When[Windows_Win32_Security_AppLocker == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AppLocker_SaferComputeTokenFromLevel == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: InAccessToken optional
+    // param-hint: lpReserved optional
+    // pinvoke-hint: SetLastError
+    func SaferComputeTokenFromLevel(LevelHandle: Win32_Security.SAFER_LEVEL_HANDLE, InAccessToken: CPointer<Unit>, OutAccessToken: CPointer<CPointer<Unit>>, dwFlags: UInt32, lpReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Security_AppLocker == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AppLocker_SaferComputeTokenFromLevel == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_SaferComputeTokenFromLevel(LevelHandle: Win32_Security.SAFER_LEVEL_HANDLE, InAccessToken: CPointer<Unit>, OutAccessToken: CPointer<CPointer<Unit>>, dwFlags: UInt32, lpReserved: CPointer<Unit>): Int32 {
+    return SaferComputeTokenFromLevel(LevelHandle, InAccessToken, OutAccessToken, dwFlags, lpReserved)
+}
+
+@When[Windows_Win32_Security_AppLocker == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AppLocker_SaferCreateLevel == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: lpReserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SaferCreateLevel(dwScopeId: UInt32, dwLevelId: UInt32, OpenFlags: UInt32, pLevelHandle: CPointer<Win32_Security.SAFER_LEVEL_HANDLE>, lpReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Security_AppLocker == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AppLocker_SaferCreateLevel == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_SaferCreateLevel(dwScopeId: UInt32, dwLevelId: UInt32, OpenFlags: UInt32, pLevelHandle: CPointer<Win32_Security.SAFER_LEVEL_HANDLE>, lpReserved: CPointer<Unit>): Int32 {
+    return SaferCreateLevel(dwScopeId, dwLevelId, OpenFlags, pLevelHandle, lpReserved)
+}
+
+@When[Windows_Win32_Security_AppLocker == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AppLocker_SaferGetLevelInformation == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: lpQueryBuffer bytes=param[3] optional
+    // pinvoke-hint: SetLastError
+    func SaferGetLevelInformation(LevelHandle: Win32_Security.SAFER_LEVEL_HANDLE, dwInfoType: Int32, lpQueryBuffer: CPointer<Unit>, dwInBufferSize: UInt32, lpdwOutBufferSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_AppLocker == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AppLocker_SaferGetLevelInformation == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_SaferGetLevelInformation(LevelHandle: Win32_Security.SAFER_LEVEL_HANDLE, dwInfoType: Int32, lpQueryBuffer: CPointer<Unit>, dwInBufferSize: UInt32, lpdwOutBufferSize: CPointer<UInt32>): Int32 {
+    return SaferGetLevelInformation(LevelHandle, dwInfoType, lpQueryBuffer, dwInBufferSize, lpdwOutBufferSize)
+}
+
+@When[Windows_Win32_Security_AppLocker == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AppLocker_SaferGetPolicyInformation == "on"]
 foreign {
     // param-hint: InfoBuffer bytes=param[2]
     // param-hint: lpReserved optional reserved
     // pinvoke-hint: SetLastError
     func SaferGetPolicyInformation(dwScopeId: UInt32, SaferPolicyInfoClass: Int32, InfoBufferSize: UInt32, InfoBuffer: CPointer<Unit>, InfoBufferRetSize: CPointer<UInt32>, lpReserved: CPointer<Unit>): Int32
-    // param-hint: InfoBuffer bytes=param[2]
-    // param-hint: lpReserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SaferSetPolicyInformation(dwScopeId: UInt32, SaferPolicyInfoClass: Int32, InfoBufferSize: UInt32, InfoBuffer: CPointer<Unit>, lpReserved: CPointer<Unit>): Int32
-    func SaferiIsExecutableFileType(szFullPathname: CPointer<UInt16>, bFromShellExecute: UInt8): Int32
 }
 
-@When[ADVAPI32 == "on" && (Windows_Win32_Security == "on" && Windows_Win32_Security_Cryptography == "on")]
+@When[Windows_Win32_Security_AppLocker == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AppLocker_SaferGetPolicyInformation == "on"]
+public unsafe func Windows_SaferGetPolicyInformation(dwScopeId: UInt32, SaferPolicyInfoClass: Int32, InfoBufferSize: UInt32, InfoBuffer: CPointer<Unit>, InfoBufferRetSize: CPointer<UInt32>, lpReserved: CPointer<Unit>): Int32 {
+    return SaferGetPolicyInformation(dwScopeId, SaferPolicyInfoClass, InfoBufferSize, InfoBuffer, InfoBufferRetSize, lpReserved)
+}
+
+@When[Windows_Win32_Security_AppLocker == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AppLocker_SaferIdentifyLevel == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security_Cryptography == "on"]
 foreign {
     // param-hint: pCodeProperties len=param[0] optional
     // param-hint: lpReserved optional
@@ -307,26 +353,56 @@ foreign {
     func SaferIdentifyLevel(dwNumProperties: UInt32, pCodeProperties: CPointer<SAFER_CODE_PROPERTIES_V2>, pLevelHandle: CPointer<Win32_Security.SAFER_LEVEL_HANDLE>, lpReserved: CPointer<Unit>): Int32
 }
 
-@When[ADVAPI32 == "on" && Windows_Win32_Security == "on"]
+@When[Windows_Win32_Security_AppLocker == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AppLocker_SaferIdentifyLevel == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_SaferIdentifyLevel(dwNumProperties: UInt32, pCodeProperties: CPointer<SAFER_CODE_PROPERTIES_V2>, pLevelHandle: CPointer<Win32_Security.SAFER_LEVEL_HANDLE>, lpReserved: CPointer<Unit>): Int32 {
+    return SaferIdentifyLevel(dwNumProperties, pCodeProperties, pLevelHandle, lpReserved)
+}
+
+@When[Windows_Win32_Security_AppLocker == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AppLocker_SaferRecordEventLogEntry == "on" && Windows_Win32_Security == "on"]
 foreign {
-    // pinvoke-hint: SetLastError
-    func SaferCloseLevel(hLevelHandle: Win32_Security.SAFER_LEVEL_HANDLE): Int32
-    // param-hint: InAccessToken optional
-    // param-hint: lpReserved optional
-    // pinvoke-hint: SetLastError
-    func SaferComputeTokenFromLevel(LevelHandle: Win32_Security.SAFER_LEVEL_HANDLE, InAccessToken: CPointer<Unit>, OutAccessToken: CPointer<CPointer<Unit>>, dwFlags: UInt32, lpReserved: CPointer<Unit>): Int32
-    // param-hint: lpReserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SaferCreateLevel(dwScopeId: UInt32, dwLevelId: UInt32, OpenFlags: UInt32, pLevelHandle: CPointer<Win32_Security.SAFER_LEVEL_HANDLE>, lpReserved: CPointer<Unit>): Int32
-    // param-hint: lpQueryBuffer bytes=param[3] optional
-    // pinvoke-hint: SetLastError
-    func SaferGetLevelInformation(LevelHandle: Win32_Security.SAFER_LEVEL_HANDLE, dwInfoType: Int32, lpQueryBuffer: CPointer<Unit>, dwInBufferSize: UInt32, lpdwOutBufferSize: CPointer<UInt32>): Int32
     // param-hint: lpReserved optional reserved
     // pinvoke-hint: SetLastError
     func SaferRecordEventLogEntry(hLevel: Win32_Security.SAFER_LEVEL_HANDLE, szTargetPath: CPointer<UInt16>, lpReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Security_AppLocker == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AppLocker_SaferRecordEventLogEntry == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_SaferRecordEventLogEntry(hLevel: Win32_Security.SAFER_LEVEL_HANDLE, szTargetPath: CPointer<UInt16>, lpReserved: CPointer<Unit>): Int32 {
+    return SaferRecordEventLogEntry(hLevel, szTargetPath, lpReserved)
+}
+
+@When[Windows_Win32_Security_AppLocker == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AppLocker_SaferSetLevelInformation == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: lpQueryBuffer bytes=param[3]
     // pinvoke-hint: SetLastError
     func SaferSetLevelInformation(LevelHandle: Win32_Security.SAFER_LEVEL_HANDLE, dwInfoType: Int32, lpQueryBuffer: CPointer<Unit>, dwInBufferSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_AppLocker == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AppLocker_SaferSetLevelInformation == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_SaferSetLevelInformation(LevelHandle: Win32_Security.SAFER_LEVEL_HANDLE, dwInfoType: Int32, lpQueryBuffer: CPointer<Unit>, dwInBufferSize: UInt32): Int32 {
+    return SaferSetLevelInformation(LevelHandle, dwInfoType, lpQueryBuffer, dwInBufferSize)
+}
+
+@When[Windows_Win32_Security_AppLocker == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AppLocker_SaferSetPolicyInformation == "on"]
+foreign {
+    // param-hint: InfoBuffer bytes=param[2]
+    // param-hint: lpReserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SaferSetPolicyInformation(dwScopeId: UInt32, SaferPolicyInfoClass: Int32, InfoBufferSize: UInt32, InfoBuffer: CPointer<Unit>, lpReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Security_AppLocker == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AppLocker_SaferSetPolicyInformation == "on"]
+public unsafe func Windows_SaferSetPolicyInformation(dwScopeId: UInt32, SaferPolicyInfoClass: Int32, InfoBufferSize: UInt32, InfoBuffer: CPointer<Unit>, lpReserved: CPointer<Unit>): Int32 {
+    return SaferSetPolicyInformation(dwScopeId, SaferPolicyInfoClass, InfoBufferSize, InfoBuffer, lpReserved)
+}
+
+@When[Windows_Win32_Security_AppLocker == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AppLocker_SaferiIsExecutableFileType == "on"]
+foreign {
+    func SaferiIsExecutableFileType(szFullPathname: CPointer<UInt16>, bFromShellExecute: UInt8): Int32
+}
+
+@When[Windows_Win32_Security_AppLocker == "on" && ADVAPI32 == "on" && Windows_Win32_Security_AppLocker_SaferiIsExecutableFileType == "on"]
+public unsafe func Windows_SaferiIsExecutableFileType(szFullPathname: CPointer<UInt16>, bFromShellExecute: UInt8): Int32 {
+    return SaferiIsExecutableFileType(szFullPathname, bFromShellExecute)
 }
 
 @When[Windows_Win32_Security_AppLocker == "on"]

@@ -1497,9 +1497,9 @@ public struct ISpatialInteractionManagerVtbl {
     public var RemoveSourceReleased: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var InteractionDetected: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveInteractionDetected: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Perception == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Perception == "on"]
     public var GetDetectedSourcesAtTimestamp: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Perception != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Perception != "on"]
     public var GetDetectedSourcesAtTimestamp: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -1653,7 +1653,7 @@ public class ISpatialInteractionManager <: InterfaceWrapperBase & ComInterface &
         HRESULT(hr).ok()
     }
 
-    @When[Windows_Perception == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Perception == "on"]
     public unsafe func GetDetectedSourcesAtTimestamp(timeStamp: Perception.PerceptionTimestamp): windows_collections.IVectorView<SpatialInteractionSourceState> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6172,7 +6172,7 @@ public class SpatialInteractionManager <: InterfaceWrapperBase & ComInterface & 
         defaultInterface().RemoveInteractionDetected(token)
     }
 
-    @When[Windows_Perception == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Perception == "on"]
     public unsafe func GetDetectedSourcesAtTimestamp(timeStamp: Perception.PerceptionTimestamp): windows_collections.IVectorView<SpatialInteractionSourceState> {
         return defaultInterface().GetDetectedSourcesAtTimestamp(timeStamp)
     }

@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows_collections as windows_collections
 
@@ -499,7 +498,10 @@ extend INumberFormatter2 <: windows_core.Interface<INumberFormatter2> {}
 @C
 public struct INumberFormatterOptionsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Languages: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Languages: UIntNative = UIntNative(0)
     public var GeographicRegion: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IntegerDigits: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetIntegerDigits: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -515,18 +517,12 @@ public struct INumberFormatterOptionsVtbl {
     public var ResolvedGeographicRegion: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 
+    @When[Windows_Foundation_Collections == "on"]
     public static func new<Identity>(offset!: Int64 = 0): INumberFormatterOptionsVtbl where Identity <: INumberFormatterOptions_Impl {
         let _ = offset
         var vtbl = INumberFormatterOptionsVtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.Languages = { instanceRaw, result__ =>
-            match (unsafe { asImplFromRaw<INumberFormatterOptions_ImplErased>(instanceRaw) }) {
-                case Some(impl) =>
-                    impl.__winrtThunk_Languages(result__)
-                case None =>
-                    E_NOINTERFACE.value
-            }
-        }
+        vtbl = INumberFormatterOptionsVtbl.__assignLanguages<Identity>(vtbl)
         vtbl.GeographicRegion = { instanceRaw, result__ =>
             match (unsafe { asImplFromRaw<INumberFormatterOptions_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
@@ -634,6 +630,25 @@ public struct INumberFormatterOptionsVtbl {
         return vtbl
     }
 
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections == "on"]
+    public static func __assignLanguages<Identity>(vtbl: INumberFormatterOptionsVtbl): INumberFormatterOptionsVtbl where Identity <: INumberFormatterOptions_Impl {
+        var next = vtbl
+        next.Languages = { instanceRaw, result__ =>
+            match (unsafe { asImplFromRaw<INumberFormatterOptions_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_Languages(result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        return next
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections != "on"]
+    public static func __assignLanguages<Identity>(vtbl: INumberFormatterOptionsVtbl): INumberFormatterOptionsVtbl where Identity <: INumberFormatterOptions_Impl {
+        return vtbl
+    }
+
     public static func matches(iid: GUID): Bool {
         if (iid == INumberFormatterOptions.iid()) {
             return true
@@ -642,7 +657,7 @@ public struct INumberFormatterOptionsVtbl {
     }
 }
 
-@When[Windows_Globalization_NumberFormatting == "on"]
+@When[Windows_Globalization_NumberFormatting == "on" && Windows_Foundation_Collections == "on"]
 public interface INumberFormatterOptions_ImplErased {
     public func __winrtThunk_Languages(result__: CPointer<CPointer<Unit>>): Int32
 
@@ -673,7 +688,7 @@ public interface INumberFormatterOptions_ImplErased {
     public func __winrtThunk_ResolvedGeographicRegion(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Globalization_NumberFormatting == "on"]
+@When[Windows_Globalization_NumberFormatting == "on" && Windows_Foundation_Collections == "on"]
 public interface INumberFormatterOptions_Impl <: INumberFormatterOptions_ImplErased {
     public func Languages(): windows_core.Result<windows_collections.IVectorView<windows_core.HString>>
 
@@ -956,6 +971,7 @@ public class INumberFormatterOptions <: InterfaceWrapperBase & ComInterface & Ru
         readVtbl<INumberFormatterOptionsVtbl>(INumberFormatterOptionsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Languages(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1742,7 +1758,10 @@ extend INumberRounderOption <: windows_core.Interface<INumberRounderOption> {}
 @C
 public struct INumeralSystemTranslatorVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Languages: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Languages: UIntNative = UIntNative(0)
     public var ResolvedLanguage: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var NumeralSystem: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetNumeralSystem: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1815,6 +1834,7 @@ public class INumeralSystemTranslator <: InterfaceWrapperBase & ComInterface & R
         readVtbl<INumeralSystemTranslatorVtbl>(INumeralSystemTranslatorVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Languages(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3066,6 +3086,7 @@ public class CurrencyFormatter <: InterfaceWrapperBase & ComInterface & windows_
         defaultInterface().SetCurrency(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Languages(): windows_collections.IVectorView<windows_core.HString> {
         return asINumberFormatterOptions().Languages()
     }
@@ -3181,6 +3202,7 @@ public class CurrencyFormatter <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateCurrencyFormatterCodeContext(currencyCode: windows_core.HString, languages: windows_collections.IIterable<windows_core.HString>, geographicRegion: windows_core.HString): CurrencyFormatter {
         var result__: Option<CurrencyFormatter> = Option<CurrencyFormatter>.None
         try (factory__ = windows_core.factory<CurrencyFormatter, ICurrencyFormatterFactory>().unwrap()) {
@@ -3345,6 +3367,7 @@ public class DecimalFormatter <: InterfaceWrapperBase & ComInterface & windows_i
         return defaultInterface().FormatDouble(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Languages(): windows_collections.IVectorView<windows_core.HString> {
         return asINumberFormatterOptions().Languages()
     }
@@ -3437,6 +3460,7 @@ public class DecimalFormatter <: InterfaceWrapperBase & ComInterface & windows_i
         asISignedZeroOption().SetIsZeroSigned(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateDecimalFormatter(languages: windows_collections.IIterable<windows_core.HString>, geographicRegion: windows_core.HString): DecimalFormatter {
         var result__: Option<DecimalFormatter> = Option<DecimalFormatter>.None
         try (factory__ = windows_core.factory<DecimalFormatter, IDecimalFormatterFactory>().unwrap()) {
@@ -3472,7 +3496,10 @@ extend DecimalFormatter <: windows_core.HandleWinrtType<DecimalFormatter> {
 public struct ICurrencyFormatterFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var CreateCurrencyFormatterCode: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateCurrencyFormatterCodeContext: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateCurrencyFormatterCodeContext: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3549,6 +3576,7 @@ public class ICurrencyFormatterFactory <: InterfaceWrapperBase & ComInterface & 
         return CurrencyFormatter.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateCurrencyFormatterCodeContext(currencyCode: windows_core.HString, languages: windows_collections.IIterable<windows_core.HString>, geographicRegion: windows_core.HString): CurrencyFormatter {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3565,7 +3593,10 @@ extend ICurrencyFormatterFactory <: windows_core.Interface<ICurrencyFormatterFac
 @C
 public struct IDecimalFormatterFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateDecimalFormatter: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateDecimalFormatter: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3634,6 +3665,7 @@ public class IDecimalFormatterFactory <: InterfaceWrapperBase & ComInterface & R
         readVtbl<IDecimalFormatterFactoryVtbl>(IDecimalFormatterFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateDecimalFormatter(languages: windows_collections.IIterable<windows_core.HString>, geographicRegion: windows_core.HString): DecimalFormatter {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3650,7 +3682,10 @@ extend IDecimalFormatterFactory <: windows_core.Interface<IDecimalFormatterFacto
 @C
 public struct INumeralSystemTranslatorFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Create: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3719,6 +3754,7 @@ public class INumeralSystemTranslatorFactory <: InterfaceWrapperBase & ComInterf
         readVtbl<INumeralSystemTranslatorFactoryVtbl>(INumeralSystemTranslatorFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create(languages: windows_collections.IIterable<windows_core.HString>): NumeralSystemTranslator {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3735,7 +3771,10 @@ extend INumeralSystemTranslatorFactory <: windows_core.Interface<INumeralSystemT
 @C
 public struct IPercentFormatterFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreatePercentFormatter: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreatePercentFormatter: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3804,6 +3843,7 @@ public class IPercentFormatterFactory <: InterfaceWrapperBase & ComInterface & R
         readVtbl<IPercentFormatterFactoryVtbl>(IPercentFormatterFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreatePercentFormatter(languages: windows_collections.IIterable<windows_core.HString>, geographicRegion: windows_core.HString): PercentFormatter {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3820,7 +3860,10 @@ extend IPercentFormatterFactory <: windows_core.Interface<IPercentFormatterFacto
 @C
 public struct IPermilleFormatterFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreatePermilleFormatter: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreatePermilleFormatter: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3889,6 +3932,7 @@ public class IPermilleFormatterFactory <: InterfaceWrapperBase & ComInterface & 
         readVtbl<IPermilleFormatterFactoryVtbl>(IPermilleFormatterFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreatePermilleFormatter(languages: windows_collections.IIterable<windows_core.HString>, geographicRegion: windows_core.HString): PermilleFormatter {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3981,6 +4025,7 @@ public class NumeralSystemTranslator <: InterfaceWrapperBase & ComInterface & wi
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Languages(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().Languages()
     }
@@ -4001,6 +4046,7 @@ public class NumeralSystemTranslator <: InterfaceWrapperBase & ComInterface & wi
         return defaultInterface().TranslateNumerals(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Create(languages: windows_collections.IIterable<windows_core.HString>): NumeralSystemTranslator {
         var result__: Option<NumeralSystemTranslator> = Option<NumeralSystemTranslator>.None
         try (factory__ = windows_core.factory<NumeralSystemTranslator, INumeralSystemTranslatorFactory>().unwrap()) {
@@ -4165,6 +4211,7 @@ public class PercentFormatter <: InterfaceWrapperBase & ComInterface & windows_i
         return defaultInterface().FormatDouble(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Languages(): windows_collections.IVectorView<windows_core.HString> {
         return asINumberFormatterOptions().Languages()
     }
@@ -4257,6 +4304,7 @@ public class PercentFormatter <: InterfaceWrapperBase & ComInterface & windows_i
         asISignedZeroOption().SetIsZeroSigned(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreatePercentFormatter(languages: windows_collections.IIterable<windows_core.HString>, geographicRegion: windows_core.HString): PercentFormatter {
         var result__: Option<PercentFormatter> = Option<PercentFormatter>.None
         try (factory__ = windows_core.factory<PercentFormatter, IPercentFormatterFactory>().unwrap()) {
@@ -4421,6 +4469,7 @@ public class PermilleFormatter <: InterfaceWrapperBase & ComInterface & windows_
         return defaultInterface().FormatDouble(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Languages(): windows_collections.IVectorView<windows_core.HString> {
         return asINumberFormatterOptions().Languages()
     }
@@ -4513,6 +4562,7 @@ public class PermilleFormatter <: InterfaceWrapperBase & ComInterface & windows_
         asISignedZeroOption().SetIsZeroSigned(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreatePermilleFormatter(languages: windows_collections.IIterable<windows_core.HString>, geographicRegion: windows_core.HString): PermilleFormatter {
         var result__: Option<PermilleFormatter> = Option<PermilleFormatter>.None
         try (factory__ = windows_core.factory<PermilleFormatter, IPermilleFormatterFactory>().unwrap()) {

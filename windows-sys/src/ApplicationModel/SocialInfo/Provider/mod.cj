@@ -3,7 +3,6 @@ package windows_sys.ApplicationModel.SocialInfo.Provider
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_ApplicationModel_SocialInfo == "on"]
 import windows_sys.ApplicationModel.SocialInfo as ApplicationModel_SocialInfo
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
 
@@ -132,7 +131,7 @@ public struct ISocialFeedUpdaterVtbl {
     public var OwnerRemoteId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_ApplicationModel_SocialInfo == "on"]
     public var Kind: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
-    @When[Windows_ApplicationModel_SocialInfo == "on"]
+    @When[Windows_ApplicationModel_SocialInfo == "on" && Windows_Foundation_Collections == "on"]
     public var Items: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CommitAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -191,7 +190,7 @@ public class ISocialFeedUpdater <: InterfaceWrapperBase & ComInterface {
         return __vt.Kind(__liveRaw, result__)
     }
 
-    @When[Windows_ApplicationModel_SocialInfo == "on"]
+    @When[Windows_ApplicationModel_SocialInfo == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func Items(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

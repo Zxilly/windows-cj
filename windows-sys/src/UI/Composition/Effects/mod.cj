@@ -3,7 +3,6 @@ package windows_sys.UI.Composition.Effects
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Graphics_Effects == "on"]
 import windows_sys.Graphics.Effects as Graphics_Effects
 
 

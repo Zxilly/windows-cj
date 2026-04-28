@@ -151,7 +151,10 @@ public struct IMessageDialogVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Title: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetTitle: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Commands: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Commands: UIntNative = UIntNative(0)
     public var DefaultCommandIndex: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetDefaultCommandIndex: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CancelCommandIndex: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -243,6 +246,7 @@ public class IMessageDialog <: InterfaceWrapperBase & ComInterface & RuntimeName
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Commands(): windows_collections.IVector<IUICommand> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -417,7 +421,10 @@ extend IMessageDialogFactory <: windows_core.Interface<IMessageDialogFactory> {}
 @C
 public struct IPopupMenuVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Commands: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Commands: UIntNative = UIntNative(0)
     public var ShowAsync: CFunc<(CPointer<Unit>, windows_future.PointAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var ShowAsyncWithRect: CFunc<(CPointer<Unit>, windows_future.RectAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var ShowAsyncWithRectAndPlacement: CFunc<(CPointer<Unit>, windows_future.RectAbi, PlacementAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
@@ -489,6 +496,7 @@ public class IPopupMenu <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         readVtbl<IPopupMenuVtbl>(IPopupMenuVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Commands(): windows_collections.IVector<IUICommand> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -998,6 +1006,7 @@ public class MessageDialog <: InterfaceWrapperBase & ComInterface & windows_inte
         defaultInterface().SetTitle(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Commands(): windows_collections.IVector<IUICommand> {
         return defaultInterface().Commands()
     }
@@ -1155,6 +1164,7 @@ public class PopupMenu <: InterfaceWrapperBase & ComInterface & windows_interfac
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Commands(): windows_collections.IVector<IUICommand> {
         return defaultInterface().Commands()
     }
@@ -1422,12 +1432,14 @@ public class UICommandInvokedHandler <: InterfaceWrapperBase & ComInterface & wi
 @When[Windows_UI_Popups == "on"]
 extend UICommandInvokedHandler <: windows_core.Interface<UICommandInvokedHandler> {}
 
+@When[Windows_UI_Popups == "on"]
 private open class UICommandInvokedHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Popups == "on"]
 private open class UICommandInvokedHandlerInvoker <: UICommandInvokedHandlerInvokerErased {
     public open func Invoke(command: InParam<IUICommand>): Unit {
         ()
@@ -1439,6 +1451,7 @@ private open class UICommandInvokedHandlerInvoker <: UICommandInvokedHandlerInvo
     }
 }
 
+@When[Windows_UI_Popups == "on"]
 private class UICommandInvokedHandlerBox <: UICommandInvokedHandlerInvoker {
     public let invoke_: (InParam<IUICommand>) -> Unit
     private let vtblHandle: CPointerHandle<UICommandInvokedHandlerVtbl>
@@ -1457,6 +1470,7 @@ private class UICommandInvokedHandlerBox <: UICommandInvokedHandlerInvoker {
     }
 }
 
+@When[Windows_UI_Popups == "on"]
 func buildUICommandInvokedHandlerBoxVtbl(): UICommandInvokedHandlerVtbl {
     var vtbl = UICommandInvokedHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()

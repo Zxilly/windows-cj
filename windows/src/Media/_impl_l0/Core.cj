@@ -10,19 +10,13 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
 import windows.Graphics.DirectX.Direct3D11 as Graphics_DirectX_Direct3D11
-@When[Windows_Graphics_Imaging == "on"]
 import windows.Graphics.Imaging as Graphics_Imaging
-@When[Windows_Media == "on"]
 import windows.Media as Media
 @When[Windows_Media_FaceAnalysis == "on"]
 import windows.Media.FaceAnalysis as Media_FaceAnalysis
-@When[Windows_Networking_BackgroundTransfer == "on"]
 import windows.Networking.BackgroundTransfer as Networking_BackgroundTransfer
-@When[Windows_UI == "on"]
 import windows.UI as UI
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -868,6 +862,7 @@ public class CodecInfo <: InterfaceWrapperBase & ComInterface & windows_interfac
         return defaultInterface().Category()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Subtypes(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().Subtypes()
     }
@@ -1033,6 +1028,7 @@ public class CodecQuery <: InterfaceWrapperBase & ComInterface & windows_interfa
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAsync(kind: CodecKind, category: CodecCategory, subType: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVectorView<CodecInfo>> {
         return defaultInterface().FindAllAsync(kind, category, subType)
     }
@@ -1858,6 +1854,7 @@ public class FaceDetectedEventArgs <: InterfaceWrapperBase & ComInterface & wind
         }
     }
 
+    @When[Windows_Media == "on"]
     public unsafe func ResultFrame(): FaceDetectionEffectFrame {
         return defaultInterface().ResultFrame()
     }
@@ -1881,7 +1878,7 @@ extend FaceDetectedEventArgs <: windows_core.HandleWinrtType<FaceDetectedEventAr
     }
 }
 
-@When[Windows_Media_Core == "on"]
+@When[Windows_Media_Core == "on" && Windows_Media == "on"]
 public class FaceDetectionEffect <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1993,7 +1990,7 @@ public class FaceDetectionEffect <: InterfaceWrapperBase & ComInterface & window
     }
 }
 
-@When[Windows_Media_Core == "on"]
+@When[Windows_Media_Core == "on" && Windows_Media == "on"]
 extend FaceDetectionEffect <: windows_core.HandleWinrtType<FaceDetectionEffect> {
     public static func intoWinrtHandle(value: FaceDetectionEffect): CPointer<Unit> {
         value.asRaw()
@@ -2011,7 +2008,7 @@ extend FaceDetectionEffect <: windows_core.HandleWinrtType<FaceDetectionEffect> 
     }
 }
 
-@When[Windows_Media_Core == "on"]
+@When[Windows_Media_Core == "on" && Windows_Media_Effects == "on"]
 public class FaceDetectionEffectDefinition <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -2101,7 +2098,7 @@ public class FaceDetectionEffectDefinition <: InterfaceWrapperBase & ComInterfac
     }
 }
 
-@When[Windows_Media_Core == "on"]
+@When[Windows_Media_Core == "on" && Windows_Media_Effects == "on"]
 extend FaceDetectionEffectDefinition <: windows_core.HandleWinrtType<FaceDetectionEffectDefinition> {
     public static func intoWinrtHandle(value: FaceDetectionEffectDefinition): CPointer<Unit> {
         value.asRaw()
@@ -2119,7 +2116,7 @@ extend FaceDetectionEffectDefinition <: windows_core.HandleWinrtType<FaceDetecti
     }
 }
 
-@When[Windows_Media_Core == "on"]
+@When[Windows_Media_Core == "on" && Windows_Media == "on"]
 public class FaceDetectionEffectFrame <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -2202,7 +2199,7 @@ public class FaceDetectionEffectFrame <: InterfaceWrapperBase & ComInterface & w
         }
     }
 
-    @When[(Windows_Media_FaceAnalysis == "on") && (Windows_Media == "on")]
+    @When[(Windows_Foundation_Collections == "on" && Windows_Media_FaceAnalysis == "on") && (Windows_Media == "on")]
     public unsafe func DetectedFaces(): windows_collections.IVectorView<Media_FaceAnalysis.DetectedFace> {
         return defaultInterface().DetectedFaces()
     }
@@ -2257,7 +2254,7 @@ public class FaceDetectionEffectFrame <: InterfaceWrapperBase & ComInterface & w
     }
 }
 
-@When[Windows_Media_Core == "on"]
+@When[Windows_Media_Core == "on" && Windows_Media == "on"]
 extend FaceDetectionEffectFrame <: windows_core.HandleWinrtType<FaceDetectionEffectFrame> {
     public static func intoWinrtHandle(value: FaceDetectionEffectFrame): CPointer<Unit> {
         value.asRaw()
@@ -2501,7 +2498,7 @@ public class HighDynamicRangeOutput <: InterfaceWrapperBase & ComInterface & win
         return defaultInterface().Certainty()
     }
 
-    @When[Windows_Media_Devices_Core == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Devices_Core == "on"]
     public unsafe func FrameControllers(): windows_collections.IVectorView<FrameController> {
         return defaultInterface().FrameControllers()
     }
@@ -3363,7 +3360,10 @@ public struct ICodecInfoVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Kind: CFunc<(CPointer<Unit>, CPointer<CodecKindAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Category: CFunc<(CPointer<Unit>, CPointer<CodecCategoryAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Subtypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Subtypes: UIntNative = UIntNative(0)
     public var DisplayName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsTrusted: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -3450,6 +3450,7 @@ public class ICodecInfo <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<CodecCategory>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Subtypes(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3482,7 +3483,10 @@ extend ICodecInfo <: windows_core.Interface<ICodecInfo> {}
 @C
 public struct ICodecQueryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllAsync: CFunc<(CPointer<Unit>, CodecKindAbi, CodecCategoryAbi, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3551,6 +3555,7 @@ public class ICodecQuery <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         readVtbl<ICodecQueryVtbl>(ICodecQueryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAsync(kind: CodecKind, category: CodecCategory, subType: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVectorView<CodecInfo>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4407,7 +4412,10 @@ extend IDataCue2 <: windows_core.Interface<IDataCue2> {}
 @C
 public struct IFaceDetectedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Media == "on"]
     public var ResultFrame: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Media != "on"]
+    public var ResultFrame: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4476,6 +4484,7 @@ public class IFaceDetectedEventArgs <: InterfaceWrapperBase & ComInterface & Run
         readVtbl<IFaceDetectedEventArgsVtbl>(IFaceDetectedEventArgsVtbl())
     }
 
+    @When[Windows_Media == "on"]
     public unsafe func ResultFrame(): FaceDetectionEffectFrame {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4496,7 +4505,10 @@ public struct IFaceDetectionEffectVtbl {
     public var Enabled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetDesiredDetectionInterval: CFunc<(CPointer<Unit>, windows_future.TimeSpanAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var DesiredDetectionInterval: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Media == "on"]
     public var FaceDetected: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Media != "on"]
+    public var FaceDetected: UIntNative = UIntNative(0)
     public var RemoveFaceDetected: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -4606,6 +4618,7 @@ public class IFaceDetectionEffect <: InterfaceWrapperBase & ComInterface & Runti
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<windows_future.TimeSpan>()).unwrap()
     }
 
+    @When[Windows_Media == "on"]
     public unsafe func FaceDetected(handler: Foundation.TypedEventHandler<FaceDetectionEffect, FaceDetectedEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
@@ -4748,9 +4761,9 @@ extend IFaceDetectionEffectDefinition <: windows_core.Interface<IFaceDetectionEf
 @C
 public struct IFaceDetectionEffectFrameVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Media_FaceAnalysis == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_FaceAnalysis == "on"]
     public var DetectedFaces: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Media_FaceAnalysis != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Media_FaceAnalysis != "on"]
     public var DetectedFaces: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -4839,7 +4852,7 @@ public class IFaceDetectionEffectFrame <: InterfaceWrapperBase & ComInterface & 
         readVtbl<IFaceDetectionEffectFrameVtbl>(IFaceDetectionEffectFrameVtbl())
     }
 
-    @When[Windows_Media_FaceAnalysis == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_FaceAnalysis == "on"]
     public unsafe func DetectedFaces(): windows_collections.IVectorView<Media_FaceAnalysis.DetectedFace> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4949,9 +4962,9 @@ extend IHighDynamicRangeControl <: windows_core.Interface<IHighDynamicRangeContr
 public struct IHighDynamicRangeOutputVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Certainty: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Media_Devices_Core == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Devices_Core == "on"]
     public var FrameControllers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Media_Devices_Core != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Media_Devices_Core != "on"]
     public var FrameControllers: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -5029,7 +5042,7 @@ public class IHighDynamicRangeOutput <: InterfaceWrapperBase & ComInterface & Ru
         return result__
     }
 
-    @When[Windows_Media_Devices_Core == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Devices_Core == "on"]
     public unsafe func FrameControllers(): windows_collections.IVectorView<FrameController> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5386,14 +5399,14 @@ extend ILowLightFusionResult <: windows_core.Interface<ILowLightFusionResult> {}
 @C
 public struct ILowLightFusionStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Graphics_Imaging == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_Imaging == "on"]
     public var SupportedBitmapPixelFormats: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Graphics_Imaging != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Graphics_Imaging != "on"]
     public var SupportedBitmapPixelFormats: UIntNative = UIntNative(0)
     public var MaxSupportedFrameCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Graphics_Imaging == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_Imaging == "on"]
     public var FuseAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Graphics_Imaging != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Graphics_Imaging != "on"]
     public var FuseAsync: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -5463,7 +5476,7 @@ public class ILowLightFusionStatics <: InterfaceWrapperBase & ComInterface & Run
         readVtbl<ILowLightFusionStaticsVtbl>(ILowLightFusionStaticsVtbl())
     }
 
-    @When[Windows_Graphics_Imaging == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_Imaging == "on"]
     public unsafe func SupportedBitmapPixelFormats(): windows_collections.IVectorView<Graphics_Imaging.BitmapPixelFormat> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5480,7 +5493,7 @@ public class ILowLightFusionStatics <: InterfaceWrapperBase & ComInterface & Run
         return result__
     }
 
-    @When[Windows_Graphics_Imaging == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_Imaging == "on"]
     public unsafe func FuseAsync(frameSet: windows_collections.IIterable<Graphics_Imaging.SoftwareBitmap>): windows_future.IAsyncOperationWithProgress<LowLightFusionResult, Float64> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5501,7 +5514,10 @@ public struct IMediaBinderVtbl {
     public var RemoveBinding: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Token: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetToken: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Media_Playback == "on"]
     public var Source: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Media_Playback != "on"]
+    public var Source: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -5598,6 +5614,7 @@ public class IMediaBinder <: InterfaceWrapperBase & ComInterface & RuntimeName &
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Media_Playback == "on"]
     public unsafe func Source(): MediaSource {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6408,7 +6425,10 @@ extend IMediaSource <: windows_core.Interface<IMediaSource> {}
 @C
 public struct IMediaSource2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Media_Playback == "on"]
     public var OpenOperationCompleted: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Media_Playback != "on"]
+    public var OpenOperationCompleted: UIntNative = UIntNative(0)
     public var RemoveOpenOperationCompleted: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Foundation_Collections == "on"]
     public var CustomProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -6416,8 +6436,14 @@ public struct IMediaSource2Vtbl {
     public var CustomProperties: UIntNative = UIntNative(0)
     public var Duration: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsOpen: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var ExternalTimedTextSources: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ExternalTimedTextSources: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var ExternalTimedMetadataTracks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ExternalTimedMetadataTracks: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -6505,6 +6531,7 @@ public class IMediaSource2 <: InterfaceWrapperBase & ComInterface & RuntimeName 
         readVtbl<IMediaSource2Vtbl>(IMediaSource2Vtbl())
     }
 
+    @When[Windows_Media_Playback == "on"]
     public unsafe func OpenOperationCompleted(handler: Foundation.TypedEventHandler<MediaSource, MediaSourceOpenOperationCompletedEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
@@ -6544,6 +6571,7 @@ public class IMediaSource2 <: InterfaceWrapperBase & ComInterface & RuntimeName 
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ExternalTimedTextSources(): windows_collections.IObservableVector<TimedTextSource> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6552,6 +6580,7 @@ public class IMediaSource2 <: InterfaceWrapperBase & ComInterface & RuntimeName 
         return windows_collections.IObservableVector<TimedTextSource>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ExternalTimedMetadataTracks(): windows_collections.IObservableVector<TimedMetadataTrack> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6568,7 +6597,10 @@ extend IMediaSource2 <: windows_core.Interface<IMediaSource2> {}
 @C
 public struct IMediaSource3Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Media_Playback == "on"]
     public var StateChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Media_Playback != "on"]
+    public var StateChanged: UIntNative = UIntNative(0)
     public var RemoveStateChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var State: CFunc<(CPointer<Unit>, CPointer<MediaSourceStateAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Reset: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
@@ -6666,6 +6698,7 @@ public class IMediaSource3 <: InterfaceWrapperBase & ComInterface & RuntimeName 
         readVtbl<IMediaSource3Vtbl>(IMediaSource3Vtbl())
     }
 
+    @When[Windows_Media_Playback == "on"]
     public unsafe func StateChanged(handler: Foundation.TypedEventHandler<MediaSource, MediaSourceStateChangedEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
@@ -7401,26 +7434,38 @@ extend IMediaSourceStateChangedEventArgs <: windows_core.Interface<IMediaSourceS
 @C
 public struct IMediaSourceStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Media_Streaming_Adaptive == "on"]
+    @When[Windows_Media_Playback == "on" && Windows_Media_Streaming_Adaptive == "on"]
     public var CreateFromAdaptiveMediaSource: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Media_Streaming_Adaptive != "on"]
+    @When[Windows_Media_Playback != "on" || Windows_Media_Streaming_Adaptive != "on"]
     public var CreateFromAdaptiveMediaSource: UIntNative = UIntNative(0)
+    @When[Windows_Media_Playback == "on"]
     public var CreateFromMediaStreamSource: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Media_Playback != "on"]
+    public var CreateFromMediaStreamSource: UIntNative = UIntNative(0)
+    @When[Windows_Media_Playback == "on"]
     public var CreateFromMseStreamSource: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Media_Playback != "on"]
+    public var CreateFromMseStreamSource: UIntNative = UIntNative(0)
+    @When[Windows_Media_Playback == "on"]
     public var CreateFromIMediaSource: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Media_Playback != "on"]
+    public var CreateFromIMediaSource: UIntNative = UIntNative(0)
+    @When[Windows_Media_Playback == "on" && Windows_Storage == "on"]
     public var CreateFromStorageFile: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Media_Playback != "on" || Windows_Storage != "on"]
     public var CreateFromStorageFile: UIntNative = UIntNative(0)
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Media_Playback == "on" && Windows_Storage_Streams == "on"]
     public var CreateFromStream: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams != "on"]
+    @When[Windows_Media_Playback != "on" || Windows_Storage_Streams != "on"]
     public var CreateFromStream: UIntNative = UIntNative(0)
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Media_Playback == "on" && Windows_Storage_Streams == "on"]
     public var CreateFromStreamReference: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams != "on"]
+    @When[Windows_Media_Playback != "on" || Windows_Storage_Streams != "on"]
     public var CreateFromStreamReference: UIntNative = UIntNative(0)
+    @When[Windows_Media_Playback == "on"]
     public var CreateFromUri: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Media_Playback != "on"]
+    public var CreateFromUri: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -7489,7 +7534,7 @@ public class IMediaSourceStatics <: InterfaceWrapperBase & ComInterface & Runtim
         readVtbl<IMediaSourceStaticsVtbl>(IMediaSourceStaticsVtbl())
     }
 
-    @When[Windows_Media_Streaming_Adaptive == "on"]
+    @When[Windows_Media_Playback == "on" && Windows_Media_Streaming_Adaptive == "on"]
     public unsafe func CreateFromAdaptiveMediaSource(mediaSource: AdaptiveMediaSource): MediaSource {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7498,6 +7543,7 @@ public class IMediaSourceStatics <: InterfaceWrapperBase & ComInterface & Runtim
         return MediaSource.fromAbiTake(result__)
     }
 
+    @When[Windows_Media_Playback == "on"]
     public unsafe func CreateFromMediaStreamSource(mediaSource: MediaStreamSource): MediaSource {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7506,6 +7552,7 @@ public class IMediaSourceStatics <: InterfaceWrapperBase & ComInterface & Runtim
         return MediaSource.fromAbiTake(result__)
     }
 
+    @When[Windows_Media_Playback == "on"]
     public unsafe func CreateFromMseStreamSource(mediaSource: MseStreamSource): MediaSource {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7514,6 +7561,7 @@ public class IMediaSourceStatics <: InterfaceWrapperBase & ComInterface & Runtim
         return MediaSource.fromAbiTake(result__)
     }
 
+    @When[Windows_Media_Playback == "on"]
     public unsafe func CreateFromIMediaSource(mediaSource: IMediaSource): MediaSource {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7522,7 +7570,7 @@ public class IMediaSourceStatics <: InterfaceWrapperBase & ComInterface & Runtim
         return MediaSource.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Media_Playback == "on" && Windows_Storage == "on"]
     public unsafe func CreateFromStorageFile(file: _impl_l1.IStorageFile): MediaSource {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7531,7 +7579,7 @@ public class IMediaSourceStatics <: InterfaceWrapperBase & ComInterface & Runtim
         return MediaSource.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Media_Playback == "on" && Windows_Storage_Streams == "on"]
     public unsafe func CreateFromStream(stream: _impl_l1.IRandomAccessStream, contentType: windows_core.HString): MediaSource {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7540,7 +7588,7 @@ public class IMediaSourceStatics <: InterfaceWrapperBase & ComInterface & Runtim
         return MediaSource.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Media_Playback == "on" && Windows_Storage_Streams == "on"]
     public unsafe func CreateFromStreamReference(stream: _impl_l1.IRandomAccessStreamReference, contentType: windows_core.HString): MediaSource {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7549,6 +7597,7 @@ public class IMediaSourceStatics <: InterfaceWrapperBase & ComInterface & Runtim
         return MediaSource.fromAbiTake(result__)
     }
 
+    @When[Windows_Media_Playback == "on"]
     public unsafe func CreateFromUri(uri: Foundation.Uri): MediaSource {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7565,7 +7614,10 @@ extend IMediaSourceStatics <: windows_core.Interface<IMediaSourceStatics> {}
 @C
 public struct IMediaSourceStatics2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Media_Playback == "on"]
     public var CreateFromMediaBinder: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Media_Playback != "on"]
+    public var CreateFromMediaBinder: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -7634,6 +7686,7 @@ public class IMediaSourceStatics2 <: InterfaceWrapperBase & ComInterface & Runti
         readVtbl<IMediaSourceStatics2Vtbl>(IMediaSourceStatics2Vtbl())
     }
 
+    @When[Windows_Media_Playback == "on"]
     public unsafe func CreateFromMediaBinder(binder: MediaBinder): MediaSource {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7650,9 +7703,9 @@ extend IMediaSourceStatics2 <: windows_core.Interface<IMediaSourceStatics2> {}
 @C
 public struct IMediaSourceStatics3Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Media_Capture_Frames == "on"]
+    @When[Windows_Media_Capture_Frames == "on" && Windows_Media_Playback == "on"]
     public var CreateFromMediaFrameSource: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Media_Capture_Frames != "on"]
+    @When[Windows_Media_Capture_Frames != "on" || Windows_Media_Playback != "on"]
     public var CreateFromMediaFrameSource: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -7722,7 +7775,7 @@ public class IMediaSourceStatics3 <: InterfaceWrapperBase & ComInterface & Runti
         readVtbl<IMediaSourceStatics3Vtbl>(IMediaSourceStatics3Vtbl())
     }
 
-    @When[Windows_Media_Capture_Frames == "on"]
+    @When[Windows_Media_Capture_Frames == "on" && Windows_Media_Playback == "on"]
     public unsafe func CreateFromMediaFrameSource(frameSource: MediaFrameSource): MediaSource {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7739,9 +7792,9 @@ extend IMediaSourceStatics3 <: windows_core.Interface<IMediaSourceStatics3> {}
 @C
 public struct IMediaSourceStatics4Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Networking_BackgroundTransfer == "on"]
+    @When[Windows_Media_Playback == "on" && Windows_Networking_BackgroundTransfer == "on"]
     public var CreateFromDownloadOperation: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Networking_BackgroundTransfer != "on"]
+    @When[Windows_Media_Playback != "on" || Windows_Networking_BackgroundTransfer != "on"]
     public var CreateFromDownloadOperation: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -7811,7 +7864,7 @@ public class IMediaSourceStatics4 <: InterfaceWrapperBase & ComInterface & Runti
         readVtbl<IMediaSourceStatics4Vtbl>(IMediaSourceStatics4Vtbl())
     }
 
-    @When[Windows_Networking_BackgroundTransfer == "on"]
+    @When[Windows_Media_Playback == "on" && Windows_Networking_BackgroundTransfer == "on"]
     public unsafe func CreateFromDownloadOperation(downloadOperation: Networking_BackgroundTransfer.DownloadOperation): MediaSource {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -8346,7 +8399,10 @@ public struct IMediaStreamSampleVtbl {
     @When[Windows_Storage_Streams != "on"]
     public var get_Buffer: UIntNative = UIntNative(0)
     public var Timestamp: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var ExtendedProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ExtendedProperties: UIntNative = UIntNative(0)
     public var Protection: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetDecodeTimestamp: CFunc<(CPointer<Unit>, windows_future.TimeSpanAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var DecodeTimestamp: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -8455,6 +8511,7 @@ public class IMediaStreamSample <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<windows_future.TimeSpan>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ExtendedProperties(): MediaStreamSamplePropertySet {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -11046,7 +11103,10 @@ public struct IMseSourceBufferVtbl {
     public var Mode: CFunc<(CPointer<Unit>, CPointer<MseAppendModeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetMode: CFunc<(CPointer<Unit>, MseAppendModeAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsUpdating: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Buffered: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Buffered: UIntNative = UIntNative(0)
     public var TimestampOffset: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetTimestampOffset: CFunc<(CPointer<Unit>, windows_future.TimeSpanAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var AppendWindowStart: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -11227,6 +11287,7 @@ public class IMseSourceBuffer <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Buffered(): windows_collections.IVectorView<MseTimeRange> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -11322,7 +11383,10 @@ public struct IMseSourceBufferListVtbl {
     public var RemoveSourceBufferAdded: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SourceBufferRemoved: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveSourceBufferRemoved: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Buffers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Buffers: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -11419,6 +11483,7 @@ public class IMseSourceBufferList <: InterfaceWrapperBase & ComInterface & Runti
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Buffers(): windows_collections.IVectorView<MseSourceBuffer> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -11817,7 +11882,10 @@ public struct ISceneAnalysisEffectVtbl {
     public var HighDynamicRangeAnalyzer: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetDesiredAnalysisInterval: CFunc<(CPointer<Unit>, windows_future.TimeSpanAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var DesiredAnalysisInterval: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Media == "on"]
     public var SceneAnalyzed: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Media != "on"]
+    public var SceneAnalyzed: UIntNative = UIntNative(0)
     public var RemoveSceneAnalyzed: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -11921,6 +11989,7 @@ public class ISceneAnalysisEffect <: InterfaceWrapperBase & ComInterface & Runti
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<windows_future.TimeSpan>()).unwrap()
     }
 
+    @When[Windows_Media == "on"]
     public unsafe func SceneAnalyzed(handler: Foundation.TypedEventHandler<SceneAnalysisEffect, SceneAnalyzedEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
@@ -12164,7 +12233,10 @@ extend ISceneAnalysisEffectFrame2 <: windows_core.Interface<ISceneAnalysisEffect
 @C
 public struct ISceneAnalyzedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Media == "on"]
     public var ResultFrame: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Media != "on"]
+    public var ResultFrame: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -12233,6 +12305,7 @@ public class ISceneAnalyzedEventArgs <: InterfaceWrapperBase & ComInterface & Ru
         readVtbl<ISceneAnalyzedEventArgsVtbl>(ISceneAnalyzedEventArgsVtbl())
     }
 
+    @When[Windows_Media == "on"]
     public unsafe func ResultFrame(): SceneAnalysisEffectFrame {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -12798,8 +12871,14 @@ public struct ITimedMetadataTrackVtbl {
     public var RemoveCueExited: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var TrackFailed: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveTrackFailed: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Cues: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Cues: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var ActiveCues: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ActiveCues: UIntNative = UIntNative(0)
     public var get_TimedMetadataKind: CFunc<(CPointer<Unit>, CPointer<TimedMetadataKindAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var DispatchType: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var AddCue: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -12926,6 +13005,7 @@ public class ITimedMetadataTrack <: InterfaceWrapperBase & ComInterface & Runtim
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Cues(): windows_collections.IVectorView<IMediaCue> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -12934,6 +13014,7 @@ public class ITimedMetadataTrack <: InterfaceWrapperBase & ComInterface & Runtim
         return windows_collections.IVectorView<IMediaCue>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ActiveCues(): windows_collections.IVectorView<IMediaCue> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -13359,14 +13440,25 @@ extend ITimedMetadataTrackFailedEventArgs <: windows_core.Interface<ITimedMetada
 @C
 public struct ITimedMetadataTrackProviderVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var TimedMetadataTracks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var TimedMetadataTracks: UIntNative = UIntNative(0)
     public init() {}
 
+    @When[Windows_Foundation_Collections == "on"]
     public static func new<Identity>(offset!: Int64 = 0): ITimedMetadataTrackProviderVtbl where Identity <: ITimedMetadataTrackProvider_Impl {
         let _ = offset
         var vtbl = ITimedMetadataTrackProviderVtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.TimedMetadataTracks = { instanceRaw, result__ =>
+        vtbl = ITimedMetadataTrackProviderVtbl.__assignTimedMetadataTracks<Identity>(vtbl)
+        return vtbl
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections == "on"]
+    public static func __assignTimedMetadataTracks<Identity>(vtbl: ITimedMetadataTrackProviderVtbl): ITimedMetadataTrackProviderVtbl where Identity <: ITimedMetadataTrackProvider_Impl {
+        var next = vtbl
+        next.TimedMetadataTracks = { instanceRaw, result__ =>
             match (unsafe { asImplFromRaw<ITimedMetadataTrackProvider_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
                     impl.__winrtThunk_TimedMetadataTracks(result__)
@@ -13374,6 +13466,11 @@ public struct ITimedMetadataTrackProviderVtbl {
                     E_NOINTERFACE.value
             }
         }
+        return next
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections != "on"]
+    public static func __assignTimedMetadataTracks<Identity>(vtbl: ITimedMetadataTrackProviderVtbl): ITimedMetadataTrackProviderVtbl where Identity <: ITimedMetadataTrackProvider_Impl {
         return vtbl
     }
 
@@ -13385,12 +13482,12 @@ public struct ITimedMetadataTrackProviderVtbl {
     }
 }
 
-@When[Windows_Media_Core == "on"]
+@When[Windows_Media_Core == "on" && Windows_Foundation_Collections == "on"]
 public interface ITimedMetadataTrackProvider_ImplErased {
     public func __winrtThunk_TimedMetadataTracks(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Media_Core == "on"]
+@When[Windows_Media_Core == "on" && Windows_Foundation_Collections == "on"]
 public interface ITimedMetadataTrackProvider_Impl <: ITimedMetadataTrackProvider_ImplErased {
     public func TimedMetadataTracks(): windows_core.Result<windows_collections.IVectorView<TimedMetadataTrack>>
 
@@ -13478,6 +13575,7 @@ public class ITimedMetadataTrackProvider <: InterfaceWrapperBase & ComInterface 
         readVtbl<ITimedMetadataTrackProviderVtbl>(ITimedMetadataTrackProviderVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TimedMetadataTracks(): windows_collections.IVectorView<TimedMetadataTrack> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -13630,7 +13728,10 @@ public struct ITimedTextCueVtbl {
     public var SetCueRegion: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CueStyle: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetCueStyle: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Lines: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Lines: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -13739,6 +13840,7 @@ public class ITimedTextCue <: InterfaceWrapperBase & ComInterface & RuntimeName 
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Lines(): windows_collections.IVector<TimedTextLine> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -13757,7 +13859,10 @@ public struct ITimedTextLineVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Text: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetText: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Subformats: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Subformats: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -13840,6 +13945,7 @@ public class ITimedTextLine <: InterfaceWrapperBase & ComInterface & RuntimeName
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Subformats(): windows_collections.IVector<TimedTextSubformat> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -14365,7 +14471,10 @@ extend ITimedTextSource <: windows_core.Interface<ITimedTextSource> {}
 public struct ITimedTextSourceResolveResultEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Error: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Tracks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Tracks: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -14442,6 +14551,7 @@ public class ITimedTextSourceResolveResultEventArgs <: InterfaceWrapperBase & Co
         return TimedMetadataTrackError.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Tracks(): windows_collections.IVectorView<TimedMetadataTrack> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -15382,7 +15492,10 @@ public struct IVideoStabilizationEffectVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var SetEnabled: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Enabled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Media == "on"]
     public var EnabledChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Media != "on"]
+    public var EnabledChanged: UIntNative = UIntNative(0)
     public var RemoveEnabledChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Media_Capture == "on" && Windows_Media_Devices == "on" && Windows_Media_MediaProperties == "on"]
     public var GetRecommendedStreamConfiguration: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
@@ -15482,6 +15595,7 @@ public class IVideoStabilizationEffect <: InterfaceWrapperBase & ComInterface & 
         return result__
     }
 
+    @When[Windows_Media == "on"]
     public unsafe func EnabledChanged(handler: Foundation.TypedEventHandler<VideoStabilizationEffect, VideoStabilizationEffectEnabledChangedEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
@@ -16461,7 +16575,7 @@ public class LowLightFusion <: windows_interface.RuntimeName & windows_core.Runt
         windows_core.activationFactory<LowLightFusion>().ok()
     }
 
-    @When[Windows_Graphics_Imaging == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_Imaging == "on"]
     public static unsafe func SupportedBitmapPixelFormats(): windows_collections.IVectorView<Graphics_Imaging.BitmapPixelFormat> {
         var result__: Option<windows_collections.IVectorView<Graphics_Imaging.BitmapPixelFormat>> = Option<windows_collections.IVectorView<Graphics_Imaging.BitmapPixelFormat>>.None
         try (factory__ = windows_core.factory<LowLightFusion, ILowLightFusionStatics>().unwrap()) {
@@ -16484,7 +16598,7 @@ public class LowLightFusion <: windows_interface.RuntimeName & windows_core.Runt
         }
     }
 
-    @When[Windows_Graphics_Imaging == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_Imaging == "on"]
     public static unsafe func FuseAsync(frameSet: windows_collections.IIterable<Graphics_Imaging.SoftwareBitmap>): windows_future.IAsyncOperationWithProgress<LowLightFusionResult, Float64> {
         var result__: Option<windows_future.IAsyncOperationWithProgress<LowLightFusionResult, Float64>> = Option<windows_future.IAsyncOperationWithProgress<LowLightFusionResult, Float64>>.None
         try (factory__ = windows_core.factory<LowLightFusion, ILowLightFusionStatics>().unwrap()) {
@@ -16697,6 +16811,7 @@ public class MediaBinder <: InterfaceWrapperBase & ComInterface & windows_interf
         defaultInterface().SetToken(value)
     }
 
+    @When[Windows_Media_Playback == "on"]
     public unsafe func Source(): MediaSource {
         return defaultInterface().Source()
     }
@@ -16990,7 +17105,7 @@ extend MediaDecoderStatus <: windows_core.CopyType & windows_core.RuntimeType & 
     }
 }
 
-@When[Windows_Media_Core == "on"]
+@When[Windows_Media_Core == "on" && Windows_Media_Playback == "on"]
 public class MediaSource <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -17098,12 +17213,12 @@ public class MediaSource <: InterfaceWrapperBase & ComInterface & windows_interf
         return defaultInterface().IsOpen()
     }
 
-    @When[Windows_Media_Playback == "on"]
+    @When[(Windows_Foundation_Collections == "on") && (Windows_Media_Playback == "on")]
     public unsafe func ExternalTimedTextSources(): windows_collections.IObservableVector<TimedTextSource> {
         return defaultInterface().ExternalTimedTextSources()
     }
 
-    @When[Windows_Media_Playback == "on"]
+    @When[(Windows_Foundation_Collections == "on") && (Windows_Media_Playback == "on")]
     public unsafe func ExternalTimedMetadataTracks(): windows_collections.IObservableVector<TimedMetadataTrack> {
         return defaultInterface().ExternalTimedMetadataTracks()
     }
@@ -17112,7 +17227,7 @@ public class MediaSource <: InterfaceWrapperBase & ComInterface & windows_interf
         asIClosable().Close()
     }
 
-    @When[Windows_Media_Streaming_Adaptive == "on"]
+    @When[Windows_Media_Playback == "on" && Windows_Media_Streaming_Adaptive == "on"]
     public static unsafe func CreateFromAdaptiveMediaSource(mediaSource: AdaptiveMediaSource): MediaSource {
         var result__: Option<MediaSource> = Option<MediaSource>.None
         try (factory__ = windows_core.factory<MediaSource, IMediaSourceStatics>().unwrap()) {
@@ -17124,6 +17239,7 @@ public class MediaSource <: InterfaceWrapperBase & ComInterface & windows_interf
         }
     }
 
+    @When[Windows_Media_Playback == "on"]
     public static unsafe func CreateFromMediaStreamSource(mediaSource: MediaStreamSource): MediaSource {
         var result__: Option<MediaSource> = Option<MediaSource>.None
         try (factory__ = windows_core.factory<MediaSource, IMediaSourceStatics>().unwrap()) {
@@ -17135,6 +17251,7 @@ public class MediaSource <: InterfaceWrapperBase & ComInterface & windows_interf
         }
     }
 
+    @When[Windows_Media_Playback == "on"]
     public static unsafe func CreateFromMseStreamSource(mediaSource: MseStreamSource): MediaSource {
         var result__: Option<MediaSource> = Option<MediaSource>.None
         try (factory__ = windows_core.factory<MediaSource, IMediaSourceStatics>().unwrap()) {
@@ -17146,6 +17263,7 @@ public class MediaSource <: InterfaceWrapperBase & ComInterface & windows_interf
         }
     }
 
+    @When[Windows_Media_Playback == "on"]
     public static unsafe func CreateFromIMediaSource(mediaSource: IMediaSource): MediaSource {
         var result__: Option<MediaSource> = Option<MediaSource>.None
         try (factory__ = windows_core.factory<MediaSource, IMediaSourceStatics>().unwrap()) {
@@ -17157,7 +17275,7 @@ public class MediaSource <: InterfaceWrapperBase & ComInterface & windows_interf
         }
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Media_Playback == "on" && Windows_Storage == "on"]
     public static unsafe func CreateFromStorageFile(file: _impl_l1.IStorageFile): MediaSource {
         var result__: Option<MediaSource> = Option<MediaSource>.None
         try (factory__ = windows_core.factory<MediaSource, IMediaSourceStatics>().unwrap()) {
@@ -17169,7 +17287,7 @@ public class MediaSource <: InterfaceWrapperBase & ComInterface & windows_interf
         }
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Media_Playback == "on" && Windows_Storage_Streams == "on"]
     public static unsafe func CreateFromStream(stream: _impl_l1.IRandomAccessStream, contentType: windows_core.HString): MediaSource {
         var result__: Option<MediaSource> = Option<MediaSource>.None
         try (factory__ = windows_core.factory<MediaSource, IMediaSourceStatics>().unwrap()) {
@@ -17181,7 +17299,7 @@ public class MediaSource <: InterfaceWrapperBase & ComInterface & windows_interf
         }
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Media_Playback == "on" && Windows_Storage_Streams == "on"]
     public static unsafe func CreateFromStreamReference(stream: _impl_l1.IRandomAccessStreamReference, contentType: windows_core.HString): MediaSource {
         var result__: Option<MediaSource> = Option<MediaSource>.None
         try (factory__ = windows_core.factory<MediaSource, IMediaSourceStatics>().unwrap()) {
@@ -17193,6 +17311,7 @@ public class MediaSource <: InterfaceWrapperBase & ComInterface & windows_interf
         }
     }
 
+    @When[Windows_Media_Playback == "on"]
     public static unsafe func CreateFromUri(uri: Foundation.Uri): MediaSource {
         var result__: Option<MediaSource> = Option<MediaSource>.None
         try (factory__ = windows_core.factory<MediaSource, IMediaSourceStatics>().unwrap()) {
@@ -17204,7 +17323,7 @@ public class MediaSource <: InterfaceWrapperBase & ComInterface & windows_interf
         }
     }
 
-    @When[Windows_Media_Capture_Frames == "on"]
+    @When[Windows_Media_Capture_Frames == "on" && Windows_Media_Playback == "on"]
     public static unsafe func CreateFromMediaFrameSource(frameSource: MediaFrameSource): MediaSource {
         var result__: Option<MediaSource> = Option<MediaSource>.None
         try (factory__ = windows_core.factory<MediaSource, IMediaSourceStatics3>().unwrap()) {
@@ -17216,7 +17335,7 @@ public class MediaSource <: InterfaceWrapperBase & ComInterface & windows_interf
         }
     }
 
-    @When[Windows_Networking_BackgroundTransfer == "on"]
+    @When[Windows_Media_Playback == "on" && Windows_Networking_BackgroundTransfer == "on"]
     public static unsafe func CreateFromDownloadOperation(downloadOperation: Networking_BackgroundTransfer.DownloadOperation): MediaSource {
         var result__: Option<MediaSource> = Option<MediaSource>.None
         try (factory__ = windows_core.factory<MediaSource, IMediaSourceStatics4>().unwrap()) {
@@ -17228,6 +17347,7 @@ public class MediaSource <: InterfaceWrapperBase & ComInterface & windows_interf
         }
     }
 
+    @When[Windows_Media_Playback == "on"]
     public static unsafe func CreateFromMediaBinder(binder: MediaBinder): MediaSource {
         var result__: Option<MediaSource> = Option<MediaSource>.None
         try (factory__ = windows_core.factory<MediaSource, IMediaSourceStatics2>().unwrap()) {
@@ -17240,7 +17360,7 @@ public class MediaSource <: InterfaceWrapperBase & ComInterface & windows_interf
     }
 }
 
-@When[Windows_Media_Core == "on"]
+@When[Windows_Media_Core == "on" && Windows_Media_Playback == "on"]
 extend MediaSource <: windows_core.HandleWinrtType<MediaSource> {
     public static func intoWinrtHandle(value: MediaSource): CPointer<Unit> {
         value.asRaw()
@@ -17849,6 +17969,7 @@ public class MediaStreamSample <: InterfaceWrapperBase & ComInterface & windows_
         return defaultInterface().Timestamp()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ExtendedProperties(): MediaStreamSamplePropertySet {
         return defaultInterface().ExtendedProperties()
     }
@@ -17944,7 +18065,7 @@ extend MediaStreamSample <: windows_core.HandleWinrtType<MediaStreamSample> {
     }
 }
 
-@When[Windows_Media_Core == "on"]
+@When[Windows_Media_Core == "on" && Windows_Foundation_Collections == "on"]
 public class MediaStreamSamplePropertySet <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -18061,7 +18182,7 @@ public class MediaStreamSamplePropertySet <: InterfaceWrapperBase & ComInterface
     }
 }
 
-@When[Windows_Media_Core == "on"]
+@When[Windows_Media_Core == "on" && Windows_Foundation_Collections == "on"]
 extend MediaStreamSamplePropertySet <: windows_core.HandleWinrtType<MediaStreamSamplePropertySet> {
     public static func intoWinrtHandle(value: MediaStreamSamplePropertySet): CPointer<Unit> {
         value.asRaw()
@@ -20044,6 +20165,7 @@ public class MseSourceBuffer <: InterfaceWrapperBase & ComInterface & windows_in
         return defaultInterface().IsUpdating()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Buffered(): windows_collections.IVectorView<MseTimeRange> {
         return defaultInterface().Buffered()
     }
@@ -20199,6 +20321,7 @@ public class MseSourceBufferList <: InterfaceWrapperBase & ComInterface & window
         defaultInterface().RemoveSourceBufferRemoved(token)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Buffers(): windows_collections.IVectorView<MseSourceBuffer> {
         return defaultInterface().Buffers()
     }
@@ -20434,7 +20557,7 @@ extend MseTimeRange <: windows_core.CopyType & windows_core.RuntimeType & window
     }
 }
 
-@When[Windows_Media_Core == "on"]
+@When[Windows_Media_Core == "on" && Windows_Media == "on"]
 public class SceneAnalysisEffect <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -20541,7 +20664,7 @@ public class SceneAnalysisEffect <: InterfaceWrapperBase & ComInterface & window
     }
 }
 
-@When[Windows_Media_Core == "on"]
+@When[Windows_Media_Core == "on" && Windows_Media == "on"]
 extend SceneAnalysisEffect <: windows_core.HandleWinrtType<SceneAnalysisEffect> {
     public static func intoWinrtHandle(value: SceneAnalysisEffect): CPointer<Unit> {
         value.asRaw()
@@ -20559,7 +20682,7 @@ extend SceneAnalysisEffect <: windows_core.HandleWinrtType<SceneAnalysisEffect> 
     }
 }
 
-@When[Windows_Media_Core == "on"]
+@When[Windows_Media_Core == "on" && Windows_Media_Effects == "on"]
 public class SceneAnalysisEffectDefinition <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -20649,7 +20772,7 @@ public class SceneAnalysisEffectDefinition <: InterfaceWrapperBase & ComInterfac
     }
 }
 
-@When[Windows_Media_Core == "on"]
+@When[Windows_Media_Core == "on" && Windows_Media_Effects == "on"]
 extend SceneAnalysisEffectDefinition <: windows_core.HandleWinrtType<SceneAnalysisEffectDefinition> {
     public static func intoWinrtHandle(value: SceneAnalysisEffectDefinition): CPointer<Unit> {
         value.asRaw()
@@ -20667,7 +20790,7 @@ extend SceneAnalysisEffectDefinition <: windows_core.HandleWinrtType<SceneAnalys
     }
 }
 
-@When[Windows_Media_Core == "on"]
+@When[Windows_Media_Core == "on" && Windows_Media == "on"]
 public class SceneAnalysisEffectFrame <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -20810,7 +20933,7 @@ public class SceneAnalysisEffectFrame <: InterfaceWrapperBase & ComInterface & w
     }
 }
 
-@When[Windows_Media_Core == "on"]
+@When[Windows_Media_Core == "on" && Windows_Media == "on"]
 extend SceneAnalysisEffectFrame <: windows_core.HandleWinrtType<SceneAnalysisEffectFrame> {
     public static func intoWinrtHandle(value: SceneAnalysisEffectFrame): CPointer<Unit> {
         value.asRaw()
@@ -20954,6 +21077,7 @@ public class SceneAnalyzedEventArgs <: InterfaceWrapperBase & ComInterface & win
         }
     }
 
+    @When[Windows_Media == "on"]
     public unsafe func ResultFrame(): SceneAnalysisEffectFrame {
         return defaultInterface().ResultFrame()
     }
@@ -21438,10 +21562,12 @@ public class TimedMetadataTrack <: InterfaceWrapperBase & ComInterface & windows
         defaultInterface().RemoveTrackFailed(token)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Cues(): windows_collections.IVectorView<IMediaCue> {
         return defaultInterface().Cues()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ActiveCues(): windows_collections.IVectorView<IMediaCue> {
         return defaultInterface().ActiveCues()
     }
@@ -22106,6 +22232,7 @@ public class TimedTextCue <: InterfaceWrapperBase & ComInterface & windows_inter
         defaultInterface().SetCueStyle(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Lines(): windows_collections.IVector<TimedTextLine> {
         return defaultInterface().Lines()
     }
@@ -22448,6 +22575,7 @@ public class TimedTextLine <: InterfaceWrapperBase & ComInterface & windows_inte
         defaultInterface().SetText(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Subformats(): windows_collections.IVector<TimedTextSubformat> {
         return defaultInterface().Subformats()
     }
@@ -23483,6 +23611,7 @@ public class TimedTextSourceResolveResultEventArgs <: InterfaceWrapperBase & Com
         return defaultInterface().Error()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Tracks(): windows_collections.IVectorView<TimedMetadataTrack> {
         return defaultInterface().Tracks()
     }
@@ -24061,7 +24190,7 @@ extend TimedTextWritingMode <: windows_core.CopyType & windows_core.RuntimeType 
     }
 }
 
-@When[Windows_Media_Core == "on"]
+@When[Windows_Media_Core == "on" && Windows_Media == "on"]
 public class VideoStabilizationEffect <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -24168,7 +24297,7 @@ public class VideoStabilizationEffect <: InterfaceWrapperBase & ComInterface & w
     }
 }
 
-@When[Windows_Media_Core == "on"]
+@When[Windows_Media_Core == "on" && Windows_Media == "on"]
 extend VideoStabilizationEffect <: windows_core.HandleWinrtType<VideoStabilizationEffect> {
     public static func intoWinrtHandle(value: VideoStabilizationEffect): CPointer<Unit> {
         value.asRaw()
@@ -24186,7 +24315,7 @@ extend VideoStabilizationEffect <: windows_core.HandleWinrtType<VideoStabilizati
     }
 }
 
-@When[Windows_Media_Core == "on"]
+@When[Windows_Media_Core == "on" && Windows_Media_Effects == "on"]
 public class VideoStabilizationEffectDefinition <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -24276,7 +24405,7 @@ public class VideoStabilizationEffectDefinition <: InterfaceWrapperBase & ComInt
     }
 }
 
-@When[Windows_Media_Core == "on"]
+@When[Windows_Media_Core == "on" && Windows_Media_Effects == "on"]
 extend VideoStabilizationEffectDefinition <: windows_core.HandleWinrtType<VideoStabilizationEffectDefinition> {
     public static func intoWinrtHandle(value: VideoStabilizationEffectDefinition): CPointer<Unit> {
         value.asRaw()

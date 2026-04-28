@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows.UI.Xaml._impl_l1 as UI_Xaml__impl_l1
 import windows._impl_l1 as _impl_l1
@@ -1540,7 +1539,10 @@ public struct IStoreConfigurationStaticsVtbl {
     public var SetStoreWebAccountId: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsStoreWebAccountId: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var HardwareManufacturerInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var FilterUnsupportedSystemFeaturesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FilterUnsupportedSystemFeaturesAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1643,6 +1645,7 @@ public class IStoreConfigurationStatics <: InterfaceWrapperBase & ComInterface &
         return StoreHardwareManufacturerInfo.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FilterUnsupportedSystemFeaturesAsync(systemFeatures: windows_collections.IIterable<StoreSystemFeature>): windows_future.IAsyncOperation<windows_collections.IVectorView<StoreSystemFeature>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1822,7 +1825,10 @@ public struct IStorePreviewProductInfoVtbl {
     public var ProductType: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Title: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Description: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SkuInfoList: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SkuInfoList: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1923,6 +1929,7 @@ public class IStorePreviewProductInfo <: InterfaceWrapperBase & ComInterface & R
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SkuInfoList(): windows_collections.IVectorView<StorePreviewSkuInfo> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2101,6 +2108,7 @@ public class StoreConfiguration <: windows_interface.RuntimeName & windows_core.
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FilterUnsupportedSystemFeaturesAsync(systemFeatures: windows_collections.IIterable<StoreSystemFeature>): windows_future.IAsyncOperation<windows_collections.IVectorView<StoreSystemFeature>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<StoreSystemFeature>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<StoreSystemFeature>>>.None
         try (factory__ = windows_core.factory<StoreConfiguration, IStoreConfigurationStatics>().unwrap()) {
@@ -2405,6 +2413,7 @@ public class StorePreviewProductInfo <: InterfaceWrapperBase & ComInterface & wi
         return defaultInterface().Description()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SkuInfoList(): windows_collections.IVectorView<StorePreviewSkuInfo> {
         return defaultInterface().SkuInfoList()
     }
@@ -2525,7 +2534,10 @@ extend StorePreviewPurchaseResults <: windows_core.HandleWinrtType<StorePreviewP
 public struct IStorePreviewVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var RequestProductPurchaseByProductIdAndSkuIdAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var LoadAddOnProductInfosAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var LoadAddOnProductInfosAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2602,6 +2614,7 @@ public class IStorePreview <: InterfaceWrapperBase & ComInterface & RuntimeName 
         return windows_future.IAsyncOperation<StorePreviewPurchaseResults>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func LoadAddOnProductInfosAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<StorePreviewProductInfo>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2645,6 +2658,7 @@ public class StorePreview <: windows_interface.RuntimeName & windows_core.Runtim
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func LoadAddOnProductInfosAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<StorePreviewProductInfo>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<StorePreviewProductInfo>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<StorePreviewProductInfo>>>.None
         try (factory__ = windows_core.factory<StorePreview, IStorePreview>().unwrap()) {

@@ -10,13 +10,9 @@ import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrap
 import windows_interface as windows_interface
 import windows_polyfill.{packedReadInt16, packedReadInt32, packedReadIntNative, packedReadUInt16, packedReadUInt32, packedReadUIntNative, packedReadValue, packedWriteInt16, packedWriteInt32, packedWriteIntNative, packedWriteUInt16, packedWriteUInt32, packedWriteUIntNative, packedWriteValue, unionReadInt32, unionReadUInt16, unionReadUInt32, unionWriteInt32, unionWriteUInt16, unionWriteUInt32}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Direct2D == "on"]
 import windows.Win32.Graphics.Direct2D as Win32_Graphics_Direct2D
-@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-@When[Windows_Win32_UI_Input_Ime == "on"]
 import windows.Win32.UI.Input.Ime as Win32_UI_Input_Ime
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1

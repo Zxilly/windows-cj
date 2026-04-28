@@ -100,6 +100,7 @@ public class FileOpenPickerUI <: InterfaceWrapperBase & ComInterface & windows_i
         return defaultInterface().CanAddFile(file)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AllowedFileTypes(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().AllowedFileTypes()
     }
@@ -169,7 +170,10 @@ public struct IFileOpenPickerUIVtbl {
     public var CanAddFile: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_Storage != "on"]
     public var CanAddFile: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var AllowedFileTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AllowedFileTypes: UIntNative = UIntNative(0)
     public var SelectionMode: CFunc<(CPointer<Unit>, CPointer<_impl_l0.FileSelectionModeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SettingsIdentifier: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Title: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -278,6 +282,7 @@ public class IFileOpenPickerUI <: InterfaceWrapperBase & ComInterface & RuntimeN
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AllowedFileTypes(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

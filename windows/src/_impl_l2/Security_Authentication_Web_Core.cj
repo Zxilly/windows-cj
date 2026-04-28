@@ -280,9 +280,9 @@ extend IWebAuthenticationCoreManagerStatics2 <: windows_core.Interface<IWebAuthe
 @C
 public struct IWebAuthenticationCoreManagerStatics3Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Security_Credentials == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Credentials == "on"]
     public var CreateWebAccountMonitor: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Security_Credentials != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Security_Credentials != "on"]
     public var CreateWebAccountMonitor: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -364,7 +364,7 @@ public class IWebAuthenticationCoreManagerStatics3 <: InterfaceWrapperBase & Com
         readVtbl<IWebAuthenticationCoreManagerStatics3Vtbl>(IWebAuthenticationCoreManagerStatics3Vtbl())
     }
 
-    @When[Windows_Security_Credentials == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Credentials == "on"]
     public unsafe func CreateWebAccountMonitor(webAccounts: windows_collections.IIterable<_impl_l1.WebAccount>): _impl_l1.WebAccountMonitor {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -888,7 +888,7 @@ public class WebAuthenticationCoreManager <: windows_interface.RuntimeName & win
         }
     }
 
-    @When[Windows_Security_Credentials == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Credentials == "on"]
     public static unsafe func CreateWebAccountMonitor(webAccounts: windows_collections.IIterable<_impl_l1.WebAccount>): _impl_l1.WebAccountMonitor {
         var result__: Option<_impl_l1.WebAccountMonitor> = Option<_impl_l1.WebAccountMonitor>.None
         try (factory__ = windows_core.factory<WebAuthenticationCoreManager, IWebAuthenticationCoreManagerStatics3>().unwrap()) {
@@ -982,6 +982,7 @@ public class WebTokenRequestResult <: InterfaceWrapperBase & ComInterface & wind
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ResponseData(): windows_collections.IVectorView<_impl_l1.WebTokenResponse> {
         return defaultInterface().ResponseData()
     }

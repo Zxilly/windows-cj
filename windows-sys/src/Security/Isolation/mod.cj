@@ -6,7 +6,7 @@ import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
 
 
-@When[Windows_Security_Isolation == "on"]
+@When[Windows_Security_Isolation == "on" && Windows_Foundation_Collections == "on"]
 public type HostMessageReceivedCallback = CFunc<(GUID, CPointer<Unit>) -> Unit>
 
 @When[Windows_Security_Isolation == "on"]
@@ -206,9 +206,13 @@ public class IIsolatedWindowsEnvironmentOptions2 <: InterfaceWrapperBase & ComIn
 @C
 public struct IIsolatedWindowsEnvironmentOwnerRegistrationDataVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ShareableFolders: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ProcessesRunnableAsSystem: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ProcessesRunnableAsUser: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ActivationFileExtensions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -253,24 +257,28 @@ public class IIsolatedWindowsEnvironmentOwnerRegistrationData <: InterfaceWrappe
         readVtbl<IIsolatedWindowsEnvironmentOwnerRegistrationDataVtbl>(IIsolatedWindowsEnvironmentOwnerRegistrationDataVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ShareableFolders(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ShareableFolders(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ProcessesRunnableAsSystem(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ProcessesRunnableAsSystem(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ProcessesRunnableAsUser(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ProcessesRunnableAsUser(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ActivationFileExtensions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -537,6 +545,7 @@ public class IIsolatedWindowsEnvironmentUserInfo <: InterfaceWrapperBase & ComIn
 @C
 public struct IIsolatedWindowsHostMessengerStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var PostMessageToReceiver: CFunc<(CPointer<Unit>, GUID, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     public var GetFileId: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -582,6 +591,7 @@ public class IIsolatedWindowsHostMessengerStatics <: InterfaceWrapperBase & ComI
         readVtbl<IIsolatedWindowsHostMessengerStaticsVtbl>(IIsolatedWindowsHostMessengerStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PostMessageToReceiver(receiverId: GUID, message: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -599,6 +609,7 @@ public class IIsolatedWindowsHostMessengerStatics <: InterfaceWrapperBase & ComI
 @C
 public struct IIsolatedWindowsHostMessengerStatics2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var RegisterHostMessageReceiver: CFunc<(CPointer<Unit>, GUID, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     public var UnregisterHostMessageReceiver: CFunc<(CPointer<Unit>, GUID) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -644,6 +655,7 @@ public class IIsolatedWindowsHostMessengerStatics2 <: InterfaceWrapperBase & Com
         readVtbl<IIsolatedWindowsHostMessengerStatics2Vtbl>(IIsolatedWindowsHostMessengerStatics2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RegisterHostMessageReceiver(receiverId: GUID, hostMessageReceivedCallback: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1203,7 +1215,7 @@ public let IsolatedWindowsEnvironmentStartProcessStatus_FileNotFound: IsolatedWi
 @When[Windows_Security_Isolation == "on"]
 public let IsolatedWindowsEnvironmentStartProcessStatus_AppNotRegistered: IsolatedWindowsEnvironmentStartProcessStatus = IsolatedWindowsEnvironmentStartProcessStatus(4)
 
-@When[Windows_Security_Isolation == "on"]
+@When[Windows_Security_Isolation == "on" && Windows_Foundation_Collections == "on"]
 public type MessageReceivedCallback = CFunc<(GUID, CPointer<Unit>) -> Unit>
 
 @When[Windows_Security_Isolation == "on"]
@@ -1321,6 +1333,7 @@ public class IIsolatedWindowsEnvironmentCreateResult2 <: InterfaceWrapperBase & 
 public struct IIsolatedWindowsEnvironmentHostStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var IsReady: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var HostErrors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1371,6 +1384,7 @@ public class IIsolatedWindowsEnvironmentHostStatics <: InterfaceWrapperBase & Co
         return __vt.IsReady(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func HostErrors(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2109,7 +2123,9 @@ public struct IsolatedWindowsEnvironmentCreateProgress {
 @C
 public struct IIsolatedWindowsEnvironment2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var PostMessageToReceiverAsync: CFunc<(CPointer<Unit>, GUID, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var PostMessageToReceiverWithTelemetryAsync: CFunc<(CPointer<Unit>, GUID, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -2154,12 +2170,14 @@ public class IIsolatedWindowsEnvironment2 <: InterfaceWrapperBase & ComInterface
         readVtbl<IIsolatedWindowsEnvironment2Vtbl>(IIsolatedWindowsEnvironment2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PostMessageToReceiverAsync(receiverId: GUID, message: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PostMessageToReceiverAsync(__liveRaw, receiverId, message, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PostMessageToReceiverWithTelemetryAsync(receiverId: GUID, message: CPointer<Unit>, telemetryParameters: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2380,6 +2398,7 @@ public struct IIsolatedWindowsEnvironmentVtbl {
     public var LaunchFileWithUIAndTelemetryAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var TerminateAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var TerminateWithTelemetryAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var RegisterMessageReceiver: CFunc<(CPointer<Unit>, GUID, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     public var UnregisterMessageReceiver: CFunc<(CPointer<Unit>, GUID) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -2479,6 +2498,7 @@ public class IIsolatedWindowsEnvironment <: InterfaceWrapperBase & ComInterface 
         return __vt.TerminateWithTelemetryAsync(__liveRaw, telemetryParameters, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RegisterMessageReceiver(receiverId: GUID, messageReceivedCallback: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2568,6 +2588,7 @@ public struct IIsolatedWindowsEnvironmentFactoryVtbl {
     public var CreateAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var CreateWithTelemetryAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var GetById: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindByOwnerId: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -2630,6 +2651,7 @@ public class IIsolatedWindowsEnvironmentFactory <: InterfaceWrapperBase & ComInt
         return __vt.GetById(__liveRaw, environmentId, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindByOwnerId(environmentOwnerId: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

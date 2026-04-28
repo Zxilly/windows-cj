@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -22,7 +21,10 @@ import windows_future as windows_future
 @C
 public struct IAnalyticsInfoStatics2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSystemPropertiesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetSystemPropertiesAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -91,6 +93,7 @@ public class IAnalyticsInfoStatics2 <: InterfaceWrapperBase & ComInterface & Run
         readVtbl<IAnalyticsInfoStatics2Vtbl>(IAnalyticsInfoStatics2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSystemPropertiesAsync(attributeNames: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, windows_core.HString>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -761,7 +764,10 @@ extend IKnownRetailInfoPropertiesStatics <: windows_core.Interface<IKnownRetailI
 public struct IRetailInfoStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var IsDemoModeEnabled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -838,6 +844,7 @@ public class IRetailInfoStatics <: InterfaceWrapperBase & ComInterface & Runtime
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1784,6 +1791,7 @@ public class RetailInfo <: windows_interface.RuntimeName & windows_core.RuntimeN
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         var result__: Option<windows_collections.IMapView<windows_core.HString, IInspectable>> = Option<windows_collections.IMapView<windows_core.HString, IInspectable>>.None
         try (factory__ = windows_core.factory<RetailInfo, IRetailInfoStatics>().unwrap()) {
@@ -3437,6 +3445,7 @@ public class AnalyticsInfo <: windows_interface.RuntimeName & windows_core.Runti
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetSystemPropertiesAsync(attributeNames: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, windows_core.HString>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, windows_core.HString>>> = Option<windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, windows_core.HString>>>.None
         try (factory__ = windows_core.factory<AnalyticsInfo, IAnalyticsInfoStatics2>().unwrap()) {
@@ -3486,7 +3495,10 @@ public class HardwareIdentification <: windows_interface.RuntimeName & windows_c
 @C
 public struct IAppApplicabilityStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetUnsupportedAppRequirements: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetUnsupportedAppRequirements: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3555,6 +3567,7 @@ public class IAppApplicabilityStatics <: InterfaceWrapperBase & ComInterface & R
         readVtbl<IAppApplicabilityStaticsVtbl>(IAppApplicabilityStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetUnsupportedAppRequirements(capabilities: windows_collections.IIterable<windows_core.HString>): windows_collections.IVectorView<UnsupportedAppRequirement> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3729,6 +3742,7 @@ public class AppApplicability <: windows_interface.RuntimeName & windows_core.Ru
         windows_core.activationFactory<AppApplicability>().ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetUnsupportedAppRequirements(capabilities: windows_collections.IIterable<windows_core.HString>): windows_collections.IVectorView<UnsupportedAppRequirement> {
         var result__: Option<windows_collections.IVectorView<UnsupportedAppRequirement>> = Option<windows_collections.IVectorView<UnsupportedAppRequirement>>.None
         try (factory__ = windows_core.factory<AppApplicability, IAppApplicabilityStatics>().unwrap()) {

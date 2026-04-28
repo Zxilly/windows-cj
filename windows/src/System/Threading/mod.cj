@@ -190,12 +190,14 @@ public class WorkItemHandler <: InterfaceWrapperBase & ComInterface & windows_in
 @When[Windows_System_Threading == "on"]
 extend WorkItemHandler <: windows_core.Interface<WorkItemHandler> {}
 
+@When[Windows_System_Threading == "on"]
 private open class WorkItemHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_System_Threading == "on"]
 private open class WorkItemHandlerInvoker <: WorkItemHandlerInvokerErased {
     public open func Invoke(operation: InParam<windows_future.IAsyncAction>): Unit {
         ()
@@ -207,6 +209,7 @@ private open class WorkItemHandlerInvoker <: WorkItemHandlerInvokerErased {
     }
 }
 
+@When[Windows_System_Threading == "on"]
 private class WorkItemHandlerBox <: WorkItemHandlerInvoker {
     public let invoke_: (InParam<windows_future.IAsyncAction>) -> Unit
     private let vtblHandle: CPointerHandle<WorkItemHandlerVtbl>
@@ -225,6 +228,7 @@ private class WorkItemHandlerBox <: WorkItemHandlerInvoker {
     }
 }
 
+@When[Windows_System_Threading == "on"]
 func buildWorkItemHandlerBoxVtbl(): WorkItemHandlerVtbl {
     var vtbl = WorkItemHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -853,12 +857,14 @@ public class TimerDestroyedHandler <: InterfaceWrapperBase & ComInterface & wind
 @When[Windows_System_Threading == "on"]
 extend TimerDestroyedHandler <: windows_core.Interface<TimerDestroyedHandler> {}
 
+@When[Windows_System_Threading == "on"]
 private open class TimerDestroyedHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_System_Threading == "on"]
 private open class TimerDestroyedHandlerInvoker <: TimerDestroyedHandlerInvokerErased {
     public open func Invoke(timer: InParam<ThreadPoolTimer>): Unit {
         ()
@@ -870,6 +876,7 @@ private open class TimerDestroyedHandlerInvoker <: TimerDestroyedHandlerInvokerE
     }
 }
 
+@When[Windows_System_Threading == "on"]
 private class TimerDestroyedHandlerBox <: TimerDestroyedHandlerInvoker {
     public let invoke_: (InParam<ThreadPoolTimer>) -> Unit
     private let vtblHandle: CPointerHandle<TimerDestroyedHandlerVtbl>
@@ -888,6 +895,7 @@ private class TimerDestroyedHandlerBox <: TimerDestroyedHandlerInvoker {
     }
 }
 
+@When[Windows_System_Threading == "on"]
 func buildTimerDestroyedHandlerBoxVtbl(): TimerDestroyedHandlerVtbl {
     var vtbl = TimerDestroyedHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -978,12 +986,14 @@ public class TimerElapsedHandler <: InterfaceWrapperBase & ComInterface & window
 @When[Windows_System_Threading == "on"]
 extend TimerElapsedHandler <: windows_core.Interface<TimerElapsedHandler> {}
 
+@When[Windows_System_Threading == "on"]
 private open class TimerElapsedHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_System_Threading == "on"]
 private open class TimerElapsedHandlerInvoker <: TimerElapsedHandlerInvokerErased {
     public open func Invoke(timer: InParam<ThreadPoolTimer>): Unit {
         ()
@@ -995,6 +1005,7 @@ private open class TimerElapsedHandlerInvoker <: TimerElapsedHandlerInvokerErase
     }
 }
 
+@When[Windows_System_Threading == "on"]
 private class TimerElapsedHandlerBox <: TimerElapsedHandlerInvoker {
     public let invoke_: (InParam<ThreadPoolTimer>) -> Unit
     private let vtblHandle: CPointerHandle<TimerElapsedHandlerVtbl>
@@ -1013,6 +1024,7 @@ private class TimerElapsedHandlerBox <: TimerElapsedHandlerInvoker {
     }
 }
 
+@When[Windows_System_Threading == "on"]
 func buildTimerElapsedHandlerBoxVtbl(): TimerElapsedHandlerVtbl {
     var vtbl = TimerElapsedHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()

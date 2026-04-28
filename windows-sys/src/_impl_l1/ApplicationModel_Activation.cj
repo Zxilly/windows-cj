@@ -1523,7 +1523,7 @@ public class IDialReceiverActivatedEventArgs <: InterfaceWrapperBase & ComInterf
 @C
 public struct IFileActivatedEventArgsVtbl {
     public var base_: _impl_l0.IActivatedEventArgsVtbl = _impl_l0.IActivatedEventArgsVtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var Files: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Verb: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -1569,7 +1569,7 @@ public class IFileActivatedEventArgs <: InterfaceWrapperBase & ComInterface {
         readVtbl<IFileActivatedEventArgsVtbl>(IFileActivatedEventArgsVtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func Files(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1756,7 +1756,7 @@ public class IFileOpenPickerActivatedEventArgs <: InterfaceWrapperBase & ComInte
 @C
 public struct IFileOpenPickerContinuationEventArgsVtbl {
     public var base_: IContinuationActivatedEventArgsVtbl = IContinuationActivatedEventArgsVtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var Files: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1801,7 +1801,7 @@ public class IFileOpenPickerContinuationEventArgs <: InterfaceWrapperBase & ComI
         readVtbl<IFileOpenPickerContinuationEventArgsVtbl>(IFileOpenPickerContinuationEventArgsVtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func Files(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1813,7 +1813,7 @@ public class IFileOpenPickerContinuationEventArgs <: InterfaceWrapperBase & ComI
 @C
 public struct IFileSavePickerContinuationEventArgsVtbl {
     public var base_: IContinuationActivatedEventArgsVtbl = IContinuationActivatedEventArgsVtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var File: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1858,7 +1858,7 @@ public class IFileSavePickerContinuationEventArgs <: InterfaceWrapperBase & ComI
         readVtbl<IFileSavePickerContinuationEventArgsVtbl>(IFileSavePickerContinuationEventArgsVtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func File(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2840,7 +2840,7 @@ public class IStartupTaskActivatedEventArgs <: InterfaceWrapperBase & ComInterfa
 @C
 public struct ITileActivatedInfoVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_UI_Notifications == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Notifications == "on"]
     public var RecentlyShownNotifications: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -2885,7 +2885,7 @@ public class ITileActivatedInfo <: InterfaceWrapperBase & ComInterface {
         readVtbl<ITileActivatedInfoVtbl>(ITileActivatedInfoVtbl())
     }
 
-    @When[Windows_UI_Notifications == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Notifications == "on"]
     public unsafe func RecentlyShownNotifications(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

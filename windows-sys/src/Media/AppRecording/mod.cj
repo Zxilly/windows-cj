@@ -117,7 +117,7 @@ public class IAppRecordingResult <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IAppRecordingSavedScreenshotInfoVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var File: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var MediaEncodingSubtype: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -163,7 +163,7 @@ public class IAppRecordingSavedScreenshotInfo <: InterfaceWrapperBase & ComInter
         readVtbl<IAppRecordingSavedScreenshotInfoVtbl>(IAppRecordingSavedScreenshotInfoVtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func File(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -294,6 +294,7 @@ public struct IAppRecordingSaveScreenshotResultVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Succeeded: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var ExtendedError: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.HResult>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SavedScreenshotInfos: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -350,6 +351,7 @@ public class IAppRecordingSaveScreenshotResult <: InterfaceWrapperBase & ComInte
         return __vt.ExtendedError(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SavedScreenshotInfos(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -438,12 +440,13 @@ public class IAppRecordingStatus <: InterfaceWrapperBase & ComInterface {
 public struct IAppRecordingManagerVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var GetStatus: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var StartRecordingToFileAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var RecordTimeSpanToFileAsync: CFunc<(CPointer<Unit>, Foundation__impl_l0.DateTime, Foundation__impl_l0.TimeSpan, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedScreenshotMediaEncodingSubtypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var SaveScreenshotToFilesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Int32, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -494,27 +497,28 @@ public class IAppRecordingManager <: InterfaceWrapperBase & ComInterface {
         return __vt.GetStatus(__liveRaw, result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func StartRecordingToFileAsync(file: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.StartRecordingToFileAsync(__liveRaw, file, result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func RecordTimeSpanToFileAsync(startTime: Foundation__impl_l0.DateTime, duration: Foundation__impl_l0.TimeSpan, file: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RecordTimeSpanToFileAsync(__liveRaw, startTime, duration, file, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedScreenshotMediaEncodingSubtypes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SupportedScreenshotMediaEncodingSubtypes(__liveRaw, result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func SaveScreenshotToFilesAsync(folder: CPointer<Unit>, filenamePrefix: CPointer<Unit>, option: Int32, requestedFormats: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

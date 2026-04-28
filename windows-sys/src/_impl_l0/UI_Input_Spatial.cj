@@ -1009,7 +1009,7 @@ public struct ISpatialInteractionManagerVtbl {
     public var RemoveSourceReleased: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
     public var InteractionDetected: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveInteractionDetected: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
-    @When[Windows_Perception == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Perception == "on"]
     public var GetDetectedSourcesAtTimestamp: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -1126,7 +1126,7 @@ public class ISpatialInteractionManager <: InterfaceWrapperBase & ComInterface {
         return __vt.RemoveInteractionDetected(__liveRaw, token)
     }
 
-    @When[Windows_Perception == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Perception == "on"]
     public unsafe func GetDetectedSourcesAtTimestamp(timeStamp: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

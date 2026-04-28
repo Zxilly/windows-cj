@@ -10,13 +10,9 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Perception_Spatial == "on"]
 import windows.Perception.Spatial as Perception_Spatial
-@When[Windows_UI == "on"]
 import windows.UI as UI
-@When[Windows_UI_Popups == "on"]
 import windows.UI.Popups as UI_Popups
 import windows._impl_l1 as _impl_l1
 import windows._impl_l2 as _impl_l2
@@ -2332,7 +2328,10 @@ extend SecondaryTileVisualElements <: windows_core.HandleWinrtType<SecondaryTile
 public struct IVisualElementsRequestVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var VisualElements: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var AlternateVisualElements: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AlternateVisualElements: UIntNative = UIntNative(0)
     public var Deadline: CFunc<(CPointer<Unit>, CPointer<windows_future.DateTimeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetDeferral: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -2411,6 +2410,7 @@ public class IVisualElementsRequest <: InterfaceWrapperBase & ComInterface & Run
         return SecondaryTileVisualElements.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AlternateVisualElements(): windows_collections.IVectorView<SecondaryTileVisualElements> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2512,6 +2512,7 @@ public class VisualElementsRequest <: InterfaceWrapperBase & ComInterface & wind
         return defaultInterface().VisualElements()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AlternateVisualElements(): windows_collections.IVectorView<SecondaryTileVisualElements> {
         return defaultInterface().AlternateVisualElements()
     }
@@ -2724,7 +2725,10 @@ extend VisualElementsRequestedEventArgs <: windows_core.HandleWinrtType<VisualEl
 @C
 public struct IJumpListVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Items: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Items: UIntNative = UIntNative(0)
     public var SystemGroupKind: CFunc<(CPointer<Unit>, CPointer<JumpListSystemGroupKindAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetSystemGroupKind: CFunc<(CPointer<Unit>, JumpListSystemGroupKindAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SaveAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -2796,6 +2800,7 @@ public class IJumpList <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
         readVtbl<IJumpListVtbl>(IJumpListVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVector<JumpListItem> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3368,9 +3373,18 @@ extend ISecondaryTileFactory2 <: windows_core.Interface<ISecondaryTileFactory2> 
 public struct ISecondaryTileStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Exists: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllForApplicationAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllForApplicationAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllForPackageAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllForPackageAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3447,6 +3461,7 @@ public class ISecondaryTileStatics <: InterfaceWrapperBase & ComInterface & Runt
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<SecondaryTile>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3455,6 +3470,7 @@ public class ISecondaryTileStatics <: InterfaceWrapperBase & ComInterface & Runt
         return windows_future.IAsyncOperation<windows_collections.IVectorView<SecondaryTile>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllForApplicationAsync(applicationId: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVectorView<SecondaryTile>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3463,6 +3479,7 @@ public class ISecondaryTileStatics <: InterfaceWrapperBase & ComInterface & Runt
         return windows_future.IAsyncOperation<windows_collections.IVectorView<SecondaryTile>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllForPackageAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<SecondaryTile>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3642,6 +3659,7 @@ public class JumpList <: InterfaceWrapperBase & ComInterface & windows_interface
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVector<JumpListItem> {
         return defaultInterface().Items()
     }
@@ -4080,6 +4098,7 @@ public class SecondaryTile <: InterfaceWrapperBase & ComInterface & windows_inte
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindAllAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<SecondaryTile>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<SecondaryTile>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<SecondaryTile>>>.None
         try (factory__ = windows_core.factory<SecondaryTile, ISecondaryTileStatics>().unwrap()) {
@@ -4091,6 +4110,7 @@ public class SecondaryTile <: InterfaceWrapperBase & ComInterface & windows_inte
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindAllForApplicationAsync(applicationId: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVectorView<SecondaryTile>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<SecondaryTile>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<SecondaryTile>>>.None
         try (factory__ = windows_core.factory<SecondaryTile, ISecondaryTileStatics>().unwrap()) {
@@ -4102,6 +4122,7 @@ public class SecondaryTile <: InterfaceWrapperBase & ComInterface & windows_inte
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindAllForPackageAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<SecondaryTile>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<SecondaryTile>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<SecondaryTile>>>.None
         try (factory__ = windows_core.factory<SecondaryTile, ISecondaryTileStatics>().unwrap()) {

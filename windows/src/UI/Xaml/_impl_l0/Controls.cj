@@ -10,16 +10,11 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Media_Casting == "on"]
 import windows.Media.Casting as Media_Casting
-@When[Windows_Media_PlayTo == "on"]
 import windows.Media.PlayTo as Media_PlayTo
 import windows.Media._impl_l0 as Media__impl_l0
-@When[Windows_UI == "on"]
 import windows.UI as UI
-@When[Windows_UI_Input_Inking == "on"]
 import windows.UI.Input.Inking as UI_Input_Inking
 @When[Windows_UI_Xaml_Interop == "on"]
 import windows.UI.Xaml.Interop as UI_Xaml_Interop
@@ -681,12 +676,14 @@ public class BackClickEventHandler <: InterfaceWrapperBase & ComInterface & wind
 @When[Windows_UI_Xaml_Controls == "on"]
 extend BackClickEventHandler <: windows_core.Interface<BackClickEventHandler> {}
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private open class BackClickEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private open class BackClickEventHandlerInvoker <: BackClickEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<BackClickEventArgs>): Unit {
         ()
@@ -698,6 +695,7 @@ private open class BackClickEventHandlerInvoker <: BackClickEventHandlerInvokerE
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private class BackClickEventHandlerBox <: BackClickEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<BackClickEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<BackClickEventHandlerVtbl>
@@ -716,6 +714,7 @@ private class BackClickEventHandlerBox <: BackClickEventHandlerInvoker {
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 func buildBackClickEventHandlerBoxVtbl(): BackClickEventHandlerVtbl {
     var vtbl = BackClickEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -1006,10 +1005,12 @@ public class CalendarViewSelectedDatesChangedEventArgs <: InterfaceWrapperBase &
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AddedDates(): windows_collections.IVectorView<windows_future.DateTime> {
         return defaultInterface().AddedDates()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RemovedDates(): windows_collections.IVectorView<windows_future.DateTime> {
         return defaultInterface().RemovedDates()
     }
@@ -3261,12 +3262,14 @@ public class ContextMenuOpeningEventHandler <: InterfaceWrapperBase & ComInterfa
 @When[Windows_UI_Xaml_Controls == "on"]
 extend ContextMenuOpeningEventHandler <: windows_core.Interface<ContextMenuOpeningEventHandler> {}
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private open class ContextMenuOpeningEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private open class ContextMenuOpeningEventHandlerInvoker <: ContextMenuOpeningEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<ContextMenuEventArgs>): Unit {
         ()
@@ -3278,6 +3281,7 @@ private open class ContextMenuOpeningEventHandlerInvoker <: ContextMenuOpeningEv
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private class ContextMenuOpeningEventHandlerBox <: ContextMenuOpeningEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<ContextMenuEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<ContextMenuOpeningEventHandlerVtbl>
@@ -3296,6 +3300,7 @@ private class ContextMenuOpeningEventHandlerBox <: ContextMenuOpeningEventHandle
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 func buildContextMenuOpeningEventHandlerBoxVtbl(): ContextMenuOpeningEventHandlerVtbl {
     var vtbl = ContextMenuOpeningEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -4045,6 +4050,7 @@ public class DragItemsCompletedEventArgs <: InterfaceWrapperBase & ComInterface 
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVectorView<IInspectable> {
         return defaultInterface().Items()
     }
@@ -4161,6 +4167,7 @@ public class DragItemsStartingEventArgs <: InterfaceWrapperBase & ComInterface &
         defaultInterface().SetCancel(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVector<IInspectable> {
         return defaultInterface().Items()
     }
@@ -4265,12 +4272,14 @@ public class DragItemsStartingEventHandler <: InterfaceWrapperBase & ComInterfac
 @When[Windows_UI_Xaml_Controls == "on"]
 extend DragItemsStartingEventHandler <: windows_core.Interface<DragItemsStartingEventHandler> {}
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private open class DragItemsStartingEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private open class DragItemsStartingEventHandlerInvoker <: DragItemsStartingEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<DragItemsStartingEventArgs>): Unit {
         ()
@@ -4282,6 +4291,7 @@ private open class DragItemsStartingEventHandlerInvoker <: DragItemsStartingEven
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private class DragItemsStartingEventHandlerBox <: DragItemsStartingEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<DragItemsStartingEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<DragItemsStartingEventHandlerVtbl>
@@ -4300,6 +4310,7 @@ private class DragItemsStartingEventHandlerBox <: DragItemsStartingEventHandlerI
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 func buildDragItemsStartingEventHandlerBoxVtbl(): DragItemsStartingEventHandlerVtbl {
     var vtbl = DragItemsStartingEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -10521,9 +10532,9 @@ public struct ICalendarViewDayItemVtbl {
     public var IsBlackout: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetIsBlackout: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Date: CFunc<(CPointer<Unit>, CPointer<windows_future.DateTimeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_UI == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI == "on"]
     public var SetDensityColors: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_UI != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_UI != "on"]
     public var SetDensityColors: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -10615,7 +10626,7 @@ public class ICalendarViewDayItem <: InterfaceWrapperBase & ComInterface & Runti
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<windows_future.DateTime>()).unwrap()
     }
 
-    @When[Windows_UI == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI == "on"]
     public unsafe func SetDensityColors(colors: windows_collections.IIterable<UI.Color>): Unit {
         let v = vtbl()
         let hr = v.SetDensityColors(asRaw(), colors.asRaw())
@@ -10732,8 +10743,14 @@ extend ICalendarViewDayItemStatics <: windows_core.Interface<ICalendarViewDayIte
 @C
 public struct ICalendarViewSelectedDatesChangedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AddedDates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AddedDates: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var RemovedDates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RemovedDates: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -10802,6 +10819,7 @@ public class ICalendarViewSelectedDatesChangedEventArgs <: InterfaceWrapperBase 
         readVtbl<ICalendarViewSelectedDatesChangedEventArgsVtbl>(ICalendarViewSelectedDatesChangedEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AddedDates(): windows_collections.IVectorView<windows_future.DateTime> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -10810,6 +10828,7 @@ public class ICalendarViewSelectedDatesChangedEventArgs <: InterfaceWrapperBase 
         return windows_collections.IVectorView<windows_future.DateTime>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RemovedDates(): windows_collections.IVectorView<windows_future.DateTime> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -14189,8 +14208,14 @@ extend IComboBoxTextSubmittedEventArgs <: windows_core.Interface<IComboBoxTextSu
 @C
 public struct ICommandBarVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var PrimaryCommands: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var PrimaryCommands: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SecondaryCommands: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SecondaryCommands: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -14259,6 +14284,7 @@ public class ICommandBar <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         readVtbl<ICommandBarVtbl>(ICommandBarVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PrimaryCommands(): windows_collections.IObservableVector<ICommandBarElement> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -14267,6 +14293,7 @@ public class ICommandBar <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         return windows_collections.IObservableVector<ICommandBarElement>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SecondaryCommands(): windows_collections.IObservableVector<ICommandBarElement> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -14633,8 +14660,14 @@ extend ICommandBarElement2 <: windows_core.Interface<ICommandBarElement2> {}
 @C
 public struct ICommandBarFlyoutVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var PrimaryCommands: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var PrimaryCommands: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SecondaryCommands: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SecondaryCommands: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -14703,6 +14736,7 @@ public class ICommandBarFlyout <: InterfaceWrapperBase & ComInterface & RuntimeN
         readVtbl<ICommandBarFlyoutVtbl>(ICommandBarFlyoutVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PrimaryCommands(): windows_collections.IObservableVector<ICommandBarElement> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -14711,6 +14745,7 @@ public class ICommandBarFlyout <: InterfaceWrapperBase & ComInterface & RuntimeN
         return windows_collections.IObservableVector<ICommandBarElement>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SecondaryCommands(): windows_collections.IObservableVector<ICommandBarElement> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -20726,7 +20761,10 @@ extend IDatePickerValueChangedEventArgs <: windows_core.Interface<IDatePickerVal
 @C
 public struct IDragItemsCompletedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Items: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Items: UIntNative = UIntNative(0)
     @When[Windows_ApplicationModel_DataTransfer == "on"]
     public var DropResult: CFunc<(CPointer<Unit>, CPointer<_impl_l0.DataPackageOperationAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel_DataTransfer != "on"]
@@ -20799,6 +20837,7 @@ public class IDragItemsCompletedEventArgs <: InterfaceWrapperBase & ComInterface
         readVtbl<IDragItemsCompletedEventArgsVtbl>(IDragItemsCompletedEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVectorView<IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -20826,7 +20865,10 @@ public struct IDragItemsStartingEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Cancel: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetCancel: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Items: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Items: UIntNative = UIntNative(0)
     @When[Windows_ApplicationModel_DataTransfer == "on"]
     public var Data: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel_DataTransfer != "on"]
@@ -20913,6 +20955,7 @@ public class IDragItemsStartingEventArgs <: InterfaceWrapperBase & ComInterface 
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVector<IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -30113,8 +30156,14 @@ extend IItemsPanelTemplate <: windows_core.Interface<IItemsPanelTemplate> {}
 @C
 public struct IItemsPickedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AddedItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AddedItems: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var RemovedItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RemovedItems: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -30183,6 +30232,7 @@ public class IItemsPickedEventArgs <: InterfaceWrapperBase & ComInterface & Runt
         readVtbl<IItemsPickedEventArgsVtbl>(IItemsPickedEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AddedItems(): windows_collections.IVector<IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -30191,6 +30241,7 @@ public class IItemsPickedEventArgs <: InterfaceWrapperBase & ComInterface & Runt
         return windows_collections.IVector<IInspectable>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RemovedItems(): windows_collections.IVector<IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -31573,7 +31624,10 @@ extend IItemsWrapGridStatics2 <: windows_core.Interface<IItemsWrapGridStatics2> 
 @C
 public struct IListBoxVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SelectedItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SelectedItems: UIntNative = UIntNative(0)
     public var get_SelectionMode: CFunc<(CPointer<Unit>, CPointer<SelectionModeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetSelectionMode: CFunc<(CPointer<Unit>, SelectionModeAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ScrollIntoView: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -31646,6 +31700,7 @@ public class IListBox <: InterfaceWrapperBase & ComInterface & RuntimeName & win
         readVtbl<IListBoxVtbl>(IListBoxVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SelectedItems(): windows_collections.IVector<IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -45530,7 +45585,10 @@ extend IRelativePanelStatics2 <: windows_core.Interface<IRelativePanelStatics2> 
 @C
 public struct IRichEditBox4Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetLinguisticAlternativesAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetLinguisticAlternativesAsync: UIntNative = UIntNative(0)
     public var ClipboardCopyFormat: CFunc<(CPointer<Unit>, CPointer<RichEditClipboardFormatAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetClipboardCopyFormat: CFunc<(CPointer<Unit>, RichEditClipboardFormatAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -45601,6 +45659,7 @@ public class IRichEditBox4 <: InterfaceWrapperBase & ComInterface & RuntimeName 
         readVtbl<IRichEditBox4Vtbl>(IRichEditBox4Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetLinguisticAlternativesAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<windows_core.HString>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -48830,7 +48889,10 @@ public struct IScrollViewerVtbl {
     public var MaxZoomFactor: CFunc<(CPointer<Unit>, CPointer<Float32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetMaxZoomFactor: CFunc<(CPointer<Unit>, Float32) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ZoomFactor: CFunc<(CPointer<Unit>, CPointer<Float32>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var ZoomSnapPoints: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ZoomSnapPoints: UIntNative = UIntNative(0)
     public var ViewChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveViewChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ScrollToHorizontalOffset: CFunc<(CPointer<Unit>, Float64) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -49269,6 +49331,7 @@ public class IScrollViewer <: InterfaceWrapperBase & ComInterface & RuntimeName 
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ZoomSnapPoints(): windows_collections.IVector<Float32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -51533,8 +51596,14 @@ extend ISectionsInViewChangedEventArgsFactory <: windows_core.Interface<ISection
 @C
 public struct ISelectionChangedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AddedItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AddedItems: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var RemovedItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RemovedItems: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -51603,6 +51672,7 @@ public class ISelectionChangedEventArgs <: InterfaceWrapperBase & ComInterface &
         readVtbl<ISelectionChangedEventArgsVtbl>(ISelectionChangedEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AddedItems(): windows_collections.IVector<IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -51611,6 +51681,7 @@ public class ISelectionChangedEventArgs <: InterfaceWrapperBase & ComInterface &
         return windows_collections.IVector<IInspectable>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RemovedItems(): windows_collections.IVector<IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -51627,7 +51698,10 @@ extend ISelectionChangedEventArgs <: windows_core.Interface<ISelectionChangedEve
 @C
 public struct ISelectionChangedEventArgsFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateInstanceWithRemovedItemsAndAddedItems: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateInstanceWithRemovedItemsAndAddedItems: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -51696,6 +51770,7 @@ public class ISelectionChangedEventArgsFactory <: InterfaceWrapperBase & ComInte
         readVtbl<ISelectionChangedEventArgsFactoryVtbl>(ISelectionChangedEventArgsFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateInstanceWithRemovedItemsAndAddedItems(removedItems: windows_collections.IVector<IInspectable>, addedItems: windows_collections.IVector<IInspectable>, baseInterface: IInspectable, innerInterface: CPointer<CPointer<Unit>>): SelectionChangedEventArgs {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -56378,7 +56453,10 @@ extend ITextBlockStatics7 <: windows_core.Interface<ITextBlockStatics7> {}
 @C
 public struct ITextBox4Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetLinguisticAlternativesAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetLinguisticAlternativesAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -56447,6 +56525,7 @@ public class ITextBox4 <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
         readVtbl<ITextBox4Vtbl>(ITextBox4Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetLinguisticAlternativesAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<windows_core.HString>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -60610,7 +60689,10 @@ public struct ITreeViewDragItemsCompletedEventArgsVtbl {
     public var DropResult: CFunc<(CPointer<Unit>, CPointer<_impl_l0.DataPackageOperationAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel_DataTransfer != "on"]
     public var DropResult: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Items: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Items: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -60688,6 +60770,7 @@ public class ITreeViewDragItemsCompletedEventArgs <: InterfaceWrapperBase & ComI
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.DataPackageOperation>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVectorView<IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -60710,7 +60793,10 @@ public struct ITreeViewDragItemsStartingEventArgsVtbl {
     public var Data: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel_DataTransfer != "on"]
     public var Data: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Items: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Items: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -60802,6 +60888,7 @@ public class ITreeViewDragItemsStartingEventArgs <: InterfaceWrapperBase & ComIn
         return _impl_l2.DataPackage.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVector<IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -61803,7 +61890,10 @@ public struct ITreeViewNodeVtbl {
     public var Depth: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var HasUnrealizedChildren: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetHasUnrealizedChildren: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Children: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Children: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -61938,6 +62028,7 @@ public class ITreeViewNode <: InterfaceWrapperBase & ComInterface & RuntimeName 
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Children(): windows_collections.IVector<TreeViewNode> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -64913,7 +65004,10 @@ extend IWebViewSettings <: windows_core.Interface<IWebViewSettings> {}
 @C
 public struct IWebViewStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AnyScriptNotifyUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AnyScriptNotifyUri: UIntNative = UIntNative(0)
     @When[Windows_UI_Xaml == "on"]
     public var SourceProperty: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Xaml != "on"]
@@ -64994,6 +65088,7 @@ public class IWebViewStatics <: InterfaceWrapperBase & ComInterface & RuntimeNam
         readVtbl<IWebViewStaticsVtbl>(IWebViewStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AnyScriptNotifyUri(): windows_collections.IVector<Foundation.Uri> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -66952,12 +67047,14 @@ public class ItemClickEventHandler <: InterfaceWrapperBase & ComInterface & wind
 @When[Windows_UI_Xaml_Controls == "on"]
 extend ItemClickEventHandler <: windows_core.Interface<ItemClickEventHandler> {}
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private open class ItemClickEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private open class ItemClickEventHandlerInvoker <: ItemClickEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<ItemClickEventArgs>): Unit {
         ()
@@ -66969,6 +67066,7 @@ private open class ItemClickEventHandlerInvoker <: ItemClickEventHandlerInvokerE
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private class ItemClickEventHandlerBox <: ItemClickEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<ItemClickEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<ItemClickEventHandlerVtbl>
@@ -66987,6 +67085,7 @@ private class ItemClickEventHandlerBox <: ItemClickEventHandlerInvoker {
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 func buildItemClickEventHandlerBoxVtbl(): ItemClickEventHandlerVtbl {
     var vtbl = ItemClickEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -67001,7 +67100,7 @@ func buildItemClickEventHandlerBoxVtbl(): ItemClickEventHandlerVtbl {
     return vtbl
 }
 
-@When[Windows_UI_Xaml_Controls == "on"]
+@When[Windows_UI_Xaml_Controls == "on" && Windows_Foundation_Collections == "on"]
 public class ItemCollection <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -67153,7 +67252,7 @@ public class ItemCollection <: InterfaceWrapperBase & ComInterface & windows_int
     }
 }
 
-@When[Windows_UI_Xaml_Controls == "on"]
+@When[Windows_UI_Xaml_Controls == "on" && Windows_Foundation_Collections == "on"]
 extend ItemCollection <: windows_core.HandleWinrtType<ItemCollection> {
     public static func intoWinrtHandle(value: ItemCollection): CPointer<Unit> {
         value.asRaw()
@@ -67371,10 +67470,12 @@ public class ItemsPickedEventArgs <: InterfaceWrapperBase & ComInterface & windo
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AddedItems(): windows_collections.IVector<IInspectable> {
         return defaultInterface().AddedItems()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RemovedItems(): windows_collections.IVector<IInspectable> {
         return defaultInterface().RemovedItems()
     }
@@ -67644,12 +67745,14 @@ public class ListViewItemToKeyHandler <: InterfaceWrapperBase & ComInterface & w
 @When[Windows_UI_Xaml_Controls == "on"]
 extend ListViewItemToKeyHandler <: windows_core.Interface<ListViewItemToKeyHandler> {}
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private open class ListViewItemToKeyHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private open class ListViewItemToKeyHandlerInvoker <: ListViewItemToKeyHandlerInvokerErased {
     public open func Invoke(item: InParam<IInspectable>): windows_core.HString {
         windows_core.HString()
@@ -67662,6 +67765,7 @@ private open class ListViewItemToKeyHandlerInvoker <: ListViewItemToKeyHandlerIn
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private class ListViewItemToKeyHandlerBox <: ListViewItemToKeyHandlerInvoker {
     public let invoke_: (InParam<IInspectable>) -> windows_core.HString
     private let vtblHandle: CPointerHandle<ListViewItemToKeyHandlerVtbl>
@@ -67680,6 +67784,7 @@ private class ListViewItemToKeyHandlerBox <: ListViewItemToKeyHandlerInvoker {
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 func buildListViewItemToKeyHandlerBoxVtbl(): ListViewItemToKeyHandlerVtbl {
     var vtbl = ListViewItemToKeyHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -67772,12 +67877,14 @@ public class ListViewKeyToItemHandler <: InterfaceWrapperBase & ComInterface & w
 @When[Windows_UI_Xaml_Controls == "on"]
 extend ListViewKeyToItemHandler <: windows_core.Interface<ListViewKeyToItemHandler> {}
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private open class ListViewKeyToItemHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private open class ListViewKeyToItemHandlerInvoker <: ListViewKeyToItemHandlerInvokerErased {
     public open func Invoke(key: windows_core.HString): windows_future.IAsyncOperation<IInspectable> {
         windows_future.IAsyncOperation<IInspectable>(CPointer<Unit>())
@@ -67790,6 +67897,7 @@ private open class ListViewKeyToItemHandlerInvoker <: ListViewKeyToItemHandlerIn
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private class ListViewKeyToItemHandlerBox <: ListViewKeyToItemHandlerInvoker {
     public let invoke_: (windows_core.HString) -> windows_future.IAsyncOperation<IInspectable>
     private let vtblHandle: CPointerHandle<ListViewKeyToItemHandlerVtbl>
@@ -67808,6 +67916,7 @@ private class ListViewKeyToItemHandlerBox <: ListViewKeyToItemHandlerInvoker {
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 func buildListViewKeyToItemHandlerBoxVtbl(): ListViewKeyToItemHandlerVtbl {
     var vtbl = ListViewKeyToItemHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -68946,12 +69055,14 @@ public class NotifyEventHandler <: InterfaceWrapperBase & ComInterface & windows
 @When[Windows_UI_Xaml_Controls == "on"]
 extend NotifyEventHandler <: windows_core.Interface<NotifyEventHandler> {}
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private open class NotifyEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private open class NotifyEventHandlerInvoker <: NotifyEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<NotifyEventArgs>): Unit {
         ()
@@ -68963,6 +69074,7 @@ private open class NotifyEventHandlerInvoker <: NotifyEventHandlerInvokerErased 
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private class NotifyEventHandlerBox <: NotifyEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<NotifyEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<NotifyEventHandlerVtbl>
@@ -68981,6 +69093,7 @@ private class NotifyEventHandlerBox <: NotifyEventHandlerInvoker {
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 func buildNotifyEventHandlerBoxVtbl(): NotifyEventHandlerVtbl {
     var vtbl = NotifyEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -71779,14 +71892,17 @@ public class SelectionChangedEventArgs <: InterfaceWrapperBase & ComInterface & 
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AddedItems(): windows_collections.IVector<IInspectable> {
         return defaultInterface().AddedItems()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RemovedItems(): windows_collections.IVector<IInspectable> {
         return defaultInterface().RemovedItems()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateInstanceWithRemovedItemsAndAddedItems(removedItems: windows_collections.IVector<IInspectable>, addedItems: windows_collections.IVector<IInspectable>): SelectionChangedEventArgs {
         var composableInner__: CPointer<Unit> = CPointer<Unit>()
         var result__: Option<SelectionChangedEventArgs> = Option<SelectionChangedEventArgs>.None
@@ -71894,12 +72010,14 @@ public class SelectionChangedEventHandler <: InterfaceWrapperBase & ComInterface
 @When[Windows_UI_Xaml_Controls == "on"]
 extend SelectionChangedEventHandler <: windows_core.Interface<SelectionChangedEventHandler> {}
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private open class SelectionChangedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private open class SelectionChangedEventHandlerInvoker <: SelectionChangedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<SelectionChangedEventArgs>): Unit {
         ()
@@ -71911,6 +72029,7 @@ private open class SelectionChangedEventHandlerInvoker <: SelectionChangedEventH
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private class SelectionChangedEventHandlerBox <: SelectionChangedEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<SelectionChangedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<SelectionChangedEventHandlerVtbl>
@@ -71929,6 +72048,7 @@ private class SelectionChangedEventHandlerBox <: SelectionChangedEventHandlerInv
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 func buildSelectionChangedEventHandlerBoxVtbl(): SelectionChangedEventHandlerVtbl {
     var vtbl = SelectionChangedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -72314,12 +72434,14 @@ public class SemanticZoomViewChangedEventHandler <: InterfaceWrapperBase & ComIn
 @When[Windows_UI_Xaml_Controls == "on"]
 extend SemanticZoomViewChangedEventHandler <: windows_core.Interface<SemanticZoomViewChangedEventHandler> {}
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private open class SemanticZoomViewChangedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private open class SemanticZoomViewChangedEventHandlerInvoker <: SemanticZoomViewChangedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<SemanticZoomViewChangedEventArgs>): Unit {
         ()
@@ -72331,6 +72453,7 @@ private open class SemanticZoomViewChangedEventHandlerInvoker <: SemanticZoomVie
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private class SemanticZoomViewChangedEventHandlerBox <: SemanticZoomViewChangedEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<SemanticZoomViewChangedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<SemanticZoomViewChangedEventHandlerVtbl>
@@ -72349,6 +72472,7 @@ private class SemanticZoomViewChangedEventHandlerBox <: SemanticZoomViewChangedE
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 func buildSemanticZoomViewChangedEventHandlerBoxVtbl(): SemanticZoomViewChangedEventHandlerVtbl {
     var vtbl = SemanticZoomViewChangedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -73994,12 +74118,14 @@ public class TextChangedEventHandler <: InterfaceWrapperBase & ComInterface & wi
 @When[Windows_UI_Xaml_Controls == "on"]
 extend TextChangedEventHandler <: windows_core.Interface<TextChangedEventHandler> {}
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private open class TextChangedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private open class TextChangedEventHandlerInvoker <: TextChangedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<TextChangedEventArgs>): Unit {
         ()
@@ -74011,6 +74137,7 @@ private open class TextChangedEventHandlerInvoker <: TextChangedEventHandlerInvo
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private class TextChangedEventHandlerBox <: TextChangedEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<TextChangedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<TextChangedEventHandlerVtbl>
@@ -74029,6 +74156,7 @@ private class TextChangedEventHandlerBox <: TextChangedEventHandlerInvoker {
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 func buildTextChangedEventHandlerBoxVtbl(): TextChangedEventHandlerVtbl {
     var vtbl = TextChangedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -74695,12 +74823,14 @@ public class TextControlPasteEventHandler <: InterfaceWrapperBase & ComInterface
 @When[Windows_UI_Xaml_Controls == "on"]
 extend TextControlPasteEventHandler <: windows_core.Interface<TextControlPasteEventHandler> {}
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private open class TextControlPasteEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private open class TextControlPasteEventHandlerInvoker <: TextControlPasteEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<TextControlPasteEventArgs>): Unit {
         ()
@@ -74712,6 +74842,7 @@ private open class TextControlPasteEventHandlerInvoker <: TextControlPasteEventH
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private class TextControlPasteEventHandlerBox <: TextControlPasteEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<TextControlPasteEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<TextControlPasteEventHandlerVtbl>
@@ -74730,6 +74861,7 @@ private class TextControlPasteEventHandlerBox <: TextControlPasteEventHandlerInv
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 func buildTextControlPasteEventHandlerBoxVtbl(): TextControlPasteEventHandlerVtbl {
     var vtbl = TextControlPasteEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -75212,6 +75344,7 @@ public class TreeViewDragItemsCompletedEventArgs <: InterfaceWrapperBase & ComIn
         return defaultInterface().DropResult()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVectorView<IInspectable> {
         return defaultInterface().Items()
     }
@@ -75317,6 +75450,7 @@ public class TreeViewDragItemsStartingEventArgs <: InterfaceWrapperBase & ComInt
         return defaultInterface().Data()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVector<IInspectable> {
         return defaultInterface().Items()
     }
@@ -75726,6 +75860,7 @@ public class TreeViewNode <: InterfaceWrapperBase & ComInterface & windows_inter
         defaultInterface().SetHasUnrealizedChildren(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Children(): windows_collections.IVector<TreeViewNode> {
         return defaultInterface().Children()
     }
@@ -76868,12 +77003,14 @@ public class WebViewNavigationFailedEventHandler <: InterfaceWrapperBase & ComIn
 @When[Windows_UI_Xaml_Controls == "on"]
 extend WebViewNavigationFailedEventHandler <: windows_core.Interface<WebViewNavigationFailedEventHandler> {}
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private open class WebViewNavigationFailedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private open class WebViewNavigationFailedEventHandlerInvoker <: WebViewNavigationFailedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<WebViewNavigationFailedEventArgs>): Unit {
         ()
@@ -76885,6 +77022,7 @@ private open class WebViewNavigationFailedEventHandlerInvoker <: WebViewNavigati
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 private class WebViewNavigationFailedEventHandlerBox <: WebViewNavigationFailedEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<WebViewNavigationFailedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<WebViewNavigationFailedEventHandlerVtbl>
@@ -76903,6 +77041,7 @@ private class WebViewNavigationFailedEventHandlerBox <: WebViewNavigationFailedE
     }
 }
 
+@When[Windows_UI_Xaml_Controls == "on"]
 func buildWebViewNavigationFailedEventHandlerBoxVtbl(): WebViewNavigationFailedEventHandlerVtbl {
     var vtbl = WebViewNavigationFailedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()

@@ -840,7 +840,10 @@ extend VibrationAccessStatus <: windows_core.CopyType & windows_core.RuntimeType
 public struct ISimpleHapticsControllerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Id: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedFeedback: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedFeedback: UIntNative = UIntNative(0)
     public var IsIntensitySupported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsPlayCountSupported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsPlayDurationSupported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -926,6 +929,7 @@ public class ISimpleHapticsController <: InterfaceWrapperBase & ComInterface & R
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedFeedback(): windows_collections.IVectorView<SimpleHapticsControllerFeedback> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1073,6 +1077,7 @@ public class SimpleHapticsController <: InterfaceWrapperBase & ComInterface & wi
         return defaultInterface().Id()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedFeedback(): windows_collections.IVectorView<SimpleHapticsControllerFeedback> {
         return defaultInterface().SupportedFeedback()
     }
@@ -1510,7 +1515,10 @@ public struct IVibrationDeviceStaticsVtbl {
     public var GetDeviceSelector: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var FromIdAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var GetDefaultAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1611,6 +1619,7 @@ public class IVibrationDeviceStatics <: InterfaceWrapperBase & ComInterface & Ru
         return windows_future.IAsyncOperation<VibrationDevice>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<VibrationDevice>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1916,6 +1925,7 @@ public class VibrationDevice <: InterfaceWrapperBase & ComInterface & windows_in
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindAllAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<VibrationDevice>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<VibrationDevice>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<VibrationDevice>>>.None
         try (factory__ = windows_core.factory<VibrationDevice, IVibrationDeviceStatics>().unwrap()) {

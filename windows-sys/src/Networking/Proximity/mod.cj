@@ -549,6 +549,7 @@ public struct IPeerFinderStaticsVtbl {
     public var DisplayName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetDisplayName: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var SupportedDiscoveryTypes: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var AlternateIdentities: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Start: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var StartWithMessage: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -557,6 +558,7 @@ public struct IPeerFinderStaticsVtbl {
     public var RemoveTriggeredConnectionStateChanged: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
     public var ConnectionRequested: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveConnectionRequested: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllPeersAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Networking_Sockets == "on"]
     public var ConnectAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -657,6 +659,7 @@ public class IPeerFinderStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.SupportedDiscoveryTypes(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AlternateIdentities(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -705,6 +708,7 @@ public class IPeerFinderStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.RemoveConnectionRequested(__liveRaw, cookie)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllPeersAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

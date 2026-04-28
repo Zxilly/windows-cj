@@ -29,4 +29,427 @@ public import windows_sys.Win32._impl_l1.{PROPSHEETHEADERA_V2, PROPSHEETHEADERW_
 public import windows_sys.Win32._impl_l0.TBBUTTON
 @When[Windows_Win32_UI_Controls == "on" && Windows_Win32_System_Registry == "on"]
 public import windows_sys.Win32._impl_l0.{TBSAVEPARAMSA, TBSAVEPARAMSW}
-
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_BeginBufferedAnimation == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BeginBufferedAnimation
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_BeginBufferedPaint == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BeginBufferedPaint
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_BeginPanningFeedback == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BeginPanningFeedback
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_BufferedPaintClear == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BufferedPaintClear
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_BufferedPaintInit == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BufferedPaintInit
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_BufferedPaintRenderAnimation == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BufferedPaintRenderAnimation
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_BufferedPaintSetAlpha == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BufferedPaintSetAlpha
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_BufferedPaintStopAllAnimations == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BufferedPaintStopAllAnimations
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_BufferedPaintUnInit == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BufferedPaintUnInit
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_CheckDlgButton == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CheckDlgButton
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_CheckRadioButton == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CheckRadioButton
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_CloseThemeData == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CloseThemeData
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_CreateMappedBitmap == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateMappedBitmap
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_CreatePropertySheetPageA == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreatePropertySheetPageA
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_CreatePropertySheetPageW == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreatePropertySheetPageW
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_CreateStatusWindowA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateStatusWindowA
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_CreateStatusWindowW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateStatusWindowW
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_CreateSyntheticPointerDevice == "on" && Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateSyntheticPointerDevice
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_CreateToolbarEx == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_CreateToolbarEx
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_CreateUpDownControl == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateUpDownControl
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_Clone == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DPA_Clone
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_Create == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DPA_Create
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_CreateEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DPA_CreateEx
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_DeleteAllPtrs == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DPA_DeleteAllPtrs
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_DeletePtr == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DPA_DeletePtr
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_Destroy == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DPA_Destroy
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_DestroyCallback == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DPA_DestroyCallback
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_EnumCallback == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DPA_EnumCallback
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_GetPtr == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DPA_GetPtr
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_GetPtrIndex == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DPA_GetPtrIndex
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_GetSize == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DPA_GetSize
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_Grow == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DPA_Grow
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_InsertPtr == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DPA_InsertPtr
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_LoadStream == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DPA_LoadStream
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_Merge == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DPA_Merge
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_SaveStream == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DPA_SaveStream
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_Search == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DPA_Search
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_SetPtr == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DPA_SetPtr
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DPA_Sort == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DPA_Sort
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_Clone == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DSA_Clone
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_Create == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DSA_Create
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_DeleteAllItems == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DSA_DeleteAllItems
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_DeleteItem == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DSA_DeleteItem
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_Destroy == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DSA_Destroy
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_DestroyCallback == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DSA_DestroyCallback
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_EnumCallback == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DSA_EnumCallback
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_GetItem == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DSA_GetItem
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_GetItemPtr == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DSA_GetItemPtr
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_GetSize == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DSA_GetSize
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_InsertItem == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DSA_InsertItem
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_SetItem == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DSA_SetItem
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DSA_Sort == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DSA_Sort
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DestroyPropertySheetPage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DestroyPropertySheetPage
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_DlgDirListA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DlgDirListA
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_DlgDirListComboBoxA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DlgDirListComboBoxA
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_DlgDirListComboBoxW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DlgDirListComboBoxW
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_DlgDirListW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DlgDirListW
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_DlgDirSelectComboBoxExA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DlgDirSelectComboBoxExA
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_DlgDirSelectComboBoxExW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DlgDirSelectComboBoxExW
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_DlgDirSelectExA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DlgDirSelectExA
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_DlgDirSelectExW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DlgDirSelectExW
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DrawInsert == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DrawInsert
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DrawShadowText == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DrawShadowText
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DrawStatusTextA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DrawStatusTextA
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_DrawStatusTextW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DrawStatusTextW
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_DrawThemeBackground == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DrawThemeBackground
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_DrawThemeBackgroundEx == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DrawThemeBackgroundEx
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_DrawThemeEdge == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DrawThemeEdge
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_DrawThemeIcon == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DrawThemeIcon
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_DrawThemeParentBackground == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DrawThemeParentBackground
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_DrawThemeParentBackgroundEx == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DrawThemeParentBackgroundEx
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_DrawThemeText == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DrawThemeText
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_DrawThemeTextEx == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DrawThemeTextEx
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_EnableScrollBar == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EnableScrollBar
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_EnableThemeDialogTexture == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EnableThemeDialogTexture
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_EnableTheming == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EnableTheming
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_EndBufferedAnimation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EndBufferedAnimation
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_EndBufferedPaint == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EndBufferedPaint
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_EndPanningFeedback == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EndPanningFeedback
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_EvaluateProximityToPolygon == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EvaluateProximityToPolygon
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_EvaluateProximityToRect == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EvaluateProximityToRect
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_FlatSB_EnableScrollBar == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FlatSB_EnableScrollBar
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_FlatSB_GetScrollInfo == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FlatSB_GetScrollInfo
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_FlatSB_GetScrollPos == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FlatSB_GetScrollPos
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_FlatSB_GetScrollProp == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FlatSB_GetScrollProp
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_FlatSB_GetScrollRange == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FlatSB_GetScrollRange
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_FlatSB_SetScrollInfo == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FlatSB_SetScrollInfo
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_FlatSB_SetScrollPos == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FlatSB_SetScrollPos
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_FlatSB_SetScrollProp == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FlatSB_SetScrollProp
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_FlatSB_SetScrollRange == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FlatSB_SetScrollRange
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_FlatSB_ShowScrollBar == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FlatSB_ShowScrollBar
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetBufferedPaintBits == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetBufferedPaintBits
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetBufferedPaintDC == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetBufferedPaintDC
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetBufferedPaintTargetDC == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetBufferedPaintTargetDC
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetBufferedPaintTargetRect == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetBufferedPaintTargetRect
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_GetComboBoxInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetComboBoxInfo
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetCurrentThemeName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetCurrentThemeName
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_GetEffectiveClientRect == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetEffectiveClientRect
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_GetListBoxInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetListBoxInfo
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_GetMUILanguage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetMUILanguage
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeAnimationProperty == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemeAnimationProperty
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeAnimationTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemeAnimationTransform
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeAppProperties == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemeAppProperties
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeBackgroundContentRect == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemeBackgroundContentRect
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeBackgroundExtent == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemeBackgroundExtent
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeBackgroundRegion == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemeBackgroundRegion
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeBitmap == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemeBitmap
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeBool == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemeBool
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeColor == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemeColor
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeDocumentationProperty == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemeDocumentationProperty
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeEnumValue == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemeEnumValue
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeFilename == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemeFilename
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeFont == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemeFont
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeInt == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemeInt
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeIntList == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemeIntList
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeMargins == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemeMargins
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeMetric == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemeMetric
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemePartSize == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemePartSize
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemePosition == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemePosition
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemePropertyOrigin == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemePropertyOrigin
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeRect == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemeRect
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeStream == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemeStream
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeString == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemeString
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeSysBool == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemeSysBool
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeSysColor == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemeSysColor
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeSysColorBrush == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemeSysColorBrush
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeSysFont == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemeSysFont
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeSysInt == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemeSysInt
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeSysSize == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemeSysSize
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeSysString == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemeSysString
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeTextExtent == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemeTextExtent
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeTextMetrics == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemeTextMetrics
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeTimingFunction == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemeTimingFunction
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetThemeTransitionDuration == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThemeTransitionDuration
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_GetWindowFeedbackSetting == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetWindowFeedbackSetting
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_GetWindowTheme == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetWindowTheme
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_HIMAGELIST_QueryInterface == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HIMAGELIST_QueryInterface
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_HitTestThemeBackground == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HitTestThemeBackground
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_Add == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_Add
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_AddMasked == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_AddMasked
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_BeginDrag == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_BeginDrag
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_CoCreateInstance == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_CoCreateInstance
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_Copy == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_Copy
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_Create == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_Create
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_Destroy == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_Destroy
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_DragEnter == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_DragEnter
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_DragLeave == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_DragLeave
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_DragMove == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_DragMove
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_DragShowNolock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_DragShowNolock
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_Draw == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_Draw
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_DrawEx == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_DrawEx
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_DrawIndirect == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_DrawIndirect
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_Duplicate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_Duplicate
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_EndDrag == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_EndDrag
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_GetBkColor == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_GetBkColor
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_GetDragImage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_GetDragImage
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_GetIcon == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_GetIcon
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_GetIconSize == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_GetIconSize
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_GetImageCount == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_GetImageCount
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_GetImageInfo == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_GetImageInfo
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_LoadImageA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_LoadImageA
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_LoadImageW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_LoadImageW
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_Merge == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_Merge
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_Read == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_Read
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_ReadEx == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_ReadEx
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_Remove == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_Remove
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_Replace == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_Replace
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_ReplaceIcon == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_ReplaceIcon
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_SetBkColor == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_SetBkColor
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_SetDragCursorImage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_SetDragCursorImage
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_SetIconSize == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_SetIconSize
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_SetImageCount == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_SetImageCount
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_SetOverlayImage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_SetOverlayImage
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_Write == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_Write
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ImageList_WriteEx == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageList_WriteEx
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_InitCommonControls == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitCommonControls
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_InitCommonControlsEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitCommonControlsEx
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_InitMUILanguage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitMUILanguage
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_InitializeFlatSB == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitializeFlatSB
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_IsAppThemed == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsAppThemed
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_IsCompositionActive == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsCompositionActive
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_IsDlgButtonChecked == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsDlgButtonChecked
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_IsThemeActive == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsThemeActive
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_IsThemeBackgroundPartiallyTransparent == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsThemeBackgroundPartiallyTransparent
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_IsThemeDialogTextureEnabled == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsThemeDialogTextureEnabled
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_IsThemePartDefined == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsThemePartDefined
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_LBItemFromPt == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LBItemFromPt
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_LoadIconMetric == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LoadIconMetric
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_LoadIconWithScaleDown == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LoadIconWithScaleDown
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_MakeDragList == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MakeDragList
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_MenuHelp == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MenuHelp
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_OpenThemeData == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OpenThemeData
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_OpenThemeDataEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OpenThemeDataEx
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_PackTouchHitTestingProximityEvaluation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PackTouchHitTestingProximityEvaluation
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_PropertySheetA == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropertySheetA
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_PropertySheetW == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropertySheetW
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_RegisterPointerDeviceNotifications == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RegisterPointerDeviceNotifications
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_RegisterTouchHitTestingWindow == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RegisterTouchHitTestingWindow
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_SetScrollInfo == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetScrollInfo
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_SetScrollPos == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetScrollPos
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_SetScrollRange == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetScrollRange
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_SetThemeAppProperties == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetThemeAppProperties
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_SetWindowFeedbackSetting == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetWindowFeedbackSetting
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_SetWindowTheme == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetWindowTheme
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_SetWindowThemeAttribute == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetWindowThemeAttribute
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_ShowHideMenuCtl == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ShowHideMenuCtl
+@When[Windows_Win32_UI_Controls == "on" && USER32 == "on" && Windows_Win32_UI_Controls_ShowScrollBar == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ShowScrollBar
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_Str_SetPtrW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_Str_SetPtrW
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_TaskDialog == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TaskDialog
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_TaskDialogIndirect == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TaskDialogIndirect
+@When[Windows_Win32_UI_Controls == "on" && COMCTL32 == "on" && Windows_Win32_UI_Controls_UninitializeFlatSB == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UninitializeFlatSB
+@When[Windows_Win32_UI_Controls == "on" && UXTHEME == "on" && Windows_Win32_UI_Controls_UpdatePanningFeedback == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UpdatePanningFeedback

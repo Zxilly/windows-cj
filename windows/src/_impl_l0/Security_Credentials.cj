@@ -96,12 +96,14 @@ public class AttestationChallengeHandler <: InterfaceWrapperBase & ComInterface 
 @When[Windows_Security_Credentials == "on" && Windows_Storage_Streams == "on"]
 extend AttestationChallengeHandler <: windows_core.Interface<AttestationChallengeHandler> {}
 
+@When[Windows_Security_Credentials == "on" && Windows_Storage_Streams == "on"]
 private open class AttestationChallengeHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_Security_Credentials == "on" && Windows_Storage_Streams == "on"]
 private open class AttestationChallengeHandlerInvoker <: AttestationChallengeHandlerInvokerErased {
     public open func Invoke(challenge: InParam<IBuffer>): IBuffer {
         IBuffer(CPointer<Unit>())
@@ -114,6 +116,7 @@ private open class AttestationChallengeHandlerInvoker <: AttestationChallengeHan
     }
 }
 
+@When[Windows_Security_Credentials == "on" && Windows_Storage_Streams == "on"]
 private class AttestationChallengeHandlerBox <: AttestationChallengeHandlerInvoker {
     public let invoke_: (InParam<IBuffer>) -> IBuffer
     private let vtblHandle: CPointerHandle<AttestationChallengeHandlerVtbl>
@@ -132,6 +135,7 @@ private class AttestationChallengeHandlerBox <: AttestationChallengeHandlerInvok
     }
 }
 
+@When[Windows_Security_Credentials == "on" && Windows_Storage_Streams == "on"]
 func buildAttestationChallengeHandlerBoxVtbl(): AttestationChallengeHandlerVtbl {
     var vtbl = AttestationChallengeHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -1415,7 +1419,7 @@ extend PasswordCredential <: windows_core.HandleWinrtType<PasswordCredential> {
     }
 }
 
-@When[Windows_Security_Credentials == "on"]
+@When[Windows_Security_Credentials == "on" && Windows_Foundation_Collections == "on"]
 public class PasswordCredentialPropertyStore <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1565,7 +1569,7 @@ public class PasswordCredentialPropertyStore <: InterfaceWrapperBase & ComInterf
     }
 }
 
-@When[Windows_Security_Credentials == "on"]
+@When[Windows_Security_Credentials == "on" && Windows_Foundation_Collections == "on"]
 extend PasswordCredentialPropertyStore <: windows_core.HandleWinrtType<PasswordCredentialPropertyStore> {
     public static func intoWinrtHandle(value: PasswordCredentialPropertyStore): CPointer<Unit> {
         value.asRaw()

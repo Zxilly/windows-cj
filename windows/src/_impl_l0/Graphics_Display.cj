@@ -770,12 +770,14 @@ public class DisplayPropertiesEventHandler <: InterfaceWrapperBase & ComInterfac
 @When[Windows_Graphics_Display == "on"]
 extend DisplayPropertiesEventHandler <: windows_core.Interface<DisplayPropertiesEventHandler> {}
 
+@When[Windows_Graphics_Display == "on"]
 private open class DisplayPropertiesEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_Graphics_Display == "on"]
 private open class DisplayPropertiesEventHandlerInvoker <: DisplayPropertiesEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>): Unit {
         ()
@@ -787,6 +789,7 @@ private open class DisplayPropertiesEventHandlerInvoker <: DisplayPropertiesEven
     }
 }
 
+@When[Windows_Graphics_Display == "on"]
 private class DisplayPropertiesEventHandlerBox <: DisplayPropertiesEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>) -> Unit
     private let vtblHandle: CPointerHandle<DisplayPropertiesEventHandlerVtbl>
@@ -805,6 +808,7 @@ private class DisplayPropertiesEventHandlerBox <: DisplayPropertiesEventHandlerI
     }
 }
 
+@When[Windows_Graphics_Display == "on"]
 func buildDisplayPropertiesEventHandlerBoxVtbl(): DisplayPropertiesEventHandlerVtbl {
     var vtbl = DisplayPropertiesEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -1727,7 +1731,10 @@ public struct IDisplayEnhancementOverrideCapabilitiesVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var IsBrightnessControlSupported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsBrightnessNitsControlSupported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSupportedNitRanges: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetSupportedNitRanges: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1812,6 +1819,7 @@ public class IDisplayEnhancementOverrideCapabilities <: InterfaceWrapperBase & C
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSupportedNitRanges(): windows_collections.IVectorView<NitRange> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

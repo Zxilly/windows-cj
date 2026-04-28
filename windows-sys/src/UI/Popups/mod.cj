@@ -83,6 +83,7 @@ public struct IMessageDialogVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Title: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetTitle: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Commands: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var DefaultCommandIndex: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var SetDefaultCommandIndex: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
@@ -148,6 +149,7 @@ public class IMessageDialog <: InterfaceWrapperBase & ComInterface {
         return __vt.SetTitle(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Commands(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -275,6 +277,7 @@ public class IMessageDialogFactory <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IPopupMenuVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Commands: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ShowAsync: CFunc<(CPointer<Unit>, Foundation__impl_l0.Point, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var ShowAsyncWithRect: CFunc<(CPointer<Unit>, Foundation__impl_l0.Rect, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -322,6 +325,7 @@ public class IPopupMenu <: InterfaceWrapperBase & ComInterface {
         readVtbl<IPopupMenuVtbl>(IPopupMenuVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Commands(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

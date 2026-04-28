@@ -538,14 +538,20 @@ extend MdmAlert <: windows_core.HandleWinrtType<MdmAlert> {
 @C
 public struct IMdmSessionVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Alerts: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Alerts: UIntNative = UIntNative(0)
     public var ExtendedError: CFunc<(CPointer<Unit>, CPointer<windows_future.HResultAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Id: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var State: CFunc<(CPointer<Unit>, CPointer<MdmSessionStateAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var AttachAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Delete: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
     public var StartAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var StartWithAlertsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var StartWithAlertsAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -614,6 +620,7 @@ public class IMdmSession <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         readVtbl<IMdmSessionVtbl>(IMdmSessionVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Alerts(): windows_collections.IVectorView<MdmAlert> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -668,6 +675,7 @@ public class IMdmSession <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StartWithAlertsAsync(alerts: windows_collections.IIterable<MdmAlert>): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -745,6 +753,7 @@ public class MdmSession <: InterfaceWrapperBase & ComInterface & windows_interfa
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Alerts(): windows_collections.IVectorView<MdmAlert> {
         return defaultInterface().Alerts()
     }
@@ -773,6 +782,7 @@ public class MdmSession <: InterfaceWrapperBase & ComInterface & windows_interfa
         return defaultInterface().StartAsync()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StartWithAlertsAsync(alerts: windows_collections.IIterable<MdmAlert>): windows_future.IAsyncAction {
         return defaultInterface().StartWithAlertsAsync(alerts)
     }
@@ -800,7 +810,10 @@ extend MdmSession <: windows_core.HandleWinrtType<MdmSession> {
 @C
 public struct IMdmSessionManagerStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SessionIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SessionIds: UIntNative = UIntNative(0)
     public var TryCreateSession: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var DeleteSessionById: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetSessionById: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -872,6 +885,7 @@ public class IMdmSessionManagerStatics <: InterfaceWrapperBase & ComInterface & 
         readVtbl<IMdmSessionManagerStaticsVtbl>(IMdmSessionManagerStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SessionIds(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -926,6 +940,7 @@ public class MdmSessionManager <: windows_interface.RuntimeName & windows_core.R
         windows_core.activationFactory<MdmSessionManager>().ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func SessionIds(): windows_collections.IVectorView<windows_core.HString> {
         var result__: Option<windows_collections.IVectorView<windows_core.HString>> = Option<windows_collections.IVectorView<windows_core.HString>>.None
         try (factory__ = windows_core.factory<MdmSessionManager, IMdmSessionManagerStatics>().unwrap()) {

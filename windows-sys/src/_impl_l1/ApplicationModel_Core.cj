@@ -753,6 +753,7 @@ public class ICoreApplicationView6 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ICoreImmersiveApplicationVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Views: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CreateNewView: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var MainView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -799,6 +800,7 @@ public class ICoreImmersiveApplication <: InterfaceWrapperBase & ComInterface {
         readVtbl<ICoreImmersiveApplicationVtbl>(ICoreImmersiveApplicationVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Views(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

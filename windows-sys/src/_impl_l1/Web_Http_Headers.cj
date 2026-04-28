@@ -9,6 +9,7 @@ import windows_interface as windows_interface
 @C
 public struct IHttpChallengeHeaderValueVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Parameters: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Scheme: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Token: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -55,6 +56,7 @@ public class IHttpChallengeHeaderValue <: InterfaceWrapperBase & ComInterface {
         readVtbl<IHttpChallengeHeaderValueVtbl>(IHttpChallengeHeaderValueVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Parameters(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -210,6 +212,7 @@ public struct IHttpContentDispositionHeaderValueVtbl {
     public var SetFileNameStar: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetName: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Parameters: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Size: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetSize: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -304,6 +307,7 @@ public class IHttpContentDispositionHeaderValue <: InterfaceWrapperBase & ComInt
         return __vt.SetName(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Parameters(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -636,6 +640,7 @@ public class IHttpContentHeaderCollection <: InterfaceWrapperBase & ComInterface
 @C
 public struct IHttpCredentialsHeaderValueVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Parameters: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Scheme: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Token: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -682,6 +687,7 @@ public class IHttpCredentialsHeaderValue <: InterfaceWrapperBase & ComInterface 
         readVtbl<IHttpCredentialsHeaderValueVtbl>(IHttpCredentialsHeaderValueVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Parameters(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -832,6 +838,7 @@ public struct IHttpExpectationHeaderValueVtbl {
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Value: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetValue: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Parameters: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -894,6 +901,7 @@ public class IHttpExpectationHeaderValue <: InterfaceWrapperBase & ComInterface 
         return __vt.SetValue(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Parameters(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1033,6 +1041,7 @@ public struct IHttpMediaTypeHeaderValueVtbl {
     public var SetCharSet: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var MediaType: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetMediaType: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Parameters: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1101,6 +1110,7 @@ public class IHttpMediaTypeHeaderValue <: InterfaceWrapperBase & ComInterface {
         return __vt.SetMediaType(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Parameters(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1233,6 +1243,7 @@ public struct IHttpMediaTypeWithQualityHeaderValueVtbl {
     public var SetCharSet: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var MediaType: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetMediaType: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Parameters: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Quality: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetQuality: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -1303,6 +1314,7 @@ public class IHttpMediaTypeWithQualityHeaderValue <: InterfaceWrapperBase & ComI
         return __vt.SetMediaType(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Parameters(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2051,6 +2063,7 @@ public class IHttpResponseHeaderCollection <: InterfaceWrapperBase & ComInterfac
 @C
 public struct IHttpTransferCodingHeaderValueVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Parameters: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Value: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -2096,6 +2109,7 @@ public class IHttpTransferCodingHeaderValue <: InterfaceWrapperBase & ComInterfa
         readVtbl<IHttpTransferCodingHeaderValueVtbl>(IHttpTransferCodingHeaderValueVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Parameters(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

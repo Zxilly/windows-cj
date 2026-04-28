@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -132,7 +131,10 @@ extend IInstalledDesktopApp <: windows_core.Interface<IInstalledDesktopApp> {}
 @C
 public struct IInstalledDesktopAppStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetInventoryAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetInventoryAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -201,6 +203,7 @@ public class IInstalledDesktopAppStatics <: InterfaceWrapperBase & ComInterface 
         readVtbl<IInstalledDesktopAppStaticsVtbl>(IInstalledDesktopAppStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetInventoryAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<InstalledDesktopApp>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -309,6 +312,7 @@ public class InstalledDesktopApp <: InterfaceWrapperBase & ComInterface & window
         return asIStringable().ToString()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetInventoryAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<InstalledDesktopApp>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<InstalledDesktopApp>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<InstalledDesktopApp>>>.None
         try (factory__ = windows_core.factory<InstalledDesktopApp, IInstalledDesktopAppStatics>().unwrap()) {

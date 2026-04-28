@@ -292,7 +292,7 @@ public struct IFileProtectionManagerStatics2Vtbl {
     public var IsContainerAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Storage == "on"]
     public var LoadFileFromContainerWithTargetAndNameCollisionOptionAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var SaveFileAsContainerWithSharingAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -351,7 +351,7 @@ public class IFileProtectionManagerStatics2 <: InterfaceWrapperBase & ComInterfa
         return __vt.LoadFileFromContainerWithTargetAndNameCollisionOptionAsync(__liveRaw, containerFile, target, collisionOption, result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func SaveFileAsContainerWithSharingAsync(protectedFile: CPointer<Unit>, sharedWithIdentities: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -512,7 +512,7 @@ public class IFileRevocationManagerStatics <: InterfaceWrapperBase & ComInterfac
 public struct IProtectedContainerExportResultVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Status: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var File: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -563,7 +563,7 @@ public class IProtectedContainerExportResult <: InterfaceWrapperBase & ComInterf
         return __vt.Status(__liveRaw, result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func File(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -576,7 +576,7 @@ public class IProtectedContainerExportResult <: InterfaceWrapperBase & ComInterf
 public struct IProtectedContainerImportResultVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Status: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var File: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -627,7 +627,7 @@ public class IProtectedContainerImportResult <: InterfaceWrapperBase & ComInterf
         return __vt.Status(__liveRaw, result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func File(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -639,7 +639,7 @@ public class IProtectedContainerImportResult <: InterfaceWrapperBase & ComInterf
 @C
 public struct IProtectedFileCreateResultVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var File: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Storage_Streams == "on"]
     public var Stream: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -687,7 +687,7 @@ public class IProtectedFileCreateResult <: InterfaceWrapperBase & ComInterface {
         readVtbl<IProtectedFileCreateResultVtbl>(IProtectedFileCreateResultVtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func File(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1015,13 +1015,13 @@ public struct IProtectionPolicyManagerStatics4Vtbl {
     public var IsRoamableProtectionEnabled: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => 0 }
     public var RequestAccessWithBehaviorAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     public var RequestAccessForAppWithBehaviorAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var RequestAccessToFilesForAppAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var RequestAccessToFilesForAppWithMessageAndBehaviorAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var RequestAccessToFilesForProcessAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var RequestAccessToFilesForProcessWithMessageAndBehaviorAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     @When[Windows_Storage == "on"]
     public var IsFileProtectionRequiredAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
@@ -1090,28 +1090,28 @@ public class IProtectionPolicyManagerStatics4 <: InterfaceWrapperBase & ComInter
         return __vt.RequestAccessForAppWithBehaviorAsync(__liveRaw, sourceIdentity, appPackageFamilyName, auditInfo, messageFromApp, behavior, result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func RequestAccessToFilesForAppAsync(sourceItemList: CPointer<Unit>, appPackageFamilyName: CPointer<Unit>, auditInfo: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RequestAccessToFilesForAppAsync(__liveRaw, sourceItemList, appPackageFamilyName, auditInfo, result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func RequestAccessToFilesForAppWithMessageAndBehaviorAsync(sourceItemList: CPointer<Unit>, appPackageFamilyName: CPointer<Unit>, auditInfo: CPointer<Unit>, messageFromApp: CPointer<Unit>, behavior: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RequestAccessToFilesForAppWithMessageAndBehaviorAsync(__liveRaw, sourceItemList, appPackageFamilyName, auditInfo, messageFromApp, behavior, result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func RequestAccessToFilesForProcessAsync(sourceItemList: CPointer<Unit>, processId: UInt32, auditInfo: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RequestAccessToFilesForProcessAsync(__liveRaw, sourceItemList, processId, auditInfo, result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func RequestAccessToFilesForProcessWithMessageAndBehaviorAsync(sourceItemList: CPointer<Unit>, processId: UInt32, auditInfo: CPointer<Unit>, messageFromApp: CPointer<Unit>, behavior: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

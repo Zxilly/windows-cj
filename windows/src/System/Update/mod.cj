@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -780,11 +779,17 @@ public struct ISystemUpdateManagerStaticsVtbl {
     public var LastUpdateCheckTime: CFunc<(CPointer<Unit>, CPointer<windows_future.DateTimeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var LastUpdateInstallTime: CFunc<(CPointer<Unit>, CPointer<windows_future.DateTimeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var LastErrorInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAutomaticRebootBlockIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAutomaticRebootBlockIds: UIntNative = UIntNative(0)
     public var BlockAutomaticRebootAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var UnblockAutomaticRebootAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var ExtendedError: CFunc<(CPointer<Unit>, CPointer<windows_future.HResultAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetUpdateItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetUpdateItems: UIntNative = UIntNative(0)
     public var AttentionRequiredReason: CFunc<(CPointer<Unit>, CPointer<SystemUpdateAttentionRequiredReasonAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetFlightRing: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var GetFlightRing: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -961,6 +966,7 @@ public class ISystemUpdateManagerStatics <: InterfaceWrapperBase & ComInterface 
         return SystemUpdateLastErrorInfo.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAutomaticRebootBlockIds(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -993,6 +999,7 @@ public class ISystemUpdateManagerStatics <: InterfaceWrapperBase & ComInterface 
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<windows_future.HResult>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetUpdateItems(): windows_collections.IVectorView<SystemUpdateItem> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1206,6 +1213,7 @@ public class SystemUpdateManager <: windows_interface.RuntimeName & windows_core
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetAutomaticRebootBlockIds(): windows_collections.IVectorView<windows_core.HString> {
         var result__: Option<windows_collections.IVectorView<windows_core.HString>> = Option<windows_collections.IVectorView<windows_core.HString>>.None
         try (factory__ = windows_core.factory<SystemUpdateManager, ISystemUpdateManagerStatics>().unwrap()) {
@@ -1250,6 +1258,7 @@ public class SystemUpdateManager <: windows_interface.RuntimeName & windows_core
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetUpdateItems(): windows_collections.IVectorView<SystemUpdateItem> {
         var result__: Option<windows_collections.IVectorView<SystemUpdateItem>> = Option<windows_collections.IVectorView<SystemUpdateItem>>.None
         try (factory__ = windows_core.factory<SystemUpdateManager, ISystemUpdateManagerStatics>().unwrap()) {

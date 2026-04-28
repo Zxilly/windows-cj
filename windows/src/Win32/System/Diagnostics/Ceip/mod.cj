@@ -4,11 +4,15 @@
 package windows.Win32.System.Diagnostics.Ceip
 
 import std.collection.*
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 
-@When[KERNEL32 == "on"]
+@When[Windows_Win32_System_Diagnostics_Ceip == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Ceip_CeipIsOptedIn == "on"]
 foreign {
     func CeipIsOptedIn(): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Ceip == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Ceip_CeipIsOptedIn == "on"]
+public unsafe func Windows_CeipIsOptedIn(): Int32 {
+    return CeipIsOptedIn()
 }

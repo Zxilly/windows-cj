@@ -21,11 +21,15 @@ import windows_future as windows_future
 public struct IWebAccountProviderTokenOperationVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var ProviderRequest: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var ProviderResponses: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ProviderResponses: UIntNative = UIntNative(0)
     public var SetCacheExpirationTime: CFunc<(CPointer<Unit>, windows_future.DateTimeAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CacheExpirationTime: CFunc<(CPointer<Unit>, CPointer<windows_future.DateTimeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 
+    @When[Windows_Foundation_Collections == "on"]
     public static func new<Identity>(offset!: Int64 = 0): IWebAccountProviderTokenOperationVtbl where Identity <: IWebAccountProviderTokenOperation_Impl {
         let _ = offset
         var vtbl = IWebAccountProviderTokenOperationVtbl()
@@ -38,14 +42,7 @@ public struct IWebAccountProviderTokenOperationVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.ProviderResponses = { instanceRaw, result__ =>
-            match (unsafe { asImplFromRaw<IWebAccountProviderTokenOperation_ImplErased>(instanceRaw) }) {
-                case Some(impl) =>
-                    impl.__winrtThunk_ProviderResponses(result__)
-                case None =>
-                    E_NOINTERFACE.value
-            }
-        }
+        vtbl = IWebAccountProviderTokenOperationVtbl.__assignProviderResponses<Identity>(vtbl)
         vtbl.SetCacheExpirationTime = { instanceRaw, arg0 =>
             match (unsafe { asImplFromRaw<IWebAccountProviderTokenOperation_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
@@ -65,6 +62,25 @@ public struct IWebAccountProviderTokenOperationVtbl {
         return vtbl
     }
 
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections == "on"]
+    public static func __assignProviderResponses<Identity>(vtbl: IWebAccountProviderTokenOperationVtbl): IWebAccountProviderTokenOperationVtbl where Identity <: IWebAccountProviderTokenOperation_Impl {
+        var next = vtbl
+        next.ProviderResponses = { instanceRaw, result__ =>
+            match (unsafe { asImplFromRaw<IWebAccountProviderTokenOperation_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_ProviderResponses(result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        return next
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections != "on"]
+    public static func __assignProviderResponses<Identity>(vtbl: IWebAccountProviderTokenOperationVtbl): IWebAccountProviderTokenOperationVtbl where Identity <: IWebAccountProviderTokenOperation_Impl {
+        return vtbl
+    }
+
     public static func matches(iid: GUID): Bool {
         if (iid == IWebAccountProviderTokenOperation.iid()) {
             return true
@@ -78,7 +94,7 @@ public struct IWebAccountProviderTokenOperationVtbl {
     }
 }
 
-@When[Windows_Security_Authentication_Web_Provider == "on"]
+@When[Windows_Security_Authentication_Web_Provider == "on" && Windows_Foundation_Collections == "on"]
 public interface IWebAccountProviderTokenOperation_ImplErased {
     public func __winrtThunk_ProviderRequest(result__: CPointer<CPointer<Unit>>): Int32
 
@@ -89,7 +105,7 @@ public interface IWebAccountProviderTokenOperation_ImplErased {
     public func __winrtThunk_CacheExpirationTime(result__: CPointer<windows_future.DateTimeAbi>): Int32
 }
 
-@When[Windows_Security_Authentication_Web_Provider == "on"]
+@When[Windows_Security_Authentication_Web_Provider == "on" && Windows_Foundation_Collections == "on"]
 public interface IWebAccountProviderTokenOperation_Impl <: IWebAccountProviderTokenOperation_ImplErased & _impl_l0.IWebAccountProviderOperation_Impl {
     public func ProviderRequest(): windows_core.Result<_impl_l1.WebProviderTokenRequest>
 
@@ -256,6 +272,7 @@ public class IWebAccountProviderTokenOperation <: InterfaceWrapperBase & ComInte
         return _impl_l1.WebProviderTokenRequest.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ProviderResponses(): windows_collections.IVector<WebProviderTokenResponse> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -465,6 +482,7 @@ public class WebAccountProviderGetTokenSilentOperation <: InterfaceWrapperBase &
         return defaultInterface().ProviderRequest()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ProviderResponses(): windows_collections.IVector<WebProviderTokenResponse> {
         return defaultInterface().ProviderResponses()
     }
@@ -612,6 +630,7 @@ public class WebAccountProviderRequestTokenOperation <: InterfaceWrapperBase & C
         return defaultInterface().ProviderRequest()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ProviderResponses(): windows_collections.IVector<WebProviderTokenResponse> {
         return defaultInterface().ProviderResponses()
     }

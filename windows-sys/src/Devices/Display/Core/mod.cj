@@ -3,16 +3,11 @@ package windows_sys.Devices.Display.Core
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Devices_Display == "on"]
 import windows_sys.Devices.Display as Devices_Display
-@When[Windows_Foundation_Numerics == "on"]
 import windows_sys.Foundation.Numerics as Foundation_Numerics
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_Graphics == "on"]
 import windows_sys.Graphics as Graphics
-@When[Windows_Graphics_DirectX == "on"]
 import windows_sys.Graphics.DirectX as Graphics_DirectX
-@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
 import windows_sys.Graphics.DirectX.Direct3D11 as Graphics_DirectX_Direct3D11
 import windows_sys._impl_l0 as _impl_l0
 
@@ -727,6 +722,7 @@ public struct IDisplayAdapterVtbl {
     public var PciDeviceId: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var PciSubSystemId: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var PciRevision: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -814,6 +810,7 @@ public class IDisplayAdapter <: InterfaceWrapperBase & ComInterface {
         return __vt.PciRevision(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1338,6 +1335,7 @@ public struct IDisplayPrimaryDescriptionVtbl {
     public var IsStereo: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     @When[Windows_Graphics_DirectX_Direct3D11 == "on"]
     public var MultisampleDescription: CFunc<(CPointer<Unit>, CPointer<Graphics_DirectX_Direct3D11.Direct3DMultisampleDescription>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1421,6 +1419,7 @@ public class IDisplayPrimaryDescription <: InterfaceWrapperBase & ComInterface {
         return __vt.MultisampleDescription(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1737,6 +1736,7 @@ public struct IDisplayWireFormatVtbl {
     public var ColorSpace: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Eotf: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var HdrMetadata: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1811,6 +1811,7 @@ public class IDisplayWireFormat <: InterfaceWrapperBase & ComInterface {
         return __vt.HdrMetadata(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2272,7 +2273,7 @@ public class IDisplayDevice <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IDisplayDevice2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Graphics == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics == "on"]
     public var CreateSimpleScanoutWithDirtyRectsAndOptions: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -2317,7 +2318,7 @@ public class IDisplayDevice2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IDisplayDevice2Vtbl>(IDisplayDevice2Vtbl())
     }
 
-    @When[Windows_Graphics == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics == "on"]
     public unsafe func CreateSimpleScanoutWithDirtyRectsAndOptions(source: CPointer<Unit>, surface: CPointer<Unit>, subresourceIndex: UInt32, syncInterval: UInt32, dirtyRects: CPointer<Unit>, options: UInt32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2329,13 +2330,18 @@ public class IDisplayDevice2 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IDisplayManagerVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetCurrentTargets: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetCurrentAdapters: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var TryAcquireTarget: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
     public var ReleaseTarget: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var TryReadCurrentStateForAllTargets: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var TryAcquireTargetsAndReadCurrentState: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var TryAcquireTargetsAndCreateEmptyState: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var TryAcquireTargetsAndCreateSubstate: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var CreateDisplayDevice: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Enabled: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
@@ -2391,12 +2397,14 @@ public class IDisplayManager <: InterfaceWrapperBase & ComInterface {
         readVtbl<IDisplayManagerVtbl>(IDisplayManagerVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetCurrentTargets(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetCurrentTargets(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetCurrentAdapters(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2421,18 +2429,21 @@ public class IDisplayManager <: InterfaceWrapperBase & ComInterface {
         return __vt.TryReadCurrentStateForAllTargets(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TryAcquireTargetsAndReadCurrentState(targets: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TryAcquireTargetsAndReadCurrentState(__liveRaw, targets, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TryAcquireTargetsAndCreateEmptyState(targets: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TryAcquireTargetsAndCreateEmptyState(__liveRaw, targets, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TryAcquireTargetsAndCreateSubstate(existingState: CPointer<Unit>, targets: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2756,6 +2767,7 @@ public struct IDisplayModeInfoVtbl {
     public var IsInterlaced: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var GetWireFormatSupportedBitsPerChannel: CFunc<(CPointer<Unit>, Int32, CPointer<UInt32>) -> Int32> = { _, _, _ => 0 }
     public var IsWireFormatSupported: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -2852,6 +2864,7 @@ public class IDisplayModeInfo <: InterfaceWrapperBase & ComInterface {
         return __vt.IsWireFormatSupported(__liveRaw, wireFormat, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2865,6 +2878,7 @@ public struct IDisplayMuxDeviceVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Id: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IsActive: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAvailableMuxTargets: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CurrentTarget: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var PreferredTarget: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -2928,6 +2942,7 @@ public class IDisplayMuxDevice <: InterfaceWrapperBase & ComInterface {
         return __vt.IsActive(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAvailableMuxTargets(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3072,8 +3087,10 @@ public struct IDisplayPathVtbl {
     public var SetRotation: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var Scaling: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetScaling: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindModes: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var ApplyPropertiesFromMode: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -3252,6 +3269,7 @@ public class IDisplayPath <: InterfaceWrapperBase & ComInterface {
         return __vt.SetScaling(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindModes(flags: UInt32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3264,6 +3282,7 @@ public class IDisplayPath <: InterfaceWrapperBase & ComInterface {
         return __vt.ApplyPropertiesFromMode(__liveRaw, modeResult)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3332,7 +3351,7 @@ public class IDisplayPrimaryDescriptionFactory <: InterfaceWrapperBase & ComInte
 @C
 public struct IDisplayPrimaryDescriptionStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Graphics_DirectX == "on" && Windows_Graphics_DirectX_Direct3D11 == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_DirectX == "on" && Windows_Graphics_DirectX_Direct3D11 == "on"]
     public var CreateWithProperties: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, UInt32, Int32, Int32, Bool, Graphics_DirectX_Direct3D11.Direct3DMultisampleDescription, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -3377,7 +3396,7 @@ public class IDisplayPrimaryDescriptionStatics <: InterfaceWrapperBase & ComInte
         readVtbl<IDisplayPrimaryDescriptionStaticsVtbl>(IDisplayPrimaryDescriptionStaticsVtbl())
     }
 
-    @When[Windows_Graphics_DirectX == "on" && Windows_Graphics_DirectX_Direct3D11 == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_DirectX == "on" && Windows_Graphics_DirectX_Direct3D11 == "on"]
     public unsafe func CreateWithProperties(extraProperties: CPointer<Unit>, width: UInt32, height: UInt32, pixelFormat: Int32, colorSpace: Int32, isStereo: Bool, multisampleDescription: Graphics_DirectX_Direct3D11.Direct3DMultisampleDescription, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3460,8 +3479,11 @@ public struct IDisplayStateVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var IsReadOnly: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var IsStale: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Targets: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Views: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ConnectTarget: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var ConnectTargetToView: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
@@ -3527,18 +3549,21 @@ public class IDisplayState <: InterfaceWrapperBase & ComInterface {
         return __vt.IsStale(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Targets(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Targets(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Views(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Views(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3616,6 +3641,7 @@ public struct IDisplayTargetVtbl {
     public var StableMonitorId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Devices_Display == "on"]
     public var TryGetMonitor: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IsStale: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var IsSame: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => 0 }
@@ -3725,6 +3751,7 @@ public class IDisplayTarget <: InterfaceWrapperBase & ComInterface {
         return __vt.TryGetMonitor(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3754,12 +3781,14 @@ public class IDisplayTarget <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IDisplayViewVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Paths: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Graphics == "on"]
     public var ContentResolution: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Graphics == "on"]
     public var SetContentResolution: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var SetPrimaryPath: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -3804,6 +3833,7 @@ public class IDisplayView <: InterfaceWrapperBase & ComInterface {
         readVtbl<IDisplayViewVtbl>(IDisplayViewVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Paths(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3830,6 +3860,7 @@ public class IDisplayView <: InterfaceWrapperBase & ComInterface {
         return __vt.SetPrimaryPath(__liveRaw, path)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3896,6 +3927,7 @@ public class IDisplayWireFormatFactory <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IDisplayWireFormatStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateWithProperties: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, Int32, Int32, Int32, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -3940,6 +3972,7 @@ public class IDisplayWireFormatStatics <: InterfaceWrapperBase & ComInterface {
         readVtbl<IDisplayWireFormatStaticsVtbl>(IDisplayWireFormatStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateWithProperties(extraProperties: CPointer<Unit>, pixelEncoding: Int32, bitsPerChannel: Int32, colorSpace: Int32, eotf: Int32, hdrMetadata: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

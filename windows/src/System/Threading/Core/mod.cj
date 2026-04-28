@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_System_Threading == "on"]
 import windows.System.Threading as System_Threading
 import windows_future as windows_future
 
@@ -621,12 +620,14 @@ public class SignalHandler <: InterfaceWrapperBase & ComInterface & windows_inte
 @When[Windows_System_Threading_Core == "on"]
 extend SignalHandler <: windows_core.Interface<SignalHandler> {}
 
+@When[Windows_System_Threading_Core == "on"]
 private open class SignalHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: Bool): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_System_Threading_Core == "on"]
 private open class SignalHandlerInvoker <: SignalHandlerInvokerErased {
     public open func Invoke(signalNotifier: InParam<SignalNotifier>, timedOut: Bool): Unit {
         ()
@@ -638,6 +639,7 @@ private open class SignalHandlerInvoker <: SignalHandlerInvokerErased {
     }
 }
 
+@When[Windows_System_Threading_Core == "on"]
 private class SignalHandlerBox <: SignalHandlerInvoker {
     public let invoke_: (InParam<SignalNotifier>, Bool) -> Unit
     private let vtblHandle: CPointerHandle<SignalHandlerVtbl>
@@ -656,6 +658,7 @@ private class SignalHandlerBox <: SignalHandlerInvoker {
     }
 }
 
+@When[Windows_System_Threading_Core == "on"]
 func buildSignalHandlerBoxVtbl(): SignalHandlerVtbl {
     var vtbl = SignalHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()

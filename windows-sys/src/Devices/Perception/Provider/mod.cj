@@ -3,14 +3,10 @@ package windows_sys.Devices.Perception.Provider
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Devices_Perception == "on"]
 import windows_sys.Devices.Perception as Devices_Perception
-@When[Windows_Foundation_Numerics == "on"]
 import windows_sys.Foundation.Numerics as Foundation_Numerics
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_Graphics_Imaging == "on"]
 import windows_sys.Graphics.Imaging as Graphics_Imaging
-@When[Windows_Media == "on"]
 import windows_sys.Media as Media
 
 
@@ -87,6 +83,7 @@ public class IKnownPerceptionFrameKindStatics <: InterfaceWrapperBase & ComInter
 @C
 public struct IPerceptionControlGroupVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var FrameProviderIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -131,6 +128,7 @@ public class IPerceptionControlGroup <: InterfaceWrapperBase & ComInterface {
         readVtbl<IPerceptionControlGroupVtbl>(IPerceptionControlGroupVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FrameProviderIds(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -215,6 +213,7 @@ public class IPerceptionCorrelation <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IPerceptionFaceAuthenticationGroupVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var FrameProviderIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -259,6 +258,7 @@ public class IPerceptionFaceAuthenticationGroup <: InterfaceWrapperBase & ComInt
         readVtbl<IPerceptionFaceAuthenticationGroupVtbl>(IPerceptionFaceAuthenticationGroupVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FrameProviderIds(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -764,6 +764,7 @@ public class IPerceptionVideoFrameAllocator <: InterfaceWrapperBase & ComInterfa
 @C
 public struct IPerceptionControlGroupFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -808,6 +809,7 @@ public class IPerceptionControlGroupFactory <: InterfaceWrapperBase & ComInterfa
         readVtbl<IPerceptionControlGroupFactoryVtbl>(IPerceptionControlGroupFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create(ids: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -876,6 +878,7 @@ public class IPerceptionCorrelationFactory <: InterfaceWrapperBase & ComInterfac
 @C
 public struct IPerceptionCorrelationGroupVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var RelativeLocations: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -920,6 +923,7 @@ public class IPerceptionCorrelationGroup <: InterfaceWrapperBase & ComInterface 
         readVtbl<IPerceptionCorrelationGroupVtbl>(IPerceptionCorrelationGroupVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RelativeLocations(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -931,6 +935,7 @@ public class IPerceptionCorrelationGroup <: InterfaceWrapperBase & ComInterface 
 @C
 public struct IPerceptionCorrelationGroupFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -975,6 +980,7 @@ public class IPerceptionCorrelationGroupFactory <: InterfaceWrapperBase & ComInt
         readVtbl<IPerceptionCorrelationGroupFactoryVtbl>(IPerceptionCorrelationGroupFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create(relativeLocations: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -986,6 +992,7 @@ public class IPerceptionCorrelationGroupFactory <: InterfaceWrapperBase & ComInt
 @C
 public struct IPerceptionFaceAuthenticationGroupFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -1030,6 +1037,7 @@ public class IPerceptionFaceAuthenticationGroupFactory <: InterfaceWrapperBase &
         readVtbl<IPerceptionFaceAuthenticationGroupFactoryVtbl>(IPerceptionFaceAuthenticationGroupFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create(ids: CPointer<Unit>, startHandler: CPointer<Unit>, stopHandler: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

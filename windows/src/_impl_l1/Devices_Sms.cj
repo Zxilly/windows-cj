@@ -1473,7 +1473,10 @@ public struct ISmsDeviceMessageStoreVtbl {
     public var DeleteMessageAsync: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var DeleteMessagesAsync: CFunc<(CPointer<Unit>, _impl_l0.SmsMessageFilterAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var GetMessageAsync: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetMessagesAsync: CFunc<(CPointer<Unit>, _impl_l0.SmsMessageFilterAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetMessagesAsync: UIntNative = UIntNative(0)
     public var MaxMessages: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -1567,6 +1570,7 @@ public class ISmsDeviceMessageStore <: InterfaceWrapperBase & ComInterface & Run
         return windows_future.IAsyncOperation<_impl_l0.ISmsMessage>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetMessagesAsync(messageFilter: _impl_l0.SmsMessageFilter): windows_future.IAsyncOperationWithProgress<windows_collections.IVectorView<_impl_l0.ISmsMessage>, Int32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1865,7 +1869,10 @@ extend ISmsFilterRuleFactory <: windows_core.Interface<ISmsFilterRuleFactory> {}
 public struct ISmsFilterRulesVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var ActionType: CFunc<(CPointer<Unit>, CPointer<_impl_l0.SmsFilterActionTypeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Rules: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Rules: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1942,6 +1949,7 @@ public class ISmsFilterRules <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.SmsFilterActionType>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Rules(): windows_collections.IVector<SmsFilterRule> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2398,7 +2406,10 @@ extend ISmsMessageRegistration <: windows_core.Interface<ISmsMessageRegistration
 @C
 public struct ISmsMessageRegistrationStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AllRegistrations: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AllRegistrations: UIntNative = UIntNative(0)
     public var Register: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -2468,6 +2479,7 @@ public class ISmsMessageRegistrationStatics <: InterfaceWrapperBase & ComInterfa
         readVtbl<ISmsMessageRegistrationStaticsVtbl>(ISmsMessageRegistrationStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AllRegistrations(): windows_collections.IVectorView<SmsMessageRegistration> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2749,9 +2761,13 @@ public struct ISmsTextMessageVtbl {
     public var SetBody: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Encoding: CFunc<(CPointer<Unit>, CPointer<_impl_l0.SmsEncodingAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetEncoding: CFunc<(CPointer<Unit>, _impl_l0.SmsEncodingAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var ToBinaryMessages: CFunc<(CPointer<Unit>, _impl_l0.SmsDataFormatAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ToBinaryMessages: UIntNative = UIntNative(0)
     public init() {}
 
+    @When[Windows_Foundation_Collections == "on"]
     public static func new<Identity>(offset!: Int64 = 0): ISmsTextMessageVtbl where Identity <: ISmsTextMessage_Impl {
         let _ = offset
         var vtbl = ISmsTextMessageVtbl()
@@ -2852,7 +2868,14 @@ public struct ISmsTextMessageVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.ToBinaryMessages = { instanceRaw, arg0, result__ =>
+        vtbl = ISmsTextMessageVtbl.__assignToBinaryMessages<Identity>(vtbl)
+        return vtbl
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections == "on"]
+    public static func __assignToBinaryMessages<Identity>(vtbl: ISmsTextMessageVtbl): ISmsTextMessageVtbl where Identity <: ISmsTextMessage_Impl {
+        var next = vtbl
+        next.ToBinaryMessages = { instanceRaw, arg0, result__ =>
             match (unsafe { asImplFromRaw<ISmsTextMessage_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
                     impl.__winrtThunk_ToBinaryMessages(arg0, result__)
@@ -2860,6 +2883,11 @@ public struct ISmsTextMessageVtbl {
                     E_NOINTERFACE.value
             }
         }
+        return next
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections != "on"]
+    public static func __assignToBinaryMessages<Identity>(vtbl: ISmsTextMessageVtbl): ISmsTextMessageVtbl where Identity <: ISmsTextMessage_Impl {
         return vtbl
     }
 
@@ -2876,7 +2904,7 @@ public struct ISmsTextMessageVtbl {
     }
 }
 
-@When[Windows_Devices_Sms == "on"]
+@When[Windows_Devices_Sms == "on" && Windows_Foundation_Collections == "on"]
 public interface ISmsTextMessage_ImplErased {
     public func __winrtThunk_Timestamp(result__: CPointer<windows_future.DateTimeAbi>): Int32
 
@@ -2905,7 +2933,7 @@ public interface ISmsTextMessage_ImplErased {
     public func __winrtThunk_ToBinaryMessages(arg0: _impl_l0.SmsDataFormatAbi, result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Devices_Sms == "on"]
+@When[Windows_Devices_Sms == "on" && Windows_Foundation_Collections == "on"]
 public interface ISmsTextMessage_Impl <: ISmsTextMessage_ImplErased & _impl_l0.ISmsMessage_Impl {
     public func Timestamp(): windows_core.Result<windows_future.DateTime>
 
@@ -3298,6 +3326,7 @@ public class ISmsTextMessage <: InterfaceWrapperBase & ComInterface & RuntimeNam
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ToBinaryMessages(format: _impl_l0.SmsDataFormat): windows_collections.IVectorView<ISmsBinaryMessage> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3761,7 +3790,10 @@ public struct ISmsWapMessageVtbl {
     public var BinaryBody: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams != "on"]
     public var BinaryBody: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Headers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Headers: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3891,6 +3923,7 @@ public class ISmsWapMessage <: InterfaceWrapperBase & ComInterface & RuntimeName
         return _impl_l0.IBuffer.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Headers(): windows_collections.IMap<windows_core.HString, windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4821,6 +4854,7 @@ public class SmsDeviceMessageStore <: InterfaceWrapperBase & ComInterface & wind
         return defaultInterface().GetMessageAsync(messageId)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetMessagesAsync(messageFilter: _impl_l0.SmsMessageFilter): windows_future.IAsyncOperationWithProgress<windows_collections.IVectorView<_impl_l0.ISmsMessage>, Int32> {
         return defaultInterface().GetMessagesAsync(messageFilter)
     }
@@ -4924,12 +4958,14 @@ public class SmsDeviceStatusChangedEventHandler <: InterfaceWrapperBase & ComInt
 @When[Windows_Devices_Sms == "on"]
 extend SmsDeviceStatusChangedEventHandler <: windows_core.Interface<SmsDeviceStatusChangedEventHandler> {}
 
+@When[Windows_Devices_Sms == "on"]
 private open class SmsDeviceStatusChangedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_Devices_Sms == "on"]
 private open class SmsDeviceStatusChangedEventHandlerInvoker <: SmsDeviceStatusChangedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<SmsDevice>): Unit {
         ()
@@ -4941,6 +4977,7 @@ private open class SmsDeviceStatusChangedEventHandlerInvoker <: SmsDeviceStatusC
     }
 }
 
+@When[Windows_Devices_Sms == "on"]
 private class SmsDeviceStatusChangedEventHandlerBox <: SmsDeviceStatusChangedEventHandlerInvoker {
     public let invoke_: (InParam<SmsDevice>) -> Unit
     private let vtblHandle: CPointerHandle<SmsDeviceStatusChangedEventHandlerVtbl>
@@ -4959,6 +4996,7 @@ private class SmsDeviceStatusChangedEventHandlerBox <: SmsDeviceStatusChangedEve
     }
 }
 
+@When[Windows_Devices_Sms == "on"]
 func buildSmsDeviceStatusChangedEventHandlerBoxVtbl(): SmsDeviceStatusChangedEventHandlerVtbl {
     var vtbl = SmsDeviceStatusChangedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -5046,22 +5084,27 @@ public class SmsFilterRule <: InterfaceWrapperBase & ComInterface & windows_inte
         return defaultInterface().MessageType()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ImsiPrefixes(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().ImsiPrefixes()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DeviceIds(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().DeviceIds()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SenderNumbers(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().SenderNumbers()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TextMessagePrefixes(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().TextMessagePrefixes()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PortNumbers(): windows_collections.IVector<Int32> {
         return defaultInterface().PortNumbers()
     }
@@ -5074,26 +5117,32 @@ public class SmsFilterRule <: InterfaceWrapperBase & ComInterface & windows_inte
         defaultInterface().SetCellularClass(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ProtocolIds(): windows_collections.IVector<Int32> {
         return defaultInterface().ProtocolIds()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TeleserviceIds(): windows_collections.IVector<Int32> {
         return defaultInterface().TeleserviceIds()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func WapApplicationIds(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().WapApplicationIds()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func WapContentTypes(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().WapContentTypes()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func BroadcastTypes(): windows_collections.IVector<_impl_l0.SmsBroadcastType> {
         return defaultInterface().BroadcastTypes()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func BroadcastChannels(): windows_collections.IVector<Int32> {
         return defaultInterface().BroadcastChannels()
     }
@@ -5201,6 +5250,7 @@ public class SmsFilterRules <: InterfaceWrapperBase & ComInterface & windows_int
         return defaultInterface().ActionType()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Rules(): windows_collections.IVector<SmsFilterRule> {
         return defaultInterface().Rules()
     }
@@ -5403,12 +5453,14 @@ public class SmsMessageReceivedEventHandler <: InterfaceWrapperBase & ComInterfa
 @When[Windows_Devices_Sms == "on"]
 extend SmsMessageReceivedEventHandler <: windows_core.Interface<SmsMessageReceivedEventHandler> {}
 
+@When[Windows_Devices_Sms == "on"]
 private open class SmsMessageReceivedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_Devices_Sms == "on"]
 private open class SmsMessageReceivedEventHandlerInvoker <: SmsMessageReceivedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<SmsDevice>, e: InParam<SmsMessageReceivedEventArgs>): Unit {
         ()
@@ -5420,6 +5472,7 @@ private open class SmsMessageReceivedEventHandlerInvoker <: SmsMessageReceivedEv
     }
 }
 
+@When[Windows_Devices_Sms == "on"]
 private class SmsMessageReceivedEventHandlerBox <: SmsMessageReceivedEventHandlerInvoker {
     public let invoke_: (InParam<SmsDevice>, InParam<SmsMessageReceivedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<SmsMessageReceivedEventHandlerVtbl>
@@ -5438,6 +5491,7 @@ private class SmsMessageReceivedEventHandlerBox <: SmsMessageReceivedEventHandle
     }
 }
 
+@When[Windows_Devices_Sms == "on"]
 func buildSmsMessageReceivedEventHandlerBoxVtbl(): SmsMessageReceivedEventHandlerVtbl {
     var vtbl = SmsMessageReceivedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -5657,6 +5711,7 @@ public class SmsMessageRegistration <: InterfaceWrapperBase & ComInterface & win
         defaultInterface().RemoveMessageReceived(eventCookie)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func AllRegistrations(): windows_collections.IVectorView<SmsMessageRegistration> {
         var result__: Option<windows_collections.IVectorView<SmsMessageRegistration>> = Option<windows_collections.IVectorView<SmsMessageRegistration>>.None
         try (factory__ = windows_core.factory<SmsMessageRegistration, ISmsMessageRegistrationStatics>().unwrap()) {
@@ -5867,6 +5922,7 @@ public class SmsSendMessageResult <: InterfaceWrapperBase & ComInterface & windo
         return defaultInterface().IsSuccessful()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MessageReferenceNumbers(): windows_collections.IVectorView<Int32> {
         return defaultInterface().MessageReferenceNumbers()
     }
@@ -6188,6 +6244,7 @@ public class SmsTextMessage <: InterfaceWrapperBase & ComInterface & windows_int
         defaultInterface().SetEncoding(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ToBinaryMessages(format: _impl_l0.SmsDataFormat): windows_collections.IVectorView<ISmsBinaryMessage> {
         return defaultInterface().ToBinaryMessages(format)
     }
@@ -6663,6 +6720,7 @@ public class SmsWapMessage <: InterfaceWrapperBase & ComInterface & windows_inte
         return defaultInterface().BinaryBody()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Headers(): windows_collections.IMap<windows_core.HString, windows_core.HString> {
         return defaultInterface().Headers()
     }

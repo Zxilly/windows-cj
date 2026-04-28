@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_UI == "on"]
 import windows.UI as UI
 import windows._impl_l1 as _impl_l1
 import windows_collections as windows_collections
@@ -1756,6 +1754,7 @@ public class CustomTextActionEntity <: InterfaceWrapperBase & ComInterface & win
         return defaultInterface().KeyPhrase()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         return defaultInterface().Properties()
     }
@@ -2962,7 +2961,10 @@ extend IActionEntityFactory6 <: windows_core.Interface<IActionEntityFactory6> {}
 @C
 public struct IActionEntityFactory7Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateCustomTextEntity: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateCustomTextEntity: UIntNative = UIntNative(0)
     public var CreateArrayEntityWithCustomKind: CFunc<(CPointer<Unit>, ActionEntityKindAbi, CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -3032,6 +3034,7 @@ public class IActionEntityFactory7 <: InterfaceWrapperBase & ComInterface & Runt
         readVtbl<IActionEntityFactory7Vtbl>(IActionEntityFactory7Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateCustomTextEntity(kind: windows_core.HString, keyPhrase: windows_core.HString, props: windows_collections.IMapView<windows_core.HString, IInspectable>): CustomTextActionEntity {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4973,7 +4976,10 @@ public struct ICustomTextActionEntityVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var CustomTextKind: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var KeyPhrase: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -5058,6 +5064,7 @@ public class ICustomTextActionEntity <: InterfaceWrapperBase & ComInterface & Ru
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

@@ -8,9 +8,7 @@ import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeTy
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Storage_Xps == "on"]
 import windows.Win32.Storage.Xps as Win32_Storage_Xps
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
@@ -669,13 +667,23 @@ public class IXpsPrintJob <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[XPSPRINT == "on"]
+@When[Windows_Win32_Storage_Xps_Printing == "on" && XPSPRINT == "on" && Windows_Win32_Storage_Xps_Printing_StartXpsPrintJob == "on"]
 foreign {
     // param-hint: printablePagesOn len=param[6]
     func StartXpsPrintJob(printerName: CPointer<UInt16>, jobName: CPointer<UInt16>, outputFileName: CPointer<UInt16>, progressEvent: CPointer<Unit>, completionEvent: CPointer<Unit>, printablePagesOn: CPointer<UInt8>, printablePagesOnCount: UInt32, xpsPrintJob: CPointer<CPointer<Unit>>, documentStream: CPointer<CPointer<Unit>>, printTicketStream: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[XPSPRINT == "on" && Windows_Win32_Storage_Xps == "on"]
+@When[Windows_Win32_Storage_Xps_Printing == "on" && XPSPRINT == "on" && Windows_Win32_Storage_Xps_Printing_StartXpsPrintJob == "on"]
+public unsafe func Windows_StartXpsPrintJob(printerName: CPointer<UInt16>, jobName: CPointer<UInt16>, outputFileName: CPointer<UInt16>, progressEvent: CPointer<Unit>, completionEvent: CPointer<Unit>, printablePagesOn: CPointer<UInt8>, printablePagesOnCount: UInt32, xpsPrintJob: CPointer<CPointer<Unit>>, documentStream: CPointer<CPointer<Unit>>, printTicketStream: CPointer<CPointer<Unit>>): Int32 {
+    return StartXpsPrintJob(printerName, jobName, outputFileName, progressEvent, completionEvent, printablePagesOn, printablePagesOnCount, xpsPrintJob, documentStream, printTicketStream)
+}
+
+@When[Windows_Win32_Storage_Xps_Printing == "on" && XPSPRINT == "on" && Windows_Win32_Storage_Xps_Printing_StartXpsPrintJob1 == "on" && Windows_Win32_Storage_Xps == "on"]
 foreign {
     func StartXpsPrintJob1(printerName: CPointer<UInt16>, jobName: CPointer<UInt16>, outputFileName: CPointer<UInt16>, progressEvent: CPointer<Unit>, completionEvent: CPointer<Unit>, xpsPrintJob: CPointer<CPointer<Unit>>, printContentReceiver: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Storage_Xps_Printing == "on" && XPSPRINT == "on" && Windows_Win32_Storage_Xps_Printing_StartXpsPrintJob1 == "on" && Windows_Win32_Storage_Xps == "on"]
+public unsafe func Windows_StartXpsPrintJob1(printerName: CPointer<UInt16>, jobName: CPointer<UInt16>, outputFileName: CPointer<UInt16>, progressEvent: CPointer<Unit>, completionEvent: CPointer<Unit>, xpsPrintJob: CPointer<CPointer<Unit>>, printContentReceiver: CPointer<CPointer<Unit>>): Int32 {
+    return StartXpsPrintJob1(printerName, jobName, outputFileName, progressEvent, completionEvent, xpsPrintJob, printContentReceiver)
 }

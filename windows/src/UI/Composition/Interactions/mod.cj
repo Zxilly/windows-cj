@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -3757,7 +3756,10 @@ extend IInteractionSourceConfiguration <: windows_core.Interface<IInteractionSou
 @C
 public struct IInteractionTracker3Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ConfigureVector2PositionInertiaModifiers: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ConfigureVector2PositionInertiaModifiers: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3826,6 +3828,7 @@ public class IInteractionTracker3 <: InterfaceWrapperBase & ComInterface & Runti
         readVtbl<IInteractionTracker3Vtbl>(IInteractionTracker3Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ConfigureVector2PositionInertiaModifiers(modifiers: windows_collections.IIterable<InteractionTrackerVector2InertiaModifier>): Unit {
         let v = vtbl()
         let hr = v.ConfigureVector2PositionInertiaModifiers(asRaw(), modifiers.asRaw())
@@ -4798,9 +4801,18 @@ public struct IInteractionTrackerVtbl {
     public var ScaleVelocityInPercentPerSecond: CFunc<(CPointer<Unit>, CPointer<Float32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var AdjustPositionXIfGreaterThanThreshold: CFunc<(CPointer<Unit>, Float32, Float32) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var AdjustPositionYIfGreaterThanThreshold: CFunc<(CPointer<Unit>, Float32, Float32) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var ConfigurePositionXInertiaModifiers: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ConfigurePositionXInertiaModifiers: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var ConfigurePositionYInertiaModifiers: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ConfigurePositionYInertiaModifiers: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var ConfigureScaleInertiaModifiers: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ConfigureScaleInertiaModifiers: UIntNative = UIntNative(0)
     @When[Windows_Foundation_Numerics == "on"]
     public var TryUpdatePosition: CFunc<(CPointer<Unit>, windows_numerics.Vector3Abi, CPointer<Int32>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_Foundation_Numerics != "on"]
@@ -5074,18 +5086,21 @@ public class IInteractionTracker <: InterfaceWrapperBase & ComInterface & Runtim
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ConfigurePositionXInertiaModifiers(modifiers: windows_collections.IIterable<InteractionTrackerInertiaModifier>): Unit {
         let v = vtbl()
         let hr = v.ConfigurePositionXInertiaModifiers(asRaw(), modifiers.asRaw())
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ConfigurePositionYInertiaModifiers(modifiers: windows_collections.IIterable<InteractionTrackerInertiaModifier>): Unit {
         let v = vtbl()
         let hr = v.ConfigurePositionYInertiaModifiers(asRaw(), modifiers.asRaw())
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ConfigureScaleInertiaModifiers(modifiers: windows_collections.IIterable<InteractionTrackerInertiaModifier>): Unit {
         let v = vtbl()
         let hr = v.ConfigureScaleInertiaModifiers(asRaw(), modifiers.asRaw())
@@ -5163,8 +5178,14 @@ extend IInteractionTracker <: windows_core.Interface<IInteractionTracker> {}
 @C
 public struct IInteractionTracker2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ConfigureCenterPointXInertiaModifiers: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ConfigureCenterPointXInertiaModifiers: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var ConfigureCenterPointYInertiaModifiers: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ConfigureCenterPointYInertiaModifiers: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -5233,12 +5254,14 @@ public class IInteractionTracker2 <: InterfaceWrapperBase & ComInterface & Runti
         readVtbl<IInteractionTracker2Vtbl>(IInteractionTracker2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ConfigureCenterPointXInertiaModifiers(conditionalValues: windows_collections.IIterable<CompositionConditionalValue>): Unit {
         let v = vtbl()
         let hr = v.ConfigureCenterPointXInertiaModifiers(asRaw(), conditionalValues.asRaw())
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ConfigureCenterPointYInertiaModifiers(conditionalValues: windows_collections.IIterable<CompositionConditionalValue>): Unit {
         let v = vtbl()
         let hr = v.ConfigureCenterPointYInertiaModifiers(asRaw(), conditionalValues.asRaw())
@@ -6082,11 +6105,26 @@ public struct IVisualInteractionSource2Vtbl {
     public var PositionVelocity: UIntNative = UIntNative(0)
     public var Scale: CFunc<(CPointer<Unit>, CPointer<Float32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ScaleVelocity: CFunc<(CPointer<Unit>, CPointer<Float32>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var ConfigureCenterPointXModifiers: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ConfigureCenterPointXModifiers: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var ConfigureCenterPointYModifiers: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ConfigureCenterPointYModifiers: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var ConfigureDeltaPositionXModifiers: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ConfigureDeltaPositionXModifiers: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var ConfigureDeltaPositionYModifiers: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ConfigureDeltaPositionYModifiers: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var ConfigureDeltaScaleModifiers: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ConfigureDeltaScaleModifiers: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -6206,30 +6244,35 @@ public class IVisualInteractionSource2 <: InterfaceWrapperBase & ComInterface & 
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ConfigureCenterPointXModifiers(conditionalValues: windows_collections.IIterable<CompositionConditionalValue>): Unit {
         let v = vtbl()
         let hr = v.ConfigureCenterPointXModifiers(asRaw(), conditionalValues.asRaw())
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ConfigureCenterPointYModifiers(conditionalValues: windows_collections.IIterable<CompositionConditionalValue>): Unit {
         let v = vtbl()
         let hr = v.ConfigureCenterPointYModifiers(asRaw(), conditionalValues.asRaw())
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ConfigureDeltaPositionXModifiers(conditionalValues: windows_collections.IIterable<CompositionConditionalValue>): Unit {
         let v = vtbl()
         let hr = v.ConfigureDeltaPositionXModifiers(asRaw(), conditionalValues.asRaw())
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ConfigureDeltaPositionYModifiers(conditionalValues: windows_collections.IIterable<CompositionConditionalValue>): Unit {
         let v = vtbl()
         let hr = v.ConfigureDeltaPositionYModifiers(asRaw(), conditionalValues.asRaw())
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ConfigureDeltaScaleModifiers(conditionalValues: windows_collections.IIterable<CompositionConditionalValue>): Unit {
         let v = vtbl()
         let hr = v.ConfigureDeltaScaleModifiers(asRaw(), conditionalValues.asRaw())
@@ -6609,14 +6652,17 @@ public class InteractionTracker <: InterfaceWrapperBase & ComInterface & windows
         defaultInterface().AdjustPositionYIfGreaterThanThreshold(adjustment, positionThreshold)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ConfigurePositionXInertiaModifiers(modifiers: windows_collections.IIterable<InteractionTrackerInertiaModifier>): Unit {
         defaultInterface().ConfigurePositionXInertiaModifiers(modifiers)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ConfigurePositionYInertiaModifiers(modifiers: windows_collections.IIterable<InteractionTrackerInertiaModifier>): Unit {
         defaultInterface().ConfigurePositionYInertiaModifiers(modifiers)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ConfigureScaleInertiaModifiers(modifiers: windows_collections.IIterable<InteractionTrackerInertiaModifier>): Unit {
         defaultInterface().ConfigureScaleInertiaModifiers(modifiers)
     }

@@ -294,10 +294,12 @@ public class AppUriHandlerRegistration <: InterfaceWrapperBase & ComInterface & 
         return defaultInterface().get_User()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAppAddedHostsAsync(): windows_future.IAsyncOperation<windows_collections.IVector<_impl_l0.AppUriHandlerHost>> {
         return defaultInterface().GetAppAddedHostsAsync()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetAppAddedHostsAsync(hosts: windows_collections.IIterable<_impl_l0.AppUriHandlerHost>): windows_future.IAsyncAction {
         return defaultInterface().SetAppAddedHostsAsync(hosts)
     }
@@ -782,7 +784,7 @@ public class FolderLauncherOptions <: InterfaceWrapperBase & ComInterface & wind
         }
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func ItemsToSelect(): windows_collections.IVector<IStorageItem> {
         return defaultInterface().ItemsToSelect()
     }
@@ -925,8 +927,14 @@ public struct IAppUriHandlerRegistrationVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var get_User: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAppAddedHostsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAppAddedHostsAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SetAppAddedHostsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SetAppAddedHostsAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1011,6 +1019,7 @@ public class IAppUriHandlerRegistration <: InterfaceWrapperBase & ComInterface &
         return User.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAppAddedHostsAsync(): windows_future.IAsyncOperation<windows_collections.IVector<_impl_l0.AppUriHandlerHost>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1019,6 +1028,7 @@ public class IAppUriHandlerRegistration <: InterfaceWrapperBase & ComInterface &
         return windows_future.IAsyncOperation<windows_collections.IVector<_impl_l0.AppUriHandlerHost>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetAppAddedHostsAsync(hosts: windows_collections.IIterable<_impl_l0.AppUriHandlerHost>): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1035,8 +1045,14 @@ extend IAppUriHandlerRegistration <: windows_core.Interface<IAppUriHandlerRegist
 @C
 public struct IAppUriHandlerRegistration2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAllHosts: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAllHosts: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var UpdateHosts: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var UpdateHosts: UIntNative = UIntNative(0)
     public var PackageFamilyName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -1106,6 +1122,7 @@ public class IAppUriHandlerRegistration2 <: InterfaceWrapperBase & ComInterface 
         readVtbl<IAppUriHandlerRegistration2Vtbl>(IAppUriHandlerRegistration2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAllHosts(): windows_collections.IVector<_impl_l0.AppUriHandlerHost> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1114,6 +1131,7 @@ public class IAppUriHandlerRegistration2 <: InterfaceWrapperBase & ComInterface 
         return windows_collections.IVector<_impl_l0.AppUriHandlerHost>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UpdateHosts(hosts: windows_collections.IIterable<_impl_l0.AppUriHandlerHost>): Unit {
         let v = vtbl()
         let hr = v.UpdateHosts(asRaw(), hosts.asRaw())
@@ -1817,9 +1835,9 @@ extend IDispatcherQueueStatics <: windows_core.Interface<IDispatcherQueueStatics
 @C
 public struct IFolderLauncherOptionsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var ItemsToSelect: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage != "on"]
     public var ItemsToSelect: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -1889,7 +1907,7 @@ public class IFolderLauncherOptions <: InterfaceWrapperBase & ComInterface & Run
         readVtbl<IFolderLauncherOptionsVtbl>(IFolderLauncherOptionsVtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func ItemsToSelect(): windows_collections.IVector<IStorageItem> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3808,9 +3826,18 @@ extend IUserPicker <: windows_core.Interface<IUserPicker> {}
 public struct IUserStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var CreateWatcher: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllAsyncByType: CFunc<(CPointer<Unit>, _impl_l0.UserTypeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllAsyncByType: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllAsyncByTypeAndStatus: CFunc<(CPointer<Unit>, _impl_l0.UserTypeAbi, _impl_l0.UserAuthenticationStatusAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllAsyncByTypeAndStatus: UIntNative = UIntNative(0)
     public var GetFromId: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -3888,6 +3915,7 @@ public class IUserStatics <: InterfaceWrapperBase & ComInterface & RuntimeName &
         return UserWatcher.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<User>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3896,6 +3924,7 @@ public class IUserStatics <: InterfaceWrapperBase & ComInterface & RuntimeName &
         return windows_future.IAsyncOperation<windows_collections.IVectorView<User>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAsyncByType(type_: _impl_l0.UserType): windows_future.IAsyncOperation<windows_collections.IVectorView<User>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3904,6 +3933,7 @@ public class IUserStatics <: InterfaceWrapperBase & ComInterface & RuntimeName &
         return windows_future.IAsyncOperation<windows_collections.IVectorView<User>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAsyncByTypeAndStatus(type_: _impl_l0.UserType, status: _impl_l0.UserAuthenticationStatus): windows_future.IAsyncOperation<windows_collections.IVectorView<User>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4908,6 +4938,7 @@ public class TimeZoneSettings <: windows_interface.RuntimeName & windows_core.Ru
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func SupportedTimeZoneDisplayNames(): windows_collections.IVectorView<windows_core.HString> {
         var result__: Option<windows_collections.IVectorView<windows_core.HString>> = Option<windows_collections.IVectorView<windows_core.HString>>.None
         try (factory__ = windows_core.factory<TimeZoneSettings, _impl_l0.ITimeZoneSettingsStatics>().unwrap()) {
@@ -5066,6 +5097,7 @@ public class User <: InterfaceWrapperBase & ComInterface & windows_interface.Run
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindAllAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<User>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<User>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<User>>>.None
         try (factory__ = windows_core.factory<User, IUserStatics>().unwrap()) {
@@ -5077,6 +5109,7 @@ public class User <: InterfaceWrapperBase & ComInterface & windows_interface.Run
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindAllAsyncByType(type_: _impl_l0.UserType): windows_future.IAsyncOperation<windows_collections.IVectorView<User>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<User>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<User>>>.None
         try (factory__ = windows_core.factory<User, IUserStatics>().unwrap()) {
@@ -5088,6 +5121,7 @@ public class User <: InterfaceWrapperBase & ComInterface & windows_interface.Run
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindAllAsyncByTypeAndStatus(type_: _impl_l0.UserType, status: _impl_l0.UserAuthenticationStatus): windows_future.IAsyncOperation<windows_collections.IVectorView<User>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<User>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<User>>>.None
         try (factory__ = windows_core.factory<User, IUserStatics>().unwrap()) {

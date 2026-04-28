@@ -18,7 +18,9 @@ public struct ICommunicationBlockingAccessManagerStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var IsBlockingActive: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var IsBlockedNumberAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ShowBlockNumbersUI: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ShowUnblockNumbersUI: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => 0 }
     public var ShowBlockedCallsUI: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var ShowBlockedMessagesUI: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -77,12 +79,14 @@ public class ICommunicationBlockingAccessManagerStatics <: InterfaceWrapperBase 
         return __vt.IsBlockedNumberAsync(__liveRaw, number, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ShowBlockNumbersUI(phoneNumbers: CPointer<Unit>, result__: CPointer<Bool>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ShowBlockNumbersUI(__liveRaw, phoneNumbers, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ShowUnblockNumbersUI(phoneNumbers: CPointer<Unit>, result__: CPointer<Bool>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

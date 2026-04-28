@@ -10,11 +10,8 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
 import windows.Graphics.DirectX.Direct3D11 as Graphics_DirectX_Direct3D11
-@When[Windows_Graphics_Imaging == "on"]
 import windows.Graphics.Imaging as Graphics_Imaging
-@When[Windows_UI == "on"]
 import windows.UI as UI
 import windows._impl_l1 as _impl_l1
 import windows_collections as windows_collections
@@ -114,6 +111,7 @@ public class BackgroundAudioTrack <: InterfaceWrapperBase & ComInterface & windo
         return defaultInterface().TrimmedDuration()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UserData(): windows_collections.IMap<windows_core.HString, windows_core.HString> {
         return defaultInterface().UserData()
     }
@@ -143,7 +141,7 @@ public class BackgroundAudioTrack <: InterfaceWrapperBase & ComInterface & windo
         return defaultInterface().GetAudioEncodingProperties()
     }
 
-    @When[Windows_Media_Effects == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on"]
     public unsafe func AudioEffectDefinitions(): windows_collections.IVector<IAudioEffectDefinition> {
         return defaultInterface().AudioEffectDefinitions()
     }
@@ -293,7 +291,10 @@ public struct IBackgroundAudioTrackVtbl {
     public var SetTrimTimeFromEnd: CFunc<(CPointer<Unit>, windows_future.TimeSpanAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var OriginalDuration: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var TrimmedDuration: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var UserData: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var UserData: UIntNative = UIntNative(0)
     public var SetDelay: CFunc<(CPointer<Unit>, windows_future.TimeSpanAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Delay: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetVolume: CFunc<(CPointer<Unit>, Float64) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -303,9 +304,9 @@ public struct IBackgroundAudioTrackVtbl {
     public var GetAudioEncodingProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Media_MediaProperties != "on"]
     public var GetAudioEncodingProperties: UIntNative = UIntNative(0)
-    @When[Windows_Media_Effects == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on"]
     public var AudioEffectDefinitions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Media_Effects != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Media_Effects != "on"]
     public var AudioEffectDefinitions: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -419,6 +420,7 @@ public class IBackgroundAudioTrack <: InterfaceWrapperBase & ComInterface & Runt
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<windows_future.TimeSpan>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UserData(): windows_collections.IMap<windows_core.HString, windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -472,7 +474,7 @@ public class IBackgroundAudioTrack <: InterfaceWrapperBase & ComInterface & Runt
         return AudioEncodingProperties.fromAbiTake(result__)
     }
 
-    @When[Windows_Media_Effects == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on"]
     public unsafe func AudioEffectDefinitions(): windows_collections.IVector<IAudioEffectDefinition> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -682,11 +684,17 @@ public struct IMediaClipVtbl {
     public var SetTrimTimeFromEnd: CFunc<(CPointer<Unit>, windows_future.TimeSpanAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var OriginalDuration: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var TrimmedDuration: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var UserData: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var UserData: UIntNative = UIntNative(0)
     public var Clone: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var StartTimeInComposition: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var EndTimeInComposition: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var EmbeddedAudioTracks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var EmbeddedAudioTracks: UIntNative = UIntNative(0)
     public var SelectedEmbeddedAudioTrackIndex: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetSelectedEmbeddedAudioTrackIndex: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetVolume: CFunc<(CPointer<Unit>, Float64) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -695,13 +703,13 @@ public struct IMediaClipVtbl {
     public var GetVideoEncodingProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Media_MediaProperties != "on"]
     public var GetVideoEncodingProperties: UIntNative = UIntNative(0)
-    @When[Windows_Media_Effects == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on"]
     public var AudioEffectDefinitions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Media_Effects != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Media_Effects != "on"]
     public var AudioEffectDefinitions: UIntNative = UIntNative(0)
-    @When[Windows_Media_Effects == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on"]
     public var VideoEffectDefinitions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Media_Effects != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Media_Effects != "on"]
     public var VideoEffectDefinitions: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -815,6 +823,7 @@ public class IMediaClip <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<windows_future.TimeSpan>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UserData(): windows_collections.IMap<windows_core.HString, windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -847,6 +856,7 @@ public class IMediaClip <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<windows_future.TimeSpan>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func EmbeddedAudioTracks(): windows_collections.IVectorView<EmbeddedAudioTrack> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -892,7 +902,7 @@ public class IMediaClip <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         return VideoEncodingProperties.fromAbiTake(result__)
     }
 
-    @When[Windows_Media_Effects == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on"]
     public unsafe func AudioEffectDefinitions(): windows_collections.IVector<IAudioEffectDefinition> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -901,7 +911,7 @@ public class IMediaClip <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         return windows_collections.IVector<IAudioEffectDefinition>.fromAbiTake(result__)
     }
 
-    @When[Windows_Media_Effects == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on"]
     public unsafe func VideoEffectDefinitions(): windows_collections.IVector<IVideoEffectDefinition> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1123,21 +1133,30 @@ extend IMediaClipStatics2 <: windows_core.Interface<IMediaClipStatics2> {}
 public struct IMediaCompositionVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Duration: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Clips: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Clips: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var BackgroundAudioTracks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var BackgroundAudioTracks: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var UserData: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var UserData: UIntNative = UIntNative(0)
     public var Clone: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Storage == "on"]
     public var SaveAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_Storage != "on"]
     public var SaveAsync: UIntNative = UIntNative(0)
-    @When[Windows_Graphics_Imaging == "on"]
+    @When[Windows_Graphics_Imaging == "on" && Windows_Storage_Streams == "on"]
     public var GetThumbnailAsync: CFunc<(CPointer<Unit>, windows_future.TimeSpanAbi, Int32, Int32, VideoFramePrecisionAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Graphics_Imaging != "on"]
+    @When[Windows_Graphics_Imaging != "on" || Windows_Storage_Streams != "on"]
     public var GetThumbnailAsync: UIntNative = UIntNative(0)
-    @When[Windows_Graphics_Imaging == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_Imaging == "on" && Windows_Storage_Streams == "on"]
     public var GetThumbnailsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, Int32, VideoFramePrecisionAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Graphics_Imaging != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Graphics_Imaging != "on" || Windows_Storage_Streams != "on"]
     public var GetThumbnailsAsync: UIntNative = UIntNative(0)
     @When[Windows_Media_Transcoding == "on" && Windows_Storage == "on"]
     public var RenderToFileAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -1243,6 +1262,7 @@ public class IMediaComposition <: InterfaceWrapperBase & ComInterface & RuntimeN
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<windows_future.TimeSpan>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Clips(): windows_collections.IVector<MediaClip> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1251,6 +1271,7 @@ public class IMediaComposition <: InterfaceWrapperBase & ComInterface & RuntimeN
         return windows_collections.IVector<MediaClip>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func BackgroundAudioTracks(): windows_collections.IVector<BackgroundAudioTrack> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1259,6 +1280,7 @@ public class IMediaComposition <: InterfaceWrapperBase & ComInterface & RuntimeN
         return windows_collections.IVector<BackgroundAudioTrack>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UserData(): windows_collections.IMap<windows_core.HString, windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1284,7 +1306,7 @@ public class IMediaComposition <: InterfaceWrapperBase & ComInterface & RuntimeN
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
 
-    @When[Windows_Graphics_Imaging == "on"]
+    @When[Windows_Graphics_Imaging == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetThumbnailAsync(timeFromStart: windows_future.TimeSpan, scaledWidth: Int32, scaledHeight: Int32, framePrecision: VideoFramePrecision): windows_future.IAsyncOperation<Graphics_Imaging.ImageStream> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1293,7 +1315,7 @@ public class IMediaComposition <: InterfaceWrapperBase & ComInterface & RuntimeN
         return windows_future.IAsyncOperation<Graphics_Imaging.ImageStream>.fromAbiTake(result__)
     }
 
-    @When[Windows_Graphics_Imaging == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_Imaging == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetThumbnailsAsync(timesFromStart: windows_collections.IIterable<windows_future.TimeSpan>, scaledWidth: Int32, scaledHeight: Int32, framePrecision: VideoFramePrecision): windows_future.IAsyncOperation<windows_collections.IVectorView<Graphics_Imaging.ImageStream>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1373,7 +1395,10 @@ extend IMediaComposition <: windows_core.Interface<IMediaComposition> {}
 @C
 public struct IMediaComposition2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var OverlayLayers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var OverlayLayers: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1442,6 +1467,7 @@ public class IMediaComposition2 <: InterfaceWrapperBase & ComInterface & Runtime
         readVtbl<IMediaComposition2Vtbl>(IMediaComposition2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OverlayLayers(): windows_collections.IVector<MediaOverlayLayer> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1458,9 +1484,9 @@ extend IMediaComposition2 <: windows_core.Interface<IMediaComposition2> {}
 @C
 public struct IMediaCompositionStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var LoadAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var LoadAsync: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -1530,7 +1556,7 @@ public class IMediaCompositionStatics <: InterfaceWrapperBase & ComInterface & R
         readVtbl<IMediaCompositionStaticsVtbl>(IMediaCompositionStaticsVtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func LoadAsync(file: _impl_l1.StorageFile): windows_future.IAsyncOperation<MediaComposition> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1800,7 +1826,10 @@ extend IMediaOverlayFactory <: windows_core.Interface<IMediaOverlayFactory> {}
 public struct IMediaOverlayLayerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Clone: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Overlays: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Overlays: UIntNative = UIntNative(0)
     @When[Windows_Media_Effects == "on"]
     public var CustomCompositorDefinition: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Media_Effects != "on"]
@@ -1881,6 +1910,7 @@ public class IMediaOverlayLayer <: InterfaceWrapperBase & ComInterface & Runtime
         return MediaOverlayLayer.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Overlays(): windows_collections.IVector<MediaOverlay> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2084,6 +2114,7 @@ public class MediaClip <: InterfaceWrapperBase & ComInterface & windows_interfac
         return defaultInterface().TrimmedDuration()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UserData(): windows_collections.IMap<windows_core.HString, windows_core.HString> {
         return defaultInterface().UserData()
     }
@@ -2100,6 +2131,7 @@ public class MediaClip <: InterfaceWrapperBase & ComInterface & windows_interfac
         return defaultInterface().EndTimeInComposition()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func EmbeddedAudioTracks(): windows_collections.IVectorView<EmbeddedAudioTrack> {
         return defaultInterface().EmbeddedAudioTracks()
     }
@@ -2125,12 +2157,12 @@ public class MediaClip <: InterfaceWrapperBase & ComInterface & windows_interfac
         return defaultInterface().GetVideoEncodingProperties()
     }
 
-    @When[Windows_Media_Effects == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on"]
     public unsafe func AudioEffectDefinitions(): windows_collections.IVector<IAudioEffectDefinition> {
         return defaultInterface().AudioEffectDefinitions()
     }
 
-    @When[Windows_Media_Effects == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on"]
     public unsafe func VideoEffectDefinitions(): windows_collections.IVector<IVideoEffectDefinition> {
         return defaultInterface().VideoEffectDefinitions()
     }
@@ -2286,14 +2318,17 @@ public class MediaComposition <: InterfaceWrapperBase & ComInterface & windows_i
         return defaultInterface().Duration()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Clips(): windows_collections.IVector<MediaClip> {
         return defaultInterface().Clips()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func BackgroundAudioTracks(): windows_collections.IVector<BackgroundAudioTrack> {
         return defaultInterface().BackgroundAudioTracks()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UserData(): windows_collections.IMap<windows_core.HString, windows_core.HString> {
         return defaultInterface().UserData()
     }
@@ -2307,12 +2342,12 @@ public class MediaComposition <: InterfaceWrapperBase & ComInterface & windows_i
         return defaultInterface().SaveAsync(file)
     }
 
-    @When[Windows_Graphics_Imaging == "on"]
+    @When[Windows_Graphics_Imaging == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetThumbnailAsync(timeFromStart: windows_future.TimeSpan, scaledWidth: Int32, scaledHeight: Int32, framePrecision: VideoFramePrecision): windows_future.IAsyncOperation<Graphics_Imaging.ImageStream> {
         return defaultInterface().GetThumbnailAsync(timeFromStart, scaledWidth, scaledHeight, framePrecision)
     }
 
-    @When[Windows_Graphics_Imaging == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_Imaging == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetThumbnailsAsync(timesFromStart: windows_collections.IIterable<windows_future.TimeSpan>, scaledWidth: Int32, scaledHeight: Int32, framePrecision: VideoFramePrecision): windows_future.IAsyncOperation<windows_collections.IVectorView<Graphics_Imaging.ImageStream>> {
         return defaultInterface().GetThumbnailsAsync(timesFromStart, scaledWidth, scaledHeight, framePrecision)
     }
@@ -2352,7 +2387,7 @@ public class MediaComposition <: InterfaceWrapperBase & ComInterface & windows_i
         return defaultInterface().GeneratePreviewMediaStreamSource(scaledWidth, scaledHeight)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public static unsafe func LoadAsync(file: _impl_l1.StorageFile): windows_future.IAsyncOperation<MediaComposition> {
         var result__: Option<windows_future.IAsyncOperation<MediaComposition>> = Option<windows_future.IAsyncOperation<MediaComposition>>.None
         try (factory__ = windows_core.factory<MediaComposition, IMediaCompositionStatics>().unwrap()) {
@@ -2617,6 +2652,7 @@ public class MediaOverlayLayer <: InterfaceWrapperBase & ComInterface & windows_
         return defaultInterface().Clone()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Overlays(): windows_collections.IVector<MediaOverlay> {
         return defaultInterface().Overlays()
     }

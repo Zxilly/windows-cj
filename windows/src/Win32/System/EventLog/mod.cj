@@ -10,9 +10,7 @@ import windows_interface.{GUID}
 import windows_interface as windows_interface
 import windows_polyfill.{unionReadFloat32, unionReadFloat64, unionReadInt16, unionReadInt32, unionReadInt64, unionReadInt8, unionReadUInt16, unionReadUInt32, unionReadUInt64, unionReadUInt8, unionWriteFloat32, unionWriteFloat64, unionWriteInt16, unionWriteInt32, unionWriteInt64, unionWriteInt8, unionWriteUInt16, unionWriteUInt32, unionWriteUInt64, unionWriteUInt8}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
 
 
@@ -2954,64 +2952,231 @@ extend EVENTSFORLOGFILE <: windows_core.CopyType & windows_core.RuntimeType & wi
 @When[Windows_Win32_System_EventLog == "on"]
 public type EVT_SUBSCRIBE_CALLBACK = CFunc<(EVT_SUBSCRIBE_NOTIFY_ACTIONAbi, CPointer<Unit>, EVT_HANDLE) -> UInt32>
 
-@When[ADVAPI32 == "on"]
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_BackupEventLogA == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func BackupEventLogA(hEventLog: CPointer<Unit>, lpBackupFileName: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_BackupEventLogA == "on"]
+public unsafe func Windows_BackupEventLogA(hEventLog: CPointer<Unit>, lpBackupFileName: CPointer<UInt8>): Int32 {
+    return BackupEventLogA(hEventLog, lpBackupFileName)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_BackupEventLogW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func BackupEventLogW(hEventLog: CPointer<Unit>, lpBackupFileName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_BackupEventLogW == "on"]
+public unsafe func Windows_BackupEventLogW(hEventLog: CPointer<Unit>, lpBackupFileName: CPointer<UInt16>): Int32 {
+    return BackupEventLogW(hEventLog, lpBackupFileName)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_ClearEventLogA == "on"]
+foreign {
     // param-hint: lpBackupFileName optional
     // pinvoke-hint: SetLastError
     func ClearEventLogA(hEventLog: CPointer<Unit>, lpBackupFileName: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_ClearEventLogA == "on"]
+public unsafe func Windows_ClearEventLogA(hEventLog: CPointer<Unit>, lpBackupFileName: CPointer<UInt8>): Int32 {
+    return ClearEventLogA(hEventLog, lpBackupFileName)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_ClearEventLogW == "on"]
+foreign {
     // param-hint: lpBackupFileName optional
     // pinvoke-hint: SetLastError
     func ClearEventLogW(hEventLog: CPointer<Unit>, lpBackupFileName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_ClearEventLogW == "on"]
+public unsafe func Windows_ClearEventLogW(hEventLog: CPointer<Unit>, lpBackupFileName: CPointer<UInt16>): Int32 {
+    return ClearEventLogW(hEventLog, lpBackupFileName)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_CloseEventLog == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CloseEventLog(hEventLog: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_CloseEventLog == "on"]
+public unsafe func Windows_CloseEventLog(hEventLog: CPointer<Unit>): Int32 {
+    return CloseEventLog(hEventLog)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_DeregisterEventSource == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func DeregisterEventSource(hEventLog: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_DeregisterEventSource == "on"]
+public unsafe func Windows_DeregisterEventSource(hEventLog: CPointer<Unit>): Int32 {
+    return DeregisterEventSource(hEventLog)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_GetEventLogInformation == "on"]
+foreign {
     // param-hint: lpBuffer bytes=param[3]
     // pinvoke-hint: SetLastError
     func GetEventLogInformation(hEventLog: CPointer<Unit>, dwInfoLevel: UInt32, lpBuffer: CPointer<Unit>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_GetEventLogInformation == "on"]
+public unsafe func Windows_GetEventLogInformation(hEventLog: CPointer<Unit>, dwInfoLevel: UInt32, lpBuffer: CPointer<Unit>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Int32 {
+    return GetEventLogInformation(hEventLog, dwInfoLevel, lpBuffer, cbBufSize, pcbBytesNeeded)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_GetNumberOfEventLogRecords == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetNumberOfEventLogRecords(hEventLog: CPointer<Unit>, NumberOfRecords: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_GetNumberOfEventLogRecords == "on"]
+public unsafe func Windows_GetNumberOfEventLogRecords(hEventLog: CPointer<Unit>, NumberOfRecords: CPointer<UInt32>): Int32 {
+    return GetNumberOfEventLogRecords(hEventLog, NumberOfRecords)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_GetOldestEventLogRecord == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetOldestEventLogRecord(hEventLog: CPointer<Unit>, OldestRecord: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_GetOldestEventLogRecord == "on"]
+public unsafe func Windows_GetOldestEventLogRecord(hEventLog: CPointer<Unit>, OldestRecord: CPointer<UInt32>): Int32 {
+    return GetOldestEventLogRecord(hEventLog, OldestRecord)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_NotifyChangeEventLog == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func NotifyChangeEventLog(hEventLog: CPointer<Unit>, hEvent: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_NotifyChangeEventLog == "on"]
+public unsafe func Windows_NotifyChangeEventLog(hEventLog: CPointer<Unit>, hEvent: CPointer<Unit>): Int32 {
+    return NotifyChangeEventLog(hEventLog, hEvent)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_OpenBackupEventLogA == "on"]
+foreign {
     // param-hint: lpUNCServerName optional
     // pinvoke-hint: SetLastError
     func OpenBackupEventLogA(lpUNCServerName: CPointer<UInt8>, lpFileName: CPointer<UInt8>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_OpenBackupEventLogA == "on"]
+public unsafe func Windows_OpenBackupEventLogA(lpUNCServerName: CPointer<UInt8>, lpFileName: CPointer<UInt8>): CPointer<Unit> {
+    return OpenBackupEventLogA(lpUNCServerName, lpFileName)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_OpenBackupEventLogW == "on"]
+foreign {
     // param-hint: lpUNCServerName optional
     // pinvoke-hint: SetLastError
     func OpenBackupEventLogW(lpUNCServerName: CPointer<UInt16>, lpFileName: CPointer<UInt16>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_OpenBackupEventLogW == "on"]
+public unsafe func Windows_OpenBackupEventLogW(lpUNCServerName: CPointer<UInt16>, lpFileName: CPointer<UInt16>): CPointer<Unit> {
+    return OpenBackupEventLogW(lpUNCServerName, lpFileName)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_OpenEventLogA == "on"]
+foreign {
     // param-hint: lpUNCServerName optional
     // pinvoke-hint: SetLastError
     func OpenEventLogA(lpUNCServerName: CPointer<UInt8>, lpSourceName: CPointer<UInt8>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_OpenEventLogA == "on"]
+public unsafe func Windows_OpenEventLogA(lpUNCServerName: CPointer<UInt8>, lpSourceName: CPointer<UInt8>): CPointer<Unit> {
+    return OpenEventLogA(lpUNCServerName, lpSourceName)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_OpenEventLogW == "on"]
+foreign {
     // param-hint: lpUNCServerName optional
     // pinvoke-hint: SetLastError
     func OpenEventLogW(lpUNCServerName: CPointer<UInt16>, lpSourceName: CPointer<UInt16>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_OpenEventLogW == "on"]
+public unsafe func Windows_OpenEventLogW(lpUNCServerName: CPointer<UInt16>, lpSourceName: CPointer<UInt16>): CPointer<Unit> {
+    return OpenEventLogW(lpUNCServerName, lpSourceName)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_ReadEventLogA == "on"]
+foreign {
     // param-hint: lpBuffer bytes=param[4]
     // pinvoke-hint: SetLastError
     func ReadEventLogA(hEventLog: CPointer<Unit>, dwReadFlags: READ_EVENT_LOG_READ_FLAGSAbi, dwRecordOffset: UInt32, lpBuffer: CPointer<Unit>, nNumberOfBytesToRead: UInt32, pnBytesRead: CPointer<UInt32>, pnMinNumberOfBytesNeeded: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_ReadEventLogA == "on"]
+public unsafe func Windows_ReadEventLogA(hEventLog: CPointer<Unit>, dwReadFlags: READ_EVENT_LOG_READ_FLAGSAbi, dwRecordOffset: UInt32, lpBuffer: CPointer<Unit>, nNumberOfBytesToRead: UInt32, pnBytesRead: CPointer<UInt32>, pnMinNumberOfBytesNeeded: CPointer<UInt32>): Int32 {
+    return ReadEventLogA(hEventLog, dwReadFlags, dwRecordOffset, lpBuffer, nNumberOfBytesToRead, pnBytesRead, pnMinNumberOfBytesNeeded)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_ReadEventLogW == "on"]
+foreign {
     // param-hint: lpBuffer bytes=param[4]
     // pinvoke-hint: SetLastError
     func ReadEventLogW(hEventLog: CPointer<Unit>, dwReadFlags: READ_EVENT_LOG_READ_FLAGSAbi, dwRecordOffset: UInt32, lpBuffer: CPointer<Unit>, nNumberOfBytesToRead: UInt32, pnBytesRead: CPointer<UInt32>, pnMinNumberOfBytesNeeded: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_ReadEventLogW == "on"]
+public unsafe func Windows_ReadEventLogW(hEventLog: CPointer<Unit>, dwReadFlags: READ_EVENT_LOG_READ_FLAGSAbi, dwRecordOffset: UInt32, lpBuffer: CPointer<Unit>, nNumberOfBytesToRead: UInt32, pnBytesRead: CPointer<UInt32>, pnMinNumberOfBytesNeeded: CPointer<UInt32>): Int32 {
+    return ReadEventLogW(hEventLog, dwReadFlags, dwRecordOffset, lpBuffer, nNumberOfBytesToRead, pnBytesRead, pnMinNumberOfBytesNeeded)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_RegisterEventSourceA == "on"]
+foreign {
     // param-hint: lpUNCServerName optional
     // pinvoke-hint: SetLastError
     func RegisterEventSourceA(lpUNCServerName: CPointer<UInt8>, lpSourceName: CPointer<UInt8>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_RegisterEventSourceA == "on"]
+public unsafe func Windows_RegisterEventSourceA(lpUNCServerName: CPointer<UInt8>, lpSourceName: CPointer<UInt8>): CPointer<Unit> {
+    return RegisterEventSourceA(lpUNCServerName, lpSourceName)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_RegisterEventSourceW == "on"]
+foreign {
     // param-hint: lpUNCServerName optional
     // pinvoke-hint: SetLastError
     func RegisterEventSourceW(lpUNCServerName: CPointer<UInt16>, lpSourceName: CPointer<UInt16>): CPointer<Unit>
 }
 
-@When[ADVAPI32 == "on" && Windows_Win32_Security == "on"]
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_RegisterEventSourceW == "on"]
+public unsafe func Windows_RegisterEventSourceW(lpUNCServerName: CPointer<UInt16>, lpSourceName: CPointer<UInt16>): CPointer<Unit> {
+    return RegisterEventSourceW(lpUNCServerName, lpSourceName)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_ReportEventA == "on" && Windows_Win32_Security == "on"]
 foreign {
     // param-hint: lpUserSid optional
     // param-hint: lpStrings len=param[5] optional
     // param-hint: lpRawData bytes=param[6] optional
     // pinvoke-hint: SetLastError
     func ReportEventA(hEventLog: CPointer<Unit>, wType: REPORT_EVENT_TYPEAbi, wCategory: UInt16, dwEventID: UInt32, lpUserSid: Win32_Security.PSID, wNumStrings: UInt16, dwDataSize: UInt32, lpStrings: CPointer<CPointer<UInt8>>, lpRawData: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_ReportEventA == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_ReportEventA(hEventLog: CPointer<Unit>, wType: REPORT_EVENT_TYPEAbi, wCategory: UInt16, dwEventID: UInt32, lpUserSid: Win32_Security.PSID, wNumStrings: UInt16, dwDataSize: UInt32, lpStrings: CPointer<CPointer<UInt8>>, lpRawData: CPointer<Unit>): Int32 {
+    return ReportEventA(hEventLog, wType, wCategory, dwEventID, lpUserSid, wNumStrings, dwDataSize, lpStrings, lpRawData)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_ReportEventW == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: lpUserSid optional
     // param-hint: lpStrings len=param[5] optional
     // param-hint: lpRawData bytes=param[6] optional
@@ -3019,83 +3184,414 @@ foreign {
     func ReportEventW(hEventLog: CPointer<Unit>, wType: REPORT_EVENT_TYPEAbi, wCategory: UInt16, dwEventID: UInt32, lpUserSid: Win32_Security.PSID, wNumStrings: UInt16, dwDataSize: UInt32, lpStrings: CPointer<CPointer<UInt16>>, lpRawData: CPointer<Unit>): Int32
 }
 
-@When[WEVTAPI == "on"]
+@When[Windows_Win32_System_EventLog == "on" && ADVAPI32 == "on" && Windows_Win32_System_EventLog_ReportEventW == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_ReportEventW(hEventLog: CPointer<Unit>, wType: REPORT_EVENT_TYPEAbi, wCategory: UInt16, dwEventID: UInt32, lpUserSid: Win32_Security.PSID, wNumStrings: UInt16, dwDataSize: UInt32, lpStrings: CPointer<CPointer<UInt16>>, lpRawData: CPointer<Unit>): Int32 {
+    return ReportEventW(hEventLog, wType, wCategory, dwEventID, lpUserSid, wNumStrings, dwDataSize, lpStrings, lpRawData)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtArchiveExportedLog == "on"]
 foreign {
     // param-hint: Session optional
     // pinvoke-hint: SetLastError
     func EvtArchiveExportedLog(Session: EVT_HANDLE, LogFilePath: CPointer<UInt16>, Locale: UInt32, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtArchiveExportedLog == "on"]
+public unsafe func Windows_EvtArchiveExportedLog(Session: EVT_HANDLE, LogFilePath: CPointer<UInt16>, Locale: UInt32, Flags: UInt32): Int32 {
+    return EvtArchiveExportedLog(Session, LogFilePath, Locale, Flags)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtCancel == "on"]
+foreign {
     // param-hint: Object optional
     // pinvoke-hint: SetLastError
     func EvtCancel(Object: EVT_HANDLE): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtCancel == "on"]
+public unsafe func Windows_EvtCancel(Object: EVT_HANDLE): Int32 {
+    return EvtCancel(Object)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtClearLog == "on"]
+foreign {
     // param-hint: Session optional
     // param-hint: TargetFilePath optional
     // pinvoke-hint: SetLastError
     func EvtClearLog(Session: EVT_HANDLE, ChannelPath: CPointer<UInt16>, TargetFilePath: CPointer<UInt16>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtClearLog == "on"]
+public unsafe func Windows_EvtClearLog(Session: EVT_HANDLE, ChannelPath: CPointer<UInt16>, TargetFilePath: CPointer<UInt16>, Flags: UInt32): Int32 {
+    return EvtClearLog(Session, ChannelPath, TargetFilePath, Flags)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtClose == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func EvtClose(Object: EVT_HANDLE): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtClose == "on"]
+public unsafe func Windows_EvtClose(Object: EVT_HANDLE): Int32 {
+    return EvtClose(Object)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtCreateBookmark == "on"]
+foreign {
     // param-hint: BookmarkXml optional
     // pinvoke-hint: SetLastError
     func EvtCreateBookmark(BookmarkXml: CPointer<UInt16>): EVT_HANDLE
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtCreateBookmark == "on"]
+public unsafe func Windows_EvtCreateBookmark(BookmarkXml: CPointer<UInt16>): EVT_HANDLE {
+    return EvtCreateBookmark(BookmarkXml)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtCreateRenderContext == "on"]
+foreign {
     // param-hint: ValuePaths len=param[0] optional
     // pinvoke-hint: SetLastError
     func EvtCreateRenderContext(ValuePathsCount: UInt32, ValuePaths: CPointer<CPointer<UInt16>>, Flags: UInt32): EVT_HANDLE
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtCreateRenderContext == "on"]
+public unsafe func Windows_EvtCreateRenderContext(ValuePathsCount: UInt32, ValuePaths: CPointer<CPointer<UInt16>>, Flags: UInt32): EVT_HANDLE {
+    return EvtCreateRenderContext(ValuePathsCount, ValuePaths, Flags)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtExportLog == "on"]
+foreign {
     // param-hint: Session optional
     // param-hint: Path optional
     // param-hint: Query optional
     // pinvoke-hint: SetLastError
     func EvtExportLog(Session: EVT_HANDLE, Path: CPointer<UInt16>, Query: CPointer<UInt16>, TargetFilePath: CPointer<UInt16>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtExportLog == "on"]
+public unsafe func Windows_EvtExportLog(Session: EVT_HANDLE, Path: CPointer<UInt16>, Query: CPointer<UInt16>, TargetFilePath: CPointer<UInt16>, Flags: UInt32): Int32 {
+    return EvtExportLog(Session, Path, Query, TargetFilePath, Flags)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtFormatMessage == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: PublisherMetadata optional
+    // param-hint: Event optional
+    // param-hint: Values len=param[3] optional
+    // param-hint: Buffer len=param[6] optional
+    // pinvoke-hint: SetLastError
+    func EvtFormatMessage(PublisherMetadata: EVT_HANDLE, Event: EVT_HANDLE, MessageId: UInt32, ValueCount: UInt32, Values: CPointer<EVT_VARIANTAbi>, Flags: UInt32, BufferSize: UInt32, Buffer: CPointer<UInt16>, BufferUsed: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtFormatMessage == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_EvtFormatMessage(PublisherMetadata: EVT_HANDLE, Event: EVT_HANDLE, MessageId: UInt32, ValueCount: UInt32, Values: CPointer<EVT_VARIANTAbi>, Flags: UInt32, BufferSize: UInt32, Buffer: CPointer<UInt16>, BufferUsed: CPointer<UInt32>): Int32 {
+    return EvtFormatMessage(PublisherMetadata, Event, MessageId, ValueCount, Values, Flags, BufferSize, Buffer, BufferUsed)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtGetChannelConfigProperty == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: PropertyValueBuffer bytes=param[3] optional
+    // pinvoke-hint: SetLastError
+    func EvtGetChannelConfigProperty(ChannelConfig: EVT_HANDLE, PropertyId: EVT_CHANNEL_CONFIG_PROPERTY_IDAbi, Flags: UInt32, PropertyValueBufferSize: UInt32, PropertyValueBuffer: CPointer<EVT_VARIANTAbi>, PropertyValueBufferUsed: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtGetChannelConfigProperty == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_EvtGetChannelConfigProperty(ChannelConfig: EVT_HANDLE, PropertyId: EVT_CHANNEL_CONFIG_PROPERTY_IDAbi, Flags: UInt32, PropertyValueBufferSize: UInt32, PropertyValueBuffer: CPointer<EVT_VARIANTAbi>, PropertyValueBufferUsed: CPointer<UInt32>): Int32 {
+    return EvtGetChannelConfigProperty(ChannelConfig, PropertyId, Flags, PropertyValueBufferSize, PropertyValueBuffer, PropertyValueBufferUsed)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtGetEventInfo == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: PropertyValueBuffer bytes=param[2] optional
+    // pinvoke-hint: SetLastError
+    func EvtGetEventInfo(Event: EVT_HANDLE, PropertyId: EVT_EVENT_PROPERTY_IDAbi, PropertyValueBufferSize: UInt32, PropertyValueBuffer: CPointer<EVT_VARIANTAbi>, PropertyValueBufferUsed: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtGetEventInfo == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_EvtGetEventInfo(Event: EVT_HANDLE, PropertyId: EVT_EVENT_PROPERTY_IDAbi, PropertyValueBufferSize: UInt32, PropertyValueBuffer: CPointer<EVT_VARIANTAbi>, PropertyValueBufferUsed: CPointer<UInt32>): Int32 {
+    return EvtGetEventInfo(Event, PropertyId, PropertyValueBufferSize, PropertyValueBuffer, PropertyValueBufferUsed)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtGetEventMetadataProperty == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: EventMetadataPropertyBuffer bytes=param[3] optional
+    // pinvoke-hint: SetLastError
+    func EvtGetEventMetadataProperty(EventMetadata: EVT_HANDLE, PropertyId: EVT_EVENT_METADATA_PROPERTY_IDAbi, Flags: UInt32, EventMetadataPropertyBufferSize: UInt32, EventMetadataPropertyBuffer: CPointer<EVT_VARIANTAbi>, EventMetadataPropertyBufferUsed: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtGetEventMetadataProperty == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_EvtGetEventMetadataProperty(EventMetadata: EVT_HANDLE, PropertyId: EVT_EVENT_METADATA_PROPERTY_IDAbi, Flags: UInt32, EventMetadataPropertyBufferSize: UInt32, EventMetadataPropertyBuffer: CPointer<EVT_VARIANTAbi>, EventMetadataPropertyBufferUsed: CPointer<UInt32>): Int32 {
+    return EvtGetEventMetadataProperty(EventMetadata, PropertyId, Flags, EventMetadataPropertyBufferSize, EventMetadataPropertyBuffer, EventMetadataPropertyBufferUsed)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtGetExtendedStatus == "on"]
+foreign {
     // param-hint: Buffer len=param[0] optional
     func EvtGetExtendedStatus(BufferSize: UInt32, Buffer: CPointer<UInt16>, BufferUsed: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtGetExtendedStatus == "on"]
+public unsafe func Windows_EvtGetExtendedStatus(BufferSize: UInt32, Buffer: CPointer<UInt16>, BufferUsed: CPointer<UInt32>): UInt32 {
+    return EvtGetExtendedStatus(BufferSize, Buffer, BufferUsed)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtGetLogInfo == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: PropertyValueBuffer bytes=param[2] optional
+    // pinvoke-hint: SetLastError
+    func EvtGetLogInfo(Log: EVT_HANDLE, PropertyId: EVT_LOG_PROPERTY_IDAbi, PropertyValueBufferSize: UInt32, PropertyValueBuffer: CPointer<EVT_VARIANTAbi>, PropertyValueBufferUsed: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtGetLogInfo == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_EvtGetLogInfo(Log: EVT_HANDLE, PropertyId: EVT_LOG_PROPERTY_IDAbi, PropertyValueBufferSize: UInt32, PropertyValueBuffer: CPointer<EVT_VARIANTAbi>, PropertyValueBufferUsed: CPointer<UInt32>): Int32 {
+    return EvtGetLogInfo(Log, PropertyId, PropertyValueBufferSize, PropertyValueBuffer, PropertyValueBufferUsed)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtGetObjectArrayProperty == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: PropertyValueBuffer bytes=param[4] optional
+    // pinvoke-hint: SetLastError
+    func EvtGetObjectArrayProperty(ObjectArray: IntNative, PropertyId: UInt32, ArrayIndex: UInt32, Flags: UInt32, PropertyValueBufferSize: UInt32, PropertyValueBuffer: CPointer<EVT_VARIANTAbi>, PropertyValueBufferUsed: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtGetObjectArrayProperty == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_EvtGetObjectArrayProperty(ObjectArray: IntNative, PropertyId: UInt32, ArrayIndex: UInt32, Flags: UInt32, PropertyValueBufferSize: UInt32, PropertyValueBuffer: CPointer<EVT_VARIANTAbi>, PropertyValueBufferUsed: CPointer<UInt32>): Int32 {
+    return EvtGetObjectArrayProperty(ObjectArray, PropertyId, ArrayIndex, Flags, PropertyValueBufferSize, PropertyValueBuffer, PropertyValueBufferUsed)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtGetObjectArraySize == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func EvtGetObjectArraySize(ObjectArray: IntNative, ObjectArraySize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtGetObjectArraySize == "on"]
+public unsafe func Windows_EvtGetObjectArraySize(ObjectArray: IntNative, ObjectArraySize: CPointer<UInt32>): Int32 {
+    return EvtGetObjectArraySize(ObjectArray, ObjectArraySize)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtGetPublisherMetadataProperty == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: PublisherMetadataPropertyBuffer bytes=param[3] optional
+    // pinvoke-hint: SetLastError
+    func EvtGetPublisherMetadataProperty(PublisherMetadata: EVT_HANDLE, PropertyId: EVT_PUBLISHER_METADATA_PROPERTY_IDAbi, Flags: UInt32, PublisherMetadataPropertyBufferSize: UInt32, PublisherMetadataPropertyBuffer: CPointer<EVT_VARIANTAbi>, PublisherMetadataPropertyBufferUsed: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtGetPublisherMetadataProperty == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_EvtGetPublisherMetadataProperty(PublisherMetadata: EVT_HANDLE, PropertyId: EVT_PUBLISHER_METADATA_PROPERTY_IDAbi, Flags: UInt32, PublisherMetadataPropertyBufferSize: UInt32, PublisherMetadataPropertyBuffer: CPointer<EVT_VARIANTAbi>, PublisherMetadataPropertyBufferUsed: CPointer<UInt32>): Int32 {
+    return EvtGetPublisherMetadataProperty(PublisherMetadata, PropertyId, Flags, PublisherMetadataPropertyBufferSize, PublisherMetadataPropertyBuffer, PublisherMetadataPropertyBufferUsed)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtGetQueryInfo == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: PropertyValueBuffer bytes=param[2] optional
+    // pinvoke-hint: SetLastError
+    func EvtGetQueryInfo(QueryOrSubscription: EVT_HANDLE, PropertyId: EVT_QUERY_PROPERTY_IDAbi, PropertyValueBufferSize: UInt32, PropertyValueBuffer: CPointer<EVT_VARIANTAbi>, PropertyValueBufferUsed: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtGetQueryInfo == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_EvtGetQueryInfo(QueryOrSubscription: EVT_HANDLE, PropertyId: EVT_QUERY_PROPERTY_IDAbi, PropertyValueBufferSize: UInt32, PropertyValueBuffer: CPointer<EVT_VARIANTAbi>, PropertyValueBufferUsed: CPointer<UInt32>): Int32 {
+    return EvtGetQueryInfo(QueryOrSubscription, PropertyId, PropertyValueBufferSize, PropertyValueBuffer, PropertyValueBufferUsed)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtNext == "on"]
+foreign {
     // param-hint: Events len=param[1]
     // pinvoke-hint: SetLastError
     func EvtNext(ResultSet: EVT_HANDLE, EventsSize: UInt32, Events: CPointer<IntNative>, Timeout: UInt32, Flags: UInt32, Returned: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtNext == "on"]
+public unsafe func Windows_EvtNext(ResultSet: EVT_HANDLE, EventsSize: UInt32, Events: CPointer<IntNative>, Timeout: UInt32, Flags: UInt32, Returned: CPointer<UInt32>): Int32 {
+    return EvtNext(ResultSet, EventsSize, Events, Timeout, Flags, Returned)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtNextChannelPath == "on"]
+foreign {
     // param-hint: ChannelPathBuffer len=param[1] optional
     // pinvoke-hint: SetLastError
     func EvtNextChannelPath(ChannelEnum: EVT_HANDLE, ChannelPathBufferSize: UInt32, ChannelPathBuffer: CPointer<UInt16>, ChannelPathBufferUsed: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtNextChannelPath == "on"]
+public unsafe func Windows_EvtNextChannelPath(ChannelEnum: EVT_HANDLE, ChannelPathBufferSize: UInt32, ChannelPathBuffer: CPointer<UInt16>, ChannelPathBufferUsed: CPointer<UInt32>): Int32 {
+    return EvtNextChannelPath(ChannelEnum, ChannelPathBufferSize, ChannelPathBuffer, ChannelPathBufferUsed)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtNextEventMetadata == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func EvtNextEventMetadata(EventMetadataEnum: EVT_HANDLE, Flags: UInt32): EVT_HANDLE
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtNextEventMetadata == "on"]
+public unsafe func Windows_EvtNextEventMetadata(EventMetadataEnum: EVT_HANDLE, Flags: UInt32): EVT_HANDLE {
+    return EvtNextEventMetadata(EventMetadataEnum, Flags)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtNextPublisherId == "on"]
+foreign {
     // param-hint: PublisherIdBuffer len=param[1] optional
     // pinvoke-hint: SetLastError
     func EvtNextPublisherId(PublisherEnum: EVT_HANDLE, PublisherIdBufferSize: UInt32, PublisherIdBuffer: CPointer<UInt16>, PublisherIdBufferUsed: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtNextPublisherId == "on"]
+public unsafe func Windows_EvtNextPublisherId(PublisherEnum: EVT_HANDLE, PublisherIdBufferSize: UInt32, PublisherIdBuffer: CPointer<UInt16>, PublisherIdBufferUsed: CPointer<UInt32>): Int32 {
+    return EvtNextPublisherId(PublisherEnum, PublisherIdBufferSize, PublisherIdBuffer, PublisherIdBufferUsed)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtOpenChannelConfig == "on"]
+foreign {
     // param-hint: Session optional
     // pinvoke-hint: SetLastError
     func EvtOpenChannelConfig(Session: EVT_HANDLE, ChannelPath: CPointer<UInt16>, Flags: UInt32): EVT_HANDLE
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtOpenChannelConfig == "on"]
+public unsafe func Windows_EvtOpenChannelConfig(Session: EVT_HANDLE, ChannelPath: CPointer<UInt16>, Flags: UInt32): EVT_HANDLE {
+    return EvtOpenChannelConfig(Session, ChannelPath, Flags)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtOpenChannelEnum == "on"]
+foreign {
     // param-hint: Session optional
     // pinvoke-hint: SetLastError
     func EvtOpenChannelEnum(Session: EVT_HANDLE, Flags: UInt32): EVT_HANDLE
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtOpenChannelEnum == "on"]
+public unsafe func Windows_EvtOpenChannelEnum(Session: EVT_HANDLE, Flags: UInt32): EVT_HANDLE {
+    return EvtOpenChannelEnum(Session, Flags)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtOpenEventMetadataEnum == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func EvtOpenEventMetadataEnum(PublisherMetadata: EVT_HANDLE, Flags: UInt32): EVT_HANDLE
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtOpenEventMetadataEnum == "on"]
+public unsafe func Windows_EvtOpenEventMetadataEnum(PublisherMetadata: EVT_HANDLE, Flags: UInt32): EVT_HANDLE {
+    return EvtOpenEventMetadataEnum(PublisherMetadata, Flags)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtOpenLog == "on"]
+foreign {
     // param-hint: Session optional
     // pinvoke-hint: SetLastError
     func EvtOpenLog(Session: EVT_HANDLE, Path: CPointer<UInt16>, Flags: UInt32): EVT_HANDLE
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtOpenLog == "on"]
+public unsafe func Windows_EvtOpenLog(Session: EVT_HANDLE, Path: CPointer<UInt16>, Flags: UInt32): EVT_HANDLE {
+    return EvtOpenLog(Session, Path, Flags)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtOpenPublisherEnum == "on"]
+foreign {
     // param-hint: Session optional
     // pinvoke-hint: SetLastError
     func EvtOpenPublisherEnum(Session: EVT_HANDLE, Flags: UInt32): EVT_HANDLE
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtOpenPublisherEnum == "on"]
+public unsafe func Windows_EvtOpenPublisherEnum(Session: EVT_HANDLE, Flags: UInt32): EVT_HANDLE {
+    return EvtOpenPublisherEnum(Session, Flags)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtOpenPublisherMetadata == "on"]
+foreign {
     // param-hint: Session optional
     // param-hint: LogFilePath optional
     // pinvoke-hint: SetLastError
     func EvtOpenPublisherMetadata(Session: EVT_HANDLE, PublisherId: CPointer<UInt16>, LogFilePath: CPointer<UInt16>, Locale: UInt32, Flags: UInt32): EVT_HANDLE
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtOpenPublisherMetadata == "on"]
+public unsafe func Windows_EvtOpenPublisherMetadata(Session: EVT_HANDLE, PublisherId: CPointer<UInt16>, LogFilePath: CPointer<UInt16>, Locale: UInt32, Flags: UInt32): EVT_HANDLE {
+    return EvtOpenPublisherMetadata(Session, PublisherId, LogFilePath, Locale, Flags)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtOpenSession == "on"]
+foreign {
     // param-hint: Timeout optional reserved
     // param-hint: Flags optional reserved
     // pinvoke-hint: SetLastError
     func EvtOpenSession(LoginClass: EVT_LOGIN_CLASSAbi, Login: CPointer<Unit>, Timeout: UInt32, Flags: UInt32): EVT_HANDLE
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtOpenSession == "on"]
+public unsafe func Windows_EvtOpenSession(LoginClass: EVT_LOGIN_CLASSAbi, Login: CPointer<Unit>, Timeout: UInt32, Flags: UInt32): EVT_HANDLE {
+    return EvtOpenSession(LoginClass, Login, Timeout, Flags)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtQuery == "on"]
+foreign {
     // param-hint: Session optional
     // param-hint: Path optional
     // param-hint: Query optional
     // pinvoke-hint: SetLastError
     func EvtQuery(Session: EVT_HANDLE, Path: CPointer<UInt16>, Query: CPointer<UInt16>, Flags: UInt32): EVT_HANDLE
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtQuery == "on"]
+public unsafe func Windows_EvtQuery(Session: EVT_HANDLE, Path: CPointer<UInt16>, Query: CPointer<UInt16>, Flags: UInt32): EVT_HANDLE {
+    return EvtQuery(Session, Path, Query, Flags)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtRender == "on"]
+foreign {
     // param-hint: Context optional
     // param-hint: Buffer bytes=param[3] optional
     // pinvoke-hint: SetLastError
     func EvtRender(Context: EVT_HANDLE, Fragment: EVT_HANDLE, Flags: UInt32, BufferSize: UInt32, Buffer: CPointer<Unit>, BufferUsed: CPointer<UInt32>, PropertyCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtRender == "on"]
+public unsafe func Windows_EvtRender(Context: EVT_HANDLE, Fragment: EVT_HANDLE, Flags: UInt32, BufferSize: UInt32, Buffer: CPointer<Unit>, BufferUsed: CPointer<UInt32>, PropertyCount: CPointer<UInt32>): Int32 {
+    return EvtRender(Context, Fragment, Flags, BufferSize, Buffer, BufferUsed, PropertyCount)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtSaveChannelConfig == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func EvtSaveChannelConfig(ChannelConfig: EVT_HANDLE, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtSaveChannelConfig == "on"]
+public unsafe func Windows_EvtSaveChannelConfig(ChannelConfig: EVT_HANDLE, Flags: UInt32): Int32 {
+    return EvtSaveChannelConfig(ChannelConfig, Flags)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtSeek == "on"]
+foreign {
     // param-hint: Bookmark optional
     // param-hint: Timeout optional reserved
     // pinvoke-hint: SetLastError
     func EvtSeek(ResultSet: EVT_HANDLE, Position: Int64, Bookmark: EVT_HANDLE, Timeout: UInt32, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtSeek == "on"]
+public unsafe func Windows_EvtSeek(ResultSet: EVT_HANDLE, Position: Int64, Bookmark: EVT_HANDLE, Timeout: UInt32, Flags: UInt32): Int32 {
+    return EvtSeek(ResultSet, Position, Bookmark, Timeout, Flags)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtSetChannelConfigProperty == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func EvtSetChannelConfigProperty(ChannelConfig: EVT_HANDLE, PropertyId: EVT_CHANNEL_CONFIG_PROPERTY_IDAbi, Flags: UInt32, PropertyValue: CPointer<EVT_VARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtSetChannelConfigProperty == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_EvtSetChannelConfigProperty(ChannelConfig: EVT_HANDLE, PropertyId: EVT_CHANNEL_CONFIG_PROPERTY_IDAbi, Flags: UInt32, PropertyValue: CPointer<EVT_VARIANTAbi>): Int32 {
+    return EvtSetChannelConfigProperty(ChannelConfig, PropertyId, Flags, PropertyValue)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtSubscribe == "on"]
+foreign {
     // param-hint: Session optional
     // param-hint: SignalEvent optional
     // param-hint: ChannelPath optional
@@ -3105,41 +3601,22 @@ foreign {
     // param-hint: Callback optional
     // pinvoke-hint: SetLastError
     func EvtSubscribe(Session: EVT_HANDLE, SignalEvent: CPointer<Unit>, ChannelPath: CPointer<UInt16>, Query: CPointer<UInt16>, Bookmark: EVT_HANDLE, Context: CPointer<Unit>, Callback: EVT_SUBSCRIBE_CALLBACK, Flags: UInt32): EVT_HANDLE
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtSubscribe == "on"]
+public unsafe func Windows_EvtSubscribe(Session: EVT_HANDLE, SignalEvent: CPointer<Unit>, ChannelPath: CPointer<UInt16>, Query: CPointer<UInt16>, Bookmark: EVT_HANDLE, Context: CPointer<Unit>, Callback: EVT_SUBSCRIBE_CALLBACK, Flags: UInt32): EVT_HANDLE {
+    return EvtSubscribe(Session, SignalEvent, ChannelPath, Query, Bookmark, Context, Callback, Flags)
+}
+
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtUpdateBookmark == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func EvtUpdateBookmark(Bookmark: EVT_HANDLE, Event: EVT_HANDLE): Int32
 }
 
-@When[WEVTAPI == "on" && Windows_Win32_Security == "on"]
-foreign {
-    // param-hint: PublisherMetadata optional
-    // param-hint: Event optional
-    // param-hint: Values len=param[3] optional
-    // param-hint: Buffer len=param[6] optional
-    // pinvoke-hint: SetLastError
-    func EvtFormatMessage(PublisherMetadata: EVT_HANDLE, Event: EVT_HANDLE, MessageId: UInt32, ValueCount: UInt32, Values: CPointer<EVT_VARIANTAbi>, Flags: UInt32, BufferSize: UInt32, Buffer: CPointer<UInt16>, BufferUsed: CPointer<UInt32>): Int32
-    // param-hint: PropertyValueBuffer bytes=param[3] optional
-    // pinvoke-hint: SetLastError
-    func EvtGetChannelConfigProperty(ChannelConfig: EVT_HANDLE, PropertyId: EVT_CHANNEL_CONFIG_PROPERTY_IDAbi, Flags: UInt32, PropertyValueBufferSize: UInt32, PropertyValueBuffer: CPointer<EVT_VARIANTAbi>, PropertyValueBufferUsed: CPointer<UInt32>): Int32
-    // param-hint: PropertyValueBuffer bytes=param[2] optional
-    // pinvoke-hint: SetLastError
-    func EvtGetEventInfo(Event: EVT_HANDLE, PropertyId: EVT_EVENT_PROPERTY_IDAbi, PropertyValueBufferSize: UInt32, PropertyValueBuffer: CPointer<EVT_VARIANTAbi>, PropertyValueBufferUsed: CPointer<UInt32>): Int32
-    // param-hint: EventMetadataPropertyBuffer bytes=param[3] optional
-    // pinvoke-hint: SetLastError
-    func EvtGetEventMetadataProperty(EventMetadata: EVT_HANDLE, PropertyId: EVT_EVENT_METADATA_PROPERTY_IDAbi, Flags: UInt32, EventMetadataPropertyBufferSize: UInt32, EventMetadataPropertyBuffer: CPointer<EVT_VARIANTAbi>, EventMetadataPropertyBufferUsed: CPointer<UInt32>): Int32
-    // param-hint: PropertyValueBuffer bytes=param[2] optional
-    // pinvoke-hint: SetLastError
-    func EvtGetLogInfo(Log: EVT_HANDLE, PropertyId: EVT_LOG_PROPERTY_IDAbi, PropertyValueBufferSize: UInt32, PropertyValueBuffer: CPointer<EVT_VARIANTAbi>, PropertyValueBufferUsed: CPointer<UInt32>): Int32
-    // param-hint: PropertyValueBuffer bytes=param[4] optional
-    // pinvoke-hint: SetLastError
-    func EvtGetObjectArrayProperty(ObjectArray: IntNative, PropertyId: UInt32, ArrayIndex: UInt32, Flags: UInt32, PropertyValueBufferSize: UInt32, PropertyValueBuffer: CPointer<EVT_VARIANTAbi>, PropertyValueBufferUsed: CPointer<UInt32>): Int32
-    // param-hint: PublisherMetadataPropertyBuffer bytes=param[3] optional
-    // pinvoke-hint: SetLastError
-    func EvtGetPublisherMetadataProperty(PublisherMetadata: EVT_HANDLE, PropertyId: EVT_PUBLISHER_METADATA_PROPERTY_IDAbi, Flags: UInt32, PublisherMetadataPropertyBufferSize: UInt32, PublisherMetadataPropertyBuffer: CPointer<EVT_VARIANTAbi>, PublisherMetadataPropertyBufferUsed: CPointer<UInt32>): Int32
-    // param-hint: PropertyValueBuffer bytes=param[2] optional
-    // pinvoke-hint: SetLastError
-    func EvtGetQueryInfo(QueryOrSubscription: EVT_HANDLE, PropertyId: EVT_QUERY_PROPERTY_IDAbi, PropertyValueBufferSize: UInt32, PropertyValueBuffer: CPointer<EVT_VARIANTAbi>, PropertyValueBufferUsed: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func EvtSetChannelConfigProperty(ChannelConfig: EVT_HANDLE, PropertyId: EVT_CHANNEL_CONFIG_PROPERTY_IDAbi, Flags: UInt32, PropertyValue: CPointer<EVT_VARIANTAbi>): Int32
+@When[Windows_Win32_System_EventLog == "on" && WEVTAPI == "on" && Windows_Win32_System_EventLog_EvtUpdateBookmark == "on"]
+public unsafe func Windows_EvtUpdateBookmark(Bookmark: EVT_HANDLE, Event: EVT_HANDLE): Int32 {
+    return EvtUpdateBookmark(Bookmark, Event)
 }
 
 @When[Windows_Win32_System_EventLog == "on"]

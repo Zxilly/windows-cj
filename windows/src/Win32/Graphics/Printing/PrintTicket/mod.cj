@@ -6,9 +6,7 @@ package windows.Win32.Graphics.Printing.PrintTicket
 import std.collection.*
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge}
 import windows_core as windows_core
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
 import windows.Win32._impl_l1 as Win32__impl_l1
 
@@ -127,36 +125,123 @@ extend EPrintTicketScope <: windows_core.CopyType & windows_core.RuntimeType & w
 @When[Windows_Win32_Graphics_Printing_PrintTicket == "on"]
 public type HPTPROVIDER = CPointer<Unit>
 
-@When[PRNTVPT == "on"]
+@When[Windows_Win32_Graphics_Printing_PrintTicket == "on" && PRNTVPT == "on" && Windows_Win32_Graphics_Printing_PrintTicket_PTCloseProvider == "on"]
 foreign {
     func PTCloseProvider(hProvider: HPTPROVIDER): Int32
-    func PTOpenProvider(pszPrinterName: CPointer<UInt16>, dwVersion: UInt32, phProvider: CPointer<HPTPROVIDER>): Int32
-    func PTOpenProviderEx(pszPrinterName: CPointer<UInt16>, dwMaxVersion: UInt32, dwPrefVersion: UInt32, phProvider: CPointer<HPTPROVIDER>, pUsedVersion: CPointer<UInt32>): Int32
-    func PTQuerySchemaVersionSupport(pszPrinterName: CPointer<UInt16>, pMaxVersion: CPointer<UInt32>): Int32
-    func PTReleaseMemory(pBuffer: CPointer<Unit>): Int32
 }
 
-@When[PRNTVPT == "on" && (Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on")]
+@When[Windows_Win32_Graphics_Printing_PrintTicket == "on" && PRNTVPT == "on" && Windows_Win32_Graphics_Printing_PrintTicket_PTCloseProvider == "on"]
+public unsafe func Windows_PTCloseProvider(hProvider: HPTPROVIDER): Int32 {
+    return PTCloseProvider(hProvider)
+}
+
+@When[Windows_Win32_Graphics_Printing_PrintTicket == "on" && PRNTVPT == "on" && Windows_Win32_Graphics_Printing_PrintTicket_PTConvertDevModeToPrintTicket == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on"]
 foreign {
     func PTConvertDevModeToPrintTicket(hProvider: HPTPROVIDER, cbDevmode: UInt32, pDevmode: CPointer<Win32_Graphics_Gdi.DEVMODEAAbi>, scope: EPrintTicketScopeAbi, pPrintTicket: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Graphics_Printing_PrintTicket == "on" && PRNTVPT == "on" && Windows_Win32_Graphics_Printing_PrintTicket_PTConvertDevModeToPrintTicket == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_PTConvertDevModeToPrintTicket(hProvider: HPTPROVIDER, cbDevmode: UInt32, pDevmode: CPointer<Win32_Graphics_Gdi.DEVMODEAAbi>, scope: EPrintTicketScopeAbi, pPrintTicket: CPointer<Unit>): Int32 {
+    return PTConvertDevModeToPrintTicket(hProvider, cbDevmode, pDevmode, scope, pPrintTicket)
+}
+
+@When[Windows_Win32_Graphics_Printing_PrintTicket == "on" && PRNTVPT == "on" && Windows_Win32_Graphics_Printing_PrintTicket_PTConvertPrintTicketToDevMode == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pbstrErrorMessage optional
     func PTConvertPrintTicketToDevMode(hProvider: HPTPROVIDER, pPrintTicket: CPointer<Unit>, baseDevmodeType: EDefaultDevmodeTypeAbi, scope: EPrintTicketScopeAbi, pcbDevmode: CPointer<UInt32>, ppDevmode: CPointer<CPointer<Win32_Graphics_Gdi.DEVMODEAAbi>>, pbstrErrorMessage: CPointer<CPointer<UInt16>>): Int32
 }
 
-@When[PRNTVPT == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_Graphics_Printing_PrintTicket == "on" && PRNTVPT == "on" && Windows_Win32_Graphics_Printing_PrintTicket_PTConvertPrintTicketToDevMode == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_PTConvertPrintTicketToDevMode(hProvider: HPTPROVIDER, pPrintTicket: CPointer<Unit>, baseDevmodeType: EDefaultDevmodeTypeAbi, scope: EPrintTicketScopeAbi, pcbDevmode: CPointer<UInt32>, ppDevmode: CPointer<CPointer<Win32_Graphics_Gdi.DEVMODEAAbi>>, pbstrErrorMessage: CPointer<CPointer<UInt16>>): Int32 {
+    return PTConvertPrintTicketToDevMode(hProvider, pPrintTicket, baseDevmodeType, scope, pcbDevmode, ppDevmode, pbstrErrorMessage)
+}
+
+@When[Windows_Win32_Graphics_Printing_PrintTicket == "on" && PRNTVPT == "on" && Windows_Win32_Graphics_Printing_PrintTicket_PTGetPrintCapabilities == "on" && Windows_Win32_System_Com == "on"]
 foreign {
     // param-hint: pPrintTicket optional
     // param-hint: pbstrErrorMessage optional
     func PTGetPrintCapabilities(hProvider: HPTPROVIDER, pPrintTicket: CPointer<Unit>, pCapabilities: CPointer<Unit>, pbstrErrorMessage: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Printing_PrintTicket == "on" && PRNTVPT == "on" && Windows_Win32_Graphics_Printing_PrintTicket_PTGetPrintCapabilities == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_PTGetPrintCapabilities(hProvider: HPTPROVIDER, pPrintTicket: CPointer<Unit>, pCapabilities: CPointer<Unit>, pbstrErrorMessage: CPointer<CPointer<UInt16>>): Int32 {
+    return PTGetPrintCapabilities(hProvider, pPrintTicket, pCapabilities, pbstrErrorMessage)
+}
+
+@When[Windows_Win32_Graphics_Printing_PrintTicket == "on" && PRNTVPT == "on" && Windows_Win32_Graphics_Printing_PrintTicket_PTGetPrintDeviceCapabilities == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pPrintTicket optional
     // param-hint: pbstrErrorMessage optional
     func PTGetPrintDeviceCapabilities(hProvider: HPTPROVIDER, pPrintTicket: CPointer<Unit>, pDeviceCapabilities: CPointer<Unit>, pbstrErrorMessage: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Printing_PrintTicket == "on" && PRNTVPT == "on" && Windows_Win32_Graphics_Printing_PrintTicket_PTGetPrintDeviceCapabilities == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_PTGetPrintDeviceCapabilities(hProvider: HPTPROVIDER, pPrintTicket: CPointer<Unit>, pDeviceCapabilities: CPointer<Unit>, pbstrErrorMessage: CPointer<CPointer<UInt16>>): Int32 {
+    return PTGetPrintDeviceCapabilities(hProvider, pPrintTicket, pDeviceCapabilities, pbstrErrorMessage)
+}
+
+@When[Windows_Win32_Graphics_Printing_PrintTicket == "on" && PRNTVPT == "on" && Windows_Win32_Graphics_Printing_PrintTicket_PTGetPrintDeviceResources == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pPrintTicket optional
     // param-hint: pbstrErrorMessage optional
     func PTGetPrintDeviceResources(hProvider: HPTPROVIDER, pszLocaleName: CPointer<UInt16>, pPrintTicket: CPointer<Unit>, pDeviceResources: CPointer<Unit>, pbstrErrorMessage: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Printing_PrintTicket == "on" && PRNTVPT == "on" && Windows_Win32_Graphics_Printing_PrintTicket_PTGetPrintDeviceResources == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_PTGetPrintDeviceResources(hProvider: HPTPROVIDER, pszLocaleName: CPointer<UInt16>, pPrintTicket: CPointer<Unit>, pDeviceResources: CPointer<Unit>, pbstrErrorMessage: CPointer<CPointer<UInt16>>): Int32 {
+    return PTGetPrintDeviceResources(hProvider, pszLocaleName, pPrintTicket, pDeviceResources, pbstrErrorMessage)
+}
+
+@When[Windows_Win32_Graphics_Printing_PrintTicket == "on" && PRNTVPT == "on" && Windows_Win32_Graphics_Printing_PrintTicket_PTMergeAndValidatePrintTicket == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pDeltaTicket optional
     // param-hint: pbstrErrorMessage optional
     func PTMergeAndValidatePrintTicket(hProvider: HPTPROVIDER, pBaseTicket: CPointer<Unit>, pDeltaTicket: CPointer<Unit>, scope: EPrintTicketScopeAbi, pResultTicket: CPointer<Unit>, pbstrErrorMessage: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Printing_PrintTicket == "on" && PRNTVPT == "on" && Windows_Win32_Graphics_Printing_PrintTicket_PTMergeAndValidatePrintTicket == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_PTMergeAndValidatePrintTicket(hProvider: HPTPROVIDER, pBaseTicket: CPointer<Unit>, pDeltaTicket: CPointer<Unit>, scope: EPrintTicketScopeAbi, pResultTicket: CPointer<Unit>, pbstrErrorMessage: CPointer<CPointer<UInt16>>): Int32 {
+    return PTMergeAndValidatePrintTicket(hProvider, pBaseTicket, pDeltaTicket, scope, pResultTicket, pbstrErrorMessage)
+}
+
+@When[Windows_Win32_Graphics_Printing_PrintTicket == "on" && PRNTVPT == "on" && Windows_Win32_Graphics_Printing_PrintTicket_PTOpenProvider == "on"]
+foreign {
+    func PTOpenProvider(pszPrinterName: CPointer<UInt16>, dwVersion: UInt32, phProvider: CPointer<HPTPROVIDER>): Int32
+}
+
+@When[Windows_Win32_Graphics_Printing_PrintTicket == "on" && PRNTVPT == "on" && Windows_Win32_Graphics_Printing_PrintTicket_PTOpenProvider == "on"]
+public unsafe func Windows_PTOpenProvider(pszPrinterName: CPointer<UInt16>, dwVersion: UInt32, phProvider: CPointer<HPTPROVIDER>): Int32 {
+    return PTOpenProvider(pszPrinterName, dwVersion, phProvider)
+}
+
+@When[Windows_Win32_Graphics_Printing_PrintTicket == "on" && PRNTVPT == "on" && Windows_Win32_Graphics_Printing_PrintTicket_PTOpenProviderEx == "on"]
+foreign {
+    func PTOpenProviderEx(pszPrinterName: CPointer<UInt16>, dwMaxVersion: UInt32, dwPrefVersion: UInt32, phProvider: CPointer<HPTPROVIDER>, pUsedVersion: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_Printing_PrintTicket == "on" && PRNTVPT == "on" && Windows_Win32_Graphics_Printing_PrintTicket_PTOpenProviderEx == "on"]
+public unsafe func Windows_PTOpenProviderEx(pszPrinterName: CPointer<UInt16>, dwMaxVersion: UInt32, dwPrefVersion: UInt32, phProvider: CPointer<HPTPROVIDER>, pUsedVersion: CPointer<UInt32>): Int32 {
+    return PTOpenProviderEx(pszPrinterName, dwMaxVersion, dwPrefVersion, phProvider, pUsedVersion)
+}
+
+@When[Windows_Win32_Graphics_Printing_PrintTicket == "on" && PRNTVPT == "on" && Windows_Win32_Graphics_Printing_PrintTicket_PTQuerySchemaVersionSupport == "on"]
+foreign {
+    func PTQuerySchemaVersionSupport(pszPrinterName: CPointer<UInt16>, pMaxVersion: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_Printing_PrintTicket == "on" && PRNTVPT == "on" && Windows_Win32_Graphics_Printing_PrintTicket_PTQuerySchemaVersionSupport == "on"]
+public unsafe func Windows_PTQuerySchemaVersionSupport(pszPrinterName: CPointer<UInt16>, pMaxVersion: CPointer<UInt32>): Int32 {
+    return PTQuerySchemaVersionSupport(pszPrinterName, pMaxVersion)
+}
+
+@When[Windows_Win32_Graphics_Printing_PrintTicket == "on" && PRNTVPT == "on" && Windows_Win32_Graphics_Printing_PrintTicket_PTReleaseMemory == "on"]
+foreign {
+    func PTReleaseMemory(pBuffer: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Graphics_Printing_PrintTicket == "on" && PRNTVPT == "on" && Windows_Win32_Graphics_Printing_PrintTicket_PTReleaseMemory == "on"]
+public unsafe func Windows_PTReleaseMemory(pBuffer: CPointer<Unit>): Int32 {
+    return PTReleaseMemory(pBuffer)
 }
 
 @When[Windows_Win32_Graphics_Printing_PrintTicket == "on"]

@@ -13,669 +13,6306 @@ import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
 
 
-@When[GDIPLUS == "on"]
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathArc == "on"]
 foreign {
     func GdipAddPathArc(path: CPointer<Win32__impl_l0.GpPath>, x: Float32, y: Float32, width: Float32, height: Float32, startAngle: Float32, sweepAngle: Float32): Int32
-    func GdipAddPathArcI(path: CPointer<Win32__impl_l0.GpPath>, x: Int32, y: Int32, width: Int32, height: Int32, startAngle: Float32, sweepAngle: Float32): Int32
-    func GdipAddPathBezier(path: CPointer<Win32__impl_l0.GpPath>, x1: Float32, y1: Float32, x2: Float32, y2: Float32, x3: Float32, y3: Float32, x4: Float32, y4: Float32): Int32
-    func GdipAddPathBezierI(path: CPointer<Win32__impl_l0.GpPath>, x1: Int32, y1: Int32, x2: Int32, y2: Int32, x3: Int32, y3: Int32, x4: Int32, y4: Int32): Int32
-    func GdipAddPathBeziers(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
-    func GdipAddPathBeziersI(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
-    func GdipAddPathClosedCurve(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
-    func GdipAddPathClosedCurve2(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.PointF>, count: Int32, tension: Float32): Int32
-    func GdipAddPathClosedCurve2I(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.Point>, count: Int32, tension: Float32): Int32
-    func GdipAddPathClosedCurveI(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
-    func GdipAddPathCurve(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
-    func GdipAddPathCurve2(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.PointF>, count: Int32, tension: Float32): Int32
-    func GdipAddPathCurve2I(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.Point>, count: Int32, tension: Float32): Int32
-    func GdipAddPathCurve3(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.PointF>, count: Int32, offset: Int32, numberOfSegments: Int32, tension: Float32): Int32
-    func GdipAddPathCurve3I(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.Point>, count: Int32, offset: Int32, numberOfSegments: Int32, tension: Float32): Int32
-    func GdipAddPathCurveI(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
-    func GdipAddPathEllipse(path: CPointer<Win32__impl_l0.GpPath>, x: Float32, y: Float32, width: Float32, height: Float32): Int32
-    func GdipAddPathEllipseI(path: CPointer<Win32__impl_l0.GpPath>, x: Int32, y: Int32, width: Int32, height: Int32): Int32
-    func GdipAddPathLine(path: CPointer<Win32__impl_l0.GpPath>, x1: Float32, y1: Float32, x2: Float32, y2: Float32): Int32
-    func GdipAddPathLine2(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
-    func GdipAddPathLine2I(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
-    func GdipAddPathLineI(path: CPointer<Win32__impl_l0.GpPath>, x1: Int32, y1: Int32, x2: Int32, y2: Int32): Int32
-    func GdipAddPathPath(path: CPointer<Win32__impl_l0.GpPath>, addingPath: CPointer<Win32__impl_l0.GpPath>, connect: Int32): Int32
-    func GdipAddPathPie(path: CPointer<Win32__impl_l0.GpPath>, x: Float32, y: Float32, width: Float32, height: Float32, startAngle: Float32, sweepAngle: Float32): Int32
-    func GdipAddPathPieI(path: CPointer<Win32__impl_l0.GpPath>, x: Int32, y: Int32, width: Int32, height: Int32, startAngle: Float32, sweepAngle: Float32): Int32
-    func GdipAddPathPolygon(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
-    func GdipAddPathPolygonI(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
-    func GdipAddPathRectangle(path: CPointer<Win32__impl_l0.GpPath>, x: Float32, y: Float32, width: Float32, height: Float32): Int32
-    func GdipAddPathRectangleI(path: CPointer<Win32__impl_l0.GpPath>, x: Int32, y: Int32, width: Int32, height: Int32): Int32
-    func GdipAddPathRectangles(path: CPointer<Win32__impl_l0.GpPath>, rects: CPointer<Win32__impl_l0.RectF>, count: Int32): Int32
-    func GdipAddPathRectanglesI(path: CPointer<Win32__impl_l0.GpPath>, rects: CPointer<Win32__impl_l0.Rect>, count: Int32): Int32
-    func GdipAddPathString(path: CPointer<Win32__impl_l0.GpPath>, string: CPointer<UInt16>, length: Int32, family: CPointer<Win32__impl_l0.GpFontFamily>, style: Int32, emSize: Float32, layoutRect: CPointer<Win32__impl_l0.RectF>, format: CPointer<Win32__impl_l0.GpStringFormat>): Int32
-    func GdipAddPathStringI(path: CPointer<Win32__impl_l0.GpPath>, string: CPointer<UInt16>, length: Int32, family: CPointer<Win32__impl_l0.GpFontFamily>, style: Int32, emSize: Float32, layoutRect: CPointer<Win32__impl_l0.Rect>, format: CPointer<Win32__impl_l0.GpStringFormat>): Int32
-    func GdipAlloc(size: UIntNative): CPointer<Unit>
-    func GdipBeginContainer(graphics: CPointer<Win32__impl_l0.GpGraphics>, dstrect: CPointer<Win32__impl_l0.RectF>, srcrect: CPointer<Win32__impl_l0.RectF>, unit: Int32, state: CPointer<UInt32>): Int32
-    func GdipBeginContainer2(graphics: CPointer<Win32__impl_l0.GpGraphics>, state: CPointer<UInt32>): Int32
-    func GdipBeginContainerI(graphics: CPointer<Win32__impl_l0.GpGraphics>, dstrect: CPointer<Win32__impl_l0.Rect>, srcrect: CPointer<Win32__impl_l0.Rect>, unit: Int32, state: CPointer<UInt32>): Int32
-    func GdipBitmapApplyEffect(bitmap: CPointer<Win32__impl_l0.GpBitmap>, effect: CPointer<Win32__impl_l0.CGpEffect>, roi: CPointer<Win32_Foundation.RECT>, useAuxData: Int32, auxData: CPointer<CPointer<Unit>>, auxDataSize: CPointer<Int32>): Int32
-    func GdipBitmapConvertFormat(pInputBitmap: CPointer<Win32__impl_l0.GpBitmap>, format: Int32, dithertype: Int32, palettetype: Int32, palette: CPointer<Win32__impl_l0.ColorPalette>, alphaThresholdPercent: Float32): Int32
-    func GdipBitmapCreateApplyEffect(inputBitmaps: CPointer<CPointer<Win32__impl_l0.GpBitmap>>, numInputs: Int32, effect: CPointer<Win32__impl_l0.CGpEffect>, roi: CPointer<Win32_Foundation.RECT>, outputRect: CPointer<Win32_Foundation.RECT>, outputBitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>, useAuxData: Int32, auxData: CPointer<CPointer<Unit>>, auxDataSize: CPointer<Int32>): Int32
-    func GdipBitmapGetHistogram(bitmap: CPointer<Win32__impl_l0.GpBitmap>, format: Int32, NumberOfEntries: UInt32, channel0: CPointer<UInt32>, channel1: CPointer<UInt32>, channel2: CPointer<UInt32>, channel3: CPointer<UInt32>): Int32
-    func GdipBitmapGetHistogramSize(format: Int32, NumberOfEntries: CPointer<UInt32>): Int32
-    func GdipBitmapGetPixel(bitmap: CPointer<Win32__impl_l0.GpBitmap>, x: Int32, y: Int32, color: CPointer<UInt32>): Int32
-    func GdipBitmapLockBits(bitmap: CPointer<Win32__impl_l0.GpBitmap>, rect: CPointer<Win32__impl_l0.Rect>, flags: UInt32, format: Int32, lockedBitmapData: CPointer<Win32__impl_l0.BitmapData>): Int32
-    func GdipBitmapSetPixel(bitmap: CPointer<Win32__impl_l0.GpBitmap>, x: Int32, y: Int32, color: UInt32): Int32
-    func GdipBitmapSetResolution(bitmap: CPointer<Win32__impl_l0.GpBitmap>, xdpi: Float32, ydpi: Float32): Int32
-    func GdipBitmapUnlockBits(bitmap: CPointer<Win32__impl_l0.GpBitmap>, lockedBitmapData: CPointer<Win32__impl_l0.BitmapData>): Int32
-    func GdipClearPathMarkers(path: CPointer<Win32__impl_l0.GpPath>): Int32
-    func GdipCloneBitmapArea(x: Float32, y: Float32, width: Float32, height: Float32, format: Int32, srcBitmap: CPointer<Win32__impl_l0.GpBitmap>, dstBitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32
-    func GdipCloneBitmapAreaI(x: Int32, y: Int32, width: Int32, height: Int32, format: Int32, srcBitmap: CPointer<Win32__impl_l0.GpBitmap>, dstBitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32
-    func GdipCloneBrush(brush: CPointer<Win32__impl_l0.GpBrush>, cloneBrush: CPointer<CPointer<Win32__impl_l0.GpBrush>>): Int32
-    func GdipCloneCustomLineCap(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, clonedCap: CPointer<CPointer<Win32__impl_l0.GpCustomLineCap>>): Int32
-    func GdipCloneFont(font: CPointer<Win32__impl_l0.GpFont>, cloneFont: CPointer<CPointer<Win32__impl_l0.GpFont>>): Int32
-    func GdipCloneFontFamily(fontFamily: CPointer<Win32__impl_l0.GpFontFamily>, clonedFontFamily: CPointer<CPointer<Win32__impl_l0.GpFontFamily>>): Int32
-    func GdipCloneImage(image: CPointer<Win32__impl_l0.GpImage>, cloneImage: CPointer<CPointer<Win32__impl_l0.GpImage>>): Int32
-    func GdipCloneImageAttributes(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, cloneImageattr: CPointer<CPointer<Win32__impl_l0.GpImageAttributes>>): Int32
-    func GdipCloneMatrix(matrix: CPointer<Win32__impl_l0.Matrix>, cloneMatrix: CPointer<CPointer<Win32__impl_l0.Matrix>>): Int32
-    func GdipClonePath(path: CPointer<Win32__impl_l0.GpPath>, clonePath: CPointer<CPointer<Win32__impl_l0.GpPath>>): Int32
-    func GdipClonePen(pen: CPointer<Win32__impl_l0.GpPen>, clonepen: CPointer<CPointer<Win32__impl_l0.GpPen>>): Int32
-    func GdipCloneRegion(region: CPointer<Win32__impl_l0.GpRegion>, cloneRegion: CPointer<CPointer<Win32__impl_l0.GpRegion>>): Int32
-    func GdipCloneStringFormat(format: CPointer<Win32__impl_l0.GpStringFormat>, newFormat: CPointer<CPointer<Win32__impl_l0.GpStringFormat>>): Int32
-    func GdipClosePathFigure(path: CPointer<Win32__impl_l0.GpPath>): Int32
-    func GdipClosePathFigures(path: CPointer<Win32__impl_l0.GpPath>): Int32
-    func GdipCombineRegionPath(region: CPointer<Win32__impl_l0.GpRegion>, path: CPointer<Win32__impl_l0.GpPath>, combineMode: Int32): Int32
-    func GdipCombineRegionRect(region: CPointer<Win32__impl_l0.GpRegion>, rect: CPointer<Win32__impl_l0.RectF>, combineMode: Int32): Int32
-    func GdipCombineRegionRectI(region: CPointer<Win32__impl_l0.GpRegion>, rect: CPointer<Win32__impl_l0.Rect>, combineMode: Int32): Int32
-    func GdipCombineRegionRegion(region: CPointer<Win32__impl_l0.GpRegion>, region2: CPointer<Win32__impl_l0.GpRegion>, combineMode: Int32): Int32
-    func GdipComment(graphics: CPointer<Win32__impl_l0.GpGraphics>, sizeData: UInt32, data: CPointer<UInt8>): Int32
-    func GdipConvertToEmfPlus(refGraphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, conversionFailureFlag: CPointer<Int32>, emfType: Int32, description: CPointer<UInt16>, out_metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32
-    func GdipConvertToEmfPlusToFile(refGraphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, conversionFailureFlag: CPointer<Int32>, filename: CPointer<UInt16>, emfType: Int32, description: CPointer<UInt16>, out_metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32
-    func GdipCreateAdjustableArrowCap(height: Float32, width: Float32, isFilled: Int32, cap: CPointer<CPointer<Win32__impl_l0.GpAdjustableArrowCap>>): Int32
-    func GdipCreateBitmapFromFile(filename: CPointer<UInt16>, bitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32
-    func GdipCreateBitmapFromFileICM(filename: CPointer<UInt16>, bitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32
-    func GdipCreateBitmapFromGraphics(width: Int32, height: Int32, target: CPointer<Win32__impl_l0.GpGraphics>, bitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32
-    func GdipCreateBitmapFromResource(hInstance: CPointer<Unit>, lpBitmapName: CPointer<UInt16>, bitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32
-    // param-hint: scan0 optional
-    func GdipCreateBitmapFromScan0(width: Int32, height: Int32, stride: Int32, format: Int32, scan0: CPointer<UInt8>, bitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32
-    func GdipCreateCachedBitmap(bitmap: CPointer<Win32__impl_l0.GpBitmap>, graphics: CPointer<Win32__impl_l0.GpGraphics>, cachedBitmap: CPointer<CPointer<Win32__impl_l0.GpCachedBitmap>>): Int32
-    func GdipCreateCustomLineCap(fillPath: CPointer<Win32__impl_l0.GpPath>, strokePath: CPointer<Win32__impl_l0.GpPath>, baseCap: Int32, baseInset: Float32, customCap: CPointer<CPointer<Win32__impl_l0.GpCustomLineCap>>): Int32
-    func GdipCreateEffect(guid: GUID, effect: CPointer<CPointer<Win32__impl_l0.CGpEffect>>): Int32
-    func GdipCreateFont(fontFamily: CPointer<Win32__impl_l0.GpFontFamily>, emSize: Float32, style: Int32, unit: Int32, font: CPointer<CPointer<Win32__impl_l0.GpFont>>): Int32
-    func GdipCreateFontFamilyFromName(name: CPointer<UInt16>, fontCollection: CPointer<Win32__impl_l0.GpFontCollection>, fontFamily: CPointer<CPointer<Win32__impl_l0.GpFontFamily>>): Int32
-    func GdipCreateFromHWND(hwnd: CPointer<Unit>, graphics: CPointer<CPointer<Win32__impl_l0.GpGraphics>>): Int32
-    func GdipCreateFromHWNDICM(hwnd: CPointer<Unit>, graphics: CPointer<CPointer<Win32__impl_l0.GpGraphics>>): Int32
-    func GdipCreateHatchBrush(hatchstyle: Int32, forecol: UInt32, backcol: UInt32, brush: CPointer<CPointer<Win32__impl_l0.GpHatch>>): Int32
-    func GdipCreateImageAttributes(imageattr: CPointer<CPointer<Win32__impl_l0.GpImageAttributes>>): Int32
-    func GdipCreateLineBrush(point1: CPointer<Win32__impl_l0.PointF>, point2: CPointer<Win32__impl_l0.PointF>, color1: UInt32, color2: UInt32, wrapMode: Int32, lineGradient: CPointer<CPointer<Win32__impl_l0.GpLineGradient>>): Int32
-    func GdipCreateLineBrushFromRect(rect: CPointer<Win32__impl_l0.RectF>, color1: UInt32, color2: UInt32, mode: Int32, wrapMode: Int32, lineGradient: CPointer<CPointer<Win32__impl_l0.GpLineGradient>>): Int32
-    func GdipCreateLineBrushFromRectI(rect: CPointer<Win32__impl_l0.Rect>, color1: UInt32, color2: UInt32, mode: Int32, wrapMode: Int32, lineGradient: CPointer<CPointer<Win32__impl_l0.GpLineGradient>>): Int32
-    func GdipCreateLineBrushFromRectWithAngle(rect: CPointer<Win32__impl_l0.RectF>, color1: UInt32, color2: UInt32, angle: Float32, isAngleScalable: Int32, wrapMode: Int32, lineGradient: CPointer<CPointer<Win32__impl_l0.GpLineGradient>>): Int32
-    func GdipCreateLineBrushFromRectWithAngleI(rect: CPointer<Win32__impl_l0.Rect>, color1: UInt32, color2: UInt32, angle: Float32, isAngleScalable: Int32, wrapMode: Int32, lineGradient: CPointer<CPointer<Win32__impl_l0.GpLineGradient>>): Int32
-    func GdipCreateLineBrushI(point1: CPointer<Win32__impl_l0.Point>, point2: CPointer<Win32__impl_l0.Point>, color1: UInt32, color2: UInt32, wrapMode: Int32, lineGradient: CPointer<CPointer<Win32__impl_l0.GpLineGradient>>): Int32
-    func GdipCreateMatrix(matrix: CPointer<CPointer<Win32__impl_l0.Matrix>>): Int32
-    func GdipCreateMatrix2(m11: Float32, m12: Float32, m21: Float32, m22: Float32, dx: Float32, dy: Float32, matrix: CPointer<CPointer<Win32__impl_l0.Matrix>>): Int32
-    func GdipCreateMatrix3(rect: CPointer<Win32__impl_l0.RectF>, dstplg: CPointer<Win32__impl_l0.PointF>, matrix: CPointer<CPointer<Win32__impl_l0.Matrix>>): Int32
-    func GdipCreateMatrix3I(rect: CPointer<Win32__impl_l0.Rect>, dstplg: CPointer<Win32__impl_l0.Point>, matrix: CPointer<CPointer<Win32__impl_l0.Matrix>>): Int32
-    func GdipCreateMetafileFromFile(file: CPointer<UInt16>, metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32
-    func GdipCreateMetafileFromWmfFile(file: CPointer<UInt16>, wmfPlaceableFileHeader: CPointer<Win32__impl_l1.WmfPlaceableFileHeader>, metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32
-    func GdipCreatePath(brushMode: Int32, path: CPointer<CPointer<Win32__impl_l0.GpPath>>): Int32
-    func GdipCreatePath2(param0: CPointer<Win32__impl_l0.PointF>, param1: CPointer<UInt8>, param2: Int32, param3: Int32, path: CPointer<CPointer<Win32__impl_l0.GpPath>>): Int32
-    func GdipCreatePath2I(param0: CPointer<Win32__impl_l0.Point>, param1: CPointer<UInt8>, param2: Int32, param3: Int32, path: CPointer<CPointer<Win32__impl_l0.GpPath>>): Int32
-    func GdipCreatePathGradient(points: CPointer<Win32__impl_l0.PointF>, count: Int32, wrapMode: Int32, polyGradient: CPointer<CPointer<Win32__impl_l0.GpPathGradient>>): Int32
-    func GdipCreatePathGradientFromPath(path: CPointer<Win32__impl_l0.GpPath>, polyGradient: CPointer<CPointer<Win32__impl_l0.GpPathGradient>>): Int32
-    func GdipCreatePathGradientI(points: CPointer<Win32__impl_l0.Point>, count: Int32, wrapMode: Int32, polyGradient: CPointer<CPointer<Win32__impl_l0.GpPathGradient>>): Int32
-    func GdipCreatePathIter(iterator: CPointer<CPointer<Win32__impl_l0.GpPathIterator>>, path: CPointer<Win32__impl_l0.GpPath>): Int32
-    func GdipCreatePen1(color: UInt32, width: Float32, unit: Int32, pen: CPointer<CPointer<Win32__impl_l0.GpPen>>): Int32
-    func GdipCreatePen2(brush: CPointer<Win32__impl_l0.GpBrush>, width: Float32, unit: Int32, pen: CPointer<CPointer<Win32__impl_l0.GpPen>>): Int32
-    func GdipCreateRegion(region: CPointer<CPointer<Win32__impl_l0.GpRegion>>): Int32
-    func GdipCreateRegionPath(path: CPointer<Win32__impl_l0.GpPath>, region: CPointer<CPointer<Win32__impl_l0.GpRegion>>): Int32
-    func GdipCreateRegionRect(rect: CPointer<Win32__impl_l0.RectF>, region: CPointer<CPointer<Win32__impl_l0.GpRegion>>): Int32
-    func GdipCreateRegionRectI(rect: CPointer<Win32__impl_l0.Rect>, region: CPointer<CPointer<Win32__impl_l0.GpRegion>>): Int32
-    func GdipCreateRegionRgnData(regionData: CPointer<UInt8>, size: Int32, region: CPointer<CPointer<Win32__impl_l0.GpRegion>>): Int32
-    func GdipCreateSolidFill(color: UInt32, brush: CPointer<CPointer<Win32__impl_l0.GpSolidFill>>): Int32
-    func GdipCreateStringFormat(formatAttributes: Int32, language: UInt16, format: CPointer<CPointer<Win32__impl_l0.GpStringFormat>>): Int32
-    func GdipCreateTexture(image: CPointer<Win32__impl_l0.GpImage>, wrapmode: Int32, texture: CPointer<CPointer<Win32__impl_l0.GpTexture>>): Int32
-    func GdipCreateTexture2(image: CPointer<Win32__impl_l0.GpImage>, wrapmode: Int32, x: Float32, y: Float32, width: Float32, height: Float32, texture: CPointer<CPointer<Win32__impl_l0.GpTexture>>): Int32
-    func GdipCreateTexture2I(image: CPointer<Win32__impl_l0.GpImage>, wrapmode: Int32, x: Int32, y: Int32, width: Int32, height: Int32, texture: CPointer<CPointer<Win32__impl_l0.GpTexture>>): Int32
-    func GdipCreateTextureIA(image: CPointer<Win32__impl_l0.GpImage>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>, x: Float32, y: Float32, width: Float32, height: Float32, texture: CPointer<CPointer<Win32__impl_l0.GpTexture>>): Int32
-    func GdipCreateTextureIAI(image: CPointer<Win32__impl_l0.GpImage>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>, x: Int32, y: Int32, width: Int32, height: Int32, texture: CPointer<CPointer<Win32__impl_l0.GpTexture>>): Int32
-    func GdipDeleteBrush(brush: CPointer<Win32__impl_l0.GpBrush>): Int32
-    func GdipDeleteCachedBitmap(cachedBitmap: CPointer<Win32__impl_l0.GpCachedBitmap>): Int32
-    func GdipDeleteCustomLineCap(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>): Int32
-    func GdipDeleteEffect(effect: CPointer<Win32__impl_l0.CGpEffect>): Int32
-    func GdipDeleteFont(font: CPointer<Win32__impl_l0.GpFont>): Int32
-    func GdipDeleteFontFamily(fontFamily: CPointer<Win32__impl_l0.GpFontFamily>): Int32
-    func GdipDeleteGraphics(graphics: CPointer<Win32__impl_l0.GpGraphics>): Int32
-    func GdipDeleteMatrix(matrix: CPointer<Win32__impl_l0.Matrix>): Int32
-    func GdipDeletePath(path: CPointer<Win32__impl_l0.GpPath>): Int32
-    func GdipDeletePathIter(iterator: CPointer<Win32__impl_l0.GpPathIterator>): Int32
-    func GdipDeletePen(pen: CPointer<Win32__impl_l0.GpPen>): Int32
-    func GdipDeletePrivateFontCollection(fontCollection: CPointer<CPointer<Win32__impl_l0.GpFontCollection>>): Int32
-    func GdipDeleteRegion(region: CPointer<Win32__impl_l0.GpRegion>): Int32
-    func GdipDeleteStringFormat(format: CPointer<Win32__impl_l0.GpStringFormat>): Int32
-    func GdipDisposeImage(image: CPointer<Win32__impl_l0.GpImage>): Int32
-    func GdipDisposeImageAttributes(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>): Int32
-    func GdipDrawArc(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x: Float32, y: Float32, width: Float32, height: Float32, startAngle: Float32, sweepAngle: Float32): Int32
-    func GdipDrawArcI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x: Int32, y: Int32, width: Int32, height: Int32, startAngle: Float32, sweepAngle: Float32): Int32
-    func GdipDrawBezier(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x1: Float32, y1: Float32, x2: Float32, y2: Float32, x3: Float32, y3: Float32, x4: Float32, y4: Float32): Int32
-    func GdipDrawBezierI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x1: Int32, y1: Int32, x2: Int32, y2: Int32, x3: Int32, y3: Int32, x4: Int32, y4: Int32): Int32
-    func GdipDrawBeziers(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
-    func GdipDrawBeziersI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
-    func GdipDrawCachedBitmap(graphics: CPointer<Win32__impl_l0.GpGraphics>, cachedBitmap: CPointer<Win32__impl_l0.GpCachedBitmap>, x: Int32, y: Int32): Int32
-    func GdipDrawClosedCurve(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
-    func GdipDrawClosedCurve2(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.PointF>, count: Int32, tension: Float32): Int32
-    func GdipDrawClosedCurve2I(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.Point>, count: Int32, tension: Float32): Int32
-    func GdipDrawClosedCurveI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
-    func GdipDrawCurve(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
-    func GdipDrawCurve2(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.PointF>, count: Int32, tension: Float32): Int32
-    func GdipDrawCurve2I(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.Point>, count: Int32, tension: Float32): Int32
-    func GdipDrawCurve3(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.PointF>, count: Int32, offset: Int32, numberOfSegments: Int32, tension: Float32): Int32
-    func GdipDrawCurve3I(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.Point>, count: Int32, offset: Int32, numberOfSegments: Int32, tension: Float32): Int32
-    func GdipDrawCurveI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
-    func GdipDrawDriverString(graphics: CPointer<Win32__impl_l0.GpGraphics>, text: CPointer<UInt16>, length: Int32, font: CPointer<Win32__impl_l0.GpFont>, brush: CPointer<Win32__impl_l0.GpBrush>, positions: CPointer<Win32__impl_l0.PointF>, flags: Int32, matrix: CPointer<Win32__impl_l0.Matrix>): Int32
-    func GdipDrawEllipse(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x: Float32, y: Float32, width: Float32, height: Float32): Int32
-    func GdipDrawEllipseI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x: Int32, y: Int32, width: Int32, height: Int32): Int32
-    func GdipDrawImage(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, x: Float32, y: Float32): Int32
-    func GdipDrawImageFX(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, source: CPointer<Win32__impl_l0.RectF>, xForm: CPointer<Win32__impl_l0.Matrix>, effect: CPointer<Win32__impl_l0.CGpEffect>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>, srcUnit: Int32): Int32
-    func GdipDrawImageI(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, x: Int32, y: Int32): Int32
-    func GdipDrawImagePointRect(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, x: Float32, y: Float32, srcx: Float32, srcy: Float32, srcwidth: Float32, srcheight: Float32, srcUnit: Int32): Int32
-    func GdipDrawImagePointRectI(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, x: Int32, y: Int32, srcx: Int32, srcy: Int32, srcwidth: Int32, srcheight: Int32, srcUnit: Int32): Int32
-    func GdipDrawImagePoints(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, dstpoints: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
-    func GdipDrawImagePointsI(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, dstpoints: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
-    func GdipDrawImagePointsRect(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, points: CPointer<Win32__impl_l0.PointF>, count: Int32, srcx: Float32, srcy: Float32, srcwidth: Float32, srcheight: Float32, srcUnit: Int32, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>, callback: IntNative, callbackData: CPointer<Unit>): Int32
-    func GdipDrawImagePointsRectI(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, points: CPointer<Win32__impl_l0.Point>, count: Int32, srcx: Int32, srcy: Int32, srcwidth: Int32, srcheight: Int32, srcUnit: Int32, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>, callback: IntNative, callbackData: CPointer<Unit>): Int32
-    func GdipDrawImageRect(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, x: Float32, y: Float32, width: Float32, height: Float32): Int32
-    func GdipDrawImageRectI(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, x: Int32, y: Int32, width: Int32, height: Int32): Int32
-    func GdipDrawImageRectRect(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, dstx: Float32, dsty: Float32, dstwidth: Float32, dstheight: Float32, srcx: Float32, srcy: Float32, srcwidth: Float32, srcheight: Float32, srcUnit: Int32, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>, callback: IntNative, callbackData: CPointer<Unit>): Int32
-    func GdipDrawImageRectRectI(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, dstx: Int32, dsty: Int32, dstwidth: Int32, dstheight: Int32, srcx: Int32, srcy: Int32, srcwidth: Int32, srcheight: Int32, srcUnit: Int32, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>, callback: IntNative, callbackData: CPointer<Unit>): Int32
-    func GdipDrawLine(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x1: Float32, y1: Float32, x2: Float32, y2: Float32): Int32
-    func GdipDrawLineI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x1: Int32, y1: Int32, x2: Int32, y2: Int32): Int32
-    func GdipDrawLines(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
-    func GdipDrawLinesI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
-    func GdipDrawPath(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, path: CPointer<Win32__impl_l0.GpPath>): Int32
-    func GdipDrawPie(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x: Float32, y: Float32, width: Float32, height: Float32, startAngle: Float32, sweepAngle: Float32): Int32
-    func GdipDrawPieI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x: Int32, y: Int32, width: Int32, height: Int32, startAngle: Float32, sweepAngle: Float32): Int32
-    func GdipDrawPolygon(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
-    func GdipDrawPolygonI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
-    func GdipDrawRectangle(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x: Float32, y: Float32, width: Float32, height: Float32): Int32
-    func GdipDrawRectangleI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x: Int32, y: Int32, width: Int32, height: Int32): Int32
-    func GdipDrawRectangles(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, rects: CPointer<Win32__impl_l0.RectF>, count: Int32): Int32
-    func GdipDrawRectanglesI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, rects: CPointer<Win32__impl_l0.Rect>, count: Int32): Int32
-    func GdipDrawString(graphics: CPointer<Win32__impl_l0.GpGraphics>, string: CPointer<UInt16>, length: Int32, font: CPointer<Win32__impl_l0.GpFont>, layoutRect: CPointer<Win32__impl_l0.RectF>, stringFormat: CPointer<Win32__impl_l0.GpStringFormat>, brush: CPointer<Win32__impl_l0.GpBrush>): Int32
-    func GdipEndContainer(graphics: CPointer<Win32__impl_l0.GpGraphics>, state: UInt32): Int32
-    func GdipEnumerateMetafileDestPoint(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destPoint: CPointer<Win32__impl_l0.PointF>, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32
-    func GdipEnumerateMetafileDestPointI(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destPoint: CPointer<Win32__impl_l0.Point>, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32
-    func GdipEnumerateMetafileDestPoints(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destPoints: CPointer<Win32__impl_l0.PointF>, count: Int32, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32
-    func GdipEnumerateMetafileDestPointsI(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destPoints: CPointer<Win32__impl_l0.Point>, count: Int32, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32
-    func GdipEnumerateMetafileDestRect(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destRect: CPointer<Win32__impl_l0.RectF>, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32
-    func GdipEnumerateMetafileDestRectI(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destRect: CPointer<Win32__impl_l0.Rect>, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32
-    func GdipEnumerateMetafileSrcRectDestPoint(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destPoint: CPointer<Win32__impl_l0.PointF>, srcRect: CPointer<Win32__impl_l0.RectF>, srcUnit: Int32, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32
-    func GdipEnumerateMetafileSrcRectDestPointI(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destPoint: CPointer<Win32__impl_l0.Point>, srcRect: CPointer<Win32__impl_l0.Rect>, srcUnit: Int32, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32
-    func GdipEnumerateMetafileSrcRectDestPoints(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destPoints: CPointer<Win32__impl_l0.PointF>, count: Int32, srcRect: CPointer<Win32__impl_l0.RectF>, srcUnit: Int32, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32
-    func GdipEnumerateMetafileSrcRectDestPointsI(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destPoints: CPointer<Win32__impl_l0.Point>, count: Int32, srcRect: CPointer<Win32__impl_l0.Rect>, srcUnit: Int32, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32
-    func GdipEnumerateMetafileSrcRectDestRect(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destRect: CPointer<Win32__impl_l0.RectF>, srcRect: CPointer<Win32__impl_l0.RectF>, srcUnit: Int32, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32
-    func GdipEnumerateMetafileSrcRectDestRectI(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destRect: CPointer<Win32__impl_l0.Rect>, srcRect: CPointer<Win32__impl_l0.Rect>, srcUnit: Int32, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32
-    func GdipFillClosedCurve(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
-    func GdipFillClosedCurve2(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, points: CPointer<Win32__impl_l0.PointF>, count: Int32, tension: Float32, fillMode: Int32): Int32
-    func GdipFillClosedCurve2I(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, points: CPointer<Win32__impl_l0.Point>, count: Int32, tension: Float32, fillMode: Int32): Int32
-    func GdipFillClosedCurveI(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
-    func GdipFillEllipse(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, x: Float32, y: Float32, width: Float32, height: Float32): Int32
-    func GdipFillEllipseI(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, x: Int32, y: Int32, width: Int32, height: Int32): Int32
-    func GdipFillPath(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, path: CPointer<Win32__impl_l0.GpPath>): Int32
-    func GdipFillPie(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, x: Float32, y: Float32, width: Float32, height: Float32, startAngle: Float32, sweepAngle: Float32): Int32
-    func GdipFillPieI(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, x: Int32, y: Int32, width: Int32, height: Int32, startAngle: Float32, sweepAngle: Float32): Int32
-    func GdipFillPolygon(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, points: CPointer<Win32__impl_l0.PointF>, count: Int32, fillMode: Int32): Int32
-    func GdipFillPolygon2(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
-    func GdipFillPolygon2I(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
-    func GdipFillPolygonI(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, points: CPointer<Win32__impl_l0.Point>, count: Int32, fillMode: Int32): Int32
-    func GdipFillRectangle(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, x: Float32, y: Float32, width: Float32, height: Float32): Int32
-    func GdipFillRectangleI(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, x: Int32, y: Int32, width: Int32, height: Int32): Int32
-    func GdipFillRectangles(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, rects: CPointer<Win32__impl_l0.RectF>, count: Int32): Int32
-    func GdipFillRectanglesI(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, rects: CPointer<Win32__impl_l0.Rect>, count: Int32): Int32
-    func GdipFillRegion(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, region: CPointer<Win32__impl_l0.GpRegion>): Int32
-    func GdipFindFirstImageItem(image: CPointer<Win32__impl_l0.GpImage>, item: CPointer<Win32__impl_l0.ImageItemData>): Int32
-    func GdipFindNextImageItem(image: CPointer<Win32__impl_l0.GpImage>, item: CPointer<Win32__impl_l0.ImageItemData>): Int32
-    func GdipFlattenPath(path: CPointer<Win32__impl_l0.GpPath>, matrix: CPointer<Win32__impl_l0.Matrix>, flatness: Float32): Int32
-    func GdipFlush(graphics: CPointer<Win32__impl_l0.GpGraphics>, intention: Int32): Int32
-    func GdipFree(ptr: CPointer<Unit>): Unit
-    func GdipGetAdjustableArrowCapFillState(cap: CPointer<Win32__impl_l0.GpAdjustableArrowCap>, fillState: CPointer<Int32>): Int32
-    func GdipGetAdjustableArrowCapHeight(cap: CPointer<Win32__impl_l0.GpAdjustableArrowCap>, height: CPointer<Float32>): Int32
-    func GdipGetAdjustableArrowCapMiddleInset(cap: CPointer<Win32__impl_l0.GpAdjustableArrowCap>, middleInset: CPointer<Float32>): Int32
-    func GdipGetAdjustableArrowCapWidth(cap: CPointer<Win32__impl_l0.GpAdjustableArrowCap>, width: CPointer<Float32>): Int32
-    func GdipGetAllPropertyItems(image: CPointer<Win32__impl_l0.GpImage>, totalBufferSize: UInt32, numProperties: UInt32, allItems: CPointer<Win32__impl_l0.PropertyItem>): Int32
-    func GdipGetBrushType(brush: CPointer<Win32__impl_l0.GpBrush>, type_: CPointer<Int32>): Int32
-    func GdipGetCellAscent(family: CPointer<Win32__impl_l0.GpFontFamily>, style: Int32, CellAscent: CPointer<UInt16>): Int32
-    func GdipGetCellDescent(family: CPointer<Win32__impl_l0.GpFontFamily>, style: Int32, CellDescent: CPointer<UInt16>): Int32
-    func GdipGetClip(graphics: CPointer<Win32__impl_l0.GpGraphics>, region: CPointer<Win32__impl_l0.GpRegion>): Int32
-    func GdipGetClipBounds(graphics: CPointer<Win32__impl_l0.GpGraphics>, rect: CPointer<Win32__impl_l0.RectF>): Int32
-    func GdipGetClipBoundsI(graphics: CPointer<Win32__impl_l0.GpGraphics>, rect: CPointer<Win32__impl_l0.Rect>): Int32
-    func GdipGetCompositingMode(graphics: CPointer<Win32__impl_l0.GpGraphics>, compositingMode: CPointer<Int32>): Int32
-    func GdipGetCompositingQuality(graphics: CPointer<Win32__impl_l0.GpGraphics>, compositingQuality: CPointer<Int32>): Int32
-    func GdipGetCustomLineCapBaseCap(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, baseCap: CPointer<Int32>): Int32
-    func GdipGetCustomLineCapBaseInset(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, inset: CPointer<Float32>): Int32
-    func GdipGetCustomLineCapStrokeCaps(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, startCap: CPointer<Int32>, endCap: CPointer<Int32>): Int32
-    func GdipGetCustomLineCapStrokeJoin(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, lineJoin: CPointer<Int32>): Int32
-    func GdipGetCustomLineCapType(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, capType: CPointer<Int32>): Int32
-    func GdipGetCustomLineCapWidthScale(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, widthScale: CPointer<Float32>): Int32
-    func GdipGetDpiX(graphics: CPointer<Win32__impl_l0.GpGraphics>, dpi: CPointer<Float32>): Int32
-    func GdipGetDpiY(graphics: CPointer<Win32__impl_l0.GpGraphics>, dpi: CPointer<Float32>): Int32
-    func GdipGetEffectParameterSize(effect: CPointer<Win32__impl_l0.CGpEffect>, size: CPointer<UInt32>): Int32
-    func GdipGetEffectParameters(effect: CPointer<Win32__impl_l0.CGpEffect>, size: CPointer<UInt32>, params: CPointer<Unit>): Int32
-    func GdipGetEmHeight(family: CPointer<Win32__impl_l0.GpFontFamily>, style: Int32, EmHeight: CPointer<UInt16>): Int32
-    func GdipGetEncoderParameterList(image: CPointer<Win32__impl_l0.GpImage>, clsidEncoder: CPointer<GUID>, size: UInt32, buffer: CPointer<Win32__impl_l1.EncoderParameters>): Int32
-    func GdipGetEncoderParameterListSize(image: CPointer<Win32__impl_l0.GpImage>, clsidEncoder: CPointer<GUID>, size: CPointer<UInt32>): Int32
-    func GdipGetFamily(font: CPointer<Win32__impl_l0.GpFont>, family: CPointer<CPointer<Win32__impl_l0.GpFontFamily>>): Int32
-    // param-hint: name fixed=32
-    func GdipGetFamilyName(family: CPointer<Win32__impl_l0.GpFontFamily>, name: CPointer<UInt16>, language: UInt16): Int32
-    func GdipGetFontCollectionFamilyCount(fontCollection: CPointer<Win32__impl_l0.GpFontCollection>, numFound: CPointer<Int32>): Int32
-    // param-hint: gpfamilies len=param[1]
-    func GdipGetFontCollectionFamilyList(fontCollection: CPointer<Win32__impl_l0.GpFontCollection>, numSought: Int32, gpfamilies: CPointer<CPointer<Win32__impl_l0.GpFontFamily>>, numFound: CPointer<Int32>): Int32
-    func GdipGetFontHeight(font: CPointer<Win32__impl_l0.GpFont>, graphics: CPointer<Win32__impl_l0.GpGraphics>, height: CPointer<Float32>): Int32
-    func GdipGetFontHeightGivenDPI(font: CPointer<Win32__impl_l0.GpFont>, dpi: Float32, height: CPointer<Float32>): Int32
-    func GdipGetFontSize(font: CPointer<Win32__impl_l0.GpFont>, size: CPointer<Float32>): Int32
-    func GdipGetFontStyle(font: CPointer<Win32__impl_l0.GpFont>, style: CPointer<Int32>): Int32
-    func GdipGetFontUnit(font: CPointer<Win32__impl_l0.GpFont>, unit: CPointer<Int32>): Int32
-    func GdipGetGenericFontFamilyMonospace(nativeFamily: CPointer<CPointer<Win32__impl_l0.GpFontFamily>>): Int32
-    func GdipGetGenericFontFamilySansSerif(nativeFamily: CPointer<CPointer<Win32__impl_l0.GpFontFamily>>): Int32
-    func GdipGetGenericFontFamilySerif(nativeFamily: CPointer<CPointer<Win32__impl_l0.GpFontFamily>>): Int32
-    func GdipGetHatchBackgroundColor(brush: CPointer<Win32__impl_l0.GpHatch>, backcol: CPointer<UInt32>): Int32
-    func GdipGetHatchForegroundColor(brush: CPointer<Win32__impl_l0.GpHatch>, forecol: CPointer<UInt32>): Int32
-    func GdipGetHatchStyle(brush: CPointer<Win32__impl_l0.GpHatch>, hatchstyle: CPointer<Int32>): Int32
-    func GdipGetImageAttributesAdjustedPalette(imageAttr: CPointer<Win32__impl_l0.GpImageAttributes>, colorPalette: CPointer<Win32__impl_l0.ColorPalette>, colorAdjustType: Int32): Int32
-    func GdipGetImageBounds(image: CPointer<Win32__impl_l0.GpImage>, srcRect: CPointer<Win32__impl_l0.RectF>, srcUnit: CPointer<Int32>): Int32
-    // param-hint: decoders bytes=param[1]
-    func GdipGetImageDecoders(numDecoders: UInt32, size: UInt32, decoders: CPointer<Win32__impl_l0.ImageCodecInfo>): Int32
-    func GdipGetImageDecodersSize(numDecoders: CPointer<UInt32>, size: CPointer<UInt32>): Int32
-    func GdipGetImageDimension(image: CPointer<Win32__impl_l0.GpImage>, width: CPointer<Float32>, height: CPointer<Float32>): Int32
-    // param-hint: encoders bytes=param[1]
-    func GdipGetImageEncoders(numEncoders: UInt32, size: UInt32, encoders: CPointer<Win32__impl_l0.ImageCodecInfo>): Int32
-    func GdipGetImageEncodersSize(numEncoders: CPointer<UInt32>, size: CPointer<UInt32>): Int32
-    func GdipGetImageFlags(image: CPointer<Win32__impl_l0.GpImage>, flags: CPointer<UInt32>): Int32
-    func GdipGetImageGraphicsContext(image: CPointer<Win32__impl_l0.GpImage>, graphics: CPointer<CPointer<Win32__impl_l0.GpGraphics>>): Int32
-    func GdipGetImageHeight(image: CPointer<Win32__impl_l0.GpImage>, height: CPointer<UInt32>): Int32
-    func GdipGetImageHorizontalResolution(image: CPointer<Win32__impl_l0.GpImage>, resolution: CPointer<Float32>): Int32
-    func GdipGetImageItemData(image: CPointer<Win32__impl_l0.GpImage>, item: CPointer<Win32__impl_l0.ImageItemData>): Int32
-    func GdipGetImagePalette(image: CPointer<Win32__impl_l0.GpImage>, palette: CPointer<Win32__impl_l0.ColorPalette>, size: Int32): Int32
-    func GdipGetImagePaletteSize(image: CPointer<Win32__impl_l0.GpImage>, size: CPointer<Int32>): Int32
-    func GdipGetImagePixelFormat(image: CPointer<Win32__impl_l0.GpImage>, format: CPointer<Int32>): Int32
-    func GdipGetImageRawFormat(image: CPointer<Win32__impl_l0.GpImage>, format: CPointer<GUID>): Int32
-    func GdipGetImageThumbnail(image: CPointer<Win32__impl_l0.GpImage>, thumbWidth: UInt32, thumbHeight: UInt32, thumbImage: CPointer<CPointer<Win32__impl_l0.GpImage>>, callback: IntNative, callbackData: CPointer<Unit>): Int32
-    func GdipGetImageType(image: CPointer<Win32__impl_l0.GpImage>, type_: CPointer<Int32>): Int32
-    func GdipGetImageVerticalResolution(image: CPointer<Win32__impl_l0.GpImage>, resolution: CPointer<Float32>): Int32
-    func GdipGetImageWidth(image: CPointer<Win32__impl_l0.GpImage>, width: CPointer<UInt32>): Int32
-    func GdipGetInterpolationMode(graphics: CPointer<Win32__impl_l0.GpGraphics>, interpolationMode: CPointer<Int32>): Int32
-    func GdipGetLineBlend(brush: CPointer<Win32__impl_l0.GpLineGradient>, blend: CPointer<Float32>, positions: CPointer<Float32>, count: Int32): Int32
-    func GdipGetLineBlendCount(brush: CPointer<Win32__impl_l0.GpLineGradient>, count: CPointer<Int32>): Int32
-    func GdipGetLineColors(brush: CPointer<Win32__impl_l0.GpLineGradient>, colors: CPointer<UInt32>): Int32
-    func GdipGetLineGammaCorrection(brush: CPointer<Win32__impl_l0.GpLineGradient>, useGammaCorrection: CPointer<Int32>): Int32
-    func GdipGetLinePresetBlend(brush: CPointer<Win32__impl_l0.GpLineGradient>, blend: CPointer<UInt32>, positions: CPointer<Float32>, count: Int32): Int32
-    func GdipGetLinePresetBlendCount(brush: CPointer<Win32__impl_l0.GpLineGradient>, count: CPointer<Int32>): Int32
-    func GdipGetLineRect(brush: CPointer<Win32__impl_l0.GpLineGradient>, rect: CPointer<Win32__impl_l0.RectF>): Int32
-    func GdipGetLineRectI(brush: CPointer<Win32__impl_l0.GpLineGradient>, rect: CPointer<Win32__impl_l0.Rect>): Int32
-    func GdipGetLineSpacing(family: CPointer<Win32__impl_l0.GpFontFamily>, style: Int32, LineSpacing: CPointer<UInt16>): Int32
-    func GdipGetLineTransform(brush: CPointer<Win32__impl_l0.GpLineGradient>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32
-    func GdipGetLineWrapMode(brush: CPointer<Win32__impl_l0.GpLineGradient>, wrapmode: CPointer<Int32>): Int32
-    func GdipGetMatrixElements(matrix: CPointer<Win32__impl_l0.Matrix>, matrixOut: CPointer<Float32>): Int32
-    func GdipGetMetafileDownLevelRasterizationLimit(metafile: CPointer<Win32__impl_l0.GpMetafile>, metafileRasterizationLimitDpi: CPointer<UInt32>): Int32
-    func GdipGetNearestColor(graphics: CPointer<Win32__impl_l0.GpGraphics>, argb: CPointer<UInt32>): Int32
-    func GdipGetPageScale(graphics: CPointer<Win32__impl_l0.GpGraphics>, scale: CPointer<Float32>): Int32
-    func GdipGetPageUnit(graphics: CPointer<Win32__impl_l0.GpGraphics>, unit: CPointer<Int32>): Int32
-    func GdipGetPathData(path: CPointer<Win32__impl_l0.GpPath>, pathData: CPointer<Win32__impl_l0.PathData>): Int32
-    func GdipGetPathFillMode(path: CPointer<Win32__impl_l0.GpPath>, fillmode: CPointer<Int32>): Int32
-    func GdipGetPathGradientBlend(brush: CPointer<Win32__impl_l0.GpPathGradient>, blend: CPointer<Float32>, positions: CPointer<Float32>, count: Int32): Int32
-    func GdipGetPathGradientBlendCount(brush: CPointer<Win32__impl_l0.GpPathGradient>, count: CPointer<Int32>): Int32
-    func GdipGetPathGradientCenterColor(brush: CPointer<Win32__impl_l0.GpPathGradient>, colors: CPointer<UInt32>): Int32
-    func GdipGetPathGradientCenterPoint(brush: CPointer<Win32__impl_l0.GpPathGradient>, points: CPointer<Win32__impl_l0.PointF>): Int32
-    func GdipGetPathGradientCenterPointI(brush: CPointer<Win32__impl_l0.GpPathGradient>, points: CPointer<Win32__impl_l0.Point>): Int32
-    func GdipGetPathGradientFocusScales(brush: CPointer<Win32__impl_l0.GpPathGradient>, xScale: CPointer<Float32>, yScale: CPointer<Float32>): Int32
-    func GdipGetPathGradientGammaCorrection(brush: CPointer<Win32__impl_l0.GpPathGradient>, useGammaCorrection: CPointer<Int32>): Int32
-    func GdipGetPathGradientPath(brush: CPointer<Win32__impl_l0.GpPathGradient>, path: CPointer<Win32__impl_l0.GpPath>): Int32
-    func GdipGetPathGradientPointCount(brush: CPointer<Win32__impl_l0.GpPathGradient>, count: CPointer<Int32>): Int32
-    func GdipGetPathGradientPresetBlend(brush: CPointer<Win32__impl_l0.GpPathGradient>, blend: CPointer<UInt32>, positions: CPointer<Float32>, count: Int32): Int32
-    func GdipGetPathGradientPresetBlendCount(brush: CPointer<Win32__impl_l0.GpPathGradient>, count: CPointer<Int32>): Int32
-    func GdipGetPathGradientRect(brush: CPointer<Win32__impl_l0.GpPathGradient>, rect: CPointer<Win32__impl_l0.RectF>): Int32
-    func GdipGetPathGradientRectI(brush: CPointer<Win32__impl_l0.GpPathGradient>, rect: CPointer<Win32__impl_l0.Rect>): Int32
-    func GdipGetPathGradientSurroundColorCount(brush: CPointer<Win32__impl_l0.GpPathGradient>, count: CPointer<Int32>): Int32
-    // param-hint: color len=param[2]
-    func GdipGetPathGradientSurroundColorsWithCount(brush: CPointer<Win32__impl_l0.GpPathGradient>, color: CPointer<UInt32>, count: CPointer<Int32>): Int32
-    func GdipGetPathGradientTransform(brush: CPointer<Win32__impl_l0.GpPathGradient>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32
-    func GdipGetPathGradientWrapMode(brush: CPointer<Win32__impl_l0.GpPathGradient>, wrapmode: CPointer<Int32>): Int32
-    func GdipGetPathLastPoint(path: CPointer<Win32__impl_l0.GpPath>, lastPoint: CPointer<Win32__impl_l0.PointF>): Int32
-    func GdipGetPathPoints(param0: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
-    func GdipGetPathPointsI(param0: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
-    // param-hint: types bytes=param[2]
-    func GdipGetPathTypes(path: CPointer<Win32__impl_l0.GpPath>, types: CPointer<UInt8>, count: Int32): Int32
-    func GdipGetPathWorldBounds(path: CPointer<Win32__impl_l0.GpPath>, bounds: CPointer<Win32__impl_l0.RectF>, matrix: CPointer<Win32__impl_l0.Matrix>, pen: CPointer<Win32__impl_l0.GpPen>): Int32
-    func GdipGetPathWorldBoundsI(path: CPointer<Win32__impl_l0.GpPath>, bounds: CPointer<Win32__impl_l0.Rect>, matrix: CPointer<Win32__impl_l0.Matrix>, pen: CPointer<Win32__impl_l0.GpPen>): Int32
-    func GdipGetPenBrushFill(pen: CPointer<Win32__impl_l0.GpPen>, brush: CPointer<CPointer<Win32__impl_l0.GpBrush>>): Int32
-    func GdipGetPenColor(pen: CPointer<Win32__impl_l0.GpPen>, argb: CPointer<UInt32>): Int32
-    func GdipGetPenCompoundArray(pen: CPointer<Win32__impl_l0.GpPen>, dash: CPointer<Float32>, count: Int32): Int32
-    func GdipGetPenCompoundCount(pen: CPointer<Win32__impl_l0.GpPen>, count: CPointer<Int32>): Int32
-    func GdipGetPenCustomEndCap(pen: CPointer<Win32__impl_l0.GpPen>, customCap: CPointer<CPointer<Win32__impl_l0.GpCustomLineCap>>): Int32
-    func GdipGetPenCustomStartCap(pen: CPointer<Win32__impl_l0.GpPen>, customCap: CPointer<CPointer<Win32__impl_l0.GpCustomLineCap>>): Int32
-    func GdipGetPenDashArray(pen: CPointer<Win32__impl_l0.GpPen>, dash: CPointer<Float32>, count: Int32): Int32
-    func GdipGetPenDashCap197819(pen: CPointer<Win32__impl_l0.GpPen>, dashCap: CPointer<Int32>): Int32
-    func GdipGetPenDashCount(pen: CPointer<Win32__impl_l0.GpPen>, count: CPointer<Int32>): Int32
-    func GdipGetPenDashOffset(pen: CPointer<Win32__impl_l0.GpPen>, offset: CPointer<Float32>): Int32
-    func GdipGetPenDashStyle(pen: CPointer<Win32__impl_l0.GpPen>, dashstyle: CPointer<Int32>): Int32
-    func GdipGetPenEndCap(pen: CPointer<Win32__impl_l0.GpPen>, endCap: CPointer<Int32>): Int32
-    func GdipGetPenFillType(pen: CPointer<Win32__impl_l0.GpPen>, type_: CPointer<Int32>): Int32
-    func GdipGetPenLineJoin(pen: CPointer<Win32__impl_l0.GpPen>, lineJoin: CPointer<Int32>): Int32
-    func GdipGetPenMiterLimit(pen: CPointer<Win32__impl_l0.GpPen>, miterLimit: CPointer<Float32>): Int32
-    func GdipGetPenMode(pen: CPointer<Win32__impl_l0.GpPen>, penMode: CPointer<Int32>): Int32
-    func GdipGetPenStartCap(pen: CPointer<Win32__impl_l0.GpPen>, startCap: CPointer<Int32>): Int32
-    func GdipGetPenTransform(pen: CPointer<Win32__impl_l0.GpPen>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32
-    func GdipGetPenUnit(pen: CPointer<Win32__impl_l0.GpPen>, unit: CPointer<Int32>): Int32
-    func GdipGetPenWidth(pen: CPointer<Win32__impl_l0.GpPen>, width: CPointer<Float32>): Int32
-    func GdipGetPixelOffsetMode(graphics: CPointer<Win32__impl_l0.GpGraphics>, pixelOffsetMode: CPointer<Int32>): Int32
-    func GdipGetPointCount(path: CPointer<Win32__impl_l0.GpPath>, count: CPointer<Int32>): Int32
-    func GdipGetPropertyCount(image: CPointer<Win32__impl_l0.GpImage>, numOfProperty: CPointer<UInt32>): Int32
-    func GdipGetPropertyIdList(image: CPointer<Win32__impl_l0.GpImage>, numOfProperty: UInt32, list: CPointer<UInt32>): Int32
-    func GdipGetPropertyItem(image: CPointer<Win32__impl_l0.GpImage>, propId: UInt32, propSize: UInt32, buffer: CPointer<Win32__impl_l0.PropertyItem>): Int32
-    func GdipGetPropertyItemSize(image: CPointer<Win32__impl_l0.GpImage>, propId: UInt32, size: CPointer<UInt32>): Int32
-    func GdipGetPropertySize(image: CPointer<Win32__impl_l0.GpImage>, totalBufferSize: CPointer<UInt32>, numProperties: CPointer<UInt32>): Int32
-    func GdipGetRegionBounds(region: CPointer<Win32__impl_l0.GpRegion>, graphics: CPointer<Win32__impl_l0.GpGraphics>, rect: CPointer<Win32__impl_l0.RectF>): Int32
-    func GdipGetRegionBoundsI(region: CPointer<Win32__impl_l0.GpRegion>, graphics: CPointer<Win32__impl_l0.GpGraphics>, rect: CPointer<Win32__impl_l0.Rect>): Int32
-    // param-hint: buffer len=param[2]
-    // param-hint: sizeFilled optional
-    func GdipGetRegionData(region: CPointer<Win32__impl_l0.GpRegion>, buffer: CPointer<UInt8>, bufferSize: UInt32, sizeFilled: CPointer<UInt32>): Int32
-    func GdipGetRegionDataSize(region: CPointer<Win32__impl_l0.GpRegion>, bufferSize: CPointer<UInt32>): Int32
-    func GdipGetRegionScans(region: CPointer<Win32__impl_l0.GpRegion>, rects: CPointer<Win32__impl_l0.RectF>, count: CPointer<Int32>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32
-    func GdipGetRegionScansCount(region: CPointer<Win32__impl_l0.GpRegion>, count: CPointer<UInt32>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32
-    func GdipGetRegionScansI(region: CPointer<Win32__impl_l0.GpRegion>, rects: CPointer<Win32__impl_l0.Rect>, count: CPointer<Int32>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32
-    func GdipGetRenderingOrigin(graphics: CPointer<Win32__impl_l0.GpGraphics>, x: CPointer<Int32>, y: CPointer<Int32>): Int32
-    func GdipGetSmoothingMode(graphics: CPointer<Win32__impl_l0.GpGraphics>, smoothingMode: CPointer<Int32>): Int32
-    func GdipGetSolidFillColor(brush: CPointer<Win32__impl_l0.GpSolidFill>, color: CPointer<UInt32>): Int32
-    func GdipGetStringFormatAlign(format: CPointer<Win32__impl_l0.GpStringFormat>, align: CPointer<Int32>): Int32
-    func GdipGetStringFormatDigitSubstitution(format: CPointer<Win32__impl_l0.GpStringFormat>, language: CPointer<UInt16>, substitute: CPointer<Int32>): Int32
-    func GdipGetStringFormatFlags(format: CPointer<Win32__impl_l0.GpStringFormat>, flags: CPointer<Int32>): Int32
-    func GdipGetStringFormatHotkeyPrefix(format: CPointer<Win32__impl_l0.GpStringFormat>, hotkeyPrefix: CPointer<Int32>): Int32
-    func GdipGetStringFormatLineAlign(format: CPointer<Win32__impl_l0.GpStringFormat>, align: CPointer<Int32>): Int32
-    func GdipGetStringFormatMeasurableCharacterRangeCount(format: CPointer<Win32__impl_l0.GpStringFormat>, count: CPointer<Int32>): Int32
-    func GdipGetStringFormatTabStopCount(format: CPointer<Win32__impl_l0.GpStringFormat>, count: CPointer<Int32>): Int32
-    func GdipGetStringFormatTabStops(format: CPointer<Win32__impl_l0.GpStringFormat>, count: Int32, firstTabOffset: CPointer<Float32>, tabStops: CPointer<Float32>): Int32
-    func GdipGetStringFormatTrimming(format: CPointer<Win32__impl_l0.GpStringFormat>, trimming: CPointer<Int32>): Int32
-    func GdipGetTextContrast(graphics: CPointer<Win32__impl_l0.GpGraphics>, contrast: CPointer<UInt32>): Int32
-    func GdipGetTextRenderingHint(graphics: CPointer<Win32__impl_l0.GpGraphics>, mode: CPointer<Int32>): Int32
-    func GdipGetTextureImage(brush: CPointer<Win32__impl_l0.GpTexture>, image: CPointer<CPointer<Win32__impl_l0.GpImage>>): Int32
-    func GdipGetTextureTransform(brush: CPointer<Win32__impl_l0.GpTexture>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32
-    func GdipGetTextureWrapMode(brush: CPointer<Win32__impl_l0.GpTexture>, wrapmode: CPointer<Int32>): Int32
-    func GdipGetVisibleClipBounds(graphics: CPointer<Win32__impl_l0.GpGraphics>, rect: CPointer<Win32__impl_l0.RectF>): Int32
-    func GdipGetVisibleClipBoundsI(graphics: CPointer<Win32__impl_l0.GpGraphics>, rect: CPointer<Win32__impl_l0.Rect>): Int32
-    func GdipGetWorldTransform(graphics: CPointer<Win32__impl_l0.GpGraphics>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32
-    func GdipGraphicsClear(graphics: CPointer<Win32__impl_l0.GpGraphics>, color: UInt32): Int32
-    func GdipGraphicsSetAbort(pGraphics: CPointer<Win32__impl_l0.GpGraphics>, pIAbort: CPointer<Unit>): Int32
-    func GdipImageForceValidation(image: CPointer<Win32__impl_l0.GpImage>): Int32
-    func GdipImageGetFrameCount(image: CPointer<Win32__impl_l0.GpImage>, dimensionID: CPointer<GUID>, count: CPointer<UInt32>): Int32
-    func GdipImageGetFrameDimensionsCount(image: CPointer<Win32__impl_l0.GpImage>, count: CPointer<UInt32>): Int32
-    func GdipImageGetFrameDimensionsList(image: CPointer<Win32__impl_l0.GpImage>, dimensionIDs: CPointer<GUID>, count: UInt32): Int32
-    func GdipImageRotateFlip(image: CPointer<Win32__impl_l0.GpImage>, rfType: Int32): Int32
-    func GdipImageSelectActiveFrame(image: CPointer<Win32__impl_l0.GpImage>, dimensionID: CPointer<GUID>, frameIndex: UInt32): Int32
-    func GdipImageSetAbort(pImage: CPointer<Win32__impl_l0.GpImage>, pIAbort: CPointer<Unit>): Int32
-    func GdipInitializePalette(palette: CPointer<Win32__impl_l0.ColorPalette>, palettetype: Int32, optimalColors: Int32, useTransparentColor: Int32, bitmap: CPointer<Win32__impl_l0.GpBitmap>): Int32
-    func GdipInvertMatrix(matrix: CPointer<Win32__impl_l0.Matrix>): Int32
-    func GdipIsClipEmpty(graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32
-    func GdipIsEmptyRegion(region: CPointer<Win32__impl_l0.GpRegion>, graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32
-    func GdipIsEqualRegion(region: CPointer<Win32__impl_l0.GpRegion>, region2: CPointer<Win32__impl_l0.GpRegion>, graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32
-    func GdipIsInfiniteRegion(region: CPointer<Win32__impl_l0.GpRegion>, graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32
-    func GdipIsMatrixEqual(matrix: CPointer<Win32__impl_l0.Matrix>, matrix2: CPointer<Win32__impl_l0.Matrix>, result: CPointer<Int32>): Int32
-    func GdipIsMatrixIdentity(matrix: CPointer<Win32__impl_l0.Matrix>, result: CPointer<Int32>): Int32
-    func GdipIsMatrixInvertible(matrix: CPointer<Win32__impl_l0.Matrix>, result: CPointer<Int32>): Int32
-    func GdipIsOutlineVisiblePathPoint(path: CPointer<Win32__impl_l0.GpPath>, x: Float32, y: Float32, pen: CPointer<Win32__impl_l0.GpPen>, graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32
-    func GdipIsOutlineVisiblePathPointI(path: CPointer<Win32__impl_l0.GpPath>, x: Int32, y: Int32, pen: CPointer<Win32__impl_l0.GpPen>, graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32
-    func GdipIsStyleAvailable(family: CPointer<Win32__impl_l0.GpFontFamily>, style: Int32, IsStyleAvailable: CPointer<Int32>): Int32
-    func GdipIsVisibleClipEmpty(graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32
-    func GdipIsVisiblePathPoint(path: CPointer<Win32__impl_l0.GpPath>, x: Float32, y: Float32, graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32
-    func GdipIsVisiblePathPointI(path: CPointer<Win32__impl_l0.GpPath>, x: Int32, y: Int32, graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32
-    func GdipIsVisiblePoint(graphics: CPointer<Win32__impl_l0.GpGraphics>, x: Float32, y: Float32, result: CPointer<Int32>): Int32
-    func GdipIsVisiblePointI(graphics: CPointer<Win32__impl_l0.GpGraphics>, x: Int32, y: Int32, result: CPointer<Int32>): Int32
-    func GdipIsVisibleRect(graphics: CPointer<Win32__impl_l0.GpGraphics>, x: Float32, y: Float32, width: Float32, height: Float32, result: CPointer<Int32>): Int32
-    func GdipIsVisibleRectI(graphics: CPointer<Win32__impl_l0.GpGraphics>, x: Int32, y: Int32, width: Int32, height: Int32, result: CPointer<Int32>): Int32
-    func GdipIsVisibleRegionPoint(region: CPointer<Win32__impl_l0.GpRegion>, x: Float32, y: Float32, graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32
-    func GdipIsVisibleRegionPointI(region: CPointer<Win32__impl_l0.GpRegion>, x: Int32, y: Int32, graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32
-    func GdipIsVisibleRegionRect(region: CPointer<Win32__impl_l0.GpRegion>, x: Float32, y: Float32, width: Float32, height: Float32, graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32
-    func GdipIsVisibleRegionRectI(region: CPointer<Win32__impl_l0.GpRegion>, x: Int32, y: Int32, width: Int32, height: Int32, graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32
-    func GdipLoadImageFromFile(filename: CPointer<UInt16>, image: CPointer<CPointer<Win32__impl_l0.GpImage>>): Int32
-    func GdipLoadImageFromFileICM(filename: CPointer<UInt16>, image: CPointer<CPointer<Win32__impl_l0.GpImage>>): Int32
-    func GdipMeasureCharacterRanges(graphics: CPointer<Win32__impl_l0.GpGraphics>, string: CPointer<UInt16>, length: Int32, font: CPointer<Win32__impl_l0.GpFont>, layoutRect: CPointer<Win32__impl_l0.RectF>, stringFormat: CPointer<Win32__impl_l0.GpStringFormat>, regionCount: Int32, regions: CPointer<CPointer<Win32__impl_l0.GpRegion>>): Int32
-    func GdipMeasureDriverString(graphics: CPointer<Win32__impl_l0.GpGraphics>, text: CPointer<UInt16>, length: Int32, font: CPointer<Win32__impl_l0.GpFont>, positions: CPointer<Win32__impl_l0.PointF>, flags: Int32, matrix: CPointer<Win32__impl_l0.Matrix>, boundingBox: CPointer<Win32__impl_l0.RectF>): Int32
-    func GdipMeasureString(graphics: CPointer<Win32__impl_l0.GpGraphics>, string: CPointer<UInt16>, length: Int32, font: CPointer<Win32__impl_l0.GpFont>, layoutRect: CPointer<Win32__impl_l0.RectF>, stringFormat: CPointer<Win32__impl_l0.GpStringFormat>, boundingBox: CPointer<Win32__impl_l0.RectF>, codepointsFitted: CPointer<Int32>, linesFilled: CPointer<Int32>): Int32
-    func GdipMultiplyLineTransform(brush: CPointer<Win32__impl_l0.GpLineGradient>, matrix: CPointer<Win32__impl_l0.Matrix>, order: Int32): Int32
-    func GdipMultiplyMatrix(matrix: CPointer<Win32__impl_l0.Matrix>, matrix2: CPointer<Win32__impl_l0.Matrix>, order: Int32): Int32
-    func GdipMultiplyPathGradientTransform(brush: CPointer<Win32__impl_l0.GpPathGradient>, matrix: CPointer<Win32__impl_l0.Matrix>, order: Int32): Int32
-    func GdipMultiplyPenTransform(pen: CPointer<Win32__impl_l0.GpPen>, matrix: CPointer<Win32__impl_l0.Matrix>, order: Int32): Int32
-    func GdipMultiplyTextureTransform(brush: CPointer<Win32__impl_l0.GpTexture>, matrix: CPointer<Win32__impl_l0.Matrix>, order: Int32): Int32
-    func GdipMultiplyWorldTransform(graphics: CPointer<Win32__impl_l0.GpGraphics>, matrix: CPointer<Win32__impl_l0.Matrix>, order: Int32): Int32
-    func GdipNewInstalledFontCollection(fontCollection: CPointer<CPointer<Win32__impl_l0.GpFontCollection>>): Int32
-    func GdipNewPrivateFontCollection(fontCollection: CPointer<CPointer<Win32__impl_l0.GpFontCollection>>): Int32
-    func GdipPathIterCopyData(iterator: CPointer<Win32__impl_l0.GpPathIterator>, resultCount: CPointer<Int32>, points: CPointer<Win32__impl_l0.PointF>, types: CPointer<UInt8>, startIndex: Int32, endIndex: Int32): Int32
-    // param-hint: points len=param[4]
-    // param-hint: types len=param[4]
-    func GdipPathIterEnumerate(iterator: CPointer<Win32__impl_l0.GpPathIterator>, resultCount: CPointer<Int32>, points: CPointer<Win32__impl_l0.PointF>, types: CPointer<UInt8>, count: Int32): Int32
-    func GdipPathIterGetCount(iterator: CPointer<Win32__impl_l0.GpPathIterator>, count: CPointer<Int32>): Int32
-    func GdipPathIterGetSubpathCount(iterator: CPointer<Win32__impl_l0.GpPathIterator>, count: CPointer<Int32>): Int32
-    func GdipPathIterHasCurve(iterator: CPointer<Win32__impl_l0.GpPathIterator>, hasCurve: CPointer<Int32>): Int32
-    func GdipPathIterIsValid(iterator: CPointer<Win32__impl_l0.GpPathIterator>, valid: CPointer<Int32>): Int32
-    func GdipPathIterNextMarker(iterator: CPointer<Win32__impl_l0.GpPathIterator>, resultCount: CPointer<Int32>, startIndex: CPointer<Int32>, endIndex: CPointer<Int32>): Int32
-    func GdipPathIterNextMarkerPath(iterator: CPointer<Win32__impl_l0.GpPathIterator>, resultCount: CPointer<Int32>, path: CPointer<Win32__impl_l0.GpPath>): Int32
-    func GdipPathIterNextPathType(iterator: CPointer<Win32__impl_l0.GpPathIterator>, resultCount: CPointer<Int32>, pathType: CPointer<UInt8>, startIndex: CPointer<Int32>, endIndex: CPointer<Int32>): Int32
-    func GdipPathIterNextSubpath(iterator: CPointer<Win32__impl_l0.GpPathIterator>, resultCount: CPointer<Int32>, startIndex: CPointer<Int32>, endIndex: CPointer<Int32>, isClosed: CPointer<Int32>): Int32
-    func GdipPathIterNextSubpathPath(iterator: CPointer<Win32__impl_l0.GpPathIterator>, resultCount: CPointer<Int32>, path: CPointer<Win32__impl_l0.GpPath>, isClosed: CPointer<Int32>): Int32
-    func GdipPathIterRewind(iterator: CPointer<Win32__impl_l0.GpPathIterator>): Int32
-    func GdipPlayMetafileRecord(metafile: CPointer<Win32__impl_l0.GpMetafile>, recordType: Int32, flags: UInt32, dataSize: UInt32, data: CPointer<UInt8>): Int32
-    func GdipPrivateAddFontFile(fontCollection: CPointer<Win32__impl_l0.GpFontCollection>, filename: CPointer<UInt16>): Int32
-    func GdipPrivateAddMemoryFont(fontCollection: CPointer<Win32__impl_l0.GpFontCollection>, memory: CPointer<Unit>, length: Int32): Int32
-    func GdipRemovePropertyItem(image: CPointer<Win32__impl_l0.GpImage>, propId: UInt32): Int32
-    func GdipResetClip(graphics: CPointer<Win32__impl_l0.GpGraphics>): Int32
-    func GdipResetImageAttributes(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, type_: Int32): Int32
-    func GdipResetLineTransform(brush: CPointer<Win32__impl_l0.GpLineGradient>): Int32
-    func GdipResetPageTransform(graphics: CPointer<Win32__impl_l0.GpGraphics>): Int32
-    func GdipResetPath(path: CPointer<Win32__impl_l0.GpPath>): Int32
-    func GdipResetPathGradientTransform(brush: CPointer<Win32__impl_l0.GpPathGradient>): Int32
-    func GdipResetPenTransform(pen: CPointer<Win32__impl_l0.GpPen>): Int32
-    func GdipResetTextureTransform(brush: CPointer<Win32__impl_l0.GpTexture>): Int32
-    func GdipResetWorldTransform(graphics: CPointer<Win32__impl_l0.GpGraphics>): Int32
-    func GdipRestoreGraphics(graphics: CPointer<Win32__impl_l0.GpGraphics>, state: UInt32): Int32
-    func GdipReversePath(path: CPointer<Win32__impl_l0.GpPath>): Int32
-    func GdipRotateLineTransform(brush: CPointer<Win32__impl_l0.GpLineGradient>, angle: Float32, order: Int32): Int32
-    func GdipRotateMatrix(matrix: CPointer<Win32__impl_l0.Matrix>, angle: Float32, order: Int32): Int32
-    func GdipRotatePathGradientTransform(brush: CPointer<Win32__impl_l0.GpPathGradient>, angle: Float32, order: Int32): Int32
-    func GdipRotatePenTransform(pen: CPointer<Win32__impl_l0.GpPen>, angle: Float32, order: Int32): Int32
-    func GdipRotateTextureTransform(brush: CPointer<Win32__impl_l0.GpTexture>, angle: Float32, order: Int32): Int32
-    func GdipRotateWorldTransform(graphics: CPointer<Win32__impl_l0.GpGraphics>, angle: Float32, order: Int32): Int32
-    func GdipSaveAdd(image: CPointer<Win32__impl_l0.GpImage>, encoderParams: CPointer<Win32__impl_l1.EncoderParameters>): Int32
-    func GdipSaveAddImage(image: CPointer<Win32__impl_l0.GpImage>, newImage: CPointer<Win32__impl_l0.GpImage>, encoderParams: CPointer<Win32__impl_l1.EncoderParameters>): Int32
-    func GdipSaveGraphics(graphics: CPointer<Win32__impl_l0.GpGraphics>, state: CPointer<UInt32>): Int32
-    func GdipSaveImageToFile(image: CPointer<Win32__impl_l0.GpImage>, filename: CPointer<UInt16>, clsidEncoder: CPointer<GUID>, encoderParams: CPointer<Win32__impl_l1.EncoderParameters>): Int32
-    func GdipScaleLineTransform(brush: CPointer<Win32__impl_l0.GpLineGradient>, sx: Float32, sy: Float32, order: Int32): Int32
-    func GdipScaleMatrix(matrix: CPointer<Win32__impl_l0.Matrix>, scaleX: Float32, scaleY: Float32, order: Int32): Int32
-    func GdipScalePathGradientTransform(brush: CPointer<Win32__impl_l0.GpPathGradient>, sx: Float32, sy: Float32, order: Int32): Int32
-    func GdipScalePenTransform(pen: CPointer<Win32__impl_l0.GpPen>, sx: Float32, sy: Float32, order: Int32): Int32
-    func GdipScaleTextureTransform(brush: CPointer<Win32__impl_l0.GpTexture>, sx: Float32, sy: Float32, order: Int32): Int32
-    func GdipScaleWorldTransform(graphics: CPointer<Win32__impl_l0.GpGraphics>, sx: Float32, sy: Float32, order: Int32): Int32
-    func GdipSetAdjustableArrowCapFillState(cap: CPointer<Win32__impl_l0.GpAdjustableArrowCap>, fillState: Int32): Int32
-    func GdipSetAdjustableArrowCapHeight(cap: CPointer<Win32__impl_l0.GpAdjustableArrowCap>, height: Float32): Int32
-    func GdipSetAdjustableArrowCapMiddleInset(cap: CPointer<Win32__impl_l0.GpAdjustableArrowCap>, middleInset: Float32): Int32
-    func GdipSetAdjustableArrowCapWidth(cap: CPointer<Win32__impl_l0.GpAdjustableArrowCap>, width: Float32): Int32
-    func GdipSetClipGraphics(graphics: CPointer<Win32__impl_l0.GpGraphics>, srcgraphics: CPointer<Win32__impl_l0.GpGraphics>, combineMode: Int32): Int32
-    func GdipSetClipPath(graphics: CPointer<Win32__impl_l0.GpGraphics>, path: CPointer<Win32__impl_l0.GpPath>, combineMode: Int32): Int32
-    func GdipSetClipRect(graphics: CPointer<Win32__impl_l0.GpGraphics>, x: Float32, y: Float32, width: Float32, height: Float32, combineMode: Int32): Int32
-    func GdipSetClipRectI(graphics: CPointer<Win32__impl_l0.GpGraphics>, x: Int32, y: Int32, width: Int32, height: Int32, combineMode: Int32): Int32
-    func GdipSetClipRegion(graphics: CPointer<Win32__impl_l0.GpGraphics>, region: CPointer<Win32__impl_l0.GpRegion>, combineMode: Int32): Int32
-    func GdipSetCompositingMode(graphics: CPointer<Win32__impl_l0.GpGraphics>, compositingMode: Int32): Int32
-    func GdipSetCompositingQuality(graphics: CPointer<Win32__impl_l0.GpGraphics>, compositingQuality: Int32): Int32
-    func GdipSetCustomLineCapBaseCap(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, baseCap: Int32): Int32
-    func GdipSetCustomLineCapBaseInset(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, inset: Float32): Int32
-    func GdipSetCustomLineCapStrokeCaps(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, startCap: Int32, endCap: Int32): Int32
-    func GdipSetCustomLineCapStrokeJoin(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, lineJoin: Int32): Int32
-    func GdipSetCustomLineCapWidthScale(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, widthScale: Float32): Int32
-    func GdipSetEffectParameters(effect: CPointer<Win32__impl_l0.CGpEffect>, params: CPointer<Unit>, size: UInt32): Int32
-    func GdipSetEmpty(region: CPointer<Win32__impl_l0.GpRegion>): Int32
-    func GdipSetImageAttributesCachedBackground(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, enableFlag: Int32): Int32
-    func GdipSetImageAttributesColorKeys(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, type_: Int32, enableFlag: Int32, colorLow: UInt32, colorHigh: UInt32): Int32
-    func GdipSetImageAttributesColorMatrix(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, type_: Int32, enableFlag: Int32, colorMatrix: CPointer<Win32__impl_l0.ColorMatrix>, grayMatrix: CPointer<Win32__impl_l0.ColorMatrix>, flags: Int32): Int32
-    func GdipSetImageAttributesGamma(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, type_: Int32, enableFlag: Int32, gamma: Float32): Int32
-    func GdipSetImageAttributesNoOp(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, type_: Int32, enableFlag: Int32): Int32
-    func GdipSetImageAttributesOutputChannel(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, type_: Int32, enableFlag: Int32, channelFlags: Int32): Int32
-    func GdipSetImageAttributesOutputChannelColorProfile(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, type_: Int32, enableFlag: Int32, colorProfileFilename: CPointer<UInt16>): Int32
-    func GdipSetImageAttributesRemapTable(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, type_: Int32, enableFlag: Int32, mapSize: UInt32, map: CPointer<Win32__impl_l1.ColorMap>): Int32
-    func GdipSetImageAttributesThreshold(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, type_: Int32, enableFlag: Int32, threshold: Float32): Int32
-    func GdipSetImageAttributesToIdentity(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, type_: Int32): Int32
-    func GdipSetImageAttributesWrapMode(imageAttr: CPointer<Win32__impl_l0.GpImageAttributes>, wrap: Int32, argb: UInt32, clamp: Int32): Int32
-    func GdipSetImagePalette(image: CPointer<Win32__impl_l0.GpImage>, palette: CPointer<Win32__impl_l0.ColorPalette>): Int32
-    func GdipSetInfinite(region: CPointer<Win32__impl_l0.GpRegion>): Int32
-    func GdipSetInterpolationMode(graphics: CPointer<Win32__impl_l0.GpGraphics>, interpolationMode: Int32): Int32
-    func GdipSetLineBlend(brush: CPointer<Win32__impl_l0.GpLineGradient>, blend: CPointer<Float32>, positions: CPointer<Float32>, count: Int32): Int32
-    func GdipSetLineColors(brush: CPointer<Win32__impl_l0.GpLineGradient>, color1: UInt32, color2: UInt32): Int32
-    func GdipSetLineGammaCorrection(brush: CPointer<Win32__impl_l0.GpLineGradient>, useGammaCorrection: Int32): Int32
-    func GdipSetLineLinearBlend(brush: CPointer<Win32__impl_l0.GpLineGradient>, focus: Float32, scale: Float32): Int32
-    func GdipSetLinePresetBlend(brush: CPointer<Win32__impl_l0.GpLineGradient>, blend: CPointer<UInt32>, positions: CPointer<Float32>, count: Int32): Int32
-    func GdipSetLineSigmaBlend(brush: CPointer<Win32__impl_l0.GpLineGradient>, focus: Float32, scale: Float32): Int32
-    func GdipSetLineTransform(brush: CPointer<Win32__impl_l0.GpLineGradient>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32
-    func GdipSetLineWrapMode(brush: CPointer<Win32__impl_l0.GpLineGradient>, wrapmode: Int32): Int32
-    func GdipSetMatrixElements(matrix: CPointer<Win32__impl_l0.Matrix>, m11: Float32, m12: Float32, m21: Float32, m22: Float32, dx: Float32, dy: Float32): Int32
-    func GdipSetMetafileDownLevelRasterizationLimit(metafile: CPointer<Win32__impl_l0.GpMetafile>, metafileRasterizationLimitDpi: UInt32): Int32
-    func GdipSetPageScale(graphics: CPointer<Win32__impl_l0.GpGraphics>, scale: Float32): Int32
-    func GdipSetPageUnit(graphics: CPointer<Win32__impl_l0.GpGraphics>, unit: Int32): Int32
-    func GdipSetPathFillMode(path: CPointer<Win32__impl_l0.GpPath>, fillmode: Int32): Int32
-    func GdipSetPathGradientBlend(brush: CPointer<Win32__impl_l0.GpPathGradient>, blend: CPointer<Float32>, positions: CPointer<Float32>, count: Int32): Int32
-    func GdipSetPathGradientCenterColor(brush: CPointer<Win32__impl_l0.GpPathGradient>, colors: UInt32): Int32
-    func GdipSetPathGradientCenterPoint(brush: CPointer<Win32__impl_l0.GpPathGradient>, points: CPointer<Win32__impl_l0.PointF>): Int32
-    func GdipSetPathGradientCenterPointI(brush: CPointer<Win32__impl_l0.GpPathGradient>, points: CPointer<Win32__impl_l0.Point>): Int32
-    func GdipSetPathGradientFocusScales(brush: CPointer<Win32__impl_l0.GpPathGradient>, xScale: Float32, yScale: Float32): Int32
-    func GdipSetPathGradientGammaCorrection(brush: CPointer<Win32__impl_l0.GpPathGradient>, useGammaCorrection: Int32): Int32
-    func GdipSetPathGradientLinearBlend(brush: CPointer<Win32__impl_l0.GpPathGradient>, focus: Float32, scale: Float32): Int32
-    func GdipSetPathGradientPath(brush: CPointer<Win32__impl_l0.GpPathGradient>, path: CPointer<Win32__impl_l0.GpPath>): Int32
-    func GdipSetPathGradientPresetBlend(brush: CPointer<Win32__impl_l0.GpPathGradient>, blend: CPointer<UInt32>, positions: CPointer<Float32>, count: Int32): Int32
-    func GdipSetPathGradientSigmaBlend(brush: CPointer<Win32__impl_l0.GpPathGradient>, focus: Float32, scale: Float32): Int32
-    func GdipSetPathGradientSurroundColorsWithCount(brush: CPointer<Win32__impl_l0.GpPathGradient>, color: CPointer<UInt32>, count: CPointer<Int32>): Int32
-    func GdipSetPathGradientTransform(brush: CPointer<Win32__impl_l0.GpPathGradient>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32
-    func GdipSetPathGradientWrapMode(brush: CPointer<Win32__impl_l0.GpPathGradient>, wrapmode: Int32): Int32
-    func GdipSetPathMarker(path: CPointer<Win32__impl_l0.GpPath>): Int32
-    func GdipSetPenBrushFill(pen: CPointer<Win32__impl_l0.GpPen>, brush: CPointer<Win32__impl_l0.GpBrush>): Int32
-    func GdipSetPenColor(pen: CPointer<Win32__impl_l0.GpPen>, argb: UInt32): Int32
-    func GdipSetPenCompoundArray(pen: CPointer<Win32__impl_l0.GpPen>, dash: CPointer<Float32>, count: Int32): Int32
-    func GdipSetPenCustomEndCap(pen: CPointer<Win32__impl_l0.GpPen>, customCap: CPointer<Win32__impl_l0.GpCustomLineCap>): Int32
-    func GdipSetPenCustomStartCap(pen: CPointer<Win32__impl_l0.GpPen>, customCap: CPointer<Win32__impl_l0.GpCustomLineCap>): Int32
-    func GdipSetPenDashArray(pen: CPointer<Win32__impl_l0.GpPen>, dash: CPointer<Float32>, count: Int32): Int32
-    func GdipSetPenDashCap197819(pen: CPointer<Win32__impl_l0.GpPen>, dashCap: Int32): Int32
-    func GdipSetPenDashOffset(pen: CPointer<Win32__impl_l0.GpPen>, offset: Float32): Int32
-    func GdipSetPenDashStyle(pen: CPointer<Win32__impl_l0.GpPen>, dashstyle: Int32): Int32
-    func GdipSetPenEndCap(pen: CPointer<Win32__impl_l0.GpPen>, endCap: Int32): Int32
-    func GdipSetPenLineCap197819(pen: CPointer<Win32__impl_l0.GpPen>, startCap: Int32, endCap: Int32, dashCap: Int32): Int32
-    func GdipSetPenLineJoin(pen: CPointer<Win32__impl_l0.GpPen>, lineJoin: Int32): Int32
-    func GdipSetPenMiterLimit(pen: CPointer<Win32__impl_l0.GpPen>, miterLimit: Float32): Int32
-    func GdipSetPenMode(pen: CPointer<Win32__impl_l0.GpPen>, penMode: Int32): Int32
-    func GdipSetPenStartCap(pen: CPointer<Win32__impl_l0.GpPen>, startCap: Int32): Int32
-    func GdipSetPenTransform(pen: CPointer<Win32__impl_l0.GpPen>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32
-    func GdipSetPenUnit(pen: CPointer<Win32__impl_l0.GpPen>, unit: Int32): Int32
-    func GdipSetPenWidth(pen: CPointer<Win32__impl_l0.GpPen>, width: Float32): Int32
-    func GdipSetPixelOffsetMode(graphics: CPointer<Win32__impl_l0.GpGraphics>, pixelOffsetMode: Int32): Int32
-    func GdipSetPropertyItem(image: CPointer<Win32__impl_l0.GpImage>, item: CPointer<Win32__impl_l0.PropertyItem>): Int32
-    func GdipSetRenderingOrigin(graphics: CPointer<Win32__impl_l0.GpGraphics>, x: Int32, y: Int32): Int32
-    func GdipSetSmoothingMode(graphics: CPointer<Win32__impl_l0.GpGraphics>, smoothingMode: Int32): Int32
-    func GdipSetSolidFillColor(brush: CPointer<Win32__impl_l0.GpSolidFill>, color: UInt32): Int32
-    func GdipSetStringFormatAlign(format: CPointer<Win32__impl_l0.GpStringFormat>, align: Int32): Int32
-    func GdipSetStringFormatDigitSubstitution(format: CPointer<Win32__impl_l0.GpStringFormat>, language: UInt16, substitute: Int32): Int32
-    func GdipSetStringFormatFlags(format: CPointer<Win32__impl_l0.GpStringFormat>, flags: Int32): Int32
-    func GdipSetStringFormatHotkeyPrefix(format: CPointer<Win32__impl_l0.GpStringFormat>, hotkeyPrefix: Int32): Int32
-    func GdipSetStringFormatLineAlign(format: CPointer<Win32__impl_l0.GpStringFormat>, align: Int32): Int32
-    func GdipSetStringFormatMeasurableCharacterRanges(format: CPointer<Win32__impl_l0.GpStringFormat>, rangeCount: Int32, ranges: CPointer<Win32__impl_l0.CharacterRange>): Int32
-    func GdipSetStringFormatTabStops(format: CPointer<Win32__impl_l0.GpStringFormat>, firstTabOffset: Float32, count: Int32, tabStops: CPointer<Float32>): Int32
-    func GdipSetStringFormatTrimming(format: CPointer<Win32__impl_l0.GpStringFormat>, trimming: Int32): Int32
-    func GdipSetTextContrast(graphics: CPointer<Win32__impl_l0.GpGraphics>, contrast: UInt32): Int32
-    func GdipSetTextRenderingHint(graphics: CPointer<Win32__impl_l0.GpGraphics>, mode: Int32): Int32
-    func GdipSetTextureTransform(brush: CPointer<Win32__impl_l0.GpTexture>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32
-    func GdipSetTextureWrapMode(brush: CPointer<Win32__impl_l0.GpTexture>, wrapmode: Int32): Int32
-    func GdipSetWorldTransform(graphics: CPointer<Win32__impl_l0.GpGraphics>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32
-    func GdipShearMatrix(matrix: CPointer<Win32__impl_l0.Matrix>, shearX: Float32, shearY: Float32, order: Int32): Int32
-    func GdipStartPathFigure(path: CPointer<Win32__impl_l0.GpPath>): Int32
-    func GdipStringFormatGetGenericDefault(format: CPointer<CPointer<Win32__impl_l0.GpStringFormat>>): Int32
-    func GdipStringFormatGetGenericTypographic(format: CPointer<CPointer<Win32__impl_l0.GpStringFormat>>): Int32
-    func GdipTestControl(control: Int32, param1: CPointer<Unit>): Int32
-    func GdipTransformMatrixPoints(matrix: CPointer<Win32__impl_l0.Matrix>, pts: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
-    func GdipTransformMatrixPointsI(matrix: CPointer<Win32__impl_l0.Matrix>, pts: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
-    func GdipTransformPath(path: CPointer<Win32__impl_l0.GpPath>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32
-    func GdipTransformPoints(graphics: CPointer<Win32__impl_l0.GpGraphics>, destSpace: Int32, srcSpace: Int32, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
-    func GdipTransformPointsI(graphics: CPointer<Win32__impl_l0.GpGraphics>, destSpace: Int32, srcSpace: Int32, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
-    func GdipTransformRegion(region: CPointer<Win32__impl_l0.GpRegion>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32
-    func GdipTranslateClip(graphics: CPointer<Win32__impl_l0.GpGraphics>, dx: Float32, dy: Float32): Int32
-    func GdipTranslateClipI(graphics: CPointer<Win32__impl_l0.GpGraphics>, dx: Int32, dy: Int32): Int32
-    func GdipTranslateLineTransform(brush: CPointer<Win32__impl_l0.GpLineGradient>, dx: Float32, dy: Float32, order: Int32): Int32
-    func GdipTranslateMatrix(matrix: CPointer<Win32__impl_l0.Matrix>, offsetX: Float32, offsetY: Float32, order: Int32): Int32
-    func GdipTranslatePathGradientTransform(brush: CPointer<Win32__impl_l0.GpPathGradient>, dx: Float32, dy: Float32, order: Int32): Int32
-    func GdipTranslatePenTransform(pen: CPointer<Win32__impl_l0.GpPen>, dx: Float32, dy: Float32, order: Int32): Int32
-    func GdipTranslateRegion(region: CPointer<Win32__impl_l0.GpRegion>, dx: Float32, dy: Float32): Int32
-    func GdipTranslateRegionI(region: CPointer<Win32__impl_l0.GpRegion>, dx: Int32, dy: Int32): Int32
-    func GdipTranslateTextureTransform(brush: CPointer<Win32__impl_l0.GpTexture>, dx: Float32, dy: Float32, order: Int32): Int32
-    func GdipTranslateWorldTransform(graphics: CPointer<Win32__impl_l0.GpGraphics>, dx: Float32, dy: Float32, order: Int32): Int32
-    func GdipVectorTransformMatrixPoints(matrix: CPointer<Win32__impl_l0.Matrix>, pts: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
-    func GdipVectorTransformMatrixPointsI(matrix: CPointer<Win32__impl_l0.Matrix>, pts: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
-    func GdipWarpPath(path: CPointer<Win32__impl_l0.GpPath>, matrix: CPointer<Win32__impl_l0.Matrix>, points: CPointer<Win32__impl_l0.PointF>, count: Int32, srcx: Float32, srcy: Float32, srcwidth: Float32, srcheight: Float32, warpMode: Int32, flatness: Float32): Int32
-    func GdipWidenPath(nativePath: CPointer<Win32__impl_l0.GpPath>, pen: CPointer<Win32__impl_l0.GpPen>, matrix: CPointer<Win32__impl_l0.Matrix>, flatness: Float32): Int32
-    func GdipWindingModeOutline(path: CPointer<Win32__impl_l0.GpPath>, matrix: CPointer<Win32__impl_l0.Matrix>, flatness: Float32): Int32
-    func GdiplusNotificationHook(token: CPointer<UIntNative>): Int32
-    func GdiplusNotificationUnhook(token: UIntNative): Unit
-    func GdiplusShutdown(token: UIntNative): Unit
-    func GdiplusStartup(token: CPointer<UIntNative>, input: CPointer<Win32__impl_l0.GdiplusStartupInput>, output: CPointer<Win32__impl_l0.GdiplusStartupOutput>): Int32
 }
 
-@When[GDIPLUS == "on" && (Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on")]
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathArc == "on"]
+public unsafe func Windows_GdipAddPathArc(path: CPointer<Win32__impl_l0.GpPath>, x: Float32, y: Float32, width: Float32, height: Float32, startAngle: Float32, sweepAngle: Float32): Int32 {
+    return GdipAddPathArc(path, x, y, width, height, startAngle, sweepAngle)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathArcI == "on"]
 foreign {
-    func GdipGetMetafileHeaderFromStream(stream: CPointer<Unit>, header: CPointer<Win32__impl_l1.MetafileHeader>): Int32
-    func GdipRecordMetafileStream(stream: CPointer<Unit>, referenceHdc: Win32_Graphics_Gdi.HDC, type_: Int32, frameRect: CPointer<Win32__impl_l0.RectF>, frameUnit: Int32, description: CPointer<UInt16>, metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32
-    func GdipRecordMetafileStreamI(stream: CPointer<Unit>, referenceHdc: Win32_Graphics_Gdi.HDC, type_: Int32, frameRect: CPointer<Win32__impl_l0.Rect>, frameUnit: Int32, description: CPointer<UInt16>, metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32
+    func GdipAddPathArcI(path: CPointer<Win32__impl_l0.GpPath>, x: Int32, y: Int32, width: Int32, height: Int32, startAngle: Float32, sweepAngle: Float32): Int32
 }
 
-@When[GDIPLUS == "on" && Windows_Win32_Graphics_DirectDraw == "on"]
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathArcI == "on"]
+public unsafe func Windows_GdipAddPathArcI(path: CPointer<Win32__impl_l0.GpPath>, x: Int32, y: Int32, width: Int32, height: Int32, startAngle: Float32, sweepAngle: Float32): Int32 {
+    return GdipAddPathArcI(path, x, y, width, height, startAngle, sweepAngle)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathBezier == "on"]
+foreign {
+    func GdipAddPathBezier(path: CPointer<Win32__impl_l0.GpPath>, x1: Float32, y1: Float32, x2: Float32, y2: Float32, x3: Float32, y3: Float32, x4: Float32, y4: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathBezier == "on"]
+public unsafe func Windows_GdipAddPathBezier(path: CPointer<Win32__impl_l0.GpPath>, x1: Float32, y1: Float32, x2: Float32, y2: Float32, x3: Float32, y3: Float32, x4: Float32, y4: Float32): Int32 {
+    return GdipAddPathBezier(path, x1, y1, x2, y2, x3, y3, x4, y4)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathBezierI == "on"]
+foreign {
+    func GdipAddPathBezierI(path: CPointer<Win32__impl_l0.GpPath>, x1: Int32, y1: Int32, x2: Int32, y2: Int32, x3: Int32, y3: Int32, x4: Int32, y4: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathBezierI == "on"]
+public unsafe func Windows_GdipAddPathBezierI(path: CPointer<Win32__impl_l0.GpPath>, x1: Int32, y1: Int32, x2: Int32, y2: Int32, x3: Int32, y3: Int32, x4: Int32, y4: Int32): Int32 {
+    return GdipAddPathBezierI(path, x1, y1, x2, y2, x3, y3, x4, y4)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathBeziers == "on"]
+foreign {
+    func GdipAddPathBeziers(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathBeziers == "on"]
+public unsafe func Windows_GdipAddPathBeziers(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32 {
+    return GdipAddPathBeziers(path, points, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathBeziersI == "on"]
+foreign {
+    func GdipAddPathBeziersI(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathBeziersI == "on"]
+public unsafe func Windows_GdipAddPathBeziersI(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32 {
+    return GdipAddPathBeziersI(path, points, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathClosedCurve == "on"]
+foreign {
+    func GdipAddPathClosedCurve(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathClosedCurve == "on"]
+public unsafe func Windows_GdipAddPathClosedCurve(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32 {
+    return GdipAddPathClosedCurve(path, points, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathClosedCurve2 == "on"]
+foreign {
+    func GdipAddPathClosedCurve2(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.PointF>, count: Int32, tension: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathClosedCurve2 == "on"]
+public unsafe func Windows_GdipAddPathClosedCurve2(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.PointF>, count: Int32, tension: Float32): Int32 {
+    return GdipAddPathClosedCurve2(path, points, count, tension)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathClosedCurve2I == "on"]
+foreign {
+    func GdipAddPathClosedCurve2I(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.Point>, count: Int32, tension: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathClosedCurve2I == "on"]
+public unsafe func Windows_GdipAddPathClosedCurve2I(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.Point>, count: Int32, tension: Float32): Int32 {
+    return GdipAddPathClosedCurve2I(path, points, count, tension)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathClosedCurveI == "on"]
+foreign {
+    func GdipAddPathClosedCurveI(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathClosedCurveI == "on"]
+public unsafe func Windows_GdipAddPathClosedCurveI(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32 {
+    return GdipAddPathClosedCurveI(path, points, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathCurve == "on"]
+foreign {
+    func GdipAddPathCurve(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathCurve == "on"]
+public unsafe func Windows_GdipAddPathCurve(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32 {
+    return GdipAddPathCurve(path, points, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathCurve2 == "on"]
+foreign {
+    func GdipAddPathCurve2(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.PointF>, count: Int32, tension: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathCurve2 == "on"]
+public unsafe func Windows_GdipAddPathCurve2(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.PointF>, count: Int32, tension: Float32): Int32 {
+    return GdipAddPathCurve2(path, points, count, tension)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathCurve2I == "on"]
+foreign {
+    func GdipAddPathCurve2I(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.Point>, count: Int32, tension: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathCurve2I == "on"]
+public unsafe func Windows_GdipAddPathCurve2I(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.Point>, count: Int32, tension: Float32): Int32 {
+    return GdipAddPathCurve2I(path, points, count, tension)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathCurve3 == "on"]
+foreign {
+    func GdipAddPathCurve3(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.PointF>, count: Int32, offset: Int32, numberOfSegments: Int32, tension: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathCurve3 == "on"]
+public unsafe func Windows_GdipAddPathCurve3(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.PointF>, count: Int32, offset: Int32, numberOfSegments: Int32, tension: Float32): Int32 {
+    return GdipAddPathCurve3(path, points, count, offset, numberOfSegments, tension)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathCurve3I == "on"]
+foreign {
+    func GdipAddPathCurve3I(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.Point>, count: Int32, offset: Int32, numberOfSegments: Int32, tension: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathCurve3I == "on"]
+public unsafe func Windows_GdipAddPathCurve3I(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.Point>, count: Int32, offset: Int32, numberOfSegments: Int32, tension: Float32): Int32 {
+    return GdipAddPathCurve3I(path, points, count, offset, numberOfSegments, tension)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathCurveI == "on"]
+foreign {
+    func GdipAddPathCurveI(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathCurveI == "on"]
+public unsafe func Windows_GdipAddPathCurveI(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32 {
+    return GdipAddPathCurveI(path, points, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathEllipse == "on"]
+foreign {
+    func GdipAddPathEllipse(path: CPointer<Win32__impl_l0.GpPath>, x: Float32, y: Float32, width: Float32, height: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathEllipse == "on"]
+public unsafe func Windows_GdipAddPathEllipse(path: CPointer<Win32__impl_l0.GpPath>, x: Float32, y: Float32, width: Float32, height: Float32): Int32 {
+    return GdipAddPathEllipse(path, x, y, width, height)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathEllipseI == "on"]
+foreign {
+    func GdipAddPathEllipseI(path: CPointer<Win32__impl_l0.GpPath>, x: Int32, y: Int32, width: Int32, height: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathEllipseI == "on"]
+public unsafe func Windows_GdipAddPathEllipseI(path: CPointer<Win32__impl_l0.GpPath>, x: Int32, y: Int32, width: Int32, height: Int32): Int32 {
+    return GdipAddPathEllipseI(path, x, y, width, height)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathLine == "on"]
+foreign {
+    func GdipAddPathLine(path: CPointer<Win32__impl_l0.GpPath>, x1: Float32, y1: Float32, x2: Float32, y2: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathLine == "on"]
+public unsafe func Windows_GdipAddPathLine(path: CPointer<Win32__impl_l0.GpPath>, x1: Float32, y1: Float32, x2: Float32, y2: Float32): Int32 {
+    return GdipAddPathLine(path, x1, y1, x2, y2)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathLine2 == "on"]
+foreign {
+    func GdipAddPathLine2(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathLine2 == "on"]
+public unsafe func Windows_GdipAddPathLine2(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32 {
+    return GdipAddPathLine2(path, points, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathLine2I == "on"]
+foreign {
+    func GdipAddPathLine2I(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathLine2I == "on"]
+public unsafe func Windows_GdipAddPathLine2I(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32 {
+    return GdipAddPathLine2I(path, points, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathLineI == "on"]
+foreign {
+    func GdipAddPathLineI(path: CPointer<Win32__impl_l0.GpPath>, x1: Int32, y1: Int32, x2: Int32, y2: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathLineI == "on"]
+public unsafe func Windows_GdipAddPathLineI(path: CPointer<Win32__impl_l0.GpPath>, x1: Int32, y1: Int32, x2: Int32, y2: Int32): Int32 {
+    return GdipAddPathLineI(path, x1, y1, x2, y2)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathPath == "on"]
+foreign {
+    func GdipAddPathPath(path: CPointer<Win32__impl_l0.GpPath>, addingPath: CPointer<Win32__impl_l0.GpPath>, connect: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathPath == "on"]
+public unsafe func Windows_GdipAddPathPath(path: CPointer<Win32__impl_l0.GpPath>, addingPath: CPointer<Win32__impl_l0.GpPath>, connect: Int32): Int32 {
+    return GdipAddPathPath(path, addingPath, connect)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathPie == "on"]
+foreign {
+    func GdipAddPathPie(path: CPointer<Win32__impl_l0.GpPath>, x: Float32, y: Float32, width: Float32, height: Float32, startAngle: Float32, sweepAngle: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathPie == "on"]
+public unsafe func Windows_GdipAddPathPie(path: CPointer<Win32__impl_l0.GpPath>, x: Float32, y: Float32, width: Float32, height: Float32, startAngle: Float32, sweepAngle: Float32): Int32 {
+    return GdipAddPathPie(path, x, y, width, height, startAngle, sweepAngle)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathPieI == "on"]
+foreign {
+    func GdipAddPathPieI(path: CPointer<Win32__impl_l0.GpPath>, x: Int32, y: Int32, width: Int32, height: Int32, startAngle: Float32, sweepAngle: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathPieI == "on"]
+public unsafe func Windows_GdipAddPathPieI(path: CPointer<Win32__impl_l0.GpPath>, x: Int32, y: Int32, width: Int32, height: Int32, startAngle: Float32, sweepAngle: Float32): Int32 {
+    return GdipAddPathPieI(path, x, y, width, height, startAngle, sweepAngle)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathPolygon == "on"]
+foreign {
+    func GdipAddPathPolygon(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathPolygon == "on"]
+public unsafe func Windows_GdipAddPathPolygon(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32 {
+    return GdipAddPathPolygon(path, points, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathPolygonI == "on"]
+foreign {
+    func GdipAddPathPolygonI(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathPolygonI == "on"]
+public unsafe func Windows_GdipAddPathPolygonI(path: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32 {
+    return GdipAddPathPolygonI(path, points, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathRectangle == "on"]
+foreign {
+    func GdipAddPathRectangle(path: CPointer<Win32__impl_l0.GpPath>, x: Float32, y: Float32, width: Float32, height: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathRectangle == "on"]
+public unsafe func Windows_GdipAddPathRectangle(path: CPointer<Win32__impl_l0.GpPath>, x: Float32, y: Float32, width: Float32, height: Float32): Int32 {
+    return GdipAddPathRectangle(path, x, y, width, height)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathRectangleI == "on"]
+foreign {
+    func GdipAddPathRectangleI(path: CPointer<Win32__impl_l0.GpPath>, x: Int32, y: Int32, width: Int32, height: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathRectangleI == "on"]
+public unsafe func Windows_GdipAddPathRectangleI(path: CPointer<Win32__impl_l0.GpPath>, x: Int32, y: Int32, width: Int32, height: Int32): Int32 {
+    return GdipAddPathRectangleI(path, x, y, width, height)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathRectangles == "on"]
+foreign {
+    func GdipAddPathRectangles(path: CPointer<Win32__impl_l0.GpPath>, rects: CPointer<Win32__impl_l0.RectF>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathRectangles == "on"]
+public unsafe func Windows_GdipAddPathRectangles(path: CPointer<Win32__impl_l0.GpPath>, rects: CPointer<Win32__impl_l0.RectF>, count: Int32): Int32 {
+    return GdipAddPathRectangles(path, rects, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathRectanglesI == "on"]
+foreign {
+    func GdipAddPathRectanglesI(path: CPointer<Win32__impl_l0.GpPath>, rects: CPointer<Win32__impl_l0.Rect>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathRectanglesI == "on"]
+public unsafe func Windows_GdipAddPathRectanglesI(path: CPointer<Win32__impl_l0.GpPath>, rects: CPointer<Win32__impl_l0.Rect>, count: Int32): Int32 {
+    return GdipAddPathRectanglesI(path, rects, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathString == "on"]
+foreign {
+    func GdipAddPathString(path: CPointer<Win32__impl_l0.GpPath>, string: CPointer<UInt16>, length: Int32, family: CPointer<Win32__impl_l0.GpFontFamily>, style: Int32, emSize: Float32, layoutRect: CPointer<Win32__impl_l0.RectF>, format: CPointer<Win32__impl_l0.GpStringFormat>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathString == "on"]
+public unsafe func Windows_GdipAddPathString(path: CPointer<Win32__impl_l0.GpPath>, string: CPointer<UInt16>, length: Int32, family: CPointer<Win32__impl_l0.GpFontFamily>, style: Int32, emSize: Float32, layoutRect: CPointer<Win32__impl_l0.RectF>, format: CPointer<Win32__impl_l0.GpStringFormat>): Int32 {
+    return GdipAddPathString(path, string, length, family, style, emSize, layoutRect, format)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathStringI == "on"]
+foreign {
+    func GdipAddPathStringI(path: CPointer<Win32__impl_l0.GpPath>, string: CPointer<UInt16>, length: Int32, family: CPointer<Win32__impl_l0.GpFontFamily>, style: Int32, emSize: Float32, layoutRect: CPointer<Win32__impl_l0.Rect>, format: CPointer<Win32__impl_l0.GpStringFormat>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAddPathStringI == "on"]
+public unsafe func Windows_GdipAddPathStringI(path: CPointer<Win32__impl_l0.GpPath>, string: CPointer<UInt16>, length: Int32, family: CPointer<Win32__impl_l0.GpFontFamily>, style: Int32, emSize: Float32, layoutRect: CPointer<Win32__impl_l0.Rect>, format: CPointer<Win32__impl_l0.GpStringFormat>): Int32 {
+    return GdipAddPathStringI(path, string, length, family, style, emSize, layoutRect, format)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAlloc == "on"]
+foreign {
+    func GdipAlloc(size: UIntNative): CPointer<Unit>
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipAlloc == "on"]
+public unsafe func Windows_GdipAlloc(size: UIntNative): CPointer<Unit> {
+    return GdipAlloc(size)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBeginContainer == "on"]
+foreign {
+    func GdipBeginContainer(graphics: CPointer<Win32__impl_l0.GpGraphics>, dstrect: CPointer<Win32__impl_l0.RectF>, srcrect: CPointer<Win32__impl_l0.RectF>, unit: Int32, state: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBeginContainer == "on"]
+public unsafe func Windows_GdipBeginContainer(graphics: CPointer<Win32__impl_l0.GpGraphics>, dstrect: CPointer<Win32__impl_l0.RectF>, srcrect: CPointer<Win32__impl_l0.RectF>, unit: Int32, state: CPointer<UInt32>): Int32 {
+    return GdipBeginContainer(graphics, dstrect, srcrect, unit, state)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBeginContainer2 == "on"]
+foreign {
+    func GdipBeginContainer2(graphics: CPointer<Win32__impl_l0.GpGraphics>, state: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBeginContainer2 == "on"]
+public unsafe func Windows_GdipBeginContainer2(graphics: CPointer<Win32__impl_l0.GpGraphics>, state: CPointer<UInt32>): Int32 {
+    return GdipBeginContainer2(graphics, state)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBeginContainerI == "on"]
+foreign {
+    func GdipBeginContainerI(graphics: CPointer<Win32__impl_l0.GpGraphics>, dstrect: CPointer<Win32__impl_l0.Rect>, srcrect: CPointer<Win32__impl_l0.Rect>, unit: Int32, state: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBeginContainerI == "on"]
+public unsafe func Windows_GdipBeginContainerI(graphics: CPointer<Win32__impl_l0.GpGraphics>, dstrect: CPointer<Win32__impl_l0.Rect>, srcrect: CPointer<Win32__impl_l0.Rect>, unit: Int32, state: CPointer<UInt32>): Int32 {
+    return GdipBeginContainerI(graphics, dstrect, srcrect, unit, state)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBitmapApplyEffect == "on"]
+foreign {
+    func GdipBitmapApplyEffect(bitmap: CPointer<Win32__impl_l0.GpBitmap>, effect: CPointer<Win32__impl_l0.CGpEffect>, roi: CPointer<Win32_Foundation.RECT>, useAuxData: Int32, auxData: CPointer<CPointer<Unit>>, auxDataSize: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBitmapApplyEffect == "on"]
+public unsafe func Windows_GdipBitmapApplyEffect(bitmap: CPointer<Win32__impl_l0.GpBitmap>, effect: CPointer<Win32__impl_l0.CGpEffect>, roi: CPointer<Win32_Foundation.RECT>, useAuxData: Int32, auxData: CPointer<CPointer<Unit>>, auxDataSize: CPointer<Int32>): Int32 {
+    return GdipBitmapApplyEffect(bitmap, effect, roi, useAuxData, auxData, auxDataSize)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBitmapConvertFormat == "on"]
+foreign {
+    func GdipBitmapConvertFormat(pInputBitmap: CPointer<Win32__impl_l0.GpBitmap>, format: Int32, dithertype: Int32, palettetype: Int32, palette: CPointer<Win32__impl_l0.ColorPalette>, alphaThresholdPercent: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBitmapConvertFormat == "on"]
+public unsafe func Windows_GdipBitmapConvertFormat(pInputBitmap: CPointer<Win32__impl_l0.GpBitmap>, format: Int32, dithertype: Int32, palettetype: Int32, palette: CPointer<Win32__impl_l0.ColorPalette>, alphaThresholdPercent: Float32): Int32 {
+    return GdipBitmapConvertFormat(pInputBitmap, format, dithertype, palettetype, palette, alphaThresholdPercent)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBitmapCreateApplyEffect == "on"]
+foreign {
+    func GdipBitmapCreateApplyEffect(inputBitmaps: CPointer<CPointer<Win32__impl_l0.GpBitmap>>, numInputs: Int32, effect: CPointer<Win32__impl_l0.CGpEffect>, roi: CPointer<Win32_Foundation.RECT>, outputRect: CPointer<Win32_Foundation.RECT>, outputBitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>, useAuxData: Int32, auxData: CPointer<CPointer<Unit>>, auxDataSize: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBitmapCreateApplyEffect == "on"]
+public unsafe func Windows_GdipBitmapCreateApplyEffect(inputBitmaps: CPointer<CPointer<Win32__impl_l0.GpBitmap>>, numInputs: Int32, effect: CPointer<Win32__impl_l0.CGpEffect>, roi: CPointer<Win32_Foundation.RECT>, outputRect: CPointer<Win32_Foundation.RECT>, outputBitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>, useAuxData: Int32, auxData: CPointer<CPointer<Unit>>, auxDataSize: CPointer<Int32>): Int32 {
+    return GdipBitmapCreateApplyEffect(inputBitmaps, numInputs, effect, roi, outputRect, outputBitmap, useAuxData, auxData, auxDataSize)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBitmapGetHistogram == "on"]
+foreign {
+    func GdipBitmapGetHistogram(bitmap: CPointer<Win32__impl_l0.GpBitmap>, format: Int32, NumberOfEntries: UInt32, channel0: CPointer<UInt32>, channel1: CPointer<UInt32>, channel2: CPointer<UInt32>, channel3: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBitmapGetHistogram == "on"]
+public unsafe func Windows_GdipBitmapGetHistogram(bitmap: CPointer<Win32__impl_l0.GpBitmap>, format: Int32, NumberOfEntries: UInt32, channel0: CPointer<UInt32>, channel1: CPointer<UInt32>, channel2: CPointer<UInt32>, channel3: CPointer<UInt32>): Int32 {
+    return GdipBitmapGetHistogram(bitmap, format, NumberOfEntries, channel0, channel1, channel2, channel3)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBitmapGetHistogramSize == "on"]
+foreign {
+    func GdipBitmapGetHistogramSize(format: Int32, NumberOfEntries: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBitmapGetHistogramSize == "on"]
+public unsafe func Windows_GdipBitmapGetHistogramSize(format: Int32, NumberOfEntries: CPointer<UInt32>): Int32 {
+    return GdipBitmapGetHistogramSize(format, NumberOfEntries)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBitmapGetPixel == "on"]
+foreign {
+    func GdipBitmapGetPixel(bitmap: CPointer<Win32__impl_l0.GpBitmap>, x: Int32, y: Int32, color: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBitmapGetPixel == "on"]
+public unsafe func Windows_GdipBitmapGetPixel(bitmap: CPointer<Win32__impl_l0.GpBitmap>, x: Int32, y: Int32, color: CPointer<UInt32>): Int32 {
+    return GdipBitmapGetPixel(bitmap, x, y, color)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBitmapLockBits == "on"]
+foreign {
+    func GdipBitmapLockBits(bitmap: CPointer<Win32__impl_l0.GpBitmap>, rect: CPointer<Win32__impl_l0.Rect>, flags: UInt32, format: Int32, lockedBitmapData: CPointer<Win32__impl_l0.BitmapData>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBitmapLockBits == "on"]
+public unsafe func Windows_GdipBitmapLockBits(bitmap: CPointer<Win32__impl_l0.GpBitmap>, rect: CPointer<Win32__impl_l0.Rect>, flags: UInt32, format: Int32, lockedBitmapData: CPointer<Win32__impl_l0.BitmapData>): Int32 {
+    return GdipBitmapLockBits(bitmap, rect, flags, format, lockedBitmapData)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBitmapSetPixel == "on"]
+foreign {
+    func GdipBitmapSetPixel(bitmap: CPointer<Win32__impl_l0.GpBitmap>, x: Int32, y: Int32, color: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBitmapSetPixel == "on"]
+public unsafe func Windows_GdipBitmapSetPixel(bitmap: CPointer<Win32__impl_l0.GpBitmap>, x: Int32, y: Int32, color: UInt32): Int32 {
+    return GdipBitmapSetPixel(bitmap, x, y, color)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBitmapSetResolution == "on"]
+foreign {
+    func GdipBitmapSetResolution(bitmap: CPointer<Win32__impl_l0.GpBitmap>, xdpi: Float32, ydpi: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBitmapSetResolution == "on"]
+public unsafe func Windows_GdipBitmapSetResolution(bitmap: CPointer<Win32__impl_l0.GpBitmap>, xdpi: Float32, ydpi: Float32): Int32 {
+    return GdipBitmapSetResolution(bitmap, xdpi, ydpi)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBitmapUnlockBits == "on"]
+foreign {
+    func GdipBitmapUnlockBits(bitmap: CPointer<Win32__impl_l0.GpBitmap>, lockedBitmapData: CPointer<Win32__impl_l0.BitmapData>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipBitmapUnlockBits == "on"]
+public unsafe func Windows_GdipBitmapUnlockBits(bitmap: CPointer<Win32__impl_l0.GpBitmap>, lockedBitmapData: CPointer<Win32__impl_l0.BitmapData>): Int32 {
+    return GdipBitmapUnlockBits(bitmap, lockedBitmapData)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipClearPathMarkers == "on"]
+foreign {
+    func GdipClearPathMarkers(path: CPointer<Win32__impl_l0.GpPath>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipClearPathMarkers == "on"]
+public unsafe func Windows_GdipClearPathMarkers(path: CPointer<Win32__impl_l0.GpPath>): Int32 {
+    return GdipClearPathMarkers(path)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCloneBitmapArea == "on"]
+foreign {
+    func GdipCloneBitmapArea(x: Float32, y: Float32, width: Float32, height: Float32, format: Int32, srcBitmap: CPointer<Win32__impl_l0.GpBitmap>, dstBitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCloneBitmapArea == "on"]
+public unsafe func Windows_GdipCloneBitmapArea(x: Float32, y: Float32, width: Float32, height: Float32, format: Int32, srcBitmap: CPointer<Win32__impl_l0.GpBitmap>, dstBitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32 {
+    return GdipCloneBitmapArea(x, y, width, height, format, srcBitmap, dstBitmap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCloneBitmapAreaI == "on"]
+foreign {
+    func GdipCloneBitmapAreaI(x: Int32, y: Int32, width: Int32, height: Int32, format: Int32, srcBitmap: CPointer<Win32__impl_l0.GpBitmap>, dstBitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCloneBitmapAreaI == "on"]
+public unsafe func Windows_GdipCloneBitmapAreaI(x: Int32, y: Int32, width: Int32, height: Int32, format: Int32, srcBitmap: CPointer<Win32__impl_l0.GpBitmap>, dstBitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32 {
+    return GdipCloneBitmapAreaI(x, y, width, height, format, srcBitmap, dstBitmap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCloneBrush == "on"]
+foreign {
+    func GdipCloneBrush(brush: CPointer<Win32__impl_l0.GpBrush>, cloneBrush: CPointer<CPointer<Win32__impl_l0.GpBrush>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCloneBrush == "on"]
+public unsafe func Windows_GdipCloneBrush(brush: CPointer<Win32__impl_l0.GpBrush>, cloneBrush: CPointer<CPointer<Win32__impl_l0.GpBrush>>): Int32 {
+    return GdipCloneBrush(brush, cloneBrush)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCloneCustomLineCap == "on"]
+foreign {
+    func GdipCloneCustomLineCap(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, clonedCap: CPointer<CPointer<Win32__impl_l0.GpCustomLineCap>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCloneCustomLineCap == "on"]
+public unsafe func Windows_GdipCloneCustomLineCap(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, clonedCap: CPointer<CPointer<Win32__impl_l0.GpCustomLineCap>>): Int32 {
+    return GdipCloneCustomLineCap(customCap, clonedCap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCloneFont == "on"]
+foreign {
+    func GdipCloneFont(font: CPointer<Win32__impl_l0.GpFont>, cloneFont: CPointer<CPointer<Win32__impl_l0.GpFont>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCloneFont == "on"]
+public unsafe func Windows_GdipCloneFont(font: CPointer<Win32__impl_l0.GpFont>, cloneFont: CPointer<CPointer<Win32__impl_l0.GpFont>>): Int32 {
+    return GdipCloneFont(font, cloneFont)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCloneFontFamily == "on"]
+foreign {
+    func GdipCloneFontFamily(fontFamily: CPointer<Win32__impl_l0.GpFontFamily>, clonedFontFamily: CPointer<CPointer<Win32__impl_l0.GpFontFamily>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCloneFontFamily == "on"]
+public unsafe func Windows_GdipCloneFontFamily(fontFamily: CPointer<Win32__impl_l0.GpFontFamily>, clonedFontFamily: CPointer<CPointer<Win32__impl_l0.GpFontFamily>>): Int32 {
+    return GdipCloneFontFamily(fontFamily, clonedFontFamily)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCloneImage == "on"]
+foreign {
+    func GdipCloneImage(image: CPointer<Win32__impl_l0.GpImage>, cloneImage: CPointer<CPointer<Win32__impl_l0.GpImage>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCloneImage == "on"]
+public unsafe func Windows_GdipCloneImage(image: CPointer<Win32__impl_l0.GpImage>, cloneImage: CPointer<CPointer<Win32__impl_l0.GpImage>>): Int32 {
+    return GdipCloneImage(image, cloneImage)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCloneImageAttributes == "on"]
+foreign {
+    func GdipCloneImageAttributes(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, cloneImageattr: CPointer<CPointer<Win32__impl_l0.GpImageAttributes>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCloneImageAttributes == "on"]
+public unsafe func Windows_GdipCloneImageAttributes(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, cloneImageattr: CPointer<CPointer<Win32__impl_l0.GpImageAttributes>>): Int32 {
+    return GdipCloneImageAttributes(imageattr, cloneImageattr)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCloneMatrix == "on"]
+foreign {
+    func GdipCloneMatrix(matrix: CPointer<Win32__impl_l0.Matrix>, cloneMatrix: CPointer<CPointer<Win32__impl_l0.Matrix>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCloneMatrix == "on"]
+public unsafe func Windows_GdipCloneMatrix(matrix: CPointer<Win32__impl_l0.Matrix>, cloneMatrix: CPointer<CPointer<Win32__impl_l0.Matrix>>): Int32 {
+    return GdipCloneMatrix(matrix, cloneMatrix)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipClonePath == "on"]
+foreign {
+    func GdipClonePath(path: CPointer<Win32__impl_l0.GpPath>, clonePath: CPointer<CPointer<Win32__impl_l0.GpPath>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipClonePath == "on"]
+public unsafe func Windows_GdipClonePath(path: CPointer<Win32__impl_l0.GpPath>, clonePath: CPointer<CPointer<Win32__impl_l0.GpPath>>): Int32 {
+    return GdipClonePath(path, clonePath)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipClonePen == "on"]
+foreign {
+    func GdipClonePen(pen: CPointer<Win32__impl_l0.GpPen>, clonepen: CPointer<CPointer<Win32__impl_l0.GpPen>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipClonePen == "on"]
+public unsafe func Windows_GdipClonePen(pen: CPointer<Win32__impl_l0.GpPen>, clonepen: CPointer<CPointer<Win32__impl_l0.GpPen>>): Int32 {
+    return GdipClonePen(pen, clonepen)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCloneRegion == "on"]
+foreign {
+    func GdipCloneRegion(region: CPointer<Win32__impl_l0.GpRegion>, cloneRegion: CPointer<CPointer<Win32__impl_l0.GpRegion>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCloneRegion == "on"]
+public unsafe func Windows_GdipCloneRegion(region: CPointer<Win32__impl_l0.GpRegion>, cloneRegion: CPointer<CPointer<Win32__impl_l0.GpRegion>>): Int32 {
+    return GdipCloneRegion(region, cloneRegion)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCloneStringFormat == "on"]
+foreign {
+    func GdipCloneStringFormat(format: CPointer<Win32__impl_l0.GpStringFormat>, newFormat: CPointer<CPointer<Win32__impl_l0.GpStringFormat>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCloneStringFormat == "on"]
+public unsafe func Windows_GdipCloneStringFormat(format: CPointer<Win32__impl_l0.GpStringFormat>, newFormat: CPointer<CPointer<Win32__impl_l0.GpStringFormat>>): Int32 {
+    return GdipCloneStringFormat(format, newFormat)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipClosePathFigure == "on"]
+foreign {
+    func GdipClosePathFigure(path: CPointer<Win32__impl_l0.GpPath>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipClosePathFigure == "on"]
+public unsafe func Windows_GdipClosePathFigure(path: CPointer<Win32__impl_l0.GpPath>): Int32 {
+    return GdipClosePathFigure(path)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipClosePathFigures == "on"]
+foreign {
+    func GdipClosePathFigures(path: CPointer<Win32__impl_l0.GpPath>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipClosePathFigures == "on"]
+public unsafe func Windows_GdipClosePathFigures(path: CPointer<Win32__impl_l0.GpPath>): Int32 {
+    return GdipClosePathFigures(path)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCombineRegionPath == "on"]
+foreign {
+    func GdipCombineRegionPath(region: CPointer<Win32__impl_l0.GpRegion>, path: CPointer<Win32__impl_l0.GpPath>, combineMode: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCombineRegionPath == "on"]
+public unsafe func Windows_GdipCombineRegionPath(region: CPointer<Win32__impl_l0.GpRegion>, path: CPointer<Win32__impl_l0.GpPath>, combineMode: Int32): Int32 {
+    return GdipCombineRegionPath(region, path, combineMode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCombineRegionRect == "on"]
+foreign {
+    func GdipCombineRegionRect(region: CPointer<Win32__impl_l0.GpRegion>, rect: CPointer<Win32__impl_l0.RectF>, combineMode: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCombineRegionRect == "on"]
+public unsafe func Windows_GdipCombineRegionRect(region: CPointer<Win32__impl_l0.GpRegion>, rect: CPointer<Win32__impl_l0.RectF>, combineMode: Int32): Int32 {
+    return GdipCombineRegionRect(region, rect, combineMode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCombineRegionRectI == "on"]
+foreign {
+    func GdipCombineRegionRectI(region: CPointer<Win32__impl_l0.GpRegion>, rect: CPointer<Win32__impl_l0.Rect>, combineMode: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCombineRegionRectI == "on"]
+public unsafe func Windows_GdipCombineRegionRectI(region: CPointer<Win32__impl_l0.GpRegion>, rect: CPointer<Win32__impl_l0.Rect>, combineMode: Int32): Int32 {
+    return GdipCombineRegionRectI(region, rect, combineMode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCombineRegionRegion == "on"]
+foreign {
+    func GdipCombineRegionRegion(region: CPointer<Win32__impl_l0.GpRegion>, region2: CPointer<Win32__impl_l0.GpRegion>, combineMode: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCombineRegionRegion == "on"]
+public unsafe func Windows_GdipCombineRegionRegion(region: CPointer<Win32__impl_l0.GpRegion>, region2: CPointer<Win32__impl_l0.GpRegion>, combineMode: Int32): Int32 {
+    return GdipCombineRegionRegion(region, region2, combineMode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipComment == "on"]
+foreign {
+    func GdipComment(graphics: CPointer<Win32__impl_l0.GpGraphics>, sizeData: UInt32, data: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipComment == "on"]
+public unsafe func Windows_GdipComment(graphics: CPointer<Win32__impl_l0.GpGraphics>, sizeData: UInt32, data: CPointer<UInt8>): Int32 {
+    return GdipComment(graphics, sizeData, data)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipConvertToEmfPlus == "on"]
+foreign {
+    func GdipConvertToEmfPlus(refGraphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, conversionFailureFlag: CPointer<Int32>, emfType: Int32, description: CPointer<UInt16>, out_metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipConvertToEmfPlus == "on"]
+public unsafe func Windows_GdipConvertToEmfPlus(refGraphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, conversionFailureFlag: CPointer<Int32>, emfType: Int32, description: CPointer<UInt16>, out_metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32 {
+    return GdipConvertToEmfPlus(refGraphics, metafile, conversionFailureFlag, emfType, description, out_metafile)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipConvertToEmfPlusToFile == "on"]
+foreign {
+    func GdipConvertToEmfPlusToFile(refGraphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, conversionFailureFlag: CPointer<Int32>, filename: CPointer<UInt16>, emfType: Int32, description: CPointer<UInt16>, out_metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipConvertToEmfPlusToFile == "on"]
+public unsafe func Windows_GdipConvertToEmfPlusToFile(refGraphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, conversionFailureFlag: CPointer<Int32>, filename: CPointer<UInt16>, emfType: Int32, description: CPointer<UInt16>, out_metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32 {
+    return GdipConvertToEmfPlusToFile(refGraphics, metafile, conversionFailureFlag, filename, emfType, description, out_metafile)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipConvertToEmfPlusToStream == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func GdipConvertToEmfPlusToStream(refGraphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, conversionFailureFlag: CPointer<Int32>, stream: CPointer<Unit>, emfType: Int32, description: CPointer<UInt16>, out_metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipConvertToEmfPlusToStream == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_GdipConvertToEmfPlusToStream(refGraphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, conversionFailureFlag: CPointer<Int32>, stream: CPointer<Unit>, emfType: Int32, description: CPointer<UInt16>, out_metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32 {
+    return GdipConvertToEmfPlusToStream(refGraphics, metafile, conversionFailureFlag, stream, emfType, description, out_metafile)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateAdjustableArrowCap == "on"]
+foreign {
+    func GdipCreateAdjustableArrowCap(height: Float32, width: Float32, isFilled: Int32, cap: CPointer<CPointer<Win32__impl_l0.GpAdjustableArrowCap>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateAdjustableArrowCap == "on"]
+public unsafe func Windows_GdipCreateAdjustableArrowCap(height: Float32, width: Float32, isFilled: Int32, cap: CPointer<CPointer<Win32__impl_l0.GpAdjustableArrowCap>>): Int32 {
+    return GdipCreateAdjustableArrowCap(height, width, isFilled, cap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateBitmapFromDirectDrawSurface == "on" && Windows_Win32_Graphics_DirectDraw == "on"]
 foreign {
     func GdipCreateBitmapFromDirectDrawSurface(surface: CPointer<Unit>, bitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32
 }
 
-@When[GDIPLUS == "on" && Windows_Win32_Graphics_Gdi == "on"]
-foreign {
-    func GdipCreateBitmapFromGdiDib(gdiBitmapInfo: CPointer<Win32_Graphics_Gdi.BITMAPINFO>, gdiBitmapData: CPointer<Unit>, bitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32
-    func GdipCreateBitmapFromHBITMAP(hbm: Win32_Graphics_Gdi.HBITMAP, hpal: Win32_Graphics_Gdi.HPALETTE, bitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32
-    func GdipCreateFontFromDC(hdc: Win32_Graphics_Gdi.HDC, font: CPointer<CPointer<Win32__impl_l0.GpFont>>): Int32
-    func GdipCreateFontFromLogfontA(hdc: Win32_Graphics_Gdi.HDC, logfont: CPointer<Win32_Graphics_Gdi.LOGFONTA>, font: CPointer<CPointer<Win32__impl_l0.GpFont>>): Int32
-    func GdipCreateFontFromLogfontW(hdc: Win32_Graphics_Gdi.HDC, logfont: CPointer<Win32_Graphics_Gdi.LOGFONTW>, font: CPointer<CPointer<Win32__impl_l0.GpFont>>): Int32
-    func GdipCreateFromHDC(hdc: Win32_Graphics_Gdi.HDC, graphics: CPointer<CPointer<Win32__impl_l0.GpGraphics>>): Int32
-    func GdipCreateFromHDC2(hdc: Win32_Graphics_Gdi.HDC, hDevice: CPointer<Unit>, graphics: CPointer<CPointer<Win32__impl_l0.GpGraphics>>): Int32
-    func GdipCreateHBITMAPFromBitmap(bitmap: CPointer<Win32__impl_l0.GpBitmap>, hbmReturn: CPointer<Win32_Graphics_Gdi.HBITMAP>, background: UInt32): Int32
-    func GdipCreateHalftonePalette(): Win32_Graphics_Gdi.HPALETTE
-    func GdipCreateMetafileFromEmf(hEmf: Win32_Graphics_Gdi.HENHMETAFILE, deleteEmf: Int32, metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32
-    func GdipCreateMetafileFromWmf(hWmf: Win32_Graphics_Gdi.HMETAFILE, deleteWmf: Int32, wmfPlaceableFileHeader: CPointer<Win32__impl_l1.WmfPlaceableFileHeader>, metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32
-    func GdipCreateRegionHrgn(hRgn: Win32_Graphics_Gdi.HRGN, region: CPointer<CPointer<Win32__impl_l0.GpRegion>>): Int32
-    // param-hint: pData16 len=param[1] optional
-    func GdipEmfToWmfBits(hemf: Win32_Graphics_Gdi.HENHMETAFILE, cbData16: UInt32, pData16: CPointer<UInt8>, iMapMode: Int32, eFlags: Int32): UInt32
-    func GdipGetDC(graphics: CPointer<Win32__impl_l0.GpGraphics>, hdc: CPointer<Win32_Graphics_Gdi.HDC>): Int32
-    func GdipGetHemfFromMetafile(metafile: CPointer<Win32__impl_l0.GpMetafile>, hEmf: CPointer<Win32_Graphics_Gdi.HENHMETAFILE>): Int32
-    func GdipGetLogFontA(font: CPointer<Win32__impl_l0.GpFont>, graphics: CPointer<Win32__impl_l0.GpGraphics>, logfontA: CPointer<Win32_Graphics_Gdi.LOGFONTA>): Int32
-    func GdipGetLogFontW(font: CPointer<Win32__impl_l0.GpFont>, graphics: CPointer<Win32__impl_l0.GpGraphics>, logfontW: CPointer<Win32_Graphics_Gdi.LOGFONTW>): Int32
-    func GdipGetMetafileHeaderFromEmf(hEmf: Win32_Graphics_Gdi.HENHMETAFILE, header: CPointer<Win32__impl_l1.MetafileHeader>): Int32
-    func GdipGetMetafileHeaderFromFile(filename: CPointer<UInt16>, header: CPointer<Win32__impl_l1.MetafileHeader>): Int32
-    func GdipGetMetafileHeaderFromMetafile(metafile: CPointer<Win32__impl_l0.GpMetafile>, header: CPointer<Win32__impl_l1.MetafileHeader>): Int32
-    func GdipGetMetafileHeaderFromWmf(hWmf: Win32_Graphics_Gdi.HMETAFILE, wmfPlaceableFileHeader: CPointer<Win32__impl_l1.WmfPlaceableFileHeader>, header: CPointer<Win32__impl_l1.MetafileHeader>): Int32
-    func GdipGetRegionHRgn(region: CPointer<Win32__impl_l0.GpRegion>, graphics: CPointer<Win32__impl_l0.GpGraphics>, hRgn: CPointer<Win32_Graphics_Gdi.HRGN>): Int32
-    func GdipRecordMetafile(referenceHdc: Win32_Graphics_Gdi.HDC, type_: Int32, frameRect: CPointer<Win32__impl_l0.RectF>, frameUnit: Int32, description: CPointer<UInt16>, metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32
-    func GdipRecordMetafileFileName(fileName: CPointer<UInt16>, referenceHdc: Win32_Graphics_Gdi.HDC, type_: Int32, frameRect: CPointer<Win32__impl_l0.RectF>, frameUnit: Int32, description: CPointer<UInt16>, metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32
-    func GdipRecordMetafileFileNameI(fileName: CPointer<UInt16>, referenceHdc: Win32_Graphics_Gdi.HDC, type_: Int32, frameRect: CPointer<Win32__impl_l0.Rect>, frameUnit: Int32, description: CPointer<UInt16>, metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32
-    func GdipRecordMetafileI(referenceHdc: Win32_Graphics_Gdi.HDC, type_: Int32, frameRect: CPointer<Win32__impl_l0.Rect>, frameUnit: Int32, description: CPointer<UInt16>, metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32
-    func GdipReleaseDC(graphics: CPointer<Win32__impl_l0.GpGraphics>, hdc: Win32_Graphics_Gdi.HDC): Int32
-    func GdipSetClipHrgn(graphics: CPointer<Win32__impl_l0.GpGraphics>, hRgn: Win32_Graphics_Gdi.HRGN, combineMode: Int32): Int32
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateBitmapFromDirectDrawSurface == "on" && Windows_Win32_Graphics_DirectDraw == "on"]
+public unsafe func Windows_GdipCreateBitmapFromDirectDrawSurface(surface: CPointer<Unit>, bitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32 {
+    return GdipCreateBitmapFromDirectDrawSurface(surface, bitmap)
 }
 
-@When[GDIPLUS == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateBitmapFromFile == "on"]
 foreign {
-    func GdipConvertToEmfPlusToStream(refGraphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, conversionFailureFlag: CPointer<Int32>, stream: CPointer<Unit>, emfType: Int32, description: CPointer<UInt16>, out_metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32
+    func GdipCreateBitmapFromFile(filename: CPointer<UInt16>, bitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateBitmapFromFile == "on"]
+public unsafe func Windows_GdipCreateBitmapFromFile(filename: CPointer<UInt16>, bitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32 {
+    return GdipCreateBitmapFromFile(filename, bitmap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateBitmapFromFileICM == "on"]
+foreign {
+    func GdipCreateBitmapFromFileICM(filename: CPointer<UInt16>, bitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateBitmapFromFileICM == "on"]
+public unsafe func Windows_GdipCreateBitmapFromFileICM(filename: CPointer<UInt16>, bitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32 {
+    return GdipCreateBitmapFromFileICM(filename, bitmap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateBitmapFromGdiDib == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func GdipCreateBitmapFromGdiDib(gdiBitmapInfo: CPointer<Win32_Graphics_Gdi.BITMAPINFO>, gdiBitmapData: CPointer<Unit>, bitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateBitmapFromGdiDib == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GdipCreateBitmapFromGdiDib(gdiBitmapInfo: CPointer<Win32_Graphics_Gdi.BITMAPINFO>, gdiBitmapData: CPointer<Unit>, bitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32 {
+    return GdipCreateBitmapFromGdiDib(gdiBitmapInfo, gdiBitmapData, bitmap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateBitmapFromGraphics == "on"]
+foreign {
+    func GdipCreateBitmapFromGraphics(width: Int32, height: Int32, target: CPointer<Win32__impl_l0.GpGraphics>, bitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateBitmapFromGraphics == "on"]
+public unsafe func Windows_GdipCreateBitmapFromGraphics(width: Int32, height: Int32, target: CPointer<Win32__impl_l0.GpGraphics>, bitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32 {
+    return GdipCreateBitmapFromGraphics(width, height, target, bitmap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateBitmapFromHBITMAP == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func GdipCreateBitmapFromHBITMAP(hbm: Win32_Graphics_Gdi.HBITMAP, hpal: Win32_Graphics_Gdi.HPALETTE, bitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateBitmapFromHBITMAP == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GdipCreateBitmapFromHBITMAP(hbm: Win32_Graphics_Gdi.HBITMAP, hpal: Win32_Graphics_Gdi.HPALETTE, bitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32 {
+    return GdipCreateBitmapFromHBITMAP(hbm, hpal, bitmap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateBitmapFromHICON == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    func GdipCreateBitmapFromHICON(hicon: Win32__impl_l0.HICON, bitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateBitmapFromHICON == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_GdipCreateBitmapFromHICON(hicon: Win32__impl_l0.HICON, bitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32 {
+    return GdipCreateBitmapFromHICON(hicon, bitmap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateBitmapFromResource == "on"]
+foreign {
+    func GdipCreateBitmapFromResource(hInstance: CPointer<Unit>, lpBitmapName: CPointer<UInt16>, bitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateBitmapFromResource == "on"]
+public unsafe func Windows_GdipCreateBitmapFromResource(hInstance: CPointer<Unit>, lpBitmapName: CPointer<UInt16>, bitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32 {
+    return GdipCreateBitmapFromResource(hInstance, lpBitmapName, bitmap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateBitmapFromScan0 == "on"]
+foreign {
+    // param-hint: scan0 optional
+    func GdipCreateBitmapFromScan0(width: Int32, height: Int32, stride: Int32, format: Int32, scan0: CPointer<UInt8>, bitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateBitmapFromScan0 == "on"]
+public unsafe func Windows_GdipCreateBitmapFromScan0(width: Int32, height: Int32, stride: Int32, format: Int32, scan0: CPointer<UInt8>, bitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32 {
+    return GdipCreateBitmapFromScan0(width, height, stride, format, scan0, bitmap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateBitmapFromStream == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func GdipCreateBitmapFromStream(stream: CPointer<Unit>, bitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateBitmapFromStream == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_GdipCreateBitmapFromStream(stream: CPointer<Unit>, bitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32 {
+    return GdipCreateBitmapFromStream(stream, bitmap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateBitmapFromStreamICM == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func GdipCreateBitmapFromStreamICM(stream: CPointer<Unit>, bitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateBitmapFromStreamICM == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_GdipCreateBitmapFromStreamICM(stream: CPointer<Unit>, bitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32 {
+    return GdipCreateBitmapFromStreamICM(stream, bitmap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateCachedBitmap == "on"]
+foreign {
+    func GdipCreateCachedBitmap(bitmap: CPointer<Win32__impl_l0.GpBitmap>, graphics: CPointer<Win32__impl_l0.GpGraphics>, cachedBitmap: CPointer<CPointer<Win32__impl_l0.GpCachedBitmap>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateCachedBitmap == "on"]
+public unsafe func Windows_GdipCreateCachedBitmap(bitmap: CPointer<Win32__impl_l0.GpBitmap>, graphics: CPointer<Win32__impl_l0.GpGraphics>, cachedBitmap: CPointer<CPointer<Win32__impl_l0.GpCachedBitmap>>): Int32 {
+    return GdipCreateCachedBitmap(bitmap, graphics, cachedBitmap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateCustomLineCap == "on"]
+foreign {
+    func GdipCreateCustomLineCap(fillPath: CPointer<Win32__impl_l0.GpPath>, strokePath: CPointer<Win32__impl_l0.GpPath>, baseCap: Int32, baseInset: Float32, customCap: CPointer<CPointer<Win32__impl_l0.GpCustomLineCap>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateCustomLineCap == "on"]
+public unsafe func Windows_GdipCreateCustomLineCap(fillPath: CPointer<Win32__impl_l0.GpPath>, strokePath: CPointer<Win32__impl_l0.GpPath>, baseCap: Int32, baseInset: Float32, customCap: CPointer<CPointer<Win32__impl_l0.GpCustomLineCap>>): Int32 {
+    return GdipCreateCustomLineCap(fillPath, strokePath, baseCap, baseInset, customCap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateEffect == "on"]
+foreign {
+    func GdipCreateEffect(guid: GUID, effect: CPointer<CPointer<Win32__impl_l0.CGpEffect>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateEffect == "on"]
+public unsafe func Windows_GdipCreateEffect(guid: GUID, effect: CPointer<CPointer<Win32__impl_l0.CGpEffect>>): Int32 {
+    return GdipCreateEffect(guid, effect)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateFont == "on"]
+foreign {
+    func GdipCreateFont(fontFamily: CPointer<Win32__impl_l0.GpFontFamily>, emSize: Float32, style: Int32, unit: Int32, font: CPointer<CPointer<Win32__impl_l0.GpFont>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateFont == "on"]
+public unsafe func Windows_GdipCreateFont(fontFamily: CPointer<Win32__impl_l0.GpFontFamily>, emSize: Float32, style: Int32, unit: Int32, font: CPointer<CPointer<Win32__impl_l0.GpFont>>): Int32 {
+    return GdipCreateFont(fontFamily, emSize, style, unit, font)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateFontFamilyFromName == "on"]
+foreign {
+    func GdipCreateFontFamilyFromName(name: CPointer<UInt16>, fontCollection: CPointer<Win32__impl_l0.GpFontCollection>, fontFamily: CPointer<CPointer<Win32__impl_l0.GpFontFamily>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateFontFamilyFromName == "on"]
+public unsafe func Windows_GdipCreateFontFamilyFromName(name: CPointer<UInt16>, fontCollection: CPointer<Win32__impl_l0.GpFontCollection>, fontFamily: CPointer<CPointer<Win32__impl_l0.GpFontFamily>>): Int32 {
+    return GdipCreateFontFamilyFromName(name, fontCollection, fontFamily)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateFontFromDC == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func GdipCreateFontFromDC(hdc: Win32_Graphics_Gdi.HDC, font: CPointer<CPointer<Win32__impl_l0.GpFont>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateFontFromDC == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GdipCreateFontFromDC(hdc: Win32_Graphics_Gdi.HDC, font: CPointer<CPointer<Win32__impl_l0.GpFont>>): Int32 {
+    return GdipCreateFontFromDC(hdc, font)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateFontFromLogfontA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func GdipCreateFontFromLogfontA(hdc: Win32_Graphics_Gdi.HDC, logfont: CPointer<Win32_Graphics_Gdi.LOGFONTA>, font: CPointer<CPointer<Win32__impl_l0.GpFont>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateFontFromLogfontA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GdipCreateFontFromLogfontA(hdc: Win32_Graphics_Gdi.HDC, logfont: CPointer<Win32_Graphics_Gdi.LOGFONTA>, font: CPointer<CPointer<Win32__impl_l0.GpFont>>): Int32 {
+    return GdipCreateFontFromLogfontA(hdc, logfont, font)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateFontFromLogfontW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func GdipCreateFontFromLogfontW(hdc: Win32_Graphics_Gdi.HDC, logfont: CPointer<Win32_Graphics_Gdi.LOGFONTW>, font: CPointer<CPointer<Win32__impl_l0.GpFont>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateFontFromLogfontW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GdipCreateFontFromLogfontW(hdc: Win32_Graphics_Gdi.HDC, logfont: CPointer<Win32_Graphics_Gdi.LOGFONTW>, font: CPointer<CPointer<Win32__impl_l0.GpFont>>): Int32 {
+    return GdipCreateFontFromLogfontW(hdc, logfont, font)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateFromHDC == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func GdipCreateFromHDC(hdc: Win32_Graphics_Gdi.HDC, graphics: CPointer<CPointer<Win32__impl_l0.GpGraphics>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateFromHDC == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GdipCreateFromHDC(hdc: Win32_Graphics_Gdi.HDC, graphics: CPointer<CPointer<Win32__impl_l0.GpGraphics>>): Int32 {
+    return GdipCreateFromHDC(hdc, graphics)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateFromHDC2 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func GdipCreateFromHDC2(hdc: Win32_Graphics_Gdi.HDC, hDevice: CPointer<Unit>, graphics: CPointer<CPointer<Win32__impl_l0.GpGraphics>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateFromHDC2 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GdipCreateFromHDC2(hdc: Win32_Graphics_Gdi.HDC, hDevice: CPointer<Unit>, graphics: CPointer<CPointer<Win32__impl_l0.GpGraphics>>): Int32 {
+    return GdipCreateFromHDC2(hdc, hDevice, graphics)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateFromHWND == "on"]
+foreign {
+    func GdipCreateFromHWND(hwnd: CPointer<Unit>, graphics: CPointer<CPointer<Win32__impl_l0.GpGraphics>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateFromHWND == "on"]
+public unsafe func Windows_GdipCreateFromHWND(hwnd: CPointer<Unit>, graphics: CPointer<CPointer<Win32__impl_l0.GpGraphics>>): Int32 {
+    return GdipCreateFromHWND(hwnd, graphics)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateFromHWNDICM == "on"]
+foreign {
+    func GdipCreateFromHWNDICM(hwnd: CPointer<Unit>, graphics: CPointer<CPointer<Win32__impl_l0.GpGraphics>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateFromHWNDICM == "on"]
+public unsafe func Windows_GdipCreateFromHWNDICM(hwnd: CPointer<Unit>, graphics: CPointer<CPointer<Win32__impl_l0.GpGraphics>>): Int32 {
+    return GdipCreateFromHWNDICM(hwnd, graphics)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateHBITMAPFromBitmap == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func GdipCreateHBITMAPFromBitmap(bitmap: CPointer<Win32__impl_l0.GpBitmap>, hbmReturn: CPointer<Win32_Graphics_Gdi.HBITMAP>, background: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateHBITMAPFromBitmap == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GdipCreateHBITMAPFromBitmap(bitmap: CPointer<Win32__impl_l0.GpBitmap>, hbmReturn: CPointer<Win32_Graphics_Gdi.HBITMAP>, background: UInt32): Int32 {
+    return GdipCreateHBITMAPFromBitmap(bitmap, hbmReturn, background)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateHICONFromBitmap == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    func GdipCreateHICONFromBitmap(bitmap: CPointer<Win32__impl_l0.GpBitmap>, hbmReturn: CPointer<Win32__impl_l0.HICON>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateHICONFromBitmap == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_GdipCreateHICONFromBitmap(bitmap: CPointer<Win32__impl_l0.GpBitmap>, hbmReturn: CPointer<Win32__impl_l0.HICON>): Int32 {
+    return GdipCreateHICONFromBitmap(bitmap, hbmReturn)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateHalftonePalette == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func GdipCreateHalftonePalette(): Win32_Graphics_Gdi.HPALETTE
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateHalftonePalette == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GdipCreateHalftonePalette(): Win32_Graphics_Gdi.HPALETTE {
+    return GdipCreateHalftonePalette()
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateHatchBrush == "on"]
+foreign {
+    func GdipCreateHatchBrush(hatchstyle: Int32, forecol: UInt32, backcol: UInt32, brush: CPointer<CPointer<Win32__impl_l0.GpHatch>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateHatchBrush == "on"]
+public unsafe func Windows_GdipCreateHatchBrush(hatchstyle: Int32, forecol: UInt32, backcol: UInt32, brush: CPointer<CPointer<Win32__impl_l0.GpHatch>>): Int32 {
+    return GdipCreateHatchBrush(hatchstyle, forecol, backcol, brush)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateImageAttributes == "on"]
+foreign {
+    func GdipCreateImageAttributes(imageattr: CPointer<CPointer<Win32__impl_l0.GpImageAttributes>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateImageAttributes == "on"]
+public unsafe func Windows_GdipCreateImageAttributes(imageattr: CPointer<CPointer<Win32__impl_l0.GpImageAttributes>>): Int32 {
+    return GdipCreateImageAttributes(imageattr)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateLineBrush == "on"]
+foreign {
+    func GdipCreateLineBrush(point1: CPointer<Win32__impl_l0.PointF>, point2: CPointer<Win32__impl_l0.PointF>, color1: UInt32, color2: UInt32, wrapMode: Int32, lineGradient: CPointer<CPointer<Win32__impl_l0.GpLineGradient>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateLineBrush == "on"]
+public unsafe func Windows_GdipCreateLineBrush(point1: CPointer<Win32__impl_l0.PointF>, point2: CPointer<Win32__impl_l0.PointF>, color1: UInt32, color2: UInt32, wrapMode: Int32, lineGradient: CPointer<CPointer<Win32__impl_l0.GpLineGradient>>): Int32 {
+    return GdipCreateLineBrush(point1, point2, color1, color2, wrapMode, lineGradient)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateLineBrushFromRect == "on"]
+foreign {
+    func GdipCreateLineBrushFromRect(rect: CPointer<Win32__impl_l0.RectF>, color1: UInt32, color2: UInt32, mode: Int32, wrapMode: Int32, lineGradient: CPointer<CPointer<Win32__impl_l0.GpLineGradient>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateLineBrushFromRect == "on"]
+public unsafe func Windows_GdipCreateLineBrushFromRect(rect: CPointer<Win32__impl_l0.RectF>, color1: UInt32, color2: UInt32, mode: Int32, wrapMode: Int32, lineGradient: CPointer<CPointer<Win32__impl_l0.GpLineGradient>>): Int32 {
+    return GdipCreateLineBrushFromRect(rect, color1, color2, mode, wrapMode, lineGradient)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateLineBrushFromRectI == "on"]
+foreign {
+    func GdipCreateLineBrushFromRectI(rect: CPointer<Win32__impl_l0.Rect>, color1: UInt32, color2: UInt32, mode: Int32, wrapMode: Int32, lineGradient: CPointer<CPointer<Win32__impl_l0.GpLineGradient>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateLineBrushFromRectI == "on"]
+public unsafe func Windows_GdipCreateLineBrushFromRectI(rect: CPointer<Win32__impl_l0.Rect>, color1: UInt32, color2: UInt32, mode: Int32, wrapMode: Int32, lineGradient: CPointer<CPointer<Win32__impl_l0.GpLineGradient>>): Int32 {
+    return GdipCreateLineBrushFromRectI(rect, color1, color2, mode, wrapMode, lineGradient)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateLineBrushFromRectWithAngle == "on"]
+foreign {
+    func GdipCreateLineBrushFromRectWithAngle(rect: CPointer<Win32__impl_l0.RectF>, color1: UInt32, color2: UInt32, angle: Float32, isAngleScalable: Int32, wrapMode: Int32, lineGradient: CPointer<CPointer<Win32__impl_l0.GpLineGradient>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateLineBrushFromRectWithAngle == "on"]
+public unsafe func Windows_GdipCreateLineBrushFromRectWithAngle(rect: CPointer<Win32__impl_l0.RectF>, color1: UInt32, color2: UInt32, angle: Float32, isAngleScalable: Int32, wrapMode: Int32, lineGradient: CPointer<CPointer<Win32__impl_l0.GpLineGradient>>): Int32 {
+    return GdipCreateLineBrushFromRectWithAngle(rect, color1, color2, angle, isAngleScalable, wrapMode, lineGradient)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateLineBrushFromRectWithAngleI == "on"]
+foreign {
+    func GdipCreateLineBrushFromRectWithAngleI(rect: CPointer<Win32__impl_l0.Rect>, color1: UInt32, color2: UInt32, angle: Float32, isAngleScalable: Int32, wrapMode: Int32, lineGradient: CPointer<CPointer<Win32__impl_l0.GpLineGradient>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateLineBrushFromRectWithAngleI == "on"]
+public unsafe func Windows_GdipCreateLineBrushFromRectWithAngleI(rect: CPointer<Win32__impl_l0.Rect>, color1: UInt32, color2: UInt32, angle: Float32, isAngleScalable: Int32, wrapMode: Int32, lineGradient: CPointer<CPointer<Win32__impl_l0.GpLineGradient>>): Int32 {
+    return GdipCreateLineBrushFromRectWithAngleI(rect, color1, color2, angle, isAngleScalable, wrapMode, lineGradient)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateLineBrushI == "on"]
+foreign {
+    func GdipCreateLineBrushI(point1: CPointer<Win32__impl_l0.Point>, point2: CPointer<Win32__impl_l0.Point>, color1: UInt32, color2: UInt32, wrapMode: Int32, lineGradient: CPointer<CPointer<Win32__impl_l0.GpLineGradient>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateLineBrushI == "on"]
+public unsafe func Windows_GdipCreateLineBrushI(point1: CPointer<Win32__impl_l0.Point>, point2: CPointer<Win32__impl_l0.Point>, color1: UInt32, color2: UInt32, wrapMode: Int32, lineGradient: CPointer<CPointer<Win32__impl_l0.GpLineGradient>>): Int32 {
+    return GdipCreateLineBrushI(point1, point2, color1, color2, wrapMode, lineGradient)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateMatrix == "on"]
+foreign {
+    func GdipCreateMatrix(matrix: CPointer<CPointer<Win32__impl_l0.Matrix>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateMatrix == "on"]
+public unsafe func Windows_GdipCreateMatrix(matrix: CPointer<CPointer<Win32__impl_l0.Matrix>>): Int32 {
+    return GdipCreateMatrix(matrix)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateMatrix2 == "on"]
+foreign {
+    func GdipCreateMatrix2(m11: Float32, m12: Float32, m21: Float32, m22: Float32, dx: Float32, dy: Float32, matrix: CPointer<CPointer<Win32__impl_l0.Matrix>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateMatrix2 == "on"]
+public unsafe func Windows_GdipCreateMatrix2(m11: Float32, m12: Float32, m21: Float32, m22: Float32, dx: Float32, dy: Float32, matrix: CPointer<CPointer<Win32__impl_l0.Matrix>>): Int32 {
+    return GdipCreateMatrix2(m11, m12, m21, m22, dx, dy, matrix)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateMatrix3 == "on"]
+foreign {
+    func GdipCreateMatrix3(rect: CPointer<Win32__impl_l0.RectF>, dstplg: CPointer<Win32__impl_l0.PointF>, matrix: CPointer<CPointer<Win32__impl_l0.Matrix>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateMatrix3 == "on"]
+public unsafe func Windows_GdipCreateMatrix3(rect: CPointer<Win32__impl_l0.RectF>, dstplg: CPointer<Win32__impl_l0.PointF>, matrix: CPointer<CPointer<Win32__impl_l0.Matrix>>): Int32 {
+    return GdipCreateMatrix3(rect, dstplg, matrix)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateMatrix3I == "on"]
+foreign {
+    func GdipCreateMatrix3I(rect: CPointer<Win32__impl_l0.Rect>, dstplg: CPointer<Win32__impl_l0.Point>, matrix: CPointer<CPointer<Win32__impl_l0.Matrix>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateMatrix3I == "on"]
+public unsafe func Windows_GdipCreateMatrix3I(rect: CPointer<Win32__impl_l0.Rect>, dstplg: CPointer<Win32__impl_l0.Point>, matrix: CPointer<CPointer<Win32__impl_l0.Matrix>>): Int32 {
+    return GdipCreateMatrix3I(rect, dstplg, matrix)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateMetafileFromEmf == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func GdipCreateMetafileFromEmf(hEmf: Win32_Graphics_Gdi.HENHMETAFILE, deleteEmf: Int32, metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateMetafileFromEmf == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GdipCreateMetafileFromEmf(hEmf: Win32_Graphics_Gdi.HENHMETAFILE, deleteEmf: Int32, metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32 {
+    return GdipCreateMetafileFromEmf(hEmf, deleteEmf, metafile)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateMetafileFromFile == "on"]
+foreign {
+    func GdipCreateMetafileFromFile(file: CPointer<UInt16>, metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateMetafileFromFile == "on"]
+public unsafe func Windows_GdipCreateMetafileFromFile(file: CPointer<UInt16>, metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32 {
+    return GdipCreateMetafileFromFile(file, metafile)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateMetafileFromStream == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func GdipCreateMetafileFromStream(stream: CPointer<Unit>, metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateMetafileFromStream == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_GdipCreateMetafileFromStream(stream: CPointer<Unit>, metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32 {
+    return GdipCreateMetafileFromStream(stream, metafile)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateMetafileFromWmf == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func GdipCreateMetafileFromWmf(hWmf: Win32_Graphics_Gdi.HMETAFILE, deleteWmf: Int32, wmfPlaceableFileHeader: CPointer<Win32__impl_l1.WmfPlaceableFileHeader>, metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateMetafileFromWmf == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GdipCreateMetafileFromWmf(hWmf: Win32_Graphics_Gdi.HMETAFILE, deleteWmf: Int32, wmfPlaceableFileHeader: CPointer<Win32__impl_l1.WmfPlaceableFileHeader>, metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32 {
+    return GdipCreateMetafileFromWmf(hWmf, deleteWmf, wmfPlaceableFileHeader, metafile)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateMetafileFromWmfFile == "on"]
+foreign {
+    func GdipCreateMetafileFromWmfFile(file: CPointer<UInt16>, wmfPlaceableFileHeader: CPointer<Win32__impl_l1.WmfPlaceableFileHeader>, metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateMetafileFromWmfFile == "on"]
+public unsafe func Windows_GdipCreateMetafileFromWmfFile(file: CPointer<UInt16>, wmfPlaceableFileHeader: CPointer<Win32__impl_l1.WmfPlaceableFileHeader>, metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32 {
+    return GdipCreateMetafileFromWmfFile(file, wmfPlaceableFileHeader, metafile)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreatePath == "on"]
+foreign {
+    func GdipCreatePath(brushMode: Int32, path: CPointer<CPointer<Win32__impl_l0.GpPath>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreatePath == "on"]
+public unsafe func Windows_GdipCreatePath(brushMode: Int32, path: CPointer<CPointer<Win32__impl_l0.GpPath>>): Int32 {
+    return GdipCreatePath(brushMode, path)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreatePath2 == "on"]
+foreign {
+    func GdipCreatePath2(param0: CPointer<Win32__impl_l0.PointF>, param1: CPointer<UInt8>, param2: Int32, param3: Int32, path: CPointer<CPointer<Win32__impl_l0.GpPath>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreatePath2 == "on"]
+public unsafe func Windows_GdipCreatePath2(param0: CPointer<Win32__impl_l0.PointF>, param1: CPointer<UInt8>, param2: Int32, param3: Int32, path: CPointer<CPointer<Win32__impl_l0.GpPath>>): Int32 {
+    return GdipCreatePath2(param0, param1, param2, param3, path)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreatePath2I == "on"]
+foreign {
+    func GdipCreatePath2I(param0: CPointer<Win32__impl_l0.Point>, param1: CPointer<UInt8>, param2: Int32, param3: Int32, path: CPointer<CPointer<Win32__impl_l0.GpPath>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreatePath2I == "on"]
+public unsafe func Windows_GdipCreatePath2I(param0: CPointer<Win32__impl_l0.Point>, param1: CPointer<UInt8>, param2: Int32, param3: Int32, path: CPointer<CPointer<Win32__impl_l0.GpPath>>): Int32 {
+    return GdipCreatePath2I(param0, param1, param2, param3, path)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreatePathGradient == "on"]
+foreign {
+    func GdipCreatePathGradient(points: CPointer<Win32__impl_l0.PointF>, count: Int32, wrapMode: Int32, polyGradient: CPointer<CPointer<Win32__impl_l0.GpPathGradient>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreatePathGradient == "on"]
+public unsafe func Windows_GdipCreatePathGradient(points: CPointer<Win32__impl_l0.PointF>, count: Int32, wrapMode: Int32, polyGradient: CPointer<CPointer<Win32__impl_l0.GpPathGradient>>): Int32 {
+    return GdipCreatePathGradient(points, count, wrapMode, polyGradient)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreatePathGradientFromPath == "on"]
+foreign {
+    func GdipCreatePathGradientFromPath(path: CPointer<Win32__impl_l0.GpPath>, polyGradient: CPointer<CPointer<Win32__impl_l0.GpPathGradient>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreatePathGradientFromPath == "on"]
+public unsafe func Windows_GdipCreatePathGradientFromPath(path: CPointer<Win32__impl_l0.GpPath>, polyGradient: CPointer<CPointer<Win32__impl_l0.GpPathGradient>>): Int32 {
+    return GdipCreatePathGradientFromPath(path, polyGradient)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreatePathGradientI == "on"]
+foreign {
+    func GdipCreatePathGradientI(points: CPointer<Win32__impl_l0.Point>, count: Int32, wrapMode: Int32, polyGradient: CPointer<CPointer<Win32__impl_l0.GpPathGradient>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreatePathGradientI == "on"]
+public unsafe func Windows_GdipCreatePathGradientI(points: CPointer<Win32__impl_l0.Point>, count: Int32, wrapMode: Int32, polyGradient: CPointer<CPointer<Win32__impl_l0.GpPathGradient>>): Int32 {
+    return GdipCreatePathGradientI(points, count, wrapMode, polyGradient)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreatePathIter == "on"]
+foreign {
+    func GdipCreatePathIter(iterator: CPointer<CPointer<Win32__impl_l0.GpPathIterator>>, path: CPointer<Win32__impl_l0.GpPath>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreatePathIter == "on"]
+public unsafe func Windows_GdipCreatePathIter(iterator: CPointer<CPointer<Win32__impl_l0.GpPathIterator>>, path: CPointer<Win32__impl_l0.GpPath>): Int32 {
+    return GdipCreatePathIter(iterator, path)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreatePen1 == "on"]
+foreign {
+    func GdipCreatePen1(color: UInt32, width: Float32, unit: Int32, pen: CPointer<CPointer<Win32__impl_l0.GpPen>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreatePen1 == "on"]
+public unsafe func Windows_GdipCreatePen1(color: UInt32, width: Float32, unit: Int32, pen: CPointer<CPointer<Win32__impl_l0.GpPen>>): Int32 {
+    return GdipCreatePen1(color, width, unit, pen)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreatePen2 == "on"]
+foreign {
+    func GdipCreatePen2(brush: CPointer<Win32__impl_l0.GpBrush>, width: Float32, unit: Int32, pen: CPointer<CPointer<Win32__impl_l0.GpPen>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreatePen2 == "on"]
+public unsafe func Windows_GdipCreatePen2(brush: CPointer<Win32__impl_l0.GpBrush>, width: Float32, unit: Int32, pen: CPointer<CPointer<Win32__impl_l0.GpPen>>): Int32 {
+    return GdipCreatePen2(brush, width, unit, pen)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateRegion == "on"]
+foreign {
+    func GdipCreateRegion(region: CPointer<CPointer<Win32__impl_l0.GpRegion>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateRegion == "on"]
+public unsafe func Windows_GdipCreateRegion(region: CPointer<CPointer<Win32__impl_l0.GpRegion>>): Int32 {
+    return GdipCreateRegion(region)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateRegionHrgn == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func GdipCreateRegionHrgn(hRgn: Win32_Graphics_Gdi.HRGN, region: CPointer<CPointer<Win32__impl_l0.GpRegion>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateRegionHrgn == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GdipCreateRegionHrgn(hRgn: Win32_Graphics_Gdi.HRGN, region: CPointer<CPointer<Win32__impl_l0.GpRegion>>): Int32 {
+    return GdipCreateRegionHrgn(hRgn, region)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateRegionPath == "on"]
+foreign {
+    func GdipCreateRegionPath(path: CPointer<Win32__impl_l0.GpPath>, region: CPointer<CPointer<Win32__impl_l0.GpRegion>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateRegionPath == "on"]
+public unsafe func Windows_GdipCreateRegionPath(path: CPointer<Win32__impl_l0.GpPath>, region: CPointer<CPointer<Win32__impl_l0.GpRegion>>): Int32 {
+    return GdipCreateRegionPath(path, region)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateRegionRect == "on"]
+foreign {
+    func GdipCreateRegionRect(rect: CPointer<Win32__impl_l0.RectF>, region: CPointer<CPointer<Win32__impl_l0.GpRegion>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateRegionRect == "on"]
+public unsafe func Windows_GdipCreateRegionRect(rect: CPointer<Win32__impl_l0.RectF>, region: CPointer<CPointer<Win32__impl_l0.GpRegion>>): Int32 {
+    return GdipCreateRegionRect(rect, region)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateRegionRectI == "on"]
+foreign {
+    func GdipCreateRegionRectI(rect: CPointer<Win32__impl_l0.Rect>, region: CPointer<CPointer<Win32__impl_l0.GpRegion>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateRegionRectI == "on"]
+public unsafe func Windows_GdipCreateRegionRectI(rect: CPointer<Win32__impl_l0.Rect>, region: CPointer<CPointer<Win32__impl_l0.GpRegion>>): Int32 {
+    return GdipCreateRegionRectI(rect, region)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateRegionRgnData == "on"]
+foreign {
+    func GdipCreateRegionRgnData(regionData: CPointer<UInt8>, size: Int32, region: CPointer<CPointer<Win32__impl_l0.GpRegion>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateRegionRgnData == "on"]
+public unsafe func Windows_GdipCreateRegionRgnData(regionData: CPointer<UInt8>, size: Int32, region: CPointer<CPointer<Win32__impl_l0.GpRegion>>): Int32 {
+    return GdipCreateRegionRgnData(regionData, size, region)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateSolidFill == "on"]
+foreign {
+    func GdipCreateSolidFill(color: UInt32, brush: CPointer<CPointer<Win32__impl_l0.GpSolidFill>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateSolidFill == "on"]
+public unsafe func Windows_GdipCreateSolidFill(color: UInt32, brush: CPointer<CPointer<Win32__impl_l0.GpSolidFill>>): Int32 {
+    return GdipCreateSolidFill(color, brush)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateStreamOnFile == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func GdipCreateStreamOnFile(filename: CPointer<UInt16>, access: UInt32, stream: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateStreamOnFile == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_GdipCreateStreamOnFile(filename: CPointer<UInt16>, access: UInt32, stream: CPointer<CPointer<Unit>>): Int32 {
+    return GdipCreateStreamOnFile(filename, access, stream)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateStringFormat == "on"]
+foreign {
+    func GdipCreateStringFormat(formatAttributes: Int32, language: UInt16, format: CPointer<CPointer<Win32__impl_l0.GpStringFormat>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateStringFormat == "on"]
+public unsafe func Windows_GdipCreateStringFormat(formatAttributes: Int32, language: UInt16, format: CPointer<CPointer<Win32__impl_l0.GpStringFormat>>): Int32 {
+    return GdipCreateStringFormat(formatAttributes, language, format)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateTexture == "on"]
+foreign {
+    func GdipCreateTexture(image: CPointer<Win32__impl_l0.GpImage>, wrapmode: Int32, texture: CPointer<CPointer<Win32__impl_l0.GpTexture>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateTexture == "on"]
+public unsafe func Windows_GdipCreateTexture(image: CPointer<Win32__impl_l0.GpImage>, wrapmode: Int32, texture: CPointer<CPointer<Win32__impl_l0.GpTexture>>): Int32 {
+    return GdipCreateTexture(image, wrapmode, texture)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateTexture2 == "on"]
+foreign {
+    func GdipCreateTexture2(image: CPointer<Win32__impl_l0.GpImage>, wrapmode: Int32, x: Float32, y: Float32, width: Float32, height: Float32, texture: CPointer<CPointer<Win32__impl_l0.GpTexture>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateTexture2 == "on"]
+public unsafe func Windows_GdipCreateTexture2(image: CPointer<Win32__impl_l0.GpImage>, wrapmode: Int32, x: Float32, y: Float32, width: Float32, height: Float32, texture: CPointer<CPointer<Win32__impl_l0.GpTexture>>): Int32 {
+    return GdipCreateTexture2(image, wrapmode, x, y, width, height, texture)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateTexture2I == "on"]
+foreign {
+    func GdipCreateTexture2I(image: CPointer<Win32__impl_l0.GpImage>, wrapmode: Int32, x: Int32, y: Int32, width: Int32, height: Int32, texture: CPointer<CPointer<Win32__impl_l0.GpTexture>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateTexture2I == "on"]
+public unsafe func Windows_GdipCreateTexture2I(image: CPointer<Win32__impl_l0.GpImage>, wrapmode: Int32, x: Int32, y: Int32, width: Int32, height: Int32, texture: CPointer<CPointer<Win32__impl_l0.GpTexture>>): Int32 {
+    return GdipCreateTexture2I(image, wrapmode, x, y, width, height, texture)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateTextureIA == "on"]
+foreign {
+    func GdipCreateTextureIA(image: CPointer<Win32__impl_l0.GpImage>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>, x: Float32, y: Float32, width: Float32, height: Float32, texture: CPointer<CPointer<Win32__impl_l0.GpTexture>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateTextureIA == "on"]
+public unsafe func Windows_GdipCreateTextureIA(image: CPointer<Win32__impl_l0.GpImage>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>, x: Float32, y: Float32, width: Float32, height: Float32, texture: CPointer<CPointer<Win32__impl_l0.GpTexture>>): Int32 {
+    return GdipCreateTextureIA(image, imageAttributes, x, y, width, height, texture)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateTextureIAI == "on"]
+foreign {
+    func GdipCreateTextureIAI(image: CPointer<Win32__impl_l0.GpImage>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>, x: Int32, y: Int32, width: Int32, height: Int32, texture: CPointer<CPointer<Win32__impl_l0.GpTexture>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipCreateTextureIAI == "on"]
+public unsafe func Windows_GdipCreateTextureIAI(image: CPointer<Win32__impl_l0.GpImage>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>, x: Int32, y: Int32, width: Int32, height: Int32, texture: CPointer<CPointer<Win32__impl_l0.GpTexture>>): Int32 {
+    return GdipCreateTextureIAI(image, imageAttributes, x, y, width, height, texture)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeleteBrush == "on"]
+foreign {
+    func GdipDeleteBrush(brush: CPointer<Win32__impl_l0.GpBrush>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeleteBrush == "on"]
+public unsafe func Windows_GdipDeleteBrush(brush: CPointer<Win32__impl_l0.GpBrush>): Int32 {
+    return GdipDeleteBrush(brush)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeleteCachedBitmap == "on"]
+foreign {
+    func GdipDeleteCachedBitmap(cachedBitmap: CPointer<Win32__impl_l0.GpCachedBitmap>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeleteCachedBitmap == "on"]
+public unsafe func Windows_GdipDeleteCachedBitmap(cachedBitmap: CPointer<Win32__impl_l0.GpCachedBitmap>): Int32 {
+    return GdipDeleteCachedBitmap(cachedBitmap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeleteCustomLineCap == "on"]
+foreign {
+    func GdipDeleteCustomLineCap(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeleteCustomLineCap == "on"]
+public unsafe func Windows_GdipDeleteCustomLineCap(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>): Int32 {
+    return GdipDeleteCustomLineCap(customCap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeleteEffect == "on"]
+foreign {
+    func GdipDeleteEffect(effect: CPointer<Win32__impl_l0.CGpEffect>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeleteEffect == "on"]
+public unsafe func Windows_GdipDeleteEffect(effect: CPointer<Win32__impl_l0.CGpEffect>): Int32 {
+    return GdipDeleteEffect(effect)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeleteFont == "on"]
+foreign {
+    func GdipDeleteFont(font: CPointer<Win32__impl_l0.GpFont>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeleteFont == "on"]
+public unsafe func Windows_GdipDeleteFont(font: CPointer<Win32__impl_l0.GpFont>): Int32 {
+    return GdipDeleteFont(font)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeleteFontFamily == "on"]
+foreign {
+    func GdipDeleteFontFamily(fontFamily: CPointer<Win32__impl_l0.GpFontFamily>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeleteFontFamily == "on"]
+public unsafe func Windows_GdipDeleteFontFamily(fontFamily: CPointer<Win32__impl_l0.GpFontFamily>): Int32 {
+    return GdipDeleteFontFamily(fontFamily)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeleteGraphics == "on"]
+foreign {
+    func GdipDeleteGraphics(graphics: CPointer<Win32__impl_l0.GpGraphics>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeleteGraphics == "on"]
+public unsafe func Windows_GdipDeleteGraphics(graphics: CPointer<Win32__impl_l0.GpGraphics>): Int32 {
+    return GdipDeleteGraphics(graphics)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeleteMatrix == "on"]
+foreign {
+    func GdipDeleteMatrix(matrix: CPointer<Win32__impl_l0.Matrix>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeleteMatrix == "on"]
+public unsafe func Windows_GdipDeleteMatrix(matrix: CPointer<Win32__impl_l0.Matrix>): Int32 {
+    return GdipDeleteMatrix(matrix)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeletePath == "on"]
+foreign {
+    func GdipDeletePath(path: CPointer<Win32__impl_l0.GpPath>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeletePath == "on"]
+public unsafe func Windows_GdipDeletePath(path: CPointer<Win32__impl_l0.GpPath>): Int32 {
+    return GdipDeletePath(path)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeletePathIter == "on"]
+foreign {
+    func GdipDeletePathIter(iterator: CPointer<Win32__impl_l0.GpPathIterator>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeletePathIter == "on"]
+public unsafe func Windows_GdipDeletePathIter(iterator: CPointer<Win32__impl_l0.GpPathIterator>): Int32 {
+    return GdipDeletePathIter(iterator)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeletePen == "on"]
+foreign {
+    func GdipDeletePen(pen: CPointer<Win32__impl_l0.GpPen>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeletePen == "on"]
+public unsafe func Windows_GdipDeletePen(pen: CPointer<Win32__impl_l0.GpPen>): Int32 {
+    return GdipDeletePen(pen)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeletePrivateFontCollection == "on"]
+foreign {
+    func GdipDeletePrivateFontCollection(fontCollection: CPointer<CPointer<Win32__impl_l0.GpFontCollection>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeletePrivateFontCollection == "on"]
+public unsafe func Windows_GdipDeletePrivateFontCollection(fontCollection: CPointer<CPointer<Win32__impl_l0.GpFontCollection>>): Int32 {
+    return GdipDeletePrivateFontCollection(fontCollection)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeleteRegion == "on"]
+foreign {
+    func GdipDeleteRegion(region: CPointer<Win32__impl_l0.GpRegion>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeleteRegion == "on"]
+public unsafe func Windows_GdipDeleteRegion(region: CPointer<Win32__impl_l0.GpRegion>): Int32 {
+    return GdipDeleteRegion(region)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeleteStringFormat == "on"]
+foreign {
+    func GdipDeleteStringFormat(format: CPointer<Win32__impl_l0.GpStringFormat>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDeleteStringFormat == "on"]
+public unsafe func Windows_GdipDeleteStringFormat(format: CPointer<Win32__impl_l0.GpStringFormat>): Int32 {
+    return GdipDeleteStringFormat(format)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDisposeImage == "on"]
+foreign {
+    func GdipDisposeImage(image: CPointer<Win32__impl_l0.GpImage>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDisposeImage == "on"]
+public unsafe func Windows_GdipDisposeImage(image: CPointer<Win32__impl_l0.GpImage>): Int32 {
+    return GdipDisposeImage(image)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDisposeImageAttributes == "on"]
+foreign {
+    func GdipDisposeImageAttributes(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDisposeImageAttributes == "on"]
+public unsafe func Windows_GdipDisposeImageAttributes(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>): Int32 {
+    return GdipDisposeImageAttributes(imageattr)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawArc == "on"]
+foreign {
+    func GdipDrawArc(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x: Float32, y: Float32, width: Float32, height: Float32, startAngle: Float32, sweepAngle: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawArc == "on"]
+public unsafe func Windows_GdipDrawArc(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x: Float32, y: Float32, width: Float32, height: Float32, startAngle: Float32, sweepAngle: Float32): Int32 {
+    return GdipDrawArc(graphics, pen, x, y, width, height, startAngle, sweepAngle)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawArcI == "on"]
+foreign {
+    func GdipDrawArcI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x: Int32, y: Int32, width: Int32, height: Int32, startAngle: Float32, sweepAngle: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawArcI == "on"]
+public unsafe func Windows_GdipDrawArcI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x: Int32, y: Int32, width: Int32, height: Int32, startAngle: Float32, sweepAngle: Float32): Int32 {
+    return GdipDrawArcI(graphics, pen, x, y, width, height, startAngle, sweepAngle)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawBezier == "on"]
+foreign {
+    func GdipDrawBezier(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x1: Float32, y1: Float32, x2: Float32, y2: Float32, x3: Float32, y3: Float32, x4: Float32, y4: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawBezier == "on"]
+public unsafe func Windows_GdipDrawBezier(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x1: Float32, y1: Float32, x2: Float32, y2: Float32, x3: Float32, y3: Float32, x4: Float32, y4: Float32): Int32 {
+    return GdipDrawBezier(graphics, pen, x1, y1, x2, y2, x3, y3, x4, y4)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawBezierI == "on"]
+foreign {
+    func GdipDrawBezierI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x1: Int32, y1: Int32, x2: Int32, y2: Int32, x3: Int32, y3: Int32, x4: Int32, y4: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawBezierI == "on"]
+public unsafe func Windows_GdipDrawBezierI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x1: Int32, y1: Int32, x2: Int32, y2: Int32, x3: Int32, y3: Int32, x4: Int32, y4: Int32): Int32 {
+    return GdipDrawBezierI(graphics, pen, x1, y1, x2, y2, x3, y3, x4, y4)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawBeziers == "on"]
+foreign {
+    func GdipDrawBeziers(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawBeziers == "on"]
+public unsafe func Windows_GdipDrawBeziers(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32 {
+    return GdipDrawBeziers(graphics, pen, points, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawBeziersI == "on"]
+foreign {
+    func GdipDrawBeziersI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawBeziersI == "on"]
+public unsafe func Windows_GdipDrawBeziersI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32 {
+    return GdipDrawBeziersI(graphics, pen, points, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawCachedBitmap == "on"]
+foreign {
+    func GdipDrawCachedBitmap(graphics: CPointer<Win32__impl_l0.GpGraphics>, cachedBitmap: CPointer<Win32__impl_l0.GpCachedBitmap>, x: Int32, y: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawCachedBitmap == "on"]
+public unsafe func Windows_GdipDrawCachedBitmap(graphics: CPointer<Win32__impl_l0.GpGraphics>, cachedBitmap: CPointer<Win32__impl_l0.GpCachedBitmap>, x: Int32, y: Int32): Int32 {
+    return GdipDrawCachedBitmap(graphics, cachedBitmap, x, y)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawClosedCurve == "on"]
+foreign {
+    func GdipDrawClosedCurve(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawClosedCurve == "on"]
+public unsafe func Windows_GdipDrawClosedCurve(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32 {
+    return GdipDrawClosedCurve(graphics, pen, points, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawClosedCurve2 == "on"]
+foreign {
+    func GdipDrawClosedCurve2(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.PointF>, count: Int32, tension: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawClosedCurve2 == "on"]
+public unsafe func Windows_GdipDrawClosedCurve2(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.PointF>, count: Int32, tension: Float32): Int32 {
+    return GdipDrawClosedCurve2(graphics, pen, points, count, tension)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawClosedCurve2I == "on"]
+foreign {
+    func GdipDrawClosedCurve2I(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.Point>, count: Int32, tension: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawClosedCurve2I == "on"]
+public unsafe func Windows_GdipDrawClosedCurve2I(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.Point>, count: Int32, tension: Float32): Int32 {
+    return GdipDrawClosedCurve2I(graphics, pen, points, count, tension)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawClosedCurveI == "on"]
+foreign {
+    func GdipDrawClosedCurveI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawClosedCurveI == "on"]
+public unsafe func Windows_GdipDrawClosedCurveI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32 {
+    return GdipDrawClosedCurveI(graphics, pen, points, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawCurve == "on"]
+foreign {
+    func GdipDrawCurve(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawCurve == "on"]
+public unsafe func Windows_GdipDrawCurve(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32 {
+    return GdipDrawCurve(graphics, pen, points, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawCurve2 == "on"]
+foreign {
+    func GdipDrawCurve2(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.PointF>, count: Int32, tension: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawCurve2 == "on"]
+public unsafe func Windows_GdipDrawCurve2(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.PointF>, count: Int32, tension: Float32): Int32 {
+    return GdipDrawCurve2(graphics, pen, points, count, tension)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawCurve2I == "on"]
+foreign {
+    func GdipDrawCurve2I(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.Point>, count: Int32, tension: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawCurve2I == "on"]
+public unsafe func Windows_GdipDrawCurve2I(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.Point>, count: Int32, tension: Float32): Int32 {
+    return GdipDrawCurve2I(graphics, pen, points, count, tension)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawCurve3 == "on"]
+foreign {
+    func GdipDrawCurve3(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.PointF>, count: Int32, offset: Int32, numberOfSegments: Int32, tension: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawCurve3 == "on"]
+public unsafe func Windows_GdipDrawCurve3(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.PointF>, count: Int32, offset: Int32, numberOfSegments: Int32, tension: Float32): Int32 {
+    return GdipDrawCurve3(graphics, pen, points, count, offset, numberOfSegments, tension)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawCurve3I == "on"]
+foreign {
+    func GdipDrawCurve3I(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.Point>, count: Int32, offset: Int32, numberOfSegments: Int32, tension: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawCurve3I == "on"]
+public unsafe func Windows_GdipDrawCurve3I(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.Point>, count: Int32, offset: Int32, numberOfSegments: Int32, tension: Float32): Int32 {
+    return GdipDrawCurve3I(graphics, pen, points, count, offset, numberOfSegments, tension)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawCurveI == "on"]
+foreign {
+    func GdipDrawCurveI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawCurveI == "on"]
+public unsafe func Windows_GdipDrawCurveI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32 {
+    return GdipDrawCurveI(graphics, pen, points, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawDriverString == "on"]
+foreign {
+    func GdipDrawDriverString(graphics: CPointer<Win32__impl_l0.GpGraphics>, text: CPointer<UInt16>, length: Int32, font: CPointer<Win32__impl_l0.GpFont>, brush: CPointer<Win32__impl_l0.GpBrush>, positions: CPointer<Win32__impl_l0.PointF>, flags: Int32, matrix: CPointer<Win32__impl_l0.Matrix>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawDriverString == "on"]
+public unsafe func Windows_GdipDrawDriverString(graphics: CPointer<Win32__impl_l0.GpGraphics>, text: CPointer<UInt16>, length: Int32, font: CPointer<Win32__impl_l0.GpFont>, brush: CPointer<Win32__impl_l0.GpBrush>, positions: CPointer<Win32__impl_l0.PointF>, flags: Int32, matrix: CPointer<Win32__impl_l0.Matrix>): Int32 {
+    return GdipDrawDriverString(graphics, text, length, font, brush, positions, flags, matrix)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawEllipse == "on"]
+foreign {
+    func GdipDrawEllipse(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x: Float32, y: Float32, width: Float32, height: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawEllipse == "on"]
+public unsafe func Windows_GdipDrawEllipse(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x: Float32, y: Float32, width: Float32, height: Float32): Int32 {
+    return GdipDrawEllipse(graphics, pen, x, y, width, height)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawEllipseI == "on"]
+foreign {
+    func GdipDrawEllipseI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x: Int32, y: Int32, width: Int32, height: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawEllipseI == "on"]
+public unsafe func Windows_GdipDrawEllipseI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x: Int32, y: Int32, width: Int32, height: Int32): Int32 {
+    return GdipDrawEllipseI(graphics, pen, x, y, width, height)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImage == "on"]
+foreign {
+    func GdipDrawImage(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, x: Float32, y: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImage == "on"]
+public unsafe func Windows_GdipDrawImage(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, x: Float32, y: Float32): Int32 {
+    return GdipDrawImage(graphics, image, x, y)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImageFX == "on"]
+foreign {
+    func GdipDrawImageFX(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, source: CPointer<Win32__impl_l0.RectF>, xForm: CPointer<Win32__impl_l0.Matrix>, effect: CPointer<Win32__impl_l0.CGpEffect>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>, srcUnit: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImageFX == "on"]
+public unsafe func Windows_GdipDrawImageFX(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, source: CPointer<Win32__impl_l0.RectF>, xForm: CPointer<Win32__impl_l0.Matrix>, effect: CPointer<Win32__impl_l0.CGpEffect>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>, srcUnit: Int32): Int32 {
+    return GdipDrawImageFX(graphics, image, source, xForm, effect, imageAttributes, srcUnit)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImageI == "on"]
+foreign {
+    func GdipDrawImageI(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, x: Int32, y: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImageI == "on"]
+public unsafe func Windows_GdipDrawImageI(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, x: Int32, y: Int32): Int32 {
+    return GdipDrawImageI(graphics, image, x, y)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImagePointRect == "on"]
+foreign {
+    func GdipDrawImagePointRect(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, x: Float32, y: Float32, srcx: Float32, srcy: Float32, srcwidth: Float32, srcheight: Float32, srcUnit: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImagePointRect == "on"]
+public unsafe func Windows_GdipDrawImagePointRect(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, x: Float32, y: Float32, srcx: Float32, srcy: Float32, srcwidth: Float32, srcheight: Float32, srcUnit: Int32): Int32 {
+    return GdipDrawImagePointRect(graphics, image, x, y, srcx, srcy, srcwidth, srcheight, srcUnit)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImagePointRectI == "on"]
+foreign {
+    func GdipDrawImagePointRectI(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, x: Int32, y: Int32, srcx: Int32, srcy: Int32, srcwidth: Int32, srcheight: Int32, srcUnit: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImagePointRectI == "on"]
+public unsafe func Windows_GdipDrawImagePointRectI(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, x: Int32, y: Int32, srcx: Int32, srcy: Int32, srcwidth: Int32, srcheight: Int32, srcUnit: Int32): Int32 {
+    return GdipDrawImagePointRectI(graphics, image, x, y, srcx, srcy, srcwidth, srcheight, srcUnit)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImagePoints == "on"]
+foreign {
+    func GdipDrawImagePoints(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, dstpoints: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImagePoints == "on"]
+public unsafe func Windows_GdipDrawImagePoints(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, dstpoints: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32 {
+    return GdipDrawImagePoints(graphics, image, dstpoints, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImagePointsI == "on"]
+foreign {
+    func GdipDrawImagePointsI(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, dstpoints: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImagePointsI == "on"]
+public unsafe func Windows_GdipDrawImagePointsI(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, dstpoints: CPointer<Win32__impl_l0.Point>, count: Int32): Int32 {
+    return GdipDrawImagePointsI(graphics, image, dstpoints, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImagePointsRect == "on"]
+foreign {
+    func GdipDrawImagePointsRect(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, points: CPointer<Win32__impl_l0.PointF>, count: Int32, srcx: Float32, srcy: Float32, srcwidth: Float32, srcheight: Float32, srcUnit: Int32, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>, callback: IntNative, callbackData: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImagePointsRect == "on"]
+public unsafe func Windows_GdipDrawImagePointsRect(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, points: CPointer<Win32__impl_l0.PointF>, count: Int32, srcx: Float32, srcy: Float32, srcwidth: Float32, srcheight: Float32, srcUnit: Int32, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>, callback: IntNative, callbackData: CPointer<Unit>): Int32 {
+    return GdipDrawImagePointsRect(graphics, image, points, count, srcx, srcy, srcwidth, srcheight, srcUnit, imageAttributes, callback, callbackData)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImagePointsRectI == "on"]
+foreign {
+    func GdipDrawImagePointsRectI(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, points: CPointer<Win32__impl_l0.Point>, count: Int32, srcx: Int32, srcy: Int32, srcwidth: Int32, srcheight: Int32, srcUnit: Int32, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>, callback: IntNative, callbackData: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImagePointsRectI == "on"]
+public unsafe func Windows_GdipDrawImagePointsRectI(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, points: CPointer<Win32__impl_l0.Point>, count: Int32, srcx: Int32, srcy: Int32, srcwidth: Int32, srcheight: Int32, srcUnit: Int32, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>, callback: IntNative, callbackData: CPointer<Unit>): Int32 {
+    return GdipDrawImagePointsRectI(graphics, image, points, count, srcx, srcy, srcwidth, srcheight, srcUnit, imageAttributes, callback, callbackData)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImageRect == "on"]
+foreign {
+    func GdipDrawImageRect(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, x: Float32, y: Float32, width: Float32, height: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImageRect == "on"]
+public unsafe func Windows_GdipDrawImageRect(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, x: Float32, y: Float32, width: Float32, height: Float32): Int32 {
+    return GdipDrawImageRect(graphics, image, x, y, width, height)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImageRectI == "on"]
+foreign {
+    func GdipDrawImageRectI(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, x: Int32, y: Int32, width: Int32, height: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImageRectI == "on"]
+public unsafe func Windows_GdipDrawImageRectI(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, x: Int32, y: Int32, width: Int32, height: Int32): Int32 {
+    return GdipDrawImageRectI(graphics, image, x, y, width, height)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImageRectRect == "on"]
+foreign {
+    func GdipDrawImageRectRect(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, dstx: Float32, dsty: Float32, dstwidth: Float32, dstheight: Float32, srcx: Float32, srcy: Float32, srcwidth: Float32, srcheight: Float32, srcUnit: Int32, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>, callback: IntNative, callbackData: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImageRectRect == "on"]
+public unsafe func Windows_GdipDrawImageRectRect(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, dstx: Float32, dsty: Float32, dstwidth: Float32, dstheight: Float32, srcx: Float32, srcy: Float32, srcwidth: Float32, srcheight: Float32, srcUnit: Int32, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>, callback: IntNative, callbackData: CPointer<Unit>): Int32 {
+    return GdipDrawImageRectRect(graphics, image, dstx, dsty, dstwidth, dstheight, srcx, srcy, srcwidth, srcheight, srcUnit, imageAttributes, callback, callbackData)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImageRectRectI == "on"]
+foreign {
+    func GdipDrawImageRectRectI(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, dstx: Int32, dsty: Int32, dstwidth: Int32, dstheight: Int32, srcx: Int32, srcy: Int32, srcwidth: Int32, srcheight: Int32, srcUnit: Int32, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>, callback: IntNative, callbackData: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawImageRectRectI == "on"]
+public unsafe func Windows_GdipDrawImageRectRectI(graphics: CPointer<Win32__impl_l0.GpGraphics>, image: CPointer<Win32__impl_l0.GpImage>, dstx: Int32, dsty: Int32, dstwidth: Int32, dstheight: Int32, srcx: Int32, srcy: Int32, srcwidth: Int32, srcheight: Int32, srcUnit: Int32, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>, callback: IntNative, callbackData: CPointer<Unit>): Int32 {
+    return GdipDrawImageRectRectI(graphics, image, dstx, dsty, dstwidth, dstheight, srcx, srcy, srcwidth, srcheight, srcUnit, imageAttributes, callback, callbackData)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawLine == "on"]
+foreign {
+    func GdipDrawLine(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x1: Float32, y1: Float32, x2: Float32, y2: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawLine == "on"]
+public unsafe func Windows_GdipDrawLine(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x1: Float32, y1: Float32, x2: Float32, y2: Float32): Int32 {
+    return GdipDrawLine(graphics, pen, x1, y1, x2, y2)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawLineI == "on"]
+foreign {
+    func GdipDrawLineI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x1: Int32, y1: Int32, x2: Int32, y2: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawLineI == "on"]
+public unsafe func Windows_GdipDrawLineI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x1: Int32, y1: Int32, x2: Int32, y2: Int32): Int32 {
+    return GdipDrawLineI(graphics, pen, x1, y1, x2, y2)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawLines == "on"]
+foreign {
+    func GdipDrawLines(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawLines == "on"]
+public unsafe func Windows_GdipDrawLines(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32 {
+    return GdipDrawLines(graphics, pen, points, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawLinesI == "on"]
+foreign {
+    func GdipDrawLinesI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawLinesI == "on"]
+public unsafe func Windows_GdipDrawLinesI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32 {
+    return GdipDrawLinesI(graphics, pen, points, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawPath == "on"]
+foreign {
+    func GdipDrawPath(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, path: CPointer<Win32__impl_l0.GpPath>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawPath == "on"]
+public unsafe func Windows_GdipDrawPath(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, path: CPointer<Win32__impl_l0.GpPath>): Int32 {
+    return GdipDrawPath(graphics, pen, path)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawPie == "on"]
+foreign {
+    func GdipDrawPie(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x: Float32, y: Float32, width: Float32, height: Float32, startAngle: Float32, sweepAngle: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawPie == "on"]
+public unsafe func Windows_GdipDrawPie(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x: Float32, y: Float32, width: Float32, height: Float32, startAngle: Float32, sweepAngle: Float32): Int32 {
+    return GdipDrawPie(graphics, pen, x, y, width, height, startAngle, sweepAngle)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawPieI == "on"]
+foreign {
+    func GdipDrawPieI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x: Int32, y: Int32, width: Int32, height: Int32, startAngle: Float32, sweepAngle: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawPieI == "on"]
+public unsafe func Windows_GdipDrawPieI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x: Int32, y: Int32, width: Int32, height: Int32, startAngle: Float32, sweepAngle: Float32): Int32 {
+    return GdipDrawPieI(graphics, pen, x, y, width, height, startAngle, sweepAngle)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawPolygon == "on"]
+foreign {
+    func GdipDrawPolygon(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawPolygon == "on"]
+public unsafe func Windows_GdipDrawPolygon(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32 {
+    return GdipDrawPolygon(graphics, pen, points, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawPolygonI == "on"]
+foreign {
+    func GdipDrawPolygonI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawPolygonI == "on"]
+public unsafe func Windows_GdipDrawPolygonI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32 {
+    return GdipDrawPolygonI(graphics, pen, points, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawRectangle == "on"]
+foreign {
+    func GdipDrawRectangle(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x: Float32, y: Float32, width: Float32, height: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawRectangle == "on"]
+public unsafe func Windows_GdipDrawRectangle(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x: Float32, y: Float32, width: Float32, height: Float32): Int32 {
+    return GdipDrawRectangle(graphics, pen, x, y, width, height)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawRectangleI == "on"]
+foreign {
+    func GdipDrawRectangleI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x: Int32, y: Int32, width: Int32, height: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawRectangleI == "on"]
+public unsafe func Windows_GdipDrawRectangleI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, x: Int32, y: Int32, width: Int32, height: Int32): Int32 {
+    return GdipDrawRectangleI(graphics, pen, x, y, width, height)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawRectangles == "on"]
+foreign {
+    func GdipDrawRectangles(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, rects: CPointer<Win32__impl_l0.RectF>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawRectangles == "on"]
+public unsafe func Windows_GdipDrawRectangles(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, rects: CPointer<Win32__impl_l0.RectF>, count: Int32): Int32 {
+    return GdipDrawRectangles(graphics, pen, rects, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawRectanglesI == "on"]
+foreign {
+    func GdipDrawRectanglesI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, rects: CPointer<Win32__impl_l0.Rect>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawRectanglesI == "on"]
+public unsafe func Windows_GdipDrawRectanglesI(graphics: CPointer<Win32__impl_l0.GpGraphics>, pen: CPointer<Win32__impl_l0.GpPen>, rects: CPointer<Win32__impl_l0.Rect>, count: Int32): Int32 {
+    return GdipDrawRectanglesI(graphics, pen, rects, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawString == "on"]
+foreign {
+    func GdipDrawString(graphics: CPointer<Win32__impl_l0.GpGraphics>, string: CPointer<UInt16>, length: Int32, font: CPointer<Win32__impl_l0.GpFont>, layoutRect: CPointer<Win32__impl_l0.RectF>, stringFormat: CPointer<Win32__impl_l0.GpStringFormat>, brush: CPointer<Win32__impl_l0.GpBrush>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipDrawString == "on"]
+public unsafe func Windows_GdipDrawString(graphics: CPointer<Win32__impl_l0.GpGraphics>, string: CPointer<UInt16>, length: Int32, font: CPointer<Win32__impl_l0.GpFont>, layoutRect: CPointer<Win32__impl_l0.RectF>, stringFormat: CPointer<Win32__impl_l0.GpStringFormat>, brush: CPointer<Win32__impl_l0.GpBrush>): Int32 {
+    return GdipDrawString(graphics, string, length, font, layoutRect, stringFormat, brush)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEmfToWmfBits == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    // param-hint: pData16 len=param[1] optional
+    func GdipEmfToWmfBits(hemf: Win32_Graphics_Gdi.HENHMETAFILE, cbData16: UInt32, pData16: CPointer<UInt8>, iMapMode: Int32, eFlags: Int32): UInt32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEmfToWmfBits == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GdipEmfToWmfBits(hemf: Win32_Graphics_Gdi.HENHMETAFILE, cbData16: UInt32, pData16: CPointer<UInt8>, iMapMode: Int32, eFlags: Int32): UInt32 {
+    return GdipEmfToWmfBits(hemf, cbData16, pData16, iMapMode, eFlags)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEndContainer == "on"]
+foreign {
+    func GdipEndContainer(graphics: CPointer<Win32__impl_l0.GpGraphics>, state: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEndContainer == "on"]
+public unsafe func Windows_GdipEndContainer(graphics: CPointer<Win32__impl_l0.GpGraphics>, state: UInt32): Int32 {
+    return GdipEndContainer(graphics, state)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileDestPoint == "on"]
+foreign {
+    func GdipEnumerateMetafileDestPoint(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destPoint: CPointer<Win32__impl_l0.PointF>, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileDestPoint == "on"]
+public unsafe func Windows_GdipEnumerateMetafileDestPoint(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destPoint: CPointer<Win32__impl_l0.PointF>, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32 {
+    return GdipEnumerateMetafileDestPoint(graphics, metafile, destPoint, callback, callbackData, imageAttributes)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileDestPointI == "on"]
+foreign {
+    func GdipEnumerateMetafileDestPointI(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destPoint: CPointer<Win32__impl_l0.Point>, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileDestPointI == "on"]
+public unsafe func Windows_GdipEnumerateMetafileDestPointI(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destPoint: CPointer<Win32__impl_l0.Point>, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32 {
+    return GdipEnumerateMetafileDestPointI(graphics, metafile, destPoint, callback, callbackData, imageAttributes)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileDestPoints == "on"]
+foreign {
+    func GdipEnumerateMetafileDestPoints(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destPoints: CPointer<Win32__impl_l0.PointF>, count: Int32, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileDestPoints == "on"]
+public unsafe func Windows_GdipEnumerateMetafileDestPoints(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destPoints: CPointer<Win32__impl_l0.PointF>, count: Int32, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32 {
+    return GdipEnumerateMetafileDestPoints(graphics, metafile, destPoints, count, callback, callbackData, imageAttributes)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileDestPointsI == "on"]
+foreign {
+    func GdipEnumerateMetafileDestPointsI(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destPoints: CPointer<Win32__impl_l0.Point>, count: Int32, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileDestPointsI == "on"]
+public unsafe func Windows_GdipEnumerateMetafileDestPointsI(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destPoints: CPointer<Win32__impl_l0.Point>, count: Int32, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32 {
+    return GdipEnumerateMetafileDestPointsI(graphics, metafile, destPoints, count, callback, callbackData, imageAttributes)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileDestRect == "on"]
+foreign {
+    func GdipEnumerateMetafileDestRect(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destRect: CPointer<Win32__impl_l0.RectF>, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileDestRect == "on"]
+public unsafe func Windows_GdipEnumerateMetafileDestRect(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destRect: CPointer<Win32__impl_l0.RectF>, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32 {
+    return GdipEnumerateMetafileDestRect(graphics, metafile, destRect, callback, callbackData, imageAttributes)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileDestRectI == "on"]
+foreign {
+    func GdipEnumerateMetafileDestRectI(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destRect: CPointer<Win32__impl_l0.Rect>, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileDestRectI == "on"]
+public unsafe func Windows_GdipEnumerateMetafileDestRectI(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destRect: CPointer<Win32__impl_l0.Rect>, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32 {
+    return GdipEnumerateMetafileDestRectI(graphics, metafile, destRect, callback, callbackData, imageAttributes)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileSrcRectDestPoint == "on"]
+foreign {
+    func GdipEnumerateMetafileSrcRectDestPoint(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destPoint: CPointer<Win32__impl_l0.PointF>, srcRect: CPointer<Win32__impl_l0.RectF>, srcUnit: Int32, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileSrcRectDestPoint == "on"]
+public unsafe func Windows_GdipEnumerateMetafileSrcRectDestPoint(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destPoint: CPointer<Win32__impl_l0.PointF>, srcRect: CPointer<Win32__impl_l0.RectF>, srcUnit: Int32, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32 {
+    return GdipEnumerateMetafileSrcRectDestPoint(graphics, metafile, destPoint, srcRect, srcUnit, callback, callbackData, imageAttributes)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileSrcRectDestPointI == "on"]
+foreign {
+    func GdipEnumerateMetafileSrcRectDestPointI(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destPoint: CPointer<Win32__impl_l0.Point>, srcRect: CPointer<Win32__impl_l0.Rect>, srcUnit: Int32, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileSrcRectDestPointI == "on"]
+public unsafe func Windows_GdipEnumerateMetafileSrcRectDestPointI(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destPoint: CPointer<Win32__impl_l0.Point>, srcRect: CPointer<Win32__impl_l0.Rect>, srcUnit: Int32, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32 {
+    return GdipEnumerateMetafileSrcRectDestPointI(graphics, metafile, destPoint, srcRect, srcUnit, callback, callbackData, imageAttributes)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileSrcRectDestPoints == "on"]
+foreign {
+    func GdipEnumerateMetafileSrcRectDestPoints(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destPoints: CPointer<Win32__impl_l0.PointF>, count: Int32, srcRect: CPointer<Win32__impl_l0.RectF>, srcUnit: Int32, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileSrcRectDestPoints == "on"]
+public unsafe func Windows_GdipEnumerateMetafileSrcRectDestPoints(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destPoints: CPointer<Win32__impl_l0.PointF>, count: Int32, srcRect: CPointer<Win32__impl_l0.RectF>, srcUnit: Int32, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32 {
+    return GdipEnumerateMetafileSrcRectDestPoints(graphics, metafile, destPoints, count, srcRect, srcUnit, callback, callbackData, imageAttributes)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileSrcRectDestPointsI == "on"]
+foreign {
+    func GdipEnumerateMetafileSrcRectDestPointsI(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destPoints: CPointer<Win32__impl_l0.Point>, count: Int32, srcRect: CPointer<Win32__impl_l0.Rect>, srcUnit: Int32, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileSrcRectDestPointsI == "on"]
+public unsafe func Windows_GdipEnumerateMetafileSrcRectDestPointsI(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destPoints: CPointer<Win32__impl_l0.Point>, count: Int32, srcRect: CPointer<Win32__impl_l0.Rect>, srcUnit: Int32, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32 {
+    return GdipEnumerateMetafileSrcRectDestPointsI(graphics, metafile, destPoints, count, srcRect, srcUnit, callback, callbackData, imageAttributes)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileSrcRectDestRect == "on"]
+foreign {
+    func GdipEnumerateMetafileSrcRectDestRect(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destRect: CPointer<Win32__impl_l0.RectF>, srcRect: CPointer<Win32__impl_l0.RectF>, srcUnit: Int32, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileSrcRectDestRect == "on"]
+public unsafe func Windows_GdipEnumerateMetafileSrcRectDestRect(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destRect: CPointer<Win32__impl_l0.RectF>, srcRect: CPointer<Win32__impl_l0.RectF>, srcUnit: Int32, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32 {
+    return GdipEnumerateMetafileSrcRectDestRect(graphics, metafile, destRect, srcRect, srcUnit, callback, callbackData, imageAttributes)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileSrcRectDestRectI == "on"]
+foreign {
+    func GdipEnumerateMetafileSrcRectDestRectI(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destRect: CPointer<Win32__impl_l0.Rect>, srcRect: CPointer<Win32__impl_l0.Rect>, srcUnit: Int32, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipEnumerateMetafileSrcRectDestRectI == "on"]
+public unsafe func Windows_GdipEnumerateMetafileSrcRectDestRectI(graphics: CPointer<Win32__impl_l0.GpGraphics>, metafile: CPointer<Win32__impl_l0.GpMetafile>, destRect: CPointer<Win32__impl_l0.Rect>, srcRect: CPointer<Win32__impl_l0.Rect>, srcUnit: Int32, callback: IntNative, callbackData: CPointer<Unit>, imageAttributes: CPointer<Win32__impl_l0.GpImageAttributes>): Int32 {
+    return GdipEnumerateMetafileSrcRectDestRectI(graphics, metafile, destRect, srcRect, srcUnit, callback, callbackData, imageAttributes)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillClosedCurve == "on"]
+foreign {
+    func GdipFillClosedCurve(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillClosedCurve == "on"]
+public unsafe func Windows_GdipFillClosedCurve(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32 {
+    return GdipFillClosedCurve(graphics, brush, points, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillClosedCurve2 == "on"]
+foreign {
+    func GdipFillClosedCurve2(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, points: CPointer<Win32__impl_l0.PointF>, count: Int32, tension: Float32, fillMode: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillClosedCurve2 == "on"]
+public unsafe func Windows_GdipFillClosedCurve2(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, points: CPointer<Win32__impl_l0.PointF>, count: Int32, tension: Float32, fillMode: Int32): Int32 {
+    return GdipFillClosedCurve2(graphics, brush, points, count, tension, fillMode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillClosedCurve2I == "on"]
+foreign {
+    func GdipFillClosedCurve2I(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, points: CPointer<Win32__impl_l0.Point>, count: Int32, tension: Float32, fillMode: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillClosedCurve2I == "on"]
+public unsafe func Windows_GdipFillClosedCurve2I(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, points: CPointer<Win32__impl_l0.Point>, count: Int32, tension: Float32, fillMode: Int32): Int32 {
+    return GdipFillClosedCurve2I(graphics, brush, points, count, tension, fillMode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillClosedCurveI == "on"]
+foreign {
+    func GdipFillClosedCurveI(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillClosedCurveI == "on"]
+public unsafe func Windows_GdipFillClosedCurveI(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32 {
+    return GdipFillClosedCurveI(graphics, brush, points, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillEllipse == "on"]
+foreign {
+    func GdipFillEllipse(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, x: Float32, y: Float32, width: Float32, height: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillEllipse == "on"]
+public unsafe func Windows_GdipFillEllipse(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, x: Float32, y: Float32, width: Float32, height: Float32): Int32 {
+    return GdipFillEllipse(graphics, brush, x, y, width, height)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillEllipseI == "on"]
+foreign {
+    func GdipFillEllipseI(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, x: Int32, y: Int32, width: Int32, height: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillEllipseI == "on"]
+public unsafe func Windows_GdipFillEllipseI(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, x: Int32, y: Int32, width: Int32, height: Int32): Int32 {
+    return GdipFillEllipseI(graphics, brush, x, y, width, height)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillPath == "on"]
+foreign {
+    func GdipFillPath(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, path: CPointer<Win32__impl_l0.GpPath>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillPath == "on"]
+public unsafe func Windows_GdipFillPath(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, path: CPointer<Win32__impl_l0.GpPath>): Int32 {
+    return GdipFillPath(graphics, brush, path)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillPie == "on"]
+foreign {
+    func GdipFillPie(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, x: Float32, y: Float32, width: Float32, height: Float32, startAngle: Float32, sweepAngle: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillPie == "on"]
+public unsafe func Windows_GdipFillPie(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, x: Float32, y: Float32, width: Float32, height: Float32, startAngle: Float32, sweepAngle: Float32): Int32 {
+    return GdipFillPie(graphics, brush, x, y, width, height, startAngle, sweepAngle)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillPieI == "on"]
+foreign {
+    func GdipFillPieI(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, x: Int32, y: Int32, width: Int32, height: Int32, startAngle: Float32, sweepAngle: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillPieI == "on"]
+public unsafe func Windows_GdipFillPieI(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, x: Int32, y: Int32, width: Int32, height: Int32, startAngle: Float32, sweepAngle: Float32): Int32 {
+    return GdipFillPieI(graphics, brush, x, y, width, height, startAngle, sweepAngle)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillPolygon == "on"]
+foreign {
+    func GdipFillPolygon(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, points: CPointer<Win32__impl_l0.PointF>, count: Int32, fillMode: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillPolygon == "on"]
+public unsafe func Windows_GdipFillPolygon(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, points: CPointer<Win32__impl_l0.PointF>, count: Int32, fillMode: Int32): Int32 {
+    return GdipFillPolygon(graphics, brush, points, count, fillMode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillPolygon2 == "on"]
+foreign {
+    func GdipFillPolygon2(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillPolygon2 == "on"]
+public unsafe func Windows_GdipFillPolygon2(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32 {
+    return GdipFillPolygon2(graphics, brush, points, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillPolygon2I == "on"]
+foreign {
+    func GdipFillPolygon2I(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillPolygon2I == "on"]
+public unsafe func Windows_GdipFillPolygon2I(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32 {
+    return GdipFillPolygon2I(graphics, brush, points, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillPolygonI == "on"]
+foreign {
+    func GdipFillPolygonI(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, points: CPointer<Win32__impl_l0.Point>, count: Int32, fillMode: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillPolygonI == "on"]
+public unsafe func Windows_GdipFillPolygonI(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, points: CPointer<Win32__impl_l0.Point>, count: Int32, fillMode: Int32): Int32 {
+    return GdipFillPolygonI(graphics, brush, points, count, fillMode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillRectangle == "on"]
+foreign {
+    func GdipFillRectangle(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, x: Float32, y: Float32, width: Float32, height: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillRectangle == "on"]
+public unsafe func Windows_GdipFillRectangle(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, x: Float32, y: Float32, width: Float32, height: Float32): Int32 {
+    return GdipFillRectangle(graphics, brush, x, y, width, height)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillRectangleI == "on"]
+foreign {
+    func GdipFillRectangleI(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, x: Int32, y: Int32, width: Int32, height: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillRectangleI == "on"]
+public unsafe func Windows_GdipFillRectangleI(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, x: Int32, y: Int32, width: Int32, height: Int32): Int32 {
+    return GdipFillRectangleI(graphics, brush, x, y, width, height)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillRectangles == "on"]
+foreign {
+    func GdipFillRectangles(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, rects: CPointer<Win32__impl_l0.RectF>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillRectangles == "on"]
+public unsafe func Windows_GdipFillRectangles(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, rects: CPointer<Win32__impl_l0.RectF>, count: Int32): Int32 {
+    return GdipFillRectangles(graphics, brush, rects, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillRectanglesI == "on"]
+foreign {
+    func GdipFillRectanglesI(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, rects: CPointer<Win32__impl_l0.Rect>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillRectanglesI == "on"]
+public unsafe func Windows_GdipFillRectanglesI(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, rects: CPointer<Win32__impl_l0.Rect>, count: Int32): Int32 {
+    return GdipFillRectanglesI(graphics, brush, rects, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillRegion == "on"]
+foreign {
+    func GdipFillRegion(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, region: CPointer<Win32__impl_l0.GpRegion>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFillRegion == "on"]
+public unsafe func Windows_GdipFillRegion(graphics: CPointer<Win32__impl_l0.GpGraphics>, brush: CPointer<Win32__impl_l0.GpBrush>, region: CPointer<Win32__impl_l0.GpRegion>): Int32 {
+    return GdipFillRegion(graphics, brush, region)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFindFirstImageItem == "on"]
+foreign {
+    func GdipFindFirstImageItem(image: CPointer<Win32__impl_l0.GpImage>, item: CPointer<Win32__impl_l0.ImageItemData>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFindFirstImageItem == "on"]
+public unsafe func Windows_GdipFindFirstImageItem(image: CPointer<Win32__impl_l0.GpImage>, item: CPointer<Win32__impl_l0.ImageItemData>): Int32 {
+    return GdipFindFirstImageItem(image, item)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFindNextImageItem == "on"]
+foreign {
+    func GdipFindNextImageItem(image: CPointer<Win32__impl_l0.GpImage>, item: CPointer<Win32__impl_l0.ImageItemData>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFindNextImageItem == "on"]
+public unsafe func Windows_GdipFindNextImageItem(image: CPointer<Win32__impl_l0.GpImage>, item: CPointer<Win32__impl_l0.ImageItemData>): Int32 {
+    return GdipFindNextImageItem(image, item)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFlattenPath == "on"]
+foreign {
+    func GdipFlattenPath(path: CPointer<Win32__impl_l0.GpPath>, matrix: CPointer<Win32__impl_l0.Matrix>, flatness: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFlattenPath == "on"]
+public unsafe func Windows_GdipFlattenPath(path: CPointer<Win32__impl_l0.GpPath>, matrix: CPointer<Win32__impl_l0.Matrix>, flatness: Float32): Int32 {
+    return GdipFlattenPath(path, matrix, flatness)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFlush == "on"]
+foreign {
+    func GdipFlush(graphics: CPointer<Win32__impl_l0.GpGraphics>, intention: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFlush == "on"]
+public unsafe func Windows_GdipFlush(graphics: CPointer<Win32__impl_l0.GpGraphics>, intention: Int32): Int32 {
+    return GdipFlush(graphics, intention)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFree == "on"]
+foreign {
+    func GdipFree(ptr: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipFree == "on"]
+public unsafe func Windows_GdipFree(ptr: CPointer<Unit>): Unit {
+    GdipFree(ptr)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetAdjustableArrowCapFillState == "on"]
+foreign {
+    func GdipGetAdjustableArrowCapFillState(cap: CPointer<Win32__impl_l0.GpAdjustableArrowCap>, fillState: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetAdjustableArrowCapFillState == "on"]
+public unsafe func Windows_GdipGetAdjustableArrowCapFillState(cap: CPointer<Win32__impl_l0.GpAdjustableArrowCap>, fillState: CPointer<Int32>): Int32 {
+    return GdipGetAdjustableArrowCapFillState(cap, fillState)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetAdjustableArrowCapHeight == "on"]
+foreign {
+    func GdipGetAdjustableArrowCapHeight(cap: CPointer<Win32__impl_l0.GpAdjustableArrowCap>, height: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetAdjustableArrowCapHeight == "on"]
+public unsafe func Windows_GdipGetAdjustableArrowCapHeight(cap: CPointer<Win32__impl_l0.GpAdjustableArrowCap>, height: CPointer<Float32>): Int32 {
+    return GdipGetAdjustableArrowCapHeight(cap, height)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetAdjustableArrowCapMiddleInset == "on"]
+foreign {
+    func GdipGetAdjustableArrowCapMiddleInset(cap: CPointer<Win32__impl_l0.GpAdjustableArrowCap>, middleInset: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetAdjustableArrowCapMiddleInset == "on"]
+public unsafe func Windows_GdipGetAdjustableArrowCapMiddleInset(cap: CPointer<Win32__impl_l0.GpAdjustableArrowCap>, middleInset: CPointer<Float32>): Int32 {
+    return GdipGetAdjustableArrowCapMiddleInset(cap, middleInset)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetAdjustableArrowCapWidth == "on"]
+foreign {
+    func GdipGetAdjustableArrowCapWidth(cap: CPointer<Win32__impl_l0.GpAdjustableArrowCap>, width: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetAdjustableArrowCapWidth == "on"]
+public unsafe func Windows_GdipGetAdjustableArrowCapWidth(cap: CPointer<Win32__impl_l0.GpAdjustableArrowCap>, width: CPointer<Float32>): Int32 {
+    return GdipGetAdjustableArrowCapWidth(cap, width)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetAllPropertyItems == "on"]
+foreign {
+    func GdipGetAllPropertyItems(image: CPointer<Win32__impl_l0.GpImage>, totalBufferSize: UInt32, numProperties: UInt32, allItems: CPointer<Win32__impl_l0.PropertyItem>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetAllPropertyItems == "on"]
+public unsafe func Windows_GdipGetAllPropertyItems(image: CPointer<Win32__impl_l0.GpImage>, totalBufferSize: UInt32, numProperties: UInt32, allItems: CPointer<Win32__impl_l0.PropertyItem>): Int32 {
+    return GdipGetAllPropertyItems(image, totalBufferSize, numProperties, allItems)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetBrushType == "on"]
+foreign {
+    func GdipGetBrushType(brush: CPointer<Win32__impl_l0.GpBrush>, type_: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetBrushType == "on"]
+public unsafe func Windows_GdipGetBrushType(brush: CPointer<Win32__impl_l0.GpBrush>, type_: CPointer<Int32>): Int32 {
+    return GdipGetBrushType(brush, type_)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetCellAscent == "on"]
+foreign {
+    func GdipGetCellAscent(family: CPointer<Win32__impl_l0.GpFontFamily>, style: Int32, CellAscent: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetCellAscent == "on"]
+public unsafe func Windows_GdipGetCellAscent(family: CPointer<Win32__impl_l0.GpFontFamily>, style: Int32, CellAscent: CPointer<UInt16>): Int32 {
+    return GdipGetCellAscent(family, style, CellAscent)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetCellDescent == "on"]
+foreign {
+    func GdipGetCellDescent(family: CPointer<Win32__impl_l0.GpFontFamily>, style: Int32, CellDescent: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetCellDescent == "on"]
+public unsafe func Windows_GdipGetCellDescent(family: CPointer<Win32__impl_l0.GpFontFamily>, style: Int32, CellDescent: CPointer<UInt16>): Int32 {
+    return GdipGetCellDescent(family, style, CellDescent)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetClip == "on"]
+foreign {
+    func GdipGetClip(graphics: CPointer<Win32__impl_l0.GpGraphics>, region: CPointer<Win32__impl_l0.GpRegion>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetClip == "on"]
+public unsafe func Windows_GdipGetClip(graphics: CPointer<Win32__impl_l0.GpGraphics>, region: CPointer<Win32__impl_l0.GpRegion>): Int32 {
+    return GdipGetClip(graphics, region)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetClipBounds == "on"]
+foreign {
+    func GdipGetClipBounds(graphics: CPointer<Win32__impl_l0.GpGraphics>, rect: CPointer<Win32__impl_l0.RectF>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetClipBounds == "on"]
+public unsafe func Windows_GdipGetClipBounds(graphics: CPointer<Win32__impl_l0.GpGraphics>, rect: CPointer<Win32__impl_l0.RectF>): Int32 {
+    return GdipGetClipBounds(graphics, rect)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetClipBoundsI == "on"]
+foreign {
+    func GdipGetClipBoundsI(graphics: CPointer<Win32__impl_l0.GpGraphics>, rect: CPointer<Win32__impl_l0.Rect>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetClipBoundsI == "on"]
+public unsafe func Windows_GdipGetClipBoundsI(graphics: CPointer<Win32__impl_l0.GpGraphics>, rect: CPointer<Win32__impl_l0.Rect>): Int32 {
+    return GdipGetClipBoundsI(graphics, rect)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetCompositingMode == "on"]
+foreign {
+    func GdipGetCompositingMode(graphics: CPointer<Win32__impl_l0.GpGraphics>, compositingMode: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetCompositingMode == "on"]
+public unsafe func Windows_GdipGetCompositingMode(graphics: CPointer<Win32__impl_l0.GpGraphics>, compositingMode: CPointer<Int32>): Int32 {
+    return GdipGetCompositingMode(graphics, compositingMode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetCompositingQuality == "on"]
+foreign {
+    func GdipGetCompositingQuality(graphics: CPointer<Win32__impl_l0.GpGraphics>, compositingQuality: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetCompositingQuality == "on"]
+public unsafe func Windows_GdipGetCompositingQuality(graphics: CPointer<Win32__impl_l0.GpGraphics>, compositingQuality: CPointer<Int32>): Int32 {
+    return GdipGetCompositingQuality(graphics, compositingQuality)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetCustomLineCapBaseCap == "on"]
+foreign {
+    func GdipGetCustomLineCapBaseCap(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, baseCap: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetCustomLineCapBaseCap == "on"]
+public unsafe func Windows_GdipGetCustomLineCapBaseCap(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, baseCap: CPointer<Int32>): Int32 {
+    return GdipGetCustomLineCapBaseCap(customCap, baseCap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetCustomLineCapBaseInset == "on"]
+foreign {
+    func GdipGetCustomLineCapBaseInset(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, inset: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetCustomLineCapBaseInset == "on"]
+public unsafe func Windows_GdipGetCustomLineCapBaseInset(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, inset: CPointer<Float32>): Int32 {
+    return GdipGetCustomLineCapBaseInset(customCap, inset)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetCustomLineCapStrokeCaps == "on"]
+foreign {
+    func GdipGetCustomLineCapStrokeCaps(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, startCap: CPointer<Int32>, endCap: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetCustomLineCapStrokeCaps == "on"]
+public unsafe func Windows_GdipGetCustomLineCapStrokeCaps(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, startCap: CPointer<Int32>, endCap: CPointer<Int32>): Int32 {
+    return GdipGetCustomLineCapStrokeCaps(customCap, startCap, endCap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetCustomLineCapStrokeJoin == "on"]
+foreign {
+    func GdipGetCustomLineCapStrokeJoin(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, lineJoin: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetCustomLineCapStrokeJoin == "on"]
+public unsafe func Windows_GdipGetCustomLineCapStrokeJoin(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, lineJoin: CPointer<Int32>): Int32 {
+    return GdipGetCustomLineCapStrokeJoin(customCap, lineJoin)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetCustomLineCapType == "on"]
+foreign {
+    func GdipGetCustomLineCapType(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, capType: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetCustomLineCapType == "on"]
+public unsafe func Windows_GdipGetCustomLineCapType(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, capType: CPointer<Int32>): Int32 {
+    return GdipGetCustomLineCapType(customCap, capType)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetCustomLineCapWidthScale == "on"]
+foreign {
+    func GdipGetCustomLineCapWidthScale(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, widthScale: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetCustomLineCapWidthScale == "on"]
+public unsafe func Windows_GdipGetCustomLineCapWidthScale(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, widthScale: CPointer<Float32>): Int32 {
+    return GdipGetCustomLineCapWidthScale(customCap, widthScale)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetDC == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func GdipGetDC(graphics: CPointer<Win32__impl_l0.GpGraphics>, hdc: CPointer<Win32_Graphics_Gdi.HDC>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetDC == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GdipGetDC(graphics: CPointer<Win32__impl_l0.GpGraphics>, hdc: CPointer<Win32_Graphics_Gdi.HDC>): Int32 {
+    return GdipGetDC(graphics, hdc)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetDpiX == "on"]
+foreign {
+    func GdipGetDpiX(graphics: CPointer<Win32__impl_l0.GpGraphics>, dpi: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetDpiX == "on"]
+public unsafe func Windows_GdipGetDpiX(graphics: CPointer<Win32__impl_l0.GpGraphics>, dpi: CPointer<Float32>): Int32 {
+    return GdipGetDpiX(graphics, dpi)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetDpiY == "on"]
+foreign {
+    func GdipGetDpiY(graphics: CPointer<Win32__impl_l0.GpGraphics>, dpi: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetDpiY == "on"]
+public unsafe func Windows_GdipGetDpiY(graphics: CPointer<Win32__impl_l0.GpGraphics>, dpi: CPointer<Float32>): Int32 {
+    return GdipGetDpiY(graphics, dpi)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetEffectParameterSize == "on"]
+foreign {
+    func GdipGetEffectParameterSize(effect: CPointer<Win32__impl_l0.CGpEffect>, size: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetEffectParameterSize == "on"]
+public unsafe func Windows_GdipGetEffectParameterSize(effect: CPointer<Win32__impl_l0.CGpEffect>, size: CPointer<UInt32>): Int32 {
+    return GdipGetEffectParameterSize(effect, size)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetEffectParameters == "on"]
+foreign {
+    func GdipGetEffectParameters(effect: CPointer<Win32__impl_l0.CGpEffect>, size: CPointer<UInt32>, params: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetEffectParameters == "on"]
+public unsafe func Windows_GdipGetEffectParameters(effect: CPointer<Win32__impl_l0.CGpEffect>, size: CPointer<UInt32>, params: CPointer<Unit>): Int32 {
+    return GdipGetEffectParameters(effect, size, params)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetEmHeight == "on"]
+foreign {
+    func GdipGetEmHeight(family: CPointer<Win32__impl_l0.GpFontFamily>, style: Int32, EmHeight: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetEmHeight == "on"]
+public unsafe func Windows_GdipGetEmHeight(family: CPointer<Win32__impl_l0.GpFontFamily>, style: Int32, EmHeight: CPointer<UInt16>): Int32 {
+    return GdipGetEmHeight(family, style, EmHeight)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetEncoderParameterList == "on"]
+foreign {
+    func GdipGetEncoderParameterList(image: CPointer<Win32__impl_l0.GpImage>, clsidEncoder: CPointer<GUID>, size: UInt32, buffer: CPointer<Win32__impl_l1.EncoderParameters>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetEncoderParameterList == "on"]
+public unsafe func Windows_GdipGetEncoderParameterList(image: CPointer<Win32__impl_l0.GpImage>, clsidEncoder: CPointer<GUID>, size: UInt32, buffer: CPointer<Win32__impl_l1.EncoderParameters>): Int32 {
+    return GdipGetEncoderParameterList(image, clsidEncoder, size, buffer)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetEncoderParameterListSize == "on"]
+foreign {
+    func GdipGetEncoderParameterListSize(image: CPointer<Win32__impl_l0.GpImage>, clsidEncoder: CPointer<GUID>, size: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetEncoderParameterListSize == "on"]
+public unsafe func Windows_GdipGetEncoderParameterListSize(image: CPointer<Win32__impl_l0.GpImage>, clsidEncoder: CPointer<GUID>, size: CPointer<UInt32>): Int32 {
+    return GdipGetEncoderParameterListSize(image, clsidEncoder, size)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetFamily == "on"]
+foreign {
+    func GdipGetFamily(font: CPointer<Win32__impl_l0.GpFont>, family: CPointer<CPointer<Win32__impl_l0.GpFontFamily>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetFamily == "on"]
+public unsafe func Windows_GdipGetFamily(font: CPointer<Win32__impl_l0.GpFont>, family: CPointer<CPointer<Win32__impl_l0.GpFontFamily>>): Int32 {
+    return GdipGetFamily(font, family)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetFamilyName == "on"]
+foreign {
+    // param-hint: name fixed=32
+    func GdipGetFamilyName(family: CPointer<Win32__impl_l0.GpFontFamily>, name: CPointer<UInt16>, language: UInt16): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetFamilyName == "on"]
+public unsafe func Windows_GdipGetFamilyName(family: CPointer<Win32__impl_l0.GpFontFamily>, name: CPointer<UInt16>, language: UInt16): Int32 {
+    return GdipGetFamilyName(family, name, language)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetFontCollectionFamilyCount == "on"]
+foreign {
+    func GdipGetFontCollectionFamilyCount(fontCollection: CPointer<Win32__impl_l0.GpFontCollection>, numFound: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetFontCollectionFamilyCount == "on"]
+public unsafe func Windows_GdipGetFontCollectionFamilyCount(fontCollection: CPointer<Win32__impl_l0.GpFontCollection>, numFound: CPointer<Int32>): Int32 {
+    return GdipGetFontCollectionFamilyCount(fontCollection, numFound)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetFontCollectionFamilyList == "on"]
+foreign {
+    // param-hint: gpfamilies len=param[1]
+    func GdipGetFontCollectionFamilyList(fontCollection: CPointer<Win32__impl_l0.GpFontCollection>, numSought: Int32, gpfamilies: CPointer<CPointer<Win32__impl_l0.GpFontFamily>>, numFound: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetFontCollectionFamilyList == "on"]
+public unsafe func Windows_GdipGetFontCollectionFamilyList(fontCollection: CPointer<Win32__impl_l0.GpFontCollection>, numSought: Int32, gpfamilies: CPointer<CPointer<Win32__impl_l0.GpFontFamily>>, numFound: CPointer<Int32>): Int32 {
+    return GdipGetFontCollectionFamilyList(fontCollection, numSought, gpfamilies, numFound)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetFontHeight == "on"]
+foreign {
+    func GdipGetFontHeight(font: CPointer<Win32__impl_l0.GpFont>, graphics: CPointer<Win32__impl_l0.GpGraphics>, height: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetFontHeight == "on"]
+public unsafe func Windows_GdipGetFontHeight(font: CPointer<Win32__impl_l0.GpFont>, graphics: CPointer<Win32__impl_l0.GpGraphics>, height: CPointer<Float32>): Int32 {
+    return GdipGetFontHeight(font, graphics, height)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetFontHeightGivenDPI == "on"]
+foreign {
+    func GdipGetFontHeightGivenDPI(font: CPointer<Win32__impl_l0.GpFont>, dpi: Float32, height: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetFontHeightGivenDPI == "on"]
+public unsafe func Windows_GdipGetFontHeightGivenDPI(font: CPointer<Win32__impl_l0.GpFont>, dpi: Float32, height: CPointer<Float32>): Int32 {
+    return GdipGetFontHeightGivenDPI(font, dpi, height)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetFontSize == "on"]
+foreign {
+    func GdipGetFontSize(font: CPointer<Win32__impl_l0.GpFont>, size: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetFontSize == "on"]
+public unsafe func Windows_GdipGetFontSize(font: CPointer<Win32__impl_l0.GpFont>, size: CPointer<Float32>): Int32 {
+    return GdipGetFontSize(font, size)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetFontStyle == "on"]
+foreign {
+    func GdipGetFontStyle(font: CPointer<Win32__impl_l0.GpFont>, style: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetFontStyle == "on"]
+public unsafe func Windows_GdipGetFontStyle(font: CPointer<Win32__impl_l0.GpFont>, style: CPointer<Int32>): Int32 {
+    return GdipGetFontStyle(font, style)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetFontUnit == "on"]
+foreign {
+    func GdipGetFontUnit(font: CPointer<Win32__impl_l0.GpFont>, unit: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetFontUnit == "on"]
+public unsafe func Windows_GdipGetFontUnit(font: CPointer<Win32__impl_l0.GpFont>, unit: CPointer<Int32>): Int32 {
+    return GdipGetFontUnit(font, unit)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetGenericFontFamilyMonospace == "on"]
+foreign {
+    func GdipGetGenericFontFamilyMonospace(nativeFamily: CPointer<CPointer<Win32__impl_l0.GpFontFamily>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetGenericFontFamilyMonospace == "on"]
+public unsafe func Windows_GdipGetGenericFontFamilyMonospace(nativeFamily: CPointer<CPointer<Win32__impl_l0.GpFontFamily>>): Int32 {
+    return GdipGetGenericFontFamilyMonospace(nativeFamily)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetGenericFontFamilySansSerif == "on"]
+foreign {
+    func GdipGetGenericFontFamilySansSerif(nativeFamily: CPointer<CPointer<Win32__impl_l0.GpFontFamily>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetGenericFontFamilySansSerif == "on"]
+public unsafe func Windows_GdipGetGenericFontFamilySansSerif(nativeFamily: CPointer<CPointer<Win32__impl_l0.GpFontFamily>>): Int32 {
+    return GdipGetGenericFontFamilySansSerif(nativeFamily)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetGenericFontFamilySerif == "on"]
+foreign {
+    func GdipGetGenericFontFamilySerif(nativeFamily: CPointer<CPointer<Win32__impl_l0.GpFontFamily>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetGenericFontFamilySerif == "on"]
+public unsafe func Windows_GdipGetGenericFontFamilySerif(nativeFamily: CPointer<CPointer<Win32__impl_l0.GpFontFamily>>): Int32 {
+    return GdipGetGenericFontFamilySerif(nativeFamily)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetHatchBackgroundColor == "on"]
+foreign {
+    func GdipGetHatchBackgroundColor(brush: CPointer<Win32__impl_l0.GpHatch>, backcol: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetHatchBackgroundColor == "on"]
+public unsafe func Windows_GdipGetHatchBackgroundColor(brush: CPointer<Win32__impl_l0.GpHatch>, backcol: CPointer<UInt32>): Int32 {
+    return GdipGetHatchBackgroundColor(brush, backcol)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetHatchForegroundColor == "on"]
+foreign {
+    func GdipGetHatchForegroundColor(brush: CPointer<Win32__impl_l0.GpHatch>, forecol: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetHatchForegroundColor == "on"]
+public unsafe func Windows_GdipGetHatchForegroundColor(brush: CPointer<Win32__impl_l0.GpHatch>, forecol: CPointer<UInt32>): Int32 {
+    return GdipGetHatchForegroundColor(brush, forecol)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetHatchStyle == "on"]
+foreign {
+    func GdipGetHatchStyle(brush: CPointer<Win32__impl_l0.GpHatch>, hatchstyle: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetHatchStyle == "on"]
+public unsafe func Windows_GdipGetHatchStyle(brush: CPointer<Win32__impl_l0.GpHatch>, hatchstyle: CPointer<Int32>): Int32 {
+    return GdipGetHatchStyle(brush, hatchstyle)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetHemfFromMetafile == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func GdipGetHemfFromMetafile(metafile: CPointer<Win32__impl_l0.GpMetafile>, hEmf: CPointer<Win32_Graphics_Gdi.HENHMETAFILE>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetHemfFromMetafile == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GdipGetHemfFromMetafile(metafile: CPointer<Win32__impl_l0.GpMetafile>, hEmf: CPointer<Win32_Graphics_Gdi.HENHMETAFILE>): Int32 {
+    return GdipGetHemfFromMetafile(metafile, hEmf)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageAttributesAdjustedPalette == "on"]
+foreign {
+    func GdipGetImageAttributesAdjustedPalette(imageAttr: CPointer<Win32__impl_l0.GpImageAttributes>, colorPalette: CPointer<Win32__impl_l0.ColorPalette>, colorAdjustType: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageAttributesAdjustedPalette == "on"]
+public unsafe func Windows_GdipGetImageAttributesAdjustedPalette(imageAttr: CPointer<Win32__impl_l0.GpImageAttributes>, colorPalette: CPointer<Win32__impl_l0.ColorPalette>, colorAdjustType: Int32): Int32 {
+    return GdipGetImageAttributesAdjustedPalette(imageAttr, colorPalette, colorAdjustType)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageBounds == "on"]
+foreign {
+    func GdipGetImageBounds(image: CPointer<Win32__impl_l0.GpImage>, srcRect: CPointer<Win32__impl_l0.RectF>, srcUnit: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageBounds == "on"]
+public unsafe func Windows_GdipGetImageBounds(image: CPointer<Win32__impl_l0.GpImage>, srcRect: CPointer<Win32__impl_l0.RectF>, srcUnit: CPointer<Int32>): Int32 {
+    return GdipGetImageBounds(image, srcRect, srcUnit)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageDecoders == "on"]
+foreign {
+    // param-hint: decoders bytes=param[1]
+    func GdipGetImageDecoders(numDecoders: UInt32, size: UInt32, decoders: CPointer<Win32__impl_l0.ImageCodecInfo>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageDecoders == "on"]
+public unsafe func Windows_GdipGetImageDecoders(numDecoders: UInt32, size: UInt32, decoders: CPointer<Win32__impl_l0.ImageCodecInfo>): Int32 {
+    return GdipGetImageDecoders(numDecoders, size, decoders)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageDecodersSize == "on"]
+foreign {
+    func GdipGetImageDecodersSize(numDecoders: CPointer<UInt32>, size: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageDecodersSize == "on"]
+public unsafe func Windows_GdipGetImageDecodersSize(numDecoders: CPointer<UInt32>, size: CPointer<UInt32>): Int32 {
+    return GdipGetImageDecodersSize(numDecoders, size)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageDimension == "on"]
+foreign {
+    func GdipGetImageDimension(image: CPointer<Win32__impl_l0.GpImage>, width: CPointer<Float32>, height: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageDimension == "on"]
+public unsafe func Windows_GdipGetImageDimension(image: CPointer<Win32__impl_l0.GpImage>, width: CPointer<Float32>, height: CPointer<Float32>): Int32 {
+    return GdipGetImageDimension(image, width, height)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageEncoders == "on"]
+foreign {
+    // param-hint: encoders bytes=param[1]
+    func GdipGetImageEncoders(numEncoders: UInt32, size: UInt32, encoders: CPointer<Win32__impl_l0.ImageCodecInfo>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageEncoders == "on"]
+public unsafe func Windows_GdipGetImageEncoders(numEncoders: UInt32, size: UInt32, encoders: CPointer<Win32__impl_l0.ImageCodecInfo>): Int32 {
+    return GdipGetImageEncoders(numEncoders, size, encoders)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageEncodersSize == "on"]
+foreign {
+    func GdipGetImageEncodersSize(numEncoders: CPointer<UInt32>, size: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageEncodersSize == "on"]
+public unsafe func Windows_GdipGetImageEncodersSize(numEncoders: CPointer<UInt32>, size: CPointer<UInt32>): Int32 {
+    return GdipGetImageEncodersSize(numEncoders, size)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageFlags == "on"]
+foreign {
+    func GdipGetImageFlags(image: CPointer<Win32__impl_l0.GpImage>, flags: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageFlags == "on"]
+public unsafe func Windows_GdipGetImageFlags(image: CPointer<Win32__impl_l0.GpImage>, flags: CPointer<UInt32>): Int32 {
+    return GdipGetImageFlags(image, flags)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageGraphicsContext == "on"]
+foreign {
+    func GdipGetImageGraphicsContext(image: CPointer<Win32__impl_l0.GpImage>, graphics: CPointer<CPointer<Win32__impl_l0.GpGraphics>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageGraphicsContext == "on"]
+public unsafe func Windows_GdipGetImageGraphicsContext(image: CPointer<Win32__impl_l0.GpImage>, graphics: CPointer<CPointer<Win32__impl_l0.GpGraphics>>): Int32 {
+    return GdipGetImageGraphicsContext(image, graphics)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageHeight == "on"]
+foreign {
+    func GdipGetImageHeight(image: CPointer<Win32__impl_l0.GpImage>, height: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageHeight == "on"]
+public unsafe func Windows_GdipGetImageHeight(image: CPointer<Win32__impl_l0.GpImage>, height: CPointer<UInt32>): Int32 {
+    return GdipGetImageHeight(image, height)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageHorizontalResolution == "on"]
+foreign {
+    func GdipGetImageHorizontalResolution(image: CPointer<Win32__impl_l0.GpImage>, resolution: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageHorizontalResolution == "on"]
+public unsafe func Windows_GdipGetImageHorizontalResolution(image: CPointer<Win32__impl_l0.GpImage>, resolution: CPointer<Float32>): Int32 {
+    return GdipGetImageHorizontalResolution(image, resolution)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageItemData == "on"]
+foreign {
+    func GdipGetImageItemData(image: CPointer<Win32__impl_l0.GpImage>, item: CPointer<Win32__impl_l0.ImageItemData>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageItemData == "on"]
+public unsafe func Windows_GdipGetImageItemData(image: CPointer<Win32__impl_l0.GpImage>, item: CPointer<Win32__impl_l0.ImageItemData>): Int32 {
+    return GdipGetImageItemData(image, item)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImagePalette == "on"]
+foreign {
+    func GdipGetImagePalette(image: CPointer<Win32__impl_l0.GpImage>, palette: CPointer<Win32__impl_l0.ColorPalette>, size: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImagePalette == "on"]
+public unsafe func Windows_GdipGetImagePalette(image: CPointer<Win32__impl_l0.GpImage>, palette: CPointer<Win32__impl_l0.ColorPalette>, size: Int32): Int32 {
+    return GdipGetImagePalette(image, palette, size)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImagePaletteSize == "on"]
+foreign {
+    func GdipGetImagePaletteSize(image: CPointer<Win32__impl_l0.GpImage>, size: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImagePaletteSize == "on"]
+public unsafe func Windows_GdipGetImagePaletteSize(image: CPointer<Win32__impl_l0.GpImage>, size: CPointer<Int32>): Int32 {
+    return GdipGetImagePaletteSize(image, size)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImagePixelFormat == "on"]
+foreign {
+    func GdipGetImagePixelFormat(image: CPointer<Win32__impl_l0.GpImage>, format: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImagePixelFormat == "on"]
+public unsafe func Windows_GdipGetImagePixelFormat(image: CPointer<Win32__impl_l0.GpImage>, format: CPointer<Int32>): Int32 {
+    return GdipGetImagePixelFormat(image, format)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageRawFormat == "on"]
+foreign {
+    func GdipGetImageRawFormat(image: CPointer<Win32__impl_l0.GpImage>, format: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageRawFormat == "on"]
+public unsafe func Windows_GdipGetImageRawFormat(image: CPointer<Win32__impl_l0.GpImage>, format: CPointer<GUID>): Int32 {
+    return GdipGetImageRawFormat(image, format)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageThumbnail == "on"]
+foreign {
+    func GdipGetImageThumbnail(image: CPointer<Win32__impl_l0.GpImage>, thumbWidth: UInt32, thumbHeight: UInt32, thumbImage: CPointer<CPointer<Win32__impl_l0.GpImage>>, callback: IntNative, callbackData: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageThumbnail == "on"]
+public unsafe func Windows_GdipGetImageThumbnail(image: CPointer<Win32__impl_l0.GpImage>, thumbWidth: UInt32, thumbHeight: UInt32, thumbImage: CPointer<CPointer<Win32__impl_l0.GpImage>>, callback: IntNative, callbackData: CPointer<Unit>): Int32 {
+    return GdipGetImageThumbnail(image, thumbWidth, thumbHeight, thumbImage, callback, callbackData)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageType == "on"]
+foreign {
+    func GdipGetImageType(image: CPointer<Win32__impl_l0.GpImage>, type_: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageType == "on"]
+public unsafe func Windows_GdipGetImageType(image: CPointer<Win32__impl_l0.GpImage>, type_: CPointer<Int32>): Int32 {
+    return GdipGetImageType(image, type_)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageVerticalResolution == "on"]
+foreign {
+    func GdipGetImageVerticalResolution(image: CPointer<Win32__impl_l0.GpImage>, resolution: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageVerticalResolution == "on"]
+public unsafe func Windows_GdipGetImageVerticalResolution(image: CPointer<Win32__impl_l0.GpImage>, resolution: CPointer<Float32>): Int32 {
+    return GdipGetImageVerticalResolution(image, resolution)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageWidth == "on"]
+foreign {
+    func GdipGetImageWidth(image: CPointer<Win32__impl_l0.GpImage>, width: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetImageWidth == "on"]
+public unsafe func Windows_GdipGetImageWidth(image: CPointer<Win32__impl_l0.GpImage>, width: CPointer<UInt32>): Int32 {
+    return GdipGetImageWidth(image, width)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetInterpolationMode == "on"]
+foreign {
+    func GdipGetInterpolationMode(graphics: CPointer<Win32__impl_l0.GpGraphics>, interpolationMode: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetInterpolationMode == "on"]
+public unsafe func Windows_GdipGetInterpolationMode(graphics: CPointer<Win32__impl_l0.GpGraphics>, interpolationMode: CPointer<Int32>): Int32 {
+    return GdipGetInterpolationMode(graphics, interpolationMode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLineBlend == "on"]
+foreign {
+    func GdipGetLineBlend(brush: CPointer<Win32__impl_l0.GpLineGradient>, blend: CPointer<Float32>, positions: CPointer<Float32>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLineBlend == "on"]
+public unsafe func Windows_GdipGetLineBlend(brush: CPointer<Win32__impl_l0.GpLineGradient>, blend: CPointer<Float32>, positions: CPointer<Float32>, count: Int32): Int32 {
+    return GdipGetLineBlend(brush, blend, positions, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLineBlendCount == "on"]
+foreign {
+    func GdipGetLineBlendCount(brush: CPointer<Win32__impl_l0.GpLineGradient>, count: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLineBlendCount == "on"]
+public unsafe func Windows_GdipGetLineBlendCount(brush: CPointer<Win32__impl_l0.GpLineGradient>, count: CPointer<Int32>): Int32 {
+    return GdipGetLineBlendCount(brush, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLineColors == "on"]
+foreign {
+    func GdipGetLineColors(brush: CPointer<Win32__impl_l0.GpLineGradient>, colors: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLineColors == "on"]
+public unsafe func Windows_GdipGetLineColors(brush: CPointer<Win32__impl_l0.GpLineGradient>, colors: CPointer<UInt32>): Int32 {
+    return GdipGetLineColors(brush, colors)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLineGammaCorrection == "on"]
+foreign {
+    func GdipGetLineGammaCorrection(brush: CPointer<Win32__impl_l0.GpLineGradient>, useGammaCorrection: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLineGammaCorrection == "on"]
+public unsafe func Windows_GdipGetLineGammaCorrection(brush: CPointer<Win32__impl_l0.GpLineGradient>, useGammaCorrection: CPointer<Int32>): Int32 {
+    return GdipGetLineGammaCorrection(brush, useGammaCorrection)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLinePresetBlend == "on"]
+foreign {
+    func GdipGetLinePresetBlend(brush: CPointer<Win32__impl_l0.GpLineGradient>, blend: CPointer<UInt32>, positions: CPointer<Float32>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLinePresetBlend == "on"]
+public unsafe func Windows_GdipGetLinePresetBlend(brush: CPointer<Win32__impl_l0.GpLineGradient>, blend: CPointer<UInt32>, positions: CPointer<Float32>, count: Int32): Int32 {
+    return GdipGetLinePresetBlend(brush, blend, positions, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLinePresetBlendCount == "on"]
+foreign {
+    func GdipGetLinePresetBlendCount(brush: CPointer<Win32__impl_l0.GpLineGradient>, count: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLinePresetBlendCount == "on"]
+public unsafe func Windows_GdipGetLinePresetBlendCount(brush: CPointer<Win32__impl_l0.GpLineGradient>, count: CPointer<Int32>): Int32 {
+    return GdipGetLinePresetBlendCount(brush, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLineRect == "on"]
+foreign {
+    func GdipGetLineRect(brush: CPointer<Win32__impl_l0.GpLineGradient>, rect: CPointer<Win32__impl_l0.RectF>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLineRect == "on"]
+public unsafe func Windows_GdipGetLineRect(brush: CPointer<Win32__impl_l0.GpLineGradient>, rect: CPointer<Win32__impl_l0.RectF>): Int32 {
+    return GdipGetLineRect(brush, rect)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLineRectI == "on"]
+foreign {
+    func GdipGetLineRectI(brush: CPointer<Win32__impl_l0.GpLineGradient>, rect: CPointer<Win32__impl_l0.Rect>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLineRectI == "on"]
+public unsafe func Windows_GdipGetLineRectI(brush: CPointer<Win32__impl_l0.GpLineGradient>, rect: CPointer<Win32__impl_l0.Rect>): Int32 {
+    return GdipGetLineRectI(brush, rect)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLineSpacing == "on"]
+foreign {
+    func GdipGetLineSpacing(family: CPointer<Win32__impl_l0.GpFontFamily>, style: Int32, LineSpacing: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLineSpacing == "on"]
+public unsafe func Windows_GdipGetLineSpacing(family: CPointer<Win32__impl_l0.GpFontFamily>, style: Int32, LineSpacing: CPointer<UInt16>): Int32 {
+    return GdipGetLineSpacing(family, style, LineSpacing)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLineTransform == "on"]
+foreign {
+    func GdipGetLineTransform(brush: CPointer<Win32__impl_l0.GpLineGradient>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLineTransform == "on"]
+public unsafe func Windows_GdipGetLineTransform(brush: CPointer<Win32__impl_l0.GpLineGradient>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32 {
+    return GdipGetLineTransform(brush, matrix)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLineWrapMode == "on"]
+foreign {
+    func GdipGetLineWrapMode(brush: CPointer<Win32__impl_l0.GpLineGradient>, wrapmode: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLineWrapMode == "on"]
+public unsafe func Windows_GdipGetLineWrapMode(brush: CPointer<Win32__impl_l0.GpLineGradient>, wrapmode: CPointer<Int32>): Int32 {
+    return GdipGetLineWrapMode(brush, wrapmode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLogFontA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func GdipGetLogFontA(font: CPointer<Win32__impl_l0.GpFont>, graphics: CPointer<Win32__impl_l0.GpGraphics>, logfontA: CPointer<Win32_Graphics_Gdi.LOGFONTA>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLogFontA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GdipGetLogFontA(font: CPointer<Win32__impl_l0.GpFont>, graphics: CPointer<Win32__impl_l0.GpGraphics>, logfontA: CPointer<Win32_Graphics_Gdi.LOGFONTA>): Int32 {
+    return GdipGetLogFontA(font, graphics, logfontA)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLogFontW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func GdipGetLogFontW(font: CPointer<Win32__impl_l0.GpFont>, graphics: CPointer<Win32__impl_l0.GpGraphics>, logfontW: CPointer<Win32_Graphics_Gdi.LOGFONTW>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetLogFontW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GdipGetLogFontW(font: CPointer<Win32__impl_l0.GpFont>, graphics: CPointer<Win32__impl_l0.GpGraphics>, logfontW: CPointer<Win32_Graphics_Gdi.LOGFONTW>): Int32 {
+    return GdipGetLogFontW(font, graphics, logfontW)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetMatrixElements == "on"]
+foreign {
+    func GdipGetMatrixElements(matrix: CPointer<Win32__impl_l0.Matrix>, matrixOut: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetMatrixElements == "on"]
+public unsafe func Windows_GdipGetMatrixElements(matrix: CPointer<Win32__impl_l0.Matrix>, matrixOut: CPointer<Float32>): Int32 {
+    return GdipGetMatrixElements(matrix, matrixOut)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetMetafileDownLevelRasterizationLimit == "on"]
+foreign {
+    func GdipGetMetafileDownLevelRasterizationLimit(metafile: CPointer<Win32__impl_l0.GpMetafile>, metafileRasterizationLimitDpi: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetMetafileDownLevelRasterizationLimit == "on"]
+public unsafe func Windows_GdipGetMetafileDownLevelRasterizationLimit(metafile: CPointer<Win32__impl_l0.GpMetafile>, metafileRasterizationLimitDpi: CPointer<UInt32>): Int32 {
+    return GdipGetMetafileDownLevelRasterizationLimit(metafile, metafileRasterizationLimitDpi)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetMetafileHeaderFromEmf == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func GdipGetMetafileHeaderFromEmf(hEmf: Win32_Graphics_Gdi.HENHMETAFILE, header: CPointer<Win32__impl_l1.MetafileHeader>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetMetafileHeaderFromEmf == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GdipGetMetafileHeaderFromEmf(hEmf: Win32_Graphics_Gdi.HENHMETAFILE, header: CPointer<Win32__impl_l1.MetafileHeader>): Int32 {
+    return GdipGetMetafileHeaderFromEmf(hEmf, header)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetMetafileHeaderFromFile == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func GdipGetMetafileHeaderFromFile(filename: CPointer<UInt16>, header: CPointer<Win32__impl_l1.MetafileHeader>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetMetafileHeaderFromFile == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GdipGetMetafileHeaderFromFile(filename: CPointer<UInt16>, header: CPointer<Win32__impl_l1.MetafileHeader>): Int32 {
+    return GdipGetMetafileHeaderFromFile(filename, header)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetMetafileHeaderFromMetafile == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func GdipGetMetafileHeaderFromMetafile(metafile: CPointer<Win32__impl_l0.GpMetafile>, header: CPointer<Win32__impl_l1.MetafileHeader>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetMetafileHeaderFromMetafile == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GdipGetMetafileHeaderFromMetafile(metafile: CPointer<Win32__impl_l0.GpMetafile>, header: CPointer<Win32__impl_l1.MetafileHeader>): Int32 {
+    return GdipGetMetafileHeaderFromMetafile(metafile, header)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetMetafileHeaderFromStream == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func GdipGetMetafileHeaderFromStream(stream: CPointer<Unit>, header: CPointer<Win32__impl_l1.MetafileHeader>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetMetafileHeaderFromStream == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_GdipGetMetafileHeaderFromStream(stream: CPointer<Unit>, header: CPointer<Win32__impl_l1.MetafileHeader>): Int32 {
+    return GdipGetMetafileHeaderFromStream(stream, header)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetMetafileHeaderFromWmf == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func GdipGetMetafileHeaderFromWmf(hWmf: Win32_Graphics_Gdi.HMETAFILE, wmfPlaceableFileHeader: CPointer<Win32__impl_l1.WmfPlaceableFileHeader>, header: CPointer<Win32__impl_l1.MetafileHeader>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetMetafileHeaderFromWmf == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GdipGetMetafileHeaderFromWmf(hWmf: Win32_Graphics_Gdi.HMETAFILE, wmfPlaceableFileHeader: CPointer<Win32__impl_l1.WmfPlaceableFileHeader>, header: CPointer<Win32__impl_l1.MetafileHeader>): Int32 {
+    return GdipGetMetafileHeaderFromWmf(hWmf, wmfPlaceableFileHeader, header)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetNearestColor == "on"]
+foreign {
+    func GdipGetNearestColor(graphics: CPointer<Win32__impl_l0.GpGraphics>, argb: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetNearestColor == "on"]
+public unsafe func Windows_GdipGetNearestColor(graphics: CPointer<Win32__impl_l0.GpGraphics>, argb: CPointer<UInt32>): Int32 {
+    return GdipGetNearestColor(graphics, argb)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPageScale == "on"]
+foreign {
+    func GdipGetPageScale(graphics: CPointer<Win32__impl_l0.GpGraphics>, scale: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPageScale == "on"]
+public unsafe func Windows_GdipGetPageScale(graphics: CPointer<Win32__impl_l0.GpGraphics>, scale: CPointer<Float32>): Int32 {
+    return GdipGetPageScale(graphics, scale)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPageUnit == "on"]
+foreign {
+    func GdipGetPageUnit(graphics: CPointer<Win32__impl_l0.GpGraphics>, unit: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPageUnit == "on"]
+public unsafe func Windows_GdipGetPageUnit(graphics: CPointer<Win32__impl_l0.GpGraphics>, unit: CPointer<Int32>): Int32 {
+    return GdipGetPageUnit(graphics, unit)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathData == "on"]
+foreign {
+    func GdipGetPathData(path: CPointer<Win32__impl_l0.GpPath>, pathData: CPointer<Win32__impl_l0.PathData>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathData == "on"]
+public unsafe func Windows_GdipGetPathData(path: CPointer<Win32__impl_l0.GpPath>, pathData: CPointer<Win32__impl_l0.PathData>): Int32 {
+    return GdipGetPathData(path, pathData)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathFillMode == "on"]
+foreign {
+    func GdipGetPathFillMode(path: CPointer<Win32__impl_l0.GpPath>, fillmode: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathFillMode == "on"]
+public unsafe func Windows_GdipGetPathFillMode(path: CPointer<Win32__impl_l0.GpPath>, fillmode: CPointer<Int32>): Int32 {
+    return GdipGetPathFillMode(path, fillmode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientBlend == "on"]
+foreign {
+    func GdipGetPathGradientBlend(brush: CPointer<Win32__impl_l0.GpPathGradient>, blend: CPointer<Float32>, positions: CPointer<Float32>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientBlend == "on"]
+public unsafe func Windows_GdipGetPathGradientBlend(brush: CPointer<Win32__impl_l0.GpPathGradient>, blend: CPointer<Float32>, positions: CPointer<Float32>, count: Int32): Int32 {
+    return GdipGetPathGradientBlend(brush, blend, positions, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientBlendCount == "on"]
+foreign {
+    func GdipGetPathGradientBlendCount(brush: CPointer<Win32__impl_l0.GpPathGradient>, count: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientBlendCount == "on"]
+public unsafe func Windows_GdipGetPathGradientBlendCount(brush: CPointer<Win32__impl_l0.GpPathGradient>, count: CPointer<Int32>): Int32 {
+    return GdipGetPathGradientBlendCount(brush, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientCenterColor == "on"]
+foreign {
+    func GdipGetPathGradientCenterColor(brush: CPointer<Win32__impl_l0.GpPathGradient>, colors: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientCenterColor == "on"]
+public unsafe func Windows_GdipGetPathGradientCenterColor(brush: CPointer<Win32__impl_l0.GpPathGradient>, colors: CPointer<UInt32>): Int32 {
+    return GdipGetPathGradientCenterColor(brush, colors)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientCenterPoint == "on"]
+foreign {
+    func GdipGetPathGradientCenterPoint(brush: CPointer<Win32__impl_l0.GpPathGradient>, points: CPointer<Win32__impl_l0.PointF>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientCenterPoint == "on"]
+public unsafe func Windows_GdipGetPathGradientCenterPoint(brush: CPointer<Win32__impl_l0.GpPathGradient>, points: CPointer<Win32__impl_l0.PointF>): Int32 {
+    return GdipGetPathGradientCenterPoint(brush, points)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientCenterPointI == "on"]
+foreign {
+    func GdipGetPathGradientCenterPointI(brush: CPointer<Win32__impl_l0.GpPathGradient>, points: CPointer<Win32__impl_l0.Point>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientCenterPointI == "on"]
+public unsafe func Windows_GdipGetPathGradientCenterPointI(brush: CPointer<Win32__impl_l0.GpPathGradient>, points: CPointer<Win32__impl_l0.Point>): Int32 {
+    return GdipGetPathGradientCenterPointI(brush, points)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientFocusScales == "on"]
+foreign {
+    func GdipGetPathGradientFocusScales(brush: CPointer<Win32__impl_l0.GpPathGradient>, xScale: CPointer<Float32>, yScale: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientFocusScales == "on"]
+public unsafe func Windows_GdipGetPathGradientFocusScales(brush: CPointer<Win32__impl_l0.GpPathGradient>, xScale: CPointer<Float32>, yScale: CPointer<Float32>): Int32 {
+    return GdipGetPathGradientFocusScales(brush, xScale, yScale)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientGammaCorrection == "on"]
+foreign {
+    func GdipGetPathGradientGammaCorrection(brush: CPointer<Win32__impl_l0.GpPathGradient>, useGammaCorrection: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientGammaCorrection == "on"]
+public unsafe func Windows_GdipGetPathGradientGammaCorrection(brush: CPointer<Win32__impl_l0.GpPathGradient>, useGammaCorrection: CPointer<Int32>): Int32 {
+    return GdipGetPathGradientGammaCorrection(brush, useGammaCorrection)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientPath == "on"]
+foreign {
+    func GdipGetPathGradientPath(brush: CPointer<Win32__impl_l0.GpPathGradient>, path: CPointer<Win32__impl_l0.GpPath>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientPath == "on"]
+public unsafe func Windows_GdipGetPathGradientPath(brush: CPointer<Win32__impl_l0.GpPathGradient>, path: CPointer<Win32__impl_l0.GpPath>): Int32 {
+    return GdipGetPathGradientPath(brush, path)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientPointCount == "on"]
+foreign {
+    func GdipGetPathGradientPointCount(brush: CPointer<Win32__impl_l0.GpPathGradient>, count: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientPointCount == "on"]
+public unsafe func Windows_GdipGetPathGradientPointCount(brush: CPointer<Win32__impl_l0.GpPathGradient>, count: CPointer<Int32>): Int32 {
+    return GdipGetPathGradientPointCount(brush, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientPresetBlend == "on"]
+foreign {
+    func GdipGetPathGradientPresetBlend(brush: CPointer<Win32__impl_l0.GpPathGradient>, blend: CPointer<UInt32>, positions: CPointer<Float32>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientPresetBlend == "on"]
+public unsafe func Windows_GdipGetPathGradientPresetBlend(brush: CPointer<Win32__impl_l0.GpPathGradient>, blend: CPointer<UInt32>, positions: CPointer<Float32>, count: Int32): Int32 {
+    return GdipGetPathGradientPresetBlend(brush, blend, positions, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientPresetBlendCount == "on"]
+foreign {
+    func GdipGetPathGradientPresetBlendCount(brush: CPointer<Win32__impl_l0.GpPathGradient>, count: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientPresetBlendCount == "on"]
+public unsafe func Windows_GdipGetPathGradientPresetBlendCount(brush: CPointer<Win32__impl_l0.GpPathGradient>, count: CPointer<Int32>): Int32 {
+    return GdipGetPathGradientPresetBlendCount(brush, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientRect == "on"]
+foreign {
+    func GdipGetPathGradientRect(brush: CPointer<Win32__impl_l0.GpPathGradient>, rect: CPointer<Win32__impl_l0.RectF>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientRect == "on"]
+public unsafe func Windows_GdipGetPathGradientRect(brush: CPointer<Win32__impl_l0.GpPathGradient>, rect: CPointer<Win32__impl_l0.RectF>): Int32 {
+    return GdipGetPathGradientRect(brush, rect)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientRectI == "on"]
+foreign {
+    func GdipGetPathGradientRectI(brush: CPointer<Win32__impl_l0.GpPathGradient>, rect: CPointer<Win32__impl_l0.Rect>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientRectI == "on"]
+public unsafe func Windows_GdipGetPathGradientRectI(brush: CPointer<Win32__impl_l0.GpPathGradient>, rect: CPointer<Win32__impl_l0.Rect>): Int32 {
+    return GdipGetPathGradientRectI(brush, rect)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientSurroundColorCount == "on"]
+foreign {
+    func GdipGetPathGradientSurroundColorCount(brush: CPointer<Win32__impl_l0.GpPathGradient>, count: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientSurroundColorCount == "on"]
+public unsafe func Windows_GdipGetPathGradientSurroundColorCount(brush: CPointer<Win32__impl_l0.GpPathGradient>, count: CPointer<Int32>): Int32 {
+    return GdipGetPathGradientSurroundColorCount(brush, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientSurroundColorsWithCount == "on"]
+foreign {
+    // param-hint: color len=param[2]
+    func GdipGetPathGradientSurroundColorsWithCount(brush: CPointer<Win32__impl_l0.GpPathGradient>, color: CPointer<UInt32>, count: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientSurroundColorsWithCount == "on"]
+public unsafe func Windows_GdipGetPathGradientSurroundColorsWithCount(brush: CPointer<Win32__impl_l0.GpPathGradient>, color: CPointer<UInt32>, count: CPointer<Int32>): Int32 {
+    return GdipGetPathGradientSurroundColorsWithCount(brush, color, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientTransform == "on"]
+foreign {
+    func GdipGetPathGradientTransform(brush: CPointer<Win32__impl_l0.GpPathGradient>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientTransform == "on"]
+public unsafe func Windows_GdipGetPathGradientTransform(brush: CPointer<Win32__impl_l0.GpPathGradient>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32 {
+    return GdipGetPathGradientTransform(brush, matrix)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientWrapMode == "on"]
+foreign {
+    func GdipGetPathGradientWrapMode(brush: CPointer<Win32__impl_l0.GpPathGradient>, wrapmode: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathGradientWrapMode == "on"]
+public unsafe func Windows_GdipGetPathGradientWrapMode(brush: CPointer<Win32__impl_l0.GpPathGradient>, wrapmode: CPointer<Int32>): Int32 {
+    return GdipGetPathGradientWrapMode(brush, wrapmode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathLastPoint == "on"]
+foreign {
+    func GdipGetPathLastPoint(path: CPointer<Win32__impl_l0.GpPath>, lastPoint: CPointer<Win32__impl_l0.PointF>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathLastPoint == "on"]
+public unsafe func Windows_GdipGetPathLastPoint(path: CPointer<Win32__impl_l0.GpPath>, lastPoint: CPointer<Win32__impl_l0.PointF>): Int32 {
+    return GdipGetPathLastPoint(path, lastPoint)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathPoints == "on"]
+foreign {
+    func GdipGetPathPoints(param0: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathPoints == "on"]
+public unsafe func Windows_GdipGetPathPoints(param0: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32 {
+    return GdipGetPathPoints(param0, points, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathPointsI == "on"]
+foreign {
+    func GdipGetPathPointsI(param0: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathPointsI == "on"]
+public unsafe func Windows_GdipGetPathPointsI(param0: CPointer<Win32__impl_l0.GpPath>, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32 {
+    return GdipGetPathPointsI(param0, points, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathTypes == "on"]
+foreign {
+    // param-hint: types bytes=param[2]
+    func GdipGetPathTypes(path: CPointer<Win32__impl_l0.GpPath>, types: CPointer<UInt8>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathTypes == "on"]
+public unsafe func Windows_GdipGetPathTypes(path: CPointer<Win32__impl_l0.GpPath>, types: CPointer<UInt8>, count: Int32): Int32 {
+    return GdipGetPathTypes(path, types, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathWorldBounds == "on"]
+foreign {
+    func GdipGetPathWorldBounds(path: CPointer<Win32__impl_l0.GpPath>, bounds: CPointer<Win32__impl_l0.RectF>, matrix: CPointer<Win32__impl_l0.Matrix>, pen: CPointer<Win32__impl_l0.GpPen>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathWorldBounds == "on"]
+public unsafe func Windows_GdipGetPathWorldBounds(path: CPointer<Win32__impl_l0.GpPath>, bounds: CPointer<Win32__impl_l0.RectF>, matrix: CPointer<Win32__impl_l0.Matrix>, pen: CPointer<Win32__impl_l0.GpPen>): Int32 {
+    return GdipGetPathWorldBounds(path, bounds, matrix, pen)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathWorldBoundsI == "on"]
+foreign {
+    func GdipGetPathWorldBoundsI(path: CPointer<Win32__impl_l0.GpPath>, bounds: CPointer<Win32__impl_l0.Rect>, matrix: CPointer<Win32__impl_l0.Matrix>, pen: CPointer<Win32__impl_l0.GpPen>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPathWorldBoundsI == "on"]
+public unsafe func Windows_GdipGetPathWorldBoundsI(path: CPointer<Win32__impl_l0.GpPath>, bounds: CPointer<Win32__impl_l0.Rect>, matrix: CPointer<Win32__impl_l0.Matrix>, pen: CPointer<Win32__impl_l0.GpPen>): Int32 {
+    return GdipGetPathWorldBoundsI(path, bounds, matrix, pen)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenBrushFill == "on"]
+foreign {
+    func GdipGetPenBrushFill(pen: CPointer<Win32__impl_l0.GpPen>, brush: CPointer<CPointer<Win32__impl_l0.GpBrush>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenBrushFill == "on"]
+public unsafe func Windows_GdipGetPenBrushFill(pen: CPointer<Win32__impl_l0.GpPen>, brush: CPointer<CPointer<Win32__impl_l0.GpBrush>>): Int32 {
+    return GdipGetPenBrushFill(pen, brush)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenColor == "on"]
+foreign {
+    func GdipGetPenColor(pen: CPointer<Win32__impl_l0.GpPen>, argb: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenColor == "on"]
+public unsafe func Windows_GdipGetPenColor(pen: CPointer<Win32__impl_l0.GpPen>, argb: CPointer<UInt32>): Int32 {
+    return GdipGetPenColor(pen, argb)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenCompoundArray == "on"]
+foreign {
+    func GdipGetPenCompoundArray(pen: CPointer<Win32__impl_l0.GpPen>, dash: CPointer<Float32>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenCompoundArray == "on"]
+public unsafe func Windows_GdipGetPenCompoundArray(pen: CPointer<Win32__impl_l0.GpPen>, dash: CPointer<Float32>, count: Int32): Int32 {
+    return GdipGetPenCompoundArray(pen, dash, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenCompoundCount == "on"]
+foreign {
+    func GdipGetPenCompoundCount(pen: CPointer<Win32__impl_l0.GpPen>, count: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenCompoundCount == "on"]
+public unsafe func Windows_GdipGetPenCompoundCount(pen: CPointer<Win32__impl_l0.GpPen>, count: CPointer<Int32>): Int32 {
+    return GdipGetPenCompoundCount(pen, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenCustomEndCap == "on"]
+foreign {
+    func GdipGetPenCustomEndCap(pen: CPointer<Win32__impl_l0.GpPen>, customCap: CPointer<CPointer<Win32__impl_l0.GpCustomLineCap>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenCustomEndCap == "on"]
+public unsafe func Windows_GdipGetPenCustomEndCap(pen: CPointer<Win32__impl_l0.GpPen>, customCap: CPointer<CPointer<Win32__impl_l0.GpCustomLineCap>>): Int32 {
+    return GdipGetPenCustomEndCap(pen, customCap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenCustomStartCap == "on"]
+foreign {
+    func GdipGetPenCustomStartCap(pen: CPointer<Win32__impl_l0.GpPen>, customCap: CPointer<CPointer<Win32__impl_l0.GpCustomLineCap>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenCustomStartCap == "on"]
+public unsafe func Windows_GdipGetPenCustomStartCap(pen: CPointer<Win32__impl_l0.GpPen>, customCap: CPointer<CPointer<Win32__impl_l0.GpCustomLineCap>>): Int32 {
+    return GdipGetPenCustomStartCap(pen, customCap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenDashArray == "on"]
+foreign {
+    func GdipGetPenDashArray(pen: CPointer<Win32__impl_l0.GpPen>, dash: CPointer<Float32>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenDashArray == "on"]
+public unsafe func Windows_GdipGetPenDashArray(pen: CPointer<Win32__impl_l0.GpPen>, dash: CPointer<Float32>, count: Int32): Int32 {
+    return GdipGetPenDashArray(pen, dash, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenDashCap197819 == "on"]
+foreign {
+    func GdipGetPenDashCap197819(pen: CPointer<Win32__impl_l0.GpPen>, dashCap: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenDashCap197819 == "on"]
+public unsafe func Windows_GdipGetPenDashCap197819(pen: CPointer<Win32__impl_l0.GpPen>, dashCap: CPointer<Int32>): Int32 {
+    return GdipGetPenDashCap197819(pen, dashCap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenDashCount == "on"]
+foreign {
+    func GdipGetPenDashCount(pen: CPointer<Win32__impl_l0.GpPen>, count: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenDashCount == "on"]
+public unsafe func Windows_GdipGetPenDashCount(pen: CPointer<Win32__impl_l0.GpPen>, count: CPointer<Int32>): Int32 {
+    return GdipGetPenDashCount(pen, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenDashOffset == "on"]
+foreign {
+    func GdipGetPenDashOffset(pen: CPointer<Win32__impl_l0.GpPen>, offset: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenDashOffset == "on"]
+public unsafe func Windows_GdipGetPenDashOffset(pen: CPointer<Win32__impl_l0.GpPen>, offset: CPointer<Float32>): Int32 {
+    return GdipGetPenDashOffset(pen, offset)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenDashStyle == "on"]
+foreign {
+    func GdipGetPenDashStyle(pen: CPointer<Win32__impl_l0.GpPen>, dashstyle: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenDashStyle == "on"]
+public unsafe func Windows_GdipGetPenDashStyle(pen: CPointer<Win32__impl_l0.GpPen>, dashstyle: CPointer<Int32>): Int32 {
+    return GdipGetPenDashStyle(pen, dashstyle)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenEndCap == "on"]
+foreign {
+    func GdipGetPenEndCap(pen: CPointer<Win32__impl_l0.GpPen>, endCap: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenEndCap == "on"]
+public unsafe func Windows_GdipGetPenEndCap(pen: CPointer<Win32__impl_l0.GpPen>, endCap: CPointer<Int32>): Int32 {
+    return GdipGetPenEndCap(pen, endCap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenFillType == "on"]
+foreign {
+    func GdipGetPenFillType(pen: CPointer<Win32__impl_l0.GpPen>, type_: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenFillType == "on"]
+public unsafe func Windows_GdipGetPenFillType(pen: CPointer<Win32__impl_l0.GpPen>, type_: CPointer<Int32>): Int32 {
+    return GdipGetPenFillType(pen, type_)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenLineJoin == "on"]
+foreign {
+    func GdipGetPenLineJoin(pen: CPointer<Win32__impl_l0.GpPen>, lineJoin: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenLineJoin == "on"]
+public unsafe func Windows_GdipGetPenLineJoin(pen: CPointer<Win32__impl_l0.GpPen>, lineJoin: CPointer<Int32>): Int32 {
+    return GdipGetPenLineJoin(pen, lineJoin)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenMiterLimit == "on"]
+foreign {
+    func GdipGetPenMiterLimit(pen: CPointer<Win32__impl_l0.GpPen>, miterLimit: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenMiterLimit == "on"]
+public unsafe func Windows_GdipGetPenMiterLimit(pen: CPointer<Win32__impl_l0.GpPen>, miterLimit: CPointer<Float32>): Int32 {
+    return GdipGetPenMiterLimit(pen, miterLimit)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenMode == "on"]
+foreign {
+    func GdipGetPenMode(pen: CPointer<Win32__impl_l0.GpPen>, penMode: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenMode == "on"]
+public unsafe func Windows_GdipGetPenMode(pen: CPointer<Win32__impl_l0.GpPen>, penMode: CPointer<Int32>): Int32 {
+    return GdipGetPenMode(pen, penMode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenStartCap == "on"]
+foreign {
+    func GdipGetPenStartCap(pen: CPointer<Win32__impl_l0.GpPen>, startCap: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenStartCap == "on"]
+public unsafe func Windows_GdipGetPenStartCap(pen: CPointer<Win32__impl_l0.GpPen>, startCap: CPointer<Int32>): Int32 {
+    return GdipGetPenStartCap(pen, startCap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenTransform == "on"]
+foreign {
+    func GdipGetPenTransform(pen: CPointer<Win32__impl_l0.GpPen>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenTransform == "on"]
+public unsafe func Windows_GdipGetPenTransform(pen: CPointer<Win32__impl_l0.GpPen>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32 {
+    return GdipGetPenTransform(pen, matrix)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenUnit == "on"]
+foreign {
+    func GdipGetPenUnit(pen: CPointer<Win32__impl_l0.GpPen>, unit: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenUnit == "on"]
+public unsafe func Windows_GdipGetPenUnit(pen: CPointer<Win32__impl_l0.GpPen>, unit: CPointer<Int32>): Int32 {
+    return GdipGetPenUnit(pen, unit)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenWidth == "on"]
+foreign {
+    func GdipGetPenWidth(pen: CPointer<Win32__impl_l0.GpPen>, width: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPenWidth == "on"]
+public unsafe func Windows_GdipGetPenWidth(pen: CPointer<Win32__impl_l0.GpPen>, width: CPointer<Float32>): Int32 {
+    return GdipGetPenWidth(pen, width)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPixelOffsetMode == "on"]
+foreign {
+    func GdipGetPixelOffsetMode(graphics: CPointer<Win32__impl_l0.GpGraphics>, pixelOffsetMode: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPixelOffsetMode == "on"]
+public unsafe func Windows_GdipGetPixelOffsetMode(graphics: CPointer<Win32__impl_l0.GpGraphics>, pixelOffsetMode: CPointer<Int32>): Int32 {
+    return GdipGetPixelOffsetMode(graphics, pixelOffsetMode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPointCount == "on"]
+foreign {
+    func GdipGetPointCount(path: CPointer<Win32__impl_l0.GpPath>, count: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPointCount == "on"]
+public unsafe func Windows_GdipGetPointCount(path: CPointer<Win32__impl_l0.GpPath>, count: CPointer<Int32>): Int32 {
+    return GdipGetPointCount(path, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPropertyCount == "on"]
+foreign {
+    func GdipGetPropertyCount(image: CPointer<Win32__impl_l0.GpImage>, numOfProperty: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPropertyCount == "on"]
+public unsafe func Windows_GdipGetPropertyCount(image: CPointer<Win32__impl_l0.GpImage>, numOfProperty: CPointer<UInt32>): Int32 {
+    return GdipGetPropertyCount(image, numOfProperty)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPropertyIdList == "on"]
+foreign {
+    func GdipGetPropertyIdList(image: CPointer<Win32__impl_l0.GpImage>, numOfProperty: UInt32, list: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPropertyIdList == "on"]
+public unsafe func Windows_GdipGetPropertyIdList(image: CPointer<Win32__impl_l0.GpImage>, numOfProperty: UInt32, list: CPointer<UInt32>): Int32 {
+    return GdipGetPropertyIdList(image, numOfProperty, list)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPropertyItem == "on"]
+foreign {
+    func GdipGetPropertyItem(image: CPointer<Win32__impl_l0.GpImage>, propId: UInt32, propSize: UInt32, buffer: CPointer<Win32__impl_l0.PropertyItem>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPropertyItem == "on"]
+public unsafe func Windows_GdipGetPropertyItem(image: CPointer<Win32__impl_l0.GpImage>, propId: UInt32, propSize: UInt32, buffer: CPointer<Win32__impl_l0.PropertyItem>): Int32 {
+    return GdipGetPropertyItem(image, propId, propSize, buffer)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPropertyItemSize == "on"]
+foreign {
+    func GdipGetPropertyItemSize(image: CPointer<Win32__impl_l0.GpImage>, propId: UInt32, size: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPropertyItemSize == "on"]
+public unsafe func Windows_GdipGetPropertyItemSize(image: CPointer<Win32__impl_l0.GpImage>, propId: UInt32, size: CPointer<UInt32>): Int32 {
+    return GdipGetPropertyItemSize(image, propId, size)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPropertySize == "on"]
+foreign {
+    func GdipGetPropertySize(image: CPointer<Win32__impl_l0.GpImage>, totalBufferSize: CPointer<UInt32>, numProperties: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetPropertySize == "on"]
+public unsafe func Windows_GdipGetPropertySize(image: CPointer<Win32__impl_l0.GpImage>, totalBufferSize: CPointer<UInt32>, numProperties: CPointer<UInt32>): Int32 {
+    return GdipGetPropertySize(image, totalBufferSize, numProperties)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetRegionBounds == "on"]
+foreign {
+    func GdipGetRegionBounds(region: CPointer<Win32__impl_l0.GpRegion>, graphics: CPointer<Win32__impl_l0.GpGraphics>, rect: CPointer<Win32__impl_l0.RectF>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetRegionBounds == "on"]
+public unsafe func Windows_GdipGetRegionBounds(region: CPointer<Win32__impl_l0.GpRegion>, graphics: CPointer<Win32__impl_l0.GpGraphics>, rect: CPointer<Win32__impl_l0.RectF>): Int32 {
+    return GdipGetRegionBounds(region, graphics, rect)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetRegionBoundsI == "on"]
+foreign {
+    func GdipGetRegionBoundsI(region: CPointer<Win32__impl_l0.GpRegion>, graphics: CPointer<Win32__impl_l0.GpGraphics>, rect: CPointer<Win32__impl_l0.Rect>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetRegionBoundsI == "on"]
+public unsafe func Windows_GdipGetRegionBoundsI(region: CPointer<Win32__impl_l0.GpRegion>, graphics: CPointer<Win32__impl_l0.GpGraphics>, rect: CPointer<Win32__impl_l0.Rect>): Int32 {
+    return GdipGetRegionBoundsI(region, graphics, rect)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetRegionData == "on"]
+foreign {
+    // param-hint: buffer len=param[2]
+    // param-hint: sizeFilled optional
+    func GdipGetRegionData(region: CPointer<Win32__impl_l0.GpRegion>, buffer: CPointer<UInt8>, bufferSize: UInt32, sizeFilled: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetRegionData == "on"]
+public unsafe func Windows_GdipGetRegionData(region: CPointer<Win32__impl_l0.GpRegion>, buffer: CPointer<UInt8>, bufferSize: UInt32, sizeFilled: CPointer<UInt32>): Int32 {
+    return GdipGetRegionData(region, buffer, bufferSize, sizeFilled)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetRegionDataSize == "on"]
+foreign {
+    func GdipGetRegionDataSize(region: CPointer<Win32__impl_l0.GpRegion>, bufferSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetRegionDataSize == "on"]
+public unsafe func Windows_GdipGetRegionDataSize(region: CPointer<Win32__impl_l0.GpRegion>, bufferSize: CPointer<UInt32>): Int32 {
+    return GdipGetRegionDataSize(region, bufferSize)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetRegionHRgn == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func GdipGetRegionHRgn(region: CPointer<Win32__impl_l0.GpRegion>, graphics: CPointer<Win32__impl_l0.GpGraphics>, hRgn: CPointer<Win32_Graphics_Gdi.HRGN>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetRegionHRgn == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GdipGetRegionHRgn(region: CPointer<Win32__impl_l0.GpRegion>, graphics: CPointer<Win32__impl_l0.GpGraphics>, hRgn: CPointer<Win32_Graphics_Gdi.HRGN>): Int32 {
+    return GdipGetRegionHRgn(region, graphics, hRgn)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetRegionScans == "on"]
+foreign {
+    func GdipGetRegionScans(region: CPointer<Win32__impl_l0.GpRegion>, rects: CPointer<Win32__impl_l0.RectF>, count: CPointer<Int32>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetRegionScans == "on"]
+public unsafe func Windows_GdipGetRegionScans(region: CPointer<Win32__impl_l0.GpRegion>, rects: CPointer<Win32__impl_l0.RectF>, count: CPointer<Int32>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32 {
+    return GdipGetRegionScans(region, rects, count, matrix)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetRegionScansCount == "on"]
+foreign {
+    func GdipGetRegionScansCount(region: CPointer<Win32__impl_l0.GpRegion>, count: CPointer<UInt32>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetRegionScansCount == "on"]
+public unsafe func Windows_GdipGetRegionScansCount(region: CPointer<Win32__impl_l0.GpRegion>, count: CPointer<UInt32>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32 {
+    return GdipGetRegionScansCount(region, count, matrix)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetRegionScansI == "on"]
+foreign {
+    func GdipGetRegionScansI(region: CPointer<Win32__impl_l0.GpRegion>, rects: CPointer<Win32__impl_l0.Rect>, count: CPointer<Int32>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetRegionScansI == "on"]
+public unsafe func Windows_GdipGetRegionScansI(region: CPointer<Win32__impl_l0.GpRegion>, rects: CPointer<Win32__impl_l0.Rect>, count: CPointer<Int32>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32 {
+    return GdipGetRegionScansI(region, rects, count, matrix)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetRenderingOrigin == "on"]
+foreign {
+    func GdipGetRenderingOrigin(graphics: CPointer<Win32__impl_l0.GpGraphics>, x: CPointer<Int32>, y: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetRenderingOrigin == "on"]
+public unsafe func Windows_GdipGetRenderingOrigin(graphics: CPointer<Win32__impl_l0.GpGraphics>, x: CPointer<Int32>, y: CPointer<Int32>): Int32 {
+    return GdipGetRenderingOrigin(graphics, x, y)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetSmoothingMode == "on"]
+foreign {
+    func GdipGetSmoothingMode(graphics: CPointer<Win32__impl_l0.GpGraphics>, smoothingMode: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetSmoothingMode == "on"]
+public unsafe func Windows_GdipGetSmoothingMode(graphics: CPointer<Win32__impl_l0.GpGraphics>, smoothingMode: CPointer<Int32>): Int32 {
+    return GdipGetSmoothingMode(graphics, smoothingMode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetSolidFillColor == "on"]
+foreign {
+    func GdipGetSolidFillColor(brush: CPointer<Win32__impl_l0.GpSolidFill>, color: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetSolidFillColor == "on"]
+public unsafe func Windows_GdipGetSolidFillColor(brush: CPointer<Win32__impl_l0.GpSolidFill>, color: CPointer<UInt32>): Int32 {
+    return GdipGetSolidFillColor(brush, color)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetStringFormatAlign == "on"]
+foreign {
+    func GdipGetStringFormatAlign(format: CPointer<Win32__impl_l0.GpStringFormat>, align: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetStringFormatAlign == "on"]
+public unsafe func Windows_GdipGetStringFormatAlign(format: CPointer<Win32__impl_l0.GpStringFormat>, align: CPointer<Int32>): Int32 {
+    return GdipGetStringFormatAlign(format, align)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetStringFormatDigitSubstitution == "on"]
+foreign {
+    func GdipGetStringFormatDigitSubstitution(format: CPointer<Win32__impl_l0.GpStringFormat>, language: CPointer<UInt16>, substitute: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetStringFormatDigitSubstitution == "on"]
+public unsafe func Windows_GdipGetStringFormatDigitSubstitution(format: CPointer<Win32__impl_l0.GpStringFormat>, language: CPointer<UInt16>, substitute: CPointer<Int32>): Int32 {
+    return GdipGetStringFormatDigitSubstitution(format, language, substitute)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetStringFormatFlags == "on"]
+foreign {
+    func GdipGetStringFormatFlags(format: CPointer<Win32__impl_l0.GpStringFormat>, flags: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetStringFormatFlags == "on"]
+public unsafe func Windows_GdipGetStringFormatFlags(format: CPointer<Win32__impl_l0.GpStringFormat>, flags: CPointer<Int32>): Int32 {
+    return GdipGetStringFormatFlags(format, flags)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetStringFormatHotkeyPrefix == "on"]
+foreign {
+    func GdipGetStringFormatHotkeyPrefix(format: CPointer<Win32__impl_l0.GpStringFormat>, hotkeyPrefix: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetStringFormatHotkeyPrefix == "on"]
+public unsafe func Windows_GdipGetStringFormatHotkeyPrefix(format: CPointer<Win32__impl_l0.GpStringFormat>, hotkeyPrefix: CPointer<Int32>): Int32 {
+    return GdipGetStringFormatHotkeyPrefix(format, hotkeyPrefix)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetStringFormatLineAlign == "on"]
+foreign {
+    func GdipGetStringFormatLineAlign(format: CPointer<Win32__impl_l0.GpStringFormat>, align: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetStringFormatLineAlign == "on"]
+public unsafe func Windows_GdipGetStringFormatLineAlign(format: CPointer<Win32__impl_l0.GpStringFormat>, align: CPointer<Int32>): Int32 {
+    return GdipGetStringFormatLineAlign(format, align)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetStringFormatMeasurableCharacterRangeCount == "on"]
+foreign {
+    func GdipGetStringFormatMeasurableCharacterRangeCount(format: CPointer<Win32__impl_l0.GpStringFormat>, count: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetStringFormatMeasurableCharacterRangeCount == "on"]
+public unsafe func Windows_GdipGetStringFormatMeasurableCharacterRangeCount(format: CPointer<Win32__impl_l0.GpStringFormat>, count: CPointer<Int32>): Int32 {
+    return GdipGetStringFormatMeasurableCharacterRangeCount(format, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetStringFormatTabStopCount == "on"]
+foreign {
+    func GdipGetStringFormatTabStopCount(format: CPointer<Win32__impl_l0.GpStringFormat>, count: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetStringFormatTabStopCount == "on"]
+public unsafe func Windows_GdipGetStringFormatTabStopCount(format: CPointer<Win32__impl_l0.GpStringFormat>, count: CPointer<Int32>): Int32 {
+    return GdipGetStringFormatTabStopCount(format, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetStringFormatTabStops == "on"]
+foreign {
+    func GdipGetStringFormatTabStops(format: CPointer<Win32__impl_l0.GpStringFormat>, count: Int32, firstTabOffset: CPointer<Float32>, tabStops: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetStringFormatTabStops == "on"]
+public unsafe func Windows_GdipGetStringFormatTabStops(format: CPointer<Win32__impl_l0.GpStringFormat>, count: Int32, firstTabOffset: CPointer<Float32>, tabStops: CPointer<Float32>): Int32 {
+    return GdipGetStringFormatTabStops(format, count, firstTabOffset, tabStops)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetStringFormatTrimming == "on"]
+foreign {
+    func GdipGetStringFormatTrimming(format: CPointer<Win32__impl_l0.GpStringFormat>, trimming: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetStringFormatTrimming == "on"]
+public unsafe func Windows_GdipGetStringFormatTrimming(format: CPointer<Win32__impl_l0.GpStringFormat>, trimming: CPointer<Int32>): Int32 {
+    return GdipGetStringFormatTrimming(format, trimming)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetTextContrast == "on"]
+foreign {
+    func GdipGetTextContrast(graphics: CPointer<Win32__impl_l0.GpGraphics>, contrast: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetTextContrast == "on"]
+public unsafe func Windows_GdipGetTextContrast(graphics: CPointer<Win32__impl_l0.GpGraphics>, contrast: CPointer<UInt32>): Int32 {
+    return GdipGetTextContrast(graphics, contrast)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetTextRenderingHint == "on"]
+foreign {
+    func GdipGetTextRenderingHint(graphics: CPointer<Win32__impl_l0.GpGraphics>, mode: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetTextRenderingHint == "on"]
+public unsafe func Windows_GdipGetTextRenderingHint(graphics: CPointer<Win32__impl_l0.GpGraphics>, mode: CPointer<Int32>): Int32 {
+    return GdipGetTextRenderingHint(graphics, mode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetTextureImage == "on"]
+foreign {
+    func GdipGetTextureImage(brush: CPointer<Win32__impl_l0.GpTexture>, image: CPointer<CPointer<Win32__impl_l0.GpImage>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetTextureImage == "on"]
+public unsafe func Windows_GdipGetTextureImage(brush: CPointer<Win32__impl_l0.GpTexture>, image: CPointer<CPointer<Win32__impl_l0.GpImage>>): Int32 {
+    return GdipGetTextureImage(brush, image)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetTextureTransform == "on"]
+foreign {
+    func GdipGetTextureTransform(brush: CPointer<Win32__impl_l0.GpTexture>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetTextureTransform == "on"]
+public unsafe func Windows_GdipGetTextureTransform(brush: CPointer<Win32__impl_l0.GpTexture>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32 {
+    return GdipGetTextureTransform(brush, matrix)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetTextureWrapMode == "on"]
+foreign {
+    func GdipGetTextureWrapMode(brush: CPointer<Win32__impl_l0.GpTexture>, wrapmode: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetTextureWrapMode == "on"]
+public unsafe func Windows_GdipGetTextureWrapMode(brush: CPointer<Win32__impl_l0.GpTexture>, wrapmode: CPointer<Int32>): Int32 {
+    return GdipGetTextureWrapMode(brush, wrapmode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetVisibleClipBounds == "on"]
+foreign {
+    func GdipGetVisibleClipBounds(graphics: CPointer<Win32__impl_l0.GpGraphics>, rect: CPointer<Win32__impl_l0.RectF>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetVisibleClipBounds == "on"]
+public unsafe func Windows_GdipGetVisibleClipBounds(graphics: CPointer<Win32__impl_l0.GpGraphics>, rect: CPointer<Win32__impl_l0.RectF>): Int32 {
+    return GdipGetVisibleClipBounds(graphics, rect)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetVisibleClipBoundsI == "on"]
+foreign {
+    func GdipGetVisibleClipBoundsI(graphics: CPointer<Win32__impl_l0.GpGraphics>, rect: CPointer<Win32__impl_l0.Rect>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetVisibleClipBoundsI == "on"]
+public unsafe func Windows_GdipGetVisibleClipBoundsI(graphics: CPointer<Win32__impl_l0.GpGraphics>, rect: CPointer<Win32__impl_l0.Rect>): Int32 {
+    return GdipGetVisibleClipBoundsI(graphics, rect)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetWorldTransform == "on"]
+foreign {
+    func GdipGetWorldTransform(graphics: CPointer<Win32__impl_l0.GpGraphics>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGetWorldTransform == "on"]
+public unsafe func Windows_GdipGetWorldTransform(graphics: CPointer<Win32__impl_l0.GpGraphics>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32 {
+    return GdipGetWorldTransform(graphics, matrix)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGraphicsClear == "on"]
+foreign {
+    func GdipGraphicsClear(graphics: CPointer<Win32__impl_l0.GpGraphics>, color: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGraphicsClear == "on"]
+public unsafe func Windows_GdipGraphicsClear(graphics: CPointer<Win32__impl_l0.GpGraphics>, color: UInt32): Int32 {
+    return GdipGraphicsClear(graphics, color)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGraphicsSetAbort == "on"]
+foreign {
+    func GdipGraphicsSetAbort(pGraphics: CPointer<Win32__impl_l0.GpGraphics>, pIAbort: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipGraphicsSetAbort == "on"]
+public unsafe func Windows_GdipGraphicsSetAbort(pGraphics: CPointer<Win32__impl_l0.GpGraphics>, pIAbort: CPointer<Unit>): Int32 {
+    return GdipGraphicsSetAbort(pGraphics, pIAbort)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipImageForceValidation == "on"]
+foreign {
+    func GdipImageForceValidation(image: CPointer<Win32__impl_l0.GpImage>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipImageForceValidation == "on"]
+public unsafe func Windows_GdipImageForceValidation(image: CPointer<Win32__impl_l0.GpImage>): Int32 {
+    return GdipImageForceValidation(image)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipImageGetFrameCount == "on"]
+foreign {
+    func GdipImageGetFrameCount(image: CPointer<Win32__impl_l0.GpImage>, dimensionID: CPointer<GUID>, count: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipImageGetFrameCount == "on"]
+public unsafe func Windows_GdipImageGetFrameCount(image: CPointer<Win32__impl_l0.GpImage>, dimensionID: CPointer<GUID>, count: CPointer<UInt32>): Int32 {
+    return GdipImageGetFrameCount(image, dimensionID, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipImageGetFrameDimensionsCount == "on"]
+foreign {
+    func GdipImageGetFrameDimensionsCount(image: CPointer<Win32__impl_l0.GpImage>, count: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipImageGetFrameDimensionsCount == "on"]
+public unsafe func Windows_GdipImageGetFrameDimensionsCount(image: CPointer<Win32__impl_l0.GpImage>, count: CPointer<UInt32>): Int32 {
+    return GdipImageGetFrameDimensionsCount(image, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipImageGetFrameDimensionsList == "on"]
+foreign {
+    func GdipImageGetFrameDimensionsList(image: CPointer<Win32__impl_l0.GpImage>, dimensionIDs: CPointer<GUID>, count: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipImageGetFrameDimensionsList == "on"]
+public unsafe func Windows_GdipImageGetFrameDimensionsList(image: CPointer<Win32__impl_l0.GpImage>, dimensionIDs: CPointer<GUID>, count: UInt32): Int32 {
+    return GdipImageGetFrameDimensionsList(image, dimensionIDs, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipImageRotateFlip == "on"]
+foreign {
+    func GdipImageRotateFlip(image: CPointer<Win32__impl_l0.GpImage>, rfType: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipImageRotateFlip == "on"]
+public unsafe func Windows_GdipImageRotateFlip(image: CPointer<Win32__impl_l0.GpImage>, rfType: Int32): Int32 {
+    return GdipImageRotateFlip(image, rfType)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipImageSelectActiveFrame == "on"]
+foreign {
+    func GdipImageSelectActiveFrame(image: CPointer<Win32__impl_l0.GpImage>, dimensionID: CPointer<GUID>, frameIndex: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipImageSelectActiveFrame == "on"]
+public unsafe func Windows_GdipImageSelectActiveFrame(image: CPointer<Win32__impl_l0.GpImage>, dimensionID: CPointer<GUID>, frameIndex: UInt32): Int32 {
+    return GdipImageSelectActiveFrame(image, dimensionID, frameIndex)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipImageSetAbort == "on"]
+foreign {
+    func GdipImageSetAbort(pImage: CPointer<Win32__impl_l0.GpImage>, pIAbort: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipImageSetAbort == "on"]
+public unsafe func Windows_GdipImageSetAbort(pImage: CPointer<Win32__impl_l0.GpImage>, pIAbort: CPointer<Unit>): Int32 {
+    return GdipImageSetAbort(pImage, pIAbort)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipInitializePalette == "on"]
+foreign {
+    func GdipInitializePalette(palette: CPointer<Win32__impl_l0.ColorPalette>, palettetype: Int32, optimalColors: Int32, useTransparentColor: Int32, bitmap: CPointer<Win32__impl_l0.GpBitmap>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipInitializePalette == "on"]
+public unsafe func Windows_GdipInitializePalette(palette: CPointer<Win32__impl_l0.ColorPalette>, palettetype: Int32, optimalColors: Int32, useTransparentColor: Int32, bitmap: CPointer<Win32__impl_l0.GpBitmap>): Int32 {
+    return GdipInitializePalette(palette, palettetype, optimalColors, useTransparentColor, bitmap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipInvertMatrix == "on"]
+foreign {
+    func GdipInvertMatrix(matrix: CPointer<Win32__impl_l0.Matrix>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipInvertMatrix == "on"]
+public unsafe func Windows_GdipInvertMatrix(matrix: CPointer<Win32__impl_l0.Matrix>): Int32 {
+    return GdipInvertMatrix(matrix)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsClipEmpty == "on"]
+foreign {
+    func GdipIsClipEmpty(graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsClipEmpty == "on"]
+public unsafe func Windows_GdipIsClipEmpty(graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32 {
+    return GdipIsClipEmpty(graphics, result)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsEmptyRegion == "on"]
+foreign {
+    func GdipIsEmptyRegion(region: CPointer<Win32__impl_l0.GpRegion>, graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsEmptyRegion == "on"]
+public unsafe func Windows_GdipIsEmptyRegion(region: CPointer<Win32__impl_l0.GpRegion>, graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32 {
+    return GdipIsEmptyRegion(region, graphics, result)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsEqualRegion == "on"]
+foreign {
+    func GdipIsEqualRegion(region: CPointer<Win32__impl_l0.GpRegion>, region2: CPointer<Win32__impl_l0.GpRegion>, graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsEqualRegion == "on"]
+public unsafe func Windows_GdipIsEqualRegion(region: CPointer<Win32__impl_l0.GpRegion>, region2: CPointer<Win32__impl_l0.GpRegion>, graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32 {
+    return GdipIsEqualRegion(region, region2, graphics, result)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsInfiniteRegion == "on"]
+foreign {
+    func GdipIsInfiniteRegion(region: CPointer<Win32__impl_l0.GpRegion>, graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsInfiniteRegion == "on"]
+public unsafe func Windows_GdipIsInfiniteRegion(region: CPointer<Win32__impl_l0.GpRegion>, graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32 {
+    return GdipIsInfiniteRegion(region, graphics, result)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsMatrixEqual == "on"]
+foreign {
+    func GdipIsMatrixEqual(matrix: CPointer<Win32__impl_l0.Matrix>, matrix2: CPointer<Win32__impl_l0.Matrix>, result: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsMatrixEqual == "on"]
+public unsafe func Windows_GdipIsMatrixEqual(matrix: CPointer<Win32__impl_l0.Matrix>, matrix2: CPointer<Win32__impl_l0.Matrix>, result: CPointer<Int32>): Int32 {
+    return GdipIsMatrixEqual(matrix, matrix2, result)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsMatrixIdentity == "on"]
+foreign {
+    func GdipIsMatrixIdentity(matrix: CPointer<Win32__impl_l0.Matrix>, result: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsMatrixIdentity == "on"]
+public unsafe func Windows_GdipIsMatrixIdentity(matrix: CPointer<Win32__impl_l0.Matrix>, result: CPointer<Int32>): Int32 {
+    return GdipIsMatrixIdentity(matrix, result)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsMatrixInvertible == "on"]
+foreign {
+    func GdipIsMatrixInvertible(matrix: CPointer<Win32__impl_l0.Matrix>, result: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsMatrixInvertible == "on"]
+public unsafe func Windows_GdipIsMatrixInvertible(matrix: CPointer<Win32__impl_l0.Matrix>, result: CPointer<Int32>): Int32 {
+    return GdipIsMatrixInvertible(matrix, result)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsOutlineVisiblePathPoint == "on"]
+foreign {
+    func GdipIsOutlineVisiblePathPoint(path: CPointer<Win32__impl_l0.GpPath>, x: Float32, y: Float32, pen: CPointer<Win32__impl_l0.GpPen>, graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsOutlineVisiblePathPoint == "on"]
+public unsafe func Windows_GdipIsOutlineVisiblePathPoint(path: CPointer<Win32__impl_l0.GpPath>, x: Float32, y: Float32, pen: CPointer<Win32__impl_l0.GpPen>, graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32 {
+    return GdipIsOutlineVisiblePathPoint(path, x, y, pen, graphics, result)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsOutlineVisiblePathPointI == "on"]
+foreign {
+    func GdipIsOutlineVisiblePathPointI(path: CPointer<Win32__impl_l0.GpPath>, x: Int32, y: Int32, pen: CPointer<Win32__impl_l0.GpPen>, graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsOutlineVisiblePathPointI == "on"]
+public unsafe func Windows_GdipIsOutlineVisiblePathPointI(path: CPointer<Win32__impl_l0.GpPath>, x: Int32, y: Int32, pen: CPointer<Win32__impl_l0.GpPen>, graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32 {
+    return GdipIsOutlineVisiblePathPointI(path, x, y, pen, graphics, result)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsStyleAvailable == "on"]
+foreign {
+    func GdipIsStyleAvailable(family: CPointer<Win32__impl_l0.GpFontFamily>, style: Int32, IsStyleAvailable: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsStyleAvailable == "on"]
+public unsafe func Windows_GdipIsStyleAvailable(family: CPointer<Win32__impl_l0.GpFontFamily>, style: Int32, IsStyleAvailable: CPointer<Int32>): Int32 {
+    return GdipIsStyleAvailable(family, style, IsStyleAvailable)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsVisibleClipEmpty == "on"]
+foreign {
+    func GdipIsVisibleClipEmpty(graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsVisibleClipEmpty == "on"]
+public unsafe func Windows_GdipIsVisibleClipEmpty(graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32 {
+    return GdipIsVisibleClipEmpty(graphics, result)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsVisiblePathPoint == "on"]
+foreign {
+    func GdipIsVisiblePathPoint(path: CPointer<Win32__impl_l0.GpPath>, x: Float32, y: Float32, graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsVisiblePathPoint == "on"]
+public unsafe func Windows_GdipIsVisiblePathPoint(path: CPointer<Win32__impl_l0.GpPath>, x: Float32, y: Float32, graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32 {
+    return GdipIsVisiblePathPoint(path, x, y, graphics, result)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsVisiblePathPointI == "on"]
+foreign {
+    func GdipIsVisiblePathPointI(path: CPointer<Win32__impl_l0.GpPath>, x: Int32, y: Int32, graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsVisiblePathPointI == "on"]
+public unsafe func Windows_GdipIsVisiblePathPointI(path: CPointer<Win32__impl_l0.GpPath>, x: Int32, y: Int32, graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32 {
+    return GdipIsVisiblePathPointI(path, x, y, graphics, result)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsVisiblePoint == "on"]
+foreign {
+    func GdipIsVisiblePoint(graphics: CPointer<Win32__impl_l0.GpGraphics>, x: Float32, y: Float32, result: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsVisiblePoint == "on"]
+public unsafe func Windows_GdipIsVisiblePoint(graphics: CPointer<Win32__impl_l0.GpGraphics>, x: Float32, y: Float32, result: CPointer<Int32>): Int32 {
+    return GdipIsVisiblePoint(graphics, x, y, result)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsVisiblePointI == "on"]
+foreign {
+    func GdipIsVisiblePointI(graphics: CPointer<Win32__impl_l0.GpGraphics>, x: Int32, y: Int32, result: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsVisiblePointI == "on"]
+public unsafe func Windows_GdipIsVisiblePointI(graphics: CPointer<Win32__impl_l0.GpGraphics>, x: Int32, y: Int32, result: CPointer<Int32>): Int32 {
+    return GdipIsVisiblePointI(graphics, x, y, result)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsVisibleRect == "on"]
+foreign {
+    func GdipIsVisibleRect(graphics: CPointer<Win32__impl_l0.GpGraphics>, x: Float32, y: Float32, width: Float32, height: Float32, result: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsVisibleRect == "on"]
+public unsafe func Windows_GdipIsVisibleRect(graphics: CPointer<Win32__impl_l0.GpGraphics>, x: Float32, y: Float32, width: Float32, height: Float32, result: CPointer<Int32>): Int32 {
+    return GdipIsVisibleRect(graphics, x, y, width, height, result)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsVisibleRectI == "on"]
+foreign {
+    func GdipIsVisibleRectI(graphics: CPointer<Win32__impl_l0.GpGraphics>, x: Int32, y: Int32, width: Int32, height: Int32, result: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsVisibleRectI == "on"]
+public unsafe func Windows_GdipIsVisibleRectI(graphics: CPointer<Win32__impl_l0.GpGraphics>, x: Int32, y: Int32, width: Int32, height: Int32, result: CPointer<Int32>): Int32 {
+    return GdipIsVisibleRectI(graphics, x, y, width, height, result)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsVisibleRegionPoint == "on"]
+foreign {
+    func GdipIsVisibleRegionPoint(region: CPointer<Win32__impl_l0.GpRegion>, x: Float32, y: Float32, graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsVisibleRegionPoint == "on"]
+public unsafe func Windows_GdipIsVisibleRegionPoint(region: CPointer<Win32__impl_l0.GpRegion>, x: Float32, y: Float32, graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32 {
+    return GdipIsVisibleRegionPoint(region, x, y, graphics, result)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsVisibleRegionPointI == "on"]
+foreign {
+    func GdipIsVisibleRegionPointI(region: CPointer<Win32__impl_l0.GpRegion>, x: Int32, y: Int32, graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsVisibleRegionPointI == "on"]
+public unsafe func Windows_GdipIsVisibleRegionPointI(region: CPointer<Win32__impl_l0.GpRegion>, x: Int32, y: Int32, graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32 {
+    return GdipIsVisibleRegionPointI(region, x, y, graphics, result)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsVisibleRegionRect == "on"]
+foreign {
+    func GdipIsVisibleRegionRect(region: CPointer<Win32__impl_l0.GpRegion>, x: Float32, y: Float32, width: Float32, height: Float32, graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsVisibleRegionRect == "on"]
+public unsafe func Windows_GdipIsVisibleRegionRect(region: CPointer<Win32__impl_l0.GpRegion>, x: Float32, y: Float32, width: Float32, height: Float32, graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32 {
+    return GdipIsVisibleRegionRect(region, x, y, width, height, graphics, result)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsVisibleRegionRectI == "on"]
+foreign {
+    func GdipIsVisibleRegionRectI(region: CPointer<Win32__impl_l0.GpRegion>, x: Int32, y: Int32, width: Int32, height: Int32, graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipIsVisibleRegionRectI == "on"]
+public unsafe func Windows_GdipIsVisibleRegionRectI(region: CPointer<Win32__impl_l0.GpRegion>, x: Int32, y: Int32, width: Int32, height: Int32, graphics: CPointer<Win32__impl_l0.GpGraphics>, result: CPointer<Int32>): Int32 {
+    return GdipIsVisibleRegionRectI(region, x, y, width, height, graphics, result)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipLoadImageFromFile == "on"]
+foreign {
+    func GdipLoadImageFromFile(filename: CPointer<UInt16>, image: CPointer<CPointer<Win32__impl_l0.GpImage>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipLoadImageFromFile == "on"]
+public unsafe func Windows_GdipLoadImageFromFile(filename: CPointer<UInt16>, image: CPointer<CPointer<Win32__impl_l0.GpImage>>): Int32 {
+    return GdipLoadImageFromFile(filename, image)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipLoadImageFromFileICM == "on"]
+foreign {
+    func GdipLoadImageFromFileICM(filename: CPointer<UInt16>, image: CPointer<CPointer<Win32__impl_l0.GpImage>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipLoadImageFromFileICM == "on"]
+public unsafe func Windows_GdipLoadImageFromFileICM(filename: CPointer<UInt16>, image: CPointer<CPointer<Win32__impl_l0.GpImage>>): Int32 {
+    return GdipLoadImageFromFileICM(filename, image)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipLoadImageFromStream == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func GdipLoadImageFromStream(stream: CPointer<Unit>, image: CPointer<CPointer<Win32__impl_l0.GpImage>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipLoadImageFromStream == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_GdipLoadImageFromStream(stream: CPointer<Unit>, image: CPointer<CPointer<Win32__impl_l0.GpImage>>): Int32 {
+    return GdipLoadImageFromStream(stream, image)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipLoadImageFromStreamICM == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func GdipLoadImageFromStreamICM(stream: CPointer<Unit>, image: CPointer<CPointer<Win32__impl_l0.GpImage>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipLoadImageFromStreamICM == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_GdipLoadImageFromStreamICM(stream: CPointer<Unit>, image: CPointer<CPointer<Win32__impl_l0.GpImage>>): Int32 {
+    return GdipLoadImageFromStreamICM(stream, image)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipMeasureCharacterRanges == "on"]
+foreign {
+    func GdipMeasureCharacterRanges(graphics: CPointer<Win32__impl_l0.GpGraphics>, string: CPointer<UInt16>, length: Int32, font: CPointer<Win32__impl_l0.GpFont>, layoutRect: CPointer<Win32__impl_l0.RectF>, stringFormat: CPointer<Win32__impl_l0.GpStringFormat>, regionCount: Int32, regions: CPointer<CPointer<Win32__impl_l0.GpRegion>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipMeasureCharacterRanges == "on"]
+public unsafe func Windows_GdipMeasureCharacterRanges(graphics: CPointer<Win32__impl_l0.GpGraphics>, string: CPointer<UInt16>, length: Int32, font: CPointer<Win32__impl_l0.GpFont>, layoutRect: CPointer<Win32__impl_l0.RectF>, stringFormat: CPointer<Win32__impl_l0.GpStringFormat>, regionCount: Int32, regions: CPointer<CPointer<Win32__impl_l0.GpRegion>>): Int32 {
+    return GdipMeasureCharacterRanges(graphics, string, length, font, layoutRect, stringFormat, regionCount, regions)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipMeasureDriverString == "on"]
+foreign {
+    func GdipMeasureDriverString(graphics: CPointer<Win32__impl_l0.GpGraphics>, text: CPointer<UInt16>, length: Int32, font: CPointer<Win32__impl_l0.GpFont>, positions: CPointer<Win32__impl_l0.PointF>, flags: Int32, matrix: CPointer<Win32__impl_l0.Matrix>, boundingBox: CPointer<Win32__impl_l0.RectF>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipMeasureDriverString == "on"]
+public unsafe func Windows_GdipMeasureDriverString(graphics: CPointer<Win32__impl_l0.GpGraphics>, text: CPointer<UInt16>, length: Int32, font: CPointer<Win32__impl_l0.GpFont>, positions: CPointer<Win32__impl_l0.PointF>, flags: Int32, matrix: CPointer<Win32__impl_l0.Matrix>, boundingBox: CPointer<Win32__impl_l0.RectF>): Int32 {
+    return GdipMeasureDriverString(graphics, text, length, font, positions, flags, matrix, boundingBox)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipMeasureString == "on"]
+foreign {
+    func GdipMeasureString(graphics: CPointer<Win32__impl_l0.GpGraphics>, string: CPointer<UInt16>, length: Int32, font: CPointer<Win32__impl_l0.GpFont>, layoutRect: CPointer<Win32__impl_l0.RectF>, stringFormat: CPointer<Win32__impl_l0.GpStringFormat>, boundingBox: CPointer<Win32__impl_l0.RectF>, codepointsFitted: CPointer<Int32>, linesFilled: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipMeasureString == "on"]
+public unsafe func Windows_GdipMeasureString(graphics: CPointer<Win32__impl_l0.GpGraphics>, string: CPointer<UInt16>, length: Int32, font: CPointer<Win32__impl_l0.GpFont>, layoutRect: CPointer<Win32__impl_l0.RectF>, stringFormat: CPointer<Win32__impl_l0.GpStringFormat>, boundingBox: CPointer<Win32__impl_l0.RectF>, codepointsFitted: CPointer<Int32>, linesFilled: CPointer<Int32>): Int32 {
+    return GdipMeasureString(graphics, string, length, font, layoutRect, stringFormat, boundingBox, codepointsFitted, linesFilled)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipMultiplyLineTransform == "on"]
+foreign {
+    func GdipMultiplyLineTransform(brush: CPointer<Win32__impl_l0.GpLineGradient>, matrix: CPointer<Win32__impl_l0.Matrix>, order: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipMultiplyLineTransform == "on"]
+public unsafe func Windows_GdipMultiplyLineTransform(brush: CPointer<Win32__impl_l0.GpLineGradient>, matrix: CPointer<Win32__impl_l0.Matrix>, order: Int32): Int32 {
+    return GdipMultiplyLineTransform(brush, matrix, order)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipMultiplyMatrix == "on"]
+foreign {
+    func GdipMultiplyMatrix(matrix: CPointer<Win32__impl_l0.Matrix>, matrix2: CPointer<Win32__impl_l0.Matrix>, order: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipMultiplyMatrix == "on"]
+public unsafe func Windows_GdipMultiplyMatrix(matrix: CPointer<Win32__impl_l0.Matrix>, matrix2: CPointer<Win32__impl_l0.Matrix>, order: Int32): Int32 {
+    return GdipMultiplyMatrix(matrix, matrix2, order)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipMultiplyPathGradientTransform == "on"]
+foreign {
+    func GdipMultiplyPathGradientTransform(brush: CPointer<Win32__impl_l0.GpPathGradient>, matrix: CPointer<Win32__impl_l0.Matrix>, order: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipMultiplyPathGradientTransform == "on"]
+public unsafe func Windows_GdipMultiplyPathGradientTransform(brush: CPointer<Win32__impl_l0.GpPathGradient>, matrix: CPointer<Win32__impl_l0.Matrix>, order: Int32): Int32 {
+    return GdipMultiplyPathGradientTransform(brush, matrix, order)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipMultiplyPenTransform == "on"]
+foreign {
+    func GdipMultiplyPenTransform(pen: CPointer<Win32__impl_l0.GpPen>, matrix: CPointer<Win32__impl_l0.Matrix>, order: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipMultiplyPenTransform == "on"]
+public unsafe func Windows_GdipMultiplyPenTransform(pen: CPointer<Win32__impl_l0.GpPen>, matrix: CPointer<Win32__impl_l0.Matrix>, order: Int32): Int32 {
+    return GdipMultiplyPenTransform(pen, matrix, order)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipMultiplyTextureTransform == "on"]
+foreign {
+    func GdipMultiplyTextureTransform(brush: CPointer<Win32__impl_l0.GpTexture>, matrix: CPointer<Win32__impl_l0.Matrix>, order: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipMultiplyTextureTransform == "on"]
+public unsafe func Windows_GdipMultiplyTextureTransform(brush: CPointer<Win32__impl_l0.GpTexture>, matrix: CPointer<Win32__impl_l0.Matrix>, order: Int32): Int32 {
+    return GdipMultiplyTextureTransform(brush, matrix, order)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipMultiplyWorldTransform == "on"]
+foreign {
+    func GdipMultiplyWorldTransform(graphics: CPointer<Win32__impl_l0.GpGraphics>, matrix: CPointer<Win32__impl_l0.Matrix>, order: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipMultiplyWorldTransform == "on"]
+public unsafe func Windows_GdipMultiplyWorldTransform(graphics: CPointer<Win32__impl_l0.GpGraphics>, matrix: CPointer<Win32__impl_l0.Matrix>, order: Int32): Int32 {
+    return GdipMultiplyWorldTransform(graphics, matrix, order)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipNewInstalledFontCollection == "on"]
+foreign {
+    func GdipNewInstalledFontCollection(fontCollection: CPointer<CPointer<Win32__impl_l0.GpFontCollection>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipNewInstalledFontCollection == "on"]
+public unsafe func Windows_GdipNewInstalledFontCollection(fontCollection: CPointer<CPointer<Win32__impl_l0.GpFontCollection>>): Int32 {
+    return GdipNewInstalledFontCollection(fontCollection)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipNewPrivateFontCollection == "on"]
+foreign {
+    func GdipNewPrivateFontCollection(fontCollection: CPointer<CPointer<Win32__impl_l0.GpFontCollection>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipNewPrivateFontCollection == "on"]
+public unsafe func Windows_GdipNewPrivateFontCollection(fontCollection: CPointer<CPointer<Win32__impl_l0.GpFontCollection>>): Int32 {
+    return GdipNewPrivateFontCollection(fontCollection)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterCopyData == "on"]
+foreign {
+    func GdipPathIterCopyData(iterator: CPointer<Win32__impl_l0.GpPathIterator>, resultCount: CPointer<Int32>, points: CPointer<Win32__impl_l0.PointF>, types: CPointer<UInt8>, startIndex: Int32, endIndex: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterCopyData == "on"]
+public unsafe func Windows_GdipPathIterCopyData(iterator: CPointer<Win32__impl_l0.GpPathIterator>, resultCount: CPointer<Int32>, points: CPointer<Win32__impl_l0.PointF>, types: CPointer<UInt8>, startIndex: Int32, endIndex: Int32): Int32 {
+    return GdipPathIterCopyData(iterator, resultCount, points, types, startIndex, endIndex)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterEnumerate == "on"]
+foreign {
+    // param-hint: points len=param[4]
+    // param-hint: types len=param[4]
+    func GdipPathIterEnumerate(iterator: CPointer<Win32__impl_l0.GpPathIterator>, resultCount: CPointer<Int32>, points: CPointer<Win32__impl_l0.PointF>, types: CPointer<UInt8>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterEnumerate == "on"]
+public unsafe func Windows_GdipPathIterEnumerate(iterator: CPointer<Win32__impl_l0.GpPathIterator>, resultCount: CPointer<Int32>, points: CPointer<Win32__impl_l0.PointF>, types: CPointer<UInt8>, count: Int32): Int32 {
+    return GdipPathIterEnumerate(iterator, resultCount, points, types, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterGetCount == "on"]
+foreign {
+    func GdipPathIterGetCount(iterator: CPointer<Win32__impl_l0.GpPathIterator>, count: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterGetCount == "on"]
+public unsafe func Windows_GdipPathIterGetCount(iterator: CPointer<Win32__impl_l0.GpPathIterator>, count: CPointer<Int32>): Int32 {
+    return GdipPathIterGetCount(iterator, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterGetSubpathCount == "on"]
+foreign {
+    func GdipPathIterGetSubpathCount(iterator: CPointer<Win32__impl_l0.GpPathIterator>, count: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterGetSubpathCount == "on"]
+public unsafe func Windows_GdipPathIterGetSubpathCount(iterator: CPointer<Win32__impl_l0.GpPathIterator>, count: CPointer<Int32>): Int32 {
+    return GdipPathIterGetSubpathCount(iterator, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterHasCurve == "on"]
+foreign {
+    func GdipPathIterHasCurve(iterator: CPointer<Win32__impl_l0.GpPathIterator>, hasCurve: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterHasCurve == "on"]
+public unsafe func Windows_GdipPathIterHasCurve(iterator: CPointer<Win32__impl_l0.GpPathIterator>, hasCurve: CPointer<Int32>): Int32 {
+    return GdipPathIterHasCurve(iterator, hasCurve)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterIsValid == "on"]
+foreign {
+    func GdipPathIterIsValid(iterator: CPointer<Win32__impl_l0.GpPathIterator>, valid: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterIsValid == "on"]
+public unsafe func Windows_GdipPathIterIsValid(iterator: CPointer<Win32__impl_l0.GpPathIterator>, valid: CPointer<Int32>): Int32 {
+    return GdipPathIterIsValid(iterator, valid)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterNextMarker == "on"]
+foreign {
+    func GdipPathIterNextMarker(iterator: CPointer<Win32__impl_l0.GpPathIterator>, resultCount: CPointer<Int32>, startIndex: CPointer<Int32>, endIndex: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterNextMarker == "on"]
+public unsafe func Windows_GdipPathIterNextMarker(iterator: CPointer<Win32__impl_l0.GpPathIterator>, resultCount: CPointer<Int32>, startIndex: CPointer<Int32>, endIndex: CPointer<Int32>): Int32 {
+    return GdipPathIterNextMarker(iterator, resultCount, startIndex, endIndex)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterNextMarkerPath == "on"]
+foreign {
+    func GdipPathIterNextMarkerPath(iterator: CPointer<Win32__impl_l0.GpPathIterator>, resultCount: CPointer<Int32>, path: CPointer<Win32__impl_l0.GpPath>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterNextMarkerPath == "on"]
+public unsafe func Windows_GdipPathIterNextMarkerPath(iterator: CPointer<Win32__impl_l0.GpPathIterator>, resultCount: CPointer<Int32>, path: CPointer<Win32__impl_l0.GpPath>): Int32 {
+    return GdipPathIterNextMarkerPath(iterator, resultCount, path)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterNextPathType == "on"]
+foreign {
+    func GdipPathIterNextPathType(iterator: CPointer<Win32__impl_l0.GpPathIterator>, resultCount: CPointer<Int32>, pathType: CPointer<UInt8>, startIndex: CPointer<Int32>, endIndex: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterNextPathType == "on"]
+public unsafe func Windows_GdipPathIterNextPathType(iterator: CPointer<Win32__impl_l0.GpPathIterator>, resultCount: CPointer<Int32>, pathType: CPointer<UInt8>, startIndex: CPointer<Int32>, endIndex: CPointer<Int32>): Int32 {
+    return GdipPathIterNextPathType(iterator, resultCount, pathType, startIndex, endIndex)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterNextSubpath == "on"]
+foreign {
+    func GdipPathIterNextSubpath(iterator: CPointer<Win32__impl_l0.GpPathIterator>, resultCount: CPointer<Int32>, startIndex: CPointer<Int32>, endIndex: CPointer<Int32>, isClosed: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterNextSubpath == "on"]
+public unsafe func Windows_GdipPathIterNextSubpath(iterator: CPointer<Win32__impl_l0.GpPathIterator>, resultCount: CPointer<Int32>, startIndex: CPointer<Int32>, endIndex: CPointer<Int32>, isClosed: CPointer<Int32>): Int32 {
+    return GdipPathIterNextSubpath(iterator, resultCount, startIndex, endIndex, isClosed)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterNextSubpathPath == "on"]
+foreign {
+    func GdipPathIterNextSubpathPath(iterator: CPointer<Win32__impl_l0.GpPathIterator>, resultCount: CPointer<Int32>, path: CPointer<Win32__impl_l0.GpPath>, isClosed: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterNextSubpathPath == "on"]
+public unsafe func Windows_GdipPathIterNextSubpathPath(iterator: CPointer<Win32__impl_l0.GpPathIterator>, resultCount: CPointer<Int32>, path: CPointer<Win32__impl_l0.GpPath>, isClosed: CPointer<Int32>): Int32 {
+    return GdipPathIterNextSubpathPath(iterator, resultCount, path, isClosed)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterRewind == "on"]
+foreign {
+    func GdipPathIterRewind(iterator: CPointer<Win32__impl_l0.GpPathIterator>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPathIterRewind == "on"]
+public unsafe func Windows_GdipPathIterRewind(iterator: CPointer<Win32__impl_l0.GpPathIterator>): Int32 {
+    return GdipPathIterRewind(iterator)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPlayMetafileRecord == "on"]
+foreign {
+    func GdipPlayMetafileRecord(metafile: CPointer<Win32__impl_l0.GpMetafile>, recordType: Int32, flags: UInt32, dataSize: UInt32, data: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPlayMetafileRecord == "on"]
+public unsafe func Windows_GdipPlayMetafileRecord(metafile: CPointer<Win32__impl_l0.GpMetafile>, recordType: Int32, flags: UInt32, dataSize: UInt32, data: CPointer<UInt8>): Int32 {
+    return GdipPlayMetafileRecord(metafile, recordType, flags, dataSize, data)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPrivateAddFontFile == "on"]
+foreign {
+    func GdipPrivateAddFontFile(fontCollection: CPointer<Win32__impl_l0.GpFontCollection>, filename: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPrivateAddFontFile == "on"]
+public unsafe func Windows_GdipPrivateAddFontFile(fontCollection: CPointer<Win32__impl_l0.GpFontCollection>, filename: CPointer<UInt16>): Int32 {
+    return GdipPrivateAddFontFile(fontCollection, filename)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPrivateAddMemoryFont == "on"]
+foreign {
+    func GdipPrivateAddMemoryFont(fontCollection: CPointer<Win32__impl_l0.GpFontCollection>, memory: CPointer<Unit>, length: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipPrivateAddMemoryFont == "on"]
+public unsafe func Windows_GdipPrivateAddMemoryFont(fontCollection: CPointer<Win32__impl_l0.GpFontCollection>, memory: CPointer<Unit>, length: Int32): Int32 {
+    return GdipPrivateAddMemoryFont(fontCollection, memory, length)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRecordMetafile == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func GdipRecordMetafile(referenceHdc: Win32_Graphics_Gdi.HDC, type_: Int32, frameRect: CPointer<Win32__impl_l0.RectF>, frameUnit: Int32, description: CPointer<UInt16>, metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRecordMetafile == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GdipRecordMetafile(referenceHdc: Win32_Graphics_Gdi.HDC, type_: Int32, frameRect: CPointer<Win32__impl_l0.RectF>, frameUnit: Int32, description: CPointer<UInt16>, metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32 {
+    return GdipRecordMetafile(referenceHdc, type_, frameRect, frameUnit, description, metafile)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRecordMetafileFileName == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func GdipRecordMetafileFileName(fileName: CPointer<UInt16>, referenceHdc: Win32_Graphics_Gdi.HDC, type_: Int32, frameRect: CPointer<Win32__impl_l0.RectF>, frameUnit: Int32, description: CPointer<UInt16>, metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRecordMetafileFileName == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GdipRecordMetafileFileName(fileName: CPointer<UInt16>, referenceHdc: Win32_Graphics_Gdi.HDC, type_: Int32, frameRect: CPointer<Win32__impl_l0.RectF>, frameUnit: Int32, description: CPointer<UInt16>, metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32 {
+    return GdipRecordMetafileFileName(fileName, referenceHdc, type_, frameRect, frameUnit, description, metafile)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRecordMetafileFileNameI == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func GdipRecordMetafileFileNameI(fileName: CPointer<UInt16>, referenceHdc: Win32_Graphics_Gdi.HDC, type_: Int32, frameRect: CPointer<Win32__impl_l0.Rect>, frameUnit: Int32, description: CPointer<UInt16>, metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRecordMetafileFileNameI == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GdipRecordMetafileFileNameI(fileName: CPointer<UInt16>, referenceHdc: Win32_Graphics_Gdi.HDC, type_: Int32, frameRect: CPointer<Win32__impl_l0.Rect>, frameUnit: Int32, description: CPointer<UInt16>, metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32 {
+    return GdipRecordMetafileFileNameI(fileName, referenceHdc, type_, frameRect, frameUnit, description, metafile)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRecordMetafileI == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func GdipRecordMetafileI(referenceHdc: Win32_Graphics_Gdi.HDC, type_: Int32, frameRect: CPointer<Win32__impl_l0.Rect>, frameUnit: Int32, description: CPointer<UInt16>, metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRecordMetafileI == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GdipRecordMetafileI(referenceHdc: Win32_Graphics_Gdi.HDC, type_: Int32, frameRect: CPointer<Win32__impl_l0.Rect>, frameUnit: Int32, description: CPointer<UInt16>, metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32 {
+    return GdipRecordMetafileI(referenceHdc, type_, frameRect, frameUnit, description, metafile)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRecordMetafileStream == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func GdipRecordMetafileStream(stream: CPointer<Unit>, referenceHdc: Win32_Graphics_Gdi.HDC, type_: Int32, frameRect: CPointer<Win32__impl_l0.RectF>, frameUnit: Int32, description: CPointer<UInt16>, metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRecordMetafileStream == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_GdipRecordMetafileStream(stream: CPointer<Unit>, referenceHdc: Win32_Graphics_Gdi.HDC, type_: Int32, frameRect: CPointer<Win32__impl_l0.RectF>, frameUnit: Int32, description: CPointer<UInt16>, metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32 {
+    return GdipRecordMetafileStream(stream, referenceHdc, type_, frameRect, frameUnit, description, metafile)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRecordMetafileStreamI == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func GdipRecordMetafileStreamI(stream: CPointer<Unit>, referenceHdc: Win32_Graphics_Gdi.HDC, type_: Int32, frameRect: CPointer<Win32__impl_l0.Rect>, frameUnit: Int32, description: CPointer<UInt16>, metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRecordMetafileStreamI == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_GdipRecordMetafileStreamI(stream: CPointer<Unit>, referenceHdc: Win32_Graphics_Gdi.HDC, type_: Int32, frameRect: CPointer<Win32__impl_l0.Rect>, frameUnit: Int32, description: CPointer<UInt16>, metafile: CPointer<CPointer<Win32__impl_l0.GpMetafile>>): Int32 {
+    return GdipRecordMetafileStreamI(stream, referenceHdc, type_, frameRect, frameUnit, description, metafile)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipReleaseDC == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func GdipReleaseDC(graphics: CPointer<Win32__impl_l0.GpGraphics>, hdc: Win32_Graphics_Gdi.HDC): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipReleaseDC == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GdipReleaseDC(graphics: CPointer<Win32__impl_l0.GpGraphics>, hdc: Win32_Graphics_Gdi.HDC): Int32 {
+    return GdipReleaseDC(graphics, hdc)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRemovePropertyItem == "on"]
+foreign {
+    func GdipRemovePropertyItem(image: CPointer<Win32__impl_l0.GpImage>, propId: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRemovePropertyItem == "on"]
+public unsafe func Windows_GdipRemovePropertyItem(image: CPointer<Win32__impl_l0.GpImage>, propId: UInt32): Int32 {
+    return GdipRemovePropertyItem(image, propId)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipResetClip == "on"]
+foreign {
+    func GdipResetClip(graphics: CPointer<Win32__impl_l0.GpGraphics>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipResetClip == "on"]
+public unsafe func Windows_GdipResetClip(graphics: CPointer<Win32__impl_l0.GpGraphics>): Int32 {
+    return GdipResetClip(graphics)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipResetImageAttributes == "on"]
+foreign {
+    func GdipResetImageAttributes(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, type_: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipResetImageAttributes == "on"]
+public unsafe func Windows_GdipResetImageAttributes(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, type_: Int32): Int32 {
+    return GdipResetImageAttributes(imageattr, type_)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipResetLineTransform == "on"]
+foreign {
+    func GdipResetLineTransform(brush: CPointer<Win32__impl_l0.GpLineGradient>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipResetLineTransform == "on"]
+public unsafe func Windows_GdipResetLineTransform(brush: CPointer<Win32__impl_l0.GpLineGradient>): Int32 {
+    return GdipResetLineTransform(brush)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipResetPageTransform == "on"]
+foreign {
+    func GdipResetPageTransform(graphics: CPointer<Win32__impl_l0.GpGraphics>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipResetPageTransform == "on"]
+public unsafe func Windows_GdipResetPageTransform(graphics: CPointer<Win32__impl_l0.GpGraphics>): Int32 {
+    return GdipResetPageTransform(graphics)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipResetPath == "on"]
+foreign {
+    func GdipResetPath(path: CPointer<Win32__impl_l0.GpPath>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipResetPath == "on"]
+public unsafe func Windows_GdipResetPath(path: CPointer<Win32__impl_l0.GpPath>): Int32 {
+    return GdipResetPath(path)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipResetPathGradientTransform == "on"]
+foreign {
+    func GdipResetPathGradientTransform(brush: CPointer<Win32__impl_l0.GpPathGradient>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipResetPathGradientTransform == "on"]
+public unsafe func Windows_GdipResetPathGradientTransform(brush: CPointer<Win32__impl_l0.GpPathGradient>): Int32 {
+    return GdipResetPathGradientTransform(brush)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipResetPenTransform == "on"]
+foreign {
+    func GdipResetPenTransform(pen: CPointer<Win32__impl_l0.GpPen>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipResetPenTransform == "on"]
+public unsafe func Windows_GdipResetPenTransform(pen: CPointer<Win32__impl_l0.GpPen>): Int32 {
+    return GdipResetPenTransform(pen)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipResetTextureTransform == "on"]
+foreign {
+    func GdipResetTextureTransform(brush: CPointer<Win32__impl_l0.GpTexture>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipResetTextureTransform == "on"]
+public unsafe func Windows_GdipResetTextureTransform(brush: CPointer<Win32__impl_l0.GpTexture>): Int32 {
+    return GdipResetTextureTransform(brush)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipResetWorldTransform == "on"]
+foreign {
+    func GdipResetWorldTransform(graphics: CPointer<Win32__impl_l0.GpGraphics>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipResetWorldTransform == "on"]
+public unsafe func Windows_GdipResetWorldTransform(graphics: CPointer<Win32__impl_l0.GpGraphics>): Int32 {
+    return GdipResetWorldTransform(graphics)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRestoreGraphics == "on"]
+foreign {
+    func GdipRestoreGraphics(graphics: CPointer<Win32__impl_l0.GpGraphics>, state: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRestoreGraphics == "on"]
+public unsafe func Windows_GdipRestoreGraphics(graphics: CPointer<Win32__impl_l0.GpGraphics>, state: UInt32): Int32 {
+    return GdipRestoreGraphics(graphics, state)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipReversePath == "on"]
+foreign {
+    func GdipReversePath(path: CPointer<Win32__impl_l0.GpPath>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipReversePath == "on"]
+public unsafe func Windows_GdipReversePath(path: CPointer<Win32__impl_l0.GpPath>): Int32 {
+    return GdipReversePath(path)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRotateLineTransform == "on"]
+foreign {
+    func GdipRotateLineTransform(brush: CPointer<Win32__impl_l0.GpLineGradient>, angle: Float32, order: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRotateLineTransform == "on"]
+public unsafe func Windows_GdipRotateLineTransform(brush: CPointer<Win32__impl_l0.GpLineGradient>, angle: Float32, order: Int32): Int32 {
+    return GdipRotateLineTransform(brush, angle, order)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRotateMatrix == "on"]
+foreign {
+    func GdipRotateMatrix(matrix: CPointer<Win32__impl_l0.Matrix>, angle: Float32, order: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRotateMatrix == "on"]
+public unsafe func Windows_GdipRotateMatrix(matrix: CPointer<Win32__impl_l0.Matrix>, angle: Float32, order: Int32): Int32 {
+    return GdipRotateMatrix(matrix, angle, order)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRotatePathGradientTransform == "on"]
+foreign {
+    func GdipRotatePathGradientTransform(brush: CPointer<Win32__impl_l0.GpPathGradient>, angle: Float32, order: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRotatePathGradientTransform == "on"]
+public unsafe func Windows_GdipRotatePathGradientTransform(brush: CPointer<Win32__impl_l0.GpPathGradient>, angle: Float32, order: Int32): Int32 {
+    return GdipRotatePathGradientTransform(brush, angle, order)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRotatePenTransform == "on"]
+foreign {
+    func GdipRotatePenTransform(pen: CPointer<Win32__impl_l0.GpPen>, angle: Float32, order: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRotatePenTransform == "on"]
+public unsafe func Windows_GdipRotatePenTransform(pen: CPointer<Win32__impl_l0.GpPen>, angle: Float32, order: Int32): Int32 {
+    return GdipRotatePenTransform(pen, angle, order)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRotateTextureTransform == "on"]
+foreign {
+    func GdipRotateTextureTransform(brush: CPointer<Win32__impl_l0.GpTexture>, angle: Float32, order: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRotateTextureTransform == "on"]
+public unsafe func Windows_GdipRotateTextureTransform(brush: CPointer<Win32__impl_l0.GpTexture>, angle: Float32, order: Int32): Int32 {
+    return GdipRotateTextureTransform(brush, angle, order)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRotateWorldTransform == "on"]
+foreign {
+    func GdipRotateWorldTransform(graphics: CPointer<Win32__impl_l0.GpGraphics>, angle: Float32, order: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipRotateWorldTransform == "on"]
+public unsafe func Windows_GdipRotateWorldTransform(graphics: CPointer<Win32__impl_l0.GpGraphics>, angle: Float32, order: Int32): Int32 {
+    return GdipRotateWorldTransform(graphics, angle, order)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSaveAdd == "on"]
+foreign {
+    func GdipSaveAdd(image: CPointer<Win32__impl_l0.GpImage>, encoderParams: CPointer<Win32__impl_l1.EncoderParameters>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSaveAdd == "on"]
+public unsafe func Windows_GdipSaveAdd(image: CPointer<Win32__impl_l0.GpImage>, encoderParams: CPointer<Win32__impl_l1.EncoderParameters>): Int32 {
+    return GdipSaveAdd(image, encoderParams)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSaveAddImage == "on"]
+foreign {
+    func GdipSaveAddImage(image: CPointer<Win32__impl_l0.GpImage>, newImage: CPointer<Win32__impl_l0.GpImage>, encoderParams: CPointer<Win32__impl_l1.EncoderParameters>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSaveAddImage == "on"]
+public unsafe func Windows_GdipSaveAddImage(image: CPointer<Win32__impl_l0.GpImage>, newImage: CPointer<Win32__impl_l0.GpImage>, encoderParams: CPointer<Win32__impl_l1.EncoderParameters>): Int32 {
+    return GdipSaveAddImage(image, newImage, encoderParams)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSaveGraphics == "on"]
+foreign {
+    func GdipSaveGraphics(graphics: CPointer<Win32__impl_l0.GpGraphics>, state: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSaveGraphics == "on"]
+public unsafe func Windows_GdipSaveGraphics(graphics: CPointer<Win32__impl_l0.GpGraphics>, state: CPointer<UInt32>): Int32 {
+    return GdipSaveGraphics(graphics, state)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSaveImageToFile == "on"]
+foreign {
+    func GdipSaveImageToFile(image: CPointer<Win32__impl_l0.GpImage>, filename: CPointer<UInt16>, clsidEncoder: CPointer<GUID>, encoderParams: CPointer<Win32__impl_l1.EncoderParameters>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSaveImageToFile == "on"]
+public unsafe func Windows_GdipSaveImageToFile(image: CPointer<Win32__impl_l0.GpImage>, filename: CPointer<UInt16>, clsidEncoder: CPointer<GUID>, encoderParams: CPointer<Win32__impl_l1.EncoderParameters>): Int32 {
+    return GdipSaveImageToFile(image, filename, clsidEncoder, encoderParams)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSaveImageToStream == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func GdipSaveImageToStream(image: CPointer<Win32__impl_l0.GpImage>, stream: CPointer<Unit>, clsidEncoder: CPointer<GUID>, encoderParams: CPointer<Win32__impl_l1.EncoderParameters>): Int32
 }
 
-@When[GDIPLUS == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSaveImageToStream == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_GdipSaveImageToStream(image: CPointer<Win32__impl_l0.GpImage>, stream: CPointer<Unit>, clsidEncoder: CPointer<GUID>, encoderParams: CPointer<Win32__impl_l1.EncoderParameters>): Int32 {
+    return GdipSaveImageToStream(image, stream, clsidEncoder, encoderParams)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipScaleLineTransform == "on"]
 foreign {
-    func GdipCreateBitmapFromHICON(hicon: Win32__impl_l0.HICON, bitmap: CPointer<CPointer<Win32__impl_l0.GpBitmap>>): Int32
-    func GdipCreateHICONFromBitmap(bitmap: CPointer<Win32__impl_l0.GpBitmap>, hbmReturn: CPointer<Win32__impl_l0.HICON>): Int32
+    func GdipScaleLineTransform(brush: CPointer<Win32__impl_l0.GpLineGradient>, sx: Float32, sy: Float32, order: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipScaleLineTransform == "on"]
+public unsafe func Windows_GdipScaleLineTransform(brush: CPointer<Win32__impl_l0.GpLineGradient>, sx: Float32, sy: Float32, order: Int32): Int32 {
+    return GdipScaleLineTransform(brush, sx, sy, order)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipScaleMatrix == "on"]
+foreign {
+    func GdipScaleMatrix(matrix: CPointer<Win32__impl_l0.Matrix>, scaleX: Float32, scaleY: Float32, order: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipScaleMatrix == "on"]
+public unsafe func Windows_GdipScaleMatrix(matrix: CPointer<Win32__impl_l0.Matrix>, scaleX: Float32, scaleY: Float32, order: Int32): Int32 {
+    return GdipScaleMatrix(matrix, scaleX, scaleY, order)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipScalePathGradientTransform == "on"]
+foreign {
+    func GdipScalePathGradientTransform(brush: CPointer<Win32__impl_l0.GpPathGradient>, sx: Float32, sy: Float32, order: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipScalePathGradientTransform == "on"]
+public unsafe func Windows_GdipScalePathGradientTransform(brush: CPointer<Win32__impl_l0.GpPathGradient>, sx: Float32, sy: Float32, order: Int32): Int32 {
+    return GdipScalePathGradientTransform(brush, sx, sy, order)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipScalePenTransform == "on"]
+foreign {
+    func GdipScalePenTransform(pen: CPointer<Win32__impl_l0.GpPen>, sx: Float32, sy: Float32, order: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipScalePenTransform == "on"]
+public unsafe func Windows_GdipScalePenTransform(pen: CPointer<Win32__impl_l0.GpPen>, sx: Float32, sy: Float32, order: Int32): Int32 {
+    return GdipScalePenTransform(pen, sx, sy, order)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipScaleTextureTransform == "on"]
+foreign {
+    func GdipScaleTextureTransform(brush: CPointer<Win32__impl_l0.GpTexture>, sx: Float32, sy: Float32, order: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipScaleTextureTransform == "on"]
+public unsafe func Windows_GdipScaleTextureTransform(brush: CPointer<Win32__impl_l0.GpTexture>, sx: Float32, sy: Float32, order: Int32): Int32 {
+    return GdipScaleTextureTransform(brush, sx, sy, order)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipScaleWorldTransform == "on"]
+foreign {
+    func GdipScaleWorldTransform(graphics: CPointer<Win32__impl_l0.GpGraphics>, sx: Float32, sy: Float32, order: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipScaleWorldTransform == "on"]
+public unsafe func Windows_GdipScaleWorldTransform(graphics: CPointer<Win32__impl_l0.GpGraphics>, sx: Float32, sy: Float32, order: Int32): Int32 {
+    return GdipScaleWorldTransform(graphics, sx, sy, order)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetAdjustableArrowCapFillState == "on"]
+foreign {
+    func GdipSetAdjustableArrowCapFillState(cap: CPointer<Win32__impl_l0.GpAdjustableArrowCap>, fillState: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetAdjustableArrowCapFillState == "on"]
+public unsafe func Windows_GdipSetAdjustableArrowCapFillState(cap: CPointer<Win32__impl_l0.GpAdjustableArrowCap>, fillState: Int32): Int32 {
+    return GdipSetAdjustableArrowCapFillState(cap, fillState)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetAdjustableArrowCapHeight == "on"]
+foreign {
+    func GdipSetAdjustableArrowCapHeight(cap: CPointer<Win32__impl_l0.GpAdjustableArrowCap>, height: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetAdjustableArrowCapHeight == "on"]
+public unsafe func Windows_GdipSetAdjustableArrowCapHeight(cap: CPointer<Win32__impl_l0.GpAdjustableArrowCap>, height: Float32): Int32 {
+    return GdipSetAdjustableArrowCapHeight(cap, height)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetAdjustableArrowCapMiddleInset == "on"]
+foreign {
+    func GdipSetAdjustableArrowCapMiddleInset(cap: CPointer<Win32__impl_l0.GpAdjustableArrowCap>, middleInset: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetAdjustableArrowCapMiddleInset == "on"]
+public unsafe func Windows_GdipSetAdjustableArrowCapMiddleInset(cap: CPointer<Win32__impl_l0.GpAdjustableArrowCap>, middleInset: Float32): Int32 {
+    return GdipSetAdjustableArrowCapMiddleInset(cap, middleInset)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetAdjustableArrowCapWidth == "on"]
+foreign {
+    func GdipSetAdjustableArrowCapWidth(cap: CPointer<Win32__impl_l0.GpAdjustableArrowCap>, width: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetAdjustableArrowCapWidth == "on"]
+public unsafe func Windows_GdipSetAdjustableArrowCapWidth(cap: CPointer<Win32__impl_l0.GpAdjustableArrowCap>, width: Float32): Int32 {
+    return GdipSetAdjustableArrowCapWidth(cap, width)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetClipGraphics == "on"]
+foreign {
+    func GdipSetClipGraphics(graphics: CPointer<Win32__impl_l0.GpGraphics>, srcgraphics: CPointer<Win32__impl_l0.GpGraphics>, combineMode: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetClipGraphics == "on"]
+public unsafe func Windows_GdipSetClipGraphics(graphics: CPointer<Win32__impl_l0.GpGraphics>, srcgraphics: CPointer<Win32__impl_l0.GpGraphics>, combineMode: Int32): Int32 {
+    return GdipSetClipGraphics(graphics, srcgraphics, combineMode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetClipHrgn == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func GdipSetClipHrgn(graphics: CPointer<Win32__impl_l0.GpGraphics>, hRgn: Win32_Graphics_Gdi.HRGN, combineMode: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetClipHrgn == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GdipSetClipHrgn(graphics: CPointer<Win32__impl_l0.GpGraphics>, hRgn: Win32_Graphics_Gdi.HRGN, combineMode: Int32): Int32 {
+    return GdipSetClipHrgn(graphics, hRgn, combineMode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetClipPath == "on"]
+foreign {
+    func GdipSetClipPath(graphics: CPointer<Win32__impl_l0.GpGraphics>, path: CPointer<Win32__impl_l0.GpPath>, combineMode: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetClipPath == "on"]
+public unsafe func Windows_GdipSetClipPath(graphics: CPointer<Win32__impl_l0.GpGraphics>, path: CPointer<Win32__impl_l0.GpPath>, combineMode: Int32): Int32 {
+    return GdipSetClipPath(graphics, path, combineMode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetClipRect == "on"]
+foreign {
+    func GdipSetClipRect(graphics: CPointer<Win32__impl_l0.GpGraphics>, x: Float32, y: Float32, width: Float32, height: Float32, combineMode: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetClipRect == "on"]
+public unsafe func Windows_GdipSetClipRect(graphics: CPointer<Win32__impl_l0.GpGraphics>, x: Float32, y: Float32, width: Float32, height: Float32, combineMode: Int32): Int32 {
+    return GdipSetClipRect(graphics, x, y, width, height, combineMode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetClipRectI == "on"]
+foreign {
+    func GdipSetClipRectI(graphics: CPointer<Win32__impl_l0.GpGraphics>, x: Int32, y: Int32, width: Int32, height: Int32, combineMode: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetClipRectI == "on"]
+public unsafe func Windows_GdipSetClipRectI(graphics: CPointer<Win32__impl_l0.GpGraphics>, x: Int32, y: Int32, width: Int32, height: Int32, combineMode: Int32): Int32 {
+    return GdipSetClipRectI(graphics, x, y, width, height, combineMode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetClipRegion == "on"]
+foreign {
+    func GdipSetClipRegion(graphics: CPointer<Win32__impl_l0.GpGraphics>, region: CPointer<Win32__impl_l0.GpRegion>, combineMode: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetClipRegion == "on"]
+public unsafe func Windows_GdipSetClipRegion(graphics: CPointer<Win32__impl_l0.GpGraphics>, region: CPointer<Win32__impl_l0.GpRegion>, combineMode: Int32): Int32 {
+    return GdipSetClipRegion(graphics, region, combineMode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetCompositingMode == "on"]
+foreign {
+    func GdipSetCompositingMode(graphics: CPointer<Win32__impl_l0.GpGraphics>, compositingMode: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetCompositingMode == "on"]
+public unsafe func Windows_GdipSetCompositingMode(graphics: CPointer<Win32__impl_l0.GpGraphics>, compositingMode: Int32): Int32 {
+    return GdipSetCompositingMode(graphics, compositingMode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetCompositingQuality == "on"]
+foreign {
+    func GdipSetCompositingQuality(graphics: CPointer<Win32__impl_l0.GpGraphics>, compositingQuality: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetCompositingQuality == "on"]
+public unsafe func Windows_GdipSetCompositingQuality(graphics: CPointer<Win32__impl_l0.GpGraphics>, compositingQuality: Int32): Int32 {
+    return GdipSetCompositingQuality(graphics, compositingQuality)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetCustomLineCapBaseCap == "on"]
+foreign {
+    func GdipSetCustomLineCapBaseCap(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, baseCap: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetCustomLineCapBaseCap == "on"]
+public unsafe func Windows_GdipSetCustomLineCapBaseCap(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, baseCap: Int32): Int32 {
+    return GdipSetCustomLineCapBaseCap(customCap, baseCap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetCustomLineCapBaseInset == "on"]
+foreign {
+    func GdipSetCustomLineCapBaseInset(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, inset: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetCustomLineCapBaseInset == "on"]
+public unsafe func Windows_GdipSetCustomLineCapBaseInset(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, inset: Float32): Int32 {
+    return GdipSetCustomLineCapBaseInset(customCap, inset)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetCustomLineCapStrokeCaps == "on"]
+foreign {
+    func GdipSetCustomLineCapStrokeCaps(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, startCap: Int32, endCap: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetCustomLineCapStrokeCaps == "on"]
+public unsafe func Windows_GdipSetCustomLineCapStrokeCaps(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, startCap: Int32, endCap: Int32): Int32 {
+    return GdipSetCustomLineCapStrokeCaps(customCap, startCap, endCap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetCustomLineCapStrokeJoin == "on"]
+foreign {
+    func GdipSetCustomLineCapStrokeJoin(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, lineJoin: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetCustomLineCapStrokeJoin == "on"]
+public unsafe func Windows_GdipSetCustomLineCapStrokeJoin(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, lineJoin: Int32): Int32 {
+    return GdipSetCustomLineCapStrokeJoin(customCap, lineJoin)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetCustomLineCapWidthScale == "on"]
+foreign {
+    func GdipSetCustomLineCapWidthScale(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, widthScale: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetCustomLineCapWidthScale == "on"]
+public unsafe func Windows_GdipSetCustomLineCapWidthScale(customCap: CPointer<Win32__impl_l0.GpCustomLineCap>, widthScale: Float32): Int32 {
+    return GdipSetCustomLineCapWidthScale(customCap, widthScale)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetEffectParameters == "on"]
+foreign {
+    func GdipSetEffectParameters(effect: CPointer<Win32__impl_l0.CGpEffect>, params: CPointer<Unit>, size: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetEffectParameters == "on"]
+public unsafe func Windows_GdipSetEffectParameters(effect: CPointer<Win32__impl_l0.CGpEffect>, params: CPointer<Unit>, size: UInt32): Int32 {
+    return GdipSetEffectParameters(effect, params, size)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetEmpty == "on"]
+foreign {
+    func GdipSetEmpty(region: CPointer<Win32__impl_l0.GpRegion>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetEmpty == "on"]
+public unsafe func Windows_GdipSetEmpty(region: CPointer<Win32__impl_l0.GpRegion>): Int32 {
+    return GdipSetEmpty(region)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImageAttributesCachedBackground == "on"]
+foreign {
+    func GdipSetImageAttributesCachedBackground(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, enableFlag: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImageAttributesCachedBackground == "on"]
+public unsafe func Windows_GdipSetImageAttributesCachedBackground(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, enableFlag: Int32): Int32 {
+    return GdipSetImageAttributesCachedBackground(imageattr, enableFlag)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImageAttributesColorKeys == "on"]
+foreign {
+    func GdipSetImageAttributesColorKeys(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, type_: Int32, enableFlag: Int32, colorLow: UInt32, colorHigh: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImageAttributesColorKeys == "on"]
+public unsafe func Windows_GdipSetImageAttributesColorKeys(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, type_: Int32, enableFlag: Int32, colorLow: UInt32, colorHigh: UInt32): Int32 {
+    return GdipSetImageAttributesColorKeys(imageattr, type_, enableFlag, colorLow, colorHigh)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImageAttributesColorMatrix == "on"]
+foreign {
+    func GdipSetImageAttributesColorMatrix(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, type_: Int32, enableFlag: Int32, colorMatrix: CPointer<Win32__impl_l0.ColorMatrix>, grayMatrix: CPointer<Win32__impl_l0.ColorMatrix>, flags: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImageAttributesColorMatrix == "on"]
+public unsafe func Windows_GdipSetImageAttributesColorMatrix(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, type_: Int32, enableFlag: Int32, colorMatrix: CPointer<Win32__impl_l0.ColorMatrix>, grayMatrix: CPointer<Win32__impl_l0.ColorMatrix>, flags: Int32): Int32 {
+    return GdipSetImageAttributesColorMatrix(imageattr, type_, enableFlag, colorMatrix, grayMatrix, flags)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImageAttributesGamma == "on"]
+foreign {
+    func GdipSetImageAttributesGamma(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, type_: Int32, enableFlag: Int32, gamma: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImageAttributesGamma == "on"]
+public unsafe func Windows_GdipSetImageAttributesGamma(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, type_: Int32, enableFlag: Int32, gamma: Float32): Int32 {
+    return GdipSetImageAttributesGamma(imageattr, type_, enableFlag, gamma)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImageAttributesNoOp == "on"]
+foreign {
+    func GdipSetImageAttributesNoOp(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, type_: Int32, enableFlag: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImageAttributesNoOp == "on"]
+public unsafe func Windows_GdipSetImageAttributesNoOp(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, type_: Int32, enableFlag: Int32): Int32 {
+    return GdipSetImageAttributesNoOp(imageattr, type_, enableFlag)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImageAttributesOutputChannel == "on"]
+foreign {
+    func GdipSetImageAttributesOutputChannel(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, type_: Int32, enableFlag: Int32, channelFlags: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImageAttributesOutputChannel == "on"]
+public unsafe func Windows_GdipSetImageAttributesOutputChannel(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, type_: Int32, enableFlag: Int32, channelFlags: Int32): Int32 {
+    return GdipSetImageAttributesOutputChannel(imageattr, type_, enableFlag, channelFlags)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImageAttributesOutputChannelColorProfile == "on"]
+foreign {
+    func GdipSetImageAttributesOutputChannelColorProfile(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, type_: Int32, enableFlag: Int32, colorProfileFilename: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImageAttributesOutputChannelColorProfile == "on"]
+public unsafe func Windows_GdipSetImageAttributesOutputChannelColorProfile(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, type_: Int32, enableFlag: Int32, colorProfileFilename: CPointer<UInt16>): Int32 {
+    return GdipSetImageAttributesOutputChannelColorProfile(imageattr, type_, enableFlag, colorProfileFilename)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImageAttributesRemapTable == "on"]
+foreign {
+    func GdipSetImageAttributesRemapTable(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, type_: Int32, enableFlag: Int32, mapSize: UInt32, map: CPointer<Win32__impl_l1.ColorMap>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImageAttributesRemapTable == "on"]
+public unsafe func Windows_GdipSetImageAttributesRemapTable(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, type_: Int32, enableFlag: Int32, mapSize: UInt32, map: CPointer<Win32__impl_l1.ColorMap>): Int32 {
+    return GdipSetImageAttributesRemapTable(imageattr, type_, enableFlag, mapSize, map)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImageAttributesThreshold == "on"]
+foreign {
+    func GdipSetImageAttributesThreshold(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, type_: Int32, enableFlag: Int32, threshold: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImageAttributesThreshold == "on"]
+public unsafe func Windows_GdipSetImageAttributesThreshold(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, type_: Int32, enableFlag: Int32, threshold: Float32): Int32 {
+    return GdipSetImageAttributesThreshold(imageattr, type_, enableFlag, threshold)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImageAttributesToIdentity == "on"]
+foreign {
+    func GdipSetImageAttributesToIdentity(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, type_: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImageAttributesToIdentity == "on"]
+public unsafe func Windows_GdipSetImageAttributesToIdentity(imageattr: CPointer<Win32__impl_l0.GpImageAttributes>, type_: Int32): Int32 {
+    return GdipSetImageAttributesToIdentity(imageattr, type_)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImageAttributesWrapMode == "on"]
+foreign {
+    func GdipSetImageAttributesWrapMode(imageAttr: CPointer<Win32__impl_l0.GpImageAttributes>, wrap: Int32, argb: UInt32, clamp: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImageAttributesWrapMode == "on"]
+public unsafe func Windows_GdipSetImageAttributesWrapMode(imageAttr: CPointer<Win32__impl_l0.GpImageAttributes>, wrap: Int32, argb: UInt32, clamp: Int32): Int32 {
+    return GdipSetImageAttributesWrapMode(imageAttr, wrap, argb, clamp)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImagePalette == "on"]
+foreign {
+    func GdipSetImagePalette(image: CPointer<Win32__impl_l0.GpImage>, palette: CPointer<Win32__impl_l0.ColorPalette>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetImagePalette == "on"]
+public unsafe func Windows_GdipSetImagePalette(image: CPointer<Win32__impl_l0.GpImage>, palette: CPointer<Win32__impl_l0.ColorPalette>): Int32 {
+    return GdipSetImagePalette(image, palette)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetInfinite == "on"]
+foreign {
+    func GdipSetInfinite(region: CPointer<Win32__impl_l0.GpRegion>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetInfinite == "on"]
+public unsafe func Windows_GdipSetInfinite(region: CPointer<Win32__impl_l0.GpRegion>): Int32 {
+    return GdipSetInfinite(region)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetInterpolationMode == "on"]
+foreign {
+    func GdipSetInterpolationMode(graphics: CPointer<Win32__impl_l0.GpGraphics>, interpolationMode: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetInterpolationMode == "on"]
+public unsafe func Windows_GdipSetInterpolationMode(graphics: CPointer<Win32__impl_l0.GpGraphics>, interpolationMode: Int32): Int32 {
+    return GdipSetInterpolationMode(graphics, interpolationMode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetLineBlend == "on"]
+foreign {
+    func GdipSetLineBlend(brush: CPointer<Win32__impl_l0.GpLineGradient>, blend: CPointer<Float32>, positions: CPointer<Float32>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetLineBlend == "on"]
+public unsafe func Windows_GdipSetLineBlend(brush: CPointer<Win32__impl_l0.GpLineGradient>, blend: CPointer<Float32>, positions: CPointer<Float32>, count: Int32): Int32 {
+    return GdipSetLineBlend(brush, blend, positions, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetLineColors == "on"]
+foreign {
+    func GdipSetLineColors(brush: CPointer<Win32__impl_l0.GpLineGradient>, color1: UInt32, color2: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetLineColors == "on"]
+public unsafe func Windows_GdipSetLineColors(brush: CPointer<Win32__impl_l0.GpLineGradient>, color1: UInt32, color2: UInt32): Int32 {
+    return GdipSetLineColors(brush, color1, color2)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetLineGammaCorrection == "on"]
+foreign {
+    func GdipSetLineGammaCorrection(brush: CPointer<Win32__impl_l0.GpLineGradient>, useGammaCorrection: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetLineGammaCorrection == "on"]
+public unsafe func Windows_GdipSetLineGammaCorrection(brush: CPointer<Win32__impl_l0.GpLineGradient>, useGammaCorrection: Int32): Int32 {
+    return GdipSetLineGammaCorrection(brush, useGammaCorrection)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetLineLinearBlend == "on"]
+foreign {
+    func GdipSetLineLinearBlend(brush: CPointer<Win32__impl_l0.GpLineGradient>, focus: Float32, scale: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetLineLinearBlend == "on"]
+public unsafe func Windows_GdipSetLineLinearBlend(brush: CPointer<Win32__impl_l0.GpLineGradient>, focus: Float32, scale: Float32): Int32 {
+    return GdipSetLineLinearBlend(brush, focus, scale)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetLinePresetBlend == "on"]
+foreign {
+    func GdipSetLinePresetBlend(brush: CPointer<Win32__impl_l0.GpLineGradient>, blend: CPointer<UInt32>, positions: CPointer<Float32>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetLinePresetBlend == "on"]
+public unsafe func Windows_GdipSetLinePresetBlend(brush: CPointer<Win32__impl_l0.GpLineGradient>, blend: CPointer<UInt32>, positions: CPointer<Float32>, count: Int32): Int32 {
+    return GdipSetLinePresetBlend(brush, blend, positions, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetLineSigmaBlend == "on"]
+foreign {
+    func GdipSetLineSigmaBlend(brush: CPointer<Win32__impl_l0.GpLineGradient>, focus: Float32, scale: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetLineSigmaBlend == "on"]
+public unsafe func Windows_GdipSetLineSigmaBlend(brush: CPointer<Win32__impl_l0.GpLineGradient>, focus: Float32, scale: Float32): Int32 {
+    return GdipSetLineSigmaBlend(brush, focus, scale)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetLineTransform == "on"]
+foreign {
+    func GdipSetLineTransform(brush: CPointer<Win32__impl_l0.GpLineGradient>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetLineTransform == "on"]
+public unsafe func Windows_GdipSetLineTransform(brush: CPointer<Win32__impl_l0.GpLineGradient>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32 {
+    return GdipSetLineTransform(brush, matrix)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetLineWrapMode == "on"]
+foreign {
+    func GdipSetLineWrapMode(brush: CPointer<Win32__impl_l0.GpLineGradient>, wrapmode: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetLineWrapMode == "on"]
+public unsafe func Windows_GdipSetLineWrapMode(brush: CPointer<Win32__impl_l0.GpLineGradient>, wrapmode: Int32): Int32 {
+    return GdipSetLineWrapMode(brush, wrapmode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetMatrixElements == "on"]
+foreign {
+    func GdipSetMatrixElements(matrix: CPointer<Win32__impl_l0.Matrix>, m11: Float32, m12: Float32, m21: Float32, m22: Float32, dx: Float32, dy: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetMatrixElements == "on"]
+public unsafe func Windows_GdipSetMatrixElements(matrix: CPointer<Win32__impl_l0.Matrix>, m11: Float32, m12: Float32, m21: Float32, m22: Float32, dx: Float32, dy: Float32): Int32 {
+    return GdipSetMatrixElements(matrix, m11, m12, m21, m22, dx, dy)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetMetafileDownLevelRasterizationLimit == "on"]
+foreign {
+    func GdipSetMetafileDownLevelRasterizationLimit(metafile: CPointer<Win32__impl_l0.GpMetafile>, metafileRasterizationLimitDpi: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetMetafileDownLevelRasterizationLimit == "on"]
+public unsafe func Windows_GdipSetMetafileDownLevelRasterizationLimit(metafile: CPointer<Win32__impl_l0.GpMetafile>, metafileRasterizationLimitDpi: UInt32): Int32 {
+    return GdipSetMetafileDownLevelRasterizationLimit(metafile, metafileRasterizationLimitDpi)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPageScale == "on"]
+foreign {
+    func GdipSetPageScale(graphics: CPointer<Win32__impl_l0.GpGraphics>, scale: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPageScale == "on"]
+public unsafe func Windows_GdipSetPageScale(graphics: CPointer<Win32__impl_l0.GpGraphics>, scale: Float32): Int32 {
+    return GdipSetPageScale(graphics, scale)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPageUnit == "on"]
+foreign {
+    func GdipSetPageUnit(graphics: CPointer<Win32__impl_l0.GpGraphics>, unit: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPageUnit == "on"]
+public unsafe func Windows_GdipSetPageUnit(graphics: CPointer<Win32__impl_l0.GpGraphics>, unit: Int32): Int32 {
+    return GdipSetPageUnit(graphics, unit)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathFillMode == "on"]
+foreign {
+    func GdipSetPathFillMode(path: CPointer<Win32__impl_l0.GpPath>, fillmode: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathFillMode == "on"]
+public unsafe func Windows_GdipSetPathFillMode(path: CPointer<Win32__impl_l0.GpPath>, fillmode: Int32): Int32 {
+    return GdipSetPathFillMode(path, fillmode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientBlend == "on"]
+foreign {
+    func GdipSetPathGradientBlend(brush: CPointer<Win32__impl_l0.GpPathGradient>, blend: CPointer<Float32>, positions: CPointer<Float32>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientBlend == "on"]
+public unsafe func Windows_GdipSetPathGradientBlend(brush: CPointer<Win32__impl_l0.GpPathGradient>, blend: CPointer<Float32>, positions: CPointer<Float32>, count: Int32): Int32 {
+    return GdipSetPathGradientBlend(brush, blend, positions, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientCenterColor == "on"]
+foreign {
+    func GdipSetPathGradientCenterColor(brush: CPointer<Win32__impl_l0.GpPathGradient>, colors: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientCenterColor == "on"]
+public unsafe func Windows_GdipSetPathGradientCenterColor(brush: CPointer<Win32__impl_l0.GpPathGradient>, colors: UInt32): Int32 {
+    return GdipSetPathGradientCenterColor(brush, colors)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientCenterPoint == "on"]
+foreign {
+    func GdipSetPathGradientCenterPoint(brush: CPointer<Win32__impl_l0.GpPathGradient>, points: CPointer<Win32__impl_l0.PointF>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientCenterPoint == "on"]
+public unsafe func Windows_GdipSetPathGradientCenterPoint(brush: CPointer<Win32__impl_l0.GpPathGradient>, points: CPointer<Win32__impl_l0.PointF>): Int32 {
+    return GdipSetPathGradientCenterPoint(brush, points)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientCenterPointI == "on"]
+foreign {
+    func GdipSetPathGradientCenterPointI(brush: CPointer<Win32__impl_l0.GpPathGradient>, points: CPointer<Win32__impl_l0.Point>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientCenterPointI == "on"]
+public unsafe func Windows_GdipSetPathGradientCenterPointI(brush: CPointer<Win32__impl_l0.GpPathGradient>, points: CPointer<Win32__impl_l0.Point>): Int32 {
+    return GdipSetPathGradientCenterPointI(brush, points)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientFocusScales == "on"]
+foreign {
+    func GdipSetPathGradientFocusScales(brush: CPointer<Win32__impl_l0.GpPathGradient>, xScale: Float32, yScale: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientFocusScales == "on"]
+public unsafe func Windows_GdipSetPathGradientFocusScales(brush: CPointer<Win32__impl_l0.GpPathGradient>, xScale: Float32, yScale: Float32): Int32 {
+    return GdipSetPathGradientFocusScales(brush, xScale, yScale)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientGammaCorrection == "on"]
+foreign {
+    func GdipSetPathGradientGammaCorrection(brush: CPointer<Win32__impl_l0.GpPathGradient>, useGammaCorrection: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientGammaCorrection == "on"]
+public unsafe func Windows_GdipSetPathGradientGammaCorrection(brush: CPointer<Win32__impl_l0.GpPathGradient>, useGammaCorrection: Int32): Int32 {
+    return GdipSetPathGradientGammaCorrection(brush, useGammaCorrection)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientLinearBlend == "on"]
+foreign {
+    func GdipSetPathGradientLinearBlend(brush: CPointer<Win32__impl_l0.GpPathGradient>, focus: Float32, scale: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientLinearBlend == "on"]
+public unsafe func Windows_GdipSetPathGradientLinearBlend(brush: CPointer<Win32__impl_l0.GpPathGradient>, focus: Float32, scale: Float32): Int32 {
+    return GdipSetPathGradientLinearBlend(brush, focus, scale)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientPath == "on"]
+foreign {
+    func GdipSetPathGradientPath(brush: CPointer<Win32__impl_l0.GpPathGradient>, path: CPointer<Win32__impl_l0.GpPath>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientPath == "on"]
+public unsafe func Windows_GdipSetPathGradientPath(brush: CPointer<Win32__impl_l0.GpPathGradient>, path: CPointer<Win32__impl_l0.GpPath>): Int32 {
+    return GdipSetPathGradientPath(brush, path)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientPresetBlend == "on"]
+foreign {
+    func GdipSetPathGradientPresetBlend(brush: CPointer<Win32__impl_l0.GpPathGradient>, blend: CPointer<UInt32>, positions: CPointer<Float32>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientPresetBlend == "on"]
+public unsafe func Windows_GdipSetPathGradientPresetBlend(brush: CPointer<Win32__impl_l0.GpPathGradient>, blend: CPointer<UInt32>, positions: CPointer<Float32>, count: Int32): Int32 {
+    return GdipSetPathGradientPresetBlend(brush, blend, positions, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientSigmaBlend == "on"]
+foreign {
+    func GdipSetPathGradientSigmaBlend(brush: CPointer<Win32__impl_l0.GpPathGradient>, focus: Float32, scale: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientSigmaBlend == "on"]
+public unsafe func Windows_GdipSetPathGradientSigmaBlend(brush: CPointer<Win32__impl_l0.GpPathGradient>, focus: Float32, scale: Float32): Int32 {
+    return GdipSetPathGradientSigmaBlend(brush, focus, scale)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientSurroundColorsWithCount == "on"]
+foreign {
+    func GdipSetPathGradientSurroundColorsWithCount(brush: CPointer<Win32__impl_l0.GpPathGradient>, color: CPointer<UInt32>, count: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientSurroundColorsWithCount == "on"]
+public unsafe func Windows_GdipSetPathGradientSurroundColorsWithCount(brush: CPointer<Win32__impl_l0.GpPathGradient>, color: CPointer<UInt32>, count: CPointer<Int32>): Int32 {
+    return GdipSetPathGradientSurroundColorsWithCount(brush, color, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientTransform == "on"]
+foreign {
+    func GdipSetPathGradientTransform(brush: CPointer<Win32__impl_l0.GpPathGradient>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientTransform == "on"]
+public unsafe func Windows_GdipSetPathGradientTransform(brush: CPointer<Win32__impl_l0.GpPathGradient>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32 {
+    return GdipSetPathGradientTransform(brush, matrix)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientWrapMode == "on"]
+foreign {
+    func GdipSetPathGradientWrapMode(brush: CPointer<Win32__impl_l0.GpPathGradient>, wrapmode: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathGradientWrapMode == "on"]
+public unsafe func Windows_GdipSetPathGradientWrapMode(brush: CPointer<Win32__impl_l0.GpPathGradient>, wrapmode: Int32): Int32 {
+    return GdipSetPathGradientWrapMode(brush, wrapmode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathMarker == "on"]
+foreign {
+    func GdipSetPathMarker(path: CPointer<Win32__impl_l0.GpPath>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPathMarker == "on"]
+public unsafe func Windows_GdipSetPathMarker(path: CPointer<Win32__impl_l0.GpPath>): Int32 {
+    return GdipSetPathMarker(path)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenBrushFill == "on"]
+foreign {
+    func GdipSetPenBrushFill(pen: CPointer<Win32__impl_l0.GpPen>, brush: CPointer<Win32__impl_l0.GpBrush>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenBrushFill == "on"]
+public unsafe func Windows_GdipSetPenBrushFill(pen: CPointer<Win32__impl_l0.GpPen>, brush: CPointer<Win32__impl_l0.GpBrush>): Int32 {
+    return GdipSetPenBrushFill(pen, brush)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenColor == "on"]
+foreign {
+    func GdipSetPenColor(pen: CPointer<Win32__impl_l0.GpPen>, argb: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenColor == "on"]
+public unsafe func Windows_GdipSetPenColor(pen: CPointer<Win32__impl_l0.GpPen>, argb: UInt32): Int32 {
+    return GdipSetPenColor(pen, argb)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenCompoundArray == "on"]
+foreign {
+    func GdipSetPenCompoundArray(pen: CPointer<Win32__impl_l0.GpPen>, dash: CPointer<Float32>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenCompoundArray == "on"]
+public unsafe func Windows_GdipSetPenCompoundArray(pen: CPointer<Win32__impl_l0.GpPen>, dash: CPointer<Float32>, count: Int32): Int32 {
+    return GdipSetPenCompoundArray(pen, dash, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenCustomEndCap == "on"]
+foreign {
+    func GdipSetPenCustomEndCap(pen: CPointer<Win32__impl_l0.GpPen>, customCap: CPointer<Win32__impl_l0.GpCustomLineCap>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenCustomEndCap == "on"]
+public unsafe func Windows_GdipSetPenCustomEndCap(pen: CPointer<Win32__impl_l0.GpPen>, customCap: CPointer<Win32__impl_l0.GpCustomLineCap>): Int32 {
+    return GdipSetPenCustomEndCap(pen, customCap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenCustomStartCap == "on"]
+foreign {
+    func GdipSetPenCustomStartCap(pen: CPointer<Win32__impl_l0.GpPen>, customCap: CPointer<Win32__impl_l0.GpCustomLineCap>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenCustomStartCap == "on"]
+public unsafe func Windows_GdipSetPenCustomStartCap(pen: CPointer<Win32__impl_l0.GpPen>, customCap: CPointer<Win32__impl_l0.GpCustomLineCap>): Int32 {
+    return GdipSetPenCustomStartCap(pen, customCap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenDashArray == "on"]
+foreign {
+    func GdipSetPenDashArray(pen: CPointer<Win32__impl_l0.GpPen>, dash: CPointer<Float32>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenDashArray == "on"]
+public unsafe func Windows_GdipSetPenDashArray(pen: CPointer<Win32__impl_l0.GpPen>, dash: CPointer<Float32>, count: Int32): Int32 {
+    return GdipSetPenDashArray(pen, dash, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenDashCap197819 == "on"]
+foreign {
+    func GdipSetPenDashCap197819(pen: CPointer<Win32__impl_l0.GpPen>, dashCap: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenDashCap197819 == "on"]
+public unsafe func Windows_GdipSetPenDashCap197819(pen: CPointer<Win32__impl_l0.GpPen>, dashCap: Int32): Int32 {
+    return GdipSetPenDashCap197819(pen, dashCap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenDashOffset == "on"]
+foreign {
+    func GdipSetPenDashOffset(pen: CPointer<Win32__impl_l0.GpPen>, offset: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenDashOffset == "on"]
+public unsafe func Windows_GdipSetPenDashOffset(pen: CPointer<Win32__impl_l0.GpPen>, offset: Float32): Int32 {
+    return GdipSetPenDashOffset(pen, offset)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenDashStyle == "on"]
+foreign {
+    func GdipSetPenDashStyle(pen: CPointer<Win32__impl_l0.GpPen>, dashstyle: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenDashStyle == "on"]
+public unsafe func Windows_GdipSetPenDashStyle(pen: CPointer<Win32__impl_l0.GpPen>, dashstyle: Int32): Int32 {
+    return GdipSetPenDashStyle(pen, dashstyle)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenEndCap == "on"]
+foreign {
+    func GdipSetPenEndCap(pen: CPointer<Win32__impl_l0.GpPen>, endCap: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenEndCap == "on"]
+public unsafe func Windows_GdipSetPenEndCap(pen: CPointer<Win32__impl_l0.GpPen>, endCap: Int32): Int32 {
+    return GdipSetPenEndCap(pen, endCap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenLineCap197819 == "on"]
+foreign {
+    func GdipSetPenLineCap197819(pen: CPointer<Win32__impl_l0.GpPen>, startCap: Int32, endCap: Int32, dashCap: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenLineCap197819 == "on"]
+public unsafe func Windows_GdipSetPenLineCap197819(pen: CPointer<Win32__impl_l0.GpPen>, startCap: Int32, endCap: Int32, dashCap: Int32): Int32 {
+    return GdipSetPenLineCap197819(pen, startCap, endCap, dashCap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenLineJoin == "on"]
+foreign {
+    func GdipSetPenLineJoin(pen: CPointer<Win32__impl_l0.GpPen>, lineJoin: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenLineJoin == "on"]
+public unsafe func Windows_GdipSetPenLineJoin(pen: CPointer<Win32__impl_l0.GpPen>, lineJoin: Int32): Int32 {
+    return GdipSetPenLineJoin(pen, lineJoin)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenMiterLimit == "on"]
+foreign {
+    func GdipSetPenMiterLimit(pen: CPointer<Win32__impl_l0.GpPen>, miterLimit: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenMiterLimit == "on"]
+public unsafe func Windows_GdipSetPenMiterLimit(pen: CPointer<Win32__impl_l0.GpPen>, miterLimit: Float32): Int32 {
+    return GdipSetPenMiterLimit(pen, miterLimit)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenMode == "on"]
+foreign {
+    func GdipSetPenMode(pen: CPointer<Win32__impl_l0.GpPen>, penMode: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenMode == "on"]
+public unsafe func Windows_GdipSetPenMode(pen: CPointer<Win32__impl_l0.GpPen>, penMode: Int32): Int32 {
+    return GdipSetPenMode(pen, penMode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenStartCap == "on"]
+foreign {
+    func GdipSetPenStartCap(pen: CPointer<Win32__impl_l0.GpPen>, startCap: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenStartCap == "on"]
+public unsafe func Windows_GdipSetPenStartCap(pen: CPointer<Win32__impl_l0.GpPen>, startCap: Int32): Int32 {
+    return GdipSetPenStartCap(pen, startCap)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenTransform == "on"]
+foreign {
+    func GdipSetPenTransform(pen: CPointer<Win32__impl_l0.GpPen>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenTransform == "on"]
+public unsafe func Windows_GdipSetPenTransform(pen: CPointer<Win32__impl_l0.GpPen>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32 {
+    return GdipSetPenTransform(pen, matrix)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenUnit == "on"]
+foreign {
+    func GdipSetPenUnit(pen: CPointer<Win32__impl_l0.GpPen>, unit: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenUnit == "on"]
+public unsafe func Windows_GdipSetPenUnit(pen: CPointer<Win32__impl_l0.GpPen>, unit: Int32): Int32 {
+    return GdipSetPenUnit(pen, unit)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenWidth == "on"]
+foreign {
+    func GdipSetPenWidth(pen: CPointer<Win32__impl_l0.GpPen>, width: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPenWidth == "on"]
+public unsafe func Windows_GdipSetPenWidth(pen: CPointer<Win32__impl_l0.GpPen>, width: Float32): Int32 {
+    return GdipSetPenWidth(pen, width)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPixelOffsetMode == "on"]
+foreign {
+    func GdipSetPixelOffsetMode(graphics: CPointer<Win32__impl_l0.GpGraphics>, pixelOffsetMode: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPixelOffsetMode == "on"]
+public unsafe func Windows_GdipSetPixelOffsetMode(graphics: CPointer<Win32__impl_l0.GpGraphics>, pixelOffsetMode: Int32): Int32 {
+    return GdipSetPixelOffsetMode(graphics, pixelOffsetMode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPropertyItem == "on"]
+foreign {
+    func GdipSetPropertyItem(image: CPointer<Win32__impl_l0.GpImage>, item: CPointer<Win32__impl_l0.PropertyItem>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetPropertyItem == "on"]
+public unsafe func Windows_GdipSetPropertyItem(image: CPointer<Win32__impl_l0.GpImage>, item: CPointer<Win32__impl_l0.PropertyItem>): Int32 {
+    return GdipSetPropertyItem(image, item)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetRenderingOrigin == "on"]
+foreign {
+    func GdipSetRenderingOrigin(graphics: CPointer<Win32__impl_l0.GpGraphics>, x: Int32, y: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetRenderingOrigin == "on"]
+public unsafe func Windows_GdipSetRenderingOrigin(graphics: CPointer<Win32__impl_l0.GpGraphics>, x: Int32, y: Int32): Int32 {
+    return GdipSetRenderingOrigin(graphics, x, y)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetSmoothingMode == "on"]
+foreign {
+    func GdipSetSmoothingMode(graphics: CPointer<Win32__impl_l0.GpGraphics>, smoothingMode: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetSmoothingMode == "on"]
+public unsafe func Windows_GdipSetSmoothingMode(graphics: CPointer<Win32__impl_l0.GpGraphics>, smoothingMode: Int32): Int32 {
+    return GdipSetSmoothingMode(graphics, smoothingMode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetSolidFillColor == "on"]
+foreign {
+    func GdipSetSolidFillColor(brush: CPointer<Win32__impl_l0.GpSolidFill>, color: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetSolidFillColor == "on"]
+public unsafe func Windows_GdipSetSolidFillColor(brush: CPointer<Win32__impl_l0.GpSolidFill>, color: UInt32): Int32 {
+    return GdipSetSolidFillColor(brush, color)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetStringFormatAlign == "on"]
+foreign {
+    func GdipSetStringFormatAlign(format: CPointer<Win32__impl_l0.GpStringFormat>, align: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetStringFormatAlign == "on"]
+public unsafe func Windows_GdipSetStringFormatAlign(format: CPointer<Win32__impl_l0.GpStringFormat>, align: Int32): Int32 {
+    return GdipSetStringFormatAlign(format, align)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetStringFormatDigitSubstitution == "on"]
+foreign {
+    func GdipSetStringFormatDigitSubstitution(format: CPointer<Win32__impl_l0.GpStringFormat>, language: UInt16, substitute: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetStringFormatDigitSubstitution == "on"]
+public unsafe func Windows_GdipSetStringFormatDigitSubstitution(format: CPointer<Win32__impl_l0.GpStringFormat>, language: UInt16, substitute: Int32): Int32 {
+    return GdipSetStringFormatDigitSubstitution(format, language, substitute)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetStringFormatFlags == "on"]
+foreign {
+    func GdipSetStringFormatFlags(format: CPointer<Win32__impl_l0.GpStringFormat>, flags: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetStringFormatFlags == "on"]
+public unsafe func Windows_GdipSetStringFormatFlags(format: CPointer<Win32__impl_l0.GpStringFormat>, flags: Int32): Int32 {
+    return GdipSetStringFormatFlags(format, flags)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetStringFormatHotkeyPrefix == "on"]
+foreign {
+    func GdipSetStringFormatHotkeyPrefix(format: CPointer<Win32__impl_l0.GpStringFormat>, hotkeyPrefix: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetStringFormatHotkeyPrefix == "on"]
+public unsafe func Windows_GdipSetStringFormatHotkeyPrefix(format: CPointer<Win32__impl_l0.GpStringFormat>, hotkeyPrefix: Int32): Int32 {
+    return GdipSetStringFormatHotkeyPrefix(format, hotkeyPrefix)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetStringFormatLineAlign == "on"]
+foreign {
+    func GdipSetStringFormatLineAlign(format: CPointer<Win32__impl_l0.GpStringFormat>, align: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetStringFormatLineAlign == "on"]
+public unsafe func Windows_GdipSetStringFormatLineAlign(format: CPointer<Win32__impl_l0.GpStringFormat>, align: Int32): Int32 {
+    return GdipSetStringFormatLineAlign(format, align)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetStringFormatMeasurableCharacterRanges == "on"]
+foreign {
+    func GdipSetStringFormatMeasurableCharacterRanges(format: CPointer<Win32__impl_l0.GpStringFormat>, rangeCount: Int32, ranges: CPointer<Win32__impl_l0.CharacterRange>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetStringFormatMeasurableCharacterRanges == "on"]
+public unsafe func Windows_GdipSetStringFormatMeasurableCharacterRanges(format: CPointer<Win32__impl_l0.GpStringFormat>, rangeCount: Int32, ranges: CPointer<Win32__impl_l0.CharacterRange>): Int32 {
+    return GdipSetStringFormatMeasurableCharacterRanges(format, rangeCount, ranges)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetStringFormatTabStops == "on"]
+foreign {
+    func GdipSetStringFormatTabStops(format: CPointer<Win32__impl_l0.GpStringFormat>, firstTabOffset: Float32, count: Int32, tabStops: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetStringFormatTabStops == "on"]
+public unsafe func Windows_GdipSetStringFormatTabStops(format: CPointer<Win32__impl_l0.GpStringFormat>, firstTabOffset: Float32, count: Int32, tabStops: CPointer<Float32>): Int32 {
+    return GdipSetStringFormatTabStops(format, firstTabOffset, count, tabStops)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetStringFormatTrimming == "on"]
+foreign {
+    func GdipSetStringFormatTrimming(format: CPointer<Win32__impl_l0.GpStringFormat>, trimming: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetStringFormatTrimming == "on"]
+public unsafe func Windows_GdipSetStringFormatTrimming(format: CPointer<Win32__impl_l0.GpStringFormat>, trimming: Int32): Int32 {
+    return GdipSetStringFormatTrimming(format, trimming)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetTextContrast == "on"]
+foreign {
+    func GdipSetTextContrast(graphics: CPointer<Win32__impl_l0.GpGraphics>, contrast: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetTextContrast == "on"]
+public unsafe func Windows_GdipSetTextContrast(graphics: CPointer<Win32__impl_l0.GpGraphics>, contrast: UInt32): Int32 {
+    return GdipSetTextContrast(graphics, contrast)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetTextRenderingHint == "on"]
+foreign {
+    func GdipSetTextRenderingHint(graphics: CPointer<Win32__impl_l0.GpGraphics>, mode: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetTextRenderingHint == "on"]
+public unsafe func Windows_GdipSetTextRenderingHint(graphics: CPointer<Win32__impl_l0.GpGraphics>, mode: Int32): Int32 {
+    return GdipSetTextRenderingHint(graphics, mode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetTextureTransform == "on"]
+foreign {
+    func GdipSetTextureTransform(brush: CPointer<Win32__impl_l0.GpTexture>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetTextureTransform == "on"]
+public unsafe func Windows_GdipSetTextureTransform(brush: CPointer<Win32__impl_l0.GpTexture>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32 {
+    return GdipSetTextureTransform(brush, matrix)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetTextureWrapMode == "on"]
+foreign {
+    func GdipSetTextureWrapMode(brush: CPointer<Win32__impl_l0.GpTexture>, wrapmode: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetTextureWrapMode == "on"]
+public unsafe func Windows_GdipSetTextureWrapMode(brush: CPointer<Win32__impl_l0.GpTexture>, wrapmode: Int32): Int32 {
+    return GdipSetTextureWrapMode(brush, wrapmode)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetWorldTransform == "on"]
+foreign {
+    func GdipSetWorldTransform(graphics: CPointer<Win32__impl_l0.GpGraphics>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipSetWorldTransform == "on"]
+public unsafe func Windows_GdipSetWorldTransform(graphics: CPointer<Win32__impl_l0.GpGraphics>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32 {
+    return GdipSetWorldTransform(graphics, matrix)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipShearMatrix == "on"]
+foreign {
+    func GdipShearMatrix(matrix: CPointer<Win32__impl_l0.Matrix>, shearX: Float32, shearY: Float32, order: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipShearMatrix == "on"]
+public unsafe func Windows_GdipShearMatrix(matrix: CPointer<Win32__impl_l0.Matrix>, shearX: Float32, shearY: Float32, order: Int32): Int32 {
+    return GdipShearMatrix(matrix, shearX, shearY, order)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipStartPathFigure == "on"]
+foreign {
+    func GdipStartPathFigure(path: CPointer<Win32__impl_l0.GpPath>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipStartPathFigure == "on"]
+public unsafe func Windows_GdipStartPathFigure(path: CPointer<Win32__impl_l0.GpPath>): Int32 {
+    return GdipStartPathFigure(path)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipStringFormatGetGenericDefault == "on"]
+foreign {
+    func GdipStringFormatGetGenericDefault(format: CPointer<CPointer<Win32__impl_l0.GpStringFormat>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipStringFormatGetGenericDefault == "on"]
+public unsafe func Windows_GdipStringFormatGetGenericDefault(format: CPointer<CPointer<Win32__impl_l0.GpStringFormat>>): Int32 {
+    return GdipStringFormatGetGenericDefault(format)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipStringFormatGetGenericTypographic == "on"]
+foreign {
+    func GdipStringFormatGetGenericTypographic(format: CPointer<CPointer<Win32__impl_l0.GpStringFormat>>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipStringFormatGetGenericTypographic == "on"]
+public unsafe func Windows_GdipStringFormatGetGenericTypographic(format: CPointer<CPointer<Win32__impl_l0.GpStringFormat>>): Int32 {
+    return GdipStringFormatGetGenericTypographic(format)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTestControl == "on"]
+foreign {
+    func GdipTestControl(control: Int32, param1: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTestControl == "on"]
+public unsafe func Windows_GdipTestControl(control: Int32, param1: CPointer<Unit>): Int32 {
+    return GdipTestControl(control, param1)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTransformMatrixPoints == "on"]
+foreign {
+    func GdipTransformMatrixPoints(matrix: CPointer<Win32__impl_l0.Matrix>, pts: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTransformMatrixPoints == "on"]
+public unsafe func Windows_GdipTransformMatrixPoints(matrix: CPointer<Win32__impl_l0.Matrix>, pts: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32 {
+    return GdipTransformMatrixPoints(matrix, pts, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTransformMatrixPointsI == "on"]
+foreign {
+    func GdipTransformMatrixPointsI(matrix: CPointer<Win32__impl_l0.Matrix>, pts: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTransformMatrixPointsI == "on"]
+public unsafe func Windows_GdipTransformMatrixPointsI(matrix: CPointer<Win32__impl_l0.Matrix>, pts: CPointer<Win32__impl_l0.Point>, count: Int32): Int32 {
+    return GdipTransformMatrixPointsI(matrix, pts, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTransformPath == "on"]
+foreign {
+    func GdipTransformPath(path: CPointer<Win32__impl_l0.GpPath>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTransformPath == "on"]
+public unsafe func Windows_GdipTransformPath(path: CPointer<Win32__impl_l0.GpPath>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32 {
+    return GdipTransformPath(path, matrix)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTransformPoints == "on"]
+foreign {
+    func GdipTransformPoints(graphics: CPointer<Win32__impl_l0.GpGraphics>, destSpace: Int32, srcSpace: Int32, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTransformPoints == "on"]
+public unsafe func Windows_GdipTransformPoints(graphics: CPointer<Win32__impl_l0.GpGraphics>, destSpace: Int32, srcSpace: Int32, points: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32 {
+    return GdipTransformPoints(graphics, destSpace, srcSpace, points, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTransformPointsI == "on"]
+foreign {
+    func GdipTransformPointsI(graphics: CPointer<Win32__impl_l0.GpGraphics>, destSpace: Int32, srcSpace: Int32, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTransformPointsI == "on"]
+public unsafe func Windows_GdipTransformPointsI(graphics: CPointer<Win32__impl_l0.GpGraphics>, destSpace: Int32, srcSpace: Int32, points: CPointer<Win32__impl_l0.Point>, count: Int32): Int32 {
+    return GdipTransformPointsI(graphics, destSpace, srcSpace, points, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTransformRegion == "on"]
+foreign {
+    func GdipTransformRegion(region: CPointer<Win32__impl_l0.GpRegion>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTransformRegion == "on"]
+public unsafe func Windows_GdipTransformRegion(region: CPointer<Win32__impl_l0.GpRegion>, matrix: CPointer<Win32__impl_l0.Matrix>): Int32 {
+    return GdipTransformRegion(region, matrix)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTranslateClip == "on"]
+foreign {
+    func GdipTranslateClip(graphics: CPointer<Win32__impl_l0.GpGraphics>, dx: Float32, dy: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTranslateClip == "on"]
+public unsafe func Windows_GdipTranslateClip(graphics: CPointer<Win32__impl_l0.GpGraphics>, dx: Float32, dy: Float32): Int32 {
+    return GdipTranslateClip(graphics, dx, dy)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTranslateClipI == "on"]
+foreign {
+    func GdipTranslateClipI(graphics: CPointer<Win32__impl_l0.GpGraphics>, dx: Int32, dy: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTranslateClipI == "on"]
+public unsafe func Windows_GdipTranslateClipI(graphics: CPointer<Win32__impl_l0.GpGraphics>, dx: Int32, dy: Int32): Int32 {
+    return GdipTranslateClipI(graphics, dx, dy)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTranslateLineTransform == "on"]
+foreign {
+    func GdipTranslateLineTransform(brush: CPointer<Win32__impl_l0.GpLineGradient>, dx: Float32, dy: Float32, order: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTranslateLineTransform == "on"]
+public unsafe func Windows_GdipTranslateLineTransform(brush: CPointer<Win32__impl_l0.GpLineGradient>, dx: Float32, dy: Float32, order: Int32): Int32 {
+    return GdipTranslateLineTransform(brush, dx, dy, order)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTranslateMatrix == "on"]
+foreign {
+    func GdipTranslateMatrix(matrix: CPointer<Win32__impl_l0.Matrix>, offsetX: Float32, offsetY: Float32, order: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTranslateMatrix == "on"]
+public unsafe func Windows_GdipTranslateMatrix(matrix: CPointer<Win32__impl_l0.Matrix>, offsetX: Float32, offsetY: Float32, order: Int32): Int32 {
+    return GdipTranslateMatrix(matrix, offsetX, offsetY, order)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTranslatePathGradientTransform == "on"]
+foreign {
+    func GdipTranslatePathGradientTransform(brush: CPointer<Win32__impl_l0.GpPathGradient>, dx: Float32, dy: Float32, order: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTranslatePathGradientTransform == "on"]
+public unsafe func Windows_GdipTranslatePathGradientTransform(brush: CPointer<Win32__impl_l0.GpPathGradient>, dx: Float32, dy: Float32, order: Int32): Int32 {
+    return GdipTranslatePathGradientTransform(brush, dx, dy, order)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTranslatePenTransform == "on"]
+foreign {
+    func GdipTranslatePenTransform(pen: CPointer<Win32__impl_l0.GpPen>, dx: Float32, dy: Float32, order: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTranslatePenTransform == "on"]
+public unsafe func Windows_GdipTranslatePenTransform(pen: CPointer<Win32__impl_l0.GpPen>, dx: Float32, dy: Float32, order: Int32): Int32 {
+    return GdipTranslatePenTransform(pen, dx, dy, order)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTranslateRegion == "on"]
+foreign {
+    func GdipTranslateRegion(region: CPointer<Win32__impl_l0.GpRegion>, dx: Float32, dy: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTranslateRegion == "on"]
+public unsafe func Windows_GdipTranslateRegion(region: CPointer<Win32__impl_l0.GpRegion>, dx: Float32, dy: Float32): Int32 {
+    return GdipTranslateRegion(region, dx, dy)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTranslateRegionI == "on"]
+foreign {
+    func GdipTranslateRegionI(region: CPointer<Win32__impl_l0.GpRegion>, dx: Int32, dy: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTranslateRegionI == "on"]
+public unsafe func Windows_GdipTranslateRegionI(region: CPointer<Win32__impl_l0.GpRegion>, dx: Int32, dy: Int32): Int32 {
+    return GdipTranslateRegionI(region, dx, dy)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTranslateTextureTransform == "on"]
+foreign {
+    func GdipTranslateTextureTransform(brush: CPointer<Win32__impl_l0.GpTexture>, dx: Float32, dy: Float32, order: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTranslateTextureTransform == "on"]
+public unsafe func Windows_GdipTranslateTextureTransform(brush: CPointer<Win32__impl_l0.GpTexture>, dx: Float32, dy: Float32, order: Int32): Int32 {
+    return GdipTranslateTextureTransform(brush, dx, dy, order)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTranslateWorldTransform == "on"]
+foreign {
+    func GdipTranslateWorldTransform(graphics: CPointer<Win32__impl_l0.GpGraphics>, dx: Float32, dy: Float32, order: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipTranslateWorldTransform == "on"]
+public unsafe func Windows_GdipTranslateWorldTransform(graphics: CPointer<Win32__impl_l0.GpGraphics>, dx: Float32, dy: Float32, order: Int32): Int32 {
+    return GdipTranslateWorldTransform(graphics, dx, dy, order)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipVectorTransformMatrixPoints == "on"]
+foreign {
+    func GdipVectorTransformMatrixPoints(matrix: CPointer<Win32__impl_l0.Matrix>, pts: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipVectorTransformMatrixPoints == "on"]
+public unsafe func Windows_GdipVectorTransformMatrixPoints(matrix: CPointer<Win32__impl_l0.Matrix>, pts: CPointer<Win32__impl_l0.PointF>, count: Int32): Int32 {
+    return GdipVectorTransformMatrixPoints(matrix, pts, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipVectorTransformMatrixPointsI == "on"]
+foreign {
+    func GdipVectorTransformMatrixPointsI(matrix: CPointer<Win32__impl_l0.Matrix>, pts: CPointer<Win32__impl_l0.Point>, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipVectorTransformMatrixPointsI == "on"]
+public unsafe func Windows_GdipVectorTransformMatrixPointsI(matrix: CPointer<Win32__impl_l0.Matrix>, pts: CPointer<Win32__impl_l0.Point>, count: Int32): Int32 {
+    return GdipVectorTransformMatrixPointsI(matrix, pts, count)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipWarpPath == "on"]
+foreign {
+    func GdipWarpPath(path: CPointer<Win32__impl_l0.GpPath>, matrix: CPointer<Win32__impl_l0.Matrix>, points: CPointer<Win32__impl_l0.PointF>, count: Int32, srcx: Float32, srcy: Float32, srcwidth: Float32, srcheight: Float32, warpMode: Int32, flatness: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipWarpPath == "on"]
+public unsafe func Windows_GdipWarpPath(path: CPointer<Win32__impl_l0.GpPath>, matrix: CPointer<Win32__impl_l0.Matrix>, points: CPointer<Win32__impl_l0.PointF>, count: Int32, srcx: Float32, srcy: Float32, srcwidth: Float32, srcheight: Float32, warpMode: Int32, flatness: Float32): Int32 {
+    return GdipWarpPath(path, matrix, points, count, srcx, srcy, srcwidth, srcheight, warpMode, flatness)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipWidenPath == "on"]
+foreign {
+    func GdipWidenPath(nativePath: CPointer<Win32__impl_l0.GpPath>, pen: CPointer<Win32__impl_l0.GpPen>, matrix: CPointer<Win32__impl_l0.Matrix>, flatness: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipWidenPath == "on"]
+public unsafe func Windows_GdipWidenPath(nativePath: CPointer<Win32__impl_l0.GpPath>, pen: CPointer<Win32__impl_l0.GpPen>, matrix: CPointer<Win32__impl_l0.Matrix>, flatness: Float32): Int32 {
+    return GdipWidenPath(nativePath, pen, matrix, flatness)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipWindingModeOutline == "on"]
+foreign {
+    func GdipWindingModeOutline(path: CPointer<Win32__impl_l0.GpPath>, matrix: CPointer<Win32__impl_l0.Matrix>, flatness: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdipWindingModeOutline == "on"]
+public unsafe func Windows_GdipWindingModeOutline(path: CPointer<Win32__impl_l0.GpPath>, matrix: CPointer<Win32__impl_l0.Matrix>, flatness: Float32): Int32 {
+    return GdipWindingModeOutline(path, matrix, flatness)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdiplusNotificationHook == "on"]
+foreign {
+    func GdiplusNotificationHook(token: CPointer<UIntNative>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdiplusNotificationHook == "on"]
+public unsafe func Windows_GdiplusNotificationHook(token: CPointer<UIntNative>): Int32 {
+    return GdiplusNotificationHook(token)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdiplusNotificationUnhook == "on"]
+foreign {
+    func GdiplusNotificationUnhook(token: UIntNative): Unit
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdiplusNotificationUnhook == "on"]
+public unsafe func Windows_GdiplusNotificationUnhook(token: UIntNative): Unit {
+    GdiplusNotificationUnhook(token)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdiplusShutdown == "on"]
+foreign {
+    func GdiplusShutdown(token: UIntNative): Unit
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdiplusShutdown == "on"]
+public unsafe func Windows_GdiplusShutdown(token: UIntNative): Unit {
+    GdiplusShutdown(token)
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdiplusStartup == "on"]
+foreign {
+    func GdiplusStartup(token: CPointer<UIntNative>, input: CPointer<Win32__impl_l0.GdiplusStartupInput>, output: CPointer<Win32__impl_l0.GdiplusStartupOutput>): Int32
+}
+
+@When[Windows_Win32_Graphics_GdiPlus == "on" && GDIPLUS == "on" && Windows_Win32_Graphics_GdiPlus_GdiplusStartup == "on"]
+public unsafe func Windows_GdiplusStartup(token: CPointer<UIntNative>, input: CPointer<Win32__impl_l0.GdiplusStartupInput>, output: CPointer<Win32__impl_l0.GdiplusStartupOutput>): Int32 {
+    return GdiplusStartup(token, input, output)
 }
 
 @When[Windows_Win32_Graphics_GdiPlus == "on"]

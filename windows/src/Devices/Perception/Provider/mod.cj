@@ -10,13 +10,9 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Devices_Perception == "on"]
 import windows.Devices.Perception as Devices_Perception
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Graphics_Imaging == "on"]
 import windows.Graphics.Imaging as Graphics_Imaging
-@When[Windows_Media == "on"]
 import windows.Media as Media
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -130,7 +126,10 @@ extend IKnownPerceptionFrameKindStatics <: windows_core.Interface<IKnownPercepti
 @C
 public struct IPerceptionControlGroupVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var FrameProviderIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FrameProviderIds: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -199,6 +198,7 @@ public class IPerceptionControlGroup <: InterfaceWrapperBase & ComInterface & Ru
         readVtbl<IPerceptionControlGroupVtbl>(IPerceptionControlGroupVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FrameProviderIds(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -326,7 +326,10 @@ extend IPerceptionCorrelation <: windows_core.Interface<IPerceptionCorrelation> 
 @C
 public struct IPerceptionFaceAuthenticationGroupVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var FrameProviderIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FrameProviderIds: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -395,6 +398,7 @@ public class IPerceptionFaceAuthenticationGroup <: InterfaceWrapperBase & ComInt
         readVtbl<IPerceptionFaceAuthenticationGroupVtbl>(IPerceptionFaceAuthenticationGroupVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FrameProviderIds(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1822,7 +1826,10 @@ extend IPerceptionVideoFrameAllocator <: windows_core.Interface<IPerceptionVideo
 @C
 public struct IPerceptionControlGroupFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Create: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1891,6 +1898,7 @@ public class IPerceptionControlGroupFactory <: InterfaceWrapperBase & ComInterfa
         readVtbl<IPerceptionControlGroupFactoryVtbl>(IPerceptionControlGroupFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create(ids: windows_collections.IIterable<windows_core.HString>): PerceptionControlGroup {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1996,7 +2004,10 @@ extend IPerceptionCorrelationFactory <: windows_core.Interface<IPerceptionCorrel
 @C
 public struct IPerceptionCorrelationGroupVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var RelativeLocations: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RelativeLocations: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2065,6 +2076,7 @@ public class IPerceptionCorrelationGroup <: InterfaceWrapperBase & ComInterface 
         readVtbl<IPerceptionCorrelationGroupVtbl>(IPerceptionCorrelationGroupVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RelativeLocations(): windows_collections.IVectorView<PerceptionCorrelation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2081,7 +2093,10 @@ extend IPerceptionCorrelationGroup <: windows_core.Interface<IPerceptionCorrelat
 @C
 public struct IPerceptionCorrelationGroupFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Create: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2150,6 +2165,7 @@ public class IPerceptionCorrelationGroupFactory <: InterfaceWrapperBase & ComInt
         readVtbl<IPerceptionCorrelationGroupFactoryVtbl>(IPerceptionCorrelationGroupFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create(relativeLocations: windows_collections.IIterable<PerceptionCorrelation>): PerceptionCorrelationGroup {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2166,7 +2182,10 @@ extend IPerceptionCorrelationGroupFactory <: windows_core.Interface<IPerceptionC
 @C
 public struct IPerceptionFaceAuthenticationGroupFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Create: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2235,6 +2254,7 @@ public class IPerceptionFaceAuthenticationGroupFactory <: InterfaceWrapperBase &
         readVtbl<IPerceptionFaceAuthenticationGroupFactoryVtbl>(IPerceptionFaceAuthenticationGroupFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create(ids: windows_collections.IIterable<windows_core.HString>, startHandler: PerceptionStartFaceAuthenticationHandler, stopHandler: PerceptionStopFaceAuthenticationHandler): PerceptionFaceAuthenticationGroup {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2551,10 +2571,12 @@ public class PerceptionControlGroup <: InterfaceWrapperBase & ComInterface & win
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FrameProviderIds(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().FrameProviderIds()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Create(ids: windows_collections.IIterable<windows_core.HString>): PerceptionControlGroup {
         var result__: Option<PerceptionControlGroup> = Option<PerceptionControlGroup>.None
         try (factory__ = windows_core.factory<PerceptionControlGroup, IPerceptionControlGroupFactory>().unwrap()) {
@@ -2768,10 +2790,12 @@ public class PerceptionCorrelationGroup <: InterfaceWrapperBase & ComInterface &
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RelativeLocations(): windows_collections.IVectorView<PerceptionCorrelation> {
         return defaultInterface().RelativeLocations()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Create(relativeLocations: windows_collections.IIterable<PerceptionCorrelation>): PerceptionCorrelationGroup {
         var result__: Option<PerceptionCorrelationGroup> = Option<PerceptionCorrelationGroup>.None
         try (factory__ = windows_core.factory<PerceptionCorrelationGroup, IPerceptionCorrelationGroupFactory>().unwrap()) {
@@ -2871,10 +2895,12 @@ public class PerceptionFaceAuthenticationGroup <: InterfaceWrapperBase & ComInte
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FrameProviderIds(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().FrameProviderIds()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Create(ids: windows_collections.IIterable<windows_core.HString>, startHandler: PerceptionStartFaceAuthenticationHandler, stopHandler: PerceptionStopFaceAuthenticationHandler): PerceptionFaceAuthenticationGroup {
         var result__: Option<PerceptionFaceAuthenticationGroup> = Option<PerceptionFaceAuthenticationGroup>.None
         try (factory__ = windows_core.factory<PerceptionFaceAuthenticationGroup, IPerceptionFaceAuthenticationGroupFactory>().unwrap()) {
@@ -3074,12 +3100,14 @@ public class PerceptionStartFaceAuthenticationHandler <: InterfaceWrapperBase & 
 @When[Windows_Devices_Perception_Provider == "on"]
 extend PerceptionStartFaceAuthenticationHandler <: windows_core.Interface<PerceptionStartFaceAuthenticationHandler> {}
 
+@When[Windows_Devices_Perception_Provider == "on"]
 private open class PerceptionStartFaceAuthenticationHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, result: CPointer<Bool>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_Devices_Perception_Provider == "on"]
 private open class PerceptionStartFaceAuthenticationHandlerInvoker <: PerceptionStartFaceAuthenticationHandlerInvokerErased {
     public open func Invoke(sender: InParam<PerceptionFaceAuthenticationGroup>): Bool {
         false
@@ -3092,6 +3120,7 @@ private open class PerceptionStartFaceAuthenticationHandlerInvoker <: Perception
     }
 }
 
+@When[Windows_Devices_Perception_Provider == "on"]
 private class PerceptionStartFaceAuthenticationHandlerBox <: PerceptionStartFaceAuthenticationHandlerInvoker {
     public let invoke_: (InParam<PerceptionFaceAuthenticationGroup>) -> Bool
     private let vtblHandle: CPointerHandle<PerceptionStartFaceAuthenticationHandlerVtbl>
@@ -3110,6 +3139,7 @@ private class PerceptionStartFaceAuthenticationHandlerBox <: PerceptionStartFace
     }
 }
 
+@When[Windows_Devices_Perception_Provider == "on"]
 func buildPerceptionStartFaceAuthenticationHandlerBoxVtbl(): PerceptionStartFaceAuthenticationHandlerVtbl {
     var vtbl = PerceptionStartFaceAuthenticationHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -3200,12 +3230,14 @@ public class PerceptionStopFaceAuthenticationHandler <: InterfaceWrapperBase & C
 @When[Windows_Devices_Perception_Provider == "on"]
 extend PerceptionStopFaceAuthenticationHandler <: windows_core.Interface<PerceptionStopFaceAuthenticationHandler> {}
 
+@When[Windows_Devices_Perception_Provider == "on"]
 private open class PerceptionStopFaceAuthenticationHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_Devices_Perception_Provider == "on"]
 private open class PerceptionStopFaceAuthenticationHandlerInvoker <: PerceptionStopFaceAuthenticationHandlerInvokerErased {
     public open func Invoke(sender: InParam<PerceptionFaceAuthenticationGroup>): Unit {
         ()
@@ -3217,6 +3249,7 @@ private open class PerceptionStopFaceAuthenticationHandlerInvoker <: PerceptionS
     }
 }
 
+@When[Windows_Devices_Perception_Provider == "on"]
 private class PerceptionStopFaceAuthenticationHandlerBox <: PerceptionStopFaceAuthenticationHandlerInvoker {
     public let invoke_: (InParam<PerceptionFaceAuthenticationGroup>) -> Unit
     private let vtblHandle: CPointerHandle<PerceptionStopFaceAuthenticationHandlerVtbl>
@@ -3235,6 +3268,7 @@ private class PerceptionStopFaceAuthenticationHandlerBox <: PerceptionStopFaceAu
     }
 }
 
+@When[Windows_Devices_Perception_Provider == "on"]
 func buildPerceptionStopFaceAuthenticationHandlerBoxVtbl(): PerceptionStopFaceAuthenticationHandlerVtbl {
     var vtbl = PerceptionStopFaceAuthenticationHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()

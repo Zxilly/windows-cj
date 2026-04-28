@@ -3,10 +3,8 @@ package windows_sys.ApplicationModel.DataTransfer.DragDrop.Core
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_ApplicationModel_DataTransfer_DragDrop == "on"]
 import windows_sys.ApplicationModel.DataTransfer.DragDrop as ApplicationModel_DataTransfer_DragDrop
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_Graphics_Imaging == "on"]
 import windows_sys.Graphics.Imaging as Graphics_Imaging
 import windows_sys._impl_l0 as _impl_l0
 import windows_sys._impl_l2 as _impl_l2

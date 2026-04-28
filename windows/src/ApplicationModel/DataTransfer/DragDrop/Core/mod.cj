@@ -10,11 +10,8 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_ApplicationModel_DataTransfer_DragDrop == "on"]
 import windows.ApplicationModel.DataTransfer.DragDrop as ApplicationModel_DataTransfer_DragDrop
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Graphics_Imaging == "on"]
 import windows.Graphics.Imaging as Graphics_Imaging
 import windows._impl_l0 as _impl_l0
 import windows._impl_l2 as _impl_l2

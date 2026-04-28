@@ -4,11 +4,11 @@
 package windows.Win32.UI.Input.GameInput
 
 import std.collection.*
+import windows_libloading
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 import windows.Win32._impl_l0 as Win32__impl_l0
 
@@ -5688,9 +5688,20 @@ extend GameInputDeviceInfo <: windows_core.CopyType & windows_core.RuntimeType &
     }
 }
 
-@When[GAMEINPUT == "on"]
-foreign {
-    func GameInputCreate(gameInput: CPointer<CPointer<Unit>>): Int32
+@When[Windows_Win32_UI_Input_GameInput == "on" && GAMEINPUT == "on" && Windows_Win32_UI_Input_GameInput_GameInputCreate == "on"]
+func __windowsBindgen_GameInputCreateProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("GameInput.dll", "GameInputCreate")
+}
+
+@When[Windows_Win32_UI_Input_GameInput == "on" && GAMEINPUT == "on" && Windows_Win32_UI_Input_GameInput_GameInputCreate == "on"]
+unsafe func GameInputCreate(gameInput: CPointer<CPointer<Unit>>): Int32 {
+    let call = CFunc<(CPointer<CPointer<Unit>>) -> Int32>(__windowsBindgen_GameInputCreateProc())
+    return unsafe { call(gameInput) }
+}
+
+@When[Windows_Win32_UI_Input_GameInput == "on" && GAMEINPUT == "on" && Windows_Win32_UI_Input_GameInput_GameInputCreate == "on"]
+public unsafe func Windows_GameInputCreate(gameInput: CPointer<CPointer<Unit>>): Int32 {
+    return GameInputCreate(gameInput)
 }
 
 @When[Windows_Win32_UI_Input_GameInput == "on"]

@@ -1,5 +1,6 @@
 package windows_cfggen
 
+import std.collection.*
 import std.fs.*
 import std.env.*
 
@@ -49,23 +50,71 @@ main(args: Array<String>) {
 
 func runCfggen(args: Array<String>): Unit {
     let workspaceRoot = resolveWorkspaceRoot(args)
-    let catalogRoot = resolveCatalogRoot(args, workspaceRoot)
-
     let manifestPath = joinPath(workspaceRoot, "cjpm.toml")
-    let featureManifestPath = joinPath(catalogRoot, "features.toml")
-    let linkManifestPath = joinPath(catalogRoot, "link-options.toml")
-    let catalogCfgListPath = joinPath(catalogRoot, "cfg_list.toml")
-
     let workspace = readWorkspaceManifest(manifestPath)
-    let catalog = readFeatureCatalog(featureManifestPath, linkManifestPath)
-    let resolved = resolveFeatureClosure(workspace.enabledFeatures, catalog)
-    let cfgDefaults = readCfgKeys(catalogCfgListPath)
-    let cfgRoots = collectCfgRoots(workspaceRoot, manifestPath)
-    for (root in cfgRoots) {
-        writeCfg(joinPath(root, "cfg.toml"), resolved, defaults: cfgDefaults)
+    let catalogRoots = resolveCatalogRoots(args, workspaceRoot, workspace)
+    let outputDir = resolveOutputDir(args)
+
+    if (workspace.enabledFeatures.isEmpty()) {
+        runCfggenWithNoFeatures(args, manifestPath, catalogRoots, outputDir)
+        return
     }
 
-    let linkOptions = formatLinkOptions(resolved, catalogRoot)
+    let catalogs = ArrayList<HashMap<String, FeatureSpec>>()
+    let cfgDefaults = ArrayList<String>()
+    for (catalogRoot in catalogRoots) {
+        let featureManifestPath = joinPath(catalogRoot, "features.toml")
+        let linkManifestPath = joinPath(catalogRoot, "link-options.toml")
+        let catalogCfgListPath = joinPath(catalogRoot, "cfg_list.toml")
+
+        catalogs.add(readFeatureCatalog(featureManifestPath, linkManifestPath))
+        appendUniqueStrings(cfgDefaults, readCfgKeys(catalogCfgListPath))
+    }
+
+    let catalog = mergeFeatureCatalogs(catalogs)
+    let resolved = resolveFeatureClosure(workspace.enabledFeatures, catalog)
+    writeCfg(joinPath(outputDir, "cfg.toml"), resolved, defaults: cfgDefaults)
+
+    let linkOptions = formatLinkOptions(resolved, catalogRoots)
+    let invocation = parseInvocation(args)
+    let linkOptionPath = if (invocation.linkOptionOut.isEmpty()) {
+        joinPath(outputDir, "windows-cj-link-options.txt")
+    } else {
+        invocation.linkOptionOut
+    }
+    writeLinkOptions(linkOptionPath, linkOptions)
+    if (invocation.updateManifestLinkOption) {
+        updateManifestBuildOptions(manifestPath, linkOptions, outputDir)
+    }
+    if (!linkOptions.isEmpty()) {
+        println(linkOptions)
+    }
+}
+
+func runCfggenWithNoFeatures(
+    args: Array<String>,
+    manifestPath: String,
+    catalogRoots: ArrayList<String>,
+    outputDir: String
+): Unit {
+    let cfgDefaults = ArrayList<String>()
+    for (catalogRoot in catalogRoots) {
+        appendUniqueStrings(cfgDefaults, readCfgKeys(joinPath(catalogRoot, "cfg_list.toml")))
+    }
+    let resolved = ArrayList<FeatureSpec>()
+    writeCfg(joinPath(outputDir, "cfg.toml"), resolved, defaults: cfgDefaults)
+
+    let linkOptions = formatLinkOptions(resolved, catalogRoots)
+    let invocation = parseInvocation(args)
+    let linkOptionPath = if (invocation.linkOptionOut.isEmpty()) {
+        joinPath(outputDir, "windows-cj-link-options.txt")
+    } else {
+        invocation.linkOptionOut
+    }
+    writeLinkOptions(linkOptionPath, linkOptions)
+    if (invocation.updateManifestLinkOption) {
+        updateManifestBuildOptions(manifestPath, linkOptions, outputDir)
+    }
     if (!linkOptions.isEmpty()) {
         println(linkOptions)
     }
@@ -73,8 +122,11 @@ func runCfggen(args: Array<String>): Unit {
 
 func printHelp(): Unit {
     println("windows-cfggen: generate cfg.toml from cjpm.toml")
-    println("usage: windows-cfggen [gen] [--workspace-root <path>] [--catalog-root <path>]")
-    println("--catalog-root points to the directory that contains features.toml, link-options.toml, and cfg_list.toml")
+    println("usage: windows-cfggen [gen] [--workspace-root <path>] [--catalog-root <path>] [--out-dir <path>] [--link-option-out <path>] [--update-manifest-link-option]")
+    println("--catalog-root points to a directory that contains features.toml, link-options.toml, and cfg_list.toml; may be repeated")
+    println("--out-dir defaults to the current working directory")
+    println("--link-option-out defaults to windows-cj-link-options.txt in the output directory")
+    println("--update-manifest-link-option writes generated link-option and override-compile-option")
 }
 
 func resolveWorkspaceRoot(args: Array<String>): String {
@@ -90,20 +142,45 @@ public class Invocation {
     public var help: Bool = false
     public var command: String = ""
     public var workspaceRoot: String = ""
-    public var catalogRoot: String = ""
+    public var catalogRoots: ArrayList<String> = ArrayList<String>()
+    public var outputDir: String = ""
+    public var linkOptionOut: String = ""
+    public var updateManifestLinkOption: Bool = false
 
     public init() {}
 }
 
-func resolveCatalogRoot(args: Array<String>, workspaceRoot: String): String {
+func resolveCatalogRoots(args: Array<String>, workspaceRoot: String, workspace: WorkspaceManifest): ArrayList<String> {
     let invocation = parseInvocation(args)
-    if (!invocation.catalogRoot.isEmpty()) {
-        validateCatalogRoot(invocation.catalogRoot)
-        return invocation.catalogRoot
+    if (invocation.catalogRoots.size > 0) {
+        for (catalogRoot in invocation.catalogRoots) {
+            validateCatalogRoot(catalogRoot)
+        }
+        return invocation.catalogRoots
     }
-    let defaultCatalogRoot = joinPath(workspaceRoot, "windows-sys")
-    validateCatalogRoot(defaultCatalogRoot)
-    return defaultCatalogRoot
+    let catalogRoots = ArrayList<String>()
+    let packageRoots = collectLocalPackageRoots(workspaceRoot, workspace)
+    for (root in packageRoots) {
+        if (isCatalogRoot(root)) {
+            appendUniqueString(catalogRoots, root)
+        }
+        let siblingSysRoot = joinPath(parentDir(root), "windows-sys")
+        if (isCatalogRoot(siblingSysRoot)) {
+            appendUniqueString(catalogRoots, siblingSysRoot)
+        }
+    }
+    if (catalogRoots.size == 0) {
+        throw Exception(errorMessage(InvalidCatalogRoot("catalog root not found; pass --catalog-root <path>")))
+    }
+    return catalogRoots
+}
+
+func resolveOutputDir(args: Array<String>): String {
+    let invocation = parseInvocation(args)
+    if (!invocation.outputDir.isEmpty()) {
+        return invocation.outputDir
+    }
+    return getWorkingDirectory().toString()
 }
 
 func parseInvocation(args: Array<String>): Invocation {
@@ -127,7 +204,13 @@ func parseInvocation(args: Array<String>): Invocation {
             i += 1
             continue
         }
-        if (arg == "--workspace-root" || arg == "--catalog-root") {
+        if (arg == "--update-manifest-link-option") {
+            invocation.updateManifestLinkOption = true
+            i += 1
+            continue
+        }
+        if (arg == "--workspace-root" || arg == "--catalog-root" || arg == "--out-dir" ||
+            arg == "--link-option-out") {
             if ((i + 1) >= Int64(args.size)) {
                 invocation.valid = false
                 return invocation
@@ -139,8 +222,12 @@ func parseInvocation(args: Array<String>): Invocation {
             }
             if (arg == "--workspace-root") {
                 invocation.workspaceRoot = value
+            } else if (arg == "--catalog-root") {
+                appendUniqueString(invocation.catalogRoots, value)
+            } else if (arg == "--out-dir") {
+                invocation.outputDir = value
             } else {
-                invocation.catalogRoot = value
+                invocation.linkOptionOut = value
             }
             i += 2
             continue
@@ -163,14 +250,43 @@ func isOptionToken(token: String): Bool {
     return token == "-h" || token == "--help" || startsWith(token, "--")
 }
 
+func appendUniqueStrings(target: ArrayList<String>, values: ArrayList<String>): Unit {
+    let seen = HashMap<String, Bool>()
+    for (existing in target) {
+        seen[existing] = true
+    }
+    for (value in values) {
+        if (!value.isEmpty() && !seen.contains(value)) {
+            target.add(value)
+            seen[value] = true
+        }
+    }
+}
+
+func appendUniqueString(target: ArrayList<String>, value: String): Unit {
+    if (value.isEmpty()) {
+        return
+    }
+    for (existing in target) {
+        if (existing == value) {
+            return
+        }
+    }
+    target.add(value)
+}
+
 func discoverWorkspaceRoot(): String {
     let startDir = getWorkingDirectory().toString()
     var dir = startDir
+    var fallback = ""
     while (!dir.isEmpty()) {
         let manifestPath = joinPath(dir, "cjpm.toml")
         if (exists(manifestPath)) {
-            if (isWorkspaceManifest(manifestPath)) {
+            if (isPreferredManifest(manifestPath)) {
                 return dir
+            }
+            if (fallback.isEmpty()) {
+                fallback = dir
             }
         }
 
@@ -180,7 +296,16 @@ func discoverWorkspaceRoot(): String {
         }
         dir = parent
     }
+    if (!fallback.isEmpty()) {
+        return fallback
+    }
     throw Exception("Unable to locate workspace root from ${startDir}")
+}
+
+func isCatalogRoot(catalogRoot: String): Bool {
+    return exists(joinPath(catalogRoot, "features.toml")) &&
+        exists(joinPath(catalogRoot, "link-options.toml")) &&
+        exists(joinPath(catalogRoot, "cfg_list.toml"))
 }
 
 func validateCatalogRoot(catalogRoot: String): Unit {
@@ -214,10 +339,11 @@ func parentDir(path: String): String {
     return String.fromUtf8(bytes[0..lastSep])
 }
 
-func isWorkspaceManifest(path: String): Bool {
+func isPreferredManifest(path: String): Bool {
     let text = readText(path)
     for (rawLine in splitLines(text)) {
-        if (trimAscii(rawLine) == "[workspace]") {
+        let line = trimAscii(rawLine)
+        if (line == "[workspace]" || line == "[windows-cj]") {
             return true
         }
     }

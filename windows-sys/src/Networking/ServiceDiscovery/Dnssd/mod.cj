@@ -161,6 +161,7 @@ public struct IDnssdServiceInstanceVtbl {
     public var SetPriority: CFunc<(CPointer<Unit>, UInt16) -> Int32> = { _, _ => 0 }
     public var Weight: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var SetWeight: CFunc<(CPointer<Unit>, UInt16) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var TextAttributes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Networking_Sockets == "on"]
     public var RegisterStreamSocketListenerAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -275,6 +276,7 @@ public class IDnssdServiceInstance <: InterfaceWrapperBase & ComInterface {
         return __vt.SetWeight(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TextAttributes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

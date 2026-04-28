@@ -3,4 +3,3 @@ package windows_sys.UI.Xaml.Media.Media3D
 
 @When[Windows_UI_Xaml_Media_Media3D == "on"]
 public import windows_sys.UI.Xaml._impl_l0.{ICompositeTransform3D, ICompositeTransform3DStatics, ICompositeTransform3DStaticsVtbl, ICompositeTransform3DVtbl, IMatrix3DHelper, IMatrix3DHelperStatics, IMatrix3DHelperStaticsVtbl, IMatrix3DHelperVtbl, IPerspectiveTransform3D, IPerspectiveTransform3DStatics, IPerspectiveTransform3DStaticsVtbl, IPerspectiveTransform3DVtbl, ITransform3D, ITransform3DFactory, ITransform3DFactoryVtbl, ITransform3DVtbl, Matrix3D}
-

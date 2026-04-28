@@ -3,11 +3,8 @@ package windows_sys.Win32.System.WinRT.ML
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_AI_MachineLearning_WinML == "on"]
 import windows_sys.Win32.AI.MachineLearning.WinML as Win32_AI_MachineLearning_WinML
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Direct3D12 == "on"]
 import windows_sys.Win32.Graphics.Direct3D12 as Win32_Graphics_Direct3D12
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 

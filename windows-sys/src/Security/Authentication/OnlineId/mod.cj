@@ -128,6 +128,7 @@ public let OnlineIdSystemTicketStatus_ServiceConnectionError: OnlineIdSystemTick
 public struct IOnlineIdAuthenticatorVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var AuthenticateUserAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var AuthenticateUserAsyncAdvanced: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var SignOutUserAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetApplicationId: CFunc<(CPointer<Unit>, GUID) -> Int32> = { _, _ => 0 }
@@ -183,6 +184,7 @@ public class IOnlineIdAuthenticator <: InterfaceWrapperBase & ComInterface {
         return __vt.AuthenticateUserAsync(__liveRaw, request, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AuthenticateUserAsyncAdvanced(requests: CPointer<Unit>, credentialPromptType: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -628,6 +630,7 @@ public class IOnlineIdSystemTicketResult <: InterfaceWrapperBase & ComInterface 
 @C
 public struct IUserIdentityVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Tickets: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Id: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SafeCustomerId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -679,6 +682,7 @@ public class IUserIdentity <: InterfaceWrapperBase & ComInterface {
         readVtbl<IUserIdentityVtbl>(IUserIdentityVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Tickets(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

@@ -5,9 +5,7 @@ import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrap
 import windows_interface as windows_interface
 import windows_polyfill.{unionReadFloat32, unionReadFloat64, unionReadUInt16, unionReadUInt32, unionReadUInt64, unionReadUInt8, unionWriteFloat32, unionWriteFloat64, unionWriteUInt16, unionWriteUInt32, unionWriteUInt64, unionWriteUInt8}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_System_Memory == "on"]
 import windows_sys.Win32.System.Memory as Win32_System_Memory
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
@@ -36626,17 +36624,54 @@ public type PKDEXTS_GET_PTE_INFO = CFunc<(CPointer<Unit>, UInt64, CPointer<KDEXT
 @When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on"]
 public type fnDebugFailureAnalysisCreateInstance = CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<GUID>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32>
 
-@When[DBGENG == "on"]
+@When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on" && DBGENG == "on" && Windows_Win32_System_Diagnostics_Debug_Extensions_DebugConnect == "on"]
 foreign {
     func DebugConnect(RemoteOptions: CPointer<UInt8>, InterfaceId: CPointer<GUID>, Interface: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on" && DBGENG == "on" && Windows_Win32_System_Diagnostics_Debug_Extensions_DebugConnect == "on"]
+public unsafe func Windows_DebugConnect(RemoteOptions: CPointer<UInt8>, InterfaceId: CPointer<GUID>, Interface: CPointer<CPointer<Unit>>): Int32 {
+    return DebugConnect(RemoteOptions, InterfaceId, Interface)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on" && DBGENG == "on" && Windows_Win32_System_Diagnostics_Debug_Extensions_DebugConnectWide == "on"]
+foreign {
     func DebugConnectWide(RemoteOptions: CPointer<UInt16>, InterfaceId: CPointer<GUID>, Interface: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on" && DBGENG == "on" && Windows_Win32_System_Diagnostics_Debug_Extensions_DebugConnectWide == "on"]
+public unsafe func Windows_DebugConnectWide(RemoteOptions: CPointer<UInt16>, InterfaceId: CPointer<GUID>, Interface: CPointer<CPointer<Unit>>): Int32 {
+    return DebugConnectWide(RemoteOptions, InterfaceId, Interface)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on" && DBGENG == "on" && Windows_Win32_System_Diagnostics_Debug_Extensions_DebugCreate == "on"]
+foreign {
     func DebugCreate(InterfaceId: CPointer<GUID>, Interface: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on" && DBGENG == "on" && Windows_Win32_System_Diagnostics_Debug_Extensions_DebugCreate == "on"]
+public unsafe func Windows_DebugCreate(InterfaceId: CPointer<GUID>, Interface: CPointer<CPointer<Unit>>): Int32 {
+    return DebugCreate(InterfaceId, Interface)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on" && DBGENG == "on" && Windows_Win32_System_Diagnostics_Debug_Extensions_DebugCreateEx == "on"]
+foreign {
     func DebugCreateEx(InterfaceId: CPointer<GUID>, DbgEngOptions: UInt32, Interface: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[DBGMODEL == "on"]
+@When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on" && DBGENG == "on" && Windows_Win32_System_Diagnostics_Debug_Extensions_DebugCreateEx == "on"]
+public unsafe func Windows_DebugCreateEx(InterfaceId: CPointer<GUID>, DbgEngOptions: UInt32, Interface: CPointer<CPointer<Unit>>): Int32 {
+    return DebugCreateEx(InterfaceId, DbgEngOptions, Interface)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on" && DBGMODEL == "on" && Windows_Win32_System_Diagnostics_Debug_Extensions_CreateDataModelManager == "on"]
 foreign {
     func CreateDataModelManager(debugHost: CPointer<Unit>, manager: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on" && DBGMODEL == "on" && Windows_Win32_System_Diagnostics_Debug_Extensions_CreateDataModelManager == "on"]
+public unsafe func Windows_CreateDataModelManager(debugHost: CPointer<Unit>, manager: CPointer<CPointer<Unit>>): Int32 {
+    return CreateDataModelManager(debugHost, manager)
 }
 
 @When[Windows_Win32_System_Diagnostics_Debug_Extensions == "on"]

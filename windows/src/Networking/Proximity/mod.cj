@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -1271,7 +1270,10 @@ public struct IPeerFinderStaticsVtbl {
     public var DisplayName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetDisplayName: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SupportedDiscoveryTypes: CFunc<(CPointer<Unit>, CPointer<PeerDiscoveryTypesAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var AlternateIdentities: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AlternateIdentities: UIntNative = UIntNative(0)
     public var Start: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
     public var StartWithMessage: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Stop: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
@@ -1279,7 +1281,10 @@ public struct IPeerFinderStaticsVtbl {
     public var RemoveTriggeredConnectionStateChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ConnectionRequested: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveConnectionRequested: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllPeersAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllPeersAsync: UIntNative = UIntNative(0)
     @When[Windows_Networking_Sockets == "on"]
     public var ConnectAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_Networking_Sockets != "on"]
@@ -1416,6 +1421,7 @@ public class IPeerFinderStatics <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<PeerDiscoveryTypes>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AlternateIdentities(): windows_collections.IMap<windows_core.HString, windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1470,6 +1476,7 @@ public class IPeerFinderStatics <: InterfaceWrapperBase & ComInterface & Runtime
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllPeersAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<PeerInformation>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1567,12 +1574,14 @@ public class DeviceArrivedEventHandler <: InterfaceWrapperBase & ComInterface & 
 @When[Windows_Networking_Proximity == "on"]
 extend DeviceArrivedEventHandler <: windows_core.Interface<DeviceArrivedEventHandler> {}
 
+@When[Windows_Networking_Proximity == "on"]
 private open class DeviceArrivedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_Networking_Proximity == "on"]
 private open class DeviceArrivedEventHandlerInvoker <: DeviceArrivedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<ProximityDevice>): Unit {
         ()
@@ -1584,6 +1593,7 @@ private open class DeviceArrivedEventHandlerInvoker <: DeviceArrivedEventHandler
     }
 }
 
+@When[Windows_Networking_Proximity == "on"]
 private class DeviceArrivedEventHandlerBox <: DeviceArrivedEventHandlerInvoker {
     public let invoke_: (InParam<ProximityDevice>) -> Unit
     private let vtblHandle: CPointerHandle<DeviceArrivedEventHandlerVtbl>
@@ -1602,6 +1612,7 @@ private class DeviceArrivedEventHandlerBox <: DeviceArrivedEventHandlerInvoker {
     }
 }
 
+@When[Windows_Networking_Proximity == "on"]
 func buildDeviceArrivedEventHandlerBoxVtbl(): DeviceArrivedEventHandlerVtbl {
     var vtbl = DeviceArrivedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -1692,12 +1703,14 @@ public class DeviceDepartedEventHandler <: InterfaceWrapperBase & ComInterface &
 @When[Windows_Networking_Proximity == "on"]
 extend DeviceDepartedEventHandler <: windows_core.Interface<DeviceDepartedEventHandler> {}
 
+@When[Windows_Networking_Proximity == "on"]
 private open class DeviceDepartedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_Networking_Proximity == "on"]
 private open class DeviceDepartedEventHandlerInvoker <: DeviceDepartedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<ProximityDevice>): Unit {
         ()
@@ -1709,6 +1722,7 @@ private open class DeviceDepartedEventHandlerInvoker <: DeviceDepartedEventHandl
     }
 }
 
+@When[Windows_Networking_Proximity == "on"]
 private class DeviceDepartedEventHandlerBox <: DeviceDepartedEventHandlerInvoker {
     public let invoke_: (InParam<ProximityDevice>) -> Unit
     private let vtblHandle: CPointerHandle<DeviceDepartedEventHandlerVtbl>
@@ -1727,6 +1741,7 @@ private class DeviceDepartedEventHandlerBox <: DeviceDepartedEventHandlerInvoker
     }
 }
 
+@When[Windows_Networking_Proximity == "on"]
 func buildDeviceDepartedEventHandlerBoxVtbl(): DeviceDepartedEventHandlerVtbl {
     var vtbl = DeviceDepartedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -2444,12 +2459,14 @@ public class MessageReceivedHandler <: InterfaceWrapperBase & ComInterface & win
 @When[Windows_Networking_Proximity == "on"]
 extend MessageReceivedHandler <: windows_core.Interface<MessageReceivedHandler> {}
 
+@When[Windows_Networking_Proximity == "on"]
 private open class MessageReceivedHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_Networking_Proximity == "on"]
 private open class MessageReceivedHandlerInvoker <: MessageReceivedHandlerInvokerErased {
     public open func Invoke(sender: InParam<ProximityDevice>, message: InParam<ProximityMessage>): Unit {
         ()
@@ -2461,6 +2478,7 @@ private open class MessageReceivedHandlerInvoker <: MessageReceivedHandlerInvoke
     }
 }
 
+@When[Windows_Networking_Proximity == "on"]
 private class MessageReceivedHandlerBox <: MessageReceivedHandlerInvoker {
     public let invoke_: (InParam<ProximityDevice>, InParam<ProximityMessage>) -> Unit
     private let vtblHandle: CPointerHandle<MessageReceivedHandlerVtbl>
@@ -2479,6 +2497,7 @@ private class MessageReceivedHandlerBox <: MessageReceivedHandlerInvoker {
     }
 }
 
+@When[Windows_Networking_Proximity == "on"]
 func buildMessageReceivedHandlerBoxVtbl(): MessageReceivedHandlerVtbl {
     var vtbl = MessageReceivedHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -2569,12 +2588,14 @@ public class MessageTransmittedHandler <: InterfaceWrapperBase & ComInterface & 
 @When[Windows_Networking_Proximity == "on"]
 extend MessageTransmittedHandler <: windows_core.Interface<MessageTransmittedHandler> {}
 
+@When[Windows_Networking_Proximity == "on"]
 private open class MessageTransmittedHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: Int64): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_Networking_Proximity == "on"]
 private open class MessageTransmittedHandlerInvoker <: MessageTransmittedHandlerInvokerErased {
     public open func Invoke(sender: InParam<ProximityDevice>, messageId: Int64): Unit {
         ()
@@ -2586,6 +2607,7 @@ private open class MessageTransmittedHandlerInvoker <: MessageTransmittedHandler
     }
 }
 
+@When[Windows_Networking_Proximity == "on"]
 private class MessageTransmittedHandlerBox <: MessageTransmittedHandlerInvoker {
     public let invoke_: (InParam<ProximityDevice>, Int64) -> Unit
     private let vtblHandle: CPointerHandle<MessageTransmittedHandlerVtbl>
@@ -2604,6 +2626,7 @@ private class MessageTransmittedHandlerBox <: MessageTransmittedHandlerInvoker {
     }
 }
 
+@When[Windows_Networking_Proximity == "on"]
 func buildMessageTransmittedHandlerBoxVtbl(): MessageTransmittedHandlerVtbl {
     var vtbl = MessageTransmittedHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -2770,6 +2793,7 @@ public class PeerFinder <: windows_interface.RuntimeName & windows_core.RuntimeN
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func AlternateIdentities(): windows_collections.IMap<windows_core.HString, windows_core.HString> {
         var result__: Option<windows_collections.IMap<windows_core.HString, windows_core.HString>> = Option<windows_collections.IMap<windows_core.HString, windows_core.HString>>.None
         try (factory__ = windows_core.factory<PeerFinder, IPeerFinderStatics>().unwrap()) {
@@ -2838,6 +2862,7 @@ public class PeerFinder <: windows_interface.RuntimeName & windows_core.RuntimeN
         return ()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindAllPeersAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<PeerInformation>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<PeerInformation>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<PeerInformation>>>.None
         try (factory__ = windows_core.factory<PeerFinder, IPeerFinderStatics>().unwrap()) {

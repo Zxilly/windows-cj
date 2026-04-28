@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Perception_Spatial == "on"]
 import windows.Perception.Spatial as Perception_Spatial
 import windows._impl_l0 as _impl_l0
 import windows_numerics as windows_numerics

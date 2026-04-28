@@ -4,14 +4,12 @@
 package windows.Wdk.System.IO
 
 import std.collection.*
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_System_IO == "on"]
 import windows.Win32.System.IO as Win32_System_IO
 import windows_core as windows_core
 
 
-@When[NTDLL == "on" && Windows_Win32_System_IO == "on"]
+@When[Windows_Wdk_System_IO == "on" && NTDLL == "on" && Windows_Wdk_System_IO_NtDeviceIoControlFile == "on" && Windows_Win32_System_IO == "on"]
 foreign {
     // param-hint: Event optional
     // param-hint: ApcRoutine optional
@@ -19,4 +17,9 @@ foreign {
     // param-hint: InputBuffer bytes=param[7] optional
     // param-hint: OutputBuffer bytes=param[9] optional
     func NtDeviceIoControlFile(FileHandle: CPointer<Unit>, Event: CPointer<Unit>, ApcRoutine: Win32_System_IO.PIO_APC_ROUTINE, ApcContext: CPointer<Unit>, IoStatusBlock: CPointer<Win32_System_IO.IO_STATUS_BLOCKAbi>, IoControlCode: UInt32, InputBuffer: CPointer<Unit>, InputBufferLength: UInt32, OutputBuffer: CPointer<Unit>, OutputBufferLength: UInt32): Int32
+}
+
+@When[Windows_Wdk_System_IO == "on" && NTDLL == "on" && Windows_Wdk_System_IO_NtDeviceIoControlFile == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_NtDeviceIoControlFile(FileHandle: CPointer<Unit>, Event: CPointer<Unit>, ApcRoutine: Win32_System_IO.PIO_APC_ROUTINE, ApcContext: CPointer<Unit>, IoStatusBlock: CPointer<Win32_System_IO.IO_STATUS_BLOCKAbi>, IoControlCode: UInt32, InputBuffer: CPointer<Unit>, InputBufferLength: UInt32, OutputBuffer: CPointer<Unit>, OutputBufferLength: UInt32): Int32 {
+    return NtDeviceIoControlFile(FileHandle, Event, ApcRoutine, ApcContext, IoStatusBlock, IoControlCode, InputBuffer, InputBufferLength, OutputBuffer, OutputBufferLength)
 }

@@ -4,7 +4,6 @@ package windows_sys.System.RemoteDesktop.Provider
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_UI == "on"]
 import windows_sys.UI as UI
 
 
@@ -566,6 +565,7 @@ public class IRemoteDesktopInfoFactory <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IRemoteDesktopRegistrarStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var DesktopInfos: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IsSwitchToLocalSessionEnabled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -611,6 +611,7 @@ public class IRemoteDesktopRegistrarStatics <: InterfaceWrapperBase & ComInterfa
         readVtbl<IRemoteDesktopRegistrarStaticsVtbl>(IRemoteDesktopRegistrarStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DesktopInfos(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

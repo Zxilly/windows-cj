@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -300,8 +299,14 @@ public struct IIndexedResourceCandidateVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Type: CFunc<(CPointer<Unit>, CPointer<IndexedResourceTypeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var get_Uri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Metadata: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Metadata: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Qualifiers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Qualifiers: UIntNative = UIntNative(0)
     public var ValueAsString: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetQualifierValue: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
@@ -388,6 +393,7 @@ public class IIndexedResourceCandidate <: InterfaceWrapperBase & ComInterface & 
         return Foundation.Uri.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Metadata(): windows_collections.IMapView<windows_core.HString, windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -396,6 +402,7 @@ public class IIndexedResourceCandidate <: InterfaceWrapperBase & ComInterface & 
         return windows_collections.IMapView<windows_core.HString, windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Qualifiers(): windows_collections.IVectorView<IndexedResourceQualifier> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -501,10 +508,12 @@ public class IndexedResourceCandidate <: InterfaceWrapperBase & ComInterface & w
         return defaultInterface().get_Uri()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Metadata(): windows_collections.IMapView<windows_core.HString, windows_core.HString> {
         return defaultInterface().Metadata()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Qualifiers(): windows_collections.IVectorView<IndexedResourceQualifier> {
         return defaultInterface().Qualifiers()
     }
@@ -541,7 +550,10 @@ extend IndexedResourceCandidate <: windows_core.HandleWinrtType<IndexedResourceC
 public struct IResourceIndexerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var IndexFilePath: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var IndexFileContentsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var IndexFileContentsAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -618,6 +630,7 @@ public class IResourceIndexer <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return IndexedResourceCandidate.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func IndexFileContentsAsync(file: Foundation.Uri): windows_future.IAsyncOperation<windows_collections.IVectorView<IndexedResourceCandidate>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -873,6 +886,7 @@ public class ResourceIndexer <: InterfaceWrapperBase & ComInterface & windows_in
         return defaultInterface().IndexFilePath(filePath)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func IndexFileContentsAsync(file: Foundation.Uri): windows_future.IAsyncOperation<windows_collections.IVectorView<IndexedResourceCandidate>> {
         return defaultInterface().IndexFileContentsAsync(file)
     }

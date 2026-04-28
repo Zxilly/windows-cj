@@ -236,17 +236,54 @@ extend ADDRINFOEX7 <: windows_core.CopyType & windows_core.RuntimeType & windows
     }
 }
 
-@When[MSWSOCK == "on"]
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_AcceptEx == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    func AcceptEx(sListenSocket: Win32__impl_l0.SOCKET, sAcceptSocket: Win32__impl_l0.SOCKET, lpOutputBuffer: CPointer<Unit>, dwReceiveDataLength: UInt32, dwLocalAddressLength: UInt32, dwRemoteAddressLength: UInt32, lpdwBytesReceived: CPointer<UInt32>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_AcceptEx == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_AcceptEx(sListenSocket: Win32__impl_l0.SOCKET, sAcceptSocket: Win32__impl_l0.SOCKET, lpOutputBuffer: CPointer<Unit>, dwReceiveDataLength: UInt32, dwLocalAddressLength: UInt32, dwRemoteAddressLength: UInt32, lpdwBytesReceived: CPointer<UInt32>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): Int32 {
+    return AcceptEx(sListenSocket, sAcceptSocket, lpOutputBuffer, dwReceiveDataLength, dwLocalAddressLength, dwRemoteAddressLength, lpdwBytesReceived, lpOverlapped)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_EnumProtocolsA == "on"]
 foreign {
     // param-hint: lpiProtocols optional
     // param-hint: lpProtocolBuffer bytes=param[2]
     // pinvoke-hint: SetLastError
     func EnumProtocolsA(lpiProtocols: CPointer<Int32>, lpProtocolBuffer: CPointer<Unit>, lpdwBufferLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_EnumProtocolsA == "on"]
+public unsafe func Windows_EnumProtocolsA(lpiProtocols: CPointer<Int32>, lpProtocolBuffer: CPointer<Unit>, lpdwBufferLength: CPointer<UInt32>): Int32 {
+    return EnumProtocolsA(lpiProtocols, lpProtocolBuffer, lpdwBufferLength)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_EnumProtocolsW == "on"]
+foreign {
     // param-hint: lpiProtocols optional
     // param-hint: lpProtocolBuffer bytes=param[2]
     // pinvoke-hint: SetLastError
     func EnumProtocolsW(lpiProtocols: CPointer<Int32>, lpProtocolBuffer: CPointer<Unit>, lpdwBufferLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_EnumProtocolsW == "on"]
+public unsafe func Windows_EnumProtocolsW(lpiProtocols: CPointer<Int32>, lpProtocolBuffer: CPointer<Unit>, lpdwBufferLength: CPointer<UInt32>): Int32 {
+    return EnumProtocolsW(lpiProtocols, lpProtocolBuffer, lpdwBufferLength)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_GetAcceptExSockaddrs == "on"]
+foreign {
     func GetAcceptExSockaddrs(lpOutputBuffer: CPointer<Unit>, dwReceiveDataLength: UInt32, dwLocalAddressLength: UInt32, dwRemoteAddressLength: UInt32, LocalSockaddr: CPointer<CPointer<Win32__impl_l1.SOCKADDRAbi>>, LocalSockaddrLength: CPointer<Int32>, RemoteSockaddr: CPointer<CPointer<Win32__impl_l1.SOCKADDRAbi>>, RemoteSockaddrLength: CPointer<Int32>): Unit
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_GetAcceptExSockaddrs == "on"]
+public unsafe func Windows_GetAcceptExSockaddrs(lpOutputBuffer: CPointer<Unit>, dwReceiveDataLength: UInt32, dwLocalAddressLength: UInt32, dwRemoteAddressLength: UInt32, LocalSockaddr: CPointer<CPointer<Win32__impl_l1.SOCKADDRAbi>>, LocalSockaddrLength: CPointer<Int32>, RemoteSockaddr: CPointer<CPointer<Win32__impl_l1.SOCKADDRAbi>>, RemoteSockaddrLength: CPointer<Int32>): Unit {
+    GetAcceptExSockaddrs(lpOutputBuffer, dwReceiveDataLength, dwLocalAddressLength, dwRemoteAddressLength, LocalSockaddr, LocalSockaddrLength, RemoteSockaddr, RemoteSockaddrLength)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_GetAddressByNameA == "on"]
+foreign {
     // param-hint: lpServiceName optional
     // param-hint: lpiProtocols optional
     // param-hint: lpServiceAsyncInfo optional
@@ -254,6 +291,15 @@ foreign {
     // param-hint: lpAliasBuffer len=param[9] optional
     // pinvoke-hint: SetLastError
     func GetAddressByNameA(dwNameSpace: UInt32, lpServiceType: CPointer<GUID>, lpServiceName: CPointer<UInt8>, lpiProtocols: CPointer<Int32>, dwResolution: UInt32, lpServiceAsyncInfo: CPointer<Win32__impl_l1.SERVICE_ASYNC_INFOAbi>, lpCsaddrBuffer: CPointer<Unit>, lpdwBufferLength: CPointer<UInt32>, lpAliasBuffer: CPointer<UInt8>, lpdwAliasBufferLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_GetAddressByNameA == "on"]
+public unsafe func Windows_GetAddressByNameA(dwNameSpace: UInt32, lpServiceType: CPointer<GUID>, lpServiceName: CPointer<UInt8>, lpiProtocols: CPointer<Int32>, dwResolution: UInt32, lpServiceAsyncInfo: CPointer<Win32__impl_l1.SERVICE_ASYNC_INFOAbi>, lpCsaddrBuffer: CPointer<Unit>, lpdwBufferLength: CPointer<UInt32>, lpAliasBuffer: CPointer<UInt8>, lpdwAliasBufferLength: CPointer<UInt32>): Int32 {
+    return GetAddressByNameA(dwNameSpace, lpServiceType, lpServiceName, lpiProtocols, dwResolution, lpServiceAsyncInfo, lpCsaddrBuffer, lpdwBufferLength, lpAliasBuffer, lpdwAliasBufferLength)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_GetAddressByNameW == "on"]
+foreign {
     // param-hint: lpServiceName optional
     // param-hint: lpiProtocols optional
     // param-hint: lpServiceAsyncInfo optional
@@ -261,364 +307,295 @@ foreign {
     // param-hint: lpAliasBuffer len=param[9] optional
     // pinvoke-hint: SetLastError
     func GetAddressByNameW(dwNameSpace: UInt32, lpServiceType: CPointer<GUID>, lpServiceName: CPointer<UInt16>, lpiProtocols: CPointer<Int32>, dwResolution: UInt32, lpServiceAsyncInfo: CPointer<Win32__impl_l1.SERVICE_ASYNC_INFOAbi>, lpCsaddrBuffer: CPointer<Unit>, lpdwBufferLength: CPointer<UInt32>, lpAliasBuffer: CPointer<UInt16>, lpdwAliasBufferLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_GetAddressByNameW == "on"]
+public unsafe func Windows_GetAddressByNameW(dwNameSpace: UInt32, lpServiceType: CPointer<GUID>, lpServiceName: CPointer<UInt16>, lpiProtocols: CPointer<Int32>, dwResolution: UInt32, lpServiceAsyncInfo: CPointer<Win32__impl_l1.SERVICE_ASYNC_INFOAbi>, lpCsaddrBuffer: CPointer<Unit>, lpdwBufferLength: CPointer<UInt32>, lpAliasBuffer: CPointer<UInt16>, lpdwAliasBufferLength: CPointer<UInt32>): Int32 {
+    return GetAddressByNameW(dwNameSpace, lpServiceType, lpServiceName, lpiProtocols, dwResolution, lpServiceAsyncInfo, lpCsaddrBuffer, lpdwBufferLength, lpAliasBuffer, lpdwAliasBufferLength)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_GetNameByTypeA == "on"]
+foreign {
     // param-hint: lpServiceName bytes=param[2]
     // pinvoke-hint: SetLastError
     func GetNameByTypeA(lpServiceType: CPointer<GUID>, lpServiceName: CPointer<UInt8>, dwNameLength: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_GetNameByTypeA == "on"]
+public unsafe func Windows_GetNameByTypeA(lpServiceType: CPointer<GUID>, lpServiceName: CPointer<UInt8>, dwNameLength: UInt32): Int32 {
+    return GetNameByTypeA(lpServiceType, lpServiceName, dwNameLength)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_GetNameByTypeW == "on"]
+foreign {
     // param-hint: lpServiceName bytes=param[2]
     // pinvoke-hint: SetLastError
     func GetNameByTypeW(lpServiceType: CPointer<GUID>, lpServiceName: CPointer<UInt16>, dwNameLength: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_GetNameByTypeW == "on"]
+public unsafe func Windows_GetNameByTypeW(lpServiceType: CPointer<GUID>, lpServiceName: CPointer<UInt16>, dwNameLength: UInt32): Int32 {
+    return GetNameByTypeW(lpServiceType, lpServiceName, dwNameLength)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_GetServiceA == "on"]
+foreign {
     // param-hint: lpBuffer bytes=param[5]
     // param-hint: lpServiceAsyncInfo optional
     // pinvoke-hint: SetLastError
     func GetServiceA(dwNameSpace: UInt32, lpGuid: CPointer<GUID>, lpServiceName: CPointer<UInt8>, dwProperties: UInt32, lpBuffer: CPointer<Unit>, lpdwBufferSize: CPointer<UInt32>, lpServiceAsyncInfo: CPointer<Win32__impl_l1.SERVICE_ASYNC_INFOAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_GetServiceA == "on"]
+public unsafe func Windows_GetServiceA(dwNameSpace: UInt32, lpGuid: CPointer<GUID>, lpServiceName: CPointer<UInt8>, dwProperties: UInt32, lpBuffer: CPointer<Unit>, lpdwBufferSize: CPointer<UInt32>, lpServiceAsyncInfo: CPointer<Win32__impl_l1.SERVICE_ASYNC_INFOAbi>): Int32 {
+    return GetServiceA(dwNameSpace, lpGuid, lpServiceName, dwProperties, lpBuffer, lpdwBufferSize, lpServiceAsyncInfo)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_GetServiceW == "on"]
+foreign {
     // param-hint: lpBuffer bytes=param[5]
     // param-hint: lpServiceAsyncInfo optional
     // pinvoke-hint: SetLastError
     func GetServiceW(dwNameSpace: UInt32, lpGuid: CPointer<GUID>, lpServiceName: CPointer<UInt16>, dwProperties: UInt32, lpBuffer: CPointer<Unit>, lpdwBufferSize: CPointer<UInt32>, lpServiceAsyncInfo: CPointer<Win32__impl_l1.SERVICE_ASYNC_INFOAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func GetTypeByNameA(lpServiceName: CPointer<UInt8>, lpServiceType: CPointer<GUID>): Int32
-    // pinvoke-hint: SetLastError
-    func GetTypeByNameW(lpServiceName: CPointer<UInt16>, lpServiceType: CPointer<GUID>): Int32
-    // param-hint: buf bytes=param[2]
-    // pinvoke-hint: SetLastError
-    func WSARecvEx(s: Win32__impl_l0.SOCKET, buf: CPointer<UInt8>, len: Int32, flags: CPointer<Int32>): Int32
 }
 
-@When[MSWSOCK == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_GetServiceW == "on"]
+public unsafe func Windows_GetServiceW(dwNameSpace: UInt32, lpGuid: CPointer<GUID>, lpServiceName: CPointer<UInt16>, dwProperties: UInt32, lpBuffer: CPointer<Unit>, lpdwBufferSize: CPointer<UInt32>, lpServiceAsyncInfo: CPointer<Win32__impl_l1.SERVICE_ASYNC_INFOAbi>): Int32 {
+    return GetServiceW(dwNameSpace, lpGuid, lpServiceName, dwProperties, lpBuffer, lpdwBufferSize, lpServiceAsyncInfo)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_GetTypeByNameA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func GetTypeByNameA(lpServiceName: CPointer<UInt8>, lpServiceType: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_GetTypeByNameA == "on"]
+public unsafe func Windows_GetTypeByNameA(lpServiceName: CPointer<UInt8>, lpServiceType: CPointer<GUID>): Int32 {
+    return GetTypeByNameA(lpServiceName, lpServiceType)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_GetTypeByNameW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func GetTypeByNameW(lpServiceName: CPointer<UInt16>, lpServiceType: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_GetTypeByNameW == "on"]
+public unsafe func Windows_GetTypeByNameW(lpServiceName: CPointer<UInt16>, lpServiceType: CPointer<GUID>): Int32 {
+    return GetTypeByNameW(lpServiceName, lpServiceType)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_SetServiceA == "on" && Windows_Win32_System_Com == "on"]
 foreign {
     // param-hint: lpServiceAsyncInfo optional
     // pinvoke-hint: SetLastError
     func SetServiceA(dwNameSpace: UInt32, dwOperation: Win32__impl_l0.SET_SERVICE_OPERATIONAbi, dwFlags: UInt32, lpServiceInfo: CPointer<Win32__impl_l1.SERVICE_INFOAAbi>, lpServiceAsyncInfo: CPointer<Win32__impl_l1.SERVICE_ASYNC_INFOAbi>, lpdwStatusFlags: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_SetServiceA == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SetServiceA(dwNameSpace: UInt32, dwOperation: Win32__impl_l0.SET_SERVICE_OPERATIONAbi, dwFlags: UInt32, lpServiceInfo: CPointer<Win32__impl_l1.SERVICE_INFOAAbi>, lpServiceAsyncInfo: CPointer<Win32__impl_l1.SERVICE_ASYNC_INFOAbi>, lpdwStatusFlags: CPointer<UInt32>): Int32 {
+    return SetServiceA(dwNameSpace, dwOperation, dwFlags, lpServiceInfo, lpServiceAsyncInfo, lpdwStatusFlags)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_SetServiceW == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: lpServiceAsyncInfo optional
     // pinvoke-hint: SetLastError
     func SetServiceW(dwNameSpace: UInt32, dwOperation: Win32__impl_l0.SET_SERVICE_OPERATIONAbi, dwFlags: UInt32, lpServiceInfo: CPointer<Win32__impl_l1.SERVICE_INFOWAbi>, lpServiceAsyncInfo: CPointer<Win32__impl_l1.SERVICE_ASYNC_INFOAbi>, lpdwStatusFlags: CPointer<UInt32>): Int32
 }
 
-@When[MSWSOCK == "on" && Windows_Win32_System_IO == "on"]
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_SetServiceW == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SetServiceW(dwNameSpace: UInt32, dwOperation: Win32__impl_l0.SET_SERVICE_OPERATIONAbi, dwFlags: UInt32, lpServiceInfo: CPointer<Win32__impl_l1.SERVICE_INFOWAbi>, lpServiceAsyncInfo: CPointer<Win32__impl_l1.SERVICE_ASYNC_INFOAbi>, lpdwStatusFlags: CPointer<UInt32>): Int32 {
+    return SetServiceW(dwNameSpace, dwOperation, dwFlags, lpServiceInfo, lpServiceAsyncInfo, lpdwStatusFlags)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_TransmitFile == "on" && Windows_Win32_System_IO == "on"]
 foreign {
-    func AcceptEx(sListenSocket: Win32__impl_l0.SOCKET, sAcceptSocket: Win32__impl_l0.SOCKET, lpOutputBuffer: CPointer<Unit>, dwReceiveDataLength: UInt32, dwLocalAddressLength: UInt32, dwRemoteAddressLength: UInt32, lpdwBytesReceived: CPointer<UInt32>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): Int32
     // param-hint: lpOverlapped optional
     // param-hint: lpTransmitBuffers optional
     func TransmitFile(hSocket: Win32__impl_l0.SOCKET, hFile: CPointer<Unit>, nNumberOfBytesToWrite: UInt32, nNumberOfBytesPerSend: UInt32, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, lpTransmitBuffers: CPointer<Win32__impl_l0.TRANSMIT_FILE_BUFFERSAbi>, dwReserved: UInt32): Int32
 }
 
-@When[WS2_32 == "on"]
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_TransmitFile == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_TransmitFile(hSocket: Win32__impl_l0.SOCKET, hFile: CPointer<Unit>, nNumberOfBytesToWrite: UInt32, nNumberOfBytesPerSend: UInt32, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, lpTransmitBuffers: CPointer<Win32__impl_l0.TRANSMIT_FILE_BUFFERSAbi>, dwReserved: UInt32): Int32 {
+    return TransmitFile(hSocket, hFile, nNumberOfBytesToWrite, nNumberOfBytesPerSend, lpOverlapped, lpTransmitBuffers, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_WSARecvEx == "on"]
+foreign {
+    // param-hint: buf bytes=param[2]
+    // pinvoke-hint: SetLastError
+    func WSARecvEx(s: Win32__impl_l0.SOCKET, buf: CPointer<UInt8>, len: Int32, flags: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && MSWSOCK == "on" && Windows_Win32_Networking_WinSock_WSARecvEx == "on"]
+public unsafe func Windows_WSARecvEx(s: Win32__impl_l0.SOCKET, buf: CPointer<UInt8>, len: Int32, flags: CPointer<Int32>): Int32 {
+    return WSARecvEx(s, buf, len, flags)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_FreeAddrInfoEx == "on"]
 foreign {
     // param-hint: pAddrInfoEx optional
     func FreeAddrInfoEx(pAddrInfoEx: CPointer<Win32__impl_l1.ADDRINFOEXAAbi>): Unit
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_FreeAddrInfoEx == "on"]
+public unsafe func Windows_FreeAddrInfoEx(pAddrInfoEx: CPointer<Win32__impl_l1.ADDRINFOEXAAbi>): Unit {
+    FreeAddrInfoEx(pAddrInfoEx)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_FreeAddrInfoExW == "on"]
+foreign {
     // param-hint: pAddrInfoEx optional
     func FreeAddrInfoExW(pAddrInfoEx: CPointer<Win32__impl_l1.ADDRINFOEXWAbi>): Unit
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_FreeAddrInfoExW == "on"]
+public unsafe func Windows_FreeAddrInfoExW(pAddrInfoEx: CPointer<Win32__impl_l1.ADDRINFOEXWAbi>): Unit {
+    FreeAddrInfoExW(pAddrInfoEx)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_FreeAddrInfoW == "on"]
+foreign {
     // param-hint: pAddrInfo optional
     func FreeAddrInfoW(pAddrInfo: CPointer<Win32__impl_l1.ADDRINFOWAbi>): Unit
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_FreeAddrInfoW == "on"]
+public unsafe func Windows_FreeAddrInfoW(pAddrInfo: CPointer<Win32__impl_l1.ADDRINFOWAbi>): Unit {
+    FreeAddrInfoW(pAddrInfo)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_GetAddrInfoExA == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    // param-hint: pName optional
+    // param-hint: pServiceName optional
+    // param-hint: lpNspId optional
+    // param-hint: hints optional
+    // param-hint: timeout optional
+    // param-hint: lpOverlapped optional
+    // param-hint: lpCompletionRoutine optional
+    // param-hint: lpNameHandle optional
+    func GetAddrInfoExA(pName: CPointer<UInt8>, pServiceName: CPointer<UInt8>, dwNameSpace: UInt32, lpNspId: CPointer<GUID>, hints: CPointer<Win32__impl_l1.ADDRINFOEXAAbi>, ppResult: CPointer<CPointer<Win32__impl_l1.ADDRINFOEXAAbi>>, timeout: CPointer<Win32__impl_l0.TIMEVALAbi>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, lpCompletionRoutine: Win32__impl_l0.LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_GetAddrInfoExA == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_GetAddrInfoExA(pName: CPointer<UInt8>, pServiceName: CPointer<UInt8>, dwNameSpace: UInt32, lpNspId: CPointer<GUID>, hints: CPointer<Win32__impl_l1.ADDRINFOEXAAbi>, ppResult: CPointer<CPointer<Win32__impl_l1.ADDRINFOEXAAbi>>, timeout: CPointer<Win32__impl_l0.TIMEVALAbi>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, lpCompletionRoutine: Win32__impl_l0.LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle: CPointer<CPointer<Unit>>): Int32 {
+    return GetAddrInfoExA(pName, pServiceName, dwNameSpace, lpNspId, hints, ppResult, timeout, lpOverlapped, lpCompletionRoutine, lpNameHandle)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_GetAddrInfoExCancel == "on"]
+foreign {
     func GetAddrInfoExCancel(lpHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_GetAddrInfoExCancel == "on"]
+public unsafe func Windows_GetAddrInfoExCancel(lpHandle: CPointer<CPointer<Unit>>): Int32 {
+    return GetAddrInfoExCancel(lpHandle)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_GetAddrInfoExOverlappedResult == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    func GetAddrInfoExOverlappedResult(lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_GetAddrInfoExOverlappedResult == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_GetAddrInfoExOverlappedResult(lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): Int32 {
+    return GetAddrInfoExOverlappedResult(lpOverlapped)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_GetAddrInfoExW == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    // param-hint: pName optional
+    // param-hint: pServiceName optional
+    // param-hint: lpNspId optional
+    // param-hint: hints optional
+    // param-hint: timeout optional
+    // param-hint: lpOverlapped optional
+    // param-hint: lpCompletionRoutine optional
+    // param-hint: lpHandle optional
+    func GetAddrInfoExW(pName: CPointer<UInt16>, pServiceName: CPointer<UInt16>, dwNameSpace: UInt32, lpNspId: CPointer<GUID>, hints: CPointer<Win32__impl_l1.ADDRINFOEXWAbi>, ppResult: CPointer<CPointer<Win32__impl_l1.ADDRINFOEXWAbi>>, timeout: CPointer<Win32__impl_l0.TIMEVALAbi>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, lpCompletionRoutine: Win32__impl_l0.LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_GetAddrInfoExW == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_GetAddrInfoExW(pName: CPointer<UInt16>, pServiceName: CPointer<UInt16>, dwNameSpace: UInt32, lpNspId: CPointer<GUID>, hints: CPointer<Win32__impl_l1.ADDRINFOEXWAbi>, ppResult: CPointer<CPointer<Win32__impl_l1.ADDRINFOEXWAbi>>, timeout: CPointer<Win32__impl_l0.TIMEVALAbi>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, lpCompletionRoutine: Win32__impl_l0.LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpHandle: CPointer<CPointer<Unit>>): Int32 {
+    return GetAddrInfoExW(pName, pServiceName, dwNameSpace, lpNspId, hints, ppResult, timeout, lpOverlapped, lpCompletionRoutine, lpHandle)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_GetAddrInfoW == "on"]
+foreign {
     // param-hint: pNodeName optional
     // param-hint: pServiceName optional
     // param-hint: pHints optional
     func GetAddrInfoW(pNodeName: CPointer<UInt16>, pServiceName: CPointer<UInt16>, pHints: CPointer<Win32__impl_l1.ADDRINFOWAbi>, ppResult: CPointer<CPointer<Win32__impl_l1.ADDRINFOWAbi>>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_GetAddrInfoW == "on"]
+public unsafe func Windows_GetAddrInfoW(pNodeName: CPointer<UInt16>, pServiceName: CPointer<UInt16>, pHints: CPointer<Win32__impl_l1.ADDRINFOWAbi>, ppResult: CPointer<CPointer<Win32__impl_l1.ADDRINFOWAbi>>): Int32 {
+    return GetAddrInfoW(pNodeName, pServiceName, pHints, ppResult)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_GetHostNameW == "on"]
+foreign {
     // param-hint: name len=param[1]
     // pinvoke-hint: SetLastError
     func GetHostNameW(name: CPointer<UInt16>, namelen: Int32): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_GetHostNameW == "on"]
+public unsafe func Windows_GetHostNameW(name: CPointer<UInt16>, namelen: Int32): Int32 {
+    return GetHostNameW(name, namelen)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_GetNameInfoW == "on"]
+foreign {
     // param-hint: pSockaddr bytes=param[1]
     // param-hint: pNodeBuffer len=param[3] optional
     // param-hint: pServiceBuffer len=param[5] optional
     func GetNameInfoW(pSockaddr: CPointer<Win32__impl_l1.SOCKADDRAbi>, SockaddrLength: Win32__impl_l0.socklen_t, pNodeBuffer: CPointer<UInt16>, NodeBufferSize: UInt32, pServiceBuffer: CPointer<UInt16>, ServiceBufferSize: UInt32, Flags: Int32): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_GetNameInfoW == "on"]
+public unsafe func Windows_GetNameInfoW(pSockaddr: CPointer<Win32__impl_l1.SOCKADDRAbi>, SockaddrLength: Win32__impl_l0.socklen_t, pNodeBuffer: CPointer<UInt16>, NodeBufferSize: UInt32, pServiceBuffer: CPointer<UInt16>, ServiceBufferSize: UInt32, Flags: Int32): Int32 {
+    return GetNameInfoW(pSockaddr, SockaddrLength, pNodeBuffer, NodeBufferSize, pServiceBuffer, ServiceBufferSize, Flags)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_InetNtopW == "on"]
+foreign {
     // param-hint: pStringBuf len=param[3]
     func InetNtopW(Family: Int32, pAddr: CPointer<Unit>, pStringBuf: CPointer<UInt16>, StringBufSize: UIntNative): CPointer<UInt16>
-    func InetPtonW(Family: Int32, pszAddrString: CPointer<UInt16>, pAddrBuf: CPointer<Unit>): Int32
-    // param-hint: addr bytes=param[2] optional
-    // param-hint: addrlen optional
-    // param-hint: lpfnCondition optional
-    // param-hint: dwCallbackData optional
-    // pinvoke-hint: SetLastError
-    func WSAAccept(s: Win32__impl_l0.SOCKET, addr: CPointer<Win32__impl_l1.SOCKADDRAbi>, addrlen: CPointer<Int32>, lpfnCondition: Win32__impl_l1.LPCONDITIONPROC, dwCallbackData: UIntNative): Win32__impl_l0.SOCKET
-    // param-hint: lpsaAddress bytes=param[1]
-    // param-hint: lpProtocolInfo optional
-    // param-hint: lpszAddressString len=param[4]
-    // pinvoke-hint: SetLastError
-    func WSAAddressToStringA(lpsaAddress: CPointer<Win32__impl_l1.SOCKADDRAbi>, dwAddressLength: UInt32, lpProtocolInfo: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOAAbi>, lpszAddressString: CPointer<UInt8>, lpdwAddressStringLength: CPointer<UInt32>): Int32
-    // param-hint: lpsaAddress bytes=param[1]
-    // param-hint: lpProtocolInfo optional
-    // param-hint: lpszAddressString len=param[4]
-    // pinvoke-hint: SetLastError
-    func WSAAddressToStringW(lpsaAddress: CPointer<Win32__impl_l1.SOCKADDRAbi>, dwAddressLength: UInt32, lpProtocolInfo: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>, lpszAddressString: CPointer<UInt16>, lpdwAddressStringLength: CPointer<UInt32>): Int32
-    // param-hint: addr bytes=param[3]
-    // param-hint: buf bytes=param[6]
-    // pinvoke-hint: SetLastError
-    func WSAAsyncGetHostByAddr(hWnd: CPointer<Unit>, wMsg: UInt32, addr: CPointer<UInt8>, len: Int32, type_: Int32, buf: CPointer<UInt8>, buflen: Int32): CPointer<Unit>
-    // param-hint: buf bytes=param[4]
-    // pinvoke-hint: SetLastError
-    func WSAAsyncGetHostByName(hWnd: CPointer<Unit>, wMsg: UInt32, name: CPointer<UInt8>, buf: CPointer<UInt8>, buflen: Int32): CPointer<Unit>
-    // param-hint: buf bytes=param[4]
-    // pinvoke-hint: SetLastError
-    func WSAAsyncGetProtoByName(hWnd: CPointer<Unit>, wMsg: UInt32, name: CPointer<UInt8>, buf: CPointer<UInt8>, buflen: Int32): CPointer<Unit>
-    // param-hint: buf bytes=param[4]
-    // pinvoke-hint: SetLastError
-    func WSAAsyncGetProtoByNumber(hWnd: CPointer<Unit>, wMsg: UInt32, number: Int32, buf: CPointer<UInt8>, buflen: Int32): CPointer<Unit>
-    // param-hint: buf bytes=param[5]
-    // pinvoke-hint: SetLastError
-    func WSAAsyncGetServByName(hWnd: CPointer<Unit>, wMsg: UInt32, name: CPointer<UInt8>, proto: CPointer<UInt8>, buf: CPointer<UInt8>, buflen: Int32): CPointer<Unit>
-    // param-hint: buf bytes=param[5]
-    // pinvoke-hint: SetLastError
-    func WSAAsyncGetServByPort(hWnd: CPointer<Unit>, wMsg: UInt32, port: Int32, proto: CPointer<UInt8>, buf: CPointer<UInt8>, buflen: Int32): CPointer<Unit>
-    // pinvoke-hint: SetLastError
-    func WSAAsyncSelect(s: Win32__impl_l0.SOCKET, hWnd: CPointer<Unit>, wMsg: UInt32, lEvent: Int32): Int32
-    // pinvoke-hint: SetLastError
-    func WSACancelAsyncRequest(hAsyncTaskHandle: CPointer<Unit>): Int32
-    // pinvoke-hint: SetLastError
-    func WSACancelBlockingCall(): Int32
-    // pinvoke-hint: SetLastError
-    func WSACleanup(): Int32
-    // pinvoke-hint: SetLastError
-    func WSACloseEvent(hEvent: Win32__impl_l0.WSAEVENT): Int32
-    // param-hint: name bytes=param[2]
-    // param-hint: lpCallerData optional
-    // param-hint: lpCalleeData optional
-    // param-hint: lpSQOS optional
-    // param-hint: lpGQOS optional
-    // pinvoke-hint: SetLastError
-    func WSAConnect(s: Win32__impl_l0.SOCKET, name: CPointer<Win32__impl_l1.SOCKADDRAbi>, namelen: Int32, lpCallerData: CPointer<Win32__impl_l0.WSABUFAbi>, lpCalleeData: CPointer<Win32__impl_l0.WSABUFAbi>, lpSQOS: CPointer<Win32__impl_l1.QOSAbi>, lpGQOS: CPointer<Win32__impl_l1.QOSAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func WSACreateEvent(): Win32__impl_l0.WSAEVENT
-    // pinvoke-hint: SetLastError
-    func WSADuplicateSocketA(s: Win32__impl_l0.SOCKET, dwProcessId: UInt32, lpProtocolInfo: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOAAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func WSADuplicateSocketW(s: Win32__impl_l0.SOCKET, dwProcessId: UInt32, lpProtocolInfo: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>): Int32
-    // param-hint: lpnspBuffer bytes=param[0]
-    // pinvoke-hint: SetLastError
-    func WSAEnumNameSpaceProvidersA(lpdwBufferLength: CPointer<UInt32>, lpnspBuffer: CPointer<Win32__impl_l0.WSANAMESPACE_INFOAAbi>): Int32
-    // param-hint: lpnspBuffer bytes=param[0]
-    // pinvoke-hint: SetLastError
-    func WSAEnumNameSpaceProvidersW(lpdwBufferLength: CPointer<UInt32>, lpnspBuffer: CPointer<Win32__impl_l0.WSANAMESPACE_INFOWAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func WSAEnumNetworkEvents(s: Win32__impl_l0.SOCKET, hEventObject: Win32__impl_l0.WSAEVENT, lpNetworkEvents: CPointer<Win32__impl_l0.WSANETWORKEVENTSAbi>): Int32
-    // param-hint: lpiProtocols optional
-    // param-hint: lpProtocolBuffer bytes=param[2] optional
-    // pinvoke-hint: SetLastError
-    func WSAEnumProtocolsA(lpiProtocols: CPointer<Int32>, lpProtocolBuffer: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOAAbi>, lpdwBufferLength: CPointer<UInt32>): Int32
-    // param-hint: lpiProtocols optional
-    // param-hint: lpProtocolBuffer bytes=param[2] optional
-    // pinvoke-hint: SetLastError
-    func WSAEnumProtocolsW(lpiProtocols: CPointer<Int32>, lpProtocolBuffer: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>, lpdwBufferLength: CPointer<UInt32>): Int32
-    // param-hint: hEventObject optional
-    // pinvoke-hint: SetLastError
-    func WSAEventSelect(s: Win32__impl_l0.SOCKET, hEventObject: Win32__impl_l0.WSAEVENT, lNetworkEvents: Int32): Int32
-    // pinvoke-hint: SetLastError
-    func WSAGetLastError(): Win32__impl_l0.WSA_ERRORAbi
-    // pinvoke-hint: SetLastError
-    func WSAGetQOSByName(s: Win32__impl_l0.SOCKET, lpQOSName: CPointer<Win32__impl_l0.WSABUFAbi>, lpQOS: CPointer<Win32__impl_l1.QOSAbi>): Int32
-    // param-hint: lpServiceClassInfo bytes=param[2]
-    // pinvoke-hint: SetLastError
-    func WSAGetServiceClassInfoA(lpProviderId: CPointer<GUID>, lpServiceClassId: CPointer<GUID>, lpdwBufSize: CPointer<UInt32>, lpServiceClassInfo: CPointer<Win32__impl_l1.WSASERVICECLASSINFOAAbi>): Int32
-    // param-hint: lpServiceClassInfo bytes=param[2]
-    // pinvoke-hint: SetLastError
-    func WSAGetServiceClassInfoW(lpProviderId: CPointer<GUID>, lpServiceClassId: CPointer<GUID>, lpdwBufSize: CPointer<UInt32>, lpServiceClassInfo: CPointer<Win32__impl_l1.WSASERVICECLASSINFOWAbi>): Int32
-    // param-hint: lpszServiceClassName bytes=param[2]
-    // pinvoke-hint: SetLastError
-    func WSAGetServiceClassNameByClassIdA(lpServiceClassId: CPointer<GUID>, lpszServiceClassName: CPointer<UInt8>, lpdwBufferLength: CPointer<UInt32>): Int32
-    // param-hint: lpszServiceClassName bytes=param[2]
-    // pinvoke-hint: SetLastError
-    func WSAGetServiceClassNameByClassIdW(lpServiceClassId: CPointer<GUID>, lpszServiceClassName: CPointer<UInt16>, lpdwBufferLength: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func WSAHtonl(s: Win32__impl_l0.SOCKET, hostlong: UInt32, lpnetlong: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func WSAHtons(s: Win32__impl_l0.SOCKET, hostshort: UInt16, lpnetshort: CPointer<UInt16>): Int32
-    // pinvoke-hint: SetLastError
-    func WSAInstallServiceClassA(lpServiceClassInfo: CPointer<Win32__impl_l1.WSASERVICECLASSINFOAAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func WSAInstallServiceClassW(lpServiceClassInfo: CPointer<Win32__impl_l1.WSASERVICECLASSINFOWAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func WSAIsBlocking(): Int32
-    // param-hint: name bytes=param[2]
-    // param-hint: lpCallerData optional
-    // param-hint: lpCalleeData optional
-    // param-hint: lpSQOS optional
-    // param-hint: lpGQOS optional
-    // pinvoke-hint: SetLastError
-    func WSAJoinLeaf(s: Win32__impl_l0.SOCKET, name: CPointer<Win32__impl_l1.SOCKADDRAbi>, namelen: Int32, lpCallerData: CPointer<Win32__impl_l0.WSABUFAbi>, lpCalleeData: CPointer<Win32__impl_l0.WSABUFAbi>, lpSQOS: CPointer<Win32__impl_l1.QOSAbi>, lpGQOS: CPointer<Win32__impl_l1.QOSAbi>, dwFlags: UInt32): Win32__impl_l0.SOCKET
-    // pinvoke-hint: SetLastError
-    func WSALookupServiceEnd(hLookup: CPointer<Unit>): Int32
-    // pinvoke-hint: SetLastError
-    func WSANtohl(s: Win32__impl_l0.SOCKET, netlong: UInt32, lphostlong: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func WSANtohs(s: Win32__impl_l0.SOCKET, netshort: UInt16, lphostshort: CPointer<UInt16>): Int32
-    // pinvoke-hint: SetLastError
-    func WSAPoll(fdArray: CPointer<Win32__impl_l1.WSAPOLLFDAbi>, fds: UInt32, timeout: Int32): Int32
-    // pinvoke-hint: SetLastError
-    func WSAProviderCompleteAsyncCall(hAsyncCall: CPointer<Unit>, iRetCode: Int32): Int32
-    // param-hint: lpInboundDisconnectData optional
-    // pinvoke-hint: SetLastError
-    func WSARecvDisconnect(s: Win32__impl_l0.SOCKET, lpInboundDisconnectData: CPointer<Win32__impl_l0.WSABUFAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func WSARemoveServiceClass(lpServiceClassId: CPointer<GUID>): Int32
-    // pinvoke-hint: SetLastError
-    func WSAResetEvent(hEvent: Win32__impl_l0.WSAEVENT): Int32
-    // param-hint: lpOutboundDisconnectData optional
-    // pinvoke-hint: SetLastError
-    func WSASendDisconnect(s: Win32__impl_l0.SOCKET, lpOutboundDisconnectData: CPointer<Win32__impl_l0.WSABUFAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func WSASetBlockingHook(lpBlockFunc: Win32_Foundation.FARPROC): Win32_Foundation.FARPROC
-    // pinvoke-hint: SetLastError
-    func WSASetEvent(hEvent: Win32__impl_l0.WSAEVENT): Int32
-    // pinvoke-hint: SetLastError
-    func WSASetLastError(iError: Int32): Unit
-    // param-hint: lpProtocolInfo optional
-    // pinvoke-hint: SetLastError
-    func WSASocketA(af: Int32, type_: Int32, protocol: Int32, lpProtocolInfo: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOAAbi>, g: UInt32, dwFlags: UInt32): Win32__impl_l0.SOCKET
-    // param-hint: lpProtocolInfo optional
-    // pinvoke-hint: SetLastError
-    func WSASocketW(af: Int32, type_: Int32, protocol: Int32, lpProtocolInfo: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>, g: UInt32, dwFlags: UInt32): Win32__impl_l0.SOCKET
-    // param-hint: lpProtocolInfo optional
-    // param-hint: lpAddress bytes=param[4]
-    // pinvoke-hint: SetLastError
-    func WSAStringToAddressA(AddressString: CPointer<UInt8>, AddressFamily: Int32, lpProtocolInfo: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOAAbi>, lpAddress: CPointer<Win32__impl_l1.SOCKADDRAbi>, lpAddressLength: CPointer<Int32>): Int32
-    // param-hint: lpProtocolInfo optional
-    // param-hint: lpAddress bytes=param[4]
-    // pinvoke-hint: SetLastError
-    func WSAStringToAddressW(AddressString: CPointer<UInt16>, AddressFamily: Int32, lpProtocolInfo: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>, lpAddress: CPointer<Win32__impl_l1.SOCKADDRAbi>, lpAddressLength: CPointer<Int32>): Int32
-    // pinvoke-hint: SetLastError
-    func WSAUnadvertiseProvider(puuidProviderId: CPointer<GUID>): Int32
-    // pinvoke-hint: SetLastError
-    func WSAUnhookBlockingHook(): Int32
-    // param-hint: lphEvents len=param[0]
-    // pinvoke-hint: SetLastError
-    func WSAWaitForMultipleEvents(cEvents: UInt32, lphEvents: CPointer<CPointer<Unit>>, fWaitAll: Int32, dwTimeout: UInt32, fAlertable: Int32): Win32_Foundation.WAIT_EVENTAbi
-    func WSCDeinstallProvider(lpProviderId: CPointer<GUID>, lpErrno: CPointer<Int32>): Int32
-    func WSCEnableNSProvider(lpProviderId: CPointer<GUID>, fEnable: Int32): Int32
-    // param-hint: lpiProtocols optional
-    // param-hint: lpProtocolBuffer bytes=param[2] optional
-    func WSCEnumProtocols(lpiProtocols: CPointer<Int32>, lpProtocolBuffer: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>, lpdwBufferLength: CPointer<UInt32>, lpErrno: CPointer<Int32>): Int32
-    // param-hint: Path len=param[1]
-    // param-hint: Extra len=param[3] optional
-    func WSCGetApplicationCategory(Path: CPointer<UInt16>, PathLength: UInt32, Extra: CPointer<UInt16>, ExtraLength: UInt32, pPermittedLspCategories: CPointer<UInt32>, lpErrno: CPointer<Int32>): Int32
-    // param-hint: Info bytes=param[3]
-    func WSCGetProviderInfo(lpProviderId: CPointer<GUID>, InfoType: Win32__impl_l0.WSC_PROVIDER_INFO_TYPEAbi, Info: CPointer<UInt8>, InfoSize: CPointer<UIntNative>, Flags: UInt32, lpErrno: CPointer<Int32>): Int32
-    // param-hint: lpszProviderDllPath len=param[2]
-    func WSCGetProviderPath(lpProviderId: CPointer<GUID>, lpszProviderDllPath: CPointer<UInt16>, lpProviderDllPathLen: CPointer<Int32>, lpErrno: CPointer<Int32>): Int32
-    func WSCInstallNameSpace(lpszIdentifier: CPointer<UInt16>, lpszPathName: CPointer<UInt16>, dwNameSpace: UInt32, dwVersion: UInt32, lpProviderId: CPointer<GUID>): Int32
-    // param-hint: lpProtocolInfoList len=param[3]
-    func WSCInstallProvider(lpProviderId: CPointer<GUID>, lpszProviderDllPath: CPointer<UInt16>, lpProtocolInfoList: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>, dwNumberOfEntries: UInt32, lpErrno: CPointer<Int32>): Int32
-    // param-hint: Path len=param[1]
-    // param-hint: Extra len=param[3] optional
-    // param-hint: pPrevPermLspCat optional
-    func WSCSetApplicationCategory(Path: CPointer<UInt16>, PathLength: UInt32, Extra: CPointer<UInt16>, ExtraLength: UInt32, PermittedLspCategories: UInt32, pPrevPermLspCat: CPointer<UInt32>, lpErrno: CPointer<Int32>): Int32
-    // param-hint: Info bytes=param[3]
-    func WSCSetProviderInfo(lpProviderId: CPointer<GUID>, InfoType: Win32__impl_l0.WSC_PROVIDER_INFO_TYPEAbi, Info: CPointer<UInt8>, InfoSize: UIntNative, Flags: UInt32, lpErrno: CPointer<Int32>): Int32
-    func WSCUnInstallNameSpace(lpProviderId: CPointer<GUID>): Int32
-    // param-hint: lpProtocolInfoList len=param[3]
-    func WSCUpdateProvider(lpProviderId: CPointer<GUID>, lpszProviderDllPath: CPointer<UInt16>, lpProtocolInfoList: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>, dwNumberOfEntries: UInt32, lpErrno: CPointer<Int32>): Int32
-    func WSCWriteNameSpaceOrder(lpProviderId: CPointer<GUID>, dwNumberOfEntries: UInt32): Int32
-    func WSCWriteProviderOrder(lpwdCatalogEntryId: CPointer<UInt32>, dwNumberOfEntries: UInt32): Int32
-    func __WSAFDIsSet(fd: Win32__impl_l0.SOCKET, param1: CPointer<Win32__impl_l1.FD_SETAbi>): Int32
-    // param-hint: addr bytes=param[2] optional
-    // param-hint: addrlen optional
-    // pinvoke-hint: SetLastError
-    func accept(s: Win32__impl_l0.SOCKET, addr: CPointer<Win32__impl_l1.SOCKADDRAbi>, addrlen: CPointer<Int32>): Win32__impl_l0.SOCKET
-    // param-hint: name bytes=param[2]
-    // pinvoke-hint: SetLastError
-    func bind(s: Win32__impl_l0.SOCKET, name: CPointer<Win32__impl_l1.SOCKADDRAbi>, namelen: Int32): Int32
-    // pinvoke-hint: SetLastError
-    func closesocket(s: Win32__impl_l0.SOCKET): Int32
-    // param-hint: name bytes=param[2]
-    // pinvoke-hint: SetLastError
-    func connect(s: Win32__impl_l0.SOCKET, name: CPointer<Win32__impl_l1.SOCKADDRAbi>, namelen: Int32): Int32
-    // param-hint: pAddrInfo optional
-    // pinvoke-hint: SetLastError
-    func freeaddrinfo(pAddrInfo: CPointer<Win32__impl_l1.ADDRINFOAAbi>): Unit
-    // param-hint: pNodeName optional
-    // param-hint: pServiceName optional
-    // param-hint: pHints optional
-    // pinvoke-hint: SetLastError
-    func getaddrinfo(pNodeName: CPointer<UInt8>, pServiceName: CPointer<UInt8>, pHints: CPointer<Win32__impl_l1.ADDRINFOAAbi>, ppResult: CPointer<CPointer<Win32__impl_l1.ADDRINFOAAbi>>): Int32
-    // param-hint: addr bytes=param[1]
-    // pinvoke-hint: SetLastError
-    func gethostbyaddr(addr: CPointer<UInt8>, len: Int32, type_: Int32): CPointer<Win32__impl_l0.HOSTENTAbi>
-    // pinvoke-hint: SetLastError
-    func gethostbyname(name: CPointer<UInt8>): CPointer<Win32__impl_l0.HOSTENTAbi>
-    // param-hint: name bytes=param[1]
-    // pinvoke-hint: SetLastError
-    func gethostname(name: CPointer<UInt8>, namelen: Int32): Int32
-    // param-hint: pSockaddr bytes=param[1]
-    // param-hint: pNodeBuffer len=param[3] optional
-    // param-hint: pServiceBuffer len=param[5] optional
-    // pinvoke-hint: SetLastError
-    func getnameinfo(pSockaddr: CPointer<Win32__impl_l1.SOCKADDRAbi>, SockaddrLength: Win32__impl_l0.socklen_t, pNodeBuffer: CPointer<UInt8>, NodeBufferSize: UInt32, pServiceBuffer: CPointer<UInt8>, ServiceBufferSize: UInt32, Flags: Int32): Int32
-    // param-hint: name bytes=param[2]
-    // pinvoke-hint: SetLastError
-    func getpeername(s: Win32__impl_l0.SOCKET, name: CPointer<Win32__impl_l1.SOCKADDRAbi>, namelen: CPointer<Int32>): Int32
-    // pinvoke-hint: SetLastError
-    func getprotobyname(name: CPointer<UInt8>): CPointer<Win32__impl_l0.PROTOENTAbi>
-    // pinvoke-hint: SetLastError
-    func getprotobynumber(number: Int32): CPointer<Win32__impl_l0.PROTOENTAbi>
-    // param-hint: name bytes=param[2]
-    // pinvoke-hint: SetLastError
-    func getsockname(s: Win32__impl_l0.SOCKET, name: CPointer<Win32__impl_l1.SOCKADDRAbi>, namelen: CPointer<Int32>): Int32
-    // param-hint: optval bytes=param[4]
-    // pinvoke-hint: SetLastError
-    func getsockopt(s: Win32__impl_l0.SOCKET, level: Int32, optname: Int32, optval: CPointer<UInt8>, optlen: CPointer<Int32>): Int32
-    // pinvoke-hint: SetLastError
-    func htonl(hostlong: UInt32): UInt32
-    // pinvoke-hint: SetLastError
-    func htons(hostshort: UInt16): UInt16
-    // pinvoke-hint: SetLastError
-    func inet_addr(cp: CPointer<UInt8>): UInt32
-    // pinvoke-hint: SetLastError
-    func inet_ntoa(in_: Win32__impl_l0.IN_ADDRAbi): CPointer<UInt8>
-    // param-hint: pStringBuf len=param[3]
-    // pinvoke-hint: SetLastError
-    func inet_ntop(Family: Int32, pAddr: CPointer<Unit>, pStringBuf: CPointer<UInt8>, StringBufSize: UIntNative): CPointer<UInt8>
-    // pinvoke-hint: SetLastError
-    func inet_pton(Family: Int32, pszAddrString: CPointer<UInt8>, pAddrBuf: CPointer<Unit>): Int32
-    // pinvoke-hint: SetLastError
-    func ioctlsocket(s: Win32__impl_l0.SOCKET, cmd: Int32, argp: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func listen(s: Win32__impl_l0.SOCKET, backlog: Int32): Int32
-    // pinvoke-hint: SetLastError
-    func ntohl(netlong: UInt32): UInt32
-    // pinvoke-hint: SetLastError
-    func ntohs(netshort: UInt16): UInt16
-    // param-hint: buf bytes=param[2]
-    // pinvoke-hint: SetLastError
-    func recv(s: Win32__impl_l0.SOCKET, buf: CPointer<UInt8>, len: Int32, flags: Win32__impl_l0.SEND_RECV_FLAGSAbi): Int32
-    // param-hint: buf bytes=param[2]
-    // param-hint: from bytes=param[5] optional
-    // param-hint: fromlen optional
-    // pinvoke-hint: SetLastError
-    func recvfrom(s: Win32__impl_l0.SOCKET, buf: CPointer<UInt8>, len: Int32, flags: Int32, from: CPointer<Win32__impl_l1.SOCKADDRAbi>, fromlen: CPointer<Int32>): Int32
-    // param-hint: readfds optional
-    // param-hint: writefds optional
-    // param-hint: exceptfds optional
-    // param-hint: timeout optional
-    // pinvoke-hint: SetLastError
-    func select(nfds: Int32, readfds: CPointer<Win32__impl_l1.FD_SETAbi>, writefds: CPointer<Win32__impl_l1.FD_SETAbi>, exceptfds: CPointer<Win32__impl_l1.FD_SETAbi>, timeout: CPointer<Win32__impl_l0.TIMEVALAbi>): Int32
-    // param-hint: buf bytes=param[2]
-    // pinvoke-hint: SetLastError
-    func send(s: Win32__impl_l0.SOCKET, buf: CPointer<UInt8>, len: Int32, flags: Win32__impl_l0.SEND_RECV_FLAGSAbi): Int32
-    // param-hint: buf bytes=param[2]
-    // param-hint: to bytes=param[5]
-    // pinvoke-hint: SetLastError
-    func sendto(s: Win32__impl_l0.SOCKET, buf: CPointer<UInt8>, len: Int32, flags: Int32, to: CPointer<Win32__impl_l1.SOCKADDRAbi>, tolen: Int32): Int32
-    // param-hint: optval bytes=param[4] optional
-    // pinvoke-hint: SetLastError
-    func setsockopt(s: Win32__impl_l0.SOCKET, level: Int32, optname: Int32, optval: CPointer<UInt8>, optlen: Int32): Int32
-    // pinvoke-hint: SetLastError
-    func shutdown(s: Win32__impl_l0.SOCKET, how: Win32__impl_l0.WINSOCK_SHUTDOWN_HOWAbi): Int32
-    // pinvoke-hint: SetLastError
-    func socket(af: Int32, type_: Win32__impl_l0.WINSOCK_SOCKET_TYPEAbi, protocol: Int32): Win32__impl_l0.SOCKET
 }
 
-@When[WS2_32 == "on" && ((arch == "x86_64" || arch == "aarch64"))]
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_InetNtopW == "on"]
+public unsafe func Windows_InetNtopW(Family: Int32, pAddr: CPointer<Unit>, pStringBuf: CPointer<UInt16>, StringBufSize: UIntNative): CPointer<UInt16> {
+    return InetNtopW(Family, pAddr, pStringBuf, StringBufSize)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_InetPtonW == "on"]
 foreign {
-    // pinvoke-hint: SetLastError
-    func WSAStartup(wVersionRequested: UInt16, lpWSAData: CPointer<Win32__impl_l0.WSADATAAbi>): Int32
-    // param-hint: proto optional
-    // pinvoke-hint: SetLastError
-    func getservbyname(name: CPointer<UInt8>, proto: CPointer<UInt8>): CPointer<Win32__impl_l0.SERVENTAbi>
-    // param-hint: proto optional
-    // pinvoke-hint: SetLastError
-    func getservbyport(port: Int32, proto: CPointer<UInt8>): CPointer<Win32__impl_l0.SERVENTAbi>
+    func InetPtonW(Family: Int32, pszAddrString: CPointer<UInt16>, pAddrBuf: CPointer<Unit>): Int32
 }
 
-@When[WS2_32 == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_IO == "on")]
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_InetPtonW == "on"]
+public unsafe func Windows_InetPtonW(Family: Int32, pszAddrString: CPointer<UInt16>, pAddrBuf: CPointer<Unit>): Int32 {
+    return InetPtonW(Family, pszAddrString, pAddrBuf)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_ProcessSocketNotifications == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    // param-hint: registrationInfos len=param[1] optional
+    // param-hint: completionPortEntries len=param[4] optional
+    // param-hint: receivedEntryCount optional
+    func ProcessSocketNotifications(completionPort: CPointer<Unit>, registrationCount: UInt32, registrationInfos: CPointer<Win32__impl_l1.SOCK_NOTIFY_REGISTRATIONAbi>, timeoutMs: UInt32, completionCount: UInt32, completionPortEntries: CPointer<Win32_System_IO.OVERLAPPED_ENTRYAbi>, receivedEntryCount: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_ProcessSocketNotifications == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_ProcessSocketNotifications(completionPort: CPointer<Unit>, registrationCount: UInt32, registrationInfos: CPointer<Win32__impl_l1.SOCK_NOTIFY_REGISTRATIONAbi>, timeoutMs: UInt32, completionCount: UInt32, completionPortEntries: CPointer<Win32_System_IO.OVERLAPPED_ENTRYAbi>, receivedEntryCount: CPointer<UInt32>): UInt32 {
+    return ProcessSocketNotifications(completionPort, registrationCount, registrationInfos, timeoutMs, completionCount, completionPortEntries, receivedEntryCount)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_SetAddrInfoExA == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_IO == "on"]
 foreign {
     // param-hint: pServiceName optional
     // param-hint: pAddresses optional
@@ -629,6 +606,15 @@ foreign {
     // param-hint: lpCompletionRoutine optional
     // param-hint: lpNameHandle optional
     func SetAddrInfoExA(pName: CPointer<UInt8>, pServiceName: CPointer<UInt8>, pAddresses: CPointer<Win32__impl_l1.SOCKET_ADDRESSAbi>, dwAddressCount: UInt32, lpBlob: CPointer<Win32__impl_l0.BLOBAbi>, dwFlags: UInt32, dwNameSpace: UInt32, lpNspId: CPointer<GUID>, timeout: CPointer<Win32__impl_l0.TIMEVALAbi>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, lpCompletionRoutine: Win32__impl_l0.LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_SetAddrInfoExA == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_SetAddrInfoExA(pName: CPointer<UInt8>, pServiceName: CPointer<UInt8>, pAddresses: CPointer<Win32__impl_l1.SOCKET_ADDRESSAbi>, dwAddressCount: UInt32, lpBlob: CPointer<Win32__impl_l0.BLOBAbi>, dwFlags: UInt32, dwNameSpace: UInt32, lpNspId: CPointer<GUID>, timeout: CPointer<Win32__impl_l0.TIMEVALAbi>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, lpCompletionRoutine: Win32__impl_l0.LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle: CPointer<CPointer<Unit>>): Int32 {
+    return SetAddrInfoExA(pName, pServiceName, pAddresses, dwAddressCount, lpBlob, dwFlags, dwNameSpace, lpNspId, timeout, lpOverlapped, lpCompletionRoutine, lpNameHandle)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_SetAddrInfoExW == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: pServiceName optional
     // param-hint: pAddresses optional
     // param-hint: lpBlob optional
@@ -640,94 +626,221 @@ foreign {
     func SetAddrInfoExW(pName: CPointer<UInt16>, pServiceName: CPointer<UInt16>, pAddresses: CPointer<Win32__impl_l1.SOCKET_ADDRESSAbi>, dwAddressCount: UInt32, lpBlob: CPointer<Win32__impl_l0.BLOBAbi>, dwFlags: UInt32, dwNameSpace: UInt32, lpNspId: CPointer<GUID>, timeout: CPointer<Win32__impl_l0.TIMEVALAbi>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, lpCompletionRoutine: Win32__impl_l0.LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[WS2_32 == "on" && (arch == "x86_64" && Windows_Win32_System_Com == "on" || arch == "aarch64" && Windows_Win32_System_Com == "on")]
-foreign {
-    // param-hint: lpnspBuffer bytes=param[0]
-    func WSCEnumNameSpaceProvidersEx32(lpdwBufferLength: CPointer<UInt32>, lpnspBuffer: CPointer<Win32__impl_l1.WSANAMESPACE_INFOEXWAbi>): Int32
-    func WSCInstallNameSpaceEx32(lpszIdentifier: CPointer<UInt16>, lpszPathName: CPointer<UInt16>, dwNameSpace: UInt32, dwVersion: UInt32, lpProviderId: CPointer<GUID>, lpProviderSpecific: CPointer<Win32__impl_l0.BLOBAbi>): Int32
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_SetAddrInfoExW == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_SetAddrInfoExW(pName: CPointer<UInt16>, pServiceName: CPointer<UInt16>, pAddresses: CPointer<Win32__impl_l1.SOCKET_ADDRESSAbi>, dwAddressCount: UInt32, lpBlob: CPointer<Win32__impl_l0.BLOBAbi>, dwFlags: UInt32, dwNameSpace: UInt32, lpNspId: CPointer<GUID>, timeout: CPointer<Win32__impl_l0.TIMEVALAbi>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, lpCompletionRoutine: Win32__impl_l0.LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle: CPointer<CPointer<Unit>>): Int32 {
+    return SetAddrInfoExW(pName, pServiceName, pAddresses, dwAddressCount, lpBlob, dwFlags, dwNameSpace, lpNspId, timeout, lpOverlapped, lpCompletionRoutine, lpNameHandle)
 }
 
-@When[WS2_32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WPUCompleteOverlappedRequest == "on" && Windows_Win32_System_IO == "on"]
 foreign {
-    func WSCDeinstallProvider32(lpProviderId: CPointer<GUID>, lpErrno: CPointer<Int32>): Int32
-    func WSCEnableNSProvider32(lpProviderId: CPointer<GUID>, fEnable: Int32): Int32
-    // param-hint: lpnspBuffer bytes=param[0]
-    func WSCEnumNameSpaceProviders32(lpdwBufferLength: CPointer<UInt32>, lpnspBuffer: CPointer<Win32__impl_l0.WSANAMESPACE_INFOWAbi>): Int32
-    // param-hint: lpiProtocols optional
-    // param-hint: lpProtocolBuffer bytes=param[2]
-    func WSCEnumProtocols32(lpiProtocols: CPointer<Int32>, lpProtocolBuffer: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>, lpdwBufferLength: CPointer<UInt32>, lpErrno: CPointer<Int32>): Int32
-    // param-hint: Info bytes=param[3]
-    func WSCGetProviderInfo32(lpProviderId: CPointer<GUID>, InfoType: Win32__impl_l0.WSC_PROVIDER_INFO_TYPEAbi, Info: CPointer<UInt8>, InfoSize: CPointer<UIntNative>, Flags: UInt32, lpErrno: CPointer<Int32>): Int32
-    // param-hint: lpszProviderDllPath len=param[2]
-    func WSCGetProviderPath32(lpProviderId: CPointer<GUID>, lpszProviderDllPath: CPointer<UInt16>, lpProviderDllPathLen: CPointer<Int32>, lpErrno: CPointer<Int32>): Int32
-    func WSCInstallNameSpace32(lpszIdentifier: CPointer<UInt16>, lpszPathName: CPointer<UInt16>, dwNameSpace: UInt32, dwVersion: UInt32, lpProviderId: CPointer<GUID>): Int32
-    // param-hint: lpProtocolInfoList len=param[3]
-    func WSCInstallProvider64_32(lpProviderId: CPointer<GUID>, lpszProviderDllPath: CPointer<UInt16>, lpProtocolInfoList: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>, dwNumberOfEntries: UInt32, lpErrno: CPointer<Int32>): Int32
-    // param-hint: lpProtocolInfoList len=param[6]
-    // param-hint: lpdwCatalogEntryId optional
-    func WSCInstallProviderAndChains64_32(lpProviderId: CPointer<GUID>, lpszProviderDllPath: CPointer<UInt16>, lpszProviderDllPath32: CPointer<UInt16>, lpszLspName: CPointer<UInt16>, dwServiceFlags: UInt32, lpProtocolInfoList: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>, dwNumberOfEntries: UInt32, lpdwCatalogEntryId: CPointer<UInt32>, lpErrno: CPointer<Int32>): Int32
-    // param-hint: Info bytes=param[3]
-    func WSCSetProviderInfo32(lpProviderId: CPointer<GUID>, InfoType: Win32__impl_l0.WSC_PROVIDER_INFO_TYPEAbi, Info: CPointer<UInt8>, InfoSize: UIntNative, Flags: UInt32, lpErrno: CPointer<Int32>): Int32
-    func WSCUnInstallNameSpace32(lpProviderId: CPointer<GUID>): Int32
-    // param-hint: lpProtocolInfoList len=param[3]
-    func WSCUpdateProvider32(lpProviderId: CPointer<GUID>, lpszProviderDllPath: CPointer<UInt16>, lpProtocolInfoList: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>, dwNumberOfEntries: UInt32, lpErrno: CPointer<Int32>): Int32
-    func WSCWriteNameSpaceOrder32(lpProviderId: CPointer<GUID>, dwNumberOfEntries: UInt32): Int32
-    func WSCWriteProviderOrder32(lpwdCatalogEntryId: CPointer<UInt32>, dwNumberOfEntries: UInt32): Int32
+    func WPUCompleteOverlappedRequest(s: Win32__impl_l0.SOCKET, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, dwError: UInt32, cbTransferred: UInt32, lpErrno: CPointer<Int32>): Int32
 }
 
-@When[WS2_32 == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WPUCompleteOverlappedRequest == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_WPUCompleteOverlappedRequest(s: Win32__impl_l0.SOCKET, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, dwError: UInt32, cbTransferred: UInt32, lpErrno: CPointer<Int32>): Int32 {
+    return WPUCompleteOverlappedRequest(s, lpOverlapped, dwError, cbTransferred, lpErrno)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAAccept == "on"]
+foreign {
+    // param-hint: addr bytes=param[2] optional
+    // param-hint: addrlen optional
+    // param-hint: lpfnCondition optional
+    // param-hint: dwCallbackData optional
+    // pinvoke-hint: SetLastError
+    func WSAAccept(s: Win32__impl_l0.SOCKET, addr: CPointer<Win32__impl_l1.SOCKADDRAbi>, addrlen: CPointer<Int32>, lpfnCondition: Win32__impl_l1.LPCONDITIONPROC, dwCallbackData: UIntNative): Win32__impl_l0.SOCKET
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAAccept == "on"]
+public unsafe func Windows_WSAAccept(s: Win32__impl_l0.SOCKET, addr: CPointer<Win32__impl_l1.SOCKADDRAbi>, addrlen: CPointer<Int32>, lpfnCondition: Win32__impl_l1.LPCONDITIONPROC, dwCallbackData: UIntNative): Win32__impl_l0.SOCKET {
+    return WSAAccept(s, addr, addrlen, lpfnCondition, dwCallbackData)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAAddressToStringA == "on"]
+foreign {
+    // param-hint: lpsaAddress bytes=param[1]
+    // param-hint: lpProtocolInfo optional
+    // param-hint: lpszAddressString len=param[4]
+    // pinvoke-hint: SetLastError
+    func WSAAddressToStringA(lpsaAddress: CPointer<Win32__impl_l1.SOCKADDRAbi>, dwAddressLength: UInt32, lpProtocolInfo: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOAAbi>, lpszAddressString: CPointer<UInt8>, lpdwAddressStringLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAAddressToStringA == "on"]
+public unsafe func Windows_WSAAddressToStringA(lpsaAddress: CPointer<Win32__impl_l1.SOCKADDRAbi>, dwAddressLength: UInt32, lpProtocolInfo: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOAAbi>, lpszAddressString: CPointer<UInt8>, lpdwAddressStringLength: CPointer<UInt32>): Int32 {
+    return WSAAddressToStringA(lpsaAddress, dwAddressLength, lpProtocolInfo, lpszAddressString, lpdwAddressStringLength)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAAddressToStringW == "on"]
+foreign {
+    // param-hint: lpsaAddress bytes=param[1]
+    // param-hint: lpProtocolInfo optional
+    // param-hint: lpszAddressString len=param[4]
+    // pinvoke-hint: SetLastError
+    func WSAAddressToStringW(lpsaAddress: CPointer<Win32__impl_l1.SOCKADDRAbi>, dwAddressLength: UInt32, lpProtocolInfo: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>, lpszAddressString: CPointer<UInt16>, lpdwAddressStringLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAAddressToStringW == "on"]
+public unsafe func Windows_WSAAddressToStringW(lpsaAddress: CPointer<Win32__impl_l1.SOCKADDRAbi>, dwAddressLength: UInt32, lpProtocolInfo: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>, lpszAddressString: CPointer<UInt16>, lpdwAddressStringLength: CPointer<UInt32>): Int32 {
+    return WSAAddressToStringW(lpsaAddress, dwAddressLength, lpProtocolInfo, lpszAddressString, lpdwAddressStringLength)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAAdvertiseProvider == "on" && Windows_Win32_System_Com == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func WSAAdvertiseProvider(puuidProviderId: CPointer<GUID>, pNSPv2Routine: CPointer<NSPV2_ROUTINEAbi>): Int32
-    // param-hint: lpnspBuffer bytes=param[0]
-    // pinvoke-hint: SetLastError
-    func WSAEnumNameSpaceProvidersExA(lpdwBufferLength: CPointer<UInt32>, lpnspBuffer: CPointer<Win32__impl_l1.WSANAMESPACE_INFOEXAAbi>): Int32
-    // param-hint: lpnspBuffer bytes=param[0]
-    // pinvoke-hint: SetLastError
-    func WSAEnumNameSpaceProvidersExW(lpdwBufferLength: CPointer<UInt32>, lpnspBuffer: CPointer<Win32__impl_l1.WSANAMESPACE_INFOEXWAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func WSALookupServiceBeginA(lpqsRestrictions: CPointer<WSAQUERYSETAAbi>, dwControlFlags: UInt32, lphLookup: CPointer<CPointer<Unit>>): Int32
-    // pinvoke-hint: SetLastError
-    func WSALookupServiceBeginW(lpqsRestrictions: CPointer<WSAQUERYSETWAbi>, dwControlFlags: UInt32, lphLookup: CPointer<CPointer<Unit>>): Int32
-    // param-hint: lpqsResults bytes=param[2]
-    // pinvoke-hint: SetLastError
-    func WSALookupServiceNextA(hLookup: CPointer<Unit>, dwControlFlags: UInt32, lpdwBufferLength: CPointer<UInt32>, lpqsResults: CPointer<WSAQUERYSETAAbi>): Int32
-    // param-hint: lpqsResults bytes=param[2] optional
-    // pinvoke-hint: SetLastError
-    func WSALookupServiceNextW(hLookup: CPointer<Unit>, dwControlFlags: UInt32, lpdwBufferLength: CPointer<UInt32>, lpqsResults: CPointer<WSAQUERYSETWAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func WSASetServiceA(lpqsRegInfo: CPointer<WSAQUERYSETAAbi>, essoperation: Win32__impl_l0.WSAESETSERVICEOPAbi, dwControlFlags: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func WSASetServiceW(lpqsRegInfo: CPointer<WSAQUERYSETWAbi>, essoperation: Win32__impl_l0.WSAESETSERVICEOPAbi, dwControlFlags: UInt32): Int32
-    func WSCInstallNameSpaceEx(lpszIdentifier: CPointer<UInt16>, lpszPathName: CPointer<UInt16>, dwNameSpace: UInt32, dwVersion: UInt32, lpProviderId: CPointer<GUID>, lpProviderSpecific: CPointer<Win32__impl_l0.BLOBAbi>): Int32
 }
 
-@When[WS2_32 == "on" && Windows_Win32_System_IO == "on"]
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAAdvertiseProvider == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_WSAAdvertiseProvider(puuidProviderId: CPointer<GUID>, pNSPv2Routine: CPointer<NSPV2_ROUTINEAbi>): Int32 {
+    return WSAAdvertiseProvider(puuidProviderId, pNSPv2Routine)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAAsyncGetHostByAddr == "on"]
 foreign {
-    // param-hint: pName optional
-    // param-hint: pServiceName optional
-    // param-hint: lpNspId optional
-    // param-hint: hints optional
-    // param-hint: timeout optional
-    // param-hint: lpOverlapped optional
-    // param-hint: lpCompletionRoutine optional
-    // param-hint: lpNameHandle optional
-    func GetAddrInfoExA(pName: CPointer<UInt8>, pServiceName: CPointer<UInt8>, dwNameSpace: UInt32, lpNspId: CPointer<GUID>, hints: CPointer<Win32__impl_l1.ADDRINFOEXAAbi>, ppResult: CPointer<CPointer<Win32__impl_l1.ADDRINFOEXAAbi>>, timeout: CPointer<Win32__impl_l0.TIMEVALAbi>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, lpCompletionRoutine: Win32__impl_l0.LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle: CPointer<CPointer<Unit>>): Int32
-    func GetAddrInfoExOverlappedResult(lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): Int32
-    // param-hint: pName optional
-    // param-hint: pServiceName optional
-    // param-hint: lpNspId optional
-    // param-hint: hints optional
-    // param-hint: timeout optional
-    // param-hint: lpOverlapped optional
-    // param-hint: lpCompletionRoutine optional
-    // param-hint: lpHandle optional
-    func GetAddrInfoExW(pName: CPointer<UInt16>, pServiceName: CPointer<UInt16>, dwNameSpace: UInt32, lpNspId: CPointer<GUID>, hints: CPointer<Win32__impl_l1.ADDRINFOEXWAbi>, ppResult: CPointer<CPointer<Win32__impl_l1.ADDRINFOEXWAbi>>, timeout: CPointer<Win32__impl_l0.TIMEVALAbi>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, lpCompletionRoutine: Win32__impl_l0.LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpHandle: CPointer<CPointer<Unit>>): Int32
-    // param-hint: registrationInfos len=param[1] optional
-    // param-hint: completionPortEntries len=param[4] optional
-    // param-hint: receivedEntryCount optional
-    func ProcessSocketNotifications(completionPort: CPointer<Unit>, registrationCount: UInt32, registrationInfos: CPointer<Win32__impl_l1.SOCK_NOTIFY_REGISTRATIONAbi>, timeoutMs: UInt32, completionCount: UInt32, completionPortEntries: CPointer<Win32_System_IO.OVERLAPPED_ENTRYAbi>, receivedEntryCount: CPointer<UInt32>): UInt32
-    func WPUCompleteOverlappedRequest(s: Win32__impl_l0.SOCKET, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, dwError: UInt32, cbTransferred: UInt32, lpErrno: CPointer<Int32>): Int32
+    // param-hint: addr bytes=param[3]
+    // param-hint: buf bytes=param[6]
+    // pinvoke-hint: SetLastError
+    func WSAAsyncGetHostByAddr(hWnd: CPointer<Unit>, wMsg: UInt32, addr: CPointer<UInt8>, len: Int32, type_: Int32, buf: CPointer<UInt8>, buflen: Int32): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAAsyncGetHostByAddr == "on"]
+public unsafe func Windows_WSAAsyncGetHostByAddr(hWnd: CPointer<Unit>, wMsg: UInt32, addr: CPointer<UInt8>, len: Int32, type_: Int32, buf: CPointer<UInt8>, buflen: Int32): CPointer<Unit> {
+    return WSAAsyncGetHostByAddr(hWnd, wMsg, addr, len, type_, buf, buflen)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAAsyncGetHostByName == "on"]
+foreign {
+    // param-hint: buf bytes=param[4]
+    // pinvoke-hint: SetLastError
+    func WSAAsyncGetHostByName(hWnd: CPointer<Unit>, wMsg: UInt32, name: CPointer<UInt8>, buf: CPointer<UInt8>, buflen: Int32): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAAsyncGetHostByName == "on"]
+public unsafe func Windows_WSAAsyncGetHostByName(hWnd: CPointer<Unit>, wMsg: UInt32, name: CPointer<UInt8>, buf: CPointer<UInt8>, buflen: Int32): CPointer<Unit> {
+    return WSAAsyncGetHostByName(hWnd, wMsg, name, buf, buflen)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAAsyncGetProtoByName == "on"]
+foreign {
+    // param-hint: buf bytes=param[4]
+    // pinvoke-hint: SetLastError
+    func WSAAsyncGetProtoByName(hWnd: CPointer<Unit>, wMsg: UInt32, name: CPointer<UInt8>, buf: CPointer<UInt8>, buflen: Int32): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAAsyncGetProtoByName == "on"]
+public unsafe func Windows_WSAAsyncGetProtoByName(hWnd: CPointer<Unit>, wMsg: UInt32, name: CPointer<UInt8>, buf: CPointer<UInt8>, buflen: Int32): CPointer<Unit> {
+    return WSAAsyncGetProtoByName(hWnd, wMsg, name, buf, buflen)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAAsyncGetProtoByNumber == "on"]
+foreign {
+    // param-hint: buf bytes=param[4]
+    // pinvoke-hint: SetLastError
+    func WSAAsyncGetProtoByNumber(hWnd: CPointer<Unit>, wMsg: UInt32, number: Int32, buf: CPointer<UInt8>, buflen: Int32): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAAsyncGetProtoByNumber == "on"]
+public unsafe func Windows_WSAAsyncGetProtoByNumber(hWnd: CPointer<Unit>, wMsg: UInt32, number: Int32, buf: CPointer<UInt8>, buflen: Int32): CPointer<Unit> {
+    return WSAAsyncGetProtoByNumber(hWnd, wMsg, number, buf, buflen)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAAsyncGetServByName == "on"]
+foreign {
+    // param-hint: buf bytes=param[5]
+    // pinvoke-hint: SetLastError
+    func WSAAsyncGetServByName(hWnd: CPointer<Unit>, wMsg: UInt32, name: CPointer<UInt8>, proto: CPointer<UInt8>, buf: CPointer<UInt8>, buflen: Int32): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAAsyncGetServByName == "on"]
+public unsafe func Windows_WSAAsyncGetServByName(hWnd: CPointer<Unit>, wMsg: UInt32, name: CPointer<UInt8>, proto: CPointer<UInt8>, buf: CPointer<UInt8>, buflen: Int32): CPointer<Unit> {
+    return WSAAsyncGetServByName(hWnd, wMsg, name, proto, buf, buflen)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAAsyncGetServByPort == "on"]
+foreign {
+    // param-hint: buf bytes=param[5]
+    // pinvoke-hint: SetLastError
+    func WSAAsyncGetServByPort(hWnd: CPointer<Unit>, wMsg: UInt32, port: Int32, proto: CPointer<UInt8>, buf: CPointer<UInt8>, buflen: Int32): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAAsyncGetServByPort == "on"]
+public unsafe func Windows_WSAAsyncGetServByPort(hWnd: CPointer<Unit>, wMsg: UInt32, port: Int32, proto: CPointer<UInt8>, buf: CPointer<UInt8>, buflen: Int32): CPointer<Unit> {
+    return WSAAsyncGetServByPort(hWnd, wMsg, port, proto, buf, buflen)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAAsyncSelect == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSAAsyncSelect(s: Win32__impl_l0.SOCKET, hWnd: CPointer<Unit>, wMsg: UInt32, lEvent: Int32): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAAsyncSelect == "on"]
+public unsafe func Windows_WSAAsyncSelect(s: Win32__impl_l0.SOCKET, hWnd: CPointer<Unit>, wMsg: UInt32, lEvent: Int32): Int32 {
+    return WSAAsyncSelect(s, hWnd, wMsg, lEvent)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSACancelAsyncRequest == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSACancelAsyncRequest(hAsyncTaskHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSACancelAsyncRequest == "on"]
+public unsafe func Windows_WSACancelAsyncRequest(hAsyncTaskHandle: CPointer<Unit>): Int32 {
+    return WSACancelAsyncRequest(hAsyncTaskHandle)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSACancelBlockingCall == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSACancelBlockingCall(): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSACancelBlockingCall == "on"]
+public unsafe func Windows_WSACancelBlockingCall(): Int32 {
+    return WSACancelBlockingCall()
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSACleanup == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSACleanup(): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSACleanup == "on"]
+public unsafe func Windows_WSACleanup(): Int32 {
+    return WSACleanup()
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSACloseEvent == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSACloseEvent(hEvent: Win32__impl_l0.WSAEVENT): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSACloseEvent == "on"]
+public unsafe func Windows_WSACloseEvent(hEvent: Win32__impl_l0.WSAEVENT): Int32 {
+    return WSACloseEvent(hEvent)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAConnect == "on"]
+foreign {
+    // param-hint: name bytes=param[2]
+    // param-hint: lpCallerData optional
+    // param-hint: lpCalleeData optional
+    // param-hint: lpSQOS optional
+    // param-hint: lpGQOS optional
+    // pinvoke-hint: SetLastError
+    func WSAConnect(s: Win32__impl_l0.SOCKET, name: CPointer<Win32__impl_l1.SOCKADDRAbi>, namelen: Int32, lpCallerData: CPointer<Win32__impl_l0.WSABUFAbi>, lpCalleeData: CPointer<Win32__impl_l0.WSABUFAbi>, lpSQOS: CPointer<Win32__impl_l1.QOSAbi>, lpGQOS: CPointer<Win32__impl_l1.QOSAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAConnect == "on"]
+public unsafe func Windows_WSAConnect(s: Win32__impl_l0.SOCKET, name: CPointer<Win32__impl_l1.SOCKADDRAbi>, namelen: Int32, lpCallerData: CPointer<Win32__impl_l0.WSABUFAbi>, lpCalleeData: CPointer<Win32__impl_l0.WSABUFAbi>, lpSQOS: CPointer<Win32__impl_l1.QOSAbi>, lpGQOS: CPointer<Win32__impl_l1.QOSAbi>): Int32 {
+    return WSAConnect(s, name, namelen, lpCallerData, lpCalleeData, lpSQOS, lpGQOS)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAConnectByList == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: LocalAddressLength optional
     // param-hint: LocalAddress bytes=param[2] optional
     // param-hint: RemoteAddressLength optional
@@ -736,6 +849,15 @@ foreign {
     // param-hint: Reserved optional reserved
     // pinvoke-hint: SetLastError
     func WSAConnectByList(s: Win32__impl_l0.SOCKET, SocketAddress: CPointer<SOCKET_ADDRESS_LISTAbi>, LocalAddressLength: CPointer<UInt32>, LocalAddress: CPointer<Win32__impl_l1.SOCKADDRAbi>, RemoteAddressLength: CPointer<UInt32>, RemoteAddress: CPointer<Win32__impl_l1.SOCKADDRAbi>, timeout: CPointer<Win32__impl_l0.TIMEVALAbi>, Reserved: CPointer<Win32_System_IO.OVERLAPPEDAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAConnectByList == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_WSAConnectByList(s: Win32__impl_l0.SOCKET, SocketAddress: CPointer<SOCKET_ADDRESS_LISTAbi>, LocalAddressLength: CPointer<UInt32>, LocalAddress: CPointer<Win32__impl_l1.SOCKADDRAbi>, RemoteAddressLength: CPointer<UInt32>, RemoteAddress: CPointer<Win32__impl_l1.SOCKADDRAbi>, timeout: CPointer<Win32__impl_l0.TIMEVALAbi>, Reserved: CPointer<Win32_System_IO.OVERLAPPEDAbi>): Int32 {
+    return WSAConnectByList(s, SocketAddress, LocalAddressLength, LocalAddress, RemoteAddressLength, RemoteAddress, timeout, Reserved)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAConnectByNameA == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: LocalAddressLength optional
     // param-hint: LocalAddress bytes=param[3] optional
     // param-hint: RemoteAddressLength optional
@@ -744,6 +866,15 @@ foreign {
     // param-hint: Reserved optional reserved
     // pinvoke-hint: SetLastError
     func WSAConnectByNameA(s: Win32__impl_l0.SOCKET, nodename: CPointer<UInt8>, servicename: CPointer<UInt8>, LocalAddressLength: CPointer<UInt32>, LocalAddress: CPointer<Win32__impl_l1.SOCKADDRAbi>, RemoteAddressLength: CPointer<UInt32>, RemoteAddress: CPointer<Win32__impl_l1.SOCKADDRAbi>, timeout: CPointer<Win32__impl_l0.TIMEVALAbi>, Reserved: CPointer<Win32_System_IO.OVERLAPPEDAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAConnectByNameA == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_WSAConnectByNameA(s: Win32__impl_l0.SOCKET, nodename: CPointer<UInt8>, servicename: CPointer<UInt8>, LocalAddressLength: CPointer<UInt32>, LocalAddress: CPointer<Win32__impl_l1.SOCKADDRAbi>, RemoteAddressLength: CPointer<UInt32>, RemoteAddress: CPointer<Win32__impl_l1.SOCKADDRAbi>, timeout: CPointer<Win32__impl_l0.TIMEVALAbi>, Reserved: CPointer<Win32_System_IO.OVERLAPPEDAbi>): Int32 {
+    return WSAConnectByNameA(s, nodename, servicename, LocalAddressLength, LocalAddress, RemoteAddressLength, RemoteAddress, timeout, Reserved)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAConnectByNameW == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: LocalAddressLength optional
     // param-hint: LocalAddress bytes=param[3] optional
     // param-hint: RemoteAddressLength optional
@@ -752,29 +883,467 @@ foreign {
     // param-hint: Reserved optional reserved
     // pinvoke-hint: SetLastError
     func WSAConnectByNameW(s: Win32__impl_l0.SOCKET, nodename: CPointer<UInt16>, servicename: CPointer<UInt16>, LocalAddressLength: CPointer<UInt32>, LocalAddress: CPointer<Win32__impl_l1.SOCKADDRAbi>, RemoteAddressLength: CPointer<UInt32>, RemoteAddress: CPointer<Win32__impl_l1.SOCKADDRAbi>, timeout: CPointer<Win32__impl_l0.TIMEVALAbi>, Reserved: CPointer<Win32_System_IO.OVERLAPPEDAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAConnectByNameW == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_WSAConnectByNameW(s: Win32__impl_l0.SOCKET, nodename: CPointer<UInt16>, servicename: CPointer<UInt16>, LocalAddressLength: CPointer<UInt32>, LocalAddress: CPointer<Win32__impl_l1.SOCKADDRAbi>, RemoteAddressLength: CPointer<UInt32>, RemoteAddress: CPointer<Win32__impl_l1.SOCKADDRAbi>, timeout: CPointer<Win32__impl_l0.TIMEVALAbi>, Reserved: CPointer<Win32_System_IO.OVERLAPPEDAbi>): Int32 {
+    return WSAConnectByNameW(s, nodename, servicename, LocalAddressLength, LocalAddress, RemoteAddressLength, RemoteAddress, timeout, Reserved)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSACreateEvent == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSACreateEvent(): Win32__impl_l0.WSAEVENT
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSACreateEvent == "on"]
+public unsafe func Windows_WSACreateEvent(): Win32__impl_l0.WSAEVENT {
+    return WSACreateEvent()
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSADuplicateSocketA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSADuplicateSocketA(s: Win32__impl_l0.SOCKET, dwProcessId: UInt32, lpProtocolInfo: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOAAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSADuplicateSocketA == "on"]
+public unsafe func Windows_WSADuplicateSocketA(s: Win32__impl_l0.SOCKET, dwProcessId: UInt32, lpProtocolInfo: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOAAbi>): Int32 {
+    return WSADuplicateSocketA(s, dwProcessId, lpProtocolInfo)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSADuplicateSocketW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSADuplicateSocketW(s: Win32__impl_l0.SOCKET, dwProcessId: UInt32, lpProtocolInfo: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSADuplicateSocketW == "on"]
+public unsafe func Windows_WSADuplicateSocketW(s: Win32__impl_l0.SOCKET, dwProcessId: UInt32, lpProtocolInfo: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>): Int32 {
+    return WSADuplicateSocketW(s, dwProcessId, lpProtocolInfo)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAEnumNameSpaceProvidersA == "on"]
+foreign {
+    // param-hint: lpnspBuffer bytes=param[0]
+    // pinvoke-hint: SetLastError
+    func WSAEnumNameSpaceProvidersA(lpdwBufferLength: CPointer<UInt32>, lpnspBuffer: CPointer<Win32__impl_l0.WSANAMESPACE_INFOAAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAEnumNameSpaceProvidersA == "on"]
+public unsafe func Windows_WSAEnumNameSpaceProvidersA(lpdwBufferLength: CPointer<UInt32>, lpnspBuffer: CPointer<Win32__impl_l0.WSANAMESPACE_INFOAAbi>): Int32 {
+    return WSAEnumNameSpaceProvidersA(lpdwBufferLength, lpnspBuffer)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAEnumNameSpaceProvidersExA == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: lpnspBuffer bytes=param[0]
+    // pinvoke-hint: SetLastError
+    func WSAEnumNameSpaceProvidersExA(lpdwBufferLength: CPointer<UInt32>, lpnspBuffer: CPointer<Win32__impl_l1.WSANAMESPACE_INFOEXAAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAEnumNameSpaceProvidersExA == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_WSAEnumNameSpaceProvidersExA(lpdwBufferLength: CPointer<UInt32>, lpnspBuffer: CPointer<Win32__impl_l1.WSANAMESPACE_INFOEXAAbi>): Int32 {
+    return WSAEnumNameSpaceProvidersExA(lpdwBufferLength, lpnspBuffer)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAEnumNameSpaceProvidersExW == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: lpnspBuffer bytes=param[0]
+    // pinvoke-hint: SetLastError
+    func WSAEnumNameSpaceProvidersExW(lpdwBufferLength: CPointer<UInt32>, lpnspBuffer: CPointer<Win32__impl_l1.WSANAMESPACE_INFOEXWAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAEnumNameSpaceProvidersExW == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_WSAEnumNameSpaceProvidersExW(lpdwBufferLength: CPointer<UInt32>, lpnspBuffer: CPointer<Win32__impl_l1.WSANAMESPACE_INFOEXWAbi>): Int32 {
+    return WSAEnumNameSpaceProvidersExW(lpdwBufferLength, lpnspBuffer)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAEnumNameSpaceProvidersW == "on"]
+foreign {
+    // param-hint: lpnspBuffer bytes=param[0]
+    // pinvoke-hint: SetLastError
+    func WSAEnumNameSpaceProvidersW(lpdwBufferLength: CPointer<UInt32>, lpnspBuffer: CPointer<Win32__impl_l0.WSANAMESPACE_INFOWAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAEnumNameSpaceProvidersW == "on"]
+public unsafe func Windows_WSAEnumNameSpaceProvidersW(lpdwBufferLength: CPointer<UInt32>, lpnspBuffer: CPointer<Win32__impl_l0.WSANAMESPACE_INFOWAbi>): Int32 {
+    return WSAEnumNameSpaceProvidersW(lpdwBufferLength, lpnspBuffer)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAEnumNetworkEvents == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSAEnumNetworkEvents(s: Win32__impl_l0.SOCKET, hEventObject: Win32__impl_l0.WSAEVENT, lpNetworkEvents: CPointer<Win32__impl_l0.WSANETWORKEVENTSAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAEnumNetworkEvents == "on"]
+public unsafe func Windows_WSAEnumNetworkEvents(s: Win32__impl_l0.SOCKET, hEventObject: Win32__impl_l0.WSAEVENT, lpNetworkEvents: CPointer<Win32__impl_l0.WSANETWORKEVENTSAbi>): Int32 {
+    return WSAEnumNetworkEvents(s, hEventObject, lpNetworkEvents)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAEnumProtocolsA == "on"]
+foreign {
+    // param-hint: lpiProtocols optional
+    // param-hint: lpProtocolBuffer bytes=param[2] optional
+    // pinvoke-hint: SetLastError
+    func WSAEnumProtocolsA(lpiProtocols: CPointer<Int32>, lpProtocolBuffer: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOAAbi>, lpdwBufferLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAEnumProtocolsA == "on"]
+public unsafe func Windows_WSAEnumProtocolsA(lpiProtocols: CPointer<Int32>, lpProtocolBuffer: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOAAbi>, lpdwBufferLength: CPointer<UInt32>): Int32 {
+    return WSAEnumProtocolsA(lpiProtocols, lpProtocolBuffer, lpdwBufferLength)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAEnumProtocolsW == "on"]
+foreign {
+    // param-hint: lpiProtocols optional
+    // param-hint: lpProtocolBuffer bytes=param[2] optional
+    // pinvoke-hint: SetLastError
+    func WSAEnumProtocolsW(lpiProtocols: CPointer<Int32>, lpProtocolBuffer: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>, lpdwBufferLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAEnumProtocolsW == "on"]
+public unsafe func Windows_WSAEnumProtocolsW(lpiProtocols: CPointer<Int32>, lpProtocolBuffer: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>, lpdwBufferLength: CPointer<UInt32>): Int32 {
+    return WSAEnumProtocolsW(lpiProtocols, lpProtocolBuffer, lpdwBufferLength)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAEventSelect == "on"]
+foreign {
+    // param-hint: hEventObject optional
+    // pinvoke-hint: SetLastError
+    func WSAEventSelect(s: Win32__impl_l0.SOCKET, hEventObject: Win32__impl_l0.WSAEVENT, lNetworkEvents: Int32): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAEventSelect == "on"]
+public unsafe func Windows_WSAEventSelect(s: Win32__impl_l0.SOCKET, hEventObject: Win32__impl_l0.WSAEVENT, lNetworkEvents: Int32): Int32 {
+    return WSAEventSelect(s, hEventObject, lNetworkEvents)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAGetLastError == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSAGetLastError(): Win32__impl_l0.WSA_ERRORAbi
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAGetLastError == "on"]
+public unsafe func Windows_WSAGetLastError(): Win32__impl_l0.WSA_ERRORAbi {
+    return WSAGetLastError()
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAGetOverlappedResult == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func WSAGetOverlappedResult(s: Win32__impl_l0.SOCKET, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, lpcbTransfer: CPointer<UInt32>, fWait: Int32, lpdwFlags: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAGetOverlappedResult == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_WSAGetOverlappedResult(s: Win32__impl_l0.SOCKET, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, lpcbTransfer: CPointer<UInt32>, fWait: Int32, lpdwFlags: CPointer<UInt32>): Int32 {
+    return WSAGetOverlappedResult(s, lpOverlapped, lpcbTransfer, fWait, lpdwFlags)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAGetQOSByName == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSAGetQOSByName(s: Win32__impl_l0.SOCKET, lpQOSName: CPointer<Win32__impl_l0.WSABUFAbi>, lpQOS: CPointer<Win32__impl_l1.QOSAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAGetQOSByName == "on"]
+public unsafe func Windows_WSAGetQOSByName(s: Win32__impl_l0.SOCKET, lpQOSName: CPointer<Win32__impl_l0.WSABUFAbi>, lpQOS: CPointer<Win32__impl_l1.QOSAbi>): Int32 {
+    return WSAGetQOSByName(s, lpQOSName, lpQOS)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAGetServiceClassInfoA == "on"]
+foreign {
+    // param-hint: lpServiceClassInfo bytes=param[2]
+    // pinvoke-hint: SetLastError
+    func WSAGetServiceClassInfoA(lpProviderId: CPointer<GUID>, lpServiceClassId: CPointer<GUID>, lpdwBufSize: CPointer<UInt32>, lpServiceClassInfo: CPointer<Win32__impl_l1.WSASERVICECLASSINFOAAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAGetServiceClassInfoA == "on"]
+public unsafe func Windows_WSAGetServiceClassInfoA(lpProviderId: CPointer<GUID>, lpServiceClassId: CPointer<GUID>, lpdwBufSize: CPointer<UInt32>, lpServiceClassInfo: CPointer<Win32__impl_l1.WSASERVICECLASSINFOAAbi>): Int32 {
+    return WSAGetServiceClassInfoA(lpProviderId, lpServiceClassId, lpdwBufSize, lpServiceClassInfo)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAGetServiceClassInfoW == "on"]
+foreign {
+    // param-hint: lpServiceClassInfo bytes=param[2]
+    // pinvoke-hint: SetLastError
+    func WSAGetServiceClassInfoW(lpProviderId: CPointer<GUID>, lpServiceClassId: CPointer<GUID>, lpdwBufSize: CPointer<UInt32>, lpServiceClassInfo: CPointer<Win32__impl_l1.WSASERVICECLASSINFOWAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAGetServiceClassInfoW == "on"]
+public unsafe func Windows_WSAGetServiceClassInfoW(lpProviderId: CPointer<GUID>, lpServiceClassId: CPointer<GUID>, lpdwBufSize: CPointer<UInt32>, lpServiceClassInfo: CPointer<Win32__impl_l1.WSASERVICECLASSINFOWAbi>): Int32 {
+    return WSAGetServiceClassInfoW(lpProviderId, lpServiceClassId, lpdwBufSize, lpServiceClassInfo)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAGetServiceClassNameByClassIdA == "on"]
+foreign {
+    // param-hint: lpszServiceClassName bytes=param[2]
+    // pinvoke-hint: SetLastError
+    func WSAGetServiceClassNameByClassIdA(lpServiceClassId: CPointer<GUID>, lpszServiceClassName: CPointer<UInt8>, lpdwBufferLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAGetServiceClassNameByClassIdA == "on"]
+public unsafe func Windows_WSAGetServiceClassNameByClassIdA(lpServiceClassId: CPointer<GUID>, lpszServiceClassName: CPointer<UInt8>, lpdwBufferLength: CPointer<UInt32>): Int32 {
+    return WSAGetServiceClassNameByClassIdA(lpServiceClassId, lpszServiceClassName, lpdwBufferLength)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAGetServiceClassNameByClassIdW == "on"]
+foreign {
+    // param-hint: lpszServiceClassName bytes=param[2]
+    // pinvoke-hint: SetLastError
+    func WSAGetServiceClassNameByClassIdW(lpServiceClassId: CPointer<GUID>, lpszServiceClassName: CPointer<UInt16>, lpdwBufferLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAGetServiceClassNameByClassIdW == "on"]
+public unsafe func Windows_WSAGetServiceClassNameByClassIdW(lpServiceClassId: CPointer<GUID>, lpszServiceClassName: CPointer<UInt16>, lpdwBufferLength: CPointer<UInt32>): Int32 {
+    return WSAGetServiceClassNameByClassIdW(lpServiceClassId, lpszServiceClassName, lpdwBufferLength)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAHtonl == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSAHtonl(s: Win32__impl_l0.SOCKET, hostlong: UInt32, lpnetlong: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAHtonl == "on"]
+public unsafe func Windows_WSAHtonl(s: Win32__impl_l0.SOCKET, hostlong: UInt32, lpnetlong: CPointer<UInt32>): Int32 {
+    return WSAHtonl(s, hostlong, lpnetlong)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAHtons == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSAHtons(s: Win32__impl_l0.SOCKET, hostshort: UInt16, lpnetshort: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAHtons == "on"]
+public unsafe func Windows_WSAHtons(s: Win32__impl_l0.SOCKET, hostshort: UInt16, lpnetshort: CPointer<UInt16>): Int32 {
+    return WSAHtons(s, hostshort, lpnetshort)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAInstallServiceClassA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSAInstallServiceClassA(lpServiceClassInfo: CPointer<Win32__impl_l1.WSASERVICECLASSINFOAAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAInstallServiceClassA == "on"]
+public unsafe func Windows_WSAInstallServiceClassA(lpServiceClassInfo: CPointer<Win32__impl_l1.WSASERVICECLASSINFOAAbi>): Int32 {
+    return WSAInstallServiceClassA(lpServiceClassInfo)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAInstallServiceClassW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSAInstallServiceClassW(lpServiceClassInfo: CPointer<Win32__impl_l1.WSASERVICECLASSINFOWAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAInstallServiceClassW == "on"]
+public unsafe func Windows_WSAInstallServiceClassW(lpServiceClassInfo: CPointer<Win32__impl_l1.WSASERVICECLASSINFOWAbi>): Int32 {
+    return WSAInstallServiceClassW(lpServiceClassInfo)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAIoctl == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: lpvInBuffer bytes=param[3] optional
     // param-hint: lpvOutBuffer bytes=param[5] optional
     // param-hint: lpOverlapped optional
     // param-hint: lpCompletionRoutine optional
     // pinvoke-hint: SetLastError
     func WSAIoctl(s: Win32__impl_l0.SOCKET, dwIoControlCode: UInt32, lpvInBuffer: CPointer<Unit>, cbInBuffer: UInt32, lpvOutBuffer: CPointer<Unit>, cbOutBuffer: UInt32, lpcbBytesReturned: CPointer<UInt32>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, lpCompletionRoutine: Win32__impl_l0.LPWSAOVERLAPPED_COMPLETION_ROUTINE): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAIoctl == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_WSAIoctl(s: Win32__impl_l0.SOCKET, dwIoControlCode: UInt32, lpvInBuffer: CPointer<Unit>, cbInBuffer: UInt32, lpvOutBuffer: CPointer<Unit>, cbOutBuffer: UInt32, lpcbBytesReturned: CPointer<UInt32>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, lpCompletionRoutine: Win32__impl_l0.LPWSAOVERLAPPED_COMPLETION_ROUTINE): Int32 {
+    return WSAIoctl(s, dwIoControlCode, lpvInBuffer, cbInBuffer, lpvOutBuffer, cbOutBuffer, lpcbBytesReturned, lpOverlapped, lpCompletionRoutine)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAIsBlocking == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSAIsBlocking(): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAIsBlocking == "on"]
+public unsafe func Windows_WSAIsBlocking(): Int32 {
+    return WSAIsBlocking()
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAJoinLeaf == "on"]
+foreign {
+    // param-hint: name bytes=param[2]
+    // param-hint: lpCallerData optional
+    // param-hint: lpCalleeData optional
+    // param-hint: lpSQOS optional
+    // param-hint: lpGQOS optional
+    // pinvoke-hint: SetLastError
+    func WSAJoinLeaf(s: Win32__impl_l0.SOCKET, name: CPointer<Win32__impl_l1.SOCKADDRAbi>, namelen: Int32, lpCallerData: CPointer<Win32__impl_l0.WSABUFAbi>, lpCalleeData: CPointer<Win32__impl_l0.WSABUFAbi>, lpSQOS: CPointer<Win32__impl_l1.QOSAbi>, lpGQOS: CPointer<Win32__impl_l1.QOSAbi>, dwFlags: UInt32): Win32__impl_l0.SOCKET
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAJoinLeaf == "on"]
+public unsafe func Windows_WSAJoinLeaf(s: Win32__impl_l0.SOCKET, name: CPointer<Win32__impl_l1.SOCKADDRAbi>, namelen: Int32, lpCallerData: CPointer<Win32__impl_l0.WSABUFAbi>, lpCalleeData: CPointer<Win32__impl_l0.WSABUFAbi>, lpSQOS: CPointer<Win32__impl_l1.QOSAbi>, lpGQOS: CPointer<Win32__impl_l1.QOSAbi>, dwFlags: UInt32): Win32__impl_l0.SOCKET {
+    return WSAJoinLeaf(s, name, namelen, lpCallerData, lpCalleeData, lpSQOS, lpGQOS, dwFlags)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSALookupServiceBeginA == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSALookupServiceBeginA(lpqsRestrictions: CPointer<WSAQUERYSETAAbi>, dwControlFlags: UInt32, lphLookup: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSALookupServiceBeginA == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_WSALookupServiceBeginA(lpqsRestrictions: CPointer<WSAQUERYSETAAbi>, dwControlFlags: UInt32, lphLookup: CPointer<CPointer<Unit>>): Int32 {
+    return WSALookupServiceBeginA(lpqsRestrictions, dwControlFlags, lphLookup)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSALookupServiceBeginW == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSALookupServiceBeginW(lpqsRestrictions: CPointer<WSAQUERYSETWAbi>, dwControlFlags: UInt32, lphLookup: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSALookupServiceBeginW == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_WSALookupServiceBeginW(lpqsRestrictions: CPointer<WSAQUERYSETWAbi>, dwControlFlags: UInt32, lphLookup: CPointer<CPointer<Unit>>): Int32 {
+    return WSALookupServiceBeginW(lpqsRestrictions, dwControlFlags, lphLookup)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSALookupServiceEnd == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSALookupServiceEnd(hLookup: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSALookupServiceEnd == "on"]
+public unsafe func Windows_WSALookupServiceEnd(hLookup: CPointer<Unit>): Int32 {
+    return WSALookupServiceEnd(hLookup)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSALookupServiceNextA == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: lpqsResults bytes=param[2]
+    // pinvoke-hint: SetLastError
+    func WSALookupServiceNextA(hLookup: CPointer<Unit>, dwControlFlags: UInt32, lpdwBufferLength: CPointer<UInt32>, lpqsResults: CPointer<WSAQUERYSETAAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSALookupServiceNextA == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_WSALookupServiceNextA(hLookup: CPointer<Unit>, dwControlFlags: UInt32, lpdwBufferLength: CPointer<UInt32>, lpqsResults: CPointer<WSAQUERYSETAAbi>): Int32 {
+    return WSALookupServiceNextA(hLookup, dwControlFlags, lpdwBufferLength, lpqsResults)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSALookupServiceNextW == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: lpqsResults bytes=param[2] optional
+    // pinvoke-hint: SetLastError
+    func WSALookupServiceNextW(hLookup: CPointer<Unit>, dwControlFlags: UInt32, lpdwBufferLength: CPointer<UInt32>, lpqsResults: CPointer<WSAQUERYSETWAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSALookupServiceNextW == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_WSALookupServiceNextW(hLookup: CPointer<Unit>, dwControlFlags: UInt32, lpdwBufferLength: CPointer<UInt32>, lpqsResults: CPointer<WSAQUERYSETWAbi>): Int32 {
+    return WSALookupServiceNextW(hLookup, dwControlFlags, lpdwBufferLength, lpqsResults)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSANSPIoctl == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: lpvInBuffer bytes=param[3] optional
     // param-hint: lpvOutBuffer bytes=param[5] optional
     // param-hint: lpCompletion optional
     // pinvoke-hint: SetLastError
     func WSANSPIoctl(hLookup: CPointer<Unit>, dwControlCode: UInt32, lpvInBuffer: CPointer<Unit>, cbInBuffer: UInt32, lpvOutBuffer: CPointer<Unit>, cbOutBuffer: UInt32, lpcbBytesReturned: CPointer<UInt32>, lpCompletion: CPointer<Win32__impl_l1.WSACOMPLETIONAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSANSPIoctl == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_WSANSPIoctl(hLookup: CPointer<Unit>, dwControlCode: UInt32, lpvInBuffer: CPointer<Unit>, cbInBuffer: UInt32, lpvOutBuffer: CPointer<Unit>, cbOutBuffer: UInt32, lpcbBytesReturned: CPointer<UInt32>, lpCompletion: CPointer<Win32__impl_l1.WSACOMPLETIONAbi>): Int32 {
+    return WSANSPIoctl(hLookup, dwControlCode, lpvInBuffer, cbInBuffer, lpvOutBuffer, cbOutBuffer, lpcbBytesReturned, lpCompletion)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSANtohl == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSANtohl(s: Win32__impl_l0.SOCKET, netlong: UInt32, lphostlong: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSANtohl == "on"]
+public unsafe func Windows_WSANtohl(s: Win32__impl_l0.SOCKET, netlong: UInt32, lphostlong: CPointer<UInt32>): Int32 {
+    return WSANtohl(s, netlong, lphostlong)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSANtohs == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSANtohs(s: Win32__impl_l0.SOCKET, netshort: UInt16, lphostshort: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSANtohs == "on"]
+public unsafe func Windows_WSANtohs(s: Win32__impl_l0.SOCKET, netshort: UInt16, lphostshort: CPointer<UInt16>): Int32 {
+    return WSANtohs(s, netshort, lphostshort)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAPoll == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSAPoll(fdArray: CPointer<Win32__impl_l1.WSAPOLLFDAbi>, fds: UInt32, timeout: Int32): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAPoll == "on"]
+public unsafe func Windows_WSAPoll(fdArray: CPointer<Win32__impl_l1.WSAPOLLFDAbi>, fds: UInt32, timeout: Int32): Int32 {
+    return WSAPoll(fdArray, fds, timeout)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAProviderCompleteAsyncCall == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSAProviderCompleteAsyncCall(hAsyncCall: CPointer<Unit>, iRetCode: Int32): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAProviderCompleteAsyncCall == "on"]
+public unsafe func Windows_WSAProviderCompleteAsyncCall(hAsyncCall: CPointer<Unit>, iRetCode: Int32): Int32 {
+    return WSAProviderCompleteAsyncCall(hAsyncCall, iRetCode)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAProviderConfigChange == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: lpOverlapped optional
     // param-hint: lpCompletionRoutine optional
     // pinvoke-hint: SetLastError
     func WSAProviderConfigChange(lpNotificationHandle: CPointer<CPointer<Unit>>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, lpCompletionRoutine: Win32__impl_l0.LPWSAOVERLAPPED_COMPLETION_ROUTINE): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAProviderConfigChange == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_WSAProviderConfigChange(lpNotificationHandle: CPointer<CPointer<Unit>>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, lpCompletionRoutine: Win32__impl_l0.LPWSAOVERLAPPED_COMPLETION_ROUTINE): Int32 {
+    return WSAProviderConfigChange(lpNotificationHandle, lpOverlapped, lpCompletionRoutine)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSARecv == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: lpBuffers len=param[2]
     // param-hint: lpNumberOfBytesRecvd optional
     // param-hint: lpOverlapped optional
     // param-hint: lpCompletionRoutine optional
     // pinvoke-hint: SetLastError
     func WSARecv(s: Win32__impl_l0.SOCKET, lpBuffers: CPointer<Win32__impl_l0.WSABUFAbi>, dwBufferCount: UInt32, lpNumberOfBytesRecvd: CPointer<UInt32>, lpFlags: CPointer<UInt32>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, lpCompletionRoutine: Win32__impl_l0.LPWSAOVERLAPPED_COMPLETION_ROUTINE): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSARecv == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_WSARecv(s: Win32__impl_l0.SOCKET, lpBuffers: CPointer<Win32__impl_l0.WSABUFAbi>, dwBufferCount: UInt32, lpNumberOfBytesRecvd: CPointer<UInt32>, lpFlags: CPointer<UInt32>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, lpCompletionRoutine: Win32__impl_l0.LPWSAOVERLAPPED_COMPLETION_ROUTINE): Int32 {
+    return WSARecv(s, lpBuffers, dwBufferCount, lpNumberOfBytesRecvd, lpFlags, lpOverlapped, lpCompletionRoutine)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSARecvDisconnect == "on"]
+foreign {
+    // param-hint: lpInboundDisconnectData optional
+    // pinvoke-hint: SetLastError
+    func WSARecvDisconnect(s: Win32__impl_l0.SOCKET, lpInboundDisconnectData: CPointer<Win32__impl_l0.WSABUFAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSARecvDisconnect == "on"]
+public unsafe func Windows_WSARecvDisconnect(s: Win32__impl_l0.SOCKET, lpInboundDisconnectData: CPointer<Win32__impl_l0.WSABUFAbi>): Int32 {
+    return WSARecvDisconnect(s, lpInboundDisconnectData)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSARecvFrom == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: lpBuffers len=param[2]
     // param-hint: lpNumberOfBytesRecvd optional
     // param-hint: lpFrom bytes=param[6] optional
@@ -783,17 +1352,78 @@ foreign {
     // param-hint: lpCompletionRoutine optional
     // pinvoke-hint: SetLastError
     func WSARecvFrom(s: Win32__impl_l0.SOCKET, lpBuffers: CPointer<Win32__impl_l0.WSABUFAbi>, dwBufferCount: UInt32, lpNumberOfBytesRecvd: CPointer<UInt32>, lpFlags: CPointer<UInt32>, lpFrom: CPointer<Win32__impl_l1.SOCKADDRAbi>, lpFromlen: CPointer<Int32>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, lpCompletionRoutine: Win32__impl_l0.LPWSAOVERLAPPED_COMPLETION_ROUTINE): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSARecvFrom == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_WSARecvFrom(s: Win32__impl_l0.SOCKET, lpBuffers: CPointer<Win32__impl_l0.WSABUFAbi>, dwBufferCount: UInt32, lpNumberOfBytesRecvd: CPointer<UInt32>, lpFlags: CPointer<UInt32>, lpFrom: CPointer<Win32__impl_l1.SOCKADDRAbi>, lpFromlen: CPointer<Int32>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, lpCompletionRoutine: Win32__impl_l0.LPWSAOVERLAPPED_COMPLETION_ROUTINE): Int32 {
+    return WSARecvFrom(s, lpBuffers, dwBufferCount, lpNumberOfBytesRecvd, lpFlags, lpFrom, lpFromlen, lpOverlapped, lpCompletionRoutine)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSARemoveServiceClass == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSARemoveServiceClass(lpServiceClassId: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSARemoveServiceClass == "on"]
+public unsafe func Windows_WSARemoveServiceClass(lpServiceClassId: CPointer<GUID>): Int32 {
+    return WSARemoveServiceClass(lpServiceClassId)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAResetEvent == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSAResetEvent(hEvent: Win32__impl_l0.WSAEVENT): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAResetEvent == "on"]
+public unsafe func Windows_WSAResetEvent(hEvent: Win32__impl_l0.WSAEVENT): Int32 {
+    return WSAResetEvent(hEvent)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSASend == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: lpBuffers len=param[2]
     // param-hint: lpNumberOfBytesSent optional
     // param-hint: lpOverlapped optional
     // param-hint: lpCompletionRoutine optional
     // pinvoke-hint: SetLastError
     func WSASend(s: Win32__impl_l0.SOCKET, lpBuffers: CPointer<Win32__impl_l0.WSABUFAbi>, dwBufferCount: UInt32, lpNumberOfBytesSent: CPointer<UInt32>, dwFlags: UInt32, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, lpCompletionRoutine: Win32__impl_l0.LPWSAOVERLAPPED_COMPLETION_ROUTINE): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSASend == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_WSASend(s: Win32__impl_l0.SOCKET, lpBuffers: CPointer<Win32__impl_l0.WSABUFAbi>, dwBufferCount: UInt32, lpNumberOfBytesSent: CPointer<UInt32>, dwFlags: UInt32, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, lpCompletionRoutine: Win32__impl_l0.LPWSAOVERLAPPED_COMPLETION_ROUTINE): Int32 {
+    return WSASend(s, lpBuffers, dwBufferCount, lpNumberOfBytesSent, dwFlags, lpOverlapped, lpCompletionRoutine)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSASendDisconnect == "on"]
+foreign {
+    // param-hint: lpOutboundDisconnectData optional
+    // pinvoke-hint: SetLastError
+    func WSASendDisconnect(s: Win32__impl_l0.SOCKET, lpOutboundDisconnectData: CPointer<Win32__impl_l0.WSABUFAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSASendDisconnect == "on"]
+public unsafe func Windows_WSASendDisconnect(s: Win32__impl_l0.SOCKET, lpOutboundDisconnectData: CPointer<Win32__impl_l0.WSABUFAbi>): Int32 {
+    return WSASendDisconnect(s, lpOutboundDisconnectData)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSASendMsg == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: lpNumberOfBytesSent optional
     // param-hint: lpOverlapped optional
     // param-hint: lpCompletionRoutine optional
     // pinvoke-hint: SetLastError
     func WSASendMsg(Handle: Win32__impl_l0.SOCKET, lpMsg: CPointer<Win32__impl_l1.WSAMSGAbi>, dwFlags: UInt32, lpNumberOfBytesSent: CPointer<UInt32>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, lpCompletionRoutine: Win32__impl_l0.LPWSAOVERLAPPED_COMPLETION_ROUTINE): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSASendMsg == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_WSASendMsg(Handle: Win32__impl_l0.SOCKET, lpMsg: CPointer<Win32__impl_l1.WSAMSGAbi>, dwFlags: UInt32, lpNumberOfBytesSent: CPointer<UInt32>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, lpCompletionRoutine: Win32__impl_l0.LPWSAOVERLAPPED_COMPLETION_ROUTINE): Int32 {
+    return WSASendMsg(Handle, lpMsg, dwFlags, lpNumberOfBytesSent, lpOverlapped, lpCompletionRoutine)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSASendTo == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: lpBuffers len=param[2]
     // param-hint: lpNumberOfBytesSent optional
     // param-hint: lpTo bytes=param[6] optional
@@ -803,38 +1433,998 @@ foreign {
     func WSASendTo(s: Win32__impl_l0.SOCKET, lpBuffers: CPointer<Win32__impl_l0.WSABUFAbi>, dwBufferCount: UInt32, lpNumberOfBytesSent: CPointer<UInt32>, dwFlags: UInt32, lpTo: CPointer<Win32__impl_l1.SOCKADDRAbi>, iTolen: Int32, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, lpCompletionRoutine: Win32__impl_l0.LPWSAOVERLAPPED_COMPLETION_ROUTINE): Int32
 }
 
-@When[WINDOWS_NETWORKING == "on"]
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSASendTo == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_WSASendTo(s: Win32__impl_l0.SOCKET, lpBuffers: CPointer<Win32__impl_l0.WSABUFAbi>, dwBufferCount: UInt32, lpNumberOfBytesSent: CPointer<UInt32>, dwFlags: UInt32, lpTo: CPointer<Win32__impl_l1.SOCKADDRAbi>, iTolen: Int32, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, lpCompletionRoutine: Win32__impl_l0.LPWSAOVERLAPPED_COMPLETION_ROUTINE): Int32 {
+    return WSASendTo(s, lpBuffers, dwBufferCount, lpNumberOfBytesSent, dwFlags, lpTo, iTolen, lpOverlapped, lpCompletionRoutine)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSASetBlockingHook == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSASetBlockingHook(lpBlockFunc: Win32_Foundation.FARPROC): Win32_Foundation.FARPROC
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSASetBlockingHook == "on"]
+public unsafe func Windows_WSASetBlockingHook(lpBlockFunc: Win32_Foundation.FARPROC): Win32_Foundation.FARPROC {
+    return WSASetBlockingHook(lpBlockFunc)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSASetEvent == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSASetEvent(hEvent: Win32__impl_l0.WSAEVENT): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSASetEvent == "on"]
+public unsafe func Windows_WSASetEvent(hEvent: Win32__impl_l0.WSAEVENT): Int32 {
+    return WSASetEvent(hEvent)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSASetLastError == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSASetLastError(iError: Int32): Unit
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSASetLastError == "on"]
+public unsafe func Windows_WSASetLastError(iError: Int32): Unit {
+    WSASetLastError(iError)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSASetServiceA == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSASetServiceA(lpqsRegInfo: CPointer<WSAQUERYSETAAbi>, essoperation: Win32__impl_l0.WSAESETSERVICEOPAbi, dwControlFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSASetServiceA == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_WSASetServiceA(lpqsRegInfo: CPointer<WSAQUERYSETAAbi>, essoperation: Win32__impl_l0.WSAESETSERVICEOPAbi, dwControlFlags: UInt32): Int32 {
+    return WSASetServiceA(lpqsRegInfo, essoperation, dwControlFlags)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSASetServiceW == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSASetServiceW(lpqsRegInfo: CPointer<WSAQUERYSETWAbi>, essoperation: Win32__impl_l0.WSAESETSERVICEOPAbi, dwControlFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSASetServiceW == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_WSASetServiceW(lpqsRegInfo: CPointer<WSAQUERYSETWAbi>, essoperation: Win32__impl_l0.WSAESETSERVICEOPAbi, dwControlFlags: UInt32): Int32 {
+    return WSASetServiceW(lpqsRegInfo, essoperation, dwControlFlags)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSASocketA == "on"]
+foreign {
+    // param-hint: lpProtocolInfo optional
+    // pinvoke-hint: SetLastError
+    func WSASocketA(af: Int32, type_: Int32, protocol: Int32, lpProtocolInfo: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOAAbi>, g: UInt32, dwFlags: UInt32): Win32__impl_l0.SOCKET
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSASocketA == "on"]
+public unsafe func Windows_WSASocketA(af: Int32, type_: Int32, protocol: Int32, lpProtocolInfo: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOAAbi>, g: UInt32, dwFlags: UInt32): Win32__impl_l0.SOCKET {
+    return WSASocketA(af, type_, protocol, lpProtocolInfo, g, dwFlags)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSASocketW == "on"]
+foreign {
+    // param-hint: lpProtocolInfo optional
+    // pinvoke-hint: SetLastError
+    func WSASocketW(af: Int32, type_: Int32, protocol: Int32, lpProtocolInfo: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>, g: UInt32, dwFlags: UInt32): Win32__impl_l0.SOCKET
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSASocketW == "on"]
+public unsafe func Windows_WSASocketW(af: Int32, type_: Int32, protocol: Int32, lpProtocolInfo: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>, g: UInt32, dwFlags: UInt32): Win32__impl_l0.SOCKET {
+    return WSASocketW(af, type_, protocol, lpProtocolInfo, g, dwFlags)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAStartup == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSAStartup(wVersionRequested: UInt16, lpWSAData: CPointer<Win32__impl_l0.WSADATAAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAStartup == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_WSAStartup(wVersionRequested: UInt16, lpWSAData: CPointer<Win32__impl_l0.WSADATAAbi>): Int32 {
+    return WSAStartup(wVersionRequested, lpWSAData)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAStringToAddressA == "on"]
+foreign {
+    // param-hint: lpProtocolInfo optional
+    // param-hint: lpAddress bytes=param[4]
+    // pinvoke-hint: SetLastError
+    func WSAStringToAddressA(AddressString: CPointer<UInt8>, AddressFamily: Int32, lpProtocolInfo: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOAAbi>, lpAddress: CPointer<Win32__impl_l1.SOCKADDRAbi>, lpAddressLength: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAStringToAddressA == "on"]
+public unsafe func Windows_WSAStringToAddressA(AddressString: CPointer<UInt8>, AddressFamily: Int32, lpProtocolInfo: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOAAbi>, lpAddress: CPointer<Win32__impl_l1.SOCKADDRAbi>, lpAddressLength: CPointer<Int32>): Int32 {
+    return WSAStringToAddressA(AddressString, AddressFamily, lpProtocolInfo, lpAddress, lpAddressLength)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAStringToAddressW == "on"]
+foreign {
+    // param-hint: lpProtocolInfo optional
+    // param-hint: lpAddress bytes=param[4]
+    // pinvoke-hint: SetLastError
+    func WSAStringToAddressW(AddressString: CPointer<UInt16>, AddressFamily: Int32, lpProtocolInfo: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>, lpAddress: CPointer<Win32__impl_l1.SOCKADDRAbi>, lpAddressLength: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAStringToAddressW == "on"]
+public unsafe func Windows_WSAStringToAddressW(AddressString: CPointer<UInt16>, AddressFamily: Int32, lpProtocolInfo: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>, lpAddress: CPointer<Win32__impl_l1.SOCKADDRAbi>, lpAddressLength: CPointer<Int32>): Int32 {
+    return WSAStringToAddressW(AddressString, AddressFamily, lpProtocolInfo, lpAddress, lpAddressLength)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAUnadvertiseProvider == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSAUnadvertiseProvider(puuidProviderId: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAUnadvertiseProvider == "on"]
+public unsafe func Windows_WSAUnadvertiseProvider(puuidProviderId: CPointer<GUID>): Int32 {
+    return WSAUnadvertiseProvider(puuidProviderId)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAUnhookBlockingHook == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSAUnhookBlockingHook(): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAUnhookBlockingHook == "on"]
+public unsafe func Windows_WSAUnhookBlockingHook(): Int32 {
+    return WSAUnhookBlockingHook()
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAWaitForMultipleEvents == "on"]
+foreign {
+    // param-hint: lphEvents len=param[0]
+    // pinvoke-hint: SetLastError
+    func WSAWaitForMultipleEvents(cEvents: UInt32, lphEvents: CPointer<CPointer<Unit>>, fWaitAll: Int32, dwTimeout: UInt32, fAlertable: Int32): Win32_Foundation.WAIT_EVENTAbi
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSAWaitForMultipleEvents == "on"]
+public unsafe func Windows_WSAWaitForMultipleEvents(cEvents: UInt32, lphEvents: CPointer<CPointer<Unit>>, fWaitAll: Int32, dwTimeout: UInt32, fAlertable: Int32): Win32_Foundation.WAIT_EVENTAbi {
+    return WSAWaitForMultipleEvents(cEvents, lphEvents, fWaitAll, dwTimeout, fAlertable)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCDeinstallProvider == "on"]
+foreign {
+    func WSCDeinstallProvider(lpProviderId: CPointer<GUID>, lpErrno: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCDeinstallProvider == "on"]
+public unsafe func Windows_WSCDeinstallProvider(lpProviderId: CPointer<GUID>, lpErrno: CPointer<Int32>): Int32 {
+    return WSCDeinstallProvider(lpProviderId, lpErrno)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCDeinstallProvider32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func WSCDeinstallProvider32(lpProviderId: CPointer<GUID>, lpErrno: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCDeinstallProvider32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_WSCDeinstallProvider32(lpProviderId: CPointer<GUID>, lpErrno: CPointer<Int32>): Int32 {
+    return WSCDeinstallProvider32(lpProviderId, lpErrno)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCEnableNSProvider == "on"]
+foreign {
+    func WSCEnableNSProvider(lpProviderId: CPointer<GUID>, fEnable: Int32): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCEnableNSProvider == "on"]
+public unsafe func Windows_WSCEnableNSProvider(lpProviderId: CPointer<GUID>, fEnable: Int32): Int32 {
+    return WSCEnableNSProvider(lpProviderId, fEnable)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCEnableNSProvider32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func WSCEnableNSProvider32(lpProviderId: CPointer<GUID>, fEnable: Int32): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCEnableNSProvider32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_WSCEnableNSProvider32(lpProviderId: CPointer<GUID>, fEnable: Int32): Int32 {
+    return WSCEnableNSProvider32(lpProviderId, fEnable)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCEnumNameSpaceProviders32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: lpnspBuffer bytes=param[0]
+    func WSCEnumNameSpaceProviders32(lpdwBufferLength: CPointer<UInt32>, lpnspBuffer: CPointer<Win32__impl_l0.WSANAMESPACE_INFOWAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCEnumNameSpaceProviders32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_WSCEnumNameSpaceProviders32(lpdwBufferLength: CPointer<UInt32>, lpnspBuffer: CPointer<Win32__impl_l0.WSANAMESPACE_INFOWAbi>): Int32 {
+    return WSCEnumNameSpaceProviders32(lpdwBufferLength, lpnspBuffer)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCEnumNameSpaceProvidersEx32 == "on" && (arch == "x86_64" && Windows_Win32_System_Com == "on" || arch == "aarch64" && Windows_Win32_System_Com == "on")]
+foreign {
+    // param-hint: lpnspBuffer bytes=param[0]
+    func WSCEnumNameSpaceProvidersEx32(lpdwBufferLength: CPointer<UInt32>, lpnspBuffer: CPointer<Win32__impl_l1.WSANAMESPACE_INFOEXWAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCEnumNameSpaceProvidersEx32 == "on" && (arch == "x86_64" && Windows_Win32_System_Com == "on" || arch == "aarch64" && Windows_Win32_System_Com == "on")]
+public unsafe func Windows_WSCEnumNameSpaceProvidersEx32(lpdwBufferLength: CPointer<UInt32>, lpnspBuffer: CPointer<Win32__impl_l1.WSANAMESPACE_INFOEXWAbi>): Int32 {
+    return WSCEnumNameSpaceProvidersEx32(lpdwBufferLength, lpnspBuffer)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCEnumProtocols == "on"]
+foreign {
+    // param-hint: lpiProtocols optional
+    // param-hint: lpProtocolBuffer bytes=param[2] optional
+    func WSCEnumProtocols(lpiProtocols: CPointer<Int32>, lpProtocolBuffer: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>, lpdwBufferLength: CPointer<UInt32>, lpErrno: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCEnumProtocols == "on"]
+public unsafe func Windows_WSCEnumProtocols(lpiProtocols: CPointer<Int32>, lpProtocolBuffer: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>, lpdwBufferLength: CPointer<UInt32>, lpErrno: CPointer<Int32>): Int32 {
+    return WSCEnumProtocols(lpiProtocols, lpProtocolBuffer, lpdwBufferLength, lpErrno)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCEnumProtocols32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: lpiProtocols optional
+    // param-hint: lpProtocolBuffer bytes=param[2]
+    func WSCEnumProtocols32(lpiProtocols: CPointer<Int32>, lpProtocolBuffer: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>, lpdwBufferLength: CPointer<UInt32>, lpErrno: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCEnumProtocols32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_WSCEnumProtocols32(lpiProtocols: CPointer<Int32>, lpProtocolBuffer: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>, lpdwBufferLength: CPointer<UInt32>, lpErrno: CPointer<Int32>): Int32 {
+    return WSCEnumProtocols32(lpiProtocols, lpProtocolBuffer, lpdwBufferLength, lpErrno)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCGetApplicationCategory == "on"]
+foreign {
+    // param-hint: Path len=param[1]
+    // param-hint: Extra len=param[3] optional
+    func WSCGetApplicationCategory(Path: CPointer<UInt16>, PathLength: UInt32, Extra: CPointer<UInt16>, ExtraLength: UInt32, pPermittedLspCategories: CPointer<UInt32>, lpErrno: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCGetApplicationCategory == "on"]
+public unsafe func Windows_WSCGetApplicationCategory(Path: CPointer<UInt16>, PathLength: UInt32, Extra: CPointer<UInt16>, ExtraLength: UInt32, pPermittedLspCategories: CPointer<UInt32>, lpErrno: CPointer<Int32>): Int32 {
+    return WSCGetApplicationCategory(Path, PathLength, Extra, ExtraLength, pPermittedLspCategories, lpErrno)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCGetProviderInfo == "on"]
+foreign {
+    // param-hint: Info bytes=param[3]
+    func WSCGetProviderInfo(lpProviderId: CPointer<GUID>, InfoType: Win32__impl_l0.WSC_PROVIDER_INFO_TYPEAbi, Info: CPointer<UInt8>, InfoSize: CPointer<UIntNative>, Flags: UInt32, lpErrno: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCGetProviderInfo == "on"]
+public unsafe func Windows_WSCGetProviderInfo(lpProviderId: CPointer<GUID>, InfoType: Win32__impl_l0.WSC_PROVIDER_INFO_TYPEAbi, Info: CPointer<UInt8>, InfoSize: CPointer<UIntNative>, Flags: UInt32, lpErrno: CPointer<Int32>): Int32 {
+    return WSCGetProviderInfo(lpProviderId, InfoType, Info, InfoSize, Flags, lpErrno)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCGetProviderInfo32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: Info bytes=param[3]
+    func WSCGetProviderInfo32(lpProviderId: CPointer<GUID>, InfoType: Win32__impl_l0.WSC_PROVIDER_INFO_TYPEAbi, Info: CPointer<UInt8>, InfoSize: CPointer<UIntNative>, Flags: UInt32, lpErrno: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCGetProviderInfo32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_WSCGetProviderInfo32(lpProviderId: CPointer<GUID>, InfoType: Win32__impl_l0.WSC_PROVIDER_INFO_TYPEAbi, Info: CPointer<UInt8>, InfoSize: CPointer<UIntNative>, Flags: UInt32, lpErrno: CPointer<Int32>): Int32 {
+    return WSCGetProviderInfo32(lpProviderId, InfoType, Info, InfoSize, Flags, lpErrno)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCGetProviderPath == "on"]
+foreign {
+    // param-hint: lpszProviderDllPath len=param[2]
+    func WSCGetProviderPath(lpProviderId: CPointer<GUID>, lpszProviderDllPath: CPointer<UInt16>, lpProviderDllPathLen: CPointer<Int32>, lpErrno: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCGetProviderPath == "on"]
+public unsafe func Windows_WSCGetProviderPath(lpProviderId: CPointer<GUID>, lpszProviderDllPath: CPointer<UInt16>, lpProviderDllPathLen: CPointer<Int32>, lpErrno: CPointer<Int32>): Int32 {
+    return WSCGetProviderPath(lpProviderId, lpszProviderDllPath, lpProviderDllPathLen, lpErrno)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCGetProviderPath32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: lpszProviderDllPath len=param[2]
+    func WSCGetProviderPath32(lpProviderId: CPointer<GUID>, lpszProviderDllPath: CPointer<UInt16>, lpProviderDllPathLen: CPointer<Int32>, lpErrno: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCGetProviderPath32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_WSCGetProviderPath32(lpProviderId: CPointer<GUID>, lpszProviderDllPath: CPointer<UInt16>, lpProviderDllPathLen: CPointer<Int32>, lpErrno: CPointer<Int32>): Int32 {
+    return WSCGetProviderPath32(lpProviderId, lpszProviderDllPath, lpProviderDllPathLen, lpErrno)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCInstallNameSpace == "on"]
+foreign {
+    func WSCInstallNameSpace(lpszIdentifier: CPointer<UInt16>, lpszPathName: CPointer<UInt16>, dwNameSpace: UInt32, dwVersion: UInt32, lpProviderId: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCInstallNameSpace == "on"]
+public unsafe func Windows_WSCInstallNameSpace(lpszIdentifier: CPointer<UInt16>, lpszPathName: CPointer<UInt16>, dwNameSpace: UInt32, dwVersion: UInt32, lpProviderId: CPointer<GUID>): Int32 {
+    return WSCInstallNameSpace(lpszIdentifier, lpszPathName, dwNameSpace, dwVersion, lpProviderId)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCInstallNameSpace32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func WSCInstallNameSpace32(lpszIdentifier: CPointer<UInt16>, lpszPathName: CPointer<UInt16>, dwNameSpace: UInt32, dwVersion: UInt32, lpProviderId: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCInstallNameSpace32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_WSCInstallNameSpace32(lpszIdentifier: CPointer<UInt16>, lpszPathName: CPointer<UInt16>, dwNameSpace: UInt32, dwVersion: UInt32, lpProviderId: CPointer<GUID>): Int32 {
+    return WSCInstallNameSpace32(lpszIdentifier, lpszPathName, dwNameSpace, dwVersion, lpProviderId)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCInstallNameSpaceEx == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func WSCInstallNameSpaceEx(lpszIdentifier: CPointer<UInt16>, lpszPathName: CPointer<UInt16>, dwNameSpace: UInt32, dwVersion: UInt32, lpProviderId: CPointer<GUID>, lpProviderSpecific: CPointer<Win32__impl_l0.BLOBAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCInstallNameSpaceEx == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_WSCInstallNameSpaceEx(lpszIdentifier: CPointer<UInt16>, lpszPathName: CPointer<UInt16>, dwNameSpace: UInt32, dwVersion: UInt32, lpProviderId: CPointer<GUID>, lpProviderSpecific: CPointer<Win32__impl_l0.BLOBAbi>): Int32 {
+    return WSCInstallNameSpaceEx(lpszIdentifier, lpszPathName, dwNameSpace, dwVersion, lpProviderId, lpProviderSpecific)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCInstallNameSpaceEx32 == "on" && (arch == "x86_64" && Windows_Win32_System_Com == "on" || arch == "aarch64" && Windows_Win32_System_Com == "on")]
+foreign {
+    func WSCInstallNameSpaceEx32(lpszIdentifier: CPointer<UInt16>, lpszPathName: CPointer<UInt16>, dwNameSpace: UInt32, dwVersion: UInt32, lpProviderId: CPointer<GUID>, lpProviderSpecific: CPointer<Win32__impl_l0.BLOBAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCInstallNameSpaceEx32 == "on" && (arch == "x86_64" && Windows_Win32_System_Com == "on" || arch == "aarch64" && Windows_Win32_System_Com == "on")]
+public unsafe func Windows_WSCInstallNameSpaceEx32(lpszIdentifier: CPointer<UInt16>, lpszPathName: CPointer<UInt16>, dwNameSpace: UInt32, dwVersion: UInt32, lpProviderId: CPointer<GUID>, lpProviderSpecific: CPointer<Win32__impl_l0.BLOBAbi>): Int32 {
+    return WSCInstallNameSpaceEx32(lpszIdentifier, lpszPathName, dwNameSpace, dwVersion, lpProviderId, lpProviderSpecific)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCInstallProvider == "on"]
+foreign {
+    // param-hint: lpProtocolInfoList len=param[3]
+    func WSCInstallProvider(lpProviderId: CPointer<GUID>, lpszProviderDllPath: CPointer<UInt16>, lpProtocolInfoList: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>, dwNumberOfEntries: UInt32, lpErrno: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCInstallProvider == "on"]
+public unsafe func Windows_WSCInstallProvider(lpProviderId: CPointer<GUID>, lpszProviderDllPath: CPointer<UInt16>, lpProtocolInfoList: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>, dwNumberOfEntries: UInt32, lpErrno: CPointer<Int32>): Int32 {
+    return WSCInstallProvider(lpProviderId, lpszProviderDllPath, lpProtocolInfoList, dwNumberOfEntries, lpErrno)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCInstallProvider64_32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: lpProtocolInfoList len=param[3]
+    func WSCInstallProvider64_32(lpProviderId: CPointer<GUID>, lpszProviderDllPath: CPointer<UInt16>, lpProtocolInfoList: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>, dwNumberOfEntries: UInt32, lpErrno: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCInstallProvider64_32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_WSCInstallProvider64_32(lpProviderId: CPointer<GUID>, lpszProviderDllPath: CPointer<UInt16>, lpProtocolInfoList: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>, dwNumberOfEntries: UInt32, lpErrno: CPointer<Int32>): Int32 {
+    return WSCInstallProvider64_32(lpProviderId, lpszProviderDllPath, lpProtocolInfoList, dwNumberOfEntries, lpErrno)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCInstallProviderAndChains64_32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: lpProtocolInfoList len=param[6]
+    // param-hint: lpdwCatalogEntryId optional
+    func WSCInstallProviderAndChains64_32(lpProviderId: CPointer<GUID>, lpszProviderDllPath: CPointer<UInt16>, lpszProviderDllPath32: CPointer<UInt16>, lpszLspName: CPointer<UInt16>, dwServiceFlags: UInt32, lpProtocolInfoList: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>, dwNumberOfEntries: UInt32, lpdwCatalogEntryId: CPointer<UInt32>, lpErrno: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCInstallProviderAndChains64_32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_WSCInstallProviderAndChains64_32(lpProviderId: CPointer<GUID>, lpszProviderDllPath: CPointer<UInt16>, lpszProviderDllPath32: CPointer<UInt16>, lpszLspName: CPointer<UInt16>, dwServiceFlags: UInt32, lpProtocolInfoList: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>, dwNumberOfEntries: UInt32, lpdwCatalogEntryId: CPointer<UInt32>, lpErrno: CPointer<Int32>): Int32 {
+    return WSCInstallProviderAndChains64_32(lpProviderId, lpszProviderDllPath, lpszProviderDllPath32, lpszLspName, dwServiceFlags, lpProtocolInfoList, dwNumberOfEntries, lpdwCatalogEntryId, lpErrno)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCSetApplicationCategory == "on"]
+foreign {
+    // param-hint: Path len=param[1]
+    // param-hint: Extra len=param[3] optional
+    // param-hint: pPrevPermLspCat optional
+    func WSCSetApplicationCategory(Path: CPointer<UInt16>, PathLength: UInt32, Extra: CPointer<UInt16>, ExtraLength: UInt32, PermittedLspCategories: UInt32, pPrevPermLspCat: CPointer<UInt32>, lpErrno: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCSetApplicationCategory == "on"]
+public unsafe func Windows_WSCSetApplicationCategory(Path: CPointer<UInt16>, PathLength: UInt32, Extra: CPointer<UInt16>, ExtraLength: UInt32, PermittedLspCategories: UInt32, pPrevPermLspCat: CPointer<UInt32>, lpErrno: CPointer<Int32>): Int32 {
+    return WSCSetApplicationCategory(Path, PathLength, Extra, ExtraLength, PermittedLspCategories, pPrevPermLspCat, lpErrno)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCSetProviderInfo == "on"]
+foreign {
+    // param-hint: Info bytes=param[3]
+    func WSCSetProviderInfo(lpProviderId: CPointer<GUID>, InfoType: Win32__impl_l0.WSC_PROVIDER_INFO_TYPEAbi, Info: CPointer<UInt8>, InfoSize: UIntNative, Flags: UInt32, lpErrno: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCSetProviderInfo == "on"]
+public unsafe func Windows_WSCSetProviderInfo(lpProviderId: CPointer<GUID>, InfoType: Win32__impl_l0.WSC_PROVIDER_INFO_TYPEAbi, Info: CPointer<UInt8>, InfoSize: UIntNative, Flags: UInt32, lpErrno: CPointer<Int32>): Int32 {
+    return WSCSetProviderInfo(lpProviderId, InfoType, Info, InfoSize, Flags, lpErrno)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCSetProviderInfo32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: Info bytes=param[3]
+    func WSCSetProviderInfo32(lpProviderId: CPointer<GUID>, InfoType: Win32__impl_l0.WSC_PROVIDER_INFO_TYPEAbi, Info: CPointer<UInt8>, InfoSize: UIntNative, Flags: UInt32, lpErrno: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCSetProviderInfo32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_WSCSetProviderInfo32(lpProviderId: CPointer<GUID>, InfoType: Win32__impl_l0.WSC_PROVIDER_INFO_TYPEAbi, Info: CPointer<UInt8>, InfoSize: UIntNative, Flags: UInt32, lpErrno: CPointer<Int32>): Int32 {
+    return WSCSetProviderInfo32(lpProviderId, InfoType, Info, InfoSize, Flags, lpErrno)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCUnInstallNameSpace == "on"]
+foreign {
+    func WSCUnInstallNameSpace(lpProviderId: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCUnInstallNameSpace == "on"]
+public unsafe func Windows_WSCUnInstallNameSpace(lpProviderId: CPointer<GUID>): Int32 {
+    return WSCUnInstallNameSpace(lpProviderId)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCUnInstallNameSpace32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func WSCUnInstallNameSpace32(lpProviderId: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCUnInstallNameSpace32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_WSCUnInstallNameSpace32(lpProviderId: CPointer<GUID>): Int32 {
+    return WSCUnInstallNameSpace32(lpProviderId)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCUpdateProvider == "on"]
+foreign {
+    // param-hint: lpProtocolInfoList len=param[3]
+    func WSCUpdateProvider(lpProviderId: CPointer<GUID>, lpszProviderDllPath: CPointer<UInt16>, lpProtocolInfoList: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>, dwNumberOfEntries: UInt32, lpErrno: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCUpdateProvider == "on"]
+public unsafe func Windows_WSCUpdateProvider(lpProviderId: CPointer<GUID>, lpszProviderDllPath: CPointer<UInt16>, lpProtocolInfoList: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>, dwNumberOfEntries: UInt32, lpErrno: CPointer<Int32>): Int32 {
+    return WSCUpdateProvider(lpProviderId, lpszProviderDllPath, lpProtocolInfoList, dwNumberOfEntries, lpErrno)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCUpdateProvider32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: lpProtocolInfoList len=param[3]
+    func WSCUpdateProvider32(lpProviderId: CPointer<GUID>, lpszProviderDllPath: CPointer<UInt16>, lpProtocolInfoList: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>, dwNumberOfEntries: UInt32, lpErrno: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCUpdateProvider32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_WSCUpdateProvider32(lpProviderId: CPointer<GUID>, lpszProviderDllPath: CPointer<UInt16>, lpProtocolInfoList: CPointer<Win32__impl_l1.WSAPROTOCOL_INFOWAbi>, dwNumberOfEntries: UInt32, lpErrno: CPointer<Int32>): Int32 {
+    return WSCUpdateProvider32(lpProviderId, lpszProviderDllPath, lpProtocolInfoList, dwNumberOfEntries, lpErrno)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCWriteNameSpaceOrder == "on"]
+foreign {
+    func WSCWriteNameSpaceOrder(lpProviderId: CPointer<GUID>, dwNumberOfEntries: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCWriteNameSpaceOrder == "on"]
+public unsafe func Windows_WSCWriteNameSpaceOrder(lpProviderId: CPointer<GUID>, dwNumberOfEntries: UInt32): Int32 {
+    return WSCWriteNameSpaceOrder(lpProviderId, dwNumberOfEntries)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCWriteNameSpaceOrder32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func WSCWriteNameSpaceOrder32(lpProviderId: CPointer<GUID>, dwNumberOfEntries: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCWriteNameSpaceOrder32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_WSCWriteNameSpaceOrder32(lpProviderId: CPointer<GUID>, dwNumberOfEntries: UInt32): Int32 {
+    return WSCWriteNameSpaceOrder32(lpProviderId, dwNumberOfEntries)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCWriteProviderOrder == "on"]
+foreign {
+    func WSCWriteProviderOrder(lpwdCatalogEntryId: CPointer<UInt32>, dwNumberOfEntries: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCWriteProviderOrder == "on"]
+public unsafe func Windows_WSCWriteProviderOrder(lpwdCatalogEntryId: CPointer<UInt32>, dwNumberOfEntries: UInt32): Int32 {
+    return WSCWriteProviderOrder(lpwdCatalogEntryId, dwNumberOfEntries)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCWriteProviderOrder32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func WSCWriteProviderOrder32(lpwdCatalogEntryId: CPointer<UInt32>, dwNumberOfEntries: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_WSCWriteProviderOrder32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_WSCWriteProviderOrder32(lpwdCatalogEntryId: CPointer<UInt32>, dwNumberOfEntries: UInt32): Int32 {
+    return WSCWriteProviderOrder32(lpwdCatalogEntryId, dwNumberOfEntries)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock___WSAFDIsSet == "on"]
+foreign {
+    func __WSAFDIsSet(fd: Win32__impl_l0.SOCKET, param1: CPointer<Win32__impl_l1.FD_SETAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock___WSAFDIsSet == "on"]
+public unsafe func Windows___WSAFDIsSet(fd: Win32__impl_l0.SOCKET, param1: CPointer<Win32__impl_l1.FD_SETAbi>): Int32 {
+    return __WSAFDIsSet(fd, param1)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_accept == "on"]
+foreign {
+    // param-hint: addr bytes=param[2] optional
+    // param-hint: addrlen optional
+    // pinvoke-hint: SetLastError
+    func accept(s: Win32__impl_l0.SOCKET, addr: CPointer<Win32__impl_l1.SOCKADDRAbi>, addrlen: CPointer<Int32>): Win32__impl_l0.SOCKET
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_accept == "on"]
+public unsafe func Windows_accept(s: Win32__impl_l0.SOCKET, addr: CPointer<Win32__impl_l1.SOCKADDRAbi>, addrlen: CPointer<Int32>): Win32__impl_l0.SOCKET {
+    return accept(s, addr, addrlen)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_bind == "on"]
+foreign {
+    // param-hint: name bytes=param[2]
+    // pinvoke-hint: SetLastError
+    func bind(s: Win32__impl_l0.SOCKET, name: CPointer<Win32__impl_l1.SOCKADDRAbi>, namelen: Int32): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_bind == "on"]
+public unsafe func Windows_bind(s: Win32__impl_l0.SOCKET, name: CPointer<Win32__impl_l1.SOCKADDRAbi>, namelen: Int32): Int32 {
+    return bind(s, name, namelen)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_closesocket == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func closesocket(s: Win32__impl_l0.SOCKET): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_closesocket == "on"]
+public unsafe func Windows_closesocket(s: Win32__impl_l0.SOCKET): Int32 {
+    return closesocket(s)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_connect == "on"]
+foreign {
+    // param-hint: name bytes=param[2]
+    // pinvoke-hint: SetLastError
+    func connect(s: Win32__impl_l0.SOCKET, name: CPointer<Win32__impl_l1.SOCKADDRAbi>, namelen: Int32): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_connect == "on"]
+public unsafe func Windows_connect(s: Win32__impl_l0.SOCKET, name: CPointer<Win32__impl_l1.SOCKADDRAbi>, namelen: Int32): Int32 {
+    return connect(s, name, namelen)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_freeaddrinfo == "on"]
+foreign {
+    // param-hint: pAddrInfo optional
+    // pinvoke-hint: SetLastError
+    func freeaddrinfo(pAddrInfo: CPointer<Win32__impl_l1.ADDRINFOAAbi>): Unit
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_freeaddrinfo == "on"]
+public unsafe func Windows_freeaddrinfo(pAddrInfo: CPointer<Win32__impl_l1.ADDRINFOAAbi>): Unit {
+    freeaddrinfo(pAddrInfo)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_getaddrinfo == "on"]
+foreign {
+    // param-hint: pNodeName optional
+    // param-hint: pServiceName optional
+    // param-hint: pHints optional
+    // pinvoke-hint: SetLastError
+    func getaddrinfo(pNodeName: CPointer<UInt8>, pServiceName: CPointer<UInt8>, pHints: CPointer<Win32__impl_l1.ADDRINFOAAbi>, ppResult: CPointer<CPointer<Win32__impl_l1.ADDRINFOAAbi>>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_getaddrinfo == "on"]
+public unsafe func Windows_getaddrinfo(pNodeName: CPointer<UInt8>, pServiceName: CPointer<UInt8>, pHints: CPointer<Win32__impl_l1.ADDRINFOAAbi>, ppResult: CPointer<CPointer<Win32__impl_l1.ADDRINFOAAbi>>): Int32 {
+    return getaddrinfo(pNodeName, pServiceName, pHints, ppResult)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_gethostbyaddr == "on"]
+foreign {
+    // param-hint: addr bytes=param[1]
+    // pinvoke-hint: SetLastError
+    func gethostbyaddr(addr: CPointer<UInt8>, len: Int32, type_: Int32): CPointer<Win32__impl_l0.HOSTENTAbi>
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_gethostbyaddr == "on"]
+public unsafe func Windows_gethostbyaddr(addr: CPointer<UInt8>, len: Int32, type_: Int32): CPointer<Win32__impl_l0.HOSTENTAbi> {
+    return gethostbyaddr(addr, len, type_)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_gethostbyname == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func gethostbyname(name: CPointer<UInt8>): CPointer<Win32__impl_l0.HOSTENTAbi>
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_gethostbyname == "on"]
+public unsafe func Windows_gethostbyname(name: CPointer<UInt8>): CPointer<Win32__impl_l0.HOSTENTAbi> {
+    return gethostbyname(name)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_gethostname == "on"]
+foreign {
+    // param-hint: name bytes=param[1]
+    // pinvoke-hint: SetLastError
+    func gethostname(name: CPointer<UInt8>, namelen: Int32): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_gethostname == "on"]
+public unsafe func Windows_gethostname(name: CPointer<UInt8>, namelen: Int32): Int32 {
+    return gethostname(name, namelen)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_getnameinfo == "on"]
+foreign {
+    // param-hint: pSockaddr bytes=param[1]
+    // param-hint: pNodeBuffer len=param[3] optional
+    // param-hint: pServiceBuffer len=param[5] optional
+    // pinvoke-hint: SetLastError
+    func getnameinfo(pSockaddr: CPointer<Win32__impl_l1.SOCKADDRAbi>, SockaddrLength: Win32__impl_l0.socklen_t, pNodeBuffer: CPointer<UInt8>, NodeBufferSize: UInt32, pServiceBuffer: CPointer<UInt8>, ServiceBufferSize: UInt32, Flags: Int32): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_getnameinfo == "on"]
+public unsafe func Windows_getnameinfo(pSockaddr: CPointer<Win32__impl_l1.SOCKADDRAbi>, SockaddrLength: Win32__impl_l0.socklen_t, pNodeBuffer: CPointer<UInt8>, NodeBufferSize: UInt32, pServiceBuffer: CPointer<UInt8>, ServiceBufferSize: UInt32, Flags: Int32): Int32 {
+    return getnameinfo(pSockaddr, SockaddrLength, pNodeBuffer, NodeBufferSize, pServiceBuffer, ServiceBufferSize, Flags)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_getpeername == "on"]
+foreign {
+    // param-hint: name bytes=param[2]
+    // pinvoke-hint: SetLastError
+    func getpeername(s: Win32__impl_l0.SOCKET, name: CPointer<Win32__impl_l1.SOCKADDRAbi>, namelen: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_getpeername == "on"]
+public unsafe func Windows_getpeername(s: Win32__impl_l0.SOCKET, name: CPointer<Win32__impl_l1.SOCKADDRAbi>, namelen: CPointer<Int32>): Int32 {
+    return getpeername(s, name, namelen)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_getprotobyname == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func getprotobyname(name: CPointer<UInt8>): CPointer<Win32__impl_l0.PROTOENTAbi>
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_getprotobyname == "on"]
+public unsafe func Windows_getprotobyname(name: CPointer<UInt8>): CPointer<Win32__impl_l0.PROTOENTAbi> {
+    return getprotobyname(name)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_getprotobynumber == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func getprotobynumber(number: Int32): CPointer<Win32__impl_l0.PROTOENTAbi>
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_getprotobynumber == "on"]
+public unsafe func Windows_getprotobynumber(number: Int32): CPointer<Win32__impl_l0.PROTOENTAbi> {
+    return getprotobynumber(number)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_getservbyname == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: proto optional
+    // pinvoke-hint: SetLastError
+    func getservbyname(name: CPointer<UInt8>, proto: CPointer<UInt8>): CPointer<Win32__impl_l0.SERVENTAbi>
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_getservbyname == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_getservbyname(name: CPointer<UInt8>, proto: CPointer<UInt8>): CPointer<Win32__impl_l0.SERVENTAbi> {
+    return getservbyname(name, proto)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_getservbyport == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: proto optional
+    // pinvoke-hint: SetLastError
+    func getservbyport(port: Int32, proto: CPointer<UInt8>): CPointer<Win32__impl_l0.SERVENTAbi>
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_getservbyport == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_getservbyport(port: Int32, proto: CPointer<UInt8>): CPointer<Win32__impl_l0.SERVENTAbi> {
+    return getservbyport(port, proto)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_getsockname == "on"]
+foreign {
+    // param-hint: name bytes=param[2]
+    // pinvoke-hint: SetLastError
+    func getsockname(s: Win32__impl_l0.SOCKET, name: CPointer<Win32__impl_l1.SOCKADDRAbi>, namelen: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_getsockname == "on"]
+public unsafe func Windows_getsockname(s: Win32__impl_l0.SOCKET, name: CPointer<Win32__impl_l1.SOCKADDRAbi>, namelen: CPointer<Int32>): Int32 {
+    return getsockname(s, name, namelen)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_getsockopt == "on"]
+foreign {
+    // param-hint: optval bytes=param[4]
+    // pinvoke-hint: SetLastError
+    func getsockopt(s: Win32__impl_l0.SOCKET, level: Int32, optname: Int32, optval: CPointer<UInt8>, optlen: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_getsockopt == "on"]
+public unsafe func Windows_getsockopt(s: Win32__impl_l0.SOCKET, level: Int32, optname: Int32, optval: CPointer<UInt8>, optlen: CPointer<Int32>): Int32 {
+    return getsockopt(s, level, optname, optval, optlen)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_htonl == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func htonl(hostlong: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_htonl == "on"]
+public unsafe func Windows_htonl(hostlong: UInt32): UInt32 {
+    return htonl(hostlong)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_htons == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func htons(hostshort: UInt16): UInt16
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_htons == "on"]
+public unsafe func Windows_htons(hostshort: UInt16): UInt16 {
+    return htons(hostshort)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_inet_addr == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func inet_addr(cp: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_inet_addr == "on"]
+public unsafe func Windows_inet_addr(cp: CPointer<UInt8>): UInt32 {
+    return inet_addr(cp)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_inet_ntoa == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func inet_ntoa(in_: Win32__impl_l0.IN_ADDRAbi): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_inet_ntoa == "on"]
+public unsafe func Windows_inet_ntoa(in_: Win32__impl_l0.IN_ADDRAbi): CPointer<UInt8> {
+    return inet_ntoa(in_)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_inet_ntop == "on"]
+foreign {
+    // param-hint: pStringBuf len=param[3]
+    // pinvoke-hint: SetLastError
+    func inet_ntop(Family: Int32, pAddr: CPointer<Unit>, pStringBuf: CPointer<UInt8>, StringBufSize: UIntNative): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_inet_ntop == "on"]
+public unsafe func Windows_inet_ntop(Family: Int32, pAddr: CPointer<Unit>, pStringBuf: CPointer<UInt8>, StringBufSize: UIntNative): CPointer<UInt8> {
+    return inet_ntop(Family, pAddr, pStringBuf, StringBufSize)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_inet_pton == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func inet_pton(Family: Int32, pszAddrString: CPointer<UInt8>, pAddrBuf: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_inet_pton == "on"]
+public unsafe func Windows_inet_pton(Family: Int32, pszAddrString: CPointer<UInt8>, pAddrBuf: CPointer<Unit>): Int32 {
+    return inet_pton(Family, pszAddrString, pAddrBuf)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_ioctlsocket == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func ioctlsocket(s: Win32__impl_l0.SOCKET, cmd: Int32, argp: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_ioctlsocket == "on"]
+public unsafe func Windows_ioctlsocket(s: Win32__impl_l0.SOCKET, cmd: Int32, argp: CPointer<UInt32>): Int32 {
+    return ioctlsocket(s, cmd, argp)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_listen == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func listen(s: Win32__impl_l0.SOCKET, backlog: Int32): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_listen == "on"]
+public unsafe func Windows_listen(s: Win32__impl_l0.SOCKET, backlog: Int32): Int32 {
+    return listen(s, backlog)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_ntohl == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func ntohl(netlong: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_ntohl == "on"]
+public unsafe func Windows_ntohl(netlong: UInt32): UInt32 {
+    return ntohl(netlong)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_ntohs == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func ntohs(netshort: UInt16): UInt16
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_ntohs == "on"]
+public unsafe func Windows_ntohs(netshort: UInt16): UInt16 {
+    return ntohs(netshort)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_recv == "on"]
+foreign {
+    // param-hint: buf bytes=param[2]
+    // pinvoke-hint: SetLastError
+    func recv(s: Win32__impl_l0.SOCKET, buf: CPointer<UInt8>, len: Int32, flags: Win32__impl_l0.SEND_RECV_FLAGSAbi): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_recv == "on"]
+public unsafe func Windows_recv(s: Win32__impl_l0.SOCKET, buf: CPointer<UInt8>, len: Int32, flags: Win32__impl_l0.SEND_RECV_FLAGSAbi): Int32 {
+    return recv(s, buf, len, flags)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_recvfrom == "on"]
+foreign {
+    // param-hint: buf bytes=param[2]
+    // param-hint: from bytes=param[5] optional
+    // param-hint: fromlen optional
+    // pinvoke-hint: SetLastError
+    func recvfrom(s: Win32__impl_l0.SOCKET, buf: CPointer<UInt8>, len: Int32, flags: Int32, from: CPointer<Win32__impl_l1.SOCKADDRAbi>, fromlen: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_recvfrom == "on"]
+public unsafe func Windows_recvfrom(s: Win32__impl_l0.SOCKET, buf: CPointer<UInt8>, len: Int32, flags: Int32, from: CPointer<Win32__impl_l1.SOCKADDRAbi>, fromlen: CPointer<Int32>): Int32 {
+    return recvfrom(s, buf, len, flags, from, fromlen)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_select == "on"]
+foreign {
+    // param-hint: readfds optional
+    // param-hint: writefds optional
+    // param-hint: exceptfds optional
+    // param-hint: timeout optional
+    // pinvoke-hint: SetLastError
+    func select(nfds: Int32, readfds: CPointer<Win32__impl_l1.FD_SETAbi>, writefds: CPointer<Win32__impl_l1.FD_SETAbi>, exceptfds: CPointer<Win32__impl_l1.FD_SETAbi>, timeout: CPointer<Win32__impl_l0.TIMEVALAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_select == "on"]
+public unsafe func Windows_select(nfds: Int32, readfds: CPointer<Win32__impl_l1.FD_SETAbi>, writefds: CPointer<Win32__impl_l1.FD_SETAbi>, exceptfds: CPointer<Win32__impl_l1.FD_SETAbi>, timeout: CPointer<Win32__impl_l0.TIMEVALAbi>): Int32 {
+    return select(nfds, readfds, writefds, exceptfds, timeout)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_send == "on"]
+foreign {
+    // param-hint: buf bytes=param[2]
+    // pinvoke-hint: SetLastError
+    func send(s: Win32__impl_l0.SOCKET, buf: CPointer<UInt8>, len: Int32, flags: Win32__impl_l0.SEND_RECV_FLAGSAbi): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_send == "on"]
+public unsafe func Windows_send(s: Win32__impl_l0.SOCKET, buf: CPointer<UInt8>, len: Int32, flags: Win32__impl_l0.SEND_RECV_FLAGSAbi): Int32 {
+    return send(s, buf, len, flags)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_sendto == "on"]
+foreign {
+    // param-hint: buf bytes=param[2]
+    // param-hint: to bytes=param[5]
+    // pinvoke-hint: SetLastError
+    func sendto(s: Win32__impl_l0.SOCKET, buf: CPointer<UInt8>, len: Int32, flags: Int32, to: CPointer<Win32__impl_l1.SOCKADDRAbi>, tolen: Int32): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_sendto == "on"]
+public unsafe func Windows_sendto(s: Win32__impl_l0.SOCKET, buf: CPointer<UInt8>, len: Int32, flags: Int32, to: CPointer<Win32__impl_l1.SOCKADDRAbi>, tolen: Int32): Int32 {
+    return sendto(s, buf, len, flags, to, tolen)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_setsockopt == "on"]
+foreign {
+    // param-hint: optval bytes=param[4] optional
+    // pinvoke-hint: SetLastError
+    func setsockopt(s: Win32__impl_l0.SOCKET, level: Int32, optname: Int32, optval: CPointer<UInt8>, optlen: Int32): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_setsockopt == "on"]
+public unsafe func Windows_setsockopt(s: Win32__impl_l0.SOCKET, level: Int32, optname: Int32, optval: CPointer<UInt8>, optlen: Int32): Int32 {
+    return setsockopt(s, level, optname, optval, optlen)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_shutdown == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func shutdown(s: Win32__impl_l0.SOCKET, how: Win32__impl_l0.WINSOCK_SHUTDOWN_HOWAbi): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_shutdown == "on"]
+public unsafe func Windows_shutdown(s: Win32__impl_l0.SOCKET, how: Win32__impl_l0.WINSOCK_SHUTDOWN_HOWAbi): Int32 {
+    return shutdown(s, how)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_socket == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func socket(af: Int32, type_: Win32__impl_l0.WINSOCK_SOCKET_TYPEAbi, protocol: Int32): Win32__impl_l0.SOCKET
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WS2_32 == "on" && Windows_Win32_Networking_WinSock_socket == "on"]
+public unsafe func Windows_socket(af: Int32, type_: Win32__impl_l0.WINSOCK_SOCKET_TYPEAbi, protocol: Int32): Win32__impl_l0.SOCKET {
+    return socket(af, type_, protocol)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && WINDOWS_NETWORKING == "on" && Windows_Win32_Networking_WinSock_SetSocketMediaStreamingMode == "on"]
 foreign {
     func SetSocketMediaStreamingMode(value: Int32): Int32
 }
 
-@When[FWPUCLNT == "on"]
-foreign {
-    // param-hint: PeerAddr bytes=param[2] optional
-    // pinvoke-hint: SetLastError
-    func WSAImpersonateSocketPeer(Socket: Win32__impl_l0.SOCKET, PeerAddr: CPointer<Win32__impl_l1.SOCKADDRAbi>, PeerAddrLen: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func WSARevertImpersonation(): Int32
+@When[Windows_Win32_Networking_WinSock == "on" && WINDOWS_NETWORKING == "on" && Windows_Win32_Networking_WinSock_SetSocketMediaStreamingMode == "on"]
+public unsafe func Windows_SetSocketMediaStreamingMode(value: Int32): Int32 {
+    return SetSocketMediaStreamingMode(value)
 }
 
-@When[FWPUCLNT == "on" && Windows_Win32_System_IO == "on"]
+@When[Windows_Win32_Networking_WinSock == "on" && FWPUCLNT == "on" && Windows_Win32_Networking_WinSock_WSADeleteSocketPeerTargetName == "on" && Windows_Win32_System_IO == "on"]
 foreign {
     // param-hint: PeerAddr bytes=param[2]
     // param-hint: Overlapped optional
     // param-hint: CompletionRoutine optional
     // pinvoke-hint: SetLastError
     func WSADeleteSocketPeerTargetName(Socket: Win32__impl_l0.SOCKET, PeerAddr: CPointer<Win32__impl_l1.SOCKADDRAbi>, PeerAddrLen: UInt32, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, CompletionRoutine: Win32__impl_l0.LPWSAOVERLAPPED_COMPLETION_ROUTINE): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && FWPUCLNT == "on" && Windows_Win32_Networking_WinSock_WSADeleteSocketPeerTargetName == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_WSADeleteSocketPeerTargetName(Socket: Win32__impl_l0.SOCKET, PeerAddr: CPointer<Win32__impl_l1.SOCKADDRAbi>, PeerAddrLen: UInt32, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, CompletionRoutine: Win32__impl_l0.LPWSAOVERLAPPED_COMPLETION_ROUTINE): Int32 {
+    return WSADeleteSocketPeerTargetName(Socket, PeerAddr, PeerAddrLen, Overlapped, CompletionRoutine)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && FWPUCLNT == "on" && Windows_Win32_Networking_WinSock_WSAImpersonateSocketPeer == "on"]
+foreign {
+    // param-hint: PeerAddr bytes=param[2] optional
+    // pinvoke-hint: SetLastError
+    func WSAImpersonateSocketPeer(Socket: Win32__impl_l0.SOCKET, PeerAddr: CPointer<Win32__impl_l1.SOCKADDRAbi>, PeerAddrLen: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && FWPUCLNT == "on" && Windows_Win32_Networking_WinSock_WSAImpersonateSocketPeer == "on"]
+public unsafe func Windows_WSAImpersonateSocketPeer(Socket: Win32__impl_l0.SOCKET, PeerAddr: CPointer<Win32__impl_l1.SOCKADDRAbi>, PeerAddrLen: UInt32): Int32 {
+    return WSAImpersonateSocketPeer(Socket, PeerAddr, PeerAddrLen)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && FWPUCLNT == "on" && Windows_Win32_Networking_WinSock_WSAQuerySocketSecurity == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: SecurityQueryTemplate bytes=param[2] optional
     // param-hint: SecurityQueryInfo bytes=param[4] optional
     // param-hint: Overlapped optional
     // param-hint: CompletionRoutine optional
     // pinvoke-hint: SetLastError
     func WSAQuerySocketSecurity(Socket: Win32__impl_l0.SOCKET, SecurityQueryTemplate: CPointer<Win32__impl_l1.SOCKET_SECURITY_QUERY_TEMPLATEAbi>, SecurityQueryTemplateLen: UInt32, SecurityQueryInfo: CPointer<Win32__impl_l1.SOCKET_SECURITY_QUERY_INFOAbi>, SecurityQueryInfoLen: CPointer<UInt32>, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, CompletionRoutine: Win32__impl_l0.LPWSAOVERLAPPED_COMPLETION_ROUTINE): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && FWPUCLNT == "on" && Windows_Win32_Networking_WinSock_WSAQuerySocketSecurity == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_WSAQuerySocketSecurity(Socket: Win32__impl_l0.SOCKET, SecurityQueryTemplate: CPointer<Win32__impl_l1.SOCKET_SECURITY_QUERY_TEMPLATEAbi>, SecurityQueryTemplateLen: UInt32, SecurityQueryInfo: CPointer<Win32__impl_l1.SOCKET_SECURITY_QUERY_INFOAbi>, SecurityQueryInfoLen: CPointer<UInt32>, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, CompletionRoutine: Win32__impl_l0.LPWSAOVERLAPPED_COMPLETION_ROUTINE): Int32 {
+    return WSAQuerySocketSecurity(Socket, SecurityQueryTemplate, SecurityQueryTemplateLen, SecurityQueryInfo, SecurityQueryInfoLen, Overlapped, CompletionRoutine)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && FWPUCLNT == "on" && Windows_Win32_Networking_WinSock_WSARevertImpersonation == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WSARevertImpersonation(): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && FWPUCLNT == "on" && Windows_Win32_Networking_WinSock_WSARevertImpersonation == "on"]
+public unsafe func Windows_WSARevertImpersonation(): Int32 {
+    return WSARevertImpersonation()
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && FWPUCLNT == "on" && Windows_Win32_Networking_WinSock_WSASetSocketPeerTargetName == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: PeerTargetName bytes=param[2]
     // param-hint: Overlapped optional
     // param-hint: CompletionRoutine optional
     // pinvoke-hint: SetLastError
     func WSASetSocketPeerTargetName(Socket: Win32__impl_l0.SOCKET, PeerTargetName: CPointer<Win32__impl_l1.SOCKET_PEER_TARGET_NAMEAbi>, PeerTargetNameLen: UInt32, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, CompletionRoutine: Win32__impl_l0.LPWSAOVERLAPPED_COMPLETION_ROUTINE): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && FWPUCLNT == "on" && Windows_Win32_Networking_WinSock_WSASetSocketPeerTargetName == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_WSASetSocketPeerTargetName(Socket: Win32__impl_l0.SOCKET, PeerTargetName: CPointer<Win32__impl_l1.SOCKET_PEER_TARGET_NAMEAbi>, PeerTargetNameLen: UInt32, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, CompletionRoutine: Win32__impl_l0.LPWSAOVERLAPPED_COMPLETION_ROUTINE): Int32 {
+    return WSASetSocketPeerTargetName(Socket, PeerTargetName, PeerTargetNameLen, Overlapped, CompletionRoutine)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && FWPUCLNT == "on" && Windows_Win32_Networking_WinSock_WSASetSocketSecurity == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: SecuritySettings bytes=param[2] optional
     // param-hint: Overlapped optional
     // param-hint: CompletionRoutine optional
@@ -842,38 +2432,219 @@ foreign {
     func WSASetSocketSecurity(Socket: Win32__impl_l0.SOCKET, SecuritySettings: CPointer<Win32__impl_l1.SOCKET_SECURITY_SETTINGSAbi>, SecuritySettingsLen: UInt32, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, CompletionRoutine: Win32__impl_l0.LPWSAOVERLAPPED_COMPLETION_ROUTINE): Int32
 }
 
-@When[NTDLL == "on"]
+@When[Windows_Win32_Networking_WinSock == "on" && FWPUCLNT == "on" && Windows_Win32_Networking_WinSock_WSASetSocketSecurity == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_WSASetSocketSecurity(Socket: Win32__impl_l0.SOCKET, SecuritySettings: CPointer<Win32__impl_l1.SOCKET_SECURITY_SETTINGSAbi>, SecuritySettingsLen: UInt32, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, CompletionRoutine: Win32__impl_l0.LPWSAOVERLAPPED_COMPLETION_ROUTINE): Int32 {
+    return WSASetSocketSecurity(Socket, SecuritySettings, SecuritySettingsLen, Overlapped, CompletionRoutine)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlEthernetAddressToStringA == "on"]
 foreign {
     // param-hint: S fixed=18
     func RtlEthernetAddressToStringA(Addr: CPointer<Win32__impl_l1.DL_EUI48>, S: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlEthernetAddressToStringA == "on"]
+public unsafe func Windows_RtlEthernetAddressToStringA(Addr: CPointer<Win32__impl_l1.DL_EUI48>, S: CPointer<UInt8>): CPointer<UInt8> {
+    return RtlEthernetAddressToStringA(Addr, S)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlEthernetAddressToStringW == "on"]
+foreign {
     // param-hint: S fixed=18
     func RtlEthernetAddressToStringW(Addr: CPointer<Win32__impl_l1.DL_EUI48>, S: CPointer<UInt16>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlEthernetAddressToStringW == "on"]
+public unsafe func Windows_RtlEthernetAddressToStringW(Addr: CPointer<Win32__impl_l1.DL_EUI48>, S: CPointer<UInt16>): CPointer<UInt16> {
+    return RtlEthernetAddressToStringW(Addr, S)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlEthernetStringToAddressA == "on"]
+foreign {
     func RtlEthernetStringToAddressA(S: CPointer<UInt8>, Terminator: CPointer<CPointer<UInt8>>, Addr: CPointer<Win32__impl_l1.DL_EUI48>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlEthernetStringToAddressA == "on"]
+public unsafe func Windows_RtlEthernetStringToAddressA(S: CPointer<UInt8>, Terminator: CPointer<CPointer<UInt8>>, Addr: CPointer<Win32__impl_l1.DL_EUI48>): Int32 {
+    return RtlEthernetStringToAddressA(S, Terminator, Addr)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlEthernetStringToAddressW == "on"]
+foreign {
     func RtlEthernetStringToAddressW(S: CPointer<UInt16>, Terminator: CPointer<CPointer<UInt16>>, Addr: CPointer<Win32__impl_l1.DL_EUI48>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlEthernetStringToAddressW == "on"]
+public unsafe func Windows_RtlEthernetStringToAddressW(S: CPointer<UInt16>, Terminator: CPointer<CPointer<UInt16>>, Addr: CPointer<Win32__impl_l1.DL_EUI48>): Int32 {
+    return RtlEthernetStringToAddressW(S, Terminator, Addr)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv4AddressToStringA == "on"]
+foreign {
     // param-hint: S fixed=16
     func RtlIpv4AddressToStringA(Addr: CPointer<Win32__impl_l0.IN_ADDRAbi>, S: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv4AddressToStringA == "on"]
+public unsafe func Windows_RtlIpv4AddressToStringA(Addr: CPointer<Win32__impl_l0.IN_ADDRAbi>, S: CPointer<UInt8>): CPointer<UInt8> {
+    return RtlIpv4AddressToStringA(Addr, S)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv4AddressToStringExA == "on"]
+foreign {
     // param-hint: AddressString len=param[3]
     func RtlIpv4AddressToStringExA(Address: CPointer<Win32__impl_l0.IN_ADDRAbi>, Port: UInt16, AddressString: CPointer<UInt8>, AddressStringLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv4AddressToStringExA == "on"]
+public unsafe func Windows_RtlIpv4AddressToStringExA(Address: CPointer<Win32__impl_l0.IN_ADDRAbi>, Port: UInt16, AddressString: CPointer<UInt8>, AddressStringLength: CPointer<UInt32>): Int32 {
+    return RtlIpv4AddressToStringExA(Address, Port, AddressString, AddressStringLength)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv4AddressToStringExW == "on"]
+foreign {
     // param-hint: AddressString len=param[3]
     func RtlIpv4AddressToStringExW(Address: CPointer<Win32__impl_l0.IN_ADDRAbi>, Port: UInt16, AddressString: CPointer<UInt16>, AddressStringLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv4AddressToStringExW == "on"]
+public unsafe func Windows_RtlIpv4AddressToStringExW(Address: CPointer<Win32__impl_l0.IN_ADDRAbi>, Port: UInt16, AddressString: CPointer<UInt16>, AddressStringLength: CPointer<UInt32>): Int32 {
+    return RtlIpv4AddressToStringExW(Address, Port, AddressString, AddressStringLength)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv4AddressToStringW == "on"]
+foreign {
     // param-hint: S fixed=16
     func RtlIpv4AddressToStringW(Addr: CPointer<Win32__impl_l0.IN_ADDRAbi>, S: CPointer<UInt16>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv4AddressToStringW == "on"]
+public unsafe func Windows_RtlIpv4AddressToStringW(Addr: CPointer<Win32__impl_l0.IN_ADDRAbi>, S: CPointer<UInt16>): CPointer<UInt16> {
+    return RtlIpv4AddressToStringW(Addr, S)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv4StringToAddressA == "on"]
+foreign {
     func RtlIpv4StringToAddressA(S: CPointer<UInt8>, Strict: UInt8, Terminator: CPointer<CPointer<UInt8>>, Addr: CPointer<Win32__impl_l0.IN_ADDRAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv4StringToAddressA == "on"]
+public unsafe func Windows_RtlIpv4StringToAddressA(S: CPointer<UInt8>, Strict: UInt8, Terminator: CPointer<CPointer<UInt8>>, Addr: CPointer<Win32__impl_l0.IN_ADDRAbi>): Int32 {
+    return RtlIpv4StringToAddressA(S, Strict, Terminator, Addr)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv4StringToAddressExA == "on"]
+foreign {
     func RtlIpv4StringToAddressExA(AddressString: CPointer<UInt8>, Strict: UInt8, Address: CPointer<Win32__impl_l0.IN_ADDRAbi>, Port: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv4StringToAddressExA == "on"]
+public unsafe func Windows_RtlIpv4StringToAddressExA(AddressString: CPointer<UInt8>, Strict: UInt8, Address: CPointer<Win32__impl_l0.IN_ADDRAbi>, Port: CPointer<UInt16>): Int32 {
+    return RtlIpv4StringToAddressExA(AddressString, Strict, Address, Port)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv4StringToAddressExW == "on"]
+foreign {
     func RtlIpv4StringToAddressExW(AddressString: CPointer<UInt16>, Strict: UInt8, Address: CPointer<Win32__impl_l0.IN_ADDRAbi>, Port: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv4StringToAddressExW == "on"]
+public unsafe func Windows_RtlIpv4StringToAddressExW(AddressString: CPointer<UInt16>, Strict: UInt8, Address: CPointer<Win32__impl_l0.IN_ADDRAbi>, Port: CPointer<UInt16>): Int32 {
+    return RtlIpv4StringToAddressExW(AddressString, Strict, Address, Port)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv4StringToAddressW == "on"]
+foreign {
     func RtlIpv4StringToAddressW(S: CPointer<UInt16>, Strict: UInt8, Terminator: CPointer<CPointer<UInt16>>, Addr: CPointer<Win32__impl_l0.IN_ADDRAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv4StringToAddressW == "on"]
+public unsafe func Windows_RtlIpv4StringToAddressW(S: CPointer<UInt16>, Strict: UInt8, Terminator: CPointer<CPointer<UInt16>>, Addr: CPointer<Win32__impl_l0.IN_ADDRAbi>): Int32 {
+    return RtlIpv4StringToAddressW(S, Strict, Terminator, Addr)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv6AddressToStringA == "on"]
+foreign {
     // param-hint: S fixed=46
     func RtlIpv6AddressToStringA(Addr: CPointer<Win32__impl_l0.IN6_ADDRAbi>, S: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv6AddressToStringA == "on"]
+public unsafe func Windows_RtlIpv6AddressToStringA(Addr: CPointer<Win32__impl_l0.IN6_ADDRAbi>, S: CPointer<UInt8>): CPointer<UInt8> {
+    return RtlIpv6AddressToStringA(Addr, S)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv6AddressToStringExA == "on"]
+foreign {
     // param-hint: AddressString len=param[4]
     func RtlIpv6AddressToStringExA(Address: CPointer<Win32__impl_l0.IN6_ADDRAbi>, ScopeId: UInt32, Port: UInt16, AddressString: CPointer<UInt8>, AddressStringLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv6AddressToStringExA == "on"]
+public unsafe func Windows_RtlIpv6AddressToStringExA(Address: CPointer<Win32__impl_l0.IN6_ADDRAbi>, ScopeId: UInt32, Port: UInt16, AddressString: CPointer<UInt8>, AddressStringLength: CPointer<UInt32>): Int32 {
+    return RtlIpv6AddressToStringExA(Address, ScopeId, Port, AddressString, AddressStringLength)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv6AddressToStringExW == "on"]
+foreign {
     // param-hint: AddressString len=param[4]
     func RtlIpv6AddressToStringExW(Address: CPointer<Win32__impl_l0.IN6_ADDRAbi>, ScopeId: UInt32, Port: UInt16, AddressString: CPointer<UInt16>, AddressStringLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv6AddressToStringExW == "on"]
+public unsafe func Windows_RtlIpv6AddressToStringExW(Address: CPointer<Win32__impl_l0.IN6_ADDRAbi>, ScopeId: UInt32, Port: UInt16, AddressString: CPointer<UInt16>, AddressStringLength: CPointer<UInt32>): Int32 {
+    return RtlIpv6AddressToStringExW(Address, ScopeId, Port, AddressString, AddressStringLength)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv6AddressToStringW == "on"]
+foreign {
     // param-hint: S fixed=46
     func RtlIpv6AddressToStringW(Addr: CPointer<Win32__impl_l0.IN6_ADDRAbi>, S: CPointer<UInt16>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv6AddressToStringW == "on"]
+public unsafe func Windows_RtlIpv6AddressToStringW(Addr: CPointer<Win32__impl_l0.IN6_ADDRAbi>, S: CPointer<UInt16>): CPointer<UInt16> {
+    return RtlIpv6AddressToStringW(Addr, S)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv6StringToAddressA == "on"]
+foreign {
     func RtlIpv6StringToAddressA(S: CPointer<UInt8>, Terminator: CPointer<CPointer<UInt8>>, Addr: CPointer<Win32__impl_l0.IN6_ADDRAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv6StringToAddressA == "on"]
+public unsafe func Windows_RtlIpv6StringToAddressA(S: CPointer<UInt8>, Terminator: CPointer<CPointer<UInt8>>, Addr: CPointer<Win32__impl_l0.IN6_ADDRAbi>): Int32 {
+    return RtlIpv6StringToAddressA(S, Terminator, Addr)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv6StringToAddressExA == "on"]
+foreign {
     func RtlIpv6StringToAddressExA(AddressString: CPointer<UInt8>, Address: CPointer<Win32__impl_l0.IN6_ADDRAbi>, ScopeId: CPointer<UInt32>, Port: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv6StringToAddressExA == "on"]
+public unsafe func Windows_RtlIpv6StringToAddressExA(AddressString: CPointer<UInt8>, Address: CPointer<Win32__impl_l0.IN6_ADDRAbi>, ScopeId: CPointer<UInt32>, Port: CPointer<UInt16>): Int32 {
+    return RtlIpv6StringToAddressExA(AddressString, Address, ScopeId, Port)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv6StringToAddressExW == "on"]
+foreign {
     func RtlIpv6StringToAddressExW(AddressString: CPointer<UInt16>, Address: CPointer<Win32__impl_l0.IN6_ADDRAbi>, ScopeId: CPointer<UInt32>, Port: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv6StringToAddressExW == "on"]
+public unsafe func Windows_RtlIpv6StringToAddressExW(AddressString: CPointer<UInt16>, Address: CPointer<Win32__impl_l0.IN6_ADDRAbi>, ScopeId: CPointer<UInt32>, Port: CPointer<UInt16>): Int32 {
+    return RtlIpv6StringToAddressExW(AddressString, Address, ScopeId, Port)
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv6StringToAddressW == "on"]
+foreign {
     func RtlIpv6StringToAddressW(S: CPointer<UInt16>, Terminator: CPointer<CPointer<UInt16>>, Addr: CPointer<Win32__impl_l0.IN6_ADDRAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinSock == "on" && NTDLL == "on" && Windows_Win32_Networking_WinSock_RtlIpv6StringToAddressW == "on"]
+public unsafe func Windows_RtlIpv6StringToAddressW(S: CPointer<UInt16>, Terminator: CPointer<CPointer<UInt16>>, Addr: CPointer<Win32__impl_l0.IN6_ADDRAbi>): Int32 {
+    return RtlIpv6StringToAddressW(S, Terminator, Addr)
 }
 
 @When[Windows_Win32_Networking_WinSock == "on"]

@@ -18,150 +18,790 @@ import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
 
 
-@When[PROPSYS == "on"]
-foreign {
-    func PSCreateAdapterFromPropertyStore(pps: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
-    // param-hint: rgStoreIds len=param[3]
-    func PSCreateDelayedMultiplexPropertyStore(flags: Win32__impl_l0.GETPROPERTYSTOREFLAGSAbi, pdpsf: CPointer<Unit>, rgStoreIds: CPointer<UInt32>, cStores: UInt32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
-    func PSCreateMemoryPropertyStore(riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
-    func PSEnumeratePropertyDescriptions(filterOn: Win32__impl_l0.PROPDESC_ENUMFILTERAbi, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
-    func PSFormatPropertyValue(pps: CPointer<Unit>, ppd: CPointer<Unit>, pdff: Win32__impl_l0.PROPDESC_FORMAT_FLAGSAbi, ppszDisplay: CPointer<CPointer<UInt16>>): Int32
-    func PSGetNameFromPropertyKey(propkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, ppszCanonicalName: CPointer<CPointer<UInt16>>): Int32
-    func PSGetPropertyDescription(propkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
-    func PSGetPropertyDescriptionByName(pszCanonicalName: CPointer<UInt16>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
-    func PSGetPropertyDescriptionListFromString(pszPropList: CPointer<UInt16>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
-    func PSGetPropertyKeyFromName(pszName: CPointer<UInt16>, ppropkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>): Int32
-    func PSGetPropertySystem(riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
-    func PSLookupPropertyHandlerCLSID(pszFilePath: CPointer<UInt16>, pclsid: CPointer<GUID>): Int32
-    func PSPropertyKeyFromString(pszString: CPointer<UInt16>, pkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>): Int32
-    func PSRefreshPropertySchema(): Int32
-    func PSRegisterPropertySchema(pszPath: CPointer<UInt16>): Int32
-    // param-hint: psz len=param[2]
-    func PSStringFromPropertyKey(pkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, psz: CPointer<UInt16>, cch: UInt32): Int32
-    func PSUnregisterPropertySchema(pszPath: CPointer<UInt16>): Int32
-}
-
-@When[PROPSYS == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on")]
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSCoerceToCanonicalValue == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
 foreign {
     func PSCoerceToCanonicalValue(key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, ppropvar: CPointer<PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSCoerceToCanonicalValue == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSCoerceToCanonicalValue(key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, ppropvar: CPointer<PROPVARIANTAbi>): Int32 {
+    return PSCoerceToCanonicalValue(key, ppropvar)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSCreateAdapterFromPropertyStore == "on"]
+foreign {
+    func PSCreateAdapterFromPropertyStore(pps: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSCreateAdapterFromPropertyStore == "on"]
+public unsafe func Windows_PSCreateAdapterFromPropertyStore(pps: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return PSCreateAdapterFromPropertyStore(pps, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSCreateDelayedMultiplexPropertyStore == "on"]
+foreign {
+    // param-hint: rgStoreIds len=param[3]
+    func PSCreateDelayedMultiplexPropertyStore(flags: Win32__impl_l0.GETPROPERTYSTOREFLAGSAbi, pdpsf: CPointer<Unit>, rgStoreIds: CPointer<UInt32>, cStores: UInt32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSCreateDelayedMultiplexPropertyStore == "on"]
+public unsafe func Windows_PSCreateDelayedMultiplexPropertyStore(flags: Win32__impl_l0.GETPROPERTYSTOREFLAGSAbi, pdpsf: CPointer<Unit>, rgStoreIds: CPointer<UInt32>, cStores: UInt32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return PSCreateDelayedMultiplexPropertyStore(flags, pdpsf, rgStoreIds, cStores, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSCreateMemoryPropertyStore == "on"]
+foreign {
+    func PSCreateMemoryPropertyStore(riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSCreateMemoryPropertyStore == "on"]
+public unsafe func Windows_PSCreateMemoryPropertyStore(riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return PSCreateMemoryPropertyStore(riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSCreateMultiplexPropertyStore == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: prgpunkStores len=param[1]
+    func PSCreateMultiplexPropertyStore(prgpunkStores: CPointer<CPointer<Unit>>, cStores: UInt32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSCreateMultiplexPropertyStore == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_PSCreateMultiplexPropertyStore(prgpunkStores: CPointer<CPointer<Unit>>, cStores: UInt32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return PSCreateMultiplexPropertyStore(prgpunkStores, cStores, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSCreatePropertyChangeArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
     // param-hint: rgpropkey len=param[3] optional
     // param-hint: rgflags len=param[3] optional
     // param-hint: rgpropvar len=param[3] optional
     func PSCreatePropertyChangeArray(rgpropkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, rgflags: CPointer<Win32__impl_l0.PKA_FLAGSAbi>, rgpropvar: CPointer<PROPVARIANTAbi>, cChanges: UInt32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSCreatePropertyChangeArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSCreatePropertyChangeArray(rgpropkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, rgflags: CPointer<Win32__impl_l0.PKA_FLAGSAbi>, rgpropvar: CPointer<PROPVARIANTAbi>, cChanges: UInt32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return PSCreatePropertyChangeArray(rgpropkey, rgflags, rgpropvar, cChanges, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSCreatePropertyStoreFromObject == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func PSCreatePropertyStoreFromObject(punk: CPointer<Unit>, grfMode: UInt32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSCreatePropertyStoreFromObject == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_PSCreatePropertyStoreFromObject(punk: CPointer<Unit>, grfMode: UInt32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return PSCreatePropertyStoreFromObject(punk, grfMode, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSCreatePropertyStoreFromPropertySetStorage == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func PSCreatePropertyStoreFromPropertySetStorage(ppss: CPointer<Unit>, grfMode: UInt32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSCreatePropertyStoreFromPropertySetStorage == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSCreatePropertyStoreFromPropertySetStorage(ppss: CPointer<Unit>, grfMode: UInt32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return PSCreatePropertyStoreFromPropertySetStorage(ppss, grfMode, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSCreateSimplePropertyChange == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
     func PSCreateSimplePropertyChange(flags: Win32__impl_l0.PKA_FLAGSAbi, key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, propvar: CPointer<PROPVARIANTAbi>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSCreateSimplePropertyChange == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSCreateSimplePropertyChange(flags: Win32__impl_l0.PKA_FLAGSAbi, key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, propvar: CPointer<PROPVARIANTAbi>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return PSCreateSimplePropertyChange(flags, key, propvar, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSEnumeratePropertyDescriptions == "on"]
+foreign {
+    func PSEnumeratePropertyDescriptions(filterOn: Win32__impl_l0.PROPDESC_ENUMFILTERAbi, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSEnumeratePropertyDescriptions == "on"]
+public unsafe func Windows_PSEnumeratePropertyDescriptions(filterOn: Win32__impl_l0.PROPDESC_ENUMFILTERAbi, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return PSEnumeratePropertyDescriptions(filterOn, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSFormatForDisplay == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
     // param-hint: pwszText len=param[4]
     func PSFormatForDisplay(propkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, propvar: CPointer<PROPVARIANTAbi>, pdfFlags: Win32__impl_l0.PROPDESC_FORMAT_FLAGSAbi, pwszText: CPointer<UInt16>, cchText: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSFormatForDisplay == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSFormatForDisplay(propkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, propvar: CPointer<PROPVARIANTAbi>, pdfFlags: Win32__impl_l0.PROPDESC_FORMAT_FLAGSAbi, pwszText: CPointer<UInt16>, cchText: UInt32): Int32 {
+    return PSFormatForDisplay(propkey, propvar, pdfFlags, pwszText, cchText)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSFormatForDisplayAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
     func PSFormatForDisplayAlloc(key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, propvar: CPointer<PROPVARIANTAbi>, pdff: Win32__impl_l0.PROPDESC_FORMAT_FLAGSAbi, ppszDisplay: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSFormatForDisplayAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSFormatForDisplayAlloc(key: CPointer<Win32_Foundation.PROPERTYKEYAbi>, propvar: CPointer<PROPVARIANTAbi>, pdff: Win32__impl_l0.PROPDESC_FORMAT_FLAGSAbi, ppszDisplay: CPointer<CPointer<UInt16>>): Int32 {
+    return PSFormatForDisplayAlloc(key, propvar, pdff, ppszDisplay)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSFormatPropertyValue == "on"]
+foreign {
+    func PSFormatPropertyValue(pps: CPointer<Unit>, ppd: CPointer<Unit>, pdff: Win32__impl_l0.PROPDESC_FORMAT_FLAGSAbi, ppszDisplay: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSFormatPropertyValue == "on"]
+public unsafe func Windows_PSFormatPropertyValue(pps: CPointer<Unit>, ppd: CPointer<Unit>, pdff: Win32__impl_l0.PROPDESC_FORMAT_FLAGSAbi, ppszDisplay: CPointer<CPointer<UInt16>>): Int32 {
+    return PSFormatPropertyValue(pps, ppd, pdff, ppszDisplay)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetImageReferenceForValue == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
     func PSGetImageReferenceForValue(propkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, propvar: CPointer<PROPVARIANTAbi>, ppszImageRes: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetImageReferenceForValue == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSGetImageReferenceForValue(propkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, propvar: CPointer<PROPVARIANTAbi>, ppszImageRes: CPointer<CPointer<UInt16>>): Int32 {
+    return PSGetImageReferenceForValue(propkey, propvar, ppszImageRes)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetItemPropertyHandler == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func PSGetItemPropertyHandler(punkItem: CPointer<Unit>, fReadWrite: Int32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetItemPropertyHandler == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_PSGetItemPropertyHandler(punkItem: CPointer<Unit>, fReadWrite: Int32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return PSGetItemPropertyHandler(punkItem, fReadWrite, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetItemPropertyHandlerWithCreateObject == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func PSGetItemPropertyHandlerWithCreateObject(punkItem: CPointer<Unit>, fReadWrite: Int32, punkCreateObject: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetItemPropertyHandlerWithCreateObject == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_PSGetItemPropertyHandlerWithCreateObject(punkItem: CPointer<Unit>, fReadWrite: Int32, punkCreateObject: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return PSGetItemPropertyHandlerWithCreateObject(punkItem, fReadWrite, punkCreateObject, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetNameFromPropertyKey == "on"]
+foreign {
+    func PSGetNameFromPropertyKey(propkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, ppszCanonicalName: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetNameFromPropertyKey == "on"]
+public unsafe func Windows_PSGetNameFromPropertyKey(propkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, ppszCanonicalName: CPointer<CPointer<UInt16>>): Int32 {
+    return PSGetNameFromPropertyKey(propkey, ppszCanonicalName)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetNamedPropertyFromPropertyStorage == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
     // param-hint: psps bytes=param[1]
     func PSGetNamedPropertyFromPropertyStorage(psps: Win32__impl_l0.PCUSERIALIZEDPROPSTORAGE, cb: UInt32, pszName: CPointer<UInt16>, ppropvar: CPointer<PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetNamedPropertyFromPropertyStorage == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSGetNamedPropertyFromPropertyStorage(psps: Win32__impl_l0.PCUSERIALIZEDPROPSTORAGE, cb: UInt32, pszName: CPointer<UInt16>, ppropvar: CPointer<PROPVARIANTAbi>): Int32 {
+    return PSGetNamedPropertyFromPropertyStorage(psps, cb, pszName, ppropvar)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetPropertyDescription == "on"]
+foreign {
+    func PSGetPropertyDescription(propkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetPropertyDescription == "on"]
+public unsafe func Windows_PSGetPropertyDescription(propkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return PSGetPropertyDescription(propkey, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetPropertyDescriptionByName == "on"]
+foreign {
+    func PSGetPropertyDescriptionByName(pszCanonicalName: CPointer<UInt16>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetPropertyDescriptionByName == "on"]
+public unsafe func Windows_PSGetPropertyDescriptionByName(pszCanonicalName: CPointer<UInt16>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return PSGetPropertyDescriptionByName(pszCanonicalName, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetPropertyDescriptionListFromString == "on"]
+foreign {
+    func PSGetPropertyDescriptionListFromString(pszPropList: CPointer<UInt16>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetPropertyDescriptionListFromString == "on"]
+public unsafe func Windows_PSGetPropertyDescriptionListFromString(pszPropList: CPointer<UInt16>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return PSGetPropertyDescriptionListFromString(pszPropList, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetPropertyFromPropertyStorage == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
     // param-hint: psps bytes=param[1]
     func PSGetPropertyFromPropertyStorage(psps: Win32__impl_l0.PCUSERIALIZEDPROPSTORAGE, cb: UInt32, rpkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, ppropvar: CPointer<PROPVARIANTAbi>): Int32
-    func PSGetPropertyValue(pps: CPointer<Unit>, ppd: CPointer<Unit>, ppropvar: CPointer<PROPVARIANTAbi>): Int32
-    func PSSetPropertyValue(pps: CPointer<Unit>, ppd: CPointer<Unit>, propvar: CPointer<PROPVARIANTAbi>): Int32
 }
 
-@When[PROPSYS == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on")]
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetPropertyFromPropertyStorage == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSGetPropertyFromPropertyStorage(psps: Win32__impl_l0.PCUSERIALIZEDPROPSTORAGE, cb: UInt32, rpkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, ppropvar: CPointer<PROPVARIANTAbi>): Int32 {
+    return PSGetPropertyFromPropertyStorage(psps, cb, rpkey, ppropvar)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetPropertyKeyFromName == "on"]
+foreign {
+    func PSGetPropertyKeyFromName(pszName: CPointer<UInt16>, ppropkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetPropertyKeyFromName == "on"]
+public unsafe func Windows_PSGetPropertyKeyFromName(pszName: CPointer<UInt16>, ppropkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>): Int32 {
+    return PSGetPropertyKeyFromName(pszName, ppropkey)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetPropertySystem == "on"]
+foreign {
+    func PSGetPropertySystem(riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetPropertySystem == "on"]
+public unsafe func Windows_PSGetPropertySystem(riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return PSGetPropertySystem(riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetPropertyValue == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func PSGetPropertyValue(pps: CPointer<Unit>, ppd: CPointer<Unit>, ppropvar: CPointer<PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetPropertyValue == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSGetPropertyValue(pps: CPointer<Unit>, ppd: CPointer<Unit>, ppropvar: CPointer<PROPVARIANTAbi>): Int32 {
+    return PSGetPropertyValue(pps, ppd, ppropvar)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSLookupPropertyHandlerCLSID == "on"]
+foreign {
+    func PSLookupPropertyHandlerCLSID(pszFilePath: CPointer<UInt16>, pclsid: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSLookupPropertyHandlerCLSID == "on"]
+public unsafe func Windows_PSLookupPropertyHandlerCLSID(pszFilePath: CPointer<UInt16>, pclsid: CPointer<GUID>): Int32 {
+    return PSLookupPropertyHandlerCLSID(pszFilePath, pclsid)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_Delete == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func PSPropertyBag_Delete(propBag: CPointer<Unit>, propName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_Delete == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSPropertyBag_Delete(propBag: CPointer<Unit>, propName: CPointer<UInt16>): Int32 {
+    return PSPropertyBag_Delete(propBag, propName)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadBOOL == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func PSPropertyBag_ReadBOOL(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadBOOL == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSPropertyBag_ReadBOOL(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Int32>): Int32 {
+    return PSPropertyBag_ReadBOOL(propBag, propName, value)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadBSTR == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func PSPropertyBag_ReadBSTR(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadBSTR == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSPropertyBag_ReadBSTR(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<CPointer<UInt16>>): Int32 {
+    return PSPropertyBag_ReadBSTR(propBag, propName, value)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadDWORD == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func PSPropertyBag_ReadDWORD(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadDWORD == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSPropertyBag_ReadDWORD(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<UInt32>): Int32 {
+    return PSPropertyBag_ReadDWORD(propBag, propName, value)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadGUID == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func PSPropertyBag_ReadGUID(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadGUID == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSPropertyBag_ReadGUID(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<GUID>): Int32 {
+    return PSPropertyBag_ReadGUID(propBag, propName, value)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadInt == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func PSPropertyBag_ReadInt(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadInt == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSPropertyBag_ReadInt(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Int32>): Int32 {
+    return PSPropertyBag_ReadInt(propBag, propName, value)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadLONG == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func PSPropertyBag_ReadLONG(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadLONG == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSPropertyBag_ReadLONG(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Int32>): Int32 {
+    return PSPropertyBag_ReadLONG(propBag, propName, value)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadPOINTL == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func PSPropertyBag_ReadPOINTL(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Win32_Foundation.POINTLAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadPOINTL == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSPropertyBag_ReadPOINTL(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Win32_Foundation.POINTLAbi>): Int32 {
+    return PSPropertyBag_ReadPOINTL(propBag, propName, value)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadPOINTS == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func PSPropertyBag_ReadPOINTS(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Win32_Foundation.POINTSAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadPOINTS == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSPropertyBag_ReadPOINTS(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Win32_Foundation.POINTSAbi>): Int32 {
+    return PSPropertyBag_ReadPOINTS(propBag, propName, value)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadPropertyKey == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func PSPropertyBag_ReadPropertyKey(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Win32_Foundation.PROPERTYKEYAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadPropertyKey == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSPropertyBag_ReadPropertyKey(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Win32_Foundation.PROPERTYKEYAbi>): Int32 {
+    return PSPropertyBag_ReadPropertyKey(propBag, propName, value)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadRECTL == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func PSPropertyBag_ReadRECTL(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Win32_Foundation.RECTLAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadRECTL == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSPropertyBag_ReadRECTL(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Win32_Foundation.RECTLAbi>): Int32 {
+    return PSPropertyBag_ReadRECTL(propBag, propName, value)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadSHORT == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func PSPropertyBag_ReadSHORT(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadSHORT == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSPropertyBag_ReadSHORT(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Int16>): Int32 {
+    return PSPropertyBag_ReadSHORT(propBag, propName, value)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadStr == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    // param-hint: value len=param[3]
+    func PSPropertyBag_ReadStr(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<UInt16>, characterCount: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadStr == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSPropertyBag_ReadStr(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<UInt16>, characterCount: Int32): Int32 {
+    return PSPropertyBag_ReadStr(propBag, propName, value, characterCount)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadStrAlloc == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func PSPropertyBag_ReadStrAlloc(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadStrAlloc == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSPropertyBag_ReadStrAlloc(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<CPointer<UInt16>>): Int32 {
+    return PSPropertyBag_ReadStrAlloc(propBag, propName, value)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadStream == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
 foreign {
     func PSPropertyBag_ReadStream(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<CPointer<Unit>>): Int32
-    func PSPropertyBag_WriteStream(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Unit>): Int32
-    func PSPropertyBag_WriteUnknown(propBag: CPointer<Unit>, propName: CPointer<UInt16>, punk: CPointer<Unit>): Int32
 }
 
-@When[PROPSYS == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on")]
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadStream == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSPropertyBag_ReadStream(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<CPointer<Unit>>): Int32 {
+    return PSPropertyBag_ReadStream(propBag, propName, value)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadType == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on"]
 foreign {
     func PSPropertyBag_ReadType(propBag: CPointer<Unit>, propName: CPointer<UInt16>, var_: CPointer<VARIANTAbi>, type_: Win32__impl_l0.VARENUMAbi): Int32
 }
 
-@When[PROPSYS == "on" && Windows_Win32_System_Com == "on"]
-foreign {
-    // param-hint: prgpunkStores len=param[1]
-    func PSCreateMultiplexPropertyStore(prgpunkStores: CPointer<CPointer<Unit>>, cStores: UInt32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
-    func PSCreatePropertyStoreFromObject(punk: CPointer<Unit>, grfMode: UInt32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
-    func PSGetItemPropertyHandler(punkItem: CPointer<Unit>, fReadWrite: Int32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
-    func PSGetItemPropertyHandlerWithCreateObject(punkItem: CPointer<Unit>, fReadWrite: Int32, punkCreateObject: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadType == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PSPropertyBag_ReadType(propBag: CPointer<Unit>, propName: CPointer<UInt16>, var_: CPointer<VARIANTAbi>, type_: Win32__impl_l0.VARENUMAbi): Int32 {
+    return PSPropertyBag_ReadType(propBag, propName, var_, type_)
 }
 
-@When[PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadULONGLONG == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
 foreign {
-    func PSCreatePropertyStoreFromPropertySetStorage(ppss: CPointer<Unit>, grfMode: UInt32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
-    func PSPropertyBag_Delete(propBag: CPointer<Unit>, propName: CPointer<UInt16>): Int32
-    func PSPropertyBag_ReadBOOL(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Int32>): Int32
-    func PSPropertyBag_ReadBSTR(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<CPointer<UInt16>>): Int32
-    func PSPropertyBag_ReadDWORD(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<UInt32>): Int32
-    func PSPropertyBag_ReadGUID(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<GUID>): Int32
-    func PSPropertyBag_ReadInt(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Int32>): Int32
-    func PSPropertyBag_ReadLONG(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Int32>): Int32
-    func PSPropertyBag_ReadPOINTL(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Win32_Foundation.POINTLAbi>): Int32
-    func PSPropertyBag_ReadPOINTS(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Win32_Foundation.POINTSAbi>): Int32
-    func PSPropertyBag_ReadPropertyKey(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Win32_Foundation.PROPERTYKEYAbi>): Int32
-    func PSPropertyBag_ReadRECTL(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Win32_Foundation.RECTLAbi>): Int32
-    func PSPropertyBag_ReadSHORT(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Int16>): Int32
-    // param-hint: value len=param[3]
-    func PSPropertyBag_ReadStr(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<UInt16>, characterCount: Int32): Int32
-    func PSPropertyBag_ReadStrAlloc(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<CPointer<UInt16>>): Int32
     func PSPropertyBag_ReadULONGLONG(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadULONGLONG == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSPropertyBag_ReadULONGLONG(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<UInt64>): Int32 {
+    return PSPropertyBag_ReadULONGLONG(propBag, propName, value)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadUnknown == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
     func PSPropertyBag_ReadUnknown(propBag: CPointer<Unit>, propName: CPointer<UInt16>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadUnknown == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSPropertyBag_ReadUnknown(propBag: CPointer<Unit>, propName: CPointer<UInt16>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return PSPropertyBag_ReadUnknown(propBag, propName, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteBOOL == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
     func PSPropertyBag_WriteBOOL(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteBOOL == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSPropertyBag_WriteBOOL(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: Int32): Int32 {
+    return PSPropertyBag_WriteBOOL(propBag, propName, value)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteBSTR == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
     func PSPropertyBag_WriteBSTR(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteBSTR == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSPropertyBag_WriteBSTR(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<UInt16>): Int32 {
+    return PSPropertyBag_WriteBSTR(propBag, propName, value)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteDWORD == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
     func PSPropertyBag_WriteDWORD(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteDWORD == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSPropertyBag_WriteDWORD(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: UInt32): Int32 {
+    return PSPropertyBag_WriteDWORD(propBag, propName, value)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteGUID == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
     func PSPropertyBag_WriteGUID(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteGUID == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSPropertyBag_WriteGUID(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<GUID>): Int32 {
+    return PSPropertyBag_WriteGUID(propBag, propName, value)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteInt == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
     func PSPropertyBag_WriteInt(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteInt == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSPropertyBag_WriteInt(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: Int32): Int32 {
+    return PSPropertyBag_WriteInt(propBag, propName, value)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteLONG == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
     func PSPropertyBag_WriteLONG(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteLONG == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSPropertyBag_WriteLONG(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: Int32): Int32 {
+    return PSPropertyBag_WriteLONG(propBag, propName, value)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WritePOINTL == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
     func PSPropertyBag_WritePOINTL(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Win32_Foundation.POINTLAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WritePOINTL == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSPropertyBag_WritePOINTL(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Win32_Foundation.POINTLAbi>): Int32 {
+    return PSPropertyBag_WritePOINTL(propBag, propName, value)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WritePOINTS == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
     func PSPropertyBag_WritePOINTS(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Win32_Foundation.POINTSAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WritePOINTS == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSPropertyBag_WritePOINTS(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Win32_Foundation.POINTSAbi>): Int32 {
+    return PSPropertyBag_WritePOINTS(propBag, propName, value)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WritePropertyKey == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
     func PSPropertyBag_WritePropertyKey(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Win32_Foundation.PROPERTYKEYAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WritePropertyKey == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSPropertyBag_WritePropertyKey(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Win32_Foundation.PROPERTYKEYAbi>): Int32 {
+    return PSPropertyBag_WritePropertyKey(propBag, propName, value)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteRECTL == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
     func PSPropertyBag_WriteRECTL(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Win32_Foundation.RECTLAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteRECTL == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSPropertyBag_WriteRECTL(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Win32_Foundation.RECTLAbi>): Int32 {
+    return PSPropertyBag_WriteRECTL(propBag, propName, value)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteSHORT == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
     func PSPropertyBag_WriteSHORT(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: Int16): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteSHORT == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSPropertyBag_WriteSHORT(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: Int16): Int32 {
+    return PSPropertyBag_WriteSHORT(propBag, propName, value)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteStr == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
     func PSPropertyBag_WriteStr(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteStr == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSPropertyBag_WriteStr(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<UInt16>): Int32 {
+    return PSPropertyBag_WriteStr(propBag, propName, value)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteStream == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func PSPropertyBag_WriteStream(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteStream == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSPropertyBag_WriteStream(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: CPointer<Unit>): Int32 {
+    return PSPropertyBag_WriteStream(propBag, propName, value)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteULONGLONG == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
     func PSPropertyBag_WriteULONGLONG(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: UInt64): Int32
 }
 
-@When[SHELL32 == "on"]
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteULONGLONG == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSPropertyBag_WriteULONGLONG(propBag: CPointer<Unit>, propName: CPointer<UInt16>, value: UInt64): Int32 {
+    return PSPropertyBag_WriteULONGLONG(propBag, propName, value)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteUnknown == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func PSPropertyBag_WriteUnknown(propBag: CPointer<Unit>, propName: CPointer<UInt16>, punk: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteUnknown == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSPropertyBag_WriteUnknown(propBag: CPointer<Unit>, propName: CPointer<UInt16>, punk: CPointer<Unit>): Int32 {
+    return PSPropertyBag_WriteUnknown(propBag, propName, punk)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyKeyFromString == "on"]
+foreign {
+    func PSPropertyKeyFromString(pszString: CPointer<UInt16>, pkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyKeyFromString == "on"]
+public unsafe func Windows_PSPropertyKeyFromString(pszString: CPointer<UInt16>, pkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>): Int32 {
+    return PSPropertyKeyFromString(pszString, pkey)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSRefreshPropertySchema == "on"]
+foreign {
+    func PSRefreshPropertySchema(): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSRefreshPropertySchema == "on"]
+public unsafe func Windows_PSRefreshPropertySchema(): Int32 {
+    return PSRefreshPropertySchema()
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSRegisterPropertySchema == "on"]
+foreign {
+    func PSRegisterPropertySchema(pszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSRegisterPropertySchema == "on"]
+public unsafe func Windows_PSRegisterPropertySchema(pszPath: CPointer<UInt16>): Int32 {
+    return PSRegisterPropertySchema(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSSetPropertyValue == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func PSSetPropertyValue(pps: CPointer<Unit>, ppd: CPointer<Unit>, propvar: CPointer<PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSSetPropertyValue == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_PSSetPropertyValue(pps: CPointer<Unit>, ppd: CPointer<Unit>, propvar: CPointer<PROPVARIANTAbi>): Int32 {
+    return PSSetPropertyValue(pps, ppd, propvar)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSStringFromPropertyKey == "on"]
+foreign {
+    // param-hint: psz len=param[2]
+    func PSStringFromPropertyKey(pkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, psz: CPointer<UInt16>, cch: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSStringFromPropertyKey == "on"]
+public unsafe func Windows_PSStringFromPropertyKey(pkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, psz: CPointer<UInt16>, cch: UInt32): Int32 {
+    return PSStringFromPropertyKey(pkey, psz, cch)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSUnregisterPropertySchema == "on"]
+foreign {
+    func PSUnregisterPropertySchema(pszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSUnregisterPropertySchema == "on"]
+public unsafe func Windows_PSUnregisterPropertySchema(pszPath: CPointer<UInt16>): Int32 {
+    return PSUnregisterPropertySchema(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PifMgr_CloseProperties == "on"]
 foreign {
     // param-hint: hProps optional
     func PifMgr_CloseProperties(hProps: CPointer<Unit>, flOpt: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PifMgr_CloseProperties == "on"]
+public unsafe func Windows_PifMgr_CloseProperties(hProps: CPointer<Unit>, flOpt: UInt32): CPointer<Unit> {
+    return PifMgr_CloseProperties(hProps, flOpt)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PifMgr_GetProperties == "on"]
+foreign {
     // param-hint: hProps optional
     // param-hint: pszGroup optional
     // param-hint: lpProps bytes=param[3] optional
     func PifMgr_GetProperties(hProps: CPointer<Unit>, pszGroup: CPointer<UInt8>, lpProps: CPointer<Unit>, cbProps: Int32, flOpt: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PifMgr_GetProperties == "on"]
+public unsafe func Windows_PifMgr_GetProperties(hProps: CPointer<Unit>, pszGroup: CPointer<UInt8>, lpProps: CPointer<Unit>, cbProps: Int32, flOpt: UInt32): Int32 {
+    return PifMgr_GetProperties(hProps, pszGroup, lpProps, cbProps, flOpt)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PifMgr_OpenProperties == "on"]
+foreign {
     // param-hint: pszPIF optional
     func PifMgr_OpenProperties(pszApp: CPointer<UInt16>, pszPIF: CPointer<UInt16>, hInf: UInt32, flOpt: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PifMgr_OpenProperties == "on"]
+public unsafe func Windows_PifMgr_OpenProperties(pszApp: CPointer<UInt16>, pszPIF: CPointer<UInt16>, hInf: UInt32, flOpt: UInt32): CPointer<Unit> {
+    return PifMgr_OpenProperties(pszApp, pszPIF, hInf, flOpt)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PifMgr_SetProperties == "on"]
+foreign {
     // param-hint: hProps optional
     // param-hint: pszGroup optional
     // param-hint: lpProps bytes=param[3]
     func PifMgr_SetProperties(hProps: CPointer<Unit>, pszGroup: CPointer<UInt8>, lpProps: CPointer<Unit>, cbProps: Int32, flOpt: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PifMgr_SetProperties == "on"]
+public unsafe func Windows_PifMgr_SetProperties(hProps: CPointer<Unit>, pszGroup: CPointer<UInt8>, lpProps: CPointer<Unit>, cbProps: Int32, flOpt: UInt32): Int32 {
+    return PifMgr_SetProperties(hProps, pszGroup, lpProps, cbProps, flOpt)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PropertiesSystem_SHAddDefaultPropertiesByExt == "on"]
+foreign {
     func SHAddDefaultPropertiesByExt(pszExt: CPointer<UInt16>, pPropStore: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PropertiesSystem_SHAddDefaultPropertiesByExt == "on"]
+public unsafe func Windows_SHAddDefaultPropertiesByExt(pszExt: CPointer<UInt16>, pPropStore: CPointer<Unit>): Int32 {
+    return SHAddDefaultPropertiesByExt(pszExt, pPropStore)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PropertiesSystem_SHGetPropertyStoreForWindow == "on"]
+foreign {
     func SHGetPropertyStoreForWindow(hwnd: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[SHELL32 == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on")]
-foreign {
-    // param-hint: rgpspec len=param[2]
-    // param-hint: rgvar len=param[2]
-    func SHPropStgReadMultiple(pps: CPointer<Unit>, uCodePage: UInt32, cpspec: UInt32, rgpspec: CPointer<Win32__impl_l1.PROPSPECAbi>, rgvar: CPointer<PROPVARIANTAbi>): Int32
-    // param-hint: puCodePage optional
-    // param-hint: rgpspec len=param[2]
-    // param-hint: rgvar len=param[2]
-    func SHPropStgWriteMultiple(pps: CPointer<Unit>, puCodePage: CPointer<UInt32>, cpspec: UInt32, rgpspec: CPointer<Win32__impl_l1.PROPSPECAbi>, rgvar: CPointer<PROPVARIANTAbi>, propidNameFirst: UInt32): Int32
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PropertiesSystem_SHGetPropertyStoreForWindow == "on"]
+public unsafe func Windows_SHGetPropertyStoreForWindow(hwnd: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return SHGetPropertyStoreForWindow(hwnd, riid, ppv)
 }
 
-@When[SHELL32 == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PropertiesSystem_SHGetPropertyStoreFromIDList == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    func SHGetPropertyStoreFromIDList(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, flags: Win32__impl_l0.GETPROPERTYSTOREFLAGSAbi, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PropertiesSystem_SHGetPropertyStoreFromIDList == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHGetPropertyStoreFromIDList(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, flags: Win32__impl_l0.GETPROPERTYSTOREFLAGSAbi, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return SHGetPropertyStoreFromIDList(pidl, flags, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PropertiesSystem_SHGetPropertyStoreFromParsingName == "on" && Windows_Win32_System_Com == "on"]
 foreign {
     // param-hint: pbc optional
     func SHGetPropertyStoreFromParsingName(pszPath: CPointer<UInt16>, pbc: CPointer<Unit>, flags: Win32__impl_l0.GETPROPERTYSTOREFLAGSAbi, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[SHELL32 == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PropertiesSystem_SHGetPropertyStoreFromParsingName == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SHGetPropertyStoreFromParsingName(pszPath: CPointer<UInt16>, pbc: CPointer<Unit>, flags: Win32__impl_l0.GETPROPERTYSTOREFLAGSAbi, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return SHGetPropertyStoreFromParsingName(pszPath, pbc, flags, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PropertiesSystem_SHPropStgCreate == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
 foreign {
     // param-hint: pclsid optional
     // param-hint: puCodePage optional
     func SHPropStgCreate(psstg: CPointer<Unit>, fmtid: CPointer<GUID>, pclsid: CPointer<GUID>, grfFlags: UInt32, grfMode: UInt32, dwDisposition: UInt32, ppstg: CPointer<CPointer<Unit>>, puCodePage: CPointer<UInt32>): Int32
 }
 
-@When[SHELL32 == "on" && Windows_Win32_UI_Shell_Common == "on"]
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PropertiesSystem_SHPropStgCreate == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_SHPropStgCreate(psstg: CPointer<Unit>, fmtid: CPointer<GUID>, pclsid: CPointer<GUID>, grfFlags: UInt32, grfMode: UInt32, dwDisposition: UInt32, ppstg: CPointer<CPointer<Unit>>, puCodePage: CPointer<UInt32>): Int32 {
+    return SHPropStgCreate(psstg, fmtid, pclsid, grfFlags, grfMode, dwDisposition, ppstg, puCodePage)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PropertiesSystem_SHPropStgReadMultiple == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
 foreign {
-    func SHGetPropertyStoreFromIDList(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, flags: Win32__impl_l0.GETPROPERTYSTOREFLAGSAbi, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+    // param-hint: rgpspec len=param[2]
+    // param-hint: rgvar len=param[2]
+    func SHPropStgReadMultiple(pps: CPointer<Unit>, uCodePage: UInt32, cpspec: UInt32, rgpspec: CPointer<Win32__impl_l1.PROPSPECAbi>, rgvar: CPointer<PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PropertiesSystem_SHPropStgReadMultiple == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_SHPropStgReadMultiple(pps: CPointer<Unit>, uCodePage: UInt32, cpspec: UInt32, rgpspec: CPointer<Win32__impl_l1.PROPSPECAbi>, rgvar: CPointer<PROPVARIANTAbi>): Int32 {
+    return SHPropStgReadMultiple(pps, uCodePage, cpspec, rgpspec, rgvar)
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PropertiesSystem_SHPropStgWriteMultiple == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    // param-hint: puCodePage optional
+    // param-hint: rgpspec len=param[2]
+    // param-hint: rgvar len=param[2]
+    func SHPropStgWriteMultiple(pps: CPointer<Unit>, puCodePage: CPointer<UInt32>, cpspec: UInt32, rgpspec: CPointer<Win32__impl_l1.PROPSPECAbi>, rgvar: CPointer<PROPVARIANTAbi>, propidNameFirst: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PropertiesSystem_SHPropStgWriteMultiple == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_SHPropStgWriteMultiple(pps: CPointer<Unit>, puCodePage: CPointer<UInt32>, cpspec: UInt32, rgpspec: CPointer<Win32__impl_l1.PROPSPECAbi>, rgvar: CPointer<PROPVARIANTAbi>, propidNameFirst: UInt32): Int32 {
+    return SHPropStgWriteMultiple(pps, puCodePage, cpspec, rgpspec, rgvar, propidNameFirst)
 }
 
 @When[Windows_Win32_UI_Shell_PropertiesSystem == "on"]

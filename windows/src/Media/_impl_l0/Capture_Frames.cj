@@ -10,15 +10,10 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
 import windows.Graphics.DirectX.Direct3D11 as Graphics_DirectX_Direct3D11
-@When[Windows_Graphics_Imaging == "on"]
 import windows.Graphics.Imaging as Graphics_Imaging
-@When[Windows_Media == "on"]
 import windows.Media as Media
-@When[Windows_Perception_Spatial == "on"]
 import windows.Perception.Spatial as Perception_Spatial
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -1128,7 +1123,10 @@ public struct IMediaFrameFormatVtbl {
     public var FrameRate: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Media_MediaProperties != "on"]
     public var FrameRate: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     public var VideoFormat: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -1223,6 +1221,7 @@ public class IMediaFrameFormat <: InterfaceWrapperBase & ComInterface & RuntimeN
         return MediaRatio.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<GuidValue, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1563,7 +1562,10 @@ public struct IMediaFrameReferenceVtbl {
     public var Format: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SystemRelativeTime: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Duration: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     public var get_BufferMediaFrame: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var get_VideoMediaFrame: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Perception_Spatial == "on"]
@@ -1682,6 +1684,7 @@ public class IMediaFrameReference <: InterfaceWrapperBase & ComInterface & Runti
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<windows_future.TimeSpan>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<GuidValue, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1810,7 +1813,10 @@ public struct IMediaFrameSourceVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Info: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Controller: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedFormats: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedFormats: UIntNative = UIntNative(0)
     public var CurrentFormat: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetFormatAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var FormatChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -1903,6 +1909,7 @@ public class IMediaFrameSource <: InterfaceWrapperBase & ComInterface & RuntimeN
         return MediaFrameSourceController.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedFormats(): windows_collections.IVectorView<MediaFrameFormat> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2344,7 +2351,10 @@ public struct IMediaFrameSourceGroupVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Id: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var DisplayName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SourceInfos: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SourceInfos: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2429,6 +2439,7 @@ public class IMediaFrameSourceGroup <: InterfaceWrapperBase & ComInterface & Run
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SourceInfos(): windows_collections.IVectorView<MediaFrameSourceInfo> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2445,7 +2456,10 @@ extend IMediaFrameSourceGroup <: windows_core.Interface<IMediaFrameSourceGroup> 
 @C
 public struct IMediaFrameSourceGroupStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllAsync: UIntNative = UIntNative(0)
     public var FromIdAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var GetDeviceSelector: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -2516,6 +2530,7 @@ public class IMediaFrameSourceGroupStatics <: InterfaceWrapperBase & ComInterfac
         readVtbl<IMediaFrameSourceGroupStaticsVtbl>(IMediaFrameSourceGroupStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<MediaFrameSourceGroup>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2559,7 +2574,10 @@ public struct IMediaFrameSourceInfoVtbl {
     public var get_DeviceInformation: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Enumeration != "on"]
     public var get_DeviceInformation: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     @When[Windows_Perception_Spatial == "on"]
     public var CoordinateSystem: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Perception_Spatial != "on"]
@@ -2674,6 +2692,7 @@ public class IMediaFrameSourceInfo <: InterfaceWrapperBase & ComInterface & Runt
         return _impl_l1.DeviceInformation.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<GuidValue, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2700,9 +2719,9 @@ extend IMediaFrameSourceInfo <: windows_core.Interface<IMediaFrameSourceInfo> {}
 public struct IMediaFrameSourceInfo2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var ProfileId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Media_Capture == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Capture == "on"]
     public var VideoProfileMediaDescription: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Media_Capture != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Media_Capture != "on"]
     public var VideoProfileMediaDescription: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -2780,7 +2799,7 @@ public class IMediaFrameSourceInfo2 <: InterfaceWrapperBase & ComInterface & Run
         return windows_core.HString.fromAbiTake(result__)
     }
 
-    @When[Windows_Media_Capture == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Capture == "on"]
     public unsafe func VideoProfileMediaDescription(): windows_collections.IVectorView<MediaCaptureVideoProfileMediaDescription> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3909,6 +3928,7 @@ public class MediaFrameFormat <: InterfaceWrapperBase & ComInterface & windows_i
         return defaultInterface().FrameRate()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<GuidValue, IInspectable> {
         return defaultInterface().Properties()
     }
@@ -4264,6 +4284,7 @@ public class MediaFrameReference <: InterfaceWrapperBase & ComInterface & window
         return defaultInterface().Duration()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<GuidValue, IInspectable> {
         return defaultInterface().Properties()
     }
@@ -4381,6 +4402,7 @@ public class MediaFrameSource <: InterfaceWrapperBase & ComInterface & windows_i
         return defaultInterface().Controller()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedFormats(): windows_collections.IVectorView<MediaFrameFormat> {
         return defaultInterface().SupportedFormats()
     }
@@ -4765,10 +4787,12 @@ public class MediaFrameSourceGroup <: InterfaceWrapperBase & ComInterface & wind
         return defaultInterface().DisplayName()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SourceInfos(): windows_collections.IVectorView<MediaFrameSourceInfo> {
         return defaultInterface().SourceInfos()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindAllAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<MediaFrameSourceGroup>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<MediaFrameSourceGroup>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<MediaFrameSourceGroup>>>.None
         try (factory__ = windows_core.factory<MediaFrameSourceGroup, IMediaFrameSourceGroupStatics>().unwrap()) {
@@ -4912,6 +4936,7 @@ public class MediaFrameSourceInfo <: InterfaceWrapperBase & ComInterface & windo
         return defaultInterface().get_DeviceInformation()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<GuidValue, IInspectable> {
         return defaultInterface().Properties()
     }

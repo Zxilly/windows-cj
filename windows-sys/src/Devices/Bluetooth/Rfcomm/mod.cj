@@ -7,4 +7,3 @@ public import windows_sys._impl_l1.{IRfcommDeviceService, IRfcommDeviceService2,
 public import windows_sys._impl_l0.{IRfcommServiceId, IRfcommServiceIdStatics, IRfcommServiceIdStaticsVtbl, IRfcommServiceIdVtbl}
 @When[Windows_Devices_Bluetooth_Rfcomm == "on"]
 public import windows_sys._impl_l2.{IRfcommServiceProvider, IRfcommServiceProvider2, IRfcommServiceProvider2Vtbl, IRfcommServiceProviderStatics, IRfcommServiceProviderStaticsVtbl, IRfcommServiceProviderVtbl}
-

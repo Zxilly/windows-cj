@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l1 as _impl_l1
 import windows_collections as windows_collections
@@ -815,10 +814,16 @@ public struct ILockScreenInfoVtbl {
     public var LockScreenImage: UIntNative = UIntNative(0)
     public var BadgesChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveBadgesChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Badges: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Badges: UIntNative = UIntNative(0)
     public var DetailTextChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveDetailTextChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var DetailText: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var DetailText: UIntNative = UIntNative(0)
     public var AlarmIconChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveAlarmIconChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams == "on"]
@@ -930,6 +935,7 @@ public class ILockScreenInfo <: InterfaceWrapperBase & ComInterface & RuntimeNam
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Badges(): windows_collections.IVectorView<LockScreenBadge> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -952,6 +958,7 @@ public class ILockScreenInfo <: InterfaceWrapperBase & ComInterface & RuntimeNam
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DetailText(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1188,6 +1195,7 @@ public class LockScreenInfo <: InterfaceWrapperBase & ComInterface & windows_int
         defaultInterface().RemoveBadgesChanged(token)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Badges(): windows_collections.IVectorView<LockScreenBadge> {
         return defaultInterface().Badges()
     }
@@ -1200,6 +1208,7 @@ public class LockScreenInfo <: InterfaceWrapperBase & ComInterface & windows_int
         defaultInterface().RemoveDetailTextChanged(token)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DetailText(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().DetailText()
     }

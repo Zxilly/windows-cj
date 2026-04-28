@@ -4,15 +4,13 @@
 package windows.Win32.Networking.HttpServer
 
 import std.collection.*
+import windows_libloading
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
 import windows_interface.{GUID}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
-@When[Windows_Win32_System_IO == "on"]
 import windows.Win32.System.IO as Win32_System_IO
 import windows.Win32._impl_l1 as Win32__impl_l1
 
@@ -7383,68 +7381,92 @@ extend HTTP_SERVICE_CONFIG_SSL_SNI_SET_EX <: windows_core.CopyType & windows_cor
     }
 }
 
-@When[HTTPAPI == "on"]
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpAddFragmentToCache == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    // param-hint: Overlapped optional
+    func HttpAddFragmentToCache(RequestQueueHandle: CPointer<Unit>, UrlPrefix: CPointer<UInt16>, DataChunk: CPointer<HTTP_DATA_CHUNKAbi>, CachePolicy: CPointer<HTTP_CACHE_POLICYAbi>, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpAddFragmentToCache == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_HttpAddFragmentToCache(RequestQueueHandle: CPointer<Unit>, UrlPrefix: CPointer<UInt16>, DataChunk: CPointer<HTTP_DATA_CHUNKAbi>, CachePolicy: CPointer<HTTP_CACHE_POLICYAbi>, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32 {
+    return HttpAddFragmentToCache(RequestQueueHandle, UrlPrefix, DataChunk, CachePolicy, Overlapped)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpAddUrl == "on"]
 foreign {
     // param-hint: Reserved optional reserved
     func HttpAddUrl(RequestQueueHandle: CPointer<Unit>, FullyQualifiedUrl: CPointer<UInt16>, Reserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpAddUrl == "on"]
+public unsafe func Windows_HttpAddUrl(RequestQueueHandle: CPointer<Unit>, FullyQualifiedUrl: CPointer<UInt16>, Reserved: CPointer<Unit>): UInt32 {
+    return HttpAddUrl(RequestQueueHandle, FullyQualifiedUrl, Reserved)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpAddUrlToUrlGroup == "on"]
+foreign {
     // param-hint: Reserved optional reserved
     func HttpAddUrlToUrlGroup(UrlGroupId: UInt64, pFullyQualifiedUrl: CPointer<UInt16>, UrlContext: UInt64, Reserved: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpAddUrlToUrlGroup == "on"]
+public unsafe func Windows_HttpAddUrlToUrlGroup(UrlGroupId: UInt64, pFullyQualifiedUrl: CPointer<UInt16>, UrlContext: UInt64, Reserved: UInt32): UInt32 {
+    return HttpAddUrlToUrlGroup(UrlGroupId, pFullyQualifiedUrl, UrlContext, Reserved)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpCancelHttpRequest == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    // param-hint: Overlapped optional
+    func HttpCancelHttpRequest(RequestQueueHandle: CPointer<Unit>, RequestId: UInt64, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpCancelHttpRequest == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_HttpCancelHttpRequest(RequestQueueHandle: CPointer<Unit>, RequestId: UInt64, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32 {
+    return HttpCancelHttpRequest(RequestQueueHandle, RequestId, Overlapped)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpCloseRequestQueue == "on"]
+foreign {
     func HttpCloseRequestQueue(RequestQueueHandle: HTTP_REQUEST_QUEUE_HANDLE): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpCloseRequestQueue == "on"]
+public unsafe func Windows_HttpCloseRequestQueue(RequestQueueHandle: HTTP_REQUEST_QUEUE_HANDLE): UInt32 {
+    return HttpCloseRequestQueue(RequestQueueHandle)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpCloseServerSession == "on"]
+foreign {
     func HttpCloseServerSession(ServerSessionId: UInt64): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpCloseServerSession == "on"]
+public unsafe func Windows_HttpCloseServerSession(ServerSessionId: UInt64): UInt32 {
+    return HttpCloseServerSession(ServerSessionId)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpCloseUrlGroup == "on"]
+foreign {
     func HttpCloseUrlGroup(UrlGroupId: UInt64): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpCloseUrlGroup == "on"]
+public unsafe func Windows_HttpCloseUrlGroup(UrlGroupId: UInt64): UInt32 {
+    return HttpCloseUrlGroup(UrlGroupId)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpCreateHttpHandle == "on"]
+foreign {
     // param-hint: Reserved optional reserved
     func HttpCreateHttpHandle(RequestQueueHandle: CPointer<CPointer<Unit>>, Reserved: UInt32): UInt32
-    // param-hint: Reserved optional reserved
-    func HttpCreateServerSession(Version: HTTPAPI_VERSIONAbi, ServerSessionId: CPointer<UInt64>, Reserved: UInt32): UInt32
-    // param-hint: Reserved optional reserved
-    func HttpCreateUrlGroup(ServerSessionId: UInt64, pUrlGroupId: CPointer<UInt64>, Reserved: UInt32): UInt32
-    // param-hint: Query optional
-    // param-hint: Headers optional
-    func HttpDeclarePush(RequestQueueHandle: CPointer<Unit>, RequestId: UInt64, Verb: HTTP_VERBAbi, Path: CPointer<UInt16>, Query: CPointer<UInt8>, Headers: CPointer<HTTP_REQUEST_HEADERSAbi>): UInt32
-    func HttpDelegateRequestEx(RequestQueueHandle: CPointer<Unit>, DelegateQueueHandle: CPointer<Unit>, RequestId: UInt64, DelegateUrlGroupId: UInt64, PropertyInfoSetSize: UInt32, PropertyInfoSet: CPointer<HTTP_DELEGATE_REQUEST_PROPERTY_INFOAbi>): UInt32
-    func HttpFindUrlGroupId(FullyQualifiedUrl: CPointer<UInt16>, RequestQueueHandle: CPointer<Unit>, UrlGroupId: CPointer<UInt64>): UInt32
-    func HttpGetExtension(Version: HTTPAPI_VERSIONAbi, Extension: UInt32, Buffer: CPointer<Unit>, BufferSize: UInt32): UInt32
-    // param-hint: pReserved optional reserved
-    func HttpInitialize(Version: HTTPAPI_VERSIONAbi, Flags: HTTP_INITIALIZEAbi, pReserved: CPointer<Unit>): UInt32
-    func HttpIsFeatureSupported(FeatureId: HTTP_FEATURE_IDAbi): Int32
-    // param-hint: Reserved optional reserved
-    // param-hint: Flags optional reserved
-    func HttpPrepareUrl(Reserved: CPointer<Unit>, Flags: UInt32, Url: CPointer<UInt16>, PreparedUrl: CPointer<CPointer<UInt16>>): UInt32
-    // param-hint: PropertyInformation bytes=param[3] optional
-    // param-hint: Reserved1 optional reserved
-    // param-hint: ReturnLength optional
-    // param-hint: Reserved2 optional reserved
-    func HttpQueryRequestQueueProperty(RequestQueueHandle: CPointer<Unit>, Property: HTTP_SERVER_PROPERTYAbi, PropertyInformation: CPointer<Unit>, PropertyInformationLength: UInt32, Reserved1: UInt32, ReturnLength: CPointer<UInt32>, Reserved2: CPointer<Unit>): UInt32
-    // param-hint: PropertyInformation bytes=param[3] optional
-    // param-hint: ReturnLength optional
-    func HttpQueryServerSessionProperty(ServerSessionId: UInt64, Property: HTTP_SERVER_PROPERTYAbi, PropertyInformation: CPointer<Unit>, PropertyInformationLength: UInt32, ReturnLength: CPointer<UInt32>): UInt32
-    // param-hint: PropertyInformation bytes=param[3] optional
-    // param-hint: ReturnLength optional
-    func HttpQueryUrlGroupProperty(UrlGroupId: UInt64, Property: HTTP_SERVER_PROPERTYAbi, PropertyInformation: CPointer<Unit>, PropertyInformationLength: UInt32, ReturnLength: CPointer<UInt32>): UInt32
-    func HttpRemoveUrl(RequestQueueHandle: CPointer<Unit>, FullyQualifiedUrl: CPointer<UInt16>): UInt32
-    func HttpRemoveUrlFromUrlGroup(UrlGroupId: UInt64, pFullyQualifiedUrl: CPointer<UInt16>, Flags: UInt32): UInt32
-    // param-hint: PropertyInformation bytes=param[3]
-    // param-hint: Reserved1 optional reserved
-    // param-hint: Reserved2 optional reserved
-    func HttpSetRequestQueueProperty(RequestQueueHandle: CPointer<Unit>, Property: HTTP_SERVER_PROPERTYAbi, PropertyInformation: CPointer<Unit>, PropertyInformationLength: UInt32, Reserved1: UInt32, Reserved2: CPointer<Unit>): UInt32
-    // param-hint: PropertyInformation bytes=param[3]
-    func HttpSetServerSessionProperty(ServerSessionId: UInt64, Property: HTTP_SERVER_PROPERTYAbi, PropertyInformation: CPointer<Unit>, PropertyInformationLength: UInt32): UInt32
-    // param-hint: PropertyInformation bytes=param[3]
-    func HttpSetUrlGroupProperty(UrlGroupId: UInt64, Property: HTTP_SERVER_PROPERTYAbi, PropertyInformation: CPointer<Unit>, PropertyInformationLength: UInt32): UInt32
-    func HttpShutdownRequestQueue(RequestQueueHandle: CPointer<Unit>): UInt32
-    // param-hint: pReserved optional reserved
-    func HttpTerminate(Flags: HTTP_INITIALIZEAbi, pReserved: CPointer<Unit>): UInt32
 }
 
-@When[HTTPAPI == "on" && (Windows_Win32_Networking_WinSock == "on" && Windows_Win32_System_IO == "on")]
-foreign {
-    // param-hint: RequestBuffer bytes=param[4]
-    // param-hint: BytesReturned optional
-    // param-hint: Overlapped optional
-    func HttpReceiveHttpRequest(RequestQueueHandle: CPointer<Unit>, RequestId: UInt64, Flags: HTTP_RECEIVE_HTTP_REQUEST_FLAGSAbi, RequestBuffer: CPointer<HTTP_REQUEST_V2Abi>, RequestBufferLength: UInt32, BytesReturned: CPointer<UInt32>, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpCreateHttpHandle == "on"]
+public unsafe func Windows_HttpCreateHttpHandle(RequestQueueHandle: CPointer<CPointer<Unit>>, Reserved: UInt32): UInt32 {
+    return HttpCreateHttpHandle(RequestQueueHandle, Reserved)
 }
 
-@When[HTTPAPI == "on" && Windows_Win32_Security == "on"]
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpCreateRequestQueue == "on" && Windows_Win32_Security == "on"]
 foreign {
     // param-hint: Name optional
     // param-hint: SecurityAttributes optional
@@ -7452,42 +7474,260 @@ foreign {
     func HttpCreateRequestQueue(Version: HTTPAPI_VERSIONAbi, Name: CPointer<UInt16>, SecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, Flags: UInt32, RequestQueueHandle: CPointer<HTTP_REQUEST_QUEUE_HANDLE>): UInt32
 }
 
-@When[HTTPAPI == "on" && Windows_Win32_System_IO == "on"]
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpCreateRequestQueue == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_HttpCreateRequestQueue(Version: HTTPAPI_VERSIONAbi, Name: CPointer<UInt16>, SecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, Flags: UInt32, RequestQueueHandle: CPointer<HTTP_REQUEST_QUEUE_HANDLE>): UInt32 {
+    return HttpCreateRequestQueue(Version, Name, SecurityAttributes, Flags, RequestQueueHandle)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpCreateServerSession == "on"]
 foreign {
-    // param-hint: Overlapped optional
-    func HttpAddFragmentToCache(RequestQueueHandle: CPointer<Unit>, UrlPrefix: CPointer<UInt16>, DataChunk: CPointer<HTTP_DATA_CHUNKAbi>, CachePolicy: CPointer<HTTP_CACHE_POLICYAbi>, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32
-    // param-hint: Overlapped optional
-    func HttpCancelHttpRequest(RequestQueueHandle: CPointer<Unit>, RequestId: UInt64, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32
+    // param-hint: Reserved optional reserved
+    func HttpCreateServerSession(Version: HTTPAPI_VERSIONAbi, ServerSessionId: CPointer<UInt64>, Reserved: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpCreateServerSession == "on"]
+public unsafe func Windows_HttpCreateServerSession(Version: HTTPAPI_VERSIONAbi, ServerSessionId: CPointer<UInt64>, Reserved: UInt32): UInt32 {
+    return HttpCreateServerSession(Version, ServerSessionId, Reserved)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpCreateUrlGroup == "on"]
+foreign {
+    // param-hint: Reserved optional reserved
+    func HttpCreateUrlGroup(ServerSessionId: UInt64, pUrlGroupId: CPointer<UInt64>, Reserved: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpCreateUrlGroup == "on"]
+public unsafe func Windows_HttpCreateUrlGroup(ServerSessionId: UInt64, pUrlGroupId: CPointer<UInt64>, Reserved: UInt32): UInt32 {
+    return HttpCreateUrlGroup(ServerSessionId, pUrlGroupId, Reserved)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpDeclarePush == "on"]
+foreign {
+    // param-hint: Query optional
+    // param-hint: Headers optional
+    func HttpDeclarePush(RequestQueueHandle: CPointer<Unit>, RequestId: UInt64, Verb: HTTP_VERBAbi, Path: CPointer<UInt16>, Query: CPointer<UInt8>, Headers: CPointer<HTTP_REQUEST_HEADERSAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpDeclarePush == "on"]
+public unsafe func Windows_HttpDeclarePush(RequestQueueHandle: CPointer<Unit>, RequestId: UInt64, Verb: HTTP_VERBAbi, Path: CPointer<UInt16>, Query: CPointer<UInt8>, Headers: CPointer<HTTP_REQUEST_HEADERSAbi>): UInt32 {
+    return HttpDeclarePush(RequestQueueHandle, RequestId, Verb, Path, Query, Headers)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpDelegateRequestEx == "on"]
+foreign {
+    func HttpDelegateRequestEx(RequestQueueHandle: CPointer<Unit>, DelegateQueueHandle: CPointer<Unit>, RequestId: UInt64, DelegateUrlGroupId: UInt64, PropertyInfoSetSize: UInt32, PropertyInfoSet: CPointer<HTTP_DELEGATE_REQUEST_PROPERTY_INFOAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpDelegateRequestEx == "on"]
+public unsafe func Windows_HttpDelegateRequestEx(RequestQueueHandle: CPointer<Unit>, DelegateQueueHandle: CPointer<Unit>, RequestId: UInt64, DelegateUrlGroupId: UInt64, PropertyInfoSetSize: UInt32, PropertyInfoSet: CPointer<HTTP_DELEGATE_REQUEST_PROPERTY_INFOAbi>): UInt32 {
+    return HttpDelegateRequestEx(RequestQueueHandle, DelegateQueueHandle, RequestId, DelegateUrlGroupId, PropertyInfoSetSize, PropertyInfoSet)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpDeleteServiceConfiguration == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: ServiceHandle optional reserved
     // param-hint: pConfigInformation bytes=param[3]
     // param-hint: pOverlapped optional reserved
     func HttpDeleteServiceConfiguration(ServiceHandle: CPointer<Unit>, ConfigId: HTTP_SERVICE_CONFIG_IDAbi, pConfigInformation: CPointer<Unit>, ConfigInformationLength: UInt32, pOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpDeleteServiceConfiguration == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_HttpDeleteServiceConfiguration(ServiceHandle: CPointer<Unit>, ConfigId: HTTP_SERVICE_CONFIG_IDAbi, pConfigInformation: CPointer<Unit>, ConfigInformationLength: UInt32, pOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32 {
+    return HttpDeleteServiceConfiguration(ServiceHandle, ConfigId, pConfigInformation, ConfigInformationLength, pOverlapped)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpFindUrlGroupId == "on"]
+foreign {
+    func HttpFindUrlGroupId(FullyQualifiedUrl: CPointer<UInt16>, RequestQueueHandle: CPointer<Unit>, UrlGroupId: CPointer<UInt64>): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpFindUrlGroupId == "on"]
+public unsafe func Windows_HttpFindUrlGroupId(FullyQualifiedUrl: CPointer<UInt16>, RequestQueueHandle: CPointer<Unit>, UrlGroupId: CPointer<UInt64>): UInt32 {
+    return HttpFindUrlGroupId(FullyQualifiedUrl, RequestQueueHandle, UrlGroupId)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpFlushResponseCache == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: Overlapped optional
     func HttpFlushResponseCache(RequestQueueHandle: CPointer<Unit>, UrlPrefix: CPointer<UInt16>, Flags: UInt32, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32
-    // param-hint: Qualifier bytes=param[4] optional
-    // param-hint: Output bytes=param[6] optional
-    // param-hint: BytesReturned optional
-    // param-hint: Overlapped optional
-    func HttpQueryRequestProperty(RequestQueueHandle: CPointer<Unit>, Id: UInt64, PropertyId: HTTP_REQUEST_PROPERTYAbi, Qualifier: CPointer<Unit>, QualifierSize: UInt32, Output: CPointer<Unit>, OutputBufferSize: UInt32, BytesReturned: CPointer<UInt32>, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpFlushResponseCache == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_HttpFlushResponseCache(RequestQueueHandle: CPointer<Unit>, UrlPrefix: CPointer<UInt16>, Flags: UInt32, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32 {
+    return HttpFlushResponseCache(RequestQueueHandle, UrlPrefix, Flags, Overlapped)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpGetExtension == "on"]
+foreign {
+    func HttpGetExtension(Version: HTTPAPI_VERSIONAbi, Extension: UInt32, Buffer: CPointer<Unit>, BufferSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpGetExtension == "on"]
+public unsafe func Windows_HttpGetExtension(Version: HTTPAPI_VERSIONAbi, Extension: UInt32, Buffer: CPointer<Unit>, BufferSize: UInt32): UInt32 {
+    return HttpGetExtension(Version, Extension, Buffer, BufferSize)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpInitialize == "on"]
+foreign {
+    // param-hint: pReserved optional reserved
+    func HttpInitialize(Version: HTTPAPI_VERSIONAbi, Flags: HTTP_INITIALIZEAbi, pReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpInitialize == "on"]
+public unsafe func Windows_HttpInitialize(Version: HTTPAPI_VERSIONAbi, Flags: HTTP_INITIALIZEAbi, pReserved: CPointer<Unit>): UInt32 {
+    return HttpInitialize(Version, Flags, pReserved)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpIsFeatureSupported == "on"]
+foreign {
+    func HttpIsFeatureSupported(FeatureId: HTTP_FEATURE_IDAbi): Int32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpIsFeatureSupported == "on"]
+public unsafe func Windows_HttpIsFeatureSupported(FeatureId: HTTP_FEATURE_IDAbi): Int32 {
+    return HttpIsFeatureSupported(FeatureId)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpPrepareUrl == "on"]
+foreign {
+    // param-hint: Reserved optional reserved
+    // param-hint: Flags optional reserved
+    func HttpPrepareUrl(Reserved: CPointer<Unit>, Flags: UInt32, Url: CPointer<UInt16>, PreparedUrl: CPointer<CPointer<UInt16>>): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpPrepareUrl == "on"]
+public unsafe func Windows_HttpPrepareUrl(Reserved: CPointer<Unit>, Flags: UInt32, Url: CPointer<UInt16>, PreparedUrl: CPointer<CPointer<UInt16>>): UInt32 {
+    return HttpPrepareUrl(Reserved, Flags, Url, PreparedUrl)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpQueryRequestQueueProperty == "on"]
+foreign {
+    // param-hint: PropertyInformation bytes=param[3] optional
+    // param-hint: Reserved1 optional reserved
+    // param-hint: ReturnLength optional
+    // param-hint: Reserved2 optional reserved
+    func HttpQueryRequestQueueProperty(RequestQueueHandle: CPointer<Unit>, Property: HTTP_SERVER_PROPERTYAbi, PropertyInformation: CPointer<Unit>, PropertyInformationLength: UInt32, Reserved1: UInt32, ReturnLength: CPointer<UInt32>, Reserved2: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpQueryRequestQueueProperty == "on"]
+public unsafe func Windows_HttpQueryRequestQueueProperty(RequestQueueHandle: CPointer<Unit>, Property: HTTP_SERVER_PROPERTYAbi, PropertyInformation: CPointer<Unit>, PropertyInformationLength: UInt32, Reserved1: UInt32, ReturnLength: CPointer<UInt32>, Reserved2: CPointer<Unit>): UInt32 {
+    return HttpQueryRequestQueueProperty(RequestQueueHandle, Property, PropertyInformation, PropertyInformationLength, Reserved1, ReturnLength, Reserved2)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpQueryServerSessionProperty == "on"]
+foreign {
+    // param-hint: PropertyInformation bytes=param[3] optional
+    // param-hint: ReturnLength optional
+    func HttpQueryServerSessionProperty(ServerSessionId: UInt64, Property: HTTP_SERVER_PROPERTYAbi, PropertyInformation: CPointer<Unit>, PropertyInformationLength: UInt32, ReturnLength: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpQueryServerSessionProperty == "on"]
+public unsafe func Windows_HttpQueryServerSessionProperty(ServerSessionId: UInt64, Property: HTTP_SERVER_PROPERTYAbi, PropertyInformation: CPointer<Unit>, PropertyInformationLength: UInt32, ReturnLength: CPointer<UInt32>): UInt32 {
+    return HttpQueryServerSessionProperty(ServerSessionId, Property, PropertyInformation, PropertyInformationLength, ReturnLength)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpQueryServiceConfiguration == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: ServiceHandle optional reserved
     // param-hint: pInput bytes=param[3] optional
     // param-hint: pOutput bytes=param[5] optional
     // param-hint: pReturnLength optional
     // param-hint: pOverlapped optional reserved
     func HttpQueryServiceConfiguration(ServiceHandle: CPointer<Unit>, ConfigId: HTTP_SERVICE_CONFIG_IDAbi, pInput: CPointer<Unit>, InputLength: UInt32, pOutput: CPointer<Unit>, OutputLength: UInt32, pReturnLength: CPointer<UInt32>, pOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpQueryServiceConfiguration == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_HttpQueryServiceConfiguration(ServiceHandle: CPointer<Unit>, ConfigId: HTTP_SERVICE_CONFIG_IDAbi, pInput: CPointer<Unit>, InputLength: UInt32, pOutput: CPointer<Unit>, OutputLength: UInt32, pReturnLength: CPointer<UInt32>, pOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32 {
+    return HttpQueryServiceConfiguration(ServiceHandle, ConfigId, pInput, InputLength, pOutput, OutputLength, pReturnLength, pOverlapped)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpQueryUrlGroupProperty == "on"]
+foreign {
+    // param-hint: PropertyInformation bytes=param[3] optional
+    // param-hint: ReturnLength optional
+    func HttpQueryUrlGroupProperty(UrlGroupId: UInt64, Property: HTTP_SERVER_PROPERTYAbi, PropertyInformation: CPointer<Unit>, PropertyInformationLength: UInt32, ReturnLength: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpQueryUrlGroupProperty == "on"]
+public unsafe func Windows_HttpQueryUrlGroupProperty(UrlGroupId: UInt64, Property: HTTP_SERVER_PROPERTYAbi, PropertyInformation: CPointer<Unit>, PropertyInformationLength: UInt32, ReturnLength: CPointer<UInt32>): UInt32 {
+    return HttpQueryUrlGroupProperty(UrlGroupId, Property, PropertyInformation, PropertyInformationLength, ReturnLength)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpReadFragmentFromCache == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: ByteRange optional
     // param-hint: Buffer bytes=param[4]
     // param-hint: BytesRead optional
     // param-hint: Overlapped optional
     func HttpReadFragmentFromCache(RequestQueueHandle: CPointer<Unit>, UrlPrefix: CPointer<UInt16>, ByteRange: CPointer<HTTP_BYTE_RANGEAbi>, Buffer: CPointer<Unit>, BufferLength: UInt32, BytesRead: CPointer<UInt32>, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpReadFragmentFromCache == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_HttpReadFragmentFromCache(RequestQueueHandle: CPointer<Unit>, UrlPrefix: CPointer<UInt16>, ByteRange: CPointer<HTTP_BYTE_RANGEAbi>, Buffer: CPointer<Unit>, BufferLength: UInt32, BytesRead: CPointer<UInt32>, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32 {
+    return HttpReadFragmentFromCache(RequestQueueHandle, UrlPrefix, ByteRange, Buffer, BufferLength, BytesRead, Overlapped)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpReceiveClientCertificate == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: SslClientCertInfo bytes=param[4]
     // param-hint: BytesReceived optional
     // param-hint: Overlapped optional
     func HttpReceiveClientCertificate(RequestQueueHandle: CPointer<Unit>, ConnectionId: UInt64, Flags: UInt32, SslClientCertInfo: CPointer<HTTP_SSL_CLIENT_CERT_INFOAbi>, SslClientCertInfoSize: UInt32, BytesReceived: CPointer<UInt32>, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpReceiveClientCertificate == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_HttpReceiveClientCertificate(RequestQueueHandle: CPointer<Unit>, ConnectionId: UInt64, Flags: UInt32, SslClientCertInfo: CPointer<HTTP_SSL_CLIENT_CERT_INFOAbi>, SslClientCertInfoSize: UInt32, BytesReceived: CPointer<UInt32>, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32 {
+    return HttpReceiveClientCertificate(RequestQueueHandle, ConnectionId, Flags, SslClientCertInfo, SslClientCertInfoSize, BytesReceived, Overlapped)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpReceiveHttpRequest == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    // param-hint: RequestBuffer bytes=param[4]
+    // param-hint: BytesReturned optional
+    // param-hint: Overlapped optional
+    func HttpReceiveHttpRequest(RequestQueueHandle: CPointer<Unit>, RequestId: UInt64, Flags: HTTP_RECEIVE_HTTP_REQUEST_FLAGSAbi, RequestBuffer: CPointer<HTTP_REQUEST_V2Abi>, RequestBufferLength: UInt32, BytesReturned: CPointer<UInt32>, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpReceiveHttpRequest == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_HttpReceiveHttpRequest(RequestQueueHandle: CPointer<Unit>, RequestId: UInt64, Flags: HTTP_RECEIVE_HTTP_REQUEST_FLAGSAbi, RequestBuffer: CPointer<HTTP_REQUEST_V2Abi>, RequestBufferLength: UInt32, BytesReturned: CPointer<UInt32>, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32 {
+    return HttpReceiveHttpRequest(RequestQueueHandle, RequestId, Flags, RequestBuffer, RequestBufferLength, BytesReturned, Overlapped)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpReceiveRequestEntityBody == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: EntityBuffer bytes=param[4]
     // param-hint: BytesReturned optional
     // param-hint: Overlapped optional
     func HttpReceiveRequestEntityBody(RequestQueueHandle: CPointer<Unit>, RequestId: UInt64, Flags: UInt32, EntityBuffer: CPointer<Unit>, EntityBufferLength: UInt32, BytesReturned: CPointer<UInt32>, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpReceiveRequestEntityBody == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_HttpReceiveRequestEntityBody(RequestQueueHandle: CPointer<Unit>, RequestId: UInt64, Flags: UInt32, EntityBuffer: CPointer<Unit>, EntityBufferLength: UInt32, BytesReturned: CPointer<UInt32>, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32 {
+    return HttpReceiveRequestEntityBody(RequestQueueHandle, RequestId, Flags, EntityBuffer, EntityBufferLength, BytesReturned, Overlapped)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpRemoveUrl == "on"]
+foreign {
+    func HttpRemoveUrl(RequestQueueHandle: CPointer<Unit>, FullyQualifiedUrl: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpRemoveUrl == "on"]
+public unsafe func Windows_HttpRemoveUrl(RequestQueueHandle: CPointer<Unit>, FullyQualifiedUrl: CPointer<UInt16>): UInt32 {
+    return HttpRemoveUrl(RequestQueueHandle, FullyQualifiedUrl)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpRemoveUrlFromUrlGroup == "on"]
+foreign {
+    func HttpRemoveUrlFromUrlGroup(UrlGroupId: UInt64, pFullyQualifiedUrl: CPointer<UInt16>, Flags: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpRemoveUrlFromUrlGroup == "on"]
+public unsafe func Windows_HttpRemoveUrlFromUrlGroup(UrlGroupId: UInt64, pFullyQualifiedUrl: CPointer<UInt16>, Flags: UInt32): UInt32 {
+    return HttpRemoveUrlFromUrlGroup(UrlGroupId, pFullyQualifiedUrl, Flags)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpSendHttpResponse == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: CachePolicy optional
     // param-hint: BytesSent optional
     // param-hint: Reserved1 optional reserved
@@ -7495,6 +7735,15 @@ foreign {
     // param-hint: Overlapped optional
     // param-hint: LogData optional
     func HttpSendHttpResponse(RequestQueueHandle: CPointer<Unit>, RequestId: UInt64, Flags: UInt32, HttpResponse: CPointer<HTTP_RESPONSE_V2Abi>, CachePolicy: CPointer<HTTP_CACHE_POLICYAbi>, BytesSent: CPointer<UInt32>, Reserved1: CPointer<Unit>, Reserved2: UInt32, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, LogData: CPointer<HTTP_LOG_DATAAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpSendHttpResponse == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_HttpSendHttpResponse(RequestQueueHandle: CPointer<Unit>, RequestId: UInt64, Flags: UInt32, HttpResponse: CPointer<HTTP_RESPONSE_V2Abi>, CachePolicy: CPointer<HTTP_CACHE_POLICYAbi>, BytesSent: CPointer<UInt32>, Reserved1: CPointer<Unit>, Reserved2: UInt32, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, LogData: CPointer<HTTP_LOG_DATAAbi>): UInt32 {
+    return HttpSendHttpResponse(RequestQueueHandle, RequestId, Flags, HttpResponse, CachePolicy, BytesSent, Reserved1, Reserved2, Overlapped, LogData)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpSendResponseEntityBody == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: EntityChunkCount optional
     // param-hint: EntityChunks len=param[3] optional
     // param-hint: BytesSent optional
@@ -7503,23 +7752,154 @@ foreign {
     // param-hint: Overlapped optional
     // param-hint: LogData optional
     func HttpSendResponseEntityBody(RequestQueueHandle: CPointer<Unit>, RequestId: UInt64, Flags: UInt32, EntityChunkCount: UInt16, EntityChunks: CPointer<HTTP_DATA_CHUNKAbi>, BytesSent: CPointer<UInt32>, Reserved1: CPointer<Unit>, Reserved2: UInt32, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, LogData: CPointer<HTTP_LOG_DATAAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpSendResponseEntityBody == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_HttpSendResponseEntityBody(RequestQueueHandle: CPointer<Unit>, RequestId: UInt64, Flags: UInt32, EntityChunkCount: UInt16, EntityChunks: CPointer<HTTP_DATA_CHUNKAbi>, BytesSent: CPointer<UInt32>, Reserved1: CPointer<Unit>, Reserved2: UInt32, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, LogData: CPointer<HTTP_LOG_DATAAbi>): UInt32 {
+    return HttpSendResponseEntityBody(RequestQueueHandle, RequestId, Flags, EntityChunkCount, EntityChunks, BytesSent, Reserved1, Reserved2, Overlapped, LogData)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpSetRequestProperty == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: Input bytes=param[4] optional
     func HttpSetRequestProperty(RequestQueueHandle: CPointer<Unit>, Id: UInt64, PropertyId: HTTP_REQUEST_PROPERTYAbi, Input: CPointer<Unit>, InputPropertySize: UInt32, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpSetRequestProperty == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_HttpSetRequestProperty(RequestQueueHandle: CPointer<Unit>, Id: UInt64, PropertyId: HTTP_REQUEST_PROPERTYAbi, Input: CPointer<Unit>, InputPropertySize: UInt32, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32 {
+    return HttpSetRequestProperty(RequestQueueHandle, Id, PropertyId, Input, InputPropertySize, Overlapped)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpSetRequestQueueProperty == "on"]
+foreign {
+    // param-hint: PropertyInformation bytes=param[3]
+    // param-hint: Reserved1 optional reserved
+    // param-hint: Reserved2 optional reserved
+    func HttpSetRequestQueueProperty(RequestQueueHandle: CPointer<Unit>, Property: HTTP_SERVER_PROPERTYAbi, PropertyInformation: CPointer<Unit>, PropertyInformationLength: UInt32, Reserved1: UInt32, Reserved2: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpSetRequestQueueProperty == "on"]
+public unsafe func Windows_HttpSetRequestQueueProperty(RequestQueueHandle: CPointer<Unit>, Property: HTTP_SERVER_PROPERTYAbi, PropertyInformation: CPointer<Unit>, PropertyInformationLength: UInt32, Reserved1: UInt32, Reserved2: CPointer<Unit>): UInt32 {
+    return HttpSetRequestQueueProperty(RequestQueueHandle, Property, PropertyInformation, PropertyInformationLength, Reserved1, Reserved2)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpSetServerSessionProperty == "on"]
+foreign {
+    // param-hint: PropertyInformation bytes=param[3]
+    func HttpSetServerSessionProperty(ServerSessionId: UInt64, Property: HTTP_SERVER_PROPERTYAbi, PropertyInformation: CPointer<Unit>, PropertyInformationLength: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpSetServerSessionProperty == "on"]
+public unsafe func Windows_HttpSetServerSessionProperty(ServerSessionId: UInt64, Property: HTTP_SERVER_PROPERTYAbi, PropertyInformation: CPointer<Unit>, PropertyInformationLength: UInt32): UInt32 {
+    return HttpSetServerSessionProperty(ServerSessionId, Property, PropertyInformation, PropertyInformationLength)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpSetServiceConfiguration == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: ServiceHandle optional reserved
     // param-hint: pConfigInformation bytes=param[3]
     // param-hint: pOverlapped optional reserved
     func HttpSetServiceConfiguration(ServiceHandle: CPointer<Unit>, ConfigId: HTTP_SERVICE_CONFIG_IDAbi, pConfigInformation: CPointer<Unit>, ConfigInformationLength: UInt32, pOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpSetServiceConfiguration == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_HttpSetServiceConfiguration(ServiceHandle: CPointer<Unit>, ConfigId: HTTP_SERVICE_CONFIG_IDAbi, pConfigInformation: CPointer<Unit>, ConfigInformationLength: UInt32, pOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32 {
+    return HttpSetServiceConfiguration(ServiceHandle, ConfigId, pConfigInformation, ConfigInformationLength, pOverlapped)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpSetUrlGroupProperty == "on"]
+foreign {
+    // param-hint: PropertyInformation bytes=param[3]
+    func HttpSetUrlGroupProperty(UrlGroupId: UInt64, Property: HTTP_SERVER_PROPERTYAbi, PropertyInformation: CPointer<Unit>, PropertyInformationLength: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpSetUrlGroupProperty == "on"]
+public unsafe func Windows_HttpSetUrlGroupProperty(UrlGroupId: UInt64, Property: HTTP_SERVER_PROPERTYAbi, PropertyInformation: CPointer<Unit>, PropertyInformationLength: UInt32): UInt32 {
+    return HttpSetUrlGroupProperty(UrlGroupId, Property, PropertyInformation, PropertyInformationLength)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpShutdownRequestQueue == "on"]
+foreign {
+    func HttpShutdownRequestQueue(RequestQueueHandle: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpShutdownRequestQueue == "on"]
+public unsafe func Windows_HttpShutdownRequestQueue(RequestQueueHandle: CPointer<Unit>): UInt32 {
+    return HttpShutdownRequestQueue(RequestQueueHandle)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpTerminate == "on"]
+foreign {
+    // param-hint: pReserved optional reserved
+    func HttpTerminate(Flags: HTTP_INITIALIZEAbi, pReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpTerminate == "on"]
+public unsafe func Windows_HttpTerminate(Flags: HTTP_INITIALIZEAbi, pReserved: CPointer<Unit>): UInt32 {
+    return HttpTerminate(Flags, pReserved)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpUpdateServiceConfiguration == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: Handle optional reserved
     // param-hint: ConfigInfo bytes=param[3]
     // param-hint: Overlapped optional reserved
     func HttpUpdateServiceConfiguration(Handle: CPointer<Unit>, ConfigId: HTTP_SERVICE_CONFIG_IDAbi, ConfigInfo: CPointer<Unit>, ConfigInfoLength: UInt32, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpUpdateServiceConfiguration == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_HttpUpdateServiceConfiguration(Handle: CPointer<Unit>, ConfigId: HTTP_SERVICE_CONFIG_IDAbi, ConfigInfo: CPointer<Unit>, ConfigInfoLength: UInt32, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32 {
+    return HttpUpdateServiceConfiguration(Handle, ConfigId, ConfigInfo, ConfigInfoLength, Overlapped)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpWaitForDemandStart == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: Overlapped optional
     func HttpWaitForDemandStart(RequestQueueHandle: CPointer<Unit>, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpWaitForDemandStart == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_HttpWaitForDemandStart(RequestQueueHandle: CPointer<Unit>, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32 {
+    return HttpWaitForDemandStart(RequestQueueHandle, Overlapped)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpWaitForDisconnect == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: Overlapped optional
     func HttpWaitForDisconnect(RequestQueueHandle: CPointer<Unit>, ConnectionId: UInt64, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpWaitForDisconnect == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_HttpWaitForDisconnect(RequestQueueHandle: CPointer<Unit>, ConnectionId: UInt64, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32 {
+    return HttpWaitForDisconnect(RequestQueueHandle, ConnectionId, Overlapped)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpWaitForDisconnectEx == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: Reserved optional reserved
     // param-hint: Overlapped optional
     func HttpWaitForDisconnectEx(RequestQueueHandle: CPointer<Unit>, ConnectionId: UInt64, Reserved: UInt32, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpWaitForDisconnectEx == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_HttpWaitForDisconnectEx(RequestQueueHandle: CPointer<Unit>, ConnectionId: UInt64, Reserved: UInt32, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32 {
+    return HttpWaitForDisconnectEx(RequestQueueHandle, ConnectionId, Reserved, Overlapped)
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpQueryRequestProperty == "on" && Windows_Win32_System_IO == "on"]
+func __windowsBindgen_HttpQueryRequestPropertyProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("HTTPAPI.dll", "HttpQueryRequestProperty")
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpQueryRequestProperty == "on" && Windows_Win32_System_IO == "on"]
+unsafe func HttpQueryRequestProperty(RequestQueueHandle: CPointer<Unit>, Id: UInt64, PropertyId: HTTP_REQUEST_PROPERTYAbi, Qualifier: CPointer<Unit>, QualifierSize: UInt32, Output: CPointer<Unit>, OutputBufferSize: UInt32, BytesReturned: CPointer<UInt32>, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32 {
+    let call = CFunc<(CPointer<Unit>, UInt64, HTTP_REQUEST_PROPERTYAbi, CPointer<Unit>, UInt32, CPointer<Unit>, UInt32, CPointer<UInt32>, CPointer<Win32_System_IO.OVERLAPPEDAbi>) -> UInt32>(__windowsBindgen_HttpQueryRequestPropertyProc())
+    return unsafe { call(RequestQueueHandle, Id, PropertyId, Qualifier, QualifierSize, Output, OutputBufferSize, BytesReturned, Overlapped) }
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && HTTPAPI == "on" && Windows_Win32_Networking_HttpServer_HttpQueryRequestProperty == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_HttpQueryRequestProperty(RequestQueueHandle: CPointer<Unit>, Id: UInt64, PropertyId: HTTP_REQUEST_PROPERTYAbi, Qualifier: CPointer<Unit>, QualifierSize: UInt32, Output: CPointer<Unit>, OutputBufferSize: UInt32, BytesReturned: CPointer<UInt32>, Overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32 {
+    return HttpQueryRequestProperty(RequestQueueHandle, Id, PropertyId, Qualifier, QualifierSize, Output, OutputBufferSize, BytesReturned, Overlapped)
 }
 
 @When[Windows_Win32_Networking_HttpServer == "on"]

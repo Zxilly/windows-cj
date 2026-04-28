@@ -5,7 +5,6 @@ import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrap
 import windows_interface as windows_interface
 import windows_polyfill.{unionReadFloat32, unionReadFloat64, unionReadInt16, unionReadInt32, unionReadInt64, unionReadInt8, unionReadUInt16, unionReadUInt32, unionReadUInt64, unionReadUInt8, unionWriteFloat32, unionWriteFloat64, unionWriteInt16, unionWriteInt32, unionWriteInt64, unionWriteInt8, unionWriteUInt16, unionWriteUInt32, unionWriteUInt64, unionWriteUInt8}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
@@ -12920,13 +12919,18 @@ public struct MI_Value {
     public init() {}
 }
 
-@When[MI == "on"]
+@When[Windows_Win32_System_Wmi == "on" && MI == "on" && Windows_Win32_System_Wmi_MI_Application_InitializeV1 == "on"]
 @CallingConv[CDECL]
 foreign {
     // param-hint: applicationID optional
     // param-hint: extendedError optional
     // pinvoke-hint: cc=cdecl
     func MI_Application_InitializeV1(flags: UInt32, applicationID: CPointer<UInt16>, extendedError: CPointer<CPointer<MI_Instance>>, application: CPointer<MI_Application>): Int32
+}
+
+@When[Windows_Win32_System_Wmi == "on" && MI == "on" && Windows_Win32_System_Wmi_MI_Application_InitializeV1 == "on"]
+public unsafe func Windows_MI_Application_InitializeV1(flags: UInt32, applicationID: CPointer<UInt16>, extendedError: CPointer<CPointer<MI_Instance>>, application: CPointer<MI_Application>): Int32 {
+    return MI_Application_InitializeV1(flags, applicationID, extendedError, application)
 }
 
 @When[Windows_Win32_System_Wmi == "on"]

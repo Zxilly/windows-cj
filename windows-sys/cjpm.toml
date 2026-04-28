@@ -10,3 +10,4 @@
   windows_result = { path = "../windows-result" }
   windows_interface = { path = "../windows-interface" }
   windows_polyfill = { path = "../windows-polyfill" }
+  windows_libloading = { path = "../windows-libloading" }

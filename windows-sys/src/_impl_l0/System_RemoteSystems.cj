@@ -351,6 +351,7 @@ public struct IRemoteSystemAppVtbl {
     public var DisplayName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IsAvailableByProximity: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var IsAvailableBySpatialProximity: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Attributes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -419,6 +420,7 @@ public class IRemoteSystemApp <: InterfaceWrapperBase & ComInterface {
         return __vt.IsAvailableBySpatialProximity(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Attributes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -746,6 +748,7 @@ public class IRemoteSystemFilter <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IRemoteSystemKindFilterVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var RemoteSystemKinds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -790,6 +793,7 @@ public class IRemoteSystemKindFilter <: InterfaceWrapperBase & ComInterface {
         readVtbl<IRemoteSystemKindFilterVtbl>(IRemoteSystemKindFilterVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RemoteSystemKinds(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -801,6 +805,7 @@ public class IRemoteSystemKindFilter <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IRemoteSystemKindFilterFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -845,6 +850,7 @@ public class IRemoteSystemKindFilterFactory <: InterfaceWrapperBase & ComInterfa
         readVtbl<IRemoteSystemKindFilterFactoryVtbl>(IRemoteSystemKindFilterFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create(remoteSystemKinds: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

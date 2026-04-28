@@ -3,11 +3,8 @@ package windows_sys.Win32.Graphics.Direct3D.Fxc
 
 import windows_interface.{GUID}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Direct3D10 == "on"]
 import windows_sys.Win32.Graphics.Direct3D10 as Win32_Graphics_Direct3D10
-@When[Windows_Win32_Graphics_Direct3D11 == "on"]
 import windows_sys.Win32.Graphics.Direct3D11 as Win32_Graphics_Direct3D11
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
@@ -132,24 +129,7 @@ public type pD3DDisassemble = CFunc<(CPointer<Unit>, UIntNative, UInt32, CPointe
 @When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && Windows_Win32_Graphics_Direct3D == "on"]
 public type pD3DPreprocess = CFunc<(CPointer<Unit>, UIntNative, CPointer<UInt8>, CPointer<Win32__impl_l0.D3D_SHADER_MACRO>, CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>) -> Int32>
 
-@When[D3DCOMPILER_47 == "on"]
-foreign {
-    // param-hint: pSrcData bytes=param[1]
-    // param-hint: pOffsets len=param[4] optional
-    // param-hint: pTotalInsts optional
-    func D3DGetTraceInstructionOffsets(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, Flags: UInt32, StartInstIndex: UIntNative, NumInsts: UIntNative, pOffsets: CPointer<UIntNative>, pTotalInsts: CPointer<UIntNative>): Int32
-    // param-hint: pSrcData bytes=param[1]
-    func D3DReflect(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, pInterface: CPointer<GUID>, ppReflector: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pSrcData bytes=param[1]
-    func D3DReflectLibrary(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, riid: CPointer<GUID>, ppReflector: CPointer<CPointer<Unit>>): Int32
-}
-
-@When[D3DCOMPILER_47 == "on" && (Windows_Win32_Graphics_Direct3D == "on" && Windows_Win32_Graphics_Direct3D10 == "on")]
-foreign {
-    func D3DDisassemble10Effect(pEffect: CPointer<Unit>, Flags: UInt32, ppDisassembly: CPointer<CPointer<Unit>>): Int32
-}
-
-@When[D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DCompile == "on" && Windows_Win32_Graphics_Direct3D == "on"]
 foreign {
     // param-hint: pSrcData bytes=param[1]
     // param-hint: pSourceName optional
@@ -158,6 +138,15 @@ foreign {
     // param-hint: pEntrypoint optional
     // param-hint: ppErrorMsgs optional
     func D3DCompile(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, pSourceName: CPointer<UInt8>, pDefines: CPointer<Win32__impl_l0.D3D_SHADER_MACRO>, pInclude: CPointer<Unit>, pEntrypoint: CPointer<UInt8>, pTarget: CPointer<UInt8>, Flags1: UInt32, Flags2: UInt32, ppCode: CPointer<CPointer<Unit>>, ppErrorMsgs: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DCompile == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+public unsafe func Windows_D3DCompile(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, pSourceName: CPointer<UInt8>, pDefines: CPointer<Win32__impl_l0.D3D_SHADER_MACRO>, pInclude: CPointer<Unit>, pEntrypoint: CPointer<UInt8>, pTarget: CPointer<UInt8>, Flags1: UInt32, Flags2: UInt32, ppCode: CPointer<CPointer<Unit>>, ppErrorMsgs: CPointer<CPointer<Unit>>): Int32 {
+    return D3DCompile(pSrcData, SrcDataSize, pSourceName, pDefines, pInclude, pEntrypoint, pTarget, Flags1, Flags2, ppCode, ppErrorMsgs)
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DCompile2 == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+foreign {
     // param-hint: pSrcData bytes=param[1]
     // param-hint: pSourceName optional
     // param-hint: pDefines optional
@@ -165,55 +154,272 @@ foreign {
     // param-hint: pSecondaryData bytes=param[11] optional
     // param-hint: ppErrorMsgs optional
     func D3DCompile2(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, pSourceName: CPointer<UInt8>, pDefines: CPointer<Win32__impl_l0.D3D_SHADER_MACRO>, pInclude: CPointer<Unit>, pEntrypoint: CPointer<UInt8>, pTarget: CPointer<UInt8>, Flags1: UInt32, Flags2: UInt32, SecondaryDataFlags: UInt32, pSecondaryData: CPointer<Unit>, SecondaryDataSize: UIntNative, ppCode: CPointer<CPointer<Unit>>, ppErrorMsgs: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DCompile2 == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+public unsafe func Windows_D3DCompile2(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, pSourceName: CPointer<UInt8>, pDefines: CPointer<Win32__impl_l0.D3D_SHADER_MACRO>, pInclude: CPointer<Unit>, pEntrypoint: CPointer<UInt8>, pTarget: CPointer<UInt8>, Flags1: UInt32, Flags2: UInt32, SecondaryDataFlags: UInt32, pSecondaryData: CPointer<Unit>, SecondaryDataSize: UIntNative, ppCode: CPointer<CPointer<Unit>>, ppErrorMsgs: CPointer<CPointer<Unit>>): Int32 {
+    return D3DCompile2(pSrcData, SrcDataSize, pSourceName, pDefines, pInclude, pEntrypoint, pTarget, Flags1, Flags2, SecondaryDataFlags, pSecondaryData, SecondaryDataSize, ppCode, ppErrorMsgs)
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DCompileFromFile == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+foreign {
     // param-hint: pDefines optional
     // param-hint: pInclude optional
     // param-hint: ppErrorMsgs optional
     func D3DCompileFromFile(pFileName: CPointer<UInt16>, pDefines: CPointer<Win32__impl_l0.D3D_SHADER_MACRO>, pInclude: CPointer<Unit>, pEntrypoint: CPointer<UInt8>, pTarget: CPointer<UInt8>, Flags1: UInt32, Flags2: UInt32, ppCode: CPointer<CPointer<Unit>>, ppErrorMsgs: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DCompileFromFile == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+public unsafe func Windows_D3DCompileFromFile(pFileName: CPointer<UInt16>, pDefines: CPointer<Win32__impl_l0.D3D_SHADER_MACRO>, pInclude: CPointer<Unit>, pEntrypoint: CPointer<UInt8>, pTarget: CPointer<UInt8>, Flags1: UInt32, Flags2: UInt32, ppCode: CPointer<CPointer<Unit>>, ppErrorMsgs: CPointer<CPointer<Unit>>): Int32 {
+    return D3DCompileFromFile(pFileName, pDefines, pInclude, pEntrypoint, pTarget, Flags1, Flags2, ppCode, ppErrorMsgs)
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DCompressShaders == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+foreign {
     // param-hint: pShaderData len=param[0]
     func D3DCompressShaders(uNumShaders: UInt32, pShaderData: CPointer<D3D_SHADER_DATA>, uFlags: UInt32, ppCompressedData: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DCompressShaders == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+public unsafe func Windows_D3DCompressShaders(uNumShaders: UInt32, pShaderData: CPointer<D3D_SHADER_DATA>, uFlags: UInt32, ppCompressedData: CPointer<CPointer<Unit>>): Int32 {
+    return D3DCompressShaders(uNumShaders, pShaderData, uFlags, ppCompressedData)
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DCreateBlob == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+foreign {
     func D3DCreateBlob(Size: UIntNative, ppBlob: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DCreateBlob == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+public unsafe func Windows_D3DCreateBlob(Size: UIntNative, ppBlob: CPointer<CPointer<Unit>>): Int32 {
+    return D3DCreateBlob(Size, ppBlob)
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DCreateFunctionLinkingGraph == "on" && Windows_Win32_Graphics_Direct3D11 == "on"]
+foreign {
+    func D3DCreateFunctionLinkingGraph(uFlags: UInt32, ppFunctionLinkingGraph: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DCreateFunctionLinkingGraph == "on" && Windows_Win32_Graphics_Direct3D11 == "on"]
+public unsafe func Windows_D3DCreateFunctionLinkingGraph(uFlags: UInt32, ppFunctionLinkingGraph: CPointer<CPointer<Unit>>): Int32 {
+    return D3DCreateFunctionLinkingGraph(uFlags, ppFunctionLinkingGraph)
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DCreateLinker == "on" && Windows_Win32_Graphics_Direct3D11 == "on"]
+foreign {
+    func D3DCreateLinker(ppLinker: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DCreateLinker == "on" && Windows_Win32_Graphics_Direct3D11 == "on"]
+public unsafe func Windows_D3DCreateLinker(ppLinker: CPointer<CPointer<Unit>>): Int32 {
+    return D3DCreateLinker(ppLinker)
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DDecompressShaders == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+foreign {
     // param-hint: pSrcData bytes=param[1]
     // param-hint: pIndices len=param[2] optional
     // param-hint: ppShaders len=param[2]
     // param-hint: pTotalShaders optional
     func D3DDecompressShaders(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, uNumShaders: UInt32, uStartIndex: UInt32, pIndices: CPointer<UInt32>, uFlags: UInt32, ppShaders: CPointer<CPointer<Unit>>, pTotalShaders: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DDecompressShaders == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+public unsafe func Windows_D3DDecompressShaders(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, uNumShaders: UInt32, uStartIndex: UInt32, pIndices: CPointer<UInt32>, uFlags: UInt32, ppShaders: CPointer<CPointer<Unit>>, pTotalShaders: CPointer<UInt32>): Int32 {
+    return D3DDecompressShaders(pSrcData, SrcDataSize, uNumShaders, uStartIndex, pIndices, uFlags, ppShaders, pTotalShaders)
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DDisassemble == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+foreign {
     // param-hint: pSrcData bytes=param[1]
     // param-hint: szComments optional
     func D3DDisassemble(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, Flags: UInt32, szComments: CPointer<UInt8>, ppDisassembly: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DDisassemble == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+public unsafe func Windows_D3DDisassemble(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, Flags: UInt32, szComments: CPointer<UInt8>, ppDisassembly: CPointer<CPointer<Unit>>): Int32 {
+    return D3DDisassemble(pSrcData, SrcDataSize, Flags, szComments, ppDisassembly)
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DDisassemble10Effect == "on" && Windows_Win32_Graphics_Direct3D == "on" && Windows_Win32_Graphics_Direct3D10 == "on"]
+foreign {
+    func D3DDisassemble10Effect(pEffect: CPointer<Unit>, Flags: UInt32, ppDisassembly: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DDisassemble10Effect == "on" && Windows_Win32_Graphics_Direct3D == "on" && Windows_Win32_Graphics_Direct3D10 == "on"]
+public unsafe func Windows_D3DDisassemble10Effect(pEffect: CPointer<Unit>, Flags: UInt32, ppDisassembly: CPointer<CPointer<Unit>>): Int32 {
+    return D3DDisassemble10Effect(pEffect, Flags, ppDisassembly)
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DDisassembleRegion == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+foreign {
     // param-hint: pSrcData bytes=param[1]
     // param-hint: szComments optional
     // param-hint: pFinishByteOffset optional
     func D3DDisassembleRegion(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, Flags: UInt32, szComments: CPointer<UInt8>, StartByteOffset: UIntNative, NumInsts: UIntNative, pFinishByteOffset: CPointer<UIntNative>, ppDisassembly: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DDisassembleRegion == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+public unsafe func Windows_D3DDisassembleRegion(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, Flags: UInt32, szComments: CPointer<UInt8>, StartByteOffset: UIntNative, NumInsts: UIntNative, pFinishByteOffset: CPointer<UIntNative>, ppDisassembly: CPointer<CPointer<Unit>>): Int32 {
+    return D3DDisassembleRegion(pSrcData, SrcDataSize, Flags, szComments, StartByteOffset, NumInsts, pFinishByteOffset, ppDisassembly)
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DGetBlobPart == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+foreign {
     // param-hint: pSrcData bytes=param[1]
     func D3DGetBlobPart(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, Part: Int32, Flags: UInt32, ppPart: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DGetBlobPart == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+public unsafe func Windows_D3DGetBlobPart(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, Part: Int32, Flags: UInt32, ppPart: CPointer<CPointer<Unit>>): Int32 {
+    return D3DGetBlobPart(pSrcData, SrcDataSize, Part, Flags, ppPart)
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DGetDebugInfo == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+foreign {
     // param-hint: pSrcData bytes=param[1]
     func D3DGetDebugInfo(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, ppDebugInfo: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DGetDebugInfo == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+public unsafe func Windows_D3DGetDebugInfo(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, ppDebugInfo: CPointer<CPointer<Unit>>): Int32 {
+    return D3DGetDebugInfo(pSrcData, SrcDataSize, ppDebugInfo)
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DGetInputAndOutputSignatureBlob == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+foreign {
     // param-hint: pSrcData bytes=param[1]
     func D3DGetInputAndOutputSignatureBlob(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, ppSignatureBlob: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DGetInputAndOutputSignatureBlob == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+public unsafe func Windows_D3DGetInputAndOutputSignatureBlob(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, ppSignatureBlob: CPointer<CPointer<Unit>>): Int32 {
+    return D3DGetInputAndOutputSignatureBlob(pSrcData, SrcDataSize, ppSignatureBlob)
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DGetInputSignatureBlob == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+foreign {
     // param-hint: pSrcData bytes=param[1]
     func D3DGetInputSignatureBlob(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, ppSignatureBlob: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DGetInputSignatureBlob == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+public unsafe func Windows_D3DGetInputSignatureBlob(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, ppSignatureBlob: CPointer<CPointer<Unit>>): Int32 {
+    return D3DGetInputSignatureBlob(pSrcData, SrcDataSize, ppSignatureBlob)
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DGetOutputSignatureBlob == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+foreign {
     // param-hint: pSrcData bytes=param[1]
     func D3DGetOutputSignatureBlob(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, ppSignatureBlob: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DGetOutputSignatureBlob == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+public unsafe func Windows_D3DGetOutputSignatureBlob(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, ppSignatureBlob: CPointer<CPointer<Unit>>): Int32 {
+    return D3DGetOutputSignatureBlob(pSrcData, SrcDataSize, ppSignatureBlob)
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DGetTraceInstructionOffsets == "on"]
+foreign {
+    // param-hint: pSrcData bytes=param[1]
+    // param-hint: pOffsets len=param[4] optional
+    // param-hint: pTotalInsts optional
+    func D3DGetTraceInstructionOffsets(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, Flags: UInt32, StartInstIndex: UIntNative, NumInsts: UIntNative, pOffsets: CPointer<UIntNative>, pTotalInsts: CPointer<UIntNative>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DGetTraceInstructionOffsets == "on"]
+public unsafe func Windows_D3DGetTraceInstructionOffsets(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, Flags: UInt32, StartInstIndex: UIntNative, NumInsts: UIntNative, pOffsets: CPointer<UIntNative>, pTotalInsts: CPointer<UIntNative>): Int32 {
+    return D3DGetTraceInstructionOffsets(pSrcData, SrcDataSize, Flags, StartInstIndex, NumInsts, pOffsets, pTotalInsts)
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DLoadModule == "on" && Windows_Win32_Graphics_Direct3D11 == "on"]
+foreign {
+    func D3DLoadModule(pSrcData: CPointer<Unit>, cbSrcDataSize: UIntNative, ppModule: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DLoadModule == "on" && Windows_Win32_Graphics_Direct3D11 == "on"]
+public unsafe func Windows_D3DLoadModule(pSrcData: CPointer<Unit>, cbSrcDataSize: UIntNative, ppModule: CPointer<CPointer<Unit>>): Int32 {
+    return D3DLoadModule(pSrcData, cbSrcDataSize, ppModule)
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DPreprocess == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+foreign {
     // param-hint: pSrcData bytes=param[1]
     // param-hint: pSourceName optional
     // param-hint: pDefines optional
     // param-hint: pInclude optional
     // param-hint: ppErrorMsgs optional
     func D3DPreprocess(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, pSourceName: CPointer<UInt8>, pDefines: CPointer<Win32__impl_l0.D3D_SHADER_MACRO>, pInclude: CPointer<Unit>, ppCodeText: CPointer<CPointer<Unit>>, ppErrorMsgs: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DPreprocess == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+public unsafe func Windows_D3DPreprocess(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, pSourceName: CPointer<UInt8>, pDefines: CPointer<Win32__impl_l0.D3D_SHADER_MACRO>, pInclude: CPointer<Unit>, ppCodeText: CPointer<CPointer<Unit>>, ppErrorMsgs: CPointer<CPointer<Unit>>): Int32 {
+    return D3DPreprocess(pSrcData, SrcDataSize, pSourceName, pDefines, pInclude, ppCodeText, ppErrorMsgs)
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DReadFileToBlob == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+foreign {
     func D3DReadFileToBlob(pFileName: CPointer<UInt16>, ppContents: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DReadFileToBlob == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+public unsafe func Windows_D3DReadFileToBlob(pFileName: CPointer<UInt16>, ppContents: CPointer<CPointer<Unit>>): Int32 {
+    return D3DReadFileToBlob(pFileName, ppContents)
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DReflect == "on"]
+foreign {
+    // param-hint: pSrcData bytes=param[1]
+    func D3DReflect(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, pInterface: CPointer<GUID>, ppReflector: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DReflect == "on"]
+public unsafe func Windows_D3DReflect(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, pInterface: CPointer<GUID>, ppReflector: CPointer<CPointer<Unit>>): Int32 {
+    return D3DReflect(pSrcData, SrcDataSize, pInterface, ppReflector)
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DReflectLibrary == "on"]
+foreign {
+    // param-hint: pSrcData bytes=param[1]
+    func D3DReflectLibrary(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, riid: CPointer<GUID>, ppReflector: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DReflectLibrary == "on"]
+public unsafe func Windows_D3DReflectLibrary(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, riid: CPointer<GUID>, ppReflector: CPointer<CPointer<Unit>>): Int32 {
+    return D3DReflectLibrary(pSrcData, SrcDataSize, riid, ppReflector)
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DSetBlobPart == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+foreign {
     // param-hint: pSrcData bytes=param[1]
     // param-hint: pPart bytes=param[5]
     func D3DSetBlobPart(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, Part: Int32, Flags: UInt32, pPart: CPointer<Unit>, PartSize: UIntNative, ppNewShader: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DSetBlobPart == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+public unsafe func Windows_D3DSetBlobPart(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, Part: Int32, Flags: UInt32, pPart: CPointer<Unit>, PartSize: UIntNative, ppNewShader: CPointer<CPointer<Unit>>): Int32 {
+    return D3DSetBlobPart(pSrcData, SrcDataSize, Part, Flags, pPart, PartSize, ppNewShader)
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DStripShader == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+foreign {
     // param-hint: pShaderBytecode bytes=param[1]
     func D3DStripShader(pShaderBytecode: CPointer<Unit>, BytecodeLength: UIntNative, uStripFlags: UInt32, ppStrippedBlob: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DStripShader == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+public unsafe func Windows_D3DStripShader(pShaderBytecode: CPointer<Unit>, BytecodeLength: UIntNative, uStripFlags: UInt32, ppStrippedBlob: CPointer<CPointer<Unit>>): Int32 {
+    return D3DStripShader(pShaderBytecode, BytecodeLength, uStripFlags, ppStrippedBlob)
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DWriteBlobToFile == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+foreign {
     func D3DWriteBlobToFile(pBlob: CPointer<Unit>, pFileName: CPointer<UInt16>, bOverwrite: Int32): Int32
 }
 
-@When[D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D11 == "on"]
-foreign {
-    func D3DCreateFunctionLinkingGraph(uFlags: UInt32, ppFunctionLinkingGraph: CPointer<CPointer<Unit>>): Int32
-    func D3DCreateLinker(ppLinker: CPointer<CPointer<Unit>>): Int32
-    func D3DLoadModule(pSrcData: CPointer<Unit>, cbSrcDataSize: UIntNative, ppModule: CPointer<CPointer<Unit>>): Int32
+@When[Windows_Win32_Graphics_Direct3D_Fxc == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D_Fxc_D3DWriteBlobToFile == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+public unsafe func Windows_D3DWriteBlobToFile(pBlob: CPointer<Unit>, pFileName: CPointer<UInt16>, bOverwrite: Int32): Int32 {
+    return D3DWriteBlobToFile(pBlob, pFileName, bOverwrite)
 }
 
 @When[Windows_Win32_Graphics_Direct3D_Fxc == "on"]

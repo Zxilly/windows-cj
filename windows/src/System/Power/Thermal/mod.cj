@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows_collections as windows_collections
 
@@ -759,7 +758,10 @@ extend PowerThermalChannelDataReceivedEventArgs <: windows_core.HandleWinrtType<
 public struct IPowerThermalChannelDataConsumerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var GetChannelIds: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<PowerThermalChannelIdAbi>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetChannelConfigurations: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetChannelConfigurations: UIntNative = UIntNative(0)
     public var Start: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
     public var Stop: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
     public var ChannelDataReceived: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -844,6 +846,7 @@ public class IPowerThermalChannelDataConsumer <: InterfaceWrapperBase & ComInter
         return (resultSize__, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetChannelConfigurations(): windows_collections.IMapView<PowerThermalChannelId, PowerThermalChannelConfiguration> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -994,7 +997,10 @@ extend IPowerThermalChannelDataConsumerFactory <: windows_core.Interface<IPowerT
 public struct IPowerThermalChannelDataProducerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var GetChannelIds: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<PowerThermalChannelIdAbi>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetChannelConfigurations: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetChannelConfigurations: UIntNative = UIntNative(0)
     public var DisableChannel: CFunc<(CPointer<Unit>, PowerThermalChannelIdAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Start: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
     public var Stop: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
@@ -1079,6 +1085,7 @@ public class IPowerThermalChannelDataProducer <: InterfaceWrapperBase & ComInter
         return (resultSize__, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetChannelConfigurations(): windows_collections.IMapView<PowerThermalChannelId, PowerThermalChannelConfiguration> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1397,6 +1404,7 @@ public class PowerThermalChannelDataConsumer <: InterfaceWrapperBase & ComInterf
         return defaultInterface().GetChannelIds()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetChannelConfigurations(): windows_collections.IMapView<PowerThermalChannelId, PowerThermalChannelConfiguration> {
         return defaultInterface().GetChannelConfigurations()
     }
@@ -1543,6 +1551,7 @@ public class PowerThermalChannelDataProducer <: InterfaceWrapperBase & ComInterf
         return defaultInterface().GetChannelIds()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetChannelConfigurations(): windows_collections.IMapView<PowerThermalChannelId, PowerThermalChannelConfiguration> {
         return defaultInterface().GetChannelConfigurations()
     }

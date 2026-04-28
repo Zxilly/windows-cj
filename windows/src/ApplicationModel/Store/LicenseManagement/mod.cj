@@ -413,7 +413,10 @@ extend ILicenseManagerStatics2 <: windows_core.Interface<ILicenseManagerStatics2
 @C
 public struct ILicenseSatisfactionResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var LicenseSatisfactionInfos: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var LicenseSatisfactionInfos: UIntNative = UIntNative(0)
     public var ExtendedError: CFunc<(CPointer<Unit>, CPointer<windows_future.HResultAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -483,6 +486,7 @@ public class ILicenseSatisfactionResult <: InterfaceWrapperBase & ComInterface &
         readVtbl<ILicenseSatisfactionResultVtbl>(ILicenseSatisfactionResultVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func LicenseSatisfactionInfos(): windows_collections.IMapView<windows_core.HString, LicenseSatisfactionInfo> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -572,6 +576,7 @@ public class LicenseSatisfactionResult <: InterfaceWrapperBase & ComInterface & 
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func LicenseSatisfactionInfos(): windows_collections.IMapView<windows_core.HString, LicenseSatisfactionInfo> {
         return defaultInterface().LicenseSatisfactionInfos()
     }
@@ -607,7 +612,10 @@ public struct ILicenseManagerStaticsVtbl {
     public var AddLicenseAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams != "on"]
     public var AddLicenseAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSatisfactionInfosAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetSatisfactionInfosAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -685,6 +693,7 @@ public class ILicenseManagerStatics <: InterfaceWrapperBase & ComInterface & Run
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSatisfactionInfosAsync(contentIds: windows_collections.IIterable<windows_core.HString>, keyIds: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<LicenseSatisfactionResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -729,6 +738,7 @@ public class LicenseManager <: windows_interface.RuntimeName & windows_core.Runt
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetSatisfactionInfosAsync(contentIds: windows_collections.IIterable<windows_core.HString>, keyIds: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<LicenseSatisfactionResult> {
         var result__: Option<windows_future.IAsyncOperation<LicenseSatisfactionResult>> = Option<windows_future.IAsyncOperation<LicenseSatisfactionResult>>.None
         try (factory__ = windows_core.factory<LicenseManager, ILicenseManagerStatics>().unwrap()) {

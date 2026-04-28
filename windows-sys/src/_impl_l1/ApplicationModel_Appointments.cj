@@ -27,6 +27,7 @@ public struct IAppointmentVtbl {
     public var SetReminder: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Organizer: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetOrganizer: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Invitees: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Recurrence: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetRecurrence: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -165,6 +166,7 @@ public class IAppointment <: InterfaceWrapperBase & ComInterface {
         return __vt.SetOrganizer(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Invitees(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -520,14 +522,21 @@ public struct IAppointmentCalendarVtbl {
     public var SourceDisplayName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SummaryCardView: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetSummaryCardView: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAppointmentsAsync: CFunc<(CPointer<Unit>, Foundation__impl_l0.DateTime, Foundation__impl_l0.TimeSpan, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAppointmentsAsyncWithOptions: CFunc<(CPointer<Unit>, Foundation__impl_l0.DateTime, Foundation__impl_l0.TimeSpan, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindExceptionsFromMasterAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllInstancesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, Foundation__impl_l0.DateTime, Foundation__impl_l0.TimeSpan, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllInstancesAsyncWithOptions: CFunc<(CPointer<Unit>, CPointer<Unit>, Foundation__impl_l0.DateTime, Foundation__impl_l0.TimeSpan, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var GetAppointmentAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetAppointmentInstanceAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, Foundation__impl_l0.DateTime, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindUnexpandedAppointmentsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindUnexpandedAppointmentsAsyncWithOptions: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var DeleteAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SaveAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -650,30 +659,35 @@ public class IAppointmentCalendar <: InterfaceWrapperBase & ComInterface {
         return __vt.SetSummaryCardView(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAppointmentsAsync(rangeStart: Foundation__impl_l0.DateTime, rangeLength: Foundation__impl_l0.TimeSpan, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindAppointmentsAsync(__liveRaw, rangeStart, rangeLength, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAppointmentsAsyncWithOptions(rangeStart: Foundation__impl_l0.DateTime, rangeLength: Foundation__impl_l0.TimeSpan, options: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindAppointmentsAsyncWithOptions(__liveRaw, rangeStart, rangeLength, options, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindExceptionsFromMasterAsync(masterLocalId: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindExceptionsFromMasterAsync(__liveRaw, masterLocalId, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllInstancesAsync(masterLocalId: CPointer<Unit>, rangeStart: Foundation__impl_l0.DateTime, rangeLength: Foundation__impl_l0.TimeSpan, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindAllInstancesAsync(__liveRaw, masterLocalId, rangeStart, rangeLength, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllInstancesAsyncWithOptions(masterLocalId: CPointer<Unit>, rangeStart: Foundation__impl_l0.DateTime, rangeLength: Foundation__impl_l0.TimeSpan, pOptions: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -692,12 +706,14 @@ public class IAppointmentCalendar <: InterfaceWrapperBase & ComInterface {
         return __vt.GetAppointmentInstanceAsync(__liveRaw, localId, instanceStartTime, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindUnexpandedAppointmentsAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindUnexpandedAppointmentsAsync(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindUnexpandedAppointmentsAsyncWithOptions(options: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -762,6 +778,7 @@ public struct IAppointmentCalendar2Vtbl {
     public var SetMustNofityInvitees: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
     public var TryCreateOrUpdateAppointmentAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, Bool, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var TryCancelMeetingAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Bool, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var TryForwardMeetingAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     public var TryProposeNewTimeForMeetingAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, Foundation__impl_l0.DateTime, Foundation__impl_l0.TimeSpan, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     public var TryUpdateMeetingResponseAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, CPointer<Unit>, CPointer<Unit>, Bool, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
@@ -941,6 +958,7 @@ public class IAppointmentCalendar2 <: InterfaceWrapperBase & ComInterface {
         return __vt.TryCancelMeetingAsync(__liveRaw, meeting, subject, comment, notifyInvitees, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TryForwardMeetingAsync(meeting: CPointer<Unit>, invitees: CPointer<Unit>, subject: CPointer<Unit>, forwardHeader: CPointer<Unit>, comment: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1055,6 +1073,7 @@ public class IAppointmentCalendarSyncManager <: InterfaceWrapperBase & ComInterf
 public struct IAppointmentExceptionVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Appointment: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ExceptionProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IsDeleted: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -1106,6 +1125,7 @@ public class IAppointmentException <: InterfaceWrapperBase & ComInterface {
         return __vt.Appointment(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ExceptionProperties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

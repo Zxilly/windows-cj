@@ -10,9 +10,7 @@ import windows_interface.{GUID}
 import windows_interface as windows_interface
 import windows_polyfill.{unionReadInt16, unionReadInt32, unionReadUInt64, unionWriteInt16, unionWriteInt32, unionWriteUInt64}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_System_IO == "on"]
 import windows.Win32.System.IO as Win32_System_IO
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
@@ -9912,763 +9910,3528 @@ extend RPC_CLIENT_INTERFACE <: windows_core.CopyType & windows_core.RuntimeType 
     }
 }
 
-@When[RPCNS4 == "on"]
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_I_RpcNsGetBuffer == "on"]
 foreign {
     func I_RpcNsGetBuffer(Message: CPointer<RPC_MESSAGEAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_I_RpcNsGetBuffer == "on"]
+public unsafe func Windows_I_RpcNsGetBuffer(Message: CPointer<RPC_MESSAGEAbi>): windows_core.RPC_STATUS {
+    return I_RpcNsGetBuffer(Message)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_I_RpcNsRaiseException == "on"]
+foreign {
     func I_RpcNsRaiseException(Message: CPointer<RPC_MESSAGEAbi>, Status: windows_core.RPC_STATUS): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_I_RpcNsRaiseException == "on"]
+public unsafe func Windows_I_RpcNsRaiseException(Message: CPointer<RPC_MESSAGEAbi>, Status: windows_core.RPC_STATUS): Unit {
+    I_RpcNsRaiseException(Message, Status)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_I_RpcNsSendReceive == "on"]
+foreign {
     func I_RpcNsSendReceive(Message: CPointer<RPC_MESSAGEAbi>, Handle: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_I_RpcNsSendReceive == "on"]
+public unsafe func Windows_I_RpcNsSendReceive(Message: CPointer<RPC_MESSAGEAbi>, Handle: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return I_RpcNsSendReceive(Message, Handle)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_I_RpcReBindBuffer == "on"]
+foreign {
     func I_RpcReBindBuffer(Message: CPointer<RPC_MESSAGEAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_I_RpcReBindBuffer == "on"]
+public unsafe func Windows_I_RpcReBindBuffer(Message: CPointer<RPC_MESSAGEAbi>): windows_core.RPC_STATUS {
+    return I_RpcReBindBuffer(Message)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcIfIdVectorFree == "on"]
+foreign {
     func RpcIfIdVectorFree(IfIdVector: CPointer<CPointer<RPC_IF_ID_VECTORAbi>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcIfIdVectorFree == "on"]
+public unsafe func Windows_RpcIfIdVectorFree(IfIdVector: CPointer<CPointer<RPC_IF_ID_VECTORAbi>>): windows_core.RPC_STATUS {
+    return RpcIfIdVectorFree(IfIdVector)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingExportA == "on"]
+foreign {
     // param-hint: EntryName optional
     // param-hint: IfSpec optional
     // param-hint: BindingVec optional
     // param-hint: ObjectUuidVec optional
     func RpcNsBindingExportA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, IfSpec: CPointer<Unit>, BindingVec: CPointer<RPC_BINDING_VECTORAbi>, ObjectUuidVec: CPointer<UUID_VECTORAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingExportA == "on"]
+public unsafe func Windows_RpcNsBindingExportA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, IfSpec: CPointer<Unit>, BindingVec: CPointer<RPC_BINDING_VECTORAbi>, ObjectUuidVec: CPointer<UUID_VECTORAbi>): windows_core.RPC_STATUS {
+    return RpcNsBindingExportA(EntryNameSyntax, EntryName, IfSpec, BindingVec, ObjectUuidVec)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingExportPnPA == "on"]
+foreign {
     // param-hint: EntryName optional
     // param-hint: IfSpec optional
     // param-hint: ObjectVector optional
     func RpcNsBindingExportPnPA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, IfSpec: CPointer<Unit>, ObjectVector: CPointer<UUID_VECTORAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingExportPnPA == "on"]
+public unsafe func Windows_RpcNsBindingExportPnPA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, IfSpec: CPointer<Unit>, ObjectVector: CPointer<UUID_VECTORAbi>): windows_core.RPC_STATUS {
+    return RpcNsBindingExportPnPA(EntryNameSyntax, EntryName, IfSpec, ObjectVector)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingExportPnPW == "on"]
+foreign {
     // param-hint: EntryName optional
     // param-hint: IfSpec optional
     // param-hint: ObjectVector optional
     func RpcNsBindingExportPnPW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, IfSpec: CPointer<Unit>, ObjectVector: CPointer<UUID_VECTORAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingExportPnPW == "on"]
+public unsafe func Windows_RpcNsBindingExportPnPW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, IfSpec: CPointer<Unit>, ObjectVector: CPointer<UUID_VECTORAbi>): windows_core.RPC_STATUS {
+    return RpcNsBindingExportPnPW(EntryNameSyntax, EntryName, IfSpec, ObjectVector)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingExportW == "on"]
+foreign {
     // param-hint: EntryName optional
     // param-hint: IfSpec optional
     // param-hint: BindingVec optional
     // param-hint: ObjectUuidVec optional
     func RpcNsBindingExportW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, IfSpec: CPointer<Unit>, BindingVec: CPointer<RPC_BINDING_VECTORAbi>, ObjectUuidVec: CPointer<UUID_VECTORAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingExportW == "on"]
+public unsafe func Windows_RpcNsBindingExportW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, IfSpec: CPointer<Unit>, BindingVec: CPointer<RPC_BINDING_VECTORAbi>, ObjectUuidVec: CPointer<UUID_VECTORAbi>): windows_core.RPC_STATUS {
+    return RpcNsBindingExportW(EntryNameSyntax, EntryName, IfSpec, BindingVec, ObjectUuidVec)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingImportBeginA == "on"]
+foreign {
     // param-hint: EntryName optional
     // param-hint: IfSpec optional
     // param-hint: ObjUuid optional
     func RpcNsBindingImportBeginA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, IfSpec: CPointer<Unit>, ObjUuid: CPointer<GUID>, ImportContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingImportBeginA == "on"]
+public unsafe func Windows_RpcNsBindingImportBeginA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, IfSpec: CPointer<Unit>, ObjUuid: CPointer<GUID>, ImportContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return RpcNsBindingImportBeginA(EntryNameSyntax, EntryName, IfSpec, ObjUuid, ImportContext)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingImportBeginW == "on"]
+foreign {
     // param-hint: EntryName optional
     // param-hint: IfSpec optional
     // param-hint: ObjUuid optional
     func RpcNsBindingImportBeginW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, IfSpec: CPointer<Unit>, ObjUuid: CPointer<GUID>, ImportContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingImportBeginW == "on"]
+public unsafe func Windows_RpcNsBindingImportBeginW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, IfSpec: CPointer<Unit>, ObjUuid: CPointer<GUID>, ImportContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return RpcNsBindingImportBeginW(EntryNameSyntax, EntryName, IfSpec, ObjUuid, ImportContext)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingImportDone == "on"]
+foreign {
     func RpcNsBindingImportDone(ImportContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingImportDone == "on"]
+public unsafe func Windows_RpcNsBindingImportDone(ImportContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return RpcNsBindingImportDone(ImportContext)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingImportNext == "on"]
+foreign {
     func RpcNsBindingImportNext(ImportContext: CPointer<Unit>, Binding: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingImportNext == "on"]
+public unsafe func Windows_RpcNsBindingImportNext(ImportContext: CPointer<Unit>, Binding: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return RpcNsBindingImportNext(ImportContext, Binding)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingLookupBeginA == "on"]
+foreign {
     // param-hint: EntryName optional
     // param-hint: IfSpec optional
     // param-hint: ObjUuid optional
     func RpcNsBindingLookupBeginA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, IfSpec: CPointer<Unit>, ObjUuid: CPointer<GUID>, BindingMaxCount: UInt32, LookupContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingLookupBeginA == "on"]
+public unsafe func Windows_RpcNsBindingLookupBeginA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, IfSpec: CPointer<Unit>, ObjUuid: CPointer<GUID>, BindingMaxCount: UInt32, LookupContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return RpcNsBindingLookupBeginA(EntryNameSyntax, EntryName, IfSpec, ObjUuid, BindingMaxCount, LookupContext)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingLookupBeginW == "on"]
+foreign {
     // param-hint: EntryName optional
     // param-hint: IfSpec optional
     // param-hint: ObjUuid optional
     func RpcNsBindingLookupBeginW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, IfSpec: CPointer<Unit>, ObjUuid: CPointer<GUID>, BindingMaxCount: UInt32, LookupContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingLookupBeginW == "on"]
+public unsafe func Windows_RpcNsBindingLookupBeginW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, IfSpec: CPointer<Unit>, ObjUuid: CPointer<GUID>, BindingMaxCount: UInt32, LookupContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return RpcNsBindingLookupBeginW(EntryNameSyntax, EntryName, IfSpec, ObjUuid, BindingMaxCount, LookupContext)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingLookupDone == "on"]
+foreign {
     func RpcNsBindingLookupDone(LookupContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingLookupDone == "on"]
+public unsafe func Windows_RpcNsBindingLookupDone(LookupContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return RpcNsBindingLookupDone(LookupContext)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingLookupNext == "on"]
+foreign {
     func RpcNsBindingLookupNext(LookupContext: CPointer<Unit>, BindingVec: CPointer<CPointer<RPC_BINDING_VECTORAbi>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingLookupNext == "on"]
+public unsafe func Windows_RpcNsBindingLookupNext(LookupContext: CPointer<Unit>, BindingVec: CPointer<CPointer<RPC_BINDING_VECTORAbi>>): windows_core.RPC_STATUS {
+    return RpcNsBindingLookupNext(LookupContext, BindingVec)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingSelect == "on"]
+foreign {
     func RpcNsBindingSelect(BindingVec: CPointer<RPC_BINDING_VECTORAbi>, Binding: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingSelect == "on"]
+public unsafe func Windows_RpcNsBindingSelect(BindingVec: CPointer<RPC_BINDING_VECTORAbi>, Binding: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return RpcNsBindingSelect(BindingVec, Binding)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingUnexportA == "on"]
+foreign {
     // param-hint: EntryName optional
     // param-hint: IfSpec optional
     // param-hint: ObjectUuidVec optional
     func RpcNsBindingUnexportA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, IfSpec: CPointer<Unit>, ObjectUuidVec: CPointer<UUID_VECTORAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingUnexportA == "on"]
+public unsafe func Windows_RpcNsBindingUnexportA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, IfSpec: CPointer<Unit>, ObjectUuidVec: CPointer<UUID_VECTORAbi>): windows_core.RPC_STATUS {
+    return RpcNsBindingUnexportA(EntryNameSyntax, EntryName, IfSpec, ObjectUuidVec)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingUnexportPnPA == "on"]
+foreign {
     // param-hint: EntryName optional
     // param-hint: IfSpec optional
     // param-hint: ObjectVector optional
     func RpcNsBindingUnexportPnPA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, IfSpec: CPointer<Unit>, ObjectVector: CPointer<UUID_VECTORAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingUnexportPnPA == "on"]
+public unsafe func Windows_RpcNsBindingUnexportPnPA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, IfSpec: CPointer<Unit>, ObjectVector: CPointer<UUID_VECTORAbi>): windows_core.RPC_STATUS {
+    return RpcNsBindingUnexportPnPA(EntryNameSyntax, EntryName, IfSpec, ObjectVector)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingUnexportPnPW == "on"]
+foreign {
     // param-hint: EntryName optional
     // param-hint: IfSpec optional
     // param-hint: ObjectVector optional
     func RpcNsBindingUnexportPnPW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, IfSpec: CPointer<Unit>, ObjectVector: CPointer<UUID_VECTORAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingUnexportPnPW == "on"]
+public unsafe func Windows_RpcNsBindingUnexportPnPW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, IfSpec: CPointer<Unit>, ObjectVector: CPointer<UUID_VECTORAbi>): windows_core.RPC_STATUS {
+    return RpcNsBindingUnexportPnPW(EntryNameSyntax, EntryName, IfSpec, ObjectVector)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingUnexportW == "on"]
+foreign {
     // param-hint: EntryName optional
     // param-hint: IfSpec optional
     // param-hint: ObjectUuidVec optional
     func RpcNsBindingUnexportW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, IfSpec: CPointer<Unit>, ObjectUuidVec: CPointer<UUID_VECTORAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingUnexportW == "on"]
+public unsafe func Windows_RpcNsBindingUnexportW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, IfSpec: CPointer<Unit>, ObjectUuidVec: CPointer<UUID_VECTORAbi>): windows_core.RPC_STATUS {
+    return RpcNsBindingUnexportW(EntryNameSyntax, EntryName, IfSpec, ObjectUuidVec)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsEntryExpandNameA == "on"]
+foreign {
     func RpcNsEntryExpandNameA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, ExpandedName: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsEntryExpandNameA == "on"]
+public unsafe func Windows_RpcNsEntryExpandNameA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, ExpandedName: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS {
+    return RpcNsEntryExpandNameA(EntryNameSyntax, EntryName, ExpandedName)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsEntryExpandNameW == "on"]
+foreign {
     func RpcNsEntryExpandNameW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, ExpandedName: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsEntryExpandNameW == "on"]
+public unsafe func Windows_RpcNsEntryExpandNameW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, ExpandedName: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS {
+    return RpcNsEntryExpandNameW(EntryNameSyntax, EntryName, ExpandedName)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsEntryObjectInqBeginA == "on"]
+foreign {
     func RpcNsEntryObjectInqBeginA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, InquiryContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsEntryObjectInqBeginA == "on"]
+public unsafe func Windows_RpcNsEntryObjectInqBeginA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, InquiryContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return RpcNsEntryObjectInqBeginA(EntryNameSyntax, EntryName, InquiryContext)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsEntryObjectInqBeginW == "on"]
+foreign {
     func RpcNsEntryObjectInqBeginW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, InquiryContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsEntryObjectInqBeginW == "on"]
+public unsafe func Windows_RpcNsEntryObjectInqBeginW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, InquiryContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return RpcNsEntryObjectInqBeginW(EntryNameSyntax, EntryName, InquiryContext)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsEntryObjectInqDone == "on"]
+foreign {
     func RpcNsEntryObjectInqDone(InquiryContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsEntryObjectInqDone == "on"]
+public unsafe func Windows_RpcNsEntryObjectInqDone(InquiryContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return RpcNsEntryObjectInqDone(InquiryContext)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsEntryObjectInqNext == "on"]
+foreign {
     func RpcNsEntryObjectInqNext(InquiryContext: CPointer<Unit>, ObjUuid: CPointer<GUID>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsEntryObjectInqNext == "on"]
+public unsafe func Windows_RpcNsEntryObjectInqNext(InquiryContext: CPointer<Unit>, ObjUuid: CPointer<GUID>): windows_core.RPC_STATUS {
+    return RpcNsEntryObjectInqNext(InquiryContext, ObjUuid)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsGroupDeleteA == "on"]
+foreign {
     // param-hint: GroupName optional
     func RpcNsGroupDeleteA(GroupNameSyntax: GROUP_NAME_SYNTAXAbi, GroupName: CPointer<UInt8>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsGroupDeleteA == "on"]
+public unsafe func Windows_RpcNsGroupDeleteA(GroupNameSyntax: GROUP_NAME_SYNTAXAbi, GroupName: CPointer<UInt8>): windows_core.RPC_STATUS {
+    return RpcNsGroupDeleteA(GroupNameSyntax, GroupName)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsGroupDeleteW == "on"]
+foreign {
     // param-hint: GroupName optional
     func RpcNsGroupDeleteW(GroupNameSyntax: GROUP_NAME_SYNTAXAbi, GroupName: CPointer<UInt16>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsGroupDeleteW == "on"]
+public unsafe func Windows_RpcNsGroupDeleteW(GroupNameSyntax: GROUP_NAME_SYNTAXAbi, GroupName: CPointer<UInt16>): windows_core.RPC_STATUS {
+    return RpcNsGroupDeleteW(GroupNameSyntax, GroupName)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsGroupMbrAddA == "on"]
+foreign {
     func RpcNsGroupMbrAddA(GroupNameSyntax: UInt32, GroupName: CPointer<UInt8>, MemberNameSyntax: UInt32, MemberName: CPointer<UInt8>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsGroupMbrAddA == "on"]
+public unsafe func Windows_RpcNsGroupMbrAddA(GroupNameSyntax: UInt32, GroupName: CPointer<UInt8>, MemberNameSyntax: UInt32, MemberName: CPointer<UInt8>): windows_core.RPC_STATUS {
+    return RpcNsGroupMbrAddA(GroupNameSyntax, GroupName, MemberNameSyntax, MemberName)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsGroupMbrAddW == "on"]
+foreign {
     func RpcNsGroupMbrAddW(GroupNameSyntax: UInt32, GroupName: CPointer<UInt16>, MemberNameSyntax: UInt32, MemberName: CPointer<UInt16>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsGroupMbrAddW == "on"]
+public unsafe func Windows_RpcNsGroupMbrAddW(GroupNameSyntax: UInt32, GroupName: CPointer<UInt16>, MemberNameSyntax: UInt32, MemberName: CPointer<UInt16>): windows_core.RPC_STATUS {
+    return RpcNsGroupMbrAddW(GroupNameSyntax, GroupName, MemberNameSyntax, MemberName)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsGroupMbrInqBeginA == "on"]
+foreign {
     func RpcNsGroupMbrInqBeginA(GroupNameSyntax: UInt32, GroupName: CPointer<UInt8>, MemberNameSyntax: UInt32, InquiryContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsGroupMbrInqBeginA == "on"]
+public unsafe func Windows_RpcNsGroupMbrInqBeginA(GroupNameSyntax: UInt32, GroupName: CPointer<UInt8>, MemberNameSyntax: UInt32, InquiryContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return RpcNsGroupMbrInqBeginA(GroupNameSyntax, GroupName, MemberNameSyntax, InquiryContext)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsGroupMbrInqBeginW == "on"]
+foreign {
     func RpcNsGroupMbrInqBeginW(GroupNameSyntax: UInt32, GroupName: CPointer<UInt16>, MemberNameSyntax: UInt32, InquiryContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsGroupMbrInqBeginW == "on"]
+public unsafe func Windows_RpcNsGroupMbrInqBeginW(GroupNameSyntax: UInt32, GroupName: CPointer<UInt16>, MemberNameSyntax: UInt32, InquiryContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return RpcNsGroupMbrInqBeginW(GroupNameSyntax, GroupName, MemberNameSyntax, InquiryContext)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsGroupMbrInqDone == "on"]
+foreign {
     func RpcNsGroupMbrInqDone(InquiryContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsGroupMbrInqDone == "on"]
+public unsafe func Windows_RpcNsGroupMbrInqDone(InquiryContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return RpcNsGroupMbrInqDone(InquiryContext)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsGroupMbrInqNextA == "on"]
+foreign {
     func RpcNsGroupMbrInqNextA(InquiryContext: CPointer<Unit>, MemberName: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsGroupMbrInqNextA == "on"]
+public unsafe func Windows_RpcNsGroupMbrInqNextA(InquiryContext: CPointer<Unit>, MemberName: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS {
+    return RpcNsGroupMbrInqNextA(InquiryContext, MemberName)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsGroupMbrInqNextW == "on"]
+foreign {
     func RpcNsGroupMbrInqNextW(InquiryContext: CPointer<Unit>, MemberName: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsGroupMbrInqNextW == "on"]
+public unsafe func Windows_RpcNsGroupMbrInqNextW(InquiryContext: CPointer<Unit>, MemberName: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS {
+    return RpcNsGroupMbrInqNextW(InquiryContext, MemberName)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsGroupMbrRemoveA == "on"]
+foreign {
     func RpcNsGroupMbrRemoveA(GroupNameSyntax: UInt32, GroupName: CPointer<UInt8>, MemberNameSyntax: UInt32, MemberName: CPointer<UInt8>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsGroupMbrRemoveA == "on"]
+public unsafe func Windows_RpcNsGroupMbrRemoveA(GroupNameSyntax: UInt32, GroupName: CPointer<UInt8>, MemberNameSyntax: UInt32, MemberName: CPointer<UInt8>): windows_core.RPC_STATUS {
+    return RpcNsGroupMbrRemoveA(GroupNameSyntax, GroupName, MemberNameSyntax, MemberName)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsGroupMbrRemoveW == "on"]
+foreign {
     func RpcNsGroupMbrRemoveW(GroupNameSyntax: UInt32, GroupName: CPointer<UInt16>, MemberNameSyntax: UInt32, MemberName: CPointer<UInt16>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsGroupMbrRemoveW == "on"]
+public unsafe func Windows_RpcNsGroupMbrRemoveW(GroupNameSyntax: UInt32, GroupName: CPointer<UInt16>, MemberNameSyntax: UInt32, MemberName: CPointer<UInt16>): windows_core.RPC_STATUS {
+    return RpcNsGroupMbrRemoveW(GroupNameSyntax, GroupName, MemberNameSyntax, MemberName)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsMgmtBindingUnexportA == "on"]
+foreign {
     // param-hint: IfId optional
     // param-hint: ObjectUuidVec optional
     func RpcNsMgmtBindingUnexportA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, IfId: CPointer<RPC_IF_IDAbi>, VersOption: UInt32, ObjectUuidVec: CPointer<UUID_VECTORAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsMgmtBindingUnexportA == "on"]
+public unsafe func Windows_RpcNsMgmtBindingUnexportA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, IfId: CPointer<RPC_IF_IDAbi>, VersOption: UInt32, ObjectUuidVec: CPointer<UUID_VECTORAbi>): windows_core.RPC_STATUS {
+    return RpcNsMgmtBindingUnexportA(EntryNameSyntax, EntryName, IfId, VersOption, ObjectUuidVec)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsMgmtBindingUnexportW == "on"]
+foreign {
     // param-hint: IfId optional
     // param-hint: ObjectUuidVec optional
     func RpcNsMgmtBindingUnexportW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, IfId: CPointer<RPC_IF_IDAbi>, VersOption: UInt32, ObjectUuidVec: CPointer<UUID_VECTORAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsMgmtBindingUnexportW == "on"]
+public unsafe func Windows_RpcNsMgmtBindingUnexportW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, IfId: CPointer<RPC_IF_IDAbi>, VersOption: UInt32, ObjectUuidVec: CPointer<UUID_VECTORAbi>): windows_core.RPC_STATUS {
+    return RpcNsMgmtBindingUnexportW(EntryNameSyntax, EntryName, IfId, VersOption, ObjectUuidVec)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsMgmtEntryCreateA == "on"]
+foreign {
     func RpcNsMgmtEntryCreateA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsMgmtEntryCreateA == "on"]
+public unsafe func Windows_RpcNsMgmtEntryCreateA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>): windows_core.RPC_STATUS {
+    return RpcNsMgmtEntryCreateA(EntryNameSyntax, EntryName)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsMgmtEntryCreateW == "on"]
+foreign {
     func RpcNsMgmtEntryCreateW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsMgmtEntryCreateW == "on"]
+public unsafe func Windows_RpcNsMgmtEntryCreateW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>): windows_core.RPC_STATUS {
+    return RpcNsMgmtEntryCreateW(EntryNameSyntax, EntryName)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsMgmtEntryDeleteA == "on"]
+foreign {
     func RpcNsMgmtEntryDeleteA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsMgmtEntryDeleteA == "on"]
+public unsafe func Windows_RpcNsMgmtEntryDeleteA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>): windows_core.RPC_STATUS {
+    return RpcNsMgmtEntryDeleteA(EntryNameSyntax, EntryName)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsMgmtEntryDeleteW == "on"]
+foreign {
     func RpcNsMgmtEntryDeleteW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsMgmtEntryDeleteW == "on"]
+public unsafe func Windows_RpcNsMgmtEntryDeleteW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>): windows_core.RPC_STATUS {
+    return RpcNsMgmtEntryDeleteW(EntryNameSyntax, EntryName)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsMgmtEntryInqIfIdsA == "on"]
+foreign {
     func RpcNsMgmtEntryInqIfIdsA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, IfIdVec: CPointer<CPointer<RPC_IF_ID_VECTORAbi>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsMgmtEntryInqIfIdsA == "on"]
+public unsafe func Windows_RpcNsMgmtEntryInqIfIdsA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, IfIdVec: CPointer<CPointer<RPC_IF_ID_VECTORAbi>>): windows_core.RPC_STATUS {
+    return RpcNsMgmtEntryInqIfIdsA(EntryNameSyntax, EntryName, IfIdVec)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsMgmtEntryInqIfIdsW == "on"]
+foreign {
     func RpcNsMgmtEntryInqIfIdsW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, IfIdVec: CPointer<CPointer<RPC_IF_ID_VECTORAbi>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsMgmtEntryInqIfIdsW == "on"]
+public unsafe func Windows_RpcNsMgmtEntryInqIfIdsW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, IfIdVec: CPointer<CPointer<RPC_IF_ID_VECTORAbi>>): windows_core.RPC_STATUS {
+    return RpcNsMgmtEntryInqIfIdsW(EntryNameSyntax, EntryName, IfIdVec)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsMgmtHandleSetExpAge == "on"]
+foreign {
     func RpcNsMgmtHandleSetExpAge(NsHandle: CPointer<Unit>, ExpirationAge: UInt32): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsMgmtHandleSetExpAge == "on"]
+public unsafe func Windows_RpcNsMgmtHandleSetExpAge(NsHandle: CPointer<Unit>, ExpirationAge: UInt32): windows_core.RPC_STATUS {
+    return RpcNsMgmtHandleSetExpAge(NsHandle, ExpirationAge)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsMgmtInqExpAge == "on"]
+foreign {
     func RpcNsMgmtInqExpAge(ExpirationAge: CPointer<UInt32>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsMgmtInqExpAge == "on"]
+public unsafe func Windows_RpcNsMgmtInqExpAge(ExpirationAge: CPointer<UInt32>): windows_core.RPC_STATUS {
+    return RpcNsMgmtInqExpAge(ExpirationAge)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsMgmtSetExpAge == "on"]
+foreign {
     func RpcNsMgmtSetExpAge(ExpirationAge: UInt32): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsMgmtSetExpAge == "on"]
+public unsafe func Windows_RpcNsMgmtSetExpAge(ExpirationAge: UInt32): windows_core.RPC_STATUS {
+    return RpcNsMgmtSetExpAge(ExpirationAge)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsProfileDeleteA == "on"]
+foreign {
     func RpcNsProfileDeleteA(ProfileNameSyntax: UInt32, ProfileName: CPointer<UInt8>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsProfileDeleteA == "on"]
+public unsafe func Windows_RpcNsProfileDeleteA(ProfileNameSyntax: UInt32, ProfileName: CPointer<UInt8>): windows_core.RPC_STATUS {
+    return RpcNsProfileDeleteA(ProfileNameSyntax, ProfileName)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsProfileDeleteW == "on"]
+foreign {
     func RpcNsProfileDeleteW(ProfileNameSyntax: UInt32, ProfileName: CPointer<UInt16>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsProfileDeleteW == "on"]
+public unsafe func Windows_RpcNsProfileDeleteW(ProfileNameSyntax: UInt32, ProfileName: CPointer<UInt16>): windows_core.RPC_STATUS {
+    return RpcNsProfileDeleteW(ProfileNameSyntax, ProfileName)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsProfileEltAddA == "on"]
+foreign {
     // param-hint: IfId optional
     // param-hint: Annotation optional
     func RpcNsProfileEltAddA(ProfileNameSyntax: UInt32, ProfileName: CPointer<UInt8>, IfId: CPointer<RPC_IF_IDAbi>, MemberNameSyntax: UInt32, MemberName: CPointer<UInt8>, Priority: UInt32, Annotation: CPointer<UInt8>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsProfileEltAddA == "on"]
+public unsafe func Windows_RpcNsProfileEltAddA(ProfileNameSyntax: UInt32, ProfileName: CPointer<UInt8>, IfId: CPointer<RPC_IF_IDAbi>, MemberNameSyntax: UInt32, MemberName: CPointer<UInt8>, Priority: UInt32, Annotation: CPointer<UInt8>): windows_core.RPC_STATUS {
+    return RpcNsProfileEltAddA(ProfileNameSyntax, ProfileName, IfId, MemberNameSyntax, MemberName, Priority, Annotation)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsProfileEltAddW == "on"]
+foreign {
     // param-hint: IfId optional
     // param-hint: Annotation optional
     func RpcNsProfileEltAddW(ProfileNameSyntax: UInt32, ProfileName: CPointer<UInt16>, IfId: CPointer<RPC_IF_IDAbi>, MemberNameSyntax: UInt32, MemberName: CPointer<UInt16>, Priority: UInt32, Annotation: CPointer<UInt16>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsProfileEltAddW == "on"]
+public unsafe func Windows_RpcNsProfileEltAddW(ProfileNameSyntax: UInt32, ProfileName: CPointer<UInt16>, IfId: CPointer<RPC_IF_IDAbi>, MemberNameSyntax: UInt32, MemberName: CPointer<UInt16>, Priority: UInt32, Annotation: CPointer<UInt16>): windows_core.RPC_STATUS {
+    return RpcNsProfileEltAddW(ProfileNameSyntax, ProfileName, IfId, MemberNameSyntax, MemberName, Priority, Annotation)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsProfileEltInqBeginA == "on"]
+foreign {
     // param-hint: IfId optional
     // param-hint: MemberName optional
     func RpcNsProfileEltInqBeginA(ProfileNameSyntax: UInt32, ProfileName: CPointer<UInt8>, InquiryType: UInt32, IfId: CPointer<RPC_IF_IDAbi>, VersOption: UInt32, MemberNameSyntax: UInt32, MemberName: CPointer<UInt8>, InquiryContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsProfileEltInqBeginA == "on"]
+public unsafe func Windows_RpcNsProfileEltInqBeginA(ProfileNameSyntax: UInt32, ProfileName: CPointer<UInt8>, InquiryType: UInt32, IfId: CPointer<RPC_IF_IDAbi>, VersOption: UInt32, MemberNameSyntax: UInt32, MemberName: CPointer<UInt8>, InquiryContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return RpcNsProfileEltInqBeginA(ProfileNameSyntax, ProfileName, InquiryType, IfId, VersOption, MemberNameSyntax, MemberName, InquiryContext)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsProfileEltInqBeginW == "on"]
+foreign {
     // param-hint: IfId optional
     // param-hint: MemberName optional
     func RpcNsProfileEltInqBeginW(ProfileNameSyntax: UInt32, ProfileName: CPointer<UInt16>, InquiryType: UInt32, IfId: CPointer<RPC_IF_IDAbi>, VersOption: UInt32, MemberNameSyntax: UInt32, MemberName: CPointer<UInt16>, InquiryContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsProfileEltInqBeginW == "on"]
+public unsafe func Windows_RpcNsProfileEltInqBeginW(ProfileNameSyntax: UInt32, ProfileName: CPointer<UInt16>, InquiryType: UInt32, IfId: CPointer<RPC_IF_IDAbi>, VersOption: UInt32, MemberNameSyntax: UInt32, MemberName: CPointer<UInt16>, InquiryContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return RpcNsProfileEltInqBeginW(ProfileNameSyntax, ProfileName, InquiryType, IfId, VersOption, MemberNameSyntax, MemberName, InquiryContext)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsProfileEltInqDone == "on"]
+foreign {
     func RpcNsProfileEltInqDone(InquiryContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsProfileEltInqDone == "on"]
+public unsafe func Windows_RpcNsProfileEltInqDone(InquiryContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return RpcNsProfileEltInqDone(InquiryContext)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsProfileEltInqNextA == "on"]
+foreign {
     // param-hint: IfId optional
     func RpcNsProfileEltInqNextA(InquiryContext: CPointer<Unit>, IfId: CPointer<RPC_IF_IDAbi>, MemberName: CPointer<CPointer<UInt8>>, Priority: CPointer<UInt32>, Annotation: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsProfileEltInqNextA == "on"]
+public unsafe func Windows_RpcNsProfileEltInqNextA(InquiryContext: CPointer<Unit>, IfId: CPointer<RPC_IF_IDAbi>, MemberName: CPointer<CPointer<UInt8>>, Priority: CPointer<UInt32>, Annotation: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS {
+    return RpcNsProfileEltInqNextA(InquiryContext, IfId, MemberName, Priority, Annotation)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsProfileEltInqNextW == "on"]
+foreign {
     // param-hint: IfId optional
     func RpcNsProfileEltInqNextW(InquiryContext: CPointer<Unit>, IfId: CPointer<RPC_IF_IDAbi>, MemberName: CPointer<CPointer<UInt16>>, Priority: CPointer<UInt32>, Annotation: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsProfileEltInqNextW == "on"]
+public unsafe func Windows_RpcNsProfileEltInqNextW(InquiryContext: CPointer<Unit>, IfId: CPointer<RPC_IF_IDAbi>, MemberName: CPointer<CPointer<UInt16>>, Priority: CPointer<UInt32>, Annotation: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS {
+    return RpcNsProfileEltInqNextW(InquiryContext, IfId, MemberName, Priority, Annotation)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsProfileEltRemoveA == "on"]
+foreign {
     // param-hint: IfId optional
     func RpcNsProfileEltRemoveA(ProfileNameSyntax: UInt32, ProfileName: CPointer<UInt8>, IfId: CPointer<RPC_IF_IDAbi>, MemberNameSyntax: UInt32, MemberName: CPointer<UInt8>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsProfileEltRemoveA == "on"]
+public unsafe func Windows_RpcNsProfileEltRemoveA(ProfileNameSyntax: UInt32, ProfileName: CPointer<UInt8>, IfId: CPointer<RPC_IF_IDAbi>, MemberNameSyntax: UInt32, MemberName: CPointer<UInt8>): windows_core.RPC_STATUS {
+    return RpcNsProfileEltRemoveA(ProfileNameSyntax, ProfileName, IfId, MemberNameSyntax, MemberName)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsProfileEltRemoveW == "on"]
+foreign {
     // param-hint: IfId optional
     func RpcNsProfileEltRemoveW(ProfileNameSyntax: UInt32, ProfileName: CPointer<UInt16>, IfId: CPointer<RPC_IF_IDAbi>, MemberNameSyntax: UInt32, MemberName: CPointer<UInt16>): windows_core.RPC_STATUS
 }
 
-@When[RPCRT4 == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_System_Rpc == "on" && RPCNS4 == "on" && Windows_Win32_System_Rpc_RpcNsProfileEltRemoveW == "on"]
+public unsafe func Windows_RpcNsProfileEltRemoveW(ProfileNameSyntax: UInt32, ProfileName: CPointer<UInt16>, IfId: CPointer<RPC_IF_IDAbi>, MemberNameSyntax: UInt32, MemberName: CPointer<UInt16>): windows_core.RPC_STATUS {
+    return RpcNsProfileEltRemoveW(ProfileNameSyntax, ProfileName, IfId, MemberNameSyntax, MemberName)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_Ndr64AsyncClientCall == "on" && Windows_Win32_System_Com == "on"]
 @CallingConv[CDECL]
 foreign {
     // pinvoke-hint: cc=cdecl
     func Ndr64AsyncClientCall(pProxyInfo: CPointer<MIDL_STUBLESS_PROXY_INFOAbi>, nProcNum: UInt32, pReturnValue: CPointer<Unit>, ...): CLIENT_CALL_RETURN
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_Ndr64DcomAsyncClientCall == "on" && Windows_Win32_System_Com == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func Ndr64DcomAsyncClientCall(pProxyInfo: CPointer<MIDL_STUBLESS_PROXY_INFOAbi>, nProcNum: UInt32, pReturnValue: CPointer<Unit>, ...): CLIENT_CALL_RETURN
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrAsyncClientCall == "on" && Windows_Win32_System_Com == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func NdrAsyncClientCall(pStubDescriptor: CPointer<MIDL_STUB_DESCAbi>, pFormat: CPointer<UInt8>, ...): CLIENT_CALL_RETURN
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrClientCall2 == "on" && Windows_Win32_System_Com == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func NdrClientCall2(pStubDescriptor: CPointer<MIDL_STUB_DESCAbi>, pFormat: CPointer<UInt8>, ...): CLIENT_CALL_RETURN
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrClientCall3 == "on" && Windows_Win32_System_Com == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func NdrClientCall3(pProxyInfo: CPointer<MIDL_STUBLESS_PROXY_INFOAbi>, nProcNum: UInt32, pReturnValue: CPointer<Unit>, ...): CLIENT_CALL_RETURN
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrDcomAsyncClientCall == "on" && Windows_Win32_System_Com == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func NdrDcomAsyncClientCall(pStubDescriptor: CPointer<MIDL_STUB_DESCAbi>, pFormat: CPointer<UInt8>, ...): CLIENT_CALL_RETURN
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesProcEncodeDecode == "on" && Windows_Win32_System_Com == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func NdrMesProcEncodeDecode(Handle: CPointer<Unit>, pStubDesc: CPointer<MIDL_STUB_DESCAbi>, pFormatString: CPointer<UInt8>, ...): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesProcEncodeDecode2 == "on" && Windows_Win32_System_Com == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func NdrMesProcEncodeDecode2(Handle: CPointer<Unit>, pStubDesc: CPointer<MIDL_STUB_DESCAbi>, pFormatString: CPointer<UInt8>, ...): CLIENT_CALL_RETURN
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesProcEncodeDecode3 == "on" && Windows_Win32_System_Com == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func NdrMesProcEncodeDecode3(Handle: CPointer<Unit>, pProxyInfo: CPointer<MIDL_STUBLESS_PROXY_INFOAbi>, nProcNum: UInt32, pReturnValue: CPointer<Unit>, ...): CLIENT_CALL_RETURN
 }
 
-@When[RPCRT4 == "on"]
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_DceErrorInqTextA == "on"]
 foreign {
     // param-hint: ErrorText fixed=256
     func DceErrorInqTextA(RpcStatus: windows_core.RPC_STATUS, ErrorText: CPointer<UInt8>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_DceErrorInqTextA == "on"]
+public unsafe func Windows_DceErrorInqTextA(RpcStatus: windows_core.RPC_STATUS, ErrorText: CPointer<UInt8>): windows_core.RPC_STATUS {
+    return DceErrorInqTextA(RpcStatus, ErrorText)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_DceErrorInqTextW == "on"]
+foreign {
     // param-hint: ErrorText fixed=256
     func DceErrorInqTextW(RpcStatus: windows_core.RPC_STATUS, ErrorText: CPointer<UInt16>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_DceErrorInqTextW == "on"]
+public unsafe func Windows_DceErrorInqTextW(RpcStatus: windows_core.RPC_STATUS, ErrorText: CPointer<UInt16>): windows_core.RPC_STATUS {
+    return DceErrorInqTextW(RpcStatus, ErrorText)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_IUnknown_AddRef_Proxy == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func IUnknown_AddRef_Proxy(This_: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_IUnknown_AddRef_Proxy == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_IUnknown_AddRef_Proxy(This_: CPointer<Unit>): UInt32 {
+    return IUnknown_AddRef_Proxy(This_)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_IUnknown_QueryInterface_Proxy == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func IUnknown_QueryInterface_Proxy(This_: CPointer<Unit>, riid: CPointer<GUID>, ppvObject: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_IUnknown_QueryInterface_Proxy == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_IUnknown_QueryInterface_Proxy(This_: CPointer<Unit>, riid: CPointer<GUID>, ppvObject: CPointer<CPointer<Unit>>): Int32 {
+    return IUnknown_QueryInterface_Proxy(This_, riid, ppvObject)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_IUnknown_Release_Proxy == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func IUnknown_Release_Proxy(This_: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_IUnknown_Release_Proxy == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_IUnknown_Release_Proxy(This_: CPointer<Unit>): UInt32 {
+    return IUnknown_Release_Proxy(This_)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcAllocate == "on"]
+foreign {
     func I_RpcAllocate(Size: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcAllocate == "on"]
+public unsafe func Windows_I_RpcAllocate(Size: UInt32): CPointer<Unit> {
+    return I_RpcAllocate(Size)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcAsyncAbortCall == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    func I_RpcAsyncAbortCall(pAsync: CPointer<RPC_ASYNC_STATEAbi>, ExceptionCode: UInt32): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcAsyncAbortCall == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_I_RpcAsyncAbortCall(pAsync: CPointer<RPC_ASYNC_STATEAbi>, ExceptionCode: UInt32): windows_core.RPC_STATUS {
+    return I_RpcAsyncAbortCall(pAsync, ExceptionCode)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcAsyncSetHandle == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    func I_RpcAsyncSetHandle(Message: CPointer<RPC_MESSAGEAbi>, pAsync: CPointer<RPC_ASYNC_STATEAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcAsyncSetHandle == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_I_RpcAsyncSetHandle(Message: CPointer<RPC_MESSAGEAbi>, pAsync: CPointer<RPC_ASYNC_STATEAbi>): windows_core.RPC_STATUS {
+    return I_RpcAsyncSetHandle(Message, pAsync)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcBindingCopy == "on"]
+foreign {
     func I_RpcBindingCopy(SourceBinding: CPointer<Unit>, DestinationBinding: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcBindingCopy == "on"]
+public unsafe func Windows_I_RpcBindingCopy(SourceBinding: CPointer<Unit>, DestinationBinding: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return I_RpcBindingCopy(SourceBinding, DestinationBinding)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcBindingCreateNP == "on"]
+foreign {
     func I_RpcBindingCreateNP(ServerName: CPointer<UInt16>, ServiceName: CPointer<UInt16>, NetworkOptions: CPointer<UInt16>, Binding: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcBindingCreateNP == "on"]
+public unsafe func Windows_I_RpcBindingCreateNP(ServerName: CPointer<UInt16>, ServiceName: CPointer<UInt16>, NetworkOptions: CPointer<UInt16>, Binding: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return I_RpcBindingCreateNP(ServerName, ServiceName, NetworkOptions, Binding)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcBindingHandleToAsyncHandle == "on"]
+foreign {
     func I_RpcBindingHandleToAsyncHandle(Binding: CPointer<Unit>, AsyncHandle: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcBindingHandleToAsyncHandle == "on"]
+public unsafe func Windows_I_RpcBindingHandleToAsyncHandle(Binding: CPointer<Unit>, AsyncHandle: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return I_RpcBindingHandleToAsyncHandle(Binding, AsyncHandle)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcBindingInqClientTokenAttributes == "on"]
+foreign {
     // param-hint: TokenId optional
     // param-hint: AuthenticationId optional
     // param-hint: ModifiedId optional
     func I_RpcBindingInqClientTokenAttributes(Binding: CPointer<Unit>, TokenId: CPointer<Win32_Foundation.LUIDAbi>, AuthenticationId: CPointer<Win32_Foundation.LUIDAbi>, ModifiedId: CPointer<Win32_Foundation.LUIDAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcBindingInqClientTokenAttributes == "on"]
+public unsafe func Windows_I_RpcBindingInqClientTokenAttributes(Binding: CPointer<Unit>, TokenId: CPointer<Win32_Foundation.LUIDAbi>, AuthenticationId: CPointer<Win32_Foundation.LUIDAbi>, ModifiedId: CPointer<Win32_Foundation.LUIDAbi>): windows_core.RPC_STATUS {
+    return I_RpcBindingInqClientTokenAttributes(Binding, TokenId, AuthenticationId, ModifiedId)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcBindingInqDynamicEndpointA == "on"]
+foreign {
     func I_RpcBindingInqDynamicEndpointA(Binding: CPointer<Unit>, DynamicEndpoint: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcBindingInqDynamicEndpointA == "on"]
+public unsafe func Windows_I_RpcBindingInqDynamicEndpointA(Binding: CPointer<Unit>, DynamicEndpoint: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS {
+    return I_RpcBindingInqDynamicEndpointA(Binding, DynamicEndpoint)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcBindingInqDynamicEndpointW == "on"]
+foreign {
     func I_RpcBindingInqDynamicEndpointW(Binding: CPointer<Unit>, DynamicEndpoint: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcBindingInqDynamicEndpointW == "on"]
+public unsafe func Windows_I_RpcBindingInqDynamicEndpointW(Binding: CPointer<Unit>, DynamicEndpoint: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS {
+    return I_RpcBindingInqDynamicEndpointW(Binding, DynamicEndpoint)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcBindingInqLocalClientPID == "on"]
+foreign {
     func I_RpcBindingInqLocalClientPID(Binding: CPointer<Unit>, Pid: CPointer<UInt32>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcBindingInqLocalClientPID == "on"]
+public unsafe func Windows_I_RpcBindingInqLocalClientPID(Binding: CPointer<Unit>, Pid: CPointer<UInt32>): windows_core.RPC_STATUS {
+    return I_RpcBindingInqLocalClientPID(Binding, Pid)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcBindingInqMarshalledTargetInfo == "on"]
+foreign {
     func I_RpcBindingInqMarshalledTargetInfo(Binding: CPointer<Unit>, MarshalledTargetInfoSize: CPointer<UInt32>, MarshalledTargetInfo: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcBindingInqMarshalledTargetInfo == "on"]
+public unsafe func Windows_I_RpcBindingInqMarshalledTargetInfo(Binding: CPointer<Unit>, MarshalledTargetInfoSize: CPointer<UInt32>, MarshalledTargetInfo: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS {
+    return I_RpcBindingInqMarshalledTargetInfo(Binding, MarshalledTargetInfoSize, MarshalledTargetInfo)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcBindingInqSecurityContext == "on"]
+foreign {
     func I_RpcBindingInqSecurityContext(Binding: CPointer<Unit>, SecurityContextHandle: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcBindingInqSecurityContext == "on"]
+public unsafe func Windows_I_RpcBindingInqSecurityContext(Binding: CPointer<Unit>, SecurityContextHandle: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return I_RpcBindingInqSecurityContext(Binding, SecurityContextHandle)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcBindingInqSecurityContextKeyInfo == "on"]
+foreign {
     // param-hint: Binding optional
     func I_RpcBindingInqSecurityContextKeyInfo(Binding: CPointer<Unit>, KeyInfo: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcBindingInqSecurityContextKeyInfo == "on"]
+public unsafe func Windows_I_RpcBindingInqSecurityContextKeyInfo(Binding: CPointer<Unit>, KeyInfo: CPointer<Unit>): windows_core.RPC_STATUS {
+    return I_RpcBindingInqSecurityContextKeyInfo(Binding, KeyInfo)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcBindingInqTransportType == "on"]
+foreign {
     func I_RpcBindingInqTransportType(Binding: CPointer<Unit>, Type: CPointer<UInt32>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcBindingInqTransportType == "on"]
+public unsafe func Windows_I_RpcBindingInqTransportType(Binding: CPointer<Unit>, Type: CPointer<UInt32>): windows_core.RPC_STATUS {
+    return I_RpcBindingInqTransportType(Binding, Type)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcBindingInqWireIdForSnego == "on"]
+foreign {
     func I_RpcBindingInqWireIdForSnego(Binding: CPointer<Unit>, WireId: CPointer<UInt8>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcBindingInqWireIdForSnego == "on"]
+public unsafe func Windows_I_RpcBindingInqWireIdForSnego(Binding: CPointer<Unit>, WireId: CPointer<UInt8>): windows_core.RPC_STATUS {
+    return I_RpcBindingInqWireIdForSnego(Binding, WireId)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcBindingIsClientLocal == "on"]
+foreign {
     func I_RpcBindingIsClientLocal(BindingHandle: CPointer<Unit>, ClientLocalFlag: CPointer<UInt32>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcBindingIsClientLocal == "on"]
+public unsafe func Windows_I_RpcBindingIsClientLocal(BindingHandle: CPointer<Unit>, ClientLocalFlag: CPointer<UInt32>): windows_core.RPC_STATUS {
+    return I_RpcBindingIsClientLocal(BindingHandle, ClientLocalFlag)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcBindingIsServerLocal == "on"]
+foreign {
     func I_RpcBindingIsServerLocal(Binding: CPointer<Unit>, ServerLocalFlag: CPointer<UInt32>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcBindingIsServerLocal == "on"]
+public unsafe func Windows_I_RpcBindingIsServerLocal(Binding: CPointer<Unit>, ServerLocalFlag: CPointer<UInt32>): windows_core.RPC_STATUS {
+    return I_RpcBindingIsServerLocal(Binding, ServerLocalFlag)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcBindingSetPrivateOption == "on"]
+foreign {
     func I_RpcBindingSetPrivateOption(hBinding: CPointer<Unit>, option: UInt32, optionValue: UIntNative): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcBindingSetPrivateOption == "on"]
+public unsafe func Windows_I_RpcBindingSetPrivateOption(hBinding: CPointer<Unit>, option: UInt32, optionValue: UIntNative): windows_core.RPC_STATUS {
+    return I_RpcBindingSetPrivateOption(hBinding, option, optionValue)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcBindingToStaticStringBindingW == "on"]
+foreign {
     func I_RpcBindingToStaticStringBindingW(Binding: CPointer<Unit>, StringBinding: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcBindingToStaticStringBindingW == "on"]
+public unsafe func Windows_I_RpcBindingToStaticStringBindingW(Binding: CPointer<Unit>, StringBinding: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS {
+    return I_RpcBindingToStaticStringBindingW(Binding, StringBinding)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcClearMutex == "on"]
+foreign {
     func I_RpcClearMutex(Mutex: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcClearMutex == "on"]
+public unsafe func Windows_I_RpcClearMutex(Mutex: CPointer<Unit>): Unit {
+    I_RpcClearMutex(Mutex)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcDeleteMutex == "on"]
+foreign {
     func I_RpcDeleteMutex(Mutex: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcDeleteMutex == "on"]
+public unsafe func Windows_I_RpcDeleteMutex(Mutex: CPointer<Unit>): Unit {
+    I_RpcDeleteMutex(Mutex)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcExceptionFilter == "on"]
+foreign {
     func I_RpcExceptionFilter(ExceptionCode: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcExceptionFilter == "on"]
+public unsafe func Windows_I_RpcExceptionFilter(ExceptionCode: UInt32): Int32 {
+    return I_RpcExceptionFilter(ExceptionCode)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcFree == "on"]
+foreign {
     func I_RpcFree(Object: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcFree == "on"]
+public unsafe func Windows_I_RpcFree(Object: CPointer<Unit>): Unit {
+    I_RpcFree(Object)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcFreeBuffer == "on"]
+foreign {
     func I_RpcFreeBuffer(Message: CPointer<RPC_MESSAGEAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcFreeBuffer == "on"]
+public unsafe func Windows_I_RpcFreeBuffer(Message: CPointer<RPC_MESSAGEAbi>): windows_core.RPC_STATUS {
+    return I_RpcFreeBuffer(Message)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcFreePipeBuffer == "on"]
+foreign {
     func I_RpcFreePipeBuffer(Message: CPointer<RPC_MESSAGEAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcFreePipeBuffer == "on"]
+public unsafe func Windows_I_RpcFreePipeBuffer(Message: CPointer<RPC_MESSAGEAbi>): windows_core.RPC_STATUS {
+    return I_RpcFreePipeBuffer(Message)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcGetBuffer == "on"]
+foreign {
     func I_RpcGetBuffer(Message: CPointer<RPC_MESSAGEAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcGetBuffer == "on"]
+public unsafe func Windows_I_RpcGetBuffer(Message: CPointer<RPC_MESSAGEAbi>): windows_core.RPC_STATUS {
+    return I_RpcGetBuffer(Message)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcGetBufferWithObject == "on"]
+foreign {
     func I_RpcGetBufferWithObject(Message: CPointer<RPC_MESSAGEAbi>, ObjectUuid: CPointer<GUID>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcGetBufferWithObject == "on"]
+public unsafe func Windows_I_RpcGetBufferWithObject(Message: CPointer<RPC_MESSAGEAbi>, ObjectUuid: CPointer<GUID>): windows_core.RPC_STATUS {
+    return I_RpcGetBufferWithObject(Message, ObjectUuid)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcGetCurrentCallHandle == "on"]
+foreign {
     func I_RpcGetCurrentCallHandle(): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcGetCurrentCallHandle == "on"]
+public unsafe func Windows_I_RpcGetCurrentCallHandle(): CPointer<Unit> {
+    return I_RpcGetCurrentCallHandle()
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcGetDefaultSD == "on"]
+foreign {
     func I_RpcGetDefaultSD(ppSecurityDescriptor: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcGetDefaultSD == "on"]
+public unsafe func Windows_I_RpcGetDefaultSD(ppSecurityDescriptor: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return I_RpcGetDefaultSD(ppSecurityDescriptor)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcGetExtendedError == "on"]
+foreign {
     func I_RpcGetExtendedError(): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcGetExtendedError == "on"]
+public unsafe func Windows_I_RpcGetExtendedError(): windows_core.RPC_STATUS {
+    return I_RpcGetExtendedError()
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcIfInqTransferSyntaxes == "on"]
+foreign {
     func I_RpcIfInqTransferSyntaxes(RpcIfHandle: CPointer<Unit>, TransferSyntaxes: CPointer<RPC_TRANSFER_SYNTAXAbi>, TransferSyntaxSize: UInt32, TransferSyntaxCount: CPointer<UInt32>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcIfInqTransferSyntaxes == "on"]
+public unsafe func Windows_I_RpcIfInqTransferSyntaxes(RpcIfHandle: CPointer<Unit>, TransferSyntaxes: CPointer<RPC_TRANSFER_SYNTAXAbi>, TransferSyntaxSize: UInt32, TransferSyntaxCount: CPointer<UInt32>): windows_core.RPC_STATUS {
+    return I_RpcIfInqTransferSyntaxes(RpcIfHandle, TransferSyntaxes, TransferSyntaxSize, TransferSyntaxCount)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcMapWin32Status == "on"]
+foreign {
     func I_RpcMapWin32Status(Status: windows_core.RPC_STATUS): Int32
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcMapWin32Status == "on"]
+public unsafe func Windows_I_RpcMapWin32Status(Status: windows_core.RPC_STATUS): Int32 {
+    return I_RpcMapWin32Status(Status)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcMgmtEnableDedicatedThreadPool == "on"]
+foreign {
     func I_RpcMgmtEnableDedicatedThreadPool(): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcMgmtEnableDedicatedThreadPool == "on"]
+public unsafe func Windows_I_RpcMgmtEnableDedicatedThreadPool(): windows_core.RPC_STATUS {
+    return I_RpcMgmtEnableDedicatedThreadPool()
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcNegotiateTransferSyntax == "on"]
+foreign {
     func I_RpcNegotiateTransferSyntax(Message: CPointer<RPC_MESSAGEAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcNegotiateTransferSyntax == "on"]
+public unsafe func Windows_I_RpcNegotiateTransferSyntax(Message: CPointer<RPC_MESSAGEAbi>): windows_core.RPC_STATUS {
+    return I_RpcNegotiateTransferSyntax(Message)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcNsBindingSetEntryNameA == "on"]
+foreign {
     func I_RpcNsBindingSetEntryNameA(Binding: CPointer<Unit>, EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcNsBindingSetEntryNameA == "on"]
+public unsafe func Windows_I_RpcNsBindingSetEntryNameA(Binding: CPointer<Unit>, EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>): windows_core.RPC_STATUS {
+    return I_RpcNsBindingSetEntryNameA(Binding, EntryNameSyntax, EntryName)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcNsBindingSetEntryNameW == "on"]
+foreign {
     func I_RpcNsBindingSetEntryNameW(Binding: CPointer<Unit>, EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcNsBindingSetEntryNameW == "on"]
+public unsafe func Windows_I_RpcNsBindingSetEntryNameW(Binding: CPointer<Unit>, EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>): windows_core.RPC_STATUS {
+    return I_RpcNsBindingSetEntryNameW(Binding, EntryNameSyntax, EntryName)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcNsInterfaceExported == "on"]
+foreign {
     func I_RpcNsInterfaceExported(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, RpcInterfaceInformation: CPointer<RPC_SERVER_INTERFACEAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcNsInterfaceExported == "on"]
+public unsafe func Windows_I_RpcNsInterfaceExported(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, RpcInterfaceInformation: CPointer<RPC_SERVER_INTERFACEAbi>): windows_core.RPC_STATUS {
+    return I_RpcNsInterfaceExported(EntryNameSyntax, EntryName, RpcInterfaceInformation)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcNsInterfaceUnexported == "on"]
+foreign {
     func I_RpcNsInterfaceUnexported(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, RpcInterfaceInformation: CPointer<RPC_SERVER_INTERFACEAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcNsInterfaceUnexported == "on"]
+public unsafe func Windows_I_RpcNsInterfaceUnexported(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, RpcInterfaceInformation: CPointer<RPC_SERVER_INTERFACEAbi>): windows_core.RPC_STATUS {
+    return I_RpcNsInterfaceUnexported(EntryNameSyntax, EntryName, RpcInterfaceInformation)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcOpenClientProcess == "on"]
+foreign {
     // param-hint: Binding optional
     func I_RpcOpenClientProcess(Binding: CPointer<Unit>, DesiredAccess: UInt32, ClientProcess: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcOpenClientProcess == "on"]
+public unsafe func Windows_I_RpcOpenClientProcess(Binding: CPointer<Unit>, DesiredAccess: UInt32, ClientProcess: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return I_RpcOpenClientProcess(Binding, DesiredAccess, ClientProcess)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcPauseExecution == "on"]
+foreign {
     func I_RpcPauseExecution(Milliseconds: UInt32): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcPauseExecution == "on"]
+public unsafe func Windows_I_RpcPauseExecution(Milliseconds: UInt32): Unit {
+    I_RpcPauseExecution(Milliseconds)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcReallocPipeBuffer == "on"]
+foreign {
     func I_RpcReallocPipeBuffer(Message: CPointer<RPC_MESSAGEAbi>, NewSize: UInt32): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcReallocPipeBuffer == "on"]
+public unsafe func Windows_I_RpcReallocPipeBuffer(Message: CPointer<RPC_MESSAGEAbi>, NewSize: UInt32): windows_core.RPC_STATUS {
+    return I_RpcReallocPipeBuffer(Message, NewSize)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcReceive == "on"]
+foreign {
     func I_RpcReceive(Message: CPointer<RPC_MESSAGEAbi>, Size: UInt32): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcReceive == "on"]
+public unsafe func Windows_I_RpcReceive(Message: CPointer<RPC_MESSAGEAbi>, Size: UInt32): windows_core.RPC_STATUS {
+    return I_RpcReceive(Message, Size)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcRecordCalloutFailure == "on"]
+foreign {
     func I_RpcRecordCalloutFailure(RpcStatus: windows_core.RPC_STATUS, CallOutState: CPointer<RDR_CALLOUT_STATEAbi>, DllName: CPointer<UInt16>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcRecordCalloutFailure == "on"]
+public unsafe func Windows_I_RpcRecordCalloutFailure(RpcStatus: windows_core.RPC_STATUS, CallOutState: CPointer<RDR_CALLOUT_STATEAbi>, DllName: CPointer<UInt16>): Unit {
+    I_RpcRecordCalloutFailure(RpcStatus, CallOutState, DllName)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcRequestMutex == "on"]
+foreign {
     func I_RpcRequestMutex(Mutex: CPointer<CPointer<Unit>>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcRequestMutex == "on"]
+public unsafe func Windows_I_RpcRequestMutex(Mutex: CPointer<CPointer<Unit>>): Unit {
+    I_RpcRequestMutex(Mutex)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcSend == "on"]
+foreign {
     func I_RpcSend(Message: CPointer<RPC_MESSAGEAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcSend == "on"]
+public unsafe func Windows_I_RpcSend(Message: CPointer<RPC_MESSAGEAbi>): windows_core.RPC_STATUS {
+    return I_RpcSend(Message)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcSendReceive == "on"]
+foreign {
     func I_RpcSendReceive(Message: CPointer<RPC_MESSAGEAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcSendReceive == "on"]
+public unsafe func Windows_I_RpcSendReceive(Message: CPointer<RPC_MESSAGEAbi>): windows_core.RPC_STATUS {
+    return I_RpcSendReceive(Message)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerCheckClientRestriction == "on"]
+foreign {
     func I_RpcServerCheckClientRestriction(Context: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerCheckClientRestriction == "on"]
+public unsafe func Windows_I_RpcServerCheckClientRestriction(Context: CPointer<Unit>): windows_core.RPC_STATUS {
+    return I_RpcServerCheckClientRestriction(Context)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerDisableExceptionFilter == "on"]
+foreign {
     func I_RpcServerDisableExceptionFilter(): Int32
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerDisableExceptionFilter == "on"]
+public unsafe func Windows_I_RpcServerDisableExceptionFilter(): Int32 {
+    return I_RpcServerDisableExceptionFilter()
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerGetAssociationID == "on"]
+foreign {
     // param-hint: Binding optional
     func I_RpcServerGetAssociationID(Binding: CPointer<Unit>, AssociationID: CPointer<UInt32>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerGetAssociationID == "on"]
+public unsafe func Windows_I_RpcServerGetAssociationID(Binding: CPointer<Unit>, AssociationID: CPointer<UInt32>): windows_core.RPC_STATUS {
+    return I_RpcServerGetAssociationID(Binding, AssociationID)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerInqAddressChangeFn == "on"]
+foreign {
     func I_RpcServerInqAddressChangeFn(): CPointer<RPC_ADDRESS_CHANGE_FN>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerInqAddressChangeFn == "on"]
+public unsafe func Windows_I_RpcServerInqAddressChangeFn(): CPointer<RPC_ADDRESS_CHANGE_FN> {
+    return I_RpcServerInqAddressChangeFn()
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerInqLocalConnAddress == "on"]
+foreign {
     func I_RpcServerInqLocalConnAddress(Binding: CPointer<Unit>, Buffer: CPointer<Unit>, BufferSize: CPointer<UInt32>, AddressFormat: CPointer<UInt32>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerInqLocalConnAddress == "on"]
+public unsafe func Windows_I_RpcServerInqLocalConnAddress(Binding: CPointer<Unit>, Buffer: CPointer<Unit>, BufferSize: CPointer<UInt32>, AddressFormat: CPointer<UInt32>): windows_core.RPC_STATUS {
+    return I_RpcServerInqLocalConnAddress(Binding, Buffer, BufferSize, AddressFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerInqRemoteConnAddress == "on"]
+foreign {
     func I_RpcServerInqRemoteConnAddress(Binding: CPointer<Unit>, Buffer: CPointer<Unit>, BufferSize: CPointer<UInt32>, AddressFormat: CPointer<UInt32>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerInqRemoteConnAddress == "on"]
+public unsafe func Windows_I_RpcServerInqRemoteConnAddress(Binding: CPointer<Unit>, Buffer: CPointer<Unit>, BufferSize: CPointer<UInt32>, AddressFormat: CPointer<UInt32>): windows_core.RPC_STATUS {
+    return I_RpcServerInqRemoteConnAddress(Binding, Buffer, BufferSize, AddressFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerInqTransportType == "on"]
+foreign {
     func I_RpcServerInqTransportType(Type: CPointer<UInt32>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerInqTransportType == "on"]
+public unsafe func Windows_I_RpcServerInqTransportType(Type: CPointer<UInt32>): windows_core.RPC_STATUS {
+    return I_RpcServerInqTransportType(Type)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerRegisterForwardFunction == "on"]
+foreign {
     func I_RpcServerRegisterForwardFunction(pForwardFunction: CPointer<RPC_FORWARD_FUNCTION>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerRegisterForwardFunction == "on"]
+public unsafe func Windows_I_RpcServerRegisterForwardFunction(pForwardFunction: CPointer<RPC_FORWARD_FUNCTION>): windows_core.RPC_STATUS {
+    return I_RpcServerRegisterForwardFunction(pForwardFunction)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerSetAddressChangeFn == "on"]
+foreign {
     func I_RpcServerSetAddressChangeFn(pAddressChangeFn: CPointer<RPC_ADDRESS_CHANGE_FN>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerSetAddressChangeFn == "on"]
+public unsafe func Windows_I_RpcServerSetAddressChangeFn(pAddressChangeFn: CPointer<RPC_ADDRESS_CHANGE_FN>): windows_core.RPC_STATUS {
+    return I_RpcServerSetAddressChangeFn(pAddressChangeFn)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerStartService == "on"]
+foreign {
     func I_RpcServerStartService(Protseq: CPointer<UInt16>, Endpoint: CPointer<UInt16>, IfSpec: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerStartService == "on"]
+public unsafe func Windows_I_RpcServerStartService(Protseq: CPointer<UInt16>, Endpoint: CPointer<UInt16>, IfSpec: CPointer<Unit>): windows_core.RPC_STATUS {
+    return I_RpcServerStartService(Protseq, Endpoint, IfSpec)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerSubscribeForDisconnectNotification == "on"]
+foreign {
     // param-hint: Binding optional
     // param-hint: hEvent optional
     func I_RpcServerSubscribeForDisconnectNotification(Binding: CPointer<Unit>, hEvent: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerSubscribeForDisconnectNotification == "on"]
+public unsafe func Windows_I_RpcServerSubscribeForDisconnectNotification(Binding: CPointer<Unit>, hEvent: CPointer<Unit>): windows_core.RPC_STATUS {
+    return I_RpcServerSubscribeForDisconnectNotification(Binding, hEvent)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerSubscribeForDisconnectNotification2 == "on"]
+foreign {
     // param-hint: Binding optional
     func I_RpcServerSubscribeForDisconnectNotification2(Binding: CPointer<Unit>, hEvent: CPointer<Unit>, SubscriptionId: CPointer<GUID>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerSubscribeForDisconnectNotification2 == "on"]
+public unsafe func Windows_I_RpcServerSubscribeForDisconnectNotification2(Binding: CPointer<Unit>, hEvent: CPointer<Unit>, SubscriptionId: CPointer<GUID>): windows_core.RPC_STATUS {
+    return I_RpcServerSubscribeForDisconnectNotification2(Binding, hEvent, SubscriptionId)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerUnsubscribeForDisconnectNotification == "on"]
+foreign {
     // param-hint: Binding optional
     func I_RpcServerUnsubscribeForDisconnectNotification(Binding: CPointer<Unit>, SubscriptionId: GUID): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerUnsubscribeForDisconnectNotification == "on"]
+public unsafe func Windows_I_RpcServerUnsubscribeForDisconnectNotification(Binding: CPointer<Unit>, SubscriptionId: GUID): windows_core.RPC_STATUS {
+    return I_RpcServerUnsubscribeForDisconnectNotification(Binding, SubscriptionId)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerUseProtseq2A == "on"]
+foreign {
     // param-hint: NetworkAddress optional
     // param-hint: SecurityDescriptor optional
     func I_RpcServerUseProtseq2A(NetworkAddress: CPointer<UInt8>, Protseq: CPointer<UInt8>, MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerUseProtseq2A == "on"]
+public unsafe func Windows_I_RpcServerUseProtseq2A(NetworkAddress: CPointer<UInt8>, Protseq: CPointer<UInt8>, MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<Unit>): windows_core.RPC_STATUS {
+    return I_RpcServerUseProtseq2A(NetworkAddress, Protseq, MaxCalls, SecurityDescriptor, Policy)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerUseProtseq2W == "on"]
+foreign {
     // param-hint: NetworkAddress optional
     // param-hint: SecurityDescriptor optional
     func I_RpcServerUseProtseq2W(NetworkAddress: CPointer<UInt16>, Protseq: CPointer<UInt16>, MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerUseProtseq2W == "on"]
+public unsafe func Windows_I_RpcServerUseProtseq2W(NetworkAddress: CPointer<UInt16>, Protseq: CPointer<UInt16>, MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<Unit>): windows_core.RPC_STATUS {
+    return I_RpcServerUseProtseq2W(NetworkAddress, Protseq, MaxCalls, SecurityDescriptor, Policy)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerUseProtseqEp2A == "on"]
+foreign {
     // param-hint: NetworkAddress optional
     // param-hint: SecurityDescriptor optional
     func I_RpcServerUseProtseqEp2A(NetworkAddress: CPointer<UInt8>, Protseq: CPointer<UInt8>, MaxCalls: UInt32, Endpoint: CPointer<UInt8>, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerUseProtseqEp2A == "on"]
+public unsafe func Windows_I_RpcServerUseProtseqEp2A(NetworkAddress: CPointer<UInt8>, Protseq: CPointer<UInt8>, MaxCalls: UInt32, Endpoint: CPointer<UInt8>, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<Unit>): windows_core.RPC_STATUS {
+    return I_RpcServerUseProtseqEp2A(NetworkAddress, Protseq, MaxCalls, Endpoint, SecurityDescriptor, Policy)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerUseProtseqEp2W == "on"]
+foreign {
     // param-hint: NetworkAddress optional
     // param-hint: SecurityDescriptor optional
     func I_RpcServerUseProtseqEp2W(NetworkAddress: CPointer<UInt16>, Protseq: CPointer<UInt16>, MaxCalls: UInt32, Endpoint: CPointer<UInt16>, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcServerUseProtseqEp2W == "on"]
+public unsafe func Windows_I_RpcServerUseProtseqEp2W(NetworkAddress: CPointer<UInt16>, Protseq: CPointer<UInt16>, MaxCalls: UInt32, Endpoint: CPointer<UInt16>, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<Unit>): windows_core.RPC_STATUS {
+    return I_RpcServerUseProtseqEp2W(NetworkAddress, Protseq, MaxCalls, Endpoint, SecurityDescriptor, Policy)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcSessionStrictContextHandle == "on"]
+foreign {
     func I_RpcSessionStrictContextHandle(): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcSessionStrictContextHandle == "on"]
+public unsafe func Windows_I_RpcSessionStrictContextHandle(): Unit {
+    I_RpcSessionStrictContextHandle()
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcSsDontSerializeContext == "on"]
+foreign {
     func I_RpcSsDontSerializeContext(): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcSsDontSerializeContext == "on"]
+public unsafe func Windows_I_RpcSsDontSerializeContext(): Unit {
+    I_RpcSsDontSerializeContext()
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcSystemHandleTypeSpecificWork == "on"]
+foreign {
     func I_RpcSystemHandleTypeSpecificWork(Handle: CPointer<Unit>, ActualType: UInt8, IdlType: UInt8, MarshalDirection: LRPC_SYSTEM_HANDLE_MARSHAL_DIRECTIONAbi): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcSystemHandleTypeSpecificWork == "on"]
+public unsafe func Windows_I_RpcSystemHandleTypeSpecificWork(Handle: CPointer<Unit>, ActualType: UInt8, IdlType: UInt8, MarshalDirection: LRPC_SYSTEM_HANDLE_MARSHAL_DIRECTIONAbi): windows_core.RPC_STATUS {
+    return I_RpcSystemHandleTypeSpecificWork(Handle, ActualType, IdlType, MarshalDirection)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcTurnOnEEInfoPropagation == "on"]
+foreign {
     func I_RpcTurnOnEEInfoPropagation(): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_RpcTurnOnEEInfoPropagation == "on"]
+public unsafe func Windows_I_RpcTurnOnEEInfoPropagation(): windows_core.RPC_STATUS {
+    return I_RpcTurnOnEEInfoPropagation()
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_UuidCreate == "on"]
+foreign {
     func I_UuidCreate(Uuid: CPointer<GUID>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_I_UuidCreate == "on"]
+public unsafe func Windows_I_UuidCreate(Uuid: CPointer<GUID>): windows_core.RPC_STATUS {
+    return I_UuidCreate(Uuid)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_MesBufferHandleReset == "on"]
+foreign {
     // param-hint: pBuffer bytes=param[4] optional
     // param-hint: pEncodedSize optional
     func MesBufferHandleReset(Handle: CPointer<Unit>, HandleStyle: UInt32, Operation: MIDL_ES_CODEAbi, pBuffer: CPointer<CPointer<Int8>>, BufferSize: UInt32, pEncodedSize: CPointer<UInt32>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_MesBufferHandleReset == "on"]
+public unsafe func Windows_MesBufferHandleReset(Handle: CPointer<Unit>, HandleStyle: UInt32, Operation: MIDL_ES_CODEAbi, pBuffer: CPointer<CPointer<Int8>>, BufferSize: UInt32, pEncodedSize: CPointer<UInt32>): windows_core.RPC_STATUS {
+    return MesBufferHandleReset(Handle, HandleStyle, Operation, pBuffer, BufferSize, pEncodedSize)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_MesDecodeBufferHandleCreate == "on"]
+foreign {
     // param-hint: Buffer bytes=param[1]
     func MesDecodeBufferHandleCreate(Buffer: CPointer<UInt8>, BufferSize: UInt32, pHandle: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_MesDecodeBufferHandleCreate == "on"]
+public unsafe func Windows_MesDecodeBufferHandleCreate(Buffer: CPointer<UInt8>, BufferSize: UInt32, pHandle: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return MesDecodeBufferHandleCreate(Buffer, BufferSize, pHandle)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_MesDecodeIncrementalHandleCreate == "on"]
+foreign {
     func MesDecodeIncrementalHandleCreate(UserState: CPointer<Unit>, ReadFn: MIDL_ES_READ, pHandle: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_MesDecodeIncrementalHandleCreate == "on"]
+public unsafe func Windows_MesDecodeIncrementalHandleCreate(UserState: CPointer<Unit>, ReadFn: MIDL_ES_READ, pHandle: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return MesDecodeIncrementalHandleCreate(UserState, ReadFn, pHandle)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_MesEncodeDynBufferHandleCreate == "on"]
+foreign {
     func MesEncodeDynBufferHandleCreate(pBuffer: CPointer<CPointer<Int8>>, pEncodedSize: CPointer<UInt32>, pHandle: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_MesEncodeDynBufferHandleCreate == "on"]
+public unsafe func Windows_MesEncodeDynBufferHandleCreate(pBuffer: CPointer<CPointer<Int8>>, pEncodedSize: CPointer<UInt32>, pHandle: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return MesEncodeDynBufferHandleCreate(pBuffer, pEncodedSize, pHandle)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_MesEncodeFixedBufferHandleCreate == "on"]
+foreign {
     // param-hint: pBuffer bytes=param[1]
     func MesEncodeFixedBufferHandleCreate(pBuffer: CPointer<UInt8>, BufferSize: UInt32, pEncodedSize: CPointer<UInt32>, pHandle: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_MesEncodeFixedBufferHandleCreate == "on"]
+public unsafe func Windows_MesEncodeFixedBufferHandleCreate(pBuffer: CPointer<UInt8>, BufferSize: UInt32, pEncodedSize: CPointer<UInt32>, pHandle: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return MesEncodeFixedBufferHandleCreate(pBuffer, BufferSize, pEncodedSize, pHandle)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_MesEncodeIncrementalHandleCreate == "on"]
+foreign {
     func MesEncodeIncrementalHandleCreate(UserState: CPointer<Unit>, AllocFn: MIDL_ES_ALLOC, WriteFn: MIDL_ES_WRITE, pHandle: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_MesEncodeIncrementalHandleCreate == "on"]
+public unsafe func Windows_MesEncodeIncrementalHandleCreate(UserState: CPointer<Unit>, AllocFn: MIDL_ES_ALLOC, WriteFn: MIDL_ES_WRITE, pHandle: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return MesEncodeIncrementalHandleCreate(UserState, AllocFn, WriteFn, pHandle)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_MesHandleFree == "on"]
+foreign {
     func MesHandleFree(Handle: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_MesHandleFree == "on"]
+public unsafe func Windows_MesHandleFree(Handle: CPointer<Unit>): windows_core.RPC_STATUS {
+    return MesHandleFree(Handle)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_MesIncrementalHandleReset == "on"]
+foreign {
     func MesIncrementalHandleReset(Handle: CPointer<Unit>, UserState: CPointer<Unit>, AllocFn: MIDL_ES_ALLOC, WriteFn: MIDL_ES_WRITE, ReadFn: MIDL_ES_READ, Operation: MIDL_ES_CODEAbi): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_MesIncrementalHandleReset == "on"]
+public unsafe func Windows_MesIncrementalHandleReset(Handle: CPointer<Unit>, UserState: CPointer<Unit>, AllocFn: MIDL_ES_ALLOC, WriteFn: MIDL_ES_WRITE, ReadFn: MIDL_ES_READ, Operation: MIDL_ES_CODEAbi): windows_core.RPC_STATUS {
+    return MesIncrementalHandleReset(Handle, UserState, AllocFn, WriteFn, ReadFn, Operation)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_MesInqProcEncodingId == "on"]
+foreign {
     func MesInqProcEncodingId(Handle: CPointer<Unit>, pInterfaceId: CPointer<RPC_SYNTAX_IDENTIFIERAbi>, pProcNum: CPointer<UInt32>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_MesInqProcEncodingId == "on"]
+public unsafe func Windows_MesInqProcEncodingId(Handle: CPointer<Unit>, pInterfaceId: CPointer<RPC_SYNTAX_IDENTIFIERAbi>, pProcNum: CPointer<UInt32>): windows_core.RPC_STATUS {
+    return MesInqProcEncodingId(Handle, pInterfaceId, pProcNum)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NDRCContextBinding == "on"]
+foreign {
     func NDRCContextBinding(CContext: IntNative): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NDRCContextBinding == "on"]
+public unsafe func Windows_NDRCContextBinding(CContext: IntNative): CPointer<Unit> {
+    return NDRCContextBinding(CContext)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NDRCContextMarshall == "on"]
+foreign {
     // param-hint: CContext optional
     func NDRCContextMarshall(CContext: IntNative, pBuff: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NDRCContextMarshall == "on"]
+public unsafe func Windows_NDRCContextMarshall(CContext: IntNative, pBuff: CPointer<Unit>): Unit {
+    NDRCContextMarshall(CContext, pBuff)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NDRCContextUnmarshall == "on"]
+foreign {
     // param-hint: pCContext optional
     func NDRCContextUnmarshall(pCContext: CPointer<IntNative>, hBinding: CPointer<Unit>, pBuff: CPointer<Unit>, DataRepresentation: UInt32): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NDRCContextUnmarshall == "on"]
+public unsafe func Windows_NDRCContextUnmarshall(pCContext: CPointer<IntNative>, hBinding: CPointer<Unit>, pBuff: CPointer<Unit>, DataRepresentation: UInt32): Unit {
+    NDRCContextUnmarshall(pCContext, hBinding, pBuff, DataRepresentation)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NDRSContextMarshall == "on"]
+foreign {
     func NDRSContextMarshall(CContext: CPointer<NDR_SCONTEXTAbi>, pBuff: CPointer<Unit>, userRunDownIn: NDR_RUNDOWN): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NDRSContextMarshall == "on"]
+public unsafe func Windows_NDRSContextMarshall(CContext: CPointer<NDR_SCONTEXTAbi>, pBuff: CPointer<Unit>, userRunDownIn: NDR_RUNDOWN): Unit {
+    NDRSContextMarshall(CContext, pBuff, userRunDownIn)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NDRSContextMarshall2 == "on"]
+foreign {
     // param-hint: CtxGuard optional
     func NDRSContextMarshall2(BindingHandle: CPointer<Unit>, CContext: CPointer<NDR_SCONTEXTAbi>, pBuff: CPointer<Unit>, userRunDownIn: NDR_RUNDOWN, CtxGuard: CPointer<Unit>, Flags: UInt32): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NDRSContextMarshall2 == "on"]
+public unsafe func Windows_NDRSContextMarshall2(BindingHandle: CPointer<Unit>, CContext: CPointer<NDR_SCONTEXTAbi>, pBuff: CPointer<Unit>, userRunDownIn: NDR_RUNDOWN, CtxGuard: CPointer<Unit>, Flags: UInt32): Unit {
+    NDRSContextMarshall2(BindingHandle, CContext, pBuff, userRunDownIn, CtxGuard, Flags)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NDRSContextMarshallEx == "on"]
+foreign {
     func NDRSContextMarshallEx(BindingHandle: CPointer<Unit>, CContext: CPointer<NDR_SCONTEXTAbi>, pBuff: CPointer<Unit>, userRunDownIn: NDR_RUNDOWN): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NDRSContextMarshallEx == "on"]
+public unsafe func Windows_NDRSContextMarshallEx(BindingHandle: CPointer<Unit>, CContext: CPointer<NDR_SCONTEXTAbi>, pBuff: CPointer<Unit>, userRunDownIn: NDR_RUNDOWN): Unit {
+    NDRSContextMarshallEx(BindingHandle, CContext, pBuff, userRunDownIn)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NDRSContextUnmarshall == "on"]
+foreign {
     func NDRSContextUnmarshall(pBuff: CPointer<Unit>, DataRepresentation: UInt32): CPointer<NDR_SCONTEXTAbi>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NDRSContextUnmarshall == "on"]
+public unsafe func Windows_NDRSContextUnmarshall(pBuff: CPointer<Unit>, DataRepresentation: UInt32): CPointer<NDR_SCONTEXTAbi> {
+    return NDRSContextUnmarshall(pBuff, DataRepresentation)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NDRSContextUnmarshall2 == "on"]
+foreign {
     // param-hint: pBuff optional
     // param-hint: CtxGuard optional
     func NDRSContextUnmarshall2(BindingHandle: CPointer<Unit>, pBuff: CPointer<Unit>, DataRepresentation: UInt32, CtxGuard: CPointer<Unit>, Flags: UInt32): CPointer<NDR_SCONTEXTAbi>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NDRSContextUnmarshall2 == "on"]
+public unsafe func Windows_NDRSContextUnmarshall2(BindingHandle: CPointer<Unit>, pBuff: CPointer<Unit>, DataRepresentation: UInt32, CtxGuard: CPointer<Unit>, Flags: UInt32): CPointer<NDR_SCONTEXTAbi> {
+    return NDRSContextUnmarshall2(BindingHandle, pBuff, DataRepresentation, CtxGuard, Flags)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NDRSContextUnmarshallEx == "on"]
+foreign {
     func NDRSContextUnmarshallEx(BindingHandle: CPointer<Unit>, pBuff: CPointer<Unit>, DataRepresentation: UInt32): CPointer<NDR_SCONTEXTAbi>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NDRSContextUnmarshallEx == "on"]
+public unsafe func Windows_NDRSContextUnmarshallEx(BindingHandle: CPointer<Unit>, pBuff: CPointer<Unit>, DataRepresentation: UInt32): CPointer<NDR_SCONTEXTAbi> {
+    return NDRSContextUnmarshallEx(BindingHandle, pBuff, DataRepresentation)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_Ndr64AsyncServerCall64 == "on"]
+foreign {
     func Ndr64AsyncServerCall64(pRpcMsg: CPointer<RPC_MESSAGEAbi>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_Ndr64AsyncServerCall64 == "on"]
+public unsafe func Windows_Ndr64AsyncServerCall64(pRpcMsg: CPointer<RPC_MESSAGEAbi>): Unit {
+    Ndr64AsyncServerCall64(pRpcMsg)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_Ndr64AsyncServerCallAll == "on"]
+foreign {
     func Ndr64AsyncServerCallAll(pRpcMsg: CPointer<RPC_MESSAGEAbi>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_Ndr64AsyncServerCallAll == "on"]
+public unsafe func Windows_Ndr64AsyncServerCallAll(pRpcMsg: CPointer<RPC_MESSAGEAbi>): Unit {
+    Ndr64AsyncServerCallAll(pRpcMsg)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_Ndr64DcomAsyncStubCall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func Ndr64DcomAsyncStubCall(pThis: CPointer<Unit>, pChannel: CPointer<Unit>, pRpcMsg: CPointer<RPC_MESSAGEAbi>, pdwStubPhase: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_Ndr64DcomAsyncStubCall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_Ndr64DcomAsyncStubCall(pThis: CPointer<Unit>, pChannel: CPointer<Unit>, pRpcMsg: CPointer<RPC_MESSAGEAbi>, pdwStubPhase: CPointer<UInt32>): Int32 {
+    return Ndr64DcomAsyncStubCall(pThis, pChannel, pRpcMsg, pdwStubPhase)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrAllocate == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrAllocate(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, Len: UIntNative): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrAllocate == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrAllocate(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, Len: UIntNative): CPointer<Unit> {
+    return NdrAllocate(pStubMsg, Len)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrAsyncServerCall == "on"]
+foreign {
     func NdrAsyncServerCall(pRpcMsg: CPointer<RPC_MESSAGEAbi>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrAsyncServerCall == "on"]
+public unsafe func Windows_NdrAsyncServerCall(pRpcMsg: CPointer<RPC_MESSAGEAbi>): Unit {
+    NdrAsyncServerCall(pRpcMsg)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrByteCountPointerBufferSize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrByteCountPointerBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrByteCountPointerBufferSize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrByteCountPointerBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrByteCountPointerBufferSize(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrByteCountPointerFree == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrByteCountPointerFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrByteCountPointerFree == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrByteCountPointerFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrByteCountPointerFree(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrByteCountPointerMarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrByteCountPointerMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrByteCountPointerMarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrByteCountPointerMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8> {
+    return NdrByteCountPointerMarshall(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrByteCountPointerUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrByteCountPointerUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrByteCountPointerUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrByteCountPointerUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8> {
+    return NdrByteCountPointerUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrClearOutParameters == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrClearOutParameters(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>, ArgAddr: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrClearOutParameters == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrClearOutParameters(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>, ArgAddr: CPointer<Unit>): Unit {
+    NdrClearOutParameters(pStubMsg, pFormat, ArgAddr)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrClientContextMarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrClientContextMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ContextHandle: IntNative, fCheck: Int32): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrClientContextMarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrClientContextMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ContextHandle: IntNative, fCheck: Int32): Unit {
+    NdrClientContextMarshall(pStubMsg, ContextHandle, fCheck)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrClientContextUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrClientContextUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pContextHandle: CPointer<IntNative>, BindHandle: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrClientContextUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrClientContextUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pContextHandle: CPointer<IntNative>, BindHandle: CPointer<Unit>): Unit {
+    NdrClientContextUnmarshall(pStubMsg, pContextHandle, BindHandle)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrClientInitialize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrClientInitialize(pRpcMsg: CPointer<RPC_MESSAGEAbi>, pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pStubDescriptor: CPointer<MIDL_STUB_DESCAbi>, ProcNum: UInt32): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrClientInitialize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrClientInitialize(pRpcMsg: CPointer<RPC_MESSAGEAbi>, pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pStubDescriptor: CPointer<MIDL_STUB_DESCAbi>, ProcNum: UInt32): Unit {
+    NdrClientInitialize(pRpcMsg, pStubMsg, pStubDescriptor, ProcNum)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrClientInitializeNew == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrClientInitializeNew(pRpcMsg: CPointer<RPC_MESSAGEAbi>, pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pStubDescriptor: CPointer<MIDL_STUB_DESCAbi>, ProcNum: UInt32): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrClientInitializeNew == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrClientInitializeNew(pRpcMsg: CPointer<RPC_MESSAGEAbi>, pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pStubDescriptor: CPointer<MIDL_STUB_DESCAbi>, ProcNum: UInt32): Unit {
+    NdrClientInitializeNew(pRpcMsg, pStubMsg, pStubDescriptor, ProcNum)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrComplexArrayBufferSize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrComplexArrayBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrComplexArrayBufferSize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrComplexArrayBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrComplexArrayBufferSize(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrComplexArrayFree == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrComplexArrayFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrComplexArrayFree == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrComplexArrayFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrComplexArrayFree(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrComplexArrayMarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrComplexArrayMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrComplexArrayMarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrComplexArrayMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8> {
+    return NdrComplexArrayMarshall(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrComplexArrayMemorySize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrComplexArrayMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrComplexArrayMemorySize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrComplexArrayMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32 {
+    return NdrComplexArrayMemorySize(pStubMsg, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrComplexArrayUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrComplexArrayUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrComplexArrayUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrComplexArrayUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8> {
+    return NdrComplexArrayUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrComplexStructBufferSize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrComplexStructBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrComplexStructBufferSize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrComplexStructBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrComplexStructBufferSize(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrComplexStructFree == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrComplexStructFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrComplexStructFree == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrComplexStructFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrComplexStructFree(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrComplexStructMarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrComplexStructMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrComplexStructMarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrComplexStructMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8> {
+    return NdrComplexStructMarshall(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrComplexStructMemorySize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrComplexStructMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrComplexStructMemorySize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrComplexStructMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32 {
+    return NdrComplexStructMemorySize(pStubMsg, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrComplexStructUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrComplexStructUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrComplexStructUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrComplexStructUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8> {
+    return NdrComplexStructUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantArrayBufferSize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrConformantArrayBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantArrayBufferSize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrConformantArrayBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrConformantArrayBufferSize(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantArrayFree == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrConformantArrayFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantArrayFree == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrConformantArrayFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrConformantArrayFree(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantArrayMarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrConformantArrayMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantArrayMarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrConformantArrayMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8> {
+    return NdrConformantArrayMarshall(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantArrayMemorySize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrConformantArrayMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantArrayMemorySize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrConformantArrayMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32 {
+    return NdrConformantArrayMemorySize(pStubMsg, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantArrayUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrConformantArrayUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantArrayUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrConformantArrayUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8> {
+    return NdrConformantArrayUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantStringBufferSize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrConformantStringBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantStringBufferSize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrConformantStringBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrConformantStringBufferSize(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantStringMarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrConformantStringMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantStringMarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrConformantStringMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8> {
+    return NdrConformantStringMarshall(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantStringMemorySize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrConformantStringMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantStringMemorySize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrConformantStringMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32 {
+    return NdrConformantStringMemorySize(pStubMsg, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantStringUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrConformantStringUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantStringUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrConformantStringUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8> {
+    return NdrConformantStringUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantStructBufferSize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrConformantStructBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantStructBufferSize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrConformantStructBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrConformantStructBufferSize(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantStructFree == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrConformantStructFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantStructFree == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrConformantStructFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrConformantStructFree(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantStructMarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrConformantStructMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantStructMarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrConformantStructMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8> {
+    return NdrConformantStructMarshall(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantStructMemorySize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrConformantStructMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantStructMemorySize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrConformantStructMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32 {
+    return NdrConformantStructMemorySize(pStubMsg, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantStructUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrConformantStructUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantStructUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrConformantStructUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8> {
+    return NdrConformantStructUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantVaryingArrayBufferSize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrConformantVaryingArrayBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantVaryingArrayBufferSize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrConformantVaryingArrayBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrConformantVaryingArrayBufferSize(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantVaryingArrayFree == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrConformantVaryingArrayFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantVaryingArrayFree == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrConformantVaryingArrayFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrConformantVaryingArrayFree(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantVaryingArrayMarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrConformantVaryingArrayMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantVaryingArrayMarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrConformantVaryingArrayMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8> {
+    return NdrConformantVaryingArrayMarshall(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantVaryingArrayMemorySize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrConformantVaryingArrayMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantVaryingArrayMemorySize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrConformantVaryingArrayMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32 {
+    return NdrConformantVaryingArrayMemorySize(pStubMsg, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantVaryingArrayUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrConformantVaryingArrayUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantVaryingArrayUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrConformantVaryingArrayUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8> {
+    return NdrConformantVaryingArrayUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantVaryingStructBufferSize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrConformantVaryingStructBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantVaryingStructBufferSize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrConformantVaryingStructBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrConformantVaryingStructBufferSize(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantVaryingStructFree == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrConformantVaryingStructFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantVaryingStructFree == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrConformantVaryingStructFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrConformantVaryingStructFree(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantVaryingStructMarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrConformantVaryingStructMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantVaryingStructMarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrConformantVaryingStructMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8> {
+    return NdrConformantVaryingStructMarshall(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantVaryingStructMemorySize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrConformantVaryingStructMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantVaryingStructMemorySize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrConformantVaryingStructMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32 {
+    return NdrConformantVaryingStructMemorySize(pStubMsg, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantVaryingStructUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrConformantVaryingStructUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConformantVaryingStructUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrConformantVaryingStructUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8> {
+    return NdrConformantVaryingStructUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrContextHandleInitialize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrContextHandleInitialize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): CPointer<NDR_SCONTEXTAbi>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrContextHandleInitialize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrContextHandleInitialize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): CPointer<NDR_SCONTEXTAbi> {
+    return NdrContextHandleInitialize(pStubMsg, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrContextHandleSize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrContextHandleSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrContextHandleSize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrContextHandleSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrContextHandleSize(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConvert == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrConvert(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConvert == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrConvert(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): Unit {
+    NdrConvert(pStubMsg, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConvert2 == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrConvert2(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>, NumberParams: Int32): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrConvert2 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrConvert2(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>, NumberParams: Int32): Unit {
+    NdrConvert2(pStubMsg, pFormat, NumberParams)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrCorrelationFree == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrCorrelationFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrCorrelationFree == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrCorrelationFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>): Unit {
+    NdrCorrelationFree(pStubMsg)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrCorrelationInitialize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrCorrelationInitialize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<Unit>, CacheSize: UInt32, flags: UInt32): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrCorrelationInitialize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrCorrelationInitialize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<Unit>, CacheSize: UInt32, flags: UInt32): Unit {
+    NdrCorrelationInitialize(pStubMsg, pMemory, CacheSize, flags)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrCorrelationPass == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrCorrelationPass(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrCorrelationPass == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrCorrelationPass(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>): Unit {
+    NdrCorrelationPass(pStubMsg)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrCreateServerInterfaceFromStub == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrCreateServerInterfaceFromStub(pStub: CPointer<Unit>, pServerIf: CPointer<RPC_SERVER_INTERFACEAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrCreateServerInterfaceFromStub == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrCreateServerInterfaceFromStub(pStub: CPointer<Unit>, pServerIf: CPointer<RPC_SERVER_INTERFACEAbi>): windows_core.RPC_STATUS {
+    return NdrCreateServerInterfaceFromStub(pStub, pServerIf)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrDcomAsyncStubCall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrDcomAsyncStubCall(pThis: CPointer<Unit>, pChannel: CPointer<Unit>, pRpcMsg: CPointer<RPC_MESSAGEAbi>, pdwStubPhase: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrDcomAsyncStubCall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrDcomAsyncStubCall(pThis: CPointer<Unit>, pChannel: CPointer<Unit>, pRpcMsg: CPointer<RPC_MESSAGEAbi>, pdwStubPhase: CPointer<UInt32>): Int32 {
+    return NdrDcomAsyncStubCall(pThis, pChannel, pRpcMsg, pdwStubPhase)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrEncapsulatedUnionBufferSize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrEncapsulatedUnionBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrEncapsulatedUnionBufferSize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrEncapsulatedUnionBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrEncapsulatedUnionBufferSize(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrEncapsulatedUnionFree == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrEncapsulatedUnionFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrEncapsulatedUnionFree == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrEncapsulatedUnionFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrEncapsulatedUnionFree(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrEncapsulatedUnionMarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrEncapsulatedUnionMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrEncapsulatedUnionMarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrEncapsulatedUnionMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8> {
+    return NdrEncapsulatedUnionMarshall(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrEncapsulatedUnionMemorySize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrEncapsulatedUnionMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrEncapsulatedUnionMemorySize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrEncapsulatedUnionMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32 {
+    return NdrEncapsulatedUnionMemorySize(pStubMsg, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrEncapsulatedUnionUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrEncapsulatedUnionUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrEncapsulatedUnionUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrEncapsulatedUnionUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8> {
+    return NdrEncapsulatedUnionUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrFixedArrayBufferSize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrFixedArrayBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrFixedArrayBufferSize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrFixedArrayBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrFixedArrayBufferSize(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrFixedArrayFree == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrFixedArrayFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrFixedArrayFree == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrFixedArrayFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrFixedArrayFree(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrFixedArrayMarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrFixedArrayMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrFixedArrayMarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrFixedArrayMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8> {
+    return NdrFixedArrayMarshall(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrFixedArrayMemorySize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrFixedArrayMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrFixedArrayMemorySize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrFixedArrayMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32 {
+    return NdrFixedArrayMemorySize(pStubMsg, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrFixedArrayUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrFixedArrayUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrFixedArrayUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrFixedArrayUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8> {
+    return NdrFixedArrayUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrFreeBuffer == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrFreeBuffer(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrFreeBuffer == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrFreeBuffer(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>): Unit {
+    NdrFreeBuffer(pStubMsg)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrFullPointerXlatFree == "on"]
+foreign {
     func NdrFullPointerXlatFree(pXlatTables: CPointer<FULL_PTR_XLAT_TABLESAbi>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrFullPointerXlatFree == "on"]
+public unsafe func Windows_NdrFullPointerXlatFree(pXlatTables: CPointer<FULL_PTR_XLAT_TABLESAbi>): Unit {
+    NdrFullPointerXlatFree(pXlatTables)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrFullPointerXlatInit == "on"]
+foreign {
     func NdrFullPointerXlatInit(NumberOfPointers: UInt32, XlatSide: XLAT_SIDEAbi): CPointer<FULL_PTR_XLAT_TABLESAbi>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrFullPointerXlatInit == "on"]
+public unsafe func Windows_NdrFullPointerXlatInit(NumberOfPointers: UInt32, XlatSide: XLAT_SIDEAbi): CPointer<FULL_PTR_XLAT_TABLESAbi> {
+    return NdrFullPointerXlatInit(NumberOfPointers, XlatSide)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrGetBuffer == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrGetBuffer(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, BufferLength: UInt32, Handle: CPointer<Unit>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrGetBuffer == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrGetBuffer(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, BufferLength: UInt32, Handle: CPointer<Unit>): CPointer<UInt8> {
+    return NdrGetBuffer(pStubMsg, BufferLength, Handle)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrGetDcomProtocolVersion == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrGetDcomProtocolVersion(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pVersion: CPointer<RPC_VERSIONAbi>): Int32
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrGetDcomProtocolVersion == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrGetDcomProtocolVersion(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pVersion: CPointer<RPC_VERSIONAbi>): Int32 {
+    return NdrGetDcomProtocolVersion(pStubMsg, pVersion)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrGetUserMarshalInfo == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrGetUserMarshalInfo(pFlags: CPointer<UInt32>, InformationLevel: UInt32, pMarshalInfo: CPointer<NDR_USER_MARSHAL_INFOAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrGetUserMarshalInfo == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrGetUserMarshalInfo(pFlags: CPointer<UInt32>, InformationLevel: UInt32, pMarshalInfo: CPointer<NDR_USER_MARSHAL_INFOAbi>): windows_core.RPC_STATUS {
+    return NdrGetUserMarshalInfo(pFlags, InformationLevel, pMarshalInfo)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrInterfacePointerBufferSize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrInterfacePointerBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrInterfacePointerBufferSize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrInterfacePointerBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrInterfacePointerBufferSize(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrInterfacePointerFree == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrInterfacePointerFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrInterfacePointerFree == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrInterfacePointerFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrInterfacePointerFree(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrInterfacePointerMarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrInterfacePointerMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrInterfacePointerMarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrInterfacePointerMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8> {
+    return NdrInterfacePointerMarshall(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrInterfacePointerMemorySize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrInterfacePointerMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrInterfacePointerMemorySize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrInterfacePointerMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32 {
+    return NdrInterfacePointerMemorySize(pStubMsg, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrInterfacePointerUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrInterfacePointerUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrInterfacePointerUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrInterfacePointerUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8> {
+    return NdrInterfacePointerUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMapCommAndFaultStatus == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrMapCommAndFaultStatus(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pCommStatus: CPointer<UInt32>, pFaultStatus: CPointer<UInt32>, Status: windows_core.RPC_STATUS): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMapCommAndFaultStatus == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrMapCommAndFaultStatus(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pCommStatus: CPointer<UInt32>, pFaultStatus: CPointer<UInt32>, Status: windows_core.RPC_STATUS): windows_core.RPC_STATUS {
+    return NdrMapCommAndFaultStatus(pStubMsg, pCommStatus, pFaultStatus, Status)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesSimpleTypeAlignSize == "on"]
+foreign {
     func NdrMesSimpleTypeAlignSize(param0: CPointer<Unit>): UIntNative
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesSimpleTypeAlignSize == "on"]
+public unsafe func Windows_NdrMesSimpleTypeAlignSize(param0: CPointer<Unit>): UIntNative {
+    return NdrMesSimpleTypeAlignSize(param0)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesSimpleTypeAlignSizeAll == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrMesSimpleTypeAlignSizeAll(Handle: CPointer<Unit>, pProxyInfo: CPointer<MIDL_STUBLESS_PROXY_INFOAbi>): UIntNative
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesSimpleTypeAlignSizeAll == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrMesSimpleTypeAlignSizeAll(Handle: CPointer<Unit>, pProxyInfo: CPointer<MIDL_STUBLESS_PROXY_INFOAbi>): UIntNative {
+    return NdrMesSimpleTypeAlignSizeAll(Handle, pProxyInfo)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesSimpleTypeDecode == "on"]
+foreign {
     func NdrMesSimpleTypeDecode(Handle: CPointer<Unit>, pObject: CPointer<Unit>, Size: Int16): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesSimpleTypeDecode == "on"]
+public unsafe func Windows_NdrMesSimpleTypeDecode(Handle: CPointer<Unit>, pObject: CPointer<Unit>, Size: Int16): Unit {
+    NdrMesSimpleTypeDecode(Handle, pObject, Size)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesSimpleTypeDecodeAll == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrMesSimpleTypeDecodeAll(Handle: CPointer<Unit>, pProxyInfo: CPointer<MIDL_STUBLESS_PROXY_INFOAbi>, pObject: CPointer<Unit>, Size: Int16): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesSimpleTypeDecodeAll == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrMesSimpleTypeDecodeAll(Handle: CPointer<Unit>, pProxyInfo: CPointer<MIDL_STUBLESS_PROXY_INFOAbi>, pObject: CPointer<Unit>, Size: Int16): Unit {
+    NdrMesSimpleTypeDecodeAll(Handle, pProxyInfo, pObject, Size)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesSimpleTypeEncode == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrMesSimpleTypeEncode(Handle: CPointer<Unit>, pStubDesc: CPointer<MIDL_STUB_DESCAbi>, pObject: CPointer<Unit>, Size: Int16): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesSimpleTypeEncode == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrMesSimpleTypeEncode(Handle: CPointer<Unit>, pStubDesc: CPointer<MIDL_STUB_DESCAbi>, pObject: CPointer<Unit>, Size: Int16): Unit {
+    NdrMesSimpleTypeEncode(Handle, pStubDesc, pObject, Size)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesSimpleTypeEncodeAll == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrMesSimpleTypeEncodeAll(Handle: CPointer<Unit>, pProxyInfo: CPointer<MIDL_STUBLESS_PROXY_INFOAbi>, pObject: CPointer<Unit>, Size: Int16): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesSimpleTypeEncodeAll == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrMesSimpleTypeEncodeAll(Handle: CPointer<Unit>, pProxyInfo: CPointer<MIDL_STUBLESS_PROXY_INFOAbi>, pObject: CPointer<Unit>, Size: Int16): Unit {
+    NdrMesSimpleTypeEncodeAll(Handle, pProxyInfo, pObject, Size)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesTypeAlignSize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrMesTypeAlignSize(Handle: CPointer<Unit>, pStubDesc: CPointer<MIDL_STUB_DESCAbi>, pFormatString: CPointer<UInt8>, pObject: CPointer<Unit>): UIntNative
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesTypeAlignSize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrMesTypeAlignSize(Handle: CPointer<Unit>, pStubDesc: CPointer<MIDL_STUB_DESCAbi>, pFormatString: CPointer<UInt8>, pObject: CPointer<Unit>): UIntNative {
+    return NdrMesTypeAlignSize(Handle, pStubDesc, pFormatString, pObject)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesTypeAlignSize2 == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrMesTypeAlignSize2(Handle: CPointer<Unit>, pPicklingInfo: CPointer<MIDL_TYPE_PICKLING_INFOAbi>, pStubDesc: CPointer<MIDL_STUB_DESCAbi>, pFormatString: CPointer<UInt8>, pObject: CPointer<Unit>): UIntNative
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesTypeAlignSize2 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrMesTypeAlignSize2(Handle: CPointer<Unit>, pPicklingInfo: CPointer<MIDL_TYPE_PICKLING_INFOAbi>, pStubDesc: CPointer<MIDL_STUB_DESCAbi>, pFormatString: CPointer<UInt8>, pObject: CPointer<Unit>): UIntNative {
+    return NdrMesTypeAlignSize2(Handle, pPicklingInfo, pStubDesc, pFormatString, pObject)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesTypeAlignSize3 == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrMesTypeAlignSize3(Handle: CPointer<Unit>, pPicklingInfo: CPointer<MIDL_TYPE_PICKLING_INFOAbi>, pProxyInfo: CPointer<MIDL_STUBLESS_PROXY_INFOAbi>, ArrTypeOffset: CPointer<CPointer<UInt32>>, nTypeIndex: UInt32, pObject: CPointer<Unit>): UIntNative
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesTypeAlignSize3 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrMesTypeAlignSize3(Handle: CPointer<Unit>, pPicklingInfo: CPointer<MIDL_TYPE_PICKLING_INFOAbi>, pProxyInfo: CPointer<MIDL_STUBLESS_PROXY_INFOAbi>, ArrTypeOffset: CPointer<CPointer<UInt32>>, nTypeIndex: UInt32, pObject: CPointer<Unit>): UIntNative {
+    return NdrMesTypeAlignSize3(Handle, pPicklingInfo, pProxyInfo, ArrTypeOffset, nTypeIndex, pObject)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesTypeDecode == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrMesTypeDecode(Handle: CPointer<Unit>, pStubDesc: CPointer<MIDL_STUB_DESCAbi>, pFormatString: CPointer<UInt8>, pObject: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesTypeDecode == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrMesTypeDecode(Handle: CPointer<Unit>, pStubDesc: CPointer<MIDL_STUB_DESCAbi>, pFormatString: CPointer<UInt8>, pObject: CPointer<Unit>): Unit {
+    NdrMesTypeDecode(Handle, pStubDesc, pFormatString, pObject)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesTypeDecode2 == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrMesTypeDecode2(Handle: CPointer<Unit>, pPicklingInfo: CPointer<MIDL_TYPE_PICKLING_INFOAbi>, pStubDesc: CPointer<MIDL_STUB_DESCAbi>, pFormatString: CPointer<UInt8>, pObject: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesTypeDecode2 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrMesTypeDecode2(Handle: CPointer<Unit>, pPicklingInfo: CPointer<MIDL_TYPE_PICKLING_INFOAbi>, pStubDesc: CPointer<MIDL_STUB_DESCAbi>, pFormatString: CPointer<UInt8>, pObject: CPointer<Unit>): Unit {
+    NdrMesTypeDecode2(Handle, pPicklingInfo, pStubDesc, pFormatString, pObject)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesTypeDecode3 == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrMesTypeDecode3(Handle: CPointer<Unit>, pPicklingInfo: CPointer<MIDL_TYPE_PICKLING_INFOAbi>, pProxyInfo: CPointer<MIDL_STUBLESS_PROXY_INFOAbi>, ArrTypeOffset: CPointer<CPointer<UInt32>>, nTypeIndex: UInt32, pObject: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesTypeDecode3 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrMesTypeDecode3(Handle: CPointer<Unit>, pPicklingInfo: CPointer<MIDL_TYPE_PICKLING_INFOAbi>, pProxyInfo: CPointer<MIDL_STUBLESS_PROXY_INFOAbi>, ArrTypeOffset: CPointer<CPointer<UInt32>>, nTypeIndex: UInt32, pObject: CPointer<Unit>): Unit {
+    NdrMesTypeDecode3(Handle, pPicklingInfo, pProxyInfo, ArrTypeOffset, nTypeIndex, pObject)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesTypeEncode == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrMesTypeEncode(Handle: CPointer<Unit>, pStubDesc: CPointer<MIDL_STUB_DESCAbi>, pFormatString: CPointer<UInt8>, pObject: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesTypeEncode == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrMesTypeEncode(Handle: CPointer<Unit>, pStubDesc: CPointer<MIDL_STUB_DESCAbi>, pFormatString: CPointer<UInt8>, pObject: CPointer<Unit>): Unit {
+    NdrMesTypeEncode(Handle, pStubDesc, pFormatString, pObject)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesTypeEncode2 == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrMesTypeEncode2(Handle: CPointer<Unit>, pPicklingInfo: CPointer<MIDL_TYPE_PICKLING_INFOAbi>, pStubDesc: CPointer<MIDL_STUB_DESCAbi>, pFormatString: CPointer<UInt8>, pObject: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesTypeEncode2 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrMesTypeEncode2(Handle: CPointer<Unit>, pPicklingInfo: CPointer<MIDL_TYPE_PICKLING_INFOAbi>, pStubDesc: CPointer<MIDL_STUB_DESCAbi>, pFormatString: CPointer<UInt8>, pObject: CPointer<Unit>): Unit {
+    NdrMesTypeEncode2(Handle, pPicklingInfo, pStubDesc, pFormatString, pObject)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesTypeEncode3 == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrMesTypeEncode3(Handle: CPointer<Unit>, pPicklingInfo: CPointer<MIDL_TYPE_PICKLING_INFOAbi>, pProxyInfo: CPointer<MIDL_STUBLESS_PROXY_INFOAbi>, ArrTypeOffset: CPointer<CPointer<UInt32>>, nTypeIndex: UInt32, pObject: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesTypeEncode3 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrMesTypeEncode3(Handle: CPointer<Unit>, pPicklingInfo: CPointer<MIDL_TYPE_PICKLING_INFOAbi>, pProxyInfo: CPointer<MIDL_STUBLESS_PROXY_INFOAbi>, ArrTypeOffset: CPointer<CPointer<UInt32>>, nTypeIndex: UInt32, pObject: CPointer<Unit>): Unit {
+    NdrMesTypeEncode3(Handle, pPicklingInfo, pProxyInfo, ArrTypeOffset, nTypeIndex, pObject)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesTypeFree2 == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrMesTypeFree2(Handle: CPointer<Unit>, pPicklingInfo: CPointer<MIDL_TYPE_PICKLING_INFOAbi>, pStubDesc: CPointer<MIDL_STUB_DESCAbi>, pFormatString: CPointer<UInt8>, pObject: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesTypeFree2 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrMesTypeFree2(Handle: CPointer<Unit>, pPicklingInfo: CPointer<MIDL_TYPE_PICKLING_INFOAbi>, pStubDesc: CPointer<MIDL_STUB_DESCAbi>, pFormatString: CPointer<UInt8>, pObject: CPointer<Unit>): Unit {
+    NdrMesTypeFree2(Handle, pPicklingInfo, pStubDesc, pFormatString, pObject)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesTypeFree3 == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrMesTypeFree3(Handle: CPointer<Unit>, pPicklingInfo: CPointer<MIDL_TYPE_PICKLING_INFOAbi>, pProxyInfo: CPointer<MIDL_STUBLESS_PROXY_INFOAbi>, ArrTypeOffset: CPointer<CPointer<UInt32>>, nTypeIndex: UInt32, pObject: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrMesTypeFree3 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrMesTypeFree3(Handle: CPointer<Unit>, pPicklingInfo: CPointer<MIDL_TYPE_PICKLING_INFOAbi>, pProxyInfo: CPointer<MIDL_STUBLESS_PROXY_INFOAbi>, ArrTypeOffset: CPointer<CPointer<UInt32>>, nTypeIndex: UInt32, pObject: CPointer<Unit>): Unit {
+    NdrMesTypeFree3(Handle, pPicklingInfo, pProxyInfo, ArrTypeOffset, nTypeIndex, pObject)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrNonConformantStringBufferSize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrNonConformantStringBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrNonConformantStringBufferSize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrNonConformantStringBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrNonConformantStringBufferSize(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrNonConformantStringMarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrNonConformantStringMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrNonConformantStringMarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrNonConformantStringMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8> {
+    return NdrNonConformantStringMarshall(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrNonConformantStringMemorySize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrNonConformantStringMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrNonConformantStringMemorySize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrNonConformantStringMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32 {
+    return NdrNonConformantStringMemorySize(pStubMsg, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrNonConformantStringUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrNonConformantStringUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrNonConformantStringUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrNonConformantStringUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8> {
+    return NdrNonConformantStringUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrNonEncapsulatedUnionBufferSize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrNonEncapsulatedUnionBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrNonEncapsulatedUnionBufferSize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrNonEncapsulatedUnionBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrNonEncapsulatedUnionBufferSize(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrNonEncapsulatedUnionFree == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrNonEncapsulatedUnionFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrNonEncapsulatedUnionFree == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrNonEncapsulatedUnionFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrNonEncapsulatedUnionFree(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrNonEncapsulatedUnionMarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrNonEncapsulatedUnionMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrNonEncapsulatedUnionMarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrNonEncapsulatedUnionMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8> {
+    return NdrNonEncapsulatedUnionMarshall(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrNonEncapsulatedUnionMemorySize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrNonEncapsulatedUnionMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrNonEncapsulatedUnionMemorySize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrNonEncapsulatedUnionMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32 {
+    return NdrNonEncapsulatedUnionMemorySize(pStubMsg, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrNonEncapsulatedUnionUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrNonEncapsulatedUnionUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrNonEncapsulatedUnionUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrNonEncapsulatedUnionUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8> {
+    return NdrNonEncapsulatedUnionUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrNsGetBuffer == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrNsGetBuffer(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, BufferLength: UInt32, Handle: CPointer<Unit>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrNsGetBuffer == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrNsGetBuffer(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, BufferLength: UInt32, Handle: CPointer<Unit>): CPointer<UInt8> {
+    return NdrNsGetBuffer(pStubMsg, BufferLength, Handle)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrNsSendReceive == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrNsSendReceive(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pBufferEnd: CPointer<UInt8>, pAutoHandle: CPointer<CPointer<Unit>>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrNsSendReceive == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrNsSendReceive(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pBufferEnd: CPointer<UInt8>, pAutoHandle: CPointer<CPointer<Unit>>): CPointer<UInt8> {
+    return NdrNsSendReceive(pStubMsg, pBufferEnd, pAutoHandle)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrOleAllocate == "on"]
+foreign {
     func NdrOleAllocate(Size: UIntNative): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrOleAllocate == "on"]
+public unsafe func Windows_NdrOleAllocate(Size: UIntNative): CPointer<Unit> {
+    return NdrOleAllocate(Size)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrOleFree == "on"]
+foreign {
     func NdrOleFree(NodeToFree: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrOleFree == "on"]
+public unsafe func Windows_NdrOleFree(NodeToFree: CPointer<Unit>): Unit {
+    NdrOleFree(NodeToFree)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrPartialIgnoreClientBufferSize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrPartialIgnoreClientBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrPartialIgnoreClientBufferSize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrPartialIgnoreClientBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<Unit>): Unit {
+    NdrPartialIgnoreClientBufferSize(pStubMsg, pMemory)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrPartialIgnoreClientMarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrPartialIgnoreClientMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrPartialIgnoreClientMarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrPartialIgnoreClientMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<Unit>): Unit {
+    NdrPartialIgnoreClientMarshall(pStubMsg, pMemory)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrPartialIgnoreServerInitialize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrPartialIgnoreServerInitialize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<Unit>>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrPartialIgnoreServerInitialize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrPartialIgnoreServerInitialize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<Unit>>, pFormat: CPointer<UInt8>): Unit {
+    NdrPartialIgnoreServerInitialize(pStubMsg, ppMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrPartialIgnoreServerUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrPartialIgnoreServerUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<Unit>>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrPartialIgnoreServerUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrPartialIgnoreServerUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<Unit>>): Unit {
+    NdrPartialIgnoreServerUnmarshall(pStubMsg, ppMemory)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrPointerBufferSize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrPointerBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrPointerBufferSize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrPointerBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrPointerBufferSize(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrPointerFree == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrPointerFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrPointerFree == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrPointerFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrPointerFree(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrPointerMarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrPointerMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrPointerMarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrPointerMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8> {
+    return NdrPointerMarshall(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrPointerMemorySize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrPointerMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrPointerMemorySize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrPointerMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32 {
+    return NdrPointerMemorySize(pStubMsg, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrPointerUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrPointerUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrPointerUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrPointerUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8> {
+    return NdrPointerUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrRangeUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrRangeUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrRangeUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrRangeUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8> {
+    return NdrRangeUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrRpcSmClientAllocate == "on"]
+foreign {
     func NdrRpcSmClientAllocate(Size: UIntNative): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrRpcSmClientAllocate == "on"]
+public unsafe func Windows_NdrRpcSmClientAllocate(Size: UIntNative): CPointer<Unit> {
+    return NdrRpcSmClientAllocate(Size)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrRpcSmClientFree == "on"]
+foreign {
     func NdrRpcSmClientFree(NodeToFree: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrRpcSmClientFree == "on"]
+public unsafe func Windows_NdrRpcSmClientFree(NodeToFree: CPointer<Unit>): Unit {
+    NdrRpcSmClientFree(NodeToFree)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrRpcSmSetClientToOsf == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrRpcSmSetClientToOsf(pMessage: CPointer<MIDL_STUB_MESSAGEAbi>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrRpcSmSetClientToOsf == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrRpcSmSetClientToOsf(pMessage: CPointer<MIDL_STUB_MESSAGEAbi>): Unit {
+    NdrRpcSmSetClientToOsf(pMessage)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrRpcSsDefaultAllocate == "on"]
+foreign {
     func NdrRpcSsDefaultAllocate(Size: UIntNative): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrRpcSsDefaultAllocate == "on"]
+public unsafe func Windows_NdrRpcSsDefaultAllocate(Size: UIntNative): CPointer<Unit> {
+    return NdrRpcSsDefaultAllocate(Size)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrRpcSsDefaultFree == "on"]
+foreign {
     func NdrRpcSsDefaultFree(NodeToFree: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrRpcSsDefaultFree == "on"]
+public unsafe func Windows_NdrRpcSsDefaultFree(NodeToFree: CPointer<Unit>): Unit {
+    NdrRpcSsDefaultFree(NodeToFree)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrRpcSsDisableAllocate == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrRpcSsDisableAllocate(pMessage: CPointer<MIDL_STUB_MESSAGEAbi>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrRpcSsDisableAllocate == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrRpcSsDisableAllocate(pMessage: CPointer<MIDL_STUB_MESSAGEAbi>): Unit {
+    NdrRpcSsDisableAllocate(pMessage)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrRpcSsEnableAllocate == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrRpcSsEnableAllocate(pMessage: CPointer<MIDL_STUB_MESSAGEAbi>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrRpcSsEnableAllocate == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrRpcSsEnableAllocate(pMessage: CPointer<MIDL_STUB_MESSAGEAbi>): Unit {
+    NdrRpcSsEnableAllocate(pMessage)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrSendReceive == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrSendReceive(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pBufferEnd: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrSendReceive == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrSendReceive(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pBufferEnd: CPointer<UInt8>): CPointer<UInt8> {
+    return NdrSendReceive(pStubMsg, pBufferEnd)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrServerCall2 == "on"]
+foreign {
     func NdrServerCall2(pRpcMsg: CPointer<RPC_MESSAGEAbi>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrServerCall2 == "on"]
+public unsafe func Windows_NdrServerCall2(pRpcMsg: CPointer<RPC_MESSAGEAbi>): Unit {
+    NdrServerCall2(pRpcMsg)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrServerCallAll == "on"]
+foreign {
     func NdrServerCallAll(pRpcMsg: CPointer<RPC_MESSAGEAbi>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrServerCallAll == "on"]
+public unsafe func Windows_NdrServerCallAll(pRpcMsg: CPointer<RPC_MESSAGEAbi>): Unit {
+    NdrServerCallAll(pRpcMsg)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrServerCallNdr64 == "on"]
+foreign {
     func NdrServerCallNdr64(pRpcMsg: CPointer<RPC_MESSAGEAbi>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrServerCallNdr64 == "on"]
+public unsafe func Windows_NdrServerCallNdr64(pRpcMsg: CPointer<RPC_MESSAGEAbi>): Unit {
+    NdrServerCallNdr64(pRpcMsg)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrServerContextMarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrServerContextMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ContextHandle: CPointer<NDR_SCONTEXTAbi>, RundownRoutine: NDR_RUNDOWN): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrServerContextMarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrServerContextMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ContextHandle: CPointer<NDR_SCONTEXTAbi>, RundownRoutine: NDR_RUNDOWN): Unit {
+    NdrServerContextMarshall(pStubMsg, ContextHandle, RundownRoutine)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrServerContextNewMarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrServerContextNewMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ContextHandle: CPointer<NDR_SCONTEXTAbi>, RundownRoutine: NDR_RUNDOWN, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrServerContextNewMarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrServerContextNewMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ContextHandle: CPointer<NDR_SCONTEXTAbi>, RundownRoutine: NDR_RUNDOWN, pFormat: CPointer<UInt8>): Unit {
+    NdrServerContextNewMarshall(pStubMsg, ContextHandle, RundownRoutine, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrServerContextNewUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrServerContextNewUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): CPointer<NDR_SCONTEXTAbi>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrServerContextNewUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrServerContextNewUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): CPointer<NDR_SCONTEXTAbi> {
+    return NdrServerContextNewUnmarshall(pStubMsg, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrServerContextUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrServerContextUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>): CPointer<NDR_SCONTEXTAbi>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrServerContextUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrServerContextUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>): CPointer<NDR_SCONTEXTAbi> {
+    return NdrServerContextUnmarshall(pStubMsg)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrServerInitialize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrServerInitialize(pRpcMsg: CPointer<RPC_MESSAGEAbi>, pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pStubDescriptor: CPointer<MIDL_STUB_DESCAbi>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrServerInitialize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrServerInitialize(pRpcMsg: CPointer<RPC_MESSAGEAbi>, pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pStubDescriptor: CPointer<MIDL_STUB_DESCAbi>): CPointer<UInt8> {
+    return NdrServerInitialize(pRpcMsg, pStubMsg, pStubDescriptor)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrServerInitializeMarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrServerInitializeMarshall(pRpcMsg: CPointer<RPC_MESSAGEAbi>, pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrServerInitializeMarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrServerInitializeMarshall(pRpcMsg: CPointer<RPC_MESSAGEAbi>, pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>): Unit {
+    NdrServerInitializeMarshall(pRpcMsg, pStubMsg)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrServerInitializeNew == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrServerInitializeNew(pRpcMsg: CPointer<RPC_MESSAGEAbi>, pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pStubDescriptor: CPointer<MIDL_STUB_DESCAbi>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrServerInitializeNew == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrServerInitializeNew(pRpcMsg: CPointer<RPC_MESSAGEAbi>, pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pStubDescriptor: CPointer<MIDL_STUB_DESCAbi>): CPointer<UInt8> {
+    return NdrServerInitializeNew(pRpcMsg, pStubMsg, pStubDescriptor)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrServerInitializePartial == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrServerInitializePartial(pRpcMsg: CPointer<RPC_MESSAGEAbi>, pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pStubDescriptor: CPointer<MIDL_STUB_DESCAbi>, RequestedBufferSize: UInt32): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrServerInitializePartial == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrServerInitializePartial(pRpcMsg: CPointer<RPC_MESSAGEAbi>, pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pStubDescriptor: CPointer<MIDL_STUB_DESCAbi>, RequestedBufferSize: UInt32): Unit {
+    NdrServerInitializePartial(pRpcMsg, pStubMsg, pStubDescriptor, RequestedBufferSize)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrServerInitializeUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrServerInitializeUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pStubDescriptor: CPointer<MIDL_STUB_DESCAbi>, pRpcMsg: CPointer<RPC_MESSAGEAbi>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrServerInitializeUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrServerInitializeUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pStubDescriptor: CPointer<MIDL_STUB_DESCAbi>, pRpcMsg: CPointer<RPC_MESSAGEAbi>): CPointer<UInt8> {
+    return NdrServerInitializeUnmarshall(pStubMsg, pStubDescriptor, pRpcMsg)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrSimpleStructBufferSize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrSimpleStructBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrSimpleStructBufferSize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrSimpleStructBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrSimpleStructBufferSize(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrSimpleStructFree == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrSimpleStructFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrSimpleStructFree == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrSimpleStructFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrSimpleStructFree(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrSimpleStructMarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrSimpleStructMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrSimpleStructMarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrSimpleStructMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8> {
+    return NdrSimpleStructMarshall(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrSimpleStructMemorySize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrSimpleStructMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrSimpleStructMemorySize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrSimpleStructMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32 {
+    return NdrSimpleStructMemorySize(pStubMsg, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrSimpleStructUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrSimpleStructUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrSimpleStructUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrSimpleStructUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8> {
+    return NdrSimpleStructUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrSimpleTypeMarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrSimpleTypeMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, FormatChar: UInt8): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrSimpleTypeMarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrSimpleTypeMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, FormatChar: UInt8): Unit {
+    NdrSimpleTypeMarshall(pStubMsg, pMemory, FormatChar)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrSimpleTypeUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrSimpleTypeUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, FormatChar: UInt8): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrSimpleTypeUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrSimpleTypeUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, FormatChar: UInt8): Unit {
+    NdrSimpleTypeUnmarshall(pStubMsg, pMemory, FormatChar)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrStubCall2 == "on"]
+foreign {
     func NdrStubCall2(pThis: CPointer<Unit>, pChannel: CPointer<Unit>, pRpcMsg: CPointer<RPC_MESSAGEAbi>, pdwStubPhase: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrStubCall2 == "on"]
+public unsafe func Windows_NdrStubCall2(pThis: CPointer<Unit>, pChannel: CPointer<Unit>, pRpcMsg: CPointer<RPC_MESSAGEAbi>, pdwStubPhase: CPointer<UInt32>): Int32 {
+    return NdrStubCall2(pThis, pChannel, pRpcMsg, pdwStubPhase)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrStubCall3 == "on"]
+foreign {
     func NdrStubCall3(pThis: CPointer<Unit>, pChannel: CPointer<Unit>, pRpcMsg: CPointer<RPC_MESSAGEAbi>, pdwStubPhase: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrStubCall3 == "on"]
+public unsafe func Windows_NdrStubCall3(pThis: CPointer<Unit>, pChannel: CPointer<Unit>, pRpcMsg: CPointer<RPC_MESSAGEAbi>, pdwStubPhase: CPointer<UInt32>): Int32 {
+    return NdrStubCall3(pThis, pChannel, pRpcMsg, pdwStubPhase)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrUserMarshalBufferSize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrUserMarshalBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrUserMarshalBufferSize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrUserMarshalBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrUserMarshalBufferSize(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrUserMarshalFree == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrUserMarshalFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrUserMarshalFree == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrUserMarshalFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrUserMarshalFree(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrUserMarshalMarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrUserMarshalMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrUserMarshalMarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrUserMarshalMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8> {
+    return NdrUserMarshalMarshall(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrUserMarshalMemorySize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrUserMarshalMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrUserMarshalMemorySize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrUserMarshalMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32 {
+    return NdrUserMarshalMemorySize(pStubMsg, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrUserMarshalSimpleTypeConvert == "on"]
+foreign {
     func NdrUserMarshalSimpleTypeConvert(pFlags: CPointer<UInt32>, pBuffer: CPointer<UInt8>, FormatChar: UInt8): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrUserMarshalSimpleTypeConvert == "on"]
+public unsafe func Windows_NdrUserMarshalSimpleTypeConvert(pFlags: CPointer<UInt32>, pBuffer: CPointer<UInt8>, FormatChar: UInt8): CPointer<UInt8> {
+    return NdrUserMarshalSimpleTypeConvert(pFlags, pBuffer, FormatChar)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrUserMarshalUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrUserMarshalUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrUserMarshalUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrUserMarshalUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8> {
+    return NdrUserMarshalUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrVaryingArrayBufferSize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrVaryingArrayBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrVaryingArrayBufferSize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrVaryingArrayBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrVaryingArrayBufferSize(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrVaryingArrayFree == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrVaryingArrayFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrVaryingArrayFree == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrVaryingArrayFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrVaryingArrayFree(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrVaryingArrayMarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrVaryingArrayMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrVaryingArrayMarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrVaryingArrayMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8> {
+    return NdrVaryingArrayMarshall(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrVaryingArrayMemorySize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrVaryingArrayMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrVaryingArrayMemorySize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrVaryingArrayMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32 {
+    return NdrVaryingArrayMemorySize(pStubMsg, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrVaryingArrayUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrVaryingArrayUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrVaryingArrayUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrVaryingArrayUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8> {
+    return NdrVaryingArrayUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrXmitOrRepAsBufferSize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrXmitOrRepAsBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrXmitOrRepAsBufferSize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrXmitOrRepAsBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrXmitOrRepAsBufferSize(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrXmitOrRepAsFree == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrXmitOrRepAsFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrXmitOrRepAsFree == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrXmitOrRepAsFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit {
+    NdrXmitOrRepAsFree(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrXmitOrRepAsMarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrXmitOrRepAsMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrXmitOrRepAsMarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrXmitOrRepAsMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8> {
+    return NdrXmitOrRepAsMarshall(pStubMsg, pMemory, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrXmitOrRepAsMemorySize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrXmitOrRepAsMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrXmitOrRepAsMemorySize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrXmitOrRepAsMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32 {
+    return NdrXmitOrRepAsMemorySize(pStubMsg, pFormat)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrXmitOrRepAsUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func NdrXmitOrRepAsUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_NdrXmitOrRepAsUnmarshall == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_NdrXmitOrRepAsUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8> {
+    return NdrXmitOrRepAsUnmarshall(pStubMsg, ppMemory, pFormat, fMustAlloc)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcAsyncAbortCall == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    func RpcAsyncAbortCall(pAsync: CPointer<RPC_ASYNC_STATEAbi>, ExceptionCode: UInt32): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcAsyncAbortCall == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_RpcAsyncAbortCall(pAsync: CPointer<RPC_ASYNC_STATEAbi>, ExceptionCode: UInt32): windows_core.RPC_STATUS {
+    return RpcAsyncAbortCall(pAsync, ExceptionCode)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcAsyncCancelCall == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    func RpcAsyncCancelCall(pAsync: CPointer<RPC_ASYNC_STATEAbi>, fAbort: Int32): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcAsyncCancelCall == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_RpcAsyncCancelCall(pAsync: CPointer<RPC_ASYNC_STATEAbi>, fAbort: Int32): windows_core.RPC_STATUS {
+    return RpcAsyncCancelCall(pAsync, fAbort)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcAsyncCompleteCall == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    // param-hint: Reply optional
+    func RpcAsyncCompleteCall(pAsync: CPointer<RPC_ASYNC_STATEAbi>, Reply: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcAsyncCompleteCall == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_RpcAsyncCompleteCall(pAsync: CPointer<RPC_ASYNC_STATEAbi>, Reply: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcAsyncCompleteCall(pAsync, Reply)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcAsyncGetCallStatus == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    func RpcAsyncGetCallStatus(pAsync: CPointer<RPC_ASYNC_STATEAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcAsyncGetCallStatus == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_RpcAsyncGetCallStatus(pAsync: CPointer<RPC_ASYNC_STATEAbi>): windows_core.RPC_STATUS {
+    return RpcAsyncGetCallStatus(pAsync)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcAsyncInitializeHandle == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    // param-hint: pAsync bytes=param[1]
+    func RpcAsyncInitializeHandle(pAsync: CPointer<RPC_ASYNC_STATEAbi>, Size: UInt32): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcAsyncInitializeHandle == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_RpcAsyncInitializeHandle(pAsync: CPointer<RPC_ASYNC_STATEAbi>, Size: UInt32): windows_core.RPC_STATUS {
+    return RpcAsyncInitializeHandle(pAsync, Size)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcAsyncRegisterInfo == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    func RpcAsyncRegisterInfo(pAsync: CPointer<RPC_ASYNC_STATEAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcAsyncRegisterInfo == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_RpcAsyncRegisterInfo(pAsync: CPointer<RPC_ASYNC_STATEAbi>): windows_core.RPC_STATUS {
+    return RpcAsyncRegisterInfo(pAsync)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingBind == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    // param-hint: pAsync optional
+    func RpcBindingBind(pAsync: CPointer<RPC_ASYNC_STATEAbi>, Binding: CPointer<Unit>, IfSpec: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingBind == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_RpcBindingBind(pAsync: CPointer<RPC_ASYNC_STATEAbi>, Binding: CPointer<Unit>, IfSpec: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcBindingBind(pAsync, Binding, IfSpec)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingCopy == "on"]
+foreign {
     func RpcBindingCopy(SourceBinding: CPointer<Unit>, DestinationBinding: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingCopy == "on"]
+public unsafe func Windows_RpcBindingCopy(SourceBinding: CPointer<Unit>, DestinationBinding: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return RpcBindingCopy(SourceBinding, DestinationBinding)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingCreateA == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: Security optional
+    // param-hint: Options optional
+    func RpcBindingCreateA(Template: CPointer<RPC_BINDING_HANDLE_TEMPLATE_V1_AAbi>, Security: CPointer<RPC_BINDING_HANDLE_SECURITY_V1_AAbi>, Options: CPointer<RPC_BINDING_HANDLE_OPTIONS_V1Abi>, Binding: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingCreateA == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_RpcBindingCreateA(Template: CPointer<RPC_BINDING_HANDLE_TEMPLATE_V1_AAbi>, Security: CPointer<RPC_BINDING_HANDLE_SECURITY_V1_AAbi>, Options: CPointer<RPC_BINDING_HANDLE_OPTIONS_V1Abi>, Binding: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return RpcBindingCreateA(Template, Security, Options, Binding)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingCreateW == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: Security optional
+    // param-hint: Options optional
+    func RpcBindingCreateW(Template: CPointer<RPC_BINDING_HANDLE_TEMPLATE_V1_WAbi>, Security: CPointer<RPC_BINDING_HANDLE_SECURITY_V1_WAbi>, Options: CPointer<RPC_BINDING_HANDLE_OPTIONS_V1Abi>, Binding: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingCreateW == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_RpcBindingCreateW(Template: CPointer<RPC_BINDING_HANDLE_TEMPLATE_V1_WAbi>, Security: CPointer<RPC_BINDING_HANDLE_SECURITY_V1_WAbi>, Options: CPointer<RPC_BINDING_HANDLE_OPTIONS_V1Abi>, Binding: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return RpcBindingCreateW(Template, Security, Options, Binding)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingFree == "on"]
+foreign {
     func RpcBindingFree(Binding: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingFree == "on"]
+public unsafe func Windows_RpcBindingFree(Binding: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return RpcBindingFree(Binding)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingFromStringBindingA == "on"]
+foreign {
     func RpcBindingFromStringBindingA(StringBinding: CPointer<UInt8>, Binding: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingFromStringBindingA == "on"]
+public unsafe func Windows_RpcBindingFromStringBindingA(StringBinding: CPointer<UInt8>, Binding: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return RpcBindingFromStringBindingA(StringBinding, Binding)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingFromStringBindingW == "on"]
+foreign {
     func RpcBindingFromStringBindingW(StringBinding: CPointer<UInt16>, Binding: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingFromStringBindingW == "on"]
+public unsafe func Windows_RpcBindingFromStringBindingW(StringBinding: CPointer<UInt16>, Binding: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return RpcBindingFromStringBindingW(StringBinding, Binding)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingInqAuthClientA == "on"]
+foreign {
     // param-hint: ClientBinding optional
     // param-hint: ServerPrincName optional
     // param-hint: AuthnLevel optional
     // param-hint: AuthnSvc optional
     // param-hint: AuthzSvc optional
     func RpcBindingInqAuthClientA(ClientBinding: CPointer<Unit>, Privs: CPointer<CPointer<Unit>>, ServerPrincName: CPointer<CPointer<UInt8>>, AuthnLevel: CPointer<UInt32>, AuthnSvc: CPointer<UInt32>, AuthzSvc: CPointer<UInt32>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingInqAuthClientA == "on"]
+public unsafe func Windows_RpcBindingInqAuthClientA(ClientBinding: CPointer<Unit>, Privs: CPointer<CPointer<Unit>>, ServerPrincName: CPointer<CPointer<UInt8>>, AuthnLevel: CPointer<UInt32>, AuthnSvc: CPointer<UInt32>, AuthzSvc: CPointer<UInt32>): windows_core.RPC_STATUS {
+    return RpcBindingInqAuthClientA(ClientBinding, Privs, ServerPrincName, AuthnLevel, AuthnSvc, AuthzSvc)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingInqAuthClientExA == "on"]
+foreign {
     // param-hint: ClientBinding optional
     // param-hint: ServerPrincName optional
     // param-hint: AuthnLevel optional
     // param-hint: AuthnSvc optional
     // param-hint: AuthzSvc optional
     func RpcBindingInqAuthClientExA(ClientBinding: CPointer<Unit>, Privs: CPointer<CPointer<Unit>>, ServerPrincName: CPointer<CPointer<UInt8>>, AuthnLevel: CPointer<UInt32>, AuthnSvc: CPointer<UInt32>, AuthzSvc: CPointer<UInt32>, Flags: UInt32): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingInqAuthClientExA == "on"]
+public unsafe func Windows_RpcBindingInqAuthClientExA(ClientBinding: CPointer<Unit>, Privs: CPointer<CPointer<Unit>>, ServerPrincName: CPointer<CPointer<UInt8>>, AuthnLevel: CPointer<UInt32>, AuthnSvc: CPointer<UInt32>, AuthzSvc: CPointer<UInt32>, Flags: UInt32): windows_core.RPC_STATUS {
+    return RpcBindingInqAuthClientExA(ClientBinding, Privs, ServerPrincName, AuthnLevel, AuthnSvc, AuthzSvc, Flags)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingInqAuthClientExW == "on"]
+foreign {
     // param-hint: ClientBinding optional
     // param-hint: ServerPrincName optional
     // param-hint: AuthnLevel optional
     // param-hint: AuthnSvc optional
     // param-hint: AuthzSvc optional
     func RpcBindingInqAuthClientExW(ClientBinding: CPointer<Unit>, Privs: CPointer<CPointer<Unit>>, ServerPrincName: CPointer<CPointer<UInt16>>, AuthnLevel: CPointer<UInt32>, AuthnSvc: CPointer<UInt32>, AuthzSvc: CPointer<UInt32>, Flags: UInt32): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingInqAuthClientExW == "on"]
+public unsafe func Windows_RpcBindingInqAuthClientExW(ClientBinding: CPointer<Unit>, Privs: CPointer<CPointer<Unit>>, ServerPrincName: CPointer<CPointer<UInt16>>, AuthnLevel: CPointer<UInt32>, AuthnSvc: CPointer<UInt32>, AuthzSvc: CPointer<UInt32>, Flags: UInt32): windows_core.RPC_STATUS {
+    return RpcBindingInqAuthClientExW(ClientBinding, Privs, ServerPrincName, AuthnLevel, AuthnSvc, AuthzSvc, Flags)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingInqAuthClientW == "on"]
+foreign {
     // param-hint: ClientBinding optional
     // param-hint: ServerPrincName optional
     // param-hint: AuthnLevel optional
     // param-hint: AuthnSvc optional
     // param-hint: AuthzSvc optional
     func RpcBindingInqAuthClientW(ClientBinding: CPointer<Unit>, Privs: CPointer<CPointer<Unit>>, ServerPrincName: CPointer<CPointer<UInt16>>, AuthnLevel: CPointer<UInt32>, AuthnSvc: CPointer<UInt32>, AuthzSvc: CPointer<UInt32>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingInqAuthClientW == "on"]
+public unsafe func Windows_RpcBindingInqAuthClientW(ClientBinding: CPointer<Unit>, Privs: CPointer<CPointer<Unit>>, ServerPrincName: CPointer<CPointer<UInt16>>, AuthnLevel: CPointer<UInt32>, AuthnSvc: CPointer<UInt32>, AuthzSvc: CPointer<UInt32>): windows_core.RPC_STATUS {
+    return RpcBindingInqAuthClientW(ClientBinding, Privs, ServerPrincName, AuthnLevel, AuthnSvc, AuthzSvc)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingInqAuthInfoA == "on"]
+foreign {
     // param-hint: ServerPrincName optional
     // param-hint: AuthnLevel optional
     // param-hint: AuthnSvc optional
     // param-hint: AuthIdentity optional
     // param-hint: AuthzSvc optional
     func RpcBindingInqAuthInfoA(Binding: CPointer<Unit>, ServerPrincName: CPointer<CPointer<UInt8>>, AuthnLevel: CPointer<UInt32>, AuthnSvc: CPointer<UInt32>, AuthIdentity: CPointer<CPointer<Unit>>, AuthzSvc: CPointer<UInt32>): windows_core.RPC_STATUS
-    // param-hint: ServerPrincName optional
-    // param-hint: AuthnLevel optional
-    // param-hint: AuthnSvc optional
-    // param-hint: AuthIdentity optional
-    // param-hint: AuthzSvc optional
-    func RpcBindingInqAuthInfoW(Binding: CPointer<Unit>, ServerPrincName: CPointer<CPointer<UInt16>>, AuthnLevel: CPointer<UInt32>, AuthnSvc: CPointer<UInt32>, AuthIdentity: CPointer<CPointer<Unit>>, AuthzSvc: CPointer<UInt32>): windows_core.RPC_STATUS
-    func RpcBindingInqMaxCalls(Binding: CPointer<Unit>, MaxCalls: CPointer<UInt32>): windows_core.RPC_STATUS
-    func RpcBindingInqObject(Binding: CPointer<Unit>, ObjectUuid: CPointer<GUID>): windows_core.RPC_STATUS
-    func RpcBindingInqOption(hBinding: CPointer<Unit>, option: UInt32, pOptionValue: CPointer<UIntNative>): windows_core.RPC_STATUS
-    func RpcBindingReset(Binding: CPointer<Unit>): windows_core.RPC_STATUS
-    // param-hint: ClientBinding optional
-    func RpcBindingServerFromClient(ClientBinding: CPointer<Unit>, ServerBinding: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
-    // param-hint: ServerPrincName optional
-    // param-hint: AuthIdentity optional
-    func RpcBindingSetAuthInfoA(Binding: CPointer<Unit>, ServerPrincName: CPointer<UInt8>, AuthnLevel: UInt32, AuthnSvc: UInt32, AuthIdentity: CPointer<Unit>, AuthzSvc: UInt32): windows_core.RPC_STATUS
-    // param-hint: ServerPrincName optional
-    // param-hint: AuthIdentity optional
-    func RpcBindingSetAuthInfoW(Binding: CPointer<Unit>, ServerPrincName: CPointer<UInt16>, AuthnLevel: UInt32, AuthnSvc: UInt32, AuthIdentity: CPointer<Unit>, AuthzSvc: UInt32): windows_core.RPC_STATUS
-    func RpcBindingSetObject(Binding: CPointer<Unit>, ObjectUuid: CPointer<GUID>): windows_core.RPC_STATUS
-    func RpcBindingSetOption(hBinding: CPointer<Unit>, option: UInt32, optionValue: UIntNative): windows_core.RPC_STATUS
-    func RpcBindingToStringBindingA(Binding: CPointer<Unit>, StringBinding: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS
-    func RpcBindingToStringBindingW(Binding: CPointer<Unit>, StringBinding: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS
-    func RpcBindingUnbind(Binding: CPointer<Unit>): windows_core.RPC_STATUS
-    func RpcBindingVectorFree(BindingVector: CPointer<CPointer<RPC_BINDING_VECTORAbi>>): windows_core.RPC_STATUS
-    func RpcCancelThread(Thread: CPointer<Unit>): windows_core.RPC_STATUS
-    func RpcCancelThreadEx(Thread: CPointer<Unit>, Timeout: Int32): windows_core.RPC_STATUS
-    // param-hint: UuidVector optional
-    // param-hint: Annotation optional
-    func RpcEpRegisterA(IfSpec: CPointer<Unit>, BindingVector: CPointer<RPC_BINDING_VECTORAbi>, UuidVector: CPointer<UUID_VECTORAbi>, Annotation: CPointer<UInt8>): windows_core.RPC_STATUS
-    // param-hint: UuidVector optional
-    // param-hint: Annotation optional
-    func RpcEpRegisterNoReplaceA(IfSpec: CPointer<Unit>, BindingVector: CPointer<RPC_BINDING_VECTORAbi>, UuidVector: CPointer<UUID_VECTORAbi>, Annotation: CPointer<UInt8>): windows_core.RPC_STATUS
-    // param-hint: UuidVector optional
-    // param-hint: Annotation optional
-    func RpcEpRegisterNoReplaceW(IfSpec: CPointer<Unit>, BindingVector: CPointer<RPC_BINDING_VECTORAbi>, UuidVector: CPointer<UUID_VECTORAbi>, Annotation: CPointer<UInt16>): windows_core.RPC_STATUS
-    // param-hint: UuidVector optional
-    // param-hint: Annotation optional
-    func RpcEpRegisterW(IfSpec: CPointer<Unit>, BindingVector: CPointer<RPC_BINDING_VECTORAbi>, UuidVector: CPointer<UUID_VECTORAbi>, Annotation: CPointer<UInt16>): windows_core.RPC_STATUS
-    func RpcEpResolveBinding(Binding: CPointer<Unit>, IfSpec: CPointer<Unit>): windows_core.RPC_STATUS
-    // param-hint: UuidVector optional
-    func RpcEpUnregister(IfSpec: CPointer<Unit>, BindingVector: CPointer<RPC_BINDING_VECTORAbi>, UuidVector: CPointer<UUID_VECTORAbi>): windows_core.RPC_STATUS
-    func RpcErrorAddRecord(ErrorInfo: CPointer<RPC_EXTENDED_ERROR_INFOAbi>): windows_core.RPC_STATUS
-    func RpcErrorClearInformation(): Unit
-    func RpcErrorEndEnumeration(EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLEAbi>): windows_core.RPC_STATUS
-    func RpcErrorGetNextRecord(EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLEAbi>, CopyStrings: Int32, ErrorInfo: CPointer<RPC_EXTENDED_ERROR_INFOAbi>): windows_core.RPC_STATUS
-    func RpcErrorGetNumberOfRecords(EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLEAbi>, Records: CPointer<Int32>): windows_core.RPC_STATUS
-    // param-hint: ErrorBlob bytes=param[1]
-    func RpcErrorLoadErrorInfo(ErrorBlob: CPointer<Unit>, BlobSize: UIntNative, EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLEAbi>): windows_core.RPC_STATUS
-    func RpcErrorResetEnumeration(EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLEAbi>): windows_core.RPC_STATUS
-    func RpcErrorSaveErrorInfo(EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLEAbi>, ErrorBlob: CPointer<CPointer<Unit>>, BlobSize: CPointer<UIntNative>): windows_core.RPC_STATUS
-    func RpcErrorStartEnumeration(EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLEAbi>): windows_core.RPC_STATUS
-    func RpcExceptionFilter(ExceptionCode: UInt32): Int32
-    func RpcFreeAuthorizationContext(pAuthzClientContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
-    // param-hint: ClientBinding optional
-    // param-hint: Reserved1 optional
-    // param-hint: pExpirationTime optional
-    // param-hint: Reserved4 optional
-    func RpcGetAuthorizationContextForClient(ClientBinding: CPointer<Unit>, ImpersonateOnReturn: Int32, Reserved1: CPointer<Unit>, pExpirationTime: CPointer<Int64>, Reserved2: Win32_Foundation.LUIDAbi, Reserved3: UInt32, Reserved4: CPointer<Unit>, pAuthzClientContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
-    func RpcIfInqId(RpcIfHandle: CPointer<Unit>, RpcIfId: CPointer<RPC_IF_IDAbi>): windows_core.RPC_STATUS
-    // param-hint: BindingHandle optional
-    func RpcImpersonateClient(BindingHandle: CPointer<Unit>): windows_core.RPC_STATUS
-    // param-hint: BindingHandle optional
-    func RpcImpersonateClient2(BindingHandle: CPointer<Unit>): windows_core.RPC_STATUS
-    // param-hint: BindingHandle optional
-    func RpcImpersonateClientContainer(BindingHandle: CPointer<Unit>): windows_core.RPC_STATUS
-    func RpcMgmtEnableIdleCleanup(): windows_core.RPC_STATUS
-    // param-hint: EpBinding optional
-    // param-hint: IfId optional
-    // param-hint: VersOption optional
-    // param-hint: ObjectUuid optional
-    func RpcMgmtEpEltInqBegin(EpBinding: CPointer<Unit>, InquiryType: UInt32, IfId: CPointer<RPC_IF_IDAbi>, VersOption: UInt32, ObjectUuid: CPointer<GUID>, InquiryContext: CPointer<CPointer<CPointer<Unit>>>): windows_core.RPC_STATUS
-    func RpcMgmtEpEltInqDone(InquiryContext: CPointer<CPointer<CPointer<Unit>>>): windows_core.RPC_STATUS
-    // param-hint: Binding optional
-    // param-hint: ObjectUuid optional
-    // param-hint: Annotation optional
-    func RpcMgmtEpEltInqNextA(InquiryContext: CPointer<CPointer<Unit>>, IfId: CPointer<RPC_IF_IDAbi>, Binding: CPointer<CPointer<Unit>>, ObjectUuid: CPointer<GUID>, Annotation: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS
-    // param-hint: Binding optional
-    // param-hint: ObjectUuid optional
-    // param-hint: Annotation optional
-    func RpcMgmtEpEltInqNextW(InquiryContext: CPointer<CPointer<Unit>>, IfId: CPointer<RPC_IF_IDAbi>, Binding: CPointer<CPointer<Unit>>, ObjectUuid: CPointer<GUID>, Annotation: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS
-    // param-hint: EpBinding optional
-    // param-hint: ObjectUuid optional
-    func RpcMgmtEpUnregister(EpBinding: CPointer<Unit>, IfId: CPointer<RPC_IF_IDAbi>, Binding: CPointer<Unit>, ObjectUuid: CPointer<GUID>): windows_core.RPC_STATUS
-    func RpcMgmtInqComTimeout(Binding: CPointer<Unit>, Timeout: CPointer<UInt32>): windows_core.RPC_STATUS
-    func RpcMgmtInqDefaultProtectLevel(AuthnSvc: UInt32, AuthnLevel: CPointer<UInt32>): windows_core.RPC_STATUS
-    // param-hint: Binding optional
-    func RpcMgmtInqIfIds(Binding: CPointer<Unit>, IfIdVector: CPointer<CPointer<RPC_IF_ID_VECTORAbi>>): windows_core.RPC_STATUS
-    // param-hint: Binding optional
-    func RpcMgmtInqServerPrincNameA(Binding: CPointer<Unit>, AuthnSvc: UInt32, ServerPrincName: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS
-    // param-hint: Binding optional
-    func RpcMgmtInqServerPrincNameW(Binding: CPointer<Unit>, AuthnSvc: UInt32, ServerPrincName: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS
-    // param-hint: Binding optional
-    func RpcMgmtInqStats(Binding: CPointer<Unit>, Statistics: CPointer<CPointer<RPC_STATS_VECTORAbi>>): windows_core.RPC_STATUS
-    // param-hint: Binding optional
-    func RpcMgmtIsServerListening(Binding: CPointer<Unit>): windows_core.RPC_STATUS
-    func RpcMgmtSetAuthorizationFn(AuthorizationFn: RPC_MGMT_AUTHORIZATION_FN): windows_core.RPC_STATUS
-    func RpcMgmtSetCancelTimeout(Timeout: Int32): windows_core.RPC_STATUS
-    func RpcMgmtSetComTimeout(Binding: CPointer<Unit>, Timeout: UInt32): windows_core.RPC_STATUS
-    func RpcMgmtSetServerStackSize(ThreadStackSize: UInt32): windows_core.RPC_STATUS
-    func RpcMgmtStatsVectorFree(StatsVector: CPointer<CPointer<RPC_STATS_VECTORAbi>>): windows_core.RPC_STATUS
-    // param-hint: Binding optional
-    func RpcMgmtStopServerListening(Binding: CPointer<Unit>): windows_core.RPC_STATUS
-    func RpcMgmtWaitServerListen(): windows_core.RPC_STATUS
-    func RpcNetworkInqProtseqsA(ProtseqVector: CPointer<CPointer<RPC_PROTSEQ_VECTORAAbi>>): windows_core.RPC_STATUS
-    func RpcNetworkInqProtseqsW(ProtseqVector: CPointer<CPointer<RPC_PROTSEQ_VECTORWAbi>>): windows_core.RPC_STATUS
-    func RpcNetworkIsProtseqValidA(Protseq: CPointer<UInt8>): windows_core.RPC_STATUS
-    func RpcNetworkIsProtseqValidW(Protseq: CPointer<UInt16>): windows_core.RPC_STATUS
-    func RpcNsBindingInqEntryNameA(Binding: CPointer<Unit>, EntryNameSyntax: UInt32, EntryName: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS
-    func RpcNsBindingInqEntryNameW(Binding: CPointer<Unit>, EntryNameSyntax: UInt32, EntryName: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS
-    // param-hint: TypeUuid optional
-    func RpcObjectInqType(ObjUuid: CPointer<GUID>, TypeUuid: CPointer<GUID>): windows_core.RPC_STATUS
-    func RpcObjectSetInqFn(InquiryFn: RPC_OBJECT_INQ_FN): windows_core.RPC_STATUS
-    // param-hint: TypeUuid optional
-    func RpcObjectSetType(ObjUuid: CPointer<GUID>, TypeUuid: CPointer<GUID>): windows_core.RPC_STATUS
-    func RpcProtseqVectorFreeA(ProtseqVector: CPointer<CPointer<RPC_PROTSEQ_VECTORAAbi>>): windows_core.RPC_STATUS
-    func RpcProtseqVectorFreeW(ProtseqVector: CPointer<CPointer<RPC_PROTSEQ_VECTORWAbi>>): windows_core.RPC_STATUS
-    func RpcRaiseException(exception: windows_core.RPC_STATUS): Unit
-    func RpcRevertContainerImpersonation(): windows_core.RPC_STATUS
-    func RpcRevertToSelf(): windows_core.RPC_STATUS
-    // param-hint: BindingHandle optional
-    func RpcRevertToSelfEx(BindingHandle: CPointer<Unit>): windows_core.RPC_STATUS
-    func RpcServerCompleteSecurityCallback(BindingHandle: CPointer<Unit>, Status: windows_core.RPC_STATUS): windows_core.RPC_STATUS
-    func RpcServerInqBindingHandle(Binding: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
-    func RpcServerInqBindings(BindingVector: CPointer<CPointer<RPC_BINDING_VECTORAbi>>): windows_core.RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerInqBindingsEx(SecurityDescriptor: CPointer<Unit>, BindingVector: CPointer<CPointer<RPC_BINDING_VECTORAbi>>): windows_core.RPC_STATUS
-    // param-hint: ClientBinding optional
-    func RpcServerInqCallAttributesA(ClientBinding: CPointer<Unit>, RpcCallAttributes: CPointer<Unit>): windows_core.RPC_STATUS
-    // param-hint: ClientBinding optional
-    func RpcServerInqCallAttributesW(ClientBinding: CPointer<Unit>, RpcCallAttributes: CPointer<Unit>): windows_core.RPC_STATUS
-    func RpcServerInqDefaultPrincNameA(AuthnSvc: UInt32, PrincName: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS
-    func RpcServerInqDefaultPrincNameW(AuthnSvc: UInt32, PrincName: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS
-    // param-hint: MgrTypeUuid optional
-    func RpcServerInqIf(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, MgrEpv: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
-    func RpcServerInterfaceGroupActivate(IfGroup: CPointer<Unit>): windows_core.RPC_STATUS
-    func RpcServerInterfaceGroupClose(IfGroup: CPointer<Unit>): windows_core.RPC_STATUS
-    // param-hint: Interfaces len=param[1]
-    // param-hint: Endpoints len=param[3]
-    func RpcServerInterfaceGroupCreateA(Interfaces: CPointer<RPC_INTERFACE_TEMPLATEAAbi>, NumIfs: UInt32, Endpoints: CPointer<RPC_ENDPOINT_TEMPLATEAAbi>, NumEndpoints: UInt32, IdlePeriod: UInt32, IdleCallbackFn: RPC_INTERFACE_GROUP_IDLE_CALLBACK_FN, IdleCallbackContext: CPointer<Unit>, IfGroup: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
-    // param-hint: Interfaces len=param[1]
-    // param-hint: Endpoints len=param[3]
-    func RpcServerInterfaceGroupCreateW(Interfaces: CPointer<RPC_INTERFACE_TEMPLATEWAbi>, NumIfs: UInt32, Endpoints: CPointer<RPC_ENDPOINT_TEMPLATEWAbi>, NumEndpoints: UInt32, IdlePeriod: UInt32, IdleCallbackFn: RPC_INTERFACE_GROUP_IDLE_CALLBACK_FN, IdleCallbackContext: CPointer<Unit>, IfGroup: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
-    func RpcServerInterfaceGroupDeactivate(IfGroup: CPointer<Unit>, ForceDeactivation: UInt32): windows_core.RPC_STATUS
-    func RpcServerInterfaceGroupInqBindings(IfGroup: CPointer<Unit>, BindingVector: CPointer<CPointer<RPC_BINDING_VECTORAbi>>): windows_core.RPC_STATUS
-    func RpcServerListen(MinimumCallThreads: UInt32, MaxCalls: UInt32, DontWait: UInt32): windows_core.RPC_STATUS
-    // param-hint: ServerPrincName optional
-    // param-hint: GetKeyFn optional
-    // param-hint: Arg optional
-    func RpcServerRegisterAuthInfoA(ServerPrincName: CPointer<UInt8>, AuthnSvc: UInt32, GetKeyFn: RPC_AUTH_KEY_RETRIEVAL_FN, Arg: CPointer<Unit>): windows_core.RPC_STATUS
-    // param-hint: ServerPrincName optional
-    // param-hint: GetKeyFn optional
-    // param-hint: Arg optional
-    func RpcServerRegisterAuthInfoW(ServerPrincName: CPointer<UInt16>, AuthnSvc: UInt32, GetKeyFn: RPC_AUTH_KEY_RETRIEVAL_FN, Arg: CPointer<Unit>): windows_core.RPC_STATUS
-    // param-hint: MgrTypeUuid optional
-    // param-hint: MgrEpv optional
-    func RpcServerRegisterIf(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, MgrEpv: CPointer<Unit>): windows_core.RPC_STATUS
-    // param-hint: MgrTypeUuid optional
-    // param-hint: MgrEpv optional
-    // param-hint: IfCallbackFn optional
-    func RpcServerRegisterIf2(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, MgrEpv: CPointer<Unit>, Flags: UInt32, MaxCalls: UInt32, MaxRpcSize: UInt32, IfCallbackFn: RPC_IF_CALLBACK_FN): windows_core.RPC_STATUS
-    // param-hint: MgrTypeUuid optional
-    // param-hint: MgrEpv optional
-    // param-hint: IfCallback optional
-    // param-hint: SecurityDescriptor optional
-    func RpcServerRegisterIf3(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, MgrEpv: CPointer<Unit>, Flags: UInt32, MaxCalls: UInt32, MaxRpcSize: UInt32, IfCallback: RPC_IF_CALLBACK_FN, SecurityDescriptor: CPointer<Unit>): windows_core.RPC_STATUS
-    // param-hint: MgrTypeUuid optional
-    // param-hint: MgrEpv optional
-    // param-hint: IfCallback optional
-    func RpcServerRegisterIfEx(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, MgrEpv: CPointer<Unit>, Flags: UInt32, MaxCalls: UInt32, IfCallback: RPC_IF_CALLBACK_FN): windows_core.RPC_STATUS
-    // param-hint: BindingHandle optional
-    func RpcServerTestCancel(BindingHandle: CPointer<Unit>): windows_core.RPC_STATUS
-    // param-hint: IfSpec optional
-    // param-hint: MgrTypeUuid optional
-    func RpcServerUnregisterIf(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, WaitForCallsToComplete: UInt32): windows_core.RPC_STATUS
-    // param-hint: IfSpec optional
-    // param-hint: MgrTypeUuid optional
-    func RpcServerUnregisterIfEx(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, RundownContextHandles: Int32): windows_core.RPC_STATUS
-    // param-hint: Binding optional
-    func RpcServerUnsubscribeForNotification(Binding: CPointer<Unit>, Notification: RPC_NOTIFICATIONSAbi, NotificationsQueued: CPointer<UInt32>): windows_core.RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerUseAllProtseqs(MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>): windows_core.RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerUseAllProtseqsEx(MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICYAbi>): windows_core.RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerUseAllProtseqsIf(MaxCalls: UInt32, IfSpec: CPointer<Unit>, SecurityDescriptor: CPointer<Unit>): windows_core.RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerUseAllProtseqsIfEx(MaxCalls: UInt32, IfSpec: CPointer<Unit>, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICYAbi>): windows_core.RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerUseProtseqA(Protseq: CPointer<UInt8>, MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>): windows_core.RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerUseProtseqEpA(Protseq: CPointer<UInt8>, MaxCalls: UInt32, Endpoint: CPointer<UInt8>, SecurityDescriptor: CPointer<Unit>): windows_core.RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerUseProtseqEpExA(Protseq: CPointer<UInt8>, MaxCalls: UInt32, Endpoint: CPointer<UInt8>, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICYAbi>): windows_core.RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerUseProtseqEpExW(Protseq: CPointer<UInt16>, MaxCalls: UInt32, Endpoint: CPointer<UInt16>, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICYAbi>): windows_core.RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerUseProtseqEpW(Protseq: CPointer<UInt16>, MaxCalls: UInt32, Endpoint: CPointer<UInt16>, SecurityDescriptor: CPointer<Unit>): windows_core.RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerUseProtseqExA(Protseq: CPointer<UInt8>, MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICYAbi>): windows_core.RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerUseProtseqExW(Protseq: CPointer<UInt16>, MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICYAbi>): windows_core.RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerUseProtseqIfA(Protseq: CPointer<UInt8>, MaxCalls: UInt32, IfSpec: CPointer<Unit>, SecurityDescriptor: CPointer<Unit>): windows_core.RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerUseProtseqIfExA(Protseq: CPointer<UInt8>, MaxCalls: UInt32, IfSpec: CPointer<Unit>, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICYAbi>): windows_core.RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerUseProtseqIfExW(Protseq: CPointer<UInt16>, MaxCalls: UInt32, IfSpec: CPointer<Unit>, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICYAbi>): windows_core.RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerUseProtseqIfW(Protseq: CPointer<UInt16>, MaxCalls: UInt32, IfSpec: CPointer<Unit>, SecurityDescriptor: CPointer<Unit>): windows_core.RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerUseProtseqW(Protseq: CPointer<UInt16>, MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>): windows_core.RPC_STATUS
-    func RpcServerYield(): Unit
-    func RpcSmAllocate(Size: UIntNative, pStatus: CPointer<windows_core.RPC_STATUS>): CPointer<Unit>
-    func RpcSmClientFree(pNodeToFree: CPointer<Unit>): windows_core.RPC_STATUS
-    func RpcSmDestroyClientContext(ContextHandle: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
-    func RpcSmDisableAllocate(): windows_core.RPC_STATUS
-    func RpcSmEnableAllocate(): windows_core.RPC_STATUS
-    func RpcSmFree(NodeToFree: CPointer<Unit>): windows_core.RPC_STATUS
-    func RpcSmGetThreadHandle(pStatus: CPointer<windows_core.RPC_STATUS>): CPointer<Unit>
-    func RpcSmSetClientAllocFree(ClientAlloc: RPC_CLIENT_ALLOC, ClientFree: RPC_CLIENT_FREE): windows_core.RPC_STATUS
-    func RpcSmSetThreadHandle(Id: CPointer<Unit>): windows_core.RPC_STATUS
-    func RpcSmSwapClientAllocFree(ClientAlloc: RPC_CLIENT_ALLOC, ClientFree: RPC_CLIENT_FREE, OldClientAlloc: CPointer<RPC_CLIENT_ALLOC>, OldClientFree: CPointer<RPC_CLIENT_FREE>): windows_core.RPC_STATUS
-    func RpcSsAllocate(Size: UIntNative): CPointer<Unit>
-    // param-hint: ServerBindingHandle optional
-    func RpcSsContextLockExclusive(ServerBindingHandle: CPointer<Unit>, UserContext: CPointer<Unit>): windows_core.RPC_STATUS
-    func RpcSsContextLockShared(ServerBindingHandle: CPointer<Unit>, UserContext: CPointer<Unit>): windows_core.RPC_STATUS
-    func RpcSsDestroyClientContext(ContextHandle: CPointer<CPointer<Unit>>): Unit
-    func RpcSsDisableAllocate(): Unit
-    func RpcSsDontSerializeContext(): Unit
-    func RpcSsEnableAllocate(): Unit
-    func RpcSsFree(NodeToFree: CPointer<Unit>): Unit
-    func RpcSsGetContextBinding(ContextHandle: CPointer<Unit>, Binding: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
-    func RpcSsGetThreadHandle(): CPointer<Unit>
-    func RpcSsSetClientAllocFree(ClientAlloc: RPC_CLIENT_ALLOC, ClientFree: RPC_CLIENT_FREE): Unit
-    func RpcSsSetThreadHandle(Id: CPointer<Unit>): Unit
-    func RpcSsSwapClientAllocFree(ClientAlloc: RPC_CLIENT_ALLOC, ClientFree: RPC_CLIENT_FREE, OldClientAlloc: CPointer<RPC_CLIENT_ALLOC>, OldClientFree: CPointer<RPC_CLIENT_FREE>): Unit
-    // param-hint: ObjUuid optional
-    // param-hint: ProtSeq optional
-    // param-hint: NetworkAddr optional
-    // param-hint: Endpoint optional
-    // param-hint: Options optional
-    // param-hint: StringBinding optional
-    func RpcStringBindingComposeA(ObjUuid: CPointer<UInt8>, ProtSeq: CPointer<UInt8>, NetworkAddr: CPointer<UInt8>, Endpoint: CPointer<UInt8>, Options: CPointer<UInt8>, StringBinding: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS
-    // param-hint: ObjUuid optional
-    // param-hint: ProtSeq optional
-    // param-hint: NetworkAddr optional
-    // param-hint: Endpoint optional
-    // param-hint: Options optional
-    // param-hint: StringBinding optional
-    func RpcStringBindingComposeW(ObjUuid: CPointer<UInt16>, ProtSeq: CPointer<UInt16>, NetworkAddr: CPointer<UInt16>, Endpoint: CPointer<UInt16>, Options: CPointer<UInt16>, StringBinding: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS
-    // param-hint: ObjUuid optional
-    // param-hint: Protseq optional
-    // param-hint: NetworkAddr optional
-    // param-hint: Endpoint optional
-    // param-hint: NetworkOptions optional
-    func RpcStringBindingParseA(StringBinding: CPointer<UInt8>, ObjUuid: CPointer<CPointer<UInt8>>, Protseq: CPointer<CPointer<UInt8>>, NetworkAddr: CPointer<CPointer<UInt8>>, Endpoint: CPointer<CPointer<UInt8>>, NetworkOptions: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS
-    // param-hint: ObjUuid optional
-    // param-hint: Protseq optional
-    // param-hint: NetworkAddr optional
-    // param-hint: Endpoint optional
-    // param-hint: NetworkOptions optional
-    func RpcStringBindingParseW(StringBinding: CPointer<UInt16>, ObjUuid: CPointer<CPointer<UInt16>>, Protseq: CPointer<CPointer<UInt16>>, NetworkAddr: CPointer<CPointer<UInt16>>, Endpoint: CPointer<CPointer<UInt16>>, NetworkOptions: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS
-    func RpcStringFreeA(String: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS
-    func RpcStringFreeW(String: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS
-    func RpcTestCancel(): windows_core.RPC_STATUS
-    func RpcUserFree(AsyncHandle: CPointer<Unit>, pBuffer: CPointer<Unit>): Unit
-    func UuidCompare(Uuid1: CPointer<GUID>, Uuid2: CPointer<GUID>, Status: CPointer<windows_core.RPC_STATUS>): Int32
-    func UuidCreate(Uuid: CPointer<GUID>): windows_core.RPC_STATUS
-    func UuidCreateNil(NilUuid: CPointer<GUID>): windows_core.RPC_STATUS
-    func UuidCreateSequential(Uuid: CPointer<GUID>): windows_core.RPC_STATUS
-    func UuidEqual(Uuid1: CPointer<GUID>, Uuid2: CPointer<GUID>, Status: CPointer<windows_core.RPC_STATUS>): Int32
-    // param-hint: StringUuid optional
-    func UuidFromStringA(StringUuid: CPointer<UInt8>, Uuid: CPointer<GUID>): windows_core.RPC_STATUS
-    // param-hint: StringUuid optional
-    func UuidFromStringW(StringUuid: CPointer<UInt16>, Uuid: CPointer<GUID>): windows_core.RPC_STATUS
-    func UuidHash(Uuid: CPointer<GUID>, Status: CPointer<windows_core.RPC_STATUS>): UInt16
-    func UuidIsNil(Uuid: CPointer<GUID>, Status: CPointer<windows_core.RPC_STATUS>): Int32
-    func UuidToStringA(Uuid: CPointer<GUID>, StringUuid: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS
-    func UuidToStringW(Uuid: CPointer<GUID>, StringUuid: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS
 }
 
-@When[RPCRT4 == "on" && Windows_Win32_Security_Cryptography == "on"]
-foreign {
-    func RpcCertGeneratePrincipalNameA(Context: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, Flags: UInt32, pBuffer: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS
-    func RpcCertGeneratePrincipalNameW(Context: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, Flags: UInt32, pBuffer: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingInqAuthInfoA == "on"]
+public unsafe func Windows_RpcBindingInqAuthInfoA(Binding: CPointer<Unit>, ServerPrincName: CPointer<CPointer<UInt8>>, AuthnLevel: CPointer<UInt32>, AuthnSvc: CPointer<UInt32>, AuthIdentity: CPointer<CPointer<Unit>>, AuthzSvc: CPointer<UInt32>): windows_core.RPC_STATUS {
+    return RpcBindingInqAuthInfoA(Binding, ServerPrincName, AuthnLevel, AuthnSvc, AuthIdentity, AuthzSvc)
 }
 
-@When[RPCRT4 == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingInqAuthInfoExA == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func IUnknown_AddRef_Proxy(This_: CPointer<Unit>): UInt32
-    func IUnknown_QueryInterface_Proxy(This_: CPointer<Unit>, riid: CPointer<GUID>, ppvObject: CPointer<CPointer<Unit>>): Int32
-    func IUnknown_Release_Proxy(This_: CPointer<Unit>): UInt32
-    func Ndr64DcomAsyncStubCall(pThis: CPointer<Unit>, pChannel: CPointer<Unit>, pRpcMsg: CPointer<RPC_MESSAGEAbi>, pdwStubPhase: CPointer<UInt32>): Int32
-    func NdrAllocate(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, Len: UIntNative): CPointer<Unit>
-    func NdrByteCountPointerBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrByteCountPointerFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrByteCountPointerMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
-    func NdrByteCountPointerUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
-    func NdrClearOutParameters(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>, ArgAddr: CPointer<Unit>): Unit
-    func NdrClientContextMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ContextHandle: IntNative, fCheck: Int32): Unit
-    func NdrClientContextUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pContextHandle: CPointer<IntNative>, BindHandle: CPointer<Unit>): Unit
-    func NdrClientInitialize(pRpcMsg: CPointer<RPC_MESSAGEAbi>, pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pStubDescriptor: CPointer<MIDL_STUB_DESCAbi>, ProcNum: UInt32): Unit
-    func NdrClientInitializeNew(pRpcMsg: CPointer<RPC_MESSAGEAbi>, pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pStubDescriptor: CPointer<MIDL_STUB_DESCAbi>, ProcNum: UInt32): Unit
-    func NdrComplexArrayBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrComplexArrayFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrComplexArrayMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
-    func NdrComplexArrayMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
-    func NdrComplexArrayUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
-    func NdrComplexStructBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrComplexStructFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrComplexStructMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
-    func NdrComplexStructMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
-    func NdrComplexStructUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
-    func NdrConformantArrayBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrConformantArrayFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrConformantArrayMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
-    func NdrConformantArrayMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
-    func NdrConformantArrayUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
-    func NdrConformantStringBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrConformantStringMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
-    func NdrConformantStringMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
-    func NdrConformantStringUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
-    func NdrConformantStructBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrConformantStructFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrConformantStructMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
-    func NdrConformantStructMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
-    func NdrConformantStructUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
-    func NdrConformantVaryingArrayBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrConformantVaryingArrayFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrConformantVaryingArrayMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
-    func NdrConformantVaryingArrayMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
-    func NdrConformantVaryingArrayUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
-    func NdrConformantVaryingStructBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrConformantVaryingStructFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrConformantVaryingStructMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
-    func NdrConformantVaryingStructMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
-    func NdrConformantVaryingStructUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
-    func NdrContextHandleInitialize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): CPointer<NDR_SCONTEXTAbi>
-    func NdrContextHandleSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrConvert(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): Unit
-    func NdrConvert2(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>, NumberParams: Int32): Unit
-    func NdrCorrelationFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>): Unit
-    func NdrCorrelationInitialize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<Unit>, CacheSize: UInt32, flags: UInt32): Unit
-    func NdrCorrelationPass(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>): Unit
-    func NdrCreateServerInterfaceFromStub(pStub: CPointer<Unit>, pServerIf: CPointer<RPC_SERVER_INTERFACEAbi>): windows_core.RPC_STATUS
-    func NdrDcomAsyncStubCall(pThis: CPointer<Unit>, pChannel: CPointer<Unit>, pRpcMsg: CPointer<RPC_MESSAGEAbi>, pdwStubPhase: CPointer<UInt32>): Int32
-    func NdrEncapsulatedUnionBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrEncapsulatedUnionFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrEncapsulatedUnionMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
-    func NdrEncapsulatedUnionMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
-    func NdrEncapsulatedUnionUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
-    func NdrFixedArrayBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrFixedArrayFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrFixedArrayMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
-    func NdrFixedArrayMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
-    func NdrFixedArrayUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
-    func NdrFreeBuffer(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>): Unit
-    func NdrGetBuffer(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, BufferLength: UInt32, Handle: CPointer<Unit>): CPointer<UInt8>
-    func NdrGetDcomProtocolVersion(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pVersion: CPointer<RPC_VERSIONAbi>): Int32
-    func NdrGetUserMarshalInfo(pFlags: CPointer<UInt32>, InformationLevel: UInt32, pMarshalInfo: CPointer<NDR_USER_MARSHAL_INFOAbi>): windows_core.RPC_STATUS
-    func NdrInterfacePointerBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrInterfacePointerFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrInterfacePointerMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
-    func NdrInterfacePointerMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
-    func NdrInterfacePointerUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
-    func NdrMapCommAndFaultStatus(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pCommStatus: CPointer<UInt32>, pFaultStatus: CPointer<UInt32>, Status: windows_core.RPC_STATUS): windows_core.RPC_STATUS
-    func NdrMesSimpleTypeAlignSizeAll(Handle: CPointer<Unit>, pProxyInfo: CPointer<MIDL_STUBLESS_PROXY_INFOAbi>): UIntNative
-    func NdrMesSimpleTypeDecodeAll(Handle: CPointer<Unit>, pProxyInfo: CPointer<MIDL_STUBLESS_PROXY_INFOAbi>, pObject: CPointer<Unit>, Size: Int16): Unit
-    func NdrMesSimpleTypeEncode(Handle: CPointer<Unit>, pStubDesc: CPointer<MIDL_STUB_DESCAbi>, pObject: CPointer<Unit>, Size: Int16): Unit
-    func NdrMesSimpleTypeEncodeAll(Handle: CPointer<Unit>, pProxyInfo: CPointer<MIDL_STUBLESS_PROXY_INFOAbi>, pObject: CPointer<Unit>, Size: Int16): Unit
-    func NdrMesTypeAlignSize(Handle: CPointer<Unit>, pStubDesc: CPointer<MIDL_STUB_DESCAbi>, pFormatString: CPointer<UInt8>, pObject: CPointer<Unit>): UIntNative
-    func NdrMesTypeAlignSize2(Handle: CPointer<Unit>, pPicklingInfo: CPointer<MIDL_TYPE_PICKLING_INFOAbi>, pStubDesc: CPointer<MIDL_STUB_DESCAbi>, pFormatString: CPointer<UInt8>, pObject: CPointer<Unit>): UIntNative
-    func NdrMesTypeAlignSize3(Handle: CPointer<Unit>, pPicklingInfo: CPointer<MIDL_TYPE_PICKLING_INFOAbi>, pProxyInfo: CPointer<MIDL_STUBLESS_PROXY_INFOAbi>, ArrTypeOffset: CPointer<CPointer<UInt32>>, nTypeIndex: UInt32, pObject: CPointer<Unit>): UIntNative
-    func NdrMesTypeDecode(Handle: CPointer<Unit>, pStubDesc: CPointer<MIDL_STUB_DESCAbi>, pFormatString: CPointer<UInt8>, pObject: CPointer<Unit>): Unit
-    func NdrMesTypeDecode2(Handle: CPointer<Unit>, pPicklingInfo: CPointer<MIDL_TYPE_PICKLING_INFOAbi>, pStubDesc: CPointer<MIDL_STUB_DESCAbi>, pFormatString: CPointer<UInt8>, pObject: CPointer<Unit>): Unit
-    func NdrMesTypeDecode3(Handle: CPointer<Unit>, pPicklingInfo: CPointer<MIDL_TYPE_PICKLING_INFOAbi>, pProxyInfo: CPointer<MIDL_STUBLESS_PROXY_INFOAbi>, ArrTypeOffset: CPointer<CPointer<UInt32>>, nTypeIndex: UInt32, pObject: CPointer<Unit>): Unit
-    func NdrMesTypeEncode(Handle: CPointer<Unit>, pStubDesc: CPointer<MIDL_STUB_DESCAbi>, pFormatString: CPointer<UInt8>, pObject: CPointer<Unit>): Unit
-    func NdrMesTypeEncode2(Handle: CPointer<Unit>, pPicklingInfo: CPointer<MIDL_TYPE_PICKLING_INFOAbi>, pStubDesc: CPointer<MIDL_STUB_DESCAbi>, pFormatString: CPointer<UInt8>, pObject: CPointer<Unit>): Unit
-    func NdrMesTypeEncode3(Handle: CPointer<Unit>, pPicklingInfo: CPointer<MIDL_TYPE_PICKLING_INFOAbi>, pProxyInfo: CPointer<MIDL_STUBLESS_PROXY_INFOAbi>, ArrTypeOffset: CPointer<CPointer<UInt32>>, nTypeIndex: UInt32, pObject: CPointer<Unit>): Unit
-    func NdrMesTypeFree2(Handle: CPointer<Unit>, pPicklingInfo: CPointer<MIDL_TYPE_PICKLING_INFOAbi>, pStubDesc: CPointer<MIDL_STUB_DESCAbi>, pFormatString: CPointer<UInt8>, pObject: CPointer<Unit>): Unit
-    func NdrMesTypeFree3(Handle: CPointer<Unit>, pPicklingInfo: CPointer<MIDL_TYPE_PICKLING_INFOAbi>, pProxyInfo: CPointer<MIDL_STUBLESS_PROXY_INFOAbi>, ArrTypeOffset: CPointer<CPointer<UInt32>>, nTypeIndex: UInt32, pObject: CPointer<Unit>): Unit
-    func NdrNonConformantStringBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrNonConformantStringMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
-    func NdrNonConformantStringMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
-    func NdrNonConformantStringUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
-    func NdrNonEncapsulatedUnionBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrNonEncapsulatedUnionFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrNonEncapsulatedUnionMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
-    func NdrNonEncapsulatedUnionMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
-    func NdrNonEncapsulatedUnionUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
-    func NdrNsGetBuffer(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, BufferLength: UInt32, Handle: CPointer<Unit>): CPointer<UInt8>
-    func NdrNsSendReceive(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pBufferEnd: CPointer<UInt8>, pAutoHandle: CPointer<CPointer<Unit>>): CPointer<UInt8>
-    func NdrPartialIgnoreClientBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<Unit>): Unit
-    func NdrPartialIgnoreClientMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<Unit>): Unit
-    func NdrPartialIgnoreServerInitialize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<Unit>>, pFormat: CPointer<UInt8>): Unit
-    func NdrPartialIgnoreServerUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<Unit>>): Unit
-    func NdrPointerBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrPointerFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrPointerMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
-    func NdrPointerMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
-    func NdrPointerUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
-    func NdrRangeUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
-    func NdrRpcSmSetClientToOsf(pMessage: CPointer<MIDL_STUB_MESSAGEAbi>): Unit
-    func NdrRpcSsDisableAllocate(pMessage: CPointer<MIDL_STUB_MESSAGEAbi>): Unit
-    func NdrRpcSsEnableAllocate(pMessage: CPointer<MIDL_STUB_MESSAGEAbi>): Unit
-    func NdrSendReceive(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pBufferEnd: CPointer<UInt8>): CPointer<UInt8>
-    func NdrServerContextMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ContextHandle: CPointer<NDR_SCONTEXTAbi>, RundownRoutine: NDR_RUNDOWN): Unit
-    func NdrServerContextNewMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ContextHandle: CPointer<NDR_SCONTEXTAbi>, RundownRoutine: NDR_RUNDOWN, pFormat: CPointer<UInt8>): Unit
-    func NdrServerContextNewUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): CPointer<NDR_SCONTEXTAbi>
-    func NdrServerContextUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>): CPointer<NDR_SCONTEXTAbi>
-    func NdrServerInitialize(pRpcMsg: CPointer<RPC_MESSAGEAbi>, pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pStubDescriptor: CPointer<MIDL_STUB_DESCAbi>): CPointer<UInt8>
-    func NdrServerInitializeMarshall(pRpcMsg: CPointer<RPC_MESSAGEAbi>, pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>): Unit
-    func NdrServerInitializeNew(pRpcMsg: CPointer<RPC_MESSAGEAbi>, pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pStubDescriptor: CPointer<MIDL_STUB_DESCAbi>): CPointer<UInt8>
-    func NdrServerInitializePartial(pRpcMsg: CPointer<RPC_MESSAGEAbi>, pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pStubDescriptor: CPointer<MIDL_STUB_DESCAbi>, RequestedBufferSize: UInt32): Unit
-    func NdrServerInitializeUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pStubDescriptor: CPointer<MIDL_STUB_DESCAbi>, pRpcMsg: CPointer<RPC_MESSAGEAbi>): CPointer<UInt8>
-    func NdrSimpleStructBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrSimpleStructFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrSimpleStructMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
-    func NdrSimpleStructMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
-    func NdrSimpleStructUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
-    func NdrSimpleTypeMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, FormatChar: UInt8): Unit
-    func NdrSimpleTypeUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, FormatChar: UInt8): Unit
-    func NdrUserMarshalBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrUserMarshalFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrUserMarshalMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
-    func NdrUserMarshalMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
-    func NdrUserMarshalUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
-    func NdrVaryingArrayBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrVaryingArrayFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrVaryingArrayMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
-    func NdrVaryingArrayMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
-    func NdrVaryingArrayUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
-    func NdrXmitOrRepAsBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrXmitOrRepAsFree(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
-    func NdrXmitOrRepAsMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
-    func NdrXmitOrRepAsMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, pFormat: CPointer<UInt8>): UInt32
-    func NdrXmitOrRepAsUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGEAbi>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
-    // param-hint: Security optional
-    // param-hint: Options optional
-    func RpcBindingCreateA(Template: CPointer<RPC_BINDING_HANDLE_TEMPLATE_V1_AAbi>, Security: CPointer<RPC_BINDING_HANDLE_SECURITY_V1_AAbi>, Options: CPointer<RPC_BINDING_HANDLE_OPTIONS_V1Abi>, Binding: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
-    // param-hint: Security optional
-    // param-hint: Options optional
-    func RpcBindingCreateW(Template: CPointer<RPC_BINDING_HANDLE_TEMPLATE_V1_WAbi>, Security: CPointer<RPC_BINDING_HANDLE_SECURITY_V1_WAbi>, Options: CPointer<RPC_BINDING_HANDLE_OPTIONS_V1Abi>, Binding: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
     // param-hint: ServerPrincName optional
     // param-hint: AuthnLevel optional
     // param-hint: AuthnSvc optional
@@ -10676,6 +13439,15 @@ foreign {
     // param-hint: AuthzSvc optional
     // param-hint: SecurityQOS optional
     func RpcBindingInqAuthInfoExA(Binding: CPointer<Unit>, ServerPrincName: CPointer<CPointer<UInt8>>, AuthnLevel: CPointer<UInt32>, AuthnSvc: CPointer<UInt32>, AuthIdentity: CPointer<CPointer<Unit>>, AuthzSvc: CPointer<UInt32>, RpcQosVersion: UInt32, SecurityQOS: CPointer<RPC_SECURITY_QOSAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingInqAuthInfoExA == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_RpcBindingInqAuthInfoExA(Binding: CPointer<Unit>, ServerPrincName: CPointer<CPointer<UInt8>>, AuthnLevel: CPointer<UInt32>, AuthnSvc: CPointer<UInt32>, AuthIdentity: CPointer<CPointer<Unit>>, AuthzSvc: CPointer<UInt32>, RpcQosVersion: UInt32, SecurityQOS: CPointer<RPC_SECURITY_QOSAbi>): windows_core.RPC_STATUS {
+    return RpcBindingInqAuthInfoExA(Binding, ServerPrincName, AuthnLevel, AuthnSvc, AuthIdentity, AuthzSvc, RpcQosVersion, SecurityQOS)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingInqAuthInfoExW == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: ServerPrincName optional
     // param-hint: AuthnLevel optional
     // param-hint: AuthnSvc optional
@@ -10683,32 +13455,1769 @@ foreign {
     // param-hint: AuthzSvc optional
     // param-hint: SecurityQOS optional
     func RpcBindingInqAuthInfoExW(Binding: CPointer<Unit>, ServerPrincName: CPointer<CPointer<UInt16>>, AuthnLevel: CPointer<UInt32>, AuthnSvc: CPointer<UInt32>, AuthIdentity: CPointer<CPointer<Unit>>, AuthzSvc: CPointer<UInt32>, RpcQosVersion: UInt32, SecurityQOS: CPointer<RPC_SECURITY_QOSAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingInqAuthInfoExW == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_RpcBindingInqAuthInfoExW(Binding: CPointer<Unit>, ServerPrincName: CPointer<CPointer<UInt16>>, AuthnLevel: CPointer<UInt32>, AuthnSvc: CPointer<UInt32>, AuthIdentity: CPointer<CPointer<Unit>>, AuthzSvc: CPointer<UInt32>, RpcQosVersion: UInt32, SecurityQOS: CPointer<RPC_SECURITY_QOSAbi>): windows_core.RPC_STATUS {
+    return RpcBindingInqAuthInfoExW(Binding, ServerPrincName, AuthnLevel, AuthnSvc, AuthIdentity, AuthzSvc, RpcQosVersion, SecurityQOS)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingInqAuthInfoW == "on"]
+foreign {
+    // param-hint: ServerPrincName optional
+    // param-hint: AuthnLevel optional
+    // param-hint: AuthnSvc optional
+    // param-hint: AuthIdentity optional
+    // param-hint: AuthzSvc optional
+    func RpcBindingInqAuthInfoW(Binding: CPointer<Unit>, ServerPrincName: CPointer<CPointer<UInt16>>, AuthnLevel: CPointer<UInt32>, AuthnSvc: CPointer<UInt32>, AuthIdentity: CPointer<CPointer<Unit>>, AuthzSvc: CPointer<UInt32>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingInqAuthInfoW == "on"]
+public unsafe func Windows_RpcBindingInqAuthInfoW(Binding: CPointer<Unit>, ServerPrincName: CPointer<CPointer<UInt16>>, AuthnLevel: CPointer<UInt32>, AuthnSvc: CPointer<UInt32>, AuthIdentity: CPointer<CPointer<Unit>>, AuthzSvc: CPointer<UInt32>): windows_core.RPC_STATUS {
+    return RpcBindingInqAuthInfoW(Binding, ServerPrincName, AuthnLevel, AuthnSvc, AuthIdentity, AuthzSvc)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingInqMaxCalls == "on"]
+foreign {
+    func RpcBindingInqMaxCalls(Binding: CPointer<Unit>, MaxCalls: CPointer<UInt32>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingInqMaxCalls == "on"]
+public unsafe func Windows_RpcBindingInqMaxCalls(Binding: CPointer<Unit>, MaxCalls: CPointer<UInt32>): windows_core.RPC_STATUS {
+    return RpcBindingInqMaxCalls(Binding, MaxCalls)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingInqObject == "on"]
+foreign {
+    func RpcBindingInqObject(Binding: CPointer<Unit>, ObjectUuid: CPointer<GUID>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingInqObject == "on"]
+public unsafe func Windows_RpcBindingInqObject(Binding: CPointer<Unit>, ObjectUuid: CPointer<GUID>): windows_core.RPC_STATUS {
+    return RpcBindingInqObject(Binding, ObjectUuid)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingInqOption == "on"]
+foreign {
+    func RpcBindingInqOption(hBinding: CPointer<Unit>, option: UInt32, pOptionValue: CPointer<UIntNative>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingInqOption == "on"]
+public unsafe func Windows_RpcBindingInqOption(hBinding: CPointer<Unit>, option: UInt32, pOptionValue: CPointer<UIntNative>): windows_core.RPC_STATUS {
+    return RpcBindingInqOption(hBinding, option, pOptionValue)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingReset == "on"]
+foreign {
+    func RpcBindingReset(Binding: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingReset == "on"]
+public unsafe func Windows_RpcBindingReset(Binding: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcBindingReset(Binding)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingServerFromClient == "on"]
+foreign {
+    // param-hint: ClientBinding optional
+    func RpcBindingServerFromClient(ClientBinding: CPointer<Unit>, ServerBinding: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingServerFromClient == "on"]
+public unsafe func Windows_RpcBindingServerFromClient(ClientBinding: CPointer<Unit>, ServerBinding: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return RpcBindingServerFromClient(ClientBinding, ServerBinding)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingSetAuthInfoA == "on"]
+foreign {
+    // param-hint: ServerPrincName optional
+    // param-hint: AuthIdentity optional
+    func RpcBindingSetAuthInfoA(Binding: CPointer<Unit>, ServerPrincName: CPointer<UInt8>, AuthnLevel: UInt32, AuthnSvc: UInt32, AuthIdentity: CPointer<Unit>, AuthzSvc: UInt32): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingSetAuthInfoA == "on"]
+public unsafe func Windows_RpcBindingSetAuthInfoA(Binding: CPointer<Unit>, ServerPrincName: CPointer<UInt8>, AuthnLevel: UInt32, AuthnSvc: UInt32, AuthIdentity: CPointer<Unit>, AuthzSvc: UInt32): windows_core.RPC_STATUS {
+    return RpcBindingSetAuthInfoA(Binding, ServerPrincName, AuthnLevel, AuthnSvc, AuthIdentity, AuthzSvc)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingSetAuthInfoExA == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: ServerPrincName optional
     // param-hint: AuthIdentity optional
     // param-hint: SecurityQos optional
     func RpcBindingSetAuthInfoExA(Binding: CPointer<Unit>, ServerPrincName: CPointer<UInt8>, AuthnLevel: UInt32, AuthnSvc: UInt32, AuthIdentity: CPointer<Unit>, AuthzSvc: UInt32, SecurityQos: CPointer<RPC_SECURITY_QOSAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingSetAuthInfoExA == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_RpcBindingSetAuthInfoExA(Binding: CPointer<Unit>, ServerPrincName: CPointer<UInt8>, AuthnLevel: UInt32, AuthnSvc: UInt32, AuthIdentity: CPointer<Unit>, AuthzSvc: UInt32, SecurityQos: CPointer<RPC_SECURITY_QOSAbi>): windows_core.RPC_STATUS {
+    return RpcBindingSetAuthInfoExA(Binding, ServerPrincName, AuthnLevel, AuthnSvc, AuthIdentity, AuthzSvc, SecurityQos)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingSetAuthInfoExW == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: ServerPrincName optional
     // param-hint: AuthIdentity optional
     // param-hint: SecurityQOS optional
     func RpcBindingSetAuthInfoExW(Binding: CPointer<Unit>, ServerPrincName: CPointer<UInt16>, AuthnLevel: UInt32, AuthnSvc: UInt32, AuthIdentity: CPointer<Unit>, AuthzSvc: UInt32, SecurityQOS: CPointer<RPC_SECURITY_QOSAbi>): windows_core.RPC_STATUS
 }
 
-@When[RPCRT4 == "on" && Windows_Win32_System_IO == "on"]
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingSetAuthInfoExW == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_RpcBindingSetAuthInfoExW(Binding: CPointer<Unit>, ServerPrincName: CPointer<UInt16>, AuthnLevel: UInt32, AuthnSvc: UInt32, AuthIdentity: CPointer<Unit>, AuthzSvc: UInt32, SecurityQOS: CPointer<RPC_SECURITY_QOSAbi>): windows_core.RPC_STATUS {
+    return RpcBindingSetAuthInfoExW(Binding, ServerPrincName, AuthnLevel, AuthnSvc, AuthIdentity, AuthzSvc, SecurityQOS)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingSetAuthInfoW == "on"]
 foreign {
-    func I_RpcAsyncAbortCall(pAsync: CPointer<RPC_ASYNC_STATEAbi>, ExceptionCode: UInt32): windows_core.RPC_STATUS
-    func I_RpcAsyncSetHandle(Message: CPointer<RPC_MESSAGEAbi>, pAsync: CPointer<RPC_ASYNC_STATEAbi>): windows_core.RPC_STATUS
-    func RpcAsyncAbortCall(pAsync: CPointer<RPC_ASYNC_STATEAbi>, ExceptionCode: UInt32): windows_core.RPC_STATUS
-    func RpcAsyncCancelCall(pAsync: CPointer<RPC_ASYNC_STATEAbi>, fAbort: Int32): windows_core.RPC_STATUS
-    // param-hint: Reply optional
-    func RpcAsyncCompleteCall(pAsync: CPointer<RPC_ASYNC_STATEAbi>, Reply: CPointer<Unit>): windows_core.RPC_STATUS
-    func RpcAsyncGetCallStatus(pAsync: CPointer<RPC_ASYNC_STATEAbi>): windows_core.RPC_STATUS
-    // param-hint: pAsync bytes=param[1]
-    func RpcAsyncInitializeHandle(pAsync: CPointer<RPC_ASYNC_STATEAbi>, Size: UInt32): windows_core.RPC_STATUS
-    func RpcAsyncRegisterInfo(pAsync: CPointer<RPC_ASYNC_STATEAbi>): windows_core.RPC_STATUS
-    // param-hint: pAsync optional
-    func RpcBindingBind(pAsync: CPointer<RPC_ASYNC_STATEAbi>, Binding: CPointer<Unit>, IfSpec: CPointer<Unit>): windows_core.RPC_STATUS
+    // param-hint: ServerPrincName optional
+    // param-hint: AuthIdentity optional
+    func RpcBindingSetAuthInfoW(Binding: CPointer<Unit>, ServerPrincName: CPointer<UInt16>, AuthnLevel: UInt32, AuthnSvc: UInt32, AuthIdentity: CPointer<Unit>, AuthzSvc: UInt32): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingSetAuthInfoW == "on"]
+public unsafe func Windows_RpcBindingSetAuthInfoW(Binding: CPointer<Unit>, ServerPrincName: CPointer<UInt16>, AuthnLevel: UInt32, AuthnSvc: UInt32, AuthIdentity: CPointer<Unit>, AuthzSvc: UInt32): windows_core.RPC_STATUS {
+    return RpcBindingSetAuthInfoW(Binding, ServerPrincName, AuthnLevel, AuthnSvc, AuthIdentity, AuthzSvc)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingSetObject == "on"]
+foreign {
+    func RpcBindingSetObject(Binding: CPointer<Unit>, ObjectUuid: CPointer<GUID>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingSetObject == "on"]
+public unsafe func Windows_RpcBindingSetObject(Binding: CPointer<Unit>, ObjectUuid: CPointer<GUID>): windows_core.RPC_STATUS {
+    return RpcBindingSetObject(Binding, ObjectUuid)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingSetOption == "on"]
+foreign {
+    func RpcBindingSetOption(hBinding: CPointer<Unit>, option: UInt32, optionValue: UIntNative): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingSetOption == "on"]
+public unsafe func Windows_RpcBindingSetOption(hBinding: CPointer<Unit>, option: UInt32, optionValue: UIntNative): windows_core.RPC_STATUS {
+    return RpcBindingSetOption(hBinding, option, optionValue)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingToStringBindingA == "on"]
+foreign {
+    func RpcBindingToStringBindingA(Binding: CPointer<Unit>, StringBinding: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingToStringBindingA == "on"]
+public unsafe func Windows_RpcBindingToStringBindingA(Binding: CPointer<Unit>, StringBinding: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS {
+    return RpcBindingToStringBindingA(Binding, StringBinding)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingToStringBindingW == "on"]
+foreign {
+    func RpcBindingToStringBindingW(Binding: CPointer<Unit>, StringBinding: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingToStringBindingW == "on"]
+public unsafe func Windows_RpcBindingToStringBindingW(Binding: CPointer<Unit>, StringBinding: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS {
+    return RpcBindingToStringBindingW(Binding, StringBinding)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingUnbind == "on"]
+foreign {
+    func RpcBindingUnbind(Binding: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingUnbind == "on"]
+public unsafe func Windows_RpcBindingUnbind(Binding: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcBindingUnbind(Binding)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingVectorFree == "on"]
+foreign {
+    func RpcBindingVectorFree(BindingVector: CPointer<CPointer<RPC_BINDING_VECTORAbi>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcBindingVectorFree == "on"]
+public unsafe func Windows_RpcBindingVectorFree(BindingVector: CPointer<CPointer<RPC_BINDING_VECTORAbi>>): windows_core.RPC_STATUS {
+    return RpcBindingVectorFree(BindingVector)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcCancelThread == "on"]
+foreign {
+    func RpcCancelThread(Thread: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcCancelThread == "on"]
+public unsafe func Windows_RpcCancelThread(Thread: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcCancelThread(Thread)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcCancelThreadEx == "on"]
+foreign {
+    func RpcCancelThreadEx(Thread: CPointer<Unit>, Timeout: Int32): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcCancelThreadEx == "on"]
+public unsafe func Windows_RpcCancelThreadEx(Thread: CPointer<Unit>, Timeout: Int32): windows_core.RPC_STATUS {
+    return RpcCancelThreadEx(Thread, Timeout)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcCertGeneratePrincipalNameA == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
+    func RpcCertGeneratePrincipalNameA(Context: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, Flags: UInt32, pBuffer: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcCertGeneratePrincipalNameA == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_RpcCertGeneratePrincipalNameA(Context: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, Flags: UInt32, pBuffer: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS {
+    return RpcCertGeneratePrincipalNameA(Context, Flags, pBuffer)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcCertGeneratePrincipalNameW == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
+    func RpcCertGeneratePrincipalNameW(Context: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, Flags: UInt32, pBuffer: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcCertGeneratePrincipalNameW == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_RpcCertGeneratePrincipalNameW(Context: CPointer<Win32__impl_l2.CERT_CONTEXTAbi>, Flags: UInt32, pBuffer: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS {
+    return RpcCertGeneratePrincipalNameW(Context, Flags, pBuffer)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcEpRegisterA == "on"]
+foreign {
+    // param-hint: UuidVector optional
+    // param-hint: Annotation optional
+    func RpcEpRegisterA(IfSpec: CPointer<Unit>, BindingVector: CPointer<RPC_BINDING_VECTORAbi>, UuidVector: CPointer<UUID_VECTORAbi>, Annotation: CPointer<UInt8>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcEpRegisterA == "on"]
+public unsafe func Windows_RpcEpRegisterA(IfSpec: CPointer<Unit>, BindingVector: CPointer<RPC_BINDING_VECTORAbi>, UuidVector: CPointer<UUID_VECTORAbi>, Annotation: CPointer<UInt8>): windows_core.RPC_STATUS {
+    return RpcEpRegisterA(IfSpec, BindingVector, UuidVector, Annotation)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcEpRegisterNoReplaceA == "on"]
+foreign {
+    // param-hint: UuidVector optional
+    // param-hint: Annotation optional
+    func RpcEpRegisterNoReplaceA(IfSpec: CPointer<Unit>, BindingVector: CPointer<RPC_BINDING_VECTORAbi>, UuidVector: CPointer<UUID_VECTORAbi>, Annotation: CPointer<UInt8>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcEpRegisterNoReplaceA == "on"]
+public unsafe func Windows_RpcEpRegisterNoReplaceA(IfSpec: CPointer<Unit>, BindingVector: CPointer<RPC_BINDING_VECTORAbi>, UuidVector: CPointer<UUID_VECTORAbi>, Annotation: CPointer<UInt8>): windows_core.RPC_STATUS {
+    return RpcEpRegisterNoReplaceA(IfSpec, BindingVector, UuidVector, Annotation)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcEpRegisterNoReplaceW == "on"]
+foreign {
+    // param-hint: UuidVector optional
+    // param-hint: Annotation optional
+    func RpcEpRegisterNoReplaceW(IfSpec: CPointer<Unit>, BindingVector: CPointer<RPC_BINDING_VECTORAbi>, UuidVector: CPointer<UUID_VECTORAbi>, Annotation: CPointer<UInt16>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcEpRegisterNoReplaceW == "on"]
+public unsafe func Windows_RpcEpRegisterNoReplaceW(IfSpec: CPointer<Unit>, BindingVector: CPointer<RPC_BINDING_VECTORAbi>, UuidVector: CPointer<UUID_VECTORAbi>, Annotation: CPointer<UInt16>): windows_core.RPC_STATUS {
+    return RpcEpRegisterNoReplaceW(IfSpec, BindingVector, UuidVector, Annotation)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcEpRegisterW == "on"]
+foreign {
+    // param-hint: UuidVector optional
+    // param-hint: Annotation optional
+    func RpcEpRegisterW(IfSpec: CPointer<Unit>, BindingVector: CPointer<RPC_BINDING_VECTORAbi>, UuidVector: CPointer<UUID_VECTORAbi>, Annotation: CPointer<UInt16>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcEpRegisterW == "on"]
+public unsafe func Windows_RpcEpRegisterW(IfSpec: CPointer<Unit>, BindingVector: CPointer<RPC_BINDING_VECTORAbi>, UuidVector: CPointer<UUID_VECTORAbi>, Annotation: CPointer<UInt16>): windows_core.RPC_STATUS {
+    return RpcEpRegisterW(IfSpec, BindingVector, UuidVector, Annotation)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcEpResolveBinding == "on"]
+foreign {
+    func RpcEpResolveBinding(Binding: CPointer<Unit>, IfSpec: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcEpResolveBinding == "on"]
+public unsafe func Windows_RpcEpResolveBinding(Binding: CPointer<Unit>, IfSpec: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcEpResolveBinding(Binding, IfSpec)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcEpUnregister == "on"]
+foreign {
+    // param-hint: UuidVector optional
+    func RpcEpUnregister(IfSpec: CPointer<Unit>, BindingVector: CPointer<RPC_BINDING_VECTORAbi>, UuidVector: CPointer<UUID_VECTORAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcEpUnregister == "on"]
+public unsafe func Windows_RpcEpUnregister(IfSpec: CPointer<Unit>, BindingVector: CPointer<RPC_BINDING_VECTORAbi>, UuidVector: CPointer<UUID_VECTORAbi>): windows_core.RPC_STATUS {
+    return RpcEpUnregister(IfSpec, BindingVector, UuidVector)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcErrorAddRecord == "on"]
+foreign {
+    func RpcErrorAddRecord(ErrorInfo: CPointer<RPC_EXTENDED_ERROR_INFOAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcErrorAddRecord == "on"]
+public unsafe func Windows_RpcErrorAddRecord(ErrorInfo: CPointer<RPC_EXTENDED_ERROR_INFOAbi>): windows_core.RPC_STATUS {
+    return RpcErrorAddRecord(ErrorInfo)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcErrorClearInformation == "on"]
+foreign {
+    func RpcErrorClearInformation(): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcErrorClearInformation == "on"]
+public unsafe func Windows_RpcErrorClearInformation(): Unit {
+    RpcErrorClearInformation()
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcErrorEndEnumeration == "on"]
+foreign {
+    func RpcErrorEndEnumeration(EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLEAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcErrorEndEnumeration == "on"]
+public unsafe func Windows_RpcErrorEndEnumeration(EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLEAbi>): windows_core.RPC_STATUS {
+    return RpcErrorEndEnumeration(EnumHandle)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcErrorGetNextRecord == "on"]
+foreign {
+    func RpcErrorGetNextRecord(EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLEAbi>, CopyStrings: Int32, ErrorInfo: CPointer<RPC_EXTENDED_ERROR_INFOAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcErrorGetNextRecord == "on"]
+public unsafe func Windows_RpcErrorGetNextRecord(EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLEAbi>, CopyStrings: Int32, ErrorInfo: CPointer<RPC_EXTENDED_ERROR_INFOAbi>): windows_core.RPC_STATUS {
+    return RpcErrorGetNextRecord(EnumHandle, CopyStrings, ErrorInfo)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcErrorGetNumberOfRecords == "on"]
+foreign {
+    func RpcErrorGetNumberOfRecords(EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLEAbi>, Records: CPointer<Int32>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcErrorGetNumberOfRecords == "on"]
+public unsafe func Windows_RpcErrorGetNumberOfRecords(EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLEAbi>, Records: CPointer<Int32>): windows_core.RPC_STATUS {
+    return RpcErrorGetNumberOfRecords(EnumHandle, Records)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcErrorLoadErrorInfo == "on"]
+foreign {
+    // param-hint: ErrorBlob bytes=param[1]
+    func RpcErrorLoadErrorInfo(ErrorBlob: CPointer<Unit>, BlobSize: UIntNative, EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLEAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcErrorLoadErrorInfo == "on"]
+public unsafe func Windows_RpcErrorLoadErrorInfo(ErrorBlob: CPointer<Unit>, BlobSize: UIntNative, EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLEAbi>): windows_core.RPC_STATUS {
+    return RpcErrorLoadErrorInfo(ErrorBlob, BlobSize, EnumHandle)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcErrorResetEnumeration == "on"]
+foreign {
+    func RpcErrorResetEnumeration(EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLEAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcErrorResetEnumeration == "on"]
+public unsafe func Windows_RpcErrorResetEnumeration(EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLEAbi>): windows_core.RPC_STATUS {
+    return RpcErrorResetEnumeration(EnumHandle)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcErrorSaveErrorInfo == "on"]
+foreign {
+    func RpcErrorSaveErrorInfo(EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLEAbi>, ErrorBlob: CPointer<CPointer<Unit>>, BlobSize: CPointer<UIntNative>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcErrorSaveErrorInfo == "on"]
+public unsafe func Windows_RpcErrorSaveErrorInfo(EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLEAbi>, ErrorBlob: CPointer<CPointer<Unit>>, BlobSize: CPointer<UIntNative>): windows_core.RPC_STATUS {
+    return RpcErrorSaveErrorInfo(EnumHandle, ErrorBlob, BlobSize)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcErrorStartEnumeration == "on"]
+foreign {
+    func RpcErrorStartEnumeration(EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLEAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcErrorStartEnumeration == "on"]
+public unsafe func Windows_RpcErrorStartEnumeration(EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLEAbi>): windows_core.RPC_STATUS {
+    return RpcErrorStartEnumeration(EnumHandle)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcExceptionFilter == "on"]
+foreign {
+    func RpcExceptionFilter(ExceptionCode: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcExceptionFilter == "on"]
+public unsafe func Windows_RpcExceptionFilter(ExceptionCode: UInt32): Int32 {
+    return RpcExceptionFilter(ExceptionCode)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcFreeAuthorizationContext == "on"]
+foreign {
+    func RpcFreeAuthorizationContext(pAuthzClientContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcFreeAuthorizationContext == "on"]
+public unsafe func Windows_RpcFreeAuthorizationContext(pAuthzClientContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return RpcFreeAuthorizationContext(pAuthzClientContext)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcGetAuthorizationContextForClient == "on"]
+foreign {
+    // param-hint: ClientBinding optional
+    // param-hint: Reserved1 optional
+    // param-hint: pExpirationTime optional
+    // param-hint: Reserved4 optional
+    func RpcGetAuthorizationContextForClient(ClientBinding: CPointer<Unit>, ImpersonateOnReturn: Int32, Reserved1: CPointer<Unit>, pExpirationTime: CPointer<Int64>, Reserved2: Win32_Foundation.LUIDAbi, Reserved3: UInt32, Reserved4: CPointer<Unit>, pAuthzClientContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcGetAuthorizationContextForClient == "on"]
+public unsafe func Windows_RpcGetAuthorizationContextForClient(ClientBinding: CPointer<Unit>, ImpersonateOnReturn: Int32, Reserved1: CPointer<Unit>, pExpirationTime: CPointer<Int64>, Reserved2: Win32_Foundation.LUIDAbi, Reserved3: UInt32, Reserved4: CPointer<Unit>, pAuthzClientContext: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return RpcGetAuthorizationContextForClient(ClientBinding, ImpersonateOnReturn, Reserved1, pExpirationTime, Reserved2, Reserved3, Reserved4, pAuthzClientContext)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcIfInqId == "on"]
+foreign {
+    func RpcIfInqId(RpcIfHandle: CPointer<Unit>, RpcIfId: CPointer<RPC_IF_IDAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcIfInqId == "on"]
+public unsafe func Windows_RpcIfInqId(RpcIfHandle: CPointer<Unit>, RpcIfId: CPointer<RPC_IF_IDAbi>): windows_core.RPC_STATUS {
+    return RpcIfInqId(RpcIfHandle, RpcIfId)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcImpersonateClient == "on"]
+foreign {
+    // param-hint: BindingHandle optional
+    func RpcImpersonateClient(BindingHandle: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcImpersonateClient == "on"]
+public unsafe func Windows_RpcImpersonateClient(BindingHandle: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcImpersonateClient(BindingHandle)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcImpersonateClient2 == "on"]
+foreign {
+    // param-hint: BindingHandle optional
+    func RpcImpersonateClient2(BindingHandle: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcImpersonateClient2 == "on"]
+public unsafe func Windows_RpcImpersonateClient2(BindingHandle: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcImpersonateClient2(BindingHandle)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcImpersonateClientContainer == "on"]
+foreign {
+    // param-hint: BindingHandle optional
+    func RpcImpersonateClientContainer(BindingHandle: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcImpersonateClientContainer == "on"]
+public unsafe func Windows_RpcImpersonateClientContainer(BindingHandle: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcImpersonateClientContainer(BindingHandle)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtEnableIdleCleanup == "on"]
+foreign {
+    func RpcMgmtEnableIdleCleanup(): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtEnableIdleCleanup == "on"]
+public unsafe func Windows_RpcMgmtEnableIdleCleanup(): windows_core.RPC_STATUS {
+    return RpcMgmtEnableIdleCleanup()
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtEpEltInqBegin == "on"]
+foreign {
+    // param-hint: EpBinding optional
+    // param-hint: IfId optional
+    // param-hint: VersOption optional
+    // param-hint: ObjectUuid optional
+    func RpcMgmtEpEltInqBegin(EpBinding: CPointer<Unit>, InquiryType: UInt32, IfId: CPointer<RPC_IF_IDAbi>, VersOption: UInt32, ObjectUuid: CPointer<GUID>, InquiryContext: CPointer<CPointer<CPointer<Unit>>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtEpEltInqBegin == "on"]
+public unsafe func Windows_RpcMgmtEpEltInqBegin(EpBinding: CPointer<Unit>, InquiryType: UInt32, IfId: CPointer<RPC_IF_IDAbi>, VersOption: UInt32, ObjectUuid: CPointer<GUID>, InquiryContext: CPointer<CPointer<CPointer<Unit>>>): windows_core.RPC_STATUS {
+    return RpcMgmtEpEltInqBegin(EpBinding, InquiryType, IfId, VersOption, ObjectUuid, InquiryContext)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtEpEltInqDone == "on"]
+foreign {
+    func RpcMgmtEpEltInqDone(InquiryContext: CPointer<CPointer<CPointer<Unit>>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtEpEltInqDone == "on"]
+public unsafe func Windows_RpcMgmtEpEltInqDone(InquiryContext: CPointer<CPointer<CPointer<Unit>>>): windows_core.RPC_STATUS {
+    return RpcMgmtEpEltInqDone(InquiryContext)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtEpEltInqNextA == "on"]
+foreign {
+    // param-hint: Binding optional
+    // param-hint: ObjectUuid optional
+    // param-hint: Annotation optional
+    func RpcMgmtEpEltInqNextA(InquiryContext: CPointer<CPointer<Unit>>, IfId: CPointer<RPC_IF_IDAbi>, Binding: CPointer<CPointer<Unit>>, ObjectUuid: CPointer<GUID>, Annotation: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtEpEltInqNextA == "on"]
+public unsafe func Windows_RpcMgmtEpEltInqNextA(InquiryContext: CPointer<CPointer<Unit>>, IfId: CPointer<RPC_IF_IDAbi>, Binding: CPointer<CPointer<Unit>>, ObjectUuid: CPointer<GUID>, Annotation: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS {
+    return RpcMgmtEpEltInqNextA(InquiryContext, IfId, Binding, ObjectUuid, Annotation)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtEpEltInqNextW == "on"]
+foreign {
+    // param-hint: Binding optional
+    // param-hint: ObjectUuid optional
+    // param-hint: Annotation optional
+    func RpcMgmtEpEltInqNextW(InquiryContext: CPointer<CPointer<Unit>>, IfId: CPointer<RPC_IF_IDAbi>, Binding: CPointer<CPointer<Unit>>, ObjectUuid: CPointer<GUID>, Annotation: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtEpEltInqNextW == "on"]
+public unsafe func Windows_RpcMgmtEpEltInqNextW(InquiryContext: CPointer<CPointer<Unit>>, IfId: CPointer<RPC_IF_IDAbi>, Binding: CPointer<CPointer<Unit>>, ObjectUuid: CPointer<GUID>, Annotation: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS {
+    return RpcMgmtEpEltInqNextW(InquiryContext, IfId, Binding, ObjectUuid, Annotation)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtEpUnregister == "on"]
+foreign {
+    // param-hint: EpBinding optional
+    // param-hint: ObjectUuid optional
+    func RpcMgmtEpUnregister(EpBinding: CPointer<Unit>, IfId: CPointer<RPC_IF_IDAbi>, Binding: CPointer<Unit>, ObjectUuid: CPointer<GUID>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtEpUnregister == "on"]
+public unsafe func Windows_RpcMgmtEpUnregister(EpBinding: CPointer<Unit>, IfId: CPointer<RPC_IF_IDAbi>, Binding: CPointer<Unit>, ObjectUuid: CPointer<GUID>): windows_core.RPC_STATUS {
+    return RpcMgmtEpUnregister(EpBinding, IfId, Binding, ObjectUuid)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtInqComTimeout == "on"]
+foreign {
+    func RpcMgmtInqComTimeout(Binding: CPointer<Unit>, Timeout: CPointer<UInt32>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtInqComTimeout == "on"]
+public unsafe func Windows_RpcMgmtInqComTimeout(Binding: CPointer<Unit>, Timeout: CPointer<UInt32>): windows_core.RPC_STATUS {
+    return RpcMgmtInqComTimeout(Binding, Timeout)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtInqDefaultProtectLevel == "on"]
+foreign {
+    func RpcMgmtInqDefaultProtectLevel(AuthnSvc: UInt32, AuthnLevel: CPointer<UInt32>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtInqDefaultProtectLevel == "on"]
+public unsafe func Windows_RpcMgmtInqDefaultProtectLevel(AuthnSvc: UInt32, AuthnLevel: CPointer<UInt32>): windows_core.RPC_STATUS {
+    return RpcMgmtInqDefaultProtectLevel(AuthnSvc, AuthnLevel)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtInqIfIds == "on"]
+foreign {
+    // param-hint: Binding optional
+    func RpcMgmtInqIfIds(Binding: CPointer<Unit>, IfIdVector: CPointer<CPointer<RPC_IF_ID_VECTORAbi>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtInqIfIds == "on"]
+public unsafe func Windows_RpcMgmtInqIfIds(Binding: CPointer<Unit>, IfIdVector: CPointer<CPointer<RPC_IF_ID_VECTORAbi>>): windows_core.RPC_STATUS {
+    return RpcMgmtInqIfIds(Binding, IfIdVector)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtInqServerPrincNameA == "on"]
+foreign {
+    // param-hint: Binding optional
+    func RpcMgmtInqServerPrincNameA(Binding: CPointer<Unit>, AuthnSvc: UInt32, ServerPrincName: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtInqServerPrincNameA == "on"]
+public unsafe func Windows_RpcMgmtInqServerPrincNameA(Binding: CPointer<Unit>, AuthnSvc: UInt32, ServerPrincName: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS {
+    return RpcMgmtInqServerPrincNameA(Binding, AuthnSvc, ServerPrincName)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtInqServerPrincNameW == "on"]
+foreign {
+    // param-hint: Binding optional
+    func RpcMgmtInqServerPrincNameW(Binding: CPointer<Unit>, AuthnSvc: UInt32, ServerPrincName: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtInqServerPrincNameW == "on"]
+public unsafe func Windows_RpcMgmtInqServerPrincNameW(Binding: CPointer<Unit>, AuthnSvc: UInt32, ServerPrincName: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS {
+    return RpcMgmtInqServerPrincNameW(Binding, AuthnSvc, ServerPrincName)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtInqStats == "on"]
+foreign {
+    // param-hint: Binding optional
+    func RpcMgmtInqStats(Binding: CPointer<Unit>, Statistics: CPointer<CPointer<RPC_STATS_VECTORAbi>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtInqStats == "on"]
+public unsafe func Windows_RpcMgmtInqStats(Binding: CPointer<Unit>, Statistics: CPointer<CPointer<RPC_STATS_VECTORAbi>>): windows_core.RPC_STATUS {
+    return RpcMgmtInqStats(Binding, Statistics)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtIsServerListening == "on"]
+foreign {
+    // param-hint: Binding optional
+    func RpcMgmtIsServerListening(Binding: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtIsServerListening == "on"]
+public unsafe func Windows_RpcMgmtIsServerListening(Binding: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcMgmtIsServerListening(Binding)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtSetAuthorizationFn == "on"]
+foreign {
+    func RpcMgmtSetAuthorizationFn(AuthorizationFn: RPC_MGMT_AUTHORIZATION_FN): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtSetAuthorizationFn == "on"]
+public unsafe func Windows_RpcMgmtSetAuthorizationFn(AuthorizationFn: RPC_MGMT_AUTHORIZATION_FN): windows_core.RPC_STATUS {
+    return RpcMgmtSetAuthorizationFn(AuthorizationFn)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtSetCancelTimeout == "on"]
+foreign {
+    func RpcMgmtSetCancelTimeout(Timeout: Int32): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtSetCancelTimeout == "on"]
+public unsafe func Windows_RpcMgmtSetCancelTimeout(Timeout: Int32): windows_core.RPC_STATUS {
+    return RpcMgmtSetCancelTimeout(Timeout)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtSetComTimeout == "on"]
+foreign {
+    func RpcMgmtSetComTimeout(Binding: CPointer<Unit>, Timeout: UInt32): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtSetComTimeout == "on"]
+public unsafe func Windows_RpcMgmtSetComTimeout(Binding: CPointer<Unit>, Timeout: UInt32): windows_core.RPC_STATUS {
+    return RpcMgmtSetComTimeout(Binding, Timeout)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtSetServerStackSize == "on"]
+foreign {
+    func RpcMgmtSetServerStackSize(ThreadStackSize: UInt32): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtSetServerStackSize == "on"]
+public unsafe func Windows_RpcMgmtSetServerStackSize(ThreadStackSize: UInt32): windows_core.RPC_STATUS {
+    return RpcMgmtSetServerStackSize(ThreadStackSize)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtStatsVectorFree == "on"]
+foreign {
+    func RpcMgmtStatsVectorFree(StatsVector: CPointer<CPointer<RPC_STATS_VECTORAbi>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtStatsVectorFree == "on"]
+public unsafe func Windows_RpcMgmtStatsVectorFree(StatsVector: CPointer<CPointer<RPC_STATS_VECTORAbi>>): windows_core.RPC_STATUS {
+    return RpcMgmtStatsVectorFree(StatsVector)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtStopServerListening == "on"]
+foreign {
+    // param-hint: Binding optional
+    func RpcMgmtStopServerListening(Binding: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtStopServerListening == "on"]
+public unsafe func Windows_RpcMgmtStopServerListening(Binding: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcMgmtStopServerListening(Binding)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtWaitServerListen == "on"]
+foreign {
+    func RpcMgmtWaitServerListen(): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcMgmtWaitServerListen == "on"]
+public unsafe func Windows_RpcMgmtWaitServerListen(): windows_core.RPC_STATUS {
+    return RpcMgmtWaitServerListen()
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcNetworkInqProtseqsA == "on"]
+foreign {
+    func RpcNetworkInqProtseqsA(ProtseqVector: CPointer<CPointer<RPC_PROTSEQ_VECTORAAbi>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcNetworkInqProtseqsA == "on"]
+public unsafe func Windows_RpcNetworkInqProtseqsA(ProtseqVector: CPointer<CPointer<RPC_PROTSEQ_VECTORAAbi>>): windows_core.RPC_STATUS {
+    return RpcNetworkInqProtseqsA(ProtseqVector)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcNetworkInqProtseqsW == "on"]
+foreign {
+    func RpcNetworkInqProtseqsW(ProtseqVector: CPointer<CPointer<RPC_PROTSEQ_VECTORWAbi>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcNetworkInqProtseqsW == "on"]
+public unsafe func Windows_RpcNetworkInqProtseqsW(ProtseqVector: CPointer<CPointer<RPC_PROTSEQ_VECTORWAbi>>): windows_core.RPC_STATUS {
+    return RpcNetworkInqProtseqsW(ProtseqVector)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcNetworkIsProtseqValidA == "on"]
+foreign {
+    func RpcNetworkIsProtseqValidA(Protseq: CPointer<UInt8>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcNetworkIsProtseqValidA == "on"]
+public unsafe func Windows_RpcNetworkIsProtseqValidA(Protseq: CPointer<UInt8>): windows_core.RPC_STATUS {
+    return RpcNetworkIsProtseqValidA(Protseq)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcNetworkIsProtseqValidW == "on"]
+foreign {
+    func RpcNetworkIsProtseqValidW(Protseq: CPointer<UInt16>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcNetworkIsProtseqValidW == "on"]
+public unsafe func Windows_RpcNetworkIsProtseqValidW(Protseq: CPointer<UInt16>): windows_core.RPC_STATUS {
+    return RpcNetworkIsProtseqValidW(Protseq)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingInqEntryNameA == "on"]
+foreign {
+    func RpcNsBindingInqEntryNameA(Binding: CPointer<Unit>, EntryNameSyntax: UInt32, EntryName: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingInqEntryNameA == "on"]
+public unsafe func Windows_RpcNsBindingInqEntryNameA(Binding: CPointer<Unit>, EntryNameSyntax: UInt32, EntryName: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS {
+    return RpcNsBindingInqEntryNameA(Binding, EntryNameSyntax, EntryName)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingInqEntryNameW == "on"]
+foreign {
+    func RpcNsBindingInqEntryNameW(Binding: CPointer<Unit>, EntryNameSyntax: UInt32, EntryName: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcNsBindingInqEntryNameW == "on"]
+public unsafe func Windows_RpcNsBindingInqEntryNameW(Binding: CPointer<Unit>, EntryNameSyntax: UInt32, EntryName: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS {
+    return RpcNsBindingInqEntryNameW(Binding, EntryNameSyntax, EntryName)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcObjectInqType == "on"]
+foreign {
+    // param-hint: TypeUuid optional
+    func RpcObjectInqType(ObjUuid: CPointer<GUID>, TypeUuid: CPointer<GUID>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcObjectInqType == "on"]
+public unsafe func Windows_RpcObjectInqType(ObjUuid: CPointer<GUID>, TypeUuid: CPointer<GUID>): windows_core.RPC_STATUS {
+    return RpcObjectInqType(ObjUuid, TypeUuid)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcObjectSetInqFn == "on"]
+foreign {
+    func RpcObjectSetInqFn(InquiryFn: RPC_OBJECT_INQ_FN): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcObjectSetInqFn == "on"]
+public unsafe func Windows_RpcObjectSetInqFn(InquiryFn: RPC_OBJECT_INQ_FN): windows_core.RPC_STATUS {
+    return RpcObjectSetInqFn(InquiryFn)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcObjectSetType == "on"]
+foreign {
+    // param-hint: TypeUuid optional
+    func RpcObjectSetType(ObjUuid: CPointer<GUID>, TypeUuid: CPointer<GUID>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcObjectSetType == "on"]
+public unsafe func Windows_RpcObjectSetType(ObjUuid: CPointer<GUID>, TypeUuid: CPointer<GUID>): windows_core.RPC_STATUS {
+    return RpcObjectSetType(ObjUuid, TypeUuid)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcProtseqVectorFreeA == "on"]
+foreign {
+    func RpcProtseqVectorFreeA(ProtseqVector: CPointer<CPointer<RPC_PROTSEQ_VECTORAAbi>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcProtseqVectorFreeA == "on"]
+public unsafe func Windows_RpcProtseqVectorFreeA(ProtseqVector: CPointer<CPointer<RPC_PROTSEQ_VECTORAAbi>>): windows_core.RPC_STATUS {
+    return RpcProtseqVectorFreeA(ProtseqVector)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcProtseqVectorFreeW == "on"]
+foreign {
+    func RpcProtseqVectorFreeW(ProtseqVector: CPointer<CPointer<RPC_PROTSEQ_VECTORWAbi>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcProtseqVectorFreeW == "on"]
+public unsafe func Windows_RpcProtseqVectorFreeW(ProtseqVector: CPointer<CPointer<RPC_PROTSEQ_VECTORWAbi>>): windows_core.RPC_STATUS {
+    return RpcProtseqVectorFreeW(ProtseqVector)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcRaiseException == "on"]
+foreign {
+    func RpcRaiseException(exception: windows_core.RPC_STATUS): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcRaiseException == "on"]
+public unsafe func Windows_RpcRaiseException(exception: windows_core.RPC_STATUS): Unit {
+    RpcRaiseException(exception)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcRevertContainerImpersonation == "on"]
+foreign {
+    func RpcRevertContainerImpersonation(): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcRevertContainerImpersonation == "on"]
+public unsafe func Windows_RpcRevertContainerImpersonation(): windows_core.RPC_STATUS {
+    return RpcRevertContainerImpersonation()
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcRevertToSelf == "on"]
+foreign {
+    func RpcRevertToSelf(): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcRevertToSelf == "on"]
+public unsafe func Windows_RpcRevertToSelf(): windows_core.RPC_STATUS {
+    return RpcRevertToSelf()
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcRevertToSelfEx == "on"]
+foreign {
+    // param-hint: BindingHandle optional
+    func RpcRevertToSelfEx(BindingHandle: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcRevertToSelfEx == "on"]
+public unsafe func Windows_RpcRevertToSelfEx(BindingHandle: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcRevertToSelfEx(BindingHandle)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerCompleteSecurityCallback == "on"]
+foreign {
+    func RpcServerCompleteSecurityCallback(BindingHandle: CPointer<Unit>, Status: windows_core.RPC_STATUS): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerCompleteSecurityCallback == "on"]
+public unsafe func Windows_RpcServerCompleteSecurityCallback(BindingHandle: CPointer<Unit>, Status: windows_core.RPC_STATUS): windows_core.RPC_STATUS {
+    return RpcServerCompleteSecurityCallback(BindingHandle, Status)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerInqBindingHandle == "on"]
+foreign {
+    func RpcServerInqBindingHandle(Binding: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerInqBindingHandle == "on"]
+public unsafe func Windows_RpcServerInqBindingHandle(Binding: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return RpcServerInqBindingHandle(Binding)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerInqBindings == "on"]
+foreign {
+    func RpcServerInqBindings(BindingVector: CPointer<CPointer<RPC_BINDING_VECTORAbi>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerInqBindings == "on"]
+public unsafe func Windows_RpcServerInqBindings(BindingVector: CPointer<CPointer<RPC_BINDING_VECTORAbi>>): windows_core.RPC_STATUS {
+    return RpcServerInqBindings(BindingVector)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerInqBindingsEx == "on"]
+foreign {
+    // param-hint: SecurityDescriptor optional
+    func RpcServerInqBindingsEx(SecurityDescriptor: CPointer<Unit>, BindingVector: CPointer<CPointer<RPC_BINDING_VECTORAbi>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerInqBindingsEx == "on"]
+public unsafe func Windows_RpcServerInqBindingsEx(SecurityDescriptor: CPointer<Unit>, BindingVector: CPointer<CPointer<RPC_BINDING_VECTORAbi>>): windows_core.RPC_STATUS {
+    return RpcServerInqBindingsEx(SecurityDescriptor, BindingVector)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerInqCallAttributesA == "on"]
+foreign {
+    // param-hint: ClientBinding optional
+    func RpcServerInqCallAttributesA(ClientBinding: CPointer<Unit>, RpcCallAttributes: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerInqCallAttributesA == "on"]
+public unsafe func Windows_RpcServerInqCallAttributesA(ClientBinding: CPointer<Unit>, RpcCallAttributes: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcServerInqCallAttributesA(ClientBinding, RpcCallAttributes)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerInqCallAttributesW == "on"]
+foreign {
+    // param-hint: ClientBinding optional
+    func RpcServerInqCallAttributesW(ClientBinding: CPointer<Unit>, RpcCallAttributes: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerInqCallAttributesW == "on"]
+public unsafe func Windows_RpcServerInqCallAttributesW(ClientBinding: CPointer<Unit>, RpcCallAttributes: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcServerInqCallAttributesW(ClientBinding, RpcCallAttributes)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerInqDefaultPrincNameA == "on"]
+foreign {
+    func RpcServerInqDefaultPrincNameA(AuthnSvc: UInt32, PrincName: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerInqDefaultPrincNameA == "on"]
+public unsafe func Windows_RpcServerInqDefaultPrincNameA(AuthnSvc: UInt32, PrincName: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS {
+    return RpcServerInqDefaultPrincNameA(AuthnSvc, PrincName)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerInqDefaultPrincNameW == "on"]
+foreign {
+    func RpcServerInqDefaultPrincNameW(AuthnSvc: UInt32, PrincName: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerInqDefaultPrincNameW == "on"]
+public unsafe func Windows_RpcServerInqDefaultPrincNameW(AuthnSvc: UInt32, PrincName: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS {
+    return RpcServerInqDefaultPrincNameW(AuthnSvc, PrincName)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerInqIf == "on"]
+foreign {
+    // param-hint: MgrTypeUuid optional
+    func RpcServerInqIf(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, MgrEpv: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerInqIf == "on"]
+public unsafe func Windows_RpcServerInqIf(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, MgrEpv: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return RpcServerInqIf(IfSpec, MgrTypeUuid, MgrEpv)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerInterfaceGroupActivate == "on"]
+foreign {
+    func RpcServerInterfaceGroupActivate(IfGroup: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerInterfaceGroupActivate == "on"]
+public unsafe func Windows_RpcServerInterfaceGroupActivate(IfGroup: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcServerInterfaceGroupActivate(IfGroup)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerInterfaceGroupClose == "on"]
+foreign {
+    func RpcServerInterfaceGroupClose(IfGroup: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerInterfaceGroupClose == "on"]
+public unsafe func Windows_RpcServerInterfaceGroupClose(IfGroup: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcServerInterfaceGroupClose(IfGroup)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerInterfaceGroupCreateA == "on"]
+foreign {
+    // param-hint: Interfaces len=param[1]
+    // param-hint: Endpoints len=param[3]
+    func RpcServerInterfaceGroupCreateA(Interfaces: CPointer<RPC_INTERFACE_TEMPLATEAAbi>, NumIfs: UInt32, Endpoints: CPointer<RPC_ENDPOINT_TEMPLATEAAbi>, NumEndpoints: UInt32, IdlePeriod: UInt32, IdleCallbackFn: RPC_INTERFACE_GROUP_IDLE_CALLBACK_FN, IdleCallbackContext: CPointer<Unit>, IfGroup: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerInterfaceGroupCreateA == "on"]
+public unsafe func Windows_RpcServerInterfaceGroupCreateA(Interfaces: CPointer<RPC_INTERFACE_TEMPLATEAAbi>, NumIfs: UInt32, Endpoints: CPointer<RPC_ENDPOINT_TEMPLATEAAbi>, NumEndpoints: UInt32, IdlePeriod: UInt32, IdleCallbackFn: RPC_INTERFACE_GROUP_IDLE_CALLBACK_FN, IdleCallbackContext: CPointer<Unit>, IfGroup: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return RpcServerInterfaceGroupCreateA(Interfaces, NumIfs, Endpoints, NumEndpoints, IdlePeriod, IdleCallbackFn, IdleCallbackContext, IfGroup)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerInterfaceGroupCreateW == "on"]
+foreign {
+    // param-hint: Interfaces len=param[1]
+    // param-hint: Endpoints len=param[3]
+    func RpcServerInterfaceGroupCreateW(Interfaces: CPointer<RPC_INTERFACE_TEMPLATEWAbi>, NumIfs: UInt32, Endpoints: CPointer<RPC_ENDPOINT_TEMPLATEWAbi>, NumEndpoints: UInt32, IdlePeriod: UInt32, IdleCallbackFn: RPC_INTERFACE_GROUP_IDLE_CALLBACK_FN, IdleCallbackContext: CPointer<Unit>, IfGroup: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerInterfaceGroupCreateW == "on"]
+public unsafe func Windows_RpcServerInterfaceGroupCreateW(Interfaces: CPointer<RPC_INTERFACE_TEMPLATEWAbi>, NumIfs: UInt32, Endpoints: CPointer<RPC_ENDPOINT_TEMPLATEWAbi>, NumEndpoints: UInt32, IdlePeriod: UInt32, IdleCallbackFn: RPC_INTERFACE_GROUP_IDLE_CALLBACK_FN, IdleCallbackContext: CPointer<Unit>, IfGroup: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return RpcServerInterfaceGroupCreateW(Interfaces, NumIfs, Endpoints, NumEndpoints, IdlePeriod, IdleCallbackFn, IdleCallbackContext, IfGroup)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerInterfaceGroupDeactivate == "on"]
+foreign {
+    func RpcServerInterfaceGroupDeactivate(IfGroup: CPointer<Unit>, ForceDeactivation: UInt32): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerInterfaceGroupDeactivate == "on"]
+public unsafe func Windows_RpcServerInterfaceGroupDeactivate(IfGroup: CPointer<Unit>, ForceDeactivation: UInt32): windows_core.RPC_STATUS {
+    return RpcServerInterfaceGroupDeactivate(IfGroup, ForceDeactivation)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerInterfaceGroupInqBindings == "on"]
+foreign {
+    func RpcServerInterfaceGroupInqBindings(IfGroup: CPointer<Unit>, BindingVector: CPointer<CPointer<RPC_BINDING_VECTORAbi>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerInterfaceGroupInqBindings == "on"]
+public unsafe func Windows_RpcServerInterfaceGroupInqBindings(IfGroup: CPointer<Unit>, BindingVector: CPointer<CPointer<RPC_BINDING_VECTORAbi>>): windows_core.RPC_STATUS {
+    return RpcServerInterfaceGroupInqBindings(IfGroup, BindingVector)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerListen == "on"]
+foreign {
+    func RpcServerListen(MinimumCallThreads: UInt32, MaxCalls: UInt32, DontWait: UInt32): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerListen == "on"]
+public unsafe func Windows_RpcServerListen(MinimumCallThreads: UInt32, MaxCalls: UInt32, DontWait: UInt32): windows_core.RPC_STATUS {
+    return RpcServerListen(MinimumCallThreads, MaxCalls, DontWait)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerRegisterAuthInfoA == "on"]
+foreign {
+    // param-hint: ServerPrincName optional
+    // param-hint: GetKeyFn optional
+    // param-hint: Arg optional
+    func RpcServerRegisterAuthInfoA(ServerPrincName: CPointer<UInt8>, AuthnSvc: UInt32, GetKeyFn: RPC_AUTH_KEY_RETRIEVAL_FN, Arg: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerRegisterAuthInfoA == "on"]
+public unsafe func Windows_RpcServerRegisterAuthInfoA(ServerPrincName: CPointer<UInt8>, AuthnSvc: UInt32, GetKeyFn: RPC_AUTH_KEY_RETRIEVAL_FN, Arg: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcServerRegisterAuthInfoA(ServerPrincName, AuthnSvc, GetKeyFn, Arg)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerRegisterAuthInfoW == "on"]
+foreign {
+    // param-hint: ServerPrincName optional
+    // param-hint: GetKeyFn optional
+    // param-hint: Arg optional
+    func RpcServerRegisterAuthInfoW(ServerPrincName: CPointer<UInt16>, AuthnSvc: UInt32, GetKeyFn: RPC_AUTH_KEY_RETRIEVAL_FN, Arg: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerRegisterAuthInfoW == "on"]
+public unsafe func Windows_RpcServerRegisterAuthInfoW(ServerPrincName: CPointer<UInt16>, AuthnSvc: UInt32, GetKeyFn: RPC_AUTH_KEY_RETRIEVAL_FN, Arg: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcServerRegisterAuthInfoW(ServerPrincName, AuthnSvc, GetKeyFn, Arg)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerRegisterIf == "on"]
+foreign {
+    // param-hint: MgrTypeUuid optional
+    // param-hint: MgrEpv optional
+    func RpcServerRegisterIf(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, MgrEpv: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerRegisterIf == "on"]
+public unsafe func Windows_RpcServerRegisterIf(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, MgrEpv: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcServerRegisterIf(IfSpec, MgrTypeUuid, MgrEpv)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerRegisterIf2 == "on"]
+foreign {
+    // param-hint: MgrTypeUuid optional
+    // param-hint: MgrEpv optional
+    // param-hint: IfCallbackFn optional
+    func RpcServerRegisterIf2(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, MgrEpv: CPointer<Unit>, Flags: UInt32, MaxCalls: UInt32, MaxRpcSize: UInt32, IfCallbackFn: RPC_IF_CALLBACK_FN): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerRegisterIf2 == "on"]
+public unsafe func Windows_RpcServerRegisterIf2(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, MgrEpv: CPointer<Unit>, Flags: UInt32, MaxCalls: UInt32, MaxRpcSize: UInt32, IfCallbackFn: RPC_IF_CALLBACK_FN): windows_core.RPC_STATUS {
+    return RpcServerRegisterIf2(IfSpec, MgrTypeUuid, MgrEpv, Flags, MaxCalls, MaxRpcSize, IfCallbackFn)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerRegisterIf3 == "on"]
+foreign {
+    // param-hint: MgrTypeUuid optional
+    // param-hint: MgrEpv optional
+    // param-hint: IfCallback optional
+    // param-hint: SecurityDescriptor optional
+    func RpcServerRegisterIf3(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, MgrEpv: CPointer<Unit>, Flags: UInt32, MaxCalls: UInt32, MaxRpcSize: UInt32, IfCallback: RPC_IF_CALLBACK_FN, SecurityDescriptor: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerRegisterIf3 == "on"]
+public unsafe func Windows_RpcServerRegisterIf3(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, MgrEpv: CPointer<Unit>, Flags: UInt32, MaxCalls: UInt32, MaxRpcSize: UInt32, IfCallback: RPC_IF_CALLBACK_FN, SecurityDescriptor: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcServerRegisterIf3(IfSpec, MgrTypeUuid, MgrEpv, Flags, MaxCalls, MaxRpcSize, IfCallback, SecurityDescriptor)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerRegisterIfEx == "on"]
+foreign {
+    // param-hint: MgrTypeUuid optional
+    // param-hint: MgrEpv optional
+    // param-hint: IfCallback optional
+    func RpcServerRegisterIfEx(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, MgrEpv: CPointer<Unit>, Flags: UInt32, MaxCalls: UInt32, IfCallback: RPC_IF_CALLBACK_FN): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerRegisterIfEx == "on"]
+public unsafe func Windows_RpcServerRegisterIfEx(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, MgrEpv: CPointer<Unit>, Flags: UInt32, MaxCalls: UInt32, IfCallback: RPC_IF_CALLBACK_FN): windows_core.RPC_STATUS {
+    return RpcServerRegisterIfEx(IfSpec, MgrTypeUuid, MgrEpv, Flags, MaxCalls, IfCallback)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerSubscribeForNotification == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: Binding optional
     func RpcServerSubscribeForNotification(Binding: CPointer<Unit>, Notification: RPC_NOTIFICATIONSAbi, NotificationType: RPC_NOTIFICATION_TYPESAbi, NotificationInfo: CPointer<RPC_ASYNC_NOTIFICATION_INFO>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerSubscribeForNotification == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_RpcServerSubscribeForNotification(Binding: CPointer<Unit>, Notification: RPC_NOTIFICATIONSAbi, NotificationType: RPC_NOTIFICATION_TYPESAbi, NotificationInfo: CPointer<RPC_ASYNC_NOTIFICATION_INFO>): windows_core.RPC_STATUS {
+    return RpcServerSubscribeForNotification(Binding, Notification, NotificationType, NotificationInfo)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerTestCancel == "on"]
+foreign {
+    // param-hint: BindingHandle optional
+    func RpcServerTestCancel(BindingHandle: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerTestCancel == "on"]
+public unsafe func Windows_RpcServerTestCancel(BindingHandle: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcServerTestCancel(BindingHandle)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUnregisterIf == "on"]
+foreign {
+    // param-hint: IfSpec optional
+    // param-hint: MgrTypeUuid optional
+    func RpcServerUnregisterIf(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, WaitForCallsToComplete: UInt32): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUnregisterIf == "on"]
+public unsafe func Windows_RpcServerUnregisterIf(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, WaitForCallsToComplete: UInt32): windows_core.RPC_STATUS {
+    return RpcServerUnregisterIf(IfSpec, MgrTypeUuid, WaitForCallsToComplete)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUnregisterIfEx == "on"]
+foreign {
+    // param-hint: IfSpec optional
+    // param-hint: MgrTypeUuid optional
+    func RpcServerUnregisterIfEx(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, RundownContextHandles: Int32): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUnregisterIfEx == "on"]
+public unsafe func Windows_RpcServerUnregisterIfEx(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, RundownContextHandles: Int32): windows_core.RPC_STATUS {
+    return RpcServerUnregisterIfEx(IfSpec, MgrTypeUuid, RundownContextHandles)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUnsubscribeForNotification == "on"]
+foreign {
+    // param-hint: Binding optional
+    func RpcServerUnsubscribeForNotification(Binding: CPointer<Unit>, Notification: RPC_NOTIFICATIONSAbi, NotificationsQueued: CPointer<UInt32>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUnsubscribeForNotification == "on"]
+public unsafe func Windows_RpcServerUnsubscribeForNotification(Binding: CPointer<Unit>, Notification: RPC_NOTIFICATIONSAbi, NotificationsQueued: CPointer<UInt32>): windows_core.RPC_STATUS {
+    return RpcServerUnsubscribeForNotification(Binding, Notification, NotificationsQueued)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUseAllProtseqs == "on"]
+foreign {
+    // param-hint: SecurityDescriptor optional
+    func RpcServerUseAllProtseqs(MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUseAllProtseqs == "on"]
+public unsafe func Windows_RpcServerUseAllProtseqs(MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcServerUseAllProtseqs(MaxCalls, SecurityDescriptor)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUseAllProtseqsEx == "on"]
+foreign {
+    // param-hint: SecurityDescriptor optional
+    func RpcServerUseAllProtseqsEx(MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICYAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUseAllProtseqsEx == "on"]
+public unsafe func Windows_RpcServerUseAllProtseqsEx(MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICYAbi>): windows_core.RPC_STATUS {
+    return RpcServerUseAllProtseqsEx(MaxCalls, SecurityDescriptor, Policy)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUseAllProtseqsIf == "on"]
+foreign {
+    // param-hint: SecurityDescriptor optional
+    func RpcServerUseAllProtseqsIf(MaxCalls: UInt32, IfSpec: CPointer<Unit>, SecurityDescriptor: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUseAllProtseqsIf == "on"]
+public unsafe func Windows_RpcServerUseAllProtseqsIf(MaxCalls: UInt32, IfSpec: CPointer<Unit>, SecurityDescriptor: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcServerUseAllProtseqsIf(MaxCalls, IfSpec, SecurityDescriptor)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUseAllProtseqsIfEx == "on"]
+foreign {
+    // param-hint: SecurityDescriptor optional
+    func RpcServerUseAllProtseqsIfEx(MaxCalls: UInt32, IfSpec: CPointer<Unit>, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICYAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUseAllProtseqsIfEx == "on"]
+public unsafe func Windows_RpcServerUseAllProtseqsIfEx(MaxCalls: UInt32, IfSpec: CPointer<Unit>, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICYAbi>): windows_core.RPC_STATUS {
+    return RpcServerUseAllProtseqsIfEx(MaxCalls, IfSpec, SecurityDescriptor, Policy)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUseProtseqA == "on"]
+foreign {
+    // param-hint: SecurityDescriptor optional
+    func RpcServerUseProtseqA(Protseq: CPointer<UInt8>, MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUseProtseqA == "on"]
+public unsafe func Windows_RpcServerUseProtseqA(Protseq: CPointer<UInt8>, MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcServerUseProtseqA(Protseq, MaxCalls, SecurityDescriptor)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUseProtseqEpA == "on"]
+foreign {
+    // param-hint: SecurityDescriptor optional
+    func RpcServerUseProtseqEpA(Protseq: CPointer<UInt8>, MaxCalls: UInt32, Endpoint: CPointer<UInt8>, SecurityDescriptor: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUseProtseqEpA == "on"]
+public unsafe func Windows_RpcServerUseProtseqEpA(Protseq: CPointer<UInt8>, MaxCalls: UInt32, Endpoint: CPointer<UInt8>, SecurityDescriptor: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcServerUseProtseqEpA(Protseq, MaxCalls, Endpoint, SecurityDescriptor)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUseProtseqEpExA == "on"]
+foreign {
+    // param-hint: SecurityDescriptor optional
+    func RpcServerUseProtseqEpExA(Protseq: CPointer<UInt8>, MaxCalls: UInt32, Endpoint: CPointer<UInt8>, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICYAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUseProtseqEpExA == "on"]
+public unsafe func Windows_RpcServerUseProtseqEpExA(Protseq: CPointer<UInt8>, MaxCalls: UInt32, Endpoint: CPointer<UInt8>, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICYAbi>): windows_core.RPC_STATUS {
+    return RpcServerUseProtseqEpExA(Protseq, MaxCalls, Endpoint, SecurityDescriptor, Policy)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUseProtseqEpExW == "on"]
+foreign {
+    // param-hint: SecurityDescriptor optional
+    func RpcServerUseProtseqEpExW(Protseq: CPointer<UInt16>, MaxCalls: UInt32, Endpoint: CPointer<UInt16>, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICYAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUseProtseqEpExW == "on"]
+public unsafe func Windows_RpcServerUseProtseqEpExW(Protseq: CPointer<UInt16>, MaxCalls: UInt32, Endpoint: CPointer<UInt16>, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICYAbi>): windows_core.RPC_STATUS {
+    return RpcServerUseProtseqEpExW(Protseq, MaxCalls, Endpoint, SecurityDescriptor, Policy)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUseProtseqEpW == "on"]
+foreign {
+    // param-hint: SecurityDescriptor optional
+    func RpcServerUseProtseqEpW(Protseq: CPointer<UInt16>, MaxCalls: UInt32, Endpoint: CPointer<UInt16>, SecurityDescriptor: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUseProtseqEpW == "on"]
+public unsafe func Windows_RpcServerUseProtseqEpW(Protseq: CPointer<UInt16>, MaxCalls: UInt32, Endpoint: CPointer<UInt16>, SecurityDescriptor: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcServerUseProtseqEpW(Protseq, MaxCalls, Endpoint, SecurityDescriptor)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUseProtseqExA == "on"]
+foreign {
+    // param-hint: SecurityDescriptor optional
+    func RpcServerUseProtseqExA(Protseq: CPointer<UInt8>, MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICYAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUseProtseqExA == "on"]
+public unsafe func Windows_RpcServerUseProtseqExA(Protseq: CPointer<UInt8>, MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICYAbi>): windows_core.RPC_STATUS {
+    return RpcServerUseProtseqExA(Protseq, MaxCalls, SecurityDescriptor, Policy)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUseProtseqExW == "on"]
+foreign {
+    // param-hint: SecurityDescriptor optional
+    func RpcServerUseProtseqExW(Protseq: CPointer<UInt16>, MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICYAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUseProtseqExW == "on"]
+public unsafe func Windows_RpcServerUseProtseqExW(Protseq: CPointer<UInt16>, MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICYAbi>): windows_core.RPC_STATUS {
+    return RpcServerUseProtseqExW(Protseq, MaxCalls, SecurityDescriptor, Policy)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUseProtseqIfA == "on"]
+foreign {
+    // param-hint: SecurityDescriptor optional
+    func RpcServerUseProtseqIfA(Protseq: CPointer<UInt8>, MaxCalls: UInt32, IfSpec: CPointer<Unit>, SecurityDescriptor: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUseProtseqIfA == "on"]
+public unsafe func Windows_RpcServerUseProtseqIfA(Protseq: CPointer<UInt8>, MaxCalls: UInt32, IfSpec: CPointer<Unit>, SecurityDescriptor: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcServerUseProtseqIfA(Protseq, MaxCalls, IfSpec, SecurityDescriptor)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUseProtseqIfExA == "on"]
+foreign {
+    // param-hint: SecurityDescriptor optional
+    func RpcServerUseProtseqIfExA(Protseq: CPointer<UInt8>, MaxCalls: UInt32, IfSpec: CPointer<Unit>, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICYAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUseProtseqIfExA == "on"]
+public unsafe func Windows_RpcServerUseProtseqIfExA(Protseq: CPointer<UInt8>, MaxCalls: UInt32, IfSpec: CPointer<Unit>, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICYAbi>): windows_core.RPC_STATUS {
+    return RpcServerUseProtseqIfExA(Protseq, MaxCalls, IfSpec, SecurityDescriptor, Policy)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUseProtseqIfExW == "on"]
+foreign {
+    // param-hint: SecurityDescriptor optional
+    func RpcServerUseProtseqIfExW(Protseq: CPointer<UInt16>, MaxCalls: UInt32, IfSpec: CPointer<Unit>, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICYAbi>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUseProtseqIfExW == "on"]
+public unsafe func Windows_RpcServerUseProtseqIfExW(Protseq: CPointer<UInt16>, MaxCalls: UInt32, IfSpec: CPointer<Unit>, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICYAbi>): windows_core.RPC_STATUS {
+    return RpcServerUseProtseqIfExW(Protseq, MaxCalls, IfSpec, SecurityDescriptor, Policy)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUseProtseqIfW == "on"]
+foreign {
+    // param-hint: SecurityDescriptor optional
+    func RpcServerUseProtseqIfW(Protseq: CPointer<UInt16>, MaxCalls: UInt32, IfSpec: CPointer<Unit>, SecurityDescriptor: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUseProtseqIfW == "on"]
+public unsafe func Windows_RpcServerUseProtseqIfW(Protseq: CPointer<UInt16>, MaxCalls: UInt32, IfSpec: CPointer<Unit>, SecurityDescriptor: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcServerUseProtseqIfW(Protseq, MaxCalls, IfSpec, SecurityDescriptor)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUseProtseqW == "on"]
+foreign {
+    // param-hint: SecurityDescriptor optional
+    func RpcServerUseProtseqW(Protseq: CPointer<UInt16>, MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerUseProtseqW == "on"]
+public unsafe func Windows_RpcServerUseProtseqW(Protseq: CPointer<UInt16>, MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcServerUseProtseqW(Protseq, MaxCalls, SecurityDescriptor)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerYield == "on"]
+foreign {
+    func RpcServerYield(): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcServerYield == "on"]
+public unsafe func Windows_RpcServerYield(): Unit {
+    RpcServerYield()
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSmAllocate == "on"]
+foreign {
+    func RpcSmAllocate(Size: UIntNative, pStatus: CPointer<windows_core.RPC_STATUS>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSmAllocate == "on"]
+public unsafe func Windows_RpcSmAllocate(Size: UIntNative, pStatus: CPointer<windows_core.RPC_STATUS>): CPointer<Unit> {
+    return RpcSmAllocate(Size, pStatus)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSmClientFree == "on"]
+foreign {
+    func RpcSmClientFree(pNodeToFree: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSmClientFree == "on"]
+public unsafe func Windows_RpcSmClientFree(pNodeToFree: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcSmClientFree(pNodeToFree)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSmDestroyClientContext == "on"]
+foreign {
+    func RpcSmDestroyClientContext(ContextHandle: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSmDestroyClientContext == "on"]
+public unsafe func Windows_RpcSmDestroyClientContext(ContextHandle: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return RpcSmDestroyClientContext(ContextHandle)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSmDisableAllocate == "on"]
+foreign {
+    func RpcSmDisableAllocate(): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSmDisableAllocate == "on"]
+public unsafe func Windows_RpcSmDisableAllocate(): windows_core.RPC_STATUS {
+    return RpcSmDisableAllocate()
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSmEnableAllocate == "on"]
+foreign {
+    func RpcSmEnableAllocate(): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSmEnableAllocate == "on"]
+public unsafe func Windows_RpcSmEnableAllocate(): windows_core.RPC_STATUS {
+    return RpcSmEnableAllocate()
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSmFree == "on"]
+foreign {
+    func RpcSmFree(NodeToFree: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSmFree == "on"]
+public unsafe func Windows_RpcSmFree(NodeToFree: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcSmFree(NodeToFree)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSmGetThreadHandle == "on"]
+foreign {
+    func RpcSmGetThreadHandle(pStatus: CPointer<windows_core.RPC_STATUS>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSmGetThreadHandle == "on"]
+public unsafe func Windows_RpcSmGetThreadHandle(pStatus: CPointer<windows_core.RPC_STATUS>): CPointer<Unit> {
+    return RpcSmGetThreadHandle(pStatus)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSmSetClientAllocFree == "on"]
+foreign {
+    func RpcSmSetClientAllocFree(ClientAlloc: RPC_CLIENT_ALLOC, ClientFree: RPC_CLIENT_FREE): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSmSetClientAllocFree == "on"]
+public unsafe func Windows_RpcSmSetClientAllocFree(ClientAlloc: RPC_CLIENT_ALLOC, ClientFree: RPC_CLIENT_FREE): windows_core.RPC_STATUS {
+    return RpcSmSetClientAllocFree(ClientAlloc, ClientFree)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSmSetThreadHandle == "on"]
+foreign {
+    func RpcSmSetThreadHandle(Id: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSmSetThreadHandle == "on"]
+public unsafe func Windows_RpcSmSetThreadHandle(Id: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcSmSetThreadHandle(Id)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSmSwapClientAllocFree == "on"]
+foreign {
+    func RpcSmSwapClientAllocFree(ClientAlloc: RPC_CLIENT_ALLOC, ClientFree: RPC_CLIENT_FREE, OldClientAlloc: CPointer<RPC_CLIENT_ALLOC>, OldClientFree: CPointer<RPC_CLIENT_FREE>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSmSwapClientAllocFree == "on"]
+public unsafe func Windows_RpcSmSwapClientAllocFree(ClientAlloc: RPC_CLIENT_ALLOC, ClientFree: RPC_CLIENT_FREE, OldClientAlloc: CPointer<RPC_CLIENT_ALLOC>, OldClientFree: CPointer<RPC_CLIENT_FREE>): windows_core.RPC_STATUS {
+    return RpcSmSwapClientAllocFree(ClientAlloc, ClientFree, OldClientAlloc, OldClientFree)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSsAllocate == "on"]
+foreign {
+    func RpcSsAllocate(Size: UIntNative): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSsAllocate == "on"]
+public unsafe func Windows_RpcSsAllocate(Size: UIntNative): CPointer<Unit> {
+    return RpcSsAllocate(Size)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSsContextLockExclusive == "on"]
+foreign {
+    // param-hint: ServerBindingHandle optional
+    func RpcSsContextLockExclusive(ServerBindingHandle: CPointer<Unit>, UserContext: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSsContextLockExclusive == "on"]
+public unsafe func Windows_RpcSsContextLockExclusive(ServerBindingHandle: CPointer<Unit>, UserContext: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcSsContextLockExclusive(ServerBindingHandle, UserContext)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSsContextLockShared == "on"]
+foreign {
+    func RpcSsContextLockShared(ServerBindingHandle: CPointer<Unit>, UserContext: CPointer<Unit>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSsContextLockShared == "on"]
+public unsafe func Windows_RpcSsContextLockShared(ServerBindingHandle: CPointer<Unit>, UserContext: CPointer<Unit>): windows_core.RPC_STATUS {
+    return RpcSsContextLockShared(ServerBindingHandle, UserContext)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSsDestroyClientContext == "on"]
+foreign {
+    func RpcSsDestroyClientContext(ContextHandle: CPointer<CPointer<Unit>>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSsDestroyClientContext == "on"]
+public unsafe func Windows_RpcSsDestroyClientContext(ContextHandle: CPointer<CPointer<Unit>>): Unit {
+    RpcSsDestroyClientContext(ContextHandle)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSsDisableAllocate == "on"]
+foreign {
+    func RpcSsDisableAllocate(): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSsDisableAllocate == "on"]
+public unsafe func Windows_RpcSsDisableAllocate(): Unit {
+    RpcSsDisableAllocate()
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSsDontSerializeContext == "on"]
+foreign {
+    func RpcSsDontSerializeContext(): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSsDontSerializeContext == "on"]
+public unsafe func Windows_RpcSsDontSerializeContext(): Unit {
+    RpcSsDontSerializeContext()
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSsEnableAllocate == "on"]
+foreign {
+    func RpcSsEnableAllocate(): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSsEnableAllocate == "on"]
+public unsafe func Windows_RpcSsEnableAllocate(): Unit {
+    RpcSsEnableAllocate()
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSsFree == "on"]
+foreign {
+    func RpcSsFree(NodeToFree: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSsFree == "on"]
+public unsafe func Windows_RpcSsFree(NodeToFree: CPointer<Unit>): Unit {
+    RpcSsFree(NodeToFree)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSsGetContextBinding == "on"]
+foreign {
+    func RpcSsGetContextBinding(ContextHandle: CPointer<Unit>, Binding: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSsGetContextBinding == "on"]
+public unsafe func Windows_RpcSsGetContextBinding(ContextHandle: CPointer<Unit>, Binding: CPointer<CPointer<Unit>>): windows_core.RPC_STATUS {
+    return RpcSsGetContextBinding(ContextHandle, Binding)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSsGetThreadHandle == "on"]
+foreign {
+    func RpcSsGetThreadHandle(): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSsGetThreadHandle == "on"]
+public unsafe func Windows_RpcSsGetThreadHandle(): CPointer<Unit> {
+    return RpcSsGetThreadHandle()
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSsSetClientAllocFree == "on"]
+foreign {
+    func RpcSsSetClientAllocFree(ClientAlloc: RPC_CLIENT_ALLOC, ClientFree: RPC_CLIENT_FREE): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSsSetClientAllocFree == "on"]
+public unsafe func Windows_RpcSsSetClientAllocFree(ClientAlloc: RPC_CLIENT_ALLOC, ClientFree: RPC_CLIENT_FREE): Unit {
+    RpcSsSetClientAllocFree(ClientAlloc, ClientFree)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSsSetThreadHandle == "on"]
+foreign {
+    func RpcSsSetThreadHandle(Id: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSsSetThreadHandle == "on"]
+public unsafe func Windows_RpcSsSetThreadHandle(Id: CPointer<Unit>): Unit {
+    RpcSsSetThreadHandle(Id)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSsSwapClientAllocFree == "on"]
+foreign {
+    func RpcSsSwapClientAllocFree(ClientAlloc: RPC_CLIENT_ALLOC, ClientFree: RPC_CLIENT_FREE, OldClientAlloc: CPointer<RPC_CLIENT_ALLOC>, OldClientFree: CPointer<RPC_CLIENT_FREE>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcSsSwapClientAllocFree == "on"]
+public unsafe func Windows_RpcSsSwapClientAllocFree(ClientAlloc: RPC_CLIENT_ALLOC, ClientFree: RPC_CLIENT_FREE, OldClientAlloc: CPointer<RPC_CLIENT_ALLOC>, OldClientFree: CPointer<RPC_CLIENT_FREE>): Unit {
+    RpcSsSwapClientAllocFree(ClientAlloc, ClientFree, OldClientAlloc, OldClientFree)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcStringBindingComposeA == "on"]
+foreign {
+    // param-hint: ObjUuid optional
+    // param-hint: ProtSeq optional
+    // param-hint: NetworkAddr optional
+    // param-hint: Endpoint optional
+    // param-hint: Options optional
+    // param-hint: StringBinding optional
+    func RpcStringBindingComposeA(ObjUuid: CPointer<UInt8>, ProtSeq: CPointer<UInt8>, NetworkAddr: CPointer<UInt8>, Endpoint: CPointer<UInt8>, Options: CPointer<UInt8>, StringBinding: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcStringBindingComposeA == "on"]
+public unsafe func Windows_RpcStringBindingComposeA(ObjUuid: CPointer<UInt8>, ProtSeq: CPointer<UInt8>, NetworkAddr: CPointer<UInt8>, Endpoint: CPointer<UInt8>, Options: CPointer<UInt8>, StringBinding: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS {
+    return RpcStringBindingComposeA(ObjUuid, ProtSeq, NetworkAddr, Endpoint, Options, StringBinding)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcStringBindingComposeW == "on"]
+foreign {
+    // param-hint: ObjUuid optional
+    // param-hint: ProtSeq optional
+    // param-hint: NetworkAddr optional
+    // param-hint: Endpoint optional
+    // param-hint: Options optional
+    // param-hint: StringBinding optional
+    func RpcStringBindingComposeW(ObjUuid: CPointer<UInt16>, ProtSeq: CPointer<UInt16>, NetworkAddr: CPointer<UInt16>, Endpoint: CPointer<UInt16>, Options: CPointer<UInt16>, StringBinding: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcStringBindingComposeW == "on"]
+public unsafe func Windows_RpcStringBindingComposeW(ObjUuid: CPointer<UInt16>, ProtSeq: CPointer<UInt16>, NetworkAddr: CPointer<UInt16>, Endpoint: CPointer<UInt16>, Options: CPointer<UInt16>, StringBinding: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS {
+    return RpcStringBindingComposeW(ObjUuid, ProtSeq, NetworkAddr, Endpoint, Options, StringBinding)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcStringBindingParseA == "on"]
+foreign {
+    // param-hint: ObjUuid optional
+    // param-hint: Protseq optional
+    // param-hint: NetworkAddr optional
+    // param-hint: Endpoint optional
+    // param-hint: NetworkOptions optional
+    func RpcStringBindingParseA(StringBinding: CPointer<UInt8>, ObjUuid: CPointer<CPointer<UInt8>>, Protseq: CPointer<CPointer<UInt8>>, NetworkAddr: CPointer<CPointer<UInt8>>, Endpoint: CPointer<CPointer<UInt8>>, NetworkOptions: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcStringBindingParseA == "on"]
+public unsafe func Windows_RpcStringBindingParseA(StringBinding: CPointer<UInt8>, ObjUuid: CPointer<CPointer<UInt8>>, Protseq: CPointer<CPointer<UInt8>>, NetworkAddr: CPointer<CPointer<UInt8>>, Endpoint: CPointer<CPointer<UInt8>>, NetworkOptions: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS {
+    return RpcStringBindingParseA(StringBinding, ObjUuid, Protseq, NetworkAddr, Endpoint, NetworkOptions)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcStringBindingParseW == "on"]
+foreign {
+    // param-hint: ObjUuid optional
+    // param-hint: Protseq optional
+    // param-hint: NetworkAddr optional
+    // param-hint: Endpoint optional
+    // param-hint: NetworkOptions optional
+    func RpcStringBindingParseW(StringBinding: CPointer<UInt16>, ObjUuid: CPointer<CPointer<UInt16>>, Protseq: CPointer<CPointer<UInt16>>, NetworkAddr: CPointer<CPointer<UInt16>>, Endpoint: CPointer<CPointer<UInt16>>, NetworkOptions: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcStringBindingParseW == "on"]
+public unsafe func Windows_RpcStringBindingParseW(StringBinding: CPointer<UInt16>, ObjUuid: CPointer<CPointer<UInt16>>, Protseq: CPointer<CPointer<UInt16>>, NetworkAddr: CPointer<CPointer<UInt16>>, Endpoint: CPointer<CPointer<UInt16>>, NetworkOptions: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS {
+    return RpcStringBindingParseW(StringBinding, ObjUuid, Protseq, NetworkAddr, Endpoint, NetworkOptions)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcStringFreeA == "on"]
+foreign {
+    func RpcStringFreeA(String: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcStringFreeA == "on"]
+public unsafe func Windows_RpcStringFreeA(String: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS {
+    return RpcStringFreeA(String)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcStringFreeW == "on"]
+foreign {
+    func RpcStringFreeW(String: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcStringFreeW == "on"]
+public unsafe func Windows_RpcStringFreeW(String: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS {
+    return RpcStringFreeW(String)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcTestCancel == "on"]
+foreign {
+    func RpcTestCancel(): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcTestCancel == "on"]
+public unsafe func Windows_RpcTestCancel(): windows_core.RPC_STATUS {
+    return RpcTestCancel()
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcUserFree == "on"]
+foreign {
+    func RpcUserFree(AsyncHandle: CPointer<Unit>, pBuffer: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_RpcUserFree == "on"]
+public unsafe func Windows_RpcUserFree(AsyncHandle: CPointer<Unit>, pBuffer: CPointer<Unit>): Unit {
+    RpcUserFree(AsyncHandle, pBuffer)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_UuidCompare == "on"]
+foreign {
+    func UuidCompare(Uuid1: CPointer<GUID>, Uuid2: CPointer<GUID>, Status: CPointer<windows_core.RPC_STATUS>): Int32
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_UuidCompare == "on"]
+public unsafe func Windows_UuidCompare(Uuid1: CPointer<GUID>, Uuid2: CPointer<GUID>, Status: CPointer<windows_core.RPC_STATUS>): Int32 {
+    return UuidCompare(Uuid1, Uuid2, Status)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_UuidCreate == "on"]
+foreign {
+    func UuidCreate(Uuid: CPointer<GUID>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_UuidCreate == "on"]
+public unsafe func Windows_UuidCreate(Uuid: CPointer<GUID>): windows_core.RPC_STATUS {
+    return UuidCreate(Uuid)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_UuidCreateNil == "on"]
+foreign {
+    func UuidCreateNil(NilUuid: CPointer<GUID>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_UuidCreateNil == "on"]
+public unsafe func Windows_UuidCreateNil(NilUuid: CPointer<GUID>): windows_core.RPC_STATUS {
+    return UuidCreateNil(NilUuid)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_UuidCreateSequential == "on"]
+foreign {
+    func UuidCreateSequential(Uuid: CPointer<GUID>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_UuidCreateSequential == "on"]
+public unsafe func Windows_UuidCreateSequential(Uuid: CPointer<GUID>): windows_core.RPC_STATUS {
+    return UuidCreateSequential(Uuid)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_UuidEqual == "on"]
+foreign {
+    func UuidEqual(Uuid1: CPointer<GUID>, Uuid2: CPointer<GUID>, Status: CPointer<windows_core.RPC_STATUS>): Int32
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_UuidEqual == "on"]
+public unsafe func Windows_UuidEqual(Uuid1: CPointer<GUID>, Uuid2: CPointer<GUID>, Status: CPointer<windows_core.RPC_STATUS>): Int32 {
+    return UuidEqual(Uuid1, Uuid2, Status)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_UuidFromStringA == "on"]
+foreign {
+    // param-hint: StringUuid optional
+    func UuidFromStringA(StringUuid: CPointer<UInt8>, Uuid: CPointer<GUID>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_UuidFromStringA == "on"]
+public unsafe func Windows_UuidFromStringA(StringUuid: CPointer<UInt8>, Uuid: CPointer<GUID>): windows_core.RPC_STATUS {
+    return UuidFromStringA(StringUuid, Uuid)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_UuidFromStringW == "on"]
+foreign {
+    // param-hint: StringUuid optional
+    func UuidFromStringW(StringUuid: CPointer<UInt16>, Uuid: CPointer<GUID>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_UuidFromStringW == "on"]
+public unsafe func Windows_UuidFromStringW(StringUuid: CPointer<UInt16>, Uuid: CPointer<GUID>): windows_core.RPC_STATUS {
+    return UuidFromStringW(StringUuid, Uuid)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_UuidHash == "on"]
+foreign {
+    func UuidHash(Uuid: CPointer<GUID>, Status: CPointer<windows_core.RPC_STATUS>): UInt16
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_UuidHash == "on"]
+public unsafe func Windows_UuidHash(Uuid: CPointer<GUID>, Status: CPointer<windows_core.RPC_STATUS>): UInt16 {
+    return UuidHash(Uuid, Status)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_UuidIsNil == "on"]
+foreign {
+    func UuidIsNil(Uuid: CPointer<GUID>, Status: CPointer<windows_core.RPC_STATUS>): Int32
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_UuidIsNil == "on"]
+public unsafe func Windows_UuidIsNil(Uuid: CPointer<GUID>, Status: CPointer<windows_core.RPC_STATUS>): Int32 {
+    return UuidIsNil(Uuid, Status)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_UuidToStringA == "on"]
+foreign {
+    func UuidToStringA(Uuid: CPointer<GUID>, StringUuid: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_UuidToStringA == "on"]
+public unsafe func Windows_UuidToStringA(Uuid: CPointer<GUID>, StringUuid: CPointer<CPointer<UInt8>>): windows_core.RPC_STATUS {
+    return UuidToStringA(Uuid, StringUuid)
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_UuidToStringW == "on"]
+foreign {
+    func UuidToStringW(Uuid: CPointer<GUID>, StringUuid: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS
+}
+
+@When[Windows_Win32_System_Rpc == "on" && RPCRT4 == "on" && Windows_Win32_System_Rpc_UuidToStringW == "on"]
+public unsafe func Windows_UuidToStringW(Uuid: CPointer<GUID>, StringUuid: CPointer<CPointer<UInt16>>): windows_core.RPC_STATUS {
+    return UuidToStringW(Uuid, StringUuid)
 }
 
 @When[Windows_Win32_System_Rpc == "on"]

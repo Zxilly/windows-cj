@@ -1910,7 +1910,10 @@ extend IDataUsage <: windows_core.Interface<IDataUsage> {}
 public struct ILanIdentifierDataVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Type: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Value: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Value: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1987,6 +1990,7 @@ public class ILanIdentifierData <: InterfaceWrapperBase & ComInterface & Runtime
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Value(): windows_collections.IVectorView<UInt8> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2621,7 +2625,10 @@ extend IProviderNetworkUsage <: windows_core.Interface<IProviderNetworkUsage> {}
 @C
 public struct IProxyConfigurationVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ProxyUris: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ProxyUris: UIntNative = UIntNative(0)
     public var CanConnectDirectly: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -2691,6 +2698,7 @@ public class IProxyConfiguration <: InterfaceWrapperBase & ComInterface & Runtim
         readVtbl<IProxyConfigurationVtbl>(IProxyConfigurationVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ProxyUris(): windows_collections.IVectorView<Foundation.Uri> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2913,7 +2921,10 @@ extend IWwanConnectionProfileDetails <: windows_core.Interface<IWwanConnectionPr
 public struct IWwanConnectionProfileDetails2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var IPKind: CFunc<(CPointer<Unit>, CPointer<WwanNetworkIPKindAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var PurposeGuids: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var PurposeGuids: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2990,6 +3001,7 @@ public class IWwanConnectionProfileDetails2 <: InterfaceWrapperBase & ComInterfa
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<WwanNetworkIPKind>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PurposeGuids(): windows_collections.IVectorView<GuidValue> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3075,6 +3087,7 @@ public class LanIdentifierData <: InterfaceWrapperBase & ComInterface & windows_
         return defaultInterface().Type()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Value(): windows_collections.IVectorView<UInt8> {
         return defaultInterface().Value()
     }
@@ -3583,12 +3596,14 @@ public class NetworkStatusChangedEventHandler <: InterfaceWrapperBase & ComInter
 @When[Windows_Networking_Connectivity == "on"]
 extend NetworkStatusChangedEventHandler <: windows_core.Interface<NetworkStatusChangedEventHandler> {}
 
+@When[Windows_Networking_Connectivity == "on"]
 private open class NetworkStatusChangedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_Networking_Connectivity == "on"]
 private open class NetworkStatusChangedEventHandlerInvoker <: NetworkStatusChangedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>): Unit {
         ()
@@ -3600,6 +3615,7 @@ private open class NetworkStatusChangedEventHandlerInvoker <: NetworkStatusChang
     }
 }
 
+@When[Windows_Networking_Connectivity == "on"]
 private class NetworkStatusChangedEventHandlerBox <: NetworkStatusChangedEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>) -> Unit
     private let vtblHandle: CPointerHandle<NetworkStatusChangedEventHandlerVtbl>
@@ -3618,6 +3634,7 @@ private class NetworkStatusChangedEventHandlerBox <: NetworkStatusChangedEventHa
     }
 }
 
+@When[Windows_Networking_Connectivity == "on"]
 func buildNetworkStatusChangedEventHandlerBoxVtbl(): NetworkStatusChangedEventHandlerVtbl {
     var vtbl = NetworkStatusChangedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -4011,6 +4028,7 @@ public class ProxyConfiguration <: InterfaceWrapperBase & ComInterface & windows
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ProxyUris(): windows_collections.IVectorView<Foundation.Uri> {
         return defaultInterface().ProxyUris()
     }

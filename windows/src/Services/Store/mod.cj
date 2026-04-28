@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -921,7 +920,10 @@ extend IStorePrice2 <: windows_core.Interface<IStorePrice2> {}
 @C
 public struct IStoreProductOptionsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ActionFilters: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ActionFilters: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -990,6 +992,7 @@ public class IStoreProductOptions <: InterfaceWrapperBase & ComInterface & Runti
         readVtbl<IStoreProductOptionsVtbl>(IStoreProductOptionsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ActionFilters(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2478,6 +2481,7 @@ public class StoreProductOptions <: InterfaceWrapperBase & ComInterface & window
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ActionFilters(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().ActionFilters()
     }
@@ -3005,7 +3009,10 @@ public struct IStoreAppLicenseVtbl {
     public var IsTrial: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ExpirationDate: CFunc<(CPointer<Unit>, CPointer<windows_future.DateTimeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ExtendedJsonData: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var AddOnLicenses: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AddOnLicenses: UIntNative = UIntNative(0)
     public var TrialTimeRemaining: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsTrialOwnedByThisUser: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var TrialUniqueId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -3117,6 +3124,7 @@ public class IStoreAppLicense <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AddOnLicenses(): windows_collections.IMapView<windows_core.HString, StoreLicense> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3373,7 +3381,10 @@ extend IStoreConsumableResult <: windows_core.Interface<IStoreConsumableResult> 
 public struct IStorePackageUpdateResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var OverallState: CFunc<(CPointer<Unit>, CPointer<StorePackageUpdateStateAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var StorePackageUpdateStatuses: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var StorePackageUpdateStatuses: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3450,6 +3461,7 @@ public class IStorePackageUpdateResult <: InterfaceWrapperBase & ComInterface & 
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<StorePackageUpdateState>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StorePackageUpdateStatuses(): windows_collections.IVectorView<StorePackageUpdateStatus> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4214,6 +4226,7 @@ public class StoreAppLicense <: InterfaceWrapperBase & ComInterface & windows_in
         return defaultInterface().ExtendedJsonData()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AddOnLicenses(): windows_collections.IMapView<windows_core.HString, StoreLicense> {
         return defaultInterface().AddOnLicenses()
     }
@@ -5488,11 +5501,26 @@ public struct IStoreContextVtbl {
     public var GetCustomerCollectionsIdAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var GetAppLicenseAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetStoreProductForCurrentAppAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetStoreProductsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetStoreProductsAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAssociatedStoreProductsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAssociatedStoreProductsAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAssociatedStoreProductsWithPagingAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAssociatedStoreProductsWithPagingAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetUserCollectionAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetUserCollectionAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetUserCollectionWithPagingAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetUserCollectionWithPagingAsync: UIntNative = UIntNative(0)
     public var ReportConsumableFulfillmentAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, GUID, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
     public var GetConsumableBalanceRemainingAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel == "on"]
@@ -5501,10 +5529,22 @@ public struct IStoreContextVtbl {
     public var AcquireStoreLicenseForOptionalPackageAsync: UIntNative = UIntNative(0)
     public var RequestPurchaseAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RequestPurchaseWithPurchasePropertiesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAppAndOptionalStorePackageUpdatesAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAppAndOptionalStorePackageUpdatesAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var RequestDownloadStorePackageUpdatesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RequestDownloadStorePackageUpdatesAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var RequestDownloadAndInstallStorePackageUpdatesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RequestDownloadAndInstallStorePackageUpdatesAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var RequestDownloadAndInstallStorePackagesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RequestDownloadAndInstallStorePackagesAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -5628,6 +5668,7 @@ public class IStoreContext <: InterfaceWrapperBase & ComInterface & RuntimeName 
         return windows_future.IAsyncOperation<StoreProductResult>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetStoreProductsAsync(productKinds: windows_collections.IIterable<windows_core.HString>, storeIds: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<StoreProductQueryResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5636,6 +5677,7 @@ public class IStoreContext <: InterfaceWrapperBase & ComInterface & RuntimeName 
         return windows_future.IAsyncOperation<StoreProductQueryResult>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAssociatedStoreProductsAsync(productKinds: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<StoreProductQueryResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5644,6 +5686,7 @@ public class IStoreContext <: InterfaceWrapperBase & ComInterface & RuntimeName 
         return windows_future.IAsyncOperation<StoreProductQueryResult>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAssociatedStoreProductsWithPagingAsync(productKinds: windows_collections.IIterable<windows_core.HString>, maxItemsToRetrievePerPage: UInt32): windows_future.IAsyncOperation<StoreProductPagedQueryResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5652,6 +5695,7 @@ public class IStoreContext <: InterfaceWrapperBase & ComInterface & RuntimeName 
         return windows_future.IAsyncOperation<StoreProductPagedQueryResult>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetUserCollectionAsync(productKinds: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<StoreProductQueryResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5660,6 +5704,7 @@ public class IStoreContext <: InterfaceWrapperBase & ComInterface & RuntimeName 
         return windows_future.IAsyncOperation<StoreProductQueryResult>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetUserCollectionWithPagingAsync(productKinds: windows_collections.IIterable<windows_core.HString>, maxItemsToRetrievePerPage: UInt32): windows_future.IAsyncOperation<StoreProductPagedQueryResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5709,6 +5754,7 @@ public class IStoreContext <: InterfaceWrapperBase & ComInterface & RuntimeName 
         return windows_future.IAsyncOperation<StorePurchaseResult>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAppAndOptionalStorePackageUpdatesAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<StorePackageUpdate>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5717,6 +5763,7 @@ public class IStoreContext <: InterfaceWrapperBase & ComInterface & RuntimeName 
         return windows_future.IAsyncOperation<windows_collections.IVectorView<StorePackageUpdate>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RequestDownloadStorePackageUpdatesAsync(storePackageUpdates: windows_collections.IIterable<StorePackageUpdate>): windows_future.IAsyncOperationWithProgress<StorePackageUpdateResult, StorePackageUpdateStatus> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5725,6 +5772,7 @@ public class IStoreContext <: InterfaceWrapperBase & ComInterface & RuntimeName 
         return windows_future.IAsyncOperationWithProgress<StorePackageUpdateResult, StorePackageUpdateStatus>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RequestDownloadAndInstallStorePackageUpdatesAsync(storePackageUpdates: windows_collections.IIterable<StorePackageUpdate>): windows_future.IAsyncOperationWithProgress<StorePackageUpdateResult, StorePackageUpdateStatus> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5733,6 +5781,7 @@ public class IStoreContext <: InterfaceWrapperBase & ComInterface & RuntimeName 
         return windows_future.IAsyncOperationWithProgress<StorePackageUpdateResult, StorePackageUpdateStatus>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RequestDownloadAndInstallStorePackagesAsync(storeIds: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperationWithProgress<StorePackageUpdateResult, StorePackageUpdateStatus> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5749,9 +5798,9 @@ extend IStoreContext <: windows_core.Interface<IStoreContext> {}
 @C
 public struct IStoreContext2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindStoreProductForPackageAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel != "on"]
+    @When[Windows_ApplicationModel != "on" || Windows_Foundation_Collections != "on"]
     public var FindStoreProductForPackageAsync: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -5821,7 +5870,7 @@ public class IStoreContext2 <: InterfaceWrapperBase & ComInterface & RuntimeName
         readVtbl<IStoreContext2Vtbl>(IStoreContext2Vtbl())
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindStoreProductForPackageAsync(productKinds: windows_collections.IIterable<windows_core.HString>, package_: _impl_l2.Package): windows_future.IAsyncOperation<StoreProductResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5839,18 +5888,39 @@ extend IStoreContext2 <: windows_core.Interface<IStoreContext2> {}
 public struct IStoreContext3Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var CanSilentlyDownloadStorePackageUpdates: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var TrySilentDownloadStorePackageUpdatesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var TrySilentDownloadStorePackageUpdatesAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var TrySilentDownloadAndInstallStorePackageUpdatesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var TrySilentDownloadAndInstallStorePackageUpdatesAsync: UIntNative = UIntNative(0)
     @When[Windows_ApplicationModel == "on"]
     public var CanAcquireStoreLicenseForOptionalPackageAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel != "on"]
     public var CanAcquireStoreLicenseForOptionalPackageAsync: UIntNative = UIntNative(0)
     public var CanAcquireStoreLicenseAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetStoreProductsWithOptionsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetStoreProductsWithOptionsAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAssociatedStoreQueueItemsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAssociatedStoreQueueItemsAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetStoreQueueItemsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetStoreQueueItemsAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var RequestDownloadAndInstallStorePackagesWithInstallOptionsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RequestDownloadAndInstallStorePackagesWithInstallOptionsAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var DownloadAndInstallStorePackagesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var DownloadAndInstallStorePackagesAsync: UIntNative = UIntNative(0)
     @When[Windows_ApplicationModel == "on"]
     public var RequestUninstallStorePackageAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel != "on"]
@@ -5937,6 +6007,7 @@ public class IStoreContext3 <: InterfaceWrapperBase & ComInterface & RuntimeName
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TrySilentDownloadStorePackageUpdatesAsync(storePackageUpdates: windows_collections.IIterable<StorePackageUpdate>): windows_future.IAsyncOperationWithProgress<StorePackageUpdateResult, StorePackageUpdateStatus> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5945,6 +6016,7 @@ public class IStoreContext3 <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_future.IAsyncOperationWithProgress<StorePackageUpdateResult, StorePackageUpdateStatus>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TrySilentDownloadAndInstallStorePackageUpdatesAsync(storePackageUpdates: windows_collections.IIterable<StorePackageUpdate>): windows_future.IAsyncOperationWithProgress<StorePackageUpdateResult, StorePackageUpdateStatus> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5970,6 +6042,7 @@ public class IStoreContext3 <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_future.IAsyncOperation<StoreCanAcquireLicenseResult>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetStoreProductsWithOptionsAsync(productKinds: windows_collections.IIterable<windows_core.HString>, storeIds: windows_collections.IIterable<windows_core.HString>, storeProductOptions: StoreProductOptions): windows_future.IAsyncOperation<StoreProductQueryResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5978,6 +6051,7 @@ public class IStoreContext3 <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_future.IAsyncOperation<StoreProductQueryResult>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAssociatedStoreQueueItemsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<StoreQueueItem>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5986,6 +6060,7 @@ public class IStoreContext3 <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_future.IAsyncOperation<windows_collections.IVectorView<StoreQueueItem>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetStoreQueueItemsAsync(storeIds: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<windows_collections.IVectorView<StoreQueueItem>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5994,6 +6069,7 @@ public class IStoreContext3 <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_future.IAsyncOperation<windows_collections.IVectorView<StoreQueueItem>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RequestDownloadAndInstallStorePackagesWithInstallOptionsAsync(storeIds: windows_collections.IIterable<windows_core.HString>, storePackageInstallOptions: StorePackageInstallOptions): windows_future.IAsyncOperationWithProgress<StorePackageUpdateResult, StorePackageUpdateStatus> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6002,6 +6078,7 @@ public class IStoreContext3 <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_future.IAsyncOperationWithProgress<StorePackageUpdateResult, StorePackageUpdateStatus>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DownloadAndInstallStorePackagesAsync(storeIds: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperationWithProgress<StorePackageUpdateResult, StorePackageUpdateStatus> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6053,7 +6130,10 @@ extend IStoreContext3 <: windows_core.Interface<IStoreContext3> {}
 public struct IStoreContext4Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var RequestRateAndReviewAppAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetInstallOrderForAssociatedStoreQueueItemsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SetInstallOrderForAssociatedStoreQueueItemsAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -6130,6 +6210,7 @@ public class IStoreContext4 <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_future.IAsyncOperation<StoreRateAndReviewResult>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetInstallOrderForAssociatedStoreQueueItemsAsync(items: windows_collections.IIterable<StoreQueueItem>): windows_future.IAsyncOperation<windows_collections.IVectorView<StoreQueueItem>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6146,8 +6227,14 @@ extend IStoreContext4 <: windows_core.Interface<IStoreContext4> {}
 @C
 public struct IStoreContext5Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetUserPurchaseHistoryAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetUserPurchaseHistoryAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAssociatedStoreProductsByInAppOfferTokenAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAssociatedStoreProductsByInAppOfferTokenAsync: UIntNative = UIntNative(0)
     public var RequestPurchaseByInAppOfferTokenAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -6217,6 +6304,7 @@ public class IStoreContext5 <: InterfaceWrapperBase & ComInterface & RuntimeName
         readVtbl<IStoreContext5Vtbl>(IStoreContext5Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetUserPurchaseHistoryAsync(productKinds: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<StoreProductQueryResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6225,6 +6313,7 @@ public class IStoreContext5 <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_future.IAsyncOperation<StoreProductQueryResult>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAssociatedStoreProductsByInAppOfferTokenAsync(inAppOfferTokens: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<StoreProductQueryResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6480,7 +6569,10 @@ extend IStorePackageLicense <: windows_core.Interface<IStorePackageLicense> {}
 @C
 public struct IStorePackageUpdateResult2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var StoreQueueItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var StoreQueueItems: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -6549,6 +6641,7 @@ public class IStorePackageUpdateResult2 <: InterfaceWrapperBase & ComInterface &
         readVtbl<IStorePackageUpdateResult2Vtbl>(IStorePackageUpdateResult2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StoreQueueItems(): windows_collections.IVectorView<StoreQueueItem> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6571,10 +6664,22 @@ public struct IStoreProductVtbl {
     public var Description: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ProductKind: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var HasDigitalDownload: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Keywords: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Keywords: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Images: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Images: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Videos: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Videos: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Skus: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Skus: UIntNative = UIntNative(0)
     public var IsInUserCollection: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Price: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ExtendedJsonData: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -6699,6 +6804,7 @@ public class IStoreProduct <: InterfaceWrapperBase & ComInterface & RuntimeName 
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Keywords(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6707,6 +6813,7 @@ public class IStoreProduct <: InterfaceWrapperBase & ComInterface & RuntimeName 
         return windows_collections.IVectorView<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Images(): windows_collections.IVectorView<StoreImage> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6715,6 +6822,7 @@ public class IStoreProduct <: InterfaceWrapperBase & ComInterface & RuntimeName 
         return windows_collections.IVectorView<StoreImage>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Videos(): windows_collections.IVectorView<StoreVideo> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6723,6 +6831,7 @@ public class IStoreProduct <: InterfaceWrapperBase & ComInterface & RuntimeName 
         return windows_collections.IVectorView<StoreVideo>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Skus(): windows_collections.IVectorView<StoreSku> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6803,7 +6912,10 @@ extend IStoreProduct <: windows_core.Interface<IStoreProduct> {}
 @C
 public struct IStoreProductPagedQueryResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Products: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Products: UIntNative = UIntNative(0)
     public var HasMoreResults: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ExtendedError: CFunc<(CPointer<Unit>, CPointer<windows_future.HResultAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetNextAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -6875,6 +6987,7 @@ public class IStoreProductPagedQueryResult <: InterfaceWrapperBase & ComInterfac
         readVtbl<IStoreProductPagedQueryResultVtbl>(IStoreProductPagedQueryResultVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Products(): windows_collections.IMapView<windows_core.HString, StoreProduct> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6915,7 +7028,10 @@ extend IStoreProductPagedQueryResult <: windows_core.Interface<IStoreProductPage
 @C
 public struct IStoreProductQueryResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Products: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Products: UIntNative = UIntNative(0)
     public var ExtendedError: CFunc<(CPointer<Unit>, CPointer<windows_future.HResultAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -6985,6 +7101,7 @@ public class IStoreProductQueryResult <: InterfaceWrapperBase & ComInterface & R
         readVtbl<IStoreProductQueryResultVtbl>(IStoreProductQueryResultVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Products(): windows_collections.IMapView<windows_core.HString, StoreProduct> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7423,13 +7540,25 @@ public struct IStoreSkuVtbl {
     public var Description: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsTrial: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CustomDeveloperData: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Images: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Images: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Videos: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Videos: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Availabilities: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Availabilities: UIntNative = UIntNative(0)
     public var Price: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ExtendedJsonData: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsInUserCollection: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var BundledSkus: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var BundledSkus: UIntNative = UIntNative(0)
     public var CollectionData: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetIsInstalledAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var RequestPurchaseAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -7552,6 +7681,7 @@ public class IStoreSku <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Images(): windows_collections.IVectorView<StoreImage> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7560,6 +7690,7 @@ public class IStoreSku <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
         return windows_collections.IVectorView<StoreImage>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Videos(): windows_collections.IVectorView<StoreVideo> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7568,6 +7699,7 @@ public class IStoreSku <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
         return windows_collections.IVectorView<StoreVideo>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Availabilities(): windows_collections.IVectorView<StoreAvailability> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7600,6 +7732,7 @@ public class IStoreSku <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func BundledSkus(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7966,22 +8099,27 @@ public class StoreContext <: InterfaceWrapperBase & ComInterface & windows_inter
         return defaultInterface().GetStoreProductForCurrentAppAsync()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetStoreProductsAsync(productKinds: windows_collections.IIterable<windows_core.HString>, storeIds: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<StoreProductQueryResult> {
         return defaultInterface().GetStoreProductsAsync(productKinds, storeIds)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAssociatedStoreProductsAsync(productKinds: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<StoreProductQueryResult> {
         return defaultInterface().GetAssociatedStoreProductsAsync(productKinds)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAssociatedStoreProductsWithPagingAsync(productKinds: windows_collections.IIterable<windows_core.HString>, maxItemsToRetrievePerPage: UInt32): windows_future.IAsyncOperation<StoreProductPagedQueryResult> {
         return defaultInterface().GetAssociatedStoreProductsWithPagingAsync(productKinds, maxItemsToRetrievePerPage)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetUserCollectionAsync(productKinds: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<StoreProductQueryResult> {
         return defaultInterface().GetUserCollectionAsync(productKinds)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetUserCollectionWithPagingAsync(productKinds: windows_collections.IIterable<windows_core.HString>, maxItemsToRetrievePerPage: UInt32): windows_future.IAsyncOperation<StoreProductPagedQueryResult> {
         return defaultInterface().GetUserCollectionWithPagingAsync(productKinds, maxItemsToRetrievePerPage)
     }
@@ -8007,18 +8145,22 @@ public class StoreContext <: InterfaceWrapperBase & ComInterface & windows_inter
         return defaultInterface().RequestPurchaseWithPurchasePropertiesAsync(storeId, storePurchaseProperties)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAppAndOptionalStorePackageUpdatesAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<StorePackageUpdate>> {
         return defaultInterface().GetAppAndOptionalStorePackageUpdatesAsync()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RequestDownloadStorePackageUpdatesAsync(storePackageUpdates: windows_collections.IIterable<StorePackageUpdate>): windows_future.IAsyncOperationWithProgress<StorePackageUpdateResult, StorePackageUpdateStatus> {
         return defaultInterface().RequestDownloadStorePackageUpdatesAsync(storePackageUpdates)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RequestDownloadAndInstallStorePackageUpdatesAsync(storePackageUpdates: windows_collections.IIterable<StorePackageUpdate>): windows_future.IAsyncOperationWithProgress<StorePackageUpdateResult, StorePackageUpdateStatus> {
         return defaultInterface().RequestDownloadAndInstallStorePackageUpdatesAsync(storePackageUpdates)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RequestDownloadAndInstallStorePackagesAsync(storeIds: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperationWithProgress<StorePackageUpdateResult, StorePackageUpdateStatus> {
         return defaultInterface().RequestDownloadAndInstallStorePackagesAsync(storeIds)
     }
@@ -8258,6 +8400,7 @@ public class StorePackageUpdateResult <: InterfaceWrapperBase & ComInterface & w
         return defaultInterface().OverallState()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StorePackageUpdateStatuses(): windows_collections.IVectorView<StorePackageUpdateStatus> {
         return defaultInterface().StorePackageUpdateStatuses()
     }
@@ -8374,18 +8517,22 @@ public class StoreProduct <: InterfaceWrapperBase & ComInterface & windows_inter
         return defaultInterface().HasDigitalDownload()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Keywords(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().Keywords()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Images(): windows_collections.IVectorView<StoreImage> {
         return defaultInterface().Images()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Videos(): windows_collections.IVectorView<StoreVideo> {
         return defaultInterface().Videos()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Skus(): windows_collections.IVectorView<StoreSku> {
         return defaultInterface().Skus()
     }
@@ -8510,6 +8657,7 @@ public class StoreProductPagedQueryResult <: InterfaceWrapperBase & ComInterface
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Products(): windows_collections.IMapView<windows_core.HString, StoreProduct> {
         return defaultInterface().Products()
     }
@@ -8614,6 +8762,7 @@ public class StoreProductQueryResult <: InterfaceWrapperBase & ComInterface & wi
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Products(): windows_collections.IMapView<windows_core.HString, StoreProduct> {
         return defaultInterface().Products()
     }
@@ -9108,14 +9257,17 @@ public class StoreSku <: InterfaceWrapperBase & ComInterface & windows_interface
         return defaultInterface().CustomDeveloperData()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Images(): windows_collections.IVectorView<StoreImage> {
         return defaultInterface().Images()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Videos(): windows_collections.IVectorView<StoreVideo> {
         return defaultInterface().Videos()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Availabilities(): windows_collections.IVectorView<StoreAvailability> {
         return defaultInterface().Availabilities()
     }
@@ -9132,6 +9284,7 @@ public class StoreSku <: InterfaceWrapperBase & ComInterface & windows_interface
         return defaultInterface().IsInUserCollection()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func BundledSkus(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().BundledSkus()
     }

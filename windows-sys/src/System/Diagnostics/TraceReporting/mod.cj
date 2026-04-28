@@ -333,12 +333,15 @@ public class IPlatformDiagnosticTraceInfo <: InterfaceWrapperBase & ComInterface
 public struct IPlatformDiagnosticActionsStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var IsScenarioEnabled: CFunc<(CPointer<Unit>, GUID, CPointer<Bool>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var TryEscalateScenario: CFunc<(CPointer<Unit>, GUID, Int32, CPointer<Unit>, Bool, Bool, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
     public var DownloadLatestSettingsForNamespace: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Bool, Bool, Bool, CPointer<Int32>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetActiveScenarioList: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ForceUpload: CFunc<(CPointer<Unit>, UInt32, Bool, Bool, CPointer<Int32>) -> Int32> = { _, _, _, _, _ => 0 }
     public var IsTraceRunning: CFunc<(CPointer<Unit>, Int32, GUID, UInt64, CPointer<Int32>) -> Int32> = { _, _, _, _, _ => 0 }
     public var GetActiveTraceRuntime: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetKnownTraceList: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -389,6 +392,7 @@ public class IPlatformDiagnosticActionsStatics <: InterfaceWrapperBase & ComInte
         return __vt.IsScenarioEnabled(__liveRaw, scenarioId, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TryEscalateScenario(scenarioId: GUID, escalationType: Int32, outputDirectory: CPointer<Unit>, timestampOutputDirectory: Bool, forceEscalationUpload: Bool, triggers: CPointer<Unit>, result__: CPointer<Bool>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -401,6 +405,7 @@ public class IPlatformDiagnosticActionsStatics <: InterfaceWrapperBase & ComInte
         return __vt.DownloadLatestSettingsForNamespace(__liveRaw, partner, feature, isScenarioNamespace, downloadOverCostedNetwork, downloadOverBattery, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetActiveScenarioList(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -425,6 +430,7 @@ public class IPlatformDiagnosticActionsStatics <: InterfaceWrapperBase & ComInte
         return __vt.GetActiveTraceRuntime(__liveRaw, slotType, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetKnownTraceList(slotType: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

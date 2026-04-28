@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l0 as _impl_l0
 import windows_collections as windows_collections
@@ -197,6 +196,7 @@ public class AdvancedPhotoControl <: InterfaceWrapperBase & ComInterface & windo
         return defaultInterface().Supported()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedModes(): windows_collections.IVectorView<AdvancedPhotoMode> {
         return defaultInterface().SupportedModes()
     }
@@ -376,7 +376,7 @@ public class AudioDeviceController <: InterfaceWrapperBase & ComInterface & wind
         return defaultInterface().VolumePercent()
     }
 
-    @When[Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on"]
     public unsafe func GetAvailableMediaStreamProperties(mediaStreamType: MediaStreamType): windows_collections.IVectorView<IMediaEncodingProperties> {
         return asIMediaDeviceController().GetAvailableMediaStreamProperties(mediaStreamType)
     }
@@ -693,10 +693,12 @@ public class AudioDeviceModulesManager <: InterfaceWrapperBase & ComInterface & 
         defaultInterface().RemoveModuleNotificationReceived(token)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllById(moduleId: windows_core.HString): windows_collections.IVectorView<AudioDeviceModule> {
         return defaultInterface().FindAllById(moduleId)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAll(): windows_collections.IVectorView<AudioDeviceModule> {
         return defaultInterface().FindAll()
     }
@@ -1127,12 +1129,14 @@ public class CallControlEventHandler <: InterfaceWrapperBase & ComInterface & wi
 @When[Windows_Media_Devices == "on"]
 extend CallControlEventHandler <: windows_core.Interface<CallControlEventHandler> {}
 
+@When[Windows_Media_Devices == "on"]
 private open class CallControlEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_Media_Devices == "on"]
 private open class CallControlEventHandlerInvoker <: CallControlEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<CallControl>): Unit {
         ()
@@ -1144,6 +1148,7 @@ private open class CallControlEventHandlerInvoker <: CallControlEventHandlerInvo
     }
 }
 
+@When[Windows_Media_Devices == "on"]
 private class CallControlEventHandlerBox <: CallControlEventHandlerInvoker {
     public let invoke_: (InParam<CallControl>) -> Unit
     private let vtblHandle: CPointerHandle<CallControlEventHandlerVtbl>
@@ -1162,6 +1167,7 @@ private class CallControlEventHandlerBox <: CallControlEventHandlerInvoker {
     }
 }
 
+@When[Windows_Media_Devices == "on"]
 func buildCallControlEventHandlerBoxVtbl(): CallControlEventHandlerVtbl {
     var vtbl = CallControlEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -2162,12 +2168,14 @@ public class DialRequestedEventHandler <: InterfaceWrapperBase & ComInterface & 
 @When[Windows_Media_Devices == "on"]
 extend DialRequestedEventHandler <: windows_core.Interface<DialRequestedEventHandler> {}
 
+@When[Windows_Media_Devices == "on"]
 private open class DialRequestedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_Media_Devices == "on"]
 private open class DialRequestedEventHandlerInvoker <: DialRequestedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<CallControl>, e: InParam<DialRequestedEventArgs>): Unit {
         ()
@@ -2179,6 +2187,7 @@ private open class DialRequestedEventHandlerInvoker <: DialRequestedEventHandler
     }
 }
 
+@When[Windows_Media_Devices == "on"]
 private class DialRequestedEventHandlerBox <: DialRequestedEventHandlerInvoker {
     public let invoke_: (InParam<CallControl>, InParam<DialRequestedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<DialRequestedEventHandlerVtbl>
@@ -2197,6 +2206,7 @@ private class DialRequestedEventHandlerBox <: DialRequestedEventHandlerInvoker {
     }
 }
 
+@When[Windows_Media_Devices == "on"]
 func buildDialRequestedEventHandlerBoxVtbl(): DialRequestedEventHandlerVtbl {
     var vtbl = DialRequestedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -2539,6 +2549,7 @@ public class DigitalWindowControl <: InterfaceWrapperBase & ComInterface & windo
         defaultInterface().ConfigureWithBounds(digitalWindowMode, digitalWindowBounds)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedCapabilities(): windows_collections.IVectorView<DigitalWindowCapability> {
         return defaultInterface().SupportedCapabilities()
     }
@@ -3144,6 +3155,7 @@ public class FocusControl <: InterfaceWrapperBase & ComInterface & windows_inter
         return defaultInterface().Supported()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedPresets(): windows_collections.IVectorView<FocusPreset> {
         return defaultInterface().SupportedPresets()
     }
@@ -3549,6 +3561,7 @@ public class HdrVideoControl <: InterfaceWrapperBase & ComInterface & windows_in
         return defaultInterface().Supported()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedModes(): windows_collections.IVectorView<HdrVideoMode> {
         return defaultInterface().SupportedModes()
     }
@@ -3734,7 +3747,10 @@ extend IAdvancedPhotoCaptureSettings <: windows_core.Interface<IAdvancedPhotoCap
 public struct IAdvancedPhotoControlVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Supported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedModes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedModes: UIntNative = UIntNative(0)
     public var Mode: CFunc<(CPointer<Unit>, CPointer<AdvancedPhotoModeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Configure: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -3813,6 +3829,7 @@ public class IAdvancedPhotoControl <: InterfaceWrapperBase & ComInterface & Runt
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedModes(): windows_collections.IVectorView<AdvancedPhotoMode> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5439,8 +5456,14 @@ public struct IAudioDeviceModulesManagerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var ModuleNotificationReceived: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveModuleNotificationReceived: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllById: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllById: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAll: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAll: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -5523,6 +5546,7 @@ public class IAudioDeviceModulesManager <: InterfaceWrapperBase & ComInterface &
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllById(moduleId: windows_core.HString): windows_collections.IVectorView<AudioDeviceModule> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5531,6 +5555,7 @@ public class IAudioDeviceModulesManager <: InterfaceWrapperBase & ComInterface &
         return windows_collections.IVectorView<AudioDeviceModule>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAll(): windows_collections.IVectorView<AudioDeviceModule> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6749,7 +6774,10 @@ public struct IDigitalWindowControlVtbl {
     public var GetBounds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Configure: CFunc<(CPointer<Unit>, DigitalWindowModeAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ConfigureWithBounds: CFunc<(CPointer<Unit>, DigitalWindowModeAbi, CPointer<Unit>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedCapabilities: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedCapabilities: UIntNative = UIntNative(0)
     public var GetCapabilityForSize: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -6864,6 +6892,7 @@ public class IDigitalWindowControl <: InterfaceWrapperBase & ComInterface & Runt
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedCapabilities(): windows_collections.IVectorView<DigitalWindowCapability> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7536,7 +7565,10 @@ extend IFlashControl2 <: windows_core.Interface<IFlashControl2> {}
 public struct IFocusControlVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Supported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedPresets: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedPresets: UIntNative = UIntNative(0)
     public var Preset: CFunc<(CPointer<Unit>, CPointer<FocusPresetAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetPresetAsync: CFunc<(CPointer<Unit>, FocusPresetAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var SetPresetWithCompletionOptionAsync: CFunc<(CPointer<Unit>, FocusPresetAbi, Bool, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
@@ -7622,6 +7654,7 @@ public class IFocusControl <: InterfaceWrapperBase & ComInterface & RuntimeName 
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedPresets(): windows_collections.IVectorView<FocusPreset> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7712,9 +7745,18 @@ public struct IFocusControl2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var FocusChangedSupported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var WaitForFocusSupported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedFocusModes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedFocusModes: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedFocusDistances: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedFocusDistances: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedFocusRanges: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedFocusRanges: UIntNative = UIntNative(0)
     public var Mode: CFunc<(CPointer<Unit>, CPointer<FocusModeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var FocusState: CFunc<(CPointer<Unit>, CPointer<MediaCaptureFocusStateAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var UnlockAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -7804,6 +7846,7 @@ public class IFocusControl2 <: InterfaceWrapperBase & ComInterface & RuntimeName
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedFocusModes(): windows_collections.IVectorView<FocusMode> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7812,6 +7855,7 @@ public class IFocusControl2 <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_collections.IVectorView<FocusMode>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedFocusDistances(): windows_collections.IVectorView<ManualFocusDistance> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7820,6 +7864,7 @@ public class IFocusControl2 <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_collections.IVectorView<ManualFocusDistance>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedFocusRanges(): windows_collections.IVectorView<AutoFocusRange> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -8047,7 +8092,10 @@ extend IFocusSettings <: windows_core.Interface<IFocusSettings> {}
 public struct IHdrVideoControlVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Supported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedModes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedModes: UIntNative = UIntNative(0)
     public var Mode: CFunc<(CPointer<Unit>, CPointer<HdrVideoModeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetMode: CFunc<(CPointer<Unit>, HdrVideoModeAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -8126,6 +8174,7 @@ public class IHdrVideoControl <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedModes(): windows_collections.IVectorView<HdrVideoMode> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -8157,7 +8206,10 @@ extend IHdrVideoControl <: windows_core.Interface<IHdrVideoControl> {}
 public struct IInfraredTorchControlVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var IsSupported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedModes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedModes: UIntNative = UIntNative(0)
     public var CurrentMode: CFunc<(CPointer<Unit>, CPointer<InfraredTorchModeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetCurrentMode: CFunc<(CPointer<Unit>, InfraredTorchModeAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var MinPower: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -8241,6 +8293,7 @@ public class IInfraredTorchControl <: InterfaceWrapperBase & ComInterface & Runt
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedModes(): windows_collections.IVectorView<InfraredTorchMode> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -8310,7 +8363,10 @@ extend IInfraredTorchControl <: windows_core.Interface<IInfraredTorchControl> {}
 public struct IIsoSpeedControlVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Supported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedPresets: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedPresets: UIntNative = UIntNative(0)
     public var Preset: CFunc<(CPointer<Unit>, CPointer<IsoSpeedPresetAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetPresetAsync: CFunc<(CPointer<Unit>, IsoSpeedPresetAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
@@ -8389,6 +8445,7 @@ public class IIsoSpeedControl <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedPresets(): windows_collections.IVectorView<IsoSpeedPreset> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -9289,9 +9346,9 @@ extend IMediaDeviceControlCapabilities <: windows_core.Interface<IMediaDeviceCon
 @C
 public struct IMediaDeviceControllerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on"]
     public var GetAvailableMediaStreamProperties: CFunc<(CPointer<Unit>, MediaStreamTypeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Media_Capture != "on" || Windows_Media_MediaProperties != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Media_Capture != "on" || Windows_Media_MediaProperties != "on"]
     public var GetAvailableMediaStreamProperties: UIntNative = UIntNative(0)
     @When[Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on"]
     public var GetMediaStreamProperties: CFunc<(CPointer<Unit>, MediaStreamTypeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -9303,7 +9360,7 @@ public struct IMediaDeviceControllerVtbl {
     public var SetMediaStreamPropertiesAsync: UIntNative = UIntNative(0)
     public init() {}
 
-    @When[Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on"]
+    @When[((Windows_Foundation_Collections == "on" && Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on") && (Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on")]
     public static func new<Identity>(offset!: Int64 = 0): IMediaDeviceControllerVtbl where Identity <: IMediaDeviceController_Impl {
         let _ = offset
         var vtbl = IMediaDeviceControllerVtbl()
@@ -9314,7 +9371,7 @@ public struct IMediaDeviceControllerVtbl {
         return vtbl
     }
 
-    @When[(Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on") && (Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on")]
+    @When[(((Windows_Foundation_Collections == "on" && Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on") && (Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Foundation_Collections == "on" && Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on")]
     public static func __assignGetAvailableMediaStreamProperties<Identity>(vtbl: IMediaDeviceControllerVtbl): IMediaDeviceControllerVtbl where Identity <: IMediaDeviceController_Impl {
         var next = vtbl
         next.GetAvailableMediaStreamProperties = { instanceRaw, arg0, result__ =>
@@ -9328,12 +9385,12 @@ public struct IMediaDeviceControllerVtbl {
         return next
     }
 
-    @When[(Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on") && (Windows_Media_Capture != "on" || Windows_Media_MediaProperties != "on")]
+    @When[(((Windows_Foundation_Collections == "on" && Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on") && (Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Foundation_Collections != "on" || Windows_Media_Capture != "on" || Windows_Media_MediaProperties != "on")]
     public static func __assignGetAvailableMediaStreamProperties<Identity>(vtbl: IMediaDeviceControllerVtbl): IMediaDeviceControllerVtbl where Identity <: IMediaDeviceController_Impl {
         return vtbl
     }
 
-    @When[(Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on") && (Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on")]
+    @When[(((Windows_Foundation_Collections == "on" && Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on") && (Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on")]
     public static func __assignGetMediaStreamProperties<Identity>(vtbl: IMediaDeviceControllerVtbl): IMediaDeviceControllerVtbl where Identity <: IMediaDeviceController_Impl {
         var next = vtbl
         next.GetMediaStreamProperties = { instanceRaw, arg0, result__ =>
@@ -9347,12 +9404,12 @@ public struct IMediaDeviceControllerVtbl {
         return next
     }
 
-    @When[(Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on") && (Windows_Media_Capture != "on" || Windows_Media_MediaProperties != "on")]
+    @When[(((Windows_Foundation_Collections == "on" && Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on") && (Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Media_Capture != "on" || Windows_Media_MediaProperties != "on")]
     public static func __assignGetMediaStreamProperties<Identity>(vtbl: IMediaDeviceControllerVtbl): IMediaDeviceControllerVtbl where Identity <: IMediaDeviceController_Impl {
         return vtbl
     }
 
-    @When[(Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on") && (Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on")]
+    @When[(((Windows_Foundation_Collections == "on" && Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on") && (Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on")]
     public static func __assignSetMediaStreamPropertiesAsync<Identity>(vtbl: IMediaDeviceControllerVtbl): IMediaDeviceControllerVtbl where Identity <: IMediaDeviceController_Impl {
         var next = vtbl
         next.SetMediaStreamPropertiesAsync = { instanceRaw, arg0, arg1, result__ =>
@@ -9366,7 +9423,7 @@ public struct IMediaDeviceControllerVtbl {
         return next
     }
 
-    @When[(Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on") && (Windows_Media_Capture != "on" || Windows_Media_MediaProperties != "on")]
+    @When[(((Windows_Foundation_Collections == "on" && Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on") && (Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Media_Capture != "on" || Windows_Media_MediaProperties != "on")]
     public static func __assignSetMediaStreamPropertiesAsync<Identity>(vtbl: IMediaDeviceControllerVtbl): IMediaDeviceControllerVtbl where Identity <: IMediaDeviceController_Impl {
         return vtbl
     }
@@ -9379,7 +9436,7 @@ public struct IMediaDeviceControllerVtbl {
     }
 }
 
-@When[Windows_Media_Devices == "on" && (Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on")]
+@When[Windows_Media_Devices == "on" && (((Windows_Foundation_Collections == "on" && Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on") && (Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on"))]
 public interface IMediaDeviceController_ImplErased {
     public func __winrtThunk_GetAvailableMediaStreamProperties(arg0: MediaStreamTypeAbi, result__: CPointer<CPointer<Unit>>): Int32
 
@@ -9388,7 +9445,7 @@ public interface IMediaDeviceController_ImplErased {
     public func __winrtThunk_SetMediaStreamPropertiesAsync(arg0: MediaStreamTypeAbi, arg1: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Media_Devices == "on" && (Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on")]
+@When[Windows_Media_Devices == "on" && (((Windows_Foundation_Collections == "on" && Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on") && (Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on")) && (Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on"))]
 public interface IMediaDeviceController_Impl <: IMediaDeviceController_ImplErased {
     public func GetAvailableMediaStreamProperties(mediaStreamType: MediaStreamType): windows_core.Result<windows_collections.IVectorView<IMediaEncodingProperties>>
 
@@ -9516,7 +9573,7 @@ public class IMediaDeviceController <: InterfaceWrapperBase & ComInterface & Run
         readVtbl<IMediaDeviceControllerVtbl>(IMediaDeviceControllerVtbl())
     }
 
-    @When[Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on"]
     public unsafe func GetAvailableMediaStreamProperties(mediaStreamType: MediaStreamType): windows_collections.IVectorView<IMediaEncodingProperties> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -9803,7 +9860,10 @@ extend IModuleCommandResult <: windows_core.Interface<IModuleCommandResult> {}
 public struct IOpticalImageStabilizationControlVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Supported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedModes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedModes: UIntNative = UIntNative(0)
     public var Mode: CFunc<(CPointer<Unit>, CPointer<OpticalImageStabilizationModeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetMode: CFunc<(CPointer<Unit>, OpticalImageStabilizationModeAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -9882,6 +9942,7 @@ public class IOpticalImageStabilizationControl <: InterfaceWrapperBase & ComInte
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedModes(): windows_collections.IVectorView<OpticalImageStabilizationMode> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -10494,8 +10555,14 @@ extend IRegionOfInterest2 <: windows_core.Interface<IRegionOfInterest2> {}
 public struct IRegionsOfInterestControlVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var MaxRegions: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetRegionsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SetRegionsAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SetRegionsWithLockAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, Bool, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SetRegionsWithLockAsync: UIntNative = UIntNative(0)
     public var ClearRegionsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var AutoFocusSupported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var AutoWhiteBalanceSupported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -10576,6 +10643,7 @@ public class IRegionsOfInterestControl <: InterfaceWrapperBase & ComInterface & 
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetRegionsAsync(regions: windows_collections.IIterable<RegionOfInterest>): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -10584,6 +10652,7 @@ public class IRegionsOfInterestControl <: InterfaceWrapperBase & ComInterface & 
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetRegionsWithLockAsync(regions: windows_collections.IIterable<RegionOfInterest>, lockValues: Bool): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -10632,7 +10701,10 @@ extend IRegionsOfInterestControl <: windows_core.Interface<IRegionsOfInterestCon
 @C
 public struct ISceneModeControlVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedModes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedModes: UIntNative = UIntNative(0)
     public var Value: CFunc<(CPointer<Unit>, CPointer<CaptureSceneModeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetValueAsync: CFunc<(CPointer<Unit>, CaptureSceneModeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
@@ -10703,6 +10775,7 @@ public class ISceneModeControl <: InterfaceWrapperBase & ComInterface & RuntimeN
         readVtbl<ISceneModeControlVtbl>(ISceneModeControlVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedModes(): windows_collections.IVectorView<CaptureSceneMode> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -11169,7 +11242,10 @@ extend IVideoDeviceControllerGetDevicePropertyResult <: windows_core.Interface<I
 public struct IVideoTemporalDenoisingControlVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Supported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedModes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedModes: UIntNative = UIntNative(0)
     public var Mode: CFunc<(CPointer<Unit>, CPointer<VideoTemporalDenoisingModeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetMode: CFunc<(CPointer<Unit>, VideoTemporalDenoisingModeAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -11248,6 +11324,7 @@ public class IVideoTemporalDenoisingControl <: InterfaceWrapperBase & ComInterfa
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedModes(): windows_collections.IVectorView<VideoTemporalDenoisingMode> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -11554,7 +11631,10 @@ extend IZoomControl <: windows_core.Interface<IZoomControl> {}
 @C
 public struct IZoomControl2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedModes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedModes: UIntNative = UIntNative(0)
     public var Mode: CFunc<(CPointer<Unit>, CPointer<ZoomTransitionModeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Configure: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -11625,6 +11705,7 @@ public class IZoomControl2 <: InterfaceWrapperBase & ComInterface & RuntimeName 
         readVtbl<IZoomControl2Vtbl>(IZoomControl2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedModes(): windows_collections.IVectorView<ZoomTransitionMode> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -11832,6 +11913,7 @@ public class InfraredTorchControl <: InterfaceWrapperBase & ComInterface & windo
         return defaultInterface().IsSupported()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedModes(): windows_collections.IVectorView<InfraredTorchMode> {
         return defaultInterface().SupportedModes()
     }
@@ -12009,6 +12091,7 @@ public class IsoSpeedControl <: InterfaceWrapperBase & ComInterface & windows_in
         return defaultInterface().Supported()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedPresets(): windows_collections.IVectorView<IsoSpeedPreset> {
         return defaultInterface().SupportedPresets()
     }
@@ -12292,12 +12375,14 @@ public class KeypadPressedEventHandler <: InterfaceWrapperBase & ComInterface & 
 @When[Windows_Media_Devices == "on"]
 extend KeypadPressedEventHandler <: windows_core.Interface<KeypadPressedEventHandler> {}
 
+@When[Windows_Media_Devices == "on"]
 private open class KeypadPressedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_Media_Devices == "on"]
 private open class KeypadPressedEventHandlerInvoker <: KeypadPressedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<CallControl>, e: InParam<KeypadPressedEventArgs>): Unit {
         ()
@@ -12309,6 +12394,7 @@ private open class KeypadPressedEventHandlerInvoker <: KeypadPressedEventHandler
     }
 }
 
+@When[Windows_Media_Devices == "on"]
 private class KeypadPressedEventHandlerBox <: KeypadPressedEventHandlerInvoker {
     public let invoke_: (InParam<CallControl>, InParam<KeypadPressedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<KeypadPressedEventHandlerVtbl>
@@ -12327,6 +12413,7 @@ private class KeypadPressedEventHandlerBox <: KeypadPressedEventHandlerInvoker {
     }
 }
 
+@When[Windows_Media_Devices == "on"]
 func buildKeypadPressedEventHandlerBoxVtbl(): KeypadPressedEventHandlerVtbl {
     var vtbl = KeypadPressedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -13350,6 +13437,7 @@ public class OpticalImageStabilizationControl <: InterfaceWrapperBase & ComInter
         return defaultInterface().Supported()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedModes(): windows_collections.IVectorView<OpticalImageStabilizationMode> {
         return defaultInterface().SupportedModes()
     }
@@ -13814,12 +13902,14 @@ public class RedialRequestedEventHandler <: InterfaceWrapperBase & ComInterface 
 @When[Windows_Media_Devices == "on"]
 extend RedialRequestedEventHandler <: windows_core.Interface<RedialRequestedEventHandler> {}
 
+@When[Windows_Media_Devices == "on"]
 private open class RedialRequestedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_Media_Devices == "on"]
 private open class RedialRequestedEventHandlerInvoker <: RedialRequestedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<CallControl>, e: InParam<RedialRequestedEventArgs>): Unit {
         ()
@@ -13831,6 +13921,7 @@ private open class RedialRequestedEventHandlerInvoker <: RedialRequestedEventHan
     }
 }
 
+@When[Windows_Media_Devices == "on"]
 private class RedialRequestedEventHandlerBox <: RedialRequestedEventHandlerInvoker {
     public let invoke_: (InParam<CallControl>, InParam<RedialRequestedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<RedialRequestedEventHandlerVtbl>
@@ -13849,6 +13940,7 @@ private class RedialRequestedEventHandlerBox <: RedialRequestedEventHandlerInvok
     }
 }
 
+@When[Windows_Media_Devices == "on"]
 func buildRedialRequestedEventHandlerBoxVtbl(): RedialRequestedEventHandlerVtbl {
     var vtbl = RedialRequestedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -14117,10 +14209,12 @@ public class RegionsOfInterestControl <: InterfaceWrapperBase & ComInterface & w
         return defaultInterface().MaxRegions()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetRegionsAsync(regions: windows_collections.IIterable<RegionOfInterest>): windows_future.IAsyncAction {
         return defaultInterface().SetRegionsAsync(regions)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetRegionsWithLockAsync(regions: windows_collections.IIterable<RegionOfInterest>, lockValues: Bool): windows_future.IAsyncAction {
         return defaultInterface().SetRegionsWithLockAsync(regions, lockValues)
     }
@@ -14225,6 +14319,7 @@ public class SceneModeControl <: InterfaceWrapperBase & ComInterface & windows_i
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedModes(): windows_collections.IVectorView<CaptureSceneMode> {
         return defaultInterface().SupportedModes()
     }
@@ -14640,7 +14735,7 @@ public class VideoDeviceController <: InterfaceWrapperBase & ComInterface & wind
         return defaultInterface().TryGetPowerlineFrequency(value)
     }
 
-    @When[Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on"]
     public unsafe func GetAvailableMediaStreamProperties(mediaStreamType: MediaStreamType): windows_collections.IVectorView<IMediaEncodingProperties> {
         return asIMediaDeviceController().GetAvailableMediaStreamProperties(mediaStreamType)
     }
@@ -14978,6 +15073,7 @@ public class VideoTemporalDenoisingControl <: InterfaceWrapperBase & ComInterfac
         return defaultInterface().Supported()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedModes(): windows_collections.IVectorView<VideoTemporalDenoisingMode> {
         return defaultInterface().SupportedModes()
     }

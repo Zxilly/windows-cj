@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Devices_Adc_Provider == "on"]
 import windows.Devices.Adc.Provider as Devices_Adc_Provider
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -295,7 +293,7 @@ public class AdcController <: InterfaceWrapperBase & ComInterface & windows_inte
         }
     }
 
-    @When[Windows_Devices_Adc_Provider == "on"]
+    @When[Windows_Devices_Adc_Provider == "on" && Windows_Foundation_Collections == "on"]
     public static unsafe func GetControllersAsync(provider: Devices_Adc_Provider.IAdcProvider): windows_future.IAsyncOperation<windows_collections.IVectorView<AdcController>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<AdcController>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<AdcController>>>.None
         try (factory__ = windows_core.factory<AdcController, IAdcControllerStatics>().unwrap()) {
@@ -591,9 +589,9 @@ extend IAdcController <: windows_core.Interface<IAdcController> {}
 @C
 public struct IAdcControllerStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Devices_Adc_Provider == "on"]
+    @When[Windows_Devices_Adc_Provider == "on" && Windows_Foundation_Collections == "on"]
     public var GetControllersAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Devices_Adc_Provider != "on"]
+    @When[Windows_Devices_Adc_Provider != "on" || Windows_Foundation_Collections != "on"]
     public var GetControllersAsync: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -663,7 +661,7 @@ public class IAdcControllerStatics <: InterfaceWrapperBase & ComInterface & Runt
         readVtbl<IAdcControllerStaticsVtbl>(IAdcControllerStaticsVtbl())
     }
 
-    @When[Windows_Devices_Adc_Provider == "on"]
+    @When[Windows_Devices_Adc_Provider == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func GetControllersAsync(provider: Devices_Adc_Provider.IAdcProvider): windows_future.IAsyncOperation<windows_collections.IVectorView<AdcController>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

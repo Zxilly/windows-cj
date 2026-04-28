@@ -1390,12 +1390,14 @@ public class BindableVectorChangedEventHandler <: InterfaceWrapperBase & ComInte
 @When[Windows_UI_Xaml_Interop == "on"]
 extend BindableVectorChangedEventHandler <: windows_core.Interface<BindableVectorChangedEventHandler> {}
 
+@When[Windows_UI_Xaml_Interop == "on"]
 private open class BindableVectorChangedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Interop == "on"]
 private open class BindableVectorChangedEventHandlerInvoker <: BindableVectorChangedEventHandlerInvokerErased {
     public open func Invoke(vector: InParam<IBindableObservableVector>, e: InParam<IInspectable>): Unit {
         ()
@@ -1407,6 +1409,7 @@ private open class BindableVectorChangedEventHandlerInvoker <: BindableVectorCha
     }
 }
 
+@When[Windows_UI_Xaml_Interop == "on"]
 private class BindableVectorChangedEventHandlerBox <: BindableVectorChangedEventHandlerInvoker {
     public let invoke_: (InParam<IBindableObservableVector>, InParam<IInspectable>) -> Unit
     private let vtblHandle: CPointerHandle<BindableVectorChangedEventHandlerVtbl>
@@ -1425,6 +1428,7 @@ private class BindableVectorChangedEventHandlerBox <: BindableVectorChangedEvent
     }
 }
 
+@When[Windows_UI_Xaml_Interop == "on"]
 func buildBindableVectorChangedEventHandlerBoxVtbl(): BindableVectorChangedEventHandlerVtbl {
     var vtbl = BindableVectorChangedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -2194,12 +2198,14 @@ public class NotifyCollectionChangedEventHandler <: InterfaceWrapperBase & ComIn
 @When[Windows_UI_Xaml_Interop == "on"]
 extend NotifyCollectionChangedEventHandler <: windows_core.Interface<NotifyCollectionChangedEventHandler> {}
 
+@When[Windows_UI_Xaml_Interop == "on"]
 private open class NotifyCollectionChangedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Interop == "on"]
 private open class NotifyCollectionChangedEventHandlerInvoker <: NotifyCollectionChangedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<NotifyCollectionChangedEventArgs>): Unit {
         ()
@@ -2211,6 +2217,7 @@ private open class NotifyCollectionChangedEventHandlerInvoker <: NotifyCollectio
     }
 }
 
+@When[Windows_UI_Xaml_Interop == "on"]
 private class NotifyCollectionChangedEventHandlerBox <: NotifyCollectionChangedEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<NotifyCollectionChangedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<NotifyCollectionChangedEventHandlerVtbl>
@@ -2229,6 +2236,7 @@ private class NotifyCollectionChangedEventHandlerBox <: NotifyCollectionChangedE
     }
 }
 
+@When[Windows_UI_Xaml_Interop == "on"]
 func buildNotifyCollectionChangedEventHandlerBoxVtbl(): NotifyCollectionChangedEventHandlerVtbl {
     var vtbl = NotifyCollectionChangedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()

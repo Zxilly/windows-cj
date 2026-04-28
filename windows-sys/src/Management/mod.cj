@@ -251,6 +251,7 @@ public class IMdmAlert <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IMdmSessionVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Alerts: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ExtendedError: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.HResult>) -> Int32> = { _, _ => 0 }
     public var Id: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -258,6 +259,7 @@ public struct IMdmSessionVtbl {
     public var AttachAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Delete: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var StartAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var StartWithAlertsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -302,6 +304,7 @@ public class IMdmSession <: InterfaceWrapperBase & ComInterface {
         readVtbl<IMdmSessionVtbl>(IMdmSessionVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Alerts(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -344,6 +347,7 @@ public class IMdmSession <: InterfaceWrapperBase & ComInterface {
         return __vt.StartAsync(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StartWithAlertsAsync(alerts: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -355,6 +359,7 @@ public class IMdmSession <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IMdmSessionManagerStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SessionIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var TryCreateSession: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var DeleteSessionById: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -402,6 +407,7 @@ public class IMdmSessionManagerStatics <: InterfaceWrapperBase & ComInterface {
         readVtbl<IMdmSessionManagerStaticsVtbl>(IMdmSessionManagerStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SessionIds(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

@@ -733,6 +733,7 @@ public struct ISmsDeviceMessageStoreVtbl {
     public var DeleteMessageAsync: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var DeleteMessagesAsync: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetMessageAsync: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetMessagesAsync: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var MaxMessages: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -796,6 +797,7 @@ public class ISmsDeviceMessageStore <: InterfaceWrapperBase & ComInterface {
         return __vt.GetMessageAsync(__liveRaw, messageId, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetMessagesAsync(messageFilter: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -993,6 +995,7 @@ public class ISmsFilterRuleFactory <: InterfaceWrapperBase & ComInterface {
 public struct ISmsFilterRulesVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var ActionType: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Rules: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1043,6 +1046,7 @@ public class ISmsFilterRules <: InterfaceWrapperBase & ComInterface {
         return __vt.ActionType(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Rules(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1358,6 +1362,7 @@ public class ISmsMessageRegistration <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ISmsMessageRegistrationStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AllRegistrations: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Register: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
@@ -1403,6 +1408,7 @@ public class ISmsMessageRegistrationStatics <: InterfaceWrapperBase & ComInterfa
         readVtbl<ISmsMessageRegistrationStaticsVtbl>(ISmsMessageRegistrationStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AllRegistrations(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1591,6 +1597,7 @@ public struct ISmsTextMessageVtbl {
     public var SetBody: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Encoding: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetEncoding: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ToBinaryMessages: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -1707,6 +1714,7 @@ public class ISmsTextMessage <: InterfaceWrapperBase & ComInterface {
         return __vt.SetEncoding(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ToBinaryMessages(format: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2023,6 +2031,7 @@ public struct ISmsWapMessageVtbl {
     public var ContentType: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Storage_Streams == "on"]
     public var BinaryBody: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Headers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -2104,6 +2113,7 @@ public class ISmsWapMessage <: InterfaceWrapperBase & ComInterface {
         return __vt.BinaryBody(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Headers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

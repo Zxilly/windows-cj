@@ -1020,6 +1020,7 @@ public class EccCurveNames <: windows_interface.RuntimeName & windows_core.Runti
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func AllEccCurveNames(): windows_collections.IVectorView<windows_core.HString> {
         var result__: Option<windows_collections.IVectorView<windows_core.HString>> = Option<windows_collections.IVectorView<windows_core.HString>>.None
         try (factory__ = windows_core.factory<EccCurveNames, IEccCurveNamesStatics>().unwrap()) {
@@ -1635,7 +1636,10 @@ public struct IEccCurveNamesStaticsVtbl {
     public var X962P239v2: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var X962P239v3: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var X962P256v1: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var AllEccCurveNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AllEccCurveNames: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2064,6 +2068,7 @@ public class IEccCurveNamesStatics <: InterfaceWrapperBase & ComInterface & Runt
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AllEccCurveNames(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

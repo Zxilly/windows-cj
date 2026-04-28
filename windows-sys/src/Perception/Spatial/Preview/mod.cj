@@ -3,9 +3,7 @@ package windows_sys.Perception.Spatial.Preview
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Foundation_Numerics == "on"]
 import windows_sys.Foundation.Numerics as Foundation_Numerics
-@When[Windows_Perception_Spatial == "on"]
 import windows_sys.Perception.Spatial as Perception_Spatial
 
 

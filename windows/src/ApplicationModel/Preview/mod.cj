@@ -340,7 +340,10 @@ extend StartupAppInfoPreview <: windows_core.HandleWinrtType<StartupAppInfoPrevi
 @C
 public struct IStartupAppsManagerPreviewVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetStartupAppInfos: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetStartupAppInfos: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -409,6 +412,7 @@ public class IStartupAppsManagerPreview <: InterfaceWrapperBase & ComInterface &
         readVtbl<IStartupAppsManagerPreviewVtbl>(IStartupAppsManagerPreviewVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetStartupAppInfos(): windows_collections.IVectorView<StartupAppInfoPreview> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -575,6 +579,7 @@ public class StartupAppsManagerPreview <: InterfaceWrapperBase & ComInterface & 
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetStartupAppInfos(): windows_collections.IVectorView<StartupAppInfoPreview> {
         return defaultInterface().GetStartupAppInfos()
     }

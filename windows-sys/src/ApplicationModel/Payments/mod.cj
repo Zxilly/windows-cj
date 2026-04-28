@@ -12,7 +12,9 @@ public struct IPaymentAddressVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Country: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetCountry: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var AddressLines: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetAddressLines: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Region: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetRegion: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -89,12 +91,14 @@ public class IPaymentAddress <: InterfaceWrapperBase & ComInterface {
         return __vt.SetCountry(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AddressLines(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AddressLines(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetAddressLines(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -373,6 +377,7 @@ public class IPaymentMerchantInfo <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IPaymentMethodDataVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedMethodIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var JsonData: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -418,6 +423,7 @@ public class IPaymentMethodData <: InterfaceWrapperBase & ComInterface {
         readVtbl<IPaymentMethodDataVtbl>(IPaymentMethodDataVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedMethodIds(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1015,11 +1021,17 @@ public struct IPaymentDetailsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Total: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetTotal: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var DisplayItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetDisplayItems: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ShippingOptions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetShippingOptions: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Modifiers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetModifiers: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1076,36 +1088,42 @@ public class IPaymentDetails <: InterfaceWrapperBase & ComInterface {
         return __vt.SetTotal(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DisplayItems(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DisplayItems(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetDisplayItems(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetDisplayItems(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ShippingOptions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ShippingOptions(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetShippingOptions(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetShippingOptions(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Modifiers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Modifiers(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetModifiers(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1118,6 +1136,7 @@ public class IPaymentDetails <: InterfaceWrapperBase & ComInterface {
 public struct IPaymentDetailsFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateWithDisplayItems: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -1168,6 +1187,7 @@ public class IPaymentDetailsFactory <: InterfaceWrapperBase & ComInterface {
         return __vt.Create(__liveRaw, total, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateWithDisplayItems(total: CPointer<Unit>, displayItems: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1180,8 +1200,10 @@ public class IPaymentDetailsFactory <: InterfaceWrapperBase & ComInterface {
 public struct IPaymentDetailsModifierVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var JsonData: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedMethodIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Total: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var AdditionalDisplayItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1232,6 +1254,7 @@ public class IPaymentDetailsModifier <: InterfaceWrapperBase & ComInterface {
         return __vt.JsonData(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedMethodIds(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1244,6 +1267,7 @@ public class IPaymentDetailsModifier <: InterfaceWrapperBase & ComInterface {
         return __vt.Total(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AdditionalDisplayItems(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1255,8 +1279,11 @@ public class IPaymentDetailsModifier <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IPaymentDetailsModifierFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateWithAdditionalDisplayItems: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateWithAdditionalDisplayItemsAndJsonData: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -1301,18 +1328,21 @@ public class IPaymentDetailsModifierFactory <: InterfaceWrapperBase & ComInterfa
         readVtbl<IPaymentDetailsModifierFactoryVtbl>(IPaymentDetailsModifierFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create(supportedMethodIds: CPointer<Unit>, total: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Create(__liveRaw, supportedMethodIds, total, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateWithAdditionalDisplayItems(supportedMethodIds: CPointer<Unit>, total: CPointer<Unit>, additionalDisplayItems: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateWithAdditionalDisplayItems(__liveRaw, supportedMethodIds, total, additionalDisplayItems, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateWithAdditionalDisplayItemsAndJsonData(supportedMethodIds: CPointer<Unit>, total: CPointer<Unit>, additionalDisplayItems: CPointer<Unit>, jsonData: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1469,6 +1499,7 @@ public class IPaymentItemFactory <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IPaymentMediatorVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSupportedMethodIdsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SubmitPaymentRequestAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var SubmitPaymentRequestWithChangeHandlerAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
@@ -1515,6 +1546,7 @@ public class IPaymentMediator <: InterfaceWrapperBase & ComInterface {
         readVtbl<IPaymentMediatorVtbl>(IPaymentMediatorVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSupportedMethodIdsAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1648,7 +1680,9 @@ public class IPaymentMerchantInfoFactory <: InterfaceWrapperBase & ComInterface 
 @C
 public struct IPaymentMethodDataFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateWithJsonData: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -1693,12 +1727,14 @@ public class IPaymentMethodDataFactory <: InterfaceWrapperBase & ComInterface {
         readVtbl<IPaymentMethodDataFactoryVtbl>(IPaymentMethodDataFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create(supportedMethodIds: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Create(__liveRaw, supportedMethodIds, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateWithJsonData(supportedMethodIds: CPointer<Unit>, jsonData: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1712,6 +1748,7 @@ public struct IPaymentRequestVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var MerchantInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Details: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var MethodData: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Options: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -1769,6 +1806,7 @@ public class IPaymentRequest <: InterfaceWrapperBase & ComInterface {
         return __vt.Details(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MethodData(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2014,8 +2052,11 @@ public class IPaymentRequestChangedResultFactory <: InterfaceWrapperBase & ComIn
 @C
 public struct IPaymentRequestFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateWithMerchantInfo: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateWithMerchantInfoAndOptions: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -2060,18 +2101,21 @@ public class IPaymentRequestFactory <: InterfaceWrapperBase & ComInterface {
         readVtbl<IPaymentRequestFactoryVtbl>(IPaymentRequestFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create(details: CPointer<Unit>, methodData: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Create(__liveRaw, details, methodData, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateWithMerchantInfo(details: CPointer<Unit>, methodData: CPointer<Unit>, merchantInfo: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateWithMerchantInfo(__liveRaw, details, methodData, merchantInfo, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateWithMerchantInfoAndOptions(details: CPointer<Unit>, methodData: CPointer<Unit>, merchantInfo: CPointer<Unit>, options: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2083,6 +2127,7 @@ public class IPaymentRequestFactory <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IPaymentRequestFactory2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateWithMerchantInfoOptionsAndId: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -2127,6 +2172,7 @@ public class IPaymentRequestFactory2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IPaymentRequestFactory2Vtbl>(IPaymentRequestFactory2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateWithMerchantInfoOptionsAndId(details: CPointer<Unit>, methodData: CPointer<Unit>, merchantInfo: CPointer<Unit>, options: CPointer<Unit>, id: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

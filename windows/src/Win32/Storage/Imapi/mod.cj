@@ -8,9 +8,7 @@ import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_System_AddressBook == "on"]
 import windows.Win32.System.AddressBook as Win32_System_AddressBook
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
@@ -5953,26 +5951,64 @@ extend tagIMMPID_RP_STRUCT <: windows_core.CopyType & windows_core.RuntimeType &
     }
 }
 
-@When[MAPI32 == "on"]
+@When[Windows_Win32_Storage_Imapi == "on" && MAPI32 == "on" && Windows_Win32_Storage_Imapi_CloseIMsgSession == "on"]
 foreign {
     func CloseIMsgSession(lpMsgSess: LPMSGSESS): Unit
+}
+
+@When[Windows_Win32_Storage_Imapi == "on" && MAPI32 == "on" && Windows_Win32_Storage_Imapi_CloseIMsgSession == "on"]
+public unsafe func Windows_CloseIMsgSession(lpMsgSess: LPMSGSESS): Unit {
+    CloseIMsgSession(lpMsgSess)
+}
+
+@When[Windows_Win32_Storage_Imapi == "on" && MAPI32 == "on" && Windows_Win32_Storage_Imapi_GetAttribIMsgOnIStg == "on" && Windows_Win32_System_AddressBook == "on"]
+foreign {
+    func GetAttribIMsgOnIStg(lpObject: CPointer<Unit>, lpPropTagArray: CPointer<Win32_System_AddressBook.SPropTagArrayAbi>, lppPropAttrArray: CPointer<CPointer<SPropAttrArrayAbi>>): Int32
+}
+
+@When[Windows_Win32_Storage_Imapi == "on" && MAPI32 == "on" && Windows_Win32_Storage_Imapi_GetAttribIMsgOnIStg == "on" && Windows_Win32_System_AddressBook == "on"]
+public unsafe func Windows_GetAttribIMsgOnIStg(lpObject: CPointer<Unit>, lpPropTagArray: CPointer<Win32_System_AddressBook.SPropTagArrayAbi>, lppPropAttrArray: CPointer<CPointer<SPropAttrArrayAbi>>): Int32 {
+    return GetAttribIMsgOnIStg(lpObject, lpPropTagArray, lppPropAttrArray)
+}
+
+@When[Windows_Win32_Storage_Imapi == "on" && MAPI32 == "on" && Windows_Win32_Storage_Imapi_MapStorageSCode == "on"]
+foreign {
     func MapStorageSCode(StgSCode: Int32): Int32
 }
 
-@When[MAPI32 == "on" && (Windows_Win32_System_AddressBook == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on")]
+@When[Windows_Win32_Storage_Imapi == "on" && MAPI32 == "on" && Windows_Win32_Storage_Imapi_MapStorageSCode == "on"]
+public unsafe func Windows_MapStorageSCode(StgSCode: Int32): Int32 {
+    return MapStorageSCode(StgSCode)
+}
+
+@When[Windows_Win32_Storage_Imapi == "on" && MAPI32 == "on" && Windows_Win32_Storage_Imapi_OpenIMsgOnIStg == "on" && Windows_Win32_System_AddressBook == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
 foreign {
     func OpenIMsgOnIStg(lpMsgSess: LPMSGSESS, lpAllocateBuffer: Win32_System_AddressBook.LPALLOCATEBUFFER, lpAllocateMore: Win32_System_AddressBook.LPALLOCATEMORE, lpFreeBuffer: Win32_System_AddressBook.LPFREEBUFFER, lpMalloc: CPointer<Unit>, lpMapiSup: CPointer<Unit>, lpStg: CPointer<Unit>, lpfMsgCallRelease: CPointer<MSGCALLRELEASE>, ulCallerData: UInt32, ulFlags: UInt32, lppMsg: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[MAPI32 == "on" && Windows_Win32_System_AddressBook == "on"]
+@When[Windows_Win32_Storage_Imapi == "on" && MAPI32 == "on" && Windows_Win32_Storage_Imapi_OpenIMsgOnIStg == "on" && Windows_Win32_System_AddressBook == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_OpenIMsgOnIStg(lpMsgSess: LPMSGSESS, lpAllocateBuffer: Win32_System_AddressBook.LPALLOCATEBUFFER, lpAllocateMore: Win32_System_AddressBook.LPALLOCATEMORE, lpFreeBuffer: Win32_System_AddressBook.LPFREEBUFFER, lpMalloc: CPointer<Unit>, lpMapiSup: CPointer<Unit>, lpStg: CPointer<Unit>, lpfMsgCallRelease: CPointer<MSGCALLRELEASE>, ulCallerData: UInt32, ulFlags: UInt32, lppMsg: CPointer<CPointer<Unit>>): Int32 {
+    return OpenIMsgOnIStg(lpMsgSess, lpAllocateBuffer, lpAllocateMore, lpFreeBuffer, lpMalloc, lpMapiSup, lpStg, lpfMsgCallRelease, ulCallerData, ulFlags, lppMsg)
+}
+
+@When[Windows_Win32_Storage_Imapi == "on" && MAPI32 == "on" && Windows_Win32_Storage_Imapi_OpenIMsgSession == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func GetAttribIMsgOnIStg(lpObject: CPointer<Unit>, lpPropTagArray: CPointer<Win32_System_AddressBook.SPropTagArrayAbi>, lppPropAttrArray: CPointer<CPointer<SPropAttrArrayAbi>>): Int32
+    func OpenIMsgSession(lpMalloc: CPointer<Unit>, ulFlags: UInt32, lppMsgSess: CPointer<LPMSGSESS>): Int32
+}
+
+@When[Windows_Win32_Storage_Imapi == "on" && MAPI32 == "on" && Windows_Win32_Storage_Imapi_OpenIMsgSession == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_OpenIMsgSession(lpMalloc: CPointer<Unit>, ulFlags: UInt32, lppMsgSess: CPointer<LPMSGSESS>): Int32 {
+    return OpenIMsgSession(lpMalloc, ulFlags, lppMsgSess)
+}
+
+@When[Windows_Win32_Storage_Imapi == "on" && MAPI32 == "on" && Windows_Win32_Storage_Imapi_SetAttribIMsgOnIStg == "on" && Windows_Win32_System_AddressBook == "on"]
+foreign {
     func SetAttribIMsgOnIStg(lpObject: CPointer<Unit>, lpPropTags: CPointer<Win32_System_AddressBook.SPropTagArrayAbi>, lpPropAttrs: CPointer<SPropAttrArrayAbi>, lppPropProblems: CPointer<CPointer<Win32_System_AddressBook.SPropProblemArrayAbi>>): Int32
 }
 
-@When[MAPI32 == "on" && Windows_Win32_System_Com == "on"]
-foreign {
-    func OpenIMsgSession(lpMalloc: CPointer<Unit>, ulFlags: UInt32, lppMsgSess: CPointer<LPMSGSESS>): Int32
+@When[Windows_Win32_Storage_Imapi == "on" && MAPI32 == "on" && Windows_Win32_Storage_Imapi_SetAttribIMsgOnIStg == "on" && Windows_Win32_System_AddressBook == "on"]
+public unsafe func Windows_SetAttribIMsgOnIStg(lpObject: CPointer<Unit>, lpPropTags: CPointer<Win32_System_AddressBook.SPropTagArrayAbi>, lpPropAttrs: CPointer<SPropAttrArrayAbi>, lppPropProblems: CPointer<CPointer<Win32_System_AddressBook.SPropProblemArrayAbi>>): Int32 {
+    return SetAttribIMsgOnIStg(lpObject, lpPropTags, lpPropAttrs, lppPropProblems)
 }
 
 @When[Windows_Win32_Storage_Imapi == "on"]

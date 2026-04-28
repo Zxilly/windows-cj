@@ -10,11 +10,8 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Devices_Geolocation == "on"]
 import windows.Devices.Geolocation as Devices_Geolocation
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_UI_Popups == "on"]
 import windows.UI.Popups as UI_Popups
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -3849,7 +3846,10 @@ public class MapService <: windows_interface.RuntimeName & windows_core.RuntimeN
 @C
 public struct IMapLocationFinderResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Locations: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Locations: UIntNative = UIntNative(0)
     public var Status: CFunc<(CPointer<Unit>, CPointer<MapLocationFinderStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -3919,6 +3919,7 @@ public class IMapLocationFinderResult <: InterfaceWrapperBase & ComInterface & R
         readVtbl<IMapLocationFinderResultVtbl>(IMapLocationFinderResultVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Locations(): windows_collections.IVectorView<MapLocation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3943,7 +3944,10 @@ extend IMapLocationFinderResult <: windows_core.Interface<IMapLocationFinderResu
 @C
 public struct IMapRouteManeuver3Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Warnings: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Warnings: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4012,6 +4016,7 @@ public class IMapRouteManeuver3 <: InterfaceWrapperBase & ComInterface & Runtime
         readVtbl<IMapRouteManeuver3Vtbl>(IMapRouteManeuver3Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Warnings(): windows_collections.IVectorView<ManeuverWarning> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4093,6 +4098,7 @@ public class MapLocationFinderResult <: InterfaceWrapperBase & ComInterface & wi
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Locations(): windows_collections.IVectorView<MapLocation> {
         return defaultInterface().Locations()
     }
@@ -4451,7 +4457,10 @@ public struct IMapRouteLegVtbl {
     public var Path: UIntNative = UIntNative(0)
     public var LengthInMeters: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var EstimatedDuration: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Maneuvers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Maneuvers: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4554,6 +4563,7 @@ public class IMapRouteLeg <: InterfaceWrapperBase & ComInterface & RuntimeName &
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<windows_future.TimeSpan>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Maneuvers(): windows_collections.IVectorView<MapRouteManeuver> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4722,6 +4732,7 @@ public class MapRouteLeg <: InterfaceWrapperBase & ComInterface & windows_interf
         return defaultInterface().EstimatedDuration()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Maneuvers(): windows_collections.IVectorView<MapRouteManeuver> {
         return defaultInterface().Maneuvers()
     }
@@ -4759,7 +4770,10 @@ public struct IMapRouteVtbl {
     public var Path: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Geolocation != "on"]
     public var Path: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Legs: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Legs: UIntNative = UIntNative(0)
     public var IsTrafficBased: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -4863,6 +4877,7 @@ public class IMapRoute <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
         return Devices_Geolocation.Geopath.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Legs(): windows_collections.IVectorView<MapRouteLeg> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4970,6 +4985,7 @@ public class MapRoute <: InterfaceWrapperBase & ComInterface & windows_interface
         return defaultInterface().Path()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Legs(): windows_collections.IVectorView<MapRouteLeg> {
         return defaultInterface().Legs()
     }
@@ -5095,7 +5111,10 @@ extend IMapRouteFinderResult <: windows_core.Interface<IMapRouteFinderResult> {}
 @C
 public struct IMapRouteFinderResult2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AlternateRoutes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AlternateRoutes: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -5164,6 +5183,7 @@ public class IMapRouteFinderResult2 <: InterfaceWrapperBase & ComInterface & Run
         readVtbl<IMapRouteFinderResult2Vtbl>(IMapRouteFinderResult2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AlternateRoutes(): windows_collections.IVectorView<MapRoute> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5292,29 +5312,29 @@ public struct IMapRouteFinderStaticsVtbl {
     public var GetDrivingRouteWithOptimizationRestrictionsAndHeadingAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, MapRouteOptimizationAbi, MapRouteRestrictionsAbi, Float64, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Geolocation != "on"]
     public var GetDrivingRouteWithOptimizationRestrictionsAndHeadingAsync: UIntNative = UIntNative(0)
-    @When[Windows_Devices_Geolocation == "on"]
+    @When[Windows_Devices_Geolocation == "on" && Windows_Foundation_Collections == "on"]
     public var GetDrivingRouteFromWaypointsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Devices_Geolocation != "on"]
+    @When[Windows_Devices_Geolocation != "on" || Windows_Foundation_Collections != "on"]
     public var GetDrivingRouteFromWaypointsAsync: UIntNative = UIntNative(0)
-    @When[Windows_Devices_Geolocation == "on"]
+    @When[Windows_Devices_Geolocation == "on" && Windows_Foundation_Collections == "on"]
     public var GetDrivingRouteFromWaypointsAndOptimizationAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, MapRouteOptimizationAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Devices_Geolocation != "on"]
+    @When[Windows_Devices_Geolocation != "on" || Windows_Foundation_Collections != "on"]
     public var GetDrivingRouteFromWaypointsAndOptimizationAsync: UIntNative = UIntNative(0)
-    @When[Windows_Devices_Geolocation == "on"]
+    @When[Windows_Devices_Geolocation == "on" && Windows_Foundation_Collections == "on"]
     public var GetDrivingRouteFromWaypointsOptimizationAndRestrictionsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, MapRouteOptimizationAbi, MapRouteRestrictionsAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Devices_Geolocation != "on"]
+    @When[Windows_Devices_Geolocation != "on" || Windows_Foundation_Collections != "on"]
     public var GetDrivingRouteFromWaypointsOptimizationAndRestrictionsAsync: UIntNative = UIntNative(0)
-    @When[Windows_Devices_Geolocation == "on"]
+    @When[Windows_Devices_Geolocation == "on" && Windows_Foundation_Collections == "on"]
     public var GetDrivingRouteFromWaypointsOptimizationRestrictionsAndHeadingAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, MapRouteOptimizationAbi, MapRouteRestrictionsAbi, Float64, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Devices_Geolocation != "on"]
+    @When[Windows_Devices_Geolocation != "on" || Windows_Foundation_Collections != "on"]
     public var GetDrivingRouteFromWaypointsOptimizationRestrictionsAndHeadingAsync: UIntNative = UIntNative(0)
     @When[Windows_Devices_Geolocation == "on"]
     public var GetWalkingRouteAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Geolocation != "on"]
     public var GetWalkingRouteAsync: UIntNative = UIntNative(0)
-    @When[Windows_Devices_Geolocation == "on"]
+    @When[Windows_Devices_Geolocation == "on" && Windows_Foundation_Collections == "on"]
     public var GetWalkingRouteFromWaypointsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Devices_Geolocation != "on"]
+    @When[Windows_Devices_Geolocation != "on" || Windows_Foundation_Collections != "on"]
     public var GetWalkingRouteFromWaypointsAsync: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -5420,7 +5440,7 @@ public class IMapRouteFinderStatics <: InterfaceWrapperBase & ComInterface & Run
         return windows_future.IAsyncOperation<MapRouteFinderResult>.fromAbiTake(result__)
     }
 
-    @When[Windows_Devices_Geolocation == "on"]
+    @When[Windows_Devices_Geolocation == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func GetDrivingRouteFromWaypointsAsync(wayPoints: windows_collections.IIterable<Devices_Geolocation.Geopoint>): windows_future.IAsyncOperation<MapRouteFinderResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5429,7 +5449,7 @@ public class IMapRouteFinderStatics <: InterfaceWrapperBase & ComInterface & Run
         return windows_future.IAsyncOperation<MapRouteFinderResult>.fromAbiTake(result__)
     }
 
-    @When[Windows_Devices_Geolocation == "on"]
+    @When[Windows_Devices_Geolocation == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func GetDrivingRouteFromWaypointsAndOptimizationAsync(wayPoints: windows_collections.IIterable<Devices_Geolocation.Geopoint>, optimization: MapRouteOptimization): windows_future.IAsyncOperation<MapRouteFinderResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5438,7 +5458,7 @@ public class IMapRouteFinderStatics <: InterfaceWrapperBase & ComInterface & Run
         return windows_future.IAsyncOperation<MapRouteFinderResult>.fromAbiTake(result__)
     }
 
-    @When[Windows_Devices_Geolocation == "on"]
+    @When[Windows_Devices_Geolocation == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func GetDrivingRouteFromWaypointsOptimizationAndRestrictionsAsync(wayPoints: windows_collections.IIterable<Devices_Geolocation.Geopoint>, optimization: MapRouteOptimization, restrictions: MapRouteRestrictions): windows_future.IAsyncOperation<MapRouteFinderResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5447,7 +5467,7 @@ public class IMapRouteFinderStatics <: InterfaceWrapperBase & ComInterface & Run
         return windows_future.IAsyncOperation<MapRouteFinderResult>.fromAbiTake(result__)
     }
 
-    @When[Windows_Devices_Geolocation == "on"]
+    @When[Windows_Devices_Geolocation == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func GetDrivingRouteFromWaypointsOptimizationRestrictionsAndHeadingAsync(wayPoints: windows_collections.IIterable<Devices_Geolocation.Geopoint>, optimization: MapRouteOptimization, restrictions: MapRouteRestrictions, headingInDegrees: Float64): windows_future.IAsyncOperation<MapRouteFinderResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5465,7 +5485,7 @@ public class IMapRouteFinderStatics <: InterfaceWrapperBase & ComInterface & Run
         return windows_future.IAsyncOperation<MapRouteFinderResult>.fromAbiTake(result__)
     }
 
-    @When[Windows_Devices_Geolocation == "on"]
+    @When[Windows_Devices_Geolocation == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func GetWalkingRouteFromWaypointsAsync(wayPoints: windows_collections.IIterable<Devices_Geolocation.Geopoint>): windows_future.IAsyncOperation<MapRouteFinderResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5769,8 +5789,14 @@ extend IEnhancedWaypointFactory <: windows_core.Interface<IEnhancedWaypointFacto
 @C
 public struct IMapRouteFinderStatics3Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetDrivingRouteFromEnhancedWaypointsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetDrivingRouteFromEnhancedWaypointsAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetDrivingRouteFromEnhancedWaypointsWithOptionsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetDrivingRouteFromEnhancedWaypointsWithOptionsAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -5839,6 +5865,7 @@ public class IMapRouteFinderStatics3 <: InterfaceWrapperBase & ComInterface & Ru
         readVtbl<IMapRouteFinderStatics3Vtbl>(IMapRouteFinderStatics3Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetDrivingRouteFromEnhancedWaypointsAsync(waypoints: windows_collections.IIterable<EnhancedWaypoint>): windows_future.IAsyncOperation<MapRouteFinderResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5847,6 +5874,7 @@ public class IMapRouteFinderStatics3 <: InterfaceWrapperBase & ComInterface & Ru
         return windows_future.IAsyncOperation<MapRouteFinderResult>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetDrivingRouteFromEnhancedWaypointsWithOptionsAsync(waypoints: windows_collections.IIterable<EnhancedWaypoint>, options: MapRouteDrivingOptions): windows_future.IAsyncOperation<MapRouteFinderResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6163,7 +6191,7 @@ public class MapRouteFinder <: windows_interface.RuntimeName & windows_core.Runt
         }
     }
 
-    @When[Windows_Devices_Geolocation == "on"]
+    @When[Windows_Devices_Geolocation == "on" && Windows_Foundation_Collections == "on"]
     public static unsafe func GetDrivingRouteFromWaypointsAsync(wayPoints: windows_collections.IIterable<Devices_Geolocation.Geopoint>): windows_future.IAsyncOperation<MapRouteFinderResult> {
         var result__: Option<windows_future.IAsyncOperation<MapRouteFinderResult>> = Option<windows_future.IAsyncOperation<MapRouteFinderResult>>.None
         try (factory__ = windows_core.factory<MapRouteFinder, IMapRouteFinderStatics>().unwrap()) {
@@ -6175,7 +6203,7 @@ public class MapRouteFinder <: windows_interface.RuntimeName & windows_core.Runt
         }
     }
 
-    @When[Windows_Devices_Geolocation == "on"]
+    @When[Windows_Devices_Geolocation == "on" && Windows_Foundation_Collections == "on"]
     public static unsafe func GetDrivingRouteFromWaypointsAndOptimizationAsync(wayPoints: windows_collections.IIterable<Devices_Geolocation.Geopoint>, optimization: MapRouteOptimization): windows_future.IAsyncOperation<MapRouteFinderResult> {
         var result__: Option<windows_future.IAsyncOperation<MapRouteFinderResult>> = Option<windows_future.IAsyncOperation<MapRouteFinderResult>>.None
         try (factory__ = windows_core.factory<MapRouteFinder, IMapRouteFinderStatics>().unwrap()) {
@@ -6187,7 +6215,7 @@ public class MapRouteFinder <: windows_interface.RuntimeName & windows_core.Runt
         }
     }
 
-    @When[Windows_Devices_Geolocation == "on"]
+    @When[Windows_Devices_Geolocation == "on" && Windows_Foundation_Collections == "on"]
     public static unsafe func GetDrivingRouteFromWaypointsOptimizationAndRestrictionsAsync(wayPoints: windows_collections.IIterable<Devices_Geolocation.Geopoint>, optimization: MapRouteOptimization, restrictions: MapRouteRestrictions): windows_future.IAsyncOperation<MapRouteFinderResult> {
         var result__: Option<windows_future.IAsyncOperation<MapRouteFinderResult>> = Option<windows_future.IAsyncOperation<MapRouteFinderResult>>.None
         try (factory__ = windows_core.factory<MapRouteFinder, IMapRouteFinderStatics>().unwrap()) {
@@ -6199,7 +6227,7 @@ public class MapRouteFinder <: windows_interface.RuntimeName & windows_core.Runt
         }
     }
 
-    @When[Windows_Devices_Geolocation == "on"]
+    @When[Windows_Devices_Geolocation == "on" && Windows_Foundation_Collections == "on"]
     public static unsafe func GetDrivingRouteFromWaypointsOptimizationRestrictionsAndHeadingAsync(wayPoints: windows_collections.IIterable<Devices_Geolocation.Geopoint>, optimization: MapRouteOptimization, restrictions: MapRouteRestrictions, headingInDegrees: Float64): windows_future.IAsyncOperation<MapRouteFinderResult> {
         var result__: Option<windows_future.IAsyncOperation<MapRouteFinderResult>> = Option<windows_future.IAsyncOperation<MapRouteFinderResult>>.None
         try (factory__ = windows_core.factory<MapRouteFinder, IMapRouteFinderStatics>().unwrap()) {
@@ -6223,7 +6251,7 @@ public class MapRouteFinder <: windows_interface.RuntimeName & windows_core.Runt
         }
     }
 
-    @When[Windows_Devices_Geolocation == "on"]
+    @When[Windows_Devices_Geolocation == "on" && Windows_Foundation_Collections == "on"]
     public static unsafe func GetWalkingRouteFromWaypointsAsync(wayPoints: windows_collections.IIterable<Devices_Geolocation.Geopoint>): windows_future.IAsyncOperation<MapRouteFinderResult> {
         var result__: Option<windows_future.IAsyncOperation<MapRouteFinderResult>> = Option<windows_future.IAsyncOperation<MapRouteFinderResult>>.None
         try (factory__ = windows_core.factory<MapRouteFinder, IMapRouteFinderStatics>().unwrap()) {
@@ -6247,6 +6275,7 @@ public class MapRouteFinder <: windows_interface.RuntimeName & windows_core.Runt
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetDrivingRouteFromEnhancedWaypointsAsync(waypoints: windows_collections.IIterable<EnhancedWaypoint>): windows_future.IAsyncOperation<MapRouteFinderResult> {
         var result__: Option<windows_future.IAsyncOperation<MapRouteFinderResult>> = Option<windows_future.IAsyncOperation<MapRouteFinderResult>>.None
         try (factory__ = windows_core.factory<MapRouteFinder, IMapRouteFinderStatics3>().unwrap()) {
@@ -6258,6 +6287,7 @@ public class MapRouteFinder <: windows_interface.RuntimeName & windows_core.Runt
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetDrivingRouteFromEnhancedWaypointsWithOptionsAsync(waypoints: windows_collections.IIterable<EnhancedWaypoint>, options: MapRouteDrivingOptions): windows_future.IAsyncOperation<MapRouteFinderResult> {
         var result__: Option<windows_future.IAsyncOperation<MapRouteFinderResult>> = Option<windows_future.IAsyncOperation<MapRouteFinderResult>>.None
         try (factory__ = windows_core.factory<MapRouteFinder, IMapRouteFinderStatics3>().unwrap()) {

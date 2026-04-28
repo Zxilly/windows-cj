@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l1 as _impl_l1
 import windows_collections as windows_collections
@@ -78,9 +77,9 @@ extend WalletItemAppAssociation <: windows_core.CopyType & windows_core.RuntimeT
 @C
 public struct IWalletItemSystemStoreVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_ApplicationModel_Wallet == "on"]
+    @When[Windows_ApplicationModel_Wallet == "on" && Windows_Foundation_Collections == "on"]
     public var GetItemsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel_Wallet != "on"]
+    @When[Windows_ApplicationModel_Wallet != "on" || Windows_Foundation_Collections != "on"]
     public var GetItemsAsync: UIntNative = UIntNative(0)
     @When[Windows_ApplicationModel_Wallet == "on"]
     public var DeleteAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -166,7 +165,7 @@ public class IWalletItemSystemStore <: InterfaceWrapperBase & ComInterface & Run
         readVtbl<IWalletItemSystemStoreVtbl>(IWalletItemSystemStoreVtbl())
     }
 
-    @When[Windows_ApplicationModel_Wallet == "on"]
+    @When[Windows_ApplicationModel_Wallet == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func GetItemsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.WalletItem>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -461,7 +460,7 @@ public class WalletItemSystemStore <: InterfaceWrapperBase & ComInterface & wind
         }
     }
 
-    @When[Windows_ApplicationModel_Wallet == "on"]
+    @When[Windows_ApplicationModel_Wallet == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func GetItemsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.WalletItem>> {
         return defaultInterface().GetItemsAsync()
     }

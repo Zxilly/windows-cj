@@ -10,11 +10,8 @@ import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrap
 import windows_interface as windows_interface
 import windows_polyfill.{unionReadInt32, unionReadUInt32, unionWriteInt32, unionWriteUInt32}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-@When[Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
 import windows.Win32.UI.Input.KeyboardAndMouse as Win32_UI_Input_KeyboardAndMouse
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
@@ -213,11 +210,34 @@ extend AccStore <: windows_core.CopyType & windows_core.RuntimeType & windows_co
     }
 }
 
-@When[MSCTFMONITOR == "on"]
+@When[Windows_Win32_UI_TextServices == "on" && MSCTFMONITOR == "on" && Windows_Win32_UI_TextServices_DoMsCtfMonitor == "on"]
 foreign {
     func DoMsCtfMonitor(dwFlags: UInt32, hEventForServiceStop: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_TextServices == "on" && MSCTFMONITOR == "on" && Windows_Win32_UI_TextServices_DoMsCtfMonitor == "on"]
+public unsafe func Windows_DoMsCtfMonitor(dwFlags: UInt32, hEventForServiceStop: CPointer<Unit>): Int32 {
+    return DoMsCtfMonitor(dwFlags, hEventForServiceStop)
+}
+
+@When[Windows_Win32_UI_TextServices == "on" && MSCTFMONITOR == "on" && Windows_Win32_UI_TextServices_InitLocalMsCtfMonitor == "on"]
+foreign {
     func InitLocalMsCtfMonitor(dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_TextServices == "on" && MSCTFMONITOR == "on" && Windows_Win32_UI_TextServices_InitLocalMsCtfMonitor == "on"]
+public unsafe func Windows_InitLocalMsCtfMonitor(dwFlags: UInt32): Int32 {
+    return InitLocalMsCtfMonitor(dwFlags)
+}
+
+@When[Windows_Win32_UI_TextServices == "on" && MSCTFMONITOR == "on" && Windows_Win32_UI_TextServices_UninitLocalMsCtfMonitor == "on"]
+foreign {
     func UninitLocalMsCtfMonitor(): Int32
+}
+
+@When[Windows_Win32_UI_TextServices == "on" && MSCTFMONITOR == "on" && Windows_Win32_UI_TextServices_UninitLocalMsCtfMonitor == "on"]
+public unsafe func Windows_UninitLocalMsCtfMonitor(): Int32 {
+    return UninitLocalMsCtfMonitor()
 }
 
 @When[Windows_Win32_UI_TextServices == "on"]

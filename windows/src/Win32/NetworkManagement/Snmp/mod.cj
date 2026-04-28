@@ -8,7 +8,6 @@ import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeTy
 import windows_core as windows_core
 import windows_polyfill.{packedReadInt32, packedReadUInt32, packedReadUInt8, packedReadValue, packedWriteInt32, packedWriteUInt32, packedWriteUInt8, packedWriteValue, unionReadInt32, unionReadUInt32, unionReadUInt64, unionReadUInt8, unionWriteInt32, unionWriteUInt32, unionWriteUInt64, unionWriteUInt8}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 
@@ -1516,133 +1515,852 @@ public struct SnmpVarBindList {
     public init() {}
 }
 
-@When[MGMTAPI == "on"]
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && MGMTAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpMgrClose == "on"]
 foreign {
     func SnmpMgrClose(session: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && MGMTAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpMgrClose == "on"]
+public unsafe func Windows_SnmpMgrClose(session: CPointer<Unit>): Int32 {
+    return SnmpMgrClose(session)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && MGMTAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpMgrCtl == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SnmpMgrCtl(session: CPointer<Unit>, dwCtlCode: UInt32, lpvInBuffer: CPointer<Unit>, cbInBuffer: UInt32, lpvOUTBuffer: CPointer<Unit>, cbOUTBuffer: UInt32, lpcbBytesReturned: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && MGMTAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpMgrCtl == "on"]
+public unsafe func Windows_SnmpMgrCtl(session: CPointer<Unit>, dwCtlCode: UInt32, lpvInBuffer: CPointer<Unit>, cbInBuffer: UInt32, lpvOUTBuffer: CPointer<Unit>, cbOUTBuffer: UInt32, lpcbBytesReturned: CPointer<UInt32>): Int32 {
+    return SnmpMgrCtl(session, dwCtlCode, lpvInBuffer, cbInBuffer, lpvOUTBuffer, cbOUTBuffer, lpcbBytesReturned)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && MGMTAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpMgrGetTrap == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func SnmpMgrGetTrap(enterprise: CPointer<AsnObjectIdentifier>, IPAddress: CPointer<AsnOctetString>, genericTrap: CPointer<SNMP_GENERICTRAPAbi>, specificTrap: CPointer<Int32>, timeStamp: CPointer<UInt32>, variableBindings: CPointer<SnmpVarBindList>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && MGMTAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpMgrGetTrap == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SnmpMgrGetTrap(enterprise: CPointer<AsnObjectIdentifier>, IPAddress: CPointer<AsnOctetString>, genericTrap: CPointer<SNMP_GENERICTRAPAbi>, specificTrap: CPointer<Int32>, timeStamp: CPointer<UInt32>, variableBindings: CPointer<SnmpVarBindList>): Int32 {
+    return SnmpMgrGetTrap(enterprise, IPAddress, genericTrap, specificTrap, timeStamp, variableBindings)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && MGMTAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpMgrGetTrapEx == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func SnmpMgrGetTrapEx(enterprise: CPointer<AsnObjectIdentifier>, agentAddress: CPointer<AsnOctetString>, sourceAddress: CPointer<AsnOctetString>, genericTrap: CPointer<SNMP_GENERICTRAPAbi>, specificTrap: CPointer<Int32>, community: CPointer<AsnOctetString>, timeStamp: CPointer<UInt32>, variableBindings: CPointer<SnmpVarBindList>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && MGMTAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpMgrGetTrapEx == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SnmpMgrGetTrapEx(enterprise: CPointer<AsnObjectIdentifier>, agentAddress: CPointer<AsnOctetString>, sourceAddress: CPointer<AsnOctetString>, genericTrap: CPointer<SNMP_GENERICTRAPAbi>, specificTrap: CPointer<Int32>, community: CPointer<AsnOctetString>, timeStamp: CPointer<UInt32>, variableBindings: CPointer<SnmpVarBindList>): Int32 {
+    return SnmpMgrGetTrapEx(enterprise, agentAddress, sourceAddress, genericTrap, specificTrap, community, timeStamp, variableBindings)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && MGMTAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpMgrOidToStr == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: string optional
+    func SnmpMgrOidToStr(oid: CPointer<AsnObjectIdentifier>, string: CPointer<CPointer<UInt8>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && MGMTAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpMgrOidToStr == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SnmpMgrOidToStr(oid: CPointer<AsnObjectIdentifier>, string: CPointer<CPointer<UInt8>>): Int32 {
+    return SnmpMgrOidToStr(oid, string)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && MGMTAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpMgrOpen == "on"]
+foreign {
     // param-hint: lpAgentAddress optional
     // param-hint: lpAgentCommunity optional
     // pinvoke-hint: SetLastError
     func SnmpMgrOpen(lpAgentAddress: CPointer<UInt8>, lpAgentCommunity: CPointer<UInt8>, nTimeOut: Int32, nRetries: Int32): CPointer<Unit>
-    // pinvoke-hint: SetLastError
-    func SnmpMgrTrapListen(phTrapAvailable: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[MGMTAPI == "on" && (((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64")) || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64"))))]
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && MGMTAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpMgrOpen == "on"]
+public unsafe func Windows_SnmpMgrOpen(lpAgentAddress: CPointer<UInt8>, lpAgentCommunity: CPointer<UInt8>, nTimeOut: Int32, nRetries: Int32): CPointer<Unit> {
+    return SnmpMgrOpen(lpAgentAddress, lpAgentCommunity, nTimeOut, nRetries)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && MGMTAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpMgrRequest == "on" && ((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64")) || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64")))]
 foreign {
     // pinvoke-hint: SetLastError
     func SnmpMgrRequest(session: CPointer<Unit>, requestType: UInt8, variableBindings: CPointer<SnmpVarBindList>, errorStatus: CPointer<SNMP_ERROR_STATUSAbi>, errorIndex: CPointer<Int32>): Int32
 }
 
-@When[MGMTAPI == "on" && ((arch == "x86_64" || arch == "aarch64"))]
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && MGMTAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpMgrRequest == "on" && ((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64")) || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64")))]
+public unsafe func Windows_SnmpMgrRequest(session: CPointer<Unit>, requestType: UInt8, variableBindings: CPointer<SnmpVarBindList>, errorStatus: CPointer<SNMP_ERROR_STATUSAbi>, errorIndex: CPointer<Int32>): Int32 {
+    return SnmpMgrRequest(session, requestType, variableBindings, errorStatus, errorIndex)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && MGMTAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpMgrStrToOid == "on" && (arch == "x86_64" || arch == "aarch64")]
 foreign {
-    func SnmpMgrGetTrap(enterprise: CPointer<AsnObjectIdentifier>, IPAddress: CPointer<AsnOctetString>, genericTrap: CPointer<SNMP_GENERICTRAPAbi>, specificTrap: CPointer<Int32>, timeStamp: CPointer<UInt32>, variableBindings: CPointer<SnmpVarBindList>): Int32
-    func SnmpMgrGetTrapEx(enterprise: CPointer<AsnObjectIdentifier>, agentAddress: CPointer<AsnOctetString>, sourceAddress: CPointer<AsnOctetString>, genericTrap: CPointer<SNMP_GENERICTRAPAbi>, specificTrap: CPointer<Int32>, community: CPointer<AsnOctetString>, timeStamp: CPointer<UInt32>, variableBindings: CPointer<SnmpVarBindList>): Int32
-    // param-hint: string optional
-    func SnmpMgrOidToStr(oid: CPointer<AsnObjectIdentifier>, string: CPointer<CPointer<UInt8>>): Int32
     // param-hint: string optional
     func SnmpMgrStrToOid(string: CPointer<UInt8>, oid: CPointer<AsnObjectIdentifier>): Int32
 }
 
-@When[SNMPAPI == "on"]
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && MGMTAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpMgrStrToOid == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SnmpMgrStrToOid(string: CPointer<UInt8>, oid: CPointer<AsnObjectIdentifier>): Int32 {
+    return SnmpMgrStrToOid(string, oid)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && MGMTAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpMgrTrapListen == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SnmpMgrTrapListen(phTrapAvailable: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && MGMTAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpMgrTrapListen == "on"]
+public unsafe func Windows_SnmpMgrTrapListen(phTrapAvailable: CPointer<CPointer<Unit>>): Int32 {
+    return SnmpMgrTrapListen(phTrapAvailable)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilDbgPrint == "on"]
 @CallingConv[CDECL]
 foreign {
     // pinvoke-hint: cc=cdecl
     func SnmpUtilDbgPrint(nLogLevel: SNMP_LOGAbi, szFormat: CPointer<UInt8>, ...): Unit
 }
 
-@When[SNMPAPI == "on"]
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpSvcGetUptime == "on"]
 foreign {
     func SnmpSvcGetUptime(): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpSvcGetUptime == "on"]
+public unsafe func Windows_SnmpSvcGetUptime(): UInt32 {
+    return SnmpSvcGetUptime()
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpSvcSetLogLevel == "on"]
+foreign {
     func SnmpSvcSetLogLevel(nLogLevel: SNMP_LOGAbi): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpSvcSetLogLevel == "on"]
+public unsafe func Windows_SnmpSvcSetLogLevel(nLogLevel: SNMP_LOGAbi): Unit {
+    SnmpSvcSetLogLevel(nLogLevel)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpSvcSetLogType == "on"]
+foreign {
     func SnmpSvcSetLogType(nLogType: Int32): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpSvcSetLogType == "on"]
+public unsafe func Windows_SnmpSvcSetLogType(nLogType: Int32): Unit {
+    SnmpSvcSetLogType(nLogType)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilAsnAnyCpy == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func SnmpUtilAsnAnyCpy(pAnyDst: CPointer<AsnAny>, pAnySrc: CPointer<AsnAny>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilAsnAnyCpy == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SnmpUtilAsnAnyCpy(pAnyDst: CPointer<AsnAny>, pAnySrc: CPointer<AsnAny>): Int32 {
+    return SnmpUtilAsnAnyCpy(pAnyDst, pAnySrc)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilAsnAnyFree == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func SnmpUtilAsnAnyFree(pAny: CPointer<AsnAny>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilAsnAnyFree == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SnmpUtilAsnAnyFree(pAny: CPointer<AsnAny>): Unit {
+    SnmpUtilAsnAnyFree(pAny)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilIdsToA == "on"]
+foreign {
     func SnmpUtilIdsToA(Ids: CPointer<UInt32>, IdLength: UInt32): CPointer<UInt8>
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilIdsToA == "on"]
+public unsafe func Windows_SnmpUtilIdsToA(Ids: CPointer<UInt32>, IdLength: UInt32): CPointer<UInt8> {
+    return SnmpUtilIdsToA(Ids, IdLength)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilMemAlloc == "on"]
+foreign {
     func SnmpUtilMemAlloc(nBytes: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilMemAlloc == "on"]
+public unsafe func Windows_SnmpUtilMemAlloc(nBytes: UInt32): CPointer<Unit> {
+    return SnmpUtilMemAlloc(nBytes)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilMemFree == "on"]
+foreign {
     func SnmpUtilMemFree(pMem: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilMemFree == "on"]
+public unsafe func Windows_SnmpUtilMemFree(pMem: CPointer<Unit>): Unit {
+    SnmpUtilMemFree(pMem)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilMemReAlloc == "on"]
+foreign {
     func SnmpUtilMemReAlloc(pMem: CPointer<Unit>, nBytes: UInt32): CPointer<Unit>
 }
 
-@When[SNMPAPI == "on" && (((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64")) || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64"))))]
-foreign {
-    func SnmpUtilVarBindListCpy(pVblDst: CPointer<SnmpVarBindList>, pVblSrc: CPointer<SnmpVarBindList>): Int32
-    func SnmpUtilVarBindListFree(pVbl: CPointer<SnmpVarBindList>): Unit
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilMemReAlloc == "on"]
+public unsafe func Windows_SnmpUtilMemReAlloc(pMem: CPointer<Unit>, nBytes: UInt32): CPointer<Unit> {
+    return SnmpUtilMemReAlloc(pMem, nBytes)
 }
 
-@When[SNMPAPI == "on" && ((arch == "x86_64" || arch == "aarch64"))]
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilOctetsCmp == "on" && (arch == "x86_64" || arch == "aarch64")]
 foreign {
-    func SnmpUtilAsnAnyCpy(pAnyDst: CPointer<AsnAny>, pAnySrc: CPointer<AsnAny>): Int32
-    func SnmpUtilAsnAnyFree(pAny: CPointer<AsnAny>): Unit
     func SnmpUtilOctetsCmp(pOctets1: CPointer<AsnOctetString>, pOctets2: CPointer<AsnOctetString>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilOctetsCmp == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SnmpUtilOctetsCmp(pOctets1: CPointer<AsnOctetString>, pOctets2: CPointer<AsnOctetString>): Int32 {
+    return SnmpUtilOctetsCmp(pOctets1, pOctets2)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilOctetsCpy == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func SnmpUtilOctetsCpy(pOctetsDst: CPointer<AsnOctetString>, pOctetsSrc: CPointer<AsnOctetString>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilOctetsCpy == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SnmpUtilOctetsCpy(pOctetsDst: CPointer<AsnOctetString>, pOctetsSrc: CPointer<AsnOctetString>): Int32 {
+    return SnmpUtilOctetsCpy(pOctetsDst, pOctetsSrc)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilOctetsFree == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func SnmpUtilOctetsFree(pOctets: CPointer<AsnOctetString>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilOctetsFree == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SnmpUtilOctetsFree(pOctets: CPointer<AsnOctetString>): Unit {
+    SnmpUtilOctetsFree(pOctets)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilOctetsNCmp == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func SnmpUtilOctetsNCmp(pOctets1: CPointer<AsnOctetString>, pOctets2: CPointer<AsnOctetString>, nChars: UInt32): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilOctetsNCmp == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SnmpUtilOctetsNCmp(pOctets1: CPointer<AsnOctetString>, pOctets2: CPointer<AsnOctetString>, nChars: UInt32): Int32 {
+    return SnmpUtilOctetsNCmp(pOctets1, pOctets2, nChars)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilOidAppend == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // pinvoke-hint: SetLastError
     func SnmpUtilOidAppend(pOidDst: CPointer<AsnObjectIdentifier>, pOidSrc: CPointer<AsnObjectIdentifier>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilOidAppend == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SnmpUtilOidAppend(pOidDst: CPointer<AsnObjectIdentifier>, pOidSrc: CPointer<AsnObjectIdentifier>): Int32 {
+    return SnmpUtilOidAppend(pOidDst, pOidSrc)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilOidCmp == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func SnmpUtilOidCmp(pOid1: CPointer<AsnObjectIdentifier>, pOid2: CPointer<AsnObjectIdentifier>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilOidCmp == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SnmpUtilOidCmp(pOid1: CPointer<AsnObjectIdentifier>, pOid2: CPointer<AsnObjectIdentifier>): Int32 {
+    return SnmpUtilOidCmp(pOid1, pOid2)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilOidCpy == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func SnmpUtilOidCpy(pOidDst: CPointer<AsnObjectIdentifier>, pOidSrc: CPointer<AsnObjectIdentifier>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilOidCpy == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SnmpUtilOidCpy(pOidDst: CPointer<AsnObjectIdentifier>, pOidSrc: CPointer<AsnObjectIdentifier>): Int32 {
+    return SnmpUtilOidCpy(pOidDst, pOidSrc)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilOidFree == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func SnmpUtilOidFree(pOid: CPointer<AsnObjectIdentifier>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilOidFree == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SnmpUtilOidFree(pOid: CPointer<AsnObjectIdentifier>): Unit {
+    SnmpUtilOidFree(pOid)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilOidNCmp == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func SnmpUtilOidNCmp(pOid1: CPointer<AsnObjectIdentifier>, pOid2: CPointer<AsnObjectIdentifier>, nSubIds: UInt32): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilOidNCmp == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SnmpUtilOidNCmp(pOid1: CPointer<AsnObjectIdentifier>, pOid2: CPointer<AsnObjectIdentifier>, nSubIds: UInt32): Int32 {
+    return SnmpUtilOidNCmp(pOid1, pOid2, nSubIds)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilOidToA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func SnmpUtilOidToA(Oid: CPointer<AsnObjectIdentifier>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilOidToA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SnmpUtilOidToA(Oid: CPointer<AsnObjectIdentifier>): CPointer<UInt8> {
+    return SnmpUtilOidToA(Oid)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilPrintAsnAny == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func SnmpUtilPrintAsnAny(pAny: CPointer<AsnAny>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilPrintAsnAny == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SnmpUtilPrintAsnAny(pAny: CPointer<AsnAny>): Unit {
+    SnmpUtilPrintAsnAny(pAny)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilPrintOid == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func SnmpUtilPrintOid(Oid: CPointer<AsnObjectIdentifier>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilPrintOid == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SnmpUtilPrintOid(Oid: CPointer<AsnObjectIdentifier>): Unit {
+    SnmpUtilPrintOid(Oid)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilVarBindCpy == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func SnmpUtilVarBindCpy(pVbDst: CPointer<SnmpVarBind>, pVbSrc: CPointer<SnmpVarBind>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilVarBindCpy == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SnmpUtilVarBindCpy(pVbDst: CPointer<SnmpVarBind>, pVbSrc: CPointer<SnmpVarBind>): Int32 {
+    return SnmpUtilVarBindCpy(pVbDst, pVbSrc)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilVarBindFree == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func SnmpUtilVarBindFree(pVb: CPointer<SnmpVarBind>): Unit
 }
 
-@When[WSNMP32 == "on"]
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilVarBindFree == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SnmpUtilVarBindFree(pVb: CPointer<SnmpVarBind>): Unit {
+    SnmpUtilVarBindFree(pVb)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilVarBindListCpy == "on" && ((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64")) || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64")))]
+foreign {
+    func SnmpUtilVarBindListCpy(pVblDst: CPointer<SnmpVarBindList>, pVblSrc: CPointer<SnmpVarBindList>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilVarBindListCpy == "on" && ((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64")) || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64")))]
+public unsafe func Windows_SnmpUtilVarBindListCpy(pVblDst: CPointer<SnmpVarBindList>, pVblSrc: CPointer<SnmpVarBindList>): Int32 {
+    return SnmpUtilVarBindListCpy(pVblDst, pVblSrc)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilVarBindListFree == "on" && ((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64")) || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64")))]
+foreign {
+    func SnmpUtilVarBindListFree(pVbl: CPointer<SnmpVarBindList>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && SNMPAPI == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpUtilVarBindListFree == "on" && ((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64")) || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64")))]
+public unsafe func Windows_SnmpUtilVarBindListFree(pVbl: CPointer<SnmpVarBindList>): Unit {
+    SnmpUtilVarBindListFree(pVbl)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpCancelMsg == "on"]
 foreign {
     func SnmpCancelMsg(session: IntNative, reqId: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpCancelMsg == "on"]
+public unsafe func Windows_SnmpCancelMsg(session: IntNative, reqId: Int32): UInt32 {
+    return SnmpCancelMsg(session, reqId)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpCleanup == "on"]
+foreign {
     func SnmpCleanup(): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpCleanup == "on"]
+public unsafe func Windows_SnmpCleanup(): UInt32 {
+    return SnmpCleanup()
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpCleanupEx == "on"]
+foreign {
     func SnmpCleanupEx(): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpCleanupEx == "on"]
+public unsafe func Windows_SnmpCleanupEx(): UInt32 {
+    return SnmpCleanupEx()
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpClose == "on"]
+foreign {
     func SnmpClose(session: IntNative): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpClose == "on"]
+public unsafe func Windows_SnmpClose(session: IntNative): UInt32 {
+    return SnmpClose(session)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpContextToStr == "on"]
+foreign {
     func SnmpContextToStr(context: IntNative, string: CPointer<smiOCTETSAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpContextToStr == "on"]
+public unsafe func Windows_SnmpContextToStr(context: IntNative, string: CPointer<smiOCTETSAbi>): UInt32 {
+    return SnmpContextToStr(context, string)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpCountVbl == "on"]
+foreign {
     func SnmpCountVbl(vbl: IntNative): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpCountVbl == "on"]
+public unsafe func Windows_SnmpCountVbl(vbl: IntNative): UInt32 {
+    return SnmpCountVbl(vbl)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpCreatePdu == "on"]
+foreign {
     func SnmpCreatePdu(session: IntNative, PDU_type: SNMP_PDU_TYPEAbi, request_id: Int32, error_status: Int32, error_index: Int32, varbindlist: IntNative): IntNative
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpCreatePdu == "on"]
+public unsafe func Windows_SnmpCreatePdu(session: IntNative, PDU_type: SNMP_PDU_TYPEAbi, request_id: Int32, error_status: Int32, error_index: Int32, varbindlist: IntNative): IntNative {
+    return SnmpCreatePdu(session, PDU_type, request_id, error_status, error_index, varbindlist)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpCreateSession == "on"]
+foreign {
     func SnmpCreateSession(hWnd: CPointer<Unit>, wMsg: UInt32, fCallBack: SNMPAPI_CALLBACK, lpClientData: CPointer<Unit>): IntNative
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpCreateSession == "on"]
+public unsafe func Windows_SnmpCreateSession(hWnd: CPointer<Unit>, wMsg: UInt32, fCallBack: SNMPAPI_CALLBACK, lpClientData: CPointer<Unit>): IntNative {
+    return SnmpCreateSession(hWnd, wMsg, fCallBack, lpClientData)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpCreateVbl == "on"]
+foreign {
     func SnmpCreateVbl(session: IntNative, name: CPointer<smiOIDAbi>, value: CPointer<smiVALUEAbi>): IntNative
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpCreateVbl == "on"]
+public unsafe func Windows_SnmpCreateVbl(session: IntNative, name: CPointer<smiOIDAbi>, value: CPointer<smiVALUEAbi>): IntNative {
+    return SnmpCreateVbl(session, name, value)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpDecodeMsg == "on"]
+foreign {
     func SnmpDecodeMsg(session: IntNative, srcEntity: CPointer<IntNative>, dstEntity: CPointer<IntNative>, context: CPointer<IntNative>, pdu: CPointer<IntNative>, msgBufDesc: CPointer<smiOCTETSAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpDecodeMsg == "on"]
+public unsafe func Windows_SnmpDecodeMsg(session: IntNative, srcEntity: CPointer<IntNative>, dstEntity: CPointer<IntNative>, context: CPointer<IntNative>, pdu: CPointer<IntNative>, msgBufDesc: CPointer<smiOCTETSAbi>): UInt32 {
+    return SnmpDecodeMsg(session, srcEntity, dstEntity, context, pdu, msgBufDesc)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpDeleteVb == "on"]
+foreign {
     func SnmpDeleteVb(vbl: IntNative, index: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpDeleteVb == "on"]
+public unsafe func Windows_SnmpDeleteVb(vbl: IntNative, index: UInt32): UInt32 {
+    return SnmpDeleteVb(vbl, index)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpDuplicatePdu == "on"]
+foreign {
     func SnmpDuplicatePdu(session: IntNative, PDU: IntNative): IntNative
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpDuplicatePdu == "on"]
+public unsafe func Windows_SnmpDuplicatePdu(session: IntNative, PDU: IntNative): IntNative {
+    return SnmpDuplicatePdu(session, PDU)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpDuplicateVbl == "on"]
+foreign {
     func SnmpDuplicateVbl(session: IntNative, vbl: IntNative): IntNative
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpDuplicateVbl == "on"]
+public unsafe func Windows_SnmpDuplicateVbl(session: IntNative, vbl: IntNative): IntNative {
+    return SnmpDuplicateVbl(session, vbl)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpEncodeMsg == "on"]
+foreign {
     func SnmpEncodeMsg(session: IntNative, srcEntity: IntNative, dstEntity: IntNative, context: IntNative, pdu: IntNative, msgBufDesc: CPointer<smiOCTETSAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpEncodeMsg == "on"]
+public unsafe func Windows_SnmpEncodeMsg(session: IntNative, srcEntity: IntNative, dstEntity: IntNative, context: IntNative, pdu: IntNative, msgBufDesc: CPointer<smiOCTETSAbi>): UInt32 {
+    return SnmpEncodeMsg(session, srcEntity, dstEntity, context, pdu, msgBufDesc)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpEntityToStr == "on"]
+foreign {
     // param-hint: string len=param[1]
     func SnmpEntityToStr(entity: IntNative, size: UInt32, string: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpEntityToStr == "on"]
+public unsafe func Windows_SnmpEntityToStr(entity: IntNative, size: UInt32, string: CPointer<UInt8>): UInt32 {
+    return SnmpEntityToStr(entity, size, string)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpFreeContext == "on"]
+foreign {
     func SnmpFreeContext(context: IntNative): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpFreeContext == "on"]
+public unsafe func Windows_SnmpFreeContext(context: IntNative): UInt32 {
+    return SnmpFreeContext(context)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpFreeDescriptor == "on"]
+foreign {
     func SnmpFreeDescriptor(syntax: UInt32, descriptor: CPointer<smiOCTETSAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpFreeDescriptor == "on"]
+public unsafe func Windows_SnmpFreeDescriptor(syntax: UInt32, descriptor: CPointer<smiOCTETSAbi>): UInt32 {
+    return SnmpFreeDescriptor(syntax, descriptor)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpFreeEntity == "on"]
+foreign {
     func SnmpFreeEntity(entity: IntNative): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpFreeEntity == "on"]
+public unsafe func Windows_SnmpFreeEntity(entity: IntNative): UInt32 {
+    return SnmpFreeEntity(entity)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpFreePdu == "on"]
+foreign {
     func SnmpFreePdu(PDU: IntNative): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpFreePdu == "on"]
+public unsafe func Windows_SnmpFreePdu(PDU: IntNative): UInt32 {
+    return SnmpFreePdu(PDU)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpFreeVbl == "on"]
+foreign {
     func SnmpFreeVbl(vbl: IntNative): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpFreeVbl == "on"]
+public unsafe func Windows_SnmpFreeVbl(vbl: IntNative): UInt32 {
+    return SnmpFreeVbl(vbl)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpGetLastError == "on"]
+foreign {
     func SnmpGetLastError(session: IntNative): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpGetLastError == "on"]
+public unsafe func Windows_SnmpGetLastError(session: IntNative): UInt32 {
+    return SnmpGetLastError(session)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpGetPduData == "on"]
+foreign {
     func SnmpGetPduData(PDU: IntNative, PDU_type: CPointer<SNMP_PDU_TYPEAbi>, request_id: CPointer<Int32>, error_status: CPointer<SNMP_ERRORAbi>, error_index: CPointer<Int32>, varbindlist: CPointer<IntNative>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpGetPduData == "on"]
+public unsafe func Windows_SnmpGetPduData(PDU: IntNative, PDU_type: CPointer<SNMP_PDU_TYPEAbi>, request_id: CPointer<Int32>, error_status: CPointer<SNMP_ERRORAbi>, error_index: CPointer<Int32>, varbindlist: CPointer<IntNative>): UInt32 {
+    return SnmpGetPduData(PDU, PDU_type, request_id, error_status, error_index, varbindlist)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpGetRetransmitMode == "on"]
+foreign {
     func SnmpGetRetransmitMode(nRetransmitMode: CPointer<SNMP_STATUSAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpGetRetransmitMode == "on"]
+public unsafe func Windows_SnmpGetRetransmitMode(nRetransmitMode: CPointer<SNMP_STATUSAbi>): UInt32 {
+    return SnmpGetRetransmitMode(nRetransmitMode)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpGetRetry == "on"]
+foreign {
     func SnmpGetRetry(hEntity: IntNative, nPolicyRetry: CPointer<UInt32>, nActualRetry: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpGetRetry == "on"]
+public unsafe func Windows_SnmpGetRetry(hEntity: IntNative, nPolicyRetry: CPointer<UInt32>, nActualRetry: CPointer<UInt32>): UInt32 {
+    return SnmpGetRetry(hEntity, nPolicyRetry, nActualRetry)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpGetTimeout == "on"]
+foreign {
     func SnmpGetTimeout(hEntity: IntNative, nPolicyTimeout: CPointer<UInt32>, nActualTimeout: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpGetTimeout == "on"]
+public unsafe func Windows_SnmpGetTimeout(hEntity: IntNative, nPolicyTimeout: CPointer<UInt32>, nActualTimeout: CPointer<UInt32>): UInt32 {
+    return SnmpGetTimeout(hEntity, nPolicyTimeout, nActualTimeout)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpGetTranslateMode == "on"]
+foreign {
     func SnmpGetTranslateMode(nTranslateMode: CPointer<SNMP_API_TRANSLATE_MODEAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpGetTranslateMode == "on"]
+public unsafe func Windows_SnmpGetTranslateMode(nTranslateMode: CPointer<SNMP_API_TRANSLATE_MODEAbi>): UInt32 {
+    return SnmpGetTranslateMode(nTranslateMode)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpGetVb == "on"]
+foreign {
     func SnmpGetVb(vbl: IntNative, index: UInt32, name: CPointer<smiOIDAbi>, value: CPointer<smiVALUEAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpGetVb == "on"]
+public unsafe func Windows_SnmpGetVb(vbl: IntNative, index: UInt32, name: CPointer<smiOIDAbi>, value: CPointer<smiVALUEAbi>): UInt32 {
+    return SnmpGetVb(vbl, index, name, value)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpGetVendorInfo == "on"]
+foreign {
     func SnmpGetVendorInfo(vendorInfo: CPointer<smiVENDORINFOAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpGetVendorInfo == "on"]
+public unsafe func Windows_SnmpGetVendorInfo(vendorInfo: CPointer<smiVENDORINFOAbi>): UInt32 {
+    return SnmpGetVendorInfo(vendorInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpListen == "on"]
+foreign {
     func SnmpListen(hEntity: IntNative, lStatus: SNMP_STATUSAbi): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpListen == "on"]
+public unsafe func Windows_SnmpListen(hEntity: IntNative, lStatus: SNMP_STATUSAbi): UInt32 {
+    return SnmpListen(hEntity, lStatus)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpListenEx == "on"]
+foreign {
     func SnmpListenEx(hEntity: IntNative, lStatus: UInt32, nUseEntityAddr: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpListenEx == "on"]
+public unsafe func Windows_SnmpListenEx(hEntity: IntNative, lStatus: UInt32, nUseEntityAddr: UInt32): UInt32 {
+    return SnmpListenEx(hEntity, lStatus, nUseEntityAddr)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpOidCompare == "on"]
+foreign {
     func SnmpOidCompare(xOID: CPointer<smiOIDAbi>, yOID: CPointer<smiOIDAbi>, maxlen: UInt32, result: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpOidCompare == "on"]
+public unsafe func Windows_SnmpOidCompare(xOID: CPointer<smiOIDAbi>, yOID: CPointer<smiOIDAbi>, maxlen: UInt32, result: CPointer<Int32>): UInt32 {
+    return SnmpOidCompare(xOID, yOID, maxlen, result)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpOidCopy == "on"]
+foreign {
     func SnmpOidCopy(srcOID: CPointer<smiOIDAbi>, dstOID: CPointer<smiOIDAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpOidCopy == "on"]
+public unsafe func Windows_SnmpOidCopy(srcOID: CPointer<smiOIDAbi>, dstOID: CPointer<smiOIDAbi>): UInt32 {
+    return SnmpOidCopy(srcOID, dstOID)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpOidToStr == "on"]
+foreign {
     // param-hint: string len=param[1]
     func SnmpOidToStr(srcOID: CPointer<smiOIDAbi>, size: UInt32, string: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpOidToStr == "on"]
+public unsafe func Windows_SnmpOidToStr(srcOID: CPointer<smiOIDAbi>, size: UInt32, string: CPointer<UInt8>): UInt32 {
+    return SnmpOidToStr(srcOID, size, string)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpOpen == "on"]
+foreign {
     func SnmpOpen(hWnd: CPointer<Unit>, wMsg: UInt32): IntNative
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpOpen == "on"]
+public unsafe func Windows_SnmpOpen(hWnd: CPointer<Unit>, wMsg: UInt32): IntNative {
+    return SnmpOpen(hWnd, wMsg)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpRecvMsg == "on"]
+foreign {
     func SnmpRecvMsg(session: IntNative, srcEntity: CPointer<IntNative>, dstEntity: CPointer<IntNative>, context: CPointer<IntNative>, PDU: CPointer<IntNative>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpRecvMsg == "on"]
+public unsafe func Windows_SnmpRecvMsg(session: IntNative, srcEntity: CPointer<IntNative>, dstEntity: CPointer<IntNative>, context: CPointer<IntNative>, PDU: CPointer<IntNative>): UInt32 {
+    return SnmpRecvMsg(session, srcEntity, dstEntity, context, PDU)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpRegister == "on"]
+foreign {
     func SnmpRegister(session: IntNative, srcEntity: IntNative, dstEntity: IntNative, context: IntNative, notification: CPointer<smiOIDAbi>, state: SNMP_STATUSAbi): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpRegister == "on"]
+public unsafe func Windows_SnmpRegister(session: IntNative, srcEntity: IntNative, dstEntity: IntNative, context: IntNative, notification: CPointer<smiOIDAbi>, state: SNMP_STATUSAbi): UInt32 {
+    return SnmpRegister(session, srcEntity, dstEntity, context, notification, state)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpSendMsg == "on"]
+foreign {
     func SnmpSendMsg(session: IntNative, srcEntity: IntNative, dstEntity: IntNative, context: IntNative, PDU: IntNative): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpSendMsg == "on"]
+public unsafe func Windows_SnmpSendMsg(session: IntNative, srcEntity: IntNative, dstEntity: IntNative, context: IntNative, PDU: IntNative): UInt32 {
+    return SnmpSendMsg(session, srcEntity, dstEntity, context, PDU)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpSetPduData == "on"]
+foreign {
     func SnmpSetPduData(PDU: IntNative, PDU_type: CPointer<Int32>, request_id: CPointer<Int32>, non_repeaters: CPointer<Int32>, max_repetitions: CPointer<Int32>, varbindlist: CPointer<IntNative>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpSetPduData == "on"]
+public unsafe func Windows_SnmpSetPduData(PDU: IntNative, PDU_type: CPointer<Int32>, request_id: CPointer<Int32>, non_repeaters: CPointer<Int32>, max_repetitions: CPointer<Int32>, varbindlist: CPointer<IntNative>): UInt32 {
+    return SnmpSetPduData(PDU, PDU_type, request_id, non_repeaters, max_repetitions, varbindlist)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpSetPort == "on"]
+foreign {
     func SnmpSetPort(hEntity: IntNative, nPort: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpSetPort == "on"]
+public unsafe func Windows_SnmpSetPort(hEntity: IntNative, nPort: UInt32): UInt32 {
+    return SnmpSetPort(hEntity, nPort)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpSetRetransmitMode == "on"]
+foreign {
     func SnmpSetRetransmitMode(nRetransmitMode: SNMP_STATUSAbi): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpSetRetransmitMode == "on"]
+public unsafe func Windows_SnmpSetRetransmitMode(nRetransmitMode: SNMP_STATUSAbi): UInt32 {
+    return SnmpSetRetransmitMode(nRetransmitMode)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpSetRetry == "on"]
+foreign {
     func SnmpSetRetry(hEntity: IntNative, nPolicyRetry: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpSetRetry == "on"]
+public unsafe func Windows_SnmpSetRetry(hEntity: IntNative, nPolicyRetry: UInt32): UInt32 {
+    return SnmpSetRetry(hEntity, nPolicyRetry)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpSetTimeout == "on"]
+foreign {
     func SnmpSetTimeout(hEntity: IntNative, nPolicyTimeout: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpSetTimeout == "on"]
+public unsafe func Windows_SnmpSetTimeout(hEntity: IntNative, nPolicyTimeout: UInt32): UInt32 {
+    return SnmpSetTimeout(hEntity, nPolicyTimeout)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpSetTranslateMode == "on"]
+foreign {
     func SnmpSetTranslateMode(nTranslateMode: SNMP_API_TRANSLATE_MODEAbi): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpSetTranslateMode == "on"]
+public unsafe func Windows_SnmpSetTranslateMode(nTranslateMode: SNMP_API_TRANSLATE_MODEAbi): UInt32 {
+    return SnmpSetTranslateMode(nTranslateMode)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpSetVb == "on"]
+foreign {
     func SnmpSetVb(vbl: IntNative, index: UInt32, name: CPointer<smiOIDAbi>, value: CPointer<smiVALUEAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpSetVb == "on"]
+public unsafe func Windows_SnmpSetVb(vbl: IntNative, index: UInt32, name: CPointer<smiOIDAbi>, value: CPointer<smiVALUEAbi>): UInt32 {
+    return SnmpSetVb(vbl, index, name, value)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpStartup == "on"]
+foreign {
     func SnmpStartup(nMajorVersion: CPointer<UInt32>, nMinorVersion: CPointer<UInt32>, nLevel: CPointer<UInt32>, nTranslateMode: CPointer<SNMP_API_TRANSLATE_MODEAbi>, nRetransmitMode: CPointer<SNMP_STATUSAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpStartup == "on"]
+public unsafe func Windows_SnmpStartup(nMajorVersion: CPointer<UInt32>, nMinorVersion: CPointer<UInt32>, nLevel: CPointer<UInt32>, nTranslateMode: CPointer<SNMP_API_TRANSLATE_MODEAbi>, nRetransmitMode: CPointer<SNMP_STATUSAbi>): UInt32 {
+    return SnmpStartup(nMajorVersion, nMinorVersion, nLevel, nTranslateMode, nRetransmitMode)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpStartupEx == "on"]
+foreign {
     func SnmpStartupEx(nMajorVersion: CPointer<UInt32>, nMinorVersion: CPointer<UInt32>, nLevel: CPointer<UInt32>, nTranslateMode: CPointer<SNMP_API_TRANSLATE_MODEAbi>, nRetransmitMode: CPointer<SNMP_STATUSAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpStartupEx == "on"]
+public unsafe func Windows_SnmpStartupEx(nMajorVersion: CPointer<UInt32>, nMinorVersion: CPointer<UInt32>, nLevel: CPointer<UInt32>, nTranslateMode: CPointer<SNMP_API_TRANSLATE_MODEAbi>, nRetransmitMode: CPointer<SNMP_STATUSAbi>): UInt32 {
+    return SnmpStartupEx(nMajorVersion, nMinorVersion, nLevel, nTranslateMode, nRetransmitMode)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpStrToContext == "on"]
+foreign {
     func SnmpStrToContext(session: IntNative, string: CPointer<smiOCTETSAbi>): IntNative
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpStrToContext == "on"]
+public unsafe func Windows_SnmpStrToContext(session: IntNative, string: CPointer<smiOCTETSAbi>): IntNative {
+    return SnmpStrToContext(session, string)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpStrToEntity == "on"]
+foreign {
     func SnmpStrToEntity(session: IntNative, string: CPointer<UInt8>): IntNative
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpStrToEntity == "on"]
+public unsafe func Windows_SnmpStrToEntity(session: IntNative, string: CPointer<UInt8>): IntNative {
+    return SnmpStrToEntity(session, string)
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpStrToOid == "on"]
+foreign {
     func SnmpStrToOid(string: CPointer<UInt8>, dstOID: CPointer<smiOIDAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Snmp == "on" && WSNMP32 == "on" && Windows_Win32_NetworkManagement_Snmp_SnmpStrToOid == "on"]
+public unsafe func Windows_SnmpStrToOid(string: CPointer<UInt8>, dstOID: CPointer<smiOIDAbi>): UInt32 {
+    return SnmpStrToOid(string, dstOID)
 }
 
 @When[Windows_Win32_NetworkManagement_Snmp == "on"]

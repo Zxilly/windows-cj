@@ -173,7 +173,9 @@ public class ISelectableWordSegment <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ISemanticTextQueryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Find: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindInProperty: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -218,12 +220,14 @@ public class ISemanticTextQuery <: InterfaceWrapperBase & ComInterface {
         readVtbl<ISemanticTextQueryVtbl>(ISemanticTextQueryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Find(content: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Find(__liveRaw, content, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindInProperty(propertyContent: CPointer<Unit>, propertyName: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -237,7 +241,9 @@ public struct ITextConversionGeneratorVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var ResolvedLanguage: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var LanguageAvailableButNotInstalled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetCandidatesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetCandidatesWithMaxCountAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -294,12 +300,14 @@ public class ITextConversionGenerator <: InterfaceWrapperBase & ComInterface {
         return __vt.LanguageAvailableButNotInstalled(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetCandidatesAsync(input: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetCandidatesAsync(__liveRaw, input, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetCandidatesWithMaxCountAsync(input: CPointer<Unit>, maxCandidates: UInt32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -430,7 +438,9 @@ public struct ITextPredictionGeneratorVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var ResolvedLanguage: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var LanguageAvailableButNotInstalled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetCandidatesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetCandidatesWithMaxCountAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -487,12 +497,14 @@ public class ITextPredictionGenerator <: InterfaceWrapperBase & ComInterface {
         return __vt.LanguageAvailableButNotInstalled(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetCandidatesAsync(input: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetCandidatesAsync(__liveRaw, input, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetCandidatesWithMaxCountAsync(input: CPointer<Unit>, maxCandidates: UInt32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -504,7 +516,9 @@ public class ITextPredictionGenerator <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ITextPredictionGenerator2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetCandidatesWithParametersAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetNextWordCandidatesAsync: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_UI_Text_Core == "on"]
     public var InputScope: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -553,12 +567,14 @@ public class ITextPredictionGenerator2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<ITextPredictionGenerator2Vtbl>(ITextPredictionGenerator2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetCandidatesWithParametersAsync(input: CPointer<Unit>, maxCandidates: UInt32, predictionOptions: UInt32, previousStrings: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetCandidatesWithParametersAsync(__liveRaw, input, maxCandidates, predictionOptions, previousStrings, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetNextWordCandidatesAsync(maxCandidates: UInt32, previousStrings: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

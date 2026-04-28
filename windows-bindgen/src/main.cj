@@ -5,6 +5,7 @@ import std.collection.*
 import std.runtime.*
 import std.sort.*
 import std.sync.*
+import std.time.*
 import windows_metadata.*
 import windows_bindgen.tokens.*
 import windows_bindgen.tables.*
@@ -301,6 +302,7 @@ func runBindgen(config: BindgenConfig, verbose: Bool): Warnings {
     logBindgen(verbose, "Input files: ${config.winmdPaths.size}")
     logBindgen(verbose, "Output directory: ${config.outputDir}")
 
+    let stageStart0 = MonoTime.now()
     let winmdFiles = ArrayList<WinmdFile>()
     for (path in config.winmdPaths) {
         logBindgen(verbose, "  Loading: ${path}")
@@ -313,25 +315,42 @@ func runBindgen(config: BindgenConfig, verbose: Bool): Warnings {
     if (winmdFiles.isEmpty()) {
         throw Exception("No valid .winmd files loaded")
     }
+    logStage("winmd-load", stageStart0)
 
+    let stageStart1 = MonoTime.now()
     let index = TypeIndex(winmdFiles)
     logBindgen(verbose, "Type index built: ${countTypes(index)} types")
+    logStage("type-index", stageStart1)
 
+    let stageStart2 = MonoTime.now()
     let filter = BindgenFilter(index, config)
     let references = config.references(index)
     let warnings = WarningCollector()
     let typeMap = TypeMap(index, filter, config, references)
+    logStage("type-map", stageStart2)
+
+    let stageStart3 = MonoTime.now()
     config.resolveDeriveTargets(index, typeMap, references)
+    logStage("derive-targets", stageStart3)
+
+    let stageStart4 = MonoTime.now()
     resetStructLayoutCaches()
     resetSupportSymbolUsage()
-    setBindgenContext(BindgenContext(index, config, references, typeMap, warnings))
+    let importSymbols = loadBundledImportSymbols()
+    setBindgenContext(BindgenContext(index, config, references, typeMap, warnings, importSymbols))
     config.resolveGeneratedPackages(index, typeMap)
+    logStage("generated-packages", stageStart4)
+
     if (config.usesLayeredImpl && config.usesSubpackageLayout()) {
+        let stageStart5 = MonoTime.now()
         let namespaceGraph = buildNamespaceDependencyGraph(index, typeMap)
         let namespaceComponents = computeNamespaceComponents(typeMap.namespaces(), namespaceGraph)
         config.layerAssignment = Some(computeLayerAssignment(index, typeMap, namespaceComponents,
             config.outputRootPackageName(), config.targetBucketSize))
+        logStage("layer-assignment", stageStart5)
     }
+
+    let stageStart6 = MonoTime.now()
     let typeTree = TypeTree(typeMap)
     let namespaces = typeTree.flattenNamespaces()
     let mode = config.primaryMode()
@@ -341,16 +360,23 @@ func runBindgen(config: BindgenConfig, verbose: Bool): Warnings {
     }
     logBindgen(verbose, "Namespaces found: ${namespaces.size}")
     logBindgen(verbose, "Namespace render jobs: ${config.jobs}")
+    logStage("type-tree", stageStart6)
 
+    let stageStart7 = MonoTime.now()
     let fileWriter = FileWriter(config.outputDir)
     let artifactWriter = FileWriter(config.artifactOutputDir())
     let libraryCollector = LibraryCollector(config.link)
     if (!config.link.isEmpty()) {
         libraryCollector.collect(index, typeMap)
     }
+    logStage("library-collector", stageStart7)
 
+    let stageStart8 = MonoTime.now()
     let features = FeatureCollector()
     let cfgUniverse = collectCfgUniverse(index)
+    logStage("cfg-universe", stageStart8)
+
+    let stageStart9 = MonoTime.now()
     let generatedFiles = generateNamespaceFiles(
         index,
         namespaces,
@@ -360,15 +386,25 @@ func runBindgen(config: BindgenConfig, verbose: Bool): Warnings {
         config,
         features
     )
+    logStage("namespace-render", stageStart9)
+
+    let stageStart10 = MonoTime.now()
     writeGeneratedNamespaceFiles(fileWriter, generatedFiles, config)
+    logStage("write-namespaces", stageStart10)
+
     if (config.usesSubpackageLayout()) {
+        let stageStart11 = MonoTime.now()
         writeNamespaceFacades(fileWriter, generatedFiles, config, index)
         writePackageLayerStubs(fileWriter, generatedFiles, config)
+        logStage("write-facades+stubs", stageStart11)
     } else if (config.packageOutput) {
+        let stageStart11b = MonoTime.now()
         writePackageOutputStubs(fileWriter, generatedFiles, config)
+        logStage("write-package-stubs", stageStart11b)
     }
     let nsCount = Int64(generatedFiles.size)
 
+    let stageStart12 = MonoTime.now()
     let cfgListToml = features.generateCfgListToml(config.noComment, universe: cfgUniverse)
     writeArtifact(artifactWriter, "features.toml", features.generateFeaturesToml(config.noComment))
     writeArtifact(artifactWriter, "link-options.toml", features.generateLinkOptionsToml(config.noComment))
@@ -379,11 +415,19 @@ func runBindgen(config: BindgenConfig, verbose: Bool): Warnings {
     if (!config.link.isEmpty()) {
         writeArtifact(artifactWriter, "libraries.cj", libraryCollector.generateSource(config.noComment))
     }
+    logStage("write-artifacts", stageStart12)
     clearBindgenContext()
 
     logBindgen(verbose, "Generated ${nsCount} namespace files")
     logBindgen(verbose, "Generated features.toml, link-options.toml, cfg_list.toml")
+    logStage("TOTAL", stageStart0)
     return warnings.build()
+}
+
+func logStage(stage: String, start: MonoTime): Unit {
+    let elapsed = MonoTime.now() - start
+    let ms = elapsed.toMilliseconds()
+    println("[stage] ${stage}: ${ms} ms")
 }
 
 func generateNamespaceFiles(
@@ -531,10 +575,11 @@ func writeNamespacePrelude(
     namespace: String,
     packageImports: ArrayList<String>,
     mode: GenerationMode,
-    config: BindgenConfig
+    config: BindgenConfig,
+    needsLibLoading!: Bool = false
 ): Unit {
     writeNamespacePreludeForPackage(w, namespace, config.packageNameForNamespace(namespace), packageImports, mode,
-        config)
+        config, needsLibLoading: needsLibLoading)
 }
 
 func writeNamespacePreludeForPackage(
@@ -543,7 +588,8 @@ func writeNamespacePreludeForPackage(
     packageName: String,
     packageImports: ArrayList<String>,
     mode: GenerationMode,
-    config: BindgenConfig
+    config: BindgenConfig,
+    needsLibLoading!: Bool = false
 ): Unit {
     if (!config.noComment) {
         w.writeLine("// Auto-generated by windows-bindgen. Do not edit.")
@@ -565,6 +611,9 @@ func writeNamespacePreludeForPackage(
         case GenerationMode.HighLevel => w.writeLine("import std.collection.*")
         case GenerationMode.Sys => ()
     }
+    if (needsLibLoading) {
+        w.writeLine("import windows_libloading")
+    }
     for (pkg in supportPackagesForMode(mode)) {
         let used = supportSymbolsFor(namespace, pkg)
         if (!used.isEmpty()) {
@@ -579,13 +628,39 @@ func writeNamespacePreludeForPackage(
         if (!shouldWritePackageImportForPackage(packageName, packageImport)) {
             continue
         }
-        let importTags = config.packageImportAvailabilityTags(packageImport)
-        if (!importTags.isEmpty()) {
-            writeAvailabilityForTags(w, "", importTags)
+        if (shouldGuardLayerImportToFacade(packageName, packageImport)) {
+            let importTags = config.packageImportAvailabilityTags(packageImport)
+            if (!importTags.isEmpty()) {
+                writeAvailabilityForTags(w, "", importTags)
+            }
         }
         w.writeLine("import ${packageImport} as ${importedPackageQualifier(packageImport)}")
     }
     w.writeBlankLine()
+}
+
+func shouldGuardLayerImportToFacade(packageName: String, packageImport: String): Bool {
+    if (layerPackageIndex(packageName) < 0) {
+        return false
+    }
+    if (layerPackageIndex(packageImport) >= 0) {
+        return false
+    }
+    let prefix = layerPackagePrefix(packageName)
+    let dot = "${prefix}."
+    if (!startsWith(packageImport, dot)) {
+        return false
+    }
+    let arr = packageImport.toArray()
+    let prefixLen = Int64(dot.toArray().size)
+    let relative = String.fromUtf8(arr[prefixLen..Int64(arr.size)])
+    if (relative.isEmpty()) {
+        return false
+    }
+    if (startsWith(relative, "Win32.") || startsWith(relative, "Wdk.") || relative == "Win32" || relative == "Wdk") {
+        return false
+    }
+    return true
 }
 
 func shouldWritePackageImportForPackage(packageName: String, packageImport: String): Bool {
@@ -680,11 +755,13 @@ func emitNamespaceTable(
         perTypeFragments)
     let bodyText = bodyWriter.toString()
     let packageImports = collectNamespacePackageImports(index, namespace, projectedTypes, config)
+    registerNamespaceFeatureDependenciesForPackageImports(features, namespace, packageImports)
     let exports = collectProjectedPublicExports(index, namespace, projectedTypes, mode, config)
     let exportOwners = collectProjectedPublicExportOwners(index, namespace, projectedTypes, mode, config)
 
     let headerWriter = CodeWriter()
-    writeNamespacePrelude(headerWriter, namespace, packageImports, mode, config)
+    let needsLibLoading = bodyText.indexOf("windows_libloading.", 0).isSome()
+    writeNamespacePrelude(headerWriter, namespace, packageImports, mode, config, needsLibLoading: needsLibLoading)
     let headerText = headerWriter.toString()
 
     let table = NamespaceTable(
@@ -695,6 +772,43 @@ func emitNamespaceTable(
     )
     return NamespaceRenderResult(toTokenStream(table), headerText, bodyText, typeCount, exports, perTypeFragments,
         exportOwners, packageImports)
+}
+
+func registerNamespaceFeatureDependenciesForPackageImports(
+    features: FeatureCollector,
+    namespace: String,
+    packageImports: ArrayList<String>
+): Unit {
+    for (packageImport in packageImports) {
+        match (packageImportToFeatureNamespace(packageImport)) {
+            case Some(dependencyNamespace) => features.addNamespaceDependency(namespace, dependencyNamespace)
+            case None => ()
+        }
+    }
+}
+
+func packageImportToFeatureNamespace(packageImport: String): Option<String> {
+    let parts = splitString(packageImport, b'.')
+    if (parts.size <= 1) {
+        return None
+    }
+
+    let rootPackage = parts[0]
+    let relativeParts = ArrayList<String>()
+    var i: Int64 = 1
+    while (i < Int64(parts.size)) {
+        relativeParts.add(parts[i])
+        i += 1
+    }
+    let relative = joinStrings(relativeParts, ".")
+    if (relative.isEmpty() || relative == "impl" || relative.endsWith(".impl")) {
+        return None
+    }
+    if (relative.startsWith("_impl_l") || relative.indexOf("._impl_l", 0).isSome()) {
+        return None
+    }
+
+    return Some(packageImportFeatureNamespace(rootPackage, relative))
 }
 
 func collectNamespacePackageImports(
@@ -819,9 +933,10 @@ func emitTypesGroupedByLayer(
                     fragments.add(generated.perTypeFragments[typeName])
                 }
                 let packageImports = packageImportsUsedByFragments(packageName, generated.packageImports, fragments)
+                let needsLibLoading = fragmentsContainText(fragments, "windows_libloading.")
                 let prelude = CodeWriter()
                 writeNamespacePreludeForPackage(prelude, generated.namespace, packageName, packageImports,
-                    generated.mode, config)
+                    generated.mode, config, needsLibLoading: needsLibLoading)
 
                 let w = CodeWriter()
                 w.writeRaw(prelude.toString())
@@ -905,13 +1020,12 @@ func writeOneNamespaceFacade(
     let groupedConditions = HashMap<String, String>()
     let groupOrder = ArrayList<String>()
     for (name in generated.exports) {
-        let tags = facadeExportAvailabilityTags(index, generated.namespace, name)
-        let condition = availabilityCondition(feature, tags)
         let ownerName = if (generated.exportOwners.contains(name)) {
             generated.exportOwners[name]
         } else {
             name
         }
+        let condition = facadeExportAvailabilityCondition(index, generated.namespace, name, ownerName, feature)
         let targetPackage = config.packageNameForType(generated.namespace, ownerName)
         let groupKey = facadeImportGroupKey(condition, targetPackage)
         if (!groupedNames.contains(groupKey)) {
@@ -940,11 +1054,24 @@ func writeOneNamespaceFacade(
     fileWriter.writeFile(config.facadeOutputRelativePathForNamespace(generated.namespace), facade.toString())
 }
 
+func facadeFunctionsOutputRelativePathForNamespace(namespace: String): String {
+    let dirPath = FileWriter.namespaceToHierarchicalDirPath(namespace)
+    if (dirPath.isEmpty()) {
+        return "functions.cj"
+    }
+    return "${dirPath}/functions.cj"
+}
+
 func facadeImportGroupKey(condition: String, targetPackage: String): String {
     return "${targetPackage}\n${condition}"
 }
 
-func facadeExportAvailabilityTags(index: TypeIndex, namespace: String, name: String): ArrayList<String> {
+func facadeExportAvailabilityTags(
+    index: TypeIndex,
+    namespace: String,
+    name: String,
+    ownerName: String
+): ArrayList<String> {
     match (facadeWinrtImplSurfaceBaseName(name)) {
         case Some(baseName) =>
             let candidates = index.get(namespace, baseName)
@@ -967,6 +1094,51 @@ func facadeExportAvailabilityTags(index: TypeIndex, namespace: String, name: Str
     }
 
     return facadeTypeExportAvailabilityTags(index, namespace, facadeTypeExportBaseName(name), name)
+}
+
+func facadeExportAvailabilityCondition(
+    index: TypeIndex,
+    namespace: String,
+    name: String,
+    ownerName: String,
+    feature: String
+): String {
+    match (stripPrefix(name, "Windows_")) {
+        case Some(_) => return facadeFunctionExportAvailabilityCondition(index, namespace, ownerName, name)
+        case None => ()
+    }
+    return availabilityCondition(feature, facadeExportAvailabilityTags(index, namespace, name, ownerName))
+}
+
+func facadeFunctionExportAvailabilityCondition(
+    index: TypeIndex,
+    namespace: String,
+    ownerName: String,
+    exportName: String
+): String {
+    let candidates = index.get(namespace, ownerName)
+    for (candidate in candidates) {
+        let (fileIdx, row) = candidate
+        match (index.typeDefCategory(fileIdx, row)) {
+            case TypeCategory.Class => ()
+            case _ => continue
+        }
+        let (mStart, mEnd) = index.typeDefMethods(fileIdx, row)
+        var methodRow = mStart
+        while (methodRow < mEnd) {
+            if (publicFunctionWrapperName(index, fileIdx, methodRow) == exportName) {
+                match (index.methodDefImplMap(fileIdx, methodRow)) {
+                    case Some((_, _, moduleName)) =>
+                        return functionAvailabilityCondition(namespace, moduleName,
+                            index.methodDefName(fileIdx, methodRow),
+                            functionAvailabilityTags(index, fileIdx, methodRow))
+                    case None => ()
+                }
+            }
+            methodRow += 1
+        }
+    }
+    return availabilityCondition(namespaceToFeature(namespace), ArrayList<String>())
 }
 
 func facadeTypeExportAvailabilityTags(
@@ -1113,6 +1285,10 @@ func facadeNestedStructExportAvailabilityTagsFromRow(
 }
 
 func facadeTypeExportBaseName(name: String): String {
+    match (stripSuffix(name, "Abi")) {
+        case Some(baseName) => return baseName
+        case None => ()
+    }
     match (stripSuffix(name, "Vtbl")) {
         case Some(baseName) => return baseName
         case None => return name
@@ -1143,6 +1319,15 @@ func stripSuffix(value: String, suffix: String): Option<String> {
     let valueArr = value.toArray()
     let suffixLen = Int64(suffix.toArray().size)
     return Some(String.fromUtf8(valueArr[0..Int64(valueArr.size) - suffixLen]))
+}
+
+func stripPrefix(value: String, prefix: String): Option<String> {
+    if (!value.startsWith(prefix)) {
+        return None
+    }
+    let valueArr = value.toArray()
+    let prefixLen = Int64(prefix.toArray().size)
+    return Some(String.fromUtf8(valueArr[prefixLen..Int64(valueArr.size)]))
 }
 
 func writePackageLayerStubs(
@@ -1348,6 +1533,10 @@ func namespaceOutputCandidatePaths(namespace: String): ArrayList<String> {
             result.add(relativePath)
         }
     }
+    let functionFacadePath = facadeFunctionsOutputRelativePathForNamespace(namespace)
+    if (!containsString(result, functionFacadePath)) {
+        result.add(functionFacadePath)
+    }
     return result
 }
 
@@ -1417,10 +1606,13 @@ func collectFeatures(
     while (methodRow < mEnd) {
         match (index.methodDefImplMap(fileIdx, methodRow)) {
             case Some((_, _, moduleName)) =>
-                features.addBinding(namespace, moduleName)
-                if (functionRequiresRuntimeEntryPointResolver(index, fileIdx, methodRow)) {
-                    features.addBinding(namespace, "kernel32.dll")
+                if (shouldSkipImportModule(moduleName)) {
+                    methodRow += 1
+                    continue
                 }
+                let usesRuntimeResolver = functionRequiresRuntimeEntryPointResolver(index, fileIdx, methodRow)
+                features.addFunctionBinding(namespace, moduleName, index.methodDefName(fileIdx, methodRow),
+                    functionAvailabilityTags(index, fileIdx, methodRow), runtimeResolver: usesRuntimeResolver)
             case None => ()
         }
         methodRow += 1
@@ -1498,14 +1690,14 @@ func collectProjectedPublicExportsForType(
         case HighLevelInterface(_) => collectWinrtInterfaceExports(index, entry.fileIdx, entry.row, config, exports)
         case HighLevelClass(_) => collectWinrtClassExports(index, entry.fileIdx, entry.row, exports)
         case HighLevelDelegate(_) => collectWinrtDelegateExports(index, entry.fileIdx, entry.row, exports)
-        case HighLevelEnum(_) => collectEnumExports(index, entry.fileIdx, entry.row, namespace, exports)
+        case HighLevelEnum(_) => collectEnumExports(index, entry.fileIdx, entry.row, namespace, exports, true)
         case HighLevelStruct(_) => collectStructExports(index, entry.fileIdx, entry.row, namespace,
-            trimTick(index.typeDefName(entry.fileIdx, entry.row)), exports)
+            trimTick(index.typeDefName(entry.fileIdx, entry.row)), exports, true)
         case CppInterface(_) => collectCppInterfaceExports(index, entry.fileIdx, entry.row, exports)
         case Handle(_) => collectHandleExports(index, entry.fileIdx, entry.row, exports)
         case CppStruct(_) => collectStructExports(index, entry.fileIdx, entry.row, namespace,
-            trimTick(index.typeDefName(entry.fileIdx, entry.row)), exports)
-        case CppEnum(_) => collectEnumExports(index, entry.fileIdx, entry.row, namespace, exports)
+            trimTick(index.typeDefName(entry.fileIdx, entry.row)), exports, false)
+        case CppEnum(_) => collectEnumExports(index, entry.fileIdx, entry.row, namespace, exports, false)
         case CppDelegate(_) => collectDelegateExports(index, entry.fileIdx, entry.row, namespace, exports)
         case CppFn(_) => collectCppFunctionExports(index, entry.fileIdx, entry.row, namespace, config, exports)
         case Attribute(_) => ()
@@ -1612,7 +1804,8 @@ func collectStructExports(
     row: Int64,
     namespace: String,
     name: String,
-    exports: ArrayList<String>
+    exports: ArrayList<String>,
+    includeAbi: Bool
 ): Unit {
     if (isHandleType(index, fileIdx, row)) {
         return
@@ -1629,6 +1822,9 @@ func collectStructExports(
     }
 
     addExportName(exports, name)
+    if (includeAbi && structEmitsProjectionAbi(index, fileIdx, row)) {
+        addExportName(exports, "${name}Abi")
+    }
     let (fStart, fEnd) = index.typeDefFields(fileIdx, row)
     var fieldRow = fStart
     while (fieldRow < fEnd) {
@@ -1659,10 +1855,26 @@ func collectStructExports(
                     continue
                 }
                 let nestedName = "${name}_${nestedLeafName(index.typeDefName(fileIdx, innerRow))}"
-                collectStructExports(index, fileIdx, innerRow, namespace, nestedName, exports)
+                collectStructExports(index, fileIdx, innerRow, namespace, nestedName, exports, includeAbi)
             case _ => ()
         }
     }
+}
+
+func structEmitsProjectionAbi(index: TypeIndex, fileIdx: Int64, row: Int64): Bool {
+    let flags = index.typeDefFlags(fileIdx, row)
+    let isUnion = flags.contains(TypeAttributes.ExplicitLayout)
+    if (isUnion) {
+        return false
+    }
+
+    var structPacking = 0u32
+    match (index.typeDefClassLayout(fileIdx, row)) {
+        case Some((packing, _)) =>
+            structPacking = UInt32(packing)
+        case None => ()
+    }
+    return structPacking == 0u32 || structPacking == 8u32
 }
 
 func collectEnumExports(
@@ -1670,10 +1882,14 @@ func collectEnumExports(
     fileIdx: Int64,
     row: Int64,
     namespace: String,
-    exports: ArrayList<String>
+    exports: ArrayList<String>,
+    includeAbi: Bool
 ): Unit {
     let rawEnumName = trimTick(index.typeDefName(fileIdx, row))
     addExportName(exports, rawEnumName)
+    if (includeAbi) {
+        addExportName(exports, "${rawEnumName}Abi")
+    }
     let (fStart, fEnd) = index.typeDefFields(fileIdx, row)
     var fieldRow = fStart
     while (fieldRow < fEnd) {
@@ -1732,21 +1948,28 @@ func collectCppFunctionExports(
         fieldRow += 1
     }
 
-    if (!config.sysFnPtrs) {
-        return
-    }
-
     let (mStart, mEnd) = index.typeDefMethods(fileIdx, row)
     var methodRow = mStart
     while (methodRow < mEnd) {
         let flags = index.methodDefFlags(fileIdx, methodRow)
         if (flags.contains(MethodAttributes.Static) && flags.contains(MethodAttributes.Public)) {
             match (index.methodDefImplMap(fileIdx, methodRow)) {
-                case Some((_, _, _)) =>
+                case Some((_, _, moduleName)) =>
+                    if (shouldSkipImportModule(moduleName)) {
+                        methodRow += 1
+                        continue
+                    }
                     let missing = missingMethodDependencies(index, fileIdx, methodRow,
                         Array<MetadataType>(0, {_ => MetadataType.Void}))
                     if (missing.isEmpty()) {
-                        addExportName(exports, "${index.methodDefName(fileIdx, methodRow)}Fn")
+                        let sig = index.methodDefSignature(fileIdx, methodRow,
+                            Array<MetadataType>(0, {_ => MetadataType.Void}))
+                        if (!methodHasVarArgs(sig)) {
+                            addExportName(exports, publicFunctionWrapperName(index, fileIdx, methodRow))
+                        }
+                        if (config.sysFnPtrs) {
+                            addExportName(exports, "${index.methodDefName(fileIdx, methodRow)}Fn")
+                        }
                     }
                 case None => ()
             }

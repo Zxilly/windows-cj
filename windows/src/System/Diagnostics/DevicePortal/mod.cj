@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -417,7 +416,10 @@ extend IDevicePortalWebSocketConnection <: windows_core.Interface<IDevicePortalW
 public struct IDevicePortalWebSocketConnectionRequestReceivedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var IsWebSocketUpgradeRequest: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var WebSocketProtocolsRequested: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var WebSocketProtocolsRequested: UIntNative = UIntNative(0)
     public var GetDeferral: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -495,6 +497,7 @@ public class IDevicePortalWebSocketConnectionRequestReceivedEventArgs <: Interfa
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func WebSocketProtocolsRequested(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

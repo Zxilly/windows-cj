@@ -10,11 +10,8 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Devices_Printers == "on"]
 import windows.Devices.Printers as Devices_Printers
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Graphics_Printing_PrintTicket == "on"]
 import windows.Graphics.Printing.PrintTicket as Graphics_Printing_PrintTicket
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -664,9 +661,9 @@ public struct IPrintWorkflowPdlSourceContentVtbl {
     public var GetInputStream: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams != "on"]
     public var GetInputStream: UIntNative = UIntNative(0)
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var GetContentFileAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var GetContentFileAsync: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -753,7 +750,7 @@ public class IPrintWorkflowPdlSourceContent <: InterfaceWrapperBase & ComInterfa
         return _impl_l0.IInputStream.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetContentFileAsync(): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -770,9 +767,9 @@ extend IPrintWorkflowPdlSourceContent <: windows_core.Interface<IPrintWorkflowPd
 @C
 public struct IPrintWorkflowPrinterJob2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Devices_Printers == "on" && Windows_Graphics_Printing_PrintTicket == "on"]
+    @When[Windows_Devices_Printers == "on" && Windows_Foundation_Collections == "on" && Windows_Graphics_Printing_PrintTicket == "on"]
     public var ConvertPrintTicketToJobAttributes: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Devices_Printers != "on" || Windows_Graphics_Printing_PrintTicket != "on"]
+    @When[Windows_Devices_Printers != "on" || Windows_Foundation_Collections != "on" || Windows_Graphics_Printing_PrintTicket != "on"]
     public var ConvertPrintTicketToJobAttributes: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -842,7 +839,7 @@ public class IPrintWorkflowPrinterJob2 <: InterfaceWrapperBase & ComInterface & 
         readVtbl<IPrintWorkflowPrinterJob2Vtbl>(IPrintWorkflowPrinterJob2Vtbl())
     }
 
-    @When[Windows_Devices_Printers == "on" && Windows_Graphics_Printing_PrintTicket == "on"]
+    @When[Windows_Devices_Printers == "on" && Windows_Foundation_Collections == "on" && Windows_Graphics_Printing_PrintTicket == "on"]
     public unsafe func ConvertPrintTicketToJobAttributes(printTicket: Graphics_Printing_PrintTicket.WorkflowPrintTicket, targetPdlFormat: windows_core.HString): windows_collections.IMap<windows_core.HString, Devices_Printers.IppAttributeValue> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1607,7 +1604,7 @@ public class PrintWorkflowPdlSourceContent <: InterfaceWrapperBase & ComInterfac
         return defaultInterface().GetInputStream()
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetContentFileAsync(): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
         return defaultInterface().GetContentFileAsync()
     }
@@ -2527,21 +2524,21 @@ public struct IPrintWorkflowPrinterJobVtbl {
     public var GetJobPrintTicket: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Graphics_Printing_PrintTicket != "on"]
     public var GetJobPrintTicket: UIntNative = UIntNative(0)
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var GetJobAttributesAsBuffer: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
     public var GetJobAttributesAsBuffer: UIntNative = UIntNative(0)
-    @When[Windows_Devices_Printers == "on"]
+    @When[Windows_Devices_Printers == "on" && Windows_Foundation_Collections == "on"]
     public var GetJobAttributes: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Devices_Printers != "on"]
+    @When[Windows_Devices_Printers != "on" || Windows_Foundation_Collections != "on"]
     public var GetJobAttributes: UIntNative = UIntNative(0)
     @When[Windows_Devices_Printers == "on" && Windows_Storage_Streams == "on"]
     public var SetJobAttributesFromBuffer: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Printers != "on" || Windows_Storage_Streams != "on"]
     public var SetJobAttributesFromBuffer: UIntNative = UIntNative(0)
-    @When[Windows_Devices_Printers == "on"]
+    @When[Windows_Devices_Printers == "on" && Windows_Foundation_Collections == "on"]
     public var SetJobAttributes: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Devices_Printers != "on"]
+    @When[Windows_Devices_Printers != "on" || Windows_Foundation_Collections != "on"]
     public var SetJobAttributes: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -2645,7 +2642,7 @@ public class IPrintWorkflowPrinterJob <: InterfaceWrapperBase & ComInterface & R
         return Graphics_Printing_PrintTicket.WorkflowPrintTicket.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetJobAttributesAsBuffer(attributeNames: windows_collections.IIterable<windows_core.HString>): _impl_l0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2654,7 +2651,7 @@ public class IPrintWorkflowPrinterJob <: InterfaceWrapperBase & ComInterface & R
         return _impl_l0.IBuffer.fromAbiTake(result__)
     }
 
-    @When[Windows_Devices_Printers == "on"]
+    @When[Windows_Devices_Printers == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func GetJobAttributes(attributeNames: windows_collections.IIterable<windows_core.HString>): windows_collections.IMap<windows_core.HString, Devices_Printers.IppAttributeValue> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2672,7 +2669,7 @@ public class IPrintWorkflowPrinterJob <: InterfaceWrapperBase & ComInterface & R
         return Devices_Printers.IppSetAttributesResult.fromAbiTake(result__)
     }
 
-    @When[Windows_Devices_Printers == "on"]
+    @When[Windows_Devices_Printers == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func SetJobAttributes(jobAttributes: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, Devices_Printers.IppAttributeValue>>): Devices_Printers.IppSetAttributesResult {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3250,12 +3247,12 @@ public class PrintWorkflowPrinterJob <: InterfaceWrapperBase & ComInterface & wi
         return defaultInterface().GetJobPrintTicket()
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetJobAttributesAsBuffer(attributeNames: windows_collections.IIterable<windows_core.HString>): _impl_l0.IBuffer {
         return defaultInterface().GetJobAttributesAsBuffer(attributeNames)
     }
 
-    @When[Windows_Devices_Printers == "on"]
+    @When[Windows_Devices_Printers == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func GetJobAttributes(attributeNames: windows_collections.IIterable<windows_core.HString>): windows_collections.IMap<windows_core.HString, Devices_Printers.IppAttributeValue> {
         return defaultInterface().GetJobAttributes(attributeNames)
     }
@@ -3265,7 +3262,7 @@ public class PrintWorkflowPrinterJob <: InterfaceWrapperBase & ComInterface & wi
         return defaultInterface().SetJobAttributesFromBuffer(jobAttributesBuffer)
     }
 
-    @When[Windows_Devices_Printers == "on"]
+    @When[Windows_Devices_Printers == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func SetJobAttributes(jobAttributes: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, Devices_Printers.IppAttributeValue>>): Devices_Printers.IppSetAttributesResult {
         return defaultInterface().SetJobAttributes(jobAttributes)
     }
@@ -4186,9 +4183,9 @@ public struct IPrintWorkflowPdlModificationRequestedEventArgsVtbl {
     public var SourceContent: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var UILauncher: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CreateJobOnPrinter: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Devices_Printers == "on"]
+    @When[Windows_Devices_Printers == "on" && Windows_Foundation_Collections == "on"]
     public var CreateJobOnPrinterWithAttributes: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Devices_Printers != "on"]
+    @When[Windows_Devices_Printers != "on" || Windows_Foundation_Collections != "on"]
     public var CreateJobOnPrinterWithAttributes: UIntNative = UIntNative(0)
     @When[Windows_Storage_Streams == "on"]
     public var CreateJobOnPrinterWithAttributesBuffer: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
@@ -4304,7 +4301,7 @@ public class IPrintWorkflowPdlModificationRequestedEventArgs <: InterfaceWrapper
         return PrintWorkflowPdlTargetStream.fromAbiTake(result__)
     }
 
-    @When[Windows_Devices_Printers == "on"]
+    @When[Windows_Devices_Printers == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func CreateJobOnPrinterWithAttributes(jobAttributes: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, Devices_Printers.IppAttributeValue>>, targetContentType: windows_core.HString): PrintWorkflowPdlTargetStream {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4346,9 +4343,9 @@ extend IPrintWorkflowPdlModificationRequestedEventArgs <: windows_core.Interface
 @C
 public struct IPrintWorkflowPdlModificationRequestedEventArgs2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Devices_Printers == "on"]
+    @When[Windows_Devices_Printers == "on" && Windows_Foundation_Collections == "on"]
     public var CreateJobOnPrinterWithAttributes: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, PrintWorkflowAttributesMergePolicyAbi, PrintWorkflowAttributesMergePolicyAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Devices_Printers != "on"]
+    @When[Windows_Devices_Printers != "on" || Windows_Foundation_Collections != "on"]
     public var CreateJobOnPrinterWithAttributes: UIntNative = UIntNative(0)
     @When[Windows_Storage_Streams == "on"]
     public var CreateJobOnPrinterWithAttributesBuffer: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, PrintWorkflowAttributesMergePolicyAbi, PrintWorkflowAttributesMergePolicyAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => E_NOTIMPL.value }
@@ -4422,7 +4419,7 @@ public class IPrintWorkflowPdlModificationRequestedEventArgs2 <: InterfaceWrappe
         readVtbl<IPrintWorkflowPdlModificationRequestedEventArgs2Vtbl>(IPrintWorkflowPdlModificationRequestedEventArgs2Vtbl())
     }
 
-    @When[Windows_Devices_Printers == "on"]
+    @When[Windows_Devices_Printers == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func CreateJobOnPrinterWithAttributes(jobAttributes: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, Devices_Printers.IppAttributeValue>>, targetContentType: windows_core.HString, operationAttributes: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, Devices_Printers.IppAttributeValue>>, jobAttributesMergePolicy: PrintWorkflowAttributesMergePolicy, operationAttributesMergePolicy: PrintWorkflowAttributesMergePolicy): PrintWorkflowPdlTargetStream {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4559,9 +4556,9 @@ public struct IPrintWorkflowVirtualPrinterDataAvailableEventArgsVtbl {
     @When[Windows_Graphics_Printing_PrintTicket != "on"]
     public var GetJobPrintTicket: UIntNative = UIntNative(0)
     public var GetPdlConverter: CFunc<(CPointer<Unit>, PrintWorkflowPdlConversionTypeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var GetTargetFileAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var GetTargetFileAsync: UIntNative = UIntNative(0)
     public var CompleteJob: CFunc<(CPointer<Unit>, PrintWorkflowSubmittedStatusAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -4673,7 +4670,7 @@ public class IPrintWorkflowVirtualPrinterDataAvailableEventArgs <: InterfaceWrap
         return PrintWorkflowPdlConverter.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetTargetFileAsync(): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5545,7 +5542,7 @@ public class PrintWorkflowPdlModificationRequestedEventArgs <: InterfaceWrapperB
         return defaultInterface().CreateJobOnPrinter(targetContentType)
     }
 
-    @When[Windows_Devices_Printers == "on"]
+    @When[Windows_Devices_Printers == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func CreateJobOnPrinterWithAttributes(jobAttributes: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, Devices_Printers.IppAttributeValue>>, targetContentType: windows_core.HString): PrintWorkflowPdlTargetStream {
         return defaultInterface().CreateJobOnPrinterWithAttributes(jobAttributes, targetContentType)
     }
@@ -5772,7 +5769,7 @@ public class PrintWorkflowVirtualPrinterDataAvailableEventArgs <: InterfaceWrapp
         return defaultInterface().GetPdlConverter(conversionType)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetTargetFileAsync(): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
         return defaultInterface().GetTargetFileAsync()
     }
@@ -8902,7 +8899,7 @@ extend PrintWorkflowTriggerDetails <: windows_core.HandleWinrtType<PrintWorkflow
     }
 }
 
-@When[Windows_Graphics_Printing_Workflow == "on"]
+@When[Windows_Graphics_Printing_Workflow == "on" && Windows_ApplicationModel_Activation == "on"]
 public class PrintWorkflowUIActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -9008,7 +9005,7 @@ public class PrintWorkflowUIActivatedEventArgs <: InterfaceWrapperBase & ComInte
     }
 }
 
-@When[Windows_Graphics_Printing_Workflow == "on"]
+@When[Windows_Graphics_Printing_Workflow == "on" && Windows_ApplicationModel_Activation == "on"]
 extend PrintWorkflowUIActivatedEventArgs <: windows_core.HandleWinrtType<PrintWorkflowUIActivatedEventArgs> {
     public static func intoWinrtHandle(value: PrintWorkflowUIActivatedEventArgs): CPointer<Unit> {
         value.asRaw()

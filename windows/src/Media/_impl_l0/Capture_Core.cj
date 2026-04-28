@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -20,9 +19,9 @@ import windows_future as windows_future
 @C
 public struct IVariablePhotoCapturedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Media_Capture == "on"]
+    @When[Windows_Media_Capture == "on" && Windows_Media_Capture == "on" && Windows_Storage_Streams == "on"]
     public var Frame: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Media_Capture != "on"]
+    @When[Windows_Media_Capture != "on" || Windows_Media_Capture != "on" || Windows_Storage_Streams != "on"]
     public var Frame: UIntNative = UIntNative(0)
     public var CaptureTimeOffset: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var UsedFrameControllerIndex: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -98,7 +97,7 @@ public class IVariablePhotoCapturedEventArgs <: InterfaceWrapperBase & ComInterf
         readVtbl<IVariablePhotoCapturedEventArgsVtbl>(IVariablePhotoCapturedEventArgsVtbl())
     }
 
-    @When[Windows_Media_Capture == "on"]
+    @When[Windows_Media_Capture == "on" && Windows_Media_Capture == "on" && Windows_Storage_Streams == "on"]
     public unsafe func Frame(): CapturedFrame {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -425,7 +424,7 @@ public class VariablePhotoCapturedEventArgs <: InterfaceWrapperBase & ComInterfa
         }
     }
 
-    @When[Windows_Media_Capture == "on"]
+    @When[Windows_Media_Capture == "on" && Windows_Media_Capture == "on" && Windows_Storage_Streams == "on"]
     public unsafe func Frame(): CapturedFrame {
         return defaultInterface().Frame()
     }

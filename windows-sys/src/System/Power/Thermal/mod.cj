@@ -284,6 +284,7 @@ public class IPowerThermalChannelDataReceivedEventArgs <: InterfaceWrapperBase &
 public struct IPowerThermalChannelDataConsumerVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var GetChannelIds: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<PowerThermalChannelId>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetChannelConfigurations: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Start: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var Stop: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -341,6 +342,7 @@ public class IPowerThermalChannelDataConsumer <: InterfaceWrapperBase & ComInter
         return __vt.GetChannelIds(__liveRaw, resultSize__, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetChannelConfigurations(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -450,6 +452,7 @@ public class IPowerThermalChannelDataConsumerFactory <: InterfaceWrapperBase & C
 public struct IPowerThermalChannelDataProducerVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var GetChannelIds: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<PowerThermalChannelId>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetChannelConfigurations: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var DisableChannel: CFunc<(CPointer<Unit>, PowerThermalChannelId) -> Int32> = { _, _ => 0 }
     public var Start: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -507,6 +510,7 @@ public class IPowerThermalChannelDataProducer <: InterfaceWrapperBase & ComInter
         return __vt.GetChannelIds(__liveRaw, resultSize__, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetChannelConfigurations(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

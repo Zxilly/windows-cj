@@ -3,7 +3,6 @@ package windows_sys.Win32.Media.Audio.DirectSound
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Media._impl_l0 as Win32_Media__impl_l0
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
@@ -2153,21 +2152,99 @@ public class IDirectSoundFullDuplex <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[DSOUND == "on"]
+@When[Windows_Win32_Media_Audio_DirectSound == "on" && DSOUND == "on" && Windows_Win32_Media_Audio_DirectSound_DirectSoundCaptureCreate == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: pcGuidDevice optional
+    // param-hint: pUnkOuter optional
+    func DirectSoundCaptureCreate(pcGuidDevice: CPointer<GUID>, ppDSC: CPointer<CPointer<Unit>>, pUnkOuter: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Media_Audio_DirectSound == "on" && DSOUND == "on" && Windows_Win32_Media_Audio_DirectSound_DirectSoundCaptureCreate == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_DirectSoundCaptureCreate(pcGuidDevice: CPointer<GUID>, ppDSC: CPointer<CPointer<Unit>>, pUnkOuter: CPointer<Unit>): Int32 {
+    return DirectSoundCaptureCreate(pcGuidDevice, ppDSC, pUnkOuter)
+}
+
+@When[Windows_Win32_Media_Audio_DirectSound == "on" && DSOUND == "on" && Windows_Win32_Media_Audio_DirectSound_DirectSoundCaptureCreate8 == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: pcGuidDevice optional
+    // param-hint: pUnkOuter optional
+    func DirectSoundCaptureCreate8(pcGuidDevice: CPointer<GUID>, ppDSC8: CPointer<CPointer<Unit>>, pUnkOuter: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Media_Audio_DirectSound == "on" && DSOUND == "on" && Windows_Win32_Media_Audio_DirectSound_DirectSoundCaptureCreate8 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_DirectSoundCaptureCreate8(pcGuidDevice: CPointer<GUID>, ppDSC8: CPointer<CPointer<Unit>>, pUnkOuter: CPointer<Unit>): Int32 {
+    return DirectSoundCaptureCreate8(pcGuidDevice, ppDSC8, pUnkOuter)
+}
+
+@When[Windows_Win32_Media_Audio_DirectSound == "on" && DSOUND == "on" && Windows_Win32_Media_Audio_DirectSound_DirectSoundCaptureEnumerateA == "on"]
 foreign {
     // param-hint: pContext optional
     func DirectSoundCaptureEnumerateA(pDSEnumCallback: LPDSENUMCALLBACKA, pContext: CPointer<Unit>): Int32
-    // param-hint: pContext optional
-    func DirectSoundCaptureEnumerateW(pDSEnumCallback: LPDSENUMCALLBACKW, pContext: CPointer<Unit>): Int32
-    // param-hint: pContext optional
-    func DirectSoundEnumerateA(pDSEnumCallback: LPDSENUMCALLBACKA, pContext: CPointer<Unit>): Int32
-    // param-hint: pContext optional
-    func DirectSoundEnumerateW(pDSEnumCallback: LPDSENUMCALLBACKW, pContext: CPointer<Unit>): Int32
-    // param-hint: pGuidSrc optional
-    func GetDeviceID(pGuidSrc: CPointer<GUID>, pGuidDest: CPointer<GUID>): Int32
 }
 
-@When[DSOUND == "on" && (Windows_Win32_Media_Audio == "on" && Windows_Win32_System_Com == "on")]
+@When[Windows_Win32_Media_Audio_DirectSound == "on" && DSOUND == "on" && Windows_Win32_Media_Audio_DirectSound_DirectSoundCaptureEnumerateA == "on"]
+public unsafe func Windows_DirectSoundCaptureEnumerateA(pDSEnumCallback: LPDSENUMCALLBACKA, pContext: CPointer<Unit>): Int32 {
+    return DirectSoundCaptureEnumerateA(pDSEnumCallback, pContext)
+}
+
+@When[Windows_Win32_Media_Audio_DirectSound == "on" && DSOUND == "on" && Windows_Win32_Media_Audio_DirectSound_DirectSoundCaptureEnumerateW == "on"]
+foreign {
+    // param-hint: pContext optional
+    func DirectSoundCaptureEnumerateW(pDSEnumCallback: LPDSENUMCALLBACKW, pContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Media_Audio_DirectSound == "on" && DSOUND == "on" && Windows_Win32_Media_Audio_DirectSound_DirectSoundCaptureEnumerateW == "on"]
+public unsafe func Windows_DirectSoundCaptureEnumerateW(pDSEnumCallback: LPDSENUMCALLBACKW, pContext: CPointer<Unit>): Int32 {
+    return DirectSoundCaptureEnumerateW(pDSEnumCallback, pContext)
+}
+
+@When[Windows_Win32_Media_Audio_DirectSound == "on" && DSOUND == "on" && Windows_Win32_Media_Audio_DirectSound_DirectSoundCreate == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: pcGuidDevice optional
+    // param-hint: pUnkOuter optional
+    func DirectSoundCreate(pcGuidDevice: CPointer<GUID>, ppDS: CPointer<CPointer<Unit>>, pUnkOuter: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Media_Audio_DirectSound == "on" && DSOUND == "on" && Windows_Win32_Media_Audio_DirectSound_DirectSoundCreate == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_DirectSoundCreate(pcGuidDevice: CPointer<GUID>, ppDS: CPointer<CPointer<Unit>>, pUnkOuter: CPointer<Unit>): Int32 {
+    return DirectSoundCreate(pcGuidDevice, ppDS, pUnkOuter)
+}
+
+@When[Windows_Win32_Media_Audio_DirectSound == "on" && DSOUND == "on" && Windows_Win32_Media_Audio_DirectSound_DirectSoundCreate8 == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: pcGuidDevice optional
+    // param-hint: pUnkOuter optional
+    func DirectSoundCreate8(pcGuidDevice: CPointer<GUID>, ppDS8: CPointer<CPointer<Unit>>, pUnkOuter: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Media_Audio_DirectSound == "on" && DSOUND == "on" && Windows_Win32_Media_Audio_DirectSound_DirectSoundCreate8 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_DirectSoundCreate8(pcGuidDevice: CPointer<GUID>, ppDS8: CPointer<CPointer<Unit>>, pUnkOuter: CPointer<Unit>): Int32 {
+    return DirectSoundCreate8(pcGuidDevice, ppDS8, pUnkOuter)
+}
+
+@When[Windows_Win32_Media_Audio_DirectSound == "on" && DSOUND == "on" && Windows_Win32_Media_Audio_DirectSound_DirectSoundEnumerateA == "on"]
+foreign {
+    // param-hint: pContext optional
+    func DirectSoundEnumerateA(pDSEnumCallback: LPDSENUMCALLBACKA, pContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Media_Audio_DirectSound == "on" && DSOUND == "on" && Windows_Win32_Media_Audio_DirectSound_DirectSoundEnumerateA == "on"]
+public unsafe func Windows_DirectSoundEnumerateA(pDSEnumCallback: LPDSENUMCALLBACKA, pContext: CPointer<Unit>): Int32 {
+    return DirectSoundEnumerateA(pDSEnumCallback, pContext)
+}
+
+@When[Windows_Win32_Media_Audio_DirectSound == "on" && DSOUND == "on" && Windows_Win32_Media_Audio_DirectSound_DirectSoundEnumerateW == "on"]
+foreign {
+    // param-hint: pContext optional
+    func DirectSoundEnumerateW(pDSEnumCallback: LPDSENUMCALLBACKW, pContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Media_Audio_DirectSound == "on" && DSOUND == "on" && Windows_Win32_Media_Audio_DirectSound_DirectSoundEnumerateW == "on"]
+public unsafe func Windows_DirectSoundEnumerateW(pDSEnumCallback: LPDSENUMCALLBACKW, pContext: CPointer<Unit>): Int32 {
+    return DirectSoundEnumerateW(pDSEnumCallback, pContext)
+}
+
+@When[Windows_Win32_Media_Audio_DirectSound == "on" && DSOUND == "on" && Windows_Win32_Media_Audio_DirectSound_DirectSoundFullDuplexCreate == "on" && Windows_Win32_Media_Audio == "on" && Windows_Win32_System_Com == "on"]
 foreign {
     // param-hint: pcGuidCaptureDevice optional
     // param-hint: pcGuidRenderDevice optional
@@ -2175,20 +2252,20 @@ foreign {
     func DirectSoundFullDuplexCreate(pcGuidCaptureDevice: CPointer<GUID>, pcGuidRenderDevice: CPointer<GUID>, pcDSCBufferDesc: CPointer<DSCBUFFERDESC>, pcDSBufferDesc: CPointer<DSBUFFERDESC>, hWnd: CPointer<Unit>, dwLevel: UInt32, ppDSFD: CPointer<CPointer<Unit>>, ppDSCBuffer8: CPointer<CPointer<Unit>>, ppDSBuffer8: CPointer<CPointer<Unit>>, pUnkOuter: CPointer<Unit>): Int32
 }
 
-@When[DSOUND == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_Media_Audio_DirectSound == "on" && DSOUND == "on" && Windows_Win32_Media_Audio_DirectSound_DirectSoundFullDuplexCreate == "on" && Windows_Win32_Media_Audio == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_DirectSoundFullDuplexCreate(pcGuidCaptureDevice: CPointer<GUID>, pcGuidRenderDevice: CPointer<GUID>, pcDSCBufferDesc: CPointer<DSCBUFFERDESC>, pcDSBufferDesc: CPointer<DSBUFFERDESC>, hWnd: CPointer<Unit>, dwLevel: UInt32, ppDSFD: CPointer<CPointer<Unit>>, ppDSCBuffer8: CPointer<CPointer<Unit>>, ppDSBuffer8: CPointer<CPointer<Unit>>, pUnkOuter: CPointer<Unit>): Int32 {
+    return DirectSoundFullDuplexCreate(pcGuidCaptureDevice, pcGuidRenderDevice, pcDSCBufferDesc, pcDSBufferDesc, hWnd, dwLevel, ppDSFD, ppDSCBuffer8, ppDSBuffer8, pUnkOuter)
+}
+
+@When[Windows_Win32_Media_Audio_DirectSound == "on" && DSOUND == "on" && Windows_Win32_Media_Audio_DirectSound_GetDeviceID == "on"]
 foreign {
-    // param-hint: pcGuidDevice optional
-    // param-hint: pUnkOuter optional
-    func DirectSoundCaptureCreate(pcGuidDevice: CPointer<GUID>, ppDSC: CPointer<CPointer<Unit>>, pUnkOuter: CPointer<Unit>): Int32
-    // param-hint: pcGuidDevice optional
-    // param-hint: pUnkOuter optional
-    func DirectSoundCaptureCreate8(pcGuidDevice: CPointer<GUID>, ppDSC8: CPointer<CPointer<Unit>>, pUnkOuter: CPointer<Unit>): Int32
-    // param-hint: pcGuidDevice optional
-    // param-hint: pUnkOuter optional
-    func DirectSoundCreate(pcGuidDevice: CPointer<GUID>, ppDS: CPointer<CPointer<Unit>>, pUnkOuter: CPointer<Unit>): Int32
-    // param-hint: pcGuidDevice optional
-    // param-hint: pUnkOuter optional
-    func DirectSoundCreate8(pcGuidDevice: CPointer<GUID>, ppDS8: CPointer<CPointer<Unit>>, pUnkOuter: CPointer<Unit>): Int32
+    // param-hint: pGuidSrc optional
+    func GetDeviceID(pGuidSrc: CPointer<GUID>, pGuidDest: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Media_Audio_DirectSound == "on" && DSOUND == "on" && Windows_Win32_Media_Audio_DirectSound_GetDeviceID == "on"]
+public unsafe func Windows_GetDeviceID(pGuidSrc: CPointer<GUID>, pGuidDest: CPointer<GUID>): Int32 {
+    return GetDeviceID(pGuidSrc, pGuidDest)
 }
 
 @When[Windows_Win32_Media_Audio_DirectSound == "on"]

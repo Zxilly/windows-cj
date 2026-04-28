@@ -17,6 +17,7 @@ public struct IFileOpenPickerUIVtbl {
     public var ContainsFile: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Storage == "on"]
     public var CanAddFile: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var AllowedFileTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SelectionMode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SettingsIdentifier: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -95,6 +96,7 @@ public class IFileOpenPickerUI <: InterfaceWrapperBase & ComInterface {
         return __vt.CanAddFile(__liveRaw, file, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AllowedFileTypes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

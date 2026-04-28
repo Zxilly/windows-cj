@@ -11,19 +11,78 @@ public struct NV_MEMORY_RANGE {
     public init() {}
 }
 
-@When[NTDLL == "on" && (arch == "x86_64" || arch == "aarch64")]
+@When[Windows_Win32_System_Memory_NonVolatile == "on" && NTDLL == "on" && Windows_Win32_System_Memory_NonVolatile_RtlDrainNonVolatileFlush == "on" && (arch == "x86_64" || arch == "aarch64")]
 foreign {
     func RtlDrainNonVolatileFlush(NvToken: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_Memory_NonVolatile == "on" && NTDLL == "on" && Windows_Win32_System_Memory_NonVolatile_RtlDrainNonVolatileFlush == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_RtlDrainNonVolatileFlush(NvToken: CPointer<Unit>): UInt32 {
+    return RtlDrainNonVolatileFlush(NvToken)
+}
+
+@When[Windows_Win32_System_Memory_NonVolatile == "on" && NTDLL == "on" && Windows_Win32_System_Memory_NonVolatile_RtlFillNonVolatileMemory == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: NvDestination bytes=param[2]
     func RtlFillNonVolatileMemory(NvToken: CPointer<Unit>, NvDestination: CPointer<Unit>, Size: UIntNative, Value: UInt8, Flags: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Memory_NonVolatile == "on" && NTDLL == "on" && Windows_Win32_System_Memory_NonVolatile_RtlFillNonVolatileMemory == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_RtlFillNonVolatileMemory(NvToken: CPointer<Unit>, NvDestination: CPointer<Unit>, Size: UIntNative, Value: UInt8, Flags: UInt32): UInt32 {
+    return RtlFillNonVolatileMemory(NvToken, NvDestination, Size, Value, Flags)
+}
+
+@When[Windows_Win32_System_Memory_NonVolatile == "on" && NTDLL == "on" && Windows_Win32_System_Memory_NonVolatile_RtlFlushNonVolatileMemory == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: NvBuffer bytes=param[2]
     func RtlFlushNonVolatileMemory(NvToken: CPointer<Unit>, NvBuffer: CPointer<Unit>, Size: UIntNative, Flags: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Memory_NonVolatile == "on" && NTDLL == "on" && Windows_Win32_System_Memory_NonVolatile_RtlFlushNonVolatileMemory == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_RtlFlushNonVolatileMemory(NvToken: CPointer<Unit>, NvBuffer: CPointer<Unit>, Size: UIntNative, Flags: UInt32): UInt32 {
+    return RtlFlushNonVolatileMemory(NvToken, NvBuffer, Size, Flags)
+}
+
+@When[Windows_Win32_System_Memory_NonVolatile == "on" && NTDLL == "on" && Windows_Win32_System_Memory_NonVolatile_RtlFlushNonVolatileMemoryRanges == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: NvRanges len=param[2]
     func RtlFlushNonVolatileMemoryRanges(NvToken: CPointer<Unit>, NvRanges: CPointer<NV_MEMORY_RANGE>, NumRanges: UIntNative, Flags: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Memory_NonVolatile == "on" && NTDLL == "on" && Windows_Win32_System_Memory_NonVolatile_RtlFlushNonVolatileMemoryRanges == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_RtlFlushNonVolatileMemoryRanges(NvToken: CPointer<Unit>, NvRanges: CPointer<NV_MEMORY_RANGE>, NumRanges: UIntNative, Flags: UInt32): UInt32 {
+    return RtlFlushNonVolatileMemoryRanges(NvToken, NvRanges, NumRanges, Flags)
+}
+
+@When[Windows_Win32_System_Memory_NonVolatile == "on" && NTDLL == "on" && Windows_Win32_System_Memory_NonVolatile_RtlFreeNonVolatileToken == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func RtlFreeNonVolatileToken(NvToken: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_Memory_NonVolatile == "on" && NTDLL == "on" && Windows_Win32_System_Memory_NonVolatile_RtlFreeNonVolatileToken == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_RtlFreeNonVolatileToken(NvToken: CPointer<Unit>): UInt32 {
+    return RtlFreeNonVolatileToken(NvToken)
+}
+
+@When[Windows_Win32_System_Memory_NonVolatile == "on" && NTDLL == "on" && Windows_Win32_System_Memory_NonVolatile_RtlGetNonVolatileToken == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: NvBuffer bytes=param[1]
     func RtlGetNonVolatileToken(NvBuffer: CPointer<Unit>, Size: UIntNative, NvToken: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_System_Memory_NonVolatile == "on" && NTDLL == "on" && Windows_Win32_System_Memory_NonVolatile_RtlGetNonVolatileToken == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_RtlGetNonVolatileToken(NvBuffer: CPointer<Unit>, Size: UIntNative, NvToken: CPointer<CPointer<Unit>>): UInt32 {
+    return RtlGetNonVolatileToken(NvBuffer, Size, NvToken)
+}
+
+@When[Windows_Win32_System_Memory_NonVolatile == "on" && NTDLL == "on" && Windows_Win32_System_Memory_NonVolatile_RtlWriteNonVolatileMemory == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: NvDestination bytes=param[3]
     // param-hint: Source bytes=param[3]
     func RtlWriteNonVolatileMemory(NvToken: CPointer<Unit>, NvDestination: CPointer<Unit>, Source: CPointer<Unit>, Size: UIntNative, Flags: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Memory_NonVolatile == "on" && NTDLL == "on" && Windows_Win32_System_Memory_NonVolatile_RtlWriteNonVolatileMemory == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_RtlWriteNonVolatileMemory(NvToken: CPointer<Unit>, NvDestination: CPointer<Unit>, Source: CPointer<Unit>, Size: UIntNative, Flags: UInt32): UInt32 {
+    return RtlWriteNonVolatileMemory(NvToken, NvDestination, Source, Size, Flags)
 }

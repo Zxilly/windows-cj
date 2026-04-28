@@ -454,6 +454,7 @@ public class ConnectionProfile <: InterfaceWrapperBase & ComInterface & windows_
         return defaultInterface().GetNetworkConnectivityLevel()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetNetworkNames(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().GetNetworkNames()
     }
@@ -986,7 +987,10 @@ public struct IConnectionProfileVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var ProfileName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetNetworkConnectivityLevel: CFunc<(CPointer<Unit>, CPointer<_impl_l0.NetworkConnectivityLevelAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetNetworkNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetNetworkNames: UIntNative = UIntNative(0)
     public var GetConnectionCost: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetDataPlanStatus: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var get_NetworkAdapter: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1077,6 +1081,7 @@ public class IConnectionProfile <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.NetworkConnectivityLevel>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetNetworkNames(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1148,8 +1153,14 @@ public struct IConnectionProfile2Vtbl {
     public var ServiceProviderGuid: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetSignalBars: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetDomainConnectivityLevel: CFunc<(CPointer<Unit>, CPointer<_impl_l0.DomainConnectivityLevelAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetNetworkUsageAsync: CFunc<(CPointer<Unit>, windows_future.DateTimeAbi, windows_future.DateTimeAbi, _impl_l0.DataUsageGranularityAbi, _impl_l0.NetworkUsageStatesAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetNetworkUsageAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetConnectivityIntervalsAsync: CFunc<(CPointer<Unit>, windows_future.DateTimeAbi, windows_future.DateTimeAbi, _impl_l0.NetworkUsageStatesAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetConnectivityIntervalsAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1274,6 +1285,7 @@ public class IConnectionProfile2 <: InterfaceWrapperBase & ComInterface & Runtim
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.DomainConnectivityLevel>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetNetworkUsageAsync(startTime: windows_future.DateTime, endTime: windows_future.DateTime, granularity: _impl_l0.DataUsageGranularity, states: _impl_l0.NetworkUsageStates): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l0.NetworkUsage>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1282,6 +1294,7 @@ public class IConnectionProfile2 <: InterfaceWrapperBase & ComInterface & Runtim
         return windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l0.NetworkUsage>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetConnectivityIntervalsAsync(startTime: windows_future.DateTime, endTime: windows_future.DateTime, states: _impl_l0.NetworkUsageStates): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l0.ConnectivityInterval>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1298,7 +1311,10 @@ extend IConnectionProfile2 <: windows_core.Interface<IConnectionProfile2> {}
 @C
 public struct IConnectionProfile3Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAttributedNetworkUsageAsync: CFunc<(CPointer<Unit>, windows_future.DateTimeAbi, windows_future.DateTimeAbi, _impl_l0.NetworkUsageStatesAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAttributedNetworkUsageAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1367,6 +1383,7 @@ public class IConnectionProfile3 <: InterfaceWrapperBase & ComInterface & Runtim
         readVtbl<IConnectionProfile3Vtbl>(IConnectionProfile3Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAttributedNetworkUsageAsync(startTime: windows_future.DateTime, endTime: windows_future.DateTime, states: _impl_l0.NetworkUsageStates): windows_future.IAsyncOperation<windows_collections.IVectorView<AttributedNetworkUsage>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1383,7 +1400,10 @@ extend IConnectionProfile3 <: windows_core.Interface<IConnectionProfile3> {}
 @C
 public struct IConnectionProfile4Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetProviderNetworkUsageAsync: CFunc<(CPointer<Unit>, windows_future.DateTimeAbi, windows_future.DateTimeAbi, _impl_l0.NetworkUsageStatesAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetProviderNetworkUsageAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1452,6 +1472,7 @@ public class IConnectionProfile4 <: InterfaceWrapperBase & ComInterface & Runtim
         readVtbl<IConnectionProfile4Vtbl>(IConnectionProfile4Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetProviderNetworkUsageAsync(startTime: windows_future.DateTime, endTime: windows_future.DateTime, states: _impl_l0.NetworkUsageStates): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l0.ProviderNetworkUsage>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2121,17 +2142,23 @@ extend INetworkAdapter <: windows_core.Interface<INetworkAdapter> {}
 @C
 public struct INetworkInformationStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetConnectionProfiles: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetConnectionProfiles: UIntNative = UIntNative(0)
     public var GetInternetConnectionProfile: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetLanIdentifiers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetLanIdentifiers: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public var GetHostNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Networking != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Networking != "on"]
     public var GetHostNames: UIntNative = UIntNative(0)
     public var GetProxyConfigurationAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public var GetSortedEndpointPairs: CFunc<(CPointer<Unit>, CPointer<Unit>, _impl_l0.HostNameSortOptionsAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Networking != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Networking != "on"]
     public var GetSortedEndpointPairs: UIntNative = UIntNative(0)
     public var NetworkStatusChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveNetworkStatusChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -2203,6 +2230,7 @@ public class INetworkInformationStatics <: InterfaceWrapperBase & ComInterface &
         readVtbl<INetworkInformationStaticsVtbl>(INetworkInformationStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetConnectionProfiles(): windows_collections.IVectorView<ConnectionProfile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2219,6 +2247,7 @@ public class INetworkInformationStatics <: InterfaceWrapperBase & ComInterface &
         return ConnectionProfile.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetLanIdentifiers(): windows_collections.IVectorView<LanIdentifier> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2227,7 +2256,7 @@ public class INetworkInformationStatics <: InterfaceWrapperBase & ComInterface &
         return windows_collections.IVectorView<LanIdentifier>.fromAbiTake(result__)
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func GetHostNames(): windows_collections.IVectorView<HostName> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2244,7 +2273,7 @@ public class INetworkInformationStatics <: InterfaceWrapperBase & ComInterface &
         return windows_future.IAsyncOperation<_impl_l0.ProxyConfiguration>.fromAbiTake(result__)
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func GetSortedEndpointPairs(destinationList: windows_collections.IIterable<EndpointPair>, sortOptions: _impl_l0.HostNameSortOptions): windows_collections.IVectorView<EndpointPair> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2275,7 +2304,10 @@ extend INetworkInformationStatics <: windows_core.Interface<INetworkInformationS
 @C
 public struct INetworkInformationStatics2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var FindConnectionProfilesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindConnectionProfilesAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2344,6 +2376,7 @@ public class INetworkInformationStatics2 <: InterfaceWrapperBase & ComInterface 
         readVtbl<INetworkInformationStatics2Vtbl>(INetworkInformationStatics2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindConnectionProfilesAsync(pProfileFilter: ConnectionProfileFilter): windows_future.IAsyncOperation<windows_collections.IVectorView<ConnectionProfile>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

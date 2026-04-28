@@ -8,15 +8,74 @@ import windows_polyfill as windows_polyfill
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 
 
-@When[NTDLL == "on" && ((arch == "aarch64" || arch == "x86_64"))]
+@When[Windows_Win32_System_Kernel == "on" && NTDLL == "on" && Windows_Win32_System_Kernel_RtlFirstEntrySList == "on" && (arch == "aarch64" || arch == "x86_64")]
 foreign {
     func RtlFirstEntrySList(ListHead: CPointer<SLIST_HEADER>): CPointer<Win32__impl_l0.SLIST_ENTRY>
+}
+
+@When[Windows_Win32_System_Kernel == "on" && NTDLL == "on" && Windows_Win32_System_Kernel_RtlFirstEntrySList == "on" && (arch == "aarch64" || arch == "x86_64")]
+public unsafe func Windows_RtlFirstEntrySList(ListHead: CPointer<SLIST_HEADER>): CPointer<Win32__impl_l0.SLIST_ENTRY> {
+    return RtlFirstEntrySList(ListHead)
+}
+
+@When[Windows_Win32_System_Kernel == "on" && NTDLL == "on" && Windows_Win32_System_Kernel_RtlInitializeSListHead == "on" && (arch == "aarch64" || arch == "x86_64")]
+foreign {
     func RtlInitializeSListHead(ListHead: CPointer<SLIST_HEADER>): Unit
+}
+
+@When[Windows_Win32_System_Kernel == "on" && NTDLL == "on" && Windows_Win32_System_Kernel_RtlInitializeSListHead == "on" && (arch == "aarch64" || arch == "x86_64")]
+public unsafe func Windows_RtlInitializeSListHead(ListHead: CPointer<SLIST_HEADER>): Unit {
+    RtlInitializeSListHead(ListHead)
+}
+
+@When[Windows_Win32_System_Kernel == "on" && NTDLL == "on" && Windows_Win32_System_Kernel_RtlInterlockedFlushSList == "on" && (arch == "aarch64" || arch == "x86_64")]
+foreign {
     func RtlInterlockedFlushSList(ListHead: CPointer<SLIST_HEADER>): CPointer<Win32__impl_l0.SLIST_ENTRY>
+}
+
+@When[Windows_Win32_System_Kernel == "on" && NTDLL == "on" && Windows_Win32_System_Kernel_RtlInterlockedFlushSList == "on" && (arch == "aarch64" || arch == "x86_64")]
+public unsafe func Windows_RtlInterlockedFlushSList(ListHead: CPointer<SLIST_HEADER>): CPointer<Win32__impl_l0.SLIST_ENTRY> {
+    return RtlInterlockedFlushSList(ListHead)
+}
+
+@When[Windows_Win32_System_Kernel == "on" && NTDLL == "on" && Windows_Win32_System_Kernel_RtlInterlockedPopEntrySList == "on" && (arch == "aarch64" || arch == "x86_64")]
+foreign {
     func RtlInterlockedPopEntrySList(ListHead: CPointer<SLIST_HEADER>): CPointer<Win32__impl_l0.SLIST_ENTRY>
+}
+
+@When[Windows_Win32_System_Kernel == "on" && NTDLL == "on" && Windows_Win32_System_Kernel_RtlInterlockedPopEntrySList == "on" && (arch == "aarch64" || arch == "x86_64")]
+public unsafe func Windows_RtlInterlockedPopEntrySList(ListHead: CPointer<SLIST_HEADER>): CPointer<Win32__impl_l0.SLIST_ENTRY> {
+    return RtlInterlockedPopEntrySList(ListHead)
+}
+
+@When[Windows_Win32_System_Kernel == "on" && NTDLL == "on" && Windows_Win32_System_Kernel_RtlInterlockedPushEntrySList == "on" && (arch == "aarch64" || arch == "x86_64")]
+foreign {
     func RtlInterlockedPushEntrySList(ListHead: CPointer<SLIST_HEADER>, ListEntry: CPointer<Win32__impl_l0.SLIST_ENTRY>): CPointer<Win32__impl_l0.SLIST_ENTRY>
+}
+
+@When[Windows_Win32_System_Kernel == "on" && NTDLL == "on" && Windows_Win32_System_Kernel_RtlInterlockedPushEntrySList == "on" && (arch == "aarch64" || arch == "x86_64")]
+public unsafe func Windows_RtlInterlockedPushEntrySList(ListHead: CPointer<SLIST_HEADER>, ListEntry: CPointer<Win32__impl_l0.SLIST_ENTRY>): CPointer<Win32__impl_l0.SLIST_ENTRY> {
+    return RtlInterlockedPushEntrySList(ListHead, ListEntry)
+}
+
+@When[Windows_Win32_System_Kernel == "on" && NTDLL == "on" && Windows_Win32_System_Kernel_RtlInterlockedPushListSListEx == "on" && (arch == "aarch64" || arch == "x86_64")]
+foreign {
     func RtlInterlockedPushListSListEx(ListHead: CPointer<SLIST_HEADER>, List: CPointer<Win32__impl_l0.SLIST_ENTRY>, ListEnd: CPointer<Win32__impl_l0.SLIST_ENTRY>, Count: UInt32): CPointer<Win32__impl_l0.SLIST_ENTRY>
+}
+
+@When[Windows_Win32_System_Kernel == "on" && NTDLL == "on" && Windows_Win32_System_Kernel_RtlInterlockedPushListSListEx == "on" && (arch == "aarch64" || arch == "x86_64")]
+public unsafe func Windows_RtlInterlockedPushListSListEx(ListHead: CPointer<SLIST_HEADER>, List: CPointer<Win32__impl_l0.SLIST_ENTRY>, ListEnd: CPointer<Win32__impl_l0.SLIST_ENTRY>, Count: UInt32): CPointer<Win32__impl_l0.SLIST_ENTRY> {
+    return RtlInterlockedPushListSListEx(ListHead, List, ListEnd, Count)
+}
+
+@When[Windows_Win32_System_Kernel == "on" && NTDLL == "on" && Windows_Win32_System_Kernel_RtlQueryDepthSList == "on" && (arch == "aarch64" || arch == "x86_64")]
+foreign {
     func RtlQueryDepthSList(ListHead: CPointer<SLIST_HEADER>): UInt16
+}
+
+@When[Windows_Win32_System_Kernel == "on" && NTDLL == "on" && Windows_Win32_System_Kernel_RtlQueryDepthSList == "on" && (arch == "aarch64" || arch == "x86_64")]
+public unsafe func Windows_RtlQueryDepthSList(ListHead: CPointer<SLIST_HEADER>): UInt16 {
+    return RtlQueryDepthSList(ListHead)
 }
 
 @When[Windows_Win32_System_Kernel == "on"]

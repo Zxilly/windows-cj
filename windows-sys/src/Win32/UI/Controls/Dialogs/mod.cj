@@ -15,4 +15,45 @@ public import windows_sys.Win32._impl_l0.{DEVNAMES, PRINTPAGERANGE}
 public import windows_sys.Win32._impl_l1.{OFNOTIFYA, OFNOTIFYEXA, OFNOTIFYEXW, OFNOTIFYW}
 @When[Windows_Win32_UI_Controls_Dialogs == "on" && (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Controls == "on" || arch == "aarch64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Controls == "on")]
 public import windows_sys.Win32._impl_l1.{PRINTDLGEXA, PRINTDLGEXW}
-
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_ChooseColorA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l1.Windows_ChooseColorA
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_ChooseColorW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l1.Windows_ChooseColorW
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_ChooseFontA == "on" && (((arch == "x86_64" && Windows_Win32_Graphics_Gdi == "on") || (arch == "aarch64" && Windows_Win32_Graphics_Gdi == "on")) && Windows_Win32_Graphics_Gdi == "on")]
+public import windows_sys.Win32._impl_l1.Windows_ChooseFontA
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_ChooseFontW == "on" && (((arch == "x86_64" && Windows_Win32_Graphics_Gdi == "on") || (arch == "aarch64" && Windows_Win32_Graphics_Gdi == "on")) && Windows_Win32_Graphics_Gdi == "on")]
+public import windows_sys.Win32._impl_l1.Windows_ChooseFontW
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_CommDlgExtendedError == "on"]
+public import windows_sys.Win32._impl_l1.Windows_CommDlgExtendedError
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_FindTextA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l1.Windows_FindTextA
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_FindTextW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l1.Windows_FindTextW
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_GetFileTitleA == "on"]
+public import windows_sys.Win32._impl_l1.Windows_GetFileTitleA
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_GetFileTitleW == "on"]
+public import windows_sys.Win32._impl_l1.Windows_GetFileTitleW
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_GetOpenFileNameA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l1.Windows_GetOpenFileNameA
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_GetOpenFileNameW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l1.Windows_GetOpenFileNameW
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_GetSaveFileNameA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l1.Windows_GetSaveFileNameA
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_GetSaveFileNameW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l1.Windows_GetSaveFileNameW
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_PageSetupDlgA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l1.Windows_PageSetupDlgA
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_PageSetupDlgW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l1.Windows_PageSetupDlgW
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_PrintDlgA == "on" && (((arch == "x86_64" && Windows_Win32_Graphics_Gdi == "on") || (arch == "aarch64" && Windows_Win32_Graphics_Gdi == "on")) && Windows_Win32_Graphics_Gdi == "on")]
+public import windows_sys.Win32._impl_l1.Windows_PrintDlgA
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_PrintDlgExA == "on" && (((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Controls == "on") || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Controls == "on")) && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Controls == "on")]
+public import windows_sys.Win32._impl_l1.Windows_PrintDlgExA
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_PrintDlgExW == "on" && (((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Controls == "on") || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Controls == "on")) && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Controls == "on")]
+public import windows_sys.Win32._impl_l1.Windows_PrintDlgExW
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_PrintDlgW == "on" && (((arch == "x86_64" && Windows_Win32_Graphics_Gdi == "on") || (arch == "aarch64" && Windows_Win32_Graphics_Gdi == "on")) && Windows_Win32_Graphics_Gdi == "on")]
+public import windows_sys.Win32._impl_l1.Windows_PrintDlgW
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_ReplaceTextA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l1.Windows_ReplaceTextA
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_ReplaceTextW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l1.Windows_ReplaceTextW

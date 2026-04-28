@@ -1062,6 +1062,7 @@ public class IDataUsage <: InterfaceWrapperBase & ComInterface {
 public struct ILanIdentifierDataVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Type: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Value: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1112,6 +1113,7 @@ public class ILanIdentifierData <: InterfaceWrapperBase & ComInterface {
         return __vt.Type(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Value(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1537,6 +1539,7 @@ public class IProviderNetworkUsage <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IProxyConfigurationVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ProxyUris: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CanConnectDirectly: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -1582,6 +1585,7 @@ public class IProxyConfiguration <: InterfaceWrapperBase & ComInterface {
         readVtbl<IProxyConfigurationVtbl>(IProxyConfigurationVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ProxyUris(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1731,6 +1735,7 @@ public class IWwanConnectionProfileDetails <: InterfaceWrapperBase & ComInterfac
 public struct IWwanConnectionProfileDetails2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var IPKind: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var PurposeGuids: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1781,6 +1786,7 @@ public class IWwanConnectionProfileDetails2 <: InterfaceWrapperBase & ComInterfa
         return __vt.IPKind(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PurposeGuids(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

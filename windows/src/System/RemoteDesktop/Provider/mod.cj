@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_UI == "on"]
 import windows.UI as UI
 import windows_collections as windows_collections
 
@@ -971,7 +969,10 @@ extend IRemoteDesktopInfoFactory <: windows_core.Interface<IRemoteDesktopInfoFac
 @C
 public struct IRemoteDesktopRegistrarStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var DesktopInfos: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var DesktopInfos: UIntNative = UIntNative(0)
     public var IsSwitchToLocalSessionEnabled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -1041,6 +1042,7 @@ public class IRemoteDesktopRegistrarStatics <: InterfaceWrapperBase & ComInterfa
         readVtbl<IRemoteDesktopRegistrarStaticsVtbl>(IRemoteDesktopRegistrarStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DesktopInfos(): windows_collections.IVector<RemoteDesktopInfo> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1437,6 +1439,7 @@ public class RemoteDesktopRegistrar <: windows_interface.RuntimeName & windows_c
         windows_core.activationFactory<RemoteDesktopRegistrar>().ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func DesktopInfos(): windows_collections.IVector<RemoteDesktopInfo> {
         var result__: Option<windows_collections.IVector<RemoteDesktopInfo>> = Option<windows_collections.IVector<RemoteDesktopInfo>>.None
         try (factory__ = windows_core.factory<RemoteDesktopRegistrar, IRemoteDesktopRegistrarStatics>().unwrap()) {

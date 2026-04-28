@@ -8,13 +8,9 @@ import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
-@When[Windows_Win32_System_Registry == "on"]
 import windows.Win32.System.Registry as Win32_System_Registry
-@When[Windows_Win32_System_Wmi == "on"]
 import windows.Win32.System.Wmi as Win32_System_Wmi
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
@@ -6046,77 +6042,301 @@ extend POLICYSETTINGSTATUSINFO <: windows_core.CopyType & windows_core.RuntimeTy
     }
 }
 
-@When[ADVAPI32 == "on"]
+@When[Windows_Win32_System_GroupPolicy == "on" && ADVAPI32 == "on" && Windows_Win32_System_GroupPolicy_CommandLineFromMsiDescriptor == "on"]
 foreign {
     // param-hint: CommandLine len=param[2]
     func CommandLineFromMsiDescriptor(Descriptor: CPointer<UInt16>, CommandLine: CPointer<UInt16>, CommandLineLength: CPointer<UInt32>): UInt32
-    func GetLocalManagedApplicationData(ProductCode: CPointer<UInt16>, DisplayName: CPointer<CPointer<UInt16>>, SupportUrl: CPointer<CPointer<UInt16>>): Unit
-    func GetLocalManagedApplications(bUserApps: Int32, pdwApps: CPointer<UInt32>, prgLocalApps: CPointer<CPointer<LOCALMANAGEDAPPLICATIONAbi>>): UInt32
-    func GetManagedApplications(pCategory: CPointer<GUID>, dwQueryFlags: UInt32, dwInfoLevel: UInt32, pdwApps: CPointer<UInt32>, prgManagedApps: CPointer<CPointer<MANAGEDAPPLICATIONAbi>>): UInt32
-    func InstallApplication(pInstallInfo: CPointer<INSTALLDATAAbi>): UInt32
-    func UninstallApplication(ProductCode: CPointer<UInt16>, dwStatus: UInt32): UInt32
 }
 
-@When[ADVAPI32 == "on" && Windows_Win32_UI_Shell == "on"]
+@When[Windows_Win32_System_GroupPolicy == "on" && ADVAPI32 == "on" && Windows_Win32_System_GroupPolicy_CommandLineFromMsiDescriptor == "on"]
+public unsafe func Windows_CommandLineFromMsiDescriptor(Descriptor: CPointer<UInt16>, CommandLine: CPointer<UInt16>, CommandLineLength: CPointer<UInt32>): UInt32 {
+    return CommandLineFromMsiDescriptor(Descriptor, CommandLine, CommandLineLength)
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && ADVAPI32 == "on" && Windows_Win32_System_GroupPolicy_GetLocalManagedApplicationData == "on"]
+foreign {
+    func GetLocalManagedApplicationData(ProductCode: CPointer<UInt16>, DisplayName: CPointer<CPointer<UInt16>>, SupportUrl: CPointer<CPointer<UInt16>>): Unit
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && ADVAPI32 == "on" && Windows_Win32_System_GroupPolicy_GetLocalManagedApplicationData == "on"]
+public unsafe func Windows_GetLocalManagedApplicationData(ProductCode: CPointer<UInt16>, DisplayName: CPointer<CPointer<UInt16>>, SupportUrl: CPointer<CPointer<UInt16>>): Unit {
+    GetLocalManagedApplicationData(ProductCode, DisplayName, SupportUrl)
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && ADVAPI32 == "on" && Windows_Win32_System_GroupPolicy_GetLocalManagedApplications == "on"]
+foreign {
+    func GetLocalManagedApplications(bUserApps: Int32, pdwApps: CPointer<UInt32>, prgLocalApps: CPointer<CPointer<LOCALMANAGEDAPPLICATIONAbi>>): UInt32
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && ADVAPI32 == "on" && Windows_Win32_System_GroupPolicy_GetLocalManagedApplications == "on"]
+public unsafe func Windows_GetLocalManagedApplications(bUserApps: Int32, pdwApps: CPointer<UInt32>, prgLocalApps: CPointer<CPointer<LOCALMANAGEDAPPLICATIONAbi>>): UInt32 {
+    return GetLocalManagedApplications(bUserApps, pdwApps, prgLocalApps)
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && ADVAPI32 == "on" && Windows_Win32_System_GroupPolicy_GetManagedApplicationCategories == "on" && Windows_Win32_UI_Shell == "on"]
 foreign {
     // param-hint: dwReserved optional reserved
     func GetManagedApplicationCategories(dwReserved: UInt32, pAppCategory: CPointer<Win32__impl_l1.APPCATEGORYINFOLISTAbi>): UInt32
 }
 
-@When[GPEDIT == "on"]
+@When[Windows_Win32_System_GroupPolicy == "on" && ADVAPI32 == "on" && Windows_Win32_System_GroupPolicy_GetManagedApplicationCategories == "on" && Windows_Win32_UI_Shell == "on"]
+public unsafe func Windows_GetManagedApplicationCategories(dwReserved: UInt32, pAppCategory: CPointer<Win32__impl_l1.APPCATEGORYINFOLISTAbi>): UInt32 {
+    return GetManagedApplicationCategories(dwReserved, pAppCategory)
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && ADVAPI32 == "on" && Windows_Win32_System_GroupPolicy_GetManagedApplications == "on"]
+foreign {
+    func GetManagedApplications(pCategory: CPointer<GUID>, dwQueryFlags: UInt32, dwInfoLevel: UInt32, pdwApps: CPointer<UInt32>, prgManagedApps: CPointer<CPointer<MANAGEDAPPLICATIONAbi>>): UInt32
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && ADVAPI32 == "on" && Windows_Win32_System_GroupPolicy_GetManagedApplications == "on"]
+public unsafe func Windows_GetManagedApplications(pCategory: CPointer<GUID>, dwQueryFlags: UInt32, dwInfoLevel: UInt32, pdwApps: CPointer<UInt32>, prgManagedApps: CPointer<CPointer<MANAGEDAPPLICATIONAbi>>): UInt32 {
+    return GetManagedApplications(pCategory, dwQueryFlags, dwInfoLevel, pdwApps, prgManagedApps)
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && ADVAPI32 == "on" && Windows_Win32_System_GroupPolicy_InstallApplication == "on"]
+foreign {
+    func InstallApplication(pInstallInfo: CPointer<INSTALLDATAAbi>): UInt32
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && ADVAPI32 == "on" && Windows_Win32_System_GroupPolicy_InstallApplication == "on"]
+public unsafe func Windows_InstallApplication(pInstallInfo: CPointer<INSTALLDATAAbi>): UInt32 {
+    return InstallApplication(pInstallInfo)
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && ADVAPI32 == "on" && Windows_Win32_System_GroupPolicy_UninstallApplication == "on"]
+foreign {
+    func UninstallApplication(ProductCode: CPointer<UInt16>, dwStatus: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && ADVAPI32 == "on" && Windows_Win32_System_GroupPolicy_UninstallApplication == "on"]
+public unsafe func Windows_UninstallApplication(ProductCode: CPointer<UInt16>, dwStatus: UInt32): UInt32 {
+    return UninstallApplication(ProductCode, dwStatus)
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && GPEDIT == "on" && Windows_Win32_System_GroupPolicy_BrowseForGPO == "on"]
 foreign {
     func BrowseForGPO(lpBrowseInfo: CPointer<GPOBROWSEINFOAbi>): Int32
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && GPEDIT == "on" && Windows_Win32_System_GroupPolicy_BrowseForGPO == "on"]
+public unsafe func Windows_BrowseForGPO(lpBrowseInfo: CPointer<GPOBROWSEINFOAbi>): Int32 {
+    return BrowseForGPO(lpBrowseInfo)
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && GPEDIT == "on" && Windows_Win32_System_GroupPolicy_CreateGPOLink == "on"]
+foreign {
     func CreateGPOLink(lpGPO: CPointer<UInt16>, lpContainer: CPointer<UInt16>, fHighPriority: Int32): Int32
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && GPEDIT == "on" && Windows_Win32_System_GroupPolicy_CreateGPOLink == "on"]
+public unsafe func Windows_CreateGPOLink(lpGPO: CPointer<UInt16>, lpContainer: CPointer<UInt16>, fHighPriority: Int32): Int32 {
+    return CreateGPOLink(lpGPO, lpContainer, fHighPriority)
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && GPEDIT == "on" && Windows_Win32_System_GroupPolicy_DeleteAllGPOLinks == "on"]
+foreign {
     func DeleteAllGPOLinks(lpContainer: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && GPEDIT == "on" && Windows_Win32_System_GroupPolicy_DeleteAllGPOLinks == "on"]
+public unsafe func Windows_DeleteAllGPOLinks(lpContainer: CPointer<UInt16>): Int32 {
+    return DeleteAllGPOLinks(lpContainer)
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && GPEDIT == "on" && Windows_Win32_System_GroupPolicy_DeleteGPOLink == "on"]
+foreign {
     func DeleteGPOLink(lpGPO: CPointer<UInt16>, lpContainer: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && GPEDIT == "on" && Windows_Win32_System_GroupPolicy_DeleteGPOLink == "on"]
+public unsafe func Windows_DeleteGPOLink(lpGPO: CPointer<UInt16>, lpContainer: CPointer<UInt16>): Int32 {
+    return DeleteGPOLink(lpGPO, lpContainer)
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && GPEDIT == "on" && Windows_Win32_System_GroupPolicy_ExportRSoPData == "on"]
+foreign {
     func ExportRSoPData(lpNameSpace: CPointer<UInt16>, lpFileName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && GPEDIT == "on" && Windows_Win32_System_GroupPolicy_ExportRSoPData == "on"]
+public unsafe func Windows_ExportRSoPData(lpNameSpace: CPointer<UInt16>, lpFileName: CPointer<UInt16>): Int32 {
+    return ExportRSoPData(lpNameSpace, lpFileName)
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && GPEDIT == "on" && Windows_Win32_System_GroupPolicy_ImportRSoPData == "on"]
+foreign {
     func ImportRSoPData(lpNameSpace: CPointer<UInt16>, lpFileName: CPointer<UInt16>): Int32
 }
 
-@When[USERENV == "on"]
+@When[Windows_Win32_System_GroupPolicy == "on" && GPEDIT == "on" && Windows_Win32_System_GroupPolicy_ImportRSoPData == "on"]
+public unsafe func Windows_ImportRSoPData(lpNameSpace: CPointer<UInt16>, lpFileName: CPointer<UInt16>): Int32 {
+    return ImportRSoPData(lpNameSpace, lpFileName)
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_EnterCriticalPolicySection == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func EnterCriticalPolicySection(bMachine: Int32): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_EnterCriticalPolicySection == "on"]
+public unsafe func Windows_EnterCriticalPolicySection(bMachine: Int32): CPointer<Unit> {
+    return EnterCriticalPolicySection(bMachine)
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_FreeGPOListA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func FreeGPOListA(pGPOList: CPointer<GROUP_POLICY_OBJECTAAbi>): Int32
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_FreeGPOListA == "on"]
+public unsafe func Windows_FreeGPOListA(pGPOList: CPointer<GROUP_POLICY_OBJECTAAbi>): Int32 {
+    return FreeGPOListA(pGPOList)
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_FreeGPOListW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func FreeGPOListW(pGPOList: CPointer<GROUP_POLICY_OBJECTWAbi>): Int32
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_FreeGPOListW == "on"]
+public unsafe func Windows_FreeGPOListW(pGPOList: CPointer<GROUP_POLICY_OBJECTWAbi>): Int32 {
+    return FreeGPOListW(pGPOList)
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_GenerateGPNotification == "on"]
+foreign {
     func GenerateGPNotification(bMachine: Int32, lpwszMgmtProduct: CPointer<UInt16>, dwMgmtProductOptions: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_GenerateGPNotification == "on"]
+public unsafe func Windows_GenerateGPNotification(bMachine: Int32, lpwszMgmtProduct: CPointer<UInt16>, dwMgmtProductOptions: UInt32): UInt32 {
+    return GenerateGPNotification(bMachine, lpwszMgmtProduct, dwMgmtProductOptions)
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_GetAppliedGPOListA == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: pMachineName optional
+    // param-hint: pSidUser optional
+    func GetAppliedGPOListA(dwFlags: UInt32, pMachineName: CPointer<UInt8>, pSidUser: Win32_Security.PSID, pGuidExtension: CPointer<GUID>, ppGPOList: CPointer<CPointer<GROUP_POLICY_OBJECTAAbi>>): UInt32
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_GetAppliedGPOListA == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_GetAppliedGPOListA(dwFlags: UInt32, pMachineName: CPointer<UInt8>, pSidUser: Win32_Security.PSID, pGuidExtension: CPointer<GUID>, ppGPOList: CPointer<CPointer<GROUP_POLICY_OBJECTAAbi>>): UInt32 {
+    return GetAppliedGPOListA(dwFlags, pMachineName, pSidUser, pGuidExtension, ppGPOList)
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_GetAppliedGPOListW == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: pMachineName optional
+    // param-hint: pSidUser optional
+    func GetAppliedGPOListW(dwFlags: UInt32, pMachineName: CPointer<UInt16>, pSidUser: Win32_Security.PSID, pGuidExtension: CPointer<GUID>, ppGPOList: CPointer<CPointer<GROUP_POLICY_OBJECTWAbi>>): UInt32
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_GetAppliedGPOListW == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_GetAppliedGPOListW(dwFlags: UInt32, pMachineName: CPointer<UInt16>, pSidUser: Win32_Security.PSID, pGuidExtension: CPointer<GUID>, ppGPOList: CPointer<CPointer<GROUP_POLICY_OBJECTWAbi>>): UInt32 {
+    return GetAppliedGPOListW(dwFlags, pMachineName, pSidUser, pGuidExtension, ppGPOList)
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_GetGPOListA == "on"]
+foreign {
     // param-hint: hToken optional
     // param-hint: lpName optional
     // param-hint: lpHostName optional
     // param-hint: lpComputerName optional
     // pinvoke-hint: SetLastError
     func GetGPOListA(hToken: CPointer<Unit>, lpName: CPointer<UInt8>, lpHostName: CPointer<UInt8>, lpComputerName: CPointer<UInt8>, dwFlags: UInt32, pGPOList: CPointer<CPointer<GROUP_POLICY_OBJECTAAbi>>): Int32
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_GetGPOListA == "on"]
+public unsafe func Windows_GetGPOListA(hToken: CPointer<Unit>, lpName: CPointer<UInt8>, lpHostName: CPointer<UInt8>, lpComputerName: CPointer<UInt8>, dwFlags: UInt32, pGPOList: CPointer<CPointer<GROUP_POLICY_OBJECTAAbi>>): Int32 {
+    return GetGPOListA(hToken, lpName, lpHostName, lpComputerName, dwFlags, pGPOList)
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_GetGPOListW == "on"]
+foreign {
     // param-hint: hToken optional
     // param-hint: lpName optional
     // param-hint: lpHostName optional
     // param-hint: lpComputerName optional
     // pinvoke-hint: SetLastError
     func GetGPOListW(hToken: CPointer<Unit>, lpName: CPointer<UInt16>, lpHostName: CPointer<UInt16>, lpComputerName: CPointer<UInt16>, dwFlags: UInt32, pGPOList: CPointer<CPointer<GROUP_POLICY_OBJECTWAbi>>): Int32
-    // pinvoke-hint: SetLastError
-    func LeaveCriticalPolicySection(hSection: CPointer<Unit>): Int32
-    func ProcessGroupPolicyCompleted(extensionId: CPointer<GUID>, pAsyncHandle: UIntNative, dwStatus: UInt32): UInt32
-    func ProcessGroupPolicyCompletedEx(extensionId: CPointer<GUID>, pAsyncHandle: UIntNative, dwStatus: UInt32, RsopStatus: Int32): UInt32
-    // pinvoke-hint: SetLastError
-    func RefreshPolicy(bMachine: Int32): Int32
-    // pinvoke-hint: SetLastError
-    func RefreshPolicyEx(bMachine: Int32, dwOptions: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func RegisterGPNotification(hEvent: CPointer<Unit>, bMachine: Int32): Int32
-    func RsopFileAccessCheck(pszFileName: CPointer<UInt16>, pRsopToken: CPointer<Unit>, dwDesiredAccessMask: UInt32, pdwGrantedAccessMask: CPointer<UInt32>, pbAccessStatus: CPointer<Int32>): Int32
-    // pinvoke-hint: SetLastError
-    func UnregisterGPNotification(hEvent: CPointer<Unit>): Int32
 }
 
-@When[USERENV == "on" && Windows_Win32_Security == "on"]
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_GetGPOListW == "on"]
+public unsafe func Windows_GetGPOListW(hToken: CPointer<Unit>, lpName: CPointer<UInt16>, lpHostName: CPointer<UInt16>, lpComputerName: CPointer<UInt16>, dwFlags: UInt32, pGPOList: CPointer<CPointer<GROUP_POLICY_OBJECTWAbi>>): Int32 {
+    return GetGPOListW(hToken, lpName, lpHostName, lpComputerName, dwFlags, pGPOList)
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_LeaveCriticalPolicySection == "on"]
 foreign {
-    // param-hint: pMachineName optional
-    // param-hint: pSidUser optional
-    func GetAppliedGPOListA(dwFlags: UInt32, pMachineName: CPointer<UInt8>, pSidUser: Win32_Security.PSID, pGuidExtension: CPointer<GUID>, ppGPOList: CPointer<CPointer<GROUP_POLICY_OBJECTAAbi>>): UInt32
-    // param-hint: pMachineName optional
-    // param-hint: pSidUser optional
-    func GetAppliedGPOListW(dwFlags: UInt32, pMachineName: CPointer<UInt16>, pSidUser: Win32_Security.PSID, pGuidExtension: CPointer<GUID>, ppGPOList: CPointer<CPointer<GROUP_POLICY_OBJECTWAbi>>): UInt32
+    // pinvoke-hint: SetLastError
+    func LeaveCriticalPolicySection(hSection: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_LeaveCriticalPolicySection == "on"]
+public unsafe func Windows_LeaveCriticalPolicySection(hSection: CPointer<Unit>): Int32 {
+    return LeaveCriticalPolicySection(hSection)
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_ProcessGroupPolicyCompleted == "on"]
+foreign {
+    func ProcessGroupPolicyCompleted(extensionId: CPointer<GUID>, pAsyncHandle: UIntNative, dwStatus: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_ProcessGroupPolicyCompleted == "on"]
+public unsafe func Windows_ProcessGroupPolicyCompleted(extensionId: CPointer<GUID>, pAsyncHandle: UIntNative, dwStatus: UInt32): UInt32 {
+    return ProcessGroupPolicyCompleted(extensionId, pAsyncHandle, dwStatus)
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_ProcessGroupPolicyCompletedEx == "on"]
+foreign {
+    func ProcessGroupPolicyCompletedEx(extensionId: CPointer<GUID>, pAsyncHandle: UIntNative, dwStatus: UInt32, RsopStatus: Int32): UInt32
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_ProcessGroupPolicyCompletedEx == "on"]
+public unsafe func Windows_ProcessGroupPolicyCompletedEx(extensionId: CPointer<GUID>, pAsyncHandle: UIntNative, dwStatus: UInt32, RsopStatus: Int32): UInt32 {
+    return ProcessGroupPolicyCompletedEx(extensionId, pAsyncHandle, dwStatus, RsopStatus)
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_RefreshPolicy == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func RefreshPolicy(bMachine: Int32): Int32
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_RefreshPolicy == "on"]
+public unsafe func Windows_RefreshPolicy(bMachine: Int32): Int32 {
+    return RefreshPolicy(bMachine)
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_RefreshPolicyEx == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func RefreshPolicyEx(bMachine: Int32, dwOptions: UInt32): Int32
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_RefreshPolicyEx == "on"]
+public unsafe func Windows_RefreshPolicyEx(bMachine: Int32, dwOptions: UInt32): Int32 {
+    return RefreshPolicyEx(bMachine, dwOptions)
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_RegisterGPNotification == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func RegisterGPNotification(hEvent: CPointer<Unit>, bMachine: Int32): Int32
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_RegisterGPNotification == "on"]
+public unsafe func Windows_RegisterGPNotification(hEvent: CPointer<Unit>, bMachine: Int32): Int32 {
+    return RegisterGPNotification(hEvent, bMachine)
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_RsopAccessCheckByType == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: pPrincipalSelfSid optional
     // param-hint: pObjectTypeList len=param[5] optional
     // param-hint: pPrivilegeSet bytes=param[8] optional
@@ -6125,11 +6345,51 @@ foreign {
     func RsopAccessCheckByType(pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, pPrincipalSelfSid: Win32_Security.PSID, pRsopToken: CPointer<Unit>, dwDesiredAccessMask: UInt32, pObjectTypeList: CPointer<Win32_Security.OBJECT_TYPE_LISTAbi>, ObjectTypeListLength: UInt32, pGenericMapping: CPointer<Win32_Security.GENERIC_MAPPINGAbi>, pPrivilegeSet: CPointer<Win32_Security.PRIVILEGE_SETAbi>, pdwPrivilegeSetLength: CPointer<UInt32>, pdwGrantedAccessMask: CPointer<UInt32>, pbAccessStatus: CPointer<Int32>): Int32
 }
 
-@When[USERENV == "on" && Windows_Win32_System_Wmi == "on"]
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_RsopAccessCheckByType == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_RsopAccessCheckByType(pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, pPrincipalSelfSid: Win32_Security.PSID, pRsopToken: CPointer<Unit>, dwDesiredAccessMask: UInt32, pObjectTypeList: CPointer<Win32_Security.OBJECT_TYPE_LISTAbi>, ObjectTypeListLength: UInt32, pGenericMapping: CPointer<Win32_Security.GENERIC_MAPPINGAbi>, pPrivilegeSet: CPointer<Win32_Security.PRIVILEGE_SETAbi>, pdwPrivilegeSetLength: CPointer<UInt32>, pdwGrantedAccessMask: CPointer<UInt32>, pbAccessStatus: CPointer<Int32>): Int32 {
+    return RsopAccessCheckByType(pSecurityDescriptor, pPrincipalSelfSid, pRsopToken, dwDesiredAccessMask, pObjectTypeList, ObjectTypeListLength, pGenericMapping, pPrivilegeSet, pdwPrivilegeSetLength, pdwGrantedAccessMask, pbAccessStatus)
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_RsopFileAccessCheck == "on"]
+foreign {
+    func RsopFileAccessCheck(pszFileName: CPointer<UInt16>, pRsopToken: CPointer<Unit>, dwDesiredAccessMask: UInt32, pdwGrantedAccessMask: CPointer<UInt32>, pbAccessStatus: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_RsopFileAccessCheck == "on"]
+public unsafe func Windows_RsopFileAccessCheck(pszFileName: CPointer<UInt16>, pRsopToken: CPointer<Unit>, dwDesiredAccessMask: UInt32, pdwGrantedAccessMask: CPointer<UInt32>, pbAccessStatus: CPointer<Int32>): Int32 {
+    return RsopFileAccessCheck(pszFileName, pRsopToken, dwDesiredAccessMask, pdwGrantedAccessMask, pbAccessStatus)
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_RsopResetPolicySettingStatus == "on" && Windows_Win32_System_Wmi == "on"]
 foreign {
     func RsopResetPolicySettingStatus(dwFlags: UInt32, pServices: CPointer<Unit>, pSettingInstance: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_RsopResetPolicySettingStatus == "on" && Windows_Win32_System_Wmi == "on"]
+public unsafe func Windows_RsopResetPolicySettingStatus(dwFlags: UInt32, pServices: CPointer<Unit>, pSettingInstance: CPointer<Unit>): Int32 {
+    return RsopResetPolicySettingStatus(dwFlags, pServices, pSettingInstance)
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_RsopSetPolicySettingStatus == "on" && Windows_Win32_System_Wmi == "on"]
+foreign {
     // param-hint: pStatus len=param[3]
     func RsopSetPolicySettingStatus(dwFlags: UInt32, pServices: CPointer<Unit>, pSettingInstance: CPointer<Unit>, nInfo: UInt32, pStatus: CPointer<POLICYSETTINGSTATUSINFOAbi>): Int32
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_RsopSetPolicySettingStatus == "on" && Windows_Win32_System_Wmi == "on"]
+public unsafe func Windows_RsopSetPolicySettingStatus(dwFlags: UInt32, pServices: CPointer<Unit>, pSettingInstance: CPointer<Unit>, nInfo: UInt32, pStatus: CPointer<POLICYSETTINGSTATUSINFOAbi>): Int32 {
+    return RsopSetPolicySettingStatus(dwFlags, pServices, pSettingInstance, nInfo, pStatus)
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_UnregisterGPNotification == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func UnregisterGPNotification(hEvent: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_GroupPolicy == "on" && USERENV == "on" && Windows_Win32_System_GroupPolicy_UnregisterGPNotification == "on"]
+public unsafe func Windows_UnregisterGPNotification(hEvent: CPointer<Unit>): Int32 {
+    return UnregisterGPNotification(hEvent)
 }
 
 @When[Windows_Win32_System_GroupPolicy == "on"]

@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -1142,14 +1141,25 @@ extend IGpioPinProviderValueChangedEventArgsFactory <: windows_core.Interface<IG
 @C
 public struct IGpioProviderVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetControllers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetControllers: UIntNative = UIntNative(0)
     public init() {}
 
+    @When[Windows_Foundation_Collections == "on"]
     public static func new<Identity>(offset!: Int64 = 0): IGpioProviderVtbl where Identity <: IGpioProvider_Impl {
         let _ = offset
         var vtbl = IGpioProviderVtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.GetControllers = { instanceRaw, result__ =>
+        vtbl = IGpioProviderVtbl.__assignGetControllers<Identity>(vtbl)
+        return vtbl
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections == "on"]
+    public static func __assignGetControllers<Identity>(vtbl: IGpioProviderVtbl): IGpioProviderVtbl where Identity <: IGpioProvider_Impl {
+        var next = vtbl
+        next.GetControllers = { instanceRaw, result__ =>
             match (unsafe { asImplFromRaw<IGpioProvider_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
                     impl.__winrtThunk_GetControllers(result__)
@@ -1157,6 +1167,11 @@ public struct IGpioProviderVtbl {
                     E_NOINTERFACE.value
             }
         }
+        return next
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections != "on"]
+    public static func __assignGetControllers<Identity>(vtbl: IGpioProviderVtbl): IGpioProviderVtbl where Identity <: IGpioProvider_Impl {
         return vtbl
     }
 
@@ -1168,12 +1183,12 @@ public struct IGpioProviderVtbl {
     }
 }
 
-@When[Windows_Devices_Gpio_Provider == "on"]
+@When[Windows_Devices_Gpio_Provider == "on" && Windows_Foundation_Collections == "on"]
 public interface IGpioProvider_ImplErased {
     public func __winrtThunk_GetControllers(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Devices_Gpio_Provider == "on"]
+@When[Windows_Devices_Gpio_Provider == "on" && Windows_Foundation_Collections == "on"]
 public interface IGpioProvider_Impl <: IGpioProvider_ImplErased {
     public func GetControllers(): windows_core.Result<windows_collections.IVectorView<IGpioControllerProvider>>
 
@@ -1261,6 +1276,7 @@ public class IGpioProvider <: InterfaceWrapperBase & ComInterface & RuntimeName 
         readVtbl<IGpioProviderVtbl>(IGpioProviderVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetControllers(): windows_collections.IVectorView<IGpioControllerProvider> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

@@ -500,8 +500,9 @@ func winrtStructFieldAbiType(
             return highLevelAbiType(index, ty)
         case MetadataType.ValueName(typeName) =>
             if (!typeName.namespace.isEmpty()) {
-                if (isProjectedWinrtValueType(index, typeName)) {
-                    return appendSourceIdentifierSuffix(highLevelType(index, ty), "Abi")
+                match (functionProjectedAbiTypeName(index, typeName)) {
+                    case Some(abiType) => return abiType
+                    case None => ()
                 }
                 return highLevelAbiType(index, ty)
             }
@@ -515,8 +516,9 @@ func winrtStructFieldAbiType(
             }
         case MetadataType.Union(typeName) =>
             if (!typeName.namespace.isEmpty()) {
-                if (isProjectedWinrtValueType(index, typeName)) {
-                    return appendSourceIdentifierSuffix(highLevelType(index, ty), "Abi")
+                match (functionProjectedAbiTypeName(index, typeName)) {
+                    case Some(abiType) => return abiType
+                    case None => ()
                 }
                 return highLevelAbiType(index, ty)
             }

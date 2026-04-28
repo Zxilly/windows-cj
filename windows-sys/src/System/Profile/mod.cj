@@ -12,6 +12,7 @@ import windows_sys._impl_l1 as _impl_l1
 @C
 public struct IAnalyticsInfoStatics2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSystemPropertiesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -56,6 +57,7 @@ public class IAnalyticsInfoStatics2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IAnalyticsInfoStatics2Vtbl>(IAnalyticsInfoStatics2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSystemPropertiesAsync(attributeNames: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -517,6 +519,7 @@ public class IKnownRetailInfoPropertiesStatics <: InterfaceWrapperBase & ComInte
 public struct IRetailInfoStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var IsDemoModeEnabled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -567,6 +570,7 @@ public class IRetailInfoStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.IsDemoModeEnabled(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1468,6 +1472,7 @@ public class IUnsupportedAppRequirement <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IAppApplicabilityStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetUnsupportedAppRequirements: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -1512,6 +1517,7 @@ public class IAppApplicabilityStatics <: InterfaceWrapperBase & ComInterface {
         readVtbl<IAppApplicabilityStaticsVtbl>(IAppApplicabilityStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetUnsupportedAppRequirements(capabilities: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

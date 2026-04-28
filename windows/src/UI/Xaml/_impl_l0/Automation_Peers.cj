@@ -944,6 +944,7 @@ public class AutomationPeer <: InterfaceWrapperBase & ComInterface & windows_int
         return defaultInterface().GetBoundingRectangle()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetChildren(): windows_collections.IVector<AutomationPeer> {
         return defaultInterface().GetChildren()
     }
@@ -1648,7 +1649,10 @@ public struct IAutomationPeerVtbl {
     public var GetAutomationControlType: CFunc<(CPointer<Unit>, CPointer<AutomationControlTypeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetAutomationId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetBoundingRectangle: CFunc<(CPointer<Unit>, CPointer<windows_future.RectAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetChildren: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetChildren: UIntNative = UIntNative(0)
     public var GetClassName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetClickablePoint: CFunc<(CPointer<Unit>, CPointer<windows_future.PointAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetHelpText: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1814,6 +1818,7 @@ public class IAutomationPeer <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<windows_future.Rect>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetChildren(): windows_collections.IVector<AutomationPeer> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2082,12 +2087,18 @@ public struct IAutomationPeer3Vtbl {
     public var GetElementFromPoint: CFunc<(CPointer<Unit>, windows_future.PointAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var GetFocusedElement: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ShowContextMenu: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetControlledPeers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetControlledPeers: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAnnotations: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAnnotations: UIntNative = UIntNative(0)
     public var SetParent: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Xaml_Automation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Automation == "on"]
     public var RaiseTextEditTextChangedEvent: CFunc<(CPointer<Unit>, AutomationTextEditChangeTypeAbi, CPointer<Unit>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Xaml_Automation != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_UI_Xaml_Automation != "on"]
     public var RaiseTextEditTextChangedEvent: UIntNative = UIntNative(0)
     public var GetPositionInSet: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetSizeOfSet: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -2191,6 +2202,7 @@ public class IAutomationPeer3 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetControlledPeers(): windows_collections.IVectorView<AutomationPeer> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2199,6 +2211,7 @@ public class IAutomationPeer3 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_collections.IVectorView<AutomationPeer>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAnnotations(): windows_collections.IVector<AutomationPeerAnnotation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2213,7 +2226,7 @@ public class IAutomationPeer3 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         HRESULT(hr).ok()
     }
 
-    @When[Windows_UI_Xaml_Automation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Automation == "on"]
     public unsafe func RaiseTextEditTextChangedEvent(automationTextEditChangeType: AutomationTextEditChangeType, changedData: windows_collections.IVectorView<windows_core.HString>): Unit {
         let v = vtbl()
         let hr = v.RaiseTextEditTextChangedEvent(asRaw(), windows_core.projectTypedAbi(automationTextEditChangeType, windows_core.typeMarker<AutomationTextEditChangeType>()), changedData.asRaw())
@@ -3204,7 +3217,10 @@ public struct IAutomationPeerOverridesVtbl {
     public var GetAutomationControlTypeCore: CFunc<(CPointer<Unit>, CPointer<AutomationControlTypeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetAutomationIdCore: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetBoundingRectangleCore: CFunc<(CPointer<Unit>, CPointer<windows_future.RectAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetChildrenCore: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetChildrenCore: UIntNative = UIntNative(0)
     public var GetClassNameCore: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetClickablePointCore: CFunc<(CPointer<Unit>, CPointer<windows_future.PointAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetHelpTextCore: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -3341,6 +3357,7 @@ public class IAutomationPeerOverrides <: InterfaceWrapperBase & ComInterface & R
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<windows_future.Rect>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetChildrenCore(): windows_collections.IVector<AutomationPeer> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3516,7 +3533,10 @@ extend IAutomationPeerOverrides <: windows_core.Interface<IAutomationPeerOverrid
 public struct IAutomationPeerOverrides2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var ShowContextMenuCore: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetControlledPeersCore: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetControlledPeersCore: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3591,6 +3611,7 @@ public class IAutomationPeerOverrides2 <: InterfaceWrapperBase & ComInterface & 
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetControlledPeersCore(): windows_collections.IVectorView<AutomationPeer> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3610,7 +3631,10 @@ public struct IAutomationPeerOverrides3Vtbl {
     public var NavigateCore: CFunc<(CPointer<Unit>, AutomationNavigationDirectionAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var GetElementFromPointCore: CFunc<(CPointer<Unit>, windows_future.PointAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var GetFocusedElementCore: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAnnotationsCore: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAnnotationsCore: UIntNative = UIntNative(0)
     public var GetPositionInSetCore: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetSizeOfSetCore: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetLevelCore: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -3706,6 +3730,7 @@ public class IAutomationPeerOverrides3 <: InterfaceWrapperBase & ComInterface & 
         return IInspectable.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAnnotationsCore(): windows_collections.IVector<AutomationPeerAnnotation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3843,9 +3868,18 @@ public struct IAutomationPeerOverrides5Vtbl {
     public var IsPeripheralCore: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsDataValidForFormCore: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetFullDescriptionCore: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetDescribedByCore: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetDescribedByCore: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetFlowsToCore: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetFlowsToCore: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetFlowsFromCore: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetFlowsFromCore: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3938,6 +3972,7 @@ public class IAutomationPeerOverrides5 <: InterfaceWrapperBase & ComInterface & 
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetDescribedByCore(): windows_collections.IIterable<AutomationPeer> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3946,6 +3981,7 @@ public class IAutomationPeerOverrides5 <: InterfaceWrapperBase & ComInterface & 
         return windows_collections.IIterable<AutomationPeer>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetFlowsToCore(): windows_collections.IIterable<AutomationPeer> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3954,6 +3990,7 @@ public class IAutomationPeerOverrides5 <: InterfaceWrapperBase & ComInterface & 
         return windows_collections.IIterable<AutomationPeer>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetFlowsFromCore(): windows_collections.IIterable<AutomationPeer> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

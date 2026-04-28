@@ -3,4 +3,3 @@ package windows_sys.Media.Transcoding
 
 @When[Windows_Media_Transcoding == "on"]
 public import windows_sys.Media._impl_l0.{IMediaTranscoder, IMediaTranscoder2, IMediaTranscoder2Vtbl, IMediaTranscoderVtbl, IPrepareTranscodeResult, IPrepareTranscodeResultVtbl, MediaVideoProcessingAlgorithm, MediaVideoProcessingAlgorithm_Default, MediaVideoProcessingAlgorithm_MrfCrf444, TranscodeFailureReason, TranscodeFailureReason_CodecNotFound, TranscodeFailureReason_InvalidProfile, TranscodeFailureReason_None, TranscodeFailureReason_Unknown}
-

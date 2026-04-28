@@ -3,10 +3,8 @@ package windows_sys.Perception.Spatial
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Foundation_Numerics == "on"]
 import windows_sys.Foundation.Numerics as Foundation_Numerics
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_Perception == "on"]
 import windows_sys.Perception as Perception
 import windows_sys._impl_l0 as _impl_l0
 import windows_sys._impl_l2 as _impl_l2
@@ -1021,6 +1019,7 @@ public class ISpatialAnchorStatics <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ISpatialAnchorStoreVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAllSavedAnchors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var TrySave: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _, _ => 0 }
     public var Remove: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -1068,6 +1067,7 @@ public class ISpatialAnchorStore <: InterfaceWrapperBase & ComInterface {
         readVtbl<ISpatialAnchorStoreVtbl>(ISpatialAnchorStoreVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAllSavedAnchors(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1097,9 +1097,9 @@ public class ISpatialAnchorStore <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ISpatialAnchorTransferManagerStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var TryImportAnchorsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var TryExportAnchorsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var RequestAccessAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -1145,14 +1145,14 @@ public class ISpatialAnchorTransferManagerStatics <: InterfaceWrapperBase & ComI
         readVtbl<ISpatialAnchorTransferManagerStaticsVtbl>(ISpatialAnchorTransferManagerStaticsVtbl())
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func TryImportAnchorsAsync(stream: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TryImportAnchorsAsync(__liveRaw, stream, result__)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func TryExportAnchorsAsync(anchors: CPointer<Unit>, stream: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

@@ -10,17 +10,11 @@ import windows_interface.{GUID}
 import windows_interface as windows_interface
 import windows_polyfill.{packedReadInt64, packedReadUInt32, packedReadUInt64, packedReadUInt8, packedReadValue, packedWriteInt64, packedWriteUInt32, packedWriteUInt64, packedWriteUInt8, packedWriteValue, unionReadUInt16, unionWriteUInt16}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Data_HtmlHelp == "on"]
 import windows.Win32.Data.HtmlHelp as Win32_Data_HtmlHelp
-@When[Windows_Win32_Devices_Properties == "on"]
 import windows.Win32.Devices.Properties as Win32_Devices_Properties
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-@When[Windows_Win32_System_Registry == "on"]
 import windows.Win32.System.Registry as Win32_System_Registry
-@When[Windows_Win32_System_SystemInformation == "on"]
 import windows.Win32.System.SystemInformation as Win32_System_SystemInformation
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
@@ -11190,584 +11184,2841 @@ public type PCM_NOTIFY_CALLBACK = CFunc<(HCMNOTIFICATION, CPointer<Unit>, CM_NOT
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && ((arch == "x86_64" || arch == "aarch64"))]
 public type PSP_DETSIG_CMPPROC = CFunc<(HDEVINFO, CPointer<SP_DEVINFO_DATAAbi>, CPointer<SP_DEVINFO_DATAAbi>, CPointer<Unit>) -> UInt32>
 
-@When[CFGMGR32 == "on"]
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CMP_WaitNoPendingInstallEvents == "on"]
 foreign {
     func CMP_WaitNoPendingInstallEvents(dwTimeout: UInt32): UInt32
-    func CM_Add_IDA(dnDevInst: UInt32, pszID: CPointer<UInt8>, ulFlags: UInt32): CONFIGRETAbi
-    func CM_Add_IDW(dnDevInst: UInt32, pszID: CPointer<UInt16>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Add_ID_ExA(dnDevInst: UInt32, pszID: CPointer<UInt8>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Add_ID_ExW(dnDevInst: UInt32, pszID: CPointer<UInt16>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Add_Range(ullStartValue: UInt64, ullEndValue: UInt64, rlh: UIntNative, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: prdResDes optional
-    // param-hint: ResourceData bytes=param[4]
-    func CM_Add_Res_Des(prdResDes: CPointer<UIntNative>, lcLogConf: UIntNative, ResourceID: UInt32, ResourceData: CPointer<Unit>, ResourceLen: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: prdResDes optional
-    // param-hint: ResourceData bytes=param[4]
-    // param-hint: hMachine optional
-    func CM_Add_Res_Des_Ex(prdResDes: CPointer<UIntNative>, lcLogConf: UIntNative, ResourceID: UInt32, ResourceData: CPointer<Unit>, ResourceLen: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: UNCServerName optional
-    func CM_Connect_MachineA(UNCServerName: CPointer<UInt8>, phMachine: CPointer<IntNative>): CONFIGRETAbi
-    // param-hint: UNCServerName optional
-    func CM_Connect_MachineW(UNCServerName: CPointer<UInt16>, phMachine: CPointer<IntNative>): CONFIGRETAbi
-    func CM_Create_DevNodeA(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt8>, dnParent: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    func CM_Create_DevNodeW(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt16>, dnParent: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Create_DevNode_ExA(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt8>, dnParent: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Create_DevNode_ExW(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt16>, dnParent: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Create_Range_List(prlh: CPointer<UIntNative>, ulFlags: UInt32): CONFIGRETAbi
-    func CM_Delete_Class_Key(ClassGuid: CPointer<GUID>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Delete_Class_Key_Ex(ClassGuid: CPointer<GUID>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Delete_DevNode_Key(dnDevNode: UInt32, ulHardwareProfile: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Delete_DevNode_Key_Ex(dnDevNode: UInt32, ulHardwareProfile: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Delete_Device_Interface_KeyA(pszDeviceInterface: CPointer<UInt8>, ulFlags: UInt32): CONFIGRETAbi
-    func CM_Delete_Device_Interface_KeyW(pszDeviceInterface: CPointer<UInt16>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Delete_Device_Interface_Key_ExA(pszDeviceInterface: CPointer<UInt8>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Delete_Device_Interface_Key_ExW(pszDeviceInterface: CPointer<UInt16>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Delete_Range(ullStartValue: UInt64, ullEndValue: UInt64, rlh: UIntNative, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: ResourceData bytes=param[3]
-    func CM_Detect_Resource_Conflict(dnDevInst: UInt32, ResourceID: UInt32, ResourceData: CPointer<Unit>, ResourceLen: UInt32, pbConflictDetected: CPointer<Int32>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: ResourceData bytes=param[3]
-    // param-hint: hMachine optional
-    func CM_Detect_Resource_Conflict_Ex(dnDevInst: UInt32, ResourceID: UInt32, ResourceData: CPointer<Unit>, ResourceLen: UInt32, pbConflictDetected: CPointer<Int32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Disable_DevNode(dnDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Disable_DevNode_Ex(dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Disconnect_Machine(hMachine: IntNative): CONFIGRETAbi
-    func CM_Dup_Range_List(rlhOld: UIntNative, rlhNew: UIntNative, ulFlags: UInt32): CONFIGRETAbi
-    func CM_Enable_DevNode(dnDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Enable_DevNode_Ex(dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Enumerate_Classes(ulClassIndex: UInt32, ClassGuid: CPointer<GUID>, ulFlags: CM_ENUMERATE_FLAGSAbi): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Enumerate_Classes_Ex(ulClassIndex: UInt32, ClassGuid: CPointer<GUID>, ulFlags: CM_ENUMERATE_FLAGSAbi, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: Buffer len=param[2]
-    func CM_Enumerate_EnumeratorsA(ulEnumIndex: UInt32, Buffer: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: Buffer len=param[2]
-    func CM_Enumerate_EnumeratorsW(ulEnumIndex: UInt32, Buffer: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: Buffer len=param[2]
-    // param-hint: hMachine optional
-    func CM_Enumerate_Enumerators_ExA(ulEnumIndex: UInt32, Buffer: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: Buffer len=param[2]
-    // param-hint: hMachine optional
-    func CM_Enumerate_Enumerators_ExW(ulEnumIndex: UInt32, Buffer: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Find_Range(pullStart: CPointer<UInt64>, ullStart: UInt64, ulLength: UInt32, ullAlignment: UInt64, ullEnd: UInt64, rlh: UIntNative, ulFlags: UInt32): CONFIGRETAbi
-    func CM_First_Range(rlh: UIntNative, pullStart: CPointer<UInt64>, pullEnd: CPointer<UInt64>, preElement: CPointer<UIntNative>, ulFlags: UInt32): CONFIGRETAbi
-    func CM_Free_Log_Conf(lcLogConfToBeFreed: UIntNative, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Free_Log_Conf_Ex(lcLogConfToBeFreed: UIntNative, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Free_Log_Conf_Handle(lcLogConf: UIntNative): CONFIGRETAbi
-    func CM_Free_Range_List(rlh: UIntNative, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: prdResDes optional
-    func CM_Free_Res_Des(prdResDes: CPointer<UIntNative>, rdResDes: UIntNative, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: prdResDes optional
-    // param-hint: hMachine optional
-    func CM_Free_Res_Des_Ex(prdResDes: CPointer<UIntNative>, rdResDes: UIntNative, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Free_Res_Des_Handle(rdResDes: UIntNative): CONFIGRETAbi
-    func CM_Free_Resource_Conflict_Handle(clConflictList: UIntNative): CONFIGRETAbi
-    func CM_Get_Child(pdnDevInst: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Get_Child_Ex(pdnDevInst: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: pszKeyName len=param[2] optional
-    func CM_Get_Class_Key_NameA(ClassGuid: CPointer<GUID>, pszKeyName: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: pszKeyName len=param[2] optional
-    func CM_Get_Class_Key_NameW(ClassGuid: CPointer<GUID>, pszKeyName: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: pszKeyName len=param[2] optional
-    // param-hint: hMachine optional
-    func CM_Get_Class_Key_Name_ExA(ClassGuid: CPointer<GUID>, pszKeyName: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: pszKeyName len=param[2] optional
-    // param-hint: hMachine optional
-    func CM_Get_Class_Key_Name_ExW(ClassGuid: CPointer<GUID>, pszKeyName: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: Buffer len=param[2] optional
-    func CM_Get_Class_NameA(ClassGuid: CPointer<GUID>, Buffer: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: Buffer len=param[2] optional
-    func CM_Get_Class_NameW(ClassGuid: CPointer<GUID>, Buffer: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: Buffer len=param[2] optional
-    // param-hint: hMachine optional
-    func CM_Get_Class_Name_ExA(ClassGuid: CPointer<GUID>, Buffer: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: Buffer len=param[2] optional
-    // param-hint: hMachine optional
-    func CM_Get_Class_Name_ExW(ClassGuid: CPointer<GUID>, Buffer: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: PropertyKeyArray len=param[2] optional
-    func CM_Get_Class_Property_Keys(ClassGUID: CPointer<GUID>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyKeyCount: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: PropertyKeyArray len=param[2] optional
-    // param-hint: hMachine optional
-    func CM_Get_Class_Property_Keys_Ex(ClassGUID: CPointer<GUID>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyKeyCount: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: pulRegDataType optional
-    // param-hint: Buffer bytes=param[4] optional
-    // param-hint: hMachine optional
-    func CM_Get_Class_Registry_PropertyA(ClassGuid: CPointer<GUID>, ulProperty: UInt32, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: pulRegDataType optional
-    // param-hint: Buffer bytes=param[4] optional
-    // param-hint: hMachine optional
-    func CM_Get_Class_Registry_PropertyW(ClassGuid: CPointer<GUID>, ulProperty: UInt32, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Get_Depth(pulDepth: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Get_Depth_Ex(pulDepth: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: pulRegDataType optional
-    // param-hint: Buffer bytes=param[4] optional
-    func CM_Get_DevNode_Custom_PropertyA(dnDevInst: UInt32, pszCustomPropertyName: CPointer<UInt8>, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: pulRegDataType optional
-    // param-hint: Buffer bytes=param[4] optional
-    func CM_Get_DevNode_Custom_PropertyW(dnDevInst: UInt32, pszCustomPropertyName: CPointer<UInt16>, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: pulRegDataType optional
-    // param-hint: Buffer bytes=param[4] optional
-    // param-hint: hMachine optional
-    func CM_Get_DevNode_Custom_Property_ExA(dnDevInst: UInt32, pszCustomPropertyName: CPointer<UInt8>, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: pulRegDataType optional
-    // param-hint: Buffer bytes=param[4] optional
-    // param-hint: hMachine optional
-    func CM_Get_DevNode_Custom_Property_ExW(dnDevInst: UInt32, pszCustomPropertyName: CPointer<UInt16>, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: PropertyKeyArray len=param[2] optional
-    func CM_Get_DevNode_Property_Keys(dnDevInst: UInt32, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyKeyCount: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: PropertyKeyArray len=param[2] optional
-    // param-hint: hMachine optional
-    func CM_Get_DevNode_Property_Keys_Ex(dnDevInst: UInt32, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyKeyCount: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: pulRegDataType optional
-    // param-hint: Buffer bytes=param[4] optional
-    func CM_Get_DevNode_Registry_PropertyA(dnDevInst: UInt32, ulProperty: UInt32, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: pulRegDataType optional
-    // param-hint: Buffer bytes=param[4] optional
-    func CM_Get_DevNode_Registry_PropertyW(dnDevInst: UInt32, ulProperty: UInt32, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: pulRegDataType optional
-    // param-hint: Buffer bytes=param[4] optional
-    // param-hint: hMachine optional
-    func CM_Get_DevNode_Registry_Property_ExA(dnDevInst: UInt32, ulProperty: UInt32, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: pulRegDataType optional
-    // param-hint: Buffer bytes=param[4] optional
-    // param-hint: hMachine optional
-    func CM_Get_DevNode_Registry_Property_ExW(dnDevInst: UInt32, ulProperty: UInt32, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Get_DevNode_Status(pulStatus: CPointer<CM_DEVNODE_STATUS_FLAGSAbi>, pulProblemNumber: CPointer<CM_PROBAbi>, dnDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Get_DevNode_Status_Ex(pulStatus: CPointer<CM_DEVNODE_STATUS_FLAGSAbi>, pulProblemNumber: CPointer<CM_PROBAbi>, dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: Buffer len=param[2]
-    func CM_Get_Device_IDA(dnDevInst: UInt32, Buffer: CPointer<UInt8>, BufferLen: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: Buffer len=param[2]
-    func CM_Get_Device_IDW(dnDevInst: UInt32, Buffer: CPointer<UInt16>, BufferLen: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: Buffer len=param[2]
-    // param-hint: hMachine optional
-    func CM_Get_Device_ID_ExA(dnDevInst: UInt32, Buffer: CPointer<UInt8>, BufferLen: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: Buffer len=param[2]
-    // param-hint: hMachine optional
-    func CM_Get_Device_ID_ExW(dnDevInst: UInt32, Buffer: CPointer<UInt16>, BufferLen: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: pszFilter optional
-    // param-hint: Buffer len=param[2]
-    func CM_Get_Device_ID_ListA(pszFilter: CPointer<UInt8>, Buffer: CPointer<UInt8>, BufferLen: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: pszFilter optional
-    // param-hint: Buffer len=param[2]
-    func CM_Get_Device_ID_ListW(pszFilter: CPointer<UInt16>, Buffer: CPointer<UInt16>, BufferLen: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: pszFilter optional
-    // param-hint: Buffer len=param[2]
-    // param-hint: hMachine optional
-    func CM_Get_Device_ID_List_ExA(pszFilter: CPointer<UInt8>, Buffer: CPointer<UInt8>, BufferLen: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: pszFilter optional
-    // param-hint: Buffer len=param[2]
-    // param-hint: hMachine optional
-    func CM_Get_Device_ID_List_ExW(pszFilter: CPointer<UInt16>, Buffer: CPointer<UInt16>, BufferLen: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: pszFilter optional
-    func CM_Get_Device_ID_List_SizeA(pulLen: CPointer<UInt32>, pszFilter: CPointer<UInt8>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: pszFilter optional
-    func CM_Get_Device_ID_List_SizeW(pulLen: CPointer<UInt32>, pszFilter: CPointer<UInt16>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: pszFilter optional
-    // param-hint: hMachine optional
-    func CM_Get_Device_ID_List_Size_ExA(pulLen: CPointer<UInt32>, pszFilter: CPointer<UInt8>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: pszFilter optional
-    // param-hint: hMachine optional
-    func CM_Get_Device_ID_List_Size_ExW(pulLen: CPointer<UInt32>, pszFilter: CPointer<UInt16>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Get_Device_ID_Size(pulLen: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Get_Device_ID_Size_Ex(pulLen: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: pszAliasDeviceInterface len=param[3]
-    func CM_Get_Device_Interface_AliasA(pszDeviceInterface: CPointer<UInt8>, AliasInterfaceGuid: CPointer<GUID>, pszAliasDeviceInterface: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: pszAliasDeviceInterface len=param[3]
-    func CM_Get_Device_Interface_AliasW(pszDeviceInterface: CPointer<UInt16>, AliasInterfaceGuid: CPointer<GUID>, pszAliasDeviceInterface: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: pszAliasDeviceInterface len=param[3]
-    // param-hint: hMachine optional
-    func CM_Get_Device_Interface_Alias_ExA(pszDeviceInterface: CPointer<UInt8>, AliasInterfaceGuid: CPointer<GUID>, pszAliasDeviceInterface: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: pszAliasDeviceInterface len=param[3]
-    // param-hint: hMachine optional
-    func CM_Get_Device_Interface_Alias_ExW(pszDeviceInterface: CPointer<UInt16>, AliasInterfaceGuid: CPointer<GUID>, pszAliasDeviceInterface: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: pDeviceID optional
-    // param-hint: Buffer len=param[3]
-    func CM_Get_Device_Interface_ListA(InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt8>, Buffer: CPointer<UInt8>, BufferLen: UInt32, ulFlags: CM_GET_DEVICE_INTERFACE_LIST_FLAGSAbi): CONFIGRETAbi
-    // param-hint: pDeviceID optional
-    // param-hint: Buffer len=param[3]
-    func CM_Get_Device_Interface_ListW(InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt16>, Buffer: CPointer<UInt16>, BufferLen: UInt32, ulFlags: CM_GET_DEVICE_INTERFACE_LIST_FLAGSAbi): CONFIGRETAbi
-    // param-hint: pDeviceID optional
-    // param-hint: Buffer len=param[3]
-    // param-hint: hMachine optional
-    func CM_Get_Device_Interface_List_ExA(InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt8>, Buffer: CPointer<UInt8>, BufferLen: UInt32, ulFlags: CM_GET_DEVICE_INTERFACE_LIST_FLAGSAbi, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: pDeviceID optional
-    // param-hint: Buffer len=param[3]
-    // param-hint: hMachine optional
-    func CM_Get_Device_Interface_List_ExW(InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt16>, Buffer: CPointer<UInt16>, BufferLen: UInt32, ulFlags: CM_GET_DEVICE_INTERFACE_LIST_FLAGSAbi, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: pDeviceID optional
-    func CM_Get_Device_Interface_List_SizeA(pulLen: CPointer<UInt32>, InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt8>, ulFlags: CM_GET_DEVICE_INTERFACE_LIST_FLAGSAbi): CONFIGRETAbi
-    // param-hint: pDeviceID optional
-    func CM_Get_Device_Interface_List_SizeW(pulLen: CPointer<UInt32>, InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt16>, ulFlags: CM_GET_DEVICE_INTERFACE_LIST_FLAGSAbi): CONFIGRETAbi
-    // param-hint: pDeviceID optional
-    // param-hint: hMachine optional
-    func CM_Get_Device_Interface_List_Size_ExA(pulLen: CPointer<UInt32>, InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt8>, ulFlags: CM_GET_DEVICE_INTERFACE_LIST_FLAGSAbi, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: pDeviceID optional
-    // param-hint: hMachine optional
-    func CM_Get_Device_Interface_List_Size_ExW(pulLen: CPointer<UInt32>, InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt16>, ulFlags: CM_GET_DEVICE_INTERFACE_LIST_FLAGSAbi, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: PropertyKeyArray len=param[2] optional
-    func CM_Get_Device_Interface_Property_KeysW(pszDeviceInterface: CPointer<UInt16>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyKeyCount: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: PropertyKeyArray len=param[2] optional
-    // param-hint: hMachine optional
-    func CM_Get_Device_Interface_Property_Keys_ExW(pszDeviceInterface: CPointer<UInt16>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyKeyCount: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: plcLogConf optional
-    func CM_Get_First_Log_Conf(plcLogConf: CPointer<UIntNative>, dnDevInst: UInt32, ulFlags: CM_LOG_CONFAbi): CONFIGRETAbi
-    // param-hint: plcLogConf optional
-    // param-hint: hMachine optional
-    func CM_Get_First_Log_Conf_Ex(plcLogConf: CPointer<UIntNative>, dnDevInst: UInt32, ulFlags: CM_LOG_CONFAbi, hMachine: IntNative): CONFIGRETAbi
-    func CM_Get_Global_State(pulState: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Get_Global_State_Ex(pulState: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Get_HW_Prof_FlagsA(pDeviceID: CPointer<UInt8>, ulHardwareProfile: UInt32, pulValue: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
-    func CM_Get_HW_Prof_FlagsW(pDeviceID: CPointer<UInt16>, ulHardwareProfile: UInt32, pulValue: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Get_HW_Prof_Flags_ExA(pDeviceID: CPointer<UInt8>, ulHardwareProfile: UInt32, pulValue: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Get_HW_Prof_Flags_ExW(pDeviceID: CPointer<UInt16>, ulHardwareProfile: UInt32, pulValue: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Get_Hardware_Profile_InfoA(ulIndex: UInt32, pHWProfileInfo: CPointer<HWPROFILEINFO_A>, ulFlags: UInt32): CONFIGRETAbi
-    func CM_Get_Hardware_Profile_InfoW(ulIndex: UInt32, pHWProfileInfo: CPointer<HWPROFILEINFO_W>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Get_Hardware_Profile_Info_ExA(ulIndex: UInt32, pHWProfileInfo: CPointer<HWPROFILEINFO_A>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Get_Hardware_Profile_Info_ExW(ulIndex: UInt32, pHWProfileInfo: CPointer<HWPROFILEINFO_W>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Get_Log_Conf_Priority(lcLogConf: UIntNative, pPriority: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Get_Log_Conf_Priority_Ex(lcLogConf: UIntNative, pPriority: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: plcLogConf optional
-    // param-hint: ulFlags reserved
-    func CM_Get_Next_Log_Conf(plcLogConf: CPointer<UIntNative>, lcLogConf: UIntNative, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: plcLogConf optional
-    // param-hint: ulFlags reserved
-    // param-hint: hMachine optional
-    func CM_Get_Next_Log_Conf_Ex(plcLogConf: CPointer<UIntNative>, lcLogConf: UIntNative, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: pResourceID optional
-    func CM_Get_Next_Res_Des(prdResDes: CPointer<UIntNative>, rdResDes: UIntNative, ForResource: CM_RESTYPEAbi, pResourceID: CPointer<CM_RESTYPEAbi>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: pResourceID optional
-    // param-hint: hMachine optional
-    func CM_Get_Next_Res_Des_Ex(prdResDes: CPointer<UIntNative>, rdResDes: UIntNative, ForResource: CM_RESTYPEAbi, pResourceID: CPointer<CM_RESTYPEAbi>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Get_Parent(pdnDevInst: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Get_Parent_Ex(pdnDevInst: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: Buffer bytes=param[2]
-    func CM_Get_Res_Des_Data(rdResDes: UIntNative, Buffer: CPointer<Unit>, BufferLen: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: Buffer bytes=param[2]
-    // param-hint: hMachine optional
-    func CM_Get_Res_Des_Data_Ex(rdResDes: UIntNative, Buffer: CPointer<Unit>, BufferLen: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Get_Res_Des_Data_Size(pulSize: CPointer<UInt32>, rdResDes: UIntNative, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Get_Res_Des_Data_Size_Ex(pulSize: CPointer<UInt32>, rdResDes: UIntNative, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Get_Resource_Conflict_Count(clConflictList: UIntNative, pulCount: CPointer<UInt32>): CONFIGRETAbi
-    func CM_Get_Resource_Conflict_DetailsA(clConflictList: UIntNative, ulIndex: UInt32, pConflictDetails: CPointer<CONFLICT_DETAILS_AAbi>): CONFIGRETAbi
-    func CM_Get_Resource_Conflict_DetailsW(clConflictList: UIntNative, ulIndex: UInt32, pConflictDetails: CPointer<CONFLICT_DETAILS_WAbi>): CONFIGRETAbi
-    func CM_Get_Sibling(pdnDevInst: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Get_Sibling_Ex(pdnDevInst: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // pinvoke-hint: SetLastError
-    func CM_Get_Version(): UInt16
-    // param-hint: hMachine optional
-    // pinvoke-hint: SetLastError
-    func CM_Get_Version_Ex(hMachine: IntNative): UInt16
-    func CM_Intersect_Range_List(rlhOld1: UIntNative, rlhOld2: UIntNative, rlhNew: UIntNative, ulFlags: UInt32): CONFIGRETAbi
-    func CM_Invert_Range_List(rlhOld: UIntNative, rlhNew: UIntNative, ullMaxValue: UInt64, ulFlags: UInt32): CONFIGRETAbi
-    func CM_Is_Dock_Station_Present(pbPresent: CPointer<Int32>): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Is_Dock_Station_Present_Ex(pbPresent: CPointer<Int32>, hMachine: IntNative): CONFIGRETAbi
-    func CM_Is_Version_Available(wVersion: UInt16): Int32
-    // param-hint: hMachine optional
-    func CM_Is_Version_Available_Ex(wVersion: UInt16, hMachine: IntNative): Int32
-    // param-hint: pDeviceID optional
-    func CM_Locate_DevNodeA(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt8>, ulFlags: CM_LOCATE_DEVNODE_FLAGSAbi): CONFIGRETAbi
-    // param-hint: pDeviceID optional
-    func CM_Locate_DevNodeW(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt16>, ulFlags: CM_LOCATE_DEVNODE_FLAGSAbi): CONFIGRETAbi
-    // param-hint: pDeviceID optional
-    // param-hint: hMachine optional
-    func CM_Locate_DevNode_ExA(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt8>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: pDeviceID optional
-    // param-hint: hMachine optional
-    func CM_Locate_DevNode_ExW(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt16>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_MapCrToWin32Err(CmReturnCode: CONFIGRETAbi, DefaultErr: UInt32): UInt32
-    func CM_Merge_Range_List(rlhOld1: UIntNative, rlhOld2: UIntNative, rlhNew: UIntNative, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: ResourceData bytes=param[4]
-    func CM_Modify_Res_Des(prdResDes: CPointer<UIntNative>, rdResDes: UIntNative, ResourceID: UInt32, ResourceData: CPointer<Unit>, ResourceLen: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: ResourceData bytes=param[4]
-    // param-hint: hMachine optional
-    func CM_Modify_Res_Des_Ex(prdResDes: CPointer<UIntNative>, rdResDes: UIntNative, ResourceID: UInt32, ResourceData: CPointer<Unit>, ResourceLen: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Move_DevNode(dnFromDevInst: UInt32, dnToDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Move_DevNode_Ex(dnFromDevInst: UInt32, dnToDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Next_Range(preElement: CPointer<UIntNative>, pullStart: CPointer<UInt64>, pullEnd: CPointer<UInt64>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: pVetoType optional
-    // param-hint: pszVetoName len=param[3] optional
-    func CM_Query_And_Remove_SubTreeA(dnAncestor: UInt32, pVetoType: CPointer<PNP_VETO_TYPEAbi>, pszVetoName: CPointer<UInt8>, ulNameLength: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: pVetoType optional
-    // param-hint: pszVetoName len=param[3] optional
-    func CM_Query_And_Remove_SubTreeW(dnAncestor: UInt32, pVetoType: CPointer<PNP_VETO_TYPEAbi>, pszVetoName: CPointer<UInt16>, ulNameLength: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: pVetoType optional
-    // param-hint: pszVetoName len=param[3] optional
-    // param-hint: hMachine optional
-    func CM_Query_And_Remove_SubTree_ExA(dnAncestor: UInt32, pVetoType: CPointer<PNP_VETO_TYPEAbi>, pszVetoName: CPointer<UInt8>, ulNameLength: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: pVetoType optional
-    // param-hint: pszVetoName len=param[3] optional
-    // param-hint: hMachine optional
-    func CM_Query_And_Remove_SubTree_ExW(dnAncestor: UInt32, pVetoType: CPointer<PNP_VETO_TYPEAbi>, pszVetoName: CPointer<UInt16>, ulNameLength: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: pData bytes=param[1]
-    func CM_Query_Arbitrator_Free_Data(pData: CPointer<Unit>, DataLen: UInt32, dnDevInst: UInt32, ResourceID: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: pData bytes=param[1]
-    // param-hint: hMachine optional
-    func CM_Query_Arbitrator_Free_Data_Ex(pData: CPointer<Unit>, DataLen: UInt32, dnDevInst: UInt32, ResourceID: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Query_Arbitrator_Free_Size(pulSize: CPointer<UInt32>, dnDevInst: UInt32, ResourceID: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Query_Arbitrator_Free_Size_Ex(pulSize: CPointer<UInt32>, dnDevInst: UInt32, ResourceID: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Query_Remove_SubTree(dnAncestor: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Query_Remove_SubTree_Ex(dnAncestor: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: ResourceData bytes=param[4]
-    // param-hint: hMachine optional
-    func CM_Query_Resource_Conflict_List(pclConflictList: CPointer<UIntNative>, dnDevInst: UInt32, ResourceID: CM_RESTYPEAbi, ResourceData: CPointer<Unit>, ResourceLen: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Reenumerate_DevNode(dnDevInst: UInt32, ulFlags: CM_REENUMERATE_FLAGSAbi): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Reenumerate_DevNode_Ex(dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Register_Device_Driver(dnDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Register_Device_Driver_Ex(dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: pszReference optional
-    // param-hint: pszDeviceInterface len=param[4]
-    func CM_Register_Device_InterfaceA(dnDevInst: UInt32, InterfaceClassGuid: CPointer<GUID>, pszReference: CPointer<UInt8>, pszDeviceInterface: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: pszReference optional
-    // param-hint: pszDeviceInterface len=param[4]
-    func CM_Register_Device_InterfaceW(dnDevInst: UInt32, InterfaceClassGuid: CPointer<GUID>, pszReference: CPointer<UInt16>, pszDeviceInterface: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: pszReference optional
-    // param-hint: pszDeviceInterface len=param[4]
-    // param-hint: hMachine optional
-    func CM_Register_Device_Interface_ExA(dnDevInst: UInt32, InterfaceClassGuid: CPointer<GUID>, pszReference: CPointer<UInt8>, pszDeviceInterface: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: pszReference optional
-    // param-hint: pszDeviceInterface len=param[4]
-    // param-hint: hMachine optional
-    func CM_Register_Device_Interface_ExW(dnDevInst: UInt32, InterfaceClassGuid: CPointer<GUID>, pszReference: CPointer<UInt16>, pszDeviceInterface: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: pContext optional
-    func CM_Register_Notification(pFilter: CPointer<CM_NOTIFY_FILTERAbi>, pContext: CPointer<Unit>, pCallback: PCM_NOTIFY_CALLBACK, pNotifyContext: CPointer<HCMNOTIFICATION>): CONFIGRETAbi
-    func CM_Remove_SubTree(dnAncestor: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Remove_SubTree_Ex(dnAncestor: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: pVetoType optional
-    // param-hint: pszVetoName len=param[3] optional
-    func CM_Request_Device_EjectA(dnDevInst: UInt32, pVetoType: CPointer<PNP_VETO_TYPEAbi>, pszVetoName: CPointer<UInt8>, ulNameLength: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: pVetoType optional
-    // param-hint: pszVetoName len=param[3] optional
-    func CM_Request_Device_EjectW(dnDevInst: UInt32, pVetoType: CPointer<PNP_VETO_TYPEAbi>, pszVetoName: CPointer<UInt16>, ulNameLength: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: pVetoType optional
-    // param-hint: pszVetoName len=param[3] optional
-    // param-hint: hMachine optional
-    func CM_Request_Device_Eject_ExA(dnDevInst: UInt32, pVetoType: CPointer<PNP_VETO_TYPEAbi>, pszVetoName: CPointer<UInt8>, ulNameLength: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: pVetoType optional
-    // param-hint: pszVetoName len=param[3] optional
-    // param-hint: hMachine optional
-    func CM_Request_Device_Eject_ExW(dnDevInst: UInt32, pVetoType: CPointer<PNP_VETO_TYPEAbi>, pszVetoName: CPointer<UInt16>, ulNameLength: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Request_Eject_PC(): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Request_Eject_PC_Ex(hMachine: IntNative): CONFIGRETAbi
-    func CM_Run_Detection(ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Run_Detection_Ex(ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: Buffer bytes=param[3] optional
-    // param-hint: hMachine optional
-    func CM_Set_Class_Registry_PropertyA(ClassGuid: CPointer<GUID>, ulProperty: UInt32, Buffer: CPointer<Unit>, ulLength: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: Buffer bytes=param[3] optional
-    // param-hint: hMachine optional
-    func CM_Set_Class_Registry_PropertyW(ClassGuid: CPointer<GUID>, ulProperty: UInt32, Buffer: CPointer<Unit>, ulLength: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Set_DevNode_Problem(dnDevInst: UInt32, ulProblem: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Set_DevNode_Problem_Ex(dnDevInst: UInt32, ulProblem: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: Buffer bytes=param[3] optional
-    func CM_Set_DevNode_Registry_PropertyA(dnDevInst: UInt32, ulProperty: UInt32, Buffer: CPointer<Unit>, ulLength: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: Buffer bytes=param[3] optional
-    func CM_Set_DevNode_Registry_PropertyW(dnDevInst: UInt32, ulProperty: UInt32, Buffer: CPointer<Unit>, ulLength: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: Buffer bytes=param[3] optional
-    // param-hint: hMachine optional
-    func CM_Set_DevNode_Registry_Property_ExA(dnDevInst: UInt32, ulProperty: UInt32, Buffer: CPointer<Unit>, ulLength: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: Buffer bytes=param[3] optional
-    // param-hint: hMachine optional
-    func CM_Set_DevNode_Registry_Property_ExW(dnDevInst: UInt32, ulProperty: UInt32, Buffer: CPointer<Unit>, ulLength: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Set_HW_Prof(ulHardwareProfile: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Set_HW_Prof_Ex(ulHardwareProfile: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Set_HW_Prof_FlagsA(pDeviceID: CPointer<UInt8>, ulConfig: UInt32, ulValue: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    func CM_Set_HW_Prof_FlagsW(pDeviceID: CPointer<UInt16>, ulConfig: UInt32, ulValue: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Set_HW_Prof_Flags_ExA(pDeviceID: CPointer<UInt8>, ulConfig: UInt32, ulValue: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Set_HW_Prof_Flags_ExW(pDeviceID: CPointer<UInt16>, ulConfig: UInt32, ulValue: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Setup_DevNode(dnDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Setup_DevNode_Ex(dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Test_Range_Available(ullStartValue: UInt64, ullEndValue: UInt64, rlh: UIntNative, ulFlags: UInt32): CONFIGRETAbi
-    func CM_Uninstall_DevNode(dnDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Uninstall_DevNode_Ex(dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Unregister_Device_InterfaceA(pszDeviceInterface: CPointer<UInt8>, ulFlags: UInt32): CONFIGRETAbi
-    func CM_Unregister_Device_InterfaceW(pszDeviceInterface: CPointer<UInt16>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Unregister_Device_Interface_ExA(pszDeviceInterface: CPointer<UInt8>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Unregister_Device_Interface_ExW(pszDeviceInterface: CPointer<UInt16>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Unregister_Notification(NotifyContext: HCMNOTIFICATION): CONFIGRETAbi
 }
 
-@When[CFGMGR32 == "on" && Windows_Win32_Data_HtmlHelp == "on"]
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CMP_WaitNoPendingInstallEvents == "on"]
+public unsafe func Windows_CMP_WaitNoPendingInstallEvents(dwTimeout: UInt32): UInt32 {
+    return CMP_WaitNoPendingInstallEvents(dwTimeout)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Add_Empty_Log_Conf == "on" && Windows_Win32_Data_HtmlHelp == "on"]
 foreign {
     func CM_Add_Empty_Log_Conf(plcLogConf: CPointer<UIntNative>, dnDevInst: UInt32, Priority: Win32_Data_HtmlHelp.PRIORITYAbi, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Add_Empty_Log_Conf == "on" && Windows_Win32_Data_HtmlHelp == "on"]
+public unsafe func Windows_CM_Add_Empty_Log_Conf(plcLogConf: CPointer<UIntNative>, dnDevInst: UInt32, Priority: Win32_Data_HtmlHelp.PRIORITYAbi, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Add_Empty_Log_Conf(plcLogConf, dnDevInst, Priority, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Add_Empty_Log_Conf_Ex == "on" && Windows_Win32_Data_HtmlHelp == "on"]
+foreign {
     // param-hint: hMachine optional
     func CM_Add_Empty_Log_Conf_Ex(plcLogConf: CPointer<UIntNative>, dnDevInst: UInt32, Priority: Win32_Data_HtmlHelp.PRIORITYAbi, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
 }
 
-@When[CFGMGR32 == "on" && Windows_Win32_Devices_Properties == "on"]
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Add_Empty_Log_Conf_Ex == "on" && Windows_Win32_Data_HtmlHelp == "on"]
+public unsafe func Windows_CM_Add_Empty_Log_Conf_Ex(plcLogConf: CPointer<UIntNative>, dnDevInst: UInt32, Priority: Win32_Data_HtmlHelp.PRIORITYAbi, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Add_Empty_Log_Conf_Ex(plcLogConf, dnDevInst, Priority, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Add_IDA == "on"]
+foreign {
+    func CM_Add_IDA(dnDevInst: UInt32, pszID: CPointer<UInt8>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Add_IDA == "on"]
+public unsafe func Windows_CM_Add_IDA(dnDevInst: UInt32, pszID: CPointer<UInt8>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Add_IDA(dnDevInst, pszID, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Add_IDW == "on"]
+foreign {
+    func CM_Add_IDW(dnDevInst: UInt32, pszID: CPointer<UInt16>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Add_IDW == "on"]
+public unsafe func Windows_CM_Add_IDW(dnDevInst: UInt32, pszID: CPointer<UInt16>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Add_IDW(dnDevInst, pszID, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Add_ID_ExA == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Add_ID_ExA(dnDevInst: UInt32, pszID: CPointer<UInt8>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Add_ID_ExA == "on"]
+public unsafe func Windows_CM_Add_ID_ExA(dnDevInst: UInt32, pszID: CPointer<UInt8>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Add_ID_ExA(dnDevInst, pszID, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Add_ID_ExW == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Add_ID_ExW(dnDevInst: UInt32, pszID: CPointer<UInt16>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Add_ID_ExW == "on"]
+public unsafe func Windows_CM_Add_ID_ExW(dnDevInst: UInt32, pszID: CPointer<UInt16>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Add_ID_ExW(dnDevInst, pszID, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Add_Range == "on"]
+foreign {
+    func CM_Add_Range(ullStartValue: UInt64, ullEndValue: UInt64, rlh: UIntNative, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Add_Range == "on"]
+public unsafe func Windows_CM_Add_Range(ullStartValue: UInt64, ullEndValue: UInt64, rlh: UIntNative, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Add_Range(ullStartValue, ullEndValue, rlh, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Add_Res_Des == "on"]
+foreign {
+    // param-hint: prdResDes optional
+    // param-hint: ResourceData bytes=param[4]
+    func CM_Add_Res_Des(prdResDes: CPointer<UIntNative>, lcLogConf: UIntNative, ResourceID: UInt32, ResourceData: CPointer<Unit>, ResourceLen: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Add_Res_Des == "on"]
+public unsafe func Windows_CM_Add_Res_Des(prdResDes: CPointer<UIntNative>, lcLogConf: UIntNative, ResourceID: UInt32, ResourceData: CPointer<Unit>, ResourceLen: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Add_Res_Des(prdResDes, lcLogConf, ResourceID, ResourceData, ResourceLen, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Add_Res_Des_Ex == "on"]
+foreign {
+    // param-hint: prdResDes optional
+    // param-hint: ResourceData bytes=param[4]
+    // param-hint: hMachine optional
+    func CM_Add_Res_Des_Ex(prdResDes: CPointer<UIntNative>, lcLogConf: UIntNative, ResourceID: UInt32, ResourceData: CPointer<Unit>, ResourceLen: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Add_Res_Des_Ex == "on"]
+public unsafe func Windows_CM_Add_Res_Des_Ex(prdResDes: CPointer<UIntNative>, lcLogConf: UIntNative, ResourceID: UInt32, ResourceData: CPointer<Unit>, ResourceLen: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Add_Res_Des_Ex(prdResDes, lcLogConf, ResourceID, ResourceData, ResourceLen, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Connect_MachineA == "on"]
+foreign {
+    // param-hint: UNCServerName optional
+    func CM_Connect_MachineA(UNCServerName: CPointer<UInt8>, phMachine: CPointer<IntNative>): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Connect_MachineA == "on"]
+public unsafe func Windows_CM_Connect_MachineA(UNCServerName: CPointer<UInt8>, phMachine: CPointer<IntNative>): CONFIGRETAbi {
+    return CM_Connect_MachineA(UNCServerName, phMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Connect_MachineW == "on"]
+foreign {
+    // param-hint: UNCServerName optional
+    func CM_Connect_MachineW(UNCServerName: CPointer<UInt16>, phMachine: CPointer<IntNative>): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Connect_MachineW == "on"]
+public unsafe func Windows_CM_Connect_MachineW(UNCServerName: CPointer<UInt16>, phMachine: CPointer<IntNative>): CONFIGRETAbi {
+    return CM_Connect_MachineW(UNCServerName, phMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Create_DevNodeA == "on"]
+foreign {
+    func CM_Create_DevNodeA(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt8>, dnParent: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Create_DevNodeA == "on"]
+public unsafe func Windows_CM_Create_DevNodeA(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt8>, dnParent: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Create_DevNodeA(pdnDevInst, pDeviceID, dnParent, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Create_DevNodeW == "on"]
+foreign {
+    func CM_Create_DevNodeW(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt16>, dnParent: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Create_DevNodeW == "on"]
+public unsafe func Windows_CM_Create_DevNodeW(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt16>, dnParent: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Create_DevNodeW(pdnDevInst, pDeviceID, dnParent, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Create_DevNode_ExA == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Create_DevNode_ExA(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt8>, dnParent: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Create_DevNode_ExA == "on"]
+public unsafe func Windows_CM_Create_DevNode_ExA(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt8>, dnParent: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Create_DevNode_ExA(pdnDevInst, pDeviceID, dnParent, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Create_DevNode_ExW == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Create_DevNode_ExW(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt16>, dnParent: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Create_DevNode_ExW == "on"]
+public unsafe func Windows_CM_Create_DevNode_ExW(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt16>, dnParent: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Create_DevNode_ExW(pdnDevInst, pDeviceID, dnParent, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Create_Range_List == "on"]
+foreign {
+    func CM_Create_Range_List(prlh: CPointer<UIntNative>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Create_Range_List == "on"]
+public unsafe func Windows_CM_Create_Range_List(prlh: CPointer<UIntNative>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Create_Range_List(prlh, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Delete_Class_Key == "on"]
+foreign {
+    func CM_Delete_Class_Key(ClassGuid: CPointer<GUID>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Delete_Class_Key == "on"]
+public unsafe func Windows_CM_Delete_Class_Key(ClassGuid: CPointer<GUID>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Delete_Class_Key(ClassGuid, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Delete_Class_Key_Ex == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Delete_Class_Key_Ex(ClassGuid: CPointer<GUID>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Delete_Class_Key_Ex == "on"]
+public unsafe func Windows_CM_Delete_Class_Key_Ex(ClassGuid: CPointer<GUID>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Delete_Class_Key_Ex(ClassGuid, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Delete_DevNode_Key == "on"]
+foreign {
+    func CM_Delete_DevNode_Key(dnDevNode: UInt32, ulHardwareProfile: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Delete_DevNode_Key == "on"]
+public unsafe func Windows_CM_Delete_DevNode_Key(dnDevNode: UInt32, ulHardwareProfile: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Delete_DevNode_Key(dnDevNode, ulHardwareProfile, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Delete_DevNode_Key_Ex == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Delete_DevNode_Key_Ex(dnDevNode: UInt32, ulHardwareProfile: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Delete_DevNode_Key_Ex == "on"]
+public unsafe func Windows_CM_Delete_DevNode_Key_Ex(dnDevNode: UInt32, ulHardwareProfile: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Delete_DevNode_Key_Ex(dnDevNode, ulHardwareProfile, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Delete_Device_Interface_KeyA == "on"]
+foreign {
+    func CM_Delete_Device_Interface_KeyA(pszDeviceInterface: CPointer<UInt8>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Delete_Device_Interface_KeyA == "on"]
+public unsafe func Windows_CM_Delete_Device_Interface_KeyA(pszDeviceInterface: CPointer<UInt8>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Delete_Device_Interface_KeyA(pszDeviceInterface, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Delete_Device_Interface_KeyW == "on"]
+foreign {
+    func CM_Delete_Device_Interface_KeyW(pszDeviceInterface: CPointer<UInt16>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Delete_Device_Interface_KeyW == "on"]
+public unsafe func Windows_CM_Delete_Device_Interface_KeyW(pszDeviceInterface: CPointer<UInt16>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Delete_Device_Interface_KeyW(pszDeviceInterface, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Delete_Device_Interface_Key_ExA == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Delete_Device_Interface_Key_ExA(pszDeviceInterface: CPointer<UInt8>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Delete_Device_Interface_Key_ExA == "on"]
+public unsafe func Windows_CM_Delete_Device_Interface_Key_ExA(pszDeviceInterface: CPointer<UInt8>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Delete_Device_Interface_Key_ExA(pszDeviceInterface, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Delete_Device_Interface_Key_ExW == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Delete_Device_Interface_Key_ExW(pszDeviceInterface: CPointer<UInt16>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Delete_Device_Interface_Key_ExW == "on"]
+public unsafe func Windows_CM_Delete_Device_Interface_Key_ExW(pszDeviceInterface: CPointer<UInt16>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Delete_Device_Interface_Key_ExW(pszDeviceInterface, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Delete_Range == "on"]
+foreign {
+    func CM_Delete_Range(ullStartValue: UInt64, ullEndValue: UInt64, rlh: UIntNative, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Delete_Range == "on"]
+public unsafe func Windows_CM_Delete_Range(ullStartValue: UInt64, ullEndValue: UInt64, rlh: UIntNative, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Delete_Range(ullStartValue, ullEndValue, rlh, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Detect_Resource_Conflict == "on"]
+foreign {
+    // param-hint: ResourceData bytes=param[3]
+    func CM_Detect_Resource_Conflict(dnDevInst: UInt32, ResourceID: UInt32, ResourceData: CPointer<Unit>, ResourceLen: UInt32, pbConflictDetected: CPointer<Int32>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Detect_Resource_Conflict == "on"]
+public unsafe func Windows_CM_Detect_Resource_Conflict(dnDevInst: UInt32, ResourceID: UInt32, ResourceData: CPointer<Unit>, ResourceLen: UInt32, pbConflictDetected: CPointer<Int32>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Detect_Resource_Conflict(dnDevInst, ResourceID, ResourceData, ResourceLen, pbConflictDetected, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Detect_Resource_Conflict_Ex == "on"]
+foreign {
+    // param-hint: ResourceData bytes=param[3]
+    // param-hint: hMachine optional
+    func CM_Detect_Resource_Conflict_Ex(dnDevInst: UInt32, ResourceID: UInt32, ResourceData: CPointer<Unit>, ResourceLen: UInt32, pbConflictDetected: CPointer<Int32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Detect_Resource_Conflict_Ex == "on"]
+public unsafe func Windows_CM_Detect_Resource_Conflict_Ex(dnDevInst: UInt32, ResourceID: UInt32, ResourceData: CPointer<Unit>, ResourceLen: UInt32, pbConflictDetected: CPointer<Int32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Detect_Resource_Conflict_Ex(dnDevInst, ResourceID, ResourceData, ResourceLen, pbConflictDetected, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Disable_DevNode == "on"]
+foreign {
+    func CM_Disable_DevNode(dnDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Disable_DevNode == "on"]
+public unsafe func Windows_CM_Disable_DevNode(dnDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Disable_DevNode(dnDevInst, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Disable_DevNode_Ex == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Disable_DevNode_Ex(dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Disable_DevNode_Ex == "on"]
+public unsafe func Windows_CM_Disable_DevNode_Ex(dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Disable_DevNode_Ex(dnDevInst, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Disconnect_Machine == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Disconnect_Machine(hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Disconnect_Machine == "on"]
+public unsafe func Windows_CM_Disconnect_Machine(hMachine: IntNative): CONFIGRETAbi {
+    return CM_Disconnect_Machine(hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Dup_Range_List == "on"]
+foreign {
+    func CM_Dup_Range_List(rlhOld: UIntNative, rlhNew: UIntNative, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Dup_Range_List == "on"]
+public unsafe func Windows_CM_Dup_Range_List(rlhOld: UIntNative, rlhNew: UIntNative, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Dup_Range_List(rlhOld, rlhNew, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Enable_DevNode == "on"]
+foreign {
+    func CM_Enable_DevNode(dnDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Enable_DevNode == "on"]
+public unsafe func Windows_CM_Enable_DevNode(dnDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Enable_DevNode(dnDevInst, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Enable_DevNode_Ex == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Enable_DevNode_Ex(dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Enable_DevNode_Ex == "on"]
+public unsafe func Windows_CM_Enable_DevNode_Ex(dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Enable_DevNode_Ex(dnDevInst, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Enumerate_Classes == "on"]
+foreign {
+    func CM_Enumerate_Classes(ulClassIndex: UInt32, ClassGuid: CPointer<GUID>, ulFlags: CM_ENUMERATE_FLAGSAbi): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Enumerate_Classes == "on"]
+public unsafe func Windows_CM_Enumerate_Classes(ulClassIndex: UInt32, ClassGuid: CPointer<GUID>, ulFlags: CM_ENUMERATE_FLAGSAbi): CONFIGRETAbi {
+    return CM_Enumerate_Classes(ulClassIndex, ClassGuid, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Enumerate_Classes_Ex == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Enumerate_Classes_Ex(ulClassIndex: UInt32, ClassGuid: CPointer<GUID>, ulFlags: CM_ENUMERATE_FLAGSAbi, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Enumerate_Classes_Ex == "on"]
+public unsafe func Windows_CM_Enumerate_Classes_Ex(ulClassIndex: UInt32, ClassGuid: CPointer<GUID>, ulFlags: CM_ENUMERATE_FLAGSAbi, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Enumerate_Classes_Ex(ulClassIndex, ClassGuid, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Enumerate_EnumeratorsA == "on"]
+foreign {
+    // param-hint: Buffer len=param[2]
+    func CM_Enumerate_EnumeratorsA(ulEnumIndex: UInt32, Buffer: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Enumerate_EnumeratorsA == "on"]
+public unsafe func Windows_CM_Enumerate_EnumeratorsA(ulEnumIndex: UInt32, Buffer: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Enumerate_EnumeratorsA(ulEnumIndex, Buffer, pulLength, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Enumerate_EnumeratorsW == "on"]
+foreign {
+    // param-hint: Buffer len=param[2]
+    func CM_Enumerate_EnumeratorsW(ulEnumIndex: UInt32, Buffer: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Enumerate_EnumeratorsW == "on"]
+public unsafe func Windows_CM_Enumerate_EnumeratorsW(ulEnumIndex: UInt32, Buffer: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Enumerate_EnumeratorsW(ulEnumIndex, Buffer, pulLength, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Enumerate_Enumerators_ExA == "on"]
+foreign {
+    // param-hint: Buffer len=param[2]
+    // param-hint: hMachine optional
+    func CM_Enumerate_Enumerators_ExA(ulEnumIndex: UInt32, Buffer: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Enumerate_Enumerators_ExA == "on"]
+public unsafe func Windows_CM_Enumerate_Enumerators_ExA(ulEnumIndex: UInt32, Buffer: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Enumerate_Enumerators_ExA(ulEnumIndex, Buffer, pulLength, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Enumerate_Enumerators_ExW == "on"]
+foreign {
+    // param-hint: Buffer len=param[2]
+    // param-hint: hMachine optional
+    func CM_Enumerate_Enumerators_ExW(ulEnumIndex: UInt32, Buffer: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Enumerate_Enumerators_ExW == "on"]
+public unsafe func Windows_CM_Enumerate_Enumerators_ExW(ulEnumIndex: UInt32, Buffer: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Enumerate_Enumerators_ExW(ulEnumIndex, Buffer, pulLength, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Find_Range == "on"]
+foreign {
+    func CM_Find_Range(pullStart: CPointer<UInt64>, ullStart: UInt64, ulLength: UInt32, ullAlignment: UInt64, ullEnd: UInt64, rlh: UIntNative, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Find_Range == "on"]
+public unsafe func Windows_CM_Find_Range(pullStart: CPointer<UInt64>, ullStart: UInt64, ulLength: UInt32, ullAlignment: UInt64, ullEnd: UInt64, rlh: UIntNative, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Find_Range(pullStart, ullStart, ulLength, ullAlignment, ullEnd, rlh, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_First_Range == "on"]
+foreign {
+    func CM_First_Range(rlh: UIntNative, pullStart: CPointer<UInt64>, pullEnd: CPointer<UInt64>, preElement: CPointer<UIntNative>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_First_Range == "on"]
+public unsafe func Windows_CM_First_Range(rlh: UIntNative, pullStart: CPointer<UInt64>, pullEnd: CPointer<UInt64>, preElement: CPointer<UIntNative>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_First_Range(rlh, pullStart, pullEnd, preElement, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Free_Log_Conf == "on"]
+foreign {
+    func CM_Free_Log_Conf(lcLogConfToBeFreed: UIntNative, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Free_Log_Conf == "on"]
+public unsafe func Windows_CM_Free_Log_Conf(lcLogConfToBeFreed: UIntNative, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Free_Log_Conf(lcLogConfToBeFreed, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Free_Log_Conf_Ex == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Free_Log_Conf_Ex(lcLogConfToBeFreed: UIntNative, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Free_Log_Conf_Ex == "on"]
+public unsafe func Windows_CM_Free_Log_Conf_Ex(lcLogConfToBeFreed: UIntNative, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Free_Log_Conf_Ex(lcLogConfToBeFreed, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Free_Log_Conf_Handle == "on"]
+foreign {
+    func CM_Free_Log_Conf_Handle(lcLogConf: UIntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Free_Log_Conf_Handle == "on"]
+public unsafe func Windows_CM_Free_Log_Conf_Handle(lcLogConf: UIntNative): CONFIGRETAbi {
+    return CM_Free_Log_Conf_Handle(lcLogConf)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Free_Range_List == "on"]
+foreign {
+    func CM_Free_Range_List(rlh: UIntNative, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Free_Range_List == "on"]
+public unsafe func Windows_CM_Free_Range_List(rlh: UIntNative, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Free_Range_List(rlh, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Free_Res_Des == "on"]
+foreign {
+    // param-hint: prdResDes optional
+    func CM_Free_Res_Des(prdResDes: CPointer<UIntNative>, rdResDes: UIntNative, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Free_Res_Des == "on"]
+public unsafe func Windows_CM_Free_Res_Des(prdResDes: CPointer<UIntNative>, rdResDes: UIntNative, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Free_Res_Des(prdResDes, rdResDes, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Free_Res_Des_Ex == "on"]
+foreign {
+    // param-hint: prdResDes optional
+    // param-hint: hMachine optional
+    func CM_Free_Res_Des_Ex(prdResDes: CPointer<UIntNative>, rdResDes: UIntNative, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Free_Res_Des_Ex == "on"]
+public unsafe func Windows_CM_Free_Res_Des_Ex(prdResDes: CPointer<UIntNative>, rdResDes: UIntNative, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Free_Res_Des_Ex(prdResDes, rdResDes, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Free_Res_Des_Handle == "on"]
+foreign {
+    func CM_Free_Res_Des_Handle(rdResDes: UIntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Free_Res_Des_Handle == "on"]
+public unsafe func Windows_CM_Free_Res_Des_Handle(rdResDes: UIntNative): CONFIGRETAbi {
+    return CM_Free_Res_Des_Handle(rdResDes)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Free_Resource_Conflict_Handle == "on"]
+foreign {
+    func CM_Free_Resource_Conflict_Handle(clConflictList: UIntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Free_Resource_Conflict_Handle == "on"]
+public unsafe func Windows_CM_Free_Resource_Conflict_Handle(clConflictList: UIntNative): CONFIGRETAbi {
+    return CM_Free_Resource_Conflict_Handle(clConflictList)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Child == "on"]
+foreign {
+    func CM_Get_Child(pdnDevInst: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Child == "on"]
+public unsafe func Windows_CM_Get_Child(pdnDevInst: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_Child(pdnDevInst, dnDevInst, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Child_Ex == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Get_Child_Ex(pdnDevInst: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Child_Ex == "on"]
+public unsafe func Windows_CM_Get_Child_Ex(pdnDevInst: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Child_Ex(pdnDevInst, dnDevInst, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Class_Key_NameA == "on"]
+foreign {
+    // param-hint: pszKeyName len=param[2] optional
+    func CM_Get_Class_Key_NameA(ClassGuid: CPointer<GUID>, pszKeyName: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Class_Key_NameA == "on"]
+public unsafe func Windows_CM_Get_Class_Key_NameA(ClassGuid: CPointer<GUID>, pszKeyName: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_Class_Key_NameA(ClassGuid, pszKeyName, pulLength, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Class_Key_NameW == "on"]
+foreign {
+    // param-hint: pszKeyName len=param[2] optional
+    func CM_Get_Class_Key_NameW(ClassGuid: CPointer<GUID>, pszKeyName: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Class_Key_NameW == "on"]
+public unsafe func Windows_CM_Get_Class_Key_NameW(ClassGuid: CPointer<GUID>, pszKeyName: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_Class_Key_NameW(ClassGuid, pszKeyName, pulLength, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Class_Key_Name_ExA == "on"]
+foreign {
+    // param-hint: pszKeyName len=param[2] optional
+    // param-hint: hMachine optional
+    func CM_Get_Class_Key_Name_ExA(ClassGuid: CPointer<GUID>, pszKeyName: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Class_Key_Name_ExA == "on"]
+public unsafe func Windows_CM_Get_Class_Key_Name_ExA(ClassGuid: CPointer<GUID>, pszKeyName: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Class_Key_Name_ExA(ClassGuid, pszKeyName, pulLength, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Class_Key_Name_ExW == "on"]
+foreign {
+    // param-hint: pszKeyName len=param[2] optional
+    // param-hint: hMachine optional
+    func CM_Get_Class_Key_Name_ExW(ClassGuid: CPointer<GUID>, pszKeyName: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Class_Key_Name_ExW == "on"]
+public unsafe func Windows_CM_Get_Class_Key_Name_ExW(ClassGuid: CPointer<GUID>, pszKeyName: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Class_Key_Name_ExW(ClassGuid, pszKeyName, pulLength, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Class_NameA == "on"]
+foreign {
+    // param-hint: Buffer len=param[2] optional
+    func CM_Get_Class_NameA(ClassGuid: CPointer<GUID>, Buffer: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Class_NameA == "on"]
+public unsafe func Windows_CM_Get_Class_NameA(ClassGuid: CPointer<GUID>, Buffer: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_Class_NameA(ClassGuid, Buffer, pulLength, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Class_NameW == "on"]
+foreign {
+    // param-hint: Buffer len=param[2] optional
+    func CM_Get_Class_NameW(ClassGuid: CPointer<GUID>, Buffer: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Class_NameW == "on"]
+public unsafe func Windows_CM_Get_Class_NameW(ClassGuid: CPointer<GUID>, Buffer: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_Class_NameW(ClassGuid, Buffer, pulLength, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Class_Name_ExA == "on"]
+foreign {
+    // param-hint: Buffer len=param[2] optional
+    // param-hint: hMachine optional
+    func CM_Get_Class_Name_ExA(ClassGuid: CPointer<GUID>, Buffer: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Class_Name_ExA == "on"]
+public unsafe func Windows_CM_Get_Class_Name_ExA(ClassGuid: CPointer<GUID>, Buffer: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Class_Name_ExA(ClassGuid, Buffer, pulLength, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Class_Name_ExW == "on"]
+foreign {
+    // param-hint: Buffer len=param[2] optional
+    // param-hint: hMachine optional
+    func CM_Get_Class_Name_ExW(ClassGuid: CPointer<GUID>, Buffer: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Class_Name_ExW == "on"]
+public unsafe func Windows_CM_Get_Class_Name_ExW(ClassGuid: CPointer<GUID>, Buffer: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Class_Name_ExW(ClassGuid, Buffer, pulLength, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Class_PropertyW == "on" && Windows_Win32_Devices_Properties == "on"]
 foreign {
     // param-hint: PropertyBuffer bytes=param[4] optional
     func CM_Get_Class_PropertyW(ClassGUID: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPEAbi>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Class_PropertyW == "on" && Windows_Win32_Devices_Properties == "on"]
+public unsafe func Windows_CM_Get_Class_PropertyW(ClassGUID: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPEAbi>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_Class_PropertyW(ClassGUID, PropertyKey, PropertyType, PropertyBuffer, PropertyBufferSize, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Class_Property_ExW == "on" && Windows_Win32_Devices_Properties == "on"]
+foreign {
     // param-hint: PropertyBuffer bytes=param[4] optional
     // param-hint: hMachine optional
     func CM_Get_Class_Property_ExW(ClassGUID: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPEAbi>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Class_Property_ExW == "on" && Windows_Win32_Devices_Properties == "on"]
+public unsafe func Windows_CM_Get_Class_Property_ExW(ClassGUID: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPEAbi>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Class_Property_ExW(ClassGUID, PropertyKey, PropertyType, PropertyBuffer, PropertyBufferSize, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Class_Property_Keys == "on"]
+foreign {
+    // param-hint: PropertyKeyArray len=param[2] optional
+    func CM_Get_Class_Property_Keys(ClassGUID: CPointer<GUID>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyKeyCount: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Class_Property_Keys == "on"]
+public unsafe func Windows_CM_Get_Class_Property_Keys(ClassGUID: CPointer<GUID>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyKeyCount: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_Class_Property_Keys(ClassGUID, PropertyKeyArray, PropertyKeyCount, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Class_Property_Keys_Ex == "on"]
+foreign {
+    // param-hint: PropertyKeyArray len=param[2] optional
+    // param-hint: hMachine optional
+    func CM_Get_Class_Property_Keys_Ex(ClassGUID: CPointer<GUID>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyKeyCount: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Class_Property_Keys_Ex == "on"]
+public unsafe func Windows_CM_Get_Class_Property_Keys_Ex(ClassGUID: CPointer<GUID>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyKeyCount: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Class_Property_Keys_Ex(ClassGUID, PropertyKeyArray, PropertyKeyCount, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Class_Registry_PropertyA == "on"]
+foreign {
+    // param-hint: pulRegDataType optional
+    // param-hint: Buffer bytes=param[4] optional
+    // param-hint: hMachine optional
+    func CM_Get_Class_Registry_PropertyA(ClassGuid: CPointer<GUID>, ulProperty: UInt32, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Class_Registry_PropertyA == "on"]
+public unsafe func Windows_CM_Get_Class_Registry_PropertyA(ClassGuid: CPointer<GUID>, ulProperty: UInt32, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Class_Registry_PropertyA(ClassGuid, ulProperty, pulRegDataType, Buffer, pulLength, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Class_Registry_PropertyW == "on"]
+foreign {
+    // param-hint: pulRegDataType optional
+    // param-hint: Buffer bytes=param[4] optional
+    // param-hint: hMachine optional
+    func CM_Get_Class_Registry_PropertyW(ClassGuid: CPointer<GUID>, ulProperty: UInt32, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Class_Registry_PropertyW == "on"]
+public unsafe func Windows_CM_Get_Class_Registry_PropertyW(ClassGuid: CPointer<GUID>, ulProperty: UInt32, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Class_Registry_PropertyW(ClassGuid, ulProperty, pulRegDataType, Buffer, pulLength, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Depth == "on"]
+foreign {
+    func CM_Get_Depth(pulDepth: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Depth == "on"]
+public unsafe func Windows_CM_Get_Depth(pulDepth: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_Depth(pulDepth, dnDevInst, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Depth_Ex == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Get_Depth_Ex(pulDepth: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Depth_Ex == "on"]
+public unsafe func Windows_CM_Get_Depth_Ex(pulDepth: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Depth_Ex(pulDepth, dnDevInst, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_DevNode_Custom_PropertyA == "on"]
+foreign {
+    // param-hint: pulRegDataType optional
+    // param-hint: Buffer bytes=param[4] optional
+    func CM_Get_DevNode_Custom_PropertyA(dnDevInst: UInt32, pszCustomPropertyName: CPointer<UInt8>, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_DevNode_Custom_PropertyA == "on"]
+public unsafe func Windows_CM_Get_DevNode_Custom_PropertyA(dnDevInst: UInt32, pszCustomPropertyName: CPointer<UInt8>, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_DevNode_Custom_PropertyA(dnDevInst, pszCustomPropertyName, pulRegDataType, Buffer, pulLength, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_DevNode_Custom_PropertyW == "on"]
+foreign {
+    // param-hint: pulRegDataType optional
+    // param-hint: Buffer bytes=param[4] optional
+    func CM_Get_DevNode_Custom_PropertyW(dnDevInst: UInt32, pszCustomPropertyName: CPointer<UInt16>, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_DevNode_Custom_PropertyW == "on"]
+public unsafe func Windows_CM_Get_DevNode_Custom_PropertyW(dnDevInst: UInt32, pszCustomPropertyName: CPointer<UInt16>, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_DevNode_Custom_PropertyW(dnDevInst, pszCustomPropertyName, pulRegDataType, Buffer, pulLength, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_DevNode_Custom_Property_ExA == "on"]
+foreign {
+    // param-hint: pulRegDataType optional
+    // param-hint: Buffer bytes=param[4] optional
+    // param-hint: hMachine optional
+    func CM_Get_DevNode_Custom_Property_ExA(dnDevInst: UInt32, pszCustomPropertyName: CPointer<UInt8>, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_DevNode_Custom_Property_ExA == "on"]
+public unsafe func Windows_CM_Get_DevNode_Custom_Property_ExA(dnDevInst: UInt32, pszCustomPropertyName: CPointer<UInt8>, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_DevNode_Custom_Property_ExA(dnDevInst, pszCustomPropertyName, pulRegDataType, Buffer, pulLength, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_DevNode_Custom_Property_ExW == "on"]
+foreign {
+    // param-hint: pulRegDataType optional
+    // param-hint: Buffer bytes=param[4] optional
+    // param-hint: hMachine optional
+    func CM_Get_DevNode_Custom_Property_ExW(dnDevInst: UInt32, pszCustomPropertyName: CPointer<UInt16>, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_DevNode_Custom_Property_ExW == "on"]
+public unsafe func Windows_CM_Get_DevNode_Custom_Property_ExW(dnDevInst: UInt32, pszCustomPropertyName: CPointer<UInt16>, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_DevNode_Custom_Property_ExW(dnDevInst, pszCustomPropertyName, pulRegDataType, Buffer, pulLength, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_DevNode_PropertyW == "on" && Windows_Win32_Devices_Properties == "on"]
+foreign {
     // param-hint: PropertyBuffer bytes=param[4] optional
     func CM_Get_DevNode_PropertyW(dnDevInst: UInt32, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPEAbi>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_DevNode_PropertyW == "on" && Windows_Win32_Devices_Properties == "on"]
+public unsafe func Windows_CM_Get_DevNode_PropertyW(dnDevInst: UInt32, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPEAbi>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_DevNode_PropertyW(dnDevInst, PropertyKey, PropertyType, PropertyBuffer, PropertyBufferSize, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_DevNode_Property_ExW == "on" && Windows_Win32_Devices_Properties == "on"]
+foreign {
     // param-hint: PropertyBuffer bytes=param[4] optional
     // param-hint: hMachine optional
     func CM_Get_DevNode_Property_ExW(dnDevInst: UInt32, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPEAbi>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_DevNode_Property_ExW == "on" && Windows_Win32_Devices_Properties == "on"]
+public unsafe func Windows_CM_Get_DevNode_Property_ExW(dnDevInst: UInt32, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPEAbi>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_DevNode_Property_ExW(dnDevInst, PropertyKey, PropertyType, PropertyBuffer, PropertyBufferSize, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_DevNode_Property_Keys == "on"]
+foreign {
+    // param-hint: PropertyKeyArray len=param[2] optional
+    func CM_Get_DevNode_Property_Keys(dnDevInst: UInt32, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyKeyCount: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_DevNode_Property_Keys == "on"]
+public unsafe func Windows_CM_Get_DevNode_Property_Keys(dnDevInst: UInt32, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyKeyCount: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_DevNode_Property_Keys(dnDevInst, PropertyKeyArray, PropertyKeyCount, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_DevNode_Property_Keys_Ex == "on"]
+foreign {
+    // param-hint: PropertyKeyArray len=param[2] optional
+    // param-hint: hMachine optional
+    func CM_Get_DevNode_Property_Keys_Ex(dnDevInst: UInt32, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyKeyCount: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_DevNode_Property_Keys_Ex == "on"]
+public unsafe func Windows_CM_Get_DevNode_Property_Keys_Ex(dnDevInst: UInt32, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyKeyCount: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_DevNode_Property_Keys_Ex(dnDevInst, PropertyKeyArray, PropertyKeyCount, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_DevNode_Registry_PropertyA == "on"]
+foreign {
+    // param-hint: pulRegDataType optional
+    // param-hint: Buffer bytes=param[4] optional
+    func CM_Get_DevNode_Registry_PropertyA(dnDevInst: UInt32, ulProperty: UInt32, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_DevNode_Registry_PropertyA == "on"]
+public unsafe func Windows_CM_Get_DevNode_Registry_PropertyA(dnDevInst: UInt32, ulProperty: UInt32, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_DevNode_Registry_PropertyA(dnDevInst, ulProperty, pulRegDataType, Buffer, pulLength, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_DevNode_Registry_PropertyW == "on"]
+foreign {
+    // param-hint: pulRegDataType optional
+    // param-hint: Buffer bytes=param[4] optional
+    func CM_Get_DevNode_Registry_PropertyW(dnDevInst: UInt32, ulProperty: UInt32, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_DevNode_Registry_PropertyW == "on"]
+public unsafe func Windows_CM_Get_DevNode_Registry_PropertyW(dnDevInst: UInt32, ulProperty: UInt32, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_DevNode_Registry_PropertyW(dnDevInst, ulProperty, pulRegDataType, Buffer, pulLength, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_DevNode_Registry_Property_ExA == "on"]
+foreign {
+    // param-hint: pulRegDataType optional
+    // param-hint: Buffer bytes=param[4] optional
+    // param-hint: hMachine optional
+    func CM_Get_DevNode_Registry_Property_ExA(dnDevInst: UInt32, ulProperty: UInt32, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_DevNode_Registry_Property_ExA == "on"]
+public unsafe func Windows_CM_Get_DevNode_Registry_Property_ExA(dnDevInst: UInt32, ulProperty: UInt32, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_DevNode_Registry_Property_ExA(dnDevInst, ulProperty, pulRegDataType, Buffer, pulLength, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_DevNode_Registry_Property_ExW == "on"]
+foreign {
+    // param-hint: pulRegDataType optional
+    // param-hint: Buffer bytes=param[4] optional
+    // param-hint: hMachine optional
+    func CM_Get_DevNode_Registry_Property_ExW(dnDevInst: UInt32, ulProperty: UInt32, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_DevNode_Registry_Property_ExW == "on"]
+public unsafe func Windows_CM_Get_DevNode_Registry_Property_ExW(dnDevInst: UInt32, ulProperty: UInt32, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_DevNode_Registry_Property_ExW(dnDevInst, ulProperty, pulRegDataType, Buffer, pulLength, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_DevNode_Status == "on"]
+foreign {
+    func CM_Get_DevNode_Status(pulStatus: CPointer<CM_DEVNODE_STATUS_FLAGSAbi>, pulProblemNumber: CPointer<CM_PROBAbi>, dnDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_DevNode_Status == "on"]
+public unsafe func Windows_CM_Get_DevNode_Status(pulStatus: CPointer<CM_DEVNODE_STATUS_FLAGSAbi>, pulProblemNumber: CPointer<CM_PROBAbi>, dnDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_DevNode_Status(pulStatus, pulProblemNumber, dnDevInst, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_DevNode_Status_Ex == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Get_DevNode_Status_Ex(pulStatus: CPointer<CM_DEVNODE_STATUS_FLAGSAbi>, pulProblemNumber: CPointer<CM_PROBAbi>, dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_DevNode_Status_Ex == "on"]
+public unsafe func Windows_CM_Get_DevNode_Status_Ex(pulStatus: CPointer<CM_DEVNODE_STATUS_FLAGSAbi>, pulProblemNumber: CPointer<CM_PROBAbi>, dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_DevNode_Status_Ex(pulStatus, pulProblemNumber, dnDevInst, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_IDA == "on"]
+foreign {
+    // param-hint: Buffer len=param[2]
+    func CM_Get_Device_IDA(dnDevInst: UInt32, Buffer: CPointer<UInt8>, BufferLen: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_IDA == "on"]
+public unsafe func Windows_CM_Get_Device_IDA(dnDevInst: UInt32, Buffer: CPointer<UInt8>, BufferLen: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_Device_IDA(dnDevInst, Buffer, BufferLen, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_IDW == "on"]
+foreign {
+    // param-hint: Buffer len=param[2]
+    func CM_Get_Device_IDW(dnDevInst: UInt32, Buffer: CPointer<UInt16>, BufferLen: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_IDW == "on"]
+public unsafe func Windows_CM_Get_Device_IDW(dnDevInst: UInt32, Buffer: CPointer<UInt16>, BufferLen: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_Device_IDW(dnDevInst, Buffer, BufferLen, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_ID_ExA == "on"]
+foreign {
+    // param-hint: Buffer len=param[2]
+    // param-hint: hMachine optional
+    func CM_Get_Device_ID_ExA(dnDevInst: UInt32, Buffer: CPointer<UInt8>, BufferLen: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_ID_ExA == "on"]
+public unsafe func Windows_CM_Get_Device_ID_ExA(dnDevInst: UInt32, Buffer: CPointer<UInt8>, BufferLen: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Device_ID_ExA(dnDevInst, Buffer, BufferLen, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_ID_ExW == "on"]
+foreign {
+    // param-hint: Buffer len=param[2]
+    // param-hint: hMachine optional
+    func CM_Get_Device_ID_ExW(dnDevInst: UInt32, Buffer: CPointer<UInt16>, BufferLen: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_ID_ExW == "on"]
+public unsafe func Windows_CM_Get_Device_ID_ExW(dnDevInst: UInt32, Buffer: CPointer<UInt16>, BufferLen: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Device_ID_ExW(dnDevInst, Buffer, BufferLen, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_ID_ListA == "on"]
+foreign {
+    // param-hint: pszFilter optional
+    // param-hint: Buffer len=param[2]
+    func CM_Get_Device_ID_ListA(pszFilter: CPointer<UInt8>, Buffer: CPointer<UInt8>, BufferLen: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_ID_ListA == "on"]
+public unsafe func Windows_CM_Get_Device_ID_ListA(pszFilter: CPointer<UInt8>, Buffer: CPointer<UInt8>, BufferLen: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_Device_ID_ListA(pszFilter, Buffer, BufferLen, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_ID_ListW == "on"]
+foreign {
+    // param-hint: pszFilter optional
+    // param-hint: Buffer len=param[2]
+    func CM_Get_Device_ID_ListW(pszFilter: CPointer<UInt16>, Buffer: CPointer<UInt16>, BufferLen: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_ID_ListW == "on"]
+public unsafe func Windows_CM_Get_Device_ID_ListW(pszFilter: CPointer<UInt16>, Buffer: CPointer<UInt16>, BufferLen: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_Device_ID_ListW(pszFilter, Buffer, BufferLen, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_ID_List_ExA == "on"]
+foreign {
+    // param-hint: pszFilter optional
+    // param-hint: Buffer len=param[2]
+    // param-hint: hMachine optional
+    func CM_Get_Device_ID_List_ExA(pszFilter: CPointer<UInt8>, Buffer: CPointer<UInt8>, BufferLen: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_ID_List_ExA == "on"]
+public unsafe func Windows_CM_Get_Device_ID_List_ExA(pszFilter: CPointer<UInt8>, Buffer: CPointer<UInt8>, BufferLen: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Device_ID_List_ExA(pszFilter, Buffer, BufferLen, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_ID_List_ExW == "on"]
+foreign {
+    // param-hint: pszFilter optional
+    // param-hint: Buffer len=param[2]
+    // param-hint: hMachine optional
+    func CM_Get_Device_ID_List_ExW(pszFilter: CPointer<UInt16>, Buffer: CPointer<UInt16>, BufferLen: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_ID_List_ExW == "on"]
+public unsafe func Windows_CM_Get_Device_ID_List_ExW(pszFilter: CPointer<UInt16>, Buffer: CPointer<UInt16>, BufferLen: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Device_ID_List_ExW(pszFilter, Buffer, BufferLen, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_ID_List_SizeA == "on"]
+foreign {
+    // param-hint: pszFilter optional
+    func CM_Get_Device_ID_List_SizeA(pulLen: CPointer<UInt32>, pszFilter: CPointer<UInt8>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_ID_List_SizeA == "on"]
+public unsafe func Windows_CM_Get_Device_ID_List_SizeA(pulLen: CPointer<UInt32>, pszFilter: CPointer<UInt8>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_Device_ID_List_SizeA(pulLen, pszFilter, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_ID_List_SizeW == "on"]
+foreign {
+    // param-hint: pszFilter optional
+    func CM_Get_Device_ID_List_SizeW(pulLen: CPointer<UInt32>, pszFilter: CPointer<UInt16>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_ID_List_SizeW == "on"]
+public unsafe func Windows_CM_Get_Device_ID_List_SizeW(pulLen: CPointer<UInt32>, pszFilter: CPointer<UInt16>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_Device_ID_List_SizeW(pulLen, pszFilter, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_ID_List_Size_ExA == "on"]
+foreign {
+    // param-hint: pszFilter optional
+    // param-hint: hMachine optional
+    func CM_Get_Device_ID_List_Size_ExA(pulLen: CPointer<UInt32>, pszFilter: CPointer<UInt8>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_ID_List_Size_ExA == "on"]
+public unsafe func Windows_CM_Get_Device_ID_List_Size_ExA(pulLen: CPointer<UInt32>, pszFilter: CPointer<UInt8>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Device_ID_List_Size_ExA(pulLen, pszFilter, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_ID_List_Size_ExW == "on"]
+foreign {
+    // param-hint: pszFilter optional
+    // param-hint: hMachine optional
+    func CM_Get_Device_ID_List_Size_ExW(pulLen: CPointer<UInt32>, pszFilter: CPointer<UInt16>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_ID_List_Size_ExW == "on"]
+public unsafe func Windows_CM_Get_Device_ID_List_Size_ExW(pulLen: CPointer<UInt32>, pszFilter: CPointer<UInt16>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Device_ID_List_Size_ExW(pulLen, pszFilter, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_ID_Size == "on"]
+foreign {
+    func CM_Get_Device_ID_Size(pulLen: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_ID_Size == "on"]
+public unsafe func Windows_CM_Get_Device_ID_Size(pulLen: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_Device_ID_Size(pulLen, dnDevInst, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_ID_Size_Ex == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Get_Device_ID_Size_Ex(pulLen: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_ID_Size_Ex == "on"]
+public unsafe func Windows_CM_Get_Device_ID_Size_Ex(pulLen: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Device_ID_Size_Ex(pulLen, dnDevInst, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_Interface_AliasA == "on"]
+foreign {
+    // param-hint: pszAliasDeviceInterface len=param[3]
+    func CM_Get_Device_Interface_AliasA(pszDeviceInterface: CPointer<UInt8>, AliasInterfaceGuid: CPointer<GUID>, pszAliasDeviceInterface: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_Interface_AliasA == "on"]
+public unsafe func Windows_CM_Get_Device_Interface_AliasA(pszDeviceInterface: CPointer<UInt8>, AliasInterfaceGuid: CPointer<GUID>, pszAliasDeviceInterface: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_Device_Interface_AliasA(pszDeviceInterface, AliasInterfaceGuid, pszAliasDeviceInterface, pulLength, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_Interface_AliasW == "on"]
+foreign {
+    // param-hint: pszAliasDeviceInterface len=param[3]
+    func CM_Get_Device_Interface_AliasW(pszDeviceInterface: CPointer<UInt16>, AliasInterfaceGuid: CPointer<GUID>, pszAliasDeviceInterface: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_Interface_AliasW == "on"]
+public unsafe func Windows_CM_Get_Device_Interface_AliasW(pszDeviceInterface: CPointer<UInt16>, AliasInterfaceGuid: CPointer<GUID>, pszAliasDeviceInterface: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_Device_Interface_AliasW(pszDeviceInterface, AliasInterfaceGuid, pszAliasDeviceInterface, pulLength, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_Interface_Alias_ExA == "on"]
+foreign {
+    // param-hint: pszAliasDeviceInterface len=param[3]
+    // param-hint: hMachine optional
+    func CM_Get_Device_Interface_Alias_ExA(pszDeviceInterface: CPointer<UInt8>, AliasInterfaceGuid: CPointer<GUID>, pszAliasDeviceInterface: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_Interface_Alias_ExA == "on"]
+public unsafe func Windows_CM_Get_Device_Interface_Alias_ExA(pszDeviceInterface: CPointer<UInt8>, AliasInterfaceGuid: CPointer<GUID>, pszAliasDeviceInterface: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Device_Interface_Alias_ExA(pszDeviceInterface, AliasInterfaceGuid, pszAliasDeviceInterface, pulLength, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_Interface_Alias_ExW == "on"]
+foreign {
+    // param-hint: pszAliasDeviceInterface len=param[3]
+    // param-hint: hMachine optional
+    func CM_Get_Device_Interface_Alias_ExW(pszDeviceInterface: CPointer<UInt16>, AliasInterfaceGuid: CPointer<GUID>, pszAliasDeviceInterface: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_Interface_Alias_ExW == "on"]
+public unsafe func Windows_CM_Get_Device_Interface_Alias_ExW(pszDeviceInterface: CPointer<UInt16>, AliasInterfaceGuid: CPointer<GUID>, pszAliasDeviceInterface: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Device_Interface_Alias_ExW(pszDeviceInterface, AliasInterfaceGuid, pszAliasDeviceInterface, pulLength, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_Interface_ListA == "on"]
+foreign {
+    // param-hint: pDeviceID optional
+    // param-hint: Buffer len=param[3]
+    func CM_Get_Device_Interface_ListA(InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt8>, Buffer: CPointer<UInt8>, BufferLen: UInt32, ulFlags: CM_GET_DEVICE_INTERFACE_LIST_FLAGSAbi): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_Interface_ListA == "on"]
+public unsafe func Windows_CM_Get_Device_Interface_ListA(InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt8>, Buffer: CPointer<UInt8>, BufferLen: UInt32, ulFlags: CM_GET_DEVICE_INTERFACE_LIST_FLAGSAbi): CONFIGRETAbi {
+    return CM_Get_Device_Interface_ListA(InterfaceClassGuid, pDeviceID, Buffer, BufferLen, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_Interface_ListW == "on"]
+foreign {
+    // param-hint: pDeviceID optional
+    // param-hint: Buffer len=param[3]
+    func CM_Get_Device_Interface_ListW(InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt16>, Buffer: CPointer<UInt16>, BufferLen: UInt32, ulFlags: CM_GET_DEVICE_INTERFACE_LIST_FLAGSAbi): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_Interface_ListW == "on"]
+public unsafe func Windows_CM_Get_Device_Interface_ListW(InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt16>, Buffer: CPointer<UInt16>, BufferLen: UInt32, ulFlags: CM_GET_DEVICE_INTERFACE_LIST_FLAGSAbi): CONFIGRETAbi {
+    return CM_Get_Device_Interface_ListW(InterfaceClassGuid, pDeviceID, Buffer, BufferLen, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_Interface_List_ExA == "on"]
+foreign {
+    // param-hint: pDeviceID optional
+    // param-hint: Buffer len=param[3]
+    // param-hint: hMachine optional
+    func CM_Get_Device_Interface_List_ExA(InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt8>, Buffer: CPointer<UInt8>, BufferLen: UInt32, ulFlags: CM_GET_DEVICE_INTERFACE_LIST_FLAGSAbi, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_Interface_List_ExA == "on"]
+public unsafe func Windows_CM_Get_Device_Interface_List_ExA(InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt8>, Buffer: CPointer<UInt8>, BufferLen: UInt32, ulFlags: CM_GET_DEVICE_INTERFACE_LIST_FLAGSAbi, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Device_Interface_List_ExA(InterfaceClassGuid, pDeviceID, Buffer, BufferLen, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_Interface_List_ExW == "on"]
+foreign {
+    // param-hint: pDeviceID optional
+    // param-hint: Buffer len=param[3]
+    // param-hint: hMachine optional
+    func CM_Get_Device_Interface_List_ExW(InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt16>, Buffer: CPointer<UInt16>, BufferLen: UInt32, ulFlags: CM_GET_DEVICE_INTERFACE_LIST_FLAGSAbi, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_Interface_List_ExW == "on"]
+public unsafe func Windows_CM_Get_Device_Interface_List_ExW(InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt16>, Buffer: CPointer<UInt16>, BufferLen: UInt32, ulFlags: CM_GET_DEVICE_INTERFACE_LIST_FLAGSAbi, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Device_Interface_List_ExW(InterfaceClassGuid, pDeviceID, Buffer, BufferLen, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_Interface_List_SizeA == "on"]
+foreign {
+    // param-hint: pDeviceID optional
+    func CM_Get_Device_Interface_List_SizeA(pulLen: CPointer<UInt32>, InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt8>, ulFlags: CM_GET_DEVICE_INTERFACE_LIST_FLAGSAbi): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_Interface_List_SizeA == "on"]
+public unsafe func Windows_CM_Get_Device_Interface_List_SizeA(pulLen: CPointer<UInt32>, InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt8>, ulFlags: CM_GET_DEVICE_INTERFACE_LIST_FLAGSAbi): CONFIGRETAbi {
+    return CM_Get_Device_Interface_List_SizeA(pulLen, InterfaceClassGuid, pDeviceID, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_Interface_List_SizeW == "on"]
+foreign {
+    // param-hint: pDeviceID optional
+    func CM_Get_Device_Interface_List_SizeW(pulLen: CPointer<UInt32>, InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt16>, ulFlags: CM_GET_DEVICE_INTERFACE_LIST_FLAGSAbi): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_Interface_List_SizeW == "on"]
+public unsafe func Windows_CM_Get_Device_Interface_List_SizeW(pulLen: CPointer<UInt32>, InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt16>, ulFlags: CM_GET_DEVICE_INTERFACE_LIST_FLAGSAbi): CONFIGRETAbi {
+    return CM_Get_Device_Interface_List_SizeW(pulLen, InterfaceClassGuid, pDeviceID, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_Interface_List_Size_ExA == "on"]
+foreign {
+    // param-hint: pDeviceID optional
+    // param-hint: hMachine optional
+    func CM_Get_Device_Interface_List_Size_ExA(pulLen: CPointer<UInt32>, InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt8>, ulFlags: CM_GET_DEVICE_INTERFACE_LIST_FLAGSAbi, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_Interface_List_Size_ExA == "on"]
+public unsafe func Windows_CM_Get_Device_Interface_List_Size_ExA(pulLen: CPointer<UInt32>, InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt8>, ulFlags: CM_GET_DEVICE_INTERFACE_LIST_FLAGSAbi, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Device_Interface_List_Size_ExA(pulLen, InterfaceClassGuid, pDeviceID, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_Interface_List_Size_ExW == "on"]
+foreign {
+    // param-hint: pDeviceID optional
+    // param-hint: hMachine optional
+    func CM_Get_Device_Interface_List_Size_ExW(pulLen: CPointer<UInt32>, InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt16>, ulFlags: CM_GET_DEVICE_INTERFACE_LIST_FLAGSAbi, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_Interface_List_Size_ExW == "on"]
+public unsafe func Windows_CM_Get_Device_Interface_List_Size_ExW(pulLen: CPointer<UInt32>, InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt16>, ulFlags: CM_GET_DEVICE_INTERFACE_LIST_FLAGSAbi, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Device_Interface_List_Size_ExW(pulLen, InterfaceClassGuid, pDeviceID, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_Interface_PropertyW == "on" && Windows_Win32_Devices_Properties == "on"]
+foreign {
     // param-hint: PropertyBuffer bytes=param[4] optional
     func CM_Get_Device_Interface_PropertyW(pszDeviceInterface: CPointer<UInt16>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPEAbi>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_Interface_PropertyW == "on" && Windows_Win32_Devices_Properties == "on"]
+public unsafe func Windows_CM_Get_Device_Interface_PropertyW(pszDeviceInterface: CPointer<UInt16>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPEAbi>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_Device_Interface_PropertyW(pszDeviceInterface, PropertyKey, PropertyType, PropertyBuffer, PropertyBufferSize, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_Interface_Property_ExW == "on" && Windows_Win32_Devices_Properties == "on"]
+foreign {
     // param-hint: PropertyBuffer bytes=param[4] optional
     // param-hint: hMachine optional
     func CM_Get_Device_Interface_Property_ExW(pszDeviceInterface: CPointer<UInt16>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPEAbi>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_Interface_Property_ExW == "on" && Windows_Win32_Devices_Properties == "on"]
+public unsafe func Windows_CM_Get_Device_Interface_Property_ExW(pszDeviceInterface: CPointer<UInt16>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPEAbi>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Device_Interface_Property_ExW(pszDeviceInterface, PropertyKey, PropertyType, PropertyBuffer, PropertyBufferSize, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_Interface_Property_KeysW == "on"]
+foreign {
+    // param-hint: PropertyKeyArray len=param[2] optional
+    func CM_Get_Device_Interface_Property_KeysW(pszDeviceInterface: CPointer<UInt16>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyKeyCount: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_Interface_Property_KeysW == "on"]
+public unsafe func Windows_CM_Get_Device_Interface_Property_KeysW(pszDeviceInterface: CPointer<UInt16>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyKeyCount: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_Device_Interface_Property_KeysW(pszDeviceInterface, PropertyKeyArray, PropertyKeyCount, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_Interface_Property_Keys_ExW == "on"]
+foreign {
+    // param-hint: PropertyKeyArray len=param[2] optional
+    // param-hint: hMachine optional
+    func CM_Get_Device_Interface_Property_Keys_ExW(pszDeviceInterface: CPointer<UInt16>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyKeyCount: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Device_Interface_Property_Keys_ExW == "on"]
+public unsafe func Windows_CM_Get_Device_Interface_Property_Keys_ExW(pszDeviceInterface: CPointer<UInt16>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyKeyCount: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Device_Interface_Property_Keys_ExW(pszDeviceInterface, PropertyKeyArray, PropertyKeyCount, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_First_Log_Conf == "on"]
+foreign {
+    // param-hint: plcLogConf optional
+    func CM_Get_First_Log_Conf(plcLogConf: CPointer<UIntNative>, dnDevInst: UInt32, ulFlags: CM_LOG_CONFAbi): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_First_Log_Conf == "on"]
+public unsafe func Windows_CM_Get_First_Log_Conf(plcLogConf: CPointer<UIntNative>, dnDevInst: UInt32, ulFlags: CM_LOG_CONFAbi): CONFIGRETAbi {
+    return CM_Get_First_Log_Conf(plcLogConf, dnDevInst, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_First_Log_Conf_Ex == "on"]
+foreign {
+    // param-hint: plcLogConf optional
+    // param-hint: hMachine optional
+    func CM_Get_First_Log_Conf_Ex(plcLogConf: CPointer<UIntNative>, dnDevInst: UInt32, ulFlags: CM_LOG_CONFAbi, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_First_Log_Conf_Ex == "on"]
+public unsafe func Windows_CM_Get_First_Log_Conf_Ex(plcLogConf: CPointer<UIntNative>, dnDevInst: UInt32, ulFlags: CM_LOG_CONFAbi, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_First_Log_Conf_Ex(plcLogConf, dnDevInst, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Global_State == "on"]
+foreign {
+    func CM_Get_Global_State(pulState: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Global_State == "on"]
+public unsafe func Windows_CM_Get_Global_State(pulState: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_Global_State(pulState, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Global_State_Ex == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Get_Global_State_Ex(pulState: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Global_State_Ex == "on"]
+public unsafe func Windows_CM_Get_Global_State_Ex(pulState: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Global_State_Ex(pulState, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_HW_Prof_FlagsA == "on"]
+foreign {
+    func CM_Get_HW_Prof_FlagsA(pDeviceID: CPointer<UInt8>, ulHardwareProfile: UInt32, pulValue: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_HW_Prof_FlagsA == "on"]
+public unsafe func Windows_CM_Get_HW_Prof_FlagsA(pDeviceID: CPointer<UInt8>, ulHardwareProfile: UInt32, pulValue: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_HW_Prof_FlagsA(pDeviceID, ulHardwareProfile, pulValue, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_HW_Prof_FlagsW == "on"]
+foreign {
+    func CM_Get_HW_Prof_FlagsW(pDeviceID: CPointer<UInt16>, ulHardwareProfile: UInt32, pulValue: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_HW_Prof_FlagsW == "on"]
+public unsafe func Windows_CM_Get_HW_Prof_FlagsW(pDeviceID: CPointer<UInt16>, ulHardwareProfile: UInt32, pulValue: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_HW_Prof_FlagsW(pDeviceID, ulHardwareProfile, pulValue, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_HW_Prof_Flags_ExA == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Get_HW_Prof_Flags_ExA(pDeviceID: CPointer<UInt8>, ulHardwareProfile: UInt32, pulValue: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_HW_Prof_Flags_ExA == "on"]
+public unsafe func Windows_CM_Get_HW_Prof_Flags_ExA(pDeviceID: CPointer<UInt8>, ulHardwareProfile: UInt32, pulValue: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_HW_Prof_Flags_ExA(pDeviceID, ulHardwareProfile, pulValue, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_HW_Prof_Flags_ExW == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Get_HW_Prof_Flags_ExW(pDeviceID: CPointer<UInt16>, ulHardwareProfile: UInt32, pulValue: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_HW_Prof_Flags_ExW == "on"]
+public unsafe func Windows_CM_Get_HW_Prof_Flags_ExW(pDeviceID: CPointer<UInt16>, ulHardwareProfile: UInt32, pulValue: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_HW_Prof_Flags_ExW(pDeviceID, ulHardwareProfile, pulValue, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Hardware_Profile_InfoA == "on"]
+foreign {
+    func CM_Get_Hardware_Profile_InfoA(ulIndex: UInt32, pHWProfileInfo: CPointer<HWPROFILEINFO_A>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Hardware_Profile_InfoA == "on"]
+public unsafe func Windows_CM_Get_Hardware_Profile_InfoA(ulIndex: UInt32, pHWProfileInfo: CPointer<HWPROFILEINFO_A>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_Hardware_Profile_InfoA(ulIndex, pHWProfileInfo, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Hardware_Profile_InfoW == "on"]
+foreign {
+    func CM_Get_Hardware_Profile_InfoW(ulIndex: UInt32, pHWProfileInfo: CPointer<HWPROFILEINFO_W>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Hardware_Profile_InfoW == "on"]
+public unsafe func Windows_CM_Get_Hardware_Profile_InfoW(ulIndex: UInt32, pHWProfileInfo: CPointer<HWPROFILEINFO_W>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_Hardware_Profile_InfoW(ulIndex, pHWProfileInfo, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Hardware_Profile_Info_ExA == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Get_Hardware_Profile_Info_ExA(ulIndex: UInt32, pHWProfileInfo: CPointer<HWPROFILEINFO_A>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Hardware_Profile_Info_ExA == "on"]
+public unsafe func Windows_CM_Get_Hardware_Profile_Info_ExA(ulIndex: UInt32, pHWProfileInfo: CPointer<HWPROFILEINFO_A>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Hardware_Profile_Info_ExA(ulIndex, pHWProfileInfo, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Hardware_Profile_Info_ExW == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Get_Hardware_Profile_Info_ExW(ulIndex: UInt32, pHWProfileInfo: CPointer<HWPROFILEINFO_W>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Hardware_Profile_Info_ExW == "on"]
+public unsafe func Windows_CM_Get_Hardware_Profile_Info_ExW(ulIndex: UInt32, pHWProfileInfo: CPointer<HWPROFILEINFO_W>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Hardware_Profile_Info_ExW(ulIndex, pHWProfileInfo, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Log_Conf_Priority == "on"]
+foreign {
+    func CM_Get_Log_Conf_Priority(lcLogConf: UIntNative, pPriority: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Log_Conf_Priority == "on"]
+public unsafe func Windows_CM_Get_Log_Conf_Priority(lcLogConf: UIntNative, pPriority: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_Log_Conf_Priority(lcLogConf, pPriority, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Log_Conf_Priority_Ex == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Get_Log_Conf_Priority_Ex(lcLogConf: UIntNative, pPriority: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Log_Conf_Priority_Ex == "on"]
+public unsafe func Windows_CM_Get_Log_Conf_Priority_Ex(lcLogConf: UIntNative, pPriority: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Log_Conf_Priority_Ex(lcLogConf, pPriority, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Next_Log_Conf == "on"]
+foreign {
+    // param-hint: plcLogConf optional
+    // param-hint: ulFlags reserved
+    func CM_Get_Next_Log_Conf(plcLogConf: CPointer<UIntNative>, lcLogConf: UIntNative, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Next_Log_Conf == "on"]
+public unsafe func Windows_CM_Get_Next_Log_Conf(plcLogConf: CPointer<UIntNative>, lcLogConf: UIntNative, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_Next_Log_Conf(plcLogConf, lcLogConf, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Next_Log_Conf_Ex == "on"]
+foreign {
+    // param-hint: plcLogConf optional
+    // param-hint: ulFlags reserved
+    // param-hint: hMachine optional
+    func CM_Get_Next_Log_Conf_Ex(plcLogConf: CPointer<UIntNative>, lcLogConf: UIntNative, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Next_Log_Conf_Ex == "on"]
+public unsafe func Windows_CM_Get_Next_Log_Conf_Ex(plcLogConf: CPointer<UIntNative>, lcLogConf: UIntNative, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Next_Log_Conf_Ex(plcLogConf, lcLogConf, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Next_Res_Des == "on"]
+foreign {
+    // param-hint: pResourceID optional
+    func CM_Get_Next_Res_Des(prdResDes: CPointer<UIntNative>, rdResDes: UIntNative, ForResource: CM_RESTYPEAbi, pResourceID: CPointer<CM_RESTYPEAbi>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Next_Res_Des == "on"]
+public unsafe func Windows_CM_Get_Next_Res_Des(prdResDes: CPointer<UIntNative>, rdResDes: UIntNative, ForResource: CM_RESTYPEAbi, pResourceID: CPointer<CM_RESTYPEAbi>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_Next_Res_Des(prdResDes, rdResDes, ForResource, pResourceID, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Next_Res_Des_Ex == "on"]
+foreign {
+    // param-hint: pResourceID optional
+    // param-hint: hMachine optional
+    func CM_Get_Next_Res_Des_Ex(prdResDes: CPointer<UIntNative>, rdResDes: UIntNative, ForResource: CM_RESTYPEAbi, pResourceID: CPointer<CM_RESTYPEAbi>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Next_Res_Des_Ex == "on"]
+public unsafe func Windows_CM_Get_Next_Res_Des_Ex(prdResDes: CPointer<UIntNative>, rdResDes: UIntNative, ForResource: CM_RESTYPEAbi, pResourceID: CPointer<CM_RESTYPEAbi>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Next_Res_Des_Ex(prdResDes, rdResDes, ForResource, pResourceID, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Parent == "on"]
+foreign {
+    func CM_Get_Parent(pdnDevInst: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Parent == "on"]
+public unsafe func Windows_CM_Get_Parent(pdnDevInst: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_Parent(pdnDevInst, dnDevInst, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Parent_Ex == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Get_Parent_Ex(pdnDevInst: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Parent_Ex == "on"]
+public unsafe func Windows_CM_Get_Parent_Ex(pdnDevInst: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Parent_Ex(pdnDevInst, dnDevInst, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Res_Des_Data == "on"]
+foreign {
+    // param-hint: Buffer bytes=param[2]
+    func CM_Get_Res_Des_Data(rdResDes: UIntNative, Buffer: CPointer<Unit>, BufferLen: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Res_Des_Data == "on"]
+public unsafe func Windows_CM_Get_Res_Des_Data(rdResDes: UIntNative, Buffer: CPointer<Unit>, BufferLen: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_Res_Des_Data(rdResDes, Buffer, BufferLen, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Res_Des_Data_Ex == "on"]
+foreign {
+    // param-hint: Buffer bytes=param[2]
+    // param-hint: hMachine optional
+    func CM_Get_Res_Des_Data_Ex(rdResDes: UIntNative, Buffer: CPointer<Unit>, BufferLen: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Res_Des_Data_Ex == "on"]
+public unsafe func Windows_CM_Get_Res_Des_Data_Ex(rdResDes: UIntNative, Buffer: CPointer<Unit>, BufferLen: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Res_Des_Data_Ex(rdResDes, Buffer, BufferLen, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Res_Des_Data_Size == "on"]
+foreign {
+    func CM_Get_Res_Des_Data_Size(pulSize: CPointer<UInt32>, rdResDes: UIntNative, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Res_Des_Data_Size == "on"]
+public unsafe func Windows_CM_Get_Res_Des_Data_Size(pulSize: CPointer<UInt32>, rdResDes: UIntNative, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_Res_Des_Data_Size(pulSize, rdResDes, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Res_Des_Data_Size_Ex == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Get_Res_Des_Data_Size_Ex(pulSize: CPointer<UInt32>, rdResDes: UIntNative, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Res_Des_Data_Size_Ex == "on"]
+public unsafe func Windows_CM_Get_Res_Des_Data_Size_Ex(pulSize: CPointer<UInt32>, rdResDes: UIntNative, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Res_Des_Data_Size_Ex(pulSize, rdResDes, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Resource_Conflict_Count == "on"]
+foreign {
+    func CM_Get_Resource_Conflict_Count(clConflictList: UIntNative, pulCount: CPointer<UInt32>): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Resource_Conflict_Count == "on"]
+public unsafe func Windows_CM_Get_Resource_Conflict_Count(clConflictList: UIntNative, pulCount: CPointer<UInt32>): CONFIGRETAbi {
+    return CM_Get_Resource_Conflict_Count(clConflictList, pulCount)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Resource_Conflict_DetailsA == "on"]
+foreign {
+    func CM_Get_Resource_Conflict_DetailsA(clConflictList: UIntNative, ulIndex: UInt32, pConflictDetails: CPointer<CONFLICT_DETAILS_AAbi>): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Resource_Conflict_DetailsA == "on"]
+public unsafe func Windows_CM_Get_Resource_Conflict_DetailsA(clConflictList: UIntNative, ulIndex: UInt32, pConflictDetails: CPointer<CONFLICT_DETAILS_AAbi>): CONFIGRETAbi {
+    return CM_Get_Resource_Conflict_DetailsA(clConflictList, ulIndex, pConflictDetails)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Resource_Conflict_DetailsW == "on"]
+foreign {
+    func CM_Get_Resource_Conflict_DetailsW(clConflictList: UIntNative, ulIndex: UInt32, pConflictDetails: CPointer<CONFLICT_DETAILS_WAbi>): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Resource_Conflict_DetailsW == "on"]
+public unsafe func Windows_CM_Get_Resource_Conflict_DetailsW(clConflictList: UIntNative, ulIndex: UInt32, pConflictDetails: CPointer<CONFLICT_DETAILS_WAbi>): CONFIGRETAbi {
+    return CM_Get_Resource_Conflict_DetailsW(clConflictList, ulIndex, pConflictDetails)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Sibling == "on"]
+foreign {
+    func CM_Get_Sibling(pdnDevInst: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Sibling == "on"]
+public unsafe func Windows_CM_Get_Sibling(pdnDevInst: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Get_Sibling(pdnDevInst, dnDevInst, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Sibling_Ex == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Get_Sibling_Ex(pdnDevInst: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Sibling_Ex == "on"]
+public unsafe func Windows_CM_Get_Sibling_Ex(pdnDevInst: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Get_Sibling_Ex(pdnDevInst, dnDevInst, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Version == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func CM_Get_Version(): UInt16
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Version == "on"]
+public unsafe func Windows_CM_Get_Version(): UInt16 {
+    return CM_Get_Version()
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Version_Ex == "on"]
+foreign {
+    // param-hint: hMachine optional
+    // pinvoke-hint: SetLastError
+    func CM_Get_Version_Ex(hMachine: IntNative): UInt16
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Get_Version_Ex == "on"]
+public unsafe func Windows_CM_Get_Version_Ex(hMachine: IntNative): UInt16 {
+    return CM_Get_Version_Ex(hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Intersect_Range_List == "on"]
+foreign {
+    func CM_Intersect_Range_List(rlhOld1: UIntNative, rlhOld2: UIntNative, rlhNew: UIntNative, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Intersect_Range_List == "on"]
+public unsafe func Windows_CM_Intersect_Range_List(rlhOld1: UIntNative, rlhOld2: UIntNative, rlhNew: UIntNative, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Intersect_Range_List(rlhOld1, rlhOld2, rlhNew, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Invert_Range_List == "on"]
+foreign {
+    func CM_Invert_Range_List(rlhOld: UIntNative, rlhNew: UIntNative, ullMaxValue: UInt64, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Invert_Range_List == "on"]
+public unsafe func Windows_CM_Invert_Range_List(rlhOld: UIntNative, rlhNew: UIntNative, ullMaxValue: UInt64, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Invert_Range_List(rlhOld, rlhNew, ullMaxValue, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Is_Dock_Station_Present == "on"]
+foreign {
+    func CM_Is_Dock_Station_Present(pbPresent: CPointer<Int32>): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Is_Dock_Station_Present == "on"]
+public unsafe func Windows_CM_Is_Dock_Station_Present(pbPresent: CPointer<Int32>): CONFIGRETAbi {
+    return CM_Is_Dock_Station_Present(pbPresent)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Is_Dock_Station_Present_Ex == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Is_Dock_Station_Present_Ex(pbPresent: CPointer<Int32>, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Is_Dock_Station_Present_Ex == "on"]
+public unsafe func Windows_CM_Is_Dock_Station_Present_Ex(pbPresent: CPointer<Int32>, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Is_Dock_Station_Present_Ex(pbPresent, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Is_Version_Available == "on"]
+foreign {
+    func CM_Is_Version_Available(wVersion: UInt16): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Is_Version_Available == "on"]
+public unsafe func Windows_CM_Is_Version_Available(wVersion: UInt16): Int32 {
+    return CM_Is_Version_Available(wVersion)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Is_Version_Available_Ex == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Is_Version_Available_Ex(wVersion: UInt16, hMachine: IntNative): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Is_Version_Available_Ex == "on"]
+public unsafe func Windows_CM_Is_Version_Available_Ex(wVersion: UInt16, hMachine: IntNative): Int32 {
+    return CM_Is_Version_Available_Ex(wVersion, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Locate_DevNodeA == "on"]
+foreign {
+    // param-hint: pDeviceID optional
+    func CM_Locate_DevNodeA(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt8>, ulFlags: CM_LOCATE_DEVNODE_FLAGSAbi): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Locate_DevNodeA == "on"]
+public unsafe func Windows_CM_Locate_DevNodeA(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt8>, ulFlags: CM_LOCATE_DEVNODE_FLAGSAbi): CONFIGRETAbi {
+    return CM_Locate_DevNodeA(pdnDevInst, pDeviceID, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Locate_DevNodeW == "on"]
+foreign {
+    // param-hint: pDeviceID optional
+    func CM_Locate_DevNodeW(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt16>, ulFlags: CM_LOCATE_DEVNODE_FLAGSAbi): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Locate_DevNodeW == "on"]
+public unsafe func Windows_CM_Locate_DevNodeW(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt16>, ulFlags: CM_LOCATE_DEVNODE_FLAGSAbi): CONFIGRETAbi {
+    return CM_Locate_DevNodeW(pdnDevInst, pDeviceID, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Locate_DevNode_ExA == "on"]
+foreign {
+    // param-hint: pDeviceID optional
+    // param-hint: hMachine optional
+    func CM_Locate_DevNode_ExA(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt8>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Locate_DevNode_ExA == "on"]
+public unsafe func Windows_CM_Locate_DevNode_ExA(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt8>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Locate_DevNode_ExA(pdnDevInst, pDeviceID, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Locate_DevNode_ExW == "on"]
+foreign {
+    // param-hint: pDeviceID optional
+    // param-hint: hMachine optional
+    func CM_Locate_DevNode_ExW(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt16>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Locate_DevNode_ExW == "on"]
+public unsafe func Windows_CM_Locate_DevNode_ExW(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt16>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Locate_DevNode_ExW(pdnDevInst, pDeviceID, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_MapCrToWin32Err == "on"]
+foreign {
+    func CM_MapCrToWin32Err(CmReturnCode: CONFIGRETAbi, DefaultErr: UInt32): UInt32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_MapCrToWin32Err == "on"]
+public unsafe func Windows_CM_MapCrToWin32Err(CmReturnCode: CONFIGRETAbi, DefaultErr: UInt32): UInt32 {
+    return CM_MapCrToWin32Err(CmReturnCode, DefaultErr)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Merge_Range_List == "on"]
+foreign {
+    func CM_Merge_Range_List(rlhOld1: UIntNative, rlhOld2: UIntNative, rlhNew: UIntNative, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Merge_Range_List == "on"]
+public unsafe func Windows_CM_Merge_Range_List(rlhOld1: UIntNative, rlhOld2: UIntNative, rlhNew: UIntNative, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Merge_Range_List(rlhOld1, rlhOld2, rlhNew, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Modify_Res_Des == "on"]
+foreign {
+    // param-hint: ResourceData bytes=param[4]
+    func CM_Modify_Res_Des(prdResDes: CPointer<UIntNative>, rdResDes: UIntNative, ResourceID: UInt32, ResourceData: CPointer<Unit>, ResourceLen: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Modify_Res_Des == "on"]
+public unsafe func Windows_CM_Modify_Res_Des(prdResDes: CPointer<UIntNative>, rdResDes: UIntNative, ResourceID: UInt32, ResourceData: CPointer<Unit>, ResourceLen: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Modify_Res_Des(prdResDes, rdResDes, ResourceID, ResourceData, ResourceLen, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Modify_Res_Des_Ex == "on"]
+foreign {
+    // param-hint: ResourceData bytes=param[4]
+    // param-hint: hMachine optional
+    func CM_Modify_Res_Des_Ex(prdResDes: CPointer<UIntNative>, rdResDes: UIntNative, ResourceID: UInt32, ResourceData: CPointer<Unit>, ResourceLen: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Modify_Res_Des_Ex == "on"]
+public unsafe func Windows_CM_Modify_Res_Des_Ex(prdResDes: CPointer<UIntNative>, rdResDes: UIntNative, ResourceID: UInt32, ResourceData: CPointer<Unit>, ResourceLen: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Modify_Res_Des_Ex(prdResDes, rdResDes, ResourceID, ResourceData, ResourceLen, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Move_DevNode == "on"]
+foreign {
+    func CM_Move_DevNode(dnFromDevInst: UInt32, dnToDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Move_DevNode == "on"]
+public unsafe func Windows_CM_Move_DevNode(dnFromDevInst: UInt32, dnToDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Move_DevNode(dnFromDevInst, dnToDevInst, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Move_DevNode_Ex == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Move_DevNode_Ex(dnFromDevInst: UInt32, dnToDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Move_DevNode_Ex == "on"]
+public unsafe func Windows_CM_Move_DevNode_Ex(dnFromDevInst: UInt32, dnToDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Move_DevNode_Ex(dnFromDevInst, dnToDevInst, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Next_Range == "on"]
+foreign {
+    func CM_Next_Range(preElement: CPointer<UIntNative>, pullStart: CPointer<UInt64>, pullEnd: CPointer<UInt64>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Next_Range == "on"]
+public unsafe func Windows_CM_Next_Range(preElement: CPointer<UIntNative>, pullStart: CPointer<UInt64>, pullEnd: CPointer<UInt64>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Next_Range(preElement, pullStart, pullEnd, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Open_Class_KeyA == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: ClassGuid optional
+    // param-hint: pszClassName optional
+    func CM_Open_Class_KeyA(ClassGuid: CPointer<GUID>, pszClassName: CPointer<UInt8>, samDesired: UInt32, Disposition: UInt32, phkClass: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Open_Class_KeyA == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_CM_Open_Class_KeyA(ClassGuid: CPointer<GUID>, pszClassName: CPointer<UInt8>, samDesired: UInt32, Disposition: UInt32, phkClass: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Open_Class_KeyA(ClassGuid, pszClassName, samDesired, Disposition, phkClass, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Open_Class_KeyW == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: ClassGuid optional
+    // param-hint: pszClassName optional
+    func CM_Open_Class_KeyW(ClassGuid: CPointer<GUID>, pszClassName: CPointer<UInt16>, samDesired: UInt32, Disposition: UInt32, phkClass: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Open_Class_KeyW == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_CM_Open_Class_KeyW(ClassGuid: CPointer<GUID>, pszClassName: CPointer<UInt16>, samDesired: UInt32, Disposition: UInt32, phkClass: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Open_Class_KeyW(ClassGuid, pszClassName, samDesired, Disposition, phkClass, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Open_Class_Key_ExA == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: ClassGuid optional
+    // param-hint: pszClassName optional
+    // param-hint: hMachine optional
+    func CM_Open_Class_Key_ExA(ClassGuid: CPointer<GUID>, pszClassName: CPointer<UInt8>, samDesired: UInt32, Disposition: UInt32, phkClass: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Open_Class_Key_ExA == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_CM_Open_Class_Key_ExA(ClassGuid: CPointer<GUID>, pszClassName: CPointer<UInt8>, samDesired: UInt32, Disposition: UInt32, phkClass: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Open_Class_Key_ExA(ClassGuid, pszClassName, samDesired, Disposition, phkClass, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Open_Class_Key_ExW == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: ClassGuid optional
+    // param-hint: pszClassName optional
+    // param-hint: hMachine optional
+    func CM_Open_Class_Key_ExW(ClassGuid: CPointer<GUID>, pszClassName: CPointer<UInt16>, samDesired: UInt32, Disposition: UInt32, phkClass: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Open_Class_Key_ExW == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_CM_Open_Class_Key_ExW(ClassGuid: CPointer<GUID>, pszClassName: CPointer<UInt16>, samDesired: UInt32, Disposition: UInt32, phkClass: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Open_Class_Key_ExW(ClassGuid, pszClassName, samDesired, Disposition, phkClass, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Open_DevNode_Key == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    func CM_Open_DevNode_Key(dnDevNode: UInt32, samDesired: UInt32, ulHardwareProfile: UInt32, Disposition: UInt32, phkDevice: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Open_DevNode_Key == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_CM_Open_DevNode_Key(dnDevNode: UInt32, samDesired: UInt32, ulHardwareProfile: UInt32, Disposition: UInt32, phkDevice: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Open_DevNode_Key(dnDevNode, samDesired, ulHardwareProfile, Disposition, phkDevice, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Open_DevNode_Key_Ex == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Open_DevNode_Key_Ex(dnDevNode: UInt32, samDesired: UInt32, ulHardwareProfile: UInt32, Disposition: UInt32, phkDevice: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Open_DevNode_Key_Ex == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_CM_Open_DevNode_Key_Ex(dnDevNode: UInt32, samDesired: UInt32, ulHardwareProfile: UInt32, Disposition: UInt32, phkDevice: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Open_DevNode_Key_Ex(dnDevNode, samDesired, ulHardwareProfile, Disposition, phkDevice, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Open_Device_Interface_KeyA == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    func CM_Open_Device_Interface_KeyA(pszDeviceInterface: CPointer<UInt8>, samDesired: UInt32, Disposition: UInt32, phkDeviceInterface: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Open_Device_Interface_KeyA == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_CM_Open_Device_Interface_KeyA(pszDeviceInterface: CPointer<UInt8>, samDesired: UInt32, Disposition: UInt32, phkDeviceInterface: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Open_Device_Interface_KeyA(pszDeviceInterface, samDesired, Disposition, phkDeviceInterface, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Open_Device_Interface_KeyW == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    func CM_Open_Device_Interface_KeyW(pszDeviceInterface: CPointer<UInt16>, samDesired: UInt32, Disposition: UInt32, phkDeviceInterface: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Open_Device_Interface_KeyW == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_CM_Open_Device_Interface_KeyW(pszDeviceInterface: CPointer<UInt16>, samDesired: UInt32, Disposition: UInt32, phkDeviceInterface: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Open_Device_Interface_KeyW(pszDeviceInterface, samDesired, Disposition, phkDeviceInterface, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Open_Device_Interface_Key_ExA == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Open_Device_Interface_Key_ExA(pszDeviceInterface: CPointer<UInt8>, samDesired: UInt32, Disposition: UInt32, phkDeviceInterface: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Open_Device_Interface_Key_ExA == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_CM_Open_Device_Interface_Key_ExA(pszDeviceInterface: CPointer<UInt8>, samDesired: UInt32, Disposition: UInt32, phkDeviceInterface: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Open_Device_Interface_Key_ExA(pszDeviceInterface, samDesired, Disposition, phkDeviceInterface, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Open_Device_Interface_Key_ExW == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Open_Device_Interface_Key_ExW(pszDeviceInterface: CPointer<UInt16>, samDesired: UInt32, Disposition: UInt32, phkDeviceInterface: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Open_Device_Interface_Key_ExW == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_CM_Open_Device_Interface_Key_ExW(pszDeviceInterface: CPointer<UInt16>, samDesired: UInt32, Disposition: UInt32, phkDeviceInterface: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Open_Device_Interface_Key_ExW(pszDeviceInterface, samDesired, Disposition, phkDeviceInterface, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Query_And_Remove_SubTreeA == "on"]
+foreign {
+    // param-hint: pVetoType optional
+    // param-hint: pszVetoName len=param[3] optional
+    func CM_Query_And_Remove_SubTreeA(dnAncestor: UInt32, pVetoType: CPointer<PNP_VETO_TYPEAbi>, pszVetoName: CPointer<UInt8>, ulNameLength: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Query_And_Remove_SubTreeA == "on"]
+public unsafe func Windows_CM_Query_And_Remove_SubTreeA(dnAncestor: UInt32, pVetoType: CPointer<PNP_VETO_TYPEAbi>, pszVetoName: CPointer<UInt8>, ulNameLength: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Query_And_Remove_SubTreeA(dnAncestor, pVetoType, pszVetoName, ulNameLength, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Query_And_Remove_SubTreeW == "on"]
+foreign {
+    // param-hint: pVetoType optional
+    // param-hint: pszVetoName len=param[3] optional
+    func CM_Query_And_Remove_SubTreeW(dnAncestor: UInt32, pVetoType: CPointer<PNP_VETO_TYPEAbi>, pszVetoName: CPointer<UInt16>, ulNameLength: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Query_And_Remove_SubTreeW == "on"]
+public unsafe func Windows_CM_Query_And_Remove_SubTreeW(dnAncestor: UInt32, pVetoType: CPointer<PNP_VETO_TYPEAbi>, pszVetoName: CPointer<UInt16>, ulNameLength: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Query_And_Remove_SubTreeW(dnAncestor, pVetoType, pszVetoName, ulNameLength, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Query_And_Remove_SubTree_ExA == "on"]
+foreign {
+    // param-hint: pVetoType optional
+    // param-hint: pszVetoName len=param[3] optional
+    // param-hint: hMachine optional
+    func CM_Query_And_Remove_SubTree_ExA(dnAncestor: UInt32, pVetoType: CPointer<PNP_VETO_TYPEAbi>, pszVetoName: CPointer<UInt8>, ulNameLength: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Query_And_Remove_SubTree_ExA == "on"]
+public unsafe func Windows_CM_Query_And_Remove_SubTree_ExA(dnAncestor: UInt32, pVetoType: CPointer<PNP_VETO_TYPEAbi>, pszVetoName: CPointer<UInt8>, ulNameLength: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Query_And_Remove_SubTree_ExA(dnAncestor, pVetoType, pszVetoName, ulNameLength, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Query_And_Remove_SubTree_ExW == "on"]
+foreign {
+    // param-hint: pVetoType optional
+    // param-hint: pszVetoName len=param[3] optional
+    // param-hint: hMachine optional
+    func CM_Query_And_Remove_SubTree_ExW(dnAncestor: UInt32, pVetoType: CPointer<PNP_VETO_TYPEAbi>, pszVetoName: CPointer<UInt16>, ulNameLength: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Query_And_Remove_SubTree_ExW == "on"]
+public unsafe func Windows_CM_Query_And_Remove_SubTree_ExW(dnAncestor: UInt32, pVetoType: CPointer<PNP_VETO_TYPEAbi>, pszVetoName: CPointer<UInt16>, ulNameLength: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Query_And_Remove_SubTree_ExW(dnAncestor, pVetoType, pszVetoName, ulNameLength, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Query_Arbitrator_Free_Data == "on"]
+foreign {
+    // param-hint: pData bytes=param[1]
+    func CM_Query_Arbitrator_Free_Data(pData: CPointer<Unit>, DataLen: UInt32, dnDevInst: UInt32, ResourceID: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Query_Arbitrator_Free_Data == "on"]
+public unsafe func Windows_CM_Query_Arbitrator_Free_Data(pData: CPointer<Unit>, DataLen: UInt32, dnDevInst: UInt32, ResourceID: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Query_Arbitrator_Free_Data(pData, DataLen, dnDevInst, ResourceID, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Query_Arbitrator_Free_Data_Ex == "on"]
+foreign {
+    // param-hint: pData bytes=param[1]
+    // param-hint: hMachine optional
+    func CM_Query_Arbitrator_Free_Data_Ex(pData: CPointer<Unit>, DataLen: UInt32, dnDevInst: UInt32, ResourceID: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Query_Arbitrator_Free_Data_Ex == "on"]
+public unsafe func Windows_CM_Query_Arbitrator_Free_Data_Ex(pData: CPointer<Unit>, DataLen: UInt32, dnDevInst: UInt32, ResourceID: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Query_Arbitrator_Free_Data_Ex(pData, DataLen, dnDevInst, ResourceID, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Query_Arbitrator_Free_Size == "on"]
+foreign {
+    func CM_Query_Arbitrator_Free_Size(pulSize: CPointer<UInt32>, dnDevInst: UInt32, ResourceID: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Query_Arbitrator_Free_Size == "on"]
+public unsafe func Windows_CM_Query_Arbitrator_Free_Size(pulSize: CPointer<UInt32>, dnDevInst: UInt32, ResourceID: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Query_Arbitrator_Free_Size(pulSize, dnDevInst, ResourceID, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Query_Arbitrator_Free_Size_Ex == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Query_Arbitrator_Free_Size_Ex(pulSize: CPointer<UInt32>, dnDevInst: UInt32, ResourceID: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Query_Arbitrator_Free_Size_Ex == "on"]
+public unsafe func Windows_CM_Query_Arbitrator_Free_Size_Ex(pulSize: CPointer<UInt32>, dnDevInst: UInt32, ResourceID: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Query_Arbitrator_Free_Size_Ex(pulSize, dnDevInst, ResourceID, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Query_Remove_SubTree == "on"]
+foreign {
+    func CM_Query_Remove_SubTree(dnAncestor: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Query_Remove_SubTree == "on"]
+public unsafe func Windows_CM_Query_Remove_SubTree(dnAncestor: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Query_Remove_SubTree(dnAncestor, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Query_Remove_SubTree_Ex == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Query_Remove_SubTree_Ex(dnAncestor: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Query_Remove_SubTree_Ex == "on"]
+public unsafe func Windows_CM_Query_Remove_SubTree_Ex(dnAncestor: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Query_Remove_SubTree_Ex(dnAncestor, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Query_Resource_Conflict_List == "on"]
+foreign {
+    // param-hint: ResourceData bytes=param[4]
+    // param-hint: hMachine optional
+    func CM_Query_Resource_Conflict_List(pclConflictList: CPointer<UIntNative>, dnDevInst: UInt32, ResourceID: CM_RESTYPEAbi, ResourceData: CPointer<Unit>, ResourceLen: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Query_Resource_Conflict_List == "on"]
+public unsafe func Windows_CM_Query_Resource_Conflict_List(pclConflictList: CPointer<UIntNative>, dnDevInst: UInt32, ResourceID: CM_RESTYPEAbi, ResourceData: CPointer<Unit>, ResourceLen: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Query_Resource_Conflict_List(pclConflictList, dnDevInst, ResourceID, ResourceData, ResourceLen, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Reenumerate_DevNode == "on"]
+foreign {
+    func CM_Reenumerate_DevNode(dnDevInst: UInt32, ulFlags: CM_REENUMERATE_FLAGSAbi): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Reenumerate_DevNode == "on"]
+public unsafe func Windows_CM_Reenumerate_DevNode(dnDevInst: UInt32, ulFlags: CM_REENUMERATE_FLAGSAbi): CONFIGRETAbi {
+    return CM_Reenumerate_DevNode(dnDevInst, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Reenumerate_DevNode_Ex == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Reenumerate_DevNode_Ex(dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Reenumerate_DevNode_Ex == "on"]
+public unsafe func Windows_CM_Reenumerate_DevNode_Ex(dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Reenumerate_DevNode_Ex(dnDevInst, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Register_Device_Driver == "on"]
+foreign {
+    func CM_Register_Device_Driver(dnDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Register_Device_Driver == "on"]
+public unsafe func Windows_CM_Register_Device_Driver(dnDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Register_Device_Driver(dnDevInst, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Register_Device_Driver_Ex == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Register_Device_Driver_Ex(dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Register_Device_Driver_Ex == "on"]
+public unsafe func Windows_CM_Register_Device_Driver_Ex(dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Register_Device_Driver_Ex(dnDevInst, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Register_Device_InterfaceA == "on"]
+foreign {
+    // param-hint: pszReference optional
+    // param-hint: pszDeviceInterface len=param[4]
+    func CM_Register_Device_InterfaceA(dnDevInst: UInt32, InterfaceClassGuid: CPointer<GUID>, pszReference: CPointer<UInt8>, pszDeviceInterface: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Register_Device_InterfaceA == "on"]
+public unsafe func Windows_CM_Register_Device_InterfaceA(dnDevInst: UInt32, InterfaceClassGuid: CPointer<GUID>, pszReference: CPointer<UInt8>, pszDeviceInterface: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Register_Device_InterfaceA(dnDevInst, InterfaceClassGuid, pszReference, pszDeviceInterface, pulLength, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Register_Device_InterfaceW == "on"]
+foreign {
+    // param-hint: pszReference optional
+    // param-hint: pszDeviceInterface len=param[4]
+    func CM_Register_Device_InterfaceW(dnDevInst: UInt32, InterfaceClassGuid: CPointer<GUID>, pszReference: CPointer<UInt16>, pszDeviceInterface: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Register_Device_InterfaceW == "on"]
+public unsafe func Windows_CM_Register_Device_InterfaceW(dnDevInst: UInt32, InterfaceClassGuid: CPointer<GUID>, pszReference: CPointer<UInt16>, pszDeviceInterface: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Register_Device_InterfaceW(dnDevInst, InterfaceClassGuid, pszReference, pszDeviceInterface, pulLength, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Register_Device_Interface_ExA == "on"]
+foreign {
+    // param-hint: pszReference optional
+    // param-hint: pszDeviceInterface len=param[4]
+    // param-hint: hMachine optional
+    func CM_Register_Device_Interface_ExA(dnDevInst: UInt32, InterfaceClassGuid: CPointer<GUID>, pszReference: CPointer<UInt8>, pszDeviceInterface: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Register_Device_Interface_ExA == "on"]
+public unsafe func Windows_CM_Register_Device_Interface_ExA(dnDevInst: UInt32, InterfaceClassGuid: CPointer<GUID>, pszReference: CPointer<UInt8>, pszDeviceInterface: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Register_Device_Interface_ExA(dnDevInst, InterfaceClassGuid, pszReference, pszDeviceInterface, pulLength, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Register_Device_Interface_ExW == "on"]
+foreign {
+    // param-hint: pszReference optional
+    // param-hint: pszDeviceInterface len=param[4]
+    // param-hint: hMachine optional
+    func CM_Register_Device_Interface_ExW(dnDevInst: UInt32, InterfaceClassGuid: CPointer<GUID>, pszReference: CPointer<UInt16>, pszDeviceInterface: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Register_Device_Interface_ExW == "on"]
+public unsafe func Windows_CM_Register_Device_Interface_ExW(dnDevInst: UInt32, InterfaceClassGuid: CPointer<GUID>, pszReference: CPointer<UInt16>, pszDeviceInterface: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Register_Device_Interface_ExW(dnDevInst, InterfaceClassGuid, pszReference, pszDeviceInterface, pulLength, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Register_Notification == "on"]
+foreign {
+    // param-hint: pContext optional
+    func CM_Register_Notification(pFilter: CPointer<CM_NOTIFY_FILTERAbi>, pContext: CPointer<Unit>, pCallback: PCM_NOTIFY_CALLBACK, pNotifyContext: CPointer<HCMNOTIFICATION>): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Register_Notification == "on"]
+public unsafe func Windows_CM_Register_Notification(pFilter: CPointer<CM_NOTIFY_FILTERAbi>, pContext: CPointer<Unit>, pCallback: PCM_NOTIFY_CALLBACK, pNotifyContext: CPointer<HCMNOTIFICATION>): CONFIGRETAbi {
+    return CM_Register_Notification(pFilter, pContext, pCallback, pNotifyContext)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Remove_SubTree == "on"]
+foreign {
+    func CM_Remove_SubTree(dnAncestor: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Remove_SubTree == "on"]
+public unsafe func Windows_CM_Remove_SubTree(dnAncestor: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Remove_SubTree(dnAncestor, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Remove_SubTree_Ex == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Remove_SubTree_Ex(dnAncestor: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Remove_SubTree_Ex == "on"]
+public unsafe func Windows_CM_Remove_SubTree_Ex(dnAncestor: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Remove_SubTree_Ex(dnAncestor, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Request_Device_EjectA == "on"]
+foreign {
+    // param-hint: pVetoType optional
+    // param-hint: pszVetoName len=param[3] optional
+    func CM_Request_Device_EjectA(dnDevInst: UInt32, pVetoType: CPointer<PNP_VETO_TYPEAbi>, pszVetoName: CPointer<UInt8>, ulNameLength: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Request_Device_EjectA == "on"]
+public unsafe func Windows_CM_Request_Device_EjectA(dnDevInst: UInt32, pVetoType: CPointer<PNP_VETO_TYPEAbi>, pszVetoName: CPointer<UInt8>, ulNameLength: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Request_Device_EjectA(dnDevInst, pVetoType, pszVetoName, ulNameLength, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Request_Device_EjectW == "on"]
+foreign {
+    // param-hint: pVetoType optional
+    // param-hint: pszVetoName len=param[3] optional
+    func CM_Request_Device_EjectW(dnDevInst: UInt32, pVetoType: CPointer<PNP_VETO_TYPEAbi>, pszVetoName: CPointer<UInt16>, ulNameLength: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Request_Device_EjectW == "on"]
+public unsafe func Windows_CM_Request_Device_EjectW(dnDevInst: UInt32, pVetoType: CPointer<PNP_VETO_TYPEAbi>, pszVetoName: CPointer<UInt16>, ulNameLength: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Request_Device_EjectW(dnDevInst, pVetoType, pszVetoName, ulNameLength, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Request_Device_Eject_ExA == "on"]
+foreign {
+    // param-hint: pVetoType optional
+    // param-hint: pszVetoName len=param[3] optional
+    // param-hint: hMachine optional
+    func CM_Request_Device_Eject_ExA(dnDevInst: UInt32, pVetoType: CPointer<PNP_VETO_TYPEAbi>, pszVetoName: CPointer<UInt8>, ulNameLength: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Request_Device_Eject_ExA == "on"]
+public unsafe func Windows_CM_Request_Device_Eject_ExA(dnDevInst: UInt32, pVetoType: CPointer<PNP_VETO_TYPEAbi>, pszVetoName: CPointer<UInt8>, ulNameLength: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Request_Device_Eject_ExA(dnDevInst, pVetoType, pszVetoName, ulNameLength, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Request_Device_Eject_ExW == "on"]
+foreign {
+    // param-hint: pVetoType optional
+    // param-hint: pszVetoName len=param[3] optional
+    // param-hint: hMachine optional
+    func CM_Request_Device_Eject_ExW(dnDevInst: UInt32, pVetoType: CPointer<PNP_VETO_TYPEAbi>, pszVetoName: CPointer<UInt16>, ulNameLength: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Request_Device_Eject_ExW == "on"]
+public unsafe func Windows_CM_Request_Device_Eject_ExW(dnDevInst: UInt32, pVetoType: CPointer<PNP_VETO_TYPEAbi>, pszVetoName: CPointer<UInt16>, ulNameLength: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Request_Device_Eject_ExW(dnDevInst, pVetoType, pszVetoName, ulNameLength, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Request_Eject_PC == "on"]
+foreign {
+    func CM_Request_Eject_PC(): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Request_Eject_PC == "on"]
+public unsafe func Windows_CM_Request_Eject_PC(): CONFIGRETAbi {
+    return CM_Request_Eject_PC()
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Request_Eject_PC_Ex == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Request_Eject_PC_Ex(hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Request_Eject_PC_Ex == "on"]
+public unsafe func Windows_CM_Request_Eject_PC_Ex(hMachine: IntNative): CONFIGRETAbi {
+    return CM_Request_Eject_PC_Ex(hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Run_Detection == "on"]
+foreign {
+    func CM_Run_Detection(ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Run_Detection == "on"]
+public unsafe func Windows_CM_Run_Detection(ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Run_Detection(ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Run_Detection_Ex == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Run_Detection_Ex(ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Run_Detection_Ex == "on"]
+public unsafe func Windows_CM_Run_Detection_Ex(ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Run_Detection_Ex(ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_Class_PropertyW == "on" && Windows_Win32_Devices_Properties == "on"]
+foreign {
     // param-hint: PropertyBuffer bytes=param[4] optional
     func CM_Set_Class_PropertyW(ClassGUID: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: Win32_Devices_Properties.DEVPROPTYPEAbi, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_Class_PropertyW == "on" && Windows_Win32_Devices_Properties == "on"]
+public unsafe func Windows_CM_Set_Class_PropertyW(ClassGUID: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: Win32_Devices_Properties.DEVPROPTYPEAbi, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Set_Class_PropertyW(ClassGUID, PropertyKey, PropertyType, PropertyBuffer, PropertyBufferSize, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_Class_Property_ExW == "on" && Windows_Win32_Devices_Properties == "on"]
+foreign {
     // param-hint: PropertyBuffer bytes=param[4] optional
     // param-hint: hMachine optional
     func CM_Set_Class_Property_ExW(ClassGUID: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: Win32_Devices_Properties.DEVPROPTYPEAbi, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_Class_Property_ExW == "on" && Windows_Win32_Devices_Properties == "on"]
+public unsafe func Windows_CM_Set_Class_Property_ExW(ClassGUID: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: Win32_Devices_Properties.DEVPROPTYPEAbi, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Set_Class_Property_ExW(ClassGUID, PropertyKey, PropertyType, PropertyBuffer, PropertyBufferSize, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_Class_Registry_PropertyA == "on"]
+foreign {
+    // param-hint: Buffer bytes=param[3] optional
+    // param-hint: hMachine optional
+    func CM_Set_Class_Registry_PropertyA(ClassGuid: CPointer<GUID>, ulProperty: UInt32, Buffer: CPointer<Unit>, ulLength: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_Class_Registry_PropertyA == "on"]
+public unsafe func Windows_CM_Set_Class_Registry_PropertyA(ClassGuid: CPointer<GUID>, ulProperty: UInt32, Buffer: CPointer<Unit>, ulLength: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Set_Class_Registry_PropertyA(ClassGuid, ulProperty, Buffer, ulLength, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_Class_Registry_PropertyW == "on"]
+foreign {
+    // param-hint: Buffer bytes=param[3] optional
+    // param-hint: hMachine optional
+    func CM_Set_Class_Registry_PropertyW(ClassGuid: CPointer<GUID>, ulProperty: UInt32, Buffer: CPointer<Unit>, ulLength: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_Class_Registry_PropertyW == "on"]
+public unsafe func Windows_CM_Set_Class_Registry_PropertyW(ClassGuid: CPointer<GUID>, ulProperty: UInt32, Buffer: CPointer<Unit>, ulLength: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Set_Class_Registry_PropertyW(ClassGuid, ulProperty, Buffer, ulLength, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_DevNode_Problem == "on"]
+foreign {
+    func CM_Set_DevNode_Problem(dnDevInst: UInt32, ulProblem: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_DevNode_Problem == "on"]
+public unsafe func Windows_CM_Set_DevNode_Problem(dnDevInst: UInt32, ulProblem: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Set_DevNode_Problem(dnDevInst, ulProblem, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_DevNode_Problem_Ex == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Set_DevNode_Problem_Ex(dnDevInst: UInt32, ulProblem: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_DevNode_Problem_Ex == "on"]
+public unsafe func Windows_CM_Set_DevNode_Problem_Ex(dnDevInst: UInt32, ulProblem: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Set_DevNode_Problem_Ex(dnDevInst, ulProblem, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_DevNode_PropertyW == "on" && Windows_Win32_Devices_Properties == "on"]
+foreign {
     // param-hint: PropertyBuffer bytes=param[4] optional
     func CM_Set_DevNode_PropertyW(dnDevInst: UInt32, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: Win32_Devices_Properties.DEVPROPTYPEAbi, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_DevNode_PropertyW == "on" && Windows_Win32_Devices_Properties == "on"]
+public unsafe func Windows_CM_Set_DevNode_PropertyW(dnDevInst: UInt32, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: Win32_Devices_Properties.DEVPROPTYPEAbi, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Set_DevNode_PropertyW(dnDevInst, PropertyKey, PropertyType, PropertyBuffer, PropertyBufferSize, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_DevNode_Property_ExW == "on" && Windows_Win32_Devices_Properties == "on"]
+foreign {
     // param-hint: PropertyBuffer bytes=param[4] optional
     // param-hint: hMachine optional
     func CM_Set_DevNode_Property_ExW(dnDevInst: UInt32, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: Win32_Devices_Properties.DEVPROPTYPEAbi, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_DevNode_Property_ExW == "on" && Windows_Win32_Devices_Properties == "on"]
+public unsafe func Windows_CM_Set_DevNode_Property_ExW(dnDevInst: UInt32, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: Win32_Devices_Properties.DEVPROPTYPEAbi, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Set_DevNode_Property_ExW(dnDevInst, PropertyKey, PropertyType, PropertyBuffer, PropertyBufferSize, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_DevNode_Registry_PropertyA == "on"]
+foreign {
+    // param-hint: Buffer bytes=param[3] optional
+    func CM_Set_DevNode_Registry_PropertyA(dnDevInst: UInt32, ulProperty: UInt32, Buffer: CPointer<Unit>, ulLength: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_DevNode_Registry_PropertyA == "on"]
+public unsafe func Windows_CM_Set_DevNode_Registry_PropertyA(dnDevInst: UInt32, ulProperty: UInt32, Buffer: CPointer<Unit>, ulLength: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Set_DevNode_Registry_PropertyA(dnDevInst, ulProperty, Buffer, ulLength, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_DevNode_Registry_PropertyW == "on"]
+foreign {
+    // param-hint: Buffer bytes=param[3] optional
+    func CM_Set_DevNode_Registry_PropertyW(dnDevInst: UInt32, ulProperty: UInt32, Buffer: CPointer<Unit>, ulLength: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_DevNode_Registry_PropertyW == "on"]
+public unsafe func Windows_CM_Set_DevNode_Registry_PropertyW(dnDevInst: UInt32, ulProperty: UInt32, Buffer: CPointer<Unit>, ulLength: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Set_DevNode_Registry_PropertyW(dnDevInst, ulProperty, Buffer, ulLength, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_DevNode_Registry_Property_ExA == "on"]
+foreign {
+    // param-hint: Buffer bytes=param[3] optional
+    // param-hint: hMachine optional
+    func CM_Set_DevNode_Registry_Property_ExA(dnDevInst: UInt32, ulProperty: UInt32, Buffer: CPointer<Unit>, ulLength: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_DevNode_Registry_Property_ExA == "on"]
+public unsafe func Windows_CM_Set_DevNode_Registry_Property_ExA(dnDevInst: UInt32, ulProperty: UInt32, Buffer: CPointer<Unit>, ulLength: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Set_DevNode_Registry_Property_ExA(dnDevInst, ulProperty, Buffer, ulLength, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_DevNode_Registry_Property_ExW == "on"]
+foreign {
+    // param-hint: Buffer bytes=param[3] optional
+    // param-hint: hMachine optional
+    func CM_Set_DevNode_Registry_Property_ExW(dnDevInst: UInt32, ulProperty: UInt32, Buffer: CPointer<Unit>, ulLength: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_DevNode_Registry_Property_ExW == "on"]
+public unsafe func Windows_CM_Set_DevNode_Registry_Property_ExW(dnDevInst: UInt32, ulProperty: UInt32, Buffer: CPointer<Unit>, ulLength: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Set_DevNode_Registry_Property_ExW(dnDevInst, ulProperty, Buffer, ulLength, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_Device_Interface_PropertyW == "on" && Windows_Win32_Devices_Properties == "on"]
+foreign {
     // param-hint: PropertyBuffer bytes=param[4] optional
     func CM_Set_Device_Interface_PropertyW(pszDeviceInterface: CPointer<UInt16>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: Win32_Devices_Properties.DEVPROPTYPEAbi, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_Device_Interface_PropertyW == "on" && Windows_Win32_Devices_Properties == "on"]
+public unsafe func Windows_CM_Set_Device_Interface_PropertyW(pszDeviceInterface: CPointer<UInt16>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: Win32_Devices_Properties.DEVPROPTYPEAbi, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Set_Device_Interface_PropertyW(pszDeviceInterface, PropertyKey, PropertyType, PropertyBuffer, PropertyBufferSize, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_Device_Interface_Property_ExW == "on" && Windows_Win32_Devices_Properties == "on"]
+foreign {
     // param-hint: PropertyBuffer bytes=param[4] optional
     // param-hint: hMachine optional
     func CM_Set_Device_Interface_Property_ExW(pszDeviceInterface: CPointer<UInt16>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: Win32_Devices_Properties.DEVPROPTYPEAbi, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
 }
 
-@When[CFGMGR32 == "on" && Windows_Win32_System_Registry == "on"]
-foreign {
-    // param-hint: ClassGuid optional
-    // param-hint: pszClassName optional
-    func CM_Open_Class_KeyA(ClassGuid: CPointer<GUID>, pszClassName: CPointer<UInt8>, samDesired: UInt32, Disposition: UInt32, phkClass: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: ClassGuid optional
-    // param-hint: pszClassName optional
-    func CM_Open_Class_KeyW(ClassGuid: CPointer<GUID>, pszClassName: CPointer<UInt16>, samDesired: UInt32, Disposition: UInt32, phkClass: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: ClassGuid optional
-    // param-hint: pszClassName optional
-    // param-hint: hMachine optional
-    func CM_Open_Class_Key_ExA(ClassGuid: CPointer<GUID>, pszClassName: CPointer<UInt8>, samDesired: UInt32, Disposition: UInt32, phkClass: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: ClassGuid optional
-    // param-hint: pszClassName optional
-    // param-hint: hMachine optional
-    func CM_Open_Class_Key_ExW(ClassGuid: CPointer<GUID>, pszClassName: CPointer<UInt16>, samDesired: UInt32, Disposition: UInt32, phkClass: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Open_DevNode_Key(dnDevNode: UInt32, samDesired: UInt32, ulHardwareProfile: UInt32, Disposition: UInt32, phkDevice: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Open_DevNode_Key_Ex(dnDevNode: UInt32, samDesired: UInt32, ulHardwareProfile: UInt32, Disposition: UInt32, phkDevice: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    func CM_Open_Device_Interface_KeyA(pszDeviceInterface: CPointer<UInt8>, samDesired: UInt32, Disposition: UInt32, phkDeviceInterface: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32): CONFIGRETAbi
-    func CM_Open_Device_Interface_KeyW(pszDeviceInterface: CPointer<UInt16>, samDesired: UInt32, Disposition: UInt32, phkDeviceInterface: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Open_Device_Interface_Key_ExA(pszDeviceInterface: CPointer<UInt8>, samDesired: UInt32, Disposition: UInt32, phkDeviceInterface: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
-    // param-hint: hMachine optional
-    func CM_Open_Device_Interface_Key_ExW(pszDeviceInterface: CPointer<UInt16>, samDesired: UInt32, Disposition: UInt32, phkDeviceInterface: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_Device_Interface_Property_ExW == "on" && Windows_Win32_Devices_Properties == "on"]
+public unsafe func Windows_CM_Set_Device_Interface_Property_ExW(pszDeviceInterface: CPointer<UInt16>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: Win32_Devices_Properties.DEVPROPTYPEAbi, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Set_Device_Interface_Property_ExW(pszDeviceInterface, PropertyKey, PropertyType, PropertyBuffer, PropertyBufferSize, ulFlags, hMachine)
 }
 
-@When[SETUPAPI == "on"]
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_HW_Prof == "on"]
+foreign {
+    func CM_Set_HW_Prof(ulHardwareProfile: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_HW_Prof == "on"]
+public unsafe func Windows_CM_Set_HW_Prof(ulHardwareProfile: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Set_HW_Prof(ulHardwareProfile, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_HW_Prof_Ex == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Set_HW_Prof_Ex(ulHardwareProfile: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_HW_Prof_Ex == "on"]
+public unsafe func Windows_CM_Set_HW_Prof_Ex(ulHardwareProfile: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Set_HW_Prof_Ex(ulHardwareProfile, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_HW_Prof_FlagsA == "on"]
+foreign {
+    func CM_Set_HW_Prof_FlagsA(pDeviceID: CPointer<UInt8>, ulConfig: UInt32, ulValue: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_HW_Prof_FlagsA == "on"]
+public unsafe func Windows_CM_Set_HW_Prof_FlagsA(pDeviceID: CPointer<UInt8>, ulConfig: UInt32, ulValue: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Set_HW_Prof_FlagsA(pDeviceID, ulConfig, ulValue, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_HW_Prof_FlagsW == "on"]
+foreign {
+    func CM_Set_HW_Prof_FlagsW(pDeviceID: CPointer<UInt16>, ulConfig: UInt32, ulValue: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_HW_Prof_FlagsW == "on"]
+public unsafe func Windows_CM_Set_HW_Prof_FlagsW(pDeviceID: CPointer<UInt16>, ulConfig: UInt32, ulValue: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Set_HW_Prof_FlagsW(pDeviceID, ulConfig, ulValue, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_HW_Prof_Flags_ExA == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Set_HW_Prof_Flags_ExA(pDeviceID: CPointer<UInt8>, ulConfig: UInt32, ulValue: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_HW_Prof_Flags_ExA == "on"]
+public unsafe func Windows_CM_Set_HW_Prof_Flags_ExA(pDeviceID: CPointer<UInt8>, ulConfig: UInt32, ulValue: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Set_HW_Prof_Flags_ExA(pDeviceID, ulConfig, ulValue, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_HW_Prof_Flags_ExW == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Set_HW_Prof_Flags_ExW(pDeviceID: CPointer<UInt16>, ulConfig: UInt32, ulValue: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Set_HW_Prof_Flags_ExW == "on"]
+public unsafe func Windows_CM_Set_HW_Prof_Flags_ExW(pDeviceID: CPointer<UInt16>, ulConfig: UInt32, ulValue: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Set_HW_Prof_Flags_ExW(pDeviceID, ulConfig, ulValue, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Setup_DevNode == "on"]
+foreign {
+    func CM_Setup_DevNode(dnDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Setup_DevNode == "on"]
+public unsafe func Windows_CM_Setup_DevNode(dnDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Setup_DevNode(dnDevInst, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Setup_DevNode_Ex == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Setup_DevNode_Ex(dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Setup_DevNode_Ex == "on"]
+public unsafe func Windows_CM_Setup_DevNode_Ex(dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Setup_DevNode_Ex(dnDevInst, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Test_Range_Available == "on"]
+foreign {
+    func CM_Test_Range_Available(ullStartValue: UInt64, ullEndValue: UInt64, rlh: UIntNative, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Test_Range_Available == "on"]
+public unsafe func Windows_CM_Test_Range_Available(ullStartValue: UInt64, ullEndValue: UInt64, rlh: UIntNative, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Test_Range_Available(ullStartValue, ullEndValue, rlh, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Uninstall_DevNode == "on"]
+foreign {
+    func CM_Uninstall_DevNode(dnDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Uninstall_DevNode == "on"]
+public unsafe func Windows_CM_Uninstall_DevNode(dnDevInst: UInt32, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Uninstall_DevNode(dnDevInst, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Uninstall_DevNode_Ex == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Uninstall_DevNode_Ex(dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Uninstall_DevNode_Ex == "on"]
+public unsafe func Windows_CM_Uninstall_DevNode_Ex(dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Uninstall_DevNode_Ex(dnDevInst, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Unregister_Device_InterfaceA == "on"]
+foreign {
+    func CM_Unregister_Device_InterfaceA(pszDeviceInterface: CPointer<UInt8>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Unregister_Device_InterfaceA == "on"]
+public unsafe func Windows_CM_Unregister_Device_InterfaceA(pszDeviceInterface: CPointer<UInt8>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Unregister_Device_InterfaceA(pszDeviceInterface, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Unregister_Device_InterfaceW == "on"]
+foreign {
+    func CM_Unregister_Device_InterfaceW(pszDeviceInterface: CPointer<UInt16>, ulFlags: UInt32): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Unregister_Device_InterfaceW == "on"]
+public unsafe func Windows_CM_Unregister_Device_InterfaceW(pszDeviceInterface: CPointer<UInt16>, ulFlags: UInt32): CONFIGRETAbi {
+    return CM_Unregister_Device_InterfaceW(pszDeviceInterface, ulFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Unregister_Device_Interface_ExA == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Unregister_Device_Interface_ExA(pszDeviceInterface: CPointer<UInt8>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Unregister_Device_Interface_ExA == "on"]
+public unsafe func Windows_CM_Unregister_Device_Interface_ExA(pszDeviceInterface: CPointer<UInt8>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Unregister_Device_Interface_ExA(pszDeviceInterface, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Unregister_Device_Interface_ExW == "on"]
+foreign {
+    // param-hint: hMachine optional
+    func CM_Unregister_Device_Interface_ExW(pszDeviceInterface: CPointer<UInt16>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Unregister_Device_Interface_ExW == "on"]
+public unsafe func Windows_CM_Unregister_Device_Interface_ExW(pszDeviceInterface: CPointer<UInt16>, ulFlags: UInt32, hMachine: IntNative): CONFIGRETAbi {
+    return CM_Unregister_Device_Interface_ExW(pszDeviceInterface, ulFlags, hMachine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Unregister_Notification == "on"]
+foreign {
+    func CM_Unregister_Notification(NotifyContext: HCMNOTIFICATION): CONFIGRETAbi
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_CM_Unregister_Notification == "on"]
+public unsafe func Windows_CM_Unregister_Notification(NotifyContext: HCMNOTIFICATION): CONFIGRETAbi {
+    return CM_Unregister_Notification(NotifyContext)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupWriteTextLog == "on"]
 @CallingConv[CDECL]
 foreign {
     // pinvoke-hint: cc=cdecl
     func SetupWriteTextLog(LogToken: UInt64, Category: UInt32, Flags: UInt32, MessageStr: CPointer<UInt8>, ...): Unit
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupWriteTextLogError == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func SetupWriteTextLogError(LogToken: UInt64, Category: UInt32, LogFlags: UInt32, Error: UInt32, MessageStr: CPointer<UInt8>, ...): Unit
 }
 
-@When[SETUPAPI == "on"]
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_InstallHinfSectionA == "on"]
 foreign {
     func InstallHinfSectionA(Window: CPointer<Unit>, ModuleHandle: CPointer<Unit>, CommandLine: CPointer<UInt8>, ShowCommand: Int32): Unit
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_InstallHinfSectionA == "on"]
+public unsafe func Windows_InstallHinfSectionA(Window: CPointer<Unit>, ModuleHandle: CPointer<Unit>, CommandLine: CPointer<UInt8>, ShowCommand: Int32): Unit {
+    InstallHinfSectionA(Window, ModuleHandle, CommandLine, ShowCommand)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_InstallHinfSectionW == "on"]
+foreign {
     func InstallHinfSectionW(Window: CPointer<Unit>, ModuleHandle: CPointer<Unit>, CommandLine: CPointer<UInt16>, ShowCommand: Int32): Unit
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_InstallHinfSectionW == "on"]
+public unsafe func Windows_InstallHinfSectionW(Window: CPointer<Unit>, ModuleHandle: CPointer<Unit>, CommandLine: CPointer<UInt16>, ShowCommand: Int32): Unit {
+    InstallHinfSectionW(Window, ModuleHandle, CommandLine, ShowCommand)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupAddInstallSectionToDiskSpaceListA == "on"]
+foreign {
     // param-hint: LayoutInfHandle optional
     // param-hint: Reserved1 optional reserved
     // param-hint: Reserved2 optional reserved
     // pinvoke-hint: SetLastError
     func SetupAddInstallSectionToDiskSpaceListA(DiskSpace: CPointer<Unit>, InfHandle: CPointer<Unit>, LayoutInfHandle: CPointer<Unit>, SectionName: CPointer<UInt8>, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupAddInstallSectionToDiskSpaceListA == "on"]
+public unsafe func Windows_SetupAddInstallSectionToDiskSpaceListA(DiskSpace: CPointer<Unit>, InfHandle: CPointer<Unit>, LayoutInfHandle: CPointer<Unit>, SectionName: CPointer<UInt8>, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32 {
+    return SetupAddInstallSectionToDiskSpaceListA(DiskSpace, InfHandle, LayoutInfHandle, SectionName, Reserved1, Reserved2)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupAddInstallSectionToDiskSpaceListW == "on"]
+foreign {
     // param-hint: LayoutInfHandle optional
     // param-hint: Reserved1 optional reserved
     // param-hint: Reserved2 optional reserved
     // pinvoke-hint: SetLastError
     func SetupAddInstallSectionToDiskSpaceListW(DiskSpace: CPointer<Unit>, InfHandle: CPointer<Unit>, LayoutInfHandle: CPointer<Unit>, SectionName: CPointer<UInt16>, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupAddInstallSectionToDiskSpaceListW == "on"]
+public unsafe func Windows_SetupAddInstallSectionToDiskSpaceListW(DiskSpace: CPointer<Unit>, InfHandle: CPointer<Unit>, LayoutInfHandle: CPointer<Unit>, SectionName: CPointer<UInt16>, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32 {
+    return SetupAddInstallSectionToDiskSpaceListW(DiskSpace, InfHandle, LayoutInfHandle, SectionName, Reserved1, Reserved2)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupAddSectionToDiskSpaceListA == "on"]
+foreign {
     // param-hint: ListInfHandle optional
     // param-hint: Reserved1 optional reserved
     // param-hint: Reserved2 optional reserved
     // pinvoke-hint: SetLastError
     func SetupAddSectionToDiskSpaceListA(DiskSpace: CPointer<Unit>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, SectionName: CPointer<UInt8>, Operation: SETUP_FILE_OPERATIONAbi, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupAddSectionToDiskSpaceListA == "on"]
+public unsafe func Windows_SetupAddSectionToDiskSpaceListA(DiskSpace: CPointer<Unit>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, SectionName: CPointer<UInt8>, Operation: SETUP_FILE_OPERATIONAbi, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32 {
+    return SetupAddSectionToDiskSpaceListA(DiskSpace, InfHandle, ListInfHandle, SectionName, Operation, Reserved1, Reserved2)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupAddSectionToDiskSpaceListW == "on"]
+foreign {
     // param-hint: ListInfHandle optional
     // param-hint: Reserved1 optional reserved
     // param-hint: Reserved2 optional reserved
     // pinvoke-hint: SetLastError
     func SetupAddSectionToDiskSpaceListW(DiskSpace: CPointer<Unit>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, SectionName: CPointer<UInt16>, Operation: SETUP_FILE_OPERATIONAbi, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupAddSectionToDiskSpaceListW == "on"]
+public unsafe func Windows_SetupAddSectionToDiskSpaceListW(DiskSpace: CPointer<Unit>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, SectionName: CPointer<UInt16>, Operation: SETUP_FILE_OPERATIONAbi, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32 {
+    return SetupAddSectionToDiskSpaceListW(DiskSpace, InfHandle, ListInfHandle, SectionName, Operation, Reserved1, Reserved2)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupAddToDiskSpaceListA == "on"]
+foreign {
     // param-hint: Reserved1 optional reserved
     // param-hint: Reserved2 optional reserved
     // pinvoke-hint: SetLastError
     func SetupAddToDiskSpaceListA(DiskSpace: CPointer<Unit>, TargetFilespec: CPointer<UInt8>, FileSize: Int64, Operation: SETUP_FILE_OPERATIONAbi, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupAddToDiskSpaceListA == "on"]
+public unsafe func Windows_SetupAddToDiskSpaceListA(DiskSpace: CPointer<Unit>, TargetFilespec: CPointer<UInt8>, FileSize: Int64, Operation: SETUP_FILE_OPERATIONAbi, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32 {
+    return SetupAddToDiskSpaceListA(DiskSpace, TargetFilespec, FileSize, Operation, Reserved1, Reserved2)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupAddToDiskSpaceListW == "on"]
+foreign {
     // param-hint: Reserved1 optional reserved
     // param-hint: Reserved2 optional reserved
     // pinvoke-hint: SetLastError
     func SetupAddToDiskSpaceListW(DiskSpace: CPointer<Unit>, TargetFilespec: CPointer<UInt16>, FileSize: Int64, Operation: SETUP_FILE_OPERATIONAbi, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupAddToDiskSpaceListW == "on"]
+public unsafe func Windows_SetupAddToDiskSpaceListW(DiskSpace: CPointer<Unit>, TargetFilespec: CPointer<UInt16>, FileSize: Int64, Operation: SETUP_FILE_OPERATIONAbi, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32 {
+    return SetupAddToDiskSpaceListW(DiskSpace, TargetFilespec, FileSize, Operation, Reserved1, Reserved2)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupAddToSourceListA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetupAddToSourceListA(Flags: UInt32, Source: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupAddToSourceListA == "on"]
+public unsafe func Windows_SetupAddToSourceListA(Flags: UInt32, Source: CPointer<UInt8>): Int32 {
+    return SetupAddToSourceListA(Flags, Source)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupAddToSourceListW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetupAddToSourceListW(Flags: UInt32, Source: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupAddToSourceListW == "on"]
+public unsafe func Windows_SetupAddToSourceListW(Flags: UInt32, Source: CPointer<UInt16>): Int32 {
+    return SetupAddToSourceListW(Flags, Source)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupAdjustDiskSpaceListA == "on"]
+foreign {
     // param-hint: Reserved1 optional reserved
     // param-hint: Reserved2 optional reserved
     // pinvoke-hint: SetLastError
     func SetupAdjustDiskSpaceListA(DiskSpace: CPointer<Unit>, DriveRoot: CPointer<UInt8>, Amount: Int64, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupAdjustDiskSpaceListA == "on"]
+public unsafe func Windows_SetupAdjustDiskSpaceListA(DiskSpace: CPointer<Unit>, DriveRoot: CPointer<UInt8>, Amount: Int64, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32 {
+    return SetupAdjustDiskSpaceListA(DiskSpace, DriveRoot, Amount, Reserved1, Reserved2)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupAdjustDiskSpaceListW == "on"]
+foreign {
     // param-hint: Reserved1 optional reserved
     // param-hint: Reserved2 optional reserved
     // pinvoke-hint: SetLastError
     func SetupAdjustDiskSpaceListW(DiskSpace: CPointer<Unit>, DriveRoot: CPointer<UInt16>, Amount: Int64, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupAdjustDiskSpaceListW == "on"]
+public unsafe func Windows_SetupAdjustDiskSpaceListW(DiskSpace: CPointer<Unit>, DriveRoot: CPointer<UInt16>, Amount: Int64, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32 {
+    return SetupAdjustDiskSpaceListW(DiskSpace, DriveRoot, Amount, Reserved1, Reserved2)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupBackupErrorA == "on"]
+foreign {
     // param-hint: DialogTitle optional
     // param-hint: TargetFile optional
     // pinvoke-hint: SetLastError
     func SetupBackupErrorA(hwndParent: CPointer<Unit>, DialogTitle: CPointer<UInt8>, SourceFile: CPointer<UInt8>, TargetFile: CPointer<UInt8>, Win32ErrorCode: UInt32, Style: UInt32): UInt32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupBackupErrorA == "on"]
+public unsafe func Windows_SetupBackupErrorA(hwndParent: CPointer<Unit>, DialogTitle: CPointer<UInt8>, SourceFile: CPointer<UInt8>, TargetFile: CPointer<UInt8>, Win32ErrorCode: UInt32, Style: UInt32): UInt32 {
+    return SetupBackupErrorA(hwndParent, DialogTitle, SourceFile, TargetFile, Win32ErrorCode, Style)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupBackupErrorW == "on"]
+foreign {
     // param-hint: DialogTitle optional
     // param-hint: TargetFile optional
     // pinvoke-hint: SetLastError
     func SetupBackupErrorW(hwndParent: CPointer<Unit>, DialogTitle: CPointer<UInt16>, SourceFile: CPointer<UInt16>, TargetFile: CPointer<UInt16>, Win32ErrorCode: UInt32, Style: UInt32): UInt32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupBackupErrorW == "on"]
+public unsafe func Windows_SetupBackupErrorW(hwndParent: CPointer<Unit>, DialogTitle: CPointer<UInt16>, SourceFile: CPointer<UInt16>, TargetFile: CPointer<UInt16>, Win32ErrorCode: UInt32, Style: UInt32): UInt32 {
+    return SetupBackupErrorW(hwndParent, DialogTitle, SourceFile, TargetFile, Win32ErrorCode, Style)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupCancelTemporarySourceList == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetupCancelTemporarySourceList(): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupCancelTemporarySourceList == "on"]
+public unsafe func Windows_SetupCancelTemporarySourceList(): Int32 {
+    return SetupCancelTemporarySourceList()
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupCloseFileQueue == "on"]
+foreign {
     func SetupCloseFileQueue(QueueHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupCloseFileQueue == "on"]
+public unsafe func Windows_SetupCloseFileQueue(QueueHandle: CPointer<Unit>): Int32 {
+    return SetupCloseFileQueue(QueueHandle)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupCloseInfFile == "on"]
+foreign {
     func SetupCloseInfFile(InfHandle: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupCloseInfFile == "on"]
+public unsafe func Windows_SetupCloseInfFile(InfHandle: CPointer<Unit>): Unit {
+    SetupCloseInfFile(InfHandle)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupCloseLog == "on"]
+foreign {
     func SetupCloseLog(): Unit
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupCloseLog == "on"]
+public unsafe func Windows_SetupCloseLog(): Unit {
+    SetupCloseLog()
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupCommitFileQueueA == "on"]
+foreign {
     // param-hint: Owner optional
     // pinvoke-hint: SetLastError
     func SetupCommitFileQueueA(Owner: CPointer<Unit>, QueueHandle: CPointer<Unit>, MsgHandler: PSP_FILE_CALLBACK_A, Context: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupCommitFileQueueA == "on"]
+public unsafe func Windows_SetupCommitFileQueueA(Owner: CPointer<Unit>, QueueHandle: CPointer<Unit>, MsgHandler: PSP_FILE_CALLBACK_A, Context: CPointer<Unit>): Int32 {
+    return SetupCommitFileQueueA(Owner, QueueHandle, MsgHandler, Context)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupCommitFileQueueW == "on"]
+foreign {
     // param-hint: Owner optional
     // pinvoke-hint: SetLastError
     func SetupCommitFileQueueW(Owner: CPointer<Unit>, QueueHandle: CPointer<Unit>, MsgHandler: PSP_FILE_CALLBACK_W, Context: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupCommitFileQueueW == "on"]
+public unsafe func Windows_SetupCommitFileQueueW(Owner: CPointer<Unit>, QueueHandle: CPointer<Unit>, MsgHandler: PSP_FILE_CALLBACK_W, Context: CPointer<Unit>): Int32 {
+    return SetupCommitFileQueueW(Owner, QueueHandle, MsgHandler, Context)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupConfigureWmiFromInfSectionA == "on"]
+foreign {
     func SetupConfigureWmiFromInfSectionA(InfHandle: CPointer<Unit>, SectionName: CPointer<UInt8>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupConfigureWmiFromInfSectionA == "on"]
+public unsafe func Windows_SetupConfigureWmiFromInfSectionA(InfHandle: CPointer<Unit>, SectionName: CPointer<UInt8>, Flags: UInt32): Int32 {
+    return SetupConfigureWmiFromInfSectionA(InfHandle, SectionName, Flags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupConfigureWmiFromInfSectionW == "on"]
+foreign {
     func SetupConfigureWmiFromInfSectionW(InfHandle: CPointer<Unit>, SectionName: CPointer<UInt16>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupConfigureWmiFromInfSectionW == "on"]
+public unsafe func Windows_SetupConfigureWmiFromInfSectionW(InfHandle: CPointer<Unit>, SectionName: CPointer<UInt16>, Flags: UInt32): Int32 {
+    return SetupConfigureWmiFromInfSectionW(InfHandle, SectionName, Flags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupCopyErrorA == "on"]
+foreign {
     // param-hint: DialogTitle optional
     // param-hint: DiskName optional
     // param-hint: TargetPathFile optional
@@ -11775,6 +14026,15 @@ foreign {
     // param-hint: PathRequiredSize optional
     // pinvoke-hint: SetLastError
     func SetupCopyErrorA(hwndParent: CPointer<Unit>, DialogTitle: CPointer<UInt8>, DiskName: CPointer<UInt8>, PathToSource: CPointer<UInt8>, SourceFile: CPointer<UInt8>, TargetPathFile: CPointer<UInt8>, Win32ErrorCode: UInt32, Style: UInt32, PathBuffer: CPointer<UInt8>, PathBufferSize: UInt32, PathRequiredSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupCopyErrorA == "on"]
+public unsafe func Windows_SetupCopyErrorA(hwndParent: CPointer<Unit>, DialogTitle: CPointer<UInt8>, DiskName: CPointer<UInt8>, PathToSource: CPointer<UInt8>, SourceFile: CPointer<UInt8>, TargetPathFile: CPointer<UInt8>, Win32ErrorCode: UInt32, Style: UInt32, PathBuffer: CPointer<UInt8>, PathBufferSize: UInt32, PathRequiredSize: CPointer<UInt32>): UInt32 {
+    return SetupCopyErrorA(hwndParent, DialogTitle, DiskName, PathToSource, SourceFile, TargetPathFile, Win32ErrorCode, Style, PathBuffer, PathBufferSize, PathRequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupCopyErrorW == "on"]
+foreign {
     // param-hint: DialogTitle optional
     // param-hint: DiskName optional
     // param-hint: TargetPathFile optional
@@ -11782,632 +14042,644 @@ foreign {
     // param-hint: PathRequiredSize optional
     // pinvoke-hint: SetLastError
     func SetupCopyErrorW(hwndParent: CPointer<Unit>, DialogTitle: CPointer<UInt16>, DiskName: CPointer<UInt16>, PathToSource: CPointer<UInt16>, SourceFile: CPointer<UInt16>, TargetPathFile: CPointer<UInt16>, Win32ErrorCode: UInt32, Style: UInt32, PathBuffer: CPointer<UInt16>, PathBufferSize: UInt32, PathRequiredSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupCopyErrorW == "on"]
+public unsafe func Windows_SetupCopyErrorW(hwndParent: CPointer<Unit>, DialogTitle: CPointer<UInt16>, DiskName: CPointer<UInt16>, PathToSource: CPointer<UInt16>, SourceFile: CPointer<UInt16>, TargetPathFile: CPointer<UInt16>, Win32ErrorCode: UInt32, Style: UInt32, PathBuffer: CPointer<UInt16>, PathBufferSize: UInt32, PathRequiredSize: CPointer<UInt32>): UInt32 {
+    return SetupCopyErrorW(hwndParent, DialogTitle, DiskName, PathToSource, SourceFile, TargetPathFile, Win32ErrorCode, Style, PathBuffer, PathBufferSize, PathRequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupCopyOEMInfA == "on"]
+foreign {
     // param-hint: OEMSourceMediaLocation optional
     // param-hint: DestinationInfFileName len=param[5] optional
     // param-hint: RequiredSize optional
     // param-hint: DestinationInfFileNameComponent optional
     // pinvoke-hint: SetLastError
     func SetupCopyOEMInfA(SourceInfFileName: CPointer<UInt8>, OEMSourceMediaLocation: CPointer<UInt8>, OEMSourceMediaType: OEM_SOURCE_MEDIA_TYPEAbi, CopyStyle: SP_COPY_STYLEAbi, DestinationInfFileName: CPointer<UInt8>, DestinationInfFileNameSize: UInt32, RequiredSize: CPointer<UInt32>, DestinationInfFileNameComponent: CPointer<CPointer<UInt8>>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupCopyOEMInfA == "on"]
+public unsafe func Windows_SetupCopyOEMInfA(SourceInfFileName: CPointer<UInt8>, OEMSourceMediaLocation: CPointer<UInt8>, OEMSourceMediaType: OEM_SOURCE_MEDIA_TYPEAbi, CopyStyle: SP_COPY_STYLEAbi, DestinationInfFileName: CPointer<UInt8>, DestinationInfFileNameSize: UInt32, RequiredSize: CPointer<UInt32>, DestinationInfFileNameComponent: CPointer<CPointer<UInt8>>): Int32 {
+    return SetupCopyOEMInfA(SourceInfFileName, OEMSourceMediaLocation, OEMSourceMediaType, CopyStyle, DestinationInfFileName, DestinationInfFileNameSize, RequiredSize, DestinationInfFileNameComponent)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupCopyOEMInfW == "on"]
+foreign {
     // param-hint: OEMSourceMediaLocation optional
     // param-hint: DestinationInfFileName len=param[5] optional
     // param-hint: RequiredSize optional
     // param-hint: DestinationInfFileNameComponent optional
     // pinvoke-hint: SetLastError
     func SetupCopyOEMInfW(SourceInfFileName: CPointer<UInt16>, OEMSourceMediaLocation: CPointer<UInt16>, OEMSourceMediaType: OEM_SOURCE_MEDIA_TYPEAbi, CopyStyle: SP_COPY_STYLEAbi, DestinationInfFileName: CPointer<UInt16>, DestinationInfFileNameSize: UInt32, RequiredSize: CPointer<UInt32>, DestinationInfFileNameComponent: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupCopyOEMInfW == "on"]
+public unsafe func Windows_SetupCopyOEMInfW(SourceInfFileName: CPointer<UInt16>, OEMSourceMediaLocation: CPointer<UInt16>, OEMSourceMediaType: OEM_SOURCE_MEDIA_TYPEAbi, CopyStyle: SP_COPY_STYLEAbi, DestinationInfFileName: CPointer<UInt16>, DestinationInfFileNameSize: UInt32, RequiredSize: CPointer<UInt32>, DestinationInfFileNameComponent: CPointer<CPointer<UInt16>>): Int32 {
+    return SetupCopyOEMInfW(SourceInfFileName, OEMSourceMediaLocation, OEMSourceMediaType, CopyStyle, DestinationInfFileName, DestinationInfFileNameSize, RequiredSize, DestinationInfFileNameComponent)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupCreateDiskSpaceListA == "on"]
+foreign {
     // param-hint: Reserved1 optional reserved
     // param-hint: Reserved2 optional reserved
     // pinvoke-hint: SetLastError
     func SetupCreateDiskSpaceListA(Reserved1: CPointer<Unit>, Reserved2: UInt32, Flags: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupCreateDiskSpaceListA == "on"]
+public unsafe func Windows_SetupCreateDiskSpaceListA(Reserved1: CPointer<Unit>, Reserved2: UInt32, Flags: UInt32): CPointer<Unit> {
+    return SetupCreateDiskSpaceListA(Reserved1, Reserved2, Flags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupCreateDiskSpaceListW == "on"]
+foreign {
     // param-hint: Reserved1 optional reserved
     // param-hint: Reserved2 optional reserved
     // pinvoke-hint: SetLastError
     func SetupCreateDiskSpaceListW(Reserved1: CPointer<Unit>, Reserved2: UInt32, Flags: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupCreateDiskSpaceListW == "on"]
+public unsafe func Windows_SetupCreateDiskSpaceListW(Reserved1: CPointer<Unit>, Reserved2: UInt32, Flags: UInt32): CPointer<Unit> {
+    return SetupCreateDiskSpaceListW(Reserved1, Reserved2, Flags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDecompressOrCopyFileA == "on"]
+foreign {
     // param-hint: CompressionType optional
     // pinvoke-hint: SetLastError
     func SetupDecompressOrCopyFileA(SourceFileName: CPointer<UInt8>, TargetFileName: CPointer<UInt8>, CompressionType: CPointer<FILE_COMPRESSION_TYPEAbi>): UInt32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDecompressOrCopyFileA == "on"]
+public unsafe func Windows_SetupDecompressOrCopyFileA(SourceFileName: CPointer<UInt8>, TargetFileName: CPointer<UInt8>, CompressionType: CPointer<FILE_COMPRESSION_TYPEAbi>): UInt32 {
+    return SetupDecompressOrCopyFileA(SourceFileName, TargetFileName, CompressionType)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDecompressOrCopyFileW == "on"]
+foreign {
     // param-hint: CompressionType optional
     // pinvoke-hint: SetLastError
     func SetupDecompressOrCopyFileW(SourceFileName: CPointer<UInt16>, TargetFileName: CPointer<UInt16>, CompressionType: CPointer<FILE_COMPRESSION_TYPEAbi>): UInt32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDecompressOrCopyFileW == "on"]
+public unsafe func Windows_SetupDecompressOrCopyFileW(SourceFileName: CPointer<UInt16>, TargetFileName: CPointer<UInt16>, CompressionType: CPointer<FILE_COMPRESSION_TYPEAbi>): UInt32 {
+    return SetupDecompressOrCopyFileW(SourceFileName, TargetFileName, CompressionType)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDefaultQueueCallbackA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetupDefaultQueueCallbackA(Context: CPointer<Unit>, Notification: UInt32, Param1: UIntNative, Param2: UIntNative): UInt32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDefaultQueueCallbackA == "on"]
+public unsafe func Windows_SetupDefaultQueueCallbackA(Context: CPointer<Unit>, Notification: UInt32, Param1: UIntNative, Param2: UIntNative): UInt32 {
+    return SetupDefaultQueueCallbackA(Context, Notification, Param1, Param2)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDefaultQueueCallbackW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetupDefaultQueueCallbackW(Context: CPointer<Unit>, Notification: UInt32, Param1: UIntNative, Param2: UIntNative): UInt32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDefaultQueueCallbackW == "on"]
+public unsafe func Windows_SetupDefaultQueueCallbackW(Context: CPointer<Unit>, Notification: UInt32, Param1: UIntNative, Param2: UIntNative): UInt32 {
+    return SetupDefaultQueueCallbackW(Context, Notification, Param1, Param2)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDeleteErrorA == "on"]
+foreign {
     // param-hint: DialogTitle optional
     // pinvoke-hint: SetLastError
     func SetupDeleteErrorA(hwndParent: CPointer<Unit>, DialogTitle: CPointer<UInt8>, File: CPointer<UInt8>, Win32ErrorCode: UInt32, Style: UInt32): UInt32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDeleteErrorA == "on"]
+public unsafe func Windows_SetupDeleteErrorA(hwndParent: CPointer<Unit>, DialogTitle: CPointer<UInt8>, File: CPointer<UInt8>, Win32ErrorCode: UInt32, Style: UInt32): UInt32 {
+    return SetupDeleteErrorA(hwndParent, DialogTitle, File, Win32ErrorCode, Style)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDeleteErrorW == "on"]
+foreign {
     // param-hint: DialogTitle optional
     // pinvoke-hint: SetLastError
     func SetupDeleteErrorW(hwndParent: CPointer<Unit>, DialogTitle: CPointer<UInt16>, File: CPointer<UInt16>, Win32ErrorCode: UInt32, Style: UInt32): UInt32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDeleteErrorW == "on"]
+public unsafe func Windows_SetupDeleteErrorW(hwndParent: CPointer<Unit>, DialogTitle: CPointer<UInt16>, File: CPointer<UInt16>, Win32ErrorCode: UInt32, Style: UInt32): UInt32 {
+    return SetupDeleteErrorW(hwndParent, DialogTitle, File, Win32ErrorCode, Style)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDestroyDiskSpaceList == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetupDestroyDiskSpaceList(DiskSpace: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDestroyDiskSpaceList == "on"]
+public unsafe func Windows_SetupDestroyDiskSpaceList(DiskSpace: CPointer<Unit>): Int32 {
+    return SetupDestroyDiskSpaceList(DiskSpace)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiAskForOEMDisk == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiAskForOEMDisk(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiAskForOEMDisk == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiAskForOEMDisk(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32 {
+    return SetupDiAskForOEMDisk(DeviceInfoSet, DeviceInfoData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiBuildClassInfoList == "on"]
+foreign {
     // param-hint: ClassGuidList len=param[2] optional
     // pinvoke-hint: SetLastError
     func SetupDiBuildClassInfoList(Flags: UInt32, ClassGuidList: CPointer<GUID>, ClassGuidListSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiBuildClassInfoList == "on"]
+public unsafe func Windows_SetupDiBuildClassInfoList(Flags: UInt32, ClassGuidList: CPointer<GUID>, ClassGuidListSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupDiBuildClassInfoList(Flags, ClassGuidList, ClassGuidListSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiBuildClassInfoListExA == "on"]
+foreign {
     // param-hint: ClassGuidList len=param[2] optional
     // param-hint: MachineName optional
     // param-hint: Reserved optional reserved
     // pinvoke-hint: SetLastError
     func SetupDiBuildClassInfoListExA(Flags: UInt32, ClassGuidList: CPointer<GUID>, ClassGuidListSize: UInt32, RequiredSize: CPointer<UInt32>, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiBuildClassInfoListExA == "on"]
+public unsafe func Windows_SetupDiBuildClassInfoListExA(Flags: UInt32, ClassGuidList: CPointer<GUID>, ClassGuidListSize: UInt32, RequiredSize: CPointer<UInt32>, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): Int32 {
+    return SetupDiBuildClassInfoListExA(Flags, ClassGuidList, ClassGuidListSize, RequiredSize, MachineName, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiBuildClassInfoListExW == "on"]
+foreign {
     // param-hint: ClassGuidList len=param[2] optional
     // param-hint: MachineName optional
     // param-hint: Reserved optional reserved
     // pinvoke-hint: SetLastError
     func SetupDiBuildClassInfoListExW(Flags: UInt32, ClassGuidList: CPointer<GUID>, ClassGuidListSize: UInt32, RequiredSize: CPointer<UInt32>, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiBuildClassInfoListExW == "on"]
+public unsafe func Windows_SetupDiBuildClassInfoListExW(Flags: UInt32, ClassGuidList: CPointer<GUID>, ClassGuidListSize: UInt32, RequiredSize: CPointer<UInt32>, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32 {
+    return SetupDiBuildClassInfoListExW(Flags, ClassGuidList, ClassGuidListSize, RequiredSize, MachineName, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiBuildDriverInfoList == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiBuildDriverInfoList(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverType: SETUP_DI_DRIVER_TYPEAbi): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiBuildDriverInfoList == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiBuildDriverInfoList(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverType: SETUP_DI_DRIVER_TYPEAbi): Int32 {
+    return SetupDiBuildDriverInfoList(DeviceInfoSet, DeviceInfoData, DriverType)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiCallClassInstaller == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiCallClassInstaller(InstallFunction: DI_FUNCTIONAbi, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiCallClassInstaller == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiCallClassInstaller(InstallFunction: DI_FUNCTIONAbi, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32 {
+    return SetupDiCallClassInstaller(InstallFunction, DeviceInfoSet, DeviceInfoData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiCancelDriverInfoSearch == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetupDiCancelDriverInfoSearch(DeviceInfoSet: HDEVINFO): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiCancelDriverInfoSearch == "on"]
+public unsafe func Windows_SetupDiCancelDriverInfoSearch(DeviceInfoSet: HDEVINFO): Int32 {
+    return SetupDiCancelDriverInfoSearch(DeviceInfoSet)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiChangeState == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupDiChangeState(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiChangeState == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiChangeState(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32 {
+    return SetupDiChangeState(DeviceInfoSet, DeviceInfoData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiClassGuidsFromNameA == "on"]
+foreign {
     // param-hint: ClassGuidList len=param[2]
     // pinvoke-hint: SetLastError
     func SetupDiClassGuidsFromNameA(ClassName: CPointer<UInt8>, ClassGuidList: CPointer<GUID>, ClassGuidListSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiClassGuidsFromNameA == "on"]
+public unsafe func Windows_SetupDiClassGuidsFromNameA(ClassName: CPointer<UInt8>, ClassGuidList: CPointer<GUID>, ClassGuidListSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupDiClassGuidsFromNameA(ClassName, ClassGuidList, ClassGuidListSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiClassGuidsFromNameExA == "on"]
+foreign {
     // param-hint: ClassGuidList len=param[2]
     // param-hint: MachineName optional
     // param-hint: Reserved optional reserved
     // pinvoke-hint: SetLastError
     func SetupDiClassGuidsFromNameExA(ClassName: CPointer<UInt8>, ClassGuidList: CPointer<GUID>, ClassGuidListSize: UInt32, RequiredSize: CPointer<UInt32>, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiClassGuidsFromNameExA == "on"]
+public unsafe func Windows_SetupDiClassGuidsFromNameExA(ClassName: CPointer<UInt8>, ClassGuidList: CPointer<GUID>, ClassGuidListSize: UInt32, RequiredSize: CPointer<UInt32>, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): Int32 {
+    return SetupDiClassGuidsFromNameExA(ClassName, ClassGuidList, ClassGuidListSize, RequiredSize, MachineName, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiClassGuidsFromNameExW == "on"]
+foreign {
     // param-hint: ClassGuidList len=param[2]
     // param-hint: MachineName optional
     // param-hint: Reserved optional reserved
     // pinvoke-hint: SetLastError
     func SetupDiClassGuidsFromNameExW(ClassName: CPointer<UInt16>, ClassGuidList: CPointer<GUID>, ClassGuidListSize: UInt32, RequiredSize: CPointer<UInt32>, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiClassGuidsFromNameExW == "on"]
+public unsafe func Windows_SetupDiClassGuidsFromNameExW(ClassName: CPointer<UInt16>, ClassGuidList: CPointer<GUID>, ClassGuidListSize: UInt32, RequiredSize: CPointer<UInt32>, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32 {
+    return SetupDiClassGuidsFromNameExW(ClassName, ClassGuidList, ClassGuidListSize, RequiredSize, MachineName, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiClassGuidsFromNameW == "on"]
+foreign {
     // param-hint: ClassGuidList len=param[2]
     // pinvoke-hint: SetLastError
     func SetupDiClassGuidsFromNameW(ClassName: CPointer<UInt16>, ClassGuidList: CPointer<GUID>, ClassGuidListSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiClassGuidsFromNameW == "on"]
+public unsafe func Windows_SetupDiClassGuidsFromNameW(ClassName: CPointer<UInt16>, ClassGuidList: CPointer<GUID>, ClassGuidListSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupDiClassGuidsFromNameW(ClassName, ClassGuidList, ClassGuidListSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiClassNameFromGuidA == "on"]
+foreign {
     // param-hint: ClassName len=param[2]
     // param-hint: RequiredSize optional
     // pinvoke-hint: SetLastError
     func SetupDiClassNameFromGuidA(ClassGuid: CPointer<GUID>, ClassName: CPointer<UInt8>, ClassNameSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiClassNameFromGuidA == "on"]
+public unsafe func Windows_SetupDiClassNameFromGuidA(ClassGuid: CPointer<GUID>, ClassName: CPointer<UInt8>, ClassNameSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupDiClassNameFromGuidA(ClassGuid, ClassName, ClassNameSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiClassNameFromGuidExA == "on"]
+foreign {
     // param-hint: ClassName len=param[2]
     // param-hint: RequiredSize optional
     // param-hint: MachineName optional
     // param-hint: Reserved optional reserved
     // pinvoke-hint: SetLastError
     func SetupDiClassNameFromGuidExA(ClassGuid: CPointer<GUID>, ClassName: CPointer<UInt8>, ClassNameSize: UInt32, RequiredSize: CPointer<UInt32>, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiClassNameFromGuidExA == "on"]
+public unsafe func Windows_SetupDiClassNameFromGuidExA(ClassGuid: CPointer<GUID>, ClassName: CPointer<UInt8>, ClassNameSize: UInt32, RequiredSize: CPointer<UInt32>, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): Int32 {
+    return SetupDiClassNameFromGuidExA(ClassGuid, ClassName, ClassNameSize, RequiredSize, MachineName, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiClassNameFromGuidExW == "on"]
+foreign {
     // param-hint: ClassName len=param[2]
     // param-hint: RequiredSize optional
     // param-hint: MachineName optional
     // param-hint: Reserved optional reserved
     // pinvoke-hint: SetLastError
     func SetupDiClassNameFromGuidExW(ClassGuid: CPointer<GUID>, ClassName: CPointer<UInt16>, ClassNameSize: UInt32, RequiredSize: CPointer<UInt32>, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiClassNameFromGuidExW == "on"]
+public unsafe func Windows_SetupDiClassNameFromGuidExW(ClassGuid: CPointer<GUID>, ClassName: CPointer<UInt16>, ClassNameSize: UInt32, RequiredSize: CPointer<UInt32>, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32 {
+    return SetupDiClassNameFromGuidExW(ClassGuid, ClassName, ClassNameSize, RequiredSize, MachineName, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiClassNameFromGuidW == "on"]
+foreign {
     // param-hint: ClassName len=param[2]
     // param-hint: RequiredSize optional
     // pinvoke-hint: SetLastError
     func SetupDiClassNameFromGuidW(ClassGuid: CPointer<GUID>, ClassName: CPointer<UInt16>, ClassNameSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiClassNameFromGuidW == "on"]
+public unsafe func Windows_SetupDiClassNameFromGuidW(ClassGuid: CPointer<GUID>, ClassName: CPointer<UInt16>, ClassNameSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupDiClassNameFromGuidW(ClassGuid, ClassName, ClassNameSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiCreateDevRegKeyA == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Registry == "on")]
+foreign {
+    // param-hint: InfHandle optional
+    // param-hint: InfSectionName optional
+    // pinvoke-hint: SetLastError
+    func SetupDiCreateDevRegKeyA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Scope: UInt32, HwProfile: UInt32, KeyType: UInt32, InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt8>): Win32_System_Registry.HKEY
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiCreateDevRegKeyA == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Registry == "on")]
+public unsafe func Windows_SetupDiCreateDevRegKeyA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Scope: UInt32, HwProfile: UInt32, KeyType: UInt32, InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt8>): Win32_System_Registry.HKEY {
+    return SetupDiCreateDevRegKeyA(DeviceInfoSet, DeviceInfoData, Scope, HwProfile, KeyType, InfHandle, InfSectionName)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiCreateDevRegKeyW == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Registry == "on")]
+foreign {
+    // param-hint: InfHandle optional
+    // param-hint: InfSectionName optional
+    // pinvoke-hint: SetLastError
+    func SetupDiCreateDevRegKeyW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Scope: UInt32, HwProfile: UInt32, KeyType: UInt32, InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt16>): Win32_System_Registry.HKEY
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiCreateDevRegKeyW == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Registry == "on")]
+public unsafe func Windows_SetupDiCreateDevRegKeyW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Scope: UInt32, HwProfile: UInt32, KeyType: UInt32, InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt16>): Win32_System_Registry.HKEY {
+    return SetupDiCreateDevRegKeyW(DeviceInfoSet, DeviceInfoData, Scope, HwProfile, KeyType, InfHandle, InfSectionName)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiCreateDeviceInfoA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceDescription optional
+    // param-hint: hwndParent optional
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiCreateDeviceInfoA(DeviceInfoSet: HDEVINFO, DeviceName: CPointer<UInt8>, ClassGuid: CPointer<GUID>, DeviceDescription: CPointer<UInt8>, hwndParent: CPointer<Unit>, CreationFlags: SETUP_DI_DEVICE_CREATION_FLAGSAbi, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiCreateDeviceInfoA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiCreateDeviceInfoA(DeviceInfoSet: HDEVINFO, DeviceName: CPointer<UInt8>, ClassGuid: CPointer<GUID>, DeviceDescription: CPointer<UInt8>, hwndParent: CPointer<Unit>, CreationFlags: SETUP_DI_DEVICE_CREATION_FLAGSAbi, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32 {
+    return SetupDiCreateDeviceInfoA(DeviceInfoSet, DeviceName, ClassGuid, DeviceDescription, hwndParent, CreationFlags, DeviceInfoData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiCreateDeviceInfoList == "on"]
+foreign {
     // param-hint: ClassGuid optional
     // param-hint: hwndParent optional
     // pinvoke-hint: SetLastError
     func SetupDiCreateDeviceInfoList(ClassGuid: CPointer<GUID>, hwndParent: CPointer<Unit>): HDEVINFO
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiCreateDeviceInfoList == "on"]
+public unsafe func Windows_SetupDiCreateDeviceInfoList(ClassGuid: CPointer<GUID>, hwndParent: CPointer<Unit>): HDEVINFO {
+    return SetupDiCreateDeviceInfoList(ClassGuid, hwndParent)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiCreateDeviceInfoListExA == "on"]
+foreign {
     // param-hint: ClassGuid optional
     // param-hint: hwndParent optional
     // param-hint: MachineName optional
     // param-hint: Reserved optional reserved
     // pinvoke-hint: SetLastError
     func SetupDiCreateDeviceInfoListExA(ClassGuid: CPointer<GUID>, hwndParent: CPointer<Unit>, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): HDEVINFO
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiCreateDeviceInfoListExA == "on"]
+public unsafe func Windows_SetupDiCreateDeviceInfoListExA(ClassGuid: CPointer<GUID>, hwndParent: CPointer<Unit>, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): HDEVINFO {
+    return SetupDiCreateDeviceInfoListExA(ClassGuid, hwndParent, MachineName, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiCreateDeviceInfoListExW == "on"]
+foreign {
     // param-hint: ClassGuid optional
     // param-hint: hwndParent optional
     // param-hint: MachineName optional
     // param-hint: Reserved optional reserved
     // pinvoke-hint: SetLastError
     func SetupDiCreateDeviceInfoListExW(ClassGuid: CPointer<GUID>, hwndParent: CPointer<Unit>, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): HDEVINFO
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiCreateDeviceInfoListExW == "on"]
+public unsafe func Windows_SetupDiCreateDeviceInfoListExW(ClassGuid: CPointer<GUID>, hwndParent: CPointer<Unit>, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): HDEVINFO {
+    return SetupDiCreateDeviceInfoListExW(ClassGuid, hwndParent, MachineName, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiCreateDeviceInfoW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceDescription optional
+    // param-hint: hwndParent optional
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiCreateDeviceInfoW(DeviceInfoSet: HDEVINFO, DeviceName: CPointer<UInt16>, ClassGuid: CPointer<GUID>, DeviceDescription: CPointer<UInt16>, hwndParent: CPointer<Unit>, CreationFlags: SETUP_DI_DEVICE_CREATION_FLAGSAbi, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiCreateDeviceInfoW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiCreateDeviceInfoW(DeviceInfoSet: HDEVINFO, DeviceName: CPointer<UInt16>, ClassGuid: CPointer<GUID>, DeviceDescription: CPointer<UInt16>, hwndParent: CPointer<Unit>, CreationFlags: SETUP_DI_DEVICE_CREATION_FLAGSAbi, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32 {
+    return SetupDiCreateDeviceInfoW(DeviceInfoSet, DeviceName, ClassGuid, DeviceDescription, hwndParent, CreationFlags, DeviceInfoData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiCreateDeviceInterfaceA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: ReferenceString optional
+    // param-hint: DeviceInterfaceData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiCreateDeviceInterfaceA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, InterfaceClassGuid: CPointer<GUID>, ReferenceString: CPointer<UInt8>, CreationFlags: UInt32, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiCreateDeviceInterfaceA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiCreateDeviceInterfaceA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, InterfaceClassGuid: CPointer<GUID>, ReferenceString: CPointer<UInt8>, CreationFlags: UInt32, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>): Int32 {
+    return SetupDiCreateDeviceInterfaceA(DeviceInfoSet, DeviceInfoData, InterfaceClassGuid, ReferenceString, CreationFlags, DeviceInterfaceData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiCreateDeviceInterfaceRegKeyA == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Registry == "on")]
+foreign {
+    // param-hint: Reserved optional reserved
+    // param-hint: InfHandle optional
+    // param-hint: InfSectionName optional
+    // pinvoke-hint: SetLastError
+    func SetupDiCreateDeviceInterfaceRegKeyA(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>, Reserved: UInt32, samDesired: UInt32, InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt8>): Win32_System_Registry.HKEY
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiCreateDeviceInterfaceRegKeyA == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Registry == "on")]
+public unsafe func Windows_SetupDiCreateDeviceInterfaceRegKeyA(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>, Reserved: UInt32, samDesired: UInt32, InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt8>): Win32_System_Registry.HKEY {
+    return SetupDiCreateDeviceInterfaceRegKeyA(DeviceInfoSet, DeviceInterfaceData, Reserved, samDesired, InfHandle, InfSectionName)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiCreateDeviceInterfaceRegKeyW == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Registry == "on")]
+foreign {
+    // param-hint: Reserved optional reserved
+    // param-hint: InfHandle optional
+    // param-hint: InfSectionName optional
+    // pinvoke-hint: SetLastError
+    func SetupDiCreateDeviceInterfaceRegKeyW(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>, Reserved: UInt32, samDesired: UInt32, InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt16>): Win32_System_Registry.HKEY
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiCreateDeviceInterfaceRegKeyW == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Registry == "on")]
+public unsafe func Windows_SetupDiCreateDeviceInterfaceRegKeyW(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>, Reserved: UInt32, samDesired: UInt32, InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt16>): Win32_System_Registry.HKEY {
+    return SetupDiCreateDeviceInterfaceRegKeyW(DeviceInfoSet, DeviceInterfaceData, Reserved, samDesired, InfHandle, InfSectionName)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiCreateDeviceInterfaceW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: ReferenceString optional
+    // param-hint: DeviceInterfaceData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiCreateDeviceInterfaceW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, InterfaceClassGuid: CPointer<GUID>, ReferenceString: CPointer<UInt16>, CreationFlags: UInt32, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiCreateDeviceInterfaceW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiCreateDeviceInterfaceW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, InterfaceClassGuid: CPointer<GUID>, ReferenceString: CPointer<UInt16>, CreationFlags: UInt32, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>): Int32 {
+    return SetupDiCreateDeviceInterfaceW(DeviceInfoSet, DeviceInfoData, InterfaceClassGuid, ReferenceString, CreationFlags, DeviceInterfaceData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiDeleteDevRegKey == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupDiDeleteDevRegKey(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Scope: UInt32, HwProfile: UInt32, KeyType: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiDeleteDevRegKey == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiDeleteDevRegKey(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Scope: UInt32, HwProfile: UInt32, KeyType: UInt32): Int32 {
+    return SetupDiDeleteDevRegKey(DeviceInfoSet, DeviceInfoData, Scope, HwProfile, KeyType)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiDeleteDeviceInfo == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupDiDeleteDeviceInfo(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiDeleteDeviceInfo == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiDeleteDeviceInfo(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32 {
+    return SetupDiDeleteDeviceInfo(DeviceInfoSet, DeviceInfoData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiDeleteDeviceInterfaceData == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupDiDeleteDeviceInterfaceData(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiDeleteDeviceInterfaceData == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiDeleteDeviceInterfaceData(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>): Int32 {
+    return SetupDiDeleteDeviceInterfaceData(DeviceInfoSet, DeviceInterfaceData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiDeleteDeviceInterfaceRegKey == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: Reserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDiDeleteDeviceInterfaceRegKey(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>, Reserved: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiDeleteDeviceInterfaceRegKey == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiDeleteDeviceInterfaceRegKey(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>, Reserved: UInt32): Int32 {
+    return SetupDiDeleteDeviceInterfaceRegKey(DeviceInfoSet, DeviceInterfaceData, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiDestroyClassImageList == "on" && (((arch == "x86_64" && Windows_Win32_UI_Controls == "on") || (arch == "aarch64" && Windows_Win32_UI_Controls == "on")) && Windows_Win32_UI_Controls == "on")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupDiDestroyClassImageList(ClassImageListData: CPointer<SP_CLASSIMAGELIST_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiDestroyClassImageList == "on" && (((arch == "x86_64" && Windows_Win32_UI_Controls == "on") || (arch == "aarch64" && Windows_Win32_UI_Controls == "on")) && Windows_Win32_UI_Controls == "on")]
+public unsafe func Windows_SetupDiDestroyClassImageList(ClassImageListData: CPointer<SP_CLASSIMAGELIST_DATAAbi>): Int32 {
+    return SetupDiDestroyClassImageList(ClassImageListData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiDestroyDeviceInfoList == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetupDiDestroyDeviceInfoList(DeviceInfoSet: HDEVINFO): Int32
-    // param-hint: InfSectionWithExt len=param[3] optional
-    // param-hint: RequiredSize optional
-    // param-hint: Extension optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetActualSectionToInstallA(InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt8>, InfSectionWithExt: CPointer<UInt8>, InfSectionWithExtSize: UInt32, RequiredSize: CPointer<UInt32>, Extension: CPointer<CPointer<UInt8>>): Int32
-    // param-hint: InfSectionWithExt len=param[3] optional
-    // param-hint: RequiredSize optional
-    // param-hint: Extension optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetActualSectionToInstallW(InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt16>, InfSectionWithExt: CPointer<UInt16>, InfSectionWithExtSize: UInt32, RequiredSize: CPointer<UInt32>, Extension: CPointer<CPointer<UInt16>>): Int32
-    // param-hint: ClassGuid optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetClassBitmapIndex(ClassGuid: CPointer<GUID>, MiniIconIndex: CPointer<Int32>): Int32
-    // param-hint: ClassDescription len=param[2]
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetClassDescriptionA(ClassGuid: CPointer<GUID>, ClassDescription: CPointer<UInt8>, ClassDescriptionSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: ClassDescription len=param[2]
-    // param-hint: RequiredSize optional
-    // param-hint: MachineName optional
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiGetClassDescriptionExA(ClassGuid: CPointer<GUID>, ClassDescription: CPointer<UInt8>, ClassDescriptionSize: UInt32, RequiredSize: CPointer<UInt32>, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): Int32
-    // param-hint: ClassDescription len=param[2]
-    // param-hint: RequiredSize optional
-    // param-hint: MachineName optional
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiGetClassDescriptionExW(ClassGuid: CPointer<GUID>, ClassDescription: CPointer<UInt16>, ClassDescriptionSize: UInt32, RequiredSize: CPointer<UInt32>, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32
-    // param-hint: ClassDescription len=param[2]
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetClassDescriptionW(ClassGuid: CPointer<GUID>, ClassDescription: CPointer<UInt16>, ClassDescriptionSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: ClassGuid optional
-    // param-hint: Enumerator optional
-    // param-hint: hwndParent optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetClassDevsA(ClassGuid: CPointer<GUID>, Enumerator: CPointer<UInt8>, hwndParent: CPointer<Unit>, Flags: SETUP_DI_GET_CLASS_DEVS_FLAGSAbi): HDEVINFO
-    // param-hint: ClassGuid optional
-    // param-hint: Enumerator optional
-    // param-hint: hwndParent optional
-    // param-hint: DeviceInfoSet optional
-    // param-hint: MachineName optional
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiGetClassDevsExA(ClassGuid: CPointer<GUID>, Enumerator: CPointer<UInt8>, hwndParent: CPointer<Unit>, Flags: SETUP_DI_GET_CLASS_DEVS_FLAGSAbi, DeviceInfoSet: HDEVINFO, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): HDEVINFO
-    // param-hint: ClassGuid optional
-    // param-hint: Enumerator optional
-    // param-hint: hwndParent optional
-    // param-hint: DeviceInfoSet optional
-    // param-hint: MachineName optional
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiGetClassDevsExW(ClassGuid: CPointer<GUID>, Enumerator: CPointer<UInt16>, hwndParent: CPointer<Unit>, Flags: SETUP_DI_GET_CLASS_DEVS_FLAGSAbi, DeviceInfoSet: HDEVINFO, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): HDEVINFO
-    // param-hint: ClassGuid optional
-    // param-hint: Enumerator optional
-    // param-hint: hwndParent optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetClassDevsW(ClassGuid: CPointer<GUID>, Enumerator: CPointer<UInt16>, hwndParent: CPointer<Unit>, Flags: SETUP_DI_GET_CLASS_DEVS_FLAGSAbi): HDEVINFO
-    // param-hint: PropertyKeyArray len=param[2] optional
-    // param-hint: RequiredPropertyKeyCount optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetClassPropertyKeys(ClassGuid: CPointer<GUID>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyKeyCount: UInt32, RequiredPropertyKeyCount: CPointer<UInt32>, Flags: UInt32): Int32
-    // param-hint: PropertyKeyArray len=param[2] optional
-    // param-hint: RequiredPropertyKeyCount optional
-    // param-hint: MachineName optional
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiGetClassPropertyKeysExW(ClassGuid: CPointer<GUID>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyKeyCount: UInt32, RequiredPropertyKeyCount: CPointer<UInt32>, Flags: UInt32, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32
-    // param-hint: PropertyRegDataType optional
-    // param-hint: PropertyBuffer bytes=param[4]
-    // param-hint: RequiredSize optional
-    // param-hint: MachineName optional
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiGetClassRegistryPropertyA(ClassGuid: CPointer<GUID>, Property: UInt32, PropertyRegDataType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): Int32
-    // param-hint: PropertyRegDataType optional
-    // param-hint: PropertyBuffer bytes=param[4]
-    // param-hint: RequiredSize optional
-    // param-hint: MachineName optional
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiGetClassRegistryPropertyW(ClassGuid: CPointer<GUID>, Property: UInt32, PropertyRegDataType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDeviceInfoListClass(DeviceInfoSet: HDEVINFO, ClassGuid: CPointer<GUID>): Int32
-    // param-hint: FriendlyName len=param[2]
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetHwProfileFriendlyNameA(HwProfile: UInt32, FriendlyName: CPointer<UInt8>, FriendlyNameSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: FriendlyName len=param[2]
-    // param-hint: RequiredSize optional
-    // param-hint: MachineName optional
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiGetHwProfileFriendlyNameExA(HwProfile: UInt32, FriendlyName: CPointer<UInt8>, FriendlyNameSize: UInt32, RequiredSize: CPointer<UInt32>, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): Int32
-    // param-hint: FriendlyName len=param[2]
-    // param-hint: RequiredSize optional
-    // param-hint: MachineName optional
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiGetHwProfileFriendlyNameExW(HwProfile: UInt32, FriendlyName: CPointer<UInt16>, FriendlyNameSize: UInt32, RequiredSize: CPointer<UInt32>, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32
-    // param-hint: FriendlyName len=param[2]
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetHwProfileFriendlyNameW(HwProfile: UInt32, FriendlyName: CPointer<UInt16>, FriendlyNameSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: HwProfileList len=param[1]
-    // param-hint: CurrentlyActiveIndex optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetHwProfileList(HwProfileList: CPointer<UInt32>, HwProfileListSize: UInt32, RequiredSize: CPointer<UInt32>, CurrentlyActiveIndex: CPointer<UInt32>): Int32
-    // param-hint: HwProfileList len=param[1]
-    // param-hint: CurrentlyActiveIndex optional
-    // param-hint: MachineName optional
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiGetHwProfileListExA(HwProfileList: CPointer<UInt32>, HwProfileListSize: UInt32, RequiredSize: CPointer<UInt32>, CurrentlyActiveIndex: CPointer<UInt32>, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): Int32
-    // param-hint: HwProfileList len=param[1]
-    // param-hint: CurrentlyActiveIndex optional
-    // param-hint: MachineName optional
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiGetHwProfileListExW(HwProfileList: CPointer<UInt32>, HwProfileListSize: UInt32, RequiredSize: CPointer<UInt32>, CurrentlyActiveIndex: CPointer<UInt32>, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32
-    // param-hint: ClassName len=param[3]
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetINFClassA(InfName: CPointer<UInt8>, ClassGuid: CPointer<GUID>, ClassName: CPointer<UInt8>, ClassNameSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: ClassName len=param[3]
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetINFClassW(InfName: CPointer<UInt16>, ClassGuid: CPointer<GUID>, ClassName: CPointer<UInt16>, ClassNameSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: hwndParent optional
-    // param-hint: FileQueue optional
-    // pinvoke-hint: SetLastError
-    func SetupDiInstallClassA(hwndParent: CPointer<Unit>, InfFileName: CPointer<UInt8>, Flags: UInt32, FileQueue: CPointer<Unit>): Int32
-    // param-hint: hwndParent optional
-    // param-hint: InfFileName optional
-    // param-hint: FileQueue optional
-    // param-hint: InterfaceClassGuid optional
-    // param-hint: Reserved1 optional reserved
-    // param-hint: Reserved2 optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiInstallClassExA(hwndParent: CPointer<Unit>, InfFileName: CPointer<UInt8>, Flags: UInt32, FileQueue: CPointer<Unit>, InterfaceClassGuid: CPointer<GUID>, Reserved1: CPointer<Unit>, Reserved2: CPointer<Unit>): Int32
-    // param-hint: hwndParent optional
-    // param-hint: InfFileName optional
-    // param-hint: FileQueue optional
-    // param-hint: InterfaceClassGuid optional
-    // param-hint: Reserved1 optional reserved
-    // param-hint: Reserved2 optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiInstallClassExW(hwndParent: CPointer<Unit>, InfFileName: CPointer<UInt16>, Flags: UInt32, FileQueue: CPointer<Unit>, InterfaceClassGuid: CPointer<GUID>, Reserved1: CPointer<Unit>, Reserved2: CPointer<Unit>): Int32
-    // param-hint: hwndParent optional
-    // param-hint: FileQueue optional
-    // pinvoke-hint: SetLastError
-    func SetupDiInstallClassW(hwndParent: CPointer<Unit>, InfFileName: CPointer<UInt16>, Flags: UInt32, FileQueue: CPointer<Unit>): Int32
-    // param-hint: PropertyBuffer bytes=param[3] optional
-    // param-hint: MachineName optional
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiSetClassRegistryPropertyA(ClassGuid: CPointer<GUID>, Property: UInt32, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): Int32
-    // param-hint: PropertyBuffer bytes=param[3] optional
-    // param-hint: MachineName optional
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiSetClassRegistryPropertyW(ClassGuid: CPointer<GUID>, Property: UInt32, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32
-    // param-hint: Reserved1 optional reserved
-    // param-hint: Reserved2 optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDuplicateDiskSpaceListA(DiskSpace: CPointer<Unit>, Reserved1: CPointer<Unit>, Reserved2: UInt32, Flags: UInt32): CPointer<Unit>
-    // param-hint: Reserved1 optional reserved
-    // param-hint: Reserved2 optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDuplicateDiskSpaceListW(DiskSpace: CPointer<Unit>, Reserved1: CPointer<Unit>, Reserved2: UInt32, Flags: UInt32): CPointer<Unit>
-    // param-hint: Buffer len=param[3] optional
-    // param-hint: SizeNeeded optional
-    // pinvoke-hint: SetLastError
-    func SetupEnumInfSectionsA(InfHandle: CPointer<Unit>, Index: UInt32, Buffer: CPointer<UInt8>, Size: UInt32, SizeNeeded: CPointer<UInt32>): Int32
-    // param-hint: Buffer len=param[3] optional
-    // param-hint: SizeNeeded optional
-    // pinvoke-hint: SetLastError
-    func SetupEnumInfSectionsW(InfHandle: CPointer<Unit>, Index: UInt32, Buffer: CPointer<UInt16>, Size: UInt32, SizeNeeded: CPointer<UInt32>): Int32
-    // param-hint: List len=param[1]
-    // pinvoke-hint: SetLastError
-    func SetupFreeSourceListA(List: CPointer<CPointer<CPointer<UInt8>>>, Count: UInt32): Int32
-    // param-hint: List len=param[1]
-    // pinvoke-hint: SetLastError
-    func SetupFreeSourceListW(List: CPointer<CPointer<CPointer<UInt16>>>, Count: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func SetupGetFileCompressionInfoA(SourceFileName: CPointer<UInt8>, ActualSourceFileName: CPointer<CPointer<UInt8>>, SourceFileSize: CPointer<UInt32>, TargetFileSize: CPointer<UInt32>, CompressionType: CPointer<FILE_COMPRESSION_TYPEAbi>): UInt32
-    // param-hint: ActualSourceFileNameBuffer len=param[2] optional
-    // param-hint: RequiredBufferLen optional
-    // pinvoke-hint: SetLastError
-    func SetupGetFileCompressionInfoExA(SourceFileName: CPointer<UInt8>, ActualSourceFileNameBuffer: CPointer<UInt8>, ActualSourceFileNameBufferLen: UInt32, RequiredBufferLen: CPointer<UInt32>, SourceFileSize: CPointer<UInt32>, TargetFileSize: CPointer<UInt32>, CompressionType: CPointer<FILE_COMPRESSION_TYPEAbi>): Int32
-    // param-hint: ActualSourceFileNameBuffer len=param[2] optional
-    // param-hint: RequiredBufferLen optional
-    // pinvoke-hint: SetLastError
-    func SetupGetFileCompressionInfoExW(SourceFileName: CPointer<UInt16>, ActualSourceFileNameBuffer: CPointer<UInt16>, ActualSourceFileNameBufferLen: UInt32, RequiredBufferLen: CPointer<UInt32>, SourceFileSize: CPointer<UInt32>, TargetFileSize: CPointer<UInt32>, CompressionType: CPointer<FILE_COMPRESSION_TYPEAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupGetFileCompressionInfoW(SourceFileName: CPointer<UInt16>, ActualSourceFileName: CPointer<CPointer<UInt16>>, SourceFileSize: CPointer<UInt32>, TargetFileSize: CPointer<UInt32>, CompressionType: CPointer<FILE_COMPRESSION_TYPEAbi>): UInt32
-    // pinvoke-hint: SetLastError
-    func SetupGetFileQueueCount(FileQueue: CPointer<Unit>, SubQueueFileOp: UInt32, NumOperations: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupGetFileQueueFlags(FileQueue: CPointer<Unit>, Flags: CPointer<UInt32>): Int32
-    // param-hint: DirectoryPath optional
-    // param-hint: ReturnBuffer len=param[3] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetInfFileListA(DirectoryPath: CPointer<UInt8>, InfStyle: INF_STYLEAbi, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: DirectoryPath optional
-    // param-hint: ReturnBuffer len=param[3]
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetInfFileListW(DirectoryPath: CPointer<UInt16>, InfStyle: INF_STYLEAbi, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: ReturnBuffer len=param[2]
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetInfPublishedNameA(DriverStoreLocation: CPointer<UInt8>, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: ReturnBuffer len=param[2]
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetInfPublishedNameW(DriverStoreLocation: CPointer<UInt16>, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupGetLineCountA(InfHandle: CPointer<Unit>, Section: CPointer<UInt8>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupGetLineCountW(InfHandle: CPointer<Unit>, Section: CPointer<UInt16>): Int32
-    func SetupGetNonInteractiveMode(): Int32
-    // param-hint: ReturnBuffer len=param[4] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetSourceInfoA(InfHandle: CPointer<Unit>, SourceId: UInt32, InfoDesired: UInt32, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: ReturnBuffer len=param[4] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetSourceInfoW(InfHandle: CPointer<Unit>, SourceId: UInt32, InfoDesired: UInt32, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    func SetupGetThreadLogToken(): UInt64
-    // param-hint: OwnerWindow optional
-    // pinvoke-hint: SetLastError
-    func SetupInitDefaultQueueCallback(OwnerWindow: CPointer<Unit>): CPointer<Unit>
-    // param-hint: OwnerWindow optional
-    // param-hint: AlternateProgressWindow optional
-    // param-hint: Reserved1 optional reserved
-    // param-hint: Reserved2 optional reserved
-    func SetupInitDefaultQueueCallbackEx(OwnerWindow: CPointer<Unit>, AlternateProgressWindow: CPointer<Unit>, ProgressMessage: UInt32, Reserved1: UInt32, Reserved2: CPointer<Unit>): CPointer<Unit>
-    // param-hint: LogFileName optional
-    // pinvoke-hint: SetLastError
-    func SetupInitializeFileLogA(LogFileName: CPointer<UInt8>, Flags: UInt32): CPointer<Unit>
-    // param-hint: LogFileName optional
-    // pinvoke-hint: SetLastError
-    func SetupInitializeFileLogW(LogFileName: CPointer<UInt16>, Flags: UInt32): CPointer<Unit>
-    // param-hint: LayoutInfHandle optional
-    // param-hint: SourceRootPath optional
-    // pinvoke-hint: SetLastError
-    func SetupInstallFilesFromInfSectionA(InfHandle: CPointer<Unit>, LayoutInfHandle: CPointer<Unit>, FileQueue: CPointer<Unit>, SectionName: CPointer<UInt8>, SourceRootPath: CPointer<UInt8>, CopyFlags: UInt32): Int32
-    // param-hint: LayoutInfHandle optional
-    // param-hint: SourceRootPath optional
-    // pinvoke-hint: SetLastError
-    func SetupInstallFilesFromInfSectionW(InfHandle: CPointer<Unit>, LayoutInfHandle: CPointer<Unit>, FileQueue: CPointer<Unit>, SectionName: CPointer<UInt16>, SourceRootPath: CPointer<UInt16>, CopyFlags: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func SetupInstallServicesFromInfSectionA(InfHandle: CPointer<Unit>, SectionName: CPointer<UInt8>, Flags: SPSVCINST_FLAGSAbi): Int32
-    // pinvoke-hint: SetLastError
-    func SetupInstallServicesFromInfSectionW(InfHandle: CPointer<Unit>, SectionName: CPointer<UInt16>, Flags: SPSVCINST_FLAGSAbi): Int32
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupIterateCabinetA(CabinetFile: CPointer<UInt8>, Reserved: UInt32, MsgHandler: PSP_FILE_CALLBACK_A, Context: CPointer<Unit>): Int32
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupIterateCabinetW(CabinetFile: CPointer<UInt16>, Reserved: UInt32, MsgHandler: PSP_FILE_CALLBACK_W, Context: CPointer<Unit>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupLogErrorA(MessageString: CPointer<UInt8>, Severity: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func SetupLogErrorW(MessageString: CPointer<UInt16>, Severity: UInt32): Int32
-    // param-hint: LogSectionName optional
-    // param-hint: DiskTagfile optional
-    // param-hint: DiskDescription optional
-    // param-hint: OtherInfo optional
-    // pinvoke-hint: SetLastError
-    func SetupLogFileA(FileLogHandle: CPointer<Unit>, LogSectionName: CPointer<UInt8>, SourceFilename: CPointer<UInt8>, TargetFilename: CPointer<UInt8>, Checksum: UInt32, DiskTagfile: CPointer<UInt8>, DiskDescription: CPointer<UInt8>, OtherInfo: CPointer<UInt8>, Flags: UInt32): Int32
-    // param-hint: LogSectionName optional
-    // param-hint: DiskTagfile optional
-    // param-hint: DiskDescription optional
-    // param-hint: OtherInfo optional
-    // pinvoke-hint: SetLastError
-    func SetupLogFileW(FileLogHandle: CPointer<Unit>, LogSectionName: CPointer<UInt16>, SourceFilename: CPointer<UInt16>, TargetFilename: CPointer<UInt16>, Checksum: UInt32, DiskTagfile: CPointer<UInt16>, DiskDescription: CPointer<UInt16>, OtherInfo: CPointer<UInt16>, Flags: UInt32): Int32
-    // param-hint: FileName optional
-    // param-hint: ErrorLine optional
-    // pinvoke-hint: SetLastError
-    func SetupOpenAppendInfFileA(FileName: CPointer<UInt8>, InfHandle: CPointer<Unit>, ErrorLine: CPointer<UInt32>): Int32
-    // param-hint: FileName optional
-    // param-hint: ErrorLine optional
-    // pinvoke-hint: SetLastError
-    func SetupOpenAppendInfFileW(FileName: CPointer<UInt16>, InfHandle: CPointer<Unit>, ErrorLine: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupOpenFileQueue(): CPointer<Unit>
-    // param-hint: InfClass optional
-    // param-hint: ErrorLine optional
-    // pinvoke-hint: SetLastError
-    func SetupOpenInfFileA(FileName: CPointer<UInt8>, InfClass: CPointer<UInt8>, InfStyle: INF_STYLEAbi, ErrorLine: CPointer<UInt32>): CPointer<Unit>
-    // param-hint: InfClass optional
-    // param-hint: ErrorLine optional
-    // pinvoke-hint: SetLastError
-    func SetupOpenInfFileW(FileName: CPointer<UInt16>, InfClass: CPointer<UInt16>, InfStyle: INF_STYLEAbi, ErrorLine: CPointer<UInt32>): CPointer<Unit>
-    // pinvoke-hint: SetLastError
-    func SetupOpenLog(Erase: Int32): Int32
-    // pinvoke-hint: SetLastError
-    func SetupOpenMasterInf(): CPointer<Unit>
-    func SetupPrepareQueueForRestoreA(QueueHandle: CPointer<Unit>, BackupPath: CPointer<UInt8>, RestoreFlags: UInt32): Int32
-    func SetupPrepareQueueForRestoreW(QueueHandle: CPointer<Unit>, BackupPath: CPointer<UInt16>, RestoreFlags: UInt32): Int32
-    // param-hint: DialogTitle optional
-    // param-hint: DiskName optional
-    // param-hint: PathToSource optional
-    // param-hint: TagFile optional
-    // param-hint: PathBuffer len=param[8] optional
-    // param-hint: PathRequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupPromptForDiskA(hwndParent: CPointer<Unit>, DialogTitle: CPointer<UInt8>, DiskName: CPointer<UInt8>, PathToSource: CPointer<UInt8>, FileSought: CPointer<UInt8>, TagFile: CPointer<UInt8>, DiskPromptStyle: UInt32, PathBuffer: CPointer<UInt8>, PathBufferSize: UInt32, PathRequiredSize: CPointer<UInt32>): UInt32
-    // param-hint: DialogTitle optional
-    // param-hint: DiskName optional
-    // param-hint: PathToSource optional
-    // param-hint: TagFile optional
-    // param-hint: PathBuffer len=param[8] optional
-    // param-hint: PathRequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupPromptForDiskW(hwndParent: CPointer<Unit>, DialogTitle: CPointer<UInt16>, DiskName: CPointer<UInt16>, PathToSource: CPointer<UInt16>, FileSought: CPointer<UInt16>, TagFile: CPointer<UInt16>, DiskPromptStyle: UInt32, PathBuffer: CPointer<UInt16>, PathBufferSize: UInt32, PathRequiredSize: CPointer<UInt32>): UInt32
-    // param-hint: FileQueue optional
-    // param-hint: Owner optional
-    // pinvoke-hint: SetLastError
-    func SetupPromptReboot(FileQueue: CPointer<Unit>, Owner: CPointer<Unit>, ScanOnly: Int32): Int32
-    // param-hint: ReturnBuffer len=param[2] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupQueryDrivesInDiskSpaceListA(DiskSpace: CPointer<Unit>, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: ReturnBuffer len=param[2] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupQueryDrivesInDiskSpaceListW(DiskSpace: CPointer<Unit>, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: LogSectionName optional
-    // param-hint: DataOut len=param[5] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupQueryFileLogA(FileLogHandle: CPointer<Unit>, LogSectionName: CPointer<UInt8>, TargetFilename: CPointer<UInt8>, DesiredInfo: SetupFileLogInfoAbi, DataOut: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: LogSectionName optional
-    // param-hint: DataOut len=param[5] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupQueryFileLogW(FileLogHandle: CPointer<Unit>, LogSectionName: CPointer<UInt16>, TargetFilename: CPointer<UInt16>, DesiredInfo: SetupFileLogInfoAbi, DataOut: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupQuerySourceListA(Flags: UInt32, List: CPointer<CPointer<CPointer<UInt8>>>, Count: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupQuerySourceListW(Flags: UInt32, List: CPointer<CPointer<CPointer<UInt16>>>, Count: CPointer<UInt32>): Int32
-    // param-hint: Reserved1 optional reserved
-    // param-hint: Reserved2 optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupQuerySpaceRequiredOnDriveA(DiskSpace: CPointer<Unit>, DriveSpec: CPointer<UInt8>, SpaceRequired: CPointer<Int64>, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
-    // param-hint: Reserved1 optional reserved
-    // param-hint: Reserved2 optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupQuerySpaceRequiredOnDriveW(DiskSpace: CPointer<Unit>, DriveSpec: CPointer<UInt16>, SpaceRequired: CPointer<Int64>, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
-    // param-hint: SourceRootPath optional
-    // param-hint: SourcePath optional
-    // param-hint: SourceDescription optional
-    // param-hint: SourceTagfile optional
-    // param-hint: TargetFilename optional
-    // pinvoke-hint: SetLastError
-    func SetupQueueCopyA(QueueHandle: CPointer<Unit>, SourceRootPath: CPointer<UInt8>, SourcePath: CPointer<UInt8>, SourceFilename: CPointer<UInt8>, SourceDescription: CPointer<UInt8>, SourceTagfile: CPointer<UInt8>, TargetDirectory: CPointer<UInt8>, TargetFilename: CPointer<UInt8>, CopyStyle: UInt32): Int32
-    // param-hint: SourceRootPath optional
-    // param-hint: ListInfHandle optional
-    // pinvoke-hint: SetLastError
-    func SetupQueueCopySectionA(QueueHandle: CPointer<Unit>, SourceRootPath: CPointer<UInt8>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, Section: CPointer<UInt8>, CopyStyle: UInt32): Int32
-    // param-hint: SourceRootPath optional
-    // param-hint: ListInfHandle optional
-    // pinvoke-hint: SetLastError
-    func SetupQueueCopySectionW(QueueHandle: CPointer<Unit>, SourceRootPath: CPointer<UInt16>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, Section: CPointer<UInt16>, CopyStyle: UInt32): Int32
-    // param-hint: SourceRootPath optional
-    // param-hint: SourcePath optional
-    // param-hint: SourceDescription optional
-    // param-hint: SourceTagfile optional
-    // param-hint: TargetFilename optional
-    // pinvoke-hint: SetLastError
-    func SetupQueueCopyW(QueueHandle: CPointer<Unit>, SourceRootPath: CPointer<UInt16>, SourcePath: CPointer<UInt16>, SourceFilename: CPointer<UInt16>, SourceDescription: CPointer<UInt16>, SourceTagfile: CPointer<UInt16>, TargetDirectory: CPointer<UInt16>, TargetFilename: CPointer<UInt16>, CopyStyle: UInt32): Int32
-    // param-hint: SourceRootPath optional
-    // param-hint: TargetFilename optional
-    // pinvoke-hint: SetLastError
-    func SetupQueueDefaultCopyA(QueueHandle: CPointer<Unit>, InfHandle: CPointer<Unit>, SourceRootPath: CPointer<UInt8>, SourceFilename: CPointer<UInt8>, TargetFilename: CPointer<UInt8>, CopyStyle: UInt32): Int32
-    // param-hint: SourceRootPath optional
-    // param-hint: TargetFilename optional
-    // pinvoke-hint: SetLastError
-    func SetupQueueDefaultCopyW(QueueHandle: CPointer<Unit>, InfHandle: CPointer<Unit>, SourceRootPath: CPointer<UInt16>, SourceFilename: CPointer<UInt16>, TargetFilename: CPointer<UInt16>, CopyStyle: UInt32): Int32
-    // param-hint: PathPart2 optional
-    // pinvoke-hint: SetLastError
-    func SetupQueueDeleteA(QueueHandle: CPointer<Unit>, PathPart1: CPointer<UInt8>, PathPart2: CPointer<UInt8>): Int32
-    // param-hint: ListInfHandle optional
-    // pinvoke-hint: SetLastError
-    func SetupQueueDeleteSectionA(QueueHandle: CPointer<Unit>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, Section: CPointer<UInt8>): Int32
-    // param-hint: ListInfHandle optional
-    // pinvoke-hint: SetLastError
-    func SetupQueueDeleteSectionW(QueueHandle: CPointer<Unit>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, Section: CPointer<UInt16>): Int32
-    // param-hint: PathPart2 optional
-    // pinvoke-hint: SetLastError
-    func SetupQueueDeleteW(QueueHandle: CPointer<Unit>, PathPart1: CPointer<UInt16>, PathPart2: CPointer<UInt16>): Int32
-    // param-hint: SourceFilename optional
-    // param-hint: TargetPath optional
-    // pinvoke-hint: SetLastError
-    func SetupQueueRenameA(QueueHandle: CPointer<Unit>, SourcePath: CPointer<UInt8>, SourceFilename: CPointer<UInt8>, TargetPath: CPointer<UInt8>, TargetFilename: CPointer<UInt8>): Int32
-    // param-hint: ListInfHandle optional
-    // pinvoke-hint: SetLastError
-    func SetupQueueRenameSectionA(QueueHandle: CPointer<Unit>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, Section: CPointer<UInt8>): Int32
-    // param-hint: ListInfHandle optional
-    // pinvoke-hint: SetLastError
-    func SetupQueueRenameSectionW(QueueHandle: CPointer<Unit>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, Section: CPointer<UInt16>): Int32
-    // param-hint: SourceFilename optional
-    // param-hint: TargetPath optional
-    // pinvoke-hint: SetLastError
-    func SetupQueueRenameW(QueueHandle: CPointer<Unit>, SourcePath: CPointer<UInt16>, SourceFilename: CPointer<UInt16>, TargetPath: CPointer<UInt16>, TargetFilename: CPointer<UInt16>): Int32
-    // param-hint: LogSectionName optional
-    // param-hint: TargetFilename optional
-    // pinvoke-hint: SetLastError
-    func SetupRemoveFileLogEntryA(FileLogHandle: CPointer<Unit>, LogSectionName: CPointer<UInt8>, TargetFilename: CPointer<UInt8>): Int32
-    // param-hint: LogSectionName optional
-    // param-hint: TargetFilename optional
-    // pinvoke-hint: SetLastError
-    func SetupRemoveFileLogEntryW(FileLogHandle: CPointer<Unit>, LogSectionName: CPointer<UInt16>, TargetFilename: CPointer<UInt16>): Int32
-    // param-hint: Reserved1 optional reserved
-    // param-hint: Reserved2 optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupRemoveFromDiskSpaceListA(DiskSpace: CPointer<Unit>, TargetFilespec: CPointer<UInt8>, Operation: SETUP_FILE_OPERATIONAbi, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
-    // param-hint: Reserved1 optional reserved
-    // param-hint: Reserved2 optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupRemoveFromDiskSpaceListW(DiskSpace: CPointer<Unit>, TargetFilespec: CPointer<UInt16>, Operation: SETUP_FILE_OPERATIONAbi, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func SetupRemoveFromSourceListA(Flags: UInt32, Source: CPointer<UInt8>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupRemoveFromSourceListW(Flags: UInt32, Source: CPointer<UInt16>): Int32
-    // param-hint: LayoutInfHandle optional
-    // param-hint: Reserved1 optional reserved
-    // param-hint: Reserved2 optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupRemoveInstallSectionFromDiskSpaceListA(DiskSpace: CPointer<Unit>, InfHandle: CPointer<Unit>, LayoutInfHandle: CPointer<Unit>, SectionName: CPointer<UInt8>, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
-    // param-hint: LayoutInfHandle optional
-    // param-hint: Reserved1 optional reserved
-    // param-hint: Reserved2 optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupRemoveInstallSectionFromDiskSpaceListW(DiskSpace: CPointer<Unit>, InfHandle: CPointer<Unit>, LayoutInfHandle: CPointer<Unit>, SectionName: CPointer<UInt16>, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
-    // param-hint: ListInfHandle optional
-    // param-hint: Reserved1 optional reserved
-    // param-hint: Reserved2 optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupRemoveSectionFromDiskSpaceListA(DiskSpace: CPointer<Unit>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, SectionName: CPointer<UInt8>, Operation: SETUP_FILE_OPERATIONAbi, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
-    // param-hint: ListInfHandle optional
-    // param-hint: Reserved1 optional reserved
-    // param-hint: Reserved2 optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupRemoveSectionFromDiskSpaceListW(DiskSpace: CPointer<Unit>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, SectionName: CPointer<UInt16>, Operation: SETUP_FILE_OPERATIONAbi, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
-    // param-hint: DialogTitle optional
-    // pinvoke-hint: SetLastError
-    func SetupRenameErrorA(hwndParent: CPointer<Unit>, DialogTitle: CPointer<UInt8>, SourceFile: CPointer<UInt8>, TargetFile: CPointer<UInt8>, Win32ErrorCode: UInt32, Style: UInt32): UInt32
-    // param-hint: DialogTitle optional
-    // pinvoke-hint: SetLastError
-    func SetupRenameErrorW(hwndParent: CPointer<Unit>, DialogTitle: CPointer<UInt16>, SourceFile: CPointer<UInt16>, TargetFile: CPointer<UInt16>, Win32ErrorCode: UInt32, Style: UInt32): UInt32
-    // param-hint: Window optional
-    // param-hint: CallbackRoutine optional
-    // param-hint: CallbackContext optional
-    // pinvoke-hint: SetLastError
-    func SetupScanFileQueueA(FileQueue: CPointer<Unit>, Flags: SETUPSCANFILEQUEUE_FLAGSAbi, Window: CPointer<Unit>, CallbackRoutine: PSP_FILE_CALLBACK_A, CallbackContext: CPointer<Unit>, Result: CPointer<UInt32>): Int32
-    // param-hint: Window optional
-    // param-hint: CallbackRoutine optional
-    // param-hint: CallbackContext optional
-    // pinvoke-hint: SetLastError
-    func SetupScanFileQueueW(FileQueue: CPointer<Unit>, Flags: SETUPSCANFILEQUEUE_FLAGSAbi, Window: CPointer<Unit>, CallbackRoutine: PSP_FILE_CALLBACK_W, CallbackContext: CPointer<Unit>, Result: CPointer<UInt32>): Int32
-    // param-hint: Directory optional
-    // pinvoke-hint: SetLastError
-    func SetupSetDirectoryIdA(InfHandle: CPointer<Unit>, Id: UInt32, Directory: CPointer<UInt8>): Int32
-    // param-hint: Directory optional
-    // param-hint: Reserved1 optional reserved
-    // param-hint: Reserved2 optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupSetDirectoryIdExA(InfHandle: CPointer<Unit>, Id: UInt32, Directory: CPointer<UInt8>, Flags: UInt32, Reserved1: UInt32, Reserved2: CPointer<Unit>): Int32
-    // param-hint: Directory optional
-    // param-hint: Reserved1 optional reserved
-    // param-hint: Reserved2 optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupSetDirectoryIdExW(InfHandle: CPointer<Unit>, Id: UInt32, Directory: CPointer<UInt16>, Flags: UInt32, Reserved1: UInt32, Reserved2: CPointer<Unit>): Int32
-    // param-hint: Directory optional
-    // pinvoke-hint: SetLastError
-    func SetupSetDirectoryIdW(InfHandle: CPointer<Unit>, Id: UInt32, Directory: CPointer<UInt16>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupSetFileQueueFlags(FileQueue: CPointer<Unit>, FlagMask: UInt32, Flags: UInt32): Int32
-    func SetupSetNonInteractiveMode(NonInteractiveFlag: Int32): Int32
-    // param-hint: Override optional
-    // pinvoke-hint: SetLastError
-    func SetupSetPlatformPathOverrideA(Override: CPointer<UInt8>): Int32
-    // param-hint: Override optional
-    // pinvoke-hint: SetLastError
-    func SetupSetPlatformPathOverrideW(Override: CPointer<UInt16>): Int32
-    // param-hint: SourceList len=param[2]
-    // pinvoke-hint: SetLastError
-    func SetupSetSourceListA(Flags: UInt32, SourceList: CPointer<CPointer<UInt8>>, SourceCount: UInt32): Int32
-    // param-hint: SourceList len=param[2]
-    // pinvoke-hint: SetLastError
-    func SetupSetSourceListW(Flags: UInt32, SourceList: CPointer<CPointer<UInt16>>, SourceCount: UInt32): Int32
-    func SetupSetThreadLogToken(LogToken: UInt64): Unit
-    // pinvoke-hint: SetLastError
-    func SetupTermDefaultQueueCallback(Context: CPointer<Unit>): Unit
-    // pinvoke-hint: SetLastError
-    func SetupTerminateFileLog(FileLogHandle: CPointer<Unit>): Int32
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupUninstallNewlyCopiedInfs(FileQueue: CPointer<Unit>, Flags: UInt32, Reserved: CPointer<Unit>): Int32
-    // param-hint: Reserved optional reserved
-    func SetupUninstallOEMInfA(InfFileName: CPointer<UInt8>, Flags: UInt32, Reserved: CPointer<Unit>): Int32
-    // param-hint: Reserved optional reserved
-    func SetupUninstallOEMInfW(InfFileName: CPointer<UInt16>, Flags: UInt32, Reserved: CPointer<Unit>): Int32
 }
 
-@When[SETUPAPI == "on" && (((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_UI_Controls == "on") || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_UI_Controls == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_UI_Controls == "on")]
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiDestroyDeviceInfoList == "on"]
+public unsafe func Windows_SetupDiDestroyDeviceInfoList(DeviceInfoSet: HDEVINFO): Int32 {
+    return SetupDiDestroyDeviceInfoList(DeviceInfoSet)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiDestroyDriverInfoList == "on" && (arch == "x86_64" || arch == "aarch64")]
 foreign {
     // param-hint: DeviceInfoData optional
-    func SetupDiGetWizardPage(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, InstallWizardData: CPointer<SP_INSTALLWIZARD_DATAAbi>, PageType: UInt32, Flags: UInt32): Win32__impl_l0.HPROPSHEETPAGE
+    // pinvoke-hint: SetLastError
+    func SetupDiDestroyDriverInfoList(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverType: SETUP_DI_DRIVER_TYPEAbi): Int32
 }
 
-@When[SETUPAPI == "on" && (((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")]
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiDestroyDriverInfoList == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiDestroyDriverInfoList(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverType: SETUP_DI_DRIVER_TYPEAbi): Int32 {
+    return SetupDiDestroyDriverInfoList(DeviceInfoSet, DeviceInfoData, DriverType)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiDrawMiniIcon == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func SetupDiDrawMiniIcon(hdc: Win32_Graphics_Gdi.HDC, rc: Win32_Foundation.RECTAbi, MiniIconIndex: Int32, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiDrawMiniIcon == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_SetupDiDrawMiniIcon(hdc: Win32_Graphics_Gdi.HDC, rc: Win32_Foundation.RECTAbi, MiniIconIndex: Int32, Flags: UInt32): Int32 {
+    return SetupDiDrawMiniIcon(hdc, rc, MiniIconIndex, Flags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiEnumDeviceInfo == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupDiEnumDeviceInfo(DeviceInfoSet: HDEVINFO, MemberIndex: UInt32, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiEnumDeviceInfo == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiEnumDeviceInfo(DeviceInfoSet: HDEVINFO, MemberIndex: UInt32, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32 {
+    return SetupDiEnumDeviceInfo(DeviceInfoSet, MemberIndex, DeviceInfoData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiEnumDeviceInterfaces == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiEnumDeviceInterfaces(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, InterfaceClassGuid: CPointer<GUID>, MemberIndex: UInt32, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiEnumDeviceInterfaces == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiEnumDeviceInterfaces(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, InterfaceClassGuid: CPointer<GUID>, MemberIndex: UInt32, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>): Int32 {
+    return SetupDiEnumDeviceInterfaces(DeviceInfoSet, DeviceInfoData, InterfaceClassGuid, MemberIndex, DeviceInterfaceData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiEnumDriverInfoA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiEnumDriverInfoA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverType: SETUP_DI_DRIVER_TYPEAbi, MemberIndex: UInt32, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_AAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiEnumDriverInfoA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiEnumDriverInfoA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverType: SETUP_DI_DRIVER_TYPEAbi, MemberIndex: UInt32, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_AAbi>): Int32 {
+    return SetupDiEnumDriverInfoA(DeviceInfoSet, DeviceInfoData, DriverType, MemberIndex, DriverInfoData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiEnumDriverInfoW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiEnumDriverInfoW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverType: SETUP_DI_DRIVER_TYPEAbi, MemberIndex: UInt32, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_WAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiEnumDriverInfoW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiEnumDriverInfoW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverType: SETUP_DI_DRIVER_TYPEAbi, MemberIndex: UInt32, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_WAbi>): Int32 {
+    return SetupDiEnumDriverInfoW(DeviceInfoSet, DeviceInfoData, DriverType, MemberIndex, DriverInfoData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetActualModelsSectionA == "on" && (((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")]
 foreign {
     // param-hint: AlternatePlatformInfo optional
     // param-hint: InfSectionWithExt len=param[3] optional
@@ -12415,25 +14687,43 @@ foreign {
     // param-hint: Reserved optional reserved
     // pinvoke-hint: SetLastError
     func SetupDiGetActualModelsSectionA(Context: CPointer<INFCONTEXTAbi>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2Abi>, InfSectionWithExt: CPointer<UInt8>, InfSectionWithExtSize: UInt32, RequiredSize: CPointer<UInt32>, Reserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetActualModelsSectionA == "on" && (((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")]
+public unsafe func Windows_SetupDiGetActualModelsSectionA(Context: CPointer<INFCONTEXTAbi>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2Abi>, InfSectionWithExt: CPointer<UInt8>, InfSectionWithExtSize: UInt32, RequiredSize: CPointer<UInt32>, Reserved: CPointer<Unit>): Int32 {
+    return SetupDiGetActualModelsSectionA(Context, AlternatePlatformInfo, InfSectionWithExt, InfSectionWithExtSize, RequiredSize, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetActualModelsSectionW == "on" && (((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")]
+foreign {
     // param-hint: AlternatePlatformInfo optional
     // param-hint: InfSectionWithExt len=param[3] optional
     // param-hint: RequiredSize optional
     // param-hint: Reserved optional reserved
     // pinvoke-hint: SetLastError
     func SetupDiGetActualModelsSectionW(Context: CPointer<INFCONTEXTAbi>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2Abi>, InfSectionWithExt: CPointer<UInt16>, InfSectionWithExtSize: UInt32, RequiredSize: CPointer<UInt32>, Reserved: CPointer<Unit>): Int32
-    // param-hint: AlternatePlatformInfo optional
-    // pinvoke-hint: SetLastError
-    func SetupQueryInfOriginalFileInformationA(InfInformation: CPointer<SP_INF_INFORMATIONAbi>, InfIndex: UInt32, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2Abi>, OriginalFileInfo: CPointer<SP_ORIGINAL_FILE_INFO_AAbi>): Int32
-    // param-hint: AlternatePlatformInfo optional
-    // pinvoke-hint: SetLastError
-    func SetupQueryInfOriginalFileInformationW(InfInformation: CPointer<SP_INF_INFORMATIONAbi>, InfIndex: UInt32, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2Abi>, OriginalFileInfo: CPointer<SP_ORIGINAL_FILE_INFO_WAbi>): Int32
-    // param-hint: AltPlatformInfo optional
-    func SetupVerifyInfFileA(InfName: CPointer<UInt8>, AltPlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2Abi>, InfSignerInfo: CPointer<SP_INF_SIGNER_INFO_V2_AAbi>): Int32
-    // param-hint: AltPlatformInfo optional
-    func SetupVerifyInfFileW(InfName: CPointer<UInt16>, AltPlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2Abi>, InfSignerInfo: CPointer<SP_INF_SIGNER_INFO_V2_WAbi>): Int32
 }
 
-@When[SETUPAPI == "on" && (((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")]
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetActualModelsSectionW == "on" && (((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")]
+public unsafe func Windows_SetupDiGetActualModelsSectionW(Context: CPointer<INFCONTEXTAbi>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2Abi>, InfSectionWithExt: CPointer<UInt16>, InfSectionWithExtSize: UInt32, RequiredSize: CPointer<UInt32>, Reserved: CPointer<Unit>): Int32 {
+    return SetupDiGetActualModelsSectionW(Context, AlternatePlatformInfo, InfSectionWithExt, InfSectionWithExtSize, RequiredSize, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetActualSectionToInstallA == "on"]
+foreign {
+    // param-hint: InfSectionWithExt len=param[3] optional
+    // param-hint: RequiredSize optional
+    // param-hint: Extension optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetActualSectionToInstallA(InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt8>, InfSectionWithExt: CPointer<UInt8>, InfSectionWithExtSize: UInt32, RequiredSize: CPointer<UInt32>, Extension: CPointer<CPointer<UInt8>>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetActualSectionToInstallA == "on"]
+public unsafe func Windows_SetupDiGetActualSectionToInstallA(InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt8>, InfSectionWithExt: CPointer<UInt8>, InfSectionWithExtSize: UInt32, RequiredSize: CPointer<UInt32>, Extension: CPointer<CPointer<UInt8>>): Int32 {
+    return SetupDiGetActualSectionToInstallA(InfHandle, InfSectionName, InfSectionWithExt, InfSectionWithExtSize, RequiredSize, Extension)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetActualSectionToInstallExA == "on" && (((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")]
 foreign {
     // param-hint: AlternatePlatformInfo optional
     // param-hint: InfSectionWithExt len=param[4] optional
@@ -12442,6 +14732,15 @@ foreign {
     // param-hint: Reserved optional reserved
     // pinvoke-hint: SetLastError
     func SetupDiGetActualSectionToInstallExA(InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt8>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2Abi>, InfSectionWithExt: CPointer<UInt8>, InfSectionWithExtSize: UInt32, RequiredSize: CPointer<UInt32>, Extension: CPointer<CPointer<UInt8>>, Reserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetActualSectionToInstallExA == "on" && (((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")]
+public unsafe func Windows_SetupDiGetActualSectionToInstallExA(InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt8>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2Abi>, InfSectionWithExt: CPointer<UInt8>, InfSectionWithExtSize: UInt32, RequiredSize: CPointer<UInt32>, Extension: CPointer<CPointer<UInt8>>, Reserved: CPointer<Unit>): Int32 {
+    return SetupDiGetActualSectionToInstallExA(InfHandle, InfSectionName, AlternatePlatformInfo, InfSectionWithExt, InfSectionWithExtSize, RequiredSize, Extension, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetActualSectionToInstallExW == "on" && (((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")]
+foreign {
     // param-hint: AlternatePlatformInfo optional
     // param-hint: InfSectionWithExt len=param[4] optional
     // param-hint: RequiredSize optional
@@ -12449,101 +14748,2144 @@ foreign {
     // param-hint: Reserved optional reserved
     // pinvoke-hint: SetLastError
     func SetupDiGetActualSectionToInstallExW(InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt16>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2Abi>, InfSectionWithExt: CPointer<UInt16>, InfSectionWithExtSize: UInt32, RequiredSize: CPointer<UInt32>, Extension: CPointer<CPointer<UInt16>>, Reserved: CPointer<Unit>): Int32
-    // param-hint: AlternatePlatformInfo optional
-    // param-hint: LocaleName optional
-    // param-hint: ReturnBuffer len=param[4]
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetInfDriverStoreLocationA(FileName: CPointer<UInt8>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2Abi>, LocaleName: CPointer<UInt8>, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: AlternatePlatformInfo optional
-    // param-hint: LocaleName optional
-    // param-hint: ReturnBuffer len=param[4]
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetInfDriverStoreLocationW(FileName: CPointer<UInt16>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2Abi>, LocaleName: CPointer<UInt16>, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: AlternatePlatformInfo optional
-    // param-hint: AlternateDefaultCatalogFile optional
-    // pinvoke-hint: SetLastError
-    func SetupSetFileQueueAlternatePlatformA(QueueHandle: CPointer<Unit>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2Abi>, AlternateDefaultCatalogFile: CPointer<UInt8>): Int32
-    // param-hint: AlternatePlatformInfo optional
-    // param-hint: AlternateDefaultCatalogFile optional
-    // pinvoke-hint: SetLastError
-    func SetupSetFileQueueAlternatePlatformW(QueueHandle: CPointer<Unit>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2Abi>, AlternateDefaultCatalogFile: CPointer<UInt16>): Int32
 }
 
-@When[SETUPAPI == "on" && (((arch == "x86_64" && Windows_Win32_UI_Controls == "on") || (arch == "aarch64" && Windows_Win32_UI_Controls == "on")) && Windows_Win32_UI_Controls == "on")]
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetActualSectionToInstallExW == "on" && (((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")]
+public unsafe func Windows_SetupDiGetActualSectionToInstallExW(InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt16>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2Abi>, InfSectionWithExt: CPointer<UInt16>, InfSectionWithExtSize: UInt32, RequiredSize: CPointer<UInt32>, Extension: CPointer<CPointer<UInt16>>, Reserved: CPointer<Unit>): Int32 {
+    return SetupDiGetActualSectionToInstallExW(InfHandle, InfSectionName, AlternatePlatformInfo, InfSectionWithExt, InfSectionWithExtSize, RequiredSize, Extension, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetActualSectionToInstallW == "on"]
 foreign {
+    // param-hint: InfSectionWithExt len=param[3] optional
+    // param-hint: RequiredSize optional
+    // param-hint: Extension optional
     // pinvoke-hint: SetLastError
-    func SetupDiDestroyClassImageList(ClassImageListData: CPointer<SP_CLASSIMAGELIST_DATAAbi>): Int32
+    func SetupDiGetActualSectionToInstallW(InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt16>, InfSectionWithExt: CPointer<UInt16>, InfSectionWithExtSize: UInt32, RequiredSize: CPointer<UInt32>, Extension: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetActualSectionToInstallW == "on"]
+public unsafe func Windows_SetupDiGetActualSectionToInstallW(InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt16>, InfSectionWithExt: CPointer<UInt16>, InfSectionWithExtSize: UInt32, RequiredSize: CPointer<UInt32>, Extension: CPointer<CPointer<UInt16>>): Int32 {
+    return SetupDiGetActualSectionToInstallW(InfHandle, InfSectionName, InfSectionWithExt, InfSectionWithExtSize, RequiredSize, Extension)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassBitmapIndex == "on"]
+foreign {
+    // param-hint: ClassGuid optional
     // pinvoke-hint: SetLastError
-    func SetupDiGetClassImageIndex(ClassImageListData: CPointer<SP_CLASSIMAGELIST_DATAAbi>, ClassGuid: CPointer<GUID>, ImageIndex: CPointer<Int32>): Int32
+    func SetupDiGetClassBitmapIndex(ClassGuid: CPointer<GUID>, MiniIconIndex: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassBitmapIndex == "on"]
+public unsafe func Windows_SetupDiGetClassBitmapIndex(ClassGuid: CPointer<GUID>, MiniIconIndex: CPointer<Int32>): Int32 {
+    return SetupDiGetClassBitmapIndex(ClassGuid, MiniIconIndex)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassDescriptionA == "on"]
+foreign {
+    // param-hint: ClassDescription len=param[2]
+    // param-hint: RequiredSize optional
     // pinvoke-hint: SetLastError
-    func SetupDiGetClassImageList(ClassImageListData: CPointer<SP_CLASSIMAGELIST_DATAAbi>): Int32
+    func SetupDiGetClassDescriptionA(ClassGuid: CPointer<GUID>, ClassDescription: CPointer<UInt8>, ClassDescriptionSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassDescriptionA == "on"]
+public unsafe func Windows_SetupDiGetClassDescriptionA(ClassGuid: CPointer<GUID>, ClassDescription: CPointer<UInt8>, ClassDescriptionSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupDiGetClassDescriptionA(ClassGuid, ClassDescription, ClassDescriptionSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassDescriptionExA == "on"]
+foreign {
+    // param-hint: ClassDescription len=param[2]
+    // param-hint: RequiredSize optional
     // param-hint: MachineName optional
     // param-hint: Reserved optional reserved
     // pinvoke-hint: SetLastError
-    func SetupDiGetClassImageListExA(ClassImageListData: CPointer<SP_CLASSIMAGELIST_DATAAbi>, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): Int32
+    func SetupDiGetClassDescriptionExA(ClassGuid: CPointer<GUID>, ClassDescription: CPointer<UInt8>, ClassDescriptionSize: UInt32, RequiredSize: CPointer<UInt32>, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassDescriptionExA == "on"]
+public unsafe func Windows_SetupDiGetClassDescriptionExA(ClassGuid: CPointer<GUID>, ClassDescription: CPointer<UInt8>, ClassDescriptionSize: UInt32, RequiredSize: CPointer<UInt32>, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): Int32 {
+    return SetupDiGetClassDescriptionExA(ClassGuid, ClassDescription, ClassDescriptionSize, RequiredSize, MachineName, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassDescriptionExW == "on"]
+foreign {
+    // param-hint: ClassDescription len=param[2]
+    // param-hint: RequiredSize optional
     // param-hint: MachineName optional
     // param-hint: Reserved optional reserved
     // pinvoke-hint: SetLastError
-    func SetupDiGetClassImageListExW(ClassImageListData: CPointer<SP_CLASSIMAGELIST_DATAAbi>, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32
+    func SetupDiGetClassDescriptionExW(ClassGuid: CPointer<GUID>, ClassDescription: CPointer<UInt16>, ClassDescriptionSize: UInt32, RequiredSize: CPointer<UInt32>, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32
 }
 
-@When[SETUPAPI == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_Devices_Properties == "on")]
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassDescriptionExW == "on"]
+public unsafe func Windows_SetupDiGetClassDescriptionExW(ClassGuid: CPointer<GUID>, ClassDescription: CPointer<UInt16>, ClassDescriptionSize: UInt32, RequiredSize: CPointer<UInt32>, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32 {
+    return SetupDiGetClassDescriptionExW(ClassGuid, ClassDescription, ClassDescriptionSize, RequiredSize, MachineName, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassDescriptionW == "on"]
 foreign {
-    // param-hint: PropertyBuffer bytes=param[5] optional
+    // param-hint: ClassDescription len=param[2]
     // param-hint: RequiredSize optional
     // pinvoke-hint: SetLastError
-    func SetupDiGetDeviceInterfacePropertyW(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPEAbi>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>, Flags: UInt32): Int32
-    // param-hint: PropertyBuffer bytes=param[5] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDevicePropertyW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPEAbi>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>, Flags: UInt32): Int32
-    // param-hint: PropertyBuffer bytes=param[5] optional
-    // pinvoke-hint: SetLastError
-    func SetupDiSetDeviceInterfacePropertyW(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: Win32_Devices_Properties.DEVPROPTYPEAbi, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, Flags: UInt32): Int32
-    // param-hint: PropertyBuffer bytes=param[5] optional
-    // pinvoke-hint: SetLastError
-    func SetupDiSetDevicePropertyW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: Win32_Devices_Properties.DEVPROPTYPEAbi, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, Flags: UInt32): Int32
+    func SetupDiGetClassDescriptionW(ClassGuid: CPointer<GUID>, ClassDescription: CPointer<UInt16>, ClassDescriptionSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
 }
 
-@When[SETUPAPI == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_Controls == "on")]
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassDescriptionW == "on"]
+public unsafe func Windows_SetupDiGetClassDescriptionW(ClassGuid: CPointer<GUID>, ClassDescription: CPointer<UInt16>, ClassDescriptionSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupDiGetClassDescriptionW(ClassGuid, ClassDescription, ClassDescriptionSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassDevPropertySheetsA == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_Controls == "on")]
 foreign {
     // param-hint: DeviceInfoData optional
     // param-hint: RequiredSize optional
     // pinvoke-hint: SetLastError
     func SetupDiGetClassDevPropertySheetsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, PropertySheetHeader: CPointer<Win32__impl_l1.PROPSHEETHEADERA_V2Abi>, PropertySheetHeaderPageListSize: UInt32, RequiredSize: CPointer<UInt32>, PropertySheetType: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassDevPropertySheetsA == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_Controls == "on")]
+public unsafe func Windows_SetupDiGetClassDevPropertySheetsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, PropertySheetHeader: CPointer<Win32__impl_l1.PROPSHEETHEADERA_V2Abi>, PropertySheetHeaderPageListSize: UInt32, RequiredSize: CPointer<UInt32>, PropertySheetType: UInt32): Int32 {
+    return SetupDiGetClassDevPropertySheetsA(DeviceInfoSet, DeviceInfoData, PropertySheetHeader, PropertySheetHeaderPageListSize, RequiredSize, PropertySheetType)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassDevPropertySheetsW == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_Controls == "on")]
+foreign {
     // param-hint: DeviceInfoData optional
     // param-hint: RequiredSize optional
     // pinvoke-hint: SetLastError
     func SetupDiGetClassDevPropertySheetsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, PropertySheetHeader: CPointer<Win32__impl_l1.PROPSHEETHEADERW_V2Abi>, PropertySheetHeaderPageListSize: UInt32, RequiredSize: CPointer<UInt32>, PropertySheetType: UInt32): Int32
 }
 
-@When[SETUPAPI == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Registry == "on")]
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassDevPropertySheetsW == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_Controls == "on")]
+public unsafe func Windows_SetupDiGetClassDevPropertySheetsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, PropertySheetHeader: CPointer<Win32__impl_l1.PROPSHEETHEADERW_V2Abi>, PropertySheetHeaderPageListSize: UInt32, RequiredSize: CPointer<UInt32>, PropertySheetType: UInt32): Int32 {
+    return SetupDiGetClassDevPropertySheetsW(DeviceInfoSet, DeviceInfoData, PropertySheetHeader, PropertySheetHeaderPageListSize, RequiredSize, PropertySheetType)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassDevsA == "on"]
 foreign {
-    // param-hint: InfHandle optional
-    // param-hint: InfSectionName optional
+    // param-hint: ClassGuid optional
+    // param-hint: Enumerator optional
+    // param-hint: hwndParent optional
     // pinvoke-hint: SetLastError
-    func SetupDiCreateDevRegKeyA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Scope: UInt32, HwProfile: UInt32, KeyType: UInt32, InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt8>): Win32_System_Registry.HKEY
-    // param-hint: InfHandle optional
-    // param-hint: InfSectionName optional
-    // pinvoke-hint: SetLastError
-    func SetupDiCreateDevRegKeyW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Scope: UInt32, HwProfile: UInt32, KeyType: UInt32, InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt16>): Win32_System_Registry.HKEY
+    func SetupDiGetClassDevsA(ClassGuid: CPointer<GUID>, Enumerator: CPointer<UInt8>, hwndParent: CPointer<Unit>, Flags: SETUP_DI_GET_CLASS_DEVS_FLAGSAbi): HDEVINFO
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassDevsA == "on"]
+public unsafe func Windows_SetupDiGetClassDevsA(ClassGuid: CPointer<GUID>, Enumerator: CPointer<UInt8>, hwndParent: CPointer<Unit>, Flags: SETUP_DI_GET_CLASS_DEVS_FLAGSAbi): HDEVINFO {
+    return SetupDiGetClassDevsA(ClassGuid, Enumerator, hwndParent, Flags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassDevsExA == "on"]
+foreign {
+    // param-hint: ClassGuid optional
+    // param-hint: Enumerator optional
+    // param-hint: hwndParent optional
+    // param-hint: DeviceInfoSet optional
+    // param-hint: MachineName optional
     // param-hint: Reserved optional reserved
-    // param-hint: InfHandle optional
-    // param-hint: InfSectionName optional
     // pinvoke-hint: SetLastError
-    func SetupDiCreateDeviceInterfaceRegKeyA(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>, Reserved: UInt32, samDesired: UInt32, InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt8>): Win32_System_Registry.HKEY
+    func SetupDiGetClassDevsExA(ClassGuid: CPointer<GUID>, Enumerator: CPointer<UInt8>, hwndParent: CPointer<Unit>, Flags: SETUP_DI_GET_CLASS_DEVS_FLAGSAbi, DeviceInfoSet: HDEVINFO, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): HDEVINFO
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassDevsExA == "on"]
+public unsafe func Windows_SetupDiGetClassDevsExA(ClassGuid: CPointer<GUID>, Enumerator: CPointer<UInt8>, hwndParent: CPointer<Unit>, Flags: SETUP_DI_GET_CLASS_DEVS_FLAGSAbi, DeviceInfoSet: HDEVINFO, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): HDEVINFO {
+    return SetupDiGetClassDevsExA(ClassGuid, Enumerator, hwndParent, Flags, DeviceInfoSet, MachineName, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassDevsExW == "on"]
+foreign {
+    // param-hint: ClassGuid optional
+    // param-hint: Enumerator optional
+    // param-hint: hwndParent optional
+    // param-hint: DeviceInfoSet optional
+    // param-hint: MachineName optional
     // param-hint: Reserved optional reserved
-    // param-hint: InfHandle optional
-    // param-hint: InfSectionName optional
     // pinvoke-hint: SetLastError
-    func SetupDiCreateDeviceInterfaceRegKeyW(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>, Reserved: UInt32, samDesired: UInt32, InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt16>): Win32_System_Registry.HKEY
+    func SetupDiGetClassDevsExW(ClassGuid: CPointer<GUID>, Enumerator: CPointer<UInt16>, hwndParent: CPointer<Unit>, Flags: SETUP_DI_GET_CLASS_DEVS_FLAGSAbi, DeviceInfoSet: HDEVINFO, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): HDEVINFO
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassDevsExW == "on"]
+public unsafe func Windows_SetupDiGetClassDevsExW(ClassGuid: CPointer<GUID>, Enumerator: CPointer<UInt16>, hwndParent: CPointer<Unit>, Flags: SETUP_DI_GET_CLASS_DEVS_FLAGSAbi, DeviceInfoSet: HDEVINFO, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): HDEVINFO {
+    return SetupDiGetClassDevsExW(ClassGuid, Enumerator, hwndParent, Flags, DeviceInfoSet, MachineName, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassDevsW == "on"]
+foreign {
+    // param-hint: ClassGuid optional
+    // param-hint: Enumerator optional
+    // param-hint: hwndParent optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetClassDevsW(ClassGuid: CPointer<GUID>, Enumerator: CPointer<UInt16>, hwndParent: CPointer<Unit>, Flags: SETUP_DI_GET_CLASS_DEVS_FLAGSAbi): HDEVINFO
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassDevsW == "on"]
+public unsafe func Windows_SetupDiGetClassDevsW(ClassGuid: CPointer<GUID>, Enumerator: CPointer<UInt16>, hwndParent: CPointer<Unit>, Flags: SETUP_DI_GET_CLASS_DEVS_FLAGSAbi): HDEVINFO {
+    return SetupDiGetClassDevsW(ClassGuid, Enumerator, hwndParent, Flags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassImageIndex == "on" && (((arch == "x86_64" && Windows_Win32_UI_Controls == "on") || (arch == "aarch64" && Windows_Win32_UI_Controls == "on")) && Windows_Win32_UI_Controls == "on")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupDiGetClassImageIndex(ClassImageListData: CPointer<SP_CLASSIMAGELIST_DATAAbi>, ClassGuid: CPointer<GUID>, ImageIndex: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassImageIndex == "on" && (((arch == "x86_64" && Windows_Win32_UI_Controls == "on") || (arch == "aarch64" && Windows_Win32_UI_Controls == "on")) && Windows_Win32_UI_Controls == "on")]
+public unsafe func Windows_SetupDiGetClassImageIndex(ClassImageListData: CPointer<SP_CLASSIMAGELIST_DATAAbi>, ClassGuid: CPointer<GUID>, ImageIndex: CPointer<Int32>): Int32 {
+    return SetupDiGetClassImageIndex(ClassImageListData, ClassGuid, ImageIndex)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassImageList == "on" && (((arch == "x86_64" && Windows_Win32_UI_Controls == "on") || (arch == "aarch64" && Windows_Win32_UI_Controls == "on")) && Windows_Win32_UI_Controls == "on")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupDiGetClassImageList(ClassImageListData: CPointer<SP_CLASSIMAGELIST_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassImageList == "on" && (((arch == "x86_64" && Windows_Win32_UI_Controls == "on") || (arch == "aarch64" && Windows_Win32_UI_Controls == "on")) && Windows_Win32_UI_Controls == "on")]
+public unsafe func Windows_SetupDiGetClassImageList(ClassImageListData: CPointer<SP_CLASSIMAGELIST_DATAAbi>): Int32 {
+    return SetupDiGetClassImageList(ClassImageListData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassImageListExA == "on" && (((arch == "x86_64" && Windows_Win32_UI_Controls == "on") || (arch == "aarch64" && Windows_Win32_UI_Controls == "on")) && Windows_Win32_UI_Controls == "on")]
+foreign {
+    // param-hint: MachineName optional
+    // param-hint: Reserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDiGetClassImageListExA(ClassImageListData: CPointer<SP_CLASSIMAGELIST_DATAAbi>, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassImageListExA == "on" && (((arch == "x86_64" && Windows_Win32_UI_Controls == "on") || (arch == "aarch64" && Windows_Win32_UI_Controls == "on")) && Windows_Win32_UI_Controls == "on")]
+public unsafe func Windows_SetupDiGetClassImageListExA(ClassImageListData: CPointer<SP_CLASSIMAGELIST_DATAAbi>, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): Int32 {
+    return SetupDiGetClassImageListExA(ClassImageListData, MachineName, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassImageListExW == "on" && (((arch == "x86_64" && Windows_Win32_UI_Controls == "on") || (arch == "aarch64" && Windows_Win32_UI_Controls == "on")) && Windows_Win32_UI_Controls == "on")]
+foreign {
+    // param-hint: MachineName optional
+    // param-hint: Reserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDiGetClassImageListExW(ClassImageListData: CPointer<SP_CLASSIMAGELIST_DATAAbi>, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassImageListExW == "on" && (((arch == "x86_64" && Windows_Win32_UI_Controls == "on") || (arch == "aarch64" && Windows_Win32_UI_Controls == "on")) && Windows_Win32_UI_Controls == "on")]
+public unsafe func Windows_SetupDiGetClassImageListExW(ClassImageListData: CPointer<SP_CLASSIMAGELIST_DATAAbi>, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32 {
+    return SetupDiGetClassImageListExW(ClassImageListData, MachineName, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassInstallParamsA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceInfoData optional
+    // param-hint: ClassInstallParams bytes=param[3] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetClassInstallParamsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, ClassInstallParams: CPointer<SP_CLASSINSTALL_HEADERAbi>, ClassInstallParamsSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassInstallParamsA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiGetClassInstallParamsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, ClassInstallParams: CPointer<SP_CLASSINSTALL_HEADERAbi>, ClassInstallParamsSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupDiGetClassInstallParamsA(DeviceInfoSet, DeviceInfoData, ClassInstallParams, ClassInstallParamsSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassInstallParamsW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceInfoData optional
+    // param-hint: ClassInstallParams bytes=param[3] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetClassInstallParamsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, ClassInstallParams: CPointer<SP_CLASSINSTALL_HEADERAbi>, ClassInstallParamsSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassInstallParamsW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiGetClassInstallParamsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, ClassInstallParams: CPointer<SP_CLASSINSTALL_HEADERAbi>, ClassInstallParamsSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupDiGetClassInstallParamsW(DeviceInfoSet, DeviceInfoData, ClassInstallParams, ClassInstallParamsSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassPropertyExW == "on" && Windows_Win32_Devices_Properties == "on"]
+foreign {
+    // param-hint: PropertyBuffer bytes=param[4] optional
+    // param-hint: RequiredSize optional
+    // param-hint: MachineName optional
+    // param-hint: Reserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDiGetClassPropertyExW(ClassGuid: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPEAbi>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>, Flags: UInt32, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassPropertyExW == "on" && Windows_Win32_Devices_Properties == "on"]
+public unsafe func Windows_SetupDiGetClassPropertyExW(ClassGuid: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPEAbi>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>, Flags: UInt32, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32 {
+    return SetupDiGetClassPropertyExW(ClassGuid, PropertyKey, PropertyType, PropertyBuffer, PropertyBufferSize, RequiredSize, Flags, MachineName, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassPropertyKeys == "on"]
+foreign {
+    // param-hint: PropertyKeyArray len=param[2] optional
+    // param-hint: RequiredPropertyKeyCount optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetClassPropertyKeys(ClassGuid: CPointer<GUID>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyKeyCount: UInt32, RequiredPropertyKeyCount: CPointer<UInt32>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassPropertyKeys == "on"]
+public unsafe func Windows_SetupDiGetClassPropertyKeys(ClassGuid: CPointer<GUID>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyKeyCount: UInt32, RequiredPropertyKeyCount: CPointer<UInt32>, Flags: UInt32): Int32 {
+    return SetupDiGetClassPropertyKeys(ClassGuid, PropertyKeyArray, PropertyKeyCount, RequiredPropertyKeyCount, Flags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassPropertyKeysExW == "on"]
+foreign {
+    // param-hint: PropertyKeyArray len=param[2] optional
+    // param-hint: RequiredPropertyKeyCount optional
+    // param-hint: MachineName optional
+    // param-hint: Reserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDiGetClassPropertyKeysExW(ClassGuid: CPointer<GUID>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyKeyCount: UInt32, RequiredPropertyKeyCount: CPointer<UInt32>, Flags: UInt32, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassPropertyKeysExW == "on"]
+public unsafe func Windows_SetupDiGetClassPropertyKeysExW(ClassGuid: CPointer<GUID>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyKeyCount: UInt32, RequiredPropertyKeyCount: CPointer<UInt32>, Flags: UInt32, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32 {
+    return SetupDiGetClassPropertyKeysExW(ClassGuid, PropertyKeyArray, PropertyKeyCount, RequiredPropertyKeyCount, Flags, MachineName, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassPropertyW == "on" && Windows_Win32_Devices_Properties == "on"]
+foreign {
+    // param-hint: PropertyBuffer bytes=param[4] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetClassPropertyW(ClassGuid: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPEAbi>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassPropertyW == "on" && Windows_Win32_Devices_Properties == "on"]
+public unsafe func Windows_SetupDiGetClassPropertyW(ClassGuid: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPEAbi>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>, Flags: UInt32): Int32 {
+    return SetupDiGetClassPropertyW(ClassGuid, PropertyKey, PropertyType, PropertyBuffer, PropertyBufferSize, RequiredSize, Flags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassRegistryPropertyA == "on"]
+foreign {
+    // param-hint: PropertyRegDataType optional
+    // param-hint: PropertyBuffer bytes=param[4]
+    // param-hint: RequiredSize optional
+    // param-hint: MachineName optional
+    // param-hint: Reserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDiGetClassRegistryPropertyA(ClassGuid: CPointer<GUID>, Property: UInt32, PropertyRegDataType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassRegistryPropertyA == "on"]
+public unsafe func Windows_SetupDiGetClassRegistryPropertyA(ClassGuid: CPointer<GUID>, Property: UInt32, PropertyRegDataType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): Int32 {
+    return SetupDiGetClassRegistryPropertyA(ClassGuid, Property, PropertyRegDataType, PropertyBuffer, PropertyBufferSize, RequiredSize, MachineName, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassRegistryPropertyW == "on"]
+foreign {
+    // param-hint: PropertyRegDataType optional
+    // param-hint: PropertyBuffer bytes=param[4]
+    // param-hint: RequiredSize optional
+    // param-hint: MachineName optional
+    // param-hint: Reserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDiGetClassRegistryPropertyW(ClassGuid: CPointer<GUID>, Property: UInt32, PropertyRegDataType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetClassRegistryPropertyW == "on"]
+public unsafe func Windows_SetupDiGetClassRegistryPropertyW(ClassGuid: CPointer<GUID>, Property: UInt32, PropertyRegDataType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32 {
+    return SetupDiGetClassRegistryPropertyW(ClassGuid, Property, PropertyRegDataType, PropertyBuffer, PropertyBufferSize, RequiredSize, MachineName, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetCustomDevicePropertyA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: PropertyRegDataType optional
+    // param-hint: PropertyBuffer bytes=param[6]
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetCustomDevicePropertyA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, CustomPropertyName: CPointer<UInt8>, Flags: UInt32, PropertyRegDataType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetCustomDevicePropertyA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiGetCustomDevicePropertyA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, CustomPropertyName: CPointer<UInt8>, Flags: UInt32, PropertyRegDataType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupDiGetCustomDevicePropertyA(DeviceInfoSet, DeviceInfoData, CustomPropertyName, Flags, PropertyRegDataType, PropertyBuffer, PropertyBufferSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetCustomDevicePropertyW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: PropertyRegDataType optional
+    // param-hint: PropertyBuffer bytes=param[6]
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetCustomDevicePropertyW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, CustomPropertyName: CPointer<UInt16>, Flags: UInt32, PropertyRegDataType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetCustomDevicePropertyW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiGetCustomDevicePropertyW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, CustomPropertyName: CPointer<UInt16>, Flags: UInt32, PropertyRegDataType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupDiGetCustomDevicePropertyW(DeviceInfoSet, DeviceInfoData, CustomPropertyName, Flags, PropertyRegDataType, PropertyBuffer, PropertyBufferSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDeviceInfoListClass == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDeviceInfoListClass(DeviceInfoSet: HDEVINFO, ClassGuid: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDeviceInfoListClass == "on"]
+public unsafe func Windows_SetupDiGetDeviceInfoListClass(DeviceInfoSet: HDEVINFO, ClassGuid: CPointer<GUID>): Int32 {
+    return SetupDiGetDeviceInfoListClass(DeviceInfoSet, ClassGuid)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDeviceInfoListDetailA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDeviceInfoListDetailA(DeviceInfoSet: HDEVINFO, DeviceInfoSetDetailData: CPointer<SP_DEVINFO_LIST_DETAIL_DATA_AAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDeviceInfoListDetailA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiGetDeviceInfoListDetailA(DeviceInfoSet: HDEVINFO, DeviceInfoSetDetailData: CPointer<SP_DEVINFO_LIST_DETAIL_DATA_AAbi>): Int32 {
+    return SetupDiGetDeviceInfoListDetailA(DeviceInfoSet, DeviceInfoSetDetailData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDeviceInfoListDetailW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDeviceInfoListDetailW(DeviceInfoSet: HDEVINFO, DeviceInfoSetDetailData: CPointer<SP_DEVINFO_LIST_DETAIL_DATA_WAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDeviceInfoListDetailW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiGetDeviceInfoListDetailW(DeviceInfoSet: HDEVINFO, DeviceInfoSetDetailData: CPointer<SP_DEVINFO_LIST_DETAIL_DATA_WAbi>): Int32 {
+    return SetupDiGetDeviceInfoListDetailW(DeviceInfoSet, DeviceInfoSetDetailData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDeviceInstallParamsA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDeviceInstallParamsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DeviceInstallParams: CPointer<SP_DEVINSTALL_PARAMS_AAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDeviceInstallParamsA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiGetDeviceInstallParamsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DeviceInstallParams: CPointer<SP_DEVINSTALL_PARAMS_AAbi>): Int32 {
+    return SetupDiGetDeviceInstallParamsA(DeviceInfoSet, DeviceInfoData, DeviceInstallParams)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDeviceInstallParamsW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDeviceInstallParamsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DeviceInstallParams: CPointer<SP_DEVINSTALL_PARAMS_WAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDeviceInstallParamsW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiGetDeviceInstallParamsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DeviceInstallParams: CPointer<SP_DEVINSTALL_PARAMS_WAbi>): Int32 {
+    return SetupDiGetDeviceInstallParamsW(DeviceInfoSet, DeviceInfoData, DeviceInstallParams)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDeviceInstanceIdA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceInstanceId len=param[3] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDeviceInstanceIdA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DeviceInstanceId: CPointer<UInt8>, DeviceInstanceIdSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDeviceInstanceIdA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiGetDeviceInstanceIdA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DeviceInstanceId: CPointer<UInt8>, DeviceInstanceIdSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupDiGetDeviceInstanceIdA(DeviceInfoSet, DeviceInfoData, DeviceInstanceId, DeviceInstanceIdSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDeviceInstanceIdW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceInstanceId len=param[3] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDeviceInstanceIdW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DeviceInstanceId: CPointer<UInt16>, DeviceInstanceIdSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDeviceInstanceIdW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiGetDeviceInstanceIdW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DeviceInstanceId: CPointer<UInt16>, DeviceInstanceIdSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupDiGetDeviceInstanceIdW(DeviceInfoSet, DeviceInfoData, DeviceInstanceId, DeviceInstanceIdSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDeviceInterfaceAlias == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDeviceInterfaceAlias(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>, AliasInterfaceClassGuid: CPointer<GUID>, AliasDeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDeviceInterfaceAlias == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiGetDeviceInterfaceAlias(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>, AliasInterfaceClassGuid: CPointer<GUID>, AliasDeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>): Int32 {
+    return SetupDiGetDeviceInterfaceAlias(DeviceInfoSet, DeviceInterfaceData, AliasInterfaceClassGuid, AliasDeviceInterfaceData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDeviceInterfaceDetailA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceInterfaceDetailData bytes=param[3] optional
+    // param-hint: RequiredSize optional
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDeviceInterfaceDetailA(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>, DeviceInterfaceDetailData: CPointer<SP_DEVICE_INTERFACE_DETAIL_DATA_AAbi>, DeviceInterfaceDetailDataSize: UInt32, RequiredSize: CPointer<UInt32>, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDeviceInterfaceDetailA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiGetDeviceInterfaceDetailA(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>, DeviceInterfaceDetailData: CPointer<SP_DEVICE_INTERFACE_DETAIL_DATA_AAbi>, DeviceInterfaceDetailDataSize: UInt32, RequiredSize: CPointer<UInt32>, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32 {
+    return SetupDiGetDeviceInterfaceDetailA(DeviceInfoSet, DeviceInterfaceData, DeviceInterfaceDetailData, DeviceInterfaceDetailDataSize, RequiredSize, DeviceInfoData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDeviceInterfaceDetailW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceInterfaceDetailData bytes=param[3] optional
+    // param-hint: RequiredSize optional
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDeviceInterfaceDetailW(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>, DeviceInterfaceDetailData: CPointer<SP_DEVICE_INTERFACE_DETAIL_DATA_WAbi>, DeviceInterfaceDetailDataSize: UInt32, RequiredSize: CPointer<UInt32>, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDeviceInterfaceDetailW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiGetDeviceInterfaceDetailW(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>, DeviceInterfaceDetailData: CPointer<SP_DEVICE_INTERFACE_DETAIL_DATA_WAbi>, DeviceInterfaceDetailDataSize: UInt32, RequiredSize: CPointer<UInt32>, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32 {
+    return SetupDiGetDeviceInterfaceDetailW(DeviceInfoSet, DeviceInterfaceData, DeviceInterfaceDetailData, DeviceInterfaceDetailDataSize, RequiredSize, DeviceInfoData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDeviceInterfacePropertyKeys == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: PropertyKeyArray len=param[3] optional
+    // param-hint: RequiredPropertyKeyCount optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDeviceInterfacePropertyKeys(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyKeyCount: UInt32, RequiredPropertyKeyCount: CPointer<UInt32>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDeviceInterfacePropertyKeys == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiGetDeviceInterfacePropertyKeys(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyKeyCount: UInt32, RequiredPropertyKeyCount: CPointer<UInt32>, Flags: UInt32): Int32 {
+    return SetupDiGetDeviceInterfacePropertyKeys(DeviceInfoSet, DeviceInterfaceData, PropertyKeyArray, PropertyKeyCount, RequiredPropertyKeyCount, Flags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDeviceInterfacePropertyW == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_Devices_Properties == "on")]
+foreign {
+    // param-hint: PropertyBuffer bytes=param[5] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDeviceInterfacePropertyW(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPEAbi>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDeviceInterfacePropertyW == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_Devices_Properties == "on")]
+public unsafe func Windows_SetupDiGetDeviceInterfacePropertyW(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPEAbi>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>, Flags: UInt32): Int32 {
+    return SetupDiGetDeviceInterfacePropertyW(DeviceInfoSet, DeviceInterfaceData, PropertyKey, PropertyType, PropertyBuffer, PropertyBufferSize, RequiredSize, Flags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDevicePropertyKeys == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: PropertyKeyArray len=param[3] optional
+    // param-hint: RequiredPropertyKeyCount optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDevicePropertyKeys(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyKeyCount: UInt32, RequiredPropertyKeyCount: CPointer<UInt32>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDevicePropertyKeys == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiGetDevicePropertyKeys(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyKeyCount: UInt32, RequiredPropertyKeyCount: CPointer<UInt32>, Flags: UInt32): Int32 {
+    return SetupDiGetDevicePropertyKeys(DeviceInfoSet, DeviceInfoData, PropertyKeyArray, PropertyKeyCount, RequiredPropertyKeyCount, Flags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDevicePropertyW == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_Devices_Properties == "on")]
+foreign {
+    // param-hint: PropertyBuffer bytes=param[5] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDevicePropertyW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPEAbi>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDevicePropertyW == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_Devices_Properties == "on")]
+public unsafe func Windows_SetupDiGetDevicePropertyW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPEAbi>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>, Flags: UInt32): Int32 {
+    return SetupDiGetDevicePropertyW(DeviceInfoSet, DeviceInfoData, PropertyKey, PropertyType, PropertyBuffer, PropertyBufferSize, RequiredSize, Flags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDeviceRegistryPropertyA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: PropertyRegDataType optional
+    // param-hint: PropertyBuffer bytes=param[5] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDeviceRegistryPropertyA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Property: SETUP_DI_REGISTRY_PROPERTYAbi, PropertyRegDataType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDeviceRegistryPropertyA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiGetDeviceRegistryPropertyA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Property: SETUP_DI_REGISTRY_PROPERTYAbi, PropertyRegDataType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupDiGetDeviceRegistryPropertyA(DeviceInfoSet, DeviceInfoData, Property, PropertyRegDataType, PropertyBuffer, PropertyBufferSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDeviceRegistryPropertyW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: PropertyRegDataType optional
+    // param-hint: PropertyBuffer bytes=param[5] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDeviceRegistryPropertyW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Property: SETUP_DI_REGISTRY_PROPERTYAbi, PropertyRegDataType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDeviceRegistryPropertyW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiGetDeviceRegistryPropertyW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Property: SETUP_DI_REGISTRY_PROPERTYAbi, PropertyRegDataType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupDiGetDeviceRegistryPropertyW(DeviceInfoSet, DeviceInfoData, Property, PropertyRegDataType, PropertyBuffer, PropertyBufferSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDriverInfoDetailA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceInfoData optional
+    // param-hint: DriverInfoDetailData bytes=param[4] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDriverInfoDetailA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_AAbi>, DriverInfoDetailData: CPointer<SP_DRVINFO_DETAIL_DATA_AAbi>, DriverInfoDetailDataSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDriverInfoDetailA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiGetDriverInfoDetailA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_AAbi>, DriverInfoDetailData: CPointer<SP_DRVINFO_DETAIL_DATA_AAbi>, DriverInfoDetailDataSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupDiGetDriverInfoDetailA(DeviceInfoSet, DeviceInfoData, DriverInfoData, DriverInfoDetailData, DriverInfoDetailDataSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDriverInfoDetailW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceInfoData optional
+    // param-hint: DriverInfoDetailData bytes=param[4] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDriverInfoDetailW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_WAbi>, DriverInfoDetailData: CPointer<SP_DRVINFO_DETAIL_DATA_WAbi>, DriverInfoDetailDataSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDriverInfoDetailW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiGetDriverInfoDetailW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_WAbi>, DriverInfoDetailData: CPointer<SP_DRVINFO_DETAIL_DATA_WAbi>, DriverInfoDetailDataSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupDiGetDriverInfoDetailW(DeviceInfoSet, DeviceInfoData, DriverInfoData, DriverInfoDetailData, DriverInfoDetailDataSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDriverInstallParamsA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDriverInstallParamsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_AAbi>, DriverInstallParams: CPointer<SP_DRVINSTALL_PARAMSAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDriverInstallParamsA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiGetDriverInstallParamsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_AAbi>, DriverInstallParams: CPointer<SP_DRVINSTALL_PARAMSAbi>): Int32 {
+    return SetupDiGetDriverInstallParamsA(DeviceInfoSet, DeviceInfoData, DriverInfoData, DriverInstallParams)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDriverInstallParamsW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDriverInstallParamsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_WAbi>, DriverInstallParams: CPointer<SP_DRVINSTALL_PARAMSAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetDriverInstallParamsW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiGetDriverInstallParamsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_WAbi>, DriverInstallParams: CPointer<SP_DRVINSTALL_PARAMSAbi>): Int32 {
+    return SetupDiGetDriverInstallParamsW(DeviceInfoSet, DeviceInfoData, DriverInfoData, DriverInstallParams)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetHwProfileFriendlyNameA == "on"]
+foreign {
+    // param-hint: FriendlyName len=param[2]
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetHwProfileFriendlyNameA(HwProfile: UInt32, FriendlyName: CPointer<UInt8>, FriendlyNameSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetHwProfileFriendlyNameA == "on"]
+public unsafe func Windows_SetupDiGetHwProfileFriendlyNameA(HwProfile: UInt32, FriendlyName: CPointer<UInt8>, FriendlyNameSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupDiGetHwProfileFriendlyNameA(HwProfile, FriendlyName, FriendlyNameSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetHwProfileFriendlyNameExA == "on"]
+foreign {
+    // param-hint: FriendlyName len=param[2]
+    // param-hint: RequiredSize optional
+    // param-hint: MachineName optional
+    // param-hint: Reserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDiGetHwProfileFriendlyNameExA(HwProfile: UInt32, FriendlyName: CPointer<UInt8>, FriendlyNameSize: UInt32, RequiredSize: CPointer<UInt32>, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetHwProfileFriendlyNameExA == "on"]
+public unsafe func Windows_SetupDiGetHwProfileFriendlyNameExA(HwProfile: UInt32, FriendlyName: CPointer<UInt8>, FriendlyNameSize: UInt32, RequiredSize: CPointer<UInt32>, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): Int32 {
+    return SetupDiGetHwProfileFriendlyNameExA(HwProfile, FriendlyName, FriendlyNameSize, RequiredSize, MachineName, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetHwProfileFriendlyNameExW == "on"]
+foreign {
+    // param-hint: FriendlyName len=param[2]
+    // param-hint: RequiredSize optional
+    // param-hint: MachineName optional
+    // param-hint: Reserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDiGetHwProfileFriendlyNameExW(HwProfile: UInt32, FriendlyName: CPointer<UInt16>, FriendlyNameSize: UInt32, RequiredSize: CPointer<UInt32>, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetHwProfileFriendlyNameExW == "on"]
+public unsafe func Windows_SetupDiGetHwProfileFriendlyNameExW(HwProfile: UInt32, FriendlyName: CPointer<UInt16>, FriendlyNameSize: UInt32, RequiredSize: CPointer<UInt32>, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32 {
+    return SetupDiGetHwProfileFriendlyNameExW(HwProfile, FriendlyName, FriendlyNameSize, RequiredSize, MachineName, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetHwProfileFriendlyNameW == "on"]
+foreign {
+    // param-hint: FriendlyName len=param[2]
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetHwProfileFriendlyNameW(HwProfile: UInt32, FriendlyName: CPointer<UInt16>, FriendlyNameSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetHwProfileFriendlyNameW == "on"]
+public unsafe func Windows_SetupDiGetHwProfileFriendlyNameW(HwProfile: UInt32, FriendlyName: CPointer<UInt16>, FriendlyNameSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupDiGetHwProfileFriendlyNameW(HwProfile, FriendlyName, FriendlyNameSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetHwProfileList == "on"]
+foreign {
+    // param-hint: HwProfileList len=param[1]
+    // param-hint: CurrentlyActiveIndex optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetHwProfileList(HwProfileList: CPointer<UInt32>, HwProfileListSize: UInt32, RequiredSize: CPointer<UInt32>, CurrentlyActiveIndex: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetHwProfileList == "on"]
+public unsafe func Windows_SetupDiGetHwProfileList(HwProfileList: CPointer<UInt32>, HwProfileListSize: UInt32, RequiredSize: CPointer<UInt32>, CurrentlyActiveIndex: CPointer<UInt32>): Int32 {
+    return SetupDiGetHwProfileList(HwProfileList, HwProfileListSize, RequiredSize, CurrentlyActiveIndex)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetHwProfileListExA == "on"]
+foreign {
+    // param-hint: HwProfileList len=param[1]
+    // param-hint: CurrentlyActiveIndex optional
+    // param-hint: MachineName optional
+    // param-hint: Reserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDiGetHwProfileListExA(HwProfileList: CPointer<UInt32>, HwProfileListSize: UInt32, RequiredSize: CPointer<UInt32>, CurrentlyActiveIndex: CPointer<UInt32>, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetHwProfileListExA == "on"]
+public unsafe func Windows_SetupDiGetHwProfileListExA(HwProfileList: CPointer<UInt32>, HwProfileListSize: UInt32, RequiredSize: CPointer<UInt32>, CurrentlyActiveIndex: CPointer<UInt32>, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): Int32 {
+    return SetupDiGetHwProfileListExA(HwProfileList, HwProfileListSize, RequiredSize, CurrentlyActiveIndex, MachineName, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetHwProfileListExW == "on"]
+foreign {
+    // param-hint: HwProfileList len=param[1]
+    // param-hint: CurrentlyActiveIndex optional
+    // param-hint: MachineName optional
+    // param-hint: Reserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDiGetHwProfileListExW(HwProfileList: CPointer<UInt32>, HwProfileListSize: UInt32, RequiredSize: CPointer<UInt32>, CurrentlyActiveIndex: CPointer<UInt32>, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetHwProfileListExW == "on"]
+public unsafe func Windows_SetupDiGetHwProfileListExW(HwProfileList: CPointer<UInt32>, HwProfileListSize: UInt32, RequiredSize: CPointer<UInt32>, CurrentlyActiveIndex: CPointer<UInt32>, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32 {
+    return SetupDiGetHwProfileListExW(HwProfileList, HwProfileListSize, RequiredSize, CurrentlyActiveIndex, MachineName, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetINFClassA == "on"]
+foreign {
+    // param-hint: ClassName len=param[3]
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetINFClassA(InfName: CPointer<UInt8>, ClassGuid: CPointer<GUID>, ClassName: CPointer<UInt8>, ClassNameSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetINFClassA == "on"]
+public unsafe func Windows_SetupDiGetINFClassA(InfName: CPointer<UInt8>, ClassGuid: CPointer<GUID>, ClassName: CPointer<UInt8>, ClassNameSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupDiGetINFClassA(InfName, ClassGuid, ClassName, ClassNameSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetINFClassW == "on"]
+foreign {
+    // param-hint: ClassName len=param[3]
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetINFClassW(InfName: CPointer<UInt16>, ClassGuid: CPointer<GUID>, ClassName: CPointer<UInt16>, ClassNameSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetINFClassW == "on"]
+public unsafe func Windows_SetupDiGetINFClassW(InfName: CPointer<UInt16>, ClassGuid: CPointer<GUID>, ClassName: CPointer<UInt16>, ClassNameSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupDiGetINFClassW(InfName, ClassGuid, ClassName, ClassNameSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetSelectedDevice == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupDiGetSelectedDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetSelectedDevice == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiGetSelectedDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32 {
+    return SetupDiGetSelectedDevice(DeviceInfoSet, DeviceInfoData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetSelectedDriverA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetSelectedDriverA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_AAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetSelectedDriverA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiGetSelectedDriverA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_AAbi>): Int32 {
+    return SetupDiGetSelectedDriverA(DeviceInfoSet, DeviceInfoData, DriverInfoData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetSelectedDriverW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetSelectedDriverW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_WAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetSelectedDriverW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiGetSelectedDriverW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_WAbi>): Int32 {
+    return SetupDiGetSelectedDriverW(DeviceInfoSet, DeviceInfoData, DriverInfoData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetWizardPage == "on" && (((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_UI_Controls == "on") || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_UI_Controls == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_UI_Controls == "on")]
+foreign {
+    // param-hint: DeviceInfoData optional
+    func SetupDiGetWizardPage(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, InstallWizardData: CPointer<SP_INSTALLWIZARD_DATAAbi>, PageType: UInt32, Flags: UInt32): Win32__impl_l0.HPROPSHEETPAGE
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiGetWizardPage == "on" && (((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_UI_Controls == "on") || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_UI_Controls == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_UI_Controls == "on")]
+public unsafe func Windows_SetupDiGetWizardPage(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, InstallWizardData: CPointer<SP_INSTALLWIZARD_DATAAbi>, PageType: UInt32, Flags: UInt32): Win32__impl_l0.HPROPSHEETPAGE {
+    return SetupDiGetWizardPage(DeviceInfoSet, DeviceInfoData, InstallWizardData, PageType, Flags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiInstallClassA == "on"]
+foreign {
+    // param-hint: hwndParent optional
+    // param-hint: FileQueue optional
+    // pinvoke-hint: SetLastError
+    func SetupDiInstallClassA(hwndParent: CPointer<Unit>, InfFileName: CPointer<UInt8>, Flags: UInt32, FileQueue: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiInstallClassA == "on"]
+public unsafe func Windows_SetupDiInstallClassA(hwndParent: CPointer<Unit>, InfFileName: CPointer<UInt8>, Flags: UInt32, FileQueue: CPointer<Unit>): Int32 {
+    return SetupDiInstallClassA(hwndParent, InfFileName, Flags, FileQueue)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiInstallClassExA == "on"]
+foreign {
+    // param-hint: hwndParent optional
+    // param-hint: InfFileName optional
+    // param-hint: FileQueue optional
+    // param-hint: InterfaceClassGuid optional
+    // param-hint: Reserved1 optional reserved
+    // param-hint: Reserved2 optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDiInstallClassExA(hwndParent: CPointer<Unit>, InfFileName: CPointer<UInt8>, Flags: UInt32, FileQueue: CPointer<Unit>, InterfaceClassGuid: CPointer<GUID>, Reserved1: CPointer<Unit>, Reserved2: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiInstallClassExA == "on"]
+public unsafe func Windows_SetupDiInstallClassExA(hwndParent: CPointer<Unit>, InfFileName: CPointer<UInt8>, Flags: UInt32, FileQueue: CPointer<Unit>, InterfaceClassGuid: CPointer<GUID>, Reserved1: CPointer<Unit>, Reserved2: CPointer<Unit>): Int32 {
+    return SetupDiInstallClassExA(hwndParent, InfFileName, Flags, FileQueue, InterfaceClassGuid, Reserved1, Reserved2)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiInstallClassExW == "on"]
+foreign {
+    // param-hint: hwndParent optional
+    // param-hint: InfFileName optional
+    // param-hint: FileQueue optional
+    // param-hint: InterfaceClassGuid optional
+    // param-hint: Reserved1 optional reserved
+    // param-hint: Reserved2 optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDiInstallClassExW(hwndParent: CPointer<Unit>, InfFileName: CPointer<UInt16>, Flags: UInt32, FileQueue: CPointer<Unit>, InterfaceClassGuid: CPointer<GUID>, Reserved1: CPointer<Unit>, Reserved2: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiInstallClassExW == "on"]
+public unsafe func Windows_SetupDiInstallClassExW(hwndParent: CPointer<Unit>, InfFileName: CPointer<UInt16>, Flags: UInt32, FileQueue: CPointer<Unit>, InterfaceClassGuid: CPointer<GUID>, Reserved1: CPointer<Unit>, Reserved2: CPointer<Unit>): Int32 {
+    return SetupDiInstallClassExW(hwndParent, InfFileName, Flags, FileQueue, InterfaceClassGuid, Reserved1, Reserved2)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiInstallClassW == "on"]
+foreign {
+    // param-hint: hwndParent optional
+    // param-hint: FileQueue optional
+    // pinvoke-hint: SetLastError
+    func SetupDiInstallClassW(hwndParent: CPointer<Unit>, InfFileName: CPointer<UInt16>, Flags: UInt32, FileQueue: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiInstallClassW == "on"]
+public unsafe func Windows_SetupDiInstallClassW(hwndParent: CPointer<Unit>, InfFileName: CPointer<UInt16>, Flags: UInt32, FileQueue: CPointer<Unit>): Int32 {
+    return SetupDiInstallClassW(hwndParent, InfFileName, Flags, FileQueue)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiInstallDevice == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupDiInstallDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiInstallDevice == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiInstallDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32 {
+    return SetupDiInstallDevice(DeviceInfoSet, DeviceInfoData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiInstallDeviceInterfaces == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupDiInstallDeviceInterfaces(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiInstallDeviceInterfaces == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiInstallDeviceInterfaces(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32 {
+    return SetupDiInstallDeviceInterfaces(DeviceInfoSet, DeviceInfoData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiInstallDriverFiles == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupDiInstallDriverFiles(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiInstallDriverFiles == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiInstallDriverFiles(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32 {
+    return SetupDiInstallDriverFiles(DeviceInfoSet, DeviceInfoData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiLoadClassIcon == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    // param-hint: LargeIcon optional
+    // param-hint: MiniIconIndex optional
+    // pinvoke-hint: SetLastError
+    func SetupDiLoadClassIcon(ClassGuid: CPointer<GUID>, LargeIcon: CPointer<Win32__impl_l0.HICON>, MiniIconIndex: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiLoadClassIcon == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_SetupDiLoadClassIcon(ClassGuid: CPointer<GUID>, LargeIcon: CPointer<Win32__impl_l0.HICON>, MiniIconIndex: CPointer<Int32>): Int32 {
+    return SetupDiLoadClassIcon(ClassGuid, LargeIcon, MiniIconIndex)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiLoadDeviceIcon == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_UI_WindowsAndMessaging == "on")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupDiLoadDeviceIcon(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, cxIcon: UInt32, cyIcon: UInt32, Flags: UInt32, hIcon: CPointer<Win32__impl_l0.HICON>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiLoadDeviceIcon == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_UI_WindowsAndMessaging == "on")]
+public unsafe func Windows_SetupDiLoadDeviceIcon(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, cxIcon: UInt32, cyIcon: UInt32, Flags: UInt32, hIcon: CPointer<Win32__impl_l0.HICON>): Int32 {
+    return SetupDiLoadDeviceIcon(DeviceInfoSet, DeviceInfoData, cxIcon, cyIcon, Flags, hIcon)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiOpenClassRegKey == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: ClassGuid optional
+    // pinvoke-hint: SetLastError
+    func SetupDiOpenClassRegKey(ClassGuid: CPointer<GUID>, samDesired: UInt32): Win32_System_Registry.HKEY
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiOpenClassRegKey == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SetupDiOpenClassRegKey(ClassGuid: CPointer<GUID>, samDesired: UInt32): Win32_System_Registry.HKEY {
+    return SetupDiOpenClassRegKey(ClassGuid, samDesired)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiOpenClassRegKeyExA == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: ClassGuid optional
+    // param-hint: MachineName optional
+    // param-hint: Reserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDiOpenClassRegKeyExA(ClassGuid: CPointer<GUID>, samDesired: UInt32, Flags: UInt32, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): Win32_System_Registry.HKEY
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiOpenClassRegKeyExA == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SetupDiOpenClassRegKeyExA(ClassGuid: CPointer<GUID>, samDesired: UInt32, Flags: UInt32, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): Win32_System_Registry.HKEY {
+    return SetupDiOpenClassRegKeyExA(ClassGuid, samDesired, Flags, MachineName, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiOpenClassRegKeyExW == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: ClassGuid optional
+    // param-hint: MachineName optional
+    // param-hint: Reserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDiOpenClassRegKeyExW(ClassGuid: CPointer<GUID>, samDesired: UInt32, Flags: UInt32, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Win32_System_Registry.HKEY
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiOpenClassRegKeyExW == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SetupDiOpenClassRegKeyExW(ClassGuid: CPointer<GUID>, samDesired: UInt32, Flags: UInt32, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Win32_System_Registry.HKEY {
+    return SetupDiOpenClassRegKeyExW(ClassGuid, samDesired, Flags, MachineName, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiOpenDevRegKey == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Registry == "on")]
+foreign {
     // pinvoke-hint: SetLastError
     func SetupDiOpenDevRegKey(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Scope: UInt32, HwProfile: UInt32, KeyType: UInt32, samDesired: UInt32): Win32_System_Registry.HKEY
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiOpenDevRegKey == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Registry == "on")]
+public unsafe func Windows_SetupDiOpenDevRegKey(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Scope: UInt32, HwProfile: UInt32, KeyType: UInt32, samDesired: UInt32): Win32_System_Registry.HKEY {
+    return SetupDiOpenDevRegKey(DeviceInfoSet, DeviceInfoData, Scope, HwProfile, KeyType, samDesired)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiOpenDeviceInfoA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: hwndParent optional
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiOpenDeviceInfoA(DeviceInfoSet: HDEVINFO, DeviceInstanceId: CPointer<UInt8>, hwndParent: CPointer<Unit>, OpenFlags: UInt32, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiOpenDeviceInfoA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiOpenDeviceInfoA(DeviceInfoSet: HDEVINFO, DeviceInstanceId: CPointer<UInt8>, hwndParent: CPointer<Unit>, OpenFlags: UInt32, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32 {
+    return SetupDiOpenDeviceInfoA(DeviceInfoSet, DeviceInstanceId, hwndParent, OpenFlags, DeviceInfoData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiOpenDeviceInfoW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: hwndParent optional
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiOpenDeviceInfoW(DeviceInfoSet: HDEVINFO, DeviceInstanceId: CPointer<UInt16>, hwndParent: CPointer<Unit>, OpenFlags: UInt32, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiOpenDeviceInfoW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiOpenDeviceInfoW(DeviceInfoSet: HDEVINFO, DeviceInstanceId: CPointer<UInt16>, hwndParent: CPointer<Unit>, OpenFlags: UInt32, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32 {
+    return SetupDiOpenDeviceInfoW(DeviceInfoSet, DeviceInstanceId, hwndParent, OpenFlags, DeviceInfoData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiOpenDeviceInterfaceA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceInterfaceData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiOpenDeviceInterfaceA(DeviceInfoSet: HDEVINFO, DevicePath: CPointer<UInt8>, OpenFlags: UInt32, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiOpenDeviceInterfaceA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiOpenDeviceInterfaceA(DeviceInfoSet: HDEVINFO, DevicePath: CPointer<UInt8>, OpenFlags: UInt32, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>): Int32 {
+    return SetupDiOpenDeviceInterfaceA(DeviceInfoSet, DevicePath, OpenFlags, DeviceInterfaceData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiOpenDeviceInterfaceRegKey == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Registry == "on")]
+foreign {
     // param-hint: Reserved optional reserved
     // pinvoke-hint: SetLastError
     func SetupDiOpenDeviceInterfaceRegKey(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>, Reserved: UInt32, samDesired: UInt32): Win32_System_Registry.HKEY
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiOpenDeviceInterfaceRegKey == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Registry == "on")]
+public unsafe func Windows_SetupDiOpenDeviceInterfaceRegKey(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>, Reserved: UInt32, samDesired: UInt32): Win32_System_Registry.HKEY {
+    return SetupDiOpenDeviceInterfaceRegKey(DeviceInfoSet, DeviceInterfaceData, Reserved, samDesired)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiOpenDeviceInterfaceW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceInterfaceData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiOpenDeviceInterfaceW(DeviceInfoSet: HDEVINFO, DevicePath: CPointer<UInt16>, OpenFlags: UInt32, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiOpenDeviceInterfaceW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiOpenDeviceInterfaceW(DeviceInfoSet: HDEVINFO, DevicePath: CPointer<UInt16>, OpenFlags: UInt32, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>): Int32 {
+    return SetupDiOpenDeviceInterfaceW(DeviceInfoSet, DevicePath, OpenFlags, DeviceInterfaceData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiRegisterCoDeviceInstallers == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupDiRegisterCoDeviceInstallers(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiRegisterCoDeviceInstallers == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiRegisterCoDeviceInstallers(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32 {
+    return SetupDiRegisterCoDeviceInstallers(DeviceInfoSet, DeviceInfoData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiRegisterDeviceInfo == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: CompareProc optional
+    // param-hint: CompareContext optional
+    // param-hint: DupDeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiRegisterDeviceInfo(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Flags: UInt32, CompareProc: PSP_DETSIG_CMPPROC, CompareContext: CPointer<Unit>, DupDeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiRegisterDeviceInfo == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiRegisterDeviceInfo(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Flags: UInt32, CompareProc: PSP_DETSIG_CMPPROC, CompareContext: CPointer<Unit>, DupDeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32 {
+    return SetupDiRegisterDeviceInfo(DeviceInfoSet, DeviceInfoData, Flags, CompareProc, CompareContext, DupDeviceInfoData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiRemoveDevice == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func SetupDiRemoveDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiRemoveDevice == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiRemoveDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32 {
+    return SetupDiRemoveDevice(DeviceInfoSet, DeviceInfoData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiRemoveDeviceInterface == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupDiRemoveDeviceInterface(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiRemoveDeviceInterface == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiRemoveDeviceInterface(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>): Int32 {
+    return SetupDiRemoveDeviceInterface(DeviceInfoSet, DeviceInterfaceData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiRestartDevices == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupDiRestartDevices(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiRestartDevices == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiRestartDevices(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32 {
+    return SetupDiRestartDevices(DeviceInfoSet, DeviceInfoData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSelectBestCompatDrv == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiSelectBestCompatDrv(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSelectBestCompatDrv == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiSelectBestCompatDrv(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32 {
+    return SetupDiSelectBestCompatDrv(DeviceInfoSet, DeviceInfoData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSelectDevice == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiSelectDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSelectDevice == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiSelectDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32 {
+    return SetupDiSelectDevice(DeviceInfoSet, DeviceInfoData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSelectOEMDrv == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: hwndParent optional
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiSelectOEMDrv(hwndParent: CPointer<Unit>, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSelectOEMDrv == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiSelectOEMDrv(hwndParent: CPointer<Unit>, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32 {
+    return SetupDiSelectOEMDrv(hwndParent, DeviceInfoSet, DeviceInfoData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetClassInstallParamsA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceInfoData optional
+    // param-hint: ClassInstallParams bytes=param[3] optional
+    // pinvoke-hint: SetLastError
+    func SetupDiSetClassInstallParamsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, ClassInstallParams: CPointer<SP_CLASSINSTALL_HEADERAbi>, ClassInstallParamsSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetClassInstallParamsA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiSetClassInstallParamsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, ClassInstallParams: CPointer<SP_CLASSINSTALL_HEADERAbi>, ClassInstallParamsSize: UInt32): Int32 {
+    return SetupDiSetClassInstallParamsA(DeviceInfoSet, DeviceInfoData, ClassInstallParams, ClassInstallParamsSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetClassInstallParamsW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceInfoData optional
+    // param-hint: ClassInstallParams bytes=param[3] optional
+    // pinvoke-hint: SetLastError
+    func SetupDiSetClassInstallParamsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, ClassInstallParams: CPointer<SP_CLASSINSTALL_HEADERAbi>, ClassInstallParamsSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetClassInstallParamsW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiSetClassInstallParamsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, ClassInstallParams: CPointer<SP_CLASSINSTALL_HEADERAbi>, ClassInstallParamsSize: UInt32): Int32 {
+    return SetupDiSetClassInstallParamsW(DeviceInfoSet, DeviceInfoData, ClassInstallParams, ClassInstallParamsSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetClassPropertyExW == "on" && Windows_Win32_Devices_Properties == "on"]
+foreign {
+    // param-hint: PropertyBuffer bytes=param[4] optional
+    // param-hint: MachineName optional
+    // param-hint: Reserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDiSetClassPropertyExW(ClassGuid: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: Win32_Devices_Properties.DEVPROPTYPEAbi, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, Flags: UInt32, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetClassPropertyExW == "on" && Windows_Win32_Devices_Properties == "on"]
+public unsafe func Windows_SetupDiSetClassPropertyExW(ClassGuid: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: Win32_Devices_Properties.DEVPROPTYPEAbi, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, Flags: UInt32, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32 {
+    return SetupDiSetClassPropertyExW(ClassGuid, PropertyKey, PropertyType, PropertyBuffer, PropertyBufferSize, Flags, MachineName, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetClassPropertyW == "on" && Windows_Win32_Devices_Properties == "on"]
+foreign {
+    // param-hint: PropertyBuffer bytes=param[4] optional
+    // pinvoke-hint: SetLastError
+    func SetupDiSetClassPropertyW(ClassGuid: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: Win32_Devices_Properties.DEVPROPTYPEAbi, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetClassPropertyW == "on" && Windows_Win32_Devices_Properties == "on"]
+public unsafe func Windows_SetupDiSetClassPropertyW(ClassGuid: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: Win32_Devices_Properties.DEVPROPTYPEAbi, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, Flags: UInt32): Int32 {
+    return SetupDiSetClassPropertyW(ClassGuid, PropertyKey, PropertyType, PropertyBuffer, PropertyBufferSize, Flags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetClassRegistryPropertyA == "on"]
+foreign {
+    // param-hint: PropertyBuffer bytes=param[3] optional
+    // param-hint: MachineName optional
+    // param-hint: Reserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDiSetClassRegistryPropertyA(ClassGuid: CPointer<GUID>, Property: UInt32, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetClassRegistryPropertyA == "on"]
+public unsafe func Windows_SetupDiSetClassRegistryPropertyA(ClassGuid: CPointer<GUID>, Property: UInt32, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): Int32 {
+    return SetupDiSetClassRegistryPropertyA(ClassGuid, Property, PropertyBuffer, PropertyBufferSize, MachineName, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetClassRegistryPropertyW == "on"]
+foreign {
+    // param-hint: PropertyBuffer bytes=param[3] optional
+    // param-hint: MachineName optional
+    // param-hint: Reserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDiSetClassRegistryPropertyW(ClassGuid: CPointer<GUID>, Property: UInt32, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetClassRegistryPropertyW == "on"]
+public unsafe func Windows_SetupDiSetClassRegistryPropertyW(ClassGuid: CPointer<GUID>, Property: UInt32, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32 {
+    return SetupDiSetClassRegistryPropertyW(ClassGuid, Property, PropertyBuffer, PropertyBufferSize, MachineName, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetDeviceInstallParamsA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiSetDeviceInstallParamsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DeviceInstallParams: CPointer<SP_DEVINSTALL_PARAMS_AAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetDeviceInstallParamsA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiSetDeviceInstallParamsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DeviceInstallParams: CPointer<SP_DEVINSTALL_PARAMS_AAbi>): Int32 {
+    return SetupDiSetDeviceInstallParamsA(DeviceInfoSet, DeviceInfoData, DeviceInstallParams)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetDeviceInstallParamsW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiSetDeviceInstallParamsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DeviceInstallParams: CPointer<SP_DEVINSTALL_PARAMS_WAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetDeviceInstallParamsW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiSetDeviceInstallParamsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DeviceInstallParams: CPointer<SP_DEVINSTALL_PARAMS_WAbi>): Int32 {
+    return SetupDiSetDeviceInstallParamsW(DeviceInfoSet, DeviceInfoData, DeviceInstallParams)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetDeviceInterfaceDefault == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: Reserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDiSetDeviceInterfaceDefault(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>, Flags: UInt32, Reserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetDeviceInterfaceDefault == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiSetDeviceInterfaceDefault(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>, Flags: UInt32, Reserved: CPointer<Unit>): Int32 {
+    return SetupDiSetDeviceInterfaceDefault(DeviceInfoSet, DeviceInterfaceData, Flags, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetDeviceInterfacePropertyW == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_Devices_Properties == "on")]
+foreign {
+    // param-hint: PropertyBuffer bytes=param[5] optional
+    // pinvoke-hint: SetLastError
+    func SetupDiSetDeviceInterfacePropertyW(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: Win32_Devices_Properties.DEVPROPTYPEAbi, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetDeviceInterfacePropertyW == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_Devices_Properties == "on")]
+public unsafe func Windows_SetupDiSetDeviceInterfacePropertyW(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: Win32_Devices_Properties.DEVPROPTYPEAbi, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, Flags: UInt32): Int32 {
+    return SetupDiSetDeviceInterfacePropertyW(DeviceInfoSet, DeviceInterfaceData, PropertyKey, PropertyType, PropertyBuffer, PropertyBufferSize, Flags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetDevicePropertyW == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_Devices_Properties == "on")]
+foreign {
+    // param-hint: PropertyBuffer bytes=param[5] optional
+    // pinvoke-hint: SetLastError
+    func SetupDiSetDevicePropertyW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: Win32_Devices_Properties.DEVPROPTYPEAbi, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetDevicePropertyW == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_Devices_Properties == "on")]
+public unsafe func Windows_SetupDiSetDevicePropertyW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: Win32_Devices_Properties.DEVPROPTYPEAbi, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, Flags: UInt32): Int32 {
+    return SetupDiSetDevicePropertyW(DeviceInfoSet, DeviceInfoData, PropertyKey, PropertyType, PropertyBuffer, PropertyBufferSize, Flags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetDeviceRegistryPropertyA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: PropertyBuffer bytes=param[4] optional
+    // pinvoke-hint: SetLastError
+    func SetupDiSetDeviceRegistryPropertyA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Property: SETUP_DI_REGISTRY_PROPERTYAbi, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetDeviceRegistryPropertyA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiSetDeviceRegistryPropertyA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Property: SETUP_DI_REGISTRY_PROPERTYAbi, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32): Int32 {
+    return SetupDiSetDeviceRegistryPropertyA(DeviceInfoSet, DeviceInfoData, Property, PropertyBuffer, PropertyBufferSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetDeviceRegistryPropertyW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: PropertyBuffer bytes=param[4] optional
+    // pinvoke-hint: SetLastError
+    func SetupDiSetDeviceRegistryPropertyW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Property: SETUP_DI_REGISTRY_PROPERTYAbi, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetDeviceRegistryPropertyW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiSetDeviceRegistryPropertyW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Property: SETUP_DI_REGISTRY_PROPERTYAbi, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32): Int32 {
+    return SetupDiSetDeviceRegistryPropertyW(DeviceInfoSet, DeviceInfoData, Property, PropertyBuffer, PropertyBufferSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetDriverInstallParamsA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiSetDriverInstallParamsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_AAbi>, DriverInstallParams: CPointer<SP_DRVINSTALL_PARAMSAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetDriverInstallParamsA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiSetDriverInstallParamsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_AAbi>, DriverInstallParams: CPointer<SP_DRVINSTALL_PARAMSAbi>): Int32 {
+    return SetupDiSetDriverInstallParamsA(DeviceInfoSet, DeviceInfoData, DriverInfoData, DriverInstallParams)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetDriverInstallParamsW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiSetDriverInstallParamsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_WAbi>, DriverInstallParams: CPointer<SP_DRVINSTALL_PARAMSAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetDriverInstallParamsW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiSetDriverInstallParamsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_WAbi>, DriverInstallParams: CPointer<SP_DRVINSTALL_PARAMSAbi>): Int32 {
+    return SetupDiSetDriverInstallParamsW(DeviceInfoSet, DeviceInfoData, DriverInfoData, DriverInstallParams)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetSelectedDevice == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupDiSetSelectedDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetSelectedDevice == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiSetSelectedDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32 {
+    return SetupDiSetSelectedDevice(DeviceInfoSet, DeviceInfoData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetSelectedDriverA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceInfoData optional
+    // param-hint: DriverInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiSetSelectedDriverA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_AAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetSelectedDriverA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiSetSelectedDriverA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_AAbi>): Int32 {
+    return SetupDiSetSelectedDriverA(DeviceInfoSet, DeviceInfoData, DriverInfoData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetSelectedDriverW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: DeviceInfoData optional
+    // param-hint: DriverInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiSetSelectedDriverW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_WAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiSetSelectedDriverW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiSetSelectedDriverW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_WAbi>): Int32 {
+    return SetupDiSetSelectedDriverW(DeviceInfoSet, DeviceInfoData, DriverInfoData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiUnremoveDevice == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupDiUnremoveDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDiUnremoveDevice == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupDiUnremoveDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32 {
+    return SetupDiUnremoveDevice(DeviceInfoSet, DeviceInfoData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDuplicateDiskSpaceListA == "on"]
+foreign {
+    // param-hint: Reserved1 optional reserved
+    // param-hint: Reserved2 optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDuplicateDiskSpaceListA(DiskSpace: CPointer<Unit>, Reserved1: CPointer<Unit>, Reserved2: UInt32, Flags: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDuplicateDiskSpaceListA == "on"]
+public unsafe func Windows_SetupDuplicateDiskSpaceListA(DiskSpace: CPointer<Unit>, Reserved1: CPointer<Unit>, Reserved2: UInt32, Flags: UInt32): CPointer<Unit> {
+    return SetupDuplicateDiskSpaceListA(DiskSpace, Reserved1, Reserved2, Flags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDuplicateDiskSpaceListW == "on"]
+foreign {
+    // param-hint: Reserved1 optional reserved
+    // param-hint: Reserved2 optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDuplicateDiskSpaceListW(DiskSpace: CPointer<Unit>, Reserved1: CPointer<Unit>, Reserved2: UInt32, Flags: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupDuplicateDiskSpaceListW == "on"]
+public unsafe func Windows_SetupDuplicateDiskSpaceListW(DiskSpace: CPointer<Unit>, Reserved1: CPointer<Unit>, Reserved2: UInt32, Flags: UInt32): CPointer<Unit> {
+    return SetupDuplicateDiskSpaceListW(DiskSpace, Reserved1, Reserved2, Flags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupEnumInfSectionsA == "on"]
+foreign {
+    // param-hint: Buffer len=param[3] optional
+    // param-hint: SizeNeeded optional
+    // pinvoke-hint: SetLastError
+    func SetupEnumInfSectionsA(InfHandle: CPointer<Unit>, Index: UInt32, Buffer: CPointer<UInt8>, Size: UInt32, SizeNeeded: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupEnumInfSectionsA == "on"]
+public unsafe func Windows_SetupEnumInfSectionsA(InfHandle: CPointer<Unit>, Index: UInt32, Buffer: CPointer<UInt8>, Size: UInt32, SizeNeeded: CPointer<UInt32>): Int32 {
+    return SetupEnumInfSectionsA(InfHandle, Index, Buffer, Size, SizeNeeded)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupEnumInfSectionsW == "on"]
+foreign {
+    // param-hint: Buffer len=param[3] optional
+    // param-hint: SizeNeeded optional
+    // pinvoke-hint: SetLastError
+    func SetupEnumInfSectionsW(InfHandle: CPointer<Unit>, Index: UInt32, Buffer: CPointer<UInt16>, Size: UInt32, SizeNeeded: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupEnumInfSectionsW == "on"]
+public unsafe func Windows_SetupEnumInfSectionsW(InfHandle: CPointer<Unit>, Index: UInt32, Buffer: CPointer<UInt16>, Size: UInt32, SizeNeeded: CPointer<UInt32>): Int32 {
+    return SetupEnumInfSectionsW(InfHandle, Index, Buffer, Size, SizeNeeded)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupFindFirstLineA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: Key optional
+    // pinvoke-hint: SetLastError
+    func SetupFindFirstLineA(InfHandle: CPointer<Unit>, Section: CPointer<UInt8>, Key: CPointer<UInt8>, Context: CPointer<INFCONTEXTAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupFindFirstLineA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupFindFirstLineA(InfHandle: CPointer<Unit>, Section: CPointer<UInt8>, Key: CPointer<UInt8>, Context: CPointer<INFCONTEXTAbi>): Int32 {
+    return SetupFindFirstLineA(InfHandle, Section, Key, Context)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupFindFirstLineW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: Key optional
+    // pinvoke-hint: SetLastError
+    func SetupFindFirstLineW(InfHandle: CPointer<Unit>, Section: CPointer<UInt16>, Key: CPointer<UInt16>, Context: CPointer<INFCONTEXTAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupFindFirstLineW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupFindFirstLineW(InfHandle: CPointer<Unit>, Section: CPointer<UInt16>, Key: CPointer<UInt16>, Context: CPointer<INFCONTEXTAbi>): Int32 {
+    return SetupFindFirstLineW(InfHandle, Section, Key, Context)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupFindNextLine == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupFindNextLine(ContextIn: CPointer<INFCONTEXTAbi>, ContextOut: CPointer<INFCONTEXTAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupFindNextLine == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupFindNextLine(ContextIn: CPointer<INFCONTEXTAbi>, ContextOut: CPointer<INFCONTEXTAbi>): Int32 {
+    return SetupFindNextLine(ContextIn, ContextOut)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupFindNextMatchLineA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: Key optional
+    // pinvoke-hint: SetLastError
+    func SetupFindNextMatchLineA(ContextIn: CPointer<INFCONTEXTAbi>, Key: CPointer<UInt8>, ContextOut: CPointer<INFCONTEXTAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupFindNextMatchLineA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupFindNextMatchLineA(ContextIn: CPointer<INFCONTEXTAbi>, Key: CPointer<UInt8>, ContextOut: CPointer<INFCONTEXTAbi>): Int32 {
+    return SetupFindNextMatchLineA(ContextIn, Key, ContextOut)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupFindNextMatchLineW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: Key optional
+    // pinvoke-hint: SetLastError
+    func SetupFindNextMatchLineW(ContextIn: CPointer<INFCONTEXTAbi>, Key: CPointer<UInt16>, ContextOut: CPointer<INFCONTEXTAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupFindNextMatchLineW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupFindNextMatchLineW(ContextIn: CPointer<INFCONTEXTAbi>, Key: CPointer<UInt16>, ContextOut: CPointer<INFCONTEXTAbi>): Int32 {
+    return SetupFindNextMatchLineW(ContextIn, Key, ContextOut)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupFreeSourceListA == "on"]
+foreign {
+    // param-hint: List len=param[1]
+    // pinvoke-hint: SetLastError
+    func SetupFreeSourceListA(List: CPointer<CPointer<CPointer<UInt8>>>, Count: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupFreeSourceListA == "on"]
+public unsafe func Windows_SetupFreeSourceListA(List: CPointer<CPointer<CPointer<UInt8>>>, Count: UInt32): Int32 {
+    return SetupFreeSourceListA(List, Count)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupFreeSourceListW == "on"]
+foreign {
+    // param-hint: List len=param[1]
+    // pinvoke-hint: SetLastError
+    func SetupFreeSourceListW(List: CPointer<CPointer<CPointer<UInt16>>>, Count: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupFreeSourceListW == "on"]
+public unsafe func Windows_SetupFreeSourceListW(List: CPointer<CPointer<CPointer<UInt16>>>, Count: UInt32): Int32 {
+    return SetupFreeSourceListW(List, Count)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetBackupInformationA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func SetupGetBackupInformationA(QueueHandle: CPointer<Unit>, BackupParams: CPointer<SP_BACKUP_QUEUE_PARAMS_V2_AAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetBackupInformationA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupGetBackupInformationA(QueueHandle: CPointer<Unit>, BackupParams: CPointer<SP_BACKUP_QUEUE_PARAMS_V2_AAbi>): Int32 {
+    return SetupGetBackupInformationA(QueueHandle, BackupParams)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetBackupInformationW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func SetupGetBackupInformationW(QueueHandle: CPointer<Unit>, BackupParams: CPointer<SP_BACKUP_QUEUE_PARAMS_V2_WAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetBackupInformationW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupGetBackupInformationW(QueueHandle: CPointer<Unit>, BackupParams: CPointer<SP_BACKUP_QUEUE_PARAMS_V2_WAbi>): Int32 {
+    return SetupGetBackupInformationW(QueueHandle, BackupParams)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetBinaryField == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: ReturnBuffer bytes=param[3] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetBinaryField(Context: CPointer<INFCONTEXTAbi>, FieldIndex: UInt32, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetBinaryField == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupGetBinaryField(Context: CPointer<INFCONTEXTAbi>, FieldIndex: UInt32, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupGetBinaryField(Context, FieldIndex, ReturnBuffer, ReturnBufferSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetFieldCount == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupGetFieldCount(Context: CPointer<INFCONTEXTAbi>): UInt32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetFieldCount == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupGetFieldCount(Context: CPointer<INFCONTEXTAbi>): UInt32 {
+    return SetupGetFieldCount(Context)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetFileCompressionInfoA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupGetFileCompressionInfoA(SourceFileName: CPointer<UInt8>, ActualSourceFileName: CPointer<CPointer<UInt8>>, SourceFileSize: CPointer<UInt32>, TargetFileSize: CPointer<UInt32>, CompressionType: CPointer<FILE_COMPRESSION_TYPEAbi>): UInt32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetFileCompressionInfoA == "on"]
+public unsafe func Windows_SetupGetFileCompressionInfoA(SourceFileName: CPointer<UInt8>, ActualSourceFileName: CPointer<CPointer<UInt8>>, SourceFileSize: CPointer<UInt32>, TargetFileSize: CPointer<UInt32>, CompressionType: CPointer<FILE_COMPRESSION_TYPEAbi>): UInt32 {
+    return SetupGetFileCompressionInfoA(SourceFileName, ActualSourceFileName, SourceFileSize, TargetFileSize, CompressionType)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetFileCompressionInfoExA == "on"]
+foreign {
+    // param-hint: ActualSourceFileNameBuffer len=param[2] optional
+    // param-hint: RequiredBufferLen optional
+    // pinvoke-hint: SetLastError
+    func SetupGetFileCompressionInfoExA(SourceFileName: CPointer<UInt8>, ActualSourceFileNameBuffer: CPointer<UInt8>, ActualSourceFileNameBufferLen: UInt32, RequiredBufferLen: CPointer<UInt32>, SourceFileSize: CPointer<UInt32>, TargetFileSize: CPointer<UInt32>, CompressionType: CPointer<FILE_COMPRESSION_TYPEAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetFileCompressionInfoExA == "on"]
+public unsafe func Windows_SetupGetFileCompressionInfoExA(SourceFileName: CPointer<UInt8>, ActualSourceFileNameBuffer: CPointer<UInt8>, ActualSourceFileNameBufferLen: UInt32, RequiredBufferLen: CPointer<UInt32>, SourceFileSize: CPointer<UInt32>, TargetFileSize: CPointer<UInt32>, CompressionType: CPointer<FILE_COMPRESSION_TYPEAbi>): Int32 {
+    return SetupGetFileCompressionInfoExA(SourceFileName, ActualSourceFileNameBuffer, ActualSourceFileNameBufferLen, RequiredBufferLen, SourceFileSize, TargetFileSize, CompressionType)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetFileCompressionInfoExW == "on"]
+foreign {
+    // param-hint: ActualSourceFileNameBuffer len=param[2] optional
+    // param-hint: RequiredBufferLen optional
+    // pinvoke-hint: SetLastError
+    func SetupGetFileCompressionInfoExW(SourceFileName: CPointer<UInt16>, ActualSourceFileNameBuffer: CPointer<UInt16>, ActualSourceFileNameBufferLen: UInt32, RequiredBufferLen: CPointer<UInt32>, SourceFileSize: CPointer<UInt32>, TargetFileSize: CPointer<UInt32>, CompressionType: CPointer<FILE_COMPRESSION_TYPEAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetFileCompressionInfoExW == "on"]
+public unsafe func Windows_SetupGetFileCompressionInfoExW(SourceFileName: CPointer<UInt16>, ActualSourceFileNameBuffer: CPointer<UInt16>, ActualSourceFileNameBufferLen: UInt32, RequiredBufferLen: CPointer<UInt32>, SourceFileSize: CPointer<UInt32>, TargetFileSize: CPointer<UInt32>, CompressionType: CPointer<FILE_COMPRESSION_TYPEAbi>): Int32 {
+    return SetupGetFileCompressionInfoExW(SourceFileName, ActualSourceFileNameBuffer, ActualSourceFileNameBufferLen, RequiredBufferLen, SourceFileSize, TargetFileSize, CompressionType)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetFileCompressionInfoW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupGetFileCompressionInfoW(SourceFileName: CPointer<UInt16>, ActualSourceFileName: CPointer<CPointer<UInt16>>, SourceFileSize: CPointer<UInt32>, TargetFileSize: CPointer<UInt32>, CompressionType: CPointer<FILE_COMPRESSION_TYPEAbi>): UInt32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetFileCompressionInfoW == "on"]
+public unsafe func Windows_SetupGetFileCompressionInfoW(SourceFileName: CPointer<UInt16>, ActualSourceFileName: CPointer<CPointer<UInt16>>, SourceFileSize: CPointer<UInt32>, TargetFileSize: CPointer<UInt32>, CompressionType: CPointer<FILE_COMPRESSION_TYPEAbi>): UInt32 {
+    return SetupGetFileCompressionInfoW(SourceFileName, ActualSourceFileName, SourceFileSize, TargetFileSize, CompressionType)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetFileQueueCount == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupGetFileQueueCount(FileQueue: CPointer<Unit>, SubQueueFileOp: UInt32, NumOperations: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetFileQueueCount == "on"]
+public unsafe func Windows_SetupGetFileQueueCount(FileQueue: CPointer<Unit>, SubQueueFileOp: UInt32, NumOperations: CPointer<UInt32>): Int32 {
+    return SetupGetFileQueueCount(FileQueue, SubQueueFileOp, NumOperations)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetFileQueueFlags == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupGetFileQueueFlags(FileQueue: CPointer<Unit>, Flags: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetFileQueueFlags == "on"]
+public unsafe func Windows_SetupGetFileQueueFlags(FileQueue: CPointer<Unit>, Flags: CPointer<UInt32>): Int32 {
+    return SetupGetFileQueueFlags(FileQueue, Flags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetInfDriverStoreLocationA == "on" && (((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")]
+foreign {
+    // param-hint: AlternatePlatformInfo optional
+    // param-hint: LocaleName optional
+    // param-hint: ReturnBuffer len=param[4]
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetInfDriverStoreLocationA(FileName: CPointer<UInt8>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2Abi>, LocaleName: CPointer<UInt8>, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetInfDriverStoreLocationA == "on" && (((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")]
+public unsafe func Windows_SetupGetInfDriverStoreLocationA(FileName: CPointer<UInt8>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2Abi>, LocaleName: CPointer<UInt8>, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupGetInfDriverStoreLocationA(FileName, AlternatePlatformInfo, LocaleName, ReturnBuffer, ReturnBufferSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetInfDriverStoreLocationW == "on" && (((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")]
+foreign {
+    // param-hint: AlternatePlatformInfo optional
+    // param-hint: LocaleName optional
+    // param-hint: ReturnBuffer len=param[4]
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetInfDriverStoreLocationW(FileName: CPointer<UInt16>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2Abi>, LocaleName: CPointer<UInt16>, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetInfDriverStoreLocationW == "on" && (((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")]
+public unsafe func Windows_SetupGetInfDriverStoreLocationW(FileName: CPointer<UInt16>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2Abi>, LocaleName: CPointer<UInt16>, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupGetInfDriverStoreLocationW(FileName, AlternatePlatformInfo, LocaleName, ReturnBuffer, ReturnBufferSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetInfFileListA == "on"]
+foreign {
+    // param-hint: DirectoryPath optional
+    // param-hint: ReturnBuffer len=param[3] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetInfFileListA(DirectoryPath: CPointer<UInt8>, InfStyle: INF_STYLEAbi, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetInfFileListA == "on"]
+public unsafe func Windows_SetupGetInfFileListA(DirectoryPath: CPointer<UInt8>, InfStyle: INF_STYLEAbi, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupGetInfFileListA(DirectoryPath, InfStyle, ReturnBuffer, ReturnBufferSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetInfFileListW == "on"]
+foreign {
+    // param-hint: DirectoryPath optional
+    // param-hint: ReturnBuffer len=param[3]
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetInfFileListW(DirectoryPath: CPointer<UInt16>, InfStyle: INF_STYLEAbi, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetInfFileListW == "on"]
+public unsafe func Windows_SetupGetInfFileListW(DirectoryPath: CPointer<UInt16>, InfStyle: INF_STYLEAbi, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupGetInfFileListW(DirectoryPath, InfStyle, ReturnBuffer, ReturnBufferSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetInfInformationA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: ReturnBuffer bytes=param[3] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetInfInformationA(InfSpec: CPointer<Unit>, SearchControl: UInt32, ReturnBuffer: CPointer<SP_INF_INFORMATIONAbi>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetInfInformationA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupGetInfInformationA(InfSpec: CPointer<Unit>, SearchControl: UInt32, ReturnBuffer: CPointer<SP_INF_INFORMATIONAbi>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupGetInfInformationA(InfSpec, SearchControl, ReturnBuffer, ReturnBufferSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetInfInformationW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: ReturnBuffer bytes=param[3] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetInfInformationW(InfSpec: CPointer<Unit>, SearchControl: UInt32, ReturnBuffer: CPointer<SP_INF_INFORMATIONAbi>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetInfInformationW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupGetInfInformationW(InfSpec: CPointer<Unit>, SearchControl: UInt32, ReturnBuffer: CPointer<SP_INF_INFORMATIONAbi>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupGetInfInformationW(InfSpec, SearchControl, ReturnBuffer, ReturnBufferSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetInfPublishedNameA == "on"]
+foreign {
+    // param-hint: ReturnBuffer len=param[2]
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetInfPublishedNameA(DriverStoreLocation: CPointer<UInt8>, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetInfPublishedNameA == "on"]
+public unsafe func Windows_SetupGetInfPublishedNameA(DriverStoreLocation: CPointer<UInt8>, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupGetInfPublishedNameA(DriverStoreLocation, ReturnBuffer, ReturnBufferSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetInfPublishedNameW == "on"]
+foreign {
+    // param-hint: ReturnBuffer len=param[2]
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetInfPublishedNameW(DriverStoreLocation: CPointer<UInt16>, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetInfPublishedNameW == "on"]
+public unsafe func Windows_SetupGetInfPublishedNameW(DriverStoreLocation: CPointer<UInt16>, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupGetInfPublishedNameW(DriverStoreLocation, ReturnBuffer, ReturnBufferSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetIntField == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupGetIntField(Context: CPointer<INFCONTEXTAbi>, FieldIndex: UInt32, IntegerValue: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetIntField == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupGetIntField(Context: CPointer<INFCONTEXTAbi>, FieldIndex: UInt32, IntegerValue: CPointer<Int32>): Int32 {
+    return SetupGetIntField(Context, FieldIndex, IntegerValue)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetLineByIndexA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupGetLineByIndexA(InfHandle: CPointer<Unit>, Section: CPointer<UInt8>, Index: UInt32, Context: CPointer<INFCONTEXTAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetLineByIndexA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupGetLineByIndexA(InfHandle: CPointer<Unit>, Section: CPointer<UInt8>, Index: UInt32, Context: CPointer<INFCONTEXTAbi>): Int32 {
+    return SetupGetLineByIndexA(InfHandle, Section, Index, Context)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetLineByIndexW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupGetLineByIndexW(InfHandle: CPointer<Unit>, Section: CPointer<UInt16>, Index: UInt32, Context: CPointer<INFCONTEXTAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetLineByIndexW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupGetLineByIndexW(InfHandle: CPointer<Unit>, Section: CPointer<UInt16>, Index: UInt32, Context: CPointer<INFCONTEXTAbi>): Int32 {
+    return SetupGetLineByIndexW(InfHandle, Section, Index, Context)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetLineCountA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupGetLineCountA(InfHandle: CPointer<Unit>, Section: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetLineCountA == "on"]
+public unsafe func Windows_SetupGetLineCountA(InfHandle: CPointer<Unit>, Section: CPointer<UInt8>): Int32 {
+    return SetupGetLineCountA(InfHandle, Section)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetLineCountW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupGetLineCountW(InfHandle: CPointer<Unit>, Section: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetLineCountW == "on"]
+public unsafe func Windows_SetupGetLineCountW(InfHandle: CPointer<Unit>, Section: CPointer<UInt16>): Int32 {
+    return SetupGetLineCountW(InfHandle, Section)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetLineTextA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: Context optional
+    // param-hint: InfHandle optional
+    // param-hint: Section optional
+    // param-hint: Key optional
+    // param-hint: ReturnBuffer len=param[5] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetLineTextA(Context: CPointer<INFCONTEXTAbi>, InfHandle: CPointer<Unit>, Section: CPointer<UInt8>, Key: CPointer<UInt8>, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetLineTextA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupGetLineTextA(Context: CPointer<INFCONTEXTAbi>, InfHandle: CPointer<Unit>, Section: CPointer<UInt8>, Key: CPointer<UInt8>, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupGetLineTextA(Context, InfHandle, Section, Key, ReturnBuffer, ReturnBufferSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetLineTextW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: Context optional
+    // param-hint: InfHandle optional
+    // param-hint: Section optional
+    // param-hint: Key optional
+    // param-hint: ReturnBuffer len=param[5] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetLineTextW(Context: CPointer<INFCONTEXTAbi>, InfHandle: CPointer<Unit>, Section: CPointer<UInt16>, Key: CPointer<UInt16>, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetLineTextW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupGetLineTextW(Context: CPointer<INFCONTEXTAbi>, InfHandle: CPointer<Unit>, Section: CPointer<UInt16>, Key: CPointer<UInt16>, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupGetLineTextW(Context, InfHandle, Section, Key, ReturnBuffer, ReturnBufferSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetMultiSzFieldA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: ReturnBuffer len=param[3] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetMultiSzFieldA(Context: CPointer<INFCONTEXTAbi>, FieldIndex: UInt32, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetMultiSzFieldA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupGetMultiSzFieldA(Context: CPointer<INFCONTEXTAbi>, FieldIndex: UInt32, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupGetMultiSzFieldA(Context, FieldIndex, ReturnBuffer, ReturnBufferSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetMultiSzFieldW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: ReturnBuffer len=param[3] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetMultiSzFieldW(Context: CPointer<INFCONTEXTAbi>, FieldIndex: UInt32, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetMultiSzFieldW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupGetMultiSzFieldW(Context: CPointer<INFCONTEXTAbi>, FieldIndex: UInt32, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupGetMultiSzFieldW(Context, FieldIndex, ReturnBuffer, ReturnBufferSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetNonInteractiveMode == "on"]
+foreign {
+    func SetupGetNonInteractiveMode(): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetNonInteractiveMode == "on"]
+public unsafe func Windows_SetupGetNonInteractiveMode(): Int32 {
+    return SetupGetNonInteractiveMode()
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetSourceFileLocationA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: InfContext optional
+    // param-hint: FileName optional
+    // param-hint: ReturnBuffer len=param[5] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetSourceFileLocationA(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXTAbi>, FileName: CPointer<UInt8>, SourceId: CPointer<UInt32>, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetSourceFileLocationA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupGetSourceFileLocationA(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXTAbi>, FileName: CPointer<UInt8>, SourceId: CPointer<UInt32>, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupGetSourceFileLocationA(InfHandle, InfContext, FileName, SourceId, ReturnBuffer, ReturnBufferSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetSourceFileLocationW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: InfContext optional
+    // param-hint: FileName optional
+    // param-hint: ReturnBuffer len=param[5] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetSourceFileLocationW(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXTAbi>, FileName: CPointer<UInt16>, SourceId: CPointer<UInt32>, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetSourceFileLocationW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupGetSourceFileLocationW(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXTAbi>, FileName: CPointer<UInt16>, SourceId: CPointer<UInt32>, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupGetSourceFileLocationW(InfHandle, InfContext, FileName, SourceId, ReturnBuffer, ReturnBufferSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetSourceFileSizeA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: InfContext optional
+    // param-hint: FileName optional
+    // param-hint: Section optional
+    // pinvoke-hint: SetLastError
+    func SetupGetSourceFileSizeA(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXTAbi>, FileName: CPointer<UInt8>, Section: CPointer<UInt8>, FileSize: CPointer<UInt32>, RoundingFactor: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetSourceFileSizeA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupGetSourceFileSizeA(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXTAbi>, FileName: CPointer<UInt8>, Section: CPointer<UInt8>, FileSize: CPointer<UInt32>, RoundingFactor: UInt32): Int32 {
+    return SetupGetSourceFileSizeA(InfHandle, InfContext, FileName, Section, FileSize, RoundingFactor)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetSourceFileSizeW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: InfContext optional
+    // param-hint: FileName optional
+    // param-hint: Section optional
+    // pinvoke-hint: SetLastError
+    func SetupGetSourceFileSizeW(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXTAbi>, FileName: CPointer<UInt16>, Section: CPointer<UInt16>, FileSize: CPointer<UInt32>, RoundingFactor: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetSourceFileSizeW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupGetSourceFileSizeW(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXTAbi>, FileName: CPointer<UInt16>, Section: CPointer<UInt16>, FileSize: CPointer<UInt32>, RoundingFactor: UInt32): Int32 {
+    return SetupGetSourceFileSizeW(InfHandle, InfContext, FileName, Section, FileSize, RoundingFactor)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetSourceInfoA == "on"]
+foreign {
+    // param-hint: ReturnBuffer len=param[4] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetSourceInfoA(InfHandle: CPointer<Unit>, SourceId: UInt32, InfoDesired: UInt32, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetSourceInfoA == "on"]
+public unsafe func Windows_SetupGetSourceInfoA(InfHandle: CPointer<Unit>, SourceId: UInt32, InfoDesired: UInt32, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupGetSourceInfoA(InfHandle, SourceId, InfoDesired, ReturnBuffer, ReturnBufferSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetSourceInfoW == "on"]
+foreign {
+    // param-hint: ReturnBuffer len=param[4] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetSourceInfoW(InfHandle: CPointer<Unit>, SourceId: UInt32, InfoDesired: UInt32, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetSourceInfoW == "on"]
+public unsafe func Windows_SetupGetSourceInfoW(InfHandle: CPointer<Unit>, SourceId: UInt32, InfoDesired: UInt32, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupGetSourceInfoW(InfHandle, SourceId, InfoDesired, ReturnBuffer, ReturnBufferSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetStringFieldA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: ReturnBuffer len=param[3] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetStringFieldA(Context: CPointer<INFCONTEXTAbi>, FieldIndex: UInt32, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetStringFieldA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupGetStringFieldA(Context: CPointer<INFCONTEXTAbi>, FieldIndex: UInt32, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupGetStringFieldA(Context, FieldIndex, ReturnBuffer, ReturnBufferSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetStringFieldW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: ReturnBuffer len=param[3] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetStringFieldW(Context: CPointer<INFCONTEXTAbi>, FieldIndex: UInt32, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetStringFieldW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupGetStringFieldW(Context: CPointer<INFCONTEXTAbi>, FieldIndex: UInt32, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupGetStringFieldW(Context, FieldIndex, ReturnBuffer, ReturnBufferSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetTargetPathA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: InfContext optional
+    // param-hint: Section optional
+    // param-hint: ReturnBuffer len=param[4] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetTargetPathA(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXTAbi>, Section: CPointer<UInt8>, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetTargetPathA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupGetTargetPathA(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXTAbi>, Section: CPointer<UInt8>, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupGetTargetPathA(InfHandle, InfContext, Section, ReturnBuffer, ReturnBufferSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetTargetPathW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: InfContext optional
+    // param-hint: Section optional
+    // param-hint: ReturnBuffer len=param[4] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetTargetPathW(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXTAbi>, Section: CPointer<UInt16>, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetTargetPathW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupGetTargetPathW(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXTAbi>, Section: CPointer<UInt16>, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupGetTargetPathW(InfHandle, InfContext, Section, ReturnBuffer, ReturnBufferSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetThreadLogToken == "on"]
+foreign {
+    func SetupGetThreadLogToken(): UInt64
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupGetThreadLogToken == "on"]
+public unsafe func Windows_SetupGetThreadLogToken(): UInt64 {
+    return SetupGetThreadLogToken()
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupInitDefaultQueueCallback == "on"]
+foreign {
+    // param-hint: OwnerWindow optional
+    // pinvoke-hint: SetLastError
+    func SetupInitDefaultQueueCallback(OwnerWindow: CPointer<Unit>): CPointer<Unit>
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupInitDefaultQueueCallback == "on"]
+public unsafe func Windows_SetupInitDefaultQueueCallback(OwnerWindow: CPointer<Unit>): CPointer<Unit> {
+    return SetupInitDefaultQueueCallback(OwnerWindow)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupInitDefaultQueueCallbackEx == "on"]
+foreign {
+    // param-hint: OwnerWindow optional
+    // param-hint: AlternateProgressWindow optional
+    // param-hint: Reserved1 optional reserved
+    // param-hint: Reserved2 optional reserved
+    func SetupInitDefaultQueueCallbackEx(OwnerWindow: CPointer<Unit>, AlternateProgressWindow: CPointer<Unit>, ProgressMessage: UInt32, Reserved1: UInt32, Reserved2: CPointer<Unit>): CPointer<Unit>
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupInitDefaultQueueCallbackEx == "on"]
+public unsafe func Windows_SetupInitDefaultQueueCallbackEx(OwnerWindow: CPointer<Unit>, AlternateProgressWindow: CPointer<Unit>, ProgressMessage: UInt32, Reserved1: UInt32, Reserved2: CPointer<Unit>): CPointer<Unit> {
+    return SetupInitDefaultQueueCallbackEx(OwnerWindow, AlternateProgressWindow, ProgressMessage, Reserved1, Reserved2)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupInitializeFileLogA == "on"]
+foreign {
+    // param-hint: LogFileName optional
+    // pinvoke-hint: SetLastError
+    func SetupInitializeFileLogA(LogFileName: CPointer<UInt8>, Flags: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupInitializeFileLogA == "on"]
+public unsafe func Windows_SetupInitializeFileLogA(LogFileName: CPointer<UInt8>, Flags: UInt32): CPointer<Unit> {
+    return SetupInitializeFileLogA(LogFileName, Flags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupInitializeFileLogW == "on"]
+foreign {
+    // param-hint: LogFileName optional
+    // pinvoke-hint: SetLastError
+    func SetupInitializeFileLogW(LogFileName: CPointer<UInt16>, Flags: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupInitializeFileLogW == "on"]
+public unsafe func Windows_SetupInitializeFileLogW(LogFileName: CPointer<UInt16>, Flags: UInt32): CPointer<Unit> {
+    return SetupInitializeFileLogW(LogFileName, Flags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupInstallFileA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: InfHandle optional
+    // param-hint: InfContext optional
+    // param-hint: SourceFile optional
+    // param-hint: SourcePathRoot optional
+    // param-hint: DestinationName optional
+    // param-hint: CopyMsgHandler optional
+    // param-hint: Context optional
+    // pinvoke-hint: SetLastError
+    func SetupInstallFileA(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXTAbi>, SourceFile: CPointer<UInt8>, SourcePathRoot: CPointer<UInt8>, DestinationName: CPointer<UInt8>, CopyStyle: SP_COPY_STYLEAbi, CopyMsgHandler: PSP_FILE_CALLBACK_A, Context: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupInstallFileA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupInstallFileA(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXTAbi>, SourceFile: CPointer<UInt8>, SourcePathRoot: CPointer<UInt8>, DestinationName: CPointer<UInt8>, CopyStyle: SP_COPY_STYLEAbi, CopyMsgHandler: PSP_FILE_CALLBACK_A, Context: CPointer<Unit>): Int32 {
+    return SetupInstallFileA(InfHandle, InfContext, SourceFile, SourcePathRoot, DestinationName, CopyStyle, CopyMsgHandler, Context)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupInstallFileExA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: InfHandle optional
+    // param-hint: InfContext optional
+    // param-hint: SourceFile optional
+    // param-hint: SourcePathRoot optional
+    // param-hint: DestinationName optional
+    // param-hint: CopyMsgHandler optional
+    // param-hint: Context optional
+    // pinvoke-hint: SetLastError
+    func SetupInstallFileExA(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXTAbi>, SourceFile: CPointer<UInt8>, SourcePathRoot: CPointer<UInt8>, DestinationName: CPointer<UInt8>, CopyStyle: SP_COPY_STYLEAbi, CopyMsgHandler: PSP_FILE_CALLBACK_A, Context: CPointer<Unit>, FileWasInUse: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupInstallFileExA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupInstallFileExA(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXTAbi>, SourceFile: CPointer<UInt8>, SourcePathRoot: CPointer<UInt8>, DestinationName: CPointer<UInt8>, CopyStyle: SP_COPY_STYLEAbi, CopyMsgHandler: PSP_FILE_CALLBACK_A, Context: CPointer<Unit>, FileWasInUse: CPointer<Int32>): Int32 {
+    return SetupInstallFileExA(InfHandle, InfContext, SourceFile, SourcePathRoot, DestinationName, CopyStyle, CopyMsgHandler, Context, FileWasInUse)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupInstallFileExW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: InfHandle optional
+    // param-hint: InfContext optional
+    // param-hint: SourceFile optional
+    // param-hint: SourcePathRoot optional
+    // param-hint: DestinationName optional
+    // param-hint: CopyMsgHandler optional
+    // param-hint: Context optional
+    // pinvoke-hint: SetLastError
+    func SetupInstallFileExW(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXTAbi>, SourceFile: CPointer<UInt16>, SourcePathRoot: CPointer<UInt16>, DestinationName: CPointer<UInt16>, CopyStyle: SP_COPY_STYLEAbi, CopyMsgHandler: PSP_FILE_CALLBACK_W, Context: CPointer<Unit>, FileWasInUse: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupInstallFileExW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupInstallFileExW(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXTAbi>, SourceFile: CPointer<UInt16>, SourcePathRoot: CPointer<UInt16>, DestinationName: CPointer<UInt16>, CopyStyle: SP_COPY_STYLEAbi, CopyMsgHandler: PSP_FILE_CALLBACK_W, Context: CPointer<Unit>, FileWasInUse: CPointer<Int32>): Int32 {
+    return SetupInstallFileExW(InfHandle, InfContext, SourceFile, SourcePathRoot, DestinationName, CopyStyle, CopyMsgHandler, Context, FileWasInUse)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupInstallFileW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: InfHandle optional
+    // param-hint: InfContext optional
+    // param-hint: SourceFile optional
+    // param-hint: SourcePathRoot optional
+    // param-hint: DestinationName optional
+    // param-hint: CopyMsgHandler optional
+    // param-hint: Context optional
+    // pinvoke-hint: SetLastError
+    func SetupInstallFileW(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXTAbi>, SourceFile: CPointer<UInt16>, SourcePathRoot: CPointer<UInt16>, DestinationName: CPointer<UInt16>, CopyStyle: SP_COPY_STYLEAbi, CopyMsgHandler: PSP_FILE_CALLBACK_W, Context: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupInstallFileW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupInstallFileW(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXTAbi>, SourceFile: CPointer<UInt16>, SourcePathRoot: CPointer<UInt16>, DestinationName: CPointer<UInt16>, CopyStyle: SP_COPY_STYLEAbi, CopyMsgHandler: PSP_FILE_CALLBACK_W, Context: CPointer<Unit>): Int32 {
+    return SetupInstallFileW(InfHandle, InfContext, SourceFile, SourcePathRoot, DestinationName, CopyStyle, CopyMsgHandler, Context)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupInstallFilesFromInfSectionA == "on"]
+foreign {
+    // param-hint: LayoutInfHandle optional
+    // param-hint: SourceRootPath optional
+    // pinvoke-hint: SetLastError
+    func SetupInstallFilesFromInfSectionA(InfHandle: CPointer<Unit>, LayoutInfHandle: CPointer<Unit>, FileQueue: CPointer<Unit>, SectionName: CPointer<UInt8>, SourceRootPath: CPointer<UInt8>, CopyFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupInstallFilesFromInfSectionA == "on"]
+public unsafe func Windows_SetupInstallFilesFromInfSectionA(InfHandle: CPointer<Unit>, LayoutInfHandle: CPointer<Unit>, FileQueue: CPointer<Unit>, SectionName: CPointer<UInt8>, SourceRootPath: CPointer<UInt8>, CopyFlags: UInt32): Int32 {
+    return SetupInstallFilesFromInfSectionA(InfHandle, LayoutInfHandle, FileQueue, SectionName, SourceRootPath, CopyFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupInstallFilesFromInfSectionW == "on"]
+foreign {
+    // param-hint: LayoutInfHandle optional
+    // param-hint: SourceRootPath optional
+    // pinvoke-hint: SetLastError
+    func SetupInstallFilesFromInfSectionW(InfHandle: CPointer<Unit>, LayoutInfHandle: CPointer<Unit>, FileQueue: CPointer<Unit>, SectionName: CPointer<UInt16>, SourceRootPath: CPointer<UInt16>, CopyFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupInstallFilesFromInfSectionW == "on"]
+public unsafe func Windows_SetupInstallFilesFromInfSectionW(InfHandle: CPointer<Unit>, LayoutInfHandle: CPointer<Unit>, FileQueue: CPointer<Unit>, SectionName: CPointer<UInt16>, SourceRootPath: CPointer<UInt16>, CopyFlags: UInt32): Int32 {
+    return SetupInstallFilesFromInfSectionW(InfHandle, LayoutInfHandle, FileQueue, SectionName, SourceRootPath, CopyFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupInstallFromInfSectionA == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Registry == "on")]
+foreign {
     // param-hint: Owner optional
     // param-hint: RelativeKeyRoot optional
     // param-hint: SourceRootPath optional
@@ -12553,6 +16895,15 @@ foreign {
     // param-hint: DeviceInfoData optional
     // pinvoke-hint: SetLastError
     func SetupInstallFromInfSectionA(Owner: CPointer<Unit>, InfHandle: CPointer<Unit>, SectionName: CPointer<UInt8>, Flags: UInt32, RelativeKeyRoot: Win32_System_Registry.HKEY, SourceRootPath: CPointer<UInt8>, CopyFlags: UInt32, MsgHandler: PSP_FILE_CALLBACK_A, Context: CPointer<Unit>, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupInstallFromInfSectionA == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Registry == "on")]
+public unsafe func Windows_SetupInstallFromInfSectionA(Owner: CPointer<Unit>, InfHandle: CPointer<Unit>, SectionName: CPointer<UInt8>, Flags: UInt32, RelativeKeyRoot: Win32_System_Registry.HKEY, SourceRootPath: CPointer<UInt8>, CopyFlags: UInt32, MsgHandler: PSP_FILE_CALLBACK_A, Context: CPointer<Unit>, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32 {
+    return SetupInstallFromInfSectionA(Owner, InfHandle, SectionName, Flags, RelativeKeyRoot, SourceRootPath, CopyFlags, MsgHandler, Context, DeviceInfoSet, DeviceInfoData)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupInstallFromInfSectionW == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Registry == "on")]
+foreign {
     // param-hint: Owner optional
     // param-hint: RelativeKeyRoot optional
     // param-hint: SourceRootPath optional
@@ -12564,518 +16915,1243 @@ foreign {
     func SetupInstallFromInfSectionW(Owner: CPointer<Unit>, InfHandle: CPointer<Unit>, SectionName: CPointer<UInt16>, Flags: UInt32, RelativeKeyRoot: Win32_System_Registry.HKEY, SourceRootPath: CPointer<UInt16>, CopyFlags: UInt32, MsgHandler: PSP_FILE_CALLBACK_W, Context: CPointer<Unit>, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
 }
 
-@When[SETUPAPI == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_UI_WindowsAndMessaging == "on")]
-foreign {
-    // pinvoke-hint: SetLastError
-    func SetupDiLoadDeviceIcon(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, cxIcon: UInt32, cyIcon: UInt32, Flags: UInt32, hIcon: CPointer<Win32__impl_l0.HICON>): Int32
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupInstallFromInfSectionW == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Registry == "on")]
+public unsafe func Windows_SetupInstallFromInfSectionW(Owner: CPointer<Unit>, InfHandle: CPointer<Unit>, SectionName: CPointer<UInt16>, Flags: UInt32, RelativeKeyRoot: Win32_System_Registry.HKEY, SourceRootPath: CPointer<UInt16>, CopyFlags: UInt32, MsgHandler: PSP_FILE_CALLBACK_W, Context: CPointer<Unit>, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32 {
+    return SetupInstallFromInfSectionW(Owner, InfHandle, SectionName, Flags, RelativeKeyRoot, SourceRootPath, CopyFlags, MsgHandler, Context, DeviceInfoSet, DeviceInfoData)
 }
 
-@When[SETUPAPI == "on" && ((arch == "x86_64" || arch == "aarch64"))]
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupInstallServicesFromInfSectionA == "on"]
 foreign {
-    // param-hint: DeviceInfoData optional
     // pinvoke-hint: SetLastError
-    func SetupDiAskForOEMDisk(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiBuildDriverInfoList(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverType: SETUP_DI_DRIVER_TYPEAbi): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiCallClassInstaller(InstallFunction: DI_FUNCTIONAbi, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiChangeState(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
-    // param-hint: DeviceDescription optional
-    // param-hint: hwndParent optional
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiCreateDeviceInfoA(DeviceInfoSet: HDEVINFO, DeviceName: CPointer<UInt8>, ClassGuid: CPointer<GUID>, DeviceDescription: CPointer<UInt8>, hwndParent: CPointer<Unit>, CreationFlags: SETUP_DI_DEVICE_CREATION_FLAGSAbi, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
-    // param-hint: DeviceDescription optional
-    // param-hint: hwndParent optional
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiCreateDeviceInfoW(DeviceInfoSet: HDEVINFO, DeviceName: CPointer<UInt16>, ClassGuid: CPointer<GUID>, DeviceDescription: CPointer<UInt16>, hwndParent: CPointer<Unit>, CreationFlags: SETUP_DI_DEVICE_CREATION_FLAGSAbi, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
-    // param-hint: ReferenceString optional
-    // param-hint: DeviceInterfaceData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiCreateDeviceInterfaceA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, InterfaceClassGuid: CPointer<GUID>, ReferenceString: CPointer<UInt8>, CreationFlags: UInt32, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>): Int32
-    // param-hint: ReferenceString optional
-    // param-hint: DeviceInterfaceData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiCreateDeviceInterfaceW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, InterfaceClassGuid: CPointer<GUID>, ReferenceString: CPointer<UInt16>, CreationFlags: UInt32, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiDeleteDevRegKey(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Scope: UInt32, HwProfile: UInt32, KeyType: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiDeleteDeviceInfo(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiDeleteDeviceInterfaceData(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>): Int32
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiDeleteDeviceInterfaceRegKey(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>, Reserved: UInt32): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiDestroyDriverInfoList(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverType: SETUP_DI_DRIVER_TYPEAbi): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiEnumDeviceInfo(DeviceInfoSet: HDEVINFO, MemberIndex: UInt32, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiEnumDeviceInterfaces(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, InterfaceClassGuid: CPointer<GUID>, MemberIndex: UInt32, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiEnumDriverInfoA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverType: SETUP_DI_DRIVER_TYPEAbi, MemberIndex: UInt32, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_AAbi>): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiEnumDriverInfoW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverType: SETUP_DI_DRIVER_TYPEAbi, MemberIndex: UInt32, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_WAbi>): Int32
-    // param-hint: DeviceInfoData optional
-    // param-hint: ClassInstallParams bytes=param[3] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetClassInstallParamsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, ClassInstallParams: CPointer<SP_CLASSINSTALL_HEADERAbi>, ClassInstallParamsSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: DeviceInfoData optional
-    // param-hint: ClassInstallParams bytes=param[3] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetClassInstallParamsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, ClassInstallParams: CPointer<SP_CLASSINSTALL_HEADERAbi>, ClassInstallParamsSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: PropertyRegDataType optional
-    // param-hint: PropertyBuffer bytes=param[6]
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetCustomDevicePropertyA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, CustomPropertyName: CPointer<UInt8>, Flags: UInt32, PropertyRegDataType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: PropertyRegDataType optional
-    // param-hint: PropertyBuffer bytes=param[6]
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetCustomDevicePropertyW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, CustomPropertyName: CPointer<UInt16>, Flags: UInt32, PropertyRegDataType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDeviceInfoListDetailA(DeviceInfoSet: HDEVINFO, DeviceInfoSetDetailData: CPointer<SP_DEVINFO_LIST_DETAIL_DATA_AAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDeviceInfoListDetailW(DeviceInfoSet: HDEVINFO, DeviceInfoSetDetailData: CPointer<SP_DEVINFO_LIST_DETAIL_DATA_WAbi>): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDeviceInstallParamsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DeviceInstallParams: CPointer<SP_DEVINSTALL_PARAMS_AAbi>): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDeviceInstallParamsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DeviceInstallParams: CPointer<SP_DEVINSTALL_PARAMS_WAbi>): Int32
-    // param-hint: DeviceInstanceId len=param[3] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDeviceInstanceIdA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DeviceInstanceId: CPointer<UInt8>, DeviceInstanceIdSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: DeviceInstanceId len=param[3] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDeviceInstanceIdW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DeviceInstanceId: CPointer<UInt16>, DeviceInstanceIdSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDeviceInterfaceAlias(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>, AliasInterfaceClassGuid: CPointer<GUID>, AliasDeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>): Int32
-    // param-hint: DeviceInterfaceDetailData bytes=param[3] optional
-    // param-hint: RequiredSize optional
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDeviceInterfaceDetailA(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>, DeviceInterfaceDetailData: CPointer<SP_DEVICE_INTERFACE_DETAIL_DATA_AAbi>, DeviceInterfaceDetailDataSize: UInt32, RequiredSize: CPointer<UInt32>, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
-    // param-hint: DeviceInterfaceDetailData bytes=param[3] optional
-    // param-hint: RequiredSize optional
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDeviceInterfaceDetailW(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>, DeviceInterfaceDetailData: CPointer<SP_DEVICE_INTERFACE_DETAIL_DATA_WAbi>, DeviceInterfaceDetailDataSize: UInt32, RequiredSize: CPointer<UInt32>, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
-    // param-hint: PropertyKeyArray len=param[3] optional
-    // param-hint: RequiredPropertyKeyCount optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDeviceInterfacePropertyKeys(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyKeyCount: UInt32, RequiredPropertyKeyCount: CPointer<UInt32>, Flags: UInt32): Int32
-    // param-hint: PropertyKeyArray len=param[3] optional
-    // param-hint: RequiredPropertyKeyCount optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDevicePropertyKeys(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyKeyCount: UInt32, RequiredPropertyKeyCount: CPointer<UInt32>, Flags: UInt32): Int32
-    // param-hint: PropertyRegDataType optional
-    // param-hint: PropertyBuffer bytes=param[5] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDeviceRegistryPropertyA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Property: SETUP_DI_REGISTRY_PROPERTYAbi, PropertyRegDataType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: PropertyRegDataType optional
-    // param-hint: PropertyBuffer bytes=param[5] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDeviceRegistryPropertyW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Property: SETUP_DI_REGISTRY_PROPERTYAbi, PropertyRegDataType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: DeviceInfoData optional
-    // param-hint: DriverInfoDetailData bytes=param[4] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDriverInfoDetailA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_AAbi>, DriverInfoDetailData: CPointer<SP_DRVINFO_DETAIL_DATA_AAbi>, DriverInfoDetailDataSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: DeviceInfoData optional
-    // param-hint: DriverInfoDetailData bytes=param[4] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDriverInfoDetailW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_WAbi>, DriverInfoDetailData: CPointer<SP_DRVINFO_DETAIL_DATA_WAbi>, DriverInfoDetailDataSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDriverInstallParamsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_AAbi>, DriverInstallParams: CPointer<SP_DRVINSTALL_PARAMSAbi>): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDriverInstallParamsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_WAbi>, DriverInstallParams: CPointer<SP_DRVINSTALL_PARAMSAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiGetSelectedDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetSelectedDriverA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_AAbi>): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetSelectedDriverW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_WAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiInstallDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiInstallDeviceInterfaces(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiInstallDriverFiles(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
-    // param-hint: hwndParent optional
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiOpenDeviceInfoA(DeviceInfoSet: HDEVINFO, DeviceInstanceId: CPointer<UInt8>, hwndParent: CPointer<Unit>, OpenFlags: UInt32, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
-    // param-hint: hwndParent optional
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiOpenDeviceInfoW(DeviceInfoSet: HDEVINFO, DeviceInstanceId: CPointer<UInt16>, hwndParent: CPointer<Unit>, OpenFlags: UInt32, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
-    // param-hint: DeviceInterfaceData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiOpenDeviceInterfaceA(DeviceInfoSet: HDEVINFO, DevicePath: CPointer<UInt8>, OpenFlags: UInt32, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>): Int32
-    // param-hint: DeviceInterfaceData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiOpenDeviceInterfaceW(DeviceInfoSet: HDEVINFO, DevicePath: CPointer<UInt16>, OpenFlags: UInt32, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiRegisterCoDeviceInstallers(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
-    // param-hint: CompareProc optional
-    // param-hint: CompareContext optional
-    // param-hint: DupDeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiRegisterDeviceInfo(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Flags: UInt32, CompareProc: PSP_DETSIG_CMPPROC, CompareContext: CPointer<Unit>, DupDeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
-    func SetupDiRemoveDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiRemoveDeviceInterface(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiRestartDevices(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiSelectBestCompatDrv(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiSelectDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
-    // param-hint: hwndParent optional
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiSelectOEMDrv(hwndParent: CPointer<Unit>, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
-    // param-hint: DeviceInfoData optional
-    // param-hint: ClassInstallParams bytes=param[3] optional
-    // pinvoke-hint: SetLastError
-    func SetupDiSetClassInstallParamsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, ClassInstallParams: CPointer<SP_CLASSINSTALL_HEADERAbi>, ClassInstallParamsSize: UInt32): Int32
-    // param-hint: DeviceInfoData optional
-    // param-hint: ClassInstallParams bytes=param[3] optional
-    // pinvoke-hint: SetLastError
-    func SetupDiSetClassInstallParamsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, ClassInstallParams: CPointer<SP_CLASSINSTALL_HEADERAbi>, ClassInstallParamsSize: UInt32): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiSetDeviceInstallParamsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DeviceInstallParams: CPointer<SP_DEVINSTALL_PARAMS_AAbi>): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiSetDeviceInstallParamsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DeviceInstallParams: CPointer<SP_DEVINSTALL_PARAMS_WAbi>): Int32
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiSetDeviceInterfaceDefault(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATAAbi>, Flags: UInt32, Reserved: CPointer<Unit>): Int32
-    // param-hint: PropertyBuffer bytes=param[4] optional
-    // pinvoke-hint: SetLastError
-    func SetupDiSetDeviceRegistryPropertyA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Property: SETUP_DI_REGISTRY_PROPERTYAbi, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32): Int32
-    // param-hint: PropertyBuffer bytes=param[4] optional
-    // pinvoke-hint: SetLastError
-    func SetupDiSetDeviceRegistryPropertyW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Property: SETUP_DI_REGISTRY_PROPERTYAbi, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiSetDriverInstallParamsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_AAbi>, DriverInstallParams: CPointer<SP_DRVINSTALL_PARAMSAbi>): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiSetDriverInstallParamsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_WAbi>, DriverInstallParams: CPointer<SP_DRVINSTALL_PARAMSAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiSetSelectedDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
-    // param-hint: DeviceInfoData optional
-    // param-hint: DriverInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiSetSelectedDriverA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_AAbi>): Int32
-    // param-hint: DeviceInfoData optional
-    // param-hint: DriverInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiSetSelectedDriverW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_WAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiUnremoveDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>): Int32
-    // param-hint: Key optional
-    // pinvoke-hint: SetLastError
-    func SetupFindFirstLineA(InfHandle: CPointer<Unit>, Section: CPointer<UInt8>, Key: CPointer<UInt8>, Context: CPointer<INFCONTEXTAbi>): Int32
-    // param-hint: Key optional
-    // pinvoke-hint: SetLastError
-    func SetupFindFirstLineW(InfHandle: CPointer<Unit>, Section: CPointer<UInt16>, Key: CPointer<UInt16>, Context: CPointer<INFCONTEXTAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupFindNextLine(ContextIn: CPointer<INFCONTEXTAbi>, ContextOut: CPointer<INFCONTEXTAbi>): Int32
-    // param-hint: Key optional
-    // pinvoke-hint: SetLastError
-    func SetupFindNextMatchLineA(ContextIn: CPointer<INFCONTEXTAbi>, Key: CPointer<UInt8>, ContextOut: CPointer<INFCONTEXTAbi>): Int32
-    // param-hint: Key optional
-    // pinvoke-hint: SetLastError
-    func SetupFindNextMatchLineW(ContextIn: CPointer<INFCONTEXTAbi>, Key: CPointer<UInt16>, ContextOut: CPointer<INFCONTEXTAbi>): Int32
-    func SetupGetBackupInformationA(QueueHandle: CPointer<Unit>, BackupParams: CPointer<SP_BACKUP_QUEUE_PARAMS_V2_AAbi>): Int32
-    func SetupGetBackupInformationW(QueueHandle: CPointer<Unit>, BackupParams: CPointer<SP_BACKUP_QUEUE_PARAMS_V2_WAbi>): Int32
-    // param-hint: ReturnBuffer bytes=param[3] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetBinaryField(Context: CPointer<INFCONTEXTAbi>, FieldIndex: UInt32, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupGetFieldCount(Context: CPointer<INFCONTEXTAbi>): UInt32
-    // param-hint: ReturnBuffer bytes=param[3] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetInfInformationA(InfSpec: CPointer<Unit>, SearchControl: UInt32, ReturnBuffer: CPointer<SP_INF_INFORMATIONAbi>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: ReturnBuffer bytes=param[3] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetInfInformationW(InfSpec: CPointer<Unit>, SearchControl: UInt32, ReturnBuffer: CPointer<SP_INF_INFORMATIONAbi>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupGetIntField(Context: CPointer<INFCONTEXTAbi>, FieldIndex: UInt32, IntegerValue: CPointer<Int32>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupGetLineByIndexA(InfHandle: CPointer<Unit>, Section: CPointer<UInt8>, Index: UInt32, Context: CPointer<INFCONTEXTAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupGetLineByIndexW(InfHandle: CPointer<Unit>, Section: CPointer<UInt16>, Index: UInt32, Context: CPointer<INFCONTEXTAbi>): Int32
-    // param-hint: Context optional
-    // param-hint: InfHandle optional
-    // param-hint: Section optional
-    // param-hint: Key optional
-    // param-hint: ReturnBuffer len=param[5] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetLineTextA(Context: CPointer<INFCONTEXTAbi>, InfHandle: CPointer<Unit>, Section: CPointer<UInt8>, Key: CPointer<UInt8>, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: Context optional
-    // param-hint: InfHandle optional
-    // param-hint: Section optional
-    // param-hint: Key optional
-    // param-hint: ReturnBuffer len=param[5] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetLineTextW(Context: CPointer<INFCONTEXTAbi>, InfHandle: CPointer<Unit>, Section: CPointer<UInt16>, Key: CPointer<UInt16>, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: ReturnBuffer len=param[3] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetMultiSzFieldA(Context: CPointer<INFCONTEXTAbi>, FieldIndex: UInt32, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: ReturnBuffer len=param[3] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetMultiSzFieldW(Context: CPointer<INFCONTEXTAbi>, FieldIndex: UInt32, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: InfContext optional
-    // param-hint: FileName optional
-    // param-hint: ReturnBuffer len=param[5] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetSourceFileLocationA(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXTAbi>, FileName: CPointer<UInt8>, SourceId: CPointer<UInt32>, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: InfContext optional
-    // param-hint: FileName optional
-    // param-hint: ReturnBuffer len=param[5] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetSourceFileLocationW(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXTAbi>, FileName: CPointer<UInt16>, SourceId: CPointer<UInt32>, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: InfContext optional
-    // param-hint: FileName optional
-    // param-hint: Section optional
-    // pinvoke-hint: SetLastError
-    func SetupGetSourceFileSizeA(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXTAbi>, FileName: CPointer<UInt8>, Section: CPointer<UInt8>, FileSize: CPointer<UInt32>, RoundingFactor: UInt32): Int32
-    // param-hint: InfContext optional
-    // param-hint: FileName optional
-    // param-hint: Section optional
-    // pinvoke-hint: SetLastError
-    func SetupGetSourceFileSizeW(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXTAbi>, FileName: CPointer<UInt16>, Section: CPointer<UInt16>, FileSize: CPointer<UInt32>, RoundingFactor: UInt32): Int32
-    // param-hint: ReturnBuffer len=param[3] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetStringFieldA(Context: CPointer<INFCONTEXTAbi>, FieldIndex: UInt32, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: ReturnBuffer len=param[3] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetStringFieldW(Context: CPointer<INFCONTEXTAbi>, FieldIndex: UInt32, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: InfContext optional
-    // param-hint: Section optional
-    // param-hint: ReturnBuffer len=param[4] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetTargetPathA(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXTAbi>, Section: CPointer<UInt8>, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: InfContext optional
-    // param-hint: Section optional
-    // param-hint: ReturnBuffer len=param[4] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetTargetPathW(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXTAbi>, Section: CPointer<UInt16>, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: InfHandle optional
-    // param-hint: InfContext optional
-    // param-hint: SourceFile optional
-    // param-hint: SourcePathRoot optional
-    // param-hint: DestinationName optional
-    // param-hint: CopyMsgHandler optional
-    // param-hint: Context optional
-    // pinvoke-hint: SetLastError
-    func SetupInstallFileA(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXTAbi>, SourceFile: CPointer<UInt8>, SourcePathRoot: CPointer<UInt8>, DestinationName: CPointer<UInt8>, CopyStyle: SP_COPY_STYLEAbi, CopyMsgHandler: PSP_FILE_CALLBACK_A, Context: CPointer<Unit>): Int32
-    // param-hint: InfHandle optional
-    // param-hint: InfContext optional
-    // param-hint: SourceFile optional
-    // param-hint: SourcePathRoot optional
-    // param-hint: DestinationName optional
-    // param-hint: CopyMsgHandler optional
-    // param-hint: Context optional
-    // pinvoke-hint: SetLastError
-    func SetupInstallFileExA(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXTAbi>, SourceFile: CPointer<UInt8>, SourcePathRoot: CPointer<UInt8>, DestinationName: CPointer<UInt8>, CopyStyle: SP_COPY_STYLEAbi, CopyMsgHandler: PSP_FILE_CALLBACK_A, Context: CPointer<Unit>, FileWasInUse: CPointer<Int32>): Int32
-    // param-hint: InfHandle optional
-    // param-hint: InfContext optional
-    // param-hint: SourceFile optional
-    // param-hint: SourcePathRoot optional
-    // param-hint: DestinationName optional
-    // param-hint: CopyMsgHandler optional
-    // param-hint: Context optional
-    // pinvoke-hint: SetLastError
-    func SetupInstallFileExW(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXTAbi>, SourceFile: CPointer<UInt16>, SourcePathRoot: CPointer<UInt16>, DestinationName: CPointer<UInt16>, CopyStyle: SP_COPY_STYLEAbi, CopyMsgHandler: PSP_FILE_CALLBACK_W, Context: CPointer<Unit>, FileWasInUse: CPointer<Int32>): Int32
-    // param-hint: InfHandle optional
-    // param-hint: InfContext optional
-    // param-hint: SourceFile optional
-    // param-hint: SourcePathRoot optional
-    // param-hint: DestinationName optional
-    // param-hint: CopyMsgHandler optional
-    // param-hint: Context optional
-    // pinvoke-hint: SetLastError
-    func SetupInstallFileW(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXTAbi>, SourceFile: CPointer<UInt16>, SourcePathRoot: CPointer<UInt16>, DestinationName: CPointer<UInt16>, CopyStyle: SP_COPY_STYLEAbi, CopyMsgHandler: PSP_FILE_CALLBACK_W, Context: CPointer<Unit>): Int32
+    func SetupInstallServicesFromInfSectionA(InfHandle: CPointer<Unit>, SectionName: CPointer<UInt8>, Flags: SPSVCINST_FLAGSAbi): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupInstallServicesFromInfSectionA == "on"]
+public unsafe func Windows_SetupInstallServicesFromInfSectionA(InfHandle: CPointer<Unit>, SectionName: CPointer<UInt8>, Flags: SPSVCINST_FLAGSAbi): Int32 {
+    return SetupInstallServicesFromInfSectionA(InfHandle, SectionName, Flags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupInstallServicesFromInfSectionExA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: DeviceInfoSet optional
     // param-hint: DeviceInfoData optional
     // param-hint: Reserved1 optional reserved
     // param-hint: Reserved2 optional reserved
     // pinvoke-hint: SetLastError
     func SetupInstallServicesFromInfSectionExA(InfHandle: CPointer<Unit>, SectionName: CPointer<UInt8>, Flags: SPSVCINST_FLAGSAbi, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Reserved1: CPointer<Unit>, Reserved2: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupInstallServicesFromInfSectionExA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupInstallServicesFromInfSectionExA(InfHandle: CPointer<Unit>, SectionName: CPointer<UInt8>, Flags: SPSVCINST_FLAGSAbi, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Reserved1: CPointer<Unit>, Reserved2: CPointer<Unit>): Int32 {
+    return SetupInstallServicesFromInfSectionExA(InfHandle, SectionName, Flags, DeviceInfoSet, DeviceInfoData, Reserved1, Reserved2)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupInstallServicesFromInfSectionExW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: DeviceInfoSet optional
     // param-hint: DeviceInfoData optional
     // param-hint: Reserved1 optional reserved
     // param-hint: Reserved2 optional reserved
     // pinvoke-hint: SetLastError
     func SetupInstallServicesFromInfSectionExW(InfHandle: CPointer<Unit>, SectionName: CPointer<UInt16>, Flags: SPSVCINST_FLAGSAbi, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Reserved1: CPointer<Unit>, Reserved2: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupInstallServicesFromInfSectionExW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupInstallServicesFromInfSectionExW(InfHandle: CPointer<Unit>, SectionName: CPointer<UInt16>, Flags: SPSVCINST_FLAGSAbi, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Reserved1: CPointer<Unit>, Reserved2: CPointer<Unit>): Int32 {
+    return SetupInstallServicesFromInfSectionExW(InfHandle, SectionName, Flags, DeviceInfoSet, DeviceInfoData, Reserved1, Reserved2)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupInstallServicesFromInfSectionW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupInstallServicesFromInfSectionW(InfHandle: CPointer<Unit>, SectionName: CPointer<UInt16>, Flags: SPSVCINST_FLAGSAbi): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupInstallServicesFromInfSectionW == "on"]
+public unsafe func Windows_SetupInstallServicesFromInfSectionW(InfHandle: CPointer<Unit>, SectionName: CPointer<UInt16>, Flags: SPSVCINST_FLAGSAbi): Int32 {
+    return SetupInstallServicesFromInfSectionW(InfHandle, SectionName, Flags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupIterateCabinetA == "on"]
+foreign {
+    // param-hint: Reserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupIterateCabinetA(CabinetFile: CPointer<UInt8>, Reserved: UInt32, MsgHandler: PSP_FILE_CALLBACK_A, Context: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupIterateCabinetA == "on"]
+public unsafe func Windows_SetupIterateCabinetA(CabinetFile: CPointer<UInt8>, Reserved: UInt32, MsgHandler: PSP_FILE_CALLBACK_A, Context: CPointer<Unit>): Int32 {
+    return SetupIterateCabinetA(CabinetFile, Reserved, MsgHandler, Context)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupIterateCabinetW == "on"]
+foreign {
+    // param-hint: Reserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupIterateCabinetW(CabinetFile: CPointer<UInt16>, Reserved: UInt32, MsgHandler: PSP_FILE_CALLBACK_W, Context: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupIterateCabinetW == "on"]
+public unsafe func Windows_SetupIterateCabinetW(CabinetFile: CPointer<UInt16>, Reserved: UInt32, MsgHandler: PSP_FILE_CALLBACK_W, Context: CPointer<Unit>): Int32 {
+    return SetupIterateCabinetW(CabinetFile, Reserved, MsgHandler, Context)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupLogErrorA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupLogErrorA(MessageString: CPointer<UInt8>, Severity: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupLogErrorA == "on"]
+public unsafe func Windows_SetupLogErrorA(MessageString: CPointer<UInt8>, Severity: UInt32): Int32 {
+    return SetupLogErrorA(MessageString, Severity)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupLogErrorW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupLogErrorW(MessageString: CPointer<UInt16>, Severity: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupLogErrorW == "on"]
+public unsafe func Windows_SetupLogErrorW(MessageString: CPointer<UInt16>, Severity: UInt32): Int32 {
+    return SetupLogErrorW(MessageString, Severity)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupLogFileA == "on"]
+foreign {
+    // param-hint: LogSectionName optional
+    // param-hint: DiskTagfile optional
+    // param-hint: DiskDescription optional
+    // param-hint: OtherInfo optional
+    // pinvoke-hint: SetLastError
+    func SetupLogFileA(FileLogHandle: CPointer<Unit>, LogSectionName: CPointer<UInt8>, SourceFilename: CPointer<UInt8>, TargetFilename: CPointer<UInt8>, Checksum: UInt32, DiskTagfile: CPointer<UInt8>, DiskDescription: CPointer<UInt8>, OtherInfo: CPointer<UInt8>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupLogFileA == "on"]
+public unsafe func Windows_SetupLogFileA(FileLogHandle: CPointer<Unit>, LogSectionName: CPointer<UInt8>, SourceFilename: CPointer<UInt8>, TargetFilename: CPointer<UInt8>, Checksum: UInt32, DiskTagfile: CPointer<UInt8>, DiskDescription: CPointer<UInt8>, OtherInfo: CPointer<UInt8>, Flags: UInt32): Int32 {
+    return SetupLogFileA(FileLogHandle, LogSectionName, SourceFilename, TargetFilename, Checksum, DiskTagfile, DiskDescription, OtherInfo, Flags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupLogFileW == "on"]
+foreign {
+    // param-hint: LogSectionName optional
+    // param-hint: DiskTagfile optional
+    // param-hint: DiskDescription optional
+    // param-hint: OtherInfo optional
+    // pinvoke-hint: SetLastError
+    func SetupLogFileW(FileLogHandle: CPointer<Unit>, LogSectionName: CPointer<UInt16>, SourceFilename: CPointer<UInt16>, TargetFilename: CPointer<UInt16>, Checksum: UInt32, DiskTagfile: CPointer<UInt16>, DiskDescription: CPointer<UInt16>, OtherInfo: CPointer<UInt16>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupLogFileW == "on"]
+public unsafe func Windows_SetupLogFileW(FileLogHandle: CPointer<Unit>, LogSectionName: CPointer<UInt16>, SourceFilename: CPointer<UInt16>, TargetFilename: CPointer<UInt16>, Checksum: UInt32, DiskTagfile: CPointer<UInt16>, DiskDescription: CPointer<UInt16>, OtherInfo: CPointer<UInt16>, Flags: UInt32): Int32 {
+    return SetupLogFileW(FileLogHandle, LogSectionName, SourceFilename, TargetFilename, Checksum, DiskTagfile, DiskDescription, OtherInfo, Flags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupOpenAppendInfFileA == "on"]
+foreign {
+    // param-hint: FileName optional
+    // param-hint: ErrorLine optional
+    // pinvoke-hint: SetLastError
+    func SetupOpenAppendInfFileA(FileName: CPointer<UInt8>, InfHandle: CPointer<Unit>, ErrorLine: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupOpenAppendInfFileA == "on"]
+public unsafe func Windows_SetupOpenAppendInfFileA(FileName: CPointer<UInt8>, InfHandle: CPointer<Unit>, ErrorLine: CPointer<UInt32>): Int32 {
+    return SetupOpenAppendInfFileA(FileName, InfHandle, ErrorLine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupOpenAppendInfFileW == "on"]
+foreign {
+    // param-hint: FileName optional
+    // param-hint: ErrorLine optional
+    // pinvoke-hint: SetLastError
+    func SetupOpenAppendInfFileW(FileName: CPointer<UInt16>, InfHandle: CPointer<Unit>, ErrorLine: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupOpenAppendInfFileW == "on"]
+public unsafe func Windows_SetupOpenAppendInfFileW(FileName: CPointer<UInt16>, InfHandle: CPointer<Unit>, ErrorLine: CPointer<UInt32>): Int32 {
+    return SetupOpenAppendInfFileW(FileName, InfHandle, ErrorLine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupOpenFileQueue == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupOpenFileQueue(): CPointer<Unit>
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupOpenFileQueue == "on"]
+public unsafe func Windows_SetupOpenFileQueue(): CPointer<Unit> {
+    return SetupOpenFileQueue()
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupOpenInfFileA == "on"]
+foreign {
+    // param-hint: InfClass optional
+    // param-hint: ErrorLine optional
+    // pinvoke-hint: SetLastError
+    func SetupOpenInfFileA(FileName: CPointer<UInt8>, InfClass: CPointer<UInt8>, InfStyle: INF_STYLEAbi, ErrorLine: CPointer<UInt32>): CPointer<Unit>
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupOpenInfFileA == "on"]
+public unsafe func Windows_SetupOpenInfFileA(FileName: CPointer<UInt8>, InfClass: CPointer<UInt8>, InfStyle: INF_STYLEAbi, ErrorLine: CPointer<UInt32>): CPointer<Unit> {
+    return SetupOpenInfFileA(FileName, InfClass, InfStyle, ErrorLine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupOpenInfFileW == "on"]
+foreign {
+    // param-hint: InfClass optional
+    // param-hint: ErrorLine optional
+    // pinvoke-hint: SetLastError
+    func SetupOpenInfFileW(FileName: CPointer<UInt16>, InfClass: CPointer<UInt16>, InfStyle: INF_STYLEAbi, ErrorLine: CPointer<UInt32>): CPointer<Unit>
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupOpenInfFileW == "on"]
+public unsafe func Windows_SetupOpenInfFileW(FileName: CPointer<UInt16>, InfClass: CPointer<UInt16>, InfStyle: INF_STYLEAbi, ErrorLine: CPointer<UInt32>): CPointer<Unit> {
+    return SetupOpenInfFileW(FileName, InfClass, InfStyle, ErrorLine)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupOpenLog == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupOpenLog(Erase: Int32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupOpenLog == "on"]
+public unsafe func Windows_SetupOpenLog(Erase: Int32): Int32 {
+    return SetupOpenLog(Erase)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupOpenMasterInf == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupOpenMasterInf(): CPointer<Unit>
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupOpenMasterInf == "on"]
+public unsafe func Windows_SetupOpenMasterInf(): CPointer<Unit> {
+    return SetupOpenMasterInf()
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupPrepareQueueForRestoreA == "on"]
+foreign {
+    func SetupPrepareQueueForRestoreA(QueueHandle: CPointer<Unit>, BackupPath: CPointer<UInt8>, RestoreFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupPrepareQueueForRestoreA == "on"]
+public unsafe func Windows_SetupPrepareQueueForRestoreA(QueueHandle: CPointer<Unit>, BackupPath: CPointer<UInt8>, RestoreFlags: UInt32): Int32 {
+    return SetupPrepareQueueForRestoreA(QueueHandle, BackupPath, RestoreFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupPrepareQueueForRestoreW == "on"]
+foreign {
+    func SetupPrepareQueueForRestoreW(QueueHandle: CPointer<Unit>, BackupPath: CPointer<UInt16>, RestoreFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupPrepareQueueForRestoreW == "on"]
+public unsafe func Windows_SetupPrepareQueueForRestoreW(QueueHandle: CPointer<Unit>, BackupPath: CPointer<UInt16>, RestoreFlags: UInt32): Int32 {
+    return SetupPrepareQueueForRestoreW(QueueHandle, BackupPath, RestoreFlags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupPromptForDiskA == "on"]
+foreign {
+    // param-hint: DialogTitle optional
+    // param-hint: DiskName optional
+    // param-hint: PathToSource optional
+    // param-hint: TagFile optional
+    // param-hint: PathBuffer len=param[8] optional
+    // param-hint: PathRequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupPromptForDiskA(hwndParent: CPointer<Unit>, DialogTitle: CPointer<UInt8>, DiskName: CPointer<UInt8>, PathToSource: CPointer<UInt8>, FileSought: CPointer<UInt8>, TagFile: CPointer<UInt8>, DiskPromptStyle: UInt32, PathBuffer: CPointer<UInt8>, PathBufferSize: UInt32, PathRequiredSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupPromptForDiskA == "on"]
+public unsafe func Windows_SetupPromptForDiskA(hwndParent: CPointer<Unit>, DialogTitle: CPointer<UInt8>, DiskName: CPointer<UInt8>, PathToSource: CPointer<UInt8>, FileSought: CPointer<UInt8>, TagFile: CPointer<UInt8>, DiskPromptStyle: UInt32, PathBuffer: CPointer<UInt8>, PathBufferSize: UInt32, PathRequiredSize: CPointer<UInt32>): UInt32 {
+    return SetupPromptForDiskA(hwndParent, DialogTitle, DiskName, PathToSource, FileSought, TagFile, DiskPromptStyle, PathBuffer, PathBufferSize, PathRequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupPromptForDiskW == "on"]
+foreign {
+    // param-hint: DialogTitle optional
+    // param-hint: DiskName optional
+    // param-hint: PathToSource optional
+    // param-hint: TagFile optional
+    // param-hint: PathBuffer len=param[8] optional
+    // param-hint: PathRequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupPromptForDiskW(hwndParent: CPointer<Unit>, DialogTitle: CPointer<UInt16>, DiskName: CPointer<UInt16>, PathToSource: CPointer<UInt16>, FileSought: CPointer<UInt16>, TagFile: CPointer<UInt16>, DiskPromptStyle: UInt32, PathBuffer: CPointer<UInt16>, PathBufferSize: UInt32, PathRequiredSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupPromptForDiskW == "on"]
+public unsafe func Windows_SetupPromptForDiskW(hwndParent: CPointer<Unit>, DialogTitle: CPointer<UInt16>, DiskName: CPointer<UInt16>, PathToSource: CPointer<UInt16>, FileSought: CPointer<UInt16>, TagFile: CPointer<UInt16>, DiskPromptStyle: UInt32, PathBuffer: CPointer<UInt16>, PathBufferSize: UInt32, PathRequiredSize: CPointer<UInt32>): UInt32 {
+    return SetupPromptForDiskW(hwndParent, DialogTitle, DiskName, PathToSource, FileSought, TagFile, DiskPromptStyle, PathBuffer, PathBufferSize, PathRequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupPromptReboot == "on"]
+foreign {
+    // param-hint: FileQueue optional
+    // param-hint: Owner optional
+    // pinvoke-hint: SetLastError
+    func SetupPromptReboot(FileQueue: CPointer<Unit>, Owner: CPointer<Unit>, ScanOnly: Int32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupPromptReboot == "on"]
+public unsafe func Windows_SetupPromptReboot(FileQueue: CPointer<Unit>, Owner: CPointer<Unit>, ScanOnly: Int32): Int32 {
+    return SetupPromptReboot(FileQueue, Owner, ScanOnly)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueryDrivesInDiskSpaceListA == "on"]
+foreign {
+    // param-hint: ReturnBuffer len=param[2] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupQueryDrivesInDiskSpaceListA(DiskSpace: CPointer<Unit>, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueryDrivesInDiskSpaceListA == "on"]
+public unsafe func Windows_SetupQueryDrivesInDiskSpaceListA(DiskSpace: CPointer<Unit>, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupQueryDrivesInDiskSpaceListA(DiskSpace, ReturnBuffer, ReturnBufferSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueryDrivesInDiskSpaceListW == "on"]
+foreign {
+    // param-hint: ReturnBuffer len=param[2] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupQueryDrivesInDiskSpaceListW(DiskSpace: CPointer<Unit>, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueryDrivesInDiskSpaceListW == "on"]
+public unsafe func Windows_SetupQueryDrivesInDiskSpaceListW(DiskSpace: CPointer<Unit>, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupQueryDrivesInDiskSpaceListW(DiskSpace, ReturnBuffer, ReturnBufferSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueryFileLogA == "on"]
+foreign {
+    // param-hint: LogSectionName optional
+    // param-hint: DataOut len=param[5] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupQueryFileLogA(FileLogHandle: CPointer<Unit>, LogSectionName: CPointer<UInt8>, TargetFilename: CPointer<UInt8>, DesiredInfo: SetupFileLogInfoAbi, DataOut: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueryFileLogA == "on"]
+public unsafe func Windows_SetupQueryFileLogA(FileLogHandle: CPointer<Unit>, LogSectionName: CPointer<UInt8>, TargetFilename: CPointer<UInt8>, DesiredInfo: SetupFileLogInfoAbi, DataOut: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupQueryFileLogA(FileLogHandle, LogSectionName, TargetFilename, DesiredInfo, DataOut, ReturnBufferSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueryFileLogW == "on"]
+foreign {
+    // param-hint: LogSectionName optional
+    // param-hint: DataOut len=param[5] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupQueryFileLogW(FileLogHandle: CPointer<Unit>, LogSectionName: CPointer<UInt16>, TargetFilename: CPointer<UInt16>, DesiredInfo: SetupFileLogInfoAbi, DataOut: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueryFileLogW == "on"]
+public unsafe func Windows_SetupQueryFileLogW(FileLogHandle: CPointer<Unit>, LogSectionName: CPointer<UInt16>, TargetFilename: CPointer<UInt16>, DesiredInfo: SetupFileLogInfoAbi, DataOut: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupQueryFileLogW(FileLogHandle, LogSectionName, TargetFilename, DesiredInfo, DataOut, ReturnBufferSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueryInfFileInformationA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: ReturnBuffer len=param[3] optional
     // param-hint: RequiredSize optional
     // pinvoke-hint: SetLastError
     func SetupQueryInfFileInformationA(InfInformation: CPointer<SP_INF_INFORMATIONAbi>, InfIndex: UInt32, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueryInfFileInformationA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupQueryInfFileInformationA(InfInformation: CPointer<SP_INF_INFORMATIONAbi>, InfIndex: UInt32, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupQueryInfFileInformationA(InfInformation, InfIndex, ReturnBuffer, ReturnBufferSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueryInfFileInformationW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: ReturnBuffer len=param[3] optional
     // param-hint: RequiredSize optional
     // pinvoke-hint: SetLastError
     func SetupQueryInfFileInformationW(InfInformation: CPointer<SP_INF_INFORMATIONAbi>, InfIndex: UInt32, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueryInfFileInformationW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupQueryInfFileInformationW(InfInformation: CPointer<SP_INF_INFORMATIONAbi>, InfIndex: UInt32, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupQueryInfFileInformationW(InfInformation, InfIndex, ReturnBuffer, ReturnBufferSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueryInfOriginalFileInformationA == "on" && (((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")]
+foreign {
+    // param-hint: AlternatePlatformInfo optional
+    // pinvoke-hint: SetLastError
+    func SetupQueryInfOriginalFileInformationA(InfInformation: CPointer<SP_INF_INFORMATIONAbi>, InfIndex: UInt32, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2Abi>, OriginalFileInfo: CPointer<SP_ORIGINAL_FILE_INFO_AAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueryInfOriginalFileInformationA == "on" && (((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")]
+public unsafe func Windows_SetupQueryInfOriginalFileInformationA(InfInformation: CPointer<SP_INF_INFORMATIONAbi>, InfIndex: UInt32, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2Abi>, OriginalFileInfo: CPointer<SP_ORIGINAL_FILE_INFO_AAbi>): Int32 {
+    return SetupQueryInfOriginalFileInformationA(InfInformation, InfIndex, AlternatePlatformInfo, OriginalFileInfo)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueryInfOriginalFileInformationW == "on" && (((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")]
+foreign {
+    // param-hint: AlternatePlatformInfo optional
+    // pinvoke-hint: SetLastError
+    func SetupQueryInfOriginalFileInformationW(InfInformation: CPointer<SP_INF_INFORMATIONAbi>, InfIndex: UInt32, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2Abi>, OriginalFileInfo: CPointer<SP_ORIGINAL_FILE_INFO_WAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueryInfOriginalFileInformationW == "on" && (((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")]
+public unsafe func Windows_SetupQueryInfOriginalFileInformationW(InfInformation: CPointer<SP_INF_INFORMATIONAbi>, InfIndex: UInt32, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2Abi>, OriginalFileInfo: CPointer<SP_ORIGINAL_FILE_INFO_WAbi>): Int32 {
+    return SetupQueryInfOriginalFileInformationW(InfInformation, InfIndex, AlternatePlatformInfo, OriginalFileInfo)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueryInfVersionInformationA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: Key optional
     // param-hint: ReturnBuffer len=param[4] optional
     // param-hint: RequiredSize optional
     // pinvoke-hint: SetLastError
     func SetupQueryInfVersionInformationA(InfInformation: CPointer<SP_INF_INFORMATIONAbi>, InfIndex: UInt32, Key: CPointer<UInt8>, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueryInfVersionInformationA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupQueryInfVersionInformationA(InfInformation: CPointer<SP_INF_INFORMATIONAbi>, InfIndex: UInt32, Key: CPointer<UInt8>, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupQueryInfVersionInformationA(InfInformation, InfIndex, Key, ReturnBuffer, ReturnBufferSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueryInfVersionInformationW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: Key optional
     // param-hint: ReturnBuffer len=param[4] optional
     // param-hint: RequiredSize optional
     // pinvoke-hint: SetLastError
     func SetupQueryInfVersionInformationW(InfInformation: CPointer<SP_INF_INFORMATIONAbi>, InfIndex: UInt32, Key: CPointer<UInt16>, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueryInfVersionInformationW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupQueryInfVersionInformationW(InfInformation: CPointer<SP_INF_INFORMATIONAbi>, InfIndex: UInt32, Key: CPointer<UInt16>, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32 {
+    return SetupQueryInfVersionInformationW(InfInformation, InfIndex, Key, ReturnBuffer, ReturnBufferSize, RequiredSize)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQuerySourceListA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupQuerySourceListA(Flags: UInt32, List: CPointer<CPointer<CPointer<UInt8>>>, Count: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQuerySourceListA == "on"]
+public unsafe func Windows_SetupQuerySourceListA(Flags: UInt32, List: CPointer<CPointer<CPointer<UInt8>>>, Count: CPointer<UInt32>): Int32 {
+    return SetupQuerySourceListA(Flags, List, Count)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQuerySourceListW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupQuerySourceListW(Flags: UInt32, List: CPointer<CPointer<CPointer<UInt16>>>, Count: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQuerySourceListW == "on"]
+public unsafe func Windows_SetupQuerySourceListW(Flags: UInt32, List: CPointer<CPointer<CPointer<UInt16>>>, Count: CPointer<UInt32>): Int32 {
+    return SetupQuerySourceListW(Flags, List, Count)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQuerySpaceRequiredOnDriveA == "on"]
+foreign {
+    // param-hint: Reserved1 optional reserved
+    // param-hint: Reserved2 optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupQuerySpaceRequiredOnDriveA(DiskSpace: CPointer<Unit>, DriveSpec: CPointer<UInt8>, SpaceRequired: CPointer<Int64>, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQuerySpaceRequiredOnDriveA == "on"]
+public unsafe func Windows_SetupQuerySpaceRequiredOnDriveA(DiskSpace: CPointer<Unit>, DriveSpec: CPointer<UInt8>, SpaceRequired: CPointer<Int64>, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32 {
+    return SetupQuerySpaceRequiredOnDriveA(DiskSpace, DriveSpec, SpaceRequired, Reserved1, Reserved2)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQuerySpaceRequiredOnDriveW == "on"]
+foreign {
+    // param-hint: Reserved1 optional reserved
+    // param-hint: Reserved2 optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupQuerySpaceRequiredOnDriveW(DiskSpace: CPointer<Unit>, DriveSpec: CPointer<UInt16>, SpaceRequired: CPointer<Int64>, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQuerySpaceRequiredOnDriveW == "on"]
+public unsafe func Windows_SetupQuerySpaceRequiredOnDriveW(DiskSpace: CPointer<Unit>, DriveSpec: CPointer<UInt16>, SpaceRequired: CPointer<Int64>, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32 {
+    return SetupQuerySpaceRequiredOnDriveW(DiskSpace, DriveSpec, SpaceRequired, Reserved1, Reserved2)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueueCopyA == "on"]
+foreign {
+    // param-hint: SourceRootPath optional
+    // param-hint: SourcePath optional
+    // param-hint: SourceDescription optional
+    // param-hint: SourceTagfile optional
+    // param-hint: TargetFilename optional
+    // pinvoke-hint: SetLastError
+    func SetupQueueCopyA(QueueHandle: CPointer<Unit>, SourceRootPath: CPointer<UInt8>, SourcePath: CPointer<UInt8>, SourceFilename: CPointer<UInt8>, SourceDescription: CPointer<UInt8>, SourceTagfile: CPointer<UInt8>, TargetDirectory: CPointer<UInt8>, TargetFilename: CPointer<UInt8>, CopyStyle: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueueCopyA == "on"]
+public unsafe func Windows_SetupQueueCopyA(QueueHandle: CPointer<Unit>, SourceRootPath: CPointer<UInt8>, SourcePath: CPointer<UInt8>, SourceFilename: CPointer<UInt8>, SourceDescription: CPointer<UInt8>, SourceTagfile: CPointer<UInt8>, TargetDirectory: CPointer<UInt8>, TargetFilename: CPointer<UInt8>, CopyStyle: UInt32): Int32 {
+    return SetupQueueCopyA(QueueHandle, SourceRootPath, SourcePath, SourceFilename, SourceDescription, SourceTagfile, TargetDirectory, TargetFilename, CopyStyle)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueueCopyIndirectA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // pinvoke-hint: SetLastError
     func SetupQueueCopyIndirectA(CopyParams: CPointer<SP_FILE_COPY_PARAMS_AAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueueCopyIndirectA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupQueueCopyIndirectA(CopyParams: CPointer<SP_FILE_COPY_PARAMS_AAbi>): Int32 {
+    return SetupQueueCopyIndirectA(CopyParams)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueueCopyIndirectW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // pinvoke-hint: SetLastError
     func SetupQueueCopyIndirectW(CopyParams: CPointer<SP_FILE_COPY_PARAMS_WAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueueCopyIndirectW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupQueueCopyIndirectW(CopyParams: CPointer<SP_FILE_COPY_PARAMS_WAbi>): Int32 {
+    return SetupQueueCopyIndirectW(CopyParams)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueueCopySectionA == "on"]
+foreign {
+    // param-hint: SourceRootPath optional
+    // param-hint: ListInfHandle optional
+    // pinvoke-hint: SetLastError
+    func SetupQueueCopySectionA(QueueHandle: CPointer<Unit>, SourceRootPath: CPointer<UInt8>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, Section: CPointer<UInt8>, CopyStyle: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueueCopySectionA == "on"]
+public unsafe func Windows_SetupQueueCopySectionA(QueueHandle: CPointer<Unit>, SourceRootPath: CPointer<UInt8>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, Section: CPointer<UInt8>, CopyStyle: UInt32): Int32 {
+    return SetupQueueCopySectionA(QueueHandle, SourceRootPath, InfHandle, ListInfHandle, Section, CopyStyle)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueueCopySectionW == "on"]
+foreign {
+    // param-hint: SourceRootPath optional
+    // param-hint: ListInfHandle optional
+    // pinvoke-hint: SetLastError
+    func SetupQueueCopySectionW(QueueHandle: CPointer<Unit>, SourceRootPath: CPointer<UInt16>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, Section: CPointer<UInt16>, CopyStyle: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueueCopySectionW == "on"]
+public unsafe func Windows_SetupQueueCopySectionW(QueueHandle: CPointer<Unit>, SourceRootPath: CPointer<UInt16>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, Section: CPointer<UInt16>, CopyStyle: UInt32): Int32 {
+    return SetupQueueCopySectionW(QueueHandle, SourceRootPath, InfHandle, ListInfHandle, Section, CopyStyle)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueueCopyW == "on"]
+foreign {
+    // param-hint: SourceRootPath optional
+    // param-hint: SourcePath optional
+    // param-hint: SourceDescription optional
+    // param-hint: SourceTagfile optional
+    // param-hint: TargetFilename optional
+    // pinvoke-hint: SetLastError
+    func SetupQueueCopyW(QueueHandle: CPointer<Unit>, SourceRootPath: CPointer<UInt16>, SourcePath: CPointer<UInt16>, SourceFilename: CPointer<UInt16>, SourceDescription: CPointer<UInt16>, SourceTagfile: CPointer<UInt16>, TargetDirectory: CPointer<UInt16>, TargetFilename: CPointer<UInt16>, CopyStyle: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueueCopyW == "on"]
+public unsafe func Windows_SetupQueueCopyW(QueueHandle: CPointer<Unit>, SourceRootPath: CPointer<UInt16>, SourcePath: CPointer<UInt16>, SourceFilename: CPointer<UInt16>, SourceDescription: CPointer<UInt16>, SourceTagfile: CPointer<UInt16>, TargetDirectory: CPointer<UInt16>, TargetFilename: CPointer<UInt16>, CopyStyle: UInt32): Int32 {
+    return SetupQueueCopyW(QueueHandle, SourceRootPath, SourcePath, SourceFilename, SourceDescription, SourceTagfile, TargetDirectory, TargetFilename, CopyStyle)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueueDefaultCopyA == "on"]
+foreign {
+    // param-hint: SourceRootPath optional
+    // param-hint: TargetFilename optional
+    // pinvoke-hint: SetLastError
+    func SetupQueueDefaultCopyA(QueueHandle: CPointer<Unit>, InfHandle: CPointer<Unit>, SourceRootPath: CPointer<UInt8>, SourceFilename: CPointer<UInt8>, TargetFilename: CPointer<UInt8>, CopyStyle: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueueDefaultCopyA == "on"]
+public unsafe func Windows_SetupQueueDefaultCopyA(QueueHandle: CPointer<Unit>, InfHandle: CPointer<Unit>, SourceRootPath: CPointer<UInt8>, SourceFilename: CPointer<UInt8>, TargetFilename: CPointer<UInt8>, CopyStyle: UInt32): Int32 {
+    return SetupQueueDefaultCopyA(QueueHandle, InfHandle, SourceRootPath, SourceFilename, TargetFilename, CopyStyle)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueueDefaultCopyW == "on"]
+foreign {
+    // param-hint: SourceRootPath optional
+    // param-hint: TargetFilename optional
+    // pinvoke-hint: SetLastError
+    func SetupQueueDefaultCopyW(QueueHandle: CPointer<Unit>, InfHandle: CPointer<Unit>, SourceRootPath: CPointer<UInt16>, SourceFilename: CPointer<UInt16>, TargetFilename: CPointer<UInt16>, CopyStyle: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueueDefaultCopyW == "on"]
+public unsafe func Windows_SetupQueueDefaultCopyW(QueueHandle: CPointer<Unit>, InfHandle: CPointer<Unit>, SourceRootPath: CPointer<UInt16>, SourceFilename: CPointer<UInt16>, TargetFilename: CPointer<UInt16>, CopyStyle: UInt32): Int32 {
+    return SetupQueueDefaultCopyW(QueueHandle, InfHandle, SourceRootPath, SourceFilename, TargetFilename, CopyStyle)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueueDeleteA == "on"]
+foreign {
+    // param-hint: PathPart2 optional
+    // pinvoke-hint: SetLastError
+    func SetupQueueDeleteA(QueueHandle: CPointer<Unit>, PathPart1: CPointer<UInt8>, PathPart2: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueueDeleteA == "on"]
+public unsafe func Windows_SetupQueueDeleteA(QueueHandle: CPointer<Unit>, PathPart1: CPointer<UInt8>, PathPart2: CPointer<UInt8>): Int32 {
+    return SetupQueueDeleteA(QueueHandle, PathPart1, PathPart2)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueueDeleteSectionA == "on"]
+foreign {
+    // param-hint: ListInfHandle optional
+    // pinvoke-hint: SetLastError
+    func SetupQueueDeleteSectionA(QueueHandle: CPointer<Unit>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, Section: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueueDeleteSectionA == "on"]
+public unsafe func Windows_SetupQueueDeleteSectionA(QueueHandle: CPointer<Unit>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, Section: CPointer<UInt8>): Int32 {
+    return SetupQueueDeleteSectionA(QueueHandle, InfHandle, ListInfHandle, Section)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueueDeleteSectionW == "on"]
+foreign {
+    // param-hint: ListInfHandle optional
+    // pinvoke-hint: SetLastError
+    func SetupQueueDeleteSectionW(QueueHandle: CPointer<Unit>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, Section: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueueDeleteSectionW == "on"]
+public unsafe func Windows_SetupQueueDeleteSectionW(QueueHandle: CPointer<Unit>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, Section: CPointer<UInt16>): Int32 {
+    return SetupQueueDeleteSectionW(QueueHandle, InfHandle, ListInfHandle, Section)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueueDeleteW == "on"]
+foreign {
+    // param-hint: PathPart2 optional
+    // pinvoke-hint: SetLastError
+    func SetupQueueDeleteW(QueueHandle: CPointer<Unit>, PathPart1: CPointer<UInt16>, PathPart2: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueueDeleteW == "on"]
+public unsafe func Windows_SetupQueueDeleteW(QueueHandle: CPointer<Unit>, PathPart1: CPointer<UInt16>, PathPart2: CPointer<UInt16>): Int32 {
+    return SetupQueueDeleteW(QueueHandle, PathPart1, PathPart2)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueueRenameA == "on"]
+foreign {
+    // param-hint: SourceFilename optional
+    // param-hint: TargetPath optional
+    // pinvoke-hint: SetLastError
+    func SetupQueueRenameA(QueueHandle: CPointer<Unit>, SourcePath: CPointer<UInt8>, SourceFilename: CPointer<UInt8>, TargetPath: CPointer<UInt8>, TargetFilename: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueueRenameA == "on"]
+public unsafe func Windows_SetupQueueRenameA(QueueHandle: CPointer<Unit>, SourcePath: CPointer<UInt8>, SourceFilename: CPointer<UInt8>, TargetPath: CPointer<UInt8>, TargetFilename: CPointer<UInt8>): Int32 {
+    return SetupQueueRenameA(QueueHandle, SourcePath, SourceFilename, TargetPath, TargetFilename)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueueRenameSectionA == "on"]
+foreign {
+    // param-hint: ListInfHandle optional
+    // pinvoke-hint: SetLastError
+    func SetupQueueRenameSectionA(QueueHandle: CPointer<Unit>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, Section: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueueRenameSectionA == "on"]
+public unsafe func Windows_SetupQueueRenameSectionA(QueueHandle: CPointer<Unit>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, Section: CPointer<UInt8>): Int32 {
+    return SetupQueueRenameSectionA(QueueHandle, InfHandle, ListInfHandle, Section)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueueRenameSectionW == "on"]
+foreign {
+    // param-hint: ListInfHandle optional
+    // pinvoke-hint: SetLastError
+    func SetupQueueRenameSectionW(QueueHandle: CPointer<Unit>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, Section: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueueRenameSectionW == "on"]
+public unsafe func Windows_SetupQueueRenameSectionW(QueueHandle: CPointer<Unit>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, Section: CPointer<UInt16>): Int32 {
+    return SetupQueueRenameSectionW(QueueHandle, InfHandle, ListInfHandle, Section)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueueRenameW == "on"]
+foreign {
+    // param-hint: SourceFilename optional
+    // param-hint: TargetPath optional
+    // pinvoke-hint: SetLastError
+    func SetupQueueRenameW(QueueHandle: CPointer<Unit>, SourcePath: CPointer<UInt16>, SourceFilename: CPointer<UInt16>, TargetPath: CPointer<UInt16>, TargetFilename: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupQueueRenameW == "on"]
+public unsafe func Windows_SetupQueueRenameW(QueueHandle: CPointer<Unit>, SourcePath: CPointer<UInt16>, SourceFilename: CPointer<UInt16>, TargetPath: CPointer<UInt16>, TargetFilename: CPointer<UInt16>): Int32 {
+    return SetupQueueRenameW(QueueHandle, SourcePath, SourceFilename, TargetPath, TargetFilename)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupRemoveFileLogEntryA == "on"]
+foreign {
+    // param-hint: LogSectionName optional
+    // param-hint: TargetFilename optional
+    // pinvoke-hint: SetLastError
+    func SetupRemoveFileLogEntryA(FileLogHandle: CPointer<Unit>, LogSectionName: CPointer<UInt8>, TargetFilename: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupRemoveFileLogEntryA == "on"]
+public unsafe func Windows_SetupRemoveFileLogEntryA(FileLogHandle: CPointer<Unit>, LogSectionName: CPointer<UInt8>, TargetFilename: CPointer<UInt8>): Int32 {
+    return SetupRemoveFileLogEntryA(FileLogHandle, LogSectionName, TargetFilename)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupRemoveFileLogEntryW == "on"]
+foreign {
+    // param-hint: LogSectionName optional
+    // param-hint: TargetFilename optional
+    // pinvoke-hint: SetLastError
+    func SetupRemoveFileLogEntryW(FileLogHandle: CPointer<Unit>, LogSectionName: CPointer<UInt16>, TargetFilename: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupRemoveFileLogEntryW == "on"]
+public unsafe func Windows_SetupRemoveFileLogEntryW(FileLogHandle: CPointer<Unit>, LogSectionName: CPointer<UInt16>, TargetFilename: CPointer<UInt16>): Int32 {
+    return SetupRemoveFileLogEntryW(FileLogHandle, LogSectionName, TargetFilename)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupRemoveFromDiskSpaceListA == "on"]
+foreign {
+    // param-hint: Reserved1 optional reserved
+    // param-hint: Reserved2 optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupRemoveFromDiskSpaceListA(DiskSpace: CPointer<Unit>, TargetFilespec: CPointer<UInt8>, Operation: SETUP_FILE_OPERATIONAbi, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupRemoveFromDiskSpaceListA == "on"]
+public unsafe func Windows_SetupRemoveFromDiskSpaceListA(DiskSpace: CPointer<Unit>, TargetFilespec: CPointer<UInt8>, Operation: SETUP_FILE_OPERATIONAbi, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32 {
+    return SetupRemoveFromDiskSpaceListA(DiskSpace, TargetFilespec, Operation, Reserved1, Reserved2)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupRemoveFromDiskSpaceListW == "on"]
+foreign {
+    // param-hint: Reserved1 optional reserved
+    // param-hint: Reserved2 optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupRemoveFromDiskSpaceListW(DiskSpace: CPointer<Unit>, TargetFilespec: CPointer<UInt16>, Operation: SETUP_FILE_OPERATIONAbi, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupRemoveFromDiskSpaceListW == "on"]
+public unsafe func Windows_SetupRemoveFromDiskSpaceListW(DiskSpace: CPointer<Unit>, TargetFilespec: CPointer<UInt16>, Operation: SETUP_FILE_OPERATIONAbi, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32 {
+    return SetupRemoveFromDiskSpaceListW(DiskSpace, TargetFilespec, Operation, Reserved1, Reserved2)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupRemoveFromSourceListA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupRemoveFromSourceListA(Flags: UInt32, Source: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupRemoveFromSourceListA == "on"]
+public unsafe func Windows_SetupRemoveFromSourceListA(Flags: UInt32, Source: CPointer<UInt8>): Int32 {
+    return SetupRemoveFromSourceListA(Flags, Source)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupRemoveFromSourceListW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupRemoveFromSourceListW(Flags: UInt32, Source: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupRemoveFromSourceListW == "on"]
+public unsafe func Windows_SetupRemoveFromSourceListW(Flags: UInt32, Source: CPointer<UInt16>): Int32 {
+    return SetupRemoveFromSourceListW(Flags, Source)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupRemoveInstallSectionFromDiskSpaceListA == "on"]
+foreign {
+    // param-hint: LayoutInfHandle optional
+    // param-hint: Reserved1 optional reserved
+    // param-hint: Reserved2 optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupRemoveInstallSectionFromDiskSpaceListA(DiskSpace: CPointer<Unit>, InfHandle: CPointer<Unit>, LayoutInfHandle: CPointer<Unit>, SectionName: CPointer<UInt8>, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupRemoveInstallSectionFromDiskSpaceListA == "on"]
+public unsafe func Windows_SetupRemoveInstallSectionFromDiskSpaceListA(DiskSpace: CPointer<Unit>, InfHandle: CPointer<Unit>, LayoutInfHandle: CPointer<Unit>, SectionName: CPointer<UInt8>, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32 {
+    return SetupRemoveInstallSectionFromDiskSpaceListA(DiskSpace, InfHandle, LayoutInfHandle, SectionName, Reserved1, Reserved2)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupRemoveInstallSectionFromDiskSpaceListW == "on"]
+foreign {
+    // param-hint: LayoutInfHandle optional
+    // param-hint: Reserved1 optional reserved
+    // param-hint: Reserved2 optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupRemoveInstallSectionFromDiskSpaceListW(DiskSpace: CPointer<Unit>, InfHandle: CPointer<Unit>, LayoutInfHandle: CPointer<Unit>, SectionName: CPointer<UInt16>, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupRemoveInstallSectionFromDiskSpaceListW == "on"]
+public unsafe func Windows_SetupRemoveInstallSectionFromDiskSpaceListW(DiskSpace: CPointer<Unit>, InfHandle: CPointer<Unit>, LayoutInfHandle: CPointer<Unit>, SectionName: CPointer<UInt16>, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32 {
+    return SetupRemoveInstallSectionFromDiskSpaceListW(DiskSpace, InfHandle, LayoutInfHandle, SectionName, Reserved1, Reserved2)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupRemoveSectionFromDiskSpaceListA == "on"]
+foreign {
+    // param-hint: ListInfHandle optional
+    // param-hint: Reserved1 optional reserved
+    // param-hint: Reserved2 optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupRemoveSectionFromDiskSpaceListA(DiskSpace: CPointer<Unit>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, SectionName: CPointer<UInt8>, Operation: SETUP_FILE_OPERATIONAbi, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupRemoveSectionFromDiskSpaceListA == "on"]
+public unsafe func Windows_SetupRemoveSectionFromDiskSpaceListA(DiskSpace: CPointer<Unit>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, SectionName: CPointer<UInt8>, Operation: SETUP_FILE_OPERATIONAbi, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32 {
+    return SetupRemoveSectionFromDiskSpaceListA(DiskSpace, InfHandle, ListInfHandle, SectionName, Operation, Reserved1, Reserved2)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupRemoveSectionFromDiskSpaceListW == "on"]
+foreign {
+    // param-hint: ListInfHandle optional
+    // param-hint: Reserved1 optional reserved
+    // param-hint: Reserved2 optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupRemoveSectionFromDiskSpaceListW(DiskSpace: CPointer<Unit>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, SectionName: CPointer<UInt16>, Operation: SETUP_FILE_OPERATIONAbi, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupRemoveSectionFromDiskSpaceListW == "on"]
+public unsafe func Windows_SetupRemoveSectionFromDiskSpaceListW(DiskSpace: CPointer<Unit>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, SectionName: CPointer<UInt16>, Operation: SETUP_FILE_OPERATIONAbi, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32 {
+    return SetupRemoveSectionFromDiskSpaceListW(DiskSpace, InfHandle, ListInfHandle, SectionName, Operation, Reserved1, Reserved2)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupRenameErrorA == "on"]
+foreign {
+    // param-hint: DialogTitle optional
+    // pinvoke-hint: SetLastError
+    func SetupRenameErrorA(hwndParent: CPointer<Unit>, DialogTitle: CPointer<UInt8>, SourceFile: CPointer<UInt8>, TargetFile: CPointer<UInt8>, Win32ErrorCode: UInt32, Style: UInt32): UInt32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupRenameErrorA == "on"]
+public unsafe func Windows_SetupRenameErrorA(hwndParent: CPointer<Unit>, DialogTitle: CPointer<UInt8>, SourceFile: CPointer<UInt8>, TargetFile: CPointer<UInt8>, Win32ErrorCode: UInt32, Style: UInt32): UInt32 {
+    return SetupRenameErrorA(hwndParent, DialogTitle, SourceFile, TargetFile, Win32ErrorCode, Style)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupRenameErrorW == "on"]
+foreign {
+    // param-hint: DialogTitle optional
+    // pinvoke-hint: SetLastError
+    func SetupRenameErrorW(hwndParent: CPointer<Unit>, DialogTitle: CPointer<UInt16>, SourceFile: CPointer<UInt16>, TargetFile: CPointer<UInt16>, Win32ErrorCode: UInt32, Style: UInt32): UInt32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupRenameErrorW == "on"]
+public unsafe func Windows_SetupRenameErrorW(hwndParent: CPointer<Unit>, DialogTitle: CPointer<UInt16>, SourceFile: CPointer<UInt16>, TargetFile: CPointer<UInt16>, Win32ErrorCode: UInt32, Style: UInt32): UInt32 {
+    return SetupRenameErrorW(hwndParent, DialogTitle, SourceFile, TargetFile, Win32ErrorCode, Style)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupScanFileQueueA == "on"]
+foreign {
+    // param-hint: Window optional
+    // param-hint: CallbackRoutine optional
+    // param-hint: CallbackContext optional
+    // pinvoke-hint: SetLastError
+    func SetupScanFileQueueA(FileQueue: CPointer<Unit>, Flags: SETUPSCANFILEQUEUE_FLAGSAbi, Window: CPointer<Unit>, CallbackRoutine: PSP_FILE_CALLBACK_A, CallbackContext: CPointer<Unit>, Result: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupScanFileQueueA == "on"]
+public unsafe func Windows_SetupScanFileQueueA(FileQueue: CPointer<Unit>, Flags: SETUPSCANFILEQUEUE_FLAGSAbi, Window: CPointer<Unit>, CallbackRoutine: PSP_FILE_CALLBACK_A, CallbackContext: CPointer<Unit>, Result: CPointer<UInt32>): Int32 {
+    return SetupScanFileQueueA(FileQueue, Flags, Window, CallbackRoutine, CallbackContext, Result)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupScanFileQueueW == "on"]
+foreign {
+    // param-hint: Window optional
+    // param-hint: CallbackRoutine optional
+    // param-hint: CallbackContext optional
+    // pinvoke-hint: SetLastError
+    func SetupScanFileQueueW(FileQueue: CPointer<Unit>, Flags: SETUPSCANFILEQUEUE_FLAGSAbi, Window: CPointer<Unit>, CallbackRoutine: PSP_FILE_CALLBACK_W, CallbackContext: CPointer<Unit>, Result: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupScanFileQueueW == "on"]
+public unsafe func Windows_SetupScanFileQueueW(FileQueue: CPointer<Unit>, Flags: SETUPSCANFILEQUEUE_FLAGSAbi, Window: CPointer<Unit>, CallbackRoutine: PSP_FILE_CALLBACK_W, CallbackContext: CPointer<Unit>, Result: CPointer<UInt32>): Int32 {
+    return SetupScanFileQueueW(FileQueue, Flags, Window, CallbackRoutine, CallbackContext, Result)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupSetDirectoryIdA == "on"]
+foreign {
+    // param-hint: Directory optional
+    // pinvoke-hint: SetLastError
+    func SetupSetDirectoryIdA(InfHandle: CPointer<Unit>, Id: UInt32, Directory: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupSetDirectoryIdA == "on"]
+public unsafe func Windows_SetupSetDirectoryIdA(InfHandle: CPointer<Unit>, Id: UInt32, Directory: CPointer<UInt8>): Int32 {
+    return SetupSetDirectoryIdA(InfHandle, Id, Directory)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupSetDirectoryIdExA == "on"]
+foreign {
+    // param-hint: Directory optional
+    // param-hint: Reserved1 optional reserved
+    // param-hint: Reserved2 optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupSetDirectoryIdExA(InfHandle: CPointer<Unit>, Id: UInt32, Directory: CPointer<UInt8>, Flags: UInt32, Reserved1: UInt32, Reserved2: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupSetDirectoryIdExA == "on"]
+public unsafe func Windows_SetupSetDirectoryIdExA(InfHandle: CPointer<Unit>, Id: UInt32, Directory: CPointer<UInt8>, Flags: UInt32, Reserved1: UInt32, Reserved2: CPointer<Unit>): Int32 {
+    return SetupSetDirectoryIdExA(InfHandle, Id, Directory, Flags, Reserved1, Reserved2)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupSetDirectoryIdExW == "on"]
+foreign {
+    // param-hint: Directory optional
+    // param-hint: Reserved1 optional reserved
+    // param-hint: Reserved2 optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupSetDirectoryIdExW(InfHandle: CPointer<Unit>, Id: UInt32, Directory: CPointer<UInt16>, Flags: UInt32, Reserved1: UInt32, Reserved2: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupSetDirectoryIdExW == "on"]
+public unsafe func Windows_SetupSetDirectoryIdExW(InfHandle: CPointer<Unit>, Id: UInt32, Directory: CPointer<UInt16>, Flags: UInt32, Reserved1: UInt32, Reserved2: CPointer<Unit>): Int32 {
+    return SetupSetDirectoryIdExW(InfHandle, Id, Directory, Flags, Reserved1, Reserved2)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupSetDirectoryIdW == "on"]
+foreign {
+    // param-hint: Directory optional
+    // pinvoke-hint: SetLastError
+    func SetupSetDirectoryIdW(InfHandle: CPointer<Unit>, Id: UInt32, Directory: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupSetDirectoryIdW == "on"]
+public unsafe func Windows_SetupSetDirectoryIdW(InfHandle: CPointer<Unit>, Id: UInt32, Directory: CPointer<UInt16>): Int32 {
+    return SetupSetDirectoryIdW(InfHandle, Id, Directory)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupSetFileQueueAlternatePlatformA == "on" && (((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")]
+foreign {
+    // param-hint: AlternatePlatformInfo optional
+    // param-hint: AlternateDefaultCatalogFile optional
+    // pinvoke-hint: SetLastError
+    func SetupSetFileQueueAlternatePlatformA(QueueHandle: CPointer<Unit>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2Abi>, AlternateDefaultCatalogFile: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupSetFileQueueAlternatePlatformA == "on" && (((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")]
+public unsafe func Windows_SetupSetFileQueueAlternatePlatformA(QueueHandle: CPointer<Unit>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2Abi>, AlternateDefaultCatalogFile: CPointer<UInt8>): Int32 {
+    return SetupSetFileQueueAlternatePlatformA(QueueHandle, AlternatePlatformInfo, AlternateDefaultCatalogFile)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupSetFileQueueAlternatePlatformW == "on" && (((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")]
+foreign {
+    // param-hint: AlternatePlatformInfo optional
+    // param-hint: AlternateDefaultCatalogFile optional
+    // pinvoke-hint: SetLastError
+    func SetupSetFileQueueAlternatePlatformW(QueueHandle: CPointer<Unit>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2Abi>, AlternateDefaultCatalogFile: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupSetFileQueueAlternatePlatformW == "on" && (((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")]
+public unsafe func Windows_SetupSetFileQueueAlternatePlatformW(QueueHandle: CPointer<Unit>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2Abi>, AlternateDefaultCatalogFile: CPointer<UInt16>): Int32 {
+    return SetupSetFileQueueAlternatePlatformW(QueueHandle, AlternatePlatformInfo, AlternateDefaultCatalogFile)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupSetFileQueueFlags == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupSetFileQueueFlags(FileQueue: CPointer<Unit>, FlagMask: UInt32, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupSetFileQueueFlags == "on"]
+public unsafe func Windows_SetupSetFileQueueFlags(FileQueue: CPointer<Unit>, FlagMask: UInt32, Flags: UInt32): Int32 {
+    return SetupSetFileQueueFlags(FileQueue, FlagMask, Flags)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupSetNonInteractiveMode == "on"]
+foreign {
+    func SetupSetNonInteractiveMode(NonInteractiveFlag: Int32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupSetNonInteractiveMode == "on"]
+public unsafe func Windows_SetupSetNonInteractiveMode(NonInteractiveFlag: Int32): Int32 {
+    return SetupSetNonInteractiveMode(NonInteractiveFlag)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupSetPlatformPathOverrideA == "on"]
+foreign {
+    // param-hint: Override optional
+    // pinvoke-hint: SetLastError
+    func SetupSetPlatformPathOverrideA(Override: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupSetPlatformPathOverrideA == "on"]
+public unsafe func Windows_SetupSetPlatformPathOverrideA(Override: CPointer<UInt8>): Int32 {
+    return SetupSetPlatformPathOverrideA(Override)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupSetPlatformPathOverrideW == "on"]
+foreign {
+    // param-hint: Override optional
+    // pinvoke-hint: SetLastError
+    func SetupSetPlatformPathOverrideW(Override: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupSetPlatformPathOverrideW == "on"]
+public unsafe func Windows_SetupSetPlatformPathOverrideW(Override: CPointer<UInt16>): Int32 {
+    return SetupSetPlatformPathOverrideW(Override)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupSetSourceListA == "on"]
+foreign {
+    // param-hint: SourceList len=param[2]
+    // pinvoke-hint: SetLastError
+    func SetupSetSourceListA(Flags: UInt32, SourceList: CPointer<CPointer<UInt8>>, SourceCount: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupSetSourceListA == "on"]
+public unsafe func Windows_SetupSetSourceListA(Flags: UInt32, SourceList: CPointer<CPointer<UInt8>>, SourceCount: UInt32): Int32 {
+    return SetupSetSourceListA(Flags, SourceList, SourceCount)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupSetSourceListW == "on"]
+foreign {
+    // param-hint: SourceList len=param[2]
+    // pinvoke-hint: SetLastError
+    func SetupSetSourceListW(Flags: UInt32, SourceList: CPointer<CPointer<UInt16>>, SourceCount: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupSetSourceListW == "on"]
+public unsafe func Windows_SetupSetSourceListW(Flags: UInt32, SourceList: CPointer<CPointer<UInt16>>, SourceCount: UInt32): Int32 {
+    return SetupSetSourceListW(Flags, SourceList, SourceCount)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupSetThreadLogToken == "on"]
+foreign {
+    func SetupSetThreadLogToken(LogToken: UInt64): Unit
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupSetThreadLogToken == "on"]
+public unsafe func Windows_SetupSetThreadLogToken(LogToken: UInt64): Unit {
+    SetupSetThreadLogToken(LogToken)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupTermDefaultQueueCallback == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupTermDefaultQueueCallback(Context: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupTermDefaultQueueCallback == "on"]
+public unsafe func Windows_SetupTermDefaultQueueCallback(Context: CPointer<Unit>): Unit {
+    SetupTermDefaultQueueCallback(Context)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupTerminateFileLog == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupTerminateFileLog(FileLogHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupTerminateFileLog == "on"]
+public unsafe func Windows_SetupTerminateFileLog(FileLogHandle: CPointer<Unit>): Int32 {
+    return SetupTerminateFileLog(FileLogHandle)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupUninstallNewlyCopiedInfs == "on"]
+foreign {
+    // param-hint: Reserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupUninstallNewlyCopiedInfs(FileQueue: CPointer<Unit>, Flags: UInt32, Reserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupUninstallNewlyCopiedInfs == "on"]
+public unsafe func Windows_SetupUninstallNewlyCopiedInfs(FileQueue: CPointer<Unit>, Flags: UInt32, Reserved: CPointer<Unit>): Int32 {
+    return SetupUninstallNewlyCopiedInfs(FileQueue, Flags, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupUninstallOEMInfA == "on"]
+foreign {
+    // param-hint: Reserved optional reserved
+    func SetupUninstallOEMInfA(InfFileName: CPointer<UInt8>, Flags: UInt32, Reserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupUninstallOEMInfA == "on"]
+public unsafe func Windows_SetupUninstallOEMInfA(InfFileName: CPointer<UInt8>, Flags: UInt32, Reserved: CPointer<Unit>): Int32 {
+    return SetupUninstallOEMInfA(InfFileName, Flags, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupUninstallOEMInfW == "on"]
+foreign {
+    // param-hint: Reserved optional reserved
+    func SetupUninstallOEMInfW(InfFileName: CPointer<UInt16>, Flags: UInt32, Reserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupUninstallOEMInfW == "on"]
+public unsafe func Windows_SetupUninstallOEMInfW(InfFileName: CPointer<UInt16>, Flags: UInt32, Reserved: CPointer<Unit>): Int32 {
+    return SetupUninstallOEMInfW(InfFileName, Flags, Reserved)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupVerifyInfFileA == "on" && (((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")]
+foreign {
+    // param-hint: AltPlatformInfo optional
+    func SetupVerifyInfFileA(InfName: CPointer<UInt8>, AltPlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2Abi>, InfSignerInfo: CPointer<SP_INF_SIGNER_INFO_V2_AAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupVerifyInfFileA == "on" && (((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")]
+public unsafe func Windows_SetupVerifyInfFileA(InfName: CPointer<UInt8>, AltPlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2Abi>, InfSignerInfo: CPointer<SP_INF_SIGNER_INFO_V2_AAbi>): Int32 {
+    return SetupVerifyInfFileA(InfName, AltPlatformInfo, InfSignerInfo)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupVerifyInfFileW == "on" && (((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")]
+foreign {
+    // param-hint: AltPlatformInfo optional
+    func SetupVerifyInfFileW(InfName: CPointer<UInt16>, AltPlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2Abi>, InfSignerInfo: CPointer<SP_INF_SIGNER_INFO_V2_WAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupVerifyInfFileW == "on" && (((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")]
+public unsafe func Windows_SetupVerifyInfFileW(InfName: CPointer<UInt16>, AltPlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2Abi>, InfSignerInfo: CPointer<SP_INF_SIGNER_INFO_V2_WAbi>): Int32 {
+    return SetupVerifyInfFileW(InfName, AltPlatformInfo, InfSignerInfo)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupWriteTextLogInfLine == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func SetupWriteTextLogInfLine(LogToken: UInt64, Flags: UInt32, InfHandle: CPointer<Unit>, Context: CPointer<INFCONTEXTAbi>): Unit
 }
 
-@When[SETUPAPI == "on" && Windows_Win32_Devices_Properties == "on"]
-foreign {
-    // param-hint: PropertyBuffer bytes=param[4] optional
-    // param-hint: RequiredSize optional
-    // param-hint: MachineName optional
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiGetClassPropertyExW(ClassGuid: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPEAbi>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>, Flags: UInt32, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32
-    // param-hint: PropertyBuffer bytes=param[4] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetClassPropertyW(ClassGuid: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPEAbi>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>, Flags: UInt32): Int32
-    // param-hint: PropertyBuffer bytes=param[4] optional
-    // param-hint: MachineName optional
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiSetClassPropertyExW(ClassGuid: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: Win32_Devices_Properties.DEVPROPTYPEAbi, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, Flags: UInt32, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32
-    // param-hint: PropertyBuffer bytes=param[4] optional
-    // pinvoke-hint: SetLastError
-    func SetupDiSetClassPropertyW(ClassGuid: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEYAbi>, PropertyType: Win32_Devices_Properties.DEVPROPTYPEAbi, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, Flags: UInt32): Int32
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && SETUPAPI == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_SetupWriteTextLogInfLine == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SetupWriteTextLogInfLine(LogToken: UInt64, Flags: UInt32, InfHandle: CPointer<Unit>, Context: CPointer<INFCONTEXTAbi>): Unit {
+    SetupWriteTextLogInfLine(LogToken, Flags, InfHandle, Context)
 }
 
-@When[SETUPAPI == "on" && Windows_Win32_Graphics_Gdi == "on"]
-foreign {
-    func SetupDiDrawMiniIcon(hdc: Win32_Graphics_Gdi.HDC, rc: Win32_Foundation.RECTAbi, MiniIconIndex: Int32, Flags: UInt32): Int32
-}
-
-@When[SETUPAPI == "on" && Windows_Win32_System_Registry == "on"]
-foreign {
-    // param-hint: ClassGuid optional
-    // pinvoke-hint: SetLastError
-    func SetupDiOpenClassRegKey(ClassGuid: CPointer<GUID>, samDesired: UInt32): Win32_System_Registry.HKEY
-    // param-hint: ClassGuid optional
-    // param-hint: MachineName optional
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiOpenClassRegKeyExA(ClassGuid: CPointer<GUID>, samDesired: UInt32, Flags: UInt32, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): Win32_System_Registry.HKEY
-    // param-hint: ClassGuid optional
-    // param-hint: MachineName optional
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiOpenClassRegKeyExW(ClassGuid: CPointer<GUID>, samDesired: UInt32, Flags: UInt32, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Win32_System_Registry.HKEY
-}
-
-@When[SETUPAPI == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-foreign {
-    // param-hint: LargeIcon optional
-    // param-hint: MiniIconIndex optional
-    // pinvoke-hint: SetLastError
-    func SetupDiLoadClassIcon(ClassGuid: CPointer<GUID>, LargeIcon: CPointer<Win32__impl_l0.HICON>, MiniIconIndex: CPointer<Int32>): Int32
-}
-
-@When[NEWDEV == "on"]
-foreign {
-    // param-hint: hwndParent optional
-    // param-hint: NeedReboot optional
-    // pinvoke-hint: SetLastError
-    func DiInstallDriverA(hwndParent: CPointer<Unit>, InfPath: CPointer<UInt8>, Flags: DIINSTALLDRIVER_FLAGSAbi, NeedReboot: CPointer<Int32>): Int32
-    // param-hint: hwndParent optional
-    // param-hint: NeedReboot optional
-    // pinvoke-hint: SetLastError
-    func DiInstallDriverW(hwndParent: CPointer<Unit>, InfPath: CPointer<UInt16>, Flags: DIINSTALLDRIVER_FLAGSAbi, NeedReboot: CPointer<Int32>): Int32
-    // param-hint: hwndParent optional
-    // param-hint: FilePath optional
-    // param-hint: NeedReboot optional
-    func DiShowUpdateDriver(hwndParent: CPointer<Unit>, FilePath: CPointer<UInt16>, Flags: UInt32, NeedReboot: CPointer<Int32>): Int32
-    // param-hint: hwndParent optional
-    // param-hint: NeedReboot optional
-    // pinvoke-hint: SetLastError
-    func DiUninstallDriverA(hwndParent: CPointer<Unit>, InfPath: CPointer<UInt8>, Flags: DIUNINSTALLDRIVER_FLAGSAbi, NeedReboot: CPointer<Int32>): Int32
-    // param-hint: hwndParent optional
-    // param-hint: NeedReboot optional
-    // pinvoke-hint: SetLastError
-    func DiUninstallDriverW(hwndParent: CPointer<Unit>, InfPath: CPointer<UInt16>, Flags: DIUNINSTALLDRIVER_FLAGSAbi, NeedReboot: CPointer<Int32>): Int32
-    // param-hint: hwndParent optional
-    // param-hint: bRebootRequired optional
-    // pinvoke-hint: SetLastError
-    func UpdateDriverForPlugAndPlayDevicesA(hwndParent: CPointer<Unit>, HardwareId: CPointer<UInt8>, FullInfPath: CPointer<UInt8>, InstallFlags: UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGSAbi, bRebootRequired: CPointer<Int32>): Int32
-    // param-hint: hwndParent optional
-    // param-hint: bRebootRequired optional
-    // pinvoke-hint: SetLastError
-    func UpdateDriverForPlugAndPlayDevicesW(hwndParent: CPointer<Unit>, HardwareId: CPointer<UInt16>, FullInfPath: CPointer<UInt16>, InstallFlags: UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGSAbi, bRebootRequired: CPointer<Int32>): Int32
-}
-
-@When[NEWDEV == "on" && ((arch == "x86_64" || arch == "aarch64"))]
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && NEWDEV == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_DiInstallDevice == "on" && (arch == "x86_64" || arch == "aarch64")]
 foreign {
     // param-hint: hwndParent optional
     // param-hint: DriverInfoData optional
     // param-hint: NeedReboot optional
     // pinvoke-hint: SetLastError
     func DiInstallDevice(hwndParent: CPointer<Unit>, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_WAbi>, Flags: DIINSTALLDEVICE_FLAGSAbi, NeedReboot: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && NEWDEV == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_DiInstallDevice == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_DiInstallDevice(hwndParent: CPointer<Unit>, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_WAbi>, Flags: DIINSTALLDEVICE_FLAGSAbi, NeedReboot: CPointer<Int32>): Int32 {
+    return DiInstallDevice(hwndParent, DeviceInfoSet, DeviceInfoData, DriverInfoData, Flags, NeedReboot)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && NEWDEV == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_DiInstallDriverA == "on"]
+foreign {
+    // param-hint: hwndParent optional
+    // param-hint: NeedReboot optional
+    // pinvoke-hint: SetLastError
+    func DiInstallDriverA(hwndParent: CPointer<Unit>, InfPath: CPointer<UInt8>, Flags: DIINSTALLDRIVER_FLAGSAbi, NeedReboot: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && NEWDEV == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_DiInstallDriverA == "on"]
+public unsafe func Windows_DiInstallDriverA(hwndParent: CPointer<Unit>, InfPath: CPointer<UInt8>, Flags: DIINSTALLDRIVER_FLAGSAbi, NeedReboot: CPointer<Int32>): Int32 {
+    return DiInstallDriverA(hwndParent, InfPath, Flags, NeedReboot)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && NEWDEV == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_DiInstallDriverW == "on"]
+foreign {
+    // param-hint: hwndParent optional
+    // param-hint: NeedReboot optional
+    // pinvoke-hint: SetLastError
+    func DiInstallDriverW(hwndParent: CPointer<Unit>, InfPath: CPointer<UInt16>, Flags: DIINSTALLDRIVER_FLAGSAbi, NeedReboot: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && NEWDEV == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_DiInstallDriverW == "on"]
+public unsafe func Windows_DiInstallDriverW(hwndParent: CPointer<Unit>, InfPath: CPointer<UInt16>, Flags: DIINSTALLDRIVER_FLAGSAbi, NeedReboot: CPointer<Int32>): Int32 {
+    return DiInstallDriverW(hwndParent, InfPath, Flags, NeedReboot)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && NEWDEV == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_DiRollbackDriver == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: hwndParent optional
     // param-hint: NeedReboot optional
     // pinvoke-hint: SetLastError
     func DiRollbackDriver(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, hwndParent: CPointer<Unit>, Flags: DIROLLBACKDRIVER_FLAGSAbi, NeedReboot: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && NEWDEV == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_DiRollbackDriver == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_DiRollbackDriver(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, hwndParent: CPointer<Unit>, Flags: DIROLLBACKDRIVER_FLAGSAbi, NeedReboot: CPointer<Int32>): Int32 {
+    return DiRollbackDriver(DeviceInfoSet, DeviceInfoData, hwndParent, Flags, NeedReboot)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && NEWDEV == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_DiShowUpdateDevice == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: hwndParent optional
     // param-hint: NeedReboot optional
     // pinvoke-hint: SetLastError
     func DiShowUpdateDevice(hwndParent: CPointer<Unit>, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Flags: UInt32, NeedReboot: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && NEWDEV == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_DiShowUpdateDevice == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_DiShowUpdateDevice(hwndParent: CPointer<Unit>, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Flags: UInt32, NeedReboot: CPointer<Int32>): Int32 {
+    return DiShowUpdateDevice(hwndParent, DeviceInfoSet, DeviceInfoData, Flags, NeedReboot)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && NEWDEV == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_DiShowUpdateDriver == "on"]
+foreign {
+    // param-hint: hwndParent optional
+    // param-hint: FilePath optional
+    // param-hint: NeedReboot optional
+    func DiShowUpdateDriver(hwndParent: CPointer<Unit>, FilePath: CPointer<UInt16>, Flags: UInt32, NeedReboot: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && NEWDEV == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_DiShowUpdateDriver == "on"]
+public unsafe func Windows_DiShowUpdateDriver(hwndParent: CPointer<Unit>, FilePath: CPointer<UInt16>, Flags: UInt32, NeedReboot: CPointer<Int32>): Int32 {
+    return DiShowUpdateDriver(hwndParent, FilePath, Flags, NeedReboot)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && NEWDEV == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_DiUninstallDevice == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: NeedReboot optional
     // pinvoke-hint: SetLastError
     func DiUninstallDevice(hwndParent: CPointer<Unit>, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Flags: UInt32, NeedReboot: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && NEWDEV == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_DiUninstallDevice == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_DiUninstallDevice(hwndParent: CPointer<Unit>, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATAAbi>, Flags: UInt32, NeedReboot: CPointer<Int32>): Int32 {
+    return DiUninstallDevice(hwndParent, DeviceInfoSet, DeviceInfoData, Flags, NeedReboot)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && NEWDEV == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_DiUninstallDriverA == "on"]
+foreign {
+    // param-hint: hwndParent optional
+    // param-hint: NeedReboot optional
+    // pinvoke-hint: SetLastError
+    func DiUninstallDriverA(hwndParent: CPointer<Unit>, InfPath: CPointer<UInt8>, Flags: DIUNINSTALLDRIVER_FLAGSAbi, NeedReboot: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && NEWDEV == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_DiUninstallDriverA == "on"]
+public unsafe func Windows_DiUninstallDriverA(hwndParent: CPointer<Unit>, InfPath: CPointer<UInt8>, Flags: DIUNINSTALLDRIVER_FLAGSAbi, NeedReboot: CPointer<Int32>): Int32 {
+    return DiUninstallDriverA(hwndParent, InfPath, Flags, NeedReboot)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && NEWDEV == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_DiUninstallDriverW == "on"]
+foreign {
+    // param-hint: hwndParent optional
+    // param-hint: NeedReboot optional
+    // pinvoke-hint: SetLastError
+    func DiUninstallDriverW(hwndParent: CPointer<Unit>, InfPath: CPointer<UInt16>, Flags: DIUNINSTALLDRIVER_FLAGSAbi, NeedReboot: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && NEWDEV == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_DiUninstallDriverW == "on"]
+public unsafe func Windows_DiUninstallDriverW(hwndParent: CPointer<Unit>, InfPath: CPointer<UInt16>, Flags: DIUNINSTALLDRIVER_FLAGSAbi, NeedReboot: CPointer<Int32>): Int32 {
+    return DiUninstallDriverW(hwndParent, InfPath, Flags, NeedReboot)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && NEWDEV == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_UpdateDriverForPlugAndPlayDevicesA == "on"]
+foreign {
+    // param-hint: hwndParent optional
+    // param-hint: bRebootRequired optional
+    // pinvoke-hint: SetLastError
+    func UpdateDriverForPlugAndPlayDevicesA(hwndParent: CPointer<Unit>, HardwareId: CPointer<UInt8>, FullInfPath: CPointer<UInt8>, InstallFlags: UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGSAbi, bRebootRequired: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && NEWDEV == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_UpdateDriverForPlugAndPlayDevicesA == "on"]
+public unsafe func Windows_UpdateDriverForPlugAndPlayDevicesA(hwndParent: CPointer<Unit>, HardwareId: CPointer<UInt8>, FullInfPath: CPointer<UInt8>, InstallFlags: UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGSAbi, bRebootRequired: CPointer<Int32>): Int32 {
+    return UpdateDriverForPlugAndPlayDevicesA(hwndParent, HardwareId, FullInfPath, InstallFlags, bRebootRequired)
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && NEWDEV == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_UpdateDriverForPlugAndPlayDevicesW == "on"]
+foreign {
+    // param-hint: hwndParent optional
+    // param-hint: bRebootRequired optional
+    // pinvoke-hint: SetLastError
+    func UpdateDriverForPlugAndPlayDevicesW(hwndParent: CPointer<Unit>, HardwareId: CPointer<UInt16>, FullInfPath: CPointer<UInt16>, InstallFlags: UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGSAbi, bRebootRequired: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && NEWDEV == "on" && Windows_Win32_Devices_DeviceAndDriverInstallation_UpdateDriverForPlugAndPlayDevicesW == "on"]
+public unsafe func Windows_UpdateDriverForPlugAndPlayDevicesW(hwndParent: CPointer<Unit>, HardwareId: CPointer<UInt16>, FullInfPath: CPointer<UInt16>, InstallFlags: UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGSAbi, bRebootRequired: CPointer<Int32>): Int32 {
+    return UpdateDriverForPlugAndPlayDevicesW(hwndParent, HardwareId, FullInfPath, InstallFlags, bRebootRequired)
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]

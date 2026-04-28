@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrap
 import windows_interface as windows_interface
 import windows_polyfill.{unionReadFloat64, unionReadInt32, unionReadInt64, unionWriteFloat64, unionWriteInt32, unionWriteInt64}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
@@ -8769,299 +8768,1498 @@ extend PERF_COUNTER_HEADER <: windows_core.CopyType & windows_core.RuntimeType &
     }
 }
 
-@When[ADVAPI32 == "on"]
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfAddCounters == "on"]
 foreign {
     // param-hint: pCounters bytes=param[2]
     func PerfAddCounters(hQuery: CPointer<Unit>, pCounters: CPointer<PERF_COUNTER_IDENTIFIERAbi>, cbCounters: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfAddCounters == "on"]
+public unsafe func Windows_PerfAddCounters(hQuery: CPointer<Unit>, pCounters: CPointer<PERF_COUNTER_IDENTIFIERAbi>, cbCounters: UInt32): UInt32 {
+    return PerfAddCounters(hQuery, pCounters, cbCounters)
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfCloseQueryHandle == "on"]
+foreign {
     func PerfCloseQueryHandle(hQuery: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfCloseQueryHandle == "on"]
+public unsafe func Windows_PerfCloseQueryHandle(hQuery: CPointer<Unit>): UInt32 {
+    return PerfCloseQueryHandle(hQuery)
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfCreateInstance == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func PerfCreateInstance(ProviderHandle: CPointer<Unit>, CounterSetGuid: CPointer<GUID>, Name: CPointer<UInt16>, Id: UInt32): CPointer<PERF_COUNTERSET_INSTANCEAbi>
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfCreateInstance == "on"]
+public unsafe func Windows_PerfCreateInstance(ProviderHandle: CPointer<Unit>, CounterSetGuid: CPointer<GUID>, Name: CPointer<UInt16>, Id: UInt32): CPointer<PERF_COUNTERSET_INSTANCEAbi> {
+    return PerfCreateInstance(ProviderHandle, CounterSetGuid, Name, Id)
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfDecrementULongCounterValue == "on"]
+foreign {
     func PerfDecrementULongCounterValue(Provider: CPointer<Unit>, Instance: CPointer<PERF_COUNTERSET_INSTANCEAbi>, CounterId: UInt32, Value: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfDecrementULongCounterValue == "on"]
+public unsafe func Windows_PerfDecrementULongCounterValue(Provider: CPointer<Unit>, Instance: CPointer<PERF_COUNTERSET_INSTANCEAbi>, CounterId: UInt32, Value: UInt32): UInt32 {
+    return PerfDecrementULongCounterValue(Provider, Instance, CounterId, Value)
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfDecrementULongLongCounterValue == "on"]
+foreign {
     func PerfDecrementULongLongCounterValue(Provider: CPointer<Unit>, Instance: CPointer<PERF_COUNTERSET_INSTANCEAbi>, CounterId: UInt32, Value: UInt64): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfDecrementULongLongCounterValue == "on"]
+public unsafe func Windows_PerfDecrementULongLongCounterValue(Provider: CPointer<Unit>, Instance: CPointer<PERF_COUNTERSET_INSTANCEAbi>, CounterId: UInt32, Value: UInt64): UInt32 {
+    return PerfDecrementULongLongCounterValue(Provider, Instance, CounterId, Value)
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfDeleteCounters == "on"]
+foreign {
     // param-hint: pCounters bytes=param[2]
     func PerfDeleteCounters(hQuery: CPointer<Unit>, pCounters: CPointer<PERF_COUNTER_IDENTIFIERAbi>, cbCounters: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfDeleteCounters == "on"]
+public unsafe func Windows_PerfDeleteCounters(hQuery: CPointer<Unit>, pCounters: CPointer<PERF_COUNTER_IDENTIFIERAbi>, cbCounters: UInt32): UInt32 {
+    return PerfDeleteCounters(hQuery, pCounters, cbCounters)
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfDeleteInstance == "on"]
+foreign {
     func PerfDeleteInstance(Provider: CPointer<Unit>, InstanceBlock: CPointer<PERF_COUNTERSET_INSTANCEAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfDeleteInstance == "on"]
+public unsafe func Windows_PerfDeleteInstance(Provider: CPointer<Unit>, InstanceBlock: CPointer<PERF_COUNTERSET_INSTANCEAbi>): UInt32 {
+    return PerfDeleteInstance(Provider, InstanceBlock)
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfEnumerateCounterSet == "on"]
+foreign {
     // param-hint: szMachine optional
     // param-hint: pCounterSetIds len=param[2] optional
     func PerfEnumerateCounterSet(szMachine: CPointer<UInt16>, pCounterSetIds: CPointer<GUID>, cCounterSetIds: UInt32, pcCounterSetIdsActual: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfEnumerateCounterSet == "on"]
+public unsafe func Windows_PerfEnumerateCounterSet(szMachine: CPointer<UInt16>, pCounterSetIds: CPointer<GUID>, cCounterSetIds: UInt32, pcCounterSetIdsActual: CPointer<UInt32>): UInt32 {
+    return PerfEnumerateCounterSet(szMachine, pCounterSetIds, cCounterSetIds, pcCounterSetIdsActual)
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfEnumerateCounterSetInstances == "on"]
+foreign {
     // param-hint: szMachine optional
     // param-hint: pInstances bytes=param[3] optional
     func PerfEnumerateCounterSetInstances(szMachine: CPointer<UInt16>, pCounterSetId: CPointer<GUID>, pInstances: CPointer<PERF_INSTANCE_HEADERAbi>, cbInstances: UInt32, pcbInstancesActual: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfEnumerateCounterSetInstances == "on"]
+public unsafe func Windows_PerfEnumerateCounterSetInstances(szMachine: CPointer<UInt16>, pCounterSetId: CPointer<GUID>, pInstances: CPointer<PERF_INSTANCE_HEADERAbi>, cbInstances: UInt32, pcbInstancesActual: CPointer<UInt32>): UInt32 {
+    return PerfEnumerateCounterSetInstances(szMachine, pCounterSetId, pInstances, cbInstances, pcbInstancesActual)
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfIncrementULongCounterValue == "on"]
+foreign {
     func PerfIncrementULongCounterValue(Provider: CPointer<Unit>, Instance: CPointer<PERF_COUNTERSET_INSTANCEAbi>, CounterId: UInt32, Value: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfIncrementULongCounterValue == "on"]
+public unsafe func Windows_PerfIncrementULongCounterValue(Provider: CPointer<Unit>, Instance: CPointer<PERF_COUNTERSET_INSTANCEAbi>, CounterId: UInt32, Value: UInt32): UInt32 {
+    return PerfIncrementULongCounterValue(Provider, Instance, CounterId, Value)
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfIncrementULongLongCounterValue == "on"]
+foreign {
     func PerfIncrementULongLongCounterValue(Provider: CPointer<Unit>, Instance: CPointer<PERF_COUNTERSET_INSTANCEAbi>, CounterId: UInt32, Value: UInt64): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfIncrementULongLongCounterValue == "on"]
+public unsafe func Windows_PerfIncrementULongLongCounterValue(Provider: CPointer<Unit>, Instance: CPointer<PERF_COUNTERSET_INSTANCEAbi>, CounterId: UInt32, Value: UInt64): UInt32 {
+    return PerfIncrementULongLongCounterValue(Provider, Instance, CounterId, Value)
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfOpenQueryHandle == "on"]
+foreign {
     // param-hint: szMachine optional
     func PerfOpenQueryHandle(szMachine: CPointer<UInt16>, phQuery: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfOpenQueryHandle == "on"]
+public unsafe func Windows_PerfOpenQueryHandle(szMachine: CPointer<UInt16>, phQuery: CPointer<CPointer<Unit>>): UInt32 {
+    return PerfOpenQueryHandle(szMachine, phQuery)
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfQueryCounterData == "on"]
+foreign {
     // param-hint: pCounterBlock bytes=param[2] optional
     func PerfQueryCounterData(hQuery: CPointer<Unit>, pCounterBlock: CPointer<PERF_DATA_HEADERAbi>, cbCounterBlock: UInt32, pcbCounterBlockActual: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfQueryCounterData == "on"]
+public unsafe func Windows_PerfQueryCounterData(hQuery: CPointer<Unit>, pCounterBlock: CPointer<PERF_DATA_HEADERAbi>, cbCounterBlock: UInt32, pcbCounterBlockActual: CPointer<UInt32>): UInt32 {
+    return PerfQueryCounterData(hQuery, pCounterBlock, cbCounterBlock, pcbCounterBlockActual)
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfQueryCounterInfo == "on"]
+foreign {
     // param-hint: pCounters bytes=param[2] optional
     func PerfQueryCounterInfo(hQuery: CPointer<Unit>, pCounters: CPointer<PERF_COUNTER_IDENTIFIERAbi>, cbCounters: UInt32, pcbCountersActual: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfQueryCounterInfo == "on"]
+public unsafe func Windows_PerfQueryCounterInfo(hQuery: CPointer<Unit>, pCounters: CPointer<PERF_COUNTER_IDENTIFIERAbi>, cbCounters: UInt32, pcbCountersActual: CPointer<UInt32>): UInt32 {
+    return PerfQueryCounterInfo(hQuery, pCounters, cbCounters, pcbCountersActual)
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfQueryCounterSetRegistrationInfo == "on"]
+foreign {
     // param-hint: szMachine optional
     // param-hint: pbRegInfo bytes=param[5] optional
     func PerfQueryCounterSetRegistrationInfo(szMachine: CPointer<UInt16>, pCounterSetId: CPointer<GUID>, requestCode: PerfRegInfoTypeAbi, requestLangId: UInt32, pbRegInfo: CPointer<UInt8>, cbRegInfo: UInt32, pcbRegInfoActual: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfQueryCounterSetRegistrationInfo == "on"]
+public unsafe func Windows_PerfQueryCounterSetRegistrationInfo(szMachine: CPointer<UInt16>, pCounterSetId: CPointer<GUID>, requestCode: PerfRegInfoTypeAbi, requestLangId: UInt32, pbRegInfo: CPointer<UInt8>, cbRegInfo: UInt32, pcbRegInfoActual: CPointer<UInt32>): UInt32 {
+    return PerfQueryCounterSetRegistrationInfo(szMachine, pCounterSetId, requestCode, requestLangId, pbRegInfo, cbRegInfo, pcbRegInfoActual)
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfQueryInstance == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func PerfQueryInstance(ProviderHandle: CPointer<Unit>, CounterSetGuid: CPointer<GUID>, Name: CPointer<UInt16>, Id: UInt32): CPointer<PERF_COUNTERSET_INSTANCEAbi>
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfQueryInstance == "on"]
+public unsafe func Windows_PerfQueryInstance(ProviderHandle: CPointer<Unit>, CounterSetGuid: CPointer<GUID>, Name: CPointer<UInt16>, Id: UInt32): CPointer<PERF_COUNTERSET_INSTANCEAbi> {
+    return PerfQueryInstance(ProviderHandle, CounterSetGuid, Name, Id)
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfSetCounterRefValue == "on"]
+foreign {
     func PerfSetCounterRefValue(Provider: CPointer<Unit>, Instance: CPointer<PERF_COUNTERSET_INSTANCEAbi>, CounterId: UInt32, Address: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfSetCounterRefValue == "on"]
+public unsafe func Windows_PerfSetCounterRefValue(Provider: CPointer<Unit>, Instance: CPointer<PERF_COUNTERSET_INSTANCEAbi>, CounterId: UInt32, Address: CPointer<Unit>): UInt32 {
+    return PerfSetCounterRefValue(Provider, Instance, CounterId, Address)
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfSetCounterSetInfo == "on"]
+foreign {
     // param-hint: Template bytes=param[2]
     func PerfSetCounterSetInfo(ProviderHandle: CPointer<Unit>, Template: CPointer<PERF_COUNTERSET_INFOAbi>, TemplateSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfSetCounterSetInfo == "on"]
+public unsafe func Windows_PerfSetCounterSetInfo(ProviderHandle: CPointer<Unit>, Template: CPointer<PERF_COUNTERSET_INFOAbi>, TemplateSize: UInt32): UInt32 {
+    return PerfSetCounterSetInfo(ProviderHandle, Template, TemplateSize)
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfSetULongCounterValue == "on"]
+foreign {
     func PerfSetULongCounterValue(Provider: CPointer<Unit>, Instance: CPointer<PERF_COUNTERSET_INSTANCEAbi>, CounterId: UInt32, Value: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfSetULongCounterValue == "on"]
+public unsafe func Windows_PerfSetULongCounterValue(Provider: CPointer<Unit>, Instance: CPointer<PERF_COUNTERSET_INSTANCEAbi>, CounterId: UInt32, Value: UInt32): UInt32 {
+    return PerfSetULongCounterValue(Provider, Instance, CounterId, Value)
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfSetULongLongCounterValue == "on"]
+foreign {
     func PerfSetULongLongCounterValue(Provider: CPointer<Unit>, Instance: CPointer<PERF_COUNTERSET_INSTANCEAbi>, CounterId: UInt32, Value: UInt64): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfSetULongLongCounterValue == "on"]
+public unsafe func Windows_PerfSetULongLongCounterValue(Provider: CPointer<Unit>, Instance: CPointer<PERF_COUNTERSET_INSTANCEAbi>, CounterId: UInt32, Value: UInt64): UInt32 {
+    return PerfSetULongLongCounterValue(Provider, Instance, CounterId, Value)
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfStartProvider == "on"]
+foreign {
     // param-hint: ControlCallback optional
     func PerfStartProvider(ProviderGuid: CPointer<GUID>, ControlCallback: PERFLIBREQUEST, phProvider: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfStartProvider == "on"]
+public unsafe func Windows_PerfStartProvider(ProviderGuid: CPointer<GUID>, ControlCallback: PERFLIBREQUEST, phProvider: CPointer<CPointer<Unit>>): UInt32 {
+    return PerfStartProvider(ProviderGuid, ControlCallback, phProvider)
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfStartProviderEx == "on"]
+foreign {
     // param-hint: ProviderContext optional
     func PerfStartProviderEx(ProviderGuid: CPointer<GUID>, ProviderContext: CPointer<PERF_PROVIDER_CONTEXTAbi>, Provider: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfStartProviderEx == "on"]
+public unsafe func Windows_PerfStartProviderEx(ProviderGuid: CPointer<GUID>, ProviderContext: CPointer<PERF_PROVIDER_CONTEXTAbi>, Provider: CPointer<CPointer<Unit>>): UInt32 {
+    return PerfStartProviderEx(ProviderGuid, ProviderContext, Provider)
+}
+
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfStopProvider == "on"]
+foreign {
     func PerfStopProvider(ProviderHandle: CPointer<Unit>): UInt32
 }
 
-@When[KERNEL32 == "on"]
+@When[Windows_Win32_System_Performance == "on" && ADVAPI32 == "on" && Windows_Win32_System_Performance_PerfStopProvider == "on"]
+public unsafe func Windows_PerfStopProvider(ProviderHandle: CPointer<Unit>): UInt32 {
+    return PerfStopProvider(ProviderHandle)
+}
+
+@When[Windows_Win32_System_Performance == "on" && KERNEL32 == "on" && Windows_Win32_System_Performance_QueryPerformanceCounter == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func QueryPerformanceCounter(lpPerformanceCount: CPointer<Int64>): Int32
+}
+
+@When[Windows_Win32_System_Performance == "on" && KERNEL32 == "on" && Windows_Win32_System_Performance_QueryPerformanceCounter == "on"]
+public unsafe func Windows_QueryPerformanceCounter(lpPerformanceCount: CPointer<Int64>): Int32 {
+    return QueryPerformanceCounter(lpPerformanceCount)
+}
+
+@When[Windows_Win32_System_Performance == "on" && KERNEL32 == "on" && Windows_Win32_System_Performance_QueryPerformanceFrequency == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func QueryPerformanceFrequency(lpFrequency: CPointer<Int64>): Int32
 }
 
-@When[LOADPERF == "on"]
+@When[Windows_Win32_System_Performance == "on" && KERNEL32 == "on" && Windows_Win32_System_Performance_QueryPerformanceFrequency == "on"]
+public unsafe func Windows_QueryPerformanceFrequency(lpFrequency: CPointer<Int64>): Int32 {
+    return QueryPerformanceFrequency(lpFrequency)
+}
+
+@When[Windows_Win32_System_Performance == "on" && LOADPERF == "on" && Windows_Win32_System_Performance_BackupPerfRegistryToFileW == "on"]
 foreign {
     // param-hint: szCommentString optional
     func BackupPerfRegistryToFileW(szFileName: CPointer<UInt16>, szCommentString: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && LOADPERF == "on" && Windows_Win32_System_Performance_BackupPerfRegistryToFileW == "on"]
+public unsafe func Windows_BackupPerfRegistryToFileW(szFileName: CPointer<UInt16>, szCommentString: CPointer<UInt16>): UInt32 {
+    return BackupPerfRegistryToFileW(szFileName, szCommentString)
+}
+
+@When[Windows_Win32_System_Performance == "on" && LOADPERF == "on" && Windows_Win32_System_Performance_InstallPerfDllA == "on"]
+foreign {
     // param-hint: szComputerName optional
     func InstallPerfDllA(szComputerName: CPointer<UInt8>, lpIniFile: CPointer<UInt8>, dwFlags: UIntNative): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && LOADPERF == "on" && Windows_Win32_System_Performance_InstallPerfDllA == "on"]
+public unsafe func Windows_InstallPerfDllA(szComputerName: CPointer<UInt8>, lpIniFile: CPointer<UInt8>, dwFlags: UIntNative): UInt32 {
+    return InstallPerfDllA(szComputerName, lpIniFile, dwFlags)
+}
+
+@When[Windows_Win32_System_Performance == "on" && LOADPERF == "on" && Windows_Win32_System_Performance_InstallPerfDllW == "on"]
+foreign {
     // param-hint: szComputerName optional
     func InstallPerfDllW(szComputerName: CPointer<UInt16>, lpIniFile: CPointer<UInt16>, dwFlags: UIntNative): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && LOADPERF == "on" && Windows_Win32_System_Performance_InstallPerfDllW == "on"]
+public unsafe func Windows_InstallPerfDllW(szComputerName: CPointer<UInt16>, lpIniFile: CPointer<UInt16>, dwFlags: UIntNative): UInt32 {
+    return InstallPerfDllW(szComputerName, lpIniFile, dwFlags)
+}
+
+@When[Windows_Win32_System_Performance == "on" && LOADPERF == "on" && Windows_Win32_System_Performance_LoadPerfCounterTextStringsA == "on"]
+foreign {
     func LoadPerfCounterTextStringsA(lpCommandLine: CPointer<UInt8>, bQuietModeArg: Int32): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && LOADPERF == "on" && Windows_Win32_System_Performance_LoadPerfCounterTextStringsA == "on"]
+public unsafe func Windows_LoadPerfCounterTextStringsA(lpCommandLine: CPointer<UInt8>, bQuietModeArg: Int32): UInt32 {
+    return LoadPerfCounterTextStringsA(lpCommandLine, bQuietModeArg)
+}
+
+@When[Windows_Win32_System_Performance == "on" && LOADPERF == "on" && Windows_Win32_System_Performance_LoadPerfCounterTextStringsW == "on"]
+foreign {
     func LoadPerfCounterTextStringsW(lpCommandLine: CPointer<UInt16>, bQuietModeArg: Int32): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && LOADPERF == "on" && Windows_Win32_System_Performance_LoadPerfCounterTextStringsW == "on"]
+public unsafe func Windows_LoadPerfCounterTextStringsW(lpCommandLine: CPointer<UInt16>, bQuietModeArg: Int32): UInt32 {
+    return LoadPerfCounterTextStringsW(lpCommandLine, bQuietModeArg)
+}
+
+@When[Windows_Win32_System_Performance == "on" && LOADPERF == "on" && Windows_Win32_System_Performance_RestorePerfRegistryFromFileW == "on"]
+foreign {
     // param-hint: szFileName optional
     // param-hint: szLangId optional
     func RestorePerfRegistryFromFileW(szFileName: CPointer<UInt16>, szLangId: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && LOADPERF == "on" && Windows_Win32_System_Performance_RestorePerfRegistryFromFileW == "on"]
+public unsafe func Windows_RestorePerfRegistryFromFileW(szFileName: CPointer<UInt16>, szLangId: CPointer<UInt16>): UInt32 {
+    return RestorePerfRegistryFromFileW(szFileName, szLangId)
+}
+
+@When[Windows_Win32_System_Performance == "on" && LOADPERF == "on" && Windows_Win32_System_Performance_SetServiceAsTrustedA == "on"]
+foreign {
     // param-hint: szReserved optional
     func SetServiceAsTrustedA(szReserved: CPointer<UInt8>, szServiceName: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && LOADPERF == "on" && Windows_Win32_System_Performance_SetServiceAsTrustedA == "on"]
+public unsafe func Windows_SetServiceAsTrustedA(szReserved: CPointer<UInt8>, szServiceName: CPointer<UInt8>): UInt32 {
+    return SetServiceAsTrustedA(szReserved, szServiceName)
+}
+
+@When[Windows_Win32_System_Performance == "on" && LOADPERF == "on" && Windows_Win32_System_Performance_SetServiceAsTrustedW == "on"]
+foreign {
     // param-hint: szReserved optional
     func SetServiceAsTrustedW(szReserved: CPointer<UInt16>, szServiceName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && LOADPERF == "on" && Windows_Win32_System_Performance_SetServiceAsTrustedW == "on"]
+public unsafe func Windows_SetServiceAsTrustedW(szReserved: CPointer<UInt16>, szServiceName: CPointer<UInt16>): UInt32 {
+    return SetServiceAsTrustedW(szReserved, szServiceName)
+}
+
+@When[Windows_Win32_System_Performance == "on" && LOADPERF == "on" && Windows_Win32_System_Performance_UnloadPerfCounterTextStringsA == "on"]
+foreign {
     func UnloadPerfCounterTextStringsA(lpCommandLine: CPointer<UInt8>, bQuietModeArg: Int32): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && LOADPERF == "on" && Windows_Win32_System_Performance_UnloadPerfCounterTextStringsA == "on"]
+public unsafe func Windows_UnloadPerfCounterTextStringsA(lpCommandLine: CPointer<UInt8>, bQuietModeArg: Int32): UInt32 {
+    return UnloadPerfCounterTextStringsA(lpCommandLine, bQuietModeArg)
+}
+
+@When[Windows_Win32_System_Performance == "on" && LOADPERF == "on" && Windows_Win32_System_Performance_UnloadPerfCounterTextStringsW == "on"]
+foreign {
     func UnloadPerfCounterTextStringsW(lpCommandLine: CPointer<UInt16>, bQuietModeArg: Int32): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && LOADPERF == "on" && Windows_Win32_System_Performance_UnloadPerfCounterTextStringsW == "on"]
+public unsafe func Windows_UnloadPerfCounterTextStringsW(lpCommandLine: CPointer<UInt16>, bQuietModeArg: Int32): UInt32 {
+    return UnloadPerfCounterTextStringsW(lpCommandLine, bQuietModeArg)
+}
+
+@When[Windows_Win32_System_Performance == "on" && LOADPERF == "on" && Windows_Win32_System_Performance_UpdatePerfNameFilesA == "on"]
+foreign {
     // param-hint: szNewHlpFilePath optional
     func UpdatePerfNameFilesA(szNewCtrFilePath: CPointer<UInt8>, szNewHlpFilePath: CPointer<UInt8>, szLanguageID: CPointer<UInt8>, dwModes: UIntNative): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && LOADPERF == "on" && Windows_Win32_System_Performance_UpdatePerfNameFilesA == "on"]
+public unsafe func Windows_UpdatePerfNameFilesA(szNewCtrFilePath: CPointer<UInt8>, szNewHlpFilePath: CPointer<UInt8>, szLanguageID: CPointer<UInt8>, dwModes: UIntNative): UInt32 {
+    return UpdatePerfNameFilesA(szNewCtrFilePath, szNewHlpFilePath, szLanguageID, dwModes)
+}
+
+@When[Windows_Win32_System_Performance == "on" && LOADPERF == "on" && Windows_Win32_System_Performance_UpdatePerfNameFilesW == "on"]
+foreign {
     // param-hint: szNewHlpFilePath optional
     func UpdatePerfNameFilesW(szNewCtrFilePath: CPointer<UInt16>, szNewHlpFilePath: CPointer<UInt16>, szLanguageID: CPointer<UInt16>, dwModes: UIntNative): UInt32
 }
 
-@When[PDH == "on"]
+@When[Windows_Win32_System_Performance == "on" && LOADPERF == "on" && Windows_Win32_System_Performance_UpdatePerfNameFilesW == "on"]
+public unsafe func Windows_UpdatePerfNameFilesW(szNewCtrFilePath: CPointer<UInt16>, szNewHlpFilePath: CPointer<UInt16>, szLanguageID: CPointer<UInt16>, dwModes: UIntNative): UInt32 {
+    return UpdatePerfNameFilesW(szNewCtrFilePath, szNewHlpFilePath, szLanguageID, dwModes)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhAddCounterA == "on"]
 foreign {
     func PdhAddCounterA(hQuery: PDH_HQUERY, szFullCounterPath: CPointer<UInt8>, dwUserData: UIntNative, phCounter: CPointer<PDH_HCOUNTER>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhAddCounterA == "on"]
+public unsafe func Windows_PdhAddCounterA(hQuery: PDH_HQUERY, szFullCounterPath: CPointer<UInt8>, dwUserData: UIntNative, phCounter: CPointer<PDH_HCOUNTER>): UInt32 {
+    return PdhAddCounterA(hQuery, szFullCounterPath, dwUserData, phCounter)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhAddCounterW == "on"]
+foreign {
     func PdhAddCounterW(hQuery: PDH_HQUERY, szFullCounterPath: CPointer<UInt16>, dwUserData: UIntNative, phCounter: CPointer<PDH_HCOUNTER>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhAddCounterW == "on"]
+public unsafe func Windows_PdhAddCounterW(hQuery: PDH_HQUERY, szFullCounterPath: CPointer<UInt16>, dwUserData: UIntNative, phCounter: CPointer<PDH_HCOUNTER>): UInt32 {
+    return PdhAddCounterW(hQuery, szFullCounterPath, dwUserData, phCounter)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhAddEnglishCounterA == "on"]
+foreign {
     func PdhAddEnglishCounterA(hQuery: PDH_HQUERY, szFullCounterPath: CPointer<UInt8>, dwUserData: UIntNative, phCounter: CPointer<PDH_HCOUNTER>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhAddEnglishCounterA == "on"]
+public unsafe func Windows_PdhAddEnglishCounterA(hQuery: PDH_HQUERY, szFullCounterPath: CPointer<UInt8>, dwUserData: UIntNative, phCounter: CPointer<PDH_HCOUNTER>): UInt32 {
+    return PdhAddEnglishCounterA(hQuery, szFullCounterPath, dwUserData, phCounter)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhAddEnglishCounterW == "on"]
+foreign {
     func PdhAddEnglishCounterW(hQuery: PDH_HQUERY, szFullCounterPath: CPointer<UInt16>, dwUserData: UIntNative, phCounter: CPointer<PDH_HCOUNTER>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhAddEnglishCounterW == "on"]
+public unsafe func Windows_PdhAddEnglishCounterW(hQuery: PDH_HQUERY, szFullCounterPath: CPointer<UInt16>, dwUserData: UIntNative, phCounter: CPointer<PDH_HCOUNTER>): UInt32 {
+    return PdhAddEnglishCounterW(hQuery, szFullCounterPath, dwUserData, phCounter)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhBindInputDataSourceA == "on"]
+foreign {
     // param-hint: LogFileNameList optional
     func PdhBindInputDataSourceA(phDataSource: CPointer<PDH_HLOG>, LogFileNameList: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhBindInputDataSourceA == "on"]
+public unsafe func Windows_PdhBindInputDataSourceA(phDataSource: CPointer<PDH_HLOG>, LogFileNameList: CPointer<UInt8>): UInt32 {
+    return PdhBindInputDataSourceA(phDataSource, LogFileNameList)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhBindInputDataSourceW == "on"]
+foreign {
     // param-hint: LogFileNameList optional
     func PdhBindInputDataSourceW(phDataSource: CPointer<PDH_HLOG>, LogFileNameList: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhBindInputDataSourceW == "on"]
+public unsafe func Windows_PdhBindInputDataSourceW(phDataSource: CPointer<PDH_HLOG>, LogFileNameList: CPointer<UInt16>): UInt32 {
+    return PdhBindInputDataSourceW(phDataSource, LogFileNameList)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhBrowseCountersA == "on"]
+foreign {
     func PdhBrowseCountersA(pBrowseDlgData: CPointer<PDH_BROWSE_DLG_CONFIG_AAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhBrowseCountersA == "on"]
+public unsafe func Windows_PdhBrowseCountersA(pBrowseDlgData: CPointer<PDH_BROWSE_DLG_CONFIG_AAbi>): UInt32 {
+    return PdhBrowseCountersA(pBrowseDlgData)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhBrowseCountersHA == "on"]
+foreign {
     func PdhBrowseCountersHA(pBrowseDlgData: CPointer<PDH_BROWSE_DLG_CONFIG_HAAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhBrowseCountersHA == "on"]
+public unsafe func Windows_PdhBrowseCountersHA(pBrowseDlgData: CPointer<PDH_BROWSE_DLG_CONFIG_HAAbi>): UInt32 {
+    return PdhBrowseCountersHA(pBrowseDlgData)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhBrowseCountersHW == "on"]
+foreign {
     func PdhBrowseCountersHW(pBrowseDlgData: CPointer<PDH_BROWSE_DLG_CONFIG_HWAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhBrowseCountersHW == "on"]
+public unsafe func Windows_PdhBrowseCountersHW(pBrowseDlgData: CPointer<PDH_BROWSE_DLG_CONFIG_HWAbi>): UInt32 {
+    return PdhBrowseCountersHW(pBrowseDlgData)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhBrowseCountersW == "on"]
+foreign {
     func PdhBrowseCountersW(pBrowseDlgData: CPointer<PDH_BROWSE_DLG_CONFIG_WAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhBrowseCountersW == "on"]
+public unsafe func Windows_PdhBrowseCountersW(pBrowseDlgData: CPointer<PDH_BROWSE_DLG_CONFIG_WAbi>): UInt32 {
+    return PdhBrowseCountersW(pBrowseDlgData)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhCalculateCounterFromRawValue == "on"]
+foreign {
     func PdhCalculateCounterFromRawValue(hCounter: PDH_HCOUNTER, dwFormat: PDH_FMTAbi, rawValue1: CPointer<PDH_RAW_COUNTERAbi>, rawValue2: CPointer<PDH_RAW_COUNTERAbi>, fmtValue: CPointer<PDH_FMT_COUNTERVALUEAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhCalculateCounterFromRawValue == "on"]
+public unsafe func Windows_PdhCalculateCounterFromRawValue(hCounter: PDH_HCOUNTER, dwFormat: PDH_FMTAbi, rawValue1: CPointer<PDH_RAW_COUNTERAbi>, rawValue2: CPointer<PDH_RAW_COUNTERAbi>, fmtValue: CPointer<PDH_FMT_COUNTERVALUEAbi>): UInt32 {
+    return PdhCalculateCounterFromRawValue(hCounter, dwFormat, rawValue1, rawValue2, fmtValue)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhCloseLog == "on"]
+foreign {
     func PdhCloseLog(hLog: PDH_HLOG, dwFlags: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhCloseLog == "on"]
+public unsafe func Windows_PdhCloseLog(hLog: PDH_HLOG, dwFlags: UInt32): UInt32 {
+    return PdhCloseLog(hLog, dwFlags)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhCloseQuery == "on"]
+foreign {
     func PdhCloseQuery(hQuery: PDH_HQUERY): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhCloseQuery == "on"]
+public unsafe func Windows_PdhCloseQuery(hQuery: PDH_HQUERY): UInt32 {
+    return PdhCloseQuery(hQuery)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhCollectQueryData == "on"]
+foreign {
     func PdhCollectQueryData(hQuery: PDH_HQUERY): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhCollectQueryData == "on"]
+public unsafe func Windows_PdhCollectQueryData(hQuery: PDH_HQUERY): UInt32 {
+    return PdhCollectQueryData(hQuery)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhCollectQueryDataEx == "on"]
+foreign {
     func PdhCollectQueryDataEx(hQuery: PDH_HQUERY, dwIntervalTime: UInt32, hNewDataEvent: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhCollectQueryDataEx == "on"]
+public unsafe func Windows_PdhCollectQueryDataEx(hQuery: PDH_HQUERY, dwIntervalTime: UInt32, hNewDataEvent: CPointer<Unit>): UInt32 {
+    return PdhCollectQueryDataEx(hQuery, dwIntervalTime, hNewDataEvent)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhCollectQueryDataWithTime == "on"]
+foreign {
     func PdhCollectQueryDataWithTime(hQuery: PDH_HQUERY, pllTimeStamp: CPointer<Int64>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhCollectQueryDataWithTime == "on"]
+public unsafe func Windows_PdhCollectQueryDataWithTime(hQuery: PDH_HQUERY, pllTimeStamp: CPointer<Int64>): UInt32 {
+    return PdhCollectQueryDataWithTime(hQuery, pllTimeStamp)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhComputeCounterStatistics == "on"]
+foreign {
     func PdhComputeCounterStatistics(hCounter: PDH_HCOUNTER, dwFormat: PDH_FMTAbi, dwFirstEntry: UInt32, dwNumEntries: UInt32, lpRawValueArray: CPointer<PDH_RAW_COUNTERAbi>, data: CPointer<PDH_STATISTICSAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhComputeCounterStatistics == "on"]
+public unsafe func Windows_PdhComputeCounterStatistics(hCounter: PDH_HCOUNTER, dwFormat: PDH_FMTAbi, dwFirstEntry: UInt32, dwNumEntries: UInt32, lpRawValueArray: CPointer<PDH_RAW_COUNTERAbi>, data: CPointer<PDH_STATISTICSAbi>): UInt32 {
+    return PdhComputeCounterStatistics(hCounter, dwFormat, dwFirstEntry, dwNumEntries, lpRawValueArray, data)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhConnectMachineA == "on"]
+foreign {
     // param-hint: szMachineName optional
     func PdhConnectMachineA(szMachineName: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhConnectMachineA == "on"]
+public unsafe func Windows_PdhConnectMachineA(szMachineName: CPointer<UInt8>): UInt32 {
+    return PdhConnectMachineA(szMachineName)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhConnectMachineW == "on"]
+foreign {
     // param-hint: szMachineName optional
     func PdhConnectMachineW(szMachineName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhConnectMachineW == "on"]
+public unsafe func Windows_PdhConnectMachineW(szMachineName: CPointer<UInt16>): UInt32 {
+    return PdhConnectMachineW(szMachineName)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhCreateSQLTablesA == "on"]
+foreign {
     func PdhCreateSQLTablesA(szDataSource: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhCreateSQLTablesA == "on"]
+public unsafe func Windows_PdhCreateSQLTablesA(szDataSource: CPointer<UInt8>): UInt32 {
+    return PdhCreateSQLTablesA(szDataSource)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhCreateSQLTablesW == "on"]
+foreign {
     func PdhCreateSQLTablesW(szDataSource: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhCreateSQLTablesW == "on"]
+public unsafe func Windows_PdhCreateSQLTablesW(szDataSource: CPointer<UInt16>): UInt32 {
+    return PdhCreateSQLTablesW(szDataSource)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhEnumLogSetNamesA == "on"]
+foreign {
     // param-hint: mszDataSetNameList optional
     func PdhEnumLogSetNamesA(szDataSource: CPointer<UInt8>, mszDataSetNameList: CPointer<UInt8>, pcchBufferLength: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhEnumLogSetNamesA == "on"]
+public unsafe func Windows_PdhEnumLogSetNamesA(szDataSource: CPointer<UInt8>, mszDataSetNameList: CPointer<UInt8>, pcchBufferLength: CPointer<UInt32>): UInt32 {
+    return PdhEnumLogSetNamesA(szDataSource, mszDataSetNameList, pcchBufferLength)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhEnumLogSetNamesW == "on"]
+foreign {
     // param-hint: mszDataSetNameList optional
     func PdhEnumLogSetNamesW(szDataSource: CPointer<UInt16>, mszDataSetNameList: CPointer<UInt16>, pcchBufferLength: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhEnumLogSetNamesW == "on"]
+public unsafe func Windows_PdhEnumLogSetNamesW(szDataSource: CPointer<UInt16>, mszDataSetNameList: CPointer<UInt16>, pcchBufferLength: CPointer<UInt32>): UInt32 {
+    return PdhEnumLogSetNamesW(szDataSource, mszDataSetNameList, pcchBufferLength)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhEnumMachinesA == "on"]
+foreign {
     // param-hint: szDataSource optional
     // param-hint: mszMachineList optional
     func PdhEnumMachinesA(szDataSource: CPointer<UInt8>, mszMachineList: CPointer<UInt8>, pcchBufferSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhEnumMachinesA == "on"]
+public unsafe func Windows_PdhEnumMachinesA(szDataSource: CPointer<UInt8>, mszMachineList: CPointer<UInt8>, pcchBufferSize: CPointer<UInt32>): UInt32 {
+    return PdhEnumMachinesA(szDataSource, mszMachineList, pcchBufferSize)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhEnumMachinesHA == "on"]
+foreign {
     // param-hint: hDataSource optional
     // param-hint: mszMachineList optional
     func PdhEnumMachinesHA(hDataSource: PDH_HLOG, mszMachineList: CPointer<UInt8>, pcchBufferSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhEnumMachinesHA == "on"]
+public unsafe func Windows_PdhEnumMachinesHA(hDataSource: PDH_HLOG, mszMachineList: CPointer<UInt8>, pcchBufferSize: CPointer<UInt32>): UInt32 {
+    return PdhEnumMachinesHA(hDataSource, mszMachineList, pcchBufferSize)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhEnumMachinesHW == "on"]
+foreign {
     // param-hint: hDataSource optional
     // param-hint: mszMachineList optional
     func PdhEnumMachinesHW(hDataSource: PDH_HLOG, mszMachineList: CPointer<UInt16>, pcchBufferSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhEnumMachinesHW == "on"]
+public unsafe func Windows_PdhEnumMachinesHW(hDataSource: PDH_HLOG, mszMachineList: CPointer<UInt16>, pcchBufferSize: CPointer<UInt32>): UInt32 {
+    return PdhEnumMachinesHW(hDataSource, mszMachineList, pcchBufferSize)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhEnumMachinesW == "on"]
+foreign {
     // param-hint: szDataSource optional
     // param-hint: mszMachineList optional
     func PdhEnumMachinesW(szDataSource: CPointer<UInt16>, mszMachineList: CPointer<UInt16>, pcchBufferSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhEnumMachinesW == "on"]
+public unsafe func Windows_PdhEnumMachinesW(szDataSource: CPointer<UInt16>, mszMachineList: CPointer<UInt16>, pcchBufferSize: CPointer<UInt32>): UInt32 {
+    return PdhEnumMachinesW(szDataSource, mszMachineList, pcchBufferSize)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhEnumObjectItemsA == "on"]
+foreign {
     // param-hint: szDataSource optional
     // param-hint: szMachineName optional
     // param-hint: mszCounterList optional
     // param-hint: mszInstanceList optional
     func PdhEnumObjectItemsA(szDataSource: CPointer<UInt8>, szMachineName: CPointer<UInt8>, szObjectName: CPointer<UInt8>, mszCounterList: CPointer<UInt8>, pcchCounterListLength: CPointer<UInt32>, mszInstanceList: CPointer<UInt8>, pcchInstanceListLength: CPointer<UInt32>, dwDetailLevel: PERF_DETAILAbi, dwFlags: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhEnumObjectItemsA == "on"]
+public unsafe func Windows_PdhEnumObjectItemsA(szDataSource: CPointer<UInt8>, szMachineName: CPointer<UInt8>, szObjectName: CPointer<UInt8>, mszCounterList: CPointer<UInt8>, pcchCounterListLength: CPointer<UInt32>, mszInstanceList: CPointer<UInt8>, pcchInstanceListLength: CPointer<UInt32>, dwDetailLevel: PERF_DETAILAbi, dwFlags: UInt32): UInt32 {
+    return PdhEnumObjectItemsA(szDataSource, szMachineName, szObjectName, mszCounterList, pcchCounterListLength, mszInstanceList, pcchInstanceListLength, dwDetailLevel, dwFlags)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhEnumObjectItemsHA == "on"]
+foreign {
     // param-hint: hDataSource optional
     // param-hint: szMachineName optional
     // param-hint: mszCounterList optional
     // param-hint: mszInstanceList optional
     func PdhEnumObjectItemsHA(hDataSource: PDH_HLOG, szMachineName: CPointer<UInt8>, szObjectName: CPointer<UInt8>, mszCounterList: CPointer<UInt8>, pcchCounterListLength: CPointer<UInt32>, mszInstanceList: CPointer<UInt8>, pcchInstanceListLength: CPointer<UInt32>, dwDetailLevel: PERF_DETAILAbi, dwFlags: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhEnumObjectItemsHA == "on"]
+public unsafe func Windows_PdhEnumObjectItemsHA(hDataSource: PDH_HLOG, szMachineName: CPointer<UInt8>, szObjectName: CPointer<UInt8>, mszCounterList: CPointer<UInt8>, pcchCounterListLength: CPointer<UInt32>, mszInstanceList: CPointer<UInt8>, pcchInstanceListLength: CPointer<UInt32>, dwDetailLevel: PERF_DETAILAbi, dwFlags: UInt32): UInt32 {
+    return PdhEnumObjectItemsHA(hDataSource, szMachineName, szObjectName, mszCounterList, pcchCounterListLength, mszInstanceList, pcchInstanceListLength, dwDetailLevel, dwFlags)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhEnumObjectItemsHW == "on"]
+foreign {
     // param-hint: hDataSource optional
     // param-hint: szMachineName optional
     // param-hint: mszCounterList optional
     // param-hint: mszInstanceList optional
     func PdhEnumObjectItemsHW(hDataSource: PDH_HLOG, szMachineName: CPointer<UInt16>, szObjectName: CPointer<UInt16>, mszCounterList: CPointer<UInt16>, pcchCounterListLength: CPointer<UInt32>, mszInstanceList: CPointer<UInt16>, pcchInstanceListLength: CPointer<UInt32>, dwDetailLevel: PERF_DETAILAbi, dwFlags: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhEnumObjectItemsHW == "on"]
+public unsafe func Windows_PdhEnumObjectItemsHW(hDataSource: PDH_HLOG, szMachineName: CPointer<UInt16>, szObjectName: CPointer<UInt16>, mszCounterList: CPointer<UInt16>, pcchCounterListLength: CPointer<UInt32>, mszInstanceList: CPointer<UInt16>, pcchInstanceListLength: CPointer<UInt32>, dwDetailLevel: PERF_DETAILAbi, dwFlags: UInt32): UInt32 {
+    return PdhEnumObjectItemsHW(hDataSource, szMachineName, szObjectName, mszCounterList, pcchCounterListLength, mszInstanceList, pcchInstanceListLength, dwDetailLevel, dwFlags)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhEnumObjectItemsW == "on"]
+foreign {
     // param-hint: szDataSource optional
     // param-hint: szMachineName optional
     // param-hint: mszCounterList optional
     // param-hint: mszInstanceList optional
     func PdhEnumObjectItemsW(szDataSource: CPointer<UInt16>, szMachineName: CPointer<UInt16>, szObjectName: CPointer<UInt16>, mszCounterList: CPointer<UInt16>, pcchCounterListLength: CPointer<UInt32>, mszInstanceList: CPointer<UInt16>, pcchInstanceListLength: CPointer<UInt32>, dwDetailLevel: PERF_DETAILAbi, dwFlags: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhEnumObjectItemsW == "on"]
+public unsafe func Windows_PdhEnumObjectItemsW(szDataSource: CPointer<UInt16>, szMachineName: CPointer<UInt16>, szObjectName: CPointer<UInt16>, mszCounterList: CPointer<UInt16>, pcchCounterListLength: CPointer<UInt32>, mszInstanceList: CPointer<UInt16>, pcchInstanceListLength: CPointer<UInt32>, dwDetailLevel: PERF_DETAILAbi, dwFlags: UInt32): UInt32 {
+    return PdhEnumObjectItemsW(szDataSource, szMachineName, szObjectName, mszCounterList, pcchCounterListLength, mszInstanceList, pcchInstanceListLength, dwDetailLevel, dwFlags)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhEnumObjectsA == "on"]
+foreign {
     // param-hint: szDataSource optional
     // param-hint: szMachineName optional
     // param-hint: mszObjectList optional
     func PdhEnumObjectsA(szDataSource: CPointer<UInt8>, szMachineName: CPointer<UInt8>, mszObjectList: CPointer<UInt8>, pcchBufferSize: CPointer<UInt32>, dwDetailLevel: PERF_DETAILAbi, bRefresh: Int32): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhEnumObjectsA == "on"]
+public unsafe func Windows_PdhEnumObjectsA(szDataSource: CPointer<UInt8>, szMachineName: CPointer<UInt8>, mszObjectList: CPointer<UInt8>, pcchBufferSize: CPointer<UInt32>, dwDetailLevel: PERF_DETAILAbi, bRefresh: Int32): UInt32 {
+    return PdhEnumObjectsA(szDataSource, szMachineName, mszObjectList, pcchBufferSize, dwDetailLevel, bRefresh)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhEnumObjectsHA == "on"]
+foreign {
     // param-hint: hDataSource optional
     // param-hint: szMachineName optional
     // param-hint: mszObjectList optional
     func PdhEnumObjectsHA(hDataSource: PDH_HLOG, szMachineName: CPointer<UInt8>, mszObjectList: CPointer<UInt8>, pcchBufferSize: CPointer<UInt32>, dwDetailLevel: PERF_DETAILAbi, bRefresh: Int32): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhEnumObjectsHA == "on"]
+public unsafe func Windows_PdhEnumObjectsHA(hDataSource: PDH_HLOG, szMachineName: CPointer<UInt8>, mszObjectList: CPointer<UInt8>, pcchBufferSize: CPointer<UInt32>, dwDetailLevel: PERF_DETAILAbi, bRefresh: Int32): UInt32 {
+    return PdhEnumObjectsHA(hDataSource, szMachineName, mszObjectList, pcchBufferSize, dwDetailLevel, bRefresh)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhEnumObjectsHW == "on"]
+foreign {
     // param-hint: hDataSource optional
     // param-hint: szMachineName optional
     // param-hint: mszObjectList optional
     func PdhEnumObjectsHW(hDataSource: PDH_HLOG, szMachineName: CPointer<UInt16>, mszObjectList: CPointer<UInt16>, pcchBufferSize: CPointer<UInt32>, dwDetailLevel: PERF_DETAILAbi, bRefresh: Int32): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhEnumObjectsHW == "on"]
+public unsafe func Windows_PdhEnumObjectsHW(hDataSource: PDH_HLOG, szMachineName: CPointer<UInt16>, mszObjectList: CPointer<UInt16>, pcchBufferSize: CPointer<UInt32>, dwDetailLevel: PERF_DETAILAbi, bRefresh: Int32): UInt32 {
+    return PdhEnumObjectsHW(hDataSource, szMachineName, mszObjectList, pcchBufferSize, dwDetailLevel, bRefresh)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhEnumObjectsW == "on"]
+foreign {
     // param-hint: szDataSource optional
     // param-hint: szMachineName optional
     // param-hint: mszObjectList optional
     func PdhEnumObjectsW(szDataSource: CPointer<UInt16>, szMachineName: CPointer<UInt16>, mszObjectList: CPointer<UInt16>, pcchBufferSize: CPointer<UInt32>, dwDetailLevel: PERF_DETAILAbi, bRefresh: Int32): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhEnumObjectsW == "on"]
+public unsafe func Windows_PdhEnumObjectsW(szDataSource: CPointer<UInt16>, szMachineName: CPointer<UInt16>, mszObjectList: CPointer<UInt16>, pcchBufferSize: CPointer<UInt32>, dwDetailLevel: PERF_DETAILAbi, bRefresh: Int32): UInt32 {
+    return PdhEnumObjectsW(szDataSource, szMachineName, mszObjectList, pcchBufferSize, dwDetailLevel, bRefresh)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhExpandCounterPathA == "on"]
+foreign {
     // param-hint: mszExpandedPathList optional
     func PdhExpandCounterPathA(szWildCardPath: CPointer<UInt8>, mszExpandedPathList: CPointer<UInt8>, pcchPathListLength: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhExpandCounterPathA == "on"]
+public unsafe func Windows_PdhExpandCounterPathA(szWildCardPath: CPointer<UInt8>, mszExpandedPathList: CPointer<UInt8>, pcchPathListLength: CPointer<UInt32>): UInt32 {
+    return PdhExpandCounterPathA(szWildCardPath, mszExpandedPathList, pcchPathListLength)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhExpandCounterPathW == "on"]
+foreign {
     // param-hint: mszExpandedPathList optional
     func PdhExpandCounterPathW(szWildCardPath: CPointer<UInt16>, mszExpandedPathList: CPointer<UInt16>, pcchPathListLength: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhExpandCounterPathW == "on"]
+public unsafe func Windows_PdhExpandCounterPathW(szWildCardPath: CPointer<UInt16>, mszExpandedPathList: CPointer<UInt16>, pcchPathListLength: CPointer<UInt32>): UInt32 {
+    return PdhExpandCounterPathW(szWildCardPath, mszExpandedPathList, pcchPathListLength)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhExpandWildCardPathA == "on"]
+foreign {
     // param-hint: szDataSource optional
     // param-hint: mszExpandedPathList optional
     func PdhExpandWildCardPathA(szDataSource: CPointer<UInt8>, szWildCardPath: CPointer<UInt8>, mszExpandedPathList: CPointer<UInt8>, pcchPathListLength: CPointer<UInt32>, dwFlags: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhExpandWildCardPathA == "on"]
+public unsafe func Windows_PdhExpandWildCardPathA(szDataSource: CPointer<UInt8>, szWildCardPath: CPointer<UInt8>, mszExpandedPathList: CPointer<UInt8>, pcchPathListLength: CPointer<UInt32>, dwFlags: UInt32): UInt32 {
+    return PdhExpandWildCardPathA(szDataSource, szWildCardPath, mszExpandedPathList, pcchPathListLength, dwFlags)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhExpandWildCardPathHA == "on"]
+foreign {
     // param-hint: hDataSource optional
     // param-hint: mszExpandedPathList optional
     func PdhExpandWildCardPathHA(hDataSource: PDH_HLOG, szWildCardPath: CPointer<UInt8>, mszExpandedPathList: CPointer<UInt8>, pcchPathListLength: CPointer<UInt32>, dwFlags: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhExpandWildCardPathHA == "on"]
+public unsafe func Windows_PdhExpandWildCardPathHA(hDataSource: PDH_HLOG, szWildCardPath: CPointer<UInt8>, mszExpandedPathList: CPointer<UInt8>, pcchPathListLength: CPointer<UInt32>, dwFlags: UInt32): UInt32 {
+    return PdhExpandWildCardPathHA(hDataSource, szWildCardPath, mszExpandedPathList, pcchPathListLength, dwFlags)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhExpandWildCardPathHW == "on"]
+foreign {
     // param-hint: hDataSource optional
     // param-hint: mszExpandedPathList optional
     func PdhExpandWildCardPathHW(hDataSource: PDH_HLOG, szWildCardPath: CPointer<UInt16>, mszExpandedPathList: CPointer<UInt16>, pcchPathListLength: CPointer<UInt32>, dwFlags: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhExpandWildCardPathHW == "on"]
+public unsafe func Windows_PdhExpandWildCardPathHW(hDataSource: PDH_HLOG, szWildCardPath: CPointer<UInt16>, mszExpandedPathList: CPointer<UInt16>, pcchPathListLength: CPointer<UInt32>, dwFlags: UInt32): UInt32 {
+    return PdhExpandWildCardPathHW(hDataSource, szWildCardPath, mszExpandedPathList, pcchPathListLength, dwFlags)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhExpandWildCardPathW == "on"]
+foreign {
     // param-hint: szDataSource optional
     // param-hint: mszExpandedPathList optional
     func PdhExpandWildCardPathW(szDataSource: CPointer<UInt16>, szWildCardPath: CPointer<UInt16>, mszExpandedPathList: CPointer<UInt16>, pcchPathListLength: CPointer<UInt32>, dwFlags: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhExpandWildCardPathW == "on"]
+public unsafe func Windows_PdhExpandWildCardPathW(szDataSource: CPointer<UInt16>, szWildCardPath: CPointer<UInt16>, mszExpandedPathList: CPointer<UInt16>, pcchPathListLength: CPointer<UInt32>, dwFlags: UInt32): UInt32 {
+    return PdhExpandWildCardPathW(szDataSource, szWildCardPath, mszExpandedPathList, pcchPathListLength, dwFlags)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhFormatFromRawValue == "on"]
+foreign {
     // param-hint: pTimeBase optional
     func PdhFormatFromRawValue(dwCounterType: UInt32, dwFormat: PDH_FMTAbi, pTimeBase: CPointer<Int64>, pRawValue1: CPointer<PDH_RAW_COUNTERAbi>, pRawValue2: CPointer<PDH_RAW_COUNTERAbi>, pFmtValue: CPointer<PDH_FMT_COUNTERVALUEAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhFormatFromRawValue == "on"]
+public unsafe func Windows_PdhFormatFromRawValue(dwCounterType: UInt32, dwFormat: PDH_FMTAbi, pTimeBase: CPointer<Int64>, pRawValue1: CPointer<PDH_RAW_COUNTERAbi>, pRawValue2: CPointer<PDH_RAW_COUNTERAbi>, pFmtValue: CPointer<PDH_FMT_COUNTERVALUEAbi>): UInt32 {
+    return PdhFormatFromRawValue(dwCounterType, dwFormat, pTimeBase, pRawValue1, pRawValue2, pFmtValue)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetCounterInfoA == "on"]
+foreign {
     // param-hint: lpBuffer optional
     func PdhGetCounterInfoA(hCounter: PDH_HCOUNTER, bRetrieveExplainText: UInt8, pdwBufferSize: CPointer<UInt32>, lpBuffer: CPointer<PDH_COUNTER_INFO_AAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetCounterInfoA == "on"]
+public unsafe func Windows_PdhGetCounterInfoA(hCounter: PDH_HCOUNTER, bRetrieveExplainText: UInt8, pdwBufferSize: CPointer<UInt32>, lpBuffer: CPointer<PDH_COUNTER_INFO_AAbi>): UInt32 {
+    return PdhGetCounterInfoA(hCounter, bRetrieveExplainText, pdwBufferSize, lpBuffer)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetCounterInfoW == "on"]
+foreign {
     // param-hint: lpBuffer optional
     func PdhGetCounterInfoW(hCounter: PDH_HCOUNTER, bRetrieveExplainText: UInt8, pdwBufferSize: CPointer<UInt32>, lpBuffer: CPointer<PDH_COUNTER_INFO_WAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetCounterInfoW == "on"]
+public unsafe func Windows_PdhGetCounterInfoW(hCounter: PDH_HCOUNTER, bRetrieveExplainText: UInt8, pdwBufferSize: CPointer<UInt32>, lpBuffer: CPointer<PDH_COUNTER_INFO_WAbi>): UInt32 {
+    return PdhGetCounterInfoW(hCounter, bRetrieveExplainText, pdwBufferSize, lpBuffer)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetCounterTimeBase == "on"]
+foreign {
     func PdhGetCounterTimeBase(hCounter: PDH_HCOUNTER, pTimeBase: CPointer<Int64>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetCounterTimeBase == "on"]
+public unsafe func Windows_PdhGetCounterTimeBase(hCounter: PDH_HCOUNTER, pTimeBase: CPointer<Int64>): UInt32 {
+    return PdhGetCounterTimeBase(hCounter, pTimeBase)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetDataSourceTimeRangeA == "on"]
+foreign {
     // param-hint: szDataSource optional
     func PdhGetDataSourceTimeRangeA(szDataSource: CPointer<UInt8>, pdwNumEntries: CPointer<UInt32>, pInfo: CPointer<PDH_TIME_INFOAbi>, pdwBufferSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetDataSourceTimeRangeA == "on"]
+public unsafe func Windows_PdhGetDataSourceTimeRangeA(szDataSource: CPointer<UInt8>, pdwNumEntries: CPointer<UInt32>, pInfo: CPointer<PDH_TIME_INFOAbi>, pdwBufferSize: CPointer<UInt32>): UInt32 {
+    return PdhGetDataSourceTimeRangeA(szDataSource, pdwNumEntries, pInfo, pdwBufferSize)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetDataSourceTimeRangeH == "on"]
+foreign {
     // param-hint: hDataSource optional
     func PdhGetDataSourceTimeRangeH(hDataSource: PDH_HLOG, pdwNumEntries: CPointer<UInt32>, pInfo: CPointer<PDH_TIME_INFOAbi>, pdwBufferSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetDataSourceTimeRangeH == "on"]
+public unsafe func Windows_PdhGetDataSourceTimeRangeH(hDataSource: PDH_HLOG, pdwNumEntries: CPointer<UInt32>, pInfo: CPointer<PDH_TIME_INFOAbi>, pdwBufferSize: CPointer<UInt32>): UInt32 {
+    return PdhGetDataSourceTimeRangeH(hDataSource, pdwNumEntries, pInfo, pdwBufferSize)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetDataSourceTimeRangeW == "on"]
+foreign {
     // param-hint: szDataSource optional
     func PdhGetDataSourceTimeRangeW(szDataSource: CPointer<UInt16>, pdwNumEntries: CPointer<UInt32>, pInfo: CPointer<PDH_TIME_INFOAbi>, pdwBufferSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetDataSourceTimeRangeW == "on"]
+public unsafe func Windows_PdhGetDataSourceTimeRangeW(szDataSource: CPointer<UInt16>, pdwNumEntries: CPointer<UInt32>, pInfo: CPointer<PDH_TIME_INFOAbi>, pdwBufferSize: CPointer<UInt32>): UInt32 {
+    return PdhGetDataSourceTimeRangeW(szDataSource, pdwNumEntries, pInfo, pdwBufferSize)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetDefaultPerfCounterA == "on"]
+foreign {
     // param-hint: szDataSource optional
     // param-hint: szMachineName optional
     // param-hint: szDefaultCounterName optional
     func PdhGetDefaultPerfCounterA(szDataSource: CPointer<UInt8>, szMachineName: CPointer<UInt8>, szObjectName: CPointer<UInt8>, szDefaultCounterName: CPointer<UInt8>, pcchBufferSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetDefaultPerfCounterA == "on"]
+public unsafe func Windows_PdhGetDefaultPerfCounterA(szDataSource: CPointer<UInt8>, szMachineName: CPointer<UInt8>, szObjectName: CPointer<UInt8>, szDefaultCounterName: CPointer<UInt8>, pcchBufferSize: CPointer<UInt32>): UInt32 {
+    return PdhGetDefaultPerfCounterA(szDataSource, szMachineName, szObjectName, szDefaultCounterName, pcchBufferSize)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetDefaultPerfCounterHA == "on"]
+foreign {
     // param-hint: hDataSource optional
     // param-hint: szMachineName optional
     // param-hint: szDefaultCounterName optional
     func PdhGetDefaultPerfCounterHA(hDataSource: PDH_HLOG, szMachineName: CPointer<UInt8>, szObjectName: CPointer<UInt8>, szDefaultCounterName: CPointer<UInt8>, pcchBufferSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetDefaultPerfCounterHA == "on"]
+public unsafe func Windows_PdhGetDefaultPerfCounterHA(hDataSource: PDH_HLOG, szMachineName: CPointer<UInt8>, szObjectName: CPointer<UInt8>, szDefaultCounterName: CPointer<UInt8>, pcchBufferSize: CPointer<UInt32>): UInt32 {
+    return PdhGetDefaultPerfCounterHA(hDataSource, szMachineName, szObjectName, szDefaultCounterName, pcchBufferSize)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetDefaultPerfCounterHW == "on"]
+foreign {
     // param-hint: hDataSource optional
     // param-hint: szMachineName optional
     // param-hint: szDefaultCounterName optional
     func PdhGetDefaultPerfCounterHW(hDataSource: PDH_HLOG, szMachineName: CPointer<UInt16>, szObjectName: CPointer<UInt16>, szDefaultCounterName: CPointer<UInt16>, pcchBufferSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetDefaultPerfCounterHW == "on"]
+public unsafe func Windows_PdhGetDefaultPerfCounterHW(hDataSource: PDH_HLOG, szMachineName: CPointer<UInt16>, szObjectName: CPointer<UInt16>, szDefaultCounterName: CPointer<UInt16>, pcchBufferSize: CPointer<UInt32>): UInt32 {
+    return PdhGetDefaultPerfCounterHW(hDataSource, szMachineName, szObjectName, szDefaultCounterName, pcchBufferSize)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetDefaultPerfCounterW == "on"]
+foreign {
     // param-hint: szDataSource optional
     // param-hint: szMachineName optional
     // param-hint: szDefaultCounterName optional
     func PdhGetDefaultPerfCounterW(szDataSource: CPointer<UInt16>, szMachineName: CPointer<UInt16>, szObjectName: CPointer<UInt16>, szDefaultCounterName: CPointer<UInt16>, pcchBufferSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetDefaultPerfCounterW == "on"]
+public unsafe func Windows_PdhGetDefaultPerfCounterW(szDataSource: CPointer<UInt16>, szMachineName: CPointer<UInt16>, szObjectName: CPointer<UInt16>, szDefaultCounterName: CPointer<UInt16>, pcchBufferSize: CPointer<UInt32>): UInt32 {
+    return PdhGetDefaultPerfCounterW(szDataSource, szMachineName, szObjectName, szDefaultCounterName, pcchBufferSize)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetDefaultPerfObjectA == "on"]
+foreign {
     // param-hint: szDataSource optional
     // param-hint: szMachineName optional
     // param-hint: szDefaultObjectName optional
     func PdhGetDefaultPerfObjectA(szDataSource: CPointer<UInt8>, szMachineName: CPointer<UInt8>, szDefaultObjectName: CPointer<UInt8>, pcchBufferSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetDefaultPerfObjectA == "on"]
+public unsafe func Windows_PdhGetDefaultPerfObjectA(szDataSource: CPointer<UInt8>, szMachineName: CPointer<UInt8>, szDefaultObjectName: CPointer<UInt8>, pcchBufferSize: CPointer<UInt32>): UInt32 {
+    return PdhGetDefaultPerfObjectA(szDataSource, szMachineName, szDefaultObjectName, pcchBufferSize)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetDefaultPerfObjectHA == "on"]
+foreign {
     // param-hint: hDataSource optional
     // param-hint: szMachineName optional
     // param-hint: szDefaultObjectName optional
     func PdhGetDefaultPerfObjectHA(hDataSource: PDH_HLOG, szMachineName: CPointer<UInt8>, szDefaultObjectName: CPointer<UInt8>, pcchBufferSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetDefaultPerfObjectHA == "on"]
+public unsafe func Windows_PdhGetDefaultPerfObjectHA(hDataSource: PDH_HLOG, szMachineName: CPointer<UInt8>, szDefaultObjectName: CPointer<UInt8>, pcchBufferSize: CPointer<UInt32>): UInt32 {
+    return PdhGetDefaultPerfObjectHA(hDataSource, szMachineName, szDefaultObjectName, pcchBufferSize)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetDefaultPerfObjectHW == "on"]
+foreign {
     // param-hint: hDataSource optional
     // param-hint: szMachineName optional
     // param-hint: szDefaultObjectName optional
     func PdhGetDefaultPerfObjectHW(hDataSource: PDH_HLOG, szMachineName: CPointer<UInt16>, szDefaultObjectName: CPointer<UInt16>, pcchBufferSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetDefaultPerfObjectHW == "on"]
+public unsafe func Windows_PdhGetDefaultPerfObjectHW(hDataSource: PDH_HLOG, szMachineName: CPointer<UInt16>, szDefaultObjectName: CPointer<UInt16>, pcchBufferSize: CPointer<UInt32>): UInt32 {
+    return PdhGetDefaultPerfObjectHW(hDataSource, szMachineName, szDefaultObjectName, pcchBufferSize)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetDefaultPerfObjectW == "on"]
+foreign {
     // param-hint: szDataSource optional
     // param-hint: szMachineName optional
     // param-hint: szDefaultObjectName optional
     func PdhGetDefaultPerfObjectW(szDataSource: CPointer<UInt16>, szMachineName: CPointer<UInt16>, szDefaultObjectName: CPointer<UInt16>, pcchBufferSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetDefaultPerfObjectW == "on"]
+public unsafe func Windows_PdhGetDefaultPerfObjectW(szDataSource: CPointer<UInt16>, szMachineName: CPointer<UInt16>, szDefaultObjectName: CPointer<UInt16>, pcchBufferSize: CPointer<UInt32>): UInt32 {
+    return PdhGetDefaultPerfObjectW(szDataSource, szMachineName, szDefaultObjectName, pcchBufferSize)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetDllVersion == "on"]
+foreign {
     // param-hint: lpdwVersion optional
     func PdhGetDllVersion(lpdwVersion: CPointer<PDH_DLL_VERSIONAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetDllVersion == "on"]
+public unsafe func Windows_PdhGetDllVersion(lpdwVersion: CPointer<PDH_DLL_VERSIONAbi>): UInt32 {
+    return PdhGetDllVersion(lpdwVersion)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetFormattedCounterArrayA == "on"]
+foreign {
     // param-hint: ItemBuffer optional
     func PdhGetFormattedCounterArrayA(hCounter: PDH_HCOUNTER, dwFormat: PDH_FMTAbi, lpdwBufferSize: CPointer<UInt32>, lpdwItemCount: CPointer<UInt32>, ItemBuffer: CPointer<PDH_FMT_COUNTERVALUE_ITEM_AAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetFormattedCounterArrayA == "on"]
+public unsafe func Windows_PdhGetFormattedCounterArrayA(hCounter: PDH_HCOUNTER, dwFormat: PDH_FMTAbi, lpdwBufferSize: CPointer<UInt32>, lpdwItemCount: CPointer<UInt32>, ItemBuffer: CPointer<PDH_FMT_COUNTERVALUE_ITEM_AAbi>): UInt32 {
+    return PdhGetFormattedCounterArrayA(hCounter, dwFormat, lpdwBufferSize, lpdwItemCount, ItemBuffer)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetFormattedCounterArrayW == "on"]
+foreign {
     // param-hint: ItemBuffer optional
     func PdhGetFormattedCounterArrayW(hCounter: PDH_HCOUNTER, dwFormat: PDH_FMTAbi, lpdwBufferSize: CPointer<UInt32>, lpdwItemCount: CPointer<UInt32>, ItemBuffer: CPointer<PDH_FMT_COUNTERVALUE_ITEM_WAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetFormattedCounterArrayW == "on"]
+public unsafe func Windows_PdhGetFormattedCounterArrayW(hCounter: PDH_HCOUNTER, dwFormat: PDH_FMTAbi, lpdwBufferSize: CPointer<UInt32>, lpdwItemCount: CPointer<UInt32>, ItemBuffer: CPointer<PDH_FMT_COUNTERVALUE_ITEM_WAbi>): UInt32 {
+    return PdhGetFormattedCounterArrayW(hCounter, dwFormat, lpdwBufferSize, lpdwItemCount, ItemBuffer)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetFormattedCounterValue == "on"]
+foreign {
     // param-hint: lpdwType optional
     func PdhGetFormattedCounterValue(hCounter: PDH_HCOUNTER, dwFormat: PDH_FMTAbi, lpdwType: CPointer<UInt32>, pValue: CPointer<PDH_FMT_COUNTERVALUEAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetFormattedCounterValue == "on"]
+public unsafe func Windows_PdhGetFormattedCounterValue(hCounter: PDH_HCOUNTER, dwFormat: PDH_FMTAbi, lpdwType: CPointer<UInt32>, pValue: CPointer<PDH_FMT_COUNTERVALUEAbi>): UInt32 {
+    return PdhGetFormattedCounterValue(hCounter, dwFormat, lpdwType, pValue)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetLogFileSize == "on"]
+foreign {
     func PdhGetLogFileSize(hLog: PDH_HLOG, llSize: CPointer<Int64>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetLogFileSize == "on"]
+public unsafe func Windows_PdhGetLogFileSize(hLog: PDH_HLOG, llSize: CPointer<Int64>): UInt32 {
+    return PdhGetLogFileSize(hLog, llSize)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetLogSetGUID == "on"]
+foreign {
     // param-hint: pGuid optional
     // param-hint: pRunId optional
     func PdhGetLogSetGUID(hLog: PDH_HLOG, pGuid: CPointer<GUID>, pRunId: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetLogSetGUID == "on"]
+public unsafe func Windows_PdhGetLogSetGUID(hLog: PDH_HLOG, pGuid: CPointer<GUID>, pRunId: CPointer<Int32>): UInt32 {
+    return PdhGetLogSetGUID(hLog, pGuid, pRunId)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetRawCounterArrayA == "on"]
+foreign {
     // param-hint: ItemBuffer optional
     func PdhGetRawCounterArrayA(hCounter: PDH_HCOUNTER, lpdwBufferSize: CPointer<UInt32>, lpdwItemCount: CPointer<UInt32>, ItemBuffer: CPointer<PDH_RAW_COUNTER_ITEM_AAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetRawCounterArrayA == "on"]
+public unsafe func Windows_PdhGetRawCounterArrayA(hCounter: PDH_HCOUNTER, lpdwBufferSize: CPointer<UInt32>, lpdwItemCount: CPointer<UInt32>, ItemBuffer: CPointer<PDH_RAW_COUNTER_ITEM_AAbi>): UInt32 {
+    return PdhGetRawCounterArrayA(hCounter, lpdwBufferSize, lpdwItemCount, ItemBuffer)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetRawCounterArrayW == "on"]
+foreign {
     // param-hint: ItemBuffer optional
     func PdhGetRawCounterArrayW(hCounter: PDH_HCOUNTER, lpdwBufferSize: CPointer<UInt32>, lpdwItemCount: CPointer<UInt32>, ItemBuffer: CPointer<PDH_RAW_COUNTER_ITEM_WAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetRawCounterArrayW == "on"]
+public unsafe func Windows_PdhGetRawCounterArrayW(hCounter: PDH_HCOUNTER, lpdwBufferSize: CPointer<UInt32>, lpdwItemCount: CPointer<UInt32>, ItemBuffer: CPointer<PDH_RAW_COUNTER_ITEM_WAbi>): UInt32 {
+    return PdhGetRawCounterArrayW(hCounter, lpdwBufferSize, lpdwItemCount, ItemBuffer)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetRawCounterValue == "on"]
+foreign {
     // param-hint: lpdwType optional
     func PdhGetRawCounterValue(hCounter: PDH_HCOUNTER, lpdwType: CPointer<UInt32>, pValue: CPointer<PDH_RAW_COUNTERAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhGetRawCounterValue == "on"]
+public unsafe func Windows_PdhGetRawCounterValue(hCounter: PDH_HCOUNTER, lpdwType: CPointer<UInt32>, pValue: CPointer<PDH_RAW_COUNTERAbi>): UInt32 {
+    return PdhGetRawCounterValue(hCounter, lpdwType, pValue)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhIsRealTimeQuery == "on"]
+foreign {
     func PdhIsRealTimeQuery(hQuery: PDH_HQUERY): Int32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhIsRealTimeQuery == "on"]
+public unsafe func Windows_PdhIsRealTimeQuery(hQuery: PDH_HQUERY): Int32 {
+    return PdhIsRealTimeQuery(hQuery)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhLookupPerfIndexByNameA == "on"]
+foreign {
     // param-hint: szMachineName optional
     func PdhLookupPerfIndexByNameA(szMachineName: CPointer<UInt8>, szNameBuffer: CPointer<UInt8>, pdwIndex: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhLookupPerfIndexByNameA == "on"]
+public unsafe func Windows_PdhLookupPerfIndexByNameA(szMachineName: CPointer<UInt8>, szNameBuffer: CPointer<UInt8>, pdwIndex: CPointer<UInt32>): UInt32 {
+    return PdhLookupPerfIndexByNameA(szMachineName, szNameBuffer, pdwIndex)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhLookupPerfIndexByNameW == "on"]
+foreign {
     // param-hint: szMachineName optional
     func PdhLookupPerfIndexByNameW(szMachineName: CPointer<UInt16>, szNameBuffer: CPointer<UInt16>, pdwIndex: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhLookupPerfIndexByNameW == "on"]
+public unsafe func Windows_PdhLookupPerfIndexByNameW(szMachineName: CPointer<UInt16>, szNameBuffer: CPointer<UInt16>, pdwIndex: CPointer<UInt32>): UInt32 {
+    return PdhLookupPerfIndexByNameW(szMachineName, szNameBuffer, pdwIndex)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhLookupPerfNameByIndexA == "on"]
+foreign {
     // param-hint: szMachineName optional
     // param-hint: szNameBuffer optional
     func PdhLookupPerfNameByIndexA(szMachineName: CPointer<UInt8>, dwNameIndex: UInt32, szNameBuffer: CPointer<UInt8>, pcchNameBufferSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhLookupPerfNameByIndexA == "on"]
+public unsafe func Windows_PdhLookupPerfNameByIndexA(szMachineName: CPointer<UInt8>, dwNameIndex: UInt32, szNameBuffer: CPointer<UInt8>, pcchNameBufferSize: CPointer<UInt32>): UInt32 {
+    return PdhLookupPerfNameByIndexA(szMachineName, dwNameIndex, szNameBuffer, pcchNameBufferSize)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhLookupPerfNameByIndexW == "on"]
+foreign {
     // param-hint: szMachineName optional
     // param-hint: szNameBuffer optional
     func PdhLookupPerfNameByIndexW(szMachineName: CPointer<UInt16>, dwNameIndex: UInt32, szNameBuffer: CPointer<UInt16>, pcchNameBufferSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhLookupPerfNameByIndexW == "on"]
+public unsafe func Windows_PdhLookupPerfNameByIndexW(szMachineName: CPointer<UInt16>, dwNameIndex: UInt32, szNameBuffer: CPointer<UInt16>, pcchNameBufferSize: CPointer<UInt32>): UInt32 {
+    return PdhLookupPerfNameByIndexW(szMachineName, dwNameIndex, szNameBuffer, pcchNameBufferSize)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhMakeCounterPathA == "on"]
+foreign {
     // param-hint: szFullPathBuffer optional
     func PdhMakeCounterPathA(pCounterPathElements: CPointer<PDH_COUNTER_PATH_ELEMENTS_AAbi>, szFullPathBuffer: CPointer<UInt8>, pcchBufferSize: CPointer<UInt32>, dwFlags: PDH_PATH_FLAGSAbi): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhMakeCounterPathA == "on"]
+public unsafe func Windows_PdhMakeCounterPathA(pCounterPathElements: CPointer<PDH_COUNTER_PATH_ELEMENTS_AAbi>, szFullPathBuffer: CPointer<UInt8>, pcchBufferSize: CPointer<UInt32>, dwFlags: PDH_PATH_FLAGSAbi): UInt32 {
+    return PdhMakeCounterPathA(pCounterPathElements, szFullPathBuffer, pcchBufferSize, dwFlags)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhMakeCounterPathW == "on"]
+foreign {
     // param-hint: szFullPathBuffer optional
     func PdhMakeCounterPathW(pCounterPathElements: CPointer<PDH_COUNTER_PATH_ELEMENTS_WAbi>, szFullPathBuffer: CPointer<UInt16>, pcchBufferSize: CPointer<UInt32>, dwFlags: PDH_PATH_FLAGSAbi): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhMakeCounterPathW == "on"]
+public unsafe func Windows_PdhMakeCounterPathW(pCounterPathElements: CPointer<PDH_COUNTER_PATH_ELEMENTS_WAbi>, szFullPathBuffer: CPointer<UInt16>, pcchBufferSize: CPointer<UInt32>, dwFlags: PDH_PATH_FLAGSAbi): UInt32 {
+    return PdhMakeCounterPathW(pCounterPathElements, szFullPathBuffer, pcchBufferSize, dwFlags)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhOpenLogA == "on"]
+foreign {
     // param-hint: hQuery optional
     // param-hint: szUserCaption optional
     func PdhOpenLogA(szLogFileName: CPointer<UInt8>, dwAccessFlags: PDH_LOGAbi, lpdwLogType: CPointer<PDH_LOG_TYPEAbi>, hQuery: PDH_HQUERY, dwMaxSize: UInt32, szUserCaption: CPointer<UInt8>, phLog: CPointer<PDH_HLOG>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhOpenLogA == "on"]
+public unsafe func Windows_PdhOpenLogA(szLogFileName: CPointer<UInt8>, dwAccessFlags: PDH_LOGAbi, lpdwLogType: CPointer<PDH_LOG_TYPEAbi>, hQuery: PDH_HQUERY, dwMaxSize: UInt32, szUserCaption: CPointer<UInt8>, phLog: CPointer<PDH_HLOG>): UInt32 {
+    return PdhOpenLogA(szLogFileName, dwAccessFlags, lpdwLogType, hQuery, dwMaxSize, szUserCaption, phLog)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhOpenLogW == "on"]
+foreign {
     // param-hint: hQuery optional
     // param-hint: szUserCaption optional
     func PdhOpenLogW(szLogFileName: CPointer<UInt16>, dwAccessFlags: PDH_LOGAbi, lpdwLogType: CPointer<PDH_LOG_TYPEAbi>, hQuery: PDH_HQUERY, dwMaxSize: UInt32, szUserCaption: CPointer<UInt16>, phLog: CPointer<PDH_HLOG>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhOpenLogW == "on"]
+public unsafe func Windows_PdhOpenLogW(szLogFileName: CPointer<UInt16>, dwAccessFlags: PDH_LOGAbi, lpdwLogType: CPointer<PDH_LOG_TYPEAbi>, hQuery: PDH_HQUERY, dwMaxSize: UInt32, szUserCaption: CPointer<UInt16>, phLog: CPointer<PDH_HLOG>): UInt32 {
+    return PdhOpenLogW(szLogFileName, dwAccessFlags, lpdwLogType, hQuery, dwMaxSize, szUserCaption, phLog)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhOpenQueryA == "on"]
+foreign {
     // param-hint: szDataSource optional
     func PdhOpenQueryA(szDataSource: CPointer<UInt8>, dwUserData: UIntNative, phQuery: CPointer<PDH_HQUERY>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhOpenQueryA == "on"]
+public unsafe func Windows_PdhOpenQueryA(szDataSource: CPointer<UInt8>, dwUserData: UIntNative, phQuery: CPointer<PDH_HQUERY>): UInt32 {
+    return PdhOpenQueryA(szDataSource, dwUserData, phQuery)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhOpenQueryH == "on"]
+foreign {
     // param-hint: hDataSource optional
     func PdhOpenQueryH(hDataSource: PDH_HLOG, dwUserData: UIntNative, phQuery: CPointer<PDH_HQUERY>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhOpenQueryH == "on"]
+public unsafe func Windows_PdhOpenQueryH(hDataSource: PDH_HLOG, dwUserData: UIntNative, phQuery: CPointer<PDH_HQUERY>): UInt32 {
+    return PdhOpenQueryH(hDataSource, dwUserData, phQuery)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhOpenQueryW == "on"]
+foreign {
     // param-hint: szDataSource optional
     func PdhOpenQueryW(szDataSource: CPointer<UInt16>, dwUserData: UIntNative, phQuery: CPointer<PDH_HQUERY>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhOpenQueryW == "on"]
+public unsafe func Windows_PdhOpenQueryW(szDataSource: CPointer<UInt16>, dwUserData: UIntNative, phQuery: CPointer<PDH_HQUERY>): UInt32 {
+    return PdhOpenQueryW(szDataSource, dwUserData, phQuery)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhParseCounterPathA == "on"]
+foreign {
     // param-hint: pCounterPathElements optional
     func PdhParseCounterPathA(szFullPathBuffer: CPointer<UInt8>, pCounterPathElements: CPointer<PDH_COUNTER_PATH_ELEMENTS_AAbi>, pdwBufferSize: CPointer<UInt32>, dwFlags: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhParseCounterPathA == "on"]
+public unsafe func Windows_PdhParseCounterPathA(szFullPathBuffer: CPointer<UInt8>, pCounterPathElements: CPointer<PDH_COUNTER_PATH_ELEMENTS_AAbi>, pdwBufferSize: CPointer<UInt32>, dwFlags: UInt32): UInt32 {
+    return PdhParseCounterPathA(szFullPathBuffer, pCounterPathElements, pdwBufferSize, dwFlags)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhParseCounterPathW == "on"]
+foreign {
     // param-hint: pCounterPathElements optional
     func PdhParseCounterPathW(szFullPathBuffer: CPointer<UInt16>, pCounterPathElements: CPointer<PDH_COUNTER_PATH_ELEMENTS_WAbi>, pdwBufferSize: CPointer<UInt32>, dwFlags: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhParseCounterPathW == "on"]
+public unsafe func Windows_PdhParseCounterPathW(szFullPathBuffer: CPointer<UInt16>, pCounterPathElements: CPointer<PDH_COUNTER_PATH_ELEMENTS_WAbi>, pdwBufferSize: CPointer<UInt32>, dwFlags: UInt32): UInt32 {
+    return PdhParseCounterPathW(szFullPathBuffer, pCounterPathElements, pdwBufferSize, dwFlags)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhParseInstanceNameA == "on"]
+foreign {
     // param-hint: szInstanceName optional
     // param-hint: szParentName optional
     func PdhParseInstanceNameA(szInstanceString: CPointer<UInt8>, szInstanceName: CPointer<UInt8>, pcchInstanceNameLength: CPointer<UInt32>, szParentName: CPointer<UInt8>, pcchParentNameLength: CPointer<UInt32>, lpIndex: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhParseInstanceNameA == "on"]
+public unsafe func Windows_PdhParseInstanceNameA(szInstanceString: CPointer<UInt8>, szInstanceName: CPointer<UInt8>, pcchInstanceNameLength: CPointer<UInt32>, szParentName: CPointer<UInt8>, pcchParentNameLength: CPointer<UInt32>, lpIndex: CPointer<UInt32>): UInt32 {
+    return PdhParseInstanceNameA(szInstanceString, szInstanceName, pcchInstanceNameLength, szParentName, pcchParentNameLength, lpIndex)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhParseInstanceNameW == "on"]
+foreign {
     // param-hint: szInstanceName optional
     // param-hint: szParentName optional
     func PdhParseInstanceNameW(szInstanceString: CPointer<UInt16>, szInstanceName: CPointer<UInt16>, pcchInstanceNameLength: CPointer<UInt32>, szParentName: CPointer<UInt16>, pcchParentNameLength: CPointer<UInt32>, lpIndex: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhParseInstanceNameW == "on"]
+public unsafe func Windows_PdhParseInstanceNameW(szInstanceString: CPointer<UInt16>, szInstanceName: CPointer<UInt16>, pcchInstanceNameLength: CPointer<UInt32>, szParentName: CPointer<UInt16>, pcchParentNameLength: CPointer<UInt32>, lpIndex: CPointer<UInt32>): UInt32 {
+    return PdhParseInstanceNameW(szInstanceString, szInstanceName, pcchInstanceNameLength, szParentName, pcchParentNameLength, lpIndex)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhReadRawLogRecord == "on"]
+foreign {
     // param-hint: pRawLogRecord optional
     func PdhReadRawLogRecord(hLog: PDH_HLOG, ftRecord: Win32_Foundation.FILETIMEAbi, pRawLogRecord: CPointer<PDH_RAW_LOG_RECORDAbi>, pdwBufferLength: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhReadRawLogRecord == "on"]
+public unsafe func Windows_PdhReadRawLogRecord(hLog: PDH_HLOG, ftRecord: Win32_Foundation.FILETIMEAbi, pRawLogRecord: CPointer<PDH_RAW_LOG_RECORDAbi>, pdwBufferLength: CPointer<UInt32>): UInt32 {
+    return PdhReadRawLogRecord(hLog, ftRecord, pRawLogRecord, pdwBufferLength)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhRemoveCounter == "on"]
+foreign {
     func PdhRemoveCounter(hCounter: PDH_HCOUNTER): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhRemoveCounter == "on"]
+public unsafe func Windows_PdhRemoveCounter(hCounter: PDH_HCOUNTER): UInt32 {
+    return PdhRemoveCounter(hCounter)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhSelectDataSourceA == "on"]
+foreign {
     func PdhSelectDataSourceA(hWndOwner: CPointer<Unit>, dwFlags: PDH_SELECT_DATA_SOURCE_FLAGSAbi, szDataSource: CPointer<UInt8>, pcchBufferLength: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhSelectDataSourceA == "on"]
+public unsafe func Windows_PdhSelectDataSourceA(hWndOwner: CPointer<Unit>, dwFlags: PDH_SELECT_DATA_SOURCE_FLAGSAbi, szDataSource: CPointer<UInt8>, pcchBufferLength: CPointer<UInt32>): UInt32 {
+    return PdhSelectDataSourceA(hWndOwner, dwFlags, szDataSource, pcchBufferLength)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhSelectDataSourceW == "on"]
+foreign {
     func PdhSelectDataSourceW(hWndOwner: CPointer<Unit>, dwFlags: PDH_SELECT_DATA_SOURCE_FLAGSAbi, szDataSource: CPointer<UInt16>, pcchBufferLength: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhSelectDataSourceW == "on"]
+public unsafe func Windows_PdhSelectDataSourceW(hWndOwner: CPointer<Unit>, dwFlags: PDH_SELECT_DATA_SOURCE_FLAGSAbi, szDataSource: CPointer<UInt16>, pcchBufferLength: CPointer<UInt32>): UInt32 {
+    return PdhSelectDataSourceW(hWndOwner, dwFlags, szDataSource, pcchBufferLength)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhSetCounterScaleFactor == "on"]
+foreign {
     func PdhSetCounterScaleFactor(hCounter: PDH_HCOUNTER, lFactor: Int32): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhSetCounterScaleFactor == "on"]
+public unsafe func Windows_PdhSetCounterScaleFactor(hCounter: PDH_HCOUNTER, lFactor: Int32): UInt32 {
+    return PdhSetCounterScaleFactor(hCounter, lFactor)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhSetDefaultRealTimeDataSource == "on"]
+foreign {
     func PdhSetDefaultRealTimeDataSource(dwDataSourceId: REAL_TIME_DATA_SOURCE_ID_FLAGSAbi): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhSetDefaultRealTimeDataSource == "on"]
+public unsafe func Windows_PdhSetDefaultRealTimeDataSource(dwDataSourceId: REAL_TIME_DATA_SOURCE_ID_FLAGSAbi): UInt32 {
+    return PdhSetDefaultRealTimeDataSource(dwDataSourceId)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhSetLogSetRunID == "on"]
+foreign {
     func PdhSetLogSetRunID(hLog: PDH_HLOG, RunId: Int32): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhSetLogSetRunID == "on"]
+public unsafe func Windows_PdhSetLogSetRunID(hLog: PDH_HLOG, RunId: Int32): UInt32 {
+    return PdhSetLogSetRunID(hLog, RunId)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhSetQueryTimeRange == "on"]
+foreign {
     func PdhSetQueryTimeRange(hQuery: PDH_HQUERY, pInfo: CPointer<PDH_TIME_INFOAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhSetQueryTimeRange == "on"]
+public unsafe func Windows_PdhSetQueryTimeRange(hQuery: PDH_HQUERY, pInfo: CPointer<PDH_TIME_INFOAbi>): UInt32 {
+    return PdhSetQueryTimeRange(hQuery, pInfo)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhUpdateLogA == "on"]
+foreign {
     // param-hint: szUserString optional
     func PdhUpdateLogA(hLog: PDH_HLOG, szUserString: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhUpdateLogA == "on"]
+public unsafe func Windows_PdhUpdateLogA(hLog: PDH_HLOG, szUserString: CPointer<UInt8>): UInt32 {
+    return PdhUpdateLogA(hLog, szUserString)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhUpdateLogFileCatalog == "on"]
+foreign {
     func PdhUpdateLogFileCatalog(hLog: PDH_HLOG): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhUpdateLogFileCatalog == "on"]
+public unsafe func Windows_PdhUpdateLogFileCatalog(hLog: PDH_HLOG): UInt32 {
+    return PdhUpdateLogFileCatalog(hLog)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhUpdateLogW == "on"]
+foreign {
     // param-hint: szUserString optional
     func PdhUpdateLogW(hLog: PDH_HLOG, szUserString: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhUpdateLogW == "on"]
+public unsafe func Windows_PdhUpdateLogW(hLog: PDH_HLOG, szUserString: CPointer<UInt16>): UInt32 {
+    return PdhUpdateLogW(hLog, szUserString)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhValidatePathA == "on"]
+foreign {
     func PdhValidatePathA(szFullPathBuffer: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhValidatePathA == "on"]
+public unsafe func Windows_PdhValidatePathA(szFullPathBuffer: CPointer<UInt8>): UInt32 {
+    return PdhValidatePathA(szFullPathBuffer)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhValidatePathExA == "on"]
+foreign {
     // param-hint: hDataSource optional
     func PdhValidatePathExA(hDataSource: PDH_HLOG, szFullPathBuffer: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhValidatePathExA == "on"]
+public unsafe func Windows_PdhValidatePathExA(hDataSource: PDH_HLOG, szFullPathBuffer: CPointer<UInt8>): UInt32 {
+    return PdhValidatePathExA(hDataSource, szFullPathBuffer)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhValidatePathExW == "on"]
+foreign {
     // param-hint: hDataSource optional
     func PdhValidatePathExW(hDataSource: PDH_HLOG, szFullPathBuffer: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhValidatePathExW == "on"]
+public unsafe func Windows_PdhValidatePathExW(hDataSource: PDH_HLOG, szFullPathBuffer: CPointer<UInt16>): UInt32 {
+    return PdhValidatePathExW(hDataSource, szFullPathBuffer)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhValidatePathW == "on"]
+foreign {
     func PdhValidatePathW(szFullPathBuffer: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhValidatePathW == "on"]
+public unsafe func Windows_PdhValidatePathW(szFullPathBuffer: CPointer<UInt16>): UInt32 {
+    return PdhValidatePathW(szFullPathBuffer)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhVerifySQLDBA == "on"]
+foreign {
     func PdhVerifySQLDBA(szDataSource: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhVerifySQLDBA == "on"]
+public unsafe func Windows_PdhVerifySQLDBA(szDataSource: CPointer<UInt8>): UInt32 {
+    return PdhVerifySQLDBA(szDataSource)
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhVerifySQLDBW == "on"]
+foreign {
     func PdhVerifySQLDBW(szDataSource: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_Performance == "on" && PDH == "on" && Windows_Win32_System_Performance_PdhVerifySQLDBW == "on"]
+public unsafe func Windows_PdhVerifySQLDBW(szDataSource: CPointer<UInt16>): UInt32 {
+    return PdhVerifySQLDBW(szDataSource)
 }
 
 @When[Windows_Win32_System_Performance == "on"]

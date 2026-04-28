@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Gaming_Input == "on"]
 import windows.Gaming.Input as Gaming_Input
 import windows._impl_l0 as _impl_l0
 import windows_future as windows_future

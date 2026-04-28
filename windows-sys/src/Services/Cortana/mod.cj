@@ -167,8 +167,11 @@ public class ICortanaActionableInsightsOptions <: InterfaceWrapperBase & ComInte
 public struct ICortanaPermissionsManagerVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var IsSupported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ArePermissionsGrantedAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GrantPermissionsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var RevokePermissionsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -219,18 +222,21 @@ public class ICortanaPermissionsManager <: InterfaceWrapperBase & ComInterface {
         return __vt.IsSupported(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ArePermissionsGrantedAsync(permissions: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ArePermissionsGrantedAsync(__liveRaw, permissions, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GrantPermissionsAsync(permissions: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GrantPermissionsAsync(__liveRaw, permissions, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RevokePermissionsAsync(permissions: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

@@ -3,9 +3,7 @@ package windows_sys.Win32.System.JobObjects
 
 import windows_polyfill.{unionReadInt32, unionReadUInt32, unionReadUInt64, unionWriteInt32, unionWriteUInt32, unionWriteUInt64}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Security == "on"]
 import windows_sys.Win32.Security as Win32_Security
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 
@@ -1278,52 +1276,166 @@ public struct JOBOBJECT_SECURITY_LIMIT_INFORMATION {
     public init() {}
 }
 
-@When[KERNEL32 == "on"]
+@When[Windows_Win32_System_JobObjects == "on" && KERNEL32 == "on" && Windows_Win32_System_JobObjects_AssignProcessToJobObject == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func AssignProcessToJobObject(hJob: CPointer<Unit>, hProcess: CPointer<Unit>): Int32
-    // param-hint: UserJobSet len=param[0]
-    func CreateJobSet(NumJob: UInt32, UserJobSet: CPointer<JOB_SET_ARRAY>, Flags: UInt32): Int32
-    func FreeMemoryJobObject(Buffer: CPointer<Unit>): Unit
-    // param-hint: JobHandle optional
-    // pinvoke-hint: SetLastError
-    func IsProcessInJob(ProcessHandle: CPointer<Unit>, JobHandle: CPointer<Unit>, Result: CPointer<Int32>): Int32
-    // pinvoke-hint: SetLastError
-    func OpenJobObjectA(dwDesiredAccess: UInt32, bInheritHandle: Int32, lpName: CPointer<UInt8>): CPointer<Unit>
-    // pinvoke-hint: SetLastError
-    func OpenJobObjectW(dwDesiredAccess: UInt32, bInheritHandle: Int32, lpName: CPointer<UInt16>): CPointer<Unit>
-    // param-hint: hJob optional
-    // param-hint: lpJobObjectInformation bytes=param[3]
-    // param-hint: lpReturnLength optional
-    // pinvoke-hint: SetLastError
-    func QueryInformationJobObject(hJob: CPointer<Unit>, JobObjectInformationClass: Int32, lpJobObjectInformation: CPointer<Unit>, cbJobObjectInformationLength: UInt32, lpReturnLength: CPointer<UInt32>): Int32
-    // param-hint: hJob optional
-    // param-hint: VolumeName optional
-    // pinvoke-hint: SetLastError
-    func QueryIoRateControlInformationJobObject(hJob: CPointer<Unit>, VolumeName: CPointer<UInt16>, InfoBlocks: CPointer<CPointer<JOBOBJECT_IO_RATE_CONTROL_INFORMATION>>, InfoBlockCount: CPointer<UInt32>): UInt32
-    // param-hint: lpJobObjectInformation bytes=param[3]
-    // pinvoke-hint: SetLastError
-    func SetInformationJobObject(hJob: CPointer<Unit>, JobObjectInformationClass: Int32, lpJobObjectInformation: CPointer<Unit>, cbJobObjectInformationLength: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func SetIoRateControlInformationJobObject(hJob: CPointer<Unit>, IoRateControlInfo: CPointer<JOBOBJECT_IO_RATE_CONTROL_INFORMATION>): UInt32
-    // pinvoke-hint: SetLastError
-    func TerminateJobObject(hJob: CPointer<Unit>, uExitCode: UInt32): Int32
 }
 
-@When[KERNEL32 == "on" && Windows_Win32_Security == "on"]
+@When[Windows_Win32_System_JobObjects == "on" && KERNEL32 == "on" && Windows_Win32_System_JobObjects_AssignProcessToJobObject == "on"]
+public unsafe func Windows_AssignProcessToJobObject(hJob: CPointer<Unit>, hProcess: CPointer<Unit>): Int32 {
+    return AssignProcessToJobObject(hJob, hProcess)
+}
+
+@When[Windows_Win32_System_JobObjects == "on" && KERNEL32 == "on" && Windows_Win32_System_JobObjects_CreateJobObjectA == "on" && Windows_Win32_Security == "on"]
 foreign {
     // param-hint: lpJobAttributes optional
     // param-hint: lpName optional
     // pinvoke-hint: SetLastError
     func CreateJobObjectA(lpJobAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTES>, lpName: CPointer<UInt8>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_JobObjects == "on" && KERNEL32 == "on" && Windows_Win32_System_JobObjects_CreateJobObjectA == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_CreateJobObjectA(lpJobAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTES>, lpName: CPointer<UInt8>): CPointer<Unit> {
+    return CreateJobObjectA(lpJobAttributes, lpName)
+}
+
+@When[Windows_Win32_System_JobObjects == "on" && KERNEL32 == "on" && Windows_Win32_System_JobObjects_CreateJobObjectW == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: lpJobAttributes optional
     // param-hint: lpName optional
     // pinvoke-hint: SetLastError
     func CreateJobObjectW(lpJobAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTES>, lpName: CPointer<UInt16>): CPointer<Unit>
 }
 
-@When[USER32 == "on"]
+@When[Windows_Win32_System_JobObjects == "on" && KERNEL32 == "on" && Windows_Win32_System_JobObjects_CreateJobObjectW == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_CreateJobObjectW(lpJobAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTES>, lpName: CPointer<UInt16>): CPointer<Unit> {
+    return CreateJobObjectW(lpJobAttributes, lpName)
+}
+
+@When[Windows_Win32_System_JobObjects == "on" && KERNEL32 == "on" && Windows_Win32_System_JobObjects_CreateJobSet == "on"]
+foreign {
+    // param-hint: UserJobSet len=param[0]
+    func CreateJobSet(NumJob: UInt32, UserJobSet: CPointer<JOB_SET_ARRAY>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_JobObjects == "on" && KERNEL32 == "on" && Windows_Win32_System_JobObjects_CreateJobSet == "on"]
+public unsafe func Windows_CreateJobSet(NumJob: UInt32, UserJobSet: CPointer<JOB_SET_ARRAY>, Flags: UInt32): Int32 {
+    return CreateJobSet(NumJob, UserJobSet, Flags)
+}
+
+@When[Windows_Win32_System_JobObjects == "on" && KERNEL32 == "on" && Windows_Win32_System_JobObjects_FreeMemoryJobObject == "on"]
+foreign {
+    func FreeMemoryJobObject(Buffer: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_JobObjects == "on" && KERNEL32 == "on" && Windows_Win32_System_JobObjects_FreeMemoryJobObject == "on"]
+public unsafe func Windows_FreeMemoryJobObject(Buffer: CPointer<Unit>): Unit {
+    FreeMemoryJobObject(Buffer)
+}
+
+@When[Windows_Win32_System_JobObjects == "on" && KERNEL32 == "on" && Windows_Win32_System_JobObjects_IsProcessInJob == "on"]
+foreign {
+    // param-hint: JobHandle optional
+    // pinvoke-hint: SetLastError
+    func IsProcessInJob(ProcessHandle: CPointer<Unit>, JobHandle: CPointer<Unit>, Result: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_JobObjects == "on" && KERNEL32 == "on" && Windows_Win32_System_JobObjects_IsProcessInJob == "on"]
+public unsafe func Windows_IsProcessInJob(ProcessHandle: CPointer<Unit>, JobHandle: CPointer<Unit>, Result: CPointer<Int32>): Int32 {
+    return IsProcessInJob(ProcessHandle, JobHandle, Result)
+}
+
+@When[Windows_Win32_System_JobObjects == "on" && KERNEL32 == "on" && Windows_Win32_System_JobObjects_OpenJobObjectA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func OpenJobObjectA(dwDesiredAccess: UInt32, bInheritHandle: Int32, lpName: CPointer<UInt8>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_JobObjects == "on" && KERNEL32 == "on" && Windows_Win32_System_JobObjects_OpenJobObjectA == "on"]
+public unsafe func Windows_OpenJobObjectA(dwDesiredAccess: UInt32, bInheritHandle: Int32, lpName: CPointer<UInt8>): CPointer<Unit> {
+    return OpenJobObjectA(dwDesiredAccess, bInheritHandle, lpName)
+}
+
+@When[Windows_Win32_System_JobObjects == "on" && KERNEL32 == "on" && Windows_Win32_System_JobObjects_OpenJobObjectW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func OpenJobObjectW(dwDesiredAccess: UInt32, bInheritHandle: Int32, lpName: CPointer<UInt16>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_JobObjects == "on" && KERNEL32 == "on" && Windows_Win32_System_JobObjects_OpenJobObjectW == "on"]
+public unsafe func Windows_OpenJobObjectW(dwDesiredAccess: UInt32, bInheritHandle: Int32, lpName: CPointer<UInt16>): CPointer<Unit> {
+    return OpenJobObjectW(dwDesiredAccess, bInheritHandle, lpName)
+}
+
+@When[Windows_Win32_System_JobObjects == "on" && KERNEL32 == "on" && Windows_Win32_System_JobObjects_QueryInformationJobObject == "on"]
+foreign {
+    // param-hint: hJob optional
+    // param-hint: lpJobObjectInformation bytes=param[3]
+    // param-hint: lpReturnLength optional
+    // pinvoke-hint: SetLastError
+    func QueryInformationJobObject(hJob: CPointer<Unit>, JobObjectInformationClass: Int32, lpJobObjectInformation: CPointer<Unit>, cbJobObjectInformationLength: UInt32, lpReturnLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_JobObjects == "on" && KERNEL32 == "on" && Windows_Win32_System_JobObjects_QueryInformationJobObject == "on"]
+public unsafe func Windows_QueryInformationJobObject(hJob: CPointer<Unit>, JobObjectInformationClass: Int32, lpJobObjectInformation: CPointer<Unit>, cbJobObjectInformationLength: UInt32, lpReturnLength: CPointer<UInt32>): Int32 {
+    return QueryInformationJobObject(hJob, JobObjectInformationClass, lpJobObjectInformation, cbJobObjectInformationLength, lpReturnLength)
+}
+
+@When[Windows_Win32_System_JobObjects == "on" && KERNEL32 == "on" && Windows_Win32_System_JobObjects_QueryIoRateControlInformationJobObject == "on"]
+foreign {
+    // param-hint: hJob optional
+    // param-hint: VolumeName optional
+    // pinvoke-hint: SetLastError
+    func QueryIoRateControlInformationJobObject(hJob: CPointer<Unit>, VolumeName: CPointer<UInt16>, InfoBlocks: CPointer<CPointer<JOBOBJECT_IO_RATE_CONTROL_INFORMATION>>, InfoBlockCount: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_JobObjects == "on" && KERNEL32 == "on" && Windows_Win32_System_JobObjects_QueryIoRateControlInformationJobObject == "on"]
+public unsafe func Windows_QueryIoRateControlInformationJobObject(hJob: CPointer<Unit>, VolumeName: CPointer<UInt16>, InfoBlocks: CPointer<CPointer<JOBOBJECT_IO_RATE_CONTROL_INFORMATION>>, InfoBlockCount: CPointer<UInt32>): UInt32 {
+    return QueryIoRateControlInformationJobObject(hJob, VolumeName, InfoBlocks, InfoBlockCount)
+}
+
+@When[Windows_Win32_System_JobObjects == "on" && KERNEL32 == "on" && Windows_Win32_System_JobObjects_SetInformationJobObject == "on"]
+foreign {
+    // param-hint: lpJobObjectInformation bytes=param[3]
+    // pinvoke-hint: SetLastError
+    func SetInformationJobObject(hJob: CPointer<Unit>, JobObjectInformationClass: Int32, lpJobObjectInformation: CPointer<Unit>, cbJobObjectInformationLength: UInt32): Int32
+}
+
+@When[Windows_Win32_System_JobObjects == "on" && KERNEL32 == "on" && Windows_Win32_System_JobObjects_SetInformationJobObject == "on"]
+public unsafe func Windows_SetInformationJobObject(hJob: CPointer<Unit>, JobObjectInformationClass: Int32, lpJobObjectInformation: CPointer<Unit>, cbJobObjectInformationLength: UInt32): Int32 {
+    return SetInformationJobObject(hJob, JobObjectInformationClass, lpJobObjectInformation, cbJobObjectInformationLength)
+}
+
+@When[Windows_Win32_System_JobObjects == "on" && KERNEL32 == "on" && Windows_Win32_System_JobObjects_SetIoRateControlInformationJobObject == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetIoRateControlInformationJobObject(hJob: CPointer<Unit>, IoRateControlInfo: CPointer<JOBOBJECT_IO_RATE_CONTROL_INFORMATION>): UInt32
+}
+
+@When[Windows_Win32_System_JobObjects == "on" && KERNEL32 == "on" && Windows_Win32_System_JobObjects_SetIoRateControlInformationJobObject == "on"]
+public unsafe func Windows_SetIoRateControlInformationJobObject(hJob: CPointer<Unit>, IoRateControlInfo: CPointer<JOBOBJECT_IO_RATE_CONTROL_INFORMATION>): UInt32 {
+    return SetIoRateControlInformationJobObject(hJob, IoRateControlInfo)
+}
+
+@When[Windows_Win32_System_JobObjects == "on" && KERNEL32 == "on" && Windows_Win32_System_JobObjects_TerminateJobObject == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func TerminateJobObject(hJob: CPointer<Unit>, uExitCode: UInt32): Int32
+}
+
+@When[Windows_Win32_System_JobObjects == "on" && KERNEL32 == "on" && Windows_Win32_System_JobObjects_TerminateJobObject == "on"]
+public unsafe func Windows_TerminateJobObject(hJob: CPointer<Unit>, uExitCode: UInt32): Int32 {
+    return TerminateJobObject(hJob, uExitCode)
+}
+
+@When[Windows_Win32_System_JobObjects == "on" && USER32 == "on" && Windows_Win32_System_JobObjects_UserHandleGrantAccess == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func UserHandleGrantAccess(hUserHandle: CPointer<Unit>, hJob: CPointer<Unit>, bGrant: Int32): Int32
+}
+
+@When[Windows_Win32_System_JobObjects == "on" && USER32 == "on" && Windows_Win32_System_JobObjects_UserHandleGrantAccess == "on"]
+public unsafe func Windows_UserHandleGrantAccess(hUserHandle: CPointer<Unit>, hJob: CPointer<Unit>, bGrant: Int32): Int32 {
+    return UserHandleGrantAccess(hUserHandle, hJob, bGrant)
 }

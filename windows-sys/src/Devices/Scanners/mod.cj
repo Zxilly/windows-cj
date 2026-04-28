@@ -4,7 +4,6 @@ package windows_sys.Devices.Scanners
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_Graphics_Printing == "on"]
 import windows_sys.Graphics.Printing as Graphics_Printing
 import windows_sys._impl_l1 as _impl_l1
 
@@ -13,7 +12,7 @@ import windows_sys._impl_l1 as _impl_l1
 @C
 public struct IImageScannerScanResultVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var ScannedFiles: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -58,7 +57,7 @@ public class IImageScannerScanResult <: InterfaceWrapperBase & ComInterface {
         readVtbl<IImageScannerScanResultVtbl>(IImageScannerScanResultVtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func ScannedFiles(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

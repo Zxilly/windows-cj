@@ -163,6 +163,7 @@ public struct IAppInstanceStaticsVtbl {
     public var GetActivatedEventArgs: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var FindOrRegisterInstanceForKey: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Unregister: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetInstances: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -232,6 +233,7 @@ public class IAppInstanceStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.Unregister(__liveRaw)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetInstances(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -543,6 +545,7 @@ public class IPackage7 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IStartupTaskStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetForCurrentPackageAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -588,6 +591,7 @@ public class IStartupTaskStatics <: InterfaceWrapperBase & ComInterface {
         readVtbl<IStartupTaskStaticsVtbl>(IStartupTaskStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetForCurrentPackageAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

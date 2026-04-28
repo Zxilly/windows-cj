@@ -3,7 +3,6 @@ package windows_sys.Win32.System.EventNotificationService
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32._impl_l2 as Win32__impl_l2
 
@@ -390,14 +389,37 @@ public class ISensNetwork <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[SENSAPI == "on"]
+@When[Windows_Win32_System_EventNotificationService == "on" && SENSAPI == "on" && Windows_Win32_System_EventNotificationService_IsDestinationReachableA == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func IsDestinationReachableA(lpszDestination: CPointer<UInt8>, lpQOCInfo: CPointer<QOCINFO>): Int32
+}
+
+@When[Windows_Win32_System_EventNotificationService == "on" && SENSAPI == "on" && Windows_Win32_System_EventNotificationService_IsDestinationReachableA == "on"]
+public unsafe func Windows_IsDestinationReachableA(lpszDestination: CPointer<UInt8>, lpQOCInfo: CPointer<QOCINFO>): Int32 {
+    return IsDestinationReachableA(lpszDestination, lpQOCInfo)
+}
+
+@When[Windows_Win32_System_EventNotificationService == "on" && SENSAPI == "on" && Windows_Win32_System_EventNotificationService_IsDestinationReachableW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func IsDestinationReachableW(lpszDestination: CPointer<UInt16>, lpQOCInfo: CPointer<QOCINFO>): Int32
+}
+
+@When[Windows_Win32_System_EventNotificationService == "on" && SENSAPI == "on" && Windows_Win32_System_EventNotificationService_IsDestinationReachableW == "on"]
+public unsafe func Windows_IsDestinationReachableW(lpszDestination: CPointer<UInt16>, lpQOCInfo: CPointer<QOCINFO>): Int32 {
+    return IsDestinationReachableW(lpszDestination, lpQOCInfo)
+}
+
+@When[Windows_Win32_System_EventNotificationService == "on" && SENSAPI == "on" && Windows_Win32_System_EventNotificationService_IsNetworkAlive == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func IsNetworkAlive(lpdwFlags: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_EventNotificationService == "on" && SENSAPI == "on" && Windows_Win32_System_EventNotificationService_IsNetworkAlive == "on"]
+public unsafe func Windows_IsNetworkAlive(lpdwFlags: CPointer<UInt32>): Int32 {
+    return IsNetworkAlive(lpdwFlags)
 }
 
 @When[Windows_Win32_System_EventNotificationService == "on"]

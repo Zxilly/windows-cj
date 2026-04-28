@@ -3,16 +3,11 @@ package windows_sys.UI.WebUI
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Devices_Printers_Extensions == "on"]
 import windows_sys.Devices.Printers.Extensions as Devices_Printers_Extensions
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_Graphics_Printing == "on"]
 import windows_sys.Graphics.Printing as Graphics_Printing
-@When[Windows_Security_Authentication_Web == "on"]
 import windows_sys.Security.Authentication.Web as Security_Authentication_Web
-@When[Windows_UI == "on"]
 import windows_sys.UI as UI
-@When[Windows_Web_UI == "on"]
 import windows_sys.Web.UI as Web_UI
 import windows_sys._impl_l0 as _impl_l0
 import windows_sys._impl_l1 as _impl_l1

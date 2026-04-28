@@ -1308,7 +1308,7 @@ public struct IPointerRoutedEventArgsVtbl {
     public var SetHandled: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Input == "on" && Windows_UI_Xaml == "on"]
     public var GetCurrentPoint: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
-    @When[Windows_UI_Input == "on" && Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Input == "on" && Windows_UI_Xaml == "on"]
     public var GetIntermediatePoints: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -1385,7 +1385,7 @@ public class IPointerRoutedEventArgs <: InterfaceWrapperBase & ComInterface {
         return __vt.GetCurrentPoint(__liveRaw, relativeTo, result__)
     }
 
-    @When[Windows_UI_Input == "on" && Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Input == "on" && Windows_UI_Xaml == "on"]
     public unsafe func GetIntermediatePoints(relativeTo: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1625,6 +1625,7 @@ public struct IXamlUICommandVtbl {
     public var IconSource: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Xaml_Controls == "on"]
     public var SetIconSource: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var KeyboardAccelerators: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var AccessKey: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetAccessKey: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -1706,6 +1707,7 @@ public class IXamlUICommand <: InterfaceWrapperBase & ComInterface {
         return __vt.SetIconSource(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func KeyboardAccelerators(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

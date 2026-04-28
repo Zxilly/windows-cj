@@ -84,6 +84,7 @@ public class NetworkInformation <: windows_interface.RuntimeName & windows_core.
         windows_core.activationFactory<NetworkInformation>().ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetConnectionProfiles(): windows_collections.IVectorView<_impl_l1.ConnectionProfile> {
         var result__: Option<windows_collections.IVectorView<_impl_l1.ConnectionProfile>> = Option<windows_collections.IVectorView<_impl_l1.ConnectionProfile>>.None
         try (factory__ = windows_core.factory<NetworkInformation, _impl_l1.INetworkInformationStatics>().unwrap()) {
@@ -106,6 +107,7 @@ public class NetworkInformation <: windows_interface.RuntimeName & windows_core.
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetLanIdentifiers(): windows_collections.IVectorView<_impl_l1.LanIdentifier> {
         var result__: Option<windows_collections.IVectorView<_impl_l1.LanIdentifier>> = Option<windows_collections.IVectorView<_impl_l1.LanIdentifier>>.None
         try (factory__ = windows_core.factory<NetworkInformation, _impl_l1.INetworkInformationStatics>().unwrap()) {
@@ -117,7 +119,7 @@ public class NetworkInformation <: windows_interface.RuntimeName & windows_core.
         }
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public static unsafe func GetHostNames(): windows_collections.IVectorView<_impl_l1.HostName> {
         var result__: Option<windows_collections.IVectorView<_impl_l1.HostName>> = Option<windows_collections.IVectorView<_impl_l1.HostName>>.None
         try (factory__ = windows_core.factory<NetworkInformation, _impl_l1.INetworkInformationStatics>().unwrap()) {
@@ -140,7 +142,7 @@ public class NetworkInformation <: windows_interface.RuntimeName & windows_core.
         }
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public static unsafe func GetSortedEndpointPairs(destinationList: windows_collections.IIterable<_impl_l1.EndpointPair>, sortOptions: _impl_l0.HostNameSortOptions): windows_collections.IVectorView<_impl_l1.EndpointPair> {
         var result__: Option<windows_collections.IVectorView<_impl_l1.EndpointPair>> = Option<windows_collections.IVectorView<_impl_l1.EndpointPair>>.None
         try (factory__ = windows_core.factory<NetworkInformation, _impl_l1.INetworkInformationStatics>().unwrap()) {
@@ -170,6 +172,7 @@ public class NetworkInformation <: windows_interface.RuntimeName & windows_core.
         return ()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindConnectionProfilesAsync(pProfileFilter: _impl_l1.ConnectionProfileFilter): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.ConnectionProfile>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.ConnectionProfile>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.ConnectionProfile>>>.None
         try (factory__ = windows_core.factory<NetworkInformation, _impl_l1.INetworkInformationStatics2>().unwrap()) {

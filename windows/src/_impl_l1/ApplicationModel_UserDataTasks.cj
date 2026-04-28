@@ -316,7 +316,10 @@ extend IUserDataTask <: windows_core.Interface<IUserDataTask> {}
 @C
 public struct IUserDataTaskBatchVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Tasks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Tasks: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -385,6 +388,7 @@ public class IUserDataTaskBatch <: InterfaceWrapperBase & ComInterface & Runtime
         readVtbl<IUserDataTaskBatchVtbl>(IUserDataTaskBatchVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Tasks(): windows_collections.IVectorView<UserDataTask> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1037,7 +1041,10 @@ public struct IUserDataTaskStoreVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var CreateListAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var CreateListInAccountAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindListsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindListsAsync: UIntNative = UIntNative(0)
     public var GetListAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -1123,6 +1130,7 @@ public class IUserDataTaskStore <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_future.IAsyncOperation<UserDataTaskList>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindListsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<UserDataTaskList>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1419,6 +1427,7 @@ public class UserDataTaskBatch <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Tasks(): windows_collections.IVectorView<UserDataTask> {
         return defaultInterface().Tasks()
     }
@@ -2408,6 +2417,7 @@ public class UserDataTaskStore <: InterfaceWrapperBase & ComInterface & windows_
         return defaultInterface().CreateListInAccountAsync(name, userDataAccountId)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindListsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<UserDataTaskList>> {
         return defaultInterface().FindListsAsync()
     }

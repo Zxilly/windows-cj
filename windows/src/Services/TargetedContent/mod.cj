@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l1 as _impl_l1
 import windows_collections as windows_collections
@@ -479,8 +478,14 @@ public struct ITargetedContentSubscriptionOptionsVtbl {
     public var SubscriptionId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var AllowPartialContentAvailability: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetAllowPartialContentAvailability: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var CloudQueryParameters: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CloudQueryParameters: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var LocalFilters: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var LocalFilters: UIntNative = UIntNative(0)
     public var Update: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -572,6 +577,7 @@ public class ITargetedContentSubscriptionOptions <: InterfaceWrapperBase & ComIn
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CloudQueryParameters(): windows_collections.IMap<windows_core.HString, windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -580,6 +586,7 @@ public class ITargetedContentSubscriptionOptions <: InterfaceWrapperBase & ComIn
         return windows_collections.IMap<windows_core.HString, windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func LocalFilters(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1023,7 +1030,7 @@ extend TargetedContentContract <: windows_core.CopyType & windows_core.RuntimeTy
     }
 }
 
-@When[Windows_Services_TargetedContent == "on"]
+@When[Windows_Services_TargetedContent == "on" && Windows_Storage_Streams == "on"]
 public class TargetedContentFile <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1097,7 +1104,7 @@ public class TargetedContentFile <: InterfaceWrapperBase & ComInterface & window
     }
 }
 
-@When[Windows_Services_TargetedContent == "on"]
+@When[Windows_Services_TargetedContent == "on" && Windows_Storage_Streams == "on"]
 extend TargetedContentFile <: windows_core.HandleWinrtType<TargetedContentFile> {
     public static func intoWinrtHandle(value: TargetedContentFile): CPointer<Unit> {
         value.asRaw()
@@ -1115,7 +1122,7 @@ extend TargetedContentFile <: windows_core.HandleWinrtType<TargetedContentFile> 
     }
 }
 
-@When[Windows_Services_TargetedContent == "on"]
+@When[Windows_Services_TargetedContent == "on" && Windows_Storage_Streams == "on"]
 public class TargetedContentImage <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1206,7 +1213,7 @@ public class TargetedContentImage <: InterfaceWrapperBase & ComInterface & windo
     }
 }
 
-@When[Windows_Services_TargetedContent == "on"]
+@When[Windows_Services_TargetedContent == "on" && Windows_Storage_Streams == "on"]
 extend TargetedContentImage <: windows_core.HandleWinrtType<TargetedContentImage> {
     public static func intoWinrtHandle(value: TargetedContentImage): CPointer<Unit> {
         value.asRaw()
@@ -1541,10 +1548,12 @@ public class TargetedContentSubscriptionOptions <: InterfaceWrapperBase & ComInt
         defaultInterface().SetAllowPartialContentAvailability(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CloudQueryParameters(): windows_collections.IMap<windows_core.HString, windows_core.HString> {
         return defaultInterface().CloudQueryParameters()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func LocalFilters(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().LocalFilters()
     }
@@ -1766,16 +1775,43 @@ public struct ITargetedContentValueVtbl {
     public var get_Uri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Number: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Boolean: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Storage_Streams == "on"]
     public var File: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Storage_Streams != "on"]
+    public var File: UIntNative = UIntNative(0)
+    @When[Windows_Storage_Streams == "on"]
     public var ImageFile: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Storage_Streams != "on"]
+    public var ImageFile: UIntNative = UIntNative(0)
     public var Action: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Strings: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Strings: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Uris: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Uris: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Numbers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Numbers: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Booleans: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Booleans: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var Files: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
+    public var Files: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var ImageFiles: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
+    public var ImageFiles: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Actions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Actions: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1892,6 +1928,7 @@ public class ITargetedContentValue <: InterfaceWrapperBase & ComInterface & Runt
         return result__
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func File(): TargetedContentFile {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1900,6 +1937,7 @@ public class ITargetedContentValue <: InterfaceWrapperBase & ComInterface & Runt
         return TargetedContentFile.fromAbiTake(result__)
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func ImageFile(): TargetedContentImage {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1916,6 +1954,7 @@ public class ITargetedContentValue <: InterfaceWrapperBase & ComInterface & Runt
         return TargetedContentAction.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Strings(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1924,6 +1963,7 @@ public class ITargetedContentValue <: InterfaceWrapperBase & ComInterface & Runt
         return windows_collections.IVectorView<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Uris(): windows_collections.IVectorView<Foundation.Uri> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1932,6 +1972,7 @@ public class ITargetedContentValue <: InterfaceWrapperBase & ComInterface & Runt
         return windows_collections.IVectorView<Foundation.Uri>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Numbers(): windows_collections.IVectorView<Float64> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1940,6 +1981,7 @@ public class ITargetedContentValue <: InterfaceWrapperBase & ComInterface & Runt
         return windows_collections.IVectorView<Float64>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Booleans(): windows_collections.IVectorView<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1948,6 +1990,7 @@ public class ITargetedContentValue <: InterfaceWrapperBase & ComInterface & Runt
         return windows_collections.IVectorView<Bool>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func Files(): windows_collections.IVectorView<TargetedContentFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1956,6 +1999,7 @@ public class ITargetedContentValue <: InterfaceWrapperBase & ComInterface & Runt
         return windows_collections.IVectorView<TargetedContentFile>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func ImageFiles(): windows_collections.IVectorView<TargetedContentImage> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1964,6 +2008,7 @@ public class ITargetedContentValue <: InterfaceWrapperBase & ComInterface & Runt
         return windows_collections.IVectorView<TargetedContentImage>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Actions(): windows_collections.IVectorView<TargetedContentAction> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2165,10 +2210,12 @@ public class TargetedContentValue <: InterfaceWrapperBase & ComInterface & windo
         return defaultInterface().Boolean()
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func File(): TargetedContentFile {
         return defaultInterface().File()
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func ImageFile(): TargetedContentImage {
         return defaultInterface().ImageFile()
     }
@@ -2177,30 +2224,37 @@ public class TargetedContentValue <: InterfaceWrapperBase & ComInterface & windo
         return defaultInterface().Action()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Strings(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().Strings()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Uris(): windows_collections.IVectorView<Foundation.Uri> {
         return defaultInterface().Uris()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Numbers(): windows_collections.IVectorView<Float64> {
         return defaultInterface().Numbers()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Booleans(): windows_collections.IVectorView<Bool> {
         return defaultInterface().Booleans()
     }
 
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func Files(): windows_collections.IVectorView<TargetedContentFile> {
         return defaultInterface().Files()
     }
 
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func ImageFiles(): windows_collections.IVectorView<TargetedContentImage> {
         return defaultInterface().ImageFiles()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Actions(): windows_collections.IVectorView<TargetedContentAction> {
         return defaultInterface().Actions()
     }
@@ -2232,9 +2286,18 @@ public struct ITargetedContentCollectionVtbl {
     public var ReportInteraction: CFunc<(CPointer<Unit>, TargetedContentInteractionAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ReportCustomInteraction: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Path: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Collections: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Collections: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Items: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Items: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2331,6 +2394,7 @@ public class ITargetedContentCollection <: InterfaceWrapperBase & ComInterface &
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, TargetedContentValue> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2339,6 +2403,7 @@ public class ITargetedContentCollection <: InterfaceWrapperBase & ComInterface &
         return windows_collections.IMapView<windows_core.HString, TargetedContentValue>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Collections(): windows_collections.IVectorView<TargetedContentCollection> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2347,6 +2412,7 @@ public class ITargetedContentCollection <: InterfaceWrapperBase & ComInterface &
         return windows_collections.IVectorView<TargetedContentCollection>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVectorView<TargetedContentItem> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2573,8 +2639,14 @@ public struct ITargetedContentItemVtbl {
     public var ReportInteraction: CFunc<(CPointer<Unit>, TargetedContentInteractionAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ReportCustomInteraction: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var State: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Collections: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Collections: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2671,6 +2743,7 @@ public class ITargetedContentItem <: InterfaceWrapperBase & ComInterface & Runti
         return TargetedContentItemState.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, TargetedContentValue> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2679,6 +2752,7 @@ public class ITargetedContentItem <: InterfaceWrapperBase & ComInterface & Runti
         return windows_collections.IMapView<windows_core.HString, TargetedContentValue>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Collections(): windows_collections.IVectorView<TargetedContentCollection> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3124,14 +3198,17 @@ public class TargetedContentCollection <: InterfaceWrapperBase & ComInterface & 
         return defaultInterface().Path()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, TargetedContentValue> {
         return defaultInterface().Properties()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Collections(): windows_collections.IVectorView<TargetedContentCollection> {
         return defaultInterface().Collections()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVectorView<TargetedContentItem> {
         return defaultInterface().Items()
     }
@@ -3359,10 +3436,12 @@ public class TargetedContentItem <: InterfaceWrapperBase & ComInterface & window
         return defaultInterface().State()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, TargetedContentValue> {
         return defaultInterface().Properties()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Collections(): windows_collections.IVectorView<TargetedContentCollection> {
         return defaultInterface().Collections()
     }

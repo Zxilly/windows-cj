@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l0 as _impl_l0
 import windows_collections as windows_collections
@@ -850,7 +849,7 @@ extend GameChatMessageReceivedEventArgs <: windows_core.HandleWinrtType<GameChat
     }
 }
 
-@When[Windows_Gaming_UI == "on"]
+@When[Windows_Gaming_UI == "on" && Windows_ApplicationModel_Activation == "on"]
 public class GameUIProviderActivatedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -949,7 +948,7 @@ public class GameUIProviderActivatedEventArgs <: InterfaceWrapperBase & ComInter
     }
 }
 
-@When[Windows_Gaming_UI == "on"]
+@When[Windows_Gaming_UI == "on" && Windows_ApplicationModel_Activation == "on"]
 extend GameUIProviderActivatedEventArgs <: windows_core.HandleWinrtType<GameUIProviderActivatedEventArgs> {
     public static func intoWinrtHandle(value: GameUIProviderActivatedEventArgs): CPointer<Unit> {
         value.asRaw()

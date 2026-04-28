@@ -10,11 +10,8 @@ import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrap
 import windows_interface as windows_interface
 import windows_polyfill.{packedReadInt16, packedReadInt32, packedReadUInt16, packedReadUInt32, packedReadUIntNative, packedReadValue, packedWriteInt16, packedWriteInt32, packedWriteUInt16, packedWriteUInt32, packedWriteUIntNative, packedWriteValue}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-@When[Windows_Win32_System_IO == "on"]
 import windows.Win32.System.IO as Win32_System_IO
 import windows.Win32._impl_l1 as Win32__impl_l1
 
@@ -713,155 +710,686 @@ extend AVISTREAMINFOW <: windows_core.CopyType & windows_core.RuntimeType & wind
     }
 }
 
-@When[AVICAP32 == "on"]
+@When[Windows_Win32_Media_Multimedia == "on" && AVICAP32 == "on" && Windows_Win32_Media_Multimedia_capCreateCaptureWindowA == "on"]
 foreign {
     // param-hint: hwndParent optional
     func capCreateCaptureWindowA(lpszWindowName: CPointer<UInt8>, dwStyle: UInt32, x: Int32, y: Int32, nWidth: Int32, nHeight: Int32, hwndParent: CPointer<Unit>, nID: Int32): CPointer<Unit>
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVICAP32 == "on" && Windows_Win32_Media_Multimedia_capCreateCaptureWindowA == "on"]
+public unsafe func Windows_capCreateCaptureWindowA(lpszWindowName: CPointer<UInt8>, dwStyle: UInt32, x: Int32, y: Int32, nWidth: Int32, nHeight: Int32, hwndParent: CPointer<Unit>, nID: Int32): CPointer<Unit> {
+    return capCreateCaptureWindowA(lpszWindowName, dwStyle, x, y, nWidth, nHeight, hwndParent, nID)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVICAP32 == "on" && Windows_Win32_Media_Multimedia_capCreateCaptureWindowW == "on"]
+foreign {
     // param-hint: hwndParent optional
     func capCreateCaptureWindowW(lpszWindowName: CPointer<UInt16>, dwStyle: UInt32, x: Int32, y: Int32, nWidth: Int32, nHeight: Int32, hwndParent: CPointer<Unit>, nID: Int32): CPointer<Unit>
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVICAP32 == "on" && Windows_Win32_Media_Multimedia_capCreateCaptureWindowW == "on"]
+public unsafe func Windows_capCreateCaptureWindowW(lpszWindowName: CPointer<UInt16>, dwStyle: UInt32, x: Int32, y: Int32, nWidth: Int32, nHeight: Int32, hwndParent: CPointer<Unit>, nID: Int32): CPointer<Unit> {
+    return capCreateCaptureWindowW(lpszWindowName, dwStyle, x, y, nWidth, nHeight, hwndParent, nID)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVICAP32 == "on" && Windows_Win32_Media_Multimedia_capGetDriverDescriptionA == "on"]
+foreign {
     // param-hint: lpszName len=param[2]
     // param-hint: lpszVer len=param[4]
     func capGetDriverDescriptionA(wDriverIndex: UInt32, lpszName: CPointer<UInt8>, cbName: Int32, lpszVer: CPointer<UInt8>, cbVer: Int32): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVICAP32 == "on" && Windows_Win32_Media_Multimedia_capGetDriverDescriptionA == "on"]
+public unsafe func Windows_capGetDriverDescriptionA(wDriverIndex: UInt32, lpszName: CPointer<UInt8>, cbName: Int32, lpszVer: CPointer<UInt8>, cbVer: Int32): Int32 {
+    return capGetDriverDescriptionA(wDriverIndex, lpszName, cbName, lpszVer, cbVer)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVICAP32 == "on" && Windows_Win32_Media_Multimedia_capGetDriverDescriptionW == "on"]
+foreign {
     // param-hint: lpszName len=param[2]
     // param-hint: lpszVer len=param[4]
     func capGetDriverDescriptionW(wDriverIndex: UInt32, lpszName: CPointer<UInt16>, cbName: Int32, lpszVer: CPointer<UInt16>, cbVer: Int32): Int32
 }
 
-@When[AVIFIL32 == "on"]
+@When[Windows_Win32_Media_Multimedia == "on" && AVICAP32 == "on" && Windows_Win32_Media_Multimedia_capGetDriverDescriptionW == "on"]
+public unsafe func Windows_capGetDriverDescriptionW(wDriverIndex: UInt32, lpszName: CPointer<UInt16>, cbName: Int32, lpszVer: CPointer<UInt16>, cbVer: Int32): Int32 {
+    return capGetDriverDescriptionW(wDriverIndex, lpszName, cbName, lpszVer, cbVer)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVISaveA == "on"]
 @CallingConv[CDECL]
 foreign {
     // param-hint: pclsidHandler optional
     // pinvoke-hint: cc=cdecl
     func AVISaveA(szFile: CPointer<UInt8>, pclsidHandler: CPointer<GUID>, lpfnCallback: AVISAVECALLBACK, nStreams: Int32, pfile: CPointer<Unit>, lpOptions: CPointer<AVICOMPRESSOPTIONSAbi>, ...): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVISaveW == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: pclsidHandler optional
     // pinvoke-hint: cc=cdecl
     func AVISaveW(szFile: CPointer<UInt16>, pclsidHandler: CPointer<GUID>, lpfnCallback: AVISAVECALLBACK, nStreams: Int32, pfile: CPointer<Unit>, lpOptions: CPointer<AVICOMPRESSOPTIONSAbi>, ...): Int32
 }
 
-@When[AVIFIL32 == "on"]
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIBuildFilterA == "on"]
 foreign {
     // param-hint: lpszFilter len=param[1]
     func AVIBuildFilterA(lpszFilter: CPointer<UInt8>, cbFilter: Int32, fSaving: Int32): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIBuildFilterA == "on"]
+public unsafe func Windows_AVIBuildFilterA(lpszFilter: CPointer<UInt8>, cbFilter: Int32, fSaving: Int32): Int32 {
+    return AVIBuildFilterA(lpszFilter, cbFilter, fSaving)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIBuildFilterW == "on"]
+foreign {
     // param-hint: lpszFilter len=param[1]
     func AVIBuildFilterW(lpszFilter: CPointer<UInt16>, cbFilter: Int32, fSaving: Int32): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIBuildFilterW == "on"]
+public unsafe func Windows_AVIBuildFilterW(lpszFilter: CPointer<UInt16>, cbFilter: Int32, fSaving: Int32): Int32 {
+    return AVIBuildFilterW(lpszFilter, cbFilter, fSaving)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIClearClipboard == "on"]
+foreign {
     func AVIClearClipboard(): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIClearClipboard == "on"]
+public unsafe func Windows_AVIClearClipboard(): Int32 {
+    return AVIClearClipboard()
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileAddRef == "on"]
+foreign {
     func AVIFileAddRef(pfile: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileAddRef == "on"]
+public unsafe func Windows_AVIFileAddRef(pfile: CPointer<Unit>): UInt32 {
+    return AVIFileAddRef(pfile)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileCreateStreamA == "on"]
+foreign {
     func AVIFileCreateStreamA(pfile: CPointer<Unit>, ppavi: CPointer<CPointer<Unit>>, psi: CPointer<AVISTREAMINFOAAbi>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileCreateStreamA == "on"]
+public unsafe func Windows_AVIFileCreateStreamA(pfile: CPointer<Unit>, ppavi: CPointer<CPointer<Unit>>, psi: CPointer<AVISTREAMINFOAAbi>): Int32 {
+    return AVIFileCreateStreamA(pfile, ppavi, psi)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileCreateStreamW == "on"]
+foreign {
     func AVIFileCreateStreamW(pfile: CPointer<Unit>, ppavi: CPointer<CPointer<Unit>>, psi: CPointer<AVISTREAMINFOWAbi>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileCreateStreamW == "on"]
+public unsafe func Windows_AVIFileCreateStreamW(pfile: CPointer<Unit>, ppavi: CPointer<CPointer<Unit>>, psi: CPointer<AVISTREAMINFOWAbi>): Int32 {
+    return AVIFileCreateStreamW(pfile, ppavi, psi)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileEndRecord == "on"]
+foreign {
     func AVIFileEndRecord(pfile: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileEndRecord == "on"]
+public unsafe func Windows_AVIFileEndRecord(pfile: CPointer<Unit>): Int32 {
+    return AVIFileEndRecord(pfile)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileExit == "on"]
+foreign {
     func AVIFileExit(): Unit
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileExit == "on"]
+public unsafe func Windows_AVIFileExit(): Unit {
+    AVIFileExit()
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileGetStream == "on"]
+foreign {
     func AVIFileGetStream(pfile: CPointer<Unit>, ppavi: CPointer<CPointer<Unit>>, fccType: UInt32, lParam: Int32): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileGetStream == "on"]
+public unsafe func Windows_AVIFileGetStream(pfile: CPointer<Unit>, ppavi: CPointer<CPointer<Unit>>, fccType: UInt32, lParam: Int32): Int32 {
+    return AVIFileGetStream(pfile, ppavi, fccType, lParam)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileInfoA == "on"]
+foreign {
     // param-hint: pfi bytes=param[2]
     func AVIFileInfoA(pfile: CPointer<Unit>, pfi: CPointer<AVIFILEINFOAAbi>, lSize: Int32): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileInfoA == "on"]
+public unsafe func Windows_AVIFileInfoA(pfile: CPointer<Unit>, pfi: CPointer<AVIFILEINFOAAbi>, lSize: Int32): Int32 {
+    return AVIFileInfoA(pfile, pfi, lSize)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileInfoW == "on"]
+foreign {
     // param-hint: pfi bytes=param[2]
     func AVIFileInfoW(pfile: CPointer<Unit>, pfi: CPointer<AVIFILEINFOWAbi>, lSize: Int32): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileInfoW == "on"]
+public unsafe func Windows_AVIFileInfoW(pfile: CPointer<Unit>, pfi: CPointer<AVIFILEINFOWAbi>, lSize: Int32): Int32 {
+    return AVIFileInfoW(pfile, pfi, lSize)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileInit == "on"]
+foreign {
     func AVIFileInit(): Unit
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileInit == "on"]
+public unsafe func Windows_AVIFileInit(): Unit {
+    AVIFileInit()
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileOpenA == "on"]
+foreign {
     // param-hint: lpHandler optional
     func AVIFileOpenA(ppfile: CPointer<CPointer<Unit>>, szFile: CPointer<UInt8>, uMode: UInt32, lpHandler: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileOpenA == "on"]
+public unsafe func Windows_AVIFileOpenA(ppfile: CPointer<CPointer<Unit>>, szFile: CPointer<UInt8>, uMode: UInt32, lpHandler: CPointer<GUID>): Int32 {
+    return AVIFileOpenA(ppfile, szFile, uMode, lpHandler)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileOpenW == "on"]
+foreign {
     // param-hint: lpHandler optional
     func AVIFileOpenW(ppfile: CPointer<CPointer<Unit>>, szFile: CPointer<UInt16>, uMode: UInt32, lpHandler: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileOpenW == "on"]
+public unsafe func Windows_AVIFileOpenW(ppfile: CPointer<CPointer<Unit>>, szFile: CPointer<UInt16>, uMode: UInt32, lpHandler: CPointer<GUID>): Int32 {
+    return AVIFileOpenW(ppfile, szFile, uMode, lpHandler)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileReadData == "on"]
+foreign {
     // param-hint: lpData bytes=param[3]
     func AVIFileReadData(pfile: CPointer<Unit>, ckid: UInt32, lpData: CPointer<Unit>, lpcbData: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileReadData == "on"]
+public unsafe func Windows_AVIFileReadData(pfile: CPointer<Unit>, ckid: UInt32, lpData: CPointer<Unit>, lpcbData: CPointer<Int32>): Int32 {
+    return AVIFileReadData(pfile, ckid, lpData, lpcbData)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileRelease == "on"]
+foreign {
     func AVIFileRelease(pfile: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileRelease == "on"]
+public unsafe func Windows_AVIFileRelease(pfile: CPointer<Unit>): UInt32 {
+    return AVIFileRelease(pfile)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileWriteData == "on"]
+foreign {
     // param-hint: lpData bytes=param[3]
     func AVIFileWriteData(pfile: CPointer<Unit>, ckid: UInt32, lpData: CPointer<Unit>, cbData: Int32): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileWriteData == "on"]
+public unsafe func Windows_AVIFileWriteData(pfile: CPointer<Unit>, ckid: UInt32, lpData: CPointer<Unit>, cbData: Int32): Int32 {
+    return AVIFileWriteData(pfile, ckid, lpData, cbData)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIGetFromClipboard == "on"]
+foreign {
     func AVIGetFromClipboard(lppf: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIGetFromClipboard == "on"]
+public unsafe func Windows_AVIGetFromClipboard(lppf: CPointer<CPointer<Unit>>): Int32 {
+    return AVIGetFromClipboard(lppf)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIMakeCompressedStream == "on"]
+foreign {
     // param-hint: pclsidHandler optional
     func AVIMakeCompressedStream(ppsCompressed: CPointer<CPointer<Unit>>, ppsSource: CPointer<Unit>, lpOptions: CPointer<AVICOMPRESSOPTIONSAbi>, pclsidHandler: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIMakeCompressedStream == "on"]
+public unsafe func Windows_AVIMakeCompressedStream(ppsCompressed: CPointer<CPointer<Unit>>, ppsSource: CPointer<Unit>, lpOptions: CPointer<AVICOMPRESSOPTIONSAbi>, pclsidHandler: CPointer<GUID>): Int32 {
+    return AVIMakeCompressedStream(ppsCompressed, ppsSource, lpOptions, pclsidHandler)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIMakeFileFromStreams == "on"]
+foreign {
     // param-hint: papStreams len=param[1]
     func AVIMakeFileFromStreams(ppfile: CPointer<CPointer<Unit>>, nStreams: Int32, papStreams: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIMakeFileFromStreams == "on"]
+public unsafe func Windows_AVIMakeFileFromStreams(ppfile: CPointer<CPointer<Unit>>, nStreams: Int32, papStreams: CPointer<CPointer<Unit>>): Int32 {
+    return AVIMakeFileFromStreams(ppfile, nStreams, papStreams)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIMakeStreamFromClipboard == "on"]
+foreign {
     func AVIMakeStreamFromClipboard(cfFormat: UInt32, hGlobal: CPointer<Unit>, ppstream: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIMakeStreamFromClipboard == "on"]
+public unsafe func Windows_AVIMakeStreamFromClipboard(cfFormat: UInt32, hGlobal: CPointer<Unit>, ppstream: CPointer<CPointer<Unit>>): Int32 {
+    return AVIMakeStreamFromClipboard(cfFormat, hGlobal, ppstream)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIPutFileOnClipboard == "on"]
+foreign {
     func AVIPutFileOnClipboard(pf: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIPutFileOnClipboard == "on"]
+public unsafe func Windows_AVIPutFileOnClipboard(pf: CPointer<Unit>): Int32 {
+    return AVIPutFileOnClipboard(pf)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVISaveOptions == "on"]
+foreign {
     // param-hint: ppavi len=param[2]
     // param-hint: plpOptions len=param[2]
     func AVISaveOptions(hwnd: CPointer<Unit>, uiFlags: UInt32, nStreams: Int32, ppavi: CPointer<CPointer<Unit>>, plpOptions: CPointer<CPointer<AVICOMPRESSOPTIONSAbi>>): IntNative
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVISaveOptions == "on"]
+public unsafe func Windows_AVISaveOptions(hwnd: CPointer<Unit>, uiFlags: UInt32, nStreams: Int32, ppavi: CPointer<CPointer<Unit>>, plpOptions: CPointer<CPointer<AVICOMPRESSOPTIONSAbi>>): IntNative {
+    return AVISaveOptions(hwnd, uiFlags, nStreams, ppavi, plpOptions)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVISaveOptionsFree == "on"]
+foreign {
     // param-hint: plpOptions len=param[0]
     func AVISaveOptionsFree(nStreams: Int32, plpOptions: CPointer<CPointer<AVICOMPRESSOPTIONSAbi>>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVISaveOptionsFree == "on"]
+public unsafe func Windows_AVISaveOptionsFree(nStreams: Int32, plpOptions: CPointer<CPointer<AVICOMPRESSOPTIONSAbi>>): Int32 {
+    return AVISaveOptionsFree(nStreams, plpOptions)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVISaveVA == "on"]
+foreign {
     // param-hint: pclsidHandler optional
     // param-hint: ppavi len=param[3]
     // param-hint: plpOptions len=param[3]
     func AVISaveVA(szFile: CPointer<UInt8>, pclsidHandler: CPointer<GUID>, lpfnCallback: AVISAVECALLBACK, nStreams: Int32, ppavi: CPointer<CPointer<Unit>>, plpOptions: CPointer<CPointer<AVICOMPRESSOPTIONSAbi>>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVISaveVA == "on"]
+public unsafe func Windows_AVISaveVA(szFile: CPointer<UInt8>, pclsidHandler: CPointer<GUID>, lpfnCallback: AVISAVECALLBACK, nStreams: Int32, ppavi: CPointer<CPointer<Unit>>, plpOptions: CPointer<CPointer<AVICOMPRESSOPTIONSAbi>>): Int32 {
+    return AVISaveVA(szFile, pclsidHandler, lpfnCallback, nStreams, ppavi, plpOptions)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVISaveVW == "on"]
+foreign {
     // param-hint: pclsidHandler optional
     // param-hint: ppavi len=param[3]
     // param-hint: plpOptions len=param[3]
     func AVISaveVW(szFile: CPointer<UInt16>, pclsidHandler: CPointer<GUID>, lpfnCallback: AVISAVECALLBACK, nStreams: Int32, ppavi: CPointer<CPointer<Unit>>, plpOptions: CPointer<CPointer<AVICOMPRESSOPTIONSAbi>>): Int32
-    func AVIStreamAddRef(pavi: CPointer<Unit>): UInt32
-    func AVIStreamBeginStreaming(pavi: CPointer<Unit>, lStart: Int32, lEnd: Int32, lRate: Int32): Int32
-    // param-hint: pclsidHandler optional
-    func AVIStreamCreate(ppavi: CPointer<CPointer<Unit>>, lParam1: Int32, lParam2: Int32, pclsidHandler: CPointer<GUID>): Int32
-    func AVIStreamEndStreaming(pavi: CPointer<Unit>): Int32
-    func AVIStreamFindSample(pavi: CPointer<Unit>, lPos: Int32, lFlags: Int32): Int32
-    func AVIStreamGetFrame(pg: CPointer<Unit>, lPos: Int32): CPointer<Unit>
-    func AVIStreamGetFrameClose(pg: CPointer<Unit>): Int32
-    // param-hint: psi bytes=param[2]
-    func AVIStreamInfoA(pavi: CPointer<Unit>, psi: CPointer<AVISTREAMINFOAAbi>, lSize: Int32): Int32
-    // param-hint: psi bytes=param[2]
-    func AVIStreamInfoW(pavi: CPointer<Unit>, psi: CPointer<AVISTREAMINFOWAbi>, lSize: Int32): Int32
-    func AVIStreamLength(pavi: CPointer<Unit>): Int32
-    // param-hint: pclsidHandler optional
-    func AVIStreamOpenFromFileA(ppavi: CPointer<CPointer<Unit>>, szFile: CPointer<UInt8>, fccType: UInt32, lParam: Int32, mode: UInt32, pclsidHandler: CPointer<GUID>): Int32
-    // param-hint: pclsidHandler optional
-    func AVIStreamOpenFromFileW(ppavi: CPointer<CPointer<Unit>>, szFile: CPointer<UInt16>, fccType: UInt32, lParam: Int32, mode: UInt32, pclsidHandler: CPointer<GUID>): Int32
-    // param-hint: lpBuffer bytes=param[4] optional
-    // param-hint: plBytes optional
-    // param-hint: plSamples optional
-    func AVIStreamRead(pavi: CPointer<Unit>, lStart: Int32, lSamples: Int32, lpBuffer: CPointer<Unit>, cbBuffer: Int32, plBytes: CPointer<Int32>, plSamples: CPointer<Int32>): Int32
-    // param-hint: lp bytes=param[3] optional
-    func AVIStreamReadData(pavi: CPointer<Unit>, fcc: UInt32, lp: CPointer<Unit>, lpcb: CPointer<Int32>): Int32
-    // param-hint: lpFormat bytes=param[3] optional
-    func AVIStreamReadFormat(pavi: CPointer<Unit>, lPos: Int32, lpFormat: CPointer<Unit>, lpcbFormat: CPointer<Int32>): Int32
-    func AVIStreamRelease(pavi: CPointer<Unit>): UInt32
-    func AVIStreamSampleToTime(pavi: CPointer<Unit>, lSample: Int32): Int32
-    // param-hint: lpFormat bytes=param[3]
-    func AVIStreamSetFormat(pavi: CPointer<Unit>, lPos: Int32, lpFormat: CPointer<Unit>, cbFormat: Int32): Int32
-    func AVIStreamStart(pavi: CPointer<Unit>): Int32
-    func AVIStreamTimeToSample(pavi: CPointer<Unit>, lTime: Int32): Int32
-    // param-hint: lpBuffer bytes=param[4]
-    // param-hint: plSampWritten optional
-    // param-hint: plBytesWritten optional
-    func AVIStreamWrite(pavi: CPointer<Unit>, lStart: Int32, lSamples: Int32, lpBuffer: CPointer<Unit>, cbBuffer: Int32, dwFlags: UInt32, plSampWritten: CPointer<Int32>, plBytesWritten: CPointer<Int32>): Int32
-    // param-hint: lp bytes=param[3]
-    func AVIStreamWriteData(pavi: CPointer<Unit>, fcc: UInt32, lp: CPointer<Unit>, cb: Int32): Int32
-    func CreateEditableStream(ppsEditable: CPointer<CPointer<Unit>>, psSource: CPointer<Unit>): Int32
-    func EditStreamClone(pavi: CPointer<Unit>, ppResult: CPointer<CPointer<Unit>>): Int32
-    func EditStreamCopy(pavi: CPointer<Unit>, plStart: CPointer<Int32>, plLength: CPointer<Int32>, ppResult: CPointer<CPointer<Unit>>): Int32
-    func EditStreamCut(pavi: CPointer<Unit>, plStart: CPointer<Int32>, plLength: CPointer<Int32>, ppResult: CPointer<CPointer<Unit>>): Int32
-    func EditStreamPaste(pavi: CPointer<Unit>, plPos: CPointer<Int32>, plLength: CPointer<Int32>, pstream: CPointer<Unit>, lStart: Int32, lEnd: Int32): Int32
-    // param-hint: lpInfo bytes=param[2]
-    func EditStreamSetInfoA(pavi: CPointer<Unit>, lpInfo: CPointer<AVISTREAMINFOAAbi>, cbInfo: Int32): Int32
-    // param-hint: lpInfo bytes=param[2]
-    func EditStreamSetInfoW(pavi: CPointer<Unit>, lpInfo: CPointer<AVISTREAMINFOWAbi>, cbInfo: Int32): Int32
-    func EditStreamSetNameA(pavi: CPointer<Unit>, lpszName: CPointer<UInt8>): Int32
-    func EditStreamSetNameW(pavi: CPointer<Unit>, lpszName: CPointer<UInt16>): Int32
 }
 
-@When[AVIFIL32 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVISaveVW == "on"]
+public unsafe func Windows_AVISaveVW(szFile: CPointer<UInt16>, pclsidHandler: CPointer<GUID>, lpfnCallback: AVISAVECALLBACK, nStreams: Int32, ppavi: CPointer<CPointer<Unit>>, plpOptions: CPointer<CPointer<AVICOMPRESSOPTIONSAbi>>): Int32 {
+    return AVISaveVW(szFile, pclsidHandler, lpfnCallback, nStreams, ppavi, plpOptions)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamAddRef == "on"]
+foreign {
+    func AVIStreamAddRef(pavi: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamAddRef == "on"]
+public unsafe func Windows_AVIStreamAddRef(pavi: CPointer<Unit>): UInt32 {
+    return AVIStreamAddRef(pavi)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamBeginStreaming == "on"]
+foreign {
+    func AVIStreamBeginStreaming(pavi: CPointer<Unit>, lStart: Int32, lEnd: Int32, lRate: Int32): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamBeginStreaming == "on"]
+public unsafe func Windows_AVIStreamBeginStreaming(pavi: CPointer<Unit>, lStart: Int32, lEnd: Int32, lRate: Int32): Int32 {
+    return AVIStreamBeginStreaming(pavi, lStart, lEnd, lRate)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamCreate == "on"]
+foreign {
+    // param-hint: pclsidHandler optional
+    func AVIStreamCreate(ppavi: CPointer<CPointer<Unit>>, lParam1: Int32, lParam2: Int32, pclsidHandler: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamCreate == "on"]
+public unsafe func Windows_AVIStreamCreate(ppavi: CPointer<CPointer<Unit>>, lParam1: Int32, lParam2: Int32, pclsidHandler: CPointer<GUID>): Int32 {
+    return AVIStreamCreate(ppavi, lParam1, lParam2, pclsidHandler)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamEndStreaming == "on"]
+foreign {
+    func AVIStreamEndStreaming(pavi: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamEndStreaming == "on"]
+public unsafe func Windows_AVIStreamEndStreaming(pavi: CPointer<Unit>): Int32 {
+    return AVIStreamEndStreaming(pavi)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamFindSample == "on"]
+foreign {
+    func AVIStreamFindSample(pavi: CPointer<Unit>, lPos: Int32, lFlags: Int32): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamFindSample == "on"]
+public unsafe func Windows_AVIStreamFindSample(pavi: CPointer<Unit>, lPos: Int32, lFlags: Int32): Int32 {
+    return AVIStreamFindSample(pavi, lPos, lFlags)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamGetFrame == "on"]
+foreign {
+    func AVIStreamGetFrame(pg: CPointer<Unit>, lPos: Int32): CPointer<Unit>
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamGetFrame == "on"]
+public unsafe func Windows_AVIStreamGetFrame(pg: CPointer<Unit>, lPos: Int32): CPointer<Unit> {
+    return AVIStreamGetFrame(pg, lPos)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamGetFrameClose == "on"]
+foreign {
+    func AVIStreamGetFrameClose(pg: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamGetFrameClose == "on"]
+public unsafe func Windows_AVIStreamGetFrameClose(pg: CPointer<Unit>): Int32 {
+    return AVIStreamGetFrameClose(pg)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamGetFrameOpen == "on" && Windows_Win32_Graphics_Gdi == "on"]
 foreign {
     // param-hint: lpbiWanted optional
     func AVIStreamGetFrameOpen(pavi: CPointer<Unit>, lpbiWanted: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>): CPointer<Unit>
 }
 
-@When[MSVFW32 == "on"]
-@CallingConv[CDECL]
-foreign {
-    // param-hint: lpData bytes=param[4] optional
-    // pinvoke-hint: cc=cdecl
-    func ICDraw(hic: HIC, dwFlags: UInt32, lpFormat: CPointer<Unit>, lpData: CPointer<Unit>, cbData: UInt32, lTime: Int32): UInt32
-    // param-hint: hwndParent optional
-    // param-hint: hInstance optional
-    // param-hint: szFile optional
-    // pinvoke-hint: cc=cdecl
-    func MCIWndCreateA(hwndParent: CPointer<Unit>, hInstance: CPointer<Unit>, dwStyle: UInt32, szFile: CPointer<UInt8>): CPointer<Unit>
-    // param-hint: hwndParent optional
-    // param-hint: hInstance optional
-    // param-hint: szFile optional
-    // pinvoke-hint: cc=cdecl
-    func MCIWndCreateW(hwndParent: CPointer<Unit>, hInstance: CPointer<Unit>, dwStyle: UInt32, szFile: CPointer<UInt16>): CPointer<Unit>
-    // pinvoke-hint: cc=cdecl
-    func MCIWndRegisterClass(): Int32
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamGetFrameOpen == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_AVIStreamGetFrameOpen(pavi: CPointer<Unit>, lpbiWanted: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>): CPointer<Unit> {
+    return AVIStreamGetFrameOpen(pavi, lpbiWanted)
 }
 
-@When[MSVFW32 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamInfoA == "on"]
+foreign {
+    // param-hint: psi bytes=param[2]
+    func AVIStreamInfoA(pavi: CPointer<Unit>, psi: CPointer<AVISTREAMINFOAAbi>, lSize: Int32): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamInfoA == "on"]
+public unsafe func Windows_AVIStreamInfoA(pavi: CPointer<Unit>, psi: CPointer<AVISTREAMINFOAAbi>, lSize: Int32): Int32 {
+    return AVIStreamInfoA(pavi, psi, lSize)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamInfoW == "on"]
+foreign {
+    // param-hint: psi bytes=param[2]
+    func AVIStreamInfoW(pavi: CPointer<Unit>, psi: CPointer<AVISTREAMINFOWAbi>, lSize: Int32): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamInfoW == "on"]
+public unsafe func Windows_AVIStreamInfoW(pavi: CPointer<Unit>, psi: CPointer<AVISTREAMINFOWAbi>, lSize: Int32): Int32 {
+    return AVIStreamInfoW(pavi, psi, lSize)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamLength == "on"]
+foreign {
+    func AVIStreamLength(pavi: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamLength == "on"]
+public unsafe func Windows_AVIStreamLength(pavi: CPointer<Unit>): Int32 {
+    return AVIStreamLength(pavi)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamOpenFromFileA == "on"]
+foreign {
+    // param-hint: pclsidHandler optional
+    func AVIStreamOpenFromFileA(ppavi: CPointer<CPointer<Unit>>, szFile: CPointer<UInt8>, fccType: UInt32, lParam: Int32, mode: UInt32, pclsidHandler: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamOpenFromFileA == "on"]
+public unsafe func Windows_AVIStreamOpenFromFileA(ppavi: CPointer<CPointer<Unit>>, szFile: CPointer<UInt8>, fccType: UInt32, lParam: Int32, mode: UInt32, pclsidHandler: CPointer<GUID>): Int32 {
+    return AVIStreamOpenFromFileA(ppavi, szFile, fccType, lParam, mode, pclsidHandler)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamOpenFromFileW == "on"]
+foreign {
+    // param-hint: pclsidHandler optional
+    func AVIStreamOpenFromFileW(ppavi: CPointer<CPointer<Unit>>, szFile: CPointer<UInt16>, fccType: UInt32, lParam: Int32, mode: UInt32, pclsidHandler: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamOpenFromFileW == "on"]
+public unsafe func Windows_AVIStreamOpenFromFileW(ppavi: CPointer<CPointer<Unit>>, szFile: CPointer<UInt16>, fccType: UInt32, lParam: Int32, mode: UInt32, pclsidHandler: CPointer<GUID>): Int32 {
+    return AVIStreamOpenFromFileW(ppavi, szFile, fccType, lParam, mode, pclsidHandler)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamRead == "on"]
+foreign {
+    // param-hint: lpBuffer bytes=param[4] optional
+    // param-hint: plBytes optional
+    // param-hint: plSamples optional
+    func AVIStreamRead(pavi: CPointer<Unit>, lStart: Int32, lSamples: Int32, lpBuffer: CPointer<Unit>, cbBuffer: Int32, plBytes: CPointer<Int32>, plSamples: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamRead == "on"]
+public unsafe func Windows_AVIStreamRead(pavi: CPointer<Unit>, lStart: Int32, lSamples: Int32, lpBuffer: CPointer<Unit>, cbBuffer: Int32, plBytes: CPointer<Int32>, plSamples: CPointer<Int32>): Int32 {
+    return AVIStreamRead(pavi, lStart, lSamples, lpBuffer, cbBuffer, plBytes, plSamples)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamReadData == "on"]
+foreign {
+    // param-hint: lp bytes=param[3] optional
+    func AVIStreamReadData(pavi: CPointer<Unit>, fcc: UInt32, lp: CPointer<Unit>, lpcb: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamReadData == "on"]
+public unsafe func Windows_AVIStreamReadData(pavi: CPointer<Unit>, fcc: UInt32, lp: CPointer<Unit>, lpcb: CPointer<Int32>): Int32 {
+    return AVIStreamReadData(pavi, fcc, lp, lpcb)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamReadFormat == "on"]
+foreign {
+    // param-hint: lpFormat bytes=param[3] optional
+    func AVIStreamReadFormat(pavi: CPointer<Unit>, lPos: Int32, lpFormat: CPointer<Unit>, lpcbFormat: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamReadFormat == "on"]
+public unsafe func Windows_AVIStreamReadFormat(pavi: CPointer<Unit>, lPos: Int32, lpFormat: CPointer<Unit>, lpcbFormat: CPointer<Int32>): Int32 {
+    return AVIStreamReadFormat(pavi, lPos, lpFormat, lpcbFormat)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamRelease == "on"]
+foreign {
+    func AVIStreamRelease(pavi: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamRelease == "on"]
+public unsafe func Windows_AVIStreamRelease(pavi: CPointer<Unit>): UInt32 {
+    return AVIStreamRelease(pavi)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamSampleToTime == "on"]
+foreign {
+    func AVIStreamSampleToTime(pavi: CPointer<Unit>, lSample: Int32): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamSampleToTime == "on"]
+public unsafe func Windows_AVIStreamSampleToTime(pavi: CPointer<Unit>, lSample: Int32): Int32 {
+    return AVIStreamSampleToTime(pavi, lSample)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamSetFormat == "on"]
+foreign {
+    // param-hint: lpFormat bytes=param[3]
+    func AVIStreamSetFormat(pavi: CPointer<Unit>, lPos: Int32, lpFormat: CPointer<Unit>, cbFormat: Int32): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamSetFormat == "on"]
+public unsafe func Windows_AVIStreamSetFormat(pavi: CPointer<Unit>, lPos: Int32, lpFormat: CPointer<Unit>, cbFormat: Int32): Int32 {
+    return AVIStreamSetFormat(pavi, lPos, lpFormat, cbFormat)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamStart == "on"]
+foreign {
+    func AVIStreamStart(pavi: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamStart == "on"]
+public unsafe func Windows_AVIStreamStart(pavi: CPointer<Unit>): Int32 {
+    return AVIStreamStart(pavi)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamTimeToSample == "on"]
+foreign {
+    func AVIStreamTimeToSample(pavi: CPointer<Unit>, lTime: Int32): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamTimeToSample == "on"]
+public unsafe func Windows_AVIStreamTimeToSample(pavi: CPointer<Unit>, lTime: Int32): Int32 {
+    return AVIStreamTimeToSample(pavi, lTime)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamWrite == "on"]
+foreign {
+    // param-hint: lpBuffer bytes=param[4]
+    // param-hint: plSampWritten optional
+    // param-hint: plBytesWritten optional
+    func AVIStreamWrite(pavi: CPointer<Unit>, lStart: Int32, lSamples: Int32, lpBuffer: CPointer<Unit>, cbBuffer: Int32, dwFlags: UInt32, plSampWritten: CPointer<Int32>, plBytesWritten: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamWrite == "on"]
+public unsafe func Windows_AVIStreamWrite(pavi: CPointer<Unit>, lStart: Int32, lSamples: Int32, lpBuffer: CPointer<Unit>, cbBuffer: Int32, dwFlags: UInt32, plSampWritten: CPointer<Int32>, plBytesWritten: CPointer<Int32>): Int32 {
+    return AVIStreamWrite(pavi, lStart, lSamples, lpBuffer, cbBuffer, dwFlags, plSampWritten, plBytesWritten)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamWriteData == "on"]
+foreign {
+    // param-hint: lp bytes=param[3]
+    func AVIStreamWriteData(pavi: CPointer<Unit>, fcc: UInt32, lp: CPointer<Unit>, cb: Int32): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamWriteData == "on"]
+public unsafe func Windows_AVIStreamWriteData(pavi: CPointer<Unit>, fcc: UInt32, lp: CPointer<Unit>, cb: Int32): Int32 {
+    return AVIStreamWriteData(pavi, fcc, lp, cb)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_CreateEditableStream == "on"]
+foreign {
+    func CreateEditableStream(ppsEditable: CPointer<CPointer<Unit>>, psSource: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_CreateEditableStream == "on"]
+public unsafe func Windows_CreateEditableStream(ppsEditable: CPointer<CPointer<Unit>>, psSource: CPointer<Unit>): Int32 {
+    return CreateEditableStream(ppsEditable, psSource)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_EditStreamClone == "on"]
+foreign {
+    func EditStreamClone(pavi: CPointer<Unit>, ppResult: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_EditStreamClone == "on"]
+public unsafe func Windows_EditStreamClone(pavi: CPointer<Unit>, ppResult: CPointer<CPointer<Unit>>): Int32 {
+    return EditStreamClone(pavi, ppResult)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_EditStreamCopy == "on"]
+foreign {
+    func EditStreamCopy(pavi: CPointer<Unit>, plStart: CPointer<Int32>, plLength: CPointer<Int32>, ppResult: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_EditStreamCopy == "on"]
+public unsafe func Windows_EditStreamCopy(pavi: CPointer<Unit>, plStart: CPointer<Int32>, plLength: CPointer<Int32>, ppResult: CPointer<CPointer<Unit>>): Int32 {
+    return EditStreamCopy(pavi, plStart, plLength, ppResult)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_EditStreamCut == "on"]
+foreign {
+    func EditStreamCut(pavi: CPointer<Unit>, plStart: CPointer<Int32>, plLength: CPointer<Int32>, ppResult: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_EditStreamCut == "on"]
+public unsafe func Windows_EditStreamCut(pavi: CPointer<Unit>, plStart: CPointer<Int32>, plLength: CPointer<Int32>, ppResult: CPointer<CPointer<Unit>>): Int32 {
+    return EditStreamCut(pavi, plStart, plLength, ppResult)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_EditStreamPaste == "on"]
+foreign {
+    func EditStreamPaste(pavi: CPointer<Unit>, plPos: CPointer<Int32>, plLength: CPointer<Int32>, pstream: CPointer<Unit>, lStart: Int32, lEnd: Int32): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_EditStreamPaste == "on"]
+public unsafe func Windows_EditStreamPaste(pavi: CPointer<Unit>, plPos: CPointer<Int32>, plLength: CPointer<Int32>, pstream: CPointer<Unit>, lStart: Int32, lEnd: Int32): Int32 {
+    return EditStreamPaste(pavi, plPos, plLength, pstream, lStart, lEnd)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_EditStreamSetInfoA == "on"]
+foreign {
+    // param-hint: lpInfo bytes=param[2]
+    func EditStreamSetInfoA(pavi: CPointer<Unit>, lpInfo: CPointer<AVISTREAMINFOAAbi>, cbInfo: Int32): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_EditStreamSetInfoA == "on"]
+public unsafe func Windows_EditStreamSetInfoA(pavi: CPointer<Unit>, lpInfo: CPointer<AVISTREAMINFOAAbi>, cbInfo: Int32): Int32 {
+    return EditStreamSetInfoA(pavi, lpInfo, cbInfo)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_EditStreamSetInfoW == "on"]
+foreign {
+    // param-hint: lpInfo bytes=param[2]
+    func EditStreamSetInfoW(pavi: CPointer<Unit>, lpInfo: CPointer<AVISTREAMINFOWAbi>, cbInfo: Int32): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_EditStreamSetInfoW == "on"]
+public unsafe func Windows_EditStreamSetInfoW(pavi: CPointer<Unit>, lpInfo: CPointer<AVISTREAMINFOWAbi>, cbInfo: Int32): Int32 {
+    return EditStreamSetInfoW(pavi, lpInfo, cbInfo)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_EditStreamSetNameA == "on"]
+foreign {
+    func EditStreamSetNameA(pavi: CPointer<Unit>, lpszName: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_EditStreamSetNameA == "on"]
+public unsafe func Windows_EditStreamSetNameA(pavi: CPointer<Unit>, lpszName: CPointer<UInt8>): Int32 {
+    return EditStreamSetNameA(pavi, lpszName)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_EditStreamSetNameW == "on"]
+foreign {
+    func EditStreamSetNameW(pavi: CPointer<Unit>, lpszName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_EditStreamSetNameW == "on"]
+public unsafe func Windows_EditStreamSetNameW(pavi: CPointer<Unit>, lpszName: CPointer<UInt16>): Int32 {
+    return EditStreamSetNameW(pavi, lpszName)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICCompress == "on" && Windows_Win32_Graphics_Gdi == "on"]
 @CallingConv[CDECL]
 foreign {
     // param-hint: lpckid optional
@@ -870,8 +1398,41 @@ foreign {
     // param-hint: lpPrev optional
     // pinvoke-hint: cc=cdecl
     func ICCompress(hic: HIC, dwFlags: UInt32, lpbiOutput: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, lpData: CPointer<Unit>, lpbiInput: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, lpBits: CPointer<Unit>, lpckid: CPointer<UInt32>, lpdwFlags: CPointer<UInt32>, lFrameNum: Int32, dwFrameSize: UInt32, dwQuality: UInt32, lpbiPrev: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, lpPrev: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICCompress == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_ICCompress(hic: HIC, dwFlags: UInt32, lpbiOutput: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, lpData: CPointer<Unit>, lpbiInput: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, lpBits: CPointer<Unit>, lpckid: CPointer<UInt32>, lpdwFlags: CPointer<UInt32>, lFrameNum: Int32, dwFrameSize: UInt32, dwQuality: UInt32, lpbiPrev: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, lpPrev: CPointer<Unit>): UInt32 {
+    return ICCompress(hic, dwFlags, lpbiOutput, lpData, lpbiInput, lpBits, lpckid, lpdwFlags, lFrameNum, dwFrameSize, dwQuality, lpbiPrev, lpPrev)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICDecompress == "on" && Windows_Win32_Graphics_Gdi == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ICDecompress(hic: HIC, dwFlags: UInt32, lpbiFormat: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, lpData: CPointer<Unit>, lpbi: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, lpBits: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICDecompress == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_ICDecompress(hic: HIC, dwFlags: UInt32, lpbiFormat: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, lpData: CPointer<Unit>, lpbi: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, lpBits: CPointer<Unit>): UInt32 {
+    return ICDecompress(hic, dwFlags, lpbiFormat, lpData, lpbi, lpBits)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICDraw == "on"]
+@CallingConv[CDECL]
+foreign {
+    // param-hint: lpData bytes=param[4] optional
+    // pinvoke-hint: cc=cdecl
+    func ICDraw(hic: HIC, dwFlags: UInt32, lpFormat: CPointer<Unit>, lpData: CPointer<Unit>, cbData: UInt32, lTime: Int32): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICDraw == "on"]
+public unsafe func Windows_ICDraw(hic: HIC, dwFlags: UInt32, lpFormat: CPointer<Unit>, lpData: CPointer<Unit>, cbData: UInt32, lTime: Int32): UInt32 {
+    return ICDraw(hic, dwFlags, lpFormat, lpData, cbData, lTime)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICDrawBegin == "on" && Windows_Win32_Graphics_Gdi == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: hpal optional
     // param-hint: hwnd optional
     // param-hint: hdc optional
@@ -879,169 +1440,1087 @@ foreign {
     func ICDrawBegin(hic: HIC, dwFlags: UInt32, hpal: Win32_Graphics_Gdi.HPALETTE, hwnd: CPointer<Unit>, hdc: Win32_Graphics_Gdi.HDC, xDst: Int32, yDst: Int32, dxDst: Int32, dyDst: Int32, lpbi: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, xSrc: Int32, ySrc: Int32, dxSrc: Int32, dySrc: Int32, dwRate: UInt32, dwScale: UInt32): UInt32
 }
 
-@When[MSVFW32 == "on"]
-foreign {
-    func DrawDibClose(hdd: IntNative): Int32
-    func DrawDibEnd(hdd: IntNative): Int32
-    func DrawDibOpen(): IntNative
-    func DrawDibStart(hdd: IntNative, rate: UInt32): Int32
-    func DrawDibStop(hdd: IntNative): Int32
-    func DrawDibTime(hdd: IntNative, lpddtime: CPointer<DRAWDIBTIMEAbi>): Int32
-    func ICClose(hic: HIC): IntNative
-    // param-hint: picinfo bytes=param[2]
-    func ICGetInfo(hic: HIC, picinfo: CPointer<ICINFOAbi>, cb: UInt32): IntNative
-    func ICInfo(fccType: UInt32, fccHandler: UInt32, lpicinfo: CPointer<ICINFOAbi>): Int32
-    func ICInstall(fccType: UInt32, fccHandler: UInt32, lParam: IntNative, szDesc: CPointer<UInt8>, wFlags: UInt32): Int32
-    func ICOpen(fccType: UInt32, fccHandler: UInt32, wMode: UInt32): HIC
-    func ICOpenFunction(fccType: UInt32, fccHandler: UInt32, wMode: UInt32, lpfnHandler: Win32_Foundation.FARPROC): HIC
-    func ICRemove(fccType: UInt32, fccHandler: UInt32, wFlags: UInt32): Int32
-    func ICSendMessage(hic: HIC, msg: UInt32, dw1: UIntNative, dw2: UIntNative): IntNative
-    func VideoForWindowsVersion(): UInt32
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICDrawBegin == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_ICDrawBegin(hic: HIC, dwFlags: UInt32, hpal: Win32_Graphics_Gdi.HPALETTE, hwnd: CPointer<Unit>, hdc: Win32_Graphics_Gdi.HDC, xDst: Int32, yDst: Int32, dxDst: Int32, dyDst: Int32, lpbi: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, xSrc: Int32, ySrc: Int32, dxSrc: Int32, dySrc: Int32, dwRate: UInt32, dwScale: UInt32): UInt32 {
+    return ICDrawBegin(hic, dwFlags, hpal, hwnd, hdc, xDst, yDst, dxDst, dyDst, lpbi, xSrc, ySrc, dxSrc, dySrc, dwRate, dwScale)
 }
 
-@When[MSVFW32 == "on" && (((arch == "x86_64" && Windows_Win32_UI_Controls_Dialogs == "on") || (arch == "aarch64" && Windows_Win32_UI_Controls_Dialogs == "on")) && Windows_Win32_UI_Controls_Dialogs == "on")]
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_MCIWndCreateA == "on"]
+@CallingConv[CDECL]
 foreign {
-    func GetOpenFileNamePreviewA(lpofn: CPointer<Win32__impl_l1.OPENFILENAMEAAbi>): Int32
-    func GetOpenFileNamePreviewW(lpofn: CPointer<Win32__impl_l1.OPENFILENAMEWAbi>): Int32
-    func GetSaveFileNamePreviewA(lpofn: CPointer<Win32__impl_l1.OPENFILENAMEAAbi>): Int32
-    func GetSaveFileNamePreviewW(lpofn: CPointer<Win32__impl_l1.OPENFILENAMEWAbi>): Int32
+    // param-hint: hwndParent optional
+    // param-hint: hInstance optional
+    // param-hint: szFile optional
+    // pinvoke-hint: cc=cdecl
+    func MCIWndCreateA(hwndParent: CPointer<Unit>, hInstance: CPointer<Unit>, dwStyle: UInt32, szFile: CPointer<UInt8>): CPointer<Unit>
 }
 
-@When[MSVFW32 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_MCIWndCreateA == "on"]
+public unsafe func Windows_MCIWndCreateA(hwndParent: CPointer<Unit>, hInstance: CPointer<Unit>, dwStyle: UInt32, szFile: CPointer<UInt8>): CPointer<Unit> {
+    return MCIWndCreateA(hwndParent, hInstance, dwStyle, szFile)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_MCIWndCreateW == "on"]
+@CallingConv[CDECL]
+foreign {
+    // param-hint: hwndParent optional
+    // param-hint: hInstance optional
+    // param-hint: szFile optional
+    // pinvoke-hint: cc=cdecl
+    func MCIWndCreateW(hwndParent: CPointer<Unit>, hInstance: CPointer<Unit>, dwStyle: UInt32, szFile: CPointer<UInt16>): CPointer<Unit>
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_MCIWndCreateW == "on"]
+public unsafe func Windows_MCIWndCreateW(hwndParent: CPointer<Unit>, hInstance: CPointer<Unit>, dwStyle: UInt32, szFile: CPointer<UInt16>): CPointer<Unit> {
+    return MCIWndCreateW(hwndParent, hInstance, dwStyle, szFile)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_MCIWndRegisterClass == "on"]
+@CallingConv[CDECL]
+foreign {
+    // pinvoke-hint: cc=cdecl
+    func MCIWndRegisterClass(): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_MCIWndRegisterClass == "on"]
+public unsafe func Windows_MCIWndRegisterClass(): Int32 {
+    return MCIWndRegisterClass()
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibBegin == "on" && Windows_Win32_Graphics_Gdi == "on"]
 foreign {
     // param-hint: hdc optional
     func DrawDibBegin(hdd: IntNative, hdc: Win32_Graphics_Gdi.HDC, dxDst: Int32, dyDst: Int32, lpbi: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, dxSrc: Int32, dySrc: Int32, wFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibBegin == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DrawDibBegin(hdd: IntNative, hdc: Win32_Graphics_Gdi.HDC, dxDst: Int32, dyDst: Int32, lpbi: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, dxSrc: Int32, dySrc: Int32, wFlags: UInt32): Int32 {
+    return DrawDibBegin(hdd, hdc, dxDst, dyDst, lpbi, dxSrc, dySrc, wFlags)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibChangePalette == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: lppe len=param[2]
     func DrawDibChangePalette(hdd: IntNative, iStart: Int32, iLen: Int32, lppe: CPointer<Win32_Graphics_Gdi.PALETTEENTRYAbi>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibChangePalette == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DrawDibChangePalette(hdd: IntNative, iStart: Int32, iLen: Int32, lppe: CPointer<Win32_Graphics_Gdi.PALETTEENTRYAbi>): Int32 {
+    return DrawDibChangePalette(hdd, iStart, iLen, lppe)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibClose == "on"]
+foreign {
+    func DrawDibClose(hdd: IntNative): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibClose == "on"]
+public unsafe func Windows_DrawDibClose(hdd: IntNative): Int32 {
+    return DrawDibClose(hdd)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibDraw == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: lpbi optional
     // param-hint: lpBits optional
     func DrawDibDraw(hdd: IntNative, hdc: Win32_Graphics_Gdi.HDC, xDst: Int32, yDst: Int32, dxDst: Int32, dyDst: Int32, lpbi: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, lpBits: CPointer<Unit>, xSrc: Int32, ySrc: Int32, dxSrc: Int32, dySrc: Int32, wFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibDraw == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DrawDibDraw(hdd: IntNative, hdc: Win32_Graphics_Gdi.HDC, xDst: Int32, yDst: Int32, dxDst: Int32, dyDst: Int32, lpbi: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, lpBits: CPointer<Unit>, xSrc: Int32, ySrc: Int32, dxSrc: Int32, dySrc: Int32, wFlags: UInt32): Int32 {
+    return DrawDibDraw(hdd, hdc, xDst, yDst, dxDst, dyDst, lpbi, lpBits, xSrc, ySrc, dxSrc, dySrc, wFlags)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibEnd == "on"]
+foreign {
+    func DrawDibEnd(hdd: IntNative): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibEnd == "on"]
+public unsafe func Windows_DrawDibEnd(hdd: IntNative): Int32 {
+    return DrawDibEnd(hdd)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibGetBuffer == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func DrawDibGetBuffer(hdd: IntNative, lpbi: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, dwSize: UInt32, dwFlags: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibGetBuffer == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DrawDibGetBuffer(hdd: IntNative, lpbi: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, dwSize: UInt32, dwFlags: UInt32): CPointer<Unit> {
+    return DrawDibGetBuffer(hdd, lpbi, dwSize, dwFlags)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibGetPalette == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func DrawDibGetPalette(hdd: IntNative): Win32_Graphics_Gdi.HPALETTE
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibGetPalette == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DrawDibGetPalette(hdd: IntNative): Win32_Graphics_Gdi.HPALETTE {
+    return DrawDibGetPalette(hdd)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibOpen == "on"]
+foreign {
+    func DrawDibOpen(): IntNative
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibOpen == "on"]
+public unsafe func Windows_DrawDibOpen(): IntNative {
+    return DrawDibOpen()
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibProfileDisplay == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func DrawDibProfileDisplay(lpbi: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>): IntNative
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibProfileDisplay == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DrawDibProfileDisplay(lpbi: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>): IntNative {
+    return DrawDibProfileDisplay(lpbi)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibRealize == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func DrawDibRealize(hdd: IntNative, hdc: Win32_Graphics_Gdi.HDC, fBackground: Int32): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibRealize == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DrawDibRealize(hdd: IntNative, hdc: Win32_Graphics_Gdi.HDC, fBackground: Int32): UInt32 {
+    return DrawDibRealize(hdd, hdc, fBackground)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibSetPalette == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: hpal optional
     func DrawDibSetPalette(hdd: IntNative, hpal: Win32_Graphics_Gdi.HPALETTE): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibSetPalette == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DrawDibSetPalette(hdd: IntNative, hpal: Win32_Graphics_Gdi.HPALETTE): Int32 {
+    return DrawDibSetPalette(hdd, hpal)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibStart == "on"]
+foreign {
+    func DrawDibStart(hdd: IntNative, rate: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibStart == "on"]
+public unsafe func Windows_DrawDibStart(hdd: IntNative, rate: UInt32): Int32 {
+    return DrawDibStart(hdd, rate)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibStop == "on"]
+foreign {
+    func DrawDibStop(hdd: IntNative): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibStop == "on"]
+public unsafe func Windows_DrawDibStop(hdd: IntNative): Int32 {
+    return DrawDibStop(hdd)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibTime == "on"]
+foreign {
+    func DrawDibTime(hdd: IntNative, lpddtime: CPointer<DRAWDIBTIMEAbi>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibTime == "on"]
+public unsafe func Windows_DrawDibTime(hdd: IntNative, lpddtime: CPointer<DRAWDIBTIMEAbi>): Int32 {
+    return DrawDibTime(hdd, lpddtime)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_GetOpenFileNamePreviewA == "on" && (((arch == "x86_64" && Windows_Win32_UI_Controls_Dialogs == "on") || (arch == "aarch64" && Windows_Win32_UI_Controls_Dialogs == "on")) && Windows_Win32_UI_Controls_Dialogs == "on")]
+foreign {
+    func GetOpenFileNamePreviewA(lpofn: CPointer<Win32__impl_l1.OPENFILENAMEAAbi>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_GetOpenFileNamePreviewA == "on" && (((arch == "x86_64" && Windows_Win32_UI_Controls_Dialogs == "on") || (arch == "aarch64" && Windows_Win32_UI_Controls_Dialogs == "on")) && Windows_Win32_UI_Controls_Dialogs == "on")]
+public unsafe func Windows_GetOpenFileNamePreviewA(lpofn: CPointer<Win32__impl_l1.OPENFILENAMEAAbi>): Int32 {
+    return GetOpenFileNamePreviewA(lpofn)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_GetOpenFileNamePreviewW == "on" && (((arch == "x86_64" && Windows_Win32_UI_Controls_Dialogs == "on") || (arch == "aarch64" && Windows_Win32_UI_Controls_Dialogs == "on")) && Windows_Win32_UI_Controls_Dialogs == "on")]
+foreign {
+    func GetOpenFileNamePreviewW(lpofn: CPointer<Win32__impl_l1.OPENFILENAMEWAbi>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_GetOpenFileNamePreviewW == "on" && (((arch == "x86_64" && Windows_Win32_UI_Controls_Dialogs == "on") || (arch == "aarch64" && Windows_Win32_UI_Controls_Dialogs == "on")) && Windows_Win32_UI_Controls_Dialogs == "on")]
+public unsafe func Windows_GetOpenFileNamePreviewW(lpofn: CPointer<Win32__impl_l1.OPENFILENAMEWAbi>): Int32 {
+    return GetOpenFileNamePreviewW(lpofn)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_GetSaveFileNamePreviewA == "on" && (((arch == "x86_64" && Windows_Win32_UI_Controls_Dialogs == "on") || (arch == "aarch64" && Windows_Win32_UI_Controls_Dialogs == "on")) && Windows_Win32_UI_Controls_Dialogs == "on")]
+foreign {
+    func GetSaveFileNamePreviewA(lpofn: CPointer<Win32__impl_l1.OPENFILENAMEAAbi>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_GetSaveFileNamePreviewA == "on" && (((arch == "x86_64" && Windows_Win32_UI_Controls_Dialogs == "on") || (arch == "aarch64" && Windows_Win32_UI_Controls_Dialogs == "on")) && Windows_Win32_UI_Controls_Dialogs == "on")]
+public unsafe func Windows_GetSaveFileNamePreviewA(lpofn: CPointer<Win32__impl_l1.OPENFILENAMEAAbi>): Int32 {
+    return GetSaveFileNamePreviewA(lpofn)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_GetSaveFileNamePreviewW == "on" && (((arch == "x86_64" && Windows_Win32_UI_Controls_Dialogs == "on") || (arch == "aarch64" && Windows_Win32_UI_Controls_Dialogs == "on")) && Windows_Win32_UI_Controls_Dialogs == "on")]
+foreign {
+    func GetSaveFileNamePreviewW(lpofn: CPointer<Win32__impl_l1.OPENFILENAMEWAbi>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_GetSaveFileNamePreviewW == "on" && (((arch == "x86_64" && Windows_Win32_UI_Controls_Dialogs == "on") || (arch == "aarch64" && Windows_Win32_UI_Controls_Dialogs == "on")) && Windows_Win32_UI_Controls_Dialogs == "on")]
+public unsafe func Windows_GetSaveFileNamePreviewW(lpofn: CPointer<Win32__impl_l1.OPENFILENAMEWAbi>): Int32 {
+    return GetSaveFileNamePreviewW(lpofn)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICClose == "on"]
+foreign {
+    func ICClose(hic: HIC): IntNative
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICClose == "on"]
+public unsafe func Windows_ICClose(hic: HIC): IntNative {
+    return ICClose(hic)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICCompressorChoose == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: hwnd optional
     // param-hint: pvIn optional
     // param-hint: lpData optional
     // param-hint: lpszTitle optional
     func ICCompressorChoose(hwnd: CPointer<Unit>, uiFlags: UInt32, pvIn: CPointer<Unit>, lpData: CPointer<Unit>, pc: CPointer<COMPVARSAbi>, lpszTitle: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICCompressorChoose == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_ICCompressorChoose(hwnd: CPointer<Unit>, uiFlags: UInt32, pvIn: CPointer<Unit>, lpData: CPointer<Unit>, pc: CPointer<COMPVARSAbi>, lpszTitle: CPointer<UInt8>): Int32 {
+    return ICCompressorChoose(hwnd, uiFlags, pvIn, lpData, pc, lpszTitle)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICCompressorFree == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func ICCompressorFree(pc: CPointer<COMPVARSAbi>): Unit
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICCompressorFree == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_ICCompressorFree(pc: CPointer<COMPVARSAbi>): Unit {
+    ICCompressorFree(pc)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICGetDisplayFormat == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: hic optional
     func ICGetDisplayFormat(hic: HIC, lpbiIn: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, lpbiOut: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, BitDepth: Int32, dx: Int32, dy: Int32): HIC
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICGetDisplayFormat == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_ICGetDisplayFormat(hic: HIC, lpbiIn: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, lpbiOut: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, BitDepth: Int32, dx: Int32, dy: Int32): HIC {
+    return ICGetDisplayFormat(hic, lpbiIn, lpbiOut, BitDepth, dx, dy)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICGetInfo == "on"]
+foreign {
+    // param-hint: picinfo bytes=param[2]
+    func ICGetInfo(hic: HIC, picinfo: CPointer<ICINFOAbi>, cb: UInt32): IntNative
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICGetInfo == "on"]
+public unsafe func Windows_ICGetInfo(hic: HIC, picinfo: CPointer<ICINFOAbi>, cb: UInt32): IntNative {
+    return ICGetInfo(hic, picinfo, cb)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICImageCompress == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: lpbiOut optional
     // param-hint: plSize optional
     func ICImageCompress(hic: HIC, uiFlags: UInt32, lpbiIn: CPointer<Win32_Graphics_Gdi.BITMAPINFOAbi>, lpBits: CPointer<Unit>, lpbiOut: CPointer<Win32_Graphics_Gdi.BITMAPINFOAbi>, lQuality: Int32, plSize: CPointer<Int32>): CPointer<Unit>
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICImageCompress == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_ICImageCompress(hic: HIC, uiFlags: UInt32, lpbiIn: CPointer<Win32_Graphics_Gdi.BITMAPINFOAbi>, lpBits: CPointer<Unit>, lpbiOut: CPointer<Win32_Graphics_Gdi.BITMAPINFOAbi>, lQuality: Int32, plSize: CPointer<Int32>): CPointer<Unit> {
+    return ICImageCompress(hic, uiFlags, lpbiIn, lpBits, lpbiOut, lQuality, plSize)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICImageDecompress == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: hic optional
     // param-hint: lpbiOut optional
     func ICImageDecompress(hic: HIC, uiFlags: UInt32, lpbiIn: CPointer<Win32_Graphics_Gdi.BITMAPINFOAbi>, lpBits: CPointer<Unit>, lpbiOut: CPointer<Win32_Graphics_Gdi.BITMAPINFOAbi>): CPointer<Unit>
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICImageDecompress == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_ICImageDecompress(hic: HIC, uiFlags: UInt32, lpbiIn: CPointer<Win32_Graphics_Gdi.BITMAPINFOAbi>, lpBits: CPointer<Unit>, lpbiOut: CPointer<Win32_Graphics_Gdi.BITMAPINFOAbi>): CPointer<Unit> {
+    return ICImageDecompress(hic, uiFlags, lpbiIn, lpBits, lpbiOut)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICInfo == "on"]
+foreign {
+    func ICInfo(fccType: UInt32, fccHandler: UInt32, lpicinfo: CPointer<ICINFOAbi>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICInfo == "on"]
+public unsafe func Windows_ICInfo(fccType: UInt32, fccHandler: UInt32, lpicinfo: CPointer<ICINFOAbi>): Int32 {
+    return ICInfo(fccType, fccHandler, lpicinfo)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICInstall == "on"]
+foreign {
+    func ICInstall(fccType: UInt32, fccHandler: UInt32, lParam: IntNative, szDesc: CPointer<UInt8>, wFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICInstall == "on"]
+public unsafe func Windows_ICInstall(fccType: UInt32, fccHandler: UInt32, lParam: IntNative, szDesc: CPointer<UInt8>, wFlags: UInt32): Int32 {
+    return ICInstall(fccType, fccHandler, lParam, szDesc, wFlags)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICLocate == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: lpbiOut optional
     func ICLocate(fccType: UInt32, fccHandler: UInt32, lpbiIn: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, lpbiOut: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, wFlags: UInt16): HIC
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICLocate == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_ICLocate(fccType: UInt32, fccHandler: UInt32, lpbiIn: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, lpbiOut: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, wFlags: UInt16): HIC {
+    return ICLocate(fccType, fccHandler, lpbiIn, lpbiOut, wFlags)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICOpen == "on"]
+foreign {
+    func ICOpen(fccType: UInt32, fccHandler: UInt32, wMode: UInt32): HIC
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICOpen == "on"]
+public unsafe func Windows_ICOpen(fccType: UInt32, fccHandler: UInt32, wMode: UInt32): HIC {
+    return ICOpen(fccType, fccHandler, wMode)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICOpenFunction == "on"]
+foreign {
+    func ICOpenFunction(fccType: UInt32, fccHandler: UInt32, wMode: UInt32, lpfnHandler: Win32_Foundation.FARPROC): HIC
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICOpenFunction == "on"]
+public unsafe func Windows_ICOpenFunction(fccType: UInt32, fccHandler: UInt32, wMode: UInt32, lpfnHandler: Win32_Foundation.FARPROC): HIC {
+    return ICOpenFunction(fccType, fccHandler, wMode, lpfnHandler)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICRemove == "on"]
+foreign {
+    func ICRemove(fccType: UInt32, fccHandler: UInt32, wFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICRemove == "on"]
+public unsafe func Windows_ICRemove(fccType: UInt32, fccHandler: UInt32, wFlags: UInt32): Int32 {
+    return ICRemove(fccType, fccHandler, wFlags)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICSendMessage == "on"]
+foreign {
+    func ICSendMessage(hic: HIC, msg: UInt32, dw1: UIntNative, dw2: UIntNative): IntNative
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICSendMessage == "on"]
+public unsafe func Windows_ICSendMessage(hic: HIC, msg: UInt32, dw1: UIntNative, dw2: UIntNative): IntNative {
+    return ICSendMessage(hic, msg, dw1, dw2)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICSeqCompressFrame == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: uiFlags optional reserved
     // param-hint: plSize optional
     func ICSeqCompressFrame(pc: CPointer<COMPVARSAbi>, uiFlags: UInt32, lpBits: CPointer<Unit>, pfKey: CPointer<Int32>, plSize: CPointer<Int32>): CPointer<Unit>
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICSeqCompressFrame == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_ICSeqCompressFrame(pc: CPointer<COMPVARSAbi>, uiFlags: UInt32, lpBits: CPointer<Unit>, pfKey: CPointer<Int32>, plSize: CPointer<Int32>): CPointer<Unit> {
+    return ICSeqCompressFrame(pc, uiFlags, lpBits, pfKey, plSize)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICSeqCompressFrameEnd == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func ICSeqCompressFrameEnd(pc: CPointer<COMPVARSAbi>): Unit
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICSeqCompressFrameEnd == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_ICSeqCompressFrameEnd(pc: CPointer<COMPVARSAbi>): Unit {
+    ICSeqCompressFrameEnd(pc)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICSeqCompressFrameStart == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func ICSeqCompressFrameStart(pc: CPointer<COMPVARSAbi>, lpbiIn: CPointer<Win32_Graphics_Gdi.BITMAPINFOAbi>): Int32
 }
 
-@When[WINMM == "on"]
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICSeqCompressFrameStart == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_ICSeqCompressFrameStart(pc: CPointer<COMPVARSAbi>, lpbiIn: CPointer<Win32_Graphics_Gdi.BITMAPINFOAbi>): Int32 {
+    return ICSeqCompressFrameStart(pc, lpbiIn)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_VideoForWindowsVersion == "on"]
+foreign {
+    func VideoForWindowsVersion(): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_VideoForWindowsVersion == "on"]
+public unsafe func Windows_VideoForWindowsVersion(): UInt32 {
+    return VideoForWindowsVersion()
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_CloseDriver == "on"]
 foreign {
     func CloseDriver(hDriver: HDRVR, lParam1: IntNative, lParam2: IntNative): IntNative
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_CloseDriver == "on"]
+public unsafe func Windows_CloseDriver(hDriver: HDRVR, lParam1: IntNative, lParam2: IntNative): IntNative {
+    return CloseDriver(hDriver, lParam1, lParam2)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_DefDriverProc == "on"]
+foreign {
     func DefDriverProc(dwDriverIdentifier: UIntNative, hdrvr: HDRVR, uMsg: UInt32, lParam1: IntNative, lParam2: IntNative): IntNative
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_DefDriverProc == "on"]
+public unsafe func Windows_DefDriverProc(dwDriverIdentifier: UIntNative, hdrvr: HDRVR, uMsg: UInt32, lParam1: IntNative, lParam2: IntNative): IntNative {
+    return DefDriverProc(dwDriverIdentifier, hdrvr, uMsg, lParam1, lParam2)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_DriverCallback == "on"]
+foreign {
     func DriverCallback(dwCallback: UIntNative, dwFlags: UInt32, hDevice: HDRVR, dwMsg: UInt32, dwUser: UIntNative, dwParam1: UIntNative, dwParam2: UIntNative): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_DriverCallback == "on"]
+public unsafe func Windows_DriverCallback(dwCallback: UIntNative, dwFlags: UInt32, hDevice: HDRVR, dwMsg: UInt32, dwUser: UIntNative, dwParam1: UIntNative, dwParam2: UIntNative): Int32 {
+    return DriverCallback(dwCallback, dwFlags, hDevice, dwMsg, dwUser, dwParam1, dwParam2)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_DrvGetModuleHandle == "on"]
+foreign {
     func DrvGetModuleHandle(hDriver: HDRVR): CPointer<Unit>
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_DrvGetModuleHandle == "on"]
+public unsafe func Windows_DrvGetModuleHandle(hDriver: HDRVR): CPointer<Unit> {
+    return DrvGetModuleHandle(hDriver)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_GetDriverModuleHandle == "on"]
+foreign {
     func GetDriverModuleHandle(hDriver: HDRVR): CPointer<Unit>
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_GetDriverModuleHandle == "on"]
+public unsafe func Windows_GetDriverModuleHandle(hDriver: HDRVR): CPointer<Unit> {
+    return GetDriverModuleHandle(hDriver)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_OpenDriver == "on"]
+foreign {
     func OpenDriver(szDriverName: CPointer<UInt16>, szSectionName: CPointer<UInt16>, lParam2: IntNative): HDRVR
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_OpenDriver == "on"]
+public unsafe func Windows_OpenDriver(szDriverName: CPointer<UInt16>, szSectionName: CPointer<UInt16>, lParam2: IntNative): HDRVR {
+    return OpenDriver(szDriverName, szSectionName, lParam2)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_SendDriverMessage == "on"]
+foreign {
     func SendDriverMessage(hDriver: HDRVR, message: UInt32, lParam1: IntNative, lParam2: IntNative): IntNative
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_SendDriverMessage == "on"]
+public unsafe func Windows_SendDriverMessage(hDriver: HDRVR, message: UInt32, lParam1: IntNative, lParam2: IntNative): IntNative {
+    return SendDriverMessage(hDriver, message, lParam1, lParam2)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_joyGetDevCapsA == "on"]
+foreign {
     // param-hint: pjc bytes=param[2]
     func joyGetDevCapsA(uJoyID: UIntNative, pjc: CPointer<JOYCAPSA>, cbjc: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_joyGetDevCapsA == "on"]
+public unsafe func Windows_joyGetDevCapsA(uJoyID: UIntNative, pjc: CPointer<JOYCAPSA>, cbjc: UInt32): UInt32 {
+    return joyGetDevCapsA(uJoyID, pjc, cbjc)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_joyGetDevCapsW == "on"]
+foreign {
     // param-hint: pjc bytes=param[2]
     func joyGetDevCapsW(uJoyID: UIntNative, pjc: CPointer<JOYCAPSW>, cbjc: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_joyGetDevCapsW == "on"]
+public unsafe func Windows_joyGetDevCapsW(uJoyID: UIntNative, pjc: CPointer<JOYCAPSW>, cbjc: UInt32): UInt32 {
+    return joyGetDevCapsW(uJoyID, pjc, cbjc)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_joyGetNumDevs == "on"]
+foreign {
     func joyGetNumDevs(): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_joyGetNumDevs == "on"]
+public unsafe func Windows_joyGetNumDevs(): UInt32 {
+    return joyGetNumDevs()
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_joyGetPos == "on"]
+foreign {
     func joyGetPos(uJoyID: UInt32, pji: CPointer<JOYINFO>): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_joyGetPos == "on"]
+public unsafe func Windows_joyGetPos(uJoyID: UInt32, pji: CPointer<JOYINFO>): UInt32 {
+    return joyGetPos(uJoyID, pji)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_joyGetPosEx == "on"]
+foreign {
     func joyGetPosEx(uJoyID: UInt32, pji: CPointer<JOYINFOEX>): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_joyGetPosEx == "on"]
+public unsafe func Windows_joyGetPosEx(uJoyID: UInt32, pji: CPointer<JOYINFOEX>): UInt32 {
+    return joyGetPosEx(uJoyID, pji)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_joyGetThreshold == "on"]
+foreign {
     func joyGetThreshold(uJoyID: UInt32, puThreshold: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_joyGetThreshold == "on"]
+public unsafe func Windows_joyGetThreshold(uJoyID: UInt32, puThreshold: CPointer<UInt32>): UInt32 {
+    return joyGetThreshold(uJoyID, puThreshold)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_joyReleaseCapture == "on"]
+foreign {
     func joyReleaseCapture(uJoyID: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_joyReleaseCapture == "on"]
+public unsafe func Windows_joyReleaseCapture(uJoyID: UInt32): UInt32 {
+    return joyReleaseCapture(uJoyID)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_joySetCapture == "on"]
+foreign {
     func joySetCapture(hwnd: CPointer<Unit>, uJoyID: UInt32, uPeriod: UInt32, fChanged: Int32): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_joySetCapture == "on"]
+public unsafe func Windows_joySetCapture(hwnd: CPointer<Unit>, uJoyID: UInt32, uPeriod: UInt32, fChanged: Int32): UInt32 {
+    return joySetCapture(hwnd, uJoyID, uPeriod, fChanged)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_joySetThreshold == "on"]
+foreign {
     func joySetThreshold(uJoyID: UInt32, uThreshold: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_joySetThreshold == "on"]
+public unsafe func Windows_joySetThreshold(uJoyID: UInt32, uThreshold: UInt32): UInt32 {
+    return joySetThreshold(uJoyID, uThreshold)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciDriverNotify == "on"]
+foreign {
     func mciDriverNotify(hwndCallback: CPointer<Unit>, wDeviceID: UInt32, uStatus: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciDriverNotify == "on"]
+public unsafe func Windows_mciDriverNotify(hwndCallback: CPointer<Unit>, wDeviceID: UInt32, uStatus: UInt32): Int32 {
+    return mciDriverNotify(hwndCallback, wDeviceID, uStatus)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciDriverYield == "on"]
+foreign {
     func mciDriverYield(wDeviceID: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciDriverYield == "on"]
+public unsafe func Windows_mciDriverYield(wDeviceID: UInt32): UInt32 {
+    return mciDriverYield(wDeviceID)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciFreeCommandResource == "on"]
+foreign {
     func mciFreeCommandResource(wTable: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciFreeCommandResource == "on"]
+public unsafe func Windows_mciFreeCommandResource(wTable: UInt32): Int32 {
+    return mciFreeCommandResource(wTable)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciGetCreatorTask == "on"]
+foreign {
     func mciGetCreatorTask(mciId: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciGetCreatorTask == "on"]
+public unsafe func Windows_mciGetCreatorTask(mciId: UInt32): CPointer<Unit> {
+    return mciGetCreatorTask(mciId)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciGetDeviceIDA == "on"]
+foreign {
     func mciGetDeviceIDA(pszDevice: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciGetDeviceIDA == "on"]
+public unsafe func Windows_mciGetDeviceIDA(pszDevice: CPointer<UInt8>): UInt32 {
+    return mciGetDeviceIDA(pszDevice)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciGetDeviceIDFromElementIDA == "on"]
+foreign {
     func mciGetDeviceIDFromElementIDA(dwElementID: UInt32, lpstrType: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciGetDeviceIDFromElementIDA == "on"]
+public unsafe func Windows_mciGetDeviceIDFromElementIDA(dwElementID: UInt32, lpstrType: CPointer<UInt8>): UInt32 {
+    return mciGetDeviceIDFromElementIDA(dwElementID, lpstrType)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciGetDeviceIDFromElementIDW == "on"]
+foreign {
     func mciGetDeviceIDFromElementIDW(dwElementID: UInt32, lpstrType: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciGetDeviceIDFromElementIDW == "on"]
+public unsafe func Windows_mciGetDeviceIDFromElementIDW(dwElementID: UInt32, lpstrType: CPointer<UInt16>): UInt32 {
+    return mciGetDeviceIDFromElementIDW(dwElementID, lpstrType)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciGetDeviceIDW == "on"]
+foreign {
     func mciGetDeviceIDW(pszDevice: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciGetDeviceIDW == "on"]
+public unsafe func Windows_mciGetDeviceIDW(pszDevice: CPointer<UInt16>): UInt32 {
+    return mciGetDeviceIDW(pszDevice)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciGetDriverData == "on"]
+foreign {
     func mciGetDriverData(wDeviceID: UInt32): UIntNative
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciGetDriverData == "on"]
+public unsafe func Windows_mciGetDriverData(wDeviceID: UInt32): UIntNative {
+    return mciGetDriverData(wDeviceID)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciGetErrorStringA == "on"]
+foreign {
     // param-hint: pszText len=param[2]
     func mciGetErrorStringA(mcierr: UInt32, pszText: CPointer<UInt8>, cchText: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciGetErrorStringA == "on"]
+public unsafe func Windows_mciGetErrorStringA(mcierr: UInt32, pszText: CPointer<UInt8>, cchText: UInt32): Int32 {
+    return mciGetErrorStringA(mcierr, pszText, cchText)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciGetErrorStringW == "on"]
+foreign {
     // param-hint: pszText len=param[2]
     func mciGetErrorStringW(mcierr: UInt32, pszText: CPointer<UInt16>, cchText: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciGetErrorStringW == "on"]
+public unsafe func Windows_mciGetErrorStringW(mcierr: UInt32, pszText: CPointer<UInt16>, cchText: UInt32): Int32 {
+    return mciGetErrorStringW(mcierr, pszText, cchText)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciGetYieldProc == "on"]
+foreign {
     func mciGetYieldProc(mciId: UInt32, pdwYieldData: CPointer<UInt32>): YIELDPROC
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciGetYieldProc == "on"]
+public unsafe func Windows_mciGetYieldProc(mciId: UInt32, pdwYieldData: CPointer<UInt32>): YIELDPROC {
+    return mciGetYieldProc(mciId, pdwYieldData)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciLoadCommandResource == "on"]
+foreign {
     func mciLoadCommandResource(hInstance: CPointer<Unit>, lpResName: CPointer<UInt16>, wType: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciLoadCommandResource == "on"]
+public unsafe func Windows_mciLoadCommandResource(hInstance: CPointer<Unit>, lpResName: CPointer<UInt16>, wType: UInt32): UInt32 {
+    return mciLoadCommandResource(hInstance, lpResName, wType)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciSendCommandA == "on"]
+foreign {
     // param-hint: dwParam1 optional
     // param-hint: dwParam2 optional
     func mciSendCommandA(mciId: UInt32, uMsg: UInt32, dwParam1: UIntNative, dwParam2: UIntNative): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciSendCommandA == "on"]
+public unsafe func Windows_mciSendCommandA(mciId: UInt32, uMsg: UInt32, dwParam1: UIntNative, dwParam2: UIntNative): UInt32 {
+    return mciSendCommandA(mciId, uMsg, dwParam1, dwParam2)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciSendCommandW == "on"]
+foreign {
     // param-hint: dwParam1 optional
     // param-hint: dwParam2 optional
     func mciSendCommandW(mciId: UInt32, uMsg: UInt32, dwParam1: UIntNative, dwParam2: UIntNative): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciSendCommandW == "on"]
+public unsafe func Windows_mciSendCommandW(mciId: UInt32, uMsg: UInt32, dwParam1: UIntNative, dwParam2: UIntNative): UInt32 {
+    return mciSendCommandW(mciId, uMsg, dwParam1, dwParam2)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciSendStringA == "on"]
+foreign {
     // param-hint: lpstrReturnString len=param[2] optional
     // param-hint: hwndCallback optional
     func mciSendStringA(lpstrCommand: CPointer<UInt8>, lpstrReturnString: CPointer<UInt8>, uReturnLength: UInt32, hwndCallback: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciSendStringA == "on"]
+public unsafe func Windows_mciSendStringA(lpstrCommand: CPointer<UInt8>, lpstrReturnString: CPointer<UInt8>, uReturnLength: UInt32, hwndCallback: CPointer<Unit>): UInt32 {
+    return mciSendStringA(lpstrCommand, lpstrReturnString, uReturnLength, hwndCallback)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciSendStringW == "on"]
+foreign {
     // param-hint: lpstrReturnString len=param[2] optional
     // param-hint: hwndCallback optional
     func mciSendStringW(lpstrCommand: CPointer<UInt16>, lpstrReturnString: CPointer<UInt16>, uReturnLength: UInt32, hwndCallback: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciSendStringW == "on"]
+public unsafe func Windows_mciSendStringW(lpstrCommand: CPointer<UInt16>, lpstrReturnString: CPointer<UInt16>, uReturnLength: UInt32, hwndCallback: CPointer<Unit>): UInt32 {
+    return mciSendStringW(lpstrCommand, lpstrReturnString, uReturnLength, hwndCallback)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciSetDriverData == "on"]
+foreign {
     func mciSetDriverData(wDeviceID: UInt32, dwData: UIntNative): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciSetDriverData == "on"]
+public unsafe func Windows_mciSetDriverData(wDeviceID: UInt32, dwData: UIntNative): Int32 {
+    return mciSetDriverData(wDeviceID, dwData)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciSetYieldProc == "on"]
+foreign {
     // param-hint: fpYieldProc optional
     func mciSetYieldProc(mciId: UInt32, fpYieldProc: YIELDPROC, dwYieldData: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciSetYieldProc == "on"]
+public unsafe func Windows_mciSetYieldProc(mciId: UInt32, fpYieldProc: YIELDPROC, dwYieldData: UInt32): Int32 {
+    return mciSetYieldProc(mciId, fpYieldProc, dwYieldData)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmDrvInstall == "on"]
+foreign {
     func mmDrvInstall(hDriver: HDRVR, wszDrvEntry: CPointer<UInt16>, drvMessage: DRIVERMSGPROC, wFlags: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmDrvInstall == "on"]
+public unsafe func Windows_mmDrvInstall(hDriver: HDRVR, wszDrvEntry: CPointer<UInt16>, drvMessage: DRIVERMSGPROC, wFlags: UInt32): UInt32 {
+    return mmDrvInstall(hDriver, wszDrvEntry, drvMessage, wFlags)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmGetCurrentTask == "on"]
+foreign {
     func mmGetCurrentTask(): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmGetCurrentTask == "on"]
+public unsafe func Windows_mmGetCurrentTask(): UInt32 {
+    return mmGetCurrentTask()
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmTaskBlock == "on"]
+foreign {
     func mmTaskBlock(h: UInt32): Unit
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmTaskBlock == "on"]
+public unsafe func Windows_mmTaskBlock(h: UInt32): Unit {
+    mmTaskBlock(h)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmTaskCreate == "on"]
+foreign {
     func mmTaskCreate(lpfn: LPTASKCALLBACK, lph: CPointer<CPointer<Unit>>, dwInst: UIntNative): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmTaskCreate == "on"]
+public unsafe func Windows_mmTaskCreate(lpfn: LPTASKCALLBACK, lph: CPointer<CPointer<Unit>>, dwInst: UIntNative): UInt32 {
+    return mmTaskCreate(lpfn, lph, dwInst)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmTaskSignal == "on"]
+foreign {
     func mmTaskSignal(h: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmTaskSignal == "on"]
+public unsafe func Windows_mmTaskSignal(h: UInt32): Int32 {
+    return mmTaskSignal(h)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmTaskYield == "on"]
+foreign {
     func mmTaskYield(): Unit
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmTaskYield == "on"]
+public unsafe func Windows_mmTaskYield(): Unit {
+    mmTaskYield()
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioAdvance == "on"]
+foreign {
     // param-hint: pmmioinfo optional
     func mmioAdvance(hmmio: HMMIO, pmmioinfo: CPointer<MMIOINFO>, fuAdvance: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioAdvance == "on"]
+public unsafe func Windows_mmioAdvance(hmmio: HMMIO, pmmioinfo: CPointer<MMIOINFO>, fuAdvance: UInt32): UInt32 {
+    return mmioAdvance(hmmio, pmmioinfo, fuAdvance)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioAscend == "on"]
+foreign {
     func mmioAscend(hmmio: HMMIO, pmmcki: CPointer<MMCKINFO>, fuAscend: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioAscend == "on"]
+public unsafe func Windows_mmioAscend(hmmio: HMMIO, pmmcki: CPointer<MMCKINFO>, fuAscend: UInt32): UInt32 {
+    return mmioAscend(hmmio, pmmcki, fuAscend)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioClose == "on"]
+foreign {
     func mmioClose(hmmio: HMMIO, fuClose: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioClose == "on"]
+public unsafe func Windows_mmioClose(hmmio: HMMIO, fuClose: UInt32): UInt32 {
+    return mmioClose(hmmio, fuClose)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioCreateChunk == "on"]
+foreign {
     func mmioCreateChunk(hmmio: HMMIO, pmmcki: CPointer<MMCKINFO>, fuCreate: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioCreateChunk == "on"]
+public unsafe func Windows_mmioCreateChunk(hmmio: HMMIO, pmmcki: CPointer<MMCKINFO>, fuCreate: UInt32): UInt32 {
+    return mmioCreateChunk(hmmio, pmmcki, fuCreate)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioDescend == "on"]
+foreign {
     // param-hint: pmmckiParent optional
     func mmioDescend(hmmio: HMMIO, pmmcki: CPointer<MMCKINFO>, pmmckiParent: CPointer<MMCKINFO>, fuDescend: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioDescend == "on"]
+public unsafe func Windows_mmioDescend(hmmio: HMMIO, pmmcki: CPointer<MMCKINFO>, pmmckiParent: CPointer<MMCKINFO>, fuDescend: UInt32): UInt32 {
+    return mmioDescend(hmmio, pmmcki, pmmckiParent, fuDescend)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioFlush == "on"]
+foreign {
     func mmioFlush(hmmio: HMMIO, fuFlush: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioFlush == "on"]
+public unsafe func Windows_mmioFlush(hmmio: HMMIO, fuFlush: UInt32): UInt32 {
+    return mmioFlush(hmmio, fuFlush)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioGetInfo == "on"]
+foreign {
     func mmioGetInfo(hmmio: HMMIO, pmmioinfo: CPointer<MMIOINFO>, fuInfo: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioGetInfo == "on"]
+public unsafe func Windows_mmioGetInfo(hmmio: HMMIO, pmmioinfo: CPointer<MMIOINFO>, fuInfo: UInt32): UInt32 {
+    return mmioGetInfo(hmmio, pmmioinfo, fuInfo)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioInstallIOProcA == "on"]
+foreign {
     // param-hint: pIOProc optional
     func mmioInstallIOProcA(fccIOProc: UInt32, pIOProc: LPMMIOPROC, dwFlags: UInt32): LPMMIOPROC
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioInstallIOProcA == "on"]
+public unsafe func Windows_mmioInstallIOProcA(fccIOProc: UInt32, pIOProc: LPMMIOPROC, dwFlags: UInt32): LPMMIOPROC {
+    return mmioInstallIOProcA(fccIOProc, pIOProc, dwFlags)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioInstallIOProcW == "on"]
+foreign {
     // param-hint: pIOProc optional
     func mmioInstallIOProcW(fccIOProc: UInt32, pIOProc: LPMMIOPROC, dwFlags: UInt32): LPMMIOPROC
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioInstallIOProcW == "on"]
+public unsafe func Windows_mmioInstallIOProcW(fccIOProc: UInt32, pIOProc: LPMMIOPROC, dwFlags: UInt32): LPMMIOPROC {
+    return mmioInstallIOProcW(fccIOProc, pIOProc, dwFlags)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioOpenA == "on"]
+foreign {
     // param-hint: pszFileName fixed=128 optional
     // param-hint: pmmioinfo optional
     func mmioOpenA(pszFileName: CPointer<UInt8>, pmmioinfo: CPointer<MMIOINFO>, fdwOpen: UInt32): HMMIO
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioOpenA == "on"]
+public unsafe func Windows_mmioOpenA(pszFileName: CPointer<UInt8>, pmmioinfo: CPointer<MMIOINFO>, fdwOpen: UInt32): HMMIO {
+    return mmioOpenA(pszFileName, pmmioinfo, fdwOpen)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioOpenW == "on"]
+foreign {
     // param-hint: pszFileName fixed=128 optional
     // param-hint: pmmioinfo optional
     func mmioOpenW(pszFileName: CPointer<UInt16>, pmmioinfo: CPointer<MMIOINFO>, fdwOpen: UInt32): HMMIO
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioOpenW == "on"]
+public unsafe func Windows_mmioOpenW(pszFileName: CPointer<UInt16>, pmmioinfo: CPointer<MMIOINFO>, fdwOpen: UInt32): HMMIO {
+    return mmioOpenW(pszFileName, pmmioinfo, fdwOpen)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioRead == "on"]
+foreign {
     // param-hint: pch bytes=param[2]
     func mmioRead(hmmio: HMMIO, pch: CPointer<Int8>, cch: Int32): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioRead == "on"]
+public unsafe func Windows_mmioRead(hmmio: HMMIO, pch: CPointer<Int8>, cch: Int32): Int32 {
+    return mmioRead(hmmio, pch, cch)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioRenameA == "on"]
+foreign {
     // param-hint: pmmioinfo optional
     func mmioRenameA(pszFileName: CPointer<UInt8>, pszNewFileName: CPointer<UInt8>, pmmioinfo: CPointer<MMIOINFO>, fdwRename: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioRenameA == "on"]
+public unsafe func Windows_mmioRenameA(pszFileName: CPointer<UInt8>, pszNewFileName: CPointer<UInt8>, pmmioinfo: CPointer<MMIOINFO>, fdwRename: UInt32): UInt32 {
+    return mmioRenameA(pszFileName, pszNewFileName, pmmioinfo, fdwRename)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioRenameW == "on"]
+foreign {
     // param-hint: pmmioinfo optional
     func mmioRenameW(pszFileName: CPointer<UInt16>, pszNewFileName: CPointer<UInt16>, pmmioinfo: CPointer<MMIOINFO>, fdwRename: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioRenameW == "on"]
+public unsafe func Windows_mmioRenameW(pszFileName: CPointer<UInt16>, pszNewFileName: CPointer<UInt16>, pmmioinfo: CPointer<MMIOINFO>, fdwRename: UInt32): UInt32 {
+    return mmioRenameW(pszFileName, pszNewFileName, pmmioinfo, fdwRename)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioSeek == "on"]
+foreign {
     func mmioSeek(hmmio: HMMIO, lOffset: Int32, iOrigin: Int32): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioSeek == "on"]
+public unsafe func Windows_mmioSeek(hmmio: HMMIO, lOffset: Int32, iOrigin: Int32): Int32 {
+    return mmioSeek(hmmio, lOffset, iOrigin)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioSendMessage == "on"]
+foreign {
     // param-hint: lParam1 optional
     // param-hint: lParam2 optional
     func mmioSendMessage(hmmio: HMMIO, uMsg: UInt32, lParam1: IntNative, lParam2: IntNative): IntNative
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioSendMessage == "on"]
+public unsafe func Windows_mmioSendMessage(hmmio: HMMIO, uMsg: UInt32, lParam1: IntNative, lParam2: IntNative): IntNative {
+    return mmioSendMessage(hmmio, uMsg, lParam1, lParam2)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioSetBuffer == "on"]
+foreign {
     // param-hint: pchBuffer len=param[2] optional
     func mmioSetBuffer(hmmio: HMMIO, pchBuffer: CPointer<UInt8>, cchBuffer: Int32, fuBuffer: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioSetBuffer == "on"]
+public unsafe func Windows_mmioSetBuffer(hmmio: HMMIO, pchBuffer: CPointer<UInt8>, cchBuffer: Int32, fuBuffer: UInt32): UInt32 {
+    return mmioSetBuffer(hmmio, pchBuffer, cchBuffer, fuBuffer)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioSetInfo == "on"]
+foreign {
     func mmioSetInfo(hmmio: HMMIO, pmmioinfo: CPointer<MMIOINFO>, fuInfo: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioSetInfo == "on"]
+public unsafe func Windows_mmioSetInfo(hmmio: HMMIO, pmmioinfo: CPointer<MMIOINFO>, fuInfo: UInt32): UInt32 {
+    return mmioSetInfo(hmmio, pmmioinfo, fuInfo)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioStringToFOURCCA == "on"]
+foreign {
     func mmioStringToFOURCCA(sz: CPointer<UInt8>, uFlags: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioStringToFOURCCA == "on"]
+public unsafe func Windows_mmioStringToFOURCCA(sz: CPointer<UInt8>, uFlags: UInt32): UInt32 {
+    return mmioStringToFOURCCA(sz, uFlags)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioStringToFOURCCW == "on"]
+foreign {
     func mmioStringToFOURCCW(sz: CPointer<UInt16>, uFlags: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioStringToFOURCCW == "on"]
+public unsafe func Windows_mmioStringToFOURCCW(sz: CPointer<UInt16>, uFlags: UInt32): UInt32 {
+    return mmioStringToFOURCCW(sz, uFlags)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioWrite == "on"]
+foreign {
     // param-hint: pch bytes=param[2]
     func mmioWrite(hmmio: HMMIO, pch: CPointer<UInt8>, cch: Int32): Int32
 }
 
-@When[API_MS_WIN_MM_MISC_L1_1_1 == "on"]
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioWrite == "on"]
+public unsafe func Windows_mmioWrite(hmmio: HMMIO, pch: CPointer<UInt8>, cch: Int32): Int32 {
+    return mmioWrite(hmmio, pch, cch)
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && API_MS_WIN_MM_MISC_L1_1_1 == "on" && Windows_Win32_Media_Multimedia_sndOpenSound == "on"]
 foreign {
     func sndOpenSound(EventName: CPointer<UInt16>, AppName: CPointer<UInt16>, Flags: Int32, FileHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_Multimedia == "on" && API_MS_WIN_MM_MISC_L1_1_1 == "on" && Windows_Win32_Media_Multimedia_sndOpenSound == "on"]
+public unsafe func Windows_sndOpenSound(EventName: CPointer<UInt16>, AppName: CPointer<UInt16>, Flags: Int32, FileHandle: CPointer<CPointer<Unit>>): Int32 {
+    return sndOpenSound(EventName, AppName, Flags, FileHandle)
 }
 
 @When[Windows_Win32_Media_Multimedia == "on"]

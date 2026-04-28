@@ -3,7 +3,6 @@ package windows_sys.Wdk.Devices.HumanInterfaceDevice
 
 import windows_interface.{GUID}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 
 
@@ -51,11 +50,52 @@ public struct VHF_CONFIG {
     public init() {}
 }
 
-@When[VHFUM == "on"]
+@When[Windows_Wdk_Devices_HumanInterfaceDevice == "on" && VHFUM == "on" && Windows_Wdk_Devices_HumanInterfaceDevice_VhfAsyncOperationComplete == "on"]
 foreign {
     func VhfAsyncOperationComplete(VhfOperationHandle: CPointer<Unit>, CompletionStatus: Int32): Int32
+}
+
+@When[Windows_Wdk_Devices_HumanInterfaceDevice == "on" && VHFUM == "on" && Windows_Wdk_Devices_HumanInterfaceDevice_VhfAsyncOperationComplete == "on"]
+public unsafe func Windows_VhfAsyncOperationComplete(VhfOperationHandle: CPointer<Unit>, CompletionStatus: Int32): Int32 {
+    return VhfAsyncOperationComplete(VhfOperationHandle, CompletionStatus)
+}
+
+@When[Windows_Wdk_Devices_HumanInterfaceDevice == "on" && VHFUM == "on" && Windows_Wdk_Devices_HumanInterfaceDevice_VhfCreate == "on"]
+foreign {
     func VhfCreate(VhfConfig: CPointer<VHF_CONFIG>, VhfHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Wdk_Devices_HumanInterfaceDevice == "on" && VHFUM == "on" && Windows_Wdk_Devices_HumanInterfaceDevice_VhfCreate == "on"]
+public unsafe func Windows_VhfCreate(VhfConfig: CPointer<VHF_CONFIG>, VhfHandle: CPointer<CPointer<Unit>>): Int32 {
+    return VhfCreate(VhfConfig, VhfHandle)
+}
+
+@When[Windows_Wdk_Devices_HumanInterfaceDevice == "on" && VHFUM == "on" && Windows_Wdk_Devices_HumanInterfaceDevice_VhfDelete == "on"]
+foreign {
     func VhfDelete(VhfHandle: CPointer<Unit>, Wait: UInt8): Unit
+}
+
+@When[Windows_Wdk_Devices_HumanInterfaceDevice == "on" && VHFUM == "on" && Windows_Wdk_Devices_HumanInterfaceDevice_VhfDelete == "on"]
+public unsafe func Windows_VhfDelete(VhfHandle: CPointer<Unit>, Wait: UInt8): Unit {
+    VhfDelete(VhfHandle, Wait)
+}
+
+@When[Windows_Wdk_Devices_HumanInterfaceDevice == "on" && VHFUM == "on" && Windows_Wdk_Devices_HumanInterfaceDevice_VhfReadReportSubmit == "on"]
+foreign {
     func VhfReadReportSubmit(VhfHandle: CPointer<Unit>, HidTransferPacket: CPointer<HID_XFER_PACKET>): Int32
+}
+
+@When[Windows_Wdk_Devices_HumanInterfaceDevice == "on" && VHFUM == "on" && Windows_Wdk_Devices_HumanInterfaceDevice_VhfReadReportSubmit == "on"]
+public unsafe func Windows_VhfReadReportSubmit(VhfHandle: CPointer<Unit>, HidTransferPacket: CPointer<HID_XFER_PACKET>): Int32 {
+    return VhfReadReportSubmit(VhfHandle, HidTransferPacket)
+}
+
+@When[Windows_Wdk_Devices_HumanInterfaceDevice == "on" && VHFUM == "on" && Windows_Wdk_Devices_HumanInterfaceDevice_VhfStart == "on"]
+foreign {
     func VhfStart(VhfHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Wdk_Devices_HumanInterfaceDevice == "on" && VHFUM == "on" && Windows_Wdk_Devices_HumanInterfaceDevice_VhfStart == "on"]
+public unsafe func Windows_VhfStart(VhfHandle: CPointer<Unit>): Int32 {
+    return VhfStart(VhfHandle)
 }

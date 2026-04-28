@@ -4,7 +4,6 @@ package windows_sys.ApplicationModel.Resources.Core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_UI == "on"]
 import windows_sys.UI as UI
 import windows_sys._impl_l1 as _impl_l1
 
@@ -215,12 +214,13 @@ public let ResourceQualifierPersistence_LocalMachine: ResourceQualifierPersisten
 @C
 public struct IResourceCandidateVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Qualifiers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IsMatch: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var IsMatchAsDefault: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var IsDefault: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var ValueAsString: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var GetValueAsFileAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetQualifierValue: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -266,6 +266,7 @@ public class IResourceCandidate <: InterfaceWrapperBase & ComInterface {
         readVtbl<IResourceCandidateVtbl>(IResourceCandidateVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Qualifiers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -296,7 +297,7 @@ public class IResourceCandidate <: InterfaceWrapperBase & ComInterface {
         return __vt.ValueAsString(__liveRaw, result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetValueAsFileAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -425,10 +426,13 @@ public class IResourceContextStatics3 <: InterfaceWrapperBase & ComInterface {
 public struct INamedResourceVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Uri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Candidates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Resolve: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ResolveForContext: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ResolveAll: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ResolveAllForContext: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -479,6 +483,7 @@ public class INamedResource <: InterfaceWrapperBase & ComInterface {
         return __vt.Uri(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Candidates(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -497,12 +502,14 @@ public class INamedResource <: InterfaceWrapperBase & ComInterface {
         return __vt.ResolveForContext(__liveRaw, resourceContext, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ResolveAll(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ResolveAll(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ResolveAllForContext(resourceContext: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -514,12 +521,17 @@ public class INamedResource <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IResourceContextVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var QualifierValues: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Reset: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ResetQualifierValues: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var OverrideToMatch: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Clone: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Languages: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetLanguages: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -564,6 +576,7 @@ public class IResourceContext <: InterfaceWrapperBase & ComInterface {
         readVtbl<IResourceContextVtbl>(IResourceContextVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func QualifierValues(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -576,12 +589,14 @@ public class IResourceContext <: InterfaceWrapperBase & ComInterface {
         return __vt.Reset(__liveRaw)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ResetQualifierValues(qualifierNames: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ResetQualifierValues(__liveRaw, qualifierNames)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OverrideToMatch(result: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -594,12 +609,14 @@ public class IResourceContext <: InterfaceWrapperBase & ComInterface {
         return __vt.Clone(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Languages(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Languages(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetLanguages(languages: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -611,6 +628,7 @@ public class IResourceContext <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IResourceContextStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateMatchingContext: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -655,6 +673,7 @@ public class IResourceContextStatics <: InterfaceWrapperBase & ComInterface {
         readVtbl<IResourceContextStaticsVtbl>(IResourceContextStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateMatchingContext(result: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -669,6 +688,7 @@ public struct IResourceContextStatics2Vtbl {
     public var GetForCurrentView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetGlobalQualifierValue: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     public var ResetGlobalQualifierValues: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ResetGlobalQualifierValuesForSpecifiedQualifiers: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var GetForViewIndependentUse: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -732,6 +752,7 @@ public class IResourceContextStatics2 <: InterfaceWrapperBase & ComInterface {
         return __vt.ResetGlobalQualifierValues(__liveRaw)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ResetGlobalQualifierValuesForSpecifiedQualifiers(qualifierNames: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -806,12 +827,14 @@ public class IResourceContextStatics4 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IResourceManagerVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var MainResourceMap: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var AllResourceMaps: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var DefaultContext: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var LoadPriFiles: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var UnloadPriFiles: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -856,12 +879,14 @@ public class IResourceManager <: InterfaceWrapperBase & ComInterface {
         readVtbl<IResourceManagerVtbl>(IResourceManagerVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MainResourceMap(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.MainResourceMap(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AllResourceMaps(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -874,14 +899,14 @@ public class IResourceManager <: InterfaceWrapperBase & ComInterface {
         return __vt.DefaultContext(__liveRaw, result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func LoadPriFiles(files: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.LoadPriFiles(__liveRaw, files)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func UnloadPriFiles(files: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -893,7 +918,9 @@ public class IResourceManager <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IResourceManager2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAllNamedResourcesForPackage: CFunc<(CPointer<Unit>, CPointer<Unit>, ResourceLayoutInfo, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAllSubtreesForPackage: CFunc<(CPointer<Unit>, CPointer<Unit>, ResourceLayoutInfo, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -938,12 +965,14 @@ public class IResourceManager2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IResourceManager2Vtbl>(IResourceManager2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAllNamedResourcesForPackage(packageName: CPointer<Unit>, resourceLayoutInfo: ResourceLayoutInfo, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAllNamedResourcesForPackage(__liveRaw, packageName, resourceLayoutInfo, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAllSubtreesForPackage(packageName: CPointer<Unit>, resourceLayoutInfo: ResourceLayoutInfo, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1020,6 +1049,7 @@ public struct IResourceMapVtbl {
     public var Uri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetValue: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetValueForContext: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSubtree: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -1082,6 +1112,7 @@ public class IResourceMap <: InterfaceWrapperBase & ComInterface {
         return __vt.GetValueForContext(__liveRaw, resource, context, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSubtree(reference: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

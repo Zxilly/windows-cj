@@ -5,11 +5,8 @@ import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrap
 import windows_interface as windows_interface
 import windows_polyfill.{packedReadInt64, packedReadUInt32, packedReadValue, packedWriteInt64, packedWriteUInt32, packedWriteValue, unionReadFloat32, unionReadFloat64, unionReadInt32, unionReadInt64, unionReadUInt16, unionReadUInt32, unionReadUInt64, unionWriteFloat32, unionWriteFloat64, unionWriteInt32, unionWriteInt64, unionWriteUInt16, unionWriteUInt32, unionWriteUInt64}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Media_DirectShow == "on"]
 import windows_sys.Win32.Media.DirectShow as Win32_Media_DirectShow
-@When[Windows_Win32_Media_MediaFoundation == "on"]
 import windows_sys.Win32.Media.MediaFoundation as Win32_Media_MediaFoundation
 import windows_sys.Win32.Media._impl_l0 as Win32_Media__impl_l0
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
@@ -16078,34 +16075,148 @@ public struct KSSTREAM_SEGMENT {
     public init() {}
 }
 
-@When[KSPROXY_AX == "on"]
+@When[Windows_Win32_Media_KernelStreaming == "on" && KSPROXY_AX == "on" && Windows_Win32_Media_KernelStreaming_KsGetMediaType == "on" && Windows_Win32_Media_MediaFoundation == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func KsGetMediaType(Position: Int32, AmMediaType: CPointer<Win32_Media_MediaFoundation.AM_MEDIA_TYPE>, FilterHandle: CPointer<Unit>, PinFactoryId: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_KernelStreaming == "on" && KSPROXY_AX == "on" && Windows_Win32_Media_KernelStreaming_KsGetMediaType == "on" && Windows_Win32_Media_MediaFoundation == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_KsGetMediaType(Position: Int32, AmMediaType: CPointer<Win32_Media_MediaFoundation.AM_MEDIA_TYPE>, FilterHandle: CPointer<Unit>, PinFactoryId: UInt32): Int32 {
+    return KsGetMediaType(Position, AmMediaType, FilterHandle, PinFactoryId)
+}
+
+@When[Windows_Win32_Media_KernelStreaming == "on" && KSPROXY_AX == "on" && Windows_Win32_Media_KernelStreaming_KsGetMediaTypeCount == "on"]
 foreign {
     func KsGetMediaTypeCount(FilterHandle: CPointer<Unit>, PinFactoryId: UInt32, MediaTypeCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Media_KernelStreaming == "on" && KSPROXY_AX == "on" && Windows_Win32_Media_KernelStreaming_KsGetMediaTypeCount == "on"]
+public unsafe func Windows_KsGetMediaTypeCount(FilterHandle: CPointer<Unit>, PinFactoryId: UInt32, MediaTypeCount: CPointer<UInt32>): Int32 {
+    return KsGetMediaTypeCount(FilterHandle, PinFactoryId, MediaTypeCount)
+}
+
+@When[Windows_Win32_Media_KernelStreaming == "on" && KSPROXY_AX == "on" && Windows_Win32_Media_KernelStreaming_KsGetMultiplePinFactoryItems == "on"]
+foreign {
     func KsGetMultiplePinFactoryItems(FilterHandle: CPointer<Unit>, PinFactoryId: UInt32, PropertyId: UInt32, Items: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_KernelStreaming == "on" && KSPROXY_AX == "on" && Windows_Win32_Media_KernelStreaming_KsGetMultiplePinFactoryItems == "on"]
+public unsafe func Windows_KsGetMultiplePinFactoryItems(FilterHandle: CPointer<Unit>, PinFactoryId: UInt32, PropertyId: UInt32, Items: CPointer<CPointer<Unit>>): Int32 {
+    return KsGetMultiplePinFactoryItems(FilterHandle, PinFactoryId, PropertyId, Items)
+}
+
+@When[Windows_Win32_Media_KernelStreaming == "on" && KSPROXY_AX == "on" && Windows_Win32_Media_KernelStreaming_KsOpenDefaultDevice == "on"]
+foreign {
     func KsOpenDefaultDevice(Category: CPointer<GUID>, Access: UInt32, DeviceHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_KernelStreaming == "on" && KSPROXY_AX == "on" && Windows_Win32_Media_KernelStreaming_KsOpenDefaultDevice == "on"]
+public unsafe func Windows_KsOpenDefaultDevice(Category: CPointer<GUID>, Access: UInt32, DeviceHandle: CPointer<CPointer<Unit>>): Int32 {
+    return KsOpenDefaultDevice(Category, Access, DeviceHandle)
+}
+
+@When[Windows_Win32_Media_KernelStreaming == "on" && KSPROXY_AX == "on" && Windows_Win32_Media_KernelStreaming_KsResolveRequiredAttributes == "on"]
+foreign {
     // param-hint: Attributes optional
     func KsResolveRequiredAttributes(DataRange: CPointer<KSDATAFORMAT>, Attributes: CPointer<KSMULTIPLE_ITEM>): Int32
+}
+
+@When[Windows_Win32_Media_KernelStreaming == "on" && KSPROXY_AX == "on" && Windows_Win32_Media_KernelStreaming_KsResolveRequiredAttributes == "on"]
+public unsafe func Windows_KsResolveRequiredAttributes(DataRange: CPointer<KSDATAFORMAT>, Attributes: CPointer<KSMULTIPLE_ITEM>): Int32 {
+    return KsResolveRequiredAttributes(DataRange, Attributes)
+}
+
+@When[Windows_Win32_Media_KernelStreaming == "on" && KSPROXY_AX == "on" && Windows_Win32_Media_KernelStreaming_KsSynchronousDeviceControl == "on"]
+foreign {
     // param-hint: InBuffer bytes=param[3] optional
     // param-hint: OutBuffer bytes=param[5] optional
     // param-hint: BytesReturned optional
     func KsSynchronousDeviceControl(Handle: CPointer<Unit>, IoControl: UInt32, InBuffer: CPointer<Unit>, InLength: UInt32, OutBuffer: CPointer<Unit>, OutLength: UInt32, BytesReturned: CPointer<UInt32>): Int32
 }
 
-@When[KSPROXY_AX == "on" && (Windows_Win32_Media_MediaFoundation == "on" && Windows_Win32_System_Com == "on")]
-foreign {
-    func KsGetMediaType(Position: Int32, AmMediaType: CPointer<Win32_Media_MediaFoundation.AM_MEDIA_TYPE>, FilterHandle: CPointer<Unit>, PinFactoryId: UInt32): Int32
+@When[Windows_Win32_Media_KernelStreaming == "on" && KSPROXY_AX == "on" && Windows_Win32_Media_KernelStreaming_KsSynchronousDeviceControl == "on"]
+public unsafe func Windows_KsSynchronousDeviceControl(Handle: CPointer<Unit>, IoControl: UInt32, InBuffer: CPointer<Unit>, InLength: UInt32, OutBuffer: CPointer<Unit>, OutLength: UInt32, BytesReturned: CPointer<UInt32>): Int32 {
+    return KsSynchronousDeviceControl(Handle, IoControl, InBuffer, InLength, OutBuffer, OutLength, BytesReturned)
 }
 
-@When[KSUSER == "on"]
+@When[Windows_Win32_Media_KernelStreaming == "on" && KSUSER == "on" && Windows_Win32_Media_KernelStreaming_KsCreateAllocator == "on"]
 foreign {
     func KsCreateAllocator(ConnectionHandle: CPointer<Unit>, AllocatorFraming: CPointer<KSALLOCATOR_FRAMING>, AllocatorHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Media_KernelStreaming == "on" && KSUSER == "on" && Windows_Win32_Media_KernelStreaming_KsCreateAllocator == "on"]
+public unsafe func Windows_KsCreateAllocator(ConnectionHandle: CPointer<Unit>, AllocatorFraming: CPointer<KSALLOCATOR_FRAMING>, AllocatorHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return KsCreateAllocator(ConnectionHandle, AllocatorFraming, AllocatorHandle)
+}
+
+@When[Windows_Win32_Media_KernelStreaming == "on" && KSUSER == "on" && Windows_Win32_Media_KernelStreaming_KsCreateAllocator2 == "on"]
+foreign {
     func KsCreateAllocator2(ConnectionHandle: CPointer<Unit>, AllocatorFraming: CPointer<KSALLOCATOR_FRAMING>, AllocatorHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_KernelStreaming == "on" && KSUSER == "on" && Windows_Win32_Media_KernelStreaming_KsCreateAllocator2 == "on"]
+public unsafe func Windows_KsCreateAllocator2(ConnectionHandle: CPointer<Unit>, AllocatorFraming: CPointer<KSALLOCATOR_FRAMING>, AllocatorHandle: CPointer<CPointer<Unit>>): Int32 {
+    return KsCreateAllocator2(ConnectionHandle, AllocatorFraming, AllocatorHandle)
+}
+
+@When[Windows_Win32_Media_KernelStreaming == "on" && KSUSER == "on" && Windows_Win32_Media_KernelStreaming_KsCreateClock == "on"]
+foreign {
     func KsCreateClock(ConnectionHandle: CPointer<Unit>, ClockCreate: CPointer<KSCLOCK_CREATE>, ClockHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Media_KernelStreaming == "on" && KSUSER == "on" && Windows_Win32_Media_KernelStreaming_KsCreateClock == "on"]
+public unsafe func Windows_KsCreateClock(ConnectionHandle: CPointer<Unit>, ClockCreate: CPointer<KSCLOCK_CREATE>, ClockHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return KsCreateClock(ConnectionHandle, ClockCreate, ClockHandle)
+}
+
+@When[Windows_Win32_Media_KernelStreaming == "on" && KSUSER == "on" && Windows_Win32_Media_KernelStreaming_KsCreateClock2 == "on"]
+foreign {
     func KsCreateClock2(ConnectionHandle: CPointer<Unit>, ClockCreate: CPointer<KSCLOCK_CREATE>, ClockHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_KernelStreaming == "on" && KSUSER == "on" && Windows_Win32_Media_KernelStreaming_KsCreateClock2 == "on"]
+public unsafe func Windows_KsCreateClock2(ConnectionHandle: CPointer<Unit>, ClockCreate: CPointer<KSCLOCK_CREATE>, ClockHandle: CPointer<CPointer<Unit>>): Int32 {
+    return KsCreateClock2(ConnectionHandle, ClockCreate, ClockHandle)
+}
+
+@When[Windows_Win32_Media_KernelStreaming == "on" && KSUSER == "on" && Windows_Win32_Media_KernelStreaming_KsCreatePin == "on"]
+foreign {
     func KsCreatePin(FilterHandle: CPointer<Unit>, Connect: CPointer<KSPIN_CONNECT>, DesiredAccess: UInt32, ConnectionHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Media_KernelStreaming == "on" && KSUSER == "on" && Windows_Win32_Media_KernelStreaming_KsCreatePin == "on"]
+public unsafe func Windows_KsCreatePin(FilterHandle: CPointer<Unit>, Connect: CPointer<KSPIN_CONNECT>, DesiredAccess: UInt32, ConnectionHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return KsCreatePin(FilterHandle, Connect, DesiredAccess, ConnectionHandle)
+}
+
+@When[Windows_Win32_Media_KernelStreaming == "on" && KSUSER == "on" && Windows_Win32_Media_KernelStreaming_KsCreatePin2 == "on"]
+foreign {
     func KsCreatePin2(FilterHandle: CPointer<Unit>, Connect: CPointer<KSPIN_CONNECT>, DesiredAccess: UInt32, ConnectionHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_KernelStreaming == "on" && KSUSER == "on" && Windows_Win32_Media_KernelStreaming_KsCreatePin2 == "on"]
+public unsafe func Windows_KsCreatePin2(FilterHandle: CPointer<Unit>, Connect: CPointer<KSPIN_CONNECT>, DesiredAccess: UInt32, ConnectionHandle: CPointer<CPointer<Unit>>): Int32 {
+    return KsCreatePin2(FilterHandle, Connect, DesiredAccess, ConnectionHandle)
+}
+
+@When[Windows_Win32_Media_KernelStreaming == "on" && KSUSER == "on" && Windows_Win32_Media_KernelStreaming_KsCreateTopologyNode == "on"]
+foreign {
     func KsCreateTopologyNode(ParentHandle: CPointer<Unit>, NodeCreate: CPointer<KSNODE_CREATE>, DesiredAccess: UInt32, NodeHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Media_KernelStreaming == "on" && KSUSER == "on" && Windows_Win32_Media_KernelStreaming_KsCreateTopologyNode == "on"]
+public unsafe func Windows_KsCreateTopologyNode(ParentHandle: CPointer<Unit>, NodeCreate: CPointer<KSNODE_CREATE>, DesiredAccess: UInt32, NodeHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return KsCreateTopologyNode(ParentHandle, NodeCreate, DesiredAccess, NodeHandle)
+}
+
+@When[Windows_Win32_Media_KernelStreaming == "on" && KSUSER == "on" && Windows_Win32_Media_KernelStreaming_KsCreateTopologyNode2 == "on"]
+foreign {
     func KsCreateTopologyNode2(ParentHandle: CPointer<Unit>, NodeCreate: CPointer<KSNODE_CREATE>, DesiredAccess: UInt32, NodeHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_KernelStreaming == "on" && KSUSER == "on" && Windows_Win32_Media_KernelStreaming_KsCreateTopologyNode2 == "on"]
+public unsafe func Windows_KsCreateTopologyNode2(ParentHandle: CPointer<Unit>, NodeCreate: CPointer<KSNODE_CREATE>, DesiredAccess: UInt32, NodeHandle: CPointer<CPointer<Unit>>): Int32 {
+    return KsCreateTopologyNode2(ParentHandle, NodeCreate, DesiredAccess, NodeHandle)
 }
 
 @When[Windows_Win32_Media_KernelStreaming == "on"]

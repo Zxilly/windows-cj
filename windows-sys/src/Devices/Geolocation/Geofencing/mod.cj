@@ -3,7 +3,6 @@ package windows_sys.Devices.Geolocation.Geofencing
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Devices_Geolocation == "on"]
 import windows_sys.Devices.Geolocation as Devices_Geolocation
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
 
@@ -344,11 +343,13 @@ public class IGeofenceFactory <: InterfaceWrapperBase & ComInterface {
 public struct IGeofenceMonitorVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Status: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Geofences: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Devices_Geolocation == "on"]
     public var LastKnownGeoposition: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GeofenceStateChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveGeofenceStateChanged: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ReadReports: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var StatusChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveStatusChanged: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
@@ -401,6 +402,7 @@ public class IGeofenceMonitor <: InterfaceWrapperBase & ComInterface {
         return __vt.Status(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Geofences(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -426,6 +428,7 @@ public class IGeofenceMonitor <: InterfaceWrapperBase & ComInterface {
         return __vt.RemoveGeofenceStateChanged(__liveRaw, token)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReadReports(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

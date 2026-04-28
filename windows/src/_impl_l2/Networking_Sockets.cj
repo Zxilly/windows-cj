@@ -164,7 +164,7 @@ public class DatagramSocket <: InterfaceWrapperBase & ComInterface & windows_int
         asIClosable().Close()
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public static unsafe func GetEndpointPairsAsync(remoteHostName: _impl_l1.HostName, remoteServiceName: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.EndpointPair>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.EndpointPair>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.EndpointPair>>>.None
         try (factory__ = windows_core.factory<DatagramSocket, _impl_l1.IDatagramSocketStatics>().unwrap()) {
@@ -176,7 +176,7 @@ public class DatagramSocket <: InterfaceWrapperBase & ComInterface & windows_int
         }
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public static unsafe func GetEndpointPairsWithSortOptionsAsync(remoteHostName: _impl_l1.HostName, remoteServiceName: windows_core.HString, sortOptions: _impl_l0.HostNameSortOptions): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.EndpointPair>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.EndpointPair>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.EndpointPair>>>.None
         try (factory__ = windows_core.factory<DatagramSocket, _impl_l1.IDatagramSocketStatics>().unwrap()) {
@@ -958,7 +958,10 @@ extend ISocketActivityInformation <: windows_core.Interface<ISocketActivityInfor
 @C
 public struct ISocketActivityInformationStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AllSockets: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AllSockets: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1027,6 +1030,7 @@ public class ISocketActivityInformationStatics <: InterfaceWrapperBase & ComInte
         readVtbl<ISocketActivityInformationStaticsVtbl>(ISocketActivityInformationStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AllSockets(): windows_collections.IMapView<windows_core.HString, SocketActivityInformation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1451,17 +1455,17 @@ extend IStreamSocketControl3 <: windows_core.Interface<IStreamSocketControl3> {}
 public struct IStreamSocketInformation2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var ServerCertificateErrorSeverity: CFunc<(CPointer<Unit>, CPointer<_impl_l0.SocketSslErrorSeverityAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public var ServerCertificateErrors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Security_Cryptography_Certificates != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Security_Cryptography_Certificates != "on"]
     public var ServerCertificateErrors: UIntNative = UIntNative(0)
     @When[Windows_Security_Cryptography_Certificates == "on"]
     public var ServerCertificate: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Security_Cryptography_Certificates != "on"]
     public var ServerCertificate: UIntNative = UIntNative(0)
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public var ServerIntermediateCertificates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Security_Cryptography_Certificates != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Security_Cryptography_Certificates != "on"]
     public var ServerIntermediateCertificates: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -1539,7 +1543,7 @@ public class IStreamSocketInformation2 <: InterfaceWrapperBase & ComInterface & 
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.SocketSslErrorSeverity>()).unwrap()
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func ServerCertificateErrors(): windows_collections.IVectorView<_impl_l0.ChainValidationResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1557,7 +1561,7 @@ public class IStreamSocketInformation2 <: InterfaceWrapperBase & ComInterface & 
         return _impl_l1.Certificate.fromAbiTake(result__)
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func ServerIntermediateCertificates(): windows_collections.IVectorView<_impl_l1.Certificate> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2177,17 +2181,17 @@ public struct IWebSocketInformation2Vtbl {
     @When[Windows_Security_Cryptography_Certificates != "on"]
     public var ServerCertificate: UIntNative = UIntNative(0)
     public var ServerCertificateErrorSeverity: CFunc<(CPointer<Unit>, CPointer<_impl_l0.SocketSslErrorSeverityAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public var ServerCertificateErrors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Security_Cryptography_Certificates != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Security_Cryptography_Certificates != "on"]
     public var ServerCertificateErrors: UIntNative = UIntNative(0)
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public var ServerIntermediateCertificates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Security_Cryptography_Certificates != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Security_Cryptography_Certificates != "on"]
     public var ServerIntermediateCertificates: UIntNative = UIntNative(0)
     public init() {}
 
-    @When[(Windows_Security_Cryptography_Certificates == "on") && (Windows_Networking == "on")]
+    @When[(((Windows_Security_Cryptography_Certificates == "on") && (Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on")) && (Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on")) && (Windows_Networking == "on")]
     public static func new<Identity>(offset!: Int64 = 0): IWebSocketInformation2Vtbl where Identity <: IWebSocketInformation2_Impl {
         let _ = offset
         var vtbl = IWebSocketInformation2Vtbl()
@@ -2206,7 +2210,7 @@ public struct IWebSocketInformation2Vtbl {
         return vtbl
     }
 
-    @When[((Windows_Security_Cryptography_Certificates == "on") && (Windows_Networking == "on")) && Windows_Security_Cryptography_Certificates == "on"]
+    @When[((((Windows_Security_Cryptography_Certificates == "on") && (Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on")) && (Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on")) && (Windows_Networking == "on")) && Windows_Security_Cryptography_Certificates == "on"]
     public static func __assignServerCertificate<Identity>(vtbl: IWebSocketInformation2Vtbl): IWebSocketInformation2Vtbl where Identity <: IWebSocketInformation2_Impl {
         var next = vtbl
         next.ServerCertificate = { instanceRaw, result__ =>
@@ -2220,12 +2224,12 @@ public struct IWebSocketInformation2Vtbl {
         return next
     }
 
-    @When[((Windows_Security_Cryptography_Certificates == "on") && (Windows_Networking == "on")) && Windows_Security_Cryptography_Certificates != "on"]
+    @When[((((Windows_Security_Cryptography_Certificates == "on") && (Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on")) && (Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on")) && (Windows_Networking == "on")) && Windows_Security_Cryptography_Certificates != "on"]
     public static func __assignServerCertificate<Identity>(vtbl: IWebSocketInformation2Vtbl): IWebSocketInformation2Vtbl where Identity <: IWebSocketInformation2_Impl {
         return vtbl
     }
 
-    @When[((Windows_Security_Cryptography_Certificates == "on") && (Windows_Networking == "on")) && Windows_Security_Cryptography_Certificates == "on"]
+    @When[((((Windows_Security_Cryptography_Certificates == "on") && (Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on")) && (Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on")) && (Windows_Networking == "on")) && (Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on")]
     public static func __assignServerCertificateErrors<Identity>(vtbl: IWebSocketInformation2Vtbl): IWebSocketInformation2Vtbl where Identity <: IWebSocketInformation2_Impl {
         var next = vtbl
         next.ServerCertificateErrors = { instanceRaw, result__ =>
@@ -2239,12 +2243,12 @@ public struct IWebSocketInformation2Vtbl {
         return next
     }
 
-    @When[((Windows_Security_Cryptography_Certificates == "on") && (Windows_Networking == "on")) && Windows_Security_Cryptography_Certificates != "on"]
+    @When[((((Windows_Security_Cryptography_Certificates == "on") && (Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on")) && (Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on")) && (Windows_Networking == "on")) && (Windows_Foundation_Collections != "on" || Windows_Security_Cryptography_Certificates != "on")]
     public static func __assignServerCertificateErrors<Identity>(vtbl: IWebSocketInformation2Vtbl): IWebSocketInformation2Vtbl where Identity <: IWebSocketInformation2_Impl {
         return vtbl
     }
 
-    @When[((Windows_Security_Cryptography_Certificates == "on") && (Windows_Networking == "on")) && Windows_Security_Cryptography_Certificates == "on"]
+    @When[((((Windows_Security_Cryptography_Certificates == "on") && (Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on")) && (Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on")) && (Windows_Networking == "on")) && (Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on")]
     public static func __assignServerIntermediateCertificates<Identity>(vtbl: IWebSocketInformation2Vtbl): IWebSocketInformation2Vtbl where Identity <: IWebSocketInformation2_Impl {
         var next = vtbl
         next.ServerIntermediateCertificates = { instanceRaw, result__ =>
@@ -2258,7 +2262,7 @@ public struct IWebSocketInformation2Vtbl {
         return next
     }
 
-    @When[((Windows_Security_Cryptography_Certificates == "on") && (Windows_Networking == "on")) && Windows_Security_Cryptography_Certificates != "on"]
+    @When[((((Windows_Security_Cryptography_Certificates == "on") && (Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on")) && (Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on")) && (Windows_Networking == "on")) && (Windows_Foundation_Collections != "on" || Windows_Security_Cryptography_Certificates != "on")]
     public static func __assignServerIntermediateCertificates<Identity>(vtbl: IWebSocketInformation2Vtbl): IWebSocketInformation2Vtbl where Identity <: IWebSocketInformation2_Impl {
         return vtbl
     }
@@ -2276,7 +2280,7 @@ public struct IWebSocketInformation2Vtbl {
     }
 }
 
-@When[Windows_Networking_Sockets == "on" && ((Windows_Security_Cryptography_Certificates == "on") && (Windows_Networking == "on"))]
+@When[Windows_Networking_Sockets == "on" && ((((Windows_Security_Cryptography_Certificates == "on") && (Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on")) && (Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on")) && (Windows_Networking == "on"))]
 public interface IWebSocketInformation2_ImplErased {
     public func __winrtThunk_ServerCertificate(result__: CPointer<CPointer<Unit>>): Int32
 
@@ -2287,7 +2291,7 @@ public interface IWebSocketInformation2_ImplErased {
     public func __winrtThunk_ServerIntermediateCertificates(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Networking_Sockets == "on" && ((Windows_Security_Cryptography_Certificates == "on") && (Windows_Networking == "on"))]
+@When[Windows_Networking_Sockets == "on" && ((((Windows_Security_Cryptography_Certificates == "on") && (Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on")) && (Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on")) && (Windows_Networking == "on"))]
 public interface IWebSocketInformation2_Impl <: IWebSocketInformation2_ImplErased & _impl_l1.IWebSocketInformation_Impl {
     public func ServerCertificate(): windows_core.Result<_impl_l1.Certificate>
 
@@ -2508,7 +2512,7 @@ public class IWebSocketInformation2 <: InterfaceWrapperBase & ComInterface & Run
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.SocketSslErrorSeverity>()).unwrap()
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func ServerCertificateErrors(): windows_collections.IVectorView<_impl_l0.ChainValidationResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2517,7 +2521,7 @@ public class IWebSocketInformation2 <: InterfaceWrapperBase & ComInterface & Run
         return windows_collections.IVectorView<_impl_l0.ChainValidationResult>.fromAbiTake(result__)
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func ServerIntermediateCertificates(): windows_collections.IVectorView<_impl_l1.Certificate> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2539,13 +2543,13 @@ public struct IWebSocketServerCustomValidationRequestedEventArgsVtbl {
     @When[Windows_Security_Cryptography_Certificates != "on"]
     public var ServerCertificate: UIntNative = UIntNative(0)
     public var ServerCertificateErrorSeverity: CFunc<(CPointer<Unit>, CPointer<_impl_l0.SocketSslErrorSeverityAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public var ServerCertificateErrors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Security_Cryptography_Certificates != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Security_Cryptography_Certificates != "on"]
     public var ServerCertificateErrors: UIntNative = UIntNative(0)
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public var ServerIntermediateCertificates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Security_Cryptography_Certificates != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Security_Cryptography_Certificates != "on"]
     public var ServerIntermediateCertificates: UIntNative = UIntNative(0)
     public var Reject: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
     public var GetDeferral: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -2634,7 +2638,7 @@ public class IWebSocketServerCustomValidationRequestedEventArgs <: InterfaceWrap
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.SocketSslErrorSeverity>()).unwrap()
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func ServerCertificateErrors(): windows_collections.IVectorView<_impl_l0.ChainValidationResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2643,7 +2647,7 @@ public class IWebSocketServerCustomValidationRequestedEventArgs <: InterfaceWrap
         return windows_collections.IVectorView<_impl_l0.ChainValidationResult>.fromAbiTake(result__)
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func ServerIntermediateCertificates(): windows_collections.IVectorView<_impl_l1.Certificate> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2955,11 +2959,12 @@ public class MessageWebSocketControl <: InterfaceWrapperBase & ComInterface & wi
         asIWebSocketControl().SetProxyCredential(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedProtocols(): windows_collections.IVector<windows_core.HString> {
         return asIWebSocketControl().SupportedProtocols()
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func IgnorableServerCertificateErrors(): windows_collections.IVector<_impl_l0.ChainValidationResult> {
         return asIWebSocketControl2().IgnorableServerCertificateErrors()
     }
@@ -3081,12 +3086,12 @@ public class MessageWebSocketInformation <: InterfaceWrapperBase & ComInterface 
         return asIWebSocketInformation2().ServerCertificateErrorSeverity()
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func ServerCertificateErrors(): windows_collections.IVectorView<_impl_l0.ChainValidationResult> {
         return asIWebSocketInformation2().ServerCertificateErrors()
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func ServerIntermediateCertificates(): windows_collections.IVectorView<_impl_l1.Certificate> {
         return asIWebSocketInformation2().ServerIntermediateCertificates()
     }
@@ -3207,6 +3212,7 @@ public class SocketActivityInformation <: InterfaceWrapperBase & ComInterface & 
         return defaultInterface().get_StreamSocketListener()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func AllSockets(): windows_collections.IMapView<windows_core.HString, SocketActivityInformation> {
         var result__: Option<windows_collections.IMapView<windows_core.HString, SocketActivityInformation>> = Option<windows_collections.IMapView<windows_core.HString, SocketActivityInformation>>.None
         try (factory__ = windows_core.factory<SocketActivityInformation, ISocketActivityInformationStatics>().unwrap()) {
@@ -3467,7 +3473,7 @@ public class StreamSocket <: InterfaceWrapperBase & ComInterface & windows_inter
         asIClosable().Close()
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public static unsafe func GetEndpointPairsAsync(remoteHostName: _impl_l1.HostName, remoteServiceName: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.EndpointPair>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.EndpointPair>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.EndpointPair>>>.None
         try (factory__ = windows_core.factory<StreamSocket, _impl_l1.IStreamSocketStatics>().unwrap()) {
@@ -3479,7 +3485,7 @@ public class StreamSocket <: InterfaceWrapperBase & ComInterface & windows_inter
         }
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public static unsafe func GetEndpointPairsWithSortOptionsAsync(remoteHostName: _impl_l1.HostName, remoteServiceName: windows_core.HString, sortOptions: _impl_l0.HostNameSortOptions): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.EndpointPair>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.EndpointPair>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.EndpointPair>>>.None
         try (factory__ = windows_core.factory<StreamSocket, _impl_l1.IStreamSocketStatics>().unwrap()) {
@@ -4271,11 +4277,12 @@ public class StreamWebSocketControl <: InterfaceWrapperBase & ComInterface & win
         asIWebSocketControl().SetProxyCredential(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedProtocols(): windows_collections.IVector<windows_core.HString> {
         return asIWebSocketControl().SupportedProtocols()
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func IgnorableServerCertificateErrors(): windows_collections.IVector<_impl_l0.ChainValidationResult> {
         return asIWebSocketControl2().IgnorableServerCertificateErrors()
     }
@@ -4397,12 +4404,12 @@ public class StreamWebSocketInformation <: InterfaceWrapperBase & ComInterface &
         return asIWebSocketInformation2().ServerCertificateErrorSeverity()
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func ServerCertificateErrors(): windows_collections.IVectorView<_impl_l0.ChainValidationResult> {
         return asIWebSocketInformation2().ServerCertificateErrors()
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func ServerIntermediateCertificates(): windows_collections.IVectorView<_impl_l1.Certificate> {
         return asIWebSocketInformation2().ServerIntermediateCertificates()
     }
@@ -4504,12 +4511,12 @@ public class WebSocketServerCustomValidationRequestedEventArgs <: InterfaceWrapp
         return defaultInterface().ServerCertificateErrorSeverity()
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func ServerCertificateErrors(): windows_collections.IVectorView<_impl_l0.ChainValidationResult> {
         return defaultInterface().ServerCertificateErrors()
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func ServerIntermediateCertificates(): windows_collections.IVectorView<_impl_l1.Certificate> {
         return defaultInterface().ServerIntermediateCertificates()
     }

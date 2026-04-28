@@ -773,7 +773,10 @@ extend ISpeechRecognitionResult2 <: windows_core.Interface<ISpeechRecognitionRes
 @C
 public struct ISpeechRecognitionSemanticInterpretationVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -842,6 +845,7 @@ public class ISpeechRecognitionSemanticInterpretation <: InterfaceWrapperBase & 
         readVtbl<ISpeechRecognitionSemanticInterpretationVtbl>(ISpeechRecognitionSemanticInterpretationVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, windows_collections.IVectorView<windows_core.HString>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1802,6 +1806,7 @@ public class SpeechRecognitionSemanticInterpretation <: InterfaceWrapperBase & C
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, windows_collections.IVectorView<windows_core.HString>> {
         return defaultInterface().Properties()
     }

@@ -528,7 +528,10 @@ public struct IRemoteSystemAppVtbl {
     public var DisplayName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsAvailableByProximity: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsAvailableBySpatialProximity: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Attributes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Attributes: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -629,6 +632,7 @@ public class IRemoteSystemApp <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Attributes(): windows_collections.IMapView<windows_core.HString, windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1159,7 +1163,10 @@ extend IRemoteSystemFilter <: windows_core.Interface<IRemoteSystemFilter> {}
 @C
 public struct IRemoteSystemKindFilterVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var RemoteSystemKinds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RemoteSystemKinds: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1228,6 +1235,7 @@ public class IRemoteSystemKindFilter <: InterfaceWrapperBase & ComInterface & Ru
         readVtbl<IRemoteSystemKindFilterVtbl>(IRemoteSystemKindFilterVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RemoteSystemKinds(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1244,7 +1252,10 @@ extend IRemoteSystemKindFilter <: windows_core.Interface<IRemoteSystemKindFilter
 @C
 public struct IRemoteSystemKindFilterFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Create: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1313,6 +1324,7 @@ public class IRemoteSystemKindFilterFactory <: InterfaceWrapperBase & ComInterfa
         readVtbl<IRemoteSystemKindFilterFactoryVtbl>(IRemoteSystemKindFilterFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create(remoteSystemKinds: windows_collections.IIterable<windows_core.HString>): RemoteSystemKindFilter {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2472,10 +2484,12 @@ public class RemoteSystemKindFilter <: InterfaceWrapperBase & ComInterface & win
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RemoteSystemKinds(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().RemoteSystemKinds()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Create(remoteSystemKinds: windows_collections.IIterable<windows_core.HString>): RemoteSystemKindFilter {
         var result__: Option<RemoteSystemKindFilter> = Option<RemoteSystemKindFilter>.None
         try (factory__ = windows_core.factory<RemoteSystemKindFilter, IRemoteSystemKindFilterFactory>().unwrap()) {

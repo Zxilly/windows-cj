@@ -3,10 +3,8 @@ package windows_sys.UI.Xaml._impl_l1
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Foundation_Numerics == "on"]
 import windows_sys.Foundation.Numerics as Foundation_Numerics
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_UI == "on"]
 import windows_sys.UI as UI
 import windows_sys.UI.Xaml._impl_l0 as UI_Xaml__impl_l0
 import windows_sys._impl_l0 as _impl_l0
@@ -3350,7 +3348,9 @@ public struct ILoopingSelectorVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var ShouldLoop: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var SetShouldLoop: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Items: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetItems: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var SelectedIndex: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetSelectedIndex: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -3422,12 +3422,14 @@ public class ILoopingSelector <: InterfaceWrapperBase & ComInterface {
         return __vt.SetShouldLoop(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Items(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetItems(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3994,9 +3996,9 @@ public struct IPopupVtbl {
     public var SetHorizontalOffset: CFunc<(CPointer<Unit>, Float64) -> Int32> = { _, _ => 0 }
     public var VerticalOffset: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => 0 }
     public var SetVerticalOffset: CFunc<(CPointer<Unit>, Float64) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public var ChildTransitions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public var SetChildTransitions: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var IsLightDismissEnabled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var SetIsLightDismissEnabled: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
@@ -4097,14 +4099,14 @@ public class IPopup <: InterfaceWrapperBase & ComInterface {
         return __vt.SetVerticalOffset(__liveRaw, value)
     }
 
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public unsafe func ChildTransitions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ChildTransitions(__liveRaw, result__)
     }
 
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public unsafe func SetChildTransitions(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4373,7 +4375,7 @@ public struct ISettingsFlyoutTemplateSettingsVtbl {
     public var BorderThickness: CFunc<(CPointer<Unit>, CPointer<UI_Xaml__impl_l0.Thickness>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Xaml_Media == "on"]
     public var IconSource: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public var ContentTransitions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -4453,7 +4455,7 @@ public class ISettingsFlyoutTemplateSettings <: InterfaceWrapperBase & ComInterf
         return __vt.IconSource(__liveRaw, result__)
     }
 
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public unsafe func ContentTransitions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

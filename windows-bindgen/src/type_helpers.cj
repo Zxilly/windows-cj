@@ -550,6 +550,38 @@ public func namespaceToFeature(namespace: String): String {
     return joinStrings(normalized, "_")
 }
 
+public func functionToFeature(namespace: String, functionName: String): String {
+    let namespaceFeature = namespaceToFeature(namespace)
+    let functionFeature = cfgFeatureSegment(functionName)
+    if (namespaceFeature.isEmpty()) {
+        return functionFeature
+    }
+    return "${namespaceFeature}_${functionFeature}"
+}
+
+func cfgFeatureSegment(name: String): String {
+    if (name.isEmpty()) {
+        return "_"
+    }
+    let arr = name.toArray()
+    let normalized = Array<Byte>(
+        arr.size,
+        {
+            i =>
+                let ch = arr[i]
+                if ((ch >= b'a' && ch <= b'z') ||
+                    (ch >= b'A' && ch <= b'Z') ||
+                    (ch >= b'0' && ch <= b'9') ||
+                    ch == b'_') {
+                    ch
+                } else {
+                    b'_'
+                }
+        }
+    )
+    return sanitizeIdentifier(String.fromUtf8(normalized))
+}
+
 public func metadataTypeToProjectionCj(index: TypeIndex, ty: MetadataType): String {
     match (ty) {
         case MetadataType.Void => "Unit"

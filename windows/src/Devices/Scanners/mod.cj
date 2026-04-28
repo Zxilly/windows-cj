@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Graphics_Printing == "on"]
 import windows.Graphics.Printing as Graphics_Printing
 import windows._impl_l1 as _impl_l1
 import windows_collections as windows_collections
@@ -21,9 +20,9 @@ import windows_future as windows_future
 @C
 public struct IImageScannerScanResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var ScannedFiles: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var ScannedFiles: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -93,7 +92,7 @@ public class IImageScannerScanResult <: InterfaceWrapperBase & ComInterface & Ru
         readVtbl<IImageScannerScanResultVtbl>(IImageScannerScanResultVtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func ScannedFiles(): windows_collections.IVectorView<_impl_l1.StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -400,7 +399,7 @@ public class ImageScannerScanResult <: InterfaceWrapperBase & ComInterface & win
         }
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func ScannedFiles(): windows_collections.IVectorView<_impl_l1.StorageFile> {
         return defaultInterface().ScannedFiles()
     }

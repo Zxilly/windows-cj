@@ -376,9 +376,9 @@ public struct IPolygonVtbl {
     public var FillRule: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Xaml_Media == "on"]
     public var SetFillRule: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public var Points: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public var SetPoints: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -437,14 +437,14 @@ public class IPolygon <: InterfaceWrapperBase & ComInterface {
         return __vt.SetFillRule(__liveRaw, value)
     }
 
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public unsafe func Points(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Points(__liveRaw, result__)
     }
 
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public unsafe func SetPoints(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -526,9 +526,9 @@ public struct IPolylineVtbl {
     public var FillRule: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Xaml_Media == "on"]
     public var SetFillRule: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public var Points: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public var SetPoints: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -587,14 +587,14 @@ public class IPolyline <: InterfaceWrapperBase & ComInterface {
         return __vt.SetFillRule(__liveRaw, value)
     }
 
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public unsafe func Points(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Points(__liveRaw, result__)
     }
 
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public unsafe func SetPoints(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -844,9 +844,9 @@ public struct IShapeVtbl {
     public var StrokeDashCap: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Xaml_Media == "on"]
     public var SetStrokeDashCap: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public var StrokeDashArray: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public var SetStrokeDashArray: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Xaml_Media == "on"]
     public var Stretch: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -1017,14 +1017,14 @@ public class IShape <: InterfaceWrapperBase & ComInterface {
         return __vt.SetStrokeDashCap(__liveRaw, value)
     }
 
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public unsafe func StrokeDashArray(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.StrokeDashArray(__liveRaw, result__)
     }
 
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public unsafe func SetStrokeDashArray(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

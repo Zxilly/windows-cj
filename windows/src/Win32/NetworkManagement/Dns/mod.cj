@@ -4,11 +4,11 @@
 package windows.Win32.NetworkManagement.Dns
 
 import std.collection.*
+import windows_libloading
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
 import windows_polyfill.{packedReadUInt16, packedReadUInt32, packedReadUInt8, packedReadValue, packedWriteUInt16, packedWriteUInt32, packedWriteUInt8, packedWriteValue, unionReadUInt16, unionReadUInt32, unionWriteUInt16, unionWriteUInt32}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 import windows_core as windows_core
 
@@ -10511,141 +10511,724 @@ extend MDNS_QUERY_REQUEST <: windows_core.CopyType & windows_core.RuntimeType & 
     }
 }
 
-@When[DNSAPI == "on"]
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsAcquireContextHandle_A == "on"]
 foreign {
     // param-hint: Credentials optional
     func DnsAcquireContextHandle_A(CredentialFlags: UInt32, Credentials: CPointer<Unit>, pContext: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsAcquireContextHandle_A == "on"]
+public unsafe func Windows_DnsAcquireContextHandle_A(CredentialFlags: UInt32, Credentials: CPointer<Unit>, pContext: CPointer<CPointer<Unit>>): Int32 {
+    return DnsAcquireContextHandle_A(CredentialFlags, Credentials, pContext)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsAcquireContextHandle_W == "on"]
+foreign {
     // param-hint: Credentials optional
     func DnsAcquireContextHandle_W(CredentialFlags: UInt32, Credentials: CPointer<Unit>, pContext: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsAcquireContextHandle_W == "on"]
+public unsafe func Windows_DnsAcquireContextHandle_W(CredentialFlags: UInt32, Credentials: CPointer<Unit>, pContext: CPointer<CPointer<Unit>>): Int32 {
+    return DnsAcquireContextHandle_W(CredentialFlags, Credentials, pContext)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsCancelQuery == "on"]
+foreign {
     func DnsCancelQuery(pCancelHandle: CPointer<DNS_QUERY_CANCELAbi>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsCancelQuery == "on"]
+public unsafe func Windows_DnsCancelQuery(pCancelHandle: CPointer<DNS_QUERY_CANCELAbi>): Int32 {
+    return DnsCancelQuery(pCancelHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsCancelQueryRaw == "on"]
+foreign {
     func DnsCancelQueryRaw(cancelHandle: CPointer<DNS_QUERY_RAW_CANCELAbi>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsCancelQueryRaw == "on"]
+public unsafe func Windows_DnsCancelQueryRaw(cancelHandle: CPointer<DNS_QUERY_RAW_CANCELAbi>): Int32 {
+    return DnsCancelQueryRaw(cancelHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsConnectionDeletePolicyEntries == "on"]
+foreign {
     func DnsConnectionDeletePolicyEntries(PolicyEntryTag: DNS_CONNECTION_POLICY_TAGAbi): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsConnectionDeletePolicyEntries == "on"]
+public unsafe func Windows_DnsConnectionDeletePolicyEntries(PolicyEntryTag: DNS_CONNECTION_POLICY_TAGAbi): UInt32 {
+    return DnsConnectionDeletePolicyEntries(PolicyEntryTag)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsConnectionDeleteProxyInfo == "on"]
+foreign {
     func DnsConnectionDeleteProxyInfo(pwszConnectionName: CPointer<UInt16>, Type: DNS_CONNECTION_PROXY_TYPEAbi): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsConnectionDeleteProxyInfo == "on"]
+public unsafe func Windows_DnsConnectionDeleteProxyInfo(pwszConnectionName: CPointer<UInt16>, Type: DNS_CONNECTION_PROXY_TYPEAbi): UInt32 {
+    return DnsConnectionDeleteProxyInfo(pwszConnectionName, Type)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsConnectionFreeNameList == "on"]
+foreign {
     func DnsConnectionFreeNameList(pNameList: CPointer<DNS_CONNECTION_NAME_LISTAbi>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsConnectionFreeNameList == "on"]
+public unsafe func Windows_DnsConnectionFreeNameList(pNameList: CPointer<DNS_CONNECTION_NAME_LISTAbi>): Unit {
+    DnsConnectionFreeNameList(pNameList)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsConnectionFreeProxyInfo == "on"]
+foreign {
     func DnsConnectionFreeProxyInfo(pProxyInfo: CPointer<DNS_CONNECTION_PROXY_INFOAbi>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsConnectionFreeProxyInfo == "on"]
+public unsafe func Windows_DnsConnectionFreeProxyInfo(pProxyInfo: CPointer<DNS_CONNECTION_PROXY_INFOAbi>): Unit {
+    DnsConnectionFreeProxyInfo(pProxyInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsConnectionFreeProxyInfoEx == "on"]
+foreign {
     func DnsConnectionFreeProxyInfoEx(pProxyInfoEx: CPointer<DNS_CONNECTION_PROXY_INFO_EXAbi>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsConnectionFreeProxyInfoEx == "on"]
+public unsafe func Windows_DnsConnectionFreeProxyInfoEx(pProxyInfoEx: CPointer<DNS_CONNECTION_PROXY_INFO_EXAbi>): Unit {
+    DnsConnectionFreeProxyInfoEx(pProxyInfoEx)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsConnectionFreeProxyList == "on"]
+foreign {
     func DnsConnectionFreeProxyList(pProxyList: CPointer<DNS_CONNECTION_PROXY_LISTAbi>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsConnectionFreeProxyList == "on"]
+public unsafe func Windows_DnsConnectionFreeProxyList(pProxyList: CPointer<DNS_CONNECTION_PROXY_LISTAbi>): Unit {
+    DnsConnectionFreeProxyList(pProxyList)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsConnectionGetNameList == "on"]
+foreign {
     func DnsConnectionGetNameList(pNameList: CPointer<DNS_CONNECTION_NAME_LISTAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsConnectionGetNameList == "on"]
+public unsafe func Windows_DnsConnectionGetNameList(pNameList: CPointer<DNS_CONNECTION_NAME_LISTAbi>): UInt32 {
+    return DnsConnectionGetNameList(pNameList)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsConnectionGetProxyInfo == "on"]
+foreign {
     func DnsConnectionGetProxyInfo(pwszConnectionName: CPointer<UInt16>, Type: DNS_CONNECTION_PROXY_TYPEAbi, pProxyInfo: CPointer<DNS_CONNECTION_PROXY_INFOAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsConnectionGetProxyInfo == "on"]
+public unsafe func Windows_DnsConnectionGetProxyInfo(pwszConnectionName: CPointer<UInt16>, Type: DNS_CONNECTION_PROXY_TYPEAbi, pProxyInfo: CPointer<DNS_CONNECTION_PROXY_INFOAbi>): UInt32 {
+    return DnsConnectionGetProxyInfo(pwszConnectionName, Type, pProxyInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsConnectionGetProxyInfoForHostUrl == "on"]
+foreign {
     // param-hint: pSelectionContext len=param[2] optional
     func DnsConnectionGetProxyInfoForHostUrl(pwszHostUrl: CPointer<UInt16>, pSelectionContext: CPointer<UInt8>, dwSelectionContextLength: UInt32, dwExplicitInterfaceIndex: UInt32, pProxyInfoEx: CPointer<DNS_CONNECTION_PROXY_INFO_EXAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsConnectionGetProxyInfoForHostUrl == "on"]
+public unsafe func Windows_DnsConnectionGetProxyInfoForHostUrl(pwszHostUrl: CPointer<UInt16>, pSelectionContext: CPointer<UInt8>, dwSelectionContextLength: UInt32, dwExplicitInterfaceIndex: UInt32, pProxyInfoEx: CPointer<DNS_CONNECTION_PROXY_INFO_EXAbi>): UInt32 {
+    return DnsConnectionGetProxyInfoForHostUrl(pwszHostUrl, pSelectionContext, dwSelectionContextLength, dwExplicitInterfaceIndex, pProxyInfoEx)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsConnectionGetProxyInfoForHostUrlEx == "on"]
+foreign {
     // param-hint: pSelectionContext len=param[2] optional
     // param-hint: pwszConnectionName optional
     func DnsConnectionGetProxyInfoForHostUrlEx(pwszHostUrl: CPointer<UInt16>, pSelectionContext: CPointer<UInt8>, dwSelectionContextLength: UInt32, dwExplicitInterfaceIndex: UInt32, pwszConnectionName: CPointer<UInt16>, pProxyInfoEx: CPointer<DNS_CONNECTION_PROXY_INFO_EXAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsConnectionGetProxyInfoForHostUrlEx == "on"]
+public unsafe func Windows_DnsConnectionGetProxyInfoForHostUrlEx(pwszHostUrl: CPointer<UInt16>, pSelectionContext: CPointer<UInt8>, dwSelectionContextLength: UInt32, dwExplicitInterfaceIndex: UInt32, pwszConnectionName: CPointer<UInt16>, pProxyInfoEx: CPointer<DNS_CONNECTION_PROXY_INFO_EXAbi>): UInt32 {
+    return DnsConnectionGetProxyInfoForHostUrlEx(pwszHostUrl, pSelectionContext, dwSelectionContextLength, dwExplicitInterfaceIndex, pwszConnectionName, pProxyInfoEx)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsConnectionGetProxyList == "on"]
+foreign {
     func DnsConnectionGetProxyList(pwszConnectionName: CPointer<UInt16>, pProxyList: CPointer<DNS_CONNECTION_PROXY_LISTAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsConnectionGetProxyList == "on"]
+public unsafe func Windows_DnsConnectionGetProxyList(pwszConnectionName: CPointer<UInt16>, pProxyList: CPointer<DNS_CONNECTION_PROXY_LISTAbi>): UInt32 {
+    return DnsConnectionGetProxyList(pwszConnectionName, pProxyList)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsConnectionSetPolicyEntries == "on"]
+foreign {
     func DnsConnectionSetPolicyEntries(PolicyEntryTag: DNS_CONNECTION_POLICY_TAGAbi, pPolicyEntryList: CPointer<DNS_CONNECTION_POLICY_ENTRY_LISTAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsConnectionSetPolicyEntries == "on"]
+public unsafe func Windows_DnsConnectionSetPolicyEntries(PolicyEntryTag: DNS_CONNECTION_POLICY_TAGAbi, pPolicyEntryList: CPointer<DNS_CONNECTION_POLICY_ENTRY_LISTAbi>): UInt32 {
+    return DnsConnectionSetPolicyEntries(PolicyEntryTag, pPolicyEntryList)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsConnectionSetProxyInfo == "on"]
+foreign {
     func DnsConnectionSetProxyInfo(pwszConnectionName: CPointer<UInt16>, Type: DNS_CONNECTION_PROXY_TYPEAbi, pProxyInfo: CPointer<DNS_CONNECTION_PROXY_INFOAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsConnectionSetProxyInfo == "on"]
+public unsafe func Windows_DnsConnectionSetProxyInfo(pwszConnectionName: CPointer<UInt16>, Type: DNS_CONNECTION_PROXY_TYPEAbi, pProxyInfo: CPointer<DNS_CONNECTION_PROXY_INFOAbi>): UInt32 {
+    return DnsConnectionSetProxyInfo(pwszConnectionName, Type, pProxyInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsConnectionUpdateIfIndexTable == "on"]
+foreign {
     func DnsConnectionUpdateIfIndexTable(pConnectionIfIndexEntries: CPointer<DNS_CONNECTION_IFINDEX_LISTAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsConnectionUpdateIfIndexTable == "on"]
+public unsafe func Windows_DnsConnectionUpdateIfIndexTable(pConnectionIfIndexEntries: CPointer<DNS_CONNECTION_IFINDEX_LISTAbi>): UInt32 {
+    return DnsConnectionUpdateIfIndexTable(pConnectionIfIndexEntries)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsExtractRecordsFromMessage_UTF8 == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func DnsExtractRecordsFromMessage_UTF8(pDnsBuffer: CPointer<DNS_MESSAGE_BUFFERAbi>, wMessageLength: UInt16, ppRecord: CPointer<CPointer<DNS_RECORDAAbi>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsExtractRecordsFromMessage_UTF8 == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_DnsExtractRecordsFromMessage_UTF8(pDnsBuffer: CPointer<DNS_MESSAGE_BUFFERAbi>, wMessageLength: UInt16, ppRecord: CPointer<CPointer<DNS_RECORDAAbi>>): Int32 {
+    return DnsExtractRecordsFromMessage_UTF8(pDnsBuffer, wMessageLength, ppRecord)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsExtractRecordsFromMessage_W == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func DnsExtractRecordsFromMessage_W(pDnsBuffer: CPointer<DNS_MESSAGE_BUFFERAbi>, wMessageLength: UInt16, ppRecord: CPointer<CPointer<DNS_RECORDAAbi>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsExtractRecordsFromMessage_W == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_DnsExtractRecordsFromMessage_W(pDnsBuffer: CPointer<DNS_MESSAGE_BUFFERAbi>, wMessageLength: UInt16, ppRecord: CPointer<CPointer<DNS_RECORDAAbi>>): Int32 {
+    return DnsExtractRecordsFromMessage_W(pDnsBuffer, wMessageLength, ppRecord)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsFree == "on"]
+foreign {
     // param-hint: pData optional
     func DnsFree(pData: CPointer<Unit>, FreeType: DNS_FREE_TYPEAbi): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsFree == "on"]
+public unsafe func Windows_DnsFree(pData: CPointer<Unit>, FreeType: DNS_FREE_TYPEAbi): Unit {
+    DnsFree(pData, FreeType)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsFreeCustomServers == "on"]
+foreign {
     func DnsFreeCustomServers(pcServers: CPointer<UInt32>, ppServers: CPointer<CPointer<DNS_CUSTOM_SERVERAbi>>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsFreeCustomServers == "on"]
+public unsafe func Windows_DnsFreeCustomServers(pcServers: CPointer<UInt32>, ppServers: CPointer<CPointer<DNS_CUSTOM_SERVERAbi>>): Unit {
+    DnsFreeCustomServers(pcServers, ppServers)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsFreeProxyName == "on"]
+foreign {
     // param-hint: proxyName optional
     func DnsFreeProxyName(proxyName: CPointer<UInt16>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsFreeProxyName == "on"]
+public unsafe func Windows_DnsFreeProxyName(proxyName: CPointer<UInt16>): Unit {
+    DnsFreeProxyName(proxyName)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsGetApplicationSettings == "on"]
+foreign {
     // param-hint: pSettings optional
     func DnsGetApplicationSettings(pcServers: CPointer<UInt32>, ppDefaultServers: CPointer<CPointer<DNS_CUSTOM_SERVERAbi>>, pSettings: CPointer<DNS_APPLICATION_SETTINGSAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsGetApplicationSettings == "on"]
+public unsafe func Windows_DnsGetApplicationSettings(pcServers: CPointer<UInt32>, ppDefaultServers: CPointer<CPointer<DNS_CUSTOM_SERVERAbi>>, pSettings: CPointer<DNS_APPLICATION_SETTINGSAbi>): UInt32 {
+    return DnsGetApplicationSettings(pcServers, ppDefaultServers, pSettings)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsGetProxyInformation == "on"]
+foreign {
     // param-hint: defaultProxyInformation optional
     // param-hint: completionRoutine optional
     // param-hint: completionContext optional
     func DnsGetProxyInformation(hostName: CPointer<UInt16>, proxyInformation: CPointer<DNS_PROXY_INFORMATIONAbi>, defaultProxyInformation: CPointer<DNS_PROXY_INFORMATIONAbi>, completionRoutine: DNS_PROXY_COMPLETION_ROUTINE, completionContext: CPointer<Unit>): UInt32
-    func DnsNameCompare_A(pName1: CPointer<UInt8>, pName2: CPointer<UInt8>): Int32
-    func DnsNameCompare_W(pName1: CPointer<UInt16>, pName2: CPointer<UInt16>): Int32
-    // param-hint: pwsAdapterName optional
-    // param-hint: pReserved optional
-    // param-hint: pBuffer bytes=param[5] optional
-    func DnsQueryConfig(Config: DNS_CONFIG_TYPEAbi, Flag: UInt32, pwsAdapterName: CPointer<UInt16>, pReserved: CPointer<Unit>, pBuffer: CPointer<Unit>, pBufLen: CPointer<UInt32>): Int32
-    func DnsReleaseContextHandle(hContext: CPointer<Unit>): Unit
-    // pinvoke-hint: SetLastError
-    func DnsServiceBrowseCancel(pCancelHandle: CPointer<DNS_SERVICE_CANCELAbi>): Int32
-    func DnsServiceRegisterCancel(pCancelHandle: CPointer<DNS_SERVICE_CANCELAbi>): UInt32
-    // pinvoke-hint: SetLastError
-    func DnsServiceResolveCancel(pCancelHandle: CPointer<DNS_SERVICE_CANCELAbi>): Int32
-    // param-hint: pServers len=param[0]
-    // param-hint: pSettings optional
-    func DnsSetApplicationSettings(cServers: UInt32, pServers: CPointer<DNS_CUSTOM_SERVERAbi>, pSettings: CPointer<DNS_APPLICATION_SETTINGSAbi>): UInt32
-    // pinvoke-hint: SetLastError
-    func DnsStopMulticastQuery(pHandle: CPointer<MDNS_QUERY_HANDLEAbi>): Int32
-    func DnsValidateName_A(pszName: CPointer<UInt8>, Format: DNS_NAME_FORMATAbi): Int32
-    func DnsValidateName_UTF8(pszName: CPointer<UInt8>, Format: DNS_NAME_FORMATAbi): Int32
-    func DnsValidateName_W(pszName: CPointer<UInt16>, Format: DNS_NAME_FORMATAbi): Int32
-    func DnsWriteQuestionToBuffer_UTF8(pDnsBuffer: CPointer<DNS_MESSAGE_BUFFERAbi>, pdwBufferSize: CPointer<UInt32>, pszName: CPointer<UInt8>, wType: UInt16, Xid: UInt16, fRecursionDesired: Int32): Int32
-    func DnsWriteQuestionToBuffer_W(pDnsBuffer: CPointer<DNS_MESSAGE_BUFFERAbi>, pdwBufferSize: CPointer<UInt32>, pszName: CPointer<UInt16>, wType: UInt16, Xid: UInt16, fRecursionDesired: Int32): Int32
 }
 
-@When[DNSAPI == "on" && ((arch == "x86_64" || arch == "aarch64"))]
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsGetProxyInformation == "on"]
+public unsafe func Windows_DnsGetProxyInformation(hostName: CPointer<UInt16>, proxyInformation: CPointer<DNS_PROXY_INFORMATIONAbi>, defaultProxyInformation: CPointer<DNS_PROXY_INFORMATIONAbi>, completionRoutine: DNS_PROXY_COMPLETION_ROUTINE, completionContext: CPointer<Unit>): UInt32 {
+    return DnsGetProxyInformation(hostName, proxyInformation, defaultProxyInformation, completionRoutine, completionContext)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsModifyRecordsInSet_A == "on" && (arch == "x86_64" || arch == "aarch64")]
 foreign {
-    func DnsExtractRecordsFromMessage_UTF8(pDnsBuffer: CPointer<DNS_MESSAGE_BUFFERAbi>, wMessageLength: UInt16, ppRecord: CPointer<CPointer<DNS_RECORDAAbi>>): Int32
-    func DnsExtractRecordsFromMessage_W(pDnsBuffer: CPointer<DNS_MESSAGE_BUFFERAbi>, wMessageLength: UInt16, ppRecord: CPointer<CPointer<DNS_RECORDAAbi>>): Int32
-    func DnsIsFlatRecord(pRecord: CPointer<DNS_RECORDAAbi>, ullFlags: UInt64, pfFlat: CPointer<Int32>): Int32
     // param-hint: pAddRecords optional
     // param-hint: pDeleteRecords optional
     // param-hint: hCredentials optional
     // param-hint: pExtraList optional
     // param-hint: pReserved optional
     func DnsModifyRecordsInSet_A(pAddRecords: CPointer<DNS_RECORDAAbi>, pDeleteRecords: CPointer<DNS_RECORDAAbi>, Options: UInt32, hCredentials: CPointer<Unit>, pExtraList: CPointer<Unit>, pReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsModifyRecordsInSet_A == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_DnsModifyRecordsInSet_A(pAddRecords: CPointer<DNS_RECORDAAbi>, pDeleteRecords: CPointer<DNS_RECORDAAbi>, Options: UInt32, hCredentials: CPointer<Unit>, pExtraList: CPointer<Unit>, pReserved: CPointer<Unit>): Int32 {
+    return DnsModifyRecordsInSet_A(pAddRecords, pDeleteRecords, Options, hCredentials, pExtraList, pReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsModifyRecordsInSet_UTF8 == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: pAddRecords optional
     // param-hint: pDeleteRecords optional
     // param-hint: hCredentials optional
     // param-hint: pExtraList optional
     // param-hint: pReserved optional
     func DnsModifyRecordsInSet_UTF8(pAddRecords: CPointer<DNS_RECORDAAbi>, pDeleteRecords: CPointer<DNS_RECORDAAbi>, Options: UInt32, hCredentials: CPointer<Unit>, pExtraList: CPointer<Unit>, pReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsModifyRecordsInSet_UTF8 == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_DnsModifyRecordsInSet_UTF8(pAddRecords: CPointer<DNS_RECORDAAbi>, pDeleteRecords: CPointer<DNS_RECORDAAbi>, Options: UInt32, hCredentials: CPointer<Unit>, pExtraList: CPointer<Unit>, pReserved: CPointer<Unit>): Int32 {
+    return DnsModifyRecordsInSet_UTF8(pAddRecords, pDeleteRecords, Options, hCredentials, pExtraList, pReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsModifyRecordsInSet_W == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: pAddRecords optional
     // param-hint: pDeleteRecords optional
     // param-hint: hCredentials optional
     // param-hint: pExtraList optional
     // param-hint: pReserved optional
     func DnsModifyRecordsInSet_W(pAddRecords: CPointer<DNS_RECORDAAbi>, pDeleteRecords: CPointer<DNS_RECORDAAbi>, Options: UInt32, hCredentials: CPointer<Unit>, pExtraList: CPointer<Unit>, pReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsModifyRecordsInSet_W == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_DnsModifyRecordsInSet_W(pAddRecords: CPointer<DNS_RECORDAAbi>, pDeleteRecords: CPointer<DNS_RECORDAAbi>, Options: UInt32, hCredentials: CPointer<Unit>, pExtraList: CPointer<Unit>, pReserved: CPointer<Unit>): Int32 {
+    return DnsModifyRecordsInSet_W(pAddRecords, pDeleteRecords, Options, hCredentials, pExtraList, pReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsNameCompare_A == "on"]
+foreign {
+    func DnsNameCompare_A(pName1: CPointer<UInt8>, pName2: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsNameCompare_A == "on"]
+public unsafe func Windows_DnsNameCompare_A(pName1: CPointer<UInt8>, pName2: CPointer<UInt8>): Int32 {
+    return DnsNameCompare_A(pName1, pName2)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsNameCompare_W == "on"]
+foreign {
+    func DnsNameCompare_W(pName1: CPointer<UInt16>, pName2: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsNameCompare_W == "on"]
+public unsafe func Windows_DnsNameCompare_W(pName1: CPointer<UInt16>, pName2: CPointer<UInt16>): Int32 {
+    return DnsNameCompare_W(pName1, pName2)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsQueryConfig == "on"]
+foreign {
+    // param-hint: pwsAdapterName optional
+    // param-hint: pReserved optional
+    // param-hint: pBuffer bytes=param[5] optional
+    func DnsQueryConfig(Config: DNS_CONFIG_TYPEAbi, Flag: UInt32, pwsAdapterName: CPointer<UInt16>, pReserved: CPointer<Unit>, pBuffer: CPointer<Unit>, pBufLen: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsQueryConfig == "on"]
+public unsafe func Windows_DnsQueryConfig(Config: DNS_CONFIG_TYPEAbi, Flag: UInt32, pwsAdapterName: CPointer<UInt16>, pReserved: CPointer<Unit>, pBuffer: CPointer<Unit>, pBufLen: CPointer<UInt32>): Int32 {
+    return DnsQueryConfig(Config, Flag, pwsAdapterName, pReserved, pBuffer, pBufLen)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsQueryEx == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: pCancelHandle optional
     func DnsQueryEx(pQueryRequest: CPointer<DNS_QUERY_REQUESTAbi>, pQueryResults: CPointer<DNS_QUERY_RESULTAbi>, pCancelHandle: CPointer<DNS_QUERY_CANCELAbi>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsQueryEx == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_DnsQueryEx(pQueryRequest: CPointer<DNS_QUERY_REQUESTAbi>, pQueryResults: CPointer<DNS_QUERY_RESULTAbi>, pCancelHandle: CPointer<DNS_QUERY_CANCELAbi>): Int32 {
+    return DnsQueryEx(pQueryRequest, pQueryResults, pCancelHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsQueryRaw == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func DnsQueryRaw(queryRequest: CPointer<DNS_QUERY_RAW_REQUESTAbi>, cancelHandle: CPointer<DNS_QUERY_RAW_CANCELAbi>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsQueryRaw == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_DnsQueryRaw(queryRequest: CPointer<DNS_QUERY_RAW_REQUESTAbi>, cancelHandle: CPointer<DNS_QUERY_RAW_CANCELAbi>): Int32 {
+    return DnsQueryRaw(queryRequest, cancelHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsQueryRawResultFree == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: queryResults optional
     func DnsQueryRawResultFree(queryResults: CPointer<DNS_QUERY_RAW_RESULTAbi>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsQueryRawResultFree == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_DnsQueryRawResultFree(queryResults: CPointer<DNS_QUERY_RAW_RESULTAbi>): Unit {
+    DnsQueryRawResultFree(queryResults)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsQuery_A == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: pExtra optional
     // param-hint: pReserved optional
     func DnsQuery_A(pszName: CPointer<UInt8>, wType: UInt16, Options: DNS_QUERY_OPTIONSAbi, pExtra: CPointer<Unit>, ppQueryResults: CPointer<CPointer<DNS_RECORDAAbi>>, pReserved: CPointer<CPointer<Unit>>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsQuery_A == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_DnsQuery_A(pszName: CPointer<UInt8>, wType: UInt16, Options: DNS_QUERY_OPTIONSAbi, pExtra: CPointer<Unit>, ppQueryResults: CPointer<CPointer<DNS_RECORDAAbi>>, pReserved: CPointer<CPointer<Unit>>): windows_core.WIN32_ERROR {
+    return DnsQuery_A(pszName, wType, Options, pExtra, ppQueryResults, pReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsQuery_UTF8 == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: pExtra optional
     // param-hint: pReserved optional
     func DnsQuery_UTF8(pszName: CPointer<UInt8>, wType: UInt16, Options: DNS_QUERY_OPTIONSAbi, pExtra: CPointer<Unit>, ppQueryResults: CPointer<CPointer<DNS_RECORDAAbi>>, pReserved: CPointer<CPointer<Unit>>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsQuery_UTF8 == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_DnsQuery_UTF8(pszName: CPointer<UInt8>, wType: UInt16, Options: DNS_QUERY_OPTIONSAbi, pExtra: CPointer<Unit>, ppQueryResults: CPointer<CPointer<DNS_RECORDAAbi>>, pReserved: CPointer<CPointer<Unit>>): windows_core.WIN32_ERROR {
+    return DnsQuery_UTF8(pszName, wType, Options, pExtra, ppQueryResults, pReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsQuery_W == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: pExtra optional
     // param-hint: pReserved optional
     func DnsQuery_W(pszName: CPointer<UInt16>, wType: UInt16, Options: DNS_QUERY_OPTIONSAbi, pExtra: CPointer<Unit>, ppQueryResults: CPointer<CPointer<DNS_RECORDAAbi>>, pReserved: CPointer<CPointer<Unit>>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsQuery_W == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_DnsQuery_W(pszName: CPointer<UInt16>, wType: UInt16, Options: DNS_QUERY_OPTIONSAbi, pExtra: CPointer<Unit>, ppQueryResults: CPointer<CPointer<DNS_RECORDAAbi>>, pReserved: CPointer<CPointer<Unit>>): windows_core.WIN32_ERROR {
+    return DnsQuery_W(pszName, wType, Options, pExtra, ppQueryResults, pReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsRecordCompare == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func DnsRecordCompare(pRecord1: CPointer<DNS_RECORDAAbi>, pRecord2: CPointer<DNS_RECORDAAbi>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsRecordCompare == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_DnsRecordCompare(pRecord1: CPointer<DNS_RECORDAAbi>, pRecord2: CPointer<DNS_RECORDAAbi>): Int32 {
+    return DnsRecordCompare(pRecord1, pRecord2)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsRecordCopyEx == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func DnsRecordCopyEx(pRecord: CPointer<DNS_RECORDAAbi>, CharSetIn: DNS_CHARSETAbi, CharSetOut: DNS_CHARSETAbi): CPointer<DNS_RECORDAAbi>
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsRecordCopyEx == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_DnsRecordCopyEx(pRecord: CPointer<DNS_RECORDAAbi>, CharSetIn: DNS_CHARSETAbi, CharSetOut: DNS_CHARSETAbi): CPointer<DNS_RECORDAAbi> {
+    return DnsRecordCopyEx(pRecord, CharSetIn, CharSetOut)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsRecordSetCompare == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: ppDiff1 optional
     // param-hint: ppDiff2 optional
     func DnsRecordSetCompare(pRR1: CPointer<DNS_RECORDAAbi>, pRR2: CPointer<DNS_RECORDAAbi>, ppDiff1: CPointer<CPointer<DNS_RECORDAAbi>>, ppDiff2: CPointer<CPointer<DNS_RECORDAAbi>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsRecordSetCompare == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_DnsRecordSetCompare(pRR1: CPointer<DNS_RECORDAAbi>, pRR2: CPointer<DNS_RECORDAAbi>, ppDiff1: CPointer<CPointer<DNS_RECORDAAbi>>, ppDiff2: CPointer<CPointer<DNS_RECORDAAbi>>): Int32 {
+    return DnsRecordSetCompare(pRR1, pRR2, ppDiff1, ppDiff2)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsRecordSetCopyEx == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func DnsRecordSetCopyEx(pRecordSet: CPointer<DNS_RECORDAAbi>, CharSetIn: DNS_CHARSETAbi, CharSetOut: DNS_CHARSETAbi): CPointer<DNS_RECORDAAbi>
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsRecordSetCopyEx == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_DnsRecordSetCopyEx(pRecordSet: CPointer<DNS_RECORDAAbi>, CharSetIn: DNS_CHARSETAbi, CharSetOut: DNS_CHARSETAbi): CPointer<DNS_RECORDAAbi> {
+    return DnsRecordSetCopyEx(pRecordSet, CharSetIn, CharSetOut)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsRecordSetDetach == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func DnsRecordSetDetach(pRecordList: CPointer<DNS_RECORDAAbi>): CPointer<DNS_RECORDAAbi>
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsRecordSetDetach == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_DnsRecordSetDetach(pRecordList: CPointer<DNS_RECORDAAbi>): CPointer<DNS_RECORDAAbi> {
+    return DnsRecordSetDetach(pRecordList)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsReleaseContextHandle == "on"]
+foreign {
+    func DnsReleaseContextHandle(hContext: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsReleaseContextHandle == "on"]
+public unsafe func Windows_DnsReleaseContextHandle(hContext: CPointer<Unit>): Unit {
+    DnsReleaseContextHandle(hContext)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsReplaceRecordSetA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: hContext optional
     // param-hint: pExtraInfo optional
     // param-hint: pReserved optional
     func DnsReplaceRecordSetA(pReplaceSet: CPointer<DNS_RECORDAAbi>, Options: UInt32, hContext: CPointer<Unit>, pExtraInfo: CPointer<Unit>, pReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsReplaceRecordSetA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_DnsReplaceRecordSetA(pReplaceSet: CPointer<DNS_RECORDAAbi>, Options: UInt32, hContext: CPointer<Unit>, pExtraInfo: CPointer<Unit>, pReserved: CPointer<Unit>): Int32 {
+    return DnsReplaceRecordSetA(pReplaceSet, Options, hContext, pExtraInfo, pReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsReplaceRecordSetUTF8 == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: hContext optional
     // param-hint: pExtraInfo optional
     // param-hint: pReserved optional
     func DnsReplaceRecordSetUTF8(pReplaceSet: CPointer<DNS_RECORDAAbi>, Options: UInt32, hContext: CPointer<Unit>, pExtraInfo: CPointer<Unit>, pReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsReplaceRecordSetUTF8 == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_DnsReplaceRecordSetUTF8(pReplaceSet: CPointer<DNS_RECORDAAbi>, Options: UInt32, hContext: CPointer<Unit>, pExtraInfo: CPointer<Unit>, pReserved: CPointer<Unit>): Int32 {
+    return DnsReplaceRecordSetUTF8(pReplaceSet, Options, hContext, pExtraInfo, pReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsReplaceRecordSetW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: hContext optional
     // param-hint: pExtraInfo optional
     // param-hint: pReserved optional
     func DnsReplaceRecordSetW(pReplaceSet: CPointer<DNS_RECORDAAbi>, Options: UInt32, hContext: CPointer<Unit>, pExtraInfo: CPointer<Unit>, pReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsReplaceRecordSetW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_DnsReplaceRecordSetW(pReplaceSet: CPointer<DNS_RECORDAAbi>, Options: UInt32, hContext: CPointer<Unit>, pExtraInfo: CPointer<Unit>, pReserved: CPointer<Unit>): Int32 {
+    return DnsReplaceRecordSetW(pReplaceSet, Options, hContext, pExtraInfo, pReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsServiceBrowse == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // pinvoke-hint: SetLastError
     func DnsServiceBrowse(pRequest: CPointer<DNS_SERVICE_BROWSE_REQUESTAbi>, pCancel: CPointer<DNS_SERVICE_CANCELAbi>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsServiceBrowse == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_DnsServiceBrowse(pRequest: CPointer<DNS_SERVICE_BROWSE_REQUESTAbi>, pCancel: CPointer<DNS_SERVICE_CANCELAbi>): Int32 {
+    return DnsServiceBrowse(pRequest, pCancel)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsServiceBrowseCancel == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func DnsServiceBrowseCancel(pCancelHandle: CPointer<DNS_SERVICE_CANCELAbi>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsServiceBrowseCancel == "on"]
+public unsafe func Windows_DnsServiceBrowseCancel(pCancelHandle: CPointer<DNS_SERVICE_CANCELAbi>): Int32 {
+    return DnsServiceBrowseCancel(pCancelHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsServiceConstructInstance == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: pIp4 optional
     // param-hint: pIp6 optional
     // param-hint: keys len=param[7]
     // param-hint: values len=param[7]
     func DnsServiceConstructInstance(pServiceName: CPointer<UInt16>, pHostName: CPointer<UInt16>, pIp4: CPointer<UInt32>, pIp6: CPointer<IP6_ADDRESS>, wPort: UInt16, wPriority: UInt16, wWeight: UInt16, dwPropertiesCount: UInt32, keys: CPointer<CPointer<UInt16>>, values: CPointer<CPointer<UInt16>>): CPointer<DNS_SERVICE_INSTANCEAbi>
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsServiceConstructInstance == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_DnsServiceConstructInstance(pServiceName: CPointer<UInt16>, pHostName: CPointer<UInt16>, pIp4: CPointer<UInt32>, pIp6: CPointer<IP6_ADDRESS>, wPort: UInt16, wPriority: UInt16, wWeight: UInt16, dwPropertiesCount: UInt32, keys: CPointer<CPointer<UInt16>>, values: CPointer<CPointer<UInt16>>): CPointer<DNS_SERVICE_INSTANCEAbi> {
+    return DnsServiceConstructInstance(pServiceName, pHostName, pIp4, pIp6, wPort, wPriority, wWeight, dwPropertiesCount, keys, values)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsServiceCopyInstance == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func DnsServiceCopyInstance(pOrig: CPointer<DNS_SERVICE_INSTANCEAbi>): CPointer<DNS_SERVICE_INSTANCEAbi>
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsServiceCopyInstance == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_DnsServiceCopyInstance(pOrig: CPointer<DNS_SERVICE_INSTANCEAbi>): CPointer<DNS_SERVICE_INSTANCEAbi> {
+    return DnsServiceCopyInstance(pOrig)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsServiceDeRegister == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: pCancel optional
     // pinvoke-hint: SetLastError
     func DnsServiceDeRegister(pRequest: CPointer<DNS_SERVICE_REGISTER_REQUESTAbi>, pCancel: CPointer<DNS_SERVICE_CANCELAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsServiceDeRegister == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_DnsServiceDeRegister(pRequest: CPointer<DNS_SERVICE_REGISTER_REQUESTAbi>, pCancel: CPointer<DNS_SERVICE_CANCELAbi>): UInt32 {
+    return DnsServiceDeRegister(pRequest, pCancel)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsServiceFreeInstance == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func DnsServiceFreeInstance(pInstance: CPointer<DNS_SERVICE_INSTANCEAbi>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsServiceFreeInstance == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_DnsServiceFreeInstance(pInstance: CPointer<DNS_SERVICE_INSTANCEAbi>): Unit {
+    DnsServiceFreeInstance(pInstance)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsServiceRegister == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: pCancel optional
     // pinvoke-hint: SetLastError
     func DnsServiceRegister(pRequest: CPointer<DNS_SERVICE_REGISTER_REQUESTAbi>, pCancel: CPointer<DNS_SERVICE_CANCELAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsServiceRegister == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_DnsServiceRegister(pRequest: CPointer<DNS_SERVICE_REGISTER_REQUESTAbi>, pCancel: CPointer<DNS_SERVICE_CANCELAbi>): UInt32 {
+    return DnsServiceRegister(pRequest, pCancel)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsServiceRegisterCancel == "on"]
+foreign {
+    func DnsServiceRegisterCancel(pCancelHandle: CPointer<DNS_SERVICE_CANCELAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsServiceRegisterCancel == "on"]
+public unsafe func Windows_DnsServiceRegisterCancel(pCancelHandle: CPointer<DNS_SERVICE_CANCELAbi>): UInt32 {
+    return DnsServiceRegisterCancel(pCancelHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsServiceResolve == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // pinvoke-hint: SetLastError
     func DnsServiceResolve(pRequest: CPointer<DNS_SERVICE_RESOLVE_REQUESTAbi>, pCancel: CPointer<DNS_SERVICE_CANCELAbi>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsServiceResolve == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_DnsServiceResolve(pRequest: CPointer<DNS_SERVICE_RESOLVE_REQUESTAbi>, pCancel: CPointer<DNS_SERVICE_CANCELAbi>): Int32 {
+    return DnsServiceResolve(pRequest, pCancel)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsServiceResolveCancel == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func DnsServiceResolveCancel(pCancelHandle: CPointer<DNS_SERVICE_CANCELAbi>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsServiceResolveCancel == "on"]
+public unsafe func Windows_DnsServiceResolveCancel(pCancelHandle: CPointer<DNS_SERVICE_CANCELAbi>): Int32 {
+    return DnsServiceResolveCancel(pCancelHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsSetApplicationSettings == "on"]
+foreign {
+    // param-hint: pServers len=param[0]
+    // param-hint: pSettings optional
+    func DnsSetApplicationSettings(cServers: UInt32, pServers: CPointer<DNS_CUSTOM_SERVERAbi>, pSettings: CPointer<DNS_APPLICATION_SETTINGSAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsSetApplicationSettings == "on"]
+public unsafe func Windows_DnsSetApplicationSettings(cServers: UInt32, pServers: CPointer<DNS_CUSTOM_SERVERAbi>, pSettings: CPointer<DNS_APPLICATION_SETTINGSAbi>): UInt32 {
+    return DnsSetApplicationSettings(cServers, pServers, pSettings)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsStartMulticastQuery == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // pinvoke-hint: SetLastError
     func DnsStartMulticastQuery(pQueryRequest: CPointer<MDNS_QUERY_REQUESTAbi>, pHandle: CPointer<MDNS_QUERY_HANDLEAbi>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsStartMulticastQuery == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_DnsStartMulticastQuery(pQueryRequest: CPointer<MDNS_QUERY_REQUESTAbi>, pHandle: CPointer<MDNS_QUERY_HANDLEAbi>): Int32 {
+    return DnsStartMulticastQuery(pQueryRequest, pHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsStopMulticastQuery == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func DnsStopMulticastQuery(pHandle: CPointer<MDNS_QUERY_HANDLEAbi>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsStopMulticastQuery == "on"]
+public unsafe func Windows_DnsStopMulticastQuery(pHandle: CPointer<MDNS_QUERY_HANDLEAbi>): Int32 {
+    return DnsStopMulticastQuery(pHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsValidateName_A == "on"]
+foreign {
+    func DnsValidateName_A(pszName: CPointer<UInt8>, Format: DNS_NAME_FORMATAbi): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsValidateName_A == "on"]
+public unsafe func Windows_DnsValidateName_A(pszName: CPointer<UInt8>, Format: DNS_NAME_FORMATAbi): Int32 {
+    return DnsValidateName_A(pszName, Format)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsValidateName_UTF8 == "on"]
+foreign {
+    func DnsValidateName_UTF8(pszName: CPointer<UInt8>, Format: DNS_NAME_FORMATAbi): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsValidateName_UTF8 == "on"]
+public unsafe func Windows_DnsValidateName_UTF8(pszName: CPointer<UInt8>, Format: DNS_NAME_FORMATAbi): Int32 {
+    return DnsValidateName_UTF8(pszName, Format)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsValidateName_W == "on"]
+foreign {
+    func DnsValidateName_W(pszName: CPointer<UInt16>, Format: DNS_NAME_FORMATAbi): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsValidateName_W == "on"]
+public unsafe func Windows_DnsValidateName_W(pszName: CPointer<UInt16>, Format: DNS_NAME_FORMATAbi): Int32 {
+    return DnsValidateName_W(pszName, Format)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsWriteQuestionToBuffer_UTF8 == "on"]
+foreign {
+    func DnsWriteQuestionToBuffer_UTF8(pDnsBuffer: CPointer<DNS_MESSAGE_BUFFERAbi>, pdwBufferSize: CPointer<UInt32>, pszName: CPointer<UInt8>, wType: UInt16, Xid: UInt16, fRecursionDesired: Int32): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsWriteQuestionToBuffer_UTF8 == "on"]
+public unsafe func Windows_DnsWriteQuestionToBuffer_UTF8(pDnsBuffer: CPointer<DNS_MESSAGE_BUFFERAbi>, pdwBufferSize: CPointer<UInt32>, pszName: CPointer<UInt8>, wType: UInt16, Xid: UInt16, fRecursionDesired: Int32): Int32 {
+    return DnsWriteQuestionToBuffer_UTF8(pDnsBuffer, pdwBufferSize, pszName, wType, Xid, fRecursionDesired)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsWriteQuestionToBuffer_W == "on"]
+foreign {
+    func DnsWriteQuestionToBuffer_W(pDnsBuffer: CPointer<DNS_MESSAGE_BUFFERAbi>, pdwBufferSize: CPointer<UInt32>, pszName: CPointer<UInt16>, wType: UInt16, Xid: UInt16, fRecursionDesired: Int32): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsWriteQuestionToBuffer_W == "on"]
+public unsafe func Windows_DnsWriteQuestionToBuffer_W(pDnsBuffer: CPointer<DNS_MESSAGE_BUFFERAbi>, pdwBufferSize: CPointer<UInt32>, pszName: CPointer<UInt16>, wType: UInt16, Xid: UInt16, fRecursionDesired: Int32): Int32 {
+    return DnsWriteQuestionToBuffer_W(pDnsBuffer, pdwBufferSize, pszName, wType, Xid, fRecursionDesired)
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsIsFlatRecord == "on" && (arch == "x86_64" || arch == "aarch64")]
+func __windowsBindgen_DnsIsFlatRecordProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("DNSAPI.dll", "DnsIsFlatRecord")
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsIsFlatRecord == "on" && (arch == "x86_64" || arch == "aarch64")]
+unsafe func DnsIsFlatRecord(pRecord: CPointer<DNS_RECORDAAbi>, ullFlags: UInt64, pfFlat: CPointer<Int32>): Int32 {
+    let call = CFunc<(CPointer<DNS_RECORDAAbi>, UInt64, CPointer<Int32>) -> Int32>(__windowsBindgen_DnsIsFlatRecordProc())
+    return unsafe { call(pRecord, ullFlags, pfFlat) }
+}
+
+@When[Windows_Win32_NetworkManagement_Dns == "on" && DNSAPI == "on" && Windows_Win32_NetworkManagement_Dns_DnsIsFlatRecord == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_DnsIsFlatRecord(pRecord: CPointer<DNS_RECORDAAbi>, ullFlags: UInt64, pfFlat: CPointer<Int32>): Int32 {
+    return DnsIsFlatRecord(pRecord, ullFlags, pfFlat)
 }
 
 @When[Windows_Win32_NetworkManagement_Dns == "on"]

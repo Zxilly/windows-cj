@@ -3,9 +3,7 @@ package windows_sys.Win32.System.ComponentServices
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Security == "on"]
 import windows_sys.Win32.Security as Win32_Security
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
@@ -11903,43 +11901,100 @@ public class IServiceSysTxnConfig <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[MTXDM == "on"]
+@When[Windows_Win32_System_ComponentServices == "on" && MTXDM == "on" && Windows_Win32_System_ComponentServices_GetDispenserManager == "on"]
 @CallingConv[CDECL]
 foreign {
     // pinvoke-hint: cc=cdecl
     func GetDispenserManager(param0: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[OLE32 == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_System_ComponentServices == "on" && MTXDM == "on" && Windows_Win32_System_ComponentServices_GetDispenserManager == "on"]
+public unsafe func Windows_GetDispenserManager(param0: CPointer<CPointer<Unit>>): Int32 {
+    return GetDispenserManager(param0)
+}
+
+@When[Windows_Win32_System_ComponentServices == "on" && OLE32 == "on" && Windows_Win32_System_ComponentServices_CoGetDefaultContext == "on" && Windows_Win32_System_Com == "on"]
 foreign {
     func CoGetDefaultContext(aptType: Int32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[COMSVCS == "on"]
+@When[Windows_Win32_System_ComponentServices == "on" && OLE32 == "on" && Windows_Win32_System_ComponentServices_CoGetDefaultContext == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CoGetDefaultContext(aptType: Int32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return CoGetDefaultContext(aptType, riid, ppv)
+}
+
+@When[Windows_Win32_System_ComponentServices == "on" && COMSVCS == "on" && Windows_Win32_System_ComponentServices_RecycleSurrogate == "on"]
 @CallingConv[CDECL]
 foreign {
     // pinvoke-hint: cc=cdecl
     func RecycleSurrogate(lReasonCode: Int32): Int32
 }
 
-@When[COMSVCS == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_System_ComponentServices == "on" && COMSVCS == "on" && Windows_Win32_System_ComponentServices_RecycleSurrogate == "on"]
+public unsafe func Windows_RecycleSurrogate(lReasonCode: Int32): Int32 {
+    return RecycleSurrogate(lReasonCode)
+}
+
+@When[Windows_Win32_System_ComponentServices == "on" && COMSVCS == "on" && Windows_Win32_System_ComponentServices_SafeRef == "on" && Windows_Win32_System_Com == "on"]
 @CallingConv[CDECL]
 foreign {
     // pinvoke-hint: cc=cdecl
     func SafeRef(rid: CPointer<GUID>, pUnk: CPointer<Unit>): CPointer<Unit>
 }
 
-@When[COMSVCS == "on"]
+@When[Windows_Win32_System_ComponentServices == "on" && COMSVCS == "on" && Windows_Win32_System_ComponentServices_SafeRef == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SafeRef(rid: CPointer<GUID>, pUnk: CPointer<Unit>): CPointer<Unit> {
+    return SafeRef(rid, pUnk)
+}
+
+@When[Windows_Win32_System_ComponentServices == "on" && COMSVCS == "on" && Windows_Win32_System_ComponentServices_CoCreateActivity == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func CoCreateActivity(pIUnknown: CPointer<Unit>, riid: CPointer<GUID>, ppObj: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_ComponentServices == "on" && COMSVCS == "on" && Windows_Win32_System_ComponentServices_CoCreateActivity == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CoCreateActivity(pIUnknown: CPointer<Unit>, riid: CPointer<GUID>, ppObj: CPointer<CPointer<Unit>>): Int32 {
+    return CoCreateActivity(pIUnknown, riid, ppObj)
+}
+
+@When[Windows_Win32_System_ComponentServices == "on" && COMSVCS == "on" && Windows_Win32_System_ComponentServices_CoEnterServiceDomain == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func CoEnterServiceDomain(pConfigObject: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_ComponentServices == "on" && COMSVCS == "on" && Windows_Win32_System_ComponentServices_CoEnterServiceDomain == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CoEnterServiceDomain(pConfigObject: CPointer<Unit>): Int32 {
+    return CoEnterServiceDomain(pConfigObject)
+}
+
+@When[Windows_Win32_System_ComponentServices == "on" && COMSVCS == "on" && Windows_Win32_System_ComponentServices_CoLeaveServiceDomain == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func CoLeaveServiceDomain(pUnkStatus: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_ComponentServices == "on" && COMSVCS == "on" && Windows_Win32_System_ComponentServices_CoLeaveServiceDomain == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CoLeaveServiceDomain(pUnkStatus: CPointer<Unit>): Unit {
+    CoLeaveServiceDomain(pUnkStatus)
+}
+
+@When[Windows_Win32_System_ComponentServices == "on" && COMSVCS == "on" && Windows_Win32_System_ComponentServices_GetManagedExtensions == "on"]
 foreign {
     func GetManagedExtensions(dwExts: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_ComponentServices == "on" && COMSVCS == "on" && Windows_Win32_System_ComponentServices_GetManagedExtensions == "on"]
+public unsafe func Windows_GetManagedExtensions(dwExts: CPointer<UInt32>): Int32 {
+    return GetManagedExtensions(dwExts)
+}
+
+@When[Windows_Win32_System_ComponentServices == "on" && COMSVCS == "on" && Windows_Win32_System_ComponentServices_MTSCreateActivity == "on"]
+foreign {
     func MTSCreateActivity(riid: CPointer<GUID>, ppobj: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[COMSVCS == "on" && Windows_Win32_System_Com == "on"]
-foreign {
-    func CoCreateActivity(pIUnknown: CPointer<Unit>, riid: CPointer<GUID>, ppObj: CPointer<CPointer<Unit>>): Int32
-    func CoEnterServiceDomain(pConfigObject: CPointer<Unit>): Int32
-    func CoLeaveServiceDomain(pUnkStatus: CPointer<Unit>): Unit
+@When[Windows_Win32_System_ComponentServices == "on" && COMSVCS == "on" && Windows_Win32_System_ComponentServices_MTSCreateActivity == "on"]
+public unsafe func Windows_MTSCreateActivity(riid: CPointer<GUID>, ppobj: CPointer<CPointer<Unit>>): Int32 {
+    return MTSCreateActivity(riid, ppobj)
 }
 
 @When[Windows_Win32_System_ComponentServices == "on"]

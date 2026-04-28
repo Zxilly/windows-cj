@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -183,7 +182,10 @@ extend IRawNotification <: windows_core.Interface<IRawNotification> {}
 @C
 public struct IRawNotification2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Headers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Headers: UIntNative = UIntNative(0)
     public var ChannelId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -253,6 +255,7 @@ public class IRawNotification2 <: InterfaceWrapperBase & ComInterface & RuntimeN
         readVtbl<IRawNotification2Vtbl>(IRawNotification2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Headers(): windows_collections.IMapView<windows_core.HString, windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

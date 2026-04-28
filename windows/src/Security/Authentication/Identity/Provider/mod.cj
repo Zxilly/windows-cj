@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l0 as _impl_l0
 import windows_collections as windows_collections
@@ -2171,7 +2170,10 @@ public struct ISecondaryAuthenticationFactorRegistrationStaticsVtbl {
     public var RequestStartRegisteringDeviceAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, SecondaryAuthenticationFactorDeviceCapabilitiesAbi, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams != "on"]
     public var RequestStartRegisteringDeviceAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllRegisteredDeviceInfoAsync: CFunc<(CPointer<Unit>, SecondaryAuthenticationFactorDeviceFindScopeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllRegisteredDeviceInfoAsync: UIntNative = UIntNative(0)
     public var UnregisterDeviceAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams == "on"]
     public var UpdateDeviceConfigurationDataAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
@@ -2254,6 +2256,7 @@ public class ISecondaryAuthenticationFactorRegistrationStatics <: InterfaceWrapp
         return windows_future.IAsyncOperation<SecondaryAuthenticationFactorRegistrationResult>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllRegisteredDeviceInfoAsync(queryType: SecondaryAuthenticationFactorDeviceFindScope): windows_future.IAsyncOperation<windows_collections.IVectorView<SecondaryAuthenticationFactorInfo>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2638,6 +2641,7 @@ public class SecondaryAuthenticationFactorRegistration <: InterfaceWrapperBase &
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindAllRegisteredDeviceInfoAsync(queryType: SecondaryAuthenticationFactorDeviceFindScope): windows_future.IAsyncOperation<windows_collections.IVectorView<SecondaryAuthenticationFactorInfo>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<SecondaryAuthenticationFactorInfo>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<SecondaryAuthenticationFactorInfo>>>.None
         try (factory__ = windows_core.factory<SecondaryAuthenticationFactorRegistration, ISecondaryAuthenticationFactorRegistrationStatics>().unwrap()) {

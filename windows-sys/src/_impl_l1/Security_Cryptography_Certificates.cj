@@ -11,7 +11,9 @@ import windows_sys._impl_l0 as _impl_l0
 @C
 public struct ICertificateVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var BuildChainAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var BuildChainWithParametersAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var SerialNumber: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<UInt8>>) -> Int32> = { _, _, _ => 0 }
     public var GetHashValue: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<UInt8>>) -> Int32> = { _, _, _ => 0 }
@@ -24,6 +26,7 @@ public struct ICertificateVtbl {
     public var IsStronglyProtected: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var ValidFrom: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.DateTime>) -> Int32> = { _, _ => 0 }
     public var ValidTo: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.DateTime>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var EnhancedKeyUsages: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetFriendlyName: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var FriendlyName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -70,12 +73,14 @@ public class ICertificate <: InterfaceWrapperBase & ComInterface {
         readVtbl<ICertificateVtbl>(ICertificateVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func BuildChainAsync(certificates: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.BuildChainAsync(__liveRaw, certificates, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func BuildChainWithParametersAsync(certificates: CPointer<Unit>, parameters: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -143,6 +148,7 @@ public class ICertificate <: InterfaceWrapperBase & ComInterface {
         return __vt.ValidTo(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func EnhancedKeyUsages(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -258,6 +264,7 @@ public struct ICertificateChainVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Validate: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var ValidateWithParameters: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetCertificates: CFunc<(CPointer<Unit>, Bool, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -314,6 +321,7 @@ public class ICertificateChain <: InterfaceWrapperBase & ComInterface {
         return __vt.ValidateWithParameters(__liveRaw, parameter, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetCertificates(includeRoot: Bool, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -437,8 +445,10 @@ public class ICertificateFactory <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ICertificateRequestProperties4Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SuppressedDefaults: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SubjectAlternativeName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Extensions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -483,6 +493,7 @@ public class ICertificateRequestProperties4 <: InterfaceWrapperBase & ComInterfa
         readVtbl<ICertificateRequestProperties4Vtbl>(ICertificateRequestProperties4Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SuppressedDefaults(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -495,6 +506,7 @@ public class ICertificateRequestProperties4 <: InterfaceWrapperBase & ComInterfa
         return __vt.SubjectAlternativeName(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Extensions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -506,6 +518,7 @@ public class ICertificateRequestProperties4 <: InterfaceWrapperBase & ComInterfa
 @C
 public struct IChainBuildingParametersVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var EnhancedKeyUsages: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ValidationTimestamp: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.DateTime>) -> Int32> = { _, _ => 0 }
     public var SetValidationTimestamp: CFunc<(CPointer<Unit>, Foundation__impl_l0.DateTime) -> Int32> = { _, _ => 0 }
@@ -517,6 +530,7 @@ public struct IChainBuildingParametersVtbl {
     public var SetAuthorityInformationAccessEnabled: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
     public var CurrentTimeValidationEnabled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var SetCurrentTimeValidationEnabled: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ExclusiveTrustRoots: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -561,6 +575,7 @@ public class IChainBuildingParameters <: InterfaceWrapperBase & ComInterface {
         readVtbl<IChainBuildingParametersVtbl>(IChainBuildingParametersVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func EnhancedKeyUsages(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -627,6 +642,7 @@ public class IChainBuildingParameters <: InterfaceWrapperBase & ComInterface {
         return __vt.SetCurrentTimeValidationEnabled(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ExclusiveTrustRoots(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -718,11 +734,17 @@ public class IChainValidationParameters <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ISubjectAlternativeNameInfo2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var EmailNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var IPAddresses: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Urls: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var DnsNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var DistinguishedNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var PrincipalNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Extension: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -768,36 +790,42 @@ public class ISubjectAlternativeNameInfo2 <: InterfaceWrapperBase & ComInterface
         readVtbl<ISubjectAlternativeNameInfo2Vtbl>(ISubjectAlternativeNameInfo2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func EmailNames(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.EmailNames(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func IPAddresses(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.IPAddresses(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Urls(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Urls(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DnsNames(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DnsNames(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DistinguishedNames(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DistinguishedNames(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PrincipalNames(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

@@ -3,11 +3,8 @@ package windows_sys.Win32.System.WinRT.Display
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Security == "on"]
 import windows_sys.Win32.Security as Win32_Security
-@When[Windows_Win32_System_WinRT == "on"]
 import windows_sys.Win32.System.WinRT as Win32_System_WinRT
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 

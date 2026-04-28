@@ -13,6 +13,7 @@ import windows_sys._impl_l2 as _impl_l2
 public struct IVoiceCommandVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var CommandName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Media_SpeechRecognition == "on"]
     public var SpeechRecognitionResult: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -65,6 +66,7 @@ public class IVoiceCommand <: InterfaceWrapperBase & ComInterface {
         return __vt.CommandName(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -140,6 +142,7 @@ public struct IVoiceCommandDefinitionVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Language: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetPhraseListAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -196,6 +199,7 @@ public class IVoiceCommandDefinition <: InterfaceWrapperBase & ComInterface {
         return __vt.Name(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetPhraseListAsync(phraseListName: CPointer<Unit>, phraseList: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -583,8 +587,9 @@ public class IVoiceCommandContentTile <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IVoiceCommandDefinitionManagerStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var InstallCommandDefinitionsFromStorageFileAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var InstalledCommandDefinitions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -629,13 +634,14 @@ public class IVoiceCommandDefinitionManagerStatics <: InterfaceWrapperBase & Com
         readVtbl<IVoiceCommandDefinitionManagerStaticsVtbl>(IVoiceCommandDefinitionManagerStaticsVtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func InstallCommandDefinitionsFromStorageFileAsync(file: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.InstallCommandDefinitionsFromStorageFileAsync(__liveRaw, file, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InstalledCommandDefinitions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -708,6 +714,7 @@ public struct IVoiceCommandResponseVtbl {
     public var SetRepeatMessage: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var AppLaunchArgument: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetAppLaunchArgument: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var VoiceCommandContentTiles: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -788,6 +795,7 @@ public class IVoiceCommandResponse <: InterfaceWrapperBase & ComInterface {
         return __vt.SetAppLaunchArgument(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func VoiceCommandContentTiles(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -801,8 +809,10 @@ public struct IVoiceCommandResponseStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var MaxSupportedVoiceCommandContentTiles: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var CreateResponse: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateResponseWithTiles: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var CreateResponseForPrompt: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateResponseForPromptWithTiles: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -859,6 +869,7 @@ public class IVoiceCommandResponseStatics <: InterfaceWrapperBase & ComInterface
         return __vt.CreateResponse(__liveRaw, userMessage, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateResponseWithTiles(message: CPointer<Unit>, contentTiles: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -871,6 +882,7 @@ public class IVoiceCommandResponseStatics <: InterfaceWrapperBase & ComInterface
         return __vt.CreateResponseForPrompt(__liveRaw, message, repeatMessage, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateResponseForPromptWithTiles(message: CPointer<Unit>, repeatMessage: CPointer<Unit>, contentTiles: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

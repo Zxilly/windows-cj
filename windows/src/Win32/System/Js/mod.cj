@@ -6,9 +6,7 @@ package windows.Win32.System.Js
 import std.collection.*
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge}
 import windows_core as windows_core
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_System_Diagnostics_Debug_ActiveScript == "on"]
 import windows.Win32.System.Diagnostics.Debug.ActiveScript as Win32_System_Diagnostics_Debug_ActiveScript
 import windows.Win32._impl_l2 as Win32__impl_l2
 
@@ -421,120 +419,869 @@ extend JsValueType <: windows_core.CopyType & windows_core.RuntimeType & windows
 @When[Windows_Win32_System_Js == "on"]
 public type JsMemoryAllocationCallback = CFunc<(CPointer<Unit>, JsMemoryEventTypeAbi, UIntNative) -> Bool>
 
-@When[CHAKRA == "on"]
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsAddRef == "on"]
 foreign {
     // param-hint: count optional
     func JsAddRef(ref: CPointer<Unit>, count: CPointer<UInt32>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsAddRef == "on"]
+public unsafe func Windows_JsAddRef(ref: CPointer<Unit>, count: CPointer<UInt32>): JsErrorCodeAbi {
+    return JsAddRef(ref, count)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsBoolToBoolean == "on"]
+foreign {
     func JsBoolToBoolean(value: UInt8, booleanValue: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsBoolToBoolean == "on"]
+public unsafe func Windows_JsBoolToBoolean(value: UInt8, booleanValue: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsBoolToBoolean(value, booleanValue)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsBooleanToBool == "on"]
+foreign {
     func JsBooleanToBool(value: CPointer<Unit>, boolValue: CPointer<Bool>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsBooleanToBool == "on"]
+public unsafe func Windows_JsBooleanToBool(value: CPointer<Unit>, boolValue: CPointer<Bool>): JsErrorCodeAbi {
+    return JsBooleanToBool(value, boolValue)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsCallFunction == "on"]
+foreign {
     // param-hint: arguments len=param[2]
     // param-hint: result optional
     func JsCallFunction(function: CPointer<Unit>, arguments: CPointer<CPointer<Unit>>, argumentCount: UInt16, result: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsCallFunction == "on"]
+public unsafe func Windows_JsCallFunction(function: CPointer<Unit>, arguments: CPointer<CPointer<Unit>>, argumentCount: UInt16, result: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsCallFunction(function, arguments, argumentCount, result)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsCollectGarbage == "on"]
+foreign {
     func JsCollectGarbage(runtime: CPointer<Unit>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsCollectGarbage == "on"]
+public unsafe func Windows_JsCollectGarbage(runtime: CPointer<Unit>): JsErrorCodeAbi {
+    return JsCollectGarbage(runtime)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsConstructObject == "on"]
+foreign {
     // param-hint: arguments len=param[2]
     func JsConstructObject(function: CPointer<Unit>, arguments: CPointer<CPointer<Unit>>, argumentCount: UInt16, result: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsConstructObject == "on"]
+public unsafe func Windows_JsConstructObject(function: CPointer<Unit>, arguments: CPointer<CPointer<Unit>>, argumentCount: UInt16, result: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsConstructObject(function, arguments, argumentCount, result)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsConvertValueToBoolean == "on"]
+foreign {
     func JsConvertValueToBoolean(value: CPointer<Unit>, booleanValue: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsConvertValueToBoolean == "on"]
+public unsafe func Windows_JsConvertValueToBoolean(value: CPointer<Unit>, booleanValue: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsConvertValueToBoolean(value, booleanValue)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsConvertValueToNumber == "on"]
+foreign {
     func JsConvertValueToNumber(value: CPointer<Unit>, numberValue: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsConvertValueToNumber == "on"]
+public unsafe func Windows_JsConvertValueToNumber(value: CPointer<Unit>, numberValue: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsConvertValueToNumber(value, numberValue)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsConvertValueToObject == "on"]
+foreign {
     func JsConvertValueToObject(value: CPointer<Unit>, object: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsConvertValueToObject == "on"]
+public unsafe func Windows_JsConvertValueToObject(value: CPointer<Unit>, object: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsConvertValueToObject(value, object)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsConvertValueToString == "on"]
+foreign {
     func JsConvertValueToString(value: CPointer<Unit>, stringValue: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsConvertValueToString == "on"]
+public unsafe func Windows_JsConvertValueToString(value: CPointer<Unit>, stringValue: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsConvertValueToString(value, stringValue)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsCreateArray == "on"]
+foreign {
     func JsCreateArray(length: UInt32, result: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsCreateArray == "on"]
+public unsafe func Windows_JsCreateArray(length: UInt32, result: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsCreateArray(length, result)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsCreateContext == "on" && (arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug_ActiveScript == "on" || arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug_ActiveScript == "on")]
+foreign {
+    func JsCreateContext(runtime: CPointer<Unit>, debugApplication: CPointer<Unit>, newContext: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsCreateContext == "on" && (arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug_ActiveScript == "on" || arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug_ActiveScript == "on")]
+public unsafe func Windows_JsCreateContext(runtime: CPointer<Unit>, debugApplication: CPointer<Unit>, newContext: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsCreateContext(runtime, debugApplication, newContext)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsCreateError == "on"]
+foreign {
     func JsCreateError(message: CPointer<Unit>, error: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsCreateError == "on"]
+public unsafe func Windows_JsCreateError(message: CPointer<Unit>, error: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsCreateError(message, error)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsCreateExternalObject == "on"]
+foreign {
     // param-hint: data optional
     // param-hint: finalizeCallback optional
     func JsCreateExternalObject(data: CPointer<Unit>, finalizeCallback: JsFinalizeCallback, object: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsCreateExternalObject == "on"]
+public unsafe func Windows_JsCreateExternalObject(data: CPointer<Unit>, finalizeCallback: JsFinalizeCallback, object: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsCreateExternalObject(data, finalizeCallback, object)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsCreateFunction == "on"]
+foreign {
     // param-hint: callbackState optional
     func JsCreateFunction(nativeFunction: JsNativeFunction, callbackState: CPointer<Unit>, function: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsCreateFunction == "on"]
+public unsafe func Windows_JsCreateFunction(nativeFunction: JsNativeFunction, callbackState: CPointer<Unit>, function: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsCreateFunction(nativeFunction, callbackState, function)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsCreateObject == "on"]
+foreign {
     func JsCreateObject(object: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsCreateObject == "on"]
+public unsafe func Windows_JsCreateObject(object: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsCreateObject(object)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsCreateRangeError == "on"]
+foreign {
     func JsCreateRangeError(message: CPointer<Unit>, error: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsCreateRangeError == "on"]
+public unsafe func Windows_JsCreateRangeError(message: CPointer<Unit>, error: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsCreateRangeError(message, error)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsCreateReferenceError == "on"]
+foreign {
     func JsCreateReferenceError(message: CPointer<Unit>, error: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsCreateReferenceError == "on"]
+public unsafe func Windows_JsCreateReferenceError(message: CPointer<Unit>, error: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsCreateReferenceError(message, error)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsCreateRuntime == "on"]
+foreign {
     // param-hint: threadService optional
     func JsCreateRuntime(attributes: JsRuntimeAttributesAbi, runtimeVersion: JsRuntimeVersionAbi, threadService: JsThreadServiceCallback, runtime: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsCreateRuntime == "on"]
+public unsafe func Windows_JsCreateRuntime(attributes: JsRuntimeAttributesAbi, runtimeVersion: JsRuntimeVersionAbi, threadService: JsThreadServiceCallback, runtime: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsCreateRuntime(attributes, runtimeVersion, threadService, runtime)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsCreateSyntaxError == "on"]
+foreign {
     func JsCreateSyntaxError(message: CPointer<Unit>, error: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsCreateSyntaxError == "on"]
+public unsafe func Windows_JsCreateSyntaxError(message: CPointer<Unit>, error: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsCreateSyntaxError(message, error)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsCreateTypeError == "on"]
+foreign {
     func JsCreateTypeError(message: CPointer<Unit>, error: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsCreateTypeError == "on"]
+public unsafe func Windows_JsCreateTypeError(message: CPointer<Unit>, error: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsCreateTypeError(message, error)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsCreateURIError == "on"]
+foreign {
     func JsCreateURIError(message: CPointer<Unit>, error: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsCreateURIError == "on"]
+public unsafe func Windows_JsCreateURIError(message: CPointer<Unit>, error: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsCreateURIError(message, error)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsDefineProperty == "on"]
+foreign {
     func JsDefineProperty(object: CPointer<Unit>, propertyId: CPointer<Unit>, propertyDescriptor: CPointer<Unit>, result: CPointer<Bool>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsDefineProperty == "on"]
+public unsafe func Windows_JsDefineProperty(object: CPointer<Unit>, propertyId: CPointer<Unit>, propertyDescriptor: CPointer<Unit>, result: CPointer<Bool>): JsErrorCodeAbi {
+    return JsDefineProperty(object, propertyId, propertyDescriptor, result)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsDeleteIndexedProperty == "on"]
+foreign {
     func JsDeleteIndexedProperty(object: CPointer<Unit>, index: CPointer<Unit>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsDeleteIndexedProperty == "on"]
+public unsafe func Windows_JsDeleteIndexedProperty(object: CPointer<Unit>, index: CPointer<Unit>): JsErrorCodeAbi {
+    return JsDeleteIndexedProperty(object, index)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsDeleteProperty == "on"]
+foreign {
     func JsDeleteProperty(object: CPointer<Unit>, propertyId: CPointer<Unit>, useStrictRules: UInt8, result: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsDeleteProperty == "on"]
+public unsafe func Windows_JsDeleteProperty(object: CPointer<Unit>, propertyId: CPointer<Unit>, useStrictRules: UInt8, result: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsDeleteProperty(object, propertyId, useStrictRules, result)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsDisableRuntimeExecution == "on"]
+foreign {
     func JsDisableRuntimeExecution(runtime: CPointer<Unit>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsDisableRuntimeExecution == "on"]
+public unsafe func Windows_JsDisableRuntimeExecution(runtime: CPointer<Unit>): JsErrorCodeAbi {
+    return JsDisableRuntimeExecution(runtime)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsDisposeRuntime == "on"]
+foreign {
     func JsDisposeRuntime(runtime: CPointer<Unit>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsDisposeRuntime == "on"]
+public unsafe func Windows_JsDisposeRuntime(runtime: CPointer<Unit>): JsErrorCodeAbi {
+    return JsDisposeRuntime(runtime)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsDoubleToNumber == "on"]
+foreign {
     func JsDoubleToNumber(doubleValue: Float64, value: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsDoubleToNumber == "on"]
+public unsafe func Windows_JsDoubleToNumber(doubleValue: Float64, value: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsDoubleToNumber(doubleValue, value)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsEnableRuntimeExecution == "on"]
+foreign {
     func JsEnableRuntimeExecution(runtime: CPointer<Unit>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsEnableRuntimeExecution == "on"]
+public unsafe func Windows_JsEnableRuntimeExecution(runtime: CPointer<Unit>): JsErrorCodeAbi {
+    return JsEnableRuntimeExecution(runtime)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsEnumerateHeap == "on" && Windows_Win32_System_Diagnostics_Debug_ActiveScript == "on"]
+foreign {
+    func JsEnumerateHeap(enumerator: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsEnumerateHeap == "on" && Windows_Win32_System_Diagnostics_Debug_ActiveScript == "on"]
+public unsafe func Windows_JsEnumerateHeap(enumerator: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsEnumerateHeap(enumerator)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsEquals == "on"]
+foreign {
     func JsEquals(object1: CPointer<Unit>, object2: CPointer<Unit>, result: CPointer<Bool>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsEquals == "on"]
+public unsafe func Windows_JsEquals(object1: CPointer<Unit>, object2: CPointer<Unit>, result: CPointer<Bool>): JsErrorCodeAbi {
+    return JsEquals(object1, object2, result)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetAndClearException == "on"]
+foreign {
     func JsGetAndClearException(exception: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetAndClearException == "on"]
+public unsafe func Windows_JsGetAndClearException(exception: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsGetAndClearException(exception)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetCurrentContext == "on"]
+foreign {
     func JsGetCurrentContext(currentContext: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetCurrentContext == "on"]
+public unsafe func Windows_JsGetCurrentContext(currentContext: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsGetCurrentContext(currentContext)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetExtensionAllowed == "on"]
+foreign {
     func JsGetExtensionAllowed(object: CPointer<Unit>, value: CPointer<Bool>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetExtensionAllowed == "on"]
+public unsafe func Windows_JsGetExtensionAllowed(object: CPointer<Unit>, value: CPointer<Bool>): JsErrorCodeAbi {
+    return JsGetExtensionAllowed(object, value)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetExternalData == "on"]
+foreign {
     func JsGetExternalData(object: CPointer<Unit>, externalData: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetExternalData == "on"]
+public unsafe func Windows_JsGetExternalData(object: CPointer<Unit>, externalData: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsGetExternalData(object, externalData)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetFalseValue == "on"]
+foreign {
     func JsGetFalseValue(falseValue: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetFalseValue == "on"]
+public unsafe func Windows_JsGetFalseValue(falseValue: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsGetFalseValue(falseValue)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetGlobalObject == "on"]
+foreign {
     func JsGetGlobalObject(globalObject: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetGlobalObject == "on"]
+public unsafe func Windows_JsGetGlobalObject(globalObject: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsGetGlobalObject(globalObject)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetIndexedProperty == "on"]
+foreign {
     func JsGetIndexedProperty(object: CPointer<Unit>, index: CPointer<Unit>, result: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetIndexedProperty == "on"]
+public unsafe func Windows_JsGetIndexedProperty(object: CPointer<Unit>, index: CPointer<Unit>, result: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsGetIndexedProperty(object, index, result)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetNullValue == "on"]
+foreign {
     func JsGetNullValue(nullValue: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetNullValue == "on"]
+public unsafe func Windows_JsGetNullValue(nullValue: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsGetNullValue(nullValue)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetOwnPropertyDescriptor == "on"]
+foreign {
     func JsGetOwnPropertyDescriptor(object: CPointer<Unit>, propertyId: CPointer<Unit>, propertyDescriptor: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetOwnPropertyDescriptor == "on"]
+public unsafe func Windows_JsGetOwnPropertyDescriptor(object: CPointer<Unit>, propertyId: CPointer<Unit>, propertyDescriptor: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsGetOwnPropertyDescriptor(object, propertyId, propertyDescriptor)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetOwnPropertyNames == "on"]
+foreign {
     func JsGetOwnPropertyNames(object: CPointer<Unit>, propertyNames: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetOwnPropertyNames == "on"]
+public unsafe func Windows_JsGetOwnPropertyNames(object: CPointer<Unit>, propertyNames: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsGetOwnPropertyNames(object, propertyNames)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetProperty == "on"]
+foreign {
     func JsGetProperty(object: CPointer<Unit>, propertyId: CPointer<Unit>, value: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetProperty == "on"]
+public unsafe func Windows_JsGetProperty(object: CPointer<Unit>, propertyId: CPointer<Unit>, value: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsGetProperty(object, propertyId, value)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetPropertyIdFromName == "on"]
+foreign {
     func JsGetPropertyIdFromName(name: CPointer<UInt16>, propertyId: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetPropertyIdFromName == "on"]
+public unsafe func Windows_JsGetPropertyIdFromName(name: CPointer<UInt16>, propertyId: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsGetPropertyIdFromName(name, propertyId)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetPropertyNameFromId == "on"]
+foreign {
     func JsGetPropertyNameFromId(propertyId: CPointer<Unit>, name: CPointer<CPointer<UInt16>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetPropertyNameFromId == "on"]
+public unsafe func Windows_JsGetPropertyNameFromId(propertyId: CPointer<Unit>, name: CPointer<CPointer<UInt16>>): JsErrorCodeAbi {
+    return JsGetPropertyNameFromId(propertyId, name)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetPrototype == "on"]
+foreign {
     func JsGetPrototype(object: CPointer<Unit>, prototypeObject: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetPrototype == "on"]
+public unsafe func Windows_JsGetPrototype(object: CPointer<Unit>, prototypeObject: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsGetPrototype(object, prototypeObject)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetRuntime == "on"]
+foreign {
     func JsGetRuntime(context: CPointer<Unit>, runtime: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetRuntime == "on"]
+public unsafe func Windows_JsGetRuntime(context: CPointer<Unit>, runtime: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsGetRuntime(context, runtime)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetRuntimeMemoryLimit == "on"]
+foreign {
     func JsGetRuntimeMemoryLimit(runtime: CPointer<Unit>, memoryLimit: CPointer<UIntNative>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetRuntimeMemoryLimit == "on"]
+public unsafe func Windows_JsGetRuntimeMemoryLimit(runtime: CPointer<Unit>, memoryLimit: CPointer<UIntNative>): JsErrorCodeAbi {
+    return JsGetRuntimeMemoryLimit(runtime, memoryLimit)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetRuntimeMemoryUsage == "on"]
+foreign {
     func JsGetRuntimeMemoryUsage(runtime: CPointer<Unit>, memoryUsage: CPointer<UIntNative>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetRuntimeMemoryUsage == "on"]
+public unsafe func Windows_JsGetRuntimeMemoryUsage(runtime: CPointer<Unit>, memoryUsage: CPointer<UIntNative>): JsErrorCodeAbi {
+    return JsGetRuntimeMemoryUsage(runtime, memoryUsage)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetStringLength == "on"]
+foreign {
     func JsGetStringLength(stringValue: CPointer<Unit>, length: CPointer<Int32>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetStringLength == "on"]
+public unsafe func Windows_JsGetStringLength(stringValue: CPointer<Unit>, length: CPointer<Int32>): JsErrorCodeAbi {
+    return JsGetStringLength(stringValue, length)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetTrueValue == "on"]
+foreign {
     func JsGetTrueValue(trueValue: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetTrueValue == "on"]
+public unsafe func Windows_JsGetTrueValue(trueValue: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsGetTrueValue(trueValue)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetUndefinedValue == "on"]
+foreign {
     func JsGetUndefinedValue(undefinedValue: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetUndefinedValue == "on"]
+public unsafe func Windows_JsGetUndefinedValue(undefinedValue: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsGetUndefinedValue(undefinedValue)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetValueType == "on"]
+foreign {
     func JsGetValueType(value: CPointer<Unit>, type_: CPointer<JsValueTypeAbi>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsGetValueType == "on"]
+public unsafe func Windows_JsGetValueType(value: CPointer<Unit>, type_: CPointer<JsValueTypeAbi>): JsErrorCodeAbi {
+    return JsGetValueType(value, type_)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsHasException == "on"]
+foreign {
     func JsHasException(hasException: CPointer<Bool>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsHasException == "on"]
+public unsafe func Windows_JsHasException(hasException: CPointer<Bool>): JsErrorCodeAbi {
+    return JsHasException(hasException)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsHasExternalData == "on"]
+foreign {
     func JsHasExternalData(object: CPointer<Unit>, value: CPointer<Bool>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsHasExternalData == "on"]
+public unsafe func Windows_JsHasExternalData(object: CPointer<Unit>, value: CPointer<Bool>): JsErrorCodeAbi {
+    return JsHasExternalData(object, value)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsHasIndexedProperty == "on"]
+foreign {
     func JsHasIndexedProperty(object: CPointer<Unit>, index: CPointer<Unit>, result: CPointer<Bool>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsHasIndexedProperty == "on"]
+public unsafe func Windows_JsHasIndexedProperty(object: CPointer<Unit>, index: CPointer<Unit>, result: CPointer<Bool>): JsErrorCodeAbi {
+    return JsHasIndexedProperty(object, index, result)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsHasProperty == "on"]
+foreign {
     func JsHasProperty(object: CPointer<Unit>, propertyId: CPointer<Unit>, hasProperty: CPointer<Bool>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsHasProperty == "on"]
+public unsafe func Windows_JsHasProperty(object: CPointer<Unit>, propertyId: CPointer<Unit>, hasProperty: CPointer<Bool>): JsErrorCodeAbi {
+    return JsHasProperty(object, propertyId, hasProperty)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsIdle == "on"]
+foreign {
     // param-hint: nextIdleTick optional
     func JsIdle(nextIdleTick: CPointer<UInt32>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsIdle == "on"]
+public unsafe func Windows_JsIdle(nextIdleTick: CPointer<UInt32>): JsErrorCodeAbi {
+    return JsIdle(nextIdleTick)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsIntToNumber == "on"]
+foreign {
     func JsIntToNumber(intValue: Int32, value: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsIntToNumber == "on"]
+public unsafe func Windows_JsIntToNumber(intValue: Int32, value: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsIntToNumber(intValue, value)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsIsEnumeratingHeap == "on"]
+foreign {
     func JsIsEnumeratingHeap(isEnumeratingHeap: CPointer<Bool>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsIsEnumeratingHeap == "on"]
+public unsafe func Windows_JsIsEnumeratingHeap(isEnumeratingHeap: CPointer<Bool>): JsErrorCodeAbi {
+    return JsIsEnumeratingHeap(isEnumeratingHeap)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsIsRuntimeExecutionDisabled == "on"]
+foreign {
     func JsIsRuntimeExecutionDisabled(runtime: CPointer<Unit>, isDisabled: CPointer<Bool>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsIsRuntimeExecutionDisabled == "on"]
+public unsafe func Windows_JsIsRuntimeExecutionDisabled(runtime: CPointer<Unit>, isDisabled: CPointer<Bool>): JsErrorCodeAbi {
+    return JsIsRuntimeExecutionDisabled(runtime, isDisabled)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsNumberToDouble == "on"]
+foreign {
     func JsNumberToDouble(value: CPointer<Unit>, doubleValue: CPointer<Float64>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsNumberToDouble == "on"]
+public unsafe func Windows_JsNumberToDouble(value: CPointer<Unit>, doubleValue: CPointer<Float64>): JsErrorCodeAbi {
+    return JsNumberToDouble(value, doubleValue)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsParseScript == "on"]
+foreign {
     func JsParseScript(script: CPointer<UInt16>, sourceContext: UIntNative, sourceUrl: CPointer<UInt16>, result: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsParseScript == "on"]
+public unsafe func Windows_JsParseScript(script: CPointer<UInt16>, sourceContext: UIntNative, sourceUrl: CPointer<UInt16>, result: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsParseScript(script, sourceContext, sourceUrl, result)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsParseSerializedScript == "on"]
+foreign {
     func JsParseSerializedScript(script: CPointer<UInt16>, buffer: CPointer<UInt8>, sourceContext: UIntNative, sourceUrl: CPointer<UInt16>, result: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsParseSerializedScript == "on"]
+public unsafe func Windows_JsParseSerializedScript(script: CPointer<UInt16>, buffer: CPointer<UInt8>, sourceContext: UIntNative, sourceUrl: CPointer<UInt16>, result: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsParseSerializedScript(script, buffer, sourceContext, sourceUrl, result)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsPointerToString == "on"]
+foreign {
     // param-hint: stringValue len=param[1]
     func JsPointerToString(stringValue: CPointer<UInt16>, stringLength: UIntNative, value: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsPointerToString == "on"]
+public unsafe func Windows_JsPointerToString(stringValue: CPointer<UInt16>, stringLength: UIntNative, value: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsPointerToString(stringValue, stringLength, value)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsPreventExtension == "on"]
+foreign {
     func JsPreventExtension(object: CPointer<Unit>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsPreventExtension == "on"]
+public unsafe func Windows_JsPreventExtension(object: CPointer<Unit>): JsErrorCodeAbi {
+    return JsPreventExtension(object)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsRelease == "on"]
+foreign {
     // param-hint: count optional
     func JsRelease(ref: CPointer<Unit>, count: CPointer<UInt32>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsRelease == "on"]
+public unsafe func Windows_JsRelease(ref: CPointer<Unit>, count: CPointer<UInt32>): JsErrorCodeAbi {
+    return JsRelease(ref, count)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsRunScript == "on"]
+foreign {
     func JsRunScript(script: CPointer<UInt16>, sourceContext: UIntNative, sourceUrl: CPointer<UInt16>, result: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsRunScript == "on"]
+public unsafe func Windows_JsRunScript(script: CPointer<UInt16>, sourceContext: UIntNative, sourceUrl: CPointer<UInt16>, result: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsRunScript(script, sourceContext, sourceUrl, result)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsRunSerializedScript == "on"]
+foreign {
     func JsRunSerializedScript(script: CPointer<UInt16>, buffer: CPointer<UInt8>, sourceContext: UIntNative, sourceUrl: CPointer<UInt16>, result: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsRunSerializedScript == "on"]
+public unsafe func Windows_JsRunSerializedScript(script: CPointer<UInt16>, buffer: CPointer<UInt8>, sourceContext: UIntNative, sourceUrl: CPointer<UInt16>, result: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsRunSerializedScript(script, buffer, sourceContext, sourceUrl, result)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsSerializeScript == "on"]
+foreign {
     // param-hint: buffer len=param[2] optional
     func JsSerializeScript(script: CPointer<UInt16>, buffer: CPointer<UInt8>, bufferSize: CPointer<UInt32>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsSerializeScript == "on"]
+public unsafe func Windows_JsSerializeScript(script: CPointer<UInt16>, buffer: CPointer<UInt8>, bufferSize: CPointer<UInt32>): JsErrorCodeAbi {
+    return JsSerializeScript(script, buffer, bufferSize)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsSetCurrentContext == "on"]
+foreign {
     func JsSetCurrentContext(context: CPointer<Unit>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsSetCurrentContext == "on"]
+public unsafe func Windows_JsSetCurrentContext(context: CPointer<Unit>): JsErrorCodeAbi {
+    return JsSetCurrentContext(context)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsSetException == "on"]
+foreign {
     func JsSetException(exception: CPointer<Unit>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsSetException == "on"]
+public unsafe func Windows_JsSetException(exception: CPointer<Unit>): JsErrorCodeAbi {
+    return JsSetException(exception)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsSetExternalData == "on"]
+foreign {
     // param-hint: externalData optional
     func JsSetExternalData(object: CPointer<Unit>, externalData: CPointer<Unit>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsSetExternalData == "on"]
+public unsafe func Windows_JsSetExternalData(object: CPointer<Unit>, externalData: CPointer<Unit>): JsErrorCodeAbi {
+    return JsSetExternalData(object, externalData)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsSetIndexedProperty == "on"]
+foreign {
     func JsSetIndexedProperty(object: CPointer<Unit>, index: CPointer<Unit>, value: CPointer<Unit>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsSetIndexedProperty == "on"]
+public unsafe func Windows_JsSetIndexedProperty(object: CPointer<Unit>, index: CPointer<Unit>, value: CPointer<Unit>): JsErrorCodeAbi {
+    return JsSetIndexedProperty(object, index, value)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsSetProperty == "on"]
+foreign {
     func JsSetProperty(object: CPointer<Unit>, propertyId: CPointer<Unit>, value: CPointer<Unit>, useStrictRules: UInt8): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsSetProperty == "on"]
+public unsafe func Windows_JsSetProperty(object: CPointer<Unit>, propertyId: CPointer<Unit>, value: CPointer<Unit>, useStrictRules: UInt8): JsErrorCodeAbi {
+    return JsSetProperty(object, propertyId, value, useStrictRules)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsSetPrototype == "on"]
+foreign {
     func JsSetPrototype(object: CPointer<Unit>, prototypeObject: CPointer<Unit>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsSetPrototype == "on"]
+public unsafe func Windows_JsSetPrototype(object: CPointer<Unit>, prototypeObject: CPointer<Unit>): JsErrorCodeAbi {
+    return JsSetPrototype(object, prototypeObject)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsSetRuntimeBeforeCollectCallback == "on"]
+foreign {
     // param-hint: callbackState optional
     func JsSetRuntimeBeforeCollectCallback(runtime: CPointer<Unit>, callbackState: CPointer<Unit>, beforeCollectCallback: JsBeforeCollectCallback): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsSetRuntimeBeforeCollectCallback == "on"]
+public unsafe func Windows_JsSetRuntimeBeforeCollectCallback(runtime: CPointer<Unit>, callbackState: CPointer<Unit>, beforeCollectCallback: JsBeforeCollectCallback): JsErrorCodeAbi {
+    return JsSetRuntimeBeforeCollectCallback(runtime, callbackState, beforeCollectCallback)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsSetRuntimeMemoryAllocationCallback == "on"]
+foreign {
     // param-hint: callbackState optional
     func JsSetRuntimeMemoryAllocationCallback(runtime: CPointer<Unit>, callbackState: CPointer<Unit>, allocationCallback: JsMemoryAllocationCallback): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsSetRuntimeMemoryAllocationCallback == "on"]
+public unsafe func Windows_JsSetRuntimeMemoryAllocationCallback(runtime: CPointer<Unit>, callbackState: CPointer<Unit>, allocationCallback: JsMemoryAllocationCallback): JsErrorCodeAbi {
+    return JsSetRuntimeMemoryAllocationCallback(runtime, callbackState, allocationCallback)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsSetRuntimeMemoryLimit == "on"]
+foreign {
     func JsSetRuntimeMemoryLimit(runtime: CPointer<Unit>, memoryLimit: UIntNative): JsErrorCodeAbi
-    func JsStopProfiling(reason: Int32): JsErrorCodeAbi
-    func JsStrictEquals(object1: CPointer<Unit>, object2: CPointer<Unit>, result: CPointer<Bool>): JsErrorCodeAbi
-    func JsStringToPointer(value: CPointer<Unit>, stringValue: CPointer<CPointer<UInt16>>, stringLength: CPointer<UIntNative>): JsErrorCodeAbi
 }
 
-@When[CHAKRA == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on")]
-foreign {
-    func JsValueToVariant(object: CPointer<Unit>, variant: CPointer<Win32__impl_l2.VARIANTAbi>): JsErrorCodeAbi
-    func JsVariantToValue(variant: CPointer<Win32__impl_l2.VARIANTAbi>, value: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsSetRuntimeMemoryLimit == "on"]
+public unsafe func Windows_JsSetRuntimeMemoryLimit(runtime: CPointer<Unit>, memoryLimit: UIntNative): JsErrorCodeAbi {
+    return JsSetRuntimeMemoryLimit(runtime, memoryLimit)
 }
 
-@When[CHAKRA == "on" && (arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug_ActiveScript == "on" || arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug_ActiveScript == "on")]
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsStartDebugging == "on" && (arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug_ActiveScript == "on" || arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug_ActiveScript == "on")]
 foreign {
-    func JsCreateContext(runtime: CPointer<Unit>, debugApplication: CPointer<Unit>, newContext: CPointer<CPointer<Unit>>): JsErrorCodeAbi
     func JsStartDebugging(debugApplication: CPointer<Unit>): JsErrorCodeAbi
 }
 
-@When[CHAKRA == "on" && Windows_Win32_System_Diagnostics_Debug_ActiveScript == "on"]
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsStartDebugging == "on" && (arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug_ActiveScript == "on" || arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug_ActiveScript == "on")]
+public unsafe func Windows_JsStartDebugging(debugApplication: CPointer<Unit>): JsErrorCodeAbi {
+    return JsStartDebugging(debugApplication)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsStartProfiling == "on" && Windows_Win32_System_Diagnostics_Debug_ActiveScript == "on"]
 foreign {
-    func JsEnumerateHeap(enumerator: CPointer<CPointer<Unit>>): JsErrorCodeAbi
     func JsStartProfiling(callback: CPointer<Unit>, eventMask: Win32_System_Diagnostics_Debug_ActiveScript.PROFILER_EVENT_MASKAbi, context: UInt32): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsStartProfiling == "on" && Windows_Win32_System_Diagnostics_Debug_ActiveScript == "on"]
+public unsafe func Windows_JsStartProfiling(callback: CPointer<Unit>, eventMask: Win32_System_Diagnostics_Debug_ActiveScript.PROFILER_EVENT_MASKAbi, context: UInt32): JsErrorCodeAbi {
+    return JsStartProfiling(callback, eventMask, context)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsStopProfiling == "on"]
+foreign {
+    func JsStopProfiling(reason: Int32): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsStopProfiling == "on"]
+public unsafe func Windows_JsStopProfiling(reason: Int32): JsErrorCodeAbi {
+    return JsStopProfiling(reason)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsStrictEquals == "on"]
+foreign {
+    func JsStrictEquals(object1: CPointer<Unit>, object2: CPointer<Unit>, result: CPointer<Bool>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsStrictEquals == "on"]
+public unsafe func Windows_JsStrictEquals(object1: CPointer<Unit>, object2: CPointer<Unit>, result: CPointer<Bool>): JsErrorCodeAbi {
+    return JsStrictEquals(object1, object2, result)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsStringToPointer == "on"]
+foreign {
+    func JsStringToPointer(value: CPointer<Unit>, stringValue: CPointer<CPointer<UInt16>>, stringLength: CPointer<UIntNative>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsStringToPointer == "on"]
+public unsafe func Windows_JsStringToPointer(value: CPointer<Unit>, stringValue: CPointer<CPointer<UInt16>>, stringLength: CPointer<UIntNative>): JsErrorCodeAbi {
+    return JsStringToPointer(value, stringValue, stringLength)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsValueToVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func JsValueToVariant(object: CPointer<Unit>, variant: CPointer<Win32__impl_l2.VARIANTAbi>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsValueToVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_JsValueToVariant(object: CPointer<Unit>, variant: CPointer<Win32__impl_l2.VARIANTAbi>): JsErrorCodeAbi {
+    return JsValueToVariant(object, variant)
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsVariantToValue == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func JsVariantToValue(variant: CPointer<Win32__impl_l2.VARIANTAbi>, value: CPointer<CPointer<Unit>>): JsErrorCodeAbi
+}
+
+@When[Windows_Win32_System_Js == "on" && CHAKRA == "on" && Windows_Win32_System_Js_JsVariantToValue == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_JsVariantToValue(variant: CPointer<Win32__impl_l2.VARIANTAbi>, value: CPointer<CPointer<Unit>>): JsErrorCodeAbi {
+    return JsVariantToValue(variant, value)
 }
 
 @When[Windows_Win32_System_Js == "on"]

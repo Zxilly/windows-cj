@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_System_Power == "on"]
 import windows.System.Power as System_Power
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -479,7 +477,10 @@ public struct IPowerGridForecastVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var StartTime: CFunc<(CPointer<Unit>, CPointer<windows_future.DateTimeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var BlockDuration: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Forecast: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Forecast: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -564,6 +565,7 @@ public class IPowerGridForecast <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<windows_future.TimeSpan>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Forecast(): windows_collections.IVectorView<PowerGridData> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1104,6 +1106,7 @@ public class PowerGridForecast <: InterfaceWrapperBase & ComInterface & windows_
         return defaultInterface().BlockDuration()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Forecast(): windows_collections.IVectorView<PowerGridData> {
         return defaultInterface().Forecast()
     }

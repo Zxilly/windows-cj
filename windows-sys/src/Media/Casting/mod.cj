@@ -4,7 +4,6 @@ package windows_sys.Media.Casting
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_UI_Popups == "on"]
 import windows_sys.UI.Popups as UI_Popups
 import windows_sys._impl_l0 as _impl_l0
 import windows_sys._impl_l1 as _impl_l1
@@ -260,6 +259,7 @@ public struct ICastingDevicePickerFilterVtbl {
     public var SetSupportsVideo: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
     public var SupportsPictures: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var SetSupportsPictures: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedCastingSources: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -340,6 +340,7 @@ public class ICastingDevicePickerFilter <: InterfaceWrapperBase & ComInterface {
         return __vt.SetSupportsPictures(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedCastingSources(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

@@ -11,6 +11,7 @@ import windows_sys._impl_l0 as _impl_l0
 @C
 public struct IRemoteSystem5Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Apps: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -55,6 +56,7 @@ public class IRemoteSystem5 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IRemoteSystem5Vtbl>(IRemoteSystem5Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Apps(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -244,6 +246,7 @@ public struct IRemoteSystemAppRegistrationVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     @When[Windows_System == "on"]
     public var User: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Attributes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SaveAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -296,6 +299,7 @@ public class IRemoteSystemAppRegistration <: InterfaceWrapperBase & ComInterface
         return __vt.User(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Attributes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -772,7 +776,7 @@ public class IRemoteSystemDiscoveryTypeFilterFactory <: InterfaceWrapperBase & C
 public struct IRemoteSystemSessionParticipantVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var RemoteSystem: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public var GetHostNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -823,7 +827,7 @@ public class IRemoteSystemSessionParticipant <: InterfaceWrapperBase & ComInterf
         return __vt.RemoteSystem(__liveRaw, result__)
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func GetHostNames(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -838,6 +842,7 @@ public struct IRemoteSystemStaticsVtbl {
     @When[Windows_Networking == "on"]
     public var FindByHostNameAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var CreateWatcher: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateWatcherWithFilters: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var RequestAccessAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -896,6 +901,7 @@ public class IRemoteSystemStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.CreateWatcher(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateWatcherWithFilters(filters: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -915,7 +921,7 @@ public struct IRemoteSystemStatics3Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     @When[Windows_System == "on"]
     public var CreateWatcherForUser: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
-    @When[Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
     public var CreateWatcherWithFiltersForUser: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -967,7 +973,7 @@ public class IRemoteSystemStatics3 <: InterfaceWrapperBase & ComInterface {
         return __vt.CreateWatcherForUser(__liveRaw, user, result__)
     }
 
-    @When[Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
     public unsafe func CreateWatcherWithFiltersForUser(user: CPointer<Unit>, filters: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

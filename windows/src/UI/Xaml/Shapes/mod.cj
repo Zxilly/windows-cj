@@ -561,13 +561,13 @@ public struct IPolygonVtbl {
     public var SetFillRule: CFunc<(CPointer<Unit>, UI_Xaml__impl_l0.FillRuleAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Xaml_Media != "on"]
     public var SetFillRule: UIntNative = UIntNative(0)
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public var Points: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Xaml_Media != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_UI_Xaml_Media != "on"]
     public var Points: UIntNative = UIntNative(0)
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public var SetPoints: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Xaml_Media != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_UI_Xaml_Media != "on"]
     public var SetPoints: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -653,7 +653,7 @@ public class IPolygon <: InterfaceWrapperBase & ComInterface & RuntimeName & win
         HRESULT(hr).ok()
     }
 
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public unsafe func Points(): UI_Xaml__impl_l0.PointCollection {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -662,7 +662,7 @@ public class IPolygon <: InterfaceWrapperBase & ComInterface & RuntimeName & win
         return UI_Xaml__impl_l0.PointCollection.fromAbiTake(result__)
     }
 
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public unsafe func SetPoints(value: UI_Xaml__impl_l0.PointCollection): Unit {
         let v = vtbl()
         let hr = v.SetPoints(asRaw(), value.asRaw())
@@ -787,13 +787,13 @@ public struct IPolylineVtbl {
     public var SetFillRule: CFunc<(CPointer<Unit>, UI_Xaml__impl_l0.FillRuleAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Xaml_Media != "on"]
     public var SetFillRule: UIntNative = UIntNative(0)
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public var Points: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Xaml_Media != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_UI_Xaml_Media != "on"]
     public var Points: UIntNative = UIntNative(0)
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public var SetPoints: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Xaml_Media != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_UI_Xaml_Media != "on"]
     public var SetPoints: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -879,7 +879,7 @@ public class IPolyline <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
         HRESULT(hr).ok()
     }
 
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public unsafe func Points(): UI_Xaml__impl_l0.PointCollection {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -888,7 +888,7 @@ public class IPolyline <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
         return UI_Xaml__impl_l0.PointCollection.fromAbiTake(result__)
     }
 
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public unsafe func SetPoints(value: UI_Xaml__impl_l0.PointCollection): Unit {
         let v = vtbl()
         let hr = v.SetPoints(asRaw(), value.asRaw())
@@ -1269,13 +1269,13 @@ public struct IShapeVtbl {
     public var SetStrokeDashCap: CFunc<(CPointer<Unit>, UI_Xaml__impl_l0.PenLineCapAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Xaml_Media != "on"]
     public var SetStrokeDashCap: UIntNative = UIntNative(0)
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public var StrokeDashArray: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Xaml_Media != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_UI_Xaml_Media != "on"]
     public var StrokeDashArray: UIntNative = UIntNative(0)
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public var SetStrokeDashArray: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Xaml_Media != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_UI_Xaml_Media != "on"]
     public var SetStrokeDashArray: UIntNative = UIntNative(0)
     @When[Windows_UI_Xaml_Media == "on"]
     public var get_Stretch: CFunc<(CPointer<Unit>, CPointer<UI_Xaml__impl_l0.StretchAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1495,7 +1495,7 @@ public class IShape <: InterfaceWrapperBase & ComInterface & RuntimeName & windo
         HRESULT(hr).ok()
     }
 
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public unsafe func StrokeDashArray(): UI_Xaml__impl_l0.DoubleCollection {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1504,7 +1504,7 @@ public class IShape <: InterfaceWrapperBase & ComInterface & RuntimeName & windo
         return UI_Xaml__impl_l0.DoubleCollection.fromAbiTake(result__)
     }
 
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public unsafe func SetStrokeDashArray(value: UI_Xaml__impl_l0.DoubleCollection): Unit {
         let v = vtbl()
         let hr = v.SetStrokeDashArray(asRaw(), value.asRaw())
@@ -2688,12 +2688,12 @@ public class Polygon <: InterfaceWrapperBase & ComInterface & windows_interface.
         defaultInterface().SetFillRule(value)
     }
 
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public unsafe func Points(): UI_Xaml__impl_l0.PointCollection {
         return defaultInterface().Points()
     }
 
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public unsafe func SetPoints(value: UI_Xaml__impl_l0.PointCollection): Unit {
         defaultInterface().SetPoints(value)
     }
@@ -2877,12 +2877,12 @@ public class Polyline <: InterfaceWrapperBase & ComInterface & windows_interface
         defaultInterface().SetFillRule(value)
     }
 
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public unsafe func Points(): UI_Xaml__impl_l0.PointCollection {
         return defaultInterface().Points()
     }
 
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public unsafe func SetPoints(value: UI_Xaml__impl_l0.PointCollection): Unit {
         defaultInterface().SetPoints(value)
     }
@@ -3307,12 +3307,12 @@ public class Shape <: InterfaceWrapperBase & ComInterface & windows_interface.Ru
         defaultInterface().SetStrokeDashCap(value)
     }
 
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public unsafe func StrokeDashArray(): UI_Xaml__impl_l0.DoubleCollection {
         return defaultInterface().StrokeDashArray()
     }
 
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public unsafe func SetStrokeDashArray(value: UI_Xaml__impl_l0.DoubleCollection): Unit {
         defaultInterface().SetStrokeDashArray(value)
     }

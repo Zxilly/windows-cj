@@ -4,9 +4,7 @@ package windows_sys.Gaming.Input.Preview
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_Gaming_Input == "on"]
 import windows_sys.Gaming.Input as Gaming_Input
-@When[Windows_Gaming_Input_Custom == "on"]
 import windows_sys.Gaming.Input.Custom as Gaming_Input_Custom
 import windows_sys._impl_l1 as _impl_l1
 
@@ -372,6 +370,7 @@ public struct ILegacyGipGameControllerProviderVtbl {
     public var IsFirmwareCorrupted: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var IsInterfaceSupported: CFunc<(CPointer<Unit>, GUID, CPointer<Bool>) -> Int32> = { _, _, _ => 0 }
     public var IsSyntheticDevice: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var PreferredTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ExecuteCommand: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var SetHomeLedIntensity: CFunc<(CPointer<Unit>, UInt8) -> Int32> = { _, _ => 0 }
@@ -379,9 +378,9 @@ public struct ILegacyGipGameControllerProviderVtbl {
     public var SetHeadsetOperation: CFunc<(CPointer<Unit>, Int32, UInt32, CPointer<UInt8>) -> Int32> = { _, _, _, _ => 0 }
     public var GetHeadsetOperation: CFunc<(CPointer<Unit>, Int32, CPointer<UInt32>, CPointer<CPointer<UInt8>>) -> Int32> = { _, _, _, _ => 0 }
     public var AppCompatVersion: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
-    @When[Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
     public var SetStandardControllerButtonRemapping: CFunc<(CPointer<Unit>, CPointer<Unit>, Bool, CPointer<Unit>) -> Int32> = { _, _, _, _ => 0 }
-    @When[Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
     public var GetStandardControllerButtonRemapping: CFunc<(CPointer<Unit>, CPointer<Unit>, Bool, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -468,6 +467,7 @@ public class ILegacyGipGameControllerProvider <: InterfaceWrapperBase & ComInter
         return __vt.IsSyntheticDevice(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PreferredTypes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -510,14 +510,14 @@ public class ILegacyGipGameControllerProvider <: InterfaceWrapperBase & ComInter
         return __vt.AppCompatVersion(__liveRaw, result__)
     }
 
-    @When[Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
     public unsafe func SetStandardControllerButtonRemapping(user: CPointer<Unit>, previous: Bool, remapping: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetStandardControllerButtonRemapping(__liveRaw, user, previous, remapping)
     }
 
-    @When[Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
     public unsafe func GetStandardControllerButtonRemapping(user: CPointer<Unit>, previous: Bool, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

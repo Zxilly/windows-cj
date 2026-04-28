@@ -3,11 +3,8 @@ package windows_sys.Win32.UI.Wpf
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Dwm == "on"]
 import windows_sys.Win32.Graphics.Dwm as Win32_Graphics_Dwm
-@When[Windows_Win32_Graphics_Imaging == "on"]
 import windows_sys.Win32.Graphics.Imaging as Win32_Graphics_Imaging
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 

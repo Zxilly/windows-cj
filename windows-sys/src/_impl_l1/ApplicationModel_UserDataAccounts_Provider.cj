@@ -12,6 +12,7 @@ public struct IUserDataAccountProviderAddAccountOperationVtbl {
     public var base_: _impl_l0.IUserDataAccountProviderOperationVtbl = _impl_l0.IUserDataAccountProviderOperationVtbl()
     @When[Windows_ApplicationModel_UserDataAccounts == "on"]
     public var ContentKinds: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var PartnerAccountInfos: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ReportCompleted: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -64,6 +65,7 @@ public class IUserDataAccountProviderAddAccountOperation <: InterfaceWrapperBase
         return __vt.ContentKinds(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PartnerAccountInfos(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

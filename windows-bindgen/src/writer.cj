@@ -106,7 +106,7 @@ public class FileWriter {
         let fullPath = "${outputDir}/${relativePath}"
         let dir = directoryOf(fullPath)
         ensureDir(dir)
-        File.writeTo(fullPath, content.toArray())
+        File.writeTo(fullPath, trimTrailingBlankLines(content).toArray())
     }
 
     // Convert a namespace like "Windows.Win32.Foundation" to directory path "windows/win32/foundation"
@@ -214,6 +214,18 @@ public class FileWriter {
         }
         return joinStrings(suffix, "_")
     }
+}
+
+func trimTrailingBlankLines(content: String): String {
+    let bytes = content.toArray()
+    var end = Int64(bytes.size)
+    while (end > 1 && bytes[end - 1] == b'\n' && bytes[end - 2] == b'\n') {
+        end -= 1
+    }
+    if (end == Int64(bytes.size)) {
+        return content
+    }
+    return String.fromUtf8(bytes[0..end])
 }
 
 // Get directory portion of a path

@@ -3,12 +3,9 @@ package windows_sys.Services.Maps.Guidance
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Devices_Geolocation == "on"]
 import windows_sys.Devices.Geolocation as Devices_Geolocation
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_Services_Maps == "on"]
 import windows_sys.Services.Maps as Services_Maps
-@When[Windows_UI == "on"]
 import windows_sys.UI as UI
 
 
@@ -390,6 +387,7 @@ public let GuidanceMode_Tracking: GuidanceMode = GuidanceMode(3)
 public struct IGuidanceAudioNotificationRequestedEventArgsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var AudioNotification: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var AudioFilePaths: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var AudioText: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -441,6 +439,7 @@ public class IGuidanceAudioNotificationRequestedEventArgs <: InterfaceWrapperBas
         return __vt.AudioNotification(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AudioFilePaths(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -749,6 +748,7 @@ public struct IGuidanceRoadSignpostVtbl {
     public var BackgroundColor: CFunc<(CPointer<Unit>, CPointer<UI.Color>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI == "on"]
     public var ForegroundColor: CFunc<(CPointer<Unit>, CPointer<UI.Color>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ExitDirections: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -819,6 +819,7 @@ public class IGuidanceRoadSignpost <: InterfaceWrapperBase & ComInterface {
         return __vt.ForegroundColor(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ExitDirections(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1148,11 +1149,13 @@ public struct IGuidanceRouteVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Duration: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.TimeSpan>) -> Int32> = { _, _ => 0 }
     public var Distance: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Maneuvers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Devices_Geolocation == "on"]
     public var BoundingBox: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Devices_Geolocation == "on"]
     public var Path: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var RoadSegments: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Services_Maps == "on"]
     public var ConvertToMapRoute: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -1211,6 +1214,7 @@ public class IGuidanceRoute <: InterfaceWrapperBase & ComInterface {
         return __vt.Distance(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Maneuvers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1231,6 +1235,7 @@ public class IGuidanceRoute <: InterfaceWrapperBase & ComInterface {
         return __vt.Path(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RoadSegments(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1817,6 +1822,7 @@ public struct IGuidanceUpdatedEventArgsVtbl {
     public var Route: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CurrentLocation: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IsNewManeuver: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var LaneInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1939,6 +1945,7 @@ public class IGuidanceUpdatedEventArgs <: InterfaceWrapperBase & ComInterface {
         return __vt.IsNewManeuver(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func LaneInfo(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

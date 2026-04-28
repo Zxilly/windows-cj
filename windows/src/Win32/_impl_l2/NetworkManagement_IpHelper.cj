@@ -4,6 +4,7 @@
 package windows.Win32._impl_l2
 
 import std.collection.*
+import windows_libloading
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
 import windows_interface.{GUID}
@@ -19,237 +20,1371 @@ import windows.Win32._impl_l1 as Win32__impl_l1
 import windows_core as windows_core
 
 
-@When[IPHLPAPI == "on"]
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CancelIfTimestampConfigChange == "on"]
 foreign {
     func CancelIfTimestampConfigChange(NotificationHandle: Win32__impl_l0.HIFTIMESTAMPCHANGE): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CancelIfTimestampConfigChange == "on"]
+public unsafe func Windows_CancelIfTimestampConfigChange(NotificationHandle: Win32__impl_l0.HIFTIMESTAMPCHANGE): Unit {
+    CancelIfTimestampConfigChange(NotificationHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetInterfaceCurrentTimestampCapabilities == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+foreign {
+    func GetInterfaceCurrentTimestampCapabilities(InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>, TimestampCapabilites: CPointer<Win32__impl_l1.INTERFACE_TIMESTAMP_CAPABILITIESAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetInterfaceCurrentTimestampCapabilities == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public unsafe func Windows_GetInterfaceCurrentTimestampCapabilities(InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>, TimestampCapabilites: CPointer<Win32__impl_l1.INTERFACE_TIMESTAMP_CAPABILITIESAbi>): UInt32 {
+    return GetInterfaceCurrentTimestampCapabilities(InterfaceLuid, TimestampCapabilites)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetInterfaceHardwareTimestampCapabilities == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+foreign {
+    func GetInterfaceHardwareTimestampCapabilities(InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>, TimestampCapabilites: CPointer<Win32__impl_l1.INTERFACE_TIMESTAMP_CAPABILITIESAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetInterfaceHardwareTimestampCapabilities == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public unsafe func Windows_GetInterfaceHardwareTimestampCapabilities(InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>, TimestampCapabilites: CPointer<Win32__impl_l1.INTERFACE_TIMESTAMP_CAPABILITIESAbi>): UInt32 {
+    return GetInterfaceHardwareTimestampCapabilities(InterfaceLuid, TimestampCapabilites)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_NotifyIfTimestampConfigChange == "on"]
+foreign {
     // param-hint: CallerContext optional
     func NotifyIfTimestampConfigChange(CallerContext: CPointer<Unit>, Callback: Win32__impl_l0.PINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK, NotificationHandle: CPointer<Win32__impl_l0.HIFTIMESTAMPCHANGE>): UInt32
 }
 
-@When[IPHLPAPI == "on" && (Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on")]
-foreign {
-    func GetFlVirtualInterfaceTable(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, Table: CPointer<CPointer<Win32__impl_l1.MIB_FL_VIRTUAL_INTERFACE_TABLEAbi>>): UInt32
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_NotifyIfTimestampConfigChange == "on"]
+public unsafe func Windows_NotifyIfTimestampConfigChange(CallerContext: CPointer<Unit>, Callback: Win32__impl_l0.PINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK, NotificationHandle: CPointer<Win32__impl_l0.HIFTIMESTAMPCHANGE>): UInt32 {
+    return NotifyIfTimestampConfigChange(CallerContext, Callback, NotificationHandle)
 }
 
-@When[IPHLPAPI == "on" && (Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on")]
-foreign {
-    func CreateFlVirtualInterface(Row: CPointer<Win32__impl_l1.MIB_FL_VIRTUAL_INTERFACE_ROWAbi>): UInt32
-    func DeleteFlVirtualInterface(Row: CPointer<Win32__impl_l1.MIB_FL_VIRTUAL_INTERFACE_ROWAbi>): UInt32
-    func GetFlVirtualInterface(Row: CPointer<Win32__impl_l1.MIB_FL_VIRTUAL_INTERFACE_ROWAbi>): UInt32
-    func InitializeFlVirtualInterfaceEntry(Row: CPointer<Win32__impl_l1.MIB_FL_VIRTUAL_INTERFACE_ROWAbi>): Unit
-    func SetFlVirtualInterface(Row: CPointer<Win32__impl_l1.MIB_FL_VIRTUAL_INTERFACE_ROWAbi>): UInt32
-}
-
-@When[IPHLPAPI == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
-foreign {
-    func GetInterfaceCurrentTimestampCapabilities(InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>, TimestampCapabilites: CPointer<Win32__impl_l1.INTERFACE_TIMESTAMP_CAPABILITIESAbi>): UInt32
-    func GetInterfaceHardwareTimestampCapabilities(InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>, TimestampCapabilites: CPointer<Win32__impl_l1.INTERFACE_TIMESTAMP_CAPABILITIESAbi>): UInt32
-}
-
-@When[IPHLPAPI == "on"]
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_AddIPAddress == "on"]
 foreign {
     func AddIPAddress(Address: UInt32, IpMask: UInt32, IfIndex: UInt32, NTEContext: CPointer<UInt32>, NTEInstance: CPointer<UInt32>): UInt32
-    func CancelMibChangeNotify2(NotificationHandle: CPointer<Unit>): windows_core.WIN32_ERROR
-    func ConvertCompartmentGuidToId(CompartmentGuid: CPointer<GUID>, CompartmentId: CPointer<UInt32>): windows_core.WIN32_ERROR
-    func ConvertIpv4MaskToLength(Mask: UInt32, MaskLength: CPointer<UInt8>): windows_core.WIN32_ERROR
-    func ConvertLengthToIpv4Mask(MaskLength: UInt32, Mask: CPointer<UInt32>): windows_core.WIN32_ERROR
-    func CreateIpNetEntry(pArpEntry: CPointer<Win32__impl_l1.MIB_IPNETROW_LHAbi>): UInt32
-    func CreatePersistentTcpPortReservation(StartPort: UInt16, NumberOfPorts: UInt16, Token: CPointer<UInt64>): UInt32
-    func CreatePersistentUdpPortReservation(StartPort: UInt16, NumberOfPorts: UInt16, Token: CPointer<UInt64>): UInt32
-    func CreateProxyArpEntry(dwAddress: UInt32, dwMask: UInt32, dwIfIndex: UInt32): UInt32
-    func DeleteIPAddress(NTEContext: UInt32): UInt32
-    func DeleteIpNetEntry(pArpEntry: CPointer<Win32__impl_l1.MIB_IPNETROW_LHAbi>): UInt32
-    func DeletePersistentTcpPortReservation(StartPort: UInt16, NumberOfPorts: UInt16): UInt32
-    func DeletePersistentUdpPortReservation(StartPort: UInt16, NumberOfPorts: UInt16): UInt32
-    func DeleteProxyArpEntry(dwAddress: UInt32, dwMask: UInt32, dwIfIndex: UInt32): UInt32
-    func FlushIpNetTable(dwIfIndex: UInt32): UInt32
-    func FreeDnsSettings(Settings: CPointer<Win32__impl_l0.DNS_SETTINGSAbi>): Unit
-    func FreeInterfaceDnsSettings(Settings: CPointer<Win32__impl_l0.DNS_INTERFACE_SETTINGSAbi>): Unit
-    func FreeMibTable(Memory: CPointer<Unit>): Unit
-    func GetAdapterIndex(AdapterName: CPointer<UInt16>, IfIndex: CPointer<UInt32>): UInt32
-    func GetAdapterOrderMap(): CPointer<Win32__impl_l0.IP_ADAPTER_ORDER_MAPAbi>
-    // param-hint: AdapterInfo bytes=param[1] optional
-    func GetAdaptersInfo(AdapterInfo: CPointer<Win32__impl_l1.IP_ADAPTER_INFOAbi>, SizePointer: CPointer<UInt32>): UInt32
-    func GetBestInterface(dwDestAddr: UInt32, pdwBestIfIndex: CPointer<UInt32>): UInt32
-    func GetCurrentThreadCompartmentScope(CompartmentScope: CPointer<UInt32>, CompartmentId: CPointer<UInt32>): Unit
-    func GetDnsSettings(Settings: CPointer<Win32__impl_l0.DNS_SETTINGSAbi>): windows_core.WIN32_ERROR
-    // param-hint: pTcpTable bytes=param[1] optional
-    func GetExtendedTcpTable(pTcpTable: CPointer<Unit>, pdwSize: CPointer<UInt32>, bOrder: Int32, ulAf: UInt32, TableClass: Win32__impl_l0.TCP_TABLE_CLASSAbi, Reserved: UInt32): UInt32
-    // param-hint: pUdpTable bytes=param[1] optional
-    func GetExtendedUdpTable(pUdpTable: CPointer<Unit>, pdwSize: CPointer<UInt32>, bOrder: Int32, ulAf: UInt32, TableClass: Win32__impl_l0.UDP_TABLE_CLASSAbi, Reserved: UInt32): UInt32
-    func GetFriendlyIfIndex(IfIndex: UInt32): UInt32
-    func GetIcmpStatistics(Statistics: CPointer<Win32__impl_l1.MIB_ICMPAbi>): UInt32
-    func GetIcmpStatisticsEx(Statistics: CPointer<Win32__impl_l1.MIB_ICMP_EX_XPSP1Abi>, Family: UInt32): UInt32
-    func GetIfEntry(pIfRow: CPointer<Win32__impl_l1.MIB_IFROWAbi>): UInt32
-    func GetIfStackTable(Table: CPointer<CPointer<Win32__impl_l1.MIB_IFSTACK_TABLEAbi>>): windows_core.WIN32_ERROR
-    // param-hint: pIfTable bytes=param[1] optional
-    func GetIfTable(pIfTable: CPointer<Win32__impl_l1.MIB_IFTABLEAbi>, pdwSize: CPointer<UInt32>, bOrder: Int32): UInt32
-    func GetInterfaceDnsSettings(Interface: GUID, Settings: CPointer<Win32__impl_l0.DNS_INTERFACE_SETTINGSAbi>): windows_core.WIN32_ERROR
-    // param-hint: pIfTable bytes=param[1] optional
-    func GetInterfaceInfo(pIfTable: CPointer<Win32__impl_l1.IP_INTERFACE_INFOAbi>, dwOutBufLen: CPointer<UInt32>): UInt32
-    func GetInvertedIfStackTable(Table: CPointer<CPointer<Win32__impl_l1.MIB_INVERTEDIFSTACK_TABLEAbi>>): windows_core.WIN32_ERROR
-    // param-hint: pIpAddrTable bytes=param[1] optional
-    func GetIpAddrTable(pIpAddrTable: CPointer<Win32__impl_l1.MIB_IPADDRTABLEAbi>, pdwSize: CPointer<UInt32>, bOrder: Int32): UInt32
-    // param-hint: Buffer optional
-    func GetIpErrorString(ErrorCode: UInt32, Buffer: CPointer<UInt16>, Size: CPointer<UInt32>): UInt32
-    // param-hint: IpNetTable bytes=param[1] optional
-    func GetIpNetTable(IpNetTable: CPointer<Win32__impl_l1.MIB_IPNETTABLEAbi>, SizePointer: CPointer<UInt32>, Order: Int32): UInt32
-    func GetIpStatistics(Statistics: CPointer<Win32__impl_l1.MIB_IPSTATS_LHAbi>): UInt32
-    func GetIpStatisticsEx(Statistics: CPointer<Win32__impl_l1.MIB_IPSTATS_LHAbi>, Family: UInt32): UInt32
-    // param-hint: NetworkName len=param[4]
-    func GetNetworkInformation(NetworkGuid: CPointer<GUID>, CompartmentId: CPointer<UInt32>, SiteId: CPointer<UInt32>, NetworkName: CPointer<UInt16>, Length: UInt32): windows_core.WIN32_ERROR
-    // param-hint: pFixedInfo bytes=param[1] optional
-    func GetNetworkParams(pFixedInfo: CPointer<Win32__impl_l1.FIXED_INFO_W2KSP1Abi>, pOutBufLen: CPointer<UInt32>): windows_core.WIN32_ERROR
-    func GetNumberOfInterfaces(pdwNumIf: CPointer<UInt32>): UInt32
-    // param-hint: pBuffer bytes=param[4]
-    func GetOwnerModuleFromPidAndInfo(ulPid: UInt32, pInfo: CPointer<UInt64>, Class: Win32__impl_l0.TCPIP_OWNER_MODULE_INFO_CLASSAbi, pBuffer: CPointer<Unit>, pdwSize: CPointer<UInt32>): UInt32
-    // param-hint: pBuffer bytes=param[3]
-    func GetOwnerModuleFromTcp6Entry(pTcpEntry: CPointer<Win32__impl_l0.MIB_TCP6ROW_OWNER_MODULEAbi>, Class: Win32__impl_l0.TCPIP_OWNER_MODULE_INFO_CLASSAbi, pBuffer: CPointer<Unit>, pdwSize: CPointer<UInt32>): UInt32
-    // param-hint: pBuffer bytes=param[3]
-    func GetOwnerModuleFromTcpEntry(pTcpEntry: CPointer<Win32__impl_l0.MIB_TCPROW_OWNER_MODULEAbi>, Class: Win32__impl_l0.TCPIP_OWNER_MODULE_INFO_CLASSAbi, pBuffer: CPointer<Unit>, pdwSize: CPointer<UInt32>): UInt32
-    // param-hint: pBuffer bytes=param[3]
-    func GetOwnerModuleFromUdp6Entry(pUdpEntry: CPointer<Win32__impl_l0.MIB_UDP6ROW_OWNER_MODULEAbi>, Class: Win32__impl_l0.TCPIP_OWNER_MODULE_INFO_CLASSAbi, pBuffer: CPointer<Unit>, pdwSize: CPointer<UInt32>): UInt32
-    // param-hint: pBuffer bytes=param[3]
-    func GetOwnerModuleFromUdpEntry(pUdpEntry: CPointer<Win32__impl_l0.MIB_UDPROW_OWNER_MODULEAbi>, Class: Win32__impl_l0.TCPIP_OWNER_MODULE_INFO_CLASSAbi, pBuffer: CPointer<Unit>, pdwSize: CPointer<UInt32>): UInt32
-    // param-hint: pPerAdapterInfo bytes=param[2] optional
-    func GetPerAdapterInfo(IfIndex: UInt32, pPerAdapterInfo: CPointer<Win32__impl_l1.IP_PER_ADAPTER_INFO_W2KSP1Abi>, pOutBufLen: CPointer<UInt32>): UInt32
-    // param-hint: Rw bytes=param[4] optional
-    // param-hint: Ros bytes=param[7] optional
-    // param-hint: Rod bytes=param[10] optional
-    func GetPerTcpConnectionEStats(Row: CPointer<Win32__impl_l1.MIB_TCPROW_LHAbi>, EstatsType: Win32__impl_l0.TCP_ESTATS_TYPEAbi, Rw: CPointer<UInt8>, RwVersion: UInt32, RwSize: UInt32, Ros: CPointer<UInt8>, RosVersion: UInt32, RosSize: UInt32, Rod: CPointer<UInt8>, RodVersion: UInt32, RodSize: UInt32): UInt32
-    // pinvoke-hint: SetLastError
-    func GetRTTAndHopCount(DestIpAddress: UInt32, HopCount: CPointer<UInt32>, MaxHops: UInt32, RTT: CPointer<UInt32>): Int32
-    func GetTcpStatistics(Statistics: CPointer<Win32__impl_l1.MIB_TCPSTATS_LHAbi>): UInt32
-    func GetTcpStatisticsEx(Statistics: CPointer<Win32__impl_l1.MIB_TCPSTATS_LHAbi>, Family: UInt32): UInt32
-    func GetTcpStatisticsEx2(Statistics: CPointer<Win32__impl_l1.MIB_TCPSTATS2Abi>, Family: UInt32): UInt32
-    // param-hint: TcpTable bytes=param[1] optional
-    func GetTcpTable(TcpTable: CPointer<Win32__impl_l1.MIB_TCPTABLEAbi>, SizePointer: CPointer<UInt32>, Order: Int32): UInt32
-    // param-hint: TcpTable bytes=param[1] optional
-    func GetTcpTable2(TcpTable: CPointer<Win32__impl_l1.MIB_TCPTABLE2Abi>, SizePointer: CPointer<UInt32>, Order: Int32): UInt32
-    func GetTeredoPort(Port: CPointer<UInt16>): windows_core.WIN32_ERROR
-    func GetUdpStatistics(Stats: CPointer<Win32__impl_l0.MIB_UDPSTATSAbi>): UInt32
-    func GetUdpStatisticsEx(Statistics: CPointer<Win32__impl_l0.MIB_UDPSTATSAbi>, Family: UInt32): UInt32
-    func GetUdpStatisticsEx2(Statistics: CPointer<Win32__impl_l0.MIB_UDPSTATS2Abi>, Family: UInt32): UInt32
-    // param-hint: UdpTable bytes=param[1] optional
-    func GetUdpTable(UdpTable: CPointer<Win32__impl_l1.MIB_UDPTABLEAbi>, SizePointer: CPointer<UInt32>, Order: Int32): UInt32
-    // param-hint: pIPIfInfo bytes=param[1] optional
-    func GetUniDirectionalAdapterInfo(pIPIfInfo: CPointer<Win32__impl_l0.IP_UNIDIRECTIONAL_ADAPTER_ADDRESSAbi>, dwOutBufLen: CPointer<UInt32>): UInt32
-    // pinvoke-hint: SetLastError
-    func Icmp6CreateFile(): CPointer<Unit>
-    // param-hint: ReplyBuffer bytes=param[1]
-    // pinvoke-hint: SetLastError
-    func Icmp6ParseReplies(ReplyBuffer: CPointer<Unit>, ReplySize: UInt32): UInt32
-    // pinvoke-hint: SetLastError
-    func IcmpCloseHandle(IcmpHandle: CPointer<Unit>): Int32
-    // pinvoke-hint: SetLastError
-    func IcmpCreateFile(): CPointer<Unit>
-    // param-hint: ReplyBuffer bytes=param[1]
-    // pinvoke-hint: SetLastError
-    func IcmpParseReplies(ReplyBuffer: CPointer<Unit>, ReplySize: UInt32): UInt32
-    // param-hint: RequestData bytes=param[3]
-    // param-hint: RequestOptions optional
-    // param-hint: ReplyBuffer bytes=param[6]
-    // pinvoke-hint: SetLastError
-    func IcmpSendEcho(IcmpHandle: CPointer<Unit>, DestinationAddress: UInt32, RequestData: CPointer<Unit>, RequestSize: UInt16, RequestOptions: CPointer<Win32__impl_l0.IP_OPTION_INFORMATIONAbi>, ReplyBuffer: CPointer<Unit>, ReplySize: UInt32, Timeout: UInt32): UInt32
-    func IpReleaseAddress(AdapterInfo: CPointer<Win32__impl_l0.IP_ADAPTER_INDEX_MAPAbi>): UInt32
-    func IpRenewAddress(AdapterInfo: CPointer<Win32__impl_l0.IP_ADAPTER_INDEX_MAPAbi>): UInt32
-    func LookupPersistentTcpPortReservation(StartPort: UInt16, NumberOfPorts: UInt16, Token: CPointer<UInt64>): UInt32
-    func LookupPersistentUdpPortReservation(StartPort: UInt16, NumberOfPorts: UInt16, Token: CPointer<UInt64>): UInt32
-    func NhpAllocateAndGetInterfaceInfoFromStack(ppTable: CPointer<CPointer<Win32__impl_l0.IP_INTERFACE_NAME_INFO_W2KSP1Abi>>, pdwCount: CPointer<UInt32>, bOrder: Int32, hHeap: CPointer<Unit>, dwFlags: UInt32): UInt32
-    func NotifyTeredoPortChange(Callback: Win32__impl_l1.PTEREDO_PORT_CHANGE_CALLBACK, CallerContext: CPointer<Unit>, InitialNotification: UInt8, NotificationHandle: CPointer<CPointer<Unit>>): windows_core.WIN32_ERROR
-    func PfAddFiltersToInterface(ih: CPointer<Unit>, cInFilters: UInt32, pfiltIn: CPointer<Win32__impl_l1.PF_FILTER_DESCRIPTORAbi>, cOutFilters: UInt32, pfiltOut: CPointer<Win32__impl_l1.PF_FILTER_DESCRIPTORAbi>, pfHandle: CPointer<CPointer<Unit>>): UInt32
-    func PfAddGlobalFilterToInterface(pInterface: CPointer<Unit>, gfFilter: Win32__impl_l0.GLOBAL_FILTERAbi): UInt32
-    func PfBindInterfaceToIPAddress(pInterface: CPointer<Unit>, pfatType: Win32__impl_l0.PFADDRESSTYPEAbi, IPAddress: CPointer<UInt8>): UInt32
-    func PfBindInterfaceToIndex(pInterface: CPointer<Unit>, dwIndex: UInt32, pfatLinkType: Win32__impl_l0.PFADDRESSTYPEAbi, LinkIPAddress: CPointer<UInt8>): UInt32
-    func PfCreateInterface(dwName: UInt32, inAction: Win32__impl_l0.PFFORWARD_ACTIONAbi, outAction: Win32__impl_l0.PFFORWARD_ACTIONAbi, bUseLog: Int32, bMustBeUnique: Int32, ppInterface: CPointer<CPointer<Unit>>): UInt32
-    func PfDeleteInterface(pInterface: CPointer<Unit>): UInt32
-    func PfDeleteLog(): UInt32
-    func PfGetInterfaceStatistics(pInterface: CPointer<Unit>, ppfStats: CPointer<PF_INTERFACE_STATSAbi>, pdwBufferSize: CPointer<UInt32>, fResetCounters: Int32): UInt32
-    func PfMakeLog(hEvent: CPointer<Unit>): UInt32
-    func PfRebindFilters(pInterface: CPointer<Unit>, pLateBindInfo: CPointer<Win32__impl_l0.PF_LATEBIND_INFOAbi>): UInt32
-    func PfRemoveFilterHandles(pInterface: CPointer<Unit>, cFilters: UInt32, pvHandles: CPointer<CPointer<Unit>>): UInt32
-    func PfRemoveFiltersFromInterface(ih: CPointer<Unit>, cInFilters: UInt32, pfiltIn: CPointer<Win32__impl_l1.PF_FILTER_DESCRIPTORAbi>, cOutFilters: UInt32, pfiltOut: CPointer<Win32__impl_l1.PF_FILTER_DESCRIPTORAbi>): UInt32
-    func PfRemoveGlobalFilterFromInterface(pInterface: CPointer<Unit>, gfFilter: Win32__impl_l0.GLOBAL_FILTERAbi): UInt32
-    func PfSetLogBuffer(pbBuffer: CPointer<UInt8>, dwSize: UInt32, dwThreshold: UInt32, dwEntries: UInt32, pdwLoggedEntries: CPointer<UInt32>, pdwLostEntries: CPointer<UInt32>, pdwSizeUsed: CPointer<UInt32>): UInt32
-    func PfTestPacket(pInInterface: CPointer<Unit>, pOutInterface: CPointer<Unit>, cBytes: UInt32, pbPacket: CPointer<UInt8>, ppAction: CPointer<Win32__impl_l0.PFFORWARD_ACTIONAbi>): UInt32
-    func PfUnBindInterface(pInterface: CPointer<Unit>): UInt32
-    // param-hint: CallerContext optional
-    func RegisterInterfaceTimestampConfigChange(Callback: Win32__impl_l0.PINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK, CallerContext: CPointer<Unit>, NotificationHandle: CPointer<Win32__impl_l0.HIFTIMESTAMPCHANGE>): UInt32
-    // param-hint: pMacAddr bytes=param[3]
-    func SendARP(DestIP: UInt32, SrcIP: UInt32, pMacAddr: CPointer<Unit>, PhyAddrLen: CPointer<UInt32>): UInt32
-    func SetCurrentThreadCompartmentScope(CompartmentScope: UInt32): windows_core.WIN32_ERROR
-    func SetDnsSettings(Settings: CPointer<Win32__impl_l0.DNS_SETTINGSAbi>): windows_core.WIN32_ERROR
-    func SetIfEntry(pIfRow: CPointer<Win32__impl_l1.MIB_IFROWAbi>): UInt32
-    func SetInterfaceDnsSettings(Interface: GUID, Settings: CPointer<Win32__impl_l0.DNS_INTERFACE_SETTINGSAbi>): windows_core.WIN32_ERROR
-    func SetIpNetEntry(pArpEntry: CPointer<Win32__impl_l1.MIB_IPNETROW_LHAbi>): UInt32
-    func SetIpStatistics(pIpStats: CPointer<Win32__impl_l1.MIB_IPSTATS_LHAbi>): UInt32
-    func SetIpStatisticsEx(Statistics: CPointer<Win32__impl_l1.MIB_IPSTATS_LHAbi>, Family: UInt32): UInt32
-    func SetIpTTL(nTTL: UInt32): UInt32
-    // param-hint: Rw bytes=param[4]
-    func SetPerTcpConnectionEStats(Row: CPointer<Win32__impl_l1.MIB_TCPROW_LHAbi>, EstatsType: Win32__impl_l0.TCP_ESTATS_TYPEAbi, Rw: CPointer<UInt8>, RwVersion: UInt32, RwSize: UInt32, Offset: UInt32): UInt32
-    func SetTcpEntry(pTcpRow: CPointer<Win32__impl_l1.MIB_TCPROW_LHAbi>): UInt32
-    func UnregisterInterfaceTimestampConfigChange(NotificationHandle: Win32__impl_l0.HIFTIMESTAMPCHANGE): Unit
-    // param-hint: InterfaceName fixed=256
-    func if_indextoname(InterfaceIndex: UInt32, InterfaceName: CPointer<UInt8>): CPointer<UInt8>
-    func if_nametoindex(InterfaceName: CPointer<UInt8>): UInt32
 }
 
-@When[IPHLPAPI == "on" && (Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on")]
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_AddIPAddress == "on"]
+public unsafe func Windows_AddIPAddress(Address: UInt32, IpMask: UInt32, IfIndex: UInt32, NTEContext: CPointer<UInt32>, NTEInstance: CPointer<UInt32>): UInt32 {
+    return AddIPAddress(Address, IpMask, IfIndex, NTEContext, NTEInstance)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CancelIPChangeNotify == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    func CancelIPChangeNotify(notifyOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CancelIPChangeNotify == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_CancelIPChangeNotify(notifyOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): Int32 {
+    return CancelIPChangeNotify(notifyOverlapped)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CancelMibChangeNotify2 == "on"]
+foreign {
+    func CancelMibChangeNotify2(NotificationHandle: CPointer<Unit>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CancelMibChangeNotify2 == "on"]
+public unsafe func Windows_CancelMibChangeNotify2(NotificationHandle: CPointer<Unit>): windows_core.WIN32_ERROR {
+    return CancelMibChangeNotify2(NotificationHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CaptureInterfaceHardwareCrossTimestamp == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+foreign {
+    func CaptureInterfaceHardwareCrossTimestamp(InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>, CrossTimestamp: CPointer<Win32__impl_l0.INTERFACE_HARDWARE_CROSSTIMESTAMPAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CaptureInterfaceHardwareCrossTimestamp == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public unsafe func Windows_CaptureInterfaceHardwareCrossTimestamp(InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>, CrossTimestamp: CPointer<Win32__impl_l0.INTERFACE_HARDWARE_CROSSTIMESTAMPAbi>): UInt32 {
+    return CaptureInterfaceHardwareCrossTimestamp(InterfaceLuid, CrossTimestamp)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertCompartmentGuidToId == "on"]
+foreign {
+    func ConvertCompartmentGuidToId(CompartmentGuid: CPointer<GUID>, CompartmentId: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertCompartmentGuidToId == "on"]
+public unsafe func Windows_ConvertCompartmentGuidToId(CompartmentGuid: CPointer<GUID>, CompartmentId: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return ConvertCompartmentGuidToId(CompartmentGuid, CompartmentId)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertCompartmentIdToGuid == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+foreign {
+    func ConvertCompartmentIdToGuid(CompartmentId: Win32_NetworkManagement_Ndis.NET_IF_COMPARTMENT_ID, CompartmentGuid: CPointer<GUID>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertCompartmentIdToGuid == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public unsafe func Windows_ConvertCompartmentIdToGuid(CompartmentId: Win32_NetworkManagement_Ndis.NET_IF_COMPARTMENT_ID, CompartmentGuid: CPointer<GUID>): windows_core.WIN32_ERROR {
+    return ConvertCompartmentIdToGuid(CompartmentId, CompartmentGuid)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertInterfaceAliasToLuid == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+foreign {
+    func ConvertInterfaceAliasToLuid(InterfaceAlias: CPointer<UInt16>, InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertInterfaceAliasToLuid == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public unsafe func Windows_ConvertInterfaceAliasToLuid(InterfaceAlias: CPointer<UInt16>, InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>): windows_core.WIN32_ERROR {
+    return ConvertInterfaceAliasToLuid(InterfaceAlias, InterfaceLuid)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertInterfaceGuidToLuid == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+foreign {
+    func ConvertInterfaceGuidToLuid(InterfaceGuid: CPointer<GUID>, InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertInterfaceGuidToLuid == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public unsafe func Windows_ConvertInterfaceGuidToLuid(InterfaceGuid: CPointer<GUID>, InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>): windows_core.WIN32_ERROR {
+    return ConvertInterfaceGuidToLuid(InterfaceGuid, InterfaceLuid)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertInterfaceIndexToLuid == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+foreign {
+    func ConvertInterfaceIndexToLuid(InterfaceIndex: UInt32, InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertInterfaceIndexToLuid == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public unsafe func Windows_ConvertInterfaceIndexToLuid(InterfaceIndex: UInt32, InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>): windows_core.WIN32_ERROR {
+    return ConvertInterfaceIndexToLuid(InterfaceIndex, InterfaceLuid)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertInterfaceLuidToAlias == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+foreign {
+    // param-hint: InterfaceAlias len=param[2]
+    func ConvertInterfaceLuidToAlias(InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>, InterfaceAlias: CPointer<UInt16>, Length: UIntNative): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertInterfaceLuidToAlias == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public unsafe func Windows_ConvertInterfaceLuidToAlias(InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>, InterfaceAlias: CPointer<UInt16>, Length: UIntNative): windows_core.WIN32_ERROR {
+    return ConvertInterfaceLuidToAlias(InterfaceLuid, InterfaceAlias, Length)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertInterfaceLuidToGuid == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+foreign {
+    func ConvertInterfaceLuidToGuid(InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>, InterfaceGuid: CPointer<GUID>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertInterfaceLuidToGuid == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public unsafe func Windows_ConvertInterfaceLuidToGuid(InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>, InterfaceGuid: CPointer<GUID>): windows_core.WIN32_ERROR {
+    return ConvertInterfaceLuidToGuid(InterfaceLuid, InterfaceGuid)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertInterfaceLuidToIndex == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+foreign {
+    func ConvertInterfaceLuidToIndex(InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>, InterfaceIndex: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertInterfaceLuidToIndex == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public unsafe func Windows_ConvertInterfaceLuidToIndex(InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>, InterfaceIndex: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return ConvertInterfaceLuidToIndex(InterfaceLuid, InterfaceIndex)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertInterfaceLuidToNameA == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+foreign {
+    // param-hint: InterfaceName len=param[2]
+    func ConvertInterfaceLuidToNameA(InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>, InterfaceName: CPointer<UInt8>, Length: UIntNative): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertInterfaceLuidToNameA == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public unsafe func Windows_ConvertInterfaceLuidToNameA(InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>, InterfaceName: CPointer<UInt8>, Length: UIntNative): windows_core.WIN32_ERROR {
+    return ConvertInterfaceLuidToNameA(InterfaceLuid, InterfaceName, Length)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertInterfaceLuidToNameW == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+foreign {
+    // param-hint: InterfaceName len=param[2]
+    func ConvertInterfaceLuidToNameW(InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>, InterfaceName: CPointer<UInt16>, Length: UIntNative): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertInterfaceLuidToNameW == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public unsafe func Windows_ConvertInterfaceLuidToNameW(InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>, InterfaceName: CPointer<UInt16>, Length: UIntNative): windows_core.WIN32_ERROR {
+    return ConvertInterfaceLuidToNameW(InterfaceLuid, InterfaceName, Length)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertInterfaceNameToLuidA == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+foreign {
+    func ConvertInterfaceNameToLuidA(InterfaceName: CPointer<UInt8>, InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertInterfaceNameToLuidA == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public unsafe func Windows_ConvertInterfaceNameToLuidA(InterfaceName: CPointer<UInt8>, InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>): windows_core.WIN32_ERROR {
+    return ConvertInterfaceNameToLuidA(InterfaceName, InterfaceLuid)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertInterfaceNameToLuidW == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+foreign {
+    func ConvertInterfaceNameToLuidW(InterfaceName: CPointer<UInt16>, InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertInterfaceNameToLuidW == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public unsafe func Windows_ConvertInterfaceNameToLuidW(InterfaceName: CPointer<UInt16>, InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>): windows_core.WIN32_ERROR {
+    return ConvertInterfaceNameToLuidW(InterfaceName, InterfaceLuid)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertIpv4MaskToLength == "on"]
+foreign {
+    func ConvertIpv4MaskToLength(Mask: UInt32, MaskLength: CPointer<UInt8>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertIpv4MaskToLength == "on"]
+public unsafe func Windows_ConvertIpv4MaskToLength(Mask: UInt32, MaskLength: CPointer<UInt8>): windows_core.WIN32_ERROR {
+    return ConvertIpv4MaskToLength(Mask, MaskLength)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertLengthToIpv4Mask == "on"]
+foreign {
+    func ConvertLengthToIpv4Mask(MaskLength: UInt32, Mask: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertLengthToIpv4Mask == "on"]
+public unsafe func Windows_ConvertLengthToIpv4Mask(MaskLength: UInt32, Mask: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return ConvertLengthToIpv4Mask(MaskLength, Mask)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreateAnycastIpAddressEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func CreateAnycastIpAddressEntry(Row: CPointer<MIB_ANYCASTIPADDRESS_ROWAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreateAnycastIpAddressEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_CreateAnycastIpAddressEntry(Row: CPointer<MIB_ANYCASTIPADDRESS_ROWAbi>): windows_core.WIN32_ERROR {
+    return CreateAnycastIpAddressEntry(Row)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreateIpForwardEntry == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func CreateIpForwardEntry(pRoute: CPointer<Win32__impl_l1.MIB_IPFORWARDROWAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreateIpForwardEntry == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_CreateIpForwardEntry(pRoute: CPointer<Win32__impl_l1.MIB_IPFORWARDROWAbi>): UInt32 {
+    return CreateIpForwardEntry(pRoute)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreateIpForwardEntry2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func CreateIpForwardEntry2(Row: CPointer<MIB_IPFORWARD_ROW2Abi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreateIpForwardEntry2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_CreateIpForwardEntry2(Row: CPointer<MIB_IPFORWARD_ROW2Abi>): windows_core.WIN32_ERROR {
+    return CreateIpForwardEntry2(Row)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreateIpNetEntry == "on"]
+foreign {
+    func CreateIpNetEntry(pArpEntry: CPointer<Win32__impl_l1.MIB_IPNETROW_LHAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreateIpNetEntry == "on"]
+public unsafe func Windows_CreateIpNetEntry(pArpEntry: CPointer<Win32__impl_l1.MIB_IPNETROW_LHAbi>): UInt32 {
+    return CreateIpNetEntry(pArpEntry)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreateIpNetEntry2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func CreateIpNetEntry2(Row: CPointer<MIB_IPNET_ROW2Abi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreateIpNetEntry2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_CreateIpNetEntry2(Row: CPointer<MIB_IPNET_ROW2Abi>): windows_core.WIN32_ERROR {
+    return CreateIpNetEntry2(Row)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreatePersistentTcpPortReservation == "on"]
+foreign {
+    func CreatePersistentTcpPortReservation(StartPort: UInt16, NumberOfPorts: UInt16, Token: CPointer<UInt64>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreatePersistentTcpPortReservation == "on"]
+public unsafe func Windows_CreatePersistentTcpPortReservation(StartPort: UInt16, NumberOfPorts: UInt16, Token: CPointer<UInt64>): UInt32 {
+    return CreatePersistentTcpPortReservation(StartPort, NumberOfPorts, Token)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreatePersistentUdpPortReservation == "on"]
+foreign {
+    func CreatePersistentUdpPortReservation(StartPort: UInt16, NumberOfPorts: UInt16, Token: CPointer<UInt64>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreatePersistentUdpPortReservation == "on"]
+public unsafe func Windows_CreatePersistentUdpPortReservation(StartPort: UInt16, NumberOfPorts: UInt16, Token: CPointer<UInt64>): UInt32 {
+    return CreatePersistentUdpPortReservation(StartPort, NumberOfPorts, Token)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreateProxyArpEntry == "on"]
+foreign {
+    func CreateProxyArpEntry(dwAddress: UInt32, dwMask: UInt32, dwIfIndex: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreateProxyArpEntry == "on"]
+public unsafe func Windows_CreateProxyArpEntry(dwAddress: UInt32, dwMask: UInt32, dwIfIndex: UInt32): UInt32 {
+    return CreateProxyArpEntry(dwAddress, dwMask, dwIfIndex)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreateSortedAddressPairs == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: SourceAddressList optional
+    func CreateSortedAddressPairs(SourceAddressList: CPointer<Win32__impl_l1.SOCKADDR_IN6Abi>, SourceAddressCount: UInt32, DestinationAddressList: CPointer<Win32__impl_l1.SOCKADDR_IN6Abi>, DestinationAddressCount: UInt32, AddressSortOptions: UInt32, SortedAddressPairList: CPointer<CPointer<Win32__impl_l1.SOCKADDR_IN6_PAIRAbi>>, SortedAddressPairCount: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreateSortedAddressPairs == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_CreateSortedAddressPairs(SourceAddressList: CPointer<Win32__impl_l1.SOCKADDR_IN6Abi>, SourceAddressCount: UInt32, DestinationAddressList: CPointer<Win32__impl_l1.SOCKADDR_IN6Abi>, DestinationAddressCount: UInt32, AddressSortOptions: UInt32, SortedAddressPairList: CPointer<CPointer<Win32__impl_l1.SOCKADDR_IN6_PAIRAbi>>, SortedAddressPairCount: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return CreateSortedAddressPairs(SourceAddressList, SourceAddressCount, DestinationAddressList, DestinationAddressCount, AddressSortOptions, SortedAddressPairList, SortedAddressPairCount)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreateUnicastIpAddressEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func CreateUnicastIpAddressEntry(Row: CPointer<MIB_UNICASTIPADDRESS_ROWAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreateUnicastIpAddressEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_CreateUnicastIpAddressEntry(Row: CPointer<MIB_UNICASTIPADDRESS_ROWAbi>): windows_core.WIN32_ERROR {
+    return CreateUnicastIpAddressEntry(Row)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeleteAnycastIpAddressEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func DeleteAnycastIpAddressEntry(Row: CPointer<MIB_ANYCASTIPADDRESS_ROWAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeleteAnycastIpAddressEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_DeleteAnycastIpAddressEntry(Row: CPointer<MIB_ANYCASTIPADDRESS_ROWAbi>): windows_core.WIN32_ERROR {
+    return DeleteAnycastIpAddressEntry(Row)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeleteIPAddress == "on"]
+foreign {
+    func DeleteIPAddress(NTEContext: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeleteIPAddress == "on"]
+public unsafe func Windows_DeleteIPAddress(NTEContext: UInt32): UInt32 {
+    return DeleteIPAddress(NTEContext)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeleteIpForwardEntry == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func DeleteIpForwardEntry(pRoute: CPointer<Win32__impl_l1.MIB_IPFORWARDROWAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeleteIpForwardEntry == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_DeleteIpForwardEntry(pRoute: CPointer<Win32__impl_l1.MIB_IPFORWARDROWAbi>): UInt32 {
+    return DeleteIpForwardEntry(pRoute)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeleteIpForwardEntry2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func DeleteIpForwardEntry2(Row: CPointer<MIB_IPFORWARD_ROW2Abi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeleteIpForwardEntry2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_DeleteIpForwardEntry2(Row: CPointer<MIB_IPFORWARD_ROW2Abi>): windows_core.WIN32_ERROR {
+    return DeleteIpForwardEntry2(Row)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeleteIpNetEntry == "on"]
+foreign {
+    func DeleteIpNetEntry(pArpEntry: CPointer<Win32__impl_l1.MIB_IPNETROW_LHAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeleteIpNetEntry == "on"]
+public unsafe func Windows_DeleteIpNetEntry(pArpEntry: CPointer<Win32__impl_l1.MIB_IPNETROW_LHAbi>): UInt32 {
+    return DeleteIpNetEntry(pArpEntry)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeleteIpNetEntry2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func DeleteIpNetEntry2(Row: CPointer<MIB_IPNET_ROW2Abi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeleteIpNetEntry2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_DeleteIpNetEntry2(Row: CPointer<MIB_IPNET_ROW2Abi>): windows_core.WIN32_ERROR {
+    return DeleteIpNetEntry2(Row)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeletePersistentTcpPortReservation == "on"]
+foreign {
+    func DeletePersistentTcpPortReservation(StartPort: UInt16, NumberOfPorts: UInt16): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeletePersistentTcpPortReservation == "on"]
+public unsafe func Windows_DeletePersistentTcpPortReservation(StartPort: UInt16, NumberOfPorts: UInt16): UInt32 {
+    return DeletePersistentTcpPortReservation(StartPort, NumberOfPorts)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeletePersistentUdpPortReservation == "on"]
+foreign {
+    func DeletePersistentUdpPortReservation(StartPort: UInt16, NumberOfPorts: UInt16): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeletePersistentUdpPortReservation == "on"]
+public unsafe func Windows_DeletePersistentUdpPortReservation(StartPort: UInt16, NumberOfPorts: UInt16): UInt32 {
+    return DeletePersistentUdpPortReservation(StartPort, NumberOfPorts)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeleteProxyArpEntry == "on"]
+foreign {
+    func DeleteProxyArpEntry(dwAddress: UInt32, dwMask: UInt32, dwIfIndex: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeleteProxyArpEntry == "on"]
+public unsafe func Windows_DeleteProxyArpEntry(dwAddress: UInt32, dwMask: UInt32, dwIfIndex: UInt32): UInt32 {
+    return DeleteProxyArpEntry(dwAddress, dwMask, dwIfIndex)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeleteUnicastIpAddressEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func DeleteUnicastIpAddressEntry(Row: CPointer<MIB_UNICASTIPADDRESS_ROWAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeleteUnicastIpAddressEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_DeleteUnicastIpAddressEntry(Row: CPointer<MIB_UNICASTIPADDRESS_ROWAbi>): windows_core.WIN32_ERROR {
+    return DeleteUnicastIpAddressEntry(Row)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DisableMediaSense == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    func DisableMediaSense(pHandle: CPointer<CPointer<Unit>>, pOverLapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DisableMediaSense == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_DisableMediaSense(pHandle: CPointer<CPointer<Unit>>, pOverLapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32 {
+    return DisableMediaSense(pHandle, pOverLapped)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_EnableRouter == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    func EnableRouter(pHandle: CPointer<CPointer<Unit>>, pOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_EnableRouter == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_EnableRouter(pHandle: CPointer<CPointer<Unit>>, pOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32 {
+    return EnableRouter(pHandle, pOverlapped)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_FlushIpNetTable == "on"]
+foreign {
+    func FlushIpNetTable(dwIfIndex: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_FlushIpNetTable == "on"]
+public unsafe func Windows_FlushIpNetTable(dwIfIndex: UInt32): UInt32 {
+    return FlushIpNetTable(dwIfIndex)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_FlushIpNetTable2 == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func FlushIpNetTable2(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, InterfaceIndex: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_FlushIpNetTable2 == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_FlushIpNetTable2(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, InterfaceIndex: UInt32): windows_core.WIN32_ERROR {
+    return FlushIpNetTable2(Family, InterfaceIndex)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_FlushIpPathTable == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func FlushIpPathTable(Family: Win32__impl_l0.ADDRESS_FAMILYAbi): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_FlushIpPathTable == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_FlushIpPathTable(Family: Win32__impl_l0.ADDRESS_FAMILYAbi): windows_core.WIN32_ERROR {
+    return FlushIpPathTable(Family)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_FreeDnsSettings == "on"]
+foreign {
+    func FreeDnsSettings(Settings: CPointer<Win32__impl_l0.DNS_SETTINGSAbi>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_FreeDnsSettings == "on"]
+public unsafe func Windows_FreeDnsSettings(Settings: CPointer<Win32__impl_l0.DNS_SETTINGSAbi>): Unit {
+    FreeDnsSettings(Settings)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_FreeInterfaceDnsSettings == "on"]
+foreign {
+    func FreeInterfaceDnsSettings(Settings: CPointer<Win32__impl_l0.DNS_INTERFACE_SETTINGSAbi>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_FreeInterfaceDnsSettings == "on"]
+public unsafe func Windows_FreeInterfaceDnsSettings(Settings: CPointer<Win32__impl_l0.DNS_INTERFACE_SETTINGSAbi>): Unit {
+    FreeInterfaceDnsSettings(Settings)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_FreeMibTable == "on"]
+foreign {
+    func FreeMibTable(Memory: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_FreeMibTable == "on"]
+public unsafe func Windows_FreeMibTable(Memory: CPointer<Unit>): Unit {
+    FreeMibTable(Memory)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetAdapterIndex == "on"]
+foreign {
+    func GetAdapterIndex(AdapterName: CPointer<UInt16>, IfIndex: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetAdapterIndex == "on"]
+public unsafe func Windows_GetAdapterIndex(AdapterName: CPointer<UInt16>, IfIndex: CPointer<UInt32>): UInt32 {
+    return GetAdapterIndex(AdapterName, IfIndex)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetAdapterOrderMap == "on"]
+foreign {
+    func GetAdapterOrderMap(): CPointer<Win32__impl_l0.IP_ADAPTER_ORDER_MAPAbi>
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetAdapterOrderMap == "on"]
+public unsafe func Windows_GetAdapterOrderMap(): CPointer<Win32__impl_l0.IP_ADAPTER_ORDER_MAPAbi> {
+    return GetAdapterOrderMap()
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetAdaptersAddresses == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: Reserved optional reserved
+    // param-hint: AdapterAddresses bytes=param[4] optional
+    func GetAdaptersAddresses(Family: UInt32, Flags: Win32__impl_l0.GET_ADAPTERS_ADDRESSES_FLAGSAbi, Reserved: CPointer<Unit>, AdapterAddresses: CPointer<IP_ADAPTER_ADDRESSES_LHAbi>, SizePointer: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetAdaptersAddresses == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_GetAdaptersAddresses(Family: UInt32, Flags: Win32__impl_l0.GET_ADAPTERS_ADDRESSES_FLAGSAbi, Reserved: CPointer<Unit>, AdapterAddresses: CPointer<IP_ADAPTER_ADDRESSES_LHAbi>, SizePointer: CPointer<UInt32>): UInt32 {
+    return GetAdaptersAddresses(Family, Flags, Reserved, AdapterAddresses, SizePointer)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetAdaptersInfo == "on"]
+foreign {
+    // param-hint: AdapterInfo bytes=param[1] optional
+    func GetAdaptersInfo(AdapterInfo: CPointer<Win32__impl_l1.IP_ADAPTER_INFOAbi>, SizePointer: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetAdaptersInfo == "on"]
+public unsafe func Windows_GetAdaptersInfo(AdapterInfo: CPointer<Win32__impl_l1.IP_ADAPTER_INFOAbi>, SizePointer: CPointer<UInt32>): UInt32 {
+    return GetAdaptersInfo(AdapterInfo, SizePointer)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetAnycastIpAddressEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func GetAnycastIpAddressEntry(Row: CPointer<MIB_ANYCASTIPADDRESS_ROWAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetAnycastIpAddressEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_GetAnycastIpAddressEntry(Row: CPointer<MIB_ANYCASTIPADDRESS_ROWAbi>): windows_core.WIN32_ERROR {
+    return GetAnycastIpAddressEntry(Row)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetAnycastIpAddressTable == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func GetAnycastIpAddressTable(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, Table: CPointer<CPointer<MIB_ANYCASTIPADDRESS_TABLEAbi>>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetAnycastIpAddressTable == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_GetAnycastIpAddressTable(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, Table: CPointer<CPointer<MIB_ANYCASTIPADDRESS_TABLEAbi>>): windows_core.WIN32_ERROR {
+    return GetAnycastIpAddressTable(Family, Table)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetBestInterface == "on"]
+foreign {
+    func GetBestInterface(dwDestAddr: UInt32, pdwBestIfIndex: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetBestInterface == "on"]
+public unsafe func Windows_GetBestInterface(dwDestAddr: UInt32, pdwBestIfIndex: CPointer<UInt32>): UInt32 {
+    return GetBestInterface(dwDestAddr, pdwBestIfIndex)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetBestInterfaceEx == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func GetBestInterfaceEx(pDestAddr: CPointer<Win32__impl_l1.SOCKADDRAbi>, pdwBestIfIndex: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetBestInterfaceEx == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_GetBestInterfaceEx(pDestAddr: CPointer<Win32__impl_l1.SOCKADDRAbi>, pdwBestIfIndex: CPointer<UInt32>): UInt32 {
+    return GetBestInterfaceEx(pDestAddr, pdwBestIfIndex)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetBestRoute == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: dwSourceAddr optional
+    func GetBestRoute(dwDestAddr: UInt32, dwSourceAddr: UInt32, pBestRoute: CPointer<Win32__impl_l1.MIB_IPFORWARDROWAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetBestRoute == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_GetBestRoute(dwDestAddr: UInt32, dwSourceAddr: UInt32, pBestRoute: CPointer<Win32__impl_l1.MIB_IPFORWARDROWAbi>): UInt32 {
+    return GetBestRoute(dwDestAddr, dwSourceAddr, pBestRoute)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetBestRoute2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
 foreign {
     // param-hint: InterfaceLuid optional
     // param-hint: SourceAddress optional
     func GetBestRoute2(InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>, InterfaceIndex: UInt32, SourceAddress: CPointer<Win32__impl_l1.SOCKADDR_INET>, DestinationAddress: CPointer<Win32__impl_l1.SOCKADDR_INET>, AddressSortOptions: UInt32, BestRoute: CPointer<MIB_IPFORWARD_ROW2Abi>, BestSourceAddress: CPointer<Win32__impl_l1.SOCKADDR_INET>): windows_core.WIN32_ERROR
 }
 
-@When[IPHLPAPI == "on" && (Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on")]
-foreign {
-    func GetAnycastIpAddressTable(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, Table: CPointer<CPointer<MIB_ANYCASTIPADDRESS_TABLEAbi>>): windows_core.WIN32_ERROR
-    func GetIpForwardTable2(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, Table: CPointer<CPointer<MIB_IPFORWARD_TABLE2Abi>>): windows_core.WIN32_ERROR
-    func GetIpInterfaceTable(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, Table: CPointer<CPointer<Win32__impl_l1.MIB_IPINTERFACE_TABLEAbi>>): windows_core.WIN32_ERROR
-    func GetIpNetTable2(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, Table: CPointer<CPointer<MIB_IPNET_TABLE2Abi>>): windows_core.WIN32_ERROR
-    func GetIpPathTable(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, Table: CPointer<CPointer<MIB_IPPATH_TABLEAbi>>): windows_core.WIN32_ERROR
-    func GetMulticastIpAddressTable(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, Table: CPointer<CPointer<MIB_MULTICASTIPADDRESS_TABLEAbi>>): windows_core.WIN32_ERROR
-    func GetUnicastIpAddressTable(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, Table: CPointer<CPointer<MIB_UNICASTIPADDRESS_TABLEAbi>>): windows_core.WIN32_ERROR
-    // param-hint: CallerContext optional
-    func NotifyIpInterfaceChange(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, Callback: Win32__impl_l1.PIPINTERFACE_CHANGE_CALLBACK, CallerContext: CPointer<Unit>, InitialNotification: UInt8, NotificationHandle: CPointer<CPointer<Unit>>): windows_core.WIN32_ERROR
-    func NotifyRouteChange2(AddressFamily: Win32__impl_l0.ADDRESS_FAMILYAbi, Callback: PIPFORWARD_CHANGE_CALLBACK, CallerContext: CPointer<Unit>, InitialNotification: UInt8, NotificationHandle: CPointer<CPointer<Unit>>): windows_core.WIN32_ERROR
-    func NotifyStableUnicastIpAddressTable(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, Table: CPointer<CPointer<MIB_UNICASTIPADDRESS_TABLEAbi>>, CallerCallback: PSTABLE_UNICAST_IPADDRESS_TABLE_CALLBACK, CallerContext: CPointer<Unit>, NotificationHandle: CPointer<CPointer<Unit>>): windows_core.WIN32_ERROR
-    // param-hint: CallerContext optional
-    func NotifyUnicastIpAddressChange(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, Callback: PUNICAST_IPADDRESS_CHANGE_CALLBACK, CallerContext: CPointer<Unit>, InitialNotification: UInt8, NotificationHandle: CPointer<CPointer<Unit>>): windows_core.WIN32_ERROR
-    // param-hint: SourceAddress optional
-    func ResolveIpNetEntry2(Row: CPointer<MIB_IPNET_ROW2Abi>, SourceAddress: CPointer<Win32__impl_l1.SOCKADDR_INET>): windows_core.WIN32_ERROR
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetBestRoute2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_GetBestRoute2(InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>, InterfaceIndex: UInt32, SourceAddress: CPointer<Win32__impl_l1.SOCKADDR_INET>, DestinationAddress: CPointer<Win32__impl_l1.SOCKADDR_INET>, AddressSortOptions: UInt32, BestRoute: CPointer<MIB_IPFORWARD_ROW2Abi>, BestSourceAddress: CPointer<Win32__impl_l1.SOCKADDR_INET>): windows_core.WIN32_ERROR {
+    return GetBestRoute2(InterfaceLuid, InterfaceIndex, SourceAddress, DestinationAddress, AddressSortOptions, BestRoute, BestSourceAddress)
 }
 
-@When[IPHLPAPI == "on" && (Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on")]
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetCurrentThreadCompartmentId == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
 foreign {
-    func CreateAnycastIpAddressEntry(Row: CPointer<MIB_ANYCASTIPADDRESS_ROWAbi>): windows_core.WIN32_ERROR
-    func CreateIpForwardEntry2(Row: CPointer<MIB_IPFORWARD_ROW2Abi>): windows_core.WIN32_ERROR
-    func CreateIpNetEntry2(Row: CPointer<MIB_IPNET_ROW2Abi>): windows_core.WIN32_ERROR
-    func CreateUnicastIpAddressEntry(Row: CPointer<MIB_UNICASTIPADDRESS_ROWAbi>): windows_core.WIN32_ERROR
-    func DeleteAnycastIpAddressEntry(Row: CPointer<MIB_ANYCASTIPADDRESS_ROWAbi>): windows_core.WIN32_ERROR
-    func DeleteIpForwardEntry2(Row: CPointer<MIB_IPFORWARD_ROW2Abi>): windows_core.WIN32_ERROR
-    func DeleteIpNetEntry2(Row: CPointer<MIB_IPNET_ROW2Abi>): windows_core.WIN32_ERROR
-    func DeleteUnicastIpAddressEntry(Row: CPointer<MIB_UNICASTIPADDRESS_ROWAbi>): windows_core.WIN32_ERROR
-    // param-hint: Reserved optional reserved
-    // param-hint: AdapterAddresses bytes=param[4] optional
-    func GetAdaptersAddresses(Family: UInt32, Flags: Win32__impl_l0.GET_ADAPTERS_ADDRESSES_FLAGSAbi, Reserved: CPointer<Unit>, AdapterAddresses: CPointer<IP_ADAPTER_ADDRESSES_LHAbi>, SizePointer: CPointer<UInt32>): UInt32
-    func GetAnycastIpAddressEntry(Row: CPointer<MIB_ANYCASTIPADDRESS_ROWAbi>): windows_core.WIN32_ERROR
+    func GetCurrentThreadCompartmentId(): Win32_NetworkManagement_Ndis.NET_IF_COMPARTMENT_ID
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetCurrentThreadCompartmentId == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public unsafe func Windows_GetCurrentThreadCompartmentId(): Win32_NetworkManagement_Ndis.NET_IF_COMPARTMENT_ID {
+    return GetCurrentThreadCompartmentId()
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetCurrentThreadCompartmentScope == "on"]
+foreign {
+    func GetCurrentThreadCompartmentScope(CompartmentScope: CPointer<UInt32>, CompartmentId: CPointer<UInt32>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetCurrentThreadCompartmentScope == "on"]
+public unsafe func Windows_GetCurrentThreadCompartmentScope(CompartmentScope: CPointer<UInt32>, CompartmentId: CPointer<UInt32>): Unit {
+    GetCurrentThreadCompartmentScope(CompartmentScope, CompartmentId)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetDefaultCompartmentId == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+foreign {
+    func GetDefaultCompartmentId(): Win32_NetworkManagement_Ndis.NET_IF_COMPARTMENT_ID
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetDefaultCompartmentId == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public unsafe func Windows_GetDefaultCompartmentId(): Win32_NetworkManagement_Ndis.NET_IF_COMPARTMENT_ID {
+    return GetDefaultCompartmentId()
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetDnsSettings == "on"]
+foreign {
+    func GetDnsSettings(Settings: CPointer<Win32__impl_l0.DNS_SETTINGSAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetDnsSettings == "on"]
+public unsafe func Windows_GetDnsSettings(Settings: CPointer<Win32__impl_l0.DNS_SETTINGSAbi>): windows_core.WIN32_ERROR {
+    return GetDnsSettings(Settings)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetExtendedTcpTable == "on"]
+foreign {
+    // param-hint: pTcpTable bytes=param[1] optional
+    func GetExtendedTcpTable(pTcpTable: CPointer<Unit>, pdwSize: CPointer<UInt32>, bOrder: Int32, ulAf: UInt32, TableClass: Win32__impl_l0.TCP_TABLE_CLASSAbi, Reserved: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetExtendedTcpTable == "on"]
+public unsafe func Windows_GetExtendedTcpTable(pTcpTable: CPointer<Unit>, pdwSize: CPointer<UInt32>, bOrder: Int32, ulAf: UInt32, TableClass: Win32__impl_l0.TCP_TABLE_CLASSAbi, Reserved: UInt32): UInt32 {
+    return GetExtendedTcpTable(pTcpTable, pdwSize, bOrder, ulAf, TableClass, Reserved)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetExtendedUdpTable == "on"]
+foreign {
+    // param-hint: pUdpTable bytes=param[1] optional
+    func GetExtendedUdpTable(pUdpTable: CPointer<Unit>, pdwSize: CPointer<UInt32>, bOrder: Int32, ulAf: UInt32, TableClass: Win32__impl_l0.UDP_TABLE_CLASSAbi, Reserved: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetExtendedUdpTable == "on"]
+public unsafe func Windows_GetExtendedUdpTable(pUdpTable: CPointer<Unit>, pdwSize: CPointer<UInt32>, bOrder: Int32, ulAf: UInt32, TableClass: Win32__impl_l0.UDP_TABLE_CLASSAbi, Reserved: UInt32): UInt32 {
+    return GetExtendedUdpTable(pUdpTable, pdwSize, bOrder, ulAf, TableClass, Reserved)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetFriendlyIfIndex == "on"]
+foreign {
+    func GetFriendlyIfIndex(IfIndex: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetFriendlyIfIndex == "on"]
+public unsafe func Windows_GetFriendlyIfIndex(IfIndex: UInt32): UInt32 {
+    return GetFriendlyIfIndex(IfIndex)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIcmpStatistics == "on"]
+foreign {
+    func GetIcmpStatistics(Statistics: CPointer<Win32__impl_l1.MIB_ICMPAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIcmpStatistics == "on"]
+public unsafe func Windows_GetIcmpStatistics(Statistics: CPointer<Win32__impl_l1.MIB_ICMPAbi>): UInt32 {
+    return GetIcmpStatistics(Statistics)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIcmpStatisticsEx == "on"]
+foreign {
+    func GetIcmpStatisticsEx(Statistics: CPointer<Win32__impl_l1.MIB_ICMP_EX_XPSP1Abi>, Family: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIcmpStatisticsEx == "on"]
+public unsafe func Windows_GetIcmpStatisticsEx(Statistics: CPointer<Win32__impl_l1.MIB_ICMP_EX_XPSP1Abi>, Family: UInt32): UInt32 {
+    return GetIcmpStatisticsEx(Statistics, Family)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIfEntry == "on"]
+foreign {
+    func GetIfEntry(pIfRow: CPointer<Win32__impl_l1.MIB_IFROWAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIfEntry == "on"]
+public unsafe func Windows_GetIfEntry(pIfRow: CPointer<Win32__impl_l1.MIB_IFROWAbi>): UInt32 {
+    return GetIfEntry(pIfRow)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIfEntry2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+foreign {
+    func GetIfEntry2(Row: CPointer<Win32__impl_l0.MIB_IF_ROW2Abi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIfEntry2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public unsafe func Windows_GetIfEntry2(Row: CPointer<Win32__impl_l0.MIB_IF_ROW2Abi>): windows_core.WIN32_ERROR {
+    return GetIfEntry2(Row)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIfEntry2Ex == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+foreign {
+    func GetIfEntry2Ex(Level: Win32__impl_l0.MIB_IF_ENTRY_LEVELAbi, Row: CPointer<Win32__impl_l0.MIB_IF_ROW2Abi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIfEntry2Ex == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public unsafe func Windows_GetIfEntry2Ex(Level: Win32__impl_l0.MIB_IF_ENTRY_LEVELAbi, Row: CPointer<Win32__impl_l0.MIB_IF_ROW2Abi>): windows_core.WIN32_ERROR {
+    return GetIfEntry2Ex(Level, Row)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIfStackTable == "on"]
+foreign {
+    func GetIfStackTable(Table: CPointer<CPointer<Win32__impl_l1.MIB_IFSTACK_TABLEAbi>>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIfStackTable == "on"]
+public unsafe func Windows_GetIfStackTable(Table: CPointer<CPointer<Win32__impl_l1.MIB_IFSTACK_TABLEAbi>>): windows_core.WIN32_ERROR {
+    return GetIfStackTable(Table)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIfTable == "on"]
+foreign {
+    // param-hint: pIfTable bytes=param[1] optional
+    func GetIfTable(pIfTable: CPointer<Win32__impl_l1.MIB_IFTABLEAbi>, pdwSize: CPointer<UInt32>, bOrder: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIfTable == "on"]
+public unsafe func Windows_GetIfTable(pIfTable: CPointer<Win32__impl_l1.MIB_IFTABLEAbi>, pdwSize: CPointer<UInt32>, bOrder: Int32): UInt32 {
+    return GetIfTable(pIfTable, pdwSize, bOrder)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIfTable2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+foreign {
+    func GetIfTable2(Table: CPointer<CPointer<Win32__impl_l1.MIB_IF_TABLE2Abi>>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIfTable2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public unsafe func Windows_GetIfTable2(Table: CPointer<CPointer<Win32__impl_l1.MIB_IF_TABLE2Abi>>): windows_core.WIN32_ERROR {
+    return GetIfTable2(Table)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIfTable2Ex == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+foreign {
+    func GetIfTable2Ex(Level: Win32__impl_l0.MIB_IF_TABLE_LEVELAbi, Table: CPointer<CPointer<Win32__impl_l1.MIB_IF_TABLE2Abi>>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIfTable2Ex == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public unsafe func Windows_GetIfTable2Ex(Level: Win32__impl_l0.MIB_IF_TABLE_LEVELAbi, Table: CPointer<CPointer<Win32__impl_l1.MIB_IF_TABLE2Abi>>): windows_core.WIN32_ERROR {
+    return GetIfTable2Ex(Level, Table)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetInterfaceActiveTimestampCapabilities == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+foreign {
+    func GetInterfaceActiveTimestampCapabilities(InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>, TimestampCapabilites: CPointer<Win32__impl_l1.INTERFACE_TIMESTAMP_CAPABILITIESAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetInterfaceActiveTimestampCapabilities == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public unsafe func Windows_GetInterfaceActiveTimestampCapabilities(InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>, TimestampCapabilites: CPointer<Win32__impl_l1.INTERFACE_TIMESTAMP_CAPABILITIESAbi>): UInt32 {
+    return GetInterfaceActiveTimestampCapabilities(InterfaceLuid, TimestampCapabilites)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetInterfaceDnsSettings == "on"]
+foreign {
+    func GetInterfaceDnsSettings(Interface: GUID, Settings: CPointer<Win32__impl_l0.DNS_INTERFACE_SETTINGSAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetInterfaceDnsSettings == "on"]
+public unsafe func Windows_GetInterfaceDnsSettings(Interface: GUID, Settings: CPointer<Win32__impl_l0.DNS_INTERFACE_SETTINGSAbi>): windows_core.WIN32_ERROR {
+    return GetInterfaceDnsSettings(Interface, Settings)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetInterfaceInfo == "on"]
+foreign {
+    // param-hint: pIfTable bytes=param[1] optional
+    func GetInterfaceInfo(pIfTable: CPointer<Win32__impl_l1.IP_INTERFACE_INFOAbi>, dwOutBufLen: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetInterfaceInfo == "on"]
+public unsafe func Windows_GetInterfaceInfo(pIfTable: CPointer<Win32__impl_l1.IP_INTERFACE_INFOAbi>, dwOutBufLen: CPointer<UInt32>): UInt32 {
+    return GetInterfaceInfo(pIfTable, dwOutBufLen)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetInterfaceSupportedTimestampCapabilities == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+foreign {
+    func GetInterfaceSupportedTimestampCapabilities(InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>, TimestampCapabilites: CPointer<Win32__impl_l1.INTERFACE_TIMESTAMP_CAPABILITIESAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetInterfaceSupportedTimestampCapabilities == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public unsafe func Windows_GetInterfaceSupportedTimestampCapabilities(InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>, TimestampCapabilites: CPointer<Win32__impl_l1.INTERFACE_TIMESTAMP_CAPABILITIESAbi>): UInt32 {
+    return GetInterfaceSupportedTimestampCapabilities(InterfaceLuid, TimestampCapabilites)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetInvertedIfStackTable == "on"]
+foreign {
+    func GetInvertedIfStackTable(Table: CPointer<CPointer<Win32__impl_l1.MIB_INVERTEDIFSTACK_TABLEAbi>>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetInvertedIfStackTable == "on"]
+public unsafe func Windows_GetInvertedIfStackTable(Table: CPointer<CPointer<Win32__impl_l1.MIB_INVERTEDIFSTACK_TABLEAbi>>): windows_core.WIN32_ERROR {
+    return GetInvertedIfStackTable(Table)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpAddrTable == "on"]
+foreign {
+    // param-hint: pIpAddrTable bytes=param[1] optional
+    func GetIpAddrTable(pIpAddrTable: CPointer<Win32__impl_l1.MIB_IPADDRTABLEAbi>, pdwSize: CPointer<UInt32>, bOrder: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpAddrTable == "on"]
+public unsafe func Windows_GetIpAddrTable(pIpAddrTable: CPointer<Win32__impl_l1.MIB_IPADDRTABLEAbi>, pdwSize: CPointer<UInt32>, bOrder: Int32): UInt32 {
+    return GetIpAddrTable(pIpAddrTable, pdwSize, bOrder)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpErrorString == "on"]
+foreign {
+    // param-hint: Buffer optional
+    func GetIpErrorString(ErrorCode: UInt32, Buffer: CPointer<UInt16>, Size: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpErrorString == "on"]
+public unsafe func Windows_GetIpErrorString(ErrorCode: UInt32, Buffer: CPointer<UInt16>, Size: CPointer<UInt32>): UInt32 {
+    return GetIpErrorString(ErrorCode, Buffer, Size)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpForwardEntry2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
     func GetIpForwardEntry2(Row: CPointer<MIB_IPFORWARD_ROW2Abi>): windows_core.WIN32_ERROR
-    func GetIpInterfaceEntry(Row: CPointer<Win32__impl_l1.MIB_IPINTERFACE_ROWAbi>): windows_core.WIN32_ERROR
-    func GetIpNetEntry2(Row: CPointer<MIB_IPNET_ROW2Abi>): windows_core.WIN32_ERROR
-    func GetIpPathEntry(Row: CPointer<MIB_IPPATH_ROWAbi>): windows_core.WIN32_ERROR
-    func GetMulticastIpAddressEntry(Row: CPointer<MIB_MULTICASTIPADDRESS_ROWAbi>): windows_core.WIN32_ERROR
-    func GetUnicastIpAddressEntry(Row: CPointer<MIB_UNICASTIPADDRESS_ROWAbi>): windows_core.WIN32_ERROR
-    func InitializeIpForwardEntry(Row: CPointer<MIB_IPFORWARD_ROW2Abi>): Unit
-    func InitializeIpInterfaceEntry(Row: CPointer<Win32__impl_l1.MIB_IPINTERFACE_ROWAbi>): Unit
-    func InitializeUnicastIpAddressEntry(Row: CPointer<MIB_UNICASTIPADDRESS_ROWAbi>): Unit
-    func SetIpForwardEntry2(Route: CPointer<MIB_IPFORWARD_ROW2Abi>): windows_core.WIN32_ERROR
-    func SetIpInterfaceEntry(Row: CPointer<Win32__impl_l1.MIB_IPINTERFACE_ROWAbi>): windows_core.WIN32_ERROR
-    func SetIpNetEntry2(Row: CPointer<MIB_IPNET_ROW2Abi>): windows_core.WIN32_ERROR
-    func SetUnicastIpAddressEntry(Row: CPointer<MIB_UNICASTIPADDRESS_ROWAbi>): windows_core.WIN32_ERROR
 }
 
-@When[IPHLPAPI == "on" && (Windows_Win32_Networking_WinSock == "on" && Windows_Win32_System_IO == "on")]
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpForwardEntry2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_GetIpForwardEntry2(Row: CPointer<MIB_IPFORWARD_ROW2Abi>): windows_core.WIN32_ERROR {
+    return GetIpForwardEntry2(Row)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpForwardTable == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: pIpForwardTable bytes=param[1] optional
+    func GetIpForwardTable(pIpForwardTable: CPointer<Win32__impl_l1.MIB_IPFORWARDTABLEAbi>, pdwSize: CPointer<UInt32>, bOrder: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpForwardTable == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_GetIpForwardTable(pIpForwardTable: CPointer<Win32__impl_l1.MIB_IPFORWARDTABLEAbi>, pdwSize: CPointer<UInt32>, bOrder: Int32): UInt32 {
+    return GetIpForwardTable(pIpForwardTable, pdwSize, bOrder)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpForwardTable2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func GetIpForwardTable2(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, Table: CPointer<CPointer<MIB_IPFORWARD_TABLE2Abi>>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpForwardTable2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_GetIpForwardTable2(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, Table: CPointer<CPointer<MIB_IPFORWARD_TABLE2Abi>>): windows_core.WIN32_ERROR {
+    return GetIpForwardTable2(Family, Table)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpInterfaceEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func GetIpInterfaceEntry(Row: CPointer<Win32__impl_l1.MIB_IPINTERFACE_ROWAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpInterfaceEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_GetIpInterfaceEntry(Row: CPointer<Win32__impl_l1.MIB_IPINTERFACE_ROWAbi>): windows_core.WIN32_ERROR {
+    return GetIpInterfaceEntry(Row)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpInterfaceTable == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func GetIpInterfaceTable(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, Table: CPointer<CPointer<Win32__impl_l1.MIB_IPINTERFACE_TABLEAbi>>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpInterfaceTable == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_GetIpInterfaceTable(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, Table: CPointer<CPointer<Win32__impl_l1.MIB_IPINTERFACE_TABLEAbi>>): windows_core.WIN32_ERROR {
+    return GetIpInterfaceTable(Family, Table)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpNetEntry2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func GetIpNetEntry2(Row: CPointer<MIB_IPNET_ROW2Abi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpNetEntry2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_GetIpNetEntry2(Row: CPointer<MIB_IPNET_ROW2Abi>): windows_core.WIN32_ERROR {
+    return GetIpNetEntry2(Row)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpNetTable == "on"]
+foreign {
+    // param-hint: IpNetTable bytes=param[1] optional
+    func GetIpNetTable(IpNetTable: CPointer<Win32__impl_l1.MIB_IPNETTABLEAbi>, SizePointer: CPointer<UInt32>, Order: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpNetTable == "on"]
+public unsafe func Windows_GetIpNetTable(IpNetTable: CPointer<Win32__impl_l1.MIB_IPNETTABLEAbi>, SizePointer: CPointer<UInt32>, Order: Int32): UInt32 {
+    return GetIpNetTable(IpNetTable, SizePointer, Order)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpNetTable2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func GetIpNetTable2(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, Table: CPointer<CPointer<MIB_IPNET_TABLE2Abi>>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpNetTable2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_GetIpNetTable2(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, Table: CPointer<CPointer<MIB_IPNET_TABLE2Abi>>): windows_core.WIN32_ERROR {
+    return GetIpNetTable2(Family, Table)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpNetworkConnectionBandwidthEstimates == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func GetIpNetworkConnectionBandwidthEstimates(InterfaceIndex: UInt32, AddressFamily: Win32__impl_l0.ADDRESS_FAMILYAbi, BandwidthEstimates: CPointer<Win32__impl_l1.MIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATESAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpNetworkConnectionBandwidthEstimates == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_GetIpNetworkConnectionBandwidthEstimates(InterfaceIndex: UInt32, AddressFamily: Win32__impl_l0.ADDRESS_FAMILYAbi, BandwidthEstimates: CPointer<Win32__impl_l1.MIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATESAbi>): windows_core.WIN32_ERROR {
+    return GetIpNetworkConnectionBandwidthEstimates(InterfaceIndex, AddressFamily, BandwidthEstimates)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpPathEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func GetIpPathEntry(Row: CPointer<MIB_IPPATH_ROWAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpPathEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_GetIpPathEntry(Row: CPointer<MIB_IPPATH_ROWAbi>): windows_core.WIN32_ERROR {
+    return GetIpPathEntry(Row)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpPathTable == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func GetIpPathTable(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, Table: CPointer<CPointer<MIB_IPPATH_TABLEAbi>>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpPathTable == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_GetIpPathTable(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, Table: CPointer<CPointer<MIB_IPPATH_TABLEAbi>>): windows_core.WIN32_ERROR {
+    return GetIpPathTable(Family, Table)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpStatistics == "on"]
+foreign {
+    func GetIpStatistics(Statistics: CPointer<Win32__impl_l1.MIB_IPSTATS_LHAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpStatistics == "on"]
+public unsafe func Windows_GetIpStatistics(Statistics: CPointer<Win32__impl_l1.MIB_IPSTATS_LHAbi>): UInt32 {
+    return GetIpStatistics(Statistics)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpStatisticsEx == "on"]
+foreign {
+    func GetIpStatisticsEx(Statistics: CPointer<Win32__impl_l1.MIB_IPSTATS_LHAbi>, Family: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpStatisticsEx == "on"]
+public unsafe func Windows_GetIpStatisticsEx(Statistics: CPointer<Win32__impl_l1.MIB_IPSTATS_LHAbi>, Family: UInt32): UInt32 {
+    return GetIpStatisticsEx(Statistics, Family)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetJobCompartmentId == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+foreign {
+    func GetJobCompartmentId(JobHandle: CPointer<Unit>): Win32_NetworkManagement_Ndis.NET_IF_COMPARTMENT_ID
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetJobCompartmentId == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public unsafe func Windows_GetJobCompartmentId(JobHandle: CPointer<Unit>): Win32_NetworkManagement_Ndis.NET_IF_COMPARTMENT_ID {
+    return GetJobCompartmentId(JobHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetMulticastIpAddressEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func GetMulticastIpAddressEntry(Row: CPointer<MIB_MULTICASTIPADDRESS_ROWAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetMulticastIpAddressEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_GetMulticastIpAddressEntry(Row: CPointer<MIB_MULTICASTIPADDRESS_ROWAbi>): windows_core.WIN32_ERROR {
+    return GetMulticastIpAddressEntry(Row)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetMulticastIpAddressTable == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func GetMulticastIpAddressTable(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, Table: CPointer<CPointer<MIB_MULTICASTIPADDRESS_TABLEAbi>>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetMulticastIpAddressTable == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_GetMulticastIpAddressTable(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, Table: CPointer<CPointer<MIB_MULTICASTIPADDRESS_TABLEAbi>>): windows_core.WIN32_ERROR {
+    return GetMulticastIpAddressTable(Family, Table)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetNetworkConnectivityHint == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func GetNetworkConnectivityHint(ConnectivityHint: CPointer<Win32__impl_l1.NL_NETWORK_CONNECTIVITY_HINTAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetNetworkConnectivityHint == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_GetNetworkConnectivityHint(ConnectivityHint: CPointer<Win32__impl_l1.NL_NETWORK_CONNECTIVITY_HINTAbi>): windows_core.WIN32_ERROR {
+    return GetNetworkConnectivityHint(ConnectivityHint)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetNetworkConnectivityHintForInterface == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func GetNetworkConnectivityHintForInterface(InterfaceIndex: UInt32, ConnectivityHint: CPointer<Win32__impl_l1.NL_NETWORK_CONNECTIVITY_HINTAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetNetworkConnectivityHintForInterface == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_GetNetworkConnectivityHintForInterface(InterfaceIndex: UInt32, ConnectivityHint: CPointer<Win32__impl_l1.NL_NETWORK_CONNECTIVITY_HINTAbi>): windows_core.WIN32_ERROR {
+    return GetNetworkConnectivityHintForInterface(InterfaceIndex, ConnectivityHint)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetNetworkInformation == "on"]
+foreign {
+    // param-hint: NetworkName len=param[4]
+    func GetNetworkInformation(NetworkGuid: CPointer<GUID>, CompartmentId: CPointer<UInt32>, SiteId: CPointer<UInt32>, NetworkName: CPointer<UInt16>, Length: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetNetworkInformation == "on"]
+public unsafe func Windows_GetNetworkInformation(NetworkGuid: CPointer<GUID>, CompartmentId: CPointer<UInt32>, SiteId: CPointer<UInt32>, NetworkName: CPointer<UInt16>, Length: UInt32): windows_core.WIN32_ERROR {
+    return GetNetworkInformation(NetworkGuid, CompartmentId, SiteId, NetworkName, Length)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetNetworkParams == "on"]
+foreign {
+    // param-hint: pFixedInfo bytes=param[1] optional
+    func GetNetworkParams(pFixedInfo: CPointer<Win32__impl_l1.FIXED_INFO_W2KSP1Abi>, pOutBufLen: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetNetworkParams == "on"]
+public unsafe func Windows_GetNetworkParams(pFixedInfo: CPointer<Win32__impl_l1.FIXED_INFO_W2KSP1Abi>, pOutBufLen: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return GetNetworkParams(pFixedInfo, pOutBufLen)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetNumberOfInterfaces == "on"]
+foreign {
+    func GetNumberOfInterfaces(pdwNumIf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetNumberOfInterfaces == "on"]
+public unsafe func Windows_GetNumberOfInterfaces(pdwNumIf: CPointer<UInt32>): UInt32 {
+    return GetNumberOfInterfaces(pdwNumIf)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetOwnerModuleFromPidAndInfo == "on"]
+foreign {
+    // param-hint: pBuffer bytes=param[4]
+    func GetOwnerModuleFromPidAndInfo(ulPid: UInt32, pInfo: CPointer<UInt64>, Class: Win32__impl_l0.TCPIP_OWNER_MODULE_INFO_CLASSAbi, pBuffer: CPointer<Unit>, pdwSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetOwnerModuleFromPidAndInfo == "on"]
+public unsafe func Windows_GetOwnerModuleFromPidAndInfo(ulPid: UInt32, pInfo: CPointer<UInt64>, Class: Win32__impl_l0.TCPIP_OWNER_MODULE_INFO_CLASSAbi, pBuffer: CPointer<Unit>, pdwSize: CPointer<UInt32>): UInt32 {
+    return GetOwnerModuleFromPidAndInfo(ulPid, pInfo, Class, pBuffer, pdwSize)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetOwnerModuleFromTcp6Entry == "on"]
+foreign {
+    // param-hint: pBuffer bytes=param[3]
+    func GetOwnerModuleFromTcp6Entry(pTcpEntry: CPointer<Win32__impl_l0.MIB_TCP6ROW_OWNER_MODULEAbi>, Class: Win32__impl_l0.TCPIP_OWNER_MODULE_INFO_CLASSAbi, pBuffer: CPointer<Unit>, pdwSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetOwnerModuleFromTcp6Entry == "on"]
+public unsafe func Windows_GetOwnerModuleFromTcp6Entry(pTcpEntry: CPointer<Win32__impl_l0.MIB_TCP6ROW_OWNER_MODULEAbi>, Class: Win32__impl_l0.TCPIP_OWNER_MODULE_INFO_CLASSAbi, pBuffer: CPointer<Unit>, pdwSize: CPointer<UInt32>): UInt32 {
+    return GetOwnerModuleFromTcp6Entry(pTcpEntry, Class, pBuffer, pdwSize)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetOwnerModuleFromTcpEntry == "on"]
+foreign {
+    // param-hint: pBuffer bytes=param[3]
+    func GetOwnerModuleFromTcpEntry(pTcpEntry: CPointer<Win32__impl_l0.MIB_TCPROW_OWNER_MODULEAbi>, Class: Win32__impl_l0.TCPIP_OWNER_MODULE_INFO_CLASSAbi, pBuffer: CPointer<Unit>, pdwSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetOwnerModuleFromTcpEntry == "on"]
+public unsafe func Windows_GetOwnerModuleFromTcpEntry(pTcpEntry: CPointer<Win32__impl_l0.MIB_TCPROW_OWNER_MODULEAbi>, Class: Win32__impl_l0.TCPIP_OWNER_MODULE_INFO_CLASSAbi, pBuffer: CPointer<Unit>, pdwSize: CPointer<UInt32>): UInt32 {
+    return GetOwnerModuleFromTcpEntry(pTcpEntry, Class, pBuffer, pdwSize)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetOwnerModuleFromUdp6Entry == "on"]
+foreign {
+    // param-hint: pBuffer bytes=param[3]
+    func GetOwnerModuleFromUdp6Entry(pUdpEntry: CPointer<Win32__impl_l0.MIB_UDP6ROW_OWNER_MODULEAbi>, Class: Win32__impl_l0.TCPIP_OWNER_MODULE_INFO_CLASSAbi, pBuffer: CPointer<Unit>, pdwSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetOwnerModuleFromUdp6Entry == "on"]
+public unsafe func Windows_GetOwnerModuleFromUdp6Entry(pUdpEntry: CPointer<Win32__impl_l0.MIB_UDP6ROW_OWNER_MODULEAbi>, Class: Win32__impl_l0.TCPIP_OWNER_MODULE_INFO_CLASSAbi, pBuffer: CPointer<Unit>, pdwSize: CPointer<UInt32>): UInt32 {
+    return GetOwnerModuleFromUdp6Entry(pUdpEntry, Class, pBuffer, pdwSize)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetOwnerModuleFromUdpEntry == "on"]
+foreign {
+    // param-hint: pBuffer bytes=param[3]
+    func GetOwnerModuleFromUdpEntry(pUdpEntry: CPointer<Win32__impl_l0.MIB_UDPROW_OWNER_MODULEAbi>, Class: Win32__impl_l0.TCPIP_OWNER_MODULE_INFO_CLASSAbi, pBuffer: CPointer<Unit>, pdwSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetOwnerModuleFromUdpEntry == "on"]
+public unsafe func Windows_GetOwnerModuleFromUdpEntry(pUdpEntry: CPointer<Win32__impl_l0.MIB_UDPROW_OWNER_MODULEAbi>, Class: Win32__impl_l0.TCPIP_OWNER_MODULE_INFO_CLASSAbi, pBuffer: CPointer<Unit>, pdwSize: CPointer<UInt32>): UInt32 {
+    return GetOwnerModuleFromUdpEntry(pUdpEntry, Class, pBuffer, pdwSize)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetPerAdapterInfo == "on"]
+foreign {
+    // param-hint: pPerAdapterInfo bytes=param[2] optional
+    func GetPerAdapterInfo(IfIndex: UInt32, pPerAdapterInfo: CPointer<Win32__impl_l1.IP_PER_ADAPTER_INFO_W2KSP1Abi>, pOutBufLen: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetPerAdapterInfo == "on"]
+public unsafe func Windows_GetPerAdapterInfo(IfIndex: UInt32, pPerAdapterInfo: CPointer<Win32__impl_l1.IP_PER_ADAPTER_INFO_W2KSP1Abi>, pOutBufLen: CPointer<UInt32>): UInt32 {
+    return GetPerAdapterInfo(IfIndex, pPerAdapterInfo, pOutBufLen)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetPerTcp6ConnectionEStats == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: Rw bytes=param[4] optional
+    // param-hint: Ros bytes=param[7] optional
+    // param-hint: Rod bytes=param[10] optional
+    func GetPerTcp6ConnectionEStats(Row: CPointer<Win32__impl_l1.MIB_TCP6ROWAbi>, EstatsType: Win32__impl_l0.TCP_ESTATS_TYPEAbi, Rw: CPointer<UInt8>, RwVersion: UInt32, RwSize: UInt32, Ros: CPointer<UInt8>, RosVersion: UInt32, RosSize: UInt32, Rod: CPointer<UInt8>, RodVersion: UInt32, RodSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetPerTcp6ConnectionEStats == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_GetPerTcp6ConnectionEStats(Row: CPointer<Win32__impl_l1.MIB_TCP6ROWAbi>, EstatsType: Win32__impl_l0.TCP_ESTATS_TYPEAbi, Rw: CPointer<UInt8>, RwVersion: UInt32, RwSize: UInt32, Ros: CPointer<UInt8>, RosVersion: UInt32, RosSize: UInt32, Rod: CPointer<UInt8>, RodVersion: UInt32, RodSize: UInt32): UInt32 {
+    return GetPerTcp6ConnectionEStats(Row, EstatsType, Rw, RwVersion, RwSize, Ros, RosVersion, RosSize, Rod, RodVersion, RodSize)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetPerTcpConnectionEStats == "on"]
+foreign {
+    // param-hint: Rw bytes=param[4] optional
+    // param-hint: Ros bytes=param[7] optional
+    // param-hint: Rod bytes=param[10] optional
+    func GetPerTcpConnectionEStats(Row: CPointer<Win32__impl_l1.MIB_TCPROW_LHAbi>, EstatsType: Win32__impl_l0.TCP_ESTATS_TYPEAbi, Rw: CPointer<UInt8>, RwVersion: UInt32, RwSize: UInt32, Ros: CPointer<UInt8>, RosVersion: UInt32, RosSize: UInt32, Rod: CPointer<UInt8>, RodVersion: UInt32, RodSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetPerTcpConnectionEStats == "on"]
+public unsafe func Windows_GetPerTcpConnectionEStats(Row: CPointer<Win32__impl_l1.MIB_TCPROW_LHAbi>, EstatsType: Win32__impl_l0.TCP_ESTATS_TYPEAbi, Rw: CPointer<UInt8>, RwVersion: UInt32, RwSize: UInt32, Ros: CPointer<UInt8>, RosVersion: UInt32, RosSize: UInt32, Rod: CPointer<UInt8>, RodVersion: UInt32, RodSize: UInt32): UInt32 {
+    return GetPerTcpConnectionEStats(Row, EstatsType, Rw, RwVersion, RwSize, Ros, RosVersion, RosSize, Rod, RodVersion, RodSize)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetRTTAndHopCount == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func GetRTTAndHopCount(DestIpAddress: UInt32, HopCount: CPointer<UInt32>, MaxHops: UInt32, RTT: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetRTTAndHopCount == "on"]
+public unsafe func Windows_GetRTTAndHopCount(DestIpAddress: UInt32, HopCount: CPointer<UInt32>, MaxHops: UInt32, RTT: CPointer<UInt32>): Int32 {
+    return GetRTTAndHopCount(DestIpAddress, HopCount, MaxHops, RTT)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetSessionCompartmentId == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+foreign {
+    func GetSessionCompartmentId(SessionId: UInt32): Win32_NetworkManagement_Ndis.NET_IF_COMPARTMENT_ID
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetSessionCompartmentId == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public unsafe func Windows_GetSessionCompartmentId(SessionId: UInt32): Win32_NetworkManagement_Ndis.NET_IF_COMPARTMENT_ID {
+    return GetSessionCompartmentId(SessionId)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetTcp6Table == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: TcpTable bytes=param[1]
+    func GetTcp6Table(TcpTable: CPointer<Win32__impl_l1.MIB_TCP6TABLEAbi>, SizePointer: CPointer<UInt32>, Order: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetTcp6Table == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_GetTcp6Table(TcpTable: CPointer<Win32__impl_l1.MIB_TCP6TABLEAbi>, SizePointer: CPointer<UInt32>, Order: Int32): UInt32 {
+    return GetTcp6Table(TcpTable, SizePointer, Order)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetTcp6Table2 == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: TcpTable bytes=param[1]
+    func GetTcp6Table2(TcpTable: CPointer<Win32__impl_l1.MIB_TCP6TABLE2Abi>, SizePointer: CPointer<UInt32>, Order: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetTcp6Table2 == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_GetTcp6Table2(TcpTable: CPointer<Win32__impl_l1.MIB_TCP6TABLE2Abi>, SizePointer: CPointer<UInt32>, Order: Int32): UInt32 {
+    return GetTcp6Table2(TcpTable, SizePointer, Order)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetTcpStatistics == "on"]
+foreign {
+    func GetTcpStatistics(Statistics: CPointer<Win32__impl_l1.MIB_TCPSTATS_LHAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetTcpStatistics == "on"]
+public unsafe func Windows_GetTcpStatistics(Statistics: CPointer<Win32__impl_l1.MIB_TCPSTATS_LHAbi>): UInt32 {
+    return GetTcpStatistics(Statistics)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetTcpStatisticsEx == "on"]
+foreign {
+    func GetTcpStatisticsEx(Statistics: CPointer<Win32__impl_l1.MIB_TCPSTATS_LHAbi>, Family: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetTcpStatisticsEx == "on"]
+public unsafe func Windows_GetTcpStatisticsEx(Statistics: CPointer<Win32__impl_l1.MIB_TCPSTATS_LHAbi>, Family: UInt32): UInt32 {
+    return GetTcpStatisticsEx(Statistics, Family)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetTcpStatisticsEx2 == "on"]
+foreign {
+    func GetTcpStatisticsEx2(Statistics: CPointer<Win32__impl_l1.MIB_TCPSTATS2Abi>, Family: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetTcpStatisticsEx2 == "on"]
+public unsafe func Windows_GetTcpStatisticsEx2(Statistics: CPointer<Win32__impl_l1.MIB_TCPSTATS2Abi>, Family: UInt32): UInt32 {
+    return GetTcpStatisticsEx2(Statistics, Family)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetTcpTable == "on"]
+foreign {
+    // param-hint: TcpTable bytes=param[1] optional
+    func GetTcpTable(TcpTable: CPointer<Win32__impl_l1.MIB_TCPTABLEAbi>, SizePointer: CPointer<UInt32>, Order: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetTcpTable == "on"]
+public unsafe func Windows_GetTcpTable(TcpTable: CPointer<Win32__impl_l1.MIB_TCPTABLEAbi>, SizePointer: CPointer<UInt32>, Order: Int32): UInt32 {
+    return GetTcpTable(TcpTable, SizePointer, Order)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetTcpTable2 == "on"]
+foreign {
+    // param-hint: TcpTable bytes=param[1] optional
+    func GetTcpTable2(TcpTable: CPointer<Win32__impl_l1.MIB_TCPTABLE2Abi>, SizePointer: CPointer<UInt32>, Order: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetTcpTable2 == "on"]
+public unsafe func Windows_GetTcpTable2(TcpTable: CPointer<Win32__impl_l1.MIB_TCPTABLE2Abi>, SizePointer: CPointer<UInt32>, Order: Int32): UInt32 {
+    return GetTcpTable2(TcpTable, SizePointer, Order)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetTeredoPort == "on"]
+foreign {
+    func GetTeredoPort(Port: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetTeredoPort == "on"]
+public unsafe func Windows_GetTeredoPort(Port: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return GetTeredoPort(Port)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetUdp6Table == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: Udp6Table bytes=param[1] optional
+    func GetUdp6Table(Udp6Table: CPointer<Win32__impl_l1.MIB_UDP6TABLEAbi>, SizePointer: CPointer<UInt32>, Order: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetUdp6Table == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_GetUdp6Table(Udp6Table: CPointer<Win32__impl_l1.MIB_UDP6TABLEAbi>, SizePointer: CPointer<UInt32>, Order: Int32): UInt32 {
+    return GetUdp6Table(Udp6Table, SizePointer, Order)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetUdpStatistics == "on"]
+foreign {
+    func GetUdpStatistics(Stats: CPointer<Win32__impl_l0.MIB_UDPSTATSAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetUdpStatistics == "on"]
+public unsafe func Windows_GetUdpStatistics(Stats: CPointer<Win32__impl_l0.MIB_UDPSTATSAbi>): UInt32 {
+    return GetUdpStatistics(Stats)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetUdpStatisticsEx == "on"]
+foreign {
+    func GetUdpStatisticsEx(Statistics: CPointer<Win32__impl_l0.MIB_UDPSTATSAbi>, Family: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetUdpStatisticsEx == "on"]
+public unsafe func Windows_GetUdpStatisticsEx(Statistics: CPointer<Win32__impl_l0.MIB_UDPSTATSAbi>, Family: UInt32): UInt32 {
+    return GetUdpStatisticsEx(Statistics, Family)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetUdpStatisticsEx2 == "on"]
+foreign {
+    func GetUdpStatisticsEx2(Statistics: CPointer<Win32__impl_l0.MIB_UDPSTATS2Abi>, Family: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetUdpStatisticsEx2 == "on"]
+public unsafe func Windows_GetUdpStatisticsEx2(Statistics: CPointer<Win32__impl_l0.MIB_UDPSTATS2Abi>, Family: UInt32): UInt32 {
+    return GetUdpStatisticsEx2(Statistics, Family)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetUdpTable == "on"]
+foreign {
+    // param-hint: UdpTable bytes=param[1] optional
+    func GetUdpTable(UdpTable: CPointer<Win32__impl_l1.MIB_UDPTABLEAbi>, SizePointer: CPointer<UInt32>, Order: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetUdpTable == "on"]
+public unsafe func Windows_GetUdpTable(UdpTable: CPointer<Win32__impl_l1.MIB_UDPTABLEAbi>, SizePointer: CPointer<UInt32>, Order: Int32): UInt32 {
+    return GetUdpTable(UdpTable, SizePointer, Order)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetUniDirectionalAdapterInfo == "on"]
+foreign {
+    // param-hint: pIPIfInfo bytes=param[1] optional
+    func GetUniDirectionalAdapterInfo(pIPIfInfo: CPointer<Win32__impl_l0.IP_UNIDIRECTIONAL_ADAPTER_ADDRESSAbi>, dwOutBufLen: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetUniDirectionalAdapterInfo == "on"]
+public unsafe func Windows_GetUniDirectionalAdapterInfo(pIPIfInfo: CPointer<Win32__impl_l0.IP_UNIDIRECTIONAL_ADAPTER_ADDRESSAbi>, dwOutBufLen: CPointer<UInt32>): UInt32 {
+    return GetUniDirectionalAdapterInfo(pIPIfInfo, dwOutBufLen)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetUnicastIpAddressEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func GetUnicastIpAddressEntry(Row: CPointer<MIB_UNICASTIPADDRESS_ROWAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetUnicastIpAddressEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_GetUnicastIpAddressEntry(Row: CPointer<MIB_UNICASTIPADDRESS_ROWAbi>): windows_core.WIN32_ERROR {
+    return GetUnicastIpAddressEntry(Row)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetUnicastIpAddressTable == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func GetUnicastIpAddressTable(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, Table: CPointer<CPointer<MIB_UNICASTIPADDRESS_TABLEAbi>>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetUnicastIpAddressTable == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_GetUnicastIpAddressTable(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, Table: CPointer<CPointer<MIB_UNICASTIPADDRESS_TABLEAbi>>): windows_core.WIN32_ERROR {
+    return GetUnicastIpAddressTable(Family, Table)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_Icmp6CreateFile == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func Icmp6CreateFile(): CPointer<Unit>
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_Icmp6CreateFile == "on"]
+public unsafe func Windows_Icmp6CreateFile(): CPointer<Unit> {
+    return Icmp6CreateFile()
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_Icmp6ParseReplies == "on"]
+foreign {
+    // param-hint: ReplyBuffer bytes=param[1]
+    // pinvoke-hint: SetLastError
+    func Icmp6ParseReplies(ReplyBuffer: CPointer<Unit>, ReplySize: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_Icmp6ParseReplies == "on"]
+public unsafe func Windows_Icmp6ParseReplies(ReplyBuffer: CPointer<Unit>, ReplySize: UInt32): UInt32 {
+    return Icmp6ParseReplies(ReplyBuffer, ReplySize)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_Icmp6SendEcho2 == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_System_IO == "on"]
 foreign {
     // param-hint: Event optional
     // param-hint: ApcRoutine optional
@@ -261,83 +1396,61 @@ foreign {
     func Icmp6SendEcho2(IcmpHandle: CPointer<Unit>, Event: CPointer<Unit>, ApcRoutine: Win32_System_IO.PIO_APC_ROUTINE, ApcContext: CPointer<Unit>, SourceAddress: CPointer<Win32__impl_l1.SOCKADDR_IN6Abi>, DestinationAddress: CPointer<Win32__impl_l1.SOCKADDR_IN6Abi>, RequestData: CPointer<Unit>, RequestSize: UInt16, RequestOptions: CPointer<Win32__impl_l0.IP_OPTION_INFORMATIONAbi>, ReplyBuffer: CPointer<Unit>, ReplySize: UInt32, Timeout: UInt32): UInt32
 }
 
-@When[IPHLPAPI == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
-foreign {
-    func CaptureInterfaceHardwareCrossTimestamp(InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>, CrossTimestamp: CPointer<Win32__impl_l0.INTERFACE_HARDWARE_CROSSTIMESTAMPAbi>): UInt32
-    func ConvertCompartmentIdToGuid(CompartmentId: Win32_NetworkManagement_Ndis.NET_IF_COMPARTMENT_ID, CompartmentGuid: CPointer<GUID>): windows_core.WIN32_ERROR
-    func ConvertInterfaceAliasToLuid(InterfaceAlias: CPointer<UInt16>, InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>): windows_core.WIN32_ERROR
-    func ConvertInterfaceGuidToLuid(InterfaceGuid: CPointer<GUID>, InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>): windows_core.WIN32_ERROR
-    func ConvertInterfaceIndexToLuid(InterfaceIndex: UInt32, InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>): windows_core.WIN32_ERROR
-    // param-hint: InterfaceAlias len=param[2]
-    func ConvertInterfaceLuidToAlias(InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>, InterfaceAlias: CPointer<UInt16>, Length: UIntNative): windows_core.WIN32_ERROR
-    func ConvertInterfaceLuidToGuid(InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>, InterfaceGuid: CPointer<GUID>): windows_core.WIN32_ERROR
-    func ConvertInterfaceLuidToIndex(InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>, InterfaceIndex: CPointer<UInt32>): windows_core.WIN32_ERROR
-    // param-hint: InterfaceName len=param[2]
-    func ConvertInterfaceLuidToNameA(InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>, InterfaceName: CPointer<UInt8>, Length: UIntNative): windows_core.WIN32_ERROR
-    // param-hint: InterfaceName len=param[2]
-    func ConvertInterfaceLuidToNameW(InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>, InterfaceName: CPointer<UInt16>, Length: UIntNative): windows_core.WIN32_ERROR
-    func ConvertInterfaceNameToLuidA(InterfaceName: CPointer<UInt8>, InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>): windows_core.WIN32_ERROR
-    func ConvertInterfaceNameToLuidW(InterfaceName: CPointer<UInt16>, InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>): windows_core.WIN32_ERROR
-    func GetCurrentThreadCompartmentId(): Win32_NetworkManagement_Ndis.NET_IF_COMPARTMENT_ID
-    func GetDefaultCompartmentId(): Win32_NetworkManagement_Ndis.NET_IF_COMPARTMENT_ID
-    func GetIfEntry2(Row: CPointer<Win32__impl_l0.MIB_IF_ROW2Abi>): windows_core.WIN32_ERROR
-    func GetIfEntry2Ex(Level: Win32__impl_l0.MIB_IF_ENTRY_LEVELAbi, Row: CPointer<Win32__impl_l0.MIB_IF_ROW2Abi>): windows_core.WIN32_ERROR
-    func GetIfTable2(Table: CPointer<CPointer<Win32__impl_l1.MIB_IF_TABLE2Abi>>): windows_core.WIN32_ERROR
-    func GetIfTable2Ex(Level: Win32__impl_l0.MIB_IF_TABLE_LEVELAbi, Table: CPointer<CPointer<Win32__impl_l1.MIB_IF_TABLE2Abi>>): windows_core.WIN32_ERROR
-    func GetInterfaceActiveTimestampCapabilities(InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>, TimestampCapabilites: CPointer<Win32__impl_l1.INTERFACE_TIMESTAMP_CAPABILITIESAbi>): UInt32
-    func GetInterfaceSupportedTimestampCapabilities(InterfaceLuid: CPointer<Win32_NetworkManagement_Ndis.NET_LUID_LH>, TimestampCapabilites: CPointer<Win32__impl_l1.INTERFACE_TIMESTAMP_CAPABILITIESAbi>): UInt32
-    func GetJobCompartmentId(JobHandle: CPointer<Unit>): Win32_NetworkManagement_Ndis.NET_IF_COMPARTMENT_ID
-    func GetSessionCompartmentId(SessionId: UInt32): Win32_NetworkManagement_Ndis.NET_IF_COMPARTMENT_ID
-    func SetCurrentThreadCompartmentId(CompartmentId: Win32_NetworkManagement_Ndis.NET_IF_COMPARTMENT_ID): windows_core.WIN32_ERROR
-    func SetJobCompartmentId(JobHandle: CPointer<Unit>, CompartmentId: Win32_NetworkManagement_Ndis.NET_IF_COMPARTMENT_ID): windows_core.WIN32_ERROR
-    func SetNetworkInformation(NetworkGuid: CPointer<GUID>, CompartmentId: Win32_NetworkManagement_Ndis.NET_IF_COMPARTMENT_ID, NetworkName: CPointer<UInt16>): windows_core.WIN32_ERROR
-    func SetSessionCompartmentId(SessionId: UInt32, CompartmentId: Win32_NetworkManagement_Ndis.NET_IF_COMPARTMENT_ID): windows_core.WIN32_ERROR
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_Icmp6SendEcho2 == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_Icmp6SendEcho2(IcmpHandle: CPointer<Unit>, Event: CPointer<Unit>, ApcRoutine: Win32_System_IO.PIO_APC_ROUTINE, ApcContext: CPointer<Unit>, SourceAddress: CPointer<Win32__impl_l1.SOCKADDR_IN6Abi>, DestinationAddress: CPointer<Win32__impl_l1.SOCKADDR_IN6Abi>, RequestData: CPointer<Unit>, RequestSize: UInt16, RequestOptions: CPointer<Win32__impl_l0.IP_OPTION_INFORMATIONAbi>, ReplyBuffer: CPointer<Unit>, ReplySize: UInt32, Timeout: UInt32): UInt32 {
+    return Icmp6SendEcho2(IcmpHandle, Event, ApcRoutine, ApcContext, SourceAddress, DestinationAddress, RequestData, RequestSize, RequestOptions, ReplyBuffer, ReplySize, Timeout)
 }
 
-@When[IPHLPAPI == "on" && Windows_Win32_Networking_WinSock == "on"]
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_IcmpCloseHandle == "on"]
 foreign {
-    func CreateIpForwardEntry(pRoute: CPointer<Win32__impl_l1.MIB_IPFORWARDROWAbi>): UInt32
-    // param-hint: SourceAddressList optional
-    func CreateSortedAddressPairs(SourceAddressList: CPointer<Win32__impl_l1.SOCKADDR_IN6Abi>, SourceAddressCount: UInt32, DestinationAddressList: CPointer<Win32__impl_l1.SOCKADDR_IN6Abi>, DestinationAddressCount: UInt32, AddressSortOptions: UInt32, SortedAddressPairList: CPointer<CPointer<Win32__impl_l1.SOCKADDR_IN6_PAIRAbi>>, SortedAddressPairCount: CPointer<UInt32>): windows_core.WIN32_ERROR
-    func DeleteIpForwardEntry(pRoute: CPointer<Win32__impl_l1.MIB_IPFORWARDROWAbi>): UInt32
-    func FlushIpNetTable2(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, InterfaceIndex: UInt32): windows_core.WIN32_ERROR
-    func FlushIpPathTable(Family: Win32__impl_l0.ADDRESS_FAMILYAbi): windows_core.WIN32_ERROR
-    func GetBestInterfaceEx(pDestAddr: CPointer<Win32__impl_l1.SOCKADDRAbi>, pdwBestIfIndex: CPointer<UInt32>): UInt32
-    // param-hint: dwSourceAddr optional
-    func GetBestRoute(dwDestAddr: UInt32, dwSourceAddr: UInt32, pBestRoute: CPointer<Win32__impl_l1.MIB_IPFORWARDROWAbi>): UInt32
-    // param-hint: pIpForwardTable bytes=param[1] optional
-    func GetIpForwardTable(pIpForwardTable: CPointer<Win32__impl_l1.MIB_IPFORWARDTABLEAbi>, pdwSize: CPointer<UInt32>, bOrder: Int32): UInt32
-    func GetIpNetworkConnectionBandwidthEstimates(InterfaceIndex: UInt32, AddressFamily: Win32__impl_l0.ADDRESS_FAMILYAbi, BandwidthEstimates: CPointer<Win32__impl_l1.MIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATESAbi>): windows_core.WIN32_ERROR
-    func GetNetworkConnectivityHint(ConnectivityHint: CPointer<Win32__impl_l1.NL_NETWORK_CONNECTIVITY_HINTAbi>): windows_core.WIN32_ERROR
-    func GetNetworkConnectivityHintForInterface(InterfaceIndex: UInt32, ConnectivityHint: CPointer<Win32__impl_l1.NL_NETWORK_CONNECTIVITY_HINTAbi>): windows_core.WIN32_ERROR
-    // param-hint: Rw bytes=param[4] optional
-    // param-hint: Ros bytes=param[7] optional
-    // param-hint: Rod bytes=param[10] optional
-    func GetPerTcp6ConnectionEStats(Row: CPointer<Win32__impl_l1.MIB_TCP6ROWAbi>, EstatsType: Win32__impl_l0.TCP_ESTATS_TYPEAbi, Rw: CPointer<UInt8>, RwVersion: UInt32, RwSize: UInt32, Ros: CPointer<UInt8>, RosVersion: UInt32, RosSize: UInt32, Rod: CPointer<UInt8>, RodVersion: UInt32, RodSize: UInt32): UInt32
-    // param-hint: TcpTable bytes=param[1]
-    func GetTcp6Table(TcpTable: CPointer<Win32__impl_l1.MIB_TCP6TABLEAbi>, SizePointer: CPointer<UInt32>, Order: Int32): UInt32
-    // param-hint: TcpTable bytes=param[1]
-    func GetTcp6Table2(TcpTable: CPointer<Win32__impl_l1.MIB_TCP6TABLE2Abi>, SizePointer: CPointer<UInt32>, Order: Int32): UInt32
-    // param-hint: Udp6Table bytes=param[1] optional
-    func GetUdp6Table(Udp6Table: CPointer<Win32__impl_l1.MIB_UDP6TABLEAbi>, SizePointer: CPointer<UInt32>, Order: Int32): UInt32
-    // param-hint: CallerContext optional
-    func NotifyNetworkConnectivityHintChange(Callback: Win32__impl_l1.PNETWORK_CONNECTIVITY_HINT_CHANGE_CALLBACK, CallerContext: CPointer<Unit>, InitialNotification: UInt8, NotificationHandle: CPointer<CPointer<Unit>>): windows_core.WIN32_ERROR
-    // param-hint: AddressInfo optional
-    // param-hint: PortNumber optional
-    // param-hint: PrefixLength optional
-    func ParseNetworkString(NetworkString: CPointer<UInt16>, Types: UInt32, AddressInfo: CPointer<Win32__impl_l1.NET_ADDRESS_INFOAbi>, PortNumber: CPointer<UInt16>, PrefixLength: CPointer<UInt8>): UInt32
-    // param-hint: PhysicalAddress bytes=param[2]
-    func ResolveNeighbor(NetworkAddress: CPointer<Win32__impl_l1.SOCKADDRAbi>, PhysicalAddress: CPointer<Unit>, PhysicalAddressLength: CPointer<UInt32>): UInt32
-    func SetIpForwardEntry(pRoute: CPointer<Win32__impl_l1.MIB_IPFORWARDROWAbi>): UInt32
-    // param-hint: Rw bytes=param[4]
-    func SetPerTcp6ConnectionEStats(Row: CPointer<Win32__impl_l1.MIB_TCP6ROWAbi>, EstatsType: Win32__impl_l0.TCP_ESTATS_TYPEAbi, Rw: CPointer<UInt8>, RwVersion: UInt32, RwSize: UInt32, Offset: UInt32): UInt32
+    // pinvoke-hint: SetLastError
+    func IcmpCloseHandle(IcmpHandle: CPointer<Unit>): Int32
 }
 
-@When[IPHLPAPI == "on" && Windows_Win32_System_IO == "on"]
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_IcmpCloseHandle == "on"]
+public unsafe func Windows_IcmpCloseHandle(IcmpHandle: CPointer<Unit>): Int32 {
+    return IcmpCloseHandle(IcmpHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_IcmpCreateFile == "on"]
 foreign {
-    func CancelIPChangeNotify(notifyOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): Int32
-    func DisableMediaSense(pHandle: CPointer<CPointer<Unit>>, pOverLapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32
-    func EnableRouter(pHandle: CPointer<CPointer<Unit>>, pOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32
+    // pinvoke-hint: SetLastError
+    func IcmpCreateFile(): CPointer<Unit>
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_IcmpCreateFile == "on"]
+public unsafe func Windows_IcmpCreateFile(): CPointer<Unit> {
+    return IcmpCreateFile()
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_IcmpParseReplies == "on"]
+foreign {
+    // param-hint: ReplyBuffer bytes=param[1]
+    // pinvoke-hint: SetLastError
+    func IcmpParseReplies(ReplyBuffer: CPointer<Unit>, ReplySize: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_IcmpParseReplies == "on"]
+public unsafe func Windows_IcmpParseReplies(ReplyBuffer: CPointer<Unit>, ReplySize: UInt32): UInt32 {
+    return IcmpParseReplies(ReplyBuffer, ReplySize)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_IcmpSendEcho == "on"]
+foreign {
+    // param-hint: RequestData bytes=param[3]
+    // param-hint: RequestOptions optional
+    // param-hint: ReplyBuffer bytes=param[6]
+    // pinvoke-hint: SetLastError
+    func IcmpSendEcho(IcmpHandle: CPointer<Unit>, DestinationAddress: UInt32, RequestData: CPointer<Unit>, RequestSize: UInt16, RequestOptions: CPointer<Win32__impl_l0.IP_OPTION_INFORMATIONAbi>, ReplyBuffer: CPointer<Unit>, ReplySize: UInt32, Timeout: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_IcmpSendEcho == "on"]
+public unsafe func Windows_IcmpSendEcho(IcmpHandle: CPointer<Unit>, DestinationAddress: UInt32, RequestData: CPointer<Unit>, RequestSize: UInt16, RequestOptions: CPointer<Win32__impl_l0.IP_OPTION_INFORMATIONAbi>, ReplyBuffer: CPointer<Unit>, ReplySize: UInt32, Timeout: UInt32): UInt32 {
+    return IcmpSendEcho(IcmpHandle, DestinationAddress, RequestData, RequestSize, RequestOptions, ReplyBuffer, ReplySize, Timeout)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_IcmpSendEcho2 == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: Event optional
     // param-hint: ApcRoutine optional
     // param-hint: ApcContext optional
@@ -346,6 +1459,15 @@ foreign {
     // param-hint: ReplyBuffer bytes=param[9]
     // pinvoke-hint: SetLastError
     func IcmpSendEcho2(IcmpHandle: CPointer<Unit>, Event: CPointer<Unit>, ApcRoutine: Win32_System_IO.PIO_APC_ROUTINE, ApcContext: CPointer<Unit>, DestinationAddress: UInt32, RequestData: CPointer<Unit>, RequestSize: UInt16, RequestOptions: CPointer<Win32__impl_l0.IP_OPTION_INFORMATIONAbi>, ReplyBuffer: CPointer<Unit>, ReplySize: UInt32, Timeout: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_IcmpSendEcho2 == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_IcmpSendEcho2(IcmpHandle: CPointer<Unit>, Event: CPointer<Unit>, ApcRoutine: Win32_System_IO.PIO_APC_ROUTINE, ApcContext: CPointer<Unit>, DestinationAddress: UInt32, RequestData: CPointer<Unit>, RequestSize: UInt16, RequestOptions: CPointer<Win32__impl_l0.IP_OPTION_INFORMATIONAbi>, ReplyBuffer: CPointer<Unit>, ReplySize: UInt32, Timeout: UInt32): UInt32 {
+    return IcmpSendEcho2(IcmpHandle, Event, ApcRoutine, ApcContext, DestinationAddress, RequestData, RequestSize, RequestOptions, ReplyBuffer, ReplySize, Timeout)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_IcmpSendEcho2Ex == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: Event optional
     // param-hint: ApcRoutine optional
     // param-hint: ApcContext optional
@@ -354,12 +1476,742 @@ foreign {
     // param-hint: ReplyBuffer bytes=param[10]
     // pinvoke-hint: SetLastError
     func IcmpSendEcho2Ex(IcmpHandle: CPointer<Unit>, Event: CPointer<Unit>, ApcRoutine: Win32_System_IO.PIO_APC_ROUTINE, ApcContext: CPointer<Unit>, SourceAddress: UInt32, DestinationAddress: UInt32, RequestData: CPointer<Unit>, RequestSize: UInt16, RequestOptions: CPointer<Win32__impl_l0.IP_OPTION_INFORMATIONAbi>, ReplyBuffer: CPointer<Unit>, ReplySize: UInt32, Timeout: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_IcmpSendEcho2Ex == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_IcmpSendEcho2Ex(IcmpHandle: CPointer<Unit>, Event: CPointer<Unit>, ApcRoutine: Win32_System_IO.PIO_APC_ROUTINE, ApcContext: CPointer<Unit>, SourceAddress: UInt32, DestinationAddress: UInt32, RequestData: CPointer<Unit>, RequestSize: UInt16, RequestOptions: CPointer<Win32__impl_l0.IP_OPTION_INFORMATIONAbi>, ReplyBuffer: CPointer<Unit>, ReplySize: UInt32, Timeout: UInt32): UInt32 {
+    return IcmpSendEcho2Ex(IcmpHandle, Event, ApcRoutine, ApcContext, SourceAddress, DestinationAddress, RequestData, RequestSize, RequestOptions, ReplyBuffer, ReplySize, Timeout)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_InitializeIpForwardEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func InitializeIpForwardEntry(Row: CPointer<MIB_IPFORWARD_ROW2Abi>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_InitializeIpForwardEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_InitializeIpForwardEntry(Row: CPointer<MIB_IPFORWARD_ROW2Abi>): Unit {
+    InitializeIpForwardEntry(Row)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_InitializeIpInterfaceEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func InitializeIpInterfaceEntry(Row: CPointer<Win32__impl_l1.MIB_IPINTERFACE_ROWAbi>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_InitializeIpInterfaceEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_InitializeIpInterfaceEntry(Row: CPointer<Win32__impl_l1.MIB_IPINTERFACE_ROWAbi>): Unit {
+    InitializeIpInterfaceEntry(Row)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_InitializeUnicastIpAddressEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func InitializeUnicastIpAddressEntry(Row: CPointer<MIB_UNICASTIPADDRESS_ROWAbi>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_InitializeUnicastIpAddressEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_InitializeUnicastIpAddressEntry(Row: CPointer<MIB_UNICASTIPADDRESS_ROWAbi>): Unit {
+    InitializeUnicastIpAddressEntry(Row)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_IpReleaseAddress == "on"]
+foreign {
+    func IpReleaseAddress(AdapterInfo: CPointer<Win32__impl_l0.IP_ADAPTER_INDEX_MAPAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_IpReleaseAddress == "on"]
+public unsafe func Windows_IpReleaseAddress(AdapterInfo: CPointer<Win32__impl_l0.IP_ADAPTER_INDEX_MAPAbi>): UInt32 {
+    return IpReleaseAddress(AdapterInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_IpRenewAddress == "on"]
+foreign {
+    func IpRenewAddress(AdapterInfo: CPointer<Win32__impl_l0.IP_ADAPTER_INDEX_MAPAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_IpRenewAddress == "on"]
+public unsafe func Windows_IpRenewAddress(AdapterInfo: CPointer<Win32__impl_l0.IP_ADAPTER_INDEX_MAPAbi>): UInt32 {
+    return IpRenewAddress(AdapterInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_LookupPersistentTcpPortReservation == "on"]
+foreign {
+    func LookupPersistentTcpPortReservation(StartPort: UInt16, NumberOfPorts: UInt16, Token: CPointer<UInt64>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_LookupPersistentTcpPortReservation == "on"]
+public unsafe func Windows_LookupPersistentTcpPortReservation(StartPort: UInt16, NumberOfPorts: UInt16, Token: CPointer<UInt64>): UInt32 {
+    return LookupPersistentTcpPortReservation(StartPort, NumberOfPorts, Token)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_LookupPersistentUdpPortReservation == "on"]
+foreign {
+    func LookupPersistentUdpPortReservation(StartPort: UInt16, NumberOfPorts: UInt16, Token: CPointer<UInt64>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_LookupPersistentUdpPortReservation == "on"]
+public unsafe func Windows_LookupPersistentUdpPortReservation(StartPort: UInt16, NumberOfPorts: UInt16, Token: CPointer<UInt64>): UInt32 {
+    return LookupPersistentUdpPortReservation(StartPort, NumberOfPorts, Token)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_NhpAllocateAndGetInterfaceInfoFromStack == "on"]
+foreign {
+    func NhpAllocateAndGetInterfaceInfoFromStack(ppTable: CPointer<CPointer<Win32__impl_l0.IP_INTERFACE_NAME_INFO_W2KSP1Abi>>, pdwCount: CPointer<UInt32>, bOrder: Int32, hHeap: CPointer<Unit>, dwFlags: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_NhpAllocateAndGetInterfaceInfoFromStack == "on"]
+public unsafe func Windows_NhpAllocateAndGetInterfaceInfoFromStack(ppTable: CPointer<CPointer<Win32__impl_l0.IP_INTERFACE_NAME_INFO_W2KSP1Abi>>, pdwCount: CPointer<UInt32>, bOrder: Int32, hHeap: CPointer<Unit>, dwFlags: UInt32): UInt32 {
+    return NhpAllocateAndGetInterfaceInfoFromStack(ppTable, pdwCount, bOrder, hHeap, dwFlags)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_NotifyAddrChange == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     func NotifyAddrChange(Handle: CPointer<CPointer<Unit>>, overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_NotifyAddrChange == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_NotifyAddrChange(Handle: CPointer<CPointer<Unit>>, overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32 {
+    return NotifyAddrChange(Handle, overlapped)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_NotifyIpInterfaceChange == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: CallerContext optional
+    func NotifyIpInterfaceChange(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, Callback: Win32__impl_l1.PIPINTERFACE_CHANGE_CALLBACK, CallerContext: CPointer<Unit>, InitialNotification: UInt8, NotificationHandle: CPointer<CPointer<Unit>>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_NotifyIpInterfaceChange == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_NotifyIpInterfaceChange(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, Callback: Win32__impl_l1.PIPINTERFACE_CHANGE_CALLBACK, CallerContext: CPointer<Unit>, InitialNotification: UInt8, NotificationHandle: CPointer<CPointer<Unit>>): windows_core.WIN32_ERROR {
+    return NotifyIpInterfaceChange(Family, Callback, CallerContext, InitialNotification, NotificationHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_NotifyNetworkConnectivityHintChange == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: CallerContext optional
+    func NotifyNetworkConnectivityHintChange(Callback: Win32__impl_l1.PNETWORK_CONNECTIVITY_HINT_CHANGE_CALLBACK, CallerContext: CPointer<Unit>, InitialNotification: UInt8, NotificationHandle: CPointer<CPointer<Unit>>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_NotifyNetworkConnectivityHintChange == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_NotifyNetworkConnectivityHintChange(Callback: Win32__impl_l1.PNETWORK_CONNECTIVITY_HINT_CHANGE_CALLBACK, CallerContext: CPointer<Unit>, InitialNotification: UInt8, NotificationHandle: CPointer<CPointer<Unit>>): windows_core.WIN32_ERROR {
+    return NotifyNetworkConnectivityHintChange(Callback, CallerContext, InitialNotification, NotificationHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_NotifyRouteChange == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     func NotifyRouteChange(Handle: CPointer<CPointer<Unit>>, overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_NotifyRouteChange == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_NotifyRouteChange(Handle: CPointer<CPointer<Unit>>, overlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): UInt32 {
+    return NotifyRouteChange(Handle, overlapped)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_NotifyRouteChange2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func NotifyRouteChange2(AddressFamily: Win32__impl_l0.ADDRESS_FAMILYAbi, Callback: PIPFORWARD_CHANGE_CALLBACK, CallerContext: CPointer<Unit>, InitialNotification: UInt8, NotificationHandle: CPointer<CPointer<Unit>>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_NotifyRouteChange2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_NotifyRouteChange2(AddressFamily: Win32__impl_l0.ADDRESS_FAMILYAbi, Callback: PIPFORWARD_CHANGE_CALLBACK, CallerContext: CPointer<Unit>, InitialNotification: UInt8, NotificationHandle: CPointer<CPointer<Unit>>): windows_core.WIN32_ERROR {
+    return NotifyRouteChange2(AddressFamily, Callback, CallerContext, InitialNotification, NotificationHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_NotifyStableUnicastIpAddressTable == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func NotifyStableUnicastIpAddressTable(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, Table: CPointer<CPointer<MIB_UNICASTIPADDRESS_TABLEAbi>>, CallerCallback: PSTABLE_UNICAST_IPADDRESS_TABLE_CALLBACK, CallerContext: CPointer<Unit>, NotificationHandle: CPointer<CPointer<Unit>>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_NotifyStableUnicastIpAddressTable == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_NotifyStableUnicastIpAddressTable(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, Table: CPointer<CPointer<MIB_UNICASTIPADDRESS_TABLEAbi>>, CallerCallback: PSTABLE_UNICAST_IPADDRESS_TABLE_CALLBACK, CallerContext: CPointer<Unit>, NotificationHandle: CPointer<CPointer<Unit>>): windows_core.WIN32_ERROR {
+    return NotifyStableUnicastIpAddressTable(Family, Table, CallerCallback, CallerContext, NotificationHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_NotifyTeredoPortChange == "on"]
+foreign {
+    func NotifyTeredoPortChange(Callback: Win32__impl_l1.PTEREDO_PORT_CHANGE_CALLBACK, CallerContext: CPointer<Unit>, InitialNotification: UInt8, NotificationHandle: CPointer<CPointer<Unit>>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_NotifyTeredoPortChange == "on"]
+public unsafe func Windows_NotifyTeredoPortChange(Callback: Win32__impl_l1.PTEREDO_PORT_CHANGE_CALLBACK, CallerContext: CPointer<Unit>, InitialNotification: UInt8, NotificationHandle: CPointer<CPointer<Unit>>): windows_core.WIN32_ERROR {
+    return NotifyTeredoPortChange(Callback, CallerContext, InitialNotification, NotificationHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_NotifyUnicastIpAddressChange == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: CallerContext optional
+    func NotifyUnicastIpAddressChange(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, Callback: PUNICAST_IPADDRESS_CHANGE_CALLBACK, CallerContext: CPointer<Unit>, InitialNotification: UInt8, NotificationHandle: CPointer<CPointer<Unit>>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_NotifyUnicastIpAddressChange == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_NotifyUnicastIpAddressChange(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, Callback: PUNICAST_IPADDRESS_CHANGE_CALLBACK, CallerContext: CPointer<Unit>, InitialNotification: UInt8, NotificationHandle: CPointer<CPointer<Unit>>): windows_core.WIN32_ERROR {
+    return NotifyUnicastIpAddressChange(Family, Callback, CallerContext, InitialNotification, NotificationHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ParseNetworkString == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: AddressInfo optional
+    // param-hint: PortNumber optional
+    // param-hint: PrefixLength optional
+    func ParseNetworkString(NetworkString: CPointer<UInt16>, Types: UInt32, AddressInfo: CPointer<Win32__impl_l1.NET_ADDRESS_INFOAbi>, PortNumber: CPointer<UInt16>, PrefixLength: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ParseNetworkString == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_ParseNetworkString(NetworkString: CPointer<UInt16>, Types: UInt32, AddressInfo: CPointer<Win32__impl_l1.NET_ADDRESS_INFOAbi>, PortNumber: CPointer<UInt16>, PrefixLength: CPointer<UInt8>): UInt32 {
+    return ParseNetworkString(NetworkString, Types, AddressInfo, PortNumber, PrefixLength)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfAddFiltersToInterface == "on"]
+foreign {
+    func PfAddFiltersToInterface(ih: CPointer<Unit>, cInFilters: UInt32, pfiltIn: CPointer<Win32__impl_l1.PF_FILTER_DESCRIPTORAbi>, cOutFilters: UInt32, pfiltOut: CPointer<Win32__impl_l1.PF_FILTER_DESCRIPTORAbi>, pfHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfAddFiltersToInterface == "on"]
+public unsafe func Windows_PfAddFiltersToInterface(ih: CPointer<Unit>, cInFilters: UInt32, pfiltIn: CPointer<Win32__impl_l1.PF_FILTER_DESCRIPTORAbi>, cOutFilters: UInt32, pfiltOut: CPointer<Win32__impl_l1.PF_FILTER_DESCRIPTORAbi>, pfHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return PfAddFiltersToInterface(ih, cInFilters, pfiltIn, cOutFilters, pfiltOut, pfHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfAddGlobalFilterToInterface == "on"]
+foreign {
+    func PfAddGlobalFilterToInterface(pInterface: CPointer<Unit>, gfFilter: Win32__impl_l0.GLOBAL_FILTERAbi): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfAddGlobalFilterToInterface == "on"]
+public unsafe func Windows_PfAddGlobalFilterToInterface(pInterface: CPointer<Unit>, gfFilter: Win32__impl_l0.GLOBAL_FILTERAbi): UInt32 {
+    return PfAddGlobalFilterToInterface(pInterface, gfFilter)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfBindInterfaceToIPAddress == "on"]
+foreign {
+    func PfBindInterfaceToIPAddress(pInterface: CPointer<Unit>, pfatType: Win32__impl_l0.PFADDRESSTYPEAbi, IPAddress: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfBindInterfaceToIPAddress == "on"]
+public unsafe func Windows_PfBindInterfaceToIPAddress(pInterface: CPointer<Unit>, pfatType: Win32__impl_l0.PFADDRESSTYPEAbi, IPAddress: CPointer<UInt8>): UInt32 {
+    return PfBindInterfaceToIPAddress(pInterface, pfatType, IPAddress)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfBindInterfaceToIndex == "on"]
+foreign {
+    func PfBindInterfaceToIndex(pInterface: CPointer<Unit>, dwIndex: UInt32, pfatLinkType: Win32__impl_l0.PFADDRESSTYPEAbi, LinkIPAddress: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfBindInterfaceToIndex == "on"]
+public unsafe func Windows_PfBindInterfaceToIndex(pInterface: CPointer<Unit>, dwIndex: UInt32, pfatLinkType: Win32__impl_l0.PFADDRESSTYPEAbi, LinkIPAddress: CPointer<UInt8>): UInt32 {
+    return PfBindInterfaceToIndex(pInterface, dwIndex, pfatLinkType, LinkIPAddress)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfCreateInterface == "on"]
+foreign {
+    func PfCreateInterface(dwName: UInt32, inAction: Win32__impl_l0.PFFORWARD_ACTIONAbi, outAction: Win32__impl_l0.PFFORWARD_ACTIONAbi, bUseLog: Int32, bMustBeUnique: Int32, ppInterface: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfCreateInterface == "on"]
+public unsafe func Windows_PfCreateInterface(dwName: UInt32, inAction: Win32__impl_l0.PFFORWARD_ACTIONAbi, outAction: Win32__impl_l0.PFFORWARD_ACTIONAbi, bUseLog: Int32, bMustBeUnique: Int32, ppInterface: CPointer<CPointer<Unit>>): UInt32 {
+    return PfCreateInterface(dwName, inAction, outAction, bUseLog, bMustBeUnique, ppInterface)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfDeleteInterface == "on"]
+foreign {
+    func PfDeleteInterface(pInterface: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfDeleteInterface == "on"]
+public unsafe func Windows_PfDeleteInterface(pInterface: CPointer<Unit>): UInt32 {
+    return PfDeleteInterface(pInterface)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfDeleteLog == "on"]
+foreign {
+    func PfDeleteLog(): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfDeleteLog == "on"]
+public unsafe func Windows_PfDeleteLog(): UInt32 {
+    return PfDeleteLog()
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfGetInterfaceStatistics == "on"]
+foreign {
+    func PfGetInterfaceStatistics(pInterface: CPointer<Unit>, ppfStats: CPointer<PF_INTERFACE_STATSAbi>, pdwBufferSize: CPointer<UInt32>, fResetCounters: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfGetInterfaceStatistics == "on"]
+public unsafe func Windows_PfGetInterfaceStatistics(pInterface: CPointer<Unit>, ppfStats: CPointer<PF_INTERFACE_STATSAbi>, pdwBufferSize: CPointer<UInt32>, fResetCounters: Int32): UInt32 {
+    return PfGetInterfaceStatistics(pInterface, ppfStats, pdwBufferSize, fResetCounters)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfMakeLog == "on"]
+foreign {
+    func PfMakeLog(hEvent: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfMakeLog == "on"]
+public unsafe func Windows_PfMakeLog(hEvent: CPointer<Unit>): UInt32 {
+    return PfMakeLog(hEvent)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfRebindFilters == "on"]
+foreign {
+    func PfRebindFilters(pInterface: CPointer<Unit>, pLateBindInfo: CPointer<Win32__impl_l0.PF_LATEBIND_INFOAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfRebindFilters == "on"]
+public unsafe func Windows_PfRebindFilters(pInterface: CPointer<Unit>, pLateBindInfo: CPointer<Win32__impl_l0.PF_LATEBIND_INFOAbi>): UInt32 {
+    return PfRebindFilters(pInterface, pLateBindInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfRemoveFilterHandles == "on"]
+foreign {
+    func PfRemoveFilterHandles(pInterface: CPointer<Unit>, cFilters: UInt32, pvHandles: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfRemoveFilterHandles == "on"]
+public unsafe func Windows_PfRemoveFilterHandles(pInterface: CPointer<Unit>, cFilters: UInt32, pvHandles: CPointer<CPointer<Unit>>): UInt32 {
+    return PfRemoveFilterHandles(pInterface, cFilters, pvHandles)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfRemoveFiltersFromInterface == "on"]
+foreign {
+    func PfRemoveFiltersFromInterface(ih: CPointer<Unit>, cInFilters: UInt32, pfiltIn: CPointer<Win32__impl_l1.PF_FILTER_DESCRIPTORAbi>, cOutFilters: UInt32, pfiltOut: CPointer<Win32__impl_l1.PF_FILTER_DESCRIPTORAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfRemoveFiltersFromInterface == "on"]
+public unsafe func Windows_PfRemoveFiltersFromInterface(ih: CPointer<Unit>, cInFilters: UInt32, pfiltIn: CPointer<Win32__impl_l1.PF_FILTER_DESCRIPTORAbi>, cOutFilters: UInt32, pfiltOut: CPointer<Win32__impl_l1.PF_FILTER_DESCRIPTORAbi>): UInt32 {
+    return PfRemoveFiltersFromInterface(ih, cInFilters, pfiltIn, cOutFilters, pfiltOut)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfRemoveGlobalFilterFromInterface == "on"]
+foreign {
+    func PfRemoveGlobalFilterFromInterface(pInterface: CPointer<Unit>, gfFilter: Win32__impl_l0.GLOBAL_FILTERAbi): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfRemoveGlobalFilterFromInterface == "on"]
+public unsafe func Windows_PfRemoveGlobalFilterFromInterface(pInterface: CPointer<Unit>, gfFilter: Win32__impl_l0.GLOBAL_FILTERAbi): UInt32 {
+    return PfRemoveGlobalFilterFromInterface(pInterface, gfFilter)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfSetLogBuffer == "on"]
+foreign {
+    func PfSetLogBuffer(pbBuffer: CPointer<UInt8>, dwSize: UInt32, dwThreshold: UInt32, dwEntries: UInt32, pdwLoggedEntries: CPointer<UInt32>, pdwLostEntries: CPointer<UInt32>, pdwSizeUsed: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfSetLogBuffer == "on"]
+public unsafe func Windows_PfSetLogBuffer(pbBuffer: CPointer<UInt8>, dwSize: UInt32, dwThreshold: UInt32, dwEntries: UInt32, pdwLoggedEntries: CPointer<UInt32>, pdwLostEntries: CPointer<UInt32>, pdwSizeUsed: CPointer<UInt32>): UInt32 {
+    return PfSetLogBuffer(pbBuffer, dwSize, dwThreshold, dwEntries, pdwLoggedEntries, pdwLostEntries, pdwSizeUsed)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfTestPacket == "on"]
+foreign {
+    func PfTestPacket(pInInterface: CPointer<Unit>, pOutInterface: CPointer<Unit>, cBytes: UInt32, pbPacket: CPointer<UInt8>, ppAction: CPointer<Win32__impl_l0.PFFORWARD_ACTIONAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfTestPacket == "on"]
+public unsafe func Windows_PfTestPacket(pInInterface: CPointer<Unit>, pOutInterface: CPointer<Unit>, cBytes: UInt32, pbPacket: CPointer<UInt8>, ppAction: CPointer<Win32__impl_l0.PFFORWARD_ACTIONAbi>): UInt32 {
+    return PfTestPacket(pInInterface, pOutInterface, cBytes, pbPacket, ppAction)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfUnBindInterface == "on"]
+foreign {
+    func PfUnBindInterface(pInterface: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfUnBindInterface == "on"]
+public unsafe func Windows_PfUnBindInterface(pInterface: CPointer<Unit>): UInt32 {
+    return PfUnBindInterface(pInterface)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_RegisterInterfaceTimestampConfigChange == "on"]
+foreign {
+    // param-hint: CallerContext optional
+    func RegisterInterfaceTimestampConfigChange(Callback: Win32__impl_l0.PINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK, CallerContext: CPointer<Unit>, NotificationHandle: CPointer<Win32__impl_l0.HIFTIMESTAMPCHANGE>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_RegisterInterfaceTimestampConfigChange == "on"]
+public unsafe func Windows_RegisterInterfaceTimestampConfigChange(Callback: Win32__impl_l0.PINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK, CallerContext: CPointer<Unit>, NotificationHandle: CPointer<Win32__impl_l0.HIFTIMESTAMPCHANGE>): UInt32 {
+    return RegisterInterfaceTimestampConfigChange(Callback, CallerContext, NotificationHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ResolveIpNetEntry2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: SourceAddress optional
+    func ResolveIpNetEntry2(Row: CPointer<MIB_IPNET_ROW2Abi>, SourceAddress: CPointer<Win32__impl_l1.SOCKADDR_INET>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ResolveIpNetEntry2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_ResolveIpNetEntry2(Row: CPointer<MIB_IPNET_ROW2Abi>, SourceAddress: CPointer<Win32__impl_l1.SOCKADDR_INET>): windows_core.WIN32_ERROR {
+    return ResolveIpNetEntry2(Row, SourceAddress)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ResolveNeighbor == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: PhysicalAddress bytes=param[2]
+    func ResolveNeighbor(NetworkAddress: CPointer<Win32__impl_l1.SOCKADDRAbi>, PhysicalAddress: CPointer<Unit>, PhysicalAddressLength: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ResolveNeighbor == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_ResolveNeighbor(NetworkAddress: CPointer<Win32__impl_l1.SOCKADDRAbi>, PhysicalAddress: CPointer<Unit>, PhysicalAddressLength: CPointer<UInt32>): UInt32 {
+    return ResolveNeighbor(NetworkAddress, PhysicalAddress, PhysicalAddressLength)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_RestoreMediaSense == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: lpdwEnableCount optional
     func RestoreMediaSense(pOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, lpdwEnableCount: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_RestoreMediaSense == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_RestoreMediaSense(pOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, lpdwEnableCount: CPointer<UInt32>): UInt32 {
+    return RestoreMediaSense(pOverlapped, lpdwEnableCount)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SendARP == "on"]
+foreign {
+    // param-hint: pMacAddr bytes=param[3]
+    func SendARP(DestIP: UInt32, SrcIP: UInt32, pMacAddr: CPointer<Unit>, PhyAddrLen: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SendARP == "on"]
+public unsafe func Windows_SendARP(DestIP: UInt32, SrcIP: UInt32, pMacAddr: CPointer<Unit>, PhyAddrLen: CPointer<UInt32>): UInt32 {
+    return SendARP(DestIP, SrcIP, pMacAddr, PhyAddrLen)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetCurrentThreadCompartmentId == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+foreign {
+    func SetCurrentThreadCompartmentId(CompartmentId: Win32_NetworkManagement_Ndis.NET_IF_COMPARTMENT_ID): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetCurrentThreadCompartmentId == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public unsafe func Windows_SetCurrentThreadCompartmentId(CompartmentId: Win32_NetworkManagement_Ndis.NET_IF_COMPARTMENT_ID): windows_core.WIN32_ERROR {
+    return SetCurrentThreadCompartmentId(CompartmentId)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetCurrentThreadCompartmentScope == "on"]
+foreign {
+    func SetCurrentThreadCompartmentScope(CompartmentScope: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetCurrentThreadCompartmentScope == "on"]
+public unsafe func Windows_SetCurrentThreadCompartmentScope(CompartmentScope: UInt32): windows_core.WIN32_ERROR {
+    return SetCurrentThreadCompartmentScope(CompartmentScope)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetDnsSettings == "on"]
+foreign {
+    func SetDnsSettings(Settings: CPointer<Win32__impl_l0.DNS_SETTINGSAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetDnsSettings == "on"]
+public unsafe func Windows_SetDnsSettings(Settings: CPointer<Win32__impl_l0.DNS_SETTINGSAbi>): windows_core.WIN32_ERROR {
+    return SetDnsSettings(Settings)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetIfEntry == "on"]
+foreign {
+    func SetIfEntry(pIfRow: CPointer<Win32__impl_l1.MIB_IFROWAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetIfEntry == "on"]
+public unsafe func Windows_SetIfEntry(pIfRow: CPointer<Win32__impl_l1.MIB_IFROWAbi>): UInt32 {
+    return SetIfEntry(pIfRow)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetInterfaceDnsSettings == "on"]
+foreign {
+    func SetInterfaceDnsSettings(Interface: GUID, Settings: CPointer<Win32__impl_l0.DNS_INTERFACE_SETTINGSAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetInterfaceDnsSettings == "on"]
+public unsafe func Windows_SetInterfaceDnsSettings(Interface: GUID, Settings: CPointer<Win32__impl_l0.DNS_INTERFACE_SETTINGSAbi>): windows_core.WIN32_ERROR {
+    return SetInterfaceDnsSettings(Interface, Settings)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetIpForwardEntry == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func SetIpForwardEntry(pRoute: CPointer<Win32__impl_l1.MIB_IPFORWARDROWAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetIpForwardEntry == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_SetIpForwardEntry(pRoute: CPointer<Win32__impl_l1.MIB_IPFORWARDROWAbi>): UInt32 {
+    return SetIpForwardEntry(pRoute)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetIpForwardEntry2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func SetIpForwardEntry2(Route: CPointer<MIB_IPFORWARD_ROW2Abi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetIpForwardEntry2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_SetIpForwardEntry2(Route: CPointer<MIB_IPFORWARD_ROW2Abi>): windows_core.WIN32_ERROR {
+    return SetIpForwardEntry2(Route)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetIpInterfaceEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func SetIpInterfaceEntry(Row: CPointer<Win32__impl_l1.MIB_IPINTERFACE_ROWAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetIpInterfaceEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_SetIpInterfaceEntry(Row: CPointer<Win32__impl_l1.MIB_IPINTERFACE_ROWAbi>): windows_core.WIN32_ERROR {
+    return SetIpInterfaceEntry(Row)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetIpNetEntry == "on"]
+foreign {
+    func SetIpNetEntry(pArpEntry: CPointer<Win32__impl_l1.MIB_IPNETROW_LHAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetIpNetEntry == "on"]
+public unsafe func Windows_SetIpNetEntry(pArpEntry: CPointer<Win32__impl_l1.MIB_IPNETROW_LHAbi>): UInt32 {
+    return SetIpNetEntry(pArpEntry)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetIpNetEntry2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func SetIpNetEntry2(Row: CPointer<MIB_IPNET_ROW2Abi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetIpNetEntry2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_SetIpNetEntry2(Row: CPointer<MIB_IPNET_ROW2Abi>): windows_core.WIN32_ERROR {
+    return SetIpNetEntry2(Row)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetIpStatistics == "on"]
+foreign {
+    func SetIpStatistics(pIpStats: CPointer<Win32__impl_l1.MIB_IPSTATS_LHAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetIpStatistics == "on"]
+public unsafe func Windows_SetIpStatistics(pIpStats: CPointer<Win32__impl_l1.MIB_IPSTATS_LHAbi>): UInt32 {
+    return SetIpStatistics(pIpStats)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetIpStatisticsEx == "on"]
+foreign {
+    func SetIpStatisticsEx(Statistics: CPointer<Win32__impl_l1.MIB_IPSTATS_LHAbi>, Family: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetIpStatisticsEx == "on"]
+public unsafe func Windows_SetIpStatisticsEx(Statistics: CPointer<Win32__impl_l1.MIB_IPSTATS_LHAbi>, Family: UInt32): UInt32 {
+    return SetIpStatisticsEx(Statistics, Family)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetIpTTL == "on"]
+foreign {
+    func SetIpTTL(nTTL: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetIpTTL == "on"]
+public unsafe func Windows_SetIpTTL(nTTL: UInt32): UInt32 {
+    return SetIpTTL(nTTL)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetJobCompartmentId == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+foreign {
+    func SetJobCompartmentId(JobHandle: CPointer<Unit>, CompartmentId: Win32_NetworkManagement_Ndis.NET_IF_COMPARTMENT_ID): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetJobCompartmentId == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public unsafe func Windows_SetJobCompartmentId(JobHandle: CPointer<Unit>, CompartmentId: Win32_NetworkManagement_Ndis.NET_IF_COMPARTMENT_ID): windows_core.WIN32_ERROR {
+    return SetJobCompartmentId(JobHandle, CompartmentId)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetNetworkInformation == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+foreign {
+    func SetNetworkInformation(NetworkGuid: CPointer<GUID>, CompartmentId: Win32_NetworkManagement_Ndis.NET_IF_COMPARTMENT_ID, NetworkName: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetNetworkInformation == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public unsafe func Windows_SetNetworkInformation(NetworkGuid: CPointer<GUID>, CompartmentId: Win32_NetworkManagement_Ndis.NET_IF_COMPARTMENT_ID, NetworkName: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return SetNetworkInformation(NetworkGuid, CompartmentId, NetworkName)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetPerTcp6ConnectionEStats == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: Rw bytes=param[4]
+    func SetPerTcp6ConnectionEStats(Row: CPointer<Win32__impl_l1.MIB_TCP6ROWAbi>, EstatsType: Win32__impl_l0.TCP_ESTATS_TYPEAbi, Rw: CPointer<UInt8>, RwVersion: UInt32, RwSize: UInt32, Offset: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetPerTcp6ConnectionEStats == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_SetPerTcp6ConnectionEStats(Row: CPointer<Win32__impl_l1.MIB_TCP6ROWAbi>, EstatsType: Win32__impl_l0.TCP_ESTATS_TYPEAbi, Rw: CPointer<UInt8>, RwVersion: UInt32, RwSize: UInt32, Offset: UInt32): UInt32 {
+    return SetPerTcp6ConnectionEStats(Row, EstatsType, Rw, RwVersion, RwSize, Offset)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetPerTcpConnectionEStats == "on"]
+foreign {
+    // param-hint: Rw bytes=param[4]
+    func SetPerTcpConnectionEStats(Row: CPointer<Win32__impl_l1.MIB_TCPROW_LHAbi>, EstatsType: Win32__impl_l0.TCP_ESTATS_TYPEAbi, Rw: CPointer<UInt8>, RwVersion: UInt32, RwSize: UInt32, Offset: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetPerTcpConnectionEStats == "on"]
+public unsafe func Windows_SetPerTcpConnectionEStats(Row: CPointer<Win32__impl_l1.MIB_TCPROW_LHAbi>, EstatsType: Win32__impl_l0.TCP_ESTATS_TYPEAbi, Rw: CPointer<UInt8>, RwVersion: UInt32, RwSize: UInt32, Offset: UInt32): UInt32 {
+    return SetPerTcpConnectionEStats(Row, EstatsType, Rw, RwVersion, RwSize, Offset)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetSessionCompartmentId == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+foreign {
+    func SetSessionCompartmentId(SessionId: UInt32, CompartmentId: Win32_NetworkManagement_Ndis.NET_IF_COMPARTMENT_ID): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetSessionCompartmentId == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public unsafe func Windows_SetSessionCompartmentId(SessionId: UInt32, CompartmentId: Win32_NetworkManagement_Ndis.NET_IF_COMPARTMENT_ID): windows_core.WIN32_ERROR {
+    return SetSessionCompartmentId(SessionId, CompartmentId)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetTcpEntry == "on"]
+foreign {
+    func SetTcpEntry(pTcpRow: CPointer<Win32__impl_l1.MIB_TCPROW_LHAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetTcpEntry == "on"]
+public unsafe func Windows_SetTcpEntry(pTcpRow: CPointer<Win32__impl_l1.MIB_TCPROW_LHAbi>): UInt32 {
+    return SetTcpEntry(pTcpRow)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetUnicastIpAddressEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func SetUnicastIpAddressEntry(Row: CPointer<MIB_UNICASTIPADDRESS_ROWAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetUnicastIpAddressEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_SetUnicastIpAddressEntry(Row: CPointer<MIB_UNICASTIPADDRESS_ROWAbi>): windows_core.WIN32_ERROR {
+    return SetUnicastIpAddressEntry(Row)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_UnenableRouter == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: lpdwEnableCount optional
     func UnenableRouter(pOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, lpdwEnableCount: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_UnenableRouter == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_UnenableRouter(pOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, lpdwEnableCount: CPointer<UInt32>): UInt32 {
+    return UnenableRouter(pOverlapped, lpdwEnableCount)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_UnregisterInterfaceTimestampConfigChange == "on"]
+foreign {
+    func UnregisterInterfaceTimestampConfigChange(NotificationHandle: Win32__impl_l0.HIFTIMESTAMPCHANGE): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_UnregisterInterfaceTimestampConfigChange == "on"]
+public unsafe func Windows_UnregisterInterfaceTimestampConfigChange(NotificationHandle: Win32__impl_l0.HIFTIMESTAMPCHANGE): Unit {
+    UnregisterInterfaceTimestampConfigChange(NotificationHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_if_indextoname == "on"]
+foreign {
+    // param-hint: InterfaceName fixed=256
+    func if_indextoname(InterfaceIndex: UInt32, InterfaceName: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_if_indextoname == "on"]
+public unsafe func Windows_if_indextoname(InterfaceIndex: UInt32, InterfaceName: CPointer<UInt8>): CPointer<UInt8> {
+    return if_indextoname(InterfaceIndex, InterfaceName)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_if_nametoindex == "on"]
+foreign {
+    func if_nametoindex(InterfaceName: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_if_nametoindex == "on"]
+public unsafe func Windows_if_nametoindex(InterfaceName: CPointer<UInt8>): UInt32 {
+    return if_nametoindex(InterfaceName)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreateFlVirtualInterface == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+func __windowsBindgen_CreateFlVirtualInterfaceProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("IPHLPAPI.DLL", "CreateFlVirtualInterface")
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreateFlVirtualInterface == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+unsafe func CreateFlVirtualInterface(Row: CPointer<Win32__impl_l1.MIB_FL_VIRTUAL_INTERFACE_ROWAbi>): UInt32 {
+    let call = CFunc<(CPointer<Win32__impl_l1.MIB_FL_VIRTUAL_INTERFACE_ROWAbi>) -> UInt32>(__windowsBindgen_CreateFlVirtualInterfaceProc())
+    return unsafe { call(Row) }
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreateFlVirtualInterface == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_CreateFlVirtualInterface(Row: CPointer<Win32__impl_l1.MIB_FL_VIRTUAL_INTERFACE_ROWAbi>): UInt32 {
+    return CreateFlVirtualInterface(Row)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeleteFlVirtualInterface == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+func __windowsBindgen_DeleteFlVirtualInterfaceProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("IPHLPAPI.DLL", "DeleteFlVirtualInterface")
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeleteFlVirtualInterface == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+unsafe func DeleteFlVirtualInterface(Row: CPointer<Win32__impl_l1.MIB_FL_VIRTUAL_INTERFACE_ROWAbi>): UInt32 {
+    let call = CFunc<(CPointer<Win32__impl_l1.MIB_FL_VIRTUAL_INTERFACE_ROWAbi>) -> UInt32>(__windowsBindgen_DeleteFlVirtualInterfaceProc())
+    return unsafe { call(Row) }
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeleteFlVirtualInterface == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_DeleteFlVirtualInterface(Row: CPointer<Win32__impl_l1.MIB_FL_VIRTUAL_INTERFACE_ROWAbi>): UInt32 {
+    return DeleteFlVirtualInterface(Row)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetFlVirtualInterface == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+func __windowsBindgen_GetFlVirtualInterfaceProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("IPHLPAPI.DLL", "GetFlVirtualInterface")
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetFlVirtualInterface == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+unsafe func GetFlVirtualInterface(Row: CPointer<Win32__impl_l1.MIB_FL_VIRTUAL_INTERFACE_ROWAbi>): UInt32 {
+    let call = CFunc<(CPointer<Win32__impl_l1.MIB_FL_VIRTUAL_INTERFACE_ROWAbi>) -> UInt32>(__windowsBindgen_GetFlVirtualInterfaceProc())
+    return unsafe { call(Row) }
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetFlVirtualInterface == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_GetFlVirtualInterface(Row: CPointer<Win32__impl_l1.MIB_FL_VIRTUAL_INTERFACE_ROWAbi>): UInt32 {
+    return GetFlVirtualInterface(Row)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetFlVirtualInterfaceTable == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+func __windowsBindgen_GetFlVirtualInterfaceTableProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("IPHLPAPI.DLL", "GetFlVirtualInterfaceTable")
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetFlVirtualInterfaceTable == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+unsafe func GetFlVirtualInterfaceTable(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, Table: CPointer<CPointer<Win32__impl_l1.MIB_FL_VIRTUAL_INTERFACE_TABLEAbi>>): UInt32 {
+    let call = CFunc<(Win32__impl_l0.ADDRESS_FAMILYAbi, CPointer<CPointer<Win32__impl_l1.MIB_FL_VIRTUAL_INTERFACE_TABLEAbi>>) -> UInt32>(__windowsBindgen_GetFlVirtualInterfaceTableProc())
+    return unsafe { call(Family, Table) }
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetFlVirtualInterfaceTable == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_GetFlVirtualInterfaceTable(Family: Win32__impl_l0.ADDRESS_FAMILYAbi, Table: CPointer<CPointer<Win32__impl_l1.MIB_FL_VIRTUAL_INTERFACE_TABLEAbi>>): UInt32 {
+    return GetFlVirtualInterfaceTable(Family, Table)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_InitializeFlVirtualInterfaceEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+func __windowsBindgen_InitializeFlVirtualInterfaceEntryProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("IPHLPAPI.DLL", "InitializeFlVirtualInterfaceEntry")
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_InitializeFlVirtualInterfaceEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+unsafe func InitializeFlVirtualInterfaceEntry(Row: CPointer<Win32__impl_l1.MIB_FL_VIRTUAL_INTERFACE_ROWAbi>): Unit {
+    let call = CFunc<(CPointer<Win32__impl_l1.MIB_FL_VIRTUAL_INTERFACE_ROWAbi>) -> Unit>(__windowsBindgen_InitializeFlVirtualInterfaceEntryProc())
+    unsafe { call(Row) }
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_InitializeFlVirtualInterfaceEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_InitializeFlVirtualInterfaceEntry(Row: CPointer<Win32__impl_l1.MIB_FL_VIRTUAL_INTERFACE_ROWAbi>): Unit {
+    InitializeFlVirtualInterfaceEntry(Row)
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetFlVirtualInterface == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+func __windowsBindgen_SetFlVirtualInterfaceProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("IPHLPAPI.DLL", "SetFlVirtualInterface")
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetFlVirtualInterface == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+unsafe func SetFlVirtualInterface(Row: CPointer<Win32__impl_l1.MIB_FL_VIRTUAL_INTERFACE_ROWAbi>): UInt32 {
+    let call = CFunc<(CPointer<Win32__impl_l1.MIB_FL_VIRTUAL_INTERFACE_ROWAbi>) -> UInt32>(__windowsBindgen_SetFlVirtualInterfaceProc())
+    return unsafe { call(Row) }
+}
+
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetFlVirtualInterface == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_SetFlVirtualInterface(Row: CPointer<Win32__impl_l1.MIB_FL_VIRTUAL_INTERFACE_ROWAbi>): UInt32 {
+    return SetFlVirtualInterface(Row)
 }
 
 @When[Windows_Win32_NetworkManagement_IpHelper == "on"]

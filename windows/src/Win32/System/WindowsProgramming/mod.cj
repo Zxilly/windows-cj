@@ -4,17 +4,15 @@
 package windows.Win32.System.WindowsProgramming
 
 import std.collection.*
+import windows_libloading
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_polyfill.{unionReadUInt32, unionReadUInt64, unionWriteUInt32, unionWriteUInt64}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-@When[Windows_Win32_System_Registry == "on"]
 import windows.Win32.System.Registry as Win32_System_Registry
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
@@ -5912,189 +5910,1011 @@ public struct TDI_TL_IO_CONTROL_ENDPOINT__Anonymous_e__Union {
     public init() {}
 }
 
-@When[ADVAPI32 == "on"]
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVAPI32 == "on" && Windows_Win32_System_WindowsProgramming_GetCurrentHwProfileA == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func GetCurrentHwProfileA(lpHwProfileInfo: CPointer<HW_PROFILE_INFOAAbi>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVAPI32 == "on" && Windows_Win32_System_WindowsProgramming_GetCurrentHwProfileA == "on"]
+public unsafe func Windows_GetCurrentHwProfileA(lpHwProfileInfo: CPointer<HW_PROFILE_INFOAAbi>): Int32 {
+    return GetCurrentHwProfileA(lpHwProfileInfo)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVAPI32 == "on" && Windows_Win32_System_WindowsProgramming_GetCurrentHwProfileW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetCurrentHwProfileW(lpHwProfileInfo: CPointer<HW_PROFILE_INFOWAbi>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVAPI32 == "on" && Windows_Win32_System_WindowsProgramming_GetCurrentHwProfileW == "on"]
+public unsafe func Windows_GetCurrentHwProfileW(lpHwProfileInfo: CPointer<HW_PROFILE_INFOWAbi>): Int32 {
+    return GetCurrentHwProfileW(lpHwProfileInfo)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVAPI32 == "on" && Windows_Win32_System_WindowsProgramming_GetUserNameA == "on"]
+foreign {
     // param-hint: lpBuffer len=param[1] optional
     // pinvoke-hint: SetLastError
     func GetUserNameA(lpBuffer: CPointer<UInt8>, pcbBuffer: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVAPI32 == "on" && Windows_Win32_System_WindowsProgramming_GetUserNameA == "on"]
+public unsafe func Windows_GetUserNameA(lpBuffer: CPointer<UInt8>, pcbBuffer: CPointer<UInt32>): Int32 {
+    return GetUserNameA(lpBuffer, pcbBuffer)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVAPI32 == "on" && Windows_Win32_System_WindowsProgramming_GetUserNameW == "on"]
+foreign {
     // param-hint: lpBuffer len=param[1] optional
     // pinvoke-hint: SetLastError
     func GetUserNameW(lpBuffer: CPointer<UInt16>, pcbBuffer: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVAPI32 == "on" && Windows_Win32_System_WindowsProgramming_GetUserNameW == "on"]
+public unsafe func Windows_GetUserNameW(lpBuffer: CPointer<UInt16>, pcbBuffer: CPointer<UInt32>): Int32 {
+    return GetUserNameW(lpBuffer, pcbBuffer)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVAPI32 == "on" && Windows_Win32_System_WindowsProgramming_IsTokenUntrusted == "on"]
+foreign {
     func IsTokenUntrusted(TokenHandle: CPointer<Unit>): Int32
 }
 
-@When[ADVPACK == "on"]
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVAPI32 == "on" && Windows_Win32_System_WindowsProgramming_IsTokenUntrusted == "on"]
+public unsafe func Windows_IsTokenUntrusted(TokenHandle: CPointer<Unit>): Int32 {
+    return IsTokenUntrusted(TokenHandle)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_AddDelBackupEntryA == "on"]
 foreign {
     // param-hint: lpcszFileList optional
     // param-hint: lpcszBackupDir optional
     // param-hint: lpcszBaseName optional
     func AddDelBackupEntryA(lpcszFileList: CPointer<UInt8>, lpcszBackupDir: CPointer<UInt8>, lpcszBaseName: CPointer<UInt8>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_AddDelBackupEntryA == "on"]
+public unsafe func Windows_AddDelBackupEntryA(lpcszFileList: CPointer<UInt8>, lpcszBackupDir: CPointer<UInt8>, lpcszBaseName: CPointer<UInt8>, dwFlags: UInt32): Int32 {
+    return AddDelBackupEntryA(lpcszFileList, lpcszBackupDir, lpcszBaseName, dwFlags)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_AddDelBackupEntryW == "on"]
+foreign {
     // param-hint: lpcszFileList optional
     // param-hint: lpcszBackupDir optional
     // param-hint: lpcszBaseName optional
     func AddDelBackupEntryW(lpcszFileList: CPointer<UInt16>, lpcszBackupDir: CPointer<UInt16>, lpcszBaseName: CPointer<UInt16>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_AddDelBackupEntryW == "on"]
+public unsafe func Windows_AddDelBackupEntryW(lpcszFileList: CPointer<UInt16>, lpcszBackupDir: CPointer<UInt16>, lpcszBaseName: CPointer<UInt16>, dwFlags: UInt32): Int32 {
+    return AddDelBackupEntryW(lpcszFileList, lpcszBackupDir, lpcszBaseName, dwFlags)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_AdvInstallFileA == "on"]
+foreign {
     func AdvInstallFileA(hwnd: CPointer<Unit>, lpszSourceDir: CPointer<UInt8>, lpszSourceFile: CPointer<UInt8>, lpszDestDir: CPointer<UInt8>, lpszDestFile: CPointer<UInt8>, dwFlags: UInt32, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_AdvInstallFileA == "on"]
+public unsafe func Windows_AdvInstallFileA(hwnd: CPointer<Unit>, lpszSourceDir: CPointer<UInt8>, lpszSourceFile: CPointer<UInt8>, lpszDestDir: CPointer<UInt8>, lpszDestFile: CPointer<UInt8>, dwFlags: UInt32, dwReserved: UInt32): Int32 {
+    return AdvInstallFileA(hwnd, lpszSourceDir, lpszSourceFile, lpszDestDir, lpszDestFile, dwFlags, dwReserved)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_AdvInstallFileW == "on"]
+foreign {
     func AdvInstallFileW(hwnd: CPointer<Unit>, lpszSourceDir: CPointer<UInt16>, lpszSourceFile: CPointer<UInt16>, lpszDestDir: CPointer<UInt16>, lpszDestFile: CPointer<UInt16>, dwFlags: UInt32, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_AdvInstallFileW == "on"]
+public unsafe func Windows_AdvInstallFileW(hwnd: CPointer<Unit>, lpszSourceDir: CPointer<UInt16>, lpszSourceFile: CPointer<UInt16>, lpszDestDir: CPointer<UInt16>, lpszDestFile: CPointer<UInt16>, dwFlags: UInt32, dwReserved: UInt32): Int32 {
+    return AdvInstallFileW(hwnd, lpszSourceDir, lpszSourceFile, lpszDestDir, lpszDestFile, dwFlags, dwReserved)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_CloseINFEngine == "on"]
+foreign {
     func CloseINFEngine(hInf: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_CloseINFEngine == "on"]
+public unsafe func Windows_CloseINFEngine(hInf: CPointer<Unit>): Int32 {
+    return CloseINFEngine(hInf)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_DelNodeA == "on"]
+foreign {
     func DelNodeA(pszFileOrDirName: CPointer<UInt8>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_DelNodeA == "on"]
+public unsafe func Windows_DelNodeA(pszFileOrDirName: CPointer<UInt8>, dwFlags: UInt32): Int32 {
+    return DelNodeA(pszFileOrDirName, dwFlags)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_DelNodeRunDLL32W == "on"]
+foreign {
     func DelNodeRunDLL32W(hwnd: CPointer<Unit>, hInstance: CPointer<Unit>, pszParms: CPointer<UInt16>, nShow: Int32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_DelNodeRunDLL32W == "on"]
+public unsafe func Windows_DelNodeRunDLL32W(hwnd: CPointer<Unit>, hInstance: CPointer<Unit>, pszParms: CPointer<UInt16>, nShow: Int32): Int32 {
+    return DelNodeRunDLL32W(hwnd, hInstance, pszParms, nShow)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_DelNodeW == "on"]
+foreign {
     func DelNodeW(pszFileOrDirName: CPointer<UInt16>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_DelNodeW == "on"]
+public unsafe func Windows_DelNodeW(pszFileOrDirName: CPointer<UInt16>, dwFlags: UInt32): Int32 {
+    return DelNodeW(pszFileOrDirName, dwFlags)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_ExecuteCabA == "on"]
+foreign {
     func ExecuteCabA(hwnd: CPointer<Unit>, pCab: CPointer<CABINFOAAbi>, pReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_ExecuteCabA == "on"]
+public unsafe func Windows_ExecuteCabA(hwnd: CPointer<Unit>, pCab: CPointer<CABINFOAAbi>, pReserved: CPointer<Unit>): Int32 {
+    return ExecuteCabA(hwnd, pCab, pReserved)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_ExecuteCabW == "on"]
+foreign {
     func ExecuteCabW(hwnd: CPointer<Unit>, pCab: CPointer<CABINFOWAbi>, pReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_ExecuteCabW == "on"]
+public unsafe func Windows_ExecuteCabW(hwnd: CPointer<Unit>, pCab: CPointer<CABINFOWAbi>, pReserved: CPointer<Unit>): Int32 {
+    return ExecuteCabW(hwnd, pCab, pReserved)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_ExtractFilesA == "on"]
+foreign {
     func ExtractFilesA(pszCabName: CPointer<UInt8>, pszExpandDir: CPointer<UInt8>, dwFlags: UInt32, pszFileList: CPointer<UInt8>, lpReserved: CPointer<Unit>, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_ExtractFilesA == "on"]
+public unsafe func Windows_ExtractFilesA(pszCabName: CPointer<UInt8>, pszExpandDir: CPointer<UInt8>, dwFlags: UInt32, pszFileList: CPointer<UInt8>, lpReserved: CPointer<Unit>, dwReserved: UInt32): Int32 {
+    return ExtractFilesA(pszCabName, pszExpandDir, dwFlags, pszFileList, lpReserved, dwReserved)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_ExtractFilesW == "on"]
+foreign {
     func ExtractFilesW(pszCabName: CPointer<UInt16>, pszExpandDir: CPointer<UInt16>, dwFlags: UInt32, pszFileList: CPointer<UInt16>, lpReserved: CPointer<Unit>, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_ExtractFilesW == "on"]
+public unsafe func Windows_ExtractFilesW(pszCabName: CPointer<UInt16>, pszExpandDir: CPointer<UInt16>, dwFlags: UInt32, pszFileList: CPointer<UInt16>, lpReserved: CPointer<Unit>, dwReserved: UInt32): Int32 {
+    return ExtractFilesW(pszCabName, pszExpandDir, dwFlags, pszFileList, lpReserved, dwReserved)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_FileSaveMarkNotExistA == "on"]
+foreign {
     // param-hint: lpFileList optional
     // param-hint: lpDir optional
     // param-hint: lpBaseName optional
     func FileSaveMarkNotExistA(lpFileList: CPointer<UInt8>, lpDir: CPointer<UInt8>, lpBaseName: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_FileSaveMarkNotExistA == "on"]
+public unsafe func Windows_FileSaveMarkNotExistA(lpFileList: CPointer<UInt8>, lpDir: CPointer<UInt8>, lpBaseName: CPointer<UInt8>): Int32 {
+    return FileSaveMarkNotExistA(lpFileList, lpDir, lpBaseName)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_FileSaveMarkNotExistW == "on"]
+foreign {
     // param-hint: lpFileList optional
     // param-hint: lpDir optional
     // param-hint: lpBaseName optional
     func FileSaveMarkNotExistW(lpFileList: CPointer<UInt16>, lpDir: CPointer<UInt16>, lpBaseName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_FileSaveMarkNotExistW == "on"]
+public unsafe func Windows_FileSaveMarkNotExistW(lpFileList: CPointer<UInt16>, lpDir: CPointer<UInt16>, lpBaseName: CPointer<UInt16>): Int32 {
+    return FileSaveMarkNotExistW(lpFileList, lpDir, lpBaseName)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_FileSaveRestoreOnINFA == "on"]
+foreign {
     func FileSaveRestoreOnINFA(hWnd: CPointer<Unit>, pszTitle: CPointer<UInt8>, pszINF: CPointer<UInt8>, pszSection: CPointer<UInt8>, pszBackupDir: CPointer<UInt8>, pszBaseBackupFile: CPointer<UInt8>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_FileSaveRestoreOnINFA == "on"]
+public unsafe func Windows_FileSaveRestoreOnINFA(hWnd: CPointer<Unit>, pszTitle: CPointer<UInt8>, pszINF: CPointer<UInt8>, pszSection: CPointer<UInt8>, pszBackupDir: CPointer<UInt8>, pszBaseBackupFile: CPointer<UInt8>, dwFlags: UInt32): Int32 {
+    return FileSaveRestoreOnINFA(hWnd, pszTitle, pszINF, pszSection, pszBackupDir, pszBaseBackupFile, dwFlags)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_FileSaveRestoreOnINFW == "on"]
+foreign {
     func FileSaveRestoreOnINFW(hWnd: CPointer<Unit>, pszTitle: CPointer<UInt16>, pszINF: CPointer<UInt16>, pszSection: CPointer<UInt16>, pszBackupDir: CPointer<UInt16>, pszBaseBackupFile: CPointer<UInt16>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_FileSaveRestoreOnINFW == "on"]
+public unsafe func Windows_FileSaveRestoreOnINFW(hWnd: CPointer<Unit>, pszTitle: CPointer<UInt16>, pszINF: CPointer<UInt16>, pszSection: CPointer<UInt16>, pszBackupDir: CPointer<UInt16>, pszBaseBackupFile: CPointer<UInt16>, dwFlags: UInt32): Int32 {
+    return FileSaveRestoreOnINFW(hWnd, pszTitle, pszINF, pszSection, pszBackupDir, pszBaseBackupFile, dwFlags)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_FileSaveRestoreW == "on"]
+foreign {
     // param-hint: lpFileList optional
     func FileSaveRestoreW(hDlg: CPointer<Unit>, lpFileList: CPointer<UInt16>, lpDir: CPointer<UInt16>, lpBaseName: CPointer<UInt16>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_FileSaveRestoreW == "on"]
+public unsafe func Windows_FileSaveRestoreW(hDlg: CPointer<Unit>, lpFileList: CPointer<UInt16>, lpDir: CPointer<UInt16>, lpBaseName: CPointer<UInt16>, dwFlags: UInt32): Int32 {
+    return FileSaveRestoreW(hDlg, lpFileList, lpDir, lpBaseName, dwFlags)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_GetVersionFromFileA == "on"]
+foreign {
     func GetVersionFromFileA(lpszFilename: CPointer<UInt8>, pdwMSVer: CPointer<UInt32>, pdwLSVer: CPointer<UInt32>, bVersion: Int32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_GetVersionFromFileA == "on"]
+public unsafe func Windows_GetVersionFromFileA(lpszFilename: CPointer<UInt8>, pdwMSVer: CPointer<UInt32>, pdwLSVer: CPointer<UInt32>, bVersion: Int32): Int32 {
+    return GetVersionFromFileA(lpszFilename, pdwMSVer, pdwLSVer, bVersion)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_GetVersionFromFileExA == "on"]
+foreign {
     func GetVersionFromFileExA(lpszFilename: CPointer<UInt8>, pdwMSVer: CPointer<UInt32>, pdwLSVer: CPointer<UInt32>, bVersion: Int32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_GetVersionFromFileExA == "on"]
+public unsafe func Windows_GetVersionFromFileExA(lpszFilename: CPointer<UInt8>, pdwMSVer: CPointer<UInt32>, pdwLSVer: CPointer<UInt32>, bVersion: Int32): Int32 {
+    return GetVersionFromFileExA(lpszFilename, pdwMSVer, pdwLSVer, bVersion)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_GetVersionFromFileExW == "on"]
+foreign {
     func GetVersionFromFileExW(lpszFilename: CPointer<UInt16>, pdwMSVer: CPointer<UInt32>, pdwLSVer: CPointer<UInt32>, bVersion: Int32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_GetVersionFromFileExW == "on"]
+public unsafe func Windows_GetVersionFromFileExW(lpszFilename: CPointer<UInt16>, pdwMSVer: CPointer<UInt32>, pdwLSVer: CPointer<UInt32>, bVersion: Int32): Int32 {
+    return GetVersionFromFileExW(lpszFilename, pdwMSVer, pdwLSVer, bVersion)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_GetVersionFromFileW == "on"]
+foreign {
     func GetVersionFromFileW(lpszFilename: CPointer<UInt16>, pdwMSVer: CPointer<UInt32>, pdwLSVer: CPointer<UInt32>, bVersion: Int32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_GetVersionFromFileW == "on"]
+public unsafe func Windows_GetVersionFromFileW(lpszFilename: CPointer<UInt16>, pdwMSVer: CPointer<UInt32>, pdwLSVer: CPointer<UInt32>, bVersion: Int32): Int32 {
+    return GetVersionFromFileW(lpszFilename, pdwMSVer, pdwLSVer, bVersion)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_IsNTAdmin == "on"]
+foreign {
     func IsNTAdmin(dwReserved: UInt32, lpdwReserved: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_IsNTAdmin == "on"]
+public unsafe func Windows_IsNTAdmin(dwReserved: UInt32, lpdwReserved: CPointer<UInt32>): Int32 {
+    return IsNTAdmin(dwReserved, lpdwReserved)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_LaunchINFSectionExW == "on"]
+foreign {
     // param-hint: hwnd optional
     // param-hint: hInstance optional
     func LaunchINFSectionExW(hwnd: CPointer<Unit>, hInstance: CPointer<Unit>, pszParms: CPointer<UInt16>, nShow: Int32): Int32
-    func LaunchINFSectionW(hwndOwner: CPointer<Unit>, hInstance: CPointer<Unit>, pszParams: CPointer<UInt16>, nShow: Int32): Int32
-    func NeedReboot(dwRebootCheck: UInt32): Int32
-    func NeedRebootInit(): UInt32
-    func OpenINFEngineA(pszInfFilename: CPointer<UInt8>, pszInstallSection: CPointer<UInt8>, dwFlags: UInt32, phInf: CPointer<CPointer<Unit>>, pvReserved: CPointer<Unit>): Int32
-    func OpenINFEngineW(pszInfFilename: CPointer<UInt16>, pszInstallSection: CPointer<UInt16>, dwFlags: UInt32, phInf: CPointer<CPointer<Unit>>, pvReserved: CPointer<Unit>): Int32
-    func RebootCheckOnInstallA(hwnd: CPointer<Unit>, pszINF: CPointer<UInt8>, pszSec: CPointer<UInt8>, dwReserved: UInt32): Int32
-    func RebootCheckOnInstallW(hwnd: CPointer<Unit>, pszINF: CPointer<UInt16>, pszSec: CPointer<UInt16>, dwReserved: UInt32): Int32
-    func RegInstallA(hmod: CPointer<Unit>, pszSection: CPointer<UInt8>, pstTable: CPointer<STRTABLEAAbi>): Int32
-    func RegInstallW(hmod: CPointer<Unit>, pszSection: CPointer<UInt16>, pstTable: CPointer<STRTABLEWAbi>): Int32
-    func RunSetupCommandA(hWnd: CPointer<Unit>, szCmdName: CPointer<UInt8>, szInfSection: CPointer<UInt8>, szDir: CPointer<UInt8>, lpszTitle: CPointer<UInt8>, phEXE: CPointer<CPointer<Unit>>, dwFlags: UInt32, pvReserved: CPointer<Unit>): Int32
-    func RunSetupCommandW(hWnd: CPointer<Unit>, szCmdName: CPointer<UInt16>, szInfSection: CPointer<UInt16>, szDir: CPointer<UInt16>, lpszTitle: CPointer<UInt16>, phEXE: CPointer<CPointer<Unit>>, dwFlags: UInt32, pvReserved: CPointer<Unit>): Int32
-    func SetPerUserSecValuesA(pPerUser: CPointer<PERUSERSECTIONAAbi>): Int32
-    func SetPerUserSecValuesW(pPerUser: CPointer<PERUSERSECTIONWAbi>): Int32
-    // param-hint: pszBuffer len=param[5] optional
-    // param-hint: pvReserved optional reserved
-    func TranslateInfStringA(pszInfFilename: CPointer<UInt8>, pszInstallSection: CPointer<UInt8>, pszTranslateSection: CPointer<UInt8>, pszTranslateKey: CPointer<UInt8>, pszBuffer: CPointer<UInt8>, cchBuffer: UInt32, pdwRequiredSize: CPointer<UInt32>, pvReserved: CPointer<Unit>): Int32
-    // param-hint: pszBuffer len=param[5]
-    // param-hint: pvReserved optional reserved
-    func TranslateInfStringExA(hInf: CPointer<Unit>, pszInfFilename: CPointer<UInt8>, pszTranslateSection: CPointer<UInt8>, pszTranslateKey: CPointer<UInt8>, pszBuffer: CPointer<UInt8>, dwBufferSize: UInt32, pdwRequiredSize: CPointer<UInt32>, pvReserved: CPointer<Unit>): Int32
-    // param-hint: pszBuffer len=param[5]
-    // param-hint: pvReserved optional reserved
-    func TranslateInfStringExW(hInf: CPointer<Unit>, pszInfFilename: CPointer<UInt16>, pszTranslateSection: CPointer<UInt16>, pszTranslateKey: CPointer<UInt16>, pszBuffer: CPointer<UInt16>, dwBufferSize: UInt32, pdwRequiredSize: CPointer<UInt32>, pvReserved: CPointer<Unit>): Int32
-    // param-hint: pszBuffer len=param[5] optional
-    // param-hint: pvReserved optional reserved
-    func TranslateInfStringW(pszInfFilename: CPointer<UInt16>, pszInstallSection: CPointer<UInt16>, pszTranslateSection: CPointer<UInt16>, pszTranslateKey: CPointer<UInt16>, pszBuffer: CPointer<UInt16>, cchBuffer: UInt32, pdwRequiredSize: CPointer<UInt32>, pvReserved: CPointer<Unit>): Int32
-    func UserInstStubWrapperA(hwnd: CPointer<Unit>, hInstance: CPointer<Unit>, pszParms: CPointer<UInt8>, nShow: Int32): Int32
-    func UserInstStubWrapperW(hwnd: CPointer<Unit>, hInstance: CPointer<Unit>, pszParms: CPointer<UInt16>, nShow: Int32): Int32
-    func UserUnInstStubWrapperA(hwnd: CPointer<Unit>, hInstance: CPointer<Unit>, pszParms: CPointer<UInt8>, nShow: Int32): Int32
-    func UserUnInstStubWrapperW(hwnd: CPointer<Unit>, hInstance: CPointer<Unit>, pszParms: CPointer<UInt16>, nShow: Int32): Int32
 }
 
-@When[ADVPACK == "on" && Windows_Win32_System_Registry == "on"]
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_LaunchINFSectionExW == "on"]
+public unsafe func Windows_LaunchINFSectionExW(hwnd: CPointer<Unit>, hInstance: CPointer<Unit>, pszParms: CPointer<UInt16>, nShow: Int32): Int32 {
+    return LaunchINFSectionExW(hwnd, hInstance, pszParms, nShow)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_LaunchINFSectionW == "on"]
+foreign {
+    func LaunchINFSectionW(hwndOwner: CPointer<Unit>, hInstance: CPointer<Unit>, pszParams: CPointer<UInt16>, nShow: Int32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_LaunchINFSectionW == "on"]
+public unsafe func Windows_LaunchINFSectionW(hwndOwner: CPointer<Unit>, hInstance: CPointer<Unit>, pszParams: CPointer<UInt16>, nShow: Int32): Int32 {
+    return LaunchINFSectionW(hwndOwner, hInstance, pszParams, nShow)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_NeedReboot == "on"]
+foreign {
+    func NeedReboot(dwRebootCheck: UInt32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_NeedReboot == "on"]
+public unsafe func Windows_NeedReboot(dwRebootCheck: UInt32): Int32 {
+    return NeedReboot(dwRebootCheck)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_NeedRebootInit == "on"]
+foreign {
+    func NeedRebootInit(): UInt32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_NeedRebootInit == "on"]
+public unsafe func Windows_NeedRebootInit(): UInt32 {
+    return NeedRebootInit()
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_OpenINFEngineA == "on"]
+foreign {
+    func OpenINFEngineA(pszInfFilename: CPointer<UInt8>, pszInstallSection: CPointer<UInt8>, dwFlags: UInt32, phInf: CPointer<CPointer<Unit>>, pvReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_OpenINFEngineA == "on"]
+public unsafe func Windows_OpenINFEngineA(pszInfFilename: CPointer<UInt8>, pszInstallSection: CPointer<UInt8>, dwFlags: UInt32, phInf: CPointer<CPointer<Unit>>, pvReserved: CPointer<Unit>): Int32 {
+    return OpenINFEngineA(pszInfFilename, pszInstallSection, dwFlags, phInf, pvReserved)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_OpenINFEngineW == "on"]
+foreign {
+    func OpenINFEngineW(pszInfFilename: CPointer<UInt16>, pszInstallSection: CPointer<UInt16>, dwFlags: UInt32, phInf: CPointer<CPointer<Unit>>, pvReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_OpenINFEngineW == "on"]
+public unsafe func Windows_OpenINFEngineW(pszInfFilename: CPointer<UInt16>, pszInstallSection: CPointer<UInt16>, dwFlags: UInt32, phInf: CPointer<CPointer<Unit>>, pvReserved: CPointer<Unit>): Int32 {
+    return OpenINFEngineW(pszInfFilename, pszInstallSection, dwFlags, phInf, pvReserved)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_RebootCheckOnInstallA == "on"]
+foreign {
+    func RebootCheckOnInstallA(hwnd: CPointer<Unit>, pszINF: CPointer<UInt8>, pszSec: CPointer<UInt8>, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_RebootCheckOnInstallA == "on"]
+public unsafe func Windows_RebootCheckOnInstallA(hwnd: CPointer<Unit>, pszINF: CPointer<UInt8>, pszSec: CPointer<UInt8>, dwReserved: UInt32): Int32 {
+    return RebootCheckOnInstallA(hwnd, pszINF, pszSec, dwReserved)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_RebootCheckOnInstallW == "on"]
+foreign {
+    func RebootCheckOnInstallW(hwnd: CPointer<Unit>, pszINF: CPointer<UInt16>, pszSec: CPointer<UInt16>, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_RebootCheckOnInstallW == "on"]
+public unsafe func Windows_RebootCheckOnInstallW(hwnd: CPointer<Unit>, pszINF: CPointer<UInt16>, pszSec: CPointer<UInt16>, dwReserved: UInt32): Int32 {
+    return RebootCheckOnInstallW(hwnd, pszINF, pszSec, dwReserved)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_RegInstallA == "on"]
+foreign {
+    func RegInstallA(hmod: CPointer<Unit>, pszSection: CPointer<UInt8>, pstTable: CPointer<STRTABLEAAbi>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_RegInstallA == "on"]
+public unsafe func Windows_RegInstallA(hmod: CPointer<Unit>, pszSection: CPointer<UInt8>, pstTable: CPointer<STRTABLEAAbi>): Int32 {
+    return RegInstallA(hmod, pszSection, pstTable)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_RegInstallW == "on"]
+foreign {
+    func RegInstallW(hmod: CPointer<Unit>, pszSection: CPointer<UInt16>, pstTable: CPointer<STRTABLEWAbi>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_RegInstallW == "on"]
+public unsafe func Windows_RegInstallW(hmod: CPointer<Unit>, pszSection: CPointer<UInt16>, pstTable: CPointer<STRTABLEWAbi>): Int32 {
+    return RegInstallW(hmod, pszSection, pstTable)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_RegRestoreAllA == "on" && Windows_Win32_System_Registry == "on"]
 foreign {
     // param-hint: hWnd optional
     // param-hint: pszTitleString optional
     func RegRestoreAllA(hWnd: CPointer<Unit>, pszTitleString: CPointer<UInt8>, hkBckupKey: Win32_System_Registry.HKEY): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_RegRestoreAllA == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_RegRestoreAllA(hWnd: CPointer<Unit>, pszTitleString: CPointer<UInt8>, hkBckupKey: Win32_System_Registry.HKEY): Int32 {
+    return RegRestoreAllA(hWnd, pszTitleString, hkBckupKey)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_RegRestoreAllW == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: hWnd optional
     // param-hint: pszTitleString optional
     func RegRestoreAllW(hWnd: CPointer<Unit>, pszTitleString: CPointer<UInt16>, hkBckupKey: Win32_System_Registry.HKEY): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_RegRestoreAllW == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_RegRestoreAllW(hWnd: CPointer<Unit>, pszTitleString: CPointer<UInt16>, hkBckupKey: Win32_System_Registry.HKEY): Int32 {
+    return RegRestoreAllW(hWnd, pszTitleString, hkBckupKey)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_RegSaveRestoreA == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     func RegSaveRestoreA(hWnd: CPointer<Unit>, pszTitleString: CPointer<UInt8>, hkBckupKey: Win32_System_Registry.HKEY, pcszRootKey: CPointer<UInt8>, pcszSubKey: CPointer<UInt8>, pcszValueName: CPointer<UInt8>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_RegSaveRestoreA == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_RegSaveRestoreA(hWnd: CPointer<Unit>, pszTitleString: CPointer<UInt8>, hkBckupKey: Win32_System_Registry.HKEY, pcszRootKey: CPointer<UInt8>, pcszSubKey: CPointer<UInt8>, pcszValueName: CPointer<UInt8>, dwFlags: UInt32): Int32 {
+    return RegSaveRestoreA(hWnd, pszTitleString, hkBckupKey, pcszRootKey, pcszSubKey, pcszValueName, dwFlags)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_RegSaveRestoreOnINFA == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     func RegSaveRestoreOnINFA(hWnd: CPointer<Unit>, pszTitle: CPointer<UInt8>, pszINF: CPointer<UInt8>, pszSection: CPointer<UInt8>, hHKLMBackKey: Win32_System_Registry.HKEY, hHKCUBackKey: Win32_System_Registry.HKEY, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_RegSaveRestoreOnINFA == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_RegSaveRestoreOnINFA(hWnd: CPointer<Unit>, pszTitle: CPointer<UInt8>, pszINF: CPointer<UInt8>, pszSection: CPointer<UInt8>, hHKLMBackKey: Win32_System_Registry.HKEY, hHKCUBackKey: Win32_System_Registry.HKEY, dwFlags: UInt32): Int32 {
+    return RegSaveRestoreOnINFA(hWnd, pszTitle, pszINF, pszSection, hHKLMBackKey, hHKCUBackKey, dwFlags)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_RegSaveRestoreOnINFW == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     func RegSaveRestoreOnINFW(hWnd: CPointer<Unit>, pszTitle: CPointer<UInt16>, pszINF: CPointer<UInt16>, pszSection: CPointer<UInt16>, hHKLMBackKey: Win32_System_Registry.HKEY, hHKCUBackKey: Win32_System_Registry.HKEY, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_RegSaveRestoreOnINFW == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_RegSaveRestoreOnINFW(hWnd: CPointer<Unit>, pszTitle: CPointer<UInt16>, pszINF: CPointer<UInt16>, pszSection: CPointer<UInt16>, hHKLMBackKey: Win32_System_Registry.HKEY, hHKCUBackKey: Win32_System_Registry.HKEY, dwFlags: UInt32): Int32 {
+    return RegSaveRestoreOnINFW(hWnd, pszTitle, pszINF, pszSection, hHKLMBackKey, hHKCUBackKey, dwFlags)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_RegSaveRestoreW == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     func RegSaveRestoreW(hWnd: CPointer<Unit>, pszTitleString: CPointer<UInt16>, hkBckupKey: Win32_System_Registry.HKEY, pcszRootKey: CPointer<UInt16>, pcszSubKey: CPointer<UInt16>, pcszValueName: CPointer<UInt16>, dwFlags: UInt32): Int32
 }
 
-@When[APPHELP == "on"]
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_RegSaveRestoreW == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_RegSaveRestoreW(hWnd: CPointer<Unit>, pszTitleString: CPointer<UInt16>, hkBckupKey: Win32_System_Registry.HKEY, pcszRootKey: CPointer<UInt16>, pcszSubKey: CPointer<UInt16>, pcszValueName: CPointer<UInt16>, dwFlags: UInt32): Int32 {
+    return RegSaveRestoreW(hWnd, pszTitleString, hkBckupKey, pcszRootKey, pcszSubKey, pcszValueName, dwFlags)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_RunSetupCommandA == "on"]
+foreign {
+    func RunSetupCommandA(hWnd: CPointer<Unit>, szCmdName: CPointer<UInt8>, szInfSection: CPointer<UInt8>, szDir: CPointer<UInt8>, lpszTitle: CPointer<UInt8>, phEXE: CPointer<CPointer<Unit>>, dwFlags: UInt32, pvReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_RunSetupCommandA == "on"]
+public unsafe func Windows_RunSetupCommandA(hWnd: CPointer<Unit>, szCmdName: CPointer<UInt8>, szInfSection: CPointer<UInt8>, szDir: CPointer<UInt8>, lpszTitle: CPointer<UInt8>, phEXE: CPointer<CPointer<Unit>>, dwFlags: UInt32, pvReserved: CPointer<Unit>): Int32 {
+    return RunSetupCommandA(hWnd, szCmdName, szInfSection, szDir, lpszTitle, phEXE, dwFlags, pvReserved)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_RunSetupCommandW == "on"]
+foreign {
+    func RunSetupCommandW(hWnd: CPointer<Unit>, szCmdName: CPointer<UInt16>, szInfSection: CPointer<UInt16>, szDir: CPointer<UInt16>, lpszTitle: CPointer<UInt16>, phEXE: CPointer<CPointer<Unit>>, dwFlags: UInt32, pvReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_RunSetupCommandW == "on"]
+public unsafe func Windows_RunSetupCommandW(hWnd: CPointer<Unit>, szCmdName: CPointer<UInt16>, szInfSection: CPointer<UInt16>, szDir: CPointer<UInt16>, lpszTitle: CPointer<UInt16>, phEXE: CPointer<CPointer<Unit>>, dwFlags: UInt32, pvReserved: CPointer<Unit>): Int32 {
+    return RunSetupCommandW(hWnd, szCmdName, szInfSection, szDir, lpszTitle, phEXE, dwFlags, pvReserved)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_SetPerUserSecValuesA == "on"]
+foreign {
+    func SetPerUserSecValuesA(pPerUser: CPointer<PERUSERSECTIONAAbi>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_SetPerUserSecValuesA == "on"]
+public unsafe func Windows_SetPerUserSecValuesA(pPerUser: CPointer<PERUSERSECTIONAAbi>): Int32 {
+    return SetPerUserSecValuesA(pPerUser)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_SetPerUserSecValuesW == "on"]
+foreign {
+    func SetPerUserSecValuesW(pPerUser: CPointer<PERUSERSECTIONWAbi>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_SetPerUserSecValuesW == "on"]
+public unsafe func Windows_SetPerUserSecValuesW(pPerUser: CPointer<PERUSERSECTIONWAbi>): Int32 {
+    return SetPerUserSecValuesW(pPerUser)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_TranslateInfStringA == "on"]
+foreign {
+    // param-hint: pszBuffer len=param[5] optional
+    // param-hint: pvReserved optional reserved
+    func TranslateInfStringA(pszInfFilename: CPointer<UInt8>, pszInstallSection: CPointer<UInt8>, pszTranslateSection: CPointer<UInt8>, pszTranslateKey: CPointer<UInt8>, pszBuffer: CPointer<UInt8>, cchBuffer: UInt32, pdwRequiredSize: CPointer<UInt32>, pvReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_TranslateInfStringA == "on"]
+public unsafe func Windows_TranslateInfStringA(pszInfFilename: CPointer<UInt8>, pszInstallSection: CPointer<UInt8>, pszTranslateSection: CPointer<UInt8>, pszTranslateKey: CPointer<UInt8>, pszBuffer: CPointer<UInt8>, cchBuffer: UInt32, pdwRequiredSize: CPointer<UInt32>, pvReserved: CPointer<Unit>): Int32 {
+    return TranslateInfStringA(pszInfFilename, pszInstallSection, pszTranslateSection, pszTranslateKey, pszBuffer, cchBuffer, pdwRequiredSize, pvReserved)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_TranslateInfStringExA == "on"]
+foreign {
+    // param-hint: pszBuffer len=param[5]
+    // param-hint: pvReserved optional reserved
+    func TranslateInfStringExA(hInf: CPointer<Unit>, pszInfFilename: CPointer<UInt8>, pszTranslateSection: CPointer<UInt8>, pszTranslateKey: CPointer<UInt8>, pszBuffer: CPointer<UInt8>, dwBufferSize: UInt32, pdwRequiredSize: CPointer<UInt32>, pvReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_TranslateInfStringExA == "on"]
+public unsafe func Windows_TranslateInfStringExA(hInf: CPointer<Unit>, pszInfFilename: CPointer<UInt8>, pszTranslateSection: CPointer<UInt8>, pszTranslateKey: CPointer<UInt8>, pszBuffer: CPointer<UInt8>, dwBufferSize: UInt32, pdwRequiredSize: CPointer<UInt32>, pvReserved: CPointer<Unit>): Int32 {
+    return TranslateInfStringExA(hInf, pszInfFilename, pszTranslateSection, pszTranslateKey, pszBuffer, dwBufferSize, pdwRequiredSize, pvReserved)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_TranslateInfStringExW == "on"]
+foreign {
+    // param-hint: pszBuffer len=param[5]
+    // param-hint: pvReserved optional reserved
+    func TranslateInfStringExW(hInf: CPointer<Unit>, pszInfFilename: CPointer<UInt16>, pszTranslateSection: CPointer<UInt16>, pszTranslateKey: CPointer<UInt16>, pszBuffer: CPointer<UInt16>, dwBufferSize: UInt32, pdwRequiredSize: CPointer<UInt32>, pvReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_TranslateInfStringExW == "on"]
+public unsafe func Windows_TranslateInfStringExW(hInf: CPointer<Unit>, pszInfFilename: CPointer<UInt16>, pszTranslateSection: CPointer<UInt16>, pszTranslateKey: CPointer<UInt16>, pszBuffer: CPointer<UInt16>, dwBufferSize: UInt32, pdwRequiredSize: CPointer<UInt32>, pvReserved: CPointer<Unit>): Int32 {
+    return TranslateInfStringExW(hInf, pszInfFilename, pszTranslateSection, pszTranslateKey, pszBuffer, dwBufferSize, pdwRequiredSize, pvReserved)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_TranslateInfStringW == "on"]
+foreign {
+    // param-hint: pszBuffer len=param[5] optional
+    // param-hint: pvReserved optional reserved
+    func TranslateInfStringW(pszInfFilename: CPointer<UInt16>, pszInstallSection: CPointer<UInt16>, pszTranslateSection: CPointer<UInt16>, pszTranslateKey: CPointer<UInt16>, pszBuffer: CPointer<UInt16>, cchBuffer: UInt32, pdwRequiredSize: CPointer<UInt32>, pvReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_TranslateInfStringW == "on"]
+public unsafe func Windows_TranslateInfStringW(pszInfFilename: CPointer<UInt16>, pszInstallSection: CPointer<UInt16>, pszTranslateSection: CPointer<UInt16>, pszTranslateKey: CPointer<UInt16>, pszBuffer: CPointer<UInt16>, cchBuffer: UInt32, pdwRequiredSize: CPointer<UInt32>, pvReserved: CPointer<Unit>): Int32 {
+    return TranslateInfStringW(pszInfFilename, pszInstallSection, pszTranslateSection, pszTranslateKey, pszBuffer, cchBuffer, pdwRequiredSize, pvReserved)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_UserInstStubWrapperA == "on"]
+foreign {
+    func UserInstStubWrapperA(hwnd: CPointer<Unit>, hInstance: CPointer<Unit>, pszParms: CPointer<UInt8>, nShow: Int32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_UserInstStubWrapperA == "on"]
+public unsafe func Windows_UserInstStubWrapperA(hwnd: CPointer<Unit>, hInstance: CPointer<Unit>, pszParms: CPointer<UInt8>, nShow: Int32): Int32 {
+    return UserInstStubWrapperA(hwnd, hInstance, pszParms, nShow)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_UserInstStubWrapperW == "on"]
+foreign {
+    func UserInstStubWrapperW(hwnd: CPointer<Unit>, hInstance: CPointer<Unit>, pszParms: CPointer<UInt16>, nShow: Int32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_UserInstStubWrapperW == "on"]
+public unsafe func Windows_UserInstStubWrapperW(hwnd: CPointer<Unit>, hInstance: CPointer<Unit>, pszParms: CPointer<UInt16>, nShow: Int32): Int32 {
+    return UserInstStubWrapperW(hwnd, hInstance, pszParms, nShow)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_UserUnInstStubWrapperA == "on"]
+foreign {
+    func UserUnInstStubWrapperA(hwnd: CPointer<Unit>, hInstance: CPointer<Unit>, pszParms: CPointer<UInt8>, nShow: Int32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_UserUnInstStubWrapperA == "on"]
+public unsafe func Windows_UserUnInstStubWrapperA(hwnd: CPointer<Unit>, hInstance: CPointer<Unit>, pszParms: CPointer<UInt8>, nShow: Int32): Int32 {
+    return UserUnInstStubWrapperA(hwnd, hInstance, pszParms, nShow)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_UserUnInstStubWrapperW == "on"]
+foreign {
+    func UserUnInstStubWrapperW(hwnd: CPointer<Unit>, hInstance: CPointer<Unit>, pszParms: CPointer<UInt16>, nShow: Int32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && ADVPACK == "on" && Windows_Win32_System_WindowsProgramming_UserUnInstStubWrapperW == "on"]
+public unsafe func Windows_UserUnInstStubWrapperW(hwnd: CPointer<Unit>, hInstance: CPointer<Unit>, pszParms: CPointer<UInt16>, nShow: Int32): Int32 {
+    return UserUnInstStubWrapperW(hwnd, hInstance, pszParms, nShow)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && APPHELP == "on" && Windows_Win32_System_WindowsProgramming_ApphelpCheckShellObject == "on"]
 foreign {
     func ApphelpCheckShellObject(ObjectCLSID: CPointer<GUID>, bShimIfNecessary: Int32, pullFlags: CPointer<UInt64>): Int32
 }
 
-@When[DCIMAN32 == "on"]
-foreign {
-    func DCIBeginAccess(pdci: CPointer<DCISURFACEINFOAbi>, x: Int32, y: Int32, dx: Int32, dy: Int32): Int32
-    func DCIDestroy(pdci: CPointer<DCISURFACEINFOAbi>): Unit
-    func DCIDraw(pdci: CPointer<DCIOFFSCREENAbi>): Int32
-    func DCIEndAccess(pdci: CPointer<DCISURFACEINFOAbi>): Unit
-    func DCISetDestination(pdci: CPointer<DCIOFFSCREENAbi>, dst: CPointer<Win32_Foundation.RECTAbi>, src: CPointer<Win32_Foundation.RECTAbi>): Int32
-    func WinWatchClose(hWW: HWINWATCH): Unit
-    func WinWatchDidStatusChange(hWW: HWINWATCH): Int32
-    func WinWatchNotify(hWW: HWINWATCH, NotifyCallback: WINWATCHNOTIFYPROC, NotifyParam: IntNative): Int32
-    func WinWatchOpen(hwnd: CPointer<Unit>): HWINWATCH
+@When[Windows_Win32_System_WindowsProgramming == "on" && APPHELP == "on" && Windows_Win32_System_WindowsProgramming_ApphelpCheckShellObject == "on"]
+public unsafe func Windows_ApphelpCheckShellObject(ObjectCLSID: CPointer<GUID>, bShimIfNecessary: Int32, pullFlags: CPointer<UInt64>): Int32 {
+    return ApphelpCheckShellObject(ObjectCLSID, bShimIfNecessary, pullFlags)
 }
 
-@When[DCIMAN32 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_DCIBeginAccess == "on"]
+foreign {
+    func DCIBeginAccess(pdci: CPointer<DCISURFACEINFOAbi>, x: Int32, y: Int32, dx: Int32, dy: Int32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_DCIBeginAccess == "on"]
+public unsafe func Windows_DCIBeginAccess(pdci: CPointer<DCISURFACEINFOAbi>, x: Int32, y: Int32, dx: Int32, dy: Int32): Int32 {
+    return DCIBeginAccess(pdci, x, y, dx, dy)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_DCICloseProvider == "on" && Windows_Win32_Graphics_Gdi == "on"]
 foreign {
     func DCICloseProvider(hdc: Win32_Graphics_Gdi.HDC): Unit
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_DCICloseProvider == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DCICloseProvider(hdc: Win32_Graphics_Gdi.HDC): Unit {
+    DCICloseProvider(hdc)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_DCICreateOffscreen == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func DCICreateOffscreen(hdc: Win32_Graphics_Gdi.HDC, dwCompression: UInt32, dwRedMask: UInt32, dwGreenMask: UInt32, dwBlueMask: UInt32, dwWidth: UInt32, dwHeight: UInt32, dwDCICaps: UInt32, dwBitCount: UInt32, lplpSurface: CPointer<CPointer<DCIOFFSCREENAbi>>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_DCICreateOffscreen == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DCICreateOffscreen(hdc: Win32_Graphics_Gdi.HDC, dwCompression: UInt32, dwRedMask: UInt32, dwGreenMask: UInt32, dwBlueMask: UInt32, dwWidth: UInt32, dwHeight: UInt32, dwDCICaps: UInt32, dwBitCount: UInt32, lplpSurface: CPointer<CPointer<DCIOFFSCREENAbi>>): Int32 {
+    return DCICreateOffscreen(hdc, dwCompression, dwRedMask, dwGreenMask, dwBlueMask, dwWidth, dwHeight, dwDCICaps, dwBitCount, lplpSurface)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_DCICreateOverlay == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func DCICreateOverlay(hdc: Win32_Graphics_Gdi.HDC, lpOffscreenSurf: CPointer<Unit>, lplpSurface: CPointer<CPointer<DCIOVERLAYAbi>>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_DCICreateOverlay == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DCICreateOverlay(hdc: Win32_Graphics_Gdi.HDC, lpOffscreenSurf: CPointer<Unit>, lplpSurface: CPointer<CPointer<DCIOVERLAYAbi>>): Int32 {
+    return DCICreateOverlay(hdc, lpOffscreenSurf, lplpSurface)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_DCICreatePrimary == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func DCICreatePrimary(hdc: Win32_Graphics_Gdi.HDC, lplpSurface: CPointer<CPointer<DCISURFACEINFOAbi>>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_DCICreatePrimary == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DCICreatePrimary(hdc: Win32_Graphics_Gdi.HDC, lplpSurface: CPointer<CPointer<DCISURFACEINFOAbi>>): Int32 {
+    return DCICreatePrimary(hdc, lplpSurface)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_DCIDestroy == "on"]
+foreign {
+    func DCIDestroy(pdci: CPointer<DCISURFACEINFOAbi>): Unit
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_DCIDestroy == "on"]
+public unsafe func Windows_DCIDestroy(pdci: CPointer<DCISURFACEINFOAbi>): Unit {
+    DCIDestroy(pdci)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_DCIDraw == "on"]
+foreign {
+    func DCIDraw(pdci: CPointer<DCIOFFSCREENAbi>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_DCIDraw == "on"]
+public unsafe func Windows_DCIDraw(pdci: CPointer<DCIOFFSCREENAbi>): Int32 {
+    return DCIDraw(pdci)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_DCIEndAccess == "on"]
+foreign {
+    func DCIEndAccess(pdci: CPointer<DCISURFACEINFOAbi>): Unit
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_DCIEndAccess == "on"]
+public unsafe func Windows_DCIEndAccess(pdci: CPointer<DCISURFACEINFOAbi>): Unit {
+    DCIEndAccess(pdci)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_DCIEnum == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func DCIEnum(hdc: Win32_Graphics_Gdi.HDC, lprDst: CPointer<Win32_Foundation.RECTAbi>, lprSrc: CPointer<Win32_Foundation.RECTAbi>, lpFnCallback: CPointer<Unit>, lpContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_DCIEnum == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DCIEnum(hdc: Win32_Graphics_Gdi.HDC, lprDst: CPointer<Win32_Foundation.RECTAbi>, lprSrc: CPointer<Win32_Foundation.RECTAbi>, lpFnCallback: CPointer<Unit>, lpContext: CPointer<Unit>): Int32 {
+    return DCIEnum(hdc, lprDst, lprSrc, lpFnCallback, lpContext)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_DCIOpenProvider == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func DCIOpenProvider(): Win32_Graphics_Gdi.HDC
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_DCIOpenProvider == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DCIOpenProvider(): Win32_Graphics_Gdi.HDC {
+    return DCIOpenProvider()
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_DCISetClipList == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func DCISetClipList(pdci: CPointer<DCIOFFSCREENAbi>, prd: CPointer<Win32_Graphics_Gdi.RGNDATAAbi>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_DCISetClipList == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DCISetClipList(pdci: CPointer<DCIOFFSCREENAbi>, prd: CPointer<Win32_Graphics_Gdi.RGNDATAAbi>): Int32 {
+    return DCISetClipList(pdci, prd)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_DCISetDestination == "on"]
+foreign {
+    func DCISetDestination(pdci: CPointer<DCIOFFSCREENAbi>, dst: CPointer<Win32_Foundation.RECTAbi>, src: CPointer<Win32_Foundation.RECTAbi>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_DCISetDestination == "on"]
+public unsafe func Windows_DCISetDestination(pdci: CPointer<DCIOFFSCREENAbi>, dst: CPointer<Win32_Foundation.RECTAbi>, src: CPointer<Win32_Foundation.RECTAbi>): Int32 {
+    return DCISetDestination(pdci, dst, src)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_DCISetSrcDestClip == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func DCISetSrcDestClip(pdci: CPointer<DCIOFFSCREENAbi>, srcrc: CPointer<Win32_Foundation.RECTAbi>, destrc: CPointer<Win32_Foundation.RECTAbi>, prd: CPointer<Win32_Graphics_Gdi.RGNDATAAbi>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_DCISetSrcDestClip == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DCISetSrcDestClip(pdci: CPointer<DCIOFFSCREENAbi>, srcrc: CPointer<Win32_Foundation.RECTAbi>, destrc: CPointer<Win32_Foundation.RECTAbi>, prd: CPointer<Win32_Graphics_Gdi.RGNDATAAbi>): Int32 {
+    return DCISetSrcDestClip(pdci, srcrc, destrc, prd)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_GetDCRegionData == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func GetDCRegionData(hdc: Win32_Graphics_Gdi.HDC, size: UInt32, prd: CPointer<Win32_Graphics_Gdi.RGNDATAAbi>): UInt32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_GetDCRegionData == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GetDCRegionData(hdc: Win32_Graphics_Gdi.HDC, size: UInt32, prd: CPointer<Win32_Graphics_Gdi.RGNDATAAbi>): UInt32 {
+    return GetDCRegionData(hdc, size, prd)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_GetWindowRegionData == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func GetWindowRegionData(hwnd: CPointer<Unit>, size: UInt32, prd: CPointer<Win32_Graphics_Gdi.RGNDATAAbi>): UInt32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_GetWindowRegionData == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GetWindowRegionData(hwnd: CPointer<Unit>, size: UInt32, prd: CPointer<Win32_Graphics_Gdi.RGNDATAAbi>): UInt32 {
+    return GetWindowRegionData(hwnd, size, prd)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_WinWatchClose == "on"]
+foreign {
+    func WinWatchClose(hWW: HWINWATCH): Unit
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_WinWatchClose == "on"]
+public unsafe func Windows_WinWatchClose(hWW: HWINWATCH): Unit {
+    WinWatchClose(hWW)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_WinWatchDidStatusChange == "on"]
+foreign {
+    func WinWatchDidStatusChange(hWW: HWINWATCH): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_WinWatchDidStatusChange == "on"]
+public unsafe func Windows_WinWatchDidStatusChange(hWW: HWINWATCH): Int32 {
+    return WinWatchDidStatusChange(hWW)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_WinWatchGetClipList == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func WinWatchGetClipList(hWW: HWINWATCH, prc: CPointer<Win32_Foundation.RECTAbi>, size: UInt32, prd: CPointer<Win32_Graphics_Gdi.RGNDATAAbi>): UInt32
 }
 
-@When[KERNEL32 == "on"]
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_WinWatchGetClipList == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_WinWatchGetClipList(hWW: HWINWATCH, prc: CPointer<Win32_Foundation.RECTAbi>, size: UInt32, prd: CPointer<Win32_Graphics_Gdi.RGNDATAAbi>): UInt32 {
+    return WinWatchGetClipList(hWW, prc, size, prd)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_WinWatchNotify == "on"]
+foreign {
+    func WinWatchNotify(hWW: HWINWATCH, NotifyCallback: WINWATCHNOTIFYPROC, NotifyParam: IntNative): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_WinWatchNotify == "on"]
+public unsafe func Windows_WinWatchNotify(hWW: HWINWATCH, NotifyCallback: WINWATCHNOTIFYPROC, NotifyParam: IntNative): Int32 {
+    return WinWatchNotify(hWW, NotifyCallback, NotifyParam)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_WinWatchOpen == "on"]
+foreign {
+    func WinWatchOpen(hwnd: CPointer<Unit>): HWINWATCH
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && DCIMAN32 == "on" && Windows_Win32_System_WindowsProgramming_WinWatchOpen == "on"]
+public unsafe func Windows_WinWatchOpen(hwnd: CPointer<Unit>): HWINWATCH {
+    return WinWatchOpen(hwnd)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_CancelDeviceWakeupRequest == "on"]
 foreign {
     func CancelDeviceWakeupRequest(hDevice: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_CancelDeviceWakeupRequest == "on"]
+public unsafe func Windows_CancelDeviceWakeupRequest(hDevice: CPointer<Unit>): Int32 {
+    return CancelDeviceWakeupRequest(hDevice)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_DnsHostnameToComputerNameA == "on"]
+foreign {
     // param-hint: ComputerName len=param[2] optional
     // pinvoke-hint: SetLastError
     func DnsHostnameToComputerNameA(Hostname: CPointer<UInt8>, ComputerName: CPointer<UInt8>, nSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_DnsHostnameToComputerNameA == "on"]
+public unsafe func Windows_DnsHostnameToComputerNameA(Hostname: CPointer<UInt8>, ComputerName: CPointer<UInt8>, nSize: CPointer<UInt32>): Int32 {
+    return DnsHostnameToComputerNameA(Hostname, ComputerName, nSize)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_DnsHostnameToComputerNameW == "on"]
+foreign {
     // param-hint: ComputerName len=param[2] optional
     // pinvoke-hint: SetLastError
     func DnsHostnameToComputerNameW(Hostname: CPointer<UInt16>, ComputerName: CPointer<UInt16>, nSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_DnsHostnameToComputerNameW == "on"]
+public unsafe func Windows_DnsHostnameToComputerNameW(Hostname: CPointer<UInt16>, ComputerName: CPointer<UInt16>, nSize: CPointer<UInt32>): Int32 {
+    return DnsHostnameToComputerNameW(Hostname, ComputerName, nSize)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_DosDateTimeToFileTime == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func DosDateTimeToFileTime(wFatDate: UInt16, wFatTime: UInt16, lpFileTime: CPointer<Win32_Foundation.FILETIMEAbi>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_DosDateTimeToFileTime == "on"]
+public unsafe func Windows_DosDateTimeToFileTime(wFatDate: UInt16, wFatTime: UInt16, lpFileTime: CPointer<Win32_Foundation.FILETIMEAbi>): Int32 {
+    return DosDateTimeToFileTime(wFatDate, wFatTime, lpFileTime)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_EnableProcessOptionalXStateFeatures == "on"]
+foreign {
     func EnableProcessOptionalXStateFeatures(Features: UInt64): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_EnableProcessOptionalXStateFeatures == "on"]
+public unsafe func Windows_EnableProcessOptionalXStateFeatures(Features: UInt64): Int32 {
+    return EnableProcessOptionalXStateFeatures(Features)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_FileTimeToDosDateTime == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func FileTimeToDosDateTime(lpFileTime: CPointer<Win32_Foundation.FILETIMEAbi>, lpFatDate: CPointer<UInt16>, lpFatTime: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_FileTimeToDosDateTime == "on"]
+public unsafe func Windows_FileTimeToDosDateTime(lpFileTime: CPointer<Win32_Foundation.FILETIMEAbi>, lpFatDate: CPointer<UInt16>, lpFatTime: CPointer<UInt16>): Int32 {
+    return FileTimeToDosDateTime(lpFileTime, lpFatDate, lpFatTime)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetComputerNameA == "on"]
+foreign {
     // param-hint: lpBuffer len=param[1] optional
     // pinvoke-hint: SetLastError
     func GetComputerNameA(lpBuffer: CPointer<UInt8>, nSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetComputerNameA == "on"]
+public unsafe func Windows_GetComputerNameA(lpBuffer: CPointer<UInt8>, nSize: CPointer<UInt32>): Int32 {
+    return GetComputerNameA(lpBuffer, nSize)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetComputerNameW == "on"]
+foreign {
     // param-hint: lpBuffer len=param[1] optional
     // pinvoke-hint: SetLastError
     func GetComputerNameW(lpBuffer: CPointer<UInt16>, nSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetComputerNameW == "on"]
+public unsafe func Windows_GetComputerNameW(lpBuffer: CPointer<UInt16>, nSize: CPointer<UInt32>): Int32 {
+    return GetComputerNameW(lpBuffer, nSize)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetFirmwareEnvironmentVariableA == "on"]
+foreign {
     // param-hint: pBuffer bytes=param[3] optional
     // pinvoke-hint: SetLastError
     func GetFirmwareEnvironmentVariableA(lpName: CPointer<UInt8>, lpGuid: CPointer<UInt8>, pBuffer: CPointer<Unit>, nSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetFirmwareEnvironmentVariableA == "on"]
+public unsafe func Windows_GetFirmwareEnvironmentVariableA(lpName: CPointer<UInt8>, lpGuid: CPointer<UInt8>, pBuffer: CPointer<Unit>, nSize: UInt32): UInt32 {
+    return GetFirmwareEnvironmentVariableA(lpName, lpGuid, pBuffer, nSize)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetFirmwareEnvironmentVariableExA == "on"]
+foreign {
     // param-hint: pBuffer bytes=param[3] optional
     // param-hint: pdwAttribubutes optional
     // pinvoke-hint: SetLastError
     func GetFirmwareEnvironmentVariableExA(lpName: CPointer<UInt8>, lpGuid: CPointer<UInt8>, pBuffer: CPointer<Unit>, nSize: UInt32, pdwAttribubutes: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetFirmwareEnvironmentVariableExA == "on"]
+public unsafe func Windows_GetFirmwareEnvironmentVariableExA(lpName: CPointer<UInt8>, lpGuid: CPointer<UInt8>, pBuffer: CPointer<Unit>, nSize: UInt32, pdwAttribubutes: CPointer<UInt32>): UInt32 {
+    return GetFirmwareEnvironmentVariableExA(lpName, lpGuid, pBuffer, nSize, pdwAttribubutes)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetFirmwareEnvironmentVariableExW == "on"]
+foreign {
     // param-hint: pBuffer bytes=param[3] optional
     // param-hint: pdwAttribubutes optional
     // pinvoke-hint: SetLastError
     func GetFirmwareEnvironmentVariableExW(lpName: CPointer<UInt16>, lpGuid: CPointer<UInt16>, pBuffer: CPointer<Unit>, nSize: UInt32, pdwAttribubutes: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetFirmwareEnvironmentVariableExW == "on"]
+public unsafe func Windows_GetFirmwareEnvironmentVariableExW(lpName: CPointer<UInt16>, lpGuid: CPointer<UInt16>, pBuffer: CPointer<Unit>, nSize: UInt32, pdwAttribubutes: CPointer<UInt32>): UInt32 {
+    return GetFirmwareEnvironmentVariableExW(lpName, lpGuid, pBuffer, nSize, pdwAttribubutes)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetFirmwareEnvironmentVariableW == "on"]
+foreign {
     // param-hint: pBuffer bytes=param[3] optional
     // pinvoke-hint: SetLastError
     func GetFirmwareEnvironmentVariableW(lpName: CPointer<UInt16>, lpGuid: CPointer<UInt16>, pBuffer: CPointer<Unit>, nSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetFirmwareEnvironmentVariableW == "on"]
+public unsafe func Windows_GetFirmwareEnvironmentVariableW(lpName: CPointer<UInt16>, lpGuid: CPointer<UInt16>, pBuffer: CPointer<Unit>, nSize: UInt32): UInt32 {
+    return GetFirmwareEnvironmentVariableW(lpName, lpGuid, pBuffer, nSize)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetPrivateProfileIntA == "on"]
+foreign {
     // param-hint: lpFileName optional
     func GetPrivateProfileIntA(lpAppName: CPointer<UInt8>, lpKeyName: CPointer<UInt8>, nDefault: Int32, lpFileName: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetPrivateProfileIntA == "on"]
+public unsafe func Windows_GetPrivateProfileIntA(lpAppName: CPointer<UInt8>, lpKeyName: CPointer<UInt8>, nDefault: Int32, lpFileName: CPointer<UInt8>): UInt32 {
+    return GetPrivateProfileIntA(lpAppName, lpKeyName, nDefault, lpFileName)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetPrivateProfileIntW == "on"]
+foreign {
     // param-hint: lpFileName optional
     func GetPrivateProfileIntW(lpAppName: CPointer<UInt16>, lpKeyName: CPointer<UInt16>, nDefault: Int32, lpFileName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetPrivateProfileIntW == "on"]
+public unsafe func Windows_GetPrivateProfileIntW(lpAppName: CPointer<UInt16>, lpKeyName: CPointer<UInt16>, nDefault: Int32, lpFileName: CPointer<UInt16>): Int32 {
+    return GetPrivateProfileIntW(lpAppName, lpKeyName, nDefault, lpFileName)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetPrivateProfileSectionA == "on"]
+foreign {
     // param-hint: lpReturnedString len=param[2] optional
     // param-hint: lpFileName optional
     func GetPrivateProfileSectionA(lpAppName: CPointer<UInt8>, lpReturnedString: CPointer<UInt8>, nSize: UInt32, lpFileName: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetPrivateProfileSectionA == "on"]
+public unsafe func Windows_GetPrivateProfileSectionA(lpAppName: CPointer<UInt8>, lpReturnedString: CPointer<UInt8>, nSize: UInt32, lpFileName: CPointer<UInt8>): UInt32 {
+    return GetPrivateProfileSectionA(lpAppName, lpReturnedString, nSize, lpFileName)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetPrivateProfileSectionNamesA == "on"]
+foreign {
     // param-hint: lpszReturnBuffer len=param[1] optional
     // param-hint: lpFileName optional
     func GetPrivateProfileSectionNamesA(lpszReturnBuffer: CPointer<UInt8>, nSize: UInt32, lpFileName: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetPrivateProfileSectionNamesA == "on"]
+public unsafe func Windows_GetPrivateProfileSectionNamesA(lpszReturnBuffer: CPointer<UInt8>, nSize: UInt32, lpFileName: CPointer<UInt8>): UInt32 {
+    return GetPrivateProfileSectionNamesA(lpszReturnBuffer, nSize, lpFileName)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetPrivateProfileSectionNamesW == "on"]
+foreign {
     // param-hint: lpszReturnBuffer len=param[1] optional
     // param-hint: lpFileName optional
     func GetPrivateProfileSectionNamesW(lpszReturnBuffer: CPointer<UInt16>, nSize: UInt32, lpFileName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetPrivateProfileSectionNamesW == "on"]
+public unsafe func Windows_GetPrivateProfileSectionNamesW(lpszReturnBuffer: CPointer<UInt16>, nSize: UInt32, lpFileName: CPointer<UInt16>): UInt32 {
+    return GetPrivateProfileSectionNamesW(lpszReturnBuffer, nSize, lpFileName)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetPrivateProfileSectionW == "on"]
+foreign {
     // param-hint: lpReturnedString len=param[2] optional
     // param-hint: lpFileName optional
     func GetPrivateProfileSectionW(lpAppName: CPointer<UInt16>, lpReturnedString: CPointer<UInt16>, nSize: UInt32, lpFileName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetPrivateProfileSectionW == "on"]
+public unsafe func Windows_GetPrivateProfileSectionW(lpAppName: CPointer<UInt16>, lpReturnedString: CPointer<UInt16>, nSize: UInt32, lpFileName: CPointer<UInt16>): UInt32 {
+    return GetPrivateProfileSectionW(lpAppName, lpReturnedString, nSize, lpFileName)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetPrivateProfileStringA == "on"]
+foreign {
     // param-hint: lpAppName optional
     // param-hint: lpKeyName optional
     // param-hint: lpDefault optional
@@ -6102,6 +6922,15 @@ foreign {
     // param-hint: lpFileName optional
     // pinvoke-hint: SetLastError
     func GetPrivateProfileStringA(lpAppName: CPointer<UInt8>, lpKeyName: CPointer<UInt8>, lpDefault: CPointer<UInt8>, lpReturnedString: CPointer<UInt8>, nSize: UInt32, lpFileName: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetPrivateProfileStringA == "on"]
+public unsafe func Windows_GetPrivateProfileStringA(lpAppName: CPointer<UInt8>, lpKeyName: CPointer<UInt8>, lpDefault: CPointer<UInt8>, lpReturnedString: CPointer<UInt8>, nSize: UInt32, lpFileName: CPointer<UInt8>): UInt32 {
+    return GetPrivateProfileStringA(lpAppName, lpKeyName, lpDefault, lpReturnedString, nSize, lpFileName)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetPrivateProfileStringW == "on"]
+foreign {
     // param-hint: lpAppName optional
     // param-hint: lpKeyName optional
     // param-hint: lpDefault optional
@@ -6109,287 +6938,1523 @@ foreign {
     // param-hint: lpFileName optional
     // pinvoke-hint: SetLastError
     func GetPrivateProfileStringW(lpAppName: CPointer<UInt16>, lpKeyName: CPointer<UInt16>, lpDefault: CPointer<UInt16>, lpReturnedString: CPointer<UInt16>, nSize: UInt32, lpFileName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetPrivateProfileStringW == "on"]
+public unsafe func Windows_GetPrivateProfileStringW(lpAppName: CPointer<UInt16>, lpKeyName: CPointer<UInt16>, lpDefault: CPointer<UInt16>, lpReturnedString: CPointer<UInt16>, nSize: UInt32, lpFileName: CPointer<UInt16>): UInt32 {
+    return GetPrivateProfileStringW(lpAppName, lpKeyName, lpDefault, lpReturnedString, nSize, lpFileName)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetPrivateProfileStructA == "on"]
+foreign {
     // param-hint: lpStruct bytes=param[3] optional
     // param-hint: szFile optional
     func GetPrivateProfileStructA(lpszSection: CPointer<UInt8>, lpszKey: CPointer<UInt8>, lpStruct: CPointer<Unit>, uSizeStruct: UInt32, szFile: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetPrivateProfileStructA == "on"]
+public unsafe func Windows_GetPrivateProfileStructA(lpszSection: CPointer<UInt8>, lpszKey: CPointer<UInt8>, lpStruct: CPointer<Unit>, uSizeStruct: UInt32, szFile: CPointer<UInt8>): Int32 {
+    return GetPrivateProfileStructA(lpszSection, lpszKey, lpStruct, uSizeStruct, szFile)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetPrivateProfileStructW == "on"]
+foreign {
     // param-hint: lpStruct bytes=param[3] optional
     // param-hint: szFile optional
     func GetPrivateProfileStructW(lpszSection: CPointer<UInt16>, lpszKey: CPointer<UInt16>, lpStruct: CPointer<Unit>, uSizeStruct: UInt32, szFile: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetPrivateProfileStructW == "on"]
+public unsafe func Windows_GetPrivateProfileStructW(lpszSection: CPointer<UInt16>, lpszKey: CPointer<UInt16>, lpStruct: CPointer<Unit>, uSizeStruct: UInt32, szFile: CPointer<UInt16>): Int32 {
+    return GetPrivateProfileStructW(lpszSection, lpszKey, lpStruct, uSizeStruct, szFile)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetProfileIntA == "on"]
+foreign {
     func GetProfileIntA(lpAppName: CPointer<UInt8>, lpKeyName: CPointer<UInt8>, nDefault: Int32): UInt32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetProfileIntA == "on"]
+public unsafe func Windows_GetProfileIntA(lpAppName: CPointer<UInt8>, lpKeyName: CPointer<UInt8>, nDefault: Int32): UInt32 {
+    return GetProfileIntA(lpAppName, lpKeyName, nDefault)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetProfileIntW == "on"]
+foreign {
     func GetProfileIntW(lpAppName: CPointer<UInt16>, lpKeyName: CPointer<UInt16>, nDefault: Int32): UInt32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetProfileIntW == "on"]
+public unsafe func Windows_GetProfileIntW(lpAppName: CPointer<UInt16>, lpKeyName: CPointer<UInt16>, nDefault: Int32): UInt32 {
+    return GetProfileIntW(lpAppName, lpKeyName, nDefault)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetProfileSectionA == "on"]
+foreign {
     // param-hint: lpReturnedString len=param[2] optional
     func GetProfileSectionA(lpAppName: CPointer<UInt8>, lpReturnedString: CPointer<UInt8>, nSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetProfileSectionA == "on"]
+public unsafe func Windows_GetProfileSectionA(lpAppName: CPointer<UInt8>, lpReturnedString: CPointer<UInt8>, nSize: UInt32): UInt32 {
+    return GetProfileSectionA(lpAppName, lpReturnedString, nSize)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetProfileSectionW == "on"]
+foreign {
     // param-hint: lpReturnedString len=param[2] optional
     func GetProfileSectionW(lpAppName: CPointer<UInt16>, lpReturnedString: CPointer<UInt16>, nSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetProfileSectionW == "on"]
+public unsafe func Windows_GetProfileSectionW(lpAppName: CPointer<UInt16>, lpReturnedString: CPointer<UInt16>, nSize: UInt32): UInt32 {
+    return GetProfileSectionW(lpAppName, lpReturnedString, nSize)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetProfileStringA == "on"]
+foreign {
     // param-hint: lpAppName optional
     // param-hint: lpKeyName optional
     // param-hint: lpDefault optional
     // param-hint: lpReturnedString len=param[4] optional
     func GetProfileStringA(lpAppName: CPointer<UInt8>, lpKeyName: CPointer<UInt8>, lpDefault: CPointer<UInt8>, lpReturnedString: CPointer<UInt8>, nSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetProfileStringA == "on"]
+public unsafe func Windows_GetProfileStringA(lpAppName: CPointer<UInt8>, lpKeyName: CPointer<UInt8>, lpDefault: CPointer<UInt8>, lpReturnedString: CPointer<UInt8>, nSize: UInt32): UInt32 {
+    return GetProfileStringA(lpAppName, lpKeyName, lpDefault, lpReturnedString, nSize)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetProfileStringW == "on"]
+foreign {
     // param-hint: lpAppName optional
     // param-hint: lpKeyName optional
     // param-hint: lpDefault optional
     // param-hint: lpReturnedString len=param[4] optional
     func GetProfileStringW(lpAppName: CPointer<UInt16>, lpKeyName: CPointer<UInt16>, lpDefault: CPointer<UInt16>, lpReturnedString: CPointer<UInt16>, nSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetProfileStringW == "on"]
+public unsafe func Windows_GetProfileStringW(lpAppName: CPointer<UInt16>, lpKeyName: CPointer<UInt16>, lpDefault: CPointer<UInt16>, lpReturnedString: CPointer<UInt16>, nSize: UInt32): UInt32 {
+    return GetProfileStringW(lpAppName, lpKeyName, lpDefault, lpReturnedString, nSize)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetSystemRegistryQuota == "on"]
+foreign {
     // param-hint: pdwQuotaAllowed optional
     // param-hint: pdwQuotaUsed optional
     // pinvoke-hint: SetLastError
     func GetSystemRegistryQuota(pdwQuotaAllowed: CPointer<UInt32>, pdwQuotaUsed: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetSystemRegistryQuota == "on"]
+public unsafe func Windows_GetSystemRegistryQuota(pdwQuotaAllowed: CPointer<UInt32>, pdwQuotaUsed: CPointer<UInt32>): Int32 {
+    return GetSystemRegistryQuota(pdwQuotaAllowed, pdwQuotaUsed)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetThreadEnabledXStateFeatures == "on"]
+foreign {
     func GetThreadEnabledXStateFeatures(): UInt64
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GetThreadEnabledXStateFeatures == "on"]
+public unsafe func Windows_GetThreadEnabledXStateFeatures(): UInt64 {
+    return GetThreadEnabledXStateFeatures()
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GlobalCompact == "on"]
+foreign {
     func GlobalCompact(dwMinFree: UInt32): UIntNative
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GlobalCompact == "on"]
+public unsafe func Windows_GlobalCompact(dwMinFree: UInt32): UIntNative {
+    return GlobalCompact(dwMinFree)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GlobalFix == "on"]
+foreign {
     func GlobalFix(hMem: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GlobalFix == "on"]
+public unsafe func Windows_GlobalFix(hMem: CPointer<Unit>): Unit {
+    GlobalFix(hMem)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GlobalUnWire == "on"]
+foreign {
     func GlobalUnWire(hMem: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GlobalUnWire == "on"]
+public unsafe func Windows_GlobalUnWire(hMem: CPointer<Unit>): Int32 {
+    return GlobalUnWire(hMem)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GlobalUnfix == "on"]
+foreign {
     func GlobalUnfix(hMem: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GlobalUnfix == "on"]
+public unsafe func Windows_GlobalUnfix(hMem: CPointer<Unit>): Unit {
+    GlobalUnfix(hMem)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GlobalWire == "on"]
+foreign {
     func GlobalWire(hMem: CPointer<Unit>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_GlobalWire == "on"]
+public unsafe func Windows_GlobalWire(hMem: CPointer<Unit>): CPointer<Unit> {
+    return GlobalWire(hMem)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_IsBadHugeReadPtr == "on"]
+foreign {
     // param-hint: lp optional
     func IsBadHugeReadPtr(lp: CPointer<Unit>, ucb: UIntNative): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_IsBadHugeReadPtr == "on"]
+public unsafe func Windows_IsBadHugeReadPtr(lp: CPointer<Unit>, ucb: UIntNative): Int32 {
+    return IsBadHugeReadPtr(lp, ucb)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_IsBadHugeWritePtr == "on"]
+foreign {
     // param-hint: lp optional
     func IsBadHugeWritePtr(lp: CPointer<Unit>, ucb: UIntNative): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_IsBadHugeWritePtr == "on"]
+public unsafe func Windows_IsBadHugeWritePtr(lp: CPointer<Unit>, ucb: UIntNative): Int32 {
+    return IsBadHugeWritePtr(lp, ucb)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_IsNativeVhdBoot == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func IsNativeVhdBoot(NativeVhdBoot: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_IsNativeVhdBoot == "on"]
+public unsafe func Windows_IsNativeVhdBoot(NativeVhdBoot: CPointer<Int32>): Int32 {
+    return IsNativeVhdBoot(NativeVhdBoot)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_LocalCompact == "on"]
+foreign {
     func LocalCompact(uMinFree: UInt32): UIntNative
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_LocalCompact == "on"]
+public unsafe func Windows_LocalCompact(uMinFree: UInt32): UIntNative {
+    return LocalCompact(uMinFree)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_LocalShrink == "on"]
+foreign {
     func LocalShrink(hMem: CPointer<Unit>, cbNewSize: UInt32): UIntNative
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_LocalShrink == "on"]
+public unsafe func Windows_LocalShrink(hMem: CPointer<Unit>, cbNewSize: UInt32): UIntNative {
+    return LocalShrink(hMem, cbNewSize)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_MulDiv == "on"]
+foreign {
     func MulDiv(nNumber: Int32, nNumerator: Int32, nDenominator: Int32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_MulDiv == "on"]
+public unsafe func Windows_MulDiv(nNumber: Int32, nNumerator: Int32, nDenominator: Int32): Int32 {
+    return MulDiv(nNumber, nNumerator, nDenominator)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_OpenMutexA == "on"]
+foreign {
     func OpenMutexA(dwDesiredAccess: UInt32, bInheritHandle: Int32, lpName: CPointer<UInt8>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_OpenMutexA == "on"]
+public unsafe func Windows_OpenMutexA(dwDesiredAccess: UInt32, bInheritHandle: Int32, lpName: CPointer<UInt8>): CPointer<Unit> {
+    return OpenMutexA(dwDesiredAccess, bInheritHandle, lpName)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_OpenSemaphoreA == "on"]
+foreign {
     func OpenSemaphoreA(dwDesiredAccess: UInt32, bInheritHandle: Int32, lpName: CPointer<UInt8>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_OpenSemaphoreA == "on"]
+public unsafe func Windows_OpenSemaphoreA(dwDesiredAccess: UInt32, bInheritHandle: Int32, lpName: CPointer<UInt8>): CPointer<Unit> {
+    return OpenSemaphoreA(dwDesiredAccess, bInheritHandle, lpName)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_QueryIdleProcessorCycleTime == "on"]
+foreign {
     // param-hint: ProcessorIdleCycleTime bytes=param[0] optional
     // pinvoke-hint: SetLastError
     func QueryIdleProcessorCycleTime(BufferLength: CPointer<UInt32>, ProcessorIdleCycleTime: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_QueryIdleProcessorCycleTime == "on"]
+public unsafe func Windows_QueryIdleProcessorCycleTime(BufferLength: CPointer<UInt32>, ProcessorIdleCycleTime: CPointer<UInt64>): Int32 {
+    return QueryIdleProcessorCycleTime(BufferLength, ProcessorIdleCycleTime)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_QueryIdleProcessorCycleTimeEx == "on"]
+foreign {
     // param-hint: ProcessorIdleCycleTime bytes=param[1] optional
     func QueryIdleProcessorCycleTimeEx(Group: UInt16, BufferLength: CPointer<UInt32>, ProcessorIdleCycleTime: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_QueryIdleProcessorCycleTimeEx == "on"]
+public unsafe func Windows_QueryIdleProcessorCycleTimeEx(Group: UInt16, BufferLength: CPointer<UInt32>, ProcessorIdleCycleTime: CPointer<UInt64>): Int32 {
+    return QueryIdleProcessorCycleTimeEx(Group, BufferLength, ProcessorIdleCycleTime)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_QueryProcessCycleTime == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func QueryProcessCycleTime(ProcessHandle: CPointer<Unit>, CycleTime: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_QueryProcessCycleTime == "on"]
+public unsafe func Windows_QueryProcessCycleTime(ProcessHandle: CPointer<Unit>, CycleTime: CPointer<UInt64>): Int32 {
+    return QueryProcessCycleTime(ProcessHandle, CycleTime)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_QueryThreadCycleTime == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func QueryThreadCycleTime(ThreadHandle: CPointer<Unit>, CycleTime: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_QueryThreadCycleTime == "on"]
+public unsafe func Windows_QueryThreadCycleTime(ThreadHandle: CPointer<Unit>, CycleTime: CPointer<UInt64>): Int32 {
+    return QueryThreadCycleTime(ThreadHandle, CycleTime)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_QueryUnbiasedInterruptTime == "on"]
+foreign {
     func QueryUnbiasedInterruptTime(UnbiasedTime: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_QueryUnbiasedInterruptTime == "on"]
+public unsafe func Windows_QueryUnbiasedInterruptTime(UnbiasedTime: CPointer<UInt64>): Int32 {
+    return QueryUnbiasedInterruptTime(UnbiasedTime)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_ReplacePartitionUnit == "on"]
+foreign {
     func ReplacePartitionUnit(TargetPartition: CPointer<UInt16>, SparePartition: CPointer<UInt16>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_ReplacePartitionUnit == "on"]
+public unsafe func Windows_ReplacePartitionUnit(TargetPartition: CPointer<UInt16>, SparePartition: CPointer<UInt16>, Flags: UInt32): Int32 {
+    return ReplacePartitionUnit(TargetPartition, SparePartition, Flags)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_RequestDeviceWakeup == "on"]
+foreign {
     func RequestDeviceWakeup(hDevice: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_RequestDeviceWakeup == "on"]
+public unsafe func Windows_RequestDeviceWakeup(hDevice: CPointer<Unit>): Int32 {
+    return RequestDeviceWakeup(hDevice)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_SetEnvironmentStringsA == "on"]
+foreign {
     func SetEnvironmentStringsA(NewEnvironment: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_SetEnvironmentStringsA == "on"]
+public unsafe func Windows_SetEnvironmentStringsA(NewEnvironment: CPointer<UInt8>): Int32 {
+    return SetEnvironmentStringsA(NewEnvironment)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_SetFirmwareEnvironmentVariableA == "on"]
+foreign {
     // param-hint: pValue bytes=param[3] optional
     // pinvoke-hint: SetLastError
     func SetFirmwareEnvironmentVariableA(lpName: CPointer<UInt8>, lpGuid: CPointer<UInt8>, pValue: CPointer<Unit>, nSize: UInt32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_SetFirmwareEnvironmentVariableA == "on"]
+public unsafe func Windows_SetFirmwareEnvironmentVariableA(lpName: CPointer<UInt8>, lpGuid: CPointer<UInt8>, pValue: CPointer<Unit>, nSize: UInt32): Int32 {
+    return SetFirmwareEnvironmentVariableA(lpName, lpGuid, pValue, nSize)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_SetFirmwareEnvironmentVariableExA == "on"]
+foreign {
     // param-hint: pValue bytes=param[3] optional
     // pinvoke-hint: SetLastError
     func SetFirmwareEnvironmentVariableExA(lpName: CPointer<UInt8>, lpGuid: CPointer<UInt8>, pValue: CPointer<Unit>, nSize: UInt32, dwAttributes: UInt32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_SetFirmwareEnvironmentVariableExA == "on"]
+public unsafe func Windows_SetFirmwareEnvironmentVariableExA(lpName: CPointer<UInt8>, lpGuid: CPointer<UInt8>, pValue: CPointer<Unit>, nSize: UInt32, dwAttributes: UInt32): Int32 {
+    return SetFirmwareEnvironmentVariableExA(lpName, lpGuid, pValue, nSize, dwAttributes)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_SetFirmwareEnvironmentVariableExW == "on"]
+foreign {
     // param-hint: pValue bytes=param[3] optional
     // pinvoke-hint: SetLastError
     func SetFirmwareEnvironmentVariableExW(lpName: CPointer<UInt16>, lpGuid: CPointer<UInt16>, pValue: CPointer<Unit>, nSize: UInt32, dwAttributes: UInt32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_SetFirmwareEnvironmentVariableExW == "on"]
+public unsafe func Windows_SetFirmwareEnvironmentVariableExW(lpName: CPointer<UInt16>, lpGuid: CPointer<UInt16>, pValue: CPointer<Unit>, nSize: UInt32, dwAttributes: UInt32): Int32 {
+    return SetFirmwareEnvironmentVariableExW(lpName, lpGuid, pValue, nSize, dwAttributes)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_SetFirmwareEnvironmentVariableW == "on"]
+foreign {
     // param-hint: pValue bytes=param[3] optional
     // pinvoke-hint: SetLastError
     func SetFirmwareEnvironmentVariableW(lpName: CPointer<UInt16>, lpGuid: CPointer<UInt16>, pValue: CPointer<Unit>, nSize: UInt32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_SetFirmwareEnvironmentVariableW == "on"]
+public unsafe func Windows_SetFirmwareEnvironmentVariableW(lpName: CPointer<UInt16>, lpGuid: CPointer<UInt16>, pValue: CPointer<Unit>, nSize: UInt32): Int32 {
+    return SetFirmwareEnvironmentVariableW(lpName, lpGuid, pValue, nSize)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_SetHandleCount == "on"]
+foreign {
     func SetHandleCount(uNumber: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_SetHandleCount == "on"]
+public unsafe func Windows_SetHandleCount(uNumber: UInt32): UInt32 {
+    return SetHandleCount(uNumber)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_SetMessageWaitingIndicator == "on"]
+foreign {
     func SetMessageWaitingIndicator(hMsgIndicator: CPointer<Unit>, ulMsgCount: UInt32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_SetMessageWaitingIndicator == "on"]
+public unsafe func Windows_SetMessageWaitingIndicator(hMsgIndicator: CPointer<Unit>, ulMsgCount: UInt32): Int32 {
+    return SetMessageWaitingIndicator(hMsgIndicator, ulMsgCount)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_WritePrivateProfileSectionA == "on"]
+foreign {
     // param-hint: lpAppName optional
     // param-hint: lpString optional
     // param-hint: lpFileName optional
     // pinvoke-hint: SetLastError
     func WritePrivateProfileSectionA(lpAppName: CPointer<UInt8>, lpString: CPointer<UInt8>, lpFileName: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_WritePrivateProfileSectionA == "on"]
+public unsafe func Windows_WritePrivateProfileSectionA(lpAppName: CPointer<UInt8>, lpString: CPointer<UInt8>, lpFileName: CPointer<UInt8>): Int32 {
+    return WritePrivateProfileSectionA(lpAppName, lpString, lpFileName)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_WritePrivateProfileSectionW == "on"]
+foreign {
     // param-hint: lpAppName optional
     // param-hint: lpString optional
     // param-hint: lpFileName optional
     // pinvoke-hint: SetLastError
     func WritePrivateProfileSectionW(lpAppName: CPointer<UInt16>, lpString: CPointer<UInt16>, lpFileName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_WritePrivateProfileSectionW == "on"]
+public unsafe func Windows_WritePrivateProfileSectionW(lpAppName: CPointer<UInt16>, lpString: CPointer<UInt16>, lpFileName: CPointer<UInt16>): Int32 {
+    return WritePrivateProfileSectionW(lpAppName, lpString, lpFileName)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_WritePrivateProfileStringA == "on"]
+foreign {
     // param-hint: lpAppName optional
     // param-hint: lpKeyName optional
     // param-hint: lpString optional
     // param-hint: lpFileName optional
     // pinvoke-hint: SetLastError
     func WritePrivateProfileStringA(lpAppName: CPointer<UInt8>, lpKeyName: CPointer<UInt8>, lpString: CPointer<UInt8>, lpFileName: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_WritePrivateProfileStringA == "on"]
+public unsafe func Windows_WritePrivateProfileStringA(lpAppName: CPointer<UInt8>, lpKeyName: CPointer<UInt8>, lpString: CPointer<UInt8>, lpFileName: CPointer<UInt8>): Int32 {
+    return WritePrivateProfileStringA(lpAppName, lpKeyName, lpString, lpFileName)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_WritePrivateProfileStringW == "on"]
+foreign {
     // param-hint: lpAppName optional
     // param-hint: lpKeyName optional
     // param-hint: lpString optional
     // param-hint: lpFileName optional
     // pinvoke-hint: SetLastError
     func WritePrivateProfileStringW(lpAppName: CPointer<UInt16>, lpKeyName: CPointer<UInt16>, lpString: CPointer<UInt16>, lpFileName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_WritePrivateProfileStringW == "on"]
+public unsafe func Windows_WritePrivateProfileStringW(lpAppName: CPointer<UInt16>, lpKeyName: CPointer<UInt16>, lpString: CPointer<UInt16>, lpFileName: CPointer<UInt16>): Int32 {
+    return WritePrivateProfileStringW(lpAppName, lpKeyName, lpString, lpFileName)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_WritePrivateProfileStructA == "on"]
+foreign {
     // param-hint: lpStruct bytes=param[3] optional
     // param-hint: szFile optional
     // pinvoke-hint: SetLastError
     func WritePrivateProfileStructA(lpszSection: CPointer<UInt8>, lpszKey: CPointer<UInt8>, lpStruct: CPointer<Unit>, uSizeStruct: UInt32, szFile: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_WritePrivateProfileStructA == "on"]
+public unsafe func Windows_WritePrivateProfileStructA(lpszSection: CPointer<UInt8>, lpszKey: CPointer<UInt8>, lpStruct: CPointer<Unit>, uSizeStruct: UInt32, szFile: CPointer<UInt8>): Int32 {
+    return WritePrivateProfileStructA(lpszSection, lpszKey, lpStruct, uSizeStruct, szFile)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_WritePrivateProfileStructW == "on"]
+foreign {
     // param-hint: lpStruct bytes=param[3] optional
     // param-hint: szFile optional
     // pinvoke-hint: SetLastError
     func WritePrivateProfileStructW(lpszSection: CPointer<UInt16>, lpszKey: CPointer<UInt16>, lpStruct: CPointer<Unit>, uSizeStruct: UInt32, szFile: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_WritePrivateProfileStructW == "on"]
+public unsafe func Windows_WritePrivateProfileStructW(lpszSection: CPointer<UInt16>, lpszKey: CPointer<UInt16>, lpStruct: CPointer<Unit>, uSizeStruct: UInt32, szFile: CPointer<UInt16>): Int32 {
+    return WritePrivateProfileStructW(lpszSection, lpszKey, lpStruct, uSizeStruct, szFile)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_WriteProfileSectionA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func WriteProfileSectionA(lpAppName: CPointer<UInt8>, lpString: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_WriteProfileSectionA == "on"]
+public unsafe func Windows_WriteProfileSectionA(lpAppName: CPointer<UInt8>, lpString: CPointer<UInt8>): Int32 {
+    return WriteProfileSectionA(lpAppName, lpString)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_WriteProfileSectionW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func WriteProfileSectionW(lpAppName: CPointer<UInt16>, lpString: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_WriteProfileSectionW == "on"]
+public unsafe func Windows_WriteProfileSectionW(lpAppName: CPointer<UInt16>, lpString: CPointer<UInt16>): Int32 {
+    return WriteProfileSectionW(lpAppName, lpString)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_WriteProfileStringA == "on"]
+foreign {
     // param-hint: lpAppName optional
     // param-hint: lpKeyName optional
     // param-hint: lpString optional
     // pinvoke-hint: SetLastError
     func WriteProfileStringA(lpAppName: CPointer<UInt8>, lpKeyName: CPointer<UInt8>, lpString: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_WriteProfileStringA == "on"]
+public unsafe func Windows_WriteProfileStringA(lpAppName: CPointer<UInt8>, lpKeyName: CPointer<UInt8>, lpString: CPointer<UInt8>): Int32 {
+    return WriteProfileStringA(lpAppName, lpKeyName, lpString)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_WriteProfileStringW == "on"]
+foreign {
     // param-hint: lpAppName optional
     // param-hint: lpKeyName optional
     // param-hint: lpString optional
     // pinvoke-hint: SetLastError
     func WriteProfileStringW(lpAppName: CPointer<UInt16>, lpKeyName: CPointer<UInt16>, lpString: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_WriteProfileStringW == "on"]
+public unsafe func Windows_WriteProfileStringW(lpAppName: CPointer<UInt16>, lpKeyName: CPointer<UInt16>, lpString: CPointer<UInt16>): Int32 {
+    return WriteProfileStringW(lpAppName, lpKeyName, lpString)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming__hread == "on"]
+foreign {
     // param-hint: lpBuffer bytes=param[2]
     func _hread(hFile: Int32, lpBuffer: CPointer<Unit>, lBytes: Int32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming__hread == "on"]
+public unsafe func Windows__hread(hFile: Int32, lpBuffer: CPointer<Unit>, lBytes: Int32): Int32 {
+    return _hread(hFile, lpBuffer, lBytes)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming__hwrite == "on"]
+foreign {
     // param-hint: lpBuffer bytes=param[2]
     func _hwrite(hFile: Int32, lpBuffer: CPointer<UInt8>, lBytes: Int32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming__hwrite == "on"]
+public unsafe func Windows__hwrite(hFile: Int32, lpBuffer: CPointer<UInt8>, lBytes: Int32): Int32 {
+    return _hwrite(hFile, lpBuffer, lBytes)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming__lclose == "on"]
+foreign {
     func _lclose(hFile: Int32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming__lclose == "on"]
+public unsafe func Windows__lclose(hFile: Int32): Int32 {
+    return _lclose(hFile)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming__lcreat == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func _lcreat(lpPathName: CPointer<UInt8>, iAttribute: Int32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming__lcreat == "on"]
+public unsafe func Windows__lcreat(lpPathName: CPointer<UInt8>, iAttribute: Int32): Int32 {
+    return _lcreat(lpPathName, iAttribute)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming__llseek == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func _llseek(hFile: Int32, lOffset: Int32, iOrigin: Int32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming__llseek == "on"]
+public unsafe func Windows__llseek(hFile: Int32, lOffset: Int32, iOrigin: Int32): Int32 {
+    return _llseek(hFile, lOffset, iOrigin)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming__lopen == "on"]
+foreign {
     func _lopen(lpPathName: CPointer<UInt8>, iReadWrite: Int32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming__lopen == "on"]
+public unsafe func Windows__lopen(lpPathName: CPointer<UInt8>, iReadWrite: Int32): Int32 {
+    return _lopen(lpPathName, iReadWrite)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming__lread == "on"]
+foreign {
     // param-hint: lpBuffer bytes=param[2]
     func _lread(hFile: Int32, lpBuffer: CPointer<Unit>, uBytes: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming__lread == "on"]
+public unsafe func Windows__lread(hFile: Int32, lpBuffer: CPointer<Unit>, uBytes: UInt32): UInt32 {
+    return _lread(hFile, lpBuffer, uBytes)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming__lwrite == "on"]
+foreign {
     // param-hint: lpBuffer bytes=param[2]
     // pinvoke-hint: SetLastError
     func _lwrite(hFile: Int32, lpBuffer: CPointer<UInt8>, uBytes: UInt32): UInt32
 }
 
-@When[KERNEL32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming__lwrite == "on"]
+public unsafe func Windows__lwrite(hFile: Int32, lpBuffer: CPointer<UInt8>, uBytes: UInt32): UInt32 {
+    return _lwrite(hFile, lpBuffer, uBytes)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_uaw_lstrcmpW == "on" && (arch == "x86_64" || arch == "aarch64")]
 foreign {
     func uaw_lstrcmpW(String1: CPointer<UInt16>, String2: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_uaw_lstrcmpW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_uaw_lstrcmpW(String1: CPointer<UInt16>, String2: CPointer<UInt16>): Int32 {
+    return uaw_lstrcmpW(String1, String2)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_uaw_lstrcmpiW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func uaw_lstrcmpiW(String1: CPointer<UInt16>, String2: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_uaw_lstrcmpiW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_uaw_lstrcmpiW(String1: CPointer<UInt16>, String2: CPointer<UInt16>): Int32 {
+    return uaw_lstrcmpiW(String1, String2)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_uaw_lstrlenW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func uaw_lstrlenW(String: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_uaw_lstrlenW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_uaw_lstrlenW(String: CPointer<UInt16>): Int32 {
+    return uaw_lstrlenW(String)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_uaw_wcschr == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func uaw_wcschr(String: CPointer<UInt16>, Character: UInt16): CPointer<UInt16>
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_uaw_wcschr == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_uaw_wcschr(String: CPointer<UInt16>, Character: UInt16): CPointer<UInt16> {
+    return uaw_wcschr(String, Character)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_uaw_wcscpy == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func uaw_wcscpy(Destination: CPointer<UInt16>, Source: CPointer<UInt16>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_uaw_wcscpy == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_uaw_wcscpy(Destination: CPointer<UInt16>, Source: CPointer<UInt16>): CPointer<UInt16> {
+    return uaw_wcscpy(Destination, Source)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_uaw_wcsicmp == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func uaw_wcsicmp(String1: CPointer<UInt16>, String2: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_uaw_wcsicmp == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_uaw_wcsicmp(String1: CPointer<UInt16>, String2: CPointer<UInt16>): Int32 {
+    return uaw_wcsicmp(String1, String2)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_uaw_wcslen == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func uaw_wcslen(String: CPointer<UInt16>): UIntNative
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_uaw_wcslen == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_uaw_wcslen(String: CPointer<UInt16>): UIntNative {
+    return uaw_wcslen(String)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_uaw_wcsrchr == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func uaw_wcsrchr(String: CPointer<UInt16>, Character: UInt16): CPointer<UInt16>
 }
 
-@When[USER32 == "on"]
+@When[Windows_Win32_System_WindowsProgramming == "on" && KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming_uaw_wcsrchr == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_uaw_wcsrchr(String: CPointer<UInt16>, Character: UInt16): CPointer<UInt16> {
+    return uaw_wcsrchr(String, Character)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && USER32 == "on" && Windows_Win32_System_WindowsProgramming_IMPGetIMEA == "on"]
 foreign {
     func IMPGetIMEA(param0: CPointer<Unit>, param1: CPointer<IMEPROAAbi>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && USER32 == "on" && Windows_Win32_System_WindowsProgramming_IMPGetIMEA == "on"]
+public unsafe func Windows_IMPGetIMEA(param0: CPointer<Unit>, param1: CPointer<IMEPROAAbi>): Int32 {
+    return IMPGetIMEA(param0, param1)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && USER32 == "on" && Windows_Win32_System_WindowsProgramming_IMPGetIMEW == "on"]
+foreign {
     func IMPGetIMEW(param0: CPointer<Unit>, param1: CPointer<IMEPROWAbi>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && USER32 == "on" && Windows_Win32_System_WindowsProgramming_IMPGetIMEW == "on"]
+public unsafe func Windows_IMPGetIMEW(param0: CPointer<Unit>, param1: CPointer<IMEPROWAbi>): Int32 {
+    return IMPGetIMEW(param0, param1)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && USER32 == "on" && Windows_Win32_System_WindowsProgramming_IMPQueryIMEA == "on"]
+foreign {
     func IMPQueryIMEA(param0: CPointer<IMEPROAAbi>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && USER32 == "on" && Windows_Win32_System_WindowsProgramming_IMPQueryIMEA == "on"]
+public unsafe func Windows_IMPQueryIMEA(param0: CPointer<IMEPROAAbi>): Int32 {
+    return IMPQueryIMEA(param0)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && USER32 == "on" && Windows_Win32_System_WindowsProgramming_IMPQueryIMEW == "on"]
+foreign {
     func IMPQueryIMEW(param0: CPointer<IMEPROWAbi>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && USER32 == "on" && Windows_Win32_System_WindowsProgramming_IMPQueryIMEW == "on"]
+public unsafe func Windows_IMPQueryIMEW(param0: CPointer<IMEPROWAbi>): Int32 {
+    return IMPQueryIMEW(param0)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && USER32 == "on" && Windows_Win32_System_WindowsProgramming_IMPSetIMEA == "on"]
+foreign {
     func IMPSetIMEA(param0: CPointer<Unit>, param1: CPointer<IMEPROAAbi>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && USER32 == "on" && Windows_Win32_System_WindowsProgramming_IMPSetIMEA == "on"]
+public unsafe func Windows_IMPSetIMEA(param0: CPointer<Unit>, param1: CPointer<IMEPROAAbi>): Int32 {
+    return IMPSetIMEA(param0, param1)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && USER32 == "on" && Windows_Win32_System_WindowsProgramming_IMPSetIMEW == "on"]
+foreign {
     func IMPSetIMEW(param0: CPointer<Unit>, param1: CPointer<IMEPROWAbi>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && USER32 == "on" && Windows_Win32_System_WindowsProgramming_IMPSetIMEW == "on"]
+public unsafe func Windows_IMPSetIMEW(param0: CPointer<Unit>, param1: CPointer<IMEPROWAbi>): Int32 {
+    return IMPSetIMEW(param0, param1)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && USER32 == "on" && Windows_Win32_System_WindowsProgramming_SendIMEMessageExA == "on"]
+foreign {
     func SendIMEMessageExA(param0: CPointer<Unit>, param1: IntNative): IntNative
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && USER32 == "on" && Windows_Win32_System_WindowsProgramming_SendIMEMessageExA == "on"]
+public unsafe func Windows_SendIMEMessageExA(param0: CPointer<Unit>, param1: IntNative): IntNative {
+    return SendIMEMessageExA(param0, param1)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && USER32 == "on" && Windows_Win32_System_WindowsProgramming_SendIMEMessageExW == "on"]
+foreign {
     func SendIMEMessageExW(param0: CPointer<Unit>, param1: IntNative): IntNative
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && USER32 == "on" && Windows_Win32_System_WindowsProgramming_SendIMEMessageExW == "on"]
+public unsafe func Windows_SendIMEMessageExW(param0: CPointer<Unit>, param1: IntNative): IntNative {
+    return SendIMEMessageExW(param0, param1)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && USER32 == "on" && Windows_Win32_System_WindowsProgramming_WINNLSEnableIME == "on"]
+foreign {
     func WINNLSEnableIME(param0: CPointer<Unit>, param1: Int32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && USER32 == "on" && Windows_Win32_System_WindowsProgramming_WINNLSEnableIME == "on"]
+public unsafe func Windows_WINNLSEnableIME(param0: CPointer<Unit>, param1: Int32): Int32 {
+    return WINNLSEnableIME(param0, param1)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && USER32 == "on" && Windows_Win32_System_WindowsProgramming_WINNLSGetEnableStatus == "on"]
+foreign {
     func WINNLSGetEnableStatus(param0: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && USER32 == "on" && Windows_Win32_System_WindowsProgramming_WINNLSGetEnableStatus == "on"]
+public unsafe func Windows_WINNLSGetEnableStatus(param0: CPointer<Unit>): Int32 {
+    return WINNLSGetEnableStatus(param0)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && USER32 == "on" && Windows_Win32_System_WindowsProgramming_WINNLSGetIMEHotkey == "on"]
+foreign {
     func WINNLSGetIMEHotkey(param0: CPointer<Unit>): UInt32
 }
 
-@When[WLDP == "on"]
+@When[Windows_Win32_System_WindowsProgramming == "on" && USER32 == "on" && Windows_Win32_System_WindowsProgramming_WINNLSGetIMEHotkey == "on"]
+public unsafe func Windows_WINNLSGetIMEHotkey(param0: CPointer<Unit>): UInt32 {
+    return WINNLSGetIMEHotkey(param0)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpCanExecuteBuffer == "on"]
 foreign {
     // param-hint: buffer len=param[3]
     // param-hint: auditInfo optional
     func WldpCanExecuteBuffer(host: CPointer<GUID>, options: WLDP_EXECUTION_EVALUATION_OPTIONSAbi, buffer: CPointer<UInt8>, bufferSize: UInt32, auditInfo: CPointer<UInt16>, result: CPointer<WLDP_EXECUTION_POLICYAbi>): Int32
-    // param-hint: auditInfo optional
-    func WldpCanExecuteFile(host: CPointer<GUID>, options: WLDP_EXECUTION_EVALUATION_OPTIONSAbi, fileHandle: CPointer<Unit>, auditInfo: CPointer<UInt16>, result: CPointer<WLDP_EXECUTION_POLICYAbi>): Int32
-    // param-hint: auditInfo optional
-    func WldpCanExecuteFileFromDetachedSignature(host: CPointer<GUID>, options: WLDP_EXECUTION_EVALUATION_OPTIONSAbi, contentFileHandle: CPointer<Unit>, signatureFileHandle: CPointer<Unit>, auditInfo: CPointer<UInt16>, result: CPointer<WLDP_EXECUTION_POLICYAbi>): Int32
-    func WldpGetApplicationSettingBoolean(id: CPointer<UInt16>, setting: CPointer<UInt16>, result: CPointer<Int32>): Int32
-    // param-hint: result len=param[2] optional
-    func WldpGetApplicationSettingStringList(id: CPointer<UInt16>, setting: CPointer<UInt16>, dataCount: UIntNative, requiredCount: CPointer<UIntNative>, result: CPointer<UInt16>): Int32
-    // param-hint: result len=param[2] optional
-    func WldpGetApplicationSettingStringSet(id: CPointer<UInt16>, setting: CPointer<UInt16>, dataCount: UIntNative, requiredCount: CPointer<UIntNative>, result: CPointer<UInt16>): Int32
-    // param-hint: hostInformation optional
-    func WldpGetLockdownPolicy(hostInformation: CPointer<WLDP_HOST_INFORMATIONAbi>, lockdownState: CPointer<UInt32>, lockdownFlags: UInt32): Int32
-    func WldpIsAppApprovedByPolicy(PackageFamilyName: CPointer<UInt16>, PackageVersion: UInt64): Int32
-    func WldpIsClassInApprovedList(classID: CPointer<GUID>, hostInformation: CPointer<WLDP_HOST_INFORMATIONAbi>, isApproved: CPointer<Int32>, optionalFlags: UInt32): Int32
-    func WldpIsDynamicCodePolicyEnabled(isEnabled: CPointer<Int32>): Int32
-    func WldpIsProductionConfiguration(IsProductionConfiguration: CPointer<Int32>): Int32
-    func WldpIsWcosProductionConfiguration(IsProductionConfiguration: CPointer<Int32>): Int32
-    // param-hint: information len=param[1] optional
-    func WldpQueryDeviceSecurityInformation(information: CPointer<WLDP_DEVICE_SECURITY_INFORMATIONAbi>, informationLength: UInt32, returnLength: CPointer<UInt32>): Int32
-    // param-hint: fileHandle optional
-    // param-hint: baseImage bytes=param[2] optional
-    func WldpQueryDynamicCodeTrust(fileHandle: CPointer<Unit>, baseImage: CPointer<Unit>, imageSize: UInt32): Int32
-    func WldpQueryPolicySettingEnabled(Setting: WLDP_POLICY_SETTINGAbi, Enabled: CPointer<Int32>): Int32
-    func WldpQueryPolicySettingEnabled2(SettingString: CPointer<UInt16>, Enabled: CPointer<Int32>): Int32
-    // param-hint: valueAddress bytes=param[5] optional
-    func WldpQuerySecurityPolicy(providerName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, keyName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, valueName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, valueType: CPointer<WLDP_SECURE_SETTING_VALUE_TYPEAbi>, valueAddress: CPointer<Unit>, valueSize: CPointer<UInt32>): Int32
-    func WldpQueryWindowsLockdownMode(lockdownMode: CPointer<WLDP_WINDOWS_LOCKDOWN_MODEAbi>): Int32
-    func WldpQueryWindowsLockdownRestriction(LockdownRestriction: CPointer<WLDP_WINDOWS_LOCKDOWN_RESTRICTIONAbi>): Int32
-    func WldpResetProductionConfiguration(): Int32
-    func WldpResetWcosProductionConfiguration(): Int32
-    func WldpSetDynamicCodeTrust(fileHandle: CPointer<Unit>): Int32
-    func WldpSetWindowsLockdownRestriction(LockdownRestriction: WLDP_WINDOWS_LOCKDOWN_RESTRICTIONAbi): Int32
 }
 
-@When[WLDP == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpCanExecuteBuffer == "on"]
+public unsafe func Windows_WldpCanExecuteBuffer(host: CPointer<GUID>, options: WLDP_EXECUTION_EVALUATION_OPTIONSAbi, buffer: CPointer<UInt8>, bufferSize: UInt32, auditInfo: CPointer<UInt16>, result: CPointer<WLDP_EXECUTION_POLICYAbi>): Int32 {
+    return WldpCanExecuteBuffer(host, options, buffer, bufferSize, auditInfo, result)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpCanExecuteFile == "on"]
+foreign {
+    // param-hint: auditInfo optional
+    func WldpCanExecuteFile(host: CPointer<GUID>, options: WLDP_EXECUTION_EVALUATION_OPTIONSAbi, fileHandle: CPointer<Unit>, auditInfo: CPointer<UInt16>, result: CPointer<WLDP_EXECUTION_POLICYAbi>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpCanExecuteFile == "on"]
+public unsafe func Windows_WldpCanExecuteFile(host: CPointer<GUID>, options: WLDP_EXECUTION_EVALUATION_OPTIONSAbi, fileHandle: CPointer<Unit>, auditInfo: CPointer<UInt16>, result: CPointer<WLDP_EXECUTION_POLICYAbi>): Int32 {
+    return WldpCanExecuteFile(host, options, fileHandle, auditInfo, result)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpCanExecuteStream == "on" && Windows_Win32_System_Com == "on"]
 foreign {
     // param-hint: auditInfo optional
     func WldpCanExecuteStream(host: CPointer<GUID>, options: WLDP_EXECUTION_EVALUATION_OPTIONSAbi, stream: CPointer<Unit>, auditInfo: CPointer<UInt16>, result: CPointer<WLDP_EXECUTION_POLICYAbi>): Int32
 }
 
-@When[API_MS_WIN_CORE_APIQUERY_L2_1_0 == "on"]
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpCanExecuteStream == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_WldpCanExecuteStream(host: CPointer<GUID>, options: WLDP_EXECUTION_EVALUATION_OPTIONSAbi, stream: CPointer<Unit>, auditInfo: CPointer<UInt16>, result: CPointer<WLDP_EXECUTION_POLICYAbi>): Int32 {
+    return WldpCanExecuteStream(host, options, stream, auditInfo, result)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpGetLockdownPolicy == "on"]
+foreign {
+    // param-hint: hostInformation optional
+    func WldpGetLockdownPolicy(hostInformation: CPointer<WLDP_HOST_INFORMATIONAbi>, lockdownState: CPointer<UInt32>, lockdownFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpGetLockdownPolicy == "on"]
+public unsafe func Windows_WldpGetLockdownPolicy(hostInformation: CPointer<WLDP_HOST_INFORMATIONAbi>, lockdownState: CPointer<UInt32>, lockdownFlags: UInt32): Int32 {
+    return WldpGetLockdownPolicy(hostInformation, lockdownState, lockdownFlags)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpIsClassInApprovedList == "on"]
+foreign {
+    func WldpIsClassInApprovedList(classID: CPointer<GUID>, hostInformation: CPointer<WLDP_HOST_INFORMATIONAbi>, isApproved: CPointer<Int32>, optionalFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpIsClassInApprovedList == "on"]
+public unsafe func Windows_WldpIsClassInApprovedList(classID: CPointer<GUID>, hostInformation: CPointer<WLDP_HOST_INFORMATIONAbi>, isApproved: CPointer<Int32>, optionalFlags: UInt32): Int32 {
+    return WldpIsClassInApprovedList(classID, hostInformation, isApproved, optionalFlags)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpIsDynamicCodePolicyEnabled == "on"]
+foreign {
+    func WldpIsDynamicCodePolicyEnabled(isEnabled: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpIsDynamicCodePolicyEnabled == "on"]
+public unsafe func Windows_WldpIsDynamicCodePolicyEnabled(isEnabled: CPointer<Int32>): Int32 {
+    return WldpIsDynamicCodePolicyEnabled(isEnabled)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpQueryDeviceSecurityInformation == "on"]
+foreign {
+    // param-hint: information len=param[1] optional
+    func WldpQueryDeviceSecurityInformation(information: CPointer<WLDP_DEVICE_SECURITY_INFORMATIONAbi>, informationLength: UInt32, returnLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpQueryDeviceSecurityInformation == "on"]
+public unsafe func Windows_WldpQueryDeviceSecurityInformation(information: CPointer<WLDP_DEVICE_SECURITY_INFORMATIONAbi>, informationLength: UInt32, returnLength: CPointer<UInt32>): Int32 {
+    return WldpQueryDeviceSecurityInformation(information, informationLength, returnLength)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpQueryDynamicCodeTrust == "on"]
+foreign {
+    // param-hint: fileHandle optional
+    // param-hint: baseImage bytes=param[2] optional
+    func WldpQueryDynamicCodeTrust(fileHandle: CPointer<Unit>, baseImage: CPointer<Unit>, imageSize: UInt32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpQueryDynamicCodeTrust == "on"]
+public unsafe func Windows_WldpQueryDynamicCodeTrust(fileHandle: CPointer<Unit>, baseImage: CPointer<Unit>, imageSize: UInt32): Int32 {
+    return WldpQueryDynamicCodeTrust(fileHandle, baseImage, imageSize)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpSetDynamicCodeTrust == "on"]
+foreign {
+    func WldpSetDynamicCodeTrust(fileHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpSetDynamicCodeTrust == "on"]
+public unsafe func Windows_WldpSetDynamicCodeTrust(fileHandle: CPointer<Unit>): Int32 {
+    return WldpSetDynamicCodeTrust(fileHandle)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && API_MS_WIN_CORE_APIQUERY_L2_1_0 == "on" && Windows_Win32_System_WindowsProgramming_IsApiSetImplemented == "on"]
 foreign {
     func IsApiSetImplemented(Contract: CPointer<UInt8>): Int32
 }
 
-@When[API_MS_WIN_CORE_APIQUERY_L2_1_1 == "on"]
-foreign {
-    // param-hint: moduleBaseName len=param[1]
-    // param-hint: actualNameLength optional
-    func GetApiSetModuleBaseName(contractName: CPointer<UInt8>, bufferLength: UInt32, moduleBaseName: CPointer<UInt16>, actualNameLength: CPointer<UInt32>): Int32
+@When[Windows_Win32_System_WindowsProgramming == "on" && API_MS_WIN_CORE_APIQUERY_L2_1_0 == "on" && Windows_Win32_System_WindowsProgramming_IsApiSetImplemented == "on"]
+public unsafe func Windows_IsApiSetImplemented(Contract: CPointer<UInt8>): Int32 {
+    return IsApiSetImplemented(Contract)
 }
 
-@When[API_MS_WIN_CORE_BACKGROUNDTASK_L1_1_0 == "on"]
+@When[Windows_Win32_System_WindowsProgramming == "on" && API_MS_WIN_CORE_BACKGROUNDTASK_L1_1_0 == "on" && Windows_Win32_System_WindowsProgramming_RaiseCustomSystemEventTrigger == "on"]
 foreign {
     func RaiseCustomSystemEventTrigger(CustomSystemEventTriggerConfig: CPointer<CUSTOM_SYSTEM_EVENT_TRIGGER_CONFIGAbi>): UInt32
 }
 
-@When[API_MS_WIN_CORE_FEATURESTAGING_L1_1_0 == "on"]
+@When[Windows_Win32_System_WindowsProgramming == "on" && API_MS_WIN_CORE_BACKGROUNDTASK_L1_1_0 == "on" && Windows_Win32_System_WindowsProgramming_RaiseCustomSystemEventTrigger == "on"]
+public unsafe func Windows_RaiseCustomSystemEventTrigger(CustomSystemEventTriggerConfig: CPointer<CUSTOM_SYSTEM_EVENT_TRIGGER_CONFIGAbi>): UInt32 {
+    return RaiseCustomSystemEventTrigger(CustomSystemEventTriggerConfig)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && API_MS_WIN_CORE_FEATURESTAGING_L1_1_0 == "on" && Windows_Win32_System_WindowsProgramming_GetFeatureEnabledState == "on"]
 foreign {
     func GetFeatureEnabledState(featureId: UInt32, changeTime: FEATURE_CHANGE_TIMEAbi): FEATURE_ENABLED_STATEAbi
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && API_MS_WIN_CORE_FEATURESTAGING_L1_1_0 == "on" && Windows_Win32_System_WindowsProgramming_GetFeatureEnabledState == "on"]
+public unsafe func Windows_GetFeatureEnabledState(featureId: UInt32, changeTime: FEATURE_CHANGE_TIMEAbi): FEATURE_ENABLED_STATEAbi {
+    return GetFeatureEnabledState(featureId, changeTime)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && API_MS_WIN_CORE_FEATURESTAGING_L1_1_0 == "on" && Windows_Win32_System_WindowsProgramming_RecordFeatureError == "on"]
+foreign {
     func RecordFeatureError(featureId: UInt32, error: CPointer<FEATURE_ERRORAbi>): Unit
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && API_MS_WIN_CORE_FEATURESTAGING_L1_1_0 == "on" && Windows_Win32_System_WindowsProgramming_RecordFeatureError == "on"]
+public unsafe func Windows_RecordFeatureError(featureId: UInt32, error: CPointer<FEATURE_ERRORAbi>): Unit {
+    RecordFeatureError(featureId, error)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && API_MS_WIN_CORE_FEATURESTAGING_L1_1_0 == "on" && Windows_Win32_System_WindowsProgramming_RecordFeatureUsage == "on"]
+foreign {
     func RecordFeatureUsage(featureId: UInt32, kind: UInt32, addend: UInt32, originName: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && API_MS_WIN_CORE_FEATURESTAGING_L1_1_0 == "on" && Windows_Win32_System_WindowsProgramming_RecordFeatureUsage == "on"]
+public unsafe func Windows_RecordFeatureUsage(featureId: UInt32, kind: UInt32, addend: UInt32, originName: CPointer<UInt8>): Unit {
+    RecordFeatureUsage(featureId, kind, addend, originName)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && API_MS_WIN_CORE_FEATURESTAGING_L1_1_0 == "on" && Windows_Win32_System_WindowsProgramming_SubscribeFeatureStateChangeNotification == "on"]
+foreign {
     // param-hint: context optional
     func SubscribeFeatureStateChangeNotification(subscription: CPointer<FEATURE_STATE_CHANGE_SUBSCRIPTION>, callback: PFEATURE_STATE_CHANGE_CALLBACK, context: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && API_MS_WIN_CORE_FEATURESTAGING_L1_1_0 == "on" && Windows_Win32_System_WindowsProgramming_SubscribeFeatureStateChangeNotification == "on"]
+public unsafe func Windows_SubscribeFeatureStateChangeNotification(subscription: CPointer<FEATURE_STATE_CHANGE_SUBSCRIPTION>, callback: PFEATURE_STATE_CHANGE_CALLBACK, context: CPointer<Unit>): Unit {
+    SubscribeFeatureStateChangeNotification(subscription, callback, context)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && API_MS_WIN_CORE_FEATURESTAGING_L1_1_0 == "on" && Windows_Win32_System_WindowsProgramming_UnsubscribeFeatureStateChangeNotification == "on"]
+foreign {
     func UnsubscribeFeatureStateChangeNotification(subscription: FEATURE_STATE_CHANGE_SUBSCRIPTION): Unit
 }
 
-@When[API_MS_WIN_CORE_FEATURESTAGING_L1_1_1 == "on"]
+@When[Windows_Win32_System_WindowsProgramming == "on" && API_MS_WIN_CORE_FEATURESTAGING_L1_1_0 == "on" && Windows_Win32_System_WindowsProgramming_UnsubscribeFeatureStateChangeNotification == "on"]
+public unsafe func Windows_UnsubscribeFeatureStateChangeNotification(subscription: FEATURE_STATE_CHANGE_SUBSCRIPTION): Unit {
+    UnsubscribeFeatureStateChangeNotification(subscription)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && API_MS_WIN_CORE_FEATURESTAGING_L1_1_1 == "on" && Windows_Win32_System_WindowsProgramming_GetFeatureVariant == "on"]
 foreign {
     func GetFeatureVariant(featureId: UInt32, changeTime: FEATURE_CHANGE_TIMEAbi, payloadId: CPointer<UInt32>, hasNotification: CPointer<Int32>): UInt32
 }
 
-@When[API_MS_WIN_CORE_REALTIME_L1_1_1 == "on"]
+@When[Windows_Win32_System_WindowsProgramming == "on" && API_MS_WIN_CORE_FEATURESTAGING_L1_1_1 == "on" && Windows_Win32_System_WindowsProgramming_GetFeatureVariant == "on"]
+public unsafe func Windows_GetFeatureVariant(featureId: UInt32, changeTime: FEATURE_CHANGE_TIMEAbi, payloadId: CPointer<UInt32>, hasNotification: CPointer<Int32>): UInt32 {
+    return GetFeatureVariant(featureId, changeTime, payloadId, hasNotification)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && API_MS_WIN_CORE_REALTIME_L1_1_1 == "on" && Windows_Win32_System_WindowsProgramming_QueryInterruptTime == "on"]
 foreign {
     func QueryInterruptTime(lpInterruptTime: CPointer<UInt64>): Unit
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && API_MS_WIN_CORE_REALTIME_L1_1_1 == "on" && Windows_Win32_System_WindowsProgramming_QueryInterruptTime == "on"]
+public unsafe func Windows_QueryInterruptTime(lpInterruptTime: CPointer<UInt64>): Unit {
+    QueryInterruptTime(lpInterruptTime)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && API_MS_WIN_CORE_REALTIME_L1_1_1 == "on" && Windows_Win32_System_WindowsProgramming_QueryInterruptTimePrecise == "on"]
+foreign {
     func QueryInterruptTimePrecise(lpInterruptTimePrecise: CPointer<UInt64>): Unit
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && API_MS_WIN_CORE_REALTIME_L1_1_1 == "on" && Windows_Win32_System_WindowsProgramming_QueryInterruptTimePrecise == "on"]
+public unsafe func Windows_QueryInterruptTimePrecise(lpInterruptTimePrecise: CPointer<UInt64>): Unit {
+    QueryInterruptTimePrecise(lpInterruptTimePrecise)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && API_MS_WIN_CORE_REALTIME_L1_1_1 == "on" && Windows_Win32_System_WindowsProgramming_QueryUnbiasedInterruptTimePrecise == "on"]
+foreign {
     func QueryUnbiasedInterruptTimePrecise(lpUnbiasedInterruptTimePrecise: CPointer<UInt64>): Unit
 }
 
-@When[API_MS_WIN_CORE_REALTIME_L1_1_2 == "on"]
+@When[Windows_Win32_System_WindowsProgramming == "on" && API_MS_WIN_CORE_REALTIME_L1_1_1 == "on" && Windows_Win32_System_WindowsProgramming_QueryUnbiasedInterruptTimePrecise == "on"]
+public unsafe func Windows_QueryUnbiasedInterruptTimePrecise(lpUnbiasedInterruptTimePrecise: CPointer<UInt64>): Unit {
+    QueryUnbiasedInterruptTimePrecise(lpUnbiasedInterruptTimePrecise)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && API_MS_WIN_CORE_REALTIME_L1_1_2 == "on" && Windows_Win32_System_WindowsProgramming_ConvertAuxiliaryCounterToPerformanceCounter == "on"]
 foreign {
     // param-hint: lpConversionError optional
     func ConvertAuxiliaryCounterToPerformanceCounter(ullAuxiliaryCounterValue: UInt64, lpPerformanceCounterValue: CPointer<UInt64>, lpConversionError: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && API_MS_WIN_CORE_REALTIME_L1_1_2 == "on" && Windows_Win32_System_WindowsProgramming_ConvertAuxiliaryCounterToPerformanceCounter == "on"]
+public unsafe func Windows_ConvertAuxiliaryCounterToPerformanceCounter(ullAuxiliaryCounterValue: UInt64, lpPerformanceCounterValue: CPointer<UInt64>, lpConversionError: CPointer<UInt64>): Int32 {
+    return ConvertAuxiliaryCounterToPerformanceCounter(ullAuxiliaryCounterValue, lpPerformanceCounterValue, lpConversionError)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && API_MS_WIN_CORE_REALTIME_L1_1_2 == "on" && Windows_Win32_System_WindowsProgramming_ConvertPerformanceCounterToAuxiliaryCounter == "on"]
+foreign {
     // param-hint: lpConversionError optional
     func ConvertPerformanceCounterToAuxiliaryCounter(ullPerformanceCounterValue: UInt64, lpAuxiliaryCounterValue: CPointer<UInt64>, lpConversionError: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && API_MS_WIN_CORE_REALTIME_L1_1_2 == "on" && Windows_Win32_System_WindowsProgramming_ConvertPerformanceCounterToAuxiliaryCounter == "on"]
+public unsafe func Windows_ConvertPerformanceCounterToAuxiliaryCounter(ullPerformanceCounterValue: UInt64, lpAuxiliaryCounterValue: CPointer<UInt64>, lpConversionError: CPointer<UInt64>): Int32 {
+    return ConvertPerformanceCounterToAuxiliaryCounter(ullPerformanceCounterValue, lpAuxiliaryCounterValue, lpConversionError)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && API_MS_WIN_CORE_REALTIME_L1_1_2 == "on" && Windows_Win32_System_WindowsProgramming_QueryAuxiliaryCounterFrequency == "on"]
+foreign {
     func QueryAuxiliaryCounterFrequency(lpAuxiliaryCounterFrequency: CPointer<UInt64>): Int32
 }
 
-@When[API_MS_WIN_DX_D3DKMT_L1_1_0 == "on"]
+@When[Windows_Win32_System_WindowsProgramming == "on" && API_MS_WIN_CORE_REALTIME_L1_1_2 == "on" && Windows_Win32_System_WindowsProgramming_QueryAuxiliaryCounterFrequency == "on"]
+public unsafe func Windows_QueryAuxiliaryCounterFrequency(lpAuxiliaryCounterFrequency: CPointer<UInt64>): Int32 {
+    return QueryAuxiliaryCounterFrequency(lpAuxiliaryCounterFrequency)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && API_MS_WIN_DX_D3DKMT_L1_1_0 == "on" && Windows_Win32_System_WindowsProgramming_GdiEntry13 == "on"]
 foreign {
     func GdiEntry13(): UInt32
 }
 
-@When[NTDLL == "on"]
+@When[Windows_Win32_System_WindowsProgramming == "on" && API_MS_WIN_DX_D3DKMT_L1_1_0 == "on" && Windows_Win32_System_WindowsProgramming_GdiEntry13 == "on"]
+public unsafe func Windows_GdiEntry13(): UInt32 {
+    return GdiEntry13()
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlAnsiStringToUnicodeString == "on" && Windows_Win32_System_Kernel == "on"]
+foreign {
+    func RtlAnsiStringToUnicodeString(DestinationString: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, SourceString: CPointer<Win32__impl_l0.STRINGAbi>, AllocateDestinationString: UInt8): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlAnsiStringToUnicodeString == "on" && Windows_Win32_System_Kernel == "on"]
+public unsafe func Windows_RtlAnsiStringToUnicodeString(DestinationString: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, SourceString: CPointer<Win32__impl_l0.STRINGAbi>, AllocateDestinationString: UInt8): Int32 {
+    return RtlAnsiStringToUnicodeString(DestinationString, SourceString, AllocateDestinationString)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlCharToInteger == "on"]
 foreign {
     func RtlCharToInteger(String: CPointer<Int8>, Base: UInt32, Value: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlCharToInteger == "on"]
+public unsafe func Windows_RtlCharToInteger(String: CPointer<Int8>, Base: UInt32, Value: CPointer<UInt32>): Int32 {
+    return RtlCharToInteger(String, Base, Value)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlFreeAnsiString == "on" && Windows_Win32_System_Kernel == "on"]
+foreign {
+    func RtlFreeAnsiString(AnsiString: CPointer<Win32__impl_l0.STRINGAbi>): Unit
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlFreeAnsiString == "on" && Windows_Win32_System_Kernel == "on"]
+public unsafe func Windows_RtlFreeAnsiString(AnsiString: CPointer<Win32__impl_l0.STRINGAbi>): Unit {
+    RtlFreeAnsiString(AnsiString)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlFreeOemString == "on" && Windows_Win32_System_Kernel == "on"]
+foreign {
+    func RtlFreeOemString(OemString: CPointer<Win32__impl_l0.STRINGAbi>): Unit
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlFreeOemString == "on" && Windows_Win32_System_Kernel == "on"]
+public unsafe func Windows_RtlFreeOemString(OemString: CPointer<Win32__impl_l0.STRINGAbi>): Unit {
+    RtlFreeOemString(OemString)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlFreeUnicodeString == "on"]
+foreign {
     func RtlFreeUnicodeString(UnicodeString: CPointer<Win32_Foundation.UNICODE_STRINGAbi>): Unit
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlFreeUnicodeString == "on"]
+public unsafe func Windows_RtlFreeUnicodeString(UnicodeString: CPointer<Win32_Foundation.UNICODE_STRINGAbi>): Unit {
+    RtlFreeUnicodeString(UnicodeString)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlGetReturnAddressHijackTarget == "on"]
+foreign {
     func RtlGetReturnAddressHijackTarget(): UIntNative
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlGetReturnAddressHijackTarget == "on"]
+public unsafe func Windows_RtlGetReturnAddressHijackTarget(): UIntNative {
+    return RtlGetReturnAddressHijackTarget()
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlInitAnsiString == "on" && Windows_Win32_System_Kernel == "on"]
+foreign {
+    func RtlInitAnsiString(DestinationString: CPointer<Win32__impl_l0.STRINGAbi>, SourceString: CPointer<Int8>): Unit
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlInitAnsiString == "on" && Windows_Win32_System_Kernel == "on"]
+public unsafe func Windows_RtlInitAnsiString(DestinationString: CPointer<Win32__impl_l0.STRINGAbi>, SourceString: CPointer<Int8>): Unit {
+    RtlInitAnsiString(DestinationString, SourceString)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlInitAnsiStringEx == "on" && Windows_Win32_System_Kernel == "on"]
+foreign {
+    func RtlInitAnsiStringEx(DestinationString: CPointer<Win32__impl_l0.STRINGAbi>, SourceString: CPointer<Int8>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlInitAnsiStringEx == "on" && Windows_Win32_System_Kernel == "on"]
+public unsafe func Windows_RtlInitAnsiStringEx(DestinationString: CPointer<Win32__impl_l0.STRINGAbi>, SourceString: CPointer<Int8>): Int32 {
+    return RtlInitAnsiStringEx(DestinationString, SourceString)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlInitString == "on" && Windows_Win32_System_Kernel == "on"]
+foreign {
+    func RtlInitString(DestinationString: CPointer<Win32__impl_l0.STRINGAbi>, SourceString: CPointer<Int8>): Unit
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlInitString == "on" && Windows_Win32_System_Kernel == "on"]
+public unsafe func Windows_RtlInitString(DestinationString: CPointer<Win32__impl_l0.STRINGAbi>, SourceString: CPointer<Int8>): Unit {
+    RtlInitString(DestinationString, SourceString)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlInitStringEx == "on" && Windows_Win32_System_Kernel == "on"]
+foreign {
+    func RtlInitStringEx(DestinationString: CPointer<Win32__impl_l0.STRINGAbi>, SourceString: CPointer<Int8>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlInitStringEx == "on" && Windows_Win32_System_Kernel == "on"]
+public unsafe func Windows_RtlInitStringEx(DestinationString: CPointer<Win32__impl_l0.STRINGAbi>, SourceString: CPointer<Int8>): Int32 {
+    return RtlInitStringEx(DestinationString, SourceString)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlInitUnicodeString == "on"]
+foreign {
     func RtlInitUnicodeString(DestinationString: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, SourceString: CPointer<UInt16>): Unit
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlInitUnicodeString == "on"]
+public unsafe func Windows_RtlInitUnicodeString(DestinationString: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, SourceString: CPointer<UInt16>): Unit {
+    RtlInitUnicodeString(DestinationString, SourceString)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlIsNameLegalDOS8Dot3 == "on" && Windows_Win32_System_Kernel == "on"]
+foreign {
+    func RtlIsNameLegalDOS8Dot3(Name: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, OemName: CPointer<Win32__impl_l0.STRINGAbi>, NameContainsSpaces: CPointer<UInt8>): UInt8
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlIsNameLegalDOS8Dot3 == "on" && Windows_Win32_System_Kernel == "on"]
+public unsafe func Windows_RtlIsNameLegalDOS8Dot3(Name: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, OemName: CPointer<Win32__impl_l0.STRINGAbi>, NameContainsSpaces: CPointer<UInt8>): UInt8 {
+    return RtlIsNameLegalDOS8Dot3(Name, OemName, NameContainsSpaces)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlLocalTimeToSystemTime == "on"]
+foreign {
     func RtlLocalTimeToSystemTime(LocalTime: CPointer<Int64>, SystemTime: CPointer<Int64>): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlLocalTimeToSystemTime == "on"]
+public unsafe func Windows_RtlLocalTimeToSystemTime(LocalTime: CPointer<Int64>, SystemTime: CPointer<Int64>): Int32 {
+    return RtlLocalTimeToSystemTime(LocalTime, SystemTime)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlRaiseCustomSystemEventTrigger == "on"]
+foreign {
     func RtlRaiseCustomSystemEventTrigger(TriggerConfig: CPointer<CUSTOM_SYSTEM_EVENT_TRIGGER_CONFIGAbi>): UInt32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlRaiseCustomSystemEventTrigger == "on"]
+public unsafe func Windows_RtlRaiseCustomSystemEventTrigger(TriggerConfig: CPointer<CUSTOM_SYSTEM_EVENT_TRIGGER_CONFIGAbi>): UInt32 {
+    return RtlRaiseCustomSystemEventTrigger(TriggerConfig)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlTimeToSecondsSince1970 == "on"]
+foreign {
     func RtlTimeToSecondsSince1970(Time: CPointer<Int64>, ElapsedSeconds: CPointer<UInt32>): UInt8
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlTimeToSecondsSince1970 == "on"]
+public unsafe func Windows_RtlTimeToSecondsSince1970(Time: CPointer<Int64>, ElapsedSeconds: CPointer<UInt32>): UInt8 {
+    return RtlTimeToSecondsSince1970(Time, ElapsedSeconds)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlUnicodeStringToAnsiString == "on" && Windows_Win32_System_Kernel == "on"]
+foreign {
+    func RtlUnicodeStringToAnsiString(DestinationString: CPointer<Win32__impl_l0.STRINGAbi>, SourceString: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, AllocateDestinationString: UInt8): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlUnicodeStringToAnsiString == "on" && Windows_Win32_System_Kernel == "on"]
+public unsafe func Windows_RtlUnicodeStringToAnsiString(DestinationString: CPointer<Win32__impl_l0.STRINGAbi>, SourceString: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, AllocateDestinationString: UInt8): Int32 {
+    return RtlUnicodeStringToAnsiString(DestinationString, SourceString, AllocateDestinationString)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlUnicodeStringToOemString == "on" && Windows_Win32_System_Kernel == "on"]
+foreign {
+    func RtlUnicodeStringToOemString(DestinationString: CPointer<Win32__impl_l0.STRINGAbi>, SourceString: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, AllocateDestinationString: UInt8): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlUnicodeStringToOemString == "on" && Windows_Win32_System_Kernel == "on"]
+public unsafe func Windows_RtlUnicodeStringToOemString(DestinationString: CPointer<Win32__impl_l0.STRINGAbi>, SourceString: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, AllocateDestinationString: UInt8): Int32 {
+    return RtlUnicodeStringToOemString(DestinationString, SourceString, AllocateDestinationString)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlUnicodeToMultiByteSize == "on"]
+foreign {
     // param-hint: UnicodeString bytes=param[2]
     func RtlUnicodeToMultiByteSize(BytesInMultiByteString: CPointer<UInt32>, UnicodeString: CPointer<UInt16>, BytesInUnicodeString: UInt32): Int32
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlUnicodeToMultiByteSize == "on"]
+public unsafe func Windows_RtlUnicodeToMultiByteSize(BytesInMultiByteString: CPointer<UInt32>, UnicodeString: CPointer<UInt16>, BytesInUnicodeString: UInt32): Int32 {
+    return RtlUnicodeToMultiByteSize(BytesInMultiByteString, UnicodeString, BytesInUnicodeString)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlUniform == "on"]
+foreign {
     func RtlUniform(Seed: CPointer<UInt32>): UInt32
 }
 
-@When[NTDLL == "on" && Windows_Win32_System_Kernel == "on"]
-foreign {
-    func RtlAnsiStringToUnicodeString(DestinationString: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, SourceString: CPointer<Win32__impl_l0.STRINGAbi>, AllocateDestinationString: UInt8): Int32
-    func RtlFreeAnsiString(AnsiString: CPointer<Win32__impl_l0.STRINGAbi>): Unit
-    func RtlFreeOemString(OemString: CPointer<Win32__impl_l0.STRINGAbi>): Unit
-    func RtlInitAnsiString(DestinationString: CPointer<Win32__impl_l0.STRINGAbi>, SourceString: CPointer<Int8>): Unit
-    func RtlInitAnsiStringEx(DestinationString: CPointer<Win32__impl_l0.STRINGAbi>, SourceString: CPointer<Int8>): Int32
-    func RtlInitString(DestinationString: CPointer<Win32__impl_l0.STRINGAbi>, SourceString: CPointer<Int8>): Unit
-    func RtlInitStringEx(DestinationString: CPointer<Win32__impl_l0.STRINGAbi>, SourceString: CPointer<Int8>): Int32
-    func RtlIsNameLegalDOS8Dot3(Name: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, OemName: CPointer<Win32__impl_l0.STRINGAbi>, NameContainsSpaces: CPointer<UInt8>): UInt8
-    func RtlUnicodeStringToAnsiString(DestinationString: CPointer<Win32__impl_l0.STRINGAbi>, SourceString: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, AllocateDestinationString: UInt8): Int32
-    func RtlUnicodeStringToOemString(DestinationString: CPointer<Win32__impl_l0.STRINGAbi>, SourceString: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, AllocateDestinationString: UInt8): Int32
+@When[Windows_Win32_System_WindowsProgramming == "on" && NTDLL == "on" && Windows_Win32_System_WindowsProgramming_RtlUniform == "on"]
+public unsafe func Windows_RtlUniform(Seed: CPointer<UInt32>): UInt32 {
+    return RtlUniform(Seed)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpCanExecuteFileFromDetachedSignature == "on"]
+func __windowsBindgen_WldpCanExecuteFileFromDetachedSignatureProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("Wldp.dll", "WldpCanExecuteFileFromDetachedSignature")
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpCanExecuteFileFromDetachedSignature == "on"]
+unsafe func WldpCanExecuteFileFromDetachedSignature(host: CPointer<GUID>, options: WLDP_EXECUTION_EVALUATION_OPTIONSAbi, contentFileHandle: CPointer<Unit>, signatureFileHandle: CPointer<Unit>, auditInfo: CPointer<UInt16>, result: CPointer<WLDP_EXECUTION_POLICYAbi>): Int32 {
+    let call = CFunc<(CPointer<GUID>, WLDP_EXECUTION_EVALUATION_OPTIONSAbi, CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<WLDP_EXECUTION_POLICYAbi>) -> Int32>(__windowsBindgen_WldpCanExecuteFileFromDetachedSignatureProc())
+    return unsafe { call(host, options, contentFileHandle, signatureFileHandle, auditInfo, result) }
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpCanExecuteFileFromDetachedSignature == "on"]
+public unsafe func Windows_WldpCanExecuteFileFromDetachedSignature(host: CPointer<GUID>, options: WLDP_EXECUTION_EVALUATION_OPTIONSAbi, contentFileHandle: CPointer<Unit>, signatureFileHandle: CPointer<Unit>, auditInfo: CPointer<UInt16>, result: CPointer<WLDP_EXECUTION_POLICYAbi>): Int32 {
+    return WldpCanExecuteFileFromDetachedSignature(host, options, contentFileHandle, signatureFileHandle, auditInfo, result)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpGetApplicationSettingBoolean == "on"]
+func __windowsBindgen_WldpGetApplicationSettingBooleanProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("Wldp.dll", "WldpGetApplicationSettingBoolean")
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpGetApplicationSettingBoolean == "on"]
+unsafe func WldpGetApplicationSettingBoolean(id: CPointer<UInt16>, setting: CPointer<UInt16>, result: CPointer<Int32>): Int32 {
+    let call = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<Int32>) -> Int32>(__windowsBindgen_WldpGetApplicationSettingBooleanProc())
+    return unsafe { call(id, setting, result) }
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpGetApplicationSettingBoolean == "on"]
+public unsafe func Windows_WldpGetApplicationSettingBoolean(id: CPointer<UInt16>, setting: CPointer<UInt16>, result: CPointer<Int32>): Int32 {
+    return WldpGetApplicationSettingBoolean(id, setting, result)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpGetApplicationSettingStringList == "on"]
+func __windowsBindgen_WldpGetApplicationSettingStringListProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("Wldp.dll", "WldpGetApplicationSettingStringList")
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpGetApplicationSettingStringList == "on"]
+unsafe func WldpGetApplicationSettingStringList(id: CPointer<UInt16>, setting: CPointer<UInt16>, dataCount: UIntNative, requiredCount: CPointer<UIntNative>, result: CPointer<UInt16>): Int32 {
+    let call = CFunc<(CPointer<UInt16>, CPointer<UInt16>, UIntNative, CPointer<UIntNative>, CPointer<UInt16>) -> Int32>(__windowsBindgen_WldpGetApplicationSettingStringListProc())
+    return unsafe { call(id, setting, dataCount, requiredCount, result) }
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpGetApplicationSettingStringList == "on"]
+public unsafe func Windows_WldpGetApplicationSettingStringList(id: CPointer<UInt16>, setting: CPointer<UInt16>, dataCount: UIntNative, requiredCount: CPointer<UIntNative>, result: CPointer<UInt16>): Int32 {
+    return WldpGetApplicationSettingStringList(id, setting, dataCount, requiredCount, result)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpGetApplicationSettingStringSet == "on"]
+func __windowsBindgen_WldpGetApplicationSettingStringSetProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("Wldp.dll", "WldpGetApplicationSettingStringSet")
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpGetApplicationSettingStringSet == "on"]
+unsafe func WldpGetApplicationSettingStringSet(id: CPointer<UInt16>, setting: CPointer<UInt16>, dataCount: UIntNative, requiredCount: CPointer<UIntNative>, result: CPointer<UInt16>): Int32 {
+    let call = CFunc<(CPointer<UInt16>, CPointer<UInt16>, UIntNative, CPointer<UIntNative>, CPointer<UInt16>) -> Int32>(__windowsBindgen_WldpGetApplicationSettingStringSetProc())
+    return unsafe { call(id, setting, dataCount, requiredCount, result) }
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpGetApplicationSettingStringSet == "on"]
+public unsafe func Windows_WldpGetApplicationSettingStringSet(id: CPointer<UInt16>, setting: CPointer<UInt16>, dataCount: UIntNative, requiredCount: CPointer<UIntNative>, result: CPointer<UInt16>): Int32 {
+    return WldpGetApplicationSettingStringSet(id, setting, dataCount, requiredCount, result)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpIsAppApprovedByPolicy == "on"]
+func __windowsBindgen_WldpIsAppApprovedByPolicyProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("Wldp.dll", "WldpIsAppApprovedByPolicy")
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpIsAppApprovedByPolicy == "on"]
+unsafe func WldpIsAppApprovedByPolicy(PackageFamilyName: CPointer<UInt16>, PackageVersion: UInt64): Int32 {
+    let call = CFunc<(CPointer<UInt16>, UInt64) -> Int32>(__windowsBindgen_WldpIsAppApprovedByPolicyProc())
+    return unsafe { call(PackageFamilyName, PackageVersion) }
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpIsAppApprovedByPolicy == "on"]
+public unsafe func Windows_WldpIsAppApprovedByPolicy(PackageFamilyName: CPointer<UInt16>, PackageVersion: UInt64): Int32 {
+    return WldpIsAppApprovedByPolicy(PackageFamilyName, PackageVersion)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpIsProductionConfiguration == "on"]
+func __windowsBindgen_WldpIsProductionConfigurationProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("Wldp.dll", "WldpIsProductionConfiguration")
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpIsProductionConfiguration == "on"]
+unsafe func WldpIsProductionConfiguration(IsProductionConfiguration: CPointer<Int32>): Int32 {
+    let call = CFunc<(CPointer<Int32>) -> Int32>(__windowsBindgen_WldpIsProductionConfigurationProc())
+    return unsafe { call(IsProductionConfiguration) }
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpIsProductionConfiguration == "on"]
+public unsafe func Windows_WldpIsProductionConfiguration(IsProductionConfiguration: CPointer<Int32>): Int32 {
+    return WldpIsProductionConfiguration(IsProductionConfiguration)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpIsWcosProductionConfiguration == "on"]
+func __windowsBindgen_WldpIsWcosProductionConfigurationProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("Wldp.dll", "WldpIsWcosProductionConfiguration")
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpIsWcosProductionConfiguration == "on"]
+unsafe func WldpIsWcosProductionConfiguration(IsProductionConfiguration: CPointer<Int32>): Int32 {
+    let call = CFunc<(CPointer<Int32>) -> Int32>(__windowsBindgen_WldpIsWcosProductionConfigurationProc())
+    return unsafe { call(IsProductionConfiguration) }
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpIsWcosProductionConfiguration == "on"]
+public unsafe func Windows_WldpIsWcosProductionConfiguration(IsProductionConfiguration: CPointer<Int32>): Int32 {
+    return WldpIsWcosProductionConfiguration(IsProductionConfiguration)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpQueryPolicySettingEnabled == "on"]
+func __windowsBindgen_WldpQueryPolicySettingEnabledProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("Wldp.dll", "WldpQueryPolicySettingEnabled")
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpQueryPolicySettingEnabled == "on"]
+unsafe func WldpQueryPolicySettingEnabled(Setting: WLDP_POLICY_SETTINGAbi, Enabled: CPointer<Int32>): Int32 {
+    let call = CFunc<(WLDP_POLICY_SETTINGAbi, CPointer<Int32>) -> Int32>(__windowsBindgen_WldpQueryPolicySettingEnabledProc())
+    return unsafe { call(Setting, Enabled) }
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpQueryPolicySettingEnabled == "on"]
+public unsafe func Windows_WldpQueryPolicySettingEnabled(Setting: WLDP_POLICY_SETTINGAbi, Enabled: CPointer<Int32>): Int32 {
+    return WldpQueryPolicySettingEnabled(Setting, Enabled)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpQueryPolicySettingEnabled2 == "on"]
+func __windowsBindgen_WldpQueryPolicySettingEnabled2Proc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("Wldp.dll", "WldpQueryPolicySettingEnabled2")
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpQueryPolicySettingEnabled2 == "on"]
+unsafe func WldpQueryPolicySettingEnabled2(SettingString: CPointer<UInt16>, Enabled: CPointer<Int32>): Int32 {
+    let call = CFunc<(CPointer<UInt16>, CPointer<Int32>) -> Int32>(__windowsBindgen_WldpQueryPolicySettingEnabled2Proc())
+    return unsafe { call(SettingString, Enabled) }
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpQueryPolicySettingEnabled2 == "on"]
+public unsafe func Windows_WldpQueryPolicySettingEnabled2(SettingString: CPointer<UInt16>, Enabled: CPointer<Int32>): Int32 {
+    return WldpQueryPolicySettingEnabled2(SettingString, Enabled)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpQuerySecurityPolicy == "on"]
+func __windowsBindgen_WldpQuerySecurityPolicyProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("Wldp.dll", "WldpQuerySecurityPolicy")
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpQuerySecurityPolicy == "on"]
+unsafe func WldpQuerySecurityPolicy(providerName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, keyName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, valueName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, valueType: CPointer<WLDP_SECURE_SETTING_VALUE_TYPEAbi>, valueAddress: CPointer<Unit>, valueSize: CPointer<UInt32>): Int32 {
+    let call = CFunc<(CPointer<Win32_Foundation.UNICODE_STRINGAbi>, CPointer<Win32_Foundation.UNICODE_STRINGAbi>, CPointer<Win32_Foundation.UNICODE_STRINGAbi>, CPointer<WLDP_SECURE_SETTING_VALUE_TYPEAbi>, CPointer<Unit>, CPointer<UInt32>) -> Int32>(__windowsBindgen_WldpQuerySecurityPolicyProc())
+    return unsafe { call(providerName, keyName, valueName, valueType, valueAddress, valueSize) }
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpQuerySecurityPolicy == "on"]
+public unsafe func Windows_WldpQuerySecurityPolicy(providerName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, keyName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, valueName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, valueType: CPointer<WLDP_SECURE_SETTING_VALUE_TYPEAbi>, valueAddress: CPointer<Unit>, valueSize: CPointer<UInt32>): Int32 {
+    return WldpQuerySecurityPolicy(providerName, keyName, valueName, valueType, valueAddress, valueSize)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpQueryWindowsLockdownMode == "on"]
+func __windowsBindgen_WldpQueryWindowsLockdownModeProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("Wldp.dll", "WldpQueryWindowsLockdownMode")
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpQueryWindowsLockdownMode == "on"]
+unsafe func WldpQueryWindowsLockdownMode(lockdownMode: CPointer<WLDP_WINDOWS_LOCKDOWN_MODEAbi>): Int32 {
+    let call = CFunc<(CPointer<WLDP_WINDOWS_LOCKDOWN_MODEAbi>) -> Int32>(__windowsBindgen_WldpQueryWindowsLockdownModeProc())
+    return unsafe { call(lockdownMode) }
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpQueryWindowsLockdownMode == "on"]
+public unsafe func Windows_WldpQueryWindowsLockdownMode(lockdownMode: CPointer<WLDP_WINDOWS_LOCKDOWN_MODEAbi>): Int32 {
+    return WldpQueryWindowsLockdownMode(lockdownMode)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpQueryWindowsLockdownRestriction == "on"]
+func __windowsBindgen_WldpQueryWindowsLockdownRestrictionProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("Wldp.dll", "WldpQueryWindowsLockdownRestriction")
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpQueryWindowsLockdownRestriction == "on"]
+unsafe func WldpQueryWindowsLockdownRestriction(LockdownRestriction: CPointer<WLDP_WINDOWS_LOCKDOWN_RESTRICTIONAbi>): Int32 {
+    let call = CFunc<(CPointer<WLDP_WINDOWS_LOCKDOWN_RESTRICTIONAbi>) -> Int32>(__windowsBindgen_WldpQueryWindowsLockdownRestrictionProc())
+    return unsafe { call(LockdownRestriction) }
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpQueryWindowsLockdownRestriction == "on"]
+public unsafe func Windows_WldpQueryWindowsLockdownRestriction(LockdownRestriction: CPointer<WLDP_WINDOWS_LOCKDOWN_RESTRICTIONAbi>): Int32 {
+    return WldpQueryWindowsLockdownRestriction(LockdownRestriction)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpResetProductionConfiguration == "on"]
+func __windowsBindgen_WldpResetProductionConfigurationProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("Wldp.dll", "WldpResetProductionConfiguration")
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpResetProductionConfiguration == "on"]
+unsafe func WldpResetProductionConfiguration(): Int32 {
+    let call = CFunc<() -> Int32>(__windowsBindgen_WldpResetProductionConfigurationProc())
+    return unsafe { call() }
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpResetProductionConfiguration == "on"]
+public unsafe func Windows_WldpResetProductionConfiguration(): Int32 {
+    return WldpResetProductionConfiguration()
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpResetWcosProductionConfiguration == "on"]
+func __windowsBindgen_WldpResetWcosProductionConfigurationProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("Wldp.dll", "WldpResetWcosProductionConfiguration")
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpResetWcosProductionConfiguration == "on"]
+unsafe func WldpResetWcosProductionConfiguration(): Int32 {
+    let call = CFunc<() -> Int32>(__windowsBindgen_WldpResetWcosProductionConfigurationProc())
+    return unsafe { call() }
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpResetWcosProductionConfiguration == "on"]
+public unsafe func Windows_WldpResetWcosProductionConfiguration(): Int32 {
+    return WldpResetWcosProductionConfiguration()
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpSetWindowsLockdownRestriction == "on"]
+func __windowsBindgen_WldpSetWindowsLockdownRestrictionProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("Wldp.dll", "WldpSetWindowsLockdownRestriction")
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpSetWindowsLockdownRestriction == "on"]
+unsafe func WldpSetWindowsLockdownRestriction(LockdownRestriction: WLDP_WINDOWS_LOCKDOWN_RESTRICTIONAbi): Int32 {
+    let call = CFunc<(WLDP_WINDOWS_LOCKDOWN_RESTRICTIONAbi) -> Int32>(__windowsBindgen_WldpSetWindowsLockdownRestrictionProc())
+    return unsafe { call(LockdownRestriction) }
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && WLDP == "on" && Windows_Win32_System_WindowsProgramming_WldpSetWindowsLockdownRestriction == "on"]
+public unsafe func Windows_WldpSetWindowsLockdownRestriction(LockdownRestriction: WLDP_WINDOWS_LOCKDOWN_RESTRICTIONAbi): Int32 {
+    return WldpSetWindowsLockdownRestriction(LockdownRestriction)
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && API_MS_WIN_CORE_APIQUERY_L2_1_1 == "on" && Windows_Win32_System_WindowsProgramming_GetApiSetModuleBaseName == "on"]
+func __windowsBindgen_GetApiSetModuleBaseNameProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("api-ms-win-core-apiquery-l2-1-1.dll", "GetApiSetModuleBaseName")
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && API_MS_WIN_CORE_APIQUERY_L2_1_1 == "on" && Windows_Win32_System_WindowsProgramming_GetApiSetModuleBaseName == "on"]
+unsafe func GetApiSetModuleBaseName(contractName: CPointer<UInt8>, bufferLength: UInt32, moduleBaseName: CPointer<UInt16>, actualNameLength: CPointer<UInt32>): Int32 {
+    let call = CFunc<(CPointer<UInt8>, UInt32, CPointer<UInt16>, CPointer<UInt32>) -> Int32>(__windowsBindgen_GetApiSetModuleBaseNameProc())
+    return unsafe { call(contractName, bufferLength, moduleBaseName, actualNameLength) }
+}
+
+@When[Windows_Win32_System_WindowsProgramming == "on" && API_MS_WIN_CORE_APIQUERY_L2_1_1 == "on" && Windows_Win32_System_WindowsProgramming_GetApiSetModuleBaseName == "on"]
+public unsafe func Windows_GetApiSetModuleBaseName(contractName: CPointer<UInt8>, bufferLength: UInt32, moduleBaseName: CPointer<UInt16>, actualNameLength: CPointer<UInt32>): Int32 {
+    return GetApiSetModuleBaseName(contractName, bufferLength, moduleBaseName, actualNameLength)
 }
 
 @When[Windows_Win32_System_WindowsProgramming == "on"]

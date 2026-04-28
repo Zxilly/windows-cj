@@ -12,7 +12,9 @@ public struct ISelectableWordsSegmenterVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var ResolvedLanguage: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetTokenAt: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetTokens: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Tokenize: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -69,12 +71,14 @@ public class ISelectableWordsSegmenter <: InterfaceWrapperBase & ComInterface {
         return __vt.GetTokenAt(__liveRaw, text, startIndex, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetTokens(text: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetTokens(__liveRaw, text, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Tokenize(text: CPointer<Unit>, startIndex: UInt32, handler: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -258,6 +262,7 @@ public class ITextPredictionGeneratorFactory <: InterfaceWrapperBase & ComInterf
 @C
 public struct ITextReverseConversionGenerator2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetPhonemesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -302,6 +307,7 @@ public class ITextReverseConversionGenerator2 <: InterfaceWrapperBase & ComInter
         readVtbl<ITextReverseConversionGenerator2Vtbl>(ITextReverseConversionGenerator2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetPhonemesAsync(input: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -370,6 +376,7 @@ public struct IWordSegmentVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Text: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SourceTextSegment: CFunc<(CPointer<Unit>, CPointer<_impl_l0.TextSegment>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var AlternateForms: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -426,6 +433,7 @@ public class IWordSegment <: InterfaceWrapperBase & ComInterface {
         return __vt.SourceTextSegment(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AlternateForms(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -439,7 +447,9 @@ public struct IWordsSegmenterVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var ResolvedLanguage: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetTokenAt: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetTokens: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Tokenize: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -496,12 +506,14 @@ public class IWordsSegmenter <: InterfaceWrapperBase & ComInterface {
         return __vt.GetTokenAt(__liveRaw, text, startIndex, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetTokens(text: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetTokens(__liveRaw, text, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Tokenize(text: CPointer<Unit>, startIndex: UInt32, handler: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -564,8 +576,8 @@ public class IWordsSegmenterFactory <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[Windows_Data_Text == "on"]
+@When[Windows_Data_Text == "on" && Windows_Foundation_Collections == "on"]
 public type SelectableWordSegmentsTokenizingHandler = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Unit>
 
-@When[Windows_Data_Text == "on"]
+@When[Windows_Data_Text == "on" && Windows_Foundation_Collections == "on"]
 public type WordSegmentsTokenizingHandler = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Unit>

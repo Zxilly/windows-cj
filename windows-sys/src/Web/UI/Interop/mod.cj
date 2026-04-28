@@ -4,9 +4,7 @@ package windows_sys.Web.UI.Interop
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_UI == "on"]
 import windows_sys.UI as UI
-@When[Windows_Web_UI == "on"]
 import windows_sys.Web.UI as Web_UI
 import windows_sys._impl_l0 as _impl_l0
 import windows_sys._impl_l1 as _impl_l1
@@ -325,7 +323,9 @@ public struct IWebViewControlProcessVtbl {
     public var ProcessId: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var EnterpriseId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IsPrivateNetworkClientServerCapabilityEnabled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Web_UI == "on"]
     public var CreateWebViewControlAsync: CFunc<(CPointer<Unit>, Int64, Foundation__impl_l0.Rect, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on" && Windows_Web_UI == "on"]
     public var GetWebViewControls: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Terminate: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var ProcessExited: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
@@ -391,12 +391,14 @@ public class IWebViewControlProcess <: InterfaceWrapperBase & ComInterface {
         return __vt.IsPrivateNetworkClientServerCapabilityEnabled(__liveRaw, result__)
     }
 
+    @When[Windows_Web_UI == "on"]
     public unsafe func CreateWebViewControlAsync(hostWindowHandle: Int64, bounds: Foundation__impl_l0.Rect, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateWebViewControlAsync(__liveRaw, hostWindowHandle, bounds, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on" && Windows_Web_UI == "on"]
     public unsafe func GetWebViewControls(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -490,8 +492,10 @@ public struct IWebViewControlSiteVtbl {
     public var IsVisible: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var Close: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var MoveFocus: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
+    @When[Windows_Web_UI == "on"]
     public var MoveFocusRequested: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveMoveFocusRequested: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
+    @When[Windows_Web_UI == "on"]
     public var AcceleratorKeyPressed: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveAcceleratorKeyPressed: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -591,6 +595,7 @@ public class IWebViewControlSite <: InterfaceWrapperBase & ComInterface {
         return __vt.MoveFocus(__liveRaw, reason)
     }
 
+    @When[Windows_Web_UI == "on"]
     public unsafe func MoveFocusRequested(handler: CPointer<Unit>, result__: CPointer<Foundation__impl_l0.EventRegistrationToken>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -603,6 +608,7 @@ public class IWebViewControlSite <: InterfaceWrapperBase & ComInterface {
         return __vt.RemoveMoveFocusRequested(__liveRaw, token)
     }
 
+    @When[Windows_Web_UI == "on"]
     public unsafe func AcceleratorKeyPressed(handler: CPointer<Unit>, result__: CPointer<Foundation__impl_l0.EventRegistrationToken>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -620,8 +626,10 @@ public class IWebViewControlSite <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IWebViewControlSite2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Web_UI == "on"]
     public var GotFocus: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveGotFocus: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
+    @When[Windows_Web_UI == "on"]
     public var LostFocus: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveLostFocus: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -667,6 +675,7 @@ public class IWebViewControlSite2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IWebViewControlSite2Vtbl>(IWebViewControlSite2Vtbl())
     }
 
+    @When[Windows_Web_UI == "on"]
     public unsafe func GotFocus(handler: CPointer<Unit>, result__: CPointer<Foundation__impl_l0.EventRegistrationToken>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -679,6 +688,7 @@ public class IWebViewControlSite2 <: InterfaceWrapperBase & ComInterface {
         return __vt.RemoveGotFocus(__liveRaw, token)
     }
 
+    @When[Windows_Web_UI == "on"]
     public unsafe func LostFocus(handler: CPointer<Unit>, result__: CPointer<Foundation__impl_l0.EventRegistrationToken>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

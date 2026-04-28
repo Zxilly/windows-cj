@@ -1281,14 +1281,14 @@ extend EnergyUseLevel <: windows_core.CopyType & windows_core.RuntimeType & wind
 @C
 public struct IActivitySensorTriggerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Devices_Sensors == "on"]
+    @When[Windows_Devices_Sensors == "on" && Windows_Foundation_Collections == "on"]
     public var SubscribedActivities: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Devices_Sensors != "on"]
+    @When[Windows_Devices_Sensors != "on" || Windows_Foundation_Collections != "on"]
     public var SubscribedActivities: UIntNative = UIntNative(0)
     public var ReportInterval: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Devices_Sensors == "on"]
+    @When[Windows_Devices_Sensors == "on" && Windows_Foundation_Collections == "on"]
     public var SupportedActivities: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Devices_Sensors != "on"]
+    @When[Windows_Devices_Sensors != "on" || Windows_Foundation_Collections != "on"]
     public var SupportedActivities: UIntNative = UIntNative(0)
     public var MinimumReportInterval: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -1371,7 +1371,7 @@ public class IActivitySensorTrigger <: InterfaceWrapperBase & ComInterface & Run
         readVtbl<IActivitySensorTriggerVtbl>(IActivitySensorTriggerVtbl())
     }
 
-    @When[Windows_Devices_Sensors == "on"]
+    @When[Windows_Devices_Sensors == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func SubscribedActivities(): windows_collections.IVector<ActivityType> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1388,7 +1388,7 @@ public class IActivitySensorTrigger <: InterfaceWrapperBase & ComInterface & Run
         return result__
     }
 
-    @When[Windows_Devices_Sensors == "on"]
+    @When[Windows_Devices_Sensors == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func SupportedActivities(): windows_collections.IVectorView<ActivityType> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

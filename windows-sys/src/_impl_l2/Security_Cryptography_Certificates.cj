@@ -294,7 +294,9 @@ public class ICertificateStore <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ICertificateStoresStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllWithQueryAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var TrustedRootCertificationAuthorities: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IntermediateCertificationAuthorities: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -342,12 +344,14 @@ public class ICertificateStoresStatics <: InterfaceWrapperBase & ComInterface {
         readVtbl<ICertificateStoresStaticsVtbl>(ICertificateStoresStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindAllAsync(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllWithQueryAsync(query: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -432,8 +436,10 @@ public class ICertificateStoresStatics2 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ICmsAttachedSignatureVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Certificates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Content: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<UInt8>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Signers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var VerifySignature: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -479,6 +485,7 @@ public class ICmsAttachedSignature <: InterfaceWrapperBase & ComInterface {
         readVtbl<ICmsAttachedSignatureVtbl>(ICmsAttachedSignatureVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Certificates(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -491,6 +498,7 @@ public class ICmsAttachedSignature <: InterfaceWrapperBase & ComInterface {
         return __vt.Content(__liveRaw, resultSize__, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Signers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -565,7 +573,7 @@ public class ICmsAttachedSignatureFactory <: InterfaceWrapperBase & ComInterface
 @C
 public struct ICmsAttachedSignatureStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var GenerateSignatureAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -610,7 +618,7 @@ public class ICmsAttachedSignatureStatics <: InterfaceWrapperBase & ComInterface
         readVtbl<ICmsAttachedSignatureStaticsVtbl>(ICmsAttachedSignatureStaticsVtbl())
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GenerateSignatureAsync(data: CPointer<Unit>, signers: CPointer<Unit>, certificates: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -622,7 +630,9 @@ public class ICmsAttachedSignatureStatics <: InterfaceWrapperBase & ComInterface
 @C
 public struct ICmsDetachedSignatureVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Certificates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Signers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Storage_Streams == "on"]
     public var VerifySignatureAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -669,12 +679,14 @@ public class ICmsDetachedSignature <: InterfaceWrapperBase & ComInterface {
         readVtbl<ICmsDetachedSignatureVtbl>(ICmsDetachedSignatureVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Certificates(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Certificates(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Signers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -750,7 +762,7 @@ public class ICmsDetachedSignatureFactory <: InterfaceWrapperBase & ComInterface
 @C
 public struct ICmsDetachedSignatureStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var GenerateSignatureAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -795,7 +807,7 @@ public class ICmsDetachedSignatureStatics <: InterfaceWrapperBase & ComInterface
         readVtbl<ICmsDetachedSignatureStaticsVtbl>(ICmsDetachedSignatureStaticsVtbl())
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GenerateSignatureAsync(data: CPointer<Unit>, signers: CPointer<Unit>, certificates: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -891,6 +903,7 @@ public class ICmsSignerInfo <: InterfaceWrapperBase & ComInterface {
 public struct ICmsTimestampInfoVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var SigningCertificate: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Certificates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Timestamp: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.DateTime>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -942,6 +955,7 @@ public class ICmsTimestampInfo <: InterfaceWrapperBase & ComInterface {
         return __vt.SigningCertificate(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Certificates(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

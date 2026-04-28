@@ -8,9 +8,7 @@ import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result
 import windows_core as windows_core
 import windows_interface.{GUID}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
 
 
@@ -196,32 +194,195 @@ extend MW_FILTERMODE <: windows_core.CopyType & windows_core.RuntimeType & windo
 @When[Windows_Win32_UI_Magnification == "on" && Windows_Win32_Graphics_Gdi == "on"]
 public type MagImageScalingCallback = CFunc<(CPointer<Unit>, CPointer<Unit>, MAGIMAGEHEADERAbi, CPointer<Unit>, MAGIMAGEHEADERAbi, Win32_Foundation.RECTAbi, Win32_Foundation.RECTAbi, Win32_Graphics_Gdi.HRGN) -> Int32>
 
-@When[MAGNIFICATION == "on"]
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagGetColorEffect == "on"]
 foreign {
     func MagGetColorEffect(hwnd: CPointer<Unit>, pEffect: CPointer<MAGCOLOREFFECTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagGetColorEffect == "on"]
+public unsafe func Windows_MagGetColorEffect(hwnd: CPointer<Unit>, pEffect: CPointer<MAGCOLOREFFECTAbi>): Int32 {
+    return MagGetColorEffect(hwnd, pEffect)
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagGetFullscreenColorEffect == "on"]
+foreign {
     func MagGetFullscreenColorEffect(pEffect: CPointer<MAGCOLOREFFECTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagGetFullscreenColorEffect == "on"]
+public unsafe func Windows_MagGetFullscreenColorEffect(pEffect: CPointer<MAGCOLOREFFECTAbi>): Int32 {
+    return MagGetFullscreenColorEffect(pEffect)
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagGetFullscreenTransform == "on"]
+foreign {
     func MagGetFullscreenTransform(pMagLevel: CPointer<Float32>, pxOffset: CPointer<Int32>, pyOffset: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagGetFullscreenTransform == "on"]
+public unsafe func Windows_MagGetFullscreenTransform(pMagLevel: CPointer<Float32>, pxOffset: CPointer<Int32>, pyOffset: CPointer<Int32>): Int32 {
+    return MagGetFullscreenTransform(pMagLevel, pxOffset, pyOffset)
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagGetImageScalingCallback == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func MagGetImageScalingCallback(hwnd: CPointer<Unit>): MagImageScalingCallback
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagGetImageScalingCallback == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_MagGetImageScalingCallback(hwnd: CPointer<Unit>): MagImageScalingCallback {
+    return MagGetImageScalingCallback(hwnd)
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagGetInputTransform == "on"]
+foreign {
     func MagGetInputTransform(pfEnabled: CPointer<Int32>, pRectSource: CPointer<Win32_Foundation.RECTAbi>, pRectDest: CPointer<Win32_Foundation.RECTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagGetInputTransform == "on"]
+public unsafe func Windows_MagGetInputTransform(pfEnabled: CPointer<Int32>, pRectSource: CPointer<Win32_Foundation.RECTAbi>, pRectDest: CPointer<Win32_Foundation.RECTAbi>): Int32 {
+    return MagGetInputTransform(pfEnabled, pRectSource, pRectDest)
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagGetWindowFilterList == "on"]
+foreign {
     func MagGetWindowFilterList(hwnd: CPointer<Unit>, pdwFilterMode: CPointer<MW_FILTERMODEAbi>, count: Int32, pHWND: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagGetWindowFilterList == "on"]
+public unsafe func Windows_MagGetWindowFilterList(hwnd: CPointer<Unit>, pdwFilterMode: CPointer<MW_FILTERMODEAbi>, count: Int32, pHWND: CPointer<CPointer<Unit>>): Int32 {
+    return MagGetWindowFilterList(hwnd, pdwFilterMode, count, pHWND)
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagGetWindowSource == "on"]
+foreign {
     func MagGetWindowSource(hwnd: CPointer<Unit>, pRect: CPointer<Win32_Foundation.RECTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagGetWindowSource == "on"]
+public unsafe func Windows_MagGetWindowSource(hwnd: CPointer<Unit>, pRect: CPointer<Win32_Foundation.RECTAbi>): Int32 {
+    return MagGetWindowSource(hwnd, pRect)
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagGetWindowTransform == "on"]
+foreign {
     func MagGetWindowTransform(hwnd: CPointer<Unit>, pTransform: CPointer<MAGTRANSFORMAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagGetWindowTransform == "on"]
+public unsafe func Windows_MagGetWindowTransform(hwnd: CPointer<Unit>, pTransform: CPointer<MAGTRANSFORMAbi>): Int32 {
+    return MagGetWindowTransform(hwnd, pTransform)
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagInitialize == "on"]
+foreign {
     func MagInitialize(): Int32
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagInitialize == "on"]
+public unsafe func Windows_MagInitialize(): Int32 {
+    return MagInitialize()
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagSetColorEffect == "on"]
+foreign {
     func MagSetColorEffect(hwnd: CPointer<Unit>, pEffect: CPointer<MAGCOLOREFFECTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagSetColorEffect == "on"]
+public unsafe func Windows_MagSetColorEffect(hwnd: CPointer<Unit>, pEffect: CPointer<MAGCOLOREFFECTAbi>): Int32 {
+    return MagSetColorEffect(hwnd, pEffect)
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagSetFullscreenColorEffect == "on"]
+foreign {
     func MagSetFullscreenColorEffect(pEffect: CPointer<MAGCOLOREFFECTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagSetFullscreenColorEffect == "on"]
+public unsafe func Windows_MagSetFullscreenColorEffect(pEffect: CPointer<MAGCOLOREFFECTAbi>): Int32 {
+    return MagSetFullscreenColorEffect(pEffect)
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagSetFullscreenTransform == "on"]
+foreign {
     func MagSetFullscreenTransform(magLevel: Float32, xOffset: Int32, yOffset: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagSetFullscreenTransform == "on"]
+public unsafe func Windows_MagSetFullscreenTransform(magLevel: Float32, xOffset: Int32, yOffset: Int32): Int32 {
+    return MagSetFullscreenTransform(magLevel, xOffset, yOffset)
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagSetImageScalingCallback == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func MagSetImageScalingCallback(hwnd: CPointer<Unit>, callback: MagImageScalingCallback): Int32
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagSetImageScalingCallback == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_MagSetImageScalingCallback(hwnd: CPointer<Unit>, callback: MagImageScalingCallback): Int32 {
+    return MagSetImageScalingCallback(hwnd, callback)
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagSetInputTransform == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func MagSetInputTransform(fEnabled: Int32, pRectSource: CPointer<Win32_Foundation.RECTAbi>, pRectDest: CPointer<Win32_Foundation.RECTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagSetInputTransform == "on"]
+public unsafe func Windows_MagSetInputTransform(fEnabled: Int32, pRectSource: CPointer<Win32_Foundation.RECTAbi>, pRectDest: CPointer<Win32_Foundation.RECTAbi>): Int32 {
+    return MagSetInputTransform(fEnabled, pRectSource, pRectDest)
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagSetWindowFilterList == "on"]
+foreign {
     func MagSetWindowFilterList(hwnd: CPointer<Unit>, dwFilterMode: MW_FILTERMODEAbi, count: Int32, pHWND: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagSetWindowFilterList == "on"]
+public unsafe func Windows_MagSetWindowFilterList(hwnd: CPointer<Unit>, dwFilterMode: MW_FILTERMODEAbi, count: Int32, pHWND: CPointer<CPointer<Unit>>): Int32 {
+    return MagSetWindowFilterList(hwnd, dwFilterMode, count, pHWND)
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagSetWindowSource == "on"]
+foreign {
     func MagSetWindowSource(hwnd: CPointer<Unit>, rect: Win32_Foundation.RECTAbi): Int32
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagSetWindowSource == "on"]
+public unsafe func Windows_MagSetWindowSource(hwnd: CPointer<Unit>, rect: Win32_Foundation.RECTAbi): Int32 {
+    return MagSetWindowSource(hwnd, rect)
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagSetWindowTransform == "on"]
+foreign {
     func MagSetWindowTransform(hwnd: CPointer<Unit>, pTransform: CPointer<MAGTRANSFORMAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagSetWindowTransform == "on"]
+public unsafe func Windows_MagSetWindowTransform(hwnd: CPointer<Unit>, pTransform: CPointer<MAGTRANSFORMAbi>): Int32 {
+    return MagSetWindowTransform(hwnd, pTransform)
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagShowSystemCursor == "on"]
+foreign {
     func MagShowSystemCursor(fShowCursor: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagShowSystemCursor == "on"]
+public unsafe func Windows_MagShowSystemCursor(fShowCursor: Int32): Int32 {
+    return MagShowSystemCursor(fShowCursor)
+}
+
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagUninitialize == "on"]
+foreign {
     func MagUninitialize(): Int32
 }
 
-@When[MAGNIFICATION == "on" && Windows_Win32_Graphics_Gdi == "on"]
-foreign {
-    func MagGetImageScalingCallback(hwnd: CPointer<Unit>): MagImageScalingCallback
-    func MagSetImageScalingCallback(hwnd: CPointer<Unit>, callback: MagImageScalingCallback): Int32
+@When[Windows_Win32_UI_Magnification == "on" && MAGNIFICATION == "on" && Windows_Win32_UI_Magnification_MagUninitialize == "on"]
+public unsafe func Windows_MagUninitialize(): Int32 {
+    return MagUninitialize()
 }
 
 @When[Windows_Win32_UI_Magnification == "on"]

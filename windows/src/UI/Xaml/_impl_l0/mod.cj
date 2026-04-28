@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_UI == "on"]
 import windows.UI as UI
 @When[Windows_UI_Xaml_Interop == "on"]
 import windows.UI.Xaml.Interop as UI_Xaml_Interop
@@ -319,12 +317,14 @@ public class ApplicationInitializationCallback <: InterfaceWrapperBase & ComInte
 @When[Windows_UI_Xaml == "on"]
 extend ApplicationInitializationCallback <: windows_core.Interface<ApplicationInitializationCallback> {}
 
+@When[Windows_UI_Xaml == "on"]
 private open class ApplicationInitializationCallbackInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml == "on"]
 private open class ApplicationInitializationCallbackInvoker <: ApplicationInitializationCallbackInvokerErased {
     public open func Invoke(p: InParam<ApplicationInitializationCallbackParams>): Unit {
         ()
@@ -336,6 +336,7 @@ private open class ApplicationInitializationCallbackInvoker <: ApplicationInitia
     }
 }
 
+@When[Windows_UI_Xaml == "on"]
 private class ApplicationInitializationCallbackBox <: ApplicationInitializationCallbackInvoker {
     public let invoke_: (InParam<ApplicationInitializationCallbackParams>) -> Unit
     private let vtblHandle: CPointerHandle<ApplicationInitializationCallbackVtbl>
@@ -354,6 +355,7 @@ private class ApplicationInitializationCallbackBox <: ApplicationInitializationC
     }
 }
 
+@When[Windows_UI_Xaml == "on"]
 func buildApplicationInitializationCallbackBoxVtbl(): ApplicationInitializationCallbackVtbl {
     var vtbl = ApplicationInitializationCallbackVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -900,12 +902,14 @@ public class BindingFailedEventHandler <: InterfaceWrapperBase & ComInterface & 
 @When[Windows_UI_Xaml == "on"]
 extend BindingFailedEventHandler <: windows_core.Interface<BindingFailedEventHandler> {}
 
+@When[Windows_UI_Xaml == "on"]
 private open class BindingFailedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml == "on"]
 private open class BindingFailedEventHandlerInvoker <: BindingFailedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<BindingFailedEventArgs>): Unit {
         ()
@@ -917,6 +921,7 @@ private open class BindingFailedEventHandlerInvoker <: BindingFailedEventHandler
     }
 }
 
+@When[Windows_UI_Xaml == "on"]
 private class BindingFailedEventHandlerBox <: BindingFailedEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<BindingFailedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<BindingFailedEventHandlerVtbl>
@@ -935,6 +940,7 @@ private class BindingFailedEventHandlerBox <: BindingFailedEventHandlerInvoker {
     }
 }
 
+@When[Windows_UI_Xaml == "on"]
 func buildBindingFailedEventHandlerBoxVtbl(): BindingFailedEventHandlerVtbl {
     var vtbl = BindingFailedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -1845,12 +1851,14 @@ public class CreateDefaultValueCallback <: InterfaceWrapperBase & ComInterface &
 @When[Windows_UI_Xaml == "on"]
 extend CreateDefaultValueCallback <: windows_core.Interface<CreateDefaultValueCallback> {}
 
+@When[Windows_UI_Xaml == "on"]
 private open class CreateDefaultValueCallbackInvokerErased {
     public open func __winrtThunk_Invoke(result: CPointer<CPointer<Unit>>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml == "on"]
 private open class CreateDefaultValueCallbackInvoker <: CreateDefaultValueCallbackInvokerErased {
     public open func Invoke(): IInspectable {
         IInspectable(CPointer<Unit>())
@@ -1863,6 +1871,7 @@ private open class CreateDefaultValueCallbackInvoker <: CreateDefaultValueCallba
     }
 }
 
+@When[Windows_UI_Xaml == "on"]
 private class CreateDefaultValueCallbackBox <: CreateDefaultValueCallbackInvoker {
     public let invoke_: () -> IInspectable
     private let vtblHandle: CPointerHandle<CreateDefaultValueCallbackVtbl>
@@ -1881,6 +1890,7 @@ private class CreateDefaultValueCallbackBox <: CreateDefaultValueCallbackInvoker
     }
 }
 
+@When[Windows_UI_Xaml == "on"]
 func buildCreateDefaultValueCallbackBoxVtbl(): CreateDefaultValueCallbackVtbl {
     var vtbl = CreateDefaultValueCallbackVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -2360,7 +2370,7 @@ extend DependencyObject <: windows_core.HandleWinrtType<DependencyObject> {
     }
 }
 
-@When[Windows_UI_Xaml == "on"]
+@When[Windows_UI_Xaml == "on" && Windows_Foundation_Collections == "on"]
 public class DependencyObjectCollection <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -2518,6 +2528,7 @@ public class DependencyObjectCollection <: InterfaceWrapperBase & ComInterface &
         return asIIterable().First()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateInstance(): DependencyObjectCollection {
         var composableInner__: CPointer<Unit> = CPointer<Unit>()
         var result__: Option<DependencyObjectCollection> = Option<DependencyObjectCollection>.None
@@ -2531,7 +2542,7 @@ public class DependencyObjectCollection <: InterfaceWrapperBase & ComInterface &
     }
 }
 
-@When[Windows_UI_Xaml == "on"]
+@When[Windows_UI_Xaml == "on" && Windows_Foundation_Collections == "on"]
 extend DependencyObjectCollection <: windows_core.HandleWinrtType<DependencyObjectCollection> {
     public static func intoWinrtHandle(value: DependencyObjectCollection): CPointer<Unit> {
         value.asRaw()
@@ -2753,12 +2764,14 @@ public class DependencyPropertyChangedCallback <: InterfaceWrapperBase & ComInte
 @When[Windows_UI_Xaml == "on"]
 extend DependencyPropertyChangedCallback <: windows_core.Interface<DependencyPropertyChangedCallback> {}
 
+@When[Windows_UI_Xaml == "on"]
 private open class DependencyPropertyChangedCallbackInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml == "on"]
 private open class DependencyPropertyChangedCallbackInvoker <: DependencyPropertyChangedCallbackInvokerErased {
     public open func Invoke(sender: InParam<DependencyObject>, dp: InParam<DependencyProperty>): Unit {
         ()
@@ -2770,6 +2783,7 @@ private open class DependencyPropertyChangedCallbackInvoker <: DependencyPropert
     }
 }
 
+@When[Windows_UI_Xaml == "on"]
 private class DependencyPropertyChangedCallbackBox <: DependencyPropertyChangedCallbackInvoker {
     public let invoke_: (InParam<DependencyObject>, InParam<DependencyProperty>) -> Unit
     private let vtblHandle: CPointerHandle<DependencyPropertyChangedCallbackVtbl>
@@ -2788,6 +2802,7 @@ private class DependencyPropertyChangedCallbackBox <: DependencyPropertyChangedC
     }
 }
 
+@When[Windows_UI_Xaml == "on"]
 func buildDependencyPropertyChangedCallbackBoxVtbl(): DependencyPropertyChangedCallbackVtbl {
     var vtbl = DependencyPropertyChangedCallbackVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -2978,12 +2993,14 @@ public class DependencyPropertyChangedEventHandler <: InterfaceWrapperBase & Com
 @When[Windows_UI_Xaml == "on"]
 extend DependencyPropertyChangedEventHandler <: windows_core.Interface<DependencyPropertyChangedEventHandler> {}
 
+@When[Windows_UI_Xaml == "on"]
 private open class DependencyPropertyChangedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml == "on"]
 private open class DependencyPropertyChangedEventHandlerInvoker <: DependencyPropertyChangedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<DependencyPropertyChangedEventArgs>): Unit {
         ()
@@ -2995,6 +3012,7 @@ private open class DependencyPropertyChangedEventHandlerInvoker <: DependencyPro
     }
 }
 
+@When[Windows_UI_Xaml == "on"]
 private class DependencyPropertyChangedEventHandlerBox <: DependencyPropertyChangedEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<DependencyPropertyChangedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<DependencyPropertyChangedEventHandlerVtbl>
@@ -3013,6 +3031,7 @@ private class DependencyPropertyChangedEventHandlerBox <: DependencyPropertyChan
     }
 }
 
+@When[Windows_UI_Xaml == "on"]
 func buildDependencyPropertyChangedEventHandlerBoxVtbl(): DependencyPropertyChangedEventHandlerVtbl {
     var vtbl = DependencyPropertyChangedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -4318,12 +4337,14 @@ public class EnteredBackgroundEventHandler <: InterfaceWrapperBase & ComInterfac
 @When[Windows_UI_Xaml == "on" && Windows_ApplicationModel == "on"]
 extend EnteredBackgroundEventHandler <: windows_core.Interface<EnteredBackgroundEventHandler> {}
 
+@When[Windows_UI_Xaml == "on" && Windows_ApplicationModel == "on"]
 private open class EnteredBackgroundEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml == "on" && Windows_ApplicationModel == "on"]
 private open class EnteredBackgroundEventHandlerInvoker <: EnteredBackgroundEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<_impl_l0.EnteredBackgroundEventArgs>): Unit {
         ()
@@ -4335,6 +4356,7 @@ private open class EnteredBackgroundEventHandlerInvoker <: EnteredBackgroundEven
     }
 }
 
+@When[Windows_UI_Xaml == "on" && Windows_ApplicationModel == "on"]
 private class EnteredBackgroundEventHandlerBox <: EnteredBackgroundEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<_impl_l0.EnteredBackgroundEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<EnteredBackgroundEventHandlerVtbl>
@@ -4353,6 +4375,7 @@ private class EnteredBackgroundEventHandlerBox <: EnteredBackgroundEventHandlerI
     }
 }
 
+@When[Windows_UI_Xaml == "on" && Windows_ApplicationModel == "on"]
 func buildEnteredBackgroundEventHandlerBoxVtbl(): EnteredBackgroundEventHandlerVtbl {
     var vtbl = EnteredBackgroundEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -4542,12 +4565,14 @@ public class ExceptionRoutedEventHandler <: InterfaceWrapperBase & ComInterface 
 @When[Windows_UI_Xaml == "on"]
 extend ExceptionRoutedEventHandler <: windows_core.Interface<ExceptionRoutedEventHandler> {}
 
+@When[Windows_UI_Xaml == "on"]
 private open class ExceptionRoutedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml == "on"]
 private open class ExceptionRoutedEventHandlerInvoker <: ExceptionRoutedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<ExceptionRoutedEventArgs>): Unit {
         ()
@@ -4559,6 +4584,7 @@ private open class ExceptionRoutedEventHandlerInvoker <: ExceptionRoutedEventHan
     }
 }
 
+@When[Windows_UI_Xaml == "on"]
 private class ExceptionRoutedEventHandlerBox <: ExceptionRoutedEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<ExceptionRoutedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<ExceptionRoutedEventHandlerVtbl>
@@ -4577,6 +4603,7 @@ private class ExceptionRoutedEventHandlerBox <: ExceptionRoutedEventHandlerInvok
     }
 }
 
+@When[Windows_UI_Xaml == "on"]
 func buildExceptionRoutedEventHandlerBoxVtbl(): ExceptionRoutedEventHandlerVtbl {
     var vtbl = ExceptionRoutedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -9070,7 +9097,10 @@ extend IDependencyObject2 <: windows_core.Interface<IDependencyObject2> {}
 @C
 public struct IDependencyObjectCollectionFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateInstance: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateInstance: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -9139,6 +9169,7 @@ public class IDependencyObjectCollectionFactory <: InterfaceWrapperBase & ComInt
         readVtbl<IDependencyObjectCollectionFactoryVtbl>(IDependencyObjectCollectionFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateInstance(baseInterface: IInspectable, innerInterface: CPointer<CPointer<Unit>>): DependencyObjectCollection {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -13314,8 +13345,14 @@ public struct IResourceDictionaryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Source: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetSource: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var MergedDictionaries: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var MergedDictionaries: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var ThemeDictionaries: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ThemeDictionaries: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -13398,6 +13435,7 @@ public class IResourceDictionary <: InterfaceWrapperBase & ComInterface & Runtim
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MergedDictionaries(): windows_collections.IVector<ResourceDictionary> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -13406,6 +13444,7 @@ public class IResourceDictionary <: InterfaceWrapperBase & ComInterface & Runtim
         return windows_collections.IVector<ResourceDictionary>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ThemeDictionaries(): windows_collections.IMap<IInspectable, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -16068,7 +16107,10 @@ extend IUIElementFactory <: windows_core.Interface<IUIElementFactory> {}
 @C
 public struct IUIElementOverrides7Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetChildrenInTabFocusOrder: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetChildrenInTabFocusOrder: UIntNative = UIntNative(0)
     @When[Windows_UI_Xaml_Input == "on"]
     public var OnProcessKeyboardAccelerators: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Xaml_Input != "on"]
@@ -16141,6 +16183,7 @@ public class IUIElementOverrides7 <: InterfaceWrapperBase & ComInterface & Runti
         readVtbl<IUIElementOverrides7Vtbl>(IUIElementOverrides7Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetChildrenInTabFocusOrder(): windows_collections.IIterable<DependencyObject> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -18334,12 +18377,14 @@ public class LeavingBackgroundEventHandler <: InterfaceWrapperBase & ComInterfac
 @When[Windows_UI_Xaml == "on" && Windows_ApplicationModel == "on"]
 extend LeavingBackgroundEventHandler <: windows_core.Interface<LeavingBackgroundEventHandler> {}
 
+@When[Windows_UI_Xaml == "on" && Windows_ApplicationModel == "on"]
 private open class LeavingBackgroundEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml == "on" && Windows_ApplicationModel == "on"]
 private open class LeavingBackgroundEventHandlerInvoker <: LeavingBackgroundEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<_impl_l0.LeavingBackgroundEventArgs>): Unit {
         ()
@@ -18351,6 +18396,7 @@ private open class LeavingBackgroundEventHandlerInvoker <: LeavingBackgroundEven
     }
 }
 
+@When[Windows_UI_Xaml == "on" && Windows_ApplicationModel == "on"]
 private class LeavingBackgroundEventHandlerBox <: LeavingBackgroundEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<_impl_l0.LeavingBackgroundEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<LeavingBackgroundEventHandlerVtbl>
@@ -18369,6 +18415,7 @@ private class LeavingBackgroundEventHandlerBox <: LeavingBackgroundEventHandlerI
     }
 }
 
+@When[Windows_UI_Xaml == "on" && Windows_ApplicationModel == "on"]
 func buildLeavingBackgroundEventHandlerBoxVtbl(): LeavingBackgroundEventHandlerVtbl {
     var vtbl = LeavingBackgroundEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -18775,12 +18822,14 @@ public class PropertyChangedCallback <: InterfaceWrapperBase & ComInterface & wi
 @When[Windows_UI_Xaml == "on"]
 extend PropertyChangedCallback <: windows_core.Interface<PropertyChangedCallback> {}
 
+@When[Windows_UI_Xaml == "on"]
 private open class PropertyChangedCallbackInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml == "on"]
 private open class PropertyChangedCallbackInvoker <: PropertyChangedCallbackInvokerErased {
     public open func Invoke(d: InParam<DependencyObject>, e: InParam<DependencyPropertyChangedEventArgs>): Unit {
         ()
@@ -18792,6 +18841,7 @@ private open class PropertyChangedCallbackInvoker <: PropertyChangedCallbackInvo
     }
 }
 
+@When[Windows_UI_Xaml == "on"]
 private class PropertyChangedCallbackBox <: PropertyChangedCallbackInvoker {
     public let invoke_: (InParam<DependencyObject>, InParam<DependencyPropertyChangedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<PropertyChangedCallbackVtbl>
@@ -18810,6 +18860,7 @@ private class PropertyChangedCallbackBox <: PropertyChangedCallbackInvoker {
     }
 }
 
+@When[Windows_UI_Xaml == "on"]
 func buildPropertyChangedCallbackBoxVtbl(): PropertyChangedCallbackVtbl {
     var vtbl = PropertyChangedCallbackVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -19446,10 +19497,12 @@ public class ResourceDictionary <: InterfaceWrapperBase & ComInterface & windows
         defaultInterface().SetSource(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MergedDictionaries(): windows_collections.IVector<ResourceDictionary> {
         return defaultInterface().MergedDictionaries()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ThemeDictionaries(): windows_collections.IMap<IInspectable, IInspectable> {
         return defaultInterface().ThemeDictionaries()
     }
@@ -19785,12 +19838,14 @@ public class RoutedEventHandler <: InterfaceWrapperBase & ComInterface & windows
 @When[Windows_UI_Xaml == "on"]
 extend RoutedEventHandler <: windows_core.Interface<RoutedEventHandler> {}
 
+@When[Windows_UI_Xaml == "on"]
 private open class RoutedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml == "on"]
 private open class RoutedEventHandlerInvoker <: RoutedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<RoutedEventArgs>): Unit {
         ()
@@ -19802,6 +19857,7 @@ private open class RoutedEventHandlerInvoker <: RoutedEventHandlerInvokerErased 
     }
 }
 
+@When[Windows_UI_Xaml == "on"]
 private class RoutedEventHandlerBox <: RoutedEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<RoutedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<RoutedEventHandlerVtbl>
@@ -19820,6 +19876,7 @@ private class RoutedEventHandlerBox <: RoutedEventHandlerInvoker {
     }
 }
 
+@When[Windows_UI_Xaml == "on"]
 func buildRoutedEventHandlerBoxVtbl(): RoutedEventHandlerVtbl {
     var vtbl = RoutedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -20397,12 +20454,14 @@ public class SizeChangedEventHandler <: InterfaceWrapperBase & ComInterface & wi
 @When[Windows_UI_Xaml == "on"]
 extend SizeChangedEventHandler <: windows_core.Interface<SizeChangedEventHandler> {}
 
+@When[Windows_UI_Xaml == "on"]
 private open class SizeChangedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml == "on"]
 private open class SizeChangedEventHandlerInvoker <: SizeChangedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<SizeChangedEventArgs>): Unit {
         ()
@@ -20414,6 +20473,7 @@ private open class SizeChangedEventHandlerInvoker <: SizeChangedEventHandlerInvo
     }
 }
 
+@When[Windows_UI_Xaml == "on"]
 private class SizeChangedEventHandlerBox <: SizeChangedEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<SizeChangedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<SizeChangedEventHandlerVtbl>
@@ -20432,6 +20492,7 @@ private class SizeChangedEventHandlerBox <: SizeChangedEventHandlerInvoker {
     }
 }
 
+@When[Windows_UI_Xaml == "on"]
 func buildSizeChangedEventHandlerBoxVtbl(): SizeChangedEventHandlerVtbl {
     var vtbl = SizeChangedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -20895,12 +20956,14 @@ public class SuspendingEventHandler <: InterfaceWrapperBase & ComInterface & win
 @When[Windows_UI_Xaml == "on" && Windows_ApplicationModel == "on"]
 extend SuspendingEventHandler <: windows_core.Interface<SuspendingEventHandler> {}
 
+@When[Windows_UI_Xaml == "on" && Windows_ApplicationModel == "on"]
 private open class SuspendingEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml == "on" && Windows_ApplicationModel == "on"]
 private open class SuspendingEventHandlerInvoker <: SuspendingEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<_impl_l1.SuspendingEventArgs>): Unit {
         ()
@@ -20912,6 +20975,7 @@ private open class SuspendingEventHandlerInvoker <: SuspendingEventHandlerInvoke
     }
 }
 
+@When[Windows_UI_Xaml == "on" && Windows_ApplicationModel == "on"]
 private class SuspendingEventHandlerBox <: SuspendingEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<_impl_l1.SuspendingEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<SuspendingEventHandlerVtbl>
@@ -20930,6 +20994,7 @@ private class SuspendingEventHandlerBox <: SuspendingEventHandlerInvoker {
     }
 }
 
+@When[Windows_UI_Xaml == "on" && Windows_ApplicationModel == "on"]
 func buildSuspendingEventHandlerBoxVtbl(): SuspendingEventHandlerVtbl {
     var vtbl = SuspendingEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -21499,7 +21564,7 @@ extend TriggerAction <: windows_core.HandleWinrtType<TriggerAction> {
     }
 }
 
-@When[Windows_UI_Xaml == "on"]
+@When[Windows_UI_Xaml == "on" && Windows_Foundation_Collections == "on"]
 public class TriggerActionCollection <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -21647,7 +21712,7 @@ public class TriggerActionCollection <: InterfaceWrapperBase & ComInterface & wi
     }
 }
 
-@When[Windows_UI_Xaml == "on"]
+@When[Windows_UI_Xaml == "on" && Windows_Foundation_Collections == "on"]
 extend TriggerActionCollection <: windows_core.HandleWinrtType<TriggerActionCollection> {
     public static func intoWinrtHandle(value: TriggerActionCollection): CPointer<Unit> {
         value.asRaw()
@@ -21760,7 +21825,7 @@ extend TriggerBase <: windows_core.HandleWinrtType<TriggerBase> {
     }
 }
 
-@When[Windows_UI_Xaml == "on"]
+@When[Windows_UI_Xaml == "on" && Windows_Foundation_Collections == "on"]
 public class TriggerCollection <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -21897,7 +21962,7 @@ public class TriggerCollection <: InterfaceWrapperBase & ComInterface & windows_
     }
 }
 
-@When[Windows_UI_Xaml == "on"]
+@When[Windows_UI_Xaml == "on" && Windows_Foundation_Collections == "on"]
 extend TriggerCollection <: windows_core.HandleWinrtType<TriggerCollection> {
     public static func intoWinrtHandle(value: TriggerCollection): CPointer<Unit> {
         value.asRaw()
@@ -22095,12 +22160,14 @@ public class UnhandledExceptionEventHandler <: InterfaceWrapperBase & ComInterfa
 @When[Windows_UI_Xaml == "on"]
 extend UnhandledExceptionEventHandler <: windows_core.Interface<UnhandledExceptionEventHandler> {}
 
+@When[Windows_UI_Xaml == "on"]
 private open class UnhandledExceptionEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml == "on"]
 private open class UnhandledExceptionEventHandlerInvoker <: UnhandledExceptionEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<UnhandledExceptionEventArgs>): Unit {
         ()
@@ -22112,6 +22179,7 @@ private open class UnhandledExceptionEventHandlerInvoker <: UnhandledExceptionEv
     }
 }
 
+@When[Windows_UI_Xaml == "on"]
 private class UnhandledExceptionEventHandlerBox <: UnhandledExceptionEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<UnhandledExceptionEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<UnhandledExceptionEventHandlerVtbl>
@@ -22130,6 +22198,7 @@ private class UnhandledExceptionEventHandlerBox <: UnhandledExceptionEventHandle
     }
 }
 
+@When[Windows_UI_Xaml == "on"]
 func buildUnhandledExceptionEventHandlerBoxVtbl(): UnhandledExceptionEventHandlerVtbl {
     var vtbl = UnhandledExceptionEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -22523,12 +22592,14 @@ public class WindowActivatedEventHandler <: InterfaceWrapperBase & ComInterface 
 @When[Windows_UI_Xaml == "on" && Windows_UI_Core == "on"]
 extend WindowActivatedEventHandler <: windows_core.Interface<WindowActivatedEventHandler> {}
 
+@When[Windows_UI_Xaml == "on" && Windows_UI_Core == "on"]
 private open class WindowActivatedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml == "on" && Windows_UI_Core == "on"]
 private open class WindowActivatedEventHandlerInvoker <: WindowActivatedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<_impl_l1.WindowActivatedEventArgs>): Unit {
         ()
@@ -22540,6 +22611,7 @@ private open class WindowActivatedEventHandlerInvoker <: WindowActivatedEventHan
     }
 }
 
+@When[Windows_UI_Xaml == "on" && Windows_UI_Core == "on"]
 private class WindowActivatedEventHandlerBox <: WindowActivatedEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<_impl_l1.WindowActivatedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<WindowActivatedEventHandlerVtbl>
@@ -22558,6 +22630,7 @@ private class WindowActivatedEventHandlerBox <: WindowActivatedEventHandlerInvok
     }
 }
 
+@When[Windows_UI_Xaml == "on" && Windows_UI_Core == "on"]
 func buildWindowActivatedEventHandlerBoxVtbl(): WindowActivatedEventHandlerVtbl {
     var vtbl = WindowActivatedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -22650,12 +22723,14 @@ public class WindowClosedEventHandler <: InterfaceWrapperBase & ComInterface & w
 @When[Windows_UI_Xaml == "on" && Windows_UI_Core == "on"]
 extend WindowClosedEventHandler <: windows_core.Interface<WindowClosedEventHandler> {}
 
+@When[Windows_UI_Xaml == "on" && Windows_UI_Core == "on"]
 private open class WindowClosedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml == "on" && Windows_UI_Core == "on"]
 private open class WindowClosedEventHandlerInvoker <: WindowClosedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<_impl_l0.CoreWindowEventArgs>): Unit {
         ()
@@ -22667,6 +22742,7 @@ private open class WindowClosedEventHandlerInvoker <: WindowClosedEventHandlerIn
     }
 }
 
+@When[Windows_UI_Xaml == "on" && Windows_UI_Core == "on"]
 private class WindowClosedEventHandlerBox <: WindowClosedEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<_impl_l0.CoreWindowEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<WindowClosedEventHandlerVtbl>
@@ -22685,6 +22761,7 @@ private class WindowClosedEventHandlerBox <: WindowClosedEventHandlerInvoker {
     }
 }
 
+@When[Windows_UI_Xaml == "on" && Windows_UI_Core == "on"]
 func buildWindowClosedEventHandlerBoxVtbl(): WindowClosedEventHandlerVtbl {
     var vtbl = WindowClosedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -22777,12 +22854,14 @@ public class WindowSizeChangedEventHandler <: InterfaceWrapperBase & ComInterfac
 @When[Windows_UI_Xaml == "on" && Windows_UI_Core == "on"]
 extend WindowSizeChangedEventHandler <: windows_core.Interface<WindowSizeChangedEventHandler> {}
 
+@When[Windows_UI_Xaml == "on" && Windows_UI_Core == "on"]
 private open class WindowSizeChangedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml == "on" && Windows_UI_Core == "on"]
 private open class WindowSizeChangedEventHandlerInvoker <: WindowSizeChangedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<_impl_l1.WindowSizeChangedEventArgs>): Unit {
         ()
@@ -22794,6 +22873,7 @@ private open class WindowSizeChangedEventHandlerInvoker <: WindowSizeChangedEven
     }
 }
 
+@When[Windows_UI_Xaml == "on" && Windows_UI_Core == "on"]
 private class WindowSizeChangedEventHandlerBox <: WindowSizeChangedEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<_impl_l1.WindowSizeChangedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<WindowSizeChangedEventHandlerVtbl>
@@ -22812,6 +22892,7 @@ private class WindowSizeChangedEventHandlerBox <: WindowSizeChangedEventHandlerI
     }
 }
 
+@When[Windows_UI_Xaml == "on" && Windows_UI_Core == "on"]
 func buildWindowSizeChangedEventHandlerBoxVtbl(): WindowSizeChangedEventHandlerVtbl {
     var vtbl = WindowSizeChangedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -22904,12 +22985,14 @@ public class WindowVisibilityChangedEventHandler <: InterfaceWrapperBase & ComIn
 @When[Windows_UI_Xaml == "on" && Windows_UI_Core == "on"]
 extend WindowVisibilityChangedEventHandler <: windows_core.Interface<WindowVisibilityChangedEventHandler> {}
 
+@When[Windows_UI_Xaml == "on" && Windows_UI_Core == "on"]
 private open class WindowVisibilityChangedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml == "on" && Windows_UI_Core == "on"]
 private open class WindowVisibilityChangedEventHandlerInvoker <: WindowVisibilityChangedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<_impl_l1.VisibilityChangedEventArgs>): Unit {
         ()
@@ -22921,6 +23004,7 @@ private open class WindowVisibilityChangedEventHandlerInvoker <: WindowVisibilit
     }
 }
 
+@When[Windows_UI_Xaml == "on" && Windows_UI_Core == "on"]
 private class WindowVisibilityChangedEventHandlerBox <: WindowVisibilityChangedEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<_impl_l1.VisibilityChangedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<WindowVisibilityChangedEventHandlerVtbl>
@@ -22939,6 +23023,7 @@ private class WindowVisibilityChangedEventHandlerBox <: WindowVisibilityChangedE
     }
 }
 
+@When[Windows_UI_Xaml == "on" && Windows_UI_Core == "on"]
 func buildWindowVisibilityChangedEventHandlerBoxVtbl(): WindowVisibilityChangedEventHandlerVtbl {
     var vtbl = WindowVisibilityChangedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()

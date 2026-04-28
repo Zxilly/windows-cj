@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 @When[Windows_UI_Xaml_Interop == "on"]
 import windows.UI.Xaml.Interop as UI_Xaml_Interop
@@ -1118,12 +1117,14 @@ public class NavigationFailedEventHandler <: InterfaceWrapperBase & ComInterface
 @When[Windows_UI_Xaml_Navigation == "on"]
 extend NavigationFailedEventHandler <: windows_core.Interface<NavigationFailedEventHandler> {}
 
+@When[Windows_UI_Xaml_Navigation == "on"]
 private open class NavigationFailedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Navigation == "on"]
 private open class NavigationFailedEventHandlerInvoker <: NavigationFailedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<NavigationFailedEventArgs>): Unit {
         ()
@@ -1135,6 +1136,7 @@ private open class NavigationFailedEventHandlerInvoker <: NavigationFailedEventH
     }
 }
 
+@When[Windows_UI_Xaml_Navigation == "on"]
 private class NavigationFailedEventHandlerBox <: NavigationFailedEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<NavigationFailedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<NavigationFailedEventHandlerVtbl>
@@ -1153,6 +1155,7 @@ private class NavigationFailedEventHandlerBox <: NavigationFailedEventHandlerInv
     }
 }
 
+@When[Windows_UI_Xaml_Navigation == "on"]
 func buildNavigationFailedEventHandlerBoxVtbl(): NavigationFailedEventHandlerVtbl {
     var vtbl = NavigationFailedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()

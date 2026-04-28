@@ -8,7 +8,6 @@ import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 import windows.Win32._impl_l0 as Win32__impl_l0
 
@@ -1138,24 +1137,115 @@ extend _DMO_VIDEO_OUTPUT_STREAM_FLAGS <: windows_core.CopyType & windows_core.Ru
     }
 }
 
-@When[MSDMO == "on"]
+@When[Windows_Win32_Media_DxMediaObjects == "on" && MSDMO == "on" && Windows_Win32_Media_DxMediaObjects_DMOEnum == "on"]
 foreign {
     func DMOEnum(guidCategory: CPointer<GUID>, dwFlags: UInt32, cInTypes: UInt32, pInTypes: CPointer<DMO_PARTIAL_MEDIATYPEAbi>, cOutTypes: UInt32, pOutTypes: CPointer<DMO_PARTIAL_MEDIATYPEAbi>, ppEnum: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_DxMediaObjects == "on" && MSDMO == "on" && Windows_Win32_Media_DxMediaObjects_DMOEnum == "on"]
+public unsafe func Windows_DMOEnum(guidCategory: CPointer<GUID>, dwFlags: UInt32, cInTypes: UInt32, pInTypes: CPointer<DMO_PARTIAL_MEDIATYPEAbi>, cOutTypes: UInt32, pOutTypes: CPointer<DMO_PARTIAL_MEDIATYPEAbi>, ppEnum: CPointer<CPointer<Unit>>): Int32 {
+    return DMOEnum(guidCategory, dwFlags, cInTypes, pInTypes, cOutTypes, pOutTypes, ppEnum)
+}
+
+@When[Windows_Win32_Media_DxMediaObjects == "on" && MSDMO == "on" && Windows_Win32_Media_DxMediaObjects_DMOGetName == "on"]
+foreign {
     // param-hint: szName fixed=80
     func DMOGetName(clsidDMO: CPointer<GUID>, szName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Media_DxMediaObjects == "on" && MSDMO == "on" && Windows_Win32_Media_DxMediaObjects_DMOGetName == "on"]
+public unsafe func Windows_DMOGetName(clsidDMO: CPointer<GUID>, szName: CPointer<UInt16>): Int32 {
+    return DMOGetName(clsidDMO, szName)
+}
+
+@When[Windows_Win32_Media_DxMediaObjects == "on" && MSDMO == "on" && Windows_Win32_Media_DxMediaObjects_DMOGetTypes == "on"]
+foreign {
     func DMOGetTypes(clsidDMO: CPointer<GUID>, ulInputTypesRequested: UInt32, pulInputTypesSupplied: CPointer<UInt32>, pInputTypes: CPointer<DMO_PARTIAL_MEDIATYPEAbi>, ulOutputTypesRequested: UInt32, pulOutputTypesSupplied: CPointer<UInt32>, pOutputTypes: CPointer<DMO_PARTIAL_MEDIATYPEAbi>): Int32
+}
+
+@When[Windows_Win32_Media_DxMediaObjects == "on" && MSDMO == "on" && Windows_Win32_Media_DxMediaObjects_DMOGetTypes == "on"]
+public unsafe func Windows_DMOGetTypes(clsidDMO: CPointer<GUID>, ulInputTypesRequested: UInt32, pulInputTypesSupplied: CPointer<UInt32>, pInputTypes: CPointer<DMO_PARTIAL_MEDIATYPEAbi>, ulOutputTypesRequested: UInt32, pulOutputTypesSupplied: CPointer<UInt32>, pOutputTypes: CPointer<DMO_PARTIAL_MEDIATYPEAbi>): Int32 {
+    return DMOGetTypes(clsidDMO, ulInputTypesRequested, pulInputTypesSupplied, pInputTypes, ulOutputTypesRequested, pulOutputTypesSupplied, pOutputTypes)
+}
+
+@When[Windows_Win32_Media_DxMediaObjects == "on" && MSDMO == "on" && Windows_Win32_Media_DxMediaObjects_DMORegister == "on"]
+foreign {
     func DMORegister(szName: CPointer<UInt16>, clsidDMO: CPointer<GUID>, guidCategory: CPointer<GUID>, dwFlags: UInt32, cInTypes: UInt32, pInTypes: CPointer<DMO_PARTIAL_MEDIATYPEAbi>, cOutTypes: UInt32, pOutTypes: CPointer<DMO_PARTIAL_MEDIATYPEAbi>): Int32
+}
+
+@When[Windows_Win32_Media_DxMediaObjects == "on" && MSDMO == "on" && Windows_Win32_Media_DxMediaObjects_DMORegister == "on"]
+public unsafe func Windows_DMORegister(szName: CPointer<UInt16>, clsidDMO: CPointer<GUID>, guidCategory: CPointer<GUID>, dwFlags: UInt32, cInTypes: UInt32, pInTypes: CPointer<DMO_PARTIAL_MEDIATYPEAbi>, cOutTypes: UInt32, pOutTypes: CPointer<DMO_PARTIAL_MEDIATYPEAbi>): Int32 {
+    return DMORegister(szName, clsidDMO, guidCategory, dwFlags, cInTypes, pInTypes, cOutTypes, pOutTypes)
+}
+
+@When[Windows_Win32_Media_DxMediaObjects == "on" && MSDMO == "on" && Windows_Win32_Media_DxMediaObjects_DMOUnregister == "on"]
+foreign {
     func DMOUnregister(clsidDMO: CPointer<GUID>, guidCategory: CPointer<GUID>): Int32
 }
 
-@When[MSDMO == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_Media_DxMediaObjects == "on" && MSDMO == "on" && Windows_Win32_Media_DxMediaObjects_DMOUnregister == "on"]
+public unsafe func Windows_DMOUnregister(clsidDMO: CPointer<GUID>, guidCategory: CPointer<GUID>): Int32 {
+    return DMOUnregister(clsidDMO, guidCategory)
+}
+
+@When[Windows_Win32_Media_DxMediaObjects == "on" && MSDMO == "on" && Windows_Win32_Media_DxMediaObjects_MoCopyMediaType == "on" && Windows_Win32_System_Com == "on"]
 foreign {
     func MoCopyMediaType(pmtDest: CPointer<DMO_MEDIA_TYPEAbi>, pmtSrc: CPointer<DMO_MEDIA_TYPEAbi>): Int32
+}
+
+@When[Windows_Win32_Media_DxMediaObjects == "on" && MSDMO == "on" && Windows_Win32_Media_DxMediaObjects_MoCopyMediaType == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MoCopyMediaType(pmtDest: CPointer<DMO_MEDIA_TYPEAbi>, pmtSrc: CPointer<DMO_MEDIA_TYPEAbi>): Int32 {
+    return MoCopyMediaType(pmtDest, pmtSrc)
+}
+
+@When[Windows_Win32_Media_DxMediaObjects == "on" && MSDMO == "on" && Windows_Win32_Media_DxMediaObjects_MoCreateMediaType == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func MoCreateMediaType(ppmt: CPointer<CPointer<DMO_MEDIA_TYPEAbi>>, cbFormat: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_DxMediaObjects == "on" && MSDMO == "on" && Windows_Win32_Media_DxMediaObjects_MoCreateMediaType == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MoCreateMediaType(ppmt: CPointer<CPointer<DMO_MEDIA_TYPEAbi>>, cbFormat: UInt32): Int32 {
+    return MoCreateMediaType(ppmt, cbFormat)
+}
+
+@When[Windows_Win32_Media_DxMediaObjects == "on" && MSDMO == "on" && Windows_Win32_Media_DxMediaObjects_MoDeleteMediaType == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func MoDeleteMediaType(pmt: CPointer<DMO_MEDIA_TYPEAbi>): Int32
+}
+
+@When[Windows_Win32_Media_DxMediaObjects == "on" && MSDMO == "on" && Windows_Win32_Media_DxMediaObjects_MoDeleteMediaType == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MoDeleteMediaType(pmt: CPointer<DMO_MEDIA_TYPEAbi>): Int32 {
+    return MoDeleteMediaType(pmt)
+}
+
+@When[Windows_Win32_Media_DxMediaObjects == "on" && MSDMO == "on" && Windows_Win32_Media_DxMediaObjects_MoDuplicateMediaType == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func MoDuplicateMediaType(ppmtDest: CPointer<CPointer<DMO_MEDIA_TYPEAbi>>, pmtSrc: CPointer<DMO_MEDIA_TYPEAbi>): Int32
+}
+
+@When[Windows_Win32_Media_DxMediaObjects == "on" && MSDMO == "on" && Windows_Win32_Media_DxMediaObjects_MoDuplicateMediaType == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MoDuplicateMediaType(ppmtDest: CPointer<CPointer<DMO_MEDIA_TYPEAbi>>, pmtSrc: CPointer<DMO_MEDIA_TYPEAbi>): Int32 {
+    return MoDuplicateMediaType(ppmtDest, pmtSrc)
+}
+
+@When[Windows_Win32_Media_DxMediaObjects == "on" && MSDMO == "on" && Windows_Win32_Media_DxMediaObjects_MoFreeMediaType == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func MoFreeMediaType(pmt: CPointer<DMO_MEDIA_TYPEAbi>): Int32
+}
+
+@When[Windows_Win32_Media_DxMediaObjects == "on" && MSDMO == "on" && Windows_Win32_Media_DxMediaObjects_MoFreeMediaType == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MoFreeMediaType(pmt: CPointer<DMO_MEDIA_TYPEAbi>): Int32 {
+    return MoFreeMediaType(pmt)
+}
+
+@When[Windows_Win32_Media_DxMediaObjects == "on" && MSDMO == "on" && Windows_Win32_Media_DxMediaObjects_MoInitMediaType == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func MoInitMediaType(pmt: CPointer<DMO_MEDIA_TYPEAbi>, cbFormat: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_DxMediaObjects == "on" && MSDMO == "on" && Windows_Win32_Media_DxMediaObjects_MoInitMediaType == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MoInitMediaType(pmt: CPointer<DMO_MEDIA_TYPEAbi>, cbFormat: UInt32): Int32 {
+    return MoInitMediaType(pmt, cbFormat)
 }
 
 @When[Windows_Win32_Media_DxMediaObjects == "on"]

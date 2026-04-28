@@ -4,6 +4,7 @@
 package windows.Win32._impl_l2
 
 import std.collection.*
+import windows_libloading
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
@@ -25,334 +26,213 @@ import windows.Win32._impl_l1 as Win32__impl_l1
 import windows_core as windows_core
 
 
-@When[COMCTL32 == "on"]
+@When[Windows_Win32_UI_Shell == "on" && COMCTL32 == "on" && Windows_Win32_UI_Shell_DefSubclassProc == "on"]
 foreign {
     func DefSubclassProc(hWnd: CPointer<Unit>, uMsg: UInt32, wParam: UIntNative, lParam: IntNative): IntNative
+}
+
+@When[Windows_Win32_UI_Shell == "on" && COMCTL32 == "on" && Windows_Win32_UI_Shell_DefSubclassProc == "on"]
+public unsafe func Windows_DefSubclassProc(hWnd: CPointer<Unit>, uMsg: UInt32, wParam: UIntNative, lParam: IntNative): IntNative {
+    return DefSubclassProc(hWnd, uMsg, wParam, lParam)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && COMCTL32 == "on" && Windows_Win32_UI_Shell_GetWindowSubclass == "on"]
+foreign {
     // param-hint: pdwRefData optional
     func GetWindowSubclass(hWnd: CPointer<Unit>, pfnSubclass: Win32__impl_l0.SUBCLASSPROC, uIdSubclass: UIntNative, pdwRefData: CPointer<UIntNative>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && COMCTL32 == "on" && Windows_Win32_UI_Shell_GetWindowSubclass == "on"]
+public unsafe func Windows_GetWindowSubclass(hWnd: CPointer<Unit>, pfnSubclass: Win32__impl_l0.SUBCLASSPROC, uIdSubclass: UIntNative, pdwRefData: CPointer<UIntNative>): Int32 {
+    return GetWindowSubclass(hWnd, pfnSubclass, uIdSubclass, pdwRefData)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && COMCTL32 == "on" && Windows_Win32_UI_Shell_RemoveWindowSubclass == "on"]
+foreign {
     func RemoveWindowSubclass(hWnd: CPointer<Unit>, pfnSubclass: Win32__impl_l0.SUBCLASSPROC, uIdSubclass: UIntNative): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && COMCTL32 == "on" && Windows_Win32_UI_Shell_RemoveWindowSubclass == "on"]
+public unsafe func Windows_RemoveWindowSubclass(hWnd: CPointer<Unit>, pfnSubclass: Win32__impl_l0.SUBCLASSPROC, uIdSubclass: UIntNative): Int32 {
+    return RemoveWindowSubclass(hWnd, pfnSubclass, uIdSubclass)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && COMCTL32 == "on" && Windows_Win32_UI_Shell_SetWindowSubclass == "on"]
+foreign {
     func SetWindowSubclass(hWnd: CPointer<Unit>, pfnSubclass: Win32__impl_l0.SUBCLASSPROC, uIdSubclass: UIntNative, dwRefData: UIntNative): Int32
 }
 
-@When[OLE32 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+@When[Windows_Win32_UI_Shell == "on" && COMCTL32 == "on" && Windows_Win32_UI_Shell_SetWindowSubclass == "on"]
+public unsafe func Windows_SetWindowSubclass(hWnd: CPointer<Unit>, pfnSubclass: Win32__impl_l0.SUBCLASSPROC, uIdSubclass: UIntNative, dwRefData: UIntNative): Int32 {
+    return SetWindowSubclass(hWnd, pfnSubclass, uIdSubclass, dwRefData)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && OLE32 == "on" && Windows_Win32_UI_Shell_HMONITOR_UserFree == "on" && Windows_Win32_Graphics_Gdi == "on"]
 foreign {
     func HMONITOR_UserFree(param0: CPointer<UInt32>, param1: CPointer<Win32_Graphics_Gdi.HMONITOR>): Unit
+}
+
+@When[Windows_Win32_UI_Shell == "on" && OLE32 == "on" && Windows_Win32_UI_Shell_HMONITOR_UserFree == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_HMONITOR_UserFree(param0: CPointer<UInt32>, param1: CPointer<Win32_Graphics_Gdi.HMONITOR>): Unit {
+    HMONITOR_UserFree(param0, param1)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && OLE32 == "on" && Windows_Win32_UI_Shell_HMONITOR_UserFree64 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func HMONITOR_UserFree64(param0: CPointer<UInt32>, param1: CPointer<Win32_Graphics_Gdi.HMONITOR>): Unit
+}
+
+@When[Windows_Win32_UI_Shell == "on" && OLE32 == "on" && Windows_Win32_UI_Shell_HMONITOR_UserFree64 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_HMONITOR_UserFree64(param0: CPointer<UInt32>, param1: CPointer<Win32_Graphics_Gdi.HMONITOR>): Unit {
+    HMONITOR_UserFree64(param0, param1)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && OLE32 == "on" && Windows_Win32_UI_Shell_HMONITOR_UserMarshal == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func HMONITOR_UserMarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_Graphics_Gdi.HMONITOR>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && OLE32 == "on" && Windows_Win32_UI_Shell_HMONITOR_UserMarshal == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_HMONITOR_UserMarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_Graphics_Gdi.HMONITOR>): CPointer<UInt8> {
+    return HMONITOR_UserMarshal(param0, param1, param2)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && OLE32 == "on" && Windows_Win32_UI_Shell_HMONITOR_UserMarshal64 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func HMONITOR_UserMarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_Graphics_Gdi.HMONITOR>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && OLE32 == "on" && Windows_Win32_UI_Shell_HMONITOR_UserMarshal64 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_HMONITOR_UserMarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_Graphics_Gdi.HMONITOR>): CPointer<UInt8> {
+    return HMONITOR_UserMarshal64(param0, param1, param2)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && OLE32 == "on" && Windows_Win32_UI_Shell_HMONITOR_UserSize == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func HMONITOR_UserSize(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32_Graphics_Gdi.HMONITOR>): UInt32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && OLE32 == "on" && Windows_Win32_UI_Shell_HMONITOR_UserSize == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_HMONITOR_UserSize(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32_Graphics_Gdi.HMONITOR>): UInt32 {
+    return HMONITOR_UserSize(param0, param1, param2)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && OLE32 == "on" && Windows_Win32_UI_Shell_HMONITOR_UserSize64 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func HMONITOR_UserSize64(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32_Graphics_Gdi.HMONITOR>): UInt32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && OLE32 == "on" && Windows_Win32_UI_Shell_HMONITOR_UserSize64 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_HMONITOR_UserSize64(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32_Graphics_Gdi.HMONITOR>): UInt32 {
+    return HMONITOR_UserSize64(param0, param1, param2)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && OLE32 == "on" && Windows_Win32_UI_Shell_HMONITOR_UserUnmarshal == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func HMONITOR_UserUnmarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_Graphics_Gdi.HMONITOR>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && OLE32 == "on" && Windows_Win32_UI_Shell_HMONITOR_UserUnmarshal == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_HMONITOR_UserUnmarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_Graphics_Gdi.HMONITOR>): CPointer<UInt8> {
+    return HMONITOR_UserUnmarshal(param0, param1, param2)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && OLE32 == "on" && Windows_Win32_UI_Shell_HMONITOR_UserUnmarshal64 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func HMONITOR_UserUnmarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_Graphics_Gdi.HMONITOR>): CPointer<UInt8>
 }
 
-@When[PROPSYS == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_UI_Shell_Common == "on")]
+@When[Windows_Win32_UI_Shell == "on" && OLE32 == "on" && Windows_Win32_UI_Shell_HMONITOR_UserUnmarshal64 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_HMONITOR_UserUnmarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_Graphics_Gdi.HMONITOR>): CPointer<UInt8> {
+    return HMONITOR_UserUnmarshal64(param0, param1, param2)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_InitPropVariantFromStrRet == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_UI_Shell_Common == "on"]
 foreign {
     // param-hint: pidl optional
     func InitPropVariantFromStrRet(pstrret: CPointer<Win32__impl_l0.STRRETAbi>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, ppropvar: CPointer<PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_InitPropVariantFromStrRet == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_InitPropVariantFromStrRet(pstrret: CPointer<Win32__impl_l0.STRRETAbi>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, ppropvar: CPointer<PROPVARIANTAbi>): Int32 {
+    return InitPropVariantFromStrRet(pstrret, pidl, ppropvar)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_InitVariantFromStrRet == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    func InitVariantFromStrRet(pstrret: CPointer<Win32__impl_l0.STRRETAbi>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, pvar: CPointer<VARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_InitVariantFromStrRet == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_InitVariantFromStrRet(pstrret: CPointer<Win32__impl_l0.STRRETAbi>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, pvar: CPointer<VARIANTAbi>): Int32 {
+    return InitVariantFromStrRet(pstrret, pidl, pvar)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropVariantToStrRet == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
     func PropVariantToStrRet(propvar: CPointer<PROPVARIANTAbi>, pstrret: CPointer<Win32__impl_l0.STRRETAbi>): Int32
 }
 
-@When[PROPSYS == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_UI_Shell_Common == "on")]
+@When[Windows_Win32_UI_Shell == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropVariantToStrRet == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_PropVariantToStrRet(propvar: CPointer<PROPVARIANTAbi>, pstrret: CPointer<Win32__impl_l0.STRRETAbi>): Int32 {
+    return PropVariantToStrRet(propvar, pstrret)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_VariantToStrRet == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_UI_Shell_Common == "on"]
 foreign {
-    func InitVariantFromStrRet(pstrret: CPointer<Win32__impl_l0.STRRETAbi>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, pvar: CPointer<VARIANTAbi>): Int32
     func VariantToStrRet(varIn: CPointer<VARIANTAbi>, pstrret: CPointer<Win32__impl_l0.STRRETAbi>): Int32
 }
 
-@When[SHDOCVW == "on"]
+@When[Windows_Win32_UI_Shell == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_VariantToStrRet == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_VariantToStrRet(varIn: CPointer<VARIANTAbi>, pstrret: CPointer<Win32__impl_l0.STRRETAbi>): Int32 {
+    return VariantToStrRet(varIn, pstrret)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHDOCVW == "on" && Windows_Win32_UI_Shell_ImportPrivacySettings == "on"]
 foreign {
     func ImportPrivacySettings(pszFilename: CPointer<UInt16>, pfParsePrivacyPreferences: CPointer<Int32>, pfParsePerSiteRules: CPointer<Int32>): Int32
 }
 
-@When[SHDOCVW == "on" && Windows_Win32_System_Com_Urlmon == "on"]
+@When[Windows_Win32_UI_Shell == "on" && SHDOCVW == "on" && Windows_Win32_UI_Shell_ImportPrivacySettings == "on"]
+public unsafe func Windows_ImportPrivacySettings(pszFilename: CPointer<UInt16>, pfParsePrivacyPreferences: CPointer<Int32>, pfParsePerSiteRules: CPointer<Int32>): Int32 {
+    return ImportPrivacySettings(pszFilename, pfParsePrivacyPreferences, pfParsePerSiteRules)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHDOCVW == "on" && Windows_Win32_UI_Shell_SoftwareUpdateMessageBox == "on" && Windows_Win32_System_Com_Urlmon == "on"]
 foreign {
     // param-hint: hWnd optional
     // param-hint: psdi optional
     func SoftwareUpdateMessageBox(hWnd: CPointer<Unit>, pszDistUnit: CPointer<UInt16>, dwFlags: UInt32, psdi: CPointer<Win32__impl_l0.SOFTDISTINFOAbi>): UInt32
 }
 
-@When[SHELL32 == "on"]
-foreign {
-    // pinvoke-hint: SetLastError
-    func CommandLineToArgvW(lpCmdLine: CPointer<UInt16>, pNumArgs: CPointer<Int32>): CPointer<CPointer<UInt16>>
-    func DAD_AutoScroll(hwnd: CPointer<Unit>, pad: CPointer<Win32__impl_l0.AUTO_SCROLL_DATA>, pptNow: CPointer<Win32_Foundation.POINTAbi>): Int32
-    func DAD_DragEnterEx(hwndTarget: CPointer<Unit>, ptStart: Win32_Foundation.POINTAbi): Int32
-    func DAD_DragLeave(): Int32
-    func DAD_DragMove(pt: Win32_Foundation.POINTAbi): Int32
-    func DAD_ShowDragImage(fShow: Int32): Int32
-    // param-hint: pszSrc len=param[1]
-    func DoEnvironmentSubstA(pszSrc: CPointer<UInt8>, cchSrc: UInt32): UInt32
-    // param-hint: pszSrc len=param[1]
-    func DoEnvironmentSubstW(pszSrc: CPointer<UInt16>, cchSrc: UInt32): UInt32
-    func DragAcceptFiles(hWnd: CPointer<Unit>, fAccept: Int32): Unit
-    func DragFinish(hDrop: Win32__impl_l0.HDROP): Unit
-    // param-hint: lpszFile len=param[3] optional
-    func DragQueryFileA(hDrop: Win32__impl_l0.HDROP, iFile: UInt32, lpszFile: CPointer<UInt8>, cch: UInt32): UInt32
-    // param-hint: lpszFile len=param[3] optional
-    func DragQueryFileW(hDrop: Win32__impl_l0.HDROP, iFile: UInt32, lpszFile: CPointer<UInt16>, cch: UInt32): UInt32
-    func DragQueryPoint(hDrop: Win32__impl_l0.HDROP, ppt: CPointer<Win32_Foundation.POINTAbi>): Int32
-    func DriveType(iDrive: Int32): Int32
-    // param-hint: lpDirectory optional
-    // param-hint: lpResult fixed=260
-    func FindExecutableA(lpFile: CPointer<UInt8>, lpDirectory: CPointer<UInt8>, lpResult: CPointer<UInt8>): CPointer<Unit>
-    // param-hint: lpDirectory optional
-    // param-hint: lpResult fixed=260
-    func FindExecutableW(lpFile: CPointer<UInt16>, lpDirectory: CPointer<UInt16>, lpResult: CPointer<UInt16>): CPointer<Unit>
-    func GetCurrentProcessExplicitAppUserModelID(AppID: CPointer<CPointer<UInt16>>): Int32
-    // param-hint: hwnd optional
-    // param-hint: pszFilePath len=param[2]
-    // param-hint: pszWorkingDir optional
-    // param-hint: pszFilters optional
-    // param-hint: pszTitle optional
-    func GetFileNameFromBrowse(hwnd: CPointer<Unit>, pszFilePath: CPointer<UInt16>, cchFilePath: UInt32, pszWorkingDir: CPointer<UInt16>, pszDefExt: CPointer<UInt16>, pszFilters: CPointer<UInt16>, pszTitle: CPointer<UInt16>): Int32
-    func InitNetworkAddressControl(): Int32
-    // param-hint: pszPath optional
-    func IsLFNDriveA(pszPath: CPointer<UInt8>): Int32
-    // param-hint: pszPath optional
-    func IsLFNDriveW(pszPath: CPointer<UInt16>): Int32
-    func IsNetDrive(iDrive: Int32): Int32
-    func IsUserAnAdmin(): Int32
-    // param-hint: pszDir optional
-    func PathCleanupSpec(pszDir: CPointer<UInt16>, pszSpec: CPointer<UInt16>): Int32
-    // param-hint: pszLongPath fixed=260
-    func PathGetShortPath(pszLongPath: CPointer<UInt16>): Unit
-    func PathIsExe(pszPath: CPointer<UInt16>): Int32
-    func PathIsSlowA(pszFile: CPointer<UInt8>, dwAttr: UInt32): Int32
-    func PathIsSlowW(pszFile: CPointer<UInt16>, dwAttr: UInt32): Int32
-    // param-hint: pszUniqueName len=param[1]
-    // param-hint: pszLongPlate optional
-    // param-hint: pszDir optional
-    func PathMakeUniqueName(pszUniqueName: CPointer<UInt16>, cchMax: UInt32, pszTemplate: CPointer<UInt16>, pszLongPlate: CPointer<UInt16>, pszDir: CPointer<UInt16>): Int32
-    func PathQualify(psz: CPointer<UInt16>): Unit
-    // param-hint: pszPath fixed=260
-    // param-hint: dirs optional
-    // pinvoke-hint: SetLastError
-    func PathResolve(pszPath: CPointer<UInt16>, dirs: CPointer<CPointer<UInt16>>, fFlags: UInt32): Int32
-    // param-hint: pszUniqueName fixed=260
-    // param-hint: pszShort optional
-    // param-hint: pszFileSpec optional
-    func PathYetAnotherMakeUniqueName(pszUniqueName: CPointer<UInt16>, pszPath: CPointer<UInt16>, pszShort: CPointer<UInt16>, pszFileSpec: CPointer<UInt16>): Int32
-    // param-hint: hwnd optional
-    // param-hint: pszIconPath len=param[2]
-    // param-hint: piIconIndex optional
-    func PickIconDlg(hwnd: CPointer<Unit>, pszIconPath: CPointer<UInt16>, cchIconPath: UInt32, piIconIndex: CPointer<Int32>): Int32
-    // param-hint: pcs bytes=param[1]
-    func ReadCabinetState(pcs: CPointer<Win32__impl_l0.CABINETSTATE>, cLength: Int32): Int32
-    func RealDriveType(iDrive: Int32, fOKToHitNet: Int32): Int32
-    // param-hint: hwnd optional
-    // param-hint: pszPrompt optional
-    func RestartDialog(hwnd: CPointer<Unit>, pszPrompt: CPointer<UInt16>, dwReturn: UInt32): Int32
-    // param-hint: hwnd optional
-    // param-hint: pszPrompt optional
-    func RestartDialogEx(hwnd: CPointer<Unit>, pszPrompt: CPointer<UInt16>, dwReturn: UInt32, dwReasonCode: UInt32): Int32
-    // param-hint: pv optional
-    func SHAddToRecentDocs(uFlags: UInt32, pv: CPointer<Unit>): Unit
-    func SHAlloc(cb: UIntNative): CPointer<Unit>
-    func SHAssocEnumHandlers(pszExtra: CPointer<UInt16>, afFilter: Win32__impl_l0.ASSOC_FILTERAbi, ppEnumHandler: CPointer<CPointer<Unit>>): Int32
-    func SHAssocEnumHandlersForProtocolByApplication(protocol: CPointer<UInt16>, riid: CPointer<GUID>, enumHandlers: CPointer<CPointer<Unit>>): Int32
-    func SHCLSIDFromString(psz: CPointer<UInt16>, pclsid: CPointer<GUID>): Int32
-    func SHChangeNotification_Unlock(hLock: CPointer<Unit>): Int32
-    // param-hint: dwItem1 optional
-    // param-hint: dwItem2 optional
-    func SHChangeNotify(wEventId: Int32, uFlags: Win32__impl_l0.SHCNF_FLAGSAbi, dwItem1: CPointer<Unit>, dwItem2: CPointer<Unit>): Unit
-    func SHChangeNotifyDeregister(ulID: UInt32): Int32
-    func SHChangeNotifyRegisterThread(status: Win32__impl_l0.SCNRT_STATUSAbi): Unit
-    func SHCreateAssociationRegistration(riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
-    func SHCreateDefaultExtractIcon(riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
-    func SHCreateDefaultPropertiesOp(psi: CPointer<Unit>, ppFileOp: CPointer<CPointer<Unit>>): Int32
-    // param-hint: hwnd optional
-    func SHCreateDirectory(hwnd: CPointer<Unit>, pszPath: CPointer<UInt16>): Int32
-    func SHCreateFileExtractIconW(pszFile: CPointer<UInt16>, dwFileAttributes: UInt32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pszItem optional
-    func SHCreateItemInKnownFolder(kfid: CPointer<GUID>, dwKFFlags: UInt32, pszItem: CPointer<UInt16>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
-    func SHCreateShellFolderView(pcsfv: CPointer<SFV_CREATEAbi>, ppsv: CPointer<CPointer<Unit>>): Int32
-    func SHCreateShellItemArrayFromShellItem(psi: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
-    func SHDestroyPropSheetExtArray(hpsxa: Win32__impl_l0.HPSXA): Unit
-    // param-hint: hwnd optional
-    // param-hint: pszRootPath optional
-    func SHEmptyRecycleBinA(hwnd: CPointer<Unit>, pszRootPath: CPointer<UInt8>, dwFlags: UInt32): Int32
-    // param-hint: hwnd optional
-    // param-hint: pszRootPath optional
-    func SHEmptyRecycleBinW(hwnd: CPointer<Unit>, pszRootPath: CPointer<UInt16>, dwFlags: UInt32): Int32
-    // param-hint: ppszCommandLine optional
-    // param-hint: ppszParameters optional
-    func SHEvaluateSystemCommandTemplate(pszCmdTemplate: CPointer<UInt16>, ppszApplication: CPointer<CPointer<UInt16>>, ppszCommandLine: CPointer<CPointer<UInt16>>, ppszParameters: CPointer<CPointer<UInt16>>): Int32
-    func SHFlushSFCache(): Unit
-    func SHFormatDrive(hwnd: CPointer<Unit>, drive: UInt32, fmtID: Win32__impl_l0.SHFMT_IDAbi, options: UInt32): UInt32
-    // param-hint: pv optional
-    func SHFree(pv: CPointer<Unit>): Unit
-    // param-hint: hNameMappings optional
-    func SHFreeNameMappings(hNameMappings: CPointer<Unit>): Unit
-    func SHGetDesktopFolder(ppshf: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pulFreeBytesAvailableToCaller optional
-    // param-hint: pulTotalNumberOfBytes optional
-    // param-hint: pulTotalNumberOfFreeBytes optional
-    func SHGetDiskFreeSpaceExA(pszDirectoryName: CPointer<UInt8>, pulFreeBytesAvailableToCaller: CPointer<UInt64>, pulTotalNumberOfBytes: CPointer<UInt64>, pulTotalNumberOfFreeBytes: CPointer<UInt64>): Int32
-    // param-hint: pulFreeBytesAvailableToCaller optional
-    // param-hint: pulTotalNumberOfBytes optional
-    // param-hint: pulTotalNumberOfFreeBytes optional
-    func SHGetDiskFreeSpaceExW(pszDirectoryName: CPointer<UInt16>, pulFreeBytesAvailableToCaller: CPointer<UInt64>, pulTotalNumberOfBytes: CPointer<UInt64>, pulTotalNumberOfFreeBytes: CPointer<UInt64>): Int32
-    func SHGetDriveMedia(pszDrive: CPointer<UInt16>, pdwMediaContent: CPointer<UInt32>): Int32
-    // param-hint: hwnd optional reserved
-    // param-hint: hToken optional
-    // param-hint: pszPath fixed=260
-    func SHGetFolderPathA(hwnd: CPointer<Unit>, csidl: Int32, hToken: CPointer<Unit>, dwFlags: UInt32, pszPath: CPointer<UInt8>): Int32
-    // param-hint: hwnd optional reserved
-    // param-hint: hToken optional
-    // param-hint: pszSubDir optional
-    // param-hint: pszPath fixed=260
-    func SHGetFolderPathAndSubDirA(hwnd: CPointer<Unit>, csidl: Int32, hToken: CPointer<Unit>, dwFlags: UInt32, pszSubDir: CPointer<UInt8>, pszPath: CPointer<UInt8>): Int32
-    // param-hint: hwnd optional reserved
-    // param-hint: hToken optional
-    // param-hint: pszSubDir optional
-    // param-hint: pszPath fixed=260
-    func SHGetFolderPathAndSubDirW(hwnd: CPointer<Unit>, csidl: Int32, hToken: CPointer<Unit>, dwFlags: UInt32, pszSubDir: CPointer<UInt16>, pszPath: CPointer<UInt16>): Int32
-    // param-hint: hwnd optional reserved
-    // param-hint: hToken optional
-    // param-hint: pszPath fixed=260
-    func SHGetFolderPathW(hwnd: CPointer<Unit>, csidl: Int32, hToken: CPointer<Unit>, dwFlags: UInt32, pszPath: CPointer<UInt16>): Int32
-    // param-hint: pszIconPath optional
-    func SHGetIconOverlayIndexA(pszIconPath: CPointer<UInt8>, iIconIndex: Int32): Int32
-    // param-hint: pszIconPath optional
-    func SHGetIconOverlayIndexW(pszIconPath: CPointer<UInt16>, iIconIndex: Int32): Int32
-    func SHGetImageList(iImageList: Int32, riid: CPointer<GUID>, ppvObj: CPointer<CPointer<Unit>>): Int32
-    // param-hint: hToken optional
-    func SHGetKnownFolderItem(rfid: CPointer<GUID>, flags: Win32__impl_l0.KNOWN_FOLDER_FLAGAbi, hToken: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
-    // param-hint: hToken optional
-    func SHGetKnownFolderPath(rfid: CPointer<GUID>, dwFlags: UInt32, hToken: CPointer<Unit>, ppszPath: CPointer<CPointer<UInt16>>): Int32
-    // param-hint: pszResModule len=param[2]
-    func SHGetLocalizedName(pszPath: CPointer<UInt16>, pszResModule: CPointer<UInt16>, cch: UInt32, pidsRes: CPointer<Int32>): Int32
-    // param-hint: pszName fixed=260
-    func SHGetNewLinkInfoA(pszLinkTo: CPointer<UInt8>, pszDir: CPointer<UInt8>, pszName: CPointer<UInt8>, pfMustCopy: CPointer<Int32>, uFlags: UInt32): Int32
-    // param-hint: pszName fixed=260
-    func SHGetNewLinkInfoW(pszLinkTo: CPointer<UInt16>, pszDir: CPointer<UInt16>, pszName: CPointer<UInt16>, pfMustCopy: CPointer<Int32>, uFlags: UInt32): Int32
-    func SHGetSetFolderCustomSettings(pfcs: CPointer<Win32__impl_l0.SHFOLDERCUSTOMSETTINGSAbi>, pszPath: CPointer<UInt16>, dwReadWrite: UInt32): Int32
-    // param-hint: lpss optional
-    func SHGetSetSettings(lpss: CPointer<Win32__impl_l0.SHELLSTATEA>, dwMask: Win32__impl_l0.SSF_MASKAbi, bSet: Int32): Unit
-    func SHGetSettings(psfs: CPointer<Win32__impl_l0.SHELLFLAGSTATE>, dwMask: UInt32): Unit
-    // param-hint: hwnd optional reserved
-    // param-hint: pszPath fixed=260
-    func SHGetSpecialFolderPathA(hwnd: CPointer<Unit>, pszPath: CPointer<UInt8>, csidl: Int32, fCreate: Int32): Int32
-    // param-hint: hwnd optional reserved
-    // param-hint: pszPath fixed=260
-    func SHGetSpecialFolderPathW(hwnd: CPointer<Unit>, pszPath: CPointer<UInt16>, csidl: Int32, fCreate: Int32): Int32
-    // param-hint: hwnd optional
-    // param-hint: lpBuf2 optional
-    func SHInvokePrinterCommandA(hwnd: CPointer<Unit>, uAction: UInt32, lpBuf1: CPointer<UInt8>, lpBuf2: CPointer<UInt8>, fModal: Int32): Int32
-    // param-hint: hwnd optional
-    // param-hint: lpBuf2 optional
-    func SHInvokePrinterCommandW(hwnd: CPointer<Unit>, uAction: UInt32, lpBuf1: CPointer<UInt16>, lpBuf2: CPointer<UInt16>, fModal: Int32): Int32
-    // param-hint: pdwStatus optional
-    func SHIsFileAvailableOffline(pwszPath: CPointer<UInt16>, pdwStatus: CPointer<UInt32>): Int32
-    func SHLimitInputEdit(hwndEdit: CPointer<Unit>, psf: CPointer<Unit>): Int32
-    func SHLoadInProc(rclsid: CPointer<GUID>): Int32
-    func SHLoadNonloadedIconOverlayIdentifiers(): Int32
-    // param-hint: hwnd optional
-    // param-hint: pszPropertyPage optional
-    func SHObjectProperties(hwnd: CPointer<Unit>, shopObjectType: UInt32, pszObjectName: CPointer<UInt16>, pszPropertyPage: CPointer<UInt16>): Int32
-    // param-hint: hwndParent optional
-    func SHOpenWithDialog(hwndParent: CPointer<Unit>, poainfo: CPointer<Win32__impl_l1.OPENASINFOAbi>): Int32
-    func SHQueryUserNotificationState(pquns: CPointer<Win32__impl_l0.QUERY_USER_NOTIFICATION_STATEAbi>): Int32
-    func SHRemoveLocalizedName(pszPath: CPointer<UInt16>): Int32
-    func SHResolveLibrary(psiLibrary: CPointer<Unit>): Int32
-    func SHRestricted(rest: Win32__impl_l0.RESTRICTIONSAbi): UInt32
-    // param-hint: hwnd optional
-    // param-hint: pfops optional
-    func SHSetDefaultProperties(hwnd: CPointer<Unit>, psi: CPointer<Unit>, dwFileOpFlags: UInt32, pfops: CPointer<Unit>): Int32
-    // param-hint: hToken optional
-    func SHSetFolderPathA(csidl: Int32, hToken: CPointer<Unit>, dwFlags: UInt32, pszPath: CPointer<UInt8>): Int32
-    // param-hint: hToken optional
-    func SHSetFolderPathW(csidl: Int32, hToken: CPointer<Unit>, dwFlags: UInt32, pszPath: CPointer<UInt16>): Int32
-    // param-hint: hToken optional
-    func SHSetKnownFolderPath(rfid: CPointer<GUID>, dwFlags: UInt32, hToken: CPointer<Unit>, pszPath: CPointer<UInt16>): Int32
-    func SHSetLocalizedName(pszPath: CPointer<UInt16>, pszResModule: CPointer<UInt16>, idsRes: Int32): Int32
-    func SHSetUnreadMailCountW(pszMailAddress: CPointer<UInt16>, dwCount: UInt32, pszShellExecuteCommand: CPointer<UInt16>): Int32
-    func SHShellFolderView_Message(hwndMain: CPointer<Unit>, uMsg: UInt32, lParam: IntNative): IntNative
-    // param-hint: pszTitle optional
-    // param-hint: pszInstruction optional
-    func SHShowManageLibraryUI(psiLibrary: CPointer<Unit>, hwndOwner: CPointer<Unit>, pszTitle: CPointer<UInt16>, pszInstruction: CPointer<UInt16>, lmdOptions: Win32__impl_l0.LIBRARYMANAGEDIALOGOPTIONSAbi): Int32
-    // param-hint: hwnd optional
-    // param-hint: pszRemoteName optional
-    func SHStartNetConnectionDialogW(hwnd: CPointer<Unit>, pszRemoteName: CPointer<UInt16>, dwType: UInt32): Int32
-    // param-hint: hToken optional
-    func SHTestTokenMembership(hToken: CPointer<Unit>, ulRID: UInt32): Int32
-    func SHUpdateImageA(pszHashItem: CPointer<UInt8>, iIndex: Int32, uFlags: UInt32, iImageIndex: Int32): Unit
-    func SHUpdateImageW(pszHashItem: CPointer<UInt16>, iIndex: Int32, uFlags: UInt32, iImageIndex: Int32): Unit
-    // param-hint: hwndOwner optional
-    func SHValidateUNC(hwndOwner: CPointer<Unit>, pszFile: CPointer<UInt16>, fConnect: UInt32): Int32
-    func SetCurrentProcessExplicitAppUserModelID(AppID: CPointer<UInt16>): Int32
-    func Shell_GetCachedImageIndex(pwszIconPath: CPointer<UInt16>, iIconIndex: Int32, uIconFlags: UInt32): Int32
-    func Shell_GetCachedImageIndexA(pszIconPath: CPointer<UInt8>, iIconIndex: Int32, uIconFlags: UInt32): Int32
-    func Shell_GetCachedImageIndexW(pszIconPath: CPointer<UInt16>, iIconIndex: Int32, uIconFlags: UInt32): Int32
-    func Win32DeleteFile(pszPath: CPointer<UInt16>): Int32
-    func WriteCabinetState(pcs: CPointer<Win32__impl_l0.CABINETSTATE>): Int32
+@When[Windows_Win32_UI_Shell == "on" && SHDOCVW == "on" && Windows_Win32_UI_Shell_SoftwareUpdateMessageBox == "on" && Windows_Win32_System_Com_Urlmon == "on"]
+public unsafe func Windows_SoftwareUpdateMessageBox(hWnd: CPointer<Unit>, pszDistUnit: CPointer<UInt16>, dwFlags: UInt32, psdi: CPointer<Win32__impl_l0.SOFTDISTINFOAbi>): UInt32 {
+    return SoftwareUpdateMessageBox(hWnd, pszDistUnit, dwFlags, psdi)
 }
 
-@When[SHELL32 == "on" && (((arch == "x86_64" && Windows_Win32_Security == "on" && Windows_Win32_System_Threading == "on") || (arch == "aarch64" && Windows_Win32_Security == "on" && Windows_Win32_System_Threading == "on")) && Windows_Win32_Security == "on" && Windows_Win32_System_Threading == "on")]
-foreign {
-    // pinvoke-hint: SetLastError
-    func SHCreateProcessAsUserW(pscpi: CPointer<Win32__impl_l1.SHCREATEPROCESSINFOWAbi>): Int32
-}
-
-@When[SHELL32 == "on" && (((arch == "x86_64" && Windows_Win32_System_Registry == "on") || (arch == "aarch64" && Windows_Win32_System_Registry == "on")) && Windows_Win32_System_Registry == "on")]
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_AssocCreateForClasses == "on" && (((arch == "x86_64" && Windows_Win32_System_Registry == "on") || (arch == "aarch64" && Windows_Win32_System_Registry == "on")) && Windows_Win32_System_Registry == "on")]
 foreign {
     // param-hint: rgClasses len=param[1]
     func AssocCreateForClasses(rgClasses: CPointer<Win32__impl_l1.ASSOCIATIONELEMENTAbi>, cClasses: UInt32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
-    // pinvoke-hint: SetLastError
-    func ShellExecuteExA(pExecInfo: CPointer<Win32__impl_l0.SHELLEXECUTEINFOAAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func ShellExecuteExW(pExecInfo: CPointer<Win32__impl_l0.SHELLEXECUTEINFOWAbi>): Int32
 }
 
-@When[SHELL32 == "on" && (((arch == "x86_64" && Windows_Win32_UI_WindowsAndMessaging == "on") || (arch == "aarch64" && Windows_Win32_UI_WindowsAndMessaging == "on")) && Windows_Win32_Storage_FileSystem == "on" && Windows_Win32_UI_WindowsAndMessaging == "on")]
-foreign {
-    // param-hint: psfi bytes=param[3] optional
-    func SHGetFileInfoA(pszPath: CPointer<UInt8>, dwFileAttributes: Win32__impl_l0.FILE_FLAGS_AND_ATTRIBUTESAbi, psfi: CPointer<Win32__impl_l1.SHFILEINFOAAbi>, cbFileInfo: UInt32, uFlags: Win32__impl_l0.SHGFI_FLAGSAbi): UIntNative
-    // param-hint: psfi bytes=param[3] optional
-    func SHGetFileInfoW(pszPath: CPointer<UInt16>, dwFileAttributes: Win32__impl_l0.FILE_FLAGS_AND_ATTRIBUTESAbi, psfi: CPointer<Win32__impl_l1.SHFILEINFOWAbi>, cbFileInfo: UInt32, uFlags: Win32__impl_l0.SHGFI_FLAGSAbi): UIntNative
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_AssocCreateForClasses == "on" && (((arch == "x86_64" && Windows_Win32_System_Registry == "on") || (arch == "aarch64" && Windows_Win32_System_Registry == "on")) && Windows_Win32_System_Registry == "on")]
+public unsafe func Windows_AssocCreateForClasses(rgClasses: CPointer<Win32__impl_l1.ASSOCIATIONELEMENTAbi>, cClasses: UInt32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return AssocCreateForClasses(rgClasses, cClasses, riid, ppv)
 }
 
-@When[SHELL32 == "on" && (((arch == "x86_64" && Windows_Win32_UI_WindowsAndMessaging == "on") || (arch == "aarch64" && Windows_Win32_UI_WindowsAndMessaging == "on")) && Windows_Win32_UI_WindowsAndMessaging == "on")]
-foreign {
-    func SHGetStockIconInfo(siid: Win32__impl_l0.SHSTOCKICONIDAbi, uFlags: Win32__impl_l0.SHGSI_FLAGSAbi, psii: CPointer<Win32__impl_l1.SHSTOCKICONINFOAbi>): Int32
-    func Shell_NotifyIconA(dwMessage: Win32__impl_l0.NOTIFY_ICON_MESSAGEAbi, lpData: CPointer<Win32__impl_l1.NOTIFYICONDATAAAbi>): Int32
-    func Shell_NotifyIconW(dwMessage: Win32__impl_l0.NOTIFY_ICON_MESSAGEAbi, lpData: CPointer<Win32__impl_l1.NOTIFYICONDATAWAbi>): Int32
-}
-
-@When[SHELL32 == "on" && ((arch == "x86_64" || arch == "aarch64"))]
-foreign {
-    func SHAppBarMessage(dwMessage: UInt32, pData: CPointer<Win32__impl_l0.APPBARDATAAbi>): UIntNative
-    // pinvoke-hint: SetLastError
-    func SHFileOperationA(lpFileOp: CPointer<Win32__impl_l0.SHFILEOPSTRUCTAAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func SHFileOperationW(lpFileOp: CPointer<Win32__impl_l0.SHFILEOPSTRUCTWAbi>): Int32
-    // param-hint: pszRootPath optional
-    func SHQueryRecycleBinA(pszRootPath: CPointer<UInt8>, pSHQueryRBInfo: CPointer<Win32__impl_l0.SHQUERYRBINFOAbi>): Int32
-    // param-hint: pszRootPath optional
-    func SHQueryRecycleBinW(pszRootPath: CPointer<UInt16>, pSHQueryRBInfo: CPointer<Win32__impl_l0.SHQUERYRBINFOAbi>): Int32
-    func Shell_NotifyIconGetRect(identifier: CPointer<Win32__impl_l0.NOTIFYICONIDENTIFIERAbi>, iconLocation: CPointer<Win32_Foundation.RECTAbi>): Int32
-}
-
-@When[SHELL32 == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on")]
-foreign {
-    func SHGetTemporaryPropertyForItem(psi: CPointer<Unit>, propkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, ppropvar: CPointer<PROPVARIANTAbi>): Int32
-    func SHSetTemporaryPropertyForItem(psi: CPointer<Unit>, propkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, propvar: CPointer<PROPVARIANTAbi>): Int32
-}
-
-@When[SHELL32 == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_UI_Shell_Common == "on")]
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_AssocGetDetailsOfPropKey == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_UI_Shell_Common == "on"]
 foreign {
     // param-hint: pfFoundPropKey optional
     func AssocGetDetailsOfPropKey(psf: CPointer<Unit>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, pkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pv: CPointer<VARIANTAbi>, pfFoundPropKey: CPointer<Int32>): Int32
 }
 
-@When[SHELL32 == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on")]
-foreign {
-    // param-hint: hwnd optional
-    // param-hint: pdsrc optional
-    func SHDoDragDrop(hwnd: CPointer<Unit>, pdata: CPointer<Unit>, pdsrc: CPointer<Unit>, dwEffect: Win32__impl_l0.DROPEFFECTAbi, pdwEffect: CPointer<Win32__impl_l0.DROPEFFECTAbi>): Int32
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_AssocGetDetailsOfPropKey == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_AssocGetDetailsOfPropKey(psf: CPointer<Unit>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, pkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, pv: CPointer<VARIANTAbi>, pfFoundPropKey: CPointer<Int32>): Int32 {
+    return AssocGetDetailsOfPropKey(psf, pidl, pkey, pv, pfFoundPropKey)
 }
 
-@When[SHELL32 == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Registry == "on" && Windows_Win32_UI_Shell_Common == "on")]
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_CDefFolderMenu_Create2 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Registry == "on" && Windows_Win32_UI_Shell_Common == "on"]
 foreign {
     // param-hint: pidlFolder optional
     // param-hint: hwnd optional
@@ -361,102 +241,1874 @@ foreign {
     // param-hint: pfn optional
     // param-hint: ahkeys len=param[6] optional
     func CDefFolderMenu_Create2(pidlFolder: CPointer<Win32__impl_l1.ITEMIDLIST>, hwnd: CPointer<Unit>, cidl: UInt32, apidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>, psf: CPointer<Unit>, pfn: LPFNDFMCALLBACK, nKeys: UInt32, ahkeys: CPointer<Win32_System_Registry.HKEY>, ppcm: CPointer<CPointer<Unit>>): Int32
-    func SHCreateDefaultContextMenu(pdcm: CPointer<DEFCONTEXTMENUAbi>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[SHELL32 == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Registry == "on")]
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_CDefFolderMenu_Create2 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Registry == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_CDefFolderMenu_Create2(pidlFolder: CPointer<Win32__impl_l1.ITEMIDLIST>, hwnd: CPointer<Unit>, cidl: UInt32, apidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>, psf: CPointer<Unit>, pfn: LPFNDFMCALLBACK, nKeys: UInt32, ahkeys: CPointer<Win32_System_Registry.HKEY>, ppcm: CPointer<CPointer<Unit>>): Int32 {
+    return CDefFolderMenu_Create2(pidlFolder, hwnd, cidl, apidl, psf, pfn, nKeys, ahkeys, ppcm)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_CIDLData_CreateFromIDArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    // param-hint: apidl len=param[1] optional
+    func CIDLData_CreateFromIDArray(pidlFolder: CPointer<Win32__impl_l1.ITEMIDLIST>, cidl: UInt32, apidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>, ppdtobj: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_CIDLData_CreateFromIDArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_CIDLData_CreateFromIDArray(pidlFolder: CPointer<Win32__impl_l1.ITEMIDLIST>, cidl: UInt32, apidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>, ppdtobj: CPointer<CPointer<Unit>>): Int32 {
+    return CIDLData_CreateFromIDArray(pidlFolder, cidl, apidl, ppdtobj)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_CommandLineToArgvW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func CommandLineToArgvW(lpCmdLine: CPointer<UInt16>, pNumArgs: CPointer<Int32>): CPointer<CPointer<UInt16>>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_CommandLineToArgvW == "on"]
+public unsafe func Windows_CommandLineToArgvW(lpCmdLine: CPointer<UInt16>, pNumArgs: CPointer<Int32>): CPointer<CPointer<UInt16>> {
+    return CommandLineToArgvW(lpCmdLine, pNumArgs)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DAD_AutoScroll == "on"]
+foreign {
+    func DAD_AutoScroll(hwnd: CPointer<Unit>, pad: CPointer<Win32__impl_l0.AUTO_SCROLL_DATA>, pptNow: CPointer<Win32_Foundation.POINTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DAD_AutoScroll == "on"]
+public unsafe func Windows_DAD_AutoScroll(hwnd: CPointer<Unit>, pad: CPointer<Win32__impl_l0.AUTO_SCROLL_DATA>, pptNow: CPointer<Win32_Foundation.POINTAbi>): Int32 {
+    return DAD_AutoScroll(hwnd, pad, pptNow)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DAD_DragEnterEx == "on"]
+foreign {
+    func DAD_DragEnterEx(hwndTarget: CPointer<Unit>, ptStart: Win32_Foundation.POINTAbi): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DAD_DragEnterEx == "on"]
+public unsafe func Windows_DAD_DragEnterEx(hwndTarget: CPointer<Unit>, ptStart: Win32_Foundation.POINTAbi): Int32 {
+    return DAD_DragEnterEx(hwndTarget, ptStart)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DAD_DragEnterEx2 == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: pdtObject optional
+    func DAD_DragEnterEx2(hwndTarget: CPointer<Unit>, ptStart: Win32_Foundation.POINTAbi, pdtObject: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DAD_DragEnterEx2 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_DAD_DragEnterEx2(hwndTarget: CPointer<Unit>, ptStart: Win32_Foundation.POINTAbi, pdtObject: CPointer<Unit>): Int32 {
+    return DAD_DragEnterEx2(hwndTarget, ptStart, pdtObject)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DAD_DragLeave == "on"]
+foreign {
+    func DAD_DragLeave(): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DAD_DragLeave == "on"]
+public unsafe func Windows_DAD_DragLeave(): Int32 {
+    return DAD_DragLeave()
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DAD_DragMove == "on"]
+foreign {
+    func DAD_DragMove(pt: Win32_Foundation.POINTAbi): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DAD_DragMove == "on"]
+public unsafe func Windows_DAD_DragMove(pt: Win32_Foundation.POINTAbi): Int32 {
+    return DAD_DragMove(pt)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DAD_SetDragImage == "on" && Windows_Win32_UI_Controls == "on"]
+foreign {
+    func DAD_SetDragImage(him: Win32__impl_l0.HIMAGELIST, pptOffset: CPointer<Win32_Foundation.POINTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DAD_SetDragImage == "on" && Windows_Win32_UI_Controls == "on"]
+public unsafe func Windows_DAD_SetDragImage(him: Win32__impl_l0.HIMAGELIST, pptOffset: CPointer<Win32_Foundation.POINTAbi>): Int32 {
+    return DAD_SetDragImage(him, pptOffset)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DAD_ShowDragImage == "on"]
+foreign {
+    func DAD_ShowDragImage(fShow: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DAD_ShowDragImage == "on"]
+public unsafe func Windows_DAD_ShowDragImage(fShow: Int32): Int32 {
+    return DAD_ShowDragImage(fShow)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DoEnvironmentSubstA == "on"]
+foreign {
+    // param-hint: pszSrc len=param[1]
+    func DoEnvironmentSubstA(pszSrc: CPointer<UInt8>, cchSrc: UInt32): UInt32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DoEnvironmentSubstA == "on"]
+public unsafe func Windows_DoEnvironmentSubstA(pszSrc: CPointer<UInt8>, cchSrc: UInt32): UInt32 {
+    return DoEnvironmentSubstA(pszSrc, cchSrc)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DoEnvironmentSubstW == "on"]
+foreign {
+    // param-hint: pszSrc len=param[1]
+    func DoEnvironmentSubstW(pszSrc: CPointer<UInt16>, cchSrc: UInt32): UInt32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DoEnvironmentSubstW == "on"]
+public unsafe func Windows_DoEnvironmentSubstW(pszSrc: CPointer<UInt16>, cchSrc: UInt32): UInt32 {
+    return DoEnvironmentSubstW(pszSrc, cchSrc)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DragAcceptFiles == "on"]
+foreign {
+    func DragAcceptFiles(hWnd: CPointer<Unit>, fAccept: Int32): Unit
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DragAcceptFiles == "on"]
+public unsafe func Windows_DragAcceptFiles(hWnd: CPointer<Unit>, fAccept: Int32): Unit {
+    DragAcceptFiles(hWnd, fAccept)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DragFinish == "on"]
+foreign {
+    func DragFinish(hDrop: Win32__impl_l0.HDROP): Unit
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DragFinish == "on"]
+public unsafe func Windows_DragFinish(hDrop: Win32__impl_l0.HDROP): Unit {
+    DragFinish(hDrop)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DragQueryFileA == "on"]
+foreign {
+    // param-hint: lpszFile len=param[3] optional
+    func DragQueryFileA(hDrop: Win32__impl_l0.HDROP, iFile: UInt32, lpszFile: CPointer<UInt8>, cch: UInt32): UInt32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DragQueryFileA == "on"]
+public unsafe func Windows_DragQueryFileA(hDrop: Win32__impl_l0.HDROP, iFile: UInt32, lpszFile: CPointer<UInt8>, cch: UInt32): UInt32 {
+    return DragQueryFileA(hDrop, iFile, lpszFile, cch)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DragQueryFileW == "on"]
+foreign {
+    // param-hint: lpszFile len=param[3] optional
+    func DragQueryFileW(hDrop: Win32__impl_l0.HDROP, iFile: UInt32, lpszFile: CPointer<UInt16>, cch: UInt32): UInt32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DragQueryFileW == "on"]
+public unsafe func Windows_DragQueryFileW(hDrop: Win32__impl_l0.HDROP, iFile: UInt32, lpszFile: CPointer<UInt16>, cch: UInt32): UInt32 {
+    return DragQueryFileW(hDrop, iFile, lpszFile, cch)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DragQueryPoint == "on"]
+foreign {
+    func DragQueryPoint(hDrop: Win32__impl_l0.HDROP, ppt: CPointer<Win32_Foundation.POINTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DragQueryPoint == "on"]
+public unsafe func Windows_DragQueryPoint(hDrop: Win32__impl_l0.HDROP, ppt: CPointer<Win32_Foundation.POINTAbi>): Int32 {
+    return DragQueryPoint(hDrop, ppt)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DriveType == "on"]
+foreign {
+    func DriveType(iDrive: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DriveType == "on"]
+public unsafe func Windows_DriveType(iDrive: Int32): Int32 {
+    return DriveType(iDrive)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DuplicateIcon == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    // param-hint: hInst optional reserved
+    func DuplicateIcon(hInst: CPointer<Unit>, hIcon: Win32__impl_l0.HICON): Win32__impl_l0.HICON
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DuplicateIcon == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_DuplicateIcon(hInst: CPointer<Unit>, hIcon: Win32__impl_l0.HICON): Win32__impl_l0.HICON {
+    return DuplicateIcon(hInst, hIcon)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ExtractAssociatedIconA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    // param-hint: hInst optional reserved
+    // param-hint: pszIconPath fixed=128
+    func ExtractAssociatedIconA(hInst: CPointer<Unit>, pszIconPath: CPointer<UInt8>, piIcon: CPointer<UInt16>): Win32__impl_l0.HICON
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ExtractAssociatedIconA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_ExtractAssociatedIconA(hInst: CPointer<Unit>, pszIconPath: CPointer<UInt8>, piIcon: CPointer<UInt16>): Win32__impl_l0.HICON {
+    return ExtractAssociatedIconA(hInst, pszIconPath, piIcon)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ExtractAssociatedIconExA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    // param-hint: hInst optional reserved
+    // param-hint: pszIconPath fixed=128
+    func ExtractAssociatedIconExA(hInst: CPointer<Unit>, pszIconPath: CPointer<UInt8>, piIconIndex: CPointer<UInt16>, piIconId: CPointer<UInt16>): Win32__impl_l0.HICON
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ExtractAssociatedIconExA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_ExtractAssociatedIconExA(hInst: CPointer<Unit>, pszIconPath: CPointer<UInt8>, piIconIndex: CPointer<UInt16>, piIconId: CPointer<UInt16>): Win32__impl_l0.HICON {
+    return ExtractAssociatedIconExA(hInst, pszIconPath, piIconIndex, piIconId)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ExtractAssociatedIconExW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    // param-hint: hInst optional reserved
+    // param-hint: pszIconPath fixed=128
+    func ExtractAssociatedIconExW(hInst: CPointer<Unit>, pszIconPath: CPointer<UInt16>, piIconIndex: CPointer<UInt16>, piIconId: CPointer<UInt16>): Win32__impl_l0.HICON
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ExtractAssociatedIconExW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_ExtractAssociatedIconExW(hInst: CPointer<Unit>, pszIconPath: CPointer<UInt16>, piIconIndex: CPointer<UInt16>, piIconId: CPointer<UInt16>): Win32__impl_l0.HICON {
+    return ExtractAssociatedIconExW(hInst, pszIconPath, piIconIndex, piIconId)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ExtractAssociatedIconW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    // param-hint: hInst optional reserved
+    // param-hint: pszIconPath fixed=128
+    func ExtractAssociatedIconW(hInst: CPointer<Unit>, pszIconPath: CPointer<UInt16>, piIcon: CPointer<UInt16>): Win32__impl_l0.HICON
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ExtractAssociatedIconW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_ExtractAssociatedIconW(hInst: CPointer<Unit>, pszIconPath: CPointer<UInt16>, piIcon: CPointer<UInt16>): Win32__impl_l0.HICON {
+    return ExtractAssociatedIconW(hInst, pszIconPath, piIcon)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ExtractIconA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    // param-hint: hInst optional reserved
+    func ExtractIconA(hInst: CPointer<Unit>, pszExeFileName: CPointer<UInt8>, nIconIndex: UInt32): Win32__impl_l0.HICON
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ExtractIconA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_ExtractIconA(hInst: CPointer<Unit>, pszExeFileName: CPointer<UInt8>, nIconIndex: UInt32): Win32__impl_l0.HICON {
+    return ExtractIconA(hInst, pszExeFileName, nIconIndex)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ExtractIconExA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    // param-hint: phiconLarge len=param[4] optional
+    // param-hint: phiconSmall len=param[4] optional
+    // pinvoke-hint: SetLastError
+    func ExtractIconExA(lpszFile: CPointer<UInt8>, nIconIndex: Int32, phiconLarge: CPointer<Win32__impl_l0.HICON>, phiconSmall: CPointer<Win32__impl_l0.HICON>, nIcons: UInt32): UInt32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ExtractIconExA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_ExtractIconExA(lpszFile: CPointer<UInt8>, nIconIndex: Int32, phiconLarge: CPointer<Win32__impl_l0.HICON>, phiconSmall: CPointer<Win32__impl_l0.HICON>, nIcons: UInt32): UInt32 {
+    return ExtractIconExA(lpszFile, nIconIndex, phiconLarge, phiconSmall, nIcons)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ExtractIconExW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    // param-hint: phiconLarge len=param[4] optional
+    // param-hint: phiconSmall len=param[4] optional
+    // pinvoke-hint: SetLastError
+    func ExtractIconExW(lpszFile: CPointer<UInt16>, nIconIndex: Int32, phiconLarge: CPointer<Win32__impl_l0.HICON>, phiconSmall: CPointer<Win32__impl_l0.HICON>, nIcons: UInt32): UInt32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ExtractIconExW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_ExtractIconExW(lpszFile: CPointer<UInt16>, nIconIndex: Int32, phiconLarge: CPointer<Win32__impl_l0.HICON>, phiconSmall: CPointer<Win32__impl_l0.HICON>, nIcons: UInt32): UInt32 {
+    return ExtractIconExW(lpszFile, nIconIndex, phiconLarge, phiconSmall, nIcons)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ExtractIconW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    // param-hint: hInst optional reserved
+    func ExtractIconW(hInst: CPointer<Unit>, pszExeFileName: CPointer<UInt16>, nIconIndex: UInt32): Win32__impl_l0.HICON
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ExtractIconW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_ExtractIconW(hInst: CPointer<Unit>, pszExeFileName: CPointer<UInt16>, nIconIndex: UInt32): Win32__impl_l0.HICON {
+    return ExtractIconW(hInst, pszExeFileName, nIconIndex)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_FindExecutableA == "on"]
+foreign {
+    // param-hint: lpDirectory optional
+    // param-hint: lpResult fixed=260
+    func FindExecutableA(lpFile: CPointer<UInt8>, lpDirectory: CPointer<UInt8>, lpResult: CPointer<UInt8>): CPointer<Unit>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_FindExecutableA == "on"]
+public unsafe func Windows_FindExecutableA(lpFile: CPointer<UInt8>, lpDirectory: CPointer<UInt8>, lpResult: CPointer<UInt8>): CPointer<Unit> {
+    return FindExecutableA(lpFile, lpDirectory, lpResult)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_FindExecutableW == "on"]
+foreign {
+    // param-hint: lpDirectory optional
+    // param-hint: lpResult fixed=260
+    func FindExecutableW(lpFile: CPointer<UInt16>, lpDirectory: CPointer<UInt16>, lpResult: CPointer<UInt16>): CPointer<Unit>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_FindExecutableW == "on"]
+public unsafe func Windows_FindExecutableW(lpFile: CPointer<UInt16>, lpDirectory: CPointer<UInt16>, lpResult: CPointer<UInt16>): CPointer<Unit> {
+    return FindExecutableW(lpFile, lpDirectory, lpResult)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_GetCurrentProcessExplicitAppUserModelID == "on"]
+foreign {
+    func GetCurrentProcessExplicitAppUserModelID(AppID: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_GetCurrentProcessExplicitAppUserModelID == "on"]
+public unsafe func Windows_GetCurrentProcessExplicitAppUserModelID(AppID: CPointer<CPointer<UInt16>>): Int32 {
+    return GetCurrentProcessExplicitAppUserModelID(AppID)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_GetFileNameFromBrowse == "on"]
+foreign {
+    // param-hint: hwnd optional
+    // param-hint: pszFilePath len=param[2]
+    // param-hint: pszWorkingDir optional
+    // param-hint: pszFilters optional
+    // param-hint: pszTitle optional
+    func GetFileNameFromBrowse(hwnd: CPointer<Unit>, pszFilePath: CPointer<UInt16>, cchFilePath: UInt32, pszWorkingDir: CPointer<UInt16>, pszDefExt: CPointer<UInt16>, pszFilters: CPointer<UInt16>, pszTitle: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_GetFileNameFromBrowse == "on"]
+public unsafe func Windows_GetFileNameFromBrowse(hwnd: CPointer<Unit>, pszFilePath: CPointer<UInt16>, cchFilePath: UInt32, pszWorkingDir: CPointer<UInt16>, pszDefExt: CPointer<UInt16>, pszFilters: CPointer<UInt16>, pszTitle: CPointer<UInt16>): Int32 {
+    return GetFileNameFromBrowse(hwnd, pszFilePath, cchFilePath, pszWorkingDir, pszDefExt, pszFilters, pszTitle)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILAppendID == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    // param-hint: pidl optional
+    func ILAppendID(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, pmkid: CPointer<Win32__impl_l0.SHITEMID>, fAppend: Int32): CPointer<Win32__impl_l1.ITEMIDLIST>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILAppendID == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_ILAppendID(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, pmkid: CPointer<Win32__impl_l0.SHITEMID>, fAppend: Int32): CPointer<Win32__impl_l1.ITEMIDLIST> {
+    return ILAppendID(pidl, pmkid, fAppend)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILClone == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    func ILClone(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>): CPointer<Win32__impl_l1.ITEMIDLIST>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILClone == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_ILClone(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>): CPointer<Win32__impl_l1.ITEMIDLIST> {
+    return ILClone(pidl)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILCloneFirst == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    func ILCloneFirst(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>): CPointer<Win32__impl_l1.ITEMIDLIST>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILCloneFirst == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_ILCloneFirst(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>): CPointer<Win32__impl_l1.ITEMIDLIST> {
+    return ILCloneFirst(pidl)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILCombine == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    // param-hint: pidl1 optional
+    // param-hint: pidl2 optional
+    func ILCombine(pidl1: CPointer<Win32__impl_l1.ITEMIDLIST>, pidl2: CPointer<Win32__impl_l1.ITEMIDLIST>): CPointer<Win32__impl_l1.ITEMIDLIST>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILCombine == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_ILCombine(pidl1: CPointer<Win32__impl_l1.ITEMIDLIST>, pidl2: CPointer<Win32__impl_l1.ITEMIDLIST>): CPointer<Win32__impl_l1.ITEMIDLIST> {
+    return ILCombine(pidl1, pidl2)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILCreateFromPathA == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    func ILCreateFromPathA(pszPath: CPointer<UInt8>): CPointer<Win32__impl_l1.ITEMIDLIST>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILCreateFromPathA == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_ILCreateFromPathA(pszPath: CPointer<UInt8>): CPointer<Win32__impl_l1.ITEMIDLIST> {
+    return ILCreateFromPathA(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILCreateFromPathW == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    func ILCreateFromPathW(pszPath: CPointer<UInt16>): CPointer<Win32__impl_l1.ITEMIDLIST>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILCreateFromPathW == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_ILCreateFromPathW(pszPath: CPointer<UInt16>): CPointer<Win32__impl_l1.ITEMIDLIST> {
+    return ILCreateFromPathW(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILFindChild == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    func ILFindChild(pidlParent: CPointer<Win32__impl_l1.ITEMIDLIST>, pidlChild: CPointer<Win32__impl_l1.ITEMIDLIST>): CPointer<Win32__impl_l1.ITEMIDLIST>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILFindChild == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_ILFindChild(pidlParent: CPointer<Win32__impl_l1.ITEMIDLIST>, pidlChild: CPointer<Win32__impl_l1.ITEMIDLIST>): CPointer<Win32__impl_l1.ITEMIDLIST> {
+    return ILFindChild(pidlParent, pidlChild)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILFindLastID == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    func ILFindLastID(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>): CPointer<Win32__impl_l1.ITEMIDLIST>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILFindLastID == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_ILFindLastID(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>): CPointer<Win32__impl_l1.ITEMIDLIST> {
+    return ILFindLastID(pidl)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILFree == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    // param-hint: pidl optional
+    func ILFree(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>): Unit
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILFree == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_ILFree(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>): Unit {
+    ILFree(pidl)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILGetNext == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    // param-hint: pidl optional
+    func ILGetNext(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>): CPointer<Win32__impl_l1.ITEMIDLIST>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILGetNext == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_ILGetNext(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>): CPointer<Win32__impl_l1.ITEMIDLIST> {
+    return ILGetNext(pidl)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILGetSize == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    // param-hint: pidl optional
+    func ILGetSize(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>): UInt32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILGetSize == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_ILGetSize(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>): UInt32 {
+    return ILGetSize(pidl)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILIsEqual == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    func ILIsEqual(pidl1: CPointer<Win32__impl_l1.ITEMIDLIST>, pidl2: CPointer<Win32__impl_l1.ITEMIDLIST>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILIsEqual == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_ILIsEqual(pidl1: CPointer<Win32__impl_l1.ITEMIDLIST>, pidl2: CPointer<Win32__impl_l1.ITEMIDLIST>): Int32 {
+    return ILIsEqual(pidl1, pidl2)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILIsParent == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    func ILIsParent(pidl1: CPointer<Win32__impl_l1.ITEMIDLIST>, pidl2: CPointer<Win32__impl_l1.ITEMIDLIST>, fImmediate: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILIsParent == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_ILIsParent(pidl1: CPointer<Win32__impl_l1.ITEMIDLIST>, pidl2: CPointer<Win32__impl_l1.ITEMIDLIST>, fImmediate: Int32): Int32 {
+    return ILIsParent(pidl1, pidl2, fImmediate)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILLoadFromStreamEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    func ILLoadFromStreamEx(pstm: CPointer<Unit>, pidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILLoadFromStreamEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_ILLoadFromStreamEx(pstm: CPointer<Unit>, pidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>): Int32 {
+    return ILLoadFromStreamEx(pstm, pidl)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILRemoveLastID == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    // param-hint: pidl optional
+    func ILRemoveLastID(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILRemoveLastID == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_ILRemoveLastID(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>): Int32 {
+    return ILRemoveLastID(pidl)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILSaveToStream == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    func ILSaveToStream(pstm: CPointer<Unit>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILSaveToStream == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_ILSaveToStream(pstm: CPointer<Unit>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>): Int32 {
+    return ILSaveToStream(pstm, pidl)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_InitNetworkAddressControl == "on"]
+foreign {
+    func InitNetworkAddressControl(): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_InitNetworkAddressControl == "on"]
+public unsafe func Windows_InitNetworkAddressControl(): Int32 {
+    return InitNetworkAddressControl()
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_IsLFNDriveA == "on"]
+foreign {
+    // param-hint: pszPath optional
+    func IsLFNDriveA(pszPath: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_IsLFNDriveA == "on"]
+public unsafe func Windows_IsLFNDriveA(pszPath: CPointer<UInt8>): Int32 {
+    return IsLFNDriveA(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_IsLFNDriveW == "on"]
+foreign {
+    // param-hint: pszPath optional
+    func IsLFNDriveW(pszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_IsLFNDriveW == "on"]
+public unsafe func Windows_IsLFNDriveW(pszPath: CPointer<UInt16>): Int32 {
+    return IsLFNDriveW(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_IsNetDrive == "on"]
+foreign {
+    func IsNetDrive(iDrive: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_IsNetDrive == "on"]
+public unsafe func Windows_IsNetDrive(iDrive: Int32): Int32 {
+    return IsNetDrive(iDrive)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_IsUserAnAdmin == "on"]
+foreign {
+    func IsUserAnAdmin(): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_IsUserAnAdmin == "on"]
+public unsafe func Windows_IsUserAnAdmin(): Int32 {
+    return IsUserAnAdmin()
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_OpenRegStream == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Registry == "on"]
 foreign {
     // param-hint: pszSubkey optional
     // param-hint: pszValue optional
     func OpenRegStream(hkey: Win32_System_Registry.HKEY, pszSubkey: CPointer<UInt16>, pszValue: CPointer<UInt16>, grfMode: UInt32): CPointer<Unit>
-    // param-hint: pszCaption optional
-    // param-hint: ahkeys len=param[2] optional
-    // param-hint: pclsidDefault optional
-    // param-hint: psb optional
-    // param-hint: pStartPage optional
-    func SHOpenPropSheetW(pszCaption: CPointer<UInt16>, ahkeys: CPointer<Win32_System_Registry.HKEY>, ckeys: UInt32, pclsidDefault: CPointer<GUID>, pdtobj: CPointer<Unit>, psb: CPointer<Unit>, pStartPage: CPointer<UInt16>): Int32
 }
 
-@When[SHELL32 == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_Common == "on")]
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_OpenRegStream == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_OpenRegStream(hkey: Win32_System_Registry.HKEY, pszSubkey: CPointer<UInt16>, pszValue: CPointer<UInt16>, grfMode: UInt32): CPointer<Unit> {
+    return OpenRegStream(hkey, pszSubkey, pszValue, grfMode)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PathCleanupSpec == "on"]
 foreign {
-    // param-hint: apidl len=param[1] optional
-    func CIDLData_CreateFromIDArray(pidlFolder: CPointer<Win32__impl_l1.ITEMIDLIST>, cidl: UInt32, apidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>, ppdtobj: CPointer<CPointer<Unit>>): Int32
-    func ILLoadFromStreamEx(pstm: CPointer<Unit>, pidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>): Int32
-    func ILSaveToStream(pstm: CPointer<Unit>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>): Int32
+    // param-hint: pszDir optional
+    func PathCleanupSpec(pszDir: CPointer<UInt16>, pszSpec: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PathCleanupSpec == "on"]
+public unsafe func Windows_PathCleanupSpec(pszDir: CPointer<UInt16>, pszSpec: CPointer<UInt16>): Int32 {
+    return PathCleanupSpec(pszDir, pszSpec)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PathGetShortPath == "on"]
+foreign {
+    // param-hint: pszLongPath fixed=260
+    func PathGetShortPath(pszLongPath: CPointer<UInt16>): Unit
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PathGetShortPath == "on"]
+public unsafe func Windows_PathGetShortPath(pszLongPath: CPointer<UInt16>): Unit {
+    PathGetShortPath(pszLongPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PathIsExe == "on"]
+foreign {
+    func PathIsExe(pszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PathIsExe == "on"]
+public unsafe func Windows_PathIsExe(pszPath: CPointer<UInt16>): Int32 {
+    return PathIsExe(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PathIsSlowA == "on"]
+foreign {
+    func PathIsSlowA(pszFile: CPointer<UInt8>, dwAttr: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PathIsSlowA == "on"]
+public unsafe func Windows_PathIsSlowA(pszFile: CPointer<UInt8>, dwAttr: UInt32): Int32 {
+    return PathIsSlowA(pszFile, dwAttr)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PathIsSlowW == "on"]
+foreign {
+    func PathIsSlowW(pszFile: CPointer<UInt16>, dwAttr: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PathIsSlowW == "on"]
+public unsafe func Windows_PathIsSlowW(pszFile: CPointer<UInt16>, dwAttr: UInt32): Int32 {
+    return PathIsSlowW(pszFile, dwAttr)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PathMakeUniqueName == "on"]
+foreign {
+    // param-hint: pszUniqueName len=param[1]
+    // param-hint: pszLongPlate optional
+    // param-hint: pszDir optional
+    func PathMakeUniqueName(pszUniqueName: CPointer<UInt16>, cchMax: UInt32, pszTemplate: CPointer<UInt16>, pszLongPlate: CPointer<UInt16>, pszDir: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PathMakeUniqueName == "on"]
+public unsafe func Windows_PathMakeUniqueName(pszUniqueName: CPointer<UInt16>, cchMax: UInt32, pszTemplate: CPointer<UInt16>, pszLongPlate: CPointer<UInt16>, pszDir: CPointer<UInt16>): Int32 {
+    return PathMakeUniqueName(pszUniqueName, cchMax, pszTemplate, pszLongPlate, pszDir)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PathQualify == "on"]
+foreign {
+    func PathQualify(psz: CPointer<UInt16>): Unit
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PathQualify == "on"]
+public unsafe func Windows_PathQualify(psz: CPointer<UInt16>): Unit {
+    PathQualify(psz)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PathResolve == "on"]
+foreign {
+    // param-hint: pszPath fixed=260
+    // param-hint: dirs optional
+    // pinvoke-hint: SetLastError
+    func PathResolve(pszPath: CPointer<UInt16>, dirs: CPointer<CPointer<UInt16>>, fFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PathResolve == "on"]
+public unsafe func Windows_PathResolve(pszPath: CPointer<UInt16>, dirs: CPointer<CPointer<UInt16>>, fFlags: UInt32): Int32 {
+    return PathResolve(pszPath, dirs, fFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PathYetAnotherMakeUniqueName == "on"]
+foreign {
+    // param-hint: pszUniqueName fixed=260
+    // param-hint: pszShort optional
+    // param-hint: pszFileSpec optional
+    func PathYetAnotherMakeUniqueName(pszUniqueName: CPointer<UInt16>, pszPath: CPointer<UInt16>, pszShort: CPointer<UInt16>, pszFileSpec: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PathYetAnotherMakeUniqueName == "on"]
+public unsafe func Windows_PathYetAnotherMakeUniqueName(pszUniqueName: CPointer<UInt16>, pszPath: CPointer<UInt16>, pszShort: CPointer<UInt16>, pszFileSpec: CPointer<UInt16>): Int32 {
+    return PathYetAnotherMakeUniqueName(pszUniqueName, pszPath, pszShort, pszFileSpec)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PickIconDlg == "on"]
+foreign {
+    // param-hint: hwnd optional
+    // param-hint: pszIconPath len=param[2]
+    // param-hint: piIconIndex optional
+    func PickIconDlg(hwnd: CPointer<Unit>, pszIconPath: CPointer<UInt16>, cchIconPath: UInt32, piIconIndex: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PickIconDlg == "on"]
+public unsafe func Windows_PickIconDlg(hwnd: CPointer<Unit>, pszIconPath: CPointer<UInt16>, cchIconPath: UInt32, piIconIndex: CPointer<Int32>): Int32 {
+    return PickIconDlg(hwnd, pszIconPath, cchIconPath, piIconIndex)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ReadCabinetState == "on"]
+foreign {
+    // param-hint: pcs bytes=param[1]
+    func ReadCabinetState(pcs: CPointer<Win32__impl_l0.CABINETSTATE>, cLength: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ReadCabinetState == "on"]
+public unsafe func Windows_ReadCabinetState(pcs: CPointer<Win32__impl_l0.CABINETSTATE>, cLength: Int32): Int32 {
+    return ReadCabinetState(pcs, cLength)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_RealDriveType == "on"]
+foreign {
+    func RealDriveType(iDrive: Int32, fOKToHitNet: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_RealDriveType == "on"]
+public unsafe func Windows_RealDriveType(iDrive: Int32, fOKToHitNet: Int32): Int32 {
+    return RealDriveType(iDrive, fOKToHitNet)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_RestartDialog == "on"]
+foreign {
+    // param-hint: hwnd optional
+    // param-hint: pszPrompt optional
+    func RestartDialog(hwnd: CPointer<Unit>, pszPrompt: CPointer<UInt16>, dwReturn: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_RestartDialog == "on"]
+public unsafe func Windows_RestartDialog(hwnd: CPointer<Unit>, pszPrompt: CPointer<UInt16>, dwReturn: UInt32): Int32 {
+    return RestartDialog(hwnd, pszPrompt, dwReturn)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_RestartDialogEx == "on"]
+foreign {
+    // param-hint: hwnd optional
+    // param-hint: pszPrompt optional
+    func RestartDialogEx(hwnd: CPointer<Unit>, pszPrompt: CPointer<UInt16>, dwReturn: UInt32, dwReasonCode: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_RestartDialogEx == "on"]
+public unsafe func Windows_RestartDialogEx(hwnd: CPointer<Unit>, pszPrompt: CPointer<UInt16>, dwReturn: UInt32, dwReasonCode: UInt32): Int32 {
+    return RestartDialogEx(hwnd, pszPrompt, dwReturn, dwReasonCode)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHAddFromPropSheetExtArray == "on" && Windows_Win32_UI_Controls == "on"]
+foreign {
+    func SHAddFromPropSheetExtArray(hpsxa: Win32__impl_l0.HPSXA, lpfnAddPage: Win32__impl_l1.LPFNSVADDPROPSHEETPAGE, lParam: IntNative): UInt32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHAddFromPropSheetExtArray == "on" && Windows_Win32_UI_Controls == "on"]
+public unsafe func Windows_SHAddFromPropSheetExtArray(hpsxa: Win32__impl_l0.HPSXA, lpfnAddPage: Win32__impl_l1.LPFNSVADDPROPSHEETPAGE, lParam: IntNative): UInt32 {
+    return SHAddFromPropSheetExtArray(hpsxa, lpfnAddPage, lParam)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHAddToRecentDocs == "on"]
+foreign {
+    // param-hint: pv optional
+    func SHAddToRecentDocs(uFlags: UInt32, pv: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHAddToRecentDocs == "on"]
+public unsafe func Windows_SHAddToRecentDocs(uFlags: UInt32, pv: CPointer<Unit>): Unit {
+    SHAddToRecentDocs(uFlags, pv)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHAlloc == "on"]
+foreign {
+    func SHAlloc(cb: UIntNative): CPointer<Unit>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHAlloc == "on"]
+public unsafe func Windows_SHAlloc(cb: UIntNative): CPointer<Unit> {
+    return SHAlloc(cb)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHAppBarMessage == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func SHAppBarMessage(dwMessage: UInt32, pData: CPointer<Win32__impl_l0.APPBARDATAAbi>): UIntNative
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHAppBarMessage == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SHAppBarMessage(dwMessage: UInt32, pData: CPointer<Win32__impl_l0.APPBARDATAAbi>): UIntNative {
+    return SHAppBarMessage(dwMessage, pData)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHAssocEnumHandlers == "on"]
+foreign {
+    func SHAssocEnumHandlers(pszExtra: CPointer<UInt16>, afFilter: Win32__impl_l0.ASSOC_FILTERAbi, ppEnumHandler: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHAssocEnumHandlers == "on"]
+public unsafe func Windows_SHAssocEnumHandlers(pszExtra: CPointer<UInt16>, afFilter: Win32__impl_l0.ASSOC_FILTERAbi, ppEnumHandler: CPointer<CPointer<Unit>>): Int32 {
+    return SHAssocEnumHandlers(pszExtra, afFilter, ppEnumHandler)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHAssocEnumHandlersForProtocolByApplication == "on"]
+foreign {
+    func SHAssocEnumHandlersForProtocolByApplication(protocol: CPointer<UInt16>, riid: CPointer<GUID>, enumHandlers: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHAssocEnumHandlersForProtocolByApplication == "on"]
+public unsafe func Windows_SHAssocEnumHandlersForProtocolByApplication(protocol: CPointer<UInt16>, riid: CPointer<GUID>, enumHandlers: CPointer<CPointer<Unit>>): Int32 {
+    return SHAssocEnumHandlersForProtocolByApplication(protocol, riid, enumHandlers)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHBindToFolderIDListParent == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    // param-hint: psfRoot optional
+    // param-hint: ppidlLast optional
+    func SHBindToFolderIDListParent(psfRoot: CPointer<Unit>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>, ppidlLast: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHBindToFolderIDListParent == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHBindToFolderIDListParent(psfRoot: CPointer<Unit>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>, ppidlLast: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>): Int32 {
+    return SHBindToFolderIDListParent(psfRoot, pidl, riid, ppv, ppidlLast)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHBindToFolderIDListParentEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
     // param-hint: psfRoot optional
     // param-hint: ppbc optional
     // param-hint: ppidlLast optional
     func SHBindToFolderIDListParentEx(psfRoot: CPointer<Unit>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, ppbc: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>, ppidlLast: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHBindToFolderIDListParentEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHBindToFolderIDListParentEx(psfRoot: CPointer<Unit>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, ppbc: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>, ppidlLast: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>): Int32 {
+    return SHBindToFolderIDListParentEx(psfRoot, pidl, ppbc, riid, ppv, ppidlLast)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHBindToObject == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
     // param-hint: psf optional
     // param-hint: pbc optional
     func SHBindToObject(psf: CPointer<Unit>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, pbc: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHBindToObject == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHBindToObject(psf: CPointer<Unit>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, pbc: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return SHBindToObject(psf, pidl, pbc, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHBindToParent == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    // param-hint: ppidlLast optional
+    func SHBindToParent(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>, ppidlLast: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHBindToParent == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHBindToParent(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>, ppidlLast: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>): Int32 {
+    return SHBindToParent(pidl, riid, ppv, ppidlLast)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHBrowseForFolderA == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    func SHBrowseForFolderA(lpbi: CPointer<Win32__impl_l1.BROWSEINFOAAbi>): CPointer<Win32__impl_l1.ITEMIDLIST>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHBrowseForFolderA == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHBrowseForFolderA(lpbi: CPointer<Win32__impl_l1.BROWSEINFOAAbi>): CPointer<Win32__impl_l1.ITEMIDLIST> {
+    return SHBrowseForFolderA(lpbi)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHBrowseForFolderW == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    func SHBrowseForFolderW(lpbi: CPointer<Win32__impl_l1.BROWSEINFOWAbi>): CPointer<Win32__impl_l1.ITEMIDLIST>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHBrowseForFolderW == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHBrowseForFolderW(lpbi: CPointer<Win32__impl_l1.BROWSEINFOWAbi>): CPointer<Win32__impl_l1.ITEMIDLIST> {
+    return SHBrowseForFolderW(lpbi)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCLSIDFromString == "on"]
+foreign {
+    func SHCLSIDFromString(psz: CPointer<UInt16>, pclsid: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCLSIDFromString == "on"]
+public unsafe func Windows_SHCLSIDFromString(psz: CPointer<UInt16>, pclsid: CPointer<GUID>): Int32 {
+    return SHCLSIDFromString(psz, pclsid)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHChangeNotification_Lock == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    // param-hint: pppidl optional
+    // param-hint: plEvent optional
+    func SHChangeNotification_Lock(hChange: CPointer<Unit>, dwProcId: UInt32, pppidl: CPointer<CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>>, plEvent: CPointer<Int32>): CPointer<Unit>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHChangeNotification_Lock == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHChangeNotification_Lock(hChange: CPointer<Unit>, dwProcId: UInt32, pppidl: CPointer<CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>>, plEvent: CPointer<Int32>): CPointer<Unit> {
+    return SHChangeNotification_Lock(hChange, dwProcId, pppidl, plEvent)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHChangeNotification_Unlock == "on"]
+foreign {
+    func SHChangeNotification_Unlock(hLock: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHChangeNotification_Unlock == "on"]
+public unsafe func Windows_SHChangeNotification_Unlock(hLock: CPointer<Unit>): Int32 {
+    return SHChangeNotification_Unlock(hLock)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHChangeNotify == "on"]
+foreign {
+    // param-hint: dwItem1 optional
+    // param-hint: dwItem2 optional
+    func SHChangeNotify(wEventId: Int32, uFlags: Win32__impl_l0.SHCNF_FLAGSAbi, dwItem1: CPointer<Unit>, dwItem2: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHChangeNotify == "on"]
+public unsafe func Windows_SHChangeNotify(wEventId: Int32, uFlags: Win32__impl_l0.SHCNF_FLAGSAbi, dwItem1: CPointer<Unit>, dwItem2: CPointer<Unit>): Unit {
+    SHChangeNotify(wEventId, uFlags, dwItem1, dwItem2)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHChangeNotifyDeregister == "on"]
+foreign {
+    func SHChangeNotifyDeregister(ulID: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHChangeNotifyDeregister == "on"]
+public unsafe func Windows_SHChangeNotifyDeregister(ulID: UInt32): Int32 {
+    return SHChangeNotifyDeregister(ulID)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHChangeNotifyRegister == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    func SHChangeNotifyRegister(hwnd: CPointer<Unit>, fSources: Win32__impl_l0.SHCNRF_SOURCEAbi, fEvents: Int32, wMsg: UInt32, cEntries: Int32, pshcne: CPointer<Win32__impl_l1.SHChangeNotifyEntry>): UInt32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHChangeNotifyRegister == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHChangeNotifyRegister(hwnd: CPointer<Unit>, fSources: Win32__impl_l0.SHCNRF_SOURCEAbi, fEvents: Int32, wMsg: UInt32, cEntries: Int32, pshcne: CPointer<Win32__impl_l1.SHChangeNotifyEntry>): UInt32 {
+    return SHChangeNotifyRegister(hwnd, fSources, fEvents, wMsg, cEntries, pshcne)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHChangeNotifyRegisterThread == "on"]
+foreign {
+    func SHChangeNotifyRegisterThread(status: Win32__impl_l0.SCNRT_STATUSAbi): Unit
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHChangeNotifyRegisterThread == "on"]
+public unsafe func Windows_SHChangeNotifyRegisterThread(status: Win32__impl_l0.SCNRT_STATUSAbi): Unit {
+    SHChangeNotifyRegisterThread(status)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCloneSpecialIDList == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    // param-hint: hwnd optional reserved
+    func SHCloneSpecialIDList(hwnd: CPointer<Unit>, csidl: Int32, fCreate: Int32): CPointer<Win32__impl_l1.ITEMIDLIST>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCloneSpecialIDList == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHCloneSpecialIDList(hwnd: CPointer<Unit>, csidl: Int32, fCreate: Int32): CPointer<Win32__impl_l1.ITEMIDLIST> {
+    return SHCloneSpecialIDList(hwnd, csidl, fCreate)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCoCreateInstance == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: pszCLSID optional
+    // param-hint: pclsid optional
+    // param-hint: pUnkOuter optional
+    func SHCoCreateInstance(pszCLSID: CPointer<UInt16>, pclsid: CPointer<GUID>, pUnkOuter: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCoCreateInstance == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SHCoCreateInstance(pszCLSID: CPointer<UInt16>, pclsid: CPointer<GUID>, pUnkOuter: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return SHCoCreateInstance(pszCLSID, pclsid, pUnkOuter, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateAssociationRegistration == "on"]
+foreign {
+    func SHCreateAssociationRegistration(riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateAssociationRegistration == "on"]
+public unsafe func Windows_SHCreateAssociationRegistration(riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return SHCreateAssociationRegistration(riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateDataObject == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
     // param-hint: pidlFolder optional
     // param-hint: apidl len=param[1] optional
     // param-hint: pdtInner optional
     func SHCreateDataObject(pidlFolder: CPointer<Win32__impl_l1.ITEMIDLIST>, cidl: UInt32, apidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>, pdtInner: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
-    func SHGetIDListFromObject(punk: CPointer<Unit>, ppidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>): Int32
-    // param-hint: pbc optional
-    // param-hint: psfgaoOut optional
-    func SHParseDisplayName(pszName: CPointer<UInt16>, pbc: CPointer<Unit>, ppidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>, sfgaoIn: UInt32, psfgaoOut: CPointer<UInt32>): Int32
 }
 
-@When[SHELL32 == "on" && Windows_Win32_Security == "on"]
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateDataObject == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHCreateDataObject(pidlFolder: CPointer<Win32__impl_l1.ITEMIDLIST>, cidl: UInt32, apidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>, pdtInner: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return SHCreateDataObject(pidlFolder, cidl, apidl, pdtInner, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateDefaultContextMenu == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Registry == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    func SHCreateDefaultContextMenu(pdcm: CPointer<DEFCONTEXTMENUAbi>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateDefaultContextMenu == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Registry == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHCreateDefaultContextMenu(pdcm: CPointer<DEFCONTEXTMENUAbi>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return SHCreateDefaultContextMenu(pdcm, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateDefaultExtractIcon == "on"]
+foreign {
+    func SHCreateDefaultExtractIcon(riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateDefaultExtractIcon == "on"]
+public unsafe func Windows_SHCreateDefaultExtractIcon(riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return SHCreateDefaultExtractIcon(riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateDefaultPropertiesOp == "on"]
+foreign {
+    func SHCreateDefaultPropertiesOp(psi: CPointer<Unit>, ppFileOp: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateDefaultPropertiesOp == "on"]
+public unsafe func Windows_SHCreateDefaultPropertiesOp(psi: CPointer<Unit>, ppFileOp: CPointer<CPointer<Unit>>): Int32 {
+    return SHCreateDefaultPropertiesOp(psi, ppFileOp)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateDirectory == "on"]
+foreign {
+    // param-hint: hwnd optional
+    func SHCreateDirectory(hwnd: CPointer<Unit>, pszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateDirectory == "on"]
+public unsafe func Windows_SHCreateDirectory(hwnd: CPointer<Unit>, pszPath: CPointer<UInt16>): Int32 {
+    return SHCreateDirectory(hwnd, pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateDirectoryExA == "on" && Windows_Win32_Security == "on"]
 foreign {
     // param-hint: hwnd optional
     // param-hint: psa optional
     func SHCreateDirectoryExA(hwnd: CPointer<Unit>, pszPath: CPointer<UInt8>, psa: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateDirectoryExA == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_SHCreateDirectoryExA(hwnd: CPointer<Unit>, pszPath: CPointer<UInt8>, psa: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): Int32 {
+    return SHCreateDirectoryExA(hwnd, pszPath, psa)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateDirectoryExW == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: hwnd optional
     // param-hint: psa optional
     func SHCreateDirectoryExW(hwnd: CPointer<Unit>, pszPath: CPointer<UInt16>, psa: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): Int32
 }
 
-@When[SHELL32 == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateDirectoryExW == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_SHCreateDirectoryExW(hwnd: CPointer<Unit>, pszPath: CPointer<UInt16>, psa: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): Int32 {
+    return SHCreateDirectoryExW(hwnd, pszPath, psa)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateFileExtractIconW == "on"]
 foreign {
-    // param-hint: pdtObject optional
-    func DAD_DragEnterEx2(hwndTarget: CPointer<Unit>, ptStart: Win32_Foundation.POINTAbi, pdtObject: CPointer<Unit>): Int32
-    // param-hint: pszCLSID optional
-    // param-hint: pclsid optional
-    // param-hint: pUnkOuter optional
-    func SHCoCreateInstance(pszCLSID: CPointer<UInt16>, pclsid: CPointer<GUID>, pUnkOuter: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+    func SHCreateFileExtractIconW(pszFile: CPointer<UInt16>, dwFileAttributes: UInt32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateFileExtractIconW == "on"]
+public unsafe func Windows_SHCreateFileExtractIconW(pszFile: CPointer<UInt16>, dwFileAttributes: UInt32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return SHCreateFileExtractIconW(pszFile, dwFileAttributes, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateItemFromIDList == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    func SHCreateItemFromIDList(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateItemFromIDList == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHCreateItemFromIDList(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return SHCreateItemFromIDList(pidl, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateItemFromParsingName == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pbc optional
     func SHCreateItemFromParsingName(pszPath: CPointer<UInt16>, pbc: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateItemFromParsingName == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SHCreateItemFromParsingName(pszPath: CPointer<UInt16>, pbc: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return SHCreateItemFromParsingName(pszPath, pbc, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateItemFromRelativeName == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pbc optional
     func SHCreateItemFromRelativeName(psiParent: CPointer<Unit>, pszName: CPointer<UInt16>, pbc: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateItemFromRelativeName == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SHCreateItemFromRelativeName(psiParent: CPointer<Unit>, pszName: CPointer<UInt16>, pbc: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return SHCreateItemFromRelativeName(psiParent, pszName, pbc, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateItemInKnownFolder == "on"]
+foreign {
+    // param-hint: pszItem optional
+    func SHCreateItemInKnownFolder(kfid: CPointer<GUID>, dwKFFlags: UInt32, pszItem: CPointer<UInt16>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateItemInKnownFolder == "on"]
+public unsafe func Windows_SHCreateItemInKnownFolder(kfid: CPointer<GUID>, dwKFFlags: UInt32, pszItem: CPointer<UInt16>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return SHCreateItemInKnownFolder(kfid, dwKFFlags, pszItem, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateItemWithParent == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    // param-hint: pidlParent optional
+    // param-hint: psfParent optional
+    func SHCreateItemWithParent(pidlParent: CPointer<Win32__impl_l1.ITEMIDLIST>, psfParent: CPointer<Unit>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, riid: CPointer<GUID>, ppvItem: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateItemWithParent == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHCreateItemWithParent(pidlParent: CPointer<Win32__impl_l1.ITEMIDLIST>, psfParent: CPointer<Unit>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, riid: CPointer<GUID>, ppvItem: CPointer<CPointer<Unit>>): Int32 {
+    return SHCreateItemWithParent(pidlParent, psfParent, pidl, riid, ppvItem)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateProcessAsUserW == "on" && (((arch == "x86_64" && Windows_Win32_Security == "on" && Windows_Win32_System_Threading == "on") || (arch == "aarch64" && Windows_Win32_Security == "on" && Windows_Win32_System_Threading == "on")) && Windows_Win32_Security == "on" && Windows_Win32_System_Threading == "on")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SHCreateProcessAsUserW(pscpi: CPointer<Win32__impl_l1.SHCREATEPROCESSINFOWAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateProcessAsUserW == "on" && (((arch == "x86_64" && Windows_Win32_Security == "on" && Windows_Win32_System_Threading == "on") || (arch == "aarch64" && Windows_Win32_Security == "on" && Windows_Win32_System_Threading == "on")) && Windows_Win32_Security == "on" && Windows_Win32_System_Threading == "on")]
+public unsafe func Windows_SHCreateProcessAsUserW(pscpi: CPointer<Win32__impl_l1.SHCREATEPROCESSINFOWAbi>): Int32 {
+    return SHCreateProcessAsUserW(pscpi)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreatePropSheetExtArray == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pszSubKey optional
+    func SHCreatePropSheetExtArray(hKey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt16>, max_iface: UInt32): Win32__impl_l0.HPSXA
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreatePropSheetExtArray == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHCreatePropSheetExtArray(hKey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt16>, max_iface: UInt32): Win32__impl_l0.HPSXA {
+    return SHCreatePropSheetExtArray(hKey, pszSubKey, max_iface)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateQueryCancelAutoPlayMoniker == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func SHCreateQueryCancelAutoPlayMoniker(ppmoniker: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateQueryCancelAutoPlayMoniker == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SHCreateQueryCancelAutoPlayMoniker(ppmoniker: CPointer<CPointer<Unit>>): Int32 {
+    return SHCreateQueryCancelAutoPlayMoniker(ppmoniker)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateShellFolderView == "on"]
+foreign {
+    func SHCreateShellFolderView(pcsfv: CPointer<SFV_CREATEAbi>, ppsv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateShellFolderView == "on"]
+public unsafe func Windows_SHCreateShellFolderView(pcsfv: CPointer<SFV_CREATEAbi>, ppsv: CPointer<CPointer<Unit>>): Int32 {
+    return SHCreateShellFolderView(pcsfv, ppsv)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateShellFolderViewEx == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    func SHCreateShellFolderViewEx(pcsfv: CPointer<CSFVAbi>, ppsv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateShellFolderViewEx == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHCreateShellFolderViewEx(pcsfv: CPointer<CSFVAbi>, ppsv: CPointer<CPointer<Unit>>): Int32 {
+    return SHCreateShellFolderViewEx(pcsfv, ppsv)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateShellItem == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    // param-hint: pidlParent optional
+    // param-hint: psfParent optional
+    func SHCreateShellItem(pidlParent: CPointer<Win32__impl_l1.ITEMIDLIST>, psfParent: CPointer<Unit>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, ppsi: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateShellItem == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHCreateShellItem(pidlParent: CPointer<Win32__impl_l1.ITEMIDLIST>, psfParent: CPointer<Unit>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, ppsi: CPointer<CPointer<Unit>>): Int32 {
+    return SHCreateShellItem(pidlParent, psfParent, pidl, ppsi)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateShellItemArray == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    // param-hint: pidlParent optional
+    // param-hint: psf optional
+    // param-hint: ppidl len=param[2] optional
+    func SHCreateShellItemArray(pidlParent: CPointer<Win32__impl_l1.ITEMIDLIST>, psf: CPointer<Unit>, cidl: UInt32, ppidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>, ppsiItemArray: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateShellItemArray == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHCreateShellItemArray(pidlParent: CPointer<Win32__impl_l1.ITEMIDLIST>, psf: CPointer<Unit>, cidl: UInt32, ppidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>, ppsiItemArray: CPointer<CPointer<Unit>>): Int32 {
+    return SHCreateShellItemArray(pidlParent, psf, cidl, ppidl, ppsiItemArray)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateShellItemArrayFromDataObject == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func SHCreateShellItemArrayFromDataObject(pdo: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateShellItemArrayFromDataObject == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SHCreateShellItemArrayFromDataObject(pdo: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return SHCreateShellItemArrayFromDataObject(pdo, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateShellItemArrayFromIDLists == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    // param-hint: rgpidl len=param[0]
+    func SHCreateShellItemArrayFromIDLists(cidl: UInt32, rgpidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>, ppsiItemArray: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateShellItemArrayFromIDLists == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHCreateShellItemArrayFromIDLists(cidl: UInt32, rgpidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>, ppsiItemArray: CPointer<CPointer<Unit>>): Int32 {
+    return SHCreateShellItemArrayFromIDLists(cidl, rgpidl, ppsiItemArray)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateShellItemArrayFromShellItem == "on"]
+foreign {
+    func SHCreateShellItemArrayFromShellItem(psi: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateShellItemArrayFromShellItem == "on"]
+public unsafe func Windows_SHCreateShellItemArrayFromShellItem(psi: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return SHCreateShellItemArrayFromShellItem(psi, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateStdEnumFmtEtc == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: afmt len=param[0]
     func SHCreateStdEnumFmtEtc(cfmt: UInt32, afmt: CPointer<Win32__impl_l1.FORMATETCAbi>, ppenumFormatEtc: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateStdEnumFmtEtc == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SHCreateStdEnumFmtEtc(cfmt: UInt32, afmt: CPointer<Win32__impl_l1.FORMATETCAbi>, ppenumFormatEtc: CPointer<CPointer<Unit>>): Int32 {
+    return SHCreateStdEnumFmtEtc(cfmt, afmt, ppenumFormatEtc)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHDefExtractIconA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    // param-hint: phiconLarge optional
+    // param-hint: phiconSmall optional
+    func SHDefExtractIconA(pszIconFile: CPointer<UInt8>, iIndex: Int32, uFlags: UInt32, phiconLarge: CPointer<Win32__impl_l0.HICON>, phiconSmall: CPointer<Win32__impl_l0.HICON>, nIconSize: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHDefExtractIconA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_SHDefExtractIconA(pszIconFile: CPointer<UInt8>, iIndex: Int32, uFlags: UInt32, phiconLarge: CPointer<Win32__impl_l0.HICON>, phiconSmall: CPointer<Win32__impl_l0.HICON>, nIconSize: UInt32): Int32 {
+    return SHDefExtractIconA(pszIconFile, iIndex, uFlags, phiconLarge, phiconSmall, nIconSize)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHDefExtractIconW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    // param-hint: phiconLarge optional
+    // param-hint: phiconSmall optional
+    func SHDefExtractIconW(pszIconFile: CPointer<UInt16>, iIndex: Int32, uFlags: UInt32, phiconLarge: CPointer<Win32__impl_l0.HICON>, phiconSmall: CPointer<Win32__impl_l0.HICON>, nIconSize: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHDefExtractIconW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_SHDefExtractIconW(pszIconFile: CPointer<UInt16>, iIndex: Int32, uFlags: UInt32, phiconLarge: CPointer<Win32__impl_l0.HICON>, phiconSmall: CPointer<Win32__impl_l0.HICON>, nIconSize: UInt32): Int32 {
+    return SHDefExtractIconW(pszIconFile, iIndex, uFlags, phiconLarge, phiconSmall, nIconSize)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHDestroyPropSheetExtArray == "on"]
+foreign {
+    func SHDestroyPropSheetExtArray(hpsxa: Win32__impl_l0.HPSXA): Unit
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHDestroyPropSheetExtArray == "on"]
+public unsafe func Windows_SHDestroyPropSheetExtArray(hpsxa: Win32__impl_l0.HPSXA): Unit {
+    SHDestroyPropSheetExtArray(hpsxa)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHDoDragDrop == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
+    // param-hint: hwnd optional
+    // param-hint: pdsrc optional
+    func SHDoDragDrop(hwnd: CPointer<Unit>, pdata: CPointer<Unit>, pdsrc: CPointer<Unit>, dwEffect: Win32__impl_l0.DROPEFFECTAbi, pdwEffect: CPointer<Win32__impl_l0.DROPEFFECTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHDoDragDrop == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_SHDoDragDrop(hwnd: CPointer<Unit>, pdata: CPointer<Unit>, pdsrc: CPointer<Unit>, dwEffect: Win32__impl_l0.DROPEFFECTAbi, pdwEffect: CPointer<Win32__impl_l0.DROPEFFECTAbi>): Int32 {
+    return SHDoDragDrop(hwnd, pdata, pdsrc, dwEffect, pdwEffect)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHEmptyRecycleBinA == "on"]
+foreign {
+    // param-hint: hwnd optional
+    // param-hint: pszRootPath optional
+    func SHEmptyRecycleBinA(hwnd: CPointer<Unit>, pszRootPath: CPointer<UInt8>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHEmptyRecycleBinA == "on"]
+public unsafe func Windows_SHEmptyRecycleBinA(hwnd: CPointer<Unit>, pszRootPath: CPointer<UInt8>, dwFlags: UInt32): Int32 {
+    return SHEmptyRecycleBinA(hwnd, pszRootPath, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHEmptyRecycleBinW == "on"]
+foreign {
+    // param-hint: hwnd optional
+    // param-hint: pszRootPath optional
+    func SHEmptyRecycleBinW(hwnd: CPointer<Unit>, pszRootPath: CPointer<UInt16>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHEmptyRecycleBinW == "on"]
+public unsafe func Windows_SHEmptyRecycleBinW(hwnd: CPointer<Unit>, pszRootPath: CPointer<UInt16>, dwFlags: UInt32): Int32 {
+    return SHEmptyRecycleBinW(hwnd, pszRootPath, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHEnumerateUnreadMailAccountsW == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: hKeyUser optional
+    // param-hint: pszMailAddress len=param[3]
+    func SHEnumerateUnreadMailAccountsW(hKeyUser: Win32_System_Registry.HKEY, dwIndex: UInt32, pszMailAddress: CPointer<UInt16>, cchMailAddress: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHEnumerateUnreadMailAccountsW == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHEnumerateUnreadMailAccountsW(hKeyUser: Win32_System_Registry.HKEY, dwIndex: UInt32, pszMailAddress: CPointer<UInt16>, cchMailAddress: Int32): Int32 {
+    return SHEnumerateUnreadMailAccountsW(hKeyUser, dwIndex, pszMailAddress, cchMailAddress)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHEvaluateSystemCommandTemplate == "on"]
+foreign {
+    // param-hint: ppszCommandLine optional
+    // param-hint: ppszParameters optional
+    func SHEvaluateSystemCommandTemplate(pszCmdTemplate: CPointer<UInt16>, ppszApplication: CPointer<CPointer<UInt16>>, ppszCommandLine: CPointer<CPointer<UInt16>>, ppszParameters: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHEvaluateSystemCommandTemplate == "on"]
+public unsafe func Windows_SHEvaluateSystemCommandTemplate(pszCmdTemplate: CPointer<UInt16>, ppszApplication: CPointer<CPointer<UInt16>>, ppszCommandLine: CPointer<CPointer<UInt16>>, ppszParameters: CPointer<CPointer<UInt16>>): Int32 {
+    return SHEvaluateSystemCommandTemplate(pszCmdTemplate, ppszApplication, ppszCommandLine, ppszParameters)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHFileOperationA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SHFileOperationA(lpFileOp: CPointer<Win32__impl_l0.SHFILEOPSTRUCTAAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHFileOperationA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SHFileOperationA(lpFileOp: CPointer<Win32__impl_l0.SHFILEOPSTRUCTAAbi>): Int32 {
+    return SHFileOperationA(lpFileOp)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHFileOperationW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SHFileOperationW(lpFileOp: CPointer<Win32__impl_l0.SHFILEOPSTRUCTWAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHFileOperationW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SHFileOperationW(lpFileOp: CPointer<Win32__impl_l0.SHFILEOPSTRUCTWAbi>): Int32 {
+    return SHFileOperationW(lpFileOp)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHFindFiles == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    // param-hint: pidlFolder optional
+    // param-hint: pidlSaveFile optional
+    func SHFindFiles(pidlFolder: CPointer<Win32__impl_l1.ITEMIDLIST>, pidlSaveFile: CPointer<Win32__impl_l1.ITEMIDLIST>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHFindFiles == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHFindFiles(pidlFolder: CPointer<Win32__impl_l1.ITEMIDLIST>, pidlSaveFile: CPointer<Win32__impl_l1.ITEMIDLIST>): Int32 {
+    return SHFindFiles(pidlFolder, pidlSaveFile)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHFind_InitMenuPopup == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    // param-hint: hwndOwner optional
+    func SHFind_InitMenuPopup(hmenu: Win32__impl_l0.HMENU, hwndOwner: CPointer<Unit>, idCmdFirst: UInt32, idCmdLast: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHFind_InitMenuPopup == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_SHFind_InitMenuPopup(hmenu: Win32__impl_l0.HMENU, hwndOwner: CPointer<Unit>, idCmdFirst: UInt32, idCmdLast: UInt32): CPointer<Unit> {
+    return SHFind_InitMenuPopup(hmenu, hwndOwner, idCmdFirst, idCmdLast)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHFlushSFCache == "on"]
+foreign {
+    func SHFlushSFCache(): Unit
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHFlushSFCache == "on"]
+public unsafe func Windows_SHFlushSFCache(): Unit {
+    SHFlushSFCache()
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHFormatDrive == "on"]
+foreign {
+    func SHFormatDrive(hwnd: CPointer<Unit>, drive: UInt32, fmtID: Win32__impl_l0.SHFMT_IDAbi, options: UInt32): UInt32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHFormatDrive == "on"]
+public unsafe func Windows_SHFormatDrive(hwnd: CPointer<Unit>, drive: UInt32, fmtID: Win32__impl_l0.SHFMT_IDAbi, options: UInt32): UInt32 {
+    return SHFormatDrive(hwnd, drive, fmtID, options)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHFree == "on"]
+foreign {
+    // param-hint: pv optional
+    func SHFree(pv: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHFree == "on"]
+public unsafe func Windows_SHFree(pv: CPointer<Unit>): Unit {
+    SHFree(pv)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHFreeNameMappings == "on"]
+foreign {
+    // param-hint: hNameMappings optional
+    func SHFreeNameMappings(hNameMappings: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHFreeNameMappings == "on"]
+public unsafe func Windows_SHFreeNameMappings(hNameMappings: CPointer<Unit>): Unit {
+    SHFreeNameMappings(hNameMappings)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetAttributesFromDataObject == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pdo optional
     // param-hint: pdwAttributes optional
     // param-hint: pcItems optional
     func SHGetAttributesFromDataObject(pdo: CPointer<Unit>, dwAttributeMask: UInt32, pdwAttributes: CPointer<UInt32>, pcItems: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetAttributesFromDataObject == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SHGetAttributesFromDataObject(pdo: CPointer<Unit>, dwAttributeMask: UInt32, pdwAttributes: CPointer<UInt32>, pcItems: CPointer<UInt32>): Int32 {
+    return SHGetAttributesFromDataObject(pdo, dwAttributeMask, pdwAttributes, pcItems)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetDataFromIDListA == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    // param-hint: pv bytes=param[4]
+    func SHGetDataFromIDListA(psf: CPointer<Unit>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, nFormat: Win32__impl_l0.SHGDFIL_FORMATAbi, pv: CPointer<Unit>, cb: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetDataFromIDListA == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHGetDataFromIDListA(psf: CPointer<Unit>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, nFormat: Win32__impl_l0.SHGDFIL_FORMATAbi, pv: CPointer<Unit>, cb: Int32): Int32 {
+    return SHGetDataFromIDListA(psf, pidl, nFormat, pv, cb)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetDataFromIDListW == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    // param-hint: pv bytes=param[4]
+    func SHGetDataFromIDListW(psf: CPointer<Unit>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, nFormat: Win32__impl_l0.SHGDFIL_FORMATAbi, pv: CPointer<Unit>, cb: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetDataFromIDListW == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHGetDataFromIDListW(psf: CPointer<Unit>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, nFormat: Win32__impl_l0.SHGDFIL_FORMATAbi, pv: CPointer<Unit>, cb: Int32): Int32 {
+    return SHGetDataFromIDListW(psf, pidl, nFormat, pv, cb)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetDesktopFolder == "on"]
+foreign {
+    func SHGetDesktopFolder(ppshf: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetDesktopFolder == "on"]
+public unsafe func Windows_SHGetDesktopFolder(ppshf: CPointer<CPointer<Unit>>): Int32 {
+    return SHGetDesktopFolder(ppshf)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetDiskFreeSpaceExA == "on"]
+foreign {
+    // param-hint: pulFreeBytesAvailableToCaller optional
+    // param-hint: pulTotalNumberOfBytes optional
+    // param-hint: pulTotalNumberOfFreeBytes optional
+    func SHGetDiskFreeSpaceExA(pszDirectoryName: CPointer<UInt8>, pulFreeBytesAvailableToCaller: CPointer<UInt64>, pulTotalNumberOfBytes: CPointer<UInt64>, pulTotalNumberOfFreeBytes: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetDiskFreeSpaceExA == "on"]
+public unsafe func Windows_SHGetDiskFreeSpaceExA(pszDirectoryName: CPointer<UInt8>, pulFreeBytesAvailableToCaller: CPointer<UInt64>, pulTotalNumberOfBytes: CPointer<UInt64>, pulTotalNumberOfFreeBytes: CPointer<UInt64>): Int32 {
+    return SHGetDiskFreeSpaceExA(pszDirectoryName, pulFreeBytesAvailableToCaller, pulTotalNumberOfBytes, pulTotalNumberOfFreeBytes)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetDiskFreeSpaceExW == "on"]
+foreign {
+    // param-hint: pulFreeBytesAvailableToCaller optional
+    // param-hint: pulTotalNumberOfBytes optional
+    // param-hint: pulTotalNumberOfFreeBytes optional
+    func SHGetDiskFreeSpaceExW(pszDirectoryName: CPointer<UInt16>, pulFreeBytesAvailableToCaller: CPointer<UInt64>, pulTotalNumberOfBytes: CPointer<UInt64>, pulTotalNumberOfFreeBytes: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetDiskFreeSpaceExW == "on"]
+public unsafe func Windows_SHGetDiskFreeSpaceExW(pszDirectoryName: CPointer<UInt16>, pulFreeBytesAvailableToCaller: CPointer<UInt64>, pulTotalNumberOfBytes: CPointer<UInt64>, pulTotalNumberOfFreeBytes: CPointer<UInt64>): Int32 {
+    return SHGetDiskFreeSpaceExW(pszDirectoryName, pulFreeBytesAvailableToCaller, pulTotalNumberOfBytes, pulTotalNumberOfFreeBytes)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetDriveMedia == "on"]
+foreign {
+    func SHGetDriveMedia(pszDrive: CPointer<UInt16>, pdwMediaContent: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetDriveMedia == "on"]
+public unsafe func Windows_SHGetDriveMedia(pszDrive: CPointer<UInt16>, pdwMediaContent: CPointer<UInt32>): Int32 {
+    return SHGetDriveMedia(pszDrive, pdwMediaContent)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetFileInfoA == "on" && (((arch == "x86_64" && Windows_Win32_UI_WindowsAndMessaging == "on") || (arch == "aarch64" && Windows_Win32_UI_WindowsAndMessaging == "on")) && Windows_Win32_Storage_FileSystem == "on" && Windows_Win32_UI_WindowsAndMessaging == "on")]
+foreign {
+    // param-hint: psfi bytes=param[3] optional
+    func SHGetFileInfoA(pszPath: CPointer<UInt8>, dwFileAttributes: Win32__impl_l0.FILE_FLAGS_AND_ATTRIBUTESAbi, psfi: CPointer<Win32__impl_l1.SHFILEINFOAAbi>, cbFileInfo: UInt32, uFlags: Win32__impl_l0.SHGFI_FLAGSAbi): UIntNative
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetFileInfoA == "on" && (((arch == "x86_64" && Windows_Win32_UI_WindowsAndMessaging == "on") || (arch == "aarch64" && Windows_Win32_UI_WindowsAndMessaging == "on")) && Windows_Win32_Storage_FileSystem == "on" && Windows_Win32_UI_WindowsAndMessaging == "on")]
+public unsafe func Windows_SHGetFileInfoA(pszPath: CPointer<UInt8>, dwFileAttributes: Win32__impl_l0.FILE_FLAGS_AND_ATTRIBUTESAbi, psfi: CPointer<Win32__impl_l1.SHFILEINFOAAbi>, cbFileInfo: UInt32, uFlags: Win32__impl_l0.SHGFI_FLAGSAbi): UIntNative {
+    return SHGetFileInfoA(pszPath, dwFileAttributes, psfi, cbFileInfo, uFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetFileInfoW == "on" && (((arch == "x86_64" && Windows_Win32_UI_WindowsAndMessaging == "on") || (arch == "aarch64" && Windows_Win32_UI_WindowsAndMessaging == "on")) && Windows_Win32_Storage_FileSystem == "on" && Windows_Win32_UI_WindowsAndMessaging == "on")]
+foreign {
+    // param-hint: psfi bytes=param[3] optional
+    func SHGetFileInfoW(pszPath: CPointer<UInt16>, dwFileAttributes: Win32__impl_l0.FILE_FLAGS_AND_ATTRIBUTESAbi, psfi: CPointer<Win32__impl_l1.SHFILEINFOWAbi>, cbFileInfo: UInt32, uFlags: Win32__impl_l0.SHGFI_FLAGSAbi): UIntNative
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetFileInfoW == "on" && (((arch == "x86_64" && Windows_Win32_UI_WindowsAndMessaging == "on") || (arch == "aarch64" && Windows_Win32_UI_WindowsAndMessaging == "on")) && Windows_Win32_Storage_FileSystem == "on" && Windows_Win32_UI_WindowsAndMessaging == "on")]
+public unsafe func Windows_SHGetFileInfoW(pszPath: CPointer<UInt16>, dwFileAttributes: Win32__impl_l0.FILE_FLAGS_AND_ATTRIBUTESAbi, psfi: CPointer<Win32__impl_l1.SHFILEINFOWAbi>, cbFileInfo: UInt32, uFlags: Win32__impl_l0.SHGFI_FLAGSAbi): UIntNative {
+    return SHGetFileInfoW(pszPath, dwFileAttributes, psfi, cbFileInfo, uFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetFolderLocation == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    // param-hint: hwnd optional reserved
+    // param-hint: hToken optional
+    func SHGetFolderLocation(hwnd: CPointer<Unit>, csidl: Int32, hToken: CPointer<Unit>, dwFlags: UInt32, ppidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetFolderLocation == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHGetFolderLocation(hwnd: CPointer<Unit>, csidl: Int32, hToken: CPointer<Unit>, dwFlags: UInt32, ppidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>): Int32 {
+    return SHGetFolderLocation(hwnd, csidl, hToken, dwFlags, ppidl)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetFolderPathA == "on"]
+foreign {
+    // param-hint: hwnd optional reserved
+    // param-hint: hToken optional
+    // param-hint: pszPath fixed=260
+    func SHGetFolderPathA(hwnd: CPointer<Unit>, csidl: Int32, hToken: CPointer<Unit>, dwFlags: UInt32, pszPath: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetFolderPathA == "on"]
+public unsafe func Windows_SHGetFolderPathA(hwnd: CPointer<Unit>, csidl: Int32, hToken: CPointer<Unit>, dwFlags: UInt32, pszPath: CPointer<UInt8>): Int32 {
+    return SHGetFolderPathA(hwnd, csidl, hToken, dwFlags, pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetFolderPathAndSubDirA == "on"]
+foreign {
+    // param-hint: hwnd optional reserved
+    // param-hint: hToken optional
+    // param-hint: pszSubDir optional
+    // param-hint: pszPath fixed=260
+    func SHGetFolderPathAndSubDirA(hwnd: CPointer<Unit>, csidl: Int32, hToken: CPointer<Unit>, dwFlags: UInt32, pszSubDir: CPointer<UInt8>, pszPath: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetFolderPathAndSubDirA == "on"]
+public unsafe func Windows_SHGetFolderPathAndSubDirA(hwnd: CPointer<Unit>, csidl: Int32, hToken: CPointer<Unit>, dwFlags: UInt32, pszSubDir: CPointer<UInt8>, pszPath: CPointer<UInt8>): Int32 {
+    return SHGetFolderPathAndSubDirA(hwnd, csidl, hToken, dwFlags, pszSubDir, pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetFolderPathAndSubDirW == "on"]
+foreign {
+    // param-hint: hwnd optional reserved
+    // param-hint: hToken optional
+    // param-hint: pszSubDir optional
+    // param-hint: pszPath fixed=260
+    func SHGetFolderPathAndSubDirW(hwnd: CPointer<Unit>, csidl: Int32, hToken: CPointer<Unit>, dwFlags: UInt32, pszSubDir: CPointer<UInt16>, pszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetFolderPathAndSubDirW == "on"]
+public unsafe func Windows_SHGetFolderPathAndSubDirW(hwnd: CPointer<Unit>, csidl: Int32, hToken: CPointer<Unit>, dwFlags: UInt32, pszSubDir: CPointer<UInt16>, pszPath: CPointer<UInt16>): Int32 {
+    return SHGetFolderPathAndSubDirW(hwnd, csidl, hToken, dwFlags, pszSubDir, pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetFolderPathW == "on"]
+foreign {
+    // param-hint: hwnd optional reserved
+    // param-hint: hToken optional
+    // param-hint: pszPath fixed=260
+    func SHGetFolderPathW(hwnd: CPointer<Unit>, csidl: Int32, hToken: CPointer<Unit>, dwFlags: UInt32, pszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetFolderPathW == "on"]
+public unsafe func Windows_SHGetFolderPathW(hwnd: CPointer<Unit>, csidl: Int32, hToken: CPointer<Unit>, dwFlags: UInt32, pszPath: CPointer<UInt16>): Int32 {
+    return SHGetFolderPathW(hwnd, csidl, hToken, dwFlags, pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetIDListFromObject == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    func SHGetIDListFromObject(punk: CPointer<Unit>, ppidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetIDListFromObject == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHGetIDListFromObject(punk: CPointer<Unit>, ppidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>): Int32 {
+    return SHGetIDListFromObject(punk, ppidl)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetIconOverlayIndexA == "on"]
+foreign {
+    // param-hint: pszIconPath optional
+    func SHGetIconOverlayIndexA(pszIconPath: CPointer<UInt8>, iIconIndex: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetIconOverlayIndexA == "on"]
+public unsafe func Windows_SHGetIconOverlayIndexA(pszIconPath: CPointer<UInt8>, iIconIndex: Int32): Int32 {
+    return SHGetIconOverlayIndexA(pszIconPath, iIconIndex)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetIconOverlayIndexW == "on"]
+foreign {
+    // param-hint: pszIconPath optional
+    func SHGetIconOverlayIndexW(pszIconPath: CPointer<UInt16>, iIconIndex: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetIconOverlayIndexW == "on"]
+public unsafe func Windows_SHGetIconOverlayIndexW(pszIconPath: CPointer<UInt16>, iIconIndex: Int32): Int32 {
+    return SHGetIconOverlayIndexW(pszIconPath, iIconIndex)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetImageList == "on"]
+foreign {
+    func SHGetImageList(iImageList: Int32, riid: CPointer<GUID>, ppvObj: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetImageList == "on"]
+public unsafe func Windows_SHGetImageList(iImageList: Int32, riid: CPointer<GUID>, ppvObj: CPointer<CPointer<Unit>>): Int32 {
+    return SHGetImageList(iImageList, riid, ppvObj)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetInstanceExplorer == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func SHGetInstanceExplorer(ppunk: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetInstanceExplorer == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SHGetInstanceExplorer(ppunk: CPointer<CPointer<Unit>>): Int32 {
+    return SHGetInstanceExplorer(ppunk)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetItemFromDataObject == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func SHGetItemFromDataObject(pdtobj: CPointer<Unit>, dwFlags: Win32__impl_l0.DATAOBJ_GET_ITEM_FLAGSAbi, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetItemFromDataObject == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SHGetItemFromDataObject(pdtobj: CPointer<Unit>, dwFlags: Win32__impl_l0.DATAOBJ_GET_ITEM_FLAGSAbi, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return SHGetItemFromDataObject(pdtobj, dwFlags, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetItemFromObject == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func SHGetItemFromObject(punk: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetItemFromObject == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SHGetItemFromObject(punk: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return SHGetItemFromObject(punk, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetKnownFolderIDList == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    // param-hint: hToken optional
+    func SHGetKnownFolderIDList(rfid: CPointer<GUID>, dwFlags: UInt32, hToken: CPointer<Unit>, ppidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetKnownFolderIDList == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHGetKnownFolderIDList(rfid: CPointer<GUID>, dwFlags: UInt32, hToken: CPointer<Unit>, ppidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>): Int32 {
+    return SHGetKnownFolderIDList(rfid, dwFlags, hToken, ppidl)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetKnownFolderItem == "on"]
+foreign {
+    // param-hint: hToken optional
+    func SHGetKnownFolderItem(rfid: CPointer<GUID>, flags: Win32__impl_l0.KNOWN_FOLDER_FLAGAbi, hToken: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetKnownFolderItem == "on"]
+public unsafe func Windows_SHGetKnownFolderItem(rfid: CPointer<GUID>, flags: Win32__impl_l0.KNOWN_FOLDER_FLAGAbi, hToken: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return SHGetKnownFolderItem(rfid, flags, hToken, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetKnownFolderPath == "on"]
+foreign {
+    // param-hint: hToken optional
+    func SHGetKnownFolderPath(rfid: CPointer<GUID>, dwFlags: UInt32, hToken: CPointer<Unit>, ppszPath: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetKnownFolderPath == "on"]
+public unsafe func Windows_SHGetKnownFolderPath(rfid: CPointer<GUID>, dwFlags: UInt32, hToken: CPointer<Unit>, ppszPath: CPointer<CPointer<UInt16>>): Int32 {
+    return SHGetKnownFolderPath(rfid, dwFlags, hToken, ppszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetLocalizedName == "on"]
+foreign {
+    // param-hint: pszResModule len=param[2]
+    func SHGetLocalizedName(pszPath: CPointer<UInt16>, pszResModule: CPointer<UInt16>, cch: UInt32, pidsRes: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetLocalizedName == "on"]
+public unsafe func Windows_SHGetLocalizedName(pszPath: CPointer<UInt16>, pszResModule: CPointer<UInt16>, cch: UInt32, pidsRes: CPointer<Int32>): Int32 {
+    return SHGetLocalizedName(pszPath, pszResModule, cch, pidsRes)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetMalloc == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func SHGetMalloc(ppMalloc: CPointer<CPointer<Unit>>): Int32
-    func SHMultiFileProperties(pdtobj: CPointer<Unit>, dwFlags: UInt32): Int32
-    // param-hint: hwnd optional
-    // param-hint: punkEnableModless optional
-    func SHPathPrepareForWriteA(hwnd: CPointer<Unit>, punkEnableModless: CPointer<Unit>, pszPath: CPointer<UInt8>, dwFlags: UInt32): Int32
-    // param-hint: hwnd optional
-    // param-hint: punkEnableModless optional
-    func SHPathPrepareForWriteW(hwnd: CPointer<Unit>, punkEnableModless: CPointer<Unit>, pszPath: CPointer<UInt16>, dwFlags: UInt32): Int32
-    // param-hint: punk optional
-    func SHSetInstanceExplorer(punk: CPointer<Unit>): Unit
 }
 
-@When[SHELL32 == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-foreign {
-    func StgMakeUniqueName(pstgParent: CPointer<Unit>, pszFileSpec: CPointer<UInt16>, grfMode: UInt32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetMalloc == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SHGetMalloc(ppMalloc: CPointer<CPointer<Unit>>): Int32 {
+    return SHGetMalloc(ppMalloc)
 }
 
-@When[SHELL32 == "on" && Windows_Win32_System_Registry == "on"]
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetNameFromIDList == "on" && Windows_Win32_UI_Shell_Common == "on"]
 foreign {
-    // param-hint: pszSubKey optional
-    func SHCreatePropSheetExtArray(hKey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt16>, max_iface: UInt32): Win32__impl_l0.HPSXA
-    // param-hint: hKeyUser optional
-    // param-hint: pszMailAddress len=param[3]
-    func SHEnumerateUnreadMailAccountsW(hKeyUser: Win32_System_Registry.HKEY, dwIndex: UInt32, pszMailAddress: CPointer<UInt16>, cchMailAddress: Int32): Int32
+    func SHGetNameFromIDList(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, sigdnName: Win32__impl_l0.SIGDNAbi, ppszName: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetNameFromIDList == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHGetNameFromIDList(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, sigdnName: Win32__impl_l0.SIGDNAbi, ppszName: CPointer<CPointer<UInt16>>): Int32 {
+    return SHGetNameFromIDList(pidl, sigdnName, ppszName)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetNewLinkInfoA == "on"]
+foreign {
+    // param-hint: pszName fixed=260
+    func SHGetNewLinkInfoA(pszLinkTo: CPointer<UInt8>, pszDir: CPointer<UInt8>, pszName: CPointer<UInt8>, pfMustCopy: CPointer<Int32>, uFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetNewLinkInfoA == "on"]
+public unsafe func Windows_SHGetNewLinkInfoA(pszLinkTo: CPointer<UInt8>, pszDir: CPointer<UInt8>, pszName: CPointer<UInt8>, pfMustCopy: CPointer<Int32>, uFlags: UInt32): Int32 {
+    return SHGetNewLinkInfoA(pszLinkTo, pszDir, pszName, pfMustCopy, uFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetNewLinkInfoW == "on"]
+foreign {
+    // param-hint: pszName fixed=260
+    func SHGetNewLinkInfoW(pszLinkTo: CPointer<UInt16>, pszDir: CPointer<UInt16>, pszName: CPointer<UInt16>, pfMustCopy: CPointer<Int32>, uFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetNewLinkInfoW == "on"]
+public unsafe func Windows_SHGetNewLinkInfoW(pszLinkTo: CPointer<UInt16>, pszDir: CPointer<UInt16>, pszName: CPointer<UInt16>, pfMustCopy: CPointer<Int32>, uFlags: UInt32): Int32 {
+    return SHGetNewLinkInfoW(pszLinkTo, pszDir, pszName, pfMustCopy, uFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetPathFromIDListA == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    // param-hint: pszPath fixed=260
+    func SHGetPathFromIDListA(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, pszPath: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetPathFromIDListA == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHGetPathFromIDListA(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, pszPath: CPointer<UInt8>): Int32 {
+    return SHGetPathFromIDListA(pidl, pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetPathFromIDListEx == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    // param-hint: pszPath len=param[2]
+    func SHGetPathFromIDListEx(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, pszPath: CPointer<UInt16>, cchPath: UInt32, uOpts: Win32__impl_l0.GPFIDL_FLAGSAbi): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetPathFromIDListEx == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHGetPathFromIDListEx(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, pszPath: CPointer<UInt16>, cchPath: UInt32, uOpts: Win32__impl_l0.GPFIDL_FLAGSAbi): Int32 {
+    return SHGetPathFromIDListEx(pidl, pszPath, cchPath, uOpts)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetPathFromIDListW == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    // param-hint: pszPath fixed=260
+    func SHGetPathFromIDListW(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, pszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetPathFromIDListW == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHGetPathFromIDListW(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, pszPath: CPointer<UInt16>): Int32 {
+    return SHGetPathFromIDListW(pidl, pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetRealIDL == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    func SHGetRealIDL(psf: CPointer<Unit>, pidlSimple: CPointer<Win32__impl_l1.ITEMIDLIST>, ppidlReal: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetRealIDL == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHGetRealIDL(psf: CPointer<Unit>, pidlSimple: CPointer<Win32__impl_l1.ITEMIDLIST>, ppidlReal: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>): Int32 {
+    return SHGetRealIDL(psf, pidlSimple, ppidlReal)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetSetFolderCustomSettings == "on"]
+foreign {
+    func SHGetSetFolderCustomSettings(pfcs: CPointer<Win32__impl_l0.SHFOLDERCUSTOMSETTINGSAbi>, pszPath: CPointer<UInt16>, dwReadWrite: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetSetFolderCustomSettings == "on"]
+public unsafe func Windows_SHGetSetFolderCustomSettings(pfcs: CPointer<Win32__impl_l0.SHFOLDERCUSTOMSETTINGSAbi>, pszPath: CPointer<UInt16>, dwReadWrite: UInt32): Int32 {
+    return SHGetSetFolderCustomSettings(pfcs, pszPath, dwReadWrite)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetSetSettings == "on"]
+foreign {
+    // param-hint: lpss optional
+    func SHGetSetSettings(lpss: CPointer<Win32__impl_l0.SHELLSTATEA>, dwMask: Win32__impl_l0.SSF_MASKAbi, bSet: Int32): Unit
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetSetSettings == "on"]
+public unsafe func Windows_SHGetSetSettings(lpss: CPointer<Win32__impl_l0.SHELLSTATEA>, dwMask: Win32__impl_l0.SSF_MASKAbi, bSet: Int32): Unit {
+    SHGetSetSettings(lpss, dwMask, bSet)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetSettings == "on"]
+foreign {
+    func SHGetSettings(psfs: CPointer<Win32__impl_l0.SHELLFLAGSTATE>, dwMask: UInt32): Unit
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetSettings == "on"]
+public unsafe func Windows_SHGetSettings(psfs: CPointer<Win32__impl_l0.SHELLFLAGSTATE>, dwMask: UInt32): Unit {
+    SHGetSettings(psfs, dwMask)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetSpecialFolderLocation == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    // param-hint: hwnd optional reserved
+    func SHGetSpecialFolderLocation(hwnd: CPointer<Unit>, csidl: Int32, ppidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetSpecialFolderLocation == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHGetSpecialFolderLocation(hwnd: CPointer<Unit>, csidl: Int32, ppidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>): Int32 {
+    return SHGetSpecialFolderLocation(hwnd, csidl, ppidl)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetSpecialFolderPathA == "on"]
+foreign {
+    // param-hint: hwnd optional reserved
+    // param-hint: pszPath fixed=260
+    func SHGetSpecialFolderPathA(hwnd: CPointer<Unit>, pszPath: CPointer<UInt8>, csidl: Int32, fCreate: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetSpecialFolderPathA == "on"]
+public unsafe func Windows_SHGetSpecialFolderPathA(hwnd: CPointer<Unit>, pszPath: CPointer<UInt8>, csidl: Int32, fCreate: Int32): Int32 {
+    return SHGetSpecialFolderPathA(hwnd, pszPath, csidl, fCreate)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetSpecialFolderPathW == "on"]
+foreign {
+    // param-hint: hwnd optional reserved
+    // param-hint: pszPath fixed=260
+    func SHGetSpecialFolderPathW(hwnd: CPointer<Unit>, pszPath: CPointer<UInt16>, csidl: Int32, fCreate: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetSpecialFolderPathW == "on"]
+public unsafe func Windows_SHGetSpecialFolderPathW(hwnd: CPointer<Unit>, pszPath: CPointer<UInt16>, csidl: Int32, fCreate: Int32): Int32 {
+    return SHGetSpecialFolderPathW(hwnd, pszPath, csidl, fCreate)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetStockIconInfo == "on" && (((arch == "x86_64" && Windows_Win32_UI_WindowsAndMessaging == "on") || (arch == "aarch64" && Windows_Win32_UI_WindowsAndMessaging == "on")) && Windows_Win32_UI_WindowsAndMessaging == "on")]
+foreign {
+    func SHGetStockIconInfo(siid: Win32__impl_l0.SHSTOCKICONIDAbi, uFlags: Win32__impl_l0.SHGSI_FLAGSAbi, psii: CPointer<Win32__impl_l1.SHSTOCKICONINFOAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetStockIconInfo == "on" && (((arch == "x86_64" && Windows_Win32_UI_WindowsAndMessaging == "on") || (arch == "aarch64" && Windows_Win32_UI_WindowsAndMessaging == "on")) && Windows_Win32_UI_WindowsAndMessaging == "on")]
+public unsafe func Windows_SHGetStockIconInfo(siid: Win32__impl_l0.SHSTOCKICONIDAbi, uFlags: Win32__impl_l0.SHGSI_FLAGSAbi, psii: CPointer<Win32__impl_l1.SHSTOCKICONINFOAbi>): Int32 {
+    return SHGetStockIconInfo(siid, uFlags, psii)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetTemporaryPropertyForItem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func SHGetTemporaryPropertyForItem(psi: CPointer<Unit>, propkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, ppropvar: CPointer<PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetTemporaryPropertyForItem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_SHGetTemporaryPropertyForItem(psi: CPointer<Unit>, propkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, ppropvar: CPointer<PROPVARIANTAbi>): Int32 {
+    return SHGetTemporaryPropertyForItem(psi, propkey, ppropvar)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetUnreadMailCountW == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: hKeyUser optional
     // param-hint: pszMailAddress optional
     // param-hint: pdwCount optional
@@ -465,168 +2117,656 @@ foreign {
     func SHGetUnreadMailCountW(hKeyUser: Win32_System_Registry.HKEY, pszMailAddress: CPointer<UInt16>, pdwCount: CPointer<UInt32>, pFileTime: CPointer<Win32_Foundation.FILETIMEAbi>, pszShellExecuteCommand: CPointer<UInt16>, cchShellExecuteCommand: Int32): Int32
 }
 
-@When[SHELL32 == "on" && Windows_Win32_UI_Controls == "on"]
-foreign {
-    func DAD_SetDragImage(him: Win32__impl_l0.HIMAGELIST, pptOffset: CPointer<Win32_Foundation.POINTAbi>): Int32
-    func SHAddFromPropSheetExtArray(hpsxa: Win32__impl_l0.HPSXA, lpfnAddPage: Win32__impl_l1.LPFNSVADDPROPSHEETPAGE, lParam: IntNative): UInt32
-    func SHReplaceFromPropSheetExtArray(hpsxa: Win32__impl_l0.HPSXA, uPageID: UInt32, lpfnReplaceWith: Win32__impl_l1.LPFNSVADDPROPSHEETPAGE, lParam: IntNative): UInt32
-    // param-hint: phiml optional
-    // param-hint: phimlSmall optional
-    func Shell_GetImageLists(phiml: CPointer<Win32__impl_l0.HIMAGELIST>, phimlSmall: CPointer<Win32__impl_l0.HIMAGELIST>): Int32
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetUnreadMailCountW == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHGetUnreadMailCountW(hKeyUser: Win32_System_Registry.HKEY, pszMailAddress: CPointer<UInt16>, pdwCount: CPointer<UInt32>, pFileTime: CPointer<Win32_Foundation.FILETIMEAbi>, pszShellExecuteCommand: CPointer<UInt16>, cchShellExecuteCommand: Int32): Int32 {
+    return SHGetUnreadMailCountW(hKeyUser, pszMailAddress, pdwCount, pFileTime, pszShellExecuteCommand, cchShellExecuteCommand)
 }
 
-@When[SHELL32 == "on" && Windows_Win32_UI_Shell_Common == "on"]
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHHandleUpdateImage == "on" && Windows_Win32_UI_Shell_Common == "on"]
 foreign {
-    // param-hint: pidl optional
-    func ILAppendID(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, pmkid: CPointer<Win32__impl_l0.SHITEMID>, fAppend: Int32): CPointer<Win32__impl_l1.ITEMIDLIST>
-    func ILClone(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>): CPointer<Win32__impl_l1.ITEMIDLIST>
-    func ILCloneFirst(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>): CPointer<Win32__impl_l1.ITEMIDLIST>
-    // param-hint: pidl1 optional
-    // param-hint: pidl2 optional
-    func ILCombine(pidl1: CPointer<Win32__impl_l1.ITEMIDLIST>, pidl2: CPointer<Win32__impl_l1.ITEMIDLIST>): CPointer<Win32__impl_l1.ITEMIDLIST>
-    func ILCreateFromPathA(pszPath: CPointer<UInt8>): CPointer<Win32__impl_l1.ITEMIDLIST>
-    func ILCreateFromPathW(pszPath: CPointer<UInt16>): CPointer<Win32__impl_l1.ITEMIDLIST>
-    func ILFindChild(pidlParent: CPointer<Win32__impl_l1.ITEMIDLIST>, pidlChild: CPointer<Win32__impl_l1.ITEMIDLIST>): CPointer<Win32__impl_l1.ITEMIDLIST>
-    func ILFindLastID(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>): CPointer<Win32__impl_l1.ITEMIDLIST>
-    // param-hint: pidl optional
-    func ILFree(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>): Unit
-    // param-hint: pidl optional
-    func ILGetNext(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>): CPointer<Win32__impl_l1.ITEMIDLIST>
-    // param-hint: pidl optional
-    func ILGetSize(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>): UInt32
-    func ILIsEqual(pidl1: CPointer<Win32__impl_l1.ITEMIDLIST>, pidl2: CPointer<Win32__impl_l1.ITEMIDLIST>): Int32
-    func ILIsParent(pidl1: CPointer<Win32__impl_l1.ITEMIDLIST>, pidl2: CPointer<Win32__impl_l1.ITEMIDLIST>, fImmediate: Int32): Int32
-    // param-hint: pidl optional
-    func ILRemoveLastID(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>): Int32
-    // param-hint: psfRoot optional
-    // param-hint: ppidlLast optional
-    func SHBindToFolderIDListParent(psfRoot: CPointer<Unit>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>, ppidlLast: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>): Int32
-    // param-hint: ppidlLast optional
-    func SHBindToParent(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>, ppidlLast: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>): Int32
-    func SHBrowseForFolderA(lpbi: CPointer<Win32__impl_l1.BROWSEINFOAAbi>): CPointer<Win32__impl_l1.ITEMIDLIST>
-    func SHBrowseForFolderW(lpbi: CPointer<Win32__impl_l1.BROWSEINFOWAbi>): CPointer<Win32__impl_l1.ITEMIDLIST>
-    // param-hint: pppidl optional
-    // param-hint: plEvent optional
-    func SHChangeNotification_Lock(hChange: CPointer<Unit>, dwProcId: UInt32, pppidl: CPointer<CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>>, plEvent: CPointer<Int32>): CPointer<Unit>
-    func SHChangeNotifyRegister(hwnd: CPointer<Unit>, fSources: Win32__impl_l0.SHCNRF_SOURCEAbi, fEvents: Int32, wMsg: UInt32, cEntries: Int32, pshcne: CPointer<Win32__impl_l1.SHChangeNotifyEntry>): UInt32
-    // param-hint: hwnd optional reserved
-    func SHCloneSpecialIDList(hwnd: CPointer<Unit>, csidl: Int32, fCreate: Int32): CPointer<Win32__impl_l1.ITEMIDLIST>
-    func SHCreateItemFromIDList(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pidlParent optional
-    // param-hint: psfParent optional
-    func SHCreateItemWithParent(pidlParent: CPointer<Win32__impl_l1.ITEMIDLIST>, psfParent: CPointer<Unit>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, riid: CPointer<GUID>, ppvItem: CPointer<CPointer<Unit>>): Int32
-    func SHCreateShellFolderViewEx(pcsfv: CPointer<CSFVAbi>, ppsv: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pidlParent optional
-    // param-hint: psfParent optional
-    func SHCreateShellItem(pidlParent: CPointer<Win32__impl_l1.ITEMIDLIST>, psfParent: CPointer<Unit>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, ppsi: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pidlParent optional
-    // param-hint: psf optional
-    // param-hint: ppidl len=param[2] optional
-    func SHCreateShellItemArray(pidlParent: CPointer<Win32__impl_l1.ITEMIDLIST>, psf: CPointer<Unit>, cidl: UInt32, ppidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>, ppsiItemArray: CPointer<CPointer<Unit>>): Int32
-    // param-hint: rgpidl len=param[0]
-    func SHCreateShellItemArrayFromIDLists(cidl: UInt32, rgpidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>, ppsiItemArray: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pidlFolder optional
-    // param-hint: pidlSaveFile optional
-    func SHFindFiles(pidlFolder: CPointer<Win32__impl_l1.ITEMIDLIST>, pidlSaveFile: CPointer<Win32__impl_l1.ITEMIDLIST>): Int32
-    // param-hint: pv bytes=param[4]
-    func SHGetDataFromIDListA(psf: CPointer<Unit>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, nFormat: Win32__impl_l0.SHGDFIL_FORMATAbi, pv: CPointer<Unit>, cb: Int32): Int32
-    // param-hint: pv bytes=param[4]
-    func SHGetDataFromIDListW(psf: CPointer<Unit>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, nFormat: Win32__impl_l0.SHGDFIL_FORMATAbi, pv: CPointer<Unit>, cb: Int32): Int32
-    // param-hint: hwnd optional reserved
-    // param-hint: hToken optional
-    func SHGetFolderLocation(hwnd: CPointer<Unit>, csidl: Int32, hToken: CPointer<Unit>, dwFlags: UInt32, ppidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>): Int32
-    // param-hint: hToken optional
-    func SHGetKnownFolderIDList(rfid: CPointer<GUID>, dwFlags: UInt32, hToken: CPointer<Unit>, ppidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>): Int32
-    func SHGetNameFromIDList(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, sigdnName: Win32__impl_l0.SIGDNAbi, ppszName: CPointer<CPointer<UInt16>>): Int32
-    // param-hint: pszPath fixed=260
-    func SHGetPathFromIDListA(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, pszPath: CPointer<UInt8>): Int32
-    // param-hint: pszPath len=param[2]
-    func SHGetPathFromIDListEx(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, pszPath: CPointer<UInt16>, cchPath: UInt32, uOpts: Win32__impl_l0.GPFIDL_FLAGSAbi): Int32
-    // param-hint: pszPath fixed=260
-    func SHGetPathFromIDListW(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, pszPath: CPointer<UInt16>): Int32
-    func SHGetRealIDL(psf: CPointer<Unit>, pidlSimple: CPointer<Win32__impl_l1.ITEMIDLIST>, ppidlReal: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>): Int32
-    // param-hint: hwnd optional reserved
-    func SHGetSpecialFolderLocation(hwnd: CPointer<Unit>, csidl: Int32, ppidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>): Int32
     func SHHandleUpdateImage(pidlExtra: CPointer<Win32__impl_l1.ITEMIDLIST>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHHandleUpdateImage == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHHandleUpdateImage(pidlExtra: CPointer<Win32__impl_l1.ITEMIDLIST>): Int32 {
+    return SHHandleUpdateImage(pidlExtra)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHILCreateFromPath == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
     // param-hint: rgfInOut optional
     func SHILCreateFromPath(pszPath: CPointer<UInt16>, ppidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>, rgfInOut: CPointer<UInt32>): Int32
-    // param-hint: piIndexSel optional
-    func SHMapPIDLToSystemImageListIndex(pshf: CPointer<Unit>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, piIndexSel: CPointer<Int32>): Int32
-    // param-hint: apidl len=param[1] optional
-    func SHOpenFolderAndSelectItems(pidlFolder: CPointer<Win32__impl_l1.ITEMIDLIST>, cidl: UInt32, apidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>, dwFlags: UInt32): Int32
-    func SHSimpleIDListFromPath(pszPath: CPointer<UInt16>): CPointer<Win32__impl_l1.ITEMIDLIST>
-    func SignalFileOpen(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>): Int32
 }
 
-@When[SHELL32 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHILCreateFromPath == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHILCreateFromPath(pszPath: CPointer<UInt16>, ppidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>, rgfInOut: CPointer<UInt32>): Int32 {
+    return SHILCreateFromPath(pszPath, ppidl, rgfInOut)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHInvokePrinterCommandA == "on"]
 foreign {
-    // param-hint: hInst optional reserved
-    func DuplicateIcon(hInst: CPointer<Unit>, hIcon: Win32__impl_l0.HICON): Win32__impl_l0.HICON
-    // param-hint: hInst optional reserved
-    // param-hint: pszIconPath fixed=128
-    func ExtractAssociatedIconA(hInst: CPointer<Unit>, pszIconPath: CPointer<UInt8>, piIcon: CPointer<UInt16>): Win32__impl_l0.HICON
-    // param-hint: hInst optional reserved
-    // param-hint: pszIconPath fixed=128
-    func ExtractAssociatedIconExA(hInst: CPointer<Unit>, pszIconPath: CPointer<UInt8>, piIconIndex: CPointer<UInt16>, piIconId: CPointer<UInt16>): Win32__impl_l0.HICON
-    // param-hint: hInst optional reserved
-    // param-hint: pszIconPath fixed=128
-    func ExtractAssociatedIconExW(hInst: CPointer<Unit>, pszIconPath: CPointer<UInt16>, piIconIndex: CPointer<UInt16>, piIconId: CPointer<UInt16>): Win32__impl_l0.HICON
-    // param-hint: hInst optional reserved
-    // param-hint: pszIconPath fixed=128
-    func ExtractAssociatedIconW(hInst: CPointer<Unit>, pszIconPath: CPointer<UInt16>, piIcon: CPointer<UInt16>): Win32__impl_l0.HICON
-    // param-hint: hInst optional reserved
-    func ExtractIconA(hInst: CPointer<Unit>, pszExeFileName: CPointer<UInt8>, nIconIndex: UInt32): Win32__impl_l0.HICON
-    // param-hint: phiconLarge len=param[4] optional
-    // param-hint: phiconSmall len=param[4] optional
-    // pinvoke-hint: SetLastError
-    func ExtractIconExA(lpszFile: CPointer<UInt8>, nIconIndex: Int32, phiconLarge: CPointer<Win32__impl_l0.HICON>, phiconSmall: CPointer<Win32__impl_l0.HICON>, nIcons: UInt32): UInt32
-    // param-hint: phiconLarge len=param[4] optional
-    // param-hint: phiconSmall len=param[4] optional
-    // pinvoke-hint: SetLastError
-    func ExtractIconExW(lpszFile: CPointer<UInt16>, nIconIndex: Int32, phiconLarge: CPointer<Win32__impl_l0.HICON>, phiconSmall: CPointer<Win32__impl_l0.HICON>, nIcons: UInt32): UInt32
-    // param-hint: hInst optional reserved
-    func ExtractIconW(hInst: CPointer<Unit>, pszExeFileName: CPointer<UInt16>, nIconIndex: UInt32): Win32__impl_l0.HICON
-    // param-hint: phiconLarge optional
-    // param-hint: phiconSmall optional
-    func SHDefExtractIconA(pszIconFile: CPointer<UInt8>, iIndex: Int32, uFlags: UInt32, phiconLarge: CPointer<Win32__impl_l0.HICON>, phiconSmall: CPointer<Win32__impl_l0.HICON>, nIconSize: UInt32): Int32
-    // param-hint: phiconLarge optional
-    // param-hint: phiconSmall optional
-    func SHDefExtractIconW(pszIconFile: CPointer<UInt16>, iIndex: Int32, uFlags: UInt32, phiconLarge: CPointer<Win32__impl_l0.HICON>, phiconSmall: CPointer<Win32__impl_l0.HICON>, nIconSize: UInt32): Int32
+    // param-hint: hwnd optional
+    // param-hint: lpBuf2 optional
+    func SHInvokePrinterCommandA(hwnd: CPointer<Unit>, uAction: UInt32, lpBuf1: CPointer<UInt8>, lpBuf2: CPointer<UInt8>, fModal: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHInvokePrinterCommandA == "on"]
+public unsafe func Windows_SHInvokePrinterCommandA(hwnd: CPointer<Unit>, uAction: UInt32, lpBuf1: CPointer<UInt8>, lpBuf2: CPointer<UInt8>, fModal: Int32): Int32 {
+    return SHInvokePrinterCommandA(hwnd, uAction, lpBuf1, lpBuf2, fModal)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHInvokePrinterCommandW == "on"]
+foreign {
+    // param-hint: hwnd optional
+    // param-hint: lpBuf2 optional
+    func SHInvokePrinterCommandW(hwnd: CPointer<Unit>, uAction: UInt32, lpBuf1: CPointer<UInt16>, lpBuf2: CPointer<UInt16>, fModal: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHInvokePrinterCommandW == "on"]
+public unsafe func Windows_SHInvokePrinterCommandW(hwnd: CPointer<Unit>, uAction: UInt32, lpBuf1: CPointer<UInt16>, lpBuf2: CPointer<UInt16>, fModal: Int32): Int32 {
+    return SHInvokePrinterCommandW(hwnd, uAction, lpBuf1, lpBuf2, fModal)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHIsFileAvailableOffline == "on"]
+foreign {
+    // param-hint: pdwStatus optional
+    func SHIsFileAvailableOffline(pwszPath: CPointer<UInt16>, pdwStatus: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHIsFileAvailableOffline == "on"]
+public unsafe func Windows_SHIsFileAvailableOffline(pwszPath: CPointer<UInt16>, pdwStatus: CPointer<UInt32>): Int32 {
+    return SHIsFileAvailableOffline(pwszPath, pdwStatus)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHLimitInputEdit == "on"]
+foreign {
+    func SHLimitInputEdit(hwndEdit: CPointer<Unit>, psf: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHLimitInputEdit == "on"]
+public unsafe func Windows_SHLimitInputEdit(hwndEdit: CPointer<Unit>, psf: CPointer<Unit>): Int32 {
+    return SHLimitInputEdit(hwndEdit, psf)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHLoadInProc == "on"]
+foreign {
+    func SHLoadInProc(rclsid: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHLoadInProc == "on"]
+public unsafe func Windows_SHLoadInProc(rclsid: CPointer<GUID>): Int32 {
+    return SHLoadInProc(rclsid)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHLoadNonloadedIconOverlayIdentifiers == "on"]
+foreign {
+    func SHLoadNonloadedIconOverlayIdentifiers(): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHLoadNonloadedIconOverlayIdentifiers == "on"]
+public unsafe func Windows_SHLoadNonloadedIconOverlayIdentifiers(): Int32 {
+    return SHLoadNonloadedIconOverlayIdentifiers()
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHMapPIDLToSystemImageListIndex == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    // param-hint: piIndexSel optional
+    func SHMapPIDLToSystemImageListIndex(pshf: CPointer<Unit>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, piIndexSel: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHMapPIDLToSystemImageListIndex == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHMapPIDLToSystemImageListIndex(pshf: CPointer<Unit>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, piIndexSel: CPointer<Int32>): Int32 {
+    return SHMapPIDLToSystemImageListIndex(pshf, pidl, piIndexSel)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHMultiFileProperties == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func SHMultiFileProperties(pdtobj: CPointer<Unit>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHMultiFileProperties == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SHMultiFileProperties(pdtobj: CPointer<Unit>, dwFlags: UInt32): Int32 {
+    return SHMultiFileProperties(pdtobj, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHObjectProperties == "on"]
+foreign {
+    // param-hint: hwnd optional
+    // param-hint: pszPropertyPage optional
+    func SHObjectProperties(hwnd: CPointer<Unit>, shopObjectType: UInt32, pszObjectName: CPointer<UInt16>, pszPropertyPage: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHObjectProperties == "on"]
+public unsafe func Windows_SHObjectProperties(hwnd: CPointer<Unit>, shopObjectType: UInt32, pszObjectName: CPointer<UInt16>, pszPropertyPage: CPointer<UInt16>): Int32 {
+    return SHObjectProperties(hwnd, shopObjectType, pszObjectName, pszPropertyPage)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHOpenFolderAndSelectItems == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    // param-hint: apidl len=param[1] optional
+    func SHOpenFolderAndSelectItems(pidlFolder: CPointer<Win32__impl_l1.ITEMIDLIST>, cidl: UInt32, apidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHOpenFolderAndSelectItems == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHOpenFolderAndSelectItems(pidlFolder: CPointer<Win32__impl_l1.ITEMIDLIST>, cidl: UInt32, apidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>, dwFlags: UInt32): Int32 {
+    return SHOpenFolderAndSelectItems(pidlFolder, cidl, apidl, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHOpenPropSheetW == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pszCaption optional
+    // param-hint: ahkeys len=param[2] optional
+    // param-hint: pclsidDefault optional
+    // param-hint: psb optional
+    // param-hint: pStartPage optional
+    func SHOpenPropSheetW(pszCaption: CPointer<UInt16>, ahkeys: CPointer<Win32_System_Registry.HKEY>, ckeys: UInt32, pclsidDefault: CPointer<GUID>, pdtobj: CPointer<Unit>, psb: CPointer<Unit>, pStartPage: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHOpenPropSheetW == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHOpenPropSheetW(pszCaption: CPointer<UInt16>, ahkeys: CPointer<Win32_System_Registry.HKEY>, ckeys: UInt32, pclsidDefault: CPointer<GUID>, pdtobj: CPointer<Unit>, psb: CPointer<Unit>, pStartPage: CPointer<UInt16>): Int32 {
+    return SHOpenPropSheetW(pszCaption, ahkeys, ckeys, pclsidDefault, pdtobj, psb, pStartPage)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHOpenWithDialog == "on"]
+foreign {
+    // param-hint: hwndParent optional
+    func SHOpenWithDialog(hwndParent: CPointer<Unit>, poainfo: CPointer<Win32__impl_l1.OPENASINFOAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHOpenWithDialog == "on"]
+public unsafe func Windows_SHOpenWithDialog(hwndParent: CPointer<Unit>, poainfo: CPointer<Win32__impl_l1.OPENASINFOAbi>): Int32 {
+    return SHOpenWithDialog(hwndParent, poainfo)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHParseDisplayName == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    // param-hint: pbc optional
+    // param-hint: psfgaoOut optional
+    func SHParseDisplayName(pszName: CPointer<UInt16>, pbc: CPointer<Unit>, ppidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>, sfgaoIn: UInt32, psfgaoOut: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHParseDisplayName == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHParseDisplayName(pszName: CPointer<UInt16>, pbc: CPointer<Unit>, ppidl: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>, sfgaoIn: UInt32, psfgaoOut: CPointer<UInt32>): Int32 {
+    return SHParseDisplayName(pszName, pbc, ppidl, sfgaoIn, psfgaoOut)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHPathPrepareForWriteA == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: hwnd optional
+    // param-hint: punkEnableModless optional
+    func SHPathPrepareForWriteA(hwnd: CPointer<Unit>, punkEnableModless: CPointer<Unit>, pszPath: CPointer<UInt8>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHPathPrepareForWriteA == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SHPathPrepareForWriteA(hwnd: CPointer<Unit>, punkEnableModless: CPointer<Unit>, pszPath: CPointer<UInt8>, dwFlags: UInt32): Int32 {
+    return SHPathPrepareForWriteA(hwnd, punkEnableModless, pszPath, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHPathPrepareForWriteW == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: hwnd optional
+    // param-hint: punkEnableModless optional
+    func SHPathPrepareForWriteW(hwnd: CPointer<Unit>, punkEnableModless: CPointer<Unit>, pszPath: CPointer<UInt16>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHPathPrepareForWriteW == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SHPathPrepareForWriteW(hwnd: CPointer<Unit>, punkEnableModless: CPointer<Unit>, pszPath: CPointer<UInt16>, dwFlags: UInt32): Int32 {
+    return SHPathPrepareForWriteW(hwnd, punkEnableModless, pszPath, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHQueryRecycleBinA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: pszRootPath optional
+    func SHQueryRecycleBinA(pszRootPath: CPointer<UInt8>, pSHQueryRBInfo: CPointer<Win32__impl_l0.SHQUERYRBINFOAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHQueryRecycleBinA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SHQueryRecycleBinA(pszRootPath: CPointer<UInt8>, pSHQueryRBInfo: CPointer<Win32__impl_l0.SHQUERYRBINFOAbi>): Int32 {
+    return SHQueryRecycleBinA(pszRootPath, pSHQueryRBInfo)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHQueryRecycleBinW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: pszRootPath optional
+    func SHQueryRecycleBinW(pszRootPath: CPointer<UInt16>, pSHQueryRBInfo: CPointer<Win32__impl_l0.SHQUERYRBINFOAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHQueryRecycleBinW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SHQueryRecycleBinW(pszRootPath: CPointer<UInt16>, pSHQueryRBInfo: CPointer<Win32__impl_l0.SHQUERYRBINFOAbi>): Int32 {
+    return SHQueryRecycleBinW(pszRootPath, pSHQueryRBInfo)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHQueryUserNotificationState == "on"]
+foreign {
+    func SHQueryUserNotificationState(pquns: CPointer<Win32__impl_l0.QUERY_USER_NOTIFICATION_STATEAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHQueryUserNotificationState == "on"]
+public unsafe func Windows_SHQueryUserNotificationState(pquns: CPointer<Win32__impl_l0.QUERY_USER_NOTIFICATION_STATEAbi>): Int32 {
+    return SHQueryUserNotificationState(pquns)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHRemoveLocalizedName == "on"]
+foreign {
+    func SHRemoveLocalizedName(pszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHRemoveLocalizedName == "on"]
+public unsafe func Windows_SHRemoveLocalizedName(pszPath: CPointer<UInt16>): Int32 {
+    return SHRemoveLocalizedName(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHReplaceFromPropSheetExtArray == "on" && Windows_Win32_UI_Controls == "on"]
+foreign {
+    func SHReplaceFromPropSheetExtArray(hpsxa: Win32__impl_l0.HPSXA, uPageID: UInt32, lpfnReplaceWith: Win32__impl_l1.LPFNSVADDPROPSHEETPAGE, lParam: IntNative): UInt32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHReplaceFromPropSheetExtArray == "on" && Windows_Win32_UI_Controls == "on"]
+public unsafe func Windows_SHReplaceFromPropSheetExtArray(hpsxa: Win32__impl_l0.HPSXA, uPageID: UInt32, lpfnReplaceWith: Win32__impl_l1.LPFNSVADDPROPSHEETPAGE, lParam: IntNative): UInt32 {
+    return SHReplaceFromPropSheetExtArray(hpsxa, uPageID, lpfnReplaceWith, lParam)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHResolveLibrary == "on"]
+foreign {
+    func SHResolveLibrary(psiLibrary: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHResolveLibrary == "on"]
+public unsafe func Windows_SHResolveLibrary(psiLibrary: CPointer<Unit>): Int32 {
+    return SHResolveLibrary(psiLibrary)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHRestricted == "on"]
+foreign {
+    func SHRestricted(rest: Win32__impl_l0.RESTRICTIONSAbi): UInt32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHRestricted == "on"]
+public unsafe func Windows_SHRestricted(rest: Win32__impl_l0.RESTRICTIONSAbi): UInt32 {
+    return SHRestricted(rest)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHSetDefaultProperties == "on"]
+foreign {
+    // param-hint: hwnd optional
+    // param-hint: pfops optional
+    func SHSetDefaultProperties(hwnd: CPointer<Unit>, psi: CPointer<Unit>, dwFileOpFlags: UInt32, pfops: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHSetDefaultProperties == "on"]
+public unsafe func Windows_SHSetDefaultProperties(hwnd: CPointer<Unit>, psi: CPointer<Unit>, dwFileOpFlags: UInt32, pfops: CPointer<Unit>): Int32 {
+    return SHSetDefaultProperties(hwnd, psi, dwFileOpFlags, pfops)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHSetFolderPathA == "on"]
+foreign {
+    // param-hint: hToken optional
+    func SHSetFolderPathA(csidl: Int32, hToken: CPointer<Unit>, dwFlags: UInt32, pszPath: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHSetFolderPathA == "on"]
+public unsafe func Windows_SHSetFolderPathA(csidl: Int32, hToken: CPointer<Unit>, dwFlags: UInt32, pszPath: CPointer<UInt8>): Int32 {
+    return SHSetFolderPathA(csidl, hToken, dwFlags, pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHSetFolderPathW == "on"]
+foreign {
+    // param-hint: hToken optional
+    func SHSetFolderPathW(csidl: Int32, hToken: CPointer<Unit>, dwFlags: UInt32, pszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHSetFolderPathW == "on"]
+public unsafe func Windows_SHSetFolderPathW(csidl: Int32, hToken: CPointer<Unit>, dwFlags: UInt32, pszPath: CPointer<UInt16>): Int32 {
+    return SHSetFolderPathW(csidl, hToken, dwFlags, pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHSetInstanceExplorer == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: punk optional
+    func SHSetInstanceExplorer(punk: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHSetInstanceExplorer == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SHSetInstanceExplorer(punk: CPointer<Unit>): Unit {
+    SHSetInstanceExplorer(punk)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHSetKnownFolderPath == "on"]
+foreign {
+    // param-hint: hToken optional
+    func SHSetKnownFolderPath(rfid: CPointer<GUID>, dwFlags: UInt32, hToken: CPointer<Unit>, pszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHSetKnownFolderPath == "on"]
+public unsafe func Windows_SHSetKnownFolderPath(rfid: CPointer<GUID>, dwFlags: UInt32, hToken: CPointer<Unit>, pszPath: CPointer<UInt16>): Int32 {
+    return SHSetKnownFolderPath(rfid, dwFlags, hToken, pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHSetLocalizedName == "on"]
+foreign {
+    func SHSetLocalizedName(pszPath: CPointer<UInt16>, pszResModule: CPointer<UInt16>, idsRes: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHSetLocalizedName == "on"]
+public unsafe func Windows_SHSetLocalizedName(pszPath: CPointer<UInt16>, pszResModule: CPointer<UInt16>, idsRes: Int32): Int32 {
+    return SHSetLocalizedName(pszPath, pszResModule, idsRes)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHSetTemporaryPropertyForItem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func SHSetTemporaryPropertyForItem(psi: CPointer<Unit>, propkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, propvar: CPointer<PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHSetTemporaryPropertyForItem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_SHSetTemporaryPropertyForItem(psi: CPointer<Unit>, propkey: CPointer<Win32_Foundation.PROPERTYKEYAbi>, propvar: CPointer<PROPVARIANTAbi>): Int32 {
+    return SHSetTemporaryPropertyForItem(psi, propkey, propvar)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHSetUnreadMailCountW == "on"]
+foreign {
+    func SHSetUnreadMailCountW(pszMailAddress: CPointer<UInt16>, dwCount: UInt32, pszShellExecuteCommand: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHSetUnreadMailCountW == "on"]
+public unsafe func Windows_SHSetUnreadMailCountW(pszMailAddress: CPointer<UInt16>, dwCount: UInt32, pszShellExecuteCommand: CPointer<UInt16>): Int32 {
+    return SHSetUnreadMailCountW(pszMailAddress, dwCount, pszShellExecuteCommand)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHShellFolderView_Message == "on"]
+foreign {
+    func SHShellFolderView_Message(hwndMain: CPointer<Unit>, uMsg: UInt32, lParam: IntNative): IntNative
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHShellFolderView_Message == "on"]
+public unsafe func Windows_SHShellFolderView_Message(hwndMain: CPointer<Unit>, uMsg: UInt32, lParam: IntNative): IntNative {
+    return SHShellFolderView_Message(hwndMain, uMsg, lParam)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHShowManageLibraryUI == "on"]
+foreign {
+    // param-hint: pszTitle optional
+    // param-hint: pszInstruction optional
+    func SHShowManageLibraryUI(psiLibrary: CPointer<Unit>, hwndOwner: CPointer<Unit>, pszTitle: CPointer<UInt16>, pszInstruction: CPointer<UInt16>, lmdOptions: Win32__impl_l0.LIBRARYMANAGEDIALOGOPTIONSAbi): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHShowManageLibraryUI == "on"]
+public unsafe func Windows_SHShowManageLibraryUI(psiLibrary: CPointer<Unit>, hwndOwner: CPointer<Unit>, pszTitle: CPointer<UInt16>, pszInstruction: CPointer<UInt16>, lmdOptions: Win32__impl_l0.LIBRARYMANAGEDIALOGOPTIONSAbi): Int32 {
+    return SHShowManageLibraryUI(psiLibrary, hwndOwner, pszTitle, pszInstruction, lmdOptions)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHSimpleIDListFromPath == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    func SHSimpleIDListFromPath(pszPath: CPointer<UInt16>): CPointer<Win32__impl_l1.ITEMIDLIST>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHSimpleIDListFromPath == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHSimpleIDListFromPath(pszPath: CPointer<UInt16>): CPointer<Win32__impl_l1.ITEMIDLIST> {
+    return SHSimpleIDListFromPath(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHStartNetConnectionDialogW == "on"]
+foreign {
+    // param-hint: hwnd optional
+    // param-hint: pszRemoteName optional
+    func SHStartNetConnectionDialogW(hwnd: CPointer<Unit>, pszRemoteName: CPointer<UInt16>, dwType: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHStartNetConnectionDialogW == "on"]
+public unsafe func Windows_SHStartNetConnectionDialogW(hwnd: CPointer<Unit>, pszRemoteName: CPointer<UInt16>, dwType: UInt32): Int32 {
+    return SHStartNetConnectionDialogW(hwnd, pszRemoteName, dwType)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHTestTokenMembership == "on"]
+foreign {
+    // param-hint: hToken optional
+    func SHTestTokenMembership(hToken: CPointer<Unit>, ulRID: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHTestTokenMembership == "on"]
+public unsafe func Windows_SHTestTokenMembership(hToken: CPointer<Unit>, ulRID: UInt32): Int32 {
+    return SHTestTokenMembership(hToken, ulRID)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHUpdateImageA == "on"]
+foreign {
+    func SHUpdateImageA(pszHashItem: CPointer<UInt8>, iIndex: Int32, uFlags: UInt32, iImageIndex: Int32): Unit
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHUpdateImageA == "on"]
+public unsafe func Windows_SHUpdateImageA(pszHashItem: CPointer<UInt8>, iIndex: Int32, uFlags: UInt32, iImageIndex: Int32): Unit {
+    SHUpdateImageA(pszHashItem, iIndex, uFlags, iImageIndex)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHUpdateImageW == "on"]
+foreign {
+    func SHUpdateImageW(pszHashItem: CPointer<UInt16>, iIndex: Int32, uFlags: UInt32, iImageIndex: Int32): Unit
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHUpdateImageW == "on"]
+public unsafe func Windows_SHUpdateImageW(pszHashItem: CPointer<UInt16>, iIndex: Int32, uFlags: UInt32, iImageIndex: Int32): Unit {
+    SHUpdateImageW(pszHashItem, iIndex, uFlags, iImageIndex)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHValidateUNC == "on"]
+foreign {
     // param-hint: hwndOwner optional
-    func SHFind_InitMenuPopup(hmenu: Win32__impl_l0.HMENU, hwndOwner: CPointer<Unit>, idCmdFirst: UInt32, idCmdLast: UInt32): CPointer<Unit>
+    func SHValidateUNC(hwndOwner: CPointer<Unit>, pszFile: CPointer<UInt16>, fConnect: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHValidateUNC == "on"]
+public unsafe func Windows_SHValidateUNC(hwndOwner: CPointer<Unit>, pszFile: CPointer<UInt16>, fConnect: UInt32): Int32 {
+    return SHValidateUNC(hwndOwner, pszFile, fConnect)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SetCurrentProcessExplicitAppUserModelID == "on"]
+foreign {
+    func SetCurrentProcessExplicitAppUserModelID(AppID: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SetCurrentProcessExplicitAppUserModelID == "on"]
+public unsafe func Windows_SetCurrentProcessExplicitAppUserModelID(AppID: CPointer<UInt16>): Int32 {
+    return SetCurrentProcessExplicitAppUserModelID(AppID)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ShellAboutA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
     // param-hint: hWnd optional
     // param-hint: szOtherStuff optional
     // param-hint: hIcon optional
     func ShellAboutA(hWnd: CPointer<Unit>, szApp: CPointer<UInt8>, szOtherStuff: CPointer<UInt8>, hIcon: Win32__impl_l0.HICON): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ShellAboutA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_ShellAboutA(hWnd: CPointer<Unit>, szApp: CPointer<UInt8>, szOtherStuff: CPointer<UInt8>, hIcon: Win32__impl_l0.HICON): Int32 {
+    return ShellAboutA(hWnd, szApp, szOtherStuff, hIcon)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ShellAboutW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
     // param-hint: hWnd optional
     // param-hint: szOtherStuff optional
     // param-hint: hIcon optional
     func ShellAboutW(hWnd: CPointer<Unit>, szApp: CPointer<UInt16>, szOtherStuff: CPointer<UInt16>, hIcon: Win32__impl_l0.HICON): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ShellAboutW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_ShellAboutW(hWnd: CPointer<Unit>, szApp: CPointer<UInt16>, szOtherStuff: CPointer<UInt16>, hIcon: Win32__impl_l0.HICON): Int32 {
+    return ShellAboutW(hWnd, szApp, szOtherStuff, hIcon)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ShellExecuteA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
     // param-hint: hwnd optional
     // param-hint: lpOperation optional
     // param-hint: lpParameters optional
     // param-hint: lpDirectory optional
     func ShellExecuteA(hwnd: CPointer<Unit>, lpOperation: CPointer<UInt8>, lpFile: CPointer<UInt8>, lpParameters: CPointer<UInt8>, lpDirectory: CPointer<UInt8>, nShowCmd: Win32__impl_l0.SHOW_WINDOW_CMDAbi): CPointer<Unit>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ShellExecuteA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_ShellExecuteA(hwnd: CPointer<Unit>, lpOperation: CPointer<UInt8>, lpFile: CPointer<UInt8>, lpParameters: CPointer<UInt8>, lpDirectory: CPointer<UInt8>, nShowCmd: Win32__impl_l0.SHOW_WINDOW_CMDAbi): CPointer<Unit> {
+    return ShellExecuteA(hwnd, lpOperation, lpFile, lpParameters, lpDirectory, nShowCmd)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ShellExecuteExA == "on" && (((arch == "x86_64" && Windows_Win32_System_Registry == "on") || (arch == "aarch64" && Windows_Win32_System_Registry == "on")) && Windows_Win32_System_Registry == "on")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func ShellExecuteExA(pExecInfo: CPointer<Win32__impl_l0.SHELLEXECUTEINFOAAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ShellExecuteExA == "on" && (((arch == "x86_64" && Windows_Win32_System_Registry == "on") || (arch == "aarch64" && Windows_Win32_System_Registry == "on")) && Windows_Win32_System_Registry == "on")]
+public unsafe func Windows_ShellExecuteExA(pExecInfo: CPointer<Win32__impl_l0.SHELLEXECUTEINFOAAbi>): Int32 {
+    return ShellExecuteExA(pExecInfo)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ShellExecuteExW == "on" && (((arch == "x86_64" && Windows_Win32_System_Registry == "on") || (arch == "aarch64" && Windows_Win32_System_Registry == "on")) && Windows_Win32_System_Registry == "on")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func ShellExecuteExW(pExecInfo: CPointer<Win32__impl_l0.SHELLEXECUTEINFOWAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ShellExecuteExW == "on" && (((arch == "x86_64" && Windows_Win32_System_Registry == "on") || (arch == "aarch64" && Windows_Win32_System_Registry == "on")) && Windows_Win32_System_Registry == "on")]
+public unsafe func Windows_ShellExecuteExW(pExecInfo: CPointer<Win32__impl_l0.SHELLEXECUTEINFOWAbi>): Int32 {
+    return ShellExecuteExW(pExecInfo)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ShellExecuteW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
     // param-hint: hwnd optional
     // param-hint: lpOperation optional
     // param-hint: lpParameters optional
     // param-hint: lpDirectory optional
     func ShellExecuteW(hwnd: CPointer<Unit>, lpOperation: CPointer<UInt16>, lpFile: CPointer<UInt16>, lpParameters: CPointer<UInt16>, lpDirectory: CPointer<UInt16>, nShowCmd: Win32__impl_l0.SHOW_WINDOW_CMDAbi): CPointer<Unit>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ShellExecuteW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_ShellExecuteW(hwnd: CPointer<Unit>, lpOperation: CPointer<UInt16>, lpFile: CPointer<UInt16>, lpParameters: CPointer<UInt16>, lpDirectory: CPointer<UInt16>, nShowCmd: Win32__impl_l0.SHOW_WINDOW_CMDAbi): CPointer<Unit> {
+    return ShellExecuteW(hwnd, lpOperation, lpFile, lpParameters, lpDirectory, nShowCmd)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_Shell_GetCachedImageIndex == "on"]
+foreign {
+    func Shell_GetCachedImageIndex(pwszIconPath: CPointer<UInt16>, iIconIndex: Int32, uIconFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_Shell_GetCachedImageIndex == "on"]
+public unsafe func Windows_Shell_GetCachedImageIndex(pwszIconPath: CPointer<UInt16>, iIconIndex: Int32, uIconFlags: UInt32): Int32 {
+    return Shell_GetCachedImageIndex(pwszIconPath, iIconIndex, uIconFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_Shell_GetCachedImageIndexA == "on"]
+foreign {
+    func Shell_GetCachedImageIndexA(pszIconPath: CPointer<UInt8>, iIconIndex: Int32, uIconFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_Shell_GetCachedImageIndexA == "on"]
+public unsafe func Windows_Shell_GetCachedImageIndexA(pszIconPath: CPointer<UInt8>, iIconIndex: Int32, uIconFlags: UInt32): Int32 {
+    return Shell_GetCachedImageIndexA(pszIconPath, iIconIndex, uIconFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_Shell_GetCachedImageIndexW == "on"]
+foreign {
+    func Shell_GetCachedImageIndexW(pszIconPath: CPointer<UInt16>, iIconIndex: Int32, uIconFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_Shell_GetCachedImageIndexW == "on"]
+public unsafe func Windows_Shell_GetCachedImageIndexW(pszIconPath: CPointer<UInt16>, iIconIndex: Int32, uIconFlags: UInt32): Int32 {
+    return Shell_GetCachedImageIndexW(pszIconPath, iIconIndex, uIconFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_Shell_GetImageLists == "on" && Windows_Win32_UI_Controls == "on"]
+foreign {
+    // param-hint: phiml optional
+    // param-hint: phimlSmall optional
+    func Shell_GetImageLists(phiml: CPointer<Win32__impl_l0.HIMAGELIST>, phimlSmall: CPointer<Win32__impl_l0.HIMAGELIST>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_Shell_GetImageLists == "on" && Windows_Win32_UI_Controls == "on"]
+public unsafe func Windows_Shell_GetImageLists(phiml: CPointer<Win32__impl_l0.HIMAGELIST>, phimlSmall: CPointer<Win32__impl_l0.HIMAGELIST>): Int32 {
+    return Shell_GetImageLists(phiml, phimlSmall)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_Shell_MergeMenus == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
     func Shell_MergeMenus(hmDst: Win32__impl_l0.HMENU, hmSrc: Win32__impl_l0.HMENU, uInsert: UInt32, uIDAdjust: UInt32, uIDAdjustMax: UInt32, uFlags: Win32__impl_l0.MM_FLAGSAbi): UInt32
 }
 
-@When[SHLWAPI == "on"]
-@CallingConv[CDECL]
-foreign {
-    // param-hint: pszDest len=param[1]
-    // pinvoke-hint: cc=cdecl
-    func wnsprintfA(pszDest: CPointer<UInt8>, cchDest: Int32, pszFmt: CPointer<UInt8>, ...): Int32
-    // param-hint: pszDest len=param[1]
-    // pinvoke-hint: cc=cdecl
-    func wnsprintfW(pszDest: CPointer<UInt16>, cchDest: Int32, pszFmt: CPointer<UInt16>, ...): Int32
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_Shell_MergeMenus == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_Shell_MergeMenus(hmDst: Win32__impl_l0.HMENU, hmSrc: Win32__impl_l0.HMENU, uInsert: UInt32, uIDAdjust: UInt32, uIDAdjustMax: UInt32, uFlags: Win32__impl_l0.MM_FLAGSAbi): UInt32 {
+    return Shell_MergeMenus(hmDst, hmSrc, uInsert, uIDAdjust, uIDAdjustMax, uFlags)
 }
 
-@When[SHLWAPI == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_Shell_NotifyIconA == "on" && (((arch == "x86_64" && Windows_Win32_UI_WindowsAndMessaging == "on") || (arch == "aarch64" && Windows_Win32_UI_WindowsAndMessaging == "on")) && Windows_Win32_UI_WindowsAndMessaging == "on")]
+foreign {
+    func Shell_NotifyIconA(dwMessage: Win32__impl_l0.NOTIFY_ICON_MESSAGEAbi, lpData: CPointer<Win32__impl_l1.NOTIFYICONDATAAAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_Shell_NotifyIconA == "on" && (((arch == "x86_64" && Windows_Win32_UI_WindowsAndMessaging == "on") || (arch == "aarch64" && Windows_Win32_UI_WindowsAndMessaging == "on")) && Windows_Win32_UI_WindowsAndMessaging == "on")]
+public unsafe func Windows_Shell_NotifyIconA(dwMessage: Win32__impl_l0.NOTIFY_ICON_MESSAGEAbi, lpData: CPointer<Win32__impl_l1.NOTIFYICONDATAAAbi>): Int32 {
+    return Shell_NotifyIconA(dwMessage, lpData)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_Shell_NotifyIconGetRect == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func Shell_NotifyIconGetRect(identifier: CPointer<Win32__impl_l0.NOTIFYICONIDENTIFIERAbi>, iconLocation: CPointer<Win32_Foundation.RECTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_Shell_NotifyIconGetRect == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_Shell_NotifyIconGetRect(identifier: CPointer<Win32__impl_l0.NOTIFYICONIDENTIFIERAbi>, iconLocation: CPointer<Win32_Foundation.RECTAbi>): Int32 {
+    return Shell_NotifyIconGetRect(identifier, iconLocation)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_Shell_NotifyIconW == "on" && (((arch == "x86_64" && Windows_Win32_UI_WindowsAndMessaging == "on") || (arch == "aarch64" && Windows_Win32_UI_WindowsAndMessaging == "on")) && Windows_Win32_UI_WindowsAndMessaging == "on")]
+foreign {
+    func Shell_NotifyIconW(dwMessage: Win32__impl_l0.NOTIFY_ICON_MESSAGEAbi, lpData: CPointer<Win32__impl_l1.NOTIFYICONDATAWAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_Shell_NotifyIconW == "on" && (((arch == "x86_64" && Windows_Win32_UI_WindowsAndMessaging == "on") || (arch == "aarch64" && Windows_Win32_UI_WindowsAndMessaging == "on")) && Windows_Win32_UI_WindowsAndMessaging == "on")]
+public unsafe func Windows_Shell_NotifyIconW(dwMessage: Win32__impl_l0.NOTIFY_ICON_MESSAGEAbi, lpData: CPointer<Win32__impl_l1.NOTIFYICONDATAWAbi>): Int32 {
+    return Shell_NotifyIconW(dwMessage, lpData)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SignalFileOpen == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    func SignalFileOpen(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SignalFileOpen == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SignalFileOpen(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>): Int32 {
+    return SignalFileOpen(pidl)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_StgMakeUniqueName == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func StgMakeUniqueName(pstgParent: CPointer<Unit>, pszFileSpec: CPointer<UInt16>, grfMode: UInt32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_StgMakeUniqueName == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_StgMakeUniqueName(pstgParent: CPointer<Unit>, pszFileSpec: CPointer<UInt16>, grfMode: UInt32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return StgMakeUniqueName(pstgParent, pszFileSpec, grfMode, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_Win32DeleteFile == "on"]
+foreign {
+    func Win32DeleteFile(pszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_Win32DeleteFile == "on"]
+public unsafe func Windows_Win32DeleteFile(pszPath: CPointer<UInt16>): Int32 {
+    return Win32DeleteFile(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_WriteCabinetState == "on"]
+foreign {
+    func WriteCabinetState(pcs: CPointer<Win32__impl_l0.CABINETSTATE>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_WriteCabinetState == "on"]
+public unsafe func Windows_WriteCabinetState(pcs: CPointer<Win32__impl_l0.CABINETSTATE>): Int32 {
+    return WriteCabinetState(pcs)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_ShellMessageBoxA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 @CallingConv[CDECL]
 foreign {
     // param-hint: hAppInst optional
@@ -634,6 +2774,11 @@ foreign {
     // param-hint: lpcTitle optional
     // pinvoke-hint: SetLastError cc=cdecl
     func ShellMessageBoxA(hAppInst: CPointer<Unit>, hWnd: CPointer<Unit>, lpcText: CPointer<UInt8>, lpcTitle: CPointer<UInt8>, fuStyle: Win32__impl_l0.MESSAGEBOX_STYLEAbi, ...): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_ShellMessageBoxW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: hAppInst optional
     // param-hint: hWnd optional
     // param-hint: lpcTitle optional
@@ -641,663 +2786,1804 @@ foreign {
     func ShellMessageBoxW(hAppInst: CPointer<Unit>, hWnd: CPointer<Unit>, lpcText: CPointer<UInt16>, lpcTitle: CPointer<UInt16>, fuStyle: Win32__impl_l0.MESSAGEBOX_STYLEAbi, ...): Int32
 }
 
-@When[SHLWAPI == "on"]
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_wnsprintfA == "on"]
+@CallingConv[CDECL]
+foreign {
+    // param-hint: pszDest len=param[1]
+    // pinvoke-hint: cc=cdecl
+    func wnsprintfA(pszDest: CPointer<UInt8>, cchDest: Int32, pszFmt: CPointer<UInt8>, ...): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_wnsprintfW == "on"]
+@CallingConv[CDECL]
+foreign {
+    // param-hint: pszDest len=param[1]
+    // pinvoke-hint: cc=cdecl
+    func wnsprintfW(pszDest: CPointer<UInt16>, cchDest: Int32, pszFmt: CPointer<UInt16>, ...): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_AssocCreate == "on"]
 foreign {
     func AssocCreate(clsid: GUID, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_AssocCreate == "on"]
+public unsafe func Windows_AssocCreate(clsid: GUID, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return AssocCreate(clsid, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_AssocGetPerceivedType == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    // param-hint: ppszType optional
+    func AssocGetPerceivedType(pszExt: CPointer<UInt16>, ptype: CPointer<Win32__impl_l0.PERCEIVEDAbi>, pflag: CPointer<UInt32>, ppszType: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_AssocGetPerceivedType == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_AssocGetPerceivedType(pszExt: CPointer<UInt16>, ptype: CPointer<Win32__impl_l0.PERCEIVEDAbi>, pflag: CPointer<UInt32>, ppszType: CPointer<CPointer<UInt16>>): Int32 {
+    return AssocGetPerceivedType(pszExt, ptype, pflag, ppszType)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_AssocIsDangerous == "on"]
+foreign {
     func AssocIsDangerous(pszAssoc: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_AssocIsDangerous == "on"]
+public unsafe func Windows_AssocIsDangerous(pszAssoc: CPointer<UInt16>): Int32 {
+    return AssocIsDangerous(pszAssoc)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_AssocQueryKeyA == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pszExtra optional
+    func AssocQueryKeyA(flags: Win32__impl_l0.ASSOCFAbi, key: Win32__impl_l0.ASSOCKEYAbi, pszAssoc: CPointer<UInt8>, pszExtra: CPointer<UInt8>, phkeyOut: CPointer<Win32_System_Registry.HKEY>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_AssocQueryKeyA == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_AssocQueryKeyA(flags: Win32__impl_l0.ASSOCFAbi, key: Win32__impl_l0.ASSOCKEYAbi, pszAssoc: CPointer<UInt8>, pszExtra: CPointer<UInt8>, phkeyOut: CPointer<Win32_System_Registry.HKEY>): Int32 {
+    return AssocQueryKeyA(flags, key, pszAssoc, pszExtra, phkeyOut)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_AssocQueryKeyW == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pszExtra optional
+    func AssocQueryKeyW(flags: Win32__impl_l0.ASSOCFAbi, key: Win32__impl_l0.ASSOCKEYAbi, pszAssoc: CPointer<UInt16>, pszExtra: CPointer<UInt16>, phkeyOut: CPointer<Win32_System_Registry.HKEY>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_AssocQueryKeyW == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_AssocQueryKeyW(flags: Win32__impl_l0.ASSOCFAbi, key: Win32__impl_l0.ASSOCKEYAbi, pszAssoc: CPointer<UInt16>, pszExtra: CPointer<UInt16>, phkeyOut: CPointer<Win32_System_Registry.HKEY>): Int32 {
+    return AssocQueryKeyW(flags, key, pszAssoc, pszExtra, phkeyOut)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_AssocQueryStringA == "on"]
+foreign {
     // param-hint: pszExtra optional
     // param-hint: pszOut len=param[5] optional
     func AssocQueryStringA(flags: Win32__impl_l0.ASSOCFAbi, str: Win32__impl_l0.ASSOCSTRAbi, pszAssoc: CPointer<UInt8>, pszExtra: CPointer<UInt8>, pszOut: CPointer<UInt8>, pcchOut: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_AssocQueryStringA == "on"]
+public unsafe func Windows_AssocQueryStringA(flags: Win32__impl_l0.ASSOCFAbi, str: Win32__impl_l0.ASSOCSTRAbi, pszAssoc: CPointer<UInt8>, pszExtra: CPointer<UInt8>, pszOut: CPointer<UInt8>, pcchOut: CPointer<UInt32>): Int32 {
+    return AssocQueryStringA(flags, str, pszAssoc, pszExtra, pszOut, pcchOut)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_AssocQueryStringByKeyA == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pszExtra optional
+    // param-hint: pszOut len=param[5] optional
+    func AssocQueryStringByKeyA(flags: Win32__impl_l0.ASSOCFAbi, str: Win32__impl_l0.ASSOCSTRAbi, hkAssoc: Win32_System_Registry.HKEY, pszExtra: CPointer<UInt8>, pszOut: CPointer<UInt8>, pcchOut: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_AssocQueryStringByKeyA == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_AssocQueryStringByKeyA(flags: Win32__impl_l0.ASSOCFAbi, str: Win32__impl_l0.ASSOCSTRAbi, hkAssoc: Win32_System_Registry.HKEY, pszExtra: CPointer<UInt8>, pszOut: CPointer<UInt8>, pcchOut: CPointer<UInt32>): Int32 {
+    return AssocQueryStringByKeyA(flags, str, hkAssoc, pszExtra, pszOut, pcchOut)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_AssocQueryStringByKeyW == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pszExtra optional
+    // param-hint: pszOut len=param[5] optional
+    func AssocQueryStringByKeyW(flags: Win32__impl_l0.ASSOCFAbi, str: Win32__impl_l0.ASSOCSTRAbi, hkAssoc: Win32_System_Registry.HKEY, pszExtra: CPointer<UInt16>, pszOut: CPointer<UInt16>, pcchOut: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_AssocQueryStringByKeyW == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_AssocQueryStringByKeyW(flags: Win32__impl_l0.ASSOCFAbi, str: Win32__impl_l0.ASSOCSTRAbi, hkAssoc: Win32_System_Registry.HKEY, pszExtra: CPointer<UInt16>, pszOut: CPointer<UInt16>, pcchOut: CPointer<UInt32>): Int32 {
+    return AssocQueryStringByKeyW(flags, str, hkAssoc, pszExtra, pszOut, pcchOut)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_AssocQueryStringW == "on"]
+foreign {
     // param-hint: pszExtra optional
     // param-hint: pszOut len=param[5] optional
     func AssocQueryStringW(flags: Win32__impl_l0.ASSOCFAbi, str: Win32__impl_l0.ASSOCSTRAbi, pszAssoc: CPointer<UInt16>, pszExtra: CPointer<UInt16>, pszOut: CPointer<UInt16>, pcchOut: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_AssocQueryStringW == "on"]
+public unsafe func Windows_AssocQueryStringW(flags: Win32__impl_l0.ASSOCFAbi, str: Win32__impl_l0.ASSOCSTRAbi, pszAssoc: CPointer<UInt16>, pszExtra: CPointer<UInt16>, pszOut: CPointer<UInt16>, pcchOut: CPointer<UInt32>): Int32 {
+    return AssocQueryStringW(flags, str, pszAssoc, pszExtra, pszOut, pcchOut)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_ChrCmpIA == "on"]
+foreign {
     func ChrCmpIA(w1: UInt16, w2: UInt16): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_ChrCmpIA == "on"]
+public unsafe func Windows_ChrCmpIA(w1: UInt16, w2: UInt16): Int32 {
+    return ChrCmpIA(w1, w2)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_ChrCmpIW == "on"]
+foreign {
     func ChrCmpIW(w1: UInt16, w2: UInt16): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_ChrCmpIW == "on"]
+public unsafe func Windows_ChrCmpIW(w1: UInt16, w2: UInt16): Int32 {
+    return ChrCmpIW(w1, w2)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_ColorAdjustLuma == "on"]
+foreign {
     func ColorAdjustLuma(clrRGB: UInt32, n: Int32, fScale: Int32): UInt32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_ColorAdjustLuma == "on"]
+public unsafe func Windows_ColorAdjustLuma(clrRGB: UInt32, n: Int32, fScale: Int32): UInt32 {
+    return ColorAdjustLuma(clrRGB, n, fScale)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_ColorHLSToRGB == "on"]
+foreign {
     func ColorHLSToRGB(wHue: UInt16, wLuminance: UInt16, wSaturation: UInt16): UInt32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_ColorHLSToRGB == "on"]
+public unsafe func Windows_ColorHLSToRGB(wHue: UInt16, wLuminance: UInt16, wSaturation: UInt16): UInt32 {
+    return ColorHLSToRGB(wHue, wLuminance, wSaturation)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_ColorRGBToHLS == "on"]
+foreign {
     func ColorRGBToHLS(clrRGB: UInt32, pwHue: CPointer<UInt16>, pwLuminance: CPointer<UInt16>, pwSaturation: CPointer<UInt16>): Unit
-    // param-hint: pszLanguages len=param[1]
-    func GetAcceptLanguagesA(pszLanguages: CPointer<UInt8>, pcchLanguages: CPointer<UInt32>): Int32
-    // param-hint: pszLanguages len=param[1]
-    func GetAcceptLanguagesW(pszLanguages: CPointer<UInt16>, pcchLanguages: CPointer<UInt32>): Int32
-    // param-hint: pbData bytes=param[1]
-    // param-hint: pbHash bytes=param[3]
-    func HashData(pbData: CPointer<UInt8>, cbData: UInt32, pbHash: CPointer<UInt8>, cbHash: UInt32): Int32
-    // param-hint: ppunk optional
-    func IUnknown_AtomicRelease(ppunk: CPointer<CPointer<Unit>>): Unit
-    // param-hint: lpString1 len=param[3]
-    // param-hint: lpString2 len=param[3]
-    func IntlStrEqWorkerA(fCaseSens: Int32, lpString1: CPointer<UInt8>, lpString2: CPointer<UInt8>, nChar: Int32): Int32
-    // param-hint: lpString1 len=param[3]
-    // param-hint: lpString2 len=param[3]
-    func IntlStrEqWorkerW(fCaseSens: Int32, lpString1: CPointer<UInt16>, lpString2: CPointer<UInt16>, nChar: Int32): Int32
-    func IsCharSpaceA(wch: Int8): Int32
-    func IsCharSpaceW(wch: UInt16): Int32
-    func IsInternetESCEnabled(): Int32
-    func IsOS(dwOS: Win32__impl_l0.OSAbi): Int32
-    func ParseURLA(pcszURL: CPointer<UInt8>, ppu: CPointer<Win32__impl_l0.PARSEDURLAAbi>): Int32
-    func ParseURLW(pcszURL: CPointer<UInt16>, ppu: CPointer<Win32__impl_l0.PARSEDURLWAbi>): Int32
-    // param-hint: pszPath fixed=260
-    func PathAddBackslashA(pszPath: CPointer<UInt8>): CPointer<UInt8>
-    // param-hint: pszPath fixed=260
-    func PathAddBackslashW(pszPath: CPointer<UInt16>): CPointer<UInt16>
-    // param-hint: pszPath fixed=260
-    // param-hint: pszExt optional
-    func PathAddExtensionA(pszPath: CPointer<UInt8>, pszExt: CPointer<UInt8>): Int32
-    // param-hint: pszPath fixed=260
-    // param-hint: pszExt optional
-    func PathAddExtensionW(pszPath: CPointer<UInt16>, pszExt: CPointer<UInt16>): Int32
-    // param-hint: pszPath fixed=260
-    func PathAppendA(pszPath: CPointer<UInt8>, pszMore: CPointer<UInt8>): Int32
-    // param-hint: pszPath fixed=260
-    func PathAppendW(pszPath: CPointer<UInt16>, pszMore: CPointer<UInt16>): Int32
-    // param-hint: pszRoot fixed=4
-    func PathBuildRootA(pszRoot: CPointer<UInt8>, iDrive: Int32): CPointer<UInt8>
-    // param-hint: pszRoot fixed=4
-    func PathBuildRootW(pszRoot: CPointer<UInt16>, iDrive: Int32): CPointer<UInt16>
-    // param-hint: pszBuf fixed=260
-    // pinvoke-hint: SetLastError
-    func PathCanonicalizeA(pszBuf: CPointer<UInt8>, pszPath: CPointer<UInt8>): Int32
-    // param-hint: pszBuf fixed=260
-    // pinvoke-hint: SetLastError
-    func PathCanonicalizeW(pszBuf: CPointer<UInt16>, pszPath: CPointer<UInt16>): Int32
-    // param-hint: pszDest fixed=260
-    // param-hint: pszDir optional
-    // param-hint: pszFile optional
-    func PathCombineA(pszDest: CPointer<UInt8>, pszDir: CPointer<UInt8>, pszFile: CPointer<UInt8>): CPointer<UInt8>
-    // param-hint: pszDest fixed=260
-    // param-hint: pszDir optional
-    // param-hint: pszFile optional
-    func PathCombineW(pszDest: CPointer<UInt16>, pszDir: CPointer<UInt16>, pszFile: CPointer<UInt16>): CPointer<UInt16>
-    // param-hint: achPath fixed=260 optional
-    func PathCommonPrefixA(pszFile1: CPointer<UInt8>, pszFile2: CPointer<UInt8>, achPath: CPointer<UInt8>): Int32
-    // param-hint: achPath fixed=260 optional
-    func PathCommonPrefixW(pszFile1: CPointer<UInt16>, pszFile2: CPointer<UInt16>, achPath: CPointer<UInt16>): Int32
-    // param-hint: pszOut len=param[2]
-    func PathCompactPathExA(pszOut: CPointer<UInt8>, pszSrc: CPointer<UInt8>, cchMax: UInt32, dwFlags: UInt32): Int32
-    // param-hint: pszOut len=param[2]
-    func PathCompactPathExW(pszOut: CPointer<UInt16>, pszSrc: CPointer<UInt16>, cchMax: UInt32, dwFlags: UInt32): Int32
-    // param-hint: pszPath len=param[2]
-    func PathCreateFromUrlA(pszUrl: CPointer<UInt8>, pszPath: CPointer<UInt8>, pcchPath: CPointer<UInt32>, dwFlags: UInt32): Int32
-    func PathCreateFromUrlAlloc(pszIn: CPointer<UInt16>, ppszOut: CPointer<CPointer<UInt16>>, dwFlags: UInt32): Int32
-    // param-hint: pszPath len=param[2]
-    func PathCreateFromUrlW(pszUrl: CPointer<UInt16>, pszPath: CPointer<UInt16>, pcchPath: CPointer<UInt32>, dwFlags: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func PathFileExistsA(pszPath: CPointer<UInt8>): Int32
-    // pinvoke-hint: SetLastError
-    func PathFileExistsW(pszPath: CPointer<UInt16>): Int32
-    func PathFindExtensionA(pszPath: CPointer<UInt8>): CPointer<UInt8>
-    func PathFindExtensionW(pszPath: CPointer<UInt16>): CPointer<UInt16>
-    func PathFindFileNameA(pszPath: CPointer<UInt8>): CPointer<UInt8>
-    func PathFindFileNameW(pszPath: CPointer<UInt16>): CPointer<UInt16>
-    func PathFindNextComponentA(pszPath: CPointer<UInt8>): CPointer<UInt8>
-    func PathFindNextComponentW(pszPath: CPointer<UInt16>): CPointer<UInt16>
-    // param-hint: pszPath fixed=260
-    // param-hint: ppszOtherDirs optional
-    func PathFindOnPathA(pszPath: CPointer<UInt8>, ppszOtherDirs: CPointer<CPointer<Int8>>): Int32
-    // param-hint: pszPath fixed=260
-    // param-hint: ppszOtherDirs optional
-    func PathFindOnPathW(pszPath: CPointer<UInt16>, ppszOtherDirs: CPointer<CPointer<UInt16>>): Int32
-    // param-hint: apszSuffix len=param[2]
-    func PathFindSuffixArrayA(pszPath: CPointer<UInt8>, apszSuffix: CPointer<CPointer<UInt8>>, iArraySize: Int32): CPointer<UInt8>
-    // param-hint: apszSuffix len=param[2]
-    func PathFindSuffixArrayW(pszPath: CPointer<UInt16>, apszSuffix: CPointer<CPointer<UInt16>>, iArraySize: Int32): CPointer<UInt16>
-    func PathGetArgsA(pszPath: CPointer<UInt8>): CPointer<UInt8>
-    func PathGetArgsW(pszPath: CPointer<UInt16>): CPointer<UInt16>
-    func PathGetCharTypeA(ch: UInt8): UInt32
-    func PathGetCharTypeW(ch: UInt16): UInt32
-    func PathGetDriveNumberA(pszPath: CPointer<UInt8>): Int32
-    func PathGetDriveNumberW(pszPath: CPointer<UInt16>): Int32
-    func PathIsContentTypeA(pszPath: CPointer<UInt8>, pszContentType: CPointer<UInt8>): Int32
-    func PathIsContentTypeW(pszPath: CPointer<UInt16>, pszContentType: CPointer<UInt16>): Int32
-    func PathIsDirectoryA(pszPath: CPointer<UInt8>): Int32
-    func PathIsDirectoryEmptyA(pszPath: CPointer<UInt8>): Int32
-    func PathIsDirectoryEmptyW(pszPath: CPointer<UInt16>): Int32
-    func PathIsDirectoryW(pszPath: CPointer<UInt16>): Int32
-    func PathIsFileSpecA(pszPath: CPointer<UInt8>): Int32
-    func PathIsFileSpecW(pszPath: CPointer<UInt16>): Int32
-    func PathIsLFNFileSpecA(pszName: CPointer<UInt8>): Int32
-    func PathIsLFNFileSpecW(pszName: CPointer<UInt16>): Int32
-    func PathIsNetworkPathA(pszPath: CPointer<UInt8>): Int32
-    func PathIsNetworkPathW(pszPath: CPointer<UInt16>): Int32
-    func PathIsPrefixA(pszPrefix: CPointer<UInt8>, pszPath: CPointer<UInt8>): Int32
-    func PathIsPrefixW(pszPrefix: CPointer<UInt16>, pszPath: CPointer<UInt16>): Int32
-    func PathIsRelativeA(pszPath: CPointer<UInt8>): Int32
-    func PathIsRelativeW(pszPath: CPointer<UInt16>): Int32
-    func PathIsRootA(pszPath: CPointer<UInt8>): Int32
-    func PathIsRootW(pszPath: CPointer<UInt16>): Int32
-    func PathIsSameRootA(pszPath1: CPointer<UInt8>, pszPath2: CPointer<UInt8>): Int32
-    func PathIsSameRootW(pszPath1: CPointer<UInt16>, pszPath2: CPointer<UInt16>): Int32
-    // param-hint: pszPath optional
-    func PathIsSystemFolderA(pszPath: CPointer<UInt8>, dwAttrb: UInt32): Int32
-    // param-hint: pszPath optional
-    func PathIsSystemFolderW(pszPath: CPointer<UInt16>, dwAttrb: UInt32): Int32
-    func PathIsUNCA(pszPath: CPointer<UInt8>): Int32
-    func PathIsUNCServerA(pszPath: CPointer<UInt8>): Int32
-    func PathIsUNCServerShareA(pszPath: CPointer<UInt8>): Int32
-    func PathIsUNCServerShareW(pszPath: CPointer<UInt16>): Int32
-    func PathIsUNCServerW(pszPath: CPointer<UInt16>): Int32
-    func PathIsUNCW(pszPath: CPointer<UInt16>): Int32
-    func PathIsURLA(pszPath: CPointer<UInt8>): Int32
-    func PathIsURLW(pszPath: CPointer<UInt16>): Int32
-    func PathMakePrettyA(pszPath: CPointer<UInt8>): Int32
-    func PathMakePrettyW(pszPath: CPointer<UInt16>): Int32
-    func PathMakeSystemFolderA(pszPath: CPointer<UInt8>): Int32
-    func PathMakeSystemFolderW(pszPath: CPointer<UInt16>): Int32
-    func PathMatchSpecA(pszFile: CPointer<UInt8>, pszSpec: CPointer<UInt8>): Int32
-    func PathMatchSpecExA(pszFile: CPointer<UInt8>, pszSpec: CPointer<UInt8>, dwFlags: UInt32): Int32
-    func PathMatchSpecExW(pszFile: CPointer<UInt16>, pszSpec: CPointer<UInt16>, dwFlags: UInt32): Int32
-    func PathMatchSpecW(pszFile: CPointer<UInt16>, pszSpec: CPointer<UInt16>): Int32
-    func PathParseIconLocationA(pszIconFile: CPointer<UInt8>): Int32
-    func PathParseIconLocationW(pszIconFile: CPointer<UInt16>): Int32
-    // param-hint: lpsz fixed=260
-    func PathQuoteSpacesA(lpsz: CPointer<UInt8>): Int32
-    // param-hint: lpsz fixed=260
-    func PathQuoteSpacesW(lpsz: CPointer<UInt16>): Int32
-    // param-hint: pszPath fixed=260
-    func PathRelativePathToA(pszPath: CPointer<UInt8>, pszFrom: CPointer<UInt8>, dwAttrFrom: UInt32, pszTo: CPointer<UInt8>, dwAttrTo: UInt32): Int32
-    // param-hint: pszPath fixed=260
-    func PathRelativePathToW(pszPath: CPointer<UInt16>, pszFrom: CPointer<UInt16>, dwAttrFrom: UInt32, pszTo: CPointer<UInt16>, dwAttrTo: UInt32): Int32
-    func PathRemoveArgsA(pszPath: CPointer<UInt8>): Unit
-    func PathRemoveArgsW(pszPath: CPointer<UInt16>): Unit
-    func PathRemoveBackslashA(pszPath: CPointer<UInt8>): CPointer<UInt8>
-    func PathRemoveBackslashW(pszPath: CPointer<UInt16>): CPointer<UInt16>
-    func PathRemoveBlanksA(pszPath: CPointer<UInt8>): Unit
-    func PathRemoveBlanksW(pszPath: CPointer<UInt16>): Unit
-    func PathRemoveExtensionA(pszPath: CPointer<UInt8>): Unit
-    func PathRemoveExtensionW(pszPath: CPointer<UInt16>): Unit
-    func PathRemoveFileSpecA(pszPath: CPointer<UInt8>): Int32
-    func PathRemoveFileSpecW(pszPath: CPointer<UInt16>): Int32
-    // param-hint: pszPath fixed=260
-    func PathRenameExtensionA(pszPath: CPointer<UInt8>, pszExt: CPointer<UInt8>): Int32
-    // param-hint: pszPath fixed=260
-    func PathRenameExtensionW(pszPath: CPointer<UInt16>, pszExt: CPointer<UInt16>): Int32
-    // param-hint: pszBuf len=param[2]
-    func PathSearchAndQualifyA(pszPath: CPointer<UInt8>, pszBuf: CPointer<UInt8>, cchBuf: UInt32): Int32
-    // param-hint: pszBuf len=param[2]
-    func PathSearchAndQualifyW(pszPath: CPointer<UInt16>, pszBuf: CPointer<UInt16>, cchBuf: UInt32): Int32
-    func PathSetDlgItemPathA(hDlg: CPointer<Unit>, id: Int32, pszPath: CPointer<UInt8>): Unit
-    func PathSetDlgItemPathW(hDlg: CPointer<Unit>, id: Int32, pszPath: CPointer<UInt16>): Unit
-    func PathSkipRootA(pszPath: CPointer<UInt8>): CPointer<UInt8>
-    func PathSkipRootW(pszPath: CPointer<UInt16>): CPointer<UInt16>
-    func PathStripPathA(pszPath: CPointer<UInt8>): Unit
-    func PathStripPathW(pszPath: CPointer<UInt16>): Unit
-    func PathStripToRootA(pszPath: CPointer<UInt8>): Int32
-    func PathStripToRootW(pszPath: CPointer<UInt16>): Int32
-    // param-hint: pszBuf len=param[2]
-    func PathUnExpandEnvStringsA(pszPath: CPointer<UInt8>, pszBuf: CPointer<UInt8>, cchBuf: UInt32): Int32
-    // param-hint: pszBuf len=param[2]
-    func PathUnExpandEnvStringsW(pszPath: CPointer<UInt16>, pszBuf: CPointer<UInt16>, cchBuf: UInt32): Int32
-    func PathUndecorateA(pszPath: CPointer<UInt8>): Unit
-    func PathUndecorateW(pszPath: CPointer<UInt16>): Unit
-    func PathUnmakeSystemFolderA(pszPath: CPointer<UInt8>): Int32
-    func PathUnmakeSystemFolderW(pszPath: CPointer<UInt16>): Int32
-    func PathUnquoteSpacesA(lpsz: CPointer<UInt8>): Int32
-    func PathUnquoteSpacesW(lpsz: CPointer<UInt16>): Int32
-    func QISearch(that: CPointer<Unit>, pqit: CPointer<Win32__impl_l0.QITABAbi>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pvData bytes=param[1] optional
-    func SHAllocShared(pvData: CPointer<Unit>, dwSize: UInt32, dwProcessId: UInt32): CPointer<Unit>
-    // param-hint: pszDst len=param[2]
-    func SHAnsiToAnsi(pszSrc: CPointer<UInt8>, pszDst: CPointer<UInt8>, cchBuf: Int32): Int32
-    // param-hint: pwszDst len=param[2]
-    func SHAnsiToUnicode(pszSrc: CPointer<UInt8>, pwszDst: CPointer<UInt16>, cwchBuf: Int32): Int32
-    func SHAutoComplete(hwndEdit: CPointer<Unit>, dwFlags: Win32__impl_l0.SHELL_AUTOCOMPLETE_FLAGSAbi): Int32
-    // param-hint: pdwFlags optional
-    // param-hint: pszBuf len=param[3]
-    func SHFormatDateTimeA(pft: CPointer<Win32_Foundation.FILETIMEAbi>, pdwFlags: CPointer<UInt32>, pszBuf: CPointer<UInt8>, cchBuf: UInt32): Int32
-    // param-hint: pdwFlags optional
-    // param-hint: pszBuf len=param[3]
-    func SHFormatDateTimeW(pft: CPointer<Win32_Foundation.FILETIMEAbi>, pdwFlags: CPointer<UInt32>, pszBuf: CPointer<UInt16>, cchBuf: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func SHFreeShared(hData: CPointer<Unit>, dwProcessId: UInt32): Int32
-    // param-hint: pbMap bytes=param[1]
-    func SHGetInverseCMAP(pbMap: CPointer<UInt8>, cbMap: UInt32): Int32
-    func SHGlobalCounterDecrement(id: Win32__impl_l0.SHGLOBALCOUNTERAbi): Int32
-    func SHGlobalCounterGetValue(id: Win32__impl_l0.SHGLOBALCOUNTERAbi): Int32
-    func SHGlobalCounterIncrement(id: Win32__impl_l0.SHGLOBALCOUNTERAbi): Int32
-    func SHIsLowMemoryMachine(dwType: UInt32): Int32
-    // param-hint: pszOutBuf len=param[2]
-    // param-hint: ppvReserved optional reserved
-    func SHLoadIndirectString(pszSource: CPointer<UInt16>, pszOutBuf: CPointer<UInt16>, cchOutBuf: UInt32, ppvReserved: CPointer<CPointer<Unit>>): Int32
-    func SHLockShared(hData: CPointer<Unit>, dwProcessId: UInt32): CPointer<Unit>
-    // param-hint: hwnd optional
-    func SHMessageBoxCheckA(hwnd: CPointer<Unit>, pszText: CPointer<UInt8>, pszCaption: CPointer<UInt8>, uType: UInt32, iDefault: Int32, pszRegVal: CPointer<UInt8>): Int32
-    // param-hint: hwnd optional
-    func SHMessageBoxCheckW(hwnd: CPointer<Unit>, pszText: CPointer<UInt16>, pszCaption: CPointer<UInt16>, uType: UInt32, iDefault: Int32, pszRegVal: CPointer<UInt16>): Int32
-    func SHRegCloseUSKey(hUSKey: IntNative): windows_core.WIN32_ERROR
-    // param-hint: hRelativeUSKey optional
-    func SHRegCreateUSKeyA(pszPath: CPointer<UInt8>, samDesired: UInt32, hRelativeUSKey: IntNative, phNewUSKey: CPointer<IntNative>, dwFlags: UInt32): windows_core.WIN32_ERROR
-    // param-hint: hRelativeUSKey optional
-    func SHRegCreateUSKeyW(pwzPath: CPointer<UInt16>, samDesired: UInt32, hRelativeUSKey: IntNative, phNewUSKey: CPointer<IntNative>, dwFlags: UInt32): windows_core.WIN32_ERROR
-    func SHRegDeleteEmptyUSKeyA(hUSKey: IntNative, pszSubKey: CPointer<UInt8>, delRegFlags: Win32__impl_l0.SHREGDEL_FLAGSAbi): windows_core.WIN32_ERROR
-    func SHRegDeleteEmptyUSKeyW(hUSKey: IntNative, pwzSubKey: CPointer<UInt16>, delRegFlags: Win32__impl_l0.SHREGDEL_FLAGSAbi): windows_core.WIN32_ERROR
-    func SHRegDeleteUSValueA(hUSKey: IntNative, pszValue: CPointer<UInt8>, delRegFlags: Win32__impl_l0.SHREGDEL_FLAGSAbi): windows_core.WIN32_ERROR
-    func SHRegDeleteUSValueW(hUSKey: IntNative, pwzValue: CPointer<UInt16>, delRegFlags: Win32__impl_l0.SHREGDEL_FLAGSAbi): windows_core.WIN32_ERROR
-    // param-hint: pszName len=param[3]
-    func SHRegEnumUSKeyA(hUSKey: IntNative, dwIndex: UInt32, pszName: CPointer<UInt8>, pcchName: CPointer<UInt32>, enumRegFlags: Win32__impl_l0.SHREGENUM_FLAGSAbi): windows_core.WIN32_ERROR
-    // param-hint: pwzName len=param[3]
-    func SHRegEnumUSKeyW(hUSKey: IntNative, dwIndex: UInt32, pwzName: CPointer<UInt16>, pcchName: CPointer<UInt32>, enumRegFlags: Win32__impl_l0.SHREGENUM_FLAGSAbi): windows_core.WIN32_ERROR
-    // param-hint: pszValueName len=param[3]
-    // param-hint: pdwType optional
-    // param-hint: pvData bytes=param[6] optional
-    // param-hint: pcbData optional
-    func SHRegEnumUSValueA(hUSkey: IntNative, dwIndex: UInt32, pszValueName: CPointer<UInt8>, pcchValueName: CPointer<UInt32>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>, enumRegFlags: Win32__impl_l0.SHREGENUM_FLAGSAbi): windows_core.WIN32_ERROR
-    // param-hint: pszValueName len=param[3]
-    // param-hint: pdwType optional
-    // param-hint: pvData bytes=param[6] optional
-    // param-hint: pcbData optional
-    func SHRegEnumUSValueW(hUSkey: IntNative, dwIndex: UInt32, pszValueName: CPointer<UInt16>, pcchValueName: CPointer<UInt32>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>, enumRegFlags: Win32__impl_l0.SHREGENUM_FLAGSAbi): windows_core.WIN32_ERROR
-    // param-hint: pszValue optional
-    func SHRegGetBoolUSValueA(pszSubKey: CPointer<UInt8>, pszValue: CPointer<UInt8>, fIgnoreHKCU: Int32, fDefault: Int32): Int32
-    // param-hint: pszValue optional
-    func SHRegGetBoolUSValueW(pszSubKey: CPointer<UInt16>, pszValue: CPointer<UInt16>, fIgnoreHKCU: Int32, fDefault: Int32): Int32
-    // param-hint: pszValue optional
-    // param-hint: pdwType optional
-    // param-hint: pvData bytes=param[4] optional
-    // param-hint: pcbData optional
-    // param-hint: pvDefaultData bytes=param[7] optional
-    func SHRegGetUSValueA(pszSubKey: CPointer<UInt8>, pszValue: CPointer<UInt8>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>, fIgnoreHKCU: Int32, pvDefaultData: CPointer<Unit>, dwDefaultDataSize: UInt32): windows_core.WIN32_ERROR
-    // param-hint: pszValue optional
-    // param-hint: pdwType optional
-    // param-hint: pvData bytes=param[4] optional
-    // param-hint: pcbData optional
-    // param-hint: pvDefaultData bytes=param[7] optional
-    func SHRegGetUSValueW(pszSubKey: CPointer<UInt16>, pszValue: CPointer<UInt16>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>, fIgnoreHKCU: Int32, pvDefaultData: CPointer<Unit>, dwDefaultDataSize: UInt32): windows_core.WIN32_ERROR
-    // param-hint: pwszValue optional
-    // param-hint: pdwType optional
-    // param-hint: pvData bytes=param[5] optional
-    // param-hint: pcbData optional
-    func SHRegGetValueFromHKCUHKLM(pwszKey: CPointer<UInt16>, pwszValue: CPointer<UInt16>, srrfFlags: Int32, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>): windows_core.WIN32_ERROR
-    // param-hint: hRelativeUSKey optional
-    func SHRegOpenUSKeyA(pszPath: CPointer<UInt8>, samDesired: UInt32, hRelativeUSKey: IntNative, phNewUSKey: CPointer<IntNative>, fIgnoreHKCU: Int32): windows_core.WIN32_ERROR
-    // param-hint: hRelativeUSKey optional
-    func SHRegOpenUSKeyW(pwzPath: CPointer<UInt16>, samDesired: UInt32, hRelativeUSKey: IntNative, phNewUSKey: CPointer<IntNative>, fIgnoreHKCU: Int32): windows_core.WIN32_ERROR
-    // param-hint: pcSubKeys optional
-    // param-hint: pcchMaxSubKeyLen optional
-    // param-hint: pcValues optional
-    // param-hint: pcchMaxValueNameLen optional
-    func SHRegQueryInfoUSKeyA(hUSKey: IntNative, pcSubKeys: CPointer<UInt32>, pcchMaxSubKeyLen: CPointer<UInt32>, pcValues: CPointer<UInt32>, pcchMaxValueNameLen: CPointer<UInt32>, enumRegFlags: Win32__impl_l0.SHREGENUM_FLAGSAbi): windows_core.WIN32_ERROR
-    // param-hint: pcSubKeys optional
-    // param-hint: pcchMaxSubKeyLen optional
-    // param-hint: pcValues optional
-    // param-hint: pcchMaxValueNameLen optional
-    func SHRegQueryInfoUSKeyW(hUSKey: IntNative, pcSubKeys: CPointer<UInt32>, pcchMaxSubKeyLen: CPointer<UInt32>, pcValues: CPointer<UInt32>, pcchMaxValueNameLen: CPointer<UInt32>, enumRegFlags: Win32__impl_l0.SHREGENUM_FLAGSAbi): windows_core.WIN32_ERROR
-    // param-hint: pszValue optional
-    // param-hint: pdwType optional
-    // param-hint: pvData bytes=param[4] optional
-    // param-hint: pcbData optional
-    // param-hint: pvDefaultData bytes=param[7] optional
-    // param-hint: dwDefaultDataSize optional
-    func SHRegQueryUSValueA(hUSKey: IntNative, pszValue: CPointer<UInt8>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>, fIgnoreHKCU: Int32, pvDefaultData: CPointer<Unit>, dwDefaultDataSize: UInt32): windows_core.WIN32_ERROR
-    // param-hint: pszValue optional
-    // param-hint: pdwType optional
-    // param-hint: pvData bytes=param[4] optional
-    // param-hint: pcbData optional
-    // param-hint: pvDefaultData bytes=param[7] optional
-    // param-hint: dwDefaultDataSize optional
-    func SHRegQueryUSValueW(hUSKey: IntNative, pszValue: CPointer<UInt16>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>, fIgnoreHKCU: Int32, pvDefaultData: CPointer<Unit>, dwDefaultDataSize: UInt32): windows_core.WIN32_ERROR
-    // param-hint: pvData bytes=param[4] optional
-    // param-hint: cbData optional
-    // param-hint: dwFlags optional
-    func SHRegSetUSValueA(pszSubKey: CPointer<UInt8>, pszValue: CPointer<UInt8>, dwType: UInt32, pvData: CPointer<Unit>, cbData: UInt32, dwFlags: UInt32): windows_core.WIN32_ERROR
-    // param-hint: pvData bytes=param[4] optional
-    // param-hint: cbData optional
-    // param-hint: dwFlags optional
-    func SHRegSetUSValueW(pwzSubKey: CPointer<UInt16>, pwzValue: CPointer<UInt16>, dwType: UInt32, pvData: CPointer<Unit>, cbData: UInt32, dwFlags: UInt32): windows_core.WIN32_ERROR
-    // param-hint: pvData bytes=param[4]
-    func SHRegWriteUSValueA(hUSKey: IntNative, pszValue: CPointer<UInt8>, dwType: UInt32, pvData: CPointer<Unit>, cbData: UInt32, dwFlags: UInt32): windows_core.WIN32_ERROR
-    // param-hint: pvData bytes=param[4]
-    func SHRegWriteUSValueW(hUSKey: IntNative, pwzValue: CPointer<UInt16>, dwType: UInt32, pvData: CPointer<Unit>, cbData: UInt32, dwFlags: UInt32): windows_core.WIN32_ERROR
-    func SHReleaseThreadRef(): Int32
-    func SHSendMessageBroadcastA(uMsg: UInt32, wParam: UIntNative, lParam: IntNative): IntNative
-    func SHSendMessageBroadcastW(uMsg: UInt32, wParam: UIntNative, lParam: IntNative): IntNative
-    func SHStrDupA(psz: CPointer<UInt8>, ppwsz: CPointer<CPointer<UInt16>>): Int32
-    func SHStrDupW(psz: CPointer<UInt16>, ppwsz: CPointer<CPointer<UInt16>>): Int32
-    func SHStripMneumonicA(pszMenu: CPointer<UInt8>): Int8
-    func SHStripMneumonicW(pszMenu: CPointer<UInt16>): UInt16
-    // param-hint: pszDst len=param[2]
-    func SHUnicodeToAnsi(pwszSrc: CPointer<UInt16>, pszDst: CPointer<UInt8>, cchBuf: Int32): Int32
-    // param-hint: pwzDst len=param[2]
-    func SHUnicodeToUnicode(pwzSrc: CPointer<UInt16>, pwzDst: CPointer<UInt16>, cwchBuf: Int32): Int32
-    // pinvoke-hint: SetLastError
-    func SHUnlockShared(pvData: CPointer<Unit>): Int32
-    func StrCSpnA(pszStr: CPointer<UInt8>, pszSet: CPointer<UInt8>): Int32
-    func StrCSpnIA(pszStr: CPointer<UInt8>, pszSet: CPointer<UInt8>): Int32
-    func StrCSpnIW(pszStr: CPointer<UInt16>, pszSet: CPointer<UInt16>): Int32
-    func StrCSpnW(pszStr: CPointer<UInt16>, pszSet: CPointer<UInt16>): Int32
-    // param-hint: pszDest len=param[2]
-    func StrCatBuffA(pszDest: CPointer<UInt8>, pszSrc: CPointer<UInt8>, cchDestBuffSize: Int32): CPointer<UInt8>
-    // param-hint: pszDest len=param[2]
-    func StrCatBuffW(pszDest: CPointer<UInt16>, pszSrc: CPointer<UInt16>, cchDestBuffSize: Int32): CPointer<UInt16>
-    // param-hint: pszDst len=param[1]
-    func StrCatChainW(pszDst: CPointer<UInt16>, cchDst: UInt32, ichAt: UInt32, pszSrc: CPointer<UInt16>): UInt32
-    func StrCatW(psz1: CPointer<UInt16>, psz2: CPointer<UInt16>): CPointer<UInt16>
-    func StrChrA(pszStart: CPointer<UInt8>, wMatch: UInt16): CPointer<UInt8>
-    func StrChrIA(pszStart: CPointer<UInt8>, wMatch: UInt16): CPointer<UInt8>
-    func StrChrIW(pszStart: CPointer<UInt16>, wMatch: UInt16): CPointer<UInt16>
-    func StrChrNIW(pszStart: CPointer<UInt16>, wMatch: UInt16, cchMax: UInt32): CPointer<UInt16>
-    func StrChrNW(pszStart: CPointer<UInt16>, wMatch: UInt16, cchMax: UInt32): CPointer<UInt16>
-    func StrChrW(pszStart: CPointer<UInt16>, wMatch: UInt16): CPointer<UInt16>
-    func StrCmpCA(pszStr1: CPointer<UInt8>, pszStr2: CPointer<UInt8>): Int32
-    func StrCmpCW(pszStr1: CPointer<UInt16>, pszStr2: CPointer<UInt16>): Int32
-    func StrCmpICA(pszStr1: CPointer<UInt8>, pszStr2: CPointer<UInt8>): Int32
-    func StrCmpICW(pszStr1: CPointer<UInt16>, pszStr2: CPointer<UInt16>): Int32
-    func StrCmpIW(psz1: CPointer<UInt16>, psz2: CPointer<UInt16>): Int32
-    func StrCmpLogicalW(psz1: CPointer<UInt16>, psz2: CPointer<UInt16>): Int32
-    func StrCmpNA(psz1: CPointer<UInt8>, psz2: CPointer<UInt8>, nChar: Int32): Int32
-    func StrCmpNCA(pszStr1: CPointer<UInt8>, pszStr2: CPointer<UInt8>, nChar: Int32): Int32
-    func StrCmpNCW(pszStr1: CPointer<UInt16>, pszStr2: CPointer<UInt16>, nChar: Int32): Int32
-    func StrCmpNIA(psz1: CPointer<UInt8>, psz2: CPointer<UInt8>, nChar: Int32): Int32
-    func StrCmpNICA(pszStr1: CPointer<UInt8>, pszStr2: CPointer<UInt8>, nChar: Int32): Int32
-    func StrCmpNICW(pszStr1: CPointer<UInt16>, pszStr2: CPointer<UInt16>, nChar: Int32): Int32
-    func StrCmpNIW(psz1: CPointer<UInt16>, psz2: CPointer<UInt16>, nChar: Int32): Int32
-    func StrCmpNW(psz1: CPointer<UInt16>, psz2: CPointer<UInt16>, nChar: Int32): Int32
-    func StrCmpW(psz1: CPointer<UInt16>, psz2: CPointer<UInt16>): Int32
-    // param-hint: pszDst len=param[2]
-    func StrCpyNW(pszDst: CPointer<UInt16>, pszSrc: CPointer<UInt16>, cchMax: Int32): CPointer<UInt16>
-    func StrCpyW(psz1: CPointer<UInt16>, psz2: CPointer<UInt16>): CPointer<UInt16>
-    func StrDupA(pszSrch: CPointer<UInt8>): CPointer<UInt8>
-    func StrDupW(pszSrch: CPointer<UInt16>): CPointer<UInt16>
-    // param-hint: pszBuf len=param[2]
-    func StrFormatByteSize64A(qdw: Int64, pszBuf: CPointer<UInt8>, cchBuf: UInt32): CPointer<UInt8>
-    // param-hint: pszBuf len=param[2]
-    func StrFormatByteSizeA(dw: UInt32, pszBuf: CPointer<UInt8>, cchBuf: UInt32): CPointer<UInt8>
-    // param-hint: pszBuf len=param[3]
-    func StrFormatByteSizeEx(ull: UInt64, flags: Win32__impl_l0.SFBS_FLAGSAbi, pszBuf: CPointer<UInt16>, cchBuf: UInt32): Int32
-    // param-hint: pszBuf len=param[2]
-    func StrFormatByteSizeW(qdw: Int64, pszBuf: CPointer<UInt16>, cchBuf: UInt32): CPointer<UInt16>
-    // param-hint: pszBuf len=param[2]
-    func StrFormatKBSizeA(qdw: Int64, pszBuf: CPointer<UInt8>, cchBuf: UInt32): CPointer<UInt8>
-    // param-hint: pszBuf len=param[2]
-    func StrFormatKBSizeW(qdw: Int64, pszBuf: CPointer<UInt16>, cchBuf: UInt32): CPointer<UInt16>
-    // param-hint: pszOut len=param[1]
-    func StrFromTimeIntervalA(pszOut: CPointer<UInt8>, cchMax: UInt32, dwTimeMS: UInt32, digits: Int32): Int32
-    // param-hint: pszOut len=param[1]
-    func StrFromTimeIntervalW(pszOut: CPointer<UInt16>, cchMax: UInt32, dwTimeMS: UInt32, digits: Int32): Int32
-    func StrIsIntlEqualA(fCaseSens: Int32, pszString1: CPointer<UInt8>, pszString2: CPointer<UInt8>, nChar: Int32): Int32
-    func StrIsIntlEqualW(fCaseSens: Int32, pszString1: CPointer<UInt16>, pszString2: CPointer<UInt16>, nChar: Int32): Int32
-    // param-hint: psz1 len=param[2]
-    func StrNCatA(psz1: CPointer<UInt8>, psz2: CPointer<UInt8>, cchMax: Int32): CPointer<UInt8>
-    // param-hint: psz1 len=param[2]
-    func StrNCatW(psz1: CPointer<UInt16>, psz2: CPointer<UInt16>, cchMax: Int32): CPointer<UInt16>
-    func StrPBrkA(psz: CPointer<UInt8>, pszSet: CPointer<UInt8>): CPointer<UInt8>
-    func StrPBrkW(psz: CPointer<UInt16>, pszSet: CPointer<UInt16>): CPointer<UInt16>
-    // param-hint: pszEnd optional
-    func StrRChrA(pszStart: CPointer<UInt8>, pszEnd: CPointer<UInt8>, wMatch: UInt16): CPointer<UInt8>
-    // param-hint: pszEnd optional
-    func StrRChrIA(pszStart: CPointer<UInt8>, pszEnd: CPointer<UInt8>, wMatch: UInt16): CPointer<UInt8>
-    // param-hint: pszEnd optional
-    func StrRChrIW(pszStart: CPointer<UInt16>, pszEnd: CPointer<UInt16>, wMatch: UInt16): CPointer<UInt16>
-    // param-hint: pszEnd optional
-    func StrRChrW(pszStart: CPointer<UInt16>, pszEnd: CPointer<UInt16>, wMatch: UInt16): CPointer<UInt16>
-    // param-hint: pszLast optional
-    func StrRStrIA(pszSource: CPointer<UInt8>, pszLast: CPointer<UInt8>, pszSrch: CPointer<UInt8>): CPointer<UInt8>
-    // param-hint: pszLast optional
-    func StrRStrIW(pszSource: CPointer<UInt16>, pszLast: CPointer<UInt16>, pszSrch: CPointer<UInt16>): CPointer<UInt16>
-    func StrSpnA(psz: CPointer<UInt8>, pszSet: CPointer<UInt8>): Int32
-    func StrSpnW(psz: CPointer<UInt16>, pszSet: CPointer<UInt16>): Int32
-    func StrStrA(pszFirst: CPointer<UInt8>, pszSrch: CPointer<UInt8>): CPointer<UInt8>
-    func StrStrIA(pszFirst: CPointer<UInt8>, pszSrch: CPointer<UInt8>): CPointer<UInt8>
-    func StrStrIW(pszFirst: CPointer<UInt16>, pszSrch: CPointer<UInt16>): CPointer<UInt16>
-    func StrStrNIW(pszFirst: CPointer<UInt16>, pszSrch: CPointer<UInt16>, cchMax: UInt32): CPointer<UInt16>
-    func StrStrNW(pszFirst: CPointer<UInt16>, pszSrch: CPointer<UInt16>, cchMax: UInt32): CPointer<UInt16>
-    func StrStrW(pszFirst: CPointer<UInt16>, pszSrch: CPointer<UInt16>): CPointer<UInt16>
-    func StrToInt64ExA(pszString: CPointer<UInt8>, dwFlags: Int32, pllRet: CPointer<Int64>): Int32
-    func StrToInt64ExW(pszString: CPointer<UInt16>, dwFlags: Int32, pllRet: CPointer<Int64>): Int32
-    func StrToIntA(pszSrc: CPointer<UInt8>): Int32
-    func StrToIntExA(pszString: CPointer<UInt8>, dwFlags: Int32, piRet: CPointer<Int32>): Int32
-    func StrToIntExW(pszString: CPointer<UInt16>, dwFlags: Int32, piRet: CPointer<Int32>): Int32
-    func StrToIntW(pszSrc: CPointer<UInt16>): Int32
-    func StrTrimA(psz: CPointer<UInt8>, pszTrimChars: CPointer<UInt8>): Int32
-    func StrTrimW(psz: CPointer<UInt16>, pszTrimChars: CPointer<UInt16>): Int32
-    // param-hint: pszOut len=param[2]
-    func UrlApplySchemeA(pszIn: CPointer<UInt8>, pszOut: CPointer<UInt8>, pcchOut: CPointer<UInt32>, dwFlags: UInt32): Int32
-    // param-hint: pszOut len=param[2]
-    func UrlApplySchemeW(pszIn: CPointer<UInt16>, pszOut: CPointer<UInt16>, pcchOut: CPointer<UInt32>, dwFlags: UInt32): Int32
-    // param-hint: pszCanonicalized len=param[2]
-    func UrlCanonicalizeA(pszUrl: CPointer<UInt8>, pszCanonicalized: CPointer<UInt8>, pcchCanonicalized: CPointer<UInt32>, dwFlags: UInt32): Int32
-    // param-hint: pszCanonicalized len=param[2]
-    func UrlCanonicalizeW(pszUrl: CPointer<UInt16>, pszCanonicalized: CPointer<UInt16>, pcchCanonicalized: CPointer<UInt32>, dwFlags: UInt32): Int32
-    // param-hint: pszCombined len=param[3] optional
-    func UrlCombineA(pszBase: CPointer<UInt8>, pszRelative: CPointer<UInt8>, pszCombined: CPointer<UInt8>, pcchCombined: CPointer<UInt32>, dwFlags: UInt32): Int32
-    // param-hint: pszCombined len=param[3] optional
-    func UrlCombineW(pszBase: CPointer<UInt16>, pszRelative: CPointer<UInt16>, pszCombined: CPointer<UInt16>, pcchCombined: CPointer<UInt32>, dwFlags: UInt32): Int32
-    func UrlCompareA(psz1: CPointer<UInt8>, psz2: CPointer<UInt8>, fIgnoreSlash: Int32): Int32
-    func UrlCompareW(psz1: CPointer<UInt16>, psz2: CPointer<UInt16>, fIgnoreSlash: Int32): Int32
-    // param-hint: pszUrl len=param[2]
-    func UrlCreateFromPathA(pszPath: CPointer<UInt8>, pszUrl: CPointer<UInt8>, pcchUrl: CPointer<UInt32>, dwFlags: UInt32): Int32
-    // param-hint: pszUrl len=param[2]
-    func UrlCreateFromPathW(pszPath: CPointer<UInt16>, pszUrl: CPointer<UInt16>, pcchUrl: CPointer<UInt32>, dwFlags: UInt32): Int32
-    // param-hint: pszEscaped len=param[2]
-    func UrlEscapeA(pszUrl: CPointer<UInt8>, pszEscaped: CPointer<UInt8>, pcchEscaped: CPointer<UInt32>, dwFlags: UInt32): Int32
-    // param-hint: pszEscaped len=param[2]
-    func UrlEscapeW(pszUrl: CPointer<UInt16>, pszEscaped: CPointer<UInt16>, pcchEscaped: CPointer<UInt32>, dwFlags: UInt32): Int32
-    // param-hint: pszTranslatedUrl len=param[2]
-    func UrlFixupW(pcszUrl: CPointer<UInt16>, pszTranslatedUrl: CPointer<UInt16>, cchMax: UInt32): Int32
-    func UrlGetLocationA(pszURL: CPointer<UInt8>): CPointer<UInt8>
-    func UrlGetLocationW(pszURL: CPointer<UInt16>): CPointer<UInt16>
-    // param-hint: pszOut len=param[2]
-    func UrlGetPartA(pszIn: CPointer<UInt8>, pszOut: CPointer<UInt8>, pcchOut: CPointer<UInt32>, dwPart: UInt32, dwFlags: UInt32): Int32
-    // param-hint: pszOut len=param[2]
-    func UrlGetPartW(pszIn: CPointer<UInt16>, pszOut: CPointer<UInt16>, pcchOut: CPointer<UInt32>, dwPart: UInt32, dwFlags: UInt32): Int32
-    // param-hint: pbHash bytes=param[2]
-    func UrlHashA(pszUrl: CPointer<UInt8>, pbHash: CPointer<UInt8>, cbHash: UInt32): Int32
-    // param-hint: pbHash bytes=param[2]
-    func UrlHashW(pszUrl: CPointer<UInt16>, pbHash: CPointer<UInt8>, cbHash: UInt32): Int32
-    func UrlIsA(pszUrl: CPointer<UInt8>, UrlIs: Win32__impl_l0.URLISAbi): Int32
-    func UrlIsNoHistoryA(pszURL: CPointer<UInt8>): Int32
-    func UrlIsNoHistoryW(pszURL: CPointer<UInt16>): Int32
-    func UrlIsOpaqueA(pszURL: CPointer<UInt8>): Int32
-    func UrlIsOpaqueW(pszURL: CPointer<UInt16>): Int32
-    func UrlIsW(pszUrl: CPointer<UInt16>, UrlIs: Win32__impl_l0.URLISAbi): Int32
-    // param-hint: pszUnescaped len=param[2] optional
-    // param-hint: pcchUnescaped optional
-    func UrlUnescapeA(pszUrl: CPointer<UInt8>, pszUnescaped: CPointer<UInt8>, pcchUnescaped: CPointer<UInt32>, dwFlags: UInt32): Int32
-    // param-hint: pszUnescaped len=param[2] optional
-    // param-hint: pcchUnescaped optional
-    func UrlUnescapeW(pszUrl: CPointer<UInt16>, pszUnescaped: CPointer<UInt16>, pcchUnescaped: CPointer<UInt32>, dwFlags: UInt32): Int32
-    func WhichPlatform(): UInt32
-    // param-hint: pszDest len=param[1]
-    func wvnsprintfA(pszDest: CPointer<UInt8>, cchDest: Int32, pszFmt: CPointer<UInt8>, arglist: CPointer<Int8>): Int32
-    // param-hint: pszDest len=param[1]
-    func wvnsprintfW(pszDest: CPointer<UInt16>, cchDest: Int32, pszFmt: CPointer<UInt16>, arglist: CPointer<Int8>): Int32
 }
 
-@When[SHLWAPI == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Registry == "on")]
-foreign {
-    // param-hint: pszSubkey optional
-    // param-hint: pszValue optional
-    func SHOpenRegStream2A(hkey: Win32_System_Registry.HKEY, pszSubkey: CPointer<UInt8>, pszValue: CPointer<UInt8>, grfMode: UInt32): CPointer<Unit>
-    // param-hint: pszSubkey optional
-    // param-hint: pszValue optional
-    func SHOpenRegStream2W(hkey: Win32_System_Registry.HKEY, pszSubkey: CPointer<UInt16>, pszValue: CPointer<UInt16>, grfMode: UInt32): CPointer<Unit>
-    // param-hint: pszSubkey optional
-    // param-hint: pszValue optional
-    func SHOpenRegStreamA(hkey: Win32_System_Registry.HKEY, pszSubkey: CPointer<UInt8>, pszValue: CPointer<UInt8>, grfMode: UInt32): CPointer<Unit>
-    // param-hint: pszSubkey optional
-    // param-hint: pszValue optional
-    func SHOpenRegStreamW(hkey: Win32_System_Registry.HKEY, pszSubkey: CPointer<UInt16>, pszValue: CPointer<UInt16>, grfMode: UInt32): CPointer<Unit>
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_ColorRGBToHLS == "on"]
+public unsafe func Windows_ColorRGBToHLS(clrRGB: UInt32, pwHue: CPointer<UInt16>, pwLuminance: CPointer<UInt16>, pwSaturation: CPointer<UInt16>): Unit {
+    ColorRGBToHLS(clrRGB, pwHue, pwLuminance, pwSaturation)
 }
 
-@When[SHLWAPI == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_Common == "on")]
-foreign {
-    func IStream_ReadPidl(pstm: CPointer<Unit>, ppidlOut: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>): Int32
-    func IStream_WritePidl(pstm: CPointer<Unit>, pidlWrite: CPointer<Win32__impl_l1.ITEMIDLIST>): Int32
-}
-
-@When[SHLWAPI == "on" && Windows_Win32_Graphics_Gdi == "on"]
-foreign {
-    // param-hint: hDC optional
-    // param-hint: pszPath fixed=260
-    func PathCompactPathA(hDC: Win32_Graphics_Gdi.HDC, pszPath: CPointer<UInt8>, dx: UInt32): Int32
-    // param-hint: hDC optional
-    // param-hint: pszPath fixed=260
-    func PathCompactPathW(hDC: Win32_Graphics_Gdi.HDC, pszPath: CPointer<UInt16>, dx: UInt32): Int32
-    // param-hint: hdc optional
-    func SHCreateShellPalette(hdc: Win32_Graphics_Gdi.HDC): Win32_Graphics_Gdi.HPALETTE
-}
-
-@When[SHLWAPI == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_ConnectToConnectionPoint == "on" && Windows_Win32_System_Com == "on"]
 foreign {
     // param-hint: punk optional
     // param-hint: ppcpOut optional
     func ConnectToConnectionPoint(punk: CPointer<Unit>, riidEvent: CPointer<GUID>, fConnect: Int32, punkTarget: CPointer<Unit>, pdwCookie: CPointer<UInt32>, ppcpOut: CPointer<CPointer<Unit>>): Int32
-    func IStream_Copy(pstmFrom: CPointer<Unit>, pstmTo: CPointer<Unit>, cb: UInt32): Int32
-    // param-hint: pv bytes=param[2]
-    func IStream_Read(pstm: CPointer<Unit>, pv: CPointer<Unit>, cb: UInt32): Int32
-    func IStream_ReadStr(pstm: CPointer<Unit>, ppsz: CPointer<CPointer<UInt16>>): Int32
-    func IStream_Reset(pstm: CPointer<Unit>): Int32
-    func IStream_Size(pstm: CPointer<Unit>, pui: CPointer<UInt64>): Int32
-    // param-hint: pv bytes=param[2]
-    func IStream_Write(pstm: CPointer<Unit>, pv: CPointer<Unit>, cb: UInt32): Int32
-    func IStream_WriteStr(pstm: CPointer<Unit>, psz: CPointer<UInt16>): Int32
-    func IUnknown_GetSite(punk: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
-    func IUnknown_GetWindow(punk: CPointer<Unit>, phwnd: CPointer<CPointer<Unit>>): Int32
-    // param-hint: punk optional
-    func IUnknown_QueryService(punk: CPointer<Unit>, guidService: CPointer<GUID>, riid: CPointer<GUID>, ppvOut: CPointer<CPointer<Unit>>): Int32
-    // param-hint: punk optional
-    func IUnknown_Set(ppunk: CPointer<CPointer<Unit>>, punk: CPointer<Unit>): Unit
-    // param-hint: punkSite optional
-    func IUnknown_SetSite(punk: CPointer<Unit>, punkSite: CPointer<Unit>): Int32
-    // param-hint: pInit bytes=param[1] optional
-    func SHCreateMemStream(pInit: CPointer<UInt8>, cbInit: UInt32): CPointer<Unit>
-    func SHCreateStreamOnFileA(pszFile: CPointer<UInt8>, grfMode: UInt32, ppstm: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pstmTemplate optional
-    func SHCreateStreamOnFileEx(pszFile: CPointer<UInt16>, grfMode: UInt32, dwAttributes: UInt32, fCreate: Int32, pstmTemplate: CPointer<Unit>, ppstm: CPointer<CPointer<Unit>>): Int32
-    func SHCreateStreamOnFileW(pszFile: CPointer<UInt16>, grfMode: UInt32, ppstm: CPointer<CPointer<Unit>>): Int32
-    func SHCreateThreadRef(pcRef: CPointer<Int32>, ppunk: CPointer<CPointer<Unit>>): Int32
-    func SHGetThreadRef(ppunk: CPointer<CPointer<Unit>>): Int32
-    // param-hint: punk optional
-    func SHSetThreadRef(punk: CPointer<Unit>): Int32
-    // param-hint: pbc optional
-    func SHSkipJunction(pbc: CPointer<Unit>, pclsid: CPointer<GUID>): Int32
 }
 
-@When[SHLWAPI == "on" && Windows_Win32_System_Registry == "on"]
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_ConnectToConnectionPoint == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_ConnectToConnectionPoint(punk: CPointer<Unit>, riidEvent: CPointer<GUID>, fConnect: Int32, punkTarget: CPointer<Unit>, pdwCookie: CPointer<UInt32>, ppcpOut: CPointer<CPointer<Unit>>): Int32 {
+    return ConnectToConnectionPoint(punk, riidEvent, fConnect, punkTarget, pdwCookie, ppcpOut)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_GetAcceptLanguagesA == "on"]
 foreign {
-    // param-hint: pszExtra optional
-    func AssocQueryKeyA(flags: Win32__impl_l0.ASSOCFAbi, key: Win32__impl_l0.ASSOCKEYAbi, pszAssoc: CPointer<UInt8>, pszExtra: CPointer<UInt8>, phkeyOut: CPointer<Win32_System_Registry.HKEY>): Int32
-    // param-hint: pszExtra optional
-    func AssocQueryKeyW(flags: Win32__impl_l0.ASSOCFAbi, key: Win32__impl_l0.ASSOCKEYAbi, pszAssoc: CPointer<UInt16>, pszExtra: CPointer<UInt16>, phkeyOut: CPointer<Win32_System_Registry.HKEY>): Int32
-    // param-hint: pszExtra optional
-    // param-hint: pszOut len=param[5] optional
-    func AssocQueryStringByKeyA(flags: Win32__impl_l0.ASSOCFAbi, str: Win32__impl_l0.ASSOCSTRAbi, hkAssoc: Win32_System_Registry.HKEY, pszExtra: CPointer<UInt8>, pszOut: CPointer<UInt8>, pcchOut: CPointer<UInt32>): Int32
-    // param-hint: pszExtra optional
-    // param-hint: pszOut len=param[5] optional
-    func AssocQueryStringByKeyW(flags: Win32__impl_l0.ASSOCFAbi, str: Win32__impl_l0.ASSOCSTRAbi, hkAssoc: Win32_System_Registry.HKEY, pszExtra: CPointer<UInt16>, pszOut: CPointer<UInt16>, pcchOut: CPointer<UInt32>): Int32
+    // param-hint: pszLanguages len=param[1]
+    func GetAcceptLanguagesA(pszLanguages: CPointer<UInt8>, pcchLanguages: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_GetAcceptLanguagesA == "on"]
+public unsafe func Windows_GetAcceptLanguagesA(pszLanguages: CPointer<UInt8>, pcchLanguages: CPointer<UInt32>): Int32 {
+    return GetAcceptLanguagesA(pszLanguages, pcchLanguages)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_GetAcceptLanguagesW == "on"]
+foreign {
+    // param-hint: pszLanguages len=param[1]
+    func GetAcceptLanguagesW(pszLanguages: CPointer<UInt16>, pcchLanguages: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_GetAcceptLanguagesW == "on"]
+public unsafe func Windows_GetAcceptLanguagesW(pszLanguages: CPointer<UInt16>, pcchLanguages: CPointer<UInt32>): Int32 {
+    return GetAcceptLanguagesW(pszLanguages, pcchLanguages)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_GetMenuPosFromID == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    func GetMenuPosFromID(hmenu: Win32__impl_l0.HMENU, id: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_GetMenuPosFromID == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_GetMenuPosFromID(hmenu: Win32__impl_l0.HMENU, id: UInt32): Int32 {
+    return GetMenuPosFromID(hmenu, id)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_HashData == "on"]
+foreign {
+    // param-hint: pbData bytes=param[1]
+    // param-hint: pbHash bytes=param[3]
+    func HashData(pbData: CPointer<UInt8>, cbData: UInt32, pbHash: CPointer<UInt8>, cbHash: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_HashData == "on"]
+public unsafe func Windows_HashData(pbData: CPointer<UInt8>, cbData: UInt32, pbHash: CPointer<UInt8>, cbHash: UInt32): Int32 {
+    return HashData(pbData, cbData, pbHash, cbHash)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IStream_Copy == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func IStream_Copy(pstmFrom: CPointer<Unit>, pstmTo: CPointer<Unit>, cb: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IStream_Copy == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_IStream_Copy(pstmFrom: CPointer<Unit>, pstmTo: CPointer<Unit>, cb: UInt32): Int32 {
+    return IStream_Copy(pstmFrom, pstmTo, cb)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IStream_Read == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: pv bytes=param[2]
+    func IStream_Read(pstm: CPointer<Unit>, pv: CPointer<Unit>, cb: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IStream_Read == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_IStream_Read(pstm: CPointer<Unit>, pv: CPointer<Unit>, cb: UInt32): Int32 {
+    return IStream_Read(pstm, pv, cb)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IStream_ReadPidl == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    func IStream_ReadPidl(pstm: CPointer<Unit>, ppidlOut: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IStream_ReadPidl == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_IStream_ReadPidl(pstm: CPointer<Unit>, ppidlOut: CPointer<CPointer<Win32__impl_l1.ITEMIDLIST>>): Int32 {
+    return IStream_ReadPidl(pstm, ppidlOut)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IStream_ReadStr == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func IStream_ReadStr(pstm: CPointer<Unit>, ppsz: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IStream_ReadStr == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_IStream_ReadStr(pstm: CPointer<Unit>, ppsz: CPointer<CPointer<UInt16>>): Int32 {
+    return IStream_ReadStr(pstm, ppsz)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IStream_Reset == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func IStream_Reset(pstm: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IStream_Reset == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_IStream_Reset(pstm: CPointer<Unit>): Int32 {
+    return IStream_Reset(pstm)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IStream_Size == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func IStream_Size(pstm: CPointer<Unit>, pui: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IStream_Size == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_IStream_Size(pstm: CPointer<Unit>, pui: CPointer<UInt64>): Int32 {
+    return IStream_Size(pstm, pui)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IStream_Write == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: pv bytes=param[2]
+    func IStream_Write(pstm: CPointer<Unit>, pv: CPointer<Unit>, cb: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IStream_Write == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_IStream_Write(pstm: CPointer<Unit>, pv: CPointer<Unit>, cb: UInt32): Int32 {
+    return IStream_Write(pstm, pv, cb)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IStream_WritePidl == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
+    func IStream_WritePidl(pstm: CPointer<Unit>, pidlWrite: CPointer<Win32__impl_l1.ITEMIDLIST>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IStream_WritePidl == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_IStream_WritePidl(pstm: CPointer<Unit>, pidlWrite: CPointer<Win32__impl_l1.ITEMIDLIST>): Int32 {
+    return IStream_WritePidl(pstm, pidlWrite)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IStream_WriteStr == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func IStream_WriteStr(pstm: CPointer<Unit>, psz: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IStream_WriteStr == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_IStream_WriteStr(pstm: CPointer<Unit>, psz: CPointer<UInt16>): Int32 {
+    return IStream_WriteStr(pstm, psz)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IUnknown_AtomicRelease == "on"]
+foreign {
+    // param-hint: ppunk optional
+    func IUnknown_AtomicRelease(ppunk: CPointer<CPointer<Unit>>): Unit
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IUnknown_AtomicRelease == "on"]
+public unsafe func Windows_IUnknown_AtomicRelease(ppunk: CPointer<CPointer<Unit>>): Unit {
+    IUnknown_AtomicRelease(ppunk)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IUnknown_GetSite == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func IUnknown_GetSite(punk: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IUnknown_GetSite == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_IUnknown_GetSite(punk: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return IUnknown_GetSite(punk, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IUnknown_GetWindow == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func IUnknown_GetWindow(punk: CPointer<Unit>, phwnd: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IUnknown_GetWindow == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_IUnknown_GetWindow(punk: CPointer<Unit>, phwnd: CPointer<CPointer<Unit>>): Int32 {
+    return IUnknown_GetWindow(punk, phwnd)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IUnknown_QueryService == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: punk optional
+    func IUnknown_QueryService(punk: CPointer<Unit>, guidService: CPointer<GUID>, riid: CPointer<GUID>, ppvOut: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IUnknown_QueryService == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_IUnknown_QueryService(punk: CPointer<Unit>, guidService: CPointer<GUID>, riid: CPointer<GUID>, ppvOut: CPointer<CPointer<Unit>>): Int32 {
+    return IUnknown_QueryService(punk, guidService, riid, ppvOut)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IUnknown_Set == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: punk optional
+    func IUnknown_Set(ppunk: CPointer<CPointer<Unit>>, punk: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IUnknown_Set == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_IUnknown_Set(ppunk: CPointer<CPointer<Unit>>, punk: CPointer<Unit>): Unit {
+    IUnknown_Set(ppunk, punk)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IUnknown_SetSite == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: punkSite optional
+    func IUnknown_SetSite(punk: CPointer<Unit>, punkSite: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IUnknown_SetSite == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_IUnknown_SetSite(punk: CPointer<Unit>, punkSite: CPointer<Unit>): Int32 {
+    return IUnknown_SetSite(punk, punkSite)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IntlStrEqWorkerA == "on"]
+foreign {
+    // param-hint: lpString1 len=param[3]
+    // param-hint: lpString2 len=param[3]
+    func IntlStrEqWorkerA(fCaseSens: Int32, lpString1: CPointer<UInt8>, lpString2: CPointer<UInt8>, nChar: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IntlStrEqWorkerA == "on"]
+public unsafe func Windows_IntlStrEqWorkerA(fCaseSens: Int32, lpString1: CPointer<UInt8>, lpString2: CPointer<UInt8>, nChar: Int32): Int32 {
+    return IntlStrEqWorkerA(fCaseSens, lpString1, lpString2, nChar)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IntlStrEqWorkerW == "on"]
+foreign {
+    // param-hint: lpString1 len=param[3]
+    // param-hint: lpString2 len=param[3]
+    func IntlStrEqWorkerW(fCaseSens: Int32, lpString1: CPointer<UInt16>, lpString2: CPointer<UInt16>, nChar: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IntlStrEqWorkerW == "on"]
+public unsafe func Windows_IntlStrEqWorkerW(fCaseSens: Int32, lpString1: CPointer<UInt16>, lpString2: CPointer<UInt16>, nChar: Int32): Int32 {
+    return IntlStrEqWorkerW(fCaseSens, lpString1, lpString2, nChar)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IsCharSpaceA == "on"]
+foreign {
+    func IsCharSpaceA(wch: Int8): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IsCharSpaceA == "on"]
+public unsafe func Windows_IsCharSpaceA(wch: Int8): Int32 {
+    return IsCharSpaceA(wch)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IsCharSpaceW == "on"]
+foreign {
+    func IsCharSpaceW(wch: UInt16): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IsCharSpaceW == "on"]
+public unsafe func Windows_IsCharSpaceW(wch: UInt16): Int32 {
+    return IsCharSpaceW(wch)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IsInternetESCEnabled == "on"]
+foreign {
+    func IsInternetESCEnabled(): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IsInternetESCEnabled == "on"]
+public unsafe func Windows_IsInternetESCEnabled(): Int32 {
+    return IsInternetESCEnabled()
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IsOS == "on"]
+foreign {
+    func IsOS(dwOS: Win32__impl_l0.OSAbi): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IsOS == "on"]
+public unsafe func Windows_IsOS(dwOS: Win32__impl_l0.OSAbi): Int32 {
+    return IsOS(dwOS)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_ParseURLA == "on"]
+foreign {
+    func ParseURLA(pcszURL: CPointer<UInt8>, ppu: CPointer<Win32__impl_l0.PARSEDURLAAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_ParseURLA == "on"]
+public unsafe func Windows_ParseURLA(pcszURL: CPointer<UInt8>, ppu: CPointer<Win32__impl_l0.PARSEDURLAAbi>): Int32 {
+    return ParseURLA(pcszURL, ppu)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_ParseURLW == "on"]
+foreign {
+    func ParseURLW(pcszURL: CPointer<UInt16>, ppu: CPointer<Win32__impl_l0.PARSEDURLWAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_ParseURLW == "on"]
+public unsafe func Windows_ParseURLW(pcszURL: CPointer<UInt16>, ppu: CPointer<Win32__impl_l0.PARSEDURLWAbi>): Int32 {
+    return ParseURLW(pcszURL, ppu)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathAddBackslashA == "on"]
+foreign {
+    // param-hint: pszPath fixed=260
+    func PathAddBackslashA(pszPath: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathAddBackslashA == "on"]
+public unsafe func Windows_PathAddBackslashA(pszPath: CPointer<UInt8>): CPointer<UInt8> {
+    return PathAddBackslashA(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathAddBackslashW == "on"]
+foreign {
+    // param-hint: pszPath fixed=260
+    func PathAddBackslashW(pszPath: CPointer<UInt16>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathAddBackslashW == "on"]
+public unsafe func Windows_PathAddBackslashW(pszPath: CPointer<UInt16>): CPointer<UInt16> {
+    return PathAddBackslashW(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathAddExtensionA == "on"]
+foreign {
+    // param-hint: pszPath fixed=260
+    // param-hint: pszExt optional
+    func PathAddExtensionA(pszPath: CPointer<UInt8>, pszExt: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathAddExtensionA == "on"]
+public unsafe func Windows_PathAddExtensionA(pszPath: CPointer<UInt8>, pszExt: CPointer<UInt8>): Int32 {
+    return PathAddExtensionA(pszPath, pszExt)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathAddExtensionW == "on"]
+foreign {
+    // param-hint: pszPath fixed=260
+    // param-hint: pszExt optional
+    func PathAddExtensionW(pszPath: CPointer<UInt16>, pszExt: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathAddExtensionW == "on"]
+public unsafe func Windows_PathAddExtensionW(pszPath: CPointer<UInt16>, pszExt: CPointer<UInt16>): Int32 {
+    return PathAddExtensionW(pszPath, pszExt)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathAppendA == "on"]
+foreign {
+    // param-hint: pszPath fixed=260
+    func PathAppendA(pszPath: CPointer<UInt8>, pszMore: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathAppendA == "on"]
+public unsafe func Windows_PathAppendA(pszPath: CPointer<UInt8>, pszMore: CPointer<UInt8>): Int32 {
+    return PathAppendA(pszPath, pszMore)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathAppendW == "on"]
+foreign {
+    // param-hint: pszPath fixed=260
+    func PathAppendW(pszPath: CPointer<UInt16>, pszMore: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathAppendW == "on"]
+public unsafe func Windows_PathAppendW(pszPath: CPointer<UInt16>, pszMore: CPointer<UInt16>): Int32 {
+    return PathAppendW(pszPath, pszMore)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathBuildRootA == "on"]
+foreign {
+    // param-hint: pszRoot fixed=4
+    func PathBuildRootA(pszRoot: CPointer<UInt8>, iDrive: Int32): CPointer<UInt8>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathBuildRootA == "on"]
+public unsafe func Windows_PathBuildRootA(pszRoot: CPointer<UInt8>, iDrive: Int32): CPointer<UInt8> {
+    return PathBuildRootA(pszRoot, iDrive)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathBuildRootW == "on"]
+foreign {
+    // param-hint: pszRoot fixed=4
+    func PathBuildRootW(pszRoot: CPointer<UInt16>, iDrive: Int32): CPointer<UInt16>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathBuildRootW == "on"]
+public unsafe func Windows_PathBuildRootW(pszRoot: CPointer<UInt16>, iDrive: Int32): CPointer<UInt16> {
+    return PathBuildRootW(pszRoot, iDrive)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCanonicalizeA == "on"]
+foreign {
+    // param-hint: pszBuf fixed=260
+    // pinvoke-hint: SetLastError
+    func PathCanonicalizeA(pszBuf: CPointer<UInt8>, pszPath: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCanonicalizeA == "on"]
+public unsafe func Windows_PathCanonicalizeA(pszBuf: CPointer<UInt8>, pszPath: CPointer<UInt8>): Int32 {
+    return PathCanonicalizeA(pszBuf, pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCanonicalizeW == "on"]
+foreign {
+    // param-hint: pszBuf fixed=260
+    // pinvoke-hint: SetLastError
+    func PathCanonicalizeW(pszBuf: CPointer<UInt16>, pszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCanonicalizeW == "on"]
+public unsafe func Windows_PathCanonicalizeW(pszBuf: CPointer<UInt16>, pszPath: CPointer<UInt16>): Int32 {
+    return PathCanonicalizeW(pszBuf, pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCombineA == "on"]
+foreign {
+    // param-hint: pszDest fixed=260
+    // param-hint: pszDir optional
+    // param-hint: pszFile optional
+    func PathCombineA(pszDest: CPointer<UInt8>, pszDir: CPointer<UInt8>, pszFile: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCombineA == "on"]
+public unsafe func Windows_PathCombineA(pszDest: CPointer<UInt8>, pszDir: CPointer<UInt8>, pszFile: CPointer<UInt8>): CPointer<UInt8> {
+    return PathCombineA(pszDest, pszDir, pszFile)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCombineW == "on"]
+foreign {
+    // param-hint: pszDest fixed=260
+    // param-hint: pszDir optional
+    // param-hint: pszFile optional
+    func PathCombineW(pszDest: CPointer<UInt16>, pszDir: CPointer<UInt16>, pszFile: CPointer<UInt16>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCombineW == "on"]
+public unsafe func Windows_PathCombineW(pszDest: CPointer<UInt16>, pszDir: CPointer<UInt16>, pszFile: CPointer<UInt16>): CPointer<UInt16> {
+    return PathCombineW(pszDest, pszDir, pszFile)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCommonPrefixA == "on"]
+foreign {
+    // param-hint: achPath fixed=260 optional
+    func PathCommonPrefixA(pszFile1: CPointer<UInt8>, pszFile2: CPointer<UInt8>, achPath: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCommonPrefixA == "on"]
+public unsafe func Windows_PathCommonPrefixA(pszFile1: CPointer<UInt8>, pszFile2: CPointer<UInt8>, achPath: CPointer<UInt8>): Int32 {
+    return PathCommonPrefixA(pszFile1, pszFile2, achPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCommonPrefixW == "on"]
+foreign {
+    // param-hint: achPath fixed=260 optional
+    func PathCommonPrefixW(pszFile1: CPointer<UInt16>, pszFile2: CPointer<UInt16>, achPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCommonPrefixW == "on"]
+public unsafe func Windows_PathCommonPrefixW(pszFile1: CPointer<UInt16>, pszFile2: CPointer<UInt16>, achPath: CPointer<UInt16>): Int32 {
+    return PathCommonPrefixW(pszFile1, pszFile2, achPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCompactPathA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    // param-hint: hDC optional
+    // param-hint: pszPath fixed=260
+    func PathCompactPathA(hDC: Win32_Graphics_Gdi.HDC, pszPath: CPointer<UInt8>, dx: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCompactPathA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_PathCompactPathA(hDC: Win32_Graphics_Gdi.HDC, pszPath: CPointer<UInt8>, dx: UInt32): Int32 {
+    return PathCompactPathA(hDC, pszPath, dx)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCompactPathExA == "on"]
+foreign {
+    // param-hint: pszOut len=param[2]
+    func PathCompactPathExA(pszOut: CPointer<UInt8>, pszSrc: CPointer<UInt8>, cchMax: UInt32, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCompactPathExA == "on"]
+public unsafe func Windows_PathCompactPathExA(pszOut: CPointer<UInt8>, pszSrc: CPointer<UInt8>, cchMax: UInt32, dwFlags: UInt32): Int32 {
+    return PathCompactPathExA(pszOut, pszSrc, cchMax, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCompactPathExW == "on"]
+foreign {
+    // param-hint: pszOut len=param[2]
+    func PathCompactPathExW(pszOut: CPointer<UInt16>, pszSrc: CPointer<UInt16>, cchMax: UInt32, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCompactPathExW == "on"]
+public unsafe func Windows_PathCompactPathExW(pszOut: CPointer<UInt16>, pszSrc: CPointer<UInt16>, cchMax: UInt32, dwFlags: UInt32): Int32 {
+    return PathCompactPathExW(pszOut, pszSrc, cchMax, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCompactPathW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    // param-hint: hDC optional
+    // param-hint: pszPath fixed=260
+    func PathCompactPathW(hDC: Win32_Graphics_Gdi.HDC, pszPath: CPointer<UInt16>, dx: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCompactPathW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_PathCompactPathW(hDC: Win32_Graphics_Gdi.HDC, pszPath: CPointer<UInt16>, dx: UInt32): Int32 {
+    return PathCompactPathW(hDC, pszPath, dx)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCreateFromUrlA == "on"]
+foreign {
+    // param-hint: pszPath len=param[2]
+    func PathCreateFromUrlA(pszUrl: CPointer<UInt8>, pszPath: CPointer<UInt8>, pcchPath: CPointer<UInt32>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCreateFromUrlA == "on"]
+public unsafe func Windows_PathCreateFromUrlA(pszUrl: CPointer<UInt8>, pszPath: CPointer<UInt8>, pcchPath: CPointer<UInt32>, dwFlags: UInt32): Int32 {
+    return PathCreateFromUrlA(pszUrl, pszPath, pcchPath, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCreateFromUrlAlloc == "on"]
+foreign {
+    func PathCreateFromUrlAlloc(pszIn: CPointer<UInt16>, ppszOut: CPointer<CPointer<UInt16>>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCreateFromUrlAlloc == "on"]
+public unsafe func Windows_PathCreateFromUrlAlloc(pszIn: CPointer<UInt16>, ppszOut: CPointer<CPointer<UInt16>>, dwFlags: UInt32): Int32 {
+    return PathCreateFromUrlAlloc(pszIn, ppszOut, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCreateFromUrlW == "on"]
+foreign {
+    // param-hint: pszPath len=param[2]
+    func PathCreateFromUrlW(pszUrl: CPointer<UInt16>, pszPath: CPointer<UInt16>, pcchPath: CPointer<UInt32>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCreateFromUrlW == "on"]
+public unsafe func Windows_PathCreateFromUrlW(pszUrl: CPointer<UInt16>, pszPath: CPointer<UInt16>, pcchPath: CPointer<UInt32>, dwFlags: UInt32): Int32 {
+    return PathCreateFromUrlW(pszUrl, pszPath, pcchPath, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFileExistsA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func PathFileExistsA(pszPath: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFileExistsA == "on"]
+public unsafe func Windows_PathFileExistsA(pszPath: CPointer<UInt8>): Int32 {
+    return PathFileExistsA(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFileExistsW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func PathFileExistsW(pszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFileExistsW == "on"]
+public unsafe func Windows_PathFileExistsW(pszPath: CPointer<UInt16>): Int32 {
+    return PathFileExistsW(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFindExtensionA == "on"]
+foreign {
+    func PathFindExtensionA(pszPath: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFindExtensionA == "on"]
+public unsafe func Windows_PathFindExtensionA(pszPath: CPointer<UInt8>): CPointer<UInt8> {
+    return PathFindExtensionA(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFindExtensionW == "on"]
+foreign {
+    func PathFindExtensionW(pszPath: CPointer<UInt16>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFindExtensionW == "on"]
+public unsafe func Windows_PathFindExtensionW(pszPath: CPointer<UInt16>): CPointer<UInt16> {
+    return PathFindExtensionW(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFindFileNameA == "on"]
+foreign {
+    func PathFindFileNameA(pszPath: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFindFileNameA == "on"]
+public unsafe func Windows_PathFindFileNameA(pszPath: CPointer<UInt8>): CPointer<UInt8> {
+    return PathFindFileNameA(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFindFileNameW == "on"]
+foreign {
+    func PathFindFileNameW(pszPath: CPointer<UInt16>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFindFileNameW == "on"]
+public unsafe func Windows_PathFindFileNameW(pszPath: CPointer<UInt16>): CPointer<UInt16> {
+    return PathFindFileNameW(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFindNextComponentA == "on"]
+foreign {
+    func PathFindNextComponentA(pszPath: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFindNextComponentA == "on"]
+public unsafe func Windows_PathFindNextComponentA(pszPath: CPointer<UInt8>): CPointer<UInt8> {
+    return PathFindNextComponentA(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFindNextComponentW == "on"]
+foreign {
+    func PathFindNextComponentW(pszPath: CPointer<UInt16>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFindNextComponentW == "on"]
+public unsafe func Windows_PathFindNextComponentW(pszPath: CPointer<UInt16>): CPointer<UInt16> {
+    return PathFindNextComponentW(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFindOnPathA == "on"]
+foreign {
+    // param-hint: pszPath fixed=260
+    // param-hint: ppszOtherDirs optional
+    func PathFindOnPathA(pszPath: CPointer<UInt8>, ppszOtherDirs: CPointer<CPointer<Int8>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFindOnPathA == "on"]
+public unsafe func Windows_PathFindOnPathA(pszPath: CPointer<UInt8>, ppszOtherDirs: CPointer<CPointer<Int8>>): Int32 {
+    return PathFindOnPathA(pszPath, ppszOtherDirs)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFindOnPathW == "on"]
+foreign {
+    // param-hint: pszPath fixed=260
+    // param-hint: ppszOtherDirs optional
+    func PathFindOnPathW(pszPath: CPointer<UInt16>, ppszOtherDirs: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFindOnPathW == "on"]
+public unsafe func Windows_PathFindOnPathW(pszPath: CPointer<UInt16>, ppszOtherDirs: CPointer<CPointer<UInt16>>): Int32 {
+    return PathFindOnPathW(pszPath, ppszOtherDirs)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFindSuffixArrayA == "on"]
+foreign {
+    // param-hint: apszSuffix len=param[2]
+    func PathFindSuffixArrayA(pszPath: CPointer<UInt8>, apszSuffix: CPointer<CPointer<UInt8>>, iArraySize: Int32): CPointer<UInt8>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFindSuffixArrayA == "on"]
+public unsafe func Windows_PathFindSuffixArrayA(pszPath: CPointer<UInt8>, apszSuffix: CPointer<CPointer<UInt8>>, iArraySize: Int32): CPointer<UInt8> {
+    return PathFindSuffixArrayA(pszPath, apszSuffix, iArraySize)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFindSuffixArrayW == "on"]
+foreign {
+    // param-hint: apszSuffix len=param[2]
+    func PathFindSuffixArrayW(pszPath: CPointer<UInt16>, apszSuffix: CPointer<CPointer<UInt16>>, iArraySize: Int32): CPointer<UInt16>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFindSuffixArrayW == "on"]
+public unsafe func Windows_PathFindSuffixArrayW(pszPath: CPointer<UInt16>, apszSuffix: CPointer<CPointer<UInt16>>, iArraySize: Int32): CPointer<UInt16> {
+    return PathFindSuffixArrayW(pszPath, apszSuffix, iArraySize)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathGetArgsA == "on"]
+foreign {
+    func PathGetArgsA(pszPath: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathGetArgsA == "on"]
+public unsafe func Windows_PathGetArgsA(pszPath: CPointer<UInt8>): CPointer<UInt8> {
+    return PathGetArgsA(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathGetArgsW == "on"]
+foreign {
+    func PathGetArgsW(pszPath: CPointer<UInt16>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathGetArgsW == "on"]
+public unsafe func Windows_PathGetArgsW(pszPath: CPointer<UInt16>): CPointer<UInt16> {
+    return PathGetArgsW(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathGetCharTypeA == "on"]
+foreign {
+    func PathGetCharTypeA(ch: UInt8): UInt32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathGetCharTypeA == "on"]
+public unsafe func Windows_PathGetCharTypeA(ch: UInt8): UInt32 {
+    return PathGetCharTypeA(ch)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathGetCharTypeW == "on"]
+foreign {
+    func PathGetCharTypeW(ch: UInt16): UInt32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathGetCharTypeW == "on"]
+public unsafe func Windows_PathGetCharTypeW(ch: UInt16): UInt32 {
+    return PathGetCharTypeW(ch)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathGetDriveNumberA == "on"]
+foreign {
+    func PathGetDriveNumberA(pszPath: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathGetDriveNumberA == "on"]
+public unsafe func Windows_PathGetDriveNumberA(pszPath: CPointer<UInt8>): Int32 {
+    return PathGetDriveNumberA(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathGetDriveNumberW == "on"]
+foreign {
+    func PathGetDriveNumberW(pszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathGetDriveNumberW == "on"]
+public unsafe func Windows_PathGetDriveNumberW(pszPath: CPointer<UInt16>): Int32 {
+    return PathGetDriveNumberW(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsContentTypeA == "on"]
+foreign {
+    func PathIsContentTypeA(pszPath: CPointer<UInt8>, pszContentType: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsContentTypeA == "on"]
+public unsafe func Windows_PathIsContentTypeA(pszPath: CPointer<UInt8>, pszContentType: CPointer<UInt8>): Int32 {
+    return PathIsContentTypeA(pszPath, pszContentType)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsContentTypeW == "on"]
+foreign {
+    func PathIsContentTypeW(pszPath: CPointer<UInt16>, pszContentType: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsContentTypeW == "on"]
+public unsafe func Windows_PathIsContentTypeW(pszPath: CPointer<UInt16>, pszContentType: CPointer<UInt16>): Int32 {
+    return PathIsContentTypeW(pszPath, pszContentType)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsDirectoryA == "on"]
+foreign {
+    func PathIsDirectoryA(pszPath: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsDirectoryA == "on"]
+public unsafe func Windows_PathIsDirectoryA(pszPath: CPointer<UInt8>): Int32 {
+    return PathIsDirectoryA(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsDirectoryEmptyA == "on"]
+foreign {
+    func PathIsDirectoryEmptyA(pszPath: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsDirectoryEmptyA == "on"]
+public unsafe func Windows_PathIsDirectoryEmptyA(pszPath: CPointer<UInt8>): Int32 {
+    return PathIsDirectoryEmptyA(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsDirectoryEmptyW == "on"]
+foreign {
+    func PathIsDirectoryEmptyW(pszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsDirectoryEmptyW == "on"]
+public unsafe func Windows_PathIsDirectoryEmptyW(pszPath: CPointer<UInt16>): Int32 {
+    return PathIsDirectoryEmptyW(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsDirectoryW == "on"]
+foreign {
+    func PathIsDirectoryW(pszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsDirectoryW == "on"]
+public unsafe func Windows_PathIsDirectoryW(pszPath: CPointer<UInt16>): Int32 {
+    return PathIsDirectoryW(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsFileSpecA == "on"]
+foreign {
+    func PathIsFileSpecA(pszPath: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsFileSpecA == "on"]
+public unsafe func Windows_PathIsFileSpecA(pszPath: CPointer<UInt8>): Int32 {
+    return PathIsFileSpecA(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsFileSpecW == "on"]
+foreign {
+    func PathIsFileSpecW(pszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsFileSpecW == "on"]
+public unsafe func Windows_PathIsFileSpecW(pszPath: CPointer<UInt16>): Int32 {
+    return PathIsFileSpecW(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsLFNFileSpecA == "on"]
+foreign {
+    func PathIsLFNFileSpecA(pszName: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsLFNFileSpecA == "on"]
+public unsafe func Windows_PathIsLFNFileSpecA(pszName: CPointer<UInt8>): Int32 {
+    return PathIsLFNFileSpecA(pszName)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsLFNFileSpecW == "on"]
+foreign {
+    func PathIsLFNFileSpecW(pszName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsLFNFileSpecW == "on"]
+public unsafe func Windows_PathIsLFNFileSpecW(pszName: CPointer<UInt16>): Int32 {
+    return PathIsLFNFileSpecW(pszName)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsNetworkPathA == "on"]
+foreign {
+    func PathIsNetworkPathA(pszPath: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsNetworkPathA == "on"]
+public unsafe func Windows_PathIsNetworkPathA(pszPath: CPointer<UInt8>): Int32 {
+    return PathIsNetworkPathA(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsNetworkPathW == "on"]
+foreign {
+    func PathIsNetworkPathW(pszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsNetworkPathW == "on"]
+public unsafe func Windows_PathIsNetworkPathW(pszPath: CPointer<UInt16>): Int32 {
+    return PathIsNetworkPathW(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsPrefixA == "on"]
+foreign {
+    func PathIsPrefixA(pszPrefix: CPointer<UInt8>, pszPath: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsPrefixA == "on"]
+public unsafe func Windows_PathIsPrefixA(pszPrefix: CPointer<UInt8>, pszPath: CPointer<UInt8>): Int32 {
+    return PathIsPrefixA(pszPrefix, pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsPrefixW == "on"]
+foreign {
+    func PathIsPrefixW(pszPrefix: CPointer<UInt16>, pszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsPrefixW == "on"]
+public unsafe func Windows_PathIsPrefixW(pszPrefix: CPointer<UInt16>, pszPath: CPointer<UInt16>): Int32 {
+    return PathIsPrefixW(pszPrefix, pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsRelativeA == "on"]
+foreign {
+    func PathIsRelativeA(pszPath: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsRelativeA == "on"]
+public unsafe func Windows_PathIsRelativeA(pszPath: CPointer<UInt8>): Int32 {
+    return PathIsRelativeA(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsRelativeW == "on"]
+foreign {
+    func PathIsRelativeW(pszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsRelativeW == "on"]
+public unsafe func Windows_PathIsRelativeW(pszPath: CPointer<UInt16>): Int32 {
+    return PathIsRelativeW(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsRootA == "on"]
+foreign {
+    func PathIsRootA(pszPath: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsRootA == "on"]
+public unsafe func Windows_PathIsRootA(pszPath: CPointer<UInt8>): Int32 {
+    return PathIsRootA(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsRootW == "on"]
+foreign {
+    func PathIsRootW(pszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsRootW == "on"]
+public unsafe func Windows_PathIsRootW(pszPath: CPointer<UInt16>): Int32 {
+    return PathIsRootW(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsSameRootA == "on"]
+foreign {
+    func PathIsSameRootA(pszPath1: CPointer<UInt8>, pszPath2: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsSameRootA == "on"]
+public unsafe func Windows_PathIsSameRootA(pszPath1: CPointer<UInt8>, pszPath2: CPointer<UInt8>): Int32 {
+    return PathIsSameRootA(pszPath1, pszPath2)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsSameRootW == "on"]
+foreign {
+    func PathIsSameRootW(pszPath1: CPointer<UInt16>, pszPath2: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsSameRootW == "on"]
+public unsafe func Windows_PathIsSameRootW(pszPath1: CPointer<UInt16>, pszPath2: CPointer<UInt16>): Int32 {
+    return PathIsSameRootW(pszPath1, pszPath2)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsSystemFolderA == "on"]
+foreign {
+    // param-hint: pszPath optional
+    func PathIsSystemFolderA(pszPath: CPointer<UInt8>, dwAttrb: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsSystemFolderA == "on"]
+public unsafe func Windows_PathIsSystemFolderA(pszPath: CPointer<UInt8>, dwAttrb: UInt32): Int32 {
+    return PathIsSystemFolderA(pszPath, dwAttrb)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsSystemFolderW == "on"]
+foreign {
+    // param-hint: pszPath optional
+    func PathIsSystemFolderW(pszPath: CPointer<UInt16>, dwAttrb: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsSystemFolderW == "on"]
+public unsafe func Windows_PathIsSystemFolderW(pszPath: CPointer<UInt16>, dwAttrb: UInt32): Int32 {
+    return PathIsSystemFolderW(pszPath, dwAttrb)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsUNCA == "on"]
+foreign {
+    func PathIsUNCA(pszPath: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsUNCA == "on"]
+public unsafe func Windows_PathIsUNCA(pszPath: CPointer<UInt8>): Int32 {
+    return PathIsUNCA(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsUNCServerA == "on"]
+foreign {
+    func PathIsUNCServerA(pszPath: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsUNCServerA == "on"]
+public unsafe func Windows_PathIsUNCServerA(pszPath: CPointer<UInt8>): Int32 {
+    return PathIsUNCServerA(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsUNCServerShareA == "on"]
+foreign {
+    func PathIsUNCServerShareA(pszPath: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsUNCServerShareA == "on"]
+public unsafe func Windows_PathIsUNCServerShareA(pszPath: CPointer<UInt8>): Int32 {
+    return PathIsUNCServerShareA(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsUNCServerShareW == "on"]
+foreign {
+    func PathIsUNCServerShareW(pszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsUNCServerShareW == "on"]
+public unsafe func Windows_PathIsUNCServerShareW(pszPath: CPointer<UInt16>): Int32 {
+    return PathIsUNCServerShareW(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsUNCServerW == "on"]
+foreign {
+    func PathIsUNCServerW(pszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsUNCServerW == "on"]
+public unsafe func Windows_PathIsUNCServerW(pszPath: CPointer<UInt16>): Int32 {
+    return PathIsUNCServerW(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsUNCW == "on"]
+foreign {
+    func PathIsUNCW(pszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsUNCW == "on"]
+public unsafe func Windows_PathIsUNCW(pszPath: CPointer<UInt16>): Int32 {
+    return PathIsUNCW(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsURLA == "on"]
+foreign {
+    func PathIsURLA(pszPath: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsURLA == "on"]
+public unsafe func Windows_PathIsURLA(pszPath: CPointer<UInt8>): Int32 {
+    return PathIsURLA(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsURLW == "on"]
+foreign {
+    func PathIsURLW(pszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsURLW == "on"]
+public unsafe func Windows_PathIsURLW(pszPath: CPointer<UInt16>): Int32 {
+    return PathIsURLW(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathMakePrettyA == "on"]
+foreign {
+    func PathMakePrettyA(pszPath: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathMakePrettyA == "on"]
+public unsafe func Windows_PathMakePrettyA(pszPath: CPointer<UInt8>): Int32 {
+    return PathMakePrettyA(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathMakePrettyW == "on"]
+foreign {
+    func PathMakePrettyW(pszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathMakePrettyW == "on"]
+public unsafe func Windows_PathMakePrettyW(pszPath: CPointer<UInt16>): Int32 {
+    return PathMakePrettyW(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathMakeSystemFolderA == "on"]
+foreign {
+    func PathMakeSystemFolderA(pszPath: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathMakeSystemFolderA == "on"]
+public unsafe func Windows_PathMakeSystemFolderA(pszPath: CPointer<UInt8>): Int32 {
+    return PathMakeSystemFolderA(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathMakeSystemFolderW == "on"]
+foreign {
+    func PathMakeSystemFolderW(pszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathMakeSystemFolderW == "on"]
+public unsafe func Windows_PathMakeSystemFolderW(pszPath: CPointer<UInt16>): Int32 {
+    return PathMakeSystemFolderW(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathMatchSpecA == "on"]
+foreign {
+    func PathMatchSpecA(pszFile: CPointer<UInt8>, pszSpec: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathMatchSpecA == "on"]
+public unsafe func Windows_PathMatchSpecA(pszFile: CPointer<UInt8>, pszSpec: CPointer<UInt8>): Int32 {
+    return PathMatchSpecA(pszFile, pszSpec)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathMatchSpecExA == "on"]
+foreign {
+    func PathMatchSpecExA(pszFile: CPointer<UInt8>, pszSpec: CPointer<UInt8>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathMatchSpecExA == "on"]
+public unsafe func Windows_PathMatchSpecExA(pszFile: CPointer<UInt8>, pszSpec: CPointer<UInt8>, dwFlags: UInt32): Int32 {
+    return PathMatchSpecExA(pszFile, pszSpec, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathMatchSpecExW == "on"]
+foreign {
+    func PathMatchSpecExW(pszFile: CPointer<UInt16>, pszSpec: CPointer<UInt16>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathMatchSpecExW == "on"]
+public unsafe func Windows_PathMatchSpecExW(pszFile: CPointer<UInt16>, pszSpec: CPointer<UInt16>, dwFlags: UInt32): Int32 {
+    return PathMatchSpecExW(pszFile, pszSpec, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathMatchSpecW == "on"]
+foreign {
+    func PathMatchSpecW(pszFile: CPointer<UInt16>, pszSpec: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathMatchSpecW == "on"]
+public unsafe func Windows_PathMatchSpecW(pszFile: CPointer<UInt16>, pszSpec: CPointer<UInt16>): Int32 {
+    return PathMatchSpecW(pszFile, pszSpec)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathParseIconLocationA == "on"]
+foreign {
+    func PathParseIconLocationA(pszIconFile: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathParseIconLocationA == "on"]
+public unsafe func Windows_PathParseIconLocationA(pszIconFile: CPointer<UInt8>): Int32 {
+    return PathParseIconLocationA(pszIconFile)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathParseIconLocationW == "on"]
+foreign {
+    func PathParseIconLocationW(pszIconFile: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathParseIconLocationW == "on"]
+public unsafe func Windows_PathParseIconLocationW(pszIconFile: CPointer<UInt16>): Int32 {
+    return PathParseIconLocationW(pszIconFile)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathQuoteSpacesA == "on"]
+foreign {
+    // param-hint: lpsz fixed=260
+    func PathQuoteSpacesA(lpsz: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathQuoteSpacesA == "on"]
+public unsafe func Windows_PathQuoteSpacesA(lpsz: CPointer<UInt8>): Int32 {
+    return PathQuoteSpacesA(lpsz)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathQuoteSpacesW == "on"]
+foreign {
+    // param-hint: lpsz fixed=260
+    func PathQuoteSpacesW(lpsz: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathQuoteSpacesW == "on"]
+public unsafe func Windows_PathQuoteSpacesW(lpsz: CPointer<UInt16>): Int32 {
+    return PathQuoteSpacesW(lpsz)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRelativePathToA == "on"]
+foreign {
+    // param-hint: pszPath fixed=260
+    func PathRelativePathToA(pszPath: CPointer<UInt8>, pszFrom: CPointer<UInt8>, dwAttrFrom: UInt32, pszTo: CPointer<UInt8>, dwAttrTo: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRelativePathToA == "on"]
+public unsafe func Windows_PathRelativePathToA(pszPath: CPointer<UInt8>, pszFrom: CPointer<UInt8>, dwAttrFrom: UInt32, pszTo: CPointer<UInt8>, dwAttrTo: UInt32): Int32 {
+    return PathRelativePathToA(pszPath, pszFrom, dwAttrFrom, pszTo, dwAttrTo)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRelativePathToW == "on"]
+foreign {
+    // param-hint: pszPath fixed=260
+    func PathRelativePathToW(pszPath: CPointer<UInt16>, pszFrom: CPointer<UInt16>, dwAttrFrom: UInt32, pszTo: CPointer<UInt16>, dwAttrTo: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRelativePathToW == "on"]
+public unsafe func Windows_PathRelativePathToW(pszPath: CPointer<UInt16>, pszFrom: CPointer<UInt16>, dwAttrFrom: UInt32, pszTo: CPointer<UInt16>, dwAttrTo: UInt32): Int32 {
+    return PathRelativePathToW(pszPath, pszFrom, dwAttrFrom, pszTo, dwAttrTo)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRemoveArgsA == "on"]
+foreign {
+    func PathRemoveArgsA(pszPath: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRemoveArgsA == "on"]
+public unsafe func Windows_PathRemoveArgsA(pszPath: CPointer<UInt8>): Unit {
+    PathRemoveArgsA(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRemoveArgsW == "on"]
+foreign {
+    func PathRemoveArgsW(pszPath: CPointer<UInt16>): Unit
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRemoveArgsW == "on"]
+public unsafe func Windows_PathRemoveArgsW(pszPath: CPointer<UInt16>): Unit {
+    PathRemoveArgsW(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRemoveBackslashA == "on"]
+foreign {
+    func PathRemoveBackslashA(pszPath: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRemoveBackslashA == "on"]
+public unsafe func Windows_PathRemoveBackslashA(pszPath: CPointer<UInt8>): CPointer<UInt8> {
+    return PathRemoveBackslashA(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRemoveBackslashW == "on"]
+foreign {
+    func PathRemoveBackslashW(pszPath: CPointer<UInt16>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRemoveBackslashW == "on"]
+public unsafe func Windows_PathRemoveBackslashW(pszPath: CPointer<UInt16>): CPointer<UInt16> {
+    return PathRemoveBackslashW(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRemoveBlanksA == "on"]
+foreign {
+    func PathRemoveBlanksA(pszPath: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRemoveBlanksA == "on"]
+public unsafe func Windows_PathRemoveBlanksA(pszPath: CPointer<UInt8>): Unit {
+    PathRemoveBlanksA(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRemoveBlanksW == "on"]
+foreign {
+    func PathRemoveBlanksW(pszPath: CPointer<UInt16>): Unit
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRemoveBlanksW == "on"]
+public unsafe func Windows_PathRemoveBlanksW(pszPath: CPointer<UInt16>): Unit {
+    PathRemoveBlanksW(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRemoveExtensionA == "on"]
+foreign {
+    func PathRemoveExtensionA(pszPath: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRemoveExtensionA == "on"]
+public unsafe func Windows_PathRemoveExtensionA(pszPath: CPointer<UInt8>): Unit {
+    PathRemoveExtensionA(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRemoveExtensionW == "on"]
+foreign {
+    func PathRemoveExtensionW(pszPath: CPointer<UInt16>): Unit
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRemoveExtensionW == "on"]
+public unsafe func Windows_PathRemoveExtensionW(pszPath: CPointer<UInt16>): Unit {
+    PathRemoveExtensionW(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRemoveFileSpecA == "on"]
+foreign {
+    func PathRemoveFileSpecA(pszPath: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRemoveFileSpecA == "on"]
+public unsafe func Windows_PathRemoveFileSpecA(pszPath: CPointer<UInt8>): Int32 {
+    return PathRemoveFileSpecA(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRemoveFileSpecW == "on"]
+foreign {
+    func PathRemoveFileSpecW(pszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRemoveFileSpecW == "on"]
+public unsafe func Windows_PathRemoveFileSpecW(pszPath: CPointer<UInt16>): Int32 {
+    return PathRemoveFileSpecW(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRenameExtensionA == "on"]
+foreign {
+    // param-hint: pszPath fixed=260
+    func PathRenameExtensionA(pszPath: CPointer<UInt8>, pszExt: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRenameExtensionA == "on"]
+public unsafe func Windows_PathRenameExtensionA(pszPath: CPointer<UInt8>, pszExt: CPointer<UInt8>): Int32 {
+    return PathRenameExtensionA(pszPath, pszExt)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRenameExtensionW == "on"]
+foreign {
+    // param-hint: pszPath fixed=260
+    func PathRenameExtensionW(pszPath: CPointer<UInt16>, pszExt: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRenameExtensionW == "on"]
+public unsafe func Windows_PathRenameExtensionW(pszPath: CPointer<UInt16>, pszExt: CPointer<UInt16>): Int32 {
+    return PathRenameExtensionW(pszPath, pszExt)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathSearchAndQualifyA == "on"]
+foreign {
+    // param-hint: pszBuf len=param[2]
+    func PathSearchAndQualifyA(pszPath: CPointer<UInt8>, pszBuf: CPointer<UInt8>, cchBuf: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathSearchAndQualifyA == "on"]
+public unsafe func Windows_PathSearchAndQualifyA(pszPath: CPointer<UInt8>, pszBuf: CPointer<UInt8>, cchBuf: UInt32): Int32 {
+    return PathSearchAndQualifyA(pszPath, pszBuf, cchBuf)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathSearchAndQualifyW == "on"]
+foreign {
+    // param-hint: pszBuf len=param[2]
+    func PathSearchAndQualifyW(pszPath: CPointer<UInt16>, pszBuf: CPointer<UInt16>, cchBuf: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathSearchAndQualifyW == "on"]
+public unsafe func Windows_PathSearchAndQualifyW(pszPath: CPointer<UInt16>, pszBuf: CPointer<UInt16>, cchBuf: UInt32): Int32 {
+    return PathSearchAndQualifyW(pszPath, pszBuf, cchBuf)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathSetDlgItemPathA == "on"]
+foreign {
+    func PathSetDlgItemPathA(hDlg: CPointer<Unit>, id: Int32, pszPath: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathSetDlgItemPathA == "on"]
+public unsafe func Windows_PathSetDlgItemPathA(hDlg: CPointer<Unit>, id: Int32, pszPath: CPointer<UInt8>): Unit {
+    PathSetDlgItemPathA(hDlg, id, pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathSetDlgItemPathW == "on"]
+foreign {
+    func PathSetDlgItemPathW(hDlg: CPointer<Unit>, id: Int32, pszPath: CPointer<UInt16>): Unit
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathSetDlgItemPathW == "on"]
+public unsafe func Windows_PathSetDlgItemPathW(hDlg: CPointer<Unit>, id: Int32, pszPath: CPointer<UInt16>): Unit {
+    PathSetDlgItemPathW(hDlg, id, pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathSkipRootA == "on"]
+foreign {
+    func PathSkipRootA(pszPath: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathSkipRootA == "on"]
+public unsafe func Windows_PathSkipRootA(pszPath: CPointer<UInt8>): CPointer<UInt8> {
+    return PathSkipRootA(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathSkipRootW == "on"]
+foreign {
+    func PathSkipRootW(pszPath: CPointer<UInt16>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathSkipRootW == "on"]
+public unsafe func Windows_PathSkipRootW(pszPath: CPointer<UInt16>): CPointer<UInt16> {
+    return PathSkipRootW(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathStripPathA == "on"]
+foreign {
+    func PathStripPathA(pszPath: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathStripPathA == "on"]
+public unsafe func Windows_PathStripPathA(pszPath: CPointer<UInt8>): Unit {
+    PathStripPathA(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathStripPathW == "on"]
+foreign {
+    func PathStripPathW(pszPath: CPointer<UInt16>): Unit
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathStripPathW == "on"]
+public unsafe func Windows_PathStripPathW(pszPath: CPointer<UInt16>): Unit {
+    PathStripPathW(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathStripToRootA == "on"]
+foreign {
+    func PathStripToRootA(pszPath: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathStripToRootA == "on"]
+public unsafe func Windows_PathStripToRootA(pszPath: CPointer<UInt8>): Int32 {
+    return PathStripToRootA(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathStripToRootW == "on"]
+foreign {
+    func PathStripToRootW(pszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathStripToRootW == "on"]
+public unsafe func Windows_PathStripToRootW(pszPath: CPointer<UInt16>): Int32 {
+    return PathStripToRootW(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathUnExpandEnvStringsA == "on"]
+foreign {
+    // param-hint: pszBuf len=param[2]
+    func PathUnExpandEnvStringsA(pszPath: CPointer<UInt8>, pszBuf: CPointer<UInt8>, cchBuf: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathUnExpandEnvStringsA == "on"]
+public unsafe func Windows_PathUnExpandEnvStringsA(pszPath: CPointer<UInt8>, pszBuf: CPointer<UInt8>, cchBuf: UInt32): Int32 {
+    return PathUnExpandEnvStringsA(pszPath, pszBuf, cchBuf)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathUnExpandEnvStringsW == "on"]
+foreign {
+    // param-hint: pszBuf len=param[2]
+    func PathUnExpandEnvStringsW(pszPath: CPointer<UInt16>, pszBuf: CPointer<UInt16>, cchBuf: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathUnExpandEnvStringsW == "on"]
+public unsafe func Windows_PathUnExpandEnvStringsW(pszPath: CPointer<UInt16>, pszBuf: CPointer<UInt16>, cchBuf: UInt32): Int32 {
+    return PathUnExpandEnvStringsW(pszPath, pszBuf, cchBuf)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathUndecorateA == "on"]
+foreign {
+    func PathUndecorateA(pszPath: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathUndecorateA == "on"]
+public unsafe func Windows_PathUndecorateA(pszPath: CPointer<UInt8>): Unit {
+    PathUndecorateA(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathUndecorateW == "on"]
+foreign {
+    func PathUndecorateW(pszPath: CPointer<UInt16>): Unit
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathUndecorateW == "on"]
+public unsafe func Windows_PathUndecorateW(pszPath: CPointer<UInt16>): Unit {
+    PathUndecorateW(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathUnmakeSystemFolderA == "on"]
+foreign {
+    func PathUnmakeSystemFolderA(pszPath: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathUnmakeSystemFolderA == "on"]
+public unsafe func Windows_PathUnmakeSystemFolderA(pszPath: CPointer<UInt8>): Int32 {
+    return PathUnmakeSystemFolderA(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathUnmakeSystemFolderW == "on"]
+foreign {
+    func PathUnmakeSystemFolderW(pszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathUnmakeSystemFolderW == "on"]
+public unsafe func Windows_PathUnmakeSystemFolderW(pszPath: CPointer<UInt16>): Int32 {
+    return PathUnmakeSystemFolderW(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathUnquoteSpacesA == "on"]
+foreign {
+    func PathUnquoteSpacesA(lpsz: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathUnquoteSpacesA == "on"]
+public unsafe func Windows_PathUnquoteSpacesA(lpsz: CPointer<UInt8>): Int32 {
+    return PathUnquoteSpacesA(lpsz)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathUnquoteSpacesW == "on"]
+foreign {
+    func PathUnquoteSpacesW(lpsz: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathUnquoteSpacesW == "on"]
+public unsafe func Windows_PathUnquoteSpacesW(lpsz: CPointer<UInt16>): Int32 {
+    return PathUnquoteSpacesW(lpsz)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_QISearch == "on"]
+foreign {
+    func QISearch(that: CPointer<Unit>, pqit: CPointer<Win32__impl_l0.QITABAbi>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_QISearch == "on"]
+public unsafe func Windows_QISearch(that: CPointer<Unit>, pqit: CPointer<Win32__impl_l0.QITABAbi>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return QISearch(that, pqit, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHAllocShared == "on"]
+foreign {
+    // param-hint: pvData bytes=param[1] optional
+    func SHAllocShared(pvData: CPointer<Unit>, dwSize: UInt32, dwProcessId: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHAllocShared == "on"]
+public unsafe func Windows_SHAllocShared(pvData: CPointer<Unit>, dwSize: UInt32, dwProcessId: UInt32): CPointer<Unit> {
+    return SHAllocShared(pvData, dwSize, dwProcessId)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHAnsiToAnsi == "on"]
+foreign {
+    // param-hint: pszDst len=param[2]
+    func SHAnsiToAnsi(pszSrc: CPointer<UInt8>, pszDst: CPointer<UInt8>, cchBuf: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHAnsiToAnsi == "on"]
+public unsafe func Windows_SHAnsiToAnsi(pszSrc: CPointer<UInt8>, pszDst: CPointer<UInt8>, cchBuf: Int32): Int32 {
+    return SHAnsiToAnsi(pszSrc, pszDst, cchBuf)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHAnsiToUnicode == "on"]
+foreign {
+    // param-hint: pwszDst len=param[2]
+    func SHAnsiToUnicode(pszSrc: CPointer<UInt8>, pwszDst: CPointer<UInt16>, cwchBuf: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHAnsiToUnicode == "on"]
+public unsafe func Windows_SHAnsiToUnicode(pszSrc: CPointer<UInt8>, pwszDst: CPointer<UInt16>, cwchBuf: Int32): Int32 {
+    return SHAnsiToUnicode(pszSrc, pwszDst, cwchBuf)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHAutoComplete == "on"]
+foreign {
+    func SHAutoComplete(hwndEdit: CPointer<Unit>, dwFlags: Win32__impl_l0.SHELL_AUTOCOMPLETE_FLAGSAbi): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHAutoComplete == "on"]
+public unsafe func Windows_SHAutoComplete(hwndEdit: CPointer<Unit>, dwFlags: Win32__impl_l0.SHELL_AUTOCOMPLETE_FLAGSAbi): Int32 {
+    return SHAutoComplete(hwndEdit, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHCopyKeyA == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: pszSrcSubKey optional
     // param-hint: fReserved optional reserved
     func SHCopyKeyA(hkeySrc: Win32_System_Registry.HKEY, pszSrcSubKey: CPointer<UInt8>, hkeyDest: Win32_System_Registry.HKEY, fReserved: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHCopyKeyA == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHCopyKeyA(hkeySrc: Win32_System_Registry.HKEY, pszSrcSubKey: CPointer<UInt8>, hkeyDest: Win32_System_Registry.HKEY, fReserved: UInt32): windows_core.WIN32_ERROR {
+    return SHCopyKeyA(hkeySrc, pszSrcSubKey, hkeyDest, fReserved)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHCopyKeyW == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: pszSrcSubKey optional
     // param-hint: fReserved optional reserved
     func SHCopyKeyW(hkeySrc: Win32_System_Registry.HKEY, pszSrcSubKey: CPointer<UInt16>, hkeyDest: Win32_System_Registry.HKEY, fReserved: UInt32): windows_core.WIN32_ERROR
-    // param-hint: pszSubKey optional
-    func SHDeleteEmptyKeyA(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt8>): windows_core.WIN32_ERROR
-    // param-hint: pszSubKey optional
-    func SHDeleteEmptyKeyW(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt16>): windows_core.WIN32_ERROR
-    // param-hint: pszSubKey optional
-    func SHDeleteKeyA(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt8>): windows_core.WIN32_ERROR
-    // param-hint: pszSubKey optional
-    func SHDeleteKeyW(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt16>): windows_core.WIN32_ERROR
-    // param-hint: pszSubKey optional
-    func SHDeleteValueA(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt8>, pszValue: CPointer<UInt8>): windows_core.WIN32_ERROR
-    // param-hint: pszSubKey optional
-    func SHDeleteValueW(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt16>, pszValue: CPointer<UInt16>): windows_core.WIN32_ERROR
-    // param-hint: pszName len=param[3]
-    func SHEnumKeyExA(hkey: Win32_System_Registry.HKEY, dwIndex: UInt32, pszName: CPointer<UInt8>, pcchName: CPointer<UInt32>): windows_core.WIN32_ERROR
-    // param-hint: pszName len=param[3]
-    func SHEnumKeyExW(hkey: Win32_System_Registry.HKEY, dwIndex: UInt32, pszName: CPointer<UInt16>, pcchName: CPointer<UInt32>): windows_core.WIN32_ERROR
-    // param-hint: pszValueName len=param[3] optional
-    // param-hint: pcchValueName optional
-    // param-hint: pdwType optional
-    // param-hint: pvData bytes=param[6] optional
-    // param-hint: pcbData optional
-    func SHEnumValueA(hkey: Win32_System_Registry.HKEY, dwIndex: UInt32, pszValueName: CPointer<UInt8>, pcchValueName: CPointer<UInt32>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>): windows_core.WIN32_ERROR
-    // param-hint: pszValueName len=param[3] optional
-    // param-hint: pcchValueName optional
-    // param-hint: pdwType optional
-    // param-hint: pvData bytes=param[6] optional
-    // param-hint: pcbData optional
-    func SHEnumValueW(hkey: Win32_System_Registry.HKEY, dwIndex: UInt32, pszValueName: CPointer<UInt16>, pcchValueName: CPointer<UInt32>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>): windows_core.WIN32_ERROR
-    // param-hint: pszSubKey optional
-    // param-hint: pszValue optional
-    // param-hint: pdwType optional
-    // param-hint: pvData bytes=param[5] optional
-    // param-hint: pcbData optional
-    func SHGetValueA(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt8>, pszValue: CPointer<UInt8>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>): windows_core.WIN32_ERROR
-    // param-hint: pszSubKey optional
-    // param-hint: pszValue optional
-    // param-hint: pdwType optional
-    // param-hint: pvData bytes=param[5] optional
-    // param-hint: pcbData optional
-    func SHGetValueW(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt16>, pszValue: CPointer<UInt16>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>): windows_core.WIN32_ERROR
-    // param-hint: pcSubKeys optional
-    // param-hint: pcchMaxSubKeyLen optional
-    // param-hint: pcValues optional
-    // param-hint: pcchMaxValueNameLen optional
-    func SHQueryInfoKeyA(hkey: Win32_System_Registry.HKEY, pcSubKeys: CPointer<UInt32>, pcchMaxSubKeyLen: CPointer<UInt32>, pcValues: CPointer<UInt32>, pcchMaxValueNameLen: CPointer<UInt32>): windows_core.WIN32_ERROR
-    // param-hint: pcSubKeys optional
-    // param-hint: pcchMaxSubKeyLen optional
-    // param-hint: pcValues optional
-    // param-hint: pcchMaxValueNameLen optional
-    func SHQueryInfoKeyW(hkey: Win32_System_Registry.HKEY, pcSubKeys: CPointer<UInt32>, pcchMaxSubKeyLen: CPointer<UInt32>, pcValues: CPointer<UInt32>, pcchMaxValueNameLen: CPointer<UInt32>): windows_core.WIN32_ERROR
-    // param-hint: pszValue optional
-    // param-hint: pdwReserved optional reserved
-    // param-hint: pdwType optional
-    // param-hint: pvData bytes=param[5] optional
-    // param-hint: pcbData optional
-    func SHQueryValueExA(hkey: Win32_System_Registry.HKEY, pszValue: CPointer<UInt8>, pdwReserved: CPointer<UInt32>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>): windows_core.WIN32_ERROR
-    // param-hint: pszValue optional
-    // param-hint: pdwReserved optional reserved
-    // param-hint: pdwType optional
-    // param-hint: pvData bytes=param[5] optional
-    // param-hint: pcbData optional
-    func SHQueryValueExW(hkey: Win32_System_Registry.HKEY, pszValue: CPointer<UInt16>, pdwReserved: CPointer<UInt32>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>): windows_core.WIN32_ERROR
-    func SHRegDuplicateHKey(hkey: Win32_System_Registry.HKEY): Win32_System_Registry.HKEY
-    // param-hint: pwzKey optional
-    func SHRegGetIntW(hk: Win32_System_Registry.HKEY, pwzKey: CPointer<UInt16>, iDefault: Int32): Int32
-    // param-hint: pcszSubKey optional
-    // param-hint: pcszValue optional
-    // param-hint: pszPath fixed=260
-    func SHRegGetPathA(hKey: Win32_System_Registry.HKEY, pcszSubKey: CPointer<UInt8>, pcszValue: CPointer<UInt8>, pszPath: CPointer<UInt8>, dwFlags: UInt32): windows_core.WIN32_ERROR
-    // param-hint: pcszSubKey optional
-    // param-hint: pcszValue optional
-    // param-hint: pszPath fixed=260
-    func SHRegGetPathW(hKey: Win32_System_Registry.HKEY, pcszSubKey: CPointer<UInt16>, pcszValue: CPointer<UInt16>, pszPath: CPointer<UInt16>, dwFlags: UInt32): windows_core.WIN32_ERROR
-    // param-hint: pszSubKey optional
-    // param-hint: pszValue optional
-    // param-hint: pdwType optional
-    // param-hint: pvData bytes=param[6] optional
-    // param-hint: pcbData optional
-    func SHRegGetValueA(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt8>, pszValue: CPointer<UInt8>, srrfFlags: Int32, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>): windows_core.WIN32_ERROR
-    // param-hint: pszSubKey optional
-    // param-hint: pszValue optional
-    // param-hint: pdwType optional
-    // param-hint: pvData bytes=param[6] optional
-    // param-hint: pcbData optional
-    func SHRegGetValueW(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt16>, pszValue: CPointer<UInt16>, srrfFlags: Int32, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>): windows_core.WIN32_ERROR
-    // param-hint: pcszSubKey optional
-    // param-hint: pcszValue optional
-    func SHRegSetPathA(hKey: Win32_System_Registry.HKEY, pcszSubKey: CPointer<UInt8>, pcszValue: CPointer<UInt8>, pcszPath: CPointer<UInt8>, dwFlags: UInt32): windows_core.WIN32_ERROR
-    // param-hint: pcszSubKey optional
-    // param-hint: pcszValue optional
-    func SHRegSetPathW(hKey: Win32_System_Registry.HKEY, pcszSubKey: CPointer<UInt16>, pcszValue: CPointer<UInt16>, pcszPath: CPointer<UInt16>, dwFlags: UInt32): windows_core.WIN32_ERROR
-    // param-hint: pszSubKey optional
-    // param-hint: pszValue optional
-    // param-hint: pvData bytes=param[5] optional
-    func SHSetValueA(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt8>, pszValue: CPointer<UInt8>, dwType: UInt32, pvData: CPointer<Unit>, cbData: UInt32): Int32
-    // param-hint: pszSubKey optional
-    // param-hint: pszValue optional
-    // param-hint: pvData bytes=param[5] optional
-    func SHSetValueW(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt16>, pszValue: CPointer<UInt16>, dwType: UInt32, pvData: CPointer<Unit>, cbData: UInt32): Int32
 }
 
-@When[SHLWAPI == "on" && Windows_Win32_System_Threading == "on"]
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHCopyKeyW == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHCopyKeyW(hkeySrc: Win32_System_Registry.HKEY, pszSrcSubKey: CPointer<UInt16>, hkeyDest: Win32_System_Registry.HKEY, fReserved: UInt32): windows_core.WIN32_ERROR {
+    return SHCopyKeyW(hkeySrc, pszSrcSubKey, hkeyDest, fReserved)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHCreateMemStream == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: pInit bytes=param[1] optional
+    func SHCreateMemStream(pInit: CPointer<UInt8>, cbInit: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHCreateMemStream == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SHCreateMemStream(pInit: CPointer<UInt8>, cbInit: UInt32): CPointer<Unit> {
+    return SHCreateMemStream(pInit, cbInit)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHCreateShellPalette == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    // param-hint: hdc optional
+    func SHCreateShellPalette(hdc: Win32_Graphics_Gdi.HDC): Win32_Graphics_Gdi.HPALETTE
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHCreateShellPalette == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_SHCreateShellPalette(hdc: Win32_Graphics_Gdi.HDC): Win32_Graphics_Gdi.HPALETTE {
+    return SHCreateShellPalette(hdc)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHCreateStreamOnFileA == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func SHCreateStreamOnFileA(pszFile: CPointer<UInt8>, grfMode: UInt32, ppstm: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHCreateStreamOnFileA == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SHCreateStreamOnFileA(pszFile: CPointer<UInt8>, grfMode: UInt32, ppstm: CPointer<CPointer<Unit>>): Int32 {
+    return SHCreateStreamOnFileA(pszFile, grfMode, ppstm)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHCreateStreamOnFileEx == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: pstmTemplate optional
+    func SHCreateStreamOnFileEx(pszFile: CPointer<UInt16>, grfMode: UInt32, dwAttributes: UInt32, fCreate: Int32, pstmTemplate: CPointer<Unit>, ppstm: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHCreateStreamOnFileEx == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SHCreateStreamOnFileEx(pszFile: CPointer<UInt16>, grfMode: UInt32, dwAttributes: UInt32, fCreate: Int32, pstmTemplate: CPointer<Unit>, ppstm: CPointer<CPointer<Unit>>): Int32 {
+    return SHCreateStreamOnFileEx(pszFile, grfMode, dwAttributes, fCreate, pstmTemplate, ppstm)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHCreateStreamOnFileW == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func SHCreateStreamOnFileW(pszFile: CPointer<UInt16>, grfMode: UInt32, ppstm: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHCreateStreamOnFileW == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SHCreateStreamOnFileW(pszFile: CPointer<UInt16>, grfMode: UInt32, ppstm: CPointer<CPointer<Unit>>): Int32 {
+    return SHCreateStreamOnFileW(pszFile, grfMode, ppstm)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHCreateThread == "on" && Windows_Win32_System_Threading == "on"]
 foreign {
     // param-hint: pData optional
     // param-hint: pfnCallback optional
     // pinvoke-hint: SetLastError
     func SHCreateThread(pfnThreadProc: Win32__impl_l0.LPTHREAD_START_ROUTINE, pData: CPointer<Unit>, flags: UInt32, pfnCallback: Win32__impl_l0.LPTHREAD_START_ROUTINE): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHCreateThread == "on" && Windows_Win32_System_Threading == "on"]
+public unsafe func Windows_SHCreateThread(pfnThreadProc: Win32__impl_l0.LPTHREAD_START_ROUTINE, pData: CPointer<Unit>, flags: UInt32, pfnCallback: Win32__impl_l0.LPTHREAD_START_ROUTINE): Int32 {
+    return SHCreateThread(pfnThreadProc, pData, flags, pfnCallback)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHCreateThreadRef == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func SHCreateThreadRef(pcRef: CPointer<Int32>, ppunk: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHCreateThreadRef == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SHCreateThreadRef(pcRef: CPointer<Int32>, ppunk: CPointer<CPointer<Unit>>): Int32 {
+    return SHCreateThreadRef(pcRef, ppunk)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHCreateThreadWithHandle == "on" && Windows_Win32_System_Threading == "on"]
+foreign {
     // param-hint: pData optional
     // param-hint: pfnCallback optional
     // param-hint: pHandle optional
@@ -1305,267 +4591,2972 @@ foreign {
     func SHCreateThreadWithHandle(pfnThreadProc: Win32__impl_l0.LPTHREAD_START_ROUTINE, pData: CPointer<Unit>, flags: UInt32, pfnCallback: Win32__impl_l0.LPTHREAD_START_ROUTINE, pHandle: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[SHLWAPI == "on" && Windows_Win32_UI_Shell_Common == "on"]
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHCreateThreadWithHandle == "on" && Windows_Win32_System_Threading == "on"]
+public unsafe func Windows_SHCreateThreadWithHandle(pfnThreadProc: Win32__impl_l0.LPTHREAD_START_ROUTINE, pData: CPointer<Unit>, flags: UInt32, pfnCallback: Win32__impl_l0.LPTHREAD_START_ROUTINE, pHandle: CPointer<CPointer<Unit>>): Int32 {
+    return SHCreateThreadWithHandle(pfnThreadProc, pData, flags, pfnCallback, pHandle)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHDeleteEmptyKeyA == "on" && Windows_Win32_System_Registry == "on"]
 foreign {
-    // param-hint: ppszType optional
-    func AssocGetPerceivedType(pszExt: CPointer<UInt16>, ptype: CPointer<Win32__impl_l0.PERCEIVEDAbi>, pflag: CPointer<UInt32>, ppszType: CPointer<CPointer<UInt16>>): Int32
+    // param-hint: pszSubKey optional
+    func SHDeleteEmptyKeyA(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt8>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHDeleteEmptyKeyA == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHDeleteEmptyKeyA(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt8>): windows_core.WIN32_ERROR {
+    return SHDeleteEmptyKeyA(hkey, pszSubKey)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHDeleteEmptyKeyW == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pszSubKey optional
+    func SHDeleteEmptyKeyW(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHDeleteEmptyKeyW == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHDeleteEmptyKeyW(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return SHDeleteEmptyKeyW(hkey, pszSubKey)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHDeleteKeyA == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pszSubKey optional
+    func SHDeleteKeyA(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt8>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHDeleteKeyA == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHDeleteKeyA(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt8>): windows_core.WIN32_ERROR {
+    return SHDeleteKeyA(hkey, pszSubKey)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHDeleteKeyW == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pszSubKey optional
+    func SHDeleteKeyW(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHDeleteKeyW == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHDeleteKeyW(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return SHDeleteKeyW(hkey, pszSubKey)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHDeleteValueA == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pszSubKey optional
+    func SHDeleteValueA(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt8>, pszValue: CPointer<UInt8>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHDeleteValueA == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHDeleteValueA(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt8>, pszValue: CPointer<UInt8>): windows_core.WIN32_ERROR {
+    return SHDeleteValueA(hkey, pszSubKey, pszValue)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHDeleteValueW == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pszSubKey optional
+    func SHDeleteValueW(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt16>, pszValue: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHDeleteValueW == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHDeleteValueW(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt16>, pszValue: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return SHDeleteValueW(hkey, pszSubKey, pszValue)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHEnumKeyExA == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pszName len=param[3]
+    func SHEnumKeyExA(hkey: Win32_System_Registry.HKEY, dwIndex: UInt32, pszName: CPointer<UInt8>, pcchName: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHEnumKeyExA == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHEnumKeyExA(hkey: Win32_System_Registry.HKEY, dwIndex: UInt32, pszName: CPointer<UInt8>, pcchName: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return SHEnumKeyExA(hkey, dwIndex, pszName, pcchName)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHEnumKeyExW == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pszName len=param[3]
+    func SHEnumKeyExW(hkey: Win32_System_Registry.HKEY, dwIndex: UInt32, pszName: CPointer<UInt16>, pcchName: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHEnumKeyExW == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHEnumKeyExW(hkey: Win32_System_Registry.HKEY, dwIndex: UInt32, pszName: CPointer<UInt16>, pcchName: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return SHEnumKeyExW(hkey, dwIndex, pszName, pcchName)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHEnumValueA == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pszValueName len=param[3] optional
+    // param-hint: pcchValueName optional
+    // param-hint: pdwType optional
+    // param-hint: pvData bytes=param[6] optional
+    // param-hint: pcbData optional
+    func SHEnumValueA(hkey: Win32_System_Registry.HKEY, dwIndex: UInt32, pszValueName: CPointer<UInt8>, pcchValueName: CPointer<UInt32>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHEnumValueA == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHEnumValueA(hkey: Win32_System_Registry.HKEY, dwIndex: UInt32, pszValueName: CPointer<UInt8>, pcchValueName: CPointer<UInt32>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return SHEnumValueA(hkey, dwIndex, pszValueName, pcchValueName, pdwType, pvData, pcbData)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHEnumValueW == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pszValueName len=param[3] optional
+    // param-hint: pcchValueName optional
+    // param-hint: pdwType optional
+    // param-hint: pvData bytes=param[6] optional
+    // param-hint: pcbData optional
+    func SHEnumValueW(hkey: Win32_System_Registry.HKEY, dwIndex: UInt32, pszValueName: CPointer<UInt16>, pcchValueName: CPointer<UInt32>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHEnumValueW == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHEnumValueW(hkey: Win32_System_Registry.HKEY, dwIndex: UInt32, pszValueName: CPointer<UInt16>, pcchValueName: CPointer<UInt32>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return SHEnumValueW(hkey, dwIndex, pszValueName, pcchValueName, pdwType, pvData, pcbData)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHFormatDateTimeA == "on"]
+foreign {
+    // param-hint: pdwFlags optional
+    // param-hint: pszBuf len=param[3]
+    func SHFormatDateTimeA(pft: CPointer<Win32_Foundation.FILETIMEAbi>, pdwFlags: CPointer<UInt32>, pszBuf: CPointer<UInt8>, cchBuf: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHFormatDateTimeA == "on"]
+public unsafe func Windows_SHFormatDateTimeA(pft: CPointer<Win32_Foundation.FILETIMEAbi>, pdwFlags: CPointer<UInt32>, pszBuf: CPointer<UInt8>, cchBuf: UInt32): Int32 {
+    return SHFormatDateTimeA(pft, pdwFlags, pszBuf, cchBuf)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHFormatDateTimeW == "on"]
+foreign {
+    // param-hint: pdwFlags optional
+    // param-hint: pszBuf len=param[3]
+    func SHFormatDateTimeW(pft: CPointer<Win32_Foundation.FILETIMEAbi>, pdwFlags: CPointer<UInt32>, pszBuf: CPointer<UInt16>, cchBuf: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHFormatDateTimeW == "on"]
+public unsafe func Windows_SHFormatDateTimeW(pft: CPointer<Win32_Foundation.FILETIMEAbi>, pdwFlags: CPointer<UInt32>, pszBuf: CPointer<UInt16>, cchBuf: UInt32): Int32 {
+    return SHFormatDateTimeW(pft, pdwFlags, pszBuf, cchBuf)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHFreeShared == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SHFreeShared(hData: CPointer<Unit>, dwProcessId: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHFreeShared == "on"]
+public unsafe func Windows_SHFreeShared(hData: CPointer<Unit>, dwProcessId: UInt32): Int32 {
+    return SHFreeShared(hData, dwProcessId)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHGetInverseCMAP == "on"]
+foreign {
+    // param-hint: pbMap bytes=param[1]
+    func SHGetInverseCMAP(pbMap: CPointer<UInt8>, cbMap: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHGetInverseCMAP == "on"]
+public unsafe func Windows_SHGetInverseCMAP(pbMap: CPointer<UInt8>, cbMap: UInt32): Int32 {
+    return SHGetInverseCMAP(pbMap, cbMap)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHGetThreadRef == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func SHGetThreadRef(ppunk: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHGetThreadRef == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SHGetThreadRef(ppunk: CPointer<CPointer<Unit>>): Int32 {
+    return SHGetThreadRef(ppunk)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHGetValueA == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pszSubKey optional
+    // param-hint: pszValue optional
+    // param-hint: pdwType optional
+    // param-hint: pvData bytes=param[5] optional
+    // param-hint: pcbData optional
+    func SHGetValueA(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt8>, pszValue: CPointer<UInt8>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHGetValueA == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHGetValueA(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt8>, pszValue: CPointer<UInt8>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return SHGetValueA(hkey, pszSubKey, pszValue, pdwType, pvData, pcbData)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHGetValueW == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pszSubKey optional
+    // param-hint: pszValue optional
+    // param-hint: pdwType optional
+    // param-hint: pvData bytes=param[5] optional
+    // param-hint: pcbData optional
+    func SHGetValueW(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt16>, pszValue: CPointer<UInt16>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHGetValueW == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHGetValueW(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt16>, pszValue: CPointer<UInt16>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return SHGetValueW(hkey, pszSubKey, pszValue, pdwType, pvData, pcbData)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHGetViewStatePropertyBag == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
     // param-hint: pidl optional
     // param-hint: pszBagName optional
     func SHGetViewStatePropertyBag(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, pszBagName: CPointer<UInt16>, dwFlags: UInt32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHGetViewStatePropertyBag == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_SHGetViewStatePropertyBag(pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, pszBagName: CPointer<UInt16>, dwFlags: UInt32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return SHGetViewStatePropertyBag(pidl, pszBagName, dwFlags, riid, ppv)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHGlobalCounterDecrement == "on"]
+foreign {
+    func SHGlobalCounterDecrement(id: Win32__impl_l0.SHGLOBALCOUNTERAbi): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHGlobalCounterDecrement == "on"]
+public unsafe func Windows_SHGlobalCounterDecrement(id: Win32__impl_l0.SHGLOBALCOUNTERAbi): Int32 {
+    return SHGlobalCounterDecrement(id)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHGlobalCounterGetValue == "on"]
+foreign {
+    func SHGlobalCounterGetValue(id: Win32__impl_l0.SHGLOBALCOUNTERAbi): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHGlobalCounterGetValue == "on"]
+public unsafe func Windows_SHGlobalCounterGetValue(id: Win32__impl_l0.SHGLOBALCOUNTERAbi): Int32 {
+    return SHGlobalCounterGetValue(id)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHGlobalCounterIncrement == "on"]
+foreign {
+    func SHGlobalCounterIncrement(id: Win32__impl_l0.SHGLOBALCOUNTERAbi): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHGlobalCounterIncrement == "on"]
+public unsafe func Windows_SHGlobalCounterIncrement(id: Win32__impl_l0.SHGLOBALCOUNTERAbi): Int32 {
+    return SHGlobalCounterIncrement(id)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHIsLowMemoryMachine == "on"]
+foreign {
+    func SHIsLowMemoryMachine(dwType: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHIsLowMemoryMachine == "on"]
+public unsafe func Windows_SHIsLowMemoryMachine(dwType: UInt32): Int32 {
+    return SHIsLowMemoryMachine(dwType)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHLoadIndirectString == "on"]
+foreign {
+    // param-hint: pszOutBuf len=param[2]
+    // param-hint: ppvReserved optional reserved
+    func SHLoadIndirectString(pszSource: CPointer<UInt16>, pszOutBuf: CPointer<UInt16>, cchOutBuf: UInt32, ppvReserved: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHLoadIndirectString == "on"]
+public unsafe func Windows_SHLoadIndirectString(pszSource: CPointer<UInt16>, pszOutBuf: CPointer<UInt16>, cchOutBuf: UInt32, ppvReserved: CPointer<CPointer<Unit>>): Int32 {
+    return SHLoadIndirectString(pszSource, pszOutBuf, cchOutBuf, ppvReserved)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHLockShared == "on"]
+foreign {
+    func SHLockShared(hData: CPointer<Unit>, dwProcessId: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHLockShared == "on"]
+public unsafe func Windows_SHLockShared(hData: CPointer<Unit>, dwProcessId: UInt32): CPointer<Unit> {
+    return SHLockShared(hData, dwProcessId)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHMessageBoxCheckA == "on"]
+foreign {
+    // param-hint: hwnd optional
+    func SHMessageBoxCheckA(hwnd: CPointer<Unit>, pszText: CPointer<UInt8>, pszCaption: CPointer<UInt8>, uType: UInt32, iDefault: Int32, pszRegVal: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHMessageBoxCheckA == "on"]
+public unsafe func Windows_SHMessageBoxCheckA(hwnd: CPointer<Unit>, pszText: CPointer<UInt8>, pszCaption: CPointer<UInt8>, uType: UInt32, iDefault: Int32, pszRegVal: CPointer<UInt8>): Int32 {
+    return SHMessageBoxCheckA(hwnd, pszText, pszCaption, uType, iDefault, pszRegVal)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHMessageBoxCheckW == "on"]
+foreign {
+    // param-hint: hwnd optional
+    func SHMessageBoxCheckW(hwnd: CPointer<Unit>, pszText: CPointer<UInt16>, pszCaption: CPointer<UInt16>, uType: UInt32, iDefault: Int32, pszRegVal: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHMessageBoxCheckW == "on"]
+public unsafe func Windows_SHMessageBoxCheckW(hwnd: CPointer<Unit>, pszText: CPointer<UInt16>, pszCaption: CPointer<UInt16>, uType: UInt32, iDefault: Int32, pszRegVal: CPointer<UInt16>): Int32 {
+    return SHMessageBoxCheckW(hwnd, pszText, pszCaption, uType, iDefault, pszRegVal)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHOpenRegStream2A == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pszSubkey optional
+    // param-hint: pszValue optional
+    func SHOpenRegStream2A(hkey: Win32_System_Registry.HKEY, pszSubkey: CPointer<UInt8>, pszValue: CPointer<UInt8>, grfMode: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHOpenRegStream2A == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHOpenRegStream2A(hkey: Win32_System_Registry.HKEY, pszSubkey: CPointer<UInt8>, pszValue: CPointer<UInt8>, grfMode: UInt32): CPointer<Unit> {
+    return SHOpenRegStream2A(hkey, pszSubkey, pszValue, grfMode)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHOpenRegStream2W == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pszSubkey optional
+    // param-hint: pszValue optional
+    func SHOpenRegStream2W(hkey: Win32_System_Registry.HKEY, pszSubkey: CPointer<UInt16>, pszValue: CPointer<UInt16>, grfMode: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHOpenRegStream2W == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHOpenRegStream2W(hkey: Win32_System_Registry.HKEY, pszSubkey: CPointer<UInt16>, pszValue: CPointer<UInt16>, grfMode: UInt32): CPointer<Unit> {
+    return SHOpenRegStream2W(hkey, pszSubkey, pszValue, grfMode)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHOpenRegStreamA == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pszSubkey optional
+    // param-hint: pszValue optional
+    func SHOpenRegStreamA(hkey: Win32_System_Registry.HKEY, pszSubkey: CPointer<UInt8>, pszValue: CPointer<UInt8>, grfMode: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHOpenRegStreamA == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHOpenRegStreamA(hkey: Win32_System_Registry.HKEY, pszSubkey: CPointer<UInt8>, pszValue: CPointer<UInt8>, grfMode: UInt32): CPointer<Unit> {
+    return SHOpenRegStreamA(hkey, pszSubkey, pszValue, grfMode)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHOpenRegStreamW == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pszSubkey optional
+    // param-hint: pszValue optional
+    func SHOpenRegStreamW(hkey: Win32_System_Registry.HKEY, pszSubkey: CPointer<UInt16>, pszValue: CPointer<UInt16>, grfMode: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHOpenRegStreamW == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHOpenRegStreamW(hkey: Win32_System_Registry.HKEY, pszSubkey: CPointer<UInt16>, pszValue: CPointer<UInt16>, grfMode: UInt32): CPointer<Unit> {
+    return SHOpenRegStreamW(hkey, pszSubkey, pszValue, grfMode)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHQueryInfoKeyA == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pcSubKeys optional
+    // param-hint: pcchMaxSubKeyLen optional
+    // param-hint: pcValues optional
+    // param-hint: pcchMaxValueNameLen optional
+    func SHQueryInfoKeyA(hkey: Win32_System_Registry.HKEY, pcSubKeys: CPointer<UInt32>, pcchMaxSubKeyLen: CPointer<UInt32>, pcValues: CPointer<UInt32>, pcchMaxValueNameLen: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHQueryInfoKeyA == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHQueryInfoKeyA(hkey: Win32_System_Registry.HKEY, pcSubKeys: CPointer<UInt32>, pcchMaxSubKeyLen: CPointer<UInt32>, pcValues: CPointer<UInt32>, pcchMaxValueNameLen: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return SHQueryInfoKeyA(hkey, pcSubKeys, pcchMaxSubKeyLen, pcValues, pcchMaxValueNameLen)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHQueryInfoKeyW == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pcSubKeys optional
+    // param-hint: pcchMaxSubKeyLen optional
+    // param-hint: pcValues optional
+    // param-hint: pcchMaxValueNameLen optional
+    func SHQueryInfoKeyW(hkey: Win32_System_Registry.HKEY, pcSubKeys: CPointer<UInt32>, pcchMaxSubKeyLen: CPointer<UInt32>, pcValues: CPointer<UInt32>, pcchMaxValueNameLen: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHQueryInfoKeyW == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHQueryInfoKeyW(hkey: Win32_System_Registry.HKEY, pcSubKeys: CPointer<UInt32>, pcchMaxSubKeyLen: CPointer<UInt32>, pcValues: CPointer<UInt32>, pcchMaxValueNameLen: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return SHQueryInfoKeyW(hkey, pcSubKeys, pcchMaxSubKeyLen, pcValues, pcchMaxValueNameLen)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHQueryValueExA == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pszValue optional
+    // param-hint: pdwReserved optional reserved
+    // param-hint: pdwType optional
+    // param-hint: pvData bytes=param[5] optional
+    // param-hint: pcbData optional
+    func SHQueryValueExA(hkey: Win32_System_Registry.HKEY, pszValue: CPointer<UInt8>, pdwReserved: CPointer<UInt32>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHQueryValueExA == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHQueryValueExA(hkey: Win32_System_Registry.HKEY, pszValue: CPointer<UInt8>, pdwReserved: CPointer<UInt32>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return SHQueryValueExA(hkey, pszValue, pdwReserved, pdwType, pvData, pcbData)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHQueryValueExW == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pszValue optional
+    // param-hint: pdwReserved optional reserved
+    // param-hint: pdwType optional
+    // param-hint: pvData bytes=param[5] optional
+    // param-hint: pcbData optional
+    func SHQueryValueExW(hkey: Win32_System_Registry.HKEY, pszValue: CPointer<UInt16>, pdwReserved: CPointer<UInt32>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHQueryValueExW == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHQueryValueExW(hkey: Win32_System_Registry.HKEY, pszValue: CPointer<UInt16>, pdwReserved: CPointer<UInt32>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return SHQueryValueExW(hkey, pszValue, pdwReserved, pdwType, pvData, pcbData)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegCloseUSKey == "on"]
+foreign {
+    func SHRegCloseUSKey(hUSKey: IntNative): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegCloseUSKey == "on"]
+public unsafe func Windows_SHRegCloseUSKey(hUSKey: IntNative): windows_core.WIN32_ERROR {
+    return SHRegCloseUSKey(hUSKey)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegCreateUSKeyA == "on"]
+foreign {
+    // param-hint: hRelativeUSKey optional
+    func SHRegCreateUSKeyA(pszPath: CPointer<UInt8>, samDesired: UInt32, hRelativeUSKey: IntNative, phNewUSKey: CPointer<IntNative>, dwFlags: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegCreateUSKeyA == "on"]
+public unsafe func Windows_SHRegCreateUSKeyA(pszPath: CPointer<UInt8>, samDesired: UInt32, hRelativeUSKey: IntNative, phNewUSKey: CPointer<IntNative>, dwFlags: UInt32): windows_core.WIN32_ERROR {
+    return SHRegCreateUSKeyA(pszPath, samDesired, hRelativeUSKey, phNewUSKey, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegCreateUSKeyW == "on"]
+foreign {
+    // param-hint: hRelativeUSKey optional
+    func SHRegCreateUSKeyW(pwzPath: CPointer<UInt16>, samDesired: UInt32, hRelativeUSKey: IntNative, phNewUSKey: CPointer<IntNative>, dwFlags: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegCreateUSKeyW == "on"]
+public unsafe func Windows_SHRegCreateUSKeyW(pwzPath: CPointer<UInt16>, samDesired: UInt32, hRelativeUSKey: IntNative, phNewUSKey: CPointer<IntNative>, dwFlags: UInt32): windows_core.WIN32_ERROR {
+    return SHRegCreateUSKeyW(pwzPath, samDesired, hRelativeUSKey, phNewUSKey, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegDeleteEmptyUSKeyA == "on"]
+foreign {
+    func SHRegDeleteEmptyUSKeyA(hUSKey: IntNative, pszSubKey: CPointer<UInt8>, delRegFlags: Win32__impl_l0.SHREGDEL_FLAGSAbi): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegDeleteEmptyUSKeyA == "on"]
+public unsafe func Windows_SHRegDeleteEmptyUSKeyA(hUSKey: IntNative, pszSubKey: CPointer<UInt8>, delRegFlags: Win32__impl_l0.SHREGDEL_FLAGSAbi): windows_core.WIN32_ERROR {
+    return SHRegDeleteEmptyUSKeyA(hUSKey, pszSubKey, delRegFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegDeleteEmptyUSKeyW == "on"]
+foreign {
+    func SHRegDeleteEmptyUSKeyW(hUSKey: IntNative, pwzSubKey: CPointer<UInt16>, delRegFlags: Win32__impl_l0.SHREGDEL_FLAGSAbi): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegDeleteEmptyUSKeyW == "on"]
+public unsafe func Windows_SHRegDeleteEmptyUSKeyW(hUSKey: IntNative, pwzSubKey: CPointer<UInt16>, delRegFlags: Win32__impl_l0.SHREGDEL_FLAGSAbi): windows_core.WIN32_ERROR {
+    return SHRegDeleteEmptyUSKeyW(hUSKey, pwzSubKey, delRegFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegDeleteUSValueA == "on"]
+foreign {
+    func SHRegDeleteUSValueA(hUSKey: IntNative, pszValue: CPointer<UInt8>, delRegFlags: Win32__impl_l0.SHREGDEL_FLAGSAbi): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegDeleteUSValueA == "on"]
+public unsafe func Windows_SHRegDeleteUSValueA(hUSKey: IntNative, pszValue: CPointer<UInt8>, delRegFlags: Win32__impl_l0.SHREGDEL_FLAGSAbi): windows_core.WIN32_ERROR {
+    return SHRegDeleteUSValueA(hUSKey, pszValue, delRegFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegDeleteUSValueW == "on"]
+foreign {
+    func SHRegDeleteUSValueW(hUSKey: IntNative, pwzValue: CPointer<UInt16>, delRegFlags: Win32__impl_l0.SHREGDEL_FLAGSAbi): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegDeleteUSValueW == "on"]
+public unsafe func Windows_SHRegDeleteUSValueW(hUSKey: IntNative, pwzValue: CPointer<UInt16>, delRegFlags: Win32__impl_l0.SHREGDEL_FLAGSAbi): windows_core.WIN32_ERROR {
+    return SHRegDeleteUSValueW(hUSKey, pwzValue, delRegFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegDuplicateHKey == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    func SHRegDuplicateHKey(hkey: Win32_System_Registry.HKEY): Win32_System_Registry.HKEY
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegDuplicateHKey == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHRegDuplicateHKey(hkey: Win32_System_Registry.HKEY): Win32_System_Registry.HKEY {
+    return SHRegDuplicateHKey(hkey)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegEnumUSKeyA == "on"]
+foreign {
+    // param-hint: pszName len=param[3]
+    func SHRegEnumUSKeyA(hUSKey: IntNative, dwIndex: UInt32, pszName: CPointer<UInt8>, pcchName: CPointer<UInt32>, enumRegFlags: Win32__impl_l0.SHREGENUM_FLAGSAbi): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegEnumUSKeyA == "on"]
+public unsafe func Windows_SHRegEnumUSKeyA(hUSKey: IntNative, dwIndex: UInt32, pszName: CPointer<UInt8>, pcchName: CPointer<UInt32>, enumRegFlags: Win32__impl_l0.SHREGENUM_FLAGSAbi): windows_core.WIN32_ERROR {
+    return SHRegEnumUSKeyA(hUSKey, dwIndex, pszName, pcchName, enumRegFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegEnumUSKeyW == "on"]
+foreign {
+    // param-hint: pwzName len=param[3]
+    func SHRegEnumUSKeyW(hUSKey: IntNative, dwIndex: UInt32, pwzName: CPointer<UInt16>, pcchName: CPointer<UInt32>, enumRegFlags: Win32__impl_l0.SHREGENUM_FLAGSAbi): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegEnumUSKeyW == "on"]
+public unsafe func Windows_SHRegEnumUSKeyW(hUSKey: IntNative, dwIndex: UInt32, pwzName: CPointer<UInt16>, pcchName: CPointer<UInt32>, enumRegFlags: Win32__impl_l0.SHREGENUM_FLAGSAbi): windows_core.WIN32_ERROR {
+    return SHRegEnumUSKeyW(hUSKey, dwIndex, pwzName, pcchName, enumRegFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegEnumUSValueA == "on"]
+foreign {
+    // param-hint: pszValueName len=param[3]
+    // param-hint: pdwType optional
+    // param-hint: pvData bytes=param[6] optional
+    // param-hint: pcbData optional
+    func SHRegEnumUSValueA(hUSkey: IntNative, dwIndex: UInt32, pszValueName: CPointer<UInt8>, pcchValueName: CPointer<UInt32>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>, enumRegFlags: Win32__impl_l0.SHREGENUM_FLAGSAbi): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegEnumUSValueA == "on"]
+public unsafe func Windows_SHRegEnumUSValueA(hUSkey: IntNative, dwIndex: UInt32, pszValueName: CPointer<UInt8>, pcchValueName: CPointer<UInt32>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>, enumRegFlags: Win32__impl_l0.SHREGENUM_FLAGSAbi): windows_core.WIN32_ERROR {
+    return SHRegEnumUSValueA(hUSkey, dwIndex, pszValueName, pcchValueName, pdwType, pvData, pcbData, enumRegFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegEnumUSValueW == "on"]
+foreign {
+    // param-hint: pszValueName len=param[3]
+    // param-hint: pdwType optional
+    // param-hint: pvData bytes=param[6] optional
+    // param-hint: pcbData optional
+    func SHRegEnumUSValueW(hUSkey: IntNative, dwIndex: UInt32, pszValueName: CPointer<UInt16>, pcchValueName: CPointer<UInt32>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>, enumRegFlags: Win32__impl_l0.SHREGENUM_FLAGSAbi): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegEnumUSValueW == "on"]
+public unsafe func Windows_SHRegEnumUSValueW(hUSkey: IntNative, dwIndex: UInt32, pszValueName: CPointer<UInt16>, pcchValueName: CPointer<UInt32>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>, enumRegFlags: Win32__impl_l0.SHREGENUM_FLAGSAbi): windows_core.WIN32_ERROR {
+    return SHRegEnumUSValueW(hUSkey, dwIndex, pszValueName, pcchValueName, pdwType, pvData, pcbData, enumRegFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegGetBoolUSValueA == "on"]
+foreign {
+    // param-hint: pszValue optional
+    func SHRegGetBoolUSValueA(pszSubKey: CPointer<UInt8>, pszValue: CPointer<UInt8>, fIgnoreHKCU: Int32, fDefault: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegGetBoolUSValueA == "on"]
+public unsafe func Windows_SHRegGetBoolUSValueA(pszSubKey: CPointer<UInt8>, pszValue: CPointer<UInt8>, fIgnoreHKCU: Int32, fDefault: Int32): Int32 {
+    return SHRegGetBoolUSValueA(pszSubKey, pszValue, fIgnoreHKCU, fDefault)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegGetBoolUSValueW == "on"]
+foreign {
+    // param-hint: pszValue optional
+    func SHRegGetBoolUSValueW(pszSubKey: CPointer<UInt16>, pszValue: CPointer<UInt16>, fIgnoreHKCU: Int32, fDefault: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegGetBoolUSValueW == "on"]
+public unsafe func Windows_SHRegGetBoolUSValueW(pszSubKey: CPointer<UInt16>, pszValue: CPointer<UInt16>, fIgnoreHKCU: Int32, fDefault: Int32): Int32 {
+    return SHRegGetBoolUSValueW(pszSubKey, pszValue, fIgnoreHKCU, fDefault)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegGetIntW == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pwzKey optional
+    func SHRegGetIntW(hk: Win32_System_Registry.HKEY, pwzKey: CPointer<UInt16>, iDefault: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegGetIntW == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHRegGetIntW(hk: Win32_System_Registry.HKEY, pwzKey: CPointer<UInt16>, iDefault: Int32): Int32 {
+    return SHRegGetIntW(hk, pwzKey, iDefault)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegGetPathA == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pcszSubKey optional
+    // param-hint: pcszValue optional
+    // param-hint: pszPath fixed=260
+    func SHRegGetPathA(hKey: Win32_System_Registry.HKEY, pcszSubKey: CPointer<UInt8>, pcszValue: CPointer<UInt8>, pszPath: CPointer<UInt8>, dwFlags: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegGetPathA == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHRegGetPathA(hKey: Win32_System_Registry.HKEY, pcszSubKey: CPointer<UInt8>, pcszValue: CPointer<UInt8>, pszPath: CPointer<UInt8>, dwFlags: UInt32): windows_core.WIN32_ERROR {
+    return SHRegGetPathA(hKey, pcszSubKey, pcszValue, pszPath, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegGetPathW == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pcszSubKey optional
+    // param-hint: pcszValue optional
+    // param-hint: pszPath fixed=260
+    func SHRegGetPathW(hKey: Win32_System_Registry.HKEY, pcszSubKey: CPointer<UInt16>, pcszValue: CPointer<UInt16>, pszPath: CPointer<UInt16>, dwFlags: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegGetPathW == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHRegGetPathW(hKey: Win32_System_Registry.HKEY, pcszSubKey: CPointer<UInt16>, pcszValue: CPointer<UInt16>, pszPath: CPointer<UInt16>, dwFlags: UInt32): windows_core.WIN32_ERROR {
+    return SHRegGetPathW(hKey, pcszSubKey, pcszValue, pszPath, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegGetUSValueA == "on"]
+foreign {
+    // param-hint: pszValue optional
+    // param-hint: pdwType optional
+    // param-hint: pvData bytes=param[4] optional
+    // param-hint: pcbData optional
+    // param-hint: pvDefaultData bytes=param[7] optional
+    func SHRegGetUSValueA(pszSubKey: CPointer<UInt8>, pszValue: CPointer<UInt8>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>, fIgnoreHKCU: Int32, pvDefaultData: CPointer<Unit>, dwDefaultDataSize: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegGetUSValueA == "on"]
+public unsafe func Windows_SHRegGetUSValueA(pszSubKey: CPointer<UInt8>, pszValue: CPointer<UInt8>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>, fIgnoreHKCU: Int32, pvDefaultData: CPointer<Unit>, dwDefaultDataSize: UInt32): windows_core.WIN32_ERROR {
+    return SHRegGetUSValueA(pszSubKey, pszValue, pdwType, pvData, pcbData, fIgnoreHKCU, pvDefaultData, dwDefaultDataSize)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegGetUSValueW == "on"]
+foreign {
+    // param-hint: pszValue optional
+    // param-hint: pdwType optional
+    // param-hint: pvData bytes=param[4] optional
+    // param-hint: pcbData optional
+    // param-hint: pvDefaultData bytes=param[7] optional
+    func SHRegGetUSValueW(pszSubKey: CPointer<UInt16>, pszValue: CPointer<UInt16>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>, fIgnoreHKCU: Int32, pvDefaultData: CPointer<Unit>, dwDefaultDataSize: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegGetUSValueW == "on"]
+public unsafe func Windows_SHRegGetUSValueW(pszSubKey: CPointer<UInt16>, pszValue: CPointer<UInt16>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>, fIgnoreHKCU: Int32, pvDefaultData: CPointer<Unit>, dwDefaultDataSize: UInt32): windows_core.WIN32_ERROR {
+    return SHRegGetUSValueW(pszSubKey, pszValue, pdwType, pvData, pcbData, fIgnoreHKCU, pvDefaultData, dwDefaultDataSize)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegGetValueA == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pszSubKey optional
+    // param-hint: pszValue optional
+    // param-hint: pdwType optional
+    // param-hint: pvData bytes=param[6] optional
+    // param-hint: pcbData optional
+    func SHRegGetValueA(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt8>, pszValue: CPointer<UInt8>, srrfFlags: Int32, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegGetValueA == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHRegGetValueA(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt8>, pszValue: CPointer<UInt8>, srrfFlags: Int32, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return SHRegGetValueA(hkey, pszSubKey, pszValue, srrfFlags, pdwType, pvData, pcbData)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegGetValueFromHKCUHKLM == "on"]
+foreign {
+    // param-hint: pwszValue optional
+    // param-hint: pdwType optional
+    // param-hint: pvData bytes=param[5] optional
+    // param-hint: pcbData optional
+    func SHRegGetValueFromHKCUHKLM(pwszKey: CPointer<UInt16>, pwszValue: CPointer<UInt16>, srrfFlags: Int32, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegGetValueFromHKCUHKLM == "on"]
+public unsafe func Windows_SHRegGetValueFromHKCUHKLM(pwszKey: CPointer<UInt16>, pwszValue: CPointer<UInt16>, srrfFlags: Int32, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return SHRegGetValueFromHKCUHKLM(pwszKey, pwszValue, srrfFlags, pdwType, pvData, pcbData)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegGetValueW == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pszSubKey optional
+    // param-hint: pszValue optional
+    // param-hint: pdwType optional
+    // param-hint: pvData bytes=param[6] optional
+    // param-hint: pcbData optional
+    func SHRegGetValueW(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt16>, pszValue: CPointer<UInt16>, srrfFlags: Int32, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegGetValueW == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHRegGetValueW(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt16>, pszValue: CPointer<UInt16>, srrfFlags: Int32, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return SHRegGetValueW(hkey, pszSubKey, pszValue, srrfFlags, pdwType, pvData, pcbData)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegOpenUSKeyA == "on"]
+foreign {
+    // param-hint: hRelativeUSKey optional
+    func SHRegOpenUSKeyA(pszPath: CPointer<UInt8>, samDesired: UInt32, hRelativeUSKey: IntNative, phNewUSKey: CPointer<IntNative>, fIgnoreHKCU: Int32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegOpenUSKeyA == "on"]
+public unsafe func Windows_SHRegOpenUSKeyA(pszPath: CPointer<UInt8>, samDesired: UInt32, hRelativeUSKey: IntNative, phNewUSKey: CPointer<IntNative>, fIgnoreHKCU: Int32): windows_core.WIN32_ERROR {
+    return SHRegOpenUSKeyA(pszPath, samDesired, hRelativeUSKey, phNewUSKey, fIgnoreHKCU)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegOpenUSKeyW == "on"]
+foreign {
+    // param-hint: hRelativeUSKey optional
+    func SHRegOpenUSKeyW(pwzPath: CPointer<UInt16>, samDesired: UInt32, hRelativeUSKey: IntNative, phNewUSKey: CPointer<IntNative>, fIgnoreHKCU: Int32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegOpenUSKeyW == "on"]
+public unsafe func Windows_SHRegOpenUSKeyW(pwzPath: CPointer<UInt16>, samDesired: UInt32, hRelativeUSKey: IntNative, phNewUSKey: CPointer<IntNative>, fIgnoreHKCU: Int32): windows_core.WIN32_ERROR {
+    return SHRegOpenUSKeyW(pwzPath, samDesired, hRelativeUSKey, phNewUSKey, fIgnoreHKCU)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegQueryInfoUSKeyA == "on"]
+foreign {
+    // param-hint: pcSubKeys optional
+    // param-hint: pcchMaxSubKeyLen optional
+    // param-hint: pcValues optional
+    // param-hint: pcchMaxValueNameLen optional
+    func SHRegQueryInfoUSKeyA(hUSKey: IntNative, pcSubKeys: CPointer<UInt32>, pcchMaxSubKeyLen: CPointer<UInt32>, pcValues: CPointer<UInt32>, pcchMaxValueNameLen: CPointer<UInt32>, enumRegFlags: Win32__impl_l0.SHREGENUM_FLAGSAbi): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegQueryInfoUSKeyA == "on"]
+public unsafe func Windows_SHRegQueryInfoUSKeyA(hUSKey: IntNative, pcSubKeys: CPointer<UInt32>, pcchMaxSubKeyLen: CPointer<UInt32>, pcValues: CPointer<UInt32>, pcchMaxValueNameLen: CPointer<UInt32>, enumRegFlags: Win32__impl_l0.SHREGENUM_FLAGSAbi): windows_core.WIN32_ERROR {
+    return SHRegQueryInfoUSKeyA(hUSKey, pcSubKeys, pcchMaxSubKeyLen, pcValues, pcchMaxValueNameLen, enumRegFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegQueryInfoUSKeyW == "on"]
+foreign {
+    // param-hint: pcSubKeys optional
+    // param-hint: pcchMaxSubKeyLen optional
+    // param-hint: pcValues optional
+    // param-hint: pcchMaxValueNameLen optional
+    func SHRegQueryInfoUSKeyW(hUSKey: IntNative, pcSubKeys: CPointer<UInt32>, pcchMaxSubKeyLen: CPointer<UInt32>, pcValues: CPointer<UInt32>, pcchMaxValueNameLen: CPointer<UInt32>, enumRegFlags: Win32__impl_l0.SHREGENUM_FLAGSAbi): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegQueryInfoUSKeyW == "on"]
+public unsafe func Windows_SHRegQueryInfoUSKeyW(hUSKey: IntNative, pcSubKeys: CPointer<UInt32>, pcchMaxSubKeyLen: CPointer<UInt32>, pcValues: CPointer<UInt32>, pcchMaxValueNameLen: CPointer<UInt32>, enumRegFlags: Win32__impl_l0.SHREGENUM_FLAGSAbi): windows_core.WIN32_ERROR {
+    return SHRegQueryInfoUSKeyW(hUSKey, pcSubKeys, pcchMaxSubKeyLen, pcValues, pcchMaxValueNameLen, enumRegFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegQueryUSValueA == "on"]
+foreign {
+    // param-hint: pszValue optional
+    // param-hint: pdwType optional
+    // param-hint: pvData bytes=param[4] optional
+    // param-hint: pcbData optional
+    // param-hint: pvDefaultData bytes=param[7] optional
+    // param-hint: dwDefaultDataSize optional
+    func SHRegQueryUSValueA(hUSKey: IntNative, pszValue: CPointer<UInt8>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>, fIgnoreHKCU: Int32, pvDefaultData: CPointer<Unit>, dwDefaultDataSize: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegQueryUSValueA == "on"]
+public unsafe func Windows_SHRegQueryUSValueA(hUSKey: IntNative, pszValue: CPointer<UInt8>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>, fIgnoreHKCU: Int32, pvDefaultData: CPointer<Unit>, dwDefaultDataSize: UInt32): windows_core.WIN32_ERROR {
+    return SHRegQueryUSValueA(hUSKey, pszValue, pdwType, pvData, pcbData, fIgnoreHKCU, pvDefaultData, dwDefaultDataSize)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegQueryUSValueW == "on"]
+foreign {
+    // param-hint: pszValue optional
+    // param-hint: pdwType optional
+    // param-hint: pvData bytes=param[4] optional
+    // param-hint: pcbData optional
+    // param-hint: pvDefaultData bytes=param[7] optional
+    // param-hint: dwDefaultDataSize optional
+    func SHRegQueryUSValueW(hUSKey: IntNative, pszValue: CPointer<UInt16>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>, fIgnoreHKCU: Int32, pvDefaultData: CPointer<Unit>, dwDefaultDataSize: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegQueryUSValueW == "on"]
+public unsafe func Windows_SHRegQueryUSValueW(hUSKey: IntNative, pszValue: CPointer<UInt16>, pdwType: CPointer<UInt32>, pvData: CPointer<Unit>, pcbData: CPointer<UInt32>, fIgnoreHKCU: Int32, pvDefaultData: CPointer<Unit>, dwDefaultDataSize: UInt32): windows_core.WIN32_ERROR {
+    return SHRegQueryUSValueW(hUSKey, pszValue, pdwType, pvData, pcbData, fIgnoreHKCU, pvDefaultData, dwDefaultDataSize)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegSetPathA == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pcszSubKey optional
+    // param-hint: pcszValue optional
+    func SHRegSetPathA(hKey: Win32_System_Registry.HKEY, pcszSubKey: CPointer<UInt8>, pcszValue: CPointer<UInt8>, pcszPath: CPointer<UInt8>, dwFlags: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegSetPathA == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHRegSetPathA(hKey: Win32_System_Registry.HKEY, pcszSubKey: CPointer<UInt8>, pcszValue: CPointer<UInt8>, pcszPath: CPointer<UInt8>, dwFlags: UInt32): windows_core.WIN32_ERROR {
+    return SHRegSetPathA(hKey, pcszSubKey, pcszValue, pcszPath, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegSetPathW == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pcszSubKey optional
+    // param-hint: pcszValue optional
+    func SHRegSetPathW(hKey: Win32_System_Registry.HKEY, pcszSubKey: CPointer<UInt16>, pcszValue: CPointer<UInt16>, pcszPath: CPointer<UInt16>, dwFlags: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegSetPathW == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHRegSetPathW(hKey: Win32_System_Registry.HKEY, pcszSubKey: CPointer<UInt16>, pcszValue: CPointer<UInt16>, pcszPath: CPointer<UInt16>, dwFlags: UInt32): windows_core.WIN32_ERROR {
+    return SHRegSetPathW(hKey, pcszSubKey, pcszValue, pcszPath, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegSetUSValueA == "on"]
+foreign {
+    // param-hint: pvData bytes=param[4] optional
+    // param-hint: cbData optional
+    // param-hint: dwFlags optional
+    func SHRegSetUSValueA(pszSubKey: CPointer<UInt8>, pszValue: CPointer<UInt8>, dwType: UInt32, pvData: CPointer<Unit>, cbData: UInt32, dwFlags: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegSetUSValueA == "on"]
+public unsafe func Windows_SHRegSetUSValueA(pszSubKey: CPointer<UInt8>, pszValue: CPointer<UInt8>, dwType: UInt32, pvData: CPointer<Unit>, cbData: UInt32, dwFlags: UInt32): windows_core.WIN32_ERROR {
+    return SHRegSetUSValueA(pszSubKey, pszValue, dwType, pvData, cbData, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegSetUSValueW == "on"]
+foreign {
+    // param-hint: pvData bytes=param[4] optional
+    // param-hint: cbData optional
+    // param-hint: dwFlags optional
+    func SHRegSetUSValueW(pwzSubKey: CPointer<UInt16>, pwzValue: CPointer<UInt16>, dwType: UInt32, pvData: CPointer<Unit>, cbData: UInt32, dwFlags: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegSetUSValueW == "on"]
+public unsafe func Windows_SHRegSetUSValueW(pwzSubKey: CPointer<UInt16>, pwzValue: CPointer<UInt16>, dwType: UInt32, pvData: CPointer<Unit>, cbData: UInt32, dwFlags: UInt32): windows_core.WIN32_ERROR {
+    return SHRegSetUSValueW(pwzSubKey, pwzValue, dwType, pvData, cbData, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegWriteUSValueA == "on"]
+foreign {
+    // param-hint: pvData bytes=param[4]
+    func SHRegWriteUSValueA(hUSKey: IntNative, pszValue: CPointer<UInt8>, dwType: UInt32, pvData: CPointer<Unit>, cbData: UInt32, dwFlags: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegWriteUSValueA == "on"]
+public unsafe func Windows_SHRegWriteUSValueA(hUSKey: IntNative, pszValue: CPointer<UInt8>, dwType: UInt32, pvData: CPointer<Unit>, cbData: UInt32, dwFlags: UInt32): windows_core.WIN32_ERROR {
+    return SHRegWriteUSValueA(hUSKey, pszValue, dwType, pvData, cbData, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegWriteUSValueW == "on"]
+foreign {
+    // param-hint: pvData bytes=param[4]
+    func SHRegWriteUSValueW(hUSKey: IntNative, pwzValue: CPointer<UInt16>, dwType: UInt32, pvData: CPointer<Unit>, cbData: UInt32, dwFlags: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegWriteUSValueW == "on"]
+public unsafe func Windows_SHRegWriteUSValueW(hUSKey: IntNative, pwzValue: CPointer<UInt16>, dwType: UInt32, pvData: CPointer<Unit>, cbData: UInt32, dwFlags: UInt32): windows_core.WIN32_ERROR {
+    return SHRegWriteUSValueW(hUSKey, pwzValue, dwType, pvData, cbData, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHReleaseThreadRef == "on"]
+foreign {
+    func SHReleaseThreadRef(): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHReleaseThreadRef == "on"]
+public unsafe func Windows_SHReleaseThreadRef(): Int32 {
+    return SHReleaseThreadRef()
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHSendMessageBroadcastA == "on"]
+foreign {
+    func SHSendMessageBroadcastA(uMsg: UInt32, wParam: UIntNative, lParam: IntNative): IntNative
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHSendMessageBroadcastA == "on"]
+public unsafe func Windows_SHSendMessageBroadcastA(uMsg: UInt32, wParam: UIntNative, lParam: IntNative): IntNative {
+    return SHSendMessageBroadcastA(uMsg, wParam, lParam)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHSendMessageBroadcastW == "on"]
+foreign {
+    func SHSendMessageBroadcastW(uMsg: UInt32, wParam: UIntNative, lParam: IntNative): IntNative
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHSendMessageBroadcastW == "on"]
+public unsafe func Windows_SHSendMessageBroadcastW(uMsg: UInt32, wParam: UIntNative, lParam: IntNative): IntNative {
+    return SHSendMessageBroadcastW(uMsg, wParam, lParam)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHSetThreadRef == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: punk optional
+    func SHSetThreadRef(punk: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHSetThreadRef == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SHSetThreadRef(punk: CPointer<Unit>): Int32 {
+    return SHSetThreadRef(punk)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHSetValueA == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pszSubKey optional
+    // param-hint: pszValue optional
+    // param-hint: pvData bytes=param[5] optional
+    func SHSetValueA(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt8>, pszValue: CPointer<UInt8>, dwType: UInt32, pvData: CPointer<Unit>, cbData: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHSetValueA == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHSetValueA(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt8>, pszValue: CPointer<UInt8>, dwType: UInt32, pvData: CPointer<Unit>, cbData: UInt32): Int32 {
+    return SHSetValueA(hkey, pszSubKey, pszValue, dwType, pvData, cbData)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHSetValueW == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pszSubKey optional
+    // param-hint: pszValue optional
+    // param-hint: pvData bytes=param[5] optional
+    func SHSetValueW(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt16>, pszValue: CPointer<UInt16>, dwType: UInt32, pvData: CPointer<Unit>, cbData: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHSetValueW == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SHSetValueW(hkey: Win32_System_Registry.HKEY, pszSubKey: CPointer<UInt16>, pszValue: CPointer<UInt16>, dwType: UInt32, pvData: CPointer<Unit>, cbData: UInt32): Int32 {
+    return SHSetValueW(hkey, pszSubKey, pszValue, dwType, pvData, cbData)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHSkipJunction == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: pbc optional
+    func SHSkipJunction(pbc: CPointer<Unit>, pclsid: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHSkipJunction == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SHSkipJunction(pbc: CPointer<Unit>, pclsid: CPointer<GUID>): Int32 {
+    return SHSkipJunction(pbc, pclsid)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHStrDupA == "on"]
+foreign {
+    func SHStrDupA(psz: CPointer<UInt8>, ppwsz: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHStrDupA == "on"]
+public unsafe func Windows_SHStrDupA(psz: CPointer<UInt8>, ppwsz: CPointer<CPointer<UInt16>>): Int32 {
+    return SHStrDupA(psz, ppwsz)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHStrDupW == "on"]
+foreign {
+    func SHStrDupW(psz: CPointer<UInt16>, ppwsz: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHStrDupW == "on"]
+public unsafe func Windows_SHStrDupW(psz: CPointer<UInt16>, ppwsz: CPointer<CPointer<UInt16>>): Int32 {
+    return SHStrDupW(psz, ppwsz)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHStripMneumonicA == "on"]
+foreign {
+    func SHStripMneumonicA(pszMenu: CPointer<UInt8>): Int8
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHStripMneumonicA == "on"]
+public unsafe func Windows_SHStripMneumonicA(pszMenu: CPointer<UInt8>): Int8 {
+    return SHStripMneumonicA(pszMenu)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHStripMneumonicW == "on"]
+foreign {
+    func SHStripMneumonicW(pszMenu: CPointer<UInt16>): UInt16
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHStripMneumonicW == "on"]
+public unsafe func Windows_SHStripMneumonicW(pszMenu: CPointer<UInt16>): UInt16 {
+    return SHStripMneumonicW(pszMenu)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHUnicodeToAnsi == "on"]
+foreign {
+    // param-hint: pszDst len=param[2]
+    func SHUnicodeToAnsi(pwszSrc: CPointer<UInt16>, pszDst: CPointer<UInt8>, cchBuf: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHUnicodeToAnsi == "on"]
+public unsafe func Windows_SHUnicodeToAnsi(pwszSrc: CPointer<UInt16>, pszDst: CPointer<UInt8>, cchBuf: Int32): Int32 {
+    return SHUnicodeToAnsi(pwszSrc, pszDst, cchBuf)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHUnicodeToUnicode == "on"]
+foreign {
+    // param-hint: pwzDst len=param[2]
+    func SHUnicodeToUnicode(pwzSrc: CPointer<UInt16>, pwzDst: CPointer<UInt16>, cwchBuf: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHUnicodeToUnicode == "on"]
+public unsafe func Windows_SHUnicodeToUnicode(pwzSrc: CPointer<UInt16>, pwzDst: CPointer<UInt16>, cwchBuf: Int32): Int32 {
+    return SHUnicodeToUnicode(pwzSrc, pwzDst, cwchBuf)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHUnlockShared == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SHUnlockShared(pvData: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHUnlockShared == "on"]
+public unsafe func Windows_SHUnlockShared(pvData: CPointer<Unit>): Int32 {
+    return SHUnlockShared(pvData)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCSpnA == "on"]
+foreign {
+    func StrCSpnA(pszStr: CPointer<UInt8>, pszSet: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCSpnA == "on"]
+public unsafe func Windows_StrCSpnA(pszStr: CPointer<UInt8>, pszSet: CPointer<UInt8>): Int32 {
+    return StrCSpnA(pszStr, pszSet)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCSpnIA == "on"]
+foreign {
+    func StrCSpnIA(pszStr: CPointer<UInt8>, pszSet: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCSpnIA == "on"]
+public unsafe func Windows_StrCSpnIA(pszStr: CPointer<UInt8>, pszSet: CPointer<UInt8>): Int32 {
+    return StrCSpnIA(pszStr, pszSet)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCSpnIW == "on"]
+foreign {
+    func StrCSpnIW(pszStr: CPointer<UInt16>, pszSet: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCSpnIW == "on"]
+public unsafe func Windows_StrCSpnIW(pszStr: CPointer<UInt16>, pszSet: CPointer<UInt16>): Int32 {
+    return StrCSpnIW(pszStr, pszSet)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCSpnW == "on"]
+foreign {
+    func StrCSpnW(pszStr: CPointer<UInt16>, pszSet: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCSpnW == "on"]
+public unsafe func Windows_StrCSpnW(pszStr: CPointer<UInt16>, pszSet: CPointer<UInt16>): Int32 {
+    return StrCSpnW(pszStr, pszSet)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCatBuffA == "on"]
+foreign {
+    // param-hint: pszDest len=param[2]
+    func StrCatBuffA(pszDest: CPointer<UInt8>, pszSrc: CPointer<UInt8>, cchDestBuffSize: Int32): CPointer<UInt8>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCatBuffA == "on"]
+public unsafe func Windows_StrCatBuffA(pszDest: CPointer<UInt8>, pszSrc: CPointer<UInt8>, cchDestBuffSize: Int32): CPointer<UInt8> {
+    return StrCatBuffA(pszDest, pszSrc, cchDestBuffSize)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCatBuffW == "on"]
+foreign {
+    // param-hint: pszDest len=param[2]
+    func StrCatBuffW(pszDest: CPointer<UInt16>, pszSrc: CPointer<UInt16>, cchDestBuffSize: Int32): CPointer<UInt16>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCatBuffW == "on"]
+public unsafe func Windows_StrCatBuffW(pszDest: CPointer<UInt16>, pszSrc: CPointer<UInt16>, cchDestBuffSize: Int32): CPointer<UInt16> {
+    return StrCatBuffW(pszDest, pszSrc, cchDestBuffSize)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCatChainW == "on"]
+foreign {
+    // param-hint: pszDst len=param[1]
+    func StrCatChainW(pszDst: CPointer<UInt16>, cchDst: UInt32, ichAt: UInt32, pszSrc: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCatChainW == "on"]
+public unsafe func Windows_StrCatChainW(pszDst: CPointer<UInt16>, cchDst: UInt32, ichAt: UInt32, pszSrc: CPointer<UInt16>): UInt32 {
+    return StrCatChainW(pszDst, cchDst, ichAt, pszSrc)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCatW == "on"]
+foreign {
+    func StrCatW(psz1: CPointer<UInt16>, psz2: CPointer<UInt16>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCatW == "on"]
+public unsafe func Windows_StrCatW(psz1: CPointer<UInt16>, psz2: CPointer<UInt16>): CPointer<UInt16> {
+    return StrCatW(psz1, psz2)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrChrA == "on"]
+foreign {
+    func StrChrA(pszStart: CPointer<UInt8>, wMatch: UInt16): CPointer<UInt8>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrChrA == "on"]
+public unsafe func Windows_StrChrA(pszStart: CPointer<UInt8>, wMatch: UInt16): CPointer<UInt8> {
+    return StrChrA(pszStart, wMatch)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrChrIA == "on"]
+foreign {
+    func StrChrIA(pszStart: CPointer<UInt8>, wMatch: UInt16): CPointer<UInt8>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrChrIA == "on"]
+public unsafe func Windows_StrChrIA(pszStart: CPointer<UInt8>, wMatch: UInt16): CPointer<UInt8> {
+    return StrChrIA(pszStart, wMatch)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrChrIW == "on"]
+foreign {
+    func StrChrIW(pszStart: CPointer<UInt16>, wMatch: UInt16): CPointer<UInt16>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrChrIW == "on"]
+public unsafe func Windows_StrChrIW(pszStart: CPointer<UInt16>, wMatch: UInt16): CPointer<UInt16> {
+    return StrChrIW(pszStart, wMatch)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrChrNIW == "on"]
+foreign {
+    func StrChrNIW(pszStart: CPointer<UInt16>, wMatch: UInt16, cchMax: UInt32): CPointer<UInt16>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrChrNIW == "on"]
+public unsafe func Windows_StrChrNIW(pszStart: CPointer<UInt16>, wMatch: UInt16, cchMax: UInt32): CPointer<UInt16> {
+    return StrChrNIW(pszStart, wMatch, cchMax)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrChrNW == "on"]
+foreign {
+    func StrChrNW(pszStart: CPointer<UInt16>, wMatch: UInt16, cchMax: UInt32): CPointer<UInt16>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrChrNW == "on"]
+public unsafe func Windows_StrChrNW(pszStart: CPointer<UInt16>, wMatch: UInt16, cchMax: UInt32): CPointer<UInt16> {
+    return StrChrNW(pszStart, wMatch, cchMax)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrChrW == "on"]
+foreign {
+    func StrChrW(pszStart: CPointer<UInt16>, wMatch: UInt16): CPointer<UInt16>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrChrW == "on"]
+public unsafe func Windows_StrChrW(pszStart: CPointer<UInt16>, wMatch: UInt16): CPointer<UInt16> {
+    return StrChrW(pszStart, wMatch)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpCA == "on"]
+foreign {
+    func StrCmpCA(pszStr1: CPointer<UInt8>, pszStr2: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpCA == "on"]
+public unsafe func Windows_StrCmpCA(pszStr1: CPointer<UInt8>, pszStr2: CPointer<UInt8>): Int32 {
+    return StrCmpCA(pszStr1, pszStr2)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpCW == "on"]
+foreign {
+    func StrCmpCW(pszStr1: CPointer<UInt16>, pszStr2: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpCW == "on"]
+public unsafe func Windows_StrCmpCW(pszStr1: CPointer<UInt16>, pszStr2: CPointer<UInt16>): Int32 {
+    return StrCmpCW(pszStr1, pszStr2)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpICA == "on"]
+foreign {
+    func StrCmpICA(pszStr1: CPointer<UInt8>, pszStr2: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpICA == "on"]
+public unsafe func Windows_StrCmpICA(pszStr1: CPointer<UInt8>, pszStr2: CPointer<UInt8>): Int32 {
+    return StrCmpICA(pszStr1, pszStr2)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpICW == "on"]
+foreign {
+    func StrCmpICW(pszStr1: CPointer<UInt16>, pszStr2: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpICW == "on"]
+public unsafe func Windows_StrCmpICW(pszStr1: CPointer<UInt16>, pszStr2: CPointer<UInt16>): Int32 {
+    return StrCmpICW(pszStr1, pszStr2)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpIW == "on"]
+foreign {
+    func StrCmpIW(psz1: CPointer<UInt16>, psz2: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpIW == "on"]
+public unsafe func Windows_StrCmpIW(psz1: CPointer<UInt16>, psz2: CPointer<UInt16>): Int32 {
+    return StrCmpIW(psz1, psz2)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpLogicalW == "on"]
+foreign {
+    func StrCmpLogicalW(psz1: CPointer<UInt16>, psz2: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpLogicalW == "on"]
+public unsafe func Windows_StrCmpLogicalW(psz1: CPointer<UInt16>, psz2: CPointer<UInt16>): Int32 {
+    return StrCmpLogicalW(psz1, psz2)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpNA == "on"]
+foreign {
+    func StrCmpNA(psz1: CPointer<UInt8>, psz2: CPointer<UInt8>, nChar: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpNA == "on"]
+public unsafe func Windows_StrCmpNA(psz1: CPointer<UInt8>, psz2: CPointer<UInt8>, nChar: Int32): Int32 {
+    return StrCmpNA(psz1, psz2, nChar)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpNCA == "on"]
+foreign {
+    func StrCmpNCA(pszStr1: CPointer<UInt8>, pszStr2: CPointer<UInt8>, nChar: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpNCA == "on"]
+public unsafe func Windows_StrCmpNCA(pszStr1: CPointer<UInt8>, pszStr2: CPointer<UInt8>, nChar: Int32): Int32 {
+    return StrCmpNCA(pszStr1, pszStr2, nChar)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpNCW == "on"]
+foreign {
+    func StrCmpNCW(pszStr1: CPointer<UInt16>, pszStr2: CPointer<UInt16>, nChar: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpNCW == "on"]
+public unsafe func Windows_StrCmpNCW(pszStr1: CPointer<UInt16>, pszStr2: CPointer<UInt16>, nChar: Int32): Int32 {
+    return StrCmpNCW(pszStr1, pszStr2, nChar)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpNIA == "on"]
+foreign {
+    func StrCmpNIA(psz1: CPointer<UInt8>, psz2: CPointer<UInt8>, nChar: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpNIA == "on"]
+public unsafe func Windows_StrCmpNIA(psz1: CPointer<UInt8>, psz2: CPointer<UInt8>, nChar: Int32): Int32 {
+    return StrCmpNIA(psz1, psz2, nChar)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpNICA == "on"]
+foreign {
+    func StrCmpNICA(pszStr1: CPointer<UInt8>, pszStr2: CPointer<UInt8>, nChar: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpNICA == "on"]
+public unsafe func Windows_StrCmpNICA(pszStr1: CPointer<UInt8>, pszStr2: CPointer<UInt8>, nChar: Int32): Int32 {
+    return StrCmpNICA(pszStr1, pszStr2, nChar)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpNICW == "on"]
+foreign {
+    func StrCmpNICW(pszStr1: CPointer<UInt16>, pszStr2: CPointer<UInt16>, nChar: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpNICW == "on"]
+public unsafe func Windows_StrCmpNICW(pszStr1: CPointer<UInt16>, pszStr2: CPointer<UInt16>, nChar: Int32): Int32 {
+    return StrCmpNICW(pszStr1, pszStr2, nChar)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpNIW == "on"]
+foreign {
+    func StrCmpNIW(psz1: CPointer<UInt16>, psz2: CPointer<UInt16>, nChar: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpNIW == "on"]
+public unsafe func Windows_StrCmpNIW(psz1: CPointer<UInt16>, psz2: CPointer<UInt16>, nChar: Int32): Int32 {
+    return StrCmpNIW(psz1, psz2, nChar)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpNW == "on"]
+foreign {
+    func StrCmpNW(psz1: CPointer<UInt16>, psz2: CPointer<UInt16>, nChar: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpNW == "on"]
+public unsafe func Windows_StrCmpNW(psz1: CPointer<UInt16>, psz2: CPointer<UInt16>, nChar: Int32): Int32 {
+    return StrCmpNW(psz1, psz2, nChar)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpW == "on"]
+foreign {
+    func StrCmpW(psz1: CPointer<UInt16>, psz2: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpW == "on"]
+public unsafe func Windows_StrCmpW(psz1: CPointer<UInt16>, psz2: CPointer<UInt16>): Int32 {
+    return StrCmpW(psz1, psz2)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCpyNW == "on"]
+foreign {
+    // param-hint: pszDst len=param[2]
+    func StrCpyNW(pszDst: CPointer<UInt16>, pszSrc: CPointer<UInt16>, cchMax: Int32): CPointer<UInt16>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCpyNW == "on"]
+public unsafe func Windows_StrCpyNW(pszDst: CPointer<UInt16>, pszSrc: CPointer<UInt16>, cchMax: Int32): CPointer<UInt16> {
+    return StrCpyNW(pszDst, pszSrc, cchMax)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCpyW == "on"]
+foreign {
+    func StrCpyW(psz1: CPointer<UInt16>, psz2: CPointer<UInt16>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCpyW == "on"]
+public unsafe func Windows_StrCpyW(psz1: CPointer<UInt16>, psz2: CPointer<UInt16>): CPointer<UInt16> {
+    return StrCpyW(psz1, psz2)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrDupA == "on"]
+foreign {
+    func StrDupA(pszSrch: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrDupA == "on"]
+public unsafe func Windows_StrDupA(pszSrch: CPointer<UInt8>): CPointer<UInt8> {
+    return StrDupA(pszSrch)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrDupW == "on"]
+foreign {
+    func StrDupW(pszSrch: CPointer<UInt16>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrDupW == "on"]
+public unsafe func Windows_StrDupW(pszSrch: CPointer<UInt16>): CPointer<UInt16> {
+    return StrDupW(pszSrch)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrFormatByteSize64A == "on"]
+foreign {
+    // param-hint: pszBuf len=param[2]
+    func StrFormatByteSize64A(qdw: Int64, pszBuf: CPointer<UInt8>, cchBuf: UInt32): CPointer<UInt8>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrFormatByteSize64A == "on"]
+public unsafe func Windows_StrFormatByteSize64A(qdw: Int64, pszBuf: CPointer<UInt8>, cchBuf: UInt32): CPointer<UInt8> {
+    return StrFormatByteSize64A(qdw, pszBuf, cchBuf)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrFormatByteSizeA == "on"]
+foreign {
+    // param-hint: pszBuf len=param[2]
+    func StrFormatByteSizeA(dw: UInt32, pszBuf: CPointer<UInt8>, cchBuf: UInt32): CPointer<UInt8>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrFormatByteSizeA == "on"]
+public unsafe func Windows_StrFormatByteSizeA(dw: UInt32, pszBuf: CPointer<UInt8>, cchBuf: UInt32): CPointer<UInt8> {
+    return StrFormatByteSizeA(dw, pszBuf, cchBuf)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrFormatByteSizeEx == "on"]
+foreign {
+    // param-hint: pszBuf len=param[3]
+    func StrFormatByteSizeEx(ull: UInt64, flags: Win32__impl_l0.SFBS_FLAGSAbi, pszBuf: CPointer<UInt16>, cchBuf: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrFormatByteSizeEx == "on"]
+public unsafe func Windows_StrFormatByteSizeEx(ull: UInt64, flags: Win32__impl_l0.SFBS_FLAGSAbi, pszBuf: CPointer<UInt16>, cchBuf: UInt32): Int32 {
+    return StrFormatByteSizeEx(ull, flags, pszBuf, cchBuf)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrFormatByteSizeW == "on"]
+foreign {
+    // param-hint: pszBuf len=param[2]
+    func StrFormatByteSizeW(qdw: Int64, pszBuf: CPointer<UInt16>, cchBuf: UInt32): CPointer<UInt16>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrFormatByteSizeW == "on"]
+public unsafe func Windows_StrFormatByteSizeW(qdw: Int64, pszBuf: CPointer<UInt16>, cchBuf: UInt32): CPointer<UInt16> {
+    return StrFormatByteSizeW(qdw, pszBuf, cchBuf)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrFormatKBSizeA == "on"]
+foreign {
+    // param-hint: pszBuf len=param[2]
+    func StrFormatKBSizeA(qdw: Int64, pszBuf: CPointer<UInt8>, cchBuf: UInt32): CPointer<UInt8>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrFormatKBSizeA == "on"]
+public unsafe func Windows_StrFormatKBSizeA(qdw: Int64, pszBuf: CPointer<UInt8>, cchBuf: UInt32): CPointer<UInt8> {
+    return StrFormatKBSizeA(qdw, pszBuf, cchBuf)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrFormatKBSizeW == "on"]
+foreign {
+    // param-hint: pszBuf len=param[2]
+    func StrFormatKBSizeW(qdw: Int64, pszBuf: CPointer<UInt16>, cchBuf: UInt32): CPointer<UInt16>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrFormatKBSizeW == "on"]
+public unsafe func Windows_StrFormatKBSizeW(qdw: Int64, pszBuf: CPointer<UInt16>, cchBuf: UInt32): CPointer<UInt16> {
+    return StrFormatKBSizeW(qdw, pszBuf, cchBuf)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrFromTimeIntervalA == "on"]
+foreign {
+    // param-hint: pszOut len=param[1]
+    func StrFromTimeIntervalA(pszOut: CPointer<UInt8>, cchMax: UInt32, dwTimeMS: UInt32, digits: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrFromTimeIntervalA == "on"]
+public unsafe func Windows_StrFromTimeIntervalA(pszOut: CPointer<UInt8>, cchMax: UInt32, dwTimeMS: UInt32, digits: Int32): Int32 {
+    return StrFromTimeIntervalA(pszOut, cchMax, dwTimeMS, digits)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrFromTimeIntervalW == "on"]
+foreign {
+    // param-hint: pszOut len=param[1]
+    func StrFromTimeIntervalW(pszOut: CPointer<UInt16>, cchMax: UInt32, dwTimeMS: UInt32, digits: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrFromTimeIntervalW == "on"]
+public unsafe func Windows_StrFromTimeIntervalW(pszOut: CPointer<UInt16>, cchMax: UInt32, dwTimeMS: UInt32, digits: Int32): Int32 {
+    return StrFromTimeIntervalW(pszOut, cchMax, dwTimeMS, digits)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrIsIntlEqualA == "on"]
+foreign {
+    func StrIsIntlEqualA(fCaseSens: Int32, pszString1: CPointer<UInt8>, pszString2: CPointer<UInt8>, nChar: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrIsIntlEqualA == "on"]
+public unsafe func Windows_StrIsIntlEqualA(fCaseSens: Int32, pszString1: CPointer<UInt8>, pszString2: CPointer<UInt8>, nChar: Int32): Int32 {
+    return StrIsIntlEqualA(fCaseSens, pszString1, pszString2, nChar)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrIsIntlEqualW == "on"]
+foreign {
+    func StrIsIntlEqualW(fCaseSens: Int32, pszString1: CPointer<UInt16>, pszString2: CPointer<UInt16>, nChar: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrIsIntlEqualW == "on"]
+public unsafe func Windows_StrIsIntlEqualW(fCaseSens: Int32, pszString1: CPointer<UInt16>, pszString2: CPointer<UInt16>, nChar: Int32): Int32 {
+    return StrIsIntlEqualW(fCaseSens, pszString1, pszString2, nChar)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrNCatA == "on"]
+foreign {
+    // param-hint: psz1 len=param[2]
+    func StrNCatA(psz1: CPointer<UInt8>, psz2: CPointer<UInt8>, cchMax: Int32): CPointer<UInt8>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrNCatA == "on"]
+public unsafe func Windows_StrNCatA(psz1: CPointer<UInt8>, psz2: CPointer<UInt8>, cchMax: Int32): CPointer<UInt8> {
+    return StrNCatA(psz1, psz2, cchMax)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrNCatW == "on"]
+foreign {
+    // param-hint: psz1 len=param[2]
+    func StrNCatW(psz1: CPointer<UInt16>, psz2: CPointer<UInt16>, cchMax: Int32): CPointer<UInt16>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrNCatW == "on"]
+public unsafe func Windows_StrNCatW(psz1: CPointer<UInt16>, psz2: CPointer<UInt16>, cchMax: Int32): CPointer<UInt16> {
+    return StrNCatW(psz1, psz2, cchMax)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrPBrkA == "on"]
+foreign {
+    func StrPBrkA(psz: CPointer<UInt8>, pszSet: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrPBrkA == "on"]
+public unsafe func Windows_StrPBrkA(psz: CPointer<UInt8>, pszSet: CPointer<UInt8>): CPointer<UInt8> {
+    return StrPBrkA(psz, pszSet)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrPBrkW == "on"]
+foreign {
+    func StrPBrkW(psz: CPointer<UInt16>, pszSet: CPointer<UInt16>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrPBrkW == "on"]
+public unsafe func Windows_StrPBrkW(psz: CPointer<UInt16>, pszSet: CPointer<UInt16>): CPointer<UInt16> {
+    return StrPBrkW(psz, pszSet)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrRChrA == "on"]
+foreign {
+    // param-hint: pszEnd optional
+    func StrRChrA(pszStart: CPointer<UInt8>, pszEnd: CPointer<UInt8>, wMatch: UInt16): CPointer<UInt8>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrRChrA == "on"]
+public unsafe func Windows_StrRChrA(pszStart: CPointer<UInt8>, pszEnd: CPointer<UInt8>, wMatch: UInt16): CPointer<UInt8> {
+    return StrRChrA(pszStart, pszEnd, wMatch)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrRChrIA == "on"]
+foreign {
+    // param-hint: pszEnd optional
+    func StrRChrIA(pszStart: CPointer<UInt8>, pszEnd: CPointer<UInt8>, wMatch: UInt16): CPointer<UInt8>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrRChrIA == "on"]
+public unsafe func Windows_StrRChrIA(pszStart: CPointer<UInt8>, pszEnd: CPointer<UInt8>, wMatch: UInt16): CPointer<UInt8> {
+    return StrRChrIA(pszStart, pszEnd, wMatch)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrRChrIW == "on"]
+foreign {
+    // param-hint: pszEnd optional
+    func StrRChrIW(pszStart: CPointer<UInt16>, pszEnd: CPointer<UInt16>, wMatch: UInt16): CPointer<UInt16>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrRChrIW == "on"]
+public unsafe func Windows_StrRChrIW(pszStart: CPointer<UInt16>, pszEnd: CPointer<UInt16>, wMatch: UInt16): CPointer<UInt16> {
+    return StrRChrIW(pszStart, pszEnd, wMatch)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrRChrW == "on"]
+foreign {
+    // param-hint: pszEnd optional
+    func StrRChrW(pszStart: CPointer<UInt16>, pszEnd: CPointer<UInt16>, wMatch: UInt16): CPointer<UInt16>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrRChrW == "on"]
+public unsafe func Windows_StrRChrW(pszStart: CPointer<UInt16>, pszEnd: CPointer<UInt16>, wMatch: UInt16): CPointer<UInt16> {
+    return StrRChrW(pszStart, pszEnd, wMatch)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrRStrIA == "on"]
+foreign {
+    // param-hint: pszLast optional
+    func StrRStrIA(pszSource: CPointer<UInt8>, pszLast: CPointer<UInt8>, pszSrch: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrRStrIA == "on"]
+public unsafe func Windows_StrRStrIA(pszSource: CPointer<UInt8>, pszLast: CPointer<UInt8>, pszSrch: CPointer<UInt8>): CPointer<UInt8> {
+    return StrRStrIA(pszSource, pszLast, pszSrch)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrRStrIW == "on"]
+foreign {
+    // param-hint: pszLast optional
+    func StrRStrIW(pszSource: CPointer<UInt16>, pszLast: CPointer<UInt16>, pszSrch: CPointer<UInt16>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrRStrIW == "on"]
+public unsafe func Windows_StrRStrIW(pszSource: CPointer<UInt16>, pszLast: CPointer<UInt16>, pszSrch: CPointer<UInt16>): CPointer<UInt16> {
+    return StrRStrIW(pszSource, pszLast, pszSrch)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrRetToBSTR == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
     // param-hint: pidl optional
     func StrRetToBSTR(pstr: CPointer<Win32__impl_l0.STRRETAbi>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, pbstr: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrRetToBSTR == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_StrRetToBSTR(pstr: CPointer<Win32__impl_l0.STRRETAbi>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, pbstr: CPointer<CPointer<UInt16>>): Int32 {
+    return StrRetToBSTR(pstr, pidl, pbstr)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrRetToBufA == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
     // param-hint: pidl optional
     // param-hint: pszBuf len=param[3]
     func StrRetToBufA(pstr: CPointer<Win32__impl_l0.STRRETAbi>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, pszBuf: CPointer<UInt8>, cchBuf: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrRetToBufA == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_StrRetToBufA(pstr: CPointer<Win32__impl_l0.STRRETAbi>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, pszBuf: CPointer<UInt8>, cchBuf: UInt32): Int32 {
+    return StrRetToBufA(pstr, pidl, pszBuf, cchBuf)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrRetToBufW == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
     // param-hint: pidl optional
     // param-hint: pszBuf len=param[3]
     func StrRetToBufW(pstr: CPointer<Win32__impl_l0.STRRETAbi>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, pszBuf: CPointer<UInt16>, cchBuf: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrRetToBufW == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_StrRetToBufW(pstr: CPointer<Win32__impl_l0.STRRETAbi>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, pszBuf: CPointer<UInt16>, cchBuf: UInt32): Int32 {
+    return StrRetToBufW(pstr, pidl, pszBuf, cchBuf)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrRetToStrA == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
     // param-hint: pidl optional
     func StrRetToStrA(pstr: CPointer<Win32__impl_l0.STRRETAbi>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, ppsz: CPointer<CPointer<UInt8>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrRetToStrA == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_StrRetToStrA(pstr: CPointer<Win32__impl_l0.STRRETAbi>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, ppsz: CPointer<CPointer<UInt8>>): Int32 {
+    return StrRetToStrA(pstr, pidl, ppsz)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrRetToStrW == "on" && Windows_Win32_UI_Shell_Common == "on"]
+foreign {
     // param-hint: pidl optional
     func StrRetToStrW(pstr: CPointer<Win32__impl_l0.STRRETAbi>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, ppsz: CPointer<CPointer<UInt16>>): Int32
 }
 
-@When[SHLWAPI == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-foreign {
-    func GetMenuPosFromID(hmenu: Win32__impl_l0.HMENU, id: UInt32): Int32
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrRetToStrW == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_StrRetToStrW(pstr: CPointer<Win32__impl_l0.STRRETAbi>, pidl: CPointer<Win32__impl_l1.ITEMIDLIST>, ppsz: CPointer<CPointer<UInt16>>): Int32 {
+    return StrRetToStrW(pstr, pidl, ppsz)
 }
 
-@When[USER32 == "on"]
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrSpnA == "on"]
+foreign {
+    func StrSpnA(psz: CPointer<UInt8>, pszSet: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrSpnA == "on"]
+public unsafe func Windows_StrSpnA(psz: CPointer<UInt8>, pszSet: CPointer<UInt8>): Int32 {
+    return StrSpnA(psz, pszSet)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrSpnW == "on"]
+foreign {
+    func StrSpnW(psz: CPointer<UInt16>, pszSet: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrSpnW == "on"]
+public unsafe func Windows_StrSpnW(psz: CPointer<UInt16>, pszSet: CPointer<UInt16>): Int32 {
+    return StrSpnW(psz, pszSet)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrStrA == "on"]
+foreign {
+    func StrStrA(pszFirst: CPointer<UInt8>, pszSrch: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrStrA == "on"]
+public unsafe func Windows_StrStrA(pszFirst: CPointer<UInt8>, pszSrch: CPointer<UInt8>): CPointer<UInt8> {
+    return StrStrA(pszFirst, pszSrch)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrStrIA == "on"]
+foreign {
+    func StrStrIA(pszFirst: CPointer<UInt8>, pszSrch: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrStrIA == "on"]
+public unsafe func Windows_StrStrIA(pszFirst: CPointer<UInt8>, pszSrch: CPointer<UInt8>): CPointer<UInt8> {
+    return StrStrIA(pszFirst, pszSrch)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrStrIW == "on"]
+foreign {
+    func StrStrIW(pszFirst: CPointer<UInt16>, pszSrch: CPointer<UInt16>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrStrIW == "on"]
+public unsafe func Windows_StrStrIW(pszFirst: CPointer<UInt16>, pszSrch: CPointer<UInt16>): CPointer<UInt16> {
+    return StrStrIW(pszFirst, pszSrch)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrStrNIW == "on"]
+foreign {
+    func StrStrNIW(pszFirst: CPointer<UInt16>, pszSrch: CPointer<UInt16>, cchMax: UInt32): CPointer<UInt16>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrStrNIW == "on"]
+public unsafe func Windows_StrStrNIW(pszFirst: CPointer<UInt16>, pszSrch: CPointer<UInt16>, cchMax: UInt32): CPointer<UInt16> {
+    return StrStrNIW(pszFirst, pszSrch, cchMax)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrStrNW == "on"]
+foreign {
+    func StrStrNW(pszFirst: CPointer<UInt16>, pszSrch: CPointer<UInt16>, cchMax: UInt32): CPointer<UInt16>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrStrNW == "on"]
+public unsafe func Windows_StrStrNW(pszFirst: CPointer<UInt16>, pszSrch: CPointer<UInt16>, cchMax: UInt32): CPointer<UInt16> {
+    return StrStrNW(pszFirst, pszSrch, cchMax)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrStrW == "on"]
+foreign {
+    func StrStrW(pszFirst: CPointer<UInt16>, pszSrch: CPointer<UInt16>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrStrW == "on"]
+public unsafe func Windows_StrStrW(pszFirst: CPointer<UInt16>, pszSrch: CPointer<UInt16>): CPointer<UInt16> {
+    return StrStrW(pszFirst, pszSrch)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrToInt64ExA == "on"]
+foreign {
+    func StrToInt64ExA(pszString: CPointer<UInt8>, dwFlags: Int32, pllRet: CPointer<Int64>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrToInt64ExA == "on"]
+public unsafe func Windows_StrToInt64ExA(pszString: CPointer<UInt8>, dwFlags: Int32, pllRet: CPointer<Int64>): Int32 {
+    return StrToInt64ExA(pszString, dwFlags, pllRet)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrToInt64ExW == "on"]
+foreign {
+    func StrToInt64ExW(pszString: CPointer<UInt16>, dwFlags: Int32, pllRet: CPointer<Int64>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrToInt64ExW == "on"]
+public unsafe func Windows_StrToInt64ExW(pszString: CPointer<UInt16>, dwFlags: Int32, pllRet: CPointer<Int64>): Int32 {
+    return StrToInt64ExW(pszString, dwFlags, pllRet)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrToIntA == "on"]
+foreign {
+    func StrToIntA(pszSrc: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrToIntA == "on"]
+public unsafe func Windows_StrToIntA(pszSrc: CPointer<UInt8>): Int32 {
+    return StrToIntA(pszSrc)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrToIntExA == "on"]
+foreign {
+    func StrToIntExA(pszString: CPointer<UInt8>, dwFlags: Int32, piRet: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrToIntExA == "on"]
+public unsafe func Windows_StrToIntExA(pszString: CPointer<UInt8>, dwFlags: Int32, piRet: CPointer<Int32>): Int32 {
+    return StrToIntExA(pszString, dwFlags, piRet)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrToIntExW == "on"]
+foreign {
+    func StrToIntExW(pszString: CPointer<UInt16>, dwFlags: Int32, piRet: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrToIntExW == "on"]
+public unsafe func Windows_StrToIntExW(pszString: CPointer<UInt16>, dwFlags: Int32, piRet: CPointer<Int32>): Int32 {
+    return StrToIntExW(pszString, dwFlags, piRet)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrToIntW == "on"]
+foreign {
+    func StrToIntW(pszSrc: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrToIntW == "on"]
+public unsafe func Windows_StrToIntW(pszSrc: CPointer<UInt16>): Int32 {
+    return StrToIntW(pszSrc)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrTrimA == "on"]
+foreign {
+    func StrTrimA(psz: CPointer<UInt8>, pszTrimChars: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrTrimA == "on"]
+public unsafe func Windows_StrTrimA(psz: CPointer<UInt8>, pszTrimChars: CPointer<UInt8>): Int32 {
+    return StrTrimA(psz, pszTrimChars)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrTrimW == "on"]
+foreign {
+    func StrTrimW(psz: CPointer<UInt16>, pszTrimChars: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrTrimW == "on"]
+public unsafe func Windows_StrTrimW(psz: CPointer<UInt16>, pszTrimChars: CPointer<UInt16>): Int32 {
+    return StrTrimW(psz, pszTrimChars)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlApplySchemeA == "on"]
+foreign {
+    // param-hint: pszOut len=param[2]
+    func UrlApplySchemeA(pszIn: CPointer<UInt8>, pszOut: CPointer<UInt8>, pcchOut: CPointer<UInt32>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlApplySchemeA == "on"]
+public unsafe func Windows_UrlApplySchemeA(pszIn: CPointer<UInt8>, pszOut: CPointer<UInt8>, pcchOut: CPointer<UInt32>, dwFlags: UInt32): Int32 {
+    return UrlApplySchemeA(pszIn, pszOut, pcchOut, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlApplySchemeW == "on"]
+foreign {
+    // param-hint: pszOut len=param[2]
+    func UrlApplySchemeW(pszIn: CPointer<UInt16>, pszOut: CPointer<UInt16>, pcchOut: CPointer<UInt32>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlApplySchemeW == "on"]
+public unsafe func Windows_UrlApplySchemeW(pszIn: CPointer<UInt16>, pszOut: CPointer<UInt16>, pcchOut: CPointer<UInt32>, dwFlags: UInt32): Int32 {
+    return UrlApplySchemeW(pszIn, pszOut, pcchOut, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlCanonicalizeA == "on"]
+foreign {
+    // param-hint: pszCanonicalized len=param[2]
+    func UrlCanonicalizeA(pszUrl: CPointer<UInt8>, pszCanonicalized: CPointer<UInt8>, pcchCanonicalized: CPointer<UInt32>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlCanonicalizeA == "on"]
+public unsafe func Windows_UrlCanonicalizeA(pszUrl: CPointer<UInt8>, pszCanonicalized: CPointer<UInt8>, pcchCanonicalized: CPointer<UInt32>, dwFlags: UInt32): Int32 {
+    return UrlCanonicalizeA(pszUrl, pszCanonicalized, pcchCanonicalized, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlCanonicalizeW == "on"]
+foreign {
+    // param-hint: pszCanonicalized len=param[2]
+    func UrlCanonicalizeW(pszUrl: CPointer<UInt16>, pszCanonicalized: CPointer<UInt16>, pcchCanonicalized: CPointer<UInt32>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlCanonicalizeW == "on"]
+public unsafe func Windows_UrlCanonicalizeW(pszUrl: CPointer<UInt16>, pszCanonicalized: CPointer<UInt16>, pcchCanonicalized: CPointer<UInt32>, dwFlags: UInt32): Int32 {
+    return UrlCanonicalizeW(pszUrl, pszCanonicalized, pcchCanonicalized, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlCombineA == "on"]
+foreign {
+    // param-hint: pszCombined len=param[3] optional
+    func UrlCombineA(pszBase: CPointer<UInt8>, pszRelative: CPointer<UInt8>, pszCombined: CPointer<UInt8>, pcchCombined: CPointer<UInt32>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlCombineA == "on"]
+public unsafe func Windows_UrlCombineA(pszBase: CPointer<UInt8>, pszRelative: CPointer<UInt8>, pszCombined: CPointer<UInt8>, pcchCombined: CPointer<UInt32>, dwFlags: UInt32): Int32 {
+    return UrlCombineA(pszBase, pszRelative, pszCombined, pcchCombined, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlCombineW == "on"]
+foreign {
+    // param-hint: pszCombined len=param[3] optional
+    func UrlCombineW(pszBase: CPointer<UInt16>, pszRelative: CPointer<UInt16>, pszCombined: CPointer<UInt16>, pcchCombined: CPointer<UInt32>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlCombineW == "on"]
+public unsafe func Windows_UrlCombineW(pszBase: CPointer<UInt16>, pszRelative: CPointer<UInt16>, pszCombined: CPointer<UInt16>, pcchCombined: CPointer<UInt32>, dwFlags: UInt32): Int32 {
+    return UrlCombineW(pszBase, pszRelative, pszCombined, pcchCombined, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlCompareA == "on"]
+foreign {
+    func UrlCompareA(psz1: CPointer<UInt8>, psz2: CPointer<UInt8>, fIgnoreSlash: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlCompareA == "on"]
+public unsafe func Windows_UrlCompareA(psz1: CPointer<UInt8>, psz2: CPointer<UInt8>, fIgnoreSlash: Int32): Int32 {
+    return UrlCompareA(psz1, psz2, fIgnoreSlash)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlCompareW == "on"]
+foreign {
+    func UrlCompareW(psz1: CPointer<UInt16>, psz2: CPointer<UInt16>, fIgnoreSlash: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlCompareW == "on"]
+public unsafe func Windows_UrlCompareW(psz1: CPointer<UInt16>, psz2: CPointer<UInt16>, fIgnoreSlash: Int32): Int32 {
+    return UrlCompareW(psz1, psz2, fIgnoreSlash)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlCreateFromPathA == "on"]
+foreign {
+    // param-hint: pszUrl len=param[2]
+    func UrlCreateFromPathA(pszPath: CPointer<UInt8>, pszUrl: CPointer<UInt8>, pcchUrl: CPointer<UInt32>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlCreateFromPathA == "on"]
+public unsafe func Windows_UrlCreateFromPathA(pszPath: CPointer<UInt8>, pszUrl: CPointer<UInt8>, pcchUrl: CPointer<UInt32>, dwFlags: UInt32): Int32 {
+    return UrlCreateFromPathA(pszPath, pszUrl, pcchUrl, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlCreateFromPathW == "on"]
+foreign {
+    // param-hint: pszUrl len=param[2]
+    func UrlCreateFromPathW(pszPath: CPointer<UInt16>, pszUrl: CPointer<UInt16>, pcchUrl: CPointer<UInt32>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlCreateFromPathW == "on"]
+public unsafe func Windows_UrlCreateFromPathW(pszPath: CPointer<UInt16>, pszUrl: CPointer<UInt16>, pcchUrl: CPointer<UInt32>, dwFlags: UInt32): Int32 {
+    return UrlCreateFromPathW(pszPath, pszUrl, pcchUrl, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlEscapeA == "on"]
+foreign {
+    // param-hint: pszEscaped len=param[2]
+    func UrlEscapeA(pszUrl: CPointer<UInt8>, pszEscaped: CPointer<UInt8>, pcchEscaped: CPointer<UInt32>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlEscapeA == "on"]
+public unsafe func Windows_UrlEscapeA(pszUrl: CPointer<UInt8>, pszEscaped: CPointer<UInt8>, pcchEscaped: CPointer<UInt32>, dwFlags: UInt32): Int32 {
+    return UrlEscapeA(pszUrl, pszEscaped, pcchEscaped, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlEscapeW == "on"]
+foreign {
+    // param-hint: pszEscaped len=param[2]
+    func UrlEscapeW(pszUrl: CPointer<UInt16>, pszEscaped: CPointer<UInt16>, pcchEscaped: CPointer<UInt32>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlEscapeW == "on"]
+public unsafe func Windows_UrlEscapeW(pszUrl: CPointer<UInt16>, pszEscaped: CPointer<UInt16>, pcchEscaped: CPointer<UInt32>, dwFlags: UInt32): Int32 {
+    return UrlEscapeW(pszUrl, pszEscaped, pcchEscaped, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlFixupW == "on"]
+foreign {
+    // param-hint: pszTranslatedUrl len=param[2]
+    func UrlFixupW(pcszUrl: CPointer<UInt16>, pszTranslatedUrl: CPointer<UInt16>, cchMax: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlFixupW == "on"]
+public unsafe func Windows_UrlFixupW(pcszUrl: CPointer<UInt16>, pszTranslatedUrl: CPointer<UInt16>, cchMax: UInt32): Int32 {
+    return UrlFixupW(pcszUrl, pszTranslatedUrl, cchMax)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlGetLocationA == "on"]
+foreign {
+    func UrlGetLocationA(pszURL: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlGetLocationA == "on"]
+public unsafe func Windows_UrlGetLocationA(pszURL: CPointer<UInt8>): CPointer<UInt8> {
+    return UrlGetLocationA(pszURL)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlGetLocationW == "on"]
+foreign {
+    func UrlGetLocationW(pszURL: CPointer<UInt16>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlGetLocationW == "on"]
+public unsafe func Windows_UrlGetLocationW(pszURL: CPointer<UInt16>): CPointer<UInt16> {
+    return UrlGetLocationW(pszURL)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlGetPartA == "on"]
+foreign {
+    // param-hint: pszOut len=param[2]
+    func UrlGetPartA(pszIn: CPointer<UInt8>, pszOut: CPointer<UInt8>, pcchOut: CPointer<UInt32>, dwPart: UInt32, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlGetPartA == "on"]
+public unsafe func Windows_UrlGetPartA(pszIn: CPointer<UInt8>, pszOut: CPointer<UInt8>, pcchOut: CPointer<UInt32>, dwPart: UInt32, dwFlags: UInt32): Int32 {
+    return UrlGetPartA(pszIn, pszOut, pcchOut, dwPart, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlGetPartW == "on"]
+foreign {
+    // param-hint: pszOut len=param[2]
+    func UrlGetPartW(pszIn: CPointer<UInt16>, pszOut: CPointer<UInt16>, pcchOut: CPointer<UInt32>, dwPart: UInt32, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlGetPartW == "on"]
+public unsafe func Windows_UrlGetPartW(pszIn: CPointer<UInt16>, pszOut: CPointer<UInt16>, pcchOut: CPointer<UInt32>, dwPart: UInt32, dwFlags: UInt32): Int32 {
+    return UrlGetPartW(pszIn, pszOut, pcchOut, dwPart, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlHashA == "on"]
+foreign {
+    // param-hint: pbHash bytes=param[2]
+    func UrlHashA(pszUrl: CPointer<UInt8>, pbHash: CPointer<UInt8>, cbHash: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlHashA == "on"]
+public unsafe func Windows_UrlHashA(pszUrl: CPointer<UInt8>, pbHash: CPointer<UInt8>, cbHash: UInt32): Int32 {
+    return UrlHashA(pszUrl, pbHash, cbHash)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlHashW == "on"]
+foreign {
+    // param-hint: pbHash bytes=param[2]
+    func UrlHashW(pszUrl: CPointer<UInt16>, pbHash: CPointer<UInt8>, cbHash: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlHashW == "on"]
+public unsafe func Windows_UrlHashW(pszUrl: CPointer<UInt16>, pbHash: CPointer<UInt8>, cbHash: UInt32): Int32 {
+    return UrlHashW(pszUrl, pbHash, cbHash)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlIsA == "on"]
+foreign {
+    func UrlIsA(pszUrl: CPointer<UInt8>, UrlIs: Win32__impl_l0.URLISAbi): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlIsA == "on"]
+public unsafe func Windows_UrlIsA(pszUrl: CPointer<UInt8>, UrlIs: Win32__impl_l0.URLISAbi): Int32 {
+    return UrlIsA(pszUrl, UrlIs)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlIsNoHistoryA == "on"]
+foreign {
+    func UrlIsNoHistoryA(pszURL: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlIsNoHistoryA == "on"]
+public unsafe func Windows_UrlIsNoHistoryA(pszURL: CPointer<UInt8>): Int32 {
+    return UrlIsNoHistoryA(pszURL)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlIsNoHistoryW == "on"]
+foreign {
+    func UrlIsNoHistoryW(pszURL: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlIsNoHistoryW == "on"]
+public unsafe func Windows_UrlIsNoHistoryW(pszURL: CPointer<UInt16>): Int32 {
+    return UrlIsNoHistoryW(pszURL)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlIsOpaqueA == "on"]
+foreign {
+    func UrlIsOpaqueA(pszURL: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlIsOpaqueA == "on"]
+public unsafe func Windows_UrlIsOpaqueA(pszURL: CPointer<UInt8>): Int32 {
+    return UrlIsOpaqueA(pszURL)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlIsOpaqueW == "on"]
+foreign {
+    func UrlIsOpaqueW(pszURL: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlIsOpaqueW == "on"]
+public unsafe func Windows_UrlIsOpaqueW(pszURL: CPointer<UInt16>): Int32 {
+    return UrlIsOpaqueW(pszURL)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlIsW == "on"]
+foreign {
+    func UrlIsW(pszUrl: CPointer<UInt16>, UrlIs: Win32__impl_l0.URLISAbi): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlIsW == "on"]
+public unsafe func Windows_UrlIsW(pszUrl: CPointer<UInt16>, UrlIs: Win32__impl_l0.URLISAbi): Int32 {
+    return UrlIsW(pszUrl, UrlIs)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlUnescapeA == "on"]
+foreign {
+    // param-hint: pszUnescaped len=param[2] optional
+    // param-hint: pcchUnescaped optional
+    func UrlUnescapeA(pszUrl: CPointer<UInt8>, pszUnescaped: CPointer<UInt8>, pcchUnescaped: CPointer<UInt32>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlUnescapeA == "on"]
+public unsafe func Windows_UrlUnescapeA(pszUrl: CPointer<UInt8>, pszUnescaped: CPointer<UInt8>, pcchUnescaped: CPointer<UInt32>, dwFlags: UInt32): Int32 {
+    return UrlUnescapeA(pszUrl, pszUnescaped, pcchUnescaped, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlUnescapeW == "on"]
+foreign {
+    // param-hint: pszUnescaped len=param[2] optional
+    // param-hint: pcchUnescaped optional
+    func UrlUnescapeW(pszUrl: CPointer<UInt16>, pszUnescaped: CPointer<UInt16>, pcchUnescaped: CPointer<UInt32>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlUnescapeW == "on"]
+public unsafe func Windows_UrlUnescapeW(pszUrl: CPointer<UInt16>, pszUnescaped: CPointer<UInt16>, pcchUnescaped: CPointer<UInt32>, dwFlags: UInt32): Int32 {
+    return UrlUnescapeW(pszUrl, pszUnescaped, pcchUnescaped, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_WhichPlatform == "on"]
+foreign {
+    func WhichPlatform(): UInt32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_WhichPlatform == "on"]
+public unsafe func Windows_WhichPlatform(): UInt32 {
+    return WhichPlatform()
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_wvnsprintfA == "on"]
+foreign {
+    // param-hint: pszDest len=param[1]
+    func wvnsprintfA(pszDest: CPointer<UInt8>, cchDest: Int32, pszFmt: CPointer<UInt8>, arglist: CPointer<Int8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_wvnsprintfA == "on"]
+public unsafe func Windows_wvnsprintfA(pszDest: CPointer<UInt8>, cchDest: Int32, pszFmt: CPointer<UInt8>, arglist: CPointer<Int8>): Int32 {
+    return wvnsprintfA(pszDest, cchDest, pszFmt, arglist)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_wvnsprintfW == "on"]
+foreign {
+    // param-hint: pszDest len=param[1]
+    func wvnsprintfW(pszDest: CPointer<UInt16>, cchDest: Int32, pszFmt: CPointer<UInt16>, arglist: CPointer<Int8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_wvnsprintfW == "on"]
+public unsafe func Windows_wvnsprintfW(pszDest: CPointer<UInt16>, cchDest: Int32, pszFmt: CPointer<UInt16>, arglist: CPointer<Int8>): Int32 {
+    return wvnsprintfW(pszDest, cchDest, pszFmt, arglist)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USER32 == "on" && Windows_Win32_UI_Shell_GetMenuContextHelpId == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    func GetMenuContextHelpId(param0: Win32__impl_l0.HMENU): UInt32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USER32 == "on" && Windows_Win32_UI_Shell_GetMenuContextHelpId == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_GetMenuContextHelpId(param0: Win32__impl_l0.HMENU): UInt32 {
+    return GetMenuContextHelpId(param0)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USER32 == "on" && Windows_Win32_UI_Shell_GetWindowContextHelpId == "on"]
 foreign {
     func GetWindowContextHelpId(param0: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USER32 == "on" && Windows_Win32_UI_Shell_GetWindowContextHelpId == "on"]
+public unsafe func Windows_GetWindowContextHelpId(param0: CPointer<Unit>): UInt32 {
+    return GetWindowContextHelpId(param0)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USER32 == "on" && Windows_Win32_UI_Shell_SetMenuContextHelpId == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetMenuContextHelpId(param0: Win32__impl_l0.HMENU, param1: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USER32 == "on" && Windows_Win32_UI_Shell_SetMenuContextHelpId == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_SetMenuContextHelpId(param0: Win32__impl_l0.HMENU, param1: UInt32): Int32 {
+    return SetMenuContextHelpId(param0, param1)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USER32 == "on" && Windows_Win32_UI_Shell_SetWindowContextHelpId == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetWindowContextHelpId(param0: CPointer<Unit>, param1: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USER32 == "on" && Windows_Win32_UI_Shell_SetWindowContextHelpId == "on"]
+public unsafe func Windows_SetWindowContextHelpId(param0: CPointer<Unit>, param1: UInt32): Int32 {
+    return SetWindowContextHelpId(param0, param1)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USER32 == "on" && Windows_Win32_UI_Shell_WinHelpA == "on"]
+foreign {
     // param-hint: hWndMain optional
     // param-hint: lpszHelp optional
     // pinvoke-hint: SetLastError
     func WinHelpA(hWndMain: CPointer<Unit>, lpszHelp: CPointer<UInt8>, uCommand: UInt32, dwData: UIntNative): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USER32 == "on" && Windows_Win32_UI_Shell_WinHelpA == "on"]
+public unsafe func Windows_WinHelpA(hWndMain: CPointer<Unit>, lpszHelp: CPointer<UInt8>, uCommand: UInt32, dwData: UIntNative): Int32 {
+    return WinHelpA(hWndMain, lpszHelp, uCommand, dwData)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USER32 == "on" && Windows_Win32_UI_Shell_WinHelpW == "on"]
+foreign {
     // param-hint: hWndMain optional
     // param-hint: lpszHelp optional
     // pinvoke-hint: SetLastError
     func WinHelpW(hWndMain: CPointer<Unit>, lpszHelp: CPointer<UInt16>, uCommand: UInt32, dwData: UIntNative): Int32
 }
 
-@When[USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-foreign {
-    func GetMenuContextHelpId(param0: Win32__impl_l0.HMENU): UInt32
-    // pinvoke-hint: SetLastError
-    func SetMenuContextHelpId(param0: Win32__impl_l0.HMENU, param1: UInt32): Int32
+@When[Windows_Win32_UI_Shell == "on" && USER32 == "on" && Windows_Win32_UI_Shell_WinHelpW == "on"]
+public unsafe func Windows_WinHelpW(hWndMain: CPointer<Unit>, lpszHelp: CPointer<UInt16>, uCommand: UInt32, dwData: UIntNative): Int32 {
+    return WinHelpW(hWndMain, lpszHelp, uCommand, dwData)
 }
 
-@When[USERENV == "on"]
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_CreateProfile == "on"]
 foreign {
     // param-hint: pszProfilePath len=param[3]
     func CreateProfile(pszUserSid: CPointer<UInt16>, pszUserName: CPointer<UInt16>, pszProfilePath: CPointer<UInt16>, cchProfilePath: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_CreateProfile == "on"]
+public unsafe func Windows_CreateProfile(pszUserSid: CPointer<UInt16>, pszUserName: CPointer<UInt16>, pszProfilePath: CPointer<UInt16>, cchProfilePath: UInt32): Int32 {
+    return CreateProfile(pszUserSid, pszUserName, pszProfilePath, cchProfilePath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_DeleteProfileA == "on"]
+foreign {
     // param-hint: lpProfilePath optional
     // param-hint: lpComputerName optional
     // pinvoke-hint: SetLastError
     func DeleteProfileA(lpSidString: CPointer<UInt8>, lpProfilePath: CPointer<UInt8>, lpComputerName: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_DeleteProfileA == "on"]
+public unsafe func Windows_DeleteProfileA(lpSidString: CPointer<UInt8>, lpProfilePath: CPointer<UInt8>, lpComputerName: CPointer<UInt8>): Int32 {
+    return DeleteProfileA(lpSidString, lpProfilePath, lpComputerName)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_DeleteProfileW == "on"]
+foreign {
     // param-hint: lpProfilePath optional
     // param-hint: lpComputerName optional
     // pinvoke-hint: SetLastError
     func DeleteProfileW(lpSidString: CPointer<UInt16>, lpProfilePath: CPointer<UInt16>, lpComputerName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_DeleteProfileW == "on"]
+public unsafe func Windows_DeleteProfileW(lpSidString: CPointer<UInt16>, lpProfilePath: CPointer<UInt16>, lpComputerName: CPointer<UInt16>): Int32 {
+    return DeleteProfileW(lpSidString, lpProfilePath, lpComputerName)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_GetAllUsersProfileDirectoryA == "on"]
+foreign {
     // param-hint: lpProfileDir len=param[1] optional
     // pinvoke-hint: SetLastError
     func GetAllUsersProfileDirectoryA(lpProfileDir: CPointer<UInt8>, lpcchSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_GetAllUsersProfileDirectoryA == "on"]
+public unsafe func Windows_GetAllUsersProfileDirectoryA(lpProfileDir: CPointer<UInt8>, lpcchSize: CPointer<UInt32>): Int32 {
+    return GetAllUsersProfileDirectoryA(lpProfileDir, lpcchSize)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_GetAllUsersProfileDirectoryW == "on"]
+foreign {
     // param-hint: lpProfileDir len=param[1] optional
     // pinvoke-hint: SetLastError
     func GetAllUsersProfileDirectoryW(lpProfileDir: CPointer<UInt16>, lpcchSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_GetAllUsersProfileDirectoryW == "on"]
+public unsafe func Windows_GetAllUsersProfileDirectoryW(lpProfileDir: CPointer<UInt16>, lpcchSize: CPointer<UInt32>): Int32 {
+    return GetAllUsersProfileDirectoryW(lpProfileDir, lpcchSize)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_GetDefaultUserProfileDirectoryA == "on"]
+foreign {
     // param-hint: lpProfileDir len=param[1] optional
     // pinvoke-hint: SetLastError
     func GetDefaultUserProfileDirectoryA(lpProfileDir: CPointer<UInt8>, lpcchSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_GetDefaultUserProfileDirectoryA == "on"]
+public unsafe func Windows_GetDefaultUserProfileDirectoryA(lpProfileDir: CPointer<UInt8>, lpcchSize: CPointer<UInt32>): Int32 {
+    return GetDefaultUserProfileDirectoryA(lpProfileDir, lpcchSize)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_GetDefaultUserProfileDirectoryW == "on"]
+foreign {
     // param-hint: lpProfileDir len=param[1] optional
     // pinvoke-hint: SetLastError
     func GetDefaultUserProfileDirectoryW(lpProfileDir: CPointer<UInt16>, lpcchSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_GetDefaultUserProfileDirectoryW == "on"]
+public unsafe func Windows_GetDefaultUserProfileDirectoryW(lpProfileDir: CPointer<UInt16>, lpcchSize: CPointer<UInt32>): Int32 {
+    return GetDefaultUserProfileDirectoryW(lpProfileDir, lpcchSize)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_GetProfileType == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetProfileType(dwFlags: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_GetProfileType == "on"]
+public unsafe func Windows_GetProfileType(dwFlags: CPointer<UInt32>): Int32 {
+    return GetProfileType(dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_GetProfilesDirectoryA == "on"]
+foreign {
     // param-hint: lpProfileDir len=param[1] optional
     // pinvoke-hint: SetLastError
     func GetProfilesDirectoryA(lpProfileDir: CPointer<UInt8>, lpcchSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_GetProfilesDirectoryA == "on"]
+public unsafe func Windows_GetProfilesDirectoryA(lpProfileDir: CPointer<UInt8>, lpcchSize: CPointer<UInt32>): Int32 {
+    return GetProfilesDirectoryA(lpProfileDir, lpcchSize)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_GetProfilesDirectoryW == "on"]
+foreign {
     // param-hint: lpProfileDir len=param[1] optional
     // pinvoke-hint: SetLastError
     func GetProfilesDirectoryW(lpProfileDir: CPointer<UInt16>, lpcchSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_GetProfilesDirectoryW == "on"]
+public unsafe func Windows_GetProfilesDirectoryW(lpProfileDir: CPointer<UInt16>, lpcchSize: CPointer<UInt32>): Int32 {
+    return GetProfilesDirectoryW(lpProfileDir, lpcchSize)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_GetUserProfileDirectoryA == "on"]
+foreign {
     // param-hint: lpProfileDir len=param[2] optional
     // pinvoke-hint: SetLastError
     func GetUserProfileDirectoryA(hToken: CPointer<Unit>, lpProfileDir: CPointer<UInt8>, lpcchSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_GetUserProfileDirectoryA == "on"]
+public unsafe func Windows_GetUserProfileDirectoryA(hToken: CPointer<Unit>, lpProfileDir: CPointer<UInt8>, lpcchSize: CPointer<UInt32>): Int32 {
+    return GetUserProfileDirectoryA(hToken, lpProfileDir, lpcchSize)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_GetUserProfileDirectoryW == "on"]
+foreign {
     // param-hint: lpProfileDir len=param[2] optional
     // pinvoke-hint: SetLastError
     func GetUserProfileDirectoryW(hToken: CPointer<Unit>, lpProfileDir: CPointer<UInt16>, lpcchSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_GetUserProfileDirectoryW == "on"]
+public unsafe func Windows_GetUserProfileDirectoryW(hToken: CPointer<Unit>, lpProfileDir: CPointer<UInt16>, lpcchSize: CPointer<UInt32>): Int32 {
+    return GetUserProfileDirectoryW(hToken, lpProfileDir, lpcchSize)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_LoadUserProfileA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func LoadUserProfileA(hToken: CPointer<Unit>, lpProfileInfo: CPointer<Win32__impl_l0.PROFILEINFOAAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_LoadUserProfileA == "on"]
+public unsafe func Windows_LoadUserProfileA(hToken: CPointer<Unit>, lpProfileInfo: CPointer<Win32__impl_l0.PROFILEINFOAAbi>): Int32 {
+    return LoadUserProfileA(hToken, lpProfileInfo)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_LoadUserProfileW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func LoadUserProfileW(hToken: CPointer<Unit>, lpProfileInfo: CPointer<Win32__impl_l0.PROFILEINFOWAbi>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_LoadUserProfileW == "on"]
+public unsafe func Windows_LoadUserProfileW(hToken: CPointer<Unit>, lpProfileInfo: CPointer<Win32__impl_l0.PROFILEINFOWAbi>): Int32 {
+    return LoadUserProfileW(hToken, lpProfileInfo)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_UnloadUserProfile == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func UnloadUserProfile(hToken: CPointer<Unit>, hProfile: CPointer<Unit>): Int32
 }
 
-@When[API_MS_WIN_CORE_PATH_L1_1_0 == "on"]
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_UnloadUserProfile == "on"]
+public unsafe func Windows_UnloadUserProfile(hToken: CPointer<Unit>, hProfile: CPointer<Unit>): Int32 {
+    return UnloadUserProfile(hToken, hProfile)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathAllocCanonicalize == "on"]
 foreign {
     func PathAllocCanonicalize(pszPathIn: CPointer<UInt16>, dwFlags: Win32__impl_l0.PATHCCH_OPTIONSAbi, ppszPathOut: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathAllocCanonicalize == "on"]
+public unsafe func Windows_PathAllocCanonicalize(pszPathIn: CPointer<UInt16>, dwFlags: Win32__impl_l0.PATHCCH_OPTIONSAbi, ppszPathOut: CPointer<CPointer<UInt16>>): Int32 {
+    return PathAllocCanonicalize(pszPathIn, dwFlags, ppszPathOut)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathAllocCombine == "on"]
+foreign {
     // param-hint: pszPathIn optional
     // param-hint: pszMore optional
     func PathAllocCombine(pszPathIn: CPointer<UInt16>, pszMore: CPointer<UInt16>, dwFlags: Win32__impl_l0.PATHCCH_OPTIONSAbi, ppszPathOut: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathAllocCombine == "on"]
+public unsafe func Windows_PathAllocCombine(pszPathIn: CPointer<UInt16>, pszMore: CPointer<UInt16>, dwFlags: Win32__impl_l0.PATHCCH_OPTIONSAbi, ppszPathOut: CPointer<CPointer<UInt16>>): Int32 {
+    return PathAllocCombine(pszPathIn, pszMore, dwFlags, ppszPathOut)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchAddBackslash == "on"]
+foreign {
     // param-hint: pszPath len=param[1]
     func PathCchAddBackslash(pszPath: CPointer<UInt16>, cchPath: UIntNative): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchAddBackslash == "on"]
+public unsafe func Windows_PathCchAddBackslash(pszPath: CPointer<UInt16>, cchPath: UIntNative): Int32 {
+    return PathCchAddBackslash(pszPath, cchPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchAddBackslashEx == "on"]
+foreign {
     // param-hint: pszPath len=param[1]
     // param-hint: ppszEnd optional
     // param-hint: pcchRemaining optional
     func PathCchAddBackslashEx(pszPath: CPointer<UInt16>, cchPath: UIntNative, ppszEnd: CPointer<CPointer<UInt16>>, pcchRemaining: CPointer<UIntNative>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchAddBackslashEx == "on"]
+public unsafe func Windows_PathCchAddBackslashEx(pszPath: CPointer<UInt16>, cchPath: UIntNative, ppszEnd: CPointer<CPointer<UInt16>>, pcchRemaining: CPointer<UIntNative>): Int32 {
+    return PathCchAddBackslashEx(pszPath, cchPath, ppszEnd, pcchRemaining)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchAddExtension == "on"]
+foreign {
     // param-hint: pszPath len=param[1]
     func PathCchAddExtension(pszPath: CPointer<UInt16>, cchPath: UIntNative, pszExt: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchAddExtension == "on"]
+public unsafe func Windows_PathCchAddExtension(pszPath: CPointer<UInt16>, cchPath: UIntNative, pszExt: CPointer<UInt16>): Int32 {
+    return PathCchAddExtension(pszPath, cchPath, pszExt)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchAppend == "on"]
+foreign {
     // param-hint: pszPath len=param[1]
     // param-hint: pszMore optional
     func PathCchAppend(pszPath: CPointer<UInt16>, cchPath: UIntNative, pszMore: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchAppend == "on"]
+public unsafe func Windows_PathCchAppend(pszPath: CPointer<UInt16>, cchPath: UIntNative, pszMore: CPointer<UInt16>): Int32 {
+    return PathCchAppend(pszPath, cchPath, pszMore)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchAppendEx == "on"]
+foreign {
     // param-hint: pszPath len=param[1]
     // param-hint: pszMore optional
     func PathCchAppendEx(pszPath: CPointer<UInt16>, cchPath: UIntNative, pszMore: CPointer<UInt16>, dwFlags: Win32__impl_l0.PATHCCH_OPTIONSAbi): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchAppendEx == "on"]
+public unsafe func Windows_PathCchAppendEx(pszPath: CPointer<UInt16>, cchPath: UIntNative, pszMore: CPointer<UInt16>, dwFlags: Win32__impl_l0.PATHCCH_OPTIONSAbi): Int32 {
+    return PathCchAppendEx(pszPath, cchPath, pszMore, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchCanonicalize == "on"]
+foreign {
     // param-hint: pszPathOut len=param[1]
     func PathCchCanonicalize(pszPathOut: CPointer<UInt16>, cchPathOut: UIntNative, pszPathIn: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchCanonicalize == "on"]
+public unsafe func Windows_PathCchCanonicalize(pszPathOut: CPointer<UInt16>, cchPathOut: UIntNative, pszPathIn: CPointer<UInt16>): Int32 {
+    return PathCchCanonicalize(pszPathOut, cchPathOut, pszPathIn)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchCanonicalizeEx == "on"]
+foreign {
     // param-hint: pszPathOut len=param[1]
     func PathCchCanonicalizeEx(pszPathOut: CPointer<UInt16>, cchPathOut: UIntNative, pszPathIn: CPointer<UInt16>, dwFlags: Win32__impl_l0.PATHCCH_OPTIONSAbi): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchCanonicalizeEx == "on"]
+public unsafe func Windows_PathCchCanonicalizeEx(pszPathOut: CPointer<UInt16>, cchPathOut: UIntNative, pszPathIn: CPointer<UInt16>, dwFlags: Win32__impl_l0.PATHCCH_OPTIONSAbi): Int32 {
+    return PathCchCanonicalizeEx(pszPathOut, cchPathOut, pszPathIn, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchCombine == "on"]
+foreign {
     // param-hint: pszPathOut len=param[1]
     // param-hint: pszPathIn optional
     // param-hint: pszMore optional
     func PathCchCombine(pszPathOut: CPointer<UInt16>, cchPathOut: UIntNative, pszPathIn: CPointer<UInt16>, pszMore: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchCombine == "on"]
+public unsafe func Windows_PathCchCombine(pszPathOut: CPointer<UInt16>, cchPathOut: UIntNative, pszPathIn: CPointer<UInt16>, pszMore: CPointer<UInt16>): Int32 {
+    return PathCchCombine(pszPathOut, cchPathOut, pszPathIn, pszMore)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchCombineEx == "on"]
+foreign {
     // param-hint: pszPathOut len=param[1]
     // param-hint: pszPathIn optional
     // param-hint: pszMore optional
     func PathCchCombineEx(pszPathOut: CPointer<UInt16>, cchPathOut: UIntNative, pszPathIn: CPointer<UInt16>, pszMore: CPointer<UInt16>, dwFlags: Win32__impl_l0.PATHCCH_OPTIONSAbi): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchCombineEx == "on"]
+public unsafe func Windows_PathCchCombineEx(pszPathOut: CPointer<UInt16>, cchPathOut: UIntNative, pszPathIn: CPointer<UInt16>, pszMore: CPointer<UInt16>, dwFlags: Win32__impl_l0.PATHCCH_OPTIONSAbi): Int32 {
+    return PathCchCombineEx(pszPathOut, cchPathOut, pszPathIn, pszMore, dwFlags)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchFindExtension == "on"]
+foreign {
     func PathCchFindExtension(pszPath: CPointer<UInt16>, cchPath: UIntNative, ppszExt: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchFindExtension == "on"]
+public unsafe func Windows_PathCchFindExtension(pszPath: CPointer<UInt16>, cchPath: UIntNative, ppszExt: CPointer<CPointer<UInt16>>): Int32 {
+    return PathCchFindExtension(pszPath, cchPath, ppszExt)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchIsRoot == "on"]
+foreign {
     // param-hint: pszPath optional
     func PathCchIsRoot(pszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchIsRoot == "on"]
+public unsafe func Windows_PathCchIsRoot(pszPath: CPointer<UInt16>): Int32 {
+    return PathCchIsRoot(pszPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchRemoveBackslash == "on"]
+foreign {
     // param-hint: pszPath len=param[1]
     func PathCchRemoveBackslash(pszPath: CPointer<UInt16>, cchPath: UIntNative): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchRemoveBackslash == "on"]
+public unsafe func Windows_PathCchRemoveBackslash(pszPath: CPointer<UInt16>, cchPath: UIntNative): Int32 {
+    return PathCchRemoveBackslash(pszPath, cchPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchRemoveBackslashEx == "on"]
+foreign {
     // param-hint: ppszEnd optional
     // param-hint: pcchRemaining optional
     func PathCchRemoveBackslashEx(pszPath: CPointer<UInt16>, cchPath: UIntNative, ppszEnd: CPointer<CPointer<UInt16>>, pcchRemaining: CPointer<UIntNative>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchRemoveBackslashEx == "on"]
+public unsafe func Windows_PathCchRemoveBackslashEx(pszPath: CPointer<UInt16>, cchPath: UIntNative, ppszEnd: CPointer<CPointer<UInt16>>, pcchRemaining: CPointer<UIntNative>): Int32 {
+    return PathCchRemoveBackslashEx(pszPath, cchPath, ppszEnd, pcchRemaining)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchRemoveExtension == "on"]
+foreign {
     func PathCchRemoveExtension(pszPath: CPointer<UInt16>, cchPath: UIntNative): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchRemoveExtension == "on"]
+public unsafe func Windows_PathCchRemoveExtension(pszPath: CPointer<UInt16>, cchPath: UIntNative): Int32 {
+    return PathCchRemoveExtension(pszPath, cchPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchRemoveFileSpec == "on"]
+foreign {
     func PathCchRemoveFileSpec(pszPath: CPointer<UInt16>, cchPath: UIntNative): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchRemoveFileSpec == "on"]
+public unsafe func Windows_PathCchRemoveFileSpec(pszPath: CPointer<UInt16>, cchPath: UIntNative): Int32 {
+    return PathCchRemoveFileSpec(pszPath, cchPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchRenameExtension == "on"]
+foreign {
     // param-hint: pszPath len=param[1]
     func PathCchRenameExtension(pszPath: CPointer<UInt16>, cchPath: UIntNative, pszExt: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchRenameExtension == "on"]
+public unsafe func Windows_PathCchRenameExtension(pszPath: CPointer<UInt16>, cchPath: UIntNative, pszExt: CPointer<UInt16>): Int32 {
+    return PathCchRenameExtension(pszPath, cchPath, pszExt)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchSkipRoot == "on"]
+foreign {
     func PathCchSkipRoot(pszPath: CPointer<UInt16>, ppszRootEnd: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchSkipRoot == "on"]
+public unsafe func Windows_PathCchSkipRoot(pszPath: CPointer<UInt16>, ppszRootEnd: CPointer<CPointer<UInt16>>): Int32 {
+    return PathCchSkipRoot(pszPath, ppszRootEnd)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchStripPrefix == "on"]
+foreign {
     // param-hint: pszPath len=param[1]
     func PathCchStripPrefix(pszPath: CPointer<UInt16>, cchPath: UIntNative): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchStripPrefix == "on"]
+public unsafe func Windows_PathCchStripPrefix(pszPath: CPointer<UInt16>, cchPath: UIntNative): Int32 {
+    return PathCchStripPrefix(pszPath, cchPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchStripToRoot == "on"]
+foreign {
     func PathCchStripToRoot(pszPath: CPointer<UInt16>, cchPath: UIntNative): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchStripToRoot == "on"]
+public unsafe func Windows_PathCchStripToRoot(pszPath: CPointer<UInt16>, cchPath: UIntNative): Int32 {
+    return PathCchStripToRoot(pszPath, cchPath)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathIsUNCEx == "on"]
+foreign {
     // param-hint: ppszServer optional
     func PathIsUNCEx(pszPath: CPointer<UInt16>, ppszServer: CPointer<CPointer<UInt16>>): Int32
 }
 
-@When[API_MS_WIN_CORE_PSM_APPNOTIFY_L1_1_0 == "on"]
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathIsUNCEx == "on"]
+public unsafe func Windows_PathIsUNCEx(pszPath: CPointer<UInt16>, ppszServer: CPointer<CPointer<UInt16>>): Int32 {
+    return PathIsUNCEx(pszPath, ppszServer)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PSM_APPNOTIFY_L1_1_0 == "on" && Windows_Win32_UI_Shell_RegisterAppStateChangeNotification == "on"]
 foreign {
     // param-hint: Context optional
     func RegisterAppStateChangeNotification(Routine: Win32__impl_l0.PAPPSTATE_CHANGE_ROUTINE, Context: CPointer<Unit>, Registration: CPointer<Win32__impl_l0.PAPPSTATE_REGISTRATION>): UInt32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PSM_APPNOTIFY_L1_1_0 == "on" && Windows_Win32_UI_Shell_RegisterAppStateChangeNotification == "on"]
+public unsafe func Windows_RegisterAppStateChangeNotification(Routine: Win32__impl_l0.PAPPSTATE_CHANGE_ROUTINE, Context: CPointer<Unit>, Registration: CPointer<Win32__impl_l0.PAPPSTATE_REGISTRATION>): UInt32 {
+    return RegisterAppStateChangeNotification(Routine, Context, Registration)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PSM_APPNOTIFY_L1_1_0 == "on" && Windows_Win32_UI_Shell_UnregisterAppStateChangeNotification == "on"]
+foreign {
     func UnregisterAppStateChangeNotification(Registration: Win32__impl_l0.PAPPSTATE_REGISTRATION): Unit
 }
 
-@When[API_MS_WIN_CORE_PSM_APPNOTIFY_L1_1_1 == "on"]
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PSM_APPNOTIFY_L1_1_0 == "on" && Windows_Win32_UI_Shell_UnregisterAppStateChangeNotification == "on"]
+public unsafe func Windows_UnregisterAppStateChangeNotification(Registration: Win32__impl_l0.PAPPSTATE_REGISTRATION): Unit {
+    UnregisterAppStateChangeNotification(Registration)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PSM_APPNOTIFY_L1_1_1 == "on" && Windows_Win32_UI_Shell_RegisterAppConstrainedChangeNotification == "on"]
 foreign {
     // param-hint: Context optional
     func RegisterAppConstrainedChangeNotification(Routine: Win32__impl_l0.PAPPCONSTRAIN_CHANGE_ROUTINE, Context: CPointer<Unit>, Registration: CPointer<Win32__impl_l0.PAPPCONSTRAIN_REGISTRATION>): UInt32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PSM_APPNOTIFY_L1_1_1 == "on" && Windows_Win32_UI_Shell_RegisterAppConstrainedChangeNotification == "on"]
+public unsafe func Windows_RegisterAppConstrainedChangeNotification(Routine: Win32__impl_l0.PAPPCONSTRAIN_CHANGE_ROUTINE, Context: CPointer<Unit>, Registration: CPointer<Win32__impl_l0.PAPPCONSTRAIN_REGISTRATION>): UInt32 {
+    return RegisterAppConstrainedChangeNotification(Routine, Context, Registration)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PSM_APPNOTIFY_L1_1_1 == "on" && Windows_Win32_UI_Shell_UnregisterAppConstrainedChangeNotification == "on"]
+foreign {
     func UnregisterAppConstrainedChangeNotification(Registration: Win32__impl_l0.PAPPCONSTRAIN_REGISTRATION): Unit
 }
 
-@When[API_MS_WIN_SHCORE_SCALING_L1_1_0 == "on"]
-foreign {
-    func RegisterScaleChangeNotifications(displayDevice: Win32__impl_l0.DISPLAY_DEVICE_TYPEAbi, hwndNotify: CPointer<Unit>, uMsgNotify: UInt32, pdwCookie: CPointer<UInt32>): Int32
-    func RevokeScaleChangeNotifications(displayDevice: Win32__impl_l0.DISPLAY_DEVICE_TYPEAbi, dwCookie: UInt32): Int32
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PSM_APPNOTIFY_L1_1_1 == "on" && Windows_Win32_UI_Shell_UnregisterAppConstrainedChangeNotification == "on"]
+public unsafe func Windows_UnregisterAppConstrainedChangeNotification(Registration: Win32__impl_l0.PAPPCONSTRAIN_REGISTRATION): Unit {
+    UnregisterAppConstrainedChangeNotification(Registration)
 }
 
-@When[API_MS_WIN_SHCORE_SCALING_L1_1_0 == "on" && Windows_Win32_UI_Shell_Common == "on"]
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_SHCORE_SCALING_L1_1_0 == "on" && Windows_Win32_UI_Shell_GetScaleFactorForDevice == "on" && Windows_Win32_UI_Shell_Common == "on"]
 foreign {
     func GetScaleFactorForDevice(deviceType: Win32__impl_l0.DISPLAY_DEVICE_TYPEAbi): Win32__impl_l0.DEVICE_SCALE_FACTORAbi
 }
 
-@When[API_MS_WIN_SHCORE_SCALING_L1_1_1 == "on"]
-foreign {
-    func RegisterScaleChangeEvent(hEvent: CPointer<Unit>, pdwCookie: CPointer<UIntNative>): Int32
-    func UnregisterScaleChangeEvent(dwCookie: UIntNative): Int32
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_SHCORE_SCALING_L1_1_0 == "on" && Windows_Win32_UI_Shell_GetScaleFactorForDevice == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_GetScaleFactorForDevice(deviceType: Win32__impl_l0.DISPLAY_DEVICE_TYPEAbi): Win32__impl_l0.DEVICE_SCALE_FACTORAbi {
+    return GetScaleFactorForDevice(deviceType)
 }
 
-@When[API_MS_WIN_SHCORE_SCALING_L1_1_1 == "on" && (Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_Shell_Common == "on")]
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_SHCORE_SCALING_L1_1_0 == "on" && Windows_Win32_UI_Shell_RegisterScaleChangeNotifications == "on"]
+foreign {
+    func RegisterScaleChangeNotifications(displayDevice: Win32__impl_l0.DISPLAY_DEVICE_TYPEAbi, hwndNotify: CPointer<Unit>, uMsgNotify: UInt32, pdwCookie: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_SHCORE_SCALING_L1_1_0 == "on" && Windows_Win32_UI_Shell_RegisterScaleChangeNotifications == "on"]
+public unsafe func Windows_RegisterScaleChangeNotifications(displayDevice: Win32__impl_l0.DISPLAY_DEVICE_TYPEAbi, hwndNotify: CPointer<Unit>, uMsgNotify: UInt32, pdwCookie: CPointer<UInt32>): Int32 {
+    return RegisterScaleChangeNotifications(displayDevice, hwndNotify, uMsgNotify, pdwCookie)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_SHCORE_SCALING_L1_1_0 == "on" && Windows_Win32_UI_Shell_RevokeScaleChangeNotifications == "on"]
+foreign {
+    func RevokeScaleChangeNotifications(displayDevice: Win32__impl_l0.DISPLAY_DEVICE_TYPEAbi, dwCookie: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_SHCORE_SCALING_L1_1_0 == "on" && Windows_Win32_UI_Shell_RevokeScaleChangeNotifications == "on"]
+public unsafe func Windows_RevokeScaleChangeNotifications(displayDevice: Win32__impl_l0.DISPLAY_DEVICE_TYPEAbi, dwCookie: UInt32): Int32 {
+    return RevokeScaleChangeNotifications(displayDevice, dwCookie)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_SHCORE_SCALING_L1_1_1 == "on" && Windows_Win32_UI_Shell_GetScaleFactorForMonitor == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_Shell_Common == "on"]
 foreign {
     func GetScaleFactorForMonitor(hMon: Win32_Graphics_Gdi.HMONITOR, pScale: CPointer<Win32__impl_l0.DEVICE_SCALE_FACTORAbi>): Int32
 }
 
-@When[API_MS_WIN_SHCORE_SCALING_L1_1_2 == "on"]
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_SHCORE_SCALING_L1_1_1 == "on" && Windows_Win32_UI_Shell_GetScaleFactorForMonitor == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public unsafe func Windows_GetScaleFactorForMonitor(hMon: Win32_Graphics_Gdi.HMONITOR, pScale: CPointer<Win32__impl_l0.DEVICE_SCALE_FACTORAbi>): Int32 {
+    return GetScaleFactorForMonitor(hMon, pScale)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_SHCORE_SCALING_L1_1_1 == "on" && Windows_Win32_UI_Shell_RegisterScaleChangeEvent == "on"]
+foreign {
+    func RegisterScaleChangeEvent(hEvent: CPointer<Unit>, pdwCookie: CPointer<UIntNative>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_SHCORE_SCALING_L1_1_1 == "on" && Windows_Win32_UI_Shell_RegisterScaleChangeEvent == "on"]
+public unsafe func Windows_RegisterScaleChangeEvent(hEvent: CPointer<Unit>, pdwCookie: CPointer<UIntNative>): Int32 {
+    return RegisterScaleChangeEvent(hEvent, pdwCookie)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_SHCORE_SCALING_L1_1_1 == "on" && Windows_Win32_UI_Shell_UnregisterScaleChangeEvent == "on"]
+foreign {
+    func UnregisterScaleChangeEvent(dwCookie: UIntNative): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_SHCORE_SCALING_L1_1_1 == "on" && Windows_Win32_UI_Shell_UnregisterScaleChangeEvent == "on"]
+public unsafe func Windows_UnregisterScaleChangeEvent(dwCookie: UIntNative): Int32 {
+    return UnregisterScaleChangeEvent(dwCookie)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_SHCORE_SCALING_L1_1_2 == "on" && Windows_Win32_UI_Shell_GetDpiForShellUIComponent == "on"]
 foreign {
     func GetDpiForShellUIComponent(param0: Win32__impl_l0.SHELL_UI_COMPONENTAbi): UInt32
 }
 
-@When[HLINK == "on"]
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_SHCORE_SCALING_L1_1_2 == "on" && Windows_Win32_UI_Shell_GetDpiForShellUIComponent == "on"]
+public unsafe func Windows_GetDpiForShellUIComponent(param0: Win32__impl_l0.SHELL_UI_COMPONENTAbi): UInt32 {
+    return GetDpiForShellUIComponent(param0)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkClone == "on"]
 foreign {
     func HlinkClone(pihl: CPointer<Unit>, riid: CPointer<GUID>, pihlsiteForClone: CPointer<Unit>, dwSiteData: UInt32, ppvObj: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkClone == "on"]
+public unsafe func Windows_HlinkClone(pihl: CPointer<Unit>, riid: CPointer<GUID>, pihlsiteForClone: CPointer<Unit>, dwSiteData: UInt32, ppvObj: CPointer<CPointer<Unit>>): Int32 {
+    return HlinkClone(pihl, riid, pihlsiteForClone, dwSiteData, ppvObj)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkCreateBrowseContext == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func HlinkCreateBrowseContext(piunkOuter: CPointer<Unit>, riid: CPointer<GUID>, ppvObj: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkCreateBrowseContext == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_HlinkCreateBrowseContext(piunkOuter: CPointer<Unit>, riid: CPointer<GUID>, ppvObj: CPointer<CPointer<Unit>>): Int32 {
+    return HlinkCreateBrowseContext(piunkOuter, riid, ppvObj)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkCreateExtensionServices == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func HlinkCreateExtensionServices(pwzAdditionalHeaders: CPointer<UInt16>, phwnd: CPointer<Unit>, pszUsername: CPointer<UInt16>, pszPassword: CPointer<UInt16>, piunkOuter: CPointer<Unit>, riid: CPointer<GUID>, ppvObj: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkCreateExtensionServices == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_HlinkCreateExtensionServices(pwzAdditionalHeaders: CPointer<UInt16>, phwnd: CPointer<Unit>, pszUsername: CPointer<UInt16>, pszPassword: CPointer<UInt16>, piunkOuter: CPointer<Unit>, riid: CPointer<GUID>, ppvObj: CPointer<CPointer<Unit>>): Int32 {
+    return HlinkCreateExtensionServices(pwzAdditionalHeaders, phwnd, pszUsername, pszPassword, piunkOuter, riid, ppvObj)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkCreateFromData == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func HlinkCreateFromData(piDataObj: CPointer<Unit>, pihlsite: CPointer<Unit>, dwSiteData: UInt32, piunkOuter: CPointer<Unit>, riid: CPointer<GUID>, ppvObj: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkCreateFromData == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_HlinkCreateFromData(piDataObj: CPointer<Unit>, pihlsite: CPointer<Unit>, dwSiteData: UInt32, piunkOuter: CPointer<Unit>, riid: CPointer<GUID>, ppvObj: CPointer<CPointer<Unit>>): Int32 {
+    return HlinkCreateFromData(piDataObj, pihlsite, dwSiteData, piunkOuter, riid, ppvObj)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkCreateFromMoniker == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func HlinkCreateFromMoniker(pimkTrgt: CPointer<Unit>, pwzLocation: CPointer<UInt16>, pwzFriendlyName: CPointer<UInt16>, pihlsite: CPointer<Unit>, dwSiteData: UInt32, piunkOuter: CPointer<Unit>, riid: CPointer<GUID>, ppvObj: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkCreateFromMoniker == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_HlinkCreateFromMoniker(pimkTrgt: CPointer<Unit>, pwzLocation: CPointer<UInt16>, pwzFriendlyName: CPointer<UInt16>, pihlsite: CPointer<Unit>, dwSiteData: UInt32, piunkOuter: CPointer<Unit>, riid: CPointer<GUID>, ppvObj: CPointer<CPointer<Unit>>): Int32 {
+    return HlinkCreateFromMoniker(pimkTrgt, pwzLocation, pwzFriendlyName, pihlsite, dwSiteData, piunkOuter, riid, ppvObj)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkCreateFromString == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func HlinkCreateFromString(pwzTarget: CPointer<UInt16>, pwzLocation: CPointer<UInt16>, pwzFriendlyName: CPointer<UInt16>, pihlsite: CPointer<Unit>, dwSiteData: UInt32, piunkOuter: CPointer<Unit>, riid: CPointer<GUID>, ppvObj: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkCreateFromString == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_HlinkCreateFromString(pwzTarget: CPointer<UInt16>, pwzLocation: CPointer<UInt16>, pwzFriendlyName: CPointer<UInt16>, pihlsite: CPointer<Unit>, dwSiteData: UInt32, piunkOuter: CPointer<Unit>, riid: CPointer<GUID>, ppvObj: CPointer<CPointer<Unit>>): Int32 {
+    return HlinkCreateFromString(pwzTarget, pwzLocation, pwzFriendlyName, pihlsite, dwSiteData, piunkOuter, riid, ppvObj)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkCreateShortcut == "on"]
+foreign {
     func HlinkCreateShortcut(grfHLSHORTCUTF: UInt32, pihl: CPointer<Unit>, pwzDir: CPointer<UInt16>, pwzFileName: CPointer<UInt16>, ppwzShortcutFile: CPointer<CPointer<UInt16>>, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkCreateShortcut == "on"]
+public unsafe func Windows_HlinkCreateShortcut(grfHLSHORTCUTF: UInt32, pihl: CPointer<Unit>, pwzDir: CPointer<UInt16>, pwzFileName: CPointer<UInt16>, ppwzShortcutFile: CPointer<CPointer<UInt16>>, dwReserved: UInt32): Int32 {
+    return HlinkCreateShortcut(grfHLSHORTCUTF, pihl, pwzDir, pwzFileName, ppwzShortcutFile, dwReserved)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkCreateShortcutFromMoniker == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func HlinkCreateShortcutFromMoniker(grfHLSHORTCUTF: UInt32, pimkTarget: CPointer<Unit>, pwzLocation: CPointer<UInt16>, pwzDir: CPointer<UInt16>, pwzFileName: CPointer<UInt16>, ppwzShortcutFile: CPointer<CPointer<UInt16>>, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkCreateShortcutFromMoniker == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_HlinkCreateShortcutFromMoniker(grfHLSHORTCUTF: UInt32, pimkTarget: CPointer<Unit>, pwzLocation: CPointer<UInt16>, pwzDir: CPointer<UInt16>, pwzFileName: CPointer<UInt16>, ppwzShortcutFile: CPointer<CPointer<UInt16>>, dwReserved: UInt32): Int32 {
+    return HlinkCreateShortcutFromMoniker(grfHLSHORTCUTF, pimkTarget, pwzLocation, pwzDir, pwzFileName, ppwzShortcutFile, dwReserved)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkCreateShortcutFromString == "on"]
+foreign {
     func HlinkCreateShortcutFromString(grfHLSHORTCUTF: UInt32, pwzTarget: CPointer<UInt16>, pwzLocation: CPointer<UInt16>, pwzDir: CPointer<UInt16>, pwzFileName: CPointer<UInt16>, ppwzShortcutFile: CPointer<CPointer<UInt16>>, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkCreateShortcutFromString == "on"]
+public unsafe func Windows_HlinkCreateShortcutFromString(grfHLSHORTCUTF: UInt32, pwzTarget: CPointer<UInt16>, pwzLocation: CPointer<UInt16>, pwzDir: CPointer<UInt16>, pwzFileName: CPointer<UInt16>, ppwzShortcutFile: CPointer<CPointer<UInt16>>, dwReserved: UInt32): Int32 {
+    return HlinkCreateShortcutFromString(grfHLSHORTCUTF, pwzTarget, pwzLocation, pwzDir, pwzFileName, ppwzShortcutFile, dwReserved)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkGetSpecialReference == "on"]
+foreign {
     func HlinkGetSpecialReference(uReference: UInt32, ppwzReference: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkGetSpecialReference == "on"]
+public unsafe func Windows_HlinkGetSpecialReference(uReference: UInt32, ppwzReference: CPointer<CPointer<UInt16>>): Int32 {
+    return HlinkGetSpecialReference(uReference, ppwzReference)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkGetValueFromParams == "on"]
+foreign {
     func HlinkGetValueFromParams(pwzParams: CPointer<UInt16>, pwzName: CPointer<UInt16>, ppwzValue: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkGetValueFromParams == "on"]
+public unsafe func Windows_HlinkGetValueFromParams(pwzParams: CPointer<UInt16>, pwzName: CPointer<UInt16>, ppwzValue: CPointer<CPointer<UInt16>>): Int32 {
+    return HlinkGetValueFromParams(pwzParams, pwzName, ppwzValue)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkIsShortcut == "on"]
+foreign {
     func HlinkIsShortcut(pwzFileName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkIsShortcut == "on"]
+public unsafe func Windows_HlinkIsShortcut(pwzFileName: CPointer<UInt16>): Int32 {
+    return HlinkIsShortcut(pwzFileName)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkNavigate == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func HlinkNavigate(pihl: CPointer<Unit>, pihlframe: CPointer<Unit>, grfHLNF: UInt32, pbc: CPointer<Unit>, pibsc: CPointer<Unit>, pihlbc: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkNavigate == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_HlinkNavigate(pihl: CPointer<Unit>, pihlframe: CPointer<Unit>, grfHLNF: UInt32, pbc: CPointer<Unit>, pibsc: CPointer<Unit>, pihlbc: CPointer<Unit>): Int32 {
+    return HlinkNavigate(pihl, pihlframe, grfHLNF, pbc, pibsc, pihlbc)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkNavigateToStringReference == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func HlinkNavigateToStringReference(pwzTarget: CPointer<UInt16>, pwzLocation: CPointer<UInt16>, pihlsite: CPointer<Unit>, dwSiteData: UInt32, pihlframe: CPointer<Unit>, grfHLNF: UInt32, pibc: CPointer<Unit>, pibsc: CPointer<Unit>, pihlbc: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkNavigateToStringReference == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_HlinkNavigateToStringReference(pwzTarget: CPointer<UInt16>, pwzLocation: CPointer<UInt16>, pihlsite: CPointer<Unit>, dwSiteData: UInt32, pihlframe: CPointer<Unit>, grfHLNF: UInt32, pibc: CPointer<Unit>, pibsc: CPointer<Unit>, pihlbc: CPointer<Unit>): Int32 {
+    return HlinkNavigateToStringReference(pwzTarget, pwzLocation, pihlsite, dwSiteData, pihlframe, grfHLNF, pibc, pibsc, pihlbc)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkOnNavigate == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func HlinkOnNavigate(pihlframe: CPointer<Unit>, pihlbc: CPointer<Unit>, grfHLNF: UInt32, pimkTarget: CPointer<Unit>, pwzLocation: CPointer<UInt16>, pwzFriendlyName: CPointer<UInt16>, puHLID: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkOnNavigate == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_HlinkOnNavigate(pihlframe: CPointer<Unit>, pihlbc: CPointer<Unit>, grfHLNF: UInt32, pimkTarget: CPointer<Unit>, pwzLocation: CPointer<UInt16>, pwzFriendlyName: CPointer<UInt16>, puHLID: CPointer<UInt32>): Int32 {
+    return HlinkOnNavigate(pihlframe, pihlbc, grfHLNF, pimkTarget, pwzLocation, pwzFriendlyName, puHLID)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkOnRenameDocument == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func HlinkOnRenameDocument(dwReserved: UInt32, pihlbc: CPointer<Unit>, pimkOld: CPointer<Unit>, pimkNew: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkOnRenameDocument == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_HlinkOnRenameDocument(dwReserved: UInt32, pihlbc: CPointer<Unit>, pimkOld: CPointer<Unit>, pimkNew: CPointer<Unit>): Int32 {
+    return HlinkOnRenameDocument(dwReserved, pihlbc, pimkOld, pimkNew)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkParseDisplayName == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func HlinkParseDisplayName(pibc: CPointer<Unit>, pwzDisplayName: CPointer<UInt16>, fNoForceAbs: Int32, pcchEaten: CPointer<UInt32>, ppimk: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkParseDisplayName == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_HlinkParseDisplayName(pibc: CPointer<Unit>, pwzDisplayName: CPointer<UInt16>, fNoForceAbs: Int32, pcchEaten: CPointer<UInt32>, ppimk: CPointer<CPointer<Unit>>): Int32 {
+    return HlinkParseDisplayName(pibc, pwzDisplayName, fNoForceAbs, pcchEaten, ppimk)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkPreprocessMoniker == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func HlinkPreprocessMoniker(pibc: CPointer<Unit>, pimkIn: CPointer<Unit>, ppimkOut: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkPreprocessMoniker == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_HlinkPreprocessMoniker(pibc: CPointer<Unit>, pimkIn: CPointer<Unit>, ppimkOut: CPointer<CPointer<Unit>>): Int32 {
+    return HlinkPreprocessMoniker(pibc, pimkIn, ppimkOut)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkQueryCreateFromData == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func HlinkQueryCreateFromData(piDataObj: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkQueryCreateFromData == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_HlinkQueryCreateFromData(piDataObj: CPointer<Unit>): Int32 {
+    return HlinkQueryCreateFromData(piDataObj)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkResolveMonikerForData == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func HlinkResolveMonikerForData(pimkReference: CPointer<Unit>, reserved: UInt32, pibc: CPointer<Unit>, cFmtetc: UInt32, rgFmtetc: CPointer<Win32__impl_l1.FORMATETCAbi>, pibsc: CPointer<Unit>, pimkBase: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkResolveMonikerForData == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_HlinkResolveMonikerForData(pimkReference: CPointer<Unit>, reserved: UInt32, pibc: CPointer<Unit>, cFmtetc: UInt32, rgFmtetc: CPointer<Win32__impl_l1.FORMATETCAbi>, pibsc: CPointer<Unit>, pimkBase: CPointer<Unit>): Int32 {
+    return HlinkResolveMonikerForData(pimkReference, reserved, pibc, cFmtetc, rgFmtetc, pibsc, pimkBase)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkResolveShortcut == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func HlinkResolveShortcut(pwzShortcutFileName: CPointer<UInt16>, pihlsite: CPointer<Unit>, dwSiteData: UInt32, piunkOuter: CPointer<Unit>, riid: CPointer<GUID>, ppvObj: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkResolveShortcut == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_HlinkResolveShortcut(pwzShortcutFileName: CPointer<UInt16>, pihlsite: CPointer<Unit>, dwSiteData: UInt32, piunkOuter: CPointer<Unit>, riid: CPointer<GUID>, ppvObj: CPointer<CPointer<Unit>>): Int32 {
+    return HlinkResolveShortcut(pwzShortcutFileName, pihlsite, dwSiteData, piunkOuter, riid, ppvObj)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkResolveShortcutToMoniker == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func HlinkResolveShortcutToMoniker(pwzShortcutFileName: CPointer<UInt16>, ppimkTarget: CPointer<CPointer<Unit>>, ppwzLocation: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkResolveShortcutToMoniker == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_HlinkResolveShortcutToMoniker(pwzShortcutFileName: CPointer<UInt16>, ppimkTarget: CPointer<CPointer<Unit>>, ppwzLocation: CPointer<CPointer<UInt16>>): Int32 {
+    return HlinkResolveShortcutToMoniker(pwzShortcutFileName, ppimkTarget, ppwzLocation)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkResolveShortcutToString == "on"]
+foreign {
     func HlinkResolveShortcutToString(pwzShortcutFileName: CPointer<UInt16>, ppwzTarget: CPointer<CPointer<UInt16>>, ppwzLocation: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkResolveShortcutToString == "on"]
+public unsafe func Windows_HlinkResolveShortcutToString(pwzShortcutFileName: CPointer<UInt16>, ppwzTarget: CPointer<CPointer<UInt16>>, ppwzLocation: CPointer<CPointer<UInt16>>): Int32 {
+    return HlinkResolveShortcutToString(pwzShortcutFileName, ppwzTarget, ppwzLocation)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkResolveStringForData == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func HlinkResolveStringForData(pwzReference: CPointer<UInt16>, reserved: UInt32, pibc: CPointer<Unit>, cFmtetc: UInt32, rgFmtetc: CPointer<Win32__impl_l1.FORMATETCAbi>, pibsc: CPointer<Unit>, pimkBase: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkResolveStringForData == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_HlinkResolveStringForData(pwzReference: CPointer<UInt16>, reserved: UInt32, pibc: CPointer<Unit>, cFmtetc: UInt32, rgFmtetc: CPointer<Win32__impl_l1.FORMATETCAbi>, pibsc: CPointer<Unit>, pimkBase: CPointer<Unit>): Int32 {
+    return HlinkResolveStringForData(pwzReference, reserved, pibc, cFmtetc, rgFmtetc, pibsc, pimkBase)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkSetSpecialReference == "on"]
+foreign {
     func HlinkSetSpecialReference(uReference: UInt32, pwzReference: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkSetSpecialReference == "on"]
+public unsafe func Windows_HlinkSetSpecialReference(uReference: UInt32, pwzReference: CPointer<UInt16>): Int32 {
+    return HlinkSetSpecialReference(uReference, pwzReference)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkTranslateURL == "on"]
+foreign {
     func HlinkTranslateURL(pwzURL: CPointer<UInt16>, grfFlags: UInt32, ppwzTranslatedURL: CPointer<CPointer<UInt16>>): Int32
 }
 
-@When[HLINK == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkTranslateURL == "on"]
+public unsafe func Windows_HlinkTranslateURL(pwzURL: CPointer<UInt16>, grfFlags: UInt32, ppwzTranslatedURL: CPointer<CPointer<UInt16>>): Int32 {
+    return HlinkTranslateURL(pwzURL, grfFlags, ppwzTranslatedURL)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkUpdateStackItem == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func HlinkCreateBrowseContext(piunkOuter: CPointer<Unit>, riid: CPointer<GUID>, ppvObj: CPointer<CPointer<Unit>>): Int32
-    func HlinkCreateExtensionServices(pwzAdditionalHeaders: CPointer<UInt16>, phwnd: CPointer<Unit>, pszUsername: CPointer<UInt16>, pszPassword: CPointer<UInt16>, piunkOuter: CPointer<Unit>, riid: CPointer<GUID>, ppvObj: CPointer<CPointer<Unit>>): Int32
-    func HlinkCreateFromData(piDataObj: CPointer<Unit>, pihlsite: CPointer<Unit>, dwSiteData: UInt32, piunkOuter: CPointer<Unit>, riid: CPointer<GUID>, ppvObj: CPointer<CPointer<Unit>>): Int32
-    func HlinkCreateFromMoniker(pimkTrgt: CPointer<Unit>, pwzLocation: CPointer<UInt16>, pwzFriendlyName: CPointer<UInt16>, pihlsite: CPointer<Unit>, dwSiteData: UInt32, piunkOuter: CPointer<Unit>, riid: CPointer<GUID>, ppvObj: CPointer<CPointer<Unit>>): Int32
-    func HlinkCreateFromString(pwzTarget: CPointer<UInt16>, pwzLocation: CPointer<UInt16>, pwzFriendlyName: CPointer<UInt16>, pihlsite: CPointer<Unit>, dwSiteData: UInt32, piunkOuter: CPointer<Unit>, riid: CPointer<GUID>, ppvObj: CPointer<CPointer<Unit>>): Int32
-    func HlinkCreateShortcutFromMoniker(grfHLSHORTCUTF: UInt32, pimkTarget: CPointer<Unit>, pwzLocation: CPointer<UInt16>, pwzDir: CPointer<UInt16>, pwzFileName: CPointer<UInt16>, ppwzShortcutFile: CPointer<CPointer<UInt16>>, dwReserved: UInt32): Int32
-    func HlinkNavigate(pihl: CPointer<Unit>, pihlframe: CPointer<Unit>, grfHLNF: UInt32, pbc: CPointer<Unit>, pibsc: CPointer<Unit>, pihlbc: CPointer<Unit>): Int32
-    func HlinkNavigateToStringReference(pwzTarget: CPointer<UInt16>, pwzLocation: CPointer<UInt16>, pihlsite: CPointer<Unit>, dwSiteData: UInt32, pihlframe: CPointer<Unit>, grfHLNF: UInt32, pibc: CPointer<Unit>, pibsc: CPointer<Unit>, pihlbc: CPointer<Unit>): Int32
-    func HlinkOnNavigate(pihlframe: CPointer<Unit>, pihlbc: CPointer<Unit>, grfHLNF: UInt32, pimkTarget: CPointer<Unit>, pwzLocation: CPointer<UInt16>, pwzFriendlyName: CPointer<UInt16>, puHLID: CPointer<UInt32>): Int32
-    func HlinkOnRenameDocument(dwReserved: UInt32, pihlbc: CPointer<Unit>, pimkOld: CPointer<Unit>, pimkNew: CPointer<Unit>): Int32
-    func HlinkParseDisplayName(pibc: CPointer<Unit>, pwzDisplayName: CPointer<UInt16>, fNoForceAbs: Int32, pcchEaten: CPointer<UInt32>, ppimk: CPointer<CPointer<Unit>>): Int32
-    func HlinkPreprocessMoniker(pibc: CPointer<Unit>, pimkIn: CPointer<Unit>, ppimkOut: CPointer<CPointer<Unit>>): Int32
-    func HlinkQueryCreateFromData(piDataObj: CPointer<Unit>): Int32
-    func HlinkResolveMonikerForData(pimkReference: CPointer<Unit>, reserved: UInt32, pibc: CPointer<Unit>, cFmtetc: UInt32, rgFmtetc: CPointer<Win32__impl_l1.FORMATETCAbi>, pibsc: CPointer<Unit>, pimkBase: CPointer<Unit>): Int32
-    func HlinkResolveShortcut(pwzShortcutFileName: CPointer<UInt16>, pihlsite: CPointer<Unit>, dwSiteData: UInt32, piunkOuter: CPointer<Unit>, riid: CPointer<GUID>, ppvObj: CPointer<CPointer<Unit>>): Int32
-    func HlinkResolveShortcutToMoniker(pwzShortcutFileName: CPointer<UInt16>, ppimkTarget: CPointer<CPointer<Unit>>, ppwzLocation: CPointer<CPointer<UInt16>>): Int32
-    func HlinkResolveStringForData(pwzReference: CPointer<UInt16>, reserved: UInt32, pibc: CPointer<Unit>, cFmtetc: UInt32, rgFmtetc: CPointer<Win32__impl_l1.FORMATETCAbi>, pibsc: CPointer<Unit>, pimkBase: CPointer<Unit>): Int32
     func HlinkUpdateStackItem(pihlframe: CPointer<Unit>, pihlbc: CPointer<Unit>, uHLID: UInt32, pimkTrgt: CPointer<Unit>, pwzLocation: CPointer<UInt16>, pwzFriendlyName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkUpdateStackItem == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_HlinkUpdateStackItem(pihlframe: CPointer<Unit>, pihlbc: CPointer<Unit>, uHLID: UInt32, pimkTrgt: CPointer<Unit>, pwzLocation: CPointer<UInt16>, pwzFriendlyName: CPointer<UInt16>): Int32 {
+    return HlinkUpdateStackItem(pihlframe, pihlbc, uHLID, pimkTrgt, pwzLocation, pwzFriendlyName)
+}
+
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_OleSaveToStreamEx == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func OleSaveToStreamEx(piunk: CPointer<Unit>, pistm: CPointer<Unit>, fClearDirty: Int32): Int32
 }
 
-foreign {
-    func GetProcAddress(hModule: CPointer<Unit>, lpProcName: CPointer<UInt8>): CPointer<Unit>
-    func LoadLibraryA(lpLibFileName: CPointer<UInt8>): CPointer<Unit>
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_OleSaveToStreamEx == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_OleSaveToStreamEx(piunk: CPointer<Unit>, pistm: CPointer<Unit>, fClearDirty: Int32): Int32 {
+    return OleSaveToStreamEx(piunk, pistm, fClearDirty)
 }
 
-@When[SHELL32 == "on"]
-var __windowsBindgen_FileIconInitProcCache: CPointer<Unit> = CPointer<Unit>()
-
-@When[SHELL32 == "on"]
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_FileIconInit == "on"]
 func __windowsBindgen_FileIconInitProc(): CPointer<Unit> {
-    if (__windowsBindgen_FileIconInitProcCache.isNotNull()) {
-        return __windowsBindgen_FileIconInitProcCache
-    }
-    let moduleName = [0x53u8, 0x48u8, 0x45u8, 0x4Cu8, 0x4Cu8, 0x33u8, 0x32u8, 0x2Eu8, 0x64u8, 0x6Cu8, 0x6Cu8, 0u8]
-    let ordinal = unsafe { CPointer<UInt8>() + 660 }
-    unsafe {
-        let moduleHandle = acquireArrayRawData(moduleName)
-        try {
-            let module = LoadLibraryA(moduleHandle.pointer)
-            if (module.isNull()) {
-                throw Exception("failed to load SHELL32.dll")
-            }
-            let proc = GetProcAddress(module, ordinal)
-            if (proc.isNull()) {
-                throw Exception("failed to resolve FileIconInit entry point #660")
-            }
-            __windowsBindgen_FileIconInitProcCache = proc
-            return proc
-        } finally {
-            releaseArrayRawData(moduleHandle)
-        }
-    }
+    return windows_libloading.resolveProcByOrdinal("SHELL32.dll", 660)
 }
 
-@When[SHELL32 == "on"]
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_FileIconInit == "on"]
 unsafe func FileIconInit(fRestoreCache: Int32): Int32 {
     let call = CFunc<(Int32) -> Int32>(__windowsBindgen_FileIconInitProc())
     return unsafe { call(fRestoreCache) }
+}
+
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_FileIconInit == "on"]
+public unsafe func Windows_FileIconInit(fRestoreCache: Int32): Int32 {
+    return FileIconInit(fRestoreCache)
 }
 
 @When[Windows_Win32_UI_Shell == "on"]

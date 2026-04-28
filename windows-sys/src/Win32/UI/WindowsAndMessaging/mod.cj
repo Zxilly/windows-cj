@@ -15,4 +15,847 @@ public import windows_sys.Win32._impl_l1.{MENUINFO, MENUITEMINFOA, MENUITEMINFOW
 public import windows_sys.Win32._impl_l1.MSGBOXCALLBACK
 @When[Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_Shell == "on"]
 public import windows_sys.Win32._impl_l2.{MSGBOXPARAMSA, MSGBOXPARAMSW}
-
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_AdjustWindowRect == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AdjustWindowRect
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_AdjustWindowRectEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AdjustWindowRectEx
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_AllowSetForegroundWindow == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AllowSetForegroundWindow
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_AnimateWindow == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AnimateWindow
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_AnyPopup == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AnyPopup
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_AppendMenuA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AppendMenuA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_AppendMenuW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AppendMenuW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_ApplyWindowAction == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ApplyWindowAction
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_ArrangeIconicWindows == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ArrangeIconicWindows
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_BeginDeferWindowPos == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BeginDeferWindowPos
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_BringWindowToTop == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BringWindowToTop
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CalculatePopupWindowPosition == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CalculatePopupWindowPosition
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CallMsgFilterA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CallMsgFilterA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CallMsgFilterW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CallMsgFilterW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CallNextHookEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CallNextHookEx
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CallWindowProcA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CallWindowProcA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CallWindowProcW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CallWindowProcW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CancelShutdown == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CancelShutdown
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CascadeWindows == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CascadeWindows
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_ChangeMenuA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ChangeMenuA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_ChangeMenuW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ChangeMenuW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_ChangeWindowMessageFilter == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ChangeWindowMessageFilter
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_ChangeWindowMessageFilterEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ChangeWindowMessageFilterEx
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CharLowerA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CharLowerA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CharLowerBuffA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CharLowerBuffA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CharLowerBuffW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CharLowerBuffW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CharLowerW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CharLowerW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CharNextA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CharNextA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CharNextExA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CharNextExA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CharNextW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CharNextW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CharPrevA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CharPrevA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CharPrevExA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CharPrevExA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CharPrevW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CharPrevW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CharToOemA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CharToOemA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CharToOemBuffA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CharToOemBuffA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CharToOemBuffW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CharToOemBuffW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CharToOemW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CharToOemW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CharUpperA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CharUpperA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CharUpperBuffA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CharUpperBuffA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CharUpperBuffW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CharUpperBuffW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CharUpperW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CharUpperW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CheckMenuItem == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CheckMenuItem
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CheckMenuRadioItem == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CheckMenuRadioItem
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_ChildWindowFromPoint == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ChildWindowFromPoint
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_ChildWindowFromPointEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ChildWindowFromPointEx
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_ClipCursor == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ClipCursor
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CloseWindow == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CloseWindow
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_ConvertPrimaryPointerToMouseDrag == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ConvertPrimaryPointerToMouseDrag
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_ConvertToInterceptWindow == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ConvertToInterceptWindow
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CopyAcceleratorTableA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CopyAcceleratorTableA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CopyAcceleratorTableW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CopyAcceleratorTableW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CopyIcon == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CopyIcon
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CopyImage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CopyImage
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CreateAcceleratorTableA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateAcceleratorTableA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CreateAcceleratorTableW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateAcceleratorTableW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CreateCaret == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateCaret
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CreateCursor == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateCursor
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CreateDialogIndirectParamA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateDialogIndirectParamA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CreateDialogIndirectParamW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateDialogIndirectParamW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CreateDialogParamA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateDialogParamA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CreateDialogParamW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateDialogParamW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CreateIcon == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateIcon
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CreateIconFromResource == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateIconFromResource
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CreateIconFromResourceEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateIconFromResourceEx
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CreateIconIndirect == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateIconIndirect
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CreateMDIWindowA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateMDIWindowA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CreateMDIWindowW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateMDIWindowW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CreateMenu == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateMenu
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CreatePopupMenu == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreatePopupMenu
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && MRMSUPPORT == "on" && Windows_Win32_UI_WindowsAndMessaging_CreateResourceIndexer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateResourceIndexer
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CreateWindowExA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateWindowExA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_CreateWindowExW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateWindowExW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_DefDlgProcA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DefDlgProcA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_DefDlgProcW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DefDlgProcW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_DefFrameProcA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DefFrameProcA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_DefFrameProcW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DefFrameProcW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_DefMDIChildProcA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DefMDIChildProcA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_DefMDIChildProcW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DefMDIChildProcW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_DefWindowProcA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DefWindowProcA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_DefWindowProcW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DefWindowProcW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_DeferWindowPos == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeferWindowPos
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_DeleteMenu == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteMenu
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_DeregisterShellHookWindow == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeregisterShellHookWindow
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_DestroyAcceleratorTable == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DestroyAcceleratorTable
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_DestroyCaret == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DestroyCaret
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_DestroyCursor == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DestroyCursor
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_DestroyIcon == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DestroyIcon
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && MRMSUPPORT == "on" && Windows_Win32_UI_WindowsAndMessaging_DestroyIndexedResults == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DestroyIndexedResults
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_DestroyMenu == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DestroyMenu
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && MRMSUPPORT == "on" && Windows_Win32_UI_WindowsAndMessaging_DestroyResourceIndexer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DestroyResourceIndexer
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_DestroyWindow == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DestroyWindow
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_DialogBoxIndirectParamA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DialogBoxIndirectParamA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_DialogBoxIndirectParamW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DialogBoxIndirectParamW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_DialogBoxParamA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DialogBoxParamA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_DialogBoxParamW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DialogBoxParamW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_DisableProcessWindowsGhosting == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DisableProcessWindowsGhosting
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_DispatchMessageA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DispatchMessageA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_DispatchMessageW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DispatchMessageW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_DragObject == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DragObject
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_DrawIcon == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DrawIcon
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_DrawIconEx == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DrawIconEx
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_DrawMenuBar == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DrawMenuBar
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_EnableMenuItem == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EnableMenuItem
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_EndDeferWindowPos == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EndDeferWindowPos
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_EndDialog == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EndDialog
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_EndMenu == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EndMenu
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_EnterMoveSizeLoop == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EnterMoveSizeLoop
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_EnumChildWindows == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EnumChildWindows
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_EnumPropsA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EnumPropsA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_EnumPropsExA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EnumPropsExA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_EnumPropsExW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EnumPropsExW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_EnumPropsW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EnumPropsW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_EnumThreadWindows == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EnumThreadWindows
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_EnumWindows == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EnumWindows
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_FindWindowA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindWindowA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_FindWindowExA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindWindowExA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_FindWindowExW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindWindowExW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_FindWindowW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindWindowW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_FlashWindow == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FlashWindow
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_FlashWindowEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FlashWindowEx
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetAltTabInfoA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetAltTabInfoA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetAltTabInfoW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetAltTabInfoW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetAncestor == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetAncestor
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetCaretBlinkTime == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetCaretBlinkTime
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetCaretPos == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetCaretPos
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetClassInfoA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetClassInfoA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetClassInfoExA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetClassInfoExA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetClassInfoExW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetClassInfoExW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetClassInfoW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetClassInfoW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetClassLongA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetClassLongA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetClassLongPtrA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_GetClassLongPtrA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetClassLongPtrW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_GetClassLongPtrW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetClassLongW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetClassLongW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetClassNameA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetClassNameA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetClassNameW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetClassNameW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetClassWord == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetClassWord
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetClientRect == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetClientRect
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetClipCursor == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetClipCursor
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetCurrentMonitorTopologyId == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetCurrentMonitorTopologyId
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetCursor == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetCursor
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetCursorInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetCursorInfo
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetCursorPos == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetCursorPos
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetDesktopWindow == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetDesktopWindow
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetDialogBaseUnits == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetDialogBaseUnits
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetDlgCtrlID == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetDlgCtrlID
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetDlgItem == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetDlgItem
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetDlgItemInt == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetDlgItemInt
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetDlgItemTextA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetDlgItemTextA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetDlgItemTextW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetDlgItemTextW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetForegroundWindow == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetForegroundWindow
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetGUIThreadInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetGUIThreadInfo
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetIconInfo == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetIconInfo
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetIconInfoExA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetIconInfoExA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetIconInfoExW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetIconInfoExW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetInputState == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetInputState
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetLastActivePopup == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetLastActivePopup
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetLayeredWindowAttributes == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetLayeredWindowAttributes
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetMenu == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetMenu
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetMenuBarInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetMenuBarInfo
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetMenuCheckMarkDimensions == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetMenuCheckMarkDimensions
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetMenuDefaultItem == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetMenuDefaultItem
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetMenuInfo == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetMenuInfo
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetMenuItemCount == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetMenuItemCount
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetMenuItemID == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetMenuItemID
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetMenuItemInfoA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetMenuItemInfoA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetMenuItemInfoW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetMenuItemInfoW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetMenuItemRect == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetMenuItemRect
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetMenuState == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetMenuState
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetMenuStringA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetMenuStringA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetMenuStringW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetMenuStringW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetMessageA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetMessageA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetMessageExtraInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetMessageExtraInfo
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetMessagePos == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetMessagePos
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetMessageTime == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetMessageTime
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetMessageW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetMessageW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetNextDlgGroupItem == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetNextDlgGroupItem
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetNextDlgTabItem == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetNextDlgTabItem
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetParent == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetParent
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetPhysicalCursorPos == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetPhysicalCursorPos
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetProcessDefaultLayout == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetProcessDefaultLayout
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetPropA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetPropA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetPropW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetPropW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetQueueStatus == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetQueueStatus
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetScrollBarInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetScrollBarInfo
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetScrollInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetScrollInfo
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetScrollPos == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetScrollPos
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetScrollRange == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetScrollRange
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetShellWindow == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetShellWindow
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetSubMenu == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetSubMenu
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetSystemMenu == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetSystemMenu
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetSystemMetrics == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetSystemMetrics
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetTitleBarInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetTitleBarInfo
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetTopWindow == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetTopWindow
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetWindow == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetWindow
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetWindowDisplayAffinity == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetWindowDisplayAffinity
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetWindowInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetWindowInfo
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetWindowLongA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetWindowLongA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetWindowLongPtrA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_GetWindowLongPtrA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetWindowLongPtrW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_GetWindowLongPtrW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetWindowLongW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetWindowLongW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetWindowModuleFileNameA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetWindowModuleFileNameA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetWindowModuleFileNameW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetWindowModuleFileNameW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetWindowPlacement == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetWindowPlacement
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetWindowRect == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetWindowRect
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetWindowTextA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetWindowTextA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetWindowTextLengthA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetWindowTextLengthA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetWindowTextLengthW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetWindowTextLengthW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetWindowTextW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetWindowTextW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetWindowThreadProcessId == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetWindowThreadProcessId
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_GetWindowWord == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetWindowWord
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_HideCaret == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HideCaret
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_HiliteMenuItem == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HiliteMenuItem
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_InSendMessage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InSendMessage
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_InSendMessageEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InSendMessageEx
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && MRMSUPPORT == "on" && Windows_Win32_UI_WindowsAndMessaging_IndexFilePath == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IndexFilePath
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_InheritWindowMonitor == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InheritWindowMonitor
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_InsertMenuA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InsertMenuA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_InsertMenuItemA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InsertMenuItemA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_InsertMenuItemW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InsertMenuItemW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_InsertMenuW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InsertMenuW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_InternalGetWindowText == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InternalGetWindowText
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_IsCharAlphaA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsCharAlphaA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_IsCharAlphaNumericA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsCharAlphaNumericA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_IsCharAlphaNumericW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsCharAlphaNumericW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_IsCharAlphaW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsCharAlphaW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_IsCharLowerA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsCharLowerA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_IsCharLowerW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsCharLowerW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_IsCharUpperA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsCharUpperA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_IsCharUpperW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsCharUpperW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_IsChild == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsChild
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_IsDialogMessageA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsDialogMessageA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_IsDialogMessageW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsDialogMessageW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_IsGUIThread == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsGUIThread
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_IsHungAppWindow == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsHungAppWindow
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_IsIconic == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsIconic
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_IsInterceptWindow == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsInterceptWindow
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_IsMenu == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsMenu
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_IsProcessDPIAware == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsProcessDPIAware
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_IsWindow == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsWindow
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_IsWindowArranged == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsWindowArranged
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_IsWindowUnicode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsWindowUnicode
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_IsWindowVisible == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsWindowVisible
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_IsWow64Message == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsWow64Message
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_IsZoomed == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsZoomed
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_KillTimer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_KillTimer
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_LoadAcceleratorsA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LoadAcceleratorsA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_LoadAcceleratorsW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LoadAcceleratorsW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_LoadCursorA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LoadCursorA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_LoadCursorFromFileA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LoadCursorFromFileA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_LoadCursorFromFileW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LoadCursorFromFileW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_LoadCursorW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LoadCursorW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_LoadIconA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LoadIconA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_LoadIconW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LoadIconW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_LoadImageA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LoadImageA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_LoadImageW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LoadImageW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_LoadMenuA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LoadMenuA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_LoadMenuIndirectA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LoadMenuIndirectA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_LoadMenuIndirectW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LoadMenuIndirectW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_LoadMenuW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LoadMenuW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_LoadStringA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LoadStringA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_LoadStringW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LoadStringW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_LockSetForegroundWindow == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LockSetForegroundWindow
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_LogicalToPhysicalPoint == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LogicalToPhysicalPoint
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_LookupIconIdFromDirectory == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LookupIconIdFromDirectory
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_LookupIconIdFromDirectoryEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LookupIconIdFromDirectoryEx
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_MapDialogRect == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MapDialogRect
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_MenuItemFromPoint == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MenuItemFromPoint
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_MessageBoxA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MessageBoxA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_MessageBoxExA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MessageBoxExA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_MessageBoxExW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MessageBoxExW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_MessageBoxIndirectA == "on" && Windows_Win32_UI_Shell == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MessageBoxIndirectA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_MessageBoxIndirectW == "on" && Windows_Win32_UI_Shell == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MessageBoxIndirectW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_MessageBoxW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MessageBoxW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_ModifyMenuA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ModifyMenuA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_ModifyMenuW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ModifyMenuW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_MoveWindow == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MoveWindow
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && MRMSUPPORT == "on" && Windows_Win32_UI_WindowsAndMessaging_MrmCreateConfig == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MrmCreateConfig
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && MRMSUPPORT == "on" && Windows_Win32_UI_WindowsAndMessaging_MrmCreateConfigInMemory == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MrmCreateConfigInMemory
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && MRMSUPPORT == "on" && Windows_Win32_UI_WindowsAndMessaging_MrmCreateResourceFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MrmCreateResourceFile
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && MRMSUPPORT == "on" && Windows_Win32_UI_WindowsAndMessaging_MrmCreateResourceFileInMemory == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MrmCreateResourceFileInMemory
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && MRMSUPPORT == "on" && Windows_Win32_UI_WindowsAndMessaging_MrmCreateResourceFileWithChecksum == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MrmCreateResourceFileWithChecksum
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && MRMSUPPORT == "on" && Windows_Win32_UI_WindowsAndMessaging_MrmCreateResourceIndexer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MrmCreateResourceIndexer
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && MRMSUPPORT == "on" && Windows_Win32_UI_WindowsAndMessaging_MrmCreateResourceIndexerFromPreviousPriData == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MrmCreateResourceIndexerFromPreviousPriData
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && MRMSUPPORT == "on" && Windows_Win32_UI_WindowsAndMessaging_MrmCreateResourceIndexerFromPreviousPriFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MrmCreateResourceIndexerFromPreviousPriFile
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && MRMSUPPORT == "on" && Windows_Win32_UI_WindowsAndMessaging_MrmCreateResourceIndexerFromPreviousSchemaData == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MrmCreateResourceIndexerFromPreviousSchemaData
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && MRMSUPPORT == "on" && Windows_Win32_UI_WindowsAndMessaging_MrmCreateResourceIndexerFromPreviousSchemaFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MrmCreateResourceIndexerFromPreviousSchemaFile
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && MRMSUPPORT == "on" && Windows_Win32_UI_WindowsAndMessaging_MrmCreateResourceIndexerWithFlags == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MrmCreateResourceIndexerWithFlags
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && MRMSUPPORT == "on" && Windows_Win32_UI_WindowsAndMessaging_MrmDestroyIndexerAndMessages == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MrmDestroyIndexerAndMessages
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && MRMSUPPORT == "on" && Windows_Win32_UI_WindowsAndMessaging_MrmDumpPriDataInMemory == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MrmDumpPriDataInMemory
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && MRMSUPPORT == "on" && Windows_Win32_UI_WindowsAndMessaging_MrmDumpPriFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MrmDumpPriFile
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && MRMSUPPORT == "on" && Windows_Win32_UI_WindowsAndMessaging_MrmDumpPriFileInMemory == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MrmDumpPriFileInMemory
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && MRMSUPPORT == "on" && Windows_Win32_UI_WindowsAndMessaging_MrmFreeMemory == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MrmFreeMemory
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && MRMSUPPORT == "on" && Windows_Win32_UI_WindowsAndMessaging_MrmGetPriFileContentChecksum == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MrmGetPriFileContentChecksum
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && MRMSUPPORT == "on" && Windows_Win32_UI_WindowsAndMessaging_MrmIndexEmbeddedData == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MrmIndexEmbeddedData
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && MRMSUPPORT == "on" && Windows_Win32_UI_WindowsAndMessaging_MrmIndexFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MrmIndexFile
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && MRMSUPPORT == "on" && Windows_Win32_UI_WindowsAndMessaging_MrmIndexFileAutoQualifiers == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MrmIndexFileAutoQualifiers
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && MRMSUPPORT == "on" && Windows_Win32_UI_WindowsAndMessaging_MrmIndexResourceContainerAutoQualifiers == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MrmIndexResourceContainerAutoQualifiers
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && MRMSUPPORT == "on" && Windows_Win32_UI_WindowsAndMessaging_MrmIndexString == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MrmIndexString
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && MRMSUPPORT == "on" && Windows_Win32_UI_WindowsAndMessaging_MrmPeekResourceIndexerMessages == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MrmPeekResourceIndexerMessages
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_MsgWaitForMultipleObjects == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MsgWaitForMultipleObjects
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_MsgWaitForMultipleObjectsEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MsgWaitForMultipleObjectsEx
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_OemToCharA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OemToCharA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_OemToCharBuffA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OemToCharBuffA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_OemToCharBuffW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OemToCharBuffW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_OemToCharW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OemToCharW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_OpenIcon == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OpenIcon
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_PeekMessageA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PeekMessageA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_PeekMessageW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PeekMessageW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_PhysicalToLogicalPoint == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PhysicalToLogicalPoint
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_PostMessageA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PostMessageA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_PostMessageW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PostMessageW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_PostQuitMessage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PostQuitMessage
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_PostThreadMessageA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PostThreadMessageA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_PostThreadMessageW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PostThreadMessageW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_PrivateExtractIconsA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PrivateExtractIconsA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_PrivateExtractIconsW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PrivateExtractIconsW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_RealChildWindowFromPoint == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RealChildWindowFromPoint
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_RealGetWindowClassA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RealGetWindowClassA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_RealGetWindowClassW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RealGetWindowClassW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_RegisterClassA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RegisterClassA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_RegisterClassExA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RegisterClassExA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_RegisterClassExW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RegisterClassExW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_RegisterClassW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RegisterClassW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_RegisterCloakedNotification == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RegisterCloakedNotification
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_RegisterDeviceNotificationA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RegisterDeviceNotificationA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_RegisterDeviceNotificationW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RegisterDeviceNotificationW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_RegisterForTooltipDismissNotification == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RegisterForTooltipDismissNotification
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_RegisterShellHookWindow == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RegisterShellHookWindow
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_RegisterWindowMessageA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RegisterWindowMessageA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_RegisterWindowMessageW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RegisterWindowMessageW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_RemoveMenu == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RemoveMenu
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_RemovePropA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RemovePropA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_RemovePropW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RemovePropW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_ReplyMessage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReplyMessage
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_ScrollDC == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ScrollDC
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_ScrollWindow == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ScrollWindow
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_ScrollWindowEx == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ScrollWindowEx
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SendDlgItemMessageA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SendDlgItemMessageA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SendDlgItemMessageW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SendDlgItemMessageW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SendMessageA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SendMessageA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SendMessageCallbackA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SendMessageCallbackA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SendMessageCallbackW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SendMessageCallbackW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SendMessageTimeoutA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SendMessageTimeoutA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SendMessageTimeoutW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SendMessageTimeoutW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SendMessageW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SendMessageW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SendNotifyMessageA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SendNotifyMessageA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SendNotifyMessageW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SendNotifyMessageW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetAdditionalForegroundBoostProcesses == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetAdditionalForegroundBoostProcesses
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetCaretBlinkTime == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetCaretBlinkTime
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetCaretPos == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetCaretPos
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetClassLongA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetClassLongA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetClassLongPtrA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_SetClassLongPtrA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetClassLongPtrW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_SetClassLongPtrW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetClassLongW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetClassLongW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetClassWord == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetClassWord
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetCoalescableTimer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetCoalescableTimer
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetCursor == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetCursor
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetCursorPos == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetCursorPos
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetDebugErrorLevel == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetDebugErrorLevel
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetDlgItemInt == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetDlgItemInt
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetDlgItemTextA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetDlgItemTextA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetDlgItemTextW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetDlgItemTextW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetForegroundWindow == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetForegroundWindow
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetLayeredWindowAttributes == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetLayeredWindowAttributes
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetMenu == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetMenu
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetMenuDefaultItem == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetMenuDefaultItem
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetMenuInfo == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetMenuInfo
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetMenuItemBitmaps == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetMenuItemBitmaps
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetMenuItemInfoA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetMenuItemInfoA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetMenuItemInfoW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetMenuItemInfoW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetMessageExtraInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetMessageExtraInfo
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetMessageQueue == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetMessageQueue
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetParent == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetParent
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetPhysicalCursorPos == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetPhysicalCursorPos
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetProcessDPIAware == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetProcessDPIAware
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetProcessDefaultLayout == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetProcessDefaultLayout
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetPropA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetPropA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetPropW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetPropW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetSystemCursor == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetSystemCursor
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetTimer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetTimer
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetWindowDisplayAffinity == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetWindowDisplayAffinity
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetWindowLongA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetWindowLongA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetWindowLongPtrA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_SetWindowLongPtrA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetWindowLongPtrW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_SetWindowLongPtrW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetWindowLongW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetWindowLongW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetWindowPlacement == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetWindowPlacement
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetWindowPos == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetWindowPos
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetWindowTextA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetWindowTextA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetWindowTextW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetWindowTextW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetWindowWord == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetWindowWord
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetWindowsHookA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetWindowsHookA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetWindowsHookExA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetWindowsHookExA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetWindowsHookExW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetWindowsHookExW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SetWindowsHookW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetWindowsHookW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_ShowCaret == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ShowCaret
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_ShowCursor == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ShowCursor
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_ShowOwnedPopups == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ShowOwnedPopups
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_ShowWindow == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ShowWindow
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_ShowWindowAsync == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ShowWindowAsync
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SoundSentry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SoundSentry
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SwitchToThisWindow == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SwitchToThisWindow
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SystemParametersInfoA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SystemParametersInfoA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_SystemParametersInfoW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SystemParametersInfoW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_TileWindows == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TileWindows
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_TrackPopupMenu == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TrackPopupMenu
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_TrackPopupMenuEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TrackPopupMenuEx
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_TranslateAcceleratorA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TranslateAcceleratorA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_TranslateAcceleratorW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TranslateAcceleratorW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_TranslateMDISysAccel == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TranslateMDISysAccel
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_TranslateMessage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TranslateMessage
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_UnhookWindowsHook == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UnhookWindowsHook
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_UnhookWindowsHookEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UnhookWindowsHookEx
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_UnregisterClassA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UnregisterClassA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_UnregisterClassW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UnregisterClassW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_UnregisterDeviceNotification == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UnregisterDeviceNotification
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_UpdateLayeredWindow == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UpdateLayeredWindow
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_UpdateLayeredWindowIndirect == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UpdateLayeredWindowIndirect
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_WaitMessage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WaitMessage
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_WindowFromPhysicalPoint == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WindowFromPhysicalPoint
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_WindowFromPoint == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WindowFromPoint
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_wvsprintfA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_wvsprintfA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on" && USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging_wvsprintfW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_wvsprintfW

@@ -8,13 +8,9 @@ import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeTy
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-@When[Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
-@When[Windows_Win32_Storage_Packaging_Opc == "on"]
 import windows.Win32.Storage.Packaging.Opc as Win32_Storage_Packaging_Opc
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
@@ -2518,38 +2514,134 @@ extend XpsSignatureManager <: windows_core.CopyType & windows_core.RuntimeType &
     }
 }
 
-@When[GDI32 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+@When[Windows_Win32_Storage_Xps == "on" && GDI32 == "on" && Windows_Win32_Storage_Xps_AbortDoc == "on" && Windows_Win32_Graphics_Gdi == "on"]
 foreign {
     func AbortDoc(hdc: Win32_Graphics_Gdi.HDC): Int32
+}
+
+@When[Windows_Win32_Storage_Xps == "on" && GDI32 == "on" && Windows_Win32_Storage_Xps_AbortDoc == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_AbortDoc(hdc: Win32_Graphics_Gdi.HDC): Int32 {
+    return AbortDoc(hdc)
+}
+
+@When[Windows_Win32_Storage_Xps == "on" && GDI32 == "on" && Windows_Win32_Storage_Xps_EndDoc == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func EndDoc(hdc: Win32_Graphics_Gdi.HDC): Int32
+}
+
+@When[Windows_Win32_Storage_Xps == "on" && GDI32 == "on" && Windows_Win32_Storage_Xps_EndDoc == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_EndDoc(hdc: Win32_Graphics_Gdi.HDC): Int32 {
+    return EndDoc(hdc)
+}
+
+@When[Windows_Win32_Storage_Xps == "on" && GDI32 == "on" && Windows_Win32_Storage_Xps_EndPage == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func EndPage(hdc: Win32_Graphics_Gdi.HDC): Int32
+}
+
+@When[Windows_Win32_Storage_Xps == "on" && GDI32 == "on" && Windows_Win32_Storage_Xps_EndPage == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_EndPage(hdc: Win32_Graphics_Gdi.HDC): Int32 {
+    return EndPage(hdc)
+}
+
+@When[Windows_Win32_Storage_Xps == "on" && GDI32 == "on" && Windows_Win32_Storage_Xps_Escape == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: pvIn bytes=param[2] optional
     // param-hint: pvOut optional
     func Escape(hdc: Win32_Graphics_Gdi.HDC, iEscape: Int32, cjIn: Int32, pvIn: CPointer<UInt8>, pvOut: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Storage_Xps == "on" && GDI32 == "on" && Windows_Win32_Storage_Xps_Escape == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_Escape(hdc: Win32_Graphics_Gdi.HDC, iEscape: Int32, cjIn: Int32, pvIn: CPointer<UInt8>, pvOut: CPointer<Unit>): Int32 {
+    return Escape(hdc, iEscape, cjIn, pvIn, pvOut)
+}
+
+@When[Windows_Win32_Storage_Xps == "on" && GDI32 == "on" && Windows_Win32_Storage_Xps_ExtEscape == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: lpInData bytes=param[2] optional
     // param-hint: lpOutData bytes=param[4] optional
     func ExtEscape(hdc: Win32_Graphics_Gdi.HDC, iEscape: Int32, cjInput: Int32, lpInData: CPointer<UInt8>, cjOutput: Int32, lpOutData: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Storage_Xps == "on" && GDI32 == "on" && Windows_Win32_Storage_Xps_ExtEscape == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_ExtEscape(hdc: Win32_Graphics_Gdi.HDC, iEscape: Int32, cjInput: Int32, lpInData: CPointer<UInt8>, cjOutput: Int32, lpOutData: CPointer<UInt8>): Int32 {
+    return ExtEscape(hdc, iEscape, cjInput, lpInData, cjOutput, lpOutData)
+}
+
+@When[Windows_Win32_Storage_Xps == "on" && GDI32 == "on" && Windows_Win32_Storage_Xps_SetAbortProc == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func SetAbortProc(hdc: Win32_Graphics_Gdi.HDC, proc: ABORTPROC): Int32
+}
+
+@When[Windows_Win32_Storage_Xps == "on" && GDI32 == "on" && Windows_Win32_Storage_Xps_SetAbortProc == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_SetAbortProc(hdc: Win32_Graphics_Gdi.HDC, proc: ABORTPROC): Int32 {
+    return SetAbortProc(hdc, proc)
+}
+
+@When[Windows_Win32_Storage_Xps == "on" && GDI32 == "on" && Windows_Win32_Storage_Xps_StartDocA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func StartDocA(hdc: Win32_Graphics_Gdi.HDC, lpdi: CPointer<DOCINFOAAbi>): Int32
+}
+
+@When[Windows_Win32_Storage_Xps == "on" && GDI32 == "on" && Windows_Win32_Storage_Xps_StartDocA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_StartDocA(hdc: Win32_Graphics_Gdi.HDC, lpdi: CPointer<DOCINFOAAbi>): Int32 {
+    return StartDocA(hdc, lpdi)
+}
+
+@When[Windows_Win32_Storage_Xps == "on" && GDI32 == "on" && Windows_Win32_Storage_Xps_StartDocW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func StartDocW(hdc: Win32_Graphics_Gdi.HDC, lpdi: CPointer<DOCINFOWAbi>): Int32
+}
+
+@When[Windows_Win32_Storage_Xps == "on" && GDI32 == "on" && Windows_Win32_Storage_Xps_StartDocW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_StartDocW(hdc: Win32_Graphics_Gdi.HDC, lpdi: CPointer<DOCINFOWAbi>): Int32 {
+    return StartDocW(hdc, lpdi)
+}
+
+@When[Windows_Win32_Storage_Xps == "on" && GDI32 == "on" && Windows_Win32_Storage_Xps_StartPage == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func StartPage(hdc: Win32_Graphics_Gdi.HDC): Int32
 }
 
-@When[USER32 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+@When[Windows_Win32_Storage_Xps == "on" && GDI32 == "on" && Windows_Win32_Storage_Xps_StartPage == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_StartPage(hdc: Win32_Graphics_Gdi.HDC): Int32 {
+    return StartPage(hdc)
+}
+
+@When[Windows_Win32_Storage_Xps == "on" && USER32 == "on" && Windows_Win32_Storage_Xps_PrintWindow == "on" && Windows_Win32_Graphics_Gdi == "on"]
 foreign {
     func PrintWindow(hwnd: CPointer<Unit>, hdcBlt: Win32_Graphics_Gdi.HDC, nFlags: PRINT_WINDOW_FLAGSAbi): Int32
 }
 
-@When[WINSPOOL_DRV == "on" && Windows_Win32_Graphics_Gdi == "on"]
+@When[Windows_Win32_Storage_Xps == "on" && USER32 == "on" && Windows_Win32_Storage_Xps_PrintWindow == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_PrintWindow(hwnd: CPointer<Unit>, hdcBlt: Win32_Graphics_Gdi.HDC, nFlags: PRINT_WINDOW_FLAGSAbi): Int32 {
+    return PrintWindow(hwnd, hdcBlt, nFlags)
+}
+
+@When[Windows_Win32_Storage_Xps == "on" && WINSPOOL_DRV == "on" && Windows_Win32_Storage_Xps_DeviceCapabilitiesA == "on" && Windows_Win32_Graphics_Gdi == "on"]
 foreign {
     // param-hint: pPort optional
     // param-hint: pOutput optional
     // param-hint: pDevMode optional
     func DeviceCapabilitiesA(pDevice: CPointer<UInt8>, pPort: CPointer<UInt8>, fwCapability: PRINTER_DEVICE_CAPABILITIESAbi, pOutput: CPointer<UInt8>, pDevMode: CPointer<Win32_Graphics_Gdi.DEVMODEAAbi>): Int32
+}
+
+@When[Windows_Win32_Storage_Xps == "on" && WINSPOOL_DRV == "on" && Windows_Win32_Storage_Xps_DeviceCapabilitiesA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DeviceCapabilitiesA(pDevice: CPointer<UInt8>, pPort: CPointer<UInt8>, fwCapability: PRINTER_DEVICE_CAPABILITIESAbi, pOutput: CPointer<UInt8>, pDevMode: CPointer<Win32_Graphics_Gdi.DEVMODEAAbi>): Int32 {
+    return DeviceCapabilitiesA(pDevice, pPort, fwCapability, pOutput, pDevMode)
+}
+
+@When[Windows_Win32_Storage_Xps == "on" && WINSPOOL_DRV == "on" && Windows_Win32_Storage_Xps_DeviceCapabilitiesW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: pPort optional
     // param-hint: pOutput optional
     // param-hint: pDevMode optional
     func DeviceCapabilitiesW(pDevice: CPointer<UInt16>, pPort: CPointer<UInt16>, fwCapability: PRINTER_DEVICE_CAPABILITIESAbi, pOutput: CPointer<UInt16>, pDevMode: CPointer<Win32_Graphics_Gdi.DEVMODEWAbi>): Int32
+}
+
+@When[Windows_Win32_Storage_Xps == "on" && WINSPOOL_DRV == "on" && Windows_Win32_Storage_Xps_DeviceCapabilitiesW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DeviceCapabilitiesW(pDevice: CPointer<UInt16>, pPort: CPointer<UInt16>, fwCapability: PRINTER_DEVICE_CAPABILITIESAbi, pOutput: CPointer<UInt16>, pDevMode: CPointer<Win32_Graphics_Gdi.DEVMODEWAbi>): Int32 {
+    return DeviceCapabilitiesW(pDevice, pPort, fwCapability, pOutput, pDevMode)
 }
 
 @When[Windows_Win32_Storage_Xps == "on"]

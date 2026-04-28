@@ -3,7 +3,6 @@ package windows_sys.Win32.Devices.DeviceAccess
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 
@@ -208,9 +207,14 @@ public class IDeviceIoControl <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[DEVICEACCESS == "on"]
+@When[Windows_Win32_Devices_DeviceAccess == "on" && DEVICEACCESS == "on" && Windows_Win32_Devices_DeviceAccess_CreateDeviceAccessInstance == "on"]
 foreign {
     func CreateDeviceAccessInstance(deviceInterfacePath: CPointer<UInt16>, desiredAccess: UInt32, createAsync: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceAccess == "on" && DEVICEACCESS == "on" && Windows_Win32_Devices_DeviceAccess_CreateDeviceAccessInstance == "on"]
+public unsafe func Windows_CreateDeviceAccessInstance(deviceInterfacePath: CPointer<UInt16>, desiredAccess: UInt32, createAsync: CPointer<CPointer<Unit>>): Int32 {
+    return CreateDeviceAccessInstance(deviceInterfacePath, desiredAccess, createAsync)
 }
 
 @When[Windows_Win32_Devices_DeviceAccess == "on"]

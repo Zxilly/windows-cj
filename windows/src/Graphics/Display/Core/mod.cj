@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -429,6 +428,7 @@ public class HdmiDisplayInformation <: InterfaceWrapperBase & ComInterface & win
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSupportedDisplayModes(): windows_collections.IVectorView<HdmiDisplayMode> {
         return defaultInterface().GetSupportedDisplayModes()
     }
@@ -627,7 +627,10 @@ extend HdmiDisplayMode <: windows_core.HandleWinrtType<HdmiDisplayMode> {
 @C
 public struct IHdmiDisplayInformationVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSupportedDisplayModes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetSupportedDisplayModes: UIntNative = UIntNative(0)
     public var GetCurrentDisplayMode: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetDefaultDisplayModeAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var RequestSetCurrentDisplayModeAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -703,6 +706,7 @@ public class IHdmiDisplayInformation <: InterfaceWrapperBase & ComInterface & Ru
         readVtbl<IHdmiDisplayInformationVtbl>(IHdmiDisplayInformationVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSupportedDisplayModes(): windows_collections.IVectorView<HdmiDisplayMode> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

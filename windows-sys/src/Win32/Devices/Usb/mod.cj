@@ -5,9 +5,7 @@ import windows_interface.{GUID}
 import windows_interface as windows_interface
 import windows_polyfill.{packedReadInt32, packedReadInt64, packedReadUInt16, packedReadUInt32, packedReadUInt64, packedReadUInt8, packedReadUIntNative, packedReadValue, packedWriteInt32, packedWriteInt64, packedWriteUInt16, packedWriteUInt32, packedWriteUInt64, packedWriteUInt8, packedWriteUIntNative, packedWriteValue, unionReadInt32, unionReadUInt16, unionReadUInt32, unionReadUInt64, unionReadUInt8, unionWriteInt32, unionWriteUInt16, unionWriteUInt32, unionWriteUInt64, unionWriteUInt8}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_System_IO == "on"]
 import windows_sys.Win32.System.IO as Win32_System_IO
 
 
@@ -16059,102 +16057,400 @@ public struct _URB_OS_FEATURE_DESCRIPTOR_REQUEST {
     public init() {}
 }
 
-@When[WINUSB == "on"]
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_AbortPipe == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func WinUsb_AbortPipe(InterfaceHandle: WINUSB_INTERFACE_HANDLE, PipeID: UInt8): Int32
-    // pinvoke-hint: SetLastError
-    func WinUsb_FlushPipe(InterfaceHandle: WINUSB_INTERFACE_HANDLE, PipeID: UInt8): Int32
-    func WinUsb_Free(InterfaceHandle: WINUSB_INTERFACE_HANDLE): Int32
-    // pinvoke-hint: SetLastError
-    func WinUsb_GetAdjustedFrameNumber(CurrentFrameNumber: CPointer<UInt32>, TimeStamp: Int64): Int32
-    // pinvoke-hint: SetLastError
-    func WinUsb_GetAssociatedInterface(InterfaceHandle: WINUSB_INTERFACE_HANDLE, AssociatedInterfaceIndex: UInt8, AssociatedInterfaceHandle: CPointer<WINUSB_INTERFACE_HANDLE>): Int32
-    // pinvoke-hint: SetLastError
-    func WinUsb_GetCurrentAlternateSetting(InterfaceHandle: WINUSB_INTERFACE_HANDLE, SettingNumber: CPointer<UInt8>): Int32
-    // pinvoke-hint: SetLastError
-    func WinUsb_GetCurrentFrameNumber(InterfaceHandle: WINUSB_INTERFACE_HANDLE, CurrentFrameNumber: CPointer<UInt32>, TimeStamp: CPointer<Int64>): Int32
-    // pinvoke-hint: SetLastError
-    func WinUsb_GetCurrentFrameNumberAndQpc(InterfaceHandle: WINUSB_INTERFACE_HANDLE, FrameQpcInfo: CPointer<USB_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC_INFORMATION>): Int32
-    // param-hint: Buffer bytes=param[5] optional
-    // pinvoke-hint: SetLastError
-    func WinUsb_GetDescriptor(InterfaceHandle: WINUSB_INTERFACE_HANDLE, DescriptorType: UInt8, Index: UInt8, LanguageID: UInt16, Buffer: CPointer<UInt8>, BufferLength: UInt32, LengthTransferred: CPointer<UInt32>): Int32
-    // param-hint: Value bytes=param[3]
-    // pinvoke-hint: SetLastError
-    func WinUsb_GetPipePolicy(InterfaceHandle: WINUSB_INTERFACE_HANDLE, PipeID: UInt8, PolicyType: UInt32, ValueLength: CPointer<UInt32>, Value: CPointer<Unit>): Int32
-    // param-hint: Value bytes=param[2]
-    // pinvoke-hint: SetLastError
-    func WinUsb_GetPowerPolicy(InterfaceHandle: WINUSB_INTERFACE_HANDLE, PolicyType: UInt32, ValueLength: CPointer<UInt32>, Value: CPointer<Unit>): Int32
-    // pinvoke-hint: SetLastError
-    func WinUsb_Initialize(DeviceHandle: CPointer<Unit>, InterfaceHandle: CPointer<WINUSB_INTERFACE_HANDLE>): Int32
-    // pinvoke-hint: SetLastError
-    func WinUsb_ParseConfigurationDescriptor(ConfigurationDescriptor: CPointer<USB_CONFIGURATION_DESCRIPTOR>, StartPosition: CPointer<Unit>, InterfaceNumber: Int32, AlternateSetting: Int32, InterfaceClass: Int32, InterfaceSubClass: Int32, InterfaceProtocol: Int32): CPointer<USB_INTERFACE_DESCRIPTOR>
-    // param-hint: DescriptorBuffer bytes=param[1]
-    // pinvoke-hint: SetLastError
-    func WinUsb_ParseDescriptors(DescriptorBuffer: CPointer<Unit>, TotalLength: UInt32, StartPosition: CPointer<Unit>, DescriptorType: Int32): CPointer<USB_COMMON_DESCRIPTOR>
-    // param-hint: Buffer bytes=param[2]
-    // pinvoke-hint: SetLastError
-    func WinUsb_QueryDeviceInformation(InterfaceHandle: WINUSB_INTERFACE_HANDLE, InformationType: UInt32, BufferLength: CPointer<UInt32>, Buffer: CPointer<Unit>): Int32
-    // pinvoke-hint: SetLastError
-    func WinUsb_QueryInterfaceSettings(InterfaceHandle: WINUSB_INTERFACE_HANDLE, AlternateInterfaceNumber: UInt8, UsbAltInterfaceDescriptor: CPointer<USB_INTERFACE_DESCRIPTOR>): Int32
-    // pinvoke-hint: SetLastError
-    func WinUsb_QueryPipe(InterfaceHandle: WINUSB_INTERFACE_HANDLE, AlternateInterfaceNumber: UInt8, PipeIndex: UInt8, PipeInformation: CPointer<WINUSB_PIPE_INFORMATION>): Int32
-    // pinvoke-hint: SetLastError
-    func WinUsb_QueryPipeEx(InterfaceHandle: WINUSB_INTERFACE_HANDLE, AlternateSettingNumber: UInt8, PipeIndex: UInt8, PipeInformationEx: CPointer<WINUSB_PIPE_INFORMATION_EX>): Int32
-    // param-hint: Buffer bytes=param[3]
-    // pinvoke-hint: SetLastError
-    func WinUsb_RegisterIsochBuffer(InterfaceHandle: WINUSB_INTERFACE_HANDLE, PipeID: UInt8, Buffer: CPointer<UInt8>, BufferLength: UInt32, IsochBufferHandle: CPointer<CPointer<Unit>>): Int32
-    // pinvoke-hint: SetLastError
-    func WinUsb_ResetPipe(InterfaceHandle: WINUSB_INTERFACE_HANDLE, PipeID: UInt8): Int32
-    // pinvoke-hint: SetLastError
-    func WinUsb_SetCurrentAlternateSetting(InterfaceHandle: WINUSB_INTERFACE_HANDLE, SettingNumber: UInt8): Int32
-    // param-hint: Value bytes=param[3]
-    // pinvoke-hint: SetLastError
-    func WinUsb_SetPipePolicy(InterfaceHandle: WINUSB_INTERFACE_HANDLE, PipeID: UInt8, PolicyType: UInt32, ValueLength: UInt32, Value: CPointer<Unit>): Int32
-    // param-hint: Value bytes=param[2]
-    // pinvoke-hint: SetLastError
-    func WinUsb_SetPowerPolicy(InterfaceHandle: WINUSB_INTERFACE_HANDLE, PolicyType: UInt32, ValueLength: UInt32, Value: CPointer<Unit>): Int32
-    // pinvoke-hint: SetLastError
-    func WinUsb_StartTrackingForTimeSync(InterfaceHandle: WINUSB_INTERFACE_HANDLE, StartTrackingInfo: CPointer<USB_START_TRACKING_FOR_TIME_SYNC_INFORMATION>): Int32
-    // pinvoke-hint: SetLastError
-    func WinUsb_StopTrackingForTimeSync(InterfaceHandle: WINUSB_INTERFACE_HANDLE, StopTrackingInfo: CPointer<USB_STOP_TRACKING_FOR_TIME_SYNC_INFORMATION>): Int32
-    // pinvoke-hint: SetLastError
-    func WinUsb_UnregisterIsochBuffer(IsochBufferHandle: CPointer<Unit>): Int32
 }
 
-@When[WINUSB == "on" && Windows_Win32_System_IO == "on"]
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_AbortPipe == "on"]
+public unsafe func Windows_WinUsb_AbortPipe(InterfaceHandle: WINUSB_INTERFACE_HANDLE, PipeID: UInt8): Int32 {
+    return WinUsb_AbortPipe(InterfaceHandle, PipeID)
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_ControlTransfer == "on" && Windows_Win32_System_IO == "on"]
 foreign {
     // param-hint: Buffer bytes=param[3] optional
     // param-hint: LengthTransferred optional
     // param-hint: Overlapped optional
     // pinvoke-hint: SetLastError
     func WinUsb_ControlTransfer(InterfaceHandle: WINUSB_INTERFACE_HANDLE, SetupPacket: WINUSB_SETUP_PACKET, Buffer: CPointer<UInt8>, BufferLength: UInt32, LengthTransferred: CPointer<UInt32>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_ControlTransfer == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_WinUsb_ControlTransfer(InterfaceHandle: WINUSB_INTERFACE_HANDLE, SetupPacket: WINUSB_SETUP_PACKET, Buffer: CPointer<UInt8>, BufferLength: UInt32, LengthTransferred: CPointer<UInt32>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32 {
+    return WinUsb_ControlTransfer(InterfaceHandle, SetupPacket, Buffer, BufferLength, LengthTransferred, Overlapped)
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_FlushPipe == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WinUsb_FlushPipe(InterfaceHandle: WINUSB_INTERFACE_HANDLE, PipeID: UInt8): Int32
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_FlushPipe == "on"]
+public unsafe func Windows_WinUsb_FlushPipe(InterfaceHandle: WINUSB_INTERFACE_HANDLE, PipeID: UInt8): Int32 {
+    return WinUsb_FlushPipe(InterfaceHandle, PipeID)
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_Free == "on"]
+foreign {
+    func WinUsb_Free(InterfaceHandle: WINUSB_INTERFACE_HANDLE): Int32
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_Free == "on"]
+public unsafe func Windows_WinUsb_Free(InterfaceHandle: WINUSB_INTERFACE_HANDLE): Int32 {
+    return WinUsb_Free(InterfaceHandle)
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_GetAdjustedFrameNumber == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WinUsb_GetAdjustedFrameNumber(CurrentFrameNumber: CPointer<UInt32>, TimeStamp: Int64): Int32
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_GetAdjustedFrameNumber == "on"]
+public unsafe func Windows_WinUsb_GetAdjustedFrameNumber(CurrentFrameNumber: CPointer<UInt32>, TimeStamp: Int64): Int32 {
+    return WinUsb_GetAdjustedFrameNumber(CurrentFrameNumber, TimeStamp)
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_GetAssociatedInterface == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WinUsb_GetAssociatedInterface(InterfaceHandle: WINUSB_INTERFACE_HANDLE, AssociatedInterfaceIndex: UInt8, AssociatedInterfaceHandle: CPointer<WINUSB_INTERFACE_HANDLE>): Int32
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_GetAssociatedInterface == "on"]
+public unsafe func Windows_WinUsb_GetAssociatedInterface(InterfaceHandle: WINUSB_INTERFACE_HANDLE, AssociatedInterfaceIndex: UInt8, AssociatedInterfaceHandle: CPointer<WINUSB_INTERFACE_HANDLE>): Int32 {
+    return WinUsb_GetAssociatedInterface(InterfaceHandle, AssociatedInterfaceIndex, AssociatedInterfaceHandle)
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_GetCurrentAlternateSetting == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WinUsb_GetCurrentAlternateSetting(InterfaceHandle: WINUSB_INTERFACE_HANDLE, SettingNumber: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_GetCurrentAlternateSetting == "on"]
+public unsafe func Windows_WinUsb_GetCurrentAlternateSetting(InterfaceHandle: WINUSB_INTERFACE_HANDLE, SettingNumber: CPointer<UInt8>): Int32 {
+    return WinUsb_GetCurrentAlternateSetting(InterfaceHandle, SettingNumber)
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_GetCurrentFrameNumber == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WinUsb_GetCurrentFrameNumber(InterfaceHandle: WINUSB_INTERFACE_HANDLE, CurrentFrameNumber: CPointer<UInt32>, TimeStamp: CPointer<Int64>): Int32
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_GetCurrentFrameNumber == "on"]
+public unsafe func Windows_WinUsb_GetCurrentFrameNumber(InterfaceHandle: WINUSB_INTERFACE_HANDLE, CurrentFrameNumber: CPointer<UInt32>, TimeStamp: CPointer<Int64>): Int32 {
+    return WinUsb_GetCurrentFrameNumber(InterfaceHandle, CurrentFrameNumber, TimeStamp)
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_GetCurrentFrameNumberAndQpc == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WinUsb_GetCurrentFrameNumberAndQpc(InterfaceHandle: WINUSB_INTERFACE_HANDLE, FrameQpcInfo: CPointer<USB_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC_INFORMATION>): Int32
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_GetCurrentFrameNumberAndQpc == "on"]
+public unsafe func Windows_WinUsb_GetCurrentFrameNumberAndQpc(InterfaceHandle: WINUSB_INTERFACE_HANDLE, FrameQpcInfo: CPointer<USB_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC_INFORMATION>): Int32 {
+    return WinUsb_GetCurrentFrameNumberAndQpc(InterfaceHandle, FrameQpcInfo)
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_GetDescriptor == "on"]
+foreign {
+    // param-hint: Buffer bytes=param[5] optional
+    // pinvoke-hint: SetLastError
+    func WinUsb_GetDescriptor(InterfaceHandle: WINUSB_INTERFACE_HANDLE, DescriptorType: UInt8, Index: UInt8, LanguageID: UInt16, Buffer: CPointer<UInt8>, BufferLength: UInt32, LengthTransferred: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_GetDescriptor == "on"]
+public unsafe func Windows_WinUsb_GetDescriptor(InterfaceHandle: WINUSB_INTERFACE_HANDLE, DescriptorType: UInt8, Index: UInt8, LanguageID: UInt16, Buffer: CPointer<UInt8>, BufferLength: UInt32, LengthTransferred: CPointer<UInt32>): Int32 {
+    return WinUsb_GetDescriptor(InterfaceHandle, DescriptorType, Index, LanguageID, Buffer, BufferLength, LengthTransferred)
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_GetOverlappedResult == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func WinUsb_GetOverlappedResult(InterfaceHandle: WINUSB_INTERFACE_HANDLE, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>, lpNumberOfBytesTransferred: CPointer<UInt32>, bWait: Int32): Int32
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_GetOverlappedResult == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_WinUsb_GetOverlappedResult(InterfaceHandle: WINUSB_INTERFACE_HANDLE, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>, lpNumberOfBytesTransferred: CPointer<UInt32>, bWait: Int32): Int32 {
+    return WinUsb_GetOverlappedResult(InterfaceHandle, lpOverlapped, lpNumberOfBytesTransferred, bWait)
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_GetPipePolicy == "on"]
+foreign {
+    // param-hint: Value bytes=param[3]
+    // pinvoke-hint: SetLastError
+    func WinUsb_GetPipePolicy(InterfaceHandle: WINUSB_INTERFACE_HANDLE, PipeID: UInt8, PolicyType: UInt32, ValueLength: CPointer<UInt32>, Value: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_GetPipePolicy == "on"]
+public unsafe func Windows_WinUsb_GetPipePolicy(InterfaceHandle: WINUSB_INTERFACE_HANDLE, PipeID: UInt8, PolicyType: UInt32, ValueLength: CPointer<UInt32>, Value: CPointer<Unit>): Int32 {
+    return WinUsb_GetPipePolicy(InterfaceHandle, PipeID, PolicyType, ValueLength, Value)
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_GetPowerPolicy == "on"]
+foreign {
+    // param-hint: Value bytes=param[2]
+    // pinvoke-hint: SetLastError
+    func WinUsb_GetPowerPolicy(InterfaceHandle: WINUSB_INTERFACE_HANDLE, PolicyType: UInt32, ValueLength: CPointer<UInt32>, Value: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_GetPowerPolicy == "on"]
+public unsafe func Windows_WinUsb_GetPowerPolicy(InterfaceHandle: WINUSB_INTERFACE_HANDLE, PolicyType: UInt32, ValueLength: CPointer<UInt32>, Value: CPointer<Unit>): Int32 {
+    return WinUsb_GetPowerPolicy(InterfaceHandle, PolicyType, ValueLength, Value)
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_Initialize == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WinUsb_Initialize(DeviceHandle: CPointer<Unit>, InterfaceHandle: CPointer<WINUSB_INTERFACE_HANDLE>): Int32
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_Initialize == "on"]
+public unsafe func Windows_WinUsb_Initialize(DeviceHandle: CPointer<Unit>, InterfaceHandle: CPointer<WINUSB_INTERFACE_HANDLE>): Int32 {
+    return WinUsb_Initialize(DeviceHandle, InterfaceHandle)
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_ParseConfigurationDescriptor == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WinUsb_ParseConfigurationDescriptor(ConfigurationDescriptor: CPointer<USB_CONFIGURATION_DESCRIPTOR>, StartPosition: CPointer<Unit>, InterfaceNumber: Int32, AlternateSetting: Int32, InterfaceClass: Int32, InterfaceSubClass: Int32, InterfaceProtocol: Int32): CPointer<USB_INTERFACE_DESCRIPTOR>
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_ParseConfigurationDescriptor == "on"]
+public unsafe func Windows_WinUsb_ParseConfigurationDescriptor(ConfigurationDescriptor: CPointer<USB_CONFIGURATION_DESCRIPTOR>, StartPosition: CPointer<Unit>, InterfaceNumber: Int32, AlternateSetting: Int32, InterfaceClass: Int32, InterfaceSubClass: Int32, InterfaceProtocol: Int32): CPointer<USB_INTERFACE_DESCRIPTOR> {
+    return WinUsb_ParseConfigurationDescriptor(ConfigurationDescriptor, StartPosition, InterfaceNumber, AlternateSetting, InterfaceClass, InterfaceSubClass, InterfaceProtocol)
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_ParseDescriptors == "on"]
+foreign {
+    // param-hint: DescriptorBuffer bytes=param[1]
+    // pinvoke-hint: SetLastError
+    func WinUsb_ParseDescriptors(DescriptorBuffer: CPointer<Unit>, TotalLength: UInt32, StartPosition: CPointer<Unit>, DescriptorType: Int32): CPointer<USB_COMMON_DESCRIPTOR>
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_ParseDescriptors == "on"]
+public unsafe func Windows_WinUsb_ParseDescriptors(DescriptorBuffer: CPointer<Unit>, TotalLength: UInt32, StartPosition: CPointer<Unit>, DescriptorType: Int32): CPointer<USB_COMMON_DESCRIPTOR> {
+    return WinUsb_ParseDescriptors(DescriptorBuffer, TotalLength, StartPosition, DescriptorType)
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_QueryDeviceInformation == "on"]
+foreign {
+    // param-hint: Buffer bytes=param[2]
+    // pinvoke-hint: SetLastError
+    func WinUsb_QueryDeviceInformation(InterfaceHandle: WINUSB_INTERFACE_HANDLE, InformationType: UInt32, BufferLength: CPointer<UInt32>, Buffer: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_QueryDeviceInformation == "on"]
+public unsafe func Windows_WinUsb_QueryDeviceInformation(InterfaceHandle: WINUSB_INTERFACE_HANDLE, InformationType: UInt32, BufferLength: CPointer<UInt32>, Buffer: CPointer<Unit>): Int32 {
+    return WinUsb_QueryDeviceInformation(InterfaceHandle, InformationType, BufferLength, Buffer)
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_QueryInterfaceSettings == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WinUsb_QueryInterfaceSettings(InterfaceHandle: WINUSB_INTERFACE_HANDLE, AlternateInterfaceNumber: UInt8, UsbAltInterfaceDescriptor: CPointer<USB_INTERFACE_DESCRIPTOR>): Int32
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_QueryInterfaceSettings == "on"]
+public unsafe func Windows_WinUsb_QueryInterfaceSettings(InterfaceHandle: WINUSB_INTERFACE_HANDLE, AlternateInterfaceNumber: UInt8, UsbAltInterfaceDescriptor: CPointer<USB_INTERFACE_DESCRIPTOR>): Int32 {
+    return WinUsb_QueryInterfaceSettings(InterfaceHandle, AlternateInterfaceNumber, UsbAltInterfaceDescriptor)
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_QueryPipe == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WinUsb_QueryPipe(InterfaceHandle: WINUSB_INTERFACE_HANDLE, AlternateInterfaceNumber: UInt8, PipeIndex: UInt8, PipeInformation: CPointer<WINUSB_PIPE_INFORMATION>): Int32
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_QueryPipe == "on"]
+public unsafe func Windows_WinUsb_QueryPipe(InterfaceHandle: WINUSB_INTERFACE_HANDLE, AlternateInterfaceNumber: UInt8, PipeIndex: UInt8, PipeInformation: CPointer<WINUSB_PIPE_INFORMATION>): Int32 {
+    return WinUsb_QueryPipe(InterfaceHandle, AlternateInterfaceNumber, PipeIndex, PipeInformation)
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_QueryPipeEx == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WinUsb_QueryPipeEx(InterfaceHandle: WINUSB_INTERFACE_HANDLE, AlternateSettingNumber: UInt8, PipeIndex: UInt8, PipeInformationEx: CPointer<WINUSB_PIPE_INFORMATION_EX>): Int32
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_QueryPipeEx == "on"]
+public unsafe func Windows_WinUsb_QueryPipeEx(InterfaceHandle: WINUSB_INTERFACE_HANDLE, AlternateSettingNumber: UInt8, PipeIndex: UInt8, PipeInformationEx: CPointer<WINUSB_PIPE_INFORMATION_EX>): Int32 {
+    return WinUsb_QueryPipeEx(InterfaceHandle, AlternateSettingNumber, PipeIndex, PipeInformationEx)
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_ReadIsochPipe == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: IsoPacketDescriptors len=param[4]
     // param-hint: Overlapped optional
     // pinvoke-hint: SetLastError
     func WinUsb_ReadIsochPipe(BufferHandle: CPointer<Unit>, Offset: UInt32, Length: UInt32, FrameNumber: CPointer<UInt32>, NumberOfPackets: UInt32, IsoPacketDescriptors: CPointer<USBD_ISO_PACKET_DESCRIPTOR>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_ReadIsochPipe == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_WinUsb_ReadIsochPipe(BufferHandle: CPointer<Unit>, Offset: UInt32, Length: UInt32, FrameNumber: CPointer<UInt32>, NumberOfPackets: UInt32, IsoPacketDescriptors: CPointer<USBD_ISO_PACKET_DESCRIPTOR>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32 {
+    return WinUsb_ReadIsochPipe(BufferHandle, Offset, Length, FrameNumber, NumberOfPackets, IsoPacketDescriptors, Overlapped)
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_ReadIsochPipeAsap == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: IsoPacketDescriptors len=param[4]
     // param-hint: Overlapped optional
     // pinvoke-hint: SetLastError
     func WinUsb_ReadIsochPipeAsap(BufferHandle: CPointer<Unit>, Offset: UInt32, Length: UInt32, ContinueStream: Int32, NumberOfPackets: UInt32, IsoPacketDescriptors: CPointer<USBD_ISO_PACKET_DESCRIPTOR>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_ReadIsochPipeAsap == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_WinUsb_ReadIsochPipeAsap(BufferHandle: CPointer<Unit>, Offset: UInt32, Length: UInt32, ContinueStream: Int32, NumberOfPackets: UInt32, IsoPacketDescriptors: CPointer<USBD_ISO_PACKET_DESCRIPTOR>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32 {
+    return WinUsb_ReadIsochPipeAsap(BufferHandle, Offset, Length, ContinueStream, NumberOfPackets, IsoPacketDescriptors, Overlapped)
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_ReadPipe == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: Buffer bytes=param[3] optional
     // param-hint: LengthTransferred optional
     // param-hint: Overlapped optional
     // pinvoke-hint: SetLastError
     func WinUsb_ReadPipe(InterfaceHandle: WINUSB_INTERFACE_HANDLE, PipeID: UInt8, Buffer: CPointer<UInt8>, BufferLength: UInt32, LengthTransferred: CPointer<UInt32>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_ReadPipe == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_WinUsb_ReadPipe(InterfaceHandle: WINUSB_INTERFACE_HANDLE, PipeID: UInt8, Buffer: CPointer<UInt8>, BufferLength: UInt32, LengthTransferred: CPointer<UInt32>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32 {
+    return WinUsb_ReadPipe(InterfaceHandle, PipeID, Buffer, BufferLength, LengthTransferred, Overlapped)
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_RegisterIsochBuffer == "on"]
+foreign {
+    // param-hint: Buffer bytes=param[3]
+    // pinvoke-hint: SetLastError
+    func WinUsb_RegisterIsochBuffer(InterfaceHandle: WINUSB_INTERFACE_HANDLE, PipeID: UInt8, Buffer: CPointer<UInt8>, BufferLength: UInt32, IsochBufferHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_RegisterIsochBuffer == "on"]
+public unsafe func Windows_WinUsb_RegisterIsochBuffer(InterfaceHandle: WINUSB_INTERFACE_HANDLE, PipeID: UInt8, Buffer: CPointer<UInt8>, BufferLength: UInt32, IsochBufferHandle: CPointer<CPointer<Unit>>): Int32 {
+    return WinUsb_RegisterIsochBuffer(InterfaceHandle, PipeID, Buffer, BufferLength, IsochBufferHandle)
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_ResetPipe == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WinUsb_ResetPipe(InterfaceHandle: WINUSB_INTERFACE_HANDLE, PipeID: UInt8): Int32
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_ResetPipe == "on"]
+public unsafe func Windows_WinUsb_ResetPipe(InterfaceHandle: WINUSB_INTERFACE_HANDLE, PipeID: UInt8): Int32 {
+    return WinUsb_ResetPipe(InterfaceHandle, PipeID)
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_SetCurrentAlternateSetting == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WinUsb_SetCurrentAlternateSetting(InterfaceHandle: WINUSB_INTERFACE_HANDLE, SettingNumber: UInt8): Int32
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_SetCurrentAlternateSetting == "on"]
+public unsafe func Windows_WinUsb_SetCurrentAlternateSetting(InterfaceHandle: WINUSB_INTERFACE_HANDLE, SettingNumber: UInt8): Int32 {
+    return WinUsb_SetCurrentAlternateSetting(InterfaceHandle, SettingNumber)
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_SetPipePolicy == "on"]
+foreign {
+    // param-hint: Value bytes=param[3]
+    // pinvoke-hint: SetLastError
+    func WinUsb_SetPipePolicy(InterfaceHandle: WINUSB_INTERFACE_HANDLE, PipeID: UInt8, PolicyType: UInt32, ValueLength: UInt32, Value: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_SetPipePolicy == "on"]
+public unsafe func Windows_WinUsb_SetPipePolicy(InterfaceHandle: WINUSB_INTERFACE_HANDLE, PipeID: UInt8, PolicyType: UInt32, ValueLength: UInt32, Value: CPointer<Unit>): Int32 {
+    return WinUsb_SetPipePolicy(InterfaceHandle, PipeID, PolicyType, ValueLength, Value)
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_SetPowerPolicy == "on"]
+foreign {
+    // param-hint: Value bytes=param[2]
+    // pinvoke-hint: SetLastError
+    func WinUsb_SetPowerPolicy(InterfaceHandle: WINUSB_INTERFACE_HANDLE, PolicyType: UInt32, ValueLength: UInt32, Value: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_SetPowerPolicy == "on"]
+public unsafe func Windows_WinUsb_SetPowerPolicy(InterfaceHandle: WINUSB_INTERFACE_HANDLE, PolicyType: UInt32, ValueLength: UInt32, Value: CPointer<Unit>): Int32 {
+    return WinUsb_SetPowerPolicy(InterfaceHandle, PolicyType, ValueLength, Value)
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_StartTrackingForTimeSync == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WinUsb_StartTrackingForTimeSync(InterfaceHandle: WINUSB_INTERFACE_HANDLE, StartTrackingInfo: CPointer<USB_START_TRACKING_FOR_TIME_SYNC_INFORMATION>): Int32
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_StartTrackingForTimeSync == "on"]
+public unsafe func Windows_WinUsb_StartTrackingForTimeSync(InterfaceHandle: WINUSB_INTERFACE_HANDLE, StartTrackingInfo: CPointer<USB_START_TRACKING_FOR_TIME_SYNC_INFORMATION>): Int32 {
+    return WinUsb_StartTrackingForTimeSync(InterfaceHandle, StartTrackingInfo)
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_StopTrackingForTimeSync == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WinUsb_StopTrackingForTimeSync(InterfaceHandle: WINUSB_INTERFACE_HANDLE, StopTrackingInfo: CPointer<USB_STOP_TRACKING_FOR_TIME_SYNC_INFORMATION>): Int32
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_StopTrackingForTimeSync == "on"]
+public unsafe func Windows_WinUsb_StopTrackingForTimeSync(InterfaceHandle: WINUSB_INTERFACE_HANDLE, StopTrackingInfo: CPointer<USB_STOP_TRACKING_FOR_TIME_SYNC_INFORMATION>): Int32 {
+    return WinUsb_StopTrackingForTimeSync(InterfaceHandle, StopTrackingInfo)
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_UnregisterIsochBuffer == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WinUsb_UnregisterIsochBuffer(IsochBufferHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_UnregisterIsochBuffer == "on"]
+public unsafe func Windows_WinUsb_UnregisterIsochBuffer(IsochBufferHandle: CPointer<Unit>): Int32 {
+    return WinUsb_UnregisterIsochBuffer(IsochBufferHandle)
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_WriteIsochPipe == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: Overlapped optional
     // pinvoke-hint: SetLastError
     func WinUsb_WriteIsochPipe(BufferHandle: CPointer<Unit>, Offset: UInt32, Length: UInt32, FrameNumber: CPointer<UInt32>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_WriteIsochPipe == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_WinUsb_WriteIsochPipe(BufferHandle: CPointer<Unit>, Offset: UInt32, Length: UInt32, FrameNumber: CPointer<UInt32>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32 {
+    return WinUsb_WriteIsochPipe(BufferHandle, Offset, Length, FrameNumber, Overlapped)
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_WriteIsochPipeAsap == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: Overlapped optional
     // pinvoke-hint: SetLastError
     func WinUsb_WriteIsochPipeAsap(BufferHandle: CPointer<Unit>, Offset: UInt32, Length: UInt32, ContinueStream: Int32, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_WriteIsochPipeAsap == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_WinUsb_WriteIsochPipeAsap(BufferHandle: CPointer<Unit>, Offset: UInt32, Length: UInt32, ContinueStream: Int32, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32 {
+    return WinUsb_WriteIsochPipeAsap(BufferHandle, Offset, Length, ContinueStream, Overlapped)
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_WritePipe == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: Buffer bytes=param[3]
     // param-hint: LengthTransferred optional
     // param-hint: Overlapped optional
     // pinvoke-hint: SetLastError
     func WinUsb_WritePipe(InterfaceHandle: WINUSB_INTERFACE_HANDLE, PipeID: UInt8, Buffer: CPointer<UInt8>, BufferLength: UInt32, LengthTransferred: CPointer<UInt32>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32
+}
+
+@When[Windows_Win32_Devices_Usb == "on" && WINUSB == "on" && Windows_Win32_Devices_Usb_WinUsb_WritePipe == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_WinUsb_WritePipe(InterfaceHandle: WINUSB_INTERFACE_HANDLE, PipeID: UInt8, Buffer: CPointer<UInt8>, BufferLength: UInt32, LengthTransferred: CPointer<UInt32>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Int32 {
+    return WinUsb_WritePipe(InterfaceHandle, PipeID, Buffer, BufferLength, LengthTransferred, Overlapped)
 }
 
 @When[Windows_Win32_Devices_Usb == "on"]

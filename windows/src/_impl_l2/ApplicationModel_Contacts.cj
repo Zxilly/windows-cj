@@ -652,10 +652,12 @@ public class ContactStore <: InterfaceWrapperBase & ComInterface & windows_inter
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindContactsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.Contact>> {
         return defaultInterface().FindContactsAsync()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindContactsWithSearchTextAsync(searchText: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.Contact>> {
         return defaultInterface().FindContactsWithSearchTextAsync(searchText)
     }
@@ -1673,7 +1675,10 @@ public struct IContactStore2Vtbl {
     public var ContactChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveContactChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var get_AggregateContactManager: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindContactListsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindContactListsAsync: UIntNative = UIntNative(0)
     public var GetContactListAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var CreateContactListAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var GetMeContactAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1790,6 +1795,7 @@ public class IContactStore2 <: InterfaceWrapperBase & ComInterface & RuntimeName
         return _impl_l1.AggregateContactManager.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindContactListsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<ContactList>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

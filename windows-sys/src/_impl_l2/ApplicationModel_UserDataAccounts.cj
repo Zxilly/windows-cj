@@ -22,13 +22,13 @@ public struct IUserDataAccountVtbl {
     public var PackageFamilyName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SaveAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var DeleteAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_ApplicationModel_Appointments == "on"]
+    @When[Windows_ApplicationModel_Appointments == "on" && Windows_Foundation_Collections == "on"]
     public var FindAppointmentCalendarsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_ApplicationModel_Email == "on"]
+    @When[Windows_ApplicationModel_Email == "on" && Windows_Foundation_Collections == "on"]
     public var FindEmailMailboxesAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_ApplicationModel_Contacts == "on"]
+    @When[Windows_ApplicationModel_Contacts == "on" && Windows_Foundation_Collections == "on"]
     public var FindContactListsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_ApplicationModel_Contacts == "on"]
+    @When[Windows_ApplicationModel_Contacts == "on" && Windows_Foundation_Collections == "on"]
     public var FindContactAnnotationListsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -134,28 +134,28 @@ public class IUserDataAccount <: InterfaceWrapperBase & ComInterface {
         return __vt.DeleteAsync(__liveRaw, result__)
     }
 
-    @When[Windows_ApplicationModel_Appointments == "on"]
+    @When[Windows_ApplicationModel_Appointments == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindAppointmentCalendarsAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindAppointmentCalendarsAsync(__liveRaw, result__)
     }
 
-    @When[Windows_ApplicationModel_Email == "on"]
+    @When[Windows_ApplicationModel_Email == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindEmailMailboxesAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindEmailMailboxesAsync(__liveRaw, result__)
     }
 
-    @When[Windows_ApplicationModel_Contacts == "on"]
+    @When[Windows_ApplicationModel_Contacts == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindContactListsAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindContactListsAsync(__liveRaw, result__)
     }
 
-    @When[Windows_ApplicationModel_Contacts == "on"]
+    @When[Windows_ApplicationModel_Contacts == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindContactAnnotationListsAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -426,6 +426,7 @@ public class IUserDataAccountManagerStatics2 <: InterfaceWrapperBase & ComInterf
 @C
 public struct IUserDataAccountStoreVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAccountsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetAccountAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var CreateAccountAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -472,6 +473,7 @@ public class IUserDataAccountStore <: InterfaceWrapperBase & ComInterface {
         readVtbl<IUserDataAccountStoreVtbl>(IUserDataAccountStoreVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAccountsAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

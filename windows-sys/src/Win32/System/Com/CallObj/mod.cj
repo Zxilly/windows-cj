@@ -3,7 +3,6 @@ package windows_sys.Win32.System.Com.CallObj
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l2 as Win32__impl_l2
@@ -737,8 +736,22 @@ public class ICallUnmarshal <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[OLE32 == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_System_Com_CallObj == "on" && OLE32 == "on" && Windows_Win32_System_Com_CallObj_CoGetInterceptor == "on" && Windows_Win32_System_Com == "on"]
 foreign {
     func CoGetInterceptor(iidIntercepted: CPointer<GUID>, punkOuter: CPointer<Unit>, iid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com_CallObj == "on" && OLE32 == "on" && Windows_Win32_System_Com_CallObj_CoGetInterceptor == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CoGetInterceptor(iidIntercepted: CPointer<GUID>, punkOuter: CPointer<Unit>, iid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return CoGetInterceptor(iidIntercepted, punkOuter, iid, ppv)
+}
+
+@When[Windows_Win32_System_Com_CallObj == "on" && OLE32 == "on" && Windows_Win32_System_Com_CallObj_CoGetInterceptorFromTypeInfo == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func CoGetInterceptorFromTypeInfo(iidIntercepted: CPointer<GUID>, punkOuter: CPointer<Unit>, typeInfo: CPointer<Unit>, iid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com_CallObj == "on" && OLE32 == "on" && Windows_Win32_System_Com_CallObj_CoGetInterceptorFromTypeInfo == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CoGetInterceptorFromTypeInfo(iidIntercepted: CPointer<GUID>, punkOuter: CPointer<Unit>, typeInfo: CPointer<Unit>, iid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return CoGetInterceptorFromTypeInfo(iidIntercepted, punkOuter, typeInfo, iid, ppv)
 }

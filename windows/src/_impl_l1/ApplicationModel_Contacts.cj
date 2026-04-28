@@ -90,6 +90,7 @@ public class AggregateContactManager <: InterfaceWrapperBase & ComInterface & wi
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindRawContactsAsync(contact: Contact): windows_future.IAsyncOperation<windows_collections.IVectorView<Contact>> {
         return defaultInterface().FindRawContactsAsync(contact)
     }
@@ -223,6 +224,7 @@ public class Contact <: InterfaceWrapperBase & ComInterface & windows_interface.
         defaultInterface().SetThumbnail(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Fields(): windows_collections.IVector<_impl_l0.IContactField> {
         return defaultInterface().Fields()
     }
@@ -634,10 +636,12 @@ public class ContactAnnotationList <: InterfaceWrapperBase & ComInterface & wind
         return defaultInterface().GetAnnotationAsync(annotationId)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAnnotationsByRemoteIdAsync(remoteId: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVectorView<ContactAnnotation>> {
         return defaultInterface().FindAnnotationsByRemoteIdAsync(remoteId)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAnnotationsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<ContactAnnotation>> {
         return defaultInterface().FindAnnotationsAsync()
     }
@@ -734,14 +738,17 @@ public class ContactAnnotationStore <: InterfaceWrapperBase & ComInterface & win
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindContactIdsByEmailAsync(emailAddress: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVectorView<windows_core.HString>> {
         return defaultInterface().FindContactIdsByEmailAsync(emailAddress)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindContactIdsByPhoneNumberAsync(phoneNumber: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVectorView<windows_core.HString>> {
         return defaultInterface().FindContactIdsByPhoneNumberAsync(phoneNumber)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAnnotationsForContactAsync(contact: Contact): windows_future.IAsyncOperation<windows_collections.IVectorView<ContactAnnotation>> {
         return defaultInterface().FindAnnotationsForContactAsync(contact)
     }
@@ -762,6 +769,7 @@ public class ContactAnnotationStore <: InterfaceWrapperBase & ComInterface & win
         return defaultInterface().GetAnnotationListAsync(annotationListId)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAnnotationListsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<ContactAnnotationList>> {
         return defaultInterface().FindAnnotationListsAsync()
     }
@@ -854,6 +862,7 @@ public class ContactBatch <: InterfaceWrapperBase & ComInterface & windows_inter
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Contacts(): windows_collections.IVectorView<Contact> {
         return defaultInterface().Contacts()
     }
@@ -1272,6 +1281,7 @@ public class ContactChangeReader <: InterfaceWrapperBase & ComInterface & window
         defaultInterface().AcceptChangesThrough(lastChangeToAccept)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReadBatchAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<ContactChange>> {
         return defaultInterface().ReadBatchAsync()
     }
@@ -2109,26 +2119,32 @@ public class ContactInformation <: InterfaceWrapperBase & ComInterface & windows
         return defaultInterface().GetThumbnailAsync()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Emails(): windows_collections.IVectorView<ContactField> {
         return defaultInterface().Emails()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PhoneNumbers(): windows_collections.IVectorView<ContactField> {
         return defaultInterface().PhoneNumbers()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Locations(): windows_collections.IVectorView<ContactLocationField> {
         return defaultInterface().Locations()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InstantMessages(): windows_collections.IVectorView<ContactInstantMessageField> {
         return defaultInterface().InstantMessages()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CustomFields(): windows_collections.IVectorView<ContactField> {
         return defaultInterface().CustomFields()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func QueryCustomFields(customName: windows_core.HString): windows_collections.IVectorView<ContactField> {
         return defaultInterface().QueryCustomFields(customName)
     }
@@ -2761,7 +2777,7 @@ public class ContactMatchReason <: InterfaceWrapperBase & ComInterface & windows
         return defaultInterface().Field()
     }
 
-    @When[Windows_Data_Text == "on"]
+    @When[Windows_Data_Text == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func Segments(): windows_collections.IVectorView<_impl_l0.TextSegment> {
         return defaultInterface().Segments()
     }
@@ -3122,6 +3138,7 @@ public class ContactPicker <: InterfaceWrapperBase & ComInterface & windows_inte
         defaultInterface().SetSelectionMode(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DesiredFields(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().DesiredFields()
     }
@@ -3130,6 +3147,7 @@ public class ContactPicker <: InterfaceWrapperBase & ComInterface & windows_inte
         return defaultInterface().PickSingleContactAsync()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PickMultipleContactsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<ContactInformation>> {
         return defaultInterface().PickMultipleContactsAsync()
     }
@@ -3260,6 +3278,7 @@ public class ContactQueryOptions <: InterfaceWrapperBase & ComInterface & window
         return defaultInterface().TextSearch()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ContactListIds(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().ContactListIds()
     }
@@ -3288,6 +3307,7 @@ public class ContactQueryOptions <: InterfaceWrapperBase & ComInterface & window
         defaultInterface().SetDesiredOperations(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AnnotationListIds(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().AnnotationListIds()
     }
@@ -3518,6 +3538,7 @@ public class ContactReader <: InterfaceWrapperBase & ComInterface & windows_inte
         return defaultInterface().ReadBatchAsync()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetMatchingPropertiesWithMatchReason(contact: Contact): windows_collections.IVectorView<ContactMatchReason> {
         return defaultInterface().GetMatchingPropertiesWithMatchReason(contact)
     }
@@ -3884,7 +3905,10 @@ extend FullContactCardOptions <: windows_core.HandleWinrtType<FullContactCardOpt
 @C
 public struct IAggregateContactManagerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var FindRawContactsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindRawContactsAsync: UIntNative = UIntNative(0)
     public var TryLinkContactsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var UnlinkRawContactAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var TrySetPreferredSourceForPictureAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
@@ -3956,6 +3980,7 @@ public class IAggregateContactManager <: InterfaceWrapperBase & ComInterface & R
         readVtbl<IAggregateContactManagerVtbl>(IAggregateContactManagerVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindRawContactsAsync(contact: Contact): windows_future.IAsyncOperation<windows_collections.IVectorView<Contact>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4006,7 +4031,10 @@ public struct IContactVtbl {
     public var SetThumbnail: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams != "on"]
     public var SetThumbnail: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Fields: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Fields: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4105,6 +4133,7 @@ public class IContact <: InterfaceWrapperBase & ComInterface & RuntimeName & win
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Fields(): windows_collections.IVector<_impl_l0.IContactField> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4125,15 +4154,42 @@ public struct IContact2Vtbl {
     public var SetId: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Notes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetNotes: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Phones: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Phones: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Emails: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Emails: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Addresses: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Addresses: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var ConnectedServiceAccounts: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ConnectedServiceAccounts: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var ImportantDates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ImportantDates: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var DataSuppliers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var DataSuppliers: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var JobInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var JobInfo: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SignificantOthers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SignificantOthers: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Websites: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Websites: UIntNative = UIntNative(0)
     @When[Windows_Foundation_Collections == "on"]
     public var ProviderProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Foundation_Collections != "on"]
@@ -4246,6 +4302,7 @@ public class IContact2 <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Phones(): windows_collections.IVector<ContactPhone> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4254,6 +4311,7 @@ public class IContact2 <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
         return windows_collections.IVector<ContactPhone>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Emails(): windows_collections.IVector<ContactEmail> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4262,6 +4320,7 @@ public class IContact2 <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
         return windows_collections.IVector<ContactEmail>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Addresses(): windows_collections.IVector<ContactAddress> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4270,6 +4329,7 @@ public class IContact2 <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
         return windows_collections.IVector<ContactAddress>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ConnectedServiceAccounts(): windows_collections.IVector<_impl_l0.ContactConnectedServiceAccount> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4278,6 +4338,7 @@ public class IContact2 <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
         return windows_collections.IVector<_impl_l0.ContactConnectedServiceAccount>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ImportantDates(): windows_collections.IVector<ContactDate> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4286,6 +4347,7 @@ public class IContact2 <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
         return windows_collections.IVector<ContactDate>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DataSuppliers(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4294,6 +4356,7 @@ public class IContact2 <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
         return windows_collections.IVector<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func JobInfo(): windows_collections.IVector<_impl_l0.ContactJobInfo> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4302,6 +4365,7 @@ public class IContact2 <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
         return windows_collections.IVector<_impl_l0.ContactJobInfo>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SignificantOthers(): windows_collections.IVector<ContactSignificantOther> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4310,6 +4374,7 @@ public class IContact2 <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
         return windows_collections.IVector<ContactSignificantOther>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Websites(): windows_collections.IVector<ContactWebsite> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4645,8 +4710,14 @@ public struct IContactAnnotationListVtbl {
     public var DeleteAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var TrySaveAnnotationAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var GetAnnotationAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAnnotationsByRemoteIdAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAnnotationsByRemoteIdAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAnnotationsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAnnotationsAsync: UIntNative = UIntNative(0)
     public var DeleteAnnotationAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -4764,6 +4835,7 @@ public class IContactAnnotationList <: InterfaceWrapperBase & ComInterface & Run
         return windows_future.IAsyncOperation<ContactAnnotation>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAnnotationsByRemoteIdAsync(remoteId: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVectorView<ContactAnnotation>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4772,6 +4844,7 @@ public class IContactAnnotationList <: InterfaceWrapperBase & ComInterface & Run
         return windows_future.IAsyncOperation<windows_collections.IVectorView<ContactAnnotation>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAnnotationsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<ContactAnnotation>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4796,14 +4869,26 @@ extend IContactAnnotationList <: windows_core.Interface<IContactAnnotationList> 
 @C
 public struct IContactAnnotationStoreVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var FindContactIdsByEmailAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindContactIdsByEmailAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var FindContactIdsByPhoneNumberAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindContactIdsByPhoneNumberAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAnnotationsForContactAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAnnotationsForContactAsync: UIntNative = UIntNative(0)
     public var DisableAnnotationAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var CreateAnnotationListAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CreateAnnotationListInAccountAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var GetAnnotationListAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAnnotationListsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAnnotationListsAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4872,6 +4957,7 @@ public class IContactAnnotationStore <: InterfaceWrapperBase & ComInterface & Ru
         readVtbl<IContactAnnotationStoreVtbl>(IContactAnnotationStoreVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindContactIdsByEmailAsync(emailAddress: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVectorView<windows_core.HString>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4880,6 +4966,7 @@ public class IContactAnnotationStore <: InterfaceWrapperBase & ComInterface & Ru
         return windows_future.IAsyncOperation<windows_collections.IVectorView<windows_core.HString>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindContactIdsByPhoneNumberAsync(phoneNumber: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVectorView<windows_core.HString>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4888,6 +4975,7 @@ public class IContactAnnotationStore <: InterfaceWrapperBase & ComInterface & Ru
         return windows_future.IAsyncOperation<windows_collections.IVectorView<windows_core.HString>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAnnotationsForContactAsync(contact: Contact): windows_future.IAsyncOperation<windows_collections.IVectorView<ContactAnnotation>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4928,6 +5016,7 @@ public class IContactAnnotationStore <: InterfaceWrapperBase & ComInterface & Ru
         return windows_future.IAsyncOperation<ContactAnnotationList>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAnnotationListsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<ContactAnnotationList>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4944,7 +5033,10 @@ extend IContactAnnotationStore <: windows_core.Interface<IContactAnnotationStore
 @C
 public struct IContactAnnotationStore2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAnnotationsForContactListAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAnnotationsForContactListAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -5013,6 +5105,7 @@ public class IContactAnnotationStore2 <: InterfaceWrapperBase & ComInterface & R
         readVtbl<IContactAnnotationStore2Vtbl>(IContactAnnotationStore2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAnnotationsForContactListAsync(contactListId: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVectorView<ContactAnnotation>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5029,7 +5122,10 @@ extend IContactAnnotationStore2 <: windows_core.Interface<IContactAnnotationStor
 @C
 public struct IContactBatchVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Contacts: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Contacts: UIntNative = UIntNative(0)
     public var Status: CFunc<(CPointer<Unit>, CPointer<_impl_l0.ContactBatchStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -5099,6 +5195,7 @@ public class IContactBatch <: InterfaceWrapperBase & ComInterface & RuntimeName 
         readVtbl<IContactBatchVtbl>(IContactBatchVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Contacts(): windows_collections.IVectorView<Contact> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5218,7 +5315,10 @@ extend IContactCardDelayedDataLoader <: windows_core.Interface<IContactCardDelay
 @C
 public struct IContactCardOptions2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ServerSearchContactListIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ServerSearchContactListIds: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -5299,6 +5399,7 @@ public class IContactCardOptions2 <: InterfaceWrapperBase & ComInterface & Runti
         readVtbl<IContactCardOptions2Vtbl>(IContactCardOptions2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ServerSearchContactListIds(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5411,7 +5512,10 @@ public struct IContactChangeReaderVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var AcceptChanges: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
     public var AcceptChangesThrough: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var ReadBatchAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ReadBatchAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -5492,6 +5596,7 @@ public class IContactChangeReader <: InterfaceWrapperBase & ComInterface & Runti
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReadBatchAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<ContactChange>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5910,12 +6015,30 @@ public struct IContactInformationVtbl {
     public var GetThumbnailAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams != "on"]
     public var GetThumbnailAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Emails: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Emails: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var PhoneNumbers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var PhoneNumbers: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Locations: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Locations: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var InstantMessages: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var InstantMessages: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CustomFields: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CustomFields: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var QueryCustomFields: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var QueryCustomFields: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -6001,6 +6124,7 @@ public class IContactInformation <: InterfaceWrapperBase & ComInterface & Runtim
         return windows_future.IAsyncOperation<IRandomAccessStreamWithContentType>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Emails(): windows_collections.IVectorView<ContactField> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6009,6 +6133,7 @@ public class IContactInformation <: InterfaceWrapperBase & ComInterface & Runtim
         return windows_collections.IVectorView<ContactField>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PhoneNumbers(): windows_collections.IVectorView<ContactField> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6017,6 +6142,7 @@ public class IContactInformation <: InterfaceWrapperBase & ComInterface & Runtim
         return windows_collections.IVectorView<ContactField>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Locations(): windows_collections.IVectorView<ContactLocationField> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6025,6 +6151,7 @@ public class IContactInformation <: InterfaceWrapperBase & ComInterface & Runtim
         return windows_collections.IVectorView<ContactLocationField>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InstantMessages(): windows_collections.IVectorView<ContactInstantMessageField> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6033,6 +6160,7 @@ public class IContactInformation <: InterfaceWrapperBase & ComInterface & Runtim
         return windows_collections.IVectorView<ContactInstantMessageField>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CustomFields(): windows_collections.IVectorView<ContactField> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6041,6 +6169,7 @@ public class IContactInformation <: InterfaceWrapperBase & ComInterface & Runtim
         return windows_collections.IVectorView<ContactField>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func QueryCustomFields(customName: windows_core.HString): windows_collections.IVectorView<ContactField> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7405,9 +7534,15 @@ public struct IContactPickerVtbl {
     public var SetCommitButtonText: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SelectionMode: CFunc<(CPointer<Unit>, CPointer<_impl_l0.ContactSelectionModeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetSelectionMode: CFunc<(CPointer<Unit>, _impl_l0.ContactSelectionModeAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var DesiredFields: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var DesiredFields: UIntNative = UIntNative(0)
     public var PickSingleContactAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var PickMultipleContactsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var PickMultipleContactsAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -7504,6 +7639,7 @@ public class IContactPicker <: InterfaceWrapperBase & ComInterface & RuntimeName
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DesiredFields(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7520,6 +7656,7 @@ public class IContactPicker <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_future.IAsyncOperation<ContactInformation>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PickMultipleContactsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<ContactInformation>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7536,9 +7673,15 @@ extend IContactPicker <: windows_core.Interface<IContactPicker> {}
 @C
 public struct IContactPicker2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var DesiredFieldsWithContactFieldType: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var DesiredFieldsWithContactFieldType: UIntNative = UIntNative(0)
     public var PickContactAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var PickContactsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var PickContactsAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -7607,6 +7750,7 @@ public class IContactPicker2 <: InterfaceWrapperBase & ComInterface & RuntimeNam
         readVtbl<IContactPicker2Vtbl>(IContactPicker2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DesiredFieldsWithContactFieldType(): windows_collections.IVector<_impl_l0.ContactFieldType> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7623,6 +7767,7 @@ public class IContactPicker2 <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return windows_future.IAsyncOperation<Contact>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PickContactsAsync(): windows_future.IAsyncOperation<windows_collections.IVector<Contact>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7827,14 +7972,20 @@ extend IContactPickerStatics <: windows_core.Interface<IContactPickerStatics> {}
 public struct IContactQueryOptionsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var TextSearch: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var ContactListIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ContactListIds: UIntNative = UIntNative(0)
     public var IncludeContactsFromHiddenLists: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetIncludeContactsFromHiddenLists: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var DesiredFields: CFunc<(CPointer<Unit>, CPointer<_impl_l0.ContactQueryDesiredFieldsAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetDesiredFields: CFunc<(CPointer<Unit>, _impl_l0.ContactQueryDesiredFieldsAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var DesiredOperations: CFunc<(CPointer<Unit>, CPointer<_impl_l0.ContactAnnotationOperationsAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetDesiredOperations: CFunc<(CPointer<Unit>, _impl_l0.ContactAnnotationOperationsAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var AnnotationListIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AnnotationListIds: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -7911,6 +8062,7 @@ public class IContactQueryOptions <: InterfaceWrapperBase & ComInterface & Runti
         return ContactQueryTextSearch.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ContactListIds(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7961,6 +8113,7 @@ public class IContactQueryOptions <: InterfaceWrapperBase & ComInterface & Runti
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AnnotationListIds(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -8072,7 +8225,10 @@ extend IContactQueryOptionsFactory <: windows_core.Interface<IContactQueryOption
 public struct IContactReaderVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var ReadBatchAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetMatchingPropertiesWithMatchReason: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetMatchingPropertiesWithMatchReason: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -8149,6 +8305,7 @@ public class IContactReader <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_future.IAsyncOperation<ContactBatch>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetMatchingPropertiesWithMatchReason(contact: Contact): windows_collections.IVectorView<ContactMatchReason> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -8165,8 +8322,14 @@ extend IContactReader <: windows_core.Interface<IContactReader> {}
 @C
 public struct IContactStoreVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var FindContactsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindContactsAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var FindContactsWithSearchTextAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindContactsWithSearchTextAsync: UIntNative = UIntNative(0)
     public var GetContactAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -8236,6 +8399,7 @@ public class IContactStore <: InterfaceWrapperBase & ComInterface & RuntimeName 
         readVtbl<IContactStoreVtbl>(IContactStoreVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindContactsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<Contact>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -8244,6 +8408,7 @@ public class IContactStore <: InterfaceWrapperBase & ComInterface & RuntimeName 
         return windows_future.IAsyncOperation<windows_collections.IVectorView<Contact>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindContactsWithSearchTextAsync(searchText: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVectorView<Contact>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -8275,7 +8440,10 @@ public struct IPinnedContactManagerVtbl {
     public var IsPinSurfaceSupported: CFunc<(CPointer<Unit>, _impl_l0.PinnedContactSurfaceAbi, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var IsContactPinned: CFunc<(CPointer<Unit>, CPointer<Unit>, _impl_l0.PinnedContactSurfaceAbi, CPointer<Bool>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var RequestPinContactAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, _impl_l0.PinnedContactSurfaceAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var RequestPinContactsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, _impl_l0.PinnedContactSurfaceAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RequestPinContactsAsync: UIntNative = UIntNative(0)
     public var RequestUnpinContactAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, _impl_l0.PinnedContactSurfaceAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var SignalContactActivity: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetPinnedContactIdsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -8380,6 +8548,7 @@ public class IPinnedContactManager <: InterfaceWrapperBase & ComInterface & Runt
         return windows_future.IAsyncOperation<Bool>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RequestPinContactsAsync(contacts: windows_collections.IIterable<Contact>, surface: _impl_l0.PinnedContactSurface): windows_future.IAsyncOperation<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -8694,6 +8863,7 @@ public class PinnedContactManager <: InterfaceWrapperBase & ComInterface & windo
         return defaultInterface().RequestPinContactAsync(contact, surface)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RequestPinContactsAsync(contacts: windows_collections.IIterable<Contact>, surface: _impl_l0.PinnedContactSurface): windows_future.IAsyncOperation<Bool> {
         return defaultInterface().RequestPinContactsAsync(contacts, surface)
     }

@@ -3,11 +3,8 @@ package windows_sys.Win32.Graphics.Direct3D9on12
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Direct3D12 == "on"]
 import windows_sys.Win32.Graphics.Direct3D12 as Win32_Graphics_Direct3D12
-@When[Windows_Win32_Graphics_Direct3D9 == "on"]
 import windows_sys.Win32.Graphics.Direct3D9 as Win32_Graphics_Direct3D9
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 
@@ -102,10 +99,24 @@ public type PFN_Direct3DCreate9On12 = CFunc<(UInt32, CPointer<D3D9ON12_ARGS>, UI
 @When[Windows_Win32_Graphics_Direct3D9on12 == "on" && (Windows_Win32_Graphics_Direct3D9 == "on" && Windows_Win32_System_Com == "on")]
 public type PFN_Direct3DCreate9On12Ex = CFunc<(UInt32, CPointer<D3D9ON12_ARGS>, UInt32, CPointer<CPointer<Unit>>) -> Int32>
 
-@When[D3D9 == "on" && (Windows_Win32_Graphics_Direct3D9 == "on" && Windows_Win32_System_Com == "on")]
+@When[Windows_Win32_Graphics_Direct3D9on12 == "on" && D3D9 == "on" && Windows_Win32_Graphics_Direct3D9on12_Direct3DCreate9On12 == "on" && Windows_Win32_Graphics_Direct3D9 == "on" && Windows_Win32_System_Com == "on"]
 foreign {
     func Direct3DCreate9On12(SDKVersion: UInt32, pOverrideList: CPointer<D3D9ON12_ARGS>, NumOverrideEntries: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_Graphics_Direct3D9on12 == "on" && D3D9 == "on" && Windows_Win32_Graphics_Direct3D9on12_Direct3DCreate9On12 == "on" && Windows_Win32_Graphics_Direct3D9 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_Direct3DCreate9On12(SDKVersion: UInt32, pOverrideList: CPointer<D3D9ON12_ARGS>, NumOverrideEntries: UInt32): CPointer<Unit> {
+    return Direct3DCreate9On12(SDKVersion, pOverrideList, NumOverrideEntries)
+}
+
+@When[Windows_Win32_Graphics_Direct3D9on12 == "on" && D3D9 == "on" && Windows_Win32_Graphics_Direct3D9on12_Direct3DCreate9On12Ex == "on" && Windows_Win32_Graphics_Direct3D9 == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func Direct3DCreate9On12Ex(SDKVersion: UInt32, pOverrideList: CPointer<D3D9ON12_ARGS>, NumOverrideEntries: UInt32, ppOutputInterface: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D9on12 == "on" && D3D9 == "on" && Windows_Win32_Graphics_Direct3D9on12_Direct3DCreate9On12Ex == "on" && Windows_Win32_Graphics_Direct3D9 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_Direct3DCreate9On12Ex(SDKVersion: UInt32, pOverrideList: CPointer<D3D9ON12_ARGS>, NumOverrideEntries: UInt32, ppOutputInterface: CPointer<CPointer<Unit>>): Int32 {
+    return Direct3DCreate9On12Ex(SDKVersion, pOverrideList, NumOverrideEntries, ppOutputInterface)
 }
 
 @When[Windows_Win32_Graphics_Direct3D9on12 == "on"]

@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Graphics == "on"]
 import windows.Graphics as Graphics
 import windows.Media._impl_l0 as Media__impl_l0
 import windows._impl_l1 as _impl_l1
@@ -2934,9 +2932,9 @@ extend IMiracastReceiverKeyboardDevice <: windows_core.Interface<IMiracastReceiv
 public struct IMiracastReceiverMediaSourceCreatedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Connection: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Media_Core == "on" && Windows_Media_Core == "on" && Windows_Media_Playback == "on"]
     public var get_MediaSource: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Media_Core != "on"]
+    @When[Windows_Media_Core != "on" || Windows_Media_Core != "on" || Windows_Media_Playback != "on"]
     public var get_MediaSource: UIntNative = UIntNative(0)
     public var CursorImageChannelSettings: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetDeferral: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -3016,7 +3014,7 @@ public class IMiracastReceiverMediaSourceCreatedEventArgs <: InterfaceWrapperBas
         return MiracastReceiverConnection.fromAbiTake(result__)
     }
 
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Media_Core == "on" && Windows_Media_Core == "on" && Windows_Media_Playback == "on"]
     public unsafe func get_MediaSource(): Media__impl_l0.MediaSource {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3227,7 +3225,10 @@ public struct IMiracastReceiverStatusVtbl {
     public var WiFiStatus: CFunc<(CPointer<Unit>, CPointer<MiracastReceiverWiFiStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsConnectionTakeoverSupported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var MaxSimultaneousConnections: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var KnownTransmitters: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var KnownTransmitters: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3328,6 +3329,7 @@ public class IMiracastReceiverStatus <: InterfaceWrapperBase & ComInterface & Ru
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func KnownTransmitters(): windows_collections.IVectorView<MiracastTransmitter> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3348,7 +3350,10 @@ public struct IMiracastTransmitterVtbl {
     public var SetName: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var AuthorizationStatus: CFunc<(CPointer<Unit>, CPointer<MiracastTransmitterAuthorizationStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetAuthorizationStatus: CFunc<(CPointer<Unit>, MiracastTransmitterAuthorizationStatusAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetConnections: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetConnections: UIntNative = UIntNative(0)
     public var MacAddress: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var LastConnectionTime: CFunc<(CPointer<Unit>, CPointer<windows_future.DateTimeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -3447,6 +3452,7 @@ public class IMiracastTransmitter <: InterfaceWrapperBase & ComInterface & Runti
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetConnections(): windows_collections.IVectorView<MiracastReceiverConnection> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4483,7 +4489,7 @@ public class MiracastReceiverMediaSourceCreatedEventArgs <: InterfaceWrapperBase
         return defaultInterface().Connection()
     }
 
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Media_Core == "on" && Windows_Media_Core == "on" && Windows_Media_Playback == "on"]
     public unsafe func get_MediaSource(): Media__impl_l0.MediaSource {
         return defaultInterface().get_MediaSource()
     }
@@ -4747,6 +4753,7 @@ public class MiracastReceiverStatus <: InterfaceWrapperBase & ComInterface & win
         return defaultInterface().MaxSimultaneousConnections()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func KnownTransmitters(): windows_collections.IVectorView<MiracastTransmitter> {
         return defaultInterface().KnownTransmitters()
     }
@@ -4855,6 +4862,7 @@ public class MiracastTransmitter <: InterfaceWrapperBase & ComInterface & window
         defaultInterface().SetAuthorizationStatus(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetConnections(): windows_collections.IVectorView<MiracastReceiverConnection> {
         return defaultInterface().GetConnections()
     }

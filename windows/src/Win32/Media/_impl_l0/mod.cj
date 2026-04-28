@@ -12,17 +12,76 @@ import windows_polyfill.{packedReadUInt32, packedReadValue, packedWriteUInt32, p
 import windows_polyfill as windows_polyfill
 
 
-@When[WINMM == "on"]
+@When[Windows_Win32_Media == "on" && WINMM == "on" && Windows_Win32_Media_timeBeginPeriod == "on"]
 foreign {
     func timeBeginPeriod(uPeriod: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media == "on" && WINMM == "on" && Windows_Win32_Media_timeBeginPeriod == "on"]
+public unsafe func Windows_timeBeginPeriod(uPeriod: UInt32): UInt32 {
+    return timeBeginPeriod(uPeriod)
+}
+
+@When[Windows_Win32_Media == "on" && WINMM == "on" && Windows_Win32_Media_timeEndPeriod == "on"]
+foreign {
     func timeEndPeriod(uPeriod: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media == "on" && WINMM == "on" && Windows_Win32_Media_timeEndPeriod == "on"]
+public unsafe func Windows_timeEndPeriod(uPeriod: UInt32): UInt32 {
+    return timeEndPeriod(uPeriod)
+}
+
+@When[Windows_Win32_Media == "on" && WINMM == "on" && Windows_Win32_Media_timeGetDevCaps == "on"]
+foreign {
     // param-hint: ptc bytes=param[1]
     func timeGetDevCaps(ptc: CPointer<TIMECAPSAbi>, cbtc: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media == "on" && WINMM == "on" && Windows_Win32_Media_timeGetDevCaps == "on"]
+public unsafe func Windows_timeGetDevCaps(ptc: CPointer<TIMECAPSAbi>, cbtc: UInt32): UInt32 {
+    return timeGetDevCaps(ptc, cbtc)
+}
+
+@When[Windows_Win32_Media == "on" && WINMM == "on" && Windows_Win32_Media_timeGetSystemTime == "on"]
+foreign {
     // param-hint: pmmt bytes=param[1]
     func timeGetSystemTime(pmmt: CPointer<MMTIME>, cbmmt: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media == "on" && WINMM == "on" && Windows_Win32_Media_timeGetSystemTime == "on"]
+public unsafe func Windows_timeGetSystemTime(pmmt: CPointer<MMTIME>, cbmmt: UInt32): UInt32 {
+    return timeGetSystemTime(pmmt, cbmmt)
+}
+
+@When[Windows_Win32_Media == "on" && WINMM == "on" && Windows_Win32_Media_timeGetTime == "on"]
+foreign {
     func timeGetTime(): UInt32
+}
+
+@When[Windows_Win32_Media == "on" && WINMM == "on" && Windows_Win32_Media_timeGetTime == "on"]
+public unsafe func Windows_timeGetTime(): UInt32 {
+    return timeGetTime()
+}
+
+@When[Windows_Win32_Media == "on" && WINMM == "on" && Windows_Win32_Media_timeKillEvent == "on"]
+foreign {
     func timeKillEvent(uTimerID: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media == "on" && WINMM == "on" && Windows_Win32_Media_timeKillEvent == "on"]
+public unsafe func Windows_timeKillEvent(uTimerID: UInt32): UInt32 {
+    return timeKillEvent(uTimerID)
+}
+
+@When[Windows_Win32_Media == "on" && WINMM == "on" && Windows_Win32_Media_timeSetEvent == "on"]
+foreign {
     func timeSetEvent(uDelay: UInt32, uResolution: UInt32, fptc: LPTIMECALLBACK, dwUser: UIntNative, fuEvent: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media == "on" && WINMM == "on" && Windows_Win32_Media_timeSetEvent == "on"]
+public unsafe func Windows_timeSetEvent(uDelay: UInt32, uResolution: UInt32, fptc: LPTIMECALLBACK, dwUser: UIntNative, fuEvent: UInt32): UInt32 {
+    return timeSetEvent(uDelay, uResolution, fptc, dwUser, fuEvent)
 }
 
 @When[Windows_Win32_Media == "on"]

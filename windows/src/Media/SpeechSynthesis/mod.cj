@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Media == "on"]
 import windows.Media as Media
 import windows.Media._impl_l0 as Media__impl_l0
 import windows._impl_l0 as _impl_l0
@@ -25,9 +23,9 @@ import windows_future as windows_future
 @C
 public struct ISpeechSynthesisStreamVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media == "on"]
     public var Markers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Media != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Media != "on"]
     public var Markers: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -144,7 +142,7 @@ public class ISpeechSynthesisStream <: InterfaceWrapperBase & ComInterface & Run
         readVtbl<ISpeechSynthesisStreamVtbl>(ISpeechSynthesisStreamVtbl())
     }
 
-    @When[Windows_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media == "on"]
     public unsafe func Markers(): windows_collections.IVectorView<Media.IMediaMarker> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -497,7 +495,7 @@ extend SpeechPunctuationSilence <: windows_core.CopyType & windows_core.RuntimeT
     }
 }
 
-@When[Windows_Media_SpeechSynthesis == "on"]
+@When[Windows_Media_SpeechSynthesis == "on" && Windows_Storage_Streams == "on"]
 public class SpeechSynthesisStream <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -615,7 +613,7 @@ public class SpeechSynthesisStream <: InterfaceWrapperBase & ComInterface & wind
         }
     }
 
-    @When[(Windows_Media == "on") && (Windows_Storage_Streams == "on")]
+    @When[(Windows_Foundation_Collections == "on" && Windows_Media == "on") && (Windows_Storage_Streams == "on")]
     public unsafe func Markers(): windows_collections.IVectorView<Media.IMediaMarker> {
         return defaultInterface().Markers()
     }
@@ -676,12 +674,13 @@ public class SpeechSynthesisStream <: InterfaceWrapperBase & ComInterface & wind
         return asIContentTypeProvider().ContentType()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TimedMetadataTracks(): windows_collections.IVectorView<Media__impl_l0.TimedMetadataTrack> {
         return asITimedMetadataTrackProvider().TimedMetadataTracks()
     }
 }
 
-@When[Windows_Media_SpeechSynthesis == "on"]
+@When[Windows_Media_SpeechSynthesis == "on" && Windows_Storage_Streams == "on"]
 extend SpeechSynthesisStream <: windows_core.HandleWinrtType<SpeechSynthesisStream> {
     public static func intoWinrtHandle(value: SpeechSynthesisStream): CPointer<Unit> {
         value.asRaw()
@@ -1198,7 +1197,10 @@ extend VoiceInformation <: windows_core.HandleWinrtType<VoiceInformation> {
 @C
 public struct IInstalledVoicesStaticVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AllVoices: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AllVoices: UIntNative = UIntNative(0)
     public var DefaultVoice: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -1268,6 +1270,7 @@ public class IInstalledVoicesStatic <: InterfaceWrapperBase & ComInterface & Run
         readVtbl<IInstalledVoicesStaticVtbl>(IInstalledVoicesStaticVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AllVoices(): windows_collections.IVectorView<VoiceInformation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1377,8 +1380,14 @@ extend IInstalledVoicesStatic2 <: windows_core.Interface<IInstalledVoicesStatic2
 @C
 public struct ISpeechSynthesizerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Storage_Streams == "on"]
     public var SynthesizeTextToStreamAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Storage_Streams != "on"]
+    public var SynthesizeTextToStreamAsync: UIntNative = UIntNative(0)
+    @When[Windows_Storage_Streams == "on"]
     public var SynthesizeSsmlToStreamAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Storage_Streams != "on"]
+    public var SynthesizeSsmlToStreamAsync: UIntNative = UIntNative(0)
     public var SetVoice: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Voice: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -1449,6 +1458,7 @@ public class ISpeechSynthesizer <: InterfaceWrapperBase & ComInterface & Runtime
         readVtbl<ISpeechSynthesizerVtbl>(ISpeechSynthesizerVtbl())
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func SynthesizeTextToStreamAsync(text: windows_core.HString): windows_future.IAsyncOperation<SpeechSynthesisStream> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1457,6 +1467,7 @@ public class ISpeechSynthesizer <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_future.IAsyncOperation<SpeechSynthesisStream>.fromAbiTake(result__)
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func SynthesizeSsmlToStreamAsync(Ssml: windows_core.HString): windows_future.IAsyncOperation<SpeechSynthesisStream> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1655,10 +1666,12 @@ public class SpeechSynthesizer <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func SynthesizeTextToStreamAsync(text: windows_core.HString): windows_future.IAsyncOperation<SpeechSynthesisStream> {
         return defaultInterface().SynthesizeTextToStreamAsync(text)
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func SynthesizeSsmlToStreamAsync(Ssml: windows_core.HString): windows_future.IAsyncOperation<SpeechSynthesisStream> {
         return defaultInterface().SynthesizeSsmlToStreamAsync(Ssml)
     }
@@ -1686,6 +1699,7 @@ public class SpeechSynthesizer <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func AllVoices(): windows_collections.IVectorView<VoiceInformation> {
         var result__: Option<windows_collections.IVectorView<VoiceInformation>> = Option<windows_collections.IVectorView<VoiceInformation>>.None
         try (factory__ = windows_core.factory<SpeechSynthesizer, IInstalledVoicesStatic>().unwrap()) {

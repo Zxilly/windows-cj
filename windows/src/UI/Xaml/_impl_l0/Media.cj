@@ -10,10 +10,8 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows.Media._impl_l0 as Media__impl_l0
-@When[Windows_UI == "on"]
 import windows.UI as UI
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -1186,7 +1184,7 @@ extend CompositionTarget <: windows_core.HandleWinrtType<CompositionTarget> {
     }
 }
 
-@When[Windows_UI_Xaml_Media == "on"]
+@When[Windows_UI_Xaml_Media == "on" && Windows_Foundation_Collections == "on"]
 public class DoubleCollection <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1334,7 +1332,7 @@ public class DoubleCollection <: InterfaceWrapperBase & ComInterface & windows_i
     }
 }
 
-@When[Windows_UI_Xaml_Media == "on"]
+@When[Windows_UI_Xaml_Media == "on" && Windows_Foundation_Collections == "on"]
 extend DoubleCollection <: windows_core.HandleWinrtType<DoubleCollection> {
     public static func intoWinrtHandle(value: DoubleCollection): CPointer<Unit> {
         value.asRaw()
@@ -8469,8 +8467,14 @@ extend IPlaneProjectionStatics <: windows_core.Interface<IPlaneProjectionStatics
 @C
 public struct IPolyBezierSegmentVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Points: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Points: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SetPoints: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SetPoints: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -8539,6 +8543,7 @@ public class IPolyBezierSegment <: InterfaceWrapperBase & ComInterface & Runtime
         readVtbl<IPolyBezierSegmentVtbl>(IPolyBezierSegmentVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Points(): PointCollection {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -8547,6 +8552,7 @@ public class IPolyBezierSegment <: InterfaceWrapperBase & ComInterface & Runtime
         return PointCollection.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetPoints(value: PointCollection): Unit {
         let v = vtbl()
         let hr = v.SetPoints(asRaw(), value.asRaw())
@@ -8650,8 +8656,14 @@ extend IPolyBezierSegmentStatics <: windows_core.Interface<IPolyBezierSegmentSta
 @C
 public struct IPolyLineSegmentVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Points: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Points: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SetPoints: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SetPoints: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -8720,6 +8732,7 @@ public class IPolyLineSegment <: InterfaceWrapperBase & ComInterface & RuntimeNa
         readVtbl<IPolyLineSegmentVtbl>(IPolyLineSegmentVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Points(): PointCollection {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -8728,6 +8741,7 @@ public class IPolyLineSegment <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return PointCollection.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetPoints(value: PointCollection): Unit {
         let v = vtbl()
         let hr = v.SetPoints(asRaw(), value.asRaw())
@@ -8831,8 +8845,14 @@ extend IPolyLineSegmentStatics <: windows_core.Interface<IPolyLineSegmentStatics
 @C
 public struct IPolyQuadraticBezierSegmentVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Points: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Points: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SetPoints: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SetPoints: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -8901,6 +8921,7 @@ public class IPolyQuadraticBezierSegment <: InterfaceWrapperBase & ComInterface 
         readVtbl<IPolyQuadraticBezierSegmentVtbl>(IPolyQuadraticBezierSegmentVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Points(): PointCollection {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -8909,6 +8930,7 @@ public class IPolyQuadraticBezierSegment <: InterfaceWrapperBase & ComInterface 
         return PointCollection.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetPoints(value: PointCollection): Unit {
         let v = vtbl()
         let hr = v.SetPoints(asRaw(), value.asRaw())
@@ -14067,7 +14089,7 @@ extend PathSegment <: windows_core.HandleWinrtType<PathSegment> {
     }
 }
 
-@When[Windows_UI_Xaml_Media == "on"]
+@When[Windows_UI_Xaml_Media == "on" && Windows_Foundation_Collections == "on"]
 public class PathSegmentCollection <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -14215,7 +14237,7 @@ public class PathSegmentCollection <: InterfaceWrapperBase & ComInterface & wind
     }
 }
 
-@When[Windows_UI_Xaml_Media == "on"]
+@When[Windows_UI_Xaml_Media == "on" && Windows_Foundation_Collections == "on"]
 extend PathSegmentCollection <: windows_core.HandleWinrtType<PathSegmentCollection> {
     public static func intoWinrtHandle(value: PathSegmentCollection): CPointer<Unit> {
         value.asRaw()
@@ -14720,7 +14742,7 @@ extend PlaneProjection <: windows_core.HandleWinrtType<PlaneProjection> {
     }
 }
 
-@When[Windows_UI_Xaml_Media == "on"]
+@When[Windows_UI_Xaml_Media == "on" && Windows_Foundation_Collections == "on"]
 public class PointCollection <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -14868,7 +14890,7 @@ public class PointCollection <: InterfaceWrapperBase & ComInterface & windows_in
     }
 }
 
-@When[Windows_UI_Xaml_Media == "on"]
+@When[Windows_UI_Xaml_Media == "on" && Windows_Foundation_Collections == "on"]
 extend PointCollection <: windows_core.HandleWinrtType<PointCollection> {
     public static func intoWinrtHandle(value: PointCollection): CPointer<Unit> {
         value.asRaw()
@@ -14980,10 +15002,12 @@ public class PolyBezierSegment <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Points(): PointCollection {
         return defaultInterface().Points()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetPoints(value: PointCollection): Unit {
         defaultInterface().SetPoints(value)
     }
@@ -15113,10 +15137,12 @@ public class PolyLineSegment <: InterfaceWrapperBase & ComInterface & windows_in
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Points(): PointCollection {
         return defaultInterface().Points()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetPoints(value: PointCollection): Unit {
         defaultInterface().SetPoints(value)
     }
@@ -15246,10 +15272,12 @@ public class PolyQuadraticBezierSegment <: InterfaceWrapperBase & ComInterface &
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Points(): PointCollection {
         return defaultInterface().Points()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetPoints(value: PointCollection): Unit {
         defaultInterface().SetPoints(value)
     }
@@ -15727,12 +15755,14 @@ public class RateChangedRoutedEventHandler <: InterfaceWrapperBase & ComInterfac
 @When[Windows_UI_Xaml_Media == "on"]
 extend RateChangedRoutedEventHandler <: windows_core.Interface<RateChangedRoutedEventHandler> {}
 
+@When[Windows_UI_Xaml_Media == "on"]
 private open class RateChangedRoutedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Media == "on"]
 private open class RateChangedRoutedEventHandlerInvoker <: RateChangedRoutedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<RateChangedRoutedEventArgs>): Unit {
         ()
@@ -15744,6 +15774,7 @@ private open class RateChangedRoutedEventHandlerInvoker <: RateChangedRoutedEven
     }
 }
 
+@When[Windows_UI_Xaml_Media == "on"]
 private class RateChangedRoutedEventHandlerBox <: RateChangedRoutedEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<RateChangedRoutedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<RateChangedRoutedEventHandlerVtbl>
@@ -15762,6 +15793,7 @@ private class RateChangedRoutedEventHandlerBox <: RateChangedRoutedEventHandlerI
     }
 }
 
+@When[Windows_UI_Xaml_Media == "on"]
 func buildRateChangedRoutedEventHandlerBoxVtbl(): RateChangedRoutedEventHandlerVtbl {
     var vtbl = RateChangedRoutedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()

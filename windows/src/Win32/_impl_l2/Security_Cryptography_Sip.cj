@@ -14,44 +14,136 @@ import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
 
 
-@When[CRYPT32 == "on"]
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPAddProvider == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func CryptSIPAddProvider(psNewProv: CPointer<Win32__impl_l0.SIP_ADD_NEWPROVIDERAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func CryptSIPRemoveProvider(pgProv: CPointer<GUID>): Int32
-    // pinvoke-hint: SetLastError
-    func CryptSIPRetrieveSubjectGuid(FileName: CPointer<UInt16>, hFileIn: CPointer<Unit>, pgSubject: CPointer<GUID>): Int32
-    // pinvoke-hint: SetLastError
-    func CryptSIPRetrieveSubjectGuidForCatalogFile(FileName: CPointer<UInt16>, hFileIn: CPointer<Unit>, pgSubject: CPointer<GUID>): Int32
 }
 
-@When[CRYPT32 == "on" && (Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on")]
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPAddProvider == "on"]
+public unsafe func Windows_CryptSIPAddProvider(psNewProv: CPointer<Win32__impl_l0.SIP_ADD_NEWPROVIDERAbi>): Int32 {
+    return CryptSIPAddProvider(psNewProv)
+}
+
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPLoad == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func CryptSIPLoad(pgSubject: CPointer<GUID>, dwFlags: UInt32, pSipDispatch: CPointer<SIP_DISPATCH_INFOAbi>): Int32
 }
 
-@When[WINTRUST == "on" && (Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on")]
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPLoad == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on"]
+public unsafe func Windows_CryptSIPLoad(pgSubject: CPointer<GUID>, dwFlags: UInt32, pSipDispatch: CPointer<SIP_DISPATCH_INFOAbi>): Int32 {
+    return CryptSIPLoad(pgSubject, dwFlags, pSipDispatch)
+}
+
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPRemoveProvider == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func CryptSIPRemoveProvider(pgProv: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPRemoveProvider == "on"]
+public unsafe func Windows_CryptSIPRemoveProvider(pgProv: CPointer<GUID>): Int32 {
+    return CryptSIPRemoveProvider(pgProv)
+}
+
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPRetrieveSubjectGuid == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func CryptSIPRetrieveSubjectGuid(FileName: CPointer<UInt16>, hFileIn: CPointer<Unit>, pgSubject: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPRetrieveSubjectGuid == "on"]
+public unsafe func Windows_CryptSIPRetrieveSubjectGuid(FileName: CPointer<UInt16>, hFileIn: CPointer<Unit>, pgSubject: CPointer<GUID>): Int32 {
+    return CryptSIPRetrieveSubjectGuid(FileName, hFileIn, pgSubject)
+}
+
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPRetrieveSubjectGuidForCatalogFile == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func CryptSIPRetrieveSubjectGuidForCatalogFile(FileName: CPointer<UInt16>, hFileIn: CPointer<Unit>, pgSubject: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPRetrieveSubjectGuidForCatalogFile == "on"]
+public unsafe func Windows_CryptSIPRetrieveSubjectGuidForCatalogFile(FileName: CPointer<UInt16>, hFileIn: CPointer<Unit>, pgSubject: CPointer<GUID>): Int32 {
+    return CryptSIPRetrieveSubjectGuidForCatalogFile(FileName, hFileIn, pgSubject)
+}
+
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPCreateIndirectData == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func CryptSIPCreateIndirectData(pSubjectInfo: CPointer<SIP_SUBJECTINFOAbi>, pcbIndirectData: CPointer<UInt32>, pIndirectData: CPointer<Win32__impl_l1.SIP_INDIRECT_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPCreateIndirectData == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on"]
+public unsafe func Windows_CryptSIPCreateIndirectData(pSubjectInfo: CPointer<SIP_SUBJECTINFOAbi>, pcbIndirectData: CPointer<UInt32>, pIndirectData: CPointer<Win32__impl_l1.SIP_INDIRECT_DATAAbi>): Int32 {
+    return CryptSIPCreateIndirectData(pSubjectInfo, pcbIndirectData, pIndirectData)
+}
+
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPGetCaps == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on"]
+foreign {
+    func CryptSIPGetCaps(pSubjInfo: CPointer<SIP_SUBJECTINFOAbi>, pCaps: CPointer<Win32__impl_l0.SIP_CAP_SET_V3Abi>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPGetCaps == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on"]
+public unsafe func Windows_CryptSIPGetCaps(pSubjInfo: CPointer<SIP_SUBJECTINFOAbi>, pCaps: CPointer<Win32__impl_l0.SIP_CAP_SET_V3Abi>): Int32 {
+    return CryptSIPGetCaps(pSubjInfo, pCaps)
+}
+
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPGetSealedDigest == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on"]
+foreign {
+    // param-hint: pSig len=param[2] optional
+    // param-hint: pbDigest len=param[4] optional
+    func CryptSIPGetSealedDigest(pSubjectInfo: CPointer<SIP_SUBJECTINFOAbi>, pSig: CPointer<UInt8>, dwSig: UInt32, pbDigest: CPointer<UInt8>, pcbDigest: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPGetSealedDigest == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on"]
+public unsafe func Windows_CryptSIPGetSealedDigest(pSubjectInfo: CPointer<SIP_SUBJECTINFOAbi>, pSig: CPointer<UInt8>, dwSig: UInt32, pbDigest: CPointer<UInt8>, pcbDigest: CPointer<UInt32>): Int32 {
+    return CryptSIPGetSealedDigest(pSubjectInfo, pSig, dwSig, pbDigest, pcbDigest)
+}
+
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPGetSignedDataMsg == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func CryptSIPGetSignedDataMsg(pSubjectInfo: CPointer<SIP_SUBJECTINFOAbi>, pdwEncodingType: CPointer<Win32__impl_l0.CERT_QUERY_ENCODING_TYPEAbi>, dwIndex: UInt32, pcbSignedDataMsg: CPointer<UInt32>, pbSignedDataMsg: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPGetSignedDataMsg == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on"]
+public unsafe func Windows_CryptSIPGetSignedDataMsg(pSubjectInfo: CPointer<SIP_SUBJECTINFOAbi>, pdwEncodingType: CPointer<Win32__impl_l0.CERT_QUERY_ENCODING_TYPEAbi>, dwIndex: UInt32, pcbSignedDataMsg: CPointer<UInt32>, pbSignedDataMsg: CPointer<UInt8>): Int32 {
+    return CryptSIPGetSignedDataMsg(pSubjectInfo, pdwEncodingType, dwIndex, pcbSignedDataMsg, pbSignedDataMsg)
+}
+
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPPutSignedDataMsg == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CryptSIPPutSignedDataMsg(pSubjectInfo: CPointer<SIP_SUBJECTINFOAbi>, dwEncodingType: Win32__impl_l0.CERT_QUERY_ENCODING_TYPEAbi, pdwIndex: CPointer<UInt32>, cbSignedDataMsg: UInt32, pbSignedDataMsg: CPointer<UInt8>): Int32
 }
 
-@When[WINTRUST == "on" && (Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on")]
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPPutSignedDataMsg == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on"]
+public unsafe func Windows_CryptSIPPutSignedDataMsg(pSubjectInfo: CPointer<SIP_SUBJECTINFOAbi>, dwEncodingType: Win32__impl_l0.CERT_QUERY_ENCODING_TYPEAbi, pdwIndex: CPointer<UInt32>, cbSignedDataMsg: UInt32, pbSignedDataMsg: CPointer<UInt8>): Int32 {
+    return CryptSIPPutSignedDataMsg(pSubjectInfo, dwEncodingType, pdwIndex, cbSignedDataMsg, pbSignedDataMsg)
+}
+
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPRemoveSignedDataMsg == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on"]
 foreign {
     // pinvoke-hint: SetLastError
-    func CryptSIPCreateIndirectData(pSubjectInfo: CPointer<SIP_SUBJECTINFOAbi>, pcbIndirectData: CPointer<UInt32>, pIndirectData: CPointer<Win32__impl_l1.SIP_INDIRECT_DATAAbi>): Int32
-    func CryptSIPGetCaps(pSubjInfo: CPointer<SIP_SUBJECTINFOAbi>, pCaps: CPointer<Win32__impl_l0.SIP_CAP_SET_V3Abi>): Int32
-    // param-hint: pSig len=param[2] optional
-    // param-hint: pbDigest len=param[4] optional
-    func CryptSIPGetSealedDigest(pSubjectInfo: CPointer<SIP_SUBJECTINFOAbi>, pSig: CPointer<UInt8>, dwSig: UInt32, pbDigest: CPointer<UInt8>, pcbDigest: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
     func CryptSIPRemoveSignedDataMsg(pSubjectInfo: CPointer<SIP_SUBJECTINFOAbi>, dwIndex: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPRemoveSignedDataMsg == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on"]
+public unsafe func Windows_CryptSIPRemoveSignedDataMsg(pSubjectInfo: CPointer<SIP_SUBJECTINFOAbi>, dwIndex: UInt32): Int32 {
+    return CryptSIPRemoveSignedDataMsg(pSubjectInfo, dwIndex)
+}
+
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPVerifyIndirectData == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CryptSIPVerifyIndirectData(pSubjectInfo: CPointer<SIP_SUBJECTINFOAbi>, pIndirectData: CPointer<Win32__impl_l1.SIP_INDIRECT_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPVerifyIndirectData == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on"]
+public unsafe func Windows_CryptSIPVerifyIndirectData(pSubjectInfo: CPointer<SIP_SUBJECTINFOAbi>, pIndirectData: CPointer<Win32__impl_l1.SIP_INDIRECT_DATAAbi>): Int32 {
+    return CryptSIPVerifyIndirectData(pSubjectInfo, pIndirectData)
 }
 
 @When[Windows_Win32_Security_Cryptography_Sip == "on"]

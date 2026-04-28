@@ -425,6 +425,7 @@ public class DeviceInformation <: InterfaceWrapperBase & ComInterface & windows_
         return defaultInterface().get_EnclosureLocation()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         return defaultInterface().Properties()
     }
@@ -433,10 +434,12 @@ public class DeviceInformation <: InterfaceWrapperBase & ComInterface & windows_
         defaultInterface().Update(updateInfo)
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func GetThumbnailAsync(): windows_future.IAsyncOperation<DeviceThumbnail> {
         return defaultInterface().GetThumbnailAsync()
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func GetGlyphThumbnailAsync(): windows_future.IAsyncOperation<DeviceThumbnail> {
         return defaultInterface().GetGlyphThumbnailAsync()
     }
@@ -452,6 +455,7 @@ public class DeviceInformation <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromIdAsyncWithKindAndAdditionalProperties(deviceId: windows_core.HString, additionalProperties: windows_collections.IIterable<windows_core.HString>, kind: _impl_l0.DeviceInformationKind): windows_future.IAsyncOperation<DeviceInformation> {
         var result__: Option<windows_future.IAsyncOperation<DeviceInformation>> = Option<windows_future.IAsyncOperation<DeviceInformation>>.None
         try (factory__ = windows_core.factory<DeviceInformation, IDeviceInformationStatics2>().unwrap()) {
@@ -463,6 +467,7 @@ public class DeviceInformation <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindAllAsyncWithKindAqsFilterAndAdditionalProperties(aqsFilter: windows_core.HString, additionalProperties: windows_collections.IIterable<windows_core.HString>, kind: _impl_l0.DeviceInformationKind): windows_future.IAsyncOperation<DeviceInformationCollection> {
         var result__: Option<windows_future.IAsyncOperation<DeviceInformationCollection>> = Option<windows_future.IAsyncOperation<DeviceInformationCollection>>.None
         try (factory__ = windows_core.factory<DeviceInformation, IDeviceInformationStatics2>().unwrap()) {
@@ -474,6 +479,7 @@ public class DeviceInformation <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateWatcherWithKindAqsFilterAndAdditionalProperties(aqsFilter: windows_core.HString, additionalProperties: windows_collections.IIterable<windows_core.HString>, kind: _impl_l0.DeviceInformationKind): DeviceWatcher {
         var result__: Option<DeviceWatcher> = Option<DeviceWatcher>.None
         try (factory__ = windows_core.factory<DeviceInformation, IDeviceInformationStatics2>().unwrap()) {
@@ -485,6 +491,7 @@ public class DeviceInformation <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromIdAsyncWithAdditionalPropertiesKindAndSettings(deviceId: windows_core.HString, additionalProperties: windows_collections.IIterable<windows_core.HString>, kind: _impl_l0.DeviceInformationKind, settings: _impl_l0.IDeviceEnumerationSettings): windows_future.IAsyncOperation<DeviceInformation> {
         var result__: Option<windows_future.IAsyncOperation<DeviceInformation>> = Option<windows_future.IAsyncOperation<DeviceInformation>>.None
         try (factory__ = windows_core.factory<DeviceInformation, IDeviceInformationStatics3>().unwrap()) {
@@ -496,6 +503,7 @@ public class DeviceInformation <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindAllAsyncWithAqsFilterAdditionalPropertiesKindAndSettings(aqsFilter: windows_core.HString, additionalProperties: windows_collections.IIterable<windows_core.HString>, kind: _impl_l0.DeviceInformationKind, settings: _impl_l0.IDeviceEnumerationSettings): windows_future.IAsyncOperation<DeviceInformationCollection> {
         var result__: Option<windows_future.IAsyncOperation<DeviceInformationCollection>> = Option<windows_future.IAsyncOperation<DeviceInformationCollection>>.None
         try (factory__ = windows_core.factory<DeviceInformation, IDeviceInformationStatics3>().unwrap()) {
@@ -507,6 +515,7 @@ public class DeviceInformation <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateWatcherWithAqsFilterAdditionalPropertiesKindAndSettings(aqsFilter: windows_core.HString, additionalProperties: windows_collections.IIterable<windows_core.HString>, kind: _impl_l0.DeviceInformationKind, settings: _impl_l0.IDeviceEnumerationSettings): DeviceWatcher {
         var result__: Option<DeviceWatcher> = Option<DeviceWatcher>.None
         try (factory__ = windows_core.factory<DeviceInformation, IDeviceInformationStatics3>().unwrap()) {
@@ -529,6 +538,7 @@ public class DeviceInformation <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromIdAsyncAdditionalProperties(deviceId: windows_core.HString, additionalProperties: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<DeviceInformation> {
         var result__: Option<windows_future.IAsyncOperation<DeviceInformation>> = Option<windows_future.IAsyncOperation<DeviceInformation>>.None
         try (factory__ = windows_core.factory<DeviceInformation, IDeviceInformationStatics>().unwrap()) {
@@ -540,6 +550,7 @@ public class DeviceInformation <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindAllAsync(): windows_future.IAsyncOperation<DeviceInformationCollection> {
         var result__: Option<windows_future.IAsyncOperation<DeviceInformationCollection>> = Option<windows_future.IAsyncOperation<DeviceInformationCollection>>.None
         try (factory__ = windows_core.factory<DeviceInformation, IDeviceInformationStatics>().unwrap()) {
@@ -551,6 +562,7 @@ public class DeviceInformation <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindAllAsyncDeviceClass(deviceClass: _impl_l0.DeviceClass): windows_future.IAsyncOperation<DeviceInformationCollection> {
         var result__: Option<windows_future.IAsyncOperation<DeviceInformationCollection>> = Option<windows_future.IAsyncOperation<DeviceInformationCollection>>.None
         try (factory__ = windows_core.factory<DeviceInformation, IDeviceInformationStatics>().unwrap()) {
@@ -562,6 +574,7 @@ public class DeviceInformation <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindAllAsyncAqsFilter(aqsFilter: windows_core.HString): windows_future.IAsyncOperation<DeviceInformationCollection> {
         var result__: Option<windows_future.IAsyncOperation<DeviceInformationCollection>> = Option<windows_future.IAsyncOperation<DeviceInformationCollection>>.None
         try (factory__ = windows_core.factory<DeviceInformation, IDeviceInformationStatics>().unwrap()) {
@@ -573,6 +586,7 @@ public class DeviceInformation <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindAllAsyncAqsFilterAndAdditionalProperties(aqsFilter: windows_core.HString, additionalProperties: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<DeviceInformationCollection> {
         var result__: Option<windows_future.IAsyncOperation<DeviceInformationCollection>> = Option<windows_future.IAsyncOperation<DeviceInformationCollection>>.None
         try (factory__ = windows_core.factory<DeviceInformation, IDeviceInformationStatics>().unwrap()) {
@@ -617,6 +631,7 @@ public class DeviceInformation <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateWatcherAqsFilterAndAdditionalProperties(aqsFilter: windows_core.HString, additionalProperties: windows_collections.IIterable<windows_core.HString>): DeviceWatcher {
         var result__: Option<DeviceWatcher> = Option<DeviceWatcher>.None
         try (factory__ = windows_core.factory<DeviceInformation, IDeviceInformationStatics>().unwrap()) {
@@ -647,7 +662,7 @@ extend DeviceInformation <: windows_core.HandleWinrtType<DeviceInformation> {
     }
 }
 
-@When[Windows_Devices_Enumeration == "on"]
+@When[Windows_Devices_Enumeration == "on" && Windows_Foundation_Collections == "on"]
 public class DeviceInformationCollection <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -752,7 +767,7 @@ public class DeviceInformationCollection <: InterfaceWrapperBase & ComInterface 
     }
 }
 
-@When[Windows_Devices_Enumeration == "on"]
+@When[Windows_Devices_Enumeration == "on" && Windows_Foundation_Collections == "on"]
 extend DeviceInformationCollection <: windows_core.HandleWinrtType<DeviceInformationCollection> {
     public static func intoWinrtHandle(value: DeviceInformationCollection): CPointer<Unit> {
         value.asRaw()
@@ -1077,6 +1092,7 @@ public class DeviceInformationUpdate <: InterfaceWrapperBase & ComInterface & wi
         return defaultInterface().Id()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         return defaultInterface().Properties()
     }
@@ -1385,6 +1401,7 @@ public class DevicePairingSetMembersRequestedEventArgs <: InterfaceWrapperBase &
         return defaultInterface().ParentDeviceInformation()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PairingSetMembers(): windows_collections.IVectorView<DeviceInformation> {
         return defaultInterface().PairingSetMembers()
     }
@@ -1496,6 +1513,7 @@ public class DevicePicker <: InterfaceWrapperBase & ComInterface & windows_inter
         return defaultInterface().Appearance()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RequestedProperties(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().RequestedProperties()
     }
@@ -1638,10 +1656,12 @@ public class DevicePickerFilter <: InterfaceWrapperBase & ComInterface & windows
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedDeviceClasses(): windows_collections.IVector<_impl_l0.DeviceClass> {
         return defaultInterface().SupportedDeviceClasses()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedDeviceSelectors(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().SupportedDeviceSelectors()
     }
@@ -1757,7 +1777,7 @@ extend DeviceSelectedEventArgs <: windows_core.HandleWinrtType<DeviceSelectedEve
     }
 }
 
-@When[Windows_Devices_Enumeration == "on"]
+@When[Windows_Devices_Enumeration == "on" && Windows_Storage_Streams == "on"]
 public class DeviceThumbnail <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1918,7 +1938,7 @@ public class DeviceThumbnail <: InterfaceWrapperBase & ComInterface & windows_in
     }
 }
 
-@When[Windows_Devices_Enumeration == "on"]
+@When[Windows_Devices_Enumeration == "on" && Windows_Storage_Streams == "on"]
 extend DeviceThumbnail <: windows_core.HandleWinrtType<DeviceThumbnail> {
     public static func intoWinrtHandle(value: DeviceThumbnail): CPointer<Unit> {
         value.asRaw()
@@ -2337,6 +2357,7 @@ public class DeviceWatcherTriggerDetails <: InterfaceWrapperBase & ComInterface 
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DeviceWatcherEvents(): windows_collections.IVectorView<DeviceWatcherEvent> {
         return defaultInterface().DeviceWatcherEvents()
     }
@@ -2855,10 +2876,19 @@ public struct IDeviceInformationVtbl {
     public var IsEnabled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsDefault: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var get_EnclosureLocation: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     public var Update: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Storage_Streams == "on"]
     public var GetThumbnailAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Storage_Streams != "on"]
+    public var GetThumbnailAsync: UIntNative = UIntNative(0)
+    @When[Windows_Storage_Streams == "on"]
     public var GetGlyphThumbnailAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Storage_Streams != "on"]
+    public var GetGlyphThumbnailAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2967,6 +2997,7 @@ public class IDeviceInformation <: InterfaceWrapperBase & ComInterface & Runtime
         return EnclosureLocation.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2981,6 +3012,7 @@ public class IDeviceInformation <: InterfaceWrapperBase & ComInterface & Runtime
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func GetThumbnailAsync(): windows_future.IAsyncOperation<DeviceThumbnail> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2989,6 +3021,7 @@ public class IDeviceInformation <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_future.IAsyncOperation<DeviceThumbnail>.fromAbiTake(result__)
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func GetGlyphThumbnailAsync(): windows_future.IAsyncOperation<DeviceThumbnail> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3542,15 +3575,33 @@ extend IDeviceInformationPairing2 <: windows_core.Interface<IDeviceInformationPa
 public struct IDeviceInformationStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var CreateFromIdAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromIdAsyncAdditionalProperties: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateFromIdAsyncAdditionalProperties: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllAsyncDeviceClass: CFunc<(CPointer<Unit>, _impl_l0.DeviceClassAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllAsyncDeviceClass: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllAsyncAqsFilter: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllAsyncAqsFilter: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllAsyncAqsFilterAndAdditionalProperties: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllAsyncAqsFilterAndAdditionalProperties: UIntNative = UIntNative(0)
     public var CreateWatcher: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CreateWatcherDeviceClass: CFunc<(CPointer<Unit>, _impl_l0.DeviceClassAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var CreateWatcherAqsFilter: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateWatcherAqsFilterAndAdditionalProperties: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateWatcherAqsFilterAndAdditionalProperties: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3627,6 +3678,7 @@ public class IDeviceInformationStatics <: InterfaceWrapperBase & ComInterface & 
         return windows_future.IAsyncOperation<DeviceInformation>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromIdAsyncAdditionalProperties(deviceId: windows_core.HString, additionalProperties: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<DeviceInformation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3635,6 +3687,7 @@ public class IDeviceInformationStatics <: InterfaceWrapperBase & ComInterface & 
         return windows_future.IAsyncOperation<DeviceInformation>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAsync(): windows_future.IAsyncOperation<DeviceInformationCollection> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3643,6 +3696,7 @@ public class IDeviceInformationStatics <: InterfaceWrapperBase & ComInterface & 
         return windows_future.IAsyncOperation<DeviceInformationCollection>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAsyncDeviceClass(deviceClass: _impl_l0.DeviceClass): windows_future.IAsyncOperation<DeviceInformationCollection> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3651,6 +3705,7 @@ public class IDeviceInformationStatics <: InterfaceWrapperBase & ComInterface & 
         return windows_future.IAsyncOperation<DeviceInformationCollection>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAsyncAqsFilter(aqsFilter: windows_core.HString): windows_future.IAsyncOperation<DeviceInformationCollection> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3659,6 +3714,7 @@ public class IDeviceInformationStatics <: InterfaceWrapperBase & ComInterface & 
         return windows_future.IAsyncOperation<DeviceInformationCollection>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAsyncAqsFilterAndAdditionalProperties(aqsFilter: windows_core.HString, additionalProperties: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<DeviceInformationCollection> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3691,6 +3747,7 @@ public class IDeviceInformationStatics <: InterfaceWrapperBase & ComInterface & 
         return DeviceWatcher.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateWatcherAqsFilterAndAdditionalProperties(aqsFilter: windows_core.HString, additionalProperties: windows_collections.IIterable<windows_core.HString>): DeviceWatcher {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3708,9 +3765,18 @@ extend IDeviceInformationStatics <: windows_core.Interface<IDeviceInformationSta
 public struct IDeviceInformationStatics2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var GetAqsFilterFromDeviceClass: CFunc<(CPointer<Unit>, _impl_l0.DeviceClassAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromIdAsyncWithKindAndAdditionalProperties: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, _impl_l0.DeviceInformationKindAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateFromIdAsyncWithKindAndAdditionalProperties: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllAsyncWithKindAqsFilterAndAdditionalProperties: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, _impl_l0.DeviceInformationKindAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllAsyncWithKindAqsFilterAndAdditionalProperties: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateWatcherWithKindAqsFilterAndAdditionalProperties: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, _impl_l0.DeviceInformationKindAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateWatcherWithKindAqsFilterAndAdditionalProperties: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3787,6 +3853,7 @@ public class IDeviceInformationStatics2 <: InterfaceWrapperBase & ComInterface &
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromIdAsyncWithKindAndAdditionalProperties(deviceId: windows_core.HString, additionalProperties: windows_collections.IIterable<windows_core.HString>, kind: _impl_l0.DeviceInformationKind): windows_future.IAsyncOperation<DeviceInformation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3795,6 +3862,7 @@ public class IDeviceInformationStatics2 <: InterfaceWrapperBase & ComInterface &
         return windows_future.IAsyncOperation<DeviceInformation>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAsyncWithKindAqsFilterAndAdditionalProperties(aqsFilter: windows_core.HString, additionalProperties: windows_collections.IIterable<windows_core.HString>, kind: _impl_l0.DeviceInformationKind): windows_future.IAsyncOperation<DeviceInformationCollection> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3803,6 +3871,7 @@ public class IDeviceInformationStatics2 <: InterfaceWrapperBase & ComInterface &
         return windows_future.IAsyncOperation<DeviceInformationCollection>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateWatcherWithKindAqsFilterAndAdditionalProperties(aqsFilter: windows_core.HString, additionalProperties: windows_collections.IIterable<windows_core.HString>, kind: _impl_l0.DeviceInformationKind): DeviceWatcher {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3819,9 +3888,18 @@ extend IDeviceInformationStatics2 <: windows_core.Interface<IDeviceInformationSt
 @C
 public struct IDeviceInformationStatics3Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromIdAsyncWithAdditionalPropertiesKindAndSettings: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, _impl_l0.DeviceInformationKindAbi, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateFromIdAsyncWithAdditionalPropertiesKindAndSettings: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllAsyncWithAqsFilterAdditionalPropertiesKindAndSettings: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, _impl_l0.DeviceInformationKindAbi, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllAsyncWithAqsFilterAdditionalPropertiesKindAndSettings: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateWatcherWithAqsFilterAdditionalPropertiesKindAndSettings: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, _impl_l0.DeviceInformationKindAbi, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateWatcherWithAqsFilterAdditionalPropertiesKindAndSettings: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3890,6 +3968,7 @@ public class IDeviceInformationStatics3 <: InterfaceWrapperBase & ComInterface &
         readVtbl<IDeviceInformationStatics3Vtbl>(IDeviceInformationStatics3Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromIdAsyncWithAdditionalPropertiesKindAndSettings(deviceId: windows_core.HString, additionalProperties: windows_collections.IIterable<windows_core.HString>, kind: _impl_l0.DeviceInformationKind, settings: _impl_l0.IDeviceEnumerationSettings): windows_future.IAsyncOperation<DeviceInformation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3898,6 +3977,7 @@ public class IDeviceInformationStatics3 <: InterfaceWrapperBase & ComInterface &
         return windows_future.IAsyncOperation<DeviceInformation>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAsyncWithAqsFilterAdditionalPropertiesKindAndSettings(aqsFilter: windows_core.HString, additionalProperties: windows_collections.IIterable<windows_core.HString>, kind: _impl_l0.DeviceInformationKind, settings: _impl_l0.IDeviceEnumerationSettings): windows_future.IAsyncOperation<DeviceInformationCollection> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3906,6 +3986,7 @@ public class IDeviceInformationStatics3 <: InterfaceWrapperBase & ComInterface &
         return windows_future.IAsyncOperation<DeviceInformationCollection>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateWatcherWithAqsFilterAdditionalPropertiesKindAndSettings(aqsFilter: windows_core.HString, additionalProperties: windows_collections.IIterable<windows_core.HString>, kind: _impl_l0.DeviceInformationKind, settings: _impl_l0.IDeviceEnumerationSettings): DeviceWatcher {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4137,7 +4218,10 @@ public struct IDevicePairingSetMembersRequestedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Status: CFunc<(CPointer<Unit>, CPointer<_impl_l0.DevicePairingAddPairingSetMemberStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ParentDeviceInformation: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var PairingSetMembers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var PairingSetMembers: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4222,6 +4306,7 @@ public class IDevicePairingSetMembersRequestedEventArgs <: InterfaceWrapperBase 
         return DeviceInformation.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PairingSetMembers(): windows_collections.IVectorView<DeviceInformation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4240,7 +4325,10 @@ public struct IDevicePickerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Filter: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Appearance: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var RequestedProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RequestedProperties: UIntNative = UIntNative(0)
     public var DeviceSelected: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveDeviceSelected: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var DisconnectButtonClicked: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -4343,6 +4431,7 @@ public class IDevicePicker <: InterfaceWrapperBase & ComInterface & RuntimeName 
         return _impl_l0.DevicePickerAppearance.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RequestedProperties(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4707,9 +4796,9 @@ extend IDeviceWatcher <: windows_core.Interface<IDeviceWatcher> {}
 @C
 public struct IDeviceWatcher2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_ApplicationModel_Background == "on"]
+    @When[Windows_ApplicationModel_Background == "on" && Windows_Foundation_Collections == "on"]
     public var GetBackgroundTrigger: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel_Background != "on"]
+    @When[Windows_ApplicationModel_Background != "on" || Windows_Foundation_Collections != "on"]
     public var GetBackgroundTrigger: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -4779,7 +4868,7 @@ public class IDeviceWatcher2 <: InterfaceWrapperBase & ComInterface & RuntimeNam
         readVtbl<IDeviceWatcher2Vtbl>(IDeviceWatcher2Vtbl())
     }
 
-    @When[Windows_ApplicationModel_Background == "on"]
+    @When[Windows_ApplicationModel_Background == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func GetBackgroundTrigger(requestedEventKinds: windows_collections.IIterable<_impl_l0.DeviceWatcherEventKind>): DeviceWatcherTrigger {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4899,7 +4988,10 @@ extend IDeviceWatcherEvent <: windows_core.Interface<IDeviceWatcherEvent> {}
 @C
 public struct IDeviceWatcherTriggerDetailsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var DeviceWatcherEvents: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var DeviceWatcherEvents: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4968,6 +5060,7 @@ public class IDeviceWatcherTriggerDetails <: InterfaceWrapperBase & ComInterface
         readVtbl<IDeviceWatcherTriggerDetailsVtbl>(IDeviceWatcherTriggerDetailsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DeviceWatcherEvents(): windows_collections.IVectorView<DeviceWatcherEvent> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

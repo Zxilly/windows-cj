@@ -2583,7 +2583,7 @@ public class IContactManagerStatics5 <: InterfaceWrapperBase & ComInterface {
 public struct IContactMatchReasonVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Field: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Data_Text == "on"]
+    @When[Windows_Data_Text == "on" && Windows_Foundation_Collections == "on"]
     public var Segments: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Text: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -2635,7 +2635,7 @@ public class IContactMatchReason <: InterfaceWrapperBase & ComInterface {
         return __vt.Field(__liveRaw, result__)
     }
 
-    @When[Windows_Data_Text == "on"]
+    @When[Windows_Data_Text == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func Segments(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3590,6 +3590,7 @@ public class IKnownContactFieldStatics <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IPinnedContactIdsQueryResultVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ContactIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -3634,6 +3635,7 @@ public class IPinnedContactIdsQueryResult <: InterfaceWrapperBase & ComInterface
         readVtbl<IPinnedContactIdsQueryResultVtbl>(IPinnedContactIdsQueryResultVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ContactIds(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

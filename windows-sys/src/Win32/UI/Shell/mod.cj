@@ -53,4 +53,1381 @@ public import windows_sys.Win32._impl_l0.{SHELLEXECUTEINFOA, SHELLEXECUTEINFOW}
 public import windows_sys.Win32._impl_l2.SMDATA
 @When[Windows_Win32_UI_Shell == "on" && Windows_Win32_Graphics_Gdi == "on"]
 public import windows_sys.Win32._impl_l2.TOOLBARITEM
-
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_AssocCreate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AssocCreate
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_AssocCreateForClasses == "on" && (((arch == "x86_64" && Windows_Win32_System_Registry == "on") || (arch == "aarch64" && Windows_Win32_System_Registry == "on")) && Windows_Win32_System_Registry == "on")]
+public import windows_sys.Win32._impl_l2.Windows_AssocCreateForClasses
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_AssocGetDetailsOfPropKey == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AssocGetDetailsOfPropKey
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_AssocGetPerceivedType == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AssocGetPerceivedType
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_AssocIsDangerous == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AssocIsDangerous
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_AssocQueryKeyA == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AssocQueryKeyA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_AssocQueryKeyW == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AssocQueryKeyW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_AssocQueryStringA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AssocQueryStringA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_AssocQueryStringByKeyA == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AssocQueryStringByKeyA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_AssocQueryStringByKeyW == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AssocQueryStringByKeyW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_AssocQueryStringW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AssocQueryStringW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_CDefFolderMenu_Create2 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Registry == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CDefFolderMenu_Create2
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_CIDLData_CreateFromIDArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CIDLData_CreateFromIDArray
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_ChrCmpIA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ChrCmpIA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_ChrCmpIW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ChrCmpIW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_ColorAdjustLuma == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ColorAdjustLuma
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_ColorHLSToRGB == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ColorHLSToRGB
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_ColorRGBToHLS == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ColorRGBToHLS
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_CommandLineToArgvW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CommandLineToArgvW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_ConnectToConnectionPoint == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ConnectToConnectionPoint
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_CreateProfile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateProfile
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DAD_AutoScroll == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DAD_AutoScroll
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DAD_DragEnterEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DAD_DragEnterEx
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DAD_DragEnterEx2 == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DAD_DragEnterEx2
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DAD_DragLeave == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DAD_DragLeave
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DAD_DragMove == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DAD_DragMove
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DAD_SetDragImage == "on" && Windows_Win32_UI_Controls == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DAD_SetDragImage
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DAD_ShowDragImage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DAD_ShowDragImage
+@When[Windows_Win32_UI_Shell == "on" && COMCTL32 == "on" && Windows_Win32_UI_Shell_DefSubclassProc == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DefSubclassProc
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_DeleteProfileA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteProfileA
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_DeleteProfileW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteProfileW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DoEnvironmentSubstA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DoEnvironmentSubstA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DoEnvironmentSubstW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DoEnvironmentSubstW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DragAcceptFiles == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DragAcceptFiles
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DragFinish == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DragFinish
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DragQueryFileA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DragQueryFileA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DragQueryFileW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DragQueryFileW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DragQueryPoint == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DragQueryPoint
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DriveType == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DriveType
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_DuplicateIcon == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DuplicateIcon
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ExtractAssociatedIconA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ExtractAssociatedIconA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ExtractAssociatedIconExA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ExtractAssociatedIconExA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ExtractAssociatedIconExW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ExtractAssociatedIconExW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ExtractAssociatedIconW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ExtractAssociatedIconW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ExtractIconA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ExtractIconA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ExtractIconExA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ExtractIconExA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ExtractIconExW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ExtractIconExW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ExtractIconW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ExtractIconW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_FileIconInit == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FileIconInit
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_FindExecutableA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindExecutableA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_FindExecutableW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindExecutableW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_GetAcceptLanguagesA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetAcceptLanguagesA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_GetAcceptLanguagesW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetAcceptLanguagesW
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_GetAllUsersProfileDirectoryA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetAllUsersProfileDirectoryA
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_GetAllUsersProfileDirectoryW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetAllUsersProfileDirectoryW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_GetCurrentProcessExplicitAppUserModelID == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetCurrentProcessExplicitAppUserModelID
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_GetDefaultUserProfileDirectoryA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetDefaultUserProfileDirectoryA
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_GetDefaultUserProfileDirectoryW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetDefaultUserProfileDirectoryW
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_SHCORE_SCALING_L1_1_2 == "on" && Windows_Win32_UI_Shell_GetDpiForShellUIComponent == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetDpiForShellUIComponent
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_GetFileNameFromBrowse == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetFileNameFromBrowse
+@When[Windows_Win32_UI_Shell == "on" && USER32 == "on" && Windows_Win32_UI_Shell_GetMenuContextHelpId == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetMenuContextHelpId
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_GetMenuPosFromID == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetMenuPosFromID
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_GetProfileType == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetProfileType
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_GetProfilesDirectoryA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetProfilesDirectoryA
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_GetProfilesDirectoryW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetProfilesDirectoryW
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_SHCORE_SCALING_L1_1_0 == "on" && Windows_Win32_UI_Shell_GetScaleFactorForDevice == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetScaleFactorForDevice
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_SHCORE_SCALING_L1_1_1 == "on" && Windows_Win32_UI_Shell_GetScaleFactorForMonitor == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetScaleFactorForMonitor
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_GetUserProfileDirectoryA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetUserProfileDirectoryA
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_GetUserProfileDirectoryW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetUserProfileDirectoryW
+@When[Windows_Win32_UI_Shell == "on" && USER32 == "on" && Windows_Win32_UI_Shell_GetWindowContextHelpId == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetWindowContextHelpId
+@When[Windows_Win32_UI_Shell == "on" && COMCTL32 == "on" && Windows_Win32_UI_Shell_GetWindowSubclass == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetWindowSubclass
+@When[Windows_Win32_UI_Shell == "on" && OLE32 == "on" && Windows_Win32_UI_Shell_HMONITOR_UserFree == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HMONITOR_UserFree
+@When[Windows_Win32_UI_Shell == "on" && OLE32 == "on" && Windows_Win32_UI_Shell_HMONITOR_UserFree64 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HMONITOR_UserFree64
+@When[Windows_Win32_UI_Shell == "on" && OLE32 == "on" && Windows_Win32_UI_Shell_HMONITOR_UserMarshal == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HMONITOR_UserMarshal
+@When[Windows_Win32_UI_Shell == "on" && OLE32 == "on" && Windows_Win32_UI_Shell_HMONITOR_UserMarshal64 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HMONITOR_UserMarshal64
+@When[Windows_Win32_UI_Shell == "on" && OLE32 == "on" && Windows_Win32_UI_Shell_HMONITOR_UserSize == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HMONITOR_UserSize
+@When[Windows_Win32_UI_Shell == "on" && OLE32 == "on" && Windows_Win32_UI_Shell_HMONITOR_UserSize64 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HMONITOR_UserSize64
+@When[Windows_Win32_UI_Shell == "on" && OLE32 == "on" && Windows_Win32_UI_Shell_HMONITOR_UserUnmarshal == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HMONITOR_UserUnmarshal
+@When[Windows_Win32_UI_Shell == "on" && OLE32 == "on" && Windows_Win32_UI_Shell_HMONITOR_UserUnmarshal64 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HMONITOR_UserUnmarshal64
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_HashData == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HashData
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkClone == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HlinkClone
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkCreateBrowseContext == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HlinkCreateBrowseContext
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkCreateExtensionServices == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HlinkCreateExtensionServices
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkCreateFromData == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HlinkCreateFromData
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkCreateFromMoniker == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HlinkCreateFromMoniker
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkCreateFromString == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HlinkCreateFromString
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkCreateShortcut == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HlinkCreateShortcut
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkCreateShortcutFromMoniker == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HlinkCreateShortcutFromMoniker
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkCreateShortcutFromString == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HlinkCreateShortcutFromString
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkGetSpecialReference == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HlinkGetSpecialReference
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkGetValueFromParams == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HlinkGetValueFromParams
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkIsShortcut == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HlinkIsShortcut
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkNavigate == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HlinkNavigate
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkNavigateToStringReference == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HlinkNavigateToStringReference
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkOnNavigate == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HlinkOnNavigate
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkOnRenameDocument == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HlinkOnRenameDocument
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkParseDisplayName == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HlinkParseDisplayName
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkPreprocessMoniker == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HlinkPreprocessMoniker
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkQueryCreateFromData == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HlinkQueryCreateFromData
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkResolveMonikerForData == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HlinkResolveMonikerForData
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkResolveShortcut == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HlinkResolveShortcut
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkResolveShortcutToMoniker == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HlinkResolveShortcutToMoniker
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkResolveShortcutToString == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HlinkResolveShortcutToString
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkResolveStringForData == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HlinkResolveStringForData
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkSetSpecialReference == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HlinkSetSpecialReference
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkTranslateURL == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HlinkTranslateURL
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_HlinkUpdateStackItem == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HlinkUpdateStackItem
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILAppendID == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ILAppendID
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILClone == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ILClone
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILCloneFirst == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ILCloneFirst
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILCombine == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ILCombine
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILCreateFromPathA == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ILCreateFromPathA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILCreateFromPathW == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ILCreateFromPathW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILFindChild == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ILFindChild
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILFindLastID == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ILFindLastID
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILFree == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ILFree
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILGetNext == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ILGetNext
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILGetSize == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ILGetSize
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILIsEqual == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ILIsEqual
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILIsParent == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ILIsParent
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILLoadFromStreamEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ILLoadFromStreamEx
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILRemoveLastID == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ILRemoveLastID
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ILSaveToStream == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ILSaveToStream
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IStream_Copy == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IStream_Copy
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IStream_Read == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IStream_Read
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IStream_ReadPidl == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IStream_ReadPidl
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IStream_ReadStr == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IStream_ReadStr
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IStream_Reset == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IStream_Reset
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IStream_Size == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IStream_Size
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IStream_Write == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IStream_Write
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IStream_WritePidl == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IStream_WritePidl
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IStream_WriteStr == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IStream_WriteStr
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IUnknown_AtomicRelease == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IUnknown_AtomicRelease
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IUnknown_GetSite == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IUnknown_GetSite
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IUnknown_GetWindow == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IUnknown_GetWindow
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IUnknown_QueryService == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IUnknown_QueryService
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IUnknown_Set == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IUnknown_Set
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IUnknown_SetSite == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IUnknown_SetSite
+@When[Windows_Win32_UI_Shell == "on" && SHDOCVW == "on" && Windows_Win32_UI_Shell_ImportPrivacySettings == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImportPrivacySettings
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_InitNetworkAddressControl == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitNetworkAddressControl
+@When[Windows_Win32_UI_Shell == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_InitPropVariantFromStrRet == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitPropVariantFromStrRet
+@When[Windows_Win32_UI_Shell == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_InitVariantFromStrRet == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitVariantFromStrRet
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IntlStrEqWorkerA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IntlStrEqWorkerA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IntlStrEqWorkerW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IntlStrEqWorkerW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IsCharSpaceA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsCharSpaceA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IsCharSpaceW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsCharSpaceW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IsInternetESCEnabled == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsInternetESCEnabled
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_IsLFNDriveA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsLFNDriveA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_IsLFNDriveW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsLFNDriveW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_IsNetDrive == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsNetDrive
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_IsOS == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsOS
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_IsUserAnAdmin == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsUserAnAdmin
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_LoadUserProfileA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LoadUserProfileA
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_LoadUserProfileW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LoadUserProfileW
+@When[Windows_Win32_UI_Shell == "on" && HLINK == "on" && Windows_Win32_UI_Shell_OleSaveToStreamEx == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleSaveToStreamEx
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_OpenRegStream == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OpenRegStream
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_ParseURLA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ParseURLA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_ParseURLW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ParseURLW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathAddBackslashA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathAddBackslashA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathAddBackslashW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathAddBackslashW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathAddExtensionA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathAddExtensionA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathAddExtensionW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathAddExtensionW
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathAllocCanonicalize == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathAllocCanonicalize
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathAllocCombine == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathAllocCombine
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathAppendA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathAppendA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathAppendW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathAppendW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathBuildRootA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathBuildRootA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathBuildRootW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathBuildRootW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCanonicalizeA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathCanonicalizeA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCanonicalizeW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathCanonicalizeW
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchAddBackslash == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathCchAddBackslash
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchAddBackslashEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathCchAddBackslashEx
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchAddExtension == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathCchAddExtension
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchAppend == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathCchAppend
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchAppendEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathCchAppendEx
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchCanonicalize == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathCchCanonicalize
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchCanonicalizeEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathCchCanonicalizeEx
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchCombine == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathCchCombine
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchCombineEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathCchCombineEx
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchFindExtension == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathCchFindExtension
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchIsRoot == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathCchIsRoot
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchRemoveBackslash == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathCchRemoveBackslash
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchRemoveBackslashEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathCchRemoveBackslashEx
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchRemoveExtension == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathCchRemoveExtension
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchRemoveFileSpec == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathCchRemoveFileSpec
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchRenameExtension == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathCchRenameExtension
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchSkipRoot == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathCchSkipRoot
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchStripPrefix == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathCchStripPrefix
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathCchStripToRoot == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathCchStripToRoot
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PathCleanupSpec == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathCleanupSpec
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCombineA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathCombineA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCombineW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathCombineW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCommonPrefixA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathCommonPrefixA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCommonPrefixW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathCommonPrefixW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCompactPathA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathCompactPathA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCompactPathExA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathCompactPathExA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCompactPathExW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathCompactPathExW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCompactPathW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathCompactPathW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCreateFromUrlA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathCreateFromUrlA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCreateFromUrlAlloc == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathCreateFromUrlAlloc
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathCreateFromUrlW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathCreateFromUrlW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFileExistsA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathFileExistsA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFileExistsW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathFileExistsW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFindExtensionA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathFindExtensionA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFindExtensionW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathFindExtensionW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFindFileNameA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathFindFileNameA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFindFileNameW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathFindFileNameW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFindNextComponentA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathFindNextComponentA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFindNextComponentW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathFindNextComponentW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFindOnPathA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathFindOnPathA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFindOnPathW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathFindOnPathW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFindSuffixArrayA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathFindSuffixArrayA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathFindSuffixArrayW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathFindSuffixArrayW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathGetArgsA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathGetArgsA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathGetArgsW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathGetArgsW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathGetCharTypeA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathGetCharTypeA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathGetCharTypeW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathGetCharTypeW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathGetDriveNumberA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathGetDriveNumberA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathGetDriveNumberW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathGetDriveNumberW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PathGetShortPath == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathGetShortPath
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsContentTypeA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsContentTypeA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsContentTypeW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsContentTypeW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsDirectoryA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsDirectoryA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsDirectoryEmptyA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsDirectoryEmptyA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsDirectoryEmptyW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsDirectoryEmptyW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsDirectoryW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsDirectoryW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PathIsExe == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsExe
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsFileSpecA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsFileSpecA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsFileSpecW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsFileSpecW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsLFNFileSpecA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsLFNFileSpecA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsLFNFileSpecW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsLFNFileSpecW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsNetworkPathA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsNetworkPathA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsNetworkPathW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsNetworkPathW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsPrefixA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsPrefixA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsPrefixW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsPrefixW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsRelativeA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsRelativeA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsRelativeW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsRelativeW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsRootA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsRootA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsRootW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsRootW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsSameRootA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsSameRootA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsSameRootW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsSameRootW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PathIsSlowA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsSlowA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PathIsSlowW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsSlowW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsSystemFolderA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsSystemFolderA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsSystemFolderW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsSystemFolderW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsUNCA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsUNCA
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PATH_L1_1_0 == "on" && Windows_Win32_UI_Shell_PathIsUNCEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsUNCEx
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsUNCServerA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsUNCServerA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsUNCServerShareA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsUNCServerShareA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsUNCServerShareW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsUNCServerShareW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsUNCServerW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsUNCServerW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsUNCW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsUNCW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsURLA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsURLA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathIsURLW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathIsURLW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathMakePrettyA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathMakePrettyA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathMakePrettyW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathMakePrettyW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathMakeSystemFolderA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathMakeSystemFolderA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathMakeSystemFolderW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathMakeSystemFolderW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PathMakeUniqueName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathMakeUniqueName
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathMatchSpecA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathMatchSpecA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathMatchSpecExA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathMatchSpecExA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathMatchSpecExW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathMatchSpecExW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathMatchSpecW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathMatchSpecW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathParseIconLocationA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathParseIconLocationA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathParseIconLocationW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathParseIconLocationW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PathQualify == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathQualify
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathQuoteSpacesA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathQuoteSpacesA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathQuoteSpacesW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathQuoteSpacesW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRelativePathToA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathRelativePathToA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRelativePathToW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathRelativePathToW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRemoveArgsA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathRemoveArgsA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRemoveArgsW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathRemoveArgsW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRemoveBackslashA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathRemoveBackslashA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRemoveBackslashW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathRemoveBackslashW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRemoveBlanksA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathRemoveBlanksA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRemoveBlanksW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathRemoveBlanksW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRemoveExtensionA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathRemoveExtensionA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRemoveExtensionW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathRemoveExtensionW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRemoveFileSpecA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathRemoveFileSpecA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRemoveFileSpecW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathRemoveFileSpecW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRenameExtensionA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathRenameExtensionA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathRenameExtensionW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathRenameExtensionW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PathResolve == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathResolve
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathSearchAndQualifyA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathSearchAndQualifyA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathSearchAndQualifyW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathSearchAndQualifyW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathSetDlgItemPathA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathSetDlgItemPathA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathSetDlgItemPathW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathSetDlgItemPathW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathSkipRootA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathSkipRootA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathSkipRootW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathSkipRootW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathStripPathA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathStripPathA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathStripPathW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathStripPathW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathStripToRootA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathStripToRootA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathStripToRootW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathStripToRootW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathUnExpandEnvStringsA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathUnExpandEnvStringsA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathUnExpandEnvStringsW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathUnExpandEnvStringsW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathUndecorateA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathUndecorateA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathUndecorateW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathUndecorateW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathUnmakeSystemFolderA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathUnmakeSystemFolderA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathUnmakeSystemFolderW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathUnmakeSystemFolderW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathUnquoteSpacesA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathUnquoteSpacesA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_PathUnquoteSpacesW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathUnquoteSpacesW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PathYetAnotherMakeUniqueName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PathYetAnotherMakeUniqueName
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PickIconDlg == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PickIconDlg
+@When[Windows_Win32_UI_Shell == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropVariantToStrRet == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PropVariantToStrRet
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_QISearch == "on"]
+public import windows_sys.Win32._impl_l2.Windows_QISearch
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ReadCabinetState == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReadCabinetState
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_RealDriveType == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RealDriveType
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PSM_APPNOTIFY_L1_1_1 == "on" && Windows_Win32_UI_Shell_RegisterAppConstrainedChangeNotification == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RegisterAppConstrainedChangeNotification
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PSM_APPNOTIFY_L1_1_0 == "on" && Windows_Win32_UI_Shell_RegisterAppStateChangeNotification == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RegisterAppStateChangeNotification
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_SHCORE_SCALING_L1_1_1 == "on" && Windows_Win32_UI_Shell_RegisterScaleChangeEvent == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RegisterScaleChangeEvent
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_SHCORE_SCALING_L1_1_0 == "on" && Windows_Win32_UI_Shell_RegisterScaleChangeNotifications == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RegisterScaleChangeNotifications
+@When[Windows_Win32_UI_Shell == "on" && COMCTL32 == "on" && Windows_Win32_UI_Shell_RemoveWindowSubclass == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RemoveWindowSubclass
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_RestartDialog == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RestartDialog
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_RestartDialogEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RestartDialogEx
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_SHCORE_SCALING_L1_1_0 == "on" && Windows_Win32_UI_Shell_RevokeScaleChangeNotifications == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RevokeScaleChangeNotifications
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHAddFromPropSheetExtArray == "on" && Windows_Win32_UI_Controls == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHAddFromPropSheetExtArray
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHAddToRecentDocs == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHAddToRecentDocs
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHAlloc == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHAlloc
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHAllocShared == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHAllocShared
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHAnsiToAnsi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHAnsiToAnsi
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHAnsiToUnicode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHAnsiToUnicode
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHAppBarMessage == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_SHAppBarMessage
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHAssocEnumHandlers == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHAssocEnumHandlers
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHAssocEnumHandlersForProtocolByApplication == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHAssocEnumHandlersForProtocolByApplication
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHAutoComplete == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHAutoComplete
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHBindToFolderIDListParent == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHBindToFolderIDListParent
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHBindToFolderIDListParentEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHBindToFolderIDListParentEx
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHBindToObject == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHBindToObject
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHBindToParent == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHBindToParent
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHBrowseForFolderA == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHBrowseForFolderA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHBrowseForFolderW == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHBrowseForFolderW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCLSIDFromString == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCLSIDFromString
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHChangeNotification_Lock == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHChangeNotification_Lock
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHChangeNotification_Unlock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHChangeNotification_Unlock
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHChangeNotify == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHChangeNotify
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHChangeNotifyDeregister == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHChangeNotifyDeregister
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHChangeNotifyRegister == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHChangeNotifyRegister
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHChangeNotifyRegisterThread == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHChangeNotifyRegisterThread
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCloneSpecialIDList == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCloneSpecialIDList
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCoCreateInstance == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCoCreateInstance
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHCopyKeyA == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCopyKeyA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHCopyKeyW == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCopyKeyW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateAssociationRegistration == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCreateAssociationRegistration
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateDataObject == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCreateDataObject
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateDefaultContextMenu == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Registry == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCreateDefaultContextMenu
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateDefaultExtractIcon == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCreateDefaultExtractIcon
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateDefaultPropertiesOp == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCreateDefaultPropertiesOp
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateDirectory == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCreateDirectory
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateDirectoryExA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCreateDirectoryExA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateDirectoryExW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCreateDirectoryExW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateFileExtractIconW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCreateFileExtractIconW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateItemFromIDList == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCreateItemFromIDList
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateItemFromParsingName == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCreateItemFromParsingName
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateItemFromRelativeName == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCreateItemFromRelativeName
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateItemInKnownFolder == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCreateItemInKnownFolder
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateItemWithParent == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCreateItemWithParent
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHCreateMemStream == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCreateMemStream
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateProcessAsUserW == "on" && (((arch == "x86_64" && Windows_Win32_Security == "on" && Windows_Win32_System_Threading == "on") || (arch == "aarch64" && Windows_Win32_Security == "on" && Windows_Win32_System_Threading == "on")) && Windows_Win32_Security == "on" && Windows_Win32_System_Threading == "on")]
+public import windows_sys.Win32._impl_l2.Windows_SHCreateProcessAsUserW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreatePropSheetExtArray == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCreatePropSheetExtArray
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateQueryCancelAutoPlayMoniker == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCreateQueryCancelAutoPlayMoniker
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateShellFolderView == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCreateShellFolderView
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateShellFolderViewEx == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCreateShellFolderViewEx
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateShellItem == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCreateShellItem
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateShellItemArray == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCreateShellItemArray
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateShellItemArrayFromDataObject == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCreateShellItemArrayFromDataObject
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateShellItemArrayFromIDLists == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCreateShellItemArrayFromIDLists
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateShellItemArrayFromShellItem == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCreateShellItemArrayFromShellItem
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHCreateShellPalette == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCreateShellPalette
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHCreateStdEnumFmtEtc == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCreateStdEnumFmtEtc
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHCreateStreamOnFileA == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCreateStreamOnFileA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHCreateStreamOnFileEx == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCreateStreamOnFileEx
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHCreateStreamOnFileW == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCreateStreamOnFileW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHCreateThread == "on" && Windows_Win32_System_Threading == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCreateThread
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHCreateThreadRef == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCreateThreadRef
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHCreateThreadWithHandle == "on" && Windows_Win32_System_Threading == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHCreateThreadWithHandle
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHDefExtractIconA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHDefExtractIconA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHDefExtractIconW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHDefExtractIconW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHDeleteEmptyKeyA == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHDeleteEmptyKeyA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHDeleteEmptyKeyW == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHDeleteEmptyKeyW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHDeleteKeyA == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHDeleteKeyA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHDeleteKeyW == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHDeleteKeyW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHDeleteValueA == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHDeleteValueA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHDeleteValueW == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHDeleteValueW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHDestroyPropSheetExtArray == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHDestroyPropSheetExtArray
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHDoDragDrop == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHDoDragDrop
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHEmptyRecycleBinA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHEmptyRecycleBinA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHEmptyRecycleBinW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHEmptyRecycleBinW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHEnumKeyExA == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHEnumKeyExA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHEnumKeyExW == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHEnumKeyExW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHEnumValueA == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHEnumValueA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHEnumValueW == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHEnumValueW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHEnumerateUnreadMailAccountsW == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHEnumerateUnreadMailAccountsW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHEvaluateSystemCommandTemplate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHEvaluateSystemCommandTemplate
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHFileOperationA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_SHFileOperationA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHFileOperationW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_SHFileOperationW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHFindFiles == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHFindFiles
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHFind_InitMenuPopup == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHFind_InitMenuPopup
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHFlushSFCache == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHFlushSFCache
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHFormatDateTimeA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHFormatDateTimeA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHFormatDateTimeW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHFormatDateTimeW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHFormatDrive == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHFormatDrive
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHFree == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHFree
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHFreeNameMappings == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHFreeNameMappings
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHFreeShared == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHFreeShared
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetAttributesFromDataObject == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetAttributesFromDataObject
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetDataFromIDListA == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetDataFromIDListA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetDataFromIDListW == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetDataFromIDListW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetDesktopFolder == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetDesktopFolder
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetDiskFreeSpaceExA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetDiskFreeSpaceExA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetDiskFreeSpaceExW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetDiskFreeSpaceExW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetDriveMedia == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetDriveMedia
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetFileInfoA == "on" && (((arch == "x86_64" && Windows_Win32_UI_WindowsAndMessaging == "on") || (arch == "aarch64" && Windows_Win32_UI_WindowsAndMessaging == "on")) && Windows_Win32_Storage_FileSystem == "on" && Windows_Win32_UI_WindowsAndMessaging == "on")]
+public import windows_sys.Win32._impl_l2.Windows_SHGetFileInfoA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetFileInfoW == "on" && (((arch == "x86_64" && Windows_Win32_UI_WindowsAndMessaging == "on") || (arch == "aarch64" && Windows_Win32_UI_WindowsAndMessaging == "on")) && Windows_Win32_Storage_FileSystem == "on" && Windows_Win32_UI_WindowsAndMessaging == "on")]
+public import windows_sys.Win32._impl_l2.Windows_SHGetFileInfoW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetFolderLocation == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetFolderLocation
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetFolderPathA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetFolderPathA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetFolderPathAndSubDirA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetFolderPathAndSubDirA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetFolderPathAndSubDirW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetFolderPathAndSubDirW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetFolderPathW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetFolderPathW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetIDListFromObject == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetIDListFromObject
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetIconOverlayIndexA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetIconOverlayIndexA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetIconOverlayIndexW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetIconOverlayIndexW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetImageList == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetImageList
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetInstanceExplorer == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetInstanceExplorer
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHGetInverseCMAP == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetInverseCMAP
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetItemFromDataObject == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetItemFromDataObject
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetItemFromObject == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetItemFromObject
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetKnownFolderIDList == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetKnownFolderIDList
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetKnownFolderItem == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetKnownFolderItem
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetKnownFolderPath == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetKnownFolderPath
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetLocalizedName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetLocalizedName
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetMalloc == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetMalloc
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetNameFromIDList == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetNameFromIDList
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetNewLinkInfoA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetNewLinkInfoA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetNewLinkInfoW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetNewLinkInfoW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetPathFromIDListA == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetPathFromIDListA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetPathFromIDListEx == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetPathFromIDListEx
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetPathFromIDListW == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetPathFromIDListW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetRealIDL == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetRealIDL
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetSetFolderCustomSettings == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetSetFolderCustomSettings
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetSetSettings == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetSetSettings
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetSettings == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetSettings
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetSpecialFolderLocation == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetSpecialFolderLocation
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetSpecialFolderPathA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetSpecialFolderPathA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetSpecialFolderPathW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetSpecialFolderPathW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetStockIconInfo == "on" && (((arch == "x86_64" && Windows_Win32_UI_WindowsAndMessaging == "on") || (arch == "aarch64" && Windows_Win32_UI_WindowsAndMessaging == "on")) && Windows_Win32_UI_WindowsAndMessaging == "on")]
+public import windows_sys.Win32._impl_l2.Windows_SHGetStockIconInfo
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetTemporaryPropertyForItem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetTemporaryPropertyForItem
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHGetThreadRef == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetThreadRef
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHGetUnreadMailCountW == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetUnreadMailCountW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHGetValueA == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetValueA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHGetValueW == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetValueW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHGetViewStatePropertyBag == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetViewStatePropertyBag
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHGlobalCounterDecrement == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGlobalCounterDecrement
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHGlobalCounterGetValue == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGlobalCounterGetValue
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHGlobalCounterIncrement == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGlobalCounterIncrement
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHHandleUpdateImage == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHHandleUpdateImage
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHILCreateFromPath == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHILCreateFromPath
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHInvokePrinterCommandA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHInvokePrinterCommandA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHInvokePrinterCommandW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHInvokePrinterCommandW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHIsFileAvailableOffline == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHIsFileAvailableOffline
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHIsLowMemoryMachine == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHIsLowMemoryMachine
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHLimitInputEdit == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHLimitInputEdit
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHLoadInProc == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHLoadInProc
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHLoadIndirectString == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHLoadIndirectString
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHLoadNonloadedIconOverlayIdentifiers == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHLoadNonloadedIconOverlayIdentifiers
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHLockShared == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHLockShared
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHMapPIDLToSystemImageListIndex == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHMapPIDLToSystemImageListIndex
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHMessageBoxCheckA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHMessageBoxCheckA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHMessageBoxCheckW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHMessageBoxCheckW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHMultiFileProperties == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHMultiFileProperties
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHObjectProperties == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHObjectProperties
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHOpenFolderAndSelectItems == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHOpenFolderAndSelectItems
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHOpenPropSheetW == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHOpenPropSheetW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHOpenRegStream2A == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHOpenRegStream2A
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHOpenRegStream2W == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHOpenRegStream2W
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHOpenRegStreamA == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHOpenRegStreamA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHOpenRegStreamW == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHOpenRegStreamW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHOpenWithDialog == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHOpenWithDialog
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHParseDisplayName == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHParseDisplayName
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHPathPrepareForWriteA == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHPathPrepareForWriteA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHPathPrepareForWriteW == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHPathPrepareForWriteW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHQueryInfoKeyA == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHQueryInfoKeyA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHQueryInfoKeyW == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHQueryInfoKeyW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHQueryRecycleBinA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_SHQueryRecycleBinA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHQueryRecycleBinW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_SHQueryRecycleBinW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHQueryUserNotificationState == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHQueryUserNotificationState
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHQueryValueExA == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHQueryValueExA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHQueryValueExW == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHQueryValueExW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegCloseUSKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegCloseUSKey
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegCreateUSKeyA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegCreateUSKeyA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegCreateUSKeyW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegCreateUSKeyW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegDeleteEmptyUSKeyA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegDeleteEmptyUSKeyA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegDeleteEmptyUSKeyW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegDeleteEmptyUSKeyW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegDeleteUSValueA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegDeleteUSValueA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegDeleteUSValueW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegDeleteUSValueW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegDuplicateHKey == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegDuplicateHKey
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegEnumUSKeyA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegEnumUSKeyA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegEnumUSKeyW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegEnumUSKeyW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegEnumUSValueA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegEnumUSValueA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegEnumUSValueW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegEnumUSValueW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegGetBoolUSValueA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegGetBoolUSValueA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegGetBoolUSValueW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegGetBoolUSValueW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegGetIntW == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegGetIntW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegGetPathA == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegGetPathA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegGetPathW == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegGetPathW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegGetUSValueA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegGetUSValueA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegGetUSValueW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegGetUSValueW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegGetValueA == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegGetValueA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegGetValueFromHKCUHKLM == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegGetValueFromHKCUHKLM
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegGetValueW == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegGetValueW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegOpenUSKeyA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegOpenUSKeyA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegOpenUSKeyW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegOpenUSKeyW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegQueryInfoUSKeyA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegQueryInfoUSKeyA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegQueryInfoUSKeyW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegQueryInfoUSKeyW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegQueryUSValueA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegQueryUSValueA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegQueryUSValueW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegQueryUSValueW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegSetPathA == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegSetPathA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegSetPathW == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegSetPathW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegSetUSValueA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegSetUSValueA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegSetUSValueW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegSetUSValueW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegWriteUSValueA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegWriteUSValueA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHRegWriteUSValueW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRegWriteUSValueW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHReleaseThreadRef == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHReleaseThreadRef
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHRemoveLocalizedName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRemoveLocalizedName
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHReplaceFromPropSheetExtArray == "on" && Windows_Win32_UI_Controls == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHReplaceFromPropSheetExtArray
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHResolveLibrary == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHResolveLibrary
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHRestricted == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHRestricted
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHSendMessageBroadcastA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHSendMessageBroadcastA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHSendMessageBroadcastW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHSendMessageBroadcastW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHSetDefaultProperties == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHSetDefaultProperties
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHSetFolderPathA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHSetFolderPathA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHSetFolderPathW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHSetFolderPathW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHSetInstanceExplorer == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHSetInstanceExplorer
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHSetKnownFolderPath == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHSetKnownFolderPath
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHSetLocalizedName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHSetLocalizedName
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHSetTemporaryPropertyForItem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHSetTemporaryPropertyForItem
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHSetThreadRef == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHSetThreadRef
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHSetUnreadMailCountW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHSetUnreadMailCountW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHSetValueA == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHSetValueA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHSetValueW == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHSetValueW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHShellFolderView_Message == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHShellFolderView_Message
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHShowManageLibraryUI == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHShowManageLibraryUI
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHSimpleIDListFromPath == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHSimpleIDListFromPath
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHSkipJunction == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHSkipJunction
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHStartNetConnectionDialogW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHStartNetConnectionDialogW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHStrDupA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHStrDupA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHStrDupW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHStrDupW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHStripMneumonicA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHStripMneumonicA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHStripMneumonicW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHStripMneumonicW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHTestTokenMembership == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHTestTokenMembership
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHUnicodeToAnsi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHUnicodeToAnsi
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHUnicodeToUnicode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHUnicodeToUnicode
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_SHUnlockShared == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHUnlockShared
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHUpdateImageA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHUpdateImageA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHUpdateImageW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHUpdateImageW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SHValidateUNC == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHValidateUNC
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SetCurrentProcessExplicitAppUserModelID == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetCurrentProcessExplicitAppUserModelID
+@When[Windows_Win32_UI_Shell == "on" && USER32 == "on" && Windows_Win32_UI_Shell_SetMenuContextHelpId == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetMenuContextHelpId
+@When[Windows_Win32_UI_Shell == "on" && USER32 == "on" && Windows_Win32_UI_Shell_SetWindowContextHelpId == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetWindowContextHelpId
+@When[Windows_Win32_UI_Shell == "on" && COMCTL32 == "on" && Windows_Win32_UI_Shell_SetWindowSubclass == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetWindowSubclass
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ShellAboutA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ShellAboutA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ShellAboutW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ShellAboutW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ShellExecuteA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ShellExecuteA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ShellExecuteExA == "on" && (((arch == "x86_64" && Windows_Win32_System_Registry == "on") || (arch == "aarch64" && Windows_Win32_System_Registry == "on")) && Windows_Win32_System_Registry == "on")]
+public import windows_sys.Win32._impl_l2.Windows_ShellExecuteExA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ShellExecuteExW == "on" && (((arch == "x86_64" && Windows_Win32_System_Registry == "on") || (arch == "aarch64" && Windows_Win32_System_Registry == "on")) && Windows_Win32_System_Registry == "on")]
+public import windows_sys.Win32._impl_l2.Windows_ShellExecuteExW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_ShellExecuteW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ShellExecuteW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_Shell_GetCachedImageIndex == "on"]
+public import windows_sys.Win32._impl_l2.Windows_Shell_GetCachedImageIndex
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_Shell_GetCachedImageIndexA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_Shell_GetCachedImageIndexA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_Shell_GetCachedImageIndexW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_Shell_GetCachedImageIndexW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_Shell_GetImageLists == "on" && Windows_Win32_UI_Controls == "on"]
+public import windows_sys.Win32._impl_l2.Windows_Shell_GetImageLists
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_Shell_MergeMenus == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_Shell_MergeMenus
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_Shell_NotifyIconA == "on" && (((arch == "x86_64" && Windows_Win32_UI_WindowsAndMessaging == "on") || (arch == "aarch64" && Windows_Win32_UI_WindowsAndMessaging == "on")) && Windows_Win32_UI_WindowsAndMessaging == "on")]
+public import windows_sys.Win32._impl_l2.Windows_Shell_NotifyIconA
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_Shell_NotifyIconGetRect == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_Shell_NotifyIconGetRect
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_Shell_NotifyIconW == "on" && (((arch == "x86_64" && Windows_Win32_UI_WindowsAndMessaging == "on") || (arch == "aarch64" && Windows_Win32_UI_WindowsAndMessaging == "on")) && Windows_Win32_UI_WindowsAndMessaging == "on")]
+public import windows_sys.Win32._impl_l2.Windows_Shell_NotifyIconW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_SignalFileOpen == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SignalFileOpen
+@When[Windows_Win32_UI_Shell == "on" && SHDOCVW == "on" && Windows_Win32_UI_Shell_SoftwareUpdateMessageBox == "on" && Windows_Win32_System_Com_Urlmon == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SoftwareUpdateMessageBox
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_StgMakeUniqueName == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StgMakeUniqueName
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCSpnA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrCSpnA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCSpnIA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrCSpnIA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCSpnIW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrCSpnIW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCSpnW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrCSpnW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCatBuffA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrCatBuffA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCatBuffW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrCatBuffW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCatChainW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrCatChainW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCatW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrCatW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrChrA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrChrA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrChrIA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrChrIA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrChrIW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrChrIW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrChrNIW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrChrNIW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrChrNW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrChrNW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrChrW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrChrW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpCA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrCmpCA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpCW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrCmpCW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpICA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrCmpICA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpICW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrCmpICW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpIW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrCmpIW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpLogicalW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrCmpLogicalW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpNA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrCmpNA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpNCA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrCmpNCA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpNCW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrCmpNCW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpNIA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrCmpNIA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpNICA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrCmpNICA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpNICW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrCmpNICW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpNIW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrCmpNIW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpNW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrCmpNW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCmpW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrCmpW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCpyNW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrCpyNW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrCpyW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrCpyW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrDupA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrDupA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrDupW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrDupW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrFormatByteSize64A == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrFormatByteSize64A
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrFormatByteSizeA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrFormatByteSizeA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrFormatByteSizeEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrFormatByteSizeEx
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrFormatByteSizeW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrFormatByteSizeW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrFormatKBSizeA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrFormatKBSizeA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrFormatKBSizeW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrFormatKBSizeW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrFromTimeIntervalA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrFromTimeIntervalA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrFromTimeIntervalW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrFromTimeIntervalW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrIsIntlEqualA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrIsIntlEqualA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrIsIntlEqualW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrIsIntlEqualW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrNCatA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrNCatA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrNCatW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrNCatW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrPBrkA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrPBrkA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrPBrkW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrPBrkW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrRChrA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrRChrA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrRChrIA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrRChrIA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrRChrIW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrRChrIW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrRChrW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrRChrW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrRStrIA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrRStrIA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrRStrIW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrRStrIW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrRetToBSTR == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrRetToBSTR
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrRetToBufA == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrRetToBufA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrRetToBufW == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrRetToBufW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrRetToStrA == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrRetToStrA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrRetToStrW == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrRetToStrW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrSpnA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrSpnA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrSpnW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrSpnW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrStrA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrStrA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrStrIA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrStrIA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrStrIW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrStrIW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrStrNIW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrStrNIW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrStrNW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrStrNW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrStrW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrStrW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrToInt64ExA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrToInt64ExA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrToInt64ExW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrToInt64ExW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrToIntA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrToIntA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrToIntExA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrToIntExA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrToIntExW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrToIntExW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrToIntW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrToIntW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrTrimA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrTrimA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_StrTrimW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StrTrimW
+@When[Windows_Win32_UI_Shell == "on" && USERENV == "on" && Windows_Win32_UI_Shell_UnloadUserProfile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UnloadUserProfile
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PSM_APPNOTIFY_L1_1_1 == "on" && Windows_Win32_UI_Shell_UnregisterAppConstrainedChangeNotification == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UnregisterAppConstrainedChangeNotification
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_CORE_PSM_APPNOTIFY_L1_1_0 == "on" && Windows_Win32_UI_Shell_UnregisterAppStateChangeNotification == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UnregisterAppStateChangeNotification
+@When[Windows_Win32_UI_Shell == "on" && API_MS_WIN_SHCORE_SCALING_L1_1_1 == "on" && Windows_Win32_UI_Shell_UnregisterScaleChangeEvent == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UnregisterScaleChangeEvent
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlApplySchemeA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UrlApplySchemeA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlApplySchemeW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UrlApplySchemeW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlCanonicalizeA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UrlCanonicalizeA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlCanonicalizeW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UrlCanonicalizeW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlCombineA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UrlCombineA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlCombineW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UrlCombineW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlCompareA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UrlCompareA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlCompareW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UrlCompareW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlCreateFromPathA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UrlCreateFromPathA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlCreateFromPathW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UrlCreateFromPathW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlEscapeA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UrlEscapeA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlEscapeW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UrlEscapeW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlFixupW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UrlFixupW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlGetLocationA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UrlGetLocationA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlGetLocationW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UrlGetLocationW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlGetPartA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UrlGetPartA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlGetPartW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UrlGetPartW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlHashA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UrlHashA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlHashW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UrlHashW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlIsA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UrlIsA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlIsNoHistoryA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UrlIsNoHistoryA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlIsNoHistoryW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UrlIsNoHistoryW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlIsOpaqueA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UrlIsOpaqueA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlIsOpaqueW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UrlIsOpaqueW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlIsW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UrlIsW
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlUnescapeA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UrlUnescapeA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_UrlUnescapeW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UrlUnescapeW
+@When[Windows_Win32_UI_Shell == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_VariantToStrRet == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VariantToStrRet
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_WhichPlatform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WhichPlatform
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_Win32DeleteFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_Win32DeleteFile
+@When[Windows_Win32_UI_Shell == "on" && USER32 == "on" && Windows_Win32_UI_Shell_WinHelpA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WinHelpA
+@When[Windows_Win32_UI_Shell == "on" && USER32 == "on" && Windows_Win32_UI_Shell_WinHelpW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WinHelpW
+@When[Windows_Win32_UI_Shell == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_WriteCabinetState == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WriteCabinetState
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_wvnsprintfA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_wvnsprintfA
+@When[Windows_Win32_UI_Shell == "on" && SHLWAPI == "on" && Windows_Win32_UI_Shell_wvnsprintfW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_wvnsprintfW

@@ -13,525 +13,4121 @@ import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
 
 
-@When[OLE32 == "on"]
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_CreateOleAdviseHolder == "on"]
 foreign {
     func CreateOleAdviseHolder(ppOAHolder: CPointer<CPointer<Unit>>): Int32
-    func OleDestroyMenuDescriptor(holemenu: IntNative): Int32
-    func OleFlushClipboard(): Int32
-    func OleGetAutoConvert(clsidOld: CPointer<GUID>, pClsidNew: CPointer<GUID>): Int32
-    // param-hint: lpszLabel optional
-    func OleGetIconOfClass(rclsid: CPointer<GUID>, lpszLabel: CPointer<UInt16>, fUseTypeAsLabel: Int32): CPointer<Unit>
-    // param-hint: pvReserved reserved
-    func OleInitialize(pvReserved: CPointer<Unit>): Int32
-    func OleIsRunning(pObject: CPointer<Unit>): Int32
-    func OleRegEnumVerbs(clsid: CPointer<GUID>, ppenum: CPointer<CPointer<Unit>>): Int32
-    func OleRegGetMiscStatus(clsid: CPointer<GUID>, dwAspect: UInt32, pdwStatus: CPointer<UInt32>): Int32
-    func OleRegGetUserType(clsid: CPointer<GUID>, dwFormOfType: UInt32, pszUserType: CPointer<CPointer<UInt16>>): Int32
-    func OleSetMenuDescriptor(holemenu: IntNative, hwndFrame: CPointer<Unit>, hwndActiveObject: CPointer<Unit>, lpFrame: CPointer<Unit>, lpActiveObj: CPointer<Unit>): Int32
-    func OleUninitialize(): Unit
-    func RegisterDragDrop(hwnd: CPointer<Unit>, pDropTarget: CPointer<Unit>): Int32
-    func RevokeDragDrop(hwnd: CPointer<Unit>): Int32
 }
 
-@When[OLE32 == "on" && (Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com == "on")]
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_CreateOleAdviseHolder == "on"]
+public unsafe func Windows_CreateOleAdviseHolder(ppOAHolder: CPointer<CPointer<Unit>>): Int32 {
+    return CreateOleAdviseHolder(ppOAHolder)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_DoDragDrop == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func ReleaseStgMedium(param0: CPointer<STGMEDIUM>): Unit
+    func DoDragDrop(pDataObj: CPointer<Unit>, pDropSource: CPointer<Unit>, dwOKEffects: UInt32, pdwEffect: CPointer<UInt32>): Int32
 }
 
-@When[OLE32 == "on" && (Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on")]
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_DoDragDrop == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_DoDragDrop(pDataObj: CPointer<Unit>, pDropSource: CPointer<Unit>, dwOKEffects: UInt32, pdwEffect: CPointer<UInt32>): Int32 {
+    return DoDragDrop(pDataObj, pDropSource, dwOKEffects, pdwEffect)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_HRGN_UserFree == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func HRGN_UserFree(param0: CPointer<UInt32>, param1: CPointer<Win32_Graphics_Gdi.HRGN>): Unit
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_HRGN_UserFree == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_HRGN_UserFree(param0: CPointer<UInt32>, param1: CPointer<Win32_Graphics_Gdi.HRGN>): Unit {
+    HRGN_UserFree(param0, param1)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_HRGN_UserMarshal == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func HRGN_UserMarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_Graphics_Gdi.HRGN>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_HRGN_UserMarshal == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_HRGN_UserMarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_Graphics_Gdi.HRGN>): CPointer<UInt8> {
+    return HRGN_UserMarshal(param0, param1, param2)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_HRGN_UserSize == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func HRGN_UserSize(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32_Graphics_Gdi.HRGN>): UInt32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_HRGN_UserSize == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_HRGN_UserSize(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32_Graphics_Gdi.HRGN>): UInt32 {
+    return HRGN_UserSize(param0, param1, param2)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_HRGN_UserUnmarshal == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func HRGN_UserUnmarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_Graphics_Gdi.HRGN>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_HRGN_UserUnmarshal == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_HRGN_UserUnmarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_Graphics_Gdi.HRGN>): CPointer<UInt8> {
+    return HRGN_UserUnmarshal(param0, param1, param2)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_IsAccelerator == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    func IsAccelerator(hAccel: Win32__impl_l0.HACCEL, cAccelEntries: Int32, lpMsg: CPointer<Win32__impl_l0.MSG>, lpwCmd: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_IsAccelerator == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_IsAccelerator(hAccel: Win32__impl_l0.HACCEL, cAccelEntries: Int32, lpMsg: CPointer<Win32__impl_l0.MSG>, lpwCmd: CPointer<UInt16>): Int32 {
+    return IsAccelerator(hAccel, cAccelEntries, lpMsg, lpwCmd)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreate == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func OleCreate(rclsid: CPointer<GUID>, riid: CPointer<GUID>, renderopt: UInt32, pFormatEtc: CPointer<Win32__impl_l1.FORMATETC>, pClientSite: CPointer<Unit>, pStg: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreate == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_OleCreate(rclsid: CPointer<GUID>, riid: CPointer<GUID>, renderopt: UInt32, pFormatEtc: CPointer<Win32__impl_l1.FORMATETC>, pClientSite: CPointer<Unit>, pStg: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32 {
+    return OleCreate(rclsid, riid, renderopt, pFormatEtc, pClientSite, pStg, ppvObj)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateEmbeddingHelper == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func OleCreateEmbeddingHelper(clsid: CPointer<GUID>, pUnkOuter: CPointer<Unit>, flags: UInt32, pCF: CPointer<Unit>, riid: CPointer<GUID>, lplpObj: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateEmbeddingHelper == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_OleCreateEmbeddingHelper(clsid: CPointer<GUID>, pUnkOuter: CPointer<Unit>, flags: UInt32, pCF: CPointer<Unit>, riid: CPointer<GUID>, lplpObj: CPointer<CPointer<Unit>>): Int32 {
+    return OleCreateEmbeddingHelper(clsid, pUnkOuter, flags, pCF, riid, lplpObj)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateFromData == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func OleCreateFromData(pSrcDataObj: CPointer<Unit>, riid: CPointer<GUID>, renderopt: UInt32, pFormatEtc: CPointer<Win32__impl_l1.FORMATETC>, pClientSite: CPointer<Unit>, pStg: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateFromData == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_OleCreateFromData(pSrcDataObj: CPointer<Unit>, riid: CPointer<GUID>, renderopt: UInt32, pFormatEtc: CPointer<Win32__impl_l1.FORMATETC>, pClientSite: CPointer<Unit>, pStg: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32 {
+    return OleCreateFromData(pSrcDataObj, riid, renderopt, pFormatEtc, pClientSite, pStg, ppvObj)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateFromFile == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func OleCreateFromFile(rclsid: CPointer<GUID>, lpszFileName: CPointer<UInt16>, riid: CPointer<GUID>, renderopt: UInt32, lpFormatEtc: CPointer<Win32__impl_l1.FORMATETC>, pClientSite: CPointer<Unit>, pStg: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateFromFile == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_OleCreateFromFile(rclsid: CPointer<GUID>, lpszFileName: CPointer<UInt16>, riid: CPointer<GUID>, renderopt: UInt32, lpFormatEtc: CPointer<Win32__impl_l1.FORMATETC>, pClientSite: CPointer<Unit>, pStg: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32 {
+    return OleCreateFromFile(rclsid, lpszFileName, riid, renderopt, lpFormatEtc, pClientSite, pStg, ppvObj)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateLinkFromData == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func OleCreateLinkFromData(pSrcDataObj: CPointer<Unit>, riid: CPointer<GUID>, renderopt: UInt32, pFormatEtc: CPointer<Win32__impl_l1.FORMATETC>, pClientSite: CPointer<Unit>, pStg: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateLinkFromData == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_OleCreateLinkFromData(pSrcDataObj: CPointer<Unit>, riid: CPointer<GUID>, renderopt: UInt32, pFormatEtc: CPointer<Win32__impl_l1.FORMATETC>, pClientSite: CPointer<Unit>, pStg: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32 {
+    return OleCreateLinkFromData(pSrcDataObj, riid, renderopt, pFormatEtc, pClientSite, pStg, ppvObj)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateLinkToFile == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func OleCreateLinkToFile(lpszFileName: CPointer<UInt16>, riid: CPointer<GUID>, renderopt: UInt32, lpFormatEtc: CPointer<Win32__impl_l1.FORMATETC>, pClientSite: CPointer<Unit>, pStg: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateLinkToFile == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_OleCreateLinkToFile(lpszFileName: CPointer<UInt16>, riid: CPointer<GUID>, renderopt: UInt32, lpFormatEtc: CPointer<Win32__impl_l1.FORMATETC>, pClientSite: CPointer<Unit>, pStg: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32 {
+    return OleCreateLinkToFile(lpszFileName, riid, renderopt, lpFormatEtc, pClientSite, pStg, ppvObj)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateMenuDescriptor == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    func OleCreateMenuDescriptor(hmenuCombined: Win32__impl_l0.HMENU, lpMenuWidths: CPointer<Win32__impl_l0.OLEMENUGROUPWIDTHS>): IntNative
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateMenuDescriptor == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_OleCreateMenuDescriptor(hmenuCombined: Win32__impl_l0.HMENU, lpMenuWidths: CPointer<Win32__impl_l0.OLEMENUGROUPWIDTHS>): IntNative {
+    return OleCreateMenuDescriptor(hmenuCombined, lpMenuWidths)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateStaticFromData == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func OleCreateStaticFromData(pSrcDataObj: CPointer<Unit>, iid: CPointer<GUID>, renderopt: UInt32, pFormatEtc: CPointer<Win32__impl_l1.FORMATETC>, pClientSite: CPointer<Unit>, pStg: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateStaticFromData == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_OleCreateStaticFromData(pSrcDataObj: CPointer<Unit>, iid: CPointer<GUID>, renderopt: UInt32, pFormatEtc: CPointer<Win32__impl_l1.FORMATETC>, pClientSite: CPointer<Unit>, pStg: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32 {
+    return OleCreateStaticFromData(pSrcDataObj, iid, renderopt, pFormatEtc, pClientSite, pStg, ppvObj)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleDestroyMenuDescriptor == "on"]
+foreign {
+    func OleDestroyMenuDescriptor(holemenu: IntNative): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleDestroyMenuDescriptor == "on"]
+public unsafe func Windows_OleDestroyMenuDescriptor(holemenu: IntNative): Int32 {
+    return OleDestroyMenuDescriptor(holemenu)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleDraw == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on"]
 foreign {
     func OleDraw(pUnknown: CPointer<Unit>, dwAspect: UInt32, hdcDraw: Win32_Graphics_Gdi.HDC, lprcBounds: CPointer<Win32_Foundation.RECT>): Int32
 }
 
-@When[OLE32 == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on")]
-foreign {
-    func OleCreate(rclsid: CPointer<GUID>, riid: CPointer<GUID>, renderopt: UInt32, pFormatEtc: CPointer<Win32__impl_l1.FORMATETC>, pClientSite: CPointer<Unit>, pStg: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32
-    func OleCreateFromData(pSrcDataObj: CPointer<Unit>, riid: CPointer<GUID>, renderopt: UInt32, pFormatEtc: CPointer<Win32__impl_l1.FORMATETC>, pClientSite: CPointer<Unit>, pStg: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32
-    func OleCreateFromFile(rclsid: CPointer<GUID>, lpszFileName: CPointer<UInt16>, riid: CPointer<GUID>, renderopt: UInt32, lpFormatEtc: CPointer<Win32__impl_l1.FORMATETC>, pClientSite: CPointer<Unit>, pStg: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32
-    func OleCreateLinkFromData(pSrcDataObj: CPointer<Unit>, riid: CPointer<GUID>, renderopt: UInt32, pFormatEtc: CPointer<Win32__impl_l1.FORMATETC>, pClientSite: CPointer<Unit>, pStg: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32
-    func OleCreateLinkToFile(lpszFileName: CPointer<UInt16>, riid: CPointer<GUID>, renderopt: UInt32, lpFormatEtc: CPointer<Win32__impl_l1.FORMATETC>, pClientSite: CPointer<Unit>, pStg: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32
-    func OleCreateStaticFromData(pSrcDataObj: CPointer<Unit>, iid: CPointer<GUID>, renderopt: UInt32, pFormatEtc: CPointer<Win32__impl_l1.FORMATETC>, pClientSite: CPointer<Unit>, pStg: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleDraw == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_OleDraw(pUnknown: CPointer<Unit>, dwAspect: UInt32, hdcDraw: Win32_Graphics_Gdi.HDC, lprcBounds: CPointer<Win32_Foundation.RECT>): Int32 {
+    return OleDraw(pUnknown, dwAspect, hdcDraw, lprcBounds)
 }
 
-@When[OLE32 == "on" && Windows_Win32_Graphics_Gdi == "on"]
-foreign {
-    func HRGN_UserFree(param0: CPointer<UInt32>, param1: CPointer<Win32_Graphics_Gdi.HRGN>): Unit
-    func HRGN_UserMarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_Graphics_Gdi.HRGN>): CPointer<UInt8>
-    func HRGN_UserSize(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32_Graphics_Gdi.HRGN>): UInt32
-    func HRGN_UserUnmarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_Graphics_Gdi.HRGN>): CPointer<UInt8>
-}
-
-@When[OLE32 == "on" && Windows_Win32_System_Com == "on"]
-foreign {
-    func DoDragDrop(pDataObj: CPointer<Unit>, pDropSource: CPointer<Unit>, dwOKEffects: UInt32, pdwEffect: CPointer<UInt32>): Int32
-    func OleCreateEmbeddingHelper(clsid: CPointer<GUID>, pUnkOuter: CPointer<Unit>, flags: UInt32, pCF: CPointer<Unit>, riid: CPointer<GUID>, lplpObj: CPointer<CPointer<Unit>>): Int32
-    func OleGetClipboard(ppDataObj: CPointer<CPointer<Unit>>): Int32
-    func OleIsCurrentClipboard(pDataObj: CPointer<Unit>): Int32
-    func OleLoadFromStream(pStm: CPointer<Unit>, iidInterface: CPointer<GUID>, ppvObj: CPointer<CPointer<Unit>>): Int32
-    func OleLockRunning(pUnknown: CPointer<Unit>, fLock: Int32, fLastUnlockCloses: Int32): Int32
-    func OleQueryCreateFromData(pSrcDataObject: CPointer<Unit>): Int32
-    func OleQueryLinkFromData(pSrcDataObject: CPointer<Unit>): Int32
-    func OleRun(pUnknown: CPointer<Unit>): Int32
-    func OleSaveToStream(pPStm: CPointer<Unit>, pStm: CPointer<Unit>): Int32
-    func OleSetClipboard(pDataObj: CPointer<Unit>): Int32
-    func OleSetContainedObject(pUnknown: CPointer<Unit>, fContained: Int32): Int32
-}
-
-@When[OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
-foreign {
-    func OleLoad(pStg: CPointer<Unit>, riid: CPointer<GUID>, pClientSite: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32
-    func OleSave(pPS: CPointer<Unit>, pStg: CPointer<Unit>, fSameAsLoad: Int32): Int32
-}
-
-@When[OLE32 == "on" && Windows_Win32_System_Memory == "on"]
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleDuplicateData == "on" && Windows_Win32_System_Memory == "on"]
 foreign {
     func OleDuplicateData(hSrc: CPointer<Unit>, cfFormat: UInt16, uiFlags: UInt32): CPointer<Unit>
 }
 
-@When[OLE32 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleDuplicateData == "on" && Windows_Win32_System_Memory == "on"]
+public unsafe func Windows_OleDuplicateData(hSrc: CPointer<Unit>, cfFormat: UInt16, uiFlags: UInt32): CPointer<Unit> {
+    return OleDuplicateData(hSrc, cfFormat, uiFlags)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleFlushClipboard == "on"]
 foreign {
-    func IsAccelerator(hAccel: Win32__impl_l0.HACCEL, cAccelEntries: Int32, lpMsg: CPointer<Win32__impl_l0.MSG>, lpwCmd: CPointer<UInt16>): Int32
-    func OleCreateMenuDescriptor(hmenuCombined: Win32__impl_l0.HMENU, lpMenuWidths: CPointer<Win32__impl_l0.OLEMENUGROUPWIDTHS>): IntNative
+    func OleFlushClipboard(): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleFlushClipboard == "on"]
+public unsafe func Windows_OleFlushClipboard(): Int32 {
+    return OleFlushClipboard()
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleGetAutoConvert == "on"]
+foreign {
+    func OleGetAutoConvert(clsidOld: CPointer<GUID>, pClsidNew: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleGetAutoConvert == "on"]
+public unsafe func Windows_OleGetAutoConvert(clsidOld: CPointer<GUID>, pClsidNew: CPointer<GUID>): Int32 {
+    return OleGetAutoConvert(clsidOld, pClsidNew)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleGetClipboard == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func OleGetClipboard(ppDataObj: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleGetClipboard == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_OleGetClipboard(ppDataObj: CPointer<CPointer<Unit>>): Int32 {
+    return OleGetClipboard(ppDataObj)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleGetIconOfClass == "on"]
+foreign {
+    // param-hint: lpszLabel optional
+    func OleGetIconOfClass(rclsid: CPointer<GUID>, lpszLabel: CPointer<UInt16>, fUseTypeAsLabel: Int32): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleGetIconOfClass == "on"]
+public unsafe func Windows_OleGetIconOfClass(rclsid: CPointer<GUID>, lpszLabel: CPointer<UInt16>, fUseTypeAsLabel: Int32): CPointer<Unit> {
+    return OleGetIconOfClass(rclsid, lpszLabel, fUseTypeAsLabel)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleInitialize == "on"]
+foreign {
+    // param-hint: pvReserved reserved
+    func OleInitialize(pvReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleInitialize == "on"]
+public unsafe func Windows_OleInitialize(pvReserved: CPointer<Unit>): Int32 {
+    return OleInitialize(pvReserved)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleIsCurrentClipboard == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func OleIsCurrentClipboard(pDataObj: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleIsCurrentClipboard == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_OleIsCurrentClipboard(pDataObj: CPointer<Unit>): Int32 {
+    return OleIsCurrentClipboard(pDataObj)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleIsRunning == "on"]
+foreign {
+    func OleIsRunning(pObject: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleIsRunning == "on"]
+public unsafe func Windows_OleIsRunning(pObject: CPointer<Unit>): Int32 {
+    return OleIsRunning(pObject)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleLoad == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func OleLoad(pStg: CPointer<Unit>, riid: CPointer<GUID>, pClientSite: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleLoad == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_OleLoad(pStg: CPointer<Unit>, riid: CPointer<GUID>, pClientSite: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32 {
+    return OleLoad(pStg, riid, pClientSite, ppvObj)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleLoadFromStream == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func OleLoadFromStream(pStm: CPointer<Unit>, iidInterface: CPointer<GUID>, ppvObj: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleLoadFromStream == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_OleLoadFromStream(pStm: CPointer<Unit>, iidInterface: CPointer<GUID>, ppvObj: CPointer<CPointer<Unit>>): Int32 {
+    return OleLoadFromStream(pStm, iidInterface, ppvObj)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleLockRunning == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func OleLockRunning(pUnknown: CPointer<Unit>, fLock: Int32, fLastUnlockCloses: Int32): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleLockRunning == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_OleLockRunning(pUnknown: CPointer<Unit>, fLock: Int32, fLastUnlockCloses: Int32): Int32 {
+    return OleLockRunning(pUnknown, fLock, fLastUnlockCloses)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleQueryCreateFromData == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func OleQueryCreateFromData(pSrcDataObject: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleQueryCreateFromData == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_OleQueryCreateFromData(pSrcDataObject: CPointer<Unit>): Int32 {
+    return OleQueryCreateFromData(pSrcDataObject)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleQueryLinkFromData == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func OleQueryLinkFromData(pSrcDataObject: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleQueryLinkFromData == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_OleQueryLinkFromData(pSrcDataObject: CPointer<Unit>): Int32 {
+    return OleQueryLinkFromData(pSrcDataObject)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleRegEnumVerbs == "on"]
+foreign {
+    func OleRegEnumVerbs(clsid: CPointer<GUID>, ppenum: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleRegEnumVerbs == "on"]
+public unsafe func Windows_OleRegEnumVerbs(clsid: CPointer<GUID>, ppenum: CPointer<CPointer<Unit>>): Int32 {
+    return OleRegEnumVerbs(clsid, ppenum)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleRegGetMiscStatus == "on"]
+foreign {
+    func OleRegGetMiscStatus(clsid: CPointer<GUID>, dwAspect: UInt32, pdwStatus: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleRegGetMiscStatus == "on"]
+public unsafe func Windows_OleRegGetMiscStatus(clsid: CPointer<GUID>, dwAspect: UInt32, pdwStatus: CPointer<UInt32>): Int32 {
+    return OleRegGetMiscStatus(clsid, dwAspect, pdwStatus)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleRegGetUserType == "on"]
+foreign {
+    func OleRegGetUserType(clsid: CPointer<GUID>, dwFormOfType: UInt32, pszUserType: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleRegGetUserType == "on"]
+public unsafe func Windows_OleRegGetUserType(clsid: CPointer<GUID>, dwFormOfType: UInt32, pszUserType: CPointer<CPointer<UInt16>>): Int32 {
+    return OleRegGetUserType(clsid, dwFormOfType, pszUserType)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleRun == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func OleRun(pUnknown: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleRun == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_OleRun(pUnknown: CPointer<Unit>): Int32 {
+    return OleRun(pUnknown)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleSave == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func OleSave(pPS: CPointer<Unit>, pStg: CPointer<Unit>, fSameAsLoad: Int32): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleSave == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_OleSave(pPS: CPointer<Unit>, pStg: CPointer<Unit>, fSameAsLoad: Int32): Int32 {
+    return OleSave(pPS, pStg, fSameAsLoad)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleSaveToStream == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func OleSaveToStream(pPStm: CPointer<Unit>, pStm: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleSaveToStream == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_OleSaveToStream(pPStm: CPointer<Unit>, pStm: CPointer<Unit>): Int32 {
+    return OleSaveToStream(pPStm, pStm)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleSetClipboard == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func OleSetClipboard(pDataObj: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleSetClipboard == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_OleSetClipboard(pDataObj: CPointer<Unit>): Int32 {
+    return OleSetClipboard(pDataObj)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleSetContainedObject == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func OleSetContainedObject(pUnknown: CPointer<Unit>, fContained: Int32): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleSetContainedObject == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_OleSetContainedObject(pUnknown: CPointer<Unit>, fContained: Int32): Int32 {
+    return OleSetContainedObject(pUnknown, fContained)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleSetMenuDescriptor == "on"]
+foreign {
+    func OleSetMenuDescriptor(holemenu: IntNative, hwndFrame: CPointer<Unit>, hwndActiveObject: CPointer<Unit>, lpFrame: CPointer<Unit>, lpActiveObj: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleSetMenuDescriptor == "on"]
+public unsafe func Windows_OleSetMenuDescriptor(holemenu: IntNative, hwndFrame: CPointer<Unit>, hwndActiveObject: CPointer<Unit>, lpFrame: CPointer<Unit>, lpActiveObj: CPointer<Unit>): Int32 {
+    return OleSetMenuDescriptor(holemenu, hwndFrame, hwndActiveObject, lpFrame, lpActiveObj)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleTranslateAccelerator == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
     func OleTranslateAccelerator(lpFrame: CPointer<Unit>, lpFrameInfo: CPointer<Win32__impl_l1.OLEINPLACEFRAMEINFO>, lpmsg: CPointer<Win32__impl_l0.MSG>): Int32
 }
 
-@When[OLEAUT32 == "on"]
-foreign {
-    func CreateErrorInfo(pperrinfo: CPointer<CPointer<Unit>>): Int32
-    func GetAltMonthNames(lcid: UInt32, prgp: CPointer<CPointer<CPointer<UInt16>>>): Int32
-    func GetRecordInfoFromGuids(rGuidTypeLib: CPointer<GUID>, uVerMajor: UInt32, uVerMinor: UInt32, lcid: UInt32, rGuidTypeInfo: CPointer<GUID>, ppRecInfo: CPointer<CPointer<Unit>>): Int32
-    func OaBuildVersion(): UInt32
-    func OaEnablePerUserTLibRegistration(): Unit
-    func QueryPathOfRegTypeLib(guid: CPointer<GUID>, wMaj: UInt16, wMin: UInt16, lcid: UInt32, lpbstrPathName: CPointer<CPointer<UInt16>>): Int32
-    // param-hint: pvReserved reserved
-    func RevokeActiveObject(dwRegister: UInt32, pvReserved: CPointer<Unit>): Int32
-    func SafeArrayReleaseData(pData: CPointer<Unit>): Unit
-    func VarBoolFromDate(dateIn: Float64, pboolOut: CPointer<Int16>): Int32
-    func VarBoolFromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pboolOut: CPointer<Int16>): Int32
-    func VarBoolFromI1(cIn: Int8, pboolOut: CPointer<Int16>): Int32
-    func VarBoolFromI2(sIn: Int16, pboolOut: CPointer<Int16>): Int32
-    func VarBoolFromI4(lIn: Int32, pboolOut: CPointer<Int16>): Int32
-    func VarBoolFromI8(i64In: Int64, pboolOut: CPointer<Int16>): Int32
-    func VarBoolFromR4(fltIn: Float32, pboolOut: CPointer<Int16>): Int32
-    func VarBoolFromR8(dblIn: Float64, pboolOut: CPointer<Int16>): Int32
-    func VarBoolFromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pboolOut: CPointer<Int16>): Int32
-    func VarBoolFromUI1(bIn: UInt8, pboolOut: CPointer<Int16>): Int32
-    func VarBoolFromUI2(uiIn: UInt16, pboolOut: CPointer<Int16>): Int32
-    func VarBoolFromUI4(ulIn: UInt32, pboolOut: CPointer<Int16>): Int32
-    func VarBoolFromUI8(i64In: UInt64, pboolOut: CPointer<Int16>): Int32
-    func VarBstrCat(bstrLeft: CPointer<UInt16>, bstrRight: CPointer<UInt16>, pbstrResult: CPointer<CPointer<UInt16>>): Int32
-    func VarBstrCmp(bstrLeft: CPointer<UInt16>, bstrRight: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32): Int32
-    func VarBstrFromBool(boolIn: Int16, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
-    func VarBstrFromDate(dateIn: Float64, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
-    func VarBstrFromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
-    func VarBstrFromI1(cIn: Int8, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
-    func VarBstrFromI2(iVal: Int16, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
-    func VarBstrFromI4(lIn: Int32, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
-    func VarBstrFromI8(i64In: Int64, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
-    func VarBstrFromR4(fltIn: Float32, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
-    func VarBstrFromR8(dblIn: Float64, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
-    func VarBstrFromUI1(bVal: UInt8, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
-    func VarBstrFromUI2(uiIn: UInt16, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
-    func VarBstrFromUI4(ulIn: UInt32, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
-    func VarBstrFromUI8(ui64In: UInt64, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
-    func VarDateFromBool(boolIn: Int16, pdateOut: CPointer<Float64>): Int32
-    func VarDateFromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pdateOut: CPointer<Float64>): Int32
-    func VarDateFromI1(cIn: Int8, pdateOut: CPointer<Float64>): Int32
-    func VarDateFromI2(sIn: Int16, pdateOut: CPointer<Float64>): Int32
-    func VarDateFromI4(lIn: Int32, pdateOut: CPointer<Float64>): Int32
-    func VarDateFromI8(i64In: Int64, pdateOut: CPointer<Float64>): Int32
-    func VarDateFromR4(fltIn: Float32, pdateOut: CPointer<Float64>): Int32
-    func VarDateFromR8(dblIn: Float64, pdateOut: CPointer<Float64>): Int32
-    func VarDateFromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pdateOut: CPointer<Float64>): Int32
-    func VarDateFromUI1(bIn: UInt8, pdateOut: CPointer<Float64>): Int32
-    func VarDateFromUI2(uiIn: UInt16, pdateOut: CPointer<Float64>): Int32
-    func VarDateFromUI4(ulIn: UInt32, pdateOut: CPointer<Float64>): Int32
-    func VarDateFromUI8(ui64In: UInt64, pdateOut: CPointer<Float64>): Int32
-    func VarDateFromUdate(pudateIn: CPointer<Win32__impl_l0.UDATE>, dwFlags: UInt32, pdateOut: CPointer<Float64>): Int32
-    func VarDateFromUdateEx(pudateIn: CPointer<Win32__impl_l0.UDATE>, lcid: UInt32, dwFlags: UInt32, pdateOut: CPointer<Float64>): Int32
-    func VarDecAbs(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pdecResult: CPointer<Win32_Foundation.DECIMAL>): Int32
-    func VarDecAdd(pdecLeft: CPointer<Win32_Foundation.DECIMAL>, pdecRight: CPointer<Win32_Foundation.DECIMAL>, pdecResult: CPointer<Win32_Foundation.DECIMAL>): Int32
-    func VarDecCmp(pdecLeft: CPointer<Win32_Foundation.DECIMAL>, pdecRight: CPointer<Win32_Foundation.DECIMAL>): UInt32
-    func VarDecCmpR8(pdecLeft: CPointer<Win32_Foundation.DECIMAL>, dblRight: Float64): UInt32
-    func VarDecDiv(pdecLeft: CPointer<Win32_Foundation.DECIMAL>, pdecRight: CPointer<Win32_Foundation.DECIMAL>, pdecResult: CPointer<Win32_Foundation.DECIMAL>): Int32
-    func VarDecFix(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pdecResult: CPointer<Win32_Foundation.DECIMAL>): Int32
-    func VarDecFromBool(boolIn: Int16, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32
-    func VarDecFromDate(dateIn: Float64, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32
-    func VarDecFromI1(cIn: Int8, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32
-    func VarDecFromI2(uiIn: Int16, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32
-    func VarDecFromI4(lIn: Int32, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32
-    func VarDecFromI8(i64In: Int64, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32
-    func VarDecFromR4(fltIn: Float32, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32
-    func VarDecFromR8(dblIn: Float64, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32
-    func VarDecFromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32
-    func VarDecFromUI1(bIn: UInt8, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32
-    func VarDecFromUI2(uiIn: UInt16, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32
-    func VarDecFromUI4(ulIn: UInt32, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32
-    func VarDecFromUI8(ui64In: UInt64, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32
-    func VarDecInt(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pdecResult: CPointer<Win32_Foundation.DECIMAL>): Int32
-    func VarDecMul(pdecLeft: CPointer<Win32_Foundation.DECIMAL>, pdecRight: CPointer<Win32_Foundation.DECIMAL>, pdecResult: CPointer<Win32_Foundation.DECIMAL>): Int32
-    func VarDecNeg(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pdecResult: CPointer<Win32_Foundation.DECIMAL>): Int32
-    func VarDecRound(pdecIn: CPointer<Win32_Foundation.DECIMAL>, cDecimals: Int32, pdecResult: CPointer<Win32_Foundation.DECIMAL>): Int32
-    func VarDecSub(pdecLeft: CPointer<Win32_Foundation.DECIMAL>, pdecRight: CPointer<Win32_Foundation.DECIMAL>, pdecResult: CPointer<Win32_Foundation.DECIMAL>): Int32
-    func VarI1FromBool(boolIn: Int16, pcOut: CPointer<UInt8>): Int32
-    func VarI1FromDate(dateIn: Float64, pcOut: CPointer<UInt8>): Int32
-    func VarI1FromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pcOut: CPointer<UInt8>): Int32
-    func VarI1FromI2(uiIn: Int16, pcOut: CPointer<UInt8>): Int32
-    func VarI1FromI4(lIn: Int32, pcOut: CPointer<UInt8>): Int32
-    func VarI1FromI8(i64In: Int64, pcOut: CPointer<UInt8>): Int32
-    func VarI1FromR4(fltIn: Float32, pcOut: CPointer<UInt8>): Int32
-    func VarI1FromR8(dblIn: Float64, pcOut: CPointer<UInt8>): Int32
-    func VarI1FromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pcOut: CPointer<UInt8>): Int32
-    func VarI1FromUI1(bIn: UInt8, pcOut: CPointer<UInt8>): Int32
-    func VarI1FromUI2(uiIn: UInt16, pcOut: CPointer<UInt8>): Int32
-    func VarI1FromUI4(ulIn: UInt32, pcOut: CPointer<UInt8>): Int32
-    func VarI1FromUI8(i64In: UInt64, pcOut: CPointer<UInt8>): Int32
-    func VarI2FromBool(boolIn: Int16, psOut: CPointer<Int16>): Int32
-    func VarI2FromDate(dateIn: Float64, psOut: CPointer<Int16>): Int32
-    func VarI2FromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, psOut: CPointer<Int16>): Int32
-    func VarI2FromI1(cIn: Int8, psOut: CPointer<Int16>): Int32
-    func VarI2FromI4(lIn: Int32, psOut: CPointer<Int16>): Int32
-    func VarI2FromI8(i64In: Int64, psOut: CPointer<Int16>): Int32
-    func VarI2FromR4(fltIn: Float32, psOut: CPointer<Int16>): Int32
-    func VarI2FromR8(dblIn: Float64, psOut: CPointer<Int16>): Int32
-    func VarI2FromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, psOut: CPointer<Int16>): Int32
-    func VarI2FromUI1(bIn: UInt8, psOut: CPointer<Int16>): Int32
-    func VarI2FromUI2(uiIn: UInt16, psOut: CPointer<Int16>): Int32
-    func VarI2FromUI4(ulIn: UInt32, psOut: CPointer<Int16>): Int32
-    func VarI2FromUI8(ui64In: UInt64, psOut: CPointer<Int16>): Int32
-    func VarI4FromBool(boolIn: Int16, plOut: CPointer<Int32>): Int32
-    func VarI4FromDate(dateIn: Float64, plOut: CPointer<Int32>): Int32
-    func VarI4FromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, plOut: CPointer<Int32>): Int32
-    func VarI4FromI1(cIn: Int8, plOut: CPointer<Int32>): Int32
-    func VarI4FromI2(sIn: Int16, plOut: CPointer<Int32>): Int32
-    func VarI4FromI8(i64In: Int64, plOut: CPointer<Int32>): Int32
-    func VarI4FromR4(fltIn: Float32, plOut: CPointer<Int32>): Int32
-    func VarI4FromR8(dblIn: Float64, plOut: CPointer<Int32>): Int32
-    func VarI4FromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, plOut: CPointer<Int32>): Int32
-    func VarI4FromUI1(bIn: UInt8, plOut: CPointer<Int32>): Int32
-    func VarI4FromUI2(uiIn: UInt16, plOut: CPointer<Int32>): Int32
-    func VarI4FromUI4(ulIn: UInt32, plOut: CPointer<Int32>): Int32
-    func VarI4FromUI8(ui64In: UInt64, plOut: CPointer<Int32>): Int32
-    func VarI8FromBool(boolIn: Int16, pi64Out: CPointer<Int64>): Int32
-    func VarI8FromDate(dateIn: Float64, pi64Out: CPointer<Int64>): Int32
-    func VarI8FromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pi64Out: CPointer<Int64>): Int32
-    func VarI8FromI1(cIn: Int8, pi64Out: CPointer<Int64>): Int32
-    func VarI8FromI2(sIn: Int16, pi64Out: CPointer<Int64>): Int32
-    func VarI8FromR4(fltIn: Float32, pi64Out: CPointer<Int64>): Int32
-    func VarI8FromR8(dblIn: Float64, pi64Out: CPointer<Int64>): Int32
-    func VarI8FromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pi64Out: CPointer<Int64>): Int32
-    func VarI8FromUI1(bIn: UInt8, pi64Out: CPointer<Int64>): Int32
-    func VarI8FromUI2(uiIn: UInt16, pi64Out: CPointer<Int64>): Int32
-    func VarI8FromUI4(ulIn: UInt32, pi64Out: CPointer<Int64>): Int32
-    func VarI8FromUI8(ui64In: UInt64, pi64Out: CPointer<Int64>): Int32
-    func VarMonthName(iMonth: Int32, fAbbrev: Int32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
-    func VarParseNumFromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pnumprs: CPointer<Win32__impl_l1.NUMPARSE>, rgbDig: CPointer<UInt8>): Int32
-    func VarR4CmpR8(fltLeft: Float32, dblRight: Float64): UInt32
-    func VarR4FromBool(boolIn: Int16, pfltOut: CPointer<Float32>): Int32
-    func VarR4FromDate(dateIn: Float64, pfltOut: CPointer<Float32>): Int32
-    func VarR4FromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pfltOut: CPointer<Float32>): Int32
-    func VarR4FromI1(cIn: Int8, pfltOut: CPointer<Float32>): Int32
-    func VarR4FromI2(sIn: Int16, pfltOut: CPointer<Float32>): Int32
-    func VarR4FromI4(lIn: Int32, pfltOut: CPointer<Float32>): Int32
-    func VarR4FromI8(i64In: Int64, pfltOut: CPointer<Float32>): Int32
-    func VarR4FromR8(dblIn: Float64, pfltOut: CPointer<Float32>): Int32
-    func VarR4FromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pfltOut: CPointer<Float32>): Int32
-    func VarR4FromUI1(bIn: UInt8, pfltOut: CPointer<Float32>): Int32
-    func VarR4FromUI2(uiIn: UInt16, pfltOut: CPointer<Float32>): Int32
-    func VarR4FromUI4(ulIn: UInt32, pfltOut: CPointer<Float32>): Int32
-    func VarR4FromUI8(ui64In: UInt64, pfltOut: CPointer<Float32>): Int32
-    func VarR8FromBool(boolIn: Int16, pdblOut: CPointer<Float64>): Int32
-    func VarR8FromDate(dateIn: Float64, pdblOut: CPointer<Float64>): Int32
-    func VarR8FromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pdblOut: CPointer<Float64>): Int32
-    func VarR8FromI1(cIn: Int8, pdblOut: CPointer<Float64>): Int32
-    func VarR8FromI2(sIn: Int16, pdblOut: CPointer<Float64>): Int32
-    func VarR8FromI4(lIn: Int32, pdblOut: CPointer<Float64>): Int32
-    func VarR8FromI8(i64In: Int64, pdblOut: CPointer<Float64>): Int32
-    func VarR8FromR4(fltIn: Float32, pdblOut: CPointer<Float64>): Int32
-    func VarR8FromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pdblOut: CPointer<Float64>): Int32
-    func VarR8FromUI1(bIn: UInt8, pdblOut: CPointer<Float64>): Int32
-    func VarR8FromUI2(uiIn: UInt16, pdblOut: CPointer<Float64>): Int32
-    func VarR8FromUI4(ulIn: UInt32, pdblOut: CPointer<Float64>): Int32
-    func VarR8FromUI8(ui64In: UInt64, pdblOut: CPointer<Float64>): Int32
-    func VarR8Pow(dblLeft: Float64, dblRight: Float64, pdblResult: CPointer<Float64>): Int32
-    func VarR8Round(dblIn: Float64, cDecimals: Int32, pdblResult: CPointer<Float64>): Int32
-    // param-hint: pstrFormat optional
-    // param-hint: rgbTok len=param[2]
-    // param-hint: pcbActual optional
-    func VarTokenizeFormatString(pstrFormat: CPointer<UInt16>, rgbTok: CPointer<UInt8>, cbTok: Int32, iFirstDay: Int32, iFirstWeek: Int32, lcid: UInt32, pcbActual: CPointer<Int32>): Int32
-    func VarUI1FromBool(boolIn: Int16, pbOut: CPointer<UInt8>): Int32
-    func VarUI1FromDate(dateIn: Float64, pbOut: CPointer<UInt8>): Int32
-    func VarUI1FromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pbOut: CPointer<UInt8>): Int32
-    func VarUI1FromI1(cIn: Int8, pbOut: CPointer<UInt8>): Int32
-    func VarUI1FromI2(sIn: Int16, pbOut: CPointer<UInt8>): Int32
-    func VarUI1FromI4(lIn: Int32, pbOut: CPointer<UInt8>): Int32
-    func VarUI1FromI8(i64In: Int64, pbOut: CPointer<UInt8>): Int32
-    func VarUI1FromR4(fltIn: Float32, pbOut: CPointer<UInt8>): Int32
-    func VarUI1FromR8(dblIn: Float64, pbOut: CPointer<UInt8>): Int32
-    func VarUI1FromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pbOut: CPointer<UInt8>): Int32
-    func VarUI1FromUI2(uiIn: UInt16, pbOut: CPointer<UInt8>): Int32
-    func VarUI1FromUI4(ulIn: UInt32, pbOut: CPointer<UInt8>): Int32
-    func VarUI1FromUI8(ui64In: UInt64, pbOut: CPointer<UInt8>): Int32
-    func VarUI2FromBool(boolIn: Int16, puiOut: CPointer<UInt16>): Int32
-    func VarUI2FromDate(dateIn: Float64, puiOut: CPointer<UInt16>): Int32
-    func VarUI2FromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, puiOut: CPointer<UInt16>): Int32
-    func VarUI2FromI1(cIn: Int8, puiOut: CPointer<UInt16>): Int32
-    func VarUI2FromI2(uiIn: Int16, puiOut: CPointer<UInt16>): Int32
-    func VarUI2FromI4(lIn: Int32, puiOut: CPointer<UInt16>): Int32
-    func VarUI2FromI8(i64In: Int64, puiOut: CPointer<UInt16>): Int32
-    func VarUI2FromR4(fltIn: Float32, puiOut: CPointer<UInt16>): Int32
-    func VarUI2FromR8(dblIn: Float64, puiOut: CPointer<UInt16>): Int32
-    func VarUI2FromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, puiOut: CPointer<UInt16>): Int32
-    func VarUI2FromUI1(bIn: UInt8, puiOut: CPointer<UInt16>): Int32
-    func VarUI2FromUI4(ulIn: UInt32, puiOut: CPointer<UInt16>): Int32
-    func VarUI2FromUI8(i64In: UInt64, puiOut: CPointer<UInt16>): Int32
-    func VarUI4FromBool(boolIn: Int16, pulOut: CPointer<UInt32>): Int32
-    func VarUI4FromDate(dateIn: Float64, pulOut: CPointer<UInt32>): Int32
-    func VarUI4FromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pulOut: CPointer<UInt32>): Int32
-    func VarUI4FromI1(cIn: Int8, pulOut: CPointer<UInt32>): Int32
-    func VarUI4FromI2(uiIn: Int16, pulOut: CPointer<UInt32>): Int32
-    func VarUI4FromI4(lIn: Int32, pulOut: CPointer<UInt32>): Int32
-    func VarUI4FromI8(i64In: Int64, plOut: CPointer<UInt32>): Int32
-    func VarUI4FromR4(fltIn: Float32, pulOut: CPointer<UInt32>): Int32
-    func VarUI4FromR8(dblIn: Float64, pulOut: CPointer<UInt32>): Int32
-    func VarUI4FromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pulOut: CPointer<UInt32>): Int32
-    func VarUI4FromUI1(bIn: UInt8, pulOut: CPointer<UInt32>): Int32
-    func VarUI4FromUI2(uiIn: UInt16, pulOut: CPointer<UInt32>): Int32
-    func VarUI4FromUI8(ui64In: UInt64, plOut: CPointer<UInt32>): Int32
-    func VarUI8FromBool(boolIn: Int16, pi64Out: CPointer<UInt64>): Int32
-    func VarUI8FromDate(dateIn: Float64, pi64Out: CPointer<UInt64>): Int32
-    func VarUI8FromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pi64Out: CPointer<UInt64>): Int32
-    func VarUI8FromI1(cIn: Int8, pi64Out: CPointer<UInt64>): Int32
-    func VarUI8FromI2(sIn: Int16, pi64Out: CPointer<UInt64>): Int32
-    func VarUI8FromI8(ui64In: Int64, pi64Out: CPointer<UInt64>): Int32
-    func VarUI8FromR4(fltIn: Float32, pi64Out: CPointer<UInt64>): Int32
-    func VarUI8FromR8(dblIn: Float64, pi64Out: CPointer<UInt64>): Int32
-    func VarUI8FromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pi64Out: CPointer<UInt64>): Int32
-    func VarUI8FromUI1(bIn: UInt8, pi64Out: CPointer<UInt64>): Int32
-    func VarUI8FromUI2(uiIn: UInt16, pi64Out: CPointer<UInt64>): Int32
-    func VarUI8FromUI4(ulIn: UInt32, pi64Out: CPointer<UInt64>): Int32
-    func VarUdateFromDate(dateIn: Float64, dwFlags: UInt32, pudateOut: CPointer<Win32__impl_l0.UDATE>): Int32
-    func VarWeekdayName(iWeekday: Int32, fAbbrev: Int32, iFirstDay: Int32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleTranslateAccelerator == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_OleTranslateAccelerator(lpFrame: CPointer<Unit>, lpFrameInfo: CPointer<Win32__impl_l1.OLEINPLACEFRAMEINFO>, lpmsg: CPointer<Win32__impl_l0.MSG>): Int32 {
+    return OleTranslateAccelerator(lpFrame, lpFrameInfo, lpmsg)
 }
 
-@When[OLEAUT32 == "on" && (Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on")]
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleUninitialize == "on"]
 foreign {
-    func OleCreatePictureIndirect(lpPictDesc: CPointer<Win32__impl_l1.PICTDESC>, riid: CPointer<GUID>, fOwn: Int32, lplpvObj: CPointer<CPointer<Unit>>): Int32
+    func OleUninitialize(): Unit
 }
 
-@When[OLEAUT32 == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on")]
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleUninitialize == "on"]
+public unsafe func Windows_OleUninitialize(): Unit {
+    OleUninitialize()
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_RegisterDragDrop == "on"]
+foreign {
+    func RegisterDragDrop(hwnd: CPointer<Unit>, pDropTarget: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_RegisterDragDrop == "on"]
+public unsafe func Windows_RegisterDragDrop(hwnd: CPointer<Unit>, pDropTarget: CPointer<Unit>): Int32 {
+    return RegisterDragDrop(hwnd, pDropTarget)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_ReleaseStgMedium == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func ReleaseStgMedium(param0: CPointer<STGMEDIUM>): Unit
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_ReleaseStgMedium == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_ReleaseStgMedium(param0: CPointer<STGMEDIUM>): Unit {
+    ReleaseStgMedium(param0)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_RevokeDragDrop == "on"]
+foreign {
+    func RevokeDragDrop(hwnd: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_RevokeDragDrop == "on"]
+public unsafe func Windows_RevokeDragDrop(hwnd: CPointer<Unit>): Int32 {
+    return RevokeDragDrop(hwnd)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_BstrFromVector == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func BstrFromVector(psa: CPointer<Win32__impl_l1.SAFEARRAY>, pbstr: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_BstrFromVector == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_BstrFromVector(psa: CPointer<Win32__impl_l1.SAFEARRAY>, pbstr: CPointer<CPointer<UInt16>>): Int32 {
+    return BstrFromVector(psa, pbstr)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_ClearCustData == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
 foreign {
     func ClearCustData(pCustData: CPointer<CUSTDATA>): Unit
 }
 
-@When[OLEAUT32 == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on")]
-foreign {
-    // param-hint: puArgErr optional
-    func DispGetParam(pdispparams: CPointer<DISPPARAMS>, position: UInt32, vtTarg: UInt16, pvarResult: CPointer<VARIANT>, puArgErr: CPointer<UInt32>): Int32
-    func DispInvoke(_this: CPointer<Unit>, ptinfo: CPointer<Unit>, dispidMember: Int32, wFlags: UInt16, pparams: CPointer<DISPPARAMS>, pvarResult: CPointer<VARIANT>, pexcepinfo: CPointer<Win32__impl_l0.EXCEPINFO>, puArgErr: CPointer<UInt32>): Int32
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_ClearCustData == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_ClearCustData(pCustData: CPointer<CUSTDATA>): Unit {
+    ClearCustData(pCustData)
 }
 
-@When[OLEAUT32 == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on")]
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_CreateDispTypeInfo == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func CreateDispTypeInfo(pidata: CPointer<INTERFACEDATA>, lcid: UInt32, pptinfo: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_CreateDispTypeInfo == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_CreateDispTypeInfo(pidata: CPointer<INTERFACEDATA>, lcid: UInt32, pptinfo: CPointer<CPointer<Unit>>): Int32 {
+    return CreateDispTypeInfo(pidata, lcid, pptinfo)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_CreateErrorInfo == "on"]
+foreign {
+    func CreateErrorInfo(pperrinfo: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_CreateErrorInfo == "on"]
+public unsafe func Windows_CreateErrorInfo(pperrinfo: CPointer<CPointer<Unit>>): Int32 {
+    return CreateErrorInfo(pperrinfo)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_CreateStdDispatch == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func CreateStdDispatch(punkOuter: CPointer<Unit>, pvThis: CPointer<Unit>, ptinfo: CPointer<Unit>, ppunkStdDisp: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_CreateStdDispatch == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CreateStdDispatch(punkOuter: CPointer<Unit>, pvThis: CPointer<Unit>, ptinfo: CPointer<Unit>, ppunkStdDisp: CPointer<CPointer<Unit>>): Int32 {
+    return CreateStdDispatch(punkOuter, pvThis, ptinfo, ppunkStdDisp)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_CreateTypeLib == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func CreateTypeLib(syskind: Int32, szFile: CPointer<UInt16>, ppctlib: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_CreateTypeLib == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CreateTypeLib(syskind: Int32, szFile: CPointer<UInt16>, ppctlib: CPointer<CPointer<Unit>>): Int32 {
+    return CreateTypeLib(syskind, szFile, ppctlib)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_CreateTypeLib2 == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func CreateTypeLib2(syskind: Int32, szFile: CPointer<UInt16>, ppctlib: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_CreateTypeLib2 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CreateTypeLib2(syskind: Int32, szFile: CPointer<UInt16>, ppctlib: CPointer<CPointer<Unit>>): Int32 {
+    return CreateTypeLib2(syskind, szFile, ppctlib)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_DispCallFunc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
 foreign {
     // param-hint: pvInstance optional
     // param-hint: prgvt len=param[4]
     // param-hint: prgpvarg len=param[4]
     func DispCallFunc(pvInstance: CPointer<Unit>, oVft: UIntNative, cc: Int32, vtReturn: UInt16, cActuals: UInt32, prgvt: CPointer<UInt16>, prgpvarg: CPointer<CPointer<VARIANT>>, pvargResult: CPointer<VARIANT>): Int32
-    func OleLoadPictureFile(varFileName: VARIANT, lplpdispPicture: CPointer<CPointer<Unit>>): Int32
-    func OleLoadPictureFileEx(varFileName: VARIANT, xSizeDesired: UInt32, ySizeDesired: UInt32, dwFlags: UInt32, lplpdispPicture: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[OLEAUT32 == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on")]
-foreign {
-    func CreateDispTypeInfo(pidata: CPointer<INTERFACEDATA>, lcid: UInt32, pptinfo: CPointer<CPointer<Unit>>): Int32
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_DispCallFunc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_DispCallFunc(pvInstance: CPointer<Unit>, oVft: UIntNative, cc: Int32, vtReturn: UInt16, cActuals: UInt32, prgvt: CPointer<UInt16>, prgpvarg: CPointer<CPointer<VARIANT>>, pvargResult: CPointer<VARIANT>): Int32 {
+    return DispCallFunc(pvInstance, oVft, cc, vtReturn, cActuals, prgvt, prgpvarg, pvargResult)
 }
 
-@When[OLEAUT32 == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on")]
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_DispGetIDsOfNames == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func VarAbs(pvarIn: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
-    func VarAdd(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
-    func VarAnd(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
-    func VarCat(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
-    func VarCmp(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, lcid: UInt32, dwFlags: UInt32): UInt32
-    func VarDiv(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
-    func VarEqv(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
-    func VarFix(pvarIn: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
-    // param-hint: pstrFormat optional
-    func VarFormat(pvarIn: CPointer<VARIANT>, pstrFormat: CPointer<UInt16>, iFirstDay: Int32, iFirstWeek: Int32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
-    func VarFormatCurrency(pvarIn: CPointer<VARIANT>, iNumDig: Int32, iIncLead: Int32, iUseParens: Int32, iGroup: Int32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
-    func VarFormatDateTime(pvarIn: CPointer<VARIANT>, iNamedFormat: Int32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
-    // param-hint: pstrFormat optional
-    func VarFormatFromTokens(pvarIn: CPointer<VARIANT>, pstrFormat: CPointer<UInt16>, pbTokCur: CPointer<UInt8>, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>, lcid: UInt32): Int32
-    func VarFormatNumber(pvarIn: CPointer<VARIANT>, iNumDig: Int32, iIncLead: Int32, iUseParens: Int32, iGroup: Int32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
-    func VarFormatPercent(pvarIn: CPointer<VARIANT>, iNumDig: Int32, iIncLead: Int32, iUseParens: Int32, iGroup: Int32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
-    func VarIdiv(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
-    func VarImp(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
-    func VarInt(pvarIn: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
-    func VarMod(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
-    func VarMul(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
-    func VarNeg(pvarIn: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
-    func VarNot(pvarIn: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
-    func VarNumFromParseNum(pnumprs: CPointer<Win32__impl_l1.NUMPARSE>, rgbDig: CPointer<UInt8>, dwVtBits: UInt32, pvar: CPointer<VARIANT>): Int32
-    func VarOr(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
-    func VarPow(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
-    func VarRound(pvarIn: CPointer<VARIANT>, cDecimals: Int32, pvarResult: CPointer<VARIANT>): Int32
-    func VarSub(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
-    func VarXor(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
-}
-
-@When[OLEAUT32 == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on")]
-foreign {
-    func SafeArrayAllocDescriptorEx(vt: UInt16, cDims: UInt32, ppsaOut: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>): Int32
-    func SafeArrayCreate(vt: UInt16, cDims: UInt32, rgsabound: CPointer<Win32__impl_l0.SAFEARRAYBOUND>): CPointer<Win32__impl_l1.SAFEARRAY>
-    func SafeArrayCreateEx(vt: UInt16, cDims: UInt32, rgsabound: CPointer<Win32__impl_l0.SAFEARRAYBOUND>, pvExtra: CPointer<Unit>): CPointer<Win32__impl_l1.SAFEARRAY>
-    func SafeArrayCreateVector(vt: UInt16, lLbound: Int32, cElements: UInt32): CPointer<Win32__impl_l1.SAFEARRAY>
-    func SafeArrayCreateVectorEx(vt: UInt16, lLbound: Int32, cElements: UInt32, pvExtra: CPointer<Unit>): CPointer<Win32__impl_l1.SAFEARRAY>
-    func SafeArrayGetVartype(psa: CPointer<Win32__impl_l1.SAFEARRAY>, pvt: CPointer<UInt16>): Int32
-}
-
-@When[OLEAUT32 == "on" && Windows_Win32_Graphics_Gdi == "on"]
-foreign {
-    func OleTranslateColor(clr: UInt32, hpal: Win32_Graphics_Gdi.HPALETTE, lpcolorref: CPointer<UInt32>): Int32
-}
-
-@When[OLEAUT32 == "on" && Windows_Win32_System_Com == "on"]
-foreign {
-    func BstrFromVector(psa: CPointer<Win32__impl_l1.SAFEARRAY>, pbstr: CPointer<CPointer<UInt16>>): Int32
-    func CreateStdDispatch(punkOuter: CPointer<Unit>, pvThis: CPointer<Unit>, ptinfo: CPointer<Unit>, ppunkStdDisp: CPointer<CPointer<Unit>>): Int32
-    func CreateTypeLib(syskind: Int32, szFile: CPointer<UInt16>, ppctlib: CPointer<CPointer<Unit>>): Int32
-    func CreateTypeLib2(syskind: Int32, szFile: CPointer<UInt16>, ppctlib: CPointer<CPointer<Unit>>): Int32
     // param-hint: rgszNames len=param[2]
     // param-hint: rgdispid len=param[2]
     func DispGetIDsOfNames(ptinfo: CPointer<Unit>, rgszNames: CPointer<CPointer<UInt16>>, cNames: UInt32, rgdispid: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_DispGetIDsOfNames == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_DispGetIDsOfNames(ptinfo: CPointer<Unit>, rgszNames: CPointer<CPointer<UInt16>>, cNames: UInt32, rgdispid: CPointer<Int32>): Int32 {
+    return DispGetIDsOfNames(ptinfo, rgszNames, cNames, rgdispid)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_DispGetParam == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    // param-hint: puArgErr optional
+    func DispGetParam(pdispparams: CPointer<DISPPARAMS>, position: UInt32, vtTarg: UInt16, pvarResult: CPointer<VARIANT>, puArgErr: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_DispGetParam == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_DispGetParam(pdispparams: CPointer<DISPPARAMS>, position: UInt32, vtTarg: UInt16, pvarResult: CPointer<VARIANT>, puArgErr: CPointer<UInt32>): Int32 {
+    return DispGetParam(pdispparams, position, vtTarg, pvarResult, puArgErr)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_DispInvoke == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func DispInvoke(_this: CPointer<Unit>, ptinfo: CPointer<Unit>, dispidMember: Int32, wFlags: UInt16, pparams: CPointer<DISPPARAMS>, pvarResult: CPointer<VARIANT>, pexcepinfo: CPointer<Win32__impl_l0.EXCEPINFO>, puArgErr: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_DispInvoke == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_DispInvoke(_this: CPointer<Unit>, ptinfo: CPointer<Unit>, dispidMember: Int32, wFlags: UInt16, pparams: CPointer<DISPPARAMS>, pvarResult: CPointer<VARIANT>, pexcepinfo: CPointer<Win32__impl_l0.EXCEPINFO>, puArgErr: CPointer<UInt32>): Int32 {
+    return DispInvoke(_this, ptinfo, dispidMember, wFlags, pparams, pvarResult, pexcepinfo, puArgErr)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_GetActiveObject == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pvReserved reserved
     func GetActiveObject(rclsid: CPointer<GUID>, pvReserved: CPointer<Unit>, ppunk: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_GetActiveObject == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_GetActiveObject(rclsid: CPointer<GUID>, pvReserved: CPointer<Unit>, ppunk: CPointer<CPointer<Unit>>): Int32 {
+    return GetActiveObject(rclsid, pvReserved, ppunk)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_GetAltMonthNames == "on"]
+foreign {
+    func GetAltMonthNames(lcid: UInt32, prgp: CPointer<CPointer<CPointer<UInt16>>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_GetAltMonthNames == "on"]
+public unsafe func Windows_GetAltMonthNames(lcid: UInt32, prgp: CPointer<CPointer<CPointer<UInt16>>>): Int32 {
+    return GetAltMonthNames(lcid, prgp)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_GetRecordInfoFromGuids == "on"]
+foreign {
+    func GetRecordInfoFromGuids(rGuidTypeLib: CPointer<GUID>, uVerMajor: UInt32, uVerMinor: UInt32, lcid: UInt32, rGuidTypeInfo: CPointer<GUID>, ppRecInfo: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_GetRecordInfoFromGuids == "on"]
+public unsafe func Windows_GetRecordInfoFromGuids(rGuidTypeLib: CPointer<GUID>, uVerMajor: UInt32, uVerMinor: UInt32, lcid: UInt32, rGuidTypeInfo: CPointer<GUID>, ppRecInfo: CPointer<CPointer<Unit>>): Int32 {
+    return GetRecordInfoFromGuids(rGuidTypeLib, uVerMajor, uVerMinor, lcid, rGuidTypeInfo, ppRecInfo)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_GetRecordInfoFromTypeInfo == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func GetRecordInfoFromTypeInfo(pTypeInfo: CPointer<Unit>, ppRecInfo: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_GetRecordInfoFromTypeInfo == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_GetRecordInfoFromTypeInfo(pTypeInfo: CPointer<Unit>, ppRecInfo: CPointer<CPointer<Unit>>): Int32 {
+    return GetRecordInfoFromTypeInfo(pTypeInfo, ppRecInfo)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_LHashValOfNameSys == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func LHashValOfNameSys(syskind: Int32, lcid: UInt32, szName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_LHashValOfNameSys == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_LHashValOfNameSys(syskind: Int32, lcid: UInt32, szName: CPointer<UInt16>): UInt32 {
+    return LHashValOfNameSys(syskind, lcid, szName)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_LHashValOfNameSysA == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func LHashValOfNameSysA(syskind: Int32, lcid: UInt32, szName: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_LHashValOfNameSysA == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_LHashValOfNameSysA(syskind: Int32, lcid: UInt32, szName: CPointer<UInt8>): UInt32 {
+    return LHashValOfNameSysA(syskind, lcid, szName)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_LoadRegTypeLib == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func LoadRegTypeLib(rguid: CPointer<GUID>, wVerMajor: UInt16, wVerMinor: UInt16, lcid: UInt32, pptlib: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_LoadRegTypeLib == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_LoadRegTypeLib(rguid: CPointer<GUID>, wVerMajor: UInt16, wVerMinor: UInt16, lcid: UInt32, pptlib: CPointer<CPointer<Unit>>): Int32 {
+    return LoadRegTypeLib(rguid, wVerMajor, wVerMinor, lcid, pptlib)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_LoadTypeLib == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func LoadTypeLib(szFile: CPointer<UInt16>, pptlib: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_LoadTypeLib == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_LoadTypeLib(szFile: CPointer<UInt16>, pptlib: CPointer<CPointer<Unit>>): Int32 {
+    return LoadTypeLib(szFile, pptlib)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_LoadTypeLibEx == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func LoadTypeLibEx(szFile: CPointer<UInt16>, regkind: Int32, pptlib: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_LoadTypeLibEx == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_LoadTypeLibEx(szFile: CPointer<UInt16>, regkind: Int32, pptlib: CPointer<CPointer<Unit>>): Int32 {
+    return LoadTypeLibEx(szFile, regkind, pptlib)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OaBuildVersion == "on"]
+foreign {
+    func OaBuildVersion(): UInt32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OaBuildVersion == "on"]
+public unsafe func Windows_OaBuildVersion(): UInt32 {
+    return OaBuildVersion()
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OaEnablePerUserTLibRegistration == "on"]
+foreign {
+    func OaEnablePerUserTLibRegistration(): Unit
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OaEnablePerUserTLibRegistration == "on"]
+public unsafe func Windows_OaEnablePerUserTLibRegistration(): Unit {
+    OaEnablePerUserTLibRegistration()
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleCreateFontIndirect == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func OleCreateFontIndirect(lpFontDesc: CPointer<Win32__impl_l1.FONTDESC>, riid: CPointer<GUID>, lplpvObj: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleCreateFontIndirect == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_OleCreateFontIndirect(lpFontDesc: CPointer<Win32__impl_l1.FONTDESC>, riid: CPointer<GUID>, lplpvObj: CPointer<CPointer<Unit>>): Int32 {
+    return OleCreateFontIndirect(lpFontDesc, riid, lplpvObj)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleCreatePictureIndirect == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    func OleCreatePictureIndirect(lpPictDesc: CPointer<Win32__impl_l1.PICTDESC>, riid: CPointer<GUID>, fOwn: Int32, lplpvObj: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleCreatePictureIndirect == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_OleCreatePictureIndirect(lpPictDesc: CPointer<Win32__impl_l1.PICTDESC>, riid: CPointer<GUID>, fOwn: Int32, lplpvObj: CPointer<CPointer<Unit>>): Int32 {
+    return OleCreatePictureIndirect(lpPictDesc, riid, fOwn, lplpvObj)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleCreatePropertyFrame == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: dwReserved reserved
     // param-hint: pvReserved reserved
     func OleCreatePropertyFrame(hwndOwner: CPointer<Unit>, x: UInt32, y: UInt32, lpszCaption: CPointer<UInt16>, cObjects: UInt32, ppUnk: CPointer<CPointer<Unit>>, cPages: UInt32, pPageClsID: CPointer<GUID>, lcid: UInt32, dwReserved: UInt32, pvReserved: CPointer<Unit>): Int32
-    func OleCreatePropertyFrameIndirect(lpParams: CPointer<Win32__impl_l1.OCPFIPARAMS>): Int32
-    func OleLoadPicture(lpstream: CPointer<Unit>, lSize: Int32, fRunmode: Int32, riid: CPointer<GUID>, lplpvObj: CPointer<CPointer<Unit>>): Int32
-    func OleLoadPictureEx(lpstream: CPointer<Unit>, lSize: Int32, fRunmode: Int32, riid: CPointer<GUID>, xSizeDesired: UInt32, ySizeDesired: UInt32, dwFlags: UInt32, lplpvObj: CPointer<CPointer<Unit>>): Int32
-    // param-hint: dwReserved reserved
-    func OleLoadPicturePath(szURLorPath: CPointer<UInt16>, punkCaller: CPointer<Unit>, dwReserved: UInt32, clrReserved: UInt32, riid: CPointer<GUID>, ppvRet: CPointer<CPointer<Unit>>): Int32
-    func OleSavePictureFile(lpdispPicture: CPointer<Unit>, bstrFileName: CPointer<UInt16>): Int32
-    func RegisterActiveObject(punk: CPointer<Unit>, rclsid: CPointer<GUID>, dwFlags: UInt32, pdwRegister: CPointer<UInt32>): Int32
-    // param-hint: szHelpDir optional
-    func RegisterTypeLib(ptlib: CPointer<Unit>, szFullPath: CPointer<UInt16>, szHelpDir: CPointer<UInt16>): Int32
-    // param-hint: szHelpDir optional
-    func RegisterTypeLibForUser(ptlib: CPointer<Unit>, szFullPath: CPointer<UInt16>, szHelpDir: CPointer<UInt16>): Int32
-    func SafeArrayAccessData(psa: CPointer<Win32__impl_l1.SAFEARRAY>, ppvData: CPointer<CPointer<Unit>>): Int32
-    func SafeArrayAddRef(psa: CPointer<Win32__impl_l1.SAFEARRAY>, ppDataToRelease: CPointer<CPointer<Unit>>): Int32
-    func SafeArrayAllocData(psa: CPointer<Win32__impl_l1.SAFEARRAY>): Int32
-    func SafeArrayAllocDescriptor(cDims: UInt32, ppsaOut: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>): Int32
-    func SafeArrayCopy(psa: CPointer<Win32__impl_l1.SAFEARRAY>, ppsaOut: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>): Int32
-    func SafeArrayCopyData(psaSource: CPointer<Win32__impl_l1.SAFEARRAY>, psaTarget: CPointer<Win32__impl_l1.SAFEARRAY>): Int32
-    func SafeArrayDestroy(psa: CPointer<Win32__impl_l1.SAFEARRAY>): Int32
-    func SafeArrayDestroyData(psa: CPointer<Win32__impl_l1.SAFEARRAY>): Int32
-    func SafeArrayDestroyDescriptor(psa: CPointer<Win32__impl_l1.SAFEARRAY>): Int32
-    func SafeArrayGetDim(psa: CPointer<Win32__impl_l1.SAFEARRAY>): UInt32
-    func SafeArrayGetElement(psa: CPointer<Win32__impl_l1.SAFEARRAY>, rgIndices: CPointer<Int32>, pv: CPointer<Unit>): Int32
-    func SafeArrayGetElemsize(psa: CPointer<Win32__impl_l1.SAFEARRAY>): UInt32
-    func SafeArrayGetIID(psa: CPointer<Win32__impl_l1.SAFEARRAY>, pguid: CPointer<GUID>): Int32
-    func SafeArrayGetLBound(psa: CPointer<Win32__impl_l1.SAFEARRAY>, nDim: UInt32, plLbound: CPointer<Int32>): Int32
-    func SafeArrayGetRecordInfo(psa: CPointer<Win32__impl_l1.SAFEARRAY>, prinfo: CPointer<CPointer<Unit>>): Int32
-    func SafeArrayGetUBound(psa: CPointer<Win32__impl_l1.SAFEARRAY>, nDim: UInt32, plUbound: CPointer<Int32>): Int32
-    func SafeArrayLock(psa: CPointer<Win32__impl_l1.SAFEARRAY>): Int32
-    func SafeArrayPtrOfIndex(psa: CPointer<Win32__impl_l1.SAFEARRAY>, rgIndices: CPointer<Int32>, ppvData: CPointer<CPointer<Unit>>): Int32
-    func SafeArrayPutElement(psa: CPointer<Win32__impl_l1.SAFEARRAY>, rgIndices: CPointer<Int32>, pv: CPointer<Unit>): Int32
-    func SafeArrayRedim(psa: CPointer<Win32__impl_l1.SAFEARRAY>, psaboundNew: CPointer<Win32__impl_l0.SAFEARRAYBOUND>): Int32
-    func SafeArrayReleaseDescriptor(psa: CPointer<Win32__impl_l1.SAFEARRAY>): Unit
-    func SafeArraySetIID(psa: CPointer<Win32__impl_l1.SAFEARRAY>, guid: CPointer<GUID>): Int32
-    func SafeArraySetRecordInfo(psa: CPointer<Win32__impl_l1.SAFEARRAY>, prinfo: CPointer<Unit>): Int32
-    func SafeArrayUnaccessData(psa: CPointer<Win32__impl_l1.SAFEARRAY>): Int32
-    func SafeArrayUnlock(psa: CPointer<Win32__impl_l1.SAFEARRAY>): Int32
-    func UnRegisterTypeLib(libID: CPointer<GUID>, wVerMajor: UInt16, wVerMinor: UInt16, lcid: UInt32, syskind: Int32): Int32
-    func UnRegisterTypeLibForUser(libID: CPointer<GUID>, wMajorVerNum: UInt16, wMinorVerNum: UInt16, lcid: UInt32, syskind: Int32): Int32
-    func VarBoolFromCy(cyIn: Win32__impl_l0.CY, pboolOut: CPointer<Int16>): Int32
-    func VarBoolFromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, pboolOut: CPointer<Int16>): Int32
-    func VarBstrFromCy(cyIn: Win32__impl_l0.CY, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
-    func VarBstrFromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
-    func VarCyAbs(cyIn: Win32__impl_l0.CY, pcyResult: CPointer<Win32__impl_l0.CY>): Int32
-    func VarCyAdd(cyLeft: Win32__impl_l0.CY, cyRight: Win32__impl_l0.CY, pcyResult: CPointer<Win32__impl_l0.CY>): Int32
-    func VarCyCmp(cyLeft: Win32__impl_l0.CY, cyRight: Win32__impl_l0.CY): UInt32
-    func VarCyCmpR8(cyLeft: Win32__impl_l0.CY, dblRight: Float64): UInt32
-    func VarCyFix(cyIn: Win32__impl_l0.CY, pcyResult: CPointer<Win32__impl_l0.CY>): Int32
-    func VarCyFromBool(boolIn: Int16, pcyOut: CPointer<Win32__impl_l0.CY>): Int32
-    func VarCyFromDate(dateIn: Float64, pcyOut: CPointer<Win32__impl_l0.CY>): Int32
-    func VarCyFromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pcyOut: CPointer<Win32__impl_l0.CY>): Int32
-    func VarCyFromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, pcyOut: CPointer<Win32__impl_l0.CY>): Int32
-    func VarCyFromI1(cIn: Int8, pcyOut: CPointer<Win32__impl_l0.CY>): Int32
-    func VarCyFromI2(sIn: Int16, pcyOut: CPointer<Win32__impl_l0.CY>): Int32
-    func VarCyFromI4(lIn: Int32, pcyOut: CPointer<Win32__impl_l0.CY>): Int32
-    func VarCyFromI8(i64In: Int64, pcyOut: CPointer<Win32__impl_l0.CY>): Int32
-    func VarCyFromR4(fltIn: Float32, pcyOut: CPointer<Win32__impl_l0.CY>): Int32
-    func VarCyFromR8(dblIn: Float64, pcyOut: CPointer<Win32__impl_l0.CY>): Int32
-    func VarCyFromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pcyOut: CPointer<Win32__impl_l0.CY>): Int32
-    func VarCyFromUI1(bIn: UInt8, pcyOut: CPointer<Win32__impl_l0.CY>): Int32
-    func VarCyFromUI2(uiIn: UInt16, pcyOut: CPointer<Win32__impl_l0.CY>): Int32
-    func VarCyFromUI4(ulIn: UInt32, pcyOut: CPointer<Win32__impl_l0.CY>): Int32
-    func VarCyFromUI8(ui64In: UInt64, pcyOut: CPointer<Win32__impl_l0.CY>): Int32
-    func VarCyInt(cyIn: Win32__impl_l0.CY, pcyResult: CPointer<Win32__impl_l0.CY>): Int32
-    func VarCyMul(cyLeft: Win32__impl_l0.CY, cyRight: Win32__impl_l0.CY, pcyResult: CPointer<Win32__impl_l0.CY>): Int32
-    func VarCyMulI4(cyLeft: Win32__impl_l0.CY, lRight: Int32, pcyResult: CPointer<Win32__impl_l0.CY>): Int32
-    func VarCyMulI8(cyLeft: Win32__impl_l0.CY, lRight: Int64, pcyResult: CPointer<Win32__impl_l0.CY>): Int32
-    func VarCyNeg(cyIn: Win32__impl_l0.CY, pcyResult: CPointer<Win32__impl_l0.CY>): Int32
-    func VarCyRound(cyIn: Win32__impl_l0.CY, cDecimals: Int32, pcyResult: CPointer<Win32__impl_l0.CY>): Int32
-    func VarCySub(cyLeft: Win32__impl_l0.CY, cyRight: Win32__impl_l0.CY, pcyResult: CPointer<Win32__impl_l0.CY>): Int32
-    func VarDateFromCy(cyIn: Win32__impl_l0.CY, pdateOut: CPointer<Float64>): Int32
-    func VarDateFromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, pdateOut: CPointer<Float64>): Int32
-    func VarDecFromCy(cyIn: Win32__impl_l0.CY, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32
-    func VarDecFromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32
-    func VarI1FromCy(cyIn: Win32__impl_l0.CY, pcOut: CPointer<UInt8>): Int32
-    func VarI1FromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, pcOut: CPointer<UInt8>): Int32
-    func VarI2FromCy(cyIn: Win32__impl_l0.CY, psOut: CPointer<Int16>): Int32
-    func VarI2FromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, psOut: CPointer<Int16>): Int32
-    func VarI4FromCy(cyIn: Win32__impl_l0.CY, plOut: CPointer<Int32>): Int32
-    func VarI4FromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, plOut: CPointer<Int32>): Int32
-    func VarI8FromCy(cyIn: Win32__impl_l0.CY, pi64Out: CPointer<Int64>): Int32
-    func VarI8FromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, pi64Out: CPointer<Int64>): Int32
-    func VarR4FromCy(cyIn: Win32__impl_l0.CY, pfltOut: CPointer<Float32>): Int32
-    func VarR4FromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, pfltOut: CPointer<Float32>): Int32
-    func VarR8FromCy(cyIn: Win32__impl_l0.CY, pdblOut: CPointer<Float64>): Int32
-    func VarR8FromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, pdblOut: CPointer<Float64>): Int32
-    func VarUI1FromCy(cyIn: Win32__impl_l0.CY, pbOut: CPointer<UInt8>): Int32
-    func VarUI1FromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, pbOut: CPointer<UInt8>): Int32
-    func VarUI2FromCy(cyIn: Win32__impl_l0.CY, puiOut: CPointer<UInt16>): Int32
-    func VarUI2FromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, puiOut: CPointer<UInt16>): Int32
-    func VarUI4FromCy(cyIn: Win32__impl_l0.CY, pulOut: CPointer<UInt32>): Int32
-    func VarUI4FromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, pulOut: CPointer<UInt32>): Int32
-    func VarUI8FromCy(cyIn: Win32__impl_l0.CY, pi64Out: CPointer<UInt64>): Int32
-    func VarUI8FromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, pi64Out: CPointer<UInt64>): Int32
-    func VectorFromBstr(bstr: CPointer<UInt16>, ppsa: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>): Int32
 }
 
-@When[OLEAUT32 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleCreatePropertyFrame == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_OleCreatePropertyFrame(hwndOwner: CPointer<Unit>, x: UInt32, y: UInt32, lpszCaption: CPointer<UInt16>, cObjects: UInt32, ppUnk: CPointer<CPointer<Unit>>, cPages: UInt32, pPageClsID: CPointer<GUID>, lcid: UInt32, dwReserved: UInt32, pvReserved: CPointer<Unit>): Int32 {
+    return OleCreatePropertyFrame(hwndOwner, x, y, lpszCaption, cObjects, ppUnk, cPages, pPageClsID, lcid, dwReserved, pvReserved)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleCreatePropertyFrameIndirect == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func OleCreatePropertyFrameIndirect(lpParams: CPointer<Win32__impl_l1.OCPFIPARAMS>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleCreatePropertyFrameIndirect == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_OleCreatePropertyFrameIndirect(lpParams: CPointer<Win32__impl_l1.OCPFIPARAMS>): Int32 {
+    return OleCreatePropertyFrameIndirect(lpParams)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleIconToCursor == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
     func OleIconToCursor(hinstExe: CPointer<Unit>, hIcon: Win32__impl_l0.HICON): Win32__impl_l1.HCURSOR
 }
 
-@When[API_MS_WIN_CORE_MARSHAL_L1_1_0 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleIconToCursor == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_OleIconToCursor(hinstExe: CPointer<Unit>, hIcon: Win32__impl_l0.HICON): Win32__impl_l1.HCURSOR {
+    return OleIconToCursor(hinstExe, hIcon)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleLoadPicture == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func OleLoadPicture(lpstream: CPointer<Unit>, lSize: Int32, fRunmode: Int32, riid: CPointer<GUID>, lplpvObj: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleLoadPicture == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_OleLoadPicture(lpstream: CPointer<Unit>, lSize: Int32, fRunmode: Int32, riid: CPointer<GUID>, lplpvObj: CPointer<CPointer<Unit>>): Int32 {
+    return OleLoadPicture(lpstream, lSize, fRunmode, riid, lplpvObj)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleLoadPictureEx == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func OleLoadPictureEx(lpstream: CPointer<Unit>, lSize: Int32, fRunmode: Int32, riid: CPointer<GUID>, xSizeDesired: UInt32, ySizeDesired: UInt32, dwFlags: UInt32, lplpvObj: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleLoadPictureEx == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_OleLoadPictureEx(lpstream: CPointer<Unit>, lSize: Int32, fRunmode: Int32, riid: CPointer<GUID>, xSizeDesired: UInt32, ySizeDesired: UInt32, dwFlags: UInt32, lplpvObj: CPointer<CPointer<Unit>>): Int32 {
+    return OleLoadPictureEx(lpstream, lSize, fRunmode, riid, xSizeDesired, ySizeDesired, dwFlags, lplpvObj)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleLoadPictureFile == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func OleLoadPictureFile(varFileName: VARIANT, lplpdispPicture: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleLoadPictureFile == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_OleLoadPictureFile(varFileName: VARIANT, lplpdispPicture: CPointer<CPointer<Unit>>): Int32 {
+    return OleLoadPictureFile(varFileName, lplpdispPicture)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleLoadPictureFileEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func OleLoadPictureFileEx(varFileName: VARIANT, xSizeDesired: UInt32, ySizeDesired: UInt32, dwFlags: UInt32, lplpdispPicture: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleLoadPictureFileEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_OleLoadPictureFileEx(varFileName: VARIANT, xSizeDesired: UInt32, ySizeDesired: UInt32, dwFlags: UInt32, lplpdispPicture: CPointer<CPointer<Unit>>): Int32 {
+    return OleLoadPictureFileEx(varFileName, xSizeDesired, ySizeDesired, dwFlags, lplpdispPicture)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleLoadPicturePath == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: dwReserved reserved
+    func OleLoadPicturePath(szURLorPath: CPointer<UInt16>, punkCaller: CPointer<Unit>, dwReserved: UInt32, clrReserved: UInt32, riid: CPointer<GUID>, ppvRet: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleLoadPicturePath == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_OleLoadPicturePath(szURLorPath: CPointer<UInt16>, punkCaller: CPointer<Unit>, dwReserved: UInt32, clrReserved: UInt32, riid: CPointer<GUID>, ppvRet: CPointer<CPointer<Unit>>): Int32 {
+    return OleLoadPicturePath(szURLorPath, punkCaller, dwReserved, clrReserved, riid, ppvRet)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleSavePictureFile == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func OleSavePictureFile(lpdispPicture: CPointer<Unit>, bstrFileName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleSavePictureFile == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_OleSavePictureFile(lpdispPicture: CPointer<Unit>, bstrFileName: CPointer<UInt16>): Int32 {
+    return OleSavePictureFile(lpdispPicture, bstrFileName)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleTranslateColor == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func OleTranslateColor(clr: UInt32, hpal: Win32_Graphics_Gdi.HPALETTE, lpcolorref: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleTranslateColor == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_OleTranslateColor(clr: UInt32, hpal: Win32_Graphics_Gdi.HPALETTE, lpcolorref: CPointer<UInt32>): Int32 {
+    return OleTranslateColor(clr, hpal, lpcolorref)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_QueryPathOfRegTypeLib == "on"]
+foreign {
+    func QueryPathOfRegTypeLib(guid: CPointer<GUID>, wMaj: UInt16, wMin: UInt16, lcid: UInt32, lpbstrPathName: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_QueryPathOfRegTypeLib == "on"]
+public unsafe func Windows_QueryPathOfRegTypeLib(guid: CPointer<GUID>, wMaj: UInt16, wMin: UInt16, lcid: UInt32, lpbstrPathName: CPointer<CPointer<UInt16>>): Int32 {
+    return QueryPathOfRegTypeLib(guid, wMaj, wMin, lcid, lpbstrPathName)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_RegisterActiveObject == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func RegisterActiveObject(punk: CPointer<Unit>, rclsid: CPointer<GUID>, dwFlags: UInt32, pdwRegister: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_RegisterActiveObject == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_RegisterActiveObject(punk: CPointer<Unit>, rclsid: CPointer<GUID>, dwFlags: UInt32, pdwRegister: CPointer<UInt32>): Int32 {
+    return RegisterActiveObject(punk, rclsid, dwFlags, pdwRegister)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_RegisterTypeLib == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: szHelpDir optional
+    func RegisterTypeLib(ptlib: CPointer<Unit>, szFullPath: CPointer<UInt16>, szHelpDir: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_RegisterTypeLib == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_RegisterTypeLib(ptlib: CPointer<Unit>, szFullPath: CPointer<UInt16>, szHelpDir: CPointer<UInt16>): Int32 {
+    return RegisterTypeLib(ptlib, szFullPath, szHelpDir)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_RegisterTypeLibForUser == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: szHelpDir optional
+    func RegisterTypeLibForUser(ptlib: CPointer<Unit>, szFullPath: CPointer<UInt16>, szHelpDir: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_RegisterTypeLibForUser == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_RegisterTypeLibForUser(ptlib: CPointer<Unit>, szFullPath: CPointer<UInt16>, szHelpDir: CPointer<UInt16>): Int32 {
+    return RegisterTypeLibForUser(ptlib, szFullPath, szHelpDir)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_RevokeActiveObject == "on"]
+foreign {
+    // param-hint: pvReserved reserved
+    func RevokeActiveObject(dwRegister: UInt32, pvReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_RevokeActiveObject == "on"]
+public unsafe func Windows_RevokeActiveObject(dwRegister: UInt32, pvReserved: CPointer<Unit>): Int32 {
+    return RevokeActiveObject(dwRegister, pvReserved)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayAccessData == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func SafeArrayAccessData(psa: CPointer<Win32__impl_l1.SAFEARRAY>, ppvData: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayAccessData == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SafeArrayAccessData(psa: CPointer<Win32__impl_l1.SAFEARRAY>, ppvData: CPointer<CPointer<Unit>>): Int32 {
+    return SafeArrayAccessData(psa, ppvData)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayAddRef == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func SafeArrayAddRef(psa: CPointer<Win32__impl_l1.SAFEARRAY>, ppDataToRelease: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayAddRef == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SafeArrayAddRef(psa: CPointer<Win32__impl_l1.SAFEARRAY>, ppDataToRelease: CPointer<CPointer<Unit>>): Int32 {
+    return SafeArrayAddRef(psa, ppDataToRelease)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayAllocData == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func SafeArrayAllocData(psa: CPointer<Win32__impl_l1.SAFEARRAY>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayAllocData == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SafeArrayAllocData(psa: CPointer<Win32__impl_l1.SAFEARRAY>): Int32 {
+    return SafeArrayAllocData(psa)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayAllocDescriptor == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func SafeArrayAllocDescriptor(cDims: UInt32, ppsaOut: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayAllocDescriptor == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SafeArrayAllocDescriptor(cDims: UInt32, ppsaOut: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>): Int32 {
+    return SafeArrayAllocDescriptor(cDims, ppsaOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayAllocDescriptorEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func SafeArrayAllocDescriptorEx(vt: UInt16, cDims: UInt32, ppsaOut: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayAllocDescriptorEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_SafeArrayAllocDescriptorEx(vt: UInt16, cDims: UInt32, ppsaOut: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>): Int32 {
+    return SafeArrayAllocDescriptorEx(vt, cDims, ppsaOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayCopy == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func SafeArrayCopy(psa: CPointer<Win32__impl_l1.SAFEARRAY>, ppsaOut: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayCopy == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SafeArrayCopy(psa: CPointer<Win32__impl_l1.SAFEARRAY>, ppsaOut: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>): Int32 {
+    return SafeArrayCopy(psa, ppsaOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayCopyData == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func SafeArrayCopyData(psaSource: CPointer<Win32__impl_l1.SAFEARRAY>, psaTarget: CPointer<Win32__impl_l1.SAFEARRAY>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayCopyData == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SafeArrayCopyData(psaSource: CPointer<Win32__impl_l1.SAFEARRAY>, psaTarget: CPointer<Win32__impl_l1.SAFEARRAY>): Int32 {
+    return SafeArrayCopyData(psaSource, psaTarget)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayCreate == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func SafeArrayCreate(vt: UInt16, cDims: UInt32, rgsabound: CPointer<Win32__impl_l0.SAFEARRAYBOUND>): CPointer<Win32__impl_l1.SAFEARRAY>
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayCreate == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_SafeArrayCreate(vt: UInt16, cDims: UInt32, rgsabound: CPointer<Win32__impl_l0.SAFEARRAYBOUND>): CPointer<Win32__impl_l1.SAFEARRAY> {
+    return SafeArrayCreate(vt, cDims, rgsabound)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayCreateEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func SafeArrayCreateEx(vt: UInt16, cDims: UInt32, rgsabound: CPointer<Win32__impl_l0.SAFEARRAYBOUND>, pvExtra: CPointer<Unit>): CPointer<Win32__impl_l1.SAFEARRAY>
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayCreateEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_SafeArrayCreateEx(vt: UInt16, cDims: UInt32, rgsabound: CPointer<Win32__impl_l0.SAFEARRAYBOUND>, pvExtra: CPointer<Unit>): CPointer<Win32__impl_l1.SAFEARRAY> {
+    return SafeArrayCreateEx(vt, cDims, rgsabound, pvExtra)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayCreateVector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func SafeArrayCreateVector(vt: UInt16, lLbound: Int32, cElements: UInt32): CPointer<Win32__impl_l1.SAFEARRAY>
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayCreateVector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_SafeArrayCreateVector(vt: UInt16, lLbound: Int32, cElements: UInt32): CPointer<Win32__impl_l1.SAFEARRAY> {
+    return SafeArrayCreateVector(vt, lLbound, cElements)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayCreateVectorEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func SafeArrayCreateVectorEx(vt: UInt16, lLbound: Int32, cElements: UInt32, pvExtra: CPointer<Unit>): CPointer<Win32__impl_l1.SAFEARRAY>
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayCreateVectorEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_SafeArrayCreateVectorEx(vt: UInt16, lLbound: Int32, cElements: UInt32, pvExtra: CPointer<Unit>): CPointer<Win32__impl_l1.SAFEARRAY> {
+    return SafeArrayCreateVectorEx(vt, lLbound, cElements, pvExtra)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayDestroy == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func SafeArrayDestroy(psa: CPointer<Win32__impl_l1.SAFEARRAY>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayDestroy == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SafeArrayDestroy(psa: CPointer<Win32__impl_l1.SAFEARRAY>): Int32 {
+    return SafeArrayDestroy(psa)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayDestroyData == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func SafeArrayDestroyData(psa: CPointer<Win32__impl_l1.SAFEARRAY>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayDestroyData == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SafeArrayDestroyData(psa: CPointer<Win32__impl_l1.SAFEARRAY>): Int32 {
+    return SafeArrayDestroyData(psa)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayDestroyDescriptor == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func SafeArrayDestroyDescriptor(psa: CPointer<Win32__impl_l1.SAFEARRAY>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayDestroyDescriptor == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SafeArrayDestroyDescriptor(psa: CPointer<Win32__impl_l1.SAFEARRAY>): Int32 {
+    return SafeArrayDestroyDescriptor(psa)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayGetDim == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func SafeArrayGetDim(psa: CPointer<Win32__impl_l1.SAFEARRAY>): UInt32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayGetDim == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SafeArrayGetDim(psa: CPointer<Win32__impl_l1.SAFEARRAY>): UInt32 {
+    return SafeArrayGetDim(psa)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayGetElement == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func SafeArrayGetElement(psa: CPointer<Win32__impl_l1.SAFEARRAY>, rgIndices: CPointer<Int32>, pv: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayGetElement == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SafeArrayGetElement(psa: CPointer<Win32__impl_l1.SAFEARRAY>, rgIndices: CPointer<Int32>, pv: CPointer<Unit>): Int32 {
+    return SafeArrayGetElement(psa, rgIndices, pv)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayGetElemsize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func SafeArrayGetElemsize(psa: CPointer<Win32__impl_l1.SAFEARRAY>): UInt32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayGetElemsize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SafeArrayGetElemsize(psa: CPointer<Win32__impl_l1.SAFEARRAY>): UInt32 {
+    return SafeArrayGetElemsize(psa)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayGetIID == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func SafeArrayGetIID(psa: CPointer<Win32__impl_l1.SAFEARRAY>, pguid: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayGetIID == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SafeArrayGetIID(psa: CPointer<Win32__impl_l1.SAFEARRAY>, pguid: CPointer<GUID>): Int32 {
+    return SafeArrayGetIID(psa, pguid)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayGetLBound == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func SafeArrayGetLBound(psa: CPointer<Win32__impl_l1.SAFEARRAY>, nDim: UInt32, plLbound: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayGetLBound == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SafeArrayGetLBound(psa: CPointer<Win32__impl_l1.SAFEARRAY>, nDim: UInt32, plLbound: CPointer<Int32>): Int32 {
+    return SafeArrayGetLBound(psa, nDim, plLbound)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayGetRecordInfo == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func SafeArrayGetRecordInfo(psa: CPointer<Win32__impl_l1.SAFEARRAY>, prinfo: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayGetRecordInfo == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SafeArrayGetRecordInfo(psa: CPointer<Win32__impl_l1.SAFEARRAY>, prinfo: CPointer<CPointer<Unit>>): Int32 {
+    return SafeArrayGetRecordInfo(psa, prinfo)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayGetUBound == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func SafeArrayGetUBound(psa: CPointer<Win32__impl_l1.SAFEARRAY>, nDim: UInt32, plUbound: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayGetUBound == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SafeArrayGetUBound(psa: CPointer<Win32__impl_l1.SAFEARRAY>, nDim: UInt32, plUbound: CPointer<Int32>): Int32 {
+    return SafeArrayGetUBound(psa, nDim, plUbound)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayGetVartype == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func SafeArrayGetVartype(psa: CPointer<Win32__impl_l1.SAFEARRAY>, pvt: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayGetVartype == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_SafeArrayGetVartype(psa: CPointer<Win32__impl_l1.SAFEARRAY>, pvt: CPointer<UInt16>): Int32 {
+    return SafeArrayGetVartype(psa, pvt)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayLock == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func SafeArrayLock(psa: CPointer<Win32__impl_l1.SAFEARRAY>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayLock == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SafeArrayLock(psa: CPointer<Win32__impl_l1.SAFEARRAY>): Int32 {
+    return SafeArrayLock(psa)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayPtrOfIndex == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func SafeArrayPtrOfIndex(psa: CPointer<Win32__impl_l1.SAFEARRAY>, rgIndices: CPointer<Int32>, ppvData: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayPtrOfIndex == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SafeArrayPtrOfIndex(psa: CPointer<Win32__impl_l1.SAFEARRAY>, rgIndices: CPointer<Int32>, ppvData: CPointer<CPointer<Unit>>): Int32 {
+    return SafeArrayPtrOfIndex(psa, rgIndices, ppvData)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayPutElement == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func SafeArrayPutElement(psa: CPointer<Win32__impl_l1.SAFEARRAY>, rgIndices: CPointer<Int32>, pv: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayPutElement == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SafeArrayPutElement(psa: CPointer<Win32__impl_l1.SAFEARRAY>, rgIndices: CPointer<Int32>, pv: CPointer<Unit>): Int32 {
+    return SafeArrayPutElement(psa, rgIndices, pv)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayRedim == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func SafeArrayRedim(psa: CPointer<Win32__impl_l1.SAFEARRAY>, psaboundNew: CPointer<Win32__impl_l0.SAFEARRAYBOUND>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayRedim == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SafeArrayRedim(psa: CPointer<Win32__impl_l1.SAFEARRAY>, psaboundNew: CPointer<Win32__impl_l0.SAFEARRAYBOUND>): Int32 {
+    return SafeArrayRedim(psa, psaboundNew)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayReleaseData == "on"]
+foreign {
+    func SafeArrayReleaseData(pData: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayReleaseData == "on"]
+public unsafe func Windows_SafeArrayReleaseData(pData: CPointer<Unit>): Unit {
+    SafeArrayReleaseData(pData)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayReleaseDescriptor == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func SafeArrayReleaseDescriptor(psa: CPointer<Win32__impl_l1.SAFEARRAY>): Unit
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayReleaseDescriptor == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SafeArrayReleaseDescriptor(psa: CPointer<Win32__impl_l1.SAFEARRAY>): Unit {
+    SafeArrayReleaseDescriptor(psa)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArraySetIID == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func SafeArraySetIID(psa: CPointer<Win32__impl_l1.SAFEARRAY>, guid: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArraySetIID == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SafeArraySetIID(psa: CPointer<Win32__impl_l1.SAFEARRAY>, guid: CPointer<GUID>): Int32 {
+    return SafeArraySetIID(psa, guid)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArraySetRecordInfo == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func SafeArraySetRecordInfo(psa: CPointer<Win32__impl_l1.SAFEARRAY>, prinfo: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArraySetRecordInfo == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SafeArraySetRecordInfo(psa: CPointer<Win32__impl_l1.SAFEARRAY>, prinfo: CPointer<Unit>): Int32 {
+    return SafeArraySetRecordInfo(psa, prinfo)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayUnaccessData == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func SafeArrayUnaccessData(psa: CPointer<Win32__impl_l1.SAFEARRAY>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayUnaccessData == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SafeArrayUnaccessData(psa: CPointer<Win32__impl_l1.SAFEARRAY>): Int32 {
+    return SafeArrayUnaccessData(psa)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayUnlock == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func SafeArrayUnlock(psa: CPointer<Win32__impl_l1.SAFEARRAY>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayUnlock == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_SafeArrayUnlock(psa: CPointer<Win32__impl_l1.SAFEARRAY>): Int32 {
+    return SafeArrayUnlock(psa)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_UnRegisterTypeLib == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func UnRegisterTypeLib(libID: CPointer<GUID>, wVerMajor: UInt16, wVerMinor: UInt16, lcid: UInt32, syskind: Int32): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_UnRegisterTypeLib == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_UnRegisterTypeLib(libID: CPointer<GUID>, wVerMajor: UInt16, wVerMinor: UInt16, lcid: UInt32, syskind: Int32): Int32 {
+    return UnRegisterTypeLib(libID, wVerMajor, wVerMinor, lcid, syskind)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_UnRegisterTypeLibForUser == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func UnRegisterTypeLibForUser(libID: CPointer<GUID>, wMajorVerNum: UInt16, wMinorVerNum: UInt16, lcid: UInt32, syskind: Int32): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_UnRegisterTypeLibForUser == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_UnRegisterTypeLibForUser(libID: CPointer<GUID>, wMajorVerNum: UInt16, wMinorVerNum: UInt16, lcid: UInt32, syskind: Int32): Int32 {
+    return UnRegisterTypeLibForUser(libID, wMajorVerNum, wMinorVerNum, lcid, syskind)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarAbs == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func VarAbs(pvarIn: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarAbs == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_VarAbs(pvarIn: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32 {
+    return VarAbs(pvarIn, pvarResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarAdd == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func VarAdd(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarAdd == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_VarAdd(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32 {
+    return VarAdd(pvarLeft, pvarRight, pvarResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarAnd == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func VarAnd(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarAnd == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_VarAnd(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32 {
+    return VarAnd(pvarLeft, pvarRight, pvarResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromCy == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarBoolFromCy(cyIn: Win32__impl_l0.CY, pboolOut: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromCy == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarBoolFromCy(cyIn: Win32__impl_l0.CY, pboolOut: CPointer<Int16>): Int32 {
+    return VarBoolFromCy(cyIn, pboolOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromDate == "on"]
+foreign {
+    func VarBoolFromDate(dateIn: Float64, pboolOut: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromDate == "on"]
+public unsafe func Windows_VarBoolFromDate(dateIn: Float64, pboolOut: CPointer<Int16>): Int32 {
+    return VarBoolFromDate(dateIn, pboolOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromDec == "on"]
+foreign {
+    func VarBoolFromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pboolOut: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromDec == "on"]
+public unsafe func Windows_VarBoolFromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pboolOut: CPointer<Int16>): Int32 {
+    return VarBoolFromDec(pdecIn, pboolOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromDisp == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarBoolFromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, pboolOut: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromDisp == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarBoolFromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, pboolOut: CPointer<Int16>): Int32 {
+    return VarBoolFromDisp(pdispIn, lcid, pboolOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromI1 == "on"]
+foreign {
+    func VarBoolFromI1(cIn: Int8, pboolOut: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromI1 == "on"]
+public unsafe func Windows_VarBoolFromI1(cIn: Int8, pboolOut: CPointer<Int16>): Int32 {
+    return VarBoolFromI1(cIn, pboolOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromI2 == "on"]
+foreign {
+    func VarBoolFromI2(sIn: Int16, pboolOut: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromI2 == "on"]
+public unsafe func Windows_VarBoolFromI2(sIn: Int16, pboolOut: CPointer<Int16>): Int32 {
+    return VarBoolFromI2(sIn, pboolOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromI4 == "on"]
+foreign {
+    func VarBoolFromI4(lIn: Int32, pboolOut: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromI4 == "on"]
+public unsafe func Windows_VarBoolFromI4(lIn: Int32, pboolOut: CPointer<Int16>): Int32 {
+    return VarBoolFromI4(lIn, pboolOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromI8 == "on"]
+foreign {
+    func VarBoolFromI8(i64In: Int64, pboolOut: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromI8 == "on"]
+public unsafe func Windows_VarBoolFromI8(i64In: Int64, pboolOut: CPointer<Int16>): Int32 {
+    return VarBoolFromI8(i64In, pboolOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromR4 == "on"]
+foreign {
+    func VarBoolFromR4(fltIn: Float32, pboolOut: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromR4 == "on"]
+public unsafe func Windows_VarBoolFromR4(fltIn: Float32, pboolOut: CPointer<Int16>): Int32 {
+    return VarBoolFromR4(fltIn, pboolOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromR8 == "on"]
+foreign {
+    func VarBoolFromR8(dblIn: Float64, pboolOut: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromR8 == "on"]
+public unsafe func Windows_VarBoolFromR8(dblIn: Float64, pboolOut: CPointer<Int16>): Int32 {
+    return VarBoolFromR8(dblIn, pboolOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromStr == "on"]
+foreign {
+    func VarBoolFromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pboolOut: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromStr == "on"]
+public unsafe func Windows_VarBoolFromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pboolOut: CPointer<Int16>): Int32 {
+    return VarBoolFromStr(strIn, lcid, dwFlags, pboolOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromUI1 == "on"]
+foreign {
+    func VarBoolFromUI1(bIn: UInt8, pboolOut: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromUI1 == "on"]
+public unsafe func Windows_VarBoolFromUI1(bIn: UInt8, pboolOut: CPointer<Int16>): Int32 {
+    return VarBoolFromUI1(bIn, pboolOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromUI2 == "on"]
+foreign {
+    func VarBoolFromUI2(uiIn: UInt16, pboolOut: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromUI2 == "on"]
+public unsafe func Windows_VarBoolFromUI2(uiIn: UInt16, pboolOut: CPointer<Int16>): Int32 {
+    return VarBoolFromUI2(uiIn, pboolOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromUI4 == "on"]
+foreign {
+    func VarBoolFromUI4(ulIn: UInt32, pboolOut: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromUI4 == "on"]
+public unsafe func Windows_VarBoolFromUI4(ulIn: UInt32, pboolOut: CPointer<Int16>): Int32 {
+    return VarBoolFromUI4(ulIn, pboolOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromUI8 == "on"]
+foreign {
+    func VarBoolFromUI8(i64In: UInt64, pboolOut: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromUI8 == "on"]
+public unsafe func Windows_VarBoolFromUI8(i64In: UInt64, pboolOut: CPointer<Int16>): Int32 {
+    return VarBoolFromUI8(i64In, pboolOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrCat == "on"]
+foreign {
+    func VarBstrCat(bstrLeft: CPointer<UInt16>, bstrRight: CPointer<UInt16>, pbstrResult: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrCat == "on"]
+public unsafe func Windows_VarBstrCat(bstrLeft: CPointer<UInt16>, bstrRight: CPointer<UInt16>, pbstrResult: CPointer<CPointer<UInt16>>): Int32 {
+    return VarBstrCat(bstrLeft, bstrRight, pbstrResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrCmp == "on"]
+foreign {
+    func VarBstrCmp(bstrLeft: CPointer<UInt16>, bstrRight: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrCmp == "on"]
+public unsafe func Windows_VarBstrCmp(bstrLeft: CPointer<UInt16>, bstrRight: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32): Int32 {
+    return VarBstrCmp(bstrLeft, bstrRight, lcid, dwFlags)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromBool == "on"]
+foreign {
+    func VarBstrFromBool(boolIn: Int16, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromBool == "on"]
+public unsafe func Windows_VarBstrFromBool(boolIn: Int16, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32 {
+    return VarBstrFromBool(boolIn, lcid, dwFlags, pbstrOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromCy == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarBstrFromCy(cyIn: Win32__impl_l0.CY, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromCy == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarBstrFromCy(cyIn: Win32__impl_l0.CY, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32 {
+    return VarBstrFromCy(cyIn, lcid, dwFlags, pbstrOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromDate == "on"]
+foreign {
+    func VarBstrFromDate(dateIn: Float64, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromDate == "on"]
+public unsafe func Windows_VarBstrFromDate(dateIn: Float64, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32 {
+    return VarBstrFromDate(dateIn, lcid, dwFlags, pbstrOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromDec == "on"]
+foreign {
+    func VarBstrFromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromDec == "on"]
+public unsafe func Windows_VarBstrFromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32 {
+    return VarBstrFromDec(pdecIn, lcid, dwFlags, pbstrOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromDisp == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarBstrFromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromDisp == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarBstrFromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32 {
+    return VarBstrFromDisp(pdispIn, lcid, dwFlags, pbstrOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromI1 == "on"]
+foreign {
+    func VarBstrFromI1(cIn: Int8, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromI1 == "on"]
+public unsafe func Windows_VarBstrFromI1(cIn: Int8, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32 {
+    return VarBstrFromI1(cIn, lcid, dwFlags, pbstrOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromI2 == "on"]
+foreign {
+    func VarBstrFromI2(iVal: Int16, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromI2 == "on"]
+public unsafe func Windows_VarBstrFromI2(iVal: Int16, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32 {
+    return VarBstrFromI2(iVal, lcid, dwFlags, pbstrOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromI4 == "on"]
+foreign {
+    func VarBstrFromI4(lIn: Int32, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromI4 == "on"]
+public unsafe func Windows_VarBstrFromI4(lIn: Int32, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32 {
+    return VarBstrFromI4(lIn, lcid, dwFlags, pbstrOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromI8 == "on"]
+foreign {
+    func VarBstrFromI8(i64In: Int64, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromI8 == "on"]
+public unsafe func Windows_VarBstrFromI8(i64In: Int64, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32 {
+    return VarBstrFromI8(i64In, lcid, dwFlags, pbstrOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromR4 == "on"]
+foreign {
+    func VarBstrFromR4(fltIn: Float32, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromR4 == "on"]
+public unsafe func Windows_VarBstrFromR4(fltIn: Float32, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32 {
+    return VarBstrFromR4(fltIn, lcid, dwFlags, pbstrOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromR8 == "on"]
+foreign {
+    func VarBstrFromR8(dblIn: Float64, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromR8 == "on"]
+public unsafe func Windows_VarBstrFromR8(dblIn: Float64, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32 {
+    return VarBstrFromR8(dblIn, lcid, dwFlags, pbstrOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromUI1 == "on"]
+foreign {
+    func VarBstrFromUI1(bVal: UInt8, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromUI1 == "on"]
+public unsafe func Windows_VarBstrFromUI1(bVal: UInt8, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32 {
+    return VarBstrFromUI1(bVal, lcid, dwFlags, pbstrOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromUI2 == "on"]
+foreign {
+    func VarBstrFromUI2(uiIn: UInt16, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromUI2 == "on"]
+public unsafe func Windows_VarBstrFromUI2(uiIn: UInt16, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32 {
+    return VarBstrFromUI2(uiIn, lcid, dwFlags, pbstrOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromUI4 == "on"]
+foreign {
+    func VarBstrFromUI4(ulIn: UInt32, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromUI4 == "on"]
+public unsafe func Windows_VarBstrFromUI4(ulIn: UInt32, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32 {
+    return VarBstrFromUI4(ulIn, lcid, dwFlags, pbstrOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromUI8 == "on"]
+foreign {
+    func VarBstrFromUI8(ui64In: UInt64, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromUI8 == "on"]
+public unsafe func Windows_VarBstrFromUI8(ui64In: UInt64, lcid: UInt32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32 {
+    return VarBstrFromUI8(ui64In, lcid, dwFlags, pbstrOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCat == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func VarCat(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCat == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_VarCat(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32 {
+    return VarCat(pvarLeft, pvarRight, pvarResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCmp == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func VarCmp(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, lcid: UInt32, dwFlags: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCmp == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_VarCmp(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, lcid: UInt32, dwFlags: UInt32): UInt32 {
+    return VarCmp(pvarLeft, pvarRight, lcid, dwFlags)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyAbs == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarCyAbs(cyIn: Win32__impl_l0.CY, pcyResult: CPointer<Win32__impl_l0.CY>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyAbs == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarCyAbs(cyIn: Win32__impl_l0.CY, pcyResult: CPointer<Win32__impl_l0.CY>): Int32 {
+    return VarCyAbs(cyIn, pcyResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyAdd == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarCyAdd(cyLeft: Win32__impl_l0.CY, cyRight: Win32__impl_l0.CY, pcyResult: CPointer<Win32__impl_l0.CY>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyAdd == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarCyAdd(cyLeft: Win32__impl_l0.CY, cyRight: Win32__impl_l0.CY, pcyResult: CPointer<Win32__impl_l0.CY>): Int32 {
+    return VarCyAdd(cyLeft, cyRight, pcyResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyCmp == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarCyCmp(cyLeft: Win32__impl_l0.CY, cyRight: Win32__impl_l0.CY): UInt32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyCmp == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarCyCmp(cyLeft: Win32__impl_l0.CY, cyRight: Win32__impl_l0.CY): UInt32 {
+    return VarCyCmp(cyLeft, cyRight)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyCmpR8 == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarCyCmpR8(cyLeft: Win32__impl_l0.CY, dblRight: Float64): UInt32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyCmpR8 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarCyCmpR8(cyLeft: Win32__impl_l0.CY, dblRight: Float64): UInt32 {
+    return VarCyCmpR8(cyLeft, dblRight)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFix == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarCyFix(cyIn: Win32__impl_l0.CY, pcyResult: CPointer<Win32__impl_l0.CY>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFix == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarCyFix(cyIn: Win32__impl_l0.CY, pcyResult: CPointer<Win32__impl_l0.CY>): Int32 {
+    return VarCyFix(cyIn, pcyResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromBool == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarCyFromBool(boolIn: Int16, pcyOut: CPointer<Win32__impl_l0.CY>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromBool == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarCyFromBool(boolIn: Int16, pcyOut: CPointer<Win32__impl_l0.CY>): Int32 {
+    return VarCyFromBool(boolIn, pcyOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromDate == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarCyFromDate(dateIn: Float64, pcyOut: CPointer<Win32__impl_l0.CY>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromDate == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarCyFromDate(dateIn: Float64, pcyOut: CPointer<Win32__impl_l0.CY>): Int32 {
+    return VarCyFromDate(dateIn, pcyOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromDec == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarCyFromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pcyOut: CPointer<Win32__impl_l0.CY>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromDec == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarCyFromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pcyOut: CPointer<Win32__impl_l0.CY>): Int32 {
+    return VarCyFromDec(pdecIn, pcyOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromDisp == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarCyFromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, pcyOut: CPointer<Win32__impl_l0.CY>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromDisp == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarCyFromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, pcyOut: CPointer<Win32__impl_l0.CY>): Int32 {
+    return VarCyFromDisp(pdispIn, lcid, pcyOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromI1 == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarCyFromI1(cIn: Int8, pcyOut: CPointer<Win32__impl_l0.CY>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromI1 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarCyFromI1(cIn: Int8, pcyOut: CPointer<Win32__impl_l0.CY>): Int32 {
+    return VarCyFromI1(cIn, pcyOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromI2 == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarCyFromI2(sIn: Int16, pcyOut: CPointer<Win32__impl_l0.CY>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromI2 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarCyFromI2(sIn: Int16, pcyOut: CPointer<Win32__impl_l0.CY>): Int32 {
+    return VarCyFromI2(sIn, pcyOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromI4 == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarCyFromI4(lIn: Int32, pcyOut: CPointer<Win32__impl_l0.CY>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromI4 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarCyFromI4(lIn: Int32, pcyOut: CPointer<Win32__impl_l0.CY>): Int32 {
+    return VarCyFromI4(lIn, pcyOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromI8 == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarCyFromI8(i64In: Int64, pcyOut: CPointer<Win32__impl_l0.CY>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromI8 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarCyFromI8(i64In: Int64, pcyOut: CPointer<Win32__impl_l0.CY>): Int32 {
+    return VarCyFromI8(i64In, pcyOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromR4 == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarCyFromR4(fltIn: Float32, pcyOut: CPointer<Win32__impl_l0.CY>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromR4 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarCyFromR4(fltIn: Float32, pcyOut: CPointer<Win32__impl_l0.CY>): Int32 {
+    return VarCyFromR4(fltIn, pcyOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromR8 == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarCyFromR8(dblIn: Float64, pcyOut: CPointer<Win32__impl_l0.CY>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromR8 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarCyFromR8(dblIn: Float64, pcyOut: CPointer<Win32__impl_l0.CY>): Int32 {
+    return VarCyFromR8(dblIn, pcyOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromStr == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarCyFromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pcyOut: CPointer<Win32__impl_l0.CY>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromStr == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarCyFromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pcyOut: CPointer<Win32__impl_l0.CY>): Int32 {
+    return VarCyFromStr(strIn, lcid, dwFlags, pcyOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromUI1 == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarCyFromUI1(bIn: UInt8, pcyOut: CPointer<Win32__impl_l0.CY>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromUI1 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarCyFromUI1(bIn: UInt8, pcyOut: CPointer<Win32__impl_l0.CY>): Int32 {
+    return VarCyFromUI1(bIn, pcyOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromUI2 == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarCyFromUI2(uiIn: UInt16, pcyOut: CPointer<Win32__impl_l0.CY>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromUI2 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarCyFromUI2(uiIn: UInt16, pcyOut: CPointer<Win32__impl_l0.CY>): Int32 {
+    return VarCyFromUI2(uiIn, pcyOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromUI4 == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarCyFromUI4(ulIn: UInt32, pcyOut: CPointer<Win32__impl_l0.CY>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromUI4 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarCyFromUI4(ulIn: UInt32, pcyOut: CPointer<Win32__impl_l0.CY>): Int32 {
+    return VarCyFromUI4(ulIn, pcyOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromUI8 == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarCyFromUI8(ui64In: UInt64, pcyOut: CPointer<Win32__impl_l0.CY>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromUI8 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarCyFromUI8(ui64In: UInt64, pcyOut: CPointer<Win32__impl_l0.CY>): Int32 {
+    return VarCyFromUI8(ui64In, pcyOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyInt == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarCyInt(cyIn: Win32__impl_l0.CY, pcyResult: CPointer<Win32__impl_l0.CY>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyInt == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarCyInt(cyIn: Win32__impl_l0.CY, pcyResult: CPointer<Win32__impl_l0.CY>): Int32 {
+    return VarCyInt(cyIn, pcyResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyMul == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarCyMul(cyLeft: Win32__impl_l0.CY, cyRight: Win32__impl_l0.CY, pcyResult: CPointer<Win32__impl_l0.CY>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyMul == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarCyMul(cyLeft: Win32__impl_l0.CY, cyRight: Win32__impl_l0.CY, pcyResult: CPointer<Win32__impl_l0.CY>): Int32 {
+    return VarCyMul(cyLeft, cyRight, pcyResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyMulI4 == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarCyMulI4(cyLeft: Win32__impl_l0.CY, lRight: Int32, pcyResult: CPointer<Win32__impl_l0.CY>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyMulI4 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarCyMulI4(cyLeft: Win32__impl_l0.CY, lRight: Int32, pcyResult: CPointer<Win32__impl_l0.CY>): Int32 {
+    return VarCyMulI4(cyLeft, lRight, pcyResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyMulI8 == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarCyMulI8(cyLeft: Win32__impl_l0.CY, lRight: Int64, pcyResult: CPointer<Win32__impl_l0.CY>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyMulI8 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarCyMulI8(cyLeft: Win32__impl_l0.CY, lRight: Int64, pcyResult: CPointer<Win32__impl_l0.CY>): Int32 {
+    return VarCyMulI8(cyLeft, lRight, pcyResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyNeg == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarCyNeg(cyIn: Win32__impl_l0.CY, pcyResult: CPointer<Win32__impl_l0.CY>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyNeg == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarCyNeg(cyIn: Win32__impl_l0.CY, pcyResult: CPointer<Win32__impl_l0.CY>): Int32 {
+    return VarCyNeg(cyIn, pcyResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyRound == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarCyRound(cyIn: Win32__impl_l0.CY, cDecimals: Int32, pcyResult: CPointer<Win32__impl_l0.CY>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyRound == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarCyRound(cyIn: Win32__impl_l0.CY, cDecimals: Int32, pcyResult: CPointer<Win32__impl_l0.CY>): Int32 {
+    return VarCyRound(cyIn, cDecimals, pcyResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCySub == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarCySub(cyLeft: Win32__impl_l0.CY, cyRight: Win32__impl_l0.CY, pcyResult: CPointer<Win32__impl_l0.CY>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCySub == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarCySub(cyLeft: Win32__impl_l0.CY, cyRight: Win32__impl_l0.CY, pcyResult: CPointer<Win32__impl_l0.CY>): Int32 {
+    return VarCySub(cyLeft, cyRight, pcyResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromBool == "on"]
+foreign {
+    func VarDateFromBool(boolIn: Int16, pdateOut: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromBool == "on"]
+public unsafe func Windows_VarDateFromBool(boolIn: Int16, pdateOut: CPointer<Float64>): Int32 {
+    return VarDateFromBool(boolIn, pdateOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromCy == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarDateFromCy(cyIn: Win32__impl_l0.CY, pdateOut: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromCy == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarDateFromCy(cyIn: Win32__impl_l0.CY, pdateOut: CPointer<Float64>): Int32 {
+    return VarDateFromCy(cyIn, pdateOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromDec == "on"]
+foreign {
+    func VarDateFromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pdateOut: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromDec == "on"]
+public unsafe func Windows_VarDateFromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pdateOut: CPointer<Float64>): Int32 {
+    return VarDateFromDec(pdecIn, pdateOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromDisp == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarDateFromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, pdateOut: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromDisp == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarDateFromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, pdateOut: CPointer<Float64>): Int32 {
+    return VarDateFromDisp(pdispIn, lcid, pdateOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromI1 == "on"]
+foreign {
+    func VarDateFromI1(cIn: Int8, pdateOut: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromI1 == "on"]
+public unsafe func Windows_VarDateFromI1(cIn: Int8, pdateOut: CPointer<Float64>): Int32 {
+    return VarDateFromI1(cIn, pdateOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromI2 == "on"]
+foreign {
+    func VarDateFromI2(sIn: Int16, pdateOut: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromI2 == "on"]
+public unsafe func Windows_VarDateFromI2(sIn: Int16, pdateOut: CPointer<Float64>): Int32 {
+    return VarDateFromI2(sIn, pdateOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromI4 == "on"]
+foreign {
+    func VarDateFromI4(lIn: Int32, pdateOut: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromI4 == "on"]
+public unsafe func Windows_VarDateFromI4(lIn: Int32, pdateOut: CPointer<Float64>): Int32 {
+    return VarDateFromI4(lIn, pdateOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromI8 == "on"]
+foreign {
+    func VarDateFromI8(i64In: Int64, pdateOut: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromI8 == "on"]
+public unsafe func Windows_VarDateFromI8(i64In: Int64, pdateOut: CPointer<Float64>): Int32 {
+    return VarDateFromI8(i64In, pdateOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromR4 == "on"]
+foreign {
+    func VarDateFromR4(fltIn: Float32, pdateOut: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromR4 == "on"]
+public unsafe func Windows_VarDateFromR4(fltIn: Float32, pdateOut: CPointer<Float64>): Int32 {
+    return VarDateFromR4(fltIn, pdateOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromR8 == "on"]
+foreign {
+    func VarDateFromR8(dblIn: Float64, pdateOut: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromR8 == "on"]
+public unsafe func Windows_VarDateFromR8(dblIn: Float64, pdateOut: CPointer<Float64>): Int32 {
+    return VarDateFromR8(dblIn, pdateOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromStr == "on"]
+foreign {
+    func VarDateFromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pdateOut: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromStr == "on"]
+public unsafe func Windows_VarDateFromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pdateOut: CPointer<Float64>): Int32 {
+    return VarDateFromStr(strIn, lcid, dwFlags, pdateOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromUI1 == "on"]
+foreign {
+    func VarDateFromUI1(bIn: UInt8, pdateOut: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromUI1 == "on"]
+public unsafe func Windows_VarDateFromUI1(bIn: UInt8, pdateOut: CPointer<Float64>): Int32 {
+    return VarDateFromUI1(bIn, pdateOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromUI2 == "on"]
+foreign {
+    func VarDateFromUI2(uiIn: UInt16, pdateOut: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromUI2 == "on"]
+public unsafe func Windows_VarDateFromUI2(uiIn: UInt16, pdateOut: CPointer<Float64>): Int32 {
+    return VarDateFromUI2(uiIn, pdateOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromUI4 == "on"]
+foreign {
+    func VarDateFromUI4(ulIn: UInt32, pdateOut: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromUI4 == "on"]
+public unsafe func Windows_VarDateFromUI4(ulIn: UInt32, pdateOut: CPointer<Float64>): Int32 {
+    return VarDateFromUI4(ulIn, pdateOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromUI8 == "on"]
+foreign {
+    func VarDateFromUI8(ui64In: UInt64, pdateOut: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromUI8 == "on"]
+public unsafe func Windows_VarDateFromUI8(ui64In: UInt64, pdateOut: CPointer<Float64>): Int32 {
+    return VarDateFromUI8(ui64In, pdateOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromUdate == "on"]
+foreign {
+    func VarDateFromUdate(pudateIn: CPointer<Win32__impl_l0.UDATE>, dwFlags: UInt32, pdateOut: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromUdate == "on"]
+public unsafe func Windows_VarDateFromUdate(pudateIn: CPointer<Win32__impl_l0.UDATE>, dwFlags: UInt32, pdateOut: CPointer<Float64>): Int32 {
+    return VarDateFromUdate(pudateIn, dwFlags, pdateOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromUdateEx == "on"]
+foreign {
+    func VarDateFromUdateEx(pudateIn: CPointer<Win32__impl_l0.UDATE>, lcid: UInt32, dwFlags: UInt32, pdateOut: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromUdateEx == "on"]
+public unsafe func Windows_VarDateFromUdateEx(pudateIn: CPointer<Win32__impl_l0.UDATE>, lcid: UInt32, dwFlags: UInt32, pdateOut: CPointer<Float64>): Int32 {
+    return VarDateFromUdateEx(pudateIn, lcid, dwFlags, pdateOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecAbs == "on"]
+foreign {
+    func VarDecAbs(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pdecResult: CPointer<Win32_Foundation.DECIMAL>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecAbs == "on"]
+public unsafe func Windows_VarDecAbs(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pdecResult: CPointer<Win32_Foundation.DECIMAL>): Int32 {
+    return VarDecAbs(pdecIn, pdecResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecAdd == "on"]
+foreign {
+    func VarDecAdd(pdecLeft: CPointer<Win32_Foundation.DECIMAL>, pdecRight: CPointer<Win32_Foundation.DECIMAL>, pdecResult: CPointer<Win32_Foundation.DECIMAL>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecAdd == "on"]
+public unsafe func Windows_VarDecAdd(pdecLeft: CPointer<Win32_Foundation.DECIMAL>, pdecRight: CPointer<Win32_Foundation.DECIMAL>, pdecResult: CPointer<Win32_Foundation.DECIMAL>): Int32 {
+    return VarDecAdd(pdecLeft, pdecRight, pdecResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecCmp == "on"]
+foreign {
+    func VarDecCmp(pdecLeft: CPointer<Win32_Foundation.DECIMAL>, pdecRight: CPointer<Win32_Foundation.DECIMAL>): UInt32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecCmp == "on"]
+public unsafe func Windows_VarDecCmp(pdecLeft: CPointer<Win32_Foundation.DECIMAL>, pdecRight: CPointer<Win32_Foundation.DECIMAL>): UInt32 {
+    return VarDecCmp(pdecLeft, pdecRight)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecCmpR8 == "on"]
+foreign {
+    func VarDecCmpR8(pdecLeft: CPointer<Win32_Foundation.DECIMAL>, dblRight: Float64): UInt32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecCmpR8 == "on"]
+public unsafe func Windows_VarDecCmpR8(pdecLeft: CPointer<Win32_Foundation.DECIMAL>, dblRight: Float64): UInt32 {
+    return VarDecCmpR8(pdecLeft, dblRight)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecDiv == "on"]
+foreign {
+    func VarDecDiv(pdecLeft: CPointer<Win32_Foundation.DECIMAL>, pdecRight: CPointer<Win32_Foundation.DECIMAL>, pdecResult: CPointer<Win32_Foundation.DECIMAL>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecDiv == "on"]
+public unsafe func Windows_VarDecDiv(pdecLeft: CPointer<Win32_Foundation.DECIMAL>, pdecRight: CPointer<Win32_Foundation.DECIMAL>, pdecResult: CPointer<Win32_Foundation.DECIMAL>): Int32 {
+    return VarDecDiv(pdecLeft, pdecRight, pdecResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFix == "on"]
+foreign {
+    func VarDecFix(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pdecResult: CPointer<Win32_Foundation.DECIMAL>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFix == "on"]
+public unsafe func Windows_VarDecFix(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pdecResult: CPointer<Win32_Foundation.DECIMAL>): Int32 {
+    return VarDecFix(pdecIn, pdecResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromBool == "on"]
+foreign {
+    func VarDecFromBool(boolIn: Int16, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromBool == "on"]
+public unsafe func Windows_VarDecFromBool(boolIn: Int16, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32 {
+    return VarDecFromBool(boolIn, pdecOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromCy == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarDecFromCy(cyIn: Win32__impl_l0.CY, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromCy == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarDecFromCy(cyIn: Win32__impl_l0.CY, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32 {
+    return VarDecFromCy(cyIn, pdecOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromDate == "on"]
+foreign {
+    func VarDecFromDate(dateIn: Float64, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromDate == "on"]
+public unsafe func Windows_VarDecFromDate(dateIn: Float64, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32 {
+    return VarDecFromDate(dateIn, pdecOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromDisp == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarDecFromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromDisp == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarDecFromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32 {
+    return VarDecFromDisp(pdispIn, lcid, pdecOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromI1 == "on"]
+foreign {
+    func VarDecFromI1(cIn: Int8, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromI1 == "on"]
+public unsafe func Windows_VarDecFromI1(cIn: Int8, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32 {
+    return VarDecFromI1(cIn, pdecOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromI2 == "on"]
+foreign {
+    func VarDecFromI2(uiIn: Int16, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromI2 == "on"]
+public unsafe func Windows_VarDecFromI2(uiIn: Int16, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32 {
+    return VarDecFromI2(uiIn, pdecOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromI4 == "on"]
+foreign {
+    func VarDecFromI4(lIn: Int32, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromI4 == "on"]
+public unsafe func Windows_VarDecFromI4(lIn: Int32, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32 {
+    return VarDecFromI4(lIn, pdecOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromI8 == "on"]
+foreign {
+    func VarDecFromI8(i64In: Int64, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromI8 == "on"]
+public unsafe func Windows_VarDecFromI8(i64In: Int64, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32 {
+    return VarDecFromI8(i64In, pdecOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromR4 == "on"]
+foreign {
+    func VarDecFromR4(fltIn: Float32, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromR4 == "on"]
+public unsafe func Windows_VarDecFromR4(fltIn: Float32, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32 {
+    return VarDecFromR4(fltIn, pdecOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromR8 == "on"]
+foreign {
+    func VarDecFromR8(dblIn: Float64, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromR8 == "on"]
+public unsafe func Windows_VarDecFromR8(dblIn: Float64, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32 {
+    return VarDecFromR8(dblIn, pdecOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromStr == "on"]
+foreign {
+    func VarDecFromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromStr == "on"]
+public unsafe func Windows_VarDecFromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32 {
+    return VarDecFromStr(strIn, lcid, dwFlags, pdecOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromUI1 == "on"]
+foreign {
+    func VarDecFromUI1(bIn: UInt8, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromUI1 == "on"]
+public unsafe func Windows_VarDecFromUI1(bIn: UInt8, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32 {
+    return VarDecFromUI1(bIn, pdecOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromUI2 == "on"]
+foreign {
+    func VarDecFromUI2(uiIn: UInt16, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromUI2 == "on"]
+public unsafe func Windows_VarDecFromUI2(uiIn: UInt16, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32 {
+    return VarDecFromUI2(uiIn, pdecOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromUI4 == "on"]
+foreign {
+    func VarDecFromUI4(ulIn: UInt32, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromUI4 == "on"]
+public unsafe func Windows_VarDecFromUI4(ulIn: UInt32, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32 {
+    return VarDecFromUI4(ulIn, pdecOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromUI8 == "on"]
+foreign {
+    func VarDecFromUI8(ui64In: UInt64, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromUI8 == "on"]
+public unsafe func Windows_VarDecFromUI8(ui64In: UInt64, pdecOut: CPointer<Win32_Foundation.DECIMAL>): Int32 {
+    return VarDecFromUI8(ui64In, pdecOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecInt == "on"]
+foreign {
+    func VarDecInt(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pdecResult: CPointer<Win32_Foundation.DECIMAL>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecInt == "on"]
+public unsafe func Windows_VarDecInt(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pdecResult: CPointer<Win32_Foundation.DECIMAL>): Int32 {
+    return VarDecInt(pdecIn, pdecResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecMul == "on"]
+foreign {
+    func VarDecMul(pdecLeft: CPointer<Win32_Foundation.DECIMAL>, pdecRight: CPointer<Win32_Foundation.DECIMAL>, pdecResult: CPointer<Win32_Foundation.DECIMAL>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecMul == "on"]
+public unsafe func Windows_VarDecMul(pdecLeft: CPointer<Win32_Foundation.DECIMAL>, pdecRight: CPointer<Win32_Foundation.DECIMAL>, pdecResult: CPointer<Win32_Foundation.DECIMAL>): Int32 {
+    return VarDecMul(pdecLeft, pdecRight, pdecResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecNeg == "on"]
+foreign {
+    func VarDecNeg(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pdecResult: CPointer<Win32_Foundation.DECIMAL>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecNeg == "on"]
+public unsafe func Windows_VarDecNeg(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pdecResult: CPointer<Win32_Foundation.DECIMAL>): Int32 {
+    return VarDecNeg(pdecIn, pdecResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecRound == "on"]
+foreign {
+    func VarDecRound(pdecIn: CPointer<Win32_Foundation.DECIMAL>, cDecimals: Int32, pdecResult: CPointer<Win32_Foundation.DECIMAL>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecRound == "on"]
+public unsafe func Windows_VarDecRound(pdecIn: CPointer<Win32_Foundation.DECIMAL>, cDecimals: Int32, pdecResult: CPointer<Win32_Foundation.DECIMAL>): Int32 {
+    return VarDecRound(pdecIn, cDecimals, pdecResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecSub == "on"]
+foreign {
+    func VarDecSub(pdecLeft: CPointer<Win32_Foundation.DECIMAL>, pdecRight: CPointer<Win32_Foundation.DECIMAL>, pdecResult: CPointer<Win32_Foundation.DECIMAL>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecSub == "on"]
+public unsafe func Windows_VarDecSub(pdecLeft: CPointer<Win32_Foundation.DECIMAL>, pdecRight: CPointer<Win32_Foundation.DECIMAL>, pdecResult: CPointer<Win32_Foundation.DECIMAL>): Int32 {
+    return VarDecSub(pdecLeft, pdecRight, pdecResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDiv == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func VarDiv(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDiv == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_VarDiv(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32 {
+    return VarDiv(pvarLeft, pvarRight, pvarResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarEqv == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func VarEqv(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarEqv == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_VarEqv(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32 {
+    return VarEqv(pvarLeft, pvarRight, pvarResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarFix == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func VarFix(pvarIn: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarFix == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_VarFix(pvarIn: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32 {
+    return VarFix(pvarIn, pvarResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarFormat == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    // param-hint: pstrFormat optional
+    func VarFormat(pvarIn: CPointer<VARIANT>, pstrFormat: CPointer<UInt16>, iFirstDay: Int32, iFirstWeek: Int32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarFormat == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_VarFormat(pvarIn: CPointer<VARIANT>, pstrFormat: CPointer<UInt16>, iFirstDay: Int32, iFirstWeek: Int32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32 {
+    return VarFormat(pvarIn, pstrFormat, iFirstDay, iFirstWeek, dwFlags, pbstrOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarFormatCurrency == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func VarFormatCurrency(pvarIn: CPointer<VARIANT>, iNumDig: Int32, iIncLead: Int32, iUseParens: Int32, iGroup: Int32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarFormatCurrency == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_VarFormatCurrency(pvarIn: CPointer<VARIANT>, iNumDig: Int32, iIncLead: Int32, iUseParens: Int32, iGroup: Int32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32 {
+    return VarFormatCurrency(pvarIn, iNumDig, iIncLead, iUseParens, iGroup, dwFlags, pbstrOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarFormatDateTime == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func VarFormatDateTime(pvarIn: CPointer<VARIANT>, iNamedFormat: Int32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarFormatDateTime == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_VarFormatDateTime(pvarIn: CPointer<VARIANT>, iNamedFormat: Int32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32 {
+    return VarFormatDateTime(pvarIn, iNamedFormat, dwFlags, pbstrOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarFormatFromTokens == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    // param-hint: pstrFormat optional
+    func VarFormatFromTokens(pvarIn: CPointer<VARIANT>, pstrFormat: CPointer<UInt16>, pbTokCur: CPointer<UInt8>, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>, lcid: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarFormatFromTokens == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_VarFormatFromTokens(pvarIn: CPointer<VARIANT>, pstrFormat: CPointer<UInt16>, pbTokCur: CPointer<UInt8>, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>, lcid: UInt32): Int32 {
+    return VarFormatFromTokens(pvarIn, pstrFormat, pbTokCur, dwFlags, pbstrOut, lcid)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarFormatNumber == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func VarFormatNumber(pvarIn: CPointer<VARIANT>, iNumDig: Int32, iIncLead: Int32, iUseParens: Int32, iGroup: Int32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarFormatNumber == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_VarFormatNumber(pvarIn: CPointer<VARIANT>, iNumDig: Int32, iIncLead: Int32, iUseParens: Int32, iGroup: Int32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32 {
+    return VarFormatNumber(pvarIn, iNumDig, iIncLead, iUseParens, iGroup, dwFlags, pbstrOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarFormatPercent == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func VarFormatPercent(pvarIn: CPointer<VARIANT>, iNumDig: Int32, iIncLead: Int32, iUseParens: Int32, iGroup: Int32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarFormatPercent == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_VarFormatPercent(pvarIn: CPointer<VARIANT>, iNumDig: Int32, iIncLead: Int32, iUseParens: Int32, iGroup: Int32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32 {
+    return VarFormatPercent(pvarIn, iNumDig, iIncLead, iUseParens, iGroup, dwFlags, pbstrOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromBool == "on"]
+foreign {
+    func VarI1FromBool(boolIn: Int16, pcOut: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromBool == "on"]
+public unsafe func Windows_VarI1FromBool(boolIn: Int16, pcOut: CPointer<UInt8>): Int32 {
+    return VarI1FromBool(boolIn, pcOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromCy == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarI1FromCy(cyIn: Win32__impl_l0.CY, pcOut: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromCy == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarI1FromCy(cyIn: Win32__impl_l0.CY, pcOut: CPointer<UInt8>): Int32 {
+    return VarI1FromCy(cyIn, pcOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromDate == "on"]
+foreign {
+    func VarI1FromDate(dateIn: Float64, pcOut: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromDate == "on"]
+public unsafe func Windows_VarI1FromDate(dateIn: Float64, pcOut: CPointer<UInt8>): Int32 {
+    return VarI1FromDate(dateIn, pcOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromDec == "on"]
+foreign {
+    func VarI1FromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pcOut: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromDec == "on"]
+public unsafe func Windows_VarI1FromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pcOut: CPointer<UInt8>): Int32 {
+    return VarI1FromDec(pdecIn, pcOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromDisp == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarI1FromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, pcOut: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromDisp == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarI1FromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, pcOut: CPointer<UInt8>): Int32 {
+    return VarI1FromDisp(pdispIn, lcid, pcOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromI2 == "on"]
+foreign {
+    func VarI1FromI2(uiIn: Int16, pcOut: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromI2 == "on"]
+public unsafe func Windows_VarI1FromI2(uiIn: Int16, pcOut: CPointer<UInt8>): Int32 {
+    return VarI1FromI2(uiIn, pcOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromI4 == "on"]
+foreign {
+    func VarI1FromI4(lIn: Int32, pcOut: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromI4 == "on"]
+public unsafe func Windows_VarI1FromI4(lIn: Int32, pcOut: CPointer<UInt8>): Int32 {
+    return VarI1FromI4(lIn, pcOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromI8 == "on"]
+foreign {
+    func VarI1FromI8(i64In: Int64, pcOut: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromI8 == "on"]
+public unsafe func Windows_VarI1FromI8(i64In: Int64, pcOut: CPointer<UInt8>): Int32 {
+    return VarI1FromI8(i64In, pcOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromR4 == "on"]
+foreign {
+    func VarI1FromR4(fltIn: Float32, pcOut: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromR4 == "on"]
+public unsafe func Windows_VarI1FromR4(fltIn: Float32, pcOut: CPointer<UInt8>): Int32 {
+    return VarI1FromR4(fltIn, pcOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromR8 == "on"]
+foreign {
+    func VarI1FromR8(dblIn: Float64, pcOut: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromR8 == "on"]
+public unsafe func Windows_VarI1FromR8(dblIn: Float64, pcOut: CPointer<UInt8>): Int32 {
+    return VarI1FromR8(dblIn, pcOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromStr == "on"]
+foreign {
+    func VarI1FromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pcOut: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromStr == "on"]
+public unsafe func Windows_VarI1FromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pcOut: CPointer<UInt8>): Int32 {
+    return VarI1FromStr(strIn, lcid, dwFlags, pcOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromUI1 == "on"]
+foreign {
+    func VarI1FromUI1(bIn: UInt8, pcOut: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromUI1 == "on"]
+public unsafe func Windows_VarI1FromUI1(bIn: UInt8, pcOut: CPointer<UInt8>): Int32 {
+    return VarI1FromUI1(bIn, pcOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromUI2 == "on"]
+foreign {
+    func VarI1FromUI2(uiIn: UInt16, pcOut: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromUI2 == "on"]
+public unsafe func Windows_VarI1FromUI2(uiIn: UInt16, pcOut: CPointer<UInt8>): Int32 {
+    return VarI1FromUI2(uiIn, pcOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromUI4 == "on"]
+foreign {
+    func VarI1FromUI4(ulIn: UInt32, pcOut: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromUI4 == "on"]
+public unsafe func Windows_VarI1FromUI4(ulIn: UInt32, pcOut: CPointer<UInt8>): Int32 {
+    return VarI1FromUI4(ulIn, pcOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromUI8 == "on"]
+foreign {
+    func VarI1FromUI8(i64In: UInt64, pcOut: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromUI8 == "on"]
+public unsafe func Windows_VarI1FromUI8(i64In: UInt64, pcOut: CPointer<UInt8>): Int32 {
+    return VarI1FromUI8(i64In, pcOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromBool == "on"]
+foreign {
+    func VarI2FromBool(boolIn: Int16, psOut: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromBool == "on"]
+public unsafe func Windows_VarI2FromBool(boolIn: Int16, psOut: CPointer<Int16>): Int32 {
+    return VarI2FromBool(boolIn, psOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromCy == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarI2FromCy(cyIn: Win32__impl_l0.CY, psOut: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromCy == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarI2FromCy(cyIn: Win32__impl_l0.CY, psOut: CPointer<Int16>): Int32 {
+    return VarI2FromCy(cyIn, psOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromDate == "on"]
+foreign {
+    func VarI2FromDate(dateIn: Float64, psOut: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromDate == "on"]
+public unsafe func Windows_VarI2FromDate(dateIn: Float64, psOut: CPointer<Int16>): Int32 {
+    return VarI2FromDate(dateIn, psOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromDec == "on"]
+foreign {
+    func VarI2FromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, psOut: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromDec == "on"]
+public unsafe func Windows_VarI2FromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, psOut: CPointer<Int16>): Int32 {
+    return VarI2FromDec(pdecIn, psOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromDisp == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarI2FromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, psOut: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromDisp == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarI2FromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, psOut: CPointer<Int16>): Int32 {
+    return VarI2FromDisp(pdispIn, lcid, psOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromI1 == "on"]
+foreign {
+    func VarI2FromI1(cIn: Int8, psOut: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromI1 == "on"]
+public unsafe func Windows_VarI2FromI1(cIn: Int8, psOut: CPointer<Int16>): Int32 {
+    return VarI2FromI1(cIn, psOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromI4 == "on"]
+foreign {
+    func VarI2FromI4(lIn: Int32, psOut: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromI4 == "on"]
+public unsafe func Windows_VarI2FromI4(lIn: Int32, psOut: CPointer<Int16>): Int32 {
+    return VarI2FromI4(lIn, psOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromI8 == "on"]
+foreign {
+    func VarI2FromI8(i64In: Int64, psOut: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromI8 == "on"]
+public unsafe func Windows_VarI2FromI8(i64In: Int64, psOut: CPointer<Int16>): Int32 {
+    return VarI2FromI8(i64In, psOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromR4 == "on"]
+foreign {
+    func VarI2FromR4(fltIn: Float32, psOut: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromR4 == "on"]
+public unsafe func Windows_VarI2FromR4(fltIn: Float32, psOut: CPointer<Int16>): Int32 {
+    return VarI2FromR4(fltIn, psOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromR8 == "on"]
+foreign {
+    func VarI2FromR8(dblIn: Float64, psOut: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromR8 == "on"]
+public unsafe func Windows_VarI2FromR8(dblIn: Float64, psOut: CPointer<Int16>): Int32 {
+    return VarI2FromR8(dblIn, psOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromStr == "on"]
+foreign {
+    func VarI2FromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, psOut: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromStr == "on"]
+public unsafe func Windows_VarI2FromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, psOut: CPointer<Int16>): Int32 {
+    return VarI2FromStr(strIn, lcid, dwFlags, psOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromUI1 == "on"]
+foreign {
+    func VarI2FromUI1(bIn: UInt8, psOut: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromUI1 == "on"]
+public unsafe func Windows_VarI2FromUI1(bIn: UInt8, psOut: CPointer<Int16>): Int32 {
+    return VarI2FromUI1(bIn, psOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromUI2 == "on"]
+foreign {
+    func VarI2FromUI2(uiIn: UInt16, psOut: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromUI2 == "on"]
+public unsafe func Windows_VarI2FromUI2(uiIn: UInt16, psOut: CPointer<Int16>): Int32 {
+    return VarI2FromUI2(uiIn, psOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromUI4 == "on"]
+foreign {
+    func VarI2FromUI4(ulIn: UInt32, psOut: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromUI4 == "on"]
+public unsafe func Windows_VarI2FromUI4(ulIn: UInt32, psOut: CPointer<Int16>): Int32 {
+    return VarI2FromUI4(ulIn, psOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromUI8 == "on"]
+foreign {
+    func VarI2FromUI8(ui64In: UInt64, psOut: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromUI8 == "on"]
+public unsafe func Windows_VarI2FromUI8(ui64In: UInt64, psOut: CPointer<Int16>): Int32 {
+    return VarI2FromUI8(ui64In, psOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromBool == "on"]
+foreign {
+    func VarI4FromBool(boolIn: Int16, plOut: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromBool == "on"]
+public unsafe func Windows_VarI4FromBool(boolIn: Int16, plOut: CPointer<Int32>): Int32 {
+    return VarI4FromBool(boolIn, plOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromCy == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarI4FromCy(cyIn: Win32__impl_l0.CY, plOut: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromCy == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarI4FromCy(cyIn: Win32__impl_l0.CY, plOut: CPointer<Int32>): Int32 {
+    return VarI4FromCy(cyIn, plOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromDate == "on"]
+foreign {
+    func VarI4FromDate(dateIn: Float64, plOut: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromDate == "on"]
+public unsafe func Windows_VarI4FromDate(dateIn: Float64, plOut: CPointer<Int32>): Int32 {
+    return VarI4FromDate(dateIn, plOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromDec == "on"]
+foreign {
+    func VarI4FromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, plOut: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromDec == "on"]
+public unsafe func Windows_VarI4FromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, plOut: CPointer<Int32>): Int32 {
+    return VarI4FromDec(pdecIn, plOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromDisp == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarI4FromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, plOut: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromDisp == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarI4FromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, plOut: CPointer<Int32>): Int32 {
+    return VarI4FromDisp(pdispIn, lcid, plOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromI1 == "on"]
+foreign {
+    func VarI4FromI1(cIn: Int8, plOut: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromI1 == "on"]
+public unsafe func Windows_VarI4FromI1(cIn: Int8, plOut: CPointer<Int32>): Int32 {
+    return VarI4FromI1(cIn, plOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromI2 == "on"]
+foreign {
+    func VarI4FromI2(sIn: Int16, plOut: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromI2 == "on"]
+public unsafe func Windows_VarI4FromI2(sIn: Int16, plOut: CPointer<Int32>): Int32 {
+    return VarI4FromI2(sIn, plOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromI8 == "on"]
+foreign {
+    func VarI4FromI8(i64In: Int64, plOut: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromI8 == "on"]
+public unsafe func Windows_VarI4FromI8(i64In: Int64, plOut: CPointer<Int32>): Int32 {
+    return VarI4FromI8(i64In, plOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromR4 == "on"]
+foreign {
+    func VarI4FromR4(fltIn: Float32, plOut: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromR4 == "on"]
+public unsafe func Windows_VarI4FromR4(fltIn: Float32, plOut: CPointer<Int32>): Int32 {
+    return VarI4FromR4(fltIn, plOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromR8 == "on"]
+foreign {
+    func VarI4FromR8(dblIn: Float64, plOut: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromR8 == "on"]
+public unsafe func Windows_VarI4FromR8(dblIn: Float64, plOut: CPointer<Int32>): Int32 {
+    return VarI4FromR8(dblIn, plOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromStr == "on"]
+foreign {
+    func VarI4FromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, plOut: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromStr == "on"]
+public unsafe func Windows_VarI4FromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, plOut: CPointer<Int32>): Int32 {
+    return VarI4FromStr(strIn, lcid, dwFlags, plOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromUI1 == "on"]
+foreign {
+    func VarI4FromUI1(bIn: UInt8, plOut: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromUI1 == "on"]
+public unsafe func Windows_VarI4FromUI1(bIn: UInt8, plOut: CPointer<Int32>): Int32 {
+    return VarI4FromUI1(bIn, plOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromUI2 == "on"]
+foreign {
+    func VarI4FromUI2(uiIn: UInt16, plOut: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromUI2 == "on"]
+public unsafe func Windows_VarI4FromUI2(uiIn: UInt16, plOut: CPointer<Int32>): Int32 {
+    return VarI4FromUI2(uiIn, plOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromUI4 == "on"]
+foreign {
+    func VarI4FromUI4(ulIn: UInt32, plOut: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromUI4 == "on"]
+public unsafe func Windows_VarI4FromUI4(ulIn: UInt32, plOut: CPointer<Int32>): Int32 {
+    return VarI4FromUI4(ulIn, plOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromUI8 == "on"]
+foreign {
+    func VarI4FromUI8(ui64In: UInt64, plOut: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromUI8 == "on"]
+public unsafe func Windows_VarI4FromUI8(ui64In: UInt64, plOut: CPointer<Int32>): Int32 {
+    return VarI4FromUI8(ui64In, plOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromBool == "on"]
+foreign {
+    func VarI8FromBool(boolIn: Int16, pi64Out: CPointer<Int64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromBool == "on"]
+public unsafe func Windows_VarI8FromBool(boolIn: Int16, pi64Out: CPointer<Int64>): Int32 {
+    return VarI8FromBool(boolIn, pi64Out)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromCy == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarI8FromCy(cyIn: Win32__impl_l0.CY, pi64Out: CPointer<Int64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromCy == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarI8FromCy(cyIn: Win32__impl_l0.CY, pi64Out: CPointer<Int64>): Int32 {
+    return VarI8FromCy(cyIn, pi64Out)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromDate == "on"]
+foreign {
+    func VarI8FromDate(dateIn: Float64, pi64Out: CPointer<Int64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromDate == "on"]
+public unsafe func Windows_VarI8FromDate(dateIn: Float64, pi64Out: CPointer<Int64>): Int32 {
+    return VarI8FromDate(dateIn, pi64Out)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromDec == "on"]
+foreign {
+    func VarI8FromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pi64Out: CPointer<Int64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromDec == "on"]
+public unsafe func Windows_VarI8FromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pi64Out: CPointer<Int64>): Int32 {
+    return VarI8FromDec(pdecIn, pi64Out)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromDisp == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarI8FromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, pi64Out: CPointer<Int64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromDisp == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarI8FromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, pi64Out: CPointer<Int64>): Int32 {
+    return VarI8FromDisp(pdispIn, lcid, pi64Out)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromI1 == "on"]
+foreign {
+    func VarI8FromI1(cIn: Int8, pi64Out: CPointer<Int64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromI1 == "on"]
+public unsafe func Windows_VarI8FromI1(cIn: Int8, pi64Out: CPointer<Int64>): Int32 {
+    return VarI8FromI1(cIn, pi64Out)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromI2 == "on"]
+foreign {
+    func VarI8FromI2(sIn: Int16, pi64Out: CPointer<Int64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromI2 == "on"]
+public unsafe func Windows_VarI8FromI2(sIn: Int16, pi64Out: CPointer<Int64>): Int32 {
+    return VarI8FromI2(sIn, pi64Out)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromR4 == "on"]
+foreign {
+    func VarI8FromR4(fltIn: Float32, pi64Out: CPointer<Int64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromR4 == "on"]
+public unsafe func Windows_VarI8FromR4(fltIn: Float32, pi64Out: CPointer<Int64>): Int32 {
+    return VarI8FromR4(fltIn, pi64Out)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromR8 == "on"]
+foreign {
+    func VarI8FromR8(dblIn: Float64, pi64Out: CPointer<Int64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromR8 == "on"]
+public unsafe func Windows_VarI8FromR8(dblIn: Float64, pi64Out: CPointer<Int64>): Int32 {
+    return VarI8FromR8(dblIn, pi64Out)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromStr == "on"]
+foreign {
+    func VarI8FromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pi64Out: CPointer<Int64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromStr == "on"]
+public unsafe func Windows_VarI8FromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pi64Out: CPointer<Int64>): Int32 {
+    return VarI8FromStr(strIn, lcid, dwFlags, pi64Out)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromUI1 == "on"]
+foreign {
+    func VarI8FromUI1(bIn: UInt8, pi64Out: CPointer<Int64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromUI1 == "on"]
+public unsafe func Windows_VarI8FromUI1(bIn: UInt8, pi64Out: CPointer<Int64>): Int32 {
+    return VarI8FromUI1(bIn, pi64Out)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromUI2 == "on"]
+foreign {
+    func VarI8FromUI2(uiIn: UInt16, pi64Out: CPointer<Int64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromUI2 == "on"]
+public unsafe func Windows_VarI8FromUI2(uiIn: UInt16, pi64Out: CPointer<Int64>): Int32 {
+    return VarI8FromUI2(uiIn, pi64Out)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromUI4 == "on"]
+foreign {
+    func VarI8FromUI4(ulIn: UInt32, pi64Out: CPointer<Int64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromUI4 == "on"]
+public unsafe func Windows_VarI8FromUI4(ulIn: UInt32, pi64Out: CPointer<Int64>): Int32 {
+    return VarI8FromUI4(ulIn, pi64Out)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromUI8 == "on"]
+foreign {
+    func VarI8FromUI8(ui64In: UInt64, pi64Out: CPointer<Int64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromUI8 == "on"]
+public unsafe func Windows_VarI8FromUI8(ui64In: UInt64, pi64Out: CPointer<Int64>): Int32 {
+    return VarI8FromUI8(ui64In, pi64Out)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarIdiv == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func VarIdiv(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarIdiv == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_VarIdiv(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32 {
+    return VarIdiv(pvarLeft, pvarRight, pvarResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarImp == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func VarImp(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarImp == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_VarImp(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32 {
+    return VarImp(pvarLeft, pvarRight, pvarResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarInt == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func VarInt(pvarIn: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarInt == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_VarInt(pvarIn: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32 {
+    return VarInt(pvarIn, pvarResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarMod == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func VarMod(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarMod == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_VarMod(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32 {
+    return VarMod(pvarLeft, pvarRight, pvarResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarMonthName == "on"]
+foreign {
+    func VarMonthName(iMonth: Int32, fAbbrev: Int32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarMonthName == "on"]
+public unsafe func Windows_VarMonthName(iMonth: Int32, fAbbrev: Int32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32 {
+    return VarMonthName(iMonth, fAbbrev, dwFlags, pbstrOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarMul == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func VarMul(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarMul == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_VarMul(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32 {
+    return VarMul(pvarLeft, pvarRight, pvarResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarNeg == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func VarNeg(pvarIn: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarNeg == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_VarNeg(pvarIn: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32 {
+    return VarNeg(pvarIn, pvarResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarNot == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func VarNot(pvarIn: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarNot == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_VarNot(pvarIn: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32 {
+    return VarNot(pvarIn, pvarResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarNumFromParseNum == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func VarNumFromParseNum(pnumprs: CPointer<Win32__impl_l1.NUMPARSE>, rgbDig: CPointer<UInt8>, dwVtBits: UInt32, pvar: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarNumFromParseNum == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_VarNumFromParseNum(pnumprs: CPointer<Win32__impl_l1.NUMPARSE>, rgbDig: CPointer<UInt8>, dwVtBits: UInt32, pvar: CPointer<VARIANT>): Int32 {
+    return VarNumFromParseNum(pnumprs, rgbDig, dwVtBits, pvar)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarOr == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func VarOr(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarOr == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_VarOr(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32 {
+    return VarOr(pvarLeft, pvarRight, pvarResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarParseNumFromStr == "on"]
+foreign {
+    func VarParseNumFromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pnumprs: CPointer<Win32__impl_l1.NUMPARSE>, rgbDig: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarParseNumFromStr == "on"]
+public unsafe func Windows_VarParseNumFromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pnumprs: CPointer<Win32__impl_l1.NUMPARSE>, rgbDig: CPointer<UInt8>): Int32 {
+    return VarParseNumFromStr(strIn, lcid, dwFlags, pnumprs, rgbDig)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarPow == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func VarPow(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarPow == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_VarPow(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32 {
+    return VarPow(pvarLeft, pvarRight, pvarResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4CmpR8 == "on"]
+foreign {
+    func VarR4CmpR8(fltLeft: Float32, dblRight: Float64): UInt32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4CmpR8 == "on"]
+public unsafe func Windows_VarR4CmpR8(fltLeft: Float32, dblRight: Float64): UInt32 {
+    return VarR4CmpR8(fltLeft, dblRight)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromBool == "on"]
+foreign {
+    func VarR4FromBool(boolIn: Int16, pfltOut: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromBool == "on"]
+public unsafe func Windows_VarR4FromBool(boolIn: Int16, pfltOut: CPointer<Float32>): Int32 {
+    return VarR4FromBool(boolIn, pfltOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromCy == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarR4FromCy(cyIn: Win32__impl_l0.CY, pfltOut: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromCy == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarR4FromCy(cyIn: Win32__impl_l0.CY, pfltOut: CPointer<Float32>): Int32 {
+    return VarR4FromCy(cyIn, pfltOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromDate == "on"]
+foreign {
+    func VarR4FromDate(dateIn: Float64, pfltOut: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromDate == "on"]
+public unsafe func Windows_VarR4FromDate(dateIn: Float64, pfltOut: CPointer<Float32>): Int32 {
+    return VarR4FromDate(dateIn, pfltOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromDec == "on"]
+foreign {
+    func VarR4FromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pfltOut: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromDec == "on"]
+public unsafe func Windows_VarR4FromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pfltOut: CPointer<Float32>): Int32 {
+    return VarR4FromDec(pdecIn, pfltOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromDisp == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarR4FromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, pfltOut: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromDisp == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarR4FromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, pfltOut: CPointer<Float32>): Int32 {
+    return VarR4FromDisp(pdispIn, lcid, pfltOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromI1 == "on"]
+foreign {
+    func VarR4FromI1(cIn: Int8, pfltOut: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromI1 == "on"]
+public unsafe func Windows_VarR4FromI1(cIn: Int8, pfltOut: CPointer<Float32>): Int32 {
+    return VarR4FromI1(cIn, pfltOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromI2 == "on"]
+foreign {
+    func VarR4FromI2(sIn: Int16, pfltOut: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromI2 == "on"]
+public unsafe func Windows_VarR4FromI2(sIn: Int16, pfltOut: CPointer<Float32>): Int32 {
+    return VarR4FromI2(sIn, pfltOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromI4 == "on"]
+foreign {
+    func VarR4FromI4(lIn: Int32, pfltOut: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromI4 == "on"]
+public unsafe func Windows_VarR4FromI4(lIn: Int32, pfltOut: CPointer<Float32>): Int32 {
+    return VarR4FromI4(lIn, pfltOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromI8 == "on"]
+foreign {
+    func VarR4FromI8(i64In: Int64, pfltOut: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromI8 == "on"]
+public unsafe func Windows_VarR4FromI8(i64In: Int64, pfltOut: CPointer<Float32>): Int32 {
+    return VarR4FromI8(i64In, pfltOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromR8 == "on"]
+foreign {
+    func VarR4FromR8(dblIn: Float64, pfltOut: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromR8 == "on"]
+public unsafe func Windows_VarR4FromR8(dblIn: Float64, pfltOut: CPointer<Float32>): Int32 {
+    return VarR4FromR8(dblIn, pfltOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromStr == "on"]
+foreign {
+    func VarR4FromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pfltOut: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromStr == "on"]
+public unsafe func Windows_VarR4FromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pfltOut: CPointer<Float32>): Int32 {
+    return VarR4FromStr(strIn, lcid, dwFlags, pfltOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromUI1 == "on"]
+foreign {
+    func VarR4FromUI1(bIn: UInt8, pfltOut: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromUI1 == "on"]
+public unsafe func Windows_VarR4FromUI1(bIn: UInt8, pfltOut: CPointer<Float32>): Int32 {
+    return VarR4FromUI1(bIn, pfltOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromUI2 == "on"]
+foreign {
+    func VarR4FromUI2(uiIn: UInt16, pfltOut: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromUI2 == "on"]
+public unsafe func Windows_VarR4FromUI2(uiIn: UInt16, pfltOut: CPointer<Float32>): Int32 {
+    return VarR4FromUI2(uiIn, pfltOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromUI4 == "on"]
+foreign {
+    func VarR4FromUI4(ulIn: UInt32, pfltOut: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromUI4 == "on"]
+public unsafe func Windows_VarR4FromUI4(ulIn: UInt32, pfltOut: CPointer<Float32>): Int32 {
+    return VarR4FromUI4(ulIn, pfltOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromUI8 == "on"]
+foreign {
+    func VarR4FromUI8(ui64In: UInt64, pfltOut: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromUI8 == "on"]
+public unsafe func Windows_VarR4FromUI8(ui64In: UInt64, pfltOut: CPointer<Float32>): Int32 {
+    return VarR4FromUI8(ui64In, pfltOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromBool == "on"]
+foreign {
+    func VarR8FromBool(boolIn: Int16, pdblOut: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromBool == "on"]
+public unsafe func Windows_VarR8FromBool(boolIn: Int16, pdblOut: CPointer<Float64>): Int32 {
+    return VarR8FromBool(boolIn, pdblOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromCy == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarR8FromCy(cyIn: Win32__impl_l0.CY, pdblOut: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromCy == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarR8FromCy(cyIn: Win32__impl_l0.CY, pdblOut: CPointer<Float64>): Int32 {
+    return VarR8FromCy(cyIn, pdblOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromDate == "on"]
+foreign {
+    func VarR8FromDate(dateIn: Float64, pdblOut: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromDate == "on"]
+public unsafe func Windows_VarR8FromDate(dateIn: Float64, pdblOut: CPointer<Float64>): Int32 {
+    return VarR8FromDate(dateIn, pdblOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromDec == "on"]
+foreign {
+    func VarR8FromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pdblOut: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromDec == "on"]
+public unsafe func Windows_VarR8FromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pdblOut: CPointer<Float64>): Int32 {
+    return VarR8FromDec(pdecIn, pdblOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromDisp == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarR8FromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, pdblOut: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromDisp == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarR8FromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, pdblOut: CPointer<Float64>): Int32 {
+    return VarR8FromDisp(pdispIn, lcid, pdblOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromI1 == "on"]
+foreign {
+    func VarR8FromI1(cIn: Int8, pdblOut: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromI1 == "on"]
+public unsafe func Windows_VarR8FromI1(cIn: Int8, pdblOut: CPointer<Float64>): Int32 {
+    return VarR8FromI1(cIn, pdblOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromI2 == "on"]
+foreign {
+    func VarR8FromI2(sIn: Int16, pdblOut: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromI2 == "on"]
+public unsafe func Windows_VarR8FromI2(sIn: Int16, pdblOut: CPointer<Float64>): Int32 {
+    return VarR8FromI2(sIn, pdblOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromI4 == "on"]
+foreign {
+    func VarR8FromI4(lIn: Int32, pdblOut: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromI4 == "on"]
+public unsafe func Windows_VarR8FromI4(lIn: Int32, pdblOut: CPointer<Float64>): Int32 {
+    return VarR8FromI4(lIn, pdblOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromI8 == "on"]
+foreign {
+    func VarR8FromI8(i64In: Int64, pdblOut: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromI8 == "on"]
+public unsafe func Windows_VarR8FromI8(i64In: Int64, pdblOut: CPointer<Float64>): Int32 {
+    return VarR8FromI8(i64In, pdblOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromR4 == "on"]
+foreign {
+    func VarR8FromR4(fltIn: Float32, pdblOut: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromR4 == "on"]
+public unsafe func Windows_VarR8FromR4(fltIn: Float32, pdblOut: CPointer<Float64>): Int32 {
+    return VarR8FromR4(fltIn, pdblOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromStr == "on"]
+foreign {
+    func VarR8FromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pdblOut: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromStr == "on"]
+public unsafe func Windows_VarR8FromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pdblOut: CPointer<Float64>): Int32 {
+    return VarR8FromStr(strIn, lcid, dwFlags, pdblOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromUI1 == "on"]
+foreign {
+    func VarR8FromUI1(bIn: UInt8, pdblOut: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromUI1 == "on"]
+public unsafe func Windows_VarR8FromUI1(bIn: UInt8, pdblOut: CPointer<Float64>): Int32 {
+    return VarR8FromUI1(bIn, pdblOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromUI2 == "on"]
+foreign {
+    func VarR8FromUI2(uiIn: UInt16, pdblOut: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromUI2 == "on"]
+public unsafe func Windows_VarR8FromUI2(uiIn: UInt16, pdblOut: CPointer<Float64>): Int32 {
+    return VarR8FromUI2(uiIn, pdblOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromUI4 == "on"]
+foreign {
+    func VarR8FromUI4(ulIn: UInt32, pdblOut: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromUI4 == "on"]
+public unsafe func Windows_VarR8FromUI4(ulIn: UInt32, pdblOut: CPointer<Float64>): Int32 {
+    return VarR8FromUI4(ulIn, pdblOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromUI8 == "on"]
+foreign {
+    func VarR8FromUI8(ui64In: UInt64, pdblOut: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromUI8 == "on"]
+public unsafe func Windows_VarR8FromUI8(ui64In: UInt64, pdblOut: CPointer<Float64>): Int32 {
+    return VarR8FromUI8(ui64In, pdblOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8Pow == "on"]
+foreign {
+    func VarR8Pow(dblLeft: Float64, dblRight: Float64, pdblResult: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8Pow == "on"]
+public unsafe func Windows_VarR8Pow(dblLeft: Float64, dblRight: Float64, pdblResult: CPointer<Float64>): Int32 {
+    return VarR8Pow(dblLeft, dblRight, pdblResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8Round == "on"]
+foreign {
+    func VarR8Round(dblIn: Float64, cDecimals: Int32, pdblResult: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8Round == "on"]
+public unsafe func Windows_VarR8Round(dblIn: Float64, cDecimals: Int32, pdblResult: CPointer<Float64>): Int32 {
+    return VarR8Round(dblIn, cDecimals, pdblResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarRound == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func VarRound(pvarIn: CPointer<VARIANT>, cDecimals: Int32, pvarResult: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarRound == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_VarRound(pvarIn: CPointer<VARIANT>, cDecimals: Int32, pvarResult: CPointer<VARIANT>): Int32 {
+    return VarRound(pvarIn, cDecimals, pvarResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarSub == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func VarSub(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarSub == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_VarSub(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32 {
+    return VarSub(pvarLeft, pvarRight, pvarResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarTokenizeFormatString == "on"]
+foreign {
+    // param-hint: pstrFormat optional
+    // param-hint: rgbTok len=param[2]
+    // param-hint: pcbActual optional
+    func VarTokenizeFormatString(pstrFormat: CPointer<UInt16>, rgbTok: CPointer<UInt8>, cbTok: Int32, iFirstDay: Int32, iFirstWeek: Int32, lcid: UInt32, pcbActual: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarTokenizeFormatString == "on"]
+public unsafe func Windows_VarTokenizeFormatString(pstrFormat: CPointer<UInt16>, rgbTok: CPointer<UInt8>, cbTok: Int32, iFirstDay: Int32, iFirstWeek: Int32, lcid: UInt32, pcbActual: CPointer<Int32>): Int32 {
+    return VarTokenizeFormatString(pstrFormat, rgbTok, cbTok, iFirstDay, iFirstWeek, lcid, pcbActual)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromBool == "on"]
+foreign {
+    func VarUI1FromBool(boolIn: Int16, pbOut: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromBool == "on"]
+public unsafe func Windows_VarUI1FromBool(boolIn: Int16, pbOut: CPointer<UInt8>): Int32 {
+    return VarUI1FromBool(boolIn, pbOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromCy == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarUI1FromCy(cyIn: Win32__impl_l0.CY, pbOut: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromCy == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarUI1FromCy(cyIn: Win32__impl_l0.CY, pbOut: CPointer<UInt8>): Int32 {
+    return VarUI1FromCy(cyIn, pbOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromDate == "on"]
+foreign {
+    func VarUI1FromDate(dateIn: Float64, pbOut: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromDate == "on"]
+public unsafe func Windows_VarUI1FromDate(dateIn: Float64, pbOut: CPointer<UInt8>): Int32 {
+    return VarUI1FromDate(dateIn, pbOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromDec == "on"]
+foreign {
+    func VarUI1FromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pbOut: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromDec == "on"]
+public unsafe func Windows_VarUI1FromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pbOut: CPointer<UInt8>): Int32 {
+    return VarUI1FromDec(pdecIn, pbOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromDisp == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarUI1FromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, pbOut: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromDisp == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarUI1FromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, pbOut: CPointer<UInt8>): Int32 {
+    return VarUI1FromDisp(pdispIn, lcid, pbOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromI1 == "on"]
+foreign {
+    func VarUI1FromI1(cIn: Int8, pbOut: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromI1 == "on"]
+public unsafe func Windows_VarUI1FromI1(cIn: Int8, pbOut: CPointer<UInt8>): Int32 {
+    return VarUI1FromI1(cIn, pbOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromI2 == "on"]
+foreign {
+    func VarUI1FromI2(sIn: Int16, pbOut: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromI2 == "on"]
+public unsafe func Windows_VarUI1FromI2(sIn: Int16, pbOut: CPointer<UInt8>): Int32 {
+    return VarUI1FromI2(sIn, pbOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromI4 == "on"]
+foreign {
+    func VarUI1FromI4(lIn: Int32, pbOut: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromI4 == "on"]
+public unsafe func Windows_VarUI1FromI4(lIn: Int32, pbOut: CPointer<UInt8>): Int32 {
+    return VarUI1FromI4(lIn, pbOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromI8 == "on"]
+foreign {
+    func VarUI1FromI8(i64In: Int64, pbOut: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromI8 == "on"]
+public unsafe func Windows_VarUI1FromI8(i64In: Int64, pbOut: CPointer<UInt8>): Int32 {
+    return VarUI1FromI8(i64In, pbOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromR4 == "on"]
+foreign {
+    func VarUI1FromR4(fltIn: Float32, pbOut: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromR4 == "on"]
+public unsafe func Windows_VarUI1FromR4(fltIn: Float32, pbOut: CPointer<UInt8>): Int32 {
+    return VarUI1FromR4(fltIn, pbOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromR8 == "on"]
+foreign {
+    func VarUI1FromR8(dblIn: Float64, pbOut: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromR8 == "on"]
+public unsafe func Windows_VarUI1FromR8(dblIn: Float64, pbOut: CPointer<UInt8>): Int32 {
+    return VarUI1FromR8(dblIn, pbOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromStr == "on"]
+foreign {
+    func VarUI1FromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pbOut: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromStr == "on"]
+public unsafe func Windows_VarUI1FromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pbOut: CPointer<UInt8>): Int32 {
+    return VarUI1FromStr(strIn, lcid, dwFlags, pbOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromUI2 == "on"]
+foreign {
+    func VarUI1FromUI2(uiIn: UInt16, pbOut: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromUI2 == "on"]
+public unsafe func Windows_VarUI1FromUI2(uiIn: UInt16, pbOut: CPointer<UInt8>): Int32 {
+    return VarUI1FromUI2(uiIn, pbOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromUI4 == "on"]
+foreign {
+    func VarUI1FromUI4(ulIn: UInt32, pbOut: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromUI4 == "on"]
+public unsafe func Windows_VarUI1FromUI4(ulIn: UInt32, pbOut: CPointer<UInt8>): Int32 {
+    return VarUI1FromUI4(ulIn, pbOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromUI8 == "on"]
+foreign {
+    func VarUI1FromUI8(ui64In: UInt64, pbOut: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromUI8 == "on"]
+public unsafe func Windows_VarUI1FromUI8(ui64In: UInt64, pbOut: CPointer<UInt8>): Int32 {
+    return VarUI1FromUI8(ui64In, pbOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromBool == "on"]
+foreign {
+    func VarUI2FromBool(boolIn: Int16, puiOut: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromBool == "on"]
+public unsafe func Windows_VarUI2FromBool(boolIn: Int16, puiOut: CPointer<UInt16>): Int32 {
+    return VarUI2FromBool(boolIn, puiOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromCy == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarUI2FromCy(cyIn: Win32__impl_l0.CY, puiOut: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromCy == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarUI2FromCy(cyIn: Win32__impl_l0.CY, puiOut: CPointer<UInt16>): Int32 {
+    return VarUI2FromCy(cyIn, puiOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromDate == "on"]
+foreign {
+    func VarUI2FromDate(dateIn: Float64, puiOut: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromDate == "on"]
+public unsafe func Windows_VarUI2FromDate(dateIn: Float64, puiOut: CPointer<UInt16>): Int32 {
+    return VarUI2FromDate(dateIn, puiOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromDec == "on"]
+foreign {
+    func VarUI2FromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, puiOut: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromDec == "on"]
+public unsafe func Windows_VarUI2FromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, puiOut: CPointer<UInt16>): Int32 {
+    return VarUI2FromDec(pdecIn, puiOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromDisp == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarUI2FromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, puiOut: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromDisp == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarUI2FromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, puiOut: CPointer<UInt16>): Int32 {
+    return VarUI2FromDisp(pdispIn, lcid, puiOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromI1 == "on"]
+foreign {
+    func VarUI2FromI1(cIn: Int8, puiOut: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromI1 == "on"]
+public unsafe func Windows_VarUI2FromI1(cIn: Int8, puiOut: CPointer<UInt16>): Int32 {
+    return VarUI2FromI1(cIn, puiOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromI2 == "on"]
+foreign {
+    func VarUI2FromI2(uiIn: Int16, puiOut: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromI2 == "on"]
+public unsafe func Windows_VarUI2FromI2(uiIn: Int16, puiOut: CPointer<UInt16>): Int32 {
+    return VarUI2FromI2(uiIn, puiOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromI4 == "on"]
+foreign {
+    func VarUI2FromI4(lIn: Int32, puiOut: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromI4 == "on"]
+public unsafe func Windows_VarUI2FromI4(lIn: Int32, puiOut: CPointer<UInt16>): Int32 {
+    return VarUI2FromI4(lIn, puiOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromI8 == "on"]
+foreign {
+    func VarUI2FromI8(i64In: Int64, puiOut: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromI8 == "on"]
+public unsafe func Windows_VarUI2FromI8(i64In: Int64, puiOut: CPointer<UInt16>): Int32 {
+    return VarUI2FromI8(i64In, puiOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromR4 == "on"]
+foreign {
+    func VarUI2FromR4(fltIn: Float32, puiOut: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromR4 == "on"]
+public unsafe func Windows_VarUI2FromR4(fltIn: Float32, puiOut: CPointer<UInt16>): Int32 {
+    return VarUI2FromR4(fltIn, puiOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromR8 == "on"]
+foreign {
+    func VarUI2FromR8(dblIn: Float64, puiOut: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromR8 == "on"]
+public unsafe func Windows_VarUI2FromR8(dblIn: Float64, puiOut: CPointer<UInt16>): Int32 {
+    return VarUI2FromR8(dblIn, puiOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromStr == "on"]
+foreign {
+    func VarUI2FromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, puiOut: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromStr == "on"]
+public unsafe func Windows_VarUI2FromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, puiOut: CPointer<UInt16>): Int32 {
+    return VarUI2FromStr(strIn, lcid, dwFlags, puiOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromUI1 == "on"]
+foreign {
+    func VarUI2FromUI1(bIn: UInt8, puiOut: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromUI1 == "on"]
+public unsafe func Windows_VarUI2FromUI1(bIn: UInt8, puiOut: CPointer<UInt16>): Int32 {
+    return VarUI2FromUI1(bIn, puiOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromUI4 == "on"]
+foreign {
+    func VarUI2FromUI4(ulIn: UInt32, puiOut: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromUI4 == "on"]
+public unsafe func Windows_VarUI2FromUI4(ulIn: UInt32, puiOut: CPointer<UInt16>): Int32 {
+    return VarUI2FromUI4(ulIn, puiOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromUI8 == "on"]
+foreign {
+    func VarUI2FromUI8(i64In: UInt64, puiOut: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromUI8 == "on"]
+public unsafe func Windows_VarUI2FromUI8(i64In: UInt64, puiOut: CPointer<UInt16>): Int32 {
+    return VarUI2FromUI8(i64In, puiOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromBool == "on"]
+foreign {
+    func VarUI4FromBool(boolIn: Int16, pulOut: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromBool == "on"]
+public unsafe func Windows_VarUI4FromBool(boolIn: Int16, pulOut: CPointer<UInt32>): Int32 {
+    return VarUI4FromBool(boolIn, pulOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromCy == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarUI4FromCy(cyIn: Win32__impl_l0.CY, pulOut: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromCy == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarUI4FromCy(cyIn: Win32__impl_l0.CY, pulOut: CPointer<UInt32>): Int32 {
+    return VarUI4FromCy(cyIn, pulOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromDate == "on"]
+foreign {
+    func VarUI4FromDate(dateIn: Float64, pulOut: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromDate == "on"]
+public unsafe func Windows_VarUI4FromDate(dateIn: Float64, pulOut: CPointer<UInt32>): Int32 {
+    return VarUI4FromDate(dateIn, pulOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromDec == "on"]
+foreign {
+    func VarUI4FromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pulOut: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromDec == "on"]
+public unsafe func Windows_VarUI4FromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pulOut: CPointer<UInt32>): Int32 {
+    return VarUI4FromDec(pdecIn, pulOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromDisp == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarUI4FromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, pulOut: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromDisp == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarUI4FromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, pulOut: CPointer<UInt32>): Int32 {
+    return VarUI4FromDisp(pdispIn, lcid, pulOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromI1 == "on"]
+foreign {
+    func VarUI4FromI1(cIn: Int8, pulOut: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromI1 == "on"]
+public unsafe func Windows_VarUI4FromI1(cIn: Int8, pulOut: CPointer<UInt32>): Int32 {
+    return VarUI4FromI1(cIn, pulOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromI2 == "on"]
+foreign {
+    func VarUI4FromI2(uiIn: Int16, pulOut: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromI2 == "on"]
+public unsafe func Windows_VarUI4FromI2(uiIn: Int16, pulOut: CPointer<UInt32>): Int32 {
+    return VarUI4FromI2(uiIn, pulOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromI4 == "on"]
+foreign {
+    func VarUI4FromI4(lIn: Int32, pulOut: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromI4 == "on"]
+public unsafe func Windows_VarUI4FromI4(lIn: Int32, pulOut: CPointer<UInt32>): Int32 {
+    return VarUI4FromI4(lIn, pulOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromI8 == "on"]
+foreign {
+    func VarUI4FromI8(i64In: Int64, plOut: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromI8 == "on"]
+public unsafe func Windows_VarUI4FromI8(i64In: Int64, plOut: CPointer<UInt32>): Int32 {
+    return VarUI4FromI8(i64In, plOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromR4 == "on"]
+foreign {
+    func VarUI4FromR4(fltIn: Float32, pulOut: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromR4 == "on"]
+public unsafe func Windows_VarUI4FromR4(fltIn: Float32, pulOut: CPointer<UInt32>): Int32 {
+    return VarUI4FromR4(fltIn, pulOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromR8 == "on"]
+foreign {
+    func VarUI4FromR8(dblIn: Float64, pulOut: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromR8 == "on"]
+public unsafe func Windows_VarUI4FromR8(dblIn: Float64, pulOut: CPointer<UInt32>): Int32 {
+    return VarUI4FromR8(dblIn, pulOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromStr == "on"]
+foreign {
+    func VarUI4FromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pulOut: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromStr == "on"]
+public unsafe func Windows_VarUI4FromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pulOut: CPointer<UInt32>): Int32 {
+    return VarUI4FromStr(strIn, lcid, dwFlags, pulOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromUI1 == "on"]
+foreign {
+    func VarUI4FromUI1(bIn: UInt8, pulOut: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromUI1 == "on"]
+public unsafe func Windows_VarUI4FromUI1(bIn: UInt8, pulOut: CPointer<UInt32>): Int32 {
+    return VarUI4FromUI1(bIn, pulOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromUI2 == "on"]
+foreign {
+    func VarUI4FromUI2(uiIn: UInt16, pulOut: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromUI2 == "on"]
+public unsafe func Windows_VarUI4FromUI2(uiIn: UInt16, pulOut: CPointer<UInt32>): Int32 {
+    return VarUI4FromUI2(uiIn, pulOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromUI8 == "on"]
+foreign {
+    func VarUI4FromUI8(ui64In: UInt64, plOut: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromUI8 == "on"]
+public unsafe func Windows_VarUI4FromUI8(ui64In: UInt64, plOut: CPointer<UInt32>): Int32 {
+    return VarUI4FromUI8(ui64In, plOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromBool == "on"]
+foreign {
+    func VarUI8FromBool(boolIn: Int16, pi64Out: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromBool == "on"]
+public unsafe func Windows_VarUI8FromBool(boolIn: Int16, pi64Out: CPointer<UInt64>): Int32 {
+    return VarUI8FromBool(boolIn, pi64Out)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromCy == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarUI8FromCy(cyIn: Win32__impl_l0.CY, pi64Out: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromCy == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarUI8FromCy(cyIn: Win32__impl_l0.CY, pi64Out: CPointer<UInt64>): Int32 {
+    return VarUI8FromCy(cyIn, pi64Out)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromDate == "on"]
+foreign {
+    func VarUI8FromDate(dateIn: Float64, pi64Out: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromDate == "on"]
+public unsafe func Windows_VarUI8FromDate(dateIn: Float64, pi64Out: CPointer<UInt64>): Int32 {
+    return VarUI8FromDate(dateIn, pi64Out)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromDec == "on"]
+foreign {
+    func VarUI8FromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pi64Out: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromDec == "on"]
+public unsafe func Windows_VarUI8FromDec(pdecIn: CPointer<Win32_Foundation.DECIMAL>, pi64Out: CPointer<UInt64>): Int32 {
+    return VarUI8FromDec(pdecIn, pi64Out)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromDisp == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VarUI8FromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, pi64Out: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromDisp == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VarUI8FromDisp(pdispIn: CPointer<Unit>, lcid: UInt32, pi64Out: CPointer<UInt64>): Int32 {
+    return VarUI8FromDisp(pdispIn, lcid, pi64Out)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromI1 == "on"]
+foreign {
+    func VarUI8FromI1(cIn: Int8, pi64Out: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromI1 == "on"]
+public unsafe func Windows_VarUI8FromI1(cIn: Int8, pi64Out: CPointer<UInt64>): Int32 {
+    return VarUI8FromI1(cIn, pi64Out)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromI2 == "on"]
+foreign {
+    func VarUI8FromI2(sIn: Int16, pi64Out: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromI2 == "on"]
+public unsafe func Windows_VarUI8FromI2(sIn: Int16, pi64Out: CPointer<UInt64>): Int32 {
+    return VarUI8FromI2(sIn, pi64Out)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromI8 == "on"]
+foreign {
+    func VarUI8FromI8(ui64In: Int64, pi64Out: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromI8 == "on"]
+public unsafe func Windows_VarUI8FromI8(ui64In: Int64, pi64Out: CPointer<UInt64>): Int32 {
+    return VarUI8FromI8(ui64In, pi64Out)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromR4 == "on"]
+foreign {
+    func VarUI8FromR4(fltIn: Float32, pi64Out: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromR4 == "on"]
+public unsafe func Windows_VarUI8FromR4(fltIn: Float32, pi64Out: CPointer<UInt64>): Int32 {
+    return VarUI8FromR4(fltIn, pi64Out)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromR8 == "on"]
+foreign {
+    func VarUI8FromR8(dblIn: Float64, pi64Out: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromR8 == "on"]
+public unsafe func Windows_VarUI8FromR8(dblIn: Float64, pi64Out: CPointer<UInt64>): Int32 {
+    return VarUI8FromR8(dblIn, pi64Out)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromStr == "on"]
+foreign {
+    func VarUI8FromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pi64Out: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromStr == "on"]
+public unsafe func Windows_VarUI8FromStr(strIn: CPointer<UInt16>, lcid: UInt32, dwFlags: UInt32, pi64Out: CPointer<UInt64>): Int32 {
+    return VarUI8FromStr(strIn, lcid, dwFlags, pi64Out)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromUI1 == "on"]
+foreign {
+    func VarUI8FromUI1(bIn: UInt8, pi64Out: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromUI1 == "on"]
+public unsafe func Windows_VarUI8FromUI1(bIn: UInt8, pi64Out: CPointer<UInt64>): Int32 {
+    return VarUI8FromUI1(bIn, pi64Out)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromUI2 == "on"]
+foreign {
+    func VarUI8FromUI2(uiIn: UInt16, pi64Out: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromUI2 == "on"]
+public unsafe func Windows_VarUI8FromUI2(uiIn: UInt16, pi64Out: CPointer<UInt64>): Int32 {
+    return VarUI8FromUI2(uiIn, pi64Out)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromUI4 == "on"]
+foreign {
+    func VarUI8FromUI4(ulIn: UInt32, pi64Out: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromUI4 == "on"]
+public unsafe func Windows_VarUI8FromUI4(ulIn: UInt32, pi64Out: CPointer<UInt64>): Int32 {
+    return VarUI8FromUI4(ulIn, pi64Out)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUdateFromDate == "on"]
+foreign {
+    func VarUdateFromDate(dateIn: Float64, dwFlags: UInt32, pudateOut: CPointer<Win32__impl_l0.UDATE>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUdateFromDate == "on"]
+public unsafe func Windows_VarUdateFromDate(dateIn: Float64, dwFlags: UInt32, pudateOut: CPointer<Win32__impl_l0.UDATE>): Int32 {
+    return VarUdateFromDate(dateIn, dwFlags, pudateOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarWeekdayName == "on"]
+foreign {
+    func VarWeekdayName(iWeekday: Int32, fAbbrev: Int32, iFirstDay: Int32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarWeekdayName == "on"]
+public unsafe func Windows_VarWeekdayName(iWeekday: Int32, fAbbrev: Int32, iFirstDay: Int32, dwFlags: UInt32, pbstrOut: CPointer<CPointer<UInt16>>): Int32 {
+    return VarWeekdayName(iWeekday, fAbbrev, iFirstDay, dwFlags, pbstrOut)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarXor == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func VarXor(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarXor == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_VarXor(pvarLeft: CPointer<VARIANT>, pvarRight: CPointer<VARIANT>, pvarResult: CPointer<VARIANT>): Int32 {
+    return VarXor(pvarLeft, pvarRight, pvarResult)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VectorFromBstr == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func VectorFromBstr(bstr: CPointer<UInt16>, ppsa: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VectorFromBstr == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_VectorFromBstr(bstr: CPointer<UInt16>, ppsa: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>): Int32 {
+    return VectorFromBstr(bstr, ppsa)
+}
+
+@When[Windows_Win32_System_Ole == "on" && API_MS_WIN_CORE_MARSHAL_L1_1_0 == "on" && Windows_Win32_System_Ole_HRGN_UserFree64 == "on" && Windows_Win32_Graphics_Gdi == "on"]
 foreign {
     func HRGN_UserFree64(param0: CPointer<UInt32>, param1: CPointer<Win32_Graphics_Gdi.HRGN>): Unit
+}
+
+@When[Windows_Win32_System_Ole == "on" && API_MS_WIN_CORE_MARSHAL_L1_1_0 == "on" && Windows_Win32_System_Ole_HRGN_UserFree64 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_HRGN_UserFree64(param0: CPointer<UInt32>, param1: CPointer<Win32_Graphics_Gdi.HRGN>): Unit {
+    HRGN_UserFree64(param0, param1)
+}
+
+@When[Windows_Win32_System_Ole == "on" && API_MS_WIN_CORE_MARSHAL_L1_1_0 == "on" && Windows_Win32_System_Ole_HRGN_UserMarshal64 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func HRGN_UserMarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_Graphics_Gdi.HRGN>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Ole == "on" && API_MS_WIN_CORE_MARSHAL_L1_1_0 == "on" && Windows_Win32_System_Ole_HRGN_UserMarshal64 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_HRGN_UserMarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_Graphics_Gdi.HRGN>): CPointer<UInt8> {
+    return HRGN_UserMarshal64(param0, param1, param2)
+}
+
+@When[Windows_Win32_System_Ole == "on" && API_MS_WIN_CORE_MARSHAL_L1_1_0 == "on" && Windows_Win32_System_Ole_HRGN_UserSize64 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func HRGN_UserSize64(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32_Graphics_Gdi.HRGN>): UInt32
+}
+
+@When[Windows_Win32_System_Ole == "on" && API_MS_WIN_CORE_MARSHAL_L1_1_0 == "on" && Windows_Win32_System_Ole_HRGN_UserSize64 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_HRGN_UserSize64(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<Win32_Graphics_Gdi.HRGN>): UInt32 {
+    return HRGN_UserSize64(param0, param1, param2)
+}
+
+@When[Windows_Win32_System_Ole == "on" && API_MS_WIN_CORE_MARSHAL_L1_1_0 == "on" && Windows_Win32_System_Ole_HRGN_UserUnmarshal64 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func HRGN_UserUnmarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_Graphics_Gdi.HRGN>): CPointer<UInt8>
 }
 
-@When[OLE32 == "on"]
-foreign {
-    func OleBuildVersion(): UInt32
-    func OleGetIconOfFile(lpszPath: CPointer<UInt16>, fUseFileAsLabel: Int32): CPointer<Unit>
-    func OleSetAutoConvert(clsidOld: CPointer<GUID>, clsidNew: CPointer<GUID>): Int32
+@When[Windows_Win32_System_Ole == "on" && API_MS_WIN_CORE_MARSHAL_L1_1_0 == "on" && Windows_Win32_System_Ole_HRGN_UserUnmarshal64 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_HRGN_UserUnmarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<Win32_Graphics_Gdi.HRGN>): CPointer<UInt8> {
+    return HRGN_UserUnmarshal64(param0, param1, param2)
 }
 
-@When[OLE32 == "on" && (Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on")]
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleBuildVersion == "on"]
+foreign {
+    func OleBuildVersion(): UInt32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleBuildVersion == "on"]
+public unsafe func Windows_OleBuildVersion(): UInt32 {
+    return OleBuildVersion()
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleConvertOLESTREAMToIStorage2 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    // param-hint: ptd optional
+    // param-hint: opt optional
+    // param-hint: pvCallbackContext optional
+    // param-hint: pQueryConvertOLELinkCallback optional
+    func OleConvertOLESTREAMToIStorage2(lpolestream: CPointer<Win32__impl_l1.OLESTREAM>, pstg: CPointer<Unit>, ptd: CPointer<Win32__impl_l0.DVTARGETDEVICE>, opt: UInt32, pvCallbackContext: CPointer<Unit>, pQueryConvertOLELinkCallback: Win32__impl_l0.OLESTREAMQUERYCONVERTOLELINKCALLBACK): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleConvertOLESTREAMToIStorage2 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_OleConvertOLESTREAMToIStorage2(lpolestream: CPointer<Win32__impl_l1.OLESTREAM>, pstg: CPointer<Unit>, ptd: CPointer<Win32__impl_l0.DVTARGETDEVICE>, opt: UInt32, pvCallbackContext: CPointer<Unit>, pQueryConvertOLELinkCallback: Win32__impl_l0.OLESTREAMQUERYCONVERTOLELINKCALLBACK): Int32 {
+    return OleConvertOLESTREAMToIStorage2(lpolestream, pstg, ptd, opt, pvCallbackContext, pQueryConvertOLELinkCallback)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleConvertOLESTREAMToIStorageEx2 == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
 foreign {
     // param-hint: opt optional
     // param-hint: pvCallbackContext optional
@@ -539,97 +4135,388 @@ foreign {
     func OleConvertOLESTREAMToIStorageEx2(polestm: CPointer<Win32__impl_l1.OLESTREAM>, pstg: CPointer<Unit>, pcfFormat: CPointer<UInt16>, plwWidth: CPointer<Int32>, plHeight: CPointer<Int32>, pdwSize: CPointer<UInt32>, pmedium: CPointer<STGMEDIUM>, opt: UInt32, pvCallbackContext: CPointer<Unit>, pQueryConvertOLELinkCallback: Win32__impl_l0.OLESTREAMQUERYCONVERTOLELINKCALLBACK): Int32
 }
 
-@When[OLE32 == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on")]
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleConvertOLESTREAMToIStorageEx2 == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_OleConvertOLESTREAMToIStorageEx2(polestm: CPointer<Win32__impl_l1.OLESTREAM>, pstg: CPointer<Unit>, pcfFormat: CPointer<UInt16>, plwWidth: CPointer<Int32>, plHeight: CPointer<Int32>, pdwSize: CPointer<UInt32>, pmedium: CPointer<STGMEDIUM>, opt: UInt32, pvCallbackContext: CPointer<Unit>, pQueryConvertOLELinkCallback: Win32__impl_l0.OLESTREAMQUERYCONVERTOLELINKCALLBACK): Int32 {
+    return OleConvertOLESTREAMToIStorageEx2(polestm, pstg, pcfFormat, plwWidth, plHeight, pdwSize, pmedium, opt, pvCallbackContext, pQueryConvertOLELinkCallback)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateDefaultHandler == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    // param-hint: ptd optional
-    // param-hint: opt optional
-    // param-hint: pvCallbackContext optional
-    // param-hint: pQueryConvertOLELinkCallback optional
-    func OleConvertOLESTREAMToIStorage2(lpolestream: CPointer<Win32__impl_l1.OLESTREAM>, pstg: CPointer<Unit>, ptd: CPointer<Win32__impl_l0.DVTARGETDEVICE>, opt: UInt32, pvCallbackContext: CPointer<Unit>, pQueryConvertOLELinkCallback: Win32__impl_l0.OLESTREAMQUERYCONVERTOLELINKCALLBACK): Int32
+    func OleCreateDefaultHandler(clsid: CPointer<GUID>, pUnkOuter: CPointer<Unit>, riid: CPointer<GUID>, lplpObj: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateDefaultHandler == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_OleCreateDefaultHandler(clsid: CPointer<GUID>, pUnkOuter: CPointer<Unit>, riid: CPointer<GUID>, lplpObj: CPointer<CPointer<Unit>>): Int32 {
+    return OleCreateDefaultHandler(clsid, pUnkOuter, riid, lplpObj)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
     func OleCreateEx(rclsid: CPointer<GUID>, riid: CPointer<GUID>, dwFlags: UInt32, renderopt: UInt32, cFormats: UInt32, rgAdvf: CPointer<UInt32>, rgFormatEtc: CPointer<Win32__impl_l1.FORMATETC>, lpAdviseSink: CPointer<Unit>, rgdwConnection: CPointer<UInt32>, pClientSite: CPointer<Unit>, pStg: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_OleCreateEx(rclsid: CPointer<GUID>, riid: CPointer<GUID>, dwFlags: UInt32, renderopt: UInt32, cFormats: UInt32, rgAdvf: CPointer<UInt32>, rgFormatEtc: CPointer<Win32__impl_l1.FORMATETC>, lpAdviseSink: CPointer<Unit>, rgdwConnection: CPointer<UInt32>, pClientSite: CPointer<Unit>, pStg: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32 {
+    return OleCreateEx(rclsid, riid, dwFlags, renderopt, cFormats, rgAdvf, rgFormatEtc, lpAdviseSink, rgdwConnection, pClientSite, pStg, ppvObj)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateFromDataEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
     func OleCreateFromDataEx(pSrcDataObj: CPointer<Unit>, riid: CPointer<GUID>, dwFlags: UInt32, renderopt: UInt32, cFormats: UInt32, rgAdvf: CPointer<UInt32>, rgFormatEtc: CPointer<Win32__impl_l1.FORMATETC>, lpAdviseSink: CPointer<Unit>, rgdwConnection: CPointer<UInt32>, pClientSite: CPointer<Unit>, pStg: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateFromDataEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_OleCreateFromDataEx(pSrcDataObj: CPointer<Unit>, riid: CPointer<GUID>, dwFlags: UInt32, renderopt: UInt32, cFormats: UInt32, rgAdvf: CPointer<UInt32>, rgFormatEtc: CPointer<Win32__impl_l1.FORMATETC>, lpAdviseSink: CPointer<Unit>, rgdwConnection: CPointer<UInt32>, pClientSite: CPointer<Unit>, pStg: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32 {
+    return OleCreateFromDataEx(pSrcDataObj, riid, dwFlags, renderopt, cFormats, rgAdvf, rgFormatEtc, lpAdviseSink, rgdwConnection, pClientSite, pStg, ppvObj)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateFromFileEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
     func OleCreateFromFileEx(rclsid: CPointer<GUID>, lpszFileName: CPointer<UInt16>, riid: CPointer<GUID>, dwFlags: UInt32, renderopt: UInt32, cFormats: UInt32, rgAdvf: CPointer<UInt32>, rgFormatEtc: CPointer<Win32__impl_l1.FORMATETC>, lpAdviseSink: CPointer<Unit>, rgdwConnection: CPointer<UInt32>, pClientSite: CPointer<Unit>, pStg: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateFromFileEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_OleCreateFromFileEx(rclsid: CPointer<GUID>, lpszFileName: CPointer<UInt16>, riid: CPointer<GUID>, dwFlags: UInt32, renderopt: UInt32, cFormats: UInt32, rgAdvf: CPointer<UInt32>, rgFormatEtc: CPointer<Win32__impl_l1.FORMATETC>, lpAdviseSink: CPointer<Unit>, rgdwConnection: CPointer<UInt32>, pClientSite: CPointer<Unit>, pStg: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32 {
+    return OleCreateFromFileEx(rclsid, lpszFileName, riid, dwFlags, renderopt, cFormats, rgAdvf, rgFormatEtc, lpAdviseSink, rgdwConnection, pClientSite, pStg, ppvObj)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateLink == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
     func OleCreateLink(pmkLinkSrc: CPointer<Unit>, riid: CPointer<GUID>, renderopt: UInt32, lpFormatEtc: CPointer<Win32__impl_l1.FORMATETC>, pClientSite: CPointer<Unit>, pStg: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateLink == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_OleCreateLink(pmkLinkSrc: CPointer<Unit>, riid: CPointer<GUID>, renderopt: UInt32, lpFormatEtc: CPointer<Win32__impl_l1.FORMATETC>, pClientSite: CPointer<Unit>, pStg: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32 {
+    return OleCreateLink(pmkLinkSrc, riid, renderopt, lpFormatEtc, pClientSite, pStg, ppvObj)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateLinkEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
     func OleCreateLinkEx(pmkLinkSrc: CPointer<Unit>, riid: CPointer<GUID>, dwFlags: UInt32, renderopt: UInt32, cFormats: UInt32, rgAdvf: CPointer<UInt32>, rgFormatEtc: CPointer<Win32__impl_l1.FORMATETC>, lpAdviseSink: CPointer<Unit>, rgdwConnection: CPointer<UInt32>, pClientSite: CPointer<Unit>, pStg: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateLinkEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_OleCreateLinkEx(pmkLinkSrc: CPointer<Unit>, riid: CPointer<GUID>, dwFlags: UInt32, renderopt: UInt32, cFormats: UInt32, rgAdvf: CPointer<UInt32>, rgFormatEtc: CPointer<Win32__impl_l1.FORMATETC>, lpAdviseSink: CPointer<Unit>, rgdwConnection: CPointer<UInt32>, pClientSite: CPointer<Unit>, pStg: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32 {
+    return OleCreateLinkEx(pmkLinkSrc, riid, dwFlags, renderopt, cFormats, rgAdvf, rgFormatEtc, lpAdviseSink, rgdwConnection, pClientSite, pStg, ppvObj)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateLinkFromDataEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
     func OleCreateLinkFromDataEx(pSrcDataObj: CPointer<Unit>, riid: CPointer<GUID>, dwFlags: UInt32, renderopt: UInt32, cFormats: UInt32, rgAdvf: CPointer<UInt32>, rgFormatEtc: CPointer<Win32__impl_l1.FORMATETC>, lpAdviseSink: CPointer<Unit>, rgdwConnection: CPointer<UInt32>, pClientSite: CPointer<Unit>, pStg: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateLinkFromDataEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_OleCreateLinkFromDataEx(pSrcDataObj: CPointer<Unit>, riid: CPointer<GUID>, dwFlags: UInt32, renderopt: UInt32, cFormats: UInt32, rgAdvf: CPointer<UInt32>, rgFormatEtc: CPointer<Win32__impl_l1.FORMATETC>, lpAdviseSink: CPointer<Unit>, rgdwConnection: CPointer<UInt32>, pClientSite: CPointer<Unit>, pStg: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32 {
+    return OleCreateLinkFromDataEx(pSrcDataObj, riid, dwFlags, renderopt, cFormats, rgAdvf, rgFormatEtc, lpAdviseSink, rgdwConnection, pClientSite, pStg, ppvObj)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateLinkToFileEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
     func OleCreateLinkToFileEx(lpszFileName: CPointer<UInt16>, riid: CPointer<GUID>, dwFlags: UInt32, renderopt: UInt32, cFormats: UInt32, rgAdvf: CPointer<UInt32>, rgFormatEtc: CPointer<Win32__impl_l1.FORMATETC>, lpAdviseSink: CPointer<Unit>, rgdwConnection: CPointer<UInt32>, pClientSite: CPointer<Unit>, pStg: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[OLE32 == "on" && Windows_Win32_System_Com == "on"]
-foreign {
-    func OleCreateDefaultHandler(clsid: CPointer<GUID>, pUnkOuter: CPointer<Unit>, riid: CPointer<GUID>, lplpObj: CPointer<CPointer<Unit>>): Int32
-    func OleGetClipboardWithEnterpriseInfo(dataObject: CPointer<CPointer<Unit>>, dataEnterpriseId: CPointer<CPointer<UInt16>>, sourceDescription: CPointer<CPointer<UInt16>>, targetDescription: CPointer<CPointer<UInt16>>, dataDescription: CPointer<CPointer<UInt16>>): Int32
-    func OleNoteObjectVisible(pUnknown: CPointer<Unit>, fVisible: Int32): Int32
-    func OleRegEnumFormatEtc(clsid: CPointer<GUID>, dwDirection: UInt32, ppenum: CPointer<CPointer<Unit>>): Int32
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateLinkToFileEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_OleCreateLinkToFileEx(lpszFileName: CPointer<UInt16>, riid: CPointer<GUID>, dwFlags: UInt32, renderopt: UInt32, cFormats: UInt32, rgAdvf: CPointer<UInt32>, rgFormatEtc: CPointer<Win32__impl_l1.FORMATETC>, lpAdviseSink: CPointer<Unit>, rgdwConnection: CPointer<UInt32>, pClientSite: CPointer<Unit>, pStg: CPointer<Unit>, ppvObj: CPointer<CPointer<Unit>>): Int32 {
+    return OleCreateLinkToFileEx(lpszFileName, riid, dwFlags, renderopt, cFormats, rgAdvf, rgFormatEtc, lpAdviseSink, rgdwConnection, pClientSite, pStg, ppvObj)
 }
 
-@When[OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleDoAutoConvert == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
 foreign {
     func OleDoAutoConvert(pStg: CPointer<Unit>, pClsidNew: CPointer<GUID>): Int32
 }
 
-@When[OLE32 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleDoAutoConvert == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_OleDoAutoConvert(pStg: CPointer<Unit>, pClsidNew: CPointer<GUID>): Int32 {
+    return OleDoAutoConvert(pStg, pClsidNew)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleGetClipboardWithEnterpriseInfo == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func OleGetClipboardWithEnterpriseInfo(dataObject: CPointer<CPointer<Unit>>, dataEnterpriseId: CPointer<CPointer<UInt16>>, sourceDescription: CPointer<CPointer<UInt16>>, targetDescription: CPointer<CPointer<UInt16>>, dataDescription: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleGetClipboardWithEnterpriseInfo == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_OleGetClipboardWithEnterpriseInfo(dataObject: CPointer<CPointer<Unit>>, dataEnterpriseId: CPointer<CPointer<UInt16>>, sourceDescription: CPointer<CPointer<UInt16>>, targetDescription: CPointer<CPointer<UInt16>>, dataDescription: CPointer<CPointer<UInt16>>): Int32 {
+    return OleGetClipboardWithEnterpriseInfo(dataObject, dataEnterpriseId, sourceDescription, targetDescription, dataDescription)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleGetIconOfFile == "on"]
+foreign {
+    func OleGetIconOfFile(lpszPath: CPointer<UInt16>, fUseFileAsLabel: Int32): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleGetIconOfFile == "on"]
+public unsafe func Windows_OleGetIconOfFile(lpszPath: CPointer<UInt16>, fUseFileAsLabel: Int32): CPointer<Unit> {
+    return OleGetIconOfFile(lpszPath, fUseFileAsLabel)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleMetafilePictFromIconAndLabel == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func OleMetafilePictFromIconAndLabel(hIcon: Win32__impl_l0.HICON, lpszLabel: CPointer<UInt16>, lpszSourceFile: CPointer<UInt16>, iIconIndex: UInt32): CPointer<Unit>
 }
 
-@When[OLEDLG == "on"]
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleMetafilePictFromIconAndLabel == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_OleMetafilePictFromIconAndLabel(hIcon: Win32__impl_l0.HICON, lpszLabel: CPointer<UInt16>, lpszSourceFile: CPointer<UInt16>, iIconIndex: UInt32): CPointer<Unit> {
+    return OleMetafilePictFromIconAndLabel(hIcon, lpszLabel, lpszSourceFile, iIconIndex)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleNoteObjectVisible == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func OleNoteObjectVisible(pUnknown: CPointer<Unit>, fVisible: Int32): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleNoteObjectVisible == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_OleNoteObjectVisible(pUnknown: CPointer<Unit>, fVisible: Int32): Int32 {
+    return OleNoteObjectVisible(pUnknown, fVisible)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleRegEnumFormatEtc == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func OleRegEnumFormatEtc(clsid: CPointer<GUID>, dwDirection: UInt32, ppenum: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleRegEnumFormatEtc == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_OleRegEnumFormatEtc(clsid: CPointer<GUID>, dwDirection: UInt32, ppenum: CPointer<CPointer<Unit>>): Int32 {
+    return OleRegEnumFormatEtc(clsid, dwDirection, ppenum)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleSetAutoConvert == "on"]
+foreign {
+    func OleSetAutoConvert(clsidOld: CPointer<GUID>, clsidNew: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleSetAutoConvert == "on"]
+public unsafe func Windows_OleSetAutoConvert(clsidOld: CPointer<GUID>, clsidNew: CPointer<GUID>): Int32 {
+    return OleSetAutoConvert(clsidOld, clsidNew)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIPromptUserA == "on"]
 @CallingConv[CDECL]
 foreign {
     // pinvoke-hint: cc=cdecl
     func OleUIPromptUserA(nTemplate: Int32, hwndParent: CPointer<Unit>, ...): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIPromptUserW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func OleUIPromptUserW(nTemplate: Int32, hwndParent: CPointer<Unit>, ...): Int32
 }
 
-@When[OLEDLG == "on"]
-foreign {
-    func OleUIBusyA(param0: CPointer<Win32__impl_l1.OLEUIBUSYA>): UInt32
-    func OleUIBusyW(param0: CPointer<Win32__impl_l1.OLEUIBUSYW>): UInt32
-    func OleUICanConvertOrActivateAs(rClsid: CPointer<GUID>, fIsLinkedObject: Int32, wFormat: UInt16): Int32
-    func OleUIChangeIconA(param0: CPointer<Win32__impl_l1.OLEUICHANGEICONA>): UInt32
-    func OleUIChangeIconW(param0: CPointer<Win32__impl_l1.OLEUICHANGEICONW>): UInt32
-    func OleUIConvertA(param0: CPointer<Win32__impl_l1.OLEUICONVERTA>): UInt32
-    func OleUIConvertW(param0: CPointer<Win32__impl_l1.OLEUICONVERTW>): UInt32
-    func OleUIEditLinksA(param0: CPointer<Win32__impl_l1.OLEUIEDITLINKSA>): UInt32
-    func OleUIEditLinksW(param0: CPointer<Win32__impl_l1.OLEUIEDITLINKSW>): UInt32
-    func OleUIUpdateLinksA(lpOleUILinkCntr: CPointer<Unit>, hwndParent: CPointer<Unit>, lpszTitle: CPointer<UInt8>, cLinks: Int32): Int32
-    func OleUIUpdateLinksW(lpOleUILinkCntr: CPointer<Unit>, hwndParent: CPointer<Unit>, lpszTitle: CPointer<UInt16>, cLinks: Int32): Int32
-}
-
-@When[OLEDLG == "on" && (((arch == "x86_64" && Windows_Win32_UI_Controls_Dialogs == "on") || (arch == "aarch64" && Windows_Win32_UI_Controls_Dialogs == "on")) && Windows_Win32_UI_Controls_Dialogs == "on")]
-foreign {
-    func OleUIChangeSourceA(param0: CPointer<Win32__impl_l1.OLEUICHANGESOURCEA>): UInt32
-    func OleUIChangeSourceW(param0: CPointer<Win32__impl_l1.OLEUICHANGESOURCEW>): UInt32
-}
-
-@When[OLEDLG == "on" && (Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_Controls == "on")]
-foreign {
-    func OleUIObjectPropertiesA(param0: CPointer<OLEUIOBJECTPROPSA>): UInt32
-    func OleUIObjectPropertiesW(param0: CPointer<OLEUIOBJECTPROPSW>): UInt32
-}
-
-@When[OLEDLG == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on")]
-foreign {
-    func OleUIInsertObjectA(param0: CPointer<OLEUIINSERTOBJECTA>): UInt32
-    func OleUIInsertObjectW(param0: CPointer<OLEUIINSERTOBJECTW>): UInt32
-}
-
-@When[OLEDLG == "on" && Windows_Win32_System_Com == "on"]
-foreign {
-    func OleUIPasteSpecialA(param0: CPointer<OLEUIPASTESPECIALA>): UInt32
-    func OleUIPasteSpecialW(param0: CPointer<OLEUIPASTESPECIALW>): UInt32
-}
-
-@When[OLEDLG == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIAddVerbMenuA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
     // param-hint: lpOleObj optional
     // param-hint: lpszShortType optional
     func OleUIAddVerbMenuA(lpOleObj: CPointer<Unit>, lpszShortType: CPointer<UInt8>, hMenu: Win32__impl_l0.HMENU, uPos: UInt32, uIDVerbMin: UInt32, uIDVerbMax: UInt32, bAddConvert: Int32, idConvert: UInt32, lphMenu: CPointer<Win32__impl_l0.HMENU>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIAddVerbMenuA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_OleUIAddVerbMenuA(lpOleObj: CPointer<Unit>, lpszShortType: CPointer<UInt8>, hMenu: Win32__impl_l0.HMENU, uPos: UInt32, uIDVerbMin: UInt32, uIDVerbMax: UInt32, bAddConvert: Int32, idConvert: UInt32, lphMenu: CPointer<Win32__impl_l0.HMENU>): Int32 {
+    return OleUIAddVerbMenuA(lpOleObj, lpszShortType, hMenu, uPos, uIDVerbMin, uIDVerbMax, bAddConvert, idConvert, lphMenu)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIAddVerbMenuW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
     // param-hint: lpOleObj optional
     // param-hint: lpszShortType optional
     func OleUIAddVerbMenuW(lpOleObj: CPointer<Unit>, lpszShortType: CPointer<UInt16>, hMenu: Win32__impl_l0.HMENU, uPos: UInt32, uIDVerbMin: UInt32, uIDVerbMax: UInt32, bAddConvert: Int32, idConvert: UInt32, lphMenu: CPointer<Win32__impl_l0.HMENU>): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIAddVerbMenuW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_OleUIAddVerbMenuW(lpOleObj: CPointer<Unit>, lpszShortType: CPointer<UInt16>, hMenu: Win32__impl_l0.HMENU, uPos: UInt32, uIDVerbMin: UInt32, uIDVerbMax: UInt32, bAddConvert: Int32, idConvert: UInt32, lphMenu: CPointer<Win32__impl_l0.HMENU>): Int32 {
+    return OleUIAddVerbMenuW(lpOleObj, lpszShortType, hMenu, uPos, uIDVerbMin, uIDVerbMax, bAddConvert, idConvert, lphMenu)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIBusyA == "on"]
+foreign {
+    func OleUIBusyA(param0: CPointer<Win32__impl_l1.OLEUIBUSYA>): UInt32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIBusyA == "on"]
+public unsafe func Windows_OleUIBusyA(param0: CPointer<Win32__impl_l1.OLEUIBUSYA>): UInt32 {
+    return OleUIBusyA(param0)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIBusyW == "on"]
+foreign {
+    func OleUIBusyW(param0: CPointer<Win32__impl_l1.OLEUIBUSYW>): UInt32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIBusyW == "on"]
+public unsafe func Windows_OleUIBusyW(param0: CPointer<Win32__impl_l1.OLEUIBUSYW>): UInt32 {
+    return OleUIBusyW(param0)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUICanConvertOrActivateAs == "on"]
+foreign {
+    func OleUICanConvertOrActivateAs(rClsid: CPointer<GUID>, fIsLinkedObject: Int32, wFormat: UInt16): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUICanConvertOrActivateAs == "on"]
+public unsafe func Windows_OleUICanConvertOrActivateAs(rClsid: CPointer<GUID>, fIsLinkedObject: Int32, wFormat: UInt16): Int32 {
+    return OleUICanConvertOrActivateAs(rClsid, fIsLinkedObject, wFormat)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIChangeIconA == "on"]
+foreign {
+    func OleUIChangeIconA(param0: CPointer<Win32__impl_l1.OLEUICHANGEICONA>): UInt32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIChangeIconA == "on"]
+public unsafe func Windows_OleUIChangeIconA(param0: CPointer<Win32__impl_l1.OLEUICHANGEICONA>): UInt32 {
+    return OleUIChangeIconA(param0)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIChangeIconW == "on"]
+foreign {
+    func OleUIChangeIconW(param0: CPointer<Win32__impl_l1.OLEUICHANGEICONW>): UInt32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIChangeIconW == "on"]
+public unsafe func Windows_OleUIChangeIconW(param0: CPointer<Win32__impl_l1.OLEUICHANGEICONW>): UInt32 {
+    return OleUIChangeIconW(param0)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIChangeSourceA == "on" && (((arch == "x86_64" && Windows_Win32_UI_Controls_Dialogs == "on") || (arch == "aarch64" && Windows_Win32_UI_Controls_Dialogs == "on")) && Windows_Win32_UI_Controls_Dialogs == "on")]
+foreign {
+    func OleUIChangeSourceA(param0: CPointer<Win32__impl_l1.OLEUICHANGESOURCEA>): UInt32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIChangeSourceA == "on" && (((arch == "x86_64" && Windows_Win32_UI_Controls_Dialogs == "on") || (arch == "aarch64" && Windows_Win32_UI_Controls_Dialogs == "on")) && Windows_Win32_UI_Controls_Dialogs == "on")]
+public unsafe func Windows_OleUIChangeSourceA(param0: CPointer<Win32__impl_l1.OLEUICHANGESOURCEA>): UInt32 {
+    return OleUIChangeSourceA(param0)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIChangeSourceW == "on" && (((arch == "x86_64" && Windows_Win32_UI_Controls_Dialogs == "on") || (arch == "aarch64" && Windows_Win32_UI_Controls_Dialogs == "on")) && Windows_Win32_UI_Controls_Dialogs == "on")]
+foreign {
+    func OleUIChangeSourceW(param0: CPointer<Win32__impl_l1.OLEUICHANGESOURCEW>): UInt32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIChangeSourceW == "on" && (((arch == "x86_64" && Windows_Win32_UI_Controls_Dialogs == "on") || (arch == "aarch64" && Windows_Win32_UI_Controls_Dialogs == "on")) && Windows_Win32_UI_Controls_Dialogs == "on")]
+public unsafe func Windows_OleUIChangeSourceW(param0: CPointer<Win32__impl_l1.OLEUICHANGESOURCEW>): UInt32 {
+    return OleUIChangeSourceW(param0)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIConvertA == "on"]
+foreign {
+    func OleUIConvertA(param0: CPointer<Win32__impl_l1.OLEUICONVERTA>): UInt32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIConvertA == "on"]
+public unsafe func Windows_OleUIConvertA(param0: CPointer<Win32__impl_l1.OLEUICONVERTA>): UInt32 {
+    return OleUIConvertA(param0)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIConvertW == "on"]
+foreign {
+    func OleUIConvertW(param0: CPointer<Win32__impl_l1.OLEUICONVERTW>): UInt32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIConvertW == "on"]
+public unsafe func Windows_OleUIConvertW(param0: CPointer<Win32__impl_l1.OLEUICONVERTW>): UInt32 {
+    return OleUIConvertW(param0)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIEditLinksA == "on"]
+foreign {
+    func OleUIEditLinksA(param0: CPointer<Win32__impl_l1.OLEUIEDITLINKSA>): UInt32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIEditLinksA == "on"]
+public unsafe func Windows_OleUIEditLinksA(param0: CPointer<Win32__impl_l1.OLEUIEDITLINKSA>): UInt32 {
+    return OleUIEditLinksA(param0)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIEditLinksW == "on"]
+foreign {
+    func OleUIEditLinksW(param0: CPointer<Win32__impl_l1.OLEUIEDITLINKSW>): UInt32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIEditLinksW == "on"]
+public unsafe func Windows_OleUIEditLinksW(param0: CPointer<Win32__impl_l1.OLEUIEDITLINKSW>): UInt32 {
+    return OleUIEditLinksW(param0)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIInsertObjectA == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func OleUIInsertObjectA(param0: CPointer<OLEUIINSERTOBJECTA>): UInt32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIInsertObjectA == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_OleUIInsertObjectA(param0: CPointer<OLEUIINSERTOBJECTA>): UInt32 {
+    return OleUIInsertObjectA(param0)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIInsertObjectW == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func OleUIInsertObjectW(param0: CPointer<OLEUIINSERTOBJECTW>): UInt32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIInsertObjectW == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_OleUIInsertObjectW(param0: CPointer<OLEUIINSERTOBJECTW>): UInt32 {
+    return OleUIInsertObjectW(param0)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIObjectPropertiesA == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_Controls == "on"]
+foreign {
+    func OleUIObjectPropertiesA(param0: CPointer<OLEUIOBJECTPROPSA>): UInt32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIObjectPropertiesA == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_Controls == "on"]
+public unsafe func Windows_OleUIObjectPropertiesA(param0: CPointer<OLEUIOBJECTPROPSA>): UInt32 {
+    return OleUIObjectPropertiesA(param0)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIObjectPropertiesW == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_Controls == "on"]
+foreign {
+    func OleUIObjectPropertiesW(param0: CPointer<OLEUIOBJECTPROPSW>): UInt32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIObjectPropertiesW == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_Controls == "on"]
+public unsafe func Windows_OleUIObjectPropertiesW(param0: CPointer<OLEUIOBJECTPROPSW>): UInt32 {
+    return OleUIObjectPropertiesW(param0)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIPasteSpecialA == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func OleUIPasteSpecialA(param0: CPointer<OLEUIPASTESPECIALA>): UInt32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIPasteSpecialA == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_OleUIPasteSpecialA(param0: CPointer<OLEUIPASTESPECIALA>): UInt32 {
+    return OleUIPasteSpecialA(param0)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIPasteSpecialW == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func OleUIPasteSpecialW(param0: CPointer<OLEUIPASTESPECIALW>): UInt32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIPasteSpecialW == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_OleUIPasteSpecialW(param0: CPointer<OLEUIPASTESPECIALW>): UInt32 {
+    return OleUIPasteSpecialW(param0)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIUpdateLinksA == "on"]
+foreign {
+    func OleUIUpdateLinksA(lpOleUILinkCntr: CPointer<Unit>, hwndParent: CPointer<Unit>, lpszTitle: CPointer<UInt8>, cLinks: Int32): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIUpdateLinksA == "on"]
+public unsafe func Windows_OleUIUpdateLinksA(lpOleUILinkCntr: CPointer<Unit>, hwndParent: CPointer<Unit>, lpszTitle: CPointer<UInt8>, cLinks: Int32): Int32 {
+    return OleUIUpdateLinksA(lpOleUILinkCntr, hwndParent, lpszTitle, cLinks)
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIUpdateLinksW == "on"]
+foreign {
+    func OleUIUpdateLinksW(lpOleUILinkCntr: CPointer<Unit>, hwndParent: CPointer<Unit>, lpszTitle: CPointer<UInt16>, cLinks: Int32): Int32
+}
+
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIUpdateLinksW == "on"]
+public unsafe func Windows_OleUIUpdateLinksW(lpOleUILinkCntr: CPointer<Unit>, hwndParent: CPointer<Unit>, lpszTitle: CPointer<UInt16>, cLinks: Int32): Int32 {
+    return OleUIUpdateLinksW(lpOleUILinkCntr, hwndParent, lpszTitle, cLinks)
 }
 
 @When[Windows_Win32_System_Ole == "on"]

@@ -10,11 +10,8 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Devices_PointOfService == "on"]
 import windows.Devices.PointOfService as Devices_PointOfService
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Graphics_Imaging == "on"]
 import windows.Graphics.Imaging as Graphics_Imaging
 import windows._impl_l0 as _impl_l0
 import windows_collections as windows_collections
@@ -929,7 +926,10 @@ extend IBarcodeScannerHideVideoPreviewRequest2 <: windows_core.Interface<IBarcod
 @C
 public struct IBarcodeScannerSetActiveSymbologiesRequestVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Symbologies: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Symbologies: UIntNative = UIntNative(0)
     public var ReportCompletedAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ReportFailedAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -1000,6 +1000,7 @@ public class IBarcodeScannerSetActiveSymbologiesRequest <: InterfaceWrapperBase 
         readVtbl<IBarcodeScannerSetActiveSymbologiesRequestVtbl>(IBarcodeScannerSetActiveSymbologiesRequestVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Symbologies(): windows_collections.IVectorView<UInt32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2515,6 +2516,7 @@ public class BarcodeScannerSetActiveSymbologiesRequest <: InterfaceWrapperBase &
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Symbologies(): windows_collections.IVectorView<UInt32> {
         return defaultInterface().Symbologies()
     }
@@ -4815,6 +4817,7 @@ public class BarcodeScannerProviderConnection <: InterfaceWrapperBase & ComInter
         return defaultInterface().VideoDeviceId()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedSymbologies(): windows_collections.IVector<UInt32> {
         return defaultInterface().SupportedSymbologies()
     }
@@ -5179,7 +5182,10 @@ public struct IBarcodeScannerProviderConnectionVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Id: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var VideoDeviceId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedSymbologies: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedSymbologies: UIntNative = UIntNative(0)
     public var CompanyName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetCompanyName: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -5300,6 +5306,7 @@ public class IBarcodeScannerProviderConnection <: InterfaceWrapperBase & ComInte
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedSymbologies(): windows_collections.IVector<UInt32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

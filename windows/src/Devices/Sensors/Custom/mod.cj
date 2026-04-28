@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -122,7 +121,10 @@ extend ICustomSensor2 <: windows_core.Interface<ICustomSensor2> {}
 public struct ICustomSensorReadingVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Timestamp: CFunc<(CPointer<Unit>, CPointer<windows_future.DateTimeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -199,6 +201,7 @@ public class ICustomSensorReading <: InterfaceWrapperBase & ComInterface & Runti
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<windows_future.DateTime>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -369,6 +372,7 @@ public class CustomSensorReading <: InterfaceWrapperBase & ComInterface & window
         return defaultInterface().Timestamp()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         return defaultInterface().Properties()
     }

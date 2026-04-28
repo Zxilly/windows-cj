@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_ApplicationModel_UserActivities == "on"]
 import windows.ApplicationModel.UserActivities as ApplicationModel_UserActivities
 import windows_future as windows_future
 

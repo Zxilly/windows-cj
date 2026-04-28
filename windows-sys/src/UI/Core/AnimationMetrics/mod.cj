@@ -413,6 +413,7 @@ public class IScaleAnimation <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IAnimationDescriptionVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Animations: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var StaggerDelay: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.TimeSpan>) -> Int32> = { _, _ => 0 }
     public var StaggerDelayFactor: CFunc<(CPointer<Unit>, CPointer<Float32>) -> Int32> = { _, _ => 0 }
@@ -461,6 +462,7 @@ public class IAnimationDescription <: InterfaceWrapperBase & ComInterface {
         readVtbl<IAnimationDescriptionVtbl>(IAnimationDescriptionVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Animations(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

@@ -25,13 +25,13 @@ public struct IUserDataAccount4Vtbl {
     public var ProviderProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Foundation_Collections != "on"]
     public var ProviderProperties: UIntNative = UIntNative(0)
-    @When[Windows_ApplicationModel_UserDataTasks == "on"]
+    @When[Windows_ApplicationModel_UserDataTasks == "on" && Windows_Foundation_Collections == "on"]
     public var FindUserDataTaskListsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel_UserDataTasks != "on"]
+    @When[Windows_ApplicationModel_UserDataTasks != "on" || Windows_Foundation_Collections != "on"]
     public var FindUserDataTaskListsAsync: UIntNative = UIntNative(0)
-    @When[Windows_ApplicationModel_Contacts == "on"]
+    @When[Windows_ApplicationModel_Contacts == "on" && Windows_Foundation_Collections == "on"]
     public var FindContactGroupsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel_Contacts != "on"]
+    @When[Windows_ApplicationModel_Contacts != "on" || Windows_Foundation_Collections != "on"]
     public var FindContactGroupsAsync: UIntNative = UIntNative(0)
     public var TryShowCreateContactGroupAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetIsProtectedUnderLock: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -130,7 +130,7 @@ public class IUserDataAccount4 <: InterfaceWrapperBase & ComInterface & RuntimeN
         return windows_collections.IPropertySet.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel_UserDataTasks == "on"]
+    @When[Windows_ApplicationModel_UserDataTasks == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindUserDataTaskListsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<UserDataTaskList>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -139,7 +139,7 @@ public class IUserDataAccount4 <: InterfaceWrapperBase & ComInterface & RuntimeN
         return windows_future.IAsyncOperation<windows_collections.IVectorView<UserDataTaskList>>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel_Contacts == "on"]
+    @When[Windows_ApplicationModel_Contacts == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindContactGroupsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l0.ContactGroup>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

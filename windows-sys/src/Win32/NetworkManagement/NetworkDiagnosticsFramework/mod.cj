@@ -5,9 +5,7 @@ import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrap
 import windows_interface as windows_interface
 import windows_polyfill.{unionReadInt16, unionReadInt32, unionReadInt64, unionReadUInt16, unionReadUInt32, unionReadUInt64, unionReadUInt8, unionWriteInt16, unionWriteInt32, unionWriteInt64, unionWriteUInt16, unionWriteUInt32, unionWriteUInt64, unionWriteUInt8}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Security == "on"]
 import windows_sys.Win32.Security as Win32_Security
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l2 as Win32__impl_l2
@@ -1182,38 +1180,47 @@ public class INetDiagHelper <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[NDFAPI == "on"]
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfCancelIncident == "on"]
 foreign {
     func NdfCancelIncident(Handle: CPointer<Unit>): Int32
-    func NdfCloseIncident(handle: CPointer<Unit>): Int32
-    func NdfCreateConnectivityIncident(handle: CPointer<CPointer<Unit>>): Int32
-    func NdfCreateDNSIncident(hostname: CPointer<UInt16>, queryType: UInt16, handle: CPointer<CPointer<Unit>>): Int32
-    // param-hint: attributes len=param[1]
-    func NdfCreateIncident(helperClassName: CPointer<UInt16>, celt: UInt32, attributes: CPointer<HELPER_ATTRIBUTE>, handle: CPointer<CPointer<Unit>>): Int32
-    func NdfCreateNetConnectionIncident(handle: CPointer<CPointer<Unit>>, id: GUID): Int32
-    // param-hint: peername optional
-    // param-hint: appId optional
-    func NdfCreatePnrpIncident(cloudname: CPointer<UInt16>, peername: CPointer<UInt16>, diagnosePublish: Int32, appId: CPointer<UInt16>, handle: CPointer<CPointer<Unit>>): Int32
-    func NdfCreateSharingIncident(UNCPath: CPointer<UInt16>, handle: CPointer<CPointer<Unit>>): Int32
-    func NdfCreateWebIncident(url: CPointer<UInt16>, handle: CPointer<CPointer<Unit>>): Int32
-    // param-hint: moduleName optional
-    func NdfCreateWebIncidentEx(url: CPointer<UInt16>, useWinHTTP: Int32, moduleName: CPointer<UInt16>, handle: CPointer<CPointer<Unit>>): Int32
-    func NdfDiagnoseIncident(Handle: CPointer<Unit>, RootCauseCount: CPointer<UInt32>, RootCauses: CPointer<CPointer<RootCauseInfo>>, dwWait: UInt32, dwFlags: UInt32): Int32
-    // param-hint: hwnd optional
-    func NdfExecuteDiagnosis(handle: CPointer<Unit>, hwnd: CPointer<Unit>): Int32
-    func NdfGetTraceFile(Handle: CPointer<Unit>, TraceFileLocation: CPointer<CPointer<UInt16>>): Int32
-    func NdfRepairIncident(Handle: CPointer<Unit>, RepairEx: CPointer<RepairInfoEx>, dwWait: UInt32): Int32
 }
 
-@When[NDFAPI == "on" && (Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Security == "on")]
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfCancelIncident == "on"]
+public unsafe func Windows_NdfCancelIncident(Handle: CPointer<Unit>): Int32 {
+    return NdfCancelIncident(Handle)
+}
+
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfCloseIncident == "on"]
 foreign {
-    // param-hint: host optional
-    // param-hint: appId optional
-    // param-hint: userId optional
-    func NdfCreateWinSockIncident(sock: Win32__impl_l0.SOCKET, host: CPointer<UInt16>, port: UInt16, appId: CPointer<UInt16>, userId: CPointer<Win32_Security.SID>, handle: CPointer<CPointer<Unit>>): Int32
+    func NdfCloseIncident(handle: CPointer<Unit>): Int32
 }
 
-@When[NDFAPI == "on" && Windows_Win32_Networking_WinSock == "on"]
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfCloseIncident == "on"]
+public unsafe func Windows_NdfCloseIncident(handle: CPointer<Unit>): Int32 {
+    return NdfCloseIncident(handle)
+}
+
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfCreateConnectivityIncident == "on"]
+foreign {
+    func NdfCreateConnectivityIncident(handle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfCreateConnectivityIncident == "on"]
+public unsafe func Windows_NdfCreateConnectivityIncident(handle: CPointer<CPointer<Unit>>): Int32 {
+    return NdfCreateConnectivityIncident(handle)
+}
+
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfCreateDNSIncident == "on"]
+foreign {
+    func NdfCreateDNSIncident(hostname: CPointer<UInt16>, queryType: UInt16, handle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfCreateDNSIncident == "on"]
+public unsafe func Windows_NdfCreateDNSIncident(hostname: CPointer<UInt16>, queryType: UInt16, handle: CPointer<CPointer<Unit>>): Int32 {
+    return NdfCreateDNSIncident(hostname, queryType, handle)
+}
+
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfCreateGroupingIncident == "on" && Windows_Win32_Networking_WinSock == "on"]
 foreign {
     // param-hint: CloudName optional
     // param-hint: GroupName optional
@@ -1222,6 +1229,129 @@ foreign {
     // param-hint: Addresses optional
     // param-hint: appId optional
     func NdfCreateGroupingIncident(CloudName: CPointer<UInt16>, GroupName: CPointer<UInt16>, Identity: CPointer<UInt16>, Invitation: CPointer<UInt16>, Addresses: CPointer<Win32__impl_l2.SOCKET_ADDRESS_LIST>, appId: CPointer<UInt16>, handle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfCreateGroupingIncident == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_NdfCreateGroupingIncident(CloudName: CPointer<UInt16>, GroupName: CPointer<UInt16>, Identity: CPointer<UInt16>, Invitation: CPointer<UInt16>, Addresses: CPointer<Win32__impl_l2.SOCKET_ADDRESS_LIST>, appId: CPointer<UInt16>, handle: CPointer<CPointer<Unit>>): Int32 {
+    return NdfCreateGroupingIncident(CloudName, GroupName, Identity, Invitation, Addresses, appId, handle)
+}
+
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfCreateIncident == "on"]
+foreign {
+    // param-hint: attributes len=param[1]
+    func NdfCreateIncident(helperClassName: CPointer<UInt16>, celt: UInt32, attributes: CPointer<HELPER_ATTRIBUTE>, handle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfCreateIncident == "on"]
+public unsafe func Windows_NdfCreateIncident(helperClassName: CPointer<UInt16>, celt: UInt32, attributes: CPointer<HELPER_ATTRIBUTE>, handle: CPointer<CPointer<Unit>>): Int32 {
+    return NdfCreateIncident(helperClassName, celt, attributes, handle)
+}
+
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfCreateNetConnectionIncident == "on"]
+foreign {
+    func NdfCreateNetConnectionIncident(handle: CPointer<CPointer<Unit>>, id: GUID): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfCreateNetConnectionIncident == "on"]
+public unsafe func Windows_NdfCreateNetConnectionIncident(handle: CPointer<CPointer<Unit>>, id: GUID): Int32 {
+    return NdfCreateNetConnectionIncident(handle, id)
+}
+
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfCreatePnrpIncident == "on"]
+foreign {
+    // param-hint: peername optional
+    // param-hint: appId optional
+    func NdfCreatePnrpIncident(cloudname: CPointer<UInt16>, peername: CPointer<UInt16>, diagnosePublish: Int32, appId: CPointer<UInt16>, handle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfCreatePnrpIncident == "on"]
+public unsafe func Windows_NdfCreatePnrpIncident(cloudname: CPointer<UInt16>, peername: CPointer<UInt16>, diagnosePublish: Int32, appId: CPointer<UInt16>, handle: CPointer<CPointer<Unit>>): Int32 {
+    return NdfCreatePnrpIncident(cloudname, peername, diagnosePublish, appId, handle)
+}
+
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfCreateSharingIncident == "on"]
+foreign {
+    func NdfCreateSharingIncident(UNCPath: CPointer<UInt16>, handle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfCreateSharingIncident == "on"]
+public unsafe func Windows_NdfCreateSharingIncident(UNCPath: CPointer<UInt16>, handle: CPointer<CPointer<Unit>>): Int32 {
+    return NdfCreateSharingIncident(UNCPath, handle)
+}
+
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfCreateWebIncident == "on"]
+foreign {
+    func NdfCreateWebIncident(url: CPointer<UInt16>, handle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfCreateWebIncident == "on"]
+public unsafe func Windows_NdfCreateWebIncident(url: CPointer<UInt16>, handle: CPointer<CPointer<Unit>>): Int32 {
+    return NdfCreateWebIncident(url, handle)
+}
+
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfCreateWebIncidentEx == "on"]
+foreign {
+    // param-hint: moduleName optional
+    func NdfCreateWebIncidentEx(url: CPointer<UInt16>, useWinHTTP: Int32, moduleName: CPointer<UInt16>, handle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfCreateWebIncidentEx == "on"]
+public unsafe func Windows_NdfCreateWebIncidentEx(url: CPointer<UInt16>, useWinHTTP: Int32, moduleName: CPointer<UInt16>, handle: CPointer<CPointer<Unit>>): Int32 {
+    return NdfCreateWebIncidentEx(url, useWinHTTP, moduleName, handle)
+}
+
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfCreateWinSockIncident == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: host optional
+    // param-hint: appId optional
+    // param-hint: userId optional
+    func NdfCreateWinSockIncident(sock: Win32__impl_l0.SOCKET, host: CPointer<UInt16>, port: UInt16, appId: CPointer<UInt16>, userId: CPointer<Win32_Security.SID>, handle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfCreateWinSockIncident == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_NdfCreateWinSockIncident(sock: Win32__impl_l0.SOCKET, host: CPointer<UInt16>, port: UInt16, appId: CPointer<UInt16>, userId: CPointer<Win32_Security.SID>, handle: CPointer<CPointer<Unit>>): Int32 {
+    return NdfCreateWinSockIncident(sock, host, port, appId, userId, handle)
+}
+
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfDiagnoseIncident == "on"]
+foreign {
+    func NdfDiagnoseIncident(Handle: CPointer<Unit>, RootCauseCount: CPointer<UInt32>, RootCauses: CPointer<CPointer<RootCauseInfo>>, dwWait: UInt32, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfDiagnoseIncident == "on"]
+public unsafe func Windows_NdfDiagnoseIncident(Handle: CPointer<Unit>, RootCauseCount: CPointer<UInt32>, RootCauses: CPointer<CPointer<RootCauseInfo>>, dwWait: UInt32, dwFlags: UInt32): Int32 {
+    return NdfDiagnoseIncident(Handle, RootCauseCount, RootCauses, dwWait, dwFlags)
+}
+
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfExecuteDiagnosis == "on"]
+foreign {
+    // param-hint: hwnd optional
+    func NdfExecuteDiagnosis(handle: CPointer<Unit>, hwnd: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfExecuteDiagnosis == "on"]
+public unsafe func Windows_NdfExecuteDiagnosis(handle: CPointer<Unit>, hwnd: CPointer<Unit>): Int32 {
+    return NdfExecuteDiagnosis(handle, hwnd)
+}
+
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfGetTraceFile == "on"]
+foreign {
+    func NdfGetTraceFile(Handle: CPointer<Unit>, TraceFileLocation: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfGetTraceFile == "on"]
+public unsafe func Windows_NdfGetTraceFile(Handle: CPointer<Unit>, TraceFileLocation: CPointer<CPointer<UInt16>>): Int32 {
+    return NdfGetTraceFile(Handle, TraceFileLocation)
+}
+
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfRepairIncident == "on"]
+foreign {
+    func NdfRepairIncident(Handle: CPointer<Unit>, RepairEx: CPointer<RepairInfoEx>, dwWait: UInt32): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on" && NDFAPI == "on" && Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework_NdfRepairIncident == "on"]
+public unsafe func Windows_NdfRepairIncident(Handle: CPointer<Unit>, RepairEx: CPointer<RepairInfoEx>, dwWait: UInt32): Int32 {
+    return NdfRepairIncident(Handle, RepairEx, dwWait)
 }
 
 @When[Windows_Win32_NetworkManagement_NetworkDiagnosticsFramework == "on"]

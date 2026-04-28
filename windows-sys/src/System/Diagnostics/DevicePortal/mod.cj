@@ -264,6 +264,7 @@ public class IDevicePortalWebSocketConnection <: InterfaceWrapperBase & ComInter
 public struct IDevicePortalWebSocketConnectionRequestReceivedEventArgsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var IsWebSocketUpgradeRequest: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var WebSocketProtocolsRequested: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetDeferral: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -315,6 +316,7 @@ public class IDevicePortalWebSocketConnectionRequestReceivedEventArgs <: Interfa
         return __vt.IsWebSocketUpgradeRequest(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func WebSocketProtocolsRequested(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

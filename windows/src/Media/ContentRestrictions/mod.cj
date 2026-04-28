@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l1 as _impl_l1
 import windows_collections as windows_collections
@@ -364,8 +363,14 @@ public struct IRatedContentDescriptionVtbl {
     public var SetImage: UIntNative = UIntNative(0)
     public var Category: CFunc<(CPointer<Unit>, CPointer<RatedContentCategoryAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetCategory: CFunc<(CPointer<Unit>, RatedContentCategoryAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Ratings: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Ratings: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SetRatings: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SetRatings: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -492,6 +497,7 @@ public class IRatedContentDescription <: InterfaceWrapperBase & ComInterface & R
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Ratings(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -500,6 +506,7 @@ public class IRatedContentDescription <: InterfaceWrapperBase & ComInterface & R
         return windows_collections.IVector<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetRatings(value: windows_collections.IVector<windows_core.HString>): Unit {
         let v = vtbl()
         let hr = v.SetRatings(asRaw(), value.asRaw())
@@ -902,10 +909,12 @@ public class RatedContentDescription <: InterfaceWrapperBase & ComInterface & wi
         defaultInterface().SetCategory(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Ratings(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().Ratings()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetRatings(value: windows_collections.IVector<windows_core.HString>): Unit {
         defaultInterface().SetRatings(value)
     }

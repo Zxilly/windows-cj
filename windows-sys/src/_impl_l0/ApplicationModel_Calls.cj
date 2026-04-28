@@ -134,6 +134,7 @@ public struct IAcceptedVoipPhoneCallOptionsVtbl {
     public var SetServiceName: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Media: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var SetMedia: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var AssociatedDeviceIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -238,6 +239,7 @@ public class IAcceptedVoipPhoneCallOptions <: InterfaceWrapperBase & ComInterfac
         return __vt.SetMedia(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AssociatedDeviceIds(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -259,6 +261,7 @@ public struct IAppInitiatedVoipPhoneCallOptionsVtbl {
     public var SetServiceName: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Media: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var SetMedia: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var AssociatedDeviceIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -363,6 +366,7 @@ public class IAppInitiatedVoipPhoneCallOptions <: InterfaceWrapperBase & ComInte
         return __vt.SetMedia(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AssociatedDeviceIds(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -616,6 +620,7 @@ public struct IIncomingVoipPhoneCallOptionsVtbl {
     public var SetRingTimeout: CFunc<(CPointer<Unit>, Foundation__impl_l0.TimeSpan) -> Int32> = { _, _ => 0 }
     public var ContactRemoteId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetContactRemoteId: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var AssociatedDeviceIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -792,6 +797,7 @@ public class IIncomingVoipPhoneCallOptions <: InterfaceWrapperBase & ComInterfac
         return __vt.SetContactRemoteId(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AssociatedDeviceIds(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -921,6 +927,7 @@ public struct IOutgoingVoipPhoneCallOptionsVtbl {
     public var SetServiceName: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Media: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var SetMedia: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var AssociatedDeviceIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1013,6 +1020,7 @@ public class IOutgoingVoipPhoneCallOptions <: InterfaceWrapperBase & ComInterfac
         return __vt.SetMedia(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AssociatedDeviceIds(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1028,6 +1036,7 @@ public struct IPhoneCallBlockingStaticsVtbl {
     public var SetBlockUnknownNumbers: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
     public var BlockPrivateNumbers: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var SetBlockPrivateNumbers: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetCallBlockingListAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -1096,6 +1105,7 @@ public class IPhoneCallBlockingStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.SetBlockPrivateNumbers(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetCallBlockingListAsync(phoneNumberList: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1213,6 +1223,7 @@ public struct IPhoneCallHistoryEntryQueryOptionsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var DesiredMedia: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var SetDesiredMedia: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SourceIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1269,6 +1280,7 @@ public class IPhoneCallHistoryEntryQueryOptions <: InterfaceWrapperBase & ComInt
         return __vt.SetDesiredMedia(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SourceIds(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1626,6 +1638,7 @@ public class IPhoneLineCellularDetails <: InterfaceWrapperBase & ComInterface {
 public struct IPhoneLineConfigurationVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var IsVideoCallingEnabled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ExtendedProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1676,6 +1689,7 @@ public class IPhoneLineConfiguration <: InterfaceWrapperBase & ComInterface {
         return __vt.IsVideoCallingEnabled(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ExtendedProperties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1881,10 +1895,13 @@ public class IVoipCallCoordinatorStatics2 <: InterfaceWrapperBase & ComInterface
 public struct IVoipPhoneCall4Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var IsUsingAssociatedDevicesList: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var NotifyCallActiveOnDevices: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var AddAssociatedCallControlDevice: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var RemoveAssociatedCallControlDevice: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetAssociatedCallControlDevices: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAssociatedCallControlDevices: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1935,6 +1952,7 @@ public class IVoipPhoneCall4 <: InterfaceWrapperBase & ComInterface {
         return __vt.IsUsingAssociatedDevicesList(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func NotifyCallActiveOnDevices(associatedDeviceIds: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1953,12 +1971,14 @@ public class IVoipPhoneCall4 <: InterfaceWrapperBase & ComInterface {
         return __vt.RemoveAssociatedCallControlDevice(__liveRaw, deviceId)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetAssociatedCallControlDevices(associatedDeviceIds: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetAssociatedCallControlDevices(__liveRaw, associatedDeviceIds)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAssociatedCallControlDevices(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

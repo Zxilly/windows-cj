@@ -98,6 +98,7 @@ public class ContentIndexer <: InterfaceWrapperBase & ComInterface & windows_int
         return defaultInterface().DeleteAsync(contentId)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DeleteMultipleAsync(contentIds: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncAction {
         return defaultInterface().DeleteMultipleAsync(contentIds)
     }
@@ -106,6 +107,7 @@ public class ContentIndexer <: InterfaceWrapperBase & ComInterface & windows_int
         return defaultInterface().DeleteAllAsync()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RetrievePropertiesAsync(contentId: windows_core.HString, propertiesToRetrieve: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, IInspectable>> {
         return defaultInterface().RetrievePropertiesAsync(contentId, propertiesToRetrieve)
     }
@@ -228,18 +230,22 @@ public class ContentIndexerQuery <: InterfaceWrapperBase & ComInterface & window
         return defaultInterface().GetCountAsync()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetPropertiesAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<windows_collections.IMapView<windows_core.HString, IInspectable>>> {
         return defaultInterface().GetPropertiesAsync()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetPropertiesRangeAsync(startIndex: UInt32, maxItems: UInt32): windows_future.IAsyncOperation<windows_collections.IVectorView<windows_collections.IMapView<windows_core.HString, IInspectable>>> {
         return defaultInterface().GetPropertiesRangeAsync(startIndex, maxItems)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<IIndexableContent>> {
         return defaultInterface().GetAsync()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetRangeAsync(startIndex: UInt32, maxItems: UInt32): windows_future.IAsyncOperation<windows_collections.IVectorView<IIndexableContent>> {
         return defaultInterface().GetRangeAsync(startIndex, maxItems)
     }
@@ -275,9 +281,15 @@ public struct IContentIndexerVtbl {
     public var AddAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var UpdateAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var DeleteAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var DeleteMultipleAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var DeleteMultipleAsync: UIntNative = UIntNative(0)
     public var DeleteAllAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var RetrievePropertiesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RetrievePropertiesAsync: UIntNative = UIntNative(0)
     public var Revision: CFunc<(CPointer<Unit>, CPointer<UInt64>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -371,6 +383,7 @@ public class IContentIndexer <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DeleteMultipleAsync(contentIds: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -387,6 +400,7 @@ public class IContentIndexer <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RetrievePropertiesAsync(contentId: windows_core.HString, propertiesToRetrieve: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, IInspectable>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -412,10 +426,22 @@ extend IContentIndexer <: windows_core.Interface<IContentIndexer> {}
 public struct IContentIndexerQueryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var GetCountAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetPropertiesAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetPropertiesAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetPropertiesRangeAsync: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetPropertiesRangeAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetRangeAsync: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetRangeAsync: UIntNative = UIntNative(0)
     @When[Windows_Storage == "on"]
     public var QueryFolder: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Storage != "on"]
@@ -496,6 +522,7 @@ public class IContentIndexerQuery <: InterfaceWrapperBase & ComInterface & Runti
         return windows_future.IAsyncOperation<UInt32>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetPropertiesAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<windows_collections.IMapView<windows_core.HString, IInspectable>>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -504,6 +531,7 @@ public class IContentIndexerQuery <: InterfaceWrapperBase & ComInterface & Runti
         return windows_future.IAsyncOperation<windows_collections.IVectorView<windows_collections.IMapView<windows_core.HString, IInspectable>>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetPropertiesRangeAsync(startIndex: UInt32, maxItems: UInt32): windows_future.IAsyncOperation<windows_collections.IVectorView<windows_collections.IMapView<windows_core.HString, IInspectable>>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -512,6 +540,7 @@ public class IContentIndexerQuery <: InterfaceWrapperBase & ComInterface & Runti
         return windows_future.IAsyncOperation<windows_collections.IVectorView<windows_collections.IMapView<windows_core.HString, IInspectable>>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<IIndexableContent>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -520,6 +549,7 @@ public class IContentIndexerQuery <: InterfaceWrapperBase & ComInterface & Runti
         return windows_future.IAsyncOperation<windows_collections.IVectorView<IIndexableContent>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetRangeAsync(startIndex: UInt32, maxItems: UInt32): windows_future.IAsyncOperation<windows_collections.IVectorView<IIndexableContent>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -545,9 +575,18 @@ extend IContentIndexerQuery <: windows_core.Interface<IContentIndexerQuery> {}
 @C
 public struct IContentIndexerQueryOperationsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateQueryWithSortOrderAndLanguage: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateQueryWithSortOrderAndLanguage: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateQueryWithSortOrder: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateQueryWithSortOrder: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateQuery: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateQuery: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -616,6 +655,7 @@ public class IContentIndexerQueryOperations <: InterfaceWrapperBase & ComInterfa
         readVtbl<IContentIndexerQueryOperationsVtbl>(IContentIndexerQueryOperationsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateQueryWithSortOrderAndLanguage(searchFilter: windows_core.HString, propertiesToRetrieve: windows_collections.IIterable<windows_core.HString>, sortOrder: windows_collections.IIterable<_impl_l0.SortEntry>, searchFilterLanguage: windows_core.HString): ContentIndexerQuery {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -624,6 +664,7 @@ public class IContentIndexerQueryOperations <: InterfaceWrapperBase & ComInterfa
         return ContentIndexerQuery.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateQueryWithSortOrder(searchFilter: windows_core.HString, propertiesToRetrieve: windows_collections.IIterable<windows_core.HString>, sortOrder: windows_collections.IIterable<_impl_l0.SortEntry>): ContentIndexerQuery {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -632,6 +673,7 @@ public class IContentIndexerQueryOperations <: InterfaceWrapperBase & ComInterfa
         return ContentIndexerQuery.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateQuery(searchFilter: windows_core.HString, propertiesToRetrieve: windows_collections.IIterable<windows_core.HString>): ContentIndexerQuery {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -744,7 +786,10 @@ public struct IIndexableContentVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Id: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetId: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     @When[Windows_Storage_Streams == "on"]
     public var Stream: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams != "on"]
@@ -757,7 +802,7 @@ public struct IIndexableContentVtbl {
     public var SetStreamContentType: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[((Windows_Foundation_Collections == "on") && (Windows_Storage_Streams == "on")) && (Windows_Storage_Streams == "on")]
     public static func new<Identity>(offset!: Int64 = 0): IIndexableContentVtbl where Identity <: IIndexableContent_Impl {
         let _ = offset
         var vtbl = IIndexableContentVtbl()
@@ -778,14 +823,7 @@ public struct IIndexableContentVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.Properties = { instanceRaw, result__ =>
-            match (unsafe { asImplFromRaw<IIndexableContent_ImplErased>(instanceRaw) }) {
-                case Some(impl) =>
-                    impl.__winrtThunk_Properties(result__)
-                case None =>
-                    E_NOINTERFACE.value
-            }
-        }
+        vtbl = IIndexableContentVtbl.__assignProperties<Identity>(vtbl)
         vtbl = IIndexableContentVtbl.__assignStream<Identity>(vtbl)
         vtbl = IIndexableContentVtbl.__assignSetStream<Identity>(vtbl)
         vtbl.StreamContentType = { instanceRaw, result__ =>
@@ -807,7 +845,26 @@ public struct IIndexableContentVtbl {
         return vtbl
     }
 
-    @When[Windows_Storage_Streams == "on" && Windows_Storage_Streams == "on"]
+    @When[(((Windows_Foundation_Collections == "on") && (Windows_Storage_Streams == "on")) && (Windows_Storage_Streams == "on")) && Windows_Foundation_Collections == "on"]
+    public static func __assignProperties<Identity>(vtbl: IIndexableContentVtbl): IIndexableContentVtbl where Identity <: IIndexableContent_Impl {
+        var next = vtbl
+        next.Properties = { instanceRaw, result__ =>
+            match (unsafe { asImplFromRaw<IIndexableContent_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_Properties(result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        return next
+    }
+
+    @When[(((Windows_Foundation_Collections == "on") && (Windows_Storage_Streams == "on")) && (Windows_Storage_Streams == "on")) && Windows_Foundation_Collections != "on"]
+    public static func __assignProperties<Identity>(vtbl: IIndexableContentVtbl): IIndexableContentVtbl where Identity <: IIndexableContent_Impl {
+        return vtbl
+    }
+
+    @When[(((Windows_Foundation_Collections == "on") && (Windows_Storage_Streams == "on")) && (Windows_Storage_Streams == "on")) && Windows_Storage_Streams == "on"]
     public static func __assignStream<Identity>(vtbl: IIndexableContentVtbl): IIndexableContentVtbl where Identity <: IIndexableContent_Impl {
         var next = vtbl
         next.Stream = { instanceRaw, result__ =>
@@ -821,12 +878,12 @@ public struct IIndexableContentVtbl {
         return next
     }
 
-    @When[Windows_Storage_Streams == "on" && Windows_Storage_Streams != "on"]
+    @When[(((Windows_Foundation_Collections == "on") && (Windows_Storage_Streams == "on")) && (Windows_Storage_Streams == "on")) && Windows_Storage_Streams != "on"]
     public static func __assignStream<Identity>(vtbl: IIndexableContentVtbl): IIndexableContentVtbl where Identity <: IIndexableContent_Impl {
         return vtbl
     }
 
-    @When[Windows_Storage_Streams == "on" && Windows_Storage_Streams == "on"]
+    @When[(((Windows_Foundation_Collections == "on") && (Windows_Storage_Streams == "on")) && (Windows_Storage_Streams == "on")) && Windows_Storage_Streams == "on"]
     public static func __assignSetStream<Identity>(vtbl: IIndexableContentVtbl): IIndexableContentVtbl where Identity <: IIndexableContent_Impl {
         var next = vtbl
         next.SetStream = { instanceRaw, arg0 =>
@@ -840,7 +897,7 @@ public struct IIndexableContentVtbl {
         return next
     }
 
-    @When[Windows_Storage_Streams == "on" && Windows_Storage_Streams != "on"]
+    @When[(((Windows_Foundation_Collections == "on") && (Windows_Storage_Streams == "on")) && (Windows_Storage_Streams == "on")) && Windows_Storage_Streams != "on"]
     public static func __assignSetStream<Identity>(vtbl: IIndexableContentVtbl): IIndexableContentVtbl where Identity <: IIndexableContent_Impl {
         return vtbl
     }
@@ -853,7 +910,7 @@ public struct IIndexableContentVtbl {
     }
 }
 
-@When[Windows_Storage_Search == "on" && Windows_Storage_Streams == "on"]
+@When[Windows_Storage_Search == "on" && (((Windows_Foundation_Collections == "on") && (Windows_Storage_Streams == "on")) && (Windows_Storage_Streams == "on"))]
 public interface IIndexableContent_ImplErased {
     public func __winrtThunk_Id(result__: CPointer<CPointer<Unit>>): Int32
 
@@ -870,7 +927,7 @@ public interface IIndexableContent_ImplErased {
     public func __winrtThunk_SetStreamContentType(arg0: CPointer<Unit>): Int32
 }
 
-@When[Windows_Storage_Search == "on" && Windows_Storage_Streams == "on"]
+@When[Windows_Storage_Search == "on" && (((Windows_Foundation_Collections == "on") && (Windows_Storage_Streams == "on")) && (Windows_Storage_Streams == "on"))]
 public interface IIndexableContent_Impl <: IIndexableContent_ImplErased {
     public func Id(): windows_core.Result<windows_core.HString>
 
@@ -1065,6 +1122,7 @@ public class IIndexableContent <: InterfaceWrapperBase & ComInterface & RuntimeN
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMap<windows_core.HString, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1111,7 +1169,10 @@ extend IIndexableContent <: windows_core.Interface<IIndexableContent> {}
 @C
 public struct IQueryOptionsFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateCommonFileQuery: CFunc<(CPointer<Unit>, _impl_l0.CommonFileQueryAbi, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateCommonFileQuery: UIntNative = UIntNative(0)
     public var CreateCommonFolderQuery: CFunc<(CPointer<Unit>, _impl_l0.CommonFolderQueryAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -1181,6 +1242,7 @@ public class IQueryOptionsFactory <: InterfaceWrapperBase & ComInterface & Runti
         readVtbl<IQueryOptionsFactoryVtbl>(IQueryOptionsFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateCommonFileQuery(query: _impl_l0.CommonFileQuery, fileTypeFilter: windows_collections.IIterable<windows_core.HString>): QueryOptions {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1205,13 +1267,13 @@ extend IQueryOptionsFactory <: windows_core.Interface<IQueryOptionsFactory> {}
 @C
 public struct IStorageFileQueryResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var GetFilesAsync: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var GetFilesAsync: UIntNative = UIntNative(0)
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var GetFilesAsyncDefaultStartAndCount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var GetFilesAsyncDefaultStartAndCount: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -1293,7 +1355,7 @@ public class IStorageFileQueryResult <: InterfaceWrapperBase & ComInterface & Ru
         readVtbl<IStorageFileQueryResultVtbl>(IStorageFileQueryResultVtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetFilesAsync(startIndex: UInt32, maxNumberOfItems: UInt32): windows_future.IAsyncOperation<windows_collections.IVectorView<StorageFile>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1302,7 +1364,7 @@ public class IStorageFileQueryResult <: InterfaceWrapperBase & ComInterface & Ru
         return windows_future.IAsyncOperation<windows_collections.IVectorView<StorageFile>>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetFilesAsyncDefaultStartAndCount(): windows_future.IAsyncOperation<windows_collections.IVectorView<StorageFile>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1319,9 +1381,9 @@ extend IStorageFileQueryResult <: windows_core.Interface<IStorageFileQueryResult
 @C
 public struct IStorageFileQueryResult2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Data_Text == "on" && Windows_Storage == "on"]
+    @When[Windows_Data_Text == "on" && Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var GetMatchingPropertiesWithRanges: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Data_Text != "on" || Windows_Storage != "on"]
+    @When[Windows_Data_Text != "on" || Windows_Foundation_Collections != "on" || Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var GetMatchingPropertiesWithRanges: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -1403,7 +1465,7 @@ public class IStorageFileQueryResult2 <: InterfaceWrapperBase & ComInterface & R
         readVtbl<IStorageFileQueryResult2Vtbl>(IStorageFileQueryResult2Vtbl())
     }
 
-    @When[Windows_Data_Text == "on" && Windows_Storage == "on"]
+    @When[Windows_Data_Text == "on" && Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetMatchingPropertiesWithRanges(file: StorageFile): windows_collections.IMap<windows_core.HString, windows_collections.IVectorView<_impl_l0.TextSegment>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1429,32 +1491,32 @@ public struct IStorageFolderQueryOperationsVtbl {
     public var CreateFolderQueryWithOptions: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var CreateItemQuery: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CreateItemQueryWithOptions: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var GetFilesAsync: CFunc<(CPointer<Unit>, _impl_l0.CommonFileQueryAbi, UInt32, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var GetFilesAsync: UIntNative = UIntNative(0)
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var GetFilesAsyncOverloadDefaultStartAndCount: CFunc<(CPointer<Unit>, _impl_l0.CommonFileQueryAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var GetFilesAsyncOverloadDefaultStartAndCount: UIntNative = UIntNative(0)
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var GetFoldersAsync: CFunc<(CPointer<Unit>, _impl_l0.CommonFolderQueryAbi, UInt32, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage != "on"]
     public var GetFoldersAsync: UIntNative = UIntNative(0)
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var GetFoldersAsyncOverloadDefaultStartAndCount: CFunc<(CPointer<Unit>, _impl_l0.CommonFolderQueryAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage != "on"]
     public var GetFoldersAsyncOverloadDefaultStartAndCount: UIntNative = UIntNative(0)
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var GetItemsAsync: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage != "on"]
     public var GetItemsAsync: UIntNative = UIntNative(0)
     public var AreQueryOptionsSupported: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var IsCommonFolderQuerySupported: CFunc<(CPointer<Unit>, _impl_l0.CommonFolderQueryAbi, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var IsCommonFileQuerySupported: CFunc<(CPointer<Unit>, _impl_l0.CommonFileQueryAbi, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 
-    @When[Windows_Storage == "on"]
+    @When[(((Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")]
     public static func new<Identity>(offset!: Int64 = 0): IStorageFolderQueryOperationsVtbl where Identity <: IStorageFolderQueryOperations_Impl {
         let _ = offset
         var vtbl = IStorageFolderQueryOperationsVtbl()
@@ -1563,7 +1625,7 @@ public struct IStorageFolderQueryOperationsVtbl {
         return vtbl
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage == "on"]
+    @When[((((Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")]
     public static func __assignGetFilesAsync<Identity>(vtbl: IStorageFolderQueryOperationsVtbl): IStorageFolderQueryOperationsVtbl where Identity <: IStorageFolderQueryOperations_Impl {
         var next = vtbl
         next.GetFilesAsync = { instanceRaw, arg0, arg1, arg2, result__ =>
@@ -1577,12 +1639,12 @@ public struct IStorageFolderQueryOperationsVtbl {
         return next
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage != "on"]
+    @When[((((Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections != "on" || Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on")]
     public static func __assignGetFilesAsync<Identity>(vtbl: IStorageFolderQueryOperationsVtbl): IStorageFolderQueryOperationsVtbl where Identity <: IStorageFolderQueryOperations_Impl {
         return vtbl
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage == "on"]
+    @When[((((Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")]
     public static func __assignGetFilesAsyncOverloadDefaultStartAndCount<Identity>(vtbl: IStorageFolderQueryOperationsVtbl): IStorageFolderQueryOperationsVtbl where Identity <: IStorageFolderQueryOperations_Impl {
         var next = vtbl
         next.GetFilesAsyncOverloadDefaultStartAndCount = { instanceRaw, arg0, result__ =>
@@ -1596,12 +1658,12 @@ public struct IStorageFolderQueryOperationsVtbl {
         return next
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage != "on"]
+    @When[((((Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections != "on" || Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on")]
     public static func __assignGetFilesAsyncOverloadDefaultStartAndCount<Identity>(vtbl: IStorageFolderQueryOperationsVtbl): IStorageFolderQueryOperationsVtbl where Identity <: IStorageFolderQueryOperations_Impl {
         return vtbl
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage == "on"]
+    @When[((((Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")]
     public static func __assignGetFoldersAsync<Identity>(vtbl: IStorageFolderQueryOperationsVtbl): IStorageFolderQueryOperationsVtbl where Identity <: IStorageFolderQueryOperations_Impl {
         var next = vtbl
         next.GetFoldersAsync = { instanceRaw, arg0, arg1, arg2, result__ =>
@@ -1615,12 +1677,12 @@ public struct IStorageFolderQueryOperationsVtbl {
         return next
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage != "on"]
+    @When[((((Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections != "on" || Windows_Storage != "on")]
     public static func __assignGetFoldersAsync<Identity>(vtbl: IStorageFolderQueryOperationsVtbl): IStorageFolderQueryOperationsVtbl where Identity <: IStorageFolderQueryOperations_Impl {
         return vtbl
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage == "on"]
+    @When[((((Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")]
     public static func __assignGetFoldersAsyncOverloadDefaultStartAndCount<Identity>(vtbl: IStorageFolderQueryOperationsVtbl): IStorageFolderQueryOperationsVtbl where Identity <: IStorageFolderQueryOperations_Impl {
         var next = vtbl
         next.GetFoldersAsyncOverloadDefaultStartAndCount = { instanceRaw, arg0, result__ =>
@@ -1634,12 +1696,12 @@ public struct IStorageFolderQueryOperationsVtbl {
         return next
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage != "on"]
+    @When[((((Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections != "on" || Windows_Storage != "on")]
     public static func __assignGetFoldersAsyncOverloadDefaultStartAndCount<Identity>(vtbl: IStorageFolderQueryOperationsVtbl): IStorageFolderQueryOperationsVtbl where Identity <: IStorageFolderQueryOperations_Impl {
         return vtbl
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage == "on"]
+    @When[((((Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")]
     public static func __assignGetItemsAsync<Identity>(vtbl: IStorageFolderQueryOperationsVtbl): IStorageFolderQueryOperationsVtbl where Identity <: IStorageFolderQueryOperations_Impl {
         var next = vtbl
         next.GetItemsAsync = { instanceRaw, arg0, arg1, result__ =>
@@ -1653,7 +1715,7 @@ public struct IStorageFolderQueryOperationsVtbl {
         return next
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage != "on"]
+    @When[((((Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections != "on" || Windows_Storage != "on")]
     public static func __assignGetItemsAsync<Identity>(vtbl: IStorageFolderQueryOperationsVtbl): IStorageFolderQueryOperationsVtbl where Identity <: IStorageFolderQueryOperations_Impl {
         return vtbl
     }
@@ -1666,7 +1728,7 @@ public struct IStorageFolderQueryOperationsVtbl {
     }
 }
 
-@When[Windows_Storage_Search == "on" && Windows_Storage == "on"]
+@When[Windows_Storage_Search == "on" && ((((Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections == "on" && Windows_Storage == "on"))]
 public interface IStorageFolderQueryOperations_ImplErased {
     public func __winrtThunk_GetIndexedStateAsync(result__: CPointer<CPointer<Unit>>): Int32
 
@@ -1703,7 +1765,7 @@ public interface IStorageFolderQueryOperations_ImplErased {
     public func __winrtThunk_IsCommonFileQuerySupported(arg0: _impl_l0.CommonFileQueryAbi, result__: CPointer<Bool>): Int32
 }
 
-@When[Windows_Storage_Search == "on" && Windows_Storage == "on"]
+@When[Windows_Storage_Search == "on" && ((((Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && (Windows_Foundation_Collections == "on" && Windows_Storage == "on"))]
 public interface IStorageFolderQueryOperations_Impl <: IStorageFolderQueryOperations_ImplErased {
     public func GetIndexedStateAsync(): windows_core.Result<windows_future.IAsyncOperation<_impl_l0.IndexedState>>
 
@@ -2168,7 +2230,7 @@ public class IStorageFolderQueryOperations <: InterfaceWrapperBase & ComInterfac
         return StorageItemQueryResult.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetFilesAsync(query: _impl_l0.CommonFileQuery, startIndex: UInt32, maxItemsToRetrieve: UInt32): windows_future.IAsyncOperation<windows_collections.IVectorView<StorageFile>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2177,7 +2239,7 @@ public class IStorageFolderQueryOperations <: InterfaceWrapperBase & ComInterfac
         return windows_future.IAsyncOperation<windows_collections.IVectorView<StorageFile>>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetFilesAsyncOverloadDefaultStartAndCount(query: _impl_l0.CommonFileQuery): windows_future.IAsyncOperation<windows_collections.IVectorView<StorageFile>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2186,7 +2248,7 @@ public class IStorageFolderQueryOperations <: InterfaceWrapperBase & ComInterfac
         return windows_future.IAsyncOperation<windows_collections.IVectorView<StorageFile>>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func GetFoldersAsync(query: _impl_l0.CommonFolderQuery, startIndex: UInt32, maxItemsToRetrieve: UInt32): windows_future.IAsyncOperation<windows_collections.IVectorView<StorageFolder>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2195,7 +2257,7 @@ public class IStorageFolderQueryOperations <: InterfaceWrapperBase & ComInterfac
         return windows_future.IAsyncOperation<windows_collections.IVectorView<StorageFolder>>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func GetFoldersAsyncOverloadDefaultStartAndCount(query: _impl_l0.CommonFolderQuery): windows_future.IAsyncOperation<windows_collections.IVectorView<StorageFolder>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2204,7 +2266,7 @@ public class IStorageFolderQueryOperations <: InterfaceWrapperBase & ComInterfac
         return windows_future.IAsyncOperation<windows_collections.IVectorView<StorageFolder>>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func GetItemsAsync(startIndex: UInt32, maxItemsToRetrieve: UInt32): windows_future.IAsyncOperation<windows_collections.IVectorView<IStorageItem>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2245,13 +2307,13 @@ extend IStorageFolderQueryOperations <: windows_core.Interface<IStorageFolderQue
 @C
 public struct IStorageFolderQueryResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var GetFoldersAsync: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage != "on"]
     public var GetFoldersAsync: UIntNative = UIntNative(0)
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var GetFoldersAsyncDefaultStartAndCount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage != "on"]
     public var GetFoldersAsyncDefaultStartAndCount: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -2333,7 +2395,7 @@ public class IStorageFolderQueryResult <: InterfaceWrapperBase & ComInterface & 
         readVtbl<IStorageFolderQueryResultVtbl>(IStorageFolderQueryResultVtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func GetFoldersAsync(startIndex: UInt32, maxNumberOfItems: UInt32): windows_future.IAsyncOperation<windows_collections.IVectorView<StorageFolder>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2342,7 +2404,7 @@ public class IStorageFolderQueryResult <: InterfaceWrapperBase & ComInterface & 
         return windows_future.IAsyncOperation<windows_collections.IVectorView<StorageFolder>>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func GetFoldersAsyncDefaultStartAndCount(): windows_future.IAsyncOperation<windows_collections.IVectorView<StorageFolder>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2359,13 +2421,13 @@ extend IStorageFolderQueryResult <: windows_core.Interface<IStorageFolderQueryRe
 @C
 public struct IStorageItemQueryResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var GetItemsAsync: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage != "on"]
     public var GetItemsAsync: UIntNative = UIntNative(0)
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var GetItemsAsyncDefaultStartAndCount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage != "on"]
     public var GetItemsAsyncDefaultStartAndCount: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -2447,7 +2509,7 @@ public class IStorageItemQueryResult <: InterfaceWrapperBase & ComInterface & Ru
         readVtbl<IStorageItemQueryResultVtbl>(IStorageItemQueryResultVtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func GetItemsAsync(startIndex: UInt32, maxNumberOfItems: UInt32): windows_future.IAsyncOperation<windows_collections.IVectorView<IStorageItem>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2456,7 +2518,7 @@ public class IStorageItemQueryResult <: InterfaceWrapperBase & ComInterface & Ru
         return windows_future.IAsyncOperation<windows_collections.IVectorView<IStorageItem>>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func GetItemsAsyncDefaultStartAndCount(): windows_future.IAsyncOperation<windows_collections.IVectorView<IStorageItem>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3178,6 +3240,7 @@ public class IndexableContent <: InterfaceWrapperBase & ComInterface & windows_i
         defaultInterface().SetId(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMap<windows_core.HString, IInspectable> {
         return defaultInterface().Properties()
     }
@@ -3299,6 +3362,7 @@ public class QueryOptions <: InterfaceWrapperBase & ComInterface & windows_inter
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FileTypeFilter(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().FileTypeFilter()
     }
@@ -3343,6 +3407,7 @@ public class QueryOptions <: InterfaceWrapperBase & ComInterface & windows_inter
         defaultInterface().SetIndexerOption(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SortOrder(): windows_collections.IVector<_impl_l0.SortEntry> {
         return defaultInterface().SortOrder()
     }
@@ -3368,11 +3433,12 @@ public class QueryOptions <: InterfaceWrapperBase & ComInterface & windows_inter
         defaultInterface().SetThumbnailPrefetch(mode, requestedSize, options)
     }
 
-    @When[Windows_Storage_FileProperties == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_FileProperties == "on"]
     public unsafe func SetPropertyPrefetch(options: _impl_l0.PropertyPrefetchOptions, propertiesToRetrieve: windows_collections.IIterable<windows_core.HString>): Unit {
         defaultInterface().SetPropertyPrefetch(options, propertiesToRetrieve)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateCommonFileQuery(query: _impl_l0.CommonFileQuery, fileTypeFilter: windows_collections.IIterable<windows_core.HString>): QueryOptions {
         var result__: Option<QueryOptions> = Option<QueryOptions>.None
         try (factory__ = windows_core.factory<QueryOptions, IQueryOptionsFactory>().unwrap()) {
@@ -3486,12 +3552,12 @@ public class StorageFileQueryResult <: InterfaceWrapperBase & ComInterface & win
         }
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetFilesAsync(startIndex: UInt32, maxNumberOfItems: UInt32): windows_future.IAsyncOperation<windows_collections.IVectorView<StorageFile>> {
         return defaultInterface().GetFilesAsync(startIndex, maxNumberOfItems)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetFilesAsyncDefaultStartAndCount(): windows_future.IAsyncOperation<windows_collections.IVectorView<StorageFile>> {
         return defaultInterface().GetFilesAsyncDefaultStartAndCount()
     }
@@ -3624,12 +3690,12 @@ public class StorageFolderQueryResult <: InterfaceWrapperBase & ComInterface & w
         }
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func GetFoldersAsync(startIndex: UInt32, maxNumberOfItems: UInt32): windows_future.IAsyncOperation<windows_collections.IVectorView<StorageFolder>> {
         return defaultInterface().GetFoldersAsync(startIndex, maxNumberOfItems)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func GetFoldersAsyncDefaultStartAndCount(): windows_future.IAsyncOperation<windows_collections.IVectorView<StorageFolder>> {
         return defaultInterface().GetFoldersAsyncDefaultStartAndCount()
     }
@@ -3762,12 +3828,12 @@ public class StorageItemQueryResult <: InterfaceWrapperBase & ComInterface & win
         }
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func GetItemsAsync(startIndex: UInt32, maxNumberOfItems: UInt32): windows_future.IAsyncOperation<windows_collections.IVectorView<IStorageItem>> {
         return defaultInterface().GetItemsAsync(startIndex, maxNumberOfItems)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func GetItemsAsyncDefaultStartAndCount(): windows_future.IAsyncOperation<windows_collections.IVectorView<IStorageItem>> {
         return defaultInterface().GetItemsAsyncDefaultStartAndCount()
     }

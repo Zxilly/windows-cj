@@ -3,9 +3,7 @@ package windows_sys.Win32.System.WinRT.Pdf
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Direct2D == "on"]
 import windows_sys.Win32.Graphics.Direct2D as Win32_Graphics_Direct2D
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l2 as Win32__impl_l2
@@ -91,7 +89,12 @@ public class IPdfRendererNative <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_System_WinRT_Pdf == "on" && Windows_Win32_Graphics_Dxgi == "on"]
 public type PFN_PDF_CREATE_RENDERER = CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>
 
-@When[WINDOWS_DATA_PDF == "on" && Windows_Win32_Graphics_Dxgi == "on"]
+@When[Windows_Win32_System_WinRT_Pdf == "on" && WINDOWS_DATA_PDF == "on" && Windows_Win32_System_WinRT_Pdf_PdfCreateRenderer == "on" && Windows_Win32_Graphics_Dxgi == "on"]
 foreign {
     func PdfCreateRenderer(pDevice: CPointer<Unit>, ppRenderer: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_WinRT_Pdf == "on" && WINDOWS_DATA_PDF == "on" && Windows_Win32_System_WinRT_Pdf_PdfCreateRenderer == "on" && Windows_Win32_Graphics_Dxgi == "on"]
+public unsafe func Windows_PdfCreateRenderer(pDevice: CPointer<Unit>, ppRenderer: CPointer<CPointer<Unit>>): Int32 {
+    return PdfCreateRenderer(pDevice, ppRenderer)
 }

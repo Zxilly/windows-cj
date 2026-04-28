@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l0 as _impl_l0
 import windows_collections as windows_collections
@@ -101,7 +100,10 @@ public struct IPnpObjectUpdateVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Type: CFunc<(CPointer<Unit>, CPointer<PnpObjectTypeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Id: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -186,6 +188,7 @@ public class IPnpObjectUpdate <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -275,6 +278,7 @@ public class PnpObjectUpdate <: InterfaceWrapperBase & ComInterface & windows_in
         return defaultInterface().Id()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         return defaultInterface().Properties()
     }
@@ -304,7 +308,10 @@ public struct IPnpObjectVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Type: CFunc<(CPointer<Unit>, CPointer<PnpObjectTypeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Id: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     public var Update: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -390,6 +397,7 @@ public class IPnpObject <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -412,11 +420,26 @@ extend IPnpObject <: windows_core.Interface<IPnpObject> {}
 @C
 public struct IPnpObjectStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromIdAsync: CFunc<(CPointer<Unit>, PnpObjectTypeAbi, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateFromIdAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllAsync: CFunc<(CPointer<Unit>, PnpObjectTypeAbi, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllAsyncAqsFilter: CFunc<(CPointer<Unit>, PnpObjectTypeAbi, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllAsyncAqsFilter: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateWatcher: CFunc<(CPointer<Unit>, PnpObjectTypeAbi, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateWatcher: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateWatcherAqsFilter: CFunc<(CPointer<Unit>, PnpObjectTypeAbi, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateWatcherAqsFilter: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -485,6 +508,7 @@ public class IPnpObjectStatics <: InterfaceWrapperBase & ComInterface & RuntimeN
         readVtbl<IPnpObjectStaticsVtbl>(IPnpObjectStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromIdAsync(type_: PnpObjectType, id: windows_core.HString, requestedProperties: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<PnpObject> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -493,6 +517,7 @@ public class IPnpObjectStatics <: InterfaceWrapperBase & ComInterface & RuntimeN
         return windows_future.IAsyncOperation<PnpObject>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAsync(type_: PnpObjectType, requestedProperties: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<PnpObjectCollection> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -501,6 +526,7 @@ public class IPnpObjectStatics <: InterfaceWrapperBase & ComInterface & RuntimeN
         return windows_future.IAsyncOperation<PnpObjectCollection>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAsyncAqsFilter(type_: PnpObjectType, requestedProperties: windows_collections.IIterable<windows_core.HString>, aqsFilter: windows_core.HString): windows_future.IAsyncOperation<PnpObjectCollection> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -509,6 +535,7 @@ public class IPnpObjectStatics <: InterfaceWrapperBase & ComInterface & RuntimeN
         return windows_future.IAsyncOperation<PnpObjectCollection>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateWatcher(type_: PnpObjectType, requestedProperties: windows_collections.IIterable<windows_core.HString>): PnpObjectWatcher {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -517,6 +544,7 @@ public class IPnpObjectStatics <: InterfaceWrapperBase & ComInterface & RuntimeN
         return PnpObjectWatcher.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateWatcherAqsFilter(type_: PnpObjectType, requestedProperties: windows_collections.IIterable<windows_core.HString>, aqsFilter: windows_core.HString): PnpObjectWatcher {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -789,6 +817,7 @@ public class PnpObject <: InterfaceWrapperBase & ComInterface & windows_interfac
         return defaultInterface().Id()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         return defaultInterface().Properties()
     }
@@ -797,6 +826,7 @@ public class PnpObject <: InterfaceWrapperBase & ComInterface & windows_interfac
         defaultInterface().Update(updateInfo)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromIdAsync(type_: PnpObjectType, id: windows_core.HString, requestedProperties: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<PnpObject> {
         var result__: Option<windows_future.IAsyncOperation<PnpObject>> = Option<windows_future.IAsyncOperation<PnpObject>>.None
         try (factory__ = windows_core.factory<PnpObject, IPnpObjectStatics>().unwrap()) {
@@ -808,6 +838,7 @@ public class PnpObject <: InterfaceWrapperBase & ComInterface & windows_interfac
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindAllAsync(type_: PnpObjectType, requestedProperties: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<PnpObjectCollection> {
         var result__: Option<windows_future.IAsyncOperation<PnpObjectCollection>> = Option<windows_future.IAsyncOperation<PnpObjectCollection>>.None
         try (factory__ = windows_core.factory<PnpObject, IPnpObjectStatics>().unwrap()) {
@@ -819,6 +850,7 @@ public class PnpObject <: InterfaceWrapperBase & ComInterface & windows_interfac
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindAllAsyncAqsFilter(type_: PnpObjectType, requestedProperties: windows_collections.IIterable<windows_core.HString>, aqsFilter: windows_core.HString): windows_future.IAsyncOperation<PnpObjectCollection> {
         var result__: Option<windows_future.IAsyncOperation<PnpObjectCollection>> = Option<windows_future.IAsyncOperation<PnpObjectCollection>>.None
         try (factory__ = windows_core.factory<PnpObject, IPnpObjectStatics>().unwrap()) {
@@ -830,6 +862,7 @@ public class PnpObject <: InterfaceWrapperBase & ComInterface & windows_interfac
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateWatcher(type_: PnpObjectType, requestedProperties: windows_collections.IIterable<windows_core.HString>): PnpObjectWatcher {
         var result__: Option<PnpObjectWatcher> = Option<PnpObjectWatcher>.None
         try (factory__ = windows_core.factory<PnpObject, IPnpObjectStatics>().unwrap()) {
@@ -841,6 +874,7 @@ public class PnpObject <: InterfaceWrapperBase & ComInterface & windows_interfac
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateWatcherAqsFilter(type_: PnpObjectType, requestedProperties: windows_collections.IIterable<windows_core.HString>, aqsFilter: windows_core.HString): PnpObjectWatcher {
         var result__: Option<PnpObjectWatcher> = Option<PnpObjectWatcher>.None
         try (factory__ = windows_core.factory<PnpObject, IPnpObjectStatics>().unwrap()) {
@@ -871,7 +905,7 @@ extend PnpObject <: windows_core.HandleWinrtType<PnpObject> {
     }
 }
 
-@When[Windows_Devices_Enumeration_Pnp == "on"]
+@When[Windows_Devices_Enumeration_Pnp == "on" && Windows_Foundation_Collections == "on"]
 public class PnpObjectCollection <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -976,7 +1010,7 @@ public class PnpObjectCollection <: InterfaceWrapperBase & ComInterface & window
     }
 }
 
-@When[Windows_Devices_Enumeration_Pnp == "on"]
+@When[Windows_Devices_Enumeration_Pnp == "on" && Windows_Foundation_Collections == "on"]
 extend PnpObjectCollection <: windows_core.HandleWinrtType<PnpObjectCollection> {
     public static func intoWinrtHandle(value: PnpObjectCollection): CPointer<Unit> {
         value.asRaw()

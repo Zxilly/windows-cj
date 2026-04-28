@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_UI == "on"]
 import windows.UI as UI
 import windows.UI.Xaml._impl_l0 as UI_Xaml__impl_l0
 import windows._impl_l0 as _impl_l0
@@ -866,6 +864,7 @@ public class ColorAnimationUsingKeyFrames <: InterfaceWrapperBase & ComInterface
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func KeyFrames(): ColorKeyFrameCollection {
         return defaultInterface().KeyFrames()
     }
@@ -909,7 +908,7 @@ extend ColorAnimationUsingKeyFrames <: windows_core.HandleWinrtType<ColorAnimati
     }
 }
 
-@When[Windows_UI_Xaml_Media_Animation == "on"]
+@When[Windows_UI_Xaml_Media_Animation == "on" && Windows_Foundation_Collections == "on"]
 public class ColorKeyFrameCollection <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1057,7 +1056,7 @@ public class ColorKeyFrameCollection <: InterfaceWrapperBase & ComInterface & wi
     }
 }
 
-@When[Windows_UI_Xaml_Media_Animation == "on"]
+@When[Windows_UI_Xaml_Media_Animation == "on" && Windows_Foundation_Collections == "on"]
 extend ColorKeyFrameCollection <: windows_core.HandleWinrtType<ColorKeyFrameCollection> {
     public static func intoWinrtHandle(value: ColorKeyFrameCollection): CPointer<Unit> {
         value.asRaw()
@@ -2574,6 +2573,7 @@ public class DoubleAnimationUsingKeyFrames <: InterfaceWrapperBase & ComInterfac
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func KeyFrames(): DoubleKeyFrameCollection {
         return defaultInterface().KeyFrames()
     }
@@ -2617,7 +2617,7 @@ extend DoubleAnimationUsingKeyFrames <: windows_core.HandleWinrtType<DoubleAnima
     }
 }
 
-@When[Windows_UI_Xaml_Media_Animation == "on"]
+@When[Windows_UI_Xaml_Media_Animation == "on" && Windows_Foundation_Collections == "on"]
 public class DoubleKeyFrameCollection <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -2765,7 +2765,7 @@ public class DoubleKeyFrameCollection <: InterfaceWrapperBase & ComInterface & w
     }
 }
 
-@When[Windows_UI_Xaml_Media_Animation == "on"]
+@When[Windows_UI_Xaml_Media_Animation == "on" && Windows_Foundation_Collections == "on"]
 extend DoubleKeyFrameCollection <: windows_core.HandleWinrtType<DoubleKeyFrameCollection> {
     public static func intoWinrtHandle(value: DoubleKeyFrameCollection): CPointer<Unit> {
         value.asRaw()
@@ -4990,7 +4990,10 @@ extend IColorAnimation <: windows_core.Interface<IColorAnimation> {}
 @C
 public struct IColorAnimationUsingKeyFramesVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var KeyFrames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var KeyFrames: UIntNative = UIntNative(0)
     public var EnableDependentAnimation: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetEnableDependentAnimation: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -5061,6 +5064,7 @@ public class IColorAnimationUsingKeyFrames <: InterfaceWrapperBase & ComInterfac
         readVtbl<IColorAnimationUsingKeyFramesVtbl>(IColorAnimationUsingKeyFramesVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func KeyFrames(): ColorKeyFrameCollection {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5331,9 +5335,9 @@ public struct IConnectedAnimation2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var IsScaleAnimationEnabled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetIsScaleAnimationEnabled: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public var TryStartWithCoordinatedElements: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Xaml != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_UI_Xaml != "on"]
     public var TryStartWithCoordinatedElements: UIntNative = UIntNative(0)
     @When[Windows_UI_Composition == "on"]
     public var SetAnimationComponent: CFunc<(CPointer<Unit>, UI_Xaml__impl_l0.ConnectedAnimationComponentAbi, CPointer<Unit>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -5421,7 +5425,7 @@ public class IConnectedAnimation2 <: InterfaceWrapperBase & ComInterface & Runti
         HRESULT(hr).ok()
     }
 
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public unsafe func TryStartWithCoordinatedElements(destination: UIElement, coordinatedElements: windows_collections.IIterable<UIElement>): Bool {
         let v = vtbl()
         var result__ = false
@@ -6124,7 +6128,10 @@ extend IDoubleAnimation <: windows_core.Interface<IDoubleAnimation> {}
 @C
 public struct IDoubleAnimationUsingKeyFramesVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var KeyFrames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var KeyFrames: UIntNative = UIntNative(0)
     public var EnableDependentAnimation: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetEnableDependentAnimation: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -6195,6 +6202,7 @@ public class IDoubleAnimationUsingKeyFrames <: InterfaceWrapperBase & ComInterfa
         readVtbl<IDoubleAnimationUsingKeyFramesVtbl>(IDoubleAnimationUsingKeyFramesVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func KeyFrames(): DoubleKeyFrameCollection {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6614,7 +6622,10 @@ extend IEntranceNavigationTransitionInfoStatics <: windows_core.Interface<IEntra
 @C
 public struct IObjectAnimationUsingKeyFramesVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var KeyFrames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var KeyFrames: UIntNative = UIntNative(0)
     public var EnableDependentAnimation: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetEnableDependentAnimation: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -6685,6 +6696,7 @@ public class IObjectAnimationUsingKeyFrames <: InterfaceWrapperBase & ComInterfa
         readVtbl<IObjectAnimationUsingKeyFramesVtbl>(IObjectAnimationUsingKeyFramesVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func KeyFrames(): ObjectKeyFrameCollection {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6871,7 +6883,10 @@ extend IPointAnimation <: windows_core.Interface<IPointAnimation> {}
 @C
 public struct IPointAnimationUsingKeyFramesVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var KeyFrames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var KeyFrames: UIntNative = UIntNative(0)
     public var EnableDependentAnimation: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetEnableDependentAnimation: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -6942,6 +6957,7 @@ public class IPointAnimationUsingKeyFrames <: InterfaceWrapperBase & ComInterfac
         readVtbl<IPointAnimationUsingKeyFramesVtbl>(IPointAnimationUsingKeyFramesVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func KeyFrames(): PointKeyFrameCollection {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6972,7 +6988,10 @@ extend IPointAnimationUsingKeyFrames <: windows_core.Interface<IPointAnimationUs
 @C
 public struct IStoryboardVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Children: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Children: UIntNative = UIntNative(0)
     public var Seek: CFunc<(CPointer<Unit>, windows_future.TimeSpanAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Stop: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
     public var Begin: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
@@ -7050,6 +7069,7 @@ public class IStoryboard <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         readVtbl<IStoryboardVtbl>(IStoryboardVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Children(): TimelineCollection {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7831,6 +7851,7 @@ public class ObjectAnimationUsingKeyFrames <: InterfaceWrapperBase & ComInterfac
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func KeyFrames(): ObjectKeyFrameCollection {
         return defaultInterface().KeyFrames()
     }
@@ -7874,7 +7895,7 @@ extend ObjectAnimationUsingKeyFrames <: windows_core.HandleWinrtType<ObjectAnima
     }
 }
 
-@When[Windows_UI_Xaml_Media_Animation == "on"]
+@When[Windows_UI_Xaml_Media_Animation == "on" && Windows_Foundation_Collections == "on"]
 public class ObjectKeyFrameCollection <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8022,7 +8043,7 @@ public class ObjectKeyFrameCollection <: InterfaceWrapperBase & ComInterface & w
     }
 }
 
-@When[Windows_UI_Xaml_Media_Animation == "on"]
+@When[Windows_UI_Xaml_Media_Animation == "on" && Windows_Foundation_Collections == "on"]
 extend ObjectKeyFrameCollection <: windows_core.HandleWinrtType<ObjectKeyFrameCollection> {
     public static func intoWinrtHandle(value: ObjectKeyFrameCollection): CPointer<Unit> {
         value.asRaw()
@@ -8347,6 +8368,7 @@ public class PointAnimationUsingKeyFrames <: InterfaceWrapperBase & ComInterface
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func KeyFrames(): PointKeyFrameCollection {
         return defaultInterface().KeyFrames()
     }
@@ -8390,7 +8412,7 @@ extend PointAnimationUsingKeyFrames <: windows_core.HandleWinrtType<PointAnimati
     }
 }
 
-@When[Windows_UI_Xaml_Media_Animation == "on"]
+@When[Windows_UI_Xaml_Media_Animation == "on" && Windows_Foundation_Collections == "on"]
 public class PointKeyFrameCollection <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8538,7 +8560,7 @@ public class PointKeyFrameCollection <: InterfaceWrapperBase & ComInterface & wi
     }
 }
 
-@When[Windows_UI_Xaml_Media_Animation == "on"]
+@When[Windows_UI_Xaml_Media_Animation == "on" && Windows_Foundation_Collections == "on"]
 extend PointKeyFrameCollection <: windows_core.HandleWinrtType<PointKeyFrameCollection> {
     public static func intoWinrtHandle(value: PointKeyFrameCollection): CPointer<Unit> {
         value.asRaw()
@@ -11061,6 +11083,7 @@ public class Storyboard <: InterfaceWrapperBase & ComInterface & windows_interfa
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Children(): TimelineCollection {
         return defaultInterface().Children()
     }
@@ -11534,7 +11557,7 @@ extend SwipeHintThemeAnimation <: windows_core.HandleWinrtType<SwipeHintThemeAni
     }
 }
 
-@When[Windows_UI_Xaml_Media_Animation == "on"]
+@When[Windows_UI_Xaml_Media_Animation == "on" && Windows_Foundation_Collections == "on"]
 public class TimelineCollection <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -11682,7 +11705,7 @@ public class TimelineCollection <: InterfaceWrapperBase & ComInterface & windows
     }
 }
 
-@When[Windows_UI_Xaml_Media_Animation == "on"]
+@When[Windows_UI_Xaml_Media_Animation == "on" && Windows_Foundation_Collections == "on"]
 extend TimelineCollection <: windows_core.HandleWinrtType<TimelineCollection> {
     public static func intoWinrtHandle(value: TimelineCollection): CPointer<Unit> {
         value.asRaw()

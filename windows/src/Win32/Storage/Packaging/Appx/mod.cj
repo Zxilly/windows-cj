@@ -4,15 +4,14 @@
 package windows.Win32.Storage.Packaging.Appx
 
 import std.collection.*
+import windows_libloading
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_polyfill.{packedReadUInt32, packedReadValue, packedWriteUInt32, packedWriteValue, unionReadUInt64, unionWriteUInt64}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
@@ -7751,179 +7750,800 @@ public struct PACKAGE_INFO {
     public init() {}
 }
 
-@When[KERNEL32 == "on"]
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_ActivatePackageVirtualizationContext == "on"]
 foreign {
     func ActivatePackageVirtualizationContext(context: PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE, cookie: CPointer<UIntNative>): Int32
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_ActivatePackageVirtualizationContext == "on"]
+public unsafe func Windows_ActivatePackageVirtualizationContext(context: PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE, cookie: CPointer<UIntNative>): Int32 {
+    return ActivatePackageVirtualizationContext(context, cookie)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_AppPolicyGetClrCompat == "on"]
+foreign {
     func AppPolicyGetClrCompat(processToken: CPointer<Unit>, policy: CPointer<AppPolicyClrCompatAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_AppPolicyGetClrCompat == "on"]
+public unsafe func Windows_AppPolicyGetClrCompat(processToken: CPointer<Unit>, policy: CPointer<AppPolicyClrCompatAbi>): windows_core.WIN32_ERROR {
+    return AppPolicyGetClrCompat(processToken, policy)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_AppPolicyGetCreateFileAccess == "on"]
+foreign {
     func AppPolicyGetCreateFileAccess(processToken: CPointer<Unit>, policy: CPointer<AppPolicyCreateFileAccessAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_AppPolicyGetCreateFileAccess == "on"]
+public unsafe func Windows_AppPolicyGetCreateFileAccess(processToken: CPointer<Unit>, policy: CPointer<AppPolicyCreateFileAccessAbi>): windows_core.WIN32_ERROR {
+    return AppPolicyGetCreateFileAccess(processToken, policy)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_AppPolicyGetLifecycleManagement == "on"]
+foreign {
     func AppPolicyGetLifecycleManagement(processToken: CPointer<Unit>, policy: CPointer<AppPolicyLifecycleManagementAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_AppPolicyGetLifecycleManagement == "on"]
+public unsafe func Windows_AppPolicyGetLifecycleManagement(processToken: CPointer<Unit>, policy: CPointer<AppPolicyLifecycleManagementAbi>): windows_core.WIN32_ERROR {
+    return AppPolicyGetLifecycleManagement(processToken, policy)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_AppPolicyGetMediaFoundationCodecLoading == "on"]
+foreign {
     func AppPolicyGetMediaFoundationCodecLoading(processToken: CPointer<Unit>, policy: CPointer<AppPolicyMediaFoundationCodecLoadingAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_AppPolicyGetMediaFoundationCodecLoading == "on"]
+public unsafe func Windows_AppPolicyGetMediaFoundationCodecLoading(processToken: CPointer<Unit>, policy: CPointer<AppPolicyMediaFoundationCodecLoadingAbi>): windows_core.WIN32_ERROR {
+    return AppPolicyGetMediaFoundationCodecLoading(processToken, policy)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_AppPolicyGetProcessTerminationMethod == "on"]
+foreign {
     func AppPolicyGetProcessTerminationMethod(processToken: CPointer<Unit>, policy: CPointer<AppPolicyProcessTerminationMethodAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_AppPolicyGetProcessTerminationMethod == "on"]
+public unsafe func Windows_AppPolicyGetProcessTerminationMethod(processToken: CPointer<Unit>, policy: CPointer<AppPolicyProcessTerminationMethodAbi>): windows_core.WIN32_ERROR {
+    return AppPolicyGetProcessTerminationMethod(processToken, policy)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_AppPolicyGetShowDeveloperDiagnostic == "on"]
+foreign {
     func AppPolicyGetShowDeveloperDiagnostic(processToken: CPointer<Unit>, policy: CPointer<AppPolicyShowDeveloperDiagnosticAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_AppPolicyGetShowDeveloperDiagnostic == "on"]
+public unsafe func Windows_AppPolicyGetShowDeveloperDiagnostic(processToken: CPointer<Unit>, policy: CPointer<AppPolicyShowDeveloperDiagnosticAbi>): windows_core.WIN32_ERROR {
+    return AppPolicyGetShowDeveloperDiagnostic(processToken, policy)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_AppPolicyGetThreadInitializationType == "on"]
+foreign {
     func AppPolicyGetThreadInitializationType(processToken: CPointer<Unit>, policy: CPointer<AppPolicyThreadInitializationTypeAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_AppPolicyGetThreadInitializationType == "on"]
+public unsafe func Windows_AppPolicyGetThreadInitializationType(processToken: CPointer<Unit>, policy: CPointer<AppPolicyThreadInitializationTypeAbi>): windows_core.WIN32_ERROR {
+    return AppPolicyGetThreadInitializationType(processToken, policy)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_AppPolicyGetWindowingModel == "on"]
+foreign {
     func AppPolicyGetWindowingModel(processToken: CPointer<Unit>, policy: CPointer<AppPolicyWindowingModelAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_AppPolicyGetWindowingModel == "on"]
+public unsafe func Windows_AppPolicyGetWindowingModel(processToken: CPointer<Unit>, policy: CPointer<AppPolicyWindowingModelAbi>): windows_core.WIN32_ERROR {
+    return AppPolicyGetWindowingModel(processToken, policy)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_CheckIsMSIXPackage == "on"]
+foreign {
     func CheckIsMSIXPackage(packageFullName: CPointer<UInt16>, isMSIXPackage: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_CheckIsMSIXPackage == "on"]
+public unsafe func Windows_CheckIsMSIXPackage(packageFullName: CPointer<UInt16>, isMSIXPackage: CPointer<Int32>): Int32 {
+    return CheckIsMSIXPackage(packageFullName, isMSIXPackage)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_ClosePackageInfo == "on"]
+foreign {
     func ClosePackageInfo(packageInfoReference: CPointer<_PACKAGE_INFO_REFERENCEAbi>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_ClosePackageInfo == "on"]
+public unsafe func Windows_ClosePackageInfo(packageInfoReference: CPointer<_PACKAGE_INFO_REFERENCEAbi>): windows_core.WIN32_ERROR {
+    return ClosePackageInfo(packageInfoReference)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_CreatePackageVirtualizationContext == "on"]
+foreign {
     // param-hint: packageFamilyName optional
     func CreatePackageVirtualizationContext(packageFamilyName: CPointer<UInt16>, context: CPointer<PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE>): Int32
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_CreatePackageVirtualizationContext == "on"]
+public unsafe func Windows_CreatePackageVirtualizationContext(packageFamilyName: CPointer<UInt16>, context: CPointer<PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE>): Int32 {
+    return CreatePackageVirtualizationContext(packageFamilyName, context)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_DeactivatePackageVirtualizationContext == "on"]
+foreign {
     func DeactivatePackageVirtualizationContext(cookie: UIntNative): Unit
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_DeactivatePackageVirtualizationContext == "on"]
+public unsafe func Windows_DeactivatePackageVirtualizationContext(cookie: UIntNative): Unit {
+    DeactivatePackageVirtualizationContext(cookie)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_DuplicatePackageVirtualizationContext == "on"]
+foreign {
     func DuplicatePackageVirtualizationContext(sourceContext: PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE, destContext: CPointer<PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE>): Int32
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_DuplicatePackageVirtualizationContext == "on"]
+public unsafe func Windows_DuplicatePackageVirtualizationContext(sourceContext: PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE, destContext: CPointer<PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE>): Int32 {
+    return DuplicatePackageVirtualizationContext(sourceContext, destContext)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_FindPackagesByPackageFamily == "on"]
+foreign {
     // param-hint: packageFullNames len=param[2] optional
     // param-hint: buffer len=param[4] optional
     // param-hint: packageProperties len=param[2] optional
     func FindPackagesByPackageFamily(packageFamilyName: CPointer<UInt16>, packageFilters: UInt32, count: CPointer<UInt32>, packageFullNames: CPointer<CPointer<UInt16>>, bufferLength: CPointer<UInt32>, buffer: CPointer<UInt16>, packageProperties: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_FindPackagesByPackageFamily == "on"]
+public unsafe func Windows_FindPackagesByPackageFamily(packageFamilyName: CPointer<UInt16>, packageFilters: UInt32, count: CPointer<UInt32>, packageFullNames: CPointer<CPointer<UInt16>>, bufferLength: CPointer<UInt32>, buffer: CPointer<UInt16>, packageProperties: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return FindPackagesByPackageFamily(packageFamilyName, packageFilters, count, packageFullNames, bufferLength, buffer, packageProperties)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_FormatApplicationUserModelId == "on"]
+foreign {
     // param-hint: applicationUserModelId len=param[2] optional
     func FormatApplicationUserModelId(packageFamilyName: CPointer<UInt16>, packageRelativeApplicationId: CPointer<UInt16>, applicationUserModelIdLength: CPointer<UInt32>, applicationUserModelId: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_FormatApplicationUserModelId == "on"]
+public unsafe func Windows_FormatApplicationUserModelId(packageFamilyName: CPointer<UInt16>, packageRelativeApplicationId: CPointer<UInt16>, applicationUserModelIdLength: CPointer<UInt32>, applicationUserModelId: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return FormatApplicationUserModelId(packageFamilyName, packageRelativeApplicationId, applicationUserModelIdLength, applicationUserModelId)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetApplicationUserModelId == "on"]
+foreign {
     // param-hint: applicationUserModelId len=param[1] optional
     func GetApplicationUserModelId(hProcess: CPointer<Unit>, applicationUserModelIdLength: CPointer<UInt32>, applicationUserModelId: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetApplicationUserModelId == "on"]
+public unsafe func Windows_GetApplicationUserModelId(hProcess: CPointer<Unit>, applicationUserModelIdLength: CPointer<UInt32>, applicationUserModelId: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return GetApplicationUserModelId(hProcess, applicationUserModelIdLength, applicationUserModelId)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetCurrentApplicationUserModelId == "on"]
+foreign {
     // param-hint: applicationUserModelId len=param[0] optional
     func GetCurrentApplicationUserModelId(applicationUserModelIdLength: CPointer<UInt32>, applicationUserModelId: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetCurrentApplicationUserModelId == "on"]
+public unsafe func Windows_GetCurrentApplicationUserModelId(applicationUserModelIdLength: CPointer<UInt32>, applicationUserModelId: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return GetCurrentApplicationUserModelId(applicationUserModelIdLength, applicationUserModelId)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetCurrentPackageFamilyName == "on"]
+foreign {
     // param-hint: packageFamilyName len=param[0] optional
     func GetCurrentPackageFamilyName(packageFamilyNameLength: CPointer<UInt32>, packageFamilyName: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetCurrentPackageFamilyName == "on"]
+public unsafe func Windows_GetCurrentPackageFamilyName(packageFamilyNameLength: CPointer<UInt32>, packageFamilyName: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return GetCurrentPackageFamilyName(packageFamilyNameLength, packageFamilyName)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetCurrentPackageFullName == "on"]
+foreign {
     // param-hint: packageFullName len=param[0] optional
     func GetCurrentPackageFullName(packageFullNameLength: CPointer<UInt32>, packageFullName: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetCurrentPackageFullName == "on"]
+public unsafe func Windows_GetCurrentPackageFullName(packageFullNameLength: CPointer<UInt32>, packageFullName: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return GetCurrentPackageFullName(packageFullNameLength, packageFullName)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetCurrentPackageId == "on"]
+foreign {
     // param-hint: buffer bytes=param[0] optional
     func GetCurrentPackageId(bufferLength: CPointer<UInt32>, buffer: CPointer<UInt8>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetCurrentPackageId == "on"]
+public unsafe func Windows_GetCurrentPackageId(bufferLength: CPointer<UInt32>, buffer: CPointer<UInt8>): windows_core.WIN32_ERROR {
+    return GetCurrentPackageId(bufferLength, buffer)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetCurrentPackageInfo == "on"]
+foreign {
     // param-hint: buffer bytes=param[1] optional
     // param-hint: count optional
     func GetCurrentPackageInfo(flags: UInt32, bufferLength: CPointer<UInt32>, buffer: CPointer<UInt8>, count: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetCurrentPackageInfo == "on"]
+public unsafe func Windows_GetCurrentPackageInfo(flags: UInt32, bufferLength: CPointer<UInt32>, buffer: CPointer<UInt8>, count: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return GetCurrentPackageInfo(flags, bufferLength, buffer, count)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetCurrentPackageInfo3 == "on"]
+foreign {
     // param-hint: buffer bytes=param[2] optional
     // param-hint: count optional
     func GetCurrentPackageInfo3(flags: UInt32, packageInfoType: PackageInfo3TypeAbi, bufferLength: CPointer<UInt32>, buffer: CPointer<Unit>, count: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetCurrentPackageInfo3 == "on"]
+public unsafe func Windows_GetCurrentPackageInfo3(flags: UInt32, packageInfoType: PackageInfo3TypeAbi, bufferLength: CPointer<UInt32>, buffer: CPointer<Unit>, count: CPointer<UInt32>): Int32 {
+    return GetCurrentPackageInfo3(flags, packageInfoType, bufferLength, buffer, count)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetCurrentPackagePath == "on"]
+foreign {
     // param-hint: path len=param[0] optional
     func GetCurrentPackagePath(pathLength: CPointer<UInt32>, path: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetCurrentPackagePath == "on"]
+public unsafe func Windows_GetCurrentPackagePath(pathLength: CPointer<UInt32>, path: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return GetCurrentPackagePath(pathLength, path)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetCurrentPackageVirtualizationContext == "on"]
+foreign {
     func GetCurrentPackageVirtualizationContext(): PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetCurrentPackageVirtualizationContext == "on"]
+public unsafe func Windows_GetCurrentPackageVirtualizationContext(): PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE {
+    return GetCurrentPackageVirtualizationContext()
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetPackageApplicationIds == "on"]
+foreign {
     // param-hint: buffer bytes=param[1] optional
     // param-hint: count optional
     func GetPackageApplicationIds(packageInfoReference: CPointer<_PACKAGE_INFO_REFERENCEAbi>, bufferLength: CPointer<UInt32>, buffer: CPointer<UInt8>, count: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetPackageApplicationIds == "on"]
+public unsafe func Windows_GetPackageApplicationIds(packageInfoReference: CPointer<_PACKAGE_INFO_REFERENCEAbi>, bufferLength: CPointer<UInt32>, buffer: CPointer<UInt8>, count: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return GetPackageApplicationIds(packageInfoReference, bufferLength, buffer, count)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetPackageFamilyName == "on"]
+foreign {
     // param-hint: packageFamilyName len=param[1] optional
     func GetPackageFamilyName(hProcess: CPointer<Unit>, packageFamilyNameLength: CPointer<UInt32>, packageFamilyName: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetPackageFamilyName == "on"]
+public unsafe func Windows_GetPackageFamilyName(hProcess: CPointer<Unit>, packageFamilyNameLength: CPointer<UInt32>, packageFamilyName: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return GetPackageFamilyName(hProcess, packageFamilyNameLength, packageFamilyName)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetPackageFullName == "on"]
+foreign {
     // param-hint: packageFullName len=param[1] optional
     func GetPackageFullName(hProcess: CPointer<Unit>, packageFullNameLength: CPointer<UInt32>, packageFullName: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetPackageFullName == "on"]
+public unsafe func Windows_GetPackageFullName(hProcess: CPointer<Unit>, packageFullNameLength: CPointer<UInt32>, packageFullName: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return GetPackageFullName(hProcess, packageFullNameLength, packageFullName)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetPackageId == "on"]
+foreign {
     // param-hint: buffer bytes=param[1] optional
     func GetPackageId(hProcess: CPointer<Unit>, bufferLength: CPointer<UInt32>, buffer: CPointer<UInt8>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetPackageId == "on"]
+public unsafe func Windows_GetPackageId(hProcess: CPointer<Unit>, bufferLength: CPointer<UInt32>, buffer: CPointer<UInt8>): windows_core.WIN32_ERROR {
+    return GetPackageId(hProcess, bufferLength, buffer)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetPackageInfo == "on"]
+foreign {
     // param-hint: buffer bytes=param[2] optional
     // param-hint: count optional
     func GetPackageInfo(packageInfoReference: CPointer<_PACKAGE_INFO_REFERENCEAbi>, flags: UInt32, bufferLength: CPointer<UInt32>, buffer: CPointer<UInt8>, count: CPointer<UInt32>): windows_core.WIN32_ERROR
-    // param-hint: path len=param[1] optional
-    func GetPackagePathByFullName(packageFullName: CPointer<UInt16>, pathLength: CPointer<UInt32>, path: CPointer<UInt16>): windows_core.WIN32_ERROR
-    // param-hint: packageFullNames len=param[1] optional
-    // param-hint: buffer len=param[3] optional
-    func GetPackagesByPackageFamily(packageFamilyName: CPointer<UInt16>, count: CPointer<UInt32>, packageFullNames: CPointer<CPointer<UInt16>>, bufferLength: CPointer<UInt32>, buffer: CPointer<UInt16>): windows_core.WIN32_ERROR
-    func GetProcessesInVirtualizationContext(packageFamilyName: CPointer<UInt16>, count: CPointer<UInt32>, processes: CPointer<CPointer<CPointer<Unit>>>): Int32
-    // param-hint: path len=param[1] optional
-    func GetStagedPackagePathByFullName(packageFullName: CPointer<UInt16>, pathLength: CPointer<UInt32>, path: CPointer<UInt16>): windows_core.WIN32_ERROR
-    // param-hint: reserved optional reserved
-    func OpenPackageInfoByFullName(packageFullName: CPointer<UInt16>, reserved: UInt32, packageInfoReference: CPointer<CPointer<_PACKAGE_INFO_REFERENCEAbi>>): windows_core.WIN32_ERROR
-    // param-hint: packageFamilyName len=param[1] optional
-    func PackageFamilyNameFromFullName(packageFullName: CPointer<UInt16>, packageFamilyNameLength: CPointer<UInt32>, packageFamilyName: CPointer<UInt16>): windows_core.WIN32_ERROR
-    // param-hint: buffer bytes=param[2] optional
-    func PackageIdFromFullName(packageFullName: CPointer<UInt16>, flags: UInt32, bufferLength: CPointer<UInt32>, buffer: CPointer<UInt8>): windows_core.WIN32_ERROR
-    // param-hint: packageName len=param[1] optional
-    // param-hint: packagePublisherId len=param[3] optional
-    func PackageNameAndPublisherIdFromFamilyName(packageFamilyName: CPointer<UInt16>, packageNameLength: CPointer<UInt32>, packageName: CPointer<UInt16>, packagePublisherIdLength: CPointer<UInt32>, packagePublisherId: CPointer<UInt16>): windows_core.WIN32_ERROR
-    // param-hint: packageFamilyName len=param[1] optional
-    // param-hint: packageRelativeApplicationId len=param[3] optional
-    func ParseApplicationUserModelId(applicationUserModelId: CPointer<UInt16>, packageFamilyNameLength: CPointer<UInt32>, packageFamilyName: CPointer<UInt16>, packageRelativeApplicationIdLength: CPointer<UInt32>, packageRelativeApplicationId: CPointer<UInt16>): windows_core.WIN32_ERROR
-    func ReleasePackageVirtualizationContext(context: PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE): Unit
 }
 
-@When[KERNEL32 == "on" && ((arch == "x86_64" || arch == "aarch64"))]
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetPackageInfo == "on"]
+public unsafe func Windows_GetPackageInfo(packageInfoReference: CPointer<_PACKAGE_INFO_REFERENCEAbi>, flags: UInt32, bufferLength: CPointer<UInt32>, buffer: CPointer<UInt8>, count: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return GetPackageInfo(packageInfoReference, flags, bufferLength, buffer, count)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetPackagePath == "on" && (arch == "x86_64" || arch == "aarch64")]
 foreign {
     // param-hint: reserved optional reserved
     // param-hint: path len=param[2] optional
     func GetPackagePath(packageId: CPointer<PACKAGE_ID>, reserved: UInt32, pathLength: CPointer<UInt32>, path: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetPackagePath == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_GetPackagePath(packageId: CPointer<PACKAGE_ID>, reserved: UInt32, pathLength: CPointer<UInt32>, path: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return GetPackagePath(packageId, reserved, pathLength, path)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetPackagePathByFullName == "on"]
+foreign {
+    // param-hint: path len=param[1] optional
+    func GetPackagePathByFullName(packageFullName: CPointer<UInt16>, pathLength: CPointer<UInt32>, path: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetPackagePathByFullName == "on"]
+public unsafe func Windows_GetPackagePathByFullName(packageFullName: CPointer<UInt16>, pathLength: CPointer<UInt32>, path: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return GetPackagePathByFullName(packageFullName, pathLength, path)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetPackagesByPackageFamily == "on"]
+foreign {
+    // param-hint: packageFullNames len=param[1] optional
+    // param-hint: buffer len=param[3] optional
+    func GetPackagesByPackageFamily(packageFamilyName: CPointer<UInt16>, count: CPointer<UInt32>, packageFullNames: CPointer<CPointer<UInt16>>, bufferLength: CPointer<UInt32>, buffer: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetPackagesByPackageFamily == "on"]
+public unsafe func Windows_GetPackagesByPackageFamily(packageFamilyName: CPointer<UInt16>, count: CPointer<UInt32>, packageFullNames: CPointer<CPointer<UInt16>>, bufferLength: CPointer<UInt32>, buffer: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return GetPackagesByPackageFamily(packageFamilyName, count, packageFullNames, bufferLength, buffer)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetProcessesInVirtualizationContext == "on"]
+foreign {
+    func GetProcessesInVirtualizationContext(packageFamilyName: CPointer<UInt16>, count: CPointer<UInt32>, processes: CPointer<CPointer<CPointer<Unit>>>): Int32
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetProcessesInVirtualizationContext == "on"]
+public unsafe func Windows_GetProcessesInVirtualizationContext(packageFamilyName: CPointer<UInt16>, count: CPointer<UInt32>, processes: CPointer<CPointer<CPointer<Unit>>>): Int32 {
+    return GetProcessesInVirtualizationContext(packageFamilyName, count, processes)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetStagedPackagePathByFullName == "on"]
+foreign {
+    // param-hint: path len=param[1] optional
+    func GetStagedPackagePathByFullName(packageFullName: CPointer<UInt16>, pathLength: CPointer<UInt32>, path: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_GetStagedPackagePathByFullName == "on"]
+public unsafe func Windows_GetStagedPackagePathByFullName(packageFullName: CPointer<UInt16>, pathLength: CPointer<UInt32>, path: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return GetStagedPackagePathByFullName(packageFullName, pathLength, path)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_OpenPackageInfoByFullName == "on"]
+foreign {
+    // param-hint: reserved optional reserved
+    func OpenPackageInfoByFullName(packageFullName: CPointer<UInt16>, reserved: UInt32, packageInfoReference: CPointer<CPointer<_PACKAGE_INFO_REFERENCEAbi>>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_OpenPackageInfoByFullName == "on"]
+public unsafe func Windows_OpenPackageInfoByFullName(packageFullName: CPointer<UInt16>, reserved: UInt32, packageInfoReference: CPointer<CPointer<_PACKAGE_INFO_REFERENCEAbi>>): windows_core.WIN32_ERROR {
+    return OpenPackageInfoByFullName(packageFullName, reserved, packageInfoReference)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_PackageFamilyNameFromFullName == "on"]
+foreign {
+    // param-hint: packageFamilyName len=param[1] optional
+    func PackageFamilyNameFromFullName(packageFullName: CPointer<UInt16>, packageFamilyNameLength: CPointer<UInt32>, packageFamilyName: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_PackageFamilyNameFromFullName == "on"]
+public unsafe func Windows_PackageFamilyNameFromFullName(packageFullName: CPointer<UInt16>, packageFamilyNameLength: CPointer<UInt32>, packageFamilyName: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return PackageFamilyNameFromFullName(packageFullName, packageFamilyNameLength, packageFamilyName)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_PackageFamilyNameFromId == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: packageFamilyName len=param[1] optional
     func PackageFamilyNameFromId(packageId: CPointer<PACKAGE_ID>, packageFamilyNameLength: CPointer<UInt32>, packageFamilyName: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_PackageFamilyNameFromId == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_PackageFamilyNameFromId(packageId: CPointer<PACKAGE_ID>, packageFamilyNameLength: CPointer<UInt32>, packageFamilyName: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return PackageFamilyNameFromId(packageId, packageFamilyNameLength, packageFamilyName)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_PackageFullNameFromId == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: packageFullName len=param[1] optional
     func PackageFullNameFromId(packageId: CPointer<PACKAGE_ID>, packageFullNameLength: CPointer<UInt32>, packageFullName: CPointer<UInt16>): windows_core.WIN32_ERROR
 }
 
-@When[KERNELBASE == "on"]
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_PackageFullNameFromId == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_PackageFullNameFromId(packageId: CPointer<PACKAGE_ID>, packageFullNameLength: CPointer<UInt32>, packageFullName: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return PackageFullNameFromId(packageId, packageFullNameLength, packageFullName)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_PackageIdFromFullName == "on"]
+foreign {
+    // param-hint: buffer bytes=param[2] optional
+    func PackageIdFromFullName(packageFullName: CPointer<UInt16>, flags: UInt32, bufferLength: CPointer<UInt32>, buffer: CPointer<UInt8>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_PackageIdFromFullName == "on"]
+public unsafe func Windows_PackageIdFromFullName(packageFullName: CPointer<UInt16>, flags: UInt32, bufferLength: CPointer<UInt32>, buffer: CPointer<UInt8>): windows_core.WIN32_ERROR {
+    return PackageIdFromFullName(packageFullName, flags, bufferLength, buffer)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_PackageNameAndPublisherIdFromFamilyName == "on"]
+foreign {
+    // param-hint: packageName len=param[1] optional
+    // param-hint: packagePublisherId len=param[3] optional
+    func PackageNameAndPublisherIdFromFamilyName(packageFamilyName: CPointer<UInt16>, packageNameLength: CPointer<UInt32>, packageName: CPointer<UInt16>, packagePublisherIdLength: CPointer<UInt32>, packagePublisherId: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_PackageNameAndPublisherIdFromFamilyName == "on"]
+public unsafe func Windows_PackageNameAndPublisherIdFromFamilyName(packageFamilyName: CPointer<UInt16>, packageNameLength: CPointer<UInt32>, packageName: CPointer<UInt16>, packagePublisherIdLength: CPointer<UInt32>, packagePublisherId: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return PackageNameAndPublisherIdFromFamilyName(packageFamilyName, packageNameLength, packageName, packagePublisherIdLength, packagePublisherId)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_ParseApplicationUserModelId == "on"]
+foreign {
+    // param-hint: packageFamilyName len=param[1] optional
+    // param-hint: packageRelativeApplicationId len=param[3] optional
+    func ParseApplicationUserModelId(applicationUserModelId: CPointer<UInt16>, packageFamilyNameLength: CPointer<UInt32>, packageFamilyName: CPointer<UInt16>, packageRelativeApplicationIdLength: CPointer<UInt32>, packageRelativeApplicationId: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_ParseApplicationUserModelId == "on"]
+public unsafe func Windows_ParseApplicationUserModelId(applicationUserModelId: CPointer<UInt16>, packageFamilyNameLength: CPointer<UInt32>, packageFamilyName: CPointer<UInt16>, packageRelativeApplicationIdLength: CPointer<UInt32>, packageRelativeApplicationId: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return ParseApplicationUserModelId(applicationUserModelId, packageFamilyNameLength, packageFamilyName, packageRelativeApplicationIdLength, packageRelativeApplicationId)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_ReleasePackageVirtualizationContext == "on"]
+foreign {
+    func ReleasePackageVirtualizationContext(context: PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE): Unit
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNEL32 == "on" && Windows_Win32_Storage_Packaging_Appx_ReleasePackageVirtualizationContext == "on"]
+public unsafe func Windows_ReleasePackageVirtualizationContext(context: PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE): Unit {
+    ReleasePackageVirtualizationContext(context)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNELBASE == "on" && Windows_Win32_Storage_Packaging_Appx_AddPackageDependency == "on"]
 foreign {
     // param-hint: packageFullName optional
     func AddPackageDependency(packageDependencyId: CPointer<UInt16>, rank: Int32, options: AddPackageDependencyOptionsAbi, packageDependencyContext: CPointer<PACKAGEDEPENDENCY_CONTEXT>, packageFullName: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNELBASE == "on" && Windows_Win32_Storage_Packaging_Appx_AddPackageDependency == "on"]
+public unsafe func Windows_AddPackageDependency(packageDependencyId: CPointer<UInt16>, rank: Int32, options: AddPackageDependencyOptionsAbi, packageDependencyContext: CPointer<PACKAGEDEPENDENCY_CONTEXT>, packageFullName: CPointer<CPointer<UInt16>>): Int32 {
+    return AddPackageDependency(packageDependencyId, rank, options, packageDependencyContext, packageFullName)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNELBASE == "on" && Windows_Win32_Storage_Packaging_Appx_DeletePackageDependency == "on"]
+foreign {
     func DeletePackageDependency(packageDependencyId: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNELBASE == "on" && Windows_Win32_Storage_Packaging_Appx_DeletePackageDependency == "on"]
+public unsafe func Windows_DeletePackageDependency(packageDependencyId: CPointer<UInt16>): Int32 {
+    return DeletePackageDependency(packageDependencyId)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNELBASE == "on" && Windows_Win32_Storage_Packaging_Appx_GetIdForPackageDependencyContext == "on"]
+foreign {
     func GetIdForPackageDependencyContext(packageDependencyContext: PACKAGEDEPENDENCY_CONTEXT, packageDependencyId: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNELBASE == "on" && Windows_Win32_Storage_Packaging_Appx_GetIdForPackageDependencyContext == "on"]
+public unsafe func Windows_GetIdForPackageDependencyContext(packageDependencyContext: PACKAGEDEPENDENCY_CONTEXT, packageDependencyId: CPointer<CPointer<UInt16>>): Int32 {
+    return GetIdForPackageDependencyContext(packageDependencyContext, packageDependencyId)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNELBASE == "on" && Windows_Win32_Storage_Packaging_Appx_GetResolvedPackageFullNameForPackageDependency == "on"]
+foreign {
     func GetResolvedPackageFullNameForPackageDependency(packageDependencyId: CPointer<UInt16>, packageFullName: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNELBASE == "on" && Windows_Win32_Storage_Packaging_Appx_GetResolvedPackageFullNameForPackageDependency == "on"]
+public unsafe func Windows_GetResolvedPackageFullNameForPackageDependency(packageDependencyId: CPointer<UInt16>, packageFullName: CPointer<CPointer<UInt16>>): Int32 {
+    return GetResolvedPackageFullNameForPackageDependency(packageDependencyId, packageFullName)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNELBASE == "on" && Windows_Win32_Storage_Packaging_Appx_RemovePackageDependency == "on"]
+foreign {
     func RemovePackageDependency(packageDependencyContext: PACKAGEDEPENDENCY_CONTEXT): Int32
 }
 
-@When[KERNELBASE == "on" && Windows_Win32_Security == "on"]
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNELBASE == "on" && Windows_Win32_Storage_Packaging_Appx_RemovePackageDependency == "on"]
+public unsafe func Windows_RemovePackageDependency(packageDependencyContext: PACKAGEDEPENDENCY_CONTEXT): Int32 {
+    return RemovePackageDependency(packageDependencyContext)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNELBASE == "on" && Windows_Win32_Storage_Packaging_Appx_TryCreatePackageDependency == "on" && Windows_Win32_Security == "on"]
 foreign {
     func TryCreatePackageDependency(user: Win32_Security.PSID, packageFamilyName: CPointer<UInt16>, minVersion: PACKAGE_VERSIONAbi, packageDependencyProcessorArchitectures: PackageDependencyProcessorArchitecturesAbi, lifetimeKind: PackageDependencyLifetimeKindAbi, lifetimeArtifact: CPointer<UInt16>, options: CreatePackageDependencyOptionsAbi, packageDependencyId: CPointer<CPointer<UInt16>>): Int32
 }
 
-@When[API_MS_WIN_APPMODEL_RUNTIME_L1_1_1 == "on"]
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && KERNELBASE == "on" && Windows_Win32_Storage_Packaging_Appx_TryCreatePackageDependency == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_TryCreatePackageDependency(user: Win32_Security.PSID, packageFamilyName: CPointer<UInt16>, minVersion: PACKAGE_VERSIONAbi, packageDependencyProcessorArchitectures: PackageDependencyProcessorArchitecturesAbi, lifetimeKind: PackageDependencyLifetimeKindAbi, lifetimeArtifact: CPointer<UInt16>, options: CreatePackageDependencyOptionsAbi, packageDependencyId: CPointer<CPointer<UInt16>>): Int32 {
+    return TryCreatePackageDependency(user, packageFamilyName, minVersion, packageDependencyProcessorArchitectures, lifetimeKind, lifetimeArtifact, options, packageDependencyId)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_1 == "on" && Windows_Win32_Storage_Packaging_Appx_GetApplicationUserModelIdFromToken == "on"]
 foreign {
     // param-hint: applicationUserModelId len=param[1] optional
     func GetApplicationUserModelIdFromToken(token: CPointer<Unit>, applicationUserModelIdLength: CPointer<UInt32>, applicationUserModelId: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_1 == "on" && Windows_Win32_Storage_Packaging_Appx_GetApplicationUserModelIdFromToken == "on"]
+public unsafe func Windows_GetApplicationUserModelIdFromToken(token: CPointer<Unit>, applicationUserModelIdLength: CPointer<UInt32>, applicationUserModelId: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return GetApplicationUserModelIdFromToken(token, applicationUserModelIdLength, applicationUserModelId)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_1 == "on" && Windows_Win32_Storage_Packaging_Appx_GetPackageFamilyNameFromToken == "on"]
+foreign {
     // param-hint: packageFamilyName len=param[1] optional
     func GetPackageFamilyNameFromToken(token: CPointer<Unit>, packageFamilyNameLength: CPointer<UInt32>, packageFamilyName: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_1 == "on" && Windows_Win32_Storage_Packaging_Appx_GetPackageFamilyNameFromToken == "on"]
+public unsafe func Windows_GetPackageFamilyNameFromToken(token: CPointer<Unit>, packageFamilyNameLength: CPointer<UInt32>, packageFamilyName: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return GetPackageFamilyNameFromToken(token, packageFamilyNameLength, packageFamilyName)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_1 == "on" && Windows_Win32_Storage_Packaging_Appx_GetPackageFullNameFromToken == "on"]
+foreign {
     // param-hint: packageFullName len=param[1] optional
     func GetPackageFullNameFromToken(token: CPointer<Unit>, packageFullNameLength: CPointer<UInt32>, packageFullName: CPointer<UInt16>): windows_core.WIN32_ERROR
-    func GetStagedPackageOrigin(packageFullName: CPointer<UInt16>, origin: CPointer<PackageOriginAbi>): windows_core.WIN32_ERROR
-    func VerifyApplicationUserModelId(applicationUserModelId: CPointer<UInt16>): windows_core.WIN32_ERROR
-    func VerifyPackageFamilyName(packageFamilyName: CPointer<UInt16>): windows_core.WIN32_ERROR
-    func VerifyPackageFullName(packageFullName: CPointer<UInt16>): windows_core.WIN32_ERROR
-    func VerifyPackageRelativeApplicationId(packageRelativeApplicationId: CPointer<UInt16>): windows_core.WIN32_ERROR
 }
 
-@When[API_MS_WIN_APPMODEL_RUNTIME_L1_1_1 == "on" && ((arch == "x86_64" || arch == "aarch64"))]
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_1 == "on" && Windows_Win32_Storage_Packaging_Appx_GetPackageFullNameFromToken == "on"]
+public unsafe func Windows_GetPackageFullNameFromToken(token: CPointer<Unit>, packageFullNameLength: CPointer<UInt32>, packageFullName: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return GetPackageFullNameFromToken(token, packageFullNameLength, packageFullName)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_1 == "on" && Windows_Win32_Storage_Packaging_Appx_GetStagedPackageOrigin == "on"]
 foreign {
-    func VerifyPackageId(packageId: CPointer<PACKAGE_ID>): windows_core.WIN32_ERROR
+    func GetStagedPackageOrigin(packageFullName: CPointer<UInt16>, origin: CPointer<PackageOriginAbi>): windows_core.WIN32_ERROR
 }
 
-@When[API_MS_WIN_APPMODEL_RUNTIME_L1_1_1 == "on" && Windows_Win32_Security == "on"]
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_1 == "on" && Windows_Win32_Storage_Packaging_Appx_GetStagedPackageOrigin == "on"]
+public unsafe func Windows_GetStagedPackageOrigin(packageFullName: CPointer<UInt16>, origin: CPointer<PackageOriginAbi>): windows_core.WIN32_ERROR {
+    return GetStagedPackageOrigin(packageFullName, origin)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_1 == "on" && Windows_Win32_Storage_Packaging_Appx_OpenPackageInfoByFullNameForUser == "on" && Windows_Win32_Security == "on"]
 foreign {
     // param-hint: userSid optional
     // param-hint: reserved optional reserved
     func OpenPackageInfoByFullNameForUser(userSid: Win32_Security.PSID, packageFullName: CPointer<UInt16>, reserved: UInt32, packageInfoReference: CPointer<CPointer<_PACKAGE_INFO_REFERENCEAbi>>): windows_core.WIN32_ERROR
 }
 
-@When[API_MS_WIN_APPMODEL_RUNTIME_L1_1_3 == "on"]
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_1 == "on" && Windows_Win32_Storage_Packaging_Appx_OpenPackageInfoByFullNameForUser == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_OpenPackageInfoByFullNameForUser(userSid: Win32_Security.PSID, packageFullName: CPointer<UInt16>, reserved: UInt32, packageInfoReference: CPointer<CPointer<_PACKAGE_INFO_REFERENCEAbi>>): windows_core.WIN32_ERROR {
+    return OpenPackageInfoByFullNameForUser(userSid, packageFullName, reserved, packageInfoReference)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_1 == "on" && Windows_Win32_Storage_Packaging_Appx_VerifyApplicationUserModelId == "on"]
+foreign {
+    func VerifyApplicationUserModelId(applicationUserModelId: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_1 == "on" && Windows_Win32_Storage_Packaging_Appx_VerifyApplicationUserModelId == "on"]
+public unsafe func Windows_VerifyApplicationUserModelId(applicationUserModelId: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return VerifyApplicationUserModelId(applicationUserModelId)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_1 == "on" && Windows_Win32_Storage_Packaging_Appx_VerifyPackageFamilyName == "on"]
+foreign {
+    func VerifyPackageFamilyName(packageFamilyName: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_1 == "on" && Windows_Win32_Storage_Packaging_Appx_VerifyPackageFamilyName == "on"]
+public unsafe func Windows_VerifyPackageFamilyName(packageFamilyName: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return VerifyPackageFamilyName(packageFamilyName)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_1 == "on" && Windows_Win32_Storage_Packaging_Appx_VerifyPackageFullName == "on"]
+foreign {
+    func VerifyPackageFullName(packageFullName: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_1 == "on" && Windows_Win32_Storage_Packaging_Appx_VerifyPackageFullName == "on"]
+public unsafe func Windows_VerifyPackageFullName(packageFullName: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return VerifyPackageFullName(packageFullName)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_1 == "on" && Windows_Win32_Storage_Packaging_Appx_VerifyPackageId == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func VerifyPackageId(packageId: CPointer<PACKAGE_ID>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_1 == "on" && Windows_Win32_Storage_Packaging_Appx_VerifyPackageId == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_VerifyPackageId(packageId: CPointer<PACKAGE_ID>): windows_core.WIN32_ERROR {
+    return VerifyPackageId(packageId)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_1 == "on" && Windows_Win32_Storage_Packaging_Appx_VerifyPackageRelativeApplicationId == "on"]
+foreign {
+    func VerifyPackageRelativeApplicationId(packageRelativeApplicationId: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_1 == "on" && Windows_Win32_Storage_Packaging_Appx_VerifyPackageRelativeApplicationId == "on"]
+public unsafe func Windows_VerifyPackageRelativeApplicationId(packageRelativeApplicationId: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return VerifyPackageRelativeApplicationId(packageRelativeApplicationId)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_3 == "on" && Windows_Win32_Storage_Packaging_Appx_GetCurrentPackageInfo2 == "on"]
 foreign {
     // param-hint: buffer bytes=param[2] optional
     // param-hint: count optional
     func GetCurrentPackageInfo2(flags: UInt32, packagePathType: PackagePathTypeAbi, bufferLength: CPointer<UInt32>, buffer: CPointer<UInt8>, count: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_3 == "on" && Windows_Win32_Storage_Packaging_Appx_GetCurrentPackageInfo2 == "on"]
+public unsafe func Windows_GetCurrentPackageInfo2(flags: UInt32, packagePathType: PackagePathTypeAbi, bufferLength: CPointer<UInt32>, buffer: CPointer<UInt8>, count: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return GetCurrentPackageInfo2(flags, packagePathType, bufferLength, buffer, count)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_3 == "on" && Windows_Win32_Storage_Packaging_Appx_GetCurrentPackagePath2 == "on"]
+foreign {
     // param-hint: path len=param[1] optional
     func GetCurrentPackagePath2(packagePathType: PackagePathTypeAbi, pathLength: CPointer<UInt32>, path: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_3 == "on" && Windows_Win32_Storage_Packaging_Appx_GetCurrentPackagePath2 == "on"]
+public unsafe func Windows_GetCurrentPackagePath2(packagePathType: PackagePathTypeAbi, pathLength: CPointer<UInt32>, path: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return GetCurrentPackagePath2(packagePathType, pathLength, path)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_3 == "on" && Windows_Win32_Storage_Packaging_Appx_GetPackageInfo2 == "on"]
+foreign {
     // param-hint: buffer bytes=param[3] optional
     // param-hint: count optional
     func GetPackageInfo2(packageInfoReference: CPointer<_PACKAGE_INFO_REFERENCEAbi>, flags: UInt32, packagePathType: PackagePathTypeAbi, bufferLength: CPointer<UInt32>, buffer: CPointer<UInt8>, count: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_3 == "on" && Windows_Win32_Storage_Packaging_Appx_GetPackageInfo2 == "on"]
+public unsafe func Windows_GetPackageInfo2(packageInfoReference: CPointer<_PACKAGE_INFO_REFERENCEAbi>, flags: UInt32, packagePathType: PackagePathTypeAbi, bufferLength: CPointer<UInt32>, buffer: CPointer<UInt8>, count: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return GetPackageInfo2(packageInfoReference, flags, packagePathType, bufferLength, buffer, count)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_3 == "on" && Windows_Win32_Storage_Packaging_Appx_GetPackagePathByFullName2 == "on"]
+foreign {
     // param-hint: path len=param[2] optional
     func GetPackagePathByFullName2(packageFullName: CPointer<UInt16>, packagePathType: PackagePathTypeAbi, pathLength: CPointer<UInt32>, path: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_3 == "on" && Windows_Win32_Storage_Packaging_Appx_GetPackagePathByFullName2 == "on"]
+public unsafe func Windows_GetPackagePathByFullName2(packageFullName: CPointer<UInt16>, packagePathType: PackagePathTypeAbi, pathLength: CPointer<UInt32>, path: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return GetPackagePathByFullName2(packageFullName, packagePathType, pathLength, path)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_3 == "on" && Windows_Win32_Storage_Packaging_Appx_GetStagedPackagePathByFullName2 == "on"]
+foreign {
     // param-hint: path len=param[2] optional
     func GetStagedPackagePathByFullName2(packageFullName: CPointer<UInt16>, packagePathType: PackagePathTypeAbi, pathLength: CPointer<UInt32>, path: CPointer<UInt16>): windows_core.WIN32_ERROR
 }
 
-@When[API_MS_WIN_APPMODEL_RUNTIME_L1_1_6 == "on"]
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_3 == "on" && Windows_Win32_Storage_Packaging_Appx_GetStagedPackagePathByFullName2 == "on"]
+public unsafe func Windows_GetStagedPackagePathByFullName2(packageFullName: CPointer<UInt16>, packagePathType: PackagePathTypeAbi, pathLength: CPointer<UInt32>, path: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return GetStagedPackagePathByFullName2(packageFullName, packagePathType, pathLength, path)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_6 == "on" && Windows_Win32_Storage_Packaging_Appx_GetPackageGraphRevisionId == "on"]
 foreign {
     func GetPackageGraphRevisionId(): UInt32
 }
 
-@When[API_MS_WIN_APPMODEL_RUNTIME_L1_1_7 == "on"]
-foreign {
-    // param-hint: packageFullName optional
-    func AddPackageDependency2(packageDependencyId: CPointer<UInt16>, rank: Int32, options: AddPackageDependencyOptions2Abi, packageDependencyContext: CPointer<PACKAGEDEPENDENCY_CONTEXT>, packageFullName: CPointer<CPointer<UInt16>>): Int32
-    func GetResolvedPackageFullNameForPackageDependency2(packageDependencyId: CPointer<UInt16>, packageFullName: CPointer<CPointer<UInt16>>): Int32
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_6 == "on" && Windows_Win32_Storage_Packaging_Appx_GetPackageGraphRevisionId == "on"]
+public unsafe func Windows_GetPackageGraphRevisionId(): UInt32 {
+    return GetPackageGraphRevisionId()
 }
 
-@When[API_MS_WIN_APPMODEL_RUNTIME_L1_1_7 == "on" && Windows_Win32_Security == "on"]
-foreign {
-    func FindPackageDependency(findPackageDependencyCriteria: CPointer<FindPackageDependencyCriteriaAbi>, packageDependencyIdsCount: CPointer<UInt32>, packageDependencyIds: CPointer<CPointer<CPointer<UInt16>>>): Int32
-    // param-hint: user optional
-    // param-hint: packageFamilyName optional
-    // param-hint: minVersion optional
-    // param-hint: packageDependencyProcessorArchitectures optional
-    // param-hint: lifetimeKind optional
-    // param-hint: lifetimeArtifact optional
-    // param-hint: options optional
-    // param-hint: lifetimeExpiration optional
-    func GetPackageDependencyInformation(packageDependencyId: CPointer<UInt16>, user: CPointer<Win32_Security.PSID>, packageFamilyName: CPointer<CPointer<UInt16>>, minVersion: CPointer<PACKAGE_VERSIONAbi>, packageDependencyProcessorArchitectures: CPointer<PackageDependencyProcessorArchitecturesAbi>, lifetimeKind: CPointer<PackageDependencyLifetimeKindAbi>, lifetimeArtifact: CPointer<CPointer<UInt16>>, options: CPointer<CreatePackageDependencyOptionsAbi>, lifetimeExpiration: CPointer<Win32_Foundation.FILETIMEAbi>): Int32
-    // param-hint: user optional
-    func GetProcessesUsingPackageDependency(packageDependencyId: CPointer<UInt16>, user: Win32_Security.PSID, scopeIsSystem: Int32, processIdsCount: CPointer<UInt32>, processIds: CPointer<CPointer<UInt32>>): Int32
-    func TryCreatePackageDependency2(user: Win32_Security.PSID, packageFamilyName: CPointer<UInt16>, minVersion: PACKAGE_VERSIONAbi, packageDependencyProcessorArchitectures: PackageDependencyProcessorArchitecturesAbi, lifetimeKind: PackageDependencyLifetimeKindAbi, lifetimeArtifact: CPointer<UInt16>, options: CreatePackageDependencyOptionsAbi, lifetimeExpiration: CPointer<Win32_Foundation.FILETIMEAbi>, packageDependencyId: CPointer<CPointer<UInt16>>): Int32
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_7 == "on" && Windows_Win32_Storage_Packaging_Appx_AddPackageDependency2 == "on"]
+func __windowsBindgen_AddPackageDependency2Proc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("api-ms-win-appmodel-runtime-l1-1-7.dll", "AddPackageDependency2")
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_7 == "on" && Windows_Win32_Storage_Packaging_Appx_AddPackageDependency2 == "on"]
+unsafe func AddPackageDependency2(packageDependencyId: CPointer<UInt16>, rank: Int32, options: AddPackageDependencyOptions2Abi, packageDependencyContext: CPointer<PACKAGEDEPENDENCY_CONTEXT>, packageFullName: CPointer<CPointer<UInt16>>): Int32 {
+    let call = CFunc<(CPointer<UInt16>, Int32, AddPackageDependencyOptions2Abi, CPointer<PACKAGEDEPENDENCY_CONTEXT>, CPointer<CPointer<UInt16>>) -> Int32>(__windowsBindgen_AddPackageDependency2Proc())
+    return unsafe { call(packageDependencyId, rank, options, packageDependencyContext, packageFullName) }
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_7 == "on" && Windows_Win32_Storage_Packaging_Appx_AddPackageDependency2 == "on"]
+public unsafe func Windows_AddPackageDependency2(packageDependencyId: CPointer<UInt16>, rank: Int32, options: AddPackageDependencyOptions2Abi, packageDependencyContext: CPointer<PACKAGEDEPENDENCY_CONTEXT>, packageFullName: CPointer<CPointer<UInt16>>): Int32 {
+    return AddPackageDependency2(packageDependencyId, rank, options, packageDependencyContext, packageFullName)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_7 == "on" && Windows_Win32_Storage_Packaging_Appx_FindPackageDependency == "on" && Windows_Win32_Security == "on"]
+func __windowsBindgen_FindPackageDependencyProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("api-ms-win-appmodel-runtime-l1-1-7.dll", "FindPackageDependency")
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_7 == "on" && Windows_Win32_Storage_Packaging_Appx_FindPackageDependency == "on" && Windows_Win32_Security == "on"]
+unsafe func FindPackageDependency(findPackageDependencyCriteria: CPointer<FindPackageDependencyCriteriaAbi>, packageDependencyIdsCount: CPointer<UInt32>, packageDependencyIds: CPointer<CPointer<CPointer<UInt16>>>): Int32 {
+    let call = CFunc<(CPointer<FindPackageDependencyCriteriaAbi>, CPointer<UInt32>, CPointer<CPointer<CPointer<UInt16>>>) -> Int32>(__windowsBindgen_FindPackageDependencyProc())
+    return unsafe { call(findPackageDependencyCriteria, packageDependencyIdsCount, packageDependencyIds) }
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_7 == "on" && Windows_Win32_Storage_Packaging_Appx_FindPackageDependency == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FindPackageDependency(findPackageDependencyCriteria: CPointer<FindPackageDependencyCriteriaAbi>, packageDependencyIdsCount: CPointer<UInt32>, packageDependencyIds: CPointer<CPointer<CPointer<UInt16>>>): Int32 {
+    return FindPackageDependency(findPackageDependencyCriteria, packageDependencyIdsCount, packageDependencyIds)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_7 == "on" && Windows_Win32_Storage_Packaging_Appx_GetPackageDependencyInformation == "on" && Windows_Win32_Security == "on"]
+func __windowsBindgen_GetPackageDependencyInformationProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("api-ms-win-appmodel-runtime-l1-1-7.dll", "GetPackageDependencyInformation")
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_7 == "on" && Windows_Win32_Storage_Packaging_Appx_GetPackageDependencyInformation == "on" && Windows_Win32_Security == "on"]
+unsafe func GetPackageDependencyInformation(packageDependencyId: CPointer<UInt16>, user: CPointer<Win32_Security.PSID>, packageFamilyName: CPointer<CPointer<UInt16>>, minVersion: CPointer<PACKAGE_VERSIONAbi>, packageDependencyProcessorArchitectures: CPointer<PackageDependencyProcessorArchitecturesAbi>, lifetimeKind: CPointer<PackageDependencyLifetimeKindAbi>, lifetimeArtifact: CPointer<CPointer<UInt16>>, options: CPointer<CreatePackageDependencyOptionsAbi>, lifetimeExpiration: CPointer<Win32_Foundation.FILETIMEAbi>): Int32 {
+    let call = CFunc<(CPointer<UInt16>, CPointer<Win32_Security.PSID>, CPointer<CPointer<UInt16>>, CPointer<PACKAGE_VERSIONAbi>, CPointer<PackageDependencyProcessorArchitecturesAbi>, CPointer<PackageDependencyLifetimeKindAbi>, CPointer<CPointer<UInt16>>, CPointer<CreatePackageDependencyOptionsAbi>, CPointer<Win32_Foundation.FILETIMEAbi>) -> Int32>(__windowsBindgen_GetPackageDependencyInformationProc())
+    return unsafe { call(packageDependencyId, user, packageFamilyName, minVersion, packageDependencyProcessorArchitectures, lifetimeKind, lifetimeArtifact, options, lifetimeExpiration) }
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_7 == "on" && Windows_Win32_Storage_Packaging_Appx_GetPackageDependencyInformation == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_GetPackageDependencyInformation(packageDependencyId: CPointer<UInt16>, user: CPointer<Win32_Security.PSID>, packageFamilyName: CPointer<CPointer<UInt16>>, minVersion: CPointer<PACKAGE_VERSIONAbi>, packageDependencyProcessorArchitectures: CPointer<PackageDependencyProcessorArchitecturesAbi>, lifetimeKind: CPointer<PackageDependencyLifetimeKindAbi>, lifetimeArtifact: CPointer<CPointer<UInt16>>, options: CPointer<CreatePackageDependencyOptionsAbi>, lifetimeExpiration: CPointer<Win32_Foundation.FILETIMEAbi>): Int32 {
+    return GetPackageDependencyInformation(packageDependencyId, user, packageFamilyName, minVersion, packageDependencyProcessorArchitectures, lifetimeKind, lifetimeArtifact, options, lifetimeExpiration)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_7 == "on" && Windows_Win32_Storage_Packaging_Appx_GetProcessesUsingPackageDependency == "on" && Windows_Win32_Security == "on"]
+func __windowsBindgen_GetProcessesUsingPackageDependencyProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("api-ms-win-appmodel-runtime-l1-1-7.dll", "GetProcessesUsingPackageDependency")
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_7 == "on" && Windows_Win32_Storage_Packaging_Appx_GetProcessesUsingPackageDependency == "on" && Windows_Win32_Security == "on"]
+unsafe func GetProcessesUsingPackageDependency(packageDependencyId: CPointer<UInt16>, user: Win32_Security.PSID, scopeIsSystem: Int32, processIdsCount: CPointer<UInt32>, processIds: CPointer<CPointer<UInt32>>): Int32 {
+    let call = CFunc<(CPointer<UInt16>, Win32_Security.PSID, Int32, CPointer<UInt32>, CPointer<CPointer<UInt32>>) -> Int32>(__windowsBindgen_GetProcessesUsingPackageDependencyProc())
+    return unsafe { call(packageDependencyId, user, scopeIsSystem, processIdsCount, processIds) }
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_7 == "on" && Windows_Win32_Storage_Packaging_Appx_GetProcessesUsingPackageDependency == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_GetProcessesUsingPackageDependency(packageDependencyId: CPointer<UInt16>, user: Win32_Security.PSID, scopeIsSystem: Int32, processIdsCount: CPointer<UInt32>, processIds: CPointer<CPointer<UInt32>>): Int32 {
+    return GetProcessesUsingPackageDependency(packageDependencyId, user, scopeIsSystem, processIdsCount, processIds)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_7 == "on" && Windows_Win32_Storage_Packaging_Appx_GetResolvedPackageFullNameForPackageDependency2 == "on"]
+func __windowsBindgen_GetResolvedPackageFullNameForPackageDependency2Proc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("api-ms-win-appmodel-runtime-l1-1-7.dll", "GetResolvedPackageFullNameForPackageDependency2")
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_7 == "on" && Windows_Win32_Storage_Packaging_Appx_GetResolvedPackageFullNameForPackageDependency2 == "on"]
+unsafe func GetResolvedPackageFullNameForPackageDependency2(packageDependencyId: CPointer<UInt16>, packageFullName: CPointer<CPointer<UInt16>>): Int32 {
+    let call = CFunc<(CPointer<UInt16>, CPointer<CPointer<UInt16>>) -> Int32>(__windowsBindgen_GetResolvedPackageFullNameForPackageDependency2Proc())
+    return unsafe { call(packageDependencyId, packageFullName) }
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_7 == "on" && Windows_Win32_Storage_Packaging_Appx_GetResolvedPackageFullNameForPackageDependency2 == "on"]
+public unsafe func Windows_GetResolvedPackageFullNameForPackageDependency2(packageDependencyId: CPointer<UInt16>, packageFullName: CPointer<CPointer<UInt16>>): Int32 {
+    return GetResolvedPackageFullNameForPackageDependency2(packageDependencyId, packageFullName)
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_7 == "on" && Windows_Win32_Storage_Packaging_Appx_TryCreatePackageDependency2 == "on" && Windows_Win32_Security == "on"]
+func __windowsBindgen_TryCreatePackageDependency2Proc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("api-ms-win-appmodel-runtime-l1-1-7.dll", "TryCreatePackageDependency2")
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_7 == "on" && Windows_Win32_Storage_Packaging_Appx_TryCreatePackageDependency2 == "on" && Windows_Win32_Security == "on"]
+unsafe func TryCreatePackageDependency2(user: Win32_Security.PSID, packageFamilyName: CPointer<UInt16>, minVersion: PACKAGE_VERSIONAbi, packageDependencyProcessorArchitectures: PackageDependencyProcessorArchitecturesAbi, lifetimeKind: PackageDependencyLifetimeKindAbi, lifetimeArtifact: CPointer<UInt16>, options: CreatePackageDependencyOptionsAbi, lifetimeExpiration: CPointer<Win32_Foundation.FILETIMEAbi>, packageDependencyId: CPointer<CPointer<UInt16>>): Int32 {
+    let call = CFunc<(Win32_Security.PSID, CPointer<UInt16>, PACKAGE_VERSIONAbi, PackageDependencyProcessorArchitecturesAbi, PackageDependencyLifetimeKindAbi, CPointer<UInt16>, CreatePackageDependencyOptionsAbi, CPointer<Win32_Foundation.FILETIMEAbi>, CPointer<CPointer<UInt16>>) -> Int32>(__windowsBindgen_TryCreatePackageDependency2Proc())
+    return unsafe { call(user, packageFamilyName, minVersion, packageDependencyProcessorArchitectures, lifetimeKind, lifetimeArtifact, options, lifetimeExpiration, packageDependencyId) }
+}
+
+@When[Windows_Win32_Storage_Packaging_Appx == "on" && API_MS_WIN_APPMODEL_RUNTIME_L1_1_7 == "on" && Windows_Win32_Storage_Packaging_Appx_TryCreatePackageDependency2 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_TryCreatePackageDependency2(user: Win32_Security.PSID, packageFamilyName: CPointer<UInt16>, minVersion: PACKAGE_VERSIONAbi, packageDependencyProcessorArchitectures: PackageDependencyProcessorArchitecturesAbi, lifetimeKind: PackageDependencyLifetimeKindAbi, lifetimeArtifact: CPointer<UInt16>, options: CreatePackageDependencyOptionsAbi, lifetimeExpiration: CPointer<Win32_Foundation.FILETIMEAbi>, packageDependencyId: CPointer<CPointer<UInt16>>): Int32 {
+    return TryCreatePackageDependency2(user, packageFamilyName, minVersion, packageDependencyProcessorArchitectures, lifetimeKind, lifetimeArtifact, options, lifetimeExpiration, packageDependencyId)
 }
 
 @When[Windows_Win32_Storage_Packaging_Appx == "on"]

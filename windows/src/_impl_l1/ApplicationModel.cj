@@ -332,6 +332,7 @@ public class AppInstance <: InterfaceWrapperBase & ComInterface & windows_interf
         return ()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetInstances(): windows_collections.IVector<AppInstance> {
         var result__: Option<windows_collections.IVector<AppInstance>> = Option<windows_collections.IVector<AppInstance>>.None
         try (factory__ = windows_core.factory<AppInstance, IAppInstanceStatics>().unwrap()) {
@@ -914,7 +915,10 @@ public struct IAppInstanceStaticsVtbl {
     public var GetActivatedEventArgs: UIntNative = UIntNative(0)
     public var FindOrRegisterInstanceForKey: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var Unregister: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetInstances: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetInstances: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1014,6 +1018,7 @@ public class IAppInstanceStatics <: InterfaceWrapperBase & ComInterface & Runtim
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetInstances(): windows_collections.IVector<AppInstance> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1490,7 +1495,10 @@ extend IPackage7 <: windows_core.Interface<IPackage7> {}
 @C
 public struct IStartupTaskStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetForCurrentPackageAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetForCurrentPackageAsync: UIntNative = UIntNative(0)
     public var GetAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -1560,6 +1568,7 @@ public class IStartupTaskStatics <: InterfaceWrapperBase & ComInterface & Runtim
         readVtbl<IStartupTaskStaticsVtbl>(IStartupTaskStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetForCurrentPackageAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<StartupTask>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2318,6 +2327,7 @@ public class StartupTask <: InterfaceWrapperBase & ComInterface & windows_interf
         return defaultInterface().TaskId()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetForCurrentPackageAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<StartupTask>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<StartupTask>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<StartupTask>>>.None
         try (factory__ = windows_core.factory<StartupTask, IStartupTaskStatics>().unwrap()) {

@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l1 as _impl_l1
 import windows_collections as windows_collections
@@ -430,6 +429,7 @@ public class AppCapability <: InterfaceWrapperBase & ComInterface & windows_inte
         defaultInterface().RemoveAccessChanged(token)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func RequestAccessForCapabilitiesAsync(capabilityNames: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, AppCapabilityAccessStatus>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, AppCapabilityAccessStatus>>> = Option<windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, AppCapabilityAccessStatus>>>.None
         try (factory__ = windows_core.factory<AppCapability, IAppCapabilityStatics>().unwrap()) {
@@ -441,7 +441,7 @@ public class AppCapability <: InterfaceWrapperBase & ComInterface & windows_inte
         }
     }
 
-    @When[Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
     public static unsafe func RequestAccessForCapabilitiesForUserAsync(user: _impl_l1.User, capabilityNames: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, AppCapabilityAccessStatus>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, AppCapabilityAccessStatus>>> = Option<windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, AppCapabilityAccessStatus>>>.None
         try (factory__ = windows_core.factory<AppCapability, IAppCapabilityStatics>().unwrap()) {
@@ -631,10 +631,13 @@ extend IAppCapability <: windows_core.Interface<IAppCapability> {}
 @C
 public struct IAppCapabilityStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var RequestAccessForCapabilitiesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_System == "on"]
+    @When[Windows_Foundation_Collections != "on"]
+    public var RequestAccessForCapabilitiesAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
     public var RequestAccessForCapabilitiesForUserAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_System != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_System != "on"]
     public var RequestAccessForCapabilitiesForUserAsync: UIntNative = UIntNative(0)
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_System == "on"]
@@ -709,6 +712,7 @@ public class IAppCapabilityStatics <: InterfaceWrapperBase & ComInterface & Runt
         readVtbl<IAppCapabilityStaticsVtbl>(IAppCapabilityStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RequestAccessForCapabilitiesAsync(capabilityNames: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, AppCapabilityAccessStatus>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -717,7 +721,7 @@ public class IAppCapabilityStatics <: InterfaceWrapperBase & ComInterface & Runt
         return windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, AppCapabilityAccessStatus>>.fromAbiTake(result__)
     }
 
-    @When[Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
     public unsafe func RequestAccessForCapabilitiesForUserAsync(user: _impl_l1.User, capabilityNames: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, AppCapabilityAccessStatus>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

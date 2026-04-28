@@ -9,7 +9,7 @@ import windows_interface as windows_interface
 @C
 public struct IApplicationLanguagesStatics2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
     public var GetLanguagesForUser: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -54,7 +54,7 @@ public class IApplicationLanguagesStatics2 <: InterfaceWrapperBase & ComInterfac
         readVtbl<IApplicationLanguagesStatics2Vtbl>(IApplicationLanguagesStatics2Vtbl())
     }
 
-    @When[Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
     public unsafe func GetLanguagesForUser(user: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -66,7 +66,9 @@ public class IApplicationLanguagesStatics2 <: InterfaceWrapperBase & ComInterfac
 @C
 public struct IJapanesePhoneticAnalyzerStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetWords: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetWordsWithMonoRubyOption: CFunc<(CPointer<Unit>, CPointer<Unit>, Bool, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -111,12 +113,14 @@ public class IJapanesePhoneticAnalyzerStatics <: InterfaceWrapperBase & ComInter
         readVtbl<IJapanesePhoneticAnalyzerStaticsVtbl>(IJapanesePhoneticAnalyzerStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetWords(input: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetWords(__liveRaw, input, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetWordsWithMonoRubyOption(input: CPointer<Unit>, monoRuby: Bool, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

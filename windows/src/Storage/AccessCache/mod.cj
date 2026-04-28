@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l1 as _impl_l1
 import windows_collections as windows_collections
@@ -133,7 +132,7 @@ extend AccessListEntry <: windows_core.CopyType & windows_core.RuntimeType & win
     }
 }
 
-@When[Windows_Storage_AccessCache == "on"]
+@When[Windows_Storage_AccessCache == "on" && Windows_Foundation_Collections == "on"]
 public class AccessListEntryView <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -234,7 +233,7 @@ public class AccessListEntryView <: InterfaceWrapperBase & ComInterface & window
     }
 }
 
-@When[Windows_Storage_AccessCache == "on"]
+@When[Windows_Storage_AccessCache == "on" && Windows_Foundation_Collections == "on"]
 extend AccessListEntryView <: windows_core.HandleWinrtType<AccessListEntryView> {
     public static func intoWinrtHandle(value: AccessListEntryView): CPointer<Unit> {
         value.asRaw()
@@ -361,9 +360,9 @@ public struct IStorageItemAccessListVtbl {
     public var GetItemAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_Storage != "on"]
     public var GetItemAsync: UIntNative = UIntNative(0)
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var GetFileAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var GetFileAsync: UIntNative = UIntNative(0)
     @When[Windows_Storage == "on"]
     public var GetFolderAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -373,9 +372,9 @@ public struct IStorageItemAccessListVtbl {
     public var GetItemWithOptionsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, AccessCacheOptionsAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_Storage != "on"]
     public var GetItemWithOptionsAsync: UIntNative = UIntNative(0)
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var GetFileWithOptionsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, AccessCacheOptionsAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var GetFileWithOptionsAsync: UIntNative = UIntNative(0)
     @When[Windows_Storage == "on"]
     public var GetFolderWithOptionsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, AccessCacheOptionsAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
@@ -388,11 +387,14 @@ public struct IStorageItemAccessListVtbl {
     public var CheckAccess: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_Storage != "on"]
     public var CheckAccess: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Entries: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Entries: UIntNative = UIntNative(0)
     public var MaximumItemsAllowed: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 
-    @When[Windows_Storage == "on"]
+    @When[(((((((Windows_Storage == "on") && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Foundation_Collections == "on")]
     public static func new<Identity>(offset!: Int64 = 0): IStorageItemAccessListVtbl where Identity <: IStorageItemAccessList_Impl {
         let _ = offset
         var vtbl = IStorageItemAccessListVtbl()
@@ -432,14 +434,7 @@ public struct IStorageItemAccessListVtbl {
             }
         }
         vtbl = IStorageItemAccessListVtbl.__assignCheckAccess<Identity>(vtbl)
-        vtbl.Entries = { instanceRaw, result__ =>
-            match (unsafe { asImplFromRaw<IStorageItemAccessList_ImplErased>(instanceRaw) }) {
-                case Some(impl) =>
-                    impl.__winrtThunk_Entries(result__)
-                case None =>
-                    E_NOINTERFACE.value
-            }
-        }
+        vtbl = IStorageItemAccessListVtbl.__assignEntries<Identity>(vtbl)
         vtbl.MaximumItemsAllowed = { instanceRaw, result__ =>
             match (unsafe { asImplFromRaw<IStorageItemAccessList_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
@@ -451,7 +446,7 @@ public struct IStorageItemAccessListVtbl {
         return vtbl
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage == "on"]
+    @When[((((((((Windows_Storage == "on") && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Foundation_Collections == "on")) && Windows_Storage == "on"]
     public static func __assignAddOverloadDefaultMetadata<Identity>(vtbl: IStorageItemAccessListVtbl): IStorageItemAccessListVtbl where Identity <: IStorageItemAccessList_Impl {
         var next = vtbl
         next.AddOverloadDefaultMetadata = { instanceRaw, arg0, result__ =>
@@ -465,12 +460,12 @@ public struct IStorageItemAccessListVtbl {
         return next
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage != "on"]
+    @When[((((((((Windows_Storage == "on") && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Foundation_Collections == "on")) && Windows_Storage != "on"]
     public static func __assignAddOverloadDefaultMetadata<Identity>(vtbl: IStorageItemAccessListVtbl): IStorageItemAccessListVtbl where Identity <: IStorageItemAccessList_Impl {
         return vtbl
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage == "on"]
+    @When[((((((((Windows_Storage == "on") && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Foundation_Collections == "on")) && Windows_Storage == "on"]
     public static func __assignAdd<Identity>(vtbl: IStorageItemAccessListVtbl): IStorageItemAccessListVtbl where Identity <: IStorageItemAccessList_Impl {
         var next = vtbl
         next.Add = { instanceRaw, arg0, arg1, result__ =>
@@ -484,12 +479,12 @@ public struct IStorageItemAccessListVtbl {
         return next
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage != "on"]
+    @When[((((((((Windows_Storage == "on") && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Foundation_Collections == "on")) && Windows_Storage != "on"]
     public static func __assignAdd<Identity>(vtbl: IStorageItemAccessListVtbl): IStorageItemAccessListVtbl where Identity <: IStorageItemAccessList_Impl {
         return vtbl
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage == "on"]
+    @When[((((((((Windows_Storage == "on") && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Foundation_Collections == "on")) && Windows_Storage == "on"]
     public static func __assignAddOrReplaceOverloadDefaultMetadata<Identity>(vtbl: IStorageItemAccessListVtbl): IStorageItemAccessListVtbl where Identity <: IStorageItemAccessList_Impl {
         var next = vtbl
         next.AddOrReplaceOverloadDefaultMetadata = { instanceRaw, arg0, arg1 =>
@@ -503,12 +498,12 @@ public struct IStorageItemAccessListVtbl {
         return next
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage != "on"]
+    @When[((((((((Windows_Storage == "on") && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Foundation_Collections == "on")) && Windows_Storage != "on"]
     public static func __assignAddOrReplaceOverloadDefaultMetadata<Identity>(vtbl: IStorageItemAccessListVtbl): IStorageItemAccessListVtbl where Identity <: IStorageItemAccessList_Impl {
         return vtbl
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage == "on"]
+    @When[((((((((Windows_Storage == "on") && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Foundation_Collections == "on")) && Windows_Storage == "on"]
     public static func __assignAddOrReplace<Identity>(vtbl: IStorageItemAccessListVtbl): IStorageItemAccessListVtbl where Identity <: IStorageItemAccessList_Impl {
         var next = vtbl
         next.AddOrReplace = { instanceRaw, arg0, arg1, arg2 =>
@@ -522,12 +517,12 @@ public struct IStorageItemAccessListVtbl {
         return next
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage != "on"]
+    @When[((((((((Windows_Storage == "on") && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Foundation_Collections == "on")) && Windows_Storage != "on"]
     public static func __assignAddOrReplace<Identity>(vtbl: IStorageItemAccessListVtbl): IStorageItemAccessListVtbl where Identity <: IStorageItemAccessList_Impl {
         return vtbl
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage == "on"]
+    @When[((((((((Windows_Storage == "on") && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Foundation_Collections == "on")) && Windows_Storage == "on"]
     public static func __assignGetItemAsync<Identity>(vtbl: IStorageItemAccessListVtbl): IStorageItemAccessListVtbl where Identity <: IStorageItemAccessList_Impl {
         var next = vtbl
         next.GetItemAsync = { instanceRaw, arg0, result__ =>
@@ -541,12 +536,12 @@ public struct IStorageItemAccessListVtbl {
         return next
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage != "on"]
+    @When[((((((((Windows_Storage == "on") && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Foundation_Collections == "on")) && Windows_Storage != "on"]
     public static func __assignGetItemAsync<Identity>(vtbl: IStorageItemAccessListVtbl): IStorageItemAccessListVtbl where Identity <: IStorageItemAccessList_Impl {
         return vtbl
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage == "on"]
+    @When[((((((((Windows_Storage == "on") && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")]
     public static func __assignGetFileAsync<Identity>(vtbl: IStorageItemAccessListVtbl): IStorageItemAccessListVtbl where Identity <: IStorageItemAccessList_Impl {
         var next = vtbl
         next.GetFileAsync = { instanceRaw, arg0, result__ =>
@@ -560,12 +555,12 @@ public struct IStorageItemAccessListVtbl {
         return next
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage != "on"]
+    @When[((((((((Windows_Storage == "on") && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on")]
     public static func __assignGetFileAsync<Identity>(vtbl: IStorageItemAccessListVtbl): IStorageItemAccessListVtbl where Identity <: IStorageItemAccessList_Impl {
         return vtbl
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage == "on"]
+    @When[((((((((Windows_Storage == "on") && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Foundation_Collections == "on")) && Windows_Storage == "on"]
     public static func __assignGetFolderAsync<Identity>(vtbl: IStorageItemAccessListVtbl): IStorageItemAccessListVtbl where Identity <: IStorageItemAccessList_Impl {
         var next = vtbl
         next.GetFolderAsync = { instanceRaw, arg0, result__ =>
@@ -579,12 +574,12 @@ public struct IStorageItemAccessListVtbl {
         return next
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage != "on"]
+    @When[((((((((Windows_Storage == "on") && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Foundation_Collections == "on")) && Windows_Storage != "on"]
     public static func __assignGetFolderAsync<Identity>(vtbl: IStorageItemAccessListVtbl): IStorageItemAccessListVtbl where Identity <: IStorageItemAccessList_Impl {
         return vtbl
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage == "on"]
+    @When[((((((((Windows_Storage == "on") && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Foundation_Collections == "on")) && Windows_Storage == "on"]
     public static func __assignGetItemWithOptionsAsync<Identity>(vtbl: IStorageItemAccessListVtbl): IStorageItemAccessListVtbl where Identity <: IStorageItemAccessList_Impl {
         var next = vtbl
         next.GetItemWithOptionsAsync = { instanceRaw, arg0, arg1, result__ =>
@@ -598,12 +593,12 @@ public struct IStorageItemAccessListVtbl {
         return next
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage != "on"]
+    @When[((((((((Windows_Storage == "on") && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Foundation_Collections == "on")) && Windows_Storage != "on"]
     public static func __assignGetItemWithOptionsAsync<Identity>(vtbl: IStorageItemAccessListVtbl): IStorageItemAccessListVtbl where Identity <: IStorageItemAccessList_Impl {
         return vtbl
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage == "on"]
+    @When[((((((((Windows_Storage == "on") && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")]
     public static func __assignGetFileWithOptionsAsync<Identity>(vtbl: IStorageItemAccessListVtbl): IStorageItemAccessListVtbl where Identity <: IStorageItemAccessList_Impl {
         var next = vtbl
         next.GetFileWithOptionsAsync = { instanceRaw, arg0, arg1, result__ =>
@@ -617,12 +612,12 @@ public struct IStorageItemAccessListVtbl {
         return next
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage != "on"]
+    @When[((((((((Windows_Storage == "on") && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on")]
     public static func __assignGetFileWithOptionsAsync<Identity>(vtbl: IStorageItemAccessListVtbl): IStorageItemAccessListVtbl where Identity <: IStorageItemAccessList_Impl {
         return vtbl
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage == "on"]
+    @When[((((((((Windows_Storage == "on") && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Foundation_Collections == "on")) && Windows_Storage == "on"]
     public static func __assignGetFolderWithOptionsAsync<Identity>(vtbl: IStorageItemAccessListVtbl): IStorageItemAccessListVtbl where Identity <: IStorageItemAccessList_Impl {
         var next = vtbl
         next.GetFolderWithOptionsAsync = { instanceRaw, arg0, arg1, result__ =>
@@ -636,12 +631,12 @@ public struct IStorageItemAccessListVtbl {
         return next
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage != "on"]
+    @When[((((((((Windows_Storage == "on") && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Foundation_Collections == "on")) && Windows_Storage != "on"]
     public static func __assignGetFolderWithOptionsAsync<Identity>(vtbl: IStorageItemAccessListVtbl): IStorageItemAccessListVtbl where Identity <: IStorageItemAccessList_Impl {
         return vtbl
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage == "on"]
+    @When[((((((((Windows_Storage == "on") && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Foundation_Collections == "on")) && Windows_Storage == "on"]
     public static func __assignCheckAccess<Identity>(vtbl: IStorageItemAccessListVtbl): IStorageItemAccessListVtbl where Identity <: IStorageItemAccessList_Impl {
         var next = vtbl
         next.CheckAccess = { instanceRaw, arg0, result__ =>
@@ -655,8 +650,27 @@ public struct IStorageItemAccessListVtbl {
         return next
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage != "on"]
+    @When[((((((((Windows_Storage == "on") && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Foundation_Collections == "on")) && Windows_Storage != "on"]
     public static func __assignCheckAccess<Identity>(vtbl: IStorageItemAccessListVtbl): IStorageItemAccessListVtbl where Identity <: IStorageItemAccessList_Impl {
+        return vtbl
+    }
+
+    @When[((((((((Windows_Storage == "on") && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Foundation_Collections == "on")) && Windows_Foundation_Collections == "on"]
+    public static func __assignEntries<Identity>(vtbl: IStorageItemAccessListVtbl): IStorageItemAccessListVtbl where Identity <: IStorageItemAccessList_Impl {
+        var next = vtbl
+        next.Entries = { instanceRaw, result__ =>
+            match (unsafe { asImplFromRaw<IStorageItemAccessList_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_Entries(result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        return next
+    }
+
+    @When[((((((((Windows_Storage == "on") && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Foundation_Collections == "on")) && Windows_Foundation_Collections != "on"]
+    public static func __assignEntries<Identity>(vtbl: IStorageItemAccessListVtbl): IStorageItemAccessListVtbl where Identity <: IStorageItemAccessList_Impl {
         return vtbl
     }
 
@@ -668,7 +682,7 @@ public struct IStorageItemAccessListVtbl {
     }
 }
 
-@When[Windows_Storage_AccessCache == "on" && Windows_Storage == "on"]
+@When[Windows_Storage_AccessCache == "on" && ((((((((Windows_Storage == "on") && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Foundation_Collections == "on"))]
 public interface IStorageItemAccessList_ImplErased {
     public func __winrtThunk_AddOverloadDefaultMetadata(arg0: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32
 
@@ -703,7 +717,7 @@ public interface IStorageItemAccessList_ImplErased {
     public func __winrtThunk_MaximumItemsAllowed(result__: CPointer<UInt32>): Int32
 }
 
-@When[Windows_Storage_AccessCache == "on" && Windows_Storage == "on"]
+@When[Windows_Storage_AccessCache == "on" && ((((((((Windows_Storage == "on") && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")) && (Windows_Storage == "on")) && (Windows_Storage == "on")) && (Windows_Foundation_Collections == "on"))]
 public interface IStorageItemAccessList_Impl <: IStorageItemAccessList_ImplErased {
     public func AddOverloadDefaultMetadata(file: InParam<_impl_l1.IStorageItem>): windows_core.Result<windows_core.HString>
 
@@ -1081,7 +1095,7 @@ public class IStorageItemAccessList <: InterfaceWrapperBase & ComInterface & Run
         return windows_future.IAsyncOperation<_impl_l1.IStorageItem>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetFileAsync(token: windows_core.HString): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1108,7 +1122,7 @@ public class IStorageItemAccessList <: InterfaceWrapperBase & ComInterface & Run
         return windows_future.IAsyncOperation<_impl_l1.IStorageItem>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetFileWithOptionsAsync(token: windows_core.HString, options: AccessCacheOptions): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1155,6 +1169,7 @@ public class IStorageItemAccessList <: InterfaceWrapperBase & ComInterface & Run
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Entries(): AccessListEntryView {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1407,7 +1422,7 @@ public class StorageItemAccessList <: InterfaceWrapperBase & ComInterface & wind
         return defaultInterface().GetItemAsync(token)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetFileAsync(token: windows_core.HString): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
         return defaultInterface().GetFileAsync(token)
     }
@@ -1422,7 +1437,7 @@ public class StorageItemAccessList <: InterfaceWrapperBase & ComInterface & wind
         return defaultInterface().GetItemWithOptionsAsync(token, options)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetFileWithOptionsAsync(token: windows_core.HString, options: AccessCacheOptions): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
         return defaultInterface().GetFileWithOptionsAsync(token, options)
     }
@@ -1449,6 +1464,7 @@ public class StorageItemAccessList <: InterfaceWrapperBase & ComInterface & wind
         return defaultInterface().CheckAccess(file)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Entries(): AccessListEntryView {
         return defaultInterface().Entries()
     }
@@ -2067,7 +2083,7 @@ public class StorageItemMostRecentlyUsedList <: InterfaceWrapperBase & ComInterf
         return asIStorageItemAccessList().GetItemAsync(token)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetFileAsync(token: windows_core.HString): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
         return asIStorageItemAccessList().GetFileAsync(token)
     }
@@ -2082,7 +2098,7 @@ public class StorageItemMostRecentlyUsedList <: InterfaceWrapperBase & ComInterf
         return asIStorageItemAccessList().GetItemWithOptionsAsync(token, options)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetFileWithOptionsAsync(token: windows_core.HString, options: AccessCacheOptions): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
         return asIStorageItemAccessList().GetFileWithOptionsAsync(token, options)
     }
@@ -2109,6 +2125,7 @@ public class StorageItemMostRecentlyUsedList <: InterfaceWrapperBase & ComInterf
         return asIStorageItemAccessList().CheckAccess(file)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Entries(): AccessListEntryView {
         return asIStorageItemAccessList().Entries()
     }

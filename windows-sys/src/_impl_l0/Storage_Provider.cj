@@ -979,12 +979,13 @@ public struct IStorageProviderSearchQueryOptionsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var UserQuery: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Language: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Storage_Search == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Search == "on"]
     public var SortOrder: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ProgrammaticQuery: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var MaxResults: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var FolderScope: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var QueryId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var PropertiesToFetch: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1041,7 +1042,7 @@ public class IStorageProviderSearchQueryOptions <: InterfaceWrapperBase & ComInt
         return __vt.Language(__liveRaw, result__)
     }
 
-    @When[Windows_Storage_Search == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Search == "on"]
     public unsafe func SortOrder(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1072,6 +1073,7 @@ public class IStorageProviderSearchQueryOptions <: InterfaceWrapperBase & ComInt
         return __vt.QueryId(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PropertiesToFetch(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1177,6 +1179,7 @@ public struct IStorageProviderSuggestionsQueryOptionsVtbl {
     public var RemoteFileId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var MaxResults: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var QueryId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var PropertiesToFetch: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1245,6 +1248,7 @@ public class IStorageProviderSuggestionsQueryOptions <: InterfaceWrapperBase & C
         return __vt.QueryId(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PropertiesToFetch(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

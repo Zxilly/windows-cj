@@ -216,6 +216,7 @@ public struct IHidBooleanControlDescriptionVtbl {
     public var ReportType: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var UsagePage: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var UsageId: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ParentCollections: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -290,6 +291,7 @@ public class IHidBooleanControlDescription <: InterfaceWrapperBase & ComInterfac
         return __vt.UsageId(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ParentCollections(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -316,6 +318,7 @@ public struct IHidNumericControlDescriptionVtbl {
     public var Unit_: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var IsAbsolute: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var HasNull: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ParentCollections: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -450,6 +453,7 @@ public class IHidNumericControlDescription <: InterfaceWrapperBase & ComInterfac
         return __vt.HasNull(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ParentCollections(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -766,7 +770,9 @@ public struct IHidInputReportVtbl {
     public var Id: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     @When[Windows_Storage_Streams == "on"]
     public var Data: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ActivatedBooleanControls: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var TransitionedBooleanControls: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetBooleanControl: CFunc<(CPointer<Unit>, UInt16, UInt16, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var GetBooleanControlByDescription: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -828,12 +834,14 @@ public class IHidInputReport <: InterfaceWrapperBase & ComInterface {
         return __vt.Data(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ActivatedBooleanControls(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ActivatedBooleanControls(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TransitionedBooleanControls(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1040,7 +1048,9 @@ public struct IHidDeviceVtbl {
     public var CreateFeatureReportById: CFunc<(CPointer<Unit>, UInt16, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var SendOutputReportAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var SendFeatureReportAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetBooleanControlDescriptions: CFunc<(CPointer<Unit>, Int32, UInt16, UInt16, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetNumericControlDescriptions: CFunc<(CPointer<Unit>, Int32, UInt16, UInt16, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var InputReportReceived: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveInputReportReceived: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
@@ -1177,12 +1187,14 @@ public class IHidDevice <: InterfaceWrapperBase & ComInterface {
         return __vt.SendFeatureReportAsync(__liveRaw, featureReport, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetBooleanControlDescriptions(reportType: Int32, usagePage: UInt16, usageId: UInt16, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetBooleanControlDescriptions(__liveRaw, reportType, usagePage, usageId, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetNumericControlDescriptions(reportType: Int32, usagePage: UInt16, usageId: UInt16, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

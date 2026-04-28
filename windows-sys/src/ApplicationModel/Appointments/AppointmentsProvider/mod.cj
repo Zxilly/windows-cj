@@ -5,4 +5,3 @@ package windows_sys.ApplicationModel.Appointments.AppointmentsProvider
 public import windows_sys._impl_l1.{IAddAppointmentOperation, IAddAppointmentOperationVtbl, IReplaceAppointmentOperation, IReplaceAppointmentOperationVtbl}
 @When[Windows_ApplicationModel_Appointments_AppointmentsProvider == "on"]
 public import windows_sys._impl_l0.{IAppointmentsProviderLaunchActionVerbsStatics, IAppointmentsProviderLaunchActionVerbsStatics2, IAppointmentsProviderLaunchActionVerbsStatics2Vtbl, IAppointmentsProviderLaunchActionVerbsStaticsVtbl, IRemoveAppointmentOperation, IRemoveAppointmentOperationVtbl}
-

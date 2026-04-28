@@ -48,6 +48,7 @@ public class CoreApplication <: windows_interface.RuntimeName & windows_core.Run
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Views(): windows_collections.IVectorView<CoreApplicationView> {
         var result__: Option<windows_collections.IVectorView<CoreApplicationView>> = Option<windows_collections.IVectorView<CoreApplicationView>>.None
         try (factory__ = windows_core.factory<CoreApplication, ICoreImmersiveApplication>().unwrap()) {
@@ -1590,7 +1591,10 @@ extend ICoreApplicationView6 <: windows_core.Interface<ICoreApplicationView6> {}
 @C
 public struct ICoreImmersiveApplicationVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Views: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Views: UIntNative = UIntNative(0)
     public var CreateNewView: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var MainView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -1661,6 +1665,7 @@ public class ICoreImmersiveApplication <: InterfaceWrapperBase & ComInterface & 
         readVtbl<ICoreImmersiveApplicationVtbl>(ICoreImmersiveApplicationVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Views(): windows_collections.IVectorView<CoreApplicationView> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

@@ -169,7 +169,7 @@ public func generateWinrtDelegate(
         case Some(invokeInfo) =>
             let (invokeMethodName, invokeSig, pStart, pEnd) = invokeInfo
             w.writeBlankLine()
-            writeWinrtDelegateBoxSupport(w, index, fileIdx, name, typeName, vtblName, genericParams, genericConstraintKinds, invokeMethodName, invokeSig, pStart, pEnd)
+            writeWinrtDelegateBoxSupport(w, index, fileIdx, name, typeName, vtblName, genericParams, genericConstraintKinds, feature, typeTags, invokeMethodName, invokeSig, pStart, pEnd)
         case None => ()
     }
 }
@@ -300,6 +300,8 @@ func writeWinrtDelegateBoxSupport(
     vtblName: String,
     genericParams: ArrayList<String>,
     genericConstraintKinds: HashMap<String, WinrtGenericConstraintKind>,
+    feature: String,
+    typeTags: ArrayList<String>,
     methodName: String,
     sig: MethodSignature,
     pStart: Int64,
@@ -315,11 +317,13 @@ func writeWinrtDelegateBoxSupport(
     let invokerTypeName = "${name}Invoker${genericDecl}"
     let boxTypeName = "${name}Box${genericDecl}"
 
+    writeAvailabilityForTags(w, feature, typeTags)
     w.writeBlock("private open class ${erasedInvokerTypeName}", { =>
         writeWinrtDelegateThunkErasedMethod(w, index, sig, methodName)
     })
 
     w.writeBlankLine()
+    writeAvailabilityForTags(w, feature, typeTags)
     w.writeBlock("private open class ${invokerTypeName} <: ${erasedInvokerTypeName}${genericWhere}", { =>
         w.writeLine("public open func ${methodName}(${delegateParams}): ${returnType} {")
         if (returnType == "Unit") {
@@ -333,6 +337,7 @@ func writeWinrtDelegateBoxSupport(
     })
 
     w.writeBlankLine()
+    writeAvailabilityForTags(w, feature, typeTags)
     w.writeBlock("private class ${boxTypeName} <: ${invokerTypeName}${genericWhere}", { =>
         w.writeLine("public let invoke_: ${fnType}")
         w.writeLine("private let vtblHandle: CPointerHandle<${vtblName}>")
@@ -360,6 +365,7 @@ func writeWinrtDelegateBoxSupport(
     })
 
     w.writeBlankLine()
+    writeAvailabilityForTags(w, feature, typeTags)
     w.writeLine("func build${name}BoxVtbl${genericDecl}(): ${vtblName}${genericWhere} {")
     w.writeLine("    var vtbl = ${vtblName}()")
     w.writeLine("    vtbl.base_ = buildIUnknownVtbl()")

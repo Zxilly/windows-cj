@@ -3,7 +3,6 @@ package windows_sys.Win32.Storage.FileHistory
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 
@@ -631,15 +630,74 @@ public class IFhConfigMgr <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[FHSVCCTL == "on"]
+@When[Windows_Win32_Storage_FileHistory == "on" && FHSVCCTL == "on" && Windows_Win32_Storage_FileHistory_FhServiceBlockBackup == "on"]
 foreign {
     func FhServiceBlockBackup(Pipe: FH_SERVICE_PIPE_HANDLE): Int32
+}
+
+@When[Windows_Win32_Storage_FileHistory == "on" && FHSVCCTL == "on" && Windows_Win32_Storage_FileHistory_FhServiceBlockBackup == "on"]
+public unsafe func Windows_FhServiceBlockBackup(Pipe: FH_SERVICE_PIPE_HANDLE): Int32 {
+    return FhServiceBlockBackup(Pipe)
+}
+
+@When[Windows_Win32_Storage_FileHistory == "on" && FHSVCCTL == "on" && Windows_Win32_Storage_FileHistory_FhServiceClosePipe == "on"]
+foreign {
     func FhServiceClosePipe(Pipe: FH_SERVICE_PIPE_HANDLE): Int32
+}
+
+@When[Windows_Win32_Storage_FileHistory == "on" && FHSVCCTL == "on" && Windows_Win32_Storage_FileHistory_FhServiceClosePipe == "on"]
+public unsafe func Windows_FhServiceClosePipe(Pipe: FH_SERVICE_PIPE_HANDLE): Int32 {
+    return FhServiceClosePipe(Pipe)
+}
+
+@When[Windows_Win32_Storage_FileHistory == "on" && FHSVCCTL == "on" && Windows_Win32_Storage_FileHistory_FhServiceOpenPipe == "on"]
+foreign {
     func FhServiceOpenPipe(StartServiceIfStopped: Int32, Pipe: CPointer<FH_SERVICE_PIPE_HANDLE>): Int32
+}
+
+@When[Windows_Win32_Storage_FileHistory == "on" && FHSVCCTL == "on" && Windows_Win32_Storage_FileHistory_FhServiceOpenPipe == "on"]
+public unsafe func Windows_FhServiceOpenPipe(StartServiceIfStopped: Int32, Pipe: CPointer<FH_SERVICE_PIPE_HANDLE>): Int32 {
+    return FhServiceOpenPipe(StartServiceIfStopped, Pipe)
+}
+
+@When[Windows_Win32_Storage_FileHistory == "on" && FHSVCCTL == "on" && Windows_Win32_Storage_FileHistory_FhServiceReloadConfiguration == "on"]
+foreign {
     func FhServiceReloadConfiguration(Pipe: FH_SERVICE_PIPE_HANDLE): Int32
+}
+
+@When[Windows_Win32_Storage_FileHistory == "on" && FHSVCCTL == "on" && Windows_Win32_Storage_FileHistory_FhServiceReloadConfiguration == "on"]
+public unsafe func Windows_FhServiceReloadConfiguration(Pipe: FH_SERVICE_PIPE_HANDLE): Int32 {
+    return FhServiceReloadConfiguration(Pipe)
+}
+
+@When[Windows_Win32_Storage_FileHistory == "on" && FHSVCCTL == "on" && Windows_Win32_Storage_FileHistory_FhServiceStartBackup == "on"]
+foreign {
     func FhServiceStartBackup(Pipe: FH_SERVICE_PIPE_HANDLE, LowPriorityIo: Int32): Int32
+}
+
+@When[Windows_Win32_Storage_FileHistory == "on" && FHSVCCTL == "on" && Windows_Win32_Storage_FileHistory_FhServiceStartBackup == "on"]
+public unsafe func Windows_FhServiceStartBackup(Pipe: FH_SERVICE_PIPE_HANDLE, LowPriorityIo: Int32): Int32 {
+    return FhServiceStartBackup(Pipe, LowPriorityIo)
+}
+
+@When[Windows_Win32_Storage_FileHistory == "on" && FHSVCCTL == "on" && Windows_Win32_Storage_FileHistory_FhServiceStopBackup == "on"]
+foreign {
     func FhServiceStopBackup(Pipe: FH_SERVICE_PIPE_HANDLE, StopTracking: Int32): Int32
+}
+
+@When[Windows_Win32_Storage_FileHistory == "on" && FHSVCCTL == "on" && Windows_Win32_Storage_FileHistory_FhServiceStopBackup == "on"]
+public unsafe func Windows_FhServiceStopBackup(Pipe: FH_SERVICE_PIPE_HANDLE, StopTracking: Int32): Int32 {
+    return FhServiceStopBackup(Pipe, StopTracking)
+}
+
+@When[Windows_Win32_Storage_FileHistory == "on" && FHSVCCTL == "on" && Windows_Win32_Storage_FileHistory_FhServiceUnblockBackup == "on"]
+foreign {
     func FhServiceUnblockBackup(Pipe: FH_SERVICE_PIPE_HANDLE): Int32
+}
+
+@When[Windows_Win32_Storage_FileHistory == "on" && FHSVCCTL == "on" && Windows_Win32_Storage_FileHistory_FhServiceUnblockBackup == "on"]
+public unsafe func Windows_FhServiceUnblockBackup(Pipe: FH_SERVICE_PIPE_HANDLE): Int32 {
+    return FhServiceUnblockBackup(Pipe)
 }
 
 @When[Windows_Win32_Storage_FileHistory == "on"]

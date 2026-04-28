@@ -246,6 +246,7 @@ public class IUserDataTask <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IUserDataTaskBatchVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Tasks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -290,6 +291,7 @@ public class IUserDataTaskBatch <: InterfaceWrapperBase & ComInterface {
         readVtbl<IUserDataTaskBatchVtbl>(IUserDataTaskBatchVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Tasks(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -743,6 +745,7 @@ public struct IUserDataTaskStoreVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var CreateListAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var CreateListInAccountAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindListsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetListAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -800,6 +803,7 @@ public class IUserDataTaskStore <: InterfaceWrapperBase & ComInterface {
         return __vt.CreateListInAccountAsync(__liveRaw, name, userDataAccountId, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindListsAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

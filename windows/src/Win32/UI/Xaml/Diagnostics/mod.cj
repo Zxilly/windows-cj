@@ -8,20 +8,31 @@ import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeTy
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Dxgi_Common == "on"]
 import windows.Win32.Graphics.Dxgi.Common as Win32_Graphics_Dxgi_Common
-@When[Windows_Win32_System_WinRT == "on"]
 import windows.Win32.System.WinRT as Win32_System_WinRT
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
 
 
-@When[WINDOWS_UI_XAML == "on"]
+@When[Windows_Win32_UI_Xaml_Diagnostics == "on" && WINDOWS_UI_XAML == "on" && Windows_Win32_UI_Xaml_Diagnostics_InitializeXamlDiagnostic == "on"]
 foreign {
     func InitializeXamlDiagnostic(endPointName: CPointer<UInt16>, pid: UInt32, wszDllXamlDiagnostics: CPointer<UInt16>, wszTAPDllName: CPointer<UInt16>, tapClsid: GUID): Int32
+}
+
+@When[Windows_Win32_UI_Xaml_Diagnostics == "on" && WINDOWS_UI_XAML == "on" && Windows_Win32_UI_Xaml_Diagnostics_InitializeXamlDiagnostic == "on"]
+public unsafe func Windows_InitializeXamlDiagnostic(endPointName: CPointer<UInt16>, pid: UInt32, wszDllXamlDiagnostics: CPointer<UInt16>, wszTAPDllName: CPointer<UInt16>, tapClsid: GUID): Int32 {
+    return InitializeXamlDiagnostic(endPointName, pid, wszDllXamlDiagnostics, wszTAPDllName, tapClsid)
+}
+
+@When[Windows_Win32_UI_Xaml_Diagnostics == "on" && WINDOWS_UI_XAML == "on" && Windows_Win32_UI_Xaml_Diagnostics_InitializeXamlDiagnosticsEx == "on"]
+foreign {
     func InitializeXamlDiagnosticsEx(endPointName: CPointer<UInt16>, pid: UInt32, wszDllXamlDiagnostics: CPointer<UInt16>, wszTAPDllName: CPointer<UInt16>, tapClsid: GUID, wszInitializationData: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Xaml_Diagnostics == "on" && WINDOWS_UI_XAML == "on" && Windows_Win32_UI_Xaml_Diagnostics_InitializeXamlDiagnosticsEx == "on"]
+public unsafe func Windows_InitializeXamlDiagnosticsEx(endPointName: CPointer<UInt16>, pid: UInt32, wszDllXamlDiagnostics: CPointer<UInt16>, wszTAPDllName: CPointer<UInt16>, tapClsid: GUID, wszInitializationData: CPointer<UInt16>): Int32 {
+    return InitializeXamlDiagnosticsEx(endPointName, pid, wszDllXamlDiagnostics, wszTAPDllName, tapClsid, wszInitializationData)
 }
 
 @When[Windows_Win32_UI_Xaml_Diagnostics == "on"]

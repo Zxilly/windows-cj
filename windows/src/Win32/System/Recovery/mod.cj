@@ -6,9 +6,7 @@ package windows.Win32.System.Recovery
 import std.collection.*
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge}
 import windows_core as windows_core
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_System_WindowsProgramming == "on"]
 import windows.Win32.System.WindowsProgramming as Win32_System_WindowsProgramming
 
 
@@ -86,25 +84,89 @@ extend REGISTER_APPLICATION_RESTART_FLAGS <: windows_core.CopyType & windows_cor
     }
 }
 
-@When[KERNEL32 == "on"]
+@When[Windows_Win32_System_Recovery == "on" && KERNEL32 == "on" && Windows_Win32_System_Recovery_ApplicationRecoveryFinished == "on"]
 foreign {
     func ApplicationRecoveryFinished(bSuccess: Int32): Unit
-    func ApplicationRecoveryInProgress(pbCancelled: CPointer<Int32>): Int32
-    // param-hint: pwzCommandline len=param[2] optional
-    // param-hint: pdwFlags optional
-    func GetApplicationRestartSettings(hProcess: CPointer<Unit>, pwzCommandline: CPointer<UInt16>, pcchSize: CPointer<UInt32>, pdwFlags: CPointer<UInt32>): Int32
-    // param-hint: pwzCommandline optional
-    func RegisterApplicationRestart(pwzCommandline: CPointer<UInt16>, dwFlags: REGISTER_APPLICATION_RESTART_FLAGSAbi): Int32
-    func UnregisterApplicationRecoveryCallback(): Int32
-    func UnregisterApplicationRestart(): Int32
 }
 
-@When[KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming == "on"]
+@When[Windows_Win32_System_Recovery == "on" && KERNEL32 == "on" && Windows_Win32_System_Recovery_ApplicationRecoveryFinished == "on"]
+public unsafe func Windows_ApplicationRecoveryFinished(bSuccess: Int32): Unit {
+    ApplicationRecoveryFinished(bSuccess)
+}
+
+@When[Windows_Win32_System_Recovery == "on" && KERNEL32 == "on" && Windows_Win32_System_Recovery_ApplicationRecoveryInProgress == "on"]
+foreign {
+    func ApplicationRecoveryInProgress(pbCancelled: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Recovery == "on" && KERNEL32 == "on" && Windows_Win32_System_Recovery_ApplicationRecoveryInProgress == "on"]
+public unsafe func Windows_ApplicationRecoveryInProgress(pbCancelled: CPointer<Int32>): Int32 {
+    return ApplicationRecoveryInProgress(pbCancelled)
+}
+
+@When[Windows_Win32_System_Recovery == "on" && KERNEL32 == "on" && Windows_Win32_System_Recovery_GetApplicationRecoveryCallback == "on" && Windows_Win32_System_WindowsProgramming == "on"]
 foreign {
     // param-hint: ppvParameter optional
     // param-hint: pdwPingInterval optional
     // param-hint: pdwFlags optional
     func GetApplicationRecoveryCallback(hProcess: CPointer<Unit>, pRecoveryCallback: CPointer<Win32_System_WindowsProgramming.APPLICATION_RECOVERY_CALLBACK>, ppvParameter: CPointer<CPointer<Unit>>, pdwPingInterval: CPointer<UInt32>, pdwFlags: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Recovery == "on" && KERNEL32 == "on" && Windows_Win32_System_Recovery_GetApplicationRecoveryCallback == "on" && Windows_Win32_System_WindowsProgramming == "on"]
+public unsafe func Windows_GetApplicationRecoveryCallback(hProcess: CPointer<Unit>, pRecoveryCallback: CPointer<Win32_System_WindowsProgramming.APPLICATION_RECOVERY_CALLBACK>, ppvParameter: CPointer<CPointer<Unit>>, pdwPingInterval: CPointer<UInt32>, pdwFlags: CPointer<UInt32>): Int32 {
+    return GetApplicationRecoveryCallback(hProcess, pRecoveryCallback, ppvParameter, pdwPingInterval, pdwFlags)
+}
+
+@When[Windows_Win32_System_Recovery == "on" && KERNEL32 == "on" && Windows_Win32_System_Recovery_GetApplicationRestartSettings == "on"]
+foreign {
+    // param-hint: pwzCommandline len=param[2] optional
+    // param-hint: pdwFlags optional
+    func GetApplicationRestartSettings(hProcess: CPointer<Unit>, pwzCommandline: CPointer<UInt16>, pcchSize: CPointer<UInt32>, pdwFlags: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Recovery == "on" && KERNEL32 == "on" && Windows_Win32_System_Recovery_GetApplicationRestartSettings == "on"]
+public unsafe func Windows_GetApplicationRestartSettings(hProcess: CPointer<Unit>, pwzCommandline: CPointer<UInt16>, pcchSize: CPointer<UInt32>, pdwFlags: CPointer<UInt32>): Int32 {
+    return GetApplicationRestartSettings(hProcess, pwzCommandline, pcchSize, pdwFlags)
+}
+
+@When[Windows_Win32_System_Recovery == "on" && KERNEL32 == "on" && Windows_Win32_System_Recovery_RegisterApplicationRecoveryCallback == "on" && Windows_Win32_System_WindowsProgramming == "on"]
+foreign {
     // param-hint: pvParameter optional
     func RegisterApplicationRecoveryCallback(pRecoveyCallback: Win32_System_WindowsProgramming.APPLICATION_RECOVERY_CALLBACK, pvParameter: CPointer<Unit>, dwPingInterval: UInt32, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Recovery == "on" && KERNEL32 == "on" && Windows_Win32_System_Recovery_RegisterApplicationRecoveryCallback == "on" && Windows_Win32_System_WindowsProgramming == "on"]
+public unsafe func Windows_RegisterApplicationRecoveryCallback(pRecoveyCallback: Win32_System_WindowsProgramming.APPLICATION_RECOVERY_CALLBACK, pvParameter: CPointer<Unit>, dwPingInterval: UInt32, dwFlags: UInt32): Int32 {
+    return RegisterApplicationRecoveryCallback(pRecoveyCallback, pvParameter, dwPingInterval, dwFlags)
+}
+
+@When[Windows_Win32_System_Recovery == "on" && KERNEL32 == "on" && Windows_Win32_System_Recovery_RegisterApplicationRestart == "on"]
+foreign {
+    // param-hint: pwzCommandline optional
+    func RegisterApplicationRestart(pwzCommandline: CPointer<UInt16>, dwFlags: REGISTER_APPLICATION_RESTART_FLAGSAbi): Int32
+}
+
+@When[Windows_Win32_System_Recovery == "on" && KERNEL32 == "on" && Windows_Win32_System_Recovery_RegisterApplicationRestart == "on"]
+public unsafe func Windows_RegisterApplicationRestart(pwzCommandline: CPointer<UInt16>, dwFlags: REGISTER_APPLICATION_RESTART_FLAGSAbi): Int32 {
+    return RegisterApplicationRestart(pwzCommandline, dwFlags)
+}
+
+@When[Windows_Win32_System_Recovery == "on" && KERNEL32 == "on" && Windows_Win32_System_Recovery_UnregisterApplicationRecoveryCallback == "on"]
+foreign {
+    func UnregisterApplicationRecoveryCallback(): Int32
+}
+
+@When[Windows_Win32_System_Recovery == "on" && KERNEL32 == "on" && Windows_Win32_System_Recovery_UnregisterApplicationRecoveryCallback == "on"]
+public unsafe func Windows_UnregisterApplicationRecoveryCallback(): Int32 {
+    return UnregisterApplicationRecoveryCallback()
+}
+
+@When[Windows_Win32_System_Recovery == "on" && KERNEL32 == "on" && Windows_Win32_System_Recovery_UnregisterApplicationRestart == "on"]
+foreign {
+    func UnregisterApplicationRestart(): Int32
+}
+
+@When[Windows_Win32_System_Recovery == "on" && KERNEL32 == "on" && Windows_Win32_System_Recovery_UnregisterApplicationRestart == "on"]
+public unsafe func Windows_UnregisterApplicationRestart(): Int32 {
+    return UnregisterApplicationRestart()
 }

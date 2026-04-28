@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Gaming_Input == "on"]
 import windows.Gaming.Input as Gaming_Input
-@When[Windows_Gaming_Input_Custom == "on"]
 import windows.Gaming.Input.Custom as Gaming_Input_Custom
 import windows._impl_l1 as _impl_l1
 import windows_collections as windows_collections
@@ -740,20 +738,23 @@ public struct ILegacyGipGameControllerProviderVtbl {
     public var IsFirmwareCorrupted: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsInterfaceSupported: CFunc<(CPointer<Unit>, GUID, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var IsSyntheticDevice: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var PreferredTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var PreferredTypes: UIntNative = UIntNative(0)
     public var ExecuteCommand: CFunc<(CPointer<Unit>, DeviceCommandAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetHomeLedIntensity: CFunc<(CPointer<Unit>, UInt8) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetExtendedDeviceInfo: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<UInt8>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var SetHeadsetOperation: CFunc<(CPointer<Unit>, HeadsetOperationAbi, UInt32, CPointer<UInt8>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var GetHeadsetOperation: CFunc<(CPointer<Unit>, HeadsetOperationAbi, CPointer<UInt32>, CPointer<CPointer<UInt8>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var AppCompatVersion: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
     public var SetStandardControllerButtonRemapping: CFunc<(CPointer<Unit>, CPointer<Unit>, Bool, CPointer<Unit>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_System != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_System != "on"]
     public var SetStandardControllerButtonRemapping: UIntNative = UIntNative(0)
-    @When[Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
     public var GetStandardControllerButtonRemapping: CFunc<(CPointer<Unit>, CPointer<Unit>, Bool, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_System != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_System != "on"]
     public var GetStandardControllerButtonRemapping: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -879,6 +880,7 @@ public class ILegacyGipGameControllerProvider <: InterfaceWrapperBase & ComInter
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PreferredTypes(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -931,14 +933,14 @@ public class ILegacyGipGameControllerProvider <: InterfaceWrapperBase & ComInter
         return result__
     }
 
-    @When[Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
     public unsafe func SetStandardControllerButtonRemapping(user: _impl_l1.User, previous: Bool, remapping: windows_collections.IMapView<RemappingButtonCategory, IInspectable>): Unit {
         let v = vtbl()
         let hr = v.SetStandardControllerButtonRemapping(asRaw(), user.asRaw(), previous, remapping.asRaw())
         HRESULT(hr).ok()
     }
 
-    @When[Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
     public unsafe func GetStandardControllerButtonRemapping(user: _impl_l1.User, previous: Bool): windows_collections.IMapView<RemappingButtonCategory, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1198,6 +1200,7 @@ public class LegacyGipGameControllerProvider <: InterfaceWrapperBase & ComInterf
         return defaultInterface().IsSyntheticDevice()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PreferredTypes(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().PreferredTypes()
     }
@@ -1226,12 +1229,12 @@ public class LegacyGipGameControllerProvider <: InterfaceWrapperBase & ComInterf
         return defaultInterface().AppCompatVersion()
     }
 
-    @When[Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
     public unsafe func SetStandardControllerButtonRemapping(user: _impl_l1.User, previous: Bool, remapping: windows_collections.IMapView<RemappingButtonCategory, IInspectable>): Unit {
         defaultInterface().SetStandardControllerButtonRemapping(user, previous, remapping)
     }
 
-    @When[Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
     public unsafe func GetStandardControllerButtonRemapping(user: _impl_l1.User, previous: Bool): windows_collections.IMapView<RemappingButtonCategory, IInspectable> {
         return defaultInterface().GetStandardControllerButtonRemapping(user, previous)
     }

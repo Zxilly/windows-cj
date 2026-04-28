@@ -13,9 +13,9 @@ public struct IUserDataAccount4Vtbl {
     public var SetCanShowCreateContactGroup: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
     @When[Windows_Foundation_Collections == "on"]
     public var ProviderProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_ApplicationModel_UserDataTasks == "on"]
+    @When[Windows_ApplicationModel_UserDataTasks == "on" && Windows_Foundation_Collections == "on"]
     public var FindUserDataTaskListsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_ApplicationModel_Contacts == "on"]
+    @When[Windows_ApplicationModel_Contacts == "on" && Windows_Foundation_Collections == "on"]
     public var FindContactGroupsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var TryShowCreateContactGroupAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetIsProtectedUnderLock: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
@@ -83,14 +83,14 @@ public class IUserDataAccount4 <: InterfaceWrapperBase & ComInterface {
         return __vt.ProviderProperties(__liveRaw, result__)
     }
 
-    @When[Windows_ApplicationModel_UserDataTasks == "on"]
+    @When[Windows_ApplicationModel_UserDataTasks == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindUserDataTaskListsAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindUserDataTaskListsAsync(__liveRaw, result__)
     }
 
-    @When[Windows_ApplicationModel_Contacts == "on"]
+    @When[Windows_ApplicationModel_Contacts == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindContactGroupsAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

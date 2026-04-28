@@ -4,11 +4,8 @@
 package windows.Win32.Security.DirectoryServices
 
 import std.collection.*
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
-@When[Windows_Win32_Security_Authorization_UI == "on"]
 import windows.Win32.Security.Authorization.UI as Win32_Security_Authorization_UI
 import windows.Win32._impl_l0 as Win32__impl_l0
 
@@ -19,28 +16,52 @@ public type PFNREADOBJECTSECURITY = CFunc<(CPointer<UInt16>, UInt32, CPointer<Wi
 @When[Windows_Win32_Security_DirectoryServices == "on" && Windows_Win32_Security == "on"]
 public type PFNWRITEOBJECTSECURITY = CFunc<(CPointer<UInt16>, UInt32, Win32_Security.PSECURITY_DESCRIPTOR, IntNative) -> Int32>
 
-@When[DSSEC == "on" && (Windows_Win32_Security == "on" && Windows_Win32_Security_Authorization_UI == "on")]
+@When[Windows_Win32_Security_DirectoryServices == "on" && DSSEC == "on" && Windows_Win32_Security_DirectoryServices_DSCreateISecurityInfoObject == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security_Authorization_UI == "on"]
 foreign {
     // param-hint: pfnReadSD optional
     // param-hint: pfnWriteSD optional
     func DSCreateISecurityInfoObject(pwszObjectPath: CPointer<UInt16>, pwszObjectClass: CPointer<UInt16>, dwFlags: UInt32, ppSI: CPointer<CPointer<Unit>>, pfnReadSD: PFNREADOBJECTSECURITY, pfnWriteSD: PFNWRITEOBJECTSECURITY, lpContext: IntNative): Int32
+}
+
+@When[Windows_Win32_Security_DirectoryServices == "on" && DSSEC == "on" && Windows_Win32_Security_DirectoryServices_DSCreateISecurityInfoObject == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security_Authorization_UI == "on"]
+public unsafe func Windows_DSCreateISecurityInfoObject(pwszObjectPath: CPointer<UInt16>, pwszObjectClass: CPointer<UInt16>, dwFlags: UInt32, ppSI: CPointer<CPointer<Unit>>, pfnReadSD: PFNREADOBJECTSECURITY, pfnWriteSD: PFNWRITEOBJECTSECURITY, lpContext: IntNative): Int32 {
+    return DSCreateISecurityInfoObject(pwszObjectPath, pwszObjectClass, dwFlags, ppSI, pfnReadSD, pfnWriteSD, lpContext)
+}
+
+@When[Windows_Win32_Security_DirectoryServices == "on" && DSSEC == "on" && Windows_Win32_Security_DirectoryServices_DSCreateISecurityInfoObjectEx == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security_Authorization_UI == "on"]
+foreign {
     // param-hint: pfnReadSD optional
     // param-hint: pfnWriteSD optional
     func DSCreateISecurityInfoObjectEx(pwszObjectPath: CPointer<UInt16>, pwszObjectClass: CPointer<UInt16>, pwszServer: CPointer<UInt16>, pwszUserName: CPointer<UInt16>, pwszPassword: CPointer<UInt16>, dwFlags: UInt32, ppSI: CPointer<CPointer<Unit>>, pfnReadSD: PFNREADOBJECTSECURITY, pfnWriteSD: PFNWRITEOBJECTSECURITY, lpContext: IntNative): Int32
 }
 
-@When[DSSEC == "on" && (Windows_Win32_Security == "on" && Windows_Win32_UI_Controls == "on")]
+@When[Windows_Win32_Security_DirectoryServices == "on" && DSSEC == "on" && Windows_Win32_Security_DirectoryServices_DSCreateISecurityInfoObjectEx == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security_Authorization_UI == "on"]
+public unsafe func Windows_DSCreateISecurityInfoObjectEx(pwszObjectPath: CPointer<UInt16>, pwszObjectClass: CPointer<UInt16>, pwszServer: CPointer<UInt16>, pwszUserName: CPointer<UInt16>, pwszPassword: CPointer<UInt16>, dwFlags: UInt32, ppSI: CPointer<CPointer<Unit>>, pfnReadSD: PFNREADOBJECTSECURITY, pfnWriteSD: PFNWRITEOBJECTSECURITY, lpContext: IntNative): Int32 {
+    return DSCreateISecurityInfoObjectEx(pwszObjectPath, pwszObjectClass, pwszServer, pwszUserName, pwszPassword, dwFlags, ppSI, pfnReadSD, pfnWriteSD, lpContext)
+}
+
+@When[Windows_Win32_Security_DirectoryServices == "on" && DSSEC == "on" && Windows_Win32_Security_DirectoryServices_DSCreateSecurityPage == "on" && Windows_Win32_Security == "on" && Windows_Win32_UI_Controls == "on"]
 foreign {
     // param-hint: pfnReadSD optional
     // param-hint: pfnWriteSD optional
     func DSCreateSecurityPage(pwszObjectPath: CPointer<UInt16>, pwszObjectClass: CPointer<UInt16>, dwFlags: UInt32, phPage: CPointer<Win32__impl_l0.HPROPSHEETPAGE>, pfnReadSD: PFNREADOBJECTSECURITY, pfnWriteSD: PFNWRITEOBJECTSECURITY, lpContext: IntNative): Int32
 }
 
-@When[DSSEC == "on" && Windows_Win32_Security == "on"]
+@When[Windows_Win32_Security_DirectoryServices == "on" && DSSEC == "on" && Windows_Win32_Security_DirectoryServices_DSCreateSecurityPage == "on" && Windows_Win32_Security == "on" && Windows_Win32_UI_Controls == "on"]
+public unsafe func Windows_DSCreateSecurityPage(pwszObjectPath: CPointer<UInt16>, pwszObjectClass: CPointer<UInt16>, dwFlags: UInt32, phPage: CPointer<Win32__impl_l0.HPROPSHEETPAGE>, pfnReadSD: PFNREADOBJECTSECURITY, pfnWriteSD: PFNWRITEOBJECTSECURITY, lpContext: IntNative): Int32 {
+    return DSCreateSecurityPage(pwszObjectPath, pwszObjectClass, dwFlags, phPage, pfnReadSD, pfnWriteSD, lpContext)
+}
+
+@When[Windows_Win32_Security_DirectoryServices == "on" && DSSEC == "on" && Windows_Win32_Security_DirectoryServices_DSEditSecurity == "on" && Windows_Win32_Security == "on"]
 foreign {
     // param-hint: pfnReadSD optional
     // param-hint: pfnWriteSD optional
     func DSEditSecurity(hwndOwner: CPointer<Unit>, pwszObjectPath: CPointer<UInt16>, pwszObjectClass: CPointer<UInt16>, dwFlags: UInt32, pwszCaption: CPointer<UInt16>, pfnReadSD: PFNREADOBJECTSECURITY, pfnWriteSD: PFNWRITEOBJECTSECURITY, lpContext: IntNative): Int32
+}
+
+@When[Windows_Win32_Security_DirectoryServices == "on" && DSSEC == "on" && Windows_Win32_Security_DirectoryServices_DSEditSecurity == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_DSEditSecurity(hwndOwner: CPointer<Unit>, pwszObjectPath: CPointer<UInt16>, pwszObjectClass: CPointer<UInt16>, dwFlags: UInt32, pwszCaption: CPointer<UInt16>, pfnReadSD: PFNREADOBJECTSECURITY, pfnWriteSD: PFNWRITEOBJECTSECURITY, lpContext: IntNative): Int32 {
+    return DSEditSecurity(hwndOwner, pwszObjectPath, pwszObjectClass, dwFlags, pwszCaption, pfnReadSD, pfnWriteSD, lpContext)
 }
 
 @When[Windows_Win32_Security_DirectoryServices == "on"]

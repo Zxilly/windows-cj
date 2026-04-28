@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -716,9 +715,9 @@ extend IWiFiDirectServiceProvisioningInfo <: windows_core.Interface<IWiFiDirectS
 @C
 public struct IWiFiDirectServiceRemotePortAddedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public var EndpointPairs: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Networking != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Networking != "on"]
     public var EndpointPairs: UIntNative = UIntNative(0)
     public var Protocol: CFunc<(CPointer<Unit>, CPointer<WiFiDirectServiceIPProtocolAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -789,7 +788,7 @@ public class IWiFiDirectServiceRemotePortAddedEventArgs <: InterfaceWrapperBase 
         readVtbl<IWiFiDirectServiceRemotePortAddedEventArgsVtbl>(IWiFiDirectServiceRemotePortAddedEventArgsVtbl())
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func EndpointPairs(): windows_collections.IVectorView<_impl_l1.EndpointPair> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -975,7 +974,7 @@ public class WiFiDirectServiceRemotePortAddedEventArgs <: InterfaceWrapperBase &
         }
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func EndpointPairs(): windows_collections.IVectorView<_impl_l1.EndpointPair> {
         return defaultInterface().EndpointPairs()
     }
@@ -1424,7 +1423,10 @@ public struct IWiFiDirectServiceVtbl {
     public var RemoteServiceInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams != "on"]
     public var RemoteServiceInfo: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedConfigurationMethods: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedConfigurationMethods: UIntNative = UIntNative(0)
     public var PreferGroupOwnerMode: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetPreferGroupOwnerMode: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams == "on"]
@@ -1518,6 +1520,7 @@ public class IWiFiDirectService <: InterfaceWrapperBase & ComInterface & Runtime
         return _impl_l0.IBuffer.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedConfigurationMethods(): windows_collections.IVectorView<WiFiDirectServiceConfigurationMethod> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1611,7 +1614,10 @@ extend IWiFiDirectService <: windows_core.Interface<IWiFiDirectService> {}
 public struct IWiFiDirectServiceAdvertiserVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var ServiceName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var ServiceNamePrefixes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ServiceNamePrefixes: UIntNative = UIntNative(0)
     @When[Windows_Storage_Streams == "on"]
     public var ServiceInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams != "on"]
@@ -1624,7 +1630,10 @@ public struct IWiFiDirectServiceAdvertiserVtbl {
     public var SetAutoAcceptSession: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var PreferGroupOwnerMode: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetPreferGroupOwnerMode: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var PreferredConfigurationMethods: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var PreferredConfigurationMethods: UIntNative = UIntNative(0)
     public var ServiceStatus: CFunc<(CPointer<Unit>, CPointer<WiFiDirectServiceStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetServiceStatus: CFunc<(CPointer<Unit>, WiFiDirectServiceStatusAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CustomServiceStatusCode: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1731,6 +1740,7 @@ public class IWiFiDirectServiceAdvertiser <: InterfaceWrapperBase & ComInterface
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ServiceNamePrefixes(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1783,6 +1793,7 @@ public class IWiFiDirectServiceAdvertiser <: InterfaceWrapperBase & ComInterface
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PreferredConfigurationMethods(): windows_collections.IVector<WiFiDirectServiceConfigurationMethod> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2121,9 +2132,9 @@ public struct IWiFiDirectServiceSessionVtbl {
     public var AdvertisementId: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ServiceAddress: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SessionAddress: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public var GetConnectionEndpointPairs: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Networking != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Networking != "on"]
     public var GetConnectionEndpointPairs: UIntNative = UIntNative(0)
     public var SessionStatusChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveSessionStatusChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -2273,7 +2284,7 @@ public class IWiFiDirectServiceSession <: InterfaceWrapperBase & ComInterface & 
         return windows_core.HString.fromAbiTake(result__)
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func GetConnectionEndpointPairs(): windows_collections.IVectorView<_impl_l1.EndpointPair> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2513,6 +2524,7 @@ public class WiFiDirectService <: InterfaceWrapperBase & ComInterface & windows_
         return defaultInterface().RemoteServiceInfo()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedConfigurationMethods(): windows_collections.IVectorView<WiFiDirectServiceConfigurationMethod> {
         return defaultInterface().SupportedConfigurationMethods()
     }
@@ -2685,6 +2697,7 @@ public class WiFiDirectServiceAdvertiser <: InterfaceWrapperBase & ComInterface 
         return defaultInterface().ServiceName()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ServiceNamePrefixes(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().ServiceNamePrefixes()
     }
@@ -2715,6 +2728,7 @@ public class WiFiDirectServiceAdvertiser <: InterfaceWrapperBase & ComInterface 
         defaultInterface().SetPreferGroupOwnerMode(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PreferredConfigurationMethods(): windows_collections.IVector<WiFiDirectServiceConfigurationMethod> {
         return defaultInterface().PreferredConfigurationMethods()
     }
@@ -3026,7 +3040,7 @@ public class WiFiDirectServiceSession <: InterfaceWrapperBase & ComInterface & w
         return defaultInterface().SessionAddress()
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func GetConnectionEndpointPairs(): windows_collections.IVectorView<_impl_l1.EndpointPair> {
         return defaultInterface().GetConnectionEndpointPairs()
     }

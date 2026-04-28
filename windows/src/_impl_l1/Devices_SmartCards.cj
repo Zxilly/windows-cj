@@ -627,9 +627,9 @@ extend ISmartCardAppletIdGroup2 <: windows_core.Interface<ISmartCardAppletIdGrou
 @C
 public struct ISmartCardAppletIdGroupFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, _impl_l0.SmartCardEmulationCategoryAbi, _impl_l0.SmartCardEmulationTypeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
     public var Create: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -699,7 +699,7 @@ public class ISmartCardAppletIdGroupFactory <: InterfaceWrapperBase & ComInterfa
         readVtbl<ISmartCardAppletIdGroupFactoryVtbl>(ISmartCardAppletIdGroupFactoryVtbl())
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func Create(displayName: windows_core.HString, appletIds: windows_collections.IVector<_impl_l0.IBuffer>, emulationCategory: _impl_l0.SmartCardEmulationCategory, emulationType: _impl_l0.SmartCardEmulationType): SmartCardAppletIdGroup {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -720,7 +720,10 @@ public struct ISmartCardAppletIdGroupRegistrationVtbl {
     public var AppletIdGroup: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var RequestActivationPolicyChangeAsync: CFunc<(CPointer<Unit>, _impl_l0.SmartCardAppletIdGroupActivationPolicyAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var Id: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetAutomaticResponseApdusAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SetAutomaticResponseApdusAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -821,6 +824,7 @@ public class ISmartCardAppletIdGroupRegistration <: InterfaceWrapperBase & ComIn
         return GuidValue(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetAutomaticResponseApdusAsync(apdus: windows_collections.IIterable<SmartCardAutomaticResponseApdu>): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1011,11 +1015,26 @@ extend ISmartCardConnect <: windows_core.Interface<ISmartCardConnect> {}
 @C
 public struct ISmartCardCryptogramGeneratorVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedCryptogramMaterialTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedCryptogramMaterialTypes: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedCryptogramAlgorithms: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedCryptogramAlgorithms: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedCryptogramMaterialPackageFormats: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedCryptogramMaterialPackageFormats: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedCryptogramMaterialPackageConfirmationResponseFormats: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedCryptogramMaterialPackageConfirmationResponseFormats: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedSmartCardCryptogramStorageKeyCapabilities: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedSmartCardCryptogramStorageKeyCapabilities: UIntNative = UIntNative(0)
     public var DeleteCryptogramMaterialStorageKeyAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var CreateCryptogramMaterialStorageKeyAsync: CFunc<(CPointer<Unit>, _impl_l0.SmartCardUnlockPromptingBehaviorAbi, CPointer<Unit>, _impl_l0.SmartCardCryptogramStorageKeyAlgorithmAbi, _impl_l0.SmartCardCryptogramStorageKeyCapabilitiesAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_Security_Cryptography_Core == "on"]
@@ -1100,6 +1119,7 @@ public class ISmartCardCryptogramGenerator <: InterfaceWrapperBase & ComInterfac
         readVtbl<ISmartCardCryptogramGeneratorVtbl>(ISmartCardCryptogramGeneratorVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedCryptogramMaterialTypes(): windows_collections.IVectorView<_impl_l0.SmartCardCryptogramMaterialType> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1108,6 +1128,7 @@ public class ISmartCardCryptogramGenerator <: InterfaceWrapperBase & ComInterfac
         return windows_collections.IVectorView<_impl_l0.SmartCardCryptogramMaterialType>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedCryptogramAlgorithms(): windows_collections.IVectorView<_impl_l0.SmartCardCryptogramAlgorithm> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1116,6 +1137,7 @@ public class ISmartCardCryptogramGenerator <: InterfaceWrapperBase & ComInterfac
         return windows_collections.IVectorView<_impl_l0.SmartCardCryptogramAlgorithm>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedCryptogramMaterialPackageFormats(): windows_collections.IVectorView<_impl_l0.SmartCardCryptogramMaterialPackageFormat> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1124,6 +1146,7 @@ public class ISmartCardCryptogramGenerator <: InterfaceWrapperBase & ComInterfac
         return windows_collections.IVectorView<_impl_l0.SmartCardCryptogramMaterialPackageFormat>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedCryptogramMaterialPackageConfirmationResponseFormats(): windows_collections.IVectorView<_impl_l0.SmartCardCryptogramMaterialPackageConfirmationResponseFormat> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1132,6 +1155,7 @@ public class ISmartCardCryptogramGenerator <: InterfaceWrapperBase & ComInterfac
         return windows_collections.IVectorView<_impl_l0.SmartCardCryptogramMaterialPackageConfirmationResponseFormat>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedSmartCardCryptogramStorageKeyCapabilities(): windows_collections.IVectorView<_impl_l0.SmartCardCryptogramStorageKeyCapabilities> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1207,9 +1231,9 @@ extend ISmartCardCryptogramGenerator <: windows_core.Interface<ISmartCardCryptog
 @C
 public struct ISmartCardCryptogramGenerator2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var ValidateRequestApduAsync: CFunc<(CPointer<Unit>, _impl_l0.SmartCardUnlockPromptingBehaviorAbi, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
     public var ValidateRequestApduAsync: UIntNative = UIntNative(0)
     public var GetAllCryptogramStorageKeyCharacteristicsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetAllCryptogramMaterialPackageCharacteristicsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1283,7 +1307,7 @@ public class ISmartCardCryptogramGenerator2 <: InterfaceWrapperBase & ComInterfa
         readVtbl<ISmartCardCryptogramGenerator2Vtbl>(ISmartCardCryptogramGenerator2Vtbl())
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func ValidateRequestApduAsync(promptingBehavior: _impl_l0.SmartCardUnlockPromptingBehavior, apduToValidate: _impl_l0.IBuffer, cryptogramPlacementSteps: windows_collections.IIterable<_impl_l0.SmartCardCryptogramPlacementStep>): windows_future.IAsyncOperation<_impl_l0.SmartCardCryptogramGeneratorOperationStatus> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1418,7 +1442,10 @@ extend ISmartCardCryptogramGeneratorStatics <: windows_core.Interface<ISmartCard
 public struct ISmartCardCryptogramGetAllCryptogramMaterialCharacteristicsResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var OperationStatus: CFunc<(CPointer<Unit>, CPointer<_impl_l0.SmartCardCryptogramGeneratorOperationStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Characteristics: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Characteristics: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1495,6 +1522,7 @@ public class ISmartCardCryptogramGetAllCryptogramMaterialCharacteristicsResult <
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.SmartCardCryptogramGeneratorOperationStatus>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Characteristics(): windows_collections.IVectorView<SmartCardCryptogramMaterialCharacteristics> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1512,7 +1540,10 @@ extend ISmartCardCryptogramGetAllCryptogramMaterialCharacteristicsResult <: wind
 public struct ISmartCardCryptogramGetAllCryptogramMaterialPackageCharacteristicsResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var OperationStatus: CFunc<(CPointer<Unit>, CPointer<_impl_l0.SmartCardCryptogramGeneratorOperationStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Characteristics: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Characteristics: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1589,6 +1620,7 @@ public class ISmartCardCryptogramGetAllCryptogramMaterialPackageCharacteristicsR
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.SmartCardCryptogramGeneratorOperationStatus>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Characteristics(): windows_collections.IVectorView<SmartCardCryptogramMaterialPackageCharacteristics> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1606,7 +1638,10 @@ extend ISmartCardCryptogramGetAllCryptogramMaterialPackageCharacteristicsResult 
 public struct ISmartCardCryptogramGetAllCryptogramStorageKeyCharacteristicsResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var OperationStatus: CFunc<(CPointer<Unit>, CPointer<_impl_l0.SmartCardCryptogramGeneratorOperationStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Characteristics: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Characteristics: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1683,6 +1718,7 @@ public class ISmartCardCryptogramGetAllCryptogramStorageKeyCharacteristicsResult
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.SmartCardCryptogramGeneratorOperationStatus>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Characteristics(): windows_collections.IVectorView<SmartCardCryptogramStorageKeyCharacteristics> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1943,13 +1979,13 @@ extend ISmartCardEmulatorApduReceivedEventArgs <: windows_core.Interface<ISmartC
 @C
 public struct ISmartCardEmulatorApduReceivedEventArgsWithCryptogramsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var TryRespondWithCryptogramsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
     public var TryRespondWithCryptogramsAsync: UIntNative = UIntNative(0)
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var TryRespondWithCryptogramsAndStateAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
     public var TryRespondWithCryptogramsAndStateAsync: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -2019,7 +2055,7 @@ public class ISmartCardEmulatorApduReceivedEventArgsWithCryptograms <: Interface
         readVtbl<ISmartCardEmulatorApduReceivedEventArgsWithCryptogramsVtbl>(ISmartCardEmulatorApduReceivedEventArgsWithCryptogramsVtbl())
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func TryRespondWithCryptogramsAsync(responseTemplate: _impl_l0.IBuffer, cryptogramPlacementSteps: windows_collections.IIterable<_impl_l0.SmartCardCryptogramPlacementStep>): windows_future.IAsyncOperation<_impl_l0.SmartCardCryptogramGeneratorOperationStatus> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2028,7 +2064,7 @@ public class ISmartCardEmulatorApduReceivedEventArgsWithCryptograms <: Interface
         return windows_future.IAsyncOperation<_impl_l0.SmartCardCryptogramGeneratorOperationStatus>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func TryRespondWithCryptogramsAndStateAsync(responseTemplate: _impl_l0.IBuffer, cryptogramPlacementSteps: windows_collections.IIterable<_impl_l0.SmartCardCryptogramPlacementStep>, nextState: Foundation.IReference<UInt32>): windows_future.IAsyncOperation<_impl_l0.SmartCardCryptogramGeneratorOperationStatus> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2224,7 +2260,10 @@ extend ISmartCardEmulatorStatics <: windows_core.Interface<ISmartCardEmulatorSta
 @C
 public struct ISmartCardEmulatorStatics2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAppletIdGroupRegistrationsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAppletIdGroupRegistrationsAsync: UIntNative = UIntNative(0)
     public var RegisterAppletIdGroupAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var UnregisterAppletIdGroupAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var MaxAppletIdGroupRegistrations: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -2296,6 +2335,7 @@ public class ISmartCardEmulatorStatics2 <: InterfaceWrapperBase & ComInterface &
         readVtbl<ISmartCardEmulatorStatics2Vtbl>(ISmartCardEmulatorStatics2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAppletIdGroupRegistrationsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<SmartCardAppletIdGroupRegistration>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2810,7 +2850,10 @@ public struct ISmartCardReaderVtbl {
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Kind: CFunc<(CPointer<Unit>, CPointer<_impl_l0.SmartCardReaderKindAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetStatusAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllCardsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllCardsAsync: UIntNative = UIntNative(0)
     public var CardAdded: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveCardAdded: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CardRemoved: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -2915,6 +2958,7 @@ public class ISmartCardReader <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_future.IAsyncOperation<_impl_l0.SmartCardReaderStatus>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllCardsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<SmartCard>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3480,7 +3524,7 @@ public class SmartCardAppletIdGroup <: InterfaceWrapperBase & ComInterface & win
         defaultInterface().SetDisplayName(value)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func AppletIds(): windows_collections.IVector<_impl_l0.IBuffer> {
         return defaultInterface().AppletIds()
     }
@@ -3520,7 +3564,7 @@ public class SmartCardAppletIdGroup <: InterfaceWrapperBase & ComInterface & win
         }
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public static unsafe func Create(displayName: windows_core.HString, appletIds: windows_collections.IVector<_impl_l0.IBuffer>, emulationCategory: _impl_l0.SmartCardEmulationCategory, emulationType: _impl_l0.SmartCardEmulationType): SmartCardAppletIdGroup {
         var result__: Option<SmartCardAppletIdGroup> = Option<SmartCardAppletIdGroup>.None
         try (factory__ = windows_core.factory<SmartCardAppletIdGroup, ISmartCardAppletIdGroupFactory>().unwrap()) {
@@ -3636,6 +3680,7 @@ public class SmartCardAppletIdGroupRegistration <: InterfaceWrapperBase & ComInt
         return defaultInterface().Id()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetAutomaticResponseApdusAsync(apdus: windows_collections.IIterable<SmartCardAutomaticResponseApdu>): windows_future.IAsyncAction {
         return defaultInterface().SetAutomaticResponseApdusAsync(apdus)
     }
@@ -4104,22 +4149,27 @@ public class SmartCardCryptogramGenerator <: InterfaceWrapperBase & ComInterface
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedCryptogramMaterialTypes(): windows_collections.IVectorView<_impl_l0.SmartCardCryptogramMaterialType> {
         return defaultInterface().SupportedCryptogramMaterialTypes()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedCryptogramAlgorithms(): windows_collections.IVectorView<_impl_l0.SmartCardCryptogramAlgorithm> {
         return defaultInterface().SupportedCryptogramAlgorithms()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedCryptogramMaterialPackageFormats(): windows_collections.IVectorView<_impl_l0.SmartCardCryptogramMaterialPackageFormat> {
         return defaultInterface().SupportedCryptogramMaterialPackageFormats()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedCryptogramMaterialPackageConfirmationResponseFormats(): windows_collections.IVectorView<_impl_l0.SmartCardCryptogramMaterialPackageConfirmationResponseFormat> {
         return defaultInterface().SupportedCryptogramMaterialPackageConfirmationResponseFormats()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedSmartCardCryptogramStorageKeyCapabilities(): windows_collections.IVectorView<_impl_l0.SmartCardCryptogramStorageKeyCapabilities> {
         return defaultInterface().SupportedSmartCardCryptogramStorageKeyCapabilities()
     }
@@ -4280,6 +4330,7 @@ public class SmartCardCryptogramGetAllCryptogramMaterialCharacteristicsResult <:
         return defaultInterface().OperationStatus()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Characteristics(): windows_collections.IVectorView<SmartCardCryptogramMaterialCharacteristics> {
         return defaultInterface().Characteristics()
     }
@@ -4387,6 +4438,7 @@ public class SmartCardCryptogramGetAllCryptogramMaterialPackageCharacteristicsRe
         return defaultInterface().OperationStatus()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Characteristics(): windows_collections.IVectorView<SmartCardCryptogramMaterialPackageCharacteristics> {
         return defaultInterface().Characteristics()
     }
@@ -4494,6 +4546,7 @@ public class SmartCardCryptogramGetAllCryptogramStorageKeyCharacteristicsResult 
         return defaultInterface().OperationStatus()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Characteristics(): windows_collections.IVectorView<SmartCardCryptogramStorageKeyCharacteristics> {
         return defaultInterface().Characteristics()
     }
@@ -4601,14 +4654,17 @@ public class SmartCardCryptogramMaterialCharacteristics <: InterfaceWrapperBase 
         return defaultInterface().MaterialName()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AllowedAlgorithms(): windows_collections.IVectorView<_impl_l0.SmartCardCryptogramAlgorithm> {
         return defaultInterface().AllowedAlgorithms()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AllowedProofOfPossessionAlgorithms(): windows_collections.IVectorView<_impl_l0.SmartCardCryptogramMaterialPackageConfirmationResponseFormat> {
         return defaultInterface().AllowedProofOfPossessionAlgorithms()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AllowedValidations(): windows_collections.IVectorView<_impl_l0.SmartCardCryptogramAlgorithm> {
         return defaultInterface().AllowedValidations()
     }
@@ -5168,6 +5224,7 @@ public class SmartCardEmulator <: InterfaceWrapperBase & ComInterface & windows_
         return defaultInterface().EnablementPolicy()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetAppletIdGroupRegistrationsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<SmartCardAppletIdGroupRegistration>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<SmartCardAppletIdGroupRegistration>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<SmartCardAppletIdGroupRegistration>>>.None
         try (factory__ = windows_core.factory<SmartCardEmulator, ISmartCardEmulatorStatics2>().unwrap()) {
@@ -5774,12 +5831,14 @@ public class SmartCardPinResetHandler <: InterfaceWrapperBase & ComInterface & w
 @When[Windows_Devices_SmartCards == "on"]
 extend SmartCardPinResetHandler <: windows_core.Interface<SmartCardPinResetHandler> {}
 
+@When[Windows_Devices_SmartCards == "on"]
 private open class SmartCardPinResetHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_Devices_SmartCards == "on"]
 private open class SmartCardPinResetHandlerInvoker <: SmartCardPinResetHandlerInvokerErased {
     public open func Invoke(sender: InParam<SmartCardProvisioning>, request: InParam<SmartCardPinResetRequest>): Unit {
         ()
@@ -5791,6 +5850,7 @@ private open class SmartCardPinResetHandlerInvoker <: SmartCardPinResetHandlerIn
     }
 }
 
+@When[Windows_Devices_SmartCards == "on"]
 private class SmartCardPinResetHandlerBox <: SmartCardPinResetHandlerInvoker {
     public let invoke_: (InParam<SmartCardProvisioning>, InParam<SmartCardPinResetRequest>) -> Unit
     private let vtblHandle: CPointerHandle<SmartCardPinResetHandlerVtbl>
@@ -5809,6 +5869,7 @@ private class SmartCardPinResetHandlerBox <: SmartCardPinResetHandlerInvoker {
     }
 }
 
+@When[Windows_Devices_SmartCards == "on"]
 func buildSmartCardPinResetHandlerBoxVtbl(): SmartCardPinResetHandlerVtbl {
     var vtbl = SmartCardPinResetHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -6196,6 +6257,7 @@ public class SmartCardReader <: InterfaceWrapperBase & ComInterface & windows_in
         return defaultInterface().GetStatusAsync()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllCardsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<SmartCard>> {
         return defaultInterface().FindAllCardsAsync()
     }

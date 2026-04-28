@@ -4,7 +4,6 @@ package windows_sys.AI.Actions._impl_l0
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_UI == "on"]
 import windows_sys.UI as UI
 
 
@@ -738,6 +737,7 @@ public class IActionEntityFactory6 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IActionEntityFactory7Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateCustomTextEntity: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var CreateArrayEntityWithCustomKind: CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public init() {}
@@ -783,6 +783,7 @@ public class IActionEntityFactory7 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IActionEntityFactory7Vtbl>(IActionEntityFactory7Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateCustomTextEntity(kind: CPointer<Unit>, keyPhrase: CPointer<Unit>, props: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2095,6 +2096,7 @@ public struct ICustomTextActionEntityVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var CustomTextKind: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var KeyPhrase: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -2151,6 +2153,7 @@ public class ICustomTextActionEntity <: InterfaceWrapperBase & ComInterface {
         return __vt.KeyPhrase(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

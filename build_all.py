@@ -21,7 +21,6 @@ WINMD_INPUTS = (
 )
 GENERATED_ROOT_ARTIFACTS = (
     SYS / "cfg_list.toml",
-    SYS / "cfg.toml",
     SYS / "features.toml",
     SYS / "link-options.toml",
 )
@@ -168,7 +167,7 @@ def clean_generated_output(out_path: Path) -> None:
     if out_path.exists():
         for file_path in out_path.rglob("*.cj"):
             file_path.unlink()
-        for artifact_name in ("cfg_list.toml", "cfg.toml", "features.toml", "link-options.toml"):
+        for artifact_name in ("cfg_list.toml", "features.toml", "link-options.toml"):
             for file_path in out_path.rglob(artifact_name):
                 file_path.unlink()
         for directory in sorted(
@@ -210,14 +209,12 @@ def generated_artifact_root(out_path: Path) -> Path:
     return out_path
 
 
-def write_generated_cfg(out_path: Path) -> None:
+def verify_generated_cfg_list(out_path: Path) -> None:
     artifact_root = generated_artifact_root(out_path)
     cfg_list_path = artifact_root / "cfg_list.toml"
-    cfg_path = artifact_root / "cfg.toml"
     if not cfg_list_path.exists():
         print(f"cfg_list.toml was not generated at {cfg_list_path}", flush=True)
         sys.exit(1)
-    cfg_path.write_text(cfg_list_path.read_text(encoding="utf-8"), encoding="utf-8")
 
 
 def should_build_live_sys(out_path: Path, filters: list[str], args: argparse.Namespace) -> bool:
@@ -285,7 +282,7 @@ def main() -> None:
         print("[1/3] skipping bindgen build", flush=True)
 
     regenerate(out_path, filters, args.bindgen_jobs)
-    write_generated_cfg(out_path)
+    verify_generated_cfg_list(out_path)
 
     if args.skip_c_abi_audit:
         print("[audit] skipping C ABI ownership (--skip-c-abi-audit)", flush=True)

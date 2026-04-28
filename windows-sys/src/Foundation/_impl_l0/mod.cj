@@ -1460,6 +1460,7 @@ public struct IUriRuntimeClassVtbl {
     public var Password: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Path: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Query: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var QueryParsed: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var RawUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SchemeName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -1565,6 +1566,7 @@ public class IUriRuntimeClass <: InterfaceWrapperBase & ComInterface {
         return __vt.Query(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func QueryParsed(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1859,6 +1861,7 @@ public class IWwwFormUrlDecoderRuntimeClass <: InterfaceWrapperBase & ComInterfa
 @C
 public struct IWwwFormUrlDecoderRuntimeClassFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateWwwFormUrlDecoder: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -1903,6 +1906,7 @@ public class IWwwFormUrlDecoderRuntimeClassFactory <: InterfaceWrapperBase & Com
         readVtbl<IWwwFormUrlDecoderRuntimeClassFactoryVtbl>(IWwwFormUrlDecoderRuntimeClassFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateWwwFormUrlDecoder(query: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

@@ -3,10 +3,8 @@ package windows_sys.UI.Xaml._impl_l1
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Foundation_Numerics == "on"]
 import windows_sys.Foundation.Numerics as Foundation_Numerics
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_UI == "on"]
 import windows_sys.UI as UI
 @When[Windows_UI_Xaml_Interop == "on"]
 import windows_sys.UI.Xaml.Interop as UI_Xaml_Interop
@@ -1597,6 +1595,7 @@ public struct IEventTriggerVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var RoutedEvent: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetRoutedEvent: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Actions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1653,6 +1652,7 @@ public class IEventTrigger <: InterfaceWrapperBase & ComInterface {
         return __vt.SetRoutedEvent(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Actions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1664,6 +1664,7 @@ public class IEventTrigger <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IFrameworkElementVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Triggers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Resources: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetResources: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -1755,6 +1756,7 @@ public class IFrameworkElement <: InterfaceWrapperBase & ComInterface {
         readVtbl<IFrameworkElementVtbl>(IFrameworkElementVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Triggers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2893,9 +2895,9 @@ public struct IUIElementVtbl {
     public var RenderSize: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.Size>) -> Int32> = { _, _ => 0 }
     public var UseLayoutRounding: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var SetUseLayoutRounding: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public var Transitions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public var SetTransitions: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Xaml_Media == "on"]
     public var CacheMode: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -2913,7 +2915,7 @@ public struct IUIElementVtbl {
     public var ManipulationMode: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Xaml_Input == "on"]
     public var SetManipulationMode: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Input == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Input == "on"]
     public var PointerCaptures: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Xaml_Input == "on"]
     public var KeyUp: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
@@ -3167,14 +3169,14 @@ public class IUIElement <: InterfaceWrapperBase & ComInterface {
         return __vt.SetUseLayoutRounding(__liveRaw, value)
     }
 
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public unsafe func Transitions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Transitions(__liveRaw, result__)
     }
 
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public unsafe func SetTransitions(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3257,7 +3259,7 @@ public class IUIElement <: InterfaceWrapperBase & ComInterface {
         return __vt.SetManipulationMode(__liveRaw, value)
     }
 
-    @When[Windows_UI_Xaml_Input == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Input == "on"]
     public unsafe func PointerCaptures(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4081,7 +4083,7 @@ public class IUIElement4 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IUIElement5Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public var Lights: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Xaml_Input == "on"]
     public var KeyTipPlacementMode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -4171,7 +4173,7 @@ public class IUIElement5 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IUIElement5Vtbl>(IUIElement5Vtbl())
     }
 
-    @When[Windows_UI_Xaml_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media == "on"]
     public unsafe func Lights(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4368,7 +4370,7 @@ public class IUIElement5 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IUIElement7Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_UI_Xaml_Input == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Input == "on"]
     public var KeyboardAccelerators: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Xaml_Input == "on"]
     public var CharacterReceived: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
@@ -4427,7 +4429,7 @@ public class IUIElement7 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IUIElement7Vtbl>(IUIElement7Vtbl())
     }
 
-    @When[Windows_UI_Xaml_Input == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Input == "on"]
     public unsafe func KeyboardAccelerators(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4609,6 +4611,7 @@ public struct IUIElementOverridesVtbl {
     @When[Windows_UI_Xaml_Automation_Peers == "on"]
     public var OnCreateAutomationPeer: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var OnDisconnectVisualChildren: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindSubElementsForTouchTargeting: CFunc<(CPointer<Unit>, Foundation__impl_l0.Point, Foundation__impl_l0.Rect, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -4666,6 +4669,7 @@ public class IUIElementOverrides <: InterfaceWrapperBase & ComInterface {
         return __vt.OnDisconnectVisualChildren(__liveRaw)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindSubElementsForTouchTargeting(point: Foundation__impl_l0.Point, boundingRect: Foundation__impl_l0.Rect, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4960,6 +4964,7 @@ public class IVisualState <: InterfaceWrapperBase & ComInterface {
 public struct IVisualState2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Setters: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var StateTriggers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -5010,6 +5015,7 @@ public class IVisualState2 <: InterfaceWrapperBase & ComInterface {
         return __vt.Setters(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StateTriggers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -5116,7 +5122,9 @@ public class IVisualStateChangedEventArgs <: InterfaceWrapperBase & ComInterface
 public struct IVisualStateGroupVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Transitions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var States: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CurrentState: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CurrentStateChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
@@ -5172,12 +5180,14 @@ public class IVisualStateGroup <: InterfaceWrapperBase & ComInterface {
         return __vt.Name(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Transitions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Transitions(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func States(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -5397,6 +5407,7 @@ public class IVisualStateManagerProtected <: InterfaceWrapperBase & ComInterface
 @C
 public struct IVisualStateManagerStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetVisualStateGroups: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var CustomVisualStateManagerProperty: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetCustomVisualStateManager: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -5446,6 +5457,7 @@ public class IVisualStateManagerStatics <: InterfaceWrapperBase & ComInterface {
         readVtbl<IVisualStateManagerStaticsVtbl>(IVisualStateManagerStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetVisualStateGroups(obj: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

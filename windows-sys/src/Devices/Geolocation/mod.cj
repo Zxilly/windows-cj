@@ -1152,6 +1152,7 @@ public class IGeocoordinateWithPositionData <: InterfaceWrapperBase & ComInterfa
 @C
 public struct IGeopathVtbl {
     public var base_: IGeoshapeVtbl = IGeoshapeVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Positions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1196,6 +1197,7 @@ public class IGeopath <: InterfaceWrapperBase & ComInterface {
         readVtbl<IGeopathVtbl>(IGeopathVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Positions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1386,8 +1388,11 @@ public class IGeoboundingBoxFactory <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IGeoboundingBoxStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var TryCompute: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var TryComputeWithAltitudeReference: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var TryComputeWithAltitudeReferenceAndSpatialReference: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -1432,18 +1437,21 @@ public class IGeoboundingBoxStatics <: InterfaceWrapperBase & ComInterface {
         readVtbl<IGeoboundingBoxStaticsVtbl>(IGeoboundingBoxStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TryCompute(positions: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TryCompute(__liveRaw, positions, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TryComputeWithAltitudeReference(positions: CPointer<Unit>, altitudeRefSystem: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TryComputeWithAltitudeReference(__liveRaw, positions, altitudeRefSystem, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TryComputeWithAltitudeReferenceAndSpatialReference(positions: CPointer<Unit>, altitudeRefSystem: Int32, spatialReferenceId: UInt32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1719,7 +1727,9 @@ public class IGeolocator <: InterfaceWrapperBase & ComInterface {
 public struct IGeolocatorStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var RequestAccessAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetGeopositionHistoryAsync: CFunc<(CPointer<Unit>, Foundation__impl_l0.DateTime, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetGeopositionHistoryWithDurationAsync: CFunc<(CPointer<Unit>, Foundation__impl_l0.DateTime, Foundation__impl_l0.TimeSpan, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -1770,12 +1780,14 @@ public class IGeolocatorStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.RequestAccessAsync(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetGeopositionHistoryAsync(startTime: Foundation__impl_l0.DateTime, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetGeopositionHistoryAsync(__liveRaw, startTime, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetGeopositionHistoryWithDurationAsync(startTime: Foundation__impl_l0.DateTime, duration: Foundation__impl_l0.TimeSpan, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1849,8 +1861,11 @@ public class IGeolocatorWithScalarAccuracy <: InterfaceWrapperBase & ComInterfac
 @C
 public struct IGeopathFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateWithAltitudeReference: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateWithAltitudeReferenceAndSpatialReference: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -1895,18 +1910,21 @@ public class IGeopathFactory <: InterfaceWrapperBase & ComInterface {
         readVtbl<IGeopathFactoryVtbl>(IGeopathFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create(positions: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Create(__liveRaw, positions, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateWithAltitudeReference(positions: CPointer<Unit>, altitudeReferenceSystem: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateWithAltitudeReference(__liveRaw, positions, altitudeReferenceSystem, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateWithAltitudeReferenceAndSpatialReference(positions: CPointer<Unit>, altitudeReferenceSystem: Int32, spatialReferenceId: UInt32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2366,6 +2384,7 @@ public class IGeovisitStateChangedEventArgs <: InterfaceWrapperBase & ComInterfa
 @C
 public struct IGeovisitTriggerDetailsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ReadReports: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -2410,6 +2429,7 @@ public class IGeovisitTriggerDetails <: InterfaceWrapperBase & ComInterface {
         readVtbl<IGeovisitTriggerDetailsVtbl>(IGeovisitTriggerDetailsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReadReports(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

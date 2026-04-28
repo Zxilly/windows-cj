@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l0 as _impl_l0
 import windows_future as windows_future
@@ -307,7 +306,7 @@ public class IDecompressor <: InterfaceWrapperBase & ComInterface & RuntimeName 
 @When[Windows_Storage_Compression == "on"]
 extend IDecompressor <: windows_core.Interface<IDecompressor> {}
 
-@When[Windows_Storage_Compression == "on"]
+@When[Windows_Storage_Compression == "on" && Windows_Storage_Streams == "on"]
 public class Compressor <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -437,7 +436,7 @@ public class Compressor <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 }
 
-@When[Windows_Storage_Compression == "on"]
+@When[Windows_Storage_Compression == "on" && Windows_Storage_Streams == "on"]
 extend Compressor <: windows_core.HandleWinrtType<Compressor> {
     public static func intoWinrtHandle(value: Compressor): CPointer<Unit> {
         value.asRaw()
@@ -455,7 +454,7 @@ extend Compressor <: windows_core.HandleWinrtType<Compressor> {
     }
 }
 
-@When[Windows_Storage_Compression == "on"]
+@When[Windows_Storage_Compression == "on" && Windows_Storage_Streams == "on"]
 public class Decompressor <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -564,7 +563,7 @@ public class Decompressor <: InterfaceWrapperBase & ComInterface & windows_inter
     }
 }
 
-@When[Windows_Storage_Compression == "on"]
+@When[Windows_Storage_Compression == "on" && Windows_Storage_Streams == "on"]
 extend Decompressor <: windows_core.HandleWinrtType<Decompressor> {
     public static func intoWinrtHandle(value: Decompressor): CPointer<Unit> {
         value.asRaw()

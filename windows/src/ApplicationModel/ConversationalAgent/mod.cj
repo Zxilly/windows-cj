@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows.Media._impl_l0 as Media__impl_l0
 import windows._impl_l0 as _impl_l0
@@ -1106,8 +1105,14 @@ public struct IConversationalAgentSession2Vtbl {
     public var RequestActivation: CFunc<(CPointer<Unit>, ConversationalAgentActivationKindAbi, CPointer<ConversationalAgentActivationResultAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var SetSupportLockScreenActivationAsync: CFunc<(CPointer<Unit>, Bool, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var SetSupportLockScreenActivation: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetMissingPrerequisites: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetMissingPrerequisites: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetMissingPrerequisitesAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetMissingPrerequisitesAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1206,6 +1211,7 @@ public class IConversationalAgentSession2 <: InterfaceWrapperBase & ComInterface
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetMissingPrerequisites(): windows_collections.IVectorView<ConversationalAgentVoiceActivationPrerequisiteKind> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1214,6 +1220,7 @@ public class IConversationalAgentSession2 <: InterfaceWrapperBase & ComInterface
         return windows_collections.IVectorView<ConversationalAgentVoiceActivationPrerequisiteKind>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetMissingPrerequisitesAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<ConversationalAgentVoiceActivationPrerequisiteKind>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2516,7 +2523,10 @@ extend DetectionConfigurationAvailabilityChangedEventArgs <: windows_core.Handle
 @C
 public struct IDetectionConfigurationAvailabilityInfo2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var UnavailableSystemResources: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var UnavailableSystemResources: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2585,6 +2595,7 @@ public class IDetectionConfigurationAvailabilityInfo2 <: InterfaceWrapperBase & 
         readVtbl<IDetectionConfigurationAvailabilityInfo2Vtbl>(IDetectionConfigurationAvailabilityInfo2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UnavailableSystemResources(): windows_collections.IVectorView<SignalDetectorResourceKind> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3079,22 +3090,27 @@ public class ActivationSignalDetector <: InterfaceWrapperBase & ComInterface & w
         return defaultInterface().CanCreateConfigurations()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedModelDataTypes(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().SupportedModelDataTypes()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedTrainingDataFormats(): windows_collections.IVectorView<ActivationSignalDetectionTrainingDataFormat> {
         return defaultInterface().SupportedTrainingDataFormats()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedPowerStates(): windows_collections.IVectorView<ActivationSignalDetectorPowerState> {
         return defaultInterface().SupportedPowerStates()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSupportedModelIdsForSignalId(signalId: windows_core.HString): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().GetSupportedModelIdsForSignalId(signalId)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSupportedModelIdsForSignalIdAsync(signalId: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVectorView<windows_core.HString>> {
         return defaultInterface().GetSupportedModelIdsForSignalIdAsync(signalId)
     }
@@ -3107,10 +3123,12 @@ public class ActivationSignalDetector <: InterfaceWrapperBase & ComInterface & w
         return defaultInterface().CreateConfigurationAsync(signalId, modelId, displayName)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetConfigurations(): windows_collections.IVectorView<ActivationSignalDetectionConfiguration> {
         return defaultInterface().GetConfigurations()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetConfigurationsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<ActivationSignalDetectionConfiguration>> {
         return defaultInterface().GetConfigurationsAsync()
     }
@@ -3219,18 +3237,22 @@ public class ConversationalAgentDetectorManager <: InterfaceWrapperBase & ComInt
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAllActivationSignalDetectors(): windows_collections.IVectorView<ActivationSignalDetector> {
         return defaultInterface().GetAllActivationSignalDetectors()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAllActivationSignalDetectorsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<ActivationSignalDetector>> {
         return defaultInterface().GetAllActivationSignalDetectorsAsync()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetActivationSignalDetectors(kind: ActivationSignalDetectorKind): windows_collections.IVectorView<ActivationSignalDetector> {
         return defaultInterface().GetActivationSignalDetectors(kind)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetActivationSignalDetectorsAsync(kind: ActivationSignalDetectorKind): windows_future.IAsyncOperation<windows_collections.IVectorView<ActivationSignalDetector>> {
         return defaultInterface().GetActivationSignalDetectorsAsync(kind)
     }
@@ -3471,10 +3493,12 @@ public class ConversationalAgentSession <: InterfaceWrapperBase & ComInterface &
         return defaultInterface().SetSignalModelId(signalModelId)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSupportedSignalModelIdsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<UInt32>> {
         return defaultInterface().GetSupportedSignalModelIdsAsync()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSupportedSignalModelIds(): windows_collections.IVectorView<UInt32> {
         return defaultInterface().GetSupportedSignalModelIds()
     }
@@ -3931,15 +3955,36 @@ public struct IActivationSignalDetectorVtbl {
     public var ProviderId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Kind: CFunc<(CPointer<Unit>, CPointer<ActivationSignalDetectorKindAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CanCreateConfigurations: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedModelDataTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedModelDataTypes: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedTrainingDataFormats: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedTrainingDataFormats: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedPowerStates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedPowerStates: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSupportedModelIdsForSignalId: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetSupportedModelIdsForSignalId: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSupportedModelIdsForSignalIdAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetSupportedModelIdsForSignalIdAsync: UIntNative = UIntNative(0)
     public var CreateConfiguration: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var CreateConfigurationAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetConfigurations: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetConfigurations: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetConfigurationsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetConfigurationsAsync: UIntNative = UIntNative(0)
     public var GetConfiguration: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var GetConfigurationAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var RemoveConfiguration: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -4036,6 +4081,7 @@ public class IActivationSignalDetector <: InterfaceWrapperBase & ComInterface & 
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedModelDataTypes(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4044,6 +4090,7 @@ public class IActivationSignalDetector <: InterfaceWrapperBase & ComInterface & 
         return windows_collections.IVectorView<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedTrainingDataFormats(): windows_collections.IVectorView<ActivationSignalDetectionTrainingDataFormat> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4052,6 +4099,7 @@ public class IActivationSignalDetector <: InterfaceWrapperBase & ComInterface & 
         return windows_collections.IVectorView<ActivationSignalDetectionTrainingDataFormat>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedPowerStates(): windows_collections.IVectorView<ActivationSignalDetectorPowerState> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4060,6 +4108,7 @@ public class IActivationSignalDetector <: InterfaceWrapperBase & ComInterface & 
         return windows_collections.IVectorView<ActivationSignalDetectorPowerState>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSupportedModelIdsForSignalId(signalId: windows_core.HString): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4068,6 +4117,7 @@ public class IActivationSignalDetector <: InterfaceWrapperBase & ComInterface & 
         return windows_collections.IVectorView<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSupportedModelIdsForSignalIdAsync(signalId: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVectorView<windows_core.HString>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4090,6 +4140,7 @@ public class IActivationSignalDetector <: InterfaceWrapperBase & ComInterface & 
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetConfigurations(): windows_collections.IVectorView<ActivationSignalDetectionConfiguration> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4098,6 +4149,7 @@ public class IActivationSignalDetector <: InterfaceWrapperBase & ComInterface & 
         return windows_collections.IVectorView<ActivationSignalDetectionConfiguration>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetConfigurationsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<ActivationSignalDetectionConfiguration>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4144,8 +4196,14 @@ extend IActivationSignalDetector <: windows_core.Interface<IActivationSignalDete
 @C
 public struct IActivationSignalDetector2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAvailableModelIdsForSignalIdAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAvailableModelIdsForSignalIdAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAvailableModelIdsForSignalId: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAvailableModelIdsForSignalId: UIntNative = UIntNative(0)
     public var CreateConfigurationWithResultAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
     public var CreateConfigurationWithResult: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
     public var RemoveConfigurationWithResultAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
@@ -4219,6 +4277,7 @@ public class IActivationSignalDetector2 <: InterfaceWrapperBase & ComInterface &
         readVtbl<IActivationSignalDetector2Vtbl>(IActivationSignalDetector2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAvailableModelIdsForSignalIdAsync(signalId: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVector<windows_core.HString>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4227,6 +4286,7 @@ public class IActivationSignalDetector2 <: InterfaceWrapperBase & ComInterface &
         return windows_future.IAsyncOperation<windows_collections.IVector<windows_core.HString>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAvailableModelIdsForSignalId(signalId: windows_core.HString): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4283,10 +4343,22 @@ extend IActivationSignalDetector2 <: windows_core.Interface<IActivationSignalDet
 @C
 public struct IConversationalAgentDetectorManagerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAllActivationSignalDetectors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAllActivationSignalDetectors: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAllActivationSignalDetectorsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAllActivationSignalDetectorsAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetActivationSignalDetectors: CFunc<(CPointer<Unit>, ActivationSignalDetectorKindAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetActivationSignalDetectors: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetActivationSignalDetectorsAsync: CFunc<(CPointer<Unit>, ActivationSignalDetectorKindAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetActivationSignalDetectorsAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4355,6 +4427,7 @@ public class IConversationalAgentDetectorManager <: InterfaceWrapperBase & ComIn
         readVtbl<IConversationalAgentDetectorManagerVtbl>(IConversationalAgentDetectorManagerVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAllActivationSignalDetectors(): windows_collections.IVectorView<ActivationSignalDetector> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4363,6 +4436,7 @@ public class IConversationalAgentDetectorManager <: InterfaceWrapperBase & ComIn
         return windows_collections.IVectorView<ActivationSignalDetector>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAllActivationSignalDetectorsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<ActivationSignalDetector>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4371,6 +4445,7 @@ public class IConversationalAgentDetectorManager <: InterfaceWrapperBase & ComIn
         return windows_future.IAsyncOperation<windows_collections.IVectorView<ActivationSignalDetector>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetActivationSignalDetectors(kind: ActivationSignalDetectorKind): windows_collections.IVectorView<ActivationSignalDetector> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4379,6 +4454,7 @@ public class IConversationalAgentDetectorManager <: InterfaceWrapperBase & ComIn
         return windows_collections.IVectorView<ActivationSignalDetector>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetActivationSignalDetectorsAsync(kind: ActivationSignalDetectorKind): windows_future.IAsyncOperation<windows_collections.IVectorView<ActivationSignalDetector>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4612,8 +4688,14 @@ public struct IConversationalAgentSessionVtbl {
     public var GetSignalModelId: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetSignalModelIdAsync: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var SetSignalModelId: CFunc<(CPointer<Unit>, UInt32, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSupportedSignalModelIdsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetSupportedSignalModelIdsAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSupportedSignalModelIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetSupportedSignalModelIds: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4934,6 +5016,7 @@ public class IConversationalAgentSession <: InterfaceWrapperBase & ComInterface 
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSupportedSignalModelIdsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<UInt32>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4942,6 +5025,7 @@ public class IConversationalAgentSession <: InterfaceWrapperBase & ComInterface 
         return windows_future.IAsyncOperation<windows_collections.IVectorView<UInt32>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSupportedSignalModelIds(): windows_collections.IVectorView<UInt32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

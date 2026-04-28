@@ -15,4 +15,177 @@ public import windows_sys.Win32._impl_l1.{AUDIT_OBJECT_TYPES, AUTHZ_ACCESS_REPLY
 public import windows_sys.Win32._impl_l0.{AUTHZ_ACCESS_REQUEST, OBJECTS_AND_SID, PFN_AUTHZ_FREE_DYNAMIC_GROUPS}
 @When[Windows_Win32_Security_Authorization == "on" && Windows_Win32_System_Com == "on"]
 public import windows_sys.Win32._impl_l2.{IAzApplication, IAzApplicationGroup, IAzApplicationGroupVtbl, IAzApplicationGroups, IAzApplicationGroupsVtbl, IAzApplicationVtbl, IAzApplications, IAzApplicationsVtbl, IAzAuthorizationStore, IAzAuthorizationStoreVtbl, IAzBizRuleContext, IAzBizRuleContextVtbl, IAzBizRuleInterfaces, IAzBizRuleInterfacesVtbl, IAzBizRuleParameters, IAzBizRuleParametersVtbl, IAzClientContext, IAzClientContextVtbl, IAzNameResolver, IAzNameResolverVtbl, IAzObjectPicker, IAzObjectPickerVtbl, IAzOperation, IAzOperationVtbl, IAzOperations, IAzOperationsVtbl, IAzPrincipalLocator, IAzPrincipalLocatorVtbl, IAzRole, IAzRoleAssignments, IAzRoleAssignmentsVtbl, IAzRoleDefinitions, IAzRoleDefinitionsVtbl, IAzRoleVtbl, IAzRoles, IAzRolesVtbl, IAzScope, IAzScopeVtbl, IAzScopes, IAzScopesVtbl, IAzTask, IAzTaskVtbl, IAzTasks, IAzTasksVtbl}
-
+@When[Windows_Win32_Security_Authorization == "on" && AUTHZ == "on" && Windows_Win32_Security_Authorization_AuthzAccessCheck == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AuthzAccessCheck
+@When[Windows_Win32_Security_Authorization == "on" && AUTHZ == "on" && Windows_Win32_Security_Authorization_AuthzAddSidsToContext == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AuthzAddSidsToContext
+@When[Windows_Win32_Security_Authorization == "on" && AUTHZ == "on" && Windows_Win32_Security_Authorization_AuthzCachedAccessCheck == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AuthzCachedAccessCheck
+@When[Windows_Win32_Security_Authorization == "on" && AUTHZ == "on" && Windows_Win32_Security_Authorization_AuthzEnumerateSecurityEventSources == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AuthzEnumerateSecurityEventSources
+@When[Windows_Win32_Security_Authorization == "on" && AUTHZ == "on" && Windows_Win32_Security_Authorization_AuthzEvaluateSacl == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AuthzEvaluateSacl
+@When[Windows_Win32_Security_Authorization == "on" && AUTHZ == "on" && Windows_Win32_Security_Authorization_AuthzFreeAuditEvent == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AuthzFreeAuditEvent
+@When[Windows_Win32_Security_Authorization == "on" && AUTHZ == "on" && Windows_Win32_Security_Authorization_AuthzFreeCentralAccessPolicyCache == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AuthzFreeCentralAccessPolicyCache
+@When[Windows_Win32_Security_Authorization == "on" && AUTHZ == "on" && Windows_Win32_Security_Authorization_AuthzFreeContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AuthzFreeContext
+@When[Windows_Win32_Security_Authorization == "on" && AUTHZ == "on" && Windows_Win32_Security_Authorization_AuthzFreeHandle == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AuthzFreeHandle
+@When[Windows_Win32_Security_Authorization == "on" && AUTHZ == "on" && Windows_Win32_Security_Authorization_AuthzFreeResourceManager == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AuthzFreeResourceManager
+@When[Windows_Win32_Security_Authorization == "on" && AUTHZ == "on" && Windows_Win32_Security_Authorization_AuthzGetInformationFromContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AuthzGetInformationFromContext
+@When[Windows_Win32_Security_Authorization == "on" && AUTHZ == "on" && Windows_Win32_Security_Authorization_AuthzInitializeCompoundContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AuthzInitializeCompoundContext
+@When[Windows_Win32_Security_Authorization == "on" && AUTHZ == "on" && Windows_Win32_Security_Authorization_AuthzInitializeContextFromAuthzContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AuthzInitializeContextFromAuthzContext
+@When[Windows_Win32_Security_Authorization == "on" && AUTHZ == "on" && Windows_Win32_Security_Authorization_AuthzInitializeContextFromSid == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AuthzInitializeContextFromSid
+@When[Windows_Win32_Security_Authorization == "on" && AUTHZ == "on" && Windows_Win32_Security_Authorization_AuthzInitializeContextFromToken == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AuthzInitializeContextFromToken
+@When[Windows_Win32_Security_Authorization == "on" && AUTHZ == "on" && Windows_Win32_Security_Authorization_AuthzInitializeRemoteResourceManager == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AuthzInitializeRemoteResourceManager
+@When[Windows_Win32_Security_Authorization == "on" && AUTHZ == "on" && Windows_Win32_Security_Authorization_AuthzInitializeResourceManager == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AuthzInitializeResourceManager
+@When[Windows_Win32_Security_Authorization == "on" && AUTHZ == "on" && Windows_Win32_Security_Authorization_AuthzInitializeResourceManagerEx == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AuthzInitializeResourceManagerEx
+@When[Windows_Win32_Security_Authorization == "on" && AUTHZ == "on" && Windows_Win32_Security_Authorization_AuthzInstallSecurityEventSource == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AuthzInstallSecurityEventSource
+@When[Windows_Win32_Security_Authorization == "on" && AUTHZ == "on" && Windows_Win32_Security_Authorization_AuthzModifyClaims == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AuthzModifyClaims
+@When[Windows_Win32_Security_Authorization == "on" && AUTHZ == "on" && Windows_Win32_Security_Authorization_AuthzModifySecurityAttributes == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AuthzModifySecurityAttributes
+@When[Windows_Win32_Security_Authorization == "on" && AUTHZ == "on" && Windows_Win32_Security_Authorization_AuthzModifySids == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AuthzModifySids
+@When[Windows_Win32_Security_Authorization == "on" && AUTHZ == "on" && Windows_Win32_Security_Authorization_AuthzOpenObjectAudit == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AuthzOpenObjectAudit
+@When[Windows_Win32_Security_Authorization == "on" && AUTHZ == "on" && Windows_Win32_Security_Authorization_AuthzRegisterCapChangeNotification == "on" && Windows_Win32_System_Threading == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AuthzRegisterCapChangeNotification
+@When[Windows_Win32_Security_Authorization == "on" && AUTHZ == "on" && Windows_Win32_Security_Authorization_AuthzRegisterSecurityEventSource == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AuthzRegisterSecurityEventSource
+@When[Windows_Win32_Security_Authorization == "on" && AUTHZ == "on" && Windows_Win32_Security_Authorization_AuthzReportSecurityEventFromParams == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AuthzReportSecurityEventFromParams
+@When[Windows_Win32_Security_Authorization == "on" && AUTHZ == "on" && Windows_Win32_Security_Authorization_AuthzSetAppContainerInformation == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AuthzSetAppContainerInformation
+@When[Windows_Win32_Security_Authorization == "on" && AUTHZ == "on" && Windows_Win32_Security_Authorization_AuthzUninstallSecurityEventSource == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AuthzUninstallSecurityEventSource
+@When[Windows_Win32_Security_Authorization == "on" && AUTHZ == "on" && Windows_Win32_Security_Authorization_AuthzUnregisterCapChangeNotification == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AuthzUnregisterCapChangeNotification
+@When[Windows_Win32_Security_Authorization == "on" && AUTHZ == "on" && Windows_Win32_Security_Authorization_AuthzUnregisterSecurityEventSource == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AuthzUnregisterSecurityEventSource
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_BuildExplicitAccessWithNameA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BuildExplicitAccessWithNameA
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_BuildExplicitAccessWithNameW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BuildExplicitAccessWithNameW
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_BuildImpersonateExplicitAccessWithNameA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BuildImpersonateExplicitAccessWithNameA
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_BuildImpersonateExplicitAccessWithNameW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BuildImpersonateExplicitAccessWithNameW
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_BuildImpersonateTrusteeA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BuildImpersonateTrusteeA
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_BuildImpersonateTrusteeW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BuildImpersonateTrusteeW
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_BuildSecurityDescriptorA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BuildSecurityDescriptorA
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_BuildSecurityDescriptorW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BuildSecurityDescriptorW
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_BuildTrusteeWithNameA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BuildTrusteeWithNameA
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_BuildTrusteeWithNameW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BuildTrusteeWithNameW
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_BuildTrusteeWithObjectsAndNameA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BuildTrusteeWithObjectsAndNameA
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_BuildTrusteeWithObjectsAndNameW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BuildTrusteeWithObjectsAndNameW
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_BuildTrusteeWithObjectsAndSidA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BuildTrusteeWithObjectsAndSidA
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_BuildTrusteeWithObjectsAndSidW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BuildTrusteeWithObjectsAndSidW
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_BuildTrusteeWithSidA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BuildTrusteeWithSidA
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_BuildTrusteeWithSidW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BuildTrusteeWithSidW
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_ConvertSecurityDescriptorToStringSecurityDescriptorA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ConvertSecurityDescriptorToStringSecurityDescriptorA
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_ConvertSecurityDescriptorToStringSecurityDescriptorW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ConvertSecurityDescriptorToStringSecurityDescriptorW
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_ConvertSidToStringSidA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ConvertSidToStringSidA
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_ConvertSidToStringSidW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ConvertSidToStringSidW
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_ConvertStringSecurityDescriptorToSecurityDescriptorA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ConvertStringSecurityDescriptorToSecurityDescriptorA
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_ConvertStringSecurityDescriptorToSecurityDescriptorW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ConvertStringSecurityDescriptorToSecurityDescriptorW
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_ConvertStringSidToSidA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ConvertStringSidToSidA
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_ConvertStringSidToSidW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ConvertStringSidToSidW
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_FreeInheritedFromArray == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FreeInheritedFromArray
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_GetAuditedPermissionsFromAclA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetAuditedPermissionsFromAclA
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_GetAuditedPermissionsFromAclW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetAuditedPermissionsFromAclW
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_GetEffectiveRightsFromAclA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetEffectiveRightsFromAclA
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_GetEffectiveRightsFromAclW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetEffectiveRightsFromAclW
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_GetExplicitEntriesFromAclA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetExplicitEntriesFromAclA
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_GetExplicitEntriesFromAclW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetExplicitEntriesFromAclW
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_GetInheritanceSourceA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetInheritanceSourceA
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_GetInheritanceSourceW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetInheritanceSourceW
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_GetMultipleTrusteeA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetMultipleTrusteeA
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_GetMultipleTrusteeOperationA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetMultipleTrusteeOperationA
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_GetMultipleTrusteeOperationW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetMultipleTrusteeOperationW
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_GetMultipleTrusteeW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetMultipleTrusteeW
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_GetNamedSecurityInfoA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetNamedSecurityInfoA
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_GetNamedSecurityInfoW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetNamedSecurityInfoW
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_GetSecurityInfo == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetSecurityInfo
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_GetTrusteeFormA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetTrusteeFormA
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_GetTrusteeFormW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetTrusteeFormW
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_GetTrusteeNameA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetTrusteeNameA
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_GetTrusteeNameW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetTrusteeNameW
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_GetTrusteeTypeA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetTrusteeTypeA
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_GetTrusteeTypeW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetTrusteeTypeW
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_LookupSecurityDescriptorPartsA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LookupSecurityDescriptorPartsA
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_LookupSecurityDescriptorPartsW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LookupSecurityDescriptorPartsW
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_SetEntriesInAclA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetEntriesInAclA
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_SetEntriesInAclW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetEntriesInAclW
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_SetNamedSecurityInfoA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetNamedSecurityInfoA
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_SetNamedSecurityInfoW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetNamedSecurityInfoW
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_SetSecurityInfo == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetSecurityInfo
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_TreeResetNamedSecurityInfoA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TreeResetNamedSecurityInfoA
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_TreeResetNamedSecurityInfoW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TreeResetNamedSecurityInfoW
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_TreeSetNamedSecurityInfoA == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TreeSetNamedSecurityInfoA
+@When[Windows_Win32_Security_Authorization == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Authorization_TreeSetNamedSecurityInfoW == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TreeSetNamedSecurityInfoW

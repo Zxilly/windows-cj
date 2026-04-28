@@ -106,6 +106,7 @@ public class Calendar <: InterfaceWrapperBase & ComInterface & windows_interface
         defaultInterface().SetToMax()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Languages(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().Languages()
     }
@@ -486,6 +487,7 @@ public class Calendar <: InterfaceWrapperBase & ComInterface & windows_interface
         return defaultInterface().IsDaylightSavingTime()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateCalendarWithTimeZone(languages: windows_collections.IIterable<windows_core.HString>, calendar: windows_core.HString, clock: windows_core.HString, timeZoneId: windows_core.HString): Calendar {
         var result__: Option<Calendar> = Option<Calendar>.None
         try (factory__ = windows_core.factory<Calendar, ICalendarFactory2>().unwrap()) {
@@ -497,6 +499,7 @@ public class Calendar <: InterfaceWrapperBase & ComInterface & windows_interface
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateCalendarDefaultCalendarAndClock(languages: windows_collections.IIterable<windows_core.HString>): Calendar {
         var result__: Option<Calendar> = Option<Calendar>.None
         try (factory__ = windows_core.factory<Calendar, ICalendarFactory>().unwrap()) {
@@ -508,6 +511,7 @@ public class Calendar <: InterfaceWrapperBase & ComInterface & windows_interface
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateCalendar(languages: windows_collections.IIterable<windows_core.HString>, calendar: windows_core.HString, clock: windows_core.HString): Calendar {
         var result__: Option<Calendar> = Option<Calendar>.None
         try (factory__ = windows_core.factory<Calendar, ICalendarFactory>().unwrap()) {
@@ -2850,6 +2854,7 @@ public class GeographicRegion <: InterfaceWrapperBase & ComInterface & windows_i
         return defaultInterface().NativeName()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CurrenciesInUse(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().CurrenciesInUse()
     }
@@ -2932,8 +2937,14 @@ public struct IApplicationLanguagesStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var PrimaryLanguageOverride: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetPrimaryLanguageOverride: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Languages: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Languages: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var ManifestLanguages: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ManifestLanguages: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3016,6 +3027,7 @@ public class IApplicationLanguagesStatics <: InterfaceWrapperBase & ComInterface
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Languages(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3024,6 +3036,7 @@ public class IApplicationLanguagesStatics <: InterfaceWrapperBase & ComInterface
         return windows_collections.IVectorView<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ManifestLanguages(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3043,7 +3056,10 @@ public struct ICalendarVtbl {
     public var Clone: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetToMin: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
     public var SetToMax: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Languages: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Languages: UIntNative = UIntNative(0)
     public var NumeralSystem: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetNumeralSystem: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetCalendarSystem: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -3226,6 +3242,7 @@ public class ICalendar <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Languages(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3944,8 +3961,14 @@ extend ICalendar <: windows_core.Interface<ICalendar> {}
 @C
 public struct ICalendarFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateCalendarDefaultCalendarAndClock: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateCalendarDefaultCalendarAndClock: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateCalendar: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateCalendar: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4014,6 +4037,7 @@ public class ICalendarFactory <: InterfaceWrapperBase & ComInterface & RuntimeNa
         readVtbl<ICalendarFactoryVtbl>(ICalendarFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateCalendarDefaultCalendarAndClock(languages: windows_collections.IIterable<windows_core.HString>): Calendar {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4022,6 +4046,7 @@ public class ICalendarFactory <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return Calendar.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateCalendar(languages: windows_collections.IIterable<windows_core.HString>, calendar: windows_core.HString, clock: windows_core.HString): Calendar {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4038,7 +4063,10 @@ extend ICalendarFactory <: windows_core.Interface<ICalendarFactory> {}
 @C
 public struct ICalendarFactory2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateCalendarWithTimeZone: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateCalendarWithTimeZone: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4107,6 +4135,7 @@ public class ICalendarFactory2 <: InterfaceWrapperBase & ComInterface & RuntimeN
         readVtbl<ICalendarFactory2Vtbl>(ICalendarFactory2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateCalendarWithTimeZone(languages: windows_collections.IIterable<windows_core.HString>, calendar: windows_core.HString, clock: windows_core.HString, timeZoneId: windows_core.HString): Calendar {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6451,7 +6480,10 @@ public struct IGeographicRegionVtbl {
     public var CodeThreeDigit: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var DisplayName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var NativeName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var CurrenciesInUse: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CurrenciesInUse: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -6568,6 +6600,7 @@ public class IGeographicRegion <: InterfaceWrapperBase & ComInterface & RuntimeN
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CurrenciesInUse(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7139,7 +7172,10 @@ extend ILanguage3 <: windows_core.Interface<ILanguage3> {}
 @C
 public struct ILanguageExtensionSubtagsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetExtensionSubtags: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetExtensionSubtags: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -7208,6 +7244,7 @@ public class ILanguageExtensionSubtags <: InterfaceWrapperBase & ComInterface & 
         readVtbl<ILanguageExtensionSubtagsVtbl>(ILanguageExtensionSubtagsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetExtensionSubtags(singleton: windows_core.HString): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7403,7 +7440,10 @@ extend ILanguageStatics2 <: windows_core.Interface<ILanguageStatics2> {}
 @C
 public struct ILanguageStatics3Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetMuiCompatibleLanguageListFromLanguageTags: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetMuiCompatibleLanguageListFromLanguageTags: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -7472,6 +7512,7 @@ public class ILanguageStatics3 <: InterfaceWrapperBase & ComInterface & RuntimeN
         readVtbl<ILanguageStatics3Vtbl>(ILanguageStatics3Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetMuiCompatibleLanguageListFromLanguageTags(languageTags: windows_collections.IIterable<windows_core.HString>): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

@@ -3,7 +3,6 @@ package windows_sys.Media._impl_l0
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Foundation_Numerics == "on"]
 import windows_sys.Foundation.Numerics as Foundation_Numerics
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
 
@@ -1444,6 +1443,7 @@ public struct IVariablePhotoSequenceControllerVtbl {
     @When[Windows_Media_MediaProperties == "on"]
     public var GetCurrentFrameRate: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var FrameCapabilities: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var DesiredFrameControllers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1532,6 +1532,7 @@ public class IVariablePhotoSequenceController <: InterfaceWrapperBase & ComInter
         return __vt.FrameCapabilities(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DesiredFrameControllers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

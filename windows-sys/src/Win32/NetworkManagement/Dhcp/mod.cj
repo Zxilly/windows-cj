@@ -3,7 +3,6 @@ package windows_sys.Win32.NetworkManagement.Dhcp
 
 import windows_polyfill.{unionReadInt32, unionReadUInt16, unionReadUInt32, unionReadUInt8, unionWriteInt32, unionWriteUInt16, unionWriteUInt32, unionWriteUInt8}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 
 
@@ -3313,458 +3312,2336 @@ public struct DHCP_ALL_OPTIONS__Anonymous_e__Struct {
     public init() {}
 }
 
-@When[DHCPSAPI == "on"]
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpAddFilterV4 == "on"]
 foreign {
     // param-hint: ServerIpAddress optional
     func DhcpAddFilterV4(ServerIpAddress: CPointer<UInt16>, AddFilterInfo: CPointer<DHCP_FILTER_ADD_INFO>, ForceFlag: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpAddFilterV4 == "on"]
+public unsafe func Windows_DhcpAddFilterV4(ServerIpAddress: CPointer<UInt16>, AddFilterInfo: CPointer<DHCP_FILTER_ADD_INFO>, ForceFlag: Int32): UInt32 {
+    return DhcpAddFilterV4(ServerIpAddress, AddFilterInfo, ForceFlag)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpAddSecurityGroup == "on"]
+foreign {
     // param-hint: pServer optional
     func DhcpAddSecurityGroup(pServer: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpAddSecurityGroup == "on"]
+public unsafe func Windows_DhcpAddSecurityGroup(pServer: CPointer<UInt16>): UInt32 {
+    return DhcpAddSecurityGroup(pServer)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpAddServer == "on"]
+foreign {
     func DhcpAddServer(Flags: UInt32, IdInfo: CPointer<Unit>, NewServer: CPointer<DHCPDS_SERVER>, CallbackFn: CPointer<Unit>, CallbackData: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpAddServer == "on"]
+public unsafe func Windows_DhcpAddServer(Flags: UInt32, IdInfo: CPointer<Unit>, NewServer: CPointer<DHCPDS_SERVER>, CallbackFn: CPointer<Unit>, CallbackData: CPointer<Unit>): UInt32 {
+    return DhcpAddServer(Flags, IdInfo, NewServer, CallbackFn, CallbackData)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpAddSubnetElement == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpAddSubnetElement(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, AddElementInfo: CPointer<DHCP_SUBNET_ELEMENT_DATA>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpAddSubnetElement == "on"]
+public unsafe func Windows_DhcpAddSubnetElement(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, AddElementInfo: CPointer<DHCP_SUBNET_ELEMENT_DATA>): UInt32 {
+    return DhcpAddSubnetElement(ServerIpAddress, SubnetAddress, AddElementInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpAddSubnetElementV4 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpAddSubnetElementV4(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, AddElementInfo: CPointer<DHCP_SUBNET_ELEMENT_DATA_V4>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpAddSubnetElementV4 == "on"]
+public unsafe func Windows_DhcpAddSubnetElementV4(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, AddElementInfo: CPointer<DHCP_SUBNET_ELEMENT_DATA_V4>): UInt32 {
+    return DhcpAddSubnetElementV4(ServerIpAddress, SubnetAddress, AddElementInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpAddSubnetElementV5 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpAddSubnetElementV5(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, AddElementInfo: CPointer<DHCP_SUBNET_ELEMENT_DATA_V5>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpAddSubnetElementV5 == "on"]
+public unsafe func Windows_DhcpAddSubnetElementV5(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, AddElementInfo: CPointer<DHCP_SUBNET_ELEMENT_DATA_V5>): UInt32 {
+    return DhcpAddSubnetElementV5(ServerIpAddress, SubnetAddress, AddElementInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpAddSubnetElementV6 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpAddSubnetElementV6(ServerIpAddress: CPointer<UInt16>, SubnetAddress: DHCP_IPV6_ADDRESS, AddElementInfo: CPointer<DHCP_SUBNET_ELEMENT_DATA_V6>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpAddSubnetElementV6 == "on"]
+public unsafe func Windows_DhcpAddSubnetElementV6(ServerIpAddress: CPointer<UInt16>, SubnetAddress: DHCP_IPV6_ADDRESS, AddElementInfo: CPointer<DHCP_SUBNET_ELEMENT_DATA_V6>): UInt32 {
+    return DhcpAddSubnetElementV6(ServerIpAddress, SubnetAddress, AddElementInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpAuditLogGetParams == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpAuditLogGetParams(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, AuditLogDir: CPointer<CPointer<UInt16>>, DiskCheckInterval: CPointer<UInt32>, MaxLogFilesSize: CPointer<UInt32>, MinSpaceOnDisk: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpAuditLogGetParams == "on"]
+public unsafe func Windows_DhcpAuditLogGetParams(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, AuditLogDir: CPointer<CPointer<UInt16>>, DiskCheckInterval: CPointer<UInt32>, MaxLogFilesSize: CPointer<UInt32>, MinSpaceOnDisk: CPointer<UInt32>): UInt32 {
+    return DhcpAuditLogGetParams(ServerIpAddress, Flags, AuditLogDir, DiskCheckInterval, MaxLogFilesSize, MinSpaceOnDisk)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpAuditLogSetParams == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     // param-hint: AuditLogDir optional
     func DhcpAuditLogSetParams(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, AuditLogDir: CPointer<UInt16>, DiskCheckInterval: UInt32, MaxLogFilesSize: UInt32, MinSpaceOnDisk: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpAuditLogSetParams == "on"]
+public unsafe func Windows_DhcpAuditLogSetParams(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, AuditLogDir: CPointer<UInt16>, DiskCheckInterval: UInt32, MaxLogFilesSize: UInt32, MinSpaceOnDisk: UInt32): UInt32 {
+    return DhcpAuditLogSetParams(ServerIpAddress, Flags, AuditLogDir, DiskCheckInterval, MaxLogFilesSize, MinSpaceOnDisk)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpCreateClass == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpCreateClass(ServerIpAddress: CPointer<UInt16>, ReservedMustBeZero: UInt32, ClassInfo: CPointer<DHCP_CLASS_INFO>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpCreateClass == "on"]
+public unsafe func Windows_DhcpCreateClass(ServerIpAddress: CPointer<UInt16>, ReservedMustBeZero: UInt32, ClassInfo: CPointer<DHCP_CLASS_INFO>): UInt32 {
+    return DhcpCreateClass(ServerIpAddress, ReservedMustBeZero, ClassInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpCreateClassV6 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpCreateClassV6(ServerIpAddress: CPointer<UInt16>, ReservedMustBeZero: UInt32, ClassInfo: CPointer<DHCP_CLASS_INFO_V6>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpCreateClassV6 == "on"]
+public unsafe func Windows_DhcpCreateClassV6(ServerIpAddress: CPointer<UInt16>, ReservedMustBeZero: UInt32, ClassInfo: CPointer<DHCP_CLASS_INFO_V6>): UInt32 {
+    return DhcpCreateClassV6(ServerIpAddress, ReservedMustBeZero, ClassInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpCreateClientInfo == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpCreateClientInfo(ServerIpAddress: CPointer<UInt16>, ClientInfo: CPointer<DHCP_CLIENT_INFO>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpCreateClientInfo == "on"]
+public unsafe func Windows_DhcpCreateClientInfo(ServerIpAddress: CPointer<UInt16>, ClientInfo: CPointer<DHCP_CLIENT_INFO>): UInt32 {
+    return DhcpCreateClientInfo(ServerIpAddress, ClientInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpCreateClientInfoV4 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpCreateClientInfoV4(ServerIpAddress: CPointer<UInt16>, ClientInfo: CPointer<DHCP_CLIENT_INFO_V4>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpCreateClientInfoV4 == "on"]
+public unsafe func Windows_DhcpCreateClientInfoV4(ServerIpAddress: CPointer<UInt16>, ClientInfo: CPointer<DHCP_CLIENT_INFO_V4>): UInt32 {
+    return DhcpCreateClientInfoV4(ServerIpAddress, ClientInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpCreateClientInfoVQ == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpCreateClientInfoVQ(ServerIpAddress: CPointer<UInt16>, ClientInfo: CPointer<DHCP_CLIENT_INFO_VQ>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpCreateClientInfoVQ == "on"]
+public unsafe func Windows_DhcpCreateClientInfoVQ(ServerIpAddress: CPointer<UInt16>, ClientInfo: CPointer<DHCP_CLIENT_INFO_VQ>): UInt32 {
+    return DhcpCreateClientInfoVQ(ServerIpAddress, ClientInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpCreateOption == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpCreateOption(ServerIpAddress: CPointer<UInt16>, OptionID: UInt32, OptionInfo: CPointer<DHCP_OPTION>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpCreateOption == "on"]
+public unsafe func Windows_DhcpCreateOption(ServerIpAddress: CPointer<UInt16>, OptionID: UInt32, OptionInfo: CPointer<DHCP_OPTION>): UInt32 {
+    return DhcpCreateOption(ServerIpAddress, OptionID, OptionInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpCreateOptionV5 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     // param-hint: ClassName optional
     // param-hint: VendorName optional
     func DhcpCreateOptionV5(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionId: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, OptionInfo: CPointer<DHCP_OPTION>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpCreateOptionV5 == "on"]
+public unsafe func Windows_DhcpCreateOptionV5(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionId: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, OptionInfo: CPointer<DHCP_OPTION>): UInt32 {
+    return DhcpCreateOptionV5(ServerIpAddress, Flags, OptionId, ClassName, VendorName, OptionInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpCreateOptionV6 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     // param-hint: ClassName optional
     // param-hint: VendorName optional
     func DhcpCreateOptionV6(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionId: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, OptionInfo: CPointer<DHCP_OPTION>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpCreateOptionV6 == "on"]
+public unsafe func Windows_DhcpCreateOptionV6(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionId: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, OptionInfo: CPointer<DHCP_OPTION>): UInt32 {
+    return DhcpCreateOptionV6(ServerIpAddress, Flags, OptionId, ClassName, VendorName, OptionInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpCreateSubnet == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpCreateSubnet(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, SubnetInfo: CPointer<DHCP_SUBNET_INFO>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpCreateSubnet == "on"]
+public unsafe func Windows_DhcpCreateSubnet(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, SubnetInfo: CPointer<DHCP_SUBNET_INFO>): UInt32 {
+    return DhcpCreateSubnet(ServerIpAddress, SubnetAddress, SubnetInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpCreateSubnetV6 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpCreateSubnetV6(ServerIpAddress: CPointer<UInt16>, SubnetAddress: DHCP_IPV6_ADDRESS, SubnetInfo: CPointer<DHCP_SUBNET_INFO_V6>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpCreateSubnetV6 == "on"]
+public unsafe func Windows_DhcpCreateSubnetV6(ServerIpAddress: CPointer<UInt16>, SubnetAddress: DHCP_IPV6_ADDRESS, SubnetInfo: CPointer<DHCP_SUBNET_INFO_V6>): UInt32 {
+    return DhcpCreateSubnetV6(ServerIpAddress, SubnetAddress, SubnetInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpCreateSubnetVQ == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpCreateSubnetVQ(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, SubnetInfo: CPointer<DHCP_SUBNET_INFO_VQ>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpCreateSubnetVQ == "on"]
+public unsafe func Windows_DhcpCreateSubnetVQ(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, SubnetInfo: CPointer<DHCP_SUBNET_INFO_VQ>): UInt32 {
+    return DhcpCreateSubnetVQ(ServerIpAddress, SubnetAddress, SubnetInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpDeleteClass == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpDeleteClass(ServerIpAddress: CPointer<UInt16>, ReservedMustBeZero: UInt32, ClassName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpDeleteClass == "on"]
+public unsafe func Windows_DhcpDeleteClass(ServerIpAddress: CPointer<UInt16>, ReservedMustBeZero: UInt32, ClassName: CPointer<UInt16>): UInt32 {
+    return DhcpDeleteClass(ServerIpAddress, ReservedMustBeZero, ClassName)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpDeleteClassV6 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpDeleteClassV6(ServerIpAddress: CPointer<UInt16>, ReservedMustBeZero: UInt32, ClassName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpDeleteClassV6 == "on"]
+public unsafe func Windows_DhcpDeleteClassV6(ServerIpAddress: CPointer<UInt16>, ReservedMustBeZero: UInt32, ClassName: CPointer<UInt16>): UInt32 {
+    return DhcpDeleteClassV6(ServerIpAddress, ReservedMustBeZero, ClassName)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpDeleteClientInfo == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpDeleteClientInfo(ServerIpAddress: CPointer<UInt16>, ClientInfo: CPointer<DHCP_SEARCH_INFO>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpDeleteClientInfo == "on"]
+public unsafe func Windows_DhcpDeleteClientInfo(ServerIpAddress: CPointer<UInt16>, ClientInfo: CPointer<DHCP_SEARCH_INFO>): UInt32 {
+    return DhcpDeleteClientInfo(ServerIpAddress, ClientInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpDeleteClientInfoV6 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpDeleteClientInfoV6(ServerIpAddress: CPointer<UInt16>, ClientInfo: CPointer<DHCP_SEARCH_INFO_V6>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpDeleteClientInfoV6 == "on"]
+public unsafe func Windows_DhcpDeleteClientInfoV6(ServerIpAddress: CPointer<UInt16>, ClientInfo: CPointer<DHCP_SEARCH_INFO_V6>): UInt32 {
+    return DhcpDeleteClientInfoV6(ServerIpAddress, ClientInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpDeleteFilterV4 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpDeleteFilterV4(ServerIpAddress: CPointer<UInt16>, DeleteFilterInfo: CPointer<DHCP_ADDR_PATTERN>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpDeleteFilterV4 == "on"]
+public unsafe func Windows_DhcpDeleteFilterV4(ServerIpAddress: CPointer<UInt16>, DeleteFilterInfo: CPointer<DHCP_ADDR_PATTERN>): UInt32 {
+    return DhcpDeleteFilterV4(ServerIpAddress, DeleteFilterInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpDeleteServer == "on"]
+foreign {
     func DhcpDeleteServer(Flags: UInt32, IdInfo: CPointer<Unit>, NewServer: CPointer<DHCPDS_SERVER>, CallbackFn: CPointer<Unit>, CallbackData: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpDeleteServer == "on"]
+public unsafe func Windows_DhcpDeleteServer(Flags: UInt32, IdInfo: CPointer<Unit>, NewServer: CPointer<DHCPDS_SERVER>, CallbackFn: CPointer<Unit>, CallbackData: CPointer<Unit>): UInt32 {
+    return DhcpDeleteServer(Flags, IdInfo, NewServer, CallbackFn, CallbackData)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpDeleteSubnet == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpDeleteSubnet(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, ForceFlag: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpDeleteSubnet == "on"]
+public unsafe func Windows_DhcpDeleteSubnet(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, ForceFlag: Int32): UInt32 {
+    return DhcpDeleteSubnet(ServerIpAddress, SubnetAddress, ForceFlag)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpDeleteSubnetV6 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpDeleteSubnetV6(ServerIpAddress: CPointer<UInt16>, SubnetAddress: DHCP_IPV6_ADDRESS, ForceFlag: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpDeleteSubnetV6 == "on"]
+public unsafe func Windows_DhcpDeleteSubnetV6(ServerIpAddress: CPointer<UInt16>, SubnetAddress: DHCP_IPV6_ADDRESS, ForceFlag: Int32): UInt32 {
+    return DhcpDeleteSubnetV6(ServerIpAddress, SubnetAddress, ForceFlag)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpDeleteSuperScopeV4 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpDeleteSuperScopeV4(ServerIpAddress: CPointer<UInt16>, SuperScopeName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpDeleteSuperScopeV4 == "on"]
+public unsafe func Windows_DhcpDeleteSuperScopeV4(ServerIpAddress: CPointer<UInt16>, SuperScopeName: CPointer<UInt16>): UInt32 {
+    return DhcpDeleteSuperScopeV4(ServerIpAddress, SuperScopeName)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpDsCleanup == "on"]
+foreign {
     func DhcpDsCleanup(): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpDsCleanup == "on"]
+public unsafe func Windows_DhcpDsCleanup(): Unit {
+    DhcpDsCleanup()
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpDsInit == "on"]
+foreign {
     func DhcpDsInit(): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpDsInit == "on"]
+public unsafe func Windows_DhcpDsInit(): UInt32 {
+    return DhcpDsInit()
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumClasses == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpEnumClasses(ServerIpAddress: CPointer<UInt16>, ReservedMustBeZero: UInt32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, ClassInfoArray: CPointer<CPointer<DHCP_CLASS_INFO_ARRAY>>, nRead: CPointer<UInt32>, nTotal: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumClasses == "on"]
+public unsafe func Windows_DhcpEnumClasses(ServerIpAddress: CPointer<UInt16>, ReservedMustBeZero: UInt32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, ClassInfoArray: CPointer<CPointer<DHCP_CLASS_INFO_ARRAY>>, nRead: CPointer<UInt32>, nTotal: CPointer<UInt32>): UInt32 {
+    return DhcpEnumClasses(ServerIpAddress, ReservedMustBeZero, ResumeHandle, PreferredMaximum, ClassInfoArray, nRead, nTotal)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumClassesV6 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpEnumClassesV6(ServerIpAddress: CPointer<UInt16>, ReservedMustBeZero: UInt32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, ClassInfoArray: CPointer<CPointer<DHCP_CLASS_INFO_ARRAY_V6>>, nRead: CPointer<UInt32>, nTotal: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumClassesV6 == "on"]
+public unsafe func Windows_DhcpEnumClassesV6(ServerIpAddress: CPointer<UInt16>, ReservedMustBeZero: UInt32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, ClassInfoArray: CPointer<CPointer<DHCP_CLASS_INFO_ARRAY_V6>>, nRead: CPointer<UInt32>, nTotal: CPointer<UInt32>): UInt32 {
+    return DhcpEnumClassesV6(ServerIpAddress, ReservedMustBeZero, ResumeHandle, PreferredMaximum, ClassInfoArray, nRead, nTotal)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumFilterV4 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpEnumFilterV4(ServerIpAddress: CPointer<UInt16>, ResumeHandle: CPointer<DHCP_ADDR_PATTERN>, PreferredMaximum: UInt32, ListType: Int32, EnumFilterInfo: CPointer<CPointer<DHCP_FILTER_ENUM_INFO>>, ElementsRead: CPointer<UInt32>, ElementsTotal: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumFilterV4 == "on"]
+public unsafe func Windows_DhcpEnumFilterV4(ServerIpAddress: CPointer<UInt16>, ResumeHandle: CPointer<DHCP_ADDR_PATTERN>, PreferredMaximum: UInt32, ListType: Int32, EnumFilterInfo: CPointer<CPointer<DHCP_FILTER_ENUM_INFO>>, ElementsRead: CPointer<UInt32>, ElementsTotal: CPointer<UInt32>): UInt32 {
+    return DhcpEnumFilterV4(ServerIpAddress, ResumeHandle, PreferredMaximum, ListType, EnumFilterInfo, ElementsRead, ElementsTotal)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumOptionValues == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpEnumOptionValues(ServerIpAddress: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO>, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, OptionValues: CPointer<CPointer<DHCP_OPTION_VALUE_ARRAY>>, OptionsRead: CPointer<UInt32>, OptionsTotal: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumOptionValues == "on"]
+public unsafe func Windows_DhcpEnumOptionValues(ServerIpAddress: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO>, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, OptionValues: CPointer<CPointer<DHCP_OPTION_VALUE_ARRAY>>, OptionsRead: CPointer<UInt32>, OptionsTotal: CPointer<UInt32>): UInt32 {
+    return DhcpEnumOptionValues(ServerIpAddress, ScopeInfo, ResumeHandle, PreferredMaximum, OptionValues, OptionsRead, OptionsTotal)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumOptionValuesV5 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     // param-hint: ClassName optional
     // param-hint: VendorName optional
     func DhcpEnumOptionValuesV5(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO>, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, OptionValues: CPointer<CPointer<DHCP_OPTION_VALUE_ARRAY>>, OptionsRead: CPointer<UInt32>, OptionsTotal: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumOptionValuesV5 == "on"]
+public unsafe func Windows_DhcpEnumOptionValuesV5(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO>, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, OptionValues: CPointer<CPointer<DHCP_OPTION_VALUE_ARRAY>>, OptionsRead: CPointer<UInt32>, OptionsTotal: CPointer<UInt32>): UInt32 {
+    return DhcpEnumOptionValuesV5(ServerIpAddress, Flags, ClassName, VendorName, ScopeInfo, ResumeHandle, PreferredMaximum, OptionValues, OptionsRead, OptionsTotal)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumOptionValuesV6 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     // param-hint: ClassName optional
     // param-hint: VendorName optional
     func DhcpEnumOptionValuesV6(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO6>, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, OptionValues: CPointer<CPointer<DHCP_OPTION_VALUE_ARRAY>>, OptionsRead: CPointer<UInt32>, OptionsTotal: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumOptionValuesV6 == "on"]
+public unsafe func Windows_DhcpEnumOptionValuesV6(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO6>, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, OptionValues: CPointer<CPointer<DHCP_OPTION_VALUE_ARRAY>>, OptionsRead: CPointer<UInt32>, OptionsTotal: CPointer<UInt32>): UInt32 {
+    return DhcpEnumOptionValuesV6(ServerIpAddress, Flags, ClassName, VendorName, ScopeInfo, ResumeHandle, PreferredMaximum, OptionValues, OptionsRead, OptionsTotal)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumOptions == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpEnumOptions(ServerIpAddress: CPointer<UInt16>, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, Options: CPointer<CPointer<DHCP_OPTION_ARRAY>>, OptionsRead: CPointer<UInt32>, OptionsTotal: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumOptions == "on"]
+public unsafe func Windows_DhcpEnumOptions(ServerIpAddress: CPointer<UInt16>, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, Options: CPointer<CPointer<DHCP_OPTION_ARRAY>>, OptionsRead: CPointer<UInt32>, OptionsTotal: CPointer<UInt32>): UInt32 {
+    return DhcpEnumOptions(ServerIpAddress, ResumeHandle, PreferredMaximum, Options, OptionsRead, OptionsTotal)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumOptionsV5 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     // param-hint: ClassName optional
     // param-hint: VendorName optional
     func DhcpEnumOptionsV5(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, Options: CPointer<CPointer<DHCP_OPTION_ARRAY>>, OptionsRead: CPointer<UInt32>, OptionsTotal: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumOptionsV5 == "on"]
+public unsafe func Windows_DhcpEnumOptionsV5(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, Options: CPointer<CPointer<DHCP_OPTION_ARRAY>>, OptionsRead: CPointer<UInt32>, OptionsTotal: CPointer<UInt32>): UInt32 {
+    return DhcpEnumOptionsV5(ServerIpAddress, Flags, ClassName, VendorName, ResumeHandle, PreferredMaximum, Options, OptionsRead, OptionsTotal)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumOptionsV6 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     // param-hint: ClassName optional
     // param-hint: VendorName optional
     func DhcpEnumOptionsV6(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, Options: CPointer<CPointer<DHCP_OPTION_ARRAY>>, OptionsRead: CPointer<UInt32>, OptionsTotal: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumOptionsV6 == "on"]
+public unsafe func Windows_DhcpEnumOptionsV6(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, Options: CPointer<CPointer<DHCP_OPTION_ARRAY>>, OptionsRead: CPointer<UInt32>, OptionsTotal: CPointer<UInt32>): UInt32 {
+    return DhcpEnumOptionsV6(ServerIpAddress, Flags, ClassName, VendorName, ResumeHandle, PreferredMaximum, Options, OptionsRead, OptionsTotal)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumServers == "on"]
+foreign {
     func DhcpEnumServers(Flags: UInt32, IdInfo: CPointer<Unit>, Servers: CPointer<CPointer<DHCPDS_SERVERS>>, CallbackFn: CPointer<Unit>, CallbackData: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumServers == "on"]
+public unsafe func Windows_DhcpEnumServers(Flags: UInt32, IdInfo: CPointer<Unit>, Servers: CPointer<CPointer<DHCPDS_SERVERS>>, CallbackFn: CPointer<Unit>, CallbackData: CPointer<Unit>): UInt32 {
+    return DhcpEnumServers(Flags, IdInfo, Servers, CallbackFn, CallbackData)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumSubnetClients == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpEnumSubnetClients(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, ClientInfo: CPointer<CPointer<DHCP_CLIENT_INFO_ARRAY>>, ClientsRead: CPointer<UInt32>, ClientsTotal: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumSubnetClients == "on"]
+public unsafe func Windows_DhcpEnumSubnetClients(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, ClientInfo: CPointer<CPointer<DHCP_CLIENT_INFO_ARRAY>>, ClientsRead: CPointer<UInt32>, ClientsTotal: CPointer<UInt32>): UInt32 {
+    return DhcpEnumSubnetClients(ServerIpAddress, SubnetAddress, ResumeHandle, PreferredMaximum, ClientInfo, ClientsRead, ClientsTotal)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumSubnetClientsFilterStatusInfo == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpEnumSubnetClientsFilterStatusInfo(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, ClientInfo: CPointer<CPointer<DHCP_CLIENT_FILTER_STATUS_INFO_ARRAY>>, ClientsRead: CPointer<UInt32>, ClientsTotal: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumSubnetClientsFilterStatusInfo == "on"]
+public unsafe func Windows_DhcpEnumSubnetClientsFilterStatusInfo(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, ClientInfo: CPointer<CPointer<DHCP_CLIENT_FILTER_STATUS_INFO_ARRAY>>, ClientsRead: CPointer<UInt32>, ClientsTotal: CPointer<UInt32>): UInt32 {
+    return DhcpEnumSubnetClientsFilterStatusInfo(ServerIpAddress, SubnetAddress, ResumeHandle, PreferredMaximum, ClientInfo, ClientsRead, ClientsTotal)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumSubnetClientsV4 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpEnumSubnetClientsV4(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, ClientInfo: CPointer<CPointer<DHCP_CLIENT_INFO_ARRAY_V4>>, ClientsRead: CPointer<UInt32>, ClientsTotal: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumSubnetClientsV4 == "on"]
+public unsafe func Windows_DhcpEnumSubnetClientsV4(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, ClientInfo: CPointer<CPointer<DHCP_CLIENT_INFO_ARRAY_V4>>, ClientsRead: CPointer<UInt32>, ClientsTotal: CPointer<UInt32>): UInt32 {
+    return DhcpEnumSubnetClientsV4(ServerIpAddress, SubnetAddress, ResumeHandle, PreferredMaximum, ClientInfo, ClientsRead, ClientsTotal)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumSubnetClientsV5 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpEnumSubnetClientsV5(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, ClientInfo: CPointer<CPointer<DHCP_CLIENT_INFO_ARRAY_V5>>, ClientsRead: CPointer<UInt32>, ClientsTotal: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumSubnetClientsV5 == "on"]
+public unsafe func Windows_DhcpEnumSubnetClientsV5(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, ClientInfo: CPointer<CPointer<DHCP_CLIENT_INFO_ARRAY_V5>>, ClientsRead: CPointer<UInt32>, ClientsTotal: CPointer<UInt32>): UInt32 {
+    return DhcpEnumSubnetClientsV5(ServerIpAddress, SubnetAddress, ResumeHandle, PreferredMaximum, ClientInfo, ClientsRead, ClientsTotal)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumSubnetClientsV6 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpEnumSubnetClientsV6(ServerIpAddress: CPointer<UInt16>, SubnetAddress: DHCP_IPV6_ADDRESS, ResumeHandle: CPointer<DHCP_IPV6_ADDRESS>, PreferredMaximum: UInt32, ClientInfo: CPointer<CPointer<DHCP_CLIENT_INFO_ARRAY_V6>>, ClientsRead: CPointer<UInt32>, ClientsTotal: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumSubnetClientsV6 == "on"]
+public unsafe func Windows_DhcpEnumSubnetClientsV6(ServerIpAddress: CPointer<UInt16>, SubnetAddress: DHCP_IPV6_ADDRESS, ResumeHandle: CPointer<DHCP_IPV6_ADDRESS>, PreferredMaximum: UInt32, ClientInfo: CPointer<CPointer<DHCP_CLIENT_INFO_ARRAY_V6>>, ClientsRead: CPointer<UInt32>, ClientsTotal: CPointer<UInt32>): UInt32 {
+    return DhcpEnumSubnetClientsV6(ServerIpAddress, SubnetAddress, ResumeHandle, PreferredMaximum, ClientInfo, ClientsRead, ClientsTotal)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumSubnetClientsVQ == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpEnumSubnetClientsVQ(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, ClientInfo: CPointer<CPointer<DHCP_CLIENT_INFO_ARRAY_VQ>>, ClientsRead: CPointer<UInt32>, ClientsTotal: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumSubnetClientsVQ == "on"]
+public unsafe func Windows_DhcpEnumSubnetClientsVQ(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, ClientInfo: CPointer<CPointer<DHCP_CLIENT_INFO_ARRAY_VQ>>, ClientsRead: CPointer<UInt32>, ClientsTotal: CPointer<UInt32>): UInt32 {
+    return DhcpEnumSubnetClientsVQ(ServerIpAddress, SubnetAddress, ResumeHandle, PreferredMaximum, ClientInfo, ClientsRead, ClientsTotal)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumSubnetElements == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpEnumSubnetElements(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, EnumElementType: Int32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, EnumElementInfo: CPointer<CPointer<DHCP_SUBNET_ELEMENT_INFO_ARRAY>>, ElementsRead: CPointer<UInt32>, ElementsTotal: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumSubnetElements == "on"]
+public unsafe func Windows_DhcpEnumSubnetElements(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, EnumElementType: Int32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, EnumElementInfo: CPointer<CPointer<DHCP_SUBNET_ELEMENT_INFO_ARRAY>>, ElementsRead: CPointer<UInt32>, ElementsTotal: CPointer<UInt32>): UInt32 {
+    return DhcpEnumSubnetElements(ServerIpAddress, SubnetAddress, EnumElementType, ResumeHandle, PreferredMaximum, EnumElementInfo, ElementsRead, ElementsTotal)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumSubnetElementsV4 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpEnumSubnetElementsV4(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, EnumElementType: Int32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, EnumElementInfo: CPointer<CPointer<DHCP_SUBNET_ELEMENT_INFO_ARRAY_V4>>, ElementsRead: CPointer<UInt32>, ElementsTotal: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumSubnetElementsV4 == "on"]
+public unsafe func Windows_DhcpEnumSubnetElementsV4(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, EnumElementType: Int32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, EnumElementInfo: CPointer<CPointer<DHCP_SUBNET_ELEMENT_INFO_ARRAY_V4>>, ElementsRead: CPointer<UInt32>, ElementsTotal: CPointer<UInt32>): UInt32 {
+    return DhcpEnumSubnetElementsV4(ServerIpAddress, SubnetAddress, EnumElementType, ResumeHandle, PreferredMaximum, EnumElementInfo, ElementsRead, ElementsTotal)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumSubnetElementsV5 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpEnumSubnetElementsV5(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, EnumElementType: Int32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, EnumElementInfo: CPointer<CPointer<DHCP_SUBNET_ELEMENT_INFO_ARRAY_V5>>, ElementsRead: CPointer<UInt32>, ElementsTotal: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumSubnetElementsV5 == "on"]
+public unsafe func Windows_DhcpEnumSubnetElementsV5(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, EnumElementType: Int32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, EnumElementInfo: CPointer<CPointer<DHCP_SUBNET_ELEMENT_INFO_ARRAY_V5>>, ElementsRead: CPointer<UInt32>, ElementsTotal: CPointer<UInt32>): UInt32 {
+    return DhcpEnumSubnetElementsV5(ServerIpAddress, SubnetAddress, EnumElementType, ResumeHandle, PreferredMaximum, EnumElementInfo, ElementsRead, ElementsTotal)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumSubnetElementsV6 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpEnumSubnetElementsV6(ServerIpAddress: CPointer<UInt16>, SubnetAddress: DHCP_IPV6_ADDRESS, EnumElementType: Int32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, EnumElementInfo: CPointer<CPointer<DHCP_SUBNET_ELEMENT_INFO_ARRAY_V6>>, ElementsRead: CPointer<UInt32>, ElementsTotal: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumSubnetElementsV6 == "on"]
+public unsafe func Windows_DhcpEnumSubnetElementsV6(ServerIpAddress: CPointer<UInt16>, SubnetAddress: DHCP_IPV6_ADDRESS, EnumElementType: Int32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, EnumElementInfo: CPointer<CPointer<DHCP_SUBNET_ELEMENT_INFO_ARRAY_V6>>, ElementsRead: CPointer<UInt32>, ElementsTotal: CPointer<UInt32>): UInt32 {
+    return DhcpEnumSubnetElementsV6(ServerIpAddress, SubnetAddress, EnumElementType, ResumeHandle, PreferredMaximum, EnumElementInfo, ElementsRead, ElementsTotal)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumSubnets == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpEnumSubnets(ServerIpAddress: CPointer<UInt16>, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, EnumInfo: CPointer<CPointer<DHCP_IP_ARRAY>>, ElementsRead: CPointer<UInt32>, ElementsTotal: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumSubnets == "on"]
+public unsafe func Windows_DhcpEnumSubnets(ServerIpAddress: CPointer<UInt16>, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, EnumInfo: CPointer<CPointer<DHCP_IP_ARRAY>>, ElementsRead: CPointer<UInt32>, ElementsTotal: CPointer<UInt32>): UInt32 {
+    return DhcpEnumSubnets(ServerIpAddress, ResumeHandle, PreferredMaximum, EnumInfo, ElementsRead, ElementsTotal)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumSubnetsV6 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpEnumSubnetsV6(ServerIpAddress: CPointer<UInt16>, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, EnumInfo: CPointer<CPointer<DHCPV6_IP_ARRAY>>, ElementsRead: CPointer<UInt32>, ElementsTotal: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpEnumSubnetsV6 == "on"]
+public unsafe func Windows_DhcpEnumSubnetsV6(ServerIpAddress: CPointer<UInt16>, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, EnumInfo: CPointer<CPointer<DHCPV6_IP_ARRAY>>, ElementsRead: CPointer<UInt32>, ElementsTotal: CPointer<UInt32>): UInt32 {
+    return DhcpEnumSubnetsV6(ServerIpAddress, ResumeHandle, PreferredMaximum, EnumInfo, ElementsRead, ElementsTotal)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetAllOptionValues == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpGetAllOptionValues(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO>, Values: CPointer<CPointer<DHCP_ALL_OPTION_VALUES>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetAllOptionValues == "on"]
+public unsafe func Windows_DhcpGetAllOptionValues(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO>, Values: CPointer<CPointer<DHCP_ALL_OPTION_VALUES>>): UInt32 {
+    return DhcpGetAllOptionValues(ServerIpAddress, Flags, ScopeInfo, Values)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetAllOptionValuesV6 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpGetAllOptionValuesV6(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO6>, Values: CPointer<CPointer<DHCP_ALL_OPTION_VALUES>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetAllOptionValuesV6 == "on"]
+public unsafe func Windows_DhcpGetAllOptionValuesV6(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO6>, Values: CPointer<CPointer<DHCP_ALL_OPTION_VALUES>>): UInt32 {
+    return DhcpGetAllOptionValuesV6(ServerIpAddress, Flags, ScopeInfo, Values)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetAllOptions == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpGetAllOptions(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionStruct: CPointer<CPointer<DHCP_ALL_OPTIONS>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetAllOptions == "on"]
+public unsafe func Windows_DhcpGetAllOptions(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionStruct: CPointer<CPointer<DHCP_ALL_OPTIONS>>): UInt32 {
+    return DhcpGetAllOptions(ServerIpAddress, Flags, OptionStruct)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetAllOptionsV6 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpGetAllOptionsV6(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionStruct: CPointer<CPointer<DHCP_ALL_OPTIONS>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetAllOptionsV6 == "on"]
+public unsafe func Windows_DhcpGetAllOptionsV6(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionStruct: CPointer<CPointer<DHCP_ALL_OPTIONS>>): UInt32 {
+    return DhcpGetAllOptionsV6(ServerIpAddress, Flags, OptionStruct)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetClassInfo == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpGetClassInfo(ServerIpAddress: CPointer<UInt16>, ReservedMustBeZero: UInt32, PartialClassInfo: CPointer<DHCP_CLASS_INFO>, FilledClassInfo: CPointer<CPointer<DHCP_CLASS_INFO>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetClassInfo == "on"]
+public unsafe func Windows_DhcpGetClassInfo(ServerIpAddress: CPointer<UInt16>, ReservedMustBeZero: UInt32, PartialClassInfo: CPointer<DHCP_CLASS_INFO>, FilledClassInfo: CPointer<CPointer<DHCP_CLASS_INFO>>): UInt32 {
+    return DhcpGetClassInfo(ServerIpAddress, ReservedMustBeZero, PartialClassInfo, FilledClassInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetClientInfo == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpGetClientInfo(ServerIpAddress: CPointer<UInt16>, SearchInfo: CPointer<DHCP_SEARCH_INFO>, ClientInfo: CPointer<CPointer<DHCP_CLIENT_INFO>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetClientInfo == "on"]
+public unsafe func Windows_DhcpGetClientInfo(ServerIpAddress: CPointer<UInt16>, SearchInfo: CPointer<DHCP_SEARCH_INFO>, ClientInfo: CPointer<CPointer<DHCP_CLIENT_INFO>>): UInt32 {
+    return DhcpGetClientInfo(ServerIpAddress, SearchInfo, ClientInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetClientInfoV4 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpGetClientInfoV4(ServerIpAddress: CPointer<UInt16>, SearchInfo: CPointer<DHCP_SEARCH_INFO>, ClientInfo: CPointer<CPointer<DHCP_CLIENT_INFO_V4>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetClientInfoV4 == "on"]
+public unsafe func Windows_DhcpGetClientInfoV4(ServerIpAddress: CPointer<UInt16>, SearchInfo: CPointer<DHCP_SEARCH_INFO>, ClientInfo: CPointer<CPointer<DHCP_CLIENT_INFO_V4>>): UInt32 {
+    return DhcpGetClientInfoV4(ServerIpAddress, SearchInfo, ClientInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetClientInfoV6 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpGetClientInfoV6(ServerIpAddress: CPointer<UInt16>, SearchInfo: CPointer<DHCP_SEARCH_INFO_V6>, ClientInfo: CPointer<CPointer<DHCP_CLIENT_INFO_V6>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetClientInfoV6 == "on"]
+public unsafe func Windows_DhcpGetClientInfoV6(ServerIpAddress: CPointer<UInt16>, SearchInfo: CPointer<DHCP_SEARCH_INFO_V6>, ClientInfo: CPointer<CPointer<DHCP_CLIENT_INFO_V6>>): UInt32 {
+    return DhcpGetClientInfoV6(ServerIpAddress, SearchInfo, ClientInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetClientInfoVQ == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpGetClientInfoVQ(ServerIpAddress: CPointer<UInt16>, SearchInfo: CPointer<DHCP_SEARCH_INFO>, ClientInfo: CPointer<CPointer<DHCP_CLIENT_INFO_VQ>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetClientInfoVQ == "on"]
+public unsafe func Windows_DhcpGetClientInfoVQ(ServerIpAddress: CPointer<UInt16>, SearchInfo: CPointer<DHCP_SEARCH_INFO>, ClientInfo: CPointer<CPointer<DHCP_CLIENT_INFO_VQ>>): UInt32 {
+    return DhcpGetClientInfoVQ(ServerIpAddress, SearchInfo, ClientInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetClientOptions == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpGetClientOptions(ServerIpAddress: CPointer<UInt16>, ClientIpAddress: UInt32, ClientSubnetMask: UInt32, ClientOptions: CPointer<CPointer<DHCP_OPTION_LIST>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetClientOptions == "on"]
+public unsafe func Windows_DhcpGetClientOptions(ServerIpAddress: CPointer<UInt16>, ClientIpAddress: UInt32, ClientSubnetMask: UInt32, ClientOptions: CPointer<CPointer<DHCP_OPTION_LIST>>): UInt32 {
+    return DhcpGetClientOptions(ServerIpAddress, ClientIpAddress, ClientSubnetMask, ClientOptions)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetFilterV4 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpGetFilterV4(ServerIpAddress: CPointer<UInt16>, GlobalFilterInfo: CPointer<DHCP_FILTER_GLOBAL_INFO>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetFilterV4 == "on"]
+public unsafe func Windows_DhcpGetFilterV4(ServerIpAddress: CPointer<UInt16>, GlobalFilterInfo: CPointer<DHCP_FILTER_GLOBAL_INFO>): UInt32 {
+    return DhcpGetFilterV4(ServerIpAddress, GlobalFilterInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetMibInfo == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpGetMibInfo(ServerIpAddress: CPointer<UInt16>, MibInfo: CPointer<CPointer<DHCP_MIB_INFO>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetMibInfo == "on"]
+public unsafe func Windows_DhcpGetMibInfo(ServerIpAddress: CPointer<UInt16>, MibInfo: CPointer<CPointer<DHCP_MIB_INFO>>): UInt32 {
+    return DhcpGetMibInfo(ServerIpAddress, MibInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetMibInfoV5 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpGetMibInfoV5(ServerIpAddress: CPointer<UInt16>, MibInfo: CPointer<CPointer<DHCP_MIB_INFO_V5>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetMibInfoV5 == "on"]
+public unsafe func Windows_DhcpGetMibInfoV5(ServerIpAddress: CPointer<UInt16>, MibInfo: CPointer<CPointer<DHCP_MIB_INFO_V5>>): UInt32 {
+    return DhcpGetMibInfoV5(ServerIpAddress, MibInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetMibInfoV6 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpGetMibInfoV6(ServerIpAddress: CPointer<UInt16>, MibInfo: CPointer<CPointer<DHCP_MIB_INFO_V6>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetMibInfoV6 == "on"]
+public unsafe func Windows_DhcpGetMibInfoV6(ServerIpAddress: CPointer<UInt16>, MibInfo: CPointer<CPointer<DHCP_MIB_INFO_V6>>): UInt32 {
+    return DhcpGetMibInfoV6(ServerIpAddress, MibInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetOptionInfo == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpGetOptionInfo(ServerIpAddress: CPointer<UInt16>, OptionID: UInt32, OptionInfo: CPointer<CPointer<DHCP_OPTION>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetOptionInfo == "on"]
+public unsafe func Windows_DhcpGetOptionInfo(ServerIpAddress: CPointer<UInt16>, OptionID: UInt32, OptionInfo: CPointer<CPointer<DHCP_OPTION>>): UInt32 {
+    return DhcpGetOptionInfo(ServerIpAddress, OptionID, OptionInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetOptionInfoV5 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     // param-hint: ClassName optional
     // param-hint: VendorName optional
     func DhcpGetOptionInfoV5(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionID: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, OptionInfo: CPointer<CPointer<DHCP_OPTION>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetOptionInfoV5 == "on"]
+public unsafe func Windows_DhcpGetOptionInfoV5(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionID: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, OptionInfo: CPointer<CPointer<DHCP_OPTION>>): UInt32 {
+    return DhcpGetOptionInfoV5(ServerIpAddress, Flags, OptionID, ClassName, VendorName, OptionInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetOptionInfoV6 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     // param-hint: ClassName optional
     // param-hint: VendorName optional
     func DhcpGetOptionInfoV6(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionID: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, OptionInfo: CPointer<CPointer<DHCP_OPTION>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetOptionInfoV6 == "on"]
+public unsafe func Windows_DhcpGetOptionInfoV6(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionID: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, OptionInfo: CPointer<CPointer<DHCP_OPTION>>): UInt32 {
+    return DhcpGetOptionInfoV6(ServerIpAddress, Flags, OptionID, ClassName, VendorName, OptionInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetOptionValue == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpGetOptionValue(ServerIpAddress: CPointer<UInt16>, OptionID: UInt32, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO>, OptionValue: CPointer<CPointer<DHCP_OPTION_VALUE>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetOptionValue == "on"]
+public unsafe func Windows_DhcpGetOptionValue(ServerIpAddress: CPointer<UInt16>, OptionID: UInt32, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO>, OptionValue: CPointer<CPointer<DHCP_OPTION_VALUE>>): UInt32 {
+    return DhcpGetOptionValue(ServerIpAddress, OptionID, ScopeInfo, OptionValue)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetOptionValueV5 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     // param-hint: ClassName optional
     // param-hint: VendorName optional
     func DhcpGetOptionValueV5(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionID: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO>, OptionValue: CPointer<CPointer<DHCP_OPTION_VALUE>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetOptionValueV5 == "on"]
+public unsafe func Windows_DhcpGetOptionValueV5(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionID: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO>, OptionValue: CPointer<CPointer<DHCP_OPTION_VALUE>>): UInt32 {
+    return DhcpGetOptionValueV5(ServerIpAddress, Flags, OptionID, ClassName, VendorName, ScopeInfo, OptionValue)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetOptionValueV6 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     // param-hint: ClassName optional
     // param-hint: VendorName optional
     func DhcpGetOptionValueV6(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionID: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO6>, OptionValue: CPointer<CPointer<DHCP_OPTION_VALUE>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetOptionValueV6 == "on"]
+public unsafe func Windows_DhcpGetOptionValueV6(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionID: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO6>, OptionValue: CPointer<CPointer<DHCP_OPTION_VALUE>>): UInt32 {
+    return DhcpGetOptionValueV6(ServerIpAddress, Flags, OptionID, ClassName, VendorName, ScopeInfo, OptionValue)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetServerBindingInfo == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpGetServerBindingInfo(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, BindElementsInfo: CPointer<CPointer<DHCP_BIND_ELEMENT_ARRAY>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetServerBindingInfo == "on"]
+public unsafe func Windows_DhcpGetServerBindingInfo(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, BindElementsInfo: CPointer<CPointer<DHCP_BIND_ELEMENT_ARRAY>>): UInt32 {
+    return DhcpGetServerBindingInfo(ServerIpAddress, Flags, BindElementsInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetServerBindingInfoV6 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpGetServerBindingInfoV6(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, BindElementsInfo: CPointer<CPointer<DHCPV6_BIND_ELEMENT_ARRAY>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetServerBindingInfoV6 == "on"]
+public unsafe func Windows_DhcpGetServerBindingInfoV6(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, BindElementsInfo: CPointer<CPointer<DHCPV6_BIND_ELEMENT_ARRAY>>): UInt32 {
+    return DhcpGetServerBindingInfoV6(ServerIpAddress, Flags, BindElementsInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetServerSpecificStrings == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpGetServerSpecificStrings(ServerIpAddress: CPointer<UInt16>, ServerSpecificStrings: CPointer<CPointer<DHCP_SERVER_SPECIFIC_STRINGS>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetServerSpecificStrings == "on"]
+public unsafe func Windows_DhcpGetServerSpecificStrings(ServerIpAddress: CPointer<UInt16>, ServerSpecificStrings: CPointer<CPointer<DHCP_SERVER_SPECIFIC_STRINGS>>): UInt32 {
+    return DhcpGetServerSpecificStrings(ServerIpAddress, ServerSpecificStrings)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetSubnetDelayOffer == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpGetSubnetDelayOffer(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, TimeDelayInMilliseconds: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetSubnetDelayOffer == "on"]
+public unsafe func Windows_DhcpGetSubnetDelayOffer(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, TimeDelayInMilliseconds: CPointer<UInt16>): UInt32 {
+    return DhcpGetSubnetDelayOffer(ServerIpAddress, SubnetAddress, TimeDelayInMilliseconds)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetSubnetInfo == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpGetSubnetInfo(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, SubnetInfo: CPointer<CPointer<DHCP_SUBNET_INFO>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetSubnetInfo == "on"]
+public unsafe func Windows_DhcpGetSubnetInfo(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, SubnetInfo: CPointer<CPointer<DHCP_SUBNET_INFO>>): UInt32 {
+    return DhcpGetSubnetInfo(ServerIpAddress, SubnetAddress, SubnetInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetSubnetInfoV6 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpGetSubnetInfoV6(ServerIpAddress: CPointer<UInt16>, SubnetAddress: DHCP_IPV6_ADDRESS, SubnetInfo: CPointer<CPointer<DHCP_SUBNET_INFO_V6>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetSubnetInfoV6 == "on"]
+public unsafe func Windows_DhcpGetSubnetInfoV6(ServerIpAddress: CPointer<UInt16>, SubnetAddress: DHCP_IPV6_ADDRESS, SubnetInfo: CPointer<CPointer<DHCP_SUBNET_INFO_V6>>): UInt32 {
+    return DhcpGetSubnetInfoV6(ServerIpAddress, SubnetAddress, SubnetInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetSubnetInfoVQ == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpGetSubnetInfoVQ(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, SubnetInfo: CPointer<CPointer<DHCP_SUBNET_INFO_VQ>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetSubnetInfoVQ == "on"]
+public unsafe func Windows_DhcpGetSubnetInfoVQ(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, SubnetInfo: CPointer<CPointer<DHCP_SUBNET_INFO_VQ>>): UInt32 {
+    return DhcpGetSubnetInfoVQ(ServerIpAddress, SubnetAddress, SubnetInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetSuperScopeInfoV4 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpGetSuperScopeInfoV4(ServerIpAddress: CPointer<UInt16>, SuperScopeTable: CPointer<CPointer<DHCP_SUPER_SCOPE_TABLE>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetSuperScopeInfoV4 == "on"]
+public unsafe func Windows_DhcpGetSuperScopeInfoV4(ServerIpAddress: CPointer<UInt16>, SuperScopeTable: CPointer<CPointer<DHCP_SUPER_SCOPE_TABLE>>): UInt32 {
+    return DhcpGetSuperScopeInfoV4(ServerIpAddress, SuperScopeTable)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetThreadOptions == "on"]
+foreign {
     func DhcpGetThreadOptions(pFlags: CPointer<UInt32>, Reserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetThreadOptions == "on"]
+public unsafe func Windows_DhcpGetThreadOptions(pFlags: CPointer<UInt32>, Reserved: CPointer<Unit>): UInt32 {
+    return DhcpGetThreadOptions(pFlags, Reserved)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetVersion == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpGetVersion(ServerIpAddress: CPointer<UInt16>, MajorVersion: CPointer<UInt32>, MinorVersion: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetVersion == "on"]
+public unsafe func Windows_DhcpGetVersion(ServerIpAddress: CPointer<UInt16>, MajorVersion: CPointer<UInt32>, MinorVersion: CPointer<UInt32>): UInt32 {
+    return DhcpGetVersion(ServerIpAddress, MajorVersion, MinorVersion)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprAddV4PolicyCondition == "on"]
+foreign {
     // param-hint: VendorName optional
     // param-hint: Value bytes=param[8]
     func DhcpHlprAddV4PolicyCondition(Policy: CPointer<DHCP_POLICY>, ParentExpr: UInt32, Type: Int32, OptionID: UInt32, SubOptionID: UInt32, VendorName: CPointer<UInt16>, Operator: Int32, Value: CPointer<UInt8>, ValueLength: UInt32, ConditionIndex: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprAddV4PolicyCondition == "on"]
+public unsafe func Windows_DhcpHlprAddV4PolicyCondition(Policy: CPointer<DHCP_POLICY>, ParentExpr: UInt32, Type: Int32, OptionID: UInt32, SubOptionID: UInt32, VendorName: CPointer<UInt16>, Operator: Int32, Value: CPointer<UInt8>, ValueLength: UInt32, ConditionIndex: CPointer<UInt32>): UInt32 {
+    return DhcpHlprAddV4PolicyCondition(Policy, ParentExpr, Type, OptionID, SubOptionID, VendorName, Operator, Value, ValueLength, ConditionIndex)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprAddV4PolicyExpr == "on"]
+foreign {
     func DhcpHlprAddV4PolicyExpr(Policy: CPointer<DHCP_POLICY>, ParentExpr: UInt32, Operator: Int32, ExprIndex: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprAddV4PolicyExpr == "on"]
+public unsafe func Windows_DhcpHlprAddV4PolicyExpr(Policy: CPointer<DHCP_POLICY>, ParentExpr: UInt32, Operator: Int32, ExprIndex: CPointer<UInt32>): UInt32 {
+    return DhcpHlprAddV4PolicyExpr(Policy, ParentExpr, Operator, ExprIndex)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprAddV4PolicyRange == "on"]
+foreign {
     func DhcpHlprAddV4PolicyRange(Policy: CPointer<DHCP_POLICY>, Range: CPointer<DHCP_IP_RANGE>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprAddV4PolicyRange == "on"]
+public unsafe func Windows_DhcpHlprAddV4PolicyRange(Policy: CPointer<DHCP_POLICY>, Range: CPointer<DHCP_IP_RANGE>): UInt32 {
+    return DhcpHlprAddV4PolicyRange(Policy, Range)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprCreateV4Policy == "on"]
+foreign {
     func DhcpHlprCreateV4Policy(PolicyName: CPointer<UInt16>, fGlobalPolicy: Int32, Subnet: UInt32, ProcessingOrder: UInt32, RootOperator: Int32, Description: CPointer<UInt16>, Enabled: Int32, Policy: CPointer<CPointer<DHCP_POLICY>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprCreateV4Policy == "on"]
+public unsafe func Windows_DhcpHlprCreateV4Policy(PolicyName: CPointer<UInt16>, fGlobalPolicy: Int32, Subnet: UInt32, ProcessingOrder: UInt32, RootOperator: Int32, Description: CPointer<UInt16>, Enabled: Int32, Policy: CPointer<CPointer<DHCP_POLICY>>): UInt32 {
+    return DhcpHlprCreateV4Policy(PolicyName, fGlobalPolicy, Subnet, ProcessingOrder, RootOperator, Description, Enabled, Policy)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprCreateV4PolicyEx == "on"]
+foreign {
     func DhcpHlprCreateV4PolicyEx(PolicyName: CPointer<UInt16>, fGlobalPolicy: Int32, Subnet: UInt32, ProcessingOrder: UInt32, RootOperator: Int32, Description: CPointer<UInt16>, Enabled: Int32, Policy: CPointer<CPointer<DHCP_POLICY_EX>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprCreateV4PolicyEx == "on"]
+public unsafe func Windows_DhcpHlprCreateV4PolicyEx(PolicyName: CPointer<UInt16>, fGlobalPolicy: Int32, Subnet: UInt32, ProcessingOrder: UInt32, RootOperator: Int32, Description: CPointer<UInt16>, Enabled: Int32, Policy: CPointer<CPointer<DHCP_POLICY_EX>>): UInt32 {
+    return DhcpHlprCreateV4PolicyEx(PolicyName, fGlobalPolicy, Subnet, ProcessingOrder, RootOperator, Description, Enabled, Policy)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprFindV4DhcpProperty == "on"]
+foreign {
     func DhcpHlprFindV4DhcpProperty(PropertyArray: CPointer<DHCP_PROPERTY_ARRAY>, ID: Int32, Type: Int32): CPointer<DHCP_PROPERTY>
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprFindV4DhcpProperty == "on"]
+public unsafe func Windows_DhcpHlprFindV4DhcpProperty(PropertyArray: CPointer<DHCP_PROPERTY_ARRAY>, ID: Int32, Type: Int32): CPointer<DHCP_PROPERTY> {
+    return DhcpHlprFindV4DhcpProperty(PropertyArray, ID, Type)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprFreeV4DhcpProperty == "on"]
+foreign {
     func DhcpHlprFreeV4DhcpProperty(Property: CPointer<DHCP_PROPERTY>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprFreeV4DhcpProperty == "on"]
+public unsafe func Windows_DhcpHlprFreeV4DhcpProperty(Property: CPointer<DHCP_PROPERTY>): Unit {
+    DhcpHlprFreeV4DhcpProperty(Property)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprFreeV4DhcpPropertyArray == "on"]
+foreign {
     func DhcpHlprFreeV4DhcpPropertyArray(PropertyArray: CPointer<DHCP_PROPERTY_ARRAY>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprFreeV4DhcpPropertyArray == "on"]
+public unsafe func Windows_DhcpHlprFreeV4DhcpPropertyArray(PropertyArray: CPointer<DHCP_PROPERTY_ARRAY>): Unit {
+    DhcpHlprFreeV4DhcpPropertyArray(PropertyArray)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprFreeV4Policy == "on"]
+foreign {
     func DhcpHlprFreeV4Policy(Policy: CPointer<DHCP_POLICY>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprFreeV4Policy == "on"]
+public unsafe func Windows_DhcpHlprFreeV4Policy(Policy: CPointer<DHCP_POLICY>): Unit {
+    DhcpHlprFreeV4Policy(Policy)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprFreeV4PolicyArray == "on"]
+foreign {
     func DhcpHlprFreeV4PolicyArray(PolicyArray: CPointer<DHCP_POLICY_ARRAY>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprFreeV4PolicyArray == "on"]
+public unsafe func Windows_DhcpHlprFreeV4PolicyArray(PolicyArray: CPointer<DHCP_POLICY_ARRAY>): Unit {
+    DhcpHlprFreeV4PolicyArray(PolicyArray)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprFreeV4PolicyEx == "on"]
+foreign {
     func DhcpHlprFreeV4PolicyEx(PolicyEx: CPointer<DHCP_POLICY_EX>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprFreeV4PolicyEx == "on"]
+public unsafe func Windows_DhcpHlprFreeV4PolicyEx(PolicyEx: CPointer<DHCP_POLICY_EX>): Unit {
+    DhcpHlprFreeV4PolicyEx(PolicyEx)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprFreeV4PolicyExArray == "on"]
+foreign {
     func DhcpHlprFreeV4PolicyExArray(PolicyExArray: CPointer<DHCP_POLICY_EX_ARRAY>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprFreeV4PolicyExArray == "on"]
+public unsafe func Windows_DhcpHlprFreeV4PolicyExArray(PolicyExArray: CPointer<DHCP_POLICY_EX_ARRAY>): Unit {
+    DhcpHlprFreeV4PolicyExArray(PolicyExArray)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprIsV4PolicySingleUC == "on"]
+foreign {
     func DhcpHlprIsV4PolicySingleUC(Policy: CPointer<DHCP_POLICY>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprIsV4PolicySingleUC == "on"]
+public unsafe func Windows_DhcpHlprIsV4PolicySingleUC(Policy: CPointer<DHCP_POLICY>): Int32 {
+    return DhcpHlprIsV4PolicySingleUC(Policy)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprIsV4PolicyValid == "on"]
+foreign {
     func DhcpHlprIsV4PolicyValid(pPolicy: CPointer<DHCP_POLICY>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprIsV4PolicyValid == "on"]
+public unsafe func Windows_DhcpHlprIsV4PolicyValid(pPolicy: CPointer<DHCP_POLICY>): UInt32 {
+    return DhcpHlprIsV4PolicyValid(pPolicy)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprIsV4PolicyWellFormed == "on"]
+foreign {
     func DhcpHlprIsV4PolicyWellFormed(pPolicy: CPointer<DHCP_POLICY>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprIsV4PolicyWellFormed == "on"]
+public unsafe func Windows_DhcpHlprIsV4PolicyWellFormed(pPolicy: CPointer<DHCP_POLICY>): Int32 {
+    return DhcpHlprIsV4PolicyWellFormed(pPolicy)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprModifyV4PolicyExpr == "on"]
+foreign {
     func DhcpHlprModifyV4PolicyExpr(Policy: CPointer<DHCP_POLICY>, Operator: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprModifyV4PolicyExpr == "on"]
+public unsafe func Windows_DhcpHlprModifyV4PolicyExpr(Policy: CPointer<DHCP_POLICY>, Operator: Int32): UInt32 {
+    return DhcpHlprModifyV4PolicyExpr(Policy, Operator)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprResetV4PolicyExpr == "on"]
+foreign {
     func DhcpHlprResetV4PolicyExpr(Policy: CPointer<DHCP_POLICY>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpHlprResetV4PolicyExpr == "on"]
+public unsafe func Windows_DhcpHlprResetV4PolicyExpr(Policy: CPointer<DHCP_POLICY>): UInt32 {
+    return DhcpHlprResetV4PolicyExpr(Policy)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpModifyClass == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpModifyClass(ServerIpAddress: CPointer<UInt16>, ReservedMustBeZero: UInt32, ClassInfo: CPointer<DHCP_CLASS_INFO>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpModifyClass == "on"]
+public unsafe func Windows_DhcpModifyClass(ServerIpAddress: CPointer<UInt16>, ReservedMustBeZero: UInt32, ClassInfo: CPointer<DHCP_CLASS_INFO>): UInt32 {
+    return DhcpModifyClass(ServerIpAddress, ReservedMustBeZero, ClassInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpModifyClassV6 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpModifyClassV6(ServerIpAddress: CPointer<UInt16>, ReservedMustBeZero: UInt32, ClassInfo: CPointer<DHCP_CLASS_INFO_V6>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpModifyClassV6 == "on"]
+public unsafe func Windows_DhcpModifyClassV6(ServerIpAddress: CPointer<UInt16>, ReservedMustBeZero: UInt32, ClassInfo: CPointer<DHCP_CLASS_INFO_V6>): UInt32 {
+    return DhcpModifyClassV6(ServerIpAddress, ReservedMustBeZero, ClassInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpRemoveOption == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpRemoveOption(ServerIpAddress: CPointer<UInt16>, OptionID: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpRemoveOption == "on"]
+public unsafe func Windows_DhcpRemoveOption(ServerIpAddress: CPointer<UInt16>, OptionID: UInt32): UInt32 {
+    return DhcpRemoveOption(ServerIpAddress, OptionID)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpRemoveOptionV5 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     // param-hint: ClassName optional
     // param-hint: VendorName optional
     func DhcpRemoveOptionV5(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionID: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpRemoveOptionV5 == "on"]
+public unsafe func Windows_DhcpRemoveOptionV5(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionID: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>): UInt32 {
+    return DhcpRemoveOptionV5(ServerIpAddress, Flags, OptionID, ClassName, VendorName)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpRemoveOptionV6 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     // param-hint: ClassName optional
     // param-hint: VendorName optional
     func DhcpRemoveOptionV6(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionID: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpRemoveOptionV6 == "on"]
+public unsafe func Windows_DhcpRemoveOptionV6(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionID: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>): UInt32 {
+    return DhcpRemoveOptionV6(ServerIpAddress, Flags, OptionID, ClassName, VendorName)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpRemoveOptionValue == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpRemoveOptionValue(ServerIpAddress: CPointer<UInt16>, OptionID: UInt32, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpRemoveOptionValue == "on"]
+public unsafe func Windows_DhcpRemoveOptionValue(ServerIpAddress: CPointer<UInt16>, OptionID: UInt32, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO>): UInt32 {
+    return DhcpRemoveOptionValue(ServerIpAddress, OptionID, ScopeInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpRemoveOptionValueV5 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     // param-hint: ClassName optional
     // param-hint: VendorName optional
     func DhcpRemoveOptionValueV5(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionID: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpRemoveOptionValueV5 == "on"]
+public unsafe func Windows_DhcpRemoveOptionValueV5(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionID: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO>): UInt32 {
+    return DhcpRemoveOptionValueV5(ServerIpAddress, Flags, OptionID, ClassName, VendorName, ScopeInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpRemoveOptionValueV6 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     // param-hint: ClassName optional
     // param-hint: VendorName optional
     func DhcpRemoveOptionValueV6(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionID: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO6>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpRemoveOptionValueV6 == "on"]
+public unsafe func Windows_DhcpRemoveOptionValueV6(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionID: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO6>): UInt32 {
+    return DhcpRemoveOptionValueV6(ServerIpAddress, Flags, OptionID, ClassName, VendorName, ScopeInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpRemoveSubnetElement == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpRemoveSubnetElement(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, RemoveElementInfo: CPointer<DHCP_SUBNET_ELEMENT_DATA>, ForceFlag: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpRemoveSubnetElement == "on"]
+public unsafe func Windows_DhcpRemoveSubnetElement(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, RemoveElementInfo: CPointer<DHCP_SUBNET_ELEMENT_DATA>, ForceFlag: Int32): UInt32 {
+    return DhcpRemoveSubnetElement(ServerIpAddress, SubnetAddress, RemoveElementInfo, ForceFlag)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpRemoveSubnetElementV4 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpRemoveSubnetElementV4(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, RemoveElementInfo: CPointer<DHCP_SUBNET_ELEMENT_DATA_V4>, ForceFlag: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpRemoveSubnetElementV4 == "on"]
+public unsafe func Windows_DhcpRemoveSubnetElementV4(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, RemoveElementInfo: CPointer<DHCP_SUBNET_ELEMENT_DATA_V4>, ForceFlag: Int32): UInt32 {
+    return DhcpRemoveSubnetElementV4(ServerIpAddress, SubnetAddress, RemoveElementInfo, ForceFlag)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpRemoveSubnetElementV5 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpRemoveSubnetElementV5(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, RemoveElementInfo: CPointer<DHCP_SUBNET_ELEMENT_DATA_V5>, ForceFlag: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpRemoveSubnetElementV5 == "on"]
+public unsafe func Windows_DhcpRemoveSubnetElementV5(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, RemoveElementInfo: CPointer<DHCP_SUBNET_ELEMENT_DATA_V5>, ForceFlag: Int32): UInt32 {
+    return DhcpRemoveSubnetElementV5(ServerIpAddress, SubnetAddress, RemoveElementInfo, ForceFlag)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpRemoveSubnetElementV6 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpRemoveSubnetElementV6(ServerIpAddress: CPointer<UInt16>, SubnetAddress: DHCP_IPV6_ADDRESS, RemoveElementInfo: CPointer<DHCP_SUBNET_ELEMENT_DATA_V6>, ForceFlag: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpRemoveSubnetElementV6 == "on"]
+public unsafe func Windows_DhcpRemoveSubnetElementV6(ServerIpAddress: CPointer<UInt16>, SubnetAddress: DHCP_IPV6_ADDRESS, RemoveElementInfo: CPointer<DHCP_SUBNET_ELEMENT_DATA_V6>, ForceFlag: Int32): UInt32 {
+    return DhcpRemoveSubnetElementV6(ServerIpAddress, SubnetAddress, RemoveElementInfo, ForceFlag)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpRpcFreeMemory == "on"]
+foreign {
     func DhcpRpcFreeMemory(BufferPointer: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpRpcFreeMemory == "on"]
+public unsafe func Windows_DhcpRpcFreeMemory(BufferPointer: CPointer<Unit>): Unit {
+    DhcpRpcFreeMemory(BufferPointer)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpScanDatabase == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpScanDatabase(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, FixFlag: UInt32, ScanList: CPointer<CPointer<DHCP_SCAN_LIST>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpScanDatabase == "on"]
+public unsafe func Windows_DhcpScanDatabase(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, FixFlag: UInt32, ScanList: CPointer<CPointer<DHCP_SCAN_LIST>>): UInt32 {
+    return DhcpScanDatabase(ServerIpAddress, SubnetAddress, FixFlag, ScanList)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerAuditlogParamsFree == "on"]
+foreign {
     func DhcpServerAuditlogParamsFree(ConfigInfo: CPointer<DHCP_SERVER_CONFIG_INFO_VQ>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerAuditlogParamsFree == "on"]
+public unsafe func Windows_DhcpServerAuditlogParamsFree(ConfigInfo: CPointer<DHCP_SERVER_CONFIG_INFO_VQ>): Unit {
+    DhcpServerAuditlogParamsFree(ConfigInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerBackupDatabase == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpServerBackupDatabase(ServerIpAddress: CPointer<UInt16>, Path: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerBackupDatabase == "on"]
+public unsafe func Windows_DhcpServerBackupDatabase(ServerIpAddress: CPointer<UInt16>, Path: CPointer<UInt16>): UInt32 {
+    return DhcpServerBackupDatabase(ServerIpAddress, Path)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerGetConfig == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpServerGetConfig(ServerIpAddress: CPointer<UInt16>, ConfigInfo: CPointer<CPointer<DHCP_SERVER_CONFIG_INFO>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerGetConfig == "on"]
+public unsafe func Windows_DhcpServerGetConfig(ServerIpAddress: CPointer<UInt16>, ConfigInfo: CPointer<CPointer<DHCP_SERVER_CONFIG_INFO>>): UInt32 {
+    return DhcpServerGetConfig(ServerIpAddress, ConfigInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerGetConfigV4 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpServerGetConfigV4(ServerIpAddress: CPointer<UInt16>, ConfigInfo: CPointer<CPointer<DHCP_SERVER_CONFIG_INFO_V4>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerGetConfigV4 == "on"]
+public unsafe func Windows_DhcpServerGetConfigV4(ServerIpAddress: CPointer<UInt16>, ConfigInfo: CPointer<CPointer<DHCP_SERVER_CONFIG_INFO_V4>>): UInt32 {
+    return DhcpServerGetConfigV4(ServerIpAddress, ConfigInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerGetConfigV6 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpServerGetConfigV6(ServerIpAddress: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO6>, ConfigInfo: CPointer<CPointer<DHCP_SERVER_CONFIG_INFO_V6>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerGetConfigV6 == "on"]
+public unsafe func Windows_DhcpServerGetConfigV6(ServerIpAddress: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO6>, ConfigInfo: CPointer<CPointer<DHCP_SERVER_CONFIG_INFO_V6>>): UInt32 {
+    return DhcpServerGetConfigV6(ServerIpAddress, ScopeInfo, ConfigInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerGetConfigVQ == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpServerGetConfigVQ(ServerIpAddress: CPointer<UInt16>, ConfigInfo: CPointer<CPointer<DHCP_SERVER_CONFIG_INFO_VQ>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerGetConfigVQ == "on"]
+public unsafe func Windows_DhcpServerGetConfigVQ(ServerIpAddress: CPointer<UInt16>, ConfigInfo: CPointer<CPointer<DHCP_SERVER_CONFIG_INFO_VQ>>): UInt32 {
+    return DhcpServerGetConfigVQ(ServerIpAddress, ConfigInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerQueryAttribute == "on"]
+foreign {
     // param-hint: ServerIpAddr optional
     func DhcpServerQueryAttribute(ServerIpAddr: CPointer<UInt16>, dwReserved: UInt32, DhcpAttribId: UInt32, pDhcpAttrib: CPointer<CPointer<DHCP_ATTRIB>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerQueryAttribute == "on"]
+public unsafe func Windows_DhcpServerQueryAttribute(ServerIpAddr: CPointer<UInt16>, dwReserved: UInt32, DhcpAttribId: UInt32, pDhcpAttrib: CPointer<CPointer<DHCP_ATTRIB>>): UInt32 {
+    return DhcpServerQueryAttribute(ServerIpAddr, dwReserved, DhcpAttribId, pDhcpAttrib)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerQueryAttributes == "on"]
+foreign {
     // param-hint: ServerIpAddr optional
     func DhcpServerQueryAttributes(ServerIpAddr: CPointer<UInt16>, dwReserved: UInt32, dwAttribCount: UInt32, pDhcpAttribs: CPointer<UInt32>, pDhcpAttribArr: CPointer<CPointer<DHCP_ATTRIB_ARRAY>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerQueryAttributes == "on"]
+public unsafe func Windows_DhcpServerQueryAttributes(ServerIpAddr: CPointer<UInt16>, dwReserved: UInt32, dwAttribCount: UInt32, pDhcpAttribs: CPointer<UInt32>, pDhcpAttribArr: CPointer<CPointer<DHCP_ATTRIB_ARRAY>>): UInt32 {
+    return DhcpServerQueryAttributes(ServerIpAddr, dwReserved, dwAttribCount, pDhcpAttribs, pDhcpAttribArr)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerQueryDnsRegCredentials == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     // param-hint: Uname len=param[1]
     // param-hint: Domain len=param[3]
     func DhcpServerQueryDnsRegCredentials(ServerIpAddress: CPointer<UInt16>, UnameSize: UInt32, Uname: CPointer<UInt16>, DomainSize: UInt32, Domain: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerQueryDnsRegCredentials == "on"]
+public unsafe func Windows_DhcpServerQueryDnsRegCredentials(ServerIpAddress: CPointer<UInt16>, UnameSize: UInt32, Uname: CPointer<UInt16>, DomainSize: UInt32, Domain: CPointer<UInt16>): UInt32 {
+    return DhcpServerQueryDnsRegCredentials(ServerIpAddress, UnameSize, Uname, DomainSize, Domain)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerRedoAuthorization == "on"]
+foreign {
     // param-hint: ServerIpAddr optional
     func DhcpServerRedoAuthorization(ServerIpAddr: CPointer<UInt16>, dwReserved: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerRedoAuthorization == "on"]
+public unsafe func Windows_DhcpServerRedoAuthorization(ServerIpAddr: CPointer<UInt16>, dwReserved: UInt32): UInt32 {
+    return DhcpServerRedoAuthorization(ServerIpAddr, dwReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerRestoreDatabase == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpServerRestoreDatabase(ServerIpAddress: CPointer<UInt16>, Path: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerRestoreDatabase == "on"]
+public unsafe func Windows_DhcpServerRestoreDatabase(ServerIpAddress: CPointer<UInt16>, Path: CPointer<UInt16>): UInt32 {
+    return DhcpServerRestoreDatabase(ServerIpAddress, Path)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerSetConfig == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpServerSetConfig(ServerIpAddress: CPointer<UInt16>, FieldsToSet: UInt32, ConfigInfo: CPointer<DHCP_SERVER_CONFIG_INFO>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerSetConfig == "on"]
+public unsafe func Windows_DhcpServerSetConfig(ServerIpAddress: CPointer<UInt16>, FieldsToSet: UInt32, ConfigInfo: CPointer<DHCP_SERVER_CONFIG_INFO>): UInt32 {
+    return DhcpServerSetConfig(ServerIpAddress, FieldsToSet, ConfigInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerSetConfigV4 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpServerSetConfigV4(ServerIpAddress: CPointer<UInt16>, FieldsToSet: UInt32, ConfigInfo: CPointer<DHCP_SERVER_CONFIG_INFO_V4>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerSetConfigV4 == "on"]
+public unsafe func Windows_DhcpServerSetConfigV4(ServerIpAddress: CPointer<UInt16>, FieldsToSet: UInt32, ConfigInfo: CPointer<DHCP_SERVER_CONFIG_INFO_V4>): UInt32 {
+    return DhcpServerSetConfigV4(ServerIpAddress, FieldsToSet, ConfigInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerSetConfigV6 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpServerSetConfigV6(ServerIpAddress: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO6>, FieldsToSet: UInt32, ConfigInfo: CPointer<DHCP_SERVER_CONFIG_INFO_V6>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerSetConfigV6 == "on"]
+public unsafe func Windows_DhcpServerSetConfigV6(ServerIpAddress: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO6>, FieldsToSet: UInt32, ConfigInfo: CPointer<DHCP_SERVER_CONFIG_INFO_V6>): UInt32 {
+    return DhcpServerSetConfigV6(ServerIpAddress, ScopeInfo, FieldsToSet, ConfigInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerSetConfigVQ == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpServerSetConfigVQ(ServerIpAddress: CPointer<UInt16>, FieldsToSet: UInt32, ConfigInfo: CPointer<DHCP_SERVER_CONFIG_INFO_VQ>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerSetConfigVQ == "on"]
+public unsafe func Windows_DhcpServerSetConfigVQ(ServerIpAddress: CPointer<UInt16>, FieldsToSet: UInt32, ConfigInfo: CPointer<DHCP_SERVER_CONFIG_INFO_VQ>): UInt32 {
+    return DhcpServerSetConfigVQ(ServerIpAddress, FieldsToSet, ConfigInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerSetDnsRegCredentials == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     // param-hint: Uname optional
     // param-hint: Domain optional
     // param-hint: Passwd optional
     func DhcpServerSetDnsRegCredentials(ServerIpAddress: CPointer<UInt16>, Uname: CPointer<UInt16>, Domain: CPointer<UInt16>, Passwd: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerSetDnsRegCredentials == "on"]
+public unsafe func Windows_DhcpServerSetDnsRegCredentials(ServerIpAddress: CPointer<UInt16>, Uname: CPointer<UInt16>, Domain: CPointer<UInt16>, Passwd: CPointer<UInt16>): UInt32 {
+    return DhcpServerSetDnsRegCredentials(ServerIpAddress, Uname, Domain, Passwd)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerSetDnsRegCredentialsV5 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     // param-hint: Uname optional
     // param-hint: Domain optional
     // param-hint: Passwd optional
     func DhcpServerSetDnsRegCredentialsV5(ServerIpAddress: CPointer<UInt16>, Uname: CPointer<UInt16>, Domain: CPointer<UInt16>, Passwd: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpServerSetDnsRegCredentialsV5 == "on"]
+public unsafe func Windows_DhcpServerSetDnsRegCredentialsV5(ServerIpAddress: CPointer<UInt16>, Uname: CPointer<UInt16>, Domain: CPointer<UInt16>, Passwd: CPointer<UInt16>): UInt32 {
+    return DhcpServerSetDnsRegCredentialsV5(ServerIpAddress, Uname, Domain, Passwd)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetClientInfo == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpSetClientInfo(ServerIpAddress: CPointer<UInt16>, ClientInfo: CPointer<DHCP_CLIENT_INFO>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetClientInfo == "on"]
+public unsafe func Windows_DhcpSetClientInfo(ServerIpAddress: CPointer<UInt16>, ClientInfo: CPointer<DHCP_CLIENT_INFO>): UInt32 {
+    return DhcpSetClientInfo(ServerIpAddress, ClientInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetClientInfoV4 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpSetClientInfoV4(ServerIpAddress: CPointer<UInt16>, ClientInfo: CPointer<DHCP_CLIENT_INFO_V4>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetClientInfoV4 == "on"]
+public unsafe func Windows_DhcpSetClientInfoV4(ServerIpAddress: CPointer<UInt16>, ClientInfo: CPointer<DHCP_CLIENT_INFO_V4>): UInt32 {
+    return DhcpSetClientInfoV4(ServerIpAddress, ClientInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetClientInfoV6 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpSetClientInfoV6(ServerIpAddress: CPointer<UInt16>, ClientInfo: CPointer<DHCP_CLIENT_INFO_V6>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetClientInfoV6 == "on"]
+public unsafe func Windows_DhcpSetClientInfoV6(ServerIpAddress: CPointer<UInt16>, ClientInfo: CPointer<DHCP_CLIENT_INFO_V6>): UInt32 {
+    return DhcpSetClientInfoV6(ServerIpAddress, ClientInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetClientInfoVQ == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpSetClientInfoVQ(ServerIpAddress: CPointer<UInt16>, ClientInfo: CPointer<DHCP_CLIENT_INFO_VQ>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetClientInfoVQ == "on"]
+public unsafe func Windows_DhcpSetClientInfoVQ(ServerIpAddress: CPointer<UInt16>, ClientInfo: CPointer<DHCP_CLIENT_INFO_VQ>): UInt32 {
+    return DhcpSetClientInfoVQ(ServerIpAddress, ClientInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetFilterV4 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpSetFilterV4(ServerIpAddress: CPointer<UInt16>, GlobalFilterInfo: CPointer<DHCP_FILTER_GLOBAL_INFO>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetFilterV4 == "on"]
+public unsafe func Windows_DhcpSetFilterV4(ServerIpAddress: CPointer<UInt16>, GlobalFilterInfo: CPointer<DHCP_FILTER_GLOBAL_INFO>): UInt32 {
+    return DhcpSetFilterV4(ServerIpAddress, GlobalFilterInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetOptionInfo == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpSetOptionInfo(ServerIpAddress: CPointer<UInt16>, OptionID: UInt32, OptionInfo: CPointer<DHCP_OPTION>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetOptionInfo == "on"]
+public unsafe func Windows_DhcpSetOptionInfo(ServerIpAddress: CPointer<UInt16>, OptionID: UInt32, OptionInfo: CPointer<DHCP_OPTION>): UInt32 {
+    return DhcpSetOptionInfo(ServerIpAddress, OptionID, OptionInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetOptionInfoV5 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     // param-hint: ClassName optional
     // param-hint: VendorName optional
     func DhcpSetOptionInfoV5(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionID: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, OptionInfo: CPointer<DHCP_OPTION>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetOptionInfoV5 == "on"]
+public unsafe func Windows_DhcpSetOptionInfoV5(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionID: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, OptionInfo: CPointer<DHCP_OPTION>): UInt32 {
+    return DhcpSetOptionInfoV5(ServerIpAddress, Flags, OptionID, ClassName, VendorName, OptionInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetOptionInfoV6 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     // param-hint: ClassName optional
     // param-hint: VendorName optional
     func DhcpSetOptionInfoV6(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionID: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, OptionInfo: CPointer<DHCP_OPTION>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetOptionInfoV6 == "on"]
+public unsafe func Windows_DhcpSetOptionInfoV6(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionID: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, OptionInfo: CPointer<DHCP_OPTION>): UInt32 {
+    return DhcpSetOptionInfoV6(ServerIpAddress, Flags, OptionID, ClassName, VendorName, OptionInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetOptionValue == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpSetOptionValue(ServerIpAddress: CPointer<UInt16>, OptionID: UInt32, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO>, OptionValue: CPointer<DHCP_OPTION_DATA>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetOptionValue == "on"]
+public unsafe func Windows_DhcpSetOptionValue(ServerIpAddress: CPointer<UInt16>, OptionID: UInt32, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO>, OptionValue: CPointer<DHCP_OPTION_DATA>): UInt32 {
+    return DhcpSetOptionValue(ServerIpAddress, OptionID, ScopeInfo, OptionValue)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetOptionValueV5 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     // param-hint: ClassName optional
     // param-hint: VendorName optional
     func DhcpSetOptionValueV5(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionId: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO>, OptionValue: CPointer<DHCP_OPTION_DATA>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetOptionValueV5 == "on"]
+public unsafe func Windows_DhcpSetOptionValueV5(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionId: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO>, OptionValue: CPointer<DHCP_OPTION_DATA>): UInt32 {
+    return DhcpSetOptionValueV5(ServerIpAddress, Flags, OptionId, ClassName, VendorName, ScopeInfo, OptionValue)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetOptionValueV6 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     // param-hint: ClassName optional
     // param-hint: VendorName optional
     func DhcpSetOptionValueV6(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionId: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO6>, OptionValue: CPointer<DHCP_OPTION_DATA>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetOptionValueV6 == "on"]
+public unsafe func Windows_DhcpSetOptionValueV6(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionId: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO6>, OptionValue: CPointer<DHCP_OPTION_DATA>): UInt32 {
+    return DhcpSetOptionValueV6(ServerIpAddress, Flags, OptionId, ClassName, VendorName, ScopeInfo, OptionValue)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetOptionValues == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpSetOptionValues(ServerIpAddress: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO>, OptionValues: CPointer<DHCP_OPTION_VALUE_ARRAY>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetOptionValues == "on"]
+public unsafe func Windows_DhcpSetOptionValues(ServerIpAddress: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO>, OptionValues: CPointer<DHCP_OPTION_VALUE_ARRAY>): UInt32 {
+    return DhcpSetOptionValues(ServerIpAddress, ScopeInfo, OptionValues)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetOptionValuesV5 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     // param-hint: ClassName optional
     // param-hint: VendorName optional
     func DhcpSetOptionValuesV5(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO>, OptionValues: CPointer<DHCP_OPTION_VALUE_ARRAY>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetOptionValuesV5 == "on"]
+public unsafe func Windows_DhcpSetOptionValuesV5(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, ClassName: CPointer<UInt16>, VendorName: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO>, OptionValues: CPointer<DHCP_OPTION_VALUE_ARRAY>): UInt32 {
+    return DhcpSetOptionValuesV5(ServerIpAddress, Flags, ClassName, VendorName, ScopeInfo, OptionValues)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetServerBindingInfo == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpSetServerBindingInfo(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, BindElementInfo: CPointer<DHCP_BIND_ELEMENT_ARRAY>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetServerBindingInfo == "on"]
+public unsafe func Windows_DhcpSetServerBindingInfo(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, BindElementInfo: CPointer<DHCP_BIND_ELEMENT_ARRAY>): UInt32 {
+    return DhcpSetServerBindingInfo(ServerIpAddress, Flags, BindElementInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetServerBindingInfoV6 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpSetServerBindingInfoV6(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, BindElementInfo: CPointer<DHCPV6_BIND_ELEMENT_ARRAY>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetServerBindingInfoV6 == "on"]
+public unsafe func Windows_DhcpSetServerBindingInfoV6(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, BindElementInfo: CPointer<DHCPV6_BIND_ELEMENT_ARRAY>): UInt32 {
+    return DhcpSetServerBindingInfoV6(ServerIpAddress, Flags, BindElementInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetSubnetDelayOffer == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpSetSubnetDelayOffer(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, TimeDelayInMilliseconds: UInt16): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetSubnetDelayOffer == "on"]
+public unsafe func Windows_DhcpSetSubnetDelayOffer(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, TimeDelayInMilliseconds: UInt16): UInt32 {
+    return DhcpSetSubnetDelayOffer(ServerIpAddress, SubnetAddress, TimeDelayInMilliseconds)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetSubnetInfo == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpSetSubnetInfo(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, SubnetInfo: CPointer<DHCP_SUBNET_INFO>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetSubnetInfo == "on"]
+public unsafe func Windows_DhcpSetSubnetInfo(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, SubnetInfo: CPointer<DHCP_SUBNET_INFO>): UInt32 {
+    return DhcpSetSubnetInfo(ServerIpAddress, SubnetAddress, SubnetInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetSubnetInfoV6 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpSetSubnetInfoV6(ServerIpAddress: CPointer<UInt16>, SubnetAddress: DHCP_IPV6_ADDRESS, SubnetInfo: CPointer<DHCP_SUBNET_INFO_V6>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetSubnetInfoV6 == "on"]
+public unsafe func Windows_DhcpSetSubnetInfoV6(ServerIpAddress: CPointer<UInt16>, SubnetAddress: DHCP_IPV6_ADDRESS, SubnetInfo: CPointer<DHCP_SUBNET_INFO_V6>): UInt32 {
+    return DhcpSetSubnetInfoV6(ServerIpAddress, SubnetAddress, SubnetInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetSubnetInfoVQ == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpSetSubnetInfoVQ(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, SubnetInfo: CPointer<DHCP_SUBNET_INFO_VQ>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetSubnetInfoVQ == "on"]
+public unsafe func Windows_DhcpSetSubnetInfoVQ(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, SubnetInfo: CPointer<DHCP_SUBNET_INFO_VQ>): UInt32 {
+    return DhcpSetSubnetInfoVQ(ServerIpAddress, SubnetAddress, SubnetInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetSuperScopeV4 == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     // param-hint: SuperScopeName optional
     func DhcpSetSuperScopeV4(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, SuperScopeName: CPointer<UInt16>, ChangeExisting: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetSuperScopeV4 == "on"]
+public unsafe func Windows_DhcpSetSuperScopeV4(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, SuperScopeName: CPointer<UInt16>, ChangeExisting: Int32): UInt32 {
+    return DhcpSetSuperScopeV4(ServerIpAddress, SubnetAddress, SuperScopeName, ChangeExisting)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetThreadOptions == "on"]
+foreign {
     func DhcpSetThreadOptions(Flags: UInt32, Reserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpSetThreadOptions == "on"]
+public unsafe func Windows_DhcpSetThreadOptions(Flags: UInt32, Reserved: CPointer<Unit>): UInt32 {
+    return DhcpSetThreadOptions(Flags, Reserved)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4AddPolicyRange == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4AddPolicyRange(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, PolicyName: CPointer<UInt16>, Range: CPointer<DHCP_IP_RANGE>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4AddPolicyRange == "on"]
+public unsafe func Windows_DhcpV4AddPolicyRange(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, PolicyName: CPointer<UInt16>, Range: CPointer<DHCP_IP_RANGE>): UInt32 {
+    return DhcpV4AddPolicyRange(ServerIpAddress, SubnetAddress, PolicyName, Range)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4CreateClientInfo == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4CreateClientInfo(ServerIpAddress: CPointer<UInt16>, ClientInfo: CPointer<DHCP_CLIENT_INFO_PB>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4CreateClientInfo == "on"]
+public unsafe func Windows_DhcpV4CreateClientInfo(ServerIpAddress: CPointer<UInt16>, ClientInfo: CPointer<DHCP_CLIENT_INFO_PB>): UInt32 {
+    return DhcpV4CreateClientInfo(ServerIpAddress, ClientInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4CreateClientInfoEx == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4CreateClientInfoEx(ServerIpAddress: CPointer<UInt16>, ClientInfo: CPointer<DHCP_CLIENT_INFO_EX>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4CreateClientInfoEx == "on"]
+public unsafe func Windows_DhcpV4CreateClientInfoEx(ServerIpAddress: CPointer<UInt16>, ClientInfo: CPointer<DHCP_CLIENT_INFO_EX>): UInt32 {
+    return DhcpV4CreateClientInfoEx(ServerIpAddress, ClientInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4CreatePolicy == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4CreatePolicy(ServerIpAddress: CPointer<UInt16>, pPolicy: CPointer<DHCP_POLICY>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4CreatePolicy == "on"]
+public unsafe func Windows_DhcpV4CreatePolicy(ServerIpAddress: CPointer<UInt16>, pPolicy: CPointer<DHCP_POLICY>): UInt32 {
+    return DhcpV4CreatePolicy(ServerIpAddress, pPolicy)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4CreatePolicyEx == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4CreatePolicyEx(ServerIpAddress: CPointer<UInt16>, PolicyEx: CPointer<DHCP_POLICY_EX>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4CreatePolicyEx == "on"]
+public unsafe func Windows_DhcpV4CreatePolicyEx(ServerIpAddress: CPointer<UInt16>, PolicyEx: CPointer<DHCP_POLICY_EX>): UInt32 {
+    return DhcpV4CreatePolicyEx(ServerIpAddress, PolicyEx)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4DeletePolicy == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4DeletePolicy(ServerIpAddress: CPointer<UInt16>, fGlobalPolicy: Int32, SubnetAddress: UInt32, PolicyName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4DeletePolicy == "on"]
+public unsafe func Windows_DhcpV4DeletePolicy(ServerIpAddress: CPointer<UInt16>, fGlobalPolicy: Int32, SubnetAddress: UInt32, PolicyName: CPointer<UInt16>): UInt32 {
+    return DhcpV4DeletePolicy(ServerIpAddress, fGlobalPolicy, SubnetAddress, PolicyName)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4EnumPolicies == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4EnumPolicies(ServerIpAddress: CPointer<UInt16>, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, fGlobalPolicy: Int32, SubnetAddress: UInt32, EnumInfo: CPointer<CPointer<DHCP_POLICY_ARRAY>>, ElementsRead: CPointer<UInt32>, ElementsTotal: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4EnumPolicies == "on"]
+public unsafe func Windows_DhcpV4EnumPolicies(ServerIpAddress: CPointer<UInt16>, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, fGlobalPolicy: Int32, SubnetAddress: UInt32, EnumInfo: CPointer<CPointer<DHCP_POLICY_ARRAY>>, ElementsRead: CPointer<UInt32>, ElementsTotal: CPointer<UInt32>): UInt32 {
+    return DhcpV4EnumPolicies(ServerIpAddress, ResumeHandle, PreferredMaximum, fGlobalPolicy, SubnetAddress, EnumInfo, ElementsRead, ElementsTotal)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4EnumPoliciesEx == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4EnumPoliciesEx(ServerIpAddress: CPointer<UInt16>, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, GlobalPolicy: Int32, SubnetAddress: UInt32, EnumInfo: CPointer<CPointer<DHCP_POLICY_EX_ARRAY>>, ElementsRead: CPointer<UInt32>, ElementsTotal: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4EnumPoliciesEx == "on"]
+public unsafe func Windows_DhcpV4EnumPoliciesEx(ServerIpAddress: CPointer<UInt16>, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, GlobalPolicy: Int32, SubnetAddress: UInt32, EnumInfo: CPointer<CPointer<DHCP_POLICY_EX_ARRAY>>, ElementsRead: CPointer<UInt32>, ElementsTotal: CPointer<UInt32>): UInt32 {
+    return DhcpV4EnumPoliciesEx(ServerIpAddress, ResumeHandle, PreferredMaximum, GlobalPolicy, SubnetAddress, EnumInfo, ElementsRead, ElementsTotal)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4EnumSubnetClients == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4EnumSubnetClients(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, ClientInfo: CPointer<CPointer<DHCP_CLIENT_INFO_PB_ARRAY>>, ClientsRead: CPointer<UInt32>, ClientsTotal: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4EnumSubnetClients == "on"]
+public unsafe func Windows_DhcpV4EnumSubnetClients(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, ClientInfo: CPointer<CPointer<DHCP_CLIENT_INFO_PB_ARRAY>>, ClientsRead: CPointer<UInt32>, ClientsTotal: CPointer<UInt32>): UInt32 {
+    return DhcpV4EnumSubnetClients(ServerIpAddress, SubnetAddress, ResumeHandle, PreferredMaximum, ClientInfo, ClientsRead, ClientsTotal)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4EnumSubnetClientsEx == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4EnumSubnetClientsEx(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, ClientInfo: CPointer<CPointer<DHCP_CLIENT_INFO_EX_ARRAY>>, ClientsRead: CPointer<UInt32>, ClientsTotal: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4EnumSubnetClientsEx == "on"]
+public unsafe func Windows_DhcpV4EnumSubnetClientsEx(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, ClientInfo: CPointer<CPointer<DHCP_CLIENT_INFO_EX_ARRAY>>, ClientsRead: CPointer<UInt32>, ClientsTotal: CPointer<UInt32>): UInt32 {
+    return DhcpV4EnumSubnetClientsEx(ServerIpAddress, SubnetAddress, ResumeHandle, PreferredMaximum, ClientInfo, ClientsRead, ClientsTotal)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4EnumSubnetReservations == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4EnumSubnetReservations(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, EnumElementInfo: CPointer<CPointer<DHCP_RESERVATION_INFO_ARRAY>>, ElementsRead: CPointer<UInt32>, ElementsTotal: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4EnumSubnetReservations == "on"]
+public unsafe func Windows_DhcpV4EnumSubnetReservations(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, EnumElementInfo: CPointer<CPointer<DHCP_RESERVATION_INFO_ARRAY>>, ElementsRead: CPointer<UInt32>, ElementsTotal: CPointer<UInt32>): UInt32 {
+    return DhcpV4EnumSubnetReservations(ServerIpAddress, SubnetAddress, ResumeHandle, PreferredMaximum, EnumElementInfo, ElementsRead, ElementsTotal)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4FailoverAddScopeToRelationship == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4FailoverAddScopeToRelationship(ServerIpAddress: CPointer<UInt16>, pRelationship: CPointer<DHCP_FAILOVER_RELATIONSHIP>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4FailoverAddScopeToRelationship == "on"]
+public unsafe func Windows_DhcpV4FailoverAddScopeToRelationship(ServerIpAddress: CPointer<UInt16>, pRelationship: CPointer<DHCP_FAILOVER_RELATIONSHIP>): UInt32 {
+    return DhcpV4FailoverAddScopeToRelationship(ServerIpAddress, pRelationship)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4FailoverCreateRelationship == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4FailoverCreateRelationship(ServerIpAddress: CPointer<UInt16>, pRelationship: CPointer<DHCP_FAILOVER_RELATIONSHIP>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4FailoverCreateRelationship == "on"]
+public unsafe func Windows_DhcpV4FailoverCreateRelationship(ServerIpAddress: CPointer<UInt16>, pRelationship: CPointer<DHCP_FAILOVER_RELATIONSHIP>): UInt32 {
+    return DhcpV4FailoverCreateRelationship(ServerIpAddress, pRelationship)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4FailoverDeleteRelationship == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4FailoverDeleteRelationship(ServerIpAddress: CPointer<UInt16>, pRelationshipName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4FailoverDeleteRelationship == "on"]
+public unsafe func Windows_DhcpV4FailoverDeleteRelationship(ServerIpAddress: CPointer<UInt16>, pRelationshipName: CPointer<UInt16>): UInt32 {
+    return DhcpV4FailoverDeleteRelationship(ServerIpAddress, pRelationshipName)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4FailoverDeleteScopeFromRelationship == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4FailoverDeleteScopeFromRelationship(ServerIpAddress: CPointer<UInt16>, pRelationship: CPointer<DHCP_FAILOVER_RELATIONSHIP>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4FailoverDeleteScopeFromRelationship == "on"]
+public unsafe func Windows_DhcpV4FailoverDeleteScopeFromRelationship(ServerIpAddress: CPointer<UInt16>, pRelationship: CPointer<DHCP_FAILOVER_RELATIONSHIP>): UInt32 {
+    return DhcpV4FailoverDeleteScopeFromRelationship(ServerIpAddress, pRelationship)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4FailoverEnumRelationship == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4FailoverEnumRelationship(ServerIpAddress: CPointer<UInt16>, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, pRelationship: CPointer<CPointer<DHCP_FAILOVER_RELATIONSHIP_ARRAY>>, RelationshipRead: CPointer<UInt32>, RelationshipTotal: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4FailoverEnumRelationship == "on"]
+public unsafe func Windows_DhcpV4FailoverEnumRelationship(ServerIpAddress: CPointer<UInt16>, ResumeHandle: CPointer<UInt32>, PreferredMaximum: UInt32, pRelationship: CPointer<CPointer<DHCP_FAILOVER_RELATIONSHIP_ARRAY>>, RelationshipRead: CPointer<UInt32>, RelationshipTotal: CPointer<UInt32>): UInt32 {
+    return DhcpV4FailoverEnumRelationship(ServerIpAddress, ResumeHandle, PreferredMaximum, pRelationship, RelationshipRead, RelationshipTotal)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4FailoverGetAddressStatus == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4FailoverGetAddressStatus(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, pStatus: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4FailoverGetAddressStatus == "on"]
+public unsafe func Windows_DhcpV4FailoverGetAddressStatus(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, pStatus: CPointer<UInt32>): UInt32 {
+    return DhcpV4FailoverGetAddressStatus(ServerIpAddress, SubnetAddress, pStatus)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4FailoverGetClientInfo == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4FailoverGetClientInfo(ServerIpAddress: CPointer<UInt16>, SearchInfo: CPointer<DHCP_SEARCH_INFO>, ClientInfo: CPointer<CPointer<DHCPV4_FAILOVER_CLIENT_INFO>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4FailoverGetClientInfo == "on"]
+public unsafe func Windows_DhcpV4FailoverGetClientInfo(ServerIpAddress: CPointer<UInt16>, SearchInfo: CPointer<DHCP_SEARCH_INFO>, ClientInfo: CPointer<CPointer<DHCPV4_FAILOVER_CLIENT_INFO>>): UInt32 {
+    return DhcpV4FailoverGetClientInfo(ServerIpAddress, SearchInfo, ClientInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4FailoverGetRelationship == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4FailoverGetRelationship(ServerIpAddress: CPointer<UInt16>, pRelationshipName: CPointer<UInt16>, pRelationship: CPointer<CPointer<DHCP_FAILOVER_RELATIONSHIP>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4FailoverGetRelationship == "on"]
+public unsafe func Windows_DhcpV4FailoverGetRelationship(ServerIpAddress: CPointer<UInt16>, pRelationshipName: CPointer<UInt16>, pRelationship: CPointer<CPointer<DHCP_FAILOVER_RELATIONSHIP>>): UInt32 {
+    return DhcpV4FailoverGetRelationship(ServerIpAddress, pRelationshipName, pRelationship)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4FailoverGetScopeRelationship == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4FailoverGetScopeRelationship(ServerIpAddress: CPointer<UInt16>, ScopeId: UInt32, pRelationship: CPointer<CPointer<DHCP_FAILOVER_RELATIONSHIP>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4FailoverGetScopeRelationship == "on"]
+public unsafe func Windows_DhcpV4FailoverGetScopeRelationship(ServerIpAddress: CPointer<UInt16>, ScopeId: UInt32, pRelationship: CPointer<CPointer<DHCP_FAILOVER_RELATIONSHIP>>): UInt32 {
+    return DhcpV4FailoverGetScopeRelationship(ServerIpAddress, ScopeId, pRelationship)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4FailoverGetScopeStatistics == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4FailoverGetScopeStatistics(ServerIpAddress: CPointer<UInt16>, ScopeId: UInt32, pStats: CPointer<CPointer<DHCP_FAILOVER_STATISTICS>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4FailoverGetScopeStatistics == "on"]
+public unsafe func Windows_DhcpV4FailoverGetScopeStatistics(ServerIpAddress: CPointer<UInt16>, ScopeId: UInt32, pStats: CPointer<CPointer<DHCP_FAILOVER_STATISTICS>>): UInt32 {
+    return DhcpV4FailoverGetScopeStatistics(ServerIpAddress, ScopeId, pStats)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4FailoverGetSystemTime == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4FailoverGetSystemTime(ServerIpAddress: CPointer<UInt16>, pTime: CPointer<UInt32>, pMaxAllowedDeltaTime: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4FailoverGetSystemTime == "on"]
+public unsafe func Windows_DhcpV4FailoverGetSystemTime(ServerIpAddress: CPointer<UInt16>, pTime: CPointer<UInt32>, pMaxAllowedDeltaTime: CPointer<UInt32>): UInt32 {
+    return DhcpV4FailoverGetSystemTime(ServerIpAddress, pTime, pMaxAllowedDeltaTime)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4FailoverSetRelationship == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4FailoverSetRelationship(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, pRelationship: CPointer<DHCP_FAILOVER_RELATIONSHIP>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4FailoverSetRelationship == "on"]
+public unsafe func Windows_DhcpV4FailoverSetRelationship(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, pRelationship: CPointer<DHCP_FAILOVER_RELATIONSHIP>): UInt32 {
+    return DhcpV4FailoverSetRelationship(ServerIpAddress, Flags, pRelationship)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4FailoverTriggerAddrAllocation == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4FailoverTriggerAddrAllocation(ServerIpAddress: CPointer<UInt16>, pFailRelName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4FailoverTriggerAddrAllocation == "on"]
+public unsafe func Windows_DhcpV4FailoverTriggerAddrAllocation(ServerIpAddress: CPointer<UInt16>, pFailRelName: CPointer<UInt16>): UInt32 {
+    return DhcpV4FailoverTriggerAddrAllocation(ServerIpAddress, pFailRelName)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4GetAllOptionValues == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4GetAllOptionValues(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO>, Values: CPointer<CPointer<DHCP_ALL_OPTION_VALUES_PB>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4GetAllOptionValues == "on"]
+public unsafe func Windows_DhcpV4GetAllOptionValues(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO>, Values: CPointer<CPointer<DHCP_ALL_OPTION_VALUES_PB>>): UInt32 {
+    return DhcpV4GetAllOptionValues(ServerIpAddress, Flags, ScopeInfo, Values)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4GetClientInfo == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4GetClientInfo(ServerIpAddress: CPointer<UInt16>, SearchInfo: CPointer<DHCP_SEARCH_INFO>, ClientInfo: CPointer<CPointer<DHCP_CLIENT_INFO_PB>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4GetClientInfo == "on"]
+public unsafe func Windows_DhcpV4GetClientInfo(ServerIpAddress: CPointer<UInt16>, SearchInfo: CPointer<DHCP_SEARCH_INFO>, ClientInfo: CPointer<CPointer<DHCP_CLIENT_INFO_PB>>): UInt32 {
+    return DhcpV4GetClientInfo(ServerIpAddress, SearchInfo, ClientInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4GetClientInfoEx == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4GetClientInfoEx(ServerIpAddress: CPointer<UInt16>, SearchInfo: CPointer<DHCP_SEARCH_INFO>, ClientInfo: CPointer<CPointer<DHCP_CLIENT_INFO_EX>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4GetClientInfoEx == "on"]
+public unsafe func Windows_DhcpV4GetClientInfoEx(ServerIpAddress: CPointer<UInt16>, SearchInfo: CPointer<DHCP_SEARCH_INFO>, ClientInfo: CPointer<CPointer<DHCP_CLIENT_INFO_EX>>): UInt32 {
+    return DhcpV4GetClientInfoEx(ServerIpAddress, SearchInfo, ClientInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4GetFreeIPAddress == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4GetFreeIPAddress(ServerIpAddress: CPointer<UInt16>, ScopeId: UInt32, StartIP: UInt32, EndIP: UInt32, NumFreeAddrReq: UInt32, IPAddrList: CPointer<CPointer<DHCP_IP_ARRAY>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4GetFreeIPAddress == "on"]
+public unsafe func Windows_DhcpV4GetFreeIPAddress(ServerIpAddress: CPointer<UInt16>, ScopeId: UInt32, StartIP: UInt32, EndIP: UInt32, NumFreeAddrReq: UInt32, IPAddrList: CPointer<CPointer<DHCP_IP_ARRAY>>): UInt32 {
+    return DhcpV4GetFreeIPAddress(ServerIpAddress, ScopeId, StartIP, EndIP, NumFreeAddrReq, IPAddrList)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4GetOptionValue == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     // param-hint: PolicyName optional
     // param-hint: VendorName optional
     func DhcpV4GetOptionValue(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionID: UInt32, PolicyName: CPointer<UInt16>, VendorName: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO>, OptionValue: CPointer<CPointer<DHCP_OPTION_VALUE>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4GetOptionValue == "on"]
+public unsafe func Windows_DhcpV4GetOptionValue(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionID: UInt32, PolicyName: CPointer<UInt16>, VendorName: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO>, OptionValue: CPointer<CPointer<DHCP_OPTION_VALUE>>): UInt32 {
+    return DhcpV4GetOptionValue(ServerIpAddress, Flags, OptionID, PolicyName, VendorName, ScopeInfo, OptionValue)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4GetPolicy == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4GetPolicy(ServerIpAddress: CPointer<UInt16>, fGlobalPolicy: Int32, SubnetAddress: UInt32, PolicyName: CPointer<UInt16>, Policy: CPointer<CPointer<DHCP_POLICY>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4GetPolicy == "on"]
+public unsafe func Windows_DhcpV4GetPolicy(ServerIpAddress: CPointer<UInt16>, fGlobalPolicy: Int32, SubnetAddress: UInt32, PolicyName: CPointer<UInt16>, Policy: CPointer<CPointer<DHCP_POLICY>>): UInt32 {
+    return DhcpV4GetPolicy(ServerIpAddress, fGlobalPolicy, SubnetAddress, PolicyName, Policy)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4GetPolicyEx == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4GetPolicyEx(ServerIpAddress: CPointer<UInt16>, GlobalPolicy: Int32, SubnetAddress: UInt32, PolicyName: CPointer<UInt16>, Policy: CPointer<CPointer<DHCP_POLICY_EX>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4GetPolicyEx == "on"]
+public unsafe func Windows_DhcpV4GetPolicyEx(ServerIpAddress: CPointer<UInt16>, GlobalPolicy: Int32, SubnetAddress: UInt32, PolicyName: CPointer<UInt16>, Policy: CPointer<CPointer<DHCP_POLICY_EX>>): UInt32 {
+    return DhcpV4GetPolicyEx(ServerIpAddress, GlobalPolicy, SubnetAddress, PolicyName, Policy)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4QueryPolicyEnforcement == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4QueryPolicyEnforcement(ServerIpAddress: CPointer<UInt16>, fGlobalPolicy: Int32, SubnetAddress: UInt32, Enabled: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4QueryPolicyEnforcement == "on"]
+public unsafe func Windows_DhcpV4QueryPolicyEnforcement(ServerIpAddress: CPointer<UInt16>, fGlobalPolicy: Int32, SubnetAddress: UInt32, Enabled: CPointer<Int32>): UInt32 {
+    return DhcpV4QueryPolicyEnforcement(ServerIpAddress, fGlobalPolicy, SubnetAddress, Enabled)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4RemoveOptionValue == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     // param-hint: PolicyName optional
     // param-hint: VendorName optional
     func DhcpV4RemoveOptionValue(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionID: UInt32, PolicyName: CPointer<UInt16>, VendorName: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4RemoveOptionValue == "on"]
+public unsafe func Windows_DhcpV4RemoveOptionValue(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionID: UInt32, PolicyName: CPointer<UInt16>, VendorName: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO>): UInt32 {
+    return DhcpV4RemoveOptionValue(ServerIpAddress, Flags, OptionID, PolicyName, VendorName, ScopeInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4RemovePolicyRange == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4RemovePolicyRange(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, PolicyName: CPointer<UInt16>, Range: CPointer<DHCP_IP_RANGE>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4RemovePolicyRange == "on"]
+public unsafe func Windows_DhcpV4RemovePolicyRange(ServerIpAddress: CPointer<UInt16>, SubnetAddress: UInt32, PolicyName: CPointer<UInt16>, Range: CPointer<DHCP_IP_RANGE>): UInt32 {
+    return DhcpV4RemovePolicyRange(ServerIpAddress, SubnetAddress, PolicyName, Range)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4SetOptionValue == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     // param-hint: PolicyName optional
     // param-hint: VendorName optional
     func DhcpV4SetOptionValue(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionId: UInt32, PolicyName: CPointer<UInt16>, VendorName: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO>, OptionValue: CPointer<DHCP_OPTION_DATA>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4SetOptionValue == "on"]
+public unsafe func Windows_DhcpV4SetOptionValue(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, OptionId: UInt32, PolicyName: CPointer<UInt16>, VendorName: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO>, OptionValue: CPointer<DHCP_OPTION_DATA>): UInt32 {
+    return DhcpV4SetOptionValue(ServerIpAddress, Flags, OptionId, PolicyName, VendorName, ScopeInfo, OptionValue)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4SetOptionValues == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     // param-hint: PolicyName optional
     // param-hint: VendorName optional
     func DhcpV4SetOptionValues(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, PolicyName: CPointer<UInt16>, VendorName: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO>, OptionValues: CPointer<DHCP_OPTION_VALUE_ARRAY>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4SetOptionValues == "on"]
+public unsafe func Windows_DhcpV4SetOptionValues(ServerIpAddress: CPointer<UInt16>, Flags: UInt32, PolicyName: CPointer<UInt16>, VendorName: CPointer<UInt16>, ScopeInfo: CPointer<DHCP_OPTION_SCOPE_INFO>, OptionValues: CPointer<DHCP_OPTION_VALUE_ARRAY>): UInt32 {
+    return DhcpV4SetOptionValues(ServerIpAddress, Flags, PolicyName, VendorName, ScopeInfo, OptionValues)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4SetPolicy == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4SetPolicy(ServerIpAddress: CPointer<UInt16>, FieldsModified: UInt32, fGlobalPolicy: Int32, SubnetAddress: UInt32, PolicyName: CPointer<UInt16>, Policy: CPointer<DHCP_POLICY>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4SetPolicy == "on"]
+public unsafe func Windows_DhcpV4SetPolicy(ServerIpAddress: CPointer<UInt16>, FieldsModified: UInt32, fGlobalPolicy: Int32, SubnetAddress: UInt32, PolicyName: CPointer<UInt16>, Policy: CPointer<DHCP_POLICY>): UInt32 {
+    return DhcpV4SetPolicy(ServerIpAddress, FieldsModified, fGlobalPolicy, SubnetAddress, PolicyName, Policy)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4SetPolicyEnforcement == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4SetPolicyEnforcement(ServerIpAddress: CPointer<UInt16>, fGlobalPolicy: Int32, SubnetAddress: UInt32, Enable: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4SetPolicyEnforcement == "on"]
+public unsafe func Windows_DhcpV4SetPolicyEnforcement(ServerIpAddress: CPointer<UInt16>, fGlobalPolicy: Int32, SubnetAddress: UInt32, Enable: Int32): UInt32 {
+    return DhcpV4SetPolicyEnforcement(ServerIpAddress, fGlobalPolicy, SubnetAddress, Enable)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4SetPolicyEx == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV4SetPolicyEx(ServerIpAddress: CPointer<UInt16>, FieldsModified: UInt32, GlobalPolicy: Int32, SubnetAddress: UInt32, PolicyName: CPointer<UInt16>, Policy: CPointer<DHCP_POLICY_EX>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV4SetPolicyEx == "on"]
+public unsafe func Windows_DhcpV4SetPolicyEx(ServerIpAddress: CPointer<UInt16>, FieldsModified: UInt32, GlobalPolicy: Int32, SubnetAddress: UInt32, PolicyName: CPointer<UInt16>, Policy: CPointer<DHCP_POLICY_EX>): UInt32 {
+    return DhcpV4SetPolicyEx(ServerIpAddress, FieldsModified, GlobalPolicy, SubnetAddress, PolicyName, Policy)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV6CreateClientInfo == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV6CreateClientInfo(ServerIpAddress: CPointer<UInt16>, ClientInfo: CPointer<DHCP_CLIENT_INFO_V6>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV6CreateClientInfo == "on"]
+public unsafe func Windows_DhcpV6CreateClientInfo(ServerIpAddress: CPointer<UInt16>, ClientInfo: CPointer<DHCP_CLIENT_INFO_V6>): UInt32 {
+    return DhcpV6CreateClientInfo(ServerIpAddress, ClientInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV6GetFreeIPAddress == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV6GetFreeIPAddress(ServerIpAddress: CPointer<UInt16>, ScopeId: DHCP_IPV6_ADDRESS, StartIP: DHCP_IPV6_ADDRESS, EndIP: DHCP_IPV6_ADDRESS, NumFreeAddrReq: UInt32, IPAddrList: CPointer<CPointer<DHCPV6_IP_ARRAY>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV6GetFreeIPAddress == "on"]
+public unsafe func Windows_DhcpV6GetFreeIPAddress(ServerIpAddress: CPointer<UInt16>, ScopeId: DHCP_IPV6_ADDRESS, StartIP: DHCP_IPV6_ADDRESS, EndIP: DHCP_IPV6_ADDRESS, NumFreeAddrReq: UInt32, IPAddrList: CPointer<CPointer<DHCPV6_IP_ARRAY>>): UInt32 {
+    return DhcpV6GetFreeIPAddress(ServerIpAddress, ScopeId, StartIP, EndIP, NumFreeAddrReq, IPAddrList)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV6GetStatelessStatistics == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV6GetStatelessStatistics(ServerIpAddress: CPointer<UInt16>, StatelessStats: CPointer<CPointer<DHCPV6_STATELESS_STATS>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV6GetStatelessStatistics == "on"]
+public unsafe func Windows_DhcpV6GetStatelessStatistics(ServerIpAddress: CPointer<UInt16>, StatelessStats: CPointer<CPointer<DHCPV6_STATELESS_STATS>>): UInt32 {
+    return DhcpV6GetStatelessStatistics(ServerIpAddress, StatelessStats)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV6GetStatelessStoreParams == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV6GetStatelessStoreParams(ServerIpAddress: CPointer<UInt16>, fServerLevel: Int32, SubnetAddress: DHCP_IPV6_ADDRESS, Params: CPointer<CPointer<DHCPV6_STATELESS_PARAMS>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV6GetStatelessStoreParams == "on"]
+public unsafe func Windows_DhcpV6GetStatelessStoreParams(ServerIpAddress: CPointer<UInt16>, fServerLevel: Int32, SubnetAddress: DHCP_IPV6_ADDRESS, Params: CPointer<CPointer<DHCPV6_STATELESS_PARAMS>>): UInt32 {
+    return DhcpV6GetStatelessStoreParams(ServerIpAddress, fServerLevel, SubnetAddress, Params)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV6SetStatelessStoreParams == "on"]
+foreign {
     // param-hint: ServerIpAddress optional
     func DhcpV6SetStatelessStoreParams(ServerIpAddress: CPointer<UInt16>, fServerLevel: Int32, SubnetAddress: DHCP_IPV6_ADDRESS, FieldModified: UInt32, Params: CPointer<DHCPV6_STATELESS_PARAMS>): UInt32
 }
 
-@When[DHCPCSVC == "on"]
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPSAPI == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpV6SetStatelessStoreParams == "on"]
+public unsafe func Windows_DhcpV6SetStatelessStoreParams(ServerIpAddress: CPointer<UInt16>, fServerLevel: Int32, SubnetAddress: DHCP_IPV6_ADDRESS, FieldModified: UInt32, Params: CPointer<DHCPV6_STATELESS_PARAMS>): UInt32 {
+    return DhcpV6SetStatelessStoreParams(ServerIpAddress, fServerLevel, SubnetAddress, FieldModified, Params)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPCSVC == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpCApiCleanup == "on"]
 foreign {
     func DhcpCApiCleanup(): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPCSVC == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpCApiCleanup == "on"]
+public unsafe func Windows_DhcpCApiCleanup(): Unit {
+    DhcpCApiCleanup()
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPCSVC == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpCApiInitialize == "on"]
+foreign {
     func DhcpCApiInitialize(Version: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPCSVC == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpCApiInitialize == "on"]
+public unsafe func Windows_DhcpCApiInitialize(Version: CPointer<UInt32>): UInt32 {
+    return DhcpCApiInitialize(Version)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPCSVC == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpDeRegisterParamChange == "on"]
+foreign {
     func DhcpDeRegisterParamChange(Flags: UInt32, Reserved: CPointer<Unit>, Event: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPCSVC == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpDeRegisterParamChange == "on"]
+public unsafe func Windows_DhcpDeRegisterParamChange(Flags: UInt32, Reserved: CPointer<Unit>, Event: CPointer<Unit>): UInt32 {
+    return DhcpDeRegisterParamChange(Flags, Reserved, Event)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPCSVC == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetOriginalSubnetMask == "on"]
+foreign {
     func DhcpGetOriginalSubnetMask(sAdapterName: CPointer<UInt16>, dwSubnetMask: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPCSVC == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpGetOriginalSubnetMask == "on"]
+public unsafe func Windows_DhcpGetOriginalSubnetMask(sAdapterName: CPointer<UInt16>, dwSubnetMask: CPointer<UInt32>): UInt32 {
+    return DhcpGetOriginalSubnetMask(sAdapterName, dwSubnetMask)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPCSVC == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpRegisterParamChange == "on"]
+foreign {
     // param-hint: Reserved optional reserved
     func DhcpRegisterParamChange(Flags: UInt32, Reserved: CPointer<Unit>, AdapterName: CPointer<UInt16>, ClassId: CPointer<DHCPCAPI_CLASSID>, Params: DHCPCAPI_PARAMS_ARRAY, Handle: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPCSVC == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpRegisterParamChange == "on"]
+public unsafe func Windows_DhcpRegisterParamChange(Flags: UInt32, Reserved: CPointer<Unit>, AdapterName: CPointer<UInt16>, ClassId: CPointer<DHCPCAPI_CLASSID>, Params: DHCPCAPI_PARAMS_ARRAY, Handle: CPointer<Unit>): UInt32 {
+    return DhcpRegisterParamChange(Flags, Reserved, AdapterName, ClassId, Params, Handle)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPCSVC == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpRemoveDNSRegistrations == "on"]
+foreign {
     func DhcpRemoveDNSRegistrations(): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPCSVC == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpRemoveDNSRegistrations == "on"]
+public unsafe func Windows_DhcpRemoveDNSRegistrations(): UInt32 {
+    return DhcpRemoveDNSRegistrations()
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPCSVC == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpRequestParams == "on"]
+foreign {
     // param-hint: Buffer bytes=param[7]
     func DhcpRequestParams(Flags: UInt32, Reserved: CPointer<Unit>, AdapterName: CPointer<UInt16>, ClassId: CPointer<DHCPCAPI_CLASSID>, SendParams: DHCPCAPI_PARAMS_ARRAY, RecdParams: DHCPCAPI_PARAMS_ARRAY, Buffer: CPointer<UInt8>, pSize: CPointer<UInt32>, RequestIdStr: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPCSVC == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpRequestParams == "on"]
+public unsafe func Windows_DhcpRequestParams(Flags: UInt32, Reserved: CPointer<Unit>, AdapterName: CPointer<UInt16>, ClassId: CPointer<DHCPCAPI_CLASSID>, SendParams: DHCPCAPI_PARAMS_ARRAY, RecdParams: DHCPCAPI_PARAMS_ARRAY, Buffer: CPointer<UInt8>, pSize: CPointer<UInt32>, RequestIdStr: CPointer<UInt16>): UInt32 {
+    return DhcpRequestParams(Flags, Reserved, AdapterName, ClassId, SendParams, RecdParams, Buffer, pSize, RequestIdStr)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPCSVC == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpUndoRequestParams == "on"]
+foreign {
     // param-hint: Flags optional reserved
     // param-hint: Reserved optional reserved
     func DhcpUndoRequestParams(Flags: UInt32, Reserved: CPointer<Unit>, AdapterName: CPointer<UInt16>, RequestIdStr: CPointer<UInt16>): UInt32
 }
 
-@When[DHCPCSVC6 == "on"]
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPCSVC == "on" && Windows_Win32_NetworkManagement_Dhcp_DhcpUndoRequestParams == "on"]
+public unsafe func Windows_DhcpUndoRequestParams(Flags: UInt32, Reserved: CPointer<Unit>, AdapterName: CPointer<UInt16>, RequestIdStr: CPointer<UInt16>): UInt32 {
+    return DhcpUndoRequestParams(Flags, Reserved, AdapterName, RequestIdStr)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPCSVC6 == "on" && Windows_Win32_NetworkManagement_Dhcp_Dhcpv6CApiCleanup == "on"]
 foreign {
     func Dhcpv6CApiCleanup(): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPCSVC6 == "on" && Windows_Win32_NetworkManagement_Dhcp_Dhcpv6CApiCleanup == "on"]
+public unsafe func Windows_Dhcpv6CApiCleanup(): Unit {
+    Dhcpv6CApiCleanup()
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPCSVC6 == "on" && Windows_Win32_NetworkManagement_Dhcp_Dhcpv6CApiInitialize == "on"]
+foreign {
     func Dhcpv6CApiInitialize(Version: CPointer<UInt32>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPCSVC6 == "on" && Windows_Win32_NetworkManagement_Dhcp_Dhcpv6CApiInitialize == "on"]
+public unsafe func Windows_Dhcpv6CApiInitialize(Version: CPointer<UInt32>): Unit {
+    Dhcpv6CApiInitialize(Version)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPCSVC6 == "on" && Windows_Win32_NetworkManagement_Dhcp_Dhcpv6ReleasePrefix == "on"]
+foreign {
     func Dhcpv6ReleasePrefix(adapterName: CPointer<UInt16>, classId: CPointer<DHCPV6CAPI_CLASSID>, leaseInfo: CPointer<DHCPV6PrefixLeaseInformation>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPCSVC6 == "on" && Windows_Win32_NetworkManagement_Dhcp_Dhcpv6ReleasePrefix == "on"]
+public unsafe func Windows_Dhcpv6ReleasePrefix(adapterName: CPointer<UInt16>, classId: CPointer<DHCPV6CAPI_CLASSID>, leaseInfo: CPointer<DHCPV6PrefixLeaseInformation>): UInt32 {
+    return Dhcpv6ReleasePrefix(adapterName, classId, leaseInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPCSVC6 == "on" && Windows_Win32_NetworkManagement_Dhcp_Dhcpv6RenewPrefix == "on"]
+foreign {
     func Dhcpv6RenewPrefix(adapterName: CPointer<UInt16>, pclassId: CPointer<DHCPV6CAPI_CLASSID>, prefixleaseInfo: CPointer<DHCPV6PrefixLeaseInformation>, pdwTimeToWait: CPointer<UInt32>, bValidatePrefix: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPCSVC6 == "on" && Windows_Win32_NetworkManagement_Dhcp_Dhcpv6RenewPrefix == "on"]
+public unsafe func Windows_Dhcpv6RenewPrefix(adapterName: CPointer<UInt16>, pclassId: CPointer<DHCPV6CAPI_CLASSID>, prefixleaseInfo: CPointer<DHCPV6PrefixLeaseInformation>, pdwTimeToWait: CPointer<UInt32>, bValidatePrefix: UInt32): UInt32 {
+    return Dhcpv6RenewPrefix(adapterName, pclassId, prefixleaseInfo, pdwTimeToWait, bValidatePrefix)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPCSVC6 == "on" && Windows_Win32_NetworkManagement_Dhcp_Dhcpv6RequestParams == "on"]
+foreign {
     func Dhcpv6RequestParams(forceNewInform: Int32, reserved: CPointer<Unit>, adapterName: CPointer<UInt16>, classId: CPointer<DHCPV6CAPI_CLASSID>, recdParams: DHCPV6CAPI_PARAMS_ARRAY, buffer: CPointer<UInt8>, pSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPCSVC6 == "on" && Windows_Win32_NetworkManagement_Dhcp_Dhcpv6RequestParams == "on"]
+public unsafe func Windows_Dhcpv6RequestParams(forceNewInform: Int32, reserved: CPointer<Unit>, adapterName: CPointer<UInt16>, classId: CPointer<DHCPV6CAPI_CLASSID>, recdParams: DHCPV6CAPI_PARAMS_ARRAY, buffer: CPointer<UInt8>, pSize: CPointer<UInt32>): UInt32 {
+    return Dhcpv6RequestParams(forceNewInform, reserved, adapterName, classId, recdParams, buffer, pSize)
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPCSVC6 == "on" && Windows_Win32_NetworkManagement_Dhcp_Dhcpv6RequestPrefix == "on"]
+foreign {
     func Dhcpv6RequestPrefix(adapterName: CPointer<UInt16>, pclassId: CPointer<DHCPV6CAPI_CLASSID>, prefixleaseInfo: CPointer<DHCPV6PrefixLeaseInformation>, pdwTimeToWait: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Dhcp == "on" && DHCPCSVC6 == "on" && Windows_Win32_NetworkManagement_Dhcp_Dhcpv6RequestPrefix == "on"]
+public unsafe func Windows_Dhcpv6RequestPrefix(adapterName: CPointer<UInt16>, pclassId: CPointer<DHCPV6CAPI_CLASSID>, prefixleaseInfo: CPointer<DHCPV6PrefixLeaseInformation>, pdwTimeToWait: CPointer<UInt32>): UInt32 {
+    return Dhcpv6RequestPrefix(adapterName, pclassId, prefixleaseInfo, pdwTimeToWait)
 }
 
 @When[Windows_Win32_NetworkManagement_Dhcp == "on"]

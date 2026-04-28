@@ -38,7 +38,7 @@ public let WalletItemAppAssociation_AppNotInstalled: WalletItemAppAssociation = 
 @C
 public struct IWalletItemSystemStoreVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_ApplicationModel_Wallet == "on"]
+    @When[Windows_ApplicationModel_Wallet == "on" && Windows_Foundation_Collections == "on"]
     public var GetItemsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_ApplicationModel_Wallet == "on"]
     public var DeleteAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -91,7 +91,7 @@ public class IWalletItemSystemStore <: InterfaceWrapperBase & ComInterface {
         readVtbl<IWalletItemSystemStoreVtbl>(IWalletItemSystemStoreVtbl())
     }
 
-    @When[Windows_ApplicationModel_Wallet == "on"]
+    @When[Windows_ApplicationModel_Wallet == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func GetItemsAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

@@ -10,11 +10,8 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Devices_Geolocation == "on"]
 import windows.Devices.Geolocation as Devices_Geolocation
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Services_Maps == "on"]
 import windows.Services.Maps as Services_Maps
 import windows._impl_l0 as _impl_l0
 import windows_collections as windows_collections
@@ -914,7 +911,10 @@ public struct ILocalLocation2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Category: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var RatingInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var HoursOfOperation: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var HoursOfOperation: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -999,6 +999,7 @@ public class ILocalLocation2 <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return LocalLocationRatingInfo.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func HoursOfOperation(): windows_collections.IVectorView<LocalLocationHoursOfOperationItem> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1133,7 +1134,10 @@ extend LocalLocation <: windows_core.HandleWinrtType<LocalLocation> {
 @C
 public struct ILocalLocationFinderResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var LocalLocations: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var LocalLocations: UIntNative = UIntNative(0)
     public var Status: CFunc<(CPointer<Unit>, CPointer<LocalLocationFinderStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -1203,6 +1207,7 @@ public class ILocalLocationFinderResult <: InterfaceWrapperBase & ComInterface &
         readVtbl<ILocalLocationFinderResultVtbl>(ILocalLocationFinderResultVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func LocalLocations(): windows_collections.IVectorView<LocalLocation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1381,6 +1386,7 @@ public class LocalLocationFinderResult <: InterfaceWrapperBase & ComInterface & 
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func LocalLocations(): windows_collections.IVectorView<LocalLocation> {
         return defaultInterface().LocalLocations()
     }

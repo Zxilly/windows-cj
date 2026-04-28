@@ -8,23 +8,54 @@ import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeTy
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l2 as Win32__impl_l2
 
 
-@When[CSCAPI == "on"]
+@When[Windows_Win32_Storage_OfflineFiles == "on" && CSCAPI == "on" && Windows_Win32_Storage_OfflineFiles_OfflineFilesEnable == "on"]
 foreign {
     func OfflineFilesEnable(bEnable: Int32, pbRebootRequired: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_Storage_OfflineFiles == "on" && CSCAPI == "on" && Windows_Win32_Storage_OfflineFiles_OfflineFilesEnable == "on"]
+public unsafe func Windows_OfflineFilesEnable(bEnable: Int32, pbRebootRequired: CPointer<Int32>): UInt32 {
+    return OfflineFilesEnable(bEnable, pbRebootRequired)
+}
+
+@When[Windows_Win32_Storage_OfflineFiles == "on" && CSCAPI == "on" && Windows_Win32_Storage_OfflineFiles_OfflineFilesQueryStatus == "on"]
+foreign {
     // param-hint: pbActive optional
     // param-hint: pbEnabled optional
     func OfflineFilesQueryStatus(pbActive: CPointer<Int32>, pbEnabled: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_Storage_OfflineFiles == "on" && CSCAPI == "on" && Windows_Win32_Storage_OfflineFiles_OfflineFilesQueryStatus == "on"]
+public unsafe func Windows_OfflineFilesQueryStatus(pbActive: CPointer<Int32>, pbEnabled: CPointer<Int32>): UInt32 {
+    return OfflineFilesQueryStatus(pbActive, pbEnabled)
+}
+
+@When[Windows_Win32_Storage_OfflineFiles == "on" && CSCAPI == "on" && Windows_Win32_Storage_OfflineFiles_OfflineFilesQueryStatusEx == "on"]
+foreign {
     // param-hint: pbActive optional
     // param-hint: pbEnabled optional
     // param-hint: pbAvailable optional
     func OfflineFilesQueryStatusEx(pbActive: CPointer<Int32>, pbEnabled: CPointer<Int32>, pbAvailable: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_Storage_OfflineFiles == "on" && CSCAPI == "on" && Windows_Win32_Storage_OfflineFiles_OfflineFilesQueryStatusEx == "on"]
+public unsafe func Windows_OfflineFilesQueryStatusEx(pbActive: CPointer<Int32>, pbEnabled: CPointer<Int32>, pbAvailable: CPointer<Int32>): UInt32 {
+    return OfflineFilesQueryStatusEx(pbActive, pbEnabled, pbAvailable)
+}
+
+@When[Windows_Win32_Storage_OfflineFiles == "on" && CSCAPI == "on" && Windows_Win32_Storage_OfflineFiles_OfflineFilesStart == "on"]
+foreign {
     func OfflineFilesStart(): UInt32
+}
+
+@When[Windows_Win32_Storage_OfflineFiles == "on" && CSCAPI == "on" && Windows_Win32_Storage_OfflineFiles_OfflineFilesStart == "on"]
+public unsafe func Windows_OfflineFilesStart(): UInt32 {
+    return OfflineFilesStart()
 }
 
 @When[Windows_Win32_Storage_OfflineFiles == "on"]

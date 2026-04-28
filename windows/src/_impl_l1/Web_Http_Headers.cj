@@ -306,6 +306,7 @@ public class HttpChallengeHeaderValue <: InterfaceWrapperBase & ComInterface & w
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Parameters(): windows_collections.IVector<_impl_l0.HttpNameValueHeaderValue> {
         return defaultInterface().Parameters()
     }
@@ -1217,6 +1218,7 @@ public class HttpContentDispositionHeaderValue <: InterfaceWrapperBase & ComInte
         defaultInterface().SetName(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Parameters(): windows_collections.IVector<_impl_l0.HttpNameValueHeaderValue> {
         return defaultInterface().Parameters()
     }
@@ -1788,6 +1790,7 @@ public class HttpCredentialsHeaderValue <: InterfaceWrapperBase & ComInterface &
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Parameters(): windows_collections.IVector<_impl_l0.HttpNameValueHeaderValue> {
         return defaultInterface().Parameters()
     }
@@ -1955,6 +1958,7 @@ public class HttpExpectationHeaderValue <: InterfaceWrapperBase & ComInterface &
         defaultInterface().SetValue(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Parameters(): windows_collections.IVector<_impl_l0.HttpNameValueHeaderValue> {
         return defaultInterface().Parameters()
     }
@@ -2661,6 +2665,7 @@ public class HttpMediaTypeHeaderValue <: InterfaceWrapperBase & ComInterface & w
         defaultInterface().SetMediaType(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Parameters(): windows_collections.IVector<_impl_l0.HttpNameValueHeaderValue> {
         return defaultInterface().Parameters()
     }
@@ -2813,6 +2818,7 @@ public class HttpMediaTypeWithQualityHeaderValue <: InterfaceWrapperBase & ComIn
         defaultInterface().SetMediaType(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Parameters(): windows_collections.IVector<_impl_l0.HttpNameValueHeaderValue> {
         return defaultInterface().Parameters()
     }
@@ -4150,6 +4156,7 @@ public class HttpTransferCodingHeaderValue <: InterfaceWrapperBase & ComInterfac
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Parameters(): windows_collections.IVector<_impl_l0.HttpNameValueHeaderValue> {
         return defaultInterface().Parameters()
     }
@@ -4399,7 +4406,10 @@ extend HttpTransferCodingHeaderValueCollection <: windows_core.HandleWinrtType<H
 @C
 public struct IHttpChallengeHeaderValueVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Parameters: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Parameters: UIntNative = UIntNative(0)
     public var Scheme: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Token: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -4470,6 +4480,7 @@ public class IHttpChallengeHeaderValue <: InterfaceWrapperBase & ComInterface & 
         readVtbl<IHttpChallengeHeaderValueVtbl>(IHttpChallengeHeaderValueVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Parameters(): windows_collections.IVector<_impl_l0.HttpNameValueHeaderValue> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4698,7 +4709,10 @@ public struct IHttpContentDispositionHeaderValueVtbl {
     public var SetFileNameStar: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetName: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Parameters: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Parameters: UIntNative = UIntNative(0)
     public var Size: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetSize: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -4825,6 +4839,7 @@ public class IHttpContentDispositionHeaderValue <: InterfaceWrapperBase & ComInt
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Parameters(): windows_collections.IVector<_impl_l0.HttpNameValueHeaderValue> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5280,7 +5295,10 @@ extend IHttpContentHeaderCollection <: windows_core.Interface<IHttpContentHeader
 @C
 public struct IHttpCredentialsHeaderValueVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Parameters: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Parameters: UIntNative = UIntNative(0)
     public var Scheme: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Token: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -5351,6 +5369,7 @@ public class IHttpCredentialsHeaderValue <: InterfaceWrapperBase & ComInterface 
         readVtbl<IHttpCredentialsHeaderValueVtbl>(IHttpCredentialsHeaderValueVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Parameters(): windows_collections.IVector<_impl_l0.HttpNameValueHeaderValue> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5574,7 +5593,10 @@ public struct IHttpExpectationHeaderValueVtbl {
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Value: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetValue: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Parameters: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Parameters: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -5665,6 +5687,7 @@ public class IHttpExpectationHeaderValue <: InterfaceWrapperBase & ComInterface 
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Parameters(): windows_collections.IVector<_impl_l0.HttpNameValueHeaderValue> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5873,7 +5896,10 @@ public struct IHttpMediaTypeHeaderValueVtbl {
     public var SetCharSet: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var MediaType: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetMediaType: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Parameters: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Parameters: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -5970,6 +5996,7 @@ public class IHttpMediaTypeHeaderValue <: InterfaceWrapperBase & ComInterface & 
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Parameters(): windows_collections.IVector<_impl_l0.HttpNameValueHeaderValue> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6169,7 +6196,10 @@ public struct IHttpMediaTypeWithQualityHeaderValueVtbl {
     public var SetCharSet: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var MediaType: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetMediaType: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Parameters: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Parameters: UIntNative = UIntNative(0)
     public var Quality: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetQuality: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -6268,6 +6298,7 @@ public class IHttpMediaTypeWithQualityHeaderValue <: InterfaceWrapperBase & ComI
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Parameters(): windows_collections.IVector<_impl_l0.HttpNameValueHeaderValue> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7303,7 +7334,10 @@ extend IHttpResponseHeaderCollection <: windows_core.Interface<IHttpResponseHead
 @C
 public struct IHttpTransferCodingHeaderValueVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Parameters: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Parameters: UIntNative = UIntNative(0)
     public var Value: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -7373,6 +7407,7 @@ public class IHttpTransferCodingHeaderValue <: InterfaceWrapperBase & ComInterfa
         readVtbl<IHttpTransferCodingHeaderValueVtbl>(IHttpTransferCodingHeaderValueVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Parameters(): windows_collections.IVector<_impl_l0.HttpNameValueHeaderValue> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

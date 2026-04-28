@@ -94,6 +94,7 @@ public class ContactPickerUI <: InterfaceWrapperBase & ComInterface & windows_in
         return defaultInterface().ContainsContact(id)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DesiredFields(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().DesiredFields()
     }
@@ -140,7 +141,10 @@ public struct IContactPickerUIVtbl {
     public var AddContact: UIntNative = UIntNative(0)
     public var RemoveContact: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ContainsContact: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var DesiredFields: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var DesiredFields: UIntNative = UIntNative(0)
     @When[Windows_ApplicationModel_Contacts == "on"]
     public var SelectionMode: CFunc<(CPointer<Unit>, CPointer<_impl_l0.ContactSelectionModeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel_Contacts != "on"]
@@ -238,6 +242,7 @@ public class IContactPickerUI <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DesiredFields(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -281,9 +286,9 @@ public struct IContactPickerUI2Vtbl {
     public var AddContact: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<_impl_l0.AddContactResultAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel_Contacts != "on"]
     public var AddContact: UIntNative = UIntNative(0)
-    @When[Windows_ApplicationModel_Contacts == "on"]
+    @When[Windows_ApplicationModel_Contacts == "on" && Windows_Foundation_Collections == "on"]
     public var DesiredFieldsWithContactFieldType: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel_Contacts != "on"]
+    @When[Windows_ApplicationModel_Contacts != "on" || Windows_Foundation_Collections != "on"]
     public var DesiredFieldsWithContactFieldType: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -362,7 +367,7 @@ public class IContactPickerUI2 <: InterfaceWrapperBase & ComInterface & RuntimeN
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.AddContactResult>()).unwrap()
     }
 
-    @When[Windows_ApplicationModel_Contacts == "on"]
+    @When[Windows_ApplicationModel_Contacts == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func DesiredFieldsWithContactFieldType(): windows_collections.IVector<_impl_l0.ContactFieldType> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

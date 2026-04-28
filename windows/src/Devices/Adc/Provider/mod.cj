@@ -489,14 +489,25 @@ extend IAdcControllerProvider <: windows_core.Interface<IAdcControllerProvider> 
 @C
 public struct IAdcProviderVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetControllers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetControllers: UIntNative = UIntNative(0)
     public init() {}
 
+    @When[Windows_Foundation_Collections == "on"]
     public static func new<Identity>(offset!: Int64 = 0): IAdcProviderVtbl where Identity <: IAdcProvider_Impl {
         let _ = offset
         var vtbl = IAdcProviderVtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.GetControllers = { instanceRaw, result__ =>
+        vtbl = IAdcProviderVtbl.__assignGetControllers<Identity>(vtbl)
+        return vtbl
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections == "on"]
+    public static func __assignGetControllers<Identity>(vtbl: IAdcProviderVtbl): IAdcProviderVtbl where Identity <: IAdcProvider_Impl {
+        var next = vtbl
+        next.GetControllers = { instanceRaw, result__ =>
             match (unsafe { asImplFromRaw<IAdcProvider_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
                     impl.__winrtThunk_GetControllers(result__)
@@ -504,6 +515,11 @@ public struct IAdcProviderVtbl {
                     E_NOINTERFACE.value
             }
         }
+        return next
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections != "on"]
+    public static func __assignGetControllers<Identity>(vtbl: IAdcProviderVtbl): IAdcProviderVtbl where Identity <: IAdcProvider_Impl {
         return vtbl
     }
 
@@ -515,12 +531,12 @@ public struct IAdcProviderVtbl {
     }
 }
 
-@When[Windows_Devices_Adc_Provider == "on"]
+@When[Windows_Devices_Adc_Provider == "on" && Windows_Foundation_Collections == "on"]
 public interface IAdcProvider_ImplErased {
     public func __winrtThunk_GetControllers(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Devices_Adc_Provider == "on"]
+@When[Windows_Devices_Adc_Provider == "on" && Windows_Foundation_Collections == "on"]
 public interface IAdcProvider_Impl <: IAdcProvider_ImplErased {
     public func GetControllers(): windows_core.Result<windows_collections.IVectorView<IAdcControllerProvider>>
 
@@ -608,6 +624,7 @@ public class IAdcProvider <: InterfaceWrapperBase & ComInterface & RuntimeName &
         readVtbl<IAdcProviderVtbl>(IAdcProviderVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetControllers(): windows_collections.IVectorView<IAdcControllerProvider> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

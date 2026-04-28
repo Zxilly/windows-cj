@@ -10,11 +10,8 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_UI == "on"]
 import windows.UI as UI
-@When[Windows_UI_Shell == "on"]
 import windows.UI.Shell as UI_Shell
 import windows._impl_l1 as _impl_l1
 import windows_collections as windows_collections
@@ -1184,8 +1181,14 @@ extend IUserActivityChannel <: windows_core.Interface<IUserActivityChannel> {}
 @C
 public struct IUserActivityChannel2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetRecentUserActivitiesAsync: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetRecentUserActivitiesAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSessionHistoryItemsForUserActivityAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, windows_future.DateTimeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetSessionHistoryItemsForUserActivityAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1254,6 +1257,7 @@ public class IUserActivityChannel2 <: InterfaceWrapperBase & ComInterface & Runt
         readVtbl<IUserActivityChannel2Vtbl>(IUserActivityChannel2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetRecentUserActivitiesAsync(maxUniqueActivities: Int32): windows_future.IAsyncOperation<windows_collections.IVector<UserActivitySessionHistoryItem>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1262,6 +1266,7 @@ public class IUserActivityChannel2 <: InterfaceWrapperBase & ComInterface & Runt
         return windows_future.IAsyncOperation<windows_collections.IVector<UserActivitySessionHistoryItem>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSessionHistoryItemsForUserActivityAsync(activityId: windows_core.HString, startTime: windows_future.DateTime): windows_future.IAsyncOperation<windows_collections.IVector<UserActivitySessionHistoryItem>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2176,8 +2181,14 @@ extend IUserActivitySessionHistoryItem <: windows_core.Interface<IUserActivitySe
 public struct IUserActivityStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var TryParseFromJson: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var TryParseFromJsonArray: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var TryParseFromJsonArray: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var ToJsonArray: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ToJsonArray: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2254,6 +2265,7 @@ public class IUserActivityStatics <: InterfaceWrapperBase & ComInterface & Runti
         return UserActivity.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TryParseFromJsonArray(json: windows_core.HString): windows_collections.IVector<UserActivity> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2262,6 +2274,7 @@ public class IUserActivityStatics <: InterfaceWrapperBase & ComInterface & Runti
         return windows_collections.IVector<UserActivity>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ToJsonArray(activities: windows_collections.IIterable<UserActivity>): windows_core.HString {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2586,6 +2599,7 @@ public class UserActivity <: InterfaceWrapperBase & ComInterface & windows_inter
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func TryParseFromJsonArray(json: windows_core.HString): windows_collections.IVector<UserActivity> {
         var result__: Option<windows_collections.IVector<UserActivity>> = Option<windows_collections.IVector<UserActivity>>.None
         try (factory__ = windows_core.factory<UserActivity, IUserActivityStatics>().unwrap()) {
@@ -2597,6 +2611,7 @@ public class UserActivity <: InterfaceWrapperBase & ComInterface & windows_inter
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func ToJsonArray(activities: windows_collections.IIterable<UserActivity>): windows_core.HString {
         var result__: Option<windows_core.HString> = Option<windows_core.HString>.None
         try (factory__ = windows_core.factory<UserActivity, IUserActivityStatics>().unwrap()) {

@@ -172,6 +172,7 @@ public class INumberFormatter2 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct INumberFormatterOptionsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Languages: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GeographicRegion: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IntegerDigits: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -229,6 +230,7 @@ public class INumberFormatterOptions <: InterfaceWrapperBase & ComInterface {
         readVtbl<INumberFormatterOptionsVtbl>(INumberFormatterOptionsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Languages(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -539,6 +541,7 @@ public class INumberRounderOption <: InterfaceWrapperBase & ComInterface {
 @C
 public struct INumeralSystemTranslatorVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Languages: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ResolvedLanguage: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var NumeralSystem: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -587,6 +590,7 @@ public class INumeralSystemTranslator <: InterfaceWrapperBase & ComInterface {
         readVtbl<INumeralSystemTranslatorVtbl>(INumeralSystemTranslatorVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Languages(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1081,6 +1085,7 @@ public class ISignificantDigitsNumberRounder <: InterfaceWrapperBase & ComInterf
 public struct ICurrencyFormatterFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var CreateCurrencyFormatterCode: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateCurrencyFormatterCodeContext: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -1131,6 +1136,7 @@ public class ICurrencyFormatterFactory <: InterfaceWrapperBase & ComInterface {
         return __vt.CreateCurrencyFormatterCode(__liveRaw, currencyCode, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateCurrencyFormatterCodeContext(currencyCode: CPointer<Unit>, languages: CPointer<Unit>, geographicRegion: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1142,6 +1148,7 @@ public class ICurrencyFormatterFactory <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IDecimalFormatterFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateDecimalFormatter: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -1186,6 +1193,7 @@ public class IDecimalFormatterFactory <: InterfaceWrapperBase & ComInterface {
         readVtbl<IDecimalFormatterFactoryVtbl>(IDecimalFormatterFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateDecimalFormatter(languages: CPointer<Unit>, geographicRegion: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1197,6 +1205,7 @@ public class IDecimalFormatterFactory <: InterfaceWrapperBase & ComInterface {
 @C
 public struct INumeralSystemTranslatorFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -1241,6 +1250,7 @@ public class INumeralSystemTranslatorFactory <: InterfaceWrapperBase & ComInterf
         readVtbl<INumeralSystemTranslatorFactoryVtbl>(INumeralSystemTranslatorFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create(languages: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1252,6 +1262,7 @@ public class INumeralSystemTranslatorFactory <: InterfaceWrapperBase & ComInterf
 @C
 public struct IPercentFormatterFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreatePercentFormatter: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -1296,6 +1307,7 @@ public class IPercentFormatterFactory <: InterfaceWrapperBase & ComInterface {
         readVtbl<IPercentFormatterFactoryVtbl>(IPercentFormatterFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreatePercentFormatter(languages: CPointer<Unit>, geographicRegion: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1307,6 +1319,7 @@ public class IPercentFormatterFactory <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IPermilleFormatterFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreatePermilleFormatter: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -1351,6 +1364,7 @@ public class IPermilleFormatterFactory <: InterfaceWrapperBase & ComInterface {
         readVtbl<IPermilleFormatterFactoryVtbl>(IPermilleFormatterFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreatePermilleFormatter(languages: CPointer<Unit>, geographicRegion: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

@@ -147,6 +147,7 @@ public class AppWindow <: InterfaceWrapperBase & ComInterface & windows_interfac
         return defaultInterface().GetPlacement()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetDisplayRegions(): windows_collections.IVectorView<DisplayRegion> {
         return defaultInterface().GetDisplayRegions()
     }
@@ -412,7 +413,7 @@ public class AppWindowFrame <: InterfaceWrapperBase & ComInterface & windows_int
         }
     }
 
-    @When[Windows_UI_Composition == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Composition == "on"]
     public unsafe func DragRegionVisuals(): windows_collections.IVector<_impl_l0.IVisualElement> {
         return defaultInterface().DragRegionVisuals()
     }
@@ -933,6 +934,7 @@ public class AppWindowTitleBar <: InterfaceWrapperBase & ComInterface & windows_
         return defaultInterface().IsVisible()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetTitleBarOcclusions(): windows_collections.IVectorView<_impl_l0.AppWindowTitleBarOcclusion> {
         return defaultInterface().GetTitleBarOcclusions()
     }
@@ -1425,7 +1427,10 @@ public struct IAppWindowVtbl {
     public var get_WindowingEnvironment: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CloseAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetPlacement: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetDisplayRegions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetDisplayRegions: UIntNative = UIntNative(0)
     public var RequestMoveToDisplayRegion: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var RequestMoveAdjacentToCurrentView: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
     public var RequestMoveAdjacentToWindow: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1619,6 +1624,7 @@ public class IAppWindow <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         return AppWindowPlacement.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetDisplayRegions(): windows_collections.IVectorView<DisplayRegion> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2140,7 +2146,10 @@ public struct IAppWindowTitleBarVtbl {
     @When[Windows_UI != "on"]
     public var SetInactiveForegroundColor: UIntNative = UIntNative(0)
     public var IsVisible: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetTitleBarOcclusions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetTitleBarOcclusions: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2423,6 +2432,7 @@ public class IAppWindowTitleBar <: InterfaceWrapperBase & ComInterface & Runtime
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetTitleBarOcclusions(): windows_collections.IVectorView<_impl_l0.AppWindowTitleBarOcclusion> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2578,7 +2588,10 @@ public struct IWindowingEnvironmentVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var IsEnabled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Kind: CFunc<(CPointer<Unit>, CPointer<_impl_l0.WindowingEnvironmentKindAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetDisplayRegions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetDisplayRegions: UIntNative = UIntNative(0)
     public var Changed: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -2665,6 +2678,7 @@ public class IWindowingEnvironment <: InterfaceWrapperBase & ComInterface & Runt
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.WindowingEnvironmentKind>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetDisplayRegions(): windows_collections.IVectorView<DisplayRegion> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2865,8 +2879,14 @@ extend IWindowingEnvironmentRemovedEventArgs <: windows_core.Interface<IWindowin
 @C
 public struct IWindowingEnvironmentStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAll: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAll: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllWithKind: CFunc<(CPointer<Unit>, _impl_l0.WindowingEnvironmentKindAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllWithKind: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2935,6 +2955,7 @@ public class IWindowingEnvironmentStatics <: InterfaceWrapperBase & ComInterface
         readVtbl<IWindowingEnvironmentStaticsVtbl>(IWindowingEnvironmentStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAll(): windows_collections.IVectorView<WindowingEnvironment> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2943,6 +2964,7 @@ public class IWindowingEnvironmentStatics <: InterfaceWrapperBase & ComInterface
         return windows_collections.IVectorView<WindowingEnvironment>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllWithKind(kind: _impl_l0.WindowingEnvironmentKind): windows_collections.IVectorView<WindowingEnvironment> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3032,6 +3054,7 @@ public class WindowingEnvironment <: InterfaceWrapperBase & ComInterface & windo
         return defaultInterface().Kind()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetDisplayRegions(): windows_collections.IVectorView<DisplayRegion> {
         return defaultInterface().GetDisplayRegions()
     }
@@ -3044,6 +3067,7 @@ public class WindowingEnvironment <: InterfaceWrapperBase & ComInterface & windo
         defaultInterface().RemoveChanged(token)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindAll(): windows_collections.IVectorView<WindowingEnvironment> {
         var result__: Option<windows_collections.IVectorView<WindowingEnvironment>> = Option<windows_collections.IVectorView<WindowingEnvironment>>.None
         try (factory__ = windows_core.factory<WindowingEnvironment, IWindowingEnvironmentStatics>().unwrap()) {
@@ -3055,6 +3079,7 @@ public class WindowingEnvironment <: InterfaceWrapperBase & ComInterface & windo
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindAllWithKind(kind: _impl_l0.WindowingEnvironmentKind): windows_collections.IVectorView<WindowingEnvironment> {
         var result__: Option<windows_collections.IVectorView<WindowingEnvironment>> = Option<windows_collections.IVectorView<WindowingEnvironment>>.None
         try (factory__ = windows_core.factory<WindowingEnvironment, IWindowingEnvironmentStatics>().unwrap()) {

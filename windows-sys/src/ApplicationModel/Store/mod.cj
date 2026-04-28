@@ -780,6 +780,7 @@ public let ProductType_Consumable: ProductType = ProductType(2)
 @C
 public struct ILicenseInformationVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ProductLicenses: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IsActive: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var IsTrial: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
@@ -829,6 +830,7 @@ public class ILicenseInformation <: InterfaceWrapperBase & ComInterface {
         readVtbl<ILicenseInformationVtbl>(ILicenseInformationVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ProductLicenses(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -926,6 +928,7 @@ public class IProductListingWithConsumables <: InterfaceWrapperBase & ComInterfa
 public struct IProductListingWithMetadataVtbl {
     public var base_: IProductListingVtbl = IProductListingVtbl()
     public var Description: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Keywords: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ProductType: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Tag: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -979,6 +982,7 @@ public class IProductListingWithMetadata <: InterfaceWrapperBase & ComInterface 
         return __vt.Description(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Keywords(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1086,6 +1090,7 @@ public struct IListingInformationVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var CurrentMarket: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Description: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ProductListings: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var FormattedPrice: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -1145,6 +1150,7 @@ public class IListingInformation <: InterfaceWrapperBase & ComInterface {
         return __vt.Description(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ProductListings(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1286,7 +1292,7 @@ public struct ICurrentAppSimulatorVtbl {
     public var LoadListingInformationAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetAppReceiptAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetProductReceiptAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var ReloadSimulatorAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -1379,7 +1385,7 @@ public class ICurrentAppSimulator <: InterfaceWrapperBase & ComInterface {
         return __vt.GetProductReceiptAsync(__liveRaw, productId, result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func ReloadSimulatorAsync(simulatorSettingsFile: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1391,7 +1397,9 @@ public class ICurrentAppSimulator <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ICurrentAppSimulatorStaticsWithFilteringVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var LoadListingInformationByProductIdsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var LoadListingInformationByKeywordsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -1436,12 +1444,14 @@ public class ICurrentAppSimulatorStaticsWithFiltering <: InterfaceWrapperBase & 
         readVtbl<ICurrentAppSimulatorStaticsWithFilteringVtbl>(ICurrentAppSimulatorStaticsWithFilteringVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func LoadListingInformationByProductIdsAsync(productIds: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.LoadListingInformationByProductIdsAsync(__liveRaw, productIds, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func LoadListingInformationByKeywordsAsync(keywords: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1453,7 +1463,9 @@ public class ICurrentAppSimulatorStaticsWithFiltering <: InterfaceWrapperBase & 
 @C
 public struct ICurrentAppStaticsWithFilteringVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var LoadListingInformationByProductIdsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var LoadListingInformationByKeywordsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var ReportProductFulfillment: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -1499,12 +1511,14 @@ public class ICurrentAppStaticsWithFiltering <: InterfaceWrapperBase & ComInterf
         readVtbl<ICurrentAppStaticsWithFilteringVtbl>(ICurrentAppStaticsWithFilteringVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func LoadListingInformationByProductIdsAsync(productIds: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.LoadListingInformationByProductIdsAsync(__liveRaw, productIds, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func LoadListingInformationByKeywordsAsync(keywords: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1525,6 +1539,7 @@ public struct ICurrentAppSimulatorWithConsumablesVtbl {
     public var ReportConsumableFulfillmentAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, GUID, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var RequestProductPurchaseWithResultsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var RequestProductPurchaseWithDisplayPropertiesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetUnfulfilledConsumablesAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1587,6 +1602,7 @@ public class ICurrentAppSimulatorWithConsumables <: InterfaceWrapperBase & ComIn
         return __vt.RequestProductPurchaseWithDisplayPropertiesAsync(__liveRaw, productId, offerId, displayProperties, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetUnfulfilledConsumablesAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1601,6 +1617,7 @@ public struct ICurrentAppWithConsumablesVtbl {
     public var ReportConsumableFulfillmentAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, GUID, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var RequestProductPurchaseWithResultsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var RequestProductPurchaseWithDisplayPropertiesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetUnfulfilledConsumablesAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1663,6 +1680,7 @@ public class ICurrentAppWithConsumables <: InterfaceWrapperBase & ComInterface {
         return __vt.RequestProductPurchaseWithDisplayPropertiesAsync(__liveRaw, productId, offerId, displayProperties, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetUnfulfilledConsumablesAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

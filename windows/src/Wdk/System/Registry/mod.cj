@@ -7,9 +7,7 @@ import std.collection.*
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
 import windows.Wdk._impl_l0 as Wdk__impl_l0
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_System_IO == "on"]
 import windows.Win32.System.IO as Win32_System_IO
 import windows_core as windows_core
 
@@ -673,65 +671,107 @@ extend REG_SET_INFORMATION_KEY_INFORMATION <: windows_core.CopyType & windows_co
     }
 }
 
-@When[NTDLL == "on"]
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtCommitRegistryTransaction == "on"]
 foreign {
     func NtCommitRegistryTransaction(TransactionHandle: CPointer<Unit>, Flags: UInt32): Int32
-    func NtDeleteKey(KeyHandle: CPointer<Unit>): Int32
-    func NtDeleteValueKey(KeyHandle: CPointer<Unit>, ValueName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>): Int32
-    // param-hint: KeyInformation bytes=param[4] optional
-    func NtEnumerateKey(KeyHandle: CPointer<Unit>, Index: UInt32, KeyInformationClass: KEY_INFORMATION_CLASSAbi, KeyInformation: CPointer<Unit>, Length: UInt32, ResultLength: CPointer<UInt32>): Int32
-    // param-hint: KeyValueInformation bytes=param[4] optional
-    func NtEnumerateValueKey(KeyHandle: CPointer<Unit>, Index: UInt32, KeyValueInformationClass: KEY_VALUE_INFORMATION_CLASSAbi, KeyValueInformation: CPointer<Unit>, Length: UInt32, ResultLength: CPointer<UInt32>): Int32
-    func NtFlushKey(KeyHandle: CPointer<Unit>): Int32
-    // param-hint: KeyInformation bytes=param[3] optional
-    func NtQueryKey(KeyHandle: CPointer<Unit>, KeyInformationClass: KEY_INFORMATION_CLASSAbi, KeyInformation: CPointer<Unit>, Length: UInt32, ResultLength: CPointer<UInt32>): Int32
-    // param-hint: ValueEntries len=param[2]
-    // param-hint: ValueBuffer bytes=param[4]
-    // param-hint: RequiredBufferLength optional
-    func NtQueryMultipleValueKey(KeyHandle: CPointer<Unit>, ValueEntries: CPointer<KEY_VALUE_ENTRYAbi>, EntryCount: UInt32, ValueBuffer: CPointer<Unit>, BufferLength: CPointer<UInt32>, RequiredBufferLength: CPointer<UInt32>): Int32
-    // param-hint: KeyValueInformation bytes=param[4] optional
-    func NtQueryValueKey(KeyHandle: CPointer<Unit>, ValueName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, KeyValueInformationClass: KEY_VALUE_INFORMATION_CLASSAbi, KeyValueInformation: CPointer<Unit>, Length: UInt32, ResultLength: CPointer<UInt32>): Int32
-    func NtRenameKey(KeyHandle: CPointer<Unit>, NewName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>): Int32
-    // param-hint: FileHandle optional
-    func NtRestoreKey(KeyHandle: CPointer<Unit>, FileHandle: CPointer<Unit>, Flags: UInt32): Int32
-    func NtRollbackRegistryTransaction(TransactionHandle: CPointer<Unit>, Flags: UInt32): Int32
-    func NtSaveKey(KeyHandle: CPointer<Unit>, FileHandle: CPointer<Unit>): Int32
-    func NtSaveKeyEx(KeyHandle: CPointer<Unit>, FileHandle: CPointer<Unit>, Format: UInt32): Int32
-    // param-hint: KeySetInformation bytes=param[3]
-    func NtSetInformationKey(KeyHandle: CPointer<Unit>, KeySetInformationClass: KEY_SET_INFORMATION_CLASSAbi, KeySetInformation: CPointer<Unit>, KeySetInformationLength: UInt32): Int32
-    // param-hint: TitleIndex optional
-    // param-hint: Data bytes=param[5] optional
-    func NtSetValueKey(KeyHandle: CPointer<Unit>, ValueName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, TitleIndex: UInt32, Type: UInt32, Data: CPointer<Unit>, DataSize: UInt32): Int32
-    func ZwCommitRegistryTransaction(TransactionHandle: CPointer<Unit>, Flags: UInt32): Int32
-    func ZwDeleteKey(KeyHandle: CPointer<Unit>): Int32
-    func ZwDeleteValueKey(KeyHandle: CPointer<Unit>, ValueName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>): Int32
-    // param-hint: KeyInformation bytes=param[4] optional
-    func ZwEnumerateKey(KeyHandle: CPointer<Unit>, Index: UInt32, KeyInformationClass: KEY_INFORMATION_CLASSAbi, KeyInformation: CPointer<Unit>, Length: UInt32, ResultLength: CPointer<UInt32>): Int32
-    // param-hint: KeyValueInformation bytes=param[4] optional
-    func ZwEnumerateValueKey(KeyHandle: CPointer<Unit>, Index: UInt32, KeyValueInformationClass: KEY_VALUE_INFORMATION_CLASSAbi, KeyValueInformation: CPointer<Unit>, Length: UInt32, ResultLength: CPointer<UInt32>): Int32
-    func ZwFlushKey(KeyHandle: CPointer<Unit>): Int32
-    // param-hint: KeyInformation bytes=param[3] optional
-    func ZwQueryKey(KeyHandle: CPointer<Unit>, KeyInformationClass: KEY_INFORMATION_CLASSAbi, KeyInformation: CPointer<Unit>, Length: UInt32, ResultLength: CPointer<UInt32>): Int32
-    // param-hint: ValueEntries len=param[2]
-    // param-hint: ValueBuffer bytes=param[4]
-    // param-hint: RequiredBufferLength optional
-    func ZwQueryMultipleValueKey(KeyHandle: CPointer<Unit>, ValueEntries: CPointer<KEY_VALUE_ENTRYAbi>, EntryCount: UInt32, ValueBuffer: CPointer<Unit>, BufferLength: CPointer<UInt32>, RequiredBufferLength: CPointer<UInt32>): Int32
-    // param-hint: KeyValueInformation bytes=param[4] optional
-    func ZwQueryValueKey(KeyHandle: CPointer<Unit>, ValueName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, KeyValueInformationClass: KEY_VALUE_INFORMATION_CLASSAbi, KeyValueInformation: CPointer<Unit>, Length: UInt32, ResultLength: CPointer<UInt32>): Int32
-    func ZwRenameKey(KeyHandle: CPointer<Unit>, NewName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>): Int32
-    // param-hint: FileHandle optional
-    func ZwRestoreKey(KeyHandle: CPointer<Unit>, FileHandle: CPointer<Unit>, Flags: UInt32): Int32
-    func ZwRollbackRegistryTransaction(TransactionHandle: CPointer<Unit>, Flags: UInt32): Int32
-    func ZwSaveKey(KeyHandle: CPointer<Unit>, FileHandle: CPointer<Unit>): Int32
-    func ZwSaveKeyEx(KeyHandle: CPointer<Unit>, FileHandle: CPointer<Unit>, Format: UInt32): Int32
-    // param-hint: KeySetInformation bytes=param[3]
-    func ZwSetInformationKey(KeyHandle: CPointer<Unit>, KeySetInformationClass: KEY_SET_INFORMATION_CLASSAbi, KeySetInformation: CPointer<Unit>, KeySetInformationLength: UInt32): Int32
-    // param-hint: TitleIndex optional
-    // param-hint: Data bytes=param[5] optional
-    func ZwSetValueKey(KeyHandle: CPointer<Unit>, ValueName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, TitleIndex: UInt32, Type: UInt32, Data: CPointer<Unit>, DataSize: UInt32): Int32
 }
 
-@When[NTDLL == "on" && (Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on")]
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtCommitRegistryTransaction == "on"]
+public unsafe func Windows_NtCommitRegistryTransaction(TransactionHandle: CPointer<Unit>, Flags: UInt32): Int32 {
+    return NtCommitRegistryTransaction(TransactionHandle, Flags)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtCreateKey == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: TitleIndex optional reserved
+    // param-hint: Class optional
+    // param-hint: Disposition optional
+    func NtCreateKey(KeyHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, TitleIndex: UInt32, Class: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, CreateOptions: UInt32, Disposition: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtCreateKey == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_NtCreateKey(KeyHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, TitleIndex: UInt32, Class: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, CreateOptions: UInt32, Disposition: CPointer<UInt32>): Int32 {
+    return NtCreateKey(KeyHandle, DesiredAccess, ObjectAttributes, TitleIndex, Class, CreateOptions, Disposition)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtCreateKeyTransacted == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: TitleIndex optional reserved
+    // param-hint: Class optional
+    // param-hint: Disposition optional
+    func NtCreateKeyTransacted(KeyHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, TitleIndex: UInt32, Class: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, CreateOptions: UInt32, TransactionHandle: CPointer<Unit>, Disposition: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtCreateKeyTransacted == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_NtCreateKeyTransacted(KeyHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, TitleIndex: UInt32, Class: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, CreateOptions: UInt32, TransactionHandle: CPointer<Unit>, Disposition: CPointer<UInt32>): Int32 {
+    return NtCreateKeyTransacted(KeyHandle, DesiredAccess, ObjectAttributes, TitleIndex, Class, CreateOptions, TransactionHandle, Disposition)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtCreateRegistryTransaction == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: ObjectAttributes optional
+    // param-hint: CreateOptions optional
+    func NtCreateRegistryTransaction(TransactionHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, CreateOptions: UInt32): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtCreateRegistryTransaction == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_NtCreateRegistryTransaction(TransactionHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, CreateOptions: UInt32): Int32 {
+    return NtCreateRegistryTransaction(TransactionHandle, DesiredAccess, ObjectAttributes, CreateOptions)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtDeleteKey == "on"]
+foreign {
+    func NtDeleteKey(KeyHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtDeleteKey == "on"]
+public unsafe func Windows_NtDeleteKey(KeyHandle: CPointer<Unit>): Int32 {
+    return NtDeleteKey(KeyHandle)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtDeleteValueKey == "on"]
+foreign {
+    func NtDeleteValueKey(KeyHandle: CPointer<Unit>, ValueName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtDeleteValueKey == "on"]
+public unsafe func Windows_NtDeleteValueKey(KeyHandle: CPointer<Unit>, ValueName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>): Int32 {
+    return NtDeleteValueKey(KeyHandle, ValueName)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtEnumerateKey == "on"]
+foreign {
+    // param-hint: KeyInformation bytes=param[4] optional
+    func NtEnumerateKey(KeyHandle: CPointer<Unit>, Index: UInt32, KeyInformationClass: KEY_INFORMATION_CLASSAbi, KeyInformation: CPointer<Unit>, Length: UInt32, ResultLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtEnumerateKey == "on"]
+public unsafe func Windows_NtEnumerateKey(KeyHandle: CPointer<Unit>, Index: UInt32, KeyInformationClass: KEY_INFORMATION_CLASSAbi, KeyInformation: CPointer<Unit>, Length: UInt32, ResultLength: CPointer<UInt32>): Int32 {
+    return NtEnumerateKey(KeyHandle, Index, KeyInformationClass, KeyInformation, Length, ResultLength)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtEnumerateValueKey == "on"]
+foreign {
+    // param-hint: KeyValueInformation bytes=param[4] optional
+    func NtEnumerateValueKey(KeyHandle: CPointer<Unit>, Index: UInt32, KeyValueInformationClass: KEY_VALUE_INFORMATION_CLASSAbi, KeyValueInformation: CPointer<Unit>, Length: UInt32, ResultLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtEnumerateValueKey == "on"]
+public unsafe func Windows_NtEnumerateValueKey(KeyHandle: CPointer<Unit>, Index: UInt32, KeyValueInformationClass: KEY_VALUE_INFORMATION_CLASSAbi, KeyValueInformation: CPointer<Unit>, Length: UInt32, ResultLength: CPointer<UInt32>): Int32 {
+    return NtEnumerateValueKey(KeyHandle, Index, KeyValueInformationClass, KeyValueInformation, Length, ResultLength)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtFlushKey == "on"]
+foreign {
+    func NtFlushKey(KeyHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtFlushKey == "on"]
+public unsafe func Windows_NtFlushKey(KeyHandle: CPointer<Unit>): Int32 {
+    return NtFlushKey(KeyHandle)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtNotifyChangeMultipleKeys == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on"]
 foreign {
     // param-hint: Count optional
     // param-hint: SubordinateObjects len=param[1] optional
@@ -740,6 +780,274 @@ foreign {
     // param-hint: ApcContext optional
     // param-hint: Buffer bytes=param[10] optional
     func NtNotifyChangeMultipleKeys(MasterKeyHandle: CPointer<Unit>, Count: UInt32, SubordinateObjects: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, Event: CPointer<Unit>, ApcRoutine: Win32_System_IO.PIO_APC_ROUTINE, ApcContext: CPointer<Unit>, IoStatusBlock: CPointer<Win32_System_IO.IO_STATUS_BLOCKAbi>, CompletionFilter: UInt32, WatchTree: UInt8, Buffer: CPointer<Unit>, BufferSize: UInt32, Asynchronous: UInt8): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtNotifyChangeMultipleKeys == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_NtNotifyChangeMultipleKeys(MasterKeyHandle: CPointer<Unit>, Count: UInt32, SubordinateObjects: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, Event: CPointer<Unit>, ApcRoutine: Win32_System_IO.PIO_APC_ROUTINE, ApcContext: CPointer<Unit>, IoStatusBlock: CPointer<Win32_System_IO.IO_STATUS_BLOCKAbi>, CompletionFilter: UInt32, WatchTree: UInt8, Buffer: CPointer<Unit>, BufferSize: UInt32, Asynchronous: UInt8): Int32 {
+    return NtNotifyChangeMultipleKeys(MasterKeyHandle, Count, SubordinateObjects, Event, ApcRoutine, ApcContext, IoStatusBlock, CompletionFilter, WatchTree, Buffer, BufferSize, Asynchronous)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtOpenKey == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+foreign {
+    func NtOpenKey(KeyHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtOpenKey == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_NtOpenKey(KeyHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>): Int32 {
+    return NtOpenKey(KeyHandle, DesiredAccess, ObjectAttributes)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtOpenKeyEx == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+foreign {
+    func NtOpenKeyEx(KeyHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, OpenOptions: UInt32): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtOpenKeyEx == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_NtOpenKeyEx(KeyHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, OpenOptions: UInt32): Int32 {
+    return NtOpenKeyEx(KeyHandle, DesiredAccess, ObjectAttributes, OpenOptions)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtOpenKeyTransacted == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+foreign {
+    func NtOpenKeyTransacted(KeyHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, TransactionHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtOpenKeyTransacted == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_NtOpenKeyTransacted(KeyHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, TransactionHandle: CPointer<Unit>): Int32 {
+    return NtOpenKeyTransacted(KeyHandle, DesiredAccess, ObjectAttributes, TransactionHandle)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtOpenKeyTransactedEx == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+foreign {
+    func NtOpenKeyTransactedEx(KeyHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, OpenOptions: UInt32, TransactionHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtOpenKeyTransactedEx == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_NtOpenKeyTransactedEx(KeyHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, OpenOptions: UInt32, TransactionHandle: CPointer<Unit>): Int32 {
+    return NtOpenKeyTransactedEx(KeyHandle, DesiredAccess, ObjectAttributes, OpenOptions, TransactionHandle)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtOpenRegistryTransaction == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+foreign {
+    func NtOpenRegistryTransaction(TransactionHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtOpenRegistryTransaction == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_NtOpenRegistryTransaction(TransactionHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>): Int32 {
+    return NtOpenRegistryTransaction(TransactionHandle, DesiredAccess, ObjectAttributes)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtQueryKey == "on"]
+foreign {
+    // param-hint: KeyInformation bytes=param[3] optional
+    func NtQueryKey(KeyHandle: CPointer<Unit>, KeyInformationClass: KEY_INFORMATION_CLASSAbi, KeyInformation: CPointer<Unit>, Length: UInt32, ResultLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtQueryKey == "on"]
+public unsafe func Windows_NtQueryKey(KeyHandle: CPointer<Unit>, KeyInformationClass: KEY_INFORMATION_CLASSAbi, KeyInformation: CPointer<Unit>, Length: UInt32, ResultLength: CPointer<UInt32>): Int32 {
+    return NtQueryKey(KeyHandle, KeyInformationClass, KeyInformation, Length, ResultLength)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtQueryMultipleValueKey == "on"]
+foreign {
+    // param-hint: ValueEntries len=param[2]
+    // param-hint: ValueBuffer bytes=param[4]
+    // param-hint: RequiredBufferLength optional
+    func NtQueryMultipleValueKey(KeyHandle: CPointer<Unit>, ValueEntries: CPointer<KEY_VALUE_ENTRYAbi>, EntryCount: UInt32, ValueBuffer: CPointer<Unit>, BufferLength: CPointer<UInt32>, RequiredBufferLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtQueryMultipleValueKey == "on"]
+public unsafe func Windows_NtQueryMultipleValueKey(KeyHandle: CPointer<Unit>, ValueEntries: CPointer<KEY_VALUE_ENTRYAbi>, EntryCount: UInt32, ValueBuffer: CPointer<Unit>, BufferLength: CPointer<UInt32>, RequiredBufferLength: CPointer<UInt32>): Int32 {
+    return NtQueryMultipleValueKey(KeyHandle, ValueEntries, EntryCount, ValueBuffer, BufferLength, RequiredBufferLength)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtQueryValueKey == "on"]
+foreign {
+    // param-hint: KeyValueInformation bytes=param[4] optional
+    func NtQueryValueKey(KeyHandle: CPointer<Unit>, ValueName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, KeyValueInformationClass: KEY_VALUE_INFORMATION_CLASSAbi, KeyValueInformation: CPointer<Unit>, Length: UInt32, ResultLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtQueryValueKey == "on"]
+public unsafe func Windows_NtQueryValueKey(KeyHandle: CPointer<Unit>, ValueName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, KeyValueInformationClass: KEY_VALUE_INFORMATION_CLASSAbi, KeyValueInformation: CPointer<Unit>, Length: UInt32, ResultLength: CPointer<UInt32>): Int32 {
+    return NtQueryValueKey(KeyHandle, ValueName, KeyValueInformationClass, KeyValueInformation, Length, ResultLength)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtRenameKey == "on"]
+foreign {
+    func NtRenameKey(KeyHandle: CPointer<Unit>, NewName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtRenameKey == "on"]
+public unsafe func Windows_NtRenameKey(KeyHandle: CPointer<Unit>, NewName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>): Int32 {
+    return NtRenameKey(KeyHandle, NewName)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtRestoreKey == "on"]
+foreign {
+    // param-hint: FileHandle optional
+    func NtRestoreKey(KeyHandle: CPointer<Unit>, FileHandle: CPointer<Unit>, Flags: UInt32): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtRestoreKey == "on"]
+public unsafe func Windows_NtRestoreKey(KeyHandle: CPointer<Unit>, FileHandle: CPointer<Unit>, Flags: UInt32): Int32 {
+    return NtRestoreKey(KeyHandle, FileHandle, Flags)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtRollbackRegistryTransaction == "on"]
+foreign {
+    func NtRollbackRegistryTransaction(TransactionHandle: CPointer<Unit>, Flags: UInt32): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtRollbackRegistryTransaction == "on"]
+public unsafe func Windows_NtRollbackRegistryTransaction(TransactionHandle: CPointer<Unit>, Flags: UInt32): Int32 {
+    return NtRollbackRegistryTransaction(TransactionHandle, Flags)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtSaveKey == "on"]
+foreign {
+    func NtSaveKey(KeyHandle: CPointer<Unit>, FileHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtSaveKey == "on"]
+public unsafe func Windows_NtSaveKey(KeyHandle: CPointer<Unit>, FileHandle: CPointer<Unit>): Int32 {
+    return NtSaveKey(KeyHandle, FileHandle)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtSaveKeyEx == "on"]
+foreign {
+    func NtSaveKeyEx(KeyHandle: CPointer<Unit>, FileHandle: CPointer<Unit>, Format: UInt32): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtSaveKeyEx == "on"]
+public unsafe func Windows_NtSaveKeyEx(KeyHandle: CPointer<Unit>, FileHandle: CPointer<Unit>, Format: UInt32): Int32 {
+    return NtSaveKeyEx(KeyHandle, FileHandle, Format)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtSetInformationKey == "on"]
+foreign {
+    // param-hint: KeySetInformation bytes=param[3]
+    func NtSetInformationKey(KeyHandle: CPointer<Unit>, KeySetInformationClass: KEY_SET_INFORMATION_CLASSAbi, KeySetInformation: CPointer<Unit>, KeySetInformationLength: UInt32): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtSetInformationKey == "on"]
+public unsafe func Windows_NtSetInformationKey(KeyHandle: CPointer<Unit>, KeySetInformationClass: KEY_SET_INFORMATION_CLASSAbi, KeySetInformation: CPointer<Unit>, KeySetInformationLength: UInt32): Int32 {
+    return NtSetInformationKey(KeyHandle, KeySetInformationClass, KeySetInformation, KeySetInformationLength)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtSetValueKey == "on"]
+foreign {
+    // param-hint: TitleIndex optional
+    // param-hint: Data bytes=param[5] optional
+    func NtSetValueKey(KeyHandle: CPointer<Unit>, ValueName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, TitleIndex: UInt32, Type: UInt32, Data: CPointer<Unit>, DataSize: UInt32): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_NtSetValueKey == "on"]
+public unsafe func Windows_NtSetValueKey(KeyHandle: CPointer<Unit>, ValueName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, TitleIndex: UInt32, Type: UInt32, Data: CPointer<Unit>, DataSize: UInt32): Int32 {
+    return NtSetValueKey(KeyHandle, ValueName, TitleIndex, Type, Data, DataSize)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwCommitRegistryTransaction == "on"]
+foreign {
+    func ZwCommitRegistryTransaction(TransactionHandle: CPointer<Unit>, Flags: UInt32): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwCommitRegistryTransaction == "on"]
+public unsafe func Windows_ZwCommitRegistryTransaction(TransactionHandle: CPointer<Unit>, Flags: UInt32): Int32 {
+    return ZwCommitRegistryTransaction(TransactionHandle, Flags)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwCreateKey == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: TitleIndex optional reserved
+    // param-hint: Class optional
+    // param-hint: Disposition optional
+    func ZwCreateKey(KeyHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, TitleIndex: UInt32, Class: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, CreateOptions: UInt32, Disposition: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwCreateKey == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_ZwCreateKey(KeyHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, TitleIndex: UInt32, Class: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, CreateOptions: UInt32, Disposition: CPointer<UInt32>): Int32 {
+    return ZwCreateKey(KeyHandle, DesiredAccess, ObjectAttributes, TitleIndex, Class, CreateOptions, Disposition)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwCreateKeyTransacted == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: TitleIndex optional reserved
+    // param-hint: Class optional
+    // param-hint: Disposition optional
+    func ZwCreateKeyTransacted(KeyHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, TitleIndex: UInt32, Class: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, CreateOptions: UInt32, TransactionHandle: CPointer<Unit>, Disposition: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwCreateKeyTransacted == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_ZwCreateKeyTransacted(KeyHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, TitleIndex: UInt32, Class: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, CreateOptions: UInt32, TransactionHandle: CPointer<Unit>, Disposition: CPointer<UInt32>): Int32 {
+    return ZwCreateKeyTransacted(KeyHandle, DesiredAccess, ObjectAttributes, TitleIndex, Class, CreateOptions, TransactionHandle, Disposition)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwCreateRegistryTransaction == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: ObjectAttributes optional
+    // param-hint: CreateOptions optional
+    func ZwCreateRegistryTransaction(TransactionHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, CreateOptions: UInt32): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwCreateRegistryTransaction == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_ZwCreateRegistryTransaction(TransactionHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, CreateOptions: UInt32): Int32 {
+    return ZwCreateRegistryTransaction(TransactionHandle, DesiredAccess, ObjectAttributes, CreateOptions)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwDeleteKey == "on"]
+foreign {
+    func ZwDeleteKey(KeyHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwDeleteKey == "on"]
+public unsafe func Windows_ZwDeleteKey(KeyHandle: CPointer<Unit>): Int32 {
+    return ZwDeleteKey(KeyHandle)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwDeleteValueKey == "on"]
+foreign {
+    func ZwDeleteValueKey(KeyHandle: CPointer<Unit>, ValueName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwDeleteValueKey == "on"]
+public unsafe func Windows_ZwDeleteValueKey(KeyHandle: CPointer<Unit>, ValueName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>): Int32 {
+    return ZwDeleteValueKey(KeyHandle, ValueName)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwEnumerateKey == "on"]
+foreign {
+    // param-hint: KeyInformation bytes=param[4] optional
+    func ZwEnumerateKey(KeyHandle: CPointer<Unit>, Index: UInt32, KeyInformationClass: KEY_INFORMATION_CLASSAbi, KeyInformation: CPointer<Unit>, Length: UInt32, ResultLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwEnumerateKey == "on"]
+public unsafe func Windows_ZwEnumerateKey(KeyHandle: CPointer<Unit>, Index: UInt32, KeyInformationClass: KEY_INFORMATION_CLASSAbi, KeyInformation: CPointer<Unit>, Length: UInt32, ResultLength: CPointer<UInt32>): Int32 {
+    return ZwEnumerateKey(KeyHandle, Index, KeyInformationClass, KeyInformation, Length, ResultLength)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwEnumerateValueKey == "on"]
+foreign {
+    // param-hint: KeyValueInformation bytes=param[4] optional
+    func ZwEnumerateValueKey(KeyHandle: CPointer<Unit>, Index: UInt32, KeyValueInformationClass: KEY_VALUE_INFORMATION_CLASSAbi, KeyValueInformation: CPointer<Unit>, Length: UInt32, ResultLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwEnumerateValueKey == "on"]
+public unsafe func Windows_ZwEnumerateValueKey(KeyHandle: CPointer<Unit>, Index: UInt32, KeyValueInformationClass: KEY_VALUE_INFORMATION_CLASSAbi, KeyValueInformation: CPointer<Unit>, Length: UInt32, ResultLength: CPointer<UInt32>): Int32 {
+    return ZwEnumerateValueKey(KeyHandle, Index, KeyValueInformationClass, KeyValueInformation, Length, ResultLength)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwFlushKey == "on"]
+foreign {
+    func ZwFlushKey(KeyHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwFlushKey == "on"]
+public unsafe func Windows_ZwFlushKey(KeyHandle: CPointer<Unit>): Int32 {
+    return ZwFlushKey(KeyHandle)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwNotifyChangeMultipleKeys == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: Count optional
     // param-hint: SubordinateObjects len=param[1] optional
     // param-hint: Event optional
@@ -749,38 +1057,166 @@ foreign {
     func ZwNotifyChangeMultipleKeys(MasterKeyHandle: CPointer<Unit>, Count: UInt32, SubordinateObjects: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, Event: CPointer<Unit>, ApcRoutine: Win32_System_IO.PIO_APC_ROUTINE, ApcContext: CPointer<Unit>, IoStatusBlock: CPointer<Win32_System_IO.IO_STATUS_BLOCKAbi>, CompletionFilter: UInt32, WatchTree: UInt8, Buffer: CPointer<Unit>, BufferSize: UInt32, Asynchronous: UInt8): Int32
 }
 
-@When[NTDLL == "on" && (Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on")]
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwNotifyChangeMultipleKeys == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_ZwNotifyChangeMultipleKeys(MasterKeyHandle: CPointer<Unit>, Count: UInt32, SubordinateObjects: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, Event: CPointer<Unit>, ApcRoutine: Win32_System_IO.PIO_APC_ROUTINE, ApcContext: CPointer<Unit>, IoStatusBlock: CPointer<Win32_System_IO.IO_STATUS_BLOCKAbi>, CompletionFilter: UInt32, WatchTree: UInt8, Buffer: CPointer<Unit>, BufferSize: UInt32, Asynchronous: UInt8): Int32 {
+    return ZwNotifyChangeMultipleKeys(MasterKeyHandle, Count, SubordinateObjects, Event, ApcRoutine, ApcContext, IoStatusBlock, CompletionFilter, WatchTree, Buffer, BufferSize, Asynchronous)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwOpenKey == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
 foreign {
-    // param-hint: TitleIndex optional reserved
-    // param-hint: Class optional
-    // param-hint: Disposition optional
-    func NtCreateKey(KeyHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, TitleIndex: UInt32, Class: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, CreateOptions: UInt32, Disposition: CPointer<UInt32>): Int32
-    // param-hint: TitleIndex optional reserved
-    // param-hint: Class optional
-    // param-hint: Disposition optional
-    func NtCreateKeyTransacted(KeyHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, TitleIndex: UInt32, Class: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, CreateOptions: UInt32, TransactionHandle: CPointer<Unit>, Disposition: CPointer<UInt32>): Int32
-    // param-hint: ObjectAttributes optional
-    // param-hint: CreateOptions optional
-    func NtCreateRegistryTransaction(TransactionHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, CreateOptions: UInt32): Int32
-    func NtOpenKey(KeyHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>): Int32
-    func NtOpenKeyEx(KeyHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, OpenOptions: UInt32): Int32
-    func NtOpenKeyTransacted(KeyHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, TransactionHandle: CPointer<Unit>): Int32
-    func NtOpenKeyTransactedEx(KeyHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, OpenOptions: UInt32, TransactionHandle: CPointer<Unit>): Int32
-    func NtOpenRegistryTransaction(TransactionHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>): Int32
-    // param-hint: TitleIndex optional reserved
-    // param-hint: Class optional
-    // param-hint: Disposition optional
-    func ZwCreateKey(KeyHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, TitleIndex: UInt32, Class: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, CreateOptions: UInt32, Disposition: CPointer<UInt32>): Int32
-    // param-hint: TitleIndex optional reserved
-    // param-hint: Class optional
-    // param-hint: Disposition optional
-    func ZwCreateKeyTransacted(KeyHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, TitleIndex: UInt32, Class: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, CreateOptions: UInt32, TransactionHandle: CPointer<Unit>, Disposition: CPointer<UInt32>): Int32
-    // param-hint: ObjectAttributes optional
-    // param-hint: CreateOptions optional
-    func ZwCreateRegistryTransaction(TransactionHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, CreateOptions: UInt32): Int32
     func ZwOpenKey(KeyHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwOpenKey == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_ZwOpenKey(KeyHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>): Int32 {
+    return ZwOpenKey(KeyHandle, DesiredAccess, ObjectAttributes)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwOpenKeyEx == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+foreign {
     func ZwOpenKeyEx(KeyHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, OpenOptions: UInt32): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwOpenKeyEx == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_ZwOpenKeyEx(KeyHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, OpenOptions: UInt32): Int32 {
+    return ZwOpenKeyEx(KeyHandle, DesiredAccess, ObjectAttributes, OpenOptions)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwOpenKeyTransacted == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+foreign {
     func ZwOpenKeyTransacted(KeyHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, TransactionHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwOpenKeyTransacted == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_ZwOpenKeyTransacted(KeyHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, TransactionHandle: CPointer<Unit>): Int32 {
+    return ZwOpenKeyTransacted(KeyHandle, DesiredAccess, ObjectAttributes, TransactionHandle)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwOpenKeyTransactedEx == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+foreign {
     func ZwOpenKeyTransactedEx(KeyHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, OpenOptions: UInt32, TransactionHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwOpenKeyTransactedEx == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_ZwOpenKeyTransactedEx(KeyHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>, OpenOptions: UInt32, TransactionHandle: CPointer<Unit>): Int32 {
+    return ZwOpenKeyTransactedEx(KeyHandle, DesiredAccess, ObjectAttributes, OpenOptions, TransactionHandle)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwOpenRegistryTransaction == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+foreign {
     func ZwOpenRegistryTransaction(TransactionHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwOpenRegistryTransaction == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_ZwOpenRegistryTransaction(TransactionHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTESAbi>): Int32 {
+    return ZwOpenRegistryTransaction(TransactionHandle, DesiredAccess, ObjectAttributes)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwQueryKey == "on"]
+foreign {
+    // param-hint: KeyInformation bytes=param[3] optional
+    func ZwQueryKey(KeyHandle: CPointer<Unit>, KeyInformationClass: KEY_INFORMATION_CLASSAbi, KeyInformation: CPointer<Unit>, Length: UInt32, ResultLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwQueryKey == "on"]
+public unsafe func Windows_ZwQueryKey(KeyHandle: CPointer<Unit>, KeyInformationClass: KEY_INFORMATION_CLASSAbi, KeyInformation: CPointer<Unit>, Length: UInt32, ResultLength: CPointer<UInt32>): Int32 {
+    return ZwQueryKey(KeyHandle, KeyInformationClass, KeyInformation, Length, ResultLength)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwQueryMultipleValueKey == "on"]
+foreign {
+    // param-hint: ValueEntries len=param[2]
+    // param-hint: ValueBuffer bytes=param[4]
+    // param-hint: RequiredBufferLength optional
+    func ZwQueryMultipleValueKey(KeyHandle: CPointer<Unit>, ValueEntries: CPointer<KEY_VALUE_ENTRYAbi>, EntryCount: UInt32, ValueBuffer: CPointer<Unit>, BufferLength: CPointer<UInt32>, RequiredBufferLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwQueryMultipleValueKey == "on"]
+public unsafe func Windows_ZwQueryMultipleValueKey(KeyHandle: CPointer<Unit>, ValueEntries: CPointer<KEY_VALUE_ENTRYAbi>, EntryCount: UInt32, ValueBuffer: CPointer<Unit>, BufferLength: CPointer<UInt32>, RequiredBufferLength: CPointer<UInt32>): Int32 {
+    return ZwQueryMultipleValueKey(KeyHandle, ValueEntries, EntryCount, ValueBuffer, BufferLength, RequiredBufferLength)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwQueryValueKey == "on"]
+foreign {
+    // param-hint: KeyValueInformation bytes=param[4] optional
+    func ZwQueryValueKey(KeyHandle: CPointer<Unit>, ValueName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, KeyValueInformationClass: KEY_VALUE_INFORMATION_CLASSAbi, KeyValueInformation: CPointer<Unit>, Length: UInt32, ResultLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwQueryValueKey == "on"]
+public unsafe func Windows_ZwQueryValueKey(KeyHandle: CPointer<Unit>, ValueName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, KeyValueInformationClass: KEY_VALUE_INFORMATION_CLASSAbi, KeyValueInformation: CPointer<Unit>, Length: UInt32, ResultLength: CPointer<UInt32>): Int32 {
+    return ZwQueryValueKey(KeyHandle, ValueName, KeyValueInformationClass, KeyValueInformation, Length, ResultLength)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwRenameKey == "on"]
+foreign {
+    func ZwRenameKey(KeyHandle: CPointer<Unit>, NewName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwRenameKey == "on"]
+public unsafe func Windows_ZwRenameKey(KeyHandle: CPointer<Unit>, NewName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>): Int32 {
+    return ZwRenameKey(KeyHandle, NewName)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwRestoreKey == "on"]
+foreign {
+    // param-hint: FileHandle optional
+    func ZwRestoreKey(KeyHandle: CPointer<Unit>, FileHandle: CPointer<Unit>, Flags: UInt32): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwRestoreKey == "on"]
+public unsafe func Windows_ZwRestoreKey(KeyHandle: CPointer<Unit>, FileHandle: CPointer<Unit>, Flags: UInt32): Int32 {
+    return ZwRestoreKey(KeyHandle, FileHandle, Flags)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwRollbackRegistryTransaction == "on"]
+foreign {
+    func ZwRollbackRegistryTransaction(TransactionHandle: CPointer<Unit>, Flags: UInt32): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwRollbackRegistryTransaction == "on"]
+public unsafe func Windows_ZwRollbackRegistryTransaction(TransactionHandle: CPointer<Unit>, Flags: UInt32): Int32 {
+    return ZwRollbackRegistryTransaction(TransactionHandle, Flags)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwSaveKey == "on"]
+foreign {
+    func ZwSaveKey(KeyHandle: CPointer<Unit>, FileHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwSaveKey == "on"]
+public unsafe func Windows_ZwSaveKey(KeyHandle: CPointer<Unit>, FileHandle: CPointer<Unit>): Int32 {
+    return ZwSaveKey(KeyHandle, FileHandle)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwSaveKeyEx == "on"]
+foreign {
+    func ZwSaveKeyEx(KeyHandle: CPointer<Unit>, FileHandle: CPointer<Unit>, Format: UInt32): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwSaveKeyEx == "on"]
+public unsafe func Windows_ZwSaveKeyEx(KeyHandle: CPointer<Unit>, FileHandle: CPointer<Unit>, Format: UInt32): Int32 {
+    return ZwSaveKeyEx(KeyHandle, FileHandle, Format)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwSetInformationKey == "on"]
+foreign {
+    // param-hint: KeySetInformation bytes=param[3]
+    func ZwSetInformationKey(KeyHandle: CPointer<Unit>, KeySetInformationClass: KEY_SET_INFORMATION_CLASSAbi, KeySetInformation: CPointer<Unit>, KeySetInformationLength: UInt32): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwSetInformationKey == "on"]
+public unsafe func Windows_ZwSetInformationKey(KeyHandle: CPointer<Unit>, KeySetInformationClass: KEY_SET_INFORMATION_CLASSAbi, KeySetInformation: CPointer<Unit>, KeySetInformationLength: UInt32): Int32 {
+    return ZwSetInformationKey(KeyHandle, KeySetInformationClass, KeySetInformation, KeySetInformationLength)
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwSetValueKey == "on"]
+foreign {
+    // param-hint: TitleIndex optional
+    // param-hint: Data bytes=param[5] optional
+    func ZwSetValueKey(KeyHandle: CPointer<Unit>, ValueName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, TitleIndex: UInt32, Type: UInt32, Data: CPointer<Unit>, DataSize: UInt32): Int32
+}
+
+@When[Windows_Wdk_System_Registry == "on" && NTDLL == "on" && Windows_Wdk_System_Registry_ZwSetValueKey == "on"]
+public unsafe func Windows_ZwSetValueKey(KeyHandle: CPointer<Unit>, ValueName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, TitleIndex: UInt32, Type: UInt32, Data: CPointer<Unit>, DataSize: UInt32): Int32 {
+    return ZwSetValueKey(KeyHandle, ValueName, TitleIndex, Type, Data, DataSize)
 }

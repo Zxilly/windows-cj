@@ -41,6 +41,7 @@ public struct IWebProviderErrorVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var ErrorCode: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var ErrorMessage: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -97,6 +98,7 @@ public class IWebProviderError <: InterfaceWrapperBase & ComInterface {
         return __vt.ErrorMessage(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -163,6 +165,7 @@ public class IWebProviderErrorFactory <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IWebTokenRequest2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AppProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -207,6 +210,7 @@ public class IWebTokenRequest2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IWebTokenRequest2Vtbl>(IWebTokenRequest2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AppProperties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

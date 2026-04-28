@@ -4,7 +4,6 @@ package windows_sys.Graphics.Printing.OptionDetails
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_Graphics_Printing == "on"]
 import windows_sys.Graphics.Printing as Graphics_Printing
 import windows_sys._impl_l1 as _impl_l1
 
@@ -1767,6 +1766,7 @@ public class IPrintCustomTextOptionDetails <: InterfaceWrapperBase & ComInterfac
 @C
 public struct IPrintItemListOptionDetailsVtbl {
     public var base_: IPrintOptionDetailsVtbl = IPrintOptionDetailsVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Items: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1811,6 +1811,7 @@ public class IPrintItemListOptionDetails <: InterfaceWrapperBase & ComInterface 
         readVtbl<IPrintItemListOptionDetailsVtbl>(IPrintItemListOptionDetailsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1994,6 +1995,7 @@ public class IPrintTaskOptionDetails2 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IPrintTaskOptionDetailsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Options: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CreateItemListOption: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var CreateTextOption: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
@@ -2044,6 +2046,7 @@ public class IPrintTaskOptionDetails <: InterfaceWrapperBase & ComInterface {
         readVtbl<IPrintTaskOptionDetailsVtbl>(IPrintTaskOptionDetailsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Options(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

@@ -7,4 +7,155 @@ public import windows_sys.Win32._impl_l0.{GETPROPERTYSTOREFLAGS, GETPROPERTYSTOR
 public import windows_sys.Win32._impl_l1.{ICreateObject, ICreateObjectVtbl, IDelayedPropertyStoreFactory, IDelayedPropertyStoreFactoryVtbl, IInitializeWithFile, IInitializeWithFileVtbl, IObjectWithPropertyKey, IObjectWithPropertyKeyVtbl, IPersistSerializedPropStorage, IPersistSerializedPropStorage2, IPersistSerializedPropStorage2Vtbl, IPersistSerializedPropStorageVtbl, IPropertyDescriptionList, IPropertyDescriptionListVtbl, IPropertyStoreCapabilities, IPropertyStoreCapabilitiesVtbl, IPropertyStoreFactory, IPropertyStoreFactoryVtbl, IPropertySystemChangeNotify, IPropertySystemChangeNotifyVtbl}
 @When[Windows_Win32_UI_Shell_PropertiesSystem == "on"]
 public import windows_sys.Win32._impl_l2.{IInitializeWithStream, IInitializeWithStreamVtbl, INamedPropertyStore, INamedPropertyStoreVtbl, IPropertyChange, IPropertyChangeArray, IPropertyChangeArrayVtbl, IPropertyChangeVtbl, IPropertyDescription, IPropertyDescription2, IPropertyDescription2Vtbl, IPropertyDescriptionAliasInfo, IPropertyDescriptionAliasInfoVtbl, IPropertyDescriptionRelatedPropertyInfo, IPropertyDescriptionRelatedPropertyInfoVtbl, IPropertyDescriptionSearchInfo, IPropertyDescriptionSearchInfoVtbl, IPropertyDescriptionVtbl, IPropertyEnumType, IPropertyEnumType2, IPropertyEnumType2Vtbl, IPropertyEnumTypeList, IPropertyEnumTypeListVtbl, IPropertyEnumTypeVtbl, IPropertyStore, IPropertyStoreCache, IPropertyStoreCacheVtbl, IPropertyStoreVtbl, IPropertySystem, IPropertySystemVtbl, IPropertyUI, IPropertyUIVtbl, PKEY_PIDSTR_MAX}
-
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSCoerceToCanonicalValue == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSCoerceToCanonicalValue
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSCreateAdapterFromPropertyStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSCreateAdapterFromPropertyStore
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSCreateDelayedMultiplexPropertyStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSCreateDelayedMultiplexPropertyStore
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSCreateMemoryPropertyStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSCreateMemoryPropertyStore
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSCreateMultiplexPropertyStore == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSCreateMultiplexPropertyStore
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSCreatePropertyChangeArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSCreatePropertyChangeArray
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSCreatePropertyStoreFromObject == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSCreatePropertyStoreFromObject
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSCreatePropertyStoreFromPropertySetStorage == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSCreatePropertyStoreFromPropertySetStorage
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSCreateSimplePropertyChange == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSCreateSimplePropertyChange
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSEnumeratePropertyDescriptions == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSEnumeratePropertyDescriptions
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSFormatForDisplay == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSFormatForDisplay
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSFormatForDisplayAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSFormatForDisplayAlloc
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSFormatPropertyValue == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSFormatPropertyValue
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetImageReferenceForValue == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSGetImageReferenceForValue
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetItemPropertyHandler == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSGetItemPropertyHandler
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetItemPropertyHandlerWithCreateObject == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSGetItemPropertyHandlerWithCreateObject
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetNameFromPropertyKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSGetNameFromPropertyKey
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetNamedPropertyFromPropertyStorage == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSGetNamedPropertyFromPropertyStorage
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetPropertyDescription == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSGetPropertyDescription
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetPropertyDescriptionByName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSGetPropertyDescriptionByName
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetPropertyDescriptionListFromString == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSGetPropertyDescriptionListFromString
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetPropertyFromPropertyStorage == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSGetPropertyFromPropertyStorage
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetPropertyKeyFromName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSGetPropertyKeyFromName
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetPropertySystem == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSGetPropertySystem
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSGetPropertyValue == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSGetPropertyValue
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSLookupPropertyHandlerCLSID == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSLookupPropertyHandlerCLSID
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_Delete == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyBag_Delete
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadBOOL == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyBag_ReadBOOL
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadBSTR == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyBag_ReadBSTR
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadDWORD == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyBag_ReadDWORD
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadGUID == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyBag_ReadGUID
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadInt == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyBag_ReadInt
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadLONG == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyBag_ReadLONG
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadPOINTL == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyBag_ReadPOINTL
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadPOINTS == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyBag_ReadPOINTS
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadPropertyKey == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyBag_ReadPropertyKey
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadRECTL == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyBag_ReadRECTL
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadSHORT == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyBag_ReadSHORT
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadStr == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyBag_ReadStr
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadStrAlloc == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyBag_ReadStrAlloc
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadStream == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyBag_ReadStream
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadType == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyBag_ReadType
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadULONGLONG == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyBag_ReadULONGLONG
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_ReadUnknown == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyBag_ReadUnknown
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteBOOL == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyBag_WriteBOOL
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteBSTR == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyBag_WriteBSTR
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteDWORD == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyBag_WriteDWORD
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteGUID == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyBag_WriteGUID
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteInt == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyBag_WriteInt
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteLONG == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyBag_WriteLONG
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WritePOINTL == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyBag_WritePOINTL
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WritePOINTS == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyBag_WritePOINTS
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WritePropertyKey == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyBag_WritePropertyKey
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteRECTL == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyBag_WriteRECTL
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteSHORT == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyBag_WriteSHORT
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteStr == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyBag_WriteStr
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteStream == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyBag_WriteStream
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteULONGLONG == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyBag_WriteULONGLONG
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyBag_WriteUnknown == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyBag_WriteUnknown
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSPropertyKeyFromString == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSPropertyKeyFromString
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSRefreshPropertySchema == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSRefreshPropertySchema
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSRegisterPropertySchema == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSRegisterPropertySchema
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSSetPropertyValue == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSSetPropertyValue
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSStringFromPropertyKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSStringFromPropertyKey
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && PROPSYS == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PSUnregisterPropertySchema == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PSUnregisterPropertySchema
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PifMgr_CloseProperties == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PifMgr_CloseProperties
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PifMgr_GetProperties == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PifMgr_GetProperties
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PifMgr_OpenProperties == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PifMgr_OpenProperties
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PropertiesSystem_PifMgr_SetProperties == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PifMgr_SetProperties
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PropertiesSystem_SHAddDefaultPropertiesByExt == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHAddDefaultPropertiesByExt
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PropertiesSystem_SHGetPropertyStoreForWindow == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetPropertyStoreForWindow
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PropertiesSystem_SHGetPropertyStoreFromIDList == "on" && Windows_Win32_UI_Shell_Common == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetPropertyStoreFromIDList
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PropertiesSystem_SHGetPropertyStoreFromParsingName == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHGetPropertyStoreFromParsingName
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PropertiesSystem_SHPropStgCreate == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHPropStgCreate
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PropertiesSystem_SHPropStgReadMultiple == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHPropStgReadMultiple
+@When[Windows_Win32_UI_Shell_PropertiesSystem == "on" && SHELL32 == "on" && Windows_Win32_UI_Shell_PropertiesSystem_SHPropStgWriteMultiple == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SHPropStgWriteMultiple

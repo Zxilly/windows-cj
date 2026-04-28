@@ -10,11 +10,8 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_UI == "on"]
 import windows.UI as UI
-@When[Windows_Web_UI == "on"]
 import windows.Web.UI as Web_UI
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -841,8 +838,14 @@ public struct IWebViewControlProcessVtbl {
     public var ProcessId: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var EnterpriseId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsPrivateNetworkClientServerCapabilityEnabled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Web_UI == "on"]
     public var CreateWebViewControlAsync: CFunc<(CPointer<Unit>, Int64, windows_future.RectAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Web_UI != "on"]
+    public var CreateWebViewControlAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on" && Windows_Web_UI == "on"]
     public var GetWebViewControls: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on" || Windows_Web_UI != "on"]
+    public var GetWebViewControls: UIntNative = UIntNative(0)
     public var Terminate: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
     public var ProcessExited: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveProcessExited: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -938,6 +941,7 @@ public class IWebViewControlProcess <: InterfaceWrapperBase & ComInterface & Run
         return result__
     }
 
+    @When[Windows_Web_UI == "on"]
     public unsafe func CreateWebViewControlAsync(hostWindowHandle: Int64, bounds: windows_future.Rect): windows_future.IAsyncOperation<WebViewControl> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -946,6 +950,7 @@ public class IWebViewControlProcess <: InterfaceWrapperBase & ComInterface & Run
         return windows_future.IAsyncOperation<WebViewControl>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on" && Windows_Web_UI == "on"]
     public unsafe func GetWebViewControls(): windows_collections.IVectorView<WebViewControl> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1076,9 +1081,15 @@ public struct IWebViewControlSiteVtbl {
     public var IsVisible: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Close: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
     public var MoveFocus: CFunc<(CPointer<Unit>, WebViewControlMoveFocusReasonAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Web_UI == "on"]
     public var MoveFocusRequested: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Web_UI != "on"]
+    public var MoveFocusRequested: UIntNative = UIntNative(0)
     public var RemoveMoveFocusRequested: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Web_UI == "on"]
     public var AcceleratorKeyPressed: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Web_UI != "on"]
+    public var AcceleratorKeyPressed: UIntNative = UIntNative(0)
     public var RemoveAcceleratorKeyPressed: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -1210,6 +1221,7 @@ public class IWebViewControlSite <: InterfaceWrapperBase & ComInterface & Runtim
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Web_UI == "on"]
     public unsafe func MoveFocusRequested(handler: Foundation.TypedEventHandler<WebViewControl, WebViewControlMoveFocusRequestedEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
@@ -1224,6 +1236,7 @@ public class IWebViewControlSite <: InterfaceWrapperBase & ComInterface & Runtim
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Web_UI == "on"]
     public unsafe func AcceleratorKeyPressed(handler: Foundation.TypedEventHandler<WebViewControl, WebViewControlAcceleratorKeyPressedEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
@@ -1246,9 +1259,15 @@ extend IWebViewControlSite <: windows_core.Interface<IWebViewControlSite> {}
 @C
 public struct IWebViewControlSite2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Web_UI == "on"]
     public var GotFocus: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Web_UI != "on"]
+    public var GotFocus: UIntNative = UIntNative(0)
     public var RemoveGotFocus: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Web_UI == "on"]
     public var LostFocus: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Web_UI != "on"]
+    public var LostFocus: UIntNative = UIntNative(0)
     public var RemoveLostFocus: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -1318,6 +1337,7 @@ public class IWebViewControlSite2 <: InterfaceWrapperBase & ComInterface & Runti
         readVtbl<IWebViewControlSite2Vtbl>(IWebViewControlSite2Vtbl())
     }
 
+    @When[Windows_Web_UI == "on"]
     public unsafe func GotFocus(handler: Foundation.TypedEventHandler<WebViewControl, IInspectable>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
@@ -1332,6 +1352,7 @@ public class IWebViewControlSite2 <: InterfaceWrapperBase & ComInterface & Runti
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Web_UI == "on"]
     public unsafe func LostFocus(handler: Foundation.TypedEventHandler<WebViewControl, IInspectable>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
@@ -1350,7 +1371,7 @@ public class IWebViewControlSite2 <: InterfaceWrapperBase & ComInterface & Runti
 @When[Windows_Web_UI_Interop == "on"]
 extend IWebViewControlSite2 <: windows_core.Interface<IWebViewControlSite2> {}
 
-@When[Windows_Web_UI_Interop == "on"]
+@When[Windows_Web_UI_Interop == "on" && Windows_Web_UI == "on"]
 public class WebViewControl <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1460,6 +1481,7 @@ public class WebViewControl <: InterfaceWrapperBase & ComInterface & windows_int
         return defaultInterface().Settings()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DeferredPermissionRequests(): windows_collections.IVectorView<Web_UI.WebViewControlDeferredPermissionRequest> {
         return defaultInterface().DeferredPermissionRequests()
     }
@@ -1498,6 +1520,7 @@ public class WebViewControl <: InterfaceWrapperBase & ComInterface & windows_int
         defaultInterface().NavigateWithHttpRequestMessage(requestMessage)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InvokeScriptAsync(scriptName: windows_core.HString, arguments: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<windows_core.HString> {
         return defaultInterface().InvokeScriptAsync(scriptName, arguments)
     }
@@ -1661,7 +1684,7 @@ public class WebViewControl <: InterfaceWrapperBase & ComInterface & windows_int
     }
 }
 
-@When[Windows_Web_UI_Interop == "on"]
+@When[Windows_Web_UI_Interop == "on" && Windows_Web_UI == "on"]
 extend WebViewControl <: windows_core.HandleWinrtType<WebViewControl> {
     public static func intoWinrtHandle(value: WebViewControl): CPointer<Unit> {
         value.asRaw()
@@ -1767,10 +1790,12 @@ public class WebViewControlProcess <: InterfaceWrapperBase & ComInterface & wind
         return defaultInterface().IsPrivateNetworkClientServerCapabilityEnabled()
     }
 
+    @When[Windows_Web_UI == "on"]
     public unsafe func CreateWebViewControlAsync(hostWindowHandle: Int64, bounds: windows_future.Rect): windows_future.IAsyncOperation<WebViewControl> {
         return defaultInterface().CreateWebViewControlAsync(hostWindowHandle, bounds)
     }
 
+    @When[Windows_Foundation_Collections == "on" && Windows_Web_UI == "on"]
     public unsafe func GetWebViewControls(): windows_collections.IVectorView<WebViewControl> {
         return defaultInterface().GetWebViewControls()
     }

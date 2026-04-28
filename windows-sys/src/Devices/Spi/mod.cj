@@ -3,7 +3,6 @@ package windows_sys.Devices.Spi
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Devices_Spi_Provider == "on"]
 import windows_sys.Devices.Spi.Provider as Devices_Spi_Provider
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
 
@@ -15,6 +14,7 @@ public struct ISpiBusInfoVtbl {
     public var ChipSelectLineCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var MinClockFrequency: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var MaxClockFrequency: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedDataBitLengths: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -77,6 +77,7 @@ public class ISpiBusInfo <: InterfaceWrapperBase & ComInterface {
         return __vt.MaxClockFrequency(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedDataBitLengths(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -371,7 +372,7 @@ public class ISpiController <: InterfaceWrapperBase & ComInterface {
 public struct ISpiControllerStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var GetDefaultAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Devices_Spi_Provider == "on"]
+    @When[Windows_Devices_Spi_Provider == "on" && Windows_Foundation_Collections == "on"]
     public var GetControllersAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -422,7 +423,7 @@ public class ISpiControllerStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.GetDefaultAsync(__liveRaw, result__)
     }
 
-    @When[Windows_Devices_Spi_Provider == "on"]
+    @When[Windows_Devices_Spi_Provider == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func GetControllersAsync(provider: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

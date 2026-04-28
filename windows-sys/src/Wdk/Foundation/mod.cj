@@ -33,4 +33,7 @@ public import windows_sys.Wdk._impl_l0.IO_STACK_LOCATION
 public import windows_sys.Wdk._impl_l0.IRP
 @When[Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
 public import windows_sys.Wdk._impl_l0.{OBJECT_ATTRIBUTES, OBJECT_ATTRIBUTES32, OBJECT_ATTRIBUTES64, SECURITY_SUBJECT_CONTEXT}
-
+@When[Windows_Wdk_Foundation == "on" && NTDLL == "on" && Windows_Wdk_Foundation_NtClose == "on"]
+public import windows_sys.Wdk._impl_l0.Windows_NtClose
+@When[Windows_Wdk_Foundation == "on" && NTDLL == "on" && Windows_Wdk_Foundation_NtQueryObject == "on"]
+public import windows_sys.Wdk._impl_l0.Windows_NtQueryObject

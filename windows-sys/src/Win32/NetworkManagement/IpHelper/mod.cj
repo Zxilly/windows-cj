@@ -27,4 +27,417 @@ public import windows_sys.Win32._impl_l0.MIB_IF_ROW2
 public import windows_sys.Win32._impl_l1.MIB_IF_TABLE2
 @When[Windows_Win32_NetworkManagement_IpHelper == "on" && Windows_Win32_Networking_WinSock == "on"]
 public import windows_sys.Win32._impl_l1.{MIB_IPDESTROW, MIB_IPFORWARDROW, MIB_IPFORWARDTABLE, MIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATES, MIB_TCP6ROW, MIB_TCP6ROW2, MIB_TCP6TABLE, MIB_TCP6TABLE2, MIB_UDP6ROW, MIB_UDP6TABLE, NET_ADDRESS_INFO, PNETWORK_CONNECTIVITY_HINT_CHANGE_CALLBACK}
-
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_AddIPAddress == "on"]
+public import windows_sys.Win32._impl_l2.Windows_AddIPAddress
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CancelIPChangeNotify == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CancelIPChangeNotify
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CancelIfTimestampConfigChange == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CancelIfTimestampConfigChange
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CancelMibChangeNotify2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CancelMibChangeNotify2
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CaptureInterfaceHardwareCrossTimestamp == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CaptureInterfaceHardwareCrossTimestamp
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertCompartmentGuidToId == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ConvertCompartmentGuidToId
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertCompartmentIdToGuid == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ConvertCompartmentIdToGuid
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertInterfaceAliasToLuid == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ConvertInterfaceAliasToLuid
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertInterfaceGuidToLuid == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ConvertInterfaceGuidToLuid
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertInterfaceIndexToLuid == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ConvertInterfaceIndexToLuid
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertInterfaceLuidToAlias == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ConvertInterfaceLuidToAlias
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertInterfaceLuidToGuid == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ConvertInterfaceLuidToGuid
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertInterfaceLuidToIndex == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ConvertInterfaceLuidToIndex
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertInterfaceLuidToNameA == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ConvertInterfaceLuidToNameA
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertInterfaceLuidToNameW == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ConvertInterfaceLuidToNameW
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertInterfaceNameToLuidA == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ConvertInterfaceNameToLuidA
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertInterfaceNameToLuidW == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ConvertInterfaceNameToLuidW
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertIpv4MaskToLength == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ConvertIpv4MaskToLength
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ConvertLengthToIpv4Mask == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ConvertLengthToIpv4Mask
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreateAnycastIpAddressEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateAnycastIpAddressEntry
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreateFlVirtualInterface == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateFlVirtualInterface
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreateIpForwardEntry == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateIpForwardEntry
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreateIpForwardEntry2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateIpForwardEntry2
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreateIpNetEntry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateIpNetEntry
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreateIpNetEntry2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateIpNetEntry2
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreatePersistentTcpPortReservation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreatePersistentTcpPortReservation
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreatePersistentUdpPortReservation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreatePersistentUdpPortReservation
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreateProxyArpEntry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateProxyArpEntry
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreateSortedAddressPairs == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateSortedAddressPairs
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_CreateUnicastIpAddressEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateUnicastIpAddressEntry
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeleteAnycastIpAddressEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteAnycastIpAddressEntry
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeleteFlVirtualInterface == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteFlVirtualInterface
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeleteIPAddress == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteIPAddress
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeleteIpForwardEntry == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteIpForwardEntry
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeleteIpForwardEntry2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteIpForwardEntry2
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeleteIpNetEntry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteIpNetEntry
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeleteIpNetEntry2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteIpNetEntry2
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeletePersistentTcpPortReservation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeletePersistentTcpPortReservation
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeletePersistentUdpPortReservation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeletePersistentUdpPortReservation
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeleteProxyArpEntry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteProxyArpEntry
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DeleteUnicastIpAddressEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DeleteUnicastIpAddressEntry
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_DisableMediaSense == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DisableMediaSense
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_EnableRouter == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EnableRouter
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_FlushIpNetTable == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FlushIpNetTable
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_FlushIpNetTable2 == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FlushIpNetTable2
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_FlushIpPathTable == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FlushIpPathTable
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_FreeDnsSettings == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FreeDnsSettings
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_FreeInterfaceDnsSettings == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FreeInterfaceDnsSettings
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_FreeMibTable == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FreeMibTable
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetAdapterIndex == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetAdapterIndex
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetAdapterOrderMap == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetAdapterOrderMap
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetAdaptersAddresses == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetAdaptersAddresses
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetAdaptersInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetAdaptersInfo
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetAnycastIpAddressEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetAnycastIpAddressEntry
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetAnycastIpAddressTable == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetAnycastIpAddressTable
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetBestInterface == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetBestInterface
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetBestInterfaceEx == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetBestInterfaceEx
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetBestRoute == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetBestRoute
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetBestRoute2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetBestRoute2
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetCurrentThreadCompartmentId == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetCurrentThreadCompartmentId
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetCurrentThreadCompartmentScope == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetCurrentThreadCompartmentScope
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetDefaultCompartmentId == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetDefaultCompartmentId
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetDnsSettings == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetDnsSettings
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetExtendedTcpTable == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetExtendedTcpTable
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetExtendedUdpTable == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetExtendedUdpTable
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetFlVirtualInterface == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetFlVirtualInterface
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetFlVirtualInterfaceTable == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetFlVirtualInterfaceTable
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetFriendlyIfIndex == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetFriendlyIfIndex
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIcmpStatistics == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetIcmpStatistics
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIcmpStatisticsEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetIcmpStatisticsEx
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIfEntry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetIfEntry
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIfEntry2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetIfEntry2
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIfEntry2Ex == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetIfEntry2Ex
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIfStackTable == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetIfStackTable
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIfTable == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetIfTable
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIfTable2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetIfTable2
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIfTable2Ex == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetIfTable2Ex
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetInterfaceActiveTimestampCapabilities == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetInterfaceActiveTimestampCapabilities
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetInterfaceCurrentTimestampCapabilities == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetInterfaceCurrentTimestampCapabilities
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetInterfaceDnsSettings == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetInterfaceDnsSettings
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetInterfaceHardwareTimestampCapabilities == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetInterfaceHardwareTimestampCapabilities
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetInterfaceInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetInterfaceInfo
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetInterfaceSupportedTimestampCapabilities == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetInterfaceSupportedTimestampCapabilities
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetInvertedIfStackTable == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetInvertedIfStackTable
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpAddrTable == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetIpAddrTable
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpErrorString == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetIpErrorString
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpForwardEntry2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetIpForwardEntry2
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpForwardTable == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetIpForwardTable
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpForwardTable2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetIpForwardTable2
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpInterfaceEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetIpInterfaceEntry
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpInterfaceTable == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetIpInterfaceTable
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpNetEntry2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetIpNetEntry2
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpNetTable == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetIpNetTable
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpNetTable2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetIpNetTable2
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpNetworkConnectionBandwidthEstimates == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetIpNetworkConnectionBandwidthEstimates
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpPathEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetIpPathEntry
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpPathTable == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetIpPathTable
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpStatistics == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetIpStatistics
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetIpStatisticsEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetIpStatisticsEx
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetJobCompartmentId == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetJobCompartmentId
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetMulticastIpAddressEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetMulticastIpAddressEntry
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetMulticastIpAddressTable == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetMulticastIpAddressTable
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetNetworkConnectivityHint == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetNetworkConnectivityHint
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetNetworkConnectivityHintForInterface == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetNetworkConnectivityHintForInterface
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetNetworkInformation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetNetworkInformation
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetNetworkParams == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetNetworkParams
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetNumberOfInterfaces == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetNumberOfInterfaces
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetOwnerModuleFromPidAndInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetOwnerModuleFromPidAndInfo
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetOwnerModuleFromTcp6Entry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetOwnerModuleFromTcp6Entry
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetOwnerModuleFromTcpEntry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetOwnerModuleFromTcpEntry
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetOwnerModuleFromUdp6Entry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetOwnerModuleFromUdp6Entry
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetOwnerModuleFromUdpEntry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetOwnerModuleFromUdpEntry
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetPerAdapterInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetPerAdapterInfo
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetPerTcp6ConnectionEStats == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetPerTcp6ConnectionEStats
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetPerTcpConnectionEStats == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetPerTcpConnectionEStats
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetRTTAndHopCount == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetRTTAndHopCount
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetSessionCompartmentId == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetSessionCompartmentId
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetTcp6Table == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetTcp6Table
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetTcp6Table2 == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetTcp6Table2
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetTcpStatistics == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetTcpStatistics
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetTcpStatisticsEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetTcpStatisticsEx
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetTcpStatisticsEx2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetTcpStatisticsEx2
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetTcpTable == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetTcpTable
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetTcpTable2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetTcpTable2
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetTeredoPort == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetTeredoPort
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetUdp6Table == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetUdp6Table
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetUdpStatistics == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetUdpStatistics
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetUdpStatisticsEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetUdpStatisticsEx
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetUdpStatisticsEx2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetUdpStatisticsEx2
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetUdpTable == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetUdpTable
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetUniDirectionalAdapterInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetUniDirectionalAdapterInfo
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetUnicastIpAddressEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetUnicastIpAddressEntry
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_GetUnicastIpAddressTable == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetUnicastIpAddressTable
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_Icmp6CreateFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_Icmp6CreateFile
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_Icmp6ParseReplies == "on"]
+public import windows_sys.Win32._impl_l2.Windows_Icmp6ParseReplies
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_Icmp6SendEcho2 == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_Icmp6SendEcho2
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_IcmpCloseHandle == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IcmpCloseHandle
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_IcmpCreateFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IcmpCreateFile
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_IcmpParseReplies == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IcmpParseReplies
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_IcmpSendEcho == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IcmpSendEcho
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_IcmpSendEcho2 == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IcmpSendEcho2
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_IcmpSendEcho2Ex == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IcmpSendEcho2Ex
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_InitializeFlVirtualInterfaceEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitializeFlVirtualInterfaceEntry
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_InitializeIpForwardEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitializeIpForwardEntry
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_InitializeIpInterfaceEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitializeIpInterfaceEntry
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_InitializeUnicastIpAddressEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitializeUnicastIpAddressEntry
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_IpReleaseAddress == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IpReleaseAddress
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_IpRenewAddress == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IpRenewAddress
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_LookupPersistentTcpPortReservation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LookupPersistentTcpPortReservation
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_LookupPersistentUdpPortReservation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LookupPersistentUdpPortReservation
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_NhpAllocateAndGetInterfaceInfoFromStack == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NhpAllocateAndGetInterfaceInfoFromStack
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_NotifyAddrChange == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NotifyAddrChange
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_NotifyIfTimestampConfigChange == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NotifyIfTimestampConfigChange
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_NotifyIpInterfaceChange == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NotifyIpInterfaceChange
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_NotifyNetworkConnectivityHintChange == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NotifyNetworkConnectivityHintChange
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_NotifyRouteChange == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NotifyRouteChange
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_NotifyRouteChange2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NotifyRouteChange2
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_NotifyStableUnicastIpAddressTable == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NotifyStableUnicastIpAddressTable
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_NotifyTeredoPortChange == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NotifyTeredoPortChange
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_NotifyUnicastIpAddressChange == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NotifyUnicastIpAddressChange
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ParseNetworkString == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ParseNetworkString
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfAddFiltersToInterface == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PfAddFiltersToInterface
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfAddGlobalFilterToInterface == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PfAddGlobalFilterToInterface
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfBindInterfaceToIPAddress == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PfBindInterfaceToIPAddress
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfBindInterfaceToIndex == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PfBindInterfaceToIndex
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfCreateInterface == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PfCreateInterface
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfDeleteInterface == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PfDeleteInterface
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfDeleteLog == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PfDeleteLog
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfGetInterfaceStatistics == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PfGetInterfaceStatistics
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfMakeLog == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PfMakeLog
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfRebindFilters == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PfRebindFilters
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfRemoveFilterHandles == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PfRemoveFilterHandles
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfRemoveFiltersFromInterface == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PfRemoveFiltersFromInterface
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfRemoveGlobalFilterFromInterface == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PfRemoveGlobalFilterFromInterface
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfSetLogBuffer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PfSetLogBuffer
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfTestPacket == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PfTestPacket
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_PfUnBindInterface == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PfUnBindInterface
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_RegisterInterfaceTimestampConfigChange == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RegisterInterfaceTimestampConfigChange
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ResolveIpNetEntry2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ResolveIpNetEntry2
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_ResolveNeighbor == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ResolveNeighbor
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_RestoreMediaSense == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RestoreMediaSense
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SendARP == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SendARP
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetCurrentThreadCompartmentId == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetCurrentThreadCompartmentId
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetCurrentThreadCompartmentScope == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetCurrentThreadCompartmentScope
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetDnsSettings == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetDnsSettings
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetFlVirtualInterface == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetFlVirtualInterface
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetIfEntry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetIfEntry
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetInterfaceDnsSettings == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetInterfaceDnsSettings
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetIpForwardEntry == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetIpForwardEntry
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetIpForwardEntry2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetIpForwardEntry2
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetIpInterfaceEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetIpInterfaceEntry
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetIpNetEntry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetIpNetEntry
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetIpNetEntry2 == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetIpNetEntry2
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetIpStatistics == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetIpStatistics
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetIpStatisticsEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetIpStatisticsEx
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetIpTTL == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetIpTTL
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetJobCompartmentId == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetJobCompartmentId
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetNetworkInformation == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetNetworkInformation
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetPerTcp6ConnectionEStats == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetPerTcp6ConnectionEStats
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetPerTcpConnectionEStats == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetPerTcpConnectionEStats
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetSessionCompartmentId == "on" && Windows_Win32_NetworkManagement_Ndis == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetSessionCompartmentId
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetTcpEntry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetTcpEntry
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_SetUnicastIpAddressEntry == "on" && Windows_Win32_NetworkManagement_Ndis == "on" && Windows_Win32_Networking_WinSock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetUnicastIpAddressEntry
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_UnenableRouter == "on" && Windows_Win32_System_IO == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UnenableRouter
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_UnregisterInterfaceTimestampConfigChange == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UnregisterInterfaceTimestampConfigChange
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_if_indextoname == "on"]
+public import windows_sys.Win32._impl_l2.Windows_if_indextoname
+@When[Windows_Win32_NetworkManagement_IpHelper == "on" && IPHLPAPI == "on" && Windows_Win32_NetworkManagement_IpHelper_if_nametoindex == "on"]
+public import windows_sys.Win32._impl_l2.Windows_if_nametoindex

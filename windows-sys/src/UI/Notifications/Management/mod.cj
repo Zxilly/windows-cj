@@ -45,7 +45,7 @@ public struct IUserNotificationListenerVtbl {
     @When[Windows_UI_Notifications == "on"]
     public var NotificationChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveNotificationChanged: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Notifications == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Notifications == "on"]
     public var GetNotificationsAsync: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_UI_Notifications == "on"]
     public var GetNotification: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -119,7 +119,7 @@ public class IUserNotificationListener <: InterfaceWrapperBase & ComInterface {
         return __vt.RemoveNotificationChanged(__liveRaw, token)
     }
 
-    @When[Windows_UI_Notifications == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Notifications == "on"]
     public unsafe func GetNotificationsAsync(kinds: UInt32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

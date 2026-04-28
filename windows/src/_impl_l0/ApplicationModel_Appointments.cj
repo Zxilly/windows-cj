@@ -1388,10 +1388,12 @@ public class FindAppointmentsOptions <: InterfaceWrapperBase & ComInterface & wi
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CalendarIds(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().CalendarIds()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FetchProperties(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().FetchProperties()
     }
@@ -2083,7 +2085,10 @@ public struct IAppointmentPropertiesStaticsVtbl {
     public var Recurrence: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Uri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Invitees: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var DefaultProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var DefaultProperties: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2328,6 +2333,7 @@ public class IAppointmentPropertiesStatics <: InterfaceWrapperBase & ComInterfac
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DefaultProperties(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2907,8 +2913,14 @@ extend IAppointmentStoreNotificationTriggerDetails <: windows_core.Interface<IAp
 @C
 public struct IFindAppointmentsOptionsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CalendarIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CalendarIds: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var FetchProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FetchProperties: UIntNative = UIntNative(0)
     public var IncludeHidden: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetIncludeHidden: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var MaxCount: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -2981,6 +2993,7 @@ public class IFindAppointmentsOptions <: InterfaceWrapperBase & ComInterface & R
         readVtbl<IFindAppointmentsOptionsVtbl>(IFindAppointmentsOptionsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CalendarIds(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2989,6 +3002,7 @@ public class IFindAppointmentsOptions <: InterfaceWrapperBase & ComInterface & R
         return windows_collections.IVector<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FetchProperties(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

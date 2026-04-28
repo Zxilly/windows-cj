@@ -353,6 +353,7 @@ public class ICompositionAnimation <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ICompositionAnimation3Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var InitialValueExpressions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -397,6 +398,7 @@ public class ICompositionAnimation3 <: InterfaceWrapperBase & ComInterface {
         readVtbl<ICompositionAnimation3Vtbl>(ICompositionAnimation3Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InitialValueExpressions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -615,6 +617,7 @@ public class ICompositionCommitBatch <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ICompositionContainerShapeVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Shapes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -659,6 +662,7 @@ public class ICompositionContainerShape <: InterfaceWrapperBase & ComInterface {
         readVtbl<ICompositionContainerShapeVtbl>(ICompositionContainerShapeVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Shapes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2954,6 +2958,7 @@ public struct ICompositionSpriteShapeVtbl {
     public var SetIsStrokeNonScaling: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
     public var StrokeBrush: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetStrokeBrush: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var StrokeDashArray: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var StrokeDashCap: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetStrokeDashCap: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -3060,6 +3065,7 @@ public class ICompositionSpriteShape <: InterfaceWrapperBase & ComInterface {
         return __vt.SetStrokeBrush(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StrokeDashArray(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3386,7 +3392,7 @@ public struct ICompositorVtbl {
     public var CreateCubicBezierEasingFunction: CFunc<(CPointer<Unit>, Foundation_Numerics.Vector2, Foundation_Numerics.Vector2, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Graphics_Effects == "on"]
     public var CreateEffectFactory: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
-    @When[Windows_Graphics_Effects == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_Effects == "on"]
     public var CreateEffectFactoryWithProperties: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var CreateExpressionAnimation: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CreateExpressionAnimationWithExpression: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -3487,7 +3493,7 @@ public class ICompositor <: InterfaceWrapperBase & ComInterface {
         return __vt.CreateEffectFactory(__liveRaw, graphicsEffect, result__)
     }
 
-    @When[Windows_Graphics_Effects == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_Effects == "on"]
     public unsafe func CreateEffectFactoryWithProperties(graphicsEffect: CPointer<Unit>, animatableProperties: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -5585,6 +5591,7 @@ public class IScalarKeyFrameAnimation <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IShapeVisualVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Shapes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ViewBox: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetViewBox: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -5631,6 +5638,7 @@ public class IShapeVisual <: InterfaceWrapperBase & ComInterface {
         readVtbl<IShapeVisualVtbl>(IShapeVisualVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Shapes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

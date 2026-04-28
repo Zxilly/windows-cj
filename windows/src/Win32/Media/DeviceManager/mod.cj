@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrap
 import windows_interface as windows_interface
 import windows_polyfill.{packedReadUInt16, packedReadUInt32, packedReadValue, packedWriteUInt16, packedWriteUInt32, packedWriteValue}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Media_MediaFoundation == "on"]
 import windows.Win32.Media.MediaFoundation as Win32_Media_MediaFoundation
 import windows.Win32.Media._impl_l0 as Win32_Media__impl_l0
 import windows.Win32._impl_l0 as Win32__impl_l0

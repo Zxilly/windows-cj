@@ -16,38 +16,121 @@ import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
 
 
-@When[DCOMP == "on"]
+@When[Windows_Win32_Graphics_DirectComposition == "on" && DCOMP == "on" && Windows_Win32_Graphics_DirectComposition_DCompositionAttachMouseDragToHwnd == "on"]
 foreign {
     func DCompositionAttachMouseDragToHwnd(visual: CPointer<Unit>, hwnd: CPointer<Unit>, enable: Int32): Int32
-    func DCompositionAttachMouseWheelToHwnd(visual: CPointer<Unit>, hwnd: CPointer<Unit>, enable: Int32): Int32
-    func DCompositionBoostCompositorClock(enable: Int32): Int32
-    func DCompositionGetFrameId(frameIdType: Win32__impl_l0.COMPOSITION_FRAME_ID_TYPEAbi, frameId: CPointer<UInt64>): Int32
-    // param-hint: targetIds optional
-    // param-hint: actualTargetIdCount optional
-    func DCompositionGetStatistics(frameId: UInt64, frameStats: CPointer<Win32__impl_l0.COMPOSITION_FRAME_STATSAbi>, targetIdCount: UInt32, targetIds: CPointer<Win32__impl_l0.COMPOSITION_TARGET_IDAbi>, actualTargetIdCount: CPointer<UInt32>): Int32
-    func DCompositionGetTargetStatistics(frameId: UInt64, targetId: CPointer<Win32__impl_l0.COMPOSITION_TARGET_IDAbi>, targetStats: CPointer<Win32__impl_l1.COMPOSITION_TARGET_STATSAbi>): Int32
-    // param-hint: handles len=param[0] optional
-    func DCompositionWaitForCompositorClock(count: UInt32, handles: CPointer<CPointer<Unit>>, timeoutInMs: UInt32): UInt32
 }
 
-@When[DCOMP == "on" && Windows_Win32_Graphics_Dxgi == "on"]
+@When[Windows_Win32_Graphics_DirectComposition == "on" && DCOMP == "on" && Windows_Win32_Graphics_DirectComposition_DCompositionAttachMouseDragToHwnd == "on"]
+public unsafe func Windows_DCompositionAttachMouseDragToHwnd(visual: CPointer<Unit>, hwnd: CPointer<Unit>, enable: Int32): Int32 {
+    return DCompositionAttachMouseDragToHwnd(visual, hwnd, enable)
+}
+
+@When[Windows_Win32_Graphics_DirectComposition == "on" && DCOMP == "on" && Windows_Win32_Graphics_DirectComposition_DCompositionAttachMouseWheelToHwnd == "on"]
+foreign {
+    func DCompositionAttachMouseWheelToHwnd(visual: CPointer<Unit>, hwnd: CPointer<Unit>, enable: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_DirectComposition == "on" && DCOMP == "on" && Windows_Win32_Graphics_DirectComposition_DCompositionAttachMouseWheelToHwnd == "on"]
+public unsafe func Windows_DCompositionAttachMouseWheelToHwnd(visual: CPointer<Unit>, hwnd: CPointer<Unit>, enable: Int32): Int32 {
+    return DCompositionAttachMouseWheelToHwnd(visual, hwnd, enable)
+}
+
+@When[Windows_Win32_Graphics_DirectComposition == "on" && DCOMP == "on" && Windows_Win32_Graphics_DirectComposition_DCompositionBoostCompositorClock == "on"]
+foreign {
+    func DCompositionBoostCompositorClock(enable: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_DirectComposition == "on" && DCOMP == "on" && Windows_Win32_Graphics_DirectComposition_DCompositionBoostCompositorClock == "on"]
+public unsafe func Windows_DCompositionBoostCompositorClock(enable: Int32): Int32 {
+    return DCompositionBoostCompositorClock(enable)
+}
+
+@When[Windows_Win32_Graphics_DirectComposition == "on" && DCOMP == "on" && Windows_Win32_Graphics_DirectComposition_DCompositionCreateDevice == "on" && Windows_Win32_Graphics_Dxgi == "on"]
 foreign {
     // param-hint: dxgiDevice optional
     func DCompositionCreateDevice(dxgiDevice: CPointer<Unit>, iid: CPointer<GUID>, dcompositionDevice: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[DCOMP == "on" && Windows_Win32_Security == "on"]
+@When[Windows_Win32_Graphics_DirectComposition == "on" && DCOMP == "on" && Windows_Win32_Graphics_DirectComposition_DCompositionCreateDevice == "on" && Windows_Win32_Graphics_Dxgi == "on"]
+public unsafe func Windows_DCompositionCreateDevice(dxgiDevice: CPointer<Unit>, iid: CPointer<GUID>, dcompositionDevice: CPointer<CPointer<Unit>>): Int32 {
+    return DCompositionCreateDevice(dxgiDevice, iid, dcompositionDevice)
+}
+
+@When[Windows_Win32_Graphics_DirectComposition == "on" && DCOMP == "on" && Windows_Win32_Graphics_DirectComposition_DCompositionCreateDevice2 == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: renderingDevice optional
+    func DCompositionCreateDevice2(renderingDevice: CPointer<Unit>, iid: CPointer<GUID>, dcompositionDevice: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_DirectComposition == "on" && DCOMP == "on" && Windows_Win32_Graphics_DirectComposition_DCompositionCreateDevice2 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_DCompositionCreateDevice2(renderingDevice: CPointer<Unit>, iid: CPointer<GUID>, dcompositionDevice: CPointer<CPointer<Unit>>): Int32 {
+    return DCompositionCreateDevice2(renderingDevice, iid, dcompositionDevice)
+}
+
+@When[Windows_Win32_Graphics_DirectComposition == "on" && DCOMP == "on" && Windows_Win32_Graphics_DirectComposition_DCompositionCreateDevice3 == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: renderingDevice optional
+    func DCompositionCreateDevice3(renderingDevice: CPointer<Unit>, iid: CPointer<GUID>, dcompositionDevice: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_DirectComposition == "on" && DCOMP == "on" && Windows_Win32_Graphics_DirectComposition_DCompositionCreateDevice3 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_DCompositionCreateDevice3(renderingDevice: CPointer<Unit>, iid: CPointer<GUID>, dcompositionDevice: CPointer<CPointer<Unit>>): Int32 {
+    return DCompositionCreateDevice3(renderingDevice, iid, dcompositionDevice)
+}
+
+@When[Windows_Win32_Graphics_DirectComposition == "on" && DCOMP == "on" && Windows_Win32_Graphics_DirectComposition_DCompositionCreateSurfaceHandle == "on" && Windows_Win32_Security == "on"]
 foreign {
     // param-hint: securityAttributes optional
     func DCompositionCreateSurfaceHandle(desiredAccess: UInt32, securityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, surfaceHandle: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[DCOMP == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_Graphics_DirectComposition == "on" && DCOMP == "on" && Windows_Win32_Graphics_DirectComposition_DCompositionCreateSurfaceHandle == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_DCompositionCreateSurfaceHandle(desiredAccess: UInt32, securityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, surfaceHandle: CPointer<CPointer<Unit>>): Int32 {
+    return DCompositionCreateSurfaceHandle(desiredAccess, securityAttributes, surfaceHandle)
+}
+
+@When[Windows_Win32_Graphics_DirectComposition == "on" && DCOMP == "on" && Windows_Win32_Graphics_DirectComposition_DCompositionGetFrameId == "on"]
 foreign {
-    // param-hint: renderingDevice optional
-    func DCompositionCreateDevice2(renderingDevice: CPointer<Unit>, iid: CPointer<GUID>, dcompositionDevice: CPointer<CPointer<Unit>>): Int32
-    // param-hint: renderingDevice optional
-    func DCompositionCreateDevice3(renderingDevice: CPointer<Unit>, iid: CPointer<GUID>, dcompositionDevice: CPointer<CPointer<Unit>>): Int32
+    func DCompositionGetFrameId(frameIdType: Win32__impl_l0.COMPOSITION_FRAME_ID_TYPEAbi, frameId: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_Graphics_DirectComposition == "on" && DCOMP == "on" && Windows_Win32_Graphics_DirectComposition_DCompositionGetFrameId == "on"]
+public unsafe func Windows_DCompositionGetFrameId(frameIdType: Win32__impl_l0.COMPOSITION_FRAME_ID_TYPEAbi, frameId: CPointer<UInt64>): Int32 {
+    return DCompositionGetFrameId(frameIdType, frameId)
+}
+
+@When[Windows_Win32_Graphics_DirectComposition == "on" && DCOMP == "on" && Windows_Win32_Graphics_DirectComposition_DCompositionGetStatistics == "on"]
+foreign {
+    // param-hint: targetIds optional
+    // param-hint: actualTargetIdCount optional
+    func DCompositionGetStatistics(frameId: UInt64, frameStats: CPointer<Win32__impl_l0.COMPOSITION_FRAME_STATSAbi>, targetIdCount: UInt32, targetIds: CPointer<Win32__impl_l0.COMPOSITION_TARGET_IDAbi>, actualTargetIdCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_DirectComposition == "on" && DCOMP == "on" && Windows_Win32_Graphics_DirectComposition_DCompositionGetStatistics == "on"]
+public unsafe func Windows_DCompositionGetStatistics(frameId: UInt64, frameStats: CPointer<Win32__impl_l0.COMPOSITION_FRAME_STATSAbi>, targetIdCount: UInt32, targetIds: CPointer<Win32__impl_l0.COMPOSITION_TARGET_IDAbi>, actualTargetIdCount: CPointer<UInt32>): Int32 {
+    return DCompositionGetStatistics(frameId, frameStats, targetIdCount, targetIds, actualTargetIdCount)
+}
+
+@When[Windows_Win32_Graphics_DirectComposition == "on" && DCOMP == "on" && Windows_Win32_Graphics_DirectComposition_DCompositionGetTargetStatistics == "on"]
+foreign {
+    func DCompositionGetTargetStatistics(frameId: UInt64, targetId: CPointer<Win32__impl_l0.COMPOSITION_TARGET_IDAbi>, targetStats: CPointer<Win32__impl_l1.COMPOSITION_TARGET_STATSAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_DirectComposition == "on" && DCOMP == "on" && Windows_Win32_Graphics_DirectComposition_DCompositionGetTargetStatistics == "on"]
+public unsafe func Windows_DCompositionGetTargetStatistics(frameId: UInt64, targetId: CPointer<Win32__impl_l0.COMPOSITION_TARGET_IDAbi>, targetStats: CPointer<Win32__impl_l1.COMPOSITION_TARGET_STATSAbi>): Int32 {
+    return DCompositionGetTargetStatistics(frameId, targetId, targetStats)
+}
+
+@When[Windows_Win32_Graphics_DirectComposition == "on" && DCOMP == "on" && Windows_Win32_Graphics_DirectComposition_DCompositionWaitForCompositorClock == "on"]
+foreign {
+    // param-hint: handles len=param[0] optional
+    func DCompositionWaitForCompositorClock(count: UInt32, handles: CPointer<CPointer<Unit>>, timeoutInMs: UInt32): UInt32
+}
+
+@When[Windows_Win32_Graphics_DirectComposition == "on" && DCOMP == "on" && Windows_Win32_Graphics_DirectComposition_DCompositionWaitForCompositorClock == "on"]
+public unsafe func Windows_DCompositionWaitForCompositorClock(count: UInt32, handles: CPointer<CPointer<Unit>>, timeoutInMs: UInt32): UInt32 {
+    return DCompositionWaitForCompositorClock(count, handles, timeoutInMs)
 }
 
 @When[Windows_Win32_Graphics_DirectComposition == "on"]

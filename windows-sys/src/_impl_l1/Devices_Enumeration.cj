@@ -264,9 +264,12 @@ public struct IDeviceInformationVtbl {
     public var IsEnabled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var IsDefault: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var EnclosureLocation: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Update: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Storage_Streams == "on"]
     public var GetThumbnailAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Storage_Streams == "on"]
     public var GetGlyphThumbnailAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -341,6 +344,7 @@ public class IDeviceInformation <: InterfaceWrapperBase & ComInterface {
         return __vt.EnclosureLocation(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -353,12 +357,14 @@ public class IDeviceInformation <: InterfaceWrapperBase & ComInterface {
         return __vt.Update(__liveRaw, updateInfo)
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func GetThumbnailAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetThumbnailAsync(__liveRaw, result__)
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func GetGlyphThumbnailAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -737,14 +743,20 @@ public class IDeviceInformationPairing2 <: InterfaceWrapperBase & ComInterface {
 public struct IDeviceInformationStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var CreateFromIdAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromIdAsyncAdditionalProperties: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllAsyncDeviceClass: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllAsyncAqsFilter: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllAsyncAqsFilterAndAdditionalProperties: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var CreateWatcher: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CreateWatcherDeviceClass: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var CreateWatcherAqsFilter: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateWatcherAqsFilterAndAdditionalProperties: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -795,30 +807,35 @@ public class IDeviceInformationStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.CreateFromIdAsync(__liveRaw, deviceId, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromIdAsyncAdditionalProperties(deviceId: CPointer<Unit>, additionalProperties: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateFromIdAsyncAdditionalProperties(__liveRaw, deviceId, additionalProperties, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindAllAsync(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAsyncDeviceClass(deviceClass: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindAllAsyncDeviceClass(__liveRaw, deviceClass, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAsyncAqsFilter(aqsFilter: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindAllAsyncAqsFilter(__liveRaw, aqsFilter, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAsyncAqsFilterAndAdditionalProperties(aqsFilter: CPointer<Unit>, additionalProperties: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -843,6 +860,7 @@ public class IDeviceInformationStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.CreateWatcherAqsFilter(__liveRaw, aqsFilter, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateWatcherAqsFilterAndAdditionalProperties(aqsFilter: CPointer<Unit>, additionalProperties: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -855,8 +873,11 @@ public class IDeviceInformationStatics <: InterfaceWrapperBase & ComInterface {
 public struct IDeviceInformationStatics2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var GetAqsFilterFromDeviceClass: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromIdAsyncWithKindAndAdditionalProperties: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllAsyncWithKindAqsFilterAndAdditionalProperties: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateWatcherWithKindAqsFilterAndAdditionalProperties: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -907,18 +928,21 @@ public class IDeviceInformationStatics2 <: InterfaceWrapperBase & ComInterface {
         return __vt.GetAqsFilterFromDeviceClass(__liveRaw, deviceClass, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromIdAsyncWithKindAndAdditionalProperties(deviceId: CPointer<Unit>, additionalProperties: CPointer<Unit>, kind: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateFromIdAsyncWithKindAndAdditionalProperties(__liveRaw, deviceId, additionalProperties, kind, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAsyncWithKindAqsFilterAndAdditionalProperties(aqsFilter: CPointer<Unit>, additionalProperties: CPointer<Unit>, kind: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindAllAsyncWithKindAqsFilterAndAdditionalProperties(__liveRaw, aqsFilter, additionalProperties, kind, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateWatcherWithKindAqsFilterAndAdditionalProperties(aqsFilter: CPointer<Unit>, additionalProperties: CPointer<Unit>, kind: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -930,8 +954,11 @@ public class IDeviceInformationStatics2 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IDeviceInformationStatics3Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromIdAsyncWithAdditionalPropertiesKindAndSettings: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Int32, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllAsyncWithAqsFilterAdditionalPropertiesKindAndSettings: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Int32, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateWatcherWithAqsFilterAdditionalPropertiesKindAndSettings: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Int32, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -976,18 +1003,21 @@ public class IDeviceInformationStatics3 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IDeviceInformationStatics3Vtbl>(IDeviceInformationStatics3Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromIdAsyncWithAdditionalPropertiesKindAndSettings(deviceId: CPointer<Unit>, additionalProperties: CPointer<Unit>, kind: Int32, settings: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateFromIdAsyncWithAdditionalPropertiesKindAndSettings(__liveRaw, deviceId, additionalProperties, kind, settings, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAsyncWithAqsFilterAdditionalPropertiesKindAndSettings(aqsFilter: CPointer<Unit>, additionalProperties: CPointer<Unit>, kind: Int32, settings: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindAllAsyncWithAqsFilterAdditionalPropertiesKindAndSettings(__liveRaw, aqsFilter, additionalProperties, kind, settings, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateWatcherWithAqsFilterAdditionalPropertiesKindAndSettings(aqsFilter: CPointer<Unit>, additionalProperties: CPointer<Unit>, kind: Int32, settings: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1148,6 +1178,7 @@ public struct IDevicePairingSetMembersRequestedEventArgsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Status: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var ParentDeviceInformation: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var PairingSetMembers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1204,6 +1235,7 @@ public class IDevicePairingSetMembersRequestedEventArgs <: InterfaceWrapperBase 
         return __vt.ParentDeviceInformation(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PairingSetMembers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1217,6 +1249,7 @@ public struct IDevicePickerVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Filter: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Appearance: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var RequestedProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var DeviceSelected: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveDeviceSelected: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
@@ -1287,6 +1320,7 @@ public class IDevicePicker <: InterfaceWrapperBase & ComInterface {
         return __vt.Appearance(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RequestedProperties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1566,7 +1600,7 @@ public class IDeviceWatcher <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IDeviceWatcher2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_ApplicationModel_Background == "on"]
+    @When[Windows_ApplicationModel_Background == "on" && Windows_Foundation_Collections == "on"]
     public var GetBackgroundTrigger: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -1611,7 +1645,7 @@ public class IDeviceWatcher2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IDeviceWatcher2Vtbl>(IDeviceWatcher2Vtbl())
     }
 
-    @When[Windows_ApplicationModel_Background == "on"]
+    @When[Windows_ApplicationModel_Background == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func GetBackgroundTrigger(requestedEventKinds: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1692,6 +1726,7 @@ public class IDeviceWatcherEvent <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IDeviceWatcherTriggerDetailsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var DeviceWatcherEvents: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1736,6 +1771,7 @@ public class IDeviceWatcherTriggerDetails <: InterfaceWrapperBase & ComInterface
         readVtbl<IDeviceWatcherTriggerDetailsVtbl>(IDeviceWatcherTriggerDetailsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DeviceWatcherEvents(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

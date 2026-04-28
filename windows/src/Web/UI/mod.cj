@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_UI == "on"]
 import windows.UI as UI
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -3025,7 +3023,10 @@ public struct IWebViewControlVtbl {
     public var DefaultBackgroundColor: UIntNative = UIntNative(0)
     public var ContainsFullScreenElement: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Settings: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var DeferredPermissionRequests: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var DeferredPermissionRequests: UIntNative = UIntNative(0)
     public var GoForward: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
     public var GoBack: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
     public var Refresh: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
@@ -3040,7 +3041,10 @@ public struct IWebViewControlVtbl {
     public var NavigateWithHttpRequestMessage: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Web_Http != "on"]
     public var NavigateWithHttpRequestMessage: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var InvokeScriptAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var InvokeScriptAsync: UIntNative = UIntNative(0)
     @When[Windows_Storage_Streams == "on"]
     public var CapturePreviewToStreamAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams != "on"]
@@ -3087,7 +3091,7 @@ public struct IWebViewControlVtbl {
     public var RemoveWebResourceRequested: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 
-    @When[((((Windows_UI == "on") && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on")]
+    @When[((((((Windows_UI == "on") && (Windows_Foundation_Collections == "on")) && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on")]
     public static func new<Identity>(offset!: Int64 = 0): IWebViewControlVtbl where Identity <: IWebViewControl_Impl {
         let _ = offset
         var vtbl = IWebViewControlVtbl()
@@ -3150,14 +3154,7 @@ public struct IWebViewControlVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.DeferredPermissionRequests = { instanceRaw, result__ =>
-            match (unsafe { asImplFromRaw<IWebViewControl_ImplErased>(instanceRaw) }) {
-                case Some(impl) =>
-                    impl.__winrtThunk_DeferredPermissionRequests(result__)
-                case None =>
-                    E_NOINTERFACE.value
-            }
-        }
+        vtbl = IWebViewControlVtbl.__assignDeferredPermissionRequests<Identity>(vtbl)
         vtbl.GoForward = { instanceRaw =>
             match (unsafe { asImplFromRaw<IWebViewControl_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
@@ -3208,14 +3205,7 @@ public struct IWebViewControlVtbl {
         }
         vtbl = IWebViewControlVtbl.__assignNavigateToLocalStreamUri<Identity>(vtbl)
         vtbl = IWebViewControlVtbl.__assignNavigateWithHttpRequestMessage<Identity>(vtbl)
-        vtbl.InvokeScriptAsync = { instanceRaw, arg0, arg1, result__ =>
-            match (unsafe { asImplFromRaw<IWebViewControl_ImplErased>(instanceRaw) }) {
-                case Some(impl) =>
-                    impl.__winrtThunk_InvokeScriptAsync(arg0, arg1, result__)
-                case None =>
-                    E_NOINTERFACE.value
-            }
-        }
+        vtbl = IWebViewControlVtbl.__assignInvokeScriptAsync<Identity>(vtbl)
         vtbl = IWebViewControlVtbl.__assignCapturePreviewToStreamAsync<Identity>(vtbl)
         vtbl = IWebViewControlVtbl.__assignCaptureSelectedContentToDataPackageAsync<Identity>(vtbl)
         vtbl.BuildLocalStreamUri = { instanceRaw, arg0, arg1, result__ =>
@@ -3509,7 +3499,7 @@ public struct IWebViewControlVtbl {
         return vtbl
     }
 
-    @When[(((((Windows_UI == "on") && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on")) && Windows_UI == "on"]
+    @When[(((((((Windows_UI == "on") && (Windows_Foundation_Collections == "on")) && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on")) && Windows_UI == "on"]
     public static func __assignSetDefaultBackgroundColor<Identity>(vtbl: IWebViewControlVtbl): IWebViewControlVtbl where Identity <: IWebViewControl_Impl {
         var next = vtbl
         next.SetDefaultBackgroundColor = { instanceRaw, arg0 =>
@@ -3523,12 +3513,12 @@ public struct IWebViewControlVtbl {
         return next
     }
 
-    @When[(((((Windows_UI == "on") && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on")) && Windows_UI != "on"]
+    @When[(((((((Windows_UI == "on") && (Windows_Foundation_Collections == "on")) && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on")) && Windows_UI != "on"]
     public static func __assignSetDefaultBackgroundColor<Identity>(vtbl: IWebViewControlVtbl): IWebViewControlVtbl where Identity <: IWebViewControl_Impl {
         return vtbl
     }
 
-    @When[(((((Windows_UI == "on") && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on")) && Windows_UI == "on"]
+    @When[(((((((Windows_UI == "on") && (Windows_Foundation_Collections == "on")) && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on")) && Windows_UI == "on"]
     public static func __assignDefaultBackgroundColor<Identity>(vtbl: IWebViewControlVtbl): IWebViewControlVtbl where Identity <: IWebViewControl_Impl {
         var next = vtbl
         next.DefaultBackgroundColor = { instanceRaw, result__ =>
@@ -3542,12 +3532,31 @@ public struct IWebViewControlVtbl {
         return next
     }
 
-    @When[(((((Windows_UI == "on") && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on")) && Windows_UI != "on"]
+    @When[(((((((Windows_UI == "on") && (Windows_Foundation_Collections == "on")) && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on")) && Windows_UI != "on"]
     public static func __assignDefaultBackgroundColor<Identity>(vtbl: IWebViewControlVtbl): IWebViewControlVtbl where Identity <: IWebViewControl_Impl {
         return vtbl
     }
 
-    @When[(((((Windows_UI == "on") && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on")) && Windows_Web == "on"]
+    @When[(((((((Windows_UI == "on") && (Windows_Foundation_Collections == "on")) && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on")) && Windows_Foundation_Collections == "on"]
+    public static func __assignDeferredPermissionRequests<Identity>(vtbl: IWebViewControlVtbl): IWebViewControlVtbl where Identity <: IWebViewControl_Impl {
+        var next = vtbl
+        next.DeferredPermissionRequests = { instanceRaw, result__ =>
+            match (unsafe { asImplFromRaw<IWebViewControl_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_DeferredPermissionRequests(result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        return next
+    }
+
+    @When[(((((((Windows_UI == "on") && (Windows_Foundation_Collections == "on")) && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on")) && Windows_Foundation_Collections != "on"]
+    public static func __assignDeferredPermissionRequests<Identity>(vtbl: IWebViewControlVtbl): IWebViewControlVtbl where Identity <: IWebViewControl_Impl {
+        return vtbl
+    }
+
+    @When[(((((((Windows_UI == "on") && (Windows_Foundation_Collections == "on")) && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on")) && Windows_Web == "on"]
     public static func __assignNavigateToLocalStreamUri<Identity>(vtbl: IWebViewControlVtbl): IWebViewControlVtbl where Identity <: IWebViewControl_Impl {
         var next = vtbl
         next.NavigateToLocalStreamUri = { instanceRaw, arg0, arg1 =>
@@ -3561,12 +3570,12 @@ public struct IWebViewControlVtbl {
         return next
     }
 
-    @When[(((((Windows_UI == "on") && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on")) && Windows_Web != "on"]
+    @When[(((((((Windows_UI == "on") && (Windows_Foundation_Collections == "on")) && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on")) && Windows_Web != "on"]
     public static func __assignNavigateToLocalStreamUri<Identity>(vtbl: IWebViewControlVtbl): IWebViewControlVtbl where Identity <: IWebViewControl_Impl {
         return vtbl
     }
 
-    @When[(((((Windows_UI == "on") && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on")) && Windows_Web_Http == "on"]
+    @When[(((((((Windows_UI == "on") && (Windows_Foundation_Collections == "on")) && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on")) && Windows_Web_Http == "on"]
     public static func __assignNavigateWithHttpRequestMessage<Identity>(vtbl: IWebViewControlVtbl): IWebViewControlVtbl where Identity <: IWebViewControl_Impl {
         var next = vtbl
         next.NavigateWithHttpRequestMessage = { instanceRaw, arg0 =>
@@ -3580,12 +3589,31 @@ public struct IWebViewControlVtbl {
         return next
     }
 
-    @When[(((((Windows_UI == "on") && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on")) && Windows_Web_Http != "on"]
+    @When[(((((((Windows_UI == "on") && (Windows_Foundation_Collections == "on")) && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on")) && Windows_Web_Http != "on"]
     public static func __assignNavigateWithHttpRequestMessage<Identity>(vtbl: IWebViewControlVtbl): IWebViewControlVtbl where Identity <: IWebViewControl_Impl {
         return vtbl
     }
 
-    @When[(((((Windows_UI == "on") && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on")) && Windows_Storage_Streams == "on"]
+    @When[(((((((Windows_UI == "on") && (Windows_Foundation_Collections == "on")) && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on")) && Windows_Foundation_Collections == "on"]
+    public static func __assignInvokeScriptAsync<Identity>(vtbl: IWebViewControlVtbl): IWebViewControlVtbl where Identity <: IWebViewControl_Impl {
+        var next = vtbl
+        next.InvokeScriptAsync = { instanceRaw, arg0, arg1, result__ =>
+            match (unsafe { asImplFromRaw<IWebViewControl_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_InvokeScriptAsync(arg0, arg1, result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        return next
+    }
+
+    @When[(((((((Windows_UI == "on") && (Windows_Foundation_Collections == "on")) && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on")) && Windows_Foundation_Collections != "on"]
+    public static func __assignInvokeScriptAsync<Identity>(vtbl: IWebViewControlVtbl): IWebViewControlVtbl where Identity <: IWebViewControl_Impl {
+        return vtbl
+    }
+
+    @When[(((((((Windows_UI == "on") && (Windows_Foundation_Collections == "on")) && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on")) && Windows_Storage_Streams == "on"]
     public static func __assignCapturePreviewToStreamAsync<Identity>(vtbl: IWebViewControlVtbl): IWebViewControlVtbl where Identity <: IWebViewControl_Impl {
         var next = vtbl
         next.CapturePreviewToStreamAsync = { instanceRaw, arg0, result__ =>
@@ -3599,12 +3627,12 @@ public struct IWebViewControlVtbl {
         return next
     }
 
-    @When[(((((Windows_UI == "on") && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on")) && Windows_Storage_Streams != "on"]
+    @When[(((((((Windows_UI == "on") && (Windows_Foundation_Collections == "on")) && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on")) && Windows_Storage_Streams != "on"]
     public static func __assignCapturePreviewToStreamAsync<Identity>(vtbl: IWebViewControlVtbl): IWebViewControlVtbl where Identity <: IWebViewControl_Impl {
         return vtbl
     }
 
-    @When[(((((Windows_UI == "on") && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on")) && Windows_ApplicationModel_DataTransfer == "on"]
+    @When[(((((((Windows_UI == "on") && (Windows_Foundation_Collections == "on")) && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on")) && Windows_ApplicationModel_DataTransfer == "on"]
     public static func __assignCaptureSelectedContentToDataPackageAsync<Identity>(vtbl: IWebViewControlVtbl): IWebViewControlVtbl where Identity <: IWebViewControl_Impl {
         var next = vtbl
         next.CaptureSelectedContentToDataPackageAsync = { instanceRaw, result__ =>
@@ -3618,7 +3646,7 @@ public struct IWebViewControlVtbl {
         return next
     }
 
-    @When[(((((Windows_UI == "on") && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on")) && Windows_ApplicationModel_DataTransfer != "on"]
+    @When[(((((((Windows_UI == "on") && (Windows_Foundation_Collections == "on")) && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on")) && Windows_ApplicationModel_DataTransfer != "on"]
     public static func __assignCaptureSelectedContentToDataPackageAsync<Identity>(vtbl: IWebViewControlVtbl): IWebViewControlVtbl where Identity <: IWebViewControl_Impl {
         return vtbl
     }
@@ -3631,7 +3659,7 @@ public struct IWebViewControlVtbl {
     }
 }
 
-@When[Windows_Web_UI == "on" && (((((Windows_UI == "on") && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on"))]
+@When[Windows_Web_UI == "on" && (((((((Windows_UI == "on") && (Windows_Foundation_Collections == "on")) && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on"))]
 public interface IWebViewControl_ImplErased {
     public func __winrtThunk_Source(result__: CPointer<CPointer<Unit>>): Int32
 
@@ -3748,7 +3776,7 @@ public interface IWebViewControl_ImplErased {
     public func __winrtThunk_RemoveWebResourceRequested(arg0: windows_collections.EventRegistrationTokenAbi): Int32
 }
 
-@When[Windows_Web_UI == "on" && (((((Windows_UI == "on") && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on"))]
+@When[Windows_Web_UI == "on" && (((((((Windows_UI == "on") && (Windows_Foundation_Collections == "on")) && (Windows_Web == "on")) && (Windows_Web_Http == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_Streams == "on")) && (Windows_ApplicationModel_DataTransfer == "on"))]
 public interface IWebViewControl_Impl <: IWebViewControl_ImplErased {
     public func Source(): windows_core.Result<Foundation.Uri>
 
@@ -4669,6 +4697,7 @@ public class IWebViewControl <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return WebViewControlSettings.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DeferredPermissionRequests(): windows_collections.IVectorView<WebViewControlDeferredPermissionRequest> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4727,6 +4756,7 @@ public class IWebViewControl <: InterfaceWrapperBase & ComInterface & RuntimeNam
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InvokeScriptAsync(scriptName: windows_core.HString, arguments: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

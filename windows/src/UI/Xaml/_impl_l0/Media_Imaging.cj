@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Graphics_Imaging == "on"]
 import windows.Graphics.Imaging as Graphics_Imaging
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -470,12 +468,14 @@ public class DownloadProgressEventHandler <: InterfaceWrapperBase & ComInterface
 @When[Windows_UI_Xaml_Media_Imaging == "on"]
 extend DownloadProgressEventHandler <: windows_core.Interface<DownloadProgressEventHandler> {}
 
+@When[Windows_UI_Xaml_Media_Imaging == "on"]
 private open class DownloadProgressEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Media_Imaging == "on"]
 private open class DownloadProgressEventHandlerInvoker <: DownloadProgressEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<DownloadProgressEventArgs>): Unit {
         ()
@@ -487,6 +487,7 @@ private open class DownloadProgressEventHandlerInvoker <: DownloadProgressEventH
     }
 }
 
+@When[Windows_UI_Xaml_Media_Imaging == "on"]
 private class DownloadProgressEventHandlerBox <: DownloadProgressEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<DownloadProgressEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<DownloadProgressEventHandlerVtbl>
@@ -505,6 +506,7 @@ private class DownloadProgressEventHandlerBox <: DownloadProgressEventHandlerInv
     }
 }
 
+@When[Windows_UI_Xaml_Media_Imaging == "on"]
 func buildDownloadProgressEventHandlerBoxVtbl(): DownloadProgressEventHandlerVtbl {
     var vtbl = DownloadProgressEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()

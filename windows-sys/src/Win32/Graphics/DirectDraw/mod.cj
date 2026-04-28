@@ -33,4 +33,17 @@ public import windows_sys.Win32._impl_l1.{DD_CREATEPALETTEDATA, DD_SETENTRIESDAT
 public import windows_sys.Win32._impl_l1.IUNKNOWN_LIST
 @When[Windows_Win32_Graphics_DirectDraw == "on" && Windows_Win32_Graphics_Gdi == "on"]
 public import windows_sys.Win32._impl_l0.{LPDDENUMCALLBACKEXA, LPDDENUMCALLBACKEXW}
-
+@When[Windows_Win32_Graphics_DirectDraw == "on" && DDRAW == "on" && Windows_Win32_Graphics_DirectDraw_DirectDrawCreate == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DirectDrawCreate
+@When[Windows_Win32_Graphics_DirectDraw == "on" && DDRAW == "on" && Windows_Win32_Graphics_DirectDraw_DirectDrawCreateClipper == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DirectDrawCreateClipper
+@When[Windows_Win32_Graphics_DirectDraw == "on" && DDRAW == "on" && Windows_Win32_Graphics_DirectDraw_DirectDrawCreateEx == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DirectDrawCreateEx
+@When[Windows_Win32_Graphics_DirectDraw == "on" && DDRAW == "on" && Windows_Win32_Graphics_DirectDraw_DirectDrawEnumerateA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DirectDrawEnumerateA
+@When[Windows_Win32_Graphics_DirectDraw == "on" && DDRAW == "on" && Windows_Win32_Graphics_DirectDraw_DirectDrawEnumerateExA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DirectDrawEnumerateExA
+@When[Windows_Win32_Graphics_DirectDraw == "on" && DDRAW == "on" && Windows_Win32_Graphics_DirectDraw_DirectDrawEnumerateExW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DirectDrawEnumerateExW
+@When[Windows_Win32_Graphics_DirectDraw == "on" && DDRAW == "on" && Windows_Win32_Graphics_DirectDraw_DirectDrawEnumerateW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DirectDrawEnumerateW

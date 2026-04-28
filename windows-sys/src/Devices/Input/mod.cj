@@ -3,7 +3,6 @@ package windows_sys.Devices.Input
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Devices_Haptics == "on"]
 import windows_sys.Devices.Haptics as Devices_Haptics
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
 
@@ -731,6 +730,7 @@ public struct IPointerDeviceVtbl {
     public var MaxContacts: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var PhysicalDeviceRect: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.Rect>) -> Int32> = { _, _ => 0 }
     public var ScreenRect: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.Rect>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedUsages: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -805,6 +805,7 @@ public class IPointerDevice <: InterfaceWrapperBase & ComInterface {
         return __vt.ScreenRect(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedUsages(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1307,6 +1308,7 @@ public class IPenDockListenerStatics <: InterfaceWrapperBase & ComInterface {
 public struct IPointerDeviceStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var GetPointerDevice: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetPointerDevices: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1357,6 +1359,7 @@ public class IPointerDeviceStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.GetPointerDevice(__liveRaw, pointerId, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetPointerDevices(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

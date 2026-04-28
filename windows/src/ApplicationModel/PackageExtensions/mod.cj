@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l1 as _impl_l1
 import windows._impl_l2 as _impl_l2
@@ -918,7 +917,10 @@ public struct IPackageExtensionPackageInstalledEventArgsVtbl {
     public var get_Package: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel != "on"]
     public var get_Package: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Extensions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Extensions: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1004,6 +1006,7 @@ public class IPackageExtensionPackageInstalledEventArgs <: InterfaceWrapperBase 
         return _impl_l2.Package.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Extensions(): windows_collections.IVectorView<PackageExtension> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1025,7 +1028,10 @@ public struct IPackageExtensionPackageUpdatedEventArgsVtbl {
     public var get_Package: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel != "on"]
     public var get_Package: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Extensions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Extensions: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1111,6 +1117,7 @@ public class IPackageExtensionPackageUpdatedEventArgs <: InterfaceWrapperBase & 
         return _impl_l2.Package.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Extensions(): windows_collections.IVectorView<PackageExtension> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1201,6 +1208,7 @@ public class PackageExtensionPackageInstalledEventArgs <: InterfaceWrapperBase &
         return defaultInterface().get_Package()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Extensions(): windows_collections.IVectorView<PackageExtension> {
         return defaultInterface().Extensions()
     }
@@ -1302,6 +1310,7 @@ public class PackageExtensionPackageUpdatedEventArgs <: InterfaceWrapperBase & C
         return defaultInterface().get_Package()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Extensions(): windows_collections.IVectorView<PackageExtension> {
         return defaultInterface().Extensions()
     }
@@ -1329,8 +1338,14 @@ extend PackageExtensionPackageUpdatedEventArgs <: windows_core.HandleWinrtType<P
 @C
 public struct IPackageExtensionCatalogVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAll: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAll: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllAsync: UIntNative = UIntNative(0)
     public var RequestRemovePackageAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var PackageInstalled: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemovePackageInstalled: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1410,6 +1425,7 @@ public class IPackageExtensionCatalog <: InterfaceWrapperBase & ComInterface & R
         readVtbl<IPackageExtensionCatalogVtbl>(IPackageExtensionCatalogVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAll(): windows_collections.IVectorView<PackageExtension> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1418,6 +1434,7 @@ public class IPackageExtensionCatalog <: InterfaceWrapperBase & ComInterface & R
         return windows_collections.IVectorView<PackageExtension>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<PackageExtension>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1662,10 +1679,12 @@ public class PackageExtensionCatalog <: InterfaceWrapperBase & ComInterface & wi
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAll(): windows_collections.IVectorView<PackageExtension> {
         return defaultInterface().FindAll()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<PackageExtension>> {
         return defaultInterface().FindAllAsync()
     }

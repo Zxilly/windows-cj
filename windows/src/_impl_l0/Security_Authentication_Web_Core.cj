@@ -79,7 +79,10 @@ public struct IWebProviderErrorVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var ErrorCode: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ErrorMessage: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -164,6 +167,7 @@ public class IWebProviderError <: InterfaceWrapperBase & ComInterface & RuntimeN
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMap<windows_core.HString, windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -265,7 +269,10 @@ extend IWebProviderErrorFactory <: windows_core.Interface<IWebProviderErrorFacto
 @C
 public struct IWebTokenRequest2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AppProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AppProperties: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -334,6 +341,7 @@ public class IWebTokenRequest2 <: InterfaceWrapperBase & ComInterface & RuntimeN
         readVtbl<IWebTokenRequest2Vtbl>(IWebTokenRequest2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AppProperties(): windows_collections.IMap<windows_core.HString, windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -578,6 +586,7 @@ public class WebProviderError <: InterfaceWrapperBase & ComInterface & windows_i
         return defaultInterface().ErrorMessage()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMap<windows_core.HString, windows_core.HString> {
         return defaultInterface().Properties()
     }

@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l1 as _impl_l1
 import windows_collections as windows_collections
@@ -1174,12 +1173,14 @@ public class LicenseChangedEventHandler <: InterfaceWrapperBase & ComInterface &
 @When[Windows_ApplicationModel_Store == "on"]
 extend LicenseChangedEventHandler <: windows_core.Interface<LicenseChangedEventHandler> {}
 
+@When[Windows_ApplicationModel_Store == "on"]
 private open class LicenseChangedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_ApplicationModel_Store == "on"]
 private open class LicenseChangedEventHandlerInvoker <: LicenseChangedEventHandlerInvokerErased {
     public open func Invoke(): Unit {
         ()
@@ -1191,6 +1192,7 @@ private open class LicenseChangedEventHandlerInvoker <: LicenseChangedEventHandl
     }
 }
 
+@When[Windows_ApplicationModel_Store == "on"]
 private class LicenseChangedEventHandlerBox <: LicenseChangedEventHandlerInvoker {
     public let invoke_: () -> Unit
     private let vtblHandle: CPointerHandle<LicenseChangedEventHandlerVtbl>
@@ -1209,6 +1211,7 @@ private class LicenseChangedEventHandlerBox <: LicenseChangedEventHandlerInvoker
     }
 }
 
+@When[Windows_ApplicationModel_Store == "on"]
 func buildLicenseChangedEventHandlerBoxVtbl(): LicenseChangedEventHandlerVtbl {
     var vtbl = LicenseChangedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -1544,7 +1547,10 @@ extend UnfulfilledConsumable <: windows_core.HandleWinrtType<UnfulfilledConsumab
 @C
 public struct ILicenseInformationVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ProductLicenses: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ProductLicenses: UIntNative = UIntNative(0)
     public var IsActive: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsTrial: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ExpirationDate: CFunc<(CPointer<Unit>, CPointer<windows_future.DateTimeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1618,6 +1624,7 @@ public class ILicenseInformation <: InterfaceWrapperBase & ComInterface & Runtim
         readVtbl<ILicenseInformationVtbl>(ILicenseInformationVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ProductLicenses(): windows_collections.IMapView<windows_core.HString, ProductLicense> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1758,7 +1765,10 @@ extend IProductListingWithConsumables <: windows_core.Interface<IProductListingW
 public struct IProductListingWithMetadataVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Description: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Keywords: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Keywords: UIntNative = UIntNative(0)
     public var get_ProductType: CFunc<(CPointer<Unit>, CPointer<ProductTypeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Tag: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ImageUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1850,6 +1860,7 @@ public class IProductListingWithMetadata <: InterfaceWrapperBase & ComInterface 
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Keywords(): windows_collections.IIterable<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2067,6 +2078,7 @@ public class LicenseInformation <: InterfaceWrapperBase & ComInterface & windows
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ProductLicenses(): windows_collections.IMapView<windows_core.HString, ProductLicense> {
         return defaultInterface().ProductLicenses()
     }
@@ -2320,7 +2332,10 @@ public struct IListingInformationVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var CurrentMarket: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Description: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var ProductListings: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ProductListings: UIntNative = UIntNative(0)
     public var FormattedPrice: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var AgeRating: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -2408,6 +2423,7 @@ public class IListingInformation <: InterfaceWrapperBase & ComInterface & Runtim
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ProductListings(): windows_collections.IMapView<windows_core.HString, ProductListing> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2521,6 +2537,7 @@ public class ListingInformation <: InterfaceWrapperBase & ComInterface & windows
         return defaultInterface().Description()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ProductListings(): windows_collections.IMapView<windows_core.HString, ProductListing> {
         return defaultInterface().ProductListings()
     }
@@ -2716,9 +2733,9 @@ public struct ICurrentAppSimulatorVtbl {
     public var LoadListingInformationAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetAppReceiptAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetProductReceiptAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var ReloadSimulatorAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var ReloadSimulatorAsync: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -2852,7 +2869,7 @@ public class ICurrentAppSimulator <: InterfaceWrapperBase & ComInterface & Runti
         return windows_future.IAsyncOperation<windows_core.HString>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func ReloadSimulatorAsync(simulatorSettingsFile: _impl_l1.StorageFile): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2869,8 +2886,14 @@ extend ICurrentAppSimulator <: windows_core.Interface<ICurrentAppSimulator> {}
 @C
 public struct ICurrentAppSimulatorStaticsWithFilteringVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var LoadListingInformationByProductIdsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var LoadListingInformationByProductIdsAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var LoadListingInformationByKeywordsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var LoadListingInformationByKeywordsAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2939,6 +2962,7 @@ public class ICurrentAppSimulatorStaticsWithFiltering <: InterfaceWrapperBase & 
         readVtbl<ICurrentAppSimulatorStaticsWithFilteringVtbl>(ICurrentAppSimulatorStaticsWithFilteringVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func LoadListingInformationByProductIdsAsync(productIds: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<ListingInformation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2947,6 +2971,7 @@ public class ICurrentAppSimulatorStaticsWithFiltering <: InterfaceWrapperBase & 
         return windows_future.IAsyncOperation<ListingInformation>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func LoadListingInformationByKeywordsAsync(keywords: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<ListingInformation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2963,8 +2988,14 @@ extend ICurrentAppSimulatorStaticsWithFiltering <: windows_core.Interface<ICurre
 @C
 public struct ICurrentAppStaticsWithFilteringVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var LoadListingInformationByProductIdsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var LoadListingInformationByProductIdsAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var LoadListingInformationByKeywordsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var LoadListingInformationByKeywordsAsync: UIntNative = UIntNative(0)
     public var ReportProductFulfillment: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -3034,6 +3065,7 @@ public class ICurrentAppStaticsWithFiltering <: InterfaceWrapperBase & ComInterf
         readVtbl<ICurrentAppStaticsWithFilteringVtbl>(ICurrentAppStaticsWithFilteringVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func LoadListingInformationByProductIdsAsync(productIds: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<ListingInformation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3042,6 +3074,7 @@ public class ICurrentAppStaticsWithFiltering <: InterfaceWrapperBase & ComInterf
         return windows_future.IAsyncOperation<ListingInformation>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func LoadListingInformationByKeywordsAsync(keywords: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<ListingInformation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3113,6 +3146,7 @@ public class CurrentApp <: windows_interface.RuntimeName & windows_core.RuntimeN
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetUnfulfilledConsumablesAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<UnfulfilledConsumable>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<UnfulfilledConsumable>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<UnfulfilledConsumable>>>.None
         try (factory__ = windows_core.factory<CurrentApp, ICurrentAppWithConsumables>().unwrap()) {
@@ -3223,6 +3257,7 @@ public class CurrentApp <: windows_interface.RuntimeName & windows_core.RuntimeN
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func LoadListingInformationByProductIdsAsync(productIds: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<ListingInformation> {
         var result__: Option<windows_future.IAsyncOperation<ListingInformation>> = Option<windows_future.IAsyncOperation<ListingInformation>>.None
         try (factory__ = windows_core.factory<CurrentApp, ICurrentAppStaticsWithFiltering>().unwrap()) {
@@ -3234,6 +3269,7 @@ public class CurrentApp <: windows_interface.RuntimeName & windows_core.RuntimeN
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func LoadListingInformationByKeywordsAsync(keywords: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<ListingInformation> {
         var result__: Option<windows_future.IAsyncOperation<ListingInformation>> = Option<windows_future.IAsyncOperation<ListingInformation>>.None
         try (factory__ = windows_core.factory<CurrentApp, ICurrentAppStaticsWithFiltering>().unwrap()) {
@@ -3328,6 +3364,7 @@ public class CurrentAppSimulator <: windows_interface.RuntimeName & windows_core
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetUnfulfilledConsumablesAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<UnfulfilledConsumable>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<UnfulfilledConsumable>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<UnfulfilledConsumable>>>.None
         try (factory__ = windows_core.factory<CurrentAppSimulator, ICurrentAppSimulatorWithConsumables>().unwrap()) {
@@ -3438,7 +3475,7 @@ public class CurrentAppSimulator <: windows_interface.RuntimeName & windows_core
         }
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public static unsafe func ReloadSimulatorAsync(simulatorSettingsFile: _impl_l1.StorageFile): windows_future.IAsyncAction {
         var result__: Option<windows_future.IAsyncAction> = Option<windows_future.IAsyncAction>.None
         try (factory__ = windows_core.factory<CurrentAppSimulator, ICurrentAppSimulator>().unwrap()) {
@@ -3450,6 +3487,7 @@ public class CurrentAppSimulator <: windows_interface.RuntimeName & windows_core
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func LoadListingInformationByProductIdsAsync(productIds: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<ListingInformation> {
         var result__: Option<windows_future.IAsyncOperation<ListingInformation>> = Option<windows_future.IAsyncOperation<ListingInformation>>.None
         try (factory__ = windows_core.factory<CurrentAppSimulator, ICurrentAppSimulatorStaticsWithFiltering>().unwrap()) {
@@ -3461,6 +3499,7 @@ public class CurrentAppSimulator <: windows_interface.RuntimeName & windows_core
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func LoadListingInformationByKeywordsAsync(keywords: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<ListingInformation> {
         var result__: Option<windows_future.IAsyncOperation<ListingInformation>> = Option<windows_future.IAsyncOperation<ListingInformation>>.None
         try (factory__ = windows_core.factory<CurrentAppSimulator, ICurrentAppSimulatorStaticsWithFiltering>().unwrap()) {
@@ -3480,7 +3519,10 @@ public struct ICurrentAppSimulatorWithConsumablesVtbl {
     public var ReportConsumableFulfillmentAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, GUID, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var RequestProductPurchaseWithResultsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RequestProductPurchaseWithDisplayPropertiesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetUnfulfilledConsumablesAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetUnfulfilledConsumablesAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3573,6 +3615,7 @@ public class ICurrentAppSimulatorWithConsumables <: InterfaceWrapperBase & ComIn
         return windows_future.IAsyncOperation<PurchaseResults>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetUnfulfilledConsumablesAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<UnfulfilledConsumable>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3592,7 +3635,10 @@ public struct ICurrentAppWithConsumablesVtbl {
     public var ReportConsumableFulfillmentAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, GUID, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var RequestProductPurchaseWithResultsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RequestProductPurchaseWithDisplayPropertiesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetUnfulfilledConsumablesAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetUnfulfilledConsumablesAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3685,6 +3731,7 @@ public class ICurrentAppWithConsumables <: InterfaceWrapperBase & ComInterface &
         return windows_future.IAsyncOperation<PurchaseResults>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetUnfulfilledConsumablesAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<UnfulfilledConsumable>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrap
 import windows_interface as windows_interface
 import windows_polyfill.{packedReadFloat32, packedReadInt32, packedReadUInt32, packedReadUInt64, packedReadUInt8, packedReadValue, packedWriteFloat32, packedWriteInt32, packedWriteUInt32, packedWriteUInt64, packedWriteUInt8, packedWriteValue}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 import windows.Win32.Media._impl_l0 as Win32_Media__impl_l0
 import windows.Win32._impl_l0 as Win32__impl_l0
@@ -3625,12 +3624,17 @@ extend HrtfApoInit <: windows_core.CopyType & windows_core.RuntimeType & windows
     }
 }
 
-@When[HRTFAPO == "on"]
+@When[Windows_Win32_Media_Audio_XAudio2 == "on" && HRTFAPO == "on" && Windows_Win32_Media_Audio_XAudio2_CreateHrtfApo == "on"]
 foreign {
     func CreateHrtfApo(init_: CPointer<HrtfApoInitAbi>, xApo: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[XAUDIO2_8 == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_Media_Audio_XAudio2 == "on" && HRTFAPO == "on" && Windows_Win32_Media_Audio_XAudio2_CreateHrtfApo == "on"]
+public unsafe func Windows_CreateHrtfApo(init_: CPointer<HrtfApoInitAbi>, xApo: CPointer<CPointer<Unit>>): Int32 {
+    return CreateHrtfApo(init_, xApo)
+}
+
+@When[Windows_Win32_Media_Audio_XAudio2 == "on" && XAUDIO2_8 == "on" && Windows_Win32_Media_Audio_XAudio2_CreateFX == "on" && Windows_Win32_System_Com == "on"]
 @CallingConv[CDECL]
 foreign {
     // param-hint: pInitDat bytes=param[3] optional
@@ -3638,15 +3642,39 @@ foreign {
     func CreateFX(clsid: CPointer<GUID>, pEffect: CPointer<CPointer<Unit>>, pInitDat: CPointer<Unit>, InitDataByteSize: UInt32): Int32
 }
 
-@When[XAUDIO2_8 == "on"]
+@When[Windows_Win32_Media_Audio_XAudio2 == "on" && XAUDIO2_8 == "on" && Windows_Win32_Media_Audio_XAudio2_CreateFX == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CreateFX(clsid: CPointer<GUID>, pEffect: CPointer<CPointer<Unit>>, pInitDat: CPointer<Unit>, InitDataByteSize: UInt32): Int32 {
+    return CreateFX(clsid, pEffect, pInitDat, InitDataByteSize)
+}
+
+@When[Windows_Win32_Media_Audio_XAudio2 == "on" && XAUDIO2_8 == "on" && Windows_Win32_Media_Audio_XAudio2_CreateAudioReverb == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func CreateAudioReverb(ppApo: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_Audio_XAudio2 == "on" && XAUDIO2_8 == "on" && Windows_Win32_Media_Audio_XAudio2_CreateAudioReverb == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CreateAudioReverb(ppApo: CPointer<CPointer<Unit>>): Int32 {
+    return CreateAudioReverb(ppApo)
+}
+
+@When[Windows_Win32_Media_Audio_XAudio2 == "on" && XAUDIO2_8 == "on" && Windows_Win32_Media_Audio_XAudio2_CreateAudioVolumeMeter == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func CreateAudioVolumeMeter(ppApo: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_Audio_XAudio2 == "on" && XAUDIO2_8 == "on" && Windows_Win32_Media_Audio_XAudio2_CreateAudioVolumeMeter == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CreateAudioVolumeMeter(ppApo: CPointer<CPointer<Unit>>): Int32 {
+    return CreateAudioVolumeMeter(ppApo)
+}
+
+@When[Windows_Win32_Media_Audio_XAudio2 == "on" && XAUDIO2_8 == "on" && Windows_Win32_Media_Audio_XAudio2_XAudio2CreateWithVersionInfo == "on"]
 foreign {
     func XAudio2CreateWithVersionInfo(ppXAudio2: CPointer<CPointer<Unit>>, Flags: UInt32, XAudio2Processor: UInt32, ntddiVersion: UInt32): Int32
 }
 
-@When[XAUDIO2_8 == "on" && Windows_Win32_System_Com == "on"]
-foreign {
-    func CreateAudioReverb(ppApo: CPointer<CPointer<Unit>>): Int32
-    func CreateAudioVolumeMeter(ppApo: CPointer<CPointer<Unit>>): Int32
+@When[Windows_Win32_Media_Audio_XAudio2 == "on" && XAUDIO2_8 == "on" && Windows_Win32_Media_Audio_XAudio2_XAudio2CreateWithVersionInfo == "on"]
+public unsafe func Windows_XAudio2CreateWithVersionInfo(ppXAudio2: CPointer<CPointer<Unit>>, Flags: UInt32, XAudio2Processor: UInt32, ntddiVersion: UInt32): Int32 {
+    return XAudio2CreateWithVersionInfo(ppXAudio2, Flags, XAudio2Processor, ntddiVersion)
 }
 
 @When[Windows_Win32_Media_Audio_XAudio2 == "on"]

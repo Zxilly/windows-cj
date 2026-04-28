@@ -191,6 +191,7 @@ public struct IGestureRecognizerVtbl {
     public var MouseWheelParameters: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CanBeDoubleTap: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => 0 }
     public var ProcessDownEvent: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ProcessMoveEvents: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var ProcessUpEvent: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var ProcessMouseWheelEvent: CFunc<(CPointer<Unit>, CPointer<Unit>, Bool, Bool) -> Int32> = { _, _, _, _ => 0 }
@@ -467,6 +468,7 @@ public class IGestureRecognizer <: InterfaceWrapperBase & ComInterface {
         return __vt.ProcessDownEvent(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ProcessMoveEvents(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -848,6 +850,7 @@ public struct IPhysicalGestureRecognizerVtbl {
     public var TranslationMaxContactCount: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var SetTranslationMaxContactCount: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     public var ProcessDownEvent: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ProcessMoveEvents: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var ProcessUpEvent: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var CompleteGesture: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -1024,6 +1027,7 @@ public class IPhysicalGestureRecognizer <: InterfaceWrapperBase & ComInterface {
         return __vt.ProcessDownEvent(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ProcessMoveEvents(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1214,8 +1218,10 @@ public class IPointerPoint <: InterfaceWrapperBase & ComInterface {
 public struct IPointerPointStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var GetCurrentPoint: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetIntermediatePoints: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetCurrentPointTransformed: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetIntermediatePointsTransformed: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -1266,6 +1272,7 @@ public class IPointerPointStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.GetCurrentPoint(__liveRaw, pointerId, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetIntermediatePoints(pointerId: UInt32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1278,6 +1285,7 @@ public class IPointerPointStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.GetCurrentPointTransformed(__liveRaw, pointerId, transform, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetIntermediatePointsTransformed(pointerId: UInt32, transform: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1591,6 +1599,7 @@ public class IRadialControllerControlAcquiredEventArgs <: InterfaceWrapperBase &
 @C
 public struct IRadialControllerMenuVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Items: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IsEnabled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var SetIsEnabled: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
@@ -1640,6 +1649,7 @@ public class IRadialControllerMenu <: InterfaceWrapperBase & ComInterface {
         readVtbl<IRadialControllerMenuVtbl>(IRadialControllerMenuVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

@@ -770,11 +770,14 @@ public struct ITileUpdaterVtbl {
     public var Setting: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var AddToSchedule: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var RemoveFromSchedule: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetScheduledTileNotifications: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var StartPeriodicUpdate: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32) -> Int32> = { _, _, _ => 0 }
     public var StartPeriodicUpdateAtTime: CFunc<(CPointer<Unit>, CPointer<Unit>, Foundation__impl_l0.DateTime, Int32) -> Int32> = { _, _, _, _ => 0 }
     public var StopPeriodicUpdate: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var StartPeriodicUpdateBatch: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var StartPeriodicUpdateBatchAtTime: CFunc<(CPointer<Unit>, CPointer<Unit>, Foundation__impl_l0.DateTime, Int32) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -855,6 +858,7 @@ public class ITileUpdater <: InterfaceWrapperBase & ComInterface {
         return __vt.RemoveFromSchedule(__liveRaw, scheduledTile)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetScheduledTileNotifications(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -879,12 +883,14 @@ public class ITileUpdater <: InterfaceWrapperBase & ComInterface {
         return __vt.StopPeriodicUpdate(__liveRaw)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StartPeriodicUpdateBatch(tileContents: CPointer<Unit>, requestedInterval: Int32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.StartPeriodicUpdateBatch(__liveRaw, tileContents, requestedInterval)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StartPeriodicUpdateBatchAtTime(tileContents: CPointer<Unit>, startTime: Foundation__impl_l0.DateTime, requestedInterval: Int32): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1369,6 +1375,7 @@ public struct IToastNotifierVtbl {
     public var Setting: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var AddToSchedule: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var RemoveFromSchedule: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetScheduledToastNotifications: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1443,6 +1450,7 @@ public class IToastNotifier <: InterfaceWrapperBase & ComInterface {
         return __vt.RemoveFromSchedule(__liveRaw, scheduledToast)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetScheduledToastNotifications(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

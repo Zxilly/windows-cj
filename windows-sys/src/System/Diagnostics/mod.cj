@@ -7,4 +7,3 @@ public import windows_sys._impl_l0.{DiagnosticActionState, DiagnosticActionState
 public import windows_sys._impl_l1.{IDiagnosticInvoker, IDiagnosticInvoker2, IDiagnosticInvoker2Vtbl, IDiagnosticInvokerStatics, IDiagnosticInvokerStaticsVtbl, IDiagnosticInvokerVtbl, IProcessCpuUsage, IProcessCpuUsageVtbl, IProcessDiskUsage, IProcessDiskUsageVtbl, IProcessMemoryUsage, IProcessMemoryUsageVtbl, ISystemCpuUsage, ISystemCpuUsageVtbl, ISystemDiagnosticInfo, ISystemDiagnosticInfoStatics, ISystemDiagnosticInfoStaticsVtbl, ISystemDiagnosticInfoVtbl, ISystemMemoryUsage, ISystemMemoryUsageVtbl}
 @When[Windows_System_Diagnostics == "on"]
 public import windows_sys._impl_l2.{IProcessDiagnosticInfo, IProcessDiagnosticInfo2, IProcessDiagnosticInfo2Vtbl, IProcessDiagnosticInfoStatics, IProcessDiagnosticInfoStatics2, IProcessDiagnosticInfoStatics2Vtbl, IProcessDiagnosticInfoStaticsVtbl, IProcessDiagnosticInfoVtbl}
-

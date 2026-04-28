@@ -335,6 +335,7 @@ public class II2cControllerProvider <: InterfaceWrapperBase & ComInterface {
 @C
 public struct II2cProviderVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetControllersAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -379,6 +380,7 @@ public class II2cProvider <: InterfaceWrapperBase & ComInterface {
         readVtbl<II2cProviderVtbl>(II2cProviderVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetControllersAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

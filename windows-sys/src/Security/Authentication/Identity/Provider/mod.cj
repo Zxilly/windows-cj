@@ -1160,6 +1160,7 @@ public struct ISecondaryAuthenticationFactorRegistrationStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     @When[Windows_Storage_Streams == "on"]
     public var RequestStartRegisteringDeviceAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllRegisteredDeviceInfoAsync: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var UnregisterDeviceAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Storage_Streams == "on"]
@@ -1214,6 +1215,7 @@ public class ISecondaryAuthenticationFactorRegistrationStatics <: InterfaceWrapp
         return __vt.RequestStartRegisteringDeviceAsync(__liveRaw, deviceId, capabilities, deviceFriendlyName, deviceModelNumber, deviceKey, mutualAuthenticationKey, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllRegisteredDeviceInfoAsync(queryType: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

@@ -5,11 +5,8 @@ import windows_interface.{GUID}
 import windows_interface as windows_interface
 import windows_polyfill.{unionReadInt32, unionReadUInt32, unionReadUInt64, unionWriteInt32, unionWriteUInt32, unionWriteUInt64}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Security == "on"]
 import windows_sys.Win32.Security as Win32_Security
-@When[Windows_Win32_System_IO == "on"]
 import windows_sys.Win32.System.IO as Win32_System_IO
 
 
@@ -3037,65 +3034,314 @@ public struct STORAGE_DEPENDENCY_INFO__Anonymous_e__Union {
     public init() {}
 }
 
-@When[VIRTDISK == "on"]
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_AddVirtualDiskParent == "on"]
 foreign {
     func AddVirtualDiskParent(VirtualDiskHandle: CPointer<Unit>, ParentPath: CPointer<UInt16>): UInt32
-    func ApplySnapshotVhdSet(VirtualDiskHandle: CPointer<Unit>, Parameters: CPointer<APPLY_SNAPSHOT_VHDSET_PARAMETERS>, Flags: Int32): UInt32
-    func BreakMirrorVirtualDisk(VirtualDiskHandle: CPointer<Unit>): UInt32
-    func CompleteForkVirtualDisk(VirtualDiskHandle: CPointer<Unit>): UInt32
-    func DeleteSnapshotVhdSet(VirtualDiskHandle: CPointer<Unit>, Parameters: CPointer<DELETE_SNAPSHOT_VHDSET_PARAMETERS>, Flags: Int32): UInt32
-    func DeleteVirtualDiskMetadata(VirtualDiskHandle: CPointer<Unit>, Item: CPointer<GUID>): UInt32
-    func DetachVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Flags: Int32, ProviderSpecificFlags: UInt32): UInt32
-    // param-hint: Items len=param[1]
-    func EnumerateVirtualDiskMetadata(VirtualDiskHandle: CPointer<Unit>, NumberOfItems: CPointer<UInt32>, Items: CPointer<GUID>): UInt32
-    // param-hint: PathsBuffer bytes=param[0]
-    func GetAllAttachedVirtualDiskPhysicalPaths(PathsBufferSizeInBytes: CPointer<UInt32>, PathsBuffer: CPointer<UInt16>): UInt32
-    // param-hint: SizeUsed optional
-    func GetStorageDependencyInformation(ObjectHandle: CPointer<Unit>, Flags: Int32, StorageDependencyInfoSize: UInt32, StorageDependencyInfo: CPointer<STORAGE_DEPENDENCY_INFO>, SizeUsed: CPointer<UInt32>): UInt32
-    // param-hint: VirtualDiskInfo bytes=param[1]
-    // param-hint: SizeUsed optional
-    func GetVirtualDiskInformation(VirtualDiskHandle: CPointer<Unit>, VirtualDiskInfoSize: CPointer<UInt32>, VirtualDiskInfo: CPointer<GET_VIRTUAL_DISK_INFO>, SizeUsed: CPointer<UInt32>): UInt32
-    // param-hint: MetaData bytes=param[2]
-    func GetVirtualDiskMetadata(VirtualDiskHandle: CPointer<Unit>, Item: CPointer<GUID>, MetaDataSize: CPointer<UInt32>, MetaData: CPointer<Unit>): UInt32
-    // param-hint: DiskPath bytes=param[1]
-    func GetVirtualDiskPhysicalPath(VirtualDiskHandle: CPointer<Unit>, DiskPathSizeInBytes: CPointer<UInt32>, DiskPath: CPointer<UInt16>): UInt32
-    func ModifyVhdSet(VirtualDiskHandle: CPointer<Unit>, Parameters: CPointer<MODIFY_VHDSET_PARAMETERS>, Flags: Int32): UInt32
-    // param-hint: Parameters optional
-    func OpenVirtualDisk(VirtualStorageType: CPointer<VIRTUAL_STORAGE_TYPE>, Path: CPointer<UInt16>, VirtualDiskAccessMask: Int32, Flags: Int32, Parameters: CPointer<OPEN_VIRTUAL_DISK_PARAMETERS>, Handle: CPointer<CPointer<Unit>>): UInt32
-    // param-hint: Ranges len=param[6]
-    func QueryChangesVirtualDisk(VirtualDiskHandle: CPointer<Unit>, ChangeTrackingId: CPointer<UInt16>, ByteOffset: UInt64, ByteLength: UInt64, Flags: Int32, Ranges: CPointer<QUERY_CHANGES_VIRTUAL_DISK_RANGE>, RangeCount: CPointer<UInt32>, ProcessedLength: CPointer<UInt64>): UInt32
-    func RawSCSIVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Parameters: CPointer<RAW_SCSI_VIRTUAL_DISK_PARAMETERS>, Flags: Int32, Response: CPointer<RAW_SCSI_VIRTUAL_DISK_RESPONSE>): UInt32
-    func SetVirtualDiskInformation(VirtualDiskHandle: CPointer<Unit>, VirtualDiskInfo: CPointer<SET_VIRTUAL_DISK_INFO>): UInt32
-    // param-hint: MetaData bytes=param[2]
-    func SetVirtualDiskMetadata(VirtualDiskHandle: CPointer<Unit>, Item: CPointer<GUID>, MetaDataSize: UInt32, MetaData: CPointer<Unit>): UInt32
-    func TakeSnapshotVhdSet(VirtualDiskHandle: CPointer<Unit>, Parameters: CPointer<TAKE_SNAPSHOT_VHDSET_PARAMETERS>, Flags: Int32): UInt32
 }
 
-@When[VIRTDISK == "on" && (Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on")]
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_AddVirtualDiskParent == "on"]
+public unsafe func Windows_AddVirtualDiskParent(VirtualDiskHandle: CPointer<Unit>, ParentPath: CPointer<UInt16>): UInt32 {
+    return AddVirtualDiskParent(VirtualDiskHandle, ParentPath)
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_ApplySnapshotVhdSet == "on"]
+foreign {
+    func ApplySnapshotVhdSet(VirtualDiskHandle: CPointer<Unit>, Parameters: CPointer<APPLY_SNAPSHOT_VHDSET_PARAMETERS>, Flags: Int32): UInt32
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_ApplySnapshotVhdSet == "on"]
+public unsafe func Windows_ApplySnapshotVhdSet(VirtualDiskHandle: CPointer<Unit>, Parameters: CPointer<APPLY_SNAPSHOT_VHDSET_PARAMETERS>, Flags: Int32): UInt32 {
+    return ApplySnapshotVhdSet(VirtualDiskHandle, Parameters, Flags)
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_AttachVirtualDisk == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on"]
 foreign {
     // param-hint: SecurityDescriptor optional
     // param-hint: Parameters optional
     // param-hint: Overlapped optional
     func AttachVirtualDisk(VirtualDiskHandle: CPointer<Unit>, SecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, Flags: Int32, ProviderSpecificFlags: UInt32, Parameters: CPointer<ATTACH_VIRTUAL_DISK_PARAMETERS>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_AttachVirtualDisk == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_AttachVirtualDisk(VirtualDiskHandle: CPointer<Unit>, SecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, Flags: Int32, ProviderSpecificFlags: UInt32, Parameters: CPointer<ATTACH_VIRTUAL_DISK_PARAMETERS>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32 {
+    return AttachVirtualDisk(VirtualDiskHandle, SecurityDescriptor, Flags, ProviderSpecificFlags, Parameters, Overlapped)
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_BreakMirrorVirtualDisk == "on"]
+foreign {
+    func BreakMirrorVirtualDisk(VirtualDiskHandle: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_BreakMirrorVirtualDisk == "on"]
+public unsafe func Windows_BreakMirrorVirtualDisk(VirtualDiskHandle: CPointer<Unit>): UInt32 {
+    return BreakMirrorVirtualDisk(VirtualDiskHandle)
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_CompactVirtualDisk == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    // param-hint: Parameters optional
+    // param-hint: Overlapped optional
+    func CompactVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Flags: Int32, Parameters: CPointer<COMPACT_VIRTUAL_DISK_PARAMETERS>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_CompactVirtualDisk == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_CompactVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Flags: Int32, Parameters: CPointer<COMPACT_VIRTUAL_DISK_PARAMETERS>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32 {
+    return CompactVirtualDisk(VirtualDiskHandle, Flags, Parameters, Overlapped)
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_CompleteForkVirtualDisk == "on"]
+foreign {
+    func CompleteForkVirtualDisk(VirtualDiskHandle: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_CompleteForkVirtualDisk == "on"]
+public unsafe func Windows_CompleteForkVirtualDisk(VirtualDiskHandle: CPointer<Unit>): UInt32 {
+    return CompleteForkVirtualDisk(VirtualDiskHandle)
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_CreateVirtualDisk == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: SecurityDescriptor optional
     // param-hint: Overlapped optional
     func CreateVirtualDisk(VirtualStorageType: CPointer<VIRTUAL_STORAGE_TYPE>, Path: CPointer<UInt16>, VirtualDiskAccessMask: Int32, SecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, Flags: Int32, ProviderSpecificFlags: UInt32, Parameters: CPointer<CREATE_VIRTUAL_DISK_PARAMETERS>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>, Handle: CPointer<CPointer<Unit>>): UInt32
 }
 
-@When[VIRTDISK == "on" && Windows_Win32_System_IO == "on"]
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_CreateVirtualDisk == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_CreateVirtualDisk(VirtualStorageType: CPointer<VIRTUAL_STORAGE_TYPE>, Path: CPointer<UInt16>, VirtualDiskAccessMask: Int32, SecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, Flags: Int32, ProviderSpecificFlags: UInt32, Parameters: CPointer<CREATE_VIRTUAL_DISK_PARAMETERS>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>, Handle: CPointer<CPointer<Unit>>): UInt32 {
+    return CreateVirtualDisk(VirtualStorageType, Path, VirtualDiskAccessMask, SecurityDescriptor, Flags, ProviderSpecificFlags, Parameters, Overlapped, Handle)
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_DeleteSnapshotVhdSet == "on"]
 foreign {
-    // param-hint: Parameters optional
-    // param-hint: Overlapped optional
-    func CompactVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Flags: Int32, Parameters: CPointer<COMPACT_VIRTUAL_DISK_PARAMETERS>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+    func DeleteSnapshotVhdSet(VirtualDiskHandle: CPointer<Unit>, Parameters: CPointer<DELETE_SNAPSHOT_VHDSET_PARAMETERS>, Flags: Int32): UInt32
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_DeleteSnapshotVhdSet == "on"]
+public unsafe func Windows_DeleteSnapshotVhdSet(VirtualDiskHandle: CPointer<Unit>, Parameters: CPointer<DELETE_SNAPSHOT_VHDSET_PARAMETERS>, Flags: Int32): UInt32 {
+    return DeleteSnapshotVhdSet(VirtualDiskHandle, Parameters, Flags)
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_DeleteVirtualDiskMetadata == "on"]
+foreign {
+    func DeleteVirtualDiskMetadata(VirtualDiskHandle: CPointer<Unit>, Item: CPointer<GUID>): UInt32
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_DeleteVirtualDiskMetadata == "on"]
+public unsafe func Windows_DeleteVirtualDiskMetadata(VirtualDiskHandle: CPointer<Unit>, Item: CPointer<GUID>): UInt32 {
+    return DeleteVirtualDiskMetadata(VirtualDiskHandle, Item)
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_DetachVirtualDisk == "on"]
+foreign {
+    func DetachVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Flags: Int32, ProviderSpecificFlags: UInt32): UInt32
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_DetachVirtualDisk == "on"]
+public unsafe func Windows_DetachVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Flags: Int32, ProviderSpecificFlags: UInt32): UInt32 {
+    return DetachVirtualDisk(VirtualDiskHandle, Flags, ProviderSpecificFlags)
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_EnumerateVirtualDiskMetadata == "on"]
+foreign {
+    // param-hint: Items len=param[1]
+    func EnumerateVirtualDiskMetadata(VirtualDiskHandle: CPointer<Unit>, NumberOfItems: CPointer<UInt32>, Items: CPointer<GUID>): UInt32
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_EnumerateVirtualDiskMetadata == "on"]
+public unsafe func Windows_EnumerateVirtualDiskMetadata(VirtualDiskHandle: CPointer<Unit>, NumberOfItems: CPointer<UInt32>, Items: CPointer<GUID>): UInt32 {
+    return EnumerateVirtualDiskMetadata(VirtualDiskHandle, NumberOfItems, Items)
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_ExpandVirtualDisk == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: Overlapped optional
     func ExpandVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Flags: Int32, Parameters: CPointer<EXPAND_VIRTUAL_DISK_PARAMETERS>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_ExpandVirtualDisk == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_ExpandVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Flags: Int32, Parameters: CPointer<EXPAND_VIRTUAL_DISK_PARAMETERS>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32 {
+    return ExpandVirtualDisk(VirtualDiskHandle, Flags, Parameters, Overlapped)
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_ForkVirtualDisk == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     func ForkVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Flags: Int32, Parameters: CPointer<FORK_VIRTUAL_DISK_PARAMETERS>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_ForkVirtualDisk == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_ForkVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Flags: Int32, Parameters: CPointer<FORK_VIRTUAL_DISK_PARAMETERS>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32 {
+    return ForkVirtualDisk(VirtualDiskHandle, Flags, Parameters, Overlapped)
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_GetAllAttachedVirtualDiskPhysicalPaths == "on"]
+foreign {
+    // param-hint: PathsBuffer bytes=param[0]
+    func GetAllAttachedVirtualDiskPhysicalPaths(PathsBufferSizeInBytes: CPointer<UInt32>, PathsBuffer: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_GetAllAttachedVirtualDiskPhysicalPaths == "on"]
+public unsafe func Windows_GetAllAttachedVirtualDiskPhysicalPaths(PathsBufferSizeInBytes: CPointer<UInt32>, PathsBuffer: CPointer<UInt16>): UInt32 {
+    return GetAllAttachedVirtualDiskPhysicalPaths(PathsBufferSizeInBytes, PathsBuffer)
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_GetStorageDependencyInformation == "on"]
+foreign {
+    // param-hint: SizeUsed optional
+    func GetStorageDependencyInformation(ObjectHandle: CPointer<Unit>, Flags: Int32, StorageDependencyInfoSize: UInt32, StorageDependencyInfo: CPointer<STORAGE_DEPENDENCY_INFO>, SizeUsed: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_GetStorageDependencyInformation == "on"]
+public unsafe func Windows_GetStorageDependencyInformation(ObjectHandle: CPointer<Unit>, Flags: Int32, StorageDependencyInfoSize: UInt32, StorageDependencyInfo: CPointer<STORAGE_DEPENDENCY_INFO>, SizeUsed: CPointer<UInt32>): UInt32 {
+    return GetStorageDependencyInformation(ObjectHandle, Flags, StorageDependencyInfoSize, StorageDependencyInfo, SizeUsed)
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_GetVirtualDiskInformation == "on"]
+foreign {
+    // param-hint: VirtualDiskInfo bytes=param[1]
+    // param-hint: SizeUsed optional
+    func GetVirtualDiskInformation(VirtualDiskHandle: CPointer<Unit>, VirtualDiskInfoSize: CPointer<UInt32>, VirtualDiskInfo: CPointer<GET_VIRTUAL_DISK_INFO>, SizeUsed: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_GetVirtualDiskInformation == "on"]
+public unsafe func Windows_GetVirtualDiskInformation(VirtualDiskHandle: CPointer<Unit>, VirtualDiskInfoSize: CPointer<UInt32>, VirtualDiskInfo: CPointer<GET_VIRTUAL_DISK_INFO>, SizeUsed: CPointer<UInt32>): UInt32 {
+    return GetVirtualDiskInformation(VirtualDiskHandle, VirtualDiskInfoSize, VirtualDiskInfo, SizeUsed)
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_GetVirtualDiskMetadata == "on"]
+foreign {
+    // param-hint: MetaData bytes=param[2]
+    func GetVirtualDiskMetadata(VirtualDiskHandle: CPointer<Unit>, Item: CPointer<GUID>, MetaDataSize: CPointer<UInt32>, MetaData: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_GetVirtualDiskMetadata == "on"]
+public unsafe func Windows_GetVirtualDiskMetadata(VirtualDiskHandle: CPointer<Unit>, Item: CPointer<GUID>, MetaDataSize: CPointer<UInt32>, MetaData: CPointer<Unit>): UInt32 {
+    return GetVirtualDiskMetadata(VirtualDiskHandle, Item, MetaDataSize, MetaData)
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_GetVirtualDiskOperationProgress == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     func GetVirtualDiskOperationProgress(VirtualDiskHandle: CPointer<Unit>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>, Progress: CPointer<VIRTUAL_DISK_PROGRESS>): UInt32
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_GetVirtualDiskOperationProgress == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_GetVirtualDiskOperationProgress(VirtualDiskHandle: CPointer<Unit>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>, Progress: CPointer<VIRTUAL_DISK_PROGRESS>): UInt32 {
+    return GetVirtualDiskOperationProgress(VirtualDiskHandle, Overlapped, Progress)
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_GetVirtualDiskPhysicalPath == "on"]
+foreign {
+    // param-hint: DiskPath bytes=param[1]
+    func GetVirtualDiskPhysicalPath(VirtualDiskHandle: CPointer<Unit>, DiskPathSizeInBytes: CPointer<UInt32>, DiskPath: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_GetVirtualDiskPhysicalPath == "on"]
+public unsafe func Windows_GetVirtualDiskPhysicalPath(VirtualDiskHandle: CPointer<Unit>, DiskPathSizeInBytes: CPointer<UInt32>, DiskPath: CPointer<UInt16>): UInt32 {
+    return GetVirtualDiskPhysicalPath(VirtualDiskHandle, DiskPathSizeInBytes, DiskPath)
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_MergeVirtualDisk == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: Overlapped optional
     func MergeVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Flags: Int32, Parameters: CPointer<MERGE_VIRTUAL_DISK_PARAMETERS>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_MergeVirtualDisk == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_MergeVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Flags: Int32, Parameters: CPointer<MERGE_VIRTUAL_DISK_PARAMETERS>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32 {
+    return MergeVirtualDisk(VirtualDiskHandle, Flags, Parameters, Overlapped)
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_MirrorVirtualDisk == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     func MirrorVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Flags: Int32, Parameters: CPointer<MIRROR_VIRTUAL_DISK_PARAMETERS>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_MirrorVirtualDisk == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_MirrorVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Flags: Int32, Parameters: CPointer<MIRROR_VIRTUAL_DISK_PARAMETERS>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32 {
+    return MirrorVirtualDisk(VirtualDiskHandle, Flags, Parameters, Overlapped)
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_ModifyVhdSet == "on"]
+foreign {
+    func ModifyVhdSet(VirtualDiskHandle: CPointer<Unit>, Parameters: CPointer<MODIFY_VHDSET_PARAMETERS>, Flags: Int32): UInt32
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_ModifyVhdSet == "on"]
+public unsafe func Windows_ModifyVhdSet(VirtualDiskHandle: CPointer<Unit>, Parameters: CPointer<MODIFY_VHDSET_PARAMETERS>, Flags: Int32): UInt32 {
+    return ModifyVhdSet(VirtualDiskHandle, Parameters, Flags)
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_OpenVirtualDisk == "on"]
+foreign {
+    // param-hint: Parameters optional
+    func OpenVirtualDisk(VirtualStorageType: CPointer<VIRTUAL_STORAGE_TYPE>, Path: CPointer<UInt16>, VirtualDiskAccessMask: Int32, Flags: Int32, Parameters: CPointer<OPEN_VIRTUAL_DISK_PARAMETERS>, Handle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_OpenVirtualDisk == "on"]
+public unsafe func Windows_OpenVirtualDisk(VirtualStorageType: CPointer<VIRTUAL_STORAGE_TYPE>, Path: CPointer<UInt16>, VirtualDiskAccessMask: Int32, Flags: Int32, Parameters: CPointer<OPEN_VIRTUAL_DISK_PARAMETERS>, Handle: CPointer<CPointer<Unit>>): UInt32 {
+    return OpenVirtualDisk(VirtualStorageType, Path, VirtualDiskAccessMask, Flags, Parameters, Handle)
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_QueryChangesVirtualDisk == "on"]
+foreign {
+    // param-hint: Ranges len=param[6]
+    func QueryChangesVirtualDisk(VirtualDiskHandle: CPointer<Unit>, ChangeTrackingId: CPointer<UInt16>, ByteOffset: UInt64, ByteLength: UInt64, Flags: Int32, Ranges: CPointer<QUERY_CHANGES_VIRTUAL_DISK_RANGE>, RangeCount: CPointer<UInt32>, ProcessedLength: CPointer<UInt64>): UInt32
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_QueryChangesVirtualDisk == "on"]
+public unsafe func Windows_QueryChangesVirtualDisk(VirtualDiskHandle: CPointer<Unit>, ChangeTrackingId: CPointer<UInt16>, ByteOffset: UInt64, ByteLength: UInt64, Flags: Int32, Ranges: CPointer<QUERY_CHANGES_VIRTUAL_DISK_RANGE>, RangeCount: CPointer<UInt32>, ProcessedLength: CPointer<UInt64>): UInt32 {
+    return QueryChangesVirtualDisk(VirtualDiskHandle, ChangeTrackingId, ByteOffset, ByteLength, Flags, Ranges, RangeCount, ProcessedLength)
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_RawSCSIVirtualDisk == "on"]
+foreign {
+    func RawSCSIVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Parameters: CPointer<RAW_SCSI_VIRTUAL_DISK_PARAMETERS>, Flags: Int32, Response: CPointer<RAW_SCSI_VIRTUAL_DISK_RESPONSE>): UInt32
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_RawSCSIVirtualDisk == "on"]
+public unsafe func Windows_RawSCSIVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Parameters: CPointer<RAW_SCSI_VIRTUAL_DISK_PARAMETERS>, Flags: Int32, Response: CPointer<RAW_SCSI_VIRTUAL_DISK_RESPONSE>): UInt32 {
+    return RawSCSIVirtualDisk(VirtualDiskHandle, Parameters, Flags, Response)
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_ResizeVirtualDisk == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: Overlapped optional
     func ResizeVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Flags: Int32, Parameters: CPointer<RESIZE_VIRTUAL_DISK_PARAMETERS>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_ResizeVirtualDisk == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_ResizeVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Flags: Int32, Parameters: CPointer<RESIZE_VIRTUAL_DISK_PARAMETERS>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32 {
+    return ResizeVirtualDisk(VirtualDiskHandle, Flags, Parameters, Overlapped)
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_SetVirtualDiskInformation == "on"]
+foreign {
+    func SetVirtualDiskInformation(VirtualDiskHandle: CPointer<Unit>, VirtualDiskInfo: CPointer<SET_VIRTUAL_DISK_INFO>): UInt32
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_SetVirtualDiskInformation == "on"]
+public unsafe func Windows_SetVirtualDiskInformation(VirtualDiskHandle: CPointer<Unit>, VirtualDiskInfo: CPointer<SET_VIRTUAL_DISK_INFO>): UInt32 {
+    return SetVirtualDiskInformation(VirtualDiskHandle, VirtualDiskInfo)
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_SetVirtualDiskMetadata == "on"]
+foreign {
+    // param-hint: MetaData bytes=param[2]
+    func SetVirtualDiskMetadata(VirtualDiskHandle: CPointer<Unit>, Item: CPointer<GUID>, MetaDataSize: UInt32, MetaData: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_SetVirtualDiskMetadata == "on"]
+public unsafe func Windows_SetVirtualDiskMetadata(VirtualDiskHandle: CPointer<Unit>, Item: CPointer<GUID>, MetaDataSize: UInt32, MetaData: CPointer<Unit>): UInt32 {
+    return SetVirtualDiskMetadata(VirtualDiskHandle, Item, MetaDataSize, MetaData)
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_TakeSnapshotVhdSet == "on"]
+foreign {
+    func TakeSnapshotVhdSet(VirtualDiskHandle: CPointer<Unit>, Parameters: CPointer<TAKE_SNAPSHOT_VHDSET_PARAMETERS>, Flags: Int32): UInt32
+}
+
+@When[Windows_Win32_Storage_Vhd == "on" && VIRTDISK == "on" && Windows_Win32_Storage_Vhd_TakeSnapshotVhdSet == "on"]
+public unsafe func Windows_TakeSnapshotVhdSet(VirtualDiskHandle: CPointer<Unit>, Parameters: CPointer<TAKE_SNAPSHOT_VHDSET_PARAMETERS>, Flags: Int32): UInt32 {
+    return TakeSnapshotVhdSet(VirtualDiskHandle, Parameters, Flags)
 }
 
 @When[Windows_Win32_Storage_Vhd == "on"]

@@ -25,6 +25,7 @@ public struct IEmailFolderVtbl {
     public var Kind: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var CreateFolderAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var DeleteAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindChildFoldersAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetConversationReader: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetConversationReaderWithOptions: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -163,6 +164,7 @@ public class IEmailFolder <: InterfaceWrapperBase & ComInterface {
         return __vt.DeleteAsync(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindChildFoldersAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -243,6 +245,7 @@ public struct IEmailMailboxVtbl {
     public var IsDataEncryptedUnderLock: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var MailAddress: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetMailAddress: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var MailAddressAliases: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var OtherAppReadAccess: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetOtherAppReadAccess: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -277,6 +280,7 @@ public struct IEmailMailboxVtbl {
     public var DownloadAttachmentAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var CreateResponseMessageAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, CPointer<Unit>, Int32, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     public var TryUpdateMeetingResponseAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, CPointer<Unit>, CPointer<Unit>, Bool, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var TryForwardMeetingAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Int32, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
     public var TryProposeNewTimeForMeetingAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, Foundation__impl_l0.DateTime, Foundation__impl_l0.TimeSpan, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     public var MailboxChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
@@ -381,6 +385,7 @@ public class IEmailMailbox <: InterfaceWrapperBase & ComInterface {
         return __vt.SetMailAddress(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MailAddressAliases(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -585,6 +590,7 @@ public class IEmailMailbox <: InterfaceWrapperBase & ComInterface {
         return __vt.TryUpdateMeetingResponseAsync(__liveRaw, meeting, response, subject, comment, sendUpdate, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TryForwardMeetingAsync(meeting: CPointer<Unit>, recipients: CPointer<Unit>, subject: CPointer<Unit>, forwardHeaderType: Int32, forwardHeader: CPointer<Unit>, comment: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -701,8 +707,9 @@ public class IEmailMailbox2 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IEmailMailbox3Vtbl {
     public var base_: IEmailMailbox2Vtbl = IEmailMailbox2Vtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ResolveRecipientsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public var ValidateCertificatesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var TryEmptyFolderAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var TryCreateFolderAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
@@ -750,13 +757,14 @@ public class IEmailMailbox3 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IEmailMailbox3Vtbl>(IEmailMailbox3Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ResolveRecipientsAsync(recipients: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ResolveRecipientsAsync(__liveRaw, recipients, result__)
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func ValidateCertificatesAsync(certificates: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -842,6 +850,7 @@ public class IEmailMailbox5 <: InterfaceWrapperBase & ComInterface {
 public struct IEmailMailboxChangeVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var ChangeType: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var MailboxActions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Message: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Folder: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -894,6 +903,7 @@ public class IEmailMailboxChange <: InterfaceWrapperBase & ComInterface {
         return __vt.ChangeType(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MailboxActions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -919,6 +929,7 @@ public struct IEmailMailboxChangeReaderVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var AcceptChanges: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var AcceptChangesThrough: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ReadBatchAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -975,6 +986,7 @@ public class IEmailMailboxChangeReader <: InterfaceWrapperBase & ComInterface {
         return __vt.AcceptChangesThrough(__liveRaw, lastChangeToAcknowledge)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReadBatchAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1308,7 +1320,7 @@ public class IEmailManagerStatics3 <: InterfaceWrapperBase & ComInterface {
 public struct IEmailRecipientResolutionResultVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Status: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public var PublicKeys: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1359,7 +1371,7 @@ public class IEmailRecipientResolutionResult <: InterfaceWrapperBase & ComInterf
         return __vt.Status(__liveRaw, result__)
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func PublicKeys(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1372,7 +1384,7 @@ public class IEmailRecipientResolutionResult <: InterfaceWrapperBase & ComInterf
 public struct IEmailRecipientResolutionResult2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var SetStatus: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public var SetPublicKeys: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1423,7 +1435,7 @@ public class IEmailRecipientResolutionResult2 <: InterfaceWrapperBase & ComInter
         return __vt.SetStatus(__liveRaw, value)
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func SetPublicKeys(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1435,6 +1447,7 @@ public class IEmailRecipientResolutionResult2 <: InterfaceWrapperBase & ComInter
 @C
 public struct IEmailStoreVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var FindMailboxesAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetConversationReader: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetConversationReaderWithOptions: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -1489,6 +1502,7 @@ public class IEmailStore <: InterfaceWrapperBase & ComInterface {
         readVtbl<IEmailStoreVtbl>(IEmailStoreVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindMailboxesAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

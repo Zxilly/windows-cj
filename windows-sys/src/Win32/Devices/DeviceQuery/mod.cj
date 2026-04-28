@@ -3,9 +3,7 @@ package windows_sys.Win32.Devices.DeviceQuery
 
 import windows_polyfill.{unionReadInt32, unionWriteInt32}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Devices_Properties == "on"]
 import windows_sys.Win32.Devices.Properties as Win32_Devices_Properties
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 
 
@@ -408,60 +406,174 @@ public struct DEV_QUERY_RESULT_ACTION_DATA__DEV_QUERY_RESULT_UPDATE_PAYLOAD {
 @When[Windows_Win32_Devices_DeviceQuery == "on" && Windows_Win32_Devices_Properties == "on"]
 public type PDEV_QUERY_RESULT_CALLBACK = CFunc<(HDEVQUERY, CPointer<Unit>, CPointer<DEV_QUERY_RESULT_ACTION_DATA>) -> Unit>
 
-@When[API_MS_WIN_DEVICES_QUERY_L1_1_0 == "on"]
+@When[Windows_Win32_Devices_DeviceQuery == "on" && API_MS_WIN_DEVICES_QUERY_L1_1_0 == "on" && Windows_Win32_Devices_DeviceQuery_DevCloseObjectQuery == "on"]
 foreign {
     func DevCloseObjectQuery(hDevQuery: HDEVQUERY): Unit
 }
 
-@When[API_MS_WIN_DEVICES_QUERY_L1_1_0 == "on" && Windows_Win32_Devices_Properties == "on"]
+@When[Windows_Win32_Devices_DeviceQuery == "on" && API_MS_WIN_DEVICES_QUERY_L1_1_0 == "on" && Windows_Win32_Devices_DeviceQuery_DevCloseObjectQuery == "on"]
+public unsafe func Windows_DevCloseObjectQuery(hDevQuery: HDEVQUERY): Unit {
+    DevCloseObjectQuery(hDevQuery)
+}
+
+@When[Windows_Win32_Devices_DeviceQuery == "on" && API_MS_WIN_DEVICES_QUERY_L1_1_0 == "on" && Windows_Win32_Devices_DeviceQuery_DevCreateObjectQuery == "on" && Windows_Win32_Devices_Properties == "on"]
 foreign {
     // param-hint: pRequestedProperties len=param[2] optional
     // param-hint: pFilter len=param[4] optional
     // param-hint: pContext optional
     func DevCreateObjectQuery(ObjectType: Int32, QueryFlags: UInt32, cRequestedProperties: UInt32, pRequestedProperties: CPointer<Win32_Devices_Properties.DEVPROPCOMPKEY>, cFilterExpressionCount: UInt32, pFilter: CPointer<DEVPROP_FILTER_EXPRESSION>, pCallback: PDEV_QUERY_RESULT_CALLBACK, pContext: CPointer<Unit>, phDevQuery: CPointer<HDEVQUERY>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceQuery == "on" && API_MS_WIN_DEVICES_QUERY_L1_1_0 == "on" && Windows_Win32_Devices_DeviceQuery_DevCreateObjectQuery == "on" && Windows_Win32_Devices_Properties == "on"]
+public unsafe func Windows_DevCreateObjectQuery(ObjectType: Int32, QueryFlags: UInt32, cRequestedProperties: UInt32, pRequestedProperties: CPointer<Win32_Devices_Properties.DEVPROPCOMPKEY>, cFilterExpressionCount: UInt32, pFilter: CPointer<DEVPROP_FILTER_EXPRESSION>, pCallback: PDEV_QUERY_RESULT_CALLBACK, pContext: CPointer<Unit>, phDevQuery: CPointer<HDEVQUERY>): Int32 {
+    return DevCreateObjectQuery(ObjectType, QueryFlags, cRequestedProperties, pRequestedProperties, cFilterExpressionCount, pFilter, pCallback, pContext, phDevQuery)
+}
+
+@When[Windows_Win32_Devices_DeviceQuery == "on" && API_MS_WIN_DEVICES_QUERY_L1_1_0 == "on" && Windows_Win32_Devices_DeviceQuery_DevCreateObjectQueryFromId == "on" && Windows_Win32_Devices_Properties == "on"]
+foreign {
     // param-hint: pRequestedProperties len=param[3] optional
     // param-hint: pFilter len=param[5] optional
     // param-hint: pContext optional
     func DevCreateObjectQueryFromId(ObjectType: Int32, pszObjectId: CPointer<UInt16>, QueryFlags: UInt32, cRequestedProperties: UInt32, pRequestedProperties: CPointer<Win32_Devices_Properties.DEVPROPCOMPKEY>, cFilterExpressionCount: UInt32, pFilter: CPointer<DEVPROP_FILTER_EXPRESSION>, pCallback: PDEV_QUERY_RESULT_CALLBACK, pContext: CPointer<Unit>, phDevQuery: CPointer<HDEVQUERY>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceQuery == "on" && API_MS_WIN_DEVICES_QUERY_L1_1_0 == "on" && Windows_Win32_Devices_DeviceQuery_DevCreateObjectQueryFromId == "on" && Windows_Win32_Devices_Properties == "on"]
+public unsafe func Windows_DevCreateObjectQueryFromId(ObjectType: Int32, pszObjectId: CPointer<UInt16>, QueryFlags: UInt32, cRequestedProperties: UInt32, pRequestedProperties: CPointer<Win32_Devices_Properties.DEVPROPCOMPKEY>, cFilterExpressionCount: UInt32, pFilter: CPointer<DEVPROP_FILTER_EXPRESSION>, pCallback: PDEV_QUERY_RESULT_CALLBACK, pContext: CPointer<Unit>, phDevQuery: CPointer<HDEVQUERY>): Int32 {
+    return DevCreateObjectQueryFromId(ObjectType, pszObjectId, QueryFlags, cRequestedProperties, pRequestedProperties, cFilterExpressionCount, pFilter, pCallback, pContext, phDevQuery)
+}
+
+@When[Windows_Win32_Devices_DeviceQuery == "on" && API_MS_WIN_DEVICES_QUERY_L1_1_0 == "on" && Windows_Win32_Devices_DeviceQuery_DevCreateObjectQueryFromIds == "on" && Windows_Win32_Devices_Properties == "on"]
+foreign {
     // param-hint: pRequestedProperties len=param[3] optional
     // param-hint: pFilter len=param[5] optional
     // param-hint: pContext optional
     func DevCreateObjectQueryFromIds(ObjectType: Int32, pszzObjectIds: CPointer<UInt16>, QueryFlags: UInt32, cRequestedProperties: UInt32, pRequestedProperties: CPointer<Win32_Devices_Properties.DEVPROPCOMPKEY>, cFilterExpressionCount: UInt32, pFilter: CPointer<DEVPROP_FILTER_EXPRESSION>, pCallback: PDEV_QUERY_RESULT_CALLBACK, pContext: CPointer<Unit>, phDevQuery: CPointer<HDEVQUERY>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceQuery == "on" && API_MS_WIN_DEVICES_QUERY_L1_1_0 == "on" && Windows_Win32_Devices_DeviceQuery_DevCreateObjectQueryFromIds == "on" && Windows_Win32_Devices_Properties == "on"]
+public unsafe func Windows_DevCreateObjectQueryFromIds(ObjectType: Int32, pszzObjectIds: CPointer<UInt16>, QueryFlags: UInt32, cRequestedProperties: UInt32, pRequestedProperties: CPointer<Win32_Devices_Properties.DEVPROPCOMPKEY>, cFilterExpressionCount: UInt32, pFilter: CPointer<DEVPROP_FILTER_EXPRESSION>, pCallback: PDEV_QUERY_RESULT_CALLBACK, pContext: CPointer<Unit>, phDevQuery: CPointer<HDEVQUERY>): Int32 {
+    return DevCreateObjectQueryFromIds(ObjectType, pszzObjectIds, QueryFlags, cRequestedProperties, pRequestedProperties, cFilterExpressionCount, pFilter, pCallback, pContext, phDevQuery)
+}
+
+@When[Windows_Win32_Devices_DeviceQuery == "on" && API_MS_WIN_DEVICES_QUERY_L1_1_0 == "on" && Windows_Win32_Devices_DeviceQuery_DevFindProperty == "on" && Windows_Win32_Devices_Properties == "on"]
+foreign {
     // param-hint: pProperties len=param[3] optional
     func DevFindProperty(pKey: CPointer<Win32_Foundation.DEVPROPKEY>, Store: Int32, pszLocaleName: CPointer<UInt16>, cProperties: UInt32, pProperties: CPointer<Win32_Devices_Properties.DEVPROPERTY>): CPointer<Win32_Devices_Properties.DEVPROPERTY>
+}
+
+@When[Windows_Win32_Devices_DeviceQuery == "on" && API_MS_WIN_DEVICES_QUERY_L1_1_0 == "on" && Windows_Win32_Devices_DeviceQuery_DevFindProperty == "on" && Windows_Win32_Devices_Properties == "on"]
+public unsafe func Windows_DevFindProperty(pKey: CPointer<Win32_Foundation.DEVPROPKEY>, Store: Int32, pszLocaleName: CPointer<UInt16>, cProperties: UInt32, pProperties: CPointer<Win32_Devices_Properties.DEVPROPERTY>): CPointer<Win32_Devices_Properties.DEVPROPERTY> {
+    return DevFindProperty(pKey, Store, pszLocaleName, cProperties, pProperties)
+}
+
+@When[Windows_Win32_Devices_DeviceQuery == "on" && API_MS_WIN_DEVICES_QUERY_L1_1_0 == "on" && Windows_Win32_Devices_DeviceQuery_DevFreeObjectProperties == "on" && Windows_Win32_Devices_Properties == "on"]
+foreign {
     // param-hint: pProperties len=param[0]
     func DevFreeObjectProperties(cPropertyCount: UInt32, pProperties: CPointer<Win32_Devices_Properties.DEVPROPERTY>): Unit
+}
+
+@When[Windows_Win32_Devices_DeviceQuery == "on" && API_MS_WIN_DEVICES_QUERY_L1_1_0 == "on" && Windows_Win32_Devices_DeviceQuery_DevFreeObjectProperties == "on" && Windows_Win32_Devices_Properties == "on"]
+public unsafe func Windows_DevFreeObjectProperties(cPropertyCount: UInt32, pProperties: CPointer<Win32_Devices_Properties.DEVPROPERTY>): Unit {
+    DevFreeObjectProperties(cPropertyCount, pProperties)
+}
+
+@When[Windows_Win32_Devices_DeviceQuery == "on" && API_MS_WIN_DEVICES_QUERY_L1_1_0 == "on" && Windows_Win32_Devices_DeviceQuery_DevFreeObjects == "on" && Windows_Win32_Devices_Properties == "on"]
+foreign {
     // param-hint: pObjects len=param[0]
     func DevFreeObjects(cObjectCount: UInt32, pObjects: CPointer<DEV_OBJECT>): Unit
+}
+
+@When[Windows_Win32_Devices_DeviceQuery == "on" && API_MS_WIN_DEVICES_QUERY_L1_1_0 == "on" && Windows_Win32_Devices_DeviceQuery_DevFreeObjects == "on" && Windows_Win32_Devices_Properties == "on"]
+public unsafe func Windows_DevFreeObjects(cObjectCount: UInt32, pObjects: CPointer<DEV_OBJECT>): Unit {
+    DevFreeObjects(cObjectCount, pObjects)
+}
+
+@When[Windows_Win32_Devices_DeviceQuery == "on" && API_MS_WIN_DEVICES_QUERY_L1_1_0 == "on" && Windows_Win32_Devices_DeviceQuery_DevGetObjectProperties == "on" && Windows_Win32_Devices_Properties == "on"]
+foreign {
     // param-hint: pRequestedProperties len=param[3]
     func DevGetObjectProperties(ObjectType: Int32, pszObjectId: CPointer<UInt16>, QueryFlags: UInt32, cRequestedProperties: UInt32, pRequestedProperties: CPointer<Win32_Devices_Properties.DEVPROPCOMPKEY>, pcPropertyCount: CPointer<UInt32>, ppProperties: CPointer<CPointer<Win32_Devices_Properties.DEVPROPERTY>>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceQuery == "on" && API_MS_WIN_DEVICES_QUERY_L1_1_0 == "on" && Windows_Win32_Devices_DeviceQuery_DevGetObjectProperties == "on" && Windows_Win32_Devices_Properties == "on"]
+public unsafe func Windows_DevGetObjectProperties(ObjectType: Int32, pszObjectId: CPointer<UInt16>, QueryFlags: UInt32, cRequestedProperties: UInt32, pRequestedProperties: CPointer<Win32_Devices_Properties.DEVPROPCOMPKEY>, pcPropertyCount: CPointer<UInt32>, ppProperties: CPointer<CPointer<Win32_Devices_Properties.DEVPROPERTY>>): Int32 {
+    return DevGetObjectProperties(ObjectType, pszObjectId, QueryFlags, cRequestedProperties, pRequestedProperties, pcPropertyCount, ppProperties)
+}
+
+@When[Windows_Win32_Devices_DeviceQuery == "on" && API_MS_WIN_DEVICES_QUERY_L1_1_0 == "on" && Windows_Win32_Devices_DeviceQuery_DevGetObjects == "on" && Windows_Win32_Devices_Properties == "on"]
+foreign {
     // param-hint: pRequestedProperties len=param[2] optional
     // param-hint: pFilter len=param[4] optional
     func DevGetObjects(ObjectType: Int32, QueryFlags: UInt32, cRequestedProperties: UInt32, pRequestedProperties: CPointer<Win32_Devices_Properties.DEVPROPCOMPKEY>, cFilterExpressionCount: UInt32, pFilter: CPointer<DEVPROP_FILTER_EXPRESSION>, pcObjectCount: CPointer<UInt32>, ppObjects: CPointer<CPointer<DEV_OBJECT>>): Int32
 }
 
-@When[API_MS_WIN_DEVICES_QUERY_L1_1_1 == "on" && Windows_Win32_Devices_Properties == "on"]
+@When[Windows_Win32_Devices_DeviceQuery == "on" && API_MS_WIN_DEVICES_QUERY_L1_1_0 == "on" && Windows_Win32_Devices_DeviceQuery_DevGetObjects == "on" && Windows_Win32_Devices_Properties == "on"]
+public unsafe func Windows_DevGetObjects(ObjectType: Int32, QueryFlags: UInt32, cRequestedProperties: UInt32, pRequestedProperties: CPointer<Win32_Devices_Properties.DEVPROPCOMPKEY>, cFilterExpressionCount: UInt32, pFilter: CPointer<DEVPROP_FILTER_EXPRESSION>, pcObjectCount: CPointer<UInt32>, ppObjects: CPointer<CPointer<DEV_OBJECT>>): Int32 {
+    return DevGetObjects(ObjectType, QueryFlags, cRequestedProperties, pRequestedProperties, cFilterExpressionCount, pFilter, pcObjectCount, ppObjects)
+}
+
+@When[Windows_Win32_Devices_DeviceQuery == "on" && API_MS_WIN_DEVICES_QUERY_L1_1_1 == "on" && Windows_Win32_Devices_DeviceQuery_DevCreateObjectQueryEx == "on" && Windows_Win32_Devices_Properties == "on"]
 foreign {
     // param-hint: pRequestedProperties len=param[2] optional
     // param-hint: pFilter len=param[4] optional
     // param-hint: pExtendedParameters len=param[6] optional
     // param-hint: pContext optional
     func DevCreateObjectQueryEx(ObjectType: Int32, QueryFlags: UInt32, cRequestedProperties: UInt32, pRequestedProperties: CPointer<Win32_Devices_Properties.DEVPROPCOMPKEY>, cFilterExpressionCount: UInt32, pFilter: CPointer<DEVPROP_FILTER_EXPRESSION>, cExtendedParameterCount: UInt32, pExtendedParameters: CPointer<DEV_QUERY_PARAMETER>, pCallback: PDEV_QUERY_RESULT_CALLBACK, pContext: CPointer<Unit>, phDevQuery: CPointer<HDEVQUERY>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceQuery == "on" && API_MS_WIN_DEVICES_QUERY_L1_1_1 == "on" && Windows_Win32_Devices_DeviceQuery_DevCreateObjectQueryEx == "on" && Windows_Win32_Devices_Properties == "on"]
+public unsafe func Windows_DevCreateObjectQueryEx(ObjectType: Int32, QueryFlags: UInt32, cRequestedProperties: UInt32, pRequestedProperties: CPointer<Win32_Devices_Properties.DEVPROPCOMPKEY>, cFilterExpressionCount: UInt32, pFilter: CPointer<DEVPROP_FILTER_EXPRESSION>, cExtendedParameterCount: UInt32, pExtendedParameters: CPointer<DEV_QUERY_PARAMETER>, pCallback: PDEV_QUERY_RESULT_CALLBACK, pContext: CPointer<Unit>, phDevQuery: CPointer<HDEVQUERY>): Int32 {
+    return DevCreateObjectQueryEx(ObjectType, QueryFlags, cRequestedProperties, pRequestedProperties, cFilterExpressionCount, pFilter, cExtendedParameterCount, pExtendedParameters, pCallback, pContext, phDevQuery)
+}
+
+@When[Windows_Win32_Devices_DeviceQuery == "on" && API_MS_WIN_DEVICES_QUERY_L1_1_1 == "on" && Windows_Win32_Devices_DeviceQuery_DevCreateObjectQueryFromIdEx == "on" && Windows_Win32_Devices_Properties == "on"]
+foreign {
     // param-hint: pRequestedProperties len=param[3] optional
     // param-hint: pFilter len=param[5] optional
     // param-hint: pExtendedParameters len=param[7] optional
     // param-hint: pContext optional
     func DevCreateObjectQueryFromIdEx(ObjectType: Int32, pszObjectId: CPointer<UInt16>, QueryFlags: UInt32, cRequestedProperties: UInt32, pRequestedProperties: CPointer<Win32_Devices_Properties.DEVPROPCOMPKEY>, cFilterExpressionCount: UInt32, pFilter: CPointer<DEVPROP_FILTER_EXPRESSION>, cExtendedParameterCount: UInt32, pExtendedParameters: CPointer<DEV_QUERY_PARAMETER>, pCallback: PDEV_QUERY_RESULT_CALLBACK, pContext: CPointer<Unit>, phDevQuery: CPointer<HDEVQUERY>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceQuery == "on" && API_MS_WIN_DEVICES_QUERY_L1_1_1 == "on" && Windows_Win32_Devices_DeviceQuery_DevCreateObjectQueryFromIdEx == "on" && Windows_Win32_Devices_Properties == "on"]
+public unsafe func Windows_DevCreateObjectQueryFromIdEx(ObjectType: Int32, pszObjectId: CPointer<UInt16>, QueryFlags: UInt32, cRequestedProperties: UInt32, pRequestedProperties: CPointer<Win32_Devices_Properties.DEVPROPCOMPKEY>, cFilterExpressionCount: UInt32, pFilter: CPointer<DEVPROP_FILTER_EXPRESSION>, cExtendedParameterCount: UInt32, pExtendedParameters: CPointer<DEV_QUERY_PARAMETER>, pCallback: PDEV_QUERY_RESULT_CALLBACK, pContext: CPointer<Unit>, phDevQuery: CPointer<HDEVQUERY>): Int32 {
+    return DevCreateObjectQueryFromIdEx(ObjectType, pszObjectId, QueryFlags, cRequestedProperties, pRequestedProperties, cFilterExpressionCount, pFilter, cExtendedParameterCount, pExtendedParameters, pCallback, pContext, phDevQuery)
+}
+
+@When[Windows_Win32_Devices_DeviceQuery == "on" && API_MS_WIN_DEVICES_QUERY_L1_1_1 == "on" && Windows_Win32_Devices_DeviceQuery_DevCreateObjectQueryFromIdsEx == "on" && Windows_Win32_Devices_Properties == "on"]
+foreign {
     // param-hint: pRequestedProperties len=param[3] optional
     // param-hint: pFilter len=param[5] optional
     // param-hint: pExtendedParameters len=param[7] optional
     // param-hint: pContext optional
     func DevCreateObjectQueryFromIdsEx(ObjectType: Int32, pszzObjectIds: CPointer<UInt16>, QueryFlags: UInt32, cRequestedProperties: UInt32, pRequestedProperties: CPointer<Win32_Devices_Properties.DEVPROPCOMPKEY>, cFilterExpressionCount: UInt32, pFilter: CPointer<DEVPROP_FILTER_EXPRESSION>, cExtendedParameterCount: UInt32, pExtendedParameters: CPointer<DEV_QUERY_PARAMETER>, pCallback: PDEV_QUERY_RESULT_CALLBACK, pContext: CPointer<Unit>, phDevQuery: CPointer<HDEVQUERY>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceQuery == "on" && API_MS_WIN_DEVICES_QUERY_L1_1_1 == "on" && Windows_Win32_Devices_DeviceQuery_DevCreateObjectQueryFromIdsEx == "on" && Windows_Win32_Devices_Properties == "on"]
+public unsafe func Windows_DevCreateObjectQueryFromIdsEx(ObjectType: Int32, pszzObjectIds: CPointer<UInt16>, QueryFlags: UInt32, cRequestedProperties: UInt32, pRequestedProperties: CPointer<Win32_Devices_Properties.DEVPROPCOMPKEY>, cFilterExpressionCount: UInt32, pFilter: CPointer<DEVPROP_FILTER_EXPRESSION>, cExtendedParameterCount: UInt32, pExtendedParameters: CPointer<DEV_QUERY_PARAMETER>, pCallback: PDEV_QUERY_RESULT_CALLBACK, pContext: CPointer<Unit>, phDevQuery: CPointer<HDEVQUERY>): Int32 {
+    return DevCreateObjectQueryFromIdsEx(ObjectType, pszzObjectIds, QueryFlags, cRequestedProperties, pRequestedProperties, cFilterExpressionCount, pFilter, cExtendedParameterCount, pExtendedParameters, pCallback, pContext, phDevQuery)
+}
+
+@When[Windows_Win32_Devices_DeviceQuery == "on" && API_MS_WIN_DEVICES_QUERY_L1_1_1 == "on" && Windows_Win32_Devices_DeviceQuery_DevGetObjectPropertiesEx == "on" && Windows_Win32_Devices_Properties == "on"]
+foreign {
     // param-hint: pRequestedProperties len=param[3]
     // param-hint: pExtendedParameters len=param[5] optional
     func DevGetObjectPropertiesEx(ObjectType: Int32, pszObjectId: CPointer<UInt16>, QueryFlags: UInt32, cRequestedProperties: UInt32, pRequestedProperties: CPointer<Win32_Devices_Properties.DEVPROPCOMPKEY>, cExtendedParameterCount: UInt32, pExtendedParameters: CPointer<DEV_QUERY_PARAMETER>, pcPropertyCount: CPointer<UInt32>, ppProperties: CPointer<CPointer<Win32_Devices_Properties.DEVPROPERTY>>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceQuery == "on" && API_MS_WIN_DEVICES_QUERY_L1_1_1 == "on" && Windows_Win32_Devices_DeviceQuery_DevGetObjectPropertiesEx == "on" && Windows_Win32_Devices_Properties == "on"]
+public unsafe func Windows_DevGetObjectPropertiesEx(ObjectType: Int32, pszObjectId: CPointer<UInt16>, QueryFlags: UInt32, cRequestedProperties: UInt32, pRequestedProperties: CPointer<Win32_Devices_Properties.DEVPROPCOMPKEY>, cExtendedParameterCount: UInt32, pExtendedParameters: CPointer<DEV_QUERY_PARAMETER>, pcPropertyCount: CPointer<UInt32>, ppProperties: CPointer<CPointer<Win32_Devices_Properties.DEVPROPERTY>>): Int32 {
+    return DevGetObjectPropertiesEx(ObjectType, pszObjectId, QueryFlags, cRequestedProperties, pRequestedProperties, cExtendedParameterCount, pExtendedParameters, pcPropertyCount, ppProperties)
+}
+
+@When[Windows_Win32_Devices_DeviceQuery == "on" && API_MS_WIN_DEVICES_QUERY_L1_1_1 == "on" && Windows_Win32_Devices_DeviceQuery_DevGetObjectsEx == "on" && Windows_Win32_Devices_Properties == "on"]
+foreign {
     // param-hint: pRequestedProperties len=param[2] optional
     // param-hint: pFilter len=param[4] optional
     // param-hint: pExtendedParameters len=param[6] optional
     func DevGetObjectsEx(ObjectType: Int32, QueryFlags: UInt32, cRequestedProperties: UInt32, pRequestedProperties: CPointer<Win32_Devices_Properties.DEVPROPCOMPKEY>, cFilterExpressionCount: UInt32, pFilter: CPointer<DEVPROP_FILTER_EXPRESSION>, cExtendedParameterCount: UInt32, pExtendedParameters: CPointer<DEV_QUERY_PARAMETER>, pcObjectCount: CPointer<UInt32>, ppObjects: CPointer<CPointer<DEV_OBJECT>>): Int32
+}
+
+@When[Windows_Win32_Devices_DeviceQuery == "on" && API_MS_WIN_DEVICES_QUERY_L1_1_1 == "on" && Windows_Win32_Devices_DeviceQuery_DevGetObjectsEx == "on" && Windows_Win32_Devices_Properties == "on"]
+public unsafe func Windows_DevGetObjectsEx(ObjectType: Int32, QueryFlags: UInt32, cRequestedProperties: UInt32, pRequestedProperties: CPointer<Win32_Devices_Properties.DEVPROPCOMPKEY>, cFilterExpressionCount: UInt32, pFilter: CPointer<DEVPROP_FILTER_EXPRESSION>, cExtendedParameterCount: UInt32, pExtendedParameters: CPointer<DEV_QUERY_PARAMETER>, pcObjectCount: CPointer<UInt32>, ppObjects: CPointer<CPointer<DEV_OBJECT>>): Int32 {
+    return DevGetObjectsEx(ObjectType, QueryFlags, cRequestedProperties, pRequestedProperties, cFilterExpressionCount, pFilter, cExtendedParameterCount, pExtendedParameters, pcObjectCount, ppObjects)
 }

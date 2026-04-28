@@ -8,11 +8,8 @@ import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Dxgi_Common == "on"]
 import windows.Win32.Graphics.Dxgi.Common as Win32_Graphics_Dxgi_Common
-@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
@@ -7142,24 +7139,97 @@ public class IWICMetadataBlockWriter <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[WINDOWSCODECS == "on"]
+@When[Windows_Win32_Graphics_Imaging == "on" && WINDOWSCODECS == "on" && Windows_Win32_Graphics_Imaging_WICConvertBitmapSource == "on"]
 foreign {
     func WICConvertBitmapSource(dstFormat: CPointer<GUID>, pISrc: CPointer<Unit>, ppIDst: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Imaging == "on" && WINDOWSCODECS == "on" && Windows_Win32_Graphics_Imaging_WICConvertBitmapSource == "on"]
+public unsafe func Windows_WICConvertBitmapSource(dstFormat: CPointer<GUID>, pISrc: CPointer<Unit>, ppIDst: CPointer<CPointer<Unit>>): Int32 {
+    return WICConvertBitmapSource(dstFormat, pISrc, ppIDst)
+}
+
+@When[Windows_Win32_Graphics_Imaging == "on" && WINDOWSCODECS == "on" && Windows_Win32_Graphics_Imaging_WICCreateBitmapFromSection == "on"]
+foreign {
     func WICCreateBitmapFromSection(width: UInt32, height: UInt32, pixelFormat: CPointer<GUID>, hSection: CPointer<Unit>, stride: UInt32, offset: UInt32, ppIBitmap: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Imaging == "on" && WINDOWSCODECS == "on" && Windows_Win32_Graphics_Imaging_WICCreateBitmapFromSection == "on"]
+public unsafe func Windows_WICCreateBitmapFromSection(width: UInt32, height: UInt32, pixelFormat: CPointer<GUID>, hSection: CPointer<Unit>, stride: UInt32, offset: UInt32, ppIBitmap: CPointer<CPointer<Unit>>): Int32 {
+    return WICCreateBitmapFromSection(width, height, pixelFormat, hSection, stride, offset, ppIBitmap)
+}
+
+@When[Windows_Win32_Graphics_Imaging == "on" && WINDOWSCODECS == "on" && Windows_Win32_Graphics_Imaging_WICCreateBitmapFromSectionEx == "on"]
+foreign {
     func WICCreateBitmapFromSectionEx(width: UInt32, height: UInt32, pixelFormat: CPointer<GUID>, hSection: CPointer<Unit>, stride: UInt32, offset: UInt32, desiredAccessLevel: WICSectionAccessLevelAbi, ppIBitmap: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Imaging == "on" && WINDOWSCODECS == "on" && Windows_Win32_Graphics_Imaging_WICCreateBitmapFromSectionEx == "on"]
+public unsafe func Windows_WICCreateBitmapFromSectionEx(width: UInt32, height: UInt32, pixelFormat: CPointer<GUID>, hSection: CPointer<Unit>, stride: UInt32, offset: UInt32, desiredAccessLevel: WICSectionAccessLevelAbi, ppIBitmap: CPointer<CPointer<Unit>>): Int32 {
+    return WICCreateBitmapFromSectionEx(width, height, pixelFormat, hSection, stride, offset, desiredAccessLevel, ppIBitmap)
+}
+
+@When[Windows_Win32_Graphics_Imaging == "on" && WINDOWSCODECS == "on" && Windows_Win32_Graphics_Imaging_WICGetMetadataContentSize == "on"]
+foreign {
     func WICGetMetadataContentSize(guidContainerFormat: CPointer<GUID>, pIWriter: CPointer<Unit>, pcbSize: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_Graphics_Imaging == "on" && WINDOWSCODECS == "on" && Windows_Win32_Graphics_Imaging_WICGetMetadataContentSize == "on"]
+public unsafe func Windows_WICGetMetadataContentSize(guidContainerFormat: CPointer<GUID>, pIWriter: CPointer<Unit>, pcbSize: CPointer<UInt64>): Int32 {
+    return WICGetMetadataContentSize(guidContainerFormat, pIWriter, pcbSize)
+}
+
+@When[Windows_Win32_Graphics_Imaging == "on" && WINDOWSCODECS == "on" && Windows_Win32_Graphics_Imaging_WICMapGuidToShortName == "on"]
+foreign {
     // param-hint: wzName len=param[1] optional
     func WICMapGuidToShortName(guid: CPointer<GUID>, cchName: UInt32, wzName: CPointer<UInt16>, pcchActual: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_Imaging == "on" && WINDOWSCODECS == "on" && Windows_Win32_Graphics_Imaging_WICMapGuidToShortName == "on"]
+public unsafe func Windows_WICMapGuidToShortName(guid: CPointer<GUID>, cchName: UInt32, wzName: CPointer<UInt16>, pcchActual: CPointer<UInt32>): Int32 {
+    return WICMapGuidToShortName(guid, cchName, wzName, pcchActual)
+}
+
+@When[Windows_Win32_Graphics_Imaging == "on" && WINDOWSCODECS == "on" && Windows_Win32_Graphics_Imaging_WICMapSchemaToName == "on"]
+foreign {
     // param-hint: wzName len=param[2] optional
     func WICMapSchemaToName(guidMetadataFormat: CPointer<GUID>, pwzSchema: CPointer<UInt16>, cchName: UInt32, wzName: CPointer<UInt16>, pcchActual: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_Imaging == "on" && WINDOWSCODECS == "on" && Windows_Win32_Graphics_Imaging_WICMapSchemaToName == "on"]
+public unsafe func Windows_WICMapSchemaToName(guidMetadataFormat: CPointer<GUID>, pwzSchema: CPointer<UInt16>, cchName: UInt32, wzName: CPointer<UInt16>, pcchActual: CPointer<UInt32>): Int32 {
+    return WICMapSchemaToName(guidMetadataFormat, pwzSchema, cchName, wzName, pcchActual)
+}
+
+@When[Windows_Win32_Graphics_Imaging == "on" && WINDOWSCODECS == "on" && Windows_Win32_Graphics_Imaging_WICMapShortNameToGuid == "on"]
+foreign {
     func WICMapShortNameToGuid(wzName: CPointer<UInt16>, pguid: CPointer<GUID>): Int32
 }
 
-@When[WINDOWSCODECS == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_Graphics_Imaging == "on" && WINDOWSCODECS == "on" && Windows_Win32_Graphics_Imaging_WICMapShortNameToGuid == "on"]
+public unsafe func Windows_WICMapShortNameToGuid(wzName: CPointer<UInt16>, pguid: CPointer<GUID>): Int32 {
+    return WICMapShortNameToGuid(wzName, pguid)
+}
+
+@When[Windows_Win32_Graphics_Imaging == "on" && WINDOWSCODECS == "on" && Windows_Win32_Graphics_Imaging_WICMatchMetadataContent == "on" && Windows_Win32_System_Com == "on"]
 foreign {
     // param-hint: pguidVendor optional
     func WICMatchMetadataContent(guidContainerFormat: CPointer<GUID>, pguidVendor: CPointer<GUID>, pIStream: CPointer<Unit>, pguidMetadataFormat: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Graphics_Imaging == "on" && WINDOWSCODECS == "on" && Windows_Win32_Graphics_Imaging_WICMatchMetadataContent == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_WICMatchMetadataContent(guidContainerFormat: CPointer<GUID>, pguidVendor: CPointer<GUID>, pIStream: CPointer<Unit>, pguidMetadataFormat: CPointer<GUID>): Int32 {
+    return WICMatchMetadataContent(guidContainerFormat, pguidVendor, pIStream, pguidMetadataFormat)
+}
+
+@When[Windows_Win32_Graphics_Imaging == "on" && WINDOWSCODECS == "on" && Windows_Win32_Graphics_Imaging_WICSerializeMetadataContent == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func WICSerializeMetadataContent(guidContainerFormat: CPointer<GUID>, pIWriter: CPointer<Unit>, dwPersistOptions: UInt32, pIStream: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Graphics_Imaging == "on" && WINDOWSCODECS == "on" && Windows_Win32_Graphics_Imaging_WICSerializeMetadataContent == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_WICSerializeMetadataContent(guidContainerFormat: CPointer<GUID>, pIWriter: CPointer<Unit>, dwPersistOptions: UInt32, pIStream: CPointer<Unit>): Int32 {
+    return WICSerializeMetadataContent(guidContainerFormat, pIWriter, dwPersistOptions, pIStream)
 }
 
 @When[Windows_Win32_Graphics_Imaging == "on"]

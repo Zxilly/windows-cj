@@ -890,9 +890,9 @@ extend IAppWindowClosedEventArgs <: windows_core.Interface<IAppWindowClosedEvent
 @C
 public struct IAppWindowFrameVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_UI_Composition == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Composition == "on"]
     public var DragRegionVisuals: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Composition != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_UI_Composition != "on"]
     public var DragRegionVisuals: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -962,7 +962,7 @@ public class IAppWindowFrame <: InterfaceWrapperBase & ComInterface & RuntimeNam
         readVtbl<IAppWindowFrameVtbl>(IAppWindowFrameVtbl())
     }
 
-    @When[Windows_UI_Composition == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Composition == "on"]
     public unsafe func DragRegionVisuals(): windows_collections.IVector<IVisualElement> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1653,9 +1653,9 @@ extend IFullScreenPresentationConfiguration <: windows_core.Interface<IFullScree
 @C
 public struct IWindowServicesStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_UI == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI == "on"]
     public var FindAllTopLevelWindowIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_UI != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_UI != "on"]
     public var FindAllTopLevelWindowIds: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -1725,7 +1725,7 @@ public class IWindowServicesStatics <: InterfaceWrapperBase & ComInterface & Run
         readVtbl<IWindowServicesStaticsVtbl>(IWindowServicesStaticsVtbl())
     }
 
-    @When[Windows_UI == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI == "on"]
     public unsafe func FindAllTopLevelWindowIds(): windows_collections.IVectorView<UI.WindowId> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1834,7 +1834,7 @@ public class WindowServices <: windows_interface.RuntimeName & windows_core.Runt
         windows_core.activationFactory<WindowServices>().ok()
     }
 
-    @When[Windows_UI == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI == "on"]
     public static unsafe func FindAllTopLevelWindowIds(): windows_collections.IVectorView<UI.WindowId> {
         var result__: Option<windows_collections.IVectorView<UI.WindowId>> = Option<windows_collections.IVectorView<UI.WindowId>>.None
         try (factory__ = windows_core.factory<WindowServices, IWindowServicesStatics>().unwrap()) {

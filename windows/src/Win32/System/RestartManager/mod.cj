@@ -6,7 +6,6 @@ package windows.Win32.System.RestartManager
 import std.collection.*
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 import windows_core as windows_core
 
@@ -616,38 +615,129 @@ extend RM_PROCESS_INFO <: windows_core.CopyType & windows_core.RuntimeType & win
     }
 }
 
-@When[RSTRTMGR == "on"]
+@When[Windows_Win32_System_RestartManager == "on" && RSTRTMGR == "on" && Windows_Win32_System_RestartManager_RmAddFilter == "on"]
 foreign {
     // param-hint: strModuleName optional
     // param-hint: pProcess optional
     // param-hint: strServiceShortName optional
     func RmAddFilter(dwSessionHandle: UInt32, strModuleName: CPointer<UInt16>, pProcess: CPointer<RM_UNIQUE_PROCESSAbi>, strServiceShortName: CPointer<UInt16>, FilterAction: RM_FILTER_ACTIONAbi): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_RestartManager == "on" && RSTRTMGR == "on" && Windows_Win32_System_RestartManager_RmAddFilter == "on"]
+public unsafe func Windows_RmAddFilter(dwSessionHandle: UInt32, strModuleName: CPointer<UInt16>, pProcess: CPointer<RM_UNIQUE_PROCESSAbi>, strServiceShortName: CPointer<UInt16>, FilterAction: RM_FILTER_ACTIONAbi): windows_core.WIN32_ERROR {
+    return RmAddFilter(dwSessionHandle, strModuleName, pProcess, strServiceShortName, FilterAction)
+}
+
+@When[Windows_Win32_System_RestartManager == "on" && RSTRTMGR == "on" && Windows_Win32_System_RestartManager_RmCancelCurrentTask == "on"]
+foreign {
     func RmCancelCurrentTask(dwSessionHandle: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_RestartManager == "on" && RSTRTMGR == "on" && Windows_Win32_System_RestartManager_RmCancelCurrentTask == "on"]
+public unsafe func Windows_RmCancelCurrentTask(dwSessionHandle: UInt32): windows_core.WIN32_ERROR {
+    return RmCancelCurrentTask(dwSessionHandle)
+}
+
+@When[Windows_Win32_System_RestartManager == "on" && RSTRTMGR == "on" && Windows_Win32_System_RestartManager_RmGetFilterList == "on"]
+foreign {
     // param-hint: pbFilterBuf bytes=param[2] optional
     func RmGetFilterList(dwSessionHandle: UInt32, pbFilterBuf: CPointer<UInt8>, cbFilterBuf: UInt32, cbFilterBufNeeded: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_RestartManager == "on" && RSTRTMGR == "on" && Windows_Win32_System_RestartManager_RmGetFilterList == "on"]
+public unsafe func Windows_RmGetFilterList(dwSessionHandle: UInt32, pbFilterBuf: CPointer<UInt8>, cbFilterBuf: UInt32, cbFilterBufNeeded: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return RmGetFilterList(dwSessionHandle, pbFilterBuf, cbFilterBuf, cbFilterBufNeeded)
+}
+
+@When[Windows_Win32_System_RestartManager == "on" && RSTRTMGR == "on" && Windows_Win32_System_RestartManager_RmJoinSession == "on"]
+foreign {
     func RmJoinSession(pSessionHandle: CPointer<UInt32>, strSessionKey: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_RestartManager == "on" && RSTRTMGR == "on" && Windows_Win32_System_RestartManager_RmJoinSession == "on"]
+public unsafe func Windows_RmJoinSession(pSessionHandle: CPointer<UInt32>, strSessionKey: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return RmJoinSession(pSessionHandle, strSessionKey)
+}
+
+@When[Windows_Win32_System_RestartManager == "on" && RSTRTMGR == "on" && Windows_Win32_System_RestartManager_RmRemoveFilter == "on"]
+foreign {
     // param-hint: strModuleName optional
     // param-hint: pProcess optional
     // param-hint: strServiceShortName optional
     func RmRemoveFilter(dwSessionHandle: UInt32, strModuleName: CPointer<UInt16>, pProcess: CPointer<RM_UNIQUE_PROCESSAbi>, strServiceShortName: CPointer<UInt16>): windows_core.WIN32_ERROR
 }
 
-@When[RSTRTMGR == "on"]
+@When[Windows_Win32_System_RestartManager == "on" && RSTRTMGR == "on" && Windows_Win32_System_RestartManager_RmRemoveFilter == "on"]
+public unsafe func Windows_RmRemoveFilter(dwSessionHandle: UInt32, strModuleName: CPointer<UInt16>, pProcess: CPointer<RM_UNIQUE_PROCESSAbi>, strServiceShortName: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return RmRemoveFilter(dwSessionHandle, strModuleName, pProcess, strServiceShortName)
+}
+
+@When[Windows_Win32_System_RestartManager == "on" && RSTRTMGR == "on" && Windows_Win32_System_RestartManager_RmEndSession == "on"]
 foreign {
     func RmEndSession(dwSessionHandle: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_RestartManager == "on" && RSTRTMGR == "on" && Windows_Win32_System_RestartManager_RmEndSession == "on"]
+public unsafe func Windows_RmEndSession(dwSessionHandle: UInt32): windows_core.WIN32_ERROR {
+    return RmEndSession(dwSessionHandle)
+}
+
+@When[Windows_Win32_System_RestartManager == "on" && RSTRTMGR == "on" && Windows_Win32_System_RestartManager_RmGetList == "on"]
+foreign {
     // param-hint: rgAffectedApps len=param[2] optional
     func RmGetList(dwSessionHandle: UInt32, pnProcInfoNeeded: CPointer<UInt32>, pnProcInfo: CPointer<UInt32>, rgAffectedApps: CPointer<RM_PROCESS_INFOAbi>, lpdwRebootReasons: CPointer<UInt32>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_RestartManager == "on" && RSTRTMGR == "on" && Windows_Win32_System_RestartManager_RmGetList == "on"]
+public unsafe func Windows_RmGetList(dwSessionHandle: UInt32, pnProcInfoNeeded: CPointer<UInt32>, pnProcInfo: CPointer<UInt32>, rgAffectedApps: CPointer<RM_PROCESS_INFOAbi>, lpdwRebootReasons: CPointer<UInt32>): windows_core.WIN32_ERROR {
+    return RmGetList(dwSessionHandle, pnProcInfoNeeded, pnProcInfo, rgAffectedApps, lpdwRebootReasons)
+}
+
+@When[Windows_Win32_System_RestartManager == "on" && RSTRTMGR == "on" && Windows_Win32_System_RestartManager_RmRegisterResources == "on"]
+foreign {
     // param-hint: rgsFileNames len=param[1] optional
     // param-hint: rgApplications len=param[3] optional
     // param-hint: rgsServiceNames len=param[5] optional
     func RmRegisterResources(dwSessionHandle: UInt32, nFiles: UInt32, rgsFileNames: CPointer<CPointer<UInt16>>, nApplications: UInt32, rgApplications: CPointer<RM_UNIQUE_PROCESSAbi>, nServices: UInt32, rgsServiceNames: CPointer<CPointer<UInt16>>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_RestartManager == "on" && RSTRTMGR == "on" && Windows_Win32_System_RestartManager_RmRegisterResources == "on"]
+public unsafe func Windows_RmRegisterResources(dwSessionHandle: UInt32, nFiles: UInt32, rgsFileNames: CPointer<CPointer<UInt16>>, nApplications: UInt32, rgApplications: CPointer<RM_UNIQUE_PROCESSAbi>, nServices: UInt32, rgsServiceNames: CPointer<CPointer<UInt16>>): windows_core.WIN32_ERROR {
+    return RmRegisterResources(dwSessionHandle, nFiles, rgsFileNames, nApplications, rgApplications, nServices, rgsServiceNames)
+}
+
+@When[Windows_Win32_System_RestartManager == "on" && RSTRTMGR == "on" && Windows_Win32_System_RestartManager_RmRestart == "on"]
+foreign {
     // param-hint: dwRestartFlags optional reserved
     // param-hint: fnStatus optional
     func RmRestart(dwSessionHandle: UInt32, dwRestartFlags: UInt32, fnStatus: RM_WRITE_STATUS_CALLBACK): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_RestartManager == "on" && RSTRTMGR == "on" && Windows_Win32_System_RestartManager_RmRestart == "on"]
+public unsafe func Windows_RmRestart(dwSessionHandle: UInt32, dwRestartFlags: UInt32, fnStatus: RM_WRITE_STATUS_CALLBACK): windows_core.WIN32_ERROR {
+    return RmRestart(dwSessionHandle, dwRestartFlags, fnStatus)
+}
+
+@When[Windows_Win32_System_RestartManager == "on" && RSTRTMGR == "on" && Windows_Win32_System_RestartManager_RmShutdown == "on"]
+foreign {
     // param-hint: fnStatus optional
     func RmShutdown(dwSessionHandle: UInt32, lActionFlags: UInt32, fnStatus: RM_WRITE_STATUS_CALLBACK): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_RestartManager == "on" && RSTRTMGR == "on" && Windows_Win32_System_RestartManager_RmShutdown == "on"]
+public unsafe func Windows_RmShutdown(dwSessionHandle: UInt32, lActionFlags: UInt32, fnStatus: RM_WRITE_STATUS_CALLBACK): windows_core.WIN32_ERROR {
+    return RmShutdown(dwSessionHandle, lActionFlags, fnStatus)
+}
+
+@When[Windows_Win32_System_RestartManager == "on" && RSTRTMGR == "on" && Windows_Win32_System_RestartManager_RmStartSession == "on"]
+foreign {
     // param-hint: dwSessionFlags optional reserved
     func RmStartSession(pSessionHandle: CPointer<UInt32>, dwSessionFlags: UInt32, strSessionKey: CPointer<UInt16>): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_System_RestartManager == "on" && RSTRTMGR == "on" && Windows_Win32_System_RestartManager_RmStartSession == "on"]
+public unsafe func Windows_RmStartSession(pSessionHandle: CPointer<UInt32>, dwSessionFlags: UInt32, strSessionKey: CPointer<UInt16>): windows_core.WIN32_ERROR {
+    return RmStartSession(pSessionHandle, dwSessionFlags, strSessionKey)
 }
 
 @When[Windows_Win32_System_RestartManager == "on"]

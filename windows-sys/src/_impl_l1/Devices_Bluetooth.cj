@@ -78,9 +78,9 @@ public struct IBluetoothDeviceVtbl {
     public var HostName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ClassOfDevice: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var SdpRecords: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Devices_Bluetooth_Rfcomm == "on"]
+    @When[Windows_Devices_Bluetooth_Rfcomm == "on" && Windows_Foundation_Collections == "on"]
     public var RfcommServices: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ConnectionStatus: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var BluetoothAddress: CFunc<(CPointer<Unit>, CPointer<UInt64>) -> Int32> = { _, _ => 0 }
@@ -158,14 +158,14 @@ public class IBluetoothDevice <: InterfaceWrapperBase & ComInterface {
         return __vt.ClassOfDevice(__liveRaw, result__)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func SdpRecords(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SdpRecords(__liveRaw, result__)
     }
 
-    @When[Windows_Devices_Bluetooth_Rfcomm == "on"]
+    @When[Windows_Devices_Bluetooth_Rfcomm == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func RfcommServices(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -664,7 +664,7 @@ public struct IBluetoothLEDeviceVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var DeviceId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Devices_Bluetooth_GenericAttributeProfile == "on"]
+    @When[Windows_Devices_Bluetooth_GenericAttributeProfile == "on" && Windows_Foundation_Collections == "on"]
     public var GattServices: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ConnectionStatus: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var BluetoothAddress: CFunc<(CPointer<Unit>, CPointer<UInt64>) -> Int32> = { _, _ => 0 }
@@ -731,7 +731,7 @@ public class IBluetoothLEDevice <: InterfaceWrapperBase & ComInterface {
         return __vt.Name(__liveRaw, result__)
     }
 
-    @When[Windows_Devices_Bluetooth_GenericAttributeProfile == "on"]
+    @When[Windows_Devices_Bluetooth_GenericAttributeProfile == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func GattServices(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

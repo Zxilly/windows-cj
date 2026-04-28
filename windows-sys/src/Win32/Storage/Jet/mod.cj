@@ -3,7 +3,6 @@ package windows_sys.Win32.Storage.Jet
 
 import windows_polyfill.{packedReadInt32, packedReadUInt16, packedReadUInt32, packedReadValue, packedWriteInt32, packedWriteUInt16, packedWriteUInt32, packedWriteValue, unionReadUInt32, unionReadUInt8, unionWriteUInt32, unionWriteUInt8}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Storage_StructuredStorage == "on"]
 import windows_sys.Win32.Storage.StructuredStorage as Win32_Storage_StructuredStorage
 
 
@@ -2505,477 +2504,2522 @@ public struct JET_TABLECREATE_W {
     public init() {}
 }
 
-@When[ESENT == "on"]
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetAddColumnA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
+    // param-hint: pvDefault bytes=param[5] optional
+    // param-hint: pcolumnid optional
+    func JetAddColumnA(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szColumnName: CPointer<Int8>, pcolumndef: CPointer<JET_COLUMNDEF>, pvDefault: CPointer<Unit>, cbDefault: UInt32, pcolumnid: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetAddColumnA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetAddColumnA(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szColumnName: CPointer<Int8>, pcolumndef: CPointer<JET_COLUMNDEF>, pvDefault: CPointer<Unit>, cbDefault: UInt32, pcolumnid: CPointer<UInt32>): Int32 {
+    return JetAddColumnA(sesid, tableid, szColumnName, pcolumndef, pvDefault, cbDefault, pcolumnid)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetAddColumnW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
+    // param-hint: pvDefault bytes=param[5] optional
+    // param-hint: pcolumnid optional
+    func JetAddColumnW(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szColumnName: CPointer<UInt16>, pcolumndef: CPointer<JET_COLUMNDEF>, pvDefault: CPointer<Unit>, cbDefault: UInt32, pcolumnid: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetAddColumnW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetAddColumnW(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szColumnName: CPointer<UInt16>, pcolumndef: CPointer<JET_COLUMNDEF>, pvDefault: CPointer<Unit>, cbDefault: UInt32, pcolumnid: CPointer<UInt32>): Int32 {
+    return JetAddColumnW(sesid, tableid, szColumnName, pcolumndef, pvDefault, cbDefault, pcolumnid)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetAttachDatabase2A == "on"]
 foreign {
     func JetAttachDatabase2A(sesid: JET_SESID, szFilename: CPointer<Int8>, cpgDatabaseSizeMax: UInt32, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetAttachDatabase2A == "on"]
+public unsafe func Windows_JetAttachDatabase2A(sesid: JET_SESID, szFilename: CPointer<Int8>, cpgDatabaseSizeMax: UInt32, grbit: UInt32): Int32 {
+    return JetAttachDatabase2A(sesid, szFilename, cpgDatabaseSizeMax, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetAttachDatabase2W == "on"]
+foreign {
     func JetAttachDatabase2W(sesid: JET_SESID, szFilename: CPointer<UInt16>, cpgDatabaseSizeMax: UInt32, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetAttachDatabase2W == "on"]
+public unsafe func Windows_JetAttachDatabase2W(sesid: JET_SESID, szFilename: CPointer<UInt16>, cpgDatabaseSizeMax: UInt32, grbit: UInt32): Int32 {
+    return JetAttachDatabase2W(sesid, szFilename, cpgDatabaseSizeMax, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetAttachDatabaseA == "on"]
+foreign {
     func JetAttachDatabaseA(sesid: JET_SESID, szFilename: CPointer<Int8>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetAttachDatabaseA == "on"]
+public unsafe func Windows_JetAttachDatabaseA(sesid: JET_SESID, szFilename: CPointer<Int8>, grbit: UInt32): Int32 {
+    return JetAttachDatabaseA(sesid, szFilename, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetAttachDatabaseW == "on"]
+foreign {
     func JetAttachDatabaseW(sesid: JET_SESID, szFilename: CPointer<UInt16>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetAttachDatabaseW == "on"]
+public unsafe func Windows_JetAttachDatabaseW(sesid: JET_SESID, szFilename: CPointer<UInt16>, grbit: UInt32): Int32 {
+    return JetAttachDatabaseW(sesid, szFilename, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetBackupA == "on"]
+foreign {
     // param-hint: pfnStatus optional
     func JetBackupA(szBackupPath: CPointer<Int8>, grbit: UInt32, pfnStatus: JET_PFNSTATUS): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetBackupA == "on"]
+public unsafe func Windows_JetBackupA(szBackupPath: CPointer<Int8>, grbit: UInt32, pfnStatus: JET_PFNSTATUS): Int32 {
+    return JetBackupA(szBackupPath, grbit, pfnStatus)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetBackupInstanceA == "on"]
+foreign {
     // param-hint: pfnStatus optional
     func JetBackupInstanceA(instance: JET_INSTANCE, szBackupPath: CPointer<Int8>, grbit: UInt32, pfnStatus: JET_PFNSTATUS): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetBackupInstanceA == "on"]
+public unsafe func Windows_JetBackupInstanceA(instance: JET_INSTANCE, szBackupPath: CPointer<Int8>, grbit: UInt32, pfnStatus: JET_PFNSTATUS): Int32 {
+    return JetBackupInstanceA(instance, szBackupPath, grbit, pfnStatus)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetBackupInstanceW == "on"]
+foreign {
     // param-hint: pfnStatus optional
     func JetBackupInstanceW(instance: JET_INSTANCE, szBackupPath: CPointer<UInt16>, grbit: UInt32, pfnStatus: JET_PFNSTATUS): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetBackupInstanceW == "on"]
+public unsafe func Windows_JetBackupInstanceW(instance: JET_INSTANCE, szBackupPath: CPointer<UInt16>, grbit: UInt32, pfnStatus: JET_PFNSTATUS): Int32 {
+    return JetBackupInstanceW(instance, szBackupPath, grbit, pfnStatus)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetBackupW == "on"]
+foreign {
     // param-hint: pfnStatus optional
     func JetBackupW(szBackupPath: CPointer<UInt16>, grbit: UInt32, pfnStatus: JET_PFNSTATUS): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetBackupW == "on"]
+public unsafe func Windows_JetBackupW(szBackupPath: CPointer<UInt16>, grbit: UInt32, pfnStatus: JET_PFNSTATUS): Int32 {
+    return JetBackupW(szBackupPath, grbit, pfnStatus)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetBeginExternalBackup == "on"]
+foreign {
     func JetBeginExternalBackup(grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetBeginExternalBackup == "on"]
+public unsafe func Windows_JetBeginExternalBackup(grbit: UInt32): Int32 {
+    return JetBeginExternalBackup(grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetBeginExternalBackupInstance == "on"]
+foreign {
     func JetBeginExternalBackupInstance(instance: JET_INSTANCE, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetBeginExternalBackupInstance == "on"]
+public unsafe func Windows_JetBeginExternalBackupInstance(instance: JET_INSTANCE, grbit: UInt32): Int32 {
+    return JetBeginExternalBackupInstance(instance, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetBeginSessionA == "on"]
+foreign {
     // param-hint: szUserName optional
     // param-hint: szPassword optional
     func JetBeginSessionA(instance: JET_INSTANCE, psesid: CPointer<JET_SESID>, szUserName: CPointer<Int8>, szPassword: CPointer<Int8>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetBeginSessionA == "on"]
+public unsafe func Windows_JetBeginSessionA(instance: JET_INSTANCE, psesid: CPointer<JET_SESID>, szUserName: CPointer<Int8>, szPassword: CPointer<Int8>): Int32 {
+    return JetBeginSessionA(instance, psesid, szUserName, szPassword)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetBeginSessionW == "on"]
+foreign {
     // param-hint: szUserName optional
     // param-hint: szPassword optional
     func JetBeginSessionW(instance: JET_INSTANCE, psesid: CPointer<JET_SESID>, szUserName: CPointer<UInt16>, szPassword: CPointer<UInt16>): Int32
-    func JetBeginTransaction(sesid: JET_SESID): Int32
-    func JetBeginTransaction2(sesid: JET_SESID, grbit: UInt32): Int32
-    func JetBeginTransaction3(sesid: JET_SESID, trxid: Int64, grbit: UInt32): Int32
-    func JetCloseDatabase(sesid: JET_SESID, dbid: UInt32, grbit: UInt32): Int32
-    func JetCommitTransaction(sesid: JET_SESID, grbit: UInt32): Int32
-    // param-hint: pconvert optional
-    func JetCompactA(sesid: JET_SESID, szDatabaseSrc: CPointer<Int8>, szDatabaseDest: CPointer<Int8>, pfnStatus: JET_PFNSTATUS, pconvert: CPointer<JET_CONVERT_A>, grbit: UInt32): Int32
-    // param-hint: pconvert optional
-    func JetCompactW(sesid: JET_SESID, szDatabaseSrc: CPointer<UInt16>, szDatabaseDest: CPointer<UInt16>, pfnStatus: JET_PFNSTATUS, pconvert: CPointer<JET_CONVERT_W>, grbit: UInt32): Int32
-    func JetConfigureProcessForCrashDump(grbit: UInt32): Int32
-    func JetCreateDatabase2A(sesid: JET_SESID, szFilename: CPointer<Int8>, cpgDatabaseSizeMax: UInt32, pdbid: CPointer<UInt32>, grbit: UInt32): Int32
-    func JetCreateDatabase2W(sesid: JET_SESID, szFilename: CPointer<UInt16>, cpgDatabaseSizeMax: UInt32, pdbid: CPointer<UInt32>, grbit: UInt32): Int32
-    // param-hint: szConnect optional
-    func JetCreateDatabaseA(sesid: JET_SESID, szFilename: CPointer<Int8>, szConnect: CPointer<Int8>, pdbid: CPointer<UInt32>, grbit: UInt32): Int32
-    // param-hint: szConnect optional
-    func JetCreateDatabaseW(sesid: JET_SESID, szFilename: CPointer<UInt16>, szConnect: CPointer<UInt16>, pdbid: CPointer<UInt32>, grbit: UInt32): Int32
-    // param-hint: szInstanceName optional
-    // param-hint: szDisplayName optional
-    func JetCreateInstance2A(pinstance: CPointer<JET_INSTANCE>, szInstanceName: CPointer<Int8>, szDisplayName: CPointer<Int8>, grbit: UInt32): Int32
-    // param-hint: szInstanceName optional
-    // param-hint: szDisplayName optional
-    func JetCreateInstance2W(pinstance: CPointer<JET_INSTANCE>, szInstanceName: CPointer<UInt16>, szDisplayName: CPointer<UInt16>, grbit: UInt32): Int32
-    // param-hint: szInstanceName optional
-    func JetCreateInstanceA(pinstance: CPointer<JET_INSTANCE>, szInstanceName: CPointer<Int8>): Int32
-    // param-hint: szInstanceName optional
-    func JetCreateInstanceW(pinstance: CPointer<JET_INSTANCE>, szInstanceName: CPointer<UInt16>): Int32
-    // param-hint: szTableName optional
-    // param-hint: pcPasses optional
-    // param-hint: pcSeconds optional
-    func JetDefragmentA(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<Int8>, pcPasses: CPointer<UInt32>, pcSeconds: CPointer<UInt32>, grbit: UInt32): Int32
-    // param-hint: szTableName optional
-    // param-hint: pcPasses optional
-    // param-hint: pcSeconds optional
-    func JetDefragmentW(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<UInt16>, pcPasses: CPointer<UInt32>, pcSeconds: CPointer<UInt32>, grbit: UInt32): Int32
-    func JetDeleteTableA(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<Int8>): Int32
-    func JetDeleteTableW(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<UInt16>): Int32
-    // param-hint: szFilename optional
-    func JetDetachDatabase2A(sesid: JET_SESID, szFilename: CPointer<Int8>, grbit: UInt32): Int32
-    // param-hint: szFilename optional
-    func JetDetachDatabase2W(sesid: JET_SESID, szFilename: CPointer<UInt16>, grbit: UInt32): Int32
-    // param-hint: szFilename optional
-    func JetDetachDatabaseA(sesid: JET_SESID, szFilename: CPointer<Int8>): Int32
-    // param-hint: szFilename optional
-    func JetDetachDatabaseW(sesid: JET_SESID, szFilename: CPointer<UInt16>): Int32
-    func JetDupSession(sesid: JET_SESID, psesid: CPointer<JET_SESID>): Int32
-    func JetEndExternalBackup(): Int32
-    func JetEndExternalBackupInstance(instance: JET_INSTANCE): Int32
-    func JetEndExternalBackupInstance2(instance: JET_INSTANCE, grbit: UInt32): Int32
-    func JetEndSession(sesid: JET_SESID, grbit: UInt32): Int32
-    // param-hint: rgrstmap len=param[3] optional
-    // param-hint: szTargetInstanceName optional
-    // param-hint: szTargetInstanceLogPath optional
-    // param-hint: szTargetInstanceCheckpointPath optional
-    func JetExternalRestore2A(szCheckpointFilePath: CPointer<Int8>, szLogPath: CPointer<Int8>, rgrstmap: CPointer<JET_RSTMAP_A>, crstfilemap: Int32, szBackupLogPath: CPointer<Int8>, pLogInfo: CPointer<JET_LOGINFO_A>, szTargetInstanceName: CPointer<Int8>, szTargetInstanceLogPath: CPointer<Int8>, szTargetInstanceCheckpointPath: CPointer<Int8>, pfn: JET_PFNSTATUS): Int32
-    // param-hint: rgrstmap len=param[3] optional
-    // param-hint: szTargetInstanceName optional
-    // param-hint: szTargetInstanceLogPath optional
-    // param-hint: szTargetInstanceCheckpointPath optional
-    func JetExternalRestore2W(szCheckpointFilePath: CPointer<UInt16>, szLogPath: CPointer<UInt16>, rgrstmap: CPointer<JET_RSTMAP_W>, crstfilemap: Int32, szBackupLogPath: CPointer<UInt16>, pLogInfo: CPointer<JET_LOGINFO_W>, szTargetInstanceName: CPointer<UInt16>, szTargetInstanceLogPath: CPointer<UInt16>, szTargetInstanceCheckpointPath: CPointer<UInt16>, pfn: JET_PFNSTATUS): Int32
-    // param-hint: rgrstmap len=param[3] optional
-    func JetExternalRestoreA(szCheckpointFilePath: CPointer<Int8>, szLogPath: CPointer<Int8>, rgrstmap: CPointer<JET_RSTMAP_A>, crstfilemap: Int32, szBackupLogPath: CPointer<Int8>, genLow: Int32, genHigh: Int32, pfn: JET_PFNSTATUS): Int32
-    // param-hint: rgrstmap len=param[3] optional
-    func JetExternalRestoreW(szCheckpointFilePath: CPointer<UInt16>, szLogPath: CPointer<UInt16>, rgrstmap: CPointer<JET_RSTMAP_W>, crstfilemap: Int32, szBackupLogPath: CPointer<UInt16>, genLow: Int32, genHigh: Int32, pfn: JET_PFNSTATUS): Int32
-    func JetFreeBuffer(pbBuf: CPointer<Int8>): Int32
-    // param-hint: szzDatabases bytes=param[1] optional
-    // param-hint: pcbActual optional
-    func JetGetAttachInfoA(szzDatabases: CPointer<Int8>, cbMax: UInt32, pcbActual: CPointer<UInt32>): Int32
-    // param-hint: szzDatabases bytes=param[2] optional
-    // param-hint: pcbActual optional
-    func JetGetAttachInfoInstanceA(instance: JET_INSTANCE, szzDatabases: CPointer<Int8>, cbMax: UInt32, pcbActual: CPointer<UInt32>): Int32
-    // param-hint: szzDatabases bytes=param[2] optional
-    // param-hint: pcbActual optional
-    func JetGetAttachInfoInstanceW(instance: JET_INSTANCE, szzDatabases: CPointer<UInt16>, cbMax: UInt32, pcbActual: CPointer<UInt32>): Int32
-    // param-hint: wszzDatabases bytes=param[1] optional
-    // param-hint: pcbActual optional
-    func JetGetAttachInfoW(wszzDatabases: CPointer<UInt16>, cbMax: UInt32, pcbActual: CPointer<UInt32>): Int32
-    // param-hint: pColumnNameOrId optional
-    // param-hint: pvResult bytes=param[5]
-    func JetGetColumnInfoA(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<Int8>, pColumnNameOrId: CPointer<Int8>, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32
-    // param-hint: pwColumnNameOrId optional
-    // param-hint: pvResult bytes=param[5]
-    func JetGetColumnInfoW(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<UInt16>, pwColumnNameOrId: CPointer<UInt16>, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32
-    // param-hint: pvResult bytes=param[2]
-    func JetGetDatabaseFileInfoA(szDatabaseName: CPointer<Int8>, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32
-    // param-hint: pvResult bytes=param[2]
-    func JetGetDatabaseFileInfoW(szDatabaseName: CPointer<UInt16>, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32
-    // param-hint: pvResult bytes=param[3]
-    func JetGetDatabaseInfoA(sesid: JET_SESID, dbid: UInt32, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32
-    // param-hint: pvResult bytes=param[3]
-    func JetGetDatabaseInfoW(sesid: JET_SESID, dbid: UInt32, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32
-    // param-hint: pvContext optional
-    // param-hint: pvResult bytes=param[2]
-    func JetGetErrorInfoW(pvContext: CPointer<Unit>, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32, grbit: UInt32): Int32
-    // param-hint: szIndexName optional
-    // param-hint: pvResult bytes=param[5]
-    func JetGetIndexInfoA(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<Int8>, szIndexName: CPointer<Int8>, pvResult: CPointer<Unit>, cbResult: UInt32, InfoLevel: UInt32): Int32
-    // param-hint: szIndexName optional
-    // param-hint: pvResult bytes=param[5]
-    func JetGetIndexInfoW(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<UInt16>, szIndexName: CPointer<UInt16>, pvResult: CPointer<Unit>, cbResult: UInt32, InfoLevel: UInt32): Int32
-    // param-hint: pvResult bytes=param[2]
-    func JetGetInstanceMiscInfo(instance: JET_INSTANCE, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32
-    // param-hint: szzLogs bytes=param[1] optional
-    // param-hint: pcbActual optional
-    func JetGetLogInfoA(szzLogs: CPointer<Int8>, cbMax: UInt32, pcbActual: CPointer<UInt32>): Int32
-    // param-hint: szzLogs bytes=param[2] optional
-    // param-hint: pcbActual optional
-    // param-hint: pLogInfo optional
-    func JetGetLogInfoInstance2A(instance: JET_INSTANCE, szzLogs: CPointer<Int8>, cbMax: UInt32, pcbActual: CPointer<UInt32>, pLogInfo: CPointer<JET_LOGINFO_A>): Int32
-    // param-hint: wszzLogs bytes=param[2] optional
-    // param-hint: pcbActual optional
-    // param-hint: pLogInfo optional
-    func JetGetLogInfoInstance2W(instance: JET_INSTANCE, wszzLogs: CPointer<UInt16>, cbMax: UInt32, pcbActual: CPointer<UInt32>, pLogInfo: CPointer<JET_LOGINFO_W>): Int32
-    // param-hint: szzLogs bytes=param[2] optional
-    // param-hint: pcbActual optional
-    func JetGetLogInfoInstanceA(instance: JET_INSTANCE, szzLogs: CPointer<Int8>, cbMax: UInt32, pcbActual: CPointer<UInt32>): Int32
-    // param-hint: wszzLogs bytes=param[2] optional
-    // param-hint: pcbActual optional
-    func JetGetLogInfoInstanceW(instance: JET_INSTANCE, wszzLogs: CPointer<UInt16>, cbMax: UInt32, pcbActual: CPointer<UInt32>): Int32
-    // param-hint: szzLogs bytes=param[1] optional
-    // param-hint: pcbActual optional
-    func JetGetLogInfoW(szzLogs: CPointer<UInt16>, cbMax: UInt32, pcbActual: CPointer<UInt32>): Int32
-    // param-hint: szContainerName optional
-    // param-hint: szObjectName optional
-    // param-hint: pvResult bytes=param[6]
-    func JetGetObjectInfoA(sesid: JET_SESID, dbid: UInt32, objtyp: UInt32, szContainerName: CPointer<Int8>, szObjectName: CPointer<Int8>, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32
-    // param-hint: szContainerName optional
-    // param-hint: szObjectName optional
-    // param-hint: pvResult bytes=param[6]
-    func JetGetObjectInfoW(sesid: JET_SESID, dbid: UInt32, objtyp: UInt32, szContainerName: CPointer<UInt16>, szObjectName: CPointer<UInt16>, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32
-    // param-hint: sesid optional
-    // param-hint: pvParam len=param[3]
-    // param-hint: pcbParamActual optional
-    func JetGetSessionParameter(sesid: JET_SESID, sesparamid: UInt32, pvParam: CPointer<Unit>, cbParamMax: UInt32, pcbParamActual: CPointer<UInt32>): Int32
-    // param-hint: pvResult bytes=param[1]
-    func JetGetThreadStats(pvResult: CPointer<Unit>, cbMax: UInt32): Int32
-    // param-hint: szzLogs bytes=param[2] optional
-    // param-hint: pcbActual optional
-    func JetGetTruncateLogInfoInstanceA(instance: JET_INSTANCE, szzLogs: CPointer<Int8>, cbMax: UInt32, pcbActual: CPointer<UInt32>): Int32
-    // param-hint: wszzLogs bytes=param[2] optional
-    // param-hint: pcbActual optional
-    func JetGetTruncateLogInfoInstanceW(instance: JET_INSTANCE, wszzLogs: CPointer<UInt16>, cbMax: UInt32, pcbActual: CPointer<UInt32>): Int32
-    func JetGetVersion(sesid: JET_SESID, pwVersion: CPointer<UInt32>): Int32
-    func JetGrowDatabase(sesid: JET_SESID, dbid: UInt32, cpg: UInt32, pcpgReal: CPointer<UInt32>): Int32
-    func JetIdle(sesid: JET_SESID, grbit: UInt32): Int32
-    // param-hint: pinstance optional
-    func JetInit(pinstance: CPointer<JET_INSTANCE>): Int32
-    // param-hint: pinstance optional
-    func JetInit2(pinstance: CPointer<JET_INSTANCE>, grbit: UInt32): Int32
-    // param-hint: pinstance optional
-    // param-hint: prstInfo optional
-    func JetInit3A(pinstance: CPointer<JET_INSTANCE>, prstInfo: CPointer<JET_RSTINFO_A>, grbit: UInt32): Int32
-    // param-hint: pinstance optional
-    // param-hint: prstInfo optional
-    func JetInit3W(pinstance: CPointer<JET_INSTANCE>, prstInfo: CPointer<JET_RSTINFO_W>, grbit: UInt32): Int32
-    func JetOSSnapshotAbort(snapId: JET_OSSNAPID, grbit: UInt32): Int32
-    func JetOSSnapshotEnd(snapId: JET_OSSNAPID, grbit: UInt32): Int32
-    func JetOSSnapshotPrepare(psnapId: CPointer<JET_OSSNAPID>, grbit: UInt32): Int32
-    func JetOSSnapshotPrepareInstance(snapId: JET_OSSNAPID, instance: JET_INSTANCE, grbit: UInt32): Int32
-    func JetOSSnapshotThaw(snapId: JET_OSSNAPID, grbit: UInt32): Int32
-    func JetOSSnapshotTruncateLog(snapId: JET_OSSNAPID, grbit: UInt32): Int32
-    func JetOSSnapshotTruncateLogInstance(snapId: JET_OSSNAPID, instance: JET_INSTANCE, grbit: UInt32): Int32
-    // param-hint: szConnect optional
-    func JetOpenDatabaseA(sesid: JET_SESID, szFilename: CPointer<Int8>, szConnect: CPointer<Int8>, pdbid: CPointer<UInt32>, grbit: UInt32): Int32
-    // param-hint: szConnect optional
-    func JetOpenDatabaseW(sesid: JET_SESID, szFilename: CPointer<UInt16>, szConnect: CPointer<UInt16>, pdbid: CPointer<UInt32>, grbit: UInt32): Int32
-    func JetRenameTableA(sesid: JET_SESID, dbid: UInt32, szName: CPointer<Int8>, szNameNew: CPointer<Int8>): Int32
-    func JetRenameTableW(sesid: JET_SESID, dbid: UInt32, szName: CPointer<UInt16>, szNameNew: CPointer<UInt16>): Int32
-    func JetResetSessionContext(sesid: JET_SESID): Int32
-    func JetResizeDatabase(sesid: JET_SESID, dbid: UInt32, cpgTarget: UInt32, pcpgActual: CPointer<UInt32>, grbit: UInt32): Int32
-    // param-hint: szDest optional
-    // param-hint: pfn optional
-    func JetRestore2A(sz: CPointer<Int8>, szDest: CPointer<Int8>, pfn: JET_PFNSTATUS): Int32
-    // param-hint: szDest optional
-    // param-hint: pfn optional
-    func JetRestore2W(sz: CPointer<UInt16>, szDest: CPointer<UInt16>, pfn: JET_PFNSTATUS): Int32
-    // param-hint: pfn optional
-    func JetRestoreA(szSource: CPointer<Int8>, pfn: JET_PFNSTATUS): Int32
-    // param-hint: szDest optional
-    // param-hint: pfn optional
-    func JetRestoreInstanceA(instance: JET_INSTANCE, sz: CPointer<Int8>, szDest: CPointer<Int8>, pfn: JET_PFNSTATUS): Int32
-    // param-hint: szDest optional
-    // param-hint: pfn optional
-    func JetRestoreInstanceW(instance: JET_INSTANCE, sz: CPointer<UInt16>, szDest: CPointer<UInt16>, pfn: JET_PFNSTATUS): Int32
-    // param-hint: pfn optional
-    func JetRestoreW(szSource: CPointer<UInt16>, pfn: JET_PFNSTATUS): Int32
-    func JetRollback(sesid: JET_SESID, grbit: UInt32): Int32
-    // param-hint: pvData bytes=param[5]
-    func JetSetColumnDefaultValueA(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<Int8>, szColumnName: CPointer<Int8>, pvData: CPointer<Unit>, cbData: UInt32, grbit: UInt32): Int32
-    // param-hint: pvData bytes=param[5]
-    func JetSetColumnDefaultValueW(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<UInt16>, szColumnName: CPointer<UInt16>, pvData: CPointer<Unit>, cbData: UInt32, grbit: UInt32): Int32
-    func JetSetDatabaseSizeA(sesid: JET_SESID, szDatabaseName: CPointer<Int8>, cpg: UInt32, pcpgReal: CPointer<UInt32>): Int32
-    func JetSetDatabaseSizeW(sesid: JET_SESID, szDatabaseName: CPointer<UInt16>, cpg: UInt32, pcpgReal: CPointer<UInt32>): Int32
-    // param-hint: sesid optional
-    // param-hint: pvParam bytes=param[3] optional
-    func JetSetSessionParameter(sesid: JET_SESID, sesparamid: UInt32, pvParam: CPointer<Unit>, cbParam: UInt32): Int32
-    func JetStopBackup(): Int32
-    func JetStopBackupInstance(instance: JET_INSTANCE): Int32
-    func JetStopService(): Int32
-    func JetStopServiceInstance(instance: JET_INSTANCE): Int32
-    func JetStopServiceInstance2(instance: JET_INSTANCE, grbit: UInt32): Int32
-    func JetTerm(instance: JET_INSTANCE): Int32
-    func JetTerm2(instance: JET_INSTANCE, grbit: UInt32): Int32
-    func JetTruncateLog(): Int32
-    func JetTruncateLogInstance(instance: JET_INSTANCE): Int32
 }
 
-@When[ESENT == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_Storage_StructuredStorage == "on")]
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetBeginSessionW == "on"]
+public unsafe func Windows_JetBeginSessionW(instance: JET_INSTANCE, psesid: CPointer<JET_SESID>, szUserName: CPointer<UInt16>, szPassword: CPointer<UInt16>): Int32 {
+    return JetBeginSessionW(instance, psesid, szUserName, szPassword)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetBeginTransaction == "on"]
 foreign {
-    func JetGetRecordSize(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, precsize: CPointer<JET_RECSIZE>, grbit: UInt32): Int32
-    func JetGetRecordSize2(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, precsize: CPointer<JET_RECSIZE2>, grbit: UInt32): Int32
-    // param-hint: szIndexName optional
-    // param-hint: pindexid optional
-    func JetSetCurrentIndex4A(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<Int8>, pindexid: CPointer<JET_INDEXID>, grbit: UInt32, itagSequence: UInt32): Int32
-    // param-hint: szIndexName optional
-    // param-hint: pindexid optional
-    func JetSetCurrentIndex4W(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<UInt16>, pindexid: CPointer<JET_INDEXID>, grbit: UInt32, itagSequence: UInt32): Int32
+    func JetBeginTransaction(sesid: JET_SESID): Int32
 }
 
-@When[ESENT == "on" && ((arch == "x86_64" || arch == "aarch64"))]
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetBeginTransaction == "on"]
+public unsafe func Windows_JetBeginTransaction(sesid: JET_SESID): Int32 {
+    return JetBeginTransaction(sesid)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetBeginTransaction2 == "on"]
+foreign {
+    func JetBeginTransaction2(sesid: JET_SESID, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetBeginTransaction2 == "on"]
+public unsafe func Windows_JetBeginTransaction2(sesid: JET_SESID, grbit: UInt32): Int32 {
+    return JetBeginTransaction2(sesid, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetBeginTransaction3 == "on"]
+foreign {
+    func JetBeginTransaction3(sesid: JET_SESID, trxid: Int64, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetBeginTransaction3 == "on"]
+public unsafe func Windows_JetBeginTransaction3(sesid: JET_SESID, trxid: Int64, grbit: UInt32): Int32 {
+    return JetBeginTransaction3(sesid, trxid, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCloseDatabase == "on"]
+foreign {
+    func JetCloseDatabase(sesid: JET_SESID, dbid: UInt32, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCloseDatabase == "on"]
+public unsafe func Windows_JetCloseDatabase(sesid: JET_SESID, dbid: UInt32, grbit: UInt32): Int32 {
+    return JetCloseDatabase(sesid, dbid, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCloseFile == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
+    func JetCloseFile(hfFile: Win32_Storage_StructuredStorage.JET_HANDLE): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCloseFile == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetCloseFile(hfFile: Win32_Storage_StructuredStorage.JET_HANDLE): Int32 {
+    return JetCloseFile(hfFile)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCloseFileInstance == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
+    func JetCloseFileInstance(instance: JET_INSTANCE, hfFile: Win32_Storage_StructuredStorage.JET_HANDLE): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCloseFileInstance == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetCloseFileInstance(instance: JET_INSTANCE, hfFile: Win32_Storage_StructuredStorage.JET_HANDLE): Int32 {
+    return JetCloseFileInstance(instance, hfFile)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCloseTable == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
+    func JetCloseTable(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCloseTable == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetCloseTable(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID): Int32 {
+    return JetCloseTable(sesid, tableid)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCommitTransaction == "on"]
+foreign {
+    func JetCommitTransaction(sesid: JET_SESID, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCommitTransaction == "on"]
+public unsafe func Windows_JetCommitTransaction(sesid: JET_SESID, grbit: UInt32): Int32 {
+    return JetCommitTransaction(sesid, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCommitTransaction2 == "on" && (arch == "x86_64" || arch == "aarch64")]
 foreign {
     // param-hint: pCommitId optional
     func JetCommitTransaction2(sesid: JET_SESID, grbit: UInt32, cmsecDurableCommit: UInt32, pCommitId: CPointer<JET_COMMIT_ID>): Int32
 }
 
-@When[ESENT == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCommitTransaction2 == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_JetCommitTransaction2(sesid: JET_SESID, grbit: UInt32, cmsecDurableCommit: UInt32, pCommitId: CPointer<JET_COMMIT_ID>): Int32 {
+    return JetCommitTransaction2(sesid, grbit, cmsecDurableCommit, pCommitId)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCompactA == "on"]
 foreign {
-    // param-hint: pvDefault bytes=param[5] optional
-    // param-hint: pcolumnid optional
-    func JetAddColumnA(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szColumnName: CPointer<Int8>, pcolumndef: CPointer<JET_COLUMNDEF>, pvDefault: CPointer<Unit>, cbDefault: UInt32, pcolumnid: CPointer<UInt32>): Int32
-    // param-hint: pvDefault bytes=param[5] optional
-    // param-hint: pcolumnid optional
-    func JetAddColumnW(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szColumnName: CPointer<UInt16>, pcolumndef: CPointer<JET_COLUMNDEF>, pvDefault: CPointer<Unit>, cbDefault: UInt32, pcolumnid: CPointer<UInt32>): Int32
-    func JetCloseFile(hfFile: Win32_Storage_StructuredStorage.JET_HANDLE): Int32
-    func JetCloseFileInstance(instance: JET_INSTANCE, hfFile: Win32_Storage_StructuredStorage.JET_HANDLE): Int32
-    func JetCloseTable(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID): Int32
+    // param-hint: pconvert optional
+    func JetCompactA(sesid: JET_SESID, szDatabaseSrc: CPointer<Int8>, szDatabaseDest: CPointer<Int8>, pfnStatus: JET_PFNSTATUS, pconvert: CPointer<JET_CONVERT_A>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCompactA == "on"]
+public unsafe func Windows_JetCompactA(sesid: JET_SESID, szDatabaseSrc: CPointer<Int8>, szDatabaseDest: CPointer<Int8>, pfnStatus: JET_PFNSTATUS, pconvert: CPointer<JET_CONVERT_A>, grbit: UInt32): Int32 {
+    return JetCompactA(sesid, szDatabaseSrc, szDatabaseDest, pfnStatus, pconvert, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCompactW == "on"]
+foreign {
+    // param-hint: pconvert optional
+    func JetCompactW(sesid: JET_SESID, szDatabaseSrc: CPointer<UInt16>, szDatabaseDest: CPointer<UInt16>, pfnStatus: JET_PFNSTATUS, pconvert: CPointer<JET_CONVERT_W>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCompactW == "on"]
+public unsafe func Windows_JetCompactW(sesid: JET_SESID, szDatabaseSrc: CPointer<UInt16>, szDatabaseDest: CPointer<UInt16>, pfnStatus: JET_PFNSTATUS, pconvert: CPointer<JET_CONVERT_W>, grbit: UInt32): Int32 {
+    return JetCompactW(sesid, szDatabaseSrc, szDatabaseDest, pfnStatus, pconvert, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetComputeStats == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetComputeStats(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetComputeStats == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetComputeStats(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID): Int32 {
+    return JetComputeStats(sesid, tableid)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetConfigureProcessForCrashDump == "on"]
+foreign {
+    func JetConfigureProcessForCrashDump(grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetConfigureProcessForCrashDump == "on"]
+public unsafe func Windows_JetConfigureProcessForCrashDump(grbit: UInt32): Int32 {
+    return JetConfigureProcessForCrashDump(grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateDatabase2A == "on"]
+foreign {
+    func JetCreateDatabase2A(sesid: JET_SESID, szFilename: CPointer<Int8>, cpgDatabaseSizeMax: UInt32, pdbid: CPointer<UInt32>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateDatabase2A == "on"]
+public unsafe func Windows_JetCreateDatabase2A(sesid: JET_SESID, szFilename: CPointer<Int8>, cpgDatabaseSizeMax: UInt32, pdbid: CPointer<UInt32>, grbit: UInt32): Int32 {
+    return JetCreateDatabase2A(sesid, szFilename, cpgDatabaseSizeMax, pdbid, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateDatabase2W == "on"]
+foreign {
+    func JetCreateDatabase2W(sesid: JET_SESID, szFilename: CPointer<UInt16>, cpgDatabaseSizeMax: UInt32, pdbid: CPointer<UInt32>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateDatabase2W == "on"]
+public unsafe func Windows_JetCreateDatabase2W(sesid: JET_SESID, szFilename: CPointer<UInt16>, cpgDatabaseSizeMax: UInt32, pdbid: CPointer<UInt32>, grbit: UInt32): Int32 {
+    return JetCreateDatabase2W(sesid, szFilename, cpgDatabaseSizeMax, pdbid, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateDatabaseA == "on"]
+foreign {
+    // param-hint: szConnect optional
+    func JetCreateDatabaseA(sesid: JET_SESID, szFilename: CPointer<Int8>, szConnect: CPointer<Int8>, pdbid: CPointer<UInt32>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateDatabaseA == "on"]
+public unsafe func Windows_JetCreateDatabaseA(sesid: JET_SESID, szFilename: CPointer<Int8>, szConnect: CPointer<Int8>, pdbid: CPointer<UInt32>, grbit: UInt32): Int32 {
+    return JetCreateDatabaseA(sesid, szFilename, szConnect, pdbid, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateDatabaseW == "on"]
+foreign {
+    // param-hint: szConnect optional
+    func JetCreateDatabaseW(sesid: JET_SESID, szFilename: CPointer<UInt16>, szConnect: CPointer<UInt16>, pdbid: CPointer<UInt32>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateDatabaseW == "on"]
+public unsafe func Windows_JetCreateDatabaseW(sesid: JET_SESID, szFilename: CPointer<UInt16>, szConnect: CPointer<UInt16>, pdbid: CPointer<UInt32>, grbit: UInt32): Int32 {
+    return JetCreateDatabaseW(sesid, szFilename, szConnect, pdbid, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateIndex2A == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: pindexcreate len=param[3]
     func JetCreateIndex2A(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pindexcreate: CPointer<JET_INDEXCREATE_A>, cIndexCreate: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateIndex2A == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetCreateIndex2A(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pindexcreate: CPointer<JET_INDEXCREATE_A>, cIndexCreate: UInt32): Int32 {
+    return JetCreateIndex2A(sesid, tableid, pindexcreate, cIndexCreate)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateIndex2W == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: pindexcreate len=param[3]
     func JetCreateIndex2W(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pindexcreate: CPointer<JET_INDEXCREATE_W>, cIndexCreate: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateIndex2W == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetCreateIndex2W(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pindexcreate: CPointer<JET_INDEXCREATE_W>, cIndexCreate: UInt32): Int32 {
+    return JetCreateIndex2W(sesid, tableid, pindexcreate, cIndexCreate)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateIndex3A == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: pindexcreate len=param[3]
     func JetCreateIndex3A(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pindexcreate: CPointer<JET_INDEXCREATE2_A>, cIndexCreate: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateIndex3A == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetCreateIndex3A(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pindexcreate: CPointer<JET_INDEXCREATE2_A>, cIndexCreate: UInt32): Int32 {
+    return JetCreateIndex3A(sesid, tableid, pindexcreate, cIndexCreate)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateIndex3W == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: pindexcreate len=param[3]
     func JetCreateIndex3W(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pindexcreate: CPointer<JET_INDEXCREATE2_W>, cIndexCreate: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateIndex3W == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetCreateIndex3W(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pindexcreate: CPointer<JET_INDEXCREATE2_W>, cIndexCreate: UInt32): Int32 {
+    return JetCreateIndex3W(sesid, tableid, pindexcreate, cIndexCreate)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateIndex4A == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: pindexcreate len=param[3]
     func JetCreateIndex4A(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pindexcreate: CPointer<JET_INDEXCREATE3_A>, cIndexCreate: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateIndex4A == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetCreateIndex4A(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pindexcreate: CPointer<JET_INDEXCREATE3_A>, cIndexCreate: UInt32): Int32 {
+    return JetCreateIndex4A(sesid, tableid, pindexcreate, cIndexCreate)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateIndex4W == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: pindexcreate len=param[3]
     func JetCreateIndex4W(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pindexcreate: CPointer<JET_INDEXCREATE3_W>, cIndexCreate: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateIndex4W == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetCreateIndex4W(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pindexcreate: CPointer<JET_INDEXCREATE3_W>, cIndexCreate: UInt32): Int32 {
+    return JetCreateIndex4W(sesid, tableid, pindexcreate, cIndexCreate)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateIndexA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: szKey bytes=param[5]
     func JetCreateIndexA(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<Int8>, grbit: UInt32, szKey: CPointer<Int8>, cbKey: UInt32, lDensity: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateIndexA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetCreateIndexA(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<Int8>, grbit: UInt32, szKey: CPointer<Int8>, cbKey: UInt32, lDensity: UInt32): Int32 {
+    return JetCreateIndexA(sesid, tableid, szIndexName, grbit, szKey, cbKey, lDensity)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateIndexW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: szKey bytes=param[5]
     func JetCreateIndexW(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<UInt16>, grbit: UInt32, szKey: CPointer<UInt16>, cbKey: UInt32, lDensity: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateIndexW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetCreateIndexW(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<UInt16>, grbit: UInt32, szKey: CPointer<UInt16>, cbKey: UInt32, lDensity: UInt32): Int32 {
+    return JetCreateIndexW(sesid, tableid, szIndexName, grbit, szKey, cbKey, lDensity)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateInstance2A == "on"]
+foreign {
+    // param-hint: szInstanceName optional
+    // param-hint: szDisplayName optional
+    func JetCreateInstance2A(pinstance: CPointer<JET_INSTANCE>, szInstanceName: CPointer<Int8>, szDisplayName: CPointer<Int8>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateInstance2A == "on"]
+public unsafe func Windows_JetCreateInstance2A(pinstance: CPointer<JET_INSTANCE>, szInstanceName: CPointer<Int8>, szDisplayName: CPointer<Int8>, grbit: UInt32): Int32 {
+    return JetCreateInstance2A(pinstance, szInstanceName, szDisplayName, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateInstance2W == "on"]
+foreign {
+    // param-hint: szInstanceName optional
+    // param-hint: szDisplayName optional
+    func JetCreateInstance2W(pinstance: CPointer<JET_INSTANCE>, szInstanceName: CPointer<UInt16>, szDisplayName: CPointer<UInt16>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateInstance2W == "on"]
+public unsafe func Windows_JetCreateInstance2W(pinstance: CPointer<JET_INSTANCE>, szInstanceName: CPointer<UInt16>, szDisplayName: CPointer<UInt16>, grbit: UInt32): Int32 {
+    return JetCreateInstance2W(pinstance, szInstanceName, szDisplayName, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateInstanceA == "on"]
+foreign {
+    // param-hint: szInstanceName optional
+    func JetCreateInstanceA(pinstance: CPointer<JET_INSTANCE>, szInstanceName: CPointer<Int8>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateInstanceA == "on"]
+public unsafe func Windows_JetCreateInstanceA(pinstance: CPointer<JET_INSTANCE>, szInstanceName: CPointer<Int8>): Int32 {
+    return JetCreateInstanceA(pinstance, szInstanceName)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateInstanceW == "on"]
+foreign {
+    // param-hint: szInstanceName optional
+    func JetCreateInstanceW(pinstance: CPointer<JET_INSTANCE>, szInstanceName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateInstanceW == "on"]
+public unsafe func Windows_JetCreateInstanceW(pinstance: CPointer<JET_INSTANCE>, szInstanceName: CPointer<UInt16>): Int32 {
+    return JetCreateInstanceW(pinstance, szInstanceName)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateTableA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetCreateTableA(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<Int8>, lPages: UInt32, lDensity: UInt32, ptableid: CPointer<Win32_Storage_StructuredStorage.JET_TABLEID>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateTableA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetCreateTableA(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<Int8>, lPages: UInt32, lDensity: UInt32, ptableid: CPointer<Win32_Storage_StructuredStorage.JET_TABLEID>): Int32 {
+    return JetCreateTableA(sesid, dbid, szTableName, lPages, lDensity, ptableid)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateTableColumnIndex2A == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetCreateTableColumnIndex2A(sesid: JET_SESID, dbid: UInt32, ptablecreate: CPointer<JET_TABLECREATE2_A>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateTableColumnIndex2A == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetCreateTableColumnIndex2A(sesid: JET_SESID, dbid: UInt32, ptablecreate: CPointer<JET_TABLECREATE2_A>): Int32 {
+    return JetCreateTableColumnIndex2A(sesid, dbid, ptablecreate)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateTableColumnIndex2W == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetCreateTableColumnIndex2W(sesid: JET_SESID, dbid: UInt32, ptablecreate: CPointer<JET_TABLECREATE2_W>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateTableColumnIndex2W == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetCreateTableColumnIndex2W(sesid: JET_SESID, dbid: UInt32, ptablecreate: CPointer<JET_TABLECREATE2_W>): Int32 {
+    return JetCreateTableColumnIndex2W(sesid, dbid, ptablecreate)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateTableColumnIndex3A == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetCreateTableColumnIndex3A(sesid: JET_SESID, dbid: UInt32, ptablecreate: CPointer<JET_TABLECREATE3_A>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateTableColumnIndex3A == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetCreateTableColumnIndex3A(sesid: JET_SESID, dbid: UInt32, ptablecreate: CPointer<JET_TABLECREATE3_A>): Int32 {
+    return JetCreateTableColumnIndex3A(sesid, dbid, ptablecreate)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateTableColumnIndex3W == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetCreateTableColumnIndex3W(sesid: JET_SESID, dbid: UInt32, ptablecreate: CPointer<JET_TABLECREATE3_W>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateTableColumnIndex3W == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetCreateTableColumnIndex3W(sesid: JET_SESID, dbid: UInt32, ptablecreate: CPointer<JET_TABLECREATE3_W>): Int32 {
+    return JetCreateTableColumnIndex3W(sesid, dbid, ptablecreate)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateTableColumnIndex4A == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetCreateTableColumnIndex4A(sesid: JET_SESID, dbid: UInt32, ptablecreate: CPointer<JET_TABLECREATE4_A>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateTableColumnIndex4A == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetCreateTableColumnIndex4A(sesid: JET_SESID, dbid: UInt32, ptablecreate: CPointer<JET_TABLECREATE4_A>): Int32 {
+    return JetCreateTableColumnIndex4A(sesid, dbid, ptablecreate)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateTableColumnIndex4W == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetCreateTableColumnIndex4W(sesid: JET_SESID, dbid: UInt32, ptablecreate: CPointer<JET_TABLECREATE4_W>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateTableColumnIndex4W == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetCreateTableColumnIndex4W(sesid: JET_SESID, dbid: UInt32, ptablecreate: CPointer<JET_TABLECREATE4_W>): Int32 {
+    return JetCreateTableColumnIndex4W(sesid, dbid, ptablecreate)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateTableColumnIndexA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetCreateTableColumnIndexA(sesid: JET_SESID, dbid: UInt32, ptablecreate: CPointer<JET_TABLECREATE_A>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateTableColumnIndexA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetCreateTableColumnIndexA(sesid: JET_SESID, dbid: UInt32, ptablecreate: CPointer<JET_TABLECREATE_A>): Int32 {
+    return JetCreateTableColumnIndexA(sesid, dbid, ptablecreate)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateTableColumnIndexW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetCreateTableColumnIndexW(sesid: JET_SESID, dbid: UInt32, ptablecreate: CPointer<JET_TABLECREATE_W>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateTableColumnIndexW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetCreateTableColumnIndexW(sesid: JET_SESID, dbid: UInt32, ptablecreate: CPointer<JET_TABLECREATE_W>): Int32 {
+    return JetCreateTableColumnIndexW(sesid, dbid, ptablecreate)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateTableW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetCreateTableW(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<UInt16>, lPages: UInt32, lDensity: UInt32, ptableid: CPointer<Win32_Storage_StructuredStorage.JET_TABLEID>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetCreateTableW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetCreateTableW(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<UInt16>, lPages: UInt32, lDensity: UInt32, ptableid: CPointer<Win32_Storage_StructuredStorage.JET_TABLEID>): Int32 {
+    return JetCreateTableW(sesid, dbid, szTableName, lPages, lDensity, ptableid)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDefragment2A == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: szTableName optional
     // param-hint: pcPasses optional
     // param-hint: pcSeconds optional
     func JetDefragment2A(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<Int8>, pcPasses: CPointer<UInt32>, pcSeconds: CPointer<UInt32>, callback: JET_CALLBACK, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDefragment2A == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetDefragment2A(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<Int8>, pcPasses: CPointer<UInt32>, pcSeconds: CPointer<UInt32>, callback: JET_CALLBACK, grbit: UInt32): Int32 {
+    return JetDefragment2A(sesid, dbid, szTableName, pcPasses, pcSeconds, callback, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDefragment2W == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: szTableName optional
     // param-hint: pcPasses optional
     // param-hint: pcSeconds optional
     func JetDefragment2W(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<UInt16>, pcPasses: CPointer<UInt32>, pcSeconds: CPointer<UInt32>, callback: JET_CALLBACK, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDefragment2W == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetDefragment2W(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<UInt16>, pcPasses: CPointer<UInt32>, pcSeconds: CPointer<UInt32>, callback: JET_CALLBACK, grbit: UInt32): Int32 {
+    return JetDefragment2W(sesid, dbid, szTableName, pcPasses, pcSeconds, callback, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDefragment3A == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: szTableName optional
     // param-hint: pcPasses optional
     // param-hint: pcSeconds optional
     func JetDefragment3A(sesid: JET_SESID, szDatabaseName: CPointer<Int8>, szTableName: CPointer<Int8>, pcPasses: CPointer<UInt32>, pcSeconds: CPointer<UInt32>, callback: JET_CALLBACK, pvContext: CPointer<Unit>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDefragment3A == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetDefragment3A(sesid: JET_SESID, szDatabaseName: CPointer<Int8>, szTableName: CPointer<Int8>, pcPasses: CPointer<UInt32>, pcSeconds: CPointer<UInt32>, callback: JET_CALLBACK, pvContext: CPointer<Unit>, grbit: UInt32): Int32 {
+    return JetDefragment3A(sesid, szDatabaseName, szTableName, pcPasses, pcSeconds, callback, pvContext, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDefragment3W == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: szTableName optional
     // param-hint: pcPasses optional
     // param-hint: pcSeconds optional
     func JetDefragment3W(sesid: JET_SESID, szDatabaseName: CPointer<UInt16>, szTableName: CPointer<UInt16>, pcPasses: CPointer<UInt32>, pcSeconds: CPointer<UInt32>, callback: JET_CALLBACK, pvContext: CPointer<Unit>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDefragment3W == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetDefragment3W(sesid: JET_SESID, szDatabaseName: CPointer<UInt16>, szTableName: CPointer<UInt16>, pcPasses: CPointer<UInt32>, pcSeconds: CPointer<UInt32>, callback: JET_CALLBACK, pvContext: CPointer<Unit>, grbit: UInt32): Int32 {
+    return JetDefragment3W(sesid, szDatabaseName, szTableName, pcPasses, pcSeconds, callback, pvContext, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDefragmentA == "on"]
+foreign {
+    // param-hint: szTableName optional
+    // param-hint: pcPasses optional
+    // param-hint: pcSeconds optional
+    func JetDefragmentA(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<Int8>, pcPasses: CPointer<UInt32>, pcSeconds: CPointer<UInt32>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDefragmentA == "on"]
+public unsafe func Windows_JetDefragmentA(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<Int8>, pcPasses: CPointer<UInt32>, pcSeconds: CPointer<UInt32>, grbit: UInt32): Int32 {
+    return JetDefragmentA(sesid, dbid, szTableName, pcPasses, pcSeconds, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDefragmentW == "on"]
+foreign {
+    // param-hint: szTableName optional
+    // param-hint: pcPasses optional
+    // param-hint: pcSeconds optional
+    func JetDefragmentW(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<UInt16>, pcPasses: CPointer<UInt32>, pcSeconds: CPointer<UInt32>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDefragmentW == "on"]
+public unsafe func Windows_JetDefragmentW(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<UInt16>, pcPasses: CPointer<UInt32>, pcSeconds: CPointer<UInt32>, grbit: UInt32): Int32 {
+    return JetDefragmentW(sesid, dbid, szTableName, pcPasses, pcSeconds, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDelete == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetDelete(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDelete == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetDelete(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID): Int32 {
+    return JetDelete(sesid, tableid)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDeleteColumn2A == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetDeleteColumn2A(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szColumnName: CPointer<Int8>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDeleteColumn2A == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetDeleteColumn2A(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szColumnName: CPointer<Int8>, grbit: UInt32): Int32 {
+    return JetDeleteColumn2A(sesid, tableid, szColumnName, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDeleteColumn2W == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetDeleteColumn2W(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szColumnName: CPointer<UInt16>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDeleteColumn2W == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetDeleteColumn2W(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szColumnName: CPointer<UInt16>, grbit: UInt32): Int32 {
+    return JetDeleteColumn2W(sesid, tableid, szColumnName, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDeleteColumnA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetDeleteColumnA(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szColumnName: CPointer<Int8>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDeleteColumnA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetDeleteColumnA(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szColumnName: CPointer<Int8>): Int32 {
+    return JetDeleteColumnA(sesid, tableid, szColumnName)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDeleteColumnW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetDeleteColumnW(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szColumnName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDeleteColumnW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetDeleteColumnW(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szColumnName: CPointer<UInt16>): Int32 {
+    return JetDeleteColumnW(sesid, tableid, szColumnName)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDeleteIndexA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetDeleteIndexA(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<Int8>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDeleteIndexA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetDeleteIndexA(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<Int8>): Int32 {
+    return JetDeleteIndexA(sesid, tableid, szIndexName)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDeleteIndexW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetDeleteIndexW(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDeleteIndexW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetDeleteIndexW(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<UInt16>): Int32 {
+    return JetDeleteIndexW(sesid, tableid, szIndexName)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDeleteTableA == "on"]
+foreign {
+    func JetDeleteTableA(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<Int8>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDeleteTableA == "on"]
+public unsafe func Windows_JetDeleteTableA(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<Int8>): Int32 {
+    return JetDeleteTableA(sesid, dbid, szTableName)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDeleteTableW == "on"]
+foreign {
+    func JetDeleteTableW(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDeleteTableW == "on"]
+public unsafe func Windows_JetDeleteTableW(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<UInt16>): Int32 {
+    return JetDeleteTableW(sesid, dbid, szTableName)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDetachDatabase2A == "on"]
+foreign {
+    // param-hint: szFilename optional
+    func JetDetachDatabase2A(sesid: JET_SESID, szFilename: CPointer<Int8>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDetachDatabase2A == "on"]
+public unsafe func Windows_JetDetachDatabase2A(sesid: JET_SESID, szFilename: CPointer<Int8>, grbit: UInt32): Int32 {
+    return JetDetachDatabase2A(sesid, szFilename, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDetachDatabase2W == "on"]
+foreign {
+    // param-hint: szFilename optional
+    func JetDetachDatabase2W(sesid: JET_SESID, szFilename: CPointer<UInt16>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDetachDatabase2W == "on"]
+public unsafe func Windows_JetDetachDatabase2W(sesid: JET_SESID, szFilename: CPointer<UInt16>, grbit: UInt32): Int32 {
+    return JetDetachDatabase2W(sesid, szFilename, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDetachDatabaseA == "on"]
+foreign {
+    // param-hint: szFilename optional
+    func JetDetachDatabaseA(sesid: JET_SESID, szFilename: CPointer<Int8>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDetachDatabaseA == "on"]
+public unsafe func Windows_JetDetachDatabaseA(sesid: JET_SESID, szFilename: CPointer<Int8>): Int32 {
+    return JetDetachDatabaseA(sesid, szFilename)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDetachDatabaseW == "on"]
+foreign {
+    // param-hint: szFilename optional
+    func JetDetachDatabaseW(sesid: JET_SESID, szFilename: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDetachDatabaseW == "on"]
+public unsafe func Windows_JetDetachDatabaseW(sesid: JET_SESID, szFilename: CPointer<UInt16>): Int32 {
+    return JetDetachDatabaseW(sesid, szFilename)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDupCursor == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetDupCursor(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, ptableid: CPointer<Win32_Storage_StructuredStorage.JET_TABLEID>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDupCursor == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetDupCursor(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, ptableid: CPointer<Win32_Storage_StructuredStorage.JET_TABLEID>, grbit: UInt32): Int32 {
+    return JetDupCursor(sesid, tableid, ptableid, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDupSession == "on"]
+foreign {
+    func JetDupSession(sesid: JET_SESID, psesid: CPointer<JET_SESID>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetDupSession == "on"]
+public unsafe func Windows_JetDupSession(sesid: JET_SESID, psesid: CPointer<JET_SESID>): Int32 {
+    return JetDupSession(sesid, psesid)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetEnableMultiInstanceA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: psetsysparam len=param[1] optional
     // param-hint: pcsetsucceed optional
     func JetEnableMultiInstanceA(psetsysparam: CPointer<JET_SETSYSPARAM_A>, csetsysparam: UInt32, pcsetsucceed: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetEnableMultiInstanceA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetEnableMultiInstanceA(psetsysparam: CPointer<JET_SETSYSPARAM_A>, csetsysparam: UInt32, pcsetsucceed: CPointer<UInt32>): Int32 {
+    return JetEnableMultiInstanceA(psetsysparam, csetsysparam, pcsetsucceed)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetEnableMultiInstanceW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: psetsysparam len=param[1] optional
     // param-hint: pcsetsucceed optional
     func JetEnableMultiInstanceW(psetsysparam: CPointer<JET_SETSYSPARAM_W>, csetsysparam: UInt32, pcsetsucceed: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetEnableMultiInstanceW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetEnableMultiInstanceW(psetsysparam: CPointer<JET_SETSYSPARAM_W>, csetsysparam: UInt32, pcsetsucceed: CPointer<UInt32>): Int32 {
+    return JetEnableMultiInstanceW(psetsysparam, csetsysparam, pcsetsucceed)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetEndExternalBackup == "on"]
+foreign {
+    func JetEndExternalBackup(): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetEndExternalBackup == "on"]
+public unsafe func Windows_JetEndExternalBackup(): Int32 {
+    return JetEndExternalBackup()
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetEndExternalBackupInstance == "on"]
+foreign {
+    func JetEndExternalBackupInstance(instance: JET_INSTANCE): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetEndExternalBackupInstance == "on"]
+public unsafe func Windows_JetEndExternalBackupInstance(instance: JET_INSTANCE): Int32 {
+    return JetEndExternalBackupInstance(instance)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetEndExternalBackupInstance2 == "on"]
+foreign {
+    func JetEndExternalBackupInstance2(instance: JET_INSTANCE, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetEndExternalBackupInstance2 == "on"]
+public unsafe func Windows_JetEndExternalBackupInstance2(instance: JET_INSTANCE, grbit: UInt32): Int32 {
+    return JetEndExternalBackupInstance2(instance, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetEndSession == "on"]
+foreign {
+    func JetEndSession(sesid: JET_SESID, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetEndSession == "on"]
+public unsafe func Windows_JetEndSession(sesid: JET_SESID, grbit: UInt32): Int32 {
+    return JetEndSession(sesid, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetEnumerateColumns == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: rgEnumColumnId len=param[2] optional
     // param-hint: pvReallocContext optional
     func JetEnumerateColumns(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, cEnumColumnId: UInt32, rgEnumColumnId: CPointer<JET_ENUMCOLUMNID>, pcEnumColumn: CPointer<UInt32>, prgEnumColumn: CPointer<CPointer<JET_ENUMCOLUMN>>, pfnRealloc: JET_PFNREALLOC, pvReallocContext: CPointer<Unit>, cbDataMost: UInt32, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetEnumerateColumns == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetEnumerateColumns(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, cEnumColumnId: UInt32, rgEnumColumnId: CPointer<JET_ENUMCOLUMNID>, pcEnumColumn: CPointer<UInt32>, prgEnumColumn: CPointer<CPointer<JET_ENUMCOLUMN>>, pfnRealloc: JET_PFNREALLOC, pvReallocContext: CPointer<Unit>, cbDataMost: UInt32, grbit: UInt32): Int32 {
+    return JetEnumerateColumns(sesid, tableid, cEnumColumnId, rgEnumColumnId, pcEnumColumn, prgEnumColumn, pfnRealloc, pvReallocContext, cbDataMost, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetEscrowUpdate == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: pv bytes=param[4]
     // param-hint: pvOld bytes=param[6] optional
     // param-hint: pcbOldActual optional
     func JetEscrowUpdate(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, columnid: UInt32, pv: CPointer<Unit>, cbMax: UInt32, pvOld: CPointer<Unit>, cbOldMax: UInt32, pcbOldActual: CPointer<UInt32>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetEscrowUpdate == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetEscrowUpdate(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, columnid: UInt32, pv: CPointer<Unit>, cbMax: UInt32, pvOld: CPointer<Unit>, cbOldMax: UInt32, pcbOldActual: CPointer<UInt32>, grbit: UInt32): Int32 {
+    return JetEscrowUpdate(sesid, tableid, columnid, pv, cbMax, pvOld, cbOldMax, pcbOldActual, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetExternalRestore2A == "on"]
+foreign {
+    // param-hint: rgrstmap len=param[3] optional
+    // param-hint: szTargetInstanceName optional
+    // param-hint: szTargetInstanceLogPath optional
+    // param-hint: szTargetInstanceCheckpointPath optional
+    func JetExternalRestore2A(szCheckpointFilePath: CPointer<Int8>, szLogPath: CPointer<Int8>, rgrstmap: CPointer<JET_RSTMAP_A>, crstfilemap: Int32, szBackupLogPath: CPointer<Int8>, pLogInfo: CPointer<JET_LOGINFO_A>, szTargetInstanceName: CPointer<Int8>, szTargetInstanceLogPath: CPointer<Int8>, szTargetInstanceCheckpointPath: CPointer<Int8>, pfn: JET_PFNSTATUS): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetExternalRestore2A == "on"]
+public unsafe func Windows_JetExternalRestore2A(szCheckpointFilePath: CPointer<Int8>, szLogPath: CPointer<Int8>, rgrstmap: CPointer<JET_RSTMAP_A>, crstfilemap: Int32, szBackupLogPath: CPointer<Int8>, pLogInfo: CPointer<JET_LOGINFO_A>, szTargetInstanceName: CPointer<Int8>, szTargetInstanceLogPath: CPointer<Int8>, szTargetInstanceCheckpointPath: CPointer<Int8>, pfn: JET_PFNSTATUS): Int32 {
+    return JetExternalRestore2A(szCheckpointFilePath, szLogPath, rgrstmap, crstfilemap, szBackupLogPath, pLogInfo, szTargetInstanceName, szTargetInstanceLogPath, szTargetInstanceCheckpointPath, pfn)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetExternalRestore2W == "on"]
+foreign {
+    // param-hint: rgrstmap len=param[3] optional
+    // param-hint: szTargetInstanceName optional
+    // param-hint: szTargetInstanceLogPath optional
+    // param-hint: szTargetInstanceCheckpointPath optional
+    func JetExternalRestore2W(szCheckpointFilePath: CPointer<UInt16>, szLogPath: CPointer<UInt16>, rgrstmap: CPointer<JET_RSTMAP_W>, crstfilemap: Int32, szBackupLogPath: CPointer<UInt16>, pLogInfo: CPointer<JET_LOGINFO_W>, szTargetInstanceName: CPointer<UInt16>, szTargetInstanceLogPath: CPointer<UInt16>, szTargetInstanceCheckpointPath: CPointer<UInt16>, pfn: JET_PFNSTATUS): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetExternalRestore2W == "on"]
+public unsafe func Windows_JetExternalRestore2W(szCheckpointFilePath: CPointer<UInt16>, szLogPath: CPointer<UInt16>, rgrstmap: CPointer<JET_RSTMAP_W>, crstfilemap: Int32, szBackupLogPath: CPointer<UInt16>, pLogInfo: CPointer<JET_LOGINFO_W>, szTargetInstanceName: CPointer<UInt16>, szTargetInstanceLogPath: CPointer<UInt16>, szTargetInstanceCheckpointPath: CPointer<UInt16>, pfn: JET_PFNSTATUS): Int32 {
+    return JetExternalRestore2W(szCheckpointFilePath, szLogPath, rgrstmap, crstfilemap, szBackupLogPath, pLogInfo, szTargetInstanceName, szTargetInstanceLogPath, szTargetInstanceCheckpointPath, pfn)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetExternalRestoreA == "on"]
+foreign {
+    // param-hint: rgrstmap len=param[3] optional
+    func JetExternalRestoreA(szCheckpointFilePath: CPointer<Int8>, szLogPath: CPointer<Int8>, rgrstmap: CPointer<JET_RSTMAP_A>, crstfilemap: Int32, szBackupLogPath: CPointer<Int8>, genLow: Int32, genHigh: Int32, pfn: JET_PFNSTATUS): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetExternalRestoreA == "on"]
+public unsafe func Windows_JetExternalRestoreA(szCheckpointFilePath: CPointer<Int8>, szLogPath: CPointer<Int8>, rgrstmap: CPointer<JET_RSTMAP_A>, crstfilemap: Int32, szBackupLogPath: CPointer<Int8>, genLow: Int32, genHigh: Int32, pfn: JET_PFNSTATUS): Int32 {
+    return JetExternalRestoreA(szCheckpointFilePath, szLogPath, rgrstmap, crstfilemap, szBackupLogPath, genLow, genHigh, pfn)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetExternalRestoreW == "on"]
+foreign {
+    // param-hint: rgrstmap len=param[3] optional
+    func JetExternalRestoreW(szCheckpointFilePath: CPointer<UInt16>, szLogPath: CPointer<UInt16>, rgrstmap: CPointer<JET_RSTMAP_W>, crstfilemap: Int32, szBackupLogPath: CPointer<UInt16>, genLow: Int32, genHigh: Int32, pfn: JET_PFNSTATUS): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetExternalRestoreW == "on"]
+public unsafe func Windows_JetExternalRestoreW(szCheckpointFilePath: CPointer<UInt16>, szLogPath: CPointer<UInt16>, rgrstmap: CPointer<JET_RSTMAP_W>, crstfilemap: Int32, szBackupLogPath: CPointer<UInt16>, genLow: Int32, genHigh: Int32, pfn: JET_PFNSTATUS): Int32 {
+    return JetExternalRestoreW(szCheckpointFilePath, szLogPath, rgrstmap, crstfilemap, szBackupLogPath, genLow, genHigh, pfn)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetFreeBuffer == "on"]
+foreign {
+    func JetFreeBuffer(pbBuf: CPointer<Int8>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetFreeBuffer == "on"]
+public unsafe func Windows_JetFreeBuffer(pbBuf: CPointer<Int8>): Int32 {
+    return JetFreeBuffer(pbBuf)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetAttachInfoA == "on"]
+foreign {
+    // param-hint: szzDatabases bytes=param[1] optional
+    // param-hint: pcbActual optional
+    func JetGetAttachInfoA(szzDatabases: CPointer<Int8>, cbMax: UInt32, pcbActual: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetAttachInfoA == "on"]
+public unsafe func Windows_JetGetAttachInfoA(szzDatabases: CPointer<Int8>, cbMax: UInt32, pcbActual: CPointer<UInt32>): Int32 {
+    return JetGetAttachInfoA(szzDatabases, cbMax, pcbActual)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetAttachInfoInstanceA == "on"]
+foreign {
+    // param-hint: szzDatabases bytes=param[2] optional
+    // param-hint: pcbActual optional
+    func JetGetAttachInfoInstanceA(instance: JET_INSTANCE, szzDatabases: CPointer<Int8>, cbMax: UInt32, pcbActual: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetAttachInfoInstanceA == "on"]
+public unsafe func Windows_JetGetAttachInfoInstanceA(instance: JET_INSTANCE, szzDatabases: CPointer<Int8>, cbMax: UInt32, pcbActual: CPointer<UInt32>): Int32 {
+    return JetGetAttachInfoInstanceA(instance, szzDatabases, cbMax, pcbActual)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetAttachInfoInstanceW == "on"]
+foreign {
+    // param-hint: szzDatabases bytes=param[2] optional
+    // param-hint: pcbActual optional
+    func JetGetAttachInfoInstanceW(instance: JET_INSTANCE, szzDatabases: CPointer<UInt16>, cbMax: UInt32, pcbActual: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetAttachInfoInstanceW == "on"]
+public unsafe func Windows_JetGetAttachInfoInstanceW(instance: JET_INSTANCE, szzDatabases: CPointer<UInt16>, cbMax: UInt32, pcbActual: CPointer<UInt32>): Int32 {
+    return JetGetAttachInfoInstanceW(instance, szzDatabases, cbMax, pcbActual)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetAttachInfoW == "on"]
+foreign {
+    // param-hint: wszzDatabases bytes=param[1] optional
+    // param-hint: pcbActual optional
+    func JetGetAttachInfoW(wszzDatabases: CPointer<UInt16>, cbMax: UInt32, pcbActual: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetAttachInfoW == "on"]
+public unsafe func Windows_JetGetAttachInfoW(wszzDatabases: CPointer<UInt16>, cbMax: UInt32, pcbActual: CPointer<UInt32>): Int32 {
+    return JetGetAttachInfoW(wszzDatabases, cbMax, pcbActual)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetBookmark == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: pvBookmark bytes=param[3] optional
     // param-hint: pcbActual optional
     func JetGetBookmark(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pvBookmark: CPointer<Unit>, cbMax: UInt32, pcbActual: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetBookmark == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetGetBookmark(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pvBookmark: CPointer<Unit>, cbMax: UInt32, pcbActual: CPointer<UInt32>): Int32 {
+    return JetGetBookmark(sesid, tableid, pvBookmark, cbMax, pcbActual)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetColumnInfoA == "on"]
+foreign {
+    // param-hint: pColumnNameOrId optional
+    // param-hint: pvResult bytes=param[5]
+    func JetGetColumnInfoA(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<Int8>, pColumnNameOrId: CPointer<Int8>, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetColumnInfoA == "on"]
+public unsafe func Windows_JetGetColumnInfoA(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<Int8>, pColumnNameOrId: CPointer<Int8>, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32 {
+    return JetGetColumnInfoA(sesid, dbid, szTableName, pColumnNameOrId, pvResult, cbMax, InfoLevel)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetColumnInfoW == "on"]
+foreign {
+    // param-hint: pwColumnNameOrId optional
+    // param-hint: pvResult bytes=param[5]
+    func JetGetColumnInfoW(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<UInt16>, pwColumnNameOrId: CPointer<UInt16>, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetColumnInfoW == "on"]
+public unsafe func Windows_JetGetColumnInfoW(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<UInt16>, pwColumnNameOrId: CPointer<UInt16>, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32 {
+    return JetGetColumnInfoW(sesid, dbid, szTableName, pwColumnNameOrId, pvResult, cbMax, InfoLevel)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetCurrentIndexA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: szIndexName bytes=param[3]
     func JetGetCurrentIndexA(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<Int8>, cbIndexName: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetCurrentIndexA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetGetCurrentIndexA(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<Int8>, cbIndexName: UInt32): Int32 {
+    return JetGetCurrentIndexA(sesid, tableid, szIndexName, cbIndexName)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetCurrentIndexW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: szIndexName bytes=param[3]
     func JetGetCurrentIndexW(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<UInt16>, cbIndexName: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetCurrentIndexW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetGetCurrentIndexW(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<UInt16>, cbIndexName: UInt32): Int32 {
+    return JetGetCurrentIndexW(sesid, tableid, szIndexName, cbIndexName)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetCursorInfo == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: pvResult bytes=param[3]
     func JetGetCursorInfo(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetCursorInfo == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetGetCursorInfo(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32 {
+    return JetGetCursorInfo(sesid, tableid, pvResult, cbMax, InfoLevel)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetDatabaseFileInfoA == "on"]
+foreign {
+    // param-hint: pvResult bytes=param[2]
+    func JetGetDatabaseFileInfoA(szDatabaseName: CPointer<Int8>, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetDatabaseFileInfoA == "on"]
+public unsafe func Windows_JetGetDatabaseFileInfoA(szDatabaseName: CPointer<Int8>, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32 {
+    return JetGetDatabaseFileInfoA(szDatabaseName, pvResult, cbMax, InfoLevel)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetDatabaseFileInfoW == "on"]
+foreign {
+    // param-hint: pvResult bytes=param[2]
+    func JetGetDatabaseFileInfoW(szDatabaseName: CPointer<UInt16>, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetDatabaseFileInfoW == "on"]
+public unsafe func Windows_JetGetDatabaseFileInfoW(szDatabaseName: CPointer<UInt16>, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32 {
+    return JetGetDatabaseFileInfoW(szDatabaseName, pvResult, cbMax, InfoLevel)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetDatabaseInfoA == "on"]
+foreign {
+    // param-hint: pvResult bytes=param[3]
+    func JetGetDatabaseInfoA(sesid: JET_SESID, dbid: UInt32, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetDatabaseInfoA == "on"]
+public unsafe func Windows_JetGetDatabaseInfoA(sesid: JET_SESID, dbid: UInt32, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32 {
+    return JetGetDatabaseInfoA(sesid, dbid, pvResult, cbMax, InfoLevel)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetDatabaseInfoW == "on"]
+foreign {
+    // param-hint: pvResult bytes=param[3]
+    func JetGetDatabaseInfoW(sesid: JET_SESID, dbid: UInt32, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetDatabaseInfoW == "on"]
+public unsafe func Windows_JetGetDatabaseInfoW(sesid: JET_SESID, dbid: UInt32, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32 {
+    return JetGetDatabaseInfoW(sesid, dbid, pvResult, cbMax, InfoLevel)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetErrorInfoW == "on"]
+foreign {
+    // param-hint: pvContext optional
+    // param-hint: pvResult bytes=param[2]
+    func JetGetErrorInfoW(pvContext: CPointer<Unit>, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetErrorInfoW == "on"]
+public unsafe func Windows_JetGetErrorInfoW(pvContext: CPointer<Unit>, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32, grbit: UInt32): Int32 {
+    return JetGetErrorInfoW(pvContext, pvResult, cbMax, InfoLevel, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetIndexInfoA == "on"]
+foreign {
+    // param-hint: szIndexName optional
+    // param-hint: pvResult bytes=param[5]
+    func JetGetIndexInfoA(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<Int8>, szIndexName: CPointer<Int8>, pvResult: CPointer<Unit>, cbResult: UInt32, InfoLevel: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetIndexInfoA == "on"]
+public unsafe func Windows_JetGetIndexInfoA(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<Int8>, szIndexName: CPointer<Int8>, pvResult: CPointer<Unit>, cbResult: UInt32, InfoLevel: UInt32): Int32 {
+    return JetGetIndexInfoA(sesid, dbid, szTableName, szIndexName, pvResult, cbResult, InfoLevel)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetIndexInfoW == "on"]
+foreign {
+    // param-hint: szIndexName optional
+    // param-hint: pvResult bytes=param[5]
+    func JetGetIndexInfoW(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<UInt16>, szIndexName: CPointer<UInt16>, pvResult: CPointer<Unit>, cbResult: UInt32, InfoLevel: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetIndexInfoW == "on"]
+public unsafe func Windows_JetGetIndexInfoW(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<UInt16>, szIndexName: CPointer<UInt16>, pvResult: CPointer<Unit>, cbResult: UInt32, InfoLevel: UInt32): Int32 {
+    return JetGetIndexInfoW(sesid, dbid, szTableName, szIndexName, pvResult, cbResult, InfoLevel)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetInstanceInfoA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetGetInstanceInfoA(pcInstanceInfo: CPointer<UInt32>, paInstanceInfo: CPointer<CPointer<JET_INSTANCE_INFO_A>>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetInstanceInfoA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetGetInstanceInfoA(pcInstanceInfo: CPointer<UInt32>, paInstanceInfo: CPointer<CPointer<JET_INSTANCE_INFO_A>>): Int32 {
+    return JetGetInstanceInfoA(pcInstanceInfo, paInstanceInfo)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetInstanceInfoW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetGetInstanceInfoW(pcInstanceInfo: CPointer<UInt32>, paInstanceInfo: CPointer<CPointer<JET_INSTANCE_INFO_W>>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetInstanceInfoW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetGetInstanceInfoW(pcInstanceInfo: CPointer<UInt32>, paInstanceInfo: CPointer<CPointer<JET_INSTANCE_INFO_W>>): Int32 {
+    return JetGetInstanceInfoW(pcInstanceInfo, paInstanceInfo)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetInstanceMiscInfo == "on"]
+foreign {
+    // param-hint: pvResult bytes=param[2]
+    func JetGetInstanceMiscInfo(instance: JET_INSTANCE, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetInstanceMiscInfo == "on"]
+public unsafe func Windows_JetGetInstanceMiscInfo(instance: JET_INSTANCE, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32 {
+    return JetGetInstanceMiscInfo(instance, pvResult, cbMax, InfoLevel)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetLS == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetGetLS(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pls: CPointer<JET_LS>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetLS == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetGetLS(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pls: CPointer<JET_LS>, grbit: UInt32): Int32 {
+    return JetGetLS(sesid, tableid, pls, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetLock == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetGetLock(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetLock == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetGetLock(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, grbit: UInt32): Int32 {
+    return JetGetLock(sesid, tableid, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetLogInfoA == "on"]
+foreign {
+    // param-hint: szzLogs bytes=param[1] optional
+    // param-hint: pcbActual optional
+    func JetGetLogInfoA(szzLogs: CPointer<Int8>, cbMax: UInt32, pcbActual: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetLogInfoA == "on"]
+public unsafe func Windows_JetGetLogInfoA(szzLogs: CPointer<Int8>, cbMax: UInt32, pcbActual: CPointer<UInt32>): Int32 {
+    return JetGetLogInfoA(szzLogs, cbMax, pcbActual)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetLogInfoInstance2A == "on"]
+foreign {
+    // param-hint: szzLogs bytes=param[2] optional
+    // param-hint: pcbActual optional
+    // param-hint: pLogInfo optional
+    func JetGetLogInfoInstance2A(instance: JET_INSTANCE, szzLogs: CPointer<Int8>, cbMax: UInt32, pcbActual: CPointer<UInt32>, pLogInfo: CPointer<JET_LOGINFO_A>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetLogInfoInstance2A == "on"]
+public unsafe func Windows_JetGetLogInfoInstance2A(instance: JET_INSTANCE, szzLogs: CPointer<Int8>, cbMax: UInt32, pcbActual: CPointer<UInt32>, pLogInfo: CPointer<JET_LOGINFO_A>): Int32 {
+    return JetGetLogInfoInstance2A(instance, szzLogs, cbMax, pcbActual, pLogInfo)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetLogInfoInstance2W == "on"]
+foreign {
+    // param-hint: wszzLogs bytes=param[2] optional
+    // param-hint: pcbActual optional
+    // param-hint: pLogInfo optional
+    func JetGetLogInfoInstance2W(instance: JET_INSTANCE, wszzLogs: CPointer<UInt16>, cbMax: UInt32, pcbActual: CPointer<UInt32>, pLogInfo: CPointer<JET_LOGINFO_W>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetLogInfoInstance2W == "on"]
+public unsafe func Windows_JetGetLogInfoInstance2W(instance: JET_INSTANCE, wszzLogs: CPointer<UInt16>, cbMax: UInt32, pcbActual: CPointer<UInt32>, pLogInfo: CPointer<JET_LOGINFO_W>): Int32 {
+    return JetGetLogInfoInstance2W(instance, wszzLogs, cbMax, pcbActual, pLogInfo)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetLogInfoInstanceA == "on"]
+foreign {
+    // param-hint: szzLogs bytes=param[2] optional
+    // param-hint: pcbActual optional
+    func JetGetLogInfoInstanceA(instance: JET_INSTANCE, szzLogs: CPointer<Int8>, cbMax: UInt32, pcbActual: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetLogInfoInstanceA == "on"]
+public unsafe func Windows_JetGetLogInfoInstanceA(instance: JET_INSTANCE, szzLogs: CPointer<Int8>, cbMax: UInt32, pcbActual: CPointer<UInt32>): Int32 {
+    return JetGetLogInfoInstanceA(instance, szzLogs, cbMax, pcbActual)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetLogInfoInstanceW == "on"]
+foreign {
+    // param-hint: wszzLogs bytes=param[2] optional
+    // param-hint: pcbActual optional
+    func JetGetLogInfoInstanceW(instance: JET_INSTANCE, wszzLogs: CPointer<UInt16>, cbMax: UInt32, pcbActual: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetLogInfoInstanceW == "on"]
+public unsafe func Windows_JetGetLogInfoInstanceW(instance: JET_INSTANCE, wszzLogs: CPointer<UInt16>, cbMax: UInt32, pcbActual: CPointer<UInt32>): Int32 {
+    return JetGetLogInfoInstanceW(instance, wszzLogs, cbMax, pcbActual)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetLogInfoW == "on"]
+foreign {
+    // param-hint: szzLogs bytes=param[1] optional
+    // param-hint: pcbActual optional
+    func JetGetLogInfoW(szzLogs: CPointer<UInt16>, cbMax: UInt32, pcbActual: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetLogInfoW == "on"]
+public unsafe func Windows_JetGetLogInfoW(szzLogs: CPointer<UInt16>, cbMax: UInt32, pcbActual: CPointer<UInt32>): Int32 {
+    return JetGetLogInfoW(szzLogs, cbMax, pcbActual)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetObjectInfoA == "on"]
+foreign {
+    // param-hint: szContainerName optional
+    // param-hint: szObjectName optional
+    // param-hint: pvResult bytes=param[6]
+    func JetGetObjectInfoA(sesid: JET_SESID, dbid: UInt32, objtyp: UInt32, szContainerName: CPointer<Int8>, szObjectName: CPointer<Int8>, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetObjectInfoA == "on"]
+public unsafe func Windows_JetGetObjectInfoA(sesid: JET_SESID, dbid: UInt32, objtyp: UInt32, szContainerName: CPointer<Int8>, szObjectName: CPointer<Int8>, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32 {
+    return JetGetObjectInfoA(sesid, dbid, objtyp, szContainerName, szObjectName, pvResult, cbMax, InfoLevel)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetObjectInfoW == "on"]
+foreign {
+    // param-hint: szContainerName optional
+    // param-hint: szObjectName optional
+    // param-hint: pvResult bytes=param[6]
+    func JetGetObjectInfoW(sesid: JET_SESID, dbid: UInt32, objtyp: UInt32, szContainerName: CPointer<UInt16>, szObjectName: CPointer<UInt16>, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetObjectInfoW == "on"]
+public unsafe func Windows_JetGetObjectInfoW(sesid: JET_SESID, dbid: UInt32, objtyp: UInt32, szContainerName: CPointer<UInt16>, szObjectName: CPointer<UInt16>, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32 {
+    return JetGetObjectInfoW(sesid, dbid, objtyp, szContainerName, szObjectName, pvResult, cbMax, InfoLevel)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetRecordPosition == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: precpos bytes=param[3]
     func JetGetRecordPosition(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, precpos: CPointer<JET_RECPOS>, cbRecpos: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetRecordPosition == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetGetRecordPosition(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, precpos: CPointer<JET_RECPOS>, cbRecpos: UInt32): Int32 {
+    return JetGetRecordPosition(sesid, tableid, precpos, cbRecpos)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetRecordSize == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_Storage_StructuredStorage == "on")]
+foreign {
+    func JetGetRecordSize(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, precsize: CPointer<JET_RECSIZE>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetRecordSize == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_Storage_StructuredStorage == "on")]
+public unsafe func Windows_JetGetRecordSize(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, precsize: CPointer<JET_RECSIZE>, grbit: UInt32): Int32 {
+    return JetGetRecordSize(sesid, tableid, precsize, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetRecordSize2 == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_Storage_StructuredStorage == "on")]
+foreign {
+    func JetGetRecordSize2(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, precsize: CPointer<JET_RECSIZE2>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetRecordSize2 == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_Storage_StructuredStorage == "on")]
+public unsafe func Windows_JetGetRecordSize2(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, precsize: CPointer<JET_RECSIZE2>, grbit: UInt32): Int32 {
+    return JetGetRecordSize2(sesid, tableid, precsize, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetSecondaryIndexBookmark == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: pvSecondaryKey bytes=param[3] optional
     // param-hint: pcbSecondaryKeyActual optional
     // param-hint: pvPrimaryBookmark bytes=param[6] optional
     // param-hint: pcbPrimaryBookmarkActual optional
     func JetGetSecondaryIndexBookmark(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pvSecondaryKey: CPointer<Unit>, cbSecondaryKeyMax: UInt32, pcbSecondaryKeyActual: CPointer<UInt32>, pvPrimaryBookmark: CPointer<Unit>, cbPrimaryBookmarkMax: UInt32, pcbPrimaryBookmarkActual: CPointer<UInt32>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetSecondaryIndexBookmark == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetGetSecondaryIndexBookmark(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pvSecondaryKey: CPointer<Unit>, cbSecondaryKeyMax: UInt32, pcbSecondaryKeyActual: CPointer<UInt32>, pvPrimaryBookmark: CPointer<Unit>, cbPrimaryBookmarkMax: UInt32, pcbPrimaryBookmarkActual: CPointer<UInt32>, grbit: UInt32): Int32 {
+    return JetGetSecondaryIndexBookmark(sesid, tableid, pvSecondaryKey, cbSecondaryKeyMax, pcbSecondaryKeyActual, pvPrimaryBookmark, cbPrimaryBookmarkMax, pcbPrimaryBookmarkActual, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetSessionParameter == "on"]
+foreign {
+    // param-hint: sesid optional
+    // param-hint: pvParam len=param[3]
+    // param-hint: pcbParamActual optional
+    func JetGetSessionParameter(sesid: JET_SESID, sesparamid: UInt32, pvParam: CPointer<Unit>, cbParamMax: UInt32, pcbParamActual: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetSessionParameter == "on"]
+public unsafe func Windows_JetGetSessionParameter(sesid: JET_SESID, sesparamid: UInt32, pvParam: CPointer<Unit>, cbParamMax: UInt32, pcbParamActual: CPointer<UInt32>): Int32 {
+    return JetGetSessionParameter(sesid, sesparamid, pvParam, cbParamMax, pcbParamActual)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetSystemParameterA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: sesid optional
     // param-hint: plParam optional
     // param-hint: szParam bytes=param[5] optional
     func JetGetSystemParameterA(instance: JET_INSTANCE, sesid: JET_SESID, paramid: UInt32, plParam: CPointer<Win32_Storage_StructuredStorage.JET_API_PTR>, szParam: CPointer<Int8>, cbMax: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetSystemParameterA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetGetSystemParameterA(instance: JET_INSTANCE, sesid: JET_SESID, paramid: UInt32, plParam: CPointer<Win32_Storage_StructuredStorage.JET_API_PTR>, szParam: CPointer<Int8>, cbMax: UInt32): Int32 {
+    return JetGetSystemParameterA(instance, sesid, paramid, plParam, szParam, cbMax)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetSystemParameterW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: sesid optional
     // param-hint: plParam optional
     // param-hint: szParam bytes=param[5] optional
     func JetGetSystemParameterW(instance: JET_INSTANCE, sesid: JET_SESID, paramid: UInt32, plParam: CPointer<Win32_Storage_StructuredStorage.JET_API_PTR>, szParam: CPointer<UInt16>, cbMax: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetSystemParameterW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetGetSystemParameterW(instance: JET_INSTANCE, sesid: JET_SESID, paramid: UInt32, plParam: CPointer<Win32_Storage_StructuredStorage.JET_API_PTR>, szParam: CPointer<UInt16>, cbMax: UInt32): Int32 {
+    return JetGetSystemParameterW(instance, sesid, paramid, plParam, szParam, cbMax)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetTableColumnInfoA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: szColumnName optional
     // param-hint: pvResult bytes=param[4]
     func JetGetTableColumnInfoA(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szColumnName: CPointer<Int8>, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetTableColumnInfoA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetGetTableColumnInfoA(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szColumnName: CPointer<Int8>, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32 {
+    return JetGetTableColumnInfoA(sesid, tableid, szColumnName, pvResult, cbMax, InfoLevel)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetTableColumnInfoW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: szColumnName optional
     // param-hint: pvResult bytes=param[4]
     func JetGetTableColumnInfoW(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szColumnName: CPointer<UInt16>, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetTableColumnInfoW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetGetTableColumnInfoW(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szColumnName: CPointer<UInt16>, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32 {
+    return JetGetTableColumnInfoW(sesid, tableid, szColumnName, pvResult, cbMax, InfoLevel)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetTableIndexInfoA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: szIndexName optional
     // param-hint: pvResult bytes=param[4]
     func JetGetTableIndexInfoA(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<Int8>, pvResult: CPointer<Unit>, cbResult: UInt32, InfoLevel: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetTableIndexInfoA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetGetTableIndexInfoA(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<Int8>, pvResult: CPointer<Unit>, cbResult: UInt32, InfoLevel: UInt32): Int32 {
+    return JetGetTableIndexInfoA(sesid, tableid, szIndexName, pvResult, cbResult, InfoLevel)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetTableIndexInfoW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: szIndexName optional
     // param-hint: pvResult bytes=param[4]
     func JetGetTableIndexInfoW(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<UInt16>, pvResult: CPointer<Unit>, cbResult: UInt32, InfoLevel: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetTableIndexInfoW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetGetTableIndexInfoW(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<UInt16>, pvResult: CPointer<Unit>, cbResult: UInt32, InfoLevel: UInt32): Int32 {
+    return JetGetTableIndexInfoW(sesid, tableid, szIndexName, pvResult, cbResult, InfoLevel)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetTableInfoA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: pvResult bytes=param[3]
     func JetGetTableInfoA(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetTableInfoA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetGetTableInfoA(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32 {
+    return JetGetTableInfoA(sesid, tableid, pvResult, cbMax, InfoLevel)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetTableInfoW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: pvResult bytes=param[3]
     func JetGetTableInfoW(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetTableInfoW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetGetTableInfoW(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pvResult: CPointer<Unit>, cbMax: UInt32, InfoLevel: UInt32): Int32 {
+    return JetGetTableInfoW(sesid, tableid, pvResult, cbMax, InfoLevel)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetThreadStats == "on"]
+foreign {
+    // param-hint: pvResult bytes=param[1]
+    func JetGetThreadStats(pvResult: CPointer<Unit>, cbMax: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetThreadStats == "on"]
+public unsafe func Windows_JetGetThreadStats(pvResult: CPointer<Unit>, cbMax: UInt32): Int32 {
+    return JetGetThreadStats(pvResult, cbMax)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetTruncateLogInfoInstanceA == "on"]
+foreign {
+    // param-hint: szzLogs bytes=param[2] optional
+    // param-hint: pcbActual optional
+    func JetGetTruncateLogInfoInstanceA(instance: JET_INSTANCE, szzLogs: CPointer<Int8>, cbMax: UInt32, pcbActual: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetTruncateLogInfoInstanceA == "on"]
+public unsafe func Windows_JetGetTruncateLogInfoInstanceA(instance: JET_INSTANCE, szzLogs: CPointer<Int8>, cbMax: UInt32, pcbActual: CPointer<UInt32>): Int32 {
+    return JetGetTruncateLogInfoInstanceA(instance, szzLogs, cbMax, pcbActual)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetTruncateLogInfoInstanceW == "on"]
+foreign {
+    // param-hint: wszzLogs bytes=param[2] optional
+    // param-hint: pcbActual optional
+    func JetGetTruncateLogInfoInstanceW(instance: JET_INSTANCE, wszzLogs: CPointer<UInt16>, cbMax: UInt32, pcbActual: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetTruncateLogInfoInstanceW == "on"]
+public unsafe func Windows_JetGetTruncateLogInfoInstanceW(instance: JET_INSTANCE, wszzLogs: CPointer<UInt16>, cbMax: UInt32, pcbActual: CPointer<UInt32>): Int32 {
+    return JetGetTruncateLogInfoInstanceW(instance, wszzLogs, cbMax, pcbActual)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetVersion == "on"]
+foreign {
+    func JetGetVersion(sesid: JET_SESID, pwVersion: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGetVersion == "on"]
+public unsafe func Windows_JetGetVersion(sesid: JET_SESID, pwVersion: CPointer<UInt32>): Int32 {
+    return JetGetVersion(sesid, pwVersion)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGotoBookmark == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: pvBookmark bytes=param[3]
     func JetGotoBookmark(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pvBookmark: CPointer<Unit>, cbBookmark: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGotoBookmark == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetGotoBookmark(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pvBookmark: CPointer<Unit>, cbBookmark: UInt32): Int32 {
+    return JetGotoBookmark(sesid, tableid, pvBookmark, cbBookmark)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGotoPosition == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetGotoPosition(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, precpos: CPointer<JET_RECPOS>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGotoPosition == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetGotoPosition(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, precpos: CPointer<JET_RECPOS>): Int32 {
+    return JetGotoPosition(sesid, tableid, precpos)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGotoSecondaryIndexBookmark == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: pvSecondaryKey bytes=param[3]
     // param-hint: pvPrimaryBookmark bytes=param[5] optional
     func JetGotoSecondaryIndexBookmark(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pvSecondaryKey: CPointer<Unit>, cbSecondaryKey: UInt32, pvPrimaryBookmark: CPointer<Unit>, cbPrimaryBookmark: UInt32, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGotoSecondaryIndexBookmark == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetGotoSecondaryIndexBookmark(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pvSecondaryKey: CPointer<Unit>, cbSecondaryKey: UInt32, pvPrimaryBookmark: CPointer<Unit>, cbPrimaryBookmark: UInt32, grbit: UInt32): Int32 {
+    return JetGotoSecondaryIndexBookmark(sesid, tableid, pvSecondaryKey, cbSecondaryKey, pvPrimaryBookmark, cbPrimaryBookmark, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGrowDatabase == "on"]
+foreign {
+    func JetGrowDatabase(sesid: JET_SESID, dbid: UInt32, cpg: UInt32, pcpgReal: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetGrowDatabase == "on"]
+public unsafe func Windows_JetGrowDatabase(sesid: JET_SESID, dbid: UInt32, cpg: UInt32, pcpgReal: CPointer<UInt32>): Int32 {
+    return JetGrowDatabase(sesid, dbid, cpg, pcpgReal)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetIdle == "on"]
+foreign {
+    func JetIdle(sesid: JET_SESID, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetIdle == "on"]
+public unsafe func Windows_JetIdle(sesid: JET_SESID, grbit: UInt32): Int32 {
+    return JetIdle(sesid, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetIndexRecordCount == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetIndexRecordCount(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pcrec: CPointer<UInt32>, crecMax: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetIndexRecordCount == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetIndexRecordCount(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pcrec: CPointer<UInt32>, crecMax: UInt32): Int32 {
+    return JetIndexRecordCount(sesid, tableid, pcrec, crecMax)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetInit == "on"]
+foreign {
+    // param-hint: pinstance optional
+    func JetInit(pinstance: CPointer<JET_INSTANCE>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetInit == "on"]
+public unsafe func Windows_JetInit(pinstance: CPointer<JET_INSTANCE>): Int32 {
+    return JetInit(pinstance)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetInit2 == "on"]
+foreign {
+    // param-hint: pinstance optional
+    func JetInit2(pinstance: CPointer<JET_INSTANCE>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetInit2 == "on"]
+public unsafe func Windows_JetInit2(pinstance: CPointer<JET_INSTANCE>, grbit: UInt32): Int32 {
+    return JetInit2(pinstance, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetInit3A == "on"]
+foreign {
+    // param-hint: pinstance optional
+    // param-hint: prstInfo optional
+    func JetInit3A(pinstance: CPointer<JET_INSTANCE>, prstInfo: CPointer<JET_RSTINFO_A>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetInit3A == "on"]
+public unsafe func Windows_JetInit3A(pinstance: CPointer<JET_INSTANCE>, prstInfo: CPointer<JET_RSTINFO_A>, grbit: UInt32): Int32 {
+    return JetInit3A(pinstance, prstInfo, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetInit3W == "on"]
+foreign {
+    // param-hint: pinstance optional
+    // param-hint: prstInfo optional
+    func JetInit3W(pinstance: CPointer<JET_INSTANCE>, prstInfo: CPointer<JET_RSTINFO_W>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetInit3W == "on"]
+public unsafe func Windows_JetInit3W(pinstance: CPointer<JET_INSTANCE>, prstInfo: CPointer<JET_RSTINFO_W>, grbit: UInt32): Int32 {
+    return JetInit3W(pinstance, prstInfo, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetIntersectIndexes == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: rgindexrange len=param[2]
     func JetIntersectIndexes(sesid: JET_SESID, rgindexrange: CPointer<JET_INDEXRANGE>, cindexrange: UInt32, precordlist: CPointer<JET_RECORDLIST>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetIntersectIndexes == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetIntersectIndexes(sesid: JET_SESID, rgindexrange: CPointer<JET_INDEXRANGE>, cindexrange: UInt32, precordlist: CPointer<JET_RECORDLIST>, grbit: UInt32): Int32 {
+    return JetIntersectIndexes(sesid, rgindexrange, cindexrange, precordlist, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetMakeKey == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: pvData bytes=param[3] optional
     func JetMakeKey(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pvData: CPointer<Unit>, cbData: UInt32, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetMakeKey == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetMakeKey(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pvData: CPointer<Unit>, cbData: UInt32, grbit: UInt32): Int32 {
+    return JetMakeKey(sesid, tableid, pvData, cbData, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetMove == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetMove(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, cRow: Int32, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetMove == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetMove(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, cRow: Int32, grbit: UInt32): Int32 {
+    return JetMove(sesid, tableid, cRow, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOSSnapshotAbort == "on"]
+foreign {
+    func JetOSSnapshotAbort(snapId: JET_OSSNAPID, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOSSnapshotAbort == "on"]
+public unsafe func Windows_JetOSSnapshotAbort(snapId: JET_OSSNAPID, grbit: UInt32): Int32 {
+    return JetOSSnapshotAbort(snapId, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOSSnapshotEnd == "on"]
+foreign {
+    func JetOSSnapshotEnd(snapId: JET_OSSNAPID, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOSSnapshotEnd == "on"]
+public unsafe func Windows_JetOSSnapshotEnd(snapId: JET_OSSNAPID, grbit: UInt32): Int32 {
+    return JetOSSnapshotEnd(snapId, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOSSnapshotFreezeA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetOSSnapshotFreezeA(snapId: JET_OSSNAPID, pcInstanceInfo: CPointer<UInt32>, paInstanceInfo: CPointer<CPointer<JET_INSTANCE_INFO_A>>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOSSnapshotFreezeA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetOSSnapshotFreezeA(snapId: JET_OSSNAPID, pcInstanceInfo: CPointer<UInt32>, paInstanceInfo: CPointer<CPointer<JET_INSTANCE_INFO_A>>, grbit: UInt32): Int32 {
+    return JetOSSnapshotFreezeA(snapId, pcInstanceInfo, paInstanceInfo, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOSSnapshotFreezeW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetOSSnapshotFreezeW(snapId: JET_OSSNAPID, pcInstanceInfo: CPointer<UInt32>, paInstanceInfo: CPointer<CPointer<JET_INSTANCE_INFO_W>>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOSSnapshotFreezeW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetOSSnapshotFreezeW(snapId: JET_OSSNAPID, pcInstanceInfo: CPointer<UInt32>, paInstanceInfo: CPointer<CPointer<JET_INSTANCE_INFO_W>>, grbit: UInt32): Int32 {
+    return JetOSSnapshotFreezeW(snapId, pcInstanceInfo, paInstanceInfo, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOSSnapshotGetFreezeInfoA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetOSSnapshotGetFreezeInfoA(snapId: JET_OSSNAPID, pcInstanceInfo: CPointer<UInt32>, paInstanceInfo: CPointer<CPointer<JET_INSTANCE_INFO_A>>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOSSnapshotGetFreezeInfoA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetOSSnapshotGetFreezeInfoA(snapId: JET_OSSNAPID, pcInstanceInfo: CPointer<UInt32>, paInstanceInfo: CPointer<CPointer<JET_INSTANCE_INFO_A>>, grbit: UInt32): Int32 {
+    return JetOSSnapshotGetFreezeInfoA(snapId, pcInstanceInfo, paInstanceInfo, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOSSnapshotGetFreezeInfoW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetOSSnapshotGetFreezeInfoW(snapId: JET_OSSNAPID, pcInstanceInfo: CPointer<UInt32>, paInstanceInfo: CPointer<CPointer<JET_INSTANCE_INFO_W>>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOSSnapshotGetFreezeInfoW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetOSSnapshotGetFreezeInfoW(snapId: JET_OSSNAPID, pcInstanceInfo: CPointer<UInt32>, paInstanceInfo: CPointer<CPointer<JET_INSTANCE_INFO_W>>, grbit: UInt32): Int32 {
+    return JetOSSnapshotGetFreezeInfoW(snapId, pcInstanceInfo, paInstanceInfo, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOSSnapshotPrepare == "on"]
+foreign {
+    func JetOSSnapshotPrepare(psnapId: CPointer<JET_OSSNAPID>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOSSnapshotPrepare == "on"]
+public unsafe func Windows_JetOSSnapshotPrepare(psnapId: CPointer<JET_OSSNAPID>, grbit: UInt32): Int32 {
+    return JetOSSnapshotPrepare(psnapId, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOSSnapshotPrepareInstance == "on"]
+foreign {
+    func JetOSSnapshotPrepareInstance(snapId: JET_OSSNAPID, instance: JET_INSTANCE, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOSSnapshotPrepareInstance == "on"]
+public unsafe func Windows_JetOSSnapshotPrepareInstance(snapId: JET_OSSNAPID, instance: JET_INSTANCE, grbit: UInt32): Int32 {
+    return JetOSSnapshotPrepareInstance(snapId, instance, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOSSnapshotThaw == "on"]
+foreign {
+    func JetOSSnapshotThaw(snapId: JET_OSSNAPID, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOSSnapshotThaw == "on"]
+public unsafe func Windows_JetOSSnapshotThaw(snapId: JET_OSSNAPID, grbit: UInt32): Int32 {
+    return JetOSSnapshotThaw(snapId, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOSSnapshotTruncateLog == "on"]
+foreign {
+    func JetOSSnapshotTruncateLog(snapId: JET_OSSNAPID, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOSSnapshotTruncateLog == "on"]
+public unsafe func Windows_JetOSSnapshotTruncateLog(snapId: JET_OSSNAPID, grbit: UInt32): Int32 {
+    return JetOSSnapshotTruncateLog(snapId, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOSSnapshotTruncateLogInstance == "on"]
+foreign {
+    func JetOSSnapshotTruncateLogInstance(snapId: JET_OSSNAPID, instance: JET_INSTANCE, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOSSnapshotTruncateLogInstance == "on"]
+public unsafe func Windows_JetOSSnapshotTruncateLogInstance(snapId: JET_OSSNAPID, instance: JET_INSTANCE, grbit: UInt32): Int32 {
+    return JetOSSnapshotTruncateLogInstance(snapId, instance, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOpenDatabaseA == "on"]
+foreign {
+    // param-hint: szConnect optional
+    func JetOpenDatabaseA(sesid: JET_SESID, szFilename: CPointer<Int8>, szConnect: CPointer<Int8>, pdbid: CPointer<UInt32>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOpenDatabaseA == "on"]
+public unsafe func Windows_JetOpenDatabaseA(sesid: JET_SESID, szFilename: CPointer<Int8>, szConnect: CPointer<Int8>, pdbid: CPointer<UInt32>, grbit: UInt32): Int32 {
+    return JetOpenDatabaseA(sesid, szFilename, szConnect, pdbid, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOpenDatabaseW == "on"]
+foreign {
+    // param-hint: szConnect optional
+    func JetOpenDatabaseW(sesid: JET_SESID, szFilename: CPointer<UInt16>, szConnect: CPointer<UInt16>, pdbid: CPointer<UInt32>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOpenDatabaseW == "on"]
+public unsafe func Windows_JetOpenDatabaseW(sesid: JET_SESID, szFilename: CPointer<UInt16>, szConnect: CPointer<UInt16>, pdbid: CPointer<UInt32>, grbit: UInt32): Int32 {
+    return JetOpenDatabaseW(sesid, szFilename, szConnect, pdbid, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOpenFileA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetOpenFileA(szFileName: CPointer<Int8>, phfFile: CPointer<Win32_Storage_StructuredStorage.JET_HANDLE>, pulFileSizeLow: CPointer<UInt32>, pulFileSizeHigh: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOpenFileA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetOpenFileA(szFileName: CPointer<Int8>, phfFile: CPointer<Win32_Storage_StructuredStorage.JET_HANDLE>, pulFileSizeLow: CPointer<UInt32>, pulFileSizeHigh: CPointer<UInt32>): Int32 {
+    return JetOpenFileA(szFileName, phfFile, pulFileSizeLow, pulFileSizeHigh)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOpenFileInstanceA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetOpenFileInstanceA(instance: JET_INSTANCE, szFileName: CPointer<Int8>, phfFile: CPointer<Win32_Storage_StructuredStorage.JET_HANDLE>, pulFileSizeLow: CPointer<UInt32>, pulFileSizeHigh: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOpenFileInstanceA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetOpenFileInstanceA(instance: JET_INSTANCE, szFileName: CPointer<Int8>, phfFile: CPointer<Win32_Storage_StructuredStorage.JET_HANDLE>, pulFileSizeLow: CPointer<UInt32>, pulFileSizeHigh: CPointer<UInt32>): Int32 {
+    return JetOpenFileInstanceA(instance, szFileName, phfFile, pulFileSizeLow, pulFileSizeHigh)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOpenFileInstanceW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetOpenFileInstanceW(instance: JET_INSTANCE, szFileName: CPointer<UInt16>, phfFile: CPointer<Win32_Storage_StructuredStorage.JET_HANDLE>, pulFileSizeLow: CPointer<UInt32>, pulFileSizeHigh: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOpenFileInstanceW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetOpenFileInstanceW(instance: JET_INSTANCE, szFileName: CPointer<UInt16>, phfFile: CPointer<Win32_Storage_StructuredStorage.JET_HANDLE>, pulFileSizeLow: CPointer<UInt32>, pulFileSizeHigh: CPointer<UInt32>): Int32 {
+    return JetOpenFileInstanceW(instance, szFileName, phfFile, pulFileSizeLow, pulFileSizeHigh)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOpenFileW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetOpenFileW(szFileName: CPointer<UInt16>, phfFile: CPointer<Win32_Storage_StructuredStorage.JET_HANDLE>, pulFileSizeLow: CPointer<UInt32>, pulFileSizeHigh: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOpenFileW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetOpenFileW(szFileName: CPointer<UInt16>, phfFile: CPointer<Win32_Storage_StructuredStorage.JET_HANDLE>, pulFileSizeLow: CPointer<UInt32>, pulFileSizeHigh: CPointer<UInt32>): Int32 {
+    return JetOpenFileW(szFileName, phfFile, pulFileSizeLow, pulFileSizeHigh)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOpenTableA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: pvParameters bytes=param[4] optional
     func JetOpenTableA(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<Int8>, pvParameters: CPointer<Unit>, cbParameters: UInt32, grbit: UInt32, ptableid: CPointer<Win32_Storage_StructuredStorage.JET_TABLEID>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOpenTableA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetOpenTableA(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<Int8>, pvParameters: CPointer<Unit>, cbParameters: UInt32, grbit: UInt32, ptableid: CPointer<Win32_Storage_StructuredStorage.JET_TABLEID>): Int32 {
+    return JetOpenTableA(sesid, dbid, szTableName, pvParameters, cbParameters, grbit, ptableid)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOpenTableW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: pvParameters bytes=param[4] optional
     func JetOpenTableW(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<UInt16>, pvParameters: CPointer<Unit>, cbParameters: UInt32, grbit: UInt32, ptableid: CPointer<Win32_Storage_StructuredStorage.JET_TABLEID>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOpenTableW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetOpenTableW(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<UInt16>, pvParameters: CPointer<Unit>, cbParameters: UInt32, grbit: UInt32, ptableid: CPointer<Win32_Storage_StructuredStorage.JET_TABLEID>): Int32 {
+    return JetOpenTableW(sesid, dbid, szTableName, pvParameters, cbParameters, grbit, ptableid)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOpenTempTable == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: prgcolumndef len=param[2]
     // param-hint: prgcolumnid len=param[2]
     func JetOpenTempTable(sesid: JET_SESID, prgcolumndef: CPointer<JET_COLUMNDEF>, ccolumn: UInt32, grbit: UInt32, ptableid: CPointer<Win32_Storage_StructuredStorage.JET_TABLEID>, prgcolumnid: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOpenTempTable == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetOpenTempTable(sesid: JET_SESID, prgcolumndef: CPointer<JET_COLUMNDEF>, ccolumn: UInt32, grbit: UInt32, ptableid: CPointer<Win32_Storage_StructuredStorage.JET_TABLEID>, prgcolumnid: CPointer<UInt32>): Int32 {
+    return JetOpenTempTable(sesid, prgcolumndef, ccolumn, grbit, ptableid, prgcolumnid)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOpenTempTable2 == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: prgcolumndef len=param[2]
     // param-hint: prgcolumnid len=param[2]
     func JetOpenTempTable2(sesid: JET_SESID, prgcolumndef: CPointer<JET_COLUMNDEF>, ccolumn: UInt32, lcid: UInt32, grbit: UInt32, ptableid: CPointer<Win32_Storage_StructuredStorage.JET_TABLEID>, prgcolumnid: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOpenTempTable2 == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetOpenTempTable2(sesid: JET_SESID, prgcolumndef: CPointer<JET_COLUMNDEF>, ccolumn: UInt32, lcid: UInt32, grbit: UInt32, ptableid: CPointer<Win32_Storage_StructuredStorage.JET_TABLEID>, prgcolumnid: CPointer<UInt32>): Int32 {
+    return JetOpenTempTable2(sesid, prgcolumndef, ccolumn, lcid, grbit, ptableid, prgcolumnid)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOpenTempTable3 == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: prgcolumndef len=param[2]
     // param-hint: pidxunicode optional
     // param-hint: prgcolumnid len=param[2]
     func JetOpenTempTable3(sesid: JET_SESID, prgcolumndef: CPointer<JET_COLUMNDEF>, ccolumn: UInt32, pidxunicode: CPointer<JET_UNICODEINDEX>, grbit: UInt32, ptableid: CPointer<Win32_Storage_StructuredStorage.JET_TABLEID>, prgcolumnid: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOpenTempTable3 == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetOpenTempTable3(sesid: JET_SESID, prgcolumndef: CPointer<JET_COLUMNDEF>, ccolumn: UInt32, pidxunicode: CPointer<JET_UNICODEINDEX>, grbit: UInt32, ptableid: CPointer<Win32_Storage_StructuredStorage.JET_TABLEID>, prgcolumnid: CPointer<UInt32>): Int32 {
+    return JetOpenTempTable3(sesid, prgcolumndef, ccolumn, pidxunicode, grbit, ptableid, prgcolumnid)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOpenTemporaryTable == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetOpenTemporaryTable(sesid: JET_SESID, popentemporarytable: CPointer<JET_OPENTEMPORARYTABLE>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOpenTemporaryTable == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetOpenTemporaryTable(sesid: JET_SESID, popentemporarytable: CPointer<JET_OPENTEMPORARYTABLE>): Int32 {
+    return JetOpenTemporaryTable(sesid, popentemporarytable)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOpenTemporaryTable2 == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetOpenTemporaryTable2(sesid: JET_SESID, popentemporarytable: CPointer<JET_OPENTEMPORARYTABLE2>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetOpenTemporaryTable2 == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetOpenTemporaryTable2(sesid: JET_SESID, popentemporarytable: CPointer<JET_OPENTEMPORARYTABLE2>): Int32 {
+    return JetOpenTemporaryTable2(sesid, popentemporarytable)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetPrepareUpdate == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetPrepareUpdate(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, prep: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetPrepareUpdate == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetPrepareUpdate(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, prep: UInt32): Int32 {
+    return JetPrepareUpdate(sesid, tableid, prep)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetPrereadIndexRanges == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: rgIndexRanges len=param[3]
     // param-hint: pcRangesPreread optional
     // param-hint: rgcolumnidPreread len=param[6]
     func JetPrereadIndexRanges(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, rgIndexRanges: CPointer<JET_INDEX_RANGE>, cIndexRanges: UInt32, pcRangesPreread: CPointer<UInt32>, rgcolumnidPreread: CPointer<UInt32>, ccolumnidPreread: UInt32, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetPrereadIndexRanges == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetPrereadIndexRanges(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, rgIndexRanges: CPointer<JET_INDEX_RANGE>, cIndexRanges: UInt32, pcRangesPreread: CPointer<UInt32>, rgcolumnidPreread: CPointer<UInt32>, ccolumnidPreread: UInt32, grbit: UInt32): Int32 {
+    return JetPrereadIndexRanges(sesid, tableid, rgIndexRanges, cIndexRanges, pcRangesPreread, rgcolumnidPreread, ccolumnidPreread, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetPrereadKeys == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: rgpvKeys len=param[4]
     // param-hint: rgcbKeys len=param[4]
     // param-hint: pckeysPreread optional
     func JetPrereadKeys(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, rgpvKeys: CPointer<CPointer<Unit>>, rgcbKeys: CPointer<UInt32>, ckeys: Int32, pckeysPreread: CPointer<Int32>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetPrereadKeys == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetPrereadKeys(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, rgpvKeys: CPointer<CPointer<Unit>>, rgcbKeys: CPointer<UInt32>, ckeys: Int32, pckeysPreread: CPointer<Int32>, grbit: UInt32): Int32 {
+    return JetPrereadKeys(sesid, tableid, rgpvKeys, rgcbKeys, ckeys, pckeysPreread, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetReadFile == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: pv bytes=param[2]
     // param-hint: pcbActual optional
     func JetReadFile(hfFile: Win32_Storage_StructuredStorage.JET_HANDLE, pv: CPointer<Unit>, cb: UInt32, pcbActual: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetReadFile == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetReadFile(hfFile: Win32_Storage_StructuredStorage.JET_HANDLE, pv: CPointer<Unit>, cb: UInt32, pcbActual: CPointer<UInt32>): Int32 {
+    return JetReadFile(hfFile, pv, cb, pcbActual)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetReadFileInstance == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: pv bytes=param[3]
     // param-hint: pcbActual optional
     func JetReadFileInstance(instance: JET_INSTANCE, hfFile: Win32_Storage_StructuredStorage.JET_HANDLE, pv: CPointer<Unit>, cb: UInt32, pcbActual: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetReadFileInstance == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetReadFileInstance(instance: JET_INSTANCE, hfFile: Win32_Storage_StructuredStorage.JET_HANDLE, pv: CPointer<Unit>, cb: UInt32, pcbActual: CPointer<UInt32>): Int32 {
+    return JetReadFileInstance(instance, hfFile, pv, cb, pcbActual)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetRegisterCallback == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: pvContext optional
     func JetRegisterCallback(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, cbtyp: UInt32, pCallback: JET_CALLBACK, pvContext: CPointer<Unit>, phCallbackId: CPointer<Win32_Storage_StructuredStorage.JET_HANDLE>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetRegisterCallback == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetRegisterCallback(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, cbtyp: UInt32, pCallback: JET_CALLBACK, pvContext: CPointer<Unit>, phCallbackId: CPointer<Win32_Storage_StructuredStorage.JET_HANDLE>): Int32 {
+    return JetRegisterCallback(sesid, tableid, cbtyp, pCallback, pvContext, phCallbackId)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetRenameColumnA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetRenameColumnA(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szName: CPointer<Int8>, szNameNew: CPointer<Int8>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetRenameColumnA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetRenameColumnA(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szName: CPointer<Int8>, szNameNew: CPointer<Int8>, grbit: UInt32): Int32 {
+    return JetRenameColumnA(sesid, tableid, szName, szNameNew, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetRenameColumnW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetRenameColumnW(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szName: CPointer<UInt16>, szNameNew: CPointer<UInt16>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetRenameColumnW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetRenameColumnW(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szName: CPointer<UInt16>, szNameNew: CPointer<UInt16>, grbit: UInt32): Int32 {
+    return JetRenameColumnW(sesid, tableid, szName, szNameNew, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetRenameTableA == "on"]
+foreign {
+    func JetRenameTableA(sesid: JET_SESID, dbid: UInt32, szName: CPointer<Int8>, szNameNew: CPointer<Int8>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetRenameTableA == "on"]
+public unsafe func Windows_JetRenameTableA(sesid: JET_SESID, dbid: UInt32, szName: CPointer<Int8>, szNameNew: CPointer<Int8>): Int32 {
+    return JetRenameTableA(sesid, dbid, szName, szNameNew)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetRenameTableW == "on"]
+foreign {
+    func JetRenameTableW(sesid: JET_SESID, dbid: UInt32, szName: CPointer<UInt16>, szNameNew: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetRenameTableW == "on"]
+public unsafe func Windows_JetRenameTableW(sesid: JET_SESID, dbid: UInt32, szName: CPointer<UInt16>, szNameNew: CPointer<UInt16>): Int32 {
+    return JetRenameTableW(sesid, dbid, szName, szNameNew)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetResetSessionContext == "on"]
+foreign {
+    func JetResetSessionContext(sesid: JET_SESID): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetResetSessionContext == "on"]
+public unsafe func Windows_JetResetSessionContext(sesid: JET_SESID): Int32 {
+    return JetResetSessionContext(sesid)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetResetTableSequential == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetResetTableSequential(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetResetTableSequential == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetResetTableSequential(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, grbit: UInt32): Int32 {
+    return JetResetTableSequential(sesid, tableid, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetResizeDatabase == "on"]
+foreign {
+    func JetResizeDatabase(sesid: JET_SESID, dbid: UInt32, cpgTarget: UInt32, pcpgActual: CPointer<UInt32>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetResizeDatabase == "on"]
+public unsafe func Windows_JetResizeDatabase(sesid: JET_SESID, dbid: UInt32, cpgTarget: UInt32, pcpgActual: CPointer<UInt32>, grbit: UInt32): Int32 {
+    return JetResizeDatabase(sesid, dbid, cpgTarget, pcpgActual, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetRestore2A == "on"]
+foreign {
+    // param-hint: szDest optional
+    // param-hint: pfn optional
+    func JetRestore2A(sz: CPointer<Int8>, szDest: CPointer<Int8>, pfn: JET_PFNSTATUS): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetRestore2A == "on"]
+public unsafe func Windows_JetRestore2A(sz: CPointer<Int8>, szDest: CPointer<Int8>, pfn: JET_PFNSTATUS): Int32 {
+    return JetRestore2A(sz, szDest, pfn)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetRestore2W == "on"]
+foreign {
+    // param-hint: szDest optional
+    // param-hint: pfn optional
+    func JetRestore2W(sz: CPointer<UInt16>, szDest: CPointer<UInt16>, pfn: JET_PFNSTATUS): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetRestore2W == "on"]
+public unsafe func Windows_JetRestore2W(sz: CPointer<UInt16>, szDest: CPointer<UInt16>, pfn: JET_PFNSTATUS): Int32 {
+    return JetRestore2W(sz, szDest, pfn)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetRestoreA == "on"]
+foreign {
+    // param-hint: pfn optional
+    func JetRestoreA(szSource: CPointer<Int8>, pfn: JET_PFNSTATUS): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetRestoreA == "on"]
+public unsafe func Windows_JetRestoreA(szSource: CPointer<Int8>, pfn: JET_PFNSTATUS): Int32 {
+    return JetRestoreA(szSource, pfn)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetRestoreInstanceA == "on"]
+foreign {
+    // param-hint: szDest optional
+    // param-hint: pfn optional
+    func JetRestoreInstanceA(instance: JET_INSTANCE, sz: CPointer<Int8>, szDest: CPointer<Int8>, pfn: JET_PFNSTATUS): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetRestoreInstanceA == "on"]
+public unsafe func Windows_JetRestoreInstanceA(instance: JET_INSTANCE, sz: CPointer<Int8>, szDest: CPointer<Int8>, pfn: JET_PFNSTATUS): Int32 {
+    return JetRestoreInstanceA(instance, sz, szDest, pfn)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetRestoreInstanceW == "on"]
+foreign {
+    // param-hint: szDest optional
+    // param-hint: pfn optional
+    func JetRestoreInstanceW(instance: JET_INSTANCE, sz: CPointer<UInt16>, szDest: CPointer<UInt16>, pfn: JET_PFNSTATUS): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetRestoreInstanceW == "on"]
+public unsafe func Windows_JetRestoreInstanceW(instance: JET_INSTANCE, sz: CPointer<UInt16>, szDest: CPointer<UInt16>, pfn: JET_PFNSTATUS): Int32 {
+    return JetRestoreInstanceW(instance, sz, szDest, pfn)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetRestoreW == "on"]
+foreign {
+    // param-hint: pfn optional
+    func JetRestoreW(szSource: CPointer<UInt16>, pfn: JET_PFNSTATUS): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetRestoreW == "on"]
+public unsafe func Windows_JetRestoreW(szSource: CPointer<UInt16>, pfn: JET_PFNSTATUS): Int32 {
+    return JetRestoreW(szSource, pfn)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetRetrieveColumn == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: pvData bytes=param[4] optional
     // param-hint: pcbActual optional
     // param-hint: pretinfo optional
     func JetRetrieveColumn(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, columnid: UInt32, pvData: CPointer<Unit>, cbData: UInt32, pcbActual: CPointer<UInt32>, grbit: UInt32, pretinfo: CPointer<JET_RETINFO>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetRetrieveColumn == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetRetrieveColumn(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, columnid: UInt32, pvData: CPointer<Unit>, cbData: UInt32, pcbActual: CPointer<UInt32>, grbit: UInt32, pretinfo: CPointer<JET_RETINFO>): Int32 {
+    return JetRetrieveColumn(sesid, tableid, columnid, pvData, cbData, pcbActual, grbit, pretinfo)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetRetrieveColumns == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: pretrievecolumn len=param[3] optional
     func JetRetrieveColumns(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pretrievecolumn: CPointer<JET_RETRIEVECOLUMN>, cretrievecolumn: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetRetrieveColumns == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetRetrieveColumns(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pretrievecolumn: CPointer<JET_RETRIEVECOLUMN>, cretrievecolumn: UInt32): Int32 {
+    return JetRetrieveColumns(sesid, tableid, pretrievecolumn, cretrievecolumn)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetRetrieveKey == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: pvKey bytes=param[3] optional
     // param-hint: pcbActual optional
     func JetRetrieveKey(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pvKey: CPointer<Unit>, cbMax: UInt32, pcbActual: CPointer<UInt32>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetRetrieveKey == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetRetrieveKey(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pvKey: CPointer<Unit>, cbMax: UInt32, pcbActual: CPointer<UInt32>, grbit: UInt32): Int32 {
+    return JetRetrieveKey(sesid, tableid, pvKey, cbMax, pcbActual, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetRollback == "on"]
+foreign {
+    func JetRollback(sesid: JET_SESID, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetRollback == "on"]
+public unsafe func Windows_JetRollback(sesid: JET_SESID, grbit: UInt32): Int32 {
+    return JetRollback(sesid, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSeek == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetSeek(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSeek == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetSeek(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, grbit: UInt32): Int32 {
+    return JetSeek(sesid, tableid, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetColumn == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: pvData bytes=param[4] optional
     // param-hint: psetinfo optional
     func JetSetColumn(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, columnid: UInt32, pvData: CPointer<Unit>, cbData: UInt32, grbit: UInt32, psetinfo: CPointer<JET_SETINFO>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetColumn == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetSetColumn(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, columnid: UInt32, pvData: CPointer<Unit>, cbData: UInt32, grbit: UInt32, psetinfo: CPointer<JET_SETINFO>): Int32 {
+    return JetSetColumn(sesid, tableid, columnid, pvData, cbData, grbit, psetinfo)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetColumnDefaultValueA == "on"]
+foreign {
+    // param-hint: pvData bytes=param[5]
+    func JetSetColumnDefaultValueA(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<Int8>, szColumnName: CPointer<Int8>, pvData: CPointer<Unit>, cbData: UInt32, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetColumnDefaultValueA == "on"]
+public unsafe func Windows_JetSetColumnDefaultValueA(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<Int8>, szColumnName: CPointer<Int8>, pvData: CPointer<Unit>, cbData: UInt32, grbit: UInt32): Int32 {
+    return JetSetColumnDefaultValueA(sesid, dbid, szTableName, szColumnName, pvData, cbData, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetColumnDefaultValueW == "on"]
+foreign {
+    // param-hint: pvData bytes=param[5]
+    func JetSetColumnDefaultValueW(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<UInt16>, szColumnName: CPointer<UInt16>, pvData: CPointer<Unit>, cbData: UInt32, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetColumnDefaultValueW == "on"]
+public unsafe func Windows_JetSetColumnDefaultValueW(sesid: JET_SESID, dbid: UInt32, szTableName: CPointer<UInt16>, szColumnName: CPointer<UInt16>, pvData: CPointer<Unit>, cbData: UInt32, grbit: UInt32): Int32 {
+    return JetSetColumnDefaultValueW(sesid, dbid, szTableName, szColumnName, pvData, cbData, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetColumns == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: psetcolumn len=param[3] optional
     func JetSetColumns(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, psetcolumn: CPointer<JET_SETCOLUMN>, csetcolumn: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetColumns == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetSetColumns(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, psetcolumn: CPointer<JET_SETCOLUMN>, csetcolumn: UInt32): Int32 {
+    return JetSetColumns(sesid, tableid, psetcolumn, csetcolumn)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetCurrentIndex2A == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: szIndexName optional
     func JetSetCurrentIndex2A(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<Int8>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetCurrentIndex2A == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetSetCurrentIndex2A(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<Int8>, grbit: UInt32): Int32 {
+    return JetSetCurrentIndex2A(sesid, tableid, szIndexName, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetCurrentIndex2W == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: szIndexName optional
     func JetSetCurrentIndex2W(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<UInt16>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetCurrentIndex2W == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetSetCurrentIndex2W(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<UInt16>, grbit: UInt32): Int32 {
+    return JetSetCurrentIndex2W(sesid, tableid, szIndexName, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetCurrentIndex3A == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: szIndexName optional
     func JetSetCurrentIndex3A(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<Int8>, grbit: UInt32, itagSequence: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetCurrentIndex3A == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetSetCurrentIndex3A(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<Int8>, grbit: UInt32, itagSequence: UInt32): Int32 {
+    return JetSetCurrentIndex3A(sesid, tableid, szIndexName, grbit, itagSequence)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetCurrentIndex3W == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: szIndexName optional
     func JetSetCurrentIndex3W(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<UInt16>, grbit: UInt32, itagSequence: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetCurrentIndex3W == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetSetCurrentIndex3W(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<UInt16>, grbit: UInt32, itagSequence: UInt32): Int32 {
+    return JetSetCurrentIndex3W(sesid, tableid, szIndexName, grbit, itagSequence)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetCurrentIndex4A == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_Storage_StructuredStorage == "on")]
+foreign {
+    // param-hint: szIndexName optional
+    // param-hint: pindexid optional
+    func JetSetCurrentIndex4A(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<Int8>, pindexid: CPointer<JET_INDEXID>, grbit: UInt32, itagSequence: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetCurrentIndex4A == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_Storage_StructuredStorage == "on")]
+public unsafe func Windows_JetSetCurrentIndex4A(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<Int8>, pindexid: CPointer<JET_INDEXID>, grbit: UInt32, itagSequence: UInt32): Int32 {
+    return JetSetCurrentIndex4A(sesid, tableid, szIndexName, pindexid, grbit, itagSequence)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetCurrentIndex4W == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_Storage_StructuredStorage == "on")]
+foreign {
+    // param-hint: szIndexName optional
+    // param-hint: pindexid optional
+    func JetSetCurrentIndex4W(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<UInt16>, pindexid: CPointer<JET_INDEXID>, grbit: UInt32, itagSequence: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetCurrentIndex4W == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_Storage_StructuredStorage == "on")]
+public unsafe func Windows_JetSetCurrentIndex4W(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<UInt16>, pindexid: CPointer<JET_INDEXID>, grbit: UInt32, itagSequence: UInt32): Int32 {
+    return JetSetCurrentIndex4W(sesid, tableid, szIndexName, pindexid, grbit, itagSequence)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetCurrentIndexA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: szIndexName optional
     func JetSetCurrentIndexA(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<Int8>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetCurrentIndexA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetSetCurrentIndexA(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<Int8>): Int32 {
+    return JetSetCurrentIndexA(sesid, tableid, szIndexName)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetCurrentIndexW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: szIndexName optional
     func JetSetCurrentIndexW(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetCurrentIndexW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetSetCurrentIndexW(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, szIndexName: CPointer<UInt16>): Int32 {
+    return JetSetCurrentIndexW(sesid, tableid, szIndexName)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetCursorFilter == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: rgColumnFilters len=param[3]
     func JetSetCursorFilter(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, rgColumnFilters: CPointer<JET_INDEX_COLUMN>, cColumnFilters: UInt32, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetCursorFilter == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetSetCursorFilter(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, rgColumnFilters: CPointer<JET_INDEX_COLUMN>, cColumnFilters: UInt32, grbit: UInt32): Int32 {
+    return JetSetCursorFilter(sesid, tableid, rgColumnFilters, cColumnFilters, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetDatabaseSizeA == "on"]
+foreign {
+    func JetSetDatabaseSizeA(sesid: JET_SESID, szDatabaseName: CPointer<Int8>, cpg: UInt32, pcpgReal: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetDatabaseSizeA == "on"]
+public unsafe func Windows_JetSetDatabaseSizeA(sesid: JET_SESID, szDatabaseName: CPointer<Int8>, cpg: UInt32, pcpgReal: CPointer<UInt32>): Int32 {
+    return JetSetDatabaseSizeA(sesid, szDatabaseName, cpg, pcpgReal)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetDatabaseSizeW == "on"]
+foreign {
+    func JetSetDatabaseSizeW(sesid: JET_SESID, szDatabaseName: CPointer<UInt16>, cpg: UInt32, pcpgReal: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetDatabaseSizeW == "on"]
+public unsafe func Windows_JetSetDatabaseSizeW(sesid: JET_SESID, szDatabaseName: CPointer<UInt16>, cpg: UInt32, pcpgReal: CPointer<UInt32>): Int32 {
+    return JetSetDatabaseSizeW(sesid, szDatabaseName, cpg, pcpgReal)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetIndexRange == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetSetIndexRange(sesid: JET_SESID, tableidSrc: Win32_Storage_StructuredStorage.JET_TABLEID, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetIndexRange == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetSetIndexRange(sesid: JET_SESID, tableidSrc: Win32_Storage_StructuredStorage.JET_TABLEID, grbit: UInt32): Int32 {
+    return JetSetIndexRange(sesid, tableidSrc, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetLS == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetSetLS(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, ls: JET_LS, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetLS == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetSetLS(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, ls: JET_LS, grbit: UInt32): Int32 {
+    return JetSetLS(sesid, tableid, ls, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetSessionContext == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetSetSessionContext(sesid: JET_SESID, ulContext: Win32_Storage_StructuredStorage.JET_API_PTR): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetSessionContext == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetSetSessionContext(sesid: JET_SESID, ulContext: Win32_Storage_StructuredStorage.JET_API_PTR): Int32 {
+    return JetSetSessionContext(sesid, ulContext)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetSessionParameter == "on"]
+foreign {
+    // param-hint: sesid optional
+    // param-hint: pvParam bytes=param[3] optional
+    func JetSetSessionParameter(sesid: JET_SESID, sesparamid: UInt32, pvParam: CPointer<Unit>, cbParam: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetSessionParameter == "on"]
+public unsafe func Windows_JetSetSessionParameter(sesid: JET_SESID, sesparamid: UInt32, pvParam: CPointer<Unit>, cbParam: UInt32): Int32 {
+    return JetSetSessionParameter(sesid, sesparamid, pvParam, cbParam)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetSystemParameterA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: pinstance optional
     // param-hint: sesid optional
     // param-hint: lParam optional
     // param-hint: szParam optional
     func JetSetSystemParameterA(pinstance: CPointer<JET_INSTANCE>, sesid: JET_SESID, paramid: UInt32, lParam: Win32_Storage_StructuredStorage.JET_API_PTR, szParam: CPointer<Int8>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetSystemParameterA == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetSetSystemParameterA(pinstance: CPointer<JET_INSTANCE>, sesid: JET_SESID, paramid: UInt32, lParam: Win32_Storage_StructuredStorage.JET_API_PTR, szParam: CPointer<Int8>): Int32 {
+    return JetSetSystemParameterA(pinstance, sesid, paramid, lParam, szParam)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetSystemParameterW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: pinstance optional
     // param-hint: sesid optional
     // param-hint: lParam optional
     // param-hint: szParam optional
     func JetSetSystemParameterW(pinstance: CPointer<JET_INSTANCE>, sesid: JET_SESID, paramid: UInt32, lParam: Win32_Storage_StructuredStorage.JET_API_PTR, szParam: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetSystemParameterW == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetSetSystemParameterW(pinstance: CPointer<JET_INSTANCE>, sesid: JET_SESID, paramid: UInt32, lParam: Win32_Storage_StructuredStorage.JET_API_PTR, szParam: CPointer<UInt16>): Int32 {
+    return JetSetSystemParameterW(pinstance, sesid, paramid, lParam, szParam)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetTableSequential == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetSetTableSequential(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetSetTableSequential == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetSetTableSequential(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, grbit: UInt32): Int32 {
+    return JetSetTableSequential(sesid, tableid, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetStopBackup == "on"]
+foreign {
+    func JetStopBackup(): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetStopBackup == "on"]
+public unsafe func Windows_JetStopBackup(): Int32 {
+    return JetStopBackup()
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetStopBackupInstance == "on"]
+foreign {
+    func JetStopBackupInstance(instance: JET_INSTANCE): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetStopBackupInstance == "on"]
+public unsafe func Windows_JetStopBackupInstance(instance: JET_INSTANCE): Int32 {
+    return JetStopBackupInstance(instance)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetStopService == "on"]
+foreign {
+    func JetStopService(): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetStopService == "on"]
+public unsafe func Windows_JetStopService(): Int32 {
+    return JetStopService()
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetStopServiceInstance == "on"]
+foreign {
+    func JetStopServiceInstance(instance: JET_INSTANCE): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetStopServiceInstance == "on"]
+public unsafe func Windows_JetStopServiceInstance(instance: JET_INSTANCE): Int32 {
+    return JetStopServiceInstance(instance)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetStopServiceInstance2 == "on"]
+foreign {
+    func JetStopServiceInstance2(instance: JET_INSTANCE, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetStopServiceInstance2 == "on"]
+public unsafe func Windows_JetStopServiceInstance2(instance: JET_INSTANCE, grbit: UInt32): Int32 {
+    return JetStopServiceInstance2(instance, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetTerm == "on"]
+foreign {
+    func JetTerm(instance: JET_INSTANCE): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetTerm == "on"]
+public unsafe func Windows_JetTerm(instance: JET_INSTANCE): Int32 {
+    return JetTerm(instance)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetTerm2 == "on"]
+foreign {
+    func JetTerm2(instance: JET_INSTANCE, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetTerm2 == "on"]
+public unsafe func Windows_JetTerm2(instance: JET_INSTANCE, grbit: UInt32): Int32 {
+    return JetTerm2(instance, grbit)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetTruncateLog == "on"]
+foreign {
+    func JetTruncateLog(): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetTruncateLog == "on"]
+public unsafe func Windows_JetTruncateLog(): Int32 {
+    return JetTruncateLog()
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetTruncateLogInstance == "on"]
+foreign {
+    func JetTruncateLogInstance(instance: JET_INSTANCE): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetTruncateLogInstance == "on"]
+public unsafe func Windows_JetTruncateLogInstance(instance: JET_INSTANCE): Int32 {
+    return JetTruncateLogInstance(instance)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetUnregisterCallback == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     func JetUnregisterCallback(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, cbtyp: UInt32, hCallbackId: Win32_Storage_StructuredStorage.JET_HANDLE): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetUnregisterCallback == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetUnregisterCallback(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, cbtyp: UInt32, hCallbackId: Win32_Storage_StructuredStorage.JET_HANDLE): Int32 {
+    return JetUnregisterCallback(sesid, tableid, cbtyp, hCallbackId)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetUpdate == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: pvBookmark bytes=param[3] optional
     // param-hint: pcbActual optional
     func JetUpdate(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pvBookmark: CPointer<Unit>, cbBookmark: UInt32, pcbActual: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetUpdate == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetUpdate(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pvBookmark: CPointer<Unit>, cbBookmark: UInt32, pcbActual: CPointer<UInt32>): Int32 {
+    return JetUpdate(sesid, tableid, pvBookmark, cbBookmark, pcbActual)
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetUpdate2 == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+foreign {
     // param-hint: pvBookmark bytes=param[3] optional
     // param-hint: pcbActual optional
     func JetUpdate2(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pvBookmark: CPointer<Unit>, cbBookmark: UInt32, pcbActual: CPointer<UInt32>, grbit: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_Jet == "on" && ESENT == "on" && Windows_Win32_Storage_Jet_JetUpdate2 == "on" && Windows_Win32_Storage_StructuredStorage == "on"]
+public unsafe func Windows_JetUpdate2(sesid: JET_SESID, tableid: Win32_Storage_StructuredStorage.JET_TABLEID, pvBookmark: CPointer<Unit>, cbBookmark: UInt32, pcbActual: CPointer<UInt32>, grbit: UInt32): Int32 {
+    return JetUpdate2(sesid, tableid, pvBookmark, cbBookmark, pcbActual, grbit)
 }
 
 @When[Windows_Win32_Storage_Jet == "on"]

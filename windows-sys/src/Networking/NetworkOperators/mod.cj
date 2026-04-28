@@ -1069,8 +1069,11 @@ public class IHotspotCredentialsAuthenticationResult <: InterfaceWrapperBase & C
 @C
 public struct IKnownCSimFilePathsStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var EFSpn: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Gid1: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Gid2: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1115,18 +1118,21 @@ public class IKnownCSimFilePathsStatics <: InterfaceWrapperBase & ComInterface {
         readVtbl<IKnownCSimFilePathsStaticsVtbl>(IKnownCSimFilePathsStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func EFSpn(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.EFSpn(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Gid1(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Gid1(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Gid2(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1138,8 +1144,11 @@ public class IKnownCSimFilePathsStatics <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IKnownRuimFilePathsStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var EFSpn: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Gid1: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Gid2: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1184,18 +1193,21 @@ public class IKnownRuimFilePathsStatics <: InterfaceWrapperBase & ComInterface {
         readVtbl<IKnownRuimFilePathsStaticsVtbl>(IKnownRuimFilePathsStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func EFSpn(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.EFSpn(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Gid1(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Gid1(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Gid2(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1207,9 +1219,13 @@ public class IKnownRuimFilePathsStatics <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IKnownSimFilePathsStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var EFOns: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var EFSpn: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Gid1: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Gid2: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1254,24 +1270,28 @@ public class IKnownSimFilePathsStatics <: InterfaceWrapperBase & ComInterface {
         readVtbl<IKnownSimFilePathsStaticsVtbl>(IKnownSimFilePathsStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func EFOns(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.EFOns(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func EFSpn(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.EFSpn(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Gid1(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Gid1(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Gid2(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1283,10 +1303,15 @@ public class IKnownSimFilePathsStatics <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IKnownUSimFilePathsStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var EFSpn: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var EFOpl: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var EFPnn: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Gid1: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Gid2: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1331,30 +1356,35 @@ public class IKnownUSimFilePathsStatics <: InterfaceWrapperBase & ComInterface {
         readVtbl<IKnownUSimFilePathsStaticsVtbl>(IKnownUSimFilePathsStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func EFSpn(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.EFSpn(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func EFOpl(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.EFOpl(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func EFPnn(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.EFPnn(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Gid1(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Gid1(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Gid2(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1366,7 +1396,7 @@ public class IKnownUSimFilePathsStatics <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IMobileBroadbandAccount2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Networking_Connectivity == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking_Connectivity == "on"]
     public var GetConnectionProfiles: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1411,7 +1441,7 @@ public class IMobileBroadbandAccount2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IMobileBroadbandAccount2Vtbl>(IMobileBroadbandAccount2Vtbl())
     }
 
-    @When[Windows_Networking_Connectivity == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking_Connectivity == "on"]
     public unsafe func GetConnectionProfiles(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3206,7 +3236,7 @@ public class INetworkOperatorTetheringAccessPointConfiguration <: InterfaceWrapp
 public struct INetworkOperatorTetheringClientVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var MacAddress: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public var HostNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -3257,7 +3287,7 @@ public class INetworkOperatorTetheringClient <: InterfaceWrapperBase & ComInterf
         return __vt.MacAddress(__liveRaw, result__)
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func HostNames(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4661,15 +4691,25 @@ public class IHotspotAuthenticationContext2 <: InterfaceWrapperBase & ComInterfa
 @C
 public struct IMobileBroadbandCellsInfoVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var NeighboringCellsCdma: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var NeighboringCellsGsm: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var NeighboringCellsLte: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var NeighboringCellsTdscdma: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var NeighboringCellsUmts: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ServingCellsCdma: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ServingCellsGsm: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ServingCellsLte: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ServingCellsTdscdma: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ServingCellsUmts: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -4714,60 +4754,70 @@ public class IMobileBroadbandCellsInfo <: InterfaceWrapperBase & ComInterface {
         readVtbl<IMobileBroadbandCellsInfoVtbl>(IMobileBroadbandCellsInfoVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func NeighboringCellsCdma(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.NeighboringCellsCdma(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func NeighboringCellsGsm(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.NeighboringCellsGsm(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func NeighboringCellsLte(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.NeighboringCellsLte(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func NeighboringCellsTdscdma(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.NeighboringCellsTdscdma(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func NeighboringCellsUmts(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.NeighboringCellsUmts(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ServingCellsCdma(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ServingCellsCdma(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ServingCellsGsm(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ServingCellsGsm(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ServingCellsLte(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ServingCellsLte(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ServingCellsTdscdma(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ServingCellsTdscdma(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ServingCellsUmts(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4779,7 +4829,9 @@ public class IMobileBroadbandCellsInfo <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IMobileBroadbandCellsInfo2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var NeighboringCellsNR: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ServingCellsNR: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -4824,12 +4876,14 @@ public class IMobileBroadbandCellsInfo2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IMobileBroadbandCellsInfo2Vtbl>(IMobileBroadbandCellsInfo2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func NeighboringCellsNR(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.NeighboringCellsNR(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ServingCellsNR(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4850,6 +4904,7 @@ public struct IMobileBroadbandDeviceInformationVtbl {
     public var DataClasses: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var CustomDataClass: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var MobileEquipmentId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var TelephoneNumbers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SubscriberId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SimIccId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -4948,6 +5003,7 @@ public class IMobileBroadbandDeviceInformation <: InterfaceWrapperBase & ComInte
         return __vt.MobileEquipmentId(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TelephoneNumbers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -6153,6 +6209,7 @@ public class INetworkOperatorTetheringAccessPointConfiguration3 <: InterfaceWrap
 @C
 public struct INetworkOperatorTetheringClientManagerVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetTetheringClients: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -6197,6 +6254,7 @@ public class INetworkOperatorTetheringClientManager <: InterfaceWrapperBase & Co
         readVtbl<INetworkOperatorTetheringClientManagerVtbl>(INetworkOperatorTetheringClientManagerVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetTetheringClients(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -6535,6 +6593,7 @@ public class IMobileBroadbandNetwork3 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IMobileBroadbandPinLockStateChangeTriggerDetailsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var PinLockStateChanges: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -6579,6 +6638,7 @@ public class IMobileBroadbandPinLockStateChangeTriggerDetails <: InterfaceWrappe
         readVtbl<IMobileBroadbandPinLockStateChangeTriggerDetailsVtbl>(IMobileBroadbandPinLockStateChangeTriggerDetailsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PinLockStateChanges(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -6590,6 +6650,7 @@ public class IMobileBroadbandPinLockStateChangeTriggerDetails <: InterfaceWrappe
 @C
 public struct IMobileBroadbandPinManagerVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedPins: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetPin: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -6635,6 +6696,7 @@ public class IMobileBroadbandPinManager <: InterfaceWrapperBase & ComInterface {
         readVtbl<IMobileBroadbandPinManagerVtbl>(IMobileBroadbandPinManagerVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedPins(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -6652,6 +6714,7 @@ public class IMobileBroadbandPinManager <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IMobileBroadbandRadioStateChangeTriggerDetailsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var RadioStateChanges: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -6696,6 +6759,7 @@ public class IMobileBroadbandRadioStateChangeTriggerDetails <: InterfaceWrapperB
         readVtbl<IMobileBroadbandRadioStateChangeTriggerDetailsVtbl>(IMobileBroadbandRadioStateChangeTriggerDetailsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RadioStateChanges(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -6765,7 +6829,9 @@ public struct IMobileBroadbandUiccAppVtbl {
     @When[Windows_Storage_Streams == "on"]
     public var Id: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Kind: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetRecordDetailsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ReadRecordAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -6823,12 +6889,14 @@ public class IMobileBroadbandUiccApp <: InterfaceWrapperBase & ComInterface {
         return __vt.Kind(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetRecordDetailsAsync(uiccFilePath: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetRecordDetailsAsync(__liveRaw, uiccFilePath, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReadRecordAsync(uiccFilePath: CPointer<Unit>, recordIndex: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -7124,6 +7192,7 @@ public class IMobileBroadbandDeviceInformation2 <: InterfaceWrapperBase & ComInt
 public struct IMobileBroadbandNetwork2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var GetVoiceCallSupportAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var RegistrationUiccApps: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -7174,6 +7243,7 @@ public class IMobileBroadbandNetwork2 <: InterfaceWrapperBase & ComInterface {
         return __vt.GetVoiceCallSupportAsync(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RegistrationUiccApps(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -7186,6 +7256,7 @@ public class IMobileBroadbandNetwork2 <: InterfaceWrapperBase & ComInterface {
 public struct IMobileBroadbandUiccAppsResultVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Status: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var UiccApps: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -7236,6 +7307,7 @@ public class IMobileBroadbandUiccAppsResult <: InterfaceWrapperBase & ComInterfa
         return __vt.Status(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UiccApps(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -7440,6 +7512,7 @@ public class IMobileBroadbandModemConfiguration <: InterfaceWrapperBase & ComInt
 @C
 public struct IMobileBroadbandNetworkRegistrationStateChangeTriggerDetailsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var NetworkRegistrationStateChanges: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -7484,6 +7557,7 @@ public class IMobileBroadbandNetworkRegistrationStateChangeTriggerDetails <: Int
         readVtbl<IMobileBroadbandNetworkRegistrationStateChangeTriggerDetailsVtbl>(IMobileBroadbandNetworkRegistrationStateChangeTriggerDetailsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func NetworkRegistrationStateChanges(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -7501,6 +7575,7 @@ public struct IESimVtbl {
     public var MobileBroadbandModemDeviceId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Policy: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var State: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetProfiles: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var DeleteProfileAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var DownloadProfileMetadataAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -7586,6 +7661,7 @@ public class IESim <: InterfaceWrapperBase & ComInterface {
         return __vt.State(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetProfiles(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -7758,6 +7834,7 @@ public class IESimAddedEventArgs <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IESimDiscoverResultVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Events: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Kind: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var ProfileMetadata: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -7805,6 +7882,7 @@ public class IESimDiscoverResult <: InterfaceWrapperBase & ComInterface {
         readVtbl<IESimDiscoverResultVtbl>(IESimDiscoverResultVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Events(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -8500,6 +8578,7 @@ public class IMobileBroadbandAccount <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IMobileBroadbandAccountStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AvailableNetworkAccountIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CreateFromNetworkAccountId: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -8545,6 +8624,7 @@ public class IMobileBroadbandAccountStatics <: InterfaceWrapperBase & ComInterfa
         readVtbl<IMobileBroadbandAccountStaticsVtbl>(IMobileBroadbandAccountStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AvailableNetworkAccountIds(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -8812,6 +8892,7 @@ public class IMobileBroadbandDeviceInformation4 <: InterfaceWrapperBase & ComInt
 public struct IMobileBroadbandDeviceServiceVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var DeviceServiceId: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedCommands: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var OpenDataSession: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var OpenCommandSession: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -8864,6 +8945,7 @@ public class IMobileBroadbandDeviceService <: InterfaceWrapperBase & ComInterfac
         return __vt.DeviceServiceId(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedCommands(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -9031,6 +9113,7 @@ public struct IMobileBroadbandModemVtbl {
     public var DeviceInformation: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var MaxDeviceServiceCommandSizeInBytes: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var MaxDeviceServiceDataSizeInBytes: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var DeviceServices: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetDeviceService: CFunc<(CPointer<Unit>, GUID, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var IsResetSupported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
@@ -9104,6 +9187,7 @@ public class IMobileBroadbandModem <: InterfaceWrapperBase & ComInterface {
         return __vt.MaxDeviceServiceDataSizeInBytes(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DeviceServices(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -9403,12 +9487,14 @@ public struct IMobileBroadbandSarManagerVtbl {
     public var IsBackoffEnabled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var IsWiFiHardwareIntegrated: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var IsSarControlledByHardware: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Antennas: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var HysteresisTimerPeriod: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.TimeSpan>) -> Int32> = { _, _ => 0 }
     public var TransmissionStateChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveTransmissionStateChanged: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
     public var EnableBackoffAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var DisableBackoffAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetConfigurationAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var RevertSarToHardwareControlAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetTransmissionStateChangedHysteresisAsync: CFunc<(CPointer<Unit>, Foundation__impl_l0.TimeSpan, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -9476,6 +9562,7 @@ public class IMobileBroadbandSarManager <: InterfaceWrapperBase & ComInterface {
         return __vt.IsSarControlledByHardware(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Antennas(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -9512,6 +9599,7 @@ public class IMobileBroadbandSarManager <: InterfaceWrapperBase & ComInterface {
         return __vt.DisableBackoffAsync(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetConfigurationAsync(antennas: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -9553,6 +9641,7 @@ public class IMobileBroadbandSarManager <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IMobileBroadbandSlotManagerVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SlotInfos: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CurrentSlotIndex: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetCurrentSlot: CFunc<(CPointer<Unit>, Int32, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
@@ -9604,6 +9693,7 @@ public class IMobileBroadbandSlotManager <: InterfaceWrapperBase & ComInterface 
         readVtbl<IMobileBroadbandSlotManagerVtbl>(IMobileBroadbandSlotManagerVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SlotInfos(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

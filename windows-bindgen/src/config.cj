@@ -304,7 +304,7 @@ public class BindgenConfig {
             return result
         }
 
-        result.add("${namespaceToFeature("Windows.${relative}")} == \"on\"")
+        result.add("${namespaceToFeature(packageImportFeatureNamespace(rootPackage, relative))} == \"on\"")
         return result
     }
 
@@ -509,6 +509,13 @@ public class BindgenConfig {
         }
         References(args)
     }
+}
+
+func packageImportFeatureNamespace(rootPackage: String, relative: String): String {
+    if (rootPackage == "windows" || rootPackage == "windows_sys") {
+        return "Windows.${relative}"
+    }
+    return relative
 }
 
 func buildNamespaceDependencyGraph(

@@ -96,6 +96,7 @@ public class GattServiceProviderConnection <: InterfaceWrapperBase & ComInterfac
         defaultInterface().Start()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func AllServices(): windows_collections.IMapView<windows_core.HString, GattServiceProviderConnection> {
         var result__: Option<windows_collections.IMapView<windows_core.HString, GattServiceProviderConnection>> = Option<windows_collections.IMapView<windows_core.HString, GattServiceProviderConnection>>.None
         try (factory__ = windows_core.factory<GattServiceProviderConnection, IGattServiceProviderConnectionStatics>().unwrap()) {
@@ -222,7 +223,10 @@ extend GattServiceProviderTriggerDetails <: windows_core.HandleWinrtType<GattSer
 @C
 public struct IGattServiceProviderConnectionStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AllServices: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AllServices: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -291,6 +295,7 @@ public class IGattServiceProviderConnectionStatics <: InterfaceWrapperBase & Com
         readVtbl<IGattServiceProviderConnectionStaticsVtbl>(IGattServiceProviderConnectionStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AllServices(): windows_collections.IMapView<windows_core.HString, GattServiceProviderConnection> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

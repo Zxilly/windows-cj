@@ -423,14 +423,25 @@ extend IPwmControllerProvider <: windows_core.Interface<IPwmControllerProvider> 
 @C
 public struct IPwmProviderVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetControllers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetControllers: UIntNative = UIntNative(0)
     public init() {}
 
+    @When[Windows_Foundation_Collections == "on"]
     public static func new<Identity>(offset!: Int64 = 0): IPwmProviderVtbl where Identity <: IPwmProvider_Impl {
         let _ = offset
         var vtbl = IPwmProviderVtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.GetControllers = { instanceRaw, result__ =>
+        vtbl = IPwmProviderVtbl.__assignGetControllers<Identity>(vtbl)
+        return vtbl
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections == "on"]
+    public static func __assignGetControllers<Identity>(vtbl: IPwmProviderVtbl): IPwmProviderVtbl where Identity <: IPwmProvider_Impl {
+        var next = vtbl
+        next.GetControllers = { instanceRaw, result__ =>
             match (unsafe { asImplFromRaw<IPwmProvider_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
                     impl.__winrtThunk_GetControllers(result__)
@@ -438,6 +449,11 @@ public struct IPwmProviderVtbl {
                     E_NOINTERFACE.value
             }
         }
+        return next
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections != "on"]
+    public static func __assignGetControllers<Identity>(vtbl: IPwmProviderVtbl): IPwmProviderVtbl where Identity <: IPwmProvider_Impl {
         return vtbl
     }
 
@@ -449,12 +465,12 @@ public struct IPwmProviderVtbl {
     }
 }
 
-@When[Windows_Devices_Pwm_Provider == "on"]
+@When[Windows_Devices_Pwm_Provider == "on" && Windows_Foundation_Collections == "on"]
 public interface IPwmProvider_ImplErased {
     public func __winrtThunk_GetControllers(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Devices_Pwm_Provider == "on"]
+@When[Windows_Devices_Pwm_Provider == "on" && Windows_Foundation_Collections == "on"]
 public interface IPwmProvider_Impl <: IPwmProvider_ImplErased {
     public func GetControllers(): windows_core.Result<windows_collections.IVectorView<IPwmControllerProvider>>
 
@@ -542,6 +558,7 @@ public class IPwmProvider <: InterfaceWrapperBase & ComInterface & RuntimeName &
         readVtbl<IPwmProviderVtbl>(IPwmProviderVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetControllers(): windows_collections.IVectorView<IPwmControllerProvider> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

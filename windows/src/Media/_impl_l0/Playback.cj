@@ -10,11 +10,8 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
 import windows.Graphics.DirectX.Direct3D11 as Graphics_DirectX_Direct3D11
-@When[Windows_Media == "on"]
 import windows.Media as Media
 @When[Windows_Media_Casting == "on"]
 import windows.Media.Casting as Media_Casting
@@ -1177,7 +1174,10 @@ public struct IMediaBreakScheduleVtbl {
     public var RemoveScheduleChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var InsertMidrollBreak: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var RemoveMidrollBreak: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var MidrollBreaks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var MidrollBreaks: UIntNative = UIntNative(0)
     public var SetPrerollBreak: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var PrerollBreak: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetPostrollBreak: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1277,6 +1277,7 @@ public class IMediaBreakSchedule <: InterfaceWrapperBase & ComInterface & Runtim
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MidrollBreaks(): windows_collections.IVectorView<MediaBreak> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1329,7 +1330,10 @@ extend IMediaBreakSchedule <: windows_core.Interface<IMediaBreakSchedule> {}
 @C
 public struct IMediaBreakSeekedOverEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SeekedOverBreaks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SeekedOverBreaks: UIntNative = UIntNative(0)
     public var OldPosition: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var NewPosition: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -1400,6 +1404,7 @@ public class IMediaBreakSeekedOverEventArgs <: InterfaceWrapperBase & ComInterfa
         readVtbl<IMediaBreakSeekedOverEventArgsVtbl>(IMediaBreakSeekedOverEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SeekedOverBreaks(): windows_collections.IVectorView<MediaBreak> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3468,9 +3473,18 @@ public struct IMediaPlaybackItemVtbl {
     public var Source: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Media_Core != "on"]
     public var Source: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var AudioTracks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AudioTracks: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var VideoTracks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var VideoTracks: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var TimedMetadataTracks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var TimedMetadataTracks: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3605,6 +3619,7 @@ public class IMediaPlaybackItem <: InterfaceWrapperBase & ComInterface & Runtime
         return MediaSource.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AudioTracks(): MediaPlaybackAudioTrackList {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3613,6 +3628,7 @@ public class IMediaPlaybackItem <: InterfaceWrapperBase & ComInterface & Runtime
         return MediaPlaybackAudioTrackList.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func VideoTracks(): MediaPlaybackVideoTrackList {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3621,6 +3637,7 @@ public class IMediaPlaybackItem <: InterfaceWrapperBase & ComInterface & Runtime
         return MediaPlaybackVideoTrackList.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TimedMetadataTracks(): MediaPlaybackTimedMetadataTrackList {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4505,7 +4522,10 @@ public struct IMediaPlaybackListVtbl {
     public var RemoveCurrentItemChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ItemOpened: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveItemOpened: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Items: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Items: UIntNative = UIntNative(0)
     public var AutoRepeatEnabled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetAutoRepeatEnabled: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ShuffleEnabled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -4637,6 +4657,7 @@ public class IMediaPlaybackList <: InterfaceWrapperBase & ComInterface & Runtime
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IObservableVector<MediaPlaybackItem> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4725,8 +4746,14 @@ public struct IMediaPlaybackList2Vtbl {
     public var SetMaxPrefetchTime: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var StartingItem: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetStartingItem: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var ShuffledItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ShuffledItems: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SetShuffledItems: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SetShuffledItems: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4842,6 +4869,7 @@ public class IMediaPlaybackList2 <: InterfaceWrapperBase & ComInterface & Runtim
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ShuffledItems(): windows_collections.IVectorView<MediaPlaybackItem> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4850,6 +4878,7 @@ public class IMediaPlaybackList2 <: InterfaceWrapperBase & ComInterface & Runtim
         return windows_collections.IVectorView<MediaPlaybackItem>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetShuffledItems(value: windows_collections.IIterable<MediaPlaybackItem>): Unit {
         let v = vtbl()
         let hr = v.SetShuffledItems(asRaw(), value.asRaw())
@@ -5391,17 +5420,17 @@ public struct IMediaPlaybackSession2Vtbl {
     public var SphericalVideoProjection: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsMirroring: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetIsMirroring: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media == "on"]
     public var GetBufferedRanges: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Media != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Media != "on"]
     public var GetBufferedRanges: UIntNative = UIntNative(0)
-    @When[Windows_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media == "on"]
     public var GetPlayedRanges: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Media != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Media != "on"]
     public var GetPlayedRanges: UIntNative = UIntNative(0)
-    @When[Windows_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media == "on"]
     public var GetSeekableRanges: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Media != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Media != "on"]
     public var GetSeekableRanges: UIntNative = UIntNative(0)
     public var IsSupportedPlaybackRateRange: CFunc<(CPointer<Unit>, Float64, Float64, CPointer<Bool>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public init() {}
@@ -5550,7 +5579,7 @@ public class IMediaPlaybackSession2 <: InterfaceWrapperBase & ComInterface & Run
         HRESULT(hr).ok()
     }
 
-    @When[Windows_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media == "on"]
     public unsafe func GetBufferedRanges(): windows_collections.IVectorView<Media.MediaTimeRange> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5559,7 +5588,7 @@ public class IMediaPlaybackSession2 <: InterfaceWrapperBase & ComInterface & Run
         return windows_collections.IVectorView<Media.MediaTimeRange>.fromAbiTake(result__)
     }
 
-    @When[Windows_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media == "on"]
     public unsafe func GetPlayedRanges(): windows_collections.IVectorView<Media.MediaTimeRange> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5568,7 +5597,7 @@ public class IMediaPlaybackSession2 <: InterfaceWrapperBase & ComInterface & Run
         return windows_collections.IVectorView<Media.MediaTimeRange>.fromAbiTake(result__)
     }
 
-    @When[Windows_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media == "on"]
     public unsafe func GetSeekableRanges(): windows_collections.IVectorView<Media.MediaTimeRange> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6142,7 +6171,10 @@ extend IMediaPlaybackSphericalVideoProjection <: windows_core.Interface<IMediaPl
 @C
 public struct IMediaPlaybackTimedMetadataTrackListVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var PresentationModeChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var PresentationModeChanged: UIntNative = UIntNative(0)
     public var RemovePresentationModeChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetPresentationMode: CFunc<(CPointer<Unit>, UInt32, CPointer<TimedMetadataTrackPresentationModeAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var SetPresentationMode: CFunc<(CPointer<Unit>, UInt32, TimedMetadataTrackPresentationModeAbi) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -6214,6 +6246,7 @@ public class IMediaPlaybackTimedMetadataTrackList <: InterfaceWrapperBase & ComI
         readVtbl<IMediaPlaybackTimedMetadataTrackListVtbl>(IMediaPlaybackTimedMetadataTrackListVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PresentationModeChanged(handler: Foundation.TypedEventHandler<MediaPlaybackTimedMetadataTrackList, TimedMetadataPresentationModeChangedEventArgs>): windows_collections.EventRegistrationToken {
         let v = vtbl()
         var result__ = windows_collections.EventRegistrationTokenAbi()
@@ -6268,7 +6301,10 @@ public struct IMediaPlayerVtbl {
     public var SetPlaybackRate: CFunc<(CPointer<Unit>, Float64) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Volume: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetVolume: CFunc<(CPointer<Unit>, Float64) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var PlaybackMediaMarkers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var PlaybackMediaMarkers: UIntNative = UIntNative(0)
     public var MediaOpened: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveMediaOpened: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var MediaEnded: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -6492,6 +6528,7 @@ public class IMediaPlayer <: InterfaceWrapperBase & ComInterface & RuntimeName &
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PlaybackMediaMarkers(): PlaybackMediaMarkerSequence {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -9305,6 +9342,7 @@ public class MediaBreakSchedule <: InterfaceWrapperBase & ComInterface & windows
         defaultInterface().RemoveMidrollBreak(mediaBreak)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MidrollBreaks(): windows_collections.IVectorView<MediaBreak> {
         return defaultInterface().MidrollBreaks()
     }
@@ -9417,6 +9455,7 @@ public class MediaBreakSeekedOverEventArgs <: InterfaceWrapperBase & ComInterfac
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SeekedOverBreaks(): windows_collections.IVectorView<MediaBreak> {
         return defaultInterface().SeekedOverBreaks()
     }
@@ -9811,7 +9850,7 @@ extend MediaItemDisplayProperties <: windows_core.HandleWinrtType<MediaItemDispl
     }
 }
 
-@When[Windows_Media_Playback == "on"]
+@When[Windows_Media_Playback == "on" && Windows_Foundation_Collections == "on"]
 public class MediaPlaybackAudioTrackList <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -9939,7 +9978,7 @@ public class MediaPlaybackAudioTrackList <: InterfaceWrapperBase & ComInterface 
     }
 }
 
-@When[Windows_Media_Playback == "on"]
+@When[Windows_Media_Playback == "on" && Windows_Foundation_Collections == "on"]
 extend MediaPlaybackAudioTrackList <: windows_core.HandleWinrtType<MediaPlaybackAudioTrackList> {
     public static func intoWinrtHandle(value: MediaPlaybackAudioTrackList): CPointer<Unit> {
         value.asRaw()
@@ -11414,14 +11453,17 @@ public class MediaPlaybackItem <: InterfaceWrapperBase & ComInterface & windows_
         return defaultInterface().Source()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AudioTracks(): MediaPlaybackAudioTrackList {
         return defaultInterface().AudioTracks()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func VideoTracks(): MediaPlaybackVideoTrackList {
         return defaultInterface().VideoTracks()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TimedMetadataTracks(): MediaPlaybackTimedMetadataTrackList {
         return defaultInterface().TimedMetadataTracks()
     }
@@ -12014,6 +12056,7 @@ public class MediaPlaybackList <: InterfaceWrapperBase & ComInterface & windows_
         defaultInterface().RemoveItemOpened(token)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IObservableVector<MediaPlaybackItem> {
         return defaultInterface().Items()
     }
@@ -12763,7 +12806,7 @@ extend MediaPlaybackState <: windows_core.CopyType & windows_core.RuntimeType & 
     }
 }
 
-@When[Windows_Media_Playback == "on"]
+@When[Windows_Media_Playback == "on" && Windows_Foundation_Collections == "on"]
 public class MediaPlaybackTimedMetadataTrackList <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -12868,7 +12911,7 @@ public class MediaPlaybackTimedMetadataTrackList <: InterfaceWrapperBase & ComIn
     }
 }
 
-@When[Windows_Media_Playback == "on"]
+@When[Windows_Media_Playback == "on" && Windows_Foundation_Collections == "on"]
 extend MediaPlaybackTimedMetadataTrackList <: windows_core.HandleWinrtType<MediaPlaybackTimedMetadataTrackList> {
     public static func intoWinrtHandle(value: MediaPlaybackTimedMetadataTrackList): CPointer<Unit> {
         value.asRaw()
@@ -12886,7 +12929,7 @@ extend MediaPlaybackTimedMetadataTrackList <: windows_core.HandleWinrtType<Media
     }
 }
 
-@When[Windows_Media_Playback == "on"]
+@When[Windows_Media_Playback == "on" && Windows_Foundation_Collections == "on"]
 public class MediaPlaybackVideoTrackList <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -13014,7 +13057,7 @@ public class MediaPlaybackVideoTrackList <: InterfaceWrapperBase & ComInterface 
     }
 }
 
-@When[Windows_Media_Playback == "on"]
+@When[Windows_Media_Playback == "on" && Windows_Foundation_Collections == "on"]
 extend MediaPlaybackVideoTrackList <: windows_core.HandleWinrtType<MediaPlaybackVideoTrackList> {
     public static func intoWinrtHandle(value: MediaPlaybackVideoTrackList): CPointer<Unit> {
         value.asRaw()
@@ -13191,6 +13234,7 @@ public class MediaPlayer <: InterfaceWrapperBase & ComInterface & windows_interf
         defaultInterface().SetVolume(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PlaybackMediaMarkers(): PlaybackMediaMarkerSequence {
         return defaultInterface().PlaybackMediaMarkers()
     }
@@ -14186,7 +14230,7 @@ extend PlaybackMediaMarkerReachedEventArgs <: windows_core.HandleWinrtType<Playb
     }
 }
 
-@When[Windows_Media_Playback == "on"]
+@When[Windows_Media_Playback == "on" && Windows_Foundation_Collections == "on"]
 public class PlaybackMediaMarkerSequence <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -14290,7 +14334,7 @@ public class PlaybackMediaMarkerSequence <: InterfaceWrapperBase & ComInterface 
     }
 }
 
-@When[Windows_Media_Playback == "on"]
+@When[Windows_Media_Playback == "on" && Windows_Foundation_Collections == "on"]
 extend PlaybackMediaMarkerSequence <: windows_core.HandleWinrtType<PlaybackMediaMarkerSequence> {
     public static func intoWinrtHandle(value: PlaybackMediaMarkerSequence): CPointer<Unit> {
         value.asRaw()

@@ -4,7 +4,6 @@ package windows_sys.UI.Xaml._impl_l0
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_UI == "on"]
 import windows_sys.UI as UI
 import windows_sys._impl_l0 as _impl_l0
 
@@ -4727,7 +4726,9 @@ public class IPlaneProjectionStatics <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IPolyBezierSegmentVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Points: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetPoints: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -4772,12 +4773,14 @@ public class IPolyBezierSegment <: InterfaceWrapperBase & ComInterface {
         readVtbl<IPolyBezierSegmentVtbl>(IPolyBezierSegmentVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Points(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Points(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetPoints(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4846,7 +4849,9 @@ public class IPolyBezierSegmentStatics <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IPolyLineSegmentVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Points: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetPoints: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -4891,12 +4896,14 @@ public class IPolyLineSegment <: InterfaceWrapperBase & ComInterface {
         readVtbl<IPolyLineSegmentVtbl>(IPolyLineSegmentVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Points(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Points(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetPoints(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4965,7 +4972,9 @@ public class IPolyLineSegmentStatics <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IPolyQuadraticBezierSegmentVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Points: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetPoints: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -5010,12 +5019,14 @@ public class IPolyQuadraticBezierSegment <: InterfaceWrapperBase & ComInterface 
         readVtbl<IPolyQuadraticBezierSegmentVtbl>(IPolyQuadraticBezierSegmentVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Points(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Points(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetPoints(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

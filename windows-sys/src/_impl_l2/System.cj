@@ -130,6 +130,7 @@ public class IAppDiagnosticInfo <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IAppDiagnosticInfo2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetResourceGroups: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CreateResourceGroupWatcher: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -175,6 +176,7 @@ public class IAppDiagnosticInfo2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IAppDiagnosticInfo2Vtbl>(IAppDiagnosticInfo2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetResourceGroups(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -247,6 +249,7 @@ public class IAppDiagnosticInfo3 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IAppDiagnosticInfoStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var RequestInfoAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -291,6 +294,7 @@ public class IAppDiagnosticInfoStatics <: InterfaceWrapperBase & ComInterface {
         readVtbl<IAppDiagnosticInfoStaticsVtbl>(IAppDiagnosticInfoStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RequestInfoAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -304,8 +308,11 @@ public struct IAppDiagnosticInfoStatics2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var CreateWatcher: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var RequestAccessAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var RequestInfoForPackageAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var RequestInfoForAppAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var RequestInfoForAppUserModelId: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -362,18 +369,21 @@ public class IAppDiagnosticInfoStatics2 <: InterfaceWrapperBase & ComInterface {
         return __vt.RequestAccessAsync(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RequestInfoForPackageAsync(packageFamilyName: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RequestInfoForPackageAsync(__liveRaw, packageFamilyName, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RequestInfoForAppAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RequestInfoForAppAsync(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RequestInfoForAppUserModelId(appUserModelId: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -567,9 +577,10 @@ public struct IAppResourceGroupInfoVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var InstanceId: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => 0 }
     public var IsShared: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetBackgroundTaskReports: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetMemoryReport: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_System_Diagnostics == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System_Diagnostics == "on"]
     public var GetProcessDiagnosticInfos: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetStateReport: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -627,6 +638,7 @@ public class IAppResourceGroupInfo <: InterfaceWrapperBase & ComInterface {
         return __vt.IsShared(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetBackgroundTaskReports(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -639,7 +651,7 @@ public class IAppResourceGroupInfo <: InterfaceWrapperBase & ComInterface {
         return __vt.GetMemoryReport(__liveRaw, result__)
     }
 
-    @When[Windows_System_Diagnostics == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System_Diagnostics == "on"]
     public unsafe func GetProcessDiagnosticInfos(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -796,6 +808,7 @@ public class IAppResourceGroupInfoWatcher <: InterfaceWrapperBase & ComInterface
 @C
 public struct IAppResourceGroupInfoWatcherEventArgsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AppDiagnosticInfos: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var AppResourceGroupInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -841,6 +854,7 @@ public class IAppResourceGroupInfoWatcherEventArgs <: InterfaceWrapperBase & Com
         readVtbl<IAppResourceGroupInfoWatcherEventArgsVtbl>(IAppResourceGroupInfoWatcherEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AppDiagnosticInfos(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -858,6 +872,7 @@ public class IAppResourceGroupInfoWatcherEventArgs <: InterfaceWrapperBase & Com
 @C
 public struct IAppResourceGroupInfoWatcherExecutionStateChangedEventArgsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AppDiagnosticInfos: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var AppResourceGroupInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -903,6 +918,7 @@ public class IAppResourceGroupInfoWatcherExecutionStateChangedEventArgs <: Inter
         readVtbl<IAppResourceGroupInfoWatcherExecutionStateChangedEventArgsVtbl>(IAppResourceGroupInfoWatcherExecutionStateChangedEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AppDiagnosticInfos(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -927,15 +943,15 @@ public struct ILauncherStatics2Vtbl {
     public var LaunchUriWithDataAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var QueryUriSupportAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var QueryUriSupportWithPackageFamilyNameAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var QueryFileSupportAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var QueryFileSupportWithPackageFamilyNameAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindUriSchemeHandlersAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindUriSchemeHandlersWithLaunchUriTypeAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindFileHandlersAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -1012,35 +1028,35 @@ public class ILauncherStatics2 <: InterfaceWrapperBase & ComInterface {
         return __vt.QueryUriSupportWithPackageFamilyNameAsync(__liveRaw, uri, launchQuerySupportType, packageFamilyName, result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func QueryFileSupportAsync(file: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.QueryFileSupportAsync(__liveRaw, file, result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func QueryFileSupportWithPackageFamilyNameAsync(file: CPointer<Unit>, packageFamilyName: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.QueryFileSupportWithPackageFamilyNameAsync(__liveRaw, file, packageFamilyName, result__)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindUriSchemeHandlersAsync(scheme: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindUriSchemeHandlersAsync(__liveRaw, scheme, result__)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindUriSchemeHandlersWithLaunchUriTypeAsync(scheme: CPointer<Unit>, launchQuerySupportType: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindUriSchemeHandlersWithLaunchUriTypeAsync(__liveRaw, scheme, launchQuerySupportType, result__)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindFileHandlersAsync(extension: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1054,7 +1070,7 @@ public struct ILauncherStatics4Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var QueryAppUriSupportAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var QueryAppUriSupportWithPackageFamilyNameAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindAppUriHandlersAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var LaunchUriForUserAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var LaunchUriWithOptionsForUserAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
@@ -1118,7 +1134,7 @@ public class ILauncherStatics4 <: InterfaceWrapperBase & ComInterface {
         return __vt.QueryAppUriSupportWithPackageFamilyNameAsync(__liveRaw, uri, packageFamilyName, result__)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindAppUriHandlersAsync(uri: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

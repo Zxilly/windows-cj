@@ -1020,6 +1020,7 @@ public class RadialControllerConfiguration <: InterfaceWrapperBase & ComInterfac
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetDefaultMenuItems(buttons: windows_collections.IIterable<_impl_l0.RadialControllerSystemMenuItemKind>): Unit {
         defaultInterface().SetDefaultMenuItems(buttons)
     }

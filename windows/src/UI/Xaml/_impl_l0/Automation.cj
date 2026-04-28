@@ -4003,25 +4003,25 @@ public struct IAutomationPropertiesStatics5Vtbl {
     public var DescribedByProperty: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Xaml != "on"]
     public var DescribedByProperty: UIntNative = UIntNative(0)
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public var GetDescribedBy: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Xaml != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_UI_Xaml != "on"]
     public var GetDescribedBy: UIntNative = UIntNative(0)
     @When[Windows_UI_Xaml == "on"]
     public var FlowsToProperty: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Xaml != "on"]
     public var FlowsToProperty: UIntNative = UIntNative(0)
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public var GetFlowsTo: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Xaml != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_UI_Xaml != "on"]
     public var GetFlowsTo: UIntNative = UIntNative(0)
     @When[Windows_UI_Xaml == "on"]
     public var FlowsFromProperty: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Xaml != "on"]
     public var FlowsFromProperty: UIntNative = UIntNative(0)
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public var GetFlowsFrom: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Xaml != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_UI_Xaml != "on"]
     public var GetFlowsFrom: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -4200,7 +4200,7 @@ public class IAutomationPropertiesStatics5 <: InterfaceWrapperBase & ComInterfac
         return DependencyProperty.fromAbiTake(result__)
     }
 
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public unsafe func GetDescribedBy(element: DependencyObject): windows_collections.IVector<DependencyObject> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4218,7 +4218,7 @@ public class IAutomationPropertiesStatics5 <: InterfaceWrapperBase & ComInterfac
         return DependencyProperty.fromAbiTake(result__)
     }
 
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public unsafe func GetFlowsTo(element: DependencyObject): windows_collections.IVector<DependencyObject> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4236,7 +4236,7 @@ public class IAutomationPropertiesStatics5 <: InterfaceWrapperBase & ComInterfac
         return DependencyProperty.fromAbiTake(result__)
     }
 
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public unsafe func GetFlowsFrom(element: DependencyObject): windows_collections.IVector<DependencyObject> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

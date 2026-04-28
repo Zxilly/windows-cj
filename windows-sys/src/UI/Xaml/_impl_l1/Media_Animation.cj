@@ -203,6 +203,7 @@ public class IColorAnimation <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IColorAnimationUsingKeyFramesVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var KeyFrames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var EnableDependentAnimation: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var SetEnableDependentAnimation: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
@@ -249,6 +250,7 @@ public class IColorAnimationUsingKeyFrames <: InterfaceWrapperBase & ComInterfac
         readVtbl<IColorAnimationUsingKeyFramesVtbl>(IColorAnimationUsingKeyFramesVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func KeyFrames(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -436,7 +438,7 @@ public struct IConnectedAnimation2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var IsScaleAnimationEnabled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var SetIsScaleAnimationEnabled: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public var TryStartWithCoordinatedElements: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_UI_Composition == "on"]
     public var SetAnimationComponent: CFunc<(CPointer<Unit>, Int32, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
@@ -495,7 +497,7 @@ public class IConnectedAnimation2 <: InterfaceWrapperBase & ComInterface {
         return __vt.SetIsScaleAnimationEnabled(__liveRaw, value)
     }
 
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public unsafe func TryStartWithCoordinatedElements(destination: CPointer<Unit>, coordinatedElements: CPointer<Unit>, result__: CPointer<Bool>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -987,6 +989,7 @@ public class IDoubleAnimation <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IDoubleAnimationUsingKeyFramesVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var KeyFrames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var EnableDependentAnimation: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var SetEnableDependentAnimation: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
@@ -1033,6 +1036,7 @@ public class IDoubleAnimationUsingKeyFrames <: InterfaceWrapperBase & ComInterfa
         readVtbl<IDoubleAnimationUsingKeyFramesVtbl>(IDoubleAnimationUsingKeyFramesVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func KeyFrames(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1317,6 +1321,7 @@ public class IEntranceNavigationTransitionInfoStatics <: InterfaceWrapperBase & 
 @C
 public struct IObjectAnimationUsingKeyFramesVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var KeyFrames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var EnableDependentAnimation: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var SetEnableDependentAnimation: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
@@ -1363,6 +1368,7 @@ public class IObjectAnimationUsingKeyFrames <: InterfaceWrapperBase & ComInterfa
         readVtbl<IObjectAnimationUsingKeyFramesVtbl>(IObjectAnimationUsingKeyFramesVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func KeyFrames(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1504,6 +1510,7 @@ public class IPointAnimation <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IPointAnimationUsingKeyFramesVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var KeyFrames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var EnableDependentAnimation: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var SetEnableDependentAnimation: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
@@ -1550,6 +1557,7 @@ public class IPointAnimationUsingKeyFrames <: InterfaceWrapperBase & ComInterfac
         readVtbl<IPointAnimationUsingKeyFramesVtbl>(IPointAnimationUsingKeyFramesVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func KeyFrames(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1573,6 +1581,7 @@ public class IPointAnimationUsingKeyFrames <: InterfaceWrapperBase & ComInterfac
 @C
 public struct IStoryboardVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Children: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Seek: CFunc<(CPointer<Unit>, Foundation__impl_l0.TimeSpan) -> Int32> = { _, _ => 0 }
     public var Stop: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -1626,6 +1635,7 @@ public class IStoryboard <: InterfaceWrapperBase & ComInterface {
         readVtbl<IStoryboardVtbl>(IStoryboardVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Children(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

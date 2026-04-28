@@ -604,7 +604,9 @@ public struct IConversationalAgentSession2Vtbl {
     public var RequestActivation: CFunc<(CPointer<Unit>, Int32, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
     public var SetSupportLockScreenActivationAsync: CFunc<(CPointer<Unit>, Bool, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var SetSupportLockScreenActivation: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetMissingPrerequisites: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetMissingPrerequisitesAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -673,12 +675,14 @@ public class IConversationalAgentSession2 <: InterfaceWrapperBase & ComInterface
         return __vt.SetSupportLockScreenActivation(__liveRaw, lockScreenActivationSupported)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetMissingPrerequisites(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetMissingPrerequisites(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetMissingPrerequisitesAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1226,6 +1230,7 @@ public let SignalDetectorResourceKind_DataChannel: SignalDetectorResourceKind = 
 @C
 public struct IDetectionConfigurationAvailabilityInfo2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var UnavailableSystemResources: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1270,6 +1275,7 @@ public class IDetectionConfigurationAvailabilityInfo2 <: InterfaceWrapperBase & 
         readVtbl<IDetectionConfigurationAvailabilityInfo2Vtbl>(IDetectionConfigurationAvailabilityInfo2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UnavailableSystemResources(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1574,14 +1580,21 @@ public struct IActivationSignalDetectorVtbl {
     public var ProviderId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Kind: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var CanCreateConfigurations: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedModelDataTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedTrainingDataFormats: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedPowerStates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSupportedModelIdsForSignalId: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSupportedModelIdsForSignalIdAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var CreateConfiguration: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _, _ => 0 }
     public var CreateConfigurationAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetConfigurations: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetConfigurationsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetConfiguration: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var GetConfigurationAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
@@ -1648,30 +1661,35 @@ public class IActivationSignalDetector <: InterfaceWrapperBase & ComInterface {
         return __vt.CanCreateConfigurations(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedModelDataTypes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SupportedModelDataTypes(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedTrainingDataFormats(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SupportedTrainingDataFormats(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedPowerStates(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SupportedPowerStates(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSupportedModelIdsForSignalId(signalId: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetSupportedModelIdsForSignalId(__liveRaw, signalId, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSupportedModelIdsForSignalIdAsync(signalId: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1690,12 +1708,14 @@ public class IActivationSignalDetector <: InterfaceWrapperBase & ComInterface {
         return __vt.CreateConfigurationAsync(__liveRaw, signalId, modelId, displayName, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetConfigurations(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetConfigurations(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetConfigurationsAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1731,7 +1751,9 @@ public class IActivationSignalDetector <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IActivationSignalDetector2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAvailableModelIdsForSignalIdAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAvailableModelIdsForSignalId: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var CreateConfigurationWithResultAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var CreateConfigurationWithResult: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
@@ -1781,12 +1803,14 @@ public class IActivationSignalDetector2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IActivationSignalDetector2Vtbl>(IActivationSignalDetector2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAvailableModelIdsForSignalIdAsync(signalId: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAvailableModelIdsForSignalIdAsync(__liveRaw, signalId, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAvailableModelIdsForSignalId(signalId: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1828,9 +1852,13 @@ public class IActivationSignalDetector2 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IConversationalAgentDetectorManagerVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAllActivationSignalDetectors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAllActivationSignalDetectorsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetActivationSignalDetectors: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetActivationSignalDetectorsAsync: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -1875,24 +1903,28 @@ public class IConversationalAgentDetectorManager <: InterfaceWrapperBase & ComIn
         readVtbl<IConversationalAgentDetectorManagerVtbl>(IConversationalAgentDetectorManagerVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAllActivationSignalDetectors(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAllActivationSignalDetectors(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAllActivationSignalDetectorsAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAllActivationSignalDetectorsAsync(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetActivationSignalDetectors(kind: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetActivationSignalDetectors(__liveRaw, kind, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetActivationSignalDetectorsAsync(kind: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2055,7 +2087,9 @@ public struct IConversationalAgentSessionVtbl {
     public var GetSignalModelId: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var SetSignalModelIdAsync: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var SetSignalModelId: CFunc<(CPointer<Unit>, UInt32, CPointer<Bool>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSupportedSignalModelIdsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSupportedSignalModelIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -2294,12 +2328,14 @@ public class IConversationalAgentSession <: InterfaceWrapperBase & ComInterface 
         return __vt.SetSignalModelId(__liveRaw, signalModelId, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSupportedSignalModelIdsAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetSupportedSignalModelIdsAsync(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSupportedSignalModelIds(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

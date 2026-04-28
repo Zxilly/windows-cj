@@ -4,7 +4,6 @@ package windows_sys.UI.ViewManagement.Core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_UI == "on"]
 import windows_sys.UI as UI
 
 
@@ -525,6 +524,7 @@ public class IUISettingsController <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ICoreFrameworkInputViewAnimationStartingEventArgsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Occlusions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var FrameworkAnimationRecommended: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var AnimationDuration: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.TimeSpan>) -> Int32> = { _, _ => 0 }
@@ -571,6 +571,7 @@ public class ICoreFrameworkInputViewAnimationStartingEventArgs <: InterfaceWrapp
         readVtbl<ICoreFrameworkInputViewAnimationStartingEventArgsVtbl>(ICoreFrameworkInputViewAnimationStartingEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Occlusions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -594,6 +595,7 @@ public class ICoreFrameworkInputViewAnimationStartingEventArgs <: InterfaceWrapp
 @C
 public struct ICoreFrameworkInputViewOcclusionsChangedEventArgsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Occlusions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Handled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -639,6 +641,7 @@ public class ICoreFrameworkInputViewOcclusionsChangedEventArgs <: InterfaceWrapp
         readVtbl<ICoreFrameworkInputViewOcclusionsChangedEventArgsVtbl>(ICoreFrameworkInputViewOcclusionsChangedEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Occlusions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -656,6 +659,7 @@ public class ICoreFrameworkInputViewOcclusionsChangedEventArgs <: InterfaceWrapp
 @C
 public struct ICoreInputViewAnimationStartingEventArgsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Occlusions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Handled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var SetHandled: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
@@ -703,6 +707,7 @@ public class ICoreInputViewAnimationStartingEventArgs <: InterfaceWrapperBase & 
         readVtbl<ICoreInputViewAnimationStartingEventArgsVtbl>(ICoreInputViewAnimationStartingEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Occlusions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -732,6 +737,7 @@ public class ICoreInputViewAnimationStartingEventArgs <: InterfaceWrapperBase & 
 @C
 public struct ICoreInputViewOcclusionsChangedEventArgsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Occlusions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Handled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var SetHandled: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
@@ -778,6 +784,7 @@ public class ICoreInputViewOcclusionsChangedEventArgs <: InterfaceWrapperBase & 
         readVtbl<ICoreInputViewOcclusionsChangedEventArgsVtbl>(ICoreInputViewOcclusionsChangedEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Occlusions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -943,6 +950,7 @@ public struct ICoreInputViewVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var OcclusionsChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveOcclusionsChanged: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetCoreInputViewOcclusions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var TryShowPrimaryView: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var TryHidePrimaryView: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
@@ -1001,6 +1009,7 @@ public class ICoreInputView <: InterfaceWrapperBase & ComInterface {
         return __vt.RemoveOcclusionsChanged(__liveRaw, token)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetCoreInputViewOcclusions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

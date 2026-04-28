@@ -3,11 +3,8 @@ package windows_sys.Win32.Devices.Enumeration.Pnp
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Devices_Properties == "on"]
 import windows_sys.Win32.Devices.Properties as Win32_Devices_Properties
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Security == "on"]
 import windows_sys.Win32.Security as Win32_Security
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l2 as Win32__impl_l2
@@ -2050,31 +2047,100 @@ public class IUPnPDevices <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[CFGMGR32 == "on"]
+@When[Windows_Win32_Devices_Enumeration_Pnp == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_Enumeration_Pnp_SwDeviceClose == "on"]
 foreign {
     func SwDeviceClose(hSwDevice: HSWDEVICE): Unit
-    func SwDeviceGetLifetime(hSwDevice: HSWDEVICE, pLifetime: CPointer<Int32>): Int32
-    func SwDeviceInterfaceSetState(hSwDevice: HSWDEVICE, pszDeviceInterfaceId: CPointer<UInt16>, fEnabled: Int32): Int32
-    func SwDeviceSetLifetime(hSwDevice: HSWDEVICE, Lifetime: Int32): Int32
-    func SwMemFree(pMem: CPointer<Unit>): Unit
 }
 
-@When[CFGMGR32 == "on" && (Windows_Win32_Devices_Properties == "on" && Windows_Win32_Security == "on")]
+@When[Windows_Win32_Devices_Enumeration_Pnp == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_Enumeration_Pnp_SwDeviceClose == "on"]
+public unsafe func Windows_SwDeviceClose(hSwDevice: HSWDEVICE): Unit {
+    SwDeviceClose(hSwDevice)
+}
+
+@When[Windows_Win32_Devices_Enumeration_Pnp == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_Enumeration_Pnp_SwDeviceCreate == "on" && Windows_Win32_Devices_Properties == "on" && Windows_Win32_Security == "on"]
 foreign {
     // param-hint: pProperties len=param[3] optional
     // param-hint: pContext optional
     func SwDeviceCreate(pszEnumeratorName: CPointer<UInt16>, pszParentDeviceInstance: CPointer<UInt16>, pCreateInfo: CPointer<SW_DEVICE_CREATE_INFO>, cPropertyCount: UInt32, pProperties: CPointer<Win32_Devices_Properties.DEVPROPERTY>, pCallback: SW_DEVICE_CREATE_CALLBACK, pContext: CPointer<Unit>, phSwDevice: CPointer<HSWDEVICE>): Int32
 }
 
-@When[CFGMGR32 == "on" && Windows_Win32_Devices_Properties == "on"]
+@When[Windows_Win32_Devices_Enumeration_Pnp == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_Enumeration_Pnp_SwDeviceCreate == "on" && Windows_Win32_Devices_Properties == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_SwDeviceCreate(pszEnumeratorName: CPointer<UInt16>, pszParentDeviceInstance: CPointer<UInt16>, pCreateInfo: CPointer<SW_DEVICE_CREATE_INFO>, cPropertyCount: UInt32, pProperties: CPointer<Win32_Devices_Properties.DEVPROPERTY>, pCallback: SW_DEVICE_CREATE_CALLBACK, pContext: CPointer<Unit>, phSwDevice: CPointer<HSWDEVICE>): Int32 {
+    return SwDeviceCreate(pszEnumeratorName, pszParentDeviceInstance, pCreateInfo, cPropertyCount, pProperties, pCallback, pContext, phSwDevice)
+}
+
+@When[Windows_Win32_Devices_Enumeration_Pnp == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_Enumeration_Pnp_SwDeviceGetLifetime == "on"]
+foreign {
+    func SwDeviceGetLifetime(hSwDevice: HSWDEVICE, pLifetime: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Devices_Enumeration_Pnp == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_Enumeration_Pnp_SwDeviceGetLifetime == "on"]
+public unsafe func Windows_SwDeviceGetLifetime(hSwDevice: HSWDEVICE, pLifetime: CPointer<Int32>): Int32 {
+    return SwDeviceGetLifetime(hSwDevice, pLifetime)
+}
+
+@When[Windows_Win32_Devices_Enumeration_Pnp == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_Enumeration_Pnp_SwDeviceInterfacePropertySet == "on" && Windows_Win32_Devices_Properties == "on"]
 foreign {
     // param-hint: pProperties len=param[2]
     func SwDeviceInterfacePropertySet(hSwDevice: HSWDEVICE, pszDeviceInterfaceId: CPointer<UInt16>, cPropertyCount: UInt32, pProperties: CPointer<Win32_Devices_Properties.DEVPROPERTY>): Int32
+}
+
+@When[Windows_Win32_Devices_Enumeration_Pnp == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_Enumeration_Pnp_SwDeviceInterfacePropertySet == "on" && Windows_Win32_Devices_Properties == "on"]
+public unsafe func Windows_SwDeviceInterfacePropertySet(hSwDevice: HSWDEVICE, pszDeviceInterfaceId: CPointer<UInt16>, cPropertyCount: UInt32, pProperties: CPointer<Win32_Devices_Properties.DEVPROPERTY>): Int32 {
+    return SwDeviceInterfacePropertySet(hSwDevice, pszDeviceInterfaceId, cPropertyCount, pProperties)
+}
+
+@When[Windows_Win32_Devices_Enumeration_Pnp == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_Enumeration_Pnp_SwDeviceInterfaceRegister == "on" && Windows_Win32_Devices_Properties == "on"]
+foreign {
     // param-hint: pszReferenceString optional
     // param-hint: pProperties len=param[3] optional
     func SwDeviceInterfaceRegister(hSwDevice: HSWDEVICE, pInterfaceClassGuid: CPointer<GUID>, pszReferenceString: CPointer<UInt16>, cPropertyCount: UInt32, pProperties: CPointer<Win32_Devices_Properties.DEVPROPERTY>, fEnabled: Int32, ppszDeviceInterfaceId: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_Devices_Enumeration_Pnp == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_Enumeration_Pnp_SwDeviceInterfaceRegister == "on" && Windows_Win32_Devices_Properties == "on"]
+public unsafe func Windows_SwDeviceInterfaceRegister(hSwDevice: HSWDEVICE, pInterfaceClassGuid: CPointer<GUID>, pszReferenceString: CPointer<UInt16>, cPropertyCount: UInt32, pProperties: CPointer<Win32_Devices_Properties.DEVPROPERTY>, fEnabled: Int32, ppszDeviceInterfaceId: CPointer<CPointer<UInt16>>): Int32 {
+    return SwDeviceInterfaceRegister(hSwDevice, pInterfaceClassGuid, pszReferenceString, cPropertyCount, pProperties, fEnabled, ppszDeviceInterfaceId)
+}
+
+@When[Windows_Win32_Devices_Enumeration_Pnp == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_Enumeration_Pnp_SwDeviceInterfaceSetState == "on"]
+foreign {
+    func SwDeviceInterfaceSetState(hSwDevice: HSWDEVICE, pszDeviceInterfaceId: CPointer<UInt16>, fEnabled: Int32): Int32
+}
+
+@When[Windows_Win32_Devices_Enumeration_Pnp == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_Enumeration_Pnp_SwDeviceInterfaceSetState == "on"]
+public unsafe func Windows_SwDeviceInterfaceSetState(hSwDevice: HSWDEVICE, pszDeviceInterfaceId: CPointer<UInt16>, fEnabled: Int32): Int32 {
+    return SwDeviceInterfaceSetState(hSwDevice, pszDeviceInterfaceId, fEnabled)
+}
+
+@When[Windows_Win32_Devices_Enumeration_Pnp == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_Enumeration_Pnp_SwDevicePropertySet == "on" && Windows_Win32_Devices_Properties == "on"]
+foreign {
     // param-hint: pProperties len=param[1]
     func SwDevicePropertySet(hSwDevice: HSWDEVICE, cPropertyCount: UInt32, pProperties: CPointer<Win32_Devices_Properties.DEVPROPERTY>): Int32
+}
+
+@When[Windows_Win32_Devices_Enumeration_Pnp == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_Enumeration_Pnp_SwDevicePropertySet == "on" && Windows_Win32_Devices_Properties == "on"]
+public unsafe func Windows_SwDevicePropertySet(hSwDevice: HSWDEVICE, cPropertyCount: UInt32, pProperties: CPointer<Win32_Devices_Properties.DEVPROPERTY>): Int32 {
+    return SwDevicePropertySet(hSwDevice, cPropertyCount, pProperties)
+}
+
+@When[Windows_Win32_Devices_Enumeration_Pnp == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_Enumeration_Pnp_SwDeviceSetLifetime == "on"]
+foreign {
+    func SwDeviceSetLifetime(hSwDevice: HSWDEVICE, Lifetime: Int32): Int32
+}
+
+@When[Windows_Win32_Devices_Enumeration_Pnp == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_Enumeration_Pnp_SwDeviceSetLifetime == "on"]
+public unsafe func Windows_SwDeviceSetLifetime(hSwDevice: HSWDEVICE, Lifetime: Int32): Int32 {
+    return SwDeviceSetLifetime(hSwDevice, Lifetime)
+}
+
+@When[Windows_Win32_Devices_Enumeration_Pnp == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_Enumeration_Pnp_SwMemFree == "on"]
+foreign {
+    func SwMemFree(pMem: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_Devices_Enumeration_Pnp == "on" && CFGMGR32 == "on" && Windows_Win32_Devices_Enumeration_Pnp_SwMemFree == "on"]
+public unsafe func Windows_SwMemFree(pMem: CPointer<Unit>): Unit {
+    SwMemFree(pMem)
 }
 
 @When[Windows_Win32_Devices_Enumeration_Pnp == "on"]

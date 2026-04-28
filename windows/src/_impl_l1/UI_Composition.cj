@@ -3103,6 +3103,7 @@ public class CompositionContainerShape <: InterfaceWrapperBase & ComInterface & 
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Shapes(): CompositionShapeCollection {
         return defaultInterface().Shapes()
     }
@@ -7568,7 +7569,7 @@ extend CompositionShape <: windows_core.HandleWinrtType<CompositionShape> {
     }
 }
 
-@When[Windows_UI_Composition == "on"]
+@When[Windows_UI_Composition == "on" && Windows_Foundation_Collections == "on"]
 public class CompositionShapeCollection <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -7734,7 +7735,7 @@ public class CompositionShapeCollection <: InterfaceWrapperBase & ComInterface &
     }
 }
 
-@When[Windows_UI_Composition == "on"]
+@When[Windows_UI_Composition == "on" && Windows_Foundation_Collections == "on"]
 extend CompositionShapeCollection <: windows_core.HandleWinrtType<CompositionShapeCollection> {
     public static func intoWinrtHandle(value: CompositionShapeCollection): CPointer<Unit> {
         value.asRaw()
@@ -7881,6 +7882,7 @@ public class CompositionSpriteShape <: InterfaceWrapperBase & ComInterface & win
         defaultInterface().SetStrokeBrush(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StrokeDashArray(): CompositionStrokeDashArray {
         return defaultInterface().StrokeDashArray()
     }
@@ -7968,7 +7970,7 @@ extend CompositionSpriteShape <: windows_core.HandleWinrtType<CompositionSpriteS
     }
 }
 
-@When[Windows_UI_Composition == "on"]
+@When[Windows_UI_Composition == "on" && Windows_Foundation_Collections == "on"]
 public class CompositionStrokeDashArray <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8134,7 +8136,7 @@ public class CompositionStrokeDashArray <: InterfaceWrapperBase & ComInterface &
     }
 }
 
-@When[Windows_UI_Composition == "on"]
+@When[Windows_UI_Composition == "on" && Windows_Foundation_Collections == "on"]
 extend CompositionStrokeDashArray <: windows_core.HandleWinrtType<CompositionStrokeDashArray> {
     public static func intoWinrtHandle(value: CompositionStrokeDashArray): CPointer<Unit> {
         value.asRaw()
@@ -9275,7 +9277,7 @@ public class Compositor <: InterfaceWrapperBase & ComInterface & windows_interfa
         return defaultInterface().CreateEffectFactory(graphicsEffect)
     }
 
-    @When[Windows_Graphics_Effects == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_Effects == "on"]
     public unsafe func CreateEffectFactoryWithProperties(graphicsEffect: Graphics_Effects.IGraphicsEffect, animatableProperties: windows_collections.IIterable<windows_core.HString>): CompositionEffectFactory {
         return defaultInterface().CreateEffectFactoryWithProperties(graphicsEffect, animatableProperties)
     }
@@ -11062,7 +11064,10 @@ extend ICompositionAnimation <: windows_core.Interface<ICompositionAnimation> {}
 @C
 public struct ICompositionAnimation3Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var InitialValueExpressions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var InitialValueExpressions: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -11131,6 +11136,7 @@ public class ICompositionAnimation3 <: InterfaceWrapperBase & ComInterface & Run
         readVtbl<ICompositionAnimation3Vtbl>(ICompositionAnimation3Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InitialValueExpressions(): InitialValueExpressionCollection {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -11446,7 +11452,10 @@ extend ICompositionCommitBatch <: windows_core.Interface<ICompositionCommitBatch
 @C
 public struct ICompositionContainerShapeVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Shapes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Shapes: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -11515,6 +11524,7 @@ public class ICompositionContainerShape <: InterfaceWrapperBase & ComInterface &
         readVtbl<ICompositionContainerShapeVtbl>(ICompositionContainerShapeVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Shapes(): CompositionShapeCollection {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -14761,7 +14771,10 @@ public struct ICompositionSpriteShapeVtbl {
     public var SetIsStrokeNonScaling: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var StrokeBrush: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetStrokeBrush: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var StrokeDashArray: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var StrokeDashArray: UIntNative = UIntNative(0)
     public var StrokeDashCap: CFunc<(CPointer<Unit>, CPointer<_impl_l0.CompositionStrokeCapAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetStrokeDashCap: CFunc<(CPointer<Unit>, _impl_l0.CompositionStrokeCapAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var StrokeDashOffset: CFunc<(CPointer<Unit>, CPointer<Float32>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -14900,6 +14913,7 @@ public class ICompositionSpriteShape <: InterfaceWrapperBase & ComInterface & Ru
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StrokeDashArray(): CompositionStrokeDashArray {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -15424,9 +15438,9 @@ public struct ICompositorVtbl {
     public var CreateEffectFactory: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_Graphics_Effects != "on"]
     public var CreateEffectFactory: UIntNative = UIntNative(0)
-    @When[Windows_Graphics_Effects == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_Effects == "on"]
     public var CreateEffectFactoryWithProperties: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Graphics_Effects != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Graphics_Effects != "on"]
     public var CreateEffectFactoryWithProperties: UIntNative = UIntNative(0)
     public var CreateExpressionAnimation: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CreateExpressionAnimationWithExpression: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -15564,7 +15578,7 @@ public class ICompositor <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         return CompositionEffectFactory.fromAbiTake(result__)
     }
 
-    @When[Windows_Graphics_Effects == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_Effects == "on"]
     public unsafe func CreateEffectFactoryWithProperties(graphicsEffect: Graphics_Effects.IGraphicsEffect, animatableProperties: windows_collections.IIterable<windows_core.HString>): CompositionEffectFactory {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -18571,7 +18585,10 @@ extend IScalarKeyFrameAnimation <: windows_core.Interface<IScalarKeyFrameAnimati
 @C
 public struct IShapeVisualVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Shapes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Shapes: UIntNative = UIntNative(0)
     public var ViewBox: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetViewBox: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -18642,6 +18659,7 @@ public class IShapeVisual <: InterfaceWrapperBase & ComInterface & RuntimeName &
         readVtbl<IShapeVisualVtbl>(IShapeVisualVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Shapes(): CompositionShapeCollection {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -20530,7 +20548,7 @@ extend ImplicitAnimationCollection <: windows_core.HandleWinrtType<ImplicitAnima
     }
 }
 
-@When[Windows_UI_Composition == "on"]
+@When[Windows_UI_Composition == "on" && Windows_Foundation_Collections == "on"]
 public class InitialValueExpressionCollection <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -20676,7 +20694,7 @@ public class InitialValueExpressionCollection <: InterfaceWrapperBase & ComInter
     }
 }
 
-@When[Windows_UI_Composition == "on"]
+@When[Windows_UI_Composition == "on" && Windows_Foundation_Collections == "on"]
 extend InitialValueExpressionCollection <: windows_core.HandleWinrtType<InitialValueExpressionCollection> {
     public static func intoWinrtHandle(value: InitialValueExpressionCollection): CPointer<Unit> {
         value.asRaw()
@@ -22921,6 +22939,7 @@ public class ShapeVisual <: InterfaceWrapperBase & ComInterface & windows_interf
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Shapes(): CompositionShapeCollection {
         return defaultInterface().Shapes()
     }

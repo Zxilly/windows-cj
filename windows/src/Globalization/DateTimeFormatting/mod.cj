@@ -502,13 +502,19 @@ extend YearFormat <: windows_core.CopyType & windows_core.RuntimeType & windows_
 @C
 public struct IDateTimeFormatterVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Languages: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Languages: UIntNative = UIntNative(0)
     public var GeographicRegion: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Calendar: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Clock: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var NumeralSystem: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetNumeralSystem: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Patterns: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Patterns: UIntNative = UIntNative(0)
     public var Template: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Format: CFunc<(CPointer<Unit>, windows_future.DateTimeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var IncludeYear: CFunc<(CPointer<Unit>, CPointer<YearFormatAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -588,6 +594,7 @@ public class IDateTimeFormatter <: InterfaceWrapperBase & ComInterface & Runtime
         readVtbl<IDateTimeFormatterVtbl>(IDateTimeFormatterVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Languages(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -634,6 +641,7 @@ public class IDateTimeFormatter <: InterfaceWrapperBase & ComInterface & Runtime
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Patterns(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -803,6 +811,7 @@ public class DateTimeFormatter <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Languages(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().Languages()
     }
@@ -827,6 +836,7 @@ public class DateTimeFormatter <: InterfaceWrapperBase & ComInterface & windows_
         defaultInterface().SetNumeralSystem(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Patterns(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().Patterns()
     }
@@ -930,6 +940,7 @@ public class DateTimeFormatter <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateDateTimeFormatterLanguages(formatTemplate: windows_core.HString, languages: windows_collections.IIterable<windows_core.HString>): DateTimeFormatter {
         var result__: Option<DateTimeFormatter> = Option<DateTimeFormatter>.None
         try (factory__ = windows_core.factory<DateTimeFormatter, IDateTimeFormatterFactory>().unwrap()) {
@@ -941,6 +952,7 @@ public class DateTimeFormatter <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateDateTimeFormatterContext(formatTemplate: windows_core.HString, languages: windows_collections.IIterable<windows_core.HString>, geographicRegion: windows_core.HString, calendar: windows_core.HString, clock: windows_core.HString): DateTimeFormatter {
         var result__: Option<DateTimeFormatter> = Option<DateTimeFormatter>.None
         try (factory__ = windows_core.factory<DateTimeFormatter, IDateTimeFormatterFactory>().unwrap()) {
@@ -974,6 +986,7 @@ public class DateTimeFormatter <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateDateTimeFormatterDateTimeLanguages(yearFormat: YearFormat, monthFormat: MonthFormat, dayFormat: DayFormat, dayOfWeekFormat: DayOfWeekFormat, hourFormat: HourFormat, minuteFormat: MinuteFormat, secondFormat: SecondFormat, languages: windows_collections.IIterable<windows_core.HString>): DateTimeFormatter {
         var result__: Option<DateTimeFormatter> = Option<DateTimeFormatter>.None
         try (factory__ = windows_core.factory<DateTimeFormatter, IDateTimeFormatterFactory>().unwrap()) {
@@ -985,6 +998,7 @@ public class DateTimeFormatter <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateDateTimeFormatterDateTimeContext(yearFormat: YearFormat, monthFormat: MonthFormat, dayFormat: DayFormat, dayOfWeekFormat: DayOfWeekFormat, hourFormat: HourFormat, minuteFormat: MinuteFormat, secondFormat: SecondFormat, languages: windows_collections.IIterable<windows_core.HString>, geographicRegion: windows_core.HString, calendar: windows_core.HString, clock: windows_core.HString): DateTimeFormatter {
         var result__: Option<DateTimeFormatter> = Option<DateTimeFormatter>.None
         try (factory__ = windows_core.factory<DateTimeFormatter, IDateTimeFormatterFactory>().unwrap()) {
@@ -1020,12 +1034,24 @@ extend DateTimeFormatter <: windows_core.HandleWinrtType<DateTimeFormatter> {
 public struct IDateTimeFormatterFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var CreateDateTimeFormatter: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateDateTimeFormatterLanguages: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateDateTimeFormatterLanguages: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateDateTimeFormatterContext: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateDateTimeFormatterContext: UIntNative = UIntNative(0)
     public var CreateDateTimeFormatterDate: CFunc<(CPointer<Unit>, YearFormatAbi, MonthFormatAbi, DayFormatAbi, DayOfWeekFormatAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
     public var CreateDateTimeFormatterTime: CFunc<(CPointer<Unit>, HourFormatAbi, MinuteFormatAbi, SecondFormatAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateDateTimeFormatterDateTimeLanguages: CFunc<(CPointer<Unit>, YearFormatAbi, MonthFormatAbi, DayFormatAbi, DayOfWeekFormatAbi, HourFormatAbi, MinuteFormatAbi, SecondFormatAbi, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateDateTimeFormatterDateTimeLanguages: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateDateTimeFormatterDateTimeContext: CFunc<(CPointer<Unit>, YearFormatAbi, MonthFormatAbi, DayFormatAbi, DayOfWeekFormatAbi, HourFormatAbi, MinuteFormatAbi, SecondFormatAbi, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateDateTimeFormatterDateTimeContext: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1102,6 +1128,7 @@ public class IDateTimeFormatterFactory <: InterfaceWrapperBase & ComInterface & 
         return DateTimeFormatter.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateDateTimeFormatterLanguages(formatTemplate: windows_core.HString, languages: windows_collections.IIterable<windows_core.HString>): DateTimeFormatter {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1110,6 +1137,7 @@ public class IDateTimeFormatterFactory <: InterfaceWrapperBase & ComInterface & 
         return DateTimeFormatter.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateDateTimeFormatterContext(formatTemplate: windows_core.HString, languages: windows_collections.IIterable<windows_core.HString>, geographicRegion: windows_core.HString, calendar: windows_core.HString, clock: windows_core.HString): DateTimeFormatter {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1134,6 +1162,7 @@ public class IDateTimeFormatterFactory <: InterfaceWrapperBase & ComInterface & 
         return DateTimeFormatter.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateDateTimeFormatterDateTimeLanguages(yearFormat: YearFormat, monthFormat: MonthFormat, dayFormat: DayFormat, dayOfWeekFormat: DayOfWeekFormat, hourFormat: HourFormat, minuteFormat: MinuteFormat, secondFormat: SecondFormat, languages: windows_collections.IIterable<windows_core.HString>): DateTimeFormatter {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1142,6 +1171,7 @@ public class IDateTimeFormatterFactory <: InterfaceWrapperBase & ComInterface & 
         return DateTimeFormatter.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateDateTimeFormatterDateTimeContext(yearFormat: YearFormat, monthFormat: MonthFormat, dayFormat: DayFormat, dayOfWeekFormat: DayOfWeekFormat, hourFormat: HourFormat, minuteFormat: MinuteFormat, secondFormat: SecondFormat, languages: windows_collections.IIterable<windows_core.HString>, geographicRegion: windows_core.HString, calendar: windows_core.HString, clock: windows_core.HString): DateTimeFormatter {
         let v = vtbl()
         var result__ = CPointer<Unit>()

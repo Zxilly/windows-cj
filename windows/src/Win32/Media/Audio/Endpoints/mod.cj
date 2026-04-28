@@ -8,11 +8,8 @@ import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeTy
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Media_Audio_Apo == "on"]
 import windows.Win32.Media.Audio.Apo as Win32_Media_Audio_Apo
-@When[Windows_Win32_Media_KernelStreaming == "on"]
 import windows.Win32.Media.KernelStreaming as Win32_Media_KernelStreaming
 import windows.Win32.Media._impl_l0 as Win32_Media__impl_l0
 import windows.Win32._impl_l0 as Win32__impl_l0

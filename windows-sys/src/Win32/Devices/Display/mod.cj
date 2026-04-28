@@ -5,15 +5,10 @@ import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrap
 import windows_interface as windows_interface
 import windows_polyfill.{packedReadUInt32, packedReadUInt8, packedReadValue, packedWriteUInt32, packedWriteUInt8, packedWriteValue, unionReadFloat32, unionReadInt32, unionReadUInt16, unionReadUInt32, unionReadUInt8, unionWriteFloat32, unionWriteInt32, unionWriteUInt16, unionWriteUInt32, unionWriteUInt8}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Direct3D9 == "on"]
 import windows_sys.Win32.Graphics.Direct3D9 as Win32_Graphics_Direct3D9
-@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows_sys.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-@When[Windows_Win32_Graphics_OpenGL == "on"]
 import windows_sys.Win32.Graphics.OpenGL as Win32_Graphics_OpenGL
-@When[Windows_Win32_UI_ColorSystem == "on"]
 import windows_sys.Win32.UI.ColorSystem as Win32_UI_ColorSystem
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
@@ -5406,212 +5401,1247 @@ public struct DRIVEROBJ {
 @When[Windows_Win32_Devices_Display == "on"]
 public type FREEOBJPROC = CFunc<(CPointer<DRIVEROBJ>) -> Int32>
 
-@When[GDI32 == "on"]
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_BRUSHOBJ_hGetColorTransform == "on"]
 foreign {
     func BRUSHOBJ_hGetColorTransform(pbo: CPointer<BRUSHOBJ>): CPointer<Unit>
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_BRUSHOBJ_hGetColorTransform == "on"]
+public unsafe func Windows_BRUSHOBJ_hGetColorTransform(pbo: CPointer<BRUSHOBJ>): CPointer<Unit> {
+    return BRUSHOBJ_hGetColorTransform(pbo)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_BRUSHOBJ_pvAllocRbrush == "on"]
+foreign {
     func BRUSHOBJ_pvAllocRbrush(pbo: CPointer<BRUSHOBJ>, cj: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_BRUSHOBJ_pvAllocRbrush == "on"]
+public unsafe func Windows_BRUSHOBJ_pvAllocRbrush(pbo: CPointer<BRUSHOBJ>, cj: UInt32): CPointer<Unit> {
+    return BRUSHOBJ_pvAllocRbrush(pbo, cj)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_BRUSHOBJ_pvGetRbrush == "on"]
+foreign {
     func BRUSHOBJ_pvGetRbrush(pbo: CPointer<BRUSHOBJ>): CPointer<Unit>
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_BRUSHOBJ_pvGetRbrush == "on"]
+public unsafe func Windows_BRUSHOBJ_pvGetRbrush(pbo: CPointer<BRUSHOBJ>): CPointer<Unit> {
+    return BRUSHOBJ_pvGetRbrush(pbo)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_BRUSHOBJ_ulGetBrushColor == "on"]
+foreign {
     func BRUSHOBJ_ulGetBrushColor(pbo: CPointer<BRUSHOBJ>): UInt32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_BRUSHOBJ_ulGetBrushColor == "on"]
+public unsafe func Windows_BRUSHOBJ_ulGetBrushColor(pbo: CPointer<BRUSHOBJ>): UInt32 {
+    return BRUSHOBJ_ulGetBrushColor(pbo)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_CLIPOBJ_bEnum == "on"]
+foreign {
     func CLIPOBJ_bEnum(pco: CPointer<CLIPOBJ>, cj: UInt32, pul: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_CLIPOBJ_bEnum == "on"]
+public unsafe func Windows_CLIPOBJ_bEnum(pco: CPointer<CLIPOBJ>, cj: UInt32, pul: CPointer<UInt32>): Int32 {
+    return CLIPOBJ_bEnum(pco, cj, pul)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_CLIPOBJ_cEnumStart == "on"]
+foreign {
     func CLIPOBJ_cEnumStart(pco: CPointer<CLIPOBJ>, bAll: Int32, iType: UInt32, iDirection: UInt32, cLimit: UInt32): UInt32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_CLIPOBJ_cEnumStart == "on"]
+public unsafe func Windows_CLIPOBJ_cEnumStart(pco: CPointer<CLIPOBJ>, bAll: Int32, iType: UInt32, iDirection: UInt32, cLimit: UInt32): UInt32 {
+    return CLIPOBJ_cEnumStart(pco, bAll, iType, iDirection, cLimit)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_CLIPOBJ_ppoGetPath == "on"]
+foreign {
     func CLIPOBJ_ppoGetPath(pco: CPointer<CLIPOBJ>): CPointer<PATHOBJ>
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_CLIPOBJ_ppoGetPath == "on"]
+public unsafe func Windows_CLIPOBJ_ppoGetPath(pco: CPointer<CLIPOBJ>): CPointer<PATHOBJ> {
+    return CLIPOBJ_ppoGetPath(pco)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngAcquireSemaphore == "on"]
+foreign {
     func EngAcquireSemaphore(hsem: HSEMAPHORE): Unit
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngAcquireSemaphore == "on"]
+public unsafe func Windows_EngAcquireSemaphore(hsem: HSEMAPHORE): Unit {
+    EngAcquireSemaphore(hsem)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngAlphaBlend == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func EngAlphaBlend(psoDest: CPointer<SURFOBJ>, psoSrc: CPointer<SURFOBJ>, pco: CPointer<CLIPOBJ>, pxlo: CPointer<XLATEOBJ>, prclDest: CPointer<Win32_Foundation.RECTL>, prclSrc: CPointer<Win32_Foundation.RECTL>, pBlendObj: CPointer<BLENDOBJ>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngAlphaBlend == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_EngAlphaBlend(psoDest: CPointer<SURFOBJ>, psoSrc: CPointer<SURFOBJ>, pco: CPointer<CLIPOBJ>, pxlo: CPointer<XLATEOBJ>, prclDest: CPointer<Win32_Foundation.RECTL>, prclSrc: CPointer<Win32_Foundation.RECTL>, pBlendObj: CPointer<BLENDOBJ>): Int32 {
+    return EngAlphaBlend(psoDest, psoSrc, pco, pxlo, prclDest, prclSrc, pBlendObj)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngAssociateSurface == "on"]
+foreign {
     func EngAssociateSurface(hsurf: HSURF, hdev: HDEV, flHooks: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngAssociateSurface == "on"]
+public unsafe func Windows_EngAssociateSurface(hsurf: HSURF, hdev: HDEV, flHooks: UInt32): Int32 {
+    return EngAssociateSurface(hsurf, hdev, flHooks)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngBitBlt == "on"]
+foreign {
     func EngBitBlt(psoTrg: CPointer<SURFOBJ>, psoSrc: CPointer<SURFOBJ>, psoMask: CPointer<SURFOBJ>, pco: CPointer<CLIPOBJ>, pxlo: CPointer<XLATEOBJ>, prclTrg: CPointer<Win32_Foundation.RECTL>, pptlSrc: CPointer<Win32_Foundation.POINTL>, pptlMask: CPointer<Win32_Foundation.POINTL>, pbo: CPointer<BRUSHOBJ>, pptlBrush: CPointer<Win32_Foundation.POINTL>, rop4: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngBitBlt == "on"]
+public unsafe func Windows_EngBitBlt(psoTrg: CPointer<SURFOBJ>, psoSrc: CPointer<SURFOBJ>, psoMask: CPointer<SURFOBJ>, pco: CPointer<CLIPOBJ>, pxlo: CPointer<XLATEOBJ>, prclTrg: CPointer<Win32_Foundation.RECTL>, pptlSrc: CPointer<Win32_Foundation.POINTL>, pptlMask: CPointer<Win32_Foundation.POINTL>, pbo: CPointer<BRUSHOBJ>, pptlBrush: CPointer<Win32_Foundation.POINTL>, rop4: UInt32): Int32 {
+    return EngBitBlt(psoTrg, psoSrc, psoMask, pco, pxlo, prclTrg, pptlSrc, pptlMask, pbo, pptlBrush, rop4)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngCheckAbort == "on"]
+foreign {
     func EngCheckAbort(pso: CPointer<SURFOBJ>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngCheckAbort == "on"]
+public unsafe func Windows_EngCheckAbort(pso: CPointer<SURFOBJ>): Int32 {
+    return EngCheckAbort(pso)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngComputeGlyphSet == "on"]
+foreign {
     func EngComputeGlyphSet(nCodePage: Int32, nFirstChar: Int32, cChars: Int32): CPointer<FD_GLYPHSET>
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngComputeGlyphSet == "on"]
+public unsafe func Windows_EngComputeGlyphSet(nCodePage: Int32, nFirstChar: Int32, cChars: Int32): CPointer<FD_GLYPHSET> {
+    return EngComputeGlyphSet(nCodePage, nFirstChar, cChars)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngCopyBits == "on"]
+foreign {
     func EngCopyBits(psoDest: CPointer<SURFOBJ>, psoSrc: CPointer<SURFOBJ>, pco: CPointer<CLIPOBJ>, pxlo: CPointer<XLATEOBJ>, prclDest: CPointer<Win32_Foundation.RECTL>, pptlSrc: CPointer<Win32_Foundation.POINTL>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngCopyBits == "on"]
+public unsafe func Windows_EngCopyBits(psoDest: CPointer<SURFOBJ>, psoSrc: CPointer<SURFOBJ>, pco: CPointer<CLIPOBJ>, pxlo: CPointer<XLATEOBJ>, prclDest: CPointer<Win32_Foundation.RECTL>, pptlSrc: CPointer<Win32_Foundation.POINTL>): Int32 {
+    return EngCopyBits(psoDest, psoSrc, pco, pxlo, prclDest, pptlSrc)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngCreateBitmap == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func EngCreateBitmap(sizl: Win32_Foundation.SIZE, lWidth: Int32, iFormat: UInt32, fl: UInt32, pvBits: CPointer<Unit>): Win32_Graphics_Gdi.HBITMAP
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngCreateBitmap == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_EngCreateBitmap(sizl: Win32_Foundation.SIZE, lWidth: Int32, iFormat: UInt32, fl: UInt32, pvBits: CPointer<Unit>): Win32_Graphics_Gdi.HBITMAP {
+    return EngCreateBitmap(sizl, lWidth, iFormat, fl, pvBits)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngCreateClip == "on"]
+foreign {
     func EngCreateClip(): CPointer<CLIPOBJ>
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngCreateClip == "on"]
+public unsafe func Windows_EngCreateClip(): CPointer<CLIPOBJ> {
+    return EngCreateClip()
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngCreateDeviceBitmap == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func EngCreateDeviceBitmap(dhsurf: DHSURF, sizl: Win32_Foundation.SIZE, iFormatCompat: UInt32): Win32_Graphics_Gdi.HBITMAP
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngCreateDeviceBitmap == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_EngCreateDeviceBitmap(dhsurf: DHSURF, sizl: Win32_Foundation.SIZE, iFormatCompat: UInt32): Win32_Graphics_Gdi.HBITMAP {
+    return EngCreateDeviceBitmap(dhsurf, sizl, iFormatCompat)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngCreateDeviceSurface == "on"]
+foreign {
     func EngCreateDeviceSurface(dhsurf: DHSURF, sizl: Win32_Foundation.SIZE, iFormatCompat: UInt32): HSURF
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngCreateDeviceSurface == "on"]
+public unsafe func Windows_EngCreateDeviceSurface(dhsurf: DHSURF, sizl: Win32_Foundation.SIZE, iFormatCompat: UInt32): HSURF {
+    return EngCreateDeviceSurface(dhsurf, sizl, iFormatCompat)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngCreatePalette == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func EngCreatePalette(iMode: UInt32, cColors: UInt32, pulColors: CPointer<UInt32>, flRed: UInt32, flGreen: UInt32, flBlue: UInt32): Win32_Graphics_Gdi.HPALETTE
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngCreatePalette == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_EngCreatePalette(iMode: UInt32, cColors: UInt32, pulColors: CPointer<UInt32>, flRed: UInt32, flGreen: UInt32, flBlue: UInt32): Win32_Graphics_Gdi.HPALETTE {
+    return EngCreatePalette(iMode, cColors, pulColors, flRed, flGreen, flBlue)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngCreateSemaphore == "on"]
+foreign {
     func EngCreateSemaphore(): HSEMAPHORE
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngCreateSemaphore == "on"]
+public unsafe func Windows_EngCreateSemaphore(): HSEMAPHORE {
+    return EngCreateSemaphore()
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngDeleteClip == "on"]
+foreign {
     // param-hint: pco optional
     func EngDeleteClip(pco: CPointer<CLIPOBJ>): Unit
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngDeleteClip == "on"]
+public unsafe func Windows_EngDeleteClip(pco: CPointer<CLIPOBJ>): Unit {
+    EngDeleteClip(pco)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngDeletePalette == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func EngDeletePalette(hpal: Win32_Graphics_Gdi.HPALETTE): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngDeletePalette == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_EngDeletePalette(hpal: Win32_Graphics_Gdi.HPALETTE): Int32 {
+    return EngDeletePalette(hpal)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngDeletePath == "on"]
+foreign {
     func EngDeletePath(ppo: CPointer<PATHOBJ>): Unit
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngDeletePath == "on"]
+public unsafe func Windows_EngDeletePath(ppo: CPointer<PATHOBJ>): Unit {
+    EngDeletePath(ppo)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngDeleteSemaphore == "on"]
+foreign {
     func EngDeleteSemaphore(hsem: HSEMAPHORE): Unit
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngDeleteSemaphore == "on"]
+public unsafe func Windows_EngDeleteSemaphore(hsem: HSEMAPHORE): Unit {
+    EngDeleteSemaphore(hsem)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngDeleteSurface == "on"]
+foreign {
     func EngDeleteSurface(hsurf: HSURF): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngDeleteSurface == "on"]
+public unsafe func Windows_EngDeleteSurface(hsurf: HSURF): Int32 {
+    return EngDeleteSurface(hsurf)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngEraseSurface == "on"]
+foreign {
     func EngEraseSurface(pso: CPointer<SURFOBJ>, prcl: CPointer<Win32_Foundation.RECTL>, iColor: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngEraseSurface == "on"]
+public unsafe func Windows_EngEraseSurface(pso: CPointer<SURFOBJ>, prcl: CPointer<Win32_Foundation.RECTL>, iColor: UInt32): Int32 {
+    return EngEraseSurface(pso, prcl, iColor)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngFillPath == "on"]
+foreign {
     func EngFillPath(pso: CPointer<SURFOBJ>, ppo: CPointer<PATHOBJ>, pco: CPointer<CLIPOBJ>, pbo: CPointer<BRUSHOBJ>, pptlBrushOrg: CPointer<Win32_Foundation.POINTL>, mix: UInt32, flOptions: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngFillPath == "on"]
+public unsafe func Windows_EngFillPath(pso: CPointer<SURFOBJ>, ppo: CPointer<PATHOBJ>, pco: CPointer<CLIPOBJ>, pbo: CPointer<BRUSHOBJ>, pptlBrushOrg: CPointer<Win32_Foundation.POINTL>, mix: UInt32, flOptions: UInt32): Int32 {
+    return EngFillPath(pso, ppo, pco, pbo, pptlBrushOrg, mix, flOptions)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngFindResource == "on"]
+foreign {
     func EngFindResource(h: CPointer<Unit>, iName: Int32, iType: Int32, pulSize: CPointer<UInt32>): CPointer<Unit>
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngFindResource == "on"]
+public unsafe func Windows_EngFindResource(h: CPointer<Unit>, iName: Int32, iType: Int32, pulSize: CPointer<UInt32>): CPointer<Unit> {
+    return EngFindResource(h, iName, iType, pulSize)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngFreeModule == "on"]
+foreign {
     func EngFreeModule(h: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngFreeModule == "on"]
+public unsafe func Windows_EngFreeModule(h: CPointer<Unit>): Unit {
+    EngFreeModule(h)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngGetCurrentCodePage == "on"]
+foreign {
     func EngGetCurrentCodePage(OemCodePage: CPointer<UInt16>, AnsiCodePage: CPointer<UInt16>): Unit
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngGetCurrentCodePage == "on"]
+public unsafe func Windows_EngGetCurrentCodePage(OemCodePage: CPointer<UInt16>, AnsiCodePage: CPointer<UInt16>): Unit {
+    EngGetCurrentCodePage(OemCodePage, AnsiCodePage)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngGetDriverName == "on"]
+foreign {
     func EngGetDriverName(hdev: HDEV): CPointer<UInt16>
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngGetDriverName == "on"]
+public unsafe func Windows_EngGetDriverName(hdev: HDEV): CPointer<UInt16> {
+    return EngGetDriverName(hdev)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngGetPrinterDataFileName == "on"]
+foreign {
     func EngGetPrinterDataFileName(hdev: HDEV): CPointer<UInt16>
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngGetPrinterDataFileName == "on"]
+public unsafe func Windows_EngGetPrinterDataFileName(hdev: HDEV): CPointer<UInt16> {
+    return EngGetPrinterDataFileName(hdev)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngGradientFill == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func EngGradientFill(psoDest: CPointer<SURFOBJ>, pco: CPointer<CLIPOBJ>, pxlo: CPointer<XLATEOBJ>, pVertex: CPointer<Win32_Graphics_Gdi.TRIVERTEX>, nVertex: UInt32, pMesh: CPointer<Unit>, nMesh: UInt32, prclExtents: CPointer<Win32_Foundation.RECTL>, pptlDitherOrg: CPointer<Win32_Foundation.POINTL>, ulMode: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngGradientFill == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_EngGradientFill(psoDest: CPointer<SURFOBJ>, pco: CPointer<CLIPOBJ>, pxlo: CPointer<XLATEOBJ>, pVertex: CPointer<Win32_Graphics_Gdi.TRIVERTEX>, nVertex: UInt32, pMesh: CPointer<Unit>, nMesh: UInt32, prclExtents: CPointer<Win32_Foundation.RECTL>, pptlDitherOrg: CPointer<Win32_Foundation.POINTL>, ulMode: UInt32): Int32 {
+    return EngGradientFill(psoDest, pco, pxlo, pVertex, nVertex, pMesh, nMesh, prclExtents, pptlDitherOrg, ulMode)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngLineTo == "on"]
+foreign {
     func EngLineTo(pso: CPointer<SURFOBJ>, pco: CPointer<CLIPOBJ>, pbo: CPointer<BRUSHOBJ>, x1: Int32, y1: Int32, x2: Int32, y2: Int32, prclBounds: CPointer<Win32_Foundation.RECTL>, mix: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngLineTo == "on"]
+public unsafe func Windows_EngLineTo(pso: CPointer<SURFOBJ>, pco: CPointer<CLIPOBJ>, pbo: CPointer<BRUSHOBJ>, x1: Int32, y1: Int32, x2: Int32, y2: Int32, prclBounds: CPointer<Win32_Foundation.RECTL>, mix: UInt32): Int32 {
+    return EngLineTo(pso, pco, pbo, x1, y1, x2, y2, prclBounds, mix)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngLoadModule == "on"]
+foreign {
     func EngLoadModule(pwsz: CPointer<UInt16>): CPointer<Unit>
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngLoadModule == "on"]
+public unsafe func Windows_EngLoadModule(pwsz: CPointer<UInt16>): CPointer<Unit> {
+    return EngLoadModule(pwsz)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngLockSurface == "on"]
+foreign {
     func EngLockSurface(hsurf: HSURF): CPointer<SURFOBJ>
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngLockSurface == "on"]
+public unsafe func Windows_EngLockSurface(hsurf: HSURF): CPointer<SURFOBJ> {
+    return EngLockSurface(hsurf)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngMarkBandingSurface == "on"]
+foreign {
     func EngMarkBandingSurface(hsurf: HSURF): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngMarkBandingSurface == "on"]
+public unsafe func Windows_EngMarkBandingSurface(hsurf: HSURF): Int32 {
+    return EngMarkBandingSurface(hsurf)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngMultiByteToUnicodeN == "on"]
+foreign {
     // param-hint: UnicodeString bytes=param[1]
     // param-hint: BytesInUnicodeString optional
     // param-hint: MultiByteString bytes=param[4]
     func EngMultiByteToUnicodeN(UnicodeString: CPointer<UInt16>, MaxBytesInUnicodeString: UInt32, BytesInUnicodeString: CPointer<UInt32>, MultiByteString: CPointer<UInt8>, BytesInMultiByteString: UInt32): Unit
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngMultiByteToUnicodeN == "on"]
+public unsafe func Windows_EngMultiByteToUnicodeN(UnicodeString: CPointer<UInt16>, MaxBytesInUnicodeString: UInt32, BytesInUnicodeString: CPointer<UInt32>, MultiByteString: CPointer<UInt8>, BytesInMultiByteString: UInt32): Unit {
+    EngMultiByteToUnicodeN(UnicodeString, MaxBytesInUnicodeString, BytesInUnicodeString, MultiByteString, BytesInMultiByteString)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngMultiByteToWideChar == "on"]
+foreign {
     // param-hint: WideCharString bytes=param[2] optional
     // param-hint: MultiByteString bytes=param[4] optional
     func EngMultiByteToWideChar(CodePage: UInt32, WideCharString: CPointer<UInt16>, BytesInWideCharString: Int32, MultiByteString: CPointer<UInt8>, BytesInMultiByteString: Int32): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngMultiByteToWideChar == "on"]
+public unsafe func Windows_EngMultiByteToWideChar(CodePage: UInt32, WideCharString: CPointer<UInt16>, BytesInWideCharString: Int32, MultiByteString: CPointer<UInt8>, BytesInMultiByteString: Int32): Int32 {
+    return EngMultiByteToWideChar(CodePage, WideCharString, BytesInWideCharString, MultiByteString, BytesInMultiByteString)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngPaint == "on"]
+foreign {
     func EngPaint(pso: CPointer<SURFOBJ>, pco: CPointer<CLIPOBJ>, pbo: CPointer<BRUSHOBJ>, pptlBrushOrg: CPointer<Win32_Foundation.POINTL>, mix: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngPaint == "on"]
+public unsafe func Windows_EngPaint(pso: CPointer<SURFOBJ>, pco: CPointer<CLIPOBJ>, pbo: CPointer<BRUSHOBJ>, pptlBrushOrg: CPointer<Win32_Foundation.POINTL>, mix: UInt32): Int32 {
+    return EngPaint(pso, pco, pbo, pptlBrushOrg, mix)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngPlgBlt == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func EngPlgBlt(psoTrg: CPointer<SURFOBJ>, psoSrc: CPointer<SURFOBJ>, psoMsk: CPointer<SURFOBJ>, pco: CPointer<CLIPOBJ>, pxlo: CPointer<XLATEOBJ>, pca: CPointer<Win32_Graphics_Gdi.COLORADJUSTMENT>, pptlBrushOrg: CPointer<Win32_Foundation.POINTL>, pptfx: CPointer<POINTFIX>, prcl: CPointer<Win32_Foundation.RECTL>, pptl: CPointer<Win32_Foundation.POINTL>, iMode: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngPlgBlt == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_EngPlgBlt(psoTrg: CPointer<SURFOBJ>, psoSrc: CPointer<SURFOBJ>, psoMsk: CPointer<SURFOBJ>, pco: CPointer<CLIPOBJ>, pxlo: CPointer<XLATEOBJ>, pca: CPointer<Win32_Graphics_Gdi.COLORADJUSTMENT>, pptlBrushOrg: CPointer<Win32_Foundation.POINTL>, pptfx: CPointer<POINTFIX>, prcl: CPointer<Win32_Foundation.RECTL>, pptl: CPointer<Win32_Foundation.POINTL>, iMode: UInt32): Int32 {
+    return EngPlgBlt(psoTrg, psoSrc, psoMsk, pco, pxlo, pca, pptlBrushOrg, pptfx, prcl, pptl, iMode)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngQueryEMFInfo == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func EngQueryEMFInfo(hdev: HDEV, pEMFInfo: CPointer<EMFINFO>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngQueryEMFInfo == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_EngQueryEMFInfo(hdev: HDEV, pEMFInfo: CPointer<EMFINFO>): Int32 {
+    return EngQueryEMFInfo(hdev, pEMFInfo)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngQueryLocalTime == "on"]
+foreign {
     func EngQueryLocalTime(param0: CPointer<ENG_TIME_FIELDS>): Unit
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngQueryLocalTime == "on"]
+public unsafe func Windows_EngQueryLocalTime(param0: CPointer<ENG_TIME_FIELDS>): Unit {
+    EngQueryLocalTime(param0)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngReleaseSemaphore == "on"]
+foreign {
     func EngReleaseSemaphore(hsem: HSEMAPHORE): Unit
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngReleaseSemaphore == "on"]
+public unsafe func Windows_EngReleaseSemaphore(hsem: HSEMAPHORE): Unit {
+    EngReleaseSemaphore(hsem)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngStretchBlt == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func EngStretchBlt(psoDest: CPointer<SURFOBJ>, psoSrc: CPointer<SURFOBJ>, psoMask: CPointer<SURFOBJ>, pco: CPointer<CLIPOBJ>, pxlo: CPointer<XLATEOBJ>, pca: CPointer<Win32_Graphics_Gdi.COLORADJUSTMENT>, pptlHTOrg: CPointer<Win32_Foundation.POINTL>, prclDest: CPointer<Win32_Foundation.RECTL>, prclSrc: CPointer<Win32_Foundation.RECTL>, pptlMask: CPointer<Win32_Foundation.POINTL>, iMode: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngStretchBlt == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_EngStretchBlt(psoDest: CPointer<SURFOBJ>, psoSrc: CPointer<SURFOBJ>, psoMask: CPointer<SURFOBJ>, pco: CPointer<CLIPOBJ>, pxlo: CPointer<XLATEOBJ>, pca: CPointer<Win32_Graphics_Gdi.COLORADJUSTMENT>, pptlHTOrg: CPointer<Win32_Foundation.POINTL>, prclDest: CPointer<Win32_Foundation.RECTL>, prclSrc: CPointer<Win32_Foundation.RECTL>, pptlMask: CPointer<Win32_Foundation.POINTL>, iMode: UInt32): Int32 {
+    return EngStretchBlt(psoDest, psoSrc, psoMask, pco, pxlo, pca, pptlHTOrg, prclDest, prclSrc, pptlMask, iMode)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngStretchBltROP == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func EngStretchBltROP(psoDest: CPointer<SURFOBJ>, psoSrc: CPointer<SURFOBJ>, psoMask: CPointer<SURFOBJ>, pco: CPointer<CLIPOBJ>, pxlo: CPointer<XLATEOBJ>, pca: CPointer<Win32_Graphics_Gdi.COLORADJUSTMENT>, pptlHTOrg: CPointer<Win32_Foundation.POINTL>, prclDest: CPointer<Win32_Foundation.RECTL>, prclSrc: CPointer<Win32_Foundation.RECTL>, pptlMask: CPointer<Win32_Foundation.POINTL>, iMode: UInt32, pbo: CPointer<BRUSHOBJ>, rop4: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngStretchBltROP == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_EngStretchBltROP(psoDest: CPointer<SURFOBJ>, psoSrc: CPointer<SURFOBJ>, psoMask: CPointer<SURFOBJ>, pco: CPointer<CLIPOBJ>, pxlo: CPointer<XLATEOBJ>, pca: CPointer<Win32_Graphics_Gdi.COLORADJUSTMENT>, pptlHTOrg: CPointer<Win32_Foundation.POINTL>, prclDest: CPointer<Win32_Foundation.RECTL>, prclSrc: CPointer<Win32_Foundation.RECTL>, pptlMask: CPointer<Win32_Foundation.POINTL>, iMode: UInt32, pbo: CPointer<BRUSHOBJ>, rop4: UInt32): Int32 {
+    return EngStretchBltROP(psoDest, psoSrc, psoMask, pco, pxlo, pca, pptlHTOrg, prclDest, prclSrc, pptlMask, iMode, pbo, rop4)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngStrokeAndFillPath == "on" && ((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64")) || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64")))]
+foreign {
+    func EngStrokeAndFillPath(pso: CPointer<SURFOBJ>, ppo: CPointer<PATHOBJ>, pco: CPointer<CLIPOBJ>, pxo: CPointer<XFORMOBJ>, pboStroke: CPointer<BRUSHOBJ>, plineattrs: CPointer<LINEATTRS>, pboFill: CPointer<BRUSHOBJ>, pptlBrushOrg: CPointer<Win32_Foundation.POINTL>, mixFill: UInt32, flOptions: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngStrokeAndFillPath == "on" && ((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64")) || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64")))]
+public unsafe func Windows_EngStrokeAndFillPath(pso: CPointer<SURFOBJ>, ppo: CPointer<PATHOBJ>, pco: CPointer<CLIPOBJ>, pxo: CPointer<XFORMOBJ>, pboStroke: CPointer<BRUSHOBJ>, plineattrs: CPointer<LINEATTRS>, pboFill: CPointer<BRUSHOBJ>, pptlBrushOrg: CPointer<Win32_Foundation.POINTL>, mixFill: UInt32, flOptions: UInt32): Int32 {
+    return EngStrokeAndFillPath(pso, ppo, pco, pxo, pboStroke, plineattrs, pboFill, pptlBrushOrg, mixFill, flOptions)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngStrokePath == "on" && ((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64")) || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64")))]
+foreign {
+    func EngStrokePath(pso: CPointer<SURFOBJ>, ppo: CPointer<PATHOBJ>, pco: CPointer<CLIPOBJ>, pxo: CPointer<XFORMOBJ>, pbo: CPointer<BRUSHOBJ>, pptlBrushOrg: CPointer<Win32_Foundation.POINTL>, plineattrs: CPointer<LINEATTRS>, mix: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngStrokePath == "on" && ((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64")) || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64")))]
+public unsafe func Windows_EngStrokePath(pso: CPointer<SURFOBJ>, ppo: CPointer<PATHOBJ>, pco: CPointer<CLIPOBJ>, pxo: CPointer<XFORMOBJ>, pbo: CPointer<BRUSHOBJ>, pptlBrushOrg: CPointer<Win32_Foundation.POINTL>, plineattrs: CPointer<LINEATTRS>, mix: UInt32): Int32 {
+    return EngStrokePath(pso, ppo, pco, pxo, pbo, pptlBrushOrg, plineattrs, mix)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngTextOut == "on"]
+foreign {
     func EngTextOut(pso: CPointer<SURFOBJ>, pstro: CPointer<STROBJ>, pfo: CPointer<FONTOBJ>, pco: CPointer<CLIPOBJ>, prclExtra: CPointer<Win32_Foundation.RECTL>, prclOpaque: CPointer<Win32_Foundation.RECTL>, pboFore: CPointer<BRUSHOBJ>, pboOpaque: CPointer<BRUSHOBJ>, pptlOrg: CPointer<Win32_Foundation.POINTL>, mix: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngTextOut == "on"]
+public unsafe func Windows_EngTextOut(pso: CPointer<SURFOBJ>, pstro: CPointer<STROBJ>, pfo: CPointer<FONTOBJ>, pco: CPointer<CLIPOBJ>, prclExtra: CPointer<Win32_Foundation.RECTL>, prclOpaque: CPointer<Win32_Foundation.RECTL>, pboFore: CPointer<BRUSHOBJ>, pboOpaque: CPointer<BRUSHOBJ>, pptlOrg: CPointer<Win32_Foundation.POINTL>, mix: UInt32): Int32 {
+    return EngTextOut(pso, pstro, pfo, pco, prclExtra, prclOpaque, pboFore, pboOpaque, pptlOrg, mix)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngTransparentBlt == "on"]
+foreign {
     // param-hint: pco optional
     // param-hint: pxlo optional
     func EngTransparentBlt(psoDst: CPointer<SURFOBJ>, psoSrc: CPointer<SURFOBJ>, pco: CPointer<CLIPOBJ>, pxlo: CPointer<XLATEOBJ>, prclDst: CPointer<Win32_Foundation.RECTL>, prclSrc: CPointer<Win32_Foundation.RECTL>, TransColor: UInt32, bCalledFromBitBlt: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngTransparentBlt == "on"]
+public unsafe func Windows_EngTransparentBlt(psoDst: CPointer<SURFOBJ>, psoSrc: CPointer<SURFOBJ>, pco: CPointer<CLIPOBJ>, pxlo: CPointer<XLATEOBJ>, prclDst: CPointer<Win32_Foundation.RECTL>, prclSrc: CPointer<Win32_Foundation.RECTL>, TransColor: UInt32, bCalledFromBitBlt: UInt32): Int32 {
+    return EngTransparentBlt(psoDst, psoSrc, pco, pxlo, prclDst, prclSrc, TransColor, bCalledFromBitBlt)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngUnicodeToMultiByteN == "on"]
+foreign {
     // param-hint: MultiByteString bytes=param[1]
     // param-hint: BytesInMultiByteString optional
     // param-hint: UnicodeString bytes=param[4]
     func EngUnicodeToMultiByteN(MultiByteString: CPointer<UInt8>, MaxBytesInMultiByteString: UInt32, BytesInMultiByteString: CPointer<UInt32>, UnicodeString: CPointer<UInt16>, BytesInUnicodeString: UInt32): Unit
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngUnicodeToMultiByteN == "on"]
+public unsafe func Windows_EngUnicodeToMultiByteN(MultiByteString: CPointer<UInt8>, MaxBytesInMultiByteString: UInt32, BytesInMultiByteString: CPointer<UInt32>, UnicodeString: CPointer<UInt16>, BytesInUnicodeString: UInt32): Unit {
+    EngUnicodeToMultiByteN(MultiByteString, MaxBytesInMultiByteString, BytesInMultiByteString, UnicodeString, BytesInUnicodeString)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngUnlockSurface == "on"]
+foreign {
     func EngUnlockSurface(pso: CPointer<SURFOBJ>): Unit
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngUnlockSurface == "on"]
+public unsafe func Windows_EngUnlockSurface(pso: CPointer<SURFOBJ>): Unit {
+    EngUnlockSurface(pso)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngWideCharToMultiByte == "on"]
+foreign {
     // param-hint: WideCharString bytes=param[2] optional
     // param-hint: MultiByteString bytes=param[4] optional
     func EngWideCharToMultiByte(CodePage: UInt32, WideCharString: CPointer<UInt16>, BytesInWideCharString: Int32, MultiByteString: CPointer<UInt8>, BytesInMultiByteString: Int32): Int32
-    func FONTOBJ_cGetAllGlyphHandles(pfo: CPointer<FONTOBJ>, phg: CPointer<UInt32>): UInt32
-    func FONTOBJ_cGetGlyphs(pfo: CPointer<FONTOBJ>, iMode: UInt32, cGlyph: UInt32, phg: CPointer<UInt32>, ppvGlyph: CPointer<CPointer<Unit>>): UInt32
-    func FONTOBJ_pQueryGlyphAttrs(pfo: CPointer<FONTOBJ>, iMode: UInt32): CPointer<FD_GLYPHATTR>
-    func FONTOBJ_pfdg(pfo: CPointer<FONTOBJ>): CPointer<FD_GLYPHSET>
-    func FONTOBJ_pvTrueTypeFontFile(pfo: CPointer<FONTOBJ>, pcjFile: CPointer<UInt32>): CPointer<Unit>
-    func FONTOBJ_pxoGetXform(pfo: CPointer<FONTOBJ>): CPointer<XFORMOBJ>
-    func FONTOBJ_vGetInfo(pfo: CPointer<FONTOBJ>, cjSize: UInt32, pfi: CPointer<FONTINFO>): Unit
-    func PATHOBJ_bEnum(ppo: CPointer<PATHOBJ>, ppd: CPointer<PATHDATA>): Int32
-    func PATHOBJ_bEnumClipLines(ppo: CPointer<PATHOBJ>, cb: UInt32, pcl: CPointer<CLIPLINE>): Int32
-    func PATHOBJ_vEnumStart(ppo: CPointer<PATHOBJ>): Unit
-    func PATHOBJ_vGetBounds(ppo: CPointer<PATHOBJ>, prectfx: CPointer<RECTFX>): Unit
-    func STROBJ_bEnum(pstro: CPointer<STROBJ>, pc: CPointer<UInt32>, ppgpos: CPointer<CPointer<GLYPHPOS>>): Int32
-    func STROBJ_bEnumPositionsOnly(pstro: CPointer<STROBJ>, pc: CPointer<UInt32>, ppgpos: CPointer<CPointer<GLYPHPOS>>): Int32
-    func STROBJ_bGetAdvanceWidths(pso: CPointer<STROBJ>, iFirst: UInt32, c: UInt32, pptqD: CPointer<POINTQF>): Int32
-    func STROBJ_dwGetCodePage(pstro: CPointer<STROBJ>): UInt32
-    func STROBJ_vEnumStart(pstro: CPointer<STROBJ>): Unit
-    func XFORMOBJ_bApplyXform(pxo: CPointer<XFORMOBJ>, iMode: UInt32, cPoints: UInt32, pvIn: CPointer<Unit>, pvOut: CPointer<Unit>): Int32
-    func XLATEOBJ_cGetPalette(pxlo: CPointer<XLATEOBJ>, iPal: UInt32, cPal: UInt32, pPal: CPointer<UInt32>): UInt32
-    func XLATEOBJ_hGetColorTransform(pxlo: CPointer<XLATEOBJ>): CPointer<Unit>
-    func XLATEOBJ_iXlate(pxlo: CPointer<XLATEOBJ>, iColor: UInt32): UInt32
-    func XLATEOBJ_piVector(pxlo: CPointer<XLATEOBJ>): CPointer<UInt32>
 }
 
-@When[GDI32 == "on" && (((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64")) || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64"))))]
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_EngWideCharToMultiByte == "on"]
+public unsafe func Windows_EngWideCharToMultiByte(CodePage: UInt32, WideCharString: CPointer<UInt16>, BytesInWideCharString: Int32, MultiByteString: CPointer<UInt8>, BytesInMultiByteString: Int32): Int32 {
+    return EngWideCharToMultiByte(CodePage, WideCharString, BytesInWideCharString, MultiByteString, BytesInMultiByteString)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_FONTOBJ_cGetAllGlyphHandles == "on"]
 foreign {
-    func EngStrokeAndFillPath(pso: CPointer<SURFOBJ>, ppo: CPointer<PATHOBJ>, pco: CPointer<CLIPOBJ>, pxo: CPointer<XFORMOBJ>, pboStroke: CPointer<BRUSHOBJ>, plineattrs: CPointer<LINEATTRS>, pboFill: CPointer<BRUSHOBJ>, pptlBrushOrg: CPointer<Win32_Foundation.POINTL>, mixFill: UInt32, flOptions: UInt32): Int32
-    func EngStrokePath(pso: CPointer<SURFOBJ>, ppo: CPointer<PATHOBJ>, pco: CPointer<CLIPOBJ>, pxo: CPointer<XFORMOBJ>, pbo: CPointer<BRUSHOBJ>, pptlBrushOrg: CPointer<Win32_Foundation.POINTL>, plineattrs: CPointer<LINEATTRS>, mix: UInt32): Int32
-    func PATHOBJ_vEnumStartClipLines(ppo: CPointer<PATHOBJ>, pco: CPointer<CLIPOBJ>, pso: CPointer<SURFOBJ>, pla: CPointer<LINEATTRS>): Unit
+    func FONTOBJ_cGetAllGlyphHandles(pfo: CPointer<FONTOBJ>, phg: CPointer<UInt32>): UInt32
 }
 
-@When[GDI32 == "on" && (((arch == "x86_64" && Windows_Win32_Graphics_Gdi == "on") || (arch == "aarch64" && Windows_Win32_Graphics_Gdi == "on")) && Windows_Win32_Graphics_Gdi == "on")]
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_FONTOBJ_cGetAllGlyphHandles == "on"]
+public unsafe func Windows_FONTOBJ_cGetAllGlyphHandles(pfo: CPointer<FONTOBJ>, phg: CPointer<UInt32>): UInt32 {
+    return FONTOBJ_cGetAllGlyphHandles(pfo, phg)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_FONTOBJ_cGetGlyphs == "on"]
+foreign {
+    func FONTOBJ_cGetGlyphs(pfo: CPointer<FONTOBJ>, iMode: UInt32, cGlyph: UInt32, phg: CPointer<UInt32>, ppvGlyph: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_FONTOBJ_cGetGlyphs == "on"]
+public unsafe func Windows_FONTOBJ_cGetGlyphs(pfo: CPointer<FONTOBJ>, iMode: UInt32, cGlyph: UInt32, phg: CPointer<UInt32>, ppvGlyph: CPointer<CPointer<Unit>>): UInt32 {
+    return FONTOBJ_cGetGlyphs(pfo, iMode, cGlyph, phg, ppvGlyph)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_FONTOBJ_pQueryGlyphAttrs == "on"]
+foreign {
+    func FONTOBJ_pQueryGlyphAttrs(pfo: CPointer<FONTOBJ>, iMode: UInt32): CPointer<FD_GLYPHATTR>
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_FONTOBJ_pQueryGlyphAttrs == "on"]
+public unsafe func Windows_FONTOBJ_pQueryGlyphAttrs(pfo: CPointer<FONTOBJ>, iMode: UInt32): CPointer<FD_GLYPHATTR> {
+    return FONTOBJ_pQueryGlyphAttrs(pfo, iMode)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_FONTOBJ_pfdg == "on"]
+foreign {
+    func FONTOBJ_pfdg(pfo: CPointer<FONTOBJ>): CPointer<FD_GLYPHSET>
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_FONTOBJ_pfdg == "on"]
+public unsafe func Windows_FONTOBJ_pfdg(pfo: CPointer<FONTOBJ>): CPointer<FD_GLYPHSET> {
+    return FONTOBJ_pfdg(pfo)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_FONTOBJ_pifi == "on" && (((arch == "x86_64" && Windows_Win32_Graphics_Gdi == "on") || (arch == "aarch64" && Windows_Win32_Graphics_Gdi == "on")) && Windows_Win32_Graphics_Gdi == "on")]
 foreign {
     func FONTOBJ_pifi(pfo: CPointer<FONTOBJ>): CPointer<IFIMETRICS>
 }
 
-@When[GDI32 == "on" && ((arch == "x86_64" || arch == "aarch64"))]
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_FONTOBJ_pifi == "on" && (((arch == "x86_64" && Windows_Win32_Graphics_Gdi == "on") || (arch == "aarch64" && Windows_Win32_Graphics_Gdi == "on")) && Windows_Win32_Graphics_Gdi == "on")]
+public unsafe func Windows_FONTOBJ_pifi(pfo: CPointer<FONTOBJ>): CPointer<IFIMETRICS> {
+    return FONTOBJ_pifi(pfo)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_FONTOBJ_pvTrueTypeFontFile == "on"]
+foreign {
+    func FONTOBJ_pvTrueTypeFontFile(pfo: CPointer<FONTOBJ>, pcjFile: CPointer<UInt32>): CPointer<Unit>
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_FONTOBJ_pvTrueTypeFontFile == "on"]
+public unsafe func Windows_FONTOBJ_pvTrueTypeFontFile(pfo: CPointer<FONTOBJ>, pcjFile: CPointer<UInt32>): CPointer<Unit> {
+    return FONTOBJ_pvTrueTypeFontFile(pfo, pcjFile)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_FONTOBJ_pxoGetXform == "on"]
+foreign {
+    func FONTOBJ_pxoGetXform(pfo: CPointer<FONTOBJ>): CPointer<XFORMOBJ>
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_FONTOBJ_pxoGetXform == "on"]
+public unsafe func Windows_FONTOBJ_pxoGetXform(pfo: CPointer<FONTOBJ>): CPointer<XFORMOBJ> {
+    return FONTOBJ_pxoGetXform(pfo)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_FONTOBJ_vGetInfo == "on"]
+foreign {
+    func FONTOBJ_vGetInfo(pfo: CPointer<FONTOBJ>, cjSize: UInt32, pfi: CPointer<FONTINFO>): Unit
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_FONTOBJ_vGetInfo == "on"]
+public unsafe func Windows_FONTOBJ_vGetInfo(pfo: CPointer<FONTOBJ>, cjSize: UInt32, pfi: CPointer<FONTINFO>): Unit {
+    FONTOBJ_vGetInfo(pfo, cjSize, pfi)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_HT_Get8BPPFormatPalette == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    // param-hint: pPaletteEntry optional
+    func HT_Get8BPPFormatPalette(pPaletteEntry: CPointer<Win32_Graphics_Gdi.PALETTEENTRY>, RedGamma: UInt16, GreenGamma: UInt16, BlueGamma: UInt16): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_HT_Get8BPPFormatPalette == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_HT_Get8BPPFormatPalette(pPaletteEntry: CPointer<Win32_Graphics_Gdi.PALETTEENTRY>, RedGamma: UInt16, GreenGamma: UInt16, BlueGamma: UInt16): Int32 {
+    return HT_Get8BPPFormatPalette(pPaletteEntry, RedGamma, GreenGamma, BlueGamma)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_HT_Get8BPPMaskPalette == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    // param-hint: pPaletteEntry optional
+    func HT_Get8BPPMaskPalette(pPaletteEntry: CPointer<Win32_Graphics_Gdi.PALETTEENTRY>, Use8BPPMaskPal: Int32, CMYMask: UInt8, RedGamma: UInt16, GreenGamma: UInt16, BlueGamma: UInt16): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_HT_Get8BPPMaskPalette == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_HT_Get8BPPMaskPalette(pPaletteEntry: CPointer<Win32_Graphics_Gdi.PALETTEENTRY>, Use8BPPMaskPal: Int32, CMYMask: UInt8, RedGamma: UInt16, GreenGamma: UInt16, BlueGamma: UInt16): Int32 {
+    return HT_Get8BPPMaskPalette(pPaletteEntry, Use8BPPMaskPal, CMYMask, RedGamma, GreenGamma, BlueGamma)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_PATHOBJ_bEnum == "on"]
+foreign {
+    func PATHOBJ_bEnum(ppo: CPointer<PATHOBJ>, ppd: CPointer<PATHDATA>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_PATHOBJ_bEnum == "on"]
+public unsafe func Windows_PATHOBJ_bEnum(ppo: CPointer<PATHOBJ>, ppd: CPointer<PATHDATA>): Int32 {
+    return PATHOBJ_bEnum(ppo, ppd)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_PATHOBJ_bEnumClipLines == "on"]
+foreign {
+    func PATHOBJ_bEnumClipLines(ppo: CPointer<PATHOBJ>, cb: UInt32, pcl: CPointer<CLIPLINE>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_PATHOBJ_bEnumClipLines == "on"]
+public unsafe func Windows_PATHOBJ_bEnumClipLines(ppo: CPointer<PATHOBJ>, cb: UInt32, pcl: CPointer<CLIPLINE>): Int32 {
+    return PATHOBJ_bEnumClipLines(ppo, cb, pcl)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_PATHOBJ_vEnumStart == "on"]
+foreign {
+    func PATHOBJ_vEnumStart(ppo: CPointer<PATHOBJ>): Unit
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_PATHOBJ_vEnumStart == "on"]
+public unsafe func Windows_PATHOBJ_vEnumStart(ppo: CPointer<PATHOBJ>): Unit {
+    PATHOBJ_vEnumStart(ppo)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_PATHOBJ_vEnumStartClipLines == "on" && ((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64")) || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64")))]
+foreign {
+    func PATHOBJ_vEnumStartClipLines(ppo: CPointer<PATHOBJ>, pco: CPointer<CLIPOBJ>, pso: CPointer<SURFOBJ>, pla: CPointer<LINEATTRS>): Unit
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_PATHOBJ_vEnumStartClipLines == "on" && ((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64")) || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64")))]
+public unsafe func Windows_PATHOBJ_vEnumStartClipLines(ppo: CPointer<PATHOBJ>, pco: CPointer<CLIPOBJ>, pso: CPointer<SURFOBJ>, pla: CPointer<LINEATTRS>): Unit {
+    PATHOBJ_vEnumStartClipLines(ppo, pco, pso, pla)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_PATHOBJ_vGetBounds == "on"]
+foreign {
+    func PATHOBJ_vGetBounds(ppo: CPointer<PATHOBJ>, prectfx: CPointer<RECTFX>): Unit
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_PATHOBJ_vGetBounds == "on"]
+public unsafe func Windows_PATHOBJ_vGetBounds(ppo: CPointer<PATHOBJ>, prectfx: CPointer<RECTFX>): Unit {
+    PATHOBJ_vGetBounds(ppo, prectfx)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_STROBJ_bEnum == "on"]
+foreign {
+    func STROBJ_bEnum(pstro: CPointer<STROBJ>, pc: CPointer<UInt32>, ppgpos: CPointer<CPointer<GLYPHPOS>>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_STROBJ_bEnum == "on"]
+public unsafe func Windows_STROBJ_bEnum(pstro: CPointer<STROBJ>, pc: CPointer<UInt32>, ppgpos: CPointer<CPointer<GLYPHPOS>>): Int32 {
+    return STROBJ_bEnum(pstro, pc, ppgpos)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_STROBJ_bEnumPositionsOnly == "on"]
+foreign {
+    func STROBJ_bEnumPositionsOnly(pstro: CPointer<STROBJ>, pc: CPointer<UInt32>, ppgpos: CPointer<CPointer<GLYPHPOS>>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_STROBJ_bEnumPositionsOnly == "on"]
+public unsafe func Windows_STROBJ_bEnumPositionsOnly(pstro: CPointer<STROBJ>, pc: CPointer<UInt32>, ppgpos: CPointer<CPointer<GLYPHPOS>>): Int32 {
+    return STROBJ_bEnumPositionsOnly(pstro, pc, ppgpos)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_STROBJ_bGetAdvanceWidths == "on"]
+foreign {
+    func STROBJ_bGetAdvanceWidths(pso: CPointer<STROBJ>, iFirst: UInt32, c: UInt32, pptqD: CPointer<POINTQF>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_STROBJ_bGetAdvanceWidths == "on"]
+public unsafe func Windows_STROBJ_bGetAdvanceWidths(pso: CPointer<STROBJ>, iFirst: UInt32, c: UInt32, pptqD: CPointer<POINTQF>): Int32 {
+    return STROBJ_bGetAdvanceWidths(pso, iFirst, c, pptqD)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_STROBJ_dwGetCodePage == "on"]
+foreign {
+    func STROBJ_dwGetCodePage(pstro: CPointer<STROBJ>): UInt32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_STROBJ_dwGetCodePage == "on"]
+public unsafe func Windows_STROBJ_dwGetCodePage(pstro: CPointer<STROBJ>): UInt32 {
+    return STROBJ_dwGetCodePage(pstro)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_STROBJ_vEnumStart == "on"]
+foreign {
+    func STROBJ_vEnumStart(pstro: CPointer<STROBJ>): Unit
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_STROBJ_vEnumStart == "on"]
+public unsafe func Windows_STROBJ_vEnumStart(pstro: CPointer<STROBJ>): Unit {
+    STROBJ_vEnumStart(pstro)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_XFORMOBJ_bApplyXform == "on"]
+foreign {
+    func XFORMOBJ_bApplyXform(pxo: CPointer<XFORMOBJ>, iMode: UInt32, cPoints: UInt32, pvIn: CPointer<Unit>, pvOut: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_XFORMOBJ_bApplyXform == "on"]
+public unsafe func Windows_XFORMOBJ_bApplyXform(pxo: CPointer<XFORMOBJ>, iMode: UInt32, cPoints: UInt32, pvIn: CPointer<Unit>, pvOut: CPointer<Unit>): Int32 {
+    return XFORMOBJ_bApplyXform(pxo, iMode, cPoints, pvIn, pvOut)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_XFORMOBJ_iGetXform == "on" && (arch == "x86_64" || arch == "aarch64")]
 foreign {
     // param-hint: pxform optional
     func XFORMOBJ_iGetXform(pxo: CPointer<XFORMOBJ>, pxform: CPointer<XFORML>): UInt32
 }
 
-@When[GDI32 == "on" && Windows_Win32_Graphics_Gdi == "on"]
-foreign {
-    func EngAlphaBlend(psoDest: CPointer<SURFOBJ>, psoSrc: CPointer<SURFOBJ>, pco: CPointer<CLIPOBJ>, pxlo: CPointer<XLATEOBJ>, prclDest: CPointer<Win32_Foundation.RECTL>, prclSrc: CPointer<Win32_Foundation.RECTL>, pBlendObj: CPointer<BLENDOBJ>): Int32
-    func EngCreateBitmap(sizl: Win32_Foundation.SIZE, lWidth: Int32, iFormat: UInt32, fl: UInt32, pvBits: CPointer<Unit>): Win32_Graphics_Gdi.HBITMAP
-    func EngCreateDeviceBitmap(dhsurf: DHSURF, sizl: Win32_Foundation.SIZE, iFormatCompat: UInt32): Win32_Graphics_Gdi.HBITMAP
-    func EngCreatePalette(iMode: UInt32, cColors: UInt32, pulColors: CPointer<UInt32>, flRed: UInt32, flGreen: UInt32, flBlue: UInt32): Win32_Graphics_Gdi.HPALETTE
-    func EngDeletePalette(hpal: Win32_Graphics_Gdi.HPALETTE): Int32
-    func EngGradientFill(psoDest: CPointer<SURFOBJ>, pco: CPointer<CLIPOBJ>, pxlo: CPointer<XLATEOBJ>, pVertex: CPointer<Win32_Graphics_Gdi.TRIVERTEX>, nVertex: UInt32, pMesh: CPointer<Unit>, nMesh: UInt32, prclExtents: CPointer<Win32_Foundation.RECTL>, pptlDitherOrg: CPointer<Win32_Foundation.POINTL>, ulMode: UInt32): Int32
-    func EngPlgBlt(psoTrg: CPointer<SURFOBJ>, psoSrc: CPointer<SURFOBJ>, psoMsk: CPointer<SURFOBJ>, pco: CPointer<CLIPOBJ>, pxlo: CPointer<XLATEOBJ>, pca: CPointer<Win32_Graphics_Gdi.COLORADJUSTMENT>, pptlBrushOrg: CPointer<Win32_Foundation.POINTL>, pptfx: CPointer<POINTFIX>, prcl: CPointer<Win32_Foundation.RECTL>, pptl: CPointer<Win32_Foundation.POINTL>, iMode: UInt32): Int32
-    func EngQueryEMFInfo(hdev: HDEV, pEMFInfo: CPointer<EMFINFO>): Int32
-    func EngStretchBlt(psoDest: CPointer<SURFOBJ>, psoSrc: CPointer<SURFOBJ>, psoMask: CPointer<SURFOBJ>, pco: CPointer<CLIPOBJ>, pxlo: CPointer<XLATEOBJ>, pca: CPointer<Win32_Graphics_Gdi.COLORADJUSTMENT>, pptlHTOrg: CPointer<Win32_Foundation.POINTL>, prclDest: CPointer<Win32_Foundation.RECTL>, prclSrc: CPointer<Win32_Foundation.RECTL>, pptlMask: CPointer<Win32_Foundation.POINTL>, iMode: UInt32): Int32
-    func EngStretchBltROP(psoDest: CPointer<SURFOBJ>, psoSrc: CPointer<SURFOBJ>, psoMask: CPointer<SURFOBJ>, pco: CPointer<CLIPOBJ>, pxlo: CPointer<XLATEOBJ>, pca: CPointer<Win32_Graphics_Gdi.COLORADJUSTMENT>, pptlHTOrg: CPointer<Win32_Foundation.POINTL>, prclDest: CPointer<Win32_Foundation.RECTL>, prclSrc: CPointer<Win32_Foundation.RECTL>, pptlMask: CPointer<Win32_Foundation.POINTL>, iMode: UInt32, pbo: CPointer<BRUSHOBJ>, rop4: UInt32): Int32
-    // param-hint: pPaletteEntry optional
-    func HT_Get8BPPFormatPalette(pPaletteEntry: CPointer<Win32_Graphics_Gdi.PALETTEENTRY>, RedGamma: UInt16, GreenGamma: UInt16, BlueGamma: UInt16): Int32
-    // param-hint: pPaletteEntry optional
-    func HT_Get8BPPMaskPalette(pPaletteEntry: CPointer<Win32_Graphics_Gdi.PALETTEENTRY>, Use8BPPMaskPal: Int32, CMYMask: UInt8, RedGamma: UInt16, GreenGamma: UInt16, BlueGamma: UInt16): Int32
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_XFORMOBJ_iGetXform == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_XFORMOBJ_iGetXform(pxo: CPointer<XFORMOBJ>, pxform: CPointer<XFORML>): UInt32 {
+    return XFORMOBJ_iGetXform(pxo, pxform)
 }
 
-@When[USER32 == "on"]
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_XLATEOBJ_cGetPalette == "on"]
+foreign {
+    func XLATEOBJ_cGetPalette(pxlo: CPointer<XLATEOBJ>, iPal: UInt32, cPal: UInt32, pPal: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_XLATEOBJ_cGetPalette == "on"]
+public unsafe func Windows_XLATEOBJ_cGetPalette(pxlo: CPointer<XLATEOBJ>, iPal: UInt32, cPal: UInt32, pPal: CPointer<UInt32>): UInt32 {
+    return XLATEOBJ_cGetPalette(pxlo, iPal, cPal, pPal)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_XLATEOBJ_hGetColorTransform == "on"]
+foreign {
+    func XLATEOBJ_hGetColorTransform(pxlo: CPointer<XLATEOBJ>): CPointer<Unit>
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_XLATEOBJ_hGetColorTransform == "on"]
+public unsafe func Windows_XLATEOBJ_hGetColorTransform(pxlo: CPointer<XLATEOBJ>): CPointer<Unit> {
+    return XLATEOBJ_hGetColorTransform(pxlo)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_XLATEOBJ_iXlate == "on"]
+foreign {
+    func XLATEOBJ_iXlate(pxlo: CPointer<XLATEOBJ>, iColor: UInt32): UInt32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_XLATEOBJ_iXlate == "on"]
+public unsafe func Windows_XLATEOBJ_iXlate(pxlo: CPointer<XLATEOBJ>, iColor: UInt32): UInt32 {
+    return XLATEOBJ_iXlate(pxlo, iColor)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_XLATEOBJ_piVector == "on"]
+foreign {
+    func XLATEOBJ_piVector(pxlo: CPointer<XLATEOBJ>): CPointer<UInt32>
+}
+
+@When[Windows_Win32_Devices_Display == "on" && GDI32 == "on" && Windows_Win32_Devices_Display_XLATEOBJ_piVector == "on"]
+public unsafe func Windows_XLATEOBJ_piVector(pxlo: CPointer<XLATEOBJ>): CPointer<UInt32> {
+    return XLATEOBJ_piVector(pxlo)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && USER32 == "on" && Windows_Win32_Devices_Display_DisplayConfigGetDeviceInfo == "on"]
 foreign {
     func DisplayConfigGetDeviceInfo(requestPacket: CPointer<DISPLAYCONFIG_DEVICE_INFO_HEADER>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && USER32 == "on" && Windows_Win32_Devices_Display_DisplayConfigGetDeviceInfo == "on"]
+public unsafe func Windows_DisplayConfigGetDeviceInfo(requestPacket: CPointer<DISPLAYCONFIG_DEVICE_INFO_HEADER>): Int32 {
+    return DisplayConfigGetDeviceInfo(requestPacket)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && USER32 == "on" && Windows_Win32_Devices_Display_DisplayConfigSetDeviceInfo == "on"]
+foreign {
     func DisplayConfigSetDeviceInfo(setPacket: CPointer<DISPLAYCONFIG_DEVICE_INFO_HEADER>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && USER32 == "on" && Windows_Win32_Devices_Display_DisplayConfigSetDeviceInfo == "on"]
+public unsafe func Windows_DisplayConfigSetDeviceInfo(setPacket: CPointer<DISPLAYCONFIG_DEVICE_INFO_HEADER>): Int32 {
+    return DisplayConfigSetDeviceInfo(setPacket)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && USER32 == "on" && Windows_Win32_Devices_Display_GetAutoRotationState == "on"]
+foreign {
     func GetAutoRotationState(pState: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && USER32 == "on" && Windows_Win32_Devices_Display_GetAutoRotationState == "on"]
+public unsafe func Windows_GetAutoRotationState(pState: CPointer<Int32>): Int32 {
+    return GetAutoRotationState(pState)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && USER32 == "on" && Windows_Win32_Devices_Display_GetDisplayAutoRotationPreferences == "on"]
+foreign {
     func GetDisplayAutoRotationPreferences(pOrientation: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && USER32 == "on" && Windows_Win32_Devices_Display_GetDisplayAutoRotationPreferences == "on"]
+public unsafe func Windows_GetDisplayAutoRotationPreferences(pOrientation: CPointer<Int32>): Int32 {
+    return GetDisplayAutoRotationPreferences(pOrientation)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && USER32 == "on" && Windows_Win32_Devices_Display_GetDisplayConfigBufferSizes == "on"]
+foreign {
     func GetDisplayConfigBufferSizes(flags: UInt32, numPathArrayElements: CPointer<UInt32>, numModeInfoArrayElements: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && USER32 == "on" && Windows_Win32_Devices_Display_GetDisplayConfigBufferSizes == "on"]
+public unsafe func Windows_GetDisplayConfigBufferSizes(flags: UInt32, numPathArrayElements: CPointer<UInt32>, numModeInfoArrayElements: CPointer<UInt32>): UInt32 {
+    return GetDisplayConfigBufferSizes(flags, numPathArrayElements, numModeInfoArrayElements)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && USER32 == "on" && Windows_Win32_Devices_Display_QueryDisplayConfig == "on"]
+foreign {
     // param-hint: pathArray len=param[1]
     // param-hint: modeInfoArray len=param[3]
     // param-hint: currentTopologyId optional
     func QueryDisplayConfig(flags: UInt32, numPathArrayElements: CPointer<UInt32>, pathArray: CPointer<DISPLAYCONFIG_PATH_INFO>, numModeInfoArrayElements: CPointer<UInt32>, modeInfoArray: CPointer<DISPLAYCONFIG_MODE_INFO>, currentTopologyId: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && USER32 == "on" && Windows_Win32_Devices_Display_QueryDisplayConfig == "on"]
+public unsafe func Windows_QueryDisplayConfig(flags: UInt32, numPathArrayElements: CPointer<UInt32>, pathArray: CPointer<DISPLAYCONFIG_PATH_INFO>, numModeInfoArrayElements: CPointer<UInt32>, modeInfoArray: CPointer<DISPLAYCONFIG_MODE_INFO>, currentTopologyId: CPointer<Int32>): UInt32 {
+    return QueryDisplayConfig(flags, numPathArrayElements, pathArray, numModeInfoArrayElements, modeInfoArray, currentTopologyId)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && USER32 == "on" && Windows_Win32_Devices_Display_SetDisplayAutoRotationPreferences == "on"]
+foreign {
     func SetDisplayAutoRotationPreferences(orientation: Int32): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && USER32 == "on" && Windows_Win32_Devices_Display_SetDisplayAutoRotationPreferences == "on"]
+public unsafe func Windows_SetDisplayAutoRotationPreferences(orientation: Int32): Int32 {
+    return SetDisplayAutoRotationPreferences(orientation)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && USER32 == "on" && Windows_Win32_Devices_Display_SetDisplayConfig == "on"]
+foreign {
     // param-hint: pathArray len=param[0] optional
     // param-hint: modeInfoArray len=param[2] optional
     func SetDisplayConfig(numPathArrayElements: UInt32, pathArray: CPointer<DISPLAYCONFIG_PATH_INFO>, numModeInfoArrayElements: UInt32, modeInfoArray: CPointer<DISPLAYCONFIG_MODE_INFO>, flags: UInt32): Int32
 }
 
-@When[DXVA2 == "on"]
+@When[Windows_Win32_Devices_Display == "on" && USER32 == "on" && Windows_Win32_Devices_Display_SetDisplayConfig == "on"]
+public unsafe func Windows_SetDisplayConfig(numPathArrayElements: UInt32, pathArray: CPointer<DISPLAYCONFIG_PATH_INFO>, numModeInfoArrayElements: UInt32, modeInfoArray: CPointer<DISPLAYCONFIG_MODE_INFO>, flags: UInt32): Int32 {
+    return SetDisplayConfig(numPathArrayElements, pathArray, numModeInfoArrayElements, modeInfoArray, flags)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_CapabilitiesRequestAndCapabilitiesReply == "on"]
 foreign {
     // param-hint: pszASCIICapabilitiesString len=param[2]
     // pinvoke-hint: SetLastError
     func CapabilitiesRequestAndCapabilitiesReply(hMonitor: CPointer<Unit>, pszASCIICapabilitiesString: CPointer<UInt8>, dwCapabilitiesStringLengthInCharacters: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_CapabilitiesRequestAndCapabilitiesReply == "on"]
+public unsafe func Windows_CapabilitiesRequestAndCapabilitiesReply(hMonitor: CPointer<Unit>, pszASCIICapabilitiesString: CPointer<UInt8>, dwCapabilitiesStringLengthInCharacters: UInt32): Int32 {
+    return CapabilitiesRequestAndCapabilitiesReply(hMonitor, pszASCIICapabilitiesString, dwCapabilitiesStringLengthInCharacters)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_DegaussMonitor == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func DegaussMonitor(hMonitor: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_DegaussMonitor == "on"]
+public unsafe func Windows_DegaussMonitor(hMonitor: CPointer<Unit>): Int32 {
+    return DegaussMonitor(hMonitor)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_DestroyPhysicalMonitor == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func DestroyPhysicalMonitor(hMonitor: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_DestroyPhysicalMonitor == "on"]
+public unsafe func Windows_DestroyPhysicalMonitor(hMonitor: CPointer<Unit>): Int32 {
+    return DestroyPhysicalMonitor(hMonitor)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_DestroyPhysicalMonitors == "on"]
+foreign {
     // param-hint: pPhysicalMonitorArray len=param[0]
     // pinvoke-hint: SetLastError
     func DestroyPhysicalMonitors(dwPhysicalMonitorArraySize: UInt32, pPhysicalMonitorArray: CPointer<PHYSICAL_MONITOR>): Int32
-    // pinvoke-hint: SetLastError
-    func GetCapabilitiesStringLength(hMonitor: CPointer<Unit>, pdwCapabilitiesStringLengthInCharacters: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func GetMonitorBrightness(hMonitor: CPointer<Unit>, pdwMinimumBrightness: CPointer<UInt32>, pdwCurrentBrightness: CPointer<UInt32>, pdwMaximumBrightness: CPointer<UInt32>): Int32
-    func GetMonitorCapabilities(hMonitor: CPointer<Unit>, pdwMonitorCapabilities: CPointer<UInt32>, pdwSupportedColorTemperatures: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func GetMonitorColorTemperature(hMonitor: CPointer<Unit>, pctCurrentColorTemperature: CPointer<Int32>): Int32
-    // pinvoke-hint: SetLastError
-    func GetMonitorContrast(hMonitor: CPointer<Unit>, pdwMinimumContrast: CPointer<UInt32>, pdwCurrentContrast: CPointer<UInt32>, pdwMaximumContrast: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func GetMonitorDisplayAreaPosition(hMonitor: CPointer<Unit>, ptPositionType: Int32, pdwMinimumPosition: CPointer<UInt32>, pdwCurrentPosition: CPointer<UInt32>, pdwMaximumPosition: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func GetMonitorDisplayAreaSize(hMonitor: CPointer<Unit>, stSizeType: Int32, pdwMinimumWidthOrHeight: CPointer<UInt32>, pdwCurrentWidthOrHeight: CPointer<UInt32>, pdwMaximumWidthOrHeight: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func GetMonitorRedGreenOrBlueDrive(hMonitor: CPointer<Unit>, dtDriveType: Int32, pdwMinimumDrive: CPointer<UInt32>, pdwCurrentDrive: CPointer<UInt32>, pdwMaximumDrive: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func GetMonitorRedGreenOrBlueGain(hMonitor: CPointer<Unit>, gtGainType: Int32, pdwMinimumGain: CPointer<UInt32>, pdwCurrentGain: CPointer<UInt32>, pdwMaximumGain: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func GetMonitorTechnologyType(hMonitor: CPointer<Unit>, pdtyDisplayTechnologyType: CPointer<Int32>): Int32
-    // pinvoke-hint: SetLastError
-    func GetTimingReport(hMonitor: CPointer<Unit>, pmtrMonitorTimingReport: CPointer<MC_TIMING_REPORT>): Int32
-    // param-hint: pvct optional
-    // param-hint: pdwMaximumValue optional
-    // pinvoke-hint: SetLastError
-    func GetVCPFeatureAndVCPFeatureReply(hMonitor: CPointer<Unit>, bVCPCode: UInt8, pvct: CPointer<Int32>, pdwCurrentValue: CPointer<UInt32>, pdwMaximumValue: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func RestoreMonitorFactoryColorDefaults(hMonitor: CPointer<Unit>): Int32
-    // pinvoke-hint: SetLastError
-    func RestoreMonitorFactoryDefaults(hMonitor: CPointer<Unit>): Int32
-    // pinvoke-hint: SetLastError
-    func SaveCurrentMonitorSettings(hMonitor: CPointer<Unit>): Int32
-    // pinvoke-hint: SetLastError
-    func SaveCurrentSettings(hMonitor: CPointer<Unit>): Int32
-    // pinvoke-hint: SetLastError
-    func SetMonitorBrightness(hMonitor: CPointer<Unit>, dwNewBrightness: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func SetMonitorColorTemperature(hMonitor: CPointer<Unit>, ctCurrentColorTemperature: Int32): Int32
-    // pinvoke-hint: SetLastError
-    func SetMonitorContrast(hMonitor: CPointer<Unit>, dwNewContrast: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func SetMonitorDisplayAreaPosition(hMonitor: CPointer<Unit>, ptPositionType: Int32, dwNewPosition: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func SetMonitorDisplayAreaSize(hMonitor: CPointer<Unit>, stSizeType: Int32, dwNewDisplayAreaWidthOrHeight: UInt32): Int32
-    func SetMonitorRedGreenOrBlueDrive(hMonitor: CPointer<Unit>, dtDriveType: Int32, dwNewDrive: UInt32): Int32
-    func SetMonitorRedGreenOrBlueGain(hMonitor: CPointer<Unit>, gtGainType: Int32, dwNewGain: UInt32): Int32
-    func SetVCPFeature(hMonitor: CPointer<Unit>, bVCPCode: UInt8, dwNewValue: UInt32): Int32
 }
 
-@When[DXVA2 == "on" && Windows_Win32_Graphics_Direct3D9 == "on"]
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_DestroyPhysicalMonitors == "on"]
+public unsafe func Windows_DestroyPhysicalMonitors(dwPhysicalMonitorArraySize: UInt32, pPhysicalMonitorArray: CPointer<PHYSICAL_MONITOR>): Int32 {
+    return DestroyPhysicalMonitors(dwPhysicalMonitorArraySize, pPhysicalMonitorArray)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_GetCapabilitiesStringLength == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func GetCapabilitiesStringLength(hMonitor: CPointer<Unit>, pdwCapabilitiesStringLengthInCharacters: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_GetCapabilitiesStringLength == "on"]
+public unsafe func Windows_GetCapabilitiesStringLength(hMonitor: CPointer<Unit>, pdwCapabilitiesStringLengthInCharacters: CPointer<UInt32>): Int32 {
+    return GetCapabilitiesStringLength(hMonitor, pdwCapabilitiesStringLengthInCharacters)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_GetMonitorBrightness == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func GetMonitorBrightness(hMonitor: CPointer<Unit>, pdwMinimumBrightness: CPointer<UInt32>, pdwCurrentBrightness: CPointer<UInt32>, pdwMaximumBrightness: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_GetMonitorBrightness == "on"]
+public unsafe func Windows_GetMonitorBrightness(hMonitor: CPointer<Unit>, pdwMinimumBrightness: CPointer<UInt32>, pdwCurrentBrightness: CPointer<UInt32>, pdwMaximumBrightness: CPointer<UInt32>): Int32 {
+    return GetMonitorBrightness(hMonitor, pdwMinimumBrightness, pdwCurrentBrightness, pdwMaximumBrightness)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_GetMonitorCapabilities == "on"]
+foreign {
+    func GetMonitorCapabilities(hMonitor: CPointer<Unit>, pdwMonitorCapabilities: CPointer<UInt32>, pdwSupportedColorTemperatures: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_GetMonitorCapabilities == "on"]
+public unsafe func Windows_GetMonitorCapabilities(hMonitor: CPointer<Unit>, pdwMonitorCapabilities: CPointer<UInt32>, pdwSupportedColorTemperatures: CPointer<UInt32>): Int32 {
+    return GetMonitorCapabilities(hMonitor, pdwMonitorCapabilities, pdwSupportedColorTemperatures)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_GetMonitorColorTemperature == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func GetMonitorColorTemperature(hMonitor: CPointer<Unit>, pctCurrentColorTemperature: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_GetMonitorColorTemperature == "on"]
+public unsafe func Windows_GetMonitorColorTemperature(hMonitor: CPointer<Unit>, pctCurrentColorTemperature: CPointer<Int32>): Int32 {
+    return GetMonitorColorTemperature(hMonitor, pctCurrentColorTemperature)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_GetMonitorContrast == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func GetMonitorContrast(hMonitor: CPointer<Unit>, pdwMinimumContrast: CPointer<UInt32>, pdwCurrentContrast: CPointer<UInt32>, pdwMaximumContrast: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_GetMonitorContrast == "on"]
+public unsafe func Windows_GetMonitorContrast(hMonitor: CPointer<Unit>, pdwMinimumContrast: CPointer<UInt32>, pdwCurrentContrast: CPointer<UInt32>, pdwMaximumContrast: CPointer<UInt32>): Int32 {
+    return GetMonitorContrast(hMonitor, pdwMinimumContrast, pdwCurrentContrast, pdwMaximumContrast)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_GetMonitorDisplayAreaPosition == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func GetMonitorDisplayAreaPosition(hMonitor: CPointer<Unit>, ptPositionType: Int32, pdwMinimumPosition: CPointer<UInt32>, pdwCurrentPosition: CPointer<UInt32>, pdwMaximumPosition: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_GetMonitorDisplayAreaPosition == "on"]
+public unsafe func Windows_GetMonitorDisplayAreaPosition(hMonitor: CPointer<Unit>, ptPositionType: Int32, pdwMinimumPosition: CPointer<UInt32>, pdwCurrentPosition: CPointer<UInt32>, pdwMaximumPosition: CPointer<UInt32>): Int32 {
+    return GetMonitorDisplayAreaPosition(hMonitor, ptPositionType, pdwMinimumPosition, pdwCurrentPosition, pdwMaximumPosition)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_GetMonitorDisplayAreaSize == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func GetMonitorDisplayAreaSize(hMonitor: CPointer<Unit>, stSizeType: Int32, pdwMinimumWidthOrHeight: CPointer<UInt32>, pdwCurrentWidthOrHeight: CPointer<UInt32>, pdwMaximumWidthOrHeight: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_GetMonitorDisplayAreaSize == "on"]
+public unsafe func Windows_GetMonitorDisplayAreaSize(hMonitor: CPointer<Unit>, stSizeType: Int32, pdwMinimumWidthOrHeight: CPointer<UInt32>, pdwCurrentWidthOrHeight: CPointer<UInt32>, pdwMaximumWidthOrHeight: CPointer<UInt32>): Int32 {
+    return GetMonitorDisplayAreaSize(hMonitor, stSizeType, pdwMinimumWidthOrHeight, pdwCurrentWidthOrHeight, pdwMaximumWidthOrHeight)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_GetMonitorRedGreenOrBlueDrive == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func GetMonitorRedGreenOrBlueDrive(hMonitor: CPointer<Unit>, dtDriveType: Int32, pdwMinimumDrive: CPointer<UInt32>, pdwCurrentDrive: CPointer<UInt32>, pdwMaximumDrive: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_GetMonitorRedGreenOrBlueDrive == "on"]
+public unsafe func Windows_GetMonitorRedGreenOrBlueDrive(hMonitor: CPointer<Unit>, dtDriveType: Int32, pdwMinimumDrive: CPointer<UInt32>, pdwCurrentDrive: CPointer<UInt32>, pdwMaximumDrive: CPointer<UInt32>): Int32 {
+    return GetMonitorRedGreenOrBlueDrive(hMonitor, dtDriveType, pdwMinimumDrive, pdwCurrentDrive, pdwMaximumDrive)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_GetMonitorRedGreenOrBlueGain == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func GetMonitorRedGreenOrBlueGain(hMonitor: CPointer<Unit>, gtGainType: Int32, pdwMinimumGain: CPointer<UInt32>, pdwCurrentGain: CPointer<UInt32>, pdwMaximumGain: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_GetMonitorRedGreenOrBlueGain == "on"]
+public unsafe func Windows_GetMonitorRedGreenOrBlueGain(hMonitor: CPointer<Unit>, gtGainType: Int32, pdwMinimumGain: CPointer<UInt32>, pdwCurrentGain: CPointer<UInt32>, pdwMaximumGain: CPointer<UInt32>): Int32 {
+    return GetMonitorRedGreenOrBlueGain(hMonitor, gtGainType, pdwMinimumGain, pdwCurrentGain, pdwMaximumGain)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_GetMonitorTechnologyType == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func GetMonitorTechnologyType(hMonitor: CPointer<Unit>, pdtyDisplayTechnologyType: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_GetMonitorTechnologyType == "on"]
+public unsafe func Windows_GetMonitorTechnologyType(hMonitor: CPointer<Unit>, pdtyDisplayTechnologyType: CPointer<Int32>): Int32 {
+    return GetMonitorTechnologyType(hMonitor, pdtyDisplayTechnologyType)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_GetNumberOfPhysicalMonitorsFromHMONITOR == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func GetNumberOfPhysicalMonitorsFromHMONITOR(hMonitor: Win32_Graphics_Gdi.HMONITOR, pdwNumberOfPhysicalMonitors: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_GetNumberOfPhysicalMonitorsFromHMONITOR == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GetNumberOfPhysicalMonitorsFromHMONITOR(hMonitor: Win32_Graphics_Gdi.HMONITOR, pdwNumberOfPhysicalMonitors: CPointer<UInt32>): Int32 {
+    return GetNumberOfPhysicalMonitorsFromHMONITOR(hMonitor, pdwNumberOfPhysicalMonitors)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_GetNumberOfPhysicalMonitorsFromIDirect3DDevice9 == "on" && Windows_Win32_Graphics_Direct3D9 == "on"]
 foreign {
     func GetNumberOfPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9: CPointer<Unit>, pdwNumberOfPhysicalMonitors: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_GetNumberOfPhysicalMonitorsFromIDirect3DDevice9 == "on" && Windows_Win32_Graphics_Direct3D9 == "on"]
+public unsafe func Windows_GetNumberOfPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9: CPointer<Unit>, pdwNumberOfPhysicalMonitors: CPointer<UInt32>): Int32 {
+    return GetNumberOfPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9, pdwNumberOfPhysicalMonitors)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_GetPhysicalMonitorsFromHMONITOR == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    // param-hint: pPhysicalMonitorArray len=param[1]
+    // pinvoke-hint: SetLastError
+    func GetPhysicalMonitorsFromHMONITOR(hMonitor: Win32_Graphics_Gdi.HMONITOR, dwPhysicalMonitorArraySize: UInt32, pPhysicalMonitorArray: CPointer<PHYSICAL_MONITOR>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_GetPhysicalMonitorsFromHMONITOR == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GetPhysicalMonitorsFromHMONITOR(hMonitor: Win32_Graphics_Gdi.HMONITOR, dwPhysicalMonitorArraySize: UInt32, pPhysicalMonitorArray: CPointer<PHYSICAL_MONITOR>): Int32 {
+    return GetPhysicalMonitorsFromHMONITOR(hMonitor, dwPhysicalMonitorArraySize, pPhysicalMonitorArray)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_GetPhysicalMonitorsFromIDirect3DDevice9 == "on" && Windows_Win32_Graphics_Direct3D9 == "on"]
+foreign {
     // param-hint: pPhysicalMonitorArray len=param[1]
     func GetPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9: CPointer<Unit>, dwPhysicalMonitorArraySize: UInt32, pPhysicalMonitorArray: CPointer<PHYSICAL_MONITOR>): Int32
 }
 
-@When[DXVA2 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_GetPhysicalMonitorsFromIDirect3DDevice9 == "on" && Windows_Win32_Graphics_Direct3D9 == "on"]
+public unsafe func Windows_GetPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9: CPointer<Unit>, dwPhysicalMonitorArraySize: UInt32, pPhysicalMonitorArray: CPointer<PHYSICAL_MONITOR>): Int32 {
+    return GetPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9, dwPhysicalMonitorArraySize, pPhysicalMonitorArray)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_GetTimingReport == "on"]
 foreign {
     // pinvoke-hint: SetLastError
-    func GetNumberOfPhysicalMonitorsFromHMONITOR(hMonitor: Win32_Graphics_Gdi.HMONITOR, pdwNumberOfPhysicalMonitors: CPointer<UInt32>): Int32
-    // param-hint: pPhysicalMonitorArray len=param[1]
+    func GetTimingReport(hMonitor: CPointer<Unit>, pmtrMonitorTimingReport: CPointer<MC_TIMING_REPORT>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_GetTimingReport == "on"]
+public unsafe func Windows_GetTimingReport(hMonitor: CPointer<Unit>, pmtrMonitorTimingReport: CPointer<MC_TIMING_REPORT>): Int32 {
+    return GetTimingReport(hMonitor, pmtrMonitorTimingReport)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_GetVCPFeatureAndVCPFeatureReply == "on"]
+foreign {
+    // param-hint: pvct optional
+    // param-hint: pdwMaximumValue optional
     // pinvoke-hint: SetLastError
-    func GetPhysicalMonitorsFromHMONITOR(hMonitor: Win32_Graphics_Gdi.HMONITOR, dwPhysicalMonitorArraySize: UInt32, pPhysicalMonitorArray: CPointer<PHYSICAL_MONITOR>): Int32
+    func GetVCPFeatureAndVCPFeatureReply(hMonitor: CPointer<Unit>, bVCPCode: UInt8, pvct: CPointer<Int32>, pdwCurrentValue: CPointer<UInt32>, pdwMaximumValue: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_GetVCPFeatureAndVCPFeatureReply == "on"]
+public unsafe func Windows_GetVCPFeatureAndVCPFeatureReply(hMonitor: CPointer<Unit>, bVCPCode: UInt8, pvct: CPointer<Int32>, pdwCurrentValue: CPointer<UInt32>, pdwMaximumValue: CPointer<UInt32>): Int32 {
+    return GetVCPFeatureAndVCPFeatureReply(hMonitor, bVCPCode, pvct, pdwCurrentValue, pdwMaximumValue)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_RestoreMonitorFactoryColorDefaults == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func RestoreMonitorFactoryColorDefaults(hMonitor: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_RestoreMonitorFactoryColorDefaults == "on"]
+public unsafe func Windows_RestoreMonitorFactoryColorDefaults(hMonitor: CPointer<Unit>): Int32 {
+    return RestoreMonitorFactoryColorDefaults(hMonitor)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_RestoreMonitorFactoryDefaults == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func RestoreMonitorFactoryDefaults(hMonitor: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_RestoreMonitorFactoryDefaults == "on"]
+public unsafe func Windows_RestoreMonitorFactoryDefaults(hMonitor: CPointer<Unit>): Int32 {
+    return RestoreMonitorFactoryDefaults(hMonitor)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_SaveCurrentMonitorSettings == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SaveCurrentMonitorSettings(hMonitor: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_SaveCurrentMonitorSettings == "on"]
+public unsafe func Windows_SaveCurrentMonitorSettings(hMonitor: CPointer<Unit>): Int32 {
+    return SaveCurrentMonitorSettings(hMonitor)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_SaveCurrentSettings == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SaveCurrentSettings(hMonitor: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_SaveCurrentSettings == "on"]
+public unsafe func Windows_SaveCurrentSettings(hMonitor: CPointer<Unit>): Int32 {
+    return SaveCurrentSettings(hMonitor)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_SetMonitorBrightness == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetMonitorBrightness(hMonitor: CPointer<Unit>, dwNewBrightness: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_SetMonitorBrightness == "on"]
+public unsafe func Windows_SetMonitorBrightness(hMonitor: CPointer<Unit>, dwNewBrightness: UInt32): Int32 {
+    return SetMonitorBrightness(hMonitor, dwNewBrightness)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_SetMonitorColorTemperature == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetMonitorColorTemperature(hMonitor: CPointer<Unit>, ctCurrentColorTemperature: Int32): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_SetMonitorColorTemperature == "on"]
+public unsafe func Windows_SetMonitorColorTemperature(hMonitor: CPointer<Unit>, ctCurrentColorTemperature: Int32): Int32 {
+    return SetMonitorColorTemperature(hMonitor, ctCurrentColorTemperature)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_SetMonitorContrast == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetMonitorContrast(hMonitor: CPointer<Unit>, dwNewContrast: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_SetMonitorContrast == "on"]
+public unsafe func Windows_SetMonitorContrast(hMonitor: CPointer<Unit>, dwNewContrast: UInt32): Int32 {
+    return SetMonitorContrast(hMonitor, dwNewContrast)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_SetMonitorDisplayAreaPosition == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetMonitorDisplayAreaPosition(hMonitor: CPointer<Unit>, ptPositionType: Int32, dwNewPosition: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_SetMonitorDisplayAreaPosition == "on"]
+public unsafe func Windows_SetMonitorDisplayAreaPosition(hMonitor: CPointer<Unit>, ptPositionType: Int32, dwNewPosition: UInt32): Int32 {
+    return SetMonitorDisplayAreaPosition(hMonitor, ptPositionType, dwNewPosition)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_SetMonitorDisplayAreaSize == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetMonitorDisplayAreaSize(hMonitor: CPointer<Unit>, stSizeType: Int32, dwNewDisplayAreaWidthOrHeight: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_SetMonitorDisplayAreaSize == "on"]
+public unsafe func Windows_SetMonitorDisplayAreaSize(hMonitor: CPointer<Unit>, stSizeType: Int32, dwNewDisplayAreaWidthOrHeight: UInt32): Int32 {
+    return SetMonitorDisplayAreaSize(hMonitor, stSizeType, dwNewDisplayAreaWidthOrHeight)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_SetMonitorRedGreenOrBlueDrive == "on"]
+foreign {
+    func SetMonitorRedGreenOrBlueDrive(hMonitor: CPointer<Unit>, dtDriveType: Int32, dwNewDrive: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_SetMonitorRedGreenOrBlueDrive == "on"]
+public unsafe func Windows_SetMonitorRedGreenOrBlueDrive(hMonitor: CPointer<Unit>, dtDriveType: Int32, dwNewDrive: UInt32): Int32 {
+    return SetMonitorRedGreenOrBlueDrive(hMonitor, dtDriveType, dwNewDrive)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_SetMonitorRedGreenOrBlueGain == "on"]
+foreign {
+    func SetMonitorRedGreenOrBlueGain(hMonitor: CPointer<Unit>, gtGainType: Int32, dwNewGain: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_SetMonitorRedGreenOrBlueGain == "on"]
+public unsafe func Windows_SetMonitorRedGreenOrBlueGain(hMonitor: CPointer<Unit>, gtGainType: Int32, dwNewGain: UInt32): Int32 {
+    return SetMonitorRedGreenOrBlueGain(hMonitor, gtGainType, dwNewGain)
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_SetVCPFeature == "on"]
+foreign {
+    func SetVCPFeature(hMonitor: CPointer<Unit>, bVCPCode: UInt8, dwNewValue: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Display == "on" && DXVA2 == "on" && Windows_Win32_Devices_Display_SetVCPFeature == "on"]
+public unsafe func Windows_SetVCPFeature(hMonitor: CPointer<Unit>, bVCPCode: UInt8, dwNewValue: UInt32): Int32 {
+    return SetVCPFeature(hMonitor, bVCPCode, dwNewValue)
 }
 
 @When[Windows_Win32_Devices_Display == "on"]

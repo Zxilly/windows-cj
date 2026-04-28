@@ -340,7 +340,7 @@ public class IAppWindowClosedEventArgs <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IAppWindowFrameVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_UI_Composition == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Composition == "on"]
     public var DragRegionVisuals: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -385,7 +385,7 @@ public class IAppWindowFrame <: InterfaceWrapperBase & ComInterface {
         readVtbl<IAppWindowFrameVtbl>(IAppWindowFrameVtbl())
     }
 
-    @When[Windows_UI_Composition == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Composition == "on"]
     public unsafe func DragRegionVisuals(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -837,7 +837,7 @@ public class IFullScreenPresentationConfiguration <: InterfaceWrapperBase & ComI
 @C
 public struct IWindowServicesStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_UI == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI == "on"]
     public var FindAllTopLevelWindowIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -882,7 +882,7 @@ public class IWindowServicesStatics <: InterfaceWrapperBase & ComInterface {
         readVtbl<IWindowServicesStaticsVtbl>(IWindowServicesStaticsVtbl())
     }
 
-    @When[Windows_UI == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI == "on"]
     public unsafe func FindAllTopLevelWindowIds(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

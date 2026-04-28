@@ -35,21 +35,21 @@ public struct IUserDataAccountVtbl {
     public var PackageFamilyName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SaveAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var DeleteAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel_Appointments == "on"]
+    @When[Windows_ApplicationModel_Appointments == "on" && Windows_Foundation_Collections == "on"]
     public var FindAppointmentCalendarsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel_Appointments != "on"]
+    @When[Windows_ApplicationModel_Appointments != "on" || Windows_Foundation_Collections != "on"]
     public var FindAppointmentCalendarsAsync: UIntNative = UIntNative(0)
-    @When[Windows_ApplicationModel_Email == "on"]
+    @When[Windows_ApplicationModel_Email == "on" && Windows_Foundation_Collections == "on"]
     public var FindEmailMailboxesAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel_Email != "on"]
+    @When[Windows_ApplicationModel_Email != "on" || Windows_Foundation_Collections != "on"]
     public var FindEmailMailboxesAsync: UIntNative = UIntNative(0)
-    @When[Windows_ApplicationModel_Contacts == "on"]
+    @When[Windows_ApplicationModel_Contacts == "on" && Windows_Foundation_Collections == "on"]
     public var FindContactListsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel_Contacts != "on"]
+    @When[Windows_ApplicationModel_Contacts != "on" || Windows_Foundation_Collections != "on"]
     public var FindContactListsAsync: UIntNative = UIntNative(0)
-    @When[Windows_ApplicationModel_Contacts == "on"]
+    @When[Windows_ApplicationModel_Contacts == "on" && Windows_Foundation_Collections == "on"]
     public var FindContactAnnotationListsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel_Contacts != "on"]
+    @When[Windows_ApplicationModel_Contacts != "on" || Windows_Foundation_Collections != "on"]
     public var FindContactAnnotationListsAsync: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -196,7 +196,7 @@ public class IUserDataAccount <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel_Appointments == "on"]
+    @When[Windows_ApplicationModel_Appointments == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindAppointmentCalendarsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.AppointmentCalendar>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -205,7 +205,7 @@ public class IUserDataAccount <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.AppointmentCalendar>>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel_Email == "on"]
+    @When[Windows_ApplicationModel_Email == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindEmailMailboxesAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<EmailMailbox>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -214,7 +214,7 @@ public class IUserDataAccount <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_future.IAsyncOperation<windows_collections.IVectorView<EmailMailbox>>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel_Contacts == "on"]
+    @When[Windows_ApplicationModel_Contacts == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindContactListsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<ContactList>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -223,7 +223,7 @@ public class IUserDataAccount <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_future.IAsyncOperation<windows_collections.IVectorView<ContactList>>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel_Contacts == "on"]
+    @When[Windows_ApplicationModel_Contacts == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindContactAnnotationListsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.ContactAnnotationList>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -645,7 +645,10 @@ extend IUserDataAccountManagerStatics2 <: windows_core.Interface<IUserDataAccoun
 @C
 public struct IUserDataAccountStoreVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAccountsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAccountsAsync: UIntNative = UIntNative(0)
     public var GetAccountAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var CreateAccountAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
@@ -716,6 +719,7 @@ public class IUserDataAccountStore <: InterfaceWrapperBase & ComInterface & Runt
         readVtbl<IUserDataAccountStoreVtbl>(IUserDataAccountStoreVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAccountsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<UserDataAccount>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1064,22 +1068,22 @@ public class UserDataAccount <: InterfaceWrapperBase & ComInterface & windows_in
         return defaultInterface().DeleteAsync()
     }
 
-    @When[Windows_ApplicationModel_Appointments == "on"]
+    @When[Windows_ApplicationModel_Appointments == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindAppointmentCalendarsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.AppointmentCalendar>> {
         return defaultInterface().FindAppointmentCalendarsAsync()
     }
 
-    @When[Windows_ApplicationModel_Email == "on"]
+    @When[Windows_ApplicationModel_Email == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindEmailMailboxesAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<EmailMailbox>> {
         return defaultInterface().FindEmailMailboxesAsync()
     }
 
-    @When[Windows_ApplicationModel_Contacts == "on"]
+    @When[Windows_ApplicationModel_Contacts == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindContactListsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<ContactList>> {
         return defaultInterface().FindContactListsAsync()
     }
 
-    @When[Windows_ApplicationModel_Contacts == "on"]
+    @When[Windows_ApplicationModel_Contacts == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindContactAnnotationListsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.ContactAnnotationList>> {
         return defaultInterface().FindContactAnnotationListsAsync()
     }
@@ -1346,6 +1350,7 @@ public class UserDataAccountStore <: InterfaceWrapperBase & ComInterface & windo
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAccountsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<UserDataAccount>> {
         return defaultInterface().FindAccountsAsync()
     }

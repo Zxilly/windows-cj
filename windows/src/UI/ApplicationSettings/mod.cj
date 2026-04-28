@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_UI_Popups == "on"]
 import windows.UI.Popups as UI_Popups
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -1004,18 +1002,22 @@ public class AccountsSettingsPaneCommandsRequestedEventArgs <: InterfaceWrapperB
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func WebAccountProviderCommands(): windows_collections.IVector<WebAccountProviderCommand> {
         return defaultInterface().WebAccountProviderCommands()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func WebAccountCommands(): windows_collections.IVector<WebAccountCommand> {
         return defaultInterface().WebAccountCommands()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CredentialCommands(): windows_collections.IVector<CredentialCommand> {
         return defaultInterface().CredentialCommands()
     }
 
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Popups == "on"]
     public unsafe func Commands(): windows_collections.IVector<SettingsCommand> {
         return defaultInterface().Commands()
     }
@@ -1244,12 +1246,14 @@ public class CredentialCommandCredentialDeletedHandler <: InterfaceWrapperBase &
 @When[Windows_UI_ApplicationSettings == "on"]
 extend CredentialCommandCredentialDeletedHandler <: windows_core.Interface<CredentialCommandCredentialDeletedHandler> {}
 
+@When[Windows_UI_ApplicationSettings == "on"]
 private open class CredentialCommandCredentialDeletedHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_ApplicationSettings == "on"]
 private open class CredentialCommandCredentialDeletedHandlerInvoker <: CredentialCommandCredentialDeletedHandlerInvokerErased {
     public open func Invoke(command: InParam<CredentialCommand>): Unit {
         ()
@@ -1261,6 +1265,7 @@ private open class CredentialCommandCredentialDeletedHandlerInvoker <: Credentia
     }
 }
 
+@When[Windows_UI_ApplicationSettings == "on"]
 private class CredentialCommandCredentialDeletedHandlerBox <: CredentialCommandCredentialDeletedHandlerInvoker {
     public let invoke_: (InParam<CredentialCommand>) -> Unit
     private let vtblHandle: CPointerHandle<CredentialCommandCredentialDeletedHandlerVtbl>
@@ -1279,6 +1284,7 @@ private class CredentialCommandCredentialDeletedHandlerBox <: CredentialCommandC
     }
 }
 
+@When[Windows_UI_ApplicationSettings == "on"]
 func buildCredentialCommandCredentialDeletedHandlerBoxVtbl(): CredentialCommandCredentialDeletedHandlerVtbl {
     var vtbl = CredentialCommandCredentialDeletedHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -1389,10 +1395,22 @@ extend IAccountsSettingsPane <: windows_core.Interface<IAccountsSettingsPane> {}
 @C
 public struct IAccountsSettingsPaneCommandsRequestedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var WebAccountProviderCommands: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var WebAccountProviderCommands: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var WebAccountCommands: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var WebAccountCommands: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CredentialCommands: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CredentialCommands: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Popups == "on"]
     public var Commands: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on" || Windows_UI_Popups != "on"]
+    public var Commands: UIntNative = UIntNative(0)
     public var HeaderText: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetHeaderText: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetDeferral: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1464,6 +1482,7 @@ public class IAccountsSettingsPaneCommandsRequestedEventArgs <: InterfaceWrapper
         readVtbl<IAccountsSettingsPaneCommandsRequestedEventArgsVtbl>(IAccountsSettingsPaneCommandsRequestedEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func WebAccountProviderCommands(): windows_collections.IVector<WebAccountProviderCommand> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1472,6 +1491,7 @@ public class IAccountsSettingsPaneCommandsRequestedEventArgs <: InterfaceWrapper
         return windows_collections.IVector<WebAccountProviderCommand>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func WebAccountCommands(): windows_collections.IVector<WebAccountCommand> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1480,6 +1500,7 @@ public class IAccountsSettingsPaneCommandsRequestedEventArgs <: InterfaceWrapper
         return windows_collections.IVector<WebAccountCommand>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CredentialCommands(): windows_collections.IVector<CredentialCommand> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1488,6 +1509,7 @@ public class IAccountsSettingsPaneCommandsRequestedEventArgs <: InterfaceWrapper
         return windows_collections.IVector<CredentialCommand>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Popups == "on"]
     public unsafe func Commands(): windows_collections.IVector<SettingsCommand> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2013,7 +2035,10 @@ extend ISettingsCommandFactory <: windows_core.Interface<ISettingsCommandFactory
 @C
 public struct ISettingsCommandStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_UI_Popups == "on"]
     public var AccountsCommand: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_UI_Popups != "on"]
+    public var AccountsCommand: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2082,6 +2107,7 @@ public class ISettingsCommandStatics <: InterfaceWrapperBase & ComInterface & Ru
         readVtbl<ISettingsCommandStaticsVtbl>(ISettingsCommandStaticsVtbl())
     }
 
+    @When[Windows_UI_Popups == "on"]
     public unsafe func AccountsCommand(): SettingsCommand {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2190,7 +2216,10 @@ extend ISettingsPane <: windows_core.Interface<ISettingsPane> {}
 @C
 public struct ISettingsPaneCommandsRequestVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Popups == "on"]
     public var ApplicationCommands: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on" || Windows_UI_Popups != "on"]
+    public var ApplicationCommands: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2259,6 +2288,7 @@ public class ISettingsPaneCommandsRequest <: InterfaceWrapperBase & ComInterface
         readVtbl<ISettingsPaneCommandsRequestVtbl>(ISettingsPaneCommandsRequestVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Popups == "on"]
     public unsafe func ApplicationCommands(): windows_collections.IVector<SettingsCommand> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2840,7 +2870,7 @@ public class IWebAccountProviderCommandFactory <: InterfaceWrapperBase & ComInte
 @When[Windows_UI_ApplicationSettings == "on"]
 extend IWebAccountProviderCommandFactory <: windows_core.Interface<IWebAccountProviderCommandFactory> {}
 
-@When[Windows_UI_ApplicationSettings == "on"]
+@When[Windows_UI_ApplicationSettings == "on" && Windows_UI_Popups == "on"]
 public class SettingsCommand <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -2929,6 +2959,7 @@ public class SettingsCommand <: InterfaceWrapperBase & ComInterface & windows_in
         defaultInterface().SetId(value)
     }
 
+    @When[Windows_UI_Popups == "on"]
     public static unsafe func AccountsCommand(): SettingsCommand {
         var result__: Option<SettingsCommand> = Option<SettingsCommand>.None
         try (factory__ = windows_core.factory<SettingsCommand, ISettingsCommandStatics>().unwrap()) {
@@ -2953,7 +2984,7 @@ public class SettingsCommand <: InterfaceWrapperBase & ComInterface & windows_in
     }
 }
 
-@When[Windows_UI_ApplicationSettings == "on"]
+@When[Windows_UI_ApplicationSettings == "on" && Windows_UI_Popups == "on"]
 extend SettingsCommand <: windows_core.HandleWinrtType<SettingsCommand> {
     public static func intoWinrtHandle(value: SettingsCommand): CPointer<Unit> {
         value.asRaw()
@@ -3157,6 +3188,7 @@ public class SettingsPaneCommandsRequest <: InterfaceWrapperBase & ComInterface 
         }
     }
 
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Popups == "on"]
     public unsafe func ApplicationCommands(): windows_collections.IVector<SettingsCommand> {
         return defaultInterface().ApplicationCommands()
     }
@@ -3453,12 +3485,14 @@ public class WebAccountCommandInvokedHandler <: InterfaceWrapperBase & ComInterf
 @When[Windows_UI_ApplicationSettings == "on"]
 extend WebAccountCommandInvokedHandler <: windows_core.Interface<WebAccountCommandInvokedHandler> {}
 
+@When[Windows_UI_ApplicationSettings == "on"]
 private open class WebAccountCommandInvokedHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_ApplicationSettings == "on"]
 private open class WebAccountCommandInvokedHandlerInvoker <: WebAccountCommandInvokedHandlerInvokerErased {
     public open func Invoke(command: InParam<WebAccountCommand>, args: InParam<WebAccountInvokedArgs>): Unit {
         ()
@@ -3470,6 +3504,7 @@ private open class WebAccountCommandInvokedHandlerInvoker <: WebAccountCommandIn
     }
 }
 
+@When[Windows_UI_ApplicationSettings == "on"]
 private class WebAccountCommandInvokedHandlerBox <: WebAccountCommandInvokedHandlerInvoker {
     public let invoke_: (InParam<WebAccountCommand>, InParam<WebAccountInvokedArgs>) -> Unit
     private let vtblHandle: CPointerHandle<WebAccountCommandInvokedHandlerVtbl>
@@ -3488,6 +3523,7 @@ private class WebAccountCommandInvokedHandlerBox <: WebAccountCommandInvokedHand
     }
 }
 
+@When[Windows_UI_ApplicationSettings == "on"]
 func buildWebAccountCommandInvokedHandlerBoxVtbl(): WebAccountCommandInvokedHandlerVtbl {
     var vtbl = WebAccountCommandInvokedHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -3683,12 +3719,14 @@ public class WebAccountProviderCommandInvokedHandler <: InterfaceWrapperBase & C
 @When[Windows_UI_ApplicationSettings == "on"]
 extend WebAccountProviderCommandInvokedHandler <: windows_core.Interface<WebAccountProviderCommandInvokedHandler> {}
 
+@When[Windows_UI_ApplicationSettings == "on"]
 private open class WebAccountProviderCommandInvokedHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_ApplicationSettings == "on"]
 private open class WebAccountProviderCommandInvokedHandlerInvoker <: WebAccountProviderCommandInvokedHandlerInvokerErased {
     public open func Invoke(command: InParam<WebAccountProviderCommand>): Unit {
         ()
@@ -3700,6 +3738,7 @@ private open class WebAccountProviderCommandInvokedHandlerInvoker <: WebAccountP
     }
 }
 
+@When[Windows_UI_ApplicationSettings == "on"]
 private class WebAccountProviderCommandInvokedHandlerBox <: WebAccountProviderCommandInvokedHandlerInvoker {
     public let invoke_: (InParam<WebAccountProviderCommand>) -> Unit
     private let vtblHandle: CPointerHandle<WebAccountProviderCommandInvokedHandlerVtbl>
@@ -3718,6 +3757,7 @@ private class WebAccountProviderCommandInvokedHandlerBox <: WebAccountProviderCo
     }
 }
 
+@When[Windows_UI_ApplicationSettings == "on"]
 func buildWebAccountProviderCommandInvokedHandlerBoxVtbl(): WebAccountProviderCommandInvokedHandlerVtbl {
     var vtbl = WebAccountProviderCommandInvokedHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()

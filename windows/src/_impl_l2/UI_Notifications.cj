@@ -1418,12 +1418,21 @@ public struct ITileUpdaterVtbl {
     public var Setting: CFunc<(CPointer<Unit>, CPointer<_impl_l0.NotificationSettingAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var AddToSchedule: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var RemoveFromSchedule: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetScheduledTileNotifications: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetScheduledTileNotifications: UIntNative = UIntNative(0)
     public var StartPeriodicUpdate: CFunc<(CPointer<Unit>, CPointer<Unit>, _impl_l0.PeriodicUpdateRecurrenceAbi) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var StartPeriodicUpdateAtTime: CFunc<(CPointer<Unit>, CPointer<Unit>, windows_future.DateTimeAbi, _impl_l0.PeriodicUpdateRecurrenceAbi) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var StopPeriodicUpdate: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var StartPeriodicUpdateBatch: CFunc<(CPointer<Unit>, CPointer<Unit>, _impl_l0.PeriodicUpdateRecurrenceAbi) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var StartPeriodicUpdateBatch: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var StartPeriodicUpdateBatchAtTime: CFunc<(CPointer<Unit>, CPointer<Unit>, windows_future.DateTimeAbi, _impl_l0.PeriodicUpdateRecurrenceAbi) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var StartPeriodicUpdateBatchAtTime: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1530,6 +1539,7 @@ public class ITileUpdater <: InterfaceWrapperBase & ComInterface & RuntimeName &
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetScheduledTileNotifications(): windows_collections.IVectorView<_impl_l1.ScheduledTileNotification> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1556,12 +1566,14 @@ public class ITileUpdater <: InterfaceWrapperBase & ComInterface & RuntimeName &
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StartPeriodicUpdateBatch(tileContents: windows_collections.IIterable<Foundation.Uri>, requestedInterval: _impl_l0.PeriodicUpdateRecurrence): Unit {
         let v = vtbl()
         let hr = v.StartPeriodicUpdateBatch(asRaw(), tileContents.asRaw(), windows_core.projectTypedAbi(requestedInterval, windows_core.typeMarker<_impl_l0.PeriodicUpdateRecurrence>()))
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StartPeriodicUpdateBatchAtTime(tileContents: windows_collections.IIterable<Foundation.Uri>, startTime: windows_future.DateTime, requestedInterval: _impl_l0.PeriodicUpdateRecurrence): Unit {
         let v = vtbl()
         let hr = v.StartPeriodicUpdateBatchAtTime(asRaw(), tileContents.asRaw(), windows_core.projectTypedAbi(startTime, windows_core.typeMarker<windows_future.DateTime>()), windows_core.projectTypedAbi(requestedInterval, windows_core.typeMarker<_impl_l0.PeriodicUpdateRecurrence>()))
@@ -2283,7 +2295,10 @@ public struct IToastNotifierVtbl {
     public var Setting: CFunc<(CPointer<Unit>, CPointer<_impl_l0.NotificationSettingAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var AddToSchedule: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var RemoveFromSchedule: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetScheduledToastNotifications: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetScheduledToastNotifications: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2384,6 +2399,7 @@ public class IToastNotifier <: InterfaceWrapperBase & ComInterface & RuntimeName
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetScheduledToastNotifications(): windows_collections.IVectorView<_impl_l1.ScheduledToastNotification> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3158,6 +3174,7 @@ public class TileUpdater <: InterfaceWrapperBase & ComInterface & windows_interf
         defaultInterface().RemoveFromSchedule(scheduledTile)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetScheduledTileNotifications(): windows_collections.IVectorView<_impl_l1.ScheduledTileNotification> {
         return defaultInterface().GetScheduledTileNotifications()
     }
@@ -3174,10 +3191,12 @@ public class TileUpdater <: InterfaceWrapperBase & ComInterface & windows_interf
         defaultInterface().StopPeriodicUpdate()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StartPeriodicUpdateBatch(tileContents: windows_collections.IIterable<Foundation.Uri>, requestedInterval: _impl_l0.PeriodicUpdateRecurrence): Unit {
         defaultInterface().StartPeriodicUpdateBatch(tileContents, requestedInterval)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StartPeriodicUpdateBatchAtTime(tileContents: windows_collections.IIterable<Foundation.Uri>, startTime: windows_future.DateTime, requestedInterval: _impl_l0.PeriodicUpdateRecurrence): Unit {
         defaultInterface().StartPeriodicUpdateBatchAtTime(tileContents, startTime, requestedInterval)
     }
@@ -3603,6 +3622,7 @@ public class ToastNotifier <: InterfaceWrapperBase & ComInterface & windows_inte
         defaultInterface().RemoveFromSchedule(scheduledToast)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetScheduledToastNotifications(): windows_collections.IVectorView<_impl_l1.ScheduledToastNotification> {
         return defaultInterface().GetScheduledToastNotifications()
     }

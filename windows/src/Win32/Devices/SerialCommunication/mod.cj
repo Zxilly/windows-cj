@@ -6,7 +6,6 @@ package windows.Win32.Devices.SerialCommunication
 import std.collection.*
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 
@@ -767,18 +766,77 @@ extend SERIAL_XOFF_COUNTER <: windows_core.CopyType & windows_core.RuntimeType &
     }
 }
 
-@When[MSPORTS == "on"]
+@When[Windows_Win32_Devices_SerialCommunication == "on" && MSPORTS == "on" && Windows_Win32_Devices_SerialCommunication_ComDBClaimNextFreePort == "on"]
 foreign {
     func ComDBClaimNextFreePort(HComDB: HCOMDB, ComNumber: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_SerialCommunication == "on" && MSPORTS == "on" && Windows_Win32_Devices_SerialCommunication_ComDBClaimNextFreePort == "on"]
+public unsafe func Windows_ComDBClaimNextFreePort(HComDB: HCOMDB, ComNumber: CPointer<UInt32>): Int32 {
+    return ComDBClaimNextFreePort(HComDB, ComNumber)
+}
+
+@When[Windows_Win32_Devices_SerialCommunication == "on" && MSPORTS == "on" && Windows_Win32_Devices_SerialCommunication_ComDBClaimPort == "on"]
+foreign {
     // param-hint: Forced optional
     func ComDBClaimPort(HComDB: HCOMDB, ComNumber: UInt32, ForceClaim: Int32, Forced: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Devices_SerialCommunication == "on" && MSPORTS == "on" && Windows_Win32_Devices_SerialCommunication_ComDBClaimPort == "on"]
+public unsafe func Windows_ComDBClaimPort(HComDB: HCOMDB, ComNumber: UInt32, ForceClaim: Int32, Forced: CPointer<Int32>): Int32 {
+    return ComDBClaimPort(HComDB, ComNumber, ForceClaim, Forced)
+}
+
+@When[Windows_Win32_Devices_SerialCommunication == "on" && MSPORTS == "on" && Windows_Win32_Devices_SerialCommunication_ComDBClose == "on"]
+foreign {
     func ComDBClose(HComDB: HCOMDB): Int32
+}
+
+@When[Windows_Win32_Devices_SerialCommunication == "on" && MSPORTS == "on" && Windows_Win32_Devices_SerialCommunication_ComDBClose == "on"]
+public unsafe func Windows_ComDBClose(HComDB: HCOMDB): Int32 {
+    return ComDBClose(HComDB)
+}
+
+@When[Windows_Win32_Devices_SerialCommunication == "on" && MSPORTS == "on" && Windows_Win32_Devices_SerialCommunication_ComDBGetCurrentPortUsage == "on"]
+foreign {
     // param-hint: Buffer bytes=param[2] optional
     // param-hint: MaxPortsReported optional
     func ComDBGetCurrentPortUsage(HComDB: HCOMDB, Buffer: CPointer<UInt8>, BufferSize: UInt32, ReportType: UInt32, MaxPortsReported: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_SerialCommunication == "on" && MSPORTS == "on" && Windows_Win32_Devices_SerialCommunication_ComDBGetCurrentPortUsage == "on"]
+public unsafe func Windows_ComDBGetCurrentPortUsage(HComDB: HCOMDB, Buffer: CPointer<UInt8>, BufferSize: UInt32, ReportType: UInt32, MaxPortsReported: CPointer<UInt32>): Int32 {
+    return ComDBGetCurrentPortUsage(HComDB, Buffer, BufferSize, ReportType, MaxPortsReported)
+}
+
+@When[Windows_Win32_Devices_SerialCommunication == "on" && MSPORTS == "on" && Windows_Win32_Devices_SerialCommunication_ComDBOpen == "on"]
+foreign {
     func ComDBOpen(PHComDB: CPointer<HCOMDB>): Int32
+}
+
+@When[Windows_Win32_Devices_SerialCommunication == "on" && MSPORTS == "on" && Windows_Win32_Devices_SerialCommunication_ComDBOpen == "on"]
+public unsafe func Windows_ComDBOpen(PHComDB: CPointer<HCOMDB>): Int32 {
+    return ComDBOpen(PHComDB)
+}
+
+@When[Windows_Win32_Devices_SerialCommunication == "on" && MSPORTS == "on" && Windows_Win32_Devices_SerialCommunication_ComDBReleasePort == "on"]
+foreign {
     func ComDBReleasePort(HComDB: HCOMDB, ComNumber: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_SerialCommunication == "on" && MSPORTS == "on" && Windows_Win32_Devices_SerialCommunication_ComDBReleasePort == "on"]
+public unsafe func Windows_ComDBReleasePort(HComDB: HCOMDB, ComNumber: UInt32): Int32 {
+    return ComDBReleasePort(HComDB, ComNumber)
+}
+
+@When[Windows_Win32_Devices_SerialCommunication == "on" && MSPORTS == "on" && Windows_Win32_Devices_SerialCommunication_ComDBResizeDatabase == "on"]
+foreign {
     func ComDBResizeDatabase(HComDB: HCOMDB, NewSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_SerialCommunication == "on" && MSPORTS == "on" && Windows_Win32_Devices_SerialCommunication_ComDBResizeDatabase == "on"]
+public unsafe func Windows_ComDBResizeDatabase(HComDB: HCOMDB, NewSize: UInt32): Int32 {
+    return ComDBResizeDatabase(HComDB, NewSize)
 }
 
 @When[Windows_Win32_Devices_SerialCommunication == "on"]

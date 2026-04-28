@@ -3,7 +3,6 @@ package windows_sys.Media._impl_l0
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Foundation_Numerics == "on"]
 import windows_sys.Foundation.Numerics as Foundation_Numerics
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
 import windows_sys._impl_l0 as _impl_l0
@@ -647,6 +646,7 @@ public struct IMediaBreakScheduleVtbl {
     public var RemoveScheduleChanged: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
     public var InsertMidrollBreak: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var RemoveMidrollBreak: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var MidrollBreaks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetPrerollBreak: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var PrerollBreak: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -720,6 +720,7 @@ public class IMediaBreakSchedule <: InterfaceWrapperBase & ComInterface {
         return __vt.RemoveMidrollBreak(__liveRaw, mediaBreak)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MidrollBreaks(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -761,6 +762,7 @@ public class IMediaBreakSchedule <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IMediaBreakSeekedOverEventArgsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SeekedOverBreaks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var OldPosition: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.TimeSpan>) -> Int32> = { _, _ => 0 }
     public var NewPosition: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.TimeSpan>) -> Int32> = { _, _ => 0 }
@@ -807,6 +809,7 @@ public class IMediaBreakSeekedOverEventArgs <: InterfaceWrapperBase & ComInterfa
         readVtbl<IMediaBreakSeekedOverEventArgsVtbl>(IMediaBreakSeekedOverEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SeekedOverBreaks(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2211,8 +2214,11 @@ public struct IMediaPlaybackItemVtbl {
     public var RemoveTimedMetadataTracksChanged: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
     @When[Windows_Media_Core == "on"]
     public var Source: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var AudioTracks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var VideoTracks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var TimedMetadataTracks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -2303,18 +2309,21 @@ public class IMediaPlaybackItem <: InterfaceWrapperBase & ComInterface {
         return __vt.Source(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AudioTracks(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AudioTracks(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func VideoTracks(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.VideoTracks(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TimedMetadataTracks(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2871,6 +2880,7 @@ public struct IMediaPlaybackListVtbl {
     public var RemoveCurrentItemChanged: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
     public var ItemOpened: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveItemOpened: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Items: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var AutoRepeatEnabled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var SetAutoRepeatEnabled: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
@@ -2960,6 +2970,7 @@ public class IMediaPlaybackList <: InterfaceWrapperBase & ComInterface {
         return __vt.RemoveItemOpened(__liveRaw, token)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3029,7 +3040,9 @@ public struct IMediaPlaybackList2Vtbl {
     public var SetMaxPrefetchTime: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var StartingItem: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetStartingItem: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ShuffledItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetShuffledItems: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -3098,12 +3111,14 @@ public class IMediaPlaybackList2 <: InterfaceWrapperBase & ComInterface {
         return __vt.SetStartingItem(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ShuffledItems(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ShuffledItems(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetShuffledItems(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3506,11 +3521,11 @@ public struct IMediaPlaybackSession2Vtbl {
     public var SphericalVideoProjection: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IsMirroring: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var SetIsMirroring: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
-    @When[Windows_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media == "on"]
     public var GetBufferedRanges: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media == "on"]
     public var GetPlayedRanges: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media == "on"]
     public var GetSeekableRanges: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IsSupportedPlaybackRateRange: CFunc<(CPointer<Unit>, Float64, Float64, CPointer<Bool>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
@@ -3622,21 +3637,21 @@ public class IMediaPlaybackSession2 <: InterfaceWrapperBase & ComInterface {
         return __vt.SetIsMirroring(__liveRaw, value)
     }
 
-    @When[Windows_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media == "on"]
     public unsafe func GetBufferedRanges(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetBufferedRanges(__liveRaw, result__)
     }
 
-    @When[Windows_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media == "on"]
     public unsafe func GetPlayedRanges(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetPlayedRanges(__liveRaw, result__)
     }
 
-    @When[Windows_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media == "on"]
     public unsafe func GetSeekableRanges(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4011,6 +4026,7 @@ public class IMediaPlaybackSphericalVideoProjection <: InterfaceWrapperBase & Co
 @C
 public struct IMediaPlaybackTimedMetadataTrackListVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var PresentationModeChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemovePresentationModeChanged: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
     public var GetPresentationMode: CFunc<(CPointer<Unit>, UInt32, CPointer<Int32>) -> Int32> = { _, _, _ => 0 }
@@ -4058,6 +4074,7 @@ public class IMediaPlaybackTimedMetadataTrackList <: InterfaceWrapperBase & ComI
         readVtbl<IMediaPlaybackTimedMetadataTrackListVtbl>(IMediaPlaybackTimedMetadataTrackListVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PresentationModeChanged(handler: CPointer<Unit>, result__: CPointer<Foundation__impl_l0.EventRegistrationToken>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4105,6 +4122,7 @@ public struct IMediaPlayerVtbl {
     public var SetPlaybackRate: CFunc<(CPointer<Unit>, Float64) -> Int32> = { _, _ => 0 }
     public var Volume: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => 0 }
     public var SetVolume: CFunc<(CPointer<Unit>, Float64) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var PlaybackMediaMarkers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var MediaOpened: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveMediaOpened: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
@@ -4280,6 +4298,7 @@ public class IMediaPlayer <: InterfaceWrapperBase & ComInterface {
         return __vt.SetVolume(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PlaybackMediaMarkers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

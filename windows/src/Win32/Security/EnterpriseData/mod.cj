@@ -4,15 +4,13 @@
 package windows.Win32.Security.EnterpriseData
 
 import std.collection.*
+import windows_libloading
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase, RuntimeType, RuntimeTypeContract}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Storage_Packaging_Appx == "on"]
 import windows.Win32.Storage.Packaging.Appx as Win32_Storage_Packaging_Appx
-@When[Windows_Win32_System_WinRT == "on"]
 import windows.Win32.System.WinRT as Win32_System_WinRT
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows_core as windows_core
@@ -572,33 +570,153 @@ extend SRPHOSTING_VERSION <: windows_core.CopyType & windows_core.RuntimeType & 
 @When[Windows_Win32_Security_EnterpriseData == "on"]
 public type _SRP_REQUEST = CPointer<Unit>
 
-@When[EFSWRT == "on"]
+@When[Windows_Win32_Security_EnterpriseData == "on" && EFSWRT == "on" && Windows_Win32_Security_EnterpriseData_ProtectFileToEnterpriseIdentity == "on"]
 foreign {
     func ProtectFileToEnterpriseIdentity(fileOrFolderPath: CPointer<UInt16>, identity: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Security_EnterpriseData == "on" && EFSWRT == "on" && Windows_Win32_Security_EnterpriseData_ProtectFileToEnterpriseIdentity == "on"]
+public unsafe func Windows_ProtectFileToEnterpriseIdentity(fileOrFolderPath: CPointer<UInt16>, identity: CPointer<UInt16>): Int32 {
+    return ProtectFileToEnterpriseIdentity(fileOrFolderPath, identity)
+}
+
+@When[Windows_Win32_Security_EnterpriseData == "on" && EFSWRT == "on" && Windows_Win32_Security_EnterpriseData_UnprotectFile == "on"]
+foreign {
     // param-hint: options optional
     func UnprotectFile(fileOrFolderPath: CPointer<UInt16>, options: CPointer<FILE_UNPROTECT_OPTIONSAbi>): Int32
 }
 
-@When[SRPAPI == "on"]
+@When[Windows_Win32_Security_EnterpriseData == "on" && EFSWRT == "on" && Windows_Win32_Security_EnterpriseData_UnprotectFile == "on"]
+public unsafe func Windows_UnprotectFile(fileOrFolderPath: CPointer<UInt16>, options: CPointer<FILE_UNPROTECT_OPTIONSAbi>): Int32 {
+    return UnprotectFile(fileOrFolderPath, options)
+}
+
+@When[Windows_Win32_Security_EnterpriseData == "on" && SRPAPI == "on" && Windows_Win32_Security_EnterpriseData_SrpCloseThreadNetworkContext == "on"]
 foreign {
     func SrpCloseThreadNetworkContext(threadNetworkContext: CPointer<HTHREAD_NETWORK_CONTEXTAbi>): Int32
+}
+
+@When[Windows_Win32_Security_EnterpriseData == "on" && SRPAPI == "on" && Windows_Win32_Security_EnterpriseData_SrpCloseThreadNetworkContext == "on"]
+public unsafe func Windows_SrpCloseThreadNetworkContext(threadNetworkContext: CPointer<HTHREAD_NETWORK_CONTEXTAbi>): Int32 {
+    return SrpCloseThreadNetworkContext(threadNetworkContext)
+}
+
+@When[Windows_Win32_Security_EnterpriseData == "on" && SRPAPI == "on" && Windows_Win32_Security_EnterpriseData_SrpCreateThreadNetworkContext == "on"]
+foreign {
     func SrpCreateThreadNetworkContext(enterpriseId: CPointer<UInt16>, threadNetworkContext: CPointer<HTHREAD_NETWORK_CONTEXTAbi>): Int32
+}
+
+@When[Windows_Win32_Security_EnterpriseData == "on" && SRPAPI == "on" && Windows_Win32_Security_EnterpriseData_SrpCreateThreadNetworkContext == "on"]
+public unsafe func Windows_SrpCreateThreadNetworkContext(enterpriseId: CPointer<UInt16>, threadNetworkContext: CPointer<HTHREAD_NETWORK_CONTEXTAbi>): Int32 {
+    return SrpCreateThreadNetworkContext(enterpriseId, threadNetworkContext)
+}
+
+@When[Windows_Win32_Security_EnterpriseData == "on" && SRPAPI == "on" && Windows_Win32_Security_EnterpriseData_SrpDisablePermissiveModeFileEncryption == "on"]
+foreign {
     func SrpDisablePermissiveModeFileEncryption(): Int32
+}
+
+@When[Windows_Win32_Security_EnterpriseData == "on" && SRPAPI == "on" && Windows_Win32_Security_EnterpriseData_SrpDisablePermissiveModeFileEncryption == "on"]
+public unsafe func Windows_SrpDisablePermissiveModeFileEncryption(): Int32 {
+    return SrpDisablePermissiveModeFileEncryption()
+}
+
+@When[Windows_Win32_Security_EnterpriseData == "on" && SRPAPI == "on" && Windows_Win32_Security_EnterpriseData_SrpDoesPolicyAllowAppExecution == "on" && (((arch == "x86_64" && Windows_Win32_Storage_Packaging_Appx == "on") || (arch == "aarch64" && Windows_Win32_Storage_Packaging_Appx == "on")) && Windows_Win32_Storage_Packaging_Appx == "on")]
+foreign {
+    func SrpDoesPolicyAllowAppExecution(packageId: CPointer<Win32_Storage_Packaging_Appx.PACKAGE_ID>, isAllowed: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Security_EnterpriseData == "on" && SRPAPI == "on" && Windows_Win32_Security_EnterpriseData_SrpDoesPolicyAllowAppExecution == "on" && (((arch == "x86_64" && Windows_Win32_Storage_Packaging_Appx == "on") || (arch == "aarch64" && Windows_Win32_Storage_Packaging_Appx == "on")) && Windows_Win32_Storage_Packaging_Appx == "on")]
+public unsafe func Windows_SrpDoesPolicyAllowAppExecution(packageId: CPointer<Win32_Storage_Packaging_Appx.PACKAGE_ID>, isAllowed: CPointer<Int32>): Int32 {
+    return SrpDoesPolicyAllowAppExecution(packageId, isAllowed)
+}
+
+@When[Windows_Win32_Security_EnterpriseData == "on" && SRPAPI == "on" && Windows_Win32_Security_EnterpriseData_SrpEnablePermissiveModeFileEncryption == "on"]
+foreign {
     // param-hint: enterpriseId optional
     func SrpEnablePermissiveModeFileEncryption(enterpriseId: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Security_EnterpriseData == "on" && SRPAPI == "on" && Windows_Win32_Security_EnterpriseData_SrpEnablePermissiveModeFileEncryption == "on"]
+public unsafe func Windows_SrpEnablePermissiveModeFileEncryption(enterpriseId: CPointer<UInt16>): Int32 {
+    return SrpEnablePermissiveModeFileEncryption(enterpriseId)
+}
+
+@When[Windows_Win32_Security_EnterpriseData == "on" && SRPAPI == "on" && Windows_Win32_Security_EnterpriseData_SrpGetEnterpriseIds == "on"]
+foreign {
     // param-hint: numberOfBytes optional
     // param-hint: enterpriseIds bytes=param[1] optional
     func SrpGetEnterpriseIds(tokenHandle: CPointer<Unit>, numberOfBytes: CPointer<UInt32>, enterpriseIds: CPointer<CPointer<UInt16>>, enterpriseIdCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_EnterpriseData == "on" && SRPAPI == "on" && Windows_Win32_Security_EnterpriseData_SrpGetEnterpriseIds == "on"]
+public unsafe func Windows_SrpGetEnterpriseIds(tokenHandle: CPointer<Unit>, numberOfBytes: CPointer<UInt32>, enterpriseIds: CPointer<CPointer<UInt16>>, enterpriseIdCount: CPointer<UInt32>): Int32 {
+    return SrpGetEnterpriseIds(tokenHandle, numberOfBytes, enterpriseIds, enterpriseIdCount)
+}
+
+@When[Windows_Win32_Security_EnterpriseData == "on" && SRPAPI == "on" && Windows_Win32_Security_EnterpriseData_SrpGetEnterprisePolicy == "on"]
+foreign {
     func SrpGetEnterprisePolicy(tokenHandle: CPointer<Unit>, policyFlags: CPointer<ENTERPRISE_DATA_POLICIESAbi>): Int32
+}
+
+@When[Windows_Win32_Security_EnterpriseData == "on" && SRPAPI == "on" && Windows_Win32_Security_EnterpriseData_SrpGetEnterprisePolicy == "on"]
+public unsafe func Windows_SrpGetEnterprisePolicy(tokenHandle: CPointer<Unit>, policyFlags: CPointer<ENTERPRISE_DATA_POLICIESAbi>): Int32 {
+    return SrpGetEnterprisePolicy(tokenHandle, policyFlags)
+}
+
+@When[Windows_Win32_Security_EnterpriseData == "on" && SRPAPI == "on" && Windows_Win32_Security_EnterpriseData_SrpHostingInitialize == "on"]
+foreign {
     func SrpHostingInitialize(Version: SRPHOSTING_VERSIONAbi, Type: SRPHOSTING_TYPEAbi, pvData: CPointer<Unit>, cbData: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_EnterpriseData == "on" && SRPAPI == "on" && Windows_Win32_Security_EnterpriseData_SrpHostingInitialize == "on"]
+public unsafe func Windows_SrpHostingInitialize(Version: SRPHOSTING_VERSIONAbi, Type: SRPHOSTING_TYPEAbi, pvData: CPointer<Unit>, cbData: UInt32): Int32 {
+    return SrpHostingInitialize(Version, Type, pvData, cbData)
+}
+
+@When[Windows_Win32_Security_EnterpriseData == "on" && SRPAPI == "on" && Windows_Win32_Security_EnterpriseData_SrpHostingTerminate == "on"]
+foreign {
     func SrpHostingTerminate(Type: SRPHOSTING_TYPEAbi): Unit
-    func SrpIsAllowed(FileInfo: CPointer<_SRP_REQUEST>): Int32
+}
+
+@When[Windows_Win32_Security_EnterpriseData == "on" && SRPAPI == "on" && Windows_Win32_Security_EnterpriseData_SrpHostingTerminate == "on"]
+public unsafe func Windows_SrpHostingTerminate(Type: SRPHOSTING_TYPEAbi): Unit {
+    SrpHostingTerminate(Type)
+}
+
+@When[Windows_Win32_Security_EnterpriseData == "on" && SRPAPI == "on" && Windows_Win32_Security_EnterpriseData_SrpIsTokenService == "on"]
+foreign {
     func SrpIsTokenService(TokenHandle: CPointer<Unit>, IsTokenService: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Security_EnterpriseData == "on" && SRPAPI == "on" && Windows_Win32_Security_EnterpriseData_SrpIsTokenService == "on"]
+public unsafe func Windows_SrpIsTokenService(TokenHandle: CPointer<Unit>, IsTokenService: CPointer<UInt8>): Int32 {
+    return SrpIsTokenService(TokenHandle, IsTokenService)
+}
+
+@When[Windows_Win32_Security_EnterpriseData == "on" && SRPAPI == "on" && Windows_Win32_Security_EnterpriseData_SrpSetTokenEnterpriseId == "on"]
+foreign {
     // param-hint: enterpriseId optional
     func SrpSetTokenEnterpriseId(tokenHandle: CPointer<Unit>, enterpriseId: CPointer<UInt16>): Int32
 }
 
-@When[SRPAPI == "on" && (((arch == "x86_64" && Windows_Win32_Storage_Packaging_Appx == "on") || (arch == "aarch64" && Windows_Win32_Storage_Packaging_Appx == "on")) && Windows_Win32_Storage_Packaging_Appx == "on")]
-foreign {
-    func SrpDoesPolicyAllowAppExecution(packageId: CPointer<Win32_Storage_Packaging_Appx.PACKAGE_ID>, isAllowed: CPointer<Int32>): Int32
+@When[Windows_Win32_Security_EnterpriseData == "on" && SRPAPI == "on" && Windows_Win32_Security_EnterpriseData_SrpSetTokenEnterpriseId == "on"]
+public unsafe func Windows_SrpSetTokenEnterpriseId(tokenHandle: CPointer<Unit>, enterpriseId: CPointer<UInt16>): Int32 {
+    return SrpSetTokenEnterpriseId(tokenHandle, enterpriseId)
+}
+
+@When[Windows_Win32_Security_EnterpriseData == "on" && SRPAPI == "on" && Windows_Win32_Security_EnterpriseData_SrpIsAllowed == "on"]
+func __windowsBindgen_SrpIsAllowedProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("srpapi.dll", "SrpIsAllowed")
+}
+
+@When[Windows_Win32_Security_EnterpriseData == "on" && SRPAPI == "on" && Windows_Win32_Security_EnterpriseData_SrpIsAllowed == "on"]
+unsafe func SrpIsAllowed(FileInfo: CPointer<_SRP_REQUEST>): Int32 {
+    let call = CFunc<(CPointer<_SRP_REQUEST>) -> Int32>(__windowsBindgen_SrpIsAllowedProc())
+    return unsafe { call(FileInfo) }
+}
+
+@When[Windows_Win32_Security_EnterpriseData == "on" && SRPAPI == "on" && Windows_Win32_Security_EnterpriseData_SrpIsAllowed == "on"]
+public unsafe func Windows_SrpIsAllowed(FileInfo: CPointer<_SRP_REQUEST>): Int32 {
+    return SrpIsAllowed(FileInfo)
 }

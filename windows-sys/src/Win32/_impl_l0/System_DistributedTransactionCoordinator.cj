@@ -58,7 +58,7 @@ public let AUTHENTICATION_LEVEL_INCOMING_AUTHENTICATION_REQUIRED: AUTHENTICATION
 @When[Windows_Win32_System_DistributedTransactionCoordinator == "on"]
 public let AUTHENTICATION_LEVEL_MUTUAL_AUTHENTICATION_REQUIRED: AUTHENTICATION_LEVEL = AUTHENTICATION_LEVEL(2)
 
-@When[XOLEHLP == "on"]
+@When[Windows_Win32_System_DistributedTransactionCoordinator == "on" && XOLEHLP == "on" && Windows_Win32_System_DistributedTransactionCoordinator_DtcGetTransactionManager == "on"]
 @CallingConv[CDECL]
 foreign {
     // param-hint: i_pszHost optional
@@ -66,19 +66,54 @@ foreign {
     // param-hint: i_pvReserved2 bytes=param[4] optional
     // pinvoke-hint: cc=cdecl
     func DtcGetTransactionManager(i_pszHost: CPointer<UInt8>, i_pszTmName: CPointer<UInt8>, i_riid: CPointer<GUID>, i_dwReserved1: UInt32, i_wcbReserved2: UInt16, i_pvReserved2: CPointer<Unit>, o_ppvObject: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_DistributedTransactionCoordinator == "on" && XOLEHLP == "on" && Windows_Win32_System_DistributedTransactionCoordinator_DtcGetTransactionManager == "on"]
+public unsafe func Windows_DtcGetTransactionManager(i_pszHost: CPointer<UInt8>, i_pszTmName: CPointer<UInt8>, i_riid: CPointer<GUID>, i_dwReserved1: UInt32, i_wcbReserved2: UInt16, i_pvReserved2: CPointer<Unit>, o_ppvObject: CPointer<CPointer<Unit>>): Int32 {
+    return DtcGetTransactionManager(i_pszHost, i_pszTmName, i_riid, i_dwReserved1, i_wcbReserved2, i_pvReserved2, o_ppvObject)
+}
+
+@When[Windows_Win32_System_DistributedTransactionCoordinator == "on" && XOLEHLP == "on" && Windows_Win32_System_DistributedTransactionCoordinator_DtcGetTransactionManagerC == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: i_pszHost optional
     // param-hint: i_pszTmName optional
     // param-hint: i_pvReserved2 bytes=param[4] optional
     // pinvoke-hint: cc=cdecl
     func DtcGetTransactionManagerC(i_pszHost: CPointer<UInt8>, i_pszTmName: CPointer<UInt8>, i_riid: CPointer<GUID>, i_dwReserved1: UInt32, i_wcbReserved2: UInt16, i_pvReserved2: CPointer<Unit>, o_ppvObject: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_DistributedTransactionCoordinator == "on" && XOLEHLP == "on" && Windows_Win32_System_DistributedTransactionCoordinator_DtcGetTransactionManagerC == "on"]
+public unsafe func Windows_DtcGetTransactionManagerC(i_pszHost: CPointer<UInt8>, i_pszTmName: CPointer<UInt8>, i_riid: CPointer<GUID>, i_dwReserved1: UInt32, i_wcbReserved2: UInt16, i_pvReserved2: CPointer<Unit>, o_ppvObject: CPointer<CPointer<Unit>>): Int32 {
+    return DtcGetTransactionManagerC(i_pszHost, i_pszTmName, i_riid, i_dwReserved1, i_wcbReserved2, i_pvReserved2, o_ppvObject)
+}
+
+@When[Windows_Win32_System_DistributedTransactionCoordinator == "on" && XOLEHLP == "on" && Windows_Win32_System_DistributedTransactionCoordinator_DtcGetTransactionManagerExA == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: i_pszHost optional
     // param-hint: i_pszTmName optional
     // pinvoke-hint: cc=cdecl
     func DtcGetTransactionManagerExA(i_pszHost: CPointer<UInt8>, i_pszTmName: CPointer<UInt8>, i_riid: CPointer<GUID>, i_grfOptions: UInt32, i_pvConfigParams: CPointer<Unit>, o_ppvObject: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_DistributedTransactionCoordinator == "on" && XOLEHLP == "on" && Windows_Win32_System_DistributedTransactionCoordinator_DtcGetTransactionManagerExA == "on"]
+public unsafe func Windows_DtcGetTransactionManagerExA(i_pszHost: CPointer<UInt8>, i_pszTmName: CPointer<UInt8>, i_riid: CPointer<GUID>, i_grfOptions: UInt32, i_pvConfigParams: CPointer<Unit>, o_ppvObject: CPointer<CPointer<Unit>>): Int32 {
+    return DtcGetTransactionManagerExA(i_pszHost, i_pszTmName, i_riid, i_grfOptions, i_pvConfigParams, o_ppvObject)
+}
+
+@When[Windows_Win32_System_DistributedTransactionCoordinator == "on" && XOLEHLP == "on" && Windows_Win32_System_DistributedTransactionCoordinator_DtcGetTransactionManagerExW == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: i_pwszHost optional
     // param-hint: i_pwszTmName optional
     // pinvoke-hint: cc=cdecl
     func DtcGetTransactionManagerExW(i_pwszHost: CPointer<UInt16>, i_pwszTmName: CPointer<UInt16>, i_riid: CPointer<GUID>, i_grfOptions: UInt32, i_pvConfigParams: CPointer<Unit>, o_ppvObject: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_DistributedTransactionCoordinator == "on" && XOLEHLP == "on" && Windows_Win32_System_DistributedTransactionCoordinator_DtcGetTransactionManagerExW == "on"]
+public unsafe func Windows_DtcGetTransactionManagerExW(i_pwszHost: CPointer<UInt16>, i_pwszTmName: CPointer<UInt16>, i_riid: CPointer<GUID>, i_grfOptions: UInt32, i_pvConfigParams: CPointer<Unit>, o_ppvObject: CPointer<CPointer<Unit>>): Int32 {
+    return DtcGetTransactionManagerExW(i_pwszHost, i_pwszTmName, i_riid, i_grfOptions, i_pvConfigParams, o_ppvObject)
 }
 
 @When[Windows_Win32_System_DistributedTransactionCoordinator == "on"]

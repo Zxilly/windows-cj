@@ -1065,12 +1065,14 @@ public class DispatcherQueueHandler <: InterfaceWrapperBase & ComInterface & win
 @When[Windows_System == "on"]
 extend DispatcherQueueHandler <: windows_core.Interface<DispatcherQueueHandler> {}
 
+@When[Windows_System == "on"]
 private open class DispatcherQueueHandlerInvokerErased {
     public open func __winrtThunk_Invoke(): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_System == "on"]
 private open class DispatcherQueueHandlerInvoker <: DispatcherQueueHandlerInvokerErased {
     public open func Invoke(): Unit {
         ()
@@ -1082,6 +1084,7 @@ private open class DispatcherQueueHandlerInvoker <: DispatcherQueueHandlerInvoke
     }
 }
 
+@When[Windows_System == "on"]
 private class DispatcherQueueHandlerBox <: DispatcherQueueHandlerInvoker {
     public let invoke_: () -> Unit
     private let vtblHandle: CPointerHandle<DispatcherQueueHandlerVtbl>
@@ -1100,6 +1103,7 @@ private class DispatcherQueueHandlerBox <: DispatcherQueueHandlerInvoker {
     }
 }
 
+@When[Windows_System == "on"]
 func buildDispatcherQueueHandlerBoxVtbl(): DispatcherQueueHandlerVtbl {
     var vtbl = DispatcherQueueHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -4124,7 +4128,10 @@ public struct IRemoteLauncherOptionsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var FallbackUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetFallbackUri: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var PreferredAppIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var PreferredAppIds: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4207,6 +4214,7 @@ public class IRemoteLauncherOptions <: InterfaceWrapperBase & ComInterface & Run
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PreferredAppIds(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4314,7 +4322,10 @@ extend IShutdownManagerStatics <: windows_core.Interface<IShutdownManagerStatics
 public struct ITimeZoneSettingsStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var CurrentTimeZoneDisplayName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedTimeZoneDisplayNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedTimeZoneDisplayNames: UIntNative = UIntNative(0)
     public var CanChangeTimeZone: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ChangeTimeZoneByDisplayName: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -4393,6 +4404,7 @@ public class ITimeZoneSettingsStatics <: InterfaceWrapperBase & ComInterface & R
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedTimeZoneDisplayNames(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4676,7 +4688,10 @@ extend IUserAuthenticationStatusChangeDeferral <: windows_core.Interface<IUserAu
 @C
 public struct IUserChangedEventArgs2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ChangedPropertyKinds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ChangedPropertyKinds: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4745,6 +4760,7 @@ public class IUserChangedEventArgs2 <: InterfaceWrapperBase & ComInterface & Run
         readVtbl<IUserChangedEventArgs2Vtbl>(IUserChangedEventArgs2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ChangedPropertyKinds(): windows_collections.IVectorView<UserWatcherUpdateKind> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5891,6 +5907,7 @@ public class RemoteLauncherOptions <: InterfaceWrapperBase & ComInterface & wind
         defaultInterface().SetFallbackUri(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PreferredAppIds(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().PreferredAppIds()
     }

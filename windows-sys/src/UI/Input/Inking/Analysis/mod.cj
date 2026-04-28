@@ -4,7 +4,6 @@ package windows_sys.UI.Input.Inking.Analysis
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_UI_Input_Inking == "on"]
 import windows_sys.UI.Input.Inking as UI_Input_Inking
 
 
@@ -174,9 +173,12 @@ public struct IInkAnalysisNodeVtbl {
     public var Id: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var Kind: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var BoundingRect: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.Rect>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var RotatedBoundingRect: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Children: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Parent: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetStrokeIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -239,12 +241,14 @@ public class IInkAnalysisNode <: InterfaceWrapperBase & ComInterface {
         return __vt.BoundingRect(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RotatedBoundingRect(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RotatedBoundingRect(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Children(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -257,6 +261,7 @@ public class IInkAnalysisNode <: InterfaceWrapperBase & ComInterface {
         return __vt.Parent(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetStrokeIds(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -379,6 +384,7 @@ public class IInkAnalysisResult <: InterfaceWrapperBase & ComInterface {
 public struct IInkAnalysisRootVtbl {
     public var base_: IInkAnalysisNodeVtbl = IInkAnalysisNodeVtbl()
     public var RecognizedText: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindNodes: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -429,6 +435,7 @@ public class IInkAnalysisRoot <: InterfaceWrapperBase & ComInterface {
         return __vt.RecognizedText(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindNodes(nodeKind: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -552,6 +559,7 @@ public struct IInkAnalysisInkDrawingVtbl {
     public var base_: IInkAnalysisNodeVtbl = IInkAnalysisNodeVtbl()
     public var DrawingKind: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Center: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.Point>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Points: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -608,6 +616,7 @@ public class IInkAnalysisInkDrawing <: InterfaceWrapperBase & ComInterface {
         return __vt.Center(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Points(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -620,6 +629,7 @@ public class IInkAnalysisInkDrawing <: InterfaceWrapperBase & ComInterface {
 public struct IInkAnalysisInkWordVtbl {
     public var base_: IInkAnalysisNodeVtbl = IInkAnalysisNodeVtbl()
     public var RecognizedText: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var TextAlternates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -670,6 +680,7 @@ public class IInkAnalysisInkWord <: InterfaceWrapperBase & ComInterface {
         return __vt.RecognizedText(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TextAlternates(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -802,10 +813,11 @@ public struct IInkAnalyzerVtbl {
     public var IsAnalyzing: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Input_Inking == "on"]
     public var AddDataForStroke: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Input_Inking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Input_Inking == "on"]
     public var AddDataForStrokes: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var ClearDataForAllStrokes: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var RemoveDataForStroke: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var RemoveDataForStrokes: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Input_Inking == "on"]
     public var ReplaceDataForStroke: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -873,7 +885,7 @@ public class IInkAnalyzer <: InterfaceWrapperBase & ComInterface {
         return __vt.AddDataForStroke(__liveRaw, stroke)
     }
 
-    @When[Windows_UI_Input_Inking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Input_Inking == "on"]
     public unsafe func AddDataForStrokes(strokes: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -892,6 +904,7 @@ public class IInkAnalyzer <: InterfaceWrapperBase & ComInterface {
         return __vt.RemoveDataForStroke(__liveRaw, strokeId)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RemoveDataForStrokes(strokeIds: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

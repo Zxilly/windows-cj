@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l0 as _impl_l0
 import windows_collections as windows_collections
@@ -456,7 +455,10 @@ public struct IHidBooleanControlDescriptionVtbl {
     public var ReportType: CFunc<(CPointer<Unit>, CPointer<HidReportTypeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var UsagePage: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var UsageId: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var ParentCollections: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ParentCollections: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -565,6 +567,7 @@ public class IHidBooleanControlDescription <: InterfaceWrapperBase & ComInterfac
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ParentCollections(): windows_collections.IVectorView<HidCollection> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -596,7 +599,10 @@ public struct IHidNumericControlDescriptionVtbl {
     public var Unit_: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsAbsolute: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var HasNull: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var ParentCollections: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ParentCollections: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -785,6 +791,7 @@ public class IHidNumericControlDescription <: InterfaceWrapperBase & ComInterfac
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ParentCollections(): windows_collections.IVectorView<HidCollection> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -886,6 +893,7 @@ public class HidBooleanControlDescription <: InterfaceWrapperBase & ComInterface
         return defaultInterface().UsageId()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ParentCollections(): windows_collections.IVectorView<HidCollection> {
         return defaultInterface().ParentCollections()
     }
@@ -1038,6 +1046,7 @@ public class HidNumericControlDescription <: InterfaceWrapperBase & ComInterface
         return defaultInterface().HasNull()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ParentCollections(): windows_collections.IVectorView<HidCollection> {
         return defaultInterface().ParentCollections()
     }
@@ -1732,8 +1741,14 @@ public struct IHidInputReportVtbl {
     public var Data: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams != "on"]
     public var Data: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var ActivatedBooleanControls: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ActivatedBooleanControls: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var TransitionedBooleanControls: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var TransitionedBooleanControls: UIntNative = UIntNative(0)
     public var GetBooleanControl: CFunc<(CPointer<Unit>, UInt16, UInt16, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var GetBooleanControlByDescription: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var GetNumericControl: CFunc<(CPointer<Unit>, UInt16, UInt16, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
@@ -1823,6 +1838,7 @@ public class IHidInputReport <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return _impl_l0.IBuffer.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ActivatedBooleanControls(): windows_collections.IVectorView<HidBooleanControl> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1831,6 +1847,7 @@ public class IHidInputReport <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return windows_collections.IVectorView<HidBooleanControl>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TransitionedBooleanControls(): windows_collections.IVectorView<HidBooleanControl> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2216,10 +2233,12 @@ public class HidInputReport <: InterfaceWrapperBase & ComInterface & windows_int
         return defaultInterface().Data()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ActivatedBooleanControls(): windows_collections.IVectorView<HidBooleanControl> {
         return defaultInterface().ActivatedBooleanControls()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TransitionedBooleanControls(): windows_collections.IVectorView<HidBooleanControl> {
         return defaultInterface().TransitionedBooleanControls()
     }
@@ -2690,10 +2709,12 @@ public class HidDevice <: InterfaceWrapperBase & ComInterface & windows_interfac
         return defaultInterface().SendFeatureReportAsync(featureReport)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetBooleanControlDescriptions(reportType: HidReportType, usagePage: UInt16, usageId: UInt16): windows_collections.IVectorView<HidBooleanControlDescription> {
         return defaultInterface().GetBooleanControlDescriptions(reportType, usagePage, usageId)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetNumericControlDescriptions(reportType: HidReportType, usagePage: UInt16, usageId: UInt16): windows_collections.IVectorView<HidNumericControlDescription> {
         return defaultInterface().GetNumericControlDescriptions(reportType, usagePage, usageId)
     }
@@ -2782,8 +2803,14 @@ public struct IHidDeviceVtbl {
     public var CreateFeatureReportById: CFunc<(CPointer<Unit>, UInt16, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var SendOutputReportAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var SendFeatureReportAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetBooleanControlDescriptions: CFunc<(CPointer<Unit>, HidReportTypeAbi, UInt16, UInt16, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetBooleanControlDescriptions: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetNumericControlDescriptions: CFunc<(CPointer<Unit>, HidReportTypeAbi, UInt16, UInt16, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetNumericControlDescriptions: UIntNative = UIntNative(0)
     public var InputReportReceived: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveInputReportReceived: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -2986,6 +3013,7 @@ public class IHidDevice <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         return windows_future.IAsyncOperation<UInt32>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetBooleanControlDescriptions(reportType: HidReportType, usagePage: UInt16, usageId: UInt16): windows_collections.IVectorView<HidBooleanControlDescription> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2994,6 +3022,7 @@ public class IHidDevice <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         return windows_collections.IVectorView<HidBooleanControlDescription>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetNumericControlDescriptions(reportType: HidReportType, usagePage: UInt16, usageId: UInt16): windows_collections.IVectorView<HidNumericControlDescription> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Media == "on"]
 import windows.Media as Media
 import windows._impl_l1 as _impl_l1
 import windows_collections as windows_collections
@@ -171,7 +169,10 @@ public struct IGlobalSystemMediaTransportControlsSessionMediaPropertiesVtbl {
     public var Artist: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var AlbumTitle: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var TrackNumber: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Genres: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Genres: UIntNative = UIntNative(0)
     public var AlbumTrackCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Media == "on"]
     public var PlaybackType: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -297,6 +298,7 @@ public class IGlobalSystemMediaTransportControlsSessionMediaProperties <: Interf
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Genres(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1513,6 +1515,7 @@ public class GlobalSystemMediaTransportControlsSessionMediaProperties <: Interfa
         return defaultInterface().TrackNumber()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Genres(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().Genres()
     }
@@ -2324,6 +2327,7 @@ public class GlobalSystemMediaTransportControlsSessionManager <: InterfaceWrappe
         return defaultInterface().GetCurrentSession()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSessions(): windows_collections.IVectorView<GlobalSystemMediaTransportControlsSession> {
         return defaultInterface().GetSessions()
     }
@@ -2678,7 +2682,10 @@ extend IGlobalSystemMediaTransportControlsSession <: windows_core.Interface<IGlo
 public struct IGlobalSystemMediaTransportControlsSessionManagerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var GetCurrentSession: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSessions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetSessions: UIntNative = UIntNative(0)
     public var CurrentSessionChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveCurrentSessionChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SessionsChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -2759,6 +2766,7 @@ public class IGlobalSystemMediaTransportControlsSessionManager <: InterfaceWrapp
         return GlobalSystemMediaTransportControlsSession.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSessions(): windows_collections.IVectorView<GlobalSystemMediaTransportControlsSession> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

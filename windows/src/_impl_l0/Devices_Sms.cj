@@ -82,19 +82,52 @@ public type DeleteSmsMessagesOperation = windows_future.IAsyncAction
 public struct ISmsFilterRuleVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var MessageType: CFunc<(CPointer<Unit>, CPointer<SmsMessageTypeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var ImsiPrefixes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ImsiPrefixes: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var DeviceIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var DeviceIds: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SenderNumbers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SenderNumbers: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var TextMessagePrefixes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var TextMessagePrefixes: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var PortNumbers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var PortNumbers: UIntNative = UIntNative(0)
     public var get_CellularClass: CFunc<(CPointer<Unit>, CPointer<CellularClassAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetCellularClass: CFunc<(CPointer<Unit>, CellularClassAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var ProtocolIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ProtocolIds: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var TeleserviceIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var TeleserviceIds: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var WapApplicationIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var WapApplicationIds: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var WapContentTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var WapContentTypes: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var BroadcastTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var BroadcastTypes: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var BroadcastChannels: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var BroadcastChannels: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -171,6 +204,7 @@ public class ISmsFilterRule <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<SmsMessageType>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ImsiPrefixes(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -179,6 +213,7 @@ public class ISmsFilterRule <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_collections.IVector<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DeviceIds(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -187,6 +222,7 @@ public class ISmsFilterRule <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_collections.IVector<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SenderNumbers(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -195,6 +231,7 @@ public class ISmsFilterRule <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_collections.IVector<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TextMessagePrefixes(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -203,6 +240,7 @@ public class ISmsFilterRule <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_collections.IVector<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PortNumbers(): windows_collections.IVector<Int32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -225,6 +263,7 @@ public class ISmsFilterRule <: InterfaceWrapperBase & ComInterface & RuntimeName
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ProtocolIds(): windows_collections.IVector<Int32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -233,6 +272,7 @@ public class ISmsFilterRule <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_collections.IVector<Int32>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TeleserviceIds(): windows_collections.IVector<Int32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -241,6 +281,7 @@ public class ISmsFilterRule <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_collections.IVector<Int32>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func WapApplicationIds(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -249,6 +290,7 @@ public class ISmsFilterRule <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_collections.IVector<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func WapContentTypes(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -257,6 +299,7 @@ public class ISmsFilterRule <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_collections.IVector<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func BroadcastTypes(): windows_collections.IVector<SmsBroadcastType> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -265,6 +308,7 @@ public class ISmsFilterRule <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_collections.IVector<SmsBroadcastType>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func BroadcastChannels(): windows_collections.IVector<Int32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -816,7 +860,10 @@ extend ISmsReceivedEventDetails <: windows_core.Interface<ISmsReceivedEventDetai
 public struct ISmsSendMessageResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var IsSuccessful: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var MessageReferenceNumbers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var MessageReferenceNumbers: UIntNative = UIntNative(0)
     public var get_CellularClass: CFunc<(CPointer<Unit>, CPointer<CellularClassAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ModemErrorCode: CFunc<(CPointer<Unit>, CPointer<SmsModemErrorCodeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsErrorTransient: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -898,6 +945,7 @@ public class ISmsSendMessageResult <: InterfaceWrapperBase & ComInterface & Runt
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MessageReferenceNumbers(): windows_collections.IVectorView<Int32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

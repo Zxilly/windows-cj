@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -1440,7 +1439,10 @@ extend IBackgroundTransferOperationPriority <: windows_core.Interface<IBackgroun
 public struct IBackgroundTransferRangesDownloadedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var WasDownloadRestarted: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var AddedRanges: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AddedRanges: UIntNative = UIntNative(0)
     public var GetDeferral: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -1518,6 +1520,7 @@ public class IBackgroundTransferRangesDownloadedEventArgs <: InterfaceWrapperBas
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AddedRanges(): windows_collections.IVector<BackgroundTransferFileRange> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1542,7 +1545,10 @@ extend IBackgroundTransferRangesDownloadedEventArgs <: windows_core.Interface<IB
 @C
 public struct IContentPrefetcherVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ContentUris: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ContentUris: UIntNative = UIntNative(0)
     public var SetIndirectContentUri: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IndirectContentUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -1613,6 +1619,7 @@ public class IContentPrefetcher <: InterfaceWrapperBase & ComInterface & Runtime
         readVtbl<IContentPrefetcherVtbl>(IContentPrefetcherVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ContentUris(): windows_collections.IVector<Foundation.Uri> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1904,7 +1911,10 @@ public struct IResponseInformationVtbl {
     public var IsResumable: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ActualUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var StatusCode: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Headers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Headers: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1997,6 +2007,7 @@ public class IResponseInformation <: InterfaceWrapperBase & ComInterface & Runti
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Headers(): windows_collections.IMapView<windows_core.HString, windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2348,6 +2359,7 @@ public class ResponseInformation <: InterfaceWrapperBase & ComInterface & window
         return defaultInterface().StatusCode()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Headers(): windows_collections.IMapView<windows_core.HString, windows_core.HString> {
         return defaultInterface().Headers()
     }
@@ -2732,6 +2744,7 @@ public class BackgroundTransferRangesDownloadedEventArgs <: InterfaceWrapperBase
         return defaultInterface().WasDownloadRestarted()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AddedRanges(): windows_collections.IVector<BackgroundTransferFileRange> {
         return defaultInterface().AddedRanges()
     }
@@ -2790,6 +2803,7 @@ public class ContentPrefetcher <: windows_interface.RuntimeName & windows_core.R
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func ContentUris(): windows_collections.IVector<Foundation.Uri> {
         var result__: Option<windows_collections.IVector<Foundation.Uri>> = Option<windows_collections.IVector<Foundation.Uri>>.None
         try (factory__ = windows_core.factory<ContentPrefetcher, IContentPrefetcher>().unwrap()) {
@@ -3544,6 +3558,7 @@ public class BackgroundDownloader <: InterfaceWrapperBase & ComInterface & windo
         asIBackgroundTransferBase().SetCostPolicy(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func RequestUnconstrainedDownloadsAsync(operations: windows_collections.IIterable<DownloadOperation>): windows_future.IAsyncOperation<UnconstrainedTransferRequestResult> {
         var result__: Option<windows_future.IAsyncOperation<UnconstrainedTransferRequestResult>> = Option<windows_future.IAsyncOperation<UnconstrainedTransferRequestResult>>.None
         try (factory__ = windows_core.factory<BackgroundDownloader, IBackgroundDownloaderUserConsent>().unwrap()) {
@@ -3555,6 +3570,7 @@ public class BackgroundDownloader <: InterfaceWrapperBase & ComInterface & windo
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetCurrentDownloadsForTransferGroupAsync(group: BackgroundTransferGroup): windows_future.IAsyncOperation<windows_collections.IVectorView<DownloadOperation>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<DownloadOperation>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<DownloadOperation>>>.None
         try (factory__ = windows_core.factory<BackgroundDownloader, IBackgroundDownloaderStaticMethods2>().unwrap()) {
@@ -3566,6 +3582,7 @@ public class BackgroundDownloader <: InterfaceWrapperBase & ComInterface & windo
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetCurrentDownloadsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<DownloadOperation>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<DownloadOperation>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<DownloadOperation>>>.None
         try (factory__ = windows_core.factory<BackgroundDownloader, IBackgroundDownloaderStaticMethods>().unwrap()) {
@@ -3577,6 +3594,7 @@ public class BackgroundDownloader <: InterfaceWrapperBase & ComInterface & windo
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetCurrentDownloadsForGroupAsync(group: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVectorView<DownloadOperation>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<DownloadOperation>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<DownloadOperation>>>.None
         try (factory__ = windows_core.factory<BackgroundDownloader, IBackgroundDownloaderStaticMethods>().unwrap()) {
@@ -3687,10 +3705,12 @@ public class BackgroundTransferCompletionGroupTriggerDetails <: InterfaceWrapper
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Downloads(): windows_collections.IVectorView<DownloadOperation> {
         return defaultInterface().Downloads()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Uploads(): windows_collections.IVectorView<UploadOperation> {
         return defaultInterface().Uploads()
     }
@@ -4056,14 +4076,17 @@ public class BackgroundUploader <: InterfaceWrapperBase & ComInterface & windows
         return defaultInterface().CreateUploadFromStreamAsync(uri, sourceStream)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateUploadWithFormDataAndAutoBoundaryAsync(uri: Foundation.Uri, parts: windows_collections.IIterable<BackgroundTransferContentPart>): windows_future.IAsyncOperation<UploadOperation> {
         return defaultInterface().CreateUploadWithFormDataAndAutoBoundaryAsync(uri, parts)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateUploadWithSubTypeAsync(uri: Foundation.Uri, parts: windows_collections.IIterable<BackgroundTransferContentPart>, subType: windows_core.HString): windows_future.IAsyncOperation<UploadOperation> {
         return defaultInterface().CreateUploadWithSubTypeAsync(uri, parts, subType)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateUploadWithSubTypeAndBoundaryAsync(uri: Foundation.Uri, parts: windows_collections.IIterable<BackgroundTransferContentPart>, subType: windows_core.HString, boundary: windows_core.HString): windows_future.IAsyncOperation<UploadOperation> {
         return defaultInterface().CreateUploadWithSubTypeAndBoundaryAsync(uri, parts, subType, boundary)
     }
@@ -4116,6 +4139,7 @@ public class BackgroundUploader <: InterfaceWrapperBase & ComInterface & windows
         asIBackgroundTransferBase().SetCostPolicy(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func RequestUnconstrainedUploadsAsync(operations: windows_collections.IIterable<UploadOperation>): windows_future.IAsyncOperation<UnconstrainedTransferRequestResult> {
         var result__: Option<windows_future.IAsyncOperation<UnconstrainedTransferRequestResult>> = Option<windows_future.IAsyncOperation<UnconstrainedTransferRequestResult>>.None
         try (factory__ = windows_core.factory<BackgroundUploader, IBackgroundUploaderUserConsent>().unwrap()) {
@@ -4127,6 +4151,7 @@ public class BackgroundUploader <: InterfaceWrapperBase & ComInterface & windows
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetCurrentUploadsForTransferGroupAsync(group: BackgroundTransferGroup): windows_future.IAsyncOperation<windows_collections.IVectorView<UploadOperation>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<UploadOperation>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<UploadOperation>>>.None
         try (factory__ = windows_core.factory<BackgroundUploader, IBackgroundUploaderStaticMethods2>().unwrap()) {
@@ -4138,6 +4163,7 @@ public class BackgroundUploader <: InterfaceWrapperBase & ComInterface & windows
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetCurrentUploadsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<UploadOperation>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<UploadOperation>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<UploadOperation>>>.None
         try (factory__ = windows_core.factory<BackgroundUploader, IBackgroundUploaderStaticMethods>().unwrap()) {
@@ -4149,6 +4175,7 @@ public class BackgroundUploader <: InterfaceWrapperBase & ComInterface & windows
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetCurrentUploadsForGroupAsync(group: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVectorView<UploadOperation>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<UploadOperation>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<UploadOperation>>>.None
         try (factory__ = windows_core.factory<BackgroundUploader, IBackgroundUploaderStaticMethods>().unwrap()) {
@@ -4762,8 +4789,14 @@ extend IBackgroundDownloaderFactory <: windows_core.Interface<IBackgroundDownloa
 @C
 public struct IBackgroundDownloaderStaticMethodsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetCurrentDownloadsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetCurrentDownloadsAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetCurrentDownloadsForGroupAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetCurrentDownloadsForGroupAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4832,6 +4865,7 @@ public class IBackgroundDownloaderStaticMethods <: InterfaceWrapperBase & ComInt
         readVtbl<IBackgroundDownloaderStaticMethodsVtbl>(IBackgroundDownloaderStaticMethodsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetCurrentDownloadsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<DownloadOperation>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4840,6 +4874,7 @@ public class IBackgroundDownloaderStaticMethods <: InterfaceWrapperBase & ComInt
         return windows_future.IAsyncOperation<windows_collections.IVectorView<DownloadOperation>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetCurrentDownloadsForGroupAsync(group: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVectorView<DownloadOperation>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4856,7 +4891,10 @@ extend IBackgroundDownloaderStaticMethods <: windows_core.Interface<IBackgroundD
 @C
 public struct IBackgroundDownloaderStaticMethods2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetCurrentDownloadsForTransferGroupAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetCurrentDownloadsForTransferGroupAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4925,6 +4963,7 @@ public class IBackgroundDownloaderStaticMethods2 <: InterfaceWrapperBase & ComIn
         readVtbl<IBackgroundDownloaderStaticMethods2Vtbl>(IBackgroundDownloaderStaticMethods2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetCurrentDownloadsForTransferGroupAsync(group: BackgroundTransferGroup): windows_future.IAsyncOperation<windows_collections.IVectorView<DownloadOperation>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4941,7 +4980,10 @@ extend IBackgroundDownloaderStaticMethods2 <: windows_core.Interface<IBackground
 @C
 public struct IBackgroundDownloaderUserConsentVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var RequestUnconstrainedDownloadsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RequestUnconstrainedDownloadsAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -5010,6 +5052,7 @@ public class IBackgroundDownloaderUserConsent <: InterfaceWrapperBase & ComInter
         readVtbl<IBackgroundDownloaderUserConsentVtbl>(IBackgroundDownloaderUserConsentVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RequestUnconstrainedDownloadsAsync(operations: windows_collections.IIterable<DownloadOperation>): windows_future.IAsyncOperation<UnconstrainedTransferRequestResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5026,8 +5069,14 @@ extend IBackgroundDownloaderUserConsent <: windows_core.Interface<IBackgroundDow
 @C
 public struct IBackgroundTransferCompletionGroupTriggerDetailsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Downloads: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Downloads: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Uploads: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Uploads: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -5096,6 +5145,7 @@ public class IBackgroundTransferCompletionGroupTriggerDetails <: InterfaceWrappe
         readVtbl<IBackgroundTransferCompletionGroupTriggerDetailsVtbl>(IBackgroundTransferCompletionGroupTriggerDetailsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Downloads(): windows_collections.IVectorView<DownloadOperation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5104,6 +5154,7 @@ public class IBackgroundTransferCompletionGroupTriggerDetails <: InterfaceWrappe
         return windows_collections.IVectorView<DownloadOperation>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Uploads(): windows_collections.IVectorView<UploadOperation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5387,9 +5438,18 @@ public struct IBackgroundUploaderVtbl {
     public var CreateUploadFromStreamAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams != "on"]
     public var CreateUploadFromStreamAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateUploadWithFormDataAndAutoBoundaryAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateUploadWithFormDataAndAutoBoundaryAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateUploadWithSubTypeAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateUploadWithSubTypeAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateUploadWithSubTypeAndBoundaryAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateUploadWithSubTypeAndBoundaryAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -5488,6 +5548,7 @@ public class IBackgroundUploader <: InterfaceWrapperBase & ComInterface & Runtim
         return windows_future.IAsyncOperation<UploadOperation>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateUploadWithFormDataAndAutoBoundaryAsync(uri: Foundation.Uri, parts: windows_collections.IIterable<BackgroundTransferContentPart>): windows_future.IAsyncOperation<UploadOperation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5496,6 +5557,7 @@ public class IBackgroundUploader <: InterfaceWrapperBase & ComInterface & Runtim
         return windows_future.IAsyncOperation<UploadOperation>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateUploadWithSubTypeAsync(uri: Foundation.Uri, parts: windows_collections.IIterable<BackgroundTransferContentPart>, subType: windows_core.HString): windows_future.IAsyncOperation<UploadOperation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5504,6 +5566,7 @@ public class IBackgroundUploader <: InterfaceWrapperBase & ComInterface & Runtim
         return windows_future.IAsyncOperation<UploadOperation>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateUploadWithSubTypeAndBoundaryAsync(uri: Foundation.Uri, parts: windows_collections.IIterable<BackgroundTransferContentPart>, subType: windows_core.HString, boundary: windows_core.HString): windows_future.IAsyncOperation<UploadOperation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5793,8 +5856,14 @@ extend IBackgroundUploaderFactory <: windows_core.Interface<IBackgroundUploaderF
 @C
 public struct IBackgroundUploaderStaticMethodsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetCurrentUploadsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetCurrentUploadsAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetCurrentUploadsForGroupAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetCurrentUploadsForGroupAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -5863,6 +5932,7 @@ public class IBackgroundUploaderStaticMethods <: InterfaceWrapperBase & ComInter
         readVtbl<IBackgroundUploaderStaticMethodsVtbl>(IBackgroundUploaderStaticMethodsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetCurrentUploadsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<UploadOperation>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5871,6 +5941,7 @@ public class IBackgroundUploaderStaticMethods <: InterfaceWrapperBase & ComInter
         return windows_future.IAsyncOperation<windows_collections.IVectorView<UploadOperation>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetCurrentUploadsForGroupAsync(group: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVectorView<UploadOperation>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5887,7 +5958,10 @@ extend IBackgroundUploaderStaticMethods <: windows_core.Interface<IBackgroundUpl
 @C
 public struct IBackgroundUploaderStaticMethods2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetCurrentUploadsForTransferGroupAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetCurrentUploadsForTransferGroupAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -5956,6 +6030,7 @@ public class IBackgroundUploaderStaticMethods2 <: InterfaceWrapperBase & ComInte
         readVtbl<IBackgroundUploaderStaticMethods2Vtbl>(IBackgroundUploaderStaticMethods2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetCurrentUploadsForTransferGroupAsync(group: BackgroundTransferGroup): windows_future.IAsyncOperation<windows_collections.IVectorView<UploadOperation>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5972,7 +6047,10 @@ extend IBackgroundUploaderStaticMethods2 <: windows_core.Interface<IBackgroundUp
 @C
 public struct IBackgroundUploaderUserConsentVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var RequestUnconstrainedUploadsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RequestUnconstrainedUploadsAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -6041,6 +6119,7 @@ public class IBackgroundUploaderUserConsent <: InterfaceWrapperBase & ComInterfa
         readVtbl<IBackgroundUploaderUserConsentVtbl>(IBackgroundUploaderUserConsentVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RequestUnconstrainedUploadsAsync(operations: windows_collections.IIterable<UploadOperation>): windows_future.IAsyncOperation<UnconstrainedTransferRequestResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6290,13 +6369,16 @@ public struct IDownloadOperation3Vtbl {
     public var GetResultRandomAccessStreamReference: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams != "on"]
     public var GetResultRandomAccessStreamReference: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetDownloadedRanges: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetDownloadedRanges: UIntNative = UIntNative(0)
     public var RangesDownloaded: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveRangesDownloaded: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetRequestedUri: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Web == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Web == "on"]
     public var RecoverableWebErrorStatuses: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Web != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Web != "on"]
     public var RecoverableWebErrorStatuses: UIntNative = UIntNative(0)
     @When[Windows_Web == "on"]
     public var CurrentWebErrorStatus: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -6393,6 +6475,7 @@ public class IDownloadOperation3 <: InterfaceWrapperBase & ComInterface & Runtim
         return _impl_l1.IRandomAccessStreamReference.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetDownloadedRanges(): windows_collections.IVector<BackgroundTransferFileRange> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6421,7 +6504,7 @@ public class IDownloadOperation3 <: InterfaceWrapperBase & ComInterface & Runtim
         HRESULT(hr).ok()
     }
 
-    @When[Windows_Web == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Web == "on"]
     public unsafe func RecoverableWebErrorStatuses(): windows_collections.IVector<_impl_l0.WebErrorStatus> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

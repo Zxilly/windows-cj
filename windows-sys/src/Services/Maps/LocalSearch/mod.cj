@@ -3,10 +3,8 @@ package windows_sys.Services.Maps.LocalSearch
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Devices_Geolocation == "on"]
 import windows_sys.Devices.Geolocation as Devices_Geolocation
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_Services_Maps == "on"]
 import windows_sys.Services.Maps as Services_Maps
 import windows_sys._impl_l0 as _impl_l0
 
@@ -404,6 +402,7 @@ public struct ILocalLocation2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Category: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var RatingInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var HoursOfOperation: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -460,6 +459,7 @@ public class ILocalLocation2 <: InterfaceWrapperBase & ComInterface {
         return __vt.RatingInfo(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func HoursOfOperation(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -471,6 +471,7 @@ public class ILocalLocation2 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ILocalLocationFinderResultVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var LocalLocations: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Status: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -516,6 +517,7 @@ public class ILocalLocationFinderResult <: InterfaceWrapperBase & ComInterface {
         readVtbl<ILocalLocationFinderResultVtbl>(ILocalLocationFinderResultVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func LocalLocations(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

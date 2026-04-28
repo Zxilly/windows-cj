@@ -19,7 +19,7 @@ import windows_collections as windows_collections
 import windows_future as windows_future
 
 
-@When[Windows_ApplicationModel_DataTransfer == "on"]
+@When[Windows_ApplicationModel_DataTransfer == "on" && Windows_Foundation_Collections == "on"]
 public class DataPackagePropertySet <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -198,7 +198,7 @@ public class DataPackagePropertySet <: InterfaceWrapperBase & ComInterface & win
     }
 }
 
-@When[Windows_ApplicationModel_DataTransfer == "on"]
+@When[Windows_ApplicationModel_DataTransfer == "on" && Windows_Foundation_Collections == "on"]
 extend DataPackagePropertySet <: windows_core.HandleWinrtType<DataPackagePropertySet> {
     public static func intoWinrtHandle(value: DataPackagePropertySet): CPointer<Unit> {
         value.asRaw()
@@ -320,6 +320,7 @@ public class DataPackagePropertySetView <: InterfaceWrapperBase & ComInterface &
         return defaultInterface().Thumbnail()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FileTypes(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().FileTypes()
     }
@@ -447,12 +448,14 @@ public class DataProviderHandler <: InterfaceWrapperBase & ComInterface & window
 @When[Windows_ApplicationModel_DataTransfer == "on"]
 extend DataProviderHandler <: windows_core.Interface<DataProviderHandler> {}
 
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 private open class DataProviderHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 private open class DataProviderHandlerInvoker <: DataProviderHandlerInvokerErased {
     public open func Invoke(request: InParam<DataProviderRequest>): Unit {
         ()
@@ -464,6 +467,7 @@ private open class DataProviderHandlerInvoker <: DataProviderHandlerInvokerErase
     }
 }
 
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 private class DataProviderHandlerBox <: DataProviderHandlerInvoker {
     public let invoke_: (InParam<DataProviderRequest>) -> Unit
     private let vtblHandle: CPointerHandle<DataProviderHandlerVtbl>
@@ -482,6 +486,7 @@ private class DataProviderHandlerBox <: DataProviderHandlerInvoker {
     }
 }
 
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 func buildDataProviderHandlerBoxVtbl(): DataProviderHandlerVtbl {
     var vtbl = DataProviderHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -616,7 +621,10 @@ public struct IDataPackagePropertySetVtbl {
     public var SetThumbnail: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams != "on"]
     public var SetThumbnail: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var FileTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FileTypes: UIntNative = UIntNative(0)
     public var ApplicationName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetApplicationName: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ApplicationListingUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -752,6 +760,7 @@ public class IDataPackagePropertySet <: InterfaceWrapperBase & ComInterface & Ru
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FileTypes(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -982,7 +991,10 @@ public struct IDataPackagePropertySetViewVtbl {
     public var Thumbnail: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams != "on"]
     public var Thumbnail: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var FileTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FileTypes: UIntNative = UIntNative(0)
     public var ApplicationName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ApplicationListingUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -1078,6 +1090,7 @@ public class IDataPackagePropertySetView <: InterfaceWrapperBase & ComInterface 
         return RandomAccessStreamReference.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FileTypes(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1242,25 +1255,28 @@ public struct IDataPackageViewVtbl {
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var RequestedOperation: CFunc<(CPointer<Unit>, CPointer<_impl_l0.DataPackageOperationAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ReportOperationCompleted: CFunc<(CPointer<Unit>, _impl_l0.DataPackageOperationAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var AvailableFormats: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AvailableFormats: UIntNative = UIntNative(0)
     public var Contains: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var GetDataAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var GetTextAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetCustomTextAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var GetUriAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetHtmlFormatAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var GetResourceMapAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
     public var GetResourceMapAsync: UIntNative = UIntNative(0)
     public var GetRtfAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams == "on"]
     public var GetBitmapAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams != "on"]
     public var GetBitmapAsync: UIntNative = UIntNative(0)
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var GetStorageItemsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage != "on"]
     public var GetStorageItemsAsync: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -1352,6 +1368,7 @@ public class IDataPackageView <: InterfaceWrapperBase & ComInterface & RuntimeNa
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AvailableFormats(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1408,7 +1425,7 @@ public class IDataPackageView <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_future.IAsyncOperation<windows_core.HString>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetResourceMapAsync(): windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, RandomAccessStreamReference>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1434,7 +1451,7 @@ public class IDataPackageView <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_future.IAsyncOperation<RandomAccessStreamReference>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func GetStorageItemsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<IStorageItem>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1775,9 +1792,9 @@ public struct ISharedStorageAccessManagerStaticsVtbl {
     public var AddFile: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_Storage != "on"]
     public var AddFile: UIntNative = UIntNative(0)
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var RedeemTokenForFileAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var RedeemTokenForFileAsync: UIntNative = UIntNative(0)
     public var RemoveFile: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -1857,7 +1874,7 @@ public class ISharedStorageAccessManagerStatics <: InterfaceWrapperBase & ComInt
         return windows_core.HString.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func RedeemTokenForFileAsync(token: windows_core.HString): windows_future.IAsyncOperation<StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2231,7 +2248,7 @@ public class SharedStorageAccessManager <: windows_interface.RuntimeName & windo
         }
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public static unsafe func RedeemTokenForFileAsync(token: windows_core.HString): windows_future.IAsyncOperation<StorageFile> {
         var result__: Option<windows_future.IAsyncOperation<StorageFile>> = Option<windows_future.IAsyncOperation<StorageFile>>.None
         try (factory__ = windows_core.factory<SharedStorageAccessManager, ISharedStorageAccessManagerStatics>().unwrap()) {

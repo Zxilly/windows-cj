@@ -8,9 +8,7 @@ import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result
 import windows_core as windows_core
 import windows_interface.{GUID}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows_core as windows_core
@@ -3177,215 +3175,1153 @@ extend SCARD_READERSTATEW <: windows_core.CopyType & windows_core.RuntimeType & 
     }
 }
 
-@When[ADVAPI32 == "on"]
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredDeleteA == "on"]
 foreign {
     // param-hint: Flags optional reserved
     // pinvoke-hint: SetLastError
     func CredDeleteA(TargetName: CPointer<UInt8>, Type: CRED_TYPEAbi, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredDeleteA == "on"]
+public unsafe func Windows_CredDeleteA(TargetName: CPointer<UInt8>, Type: CRED_TYPEAbi, Flags: UInt32): Int32 {
+    return CredDeleteA(TargetName, Type, Flags)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredDeleteW == "on"]
+foreign {
     // param-hint: Flags optional reserved
     // pinvoke-hint: SetLastError
     func CredDeleteW(TargetName: CPointer<UInt16>, Type: CRED_TYPEAbi, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredDeleteW == "on"]
+public unsafe func Windows_CredDeleteW(TargetName: CPointer<UInt16>, Type: CRED_TYPEAbi, Flags: UInt32): Int32 {
+    return CredDeleteW(TargetName, Type, Flags)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredEnumerateA == "on"]
+foreign {
     // param-hint: Filter optional
     // param-hint: Flags optional reserved
     // pinvoke-hint: SetLastError
     func CredEnumerateA(Filter: CPointer<UInt8>, Flags: CRED_ENUMERATE_FLAGSAbi, Count: CPointer<UInt32>, Credential: CPointer<CPointer<CPointer<CREDENTIALAAbi>>>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredEnumerateA == "on"]
+public unsafe func Windows_CredEnumerateA(Filter: CPointer<UInt8>, Flags: CRED_ENUMERATE_FLAGSAbi, Count: CPointer<UInt32>, Credential: CPointer<CPointer<CPointer<CREDENTIALAAbi>>>): Int32 {
+    return CredEnumerateA(Filter, Flags, Count, Credential)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredEnumerateW == "on"]
+foreign {
     // param-hint: Filter optional
     // param-hint: Flags optional reserved
     // pinvoke-hint: SetLastError
     func CredEnumerateW(Filter: CPointer<UInt16>, Flags: CRED_ENUMERATE_FLAGSAbi, Count: CPointer<UInt32>, Credential: CPointer<CPointer<CPointer<CREDENTIALWAbi>>>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredEnumerateW == "on"]
+public unsafe func Windows_CredEnumerateW(Filter: CPointer<UInt16>, Flags: CRED_ENUMERATE_FLAGSAbi, Count: CPointer<UInt32>, Credential: CPointer<CPointer<CPointer<CREDENTIALWAbi>>>): Int32 {
+    return CredEnumerateW(Filter, Flags, Count, Credential)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredFindBestCredentialA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CredFindBestCredentialA(TargetName: CPointer<UInt8>, Type: UInt32, Flags: UInt32, Credential: CPointer<CPointer<CREDENTIALAAbi>>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredFindBestCredentialA == "on"]
+public unsafe func Windows_CredFindBestCredentialA(TargetName: CPointer<UInt8>, Type: UInt32, Flags: UInt32, Credential: CPointer<CPointer<CREDENTIALAAbi>>): Int32 {
+    return CredFindBestCredentialA(TargetName, Type, Flags, Credential)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredFindBestCredentialW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CredFindBestCredentialW(TargetName: CPointer<UInt16>, Type: UInt32, Flags: UInt32, Credential: CPointer<CPointer<CREDENTIALWAbi>>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredFindBestCredentialW == "on"]
+public unsafe func Windows_CredFindBestCredentialW(TargetName: CPointer<UInt16>, Type: UInt32, Flags: UInt32, Credential: CPointer<CPointer<CREDENTIALWAbi>>): Int32 {
+    return CredFindBestCredentialW(TargetName, Type, Flags, Credential)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredFree == "on"]
+foreign {
     func CredFree(Buffer: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredFree == "on"]
+public unsafe func Windows_CredFree(Buffer: CPointer<Unit>): Unit {
+    CredFree(Buffer)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredGetSessionTypes == "on"]
+foreign {
     // param-hint: MaximumPersist len=param[0]
     // pinvoke-hint: SetLastError
     func CredGetSessionTypes(MaximumPersistCount: UInt32, MaximumPersist: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredGetSessionTypes == "on"]
+public unsafe func Windows_CredGetSessionTypes(MaximumPersistCount: UInt32, MaximumPersist: CPointer<UInt32>): Int32 {
+    return CredGetSessionTypes(MaximumPersistCount, MaximumPersist)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredGetTargetInfoA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CredGetTargetInfoA(TargetName: CPointer<UInt8>, Flags: UInt32, TargetInfo: CPointer<CPointer<CREDENTIAL_TARGET_INFORMATIONAAbi>>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredGetTargetInfoA == "on"]
+public unsafe func Windows_CredGetTargetInfoA(TargetName: CPointer<UInt8>, Flags: UInt32, TargetInfo: CPointer<CPointer<CREDENTIAL_TARGET_INFORMATIONAAbi>>): Int32 {
+    return CredGetTargetInfoA(TargetName, Flags, TargetInfo)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredGetTargetInfoW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CredGetTargetInfoW(TargetName: CPointer<UInt16>, Flags: UInt32, TargetInfo: CPointer<CPointer<CREDENTIAL_TARGET_INFORMATIONWAbi>>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredGetTargetInfoW == "on"]
+public unsafe func Windows_CredGetTargetInfoW(TargetName: CPointer<UInt16>, Flags: UInt32, TargetInfo: CPointer<CPointer<CREDENTIAL_TARGET_INFORMATIONWAbi>>): Int32 {
+    return CredGetTargetInfoW(TargetName, Flags, TargetInfo)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredIsMarshaledCredentialA == "on"]
+foreign {
     func CredIsMarshaledCredentialA(MarshaledCredential: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredIsMarshaledCredentialA == "on"]
+public unsafe func Windows_CredIsMarshaledCredentialA(MarshaledCredential: CPointer<UInt8>): Int32 {
+    return CredIsMarshaledCredentialA(MarshaledCredential)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredIsMarshaledCredentialW == "on"]
+foreign {
     func CredIsMarshaledCredentialW(MarshaledCredential: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredIsMarshaledCredentialW == "on"]
+public unsafe func Windows_CredIsMarshaledCredentialW(MarshaledCredential: CPointer<UInt16>): Int32 {
+    return CredIsMarshaledCredentialW(MarshaledCredential)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredIsProtectedA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CredIsProtectedA(pszProtectedCredentials: CPointer<UInt8>, pProtectionType: CPointer<CRED_PROTECTION_TYPEAbi>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredIsProtectedA == "on"]
+public unsafe func Windows_CredIsProtectedA(pszProtectedCredentials: CPointer<UInt8>, pProtectionType: CPointer<CRED_PROTECTION_TYPEAbi>): Int32 {
+    return CredIsProtectedA(pszProtectedCredentials, pProtectionType)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredIsProtectedW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CredIsProtectedW(pszProtectedCredentials: CPointer<UInt16>, pProtectionType: CPointer<CRED_PROTECTION_TYPEAbi>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredIsProtectedW == "on"]
+public unsafe func Windows_CredIsProtectedW(pszProtectedCredentials: CPointer<UInt16>, pProtectionType: CPointer<CRED_PROTECTION_TYPEAbi>): Int32 {
+    return CredIsProtectedW(pszProtectedCredentials, pProtectionType)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredMarshalCredentialA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CredMarshalCredentialA(CredType: CRED_MARSHAL_TYPEAbi, Credential: CPointer<Unit>, MarshaledCredential: CPointer<CPointer<UInt8>>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredMarshalCredentialA == "on"]
+public unsafe func Windows_CredMarshalCredentialA(CredType: CRED_MARSHAL_TYPEAbi, Credential: CPointer<Unit>, MarshaledCredential: CPointer<CPointer<UInt8>>): Int32 {
+    return CredMarshalCredentialA(CredType, Credential, MarshaledCredential)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredMarshalCredentialW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CredMarshalCredentialW(CredType: CRED_MARSHAL_TYPEAbi, Credential: CPointer<Unit>, MarshaledCredential: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredMarshalCredentialW == "on"]
+public unsafe func Windows_CredMarshalCredentialW(CredType: CRED_MARSHAL_TYPEAbi, Credential: CPointer<Unit>, MarshaledCredential: CPointer<CPointer<UInt16>>): Int32 {
+    return CredMarshalCredentialW(CredType, Credential, MarshaledCredential)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredProtectA == "on"]
+foreign {
     // param-hint: pszCredentials len=param[2]
     // param-hint: pszProtectedCredentials len=param[4]
     // param-hint: ProtectionType optional
     // pinvoke-hint: SetLastError
     func CredProtectA(fAsSelf: Int32, pszCredentials: CPointer<UInt8>, cchCredentials: UInt32, pszProtectedCredentials: CPointer<UInt8>, pcchMaxChars: CPointer<UInt32>, ProtectionType: CPointer<CRED_PROTECTION_TYPEAbi>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredProtectA == "on"]
+public unsafe func Windows_CredProtectA(fAsSelf: Int32, pszCredentials: CPointer<UInt8>, cchCredentials: UInt32, pszProtectedCredentials: CPointer<UInt8>, pcchMaxChars: CPointer<UInt32>, ProtectionType: CPointer<CRED_PROTECTION_TYPEAbi>): Int32 {
+    return CredProtectA(fAsSelf, pszCredentials, cchCredentials, pszProtectedCredentials, pcchMaxChars, ProtectionType)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredProtectW == "on"]
+foreign {
     // param-hint: pszCredentials len=param[2]
     // param-hint: pszProtectedCredentials len=param[4]
     // param-hint: ProtectionType optional
     // pinvoke-hint: SetLastError
     func CredProtectW(fAsSelf: Int32, pszCredentials: CPointer<UInt16>, cchCredentials: UInt32, pszProtectedCredentials: CPointer<UInt16>, pcchMaxChars: CPointer<UInt32>, ProtectionType: CPointer<CRED_PROTECTION_TYPEAbi>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredProtectW == "on"]
+public unsafe func Windows_CredProtectW(fAsSelf: Int32, pszCredentials: CPointer<UInt16>, cchCredentials: UInt32, pszProtectedCredentials: CPointer<UInt16>, pcchMaxChars: CPointer<UInt32>, ProtectionType: CPointer<CRED_PROTECTION_TYPEAbi>): Int32 {
+    return CredProtectW(fAsSelf, pszCredentials, cchCredentials, pszProtectedCredentials, pcchMaxChars, ProtectionType)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredReadA == "on"]
+foreign {
     // param-hint: Flags optional reserved
     // pinvoke-hint: SetLastError
     func CredReadA(TargetName: CPointer<UInt8>, Type: CRED_TYPEAbi, Flags: UInt32, Credential: CPointer<CPointer<CREDENTIALAAbi>>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredReadA == "on"]
+public unsafe func Windows_CredReadA(TargetName: CPointer<UInt8>, Type: CRED_TYPEAbi, Flags: UInt32, Credential: CPointer<CPointer<CREDENTIALAAbi>>): Int32 {
+    return CredReadA(TargetName, Type, Flags, Credential)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredReadDomainCredentialsA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CredReadDomainCredentialsA(TargetInfo: CPointer<CREDENTIAL_TARGET_INFORMATIONAAbi>, Flags: UInt32, Count: CPointer<UInt32>, Credential: CPointer<CPointer<CPointer<CREDENTIALAAbi>>>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredReadDomainCredentialsA == "on"]
+public unsafe func Windows_CredReadDomainCredentialsA(TargetInfo: CPointer<CREDENTIAL_TARGET_INFORMATIONAAbi>, Flags: UInt32, Count: CPointer<UInt32>, Credential: CPointer<CPointer<CPointer<CREDENTIALAAbi>>>): Int32 {
+    return CredReadDomainCredentialsA(TargetInfo, Flags, Count, Credential)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredReadDomainCredentialsW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CredReadDomainCredentialsW(TargetInfo: CPointer<CREDENTIAL_TARGET_INFORMATIONWAbi>, Flags: UInt32, Count: CPointer<UInt32>, Credential: CPointer<CPointer<CPointer<CREDENTIALWAbi>>>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredReadDomainCredentialsW == "on"]
+public unsafe func Windows_CredReadDomainCredentialsW(TargetInfo: CPointer<CREDENTIAL_TARGET_INFORMATIONWAbi>, Flags: UInt32, Count: CPointer<UInt32>, Credential: CPointer<CPointer<CPointer<CREDENTIALWAbi>>>): Int32 {
+    return CredReadDomainCredentialsW(TargetInfo, Flags, Count, Credential)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredReadW == "on"]
+foreign {
     // param-hint: Flags optional reserved
     // pinvoke-hint: SetLastError
     func CredReadW(TargetName: CPointer<UInt16>, Type: CRED_TYPEAbi, Flags: UInt32, Credential: CPointer<CPointer<CREDENTIALWAbi>>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredReadW == "on"]
+public unsafe func Windows_CredReadW(TargetName: CPointer<UInt16>, Type: CRED_TYPEAbi, Flags: UInt32, Credential: CPointer<CPointer<CREDENTIALWAbi>>): Int32 {
+    return CredReadW(TargetName, Type, Flags, Credential)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredRenameA == "on"]
+foreign {
     // param-hint: Flags optional reserved
     // pinvoke-hint: SetLastError
     func CredRenameA(OldTargetName: CPointer<UInt8>, NewTargetName: CPointer<UInt8>, Type: CRED_TYPEAbi, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredRenameA == "on"]
+public unsafe func Windows_CredRenameA(OldTargetName: CPointer<UInt8>, NewTargetName: CPointer<UInt8>, Type: CRED_TYPEAbi, Flags: UInt32): Int32 {
+    return CredRenameA(OldTargetName, NewTargetName, Type, Flags)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredRenameW == "on"]
+foreign {
     // param-hint: Flags optional reserved
     // pinvoke-hint: SetLastError
     func CredRenameW(OldTargetName: CPointer<UInt16>, NewTargetName: CPointer<UInt16>, Type: CRED_TYPEAbi, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredRenameW == "on"]
+public unsafe func Windows_CredRenameW(OldTargetName: CPointer<UInt16>, NewTargetName: CPointer<UInt16>, Type: CRED_TYPEAbi, Flags: UInt32): Int32 {
+    return CredRenameW(OldTargetName, NewTargetName, Type, Flags)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredUnmarshalCredentialA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CredUnmarshalCredentialA(MarshaledCredential: CPointer<UInt8>, CredType: CPointer<CRED_MARSHAL_TYPEAbi>, Credential: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredUnmarshalCredentialA == "on"]
+public unsafe func Windows_CredUnmarshalCredentialA(MarshaledCredential: CPointer<UInt8>, CredType: CPointer<CRED_MARSHAL_TYPEAbi>, Credential: CPointer<CPointer<Unit>>): Int32 {
+    return CredUnmarshalCredentialA(MarshaledCredential, CredType, Credential)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredUnmarshalCredentialW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CredUnmarshalCredentialW(MarshaledCredential: CPointer<UInt16>, CredType: CPointer<CRED_MARSHAL_TYPEAbi>, Credential: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredUnmarshalCredentialW == "on"]
+public unsafe func Windows_CredUnmarshalCredentialW(MarshaledCredential: CPointer<UInt16>, CredType: CPointer<CRED_MARSHAL_TYPEAbi>, Credential: CPointer<CPointer<Unit>>): Int32 {
+    return CredUnmarshalCredentialW(MarshaledCredential, CredType, Credential)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredUnprotectA == "on"]
+foreign {
     // param-hint: pszProtectedCredentials len=param[2]
     // param-hint: pszCredentials len=param[4] optional
     // pinvoke-hint: SetLastError
     func CredUnprotectA(fAsSelf: Int32, pszProtectedCredentials: CPointer<UInt8>, cchProtectedCredentials: UInt32, pszCredentials: CPointer<UInt8>, pcchMaxChars: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredUnprotectA == "on"]
+public unsafe func Windows_CredUnprotectA(fAsSelf: Int32, pszProtectedCredentials: CPointer<UInt8>, cchProtectedCredentials: UInt32, pszCredentials: CPointer<UInt8>, pcchMaxChars: CPointer<UInt32>): Int32 {
+    return CredUnprotectA(fAsSelf, pszProtectedCredentials, cchProtectedCredentials, pszCredentials, pcchMaxChars)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredUnprotectW == "on"]
+foreign {
     // param-hint: pszProtectedCredentials len=param[2]
     // param-hint: pszCredentials len=param[4] optional
     // pinvoke-hint: SetLastError
     func CredUnprotectW(fAsSelf: Int32, pszProtectedCredentials: CPointer<UInt16>, cchProtectedCredentials: UInt32, pszCredentials: CPointer<UInt16>, pcchMaxChars: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredUnprotectW == "on"]
+public unsafe func Windows_CredUnprotectW(fAsSelf: Int32, pszProtectedCredentials: CPointer<UInt16>, cchProtectedCredentials: UInt32, pszCredentials: CPointer<UInt16>, pcchMaxChars: CPointer<UInt32>): Int32 {
+    return CredUnprotectW(fAsSelf, pszProtectedCredentials, cchProtectedCredentials, pszCredentials, pcchMaxChars)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredWriteA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CredWriteA(Credential: CPointer<CREDENTIALAAbi>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredWriteA == "on"]
+public unsafe func Windows_CredWriteA(Credential: CPointer<CREDENTIALAAbi>, Flags: UInt32): Int32 {
+    return CredWriteA(Credential, Flags)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredWriteDomainCredentialsA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CredWriteDomainCredentialsA(TargetInfo: CPointer<CREDENTIAL_TARGET_INFORMATIONAAbi>, Credential: CPointer<CREDENTIALAAbi>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredWriteDomainCredentialsA == "on"]
+public unsafe func Windows_CredWriteDomainCredentialsA(TargetInfo: CPointer<CREDENTIAL_TARGET_INFORMATIONAAbi>, Credential: CPointer<CREDENTIALAAbi>, Flags: UInt32): Int32 {
+    return CredWriteDomainCredentialsA(TargetInfo, Credential, Flags)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredWriteDomainCredentialsW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CredWriteDomainCredentialsW(TargetInfo: CPointer<CREDENTIAL_TARGET_INFORMATIONWAbi>, Credential: CPointer<CREDENTIALWAbi>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredWriteDomainCredentialsW == "on"]
+public unsafe func Windows_CredWriteDomainCredentialsW(TargetInfo: CPointer<CREDENTIAL_TARGET_INFORMATIONWAbi>, Credential: CPointer<CREDENTIALWAbi>, Flags: UInt32): Int32 {
+    return CredWriteDomainCredentialsW(TargetInfo, Credential, Flags)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredWriteW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CredWriteW(Credential: CPointer<CREDENTIALWAbi>, Flags: UInt32): Int32
 }
 
-@When[KEYCREDMGR == "on"]
+@When[Windows_Win32_Security_Credentials == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Credentials_CredWriteW == "on"]
+public unsafe func Windows_CredWriteW(Credential: CPointer<CREDENTIALWAbi>, Flags: UInt32): Int32 {
+    return CredWriteW(Credential, Flags)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && KEYCREDMGR == "on" && Windows_Win32_Security_Credentials_KeyCredentialManagerFreeInformation == "on"]
 foreign {
     func KeyCredentialManagerFreeInformation(keyCredentialManagerInfo: CPointer<KeyCredentialManagerInfoAbi>): Unit
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && KEYCREDMGR == "on" && Windows_Win32_Security_Credentials_KeyCredentialManagerFreeInformation == "on"]
+public unsafe func Windows_KeyCredentialManagerFreeInformation(keyCredentialManagerInfo: CPointer<KeyCredentialManagerInfoAbi>): Unit {
+    KeyCredentialManagerFreeInformation(keyCredentialManagerInfo)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && KEYCREDMGR == "on" && Windows_Win32_Security_Credentials_KeyCredentialManagerGetInformation == "on"]
+foreign {
     func KeyCredentialManagerGetInformation(keyCredentialManagerInfo: CPointer<CPointer<KeyCredentialManagerInfoAbi>>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && KEYCREDMGR == "on" && Windows_Win32_Security_Credentials_KeyCredentialManagerGetInformation == "on"]
+public unsafe func Windows_KeyCredentialManagerGetInformation(keyCredentialManagerInfo: CPointer<CPointer<KeyCredentialManagerInfoAbi>>): Int32 {
+    return KeyCredentialManagerGetInformation(keyCredentialManagerInfo)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && KEYCREDMGR == "on" && Windows_Win32_Security_Credentials_KeyCredentialManagerGetOperationErrorStates == "on"]
+foreign {
     func KeyCredentialManagerGetOperationErrorStates(keyCredentialManagerOperationType: KeyCredentialManagerOperationTypeAbi, isReady: CPointer<Int32>, keyCredentialManagerOperationErrorStates: CPointer<KeyCredentialManagerOperationErrorStatesAbi>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && KEYCREDMGR == "on" && Windows_Win32_Security_Credentials_KeyCredentialManagerGetOperationErrorStates == "on"]
+public unsafe func Windows_KeyCredentialManagerGetOperationErrorStates(keyCredentialManagerOperationType: KeyCredentialManagerOperationTypeAbi, isReady: CPointer<Int32>, keyCredentialManagerOperationErrorStates: CPointer<KeyCredentialManagerOperationErrorStatesAbi>): Int32 {
+    return KeyCredentialManagerGetOperationErrorStates(keyCredentialManagerOperationType, isReady, keyCredentialManagerOperationErrorStates)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && KEYCREDMGR == "on" && Windows_Win32_Security_Credentials_KeyCredentialManagerShowUIOperation == "on"]
+foreign {
     func KeyCredentialManagerShowUIOperation(hWndOwner: CPointer<Unit>, keyCredentialManagerOperationType: KeyCredentialManagerOperationTypeAbi): Int32
 }
 
-@When[SCARDDLG == "on"]
+@When[Windows_Win32_Security_Credentials == "on" && KEYCREDMGR == "on" && Windows_Win32_Security_Credentials_KeyCredentialManagerShowUIOperation == "on"]
+public unsafe func Windows_KeyCredentialManagerShowUIOperation(hWndOwner: CPointer<Unit>, keyCredentialManagerOperationType: KeyCredentialManagerOperationTypeAbi): Int32 {
+    return KeyCredentialManagerShowUIOperation(hWndOwner, keyCredentialManagerOperationType)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && SCARDDLG == "on" && Windows_Win32_Security_Credentials_GetOpenCardNameA == "on"]
 foreign {
     func GetOpenCardNameA(param0: CPointer<OPENCARDNAMEAAbi>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && SCARDDLG == "on" && Windows_Win32_Security_Credentials_GetOpenCardNameA == "on"]
+public unsafe func Windows_GetOpenCardNameA(param0: CPointer<OPENCARDNAMEAAbi>): Int32 {
+    return GetOpenCardNameA(param0)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && SCARDDLG == "on" && Windows_Win32_Security_Credentials_GetOpenCardNameW == "on"]
+foreign {
     func GetOpenCardNameW(param0: CPointer<OPENCARDNAMEWAbi>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && SCARDDLG == "on" && Windows_Win32_Security_Credentials_GetOpenCardNameW == "on"]
+public unsafe func Windows_GetOpenCardNameW(param0: CPointer<OPENCARDNAMEWAbi>): Int32 {
+    return GetOpenCardNameW(param0)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && SCARDDLG == "on" && Windows_Win32_Security_Credentials_SCardDlgExtendedError == "on"]
+foreign {
     func SCardDlgExtendedError(): Int32
 }
 
-@When[SCARDDLG == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+@When[Windows_Win32_Security_Credentials == "on" && SCARDDLG == "on" && Windows_Win32_Security_Credentials_SCardDlgExtendedError == "on"]
+public unsafe func Windows_SCardDlgExtendedError(): Int32 {
+    return SCardDlgExtendedError()
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && SCARDDLG == "on" && Windows_Win32_Security_Credentials_SCardUIDlgSelectCardA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
     func SCardUIDlgSelectCardA(param0: CPointer<OPENCARDNAME_EXAAbi>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && SCARDDLG == "on" && Windows_Win32_Security_Credentials_SCardUIDlgSelectCardA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_SCardUIDlgSelectCardA(param0: CPointer<OPENCARDNAME_EXAAbi>): Int32 {
+    return SCardUIDlgSelectCardA(param0)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && SCARDDLG == "on" && Windows_Win32_Security_Credentials_SCardUIDlgSelectCardW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
     func SCardUIDlgSelectCardW(param0: CPointer<OPENCARDNAME_EXWAbi>): Int32
 }
 
-@When[WINSCARD == "on"]
+@When[Windows_Win32_Security_Credentials == "on" && SCARDDLG == "on" && Windows_Win32_Security_Credentials_SCardUIDlgSelectCardW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_SCardUIDlgSelectCardW(param0: CPointer<OPENCARDNAME_EXWAbi>): Int32 {
+    return SCardUIDlgSelectCardW(param0)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardAccessStartedEvent == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func SCardAccessStartedEvent(): CPointer<Unit>
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardAccessStartedEvent == "on"]
+public unsafe func Windows_SCardAccessStartedEvent(): CPointer<Unit> {
+    return SCardAccessStartedEvent()
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardAddReaderToGroupA == "on"]
+foreign {
     func SCardAddReaderToGroupA(hContext: UIntNative, szReaderName: CPointer<UInt8>, szGroupName: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardAddReaderToGroupA == "on"]
+public unsafe func Windows_SCardAddReaderToGroupA(hContext: UIntNative, szReaderName: CPointer<UInt8>, szGroupName: CPointer<UInt8>): Int32 {
+    return SCardAddReaderToGroupA(hContext, szReaderName, szGroupName)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardAddReaderToGroupW == "on"]
+foreign {
     func SCardAddReaderToGroupW(hContext: UIntNative, szReaderName: CPointer<UInt16>, szGroupName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardAddReaderToGroupW == "on"]
+public unsafe func Windows_SCardAddReaderToGroupW(hContext: UIntNative, szReaderName: CPointer<UInt16>, szGroupName: CPointer<UInt16>): Int32 {
+    return SCardAddReaderToGroupW(hContext, szReaderName, szGroupName)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardAudit == "on"]
+foreign {
     func SCardAudit(hContext: UIntNative, dwEvent: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardAudit == "on"]
+public unsafe func Windows_SCardAudit(hContext: UIntNative, dwEvent: UInt32): Int32 {
+    return SCardAudit(hContext, dwEvent)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardBeginTransaction == "on"]
+foreign {
     func SCardBeginTransaction(hCard: UIntNative): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardBeginTransaction == "on"]
+public unsafe func Windows_SCardBeginTransaction(hCard: UIntNative): Int32 {
+    return SCardBeginTransaction(hCard)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardCancel == "on"]
+foreign {
     func SCardCancel(hContext: UIntNative): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardCancel == "on"]
+public unsafe func Windows_SCardCancel(hContext: UIntNative): Int32 {
+    return SCardCancel(hContext)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardConnectA == "on"]
+foreign {
     func SCardConnectA(hContext: UIntNative, szReader: CPointer<UInt8>, dwShareMode: UInt32, dwPreferredProtocols: UInt32, phCard: CPointer<UIntNative>, pdwActiveProtocol: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardConnectA == "on"]
+public unsafe func Windows_SCardConnectA(hContext: UIntNative, szReader: CPointer<UInt8>, dwShareMode: UInt32, dwPreferredProtocols: UInt32, phCard: CPointer<UIntNative>, pdwActiveProtocol: CPointer<UInt32>): Int32 {
+    return SCardConnectA(hContext, szReader, dwShareMode, dwPreferredProtocols, phCard, pdwActiveProtocol)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardConnectW == "on"]
+foreign {
     func SCardConnectW(hContext: UIntNative, szReader: CPointer<UInt16>, dwShareMode: UInt32, dwPreferredProtocols: UInt32, phCard: CPointer<UIntNative>, pdwActiveProtocol: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardConnectW == "on"]
+public unsafe func Windows_SCardConnectW(hContext: UIntNative, szReader: CPointer<UInt16>, dwShareMode: UInt32, dwPreferredProtocols: UInt32, phCard: CPointer<UIntNative>, pdwActiveProtocol: CPointer<UInt32>): Int32 {
+    return SCardConnectW(hContext, szReader, dwShareMode, dwPreferredProtocols, phCard, pdwActiveProtocol)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardControl == "on"]
+foreign {
     // param-hint: lpInBuffer bytes=param[3]
     // param-hint: lpOutBuffer bytes=param[5]
     func SCardControl(hCard: UIntNative, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, cbInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, cbOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardControl == "on"]
+public unsafe func Windows_SCardControl(hCard: UIntNative, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, cbInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, cbOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>): Int32 {
+    return SCardControl(hCard, dwControlCode, lpInBuffer, cbInBufferSize, lpOutBuffer, cbOutBufferSize, lpBytesReturned)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardDisconnect == "on"]
+foreign {
     func SCardDisconnect(hCard: UIntNative, dwDisposition: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardDisconnect == "on"]
+public unsafe func Windows_SCardDisconnect(hCard: UIntNative, dwDisposition: UInt32): Int32 {
+    return SCardDisconnect(hCard, dwDisposition)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardEndTransaction == "on"]
+foreign {
     func SCardEndTransaction(hCard: UIntNative, dwDisposition: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardEndTransaction == "on"]
+public unsafe func Windows_SCardEndTransaction(hCard: UIntNative, dwDisposition: UInt32): Int32 {
+    return SCardEndTransaction(hCard, dwDisposition)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardEstablishContext == "on"]
+foreign {
     // param-hint: pvReserved1 optional reserved
     // param-hint: pvReserved2 optional reserved
     func SCardEstablishContext(dwScope: SCARD_SCOPEAbi, pvReserved1: CPointer<Unit>, pvReserved2: CPointer<Unit>, phContext: CPointer<UIntNative>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardEstablishContext == "on"]
+public unsafe func Windows_SCardEstablishContext(dwScope: SCARD_SCOPEAbi, pvReserved1: CPointer<Unit>, pvReserved2: CPointer<Unit>, phContext: CPointer<UIntNative>): Int32 {
+    return SCardEstablishContext(dwScope, pvReserved1, pvReserved2, phContext)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardForgetCardTypeA == "on"]
+foreign {
     func SCardForgetCardTypeA(hContext: UIntNative, szCardName: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardForgetCardTypeA == "on"]
+public unsafe func Windows_SCardForgetCardTypeA(hContext: UIntNative, szCardName: CPointer<UInt8>): Int32 {
+    return SCardForgetCardTypeA(hContext, szCardName)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardForgetCardTypeW == "on"]
+foreign {
     func SCardForgetCardTypeW(hContext: UIntNative, szCardName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardForgetCardTypeW == "on"]
+public unsafe func Windows_SCardForgetCardTypeW(hContext: UIntNative, szCardName: CPointer<UInt16>): Int32 {
+    return SCardForgetCardTypeW(hContext, szCardName)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardForgetReaderA == "on"]
+foreign {
     func SCardForgetReaderA(hContext: UIntNative, szReaderName: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardForgetReaderA == "on"]
+public unsafe func Windows_SCardForgetReaderA(hContext: UIntNative, szReaderName: CPointer<UInt8>): Int32 {
+    return SCardForgetReaderA(hContext, szReaderName)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardForgetReaderGroupA == "on"]
+foreign {
     func SCardForgetReaderGroupA(hContext: UIntNative, szGroupName: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardForgetReaderGroupA == "on"]
+public unsafe func Windows_SCardForgetReaderGroupA(hContext: UIntNative, szGroupName: CPointer<UInt8>): Int32 {
+    return SCardForgetReaderGroupA(hContext, szGroupName)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardForgetReaderGroupW == "on"]
+foreign {
     func SCardForgetReaderGroupW(hContext: UIntNative, szGroupName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardForgetReaderGroupW == "on"]
+public unsafe func Windows_SCardForgetReaderGroupW(hContext: UIntNative, szGroupName: CPointer<UInt16>): Int32 {
+    return SCardForgetReaderGroupW(hContext, szGroupName)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardForgetReaderW == "on"]
+foreign {
     func SCardForgetReaderW(hContext: UIntNative, szReaderName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardForgetReaderW == "on"]
+public unsafe func Windows_SCardForgetReaderW(hContext: UIntNative, szReaderName: CPointer<UInt16>): Int32 {
+    return SCardForgetReaderW(hContext, szReaderName)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardFreeMemory == "on"]
+foreign {
     func SCardFreeMemory(hContext: UIntNative, pvMem: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardFreeMemory == "on"]
+public unsafe func Windows_SCardFreeMemory(hContext: UIntNative, pvMem: CPointer<Unit>): Int32 {
+    return SCardFreeMemory(hContext, pvMem)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardGetAttrib == "on"]
+foreign {
     // param-hint: pbAttr bytes=param[3] optional
     func SCardGetAttrib(hCard: UIntNative, dwAttrId: UInt32, pbAttr: CPointer<UInt8>, pcbAttrLen: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardGetAttrib == "on"]
+public unsafe func Windows_SCardGetAttrib(hCard: UIntNative, dwAttrId: UInt32, pbAttr: CPointer<UInt8>, pcbAttrLen: CPointer<UInt32>): Int32 {
+    return SCardGetAttrib(hCard, dwAttrId, pbAttr, pcbAttrLen)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardGetCardTypeProviderNameA == "on"]
+foreign {
     // param-hint: szProvider len=param[4]
     func SCardGetCardTypeProviderNameA(hContext: UIntNative, szCardName: CPointer<UInt8>, dwProviderId: UInt32, szProvider: CPointer<UInt8>, pcchProvider: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardGetCardTypeProviderNameA == "on"]
+public unsafe func Windows_SCardGetCardTypeProviderNameA(hContext: UIntNative, szCardName: CPointer<UInt8>, dwProviderId: UInt32, szProvider: CPointer<UInt8>, pcchProvider: CPointer<UInt32>): Int32 {
+    return SCardGetCardTypeProviderNameA(hContext, szCardName, dwProviderId, szProvider, pcchProvider)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardGetCardTypeProviderNameW == "on"]
+foreign {
     // param-hint: szProvider len=param[4]
     func SCardGetCardTypeProviderNameW(hContext: UIntNative, szCardName: CPointer<UInt16>, dwProviderId: UInt32, szProvider: CPointer<UInt16>, pcchProvider: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardGetCardTypeProviderNameW == "on"]
+public unsafe func Windows_SCardGetCardTypeProviderNameW(hContext: UIntNative, szCardName: CPointer<UInt16>, dwProviderId: UInt32, szProvider: CPointer<UInt16>, pcchProvider: CPointer<UInt32>): Int32 {
+    return SCardGetCardTypeProviderNameW(hContext, szCardName, dwProviderId, szProvider, pcchProvider)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardGetDeviceTypeIdA == "on"]
+foreign {
     func SCardGetDeviceTypeIdA(hContext: UIntNative, szReaderName: CPointer<UInt8>, pdwDeviceTypeId: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardGetDeviceTypeIdA == "on"]
+public unsafe func Windows_SCardGetDeviceTypeIdA(hContext: UIntNative, szReaderName: CPointer<UInt8>, pdwDeviceTypeId: CPointer<UInt32>): Int32 {
+    return SCardGetDeviceTypeIdA(hContext, szReaderName, pdwDeviceTypeId)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardGetDeviceTypeIdW == "on"]
+foreign {
     func SCardGetDeviceTypeIdW(hContext: UIntNative, szReaderName: CPointer<UInt16>, pdwDeviceTypeId: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardGetDeviceTypeIdW == "on"]
+public unsafe func Windows_SCardGetDeviceTypeIdW(hContext: UIntNative, szReaderName: CPointer<UInt16>, pdwDeviceTypeId: CPointer<UInt32>): Int32 {
+    return SCardGetDeviceTypeIdW(hContext, szReaderName, pdwDeviceTypeId)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardGetProviderIdA == "on"]
+foreign {
     func SCardGetProviderIdA(hContext: UIntNative, szCard: CPointer<UInt8>, pguidProviderId: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardGetProviderIdA == "on"]
+public unsafe func Windows_SCardGetProviderIdA(hContext: UIntNative, szCard: CPointer<UInt8>, pguidProviderId: CPointer<GUID>): Int32 {
+    return SCardGetProviderIdA(hContext, szCard, pguidProviderId)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardGetProviderIdW == "on"]
+foreign {
     func SCardGetProviderIdW(hContext: UIntNative, szCard: CPointer<UInt16>, pguidProviderId: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardGetProviderIdW == "on"]
+public unsafe func Windows_SCardGetProviderIdW(hContext: UIntNative, szCard: CPointer<UInt16>, pguidProviderId: CPointer<GUID>): Int32 {
+    return SCardGetProviderIdW(hContext, szCard, pguidProviderId)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardGetReaderDeviceInstanceIdA == "on"]
+foreign {
     // param-hint: szDeviceInstanceId len=param[3] optional
     func SCardGetReaderDeviceInstanceIdA(hContext: UIntNative, szReaderName: CPointer<UInt8>, szDeviceInstanceId: CPointer<UInt8>, pcchDeviceInstanceId: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardGetReaderDeviceInstanceIdA == "on"]
+public unsafe func Windows_SCardGetReaderDeviceInstanceIdA(hContext: UIntNative, szReaderName: CPointer<UInt8>, szDeviceInstanceId: CPointer<UInt8>, pcchDeviceInstanceId: CPointer<UInt32>): Int32 {
+    return SCardGetReaderDeviceInstanceIdA(hContext, szReaderName, szDeviceInstanceId, pcchDeviceInstanceId)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardGetReaderDeviceInstanceIdW == "on"]
+foreign {
     // param-hint: szDeviceInstanceId len=param[3] optional
     func SCardGetReaderDeviceInstanceIdW(hContext: UIntNative, szReaderName: CPointer<UInt16>, szDeviceInstanceId: CPointer<UInt16>, pcchDeviceInstanceId: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardGetReaderDeviceInstanceIdW == "on"]
+public unsafe func Windows_SCardGetReaderDeviceInstanceIdW(hContext: UIntNative, szReaderName: CPointer<UInt16>, szDeviceInstanceId: CPointer<UInt16>, pcchDeviceInstanceId: CPointer<UInt32>): Int32 {
+    return SCardGetReaderDeviceInstanceIdW(hContext, szReaderName, szDeviceInstanceId, pcchDeviceInstanceId)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardGetReaderIconA == "on"]
+foreign {
     // param-hint: pbIcon bytes=param[3]
     func SCardGetReaderIconA(hContext: UIntNative, szReaderName: CPointer<UInt8>, pbIcon: CPointer<UInt8>, pcbIcon: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardGetReaderIconA == "on"]
+public unsafe func Windows_SCardGetReaderIconA(hContext: UIntNative, szReaderName: CPointer<UInt8>, pbIcon: CPointer<UInt8>, pcbIcon: CPointer<UInt32>): Int32 {
+    return SCardGetReaderIconA(hContext, szReaderName, pbIcon, pcbIcon)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardGetReaderIconW == "on"]
+foreign {
     // param-hint: pbIcon bytes=param[3]
     func SCardGetReaderIconW(hContext: UIntNative, szReaderName: CPointer<UInt16>, pbIcon: CPointer<UInt8>, pcbIcon: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardGetReaderIconW == "on"]
+public unsafe func Windows_SCardGetReaderIconW(hContext: UIntNative, szReaderName: CPointer<UInt16>, pbIcon: CPointer<UInt8>, pcbIcon: CPointer<UInt32>): Int32 {
+    return SCardGetReaderIconW(hContext, szReaderName, pbIcon, pcbIcon)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardGetStatusChangeA == "on"]
+foreign {
     func SCardGetStatusChangeA(hContext: UIntNative, dwTimeout: UInt32, rgReaderStates: CPointer<SCARD_READERSTATEAAbi>, cReaders: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardGetStatusChangeA == "on"]
+public unsafe func Windows_SCardGetStatusChangeA(hContext: UIntNative, dwTimeout: UInt32, rgReaderStates: CPointer<SCARD_READERSTATEAAbi>, cReaders: UInt32): Int32 {
+    return SCardGetStatusChangeA(hContext, dwTimeout, rgReaderStates, cReaders)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardGetStatusChangeW == "on"]
+foreign {
     func SCardGetStatusChangeW(hContext: UIntNative, dwTimeout: UInt32, rgReaderStates: CPointer<SCARD_READERSTATEWAbi>, cReaders: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardGetStatusChangeW == "on"]
+public unsafe func Windows_SCardGetStatusChangeW(hContext: UIntNative, dwTimeout: UInt32, rgReaderStates: CPointer<SCARD_READERSTATEWAbi>, cReaders: UInt32): Int32 {
+    return SCardGetStatusChangeW(hContext, dwTimeout, rgReaderStates, cReaders)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardGetTransmitCount == "on"]
+foreign {
     func SCardGetTransmitCount(hCard: UIntNative, pcTransmitCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardGetTransmitCount == "on"]
+public unsafe func Windows_SCardGetTransmitCount(hCard: UIntNative, pcTransmitCount: CPointer<UInt32>): Int32 {
+    return SCardGetTransmitCount(hCard, pcTransmitCount)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardIntroduceCardTypeA == "on"]
+foreign {
     // param-hint: pguidPrimaryProvider optional
     // param-hint: rgguidInterfaces optional
     func SCardIntroduceCardTypeA(hContext: UIntNative, szCardName: CPointer<UInt8>, pguidPrimaryProvider: CPointer<GUID>, rgguidInterfaces: CPointer<GUID>, dwInterfaceCount: UInt32, pbAtr: CPointer<UInt8>, pbAtrMask: CPointer<UInt8>, cbAtrLen: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardIntroduceCardTypeA == "on"]
+public unsafe func Windows_SCardIntroduceCardTypeA(hContext: UIntNative, szCardName: CPointer<UInt8>, pguidPrimaryProvider: CPointer<GUID>, rgguidInterfaces: CPointer<GUID>, dwInterfaceCount: UInt32, pbAtr: CPointer<UInt8>, pbAtrMask: CPointer<UInt8>, cbAtrLen: UInt32): Int32 {
+    return SCardIntroduceCardTypeA(hContext, szCardName, pguidPrimaryProvider, rgguidInterfaces, dwInterfaceCount, pbAtr, pbAtrMask, cbAtrLen)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardIntroduceCardTypeW == "on"]
+foreign {
     // param-hint: pguidPrimaryProvider optional
     // param-hint: rgguidInterfaces optional
     func SCardIntroduceCardTypeW(hContext: UIntNative, szCardName: CPointer<UInt16>, pguidPrimaryProvider: CPointer<GUID>, rgguidInterfaces: CPointer<GUID>, dwInterfaceCount: UInt32, pbAtr: CPointer<UInt8>, pbAtrMask: CPointer<UInt8>, cbAtrLen: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardIntroduceCardTypeW == "on"]
+public unsafe func Windows_SCardIntroduceCardTypeW(hContext: UIntNative, szCardName: CPointer<UInt16>, pguidPrimaryProvider: CPointer<GUID>, rgguidInterfaces: CPointer<GUID>, dwInterfaceCount: UInt32, pbAtr: CPointer<UInt8>, pbAtrMask: CPointer<UInt8>, cbAtrLen: UInt32): Int32 {
+    return SCardIntroduceCardTypeW(hContext, szCardName, pguidPrimaryProvider, rgguidInterfaces, dwInterfaceCount, pbAtr, pbAtrMask, cbAtrLen)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardIntroduceReaderA == "on"]
+foreign {
     func SCardIntroduceReaderA(hContext: UIntNative, szReaderName: CPointer<UInt8>, szDeviceName: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardIntroduceReaderA == "on"]
+public unsafe func Windows_SCardIntroduceReaderA(hContext: UIntNative, szReaderName: CPointer<UInt8>, szDeviceName: CPointer<UInt8>): Int32 {
+    return SCardIntroduceReaderA(hContext, szReaderName, szDeviceName)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardIntroduceReaderGroupA == "on"]
+foreign {
     func SCardIntroduceReaderGroupA(hContext: UIntNative, szGroupName: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardIntroduceReaderGroupA == "on"]
+public unsafe func Windows_SCardIntroduceReaderGroupA(hContext: UIntNative, szGroupName: CPointer<UInt8>): Int32 {
+    return SCardIntroduceReaderGroupA(hContext, szGroupName)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardIntroduceReaderGroupW == "on"]
+foreign {
     func SCardIntroduceReaderGroupW(hContext: UIntNative, szGroupName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardIntroduceReaderGroupW == "on"]
+public unsafe func Windows_SCardIntroduceReaderGroupW(hContext: UIntNative, szGroupName: CPointer<UInt16>): Int32 {
+    return SCardIntroduceReaderGroupW(hContext, szGroupName)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardIntroduceReaderW == "on"]
+foreign {
     func SCardIntroduceReaderW(hContext: UIntNative, szReaderName: CPointer<UInt16>, szDeviceName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardIntroduceReaderW == "on"]
+public unsafe func Windows_SCardIntroduceReaderW(hContext: UIntNative, szReaderName: CPointer<UInt16>, szDeviceName: CPointer<UInt16>): Int32 {
+    return SCardIntroduceReaderW(hContext, szReaderName, szDeviceName)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardIsValidContext == "on"]
+foreign {
     func SCardIsValidContext(hContext: UIntNative): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardIsValidContext == "on"]
+public unsafe func Windows_SCardIsValidContext(hContext: UIntNative): Int32 {
+    return SCardIsValidContext(hContext)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardListCardsA == "on"]
+foreign {
     // param-hint: pbAtr optional
     // param-hint: rgquidInterfaces len=param[3] optional
     // param-hint: mszCards len=param[5] optional
     func SCardListCardsA(hContext: UIntNative, pbAtr: CPointer<UInt8>, rgquidInterfaces: CPointer<GUID>, cguidInterfaceCount: UInt32, mszCards: CPointer<UInt8>, pcchCards: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardListCardsA == "on"]
+public unsafe func Windows_SCardListCardsA(hContext: UIntNative, pbAtr: CPointer<UInt8>, rgquidInterfaces: CPointer<GUID>, cguidInterfaceCount: UInt32, mszCards: CPointer<UInt8>, pcchCards: CPointer<UInt32>): Int32 {
+    return SCardListCardsA(hContext, pbAtr, rgquidInterfaces, cguidInterfaceCount, mszCards, pcchCards)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardListCardsW == "on"]
+foreign {
     // param-hint: pbAtr optional
     // param-hint: rgquidInterfaces len=param[3] optional
     // param-hint: mszCards len=param[5] optional
     func SCardListCardsW(hContext: UIntNative, pbAtr: CPointer<UInt8>, rgquidInterfaces: CPointer<GUID>, cguidInterfaceCount: UInt32, mszCards: CPointer<UInt16>, pcchCards: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardListCardsW == "on"]
+public unsafe func Windows_SCardListCardsW(hContext: UIntNative, pbAtr: CPointer<UInt8>, rgquidInterfaces: CPointer<GUID>, cguidInterfaceCount: UInt32, mszCards: CPointer<UInt16>, pcchCards: CPointer<UInt32>): Int32 {
+    return SCardListCardsW(hContext, pbAtr, rgquidInterfaces, cguidInterfaceCount, mszCards, pcchCards)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardListInterfacesA == "on"]
+foreign {
     func SCardListInterfacesA(hContext: UIntNative, szCard: CPointer<UInt8>, pguidInterfaces: CPointer<GUID>, pcguidInterfaces: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardListInterfacesA == "on"]
+public unsafe func Windows_SCardListInterfacesA(hContext: UIntNative, szCard: CPointer<UInt8>, pguidInterfaces: CPointer<GUID>, pcguidInterfaces: CPointer<UInt32>): Int32 {
+    return SCardListInterfacesA(hContext, szCard, pguidInterfaces, pcguidInterfaces)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardListInterfacesW == "on"]
+foreign {
     func SCardListInterfacesW(hContext: UIntNative, szCard: CPointer<UInt16>, pguidInterfaces: CPointer<GUID>, pcguidInterfaces: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardListInterfacesW == "on"]
+public unsafe func Windows_SCardListInterfacesW(hContext: UIntNative, szCard: CPointer<UInt16>, pguidInterfaces: CPointer<GUID>, pcguidInterfaces: CPointer<UInt32>): Int32 {
+    return SCardListInterfacesW(hContext, szCard, pguidInterfaces, pcguidInterfaces)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardListReaderGroupsA == "on"]
+foreign {
     // param-hint: mszGroups len=param[2] optional
     func SCardListReaderGroupsA(hContext: UIntNative, mszGroups: CPointer<UInt8>, pcchGroups: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardListReaderGroupsA == "on"]
+public unsafe func Windows_SCardListReaderGroupsA(hContext: UIntNative, mszGroups: CPointer<UInt8>, pcchGroups: CPointer<UInt32>): Int32 {
+    return SCardListReaderGroupsA(hContext, mszGroups, pcchGroups)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardListReaderGroupsW == "on"]
+foreign {
     // param-hint: mszGroups len=param[2] optional
     func SCardListReaderGroupsW(hContext: UIntNative, mszGroups: CPointer<UInt16>, pcchGroups: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardListReaderGroupsW == "on"]
+public unsafe func Windows_SCardListReaderGroupsW(hContext: UIntNative, mszGroups: CPointer<UInt16>, pcchGroups: CPointer<UInt32>): Int32 {
+    return SCardListReaderGroupsW(hContext, mszGroups, pcchGroups)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardListReadersA == "on"]
+foreign {
     // param-hint: mszGroups optional
     // param-hint: mszReaders len=param[3] optional
     func SCardListReadersA(hContext: UIntNative, mszGroups: CPointer<UInt8>, mszReaders: CPointer<UInt8>, pcchReaders: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardListReadersA == "on"]
+public unsafe func Windows_SCardListReadersA(hContext: UIntNative, mszGroups: CPointer<UInt8>, mszReaders: CPointer<UInt8>, pcchReaders: CPointer<UInt32>): Int32 {
+    return SCardListReadersA(hContext, mszGroups, mszReaders, pcchReaders)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardListReadersW == "on"]
+foreign {
     // param-hint: mszGroups optional
     // param-hint: mszReaders len=param[3] optional
     func SCardListReadersW(hContext: UIntNative, mszGroups: CPointer<UInt16>, mszReaders: CPointer<UInt16>, pcchReaders: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardListReadersW == "on"]
+public unsafe func Windows_SCardListReadersW(hContext: UIntNative, mszGroups: CPointer<UInt16>, mszReaders: CPointer<UInt16>, pcchReaders: CPointer<UInt32>): Int32 {
+    return SCardListReadersW(hContext, mszGroups, mszReaders, pcchReaders)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardListReadersWithDeviceInstanceIdA == "on"]
+foreign {
     // param-hint: mszReaders len=param[3] optional
     func SCardListReadersWithDeviceInstanceIdA(hContext: UIntNative, szDeviceInstanceId: CPointer<UInt8>, mszReaders: CPointer<UInt8>, pcchReaders: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardListReadersWithDeviceInstanceIdA == "on"]
+public unsafe func Windows_SCardListReadersWithDeviceInstanceIdA(hContext: UIntNative, szDeviceInstanceId: CPointer<UInt8>, mszReaders: CPointer<UInt8>, pcchReaders: CPointer<UInt32>): Int32 {
+    return SCardListReadersWithDeviceInstanceIdA(hContext, szDeviceInstanceId, mszReaders, pcchReaders)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardListReadersWithDeviceInstanceIdW == "on"]
+foreign {
     // param-hint: mszReaders len=param[3] optional
     func SCardListReadersWithDeviceInstanceIdW(hContext: UIntNative, szDeviceInstanceId: CPointer<UInt16>, mszReaders: CPointer<UInt16>, pcchReaders: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardListReadersWithDeviceInstanceIdW == "on"]
+public unsafe func Windows_SCardListReadersWithDeviceInstanceIdW(hContext: UIntNative, szDeviceInstanceId: CPointer<UInt16>, mszReaders: CPointer<UInt16>, pcchReaders: CPointer<UInt32>): Int32 {
+    return SCardListReadersWithDeviceInstanceIdW(hContext, szDeviceInstanceId, mszReaders, pcchReaders)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardLocateCardsA == "on"]
+foreign {
     func SCardLocateCardsA(hContext: UIntNative, mszCards: CPointer<UInt8>, rgReaderStates: CPointer<SCARD_READERSTATEAAbi>, cReaders: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardLocateCardsA == "on"]
+public unsafe func Windows_SCardLocateCardsA(hContext: UIntNative, mszCards: CPointer<UInt8>, rgReaderStates: CPointer<SCARD_READERSTATEAAbi>, cReaders: UInt32): Int32 {
+    return SCardLocateCardsA(hContext, mszCards, rgReaderStates, cReaders)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardLocateCardsByATRA == "on"]
+foreign {
     func SCardLocateCardsByATRA(hContext: UIntNative, rgAtrMasks: CPointer<SCARD_ATRMASKAbi>, cAtrs: UInt32, rgReaderStates: CPointer<SCARD_READERSTATEAAbi>, cReaders: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardLocateCardsByATRA == "on"]
+public unsafe func Windows_SCardLocateCardsByATRA(hContext: UIntNative, rgAtrMasks: CPointer<SCARD_ATRMASKAbi>, cAtrs: UInt32, rgReaderStates: CPointer<SCARD_READERSTATEAAbi>, cReaders: UInt32): Int32 {
+    return SCardLocateCardsByATRA(hContext, rgAtrMasks, cAtrs, rgReaderStates, cReaders)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardLocateCardsByATRW == "on"]
+foreign {
     func SCardLocateCardsByATRW(hContext: UIntNative, rgAtrMasks: CPointer<SCARD_ATRMASKAbi>, cAtrs: UInt32, rgReaderStates: CPointer<SCARD_READERSTATEWAbi>, cReaders: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardLocateCardsByATRW == "on"]
+public unsafe func Windows_SCardLocateCardsByATRW(hContext: UIntNative, rgAtrMasks: CPointer<SCARD_ATRMASKAbi>, cAtrs: UInt32, rgReaderStates: CPointer<SCARD_READERSTATEWAbi>, cReaders: UInt32): Int32 {
+    return SCardLocateCardsByATRW(hContext, rgAtrMasks, cAtrs, rgReaderStates, cReaders)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardLocateCardsW == "on"]
+foreign {
     func SCardLocateCardsW(hContext: UIntNative, mszCards: CPointer<UInt16>, rgReaderStates: CPointer<SCARD_READERSTATEWAbi>, cReaders: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardLocateCardsW == "on"]
+public unsafe func Windows_SCardLocateCardsW(hContext: UIntNative, mszCards: CPointer<UInt16>, rgReaderStates: CPointer<SCARD_READERSTATEWAbi>, cReaders: UInt32): Int32 {
+    return SCardLocateCardsW(hContext, mszCards, rgReaderStates, cReaders)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardReadCacheA == "on"]
+foreign {
     // param-hint: Data bytes=param[5]
     func SCardReadCacheA(hContext: UIntNative, CardIdentifier: CPointer<GUID>, FreshnessCounter: UInt32, LookupName: CPointer<UInt8>, Data: CPointer<UInt8>, DataLen: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardReadCacheA == "on"]
+public unsafe func Windows_SCardReadCacheA(hContext: UIntNative, CardIdentifier: CPointer<GUID>, FreshnessCounter: UInt32, LookupName: CPointer<UInt8>, Data: CPointer<UInt8>, DataLen: CPointer<UInt32>): Int32 {
+    return SCardReadCacheA(hContext, CardIdentifier, FreshnessCounter, LookupName, Data, DataLen)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardReadCacheW == "on"]
+foreign {
     // param-hint: Data bytes=param[5]
     func SCardReadCacheW(hContext: UIntNative, CardIdentifier: CPointer<GUID>, FreshnessCounter: UInt32, LookupName: CPointer<UInt16>, Data: CPointer<UInt8>, DataLen: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardReadCacheW == "on"]
+public unsafe func Windows_SCardReadCacheW(hContext: UIntNative, CardIdentifier: CPointer<GUID>, FreshnessCounter: UInt32, LookupName: CPointer<UInt16>, Data: CPointer<UInt8>, DataLen: CPointer<UInt32>): Int32 {
+    return SCardReadCacheW(hContext, CardIdentifier, FreshnessCounter, LookupName, Data, DataLen)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardReconnect == "on"]
+foreign {
     // param-hint: pdwActiveProtocol optional
     func SCardReconnect(hCard: UIntNative, dwShareMode: UInt32, dwPreferredProtocols: UInt32, dwInitialization: UInt32, pdwActiveProtocol: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardReconnect == "on"]
+public unsafe func Windows_SCardReconnect(hCard: UIntNative, dwShareMode: UInt32, dwPreferredProtocols: UInt32, dwInitialization: UInt32, pdwActiveProtocol: CPointer<UInt32>): Int32 {
+    return SCardReconnect(hCard, dwShareMode, dwPreferredProtocols, dwInitialization, pdwActiveProtocol)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardReleaseContext == "on"]
+foreign {
     func SCardReleaseContext(hContext: UIntNative): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardReleaseContext == "on"]
+public unsafe func Windows_SCardReleaseContext(hContext: UIntNative): Int32 {
+    return SCardReleaseContext(hContext)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardReleaseStartedEvent == "on"]
+foreign {
     func SCardReleaseStartedEvent(): Unit
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardReleaseStartedEvent == "on"]
+public unsafe func Windows_SCardReleaseStartedEvent(): Unit {
+    SCardReleaseStartedEvent()
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardRemoveReaderFromGroupA == "on"]
+foreign {
     func SCardRemoveReaderFromGroupA(hContext: UIntNative, szReaderName: CPointer<UInt8>, szGroupName: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardRemoveReaderFromGroupA == "on"]
+public unsafe func Windows_SCardRemoveReaderFromGroupA(hContext: UIntNative, szReaderName: CPointer<UInt8>, szGroupName: CPointer<UInt8>): Int32 {
+    return SCardRemoveReaderFromGroupA(hContext, szReaderName, szGroupName)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardRemoveReaderFromGroupW == "on"]
+foreign {
     func SCardRemoveReaderFromGroupW(hContext: UIntNative, szReaderName: CPointer<UInt16>, szGroupName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardRemoveReaderFromGroupW == "on"]
+public unsafe func Windows_SCardRemoveReaderFromGroupW(hContext: UIntNative, szReaderName: CPointer<UInt16>, szGroupName: CPointer<UInt16>): Int32 {
+    return SCardRemoveReaderFromGroupW(hContext, szReaderName, szGroupName)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardSetAttrib == "on"]
+foreign {
     // param-hint: pbAttr bytes=param[3]
     func SCardSetAttrib(hCard: UIntNative, dwAttrId: UInt32, pbAttr: CPointer<UInt8>, cbAttrLen: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardSetAttrib == "on"]
+public unsafe func Windows_SCardSetAttrib(hCard: UIntNative, dwAttrId: UInt32, pbAttr: CPointer<UInt8>, cbAttrLen: UInt32): Int32 {
+    return SCardSetAttrib(hCard, dwAttrId, pbAttr, cbAttrLen)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardSetCardTypeProviderNameA == "on"]
+foreign {
     func SCardSetCardTypeProviderNameA(hContext: UIntNative, szCardName: CPointer<UInt8>, dwProviderId: UInt32, szProvider: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardSetCardTypeProviderNameA == "on"]
+public unsafe func Windows_SCardSetCardTypeProviderNameA(hContext: UIntNative, szCardName: CPointer<UInt8>, dwProviderId: UInt32, szProvider: CPointer<UInt8>): Int32 {
+    return SCardSetCardTypeProviderNameA(hContext, szCardName, dwProviderId, szProvider)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardSetCardTypeProviderNameW == "on"]
+foreign {
     func SCardSetCardTypeProviderNameW(hContext: UIntNative, szCardName: CPointer<UInt16>, dwProviderId: UInt32, szProvider: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardSetCardTypeProviderNameW == "on"]
+public unsafe func Windows_SCardSetCardTypeProviderNameW(hContext: UIntNative, szCardName: CPointer<UInt16>, dwProviderId: UInt32, szProvider: CPointer<UInt16>): Int32 {
+    return SCardSetCardTypeProviderNameW(hContext, szCardName, dwProviderId, szProvider)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardState == "on"]
+foreign {
     // param-hint: pbAtr bytes=param[4]
     func SCardState(hCard: UIntNative, pdwState: CPointer<UInt32>, pdwProtocol: CPointer<UInt32>, pbAtr: CPointer<UInt8>, pcbAtrLen: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardState == "on"]
+public unsafe func Windows_SCardState(hCard: UIntNative, pdwState: CPointer<UInt32>, pdwProtocol: CPointer<UInt32>, pbAtr: CPointer<UInt8>, pcbAtrLen: CPointer<UInt32>): Int32 {
+    return SCardState(hCard, pdwState, pdwProtocol, pbAtr, pcbAtrLen)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardStatusA == "on"]
+foreign {
     // param-hint: mszReaderNames len=param[2] optional
     // param-hint: pcchReaderLen optional
     // param-hint: pdwState optional
@@ -3393,6 +4329,15 @@ foreign {
     // param-hint: pbAtr len=param[6] optional
     // param-hint: pcbAtrLen optional
     func SCardStatusA(hCard: UIntNative, mszReaderNames: CPointer<UInt8>, pcchReaderLen: CPointer<UInt32>, pdwState: CPointer<UInt32>, pdwProtocol: CPointer<UInt32>, pbAtr: CPointer<UInt8>, pcbAtrLen: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardStatusA == "on"]
+public unsafe func Windows_SCardStatusA(hCard: UIntNative, mszReaderNames: CPointer<UInt8>, pcchReaderLen: CPointer<UInt32>, pdwState: CPointer<UInt32>, pdwProtocol: CPointer<UInt32>, pbAtr: CPointer<UInt8>, pcbAtrLen: CPointer<UInt32>): Int32 {
+    return SCardStatusA(hCard, mszReaderNames, pcchReaderLen, pdwState, pdwProtocol, pbAtr, pcbAtrLen)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardStatusW == "on"]
+foreign {
     // param-hint: mszReaderNames len=param[2] optional
     // param-hint: pcchReaderLen optional
     // param-hint: pdwState optional
@@ -3400,48 +4345,228 @@ foreign {
     // param-hint: pbAtr len=param[6] optional
     // param-hint: pcbAtrLen optional
     func SCardStatusW(hCard: UIntNative, mszReaderNames: CPointer<UInt16>, pcchReaderLen: CPointer<UInt32>, pdwState: CPointer<UInt32>, pdwProtocol: CPointer<UInt32>, pbAtr: CPointer<UInt8>, pcbAtrLen: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardStatusW == "on"]
+public unsafe func Windows_SCardStatusW(hCard: UIntNative, mszReaderNames: CPointer<UInt16>, pcchReaderLen: CPointer<UInt32>, pdwState: CPointer<UInt32>, pdwProtocol: CPointer<UInt32>, pbAtr: CPointer<UInt8>, pcbAtrLen: CPointer<UInt32>): Int32 {
+    return SCardStatusW(hCard, mszReaderNames, pcchReaderLen, pdwState, pdwProtocol, pbAtr, pcbAtrLen)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardTransmit == "on"]
+foreign {
     // param-hint: pbSendBuffer bytes=param[3]
     // param-hint: pioRecvPci optional
     // param-hint: pbRecvBuffer bytes=param[6]
     func SCardTransmit(hCard: UIntNative, pioSendPci: CPointer<SCARD_IO_REQUESTAbi>, pbSendBuffer: CPointer<UInt8>, cbSendLength: UInt32, pioRecvPci: CPointer<SCARD_IO_REQUESTAbi>, pbRecvBuffer: CPointer<UInt8>, pcbRecvLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardTransmit == "on"]
+public unsafe func Windows_SCardTransmit(hCard: UIntNative, pioSendPci: CPointer<SCARD_IO_REQUESTAbi>, pbSendBuffer: CPointer<UInt8>, cbSendLength: UInt32, pioRecvPci: CPointer<SCARD_IO_REQUESTAbi>, pbRecvBuffer: CPointer<UInt8>, pcbRecvLength: CPointer<UInt32>): Int32 {
+    return SCardTransmit(hCard, pioSendPci, pbSendBuffer, cbSendLength, pioRecvPci, pbRecvBuffer, pcbRecvLength)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardWriteCacheA == "on"]
+foreign {
     // param-hint: Data bytes=param[5]
     func SCardWriteCacheA(hContext: UIntNative, CardIdentifier: CPointer<GUID>, FreshnessCounter: UInt32, LookupName: CPointer<UInt8>, Data: CPointer<UInt8>, DataLen: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardWriteCacheA == "on"]
+public unsafe func Windows_SCardWriteCacheA(hContext: UIntNative, CardIdentifier: CPointer<GUID>, FreshnessCounter: UInt32, LookupName: CPointer<UInt8>, Data: CPointer<UInt8>, DataLen: UInt32): Int32 {
+    return SCardWriteCacheA(hContext, CardIdentifier, FreshnessCounter, LookupName, Data, DataLen)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardWriteCacheW == "on"]
+foreign {
     // param-hint: Data bytes=param[5]
     func SCardWriteCacheW(hContext: UIntNative, CardIdentifier: CPointer<GUID>, FreshnessCounter: UInt32, LookupName: CPointer<UInt16>, Data: CPointer<UInt8>, DataLen: UInt32): Int32
 }
 
-@When[CREDUI == "on"]
+@When[Windows_Win32_Security_Credentials == "on" && WINSCARD == "on" && Windows_Win32_Security_Credentials_SCardWriteCacheW == "on"]
+public unsafe func Windows_SCardWriteCacheW(hContext: UIntNative, CardIdentifier: CPointer<GUID>, FreshnessCounter: UInt32, LookupName: CPointer<UInt16>, Data: CPointer<UInt8>, DataLen: UInt32): Int32 {
+    return SCardWriteCacheW(hContext, CardIdentifier, FreshnessCounter, LookupName, Data, DataLen)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && CREDUI == "on" && Windows_Win32_Security_Credentials_CredPackAuthenticationBufferA == "on"]
 foreign {
     // param-hint: pPackedCredentials bytes=param[4] optional
     // pinvoke-hint: SetLastError
     func CredPackAuthenticationBufferA(dwFlags: CRED_PACK_FLAGSAbi, pszUserName: CPointer<UInt8>, pszPassword: CPointer<UInt8>, pPackedCredentials: CPointer<UInt8>, pcbPackedCredentials: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && CREDUI == "on" && Windows_Win32_Security_Credentials_CredPackAuthenticationBufferA == "on"]
+public unsafe func Windows_CredPackAuthenticationBufferA(dwFlags: CRED_PACK_FLAGSAbi, pszUserName: CPointer<UInt8>, pszPassword: CPointer<UInt8>, pPackedCredentials: CPointer<UInt8>, pcbPackedCredentials: CPointer<UInt32>): Int32 {
+    return CredPackAuthenticationBufferA(dwFlags, pszUserName, pszPassword, pPackedCredentials, pcbPackedCredentials)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && CREDUI == "on" && Windows_Win32_Security_Credentials_CredPackAuthenticationBufferW == "on"]
+foreign {
     // param-hint: pPackedCredentials bytes=param[4] optional
     // pinvoke-hint: SetLastError
     func CredPackAuthenticationBufferW(dwFlags: CRED_PACK_FLAGSAbi, pszUserName: CPointer<UInt16>, pszPassword: CPointer<UInt16>, pPackedCredentials: CPointer<UInt8>, pcbPackedCredentials: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && CREDUI == "on" && Windows_Win32_Security_Credentials_CredPackAuthenticationBufferW == "on"]
+public unsafe func Windows_CredPackAuthenticationBufferW(dwFlags: CRED_PACK_FLAGSAbi, pszUserName: CPointer<UInt16>, pszPassword: CPointer<UInt16>, pPackedCredentials: CPointer<UInt8>, pcbPackedCredentials: CPointer<UInt32>): Int32 {
+    return CredPackAuthenticationBufferW(dwFlags, pszUserName, pszPassword, pPackedCredentials, pcbPackedCredentials)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && CREDUI == "on" && Windows_Win32_Security_Credentials_CredUICmdLinePromptForCredentialsA == "on"]
+foreign {
     // param-hint: pszTargetName optional
     // param-hint: pContext optional reserved
     // param-hint: UserName len=param[4]
     // param-hint: pszPassword len=param[6]
     // param-hint: pfSave optional
     func CredUICmdLinePromptForCredentialsA(pszTargetName: CPointer<UInt8>, pContext: CPointer<SecHandleAbi>, dwAuthError: UInt32, UserName: CPointer<UInt8>, ulUserBufferSize: UInt32, pszPassword: CPointer<UInt8>, ulPasswordBufferSize: UInt32, pfSave: CPointer<Int32>, dwFlags: CREDUI_FLAGSAbi): UInt32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && CREDUI == "on" && Windows_Win32_Security_Credentials_CredUICmdLinePromptForCredentialsA == "on"]
+public unsafe func Windows_CredUICmdLinePromptForCredentialsA(pszTargetName: CPointer<UInt8>, pContext: CPointer<SecHandleAbi>, dwAuthError: UInt32, UserName: CPointer<UInt8>, ulUserBufferSize: UInt32, pszPassword: CPointer<UInt8>, ulPasswordBufferSize: UInt32, pfSave: CPointer<Int32>, dwFlags: CREDUI_FLAGSAbi): UInt32 {
+    return CredUICmdLinePromptForCredentialsA(pszTargetName, pContext, dwAuthError, UserName, ulUserBufferSize, pszPassword, ulPasswordBufferSize, pfSave, dwFlags)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && CREDUI == "on" && Windows_Win32_Security_Credentials_CredUICmdLinePromptForCredentialsW == "on"]
+foreign {
     // param-hint: pszTargetName optional
     // param-hint: pContext optional reserved
     // param-hint: UserName len=param[4]
     // param-hint: pszPassword len=param[6]
     // param-hint: pfSave optional
     func CredUICmdLinePromptForCredentialsW(pszTargetName: CPointer<UInt16>, pContext: CPointer<SecHandleAbi>, dwAuthError: UInt32, UserName: CPointer<UInt16>, ulUserBufferSize: UInt32, pszPassword: CPointer<UInt16>, ulPasswordBufferSize: UInt32, pfSave: CPointer<Int32>, dwFlags: CREDUI_FLAGSAbi): UInt32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && CREDUI == "on" && Windows_Win32_Security_Credentials_CredUICmdLinePromptForCredentialsW == "on"]
+public unsafe func Windows_CredUICmdLinePromptForCredentialsW(pszTargetName: CPointer<UInt16>, pContext: CPointer<SecHandleAbi>, dwAuthError: UInt32, UserName: CPointer<UInt16>, ulUserBufferSize: UInt32, pszPassword: CPointer<UInt16>, ulPasswordBufferSize: UInt32, pfSave: CPointer<Int32>, dwFlags: CREDUI_FLAGSAbi): UInt32 {
+    return CredUICmdLinePromptForCredentialsW(pszTargetName, pContext, dwAuthError, UserName, ulUserBufferSize, pszPassword, ulPasswordBufferSize, pfSave, dwFlags)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && CREDUI == "on" && Windows_Win32_Security_Credentials_CredUIConfirmCredentialsA == "on"]
+foreign {
     func CredUIConfirmCredentialsA(pszTargetName: CPointer<UInt8>, bConfirm: Int32): UInt32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && CREDUI == "on" && Windows_Win32_Security_Credentials_CredUIConfirmCredentialsA == "on"]
+public unsafe func Windows_CredUIConfirmCredentialsA(pszTargetName: CPointer<UInt8>, bConfirm: Int32): UInt32 {
+    return CredUIConfirmCredentialsA(pszTargetName, bConfirm)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && CREDUI == "on" && Windows_Win32_Security_Credentials_CredUIConfirmCredentialsW == "on"]
+foreign {
     func CredUIConfirmCredentialsW(pszTargetName: CPointer<UInt16>, bConfirm: Int32): UInt32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && CREDUI == "on" && Windows_Win32_Security_Credentials_CredUIConfirmCredentialsW == "on"]
+public unsafe func Windows_CredUIConfirmCredentialsW(pszTargetName: CPointer<UInt16>, bConfirm: Int32): UInt32 {
+    return CredUIConfirmCredentialsW(pszTargetName, bConfirm)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && CREDUI == "on" && Windows_Win32_Security_Credentials_CredUIParseUserNameA == "on"]
+foreign {
     // param-hint: user len=param[2]
     // param-hint: domain len=param[4]
     func CredUIParseUserNameA(userName: CPointer<UInt8>, user: CPointer<UInt8>, userBufferSize: UInt32, domain: CPointer<UInt8>, domainBufferSize: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && CREDUI == "on" && Windows_Win32_Security_Credentials_CredUIParseUserNameA == "on"]
+public unsafe func Windows_CredUIParseUserNameA(userName: CPointer<UInt8>, user: CPointer<UInt8>, userBufferSize: UInt32, domain: CPointer<UInt8>, domainBufferSize: UInt32): windows_core.WIN32_ERROR {
+    return CredUIParseUserNameA(userName, user, userBufferSize, domain, domainBufferSize)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && CREDUI == "on" && Windows_Win32_Security_Credentials_CredUIParseUserNameW == "on"]
+foreign {
     // param-hint: user len=param[2]
     // param-hint: domain len=param[4]
     func CredUIParseUserNameW(UserName: CPointer<UInt16>, user: CPointer<UInt16>, userBufferSize: UInt32, domain: CPointer<UInt16>, domainBufferSize: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && CREDUI == "on" && Windows_Win32_Security_Credentials_CredUIParseUserNameW == "on"]
+public unsafe func Windows_CredUIParseUserNameW(UserName: CPointer<UInt16>, user: CPointer<UInt16>, userBufferSize: UInt32, domain: CPointer<UInt16>, domainBufferSize: UInt32): windows_core.WIN32_ERROR {
+    return CredUIParseUserNameW(UserName, user, userBufferSize, domain, domainBufferSize)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && CREDUI == "on" && Windows_Win32_Security_Credentials_CredUIPromptForCredentialsA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    // param-hint: pUiInfo optional
+    // param-hint: pszTargetName optional
+    // param-hint: pContext optional reserved
+    // param-hint: pszUserName len=param[5]
+    // param-hint: pszPassword len=param[7]
+    // param-hint: save optional
+    func CredUIPromptForCredentialsA(pUiInfo: CPointer<CREDUI_INFOAAbi>, pszTargetName: CPointer<UInt8>, pContext: CPointer<SecHandleAbi>, dwAuthError: UInt32, pszUserName: CPointer<UInt8>, ulUserNameBufferSize: UInt32, pszPassword: CPointer<UInt8>, ulPasswordBufferSize: UInt32, save: CPointer<Int32>, dwFlags: CREDUI_FLAGSAbi): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && CREDUI == "on" && Windows_Win32_Security_Credentials_CredUIPromptForCredentialsA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_CredUIPromptForCredentialsA(pUiInfo: CPointer<CREDUI_INFOAAbi>, pszTargetName: CPointer<UInt8>, pContext: CPointer<SecHandleAbi>, dwAuthError: UInt32, pszUserName: CPointer<UInt8>, ulUserNameBufferSize: UInt32, pszPassword: CPointer<UInt8>, ulPasswordBufferSize: UInt32, save: CPointer<Int32>, dwFlags: CREDUI_FLAGSAbi): windows_core.WIN32_ERROR {
+    return CredUIPromptForCredentialsA(pUiInfo, pszTargetName, pContext, dwAuthError, pszUserName, ulUserNameBufferSize, pszPassword, ulPasswordBufferSize, save, dwFlags)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && CREDUI == "on" && Windows_Win32_Security_Credentials_CredUIPromptForCredentialsW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    // param-hint: pUiInfo optional
+    // param-hint: pszTargetName optional
+    // param-hint: pContext optional reserved
+    // param-hint: pszUserName len=param[5]
+    // param-hint: pszPassword len=param[7]
+    // param-hint: save optional
+    func CredUIPromptForCredentialsW(pUiInfo: CPointer<CREDUI_INFOWAbi>, pszTargetName: CPointer<UInt16>, pContext: CPointer<SecHandleAbi>, dwAuthError: UInt32, pszUserName: CPointer<UInt16>, ulUserNameBufferSize: UInt32, pszPassword: CPointer<UInt16>, ulPasswordBufferSize: UInt32, save: CPointer<Int32>, dwFlags: CREDUI_FLAGSAbi): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && CREDUI == "on" && Windows_Win32_Security_Credentials_CredUIPromptForCredentialsW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_CredUIPromptForCredentialsW(pUiInfo: CPointer<CREDUI_INFOWAbi>, pszTargetName: CPointer<UInt16>, pContext: CPointer<SecHandleAbi>, dwAuthError: UInt32, pszUserName: CPointer<UInt16>, ulUserNameBufferSize: UInt32, pszPassword: CPointer<UInt16>, ulPasswordBufferSize: UInt32, save: CPointer<Int32>, dwFlags: CREDUI_FLAGSAbi): windows_core.WIN32_ERROR {
+    return CredUIPromptForCredentialsW(pUiInfo, pszTargetName, pContext, dwAuthError, pszUserName, ulUserNameBufferSize, pszPassword, ulPasswordBufferSize, save, dwFlags)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && CREDUI == "on" && Windows_Win32_Security_Credentials_CredUIPromptForWindowsCredentialsA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    // param-hint: pUiInfo optional
+    // param-hint: pvInAuthBuffer bytes=param[4] optional
+    // param-hint: pfSave optional
+    func CredUIPromptForWindowsCredentialsA(pUiInfo: CPointer<CREDUI_INFOAAbi>, dwAuthError: UInt32, pulAuthPackage: CPointer<UInt32>, pvInAuthBuffer: CPointer<Unit>, ulInAuthBufferSize: UInt32, ppvOutAuthBuffer: CPointer<CPointer<Unit>>, pulOutAuthBufferSize: CPointer<UInt32>, pfSave: CPointer<Int32>, dwFlags: CREDUIWIN_FLAGSAbi): UInt32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && CREDUI == "on" && Windows_Win32_Security_Credentials_CredUIPromptForWindowsCredentialsA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_CredUIPromptForWindowsCredentialsA(pUiInfo: CPointer<CREDUI_INFOAAbi>, dwAuthError: UInt32, pulAuthPackage: CPointer<UInt32>, pvInAuthBuffer: CPointer<Unit>, ulInAuthBufferSize: UInt32, ppvOutAuthBuffer: CPointer<CPointer<Unit>>, pulOutAuthBufferSize: CPointer<UInt32>, pfSave: CPointer<Int32>, dwFlags: CREDUIWIN_FLAGSAbi): UInt32 {
+    return CredUIPromptForWindowsCredentialsA(pUiInfo, dwAuthError, pulAuthPackage, pvInAuthBuffer, ulInAuthBufferSize, ppvOutAuthBuffer, pulOutAuthBufferSize, pfSave, dwFlags)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && CREDUI == "on" && Windows_Win32_Security_Credentials_CredUIPromptForWindowsCredentialsW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    // param-hint: pUiInfo optional
+    // param-hint: pvInAuthBuffer bytes=param[4] optional
+    // param-hint: pfSave optional
+    func CredUIPromptForWindowsCredentialsW(pUiInfo: CPointer<CREDUI_INFOWAbi>, dwAuthError: UInt32, pulAuthPackage: CPointer<UInt32>, pvInAuthBuffer: CPointer<Unit>, ulInAuthBufferSize: UInt32, ppvOutAuthBuffer: CPointer<CPointer<Unit>>, pulOutAuthBufferSize: CPointer<UInt32>, pfSave: CPointer<Int32>, dwFlags: CREDUIWIN_FLAGSAbi): UInt32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && CREDUI == "on" && Windows_Win32_Security_Credentials_CredUIPromptForWindowsCredentialsW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_CredUIPromptForWindowsCredentialsW(pUiInfo: CPointer<CREDUI_INFOWAbi>, dwAuthError: UInt32, pulAuthPackage: CPointer<UInt32>, pvInAuthBuffer: CPointer<Unit>, ulInAuthBufferSize: UInt32, ppvOutAuthBuffer: CPointer<CPointer<Unit>>, pulOutAuthBufferSize: CPointer<UInt32>, pfSave: CPointer<Int32>, dwFlags: CREDUIWIN_FLAGSAbi): UInt32 {
+    return CredUIPromptForWindowsCredentialsW(pUiInfo, dwAuthError, pulAuthPackage, pvInAuthBuffer, ulInAuthBufferSize, ppvOutAuthBuffer, pulOutAuthBufferSize, pfSave, dwFlags)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && CREDUI == "on" && Windows_Win32_Security_Credentials_CredUIReadSSOCredW == "on"]
+foreign {
     // param-hint: pszRealm optional
     func CredUIReadSSOCredW(pszRealm: CPointer<UInt16>, ppszUsername: CPointer<CPointer<UInt16>>): UInt32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && CREDUI == "on" && Windows_Win32_Security_Credentials_CredUIReadSSOCredW == "on"]
+public unsafe func Windows_CredUIReadSSOCredW(pszRealm: CPointer<UInt16>, ppszUsername: CPointer<CPointer<UInt16>>): UInt32 {
+    return CredUIReadSSOCredW(pszRealm, ppszUsername)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && CREDUI == "on" && Windows_Win32_Security_Credentials_CredUIStoreSSOCredW == "on"]
+foreign {
     // param-hint: pszRealm optional
     func CredUIStoreSSOCredW(pszRealm: CPointer<UInt16>, pszUsername: CPointer<UInt16>, pszPassword: CPointer<UInt16>, bPersist: Int32): UInt32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && CREDUI == "on" && Windows_Win32_Security_Credentials_CredUIStoreSSOCredW == "on"]
+public unsafe func Windows_CredUIStoreSSOCredW(pszRealm: CPointer<UInt16>, pszUsername: CPointer<UInt16>, pszPassword: CPointer<UInt16>, bPersist: Int32): UInt32 {
+    return CredUIStoreSSOCredW(pszRealm, pszUsername, pszPassword, bPersist)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && CREDUI == "on" && Windows_Win32_Security_Credentials_CredUnPackAuthenticationBufferA == "on"]
+foreign {
     // param-hint: pAuthBuffer bytes=param[2]
     // param-hint: pszUserName len=param[4] optional
     // param-hint: pszDomainName len=param[6] optional
@@ -3449,6 +4574,15 @@ foreign {
     // param-hint: pszPassword len=param[8] optional
     // pinvoke-hint: SetLastError
     func CredUnPackAuthenticationBufferA(dwFlags: CRED_PACK_FLAGSAbi, pAuthBuffer: CPointer<Unit>, cbAuthBuffer: UInt32, pszUserName: CPointer<UInt8>, pcchlMaxUserName: CPointer<UInt32>, pszDomainName: CPointer<UInt8>, pcchMaxDomainName: CPointer<UInt32>, pszPassword: CPointer<UInt8>, pcchMaxPassword: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && CREDUI == "on" && Windows_Win32_Security_Credentials_CredUnPackAuthenticationBufferA == "on"]
+public unsafe func Windows_CredUnPackAuthenticationBufferA(dwFlags: CRED_PACK_FLAGSAbi, pAuthBuffer: CPointer<Unit>, cbAuthBuffer: UInt32, pszUserName: CPointer<UInt8>, pcchlMaxUserName: CPointer<UInt32>, pszDomainName: CPointer<UInt8>, pcchMaxDomainName: CPointer<UInt32>, pszPassword: CPointer<UInt8>, pcchMaxPassword: CPointer<UInt32>): Int32 {
+    return CredUnPackAuthenticationBufferA(dwFlags, pAuthBuffer, cbAuthBuffer, pszUserName, pcchlMaxUserName, pszDomainName, pcchMaxDomainName, pszPassword, pcchMaxPassword)
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && CREDUI == "on" && Windows_Win32_Security_Credentials_CredUnPackAuthenticationBufferW == "on"]
+foreign {
     // param-hint: pAuthBuffer bytes=param[2]
     // param-hint: pszUserName len=param[4] optional
     // param-hint: pszDomainName len=param[6] optional
@@ -3458,30 +4592,9 @@ foreign {
     func CredUnPackAuthenticationBufferW(dwFlags: CRED_PACK_FLAGSAbi, pAuthBuffer: CPointer<Unit>, cbAuthBuffer: UInt32, pszUserName: CPointer<UInt16>, pcchMaxUserName: CPointer<UInt32>, pszDomainName: CPointer<UInt16>, pcchMaxDomainName: CPointer<UInt32>, pszPassword: CPointer<UInt16>, pcchMaxPassword: CPointer<UInt32>): Int32
 }
 
-@When[CREDUI == "on" && Windows_Win32_Graphics_Gdi == "on"]
-foreign {
-    // param-hint: pUiInfo optional
-    // param-hint: pszTargetName optional
-    // param-hint: pContext optional reserved
-    // param-hint: pszUserName len=param[5]
-    // param-hint: pszPassword len=param[7]
-    // param-hint: save optional
-    func CredUIPromptForCredentialsA(pUiInfo: CPointer<CREDUI_INFOAAbi>, pszTargetName: CPointer<UInt8>, pContext: CPointer<SecHandleAbi>, dwAuthError: UInt32, pszUserName: CPointer<UInt8>, ulUserNameBufferSize: UInt32, pszPassword: CPointer<UInt8>, ulPasswordBufferSize: UInt32, save: CPointer<Int32>, dwFlags: CREDUI_FLAGSAbi): windows_core.WIN32_ERROR
-    // param-hint: pUiInfo optional
-    // param-hint: pszTargetName optional
-    // param-hint: pContext optional reserved
-    // param-hint: pszUserName len=param[5]
-    // param-hint: pszPassword len=param[7]
-    // param-hint: save optional
-    func CredUIPromptForCredentialsW(pUiInfo: CPointer<CREDUI_INFOWAbi>, pszTargetName: CPointer<UInt16>, pContext: CPointer<SecHandleAbi>, dwAuthError: UInt32, pszUserName: CPointer<UInt16>, ulUserNameBufferSize: UInt32, pszPassword: CPointer<UInt16>, ulPasswordBufferSize: UInt32, save: CPointer<Int32>, dwFlags: CREDUI_FLAGSAbi): windows_core.WIN32_ERROR
-    // param-hint: pUiInfo optional
-    // param-hint: pvInAuthBuffer bytes=param[4] optional
-    // param-hint: pfSave optional
-    func CredUIPromptForWindowsCredentialsA(pUiInfo: CPointer<CREDUI_INFOAAbi>, dwAuthError: UInt32, pulAuthPackage: CPointer<UInt32>, pvInAuthBuffer: CPointer<Unit>, ulInAuthBufferSize: UInt32, ppvOutAuthBuffer: CPointer<CPointer<Unit>>, pulOutAuthBufferSize: CPointer<UInt32>, pfSave: CPointer<Int32>, dwFlags: CREDUIWIN_FLAGSAbi): UInt32
-    // param-hint: pUiInfo optional
-    // param-hint: pvInAuthBuffer bytes=param[4] optional
-    // param-hint: pfSave optional
-    func CredUIPromptForWindowsCredentialsW(pUiInfo: CPointer<CREDUI_INFOWAbi>, dwAuthError: UInt32, pulAuthPackage: CPointer<UInt32>, pvInAuthBuffer: CPointer<Unit>, ulInAuthBufferSize: UInt32, ppvOutAuthBuffer: CPointer<CPointer<Unit>>, pulOutAuthBufferSize: CPointer<UInt32>, pfSave: CPointer<Int32>, dwFlags: CREDUIWIN_FLAGSAbi): UInt32
+@When[Windows_Win32_Security_Credentials == "on" && CREDUI == "on" && Windows_Win32_Security_Credentials_CredUnPackAuthenticationBufferW == "on"]
+public unsafe func Windows_CredUnPackAuthenticationBufferW(dwFlags: CRED_PACK_FLAGSAbi, pAuthBuffer: CPointer<Unit>, cbAuthBuffer: UInt32, pszUserName: CPointer<UInt16>, pcchMaxUserName: CPointer<UInt32>, pszDomainName: CPointer<UInt16>, pcchMaxDomainName: CPointer<UInt32>, pszPassword: CPointer<UInt16>, pcchMaxPassword: CPointer<UInt32>): Int32 {
+    return CredUnPackAuthenticationBufferW(dwFlags, pAuthBuffer, cbAuthBuffer, pszUserName, pcchMaxUserName, pszDomainName, pcchMaxDomainName, pszPassword, pcchMaxPassword)
 }
 
 @When[Windows_Win32_Security_Credentials == "on"]

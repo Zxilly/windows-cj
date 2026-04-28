@@ -5,11 +5,8 @@ import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrap
 import windows_interface as windows_interface
 import windows_polyfill.{unionReadUInt32, unionReadUInt64, unionWriteUInt32, unionWriteUInt64}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Dxgi_Common == "on"]
 import windows_sys.Win32.Graphics.Dxgi.Common as Win32_Graphics_Dxgi_Common
-@When[Windows_Win32_Security == "on"]
 import windows_sys.Win32.Security as Win32_Security
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
@@ -24976,35 +24973,95 @@ public class ID3D12ShaderReflectionVariable <: InterfaceWrapperBase & ComInterfa
     }
 }
 
-@When[D3D12 == "on"]
-foreign {
-    // param-hint: pSrcData bytes=param[1]
-    func D3D12CreateRootSignatureDeserializer(pSrcData: CPointer<Unit>, SrcDataSizeInBytes: UIntNative, pRootSignatureDeserializerInterface: CPointer<GUID>, ppRootSignatureDeserializer: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pSrcData bytes=param[1]
-    func D3D12CreateVersionedRootSignatureDeserializer(pSrcData: CPointer<Unit>, SrcDataSizeInBytes: UIntNative, pRootSignatureDeserializerInterface: CPointer<GUID>, ppRootSignatureDeserializer: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pIIDs len=param[0]
-    // param-hint: pConfigurationStructs len=param[0] optional
-    // param-hint: pConfigurationStructSizes len=param[0] optional
-    func D3D12EnableExperimentalFeatures(NumFeatures: UInt32, pIIDs: CPointer<GUID>, pConfigurationStructs: CPointer<Unit>, pConfigurationStructSizes: CPointer<UInt32>): Int32
-    // param-hint: ppvDebug optional
-    func D3D12GetDebugInterface(riid: CPointer<GUID>, ppvDebug: CPointer<CPointer<Unit>>): Int32
-    // param-hint: ppvDebug optional
-    func D3D12GetInterface(rclsid: CPointer<GUID>, riid: CPointer<GUID>, ppvDebug: CPointer<CPointer<Unit>>): Int32
-}
-
-@When[D3D12 == "on" && (Windows_Win32_Graphics_Direct3D == "on" && Windows_Win32_System_Com == "on")]
+@When[Windows_Win32_Graphics_Direct3D12 == "on" && D3D12 == "on" && Windows_Win32_Graphics_Direct3D12_D3D12CreateDevice == "on" && Windows_Win32_Graphics_Direct3D == "on" && Windows_Win32_System_Com == "on"]
 foreign {
     // param-hint: pAdapter optional
     // param-hint: ppDevice optional
     func D3D12CreateDevice(pAdapter: CPointer<Unit>, MinimumFeatureLevel: Int32, riid: CPointer<GUID>, ppDevice: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[D3D12 == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+@When[Windows_Win32_Graphics_Direct3D12 == "on" && D3D12 == "on" && Windows_Win32_Graphics_Direct3D12_D3D12CreateDevice == "on" && Windows_Win32_Graphics_Direct3D == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_D3D12CreateDevice(pAdapter: CPointer<Unit>, MinimumFeatureLevel: Int32, riid: CPointer<GUID>, ppDevice: CPointer<CPointer<Unit>>): Int32 {
+    return D3D12CreateDevice(pAdapter, MinimumFeatureLevel, riid, ppDevice)
+}
+
+@When[Windows_Win32_Graphics_Direct3D12 == "on" && D3D12 == "on" && Windows_Win32_Graphics_Direct3D12_D3D12CreateRootSignatureDeserializer == "on"]
+foreign {
+    // param-hint: pSrcData bytes=param[1]
+    func D3D12CreateRootSignatureDeserializer(pSrcData: CPointer<Unit>, SrcDataSizeInBytes: UIntNative, pRootSignatureDeserializerInterface: CPointer<GUID>, ppRootSignatureDeserializer: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D12 == "on" && D3D12 == "on" && Windows_Win32_Graphics_Direct3D12_D3D12CreateRootSignatureDeserializer == "on"]
+public unsafe func Windows_D3D12CreateRootSignatureDeserializer(pSrcData: CPointer<Unit>, SrcDataSizeInBytes: UIntNative, pRootSignatureDeserializerInterface: CPointer<GUID>, ppRootSignatureDeserializer: CPointer<CPointer<Unit>>): Int32 {
+    return D3D12CreateRootSignatureDeserializer(pSrcData, SrcDataSizeInBytes, pRootSignatureDeserializerInterface, ppRootSignatureDeserializer)
+}
+
+@When[Windows_Win32_Graphics_Direct3D12 == "on" && D3D12 == "on" && Windows_Win32_Graphics_Direct3D12_D3D12CreateVersionedRootSignatureDeserializer == "on"]
+foreign {
+    // param-hint: pSrcData bytes=param[1]
+    func D3D12CreateVersionedRootSignatureDeserializer(pSrcData: CPointer<Unit>, SrcDataSizeInBytes: UIntNative, pRootSignatureDeserializerInterface: CPointer<GUID>, ppRootSignatureDeserializer: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D12 == "on" && D3D12 == "on" && Windows_Win32_Graphics_Direct3D12_D3D12CreateVersionedRootSignatureDeserializer == "on"]
+public unsafe func Windows_D3D12CreateVersionedRootSignatureDeserializer(pSrcData: CPointer<Unit>, SrcDataSizeInBytes: UIntNative, pRootSignatureDeserializerInterface: CPointer<GUID>, ppRootSignatureDeserializer: CPointer<CPointer<Unit>>): Int32 {
+    return D3D12CreateVersionedRootSignatureDeserializer(pSrcData, SrcDataSizeInBytes, pRootSignatureDeserializerInterface, ppRootSignatureDeserializer)
+}
+
+@When[Windows_Win32_Graphics_Direct3D12 == "on" && D3D12 == "on" && Windows_Win32_Graphics_Direct3D12_D3D12EnableExperimentalFeatures == "on"]
+foreign {
+    // param-hint: pIIDs len=param[0]
+    // param-hint: pConfigurationStructs len=param[0] optional
+    // param-hint: pConfigurationStructSizes len=param[0] optional
+    func D3D12EnableExperimentalFeatures(NumFeatures: UInt32, pIIDs: CPointer<GUID>, pConfigurationStructs: CPointer<Unit>, pConfigurationStructSizes: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D12 == "on" && D3D12 == "on" && Windows_Win32_Graphics_Direct3D12_D3D12EnableExperimentalFeatures == "on"]
+public unsafe func Windows_D3D12EnableExperimentalFeatures(NumFeatures: UInt32, pIIDs: CPointer<GUID>, pConfigurationStructs: CPointer<Unit>, pConfigurationStructSizes: CPointer<UInt32>): Int32 {
+    return D3D12EnableExperimentalFeatures(NumFeatures, pIIDs, pConfigurationStructs, pConfigurationStructSizes)
+}
+
+@When[Windows_Win32_Graphics_Direct3D12 == "on" && D3D12 == "on" && Windows_Win32_Graphics_Direct3D12_D3D12GetDebugInterface == "on"]
+foreign {
+    // param-hint: ppvDebug optional
+    func D3D12GetDebugInterface(riid: CPointer<GUID>, ppvDebug: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D12 == "on" && D3D12 == "on" && Windows_Win32_Graphics_Direct3D12_D3D12GetDebugInterface == "on"]
+public unsafe func Windows_D3D12GetDebugInterface(riid: CPointer<GUID>, ppvDebug: CPointer<CPointer<Unit>>): Int32 {
+    return D3D12GetDebugInterface(riid, ppvDebug)
+}
+
+@When[Windows_Win32_Graphics_Direct3D12 == "on" && D3D12 == "on" && Windows_Win32_Graphics_Direct3D12_D3D12GetInterface == "on"]
+foreign {
+    // param-hint: ppvDebug optional
+    func D3D12GetInterface(rclsid: CPointer<GUID>, riid: CPointer<GUID>, ppvDebug: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D12 == "on" && D3D12 == "on" && Windows_Win32_Graphics_Direct3D12_D3D12GetInterface == "on"]
+public unsafe func Windows_D3D12GetInterface(rclsid: CPointer<GUID>, riid: CPointer<GUID>, ppvDebug: CPointer<CPointer<Unit>>): Int32 {
+    return D3D12GetInterface(rclsid, riid, ppvDebug)
+}
+
+@When[Windows_Win32_Graphics_Direct3D12 == "on" && D3D12 == "on" && Windows_Win32_Graphics_Direct3D12_D3D12SerializeRootSignature == "on" && Windows_Win32_Graphics_Direct3D == "on"]
 foreign {
     // param-hint: ppErrorBlob optional
     func D3D12SerializeRootSignature(pRootSignature: CPointer<D3D12_ROOT_SIGNATURE_DESC>, Version: Int32, ppBlob: CPointer<CPointer<Unit>>, ppErrorBlob: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D12 == "on" && D3D12 == "on" && Windows_Win32_Graphics_Direct3D12_D3D12SerializeRootSignature == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+public unsafe func Windows_D3D12SerializeRootSignature(pRootSignature: CPointer<D3D12_ROOT_SIGNATURE_DESC>, Version: Int32, ppBlob: CPointer<CPointer<Unit>>, ppErrorBlob: CPointer<CPointer<Unit>>): Int32 {
+    return D3D12SerializeRootSignature(pRootSignature, Version, ppBlob, ppErrorBlob)
+}
+
+@When[Windows_Win32_Graphics_Direct3D12 == "on" && D3D12 == "on" && Windows_Win32_Graphics_Direct3D12_D3D12SerializeVersionedRootSignature == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+foreign {
     // param-hint: ppErrorBlob optional
     func D3D12SerializeVersionedRootSignature(pRootSignature: CPointer<D3D12_VERSIONED_ROOT_SIGNATURE_DESC>, ppBlob: CPointer<CPointer<Unit>>, ppErrorBlob: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D12 == "on" && D3D12 == "on" && Windows_Win32_Graphics_Direct3D12_D3D12SerializeVersionedRootSignature == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+public unsafe func Windows_D3D12SerializeVersionedRootSignature(pRootSignature: CPointer<D3D12_VERSIONED_ROOT_SIGNATURE_DESC>, ppBlob: CPointer<CPointer<Unit>>, ppErrorBlob: CPointer<CPointer<Unit>>): Int32 {
+    return D3D12SerializeVersionedRootSignature(pRootSignature, ppBlob, ppErrorBlob)
 }
 
 @When[Windows_Win32_Graphics_Direct3D12 == "on"]

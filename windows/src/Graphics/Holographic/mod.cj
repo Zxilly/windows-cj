@@ -10,15 +10,10 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Graphics_DirectX == "on"]
 import windows.Graphics.DirectX as Graphics_DirectX
-@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
 import windows.Graphics.DirectX.Direct3D11 as Graphics_DirectX_Direct3D11
-@When[Windows_Perception == "on"]
 import windows.Perception as Perception
-@When[Windows_Perception_Spatial == "on"]
 import windows.Perception.Spatial as Perception_Spatial
 import windows._impl_l1 as _impl_l1
 import windows_collections as windows_collections
@@ -2527,7 +2522,10 @@ extend IHolographicSpaceStatics3 <: windows_core.Interface<IHolographicSpaceStat
 @C
 public struct IHolographicViewConfiguration2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedDepthReprojectionMethods: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedDepthReprojectionMethods: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2596,6 +2594,7 @@ public class IHolographicViewConfiguration2 <: InterfaceWrapperBase & ComInterfa
         readVtbl<IHolographicViewConfiguration2Vtbl>(IHolographicViewConfiguration2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedDepthReprojectionMethods(): windows_collections.IVectorView<HolographicDepthReprojectionMethod> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3155,7 +3154,10 @@ extend HolographicQuadLayerUpdateParameters <: windows_core.HandleWinrtType<Holo
 @C
 public struct IHolographicFramePresentationMonitorVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ReadReports: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ReadReports: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3236,6 +3238,7 @@ public class IHolographicFramePresentationMonitor <: InterfaceWrapperBase & ComI
         readVtbl<IHolographicFramePresentationMonitorVtbl>(IHolographicFramePresentationMonitorVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReadReports(): windows_collections.IVectorView<HolographicFramePresentationReport> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3445,6 +3448,7 @@ public class HolographicFramePresentationMonitor <: InterfaceWrapperBase & ComIn
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReadReports(): windows_collections.IVectorView<HolographicFramePresentationReport> {
         return defaultInterface().ReadReports()
     }
@@ -3584,7 +3588,10 @@ extend HolographicFrameScanoutReport <: windows_core.HandleWinrtType<Holographic
 @C
 public struct IHolographicFrameScanoutMonitorVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ReadReports: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ReadReports: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3665,6 +3672,7 @@ public class IHolographicFrameScanoutMonitor <: InterfaceWrapperBase & ComInterf
         readVtbl<IHolographicFrameScanoutMonitorVtbl>(IHolographicFrameScanoutMonitorVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReadReports(): windows_collections.IVector<HolographicFrameScanoutReport> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3753,6 +3761,7 @@ public class HolographicFrameScanoutMonitor <: InterfaceWrapperBase & ComInterfa
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReadReports(): windows_collections.IVector<HolographicFrameScanoutReport> {
         return defaultInterface().ReadReports()
     }
@@ -4298,10 +4307,12 @@ public class HolographicFrame <: InterfaceWrapperBase & ComInterface & windows_i
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AddedCameras(): windows_collections.IVectorView<HolographicCamera> {
         return defaultInterface().AddedCameras()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RemovedCameras(): windows_collections.IVectorView<HolographicCamera> {
         return defaultInterface().RemovedCameras()
     }
@@ -4422,6 +4433,7 @@ public class HolographicFramePrediction <: InterfaceWrapperBase & ComInterface &
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CameraPoses(): windows_collections.IVectorView<HolographicCameraPose> {
         return defaultInterface().CameraPoses()
     }
@@ -5030,7 +5042,7 @@ public class HolographicViewConfiguration <: InterfaceWrapperBase & ComInterface
         return defaultInterface().RequestRenderTargetSize(size)
     }
 
-    @When[Windows_Graphics_DirectX == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_DirectX == "on"]
     public unsafe func SupportedPixelFormats(): windows_collections.IVectorView<Graphics_DirectX.DirectXPixelFormat> {
         return defaultInterface().SupportedPixelFormats()
     }
@@ -5210,7 +5222,10 @@ public struct IHolographicCamera3Vtbl {
     public var IsPrimaryLayerEnabled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetIsPrimaryLayerEnabled: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var MaxQuadLayerCount: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var QuadLayers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var QuadLayers: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -5320,6 +5335,7 @@ public class IHolographicCamera3 <: InterfaceWrapperBase & ComInterface & Runtim
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func QuadLayers(): windows_collections.IVector<HolographicQuadLayer> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5755,8 +5771,14 @@ extend IHolographicDisplayStatics <: windows_core.Interface<IHolographicDisplayS
 @C
 public struct IHolographicFrameVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AddedCameras: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AddedCameras: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var RemovedCameras: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RemovedCameras: UIntNative = UIntNative(0)
     public var GetRenderingParameters: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var Duration: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CurrentPrediction: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -5832,6 +5854,7 @@ public class IHolographicFrame <: InterfaceWrapperBase & ComInterface & RuntimeN
         readVtbl<IHolographicFrameVtbl>(IHolographicFrameVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AddedCameras(): windows_collections.IVectorView<HolographicCamera> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5840,6 +5863,7 @@ public class IHolographicFrame <: InterfaceWrapperBase & ComInterface & RuntimeN
         return windows_collections.IVectorView<HolographicCamera>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RemovedCameras(): windows_collections.IVectorView<HolographicCamera> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6005,7 +6029,10 @@ extend IHolographicFrame2 <: windows_core.Interface<IHolographicFrame2> {}
 @C
 public struct IHolographicFramePredictionVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CameraPoses: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CameraPoses: UIntNative = UIntNative(0)
     @When[Windows_Perception == "on"]
     public var Timestamp: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Perception != "on"]
@@ -6078,6 +6105,7 @@ public class IHolographicFramePrediction <: InterfaceWrapperBase & ComInterface 
         readVtbl<IHolographicFramePredictionVtbl>(IHolographicFramePredictionVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CameraPoses(): windows_collections.IVectorView<HolographicCameraPose> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6733,9 +6761,9 @@ public struct IHolographicViewConfigurationVtbl {
     public var NativeRenderTargetSize: CFunc<(CPointer<Unit>, CPointer<windows_future.SizeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var RenderTargetSize: CFunc<(CPointer<Unit>, CPointer<windows_future.SizeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var RequestRenderTargetSize: CFunc<(CPointer<Unit>, windows_future.SizeAbi, CPointer<windows_future.SizeAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Graphics_DirectX == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_DirectX == "on"]
     public var SupportedPixelFormats: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Graphics_DirectX != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Graphics_DirectX != "on"]
     public var SupportedPixelFormats: UIntNative = UIntNative(0)
     @When[Windows_Graphics_DirectX == "on"]
     public var PixelFormat: CFunc<(CPointer<Unit>, CPointer<Graphics_DirectX.DirectXPixelFormatAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -6843,7 +6871,7 @@ public class IHolographicViewConfiguration <: InterfaceWrapperBase & ComInterfac
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<windows_future.Size>()).unwrap()
     }
 
-    @When[Windows_Graphics_DirectX == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_DirectX == "on"]
     public unsafe func SupportedPixelFormats(): windows_collections.IVectorView<Graphics_DirectX.DirectXPixelFormat> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

@@ -4,7 +4,6 @@ package windows_sys.UI.UIAutomation.Core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_UI_UIAutomation == "on"]
 import windows_sys.UI.UIAutomation as UI_UIAutomation
 
 

@@ -10,7 +10,6 @@ import windows_interface.{GUID}
 import windows_interface as windows_interface
 import windows_polyfill.{unionReadUInt8, unionWriteUInt8}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 

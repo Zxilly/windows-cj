@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Media == "on"]
 import windows.Media as Media
 @When[Windows_Media_Render == "on"]
 import windows.Media.Render as Media_Render
@@ -124,6 +122,7 @@ public class AudioDeviceInputNode <: InterfaceWrapperBase & ComInterface & windo
         return defaultInterface().Device()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OutgoingConnections(): windows_collections.IVectorView<AudioGraphConnection> {
         return asIAudioInputNode().OutgoingConnections()
     }
@@ -140,7 +139,7 @@ public class AudioDeviceInputNode <: InterfaceWrapperBase & ComInterface & windo
         asIAudioInputNode().RemoveOutgoingConnection(destination)
     }
 
-    @When[Windows_Media_Effects == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on"]
     public unsafe func EffectDefinitions(): windows_collections.IVector<IAudioEffectDefinition> {
         return asIAudioNode().EffectDefinitions()
     }
@@ -373,7 +372,7 @@ public class AudioDeviceOutputNode <: InterfaceWrapperBase & ComInterface & wind
         return defaultInterface().Device()
     }
 
-    @When[Windows_Media_Effects == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on"]
     public unsafe func EffectDefinitions(): windows_collections.IVector<IAudioEffectDefinition> {
         return asIAudioNode().EffectDefinitions()
     }
@@ -780,7 +779,7 @@ public class AudioFileInputNode <: InterfaceWrapperBase & ComInterface & windows
         return defaultInterface().Duration()
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func SourceFile(): _impl_l1.StorageFile {
         return defaultInterface().SourceFile()
     }
@@ -793,6 +792,7 @@ public class AudioFileInputNode <: InterfaceWrapperBase & ComInterface & windows
         defaultInterface().RemoveFileCompleted(token)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OutgoingConnections(): windows_collections.IVectorView<AudioGraphConnection> {
         return asIAudioInputNode().OutgoingConnections()
     }
@@ -809,7 +809,7 @@ public class AudioFileInputNode <: InterfaceWrapperBase & ComInterface & windows
         asIAudioInputNode().RemoveOutgoingConnection(destination)
     }
 
-    @When[Windows_Media_Effects == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on"]
     public unsafe func EffectDefinitions(): windows_collections.IVector<IAudioEffectDefinition> {
         return asIAudioNode().EffectDefinitions()
     }
@@ -1045,7 +1045,7 @@ public class AudioFileOutputNode <: InterfaceWrapperBase & ComInterface & window
         return defaultInterface().FinalizeAsync()
     }
 
-    @When[Windows_Media_Effects == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on"]
     public unsafe func EffectDefinitions(): windows_collections.IVector<IAudioEffectDefinition> {
         return asIAudioNode().EffectDefinitions()
     }
@@ -1343,6 +1343,7 @@ public class AudioFrameInputNode <: InterfaceWrapperBase & ComInterface & window
         defaultInterface().RemoveQuantumStarted(token)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OutgoingConnections(): windows_collections.IVectorView<AudioGraphConnection> {
         return asIAudioInputNode().OutgoingConnections()
     }
@@ -1359,7 +1360,7 @@ public class AudioFrameInputNode <: InterfaceWrapperBase & ComInterface & window
         asIAudioInputNode().RemoveOutgoingConnection(destination)
     }
 
-    @When[Windows_Media_Effects == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on"]
     public unsafe func EffectDefinitions(): windows_collections.IVector<IAudioEffectDefinition> {
         return asIAudioNode().EffectDefinitions()
     }
@@ -1522,7 +1523,7 @@ public class AudioFrameOutputNode <: InterfaceWrapperBase & ComInterface & windo
         return defaultInterface().GetFrame()
     }
 
-    @When[Windows_Media_Effects == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on"]
     public unsafe func EffectDefinitions(): windows_collections.IVector<IAudioEffectDefinition> {
         return asIAudioNode().EffectDefinitions()
     }
@@ -3964,6 +3965,7 @@ public class AudioSubmixNode <: InterfaceWrapperBase & ComInterface & windows_in
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OutgoingConnections(): windows_collections.IVectorView<AudioGraphConnection> {
         return defaultInterface().OutgoingConnections()
     }
@@ -3980,7 +3982,7 @@ public class AudioSubmixNode <: InterfaceWrapperBase & ComInterface & windows_in
         defaultInterface().RemoveOutgoingConnection(destination)
     }
 
-    @When[Windows_Media_Effects == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on"]
     public unsafe func EffectDefinitions(): windows_collections.IVector<IAudioEffectDefinition> {
         return asIAudioNode().EffectDefinitions()
     }
@@ -4631,7 +4633,7 @@ extend CreateMediaSourceAudioInputNodeResult <: windows_core.HandleWinrtType<Cre
     }
 }
 
-@When[Windows_Media_Audio == "on"]
+@When[Windows_Media_Audio == "on" && Windows_Media_Effects == "on"]
 public class EchoEffectDefinition <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -4746,6 +4748,7 @@ public class EchoEffectDefinition <: InterfaceWrapperBase & ComInterface & windo
         return asIAudioEffectDefinition().Properties()
     }
 
+    @When[Windows_Media_Effects == "on"]
     public static unsafe func Create(audioGraph: AudioGraph): EchoEffectDefinition {
         var result__: Option<EchoEffectDefinition> = Option<EchoEffectDefinition>.None
         try (factory__ = windows_core.factory<EchoEffectDefinition, IEchoEffectDefinitionFactory>().unwrap()) {
@@ -4758,7 +4761,7 @@ public class EchoEffectDefinition <: InterfaceWrapperBase & ComInterface & windo
     }
 }
 
-@When[Windows_Media_Audio == "on"]
+@When[Windows_Media_Audio == "on" && Windows_Media_Effects == "on"]
 extend EchoEffectDefinition <: windows_core.HandleWinrtType<EchoEffectDefinition> {
     public static func intoWinrtHandle(value: EchoEffectDefinition): CPointer<Unit> {
         value.asRaw()
@@ -4888,7 +4891,7 @@ extend EqualizerBand <: windows_core.HandleWinrtType<EqualizerBand> {
     }
 }
 
-@When[Windows_Media_Audio == "on"]
+@When[Windows_Media_Audio == "on" && Windows_Media_Effects == "on"]
 public class EqualizerEffectDefinition <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -4964,7 +4967,7 @@ public class EqualizerEffectDefinition <: InterfaceWrapperBase & ComInterface & 
         }
     }
 
-    @When[Windows_Media_Effects == "on"]
+    @When[(Windows_Foundation_Collections == "on") && (Windows_Media_Effects == "on")]
     public unsafe func Bands(): windows_collections.IVectorView<EqualizerBand> {
         return defaultInterface().Bands()
     }
@@ -4978,6 +4981,7 @@ public class EqualizerEffectDefinition <: InterfaceWrapperBase & ComInterface & 
         return asIAudioEffectDefinition().Properties()
     }
 
+    @When[Windows_Media_Effects == "on"]
     public static unsafe func Create(audioGraph: AudioGraph): EqualizerEffectDefinition {
         var result__: Option<EqualizerEffectDefinition> = Option<EqualizerEffectDefinition>.None
         try (factory__ = windows_core.factory<EqualizerEffectDefinition, IEqualizerEffectDefinitionFactory>().unwrap()) {
@@ -4990,7 +4994,7 @@ public class EqualizerEffectDefinition <: InterfaceWrapperBase & ComInterface & 
     }
 }
 
-@When[Windows_Media_Audio == "on"]
+@When[Windows_Media_Audio == "on" && Windows_Media_Effects == "on"]
 extend EqualizerEffectDefinition <: windows_core.HandleWinrtType<EqualizerEffectDefinition> {
     public static func intoWinrtHandle(value: EqualizerEffectDefinition): CPointer<Unit> {
         value.asRaw()
@@ -5551,9 +5555,9 @@ public struct IAudioFileInputNodeVtbl {
     public var LoopCount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetLoopCount: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Duration: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var SourceFile: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var SourceFile: UIntNative = UIntNative(0)
     public var FileCompleted: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveFileCompleted: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -5729,7 +5733,7 @@ public class IAudioFileInputNode <: InterfaceWrapperBase & ComInterface & Runtim
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<windows_future.TimeSpan>()).unwrap()
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func SourceFile(): _impl_l1.StorageFile {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6800,13 +6804,13 @@ extend IAudioGraph2 <: windows_core.Interface<IAudioGraph2> {}
 @C
 public struct IAudioGraph3Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Media_Core == "on" && Windows_Media_Core == "on" && Windows_Media_Playback == "on"]
     public var CreateMediaSourceAudioInputNodeAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Media_Core != "on"]
+    @When[Windows_Media_Core != "on" || Windows_Media_Core != "on" || Windows_Media_Playback != "on"]
     public var CreateMediaSourceAudioInputNodeAsync: UIntNative = UIntNative(0)
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Media_Core == "on" && Windows_Media_Core == "on" && Windows_Media_Playback == "on"]
     public var CreateMediaSourceAudioInputNodeWithEmitterAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Media_Core != "on"]
+    @When[Windows_Media_Core != "on" || Windows_Media_Core != "on" || Windows_Media_Playback != "on"]
     public var CreateMediaSourceAudioInputNodeWithEmitterAsync: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -6876,7 +6880,7 @@ public class IAudioGraph3 <: InterfaceWrapperBase & ComInterface & RuntimeName &
         readVtbl<IAudioGraph3Vtbl>(IAudioGraph3Vtbl())
     }
 
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Media_Core == "on" && Windows_Media_Core == "on" && Windows_Media_Playback == "on"]
     public unsafe func CreateMediaSourceAudioInputNodeAsync(mediaSource: MediaSource): windows_future.IAsyncOperation<CreateMediaSourceAudioInputNodeResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6885,7 +6889,7 @@ public class IAudioGraph3 <: InterfaceWrapperBase & ComInterface & RuntimeName &
         return windows_future.IAsyncOperation<CreateMediaSourceAudioInputNodeResult>.fromAbiTake(result__)
     }
 
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Media_Core == "on" && Windows_Media_Core == "on" && Windows_Media_Playback == "on"]
     public unsafe func CreateMediaSourceAudioInputNodeWithEmitterAsync(mediaSource: MediaSource, emitter: AudioNodeEmitter): windows_future.IAsyncOperation<CreateMediaSourceAudioInputNodeResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7558,25 +7562,21 @@ extend IAudioGraphUnrecoverableErrorOccurredEventArgs <: windows_core.Interface<
 @C
 public struct IAudioInputNodeVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var OutgoingConnections: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var OutgoingConnections: UIntNative = UIntNative(0)
     public var AddOutgoingConnection: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var AddOutgoingConnectionWithGain: CFunc<(CPointer<Unit>, CPointer<Unit>, Float64) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveOutgoingConnection: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 
-    @When[(((Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on")]
+    @When[(Windows_Foundation_Collections == "on") && ((((Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on"))]
     public static func new<Identity>(offset!: Int64 = 0): IAudioInputNodeVtbl where Identity <: IAudioInputNode_Impl {
         let _ = offset
         var vtbl = IAudioInputNodeVtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.OutgoingConnections = { instanceRaw, result__ =>
-            match (unsafe { asImplFromRaw<IAudioInputNode_ImplErased>(instanceRaw) }) {
-                case Some(impl) =>
-                    impl.__winrtThunk_OutgoingConnections(result__)
-                case None =>
-                    E_NOINTERFACE.value
-            }
-        }
+        vtbl = IAudioInputNodeVtbl.__assignOutgoingConnections<Identity>(vtbl)
         vtbl.AddOutgoingConnection = { instanceRaw, arg0 =>
             match (unsafe { asImplFromRaw<IAudioInputNode_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
@@ -7604,6 +7604,25 @@ public struct IAudioInputNodeVtbl {
         return vtbl
     }
 
+    @When[((Windows_Foundation_Collections == "on") && ((((Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on"))) && Windows_Foundation_Collections == "on"]
+    public static func __assignOutgoingConnections<Identity>(vtbl: IAudioInputNodeVtbl): IAudioInputNodeVtbl where Identity <: IAudioInputNode_Impl {
+        var next = vtbl
+        next.OutgoingConnections = { instanceRaw, result__ =>
+            match (unsafe { asImplFromRaw<IAudioInputNode_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_OutgoingConnections(result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        return next
+    }
+
+    @When[((Windows_Foundation_Collections == "on") && ((((Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on"))) && Windows_Foundation_Collections != "on"]
+    public static func __assignOutgoingConnections<Identity>(vtbl: IAudioInputNodeVtbl): IAudioInputNodeVtbl where Identity <: IAudioInputNode_Impl {
+        return vtbl
+    }
+
     public static func matches(iid: GUID): Bool {
         if (iid == IAudioInputNode.iid()) {
             return true
@@ -7617,7 +7636,7 @@ public struct IAudioInputNodeVtbl {
     }
 }
 
-@When[Windows_Media_Audio == "on" && ((((Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on"))]
+@When[Windows_Media_Audio == "on" && ((Windows_Foundation_Collections == "on") && ((((Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on")))]
 public interface IAudioInputNode_ImplErased {
     public func __winrtThunk_OutgoingConnections(result__: CPointer<CPointer<Unit>>): Int32
 
@@ -7628,7 +7647,7 @@ public interface IAudioInputNode_ImplErased {
     public func __winrtThunk_RemoveOutgoingConnection(arg0: CPointer<Unit>): Int32
 }
 
-@When[Windows_Media_Audio == "on" && ((((Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on"))]
+@When[Windows_Media_Audio == "on" && ((Windows_Foundation_Collections == "on") && ((((Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on")))]
 public interface IAudioInputNode_Impl <: IAudioInputNode_ImplErased & IAudioNode_Impl & Foundation.IClosable_Impl {
     public func OutgoingConnections(): windows_core.Result<windows_collections.IVectorView<AudioGraphConnection>>
 
@@ -7902,6 +7921,7 @@ public class IAudioInputNode <: InterfaceWrapperBase & ComInterface & RuntimeNam
         readVtbl<IAudioInputNodeVtbl>(IAudioInputNodeVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OutgoingConnections(): windows_collections.IVectorView<AudioGraphConnection> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7939,7 +7959,7 @@ public struct IAudioInputNode2Vtbl {
     public var Emitter: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 
-    @When[(((Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on")]
+    @When[((((Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on")) && (Windows_Foundation_Collections == "on")]
     public static func new<Identity>(offset!: Int64 = 0): IAudioInputNode2Vtbl where Identity <: IAudioInputNode2_Impl {
         let _ = offset
         var vtbl = IAudioInputNode2Vtbl()
@@ -7968,12 +7988,12 @@ public struct IAudioInputNode2Vtbl {
     }
 }
 
-@When[Windows_Media_Audio == "on" && ((((Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on"))]
+@When[Windows_Media_Audio == "on" && (((((Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on")) && (Windows_Foundation_Collections == "on"))]
 public interface IAudioInputNode2_ImplErased {
     public func __winrtThunk_Emitter(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Media_Audio == "on" && ((((Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on"))]
+@When[Windows_Media_Audio == "on" && (((((Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on")) && (Windows_Foundation_Collections == "on"))]
 public interface IAudioInputNode2_Impl <: IAudioInputNode2_ImplErased & IAudioNode_Impl & Foundation.IClosable_Impl & IAudioInputNode_Impl {
     public func Emitter(): windows_core.Result<AudioNodeEmitter>
 
@@ -8282,9 +8302,9 @@ extend IAudioInputNode2 <: windows_core.Interface<IAudioInputNode2> {}
 @C
 public struct IAudioNodeVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Media_Effects == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on"]
     public var EffectDefinitions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Media_Effects != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Media_Effects != "on"]
     public var EffectDefinitions: UIntNative = UIntNative(0)
     public var SetOutgoingGain: CFunc<(CPointer<Unit>, Float64) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var OutgoingGain: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -8307,7 +8327,7 @@ public struct IAudioNodeVtbl {
     public var EnableEffectsByDefinition: UIntNative = UIntNative(0)
     public init() {}
 
-    @When[(((Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on")]
+    @When[(((Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on")]
     public static func new<Identity>(offset!: Int64 = 0): IAudioNodeVtbl where Identity <: IAudioNode_Impl {
         let _ = offset
         var vtbl = IAudioNodeVtbl()
@@ -8375,7 +8395,7 @@ public struct IAudioNodeVtbl {
         return vtbl
     }
 
-    @When[((((Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on")) && Windows_Media_Effects == "on"]
+    @When[((((Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on")) && (Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on")]
     public static func __assignEffectDefinitions<Identity>(vtbl: IAudioNodeVtbl): IAudioNodeVtbl where Identity <: IAudioNode_Impl {
         var next = vtbl
         next.EffectDefinitions = { instanceRaw, result__ =>
@@ -8389,12 +8409,12 @@ public struct IAudioNodeVtbl {
         return next
     }
 
-    @When[((((Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on")) && Windows_Media_Effects != "on"]
+    @When[((((Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on")) && (Windows_Foundation_Collections != "on" || Windows_Media_Effects != "on")]
     public static func __assignEffectDefinitions<Identity>(vtbl: IAudioNodeVtbl): IAudioNodeVtbl where Identity <: IAudioNode_Impl {
         return vtbl
     }
 
-    @When[((((Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on")) && Windows_Media_MediaProperties == "on"]
+    @When[((((Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on")) && Windows_Media_MediaProperties == "on"]
     public static func __assignEncodingProperties<Identity>(vtbl: IAudioNodeVtbl): IAudioNodeVtbl where Identity <: IAudioNode_Impl {
         var next = vtbl
         next.EncodingProperties = { instanceRaw, result__ =>
@@ -8408,12 +8428,12 @@ public struct IAudioNodeVtbl {
         return next
     }
 
-    @When[((((Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on")) && Windows_Media_MediaProperties != "on"]
+    @When[((((Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on")) && Windows_Media_MediaProperties != "on"]
     public static func __assignEncodingProperties<Identity>(vtbl: IAudioNodeVtbl): IAudioNodeVtbl where Identity <: IAudioNode_Impl {
         return vtbl
     }
 
-    @When[((((Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on")) && Windows_Media_Effects == "on"]
+    @When[((((Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on")) && Windows_Media_Effects == "on"]
     public static func __assignDisableEffectsByDefinition<Identity>(vtbl: IAudioNodeVtbl): IAudioNodeVtbl where Identity <: IAudioNode_Impl {
         var next = vtbl
         next.DisableEffectsByDefinition = { instanceRaw, arg0 =>
@@ -8427,12 +8447,12 @@ public struct IAudioNodeVtbl {
         return next
     }
 
-    @When[((((Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on")) && Windows_Media_Effects != "on"]
+    @When[((((Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on")) && Windows_Media_Effects != "on"]
     public static func __assignDisableEffectsByDefinition<Identity>(vtbl: IAudioNodeVtbl): IAudioNodeVtbl where Identity <: IAudioNode_Impl {
         return vtbl
     }
 
-    @When[((((Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on")) && Windows_Media_Effects == "on"]
+    @When[((((Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on")) && Windows_Media_Effects == "on"]
     public static func __assignEnableEffectsByDefinition<Identity>(vtbl: IAudioNodeVtbl): IAudioNodeVtbl where Identity <: IAudioNode_Impl {
         var next = vtbl
         next.EnableEffectsByDefinition = { instanceRaw, arg0 =>
@@ -8446,7 +8466,7 @@ public struct IAudioNodeVtbl {
         return next
     }
 
-    @When[((((Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on")) && Windows_Media_Effects != "on"]
+    @When[((((Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on")) && Windows_Media_Effects != "on"]
     public static func __assignEnableEffectsByDefinition<Identity>(vtbl: IAudioNodeVtbl): IAudioNodeVtbl where Identity <: IAudioNode_Impl {
         return vtbl
     }
@@ -8464,7 +8484,7 @@ public struct IAudioNodeVtbl {
     }
 }
 
-@When[Windows_Media_Audio == "on" && ((((Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on"))]
+@When[Windows_Media_Audio == "on" && ((((Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on"))]
 public interface IAudioNode_ImplErased {
     public func __winrtThunk_EffectDefinitions(result__: CPointer<CPointer<Unit>>): Int32
 
@@ -8489,7 +8509,7 @@ public interface IAudioNode_ImplErased {
     public func __winrtThunk_EnableEffectsByDefinition(arg0: CPointer<Unit>): Int32
 }
 
-@When[Windows_Media_Audio == "on" && ((((Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on"))]
+@When[Windows_Media_Audio == "on" && ((((Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on"))]
 public interface IAudioNode_Impl <: IAudioNode_ImplErased & Foundation.IClosable_Impl {
     public func EffectDefinitions(): windows_core.Result<windows_collections.IVector<IAudioEffectDefinition>>
 
@@ -8725,7 +8745,7 @@ public class IAudioNode <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         readVtbl<IAudioNodeVtbl>(IAudioNodeVtbl())
     }
 
-    @When[Windows_Media_Effects == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on"]
     public unsafe func EffectDefinitions(): windows_collections.IVector<IAudioEffectDefinition> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -9970,7 +9990,7 @@ public struct IAudioNodeWithListenerVtbl {
     public var Listener: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 
-    @When[(((Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on")]
+    @When[(((Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on")]
     public static func new<Identity>(offset!: Int64 = 0): IAudioNodeWithListenerVtbl where Identity <: IAudioNodeWithListener_Impl {
         let _ = offset
         var vtbl = IAudioNodeWithListenerVtbl()
@@ -10007,14 +10027,14 @@ public struct IAudioNodeWithListenerVtbl {
     }
 }
 
-@When[Windows_Media_Audio == "on" && ((((Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on"))]
+@When[Windows_Media_Audio == "on" && ((((Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on"))]
 public interface IAudioNodeWithListener_ImplErased {
     public func __winrtThunk_SetListener(arg0: CPointer<Unit>): Int32
 
     public func __winrtThunk_Listener(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Media_Audio == "on" && ((((Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on"))]
+@When[Windows_Media_Audio == "on" && ((((Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on") && (Windows_Media_MediaProperties == "on")) && (Windows_Media_Effects == "on")) && (Windows_Media_Effects == "on"))]
 public interface IAudioNodeWithListener_Impl <: IAudioNodeWithListener_ImplErased & Foundation.IClosable_Impl & IAudioNode_Impl {
     public func SetListener(value: InParam<AudioNodeListener>): windows_core.Result<Unit>
 
@@ -12107,7 +12127,10 @@ extend IEchoEffectDefinition <: windows_core.Interface<IEchoEffectDefinition> {}
 @C
 public struct IEchoEffectDefinitionFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Media_Effects == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Media_Effects != "on"]
+    public var Create: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -12176,6 +12199,7 @@ public class IEchoEffectDefinitionFactory <: InterfaceWrapperBase & ComInterface
         readVtbl<IEchoEffectDefinitionFactoryVtbl>(IEchoEffectDefinitionFactoryVtbl())
     }
 
+    @When[Windows_Media_Effects == "on"]
     public unsafe func Create(audioGraph: AudioGraph): EchoEffectDefinition {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -12316,7 +12340,10 @@ extend IEqualizerBand <: windows_core.Interface<IEqualizerBand> {}
 @C
 public struct IEqualizerEffectDefinitionVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Bands: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Bands: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -12397,6 +12424,7 @@ public class IEqualizerEffectDefinition <: InterfaceWrapperBase & ComInterface &
         readVtbl<IEqualizerEffectDefinitionVtbl>(IEqualizerEffectDefinitionVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Bands(): windows_collections.IVectorView<EqualizerBand> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -12413,7 +12441,10 @@ extend IEqualizerEffectDefinition <: windows_core.Interface<IEqualizerEffectDefi
 @C
 public struct IEqualizerEffectDefinitionFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Media_Effects == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Media_Effects != "on"]
+    public var Create: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -12482,6 +12513,7 @@ public class IEqualizerEffectDefinitionFactory <: InterfaceWrapperBase & ComInte
         readVtbl<IEqualizerEffectDefinitionFactoryVtbl>(IEqualizerEffectDefinitionFactoryVtbl())
     }
 
+    @When[Windows_Media_Effects == "on"]
     public unsafe func Create(audioGraph: AudioGraph): EqualizerEffectDefinition {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -12703,7 +12735,10 @@ extend ILimiterEffectDefinition <: windows_core.Interface<ILimiterEffectDefiniti
 @C
 public struct ILimiterEffectDefinitionFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Media_Effects == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Media_Effects != "on"]
+    public var Create: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -12772,6 +12807,7 @@ public class ILimiterEffectDefinitionFactory <: InterfaceWrapperBase & ComInterf
         readVtbl<ILimiterEffectDefinitionFactoryVtbl>(ILimiterEffectDefinitionFactoryVtbl())
     }
 
+    @When[Windows_Media_Effects == "on"]
     public unsafe func Create(audioGraph: AudioGraph): LimiterEffectDefinition {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -12799,9 +12835,9 @@ public struct IMediaSourceAudioInputNodeVtbl {
     public var LoopCount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetLoopCount: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Duration: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Media_Core == "on" && Windows_Media_Core == "on" && Windows_Media_Playback == "on"]
     public var get_MediaSource: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Media_Core != "on"]
+    @When[Windows_Media_Core != "on" || Windows_Media_Core != "on" || Windows_Media_Playback != "on"]
     public var get_MediaSource: UIntNative = UIntNative(0)
     public var MediaSourceCompleted: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveMediaSourceCompleted: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -12984,7 +13020,7 @@ public class IMediaSourceAudioInputNode <: InterfaceWrapperBase & ComInterface &
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<windows_future.TimeSpan>()).unwrap()
     }
 
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Media_Core == "on" && Windows_Media_Core == "on" && Windows_Media_Playback == "on"]
     public unsafe func get_MediaSource(): MediaSource {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -13471,7 +13507,10 @@ extend IReverbEffectDefinition <: windows_core.Interface<IReverbEffectDefinition
 @C
 public struct IReverbEffectDefinitionFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Media_Effects == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Media_Effects != "on"]
+    public var Create: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -13540,6 +13579,7 @@ public class IReverbEffectDefinitionFactory <: InterfaceWrapperBase & ComInterfa
         readVtbl<IReverbEffectDefinitionFactoryVtbl>(IReverbEffectDefinitionFactoryVtbl())
     }
 
+    @When[Windows_Media_Effects == "on"]
     public unsafe func Create(audioGraph: AudioGraph): ReverbEffectDefinition {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -14278,7 +14318,7 @@ public class ISpatialAudioFormatSubtypeStatics2 <: InterfaceWrapperBase & ComInt
 @When[Windows_Media_Audio == "on"]
 extend ISpatialAudioFormatSubtypeStatics2 <: windows_core.Interface<ISpatialAudioFormatSubtypeStatics2> {}
 
-@When[Windows_Media_Audio == "on"]
+@When[Windows_Media_Audio == "on" && Windows_Media_Effects == "on"]
 public class LimiterEffectDefinition <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -14383,6 +14423,7 @@ public class LimiterEffectDefinition <: InterfaceWrapperBase & ComInterface & wi
         return asIAudioEffectDefinition().Properties()
     }
 
+    @When[Windows_Media_Effects == "on"]
     public static unsafe func Create(audioGraph: AudioGraph): LimiterEffectDefinition {
         var result__: Option<LimiterEffectDefinition> = Option<LimiterEffectDefinition>.None
         try (factory__ = windows_core.factory<LimiterEffectDefinition, ILimiterEffectDefinitionFactory>().unwrap()) {
@@ -14395,7 +14436,7 @@ public class LimiterEffectDefinition <: InterfaceWrapperBase & ComInterface & wi
     }
 }
 
-@When[Windows_Media_Audio == "on"]
+@When[Windows_Media_Audio == "on" && Windows_Media_Effects == "on"]
 extend LimiterEffectDefinition <: windows_core.HandleWinrtType<LimiterEffectDefinition> {
     public static func intoWinrtHandle(value: LimiterEffectDefinition): CPointer<Unit> {
         value.asRaw()
@@ -14554,7 +14595,7 @@ public class MediaSourceAudioInputNode <: InterfaceWrapperBase & ComInterface & 
         return defaultInterface().Duration()
     }
 
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Media_Core == "on" && Windows_Media_Core == "on" && Windows_Media_Playback == "on"]
     public unsafe func get_MediaSource(): MediaSource {
         return defaultInterface().get_MediaSource()
     }
@@ -14567,6 +14608,7 @@ public class MediaSourceAudioInputNode <: InterfaceWrapperBase & ComInterface & 
         defaultInterface().RemoveMediaSourceCompleted(token)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OutgoingConnections(): windows_collections.IVectorView<AudioGraphConnection> {
         return asIAudioInputNode().OutgoingConnections()
     }
@@ -14583,7 +14625,7 @@ public class MediaSourceAudioInputNode <: InterfaceWrapperBase & ComInterface & 
         asIAudioInputNode().RemoveOutgoingConnection(destination)
     }
 
-    @When[Windows_Media_Effects == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on"]
     public unsafe func EffectDefinitions(): windows_collections.IVector<IAudioEffectDefinition> {
         return asIAudioNode().EffectDefinitions()
     }
@@ -14829,7 +14871,7 @@ extend QuantumSizeSelectionMode <: windows_core.CopyType & windows_core.RuntimeT
     }
 }
 
-@When[Windows_Media_Audio == "on"]
+@When[Windows_Media_Audio == "on" && Windows_Media_Effects == "on"]
 public class ReverbEffectDefinition <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -15144,6 +15186,7 @@ public class ReverbEffectDefinition <: InterfaceWrapperBase & ComInterface & win
         return asIAudioEffectDefinition().Properties()
     }
 
+    @When[Windows_Media_Effects == "on"]
     public static unsafe func Create(audioGraph: AudioGraph): ReverbEffectDefinition {
         var result__: Option<ReverbEffectDefinition> = Option<ReverbEffectDefinition>.None
         try (factory__ = windows_core.factory<ReverbEffectDefinition, IReverbEffectDefinitionFactory>().unwrap()) {
@@ -15156,7 +15199,7 @@ public class ReverbEffectDefinition <: InterfaceWrapperBase & ComInterface & win
     }
 }
 
-@When[Windows_Media_Audio == "on"]
+@When[Windows_Media_Audio == "on" && Windows_Media_Effects == "on"]
 extend ReverbEffectDefinition <: windows_core.HandleWinrtType<ReverbEffectDefinition> {
     public static func intoWinrtHandle(value: ReverbEffectDefinition): CPointer<Unit> {
         value.asRaw()

@@ -3,9 +3,7 @@ package windows_sys.Win32.UI.Input.Radial
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_System_WinRT == "on"]
 import windows_sys.Win32.System.WinRT as Win32_System_WinRT
 
 

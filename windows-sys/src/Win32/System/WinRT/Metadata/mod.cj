@@ -6,9 +6,7 @@ import windows_interface as windows_interface
 import windows_polyfill.{packedReadUInt32, packedReadUInt8, packedWriteUInt32, packedWriteUInt8, unionReadUInt16, unionReadUInt32, unionWriteUInt16, unionWriteUInt32}
 import windows_polyfill as windows_polyfill
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_System_WinRT == "on"]
 import windows_sys.Win32.System.WinRT as Win32_System_WinRT
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
@@ -5598,29 +5596,75 @@ public struct IMAGE_COR_ILMETHOD_SECT_EH {
     public init() {}
 }
 
-@When[ROMETADATA == "on"]
+@When[Windows_Win32_System_WinRT_Metadata == "on" && ROMETADATA == "on" && Windows_Win32_System_WinRT_Metadata_MetaDataGetDispenser == "on"]
 foreign {
     func MetaDataGetDispenser(rclsid: CPointer<GUID>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[API_MS_WIN_CORE_WINRT_ROPARAMETERIZEDIID_L1_1_0 == "on"]
+@When[Windows_Win32_System_WinRT_Metadata == "on" && ROMETADATA == "on" && Windows_Win32_System_WinRT_Metadata_MetaDataGetDispenser == "on"]
+public unsafe func Windows_MetaDataGetDispenser(rclsid: CPointer<GUID>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return MetaDataGetDispenser(rclsid, riid, ppv)
+}
+
+@When[Windows_Win32_System_WinRT_Metadata == "on" && API_MS_WIN_CORE_WINRT_ROPARAMETERIZEDIID_L1_1_0 == "on" && Windows_Win32_System_WinRT_Metadata_RoFreeParameterizedTypeExtra == "on"]
 foreign {
     func RoFreeParameterizedTypeExtra(extra: ROPARAMIIDHANDLE): Unit
+}
+
+@When[Windows_Win32_System_WinRT_Metadata == "on" && API_MS_WIN_CORE_WINRT_ROPARAMETERIZEDIID_L1_1_0 == "on" && Windows_Win32_System_WinRT_Metadata_RoFreeParameterizedTypeExtra == "on"]
+public unsafe func Windows_RoFreeParameterizedTypeExtra(extra: ROPARAMIIDHANDLE): Unit {
+    RoFreeParameterizedTypeExtra(extra)
+}
+
+@When[Windows_Win32_System_WinRT_Metadata == "on" && API_MS_WIN_CORE_WINRT_ROPARAMETERIZEDIID_L1_1_0 == "on" && Windows_Win32_System_WinRT_Metadata_RoGetParameterizedTypeInstanceIID == "on"]
+foreign {
     // param-hint: nameElements len=param[0]
     // param-hint: pExtra optional
     func RoGetParameterizedTypeInstanceIID(nameElementCount: UInt32, nameElements: CPointer<CPointer<UInt16>>, metaDataLocator: CPointer<Unit>, iid: CPointer<GUID>, pExtra: CPointer<ROPARAMIIDHANDLE>): Int32
+}
+
+@When[Windows_Win32_System_WinRT_Metadata == "on" && API_MS_WIN_CORE_WINRT_ROPARAMETERIZEDIID_L1_1_0 == "on" && Windows_Win32_System_WinRT_Metadata_RoGetParameterizedTypeInstanceIID == "on"]
+public unsafe func Windows_RoGetParameterizedTypeInstanceIID(nameElementCount: UInt32, nameElements: CPointer<CPointer<UInt16>>, metaDataLocator: CPointer<Unit>, iid: CPointer<GUID>, pExtra: CPointer<ROPARAMIIDHANDLE>): Int32 {
+    return RoGetParameterizedTypeInstanceIID(nameElementCount, nameElements, metaDataLocator, iid, pExtra)
+}
+
+@When[Windows_Win32_System_WinRT_Metadata == "on" && API_MS_WIN_CORE_WINRT_ROPARAMETERIZEDIID_L1_1_0 == "on" && Windows_Win32_System_WinRT_Metadata_RoParameterizedTypeExtraGetTypeSignature == "on"]
+foreign {
     func RoParameterizedTypeExtraGetTypeSignature(extra: ROPARAMIIDHANDLE): CPointer<UInt8>
 }
 
-@When[API_MS_WIN_RO_TYPERESOLUTION_L1_1_0 == "on" && Windows_Win32_System_WinRT == "on"]
+@When[Windows_Win32_System_WinRT_Metadata == "on" && API_MS_WIN_CORE_WINRT_ROPARAMETERIZEDIID_L1_1_0 == "on" && Windows_Win32_System_WinRT_Metadata_RoParameterizedTypeExtraGetTypeSignature == "on"]
+public unsafe func Windows_RoParameterizedTypeExtraGetTypeSignature(extra: ROPARAMIIDHANDLE): CPointer<UInt8> {
+    return RoParameterizedTypeExtraGetTypeSignature(extra)
+}
+
+@When[Windows_Win32_System_WinRT_Metadata == "on" && API_MS_WIN_RO_TYPERESOLUTION_L1_1_0 == "on" && Windows_Win32_System_WinRT_Metadata_RoGetMetaDataFile == "on" && Windows_Win32_System_WinRT == "on"]
 foreign {
     // param-hint: metaDataDispenser optional
     // param-hint: metaDataFilePath optional
     // param-hint: metaDataImport optional
     // param-hint: typeDefToken optional
     func RoGetMetaDataFile(name: Win32_System_WinRT.HSTRING, metaDataDispenser: CPointer<Unit>, metaDataFilePath: CPointer<Win32_System_WinRT.HSTRING>, metaDataImport: CPointer<CPointer<Unit>>, typeDefToken: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_WinRT_Metadata == "on" && API_MS_WIN_RO_TYPERESOLUTION_L1_1_0 == "on" && Windows_Win32_System_WinRT_Metadata_RoGetMetaDataFile == "on" && Windows_Win32_System_WinRT == "on"]
+public unsafe func Windows_RoGetMetaDataFile(name: Win32_System_WinRT.HSTRING, metaDataDispenser: CPointer<Unit>, metaDataFilePath: CPointer<Win32_System_WinRT.HSTRING>, metaDataImport: CPointer<CPointer<Unit>>, typeDefToken: CPointer<UInt32>): Int32 {
+    return RoGetMetaDataFile(name, metaDataDispenser, metaDataFilePath, metaDataImport, typeDefToken)
+}
+
+@When[Windows_Win32_System_WinRT_Metadata == "on" && API_MS_WIN_RO_TYPERESOLUTION_L1_1_0 == "on" && Windows_Win32_System_WinRT_Metadata_RoParseTypeName == "on" && Windows_Win32_System_WinRT == "on"]
+foreign {
     // param-hint: typeNameParts len=param[1]
     func RoParseTypeName(typeName: Win32_System_WinRT.HSTRING, partsCount: CPointer<UInt32>, typeNameParts: CPointer<CPointer<Win32_System_WinRT.HSTRING>>): Int32
+}
+
+@When[Windows_Win32_System_WinRT_Metadata == "on" && API_MS_WIN_RO_TYPERESOLUTION_L1_1_0 == "on" && Windows_Win32_System_WinRT_Metadata_RoParseTypeName == "on" && Windows_Win32_System_WinRT == "on"]
+public unsafe func Windows_RoParseTypeName(typeName: Win32_System_WinRT.HSTRING, partsCount: CPointer<UInt32>, typeNameParts: CPointer<CPointer<Win32_System_WinRT.HSTRING>>): Int32 {
+    return RoParseTypeName(typeName, partsCount, typeNameParts)
+}
+
+@When[Windows_Win32_System_WinRT_Metadata == "on" && API_MS_WIN_RO_TYPERESOLUTION_L1_1_0 == "on" && Windows_Win32_System_WinRT_Metadata_RoResolveNamespace == "on" && Windows_Win32_System_WinRT == "on"]
+foreign {
     // param-hint: name optional
     // param-hint: windowsMetaDataDir optional
     // param-hint: packageGraphDirs len=param[2] optional
@@ -5631,20 +5675,49 @@ foreign {
     func RoResolveNamespace(name: Win32_System_WinRT.HSTRING, windowsMetaDataDir: Win32_System_WinRT.HSTRING, packageGraphDirsCount: UInt32, packageGraphDirs: CPointer<Win32_System_WinRT.HSTRING>, metaDataFilePathsCount: CPointer<UInt32>, metaDataFilePaths: CPointer<CPointer<Win32_System_WinRT.HSTRING>>, subNamespacesCount: CPointer<UInt32>, subNamespaces: CPointer<CPointer<Win32_System_WinRT.HSTRING>>): Int32
 }
 
-@When[API_MS_WIN_RO_TYPERESOLUTION_L1_1_1 == "on"]
-foreign {
-    func RoIsApiContractMajorVersionPresent(name: CPointer<UInt16>, majorVersion: UInt16, present: CPointer<Int32>): Int32
-    func RoIsApiContractPresent(name: CPointer<UInt16>, majorVersion: UInt16, minorVersion: UInt16, present: CPointer<Int32>): Int32
+@When[Windows_Win32_System_WinRT_Metadata == "on" && API_MS_WIN_RO_TYPERESOLUTION_L1_1_0 == "on" && Windows_Win32_System_WinRT_Metadata_RoResolveNamespace == "on" && Windows_Win32_System_WinRT == "on"]
+public unsafe func Windows_RoResolveNamespace(name: Win32_System_WinRT.HSTRING, windowsMetaDataDir: Win32_System_WinRT.HSTRING, packageGraphDirsCount: UInt32, packageGraphDirs: CPointer<Win32_System_WinRT.HSTRING>, metaDataFilePathsCount: CPointer<UInt32>, metaDataFilePaths: CPointer<CPointer<Win32_System_WinRT.HSTRING>>, subNamespacesCount: CPointer<UInt32>, subNamespaces: CPointer<CPointer<Win32_System_WinRT.HSTRING>>): Int32 {
+    return RoResolveNamespace(name, windowsMetaDataDir, packageGraphDirsCount, packageGraphDirs, metaDataFilePathsCount, metaDataFilePaths, subNamespacesCount, subNamespaces)
 }
 
-@When[API_MS_WIN_RO_TYPERESOLUTION_L1_1_1 == "on" && Windows_Foundation_Collections == "on"]
+@When[Windows_Win32_System_WinRT_Metadata == "on" && API_MS_WIN_RO_TYPERESOLUTION_L1_1_1 == "on" && Windows_Win32_System_WinRT_Metadata_RoCreateNonAgilePropertySet == "on" && Windows_Foundation_Collections == "on"]
 foreign {
     func RoCreateNonAgilePropertySet(ppPropertySet: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[API_MS_WIN_RO_TYPERESOLUTION_L1_1_1 == "on" && Windows_Storage_Streams == "on"]
+@When[Windows_Win32_System_WinRT_Metadata == "on" && API_MS_WIN_RO_TYPERESOLUTION_L1_1_1 == "on" && Windows_Win32_System_WinRT_Metadata_RoCreateNonAgilePropertySet == "on" && Windows_Foundation_Collections == "on"]
+public unsafe func Windows_RoCreateNonAgilePropertySet(ppPropertySet: CPointer<CPointer<Unit>>): Int32 {
+    return RoCreateNonAgilePropertySet(ppPropertySet)
+}
+
+@When[Windows_Win32_System_WinRT_Metadata == "on" && API_MS_WIN_RO_TYPERESOLUTION_L1_1_1 == "on" && Windows_Win32_System_WinRT_Metadata_RoCreatePropertySetSerializer == "on" && Windows_Storage_Streams == "on"]
 foreign {
     func RoCreatePropertySetSerializer(ppPropertySetSerializer: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_WinRT_Metadata == "on" && API_MS_WIN_RO_TYPERESOLUTION_L1_1_1 == "on" && Windows_Win32_System_WinRT_Metadata_RoCreatePropertySetSerializer == "on" && Windows_Storage_Streams == "on"]
+public unsafe func Windows_RoCreatePropertySetSerializer(ppPropertySetSerializer: CPointer<CPointer<Unit>>): Int32 {
+    return RoCreatePropertySetSerializer(ppPropertySetSerializer)
+}
+
+@When[Windows_Win32_System_WinRT_Metadata == "on" && API_MS_WIN_RO_TYPERESOLUTION_L1_1_1 == "on" && Windows_Win32_System_WinRT_Metadata_RoIsApiContractMajorVersionPresent == "on"]
+foreign {
+    func RoIsApiContractMajorVersionPresent(name: CPointer<UInt16>, majorVersion: UInt16, present: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_WinRT_Metadata == "on" && API_MS_WIN_RO_TYPERESOLUTION_L1_1_1 == "on" && Windows_Win32_System_WinRT_Metadata_RoIsApiContractMajorVersionPresent == "on"]
+public unsafe func Windows_RoIsApiContractMajorVersionPresent(name: CPointer<UInt16>, majorVersion: UInt16, present: CPointer<Int32>): Int32 {
+    return RoIsApiContractMajorVersionPresent(name, majorVersion, present)
+}
+
+@When[Windows_Win32_System_WinRT_Metadata == "on" && API_MS_WIN_RO_TYPERESOLUTION_L1_1_1 == "on" && Windows_Win32_System_WinRT_Metadata_RoIsApiContractPresent == "on"]
+foreign {
+    func RoIsApiContractPresent(name: CPointer<UInt16>, majorVersion: UInt16, minorVersion: UInt16, present: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_WinRT_Metadata == "on" && API_MS_WIN_RO_TYPERESOLUTION_L1_1_1 == "on" && Windows_Win32_System_WinRT_Metadata_RoIsApiContractPresent == "on"]
+public unsafe func Windows_RoIsApiContractPresent(name: CPointer<UInt16>, majorVersion: UInt16, minorVersion: UInt16, present: CPointer<Int32>): Int32 {
+    return RoIsApiContractPresent(name, majorVersion, minorVersion, present)
 }
 
 @When[Windows_Win32_System_WinRT_Metadata == "on"]

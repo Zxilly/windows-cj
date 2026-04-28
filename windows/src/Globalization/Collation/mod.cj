@@ -315,7 +315,7 @@ extend CharacterGrouping <: windows_core.HandleWinrtType<CharacterGrouping> {
     }
 }
 
-@When[Windows_Globalization_Collation == "on"]
+@When[Windows_Globalization_Collation == "on" && Windows_Foundation_Collections == "on"]
 public class CharacterGroupings <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -442,6 +442,7 @@ public class CharacterGroupings <: InterfaceWrapperBase & ComInterface & windows
         return asIIterable().First()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Create(language: windows_core.HString): CharacterGroupings {
         var result__: Option<CharacterGroupings> = Option<CharacterGroupings>.None
         try (factory__ = windows_core.factory<CharacterGroupings, ICharacterGroupingsFactory>().unwrap()) {
@@ -454,7 +455,7 @@ public class CharacterGroupings <: InterfaceWrapperBase & ComInterface & windows
     }
 }
 
-@When[Windows_Globalization_Collation == "on"]
+@When[Windows_Globalization_Collation == "on" && Windows_Foundation_Collections == "on"]
 extend CharacterGroupings <: windows_core.HandleWinrtType<CharacterGroupings> {
     public static func intoWinrtHandle(value: CharacterGroupings): CPointer<Unit> {
         value.asRaw()
@@ -476,7 +477,10 @@ extend CharacterGroupings <: windows_core.HandleWinrtType<CharacterGroupings> {
 @C
 public struct ICharacterGroupingsFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Create: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -545,6 +549,7 @@ public class ICharacterGroupingsFactory <: InterfaceWrapperBase & ComInterface &
         readVtbl<ICharacterGroupingsFactoryVtbl>(ICharacterGroupingsFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create(language: windows_core.HString): CharacterGroupings {
         let v = vtbl()
         var result__ = CPointer<Unit>()

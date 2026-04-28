@@ -38,7 +38,7 @@ public class AppServiceCatalog <: windows_interface.RuntimeName & windows_core.R
         windows_core.activationFactory<AppServiceCatalog>().ok()
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public static unsafe func FindAppServiceProvidersAsync(appServiceName: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVectorView<AppInfo>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<AppInfo>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<AppInfo>>>.None
         try (factory__ = windows_core.factory<AppServiceCatalog, IAppServiceCatalogStatics>().unwrap()) {
@@ -318,9 +318,9 @@ extend AppServiceTriggerDetails <: windows_core.HandleWinrtType<AppServiceTrigge
 @C
 public struct IAppServiceCatalogStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindAppServiceProvidersAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel != "on"]
+    @When[Windows_ApplicationModel != "on" || Windows_Foundation_Collections != "on"]
     public var FindAppServiceProvidersAsync: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -390,7 +390,7 @@ public class IAppServiceCatalogStatics <: InterfaceWrapperBase & ComInterface & 
         readVtbl<IAppServiceCatalogStaticsVtbl>(IAppServiceCatalogStaticsVtbl())
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindAppServiceProvidersAsync(appServiceName: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVectorView<AppInfo>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

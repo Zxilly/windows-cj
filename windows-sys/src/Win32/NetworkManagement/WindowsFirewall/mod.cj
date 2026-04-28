@@ -3,9 +3,7 @@ package windows_sys.Win32.NetworkManagement.WindowsFirewall
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Security == "on"]
 import windows_sys.Win32.Security as Win32_Security
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l2 as Win32__impl_l2
@@ -5482,41 +5480,138 @@ public class INetFwMgr <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[FIREWALLAPI == "on"]
-foreign {
-    // param-hint: context optional
-    func NetworkIsolationGetEnterpriseIdAsync(wszServerName: CPointer<UInt16>, dwFlags: UInt32, context: CPointer<Unit>, callback: PNETISO_EDP_ID_CALLBACK_FN, hOperation: CPointer<CPointer<Unit>>): UInt32
-    func NetworkIsolationGetEnterpriseIdClose(hOperation: CPointer<Unit>, bWaitForOperation: Int32): UInt32
-}
-
-@When[FIREWALLAPI == "on" && Windows_Win32_System_Ole == "on"]
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && FIREWALLAPI == "on" && Windows_Win32_NetworkManagement_WindowsFirewall_NetworkIsolationEnumerateAppContainerRules == "on" && Windows_Win32_System_Ole == "on"]
 foreign {
     func NetworkIsolationEnumerateAppContainerRules(newEnum: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[NETSHELL == "on"]
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && FIREWALLAPI == "on" && Windows_Win32_NetworkManagement_WindowsFirewall_NetworkIsolationEnumerateAppContainerRules == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_NetworkIsolationEnumerateAppContainerRules(newEnum: CPointer<CPointer<Unit>>): Int32 {
+    return NetworkIsolationEnumerateAppContainerRules(newEnum)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && FIREWALLAPI == "on" && Windows_Win32_NetworkManagement_WindowsFirewall_NetworkIsolationGetEnterpriseIdAsync == "on"]
+foreign {
+    // param-hint: context optional
+    func NetworkIsolationGetEnterpriseIdAsync(wszServerName: CPointer<UInt16>, dwFlags: UInt32, context: CPointer<Unit>, callback: PNETISO_EDP_ID_CALLBACK_FN, hOperation: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && FIREWALLAPI == "on" && Windows_Win32_NetworkManagement_WindowsFirewall_NetworkIsolationGetEnterpriseIdAsync == "on"]
+public unsafe func Windows_NetworkIsolationGetEnterpriseIdAsync(wszServerName: CPointer<UInt16>, dwFlags: UInt32, context: CPointer<Unit>, callback: PNETISO_EDP_ID_CALLBACK_FN, hOperation: CPointer<CPointer<Unit>>): UInt32 {
+    return NetworkIsolationGetEnterpriseIdAsync(wszServerName, dwFlags, context, callback, hOperation)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && FIREWALLAPI == "on" && Windows_Win32_NetworkManagement_WindowsFirewall_NetworkIsolationGetEnterpriseIdClose == "on"]
+foreign {
+    func NetworkIsolationGetEnterpriseIdClose(hOperation: CPointer<Unit>, bWaitForOperation: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && FIREWALLAPI == "on" && Windows_Win32_NetworkManagement_WindowsFirewall_NetworkIsolationGetEnterpriseIdClose == "on"]
+public unsafe func Windows_NetworkIsolationGetEnterpriseIdClose(hOperation: CPointer<Unit>, bWaitForOperation: Int32): UInt32 {
+    return NetworkIsolationGetEnterpriseIdClose(hOperation, bWaitForOperation)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && NETSHELL == "on" && Windows_Win32_NetworkManagement_WindowsFirewall_NcFreeNetconProperties == "on"]
 foreign {
     func NcFreeNetconProperties(pProps: CPointer<NETCON_PROPERTIES>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && NETSHELL == "on" && Windows_Win32_NetworkManagement_WindowsFirewall_NcFreeNetconProperties == "on"]
+public unsafe func Windows_NcFreeNetconProperties(pProps: CPointer<NETCON_PROPERTIES>): Unit {
+    NcFreeNetconProperties(pProps)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && NETSHELL == "on" && Windows_Win32_NetworkManagement_WindowsFirewall_NcIsValidConnectionName == "on"]
+foreign {
     func NcIsValidConnectionName(pszwName: CPointer<UInt16>): Int32
 }
 
-@When[API_MS_WIN_NET_ISOLATION_L1_1_0 == "on"]
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && NETSHELL == "on" && Windows_Win32_NetworkManagement_WindowsFirewall_NcIsValidConnectionName == "on"]
+public unsafe func Windows_NcIsValidConnectionName(pszwName: CPointer<UInt16>): Int32 {
+    return NcIsValidConnectionName(pszwName)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && API_MS_WIN_NET_ISOLATION_L1_1_0 == "on" && Windows_Win32_NetworkManagement_WindowsFirewall_NetworkIsolationDiagnoseConnectFailureAndGetInfo == "on"]
 foreign {
     func NetworkIsolationDiagnoseConnectFailureAndGetInfo(wszServerName: CPointer<UInt16>, netIsoError: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && API_MS_WIN_NET_ISOLATION_L1_1_0 == "on" && Windows_Win32_NetworkManagement_WindowsFirewall_NetworkIsolationDiagnoseConnectFailureAndGetInfo == "on"]
+public unsafe func Windows_NetworkIsolationDiagnoseConnectFailureAndGetInfo(wszServerName: CPointer<UInt16>, netIsoError: CPointer<Int32>): UInt32 {
+    return NetworkIsolationDiagnoseConnectFailureAndGetInfo(wszServerName, netIsoError)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && API_MS_WIN_NET_ISOLATION_L1_1_0 == "on" && Windows_Win32_NetworkManagement_WindowsFirewall_NetworkIsolationEnumAppContainers == "on" && Windows_Win32_Security == "on"]
+foreign {
+    func NetworkIsolationEnumAppContainers(Flags: UInt32, pdwNumPublicAppCs: CPointer<UInt32>, ppPublicAppCs: CPointer<CPointer<INET_FIREWALL_APP_CONTAINER>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && API_MS_WIN_NET_ISOLATION_L1_1_0 == "on" && Windows_Win32_NetworkManagement_WindowsFirewall_NetworkIsolationEnumAppContainers == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_NetworkIsolationEnumAppContainers(Flags: UInt32, pdwNumPublicAppCs: CPointer<UInt32>, ppPublicAppCs: CPointer<CPointer<INET_FIREWALL_APP_CONTAINER>>): UInt32 {
+    return NetworkIsolationEnumAppContainers(Flags, pdwNumPublicAppCs, ppPublicAppCs)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && API_MS_WIN_NET_ISOLATION_L1_1_0 == "on" && Windows_Win32_NetworkManagement_WindowsFirewall_NetworkIsolationFreeAppContainers == "on" && Windows_Win32_Security == "on"]
+foreign {
+    func NetworkIsolationFreeAppContainers(pPublicAppCs: CPointer<INET_FIREWALL_APP_CONTAINER>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && API_MS_WIN_NET_ISOLATION_L1_1_0 == "on" && Windows_Win32_NetworkManagement_WindowsFirewall_NetworkIsolationFreeAppContainers == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_NetworkIsolationFreeAppContainers(pPublicAppCs: CPointer<INET_FIREWALL_APP_CONTAINER>): UInt32 {
+    return NetworkIsolationFreeAppContainers(pPublicAppCs)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && API_MS_WIN_NET_ISOLATION_L1_1_0 == "on" && Windows_Win32_NetworkManagement_WindowsFirewall_NetworkIsolationGetAppContainerConfig == "on" && Windows_Win32_Security == "on"]
+foreign {
+    func NetworkIsolationGetAppContainerConfig(pdwNumPublicAppCs: CPointer<UInt32>, appContainerSids: CPointer<CPointer<Win32_Security.SID_AND_ATTRIBUTES>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && API_MS_WIN_NET_ISOLATION_L1_1_0 == "on" && Windows_Win32_NetworkManagement_WindowsFirewall_NetworkIsolationGetAppContainerConfig == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_NetworkIsolationGetAppContainerConfig(pdwNumPublicAppCs: CPointer<UInt32>, appContainerSids: CPointer<CPointer<Win32_Security.SID_AND_ATTRIBUTES>>): UInt32 {
+    return NetworkIsolationGetAppContainerConfig(pdwNumPublicAppCs, appContainerSids)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && API_MS_WIN_NET_ISOLATION_L1_1_0 == "on" && Windows_Win32_NetworkManagement_WindowsFirewall_NetworkIsolationRegisterForAppContainerChanges == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: context optional
+    func NetworkIsolationRegisterForAppContainerChanges(flags: UInt32, callback: PAC_CHANGES_CALLBACK_FN, context: CPointer<Unit>, registrationObject: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && API_MS_WIN_NET_ISOLATION_L1_1_0 == "on" && Windows_Win32_NetworkManagement_WindowsFirewall_NetworkIsolationRegisterForAppContainerChanges == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_NetworkIsolationRegisterForAppContainerChanges(flags: UInt32, callback: PAC_CHANGES_CALLBACK_FN, context: CPointer<Unit>, registrationObject: CPointer<CPointer<Unit>>): UInt32 {
+    return NetworkIsolationRegisterForAppContainerChanges(flags, callback, context, registrationObject)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && API_MS_WIN_NET_ISOLATION_L1_1_0 == "on" && Windows_Win32_NetworkManagement_WindowsFirewall_NetworkIsolationSetAppContainerConfig == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: appContainerSids len=param[0]
+    func NetworkIsolationSetAppContainerConfig(dwNumPublicAppCs: UInt32, appContainerSids: CPointer<Win32_Security.SID_AND_ATTRIBUTES>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && API_MS_WIN_NET_ISOLATION_L1_1_0 == "on" && Windows_Win32_NetworkManagement_WindowsFirewall_NetworkIsolationSetAppContainerConfig == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_NetworkIsolationSetAppContainerConfig(dwNumPublicAppCs: UInt32, appContainerSids: CPointer<Win32_Security.SID_AND_ATTRIBUTES>): UInt32 {
+    return NetworkIsolationSetAppContainerConfig(dwNumPublicAppCs, appContainerSids)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && API_MS_WIN_NET_ISOLATION_L1_1_0 == "on" && Windows_Win32_NetworkManagement_WindowsFirewall_NetworkIsolationSetupAppContainerBinaries == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: binaries len=param[6]
+    func NetworkIsolationSetupAppContainerBinaries(applicationContainerSid: Win32_Security.PSID, packageFullName: CPointer<UInt16>, packageFolder: CPointer<UInt16>, displayName: CPointer<UInt16>, bBinariesFullyComputed: Int32, binaries: CPointer<CPointer<UInt16>>, binariesCount: UInt32): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && API_MS_WIN_NET_ISOLATION_L1_1_0 == "on" && Windows_Win32_NetworkManagement_WindowsFirewall_NetworkIsolationSetupAppContainerBinaries == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_NetworkIsolationSetupAppContainerBinaries(applicationContainerSid: Win32_Security.PSID, packageFullName: CPointer<UInt16>, packageFolder: CPointer<UInt16>, displayName: CPointer<UInt16>, bBinariesFullyComputed: Int32, binaries: CPointer<CPointer<UInt16>>, binariesCount: UInt32): Int32 {
+    return NetworkIsolationSetupAppContainerBinaries(applicationContainerSid, packageFullName, packageFolder, displayName, bBinariesFullyComputed, binaries, binariesCount)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && API_MS_WIN_NET_ISOLATION_L1_1_0 == "on" && Windows_Win32_NetworkManagement_WindowsFirewall_NetworkIsolationUnregisterForAppContainerChanges == "on"]
+foreign {
     func NetworkIsolationUnregisterForAppContainerChanges(registrationObject: CPointer<Unit>): UInt32
 }
 
-@When[API_MS_WIN_NET_ISOLATION_L1_1_0 == "on" && Windows_Win32_Security == "on"]
-foreign {
-    func NetworkIsolationEnumAppContainers(Flags: UInt32, pdwNumPublicAppCs: CPointer<UInt32>, ppPublicAppCs: CPointer<CPointer<INET_FIREWALL_APP_CONTAINER>>): UInt32
-    func NetworkIsolationFreeAppContainers(pPublicAppCs: CPointer<INET_FIREWALL_APP_CONTAINER>): UInt32
-    func NetworkIsolationGetAppContainerConfig(pdwNumPublicAppCs: CPointer<UInt32>, appContainerSids: CPointer<CPointer<Win32_Security.SID_AND_ATTRIBUTES>>): UInt32
-    // param-hint: context optional
-    func NetworkIsolationRegisterForAppContainerChanges(flags: UInt32, callback: PAC_CHANGES_CALLBACK_FN, context: CPointer<Unit>, registrationObject: CPointer<CPointer<Unit>>): UInt32
-    // param-hint: appContainerSids len=param[0]
-    func NetworkIsolationSetAppContainerConfig(dwNumPublicAppCs: UInt32, appContainerSids: CPointer<Win32_Security.SID_AND_ATTRIBUTES>): UInt32
-    // param-hint: binaries len=param[6]
-    func NetworkIsolationSetupAppContainerBinaries(applicationContainerSid: Win32_Security.PSID, packageFullName: CPointer<UInt16>, packageFolder: CPointer<UInt16>, displayName: CPointer<UInt16>, bBinariesFullyComputed: Int32, binaries: CPointer<CPointer<UInt16>>, binariesCount: UInt32): Int32
+@When[Windows_Win32_NetworkManagement_WindowsFirewall == "on" && API_MS_WIN_NET_ISOLATION_L1_1_0 == "on" && Windows_Win32_NetworkManagement_WindowsFirewall_NetworkIsolationUnregisterForAppContainerChanges == "on"]
+public unsafe func Windows_NetworkIsolationUnregisterForAppContainerChanges(registrationObject: CPointer<Unit>): UInt32 {
+    return NetworkIsolationUnregisterForAppContainerChanges(registrationObject)
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsFirewall == "on"]

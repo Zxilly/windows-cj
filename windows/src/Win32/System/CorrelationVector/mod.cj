@@ -8,7 +8,6 @@ import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeTy
 import windows_core as windows_core
 import windows_interface.{GUID}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 
@@ -51,13 +50,45 @@ extend CORRELATION_VECTOR <: windows_core.CopyType & windows_core.RuntimeType & 
     }
 }
 
-@When[NTDLL == "on"]
+@When[Windows_Win32_System_CorrelationVector == "on" && NTDLL == "on" && Windows_Win32_System_CorrelationVector_RtlExtendCorrelationVector == "on"]
 foreign {
     func RtlExtendCorrelationVector(CorrelationVector: CPointer<CORRELATION_VECTORAbi>): UInt32
+}
+
+@When[Windows_Win32_System_CorrelationVector == "on" && NTDLL == "on" && Windows_Win32_System_CorrelationVector_RtlExtendCorrelationVector == "on"]
+public unsafe func Windows_RtlExtendCorrelationVector(CorrelationVector: CPointer<CORRELATION_VECTORAbi>): UInt32 {
+    return RtlExtendCorrelationVector(CorrelationVector)
+}
+
+@When[Windows_Win32_System_CorrelationVector == "on" && NTDLL == "on" && Windows_Win32_System_CorrelationVector_RtlIncrementCorrelationVector == "on"]
+foreign {
     func RtlIncrementCorrelationVector(CorrelationVector: CPointer<CORRELATION_VECTORAbi>): UInt32
+}
+
+@When[Windows_Win32_System_CorrelationVector == "on" && NTDLL == "on" && Windows_Win32_System_CorrelationVector_RtlIncrementCorrelationVector == "on"]
+public unsafe func Windows_RtlIncrementCorrelationVector(CorrelationVector: CPointer<CORRELATION_VECTORAbi>): UInt32 {
+    return RtlIncrementCorrelationVector(CorrelationVector)
+}
+
+@When[Windows_Win32_System_CorrelationVector == "on" && NTDLL == "on" && Windows_Win32_System_CorrelationVector_RtlInitializeCorrelationVector == "on"]
+foreign {
     // param-hint: Guid optional
     func RtlInitializeCorrelationVector(CorrelationVector: CPointer<CORRELATION_VECTORAbi>, Version: Int32, Guid: CPointer<GUID>): UInt32
+}
+
+@When[Windows_Win32_System_CorrelationVector == "on" && NTDLL == "on" && Windows_Win32_System_CorrelationVector_RtlInitializeCorrelationVector == "on"]
+public unsafe func Windows_RtlInitializeCorrelationVector(CorrelationVector: CPointer<CORRELATION_VECTORAbi>, Version: Int32, Guid: CPointer<GUID>): UInt32 {
+    return RtlInitializeCorrelationVector(CorrelationVector, Version, Guid)
+}
+
+@When[Windows_Win32_System_CorrelationVector == "on" && NTDLL == "on" && Windows_Win32_System_CorrelationVector_RtlValidateCorrelationVector == "on"]
+foreign {
     func RtlValidateCorrelationVector(Vector: CPointer<CORRELATION_VECTORAbi>): UInt32
+}
+
+@When[Windows_Win32_System_CorrelationVector == "on" && NTDLL == "on" && Windows_Win32_System_CorrelationVector_RtlValidateCorrelationVector == "on"]
+public unsafe func Windows_RtlValidateCorrelationVector(Vector: CPointer<CORRELATION_VECTORAbi>): UInt32 {
+    return RtlValidateCorrelationVector(Vector)
 }
 
 @When[Windows_Win32_System_CorrelationVector == "on"]

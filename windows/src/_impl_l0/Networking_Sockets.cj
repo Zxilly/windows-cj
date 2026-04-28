@@ -1591,9 +1591,9 @@ extend IStreamSocketControl <: windows_core.Interface<IStreamSocketControl> {}
 @C
 public struct IStreamSocketControl2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public var IgnorableServerCertificateErrors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Security_Cryptography_Certificates != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Security_Cryptography_Certificates != "on"]
     public var IgnorableServerCertificateErrors: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -1663,7 +1663,7 @@ public class IStreamSocketControl2 <: InterfaceWrapperBase & ComInterface & Runt
         readVtbl<IStreamSocketControl2Vtbl>(IStreamSocketControl2Vtbl())
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func IgnorableServerCertificateErrors(): windows_collections.IVector<ChainValidationResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

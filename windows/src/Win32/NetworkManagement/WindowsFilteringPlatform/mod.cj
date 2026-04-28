@@ -4,17 +4,15 @@
 package windows.Win32.NetworkManagement.WindowsFilteringPlatform
 
 import std.collection.*
+import windows_libloading
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
 import windows_interface.{GUID}
 import windows_interface as windows_interface
 import windows_polyfill.{unionReadFloat32, unionReadInt16, unionReadInt32, unionReadInt8, unionReadUInt16, unionReadUInt32, unionReadUInt64, unionReadUInt8, unionWriteFloat32, unionWriteInt16, unionWriteInt32, unionWriteInt8, unionWriteUInt16, unionWriteUInt32, unionWriteUInt64, unionWriteUInt8}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
-@When[Windows_Win32_System_Rpc == "on"]
 import windows.Win32.System.Rpc as Win32_System_Rpc
 
 
@@ -21645,137 +21643,284 @@ extend IPSEC_KEY_MANAGER_CALLBACKS0 <: windows_core.CopyType & windows_core.Runt
     }
 }
 
-@When[FWPUCLNT == "on"]
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmCalloutAdd0 == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: sd optional
+    // param-hint: id optional
+    func FwpmCalloutAdd0(engineHandle: FWPM_ENGINE_HANDLE, callout: CPointer<FWPM_CALLOUT0Abi>, sd: Win32_Security.PSECURITY_DESCRIPTOR, id: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmCalloutAdd0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmCalloutAdd0(engineHandle: FWPM_ENGINE_HANDLE, callout: CPointer<FWPM_CALLOUT0Abi>, sd: Win32_Security.PSECURITY_DESCRIPTOR, id: CPointer<UInt32>): UInt32 {
+    return FwpmCalloutAdd0(engineHandle, callout, sd, id)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmCalloutCreateEnumHandle0 == "on"]
 foreign {
     // param-hint: enumTemplate optional
     func FwpmCalloutCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_CALLOUT_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<FWPM_CALLOUT_ENUM_HANDLE>): UInt32
-    func FwpmCalloutDeleteById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt32): UInt32
-    func FwpmCalloutDeleteByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>): UInt32
-    func FwpmCalloutDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_CALLOUT_ENUM_HANDLE): UInt32
-    func FwpmCalloutEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_CALLOUT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_CALLOUT0Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32
-    func FwpmCalloutGetById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt32, callout: CPointer<CPointer<FWPM_CALLOUT0Abi>>): UInt32
-    func FwpmCalloutGetByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, callout: CPointer<CPointer<FWPM_CALLOUT0Abi>>): UInt32
-    // param-hint: context optional
-    func FwpmCalloutSubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_CALLOUT_SUBSCRIPTION0Abi>, callback: FWPM_CALLOUT_CHANGE_CALLBACK0, context: CPointer<Unit>, changeHandle: CPointer<CPointer<Unit>>): UInt32
-    func FwpmCalloutSubscriptionsGet0(engineHandle: FWPM_ENGINE_HANDLE, entries: CPointer<CPointer<CPointer<FWPM_CALLOUT_SUBSCRIPTION0Abi>>>, numEntries: CPointer<UInt32>): UInt32
-    func FwpmCalloutUnsubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, changeHandle: CPointer<Unit>): UInt32
-    // param-hint: enumTemplate optional
-    func FwpmConnectionCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_CONNECTION_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<FWPM_CONNECTION_ENUM_HANDLE>): UInt32
-    func FwpmConnectionDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_CONNECTION_ENUM_HANDLE): UInt32
-    func FwpmConnectionEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_CONNECTION_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_CONNECTION0Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32
-    func FwpmConnectionGetById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, connection: CPointer<CPointer<FWPM_CONNECTION0Abi>>): UInt32
-    func FwpmConnectionPolicyDeleteByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>): UInt32
-    // param-hint: context optional
-    func FwpmConnectionSubscribe0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_CONNECTION_SUBSCRIPTION0Abi>, callback: FWPM_CONNECTION_CALLBACK0, context: CPointer<Unit>, eventsHandle: CPointer<CPointer<Unit>>): UInt32
-    func FwpmConnectionUnsubscribe0(engineHandle: FWPM_ENGINE_HANDLE, eventsHandle: CPointer<Unit>): UInt32
-    // param-hint: context optional
-    func FwpmDynamicKeywordSubscribe0(flags: UInt32, callback: FWPM_DYNAMIC_KEYWORD_CALLBACK0, context: CPointer<Unit>, subscriptionHandle: CPointer<CPointer<Unit>>): UInt32
-    func FwpmDynamicKeywordUnsubscribe0(subscriptionHandle: CPointer<Unit>): UInt32
-    func FwpmEngineClose0(engineHandle: FWPM_ENGINE_HANDLE): UInt32
-    func FwpmFilterDeleteById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64): UInt32
-    func FwpmFilterDeleteByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>): UInt32
-    func FwpmFilterDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_FILTER_ENUM_HANDLE): UInt32
-    func FwpmFilterUnsubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, changeHandle: CPointer<Unit>): UInt32
-    func FwpmFreeMemory0(p: CPointer<CPointer<Unit>>): Unit
-    func FwpmGetAppIdFromFileName0(fileName: CPointer<UInt16>, appId: CPointer<CPointer<FWP_BYTE_BLOBAbi>>): UInt32
-    func FwpmIPsecTunnelDeleteByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>): UInt32
-    // param-hint: enumTemplate optional
-    func FwpmLayerCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_LAYER_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<FWPM_LAYER_ENUM_HANDLE>): UInt32
-    func FwpmLayerDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_LAYER_ENUM_HANDLE): UInt32
-    func FwpmLayerEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_LAYER_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_LAYER0Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32
-    func FwpmLayerGetById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt16, layer: CPointer<CPointer<FWPM_LAYER0Abi>>): UInt32
-    func FwpmLayerGetByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, layer: CPointer<CPointer<FWPM_LAYER0Abi>>): UInt32
-    func FwpmNetEventDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_NET_EVENT_ENUM_HANDLE): UInt32
-    func FwpmNetEventUnsubscribe0(engineHandle: FWPM_ENGINE_HANDLE, eventsHandle: CPointer<Unit>): UInt32
-    // param-hint: enumTemplate optional
-    func FwpmProviderContextCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_PROVIDER_CONTEXT_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<FWPM_PROVIDER_CONTEXT_ENUM_HANDLE>): UInt32
-    func FwpmProviderContextDeleteById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64): UInt32
-    func FwpmProviderContextDeleteByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>): UInt32
-    func FwpmProviderContextDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_PROVIDER_CONTEXT_ENUM_HANDLE): UInt32
-    // param-hint: context optional
-    func FwpmProviderContextSubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_PROVIDER_CONTEXT_SUBSCRIPTION0Abi>, callback: FWPM_PROVIDER_CONTEXT_CHANGE_CALLBACK0, context: CPointer<Unit>, changeHandle: CPointer<CPointer<Unit>>): UInt32
-    func FwpmProviderContextSubscriptionsGet0(engineHandle: FWPM_ENGINE_HANDLE, entries: CPointer<CPointer<CPointer<FWPM_PROVIDER_CONTEXT_SUBSCRIPTION0Abi>>>, numEntries: CPointer<UInt32>): UInt32
-    func FwpmProviderContextUnsubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, changeHandle: CPointer<Unit>): UInt32
-    // param-hint: enumTemplate optional
-    func FwpmProviderCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_PROVIDER_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<FWPM_PROVIDER_ENUM_HANDLE>): UInt32
-    func FwpmProviderDeleteByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>): UInt32
-    func FwpmProviderDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_PROVIDER_ENUM_HANDLE): UInt32
-    func FwpmProviderEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_PROVIDER_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_PROVIDER0Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32
-    func FwpmProviderGetByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, provider: CPointer<CPointer<FWPM_PROVIDER0Abi>>): UInt32
-    // param-hint: context optional
-    func FwpmProviderSubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_PROVIDER_SUBSCRIPTION0Abi>, callback: FWPM_PROVIDER_CHANGE_CALLBACK0, context: CPointer<Unit>, changeHandle: CPointer<CPointer<Unit>>): UInt32
-    func FwpmProviderSubscriptionsGet0(engineHandle: FWPM_ENGINE_HANDLE, entries: CPointer<CPointer<CPointer<FWPM_PROVIDER_SUBSCRIPTION0Abi>>>, numEntries: CPointer<UInt32>): UInt32
-    func FwpmProviderUnsubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, changeHandle: CPointer<Unit>): UInt32
-    // param-hint: enumTemplate optional
-    func FwpmSessionCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_SESSION_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<FWPM_SESSION_ENUM_HANDLE>): UInt32
-    func FwpmSessionDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_SESSION_ENUM_HANDLE): UInt32
-    // param-hint: enumTemplate optional
-    func FwpmSubLayerCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_SUBLAYER_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<FWPM_SUBLAYER_ENUM_HANDLE>): UInt32
-    func FwpmSubLayerDeleteByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>): UInt32
-    func FwpmSubLayerDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_SUBLAYER_ENUM_HANDLE): UInt32
-    func FwpmSubLayerEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_SUBLAYER_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_SUBLAYER0Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32
-    func FwpmSubLayerGetByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, subLayer: CPointer<CPointer<FWPM_SUBLAYER0Abi>>): UInt32
-    // param-hint: context optional
-    func FwpmSubLayerSubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_SUBLAYER_SUBSCRIPTION0Abi>, callback: FWPM_SUBLAYER_CHANGE_CALLBACK0, context: CPointer<Unit>, changeHandle: CPointer<CPointer<Unit>>): UInt32
-    func FwpmSubLayerSubscriptionsGet0(engineHandle: FWPM_ENGINE_HANDLE, entries: CPointer<CPointer<CPointer<FWPM_SUBLAYER_SUBSCRIPTION0Abi>>>, numEntries: CPointer<UInt32>): UInt32
-    func FwpmSubLayerUnsubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, changeHandle: CPointer<Unit>): UInt32
-    // param-hint: engineHandle optional
-    func FwpmSystemPortsGet0(engineHandle: FWPM_ENGINE_HANDLE, sysPorts: CPointer<CPointer<FWPM_SYSTEM_PORTS0Abi>>): UInt32
-    // param-hint: engineHandle optional
-    // param-hint: reserved optional reserved
-    // param-hint: context optional
-    func FwpmSystemPortsSubscribe0(engineHandle: FWPM_ENGINE_HANDLE, reserved: CPointer<Unit>, callback: FWPM_SYSTEM_PORTS_CALLBACK0, context: CPointer<Unit>, sysPortsHandle: CPointer<CPointer<Unit>>): UInt32
-    // param-hint: engineHandle optional
-    func FwpmSystemPortsUnsubscribe0(engineHandle: FWPM_ENGINE_HANDLE, sysPortsHandle: CPointer<Unit>): UInt32
-    func FwpmTransactionAbort0(engineHandle: FWPM_ENGINE_HANDLE): UInt32
-    func FwpmTransactionBegin0(engineHandle: FWPM_ENGINE_HANDLE, flags: UInt32): UInt32
-    func FwpmTransactionCommit0(engineHandle: FWPM_ENGINE_HANDLE): UInt32
-    // param-hint: context optional
-    func FwpmvSwitchEventSubscribe0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_VSWITCH_EVENT_SUBSCRIPTION0Abi>, callback: FWPM_VSWITCH_EVENT_CALLBACK0, context: CPointer<Unit>, subscriptionHandle: CPointer<CPointer<Unit>>): UInt32
-    func FwpmvSwitchEventUnsubscribe0(engineHandle: FWPM_ENGINE_HANDLE, subscriptionHandle: CPointer<Unit>): UInt32
-    func IPsecDospGetStatistics0(engineHandle: FWPM_ENGINE_HANDLE, idpStatistics: CPointer<IPSEC_DOSP_STATISTICS0Abi>): UInt32
-    // param-hint: enumTemplate optional
-    func IPsecDospStateCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<IPSEC_DOSP_STATE_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<IPSEC_DOSP_STATE_ENUM_HANDLE>): UInt32
-    func IPsecDospStateDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IPSEC_DOSP_STATE_ENUM_HANDLE): UInt32
-    func IPsecDospStateEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IPSEC_DOSP_STATE_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<IPSEC_DOSP_STATE0Abi>>>, numEntries: CPointer<UInt32>): UInt32
-    func IPsecGetStatistics0(engineHandle: FWPM_ENGINE_HANDLE, ipsecStatistics: CPointer<IPSEC_STATISTICS0Abi>): UInt32
-    func IPsecGetStatistics1(engineHandle: FWPM_ENGINE_HANDLE, ipsecStatistics: CPointer<IPSEC_STATISTICS1Abi>): UInt32
-    func IPsecKeyManagerUnregisterAndDelete0(engineHandle: FWPM_ENGINE_HANDLE, keyMgmtHandle: CPointer<Unit>): UInt32
-    func IPsecKeyManagersGet0(engineHandle: FWPM_ENGINE_HANDLE, entries: CPointer<CPointer<CPointer<IPSEC_KEY_MANAGER0Abi>>>, numEntries: CPointer<UInt32>): UInt32
-    func IPsecSaContextAddInbound0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, inboundBundle: CPointer<IPSEC_SA_BUNDLE0Abi>): UInt32
-    func IPsecSaContextAddInbound1(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, inboundBundle: CPointer<IPSEC_SA_BUNDLE1Abi>): UInt32
-    func IPsecSaContextAddOutbound0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, outboundBundle: CPointer<IPSEC_SA_BUNDLE0Abi>): UInt32
-    func IPsecSaContextAddOutbound1(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, outboundBundle: CPointer<IPSEC_SA_BUNDLE1Abi>): UInt32
-    // param-hint: inboundFilterId optional
-    func IPsecSaContextCreate0(engineHandle: FWPM_ENGINE_HANDLE, outboundTraffic: CPointer<IPSEC_TRAFFIC0Abi>, inboundFilterId: CPointer<UInt64>, id: CPointer<UInt64>): UInt32
-    // param-hint: virtualIfTunnelInfo optional
-    // param-hint: inboundFilterId optional
-    func IPsecSaContextCreate1(engineHandle: FWPM_ENGINE_HANDLE, outboundTraffic: CPointer<IPSEC_TRAFFIC1Abi>, virtualIfTunnelInfo: CPointer<IPSEC_VIRTUAL_IF_TUNNEL_INFO0Abi>, inboundFilterId: CPointer<UInt64>, id: CPointer<UInt64>): UInt32
-    func IPsecSaContextDeleteById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64): UInt32
-    func IPsecSaContextDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IPSEC_SA_CONTEXT_ENUM_HANDLE): UInt32
-    func IPsecSaContextExpire0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64): UInt32
-    func IPsecSaContextGetSpi0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, getSpi: CPointer<IPSEC_GETSPI0Abi>, inboundSpi: CPointer<UInt32>): UInt32
-    func IPsecSaContextGetSpi1(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, getSpi: CPointer<IPSEC_GETSPI1Abi>, inboundSpi: CPointer<UInt32>): UInt32
-    func IPsecSaContextSetSpi0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, getSpi: CPointer<IPSEC_GETSPI1Abi>, inboundSpi: UInt32): UInt32
-    func IPsecSaContextUnsubscribe0(engineHandle: FWPM_ENGINE_HANDLE, eventsHandle: CPointer<Unit>): UInt32
-    // param-hint: enumTemplate optional
-    func IPsecSaCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<IPSEC_SA_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<IPSEC_SA_ENUM_HANDLE>): UInt32
-    func IPsecSaDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IPSEC_SA_ENUM_HANDLE): UInt32
-    func IkeextGetStatistics0(engineHandle: FWPM_ENGINE_HANDLE, ikeextStatistics: CPointer<IKEEXT_STATISTICS0Abi>): UInt32
-    func IkeextGetStatistics1(engineHandle: FWPM_ENGINE_HANDLE, ikeextStatistics: CPointer<IKEEXT_STATISTICS1Abi>): UInt32
-    func IkeextSaDeleteById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64): UInt32
-    func IkeextSaDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IKEEXT_SA_ENUM_HANDLE): UInt32
-    func IkeextSaEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IKEEXT_SA_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<IKEEXT_SA_DETAILS0Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32
-    func IkeextSaEnum1(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IKEEXT_SA_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<IKEEXT_SA_DETAILS1Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32
-    func IkeextSaEnum2(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IKEEXT_SA_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<IKEEXT_SA_DETAILS2Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32
-    func IkeextSaGetById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, sa: CPointer<CPointer<IKEEXT_SA_DETAILS0Abi>>): UInt32
-    // param-hint: saLookupContext optional
-    func IkeextSaGetById1(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, saLookupContext: CPointer<GUID>, sa: CPointer<CPointer<IKEEXT_SA_DETAILS1Abi>>): UInt32
-    // param-hint: saLookupContext optional
-    func IkeextSaGetById2(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, saLookupContext: CPointer<GUID>, sa: CPointer<CPointer<IKEEXT_SA_DETAILS2Abi>>): UInt32
 }
 
-@When[FWPUCLNT == "on" && (Windows_Win32_Security == "on" && Windows_Win32_System_Rpc == "on")]
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmCalloutCreateEnumHandle0 == "on"]
+public unsafe func Windows_FwpmCalloutCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_CALLOUT_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<FWPM_CALLOUT_ENUM_HANDLE>): UInt32 {
+    return FwpmCalloutCreateEnumHandle0(engineHandle, enumTemplate, enumHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmCalloutDeleteById0 == "on"]
+foreign {
+    func FwpmCalloutDeleteById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmCalloutDeleteById0 == "on"]
+public unsafe func Windows_FwpmCalloutDeleteById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt32): UInt32 {
+    return FwpmCalloutDeleteById0(engineHandle, id)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmCalloutDeleteByKey0 == "on"]
+foreign {
+    func FwpmCalloutDeleteByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmCalloutDeleteByKey0 == "on"]
+public unsafe func Windows_FwpmCalloutDeleteByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>): UInt32 {
+    return FwpmCalloutDeleteByKey0(engineHandle, key)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmCalloutDestroyEnumHandle0 == "on"]
+foreign {
+    func FwpmCalloutDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_CALLOUT_ENUM_HANDLE): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmCalloutDestroyEnumHandle0 == "on"]
+public unsafe func Windows_FwpmCalloutDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_CALLOUT_ENUM_HANDLE): UInt32 {
+    return FwpmCalloutDestroyEnumHandle0(engineHandle, enumHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmCalloutEnum0 == "on"]
+foreign {
+    func FwpmCalloutEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_CALLOUT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_CALLOUT0Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmCalloutEnum0 == "on"]
+public unsafe func Windows_FwpmCalloutEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_CALLOUT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_CALLOUT0Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32 {
+    return FwpmCalloutEnum0(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmCalloutGetById0 == "on"]
+foreign {
+    func FwpmCalloutGetById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt32, callout: CPointer<CPointer<FWPM_CALLOUT0Abi>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmCalloutGetById0 == "on"]
+public unsafe func Windows_FwpmCalloutGetById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt32, callout: CPointer<CPointer<FWPM_CALLOUT0Abi>>): UInt32 {
+    return FwpmCalloutGetById0(engineHandle, id, callout)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmCalloutGetByKey0 == "on"]
+foreign {
+    func FwpmCalloutGetByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, callout: CPointer<CPointer<FWPM_CALLOUT0Abi>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmCalloutGetByKey0 == "on"]
+public unsafe func Windows_FwpmCalloutGetByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, callout: CPointer<CPointer<FWPM_CALLOUT0Abi>>): UInt32 {
+    return FwpmCalloutGetByKey0(engineHandle, key, callout)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmCalloutGetSecurityInfoByKey0 == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: key optional
+    func FwpmCalloutGetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACLAbi>>, sacl: CPointer<CPointer<Win32_Security.ACLAbi>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmCalloutGetSecurityInfoByKey0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmCalloutGetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACLAbi>>, sacl: CPointer<CPointer<Win32_Security.ACLAbi>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32 {
+    return FwpmCalloutGetSecurityInfoByKey0(engineHandle, key, securityInfo, sidOwner, sidGroup, dacl, sacl, securityDescriptor)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmCalloutSetSecurityInfoByKey0 == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: key optional
+    // param-hint: sidOwner optional
+    // param-hint: sidGroup optional
+    // param-hint: dacl optional
+    // param-hint: sacl optional
+    func FwpmCalloutSetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SIDAbi>, sidGroup: CPointer<Win32_Security.SIDAbi>, dacl: CPointer<Win32_Security.ACLAbi>, sacl: CPointer<Win32_Security.ACLAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmCalloutSetSecurityInfoByKey0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmCalloutSetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SIDAbi>, sidGroup: CPointer<Win32_Security.SIDAbi>, dacl: CPointer<Win32_Security.ACLAbi>, sacl: CPointer<Win32_Security.ACLAbi>): UInt32 {
+    return FwpmCalloutSetSecurityInfoByKey0(engineHandle, key, securityInfo, sidOwner, sidGroup, dacl, sacl)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmCalloutSubscribeChanges0 == "on"]
+foreign {
+    // param-hint: context optional
+    func FwpmCalloutSubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_CALLOUT_SUBSCRIPTION0Abi>, callback: FWPM_CALLOUT_CHANGE_CALLBACK0, context: CPointer<Unit>, changeHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmCalloutSubscribeChanges0 == "on"]
+public unsafe func Windows_FwpmCalloutSubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_CALLOUT_SUBSCRIPTION0Abi>, callback: FWPM_CALLOUT_CHANGE_CALLBACK0, context: CPointer<Unit>, changeHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return FwpmCalloutSubscribeChanges0(engineHandle, subscription, callback, context, changeHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmCalloutSubscriptionsGet0 == "on"]
+foreign {
+    func FwpmCalloutSubscriptionsGet0(engineHandle: FWPM_ENGINE_HANDLE, entries: CPointer<CPointer<CPointer<FWPM_CALLOUT_SUBSCRIPTION0Abi>>>, numEntries: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmCalloutSubscriptionsGet0 == "on"]
+public unsafe func Windows_FwpmCalloutSubscriptionsGet0(engineHandle: FWPM_ENGINE_HANDLE, entries: CPointer<CPointer<CPointer<FWPM_CALLOUT_SUBSCRIPTION0Abi>>>, numEntries: CPointer<UInt32>): UInt32 {
+    return FwpmCalloutSubscriptionsGet0(engineHandle, entries, numEntries)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmCalloutUnsubscribeChanges0 == "on"]
+foreign {
+    func FwpmCalloutUnsubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, changeHandle: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmCalloutUnsubscribeChanges0 == "on"]
+public unsafe func Windows_FwpmCalloutUnsubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, changeHandle: CPointer<Unit>): UInt32 {
+    return FwpmCalloutUnsubscribeChanges0(engineHandle, changeHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmConnectionCreateEnumHandle0 == "on"]
+foreign {
+    // param-hint: enumTemplate optional
+    func FwpmConnectionCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_CONNECTION_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<FWPM_CONNECTION_ENUM_HANDLE>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmConnectionCreateEnumHandle0 == "on"]
+public unsafe func Windows_FwpmConnectionCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_CONNECTION_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<FWPM_CONNECTION_ENUM_HANDLE>): UInt32 {
+    return FwpmConnectionCreateEnumHandle0(engineHandle, enumTemplate, enumHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmConnectionDestroyEnumHandle0 == "on"]
+foreign {
+    func FwpmConnectionDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_CONNECTION_ENUM_HANDLE): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmConnectionDestroyEnumHandle0 == "on"]
+public unsafe func Windows_FwpmConnectionDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_CONNECTION_ENUM_HANDLE): UInt32 {
+    return FwpmConnectionDestroyEnumHandle0(engineHandle, enumHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmConnectionEnum0 == "on"]
+foreign {
+    func FwpmConnectionEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_CONNECTION_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_CONNECTION0Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmConnectionEnum0 == "on"]
+public unsafe func Windows_FwpmConnectionEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_CONNECTION_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_CONNECTION0Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32 {
+    return FwpmConnectionEnum0(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmConnectionGetById0 == "on"]
+foreign {
+    func FwpmConnectionGetById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, connection: CPointer<CPointer<FWPM_CONNECTION0Abi>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmConnectionGetById0 == "on"]
+public unsafe func Windows_FwpmConnectionGetById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, connection: CPointer<CPointer<FWPM_CONNECTION0Abi>>): UInt32 {
+    return FwpmConnectionGetById0(engineHandle, id, connection)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmConnectionGetSecurityInfo0 == "on" && Windows_Win32_Security == "on"]
+foreign {
+    func FwpmConnectionGetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACLAbi>>, sacl: CPointer<CPointer<Win32_Security.ACLAbi>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmConnectionGetSecurityInfo0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmConnectionGetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACLAbi>>, sacl: CPointer<CPointer<Win32_Security.ACLAbi>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32 {
+    return FwpmConnectionGetSecurityInfo0(engineHandle, securityInfo, sidOwner, sidGroup, dacl, sacl, securityDescriptor)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmConnectionSetSecurityInfo0 == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: sidOwner optional
+    // param-hint: sidGroup optional
+    // param-hint: dacl optional
+    // param-hint: sacl optional
+    func FwpmConnectionSetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SIDAbi>, sidGroup: CPointer<Win32_Security.SIDAbi>, dacl: CPointer<Win32_Security.ACLAbi>, sacl: CPointer<Win32_Security.ACLAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmConnectionSetSecurityInfo0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmConnectionSetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SIDAbi>, sidGroup: CPointer<Win32_Security.SIDAbi>, dacl: CPointer<Win32_Security.ACLAbi>, sacl: CPointer<Win32_Security.ACLAbi>): UInt32 {
+    return FwpmConnectionSetSecurityInfo0(engineHandle, securityInfo, sidOwner, sidGroup, dacl, sacl)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmConnectionSubscribe0 == "on"]
+foreign {
+    // param-hint: context optional
+    func FwpmConnectionSubscribe0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_CONNECTION_SUBSCRIPTION0Abi>, callback: FWPM_CONNECTION_CALLBACK0, context: CPointer<Unit>, eventsHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmConnectionSubscribe0 == "on"]
+public unsafe func Windows_FwpmConnectionSubscribe0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_CONNECTION_SUBSCRIPTION0Abi>, callback: FWPM_CONNECTION_CALLBACK0, context: CPointer<Unit>, eventsHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return FwpmConnectionSubscribe0(engineHandle, subscription, callback, context, eventsHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmConnectionUnsubscribe0 == "on"]
+foreign {
+    func FwpmConnectionUnsubscribe0(engineHandle: FWPM_ENGINE_HANDLE, eventsHandle: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmConnectionUnsubscribe0 == "on"]
+public unsafe func Windows_FwpmConnectionUnsubscribe0(engineHandle: FWPM_ENGINE_HANDLE, eventsHandle: CPointer<Unit>): UInt32 {
+    return FwpmConnectionUnsubscribe0(engineHandle, eventsHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmDynamicKeywordSubscribe0 == "on"]
+foreign {
+    // param-hint: context optional
+    func FwpmDynamicKeywordSubscribe0(flags: UInt32, callback: FWPM_DYNAMIC_KEYWORD_CALLBACK0, context: CPointer<Unit>, subscriptionHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmDynamicKeywordSubscribe0 == "on"]
+public unsafe func Windows_FwpmDynamicKeywordSubscribe0(flags: UInt32, callback: FWPM_DYNAMIC_KEYWORD_CALLBACK0, context: CPointer<Unit>, subscriptionHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return FwpmDynamicKeywordSubscribe0(flags, callback, context, subscriptionHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmDynamicKeywordUnsubscribe0 == "on"]
+foreign {
+    func FwpmDynamicKeywordUnsubscribe0(subscriptionHandle: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmDynamicKeywordUnsubscribe0 == "on"]
+public unsafe func Windows_FwpmDynamicKeywordUnsubscribe0(subscriptionHandle: CPointer<Unit>): UInt32 {
+    return FwpmDynamicKeywordUnsubscribe0(subscriptionHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmEngineClose0 == "on"]
+foreign {
+    func FwpmEngineClose0(engineHandle: FWPM_ENGINE_HANDLE): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmEngineClose0 == "on"]
+public unsafe func Windows_FwpmEngineClose0(engineHandle: FWPM_ENGINE_HANDLE): UInt32 {
+    return FwpmEngineClose0(engineHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmEngineGetOption0 == "on" && Windows_Win32_Security == "on"]
+foreign {
+    func FwpmEngineGetOption0(engineHandle: FWPM_ENGINE_HANDLE, option: FWPM_ENGINE_OPTIONAbi, value: CPointer<CPointer<FWP_VALUE0Abi>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmEngineGetOption0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmEngineGetOption0(engineHandle: FWPM_ENGINE_HANDLE, option: FWPM_ENGINE_OPTIONAbi, value: CPointer<CPointer<FWP_VALUE0Abi>>): UInt32 {
+    return FwpmEngineGetOption0(engineHandle, option, value)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmEngineGetSecurityInfo0 == "on" && Windows_Win32_Security == "on"]
+foreign {
+    func FwpmEngineGetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACLAbi>>, sacl: CPointer<CPointer<Win32_Security.ACLAbi>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmEngineGetSecurityInfo0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmEngineGetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACLAbi>>, sacl: CPointer<CPointer<Win32_Security.ACLAbi>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32 {
+    return FwpmEngineGetSecurityInfo0(engineHandle, securityInfo, sidOwner, sidGroup, dacl, sacl, securityDescriptor)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmEngineOpen0 == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Rpc == "on"]
 foreign {
     // param-hint: serverName optional reserved
     // param-hint: authIdentity optional
@@ -21783,207 +21928,1750 @@ foreign {
     func FwpmEngineOpen0(serverName: CPointer<UInt16>, authnService: UInt32, authIdentity: CPointer<Win32_System_Rpc.SEC_WINNT_AUTH_IDENTITY_WAbi>, session: CPointer<FWPM_SESSION0Abi>, engineHandle: CPointer<FWPM_ENGINE_HANDLE>): UInt32
 }
 
-@When[FWPUCLNT == "on" && Windows_Win32_Security == "on"]
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmEngineOpen0 == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Rpc == "on"]
+public unsafe func Windows_FwpmEngineOpen0(serverName: CPointer<UInt16>, authnService: UInt32, authIdentity: CPointer<Win32_System_Rpc.SEC_WINNT_AUTH_IDENTITY_WAbi>, session: CPointer<FWPM_SESSION0Abi>, engineHandle: CPointer<FWPM_ENGINE_HANDLE>): UInt32 {
+    return FwpmEngineOpen0(serverName, authnService, authIdentity, session, engineHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmEngineSetOption0 == "on" && Windows_Win32_Security == "on"]
 foreign {
-    // param-hint: sd optional
-    // param-hint: id optional
-    func FwpmCalloutAdd0(engineHandle: FWPM_ENGINE_HANDLE, callout: CPointer<FWPM_CALLOUT0Abi>, sd: Win32_Security.PSECURITY_DESCRIPTOR, id: CPointer<UInt32>): UInt32
-    // param-hint: key optional
-    func FwpmCalloutGetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACLAbi>>, sacl: CPointer<CPointer<Win32_Security.ACLAbi>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32
-    // param-hint: key optional
-    // param-hint: sidOwner optional
-    // param-hint: sidGroup optional
-    // param-hint: dacl optional
-    // param-hint: sacl optional
-    func FwpmCalloutSetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SIDAbi>, sidGroup: CPointer<Win32_Security.SIDAbi>, dacl: CPointer<Win32_Security.ACLAbi>, sacl: CPointer<Win32_Security.ACLAbi>): UInt32
-    func FwpmConnectionGetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACLAbi>>, sacl: CPointer<CPointer<Win32_Security.ACLAbi>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32
-    // param-hint: filterConditions len=param[4]
-    // param-hint: sd optional
-    func FwpmConnectionPolicyAdd0(engineHandle: FWPM_ENGINE_HANDLE, connectionPolicy: CPointer<FWPM_PROVIDER_CONTEXT3Abi>, ipVersion: FWP_IP_VERSIONAbi, weight: UInt64, numFilterConditions: UInt32, filterConditions: CPointer<FWPM_FILTER_CONDITION0Abi>, sd: Win32_Security.PSECURITY_DESCRIPTOR): UInt32
-    // param-hint: sidOwner optional
-    // param-hint: sidGroup optional
-    // param-hint: dacl optional
-    // param-hint: sacl optional
-    func FwpmConnectionSetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SIDAbi>, sidGroup: CPointer<Win32_Security.SIDAbi>, dacl: CPointer<Win32_Security.ACLAbi>, sacl: CPointer<Win32_Security.ACLAbi>): UInt32
-    func FwpmEngineGetOption0(engineHandle: FWPM_ENGINE_HANDLE, option: FWPM_ENGINE_OPTIONAbi, value: CPointer<CPointer<FWP_VALUE0Abi>>): UInt32
-    func FwpmEngineGetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACLAbi>>, sacl: CPointer<CPointer<Win32_Security.ACLAbi>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32
     func FwpmEngineSetOption0(engineHandle: FWPM_ENGINE_HANDLE, option: FWPM_ENGINE_OPTIONAbi, newValue: CPointer<FWP_VALUE0Abi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmEngineSetOption0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmEngineSetOption0(engineHandle: FWPM_ENGINE_HANDLE, option: FWPM_ENGINE_OPTIONAbi, newValue: CPointer<FWP_VALUE0Abi>): UInt32 {
+    return FwpmEngineSetOption0(engineHandle, option, newValue)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmEngineSetSecurityInfo0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: sidOwner optional
     // param-hint: sidGroup optional
     // param-hint: dacl optional
     // param-hint: sacl optional
     func FwpmEngineSetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SIDAbi>, sidGroup: CPointer<Win32_Security.SIDAbi>, dacl: CPointer<Win32_Security.ACLAbi>, sacl: CPointer<Win32_Security.ACLAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmEngineSetSecurityInfo0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmEngineSetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SIDAbi>, sidGroup: CPointer<Win32_Security.SIDAbi>, dacl: CPointer<Win32_Security.ACLAbi>, sacl: CPointer<Win32_Security.ACLAbi>): UInt32 {
+    return FwpmEngineSetSecurityInfo0(engineHandle, securityInfo, sidOwner, sidGroup, dacl, sacl)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmFilterAdd0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: sd optional
     // param-hint: id optional
     func FwpmFilterAdd0(engineHandle: FWPM_ENGINE_HANDLE, filter: CPointer<FWPM_FILTER0Abi>, sd: Win32_Security.PSECURITY_DESCRIPTOR, id: CPointer<UInt64>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmFilterAdd0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmFilterAdd0(engineHandle: FWPM_ENGINE_HANDLE, filter: CPointer<FWPM_FILTER0Abi>, sd: Win32_Security.PSECURITY_DESCRIPTOR, id: CPointer<UInt64>): UInt32 {
+    return FwpmFilterAdd0(engineHandle, filter, sd, id)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmFilterCreateEnumHandle0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: enumTemplate optional
     func FwpmFilterCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_FILTER_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<FWPM_FILTER_ENUM_HANDLE>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmFilterCreateEnumHandle0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmFilterCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_FILTER_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<FWPM_FILTER_ENUM_HANDLE>): UInt32 {
+    return FwpmFilterCreateEnumHandle0(engineHandle, enumTemplate, enumHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmFilterDeleteById0 == "on"]
+foreign {
+    func FwpmFilterDeleteById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmFilterDeleteById0 == "on"]
+public unsafe func Windows_FwpmFilterDeleteById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64): UInt32 {
+    return FwpmFilterDeleteById0(engineHandle, id)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmFilterDeleteByKey0 == "on"]
+foreign {
+    func FwpmFilterDeleteByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmFilterDeleteByKey0 == "on"]
+public unsafe func Windows_FwpmFilterDeleteByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>): UInt32 {
+    return FwpmFilterDeleteByKey0(engineHandle, key)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmFilterDestroyEnumHandle0 == "on"]
+foreign {
+    func FwpmFilterDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_FILTER_ENUM_HANDLE): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmFilterDestroyEnumHandle0 == "on"]
+public unsafe func Windows_FwpmFilterDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_FILTER_ENUM_HANDLE): UInt32 {
+    return FwpmFilterDestroyEnumHandle0(engineHandle, enumHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmFilterEnum0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func FwpmFilterEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_FILTER_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_FILTER0Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmFilterEnum0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmFilterEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_FILTER_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_FILTER0Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32 {
+    return FwpmFilterEnum0(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmFilterGetById0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func FwpmFilterGetById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, filter: CPointer<CPointer<FWPM_FILTER0Abi>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmFilterGetById0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmFilterGetById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, filter: CPointer<CPointer<FWPM_FILTER0Abi>>): UInt32 {
+    return FwpmFilterGetById0(engineHandle, id, filter)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmFilterGetByKey0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func FwpmFilterGetByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, filter: CPointer<CPointer<FWPM_FILTER0Abi>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmFilterGetByKey0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmFilterGetByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, filter: CPointer<CPointer<FWPM_FILTER0Abi>>): UInt32 {
+    return FwpmFilterGetByKey0(engineHandle, key, filter)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmFilterGetSecurityInfoByKey0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: key optional
     func FwpmFilterGetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACLAbi>>, sacl: CPointer<CPointer<Win32_Security.ACLAbi>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmFilterGetSecurityInfoByKey0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmFilterGetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACLAbi>>, sacl: CPointer<CPointer<Win32_Security.ACLAbi>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32 {
+    return FwpmFilterGetSecurityInfoByKey0(engineHandle, key, securityInfo, sidOwner, sidGroup, dacl, sacl, securityDescriptor)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmFilterSetSecurityInfoByKey0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: key optional
     // param-hint: sidOwner optional
     // param-hint: sidGroup optional
     // param-hint: dacl optional
     // param-hint: sacl optional
     func FwpmFilterSetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SIDAbi>, sidGroup: CPointer<Win32_Security.SIDAbi>, dacl: CPointer<Win32_Security.ACLAbi>, sacl: CPointer<Win32_Security.ACLAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmFilterSetSecurityInfoByKey0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmFilterSetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SIDAbi>, sidGroup: CPointer<Win32_Security.SIDAbi>, dacl: CPointer<Win32_Security.ACLAbi>, sacl: CPointer<Win32_Security.ACLAbi>): UInt32 {
+    return FwpmFilterSetSecurityInfoByKey0(engineHandle, key, securityInfo, sidOwner, sidGroup, dacl, sacl)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmFilterSubscribeChanges0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: context optional
     func FwpmFilterSubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_FILTER_SUBSCRIPTION0Abi>, callback: FWPM_FILTER_CHANGE_CALLBACK0, context: CPointer<Unit>, changeHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmFilterSubscribeChanges0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmFilterSubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_FILTER_SUBSCRIPTION0Abi>, callback: FWPM_FILTER_CHANGE_CALLBACK0, context: CPointer<Unit>, changeHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return FwpmFilterSubscribeChanges0(engineHandle, subscription, callback, context, changeHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmFilterSubscriptionsGet0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func FwpmFilterSubscriptionsGet0(engineHandle: FWPM_ENGINE_HANDLE, entries: CPointer<CPointer<CPointer<FWPM_FILTER_SUBSCRIPTION0Abi>>>, numEntries: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmFilterSubscriptionsGet0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmFilterSubscriptionsGet0(engineHandle: FWPM_ENGINE_HANDLE, entries: CPointer<CPointer<CPointer<FWPM_FILTER_SUBSCRIPTION0Abi>>>, numEntries: CPointer<UInt32>): UInt32 {
+    return FwpmFilterSubscriptionsGet0(engineHandle, entries, numEntries)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmFilterUnsubscribeChanges0 == "on"]
+foreign {
+    func FwpmFilterUnsubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, changeHandle: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmFilterUnsubscribeChanges0 == "on"]
+public unsafe func Windows_FwpmFilterUnsubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, changeHandle: CPointer<Unit>): UInt32 {
+    return FwpmFilterUnsubscribeChanges0(engineHandle, changeHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmFreeMemory0 == "on"]
+foreign {
+    func FwpmFreeMemory0(p: CPointer<CPointer<Unit>>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmFreeMemory0 == "on"]
+public unsafe func Windows_FwpmFreeMemory0(p: CPointer<CPointer<Unit>>): Unit {
+    FwpmFreeMemory0(p)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmGetAppIdFromFileName0 == "on"]
+foreign {
+    func FwpmGetAppIdFromFileName0(fileName: CPointer<UInt16>, appId: CPointer<CPointer<FWP_BYTE_BLOBAbi>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmGetAppIdFromFileName0 == "on"]
+public unsafe func Windows_FwpmGetAppIdFromFileName0(fileName: CPointer<UInt16>, appId: CPointer<CPointer<FWP_BYTE_BLOBAbi>>): UInt32 {
+    return FwpmGetAppIdFromFileName0(fileName, appId)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmIPsecTunnelAdd0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: mainModePolicy optional
     // param-hint: filterConditions len=param[4]
     // param-hint: sd optional
     func FwpmIPsecTunnelAdd0(engineHandle: FWPM_ENGINE_HANDLE, flags: UInt32, mainModePolicy: CPointer<FWPM_PROVIDER_CONTEXT0Abi>, tunnelPolicy: CPointer<FWPM_PROVIDER_CONTEXT0Abi>, numFilterConditions: UInt32, filterConditions: CPointer<FWPM_FILTER_CONDITION0Abi>, sd: Win32_Security.PSECURITY_DESCRIPTOR): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmIPsecTunnelAdd0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmIPsecTunnelAdd0(engineHandle: FWPM_ENGINE_HANDLE, flags: UInt32, mainModePolicy: CPointer<FWPM_PROVIDER_CONTEXT0Abi>, tunnelPolicy: CPointer<FWPM_PROVIDER_CONTEXT0Abi>, numFilterConditions: UInt32, filterConditions: CPointer<FWPM_FILTER_CONDITION0Abi>, sd: Win32_Security.PSECURITY_DESCRIPTOR): UInt32 {
+    return FwpmIPsecTunnelAdd0(engineHandle, flags, mainModePolicy, tunnelPolicy, numFilterConditions, filterConditions, sd)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmIPsecTunnelAdd1 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: mainModePolicy optional
     // param-hint: filterConditions len=param[4]
     // param-hint: keyModKey optional
     // param-hint: sd optional
     func FwpmIPsecTunnelAdd1(engineHandle: FWPM_ENGINE_HANDLE, flags: UInt32, mainModePolicy: CPointer<FWPM_PROVIDER_CONTEXT1Abi>, tunnelPolicy: CPointer<FWPM_PROVIDER_CONTEXT1Abi>, numFilterConditions: UInt32, filterConditions: CPointer<FWPM_FILTER_CONDITION0Abi>, keyModKey: CPointer<GUID>, sd: Win32_Security.PSECURITY_DESCRIPTOR): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmIPsecTunnelAdd1 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmIPsecTunnelAdd1(engineHandle: FWPM_ENGINE_HANDLE, flags: UInt32, mainModePolicy: CPointer<FWPM_PROVIDER_CONTEXT1Abi>, tunnelPolicy: CPointer<FWPM_PROVIDER_CONTEXT1Abi>, numFilterConditions: UInt32, filterConditions: CPointer<FWPM_FILTER_CONDITION0Abi>, keyModKey: CPointer<GUID>, sd: Win32_Security.PSECURITY_DESCRIPTOR): UInt32 {
+    return FwpmIPsecTunnelAdd1(engineHandle, flags, mainModePolicy, tunnelPolicy, numFilterConditions, filterConditions, keyModKey, sd)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmIPsecTunnelAdd2 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: mainModePolicy optional
     // param-hint: filterConditions len=param[4]
     // param-hint: keyModKey optional
     // param-hint: sd optional
     func FwpmIPsecTunnelAdd2(engineHandle: FWPM_ENGINE_HANDLE, flags: UInt32, mainModePolicy: CPointer<FWPM_PROVIDER_CONTEXT2Abi>, tunnelPolicy: CPointer<FWPM_PROVIDER_CONTEXT2Abi>, numFilterConditions: UInt32, filterConditions: CPointer<FWPM_FILTER_CONDITION0Abi>, keyModKey: CPointer<GUID>, sd: Win32_Security.PSECURITY_DESCRIPTOR): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmIPsecTunnelAdd2 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmIPsecTunnelAdd2(engineHandle: FWPM_ENGINE_HANDLE, flags: UInt32, mainModePolicy: CPointer<FWPM_PROVIDER_CONTEXT2Abi>, tunnelPolicy: CPointer<FWPM_PROVIDER_CONTEXT2Abi>, numFilterConditions: UInt32, filterConditions: CPointer<FWPM_FILTER_CONDITION0Abi>, keyModKey: CPointer<GUID>, sd: Win32_Security.PSECURITY_DESCRIPTOR): UInt32 {
+    return FwpmIPsecTunnelAdd2(engineHandle, flags, mainModePolicy, tunnelPolicy, numFilterConditions, filterConditions, keyModKey, sd)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmIPsecTunnelAdd3 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: mainModePolicy optional
     // param-hint: filterConditions len=param[4]
     // param-hint: keyModKey optional
     // param-hint: sd optional
     func FwpmIPsecTunnelAdd3(engineHandle: FWPM_ENGINE_HANDLE, flags: UInt32, mainModePolicy: CPointer<FWPM_PROVIDER_CONTEXT3Abi>, tunnelPolicy: CPointer<FWPM_PROVIDER_CONTEXT3Abi>, numFilterConditions: UInt32, filterConditions: CPointer<FWPM_FILTER_CONDITION0Abi>, keyModKey: CPointer<GUID>, sd: Win32_Security.PSECURITY_DESCRIPTOR): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmIPsecTunnelAdd3 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmIPsecTunnelAdd3(engineHandle: FWPM_ENGINE_HANDLE, flags: UInt32, mainModePolicy: CPointer<FWPM_PROVIDER_CONTEXT3Abi>, tunnelPolicy: CPointer<FWPM_PROVIDER_CONTEXT3Abi>, numFilterConditions: UInt32, filterConditions: CPointer<FWPM_FILTER_CONDITION0Abi>, keyModKey: CPointer<GUID>, sd: Win32_Security.PSECURITY_DESCRIPTOR): UInt32 {
+    return FwpmIPsecTunnelAdd3(engineHandle, flags, mainModePolicy, tunnelPolicy, numFilterConditions, filterConditions, keyModKey, sd)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmIPsecTunnelDeleteByKey0 == "on"]
+foreign {
+    func FwpmIPsecTunnelDeleteByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmIPsecTunnelDeleteByKey0 == "on"]
+public unsafe func Windows_FwpmIPsecTunnelDeleteByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>): UInt32 {
+    return FwpmIPsecTunnelDeleteByKey0(engineHandle, key)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmLayerCreateEnumHandle0 == "on"]
+foreign {
+    // param-hint: enumTemplate optional
+    func FwpmLayerCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_LAYER_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<FWPM_LAYER_ENUM_HANDLE>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmLayerCreateEnumHandle0 == "on"]
+public unsafe func Windows_FwpmLayerCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_LAYER_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<FWPM_LAYER_ENUM_HANDLE>): UInt32 {
+    return FwpmLayerCreateEnumHandle0(engineHandle, enumTemplate, enumHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmLayerDestroyEnumHandle0 == "on"]
+foreign {
+    func FwpmLayerDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_LAYER_ENUM_HANDLE): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmLayerDestroyEnumHandle0 == "on"]
+public unsafe func Windows_FwpmLayerDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_LAYER_ENUM_HANDLE): UInt32 {
+    return FwpmLayerDestroyEnumHandle0(engineHandle, enumHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmLayerEnum0 == "on"]
+foreign {
+    func FwpmLayerEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_LAYER_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_LAYER0Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmLayerEnum0 == "on"]
+public unsafe func Windows_FwpmLayerEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_LAYER_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_LAYER0Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32 {
+    return FwpmLayerEnum0(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmLayerGetById0 == "on"]
+foreign {
+    func FwpmLayerGetById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt16, layer: CPointer<CPointer<FWPM_LAYER0Abi>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmLayerGetById0 == "on"]
+public unsafe func Windows_FwpmLayerGetById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt16, layer: CPointer<CPointer<FWPM_LAYER0Abi>>): UInt32 {
+    return FwpmLayerGetById0(engineHandle, id, layer)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmLayerGetByKey0 == "on"]
+foreign {
+    func FwpmLayerGetByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, layer: CPointer<CPointer<FWPM_LAYER0Abi>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmLayerGetByKey0 == "on"]
+public unsafe func Windows_FwpmLayerGetByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, layer: CPointer<CPointer<FWPM_LAYER0Abi>>): UInt32 {
+    return FwpmLayerGetByKey0(engineHandle, key, layer)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmLayerGetSecurityInfoByKey0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: key optional
     func FwpmLayerGetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACLAbi>>, sacl: CPointer<CPointer<Win32_Security.ACLAbi>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmLayerGetSecurityInfoByKey0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmLayerGetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACLAbi>>, sacl: CPointer<CPointer<Win32_Security.ACLAbi>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32 {
+    return FwpmLayerGetSecurityInfoByKey0(engineHandle, key, securityInfo, sidOwner, sidGroup, dacl, sacl, securityDescriptor)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmLayerSetSecurityInfoByKey0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: key optional
     // param-hint: sidOwner optional
     // param-hint: sidGroup optional
     // param-hint: dacl optional
     // param-hint: sacl optional
     func FwpmLayerSetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SIDAbi>, sidGroup: CPointer<Win32_Security.SIDAbi>, dacl: CPointer<Win32_Security.ACLAbi>, sacl: CPointer<Win32_Security.ACLAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmLayerSetSecurityInfoByKey0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmLayerSetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SIDAbi>, sidGroup: CPointer<Win32_Security.SIDAbi>, dacl: CPointer<Win32_Security.ACLAbi>, sacl: CPointer<Win32_Security.ACLAbi>): UInt32 {
+    return FwpmLayerSetSecurityInfoByKey0(engineHandle, key, securityInfo, sidOwner, sidGroup, dacl, sacl)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventCreateEnumHandle0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: enumTemplate optional
     func FwpmNetEventCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_NET_EVENT_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<FWPM_NET_EVENT_ENUM_HANDLE>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventCreateEnumHandle0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmNetEventCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_NET_EVENT_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<FWPM_NET_EVENT_ENUM_HANDLE>): UInt32 {
+    return FwpmNetEventCreateEnumHandle0(engineHandle, enumTemplate, enumHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventDestroyEnumHandle0 == "on"]
+foreign {
+    func FwpmNetEventDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_NET_EVENT_ENUM_HANDLE): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventDestroyEnumHandle0 == "on"]
+public unsafe func Windows_FwpmNetEventDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_NET_EVENT_ENUM_HANDLE): UInt32 {
+    return FwpmNetEventDestroyEnumHandle0(engineHandle, enumHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventEnum0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func FwpmNetEventEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_NET_EVENT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_NET_EVENT0Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventEnum0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmNetEventEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_NET_EVENT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_NET_EVENT0Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32 {
+    return FwpmNetEventEnum0(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventEnum1 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func FwpmNetEventEnum1(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_NET_EVENT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_NET_EVENT1Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventEnum1 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmNetEventEnum1(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_NET_EVENT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_NET_EVENT1Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32 {
+    return FwpmNetEventEnum1(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventEnum2 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func FwpmNetEventEnum2(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_NET_EVENT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_NET_EVENT2Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventEnum2 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmNetEventEnum2(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_NET_EVENT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_NET_EVENT2Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32 {
+    return FwpmNetEventEnum2(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventEnum3 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func FwpmNetEventEnum3(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_NET_EVENT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_NET_EVENT3Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventEnum3 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmNetEventEnum3(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_NET_EVENT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_NET_EVENT3Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32 {
+    return FwpmNetEventEnum3(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventEnum4 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func FwpmNetEventEnum4(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_NET_EVENT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_NET_EVENT4Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventEnum4 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmNetEventEnum4(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_NET_EVENT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_NET_EVENT4Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32 {
+    return FwpmNetEventEnum4(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventEnum5 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func FwpmNetEventEnum5(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_NET_EVENT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_NET_EVENT5Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventEnum5 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmNetEventEnum5(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_NET_EVENT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_NET_EVENT5Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32 {
+    return FwpmNetEventEnum5(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventSubscribe0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: context optional
     func FwpmNetEventSubscribe0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_NET_EVENT_SUBSCRIPTION0Abi>, callback: FWPM_NET_EVENT_CALLBACK0, context: CPointer<Unit>, eventsHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventSubscribe0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmNetEventSubscribe0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_NET_EVENT_SUBSCRIPTION0Abi>, callback: FWPM_NET_EVENT_CALLBACK0, context: CPointer<Unit>, eventsHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return FwpmNetEventSubscribe0(engineHandle, subscription, callback, context, eventsHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventSubscribe1 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: context optional
     func FwpmNetEventSubscribe1(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_NET_EVENT_SUBSCRIPTION0Abi>, callback: FWPM_NET_EVENT_CALLBACK1, context: CPointer<Unit>, eventsHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventSubscribe1 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmNetEventSubscribe1(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_NET_EVENT_SUBSCRIPTION0Abi>, callback: FWPM_NET_EVENT_CALLBACK1, context: CPointer<Unit>, eventsHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return FwpmNetEventSubscribe1(engineHandle, subscription, callback, context, eventsHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventSubscribe2 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: context optional
     func FwpmNetEventSubscribe2(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_NET_EVENT_SUBSCRIPTION0Abi>, callback: FWPM_NET_EVENT_CALLBACK2, context: CPointer<Unit>, eventsHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventSubscribe2 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmNetEventSubscribe2(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_NET_EVENT_SUBSCRIPTION0Abi>, callback: FWPM_NET_EVENT_CALLBACK2, context: CPointer<Unit>, eventsHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return FwpmNetEventSubscribe2(engineHandle, subscription, callback, context, eventsHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventSubscribe3 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: context optional
     func FwpmNetEventSubscribe3(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_NET_EVENT_SUBSCRIPTION0Abi>, callback: FWPM_NET_EVENT_CALLBACK3, context: CPointer<Unit>, eventsHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventSubscribe3 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmNetEventSubscribe3(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_NET_EVENT_SUBSCRIPTION0Abi>, callback: FWPM_NET_EVENT_CALLBACK3, context: CPointer<Unit>, eventsHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return FwpmNetEventSubscribe3(engineHandle, subscription, callback, context, eventsHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventSubscribe4 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: context optional
     func FwpmNetEventSubscribe4(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_NET_EVENT_SUBSCRIPTION0Abi>, callback: FWPM_NET_EVENT_CALLBACK4, context: CPointer<Unit>, eventsHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventSubscribe4 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmNetEventSubscribe4(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_NET_EVENT_SUBSCRIPTION0Abi>, callback: FWPM_NET_EVENT_CALLBACK4, context: CPointer<Unit>, eventsHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return FwpmNetEventSubscribe4(engineHandle, subscription, callback, context, eventsHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventSubscriptionsGet0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func FwpmNetEventSubscriptionsGet0(engineHandle: FWPM_ENGINE_HANDLE, entries: CPointer<CPointer<CPointer<FWPM_NET_EVENT_SUBSCRIPTION0Abi>>>, numEntries: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventSubscriptionsGet0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmNetEventSubscriptionsGet0(engineHandle: FWPM_ENGINE_HANDLE, entries: CPointer<CPointer<CPointer<FWPM_NET_EVENT_SUBSCRIPTION0Abi>>>, numEntries: CPointer<UInt32>): UInt32 {
+    return FwpmNetEventSubscriptionsGet0(engineHandle, entries, numEntries)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventUnsubscribe0 == "on"]
+foreign {
+    func FwpmNetEventUnsubscribe0(engineHandle: FWPM_ENGINE_HANDLE, eventsHandle: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventUnsubscribe0 == "on"]
+public unsafe func Windows_FwpmNetEventUnsubscribe0(engineHandle: FWPM_ENGINE_HANDLE, eventsHandle: CPointer<Unit>): UInt32 {
+    return FwpmNetEventUnsubscribe0(engineHandle, eventsHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventsGetSecurityInfo0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func FwpmNetEventsGetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACLAbi>>, sacl: CPointer<CPointer<Win32_Security.ACLAbi>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventsGetSecurityInfo0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmNetEventsGetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACLAbi>>, sacl: CPointer<CPointer<Win32_Security.ACLAbi>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32 {
+    return FwpmNetEventsGetSecurityInfo0(engineHandle, securityInfo, sidOwner, sidGroup, dacl, sacl, securityDescriptor)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventsSetSecurityInfo0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: sidOwner optional
     // param-hint: sidGroup optional
     // param-hint: dacl optional
     // param-hint: sacl optional
     func FwpmNetEventsSetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SIDAbi>, sidGroup: CPointer<Win32_Security.SIDAbi>, dacl: CPointer<Win32_Security.ACLAbi>, sacl: CPointer<Win32_Security.ACLAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmNetEventsSetSecurityInfo0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmNetEventsSetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SIDAbi>, sidGroup: CPointer<Win32_Security.SIDAbi>, dacl: CPointer<Win32_Security.ACLAbi>, sacl: CPointer<Win32_Security.ACLAbi>): UInt32 {
+    return FwpmNetEventsSetSecurityInfo0(engineHandle, securityInfo, sidOwner, sidGroup, dacl, sacl)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderAdd0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: sd optional
     func FwpmProviderAdd0(engineHandle: FWPM_ENGINE_HANDLE, provider: CPointer<FWPM_PROVIDER0Abi>, sd: Win32_Security.PSECURITY_DESCRIPTOR): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderAdd0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmProviderAdd0(engineHandle: FWPM_ENGINE_HANDLE, provider: CPointer<FWPM_PROVIDER0Abi>, sd: Win32_Security.PSECURITY_DESCRIPTOR): UInt32 {
+    return FwpmProviderAdd0(engineHandle, provider, sd)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextAdd0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: sd optional
     // param-hint: id optional
     func FwpmProviderContextAdd0(engineHandle: FWPM_ENGINE_HANDLE, providerContext: CPointer<FWPM_PROVIDER_CONTEXT0Abi>, sd: Win32_Security.PSECURITY_DESCRIPTOR, id: CPointer<UInt64>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextAdd0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmProviderContextAdd0(engineHandle: FWPM_ENGINE_HANDLE, providerContext: CPointer<FWPM_PROVIDER_CONTEXT0Abi>, sd: Win32_Security.PSECURITY_DESCRIPTOR, id: CPointer<UInt64>): UInt32 {
+    return FwpmProviderContextAdd0(engineHandle, providerContext, sd, id)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextAdd1 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: sd optional
     // param-hint: id optional
     func FwpmProviderContextAdd1(engineHandle: FWPM_ENGINE_HANDLE, providerContext: CPointer<FWPM_PROVIDER_CONTEXT1Abi>, sd: Win32_Security.PSECURITY_DESCRIPTOR, id: CPointer<UInt64>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextAdd1 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmProviderContextAdd1(engineHandle: FWPM_ENGINE_HANDLE, providerContext: CPointer<FWPM_PROVIDER_CONTEXT1Abi>, sd: Win32_Security.PSECURITY_DESCRIPTOR, id: CPointer<UInt64>): UInt32 {
+    return FwpmProviderContextAdd1(engineHandle, providerContext, sd, id)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextAdd2 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: sd optional
     // param-hint: id optional
     func FwpmProviderContextAdd2(engineHandle: FWPM_ENGINE_HANDLE, providerContext: CPointer<FWPM_PROVIDER_CONTEXT2Abi>, sd: Win32_Security.PSECURITY_DESCRIPTOR, id: CPointer<UInt64>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextAdd2 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmProviderContextAdd2(engineHandle: FWPM_ENGINE_HANDLE, providerContext: CPointer<FWPM_PROVIDER_CONTEXT2Abi>, sd: Win32_Security.PSECURITY_DESCRIPTOR, id: CPointer<UInt64>): UInt32 {
+    return FwpmProviderContextAdd2(engineHandle, providerContext, sd, id)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextAdd3 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: sd optional
     // param-hint: id optional
     func FwpmProviderContextAdd3(engineHandle: FWPM_ENGINE_HANDLE, providerContext: CPointer<FWPM_PROVIDER_CONTEXT3Abi>, sd: Win32_Security.PSECURITY_DESCRIPTOR, id: CPointer<UInt64>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextAdd3 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmProviderContextAdd3(engineHandle: FWPM_ENGINE_HANDLE, providerContext: CPointer<FWPM_PROVIDER_CONTEXT3Abi>, sd: Win32_Security.PSECURITY_DESCRIPTOR, id: CPointer<UInt64>): UInt32 {
+    return FwpmProviderContextAdd3(engineHandle, providerContext, sd, id)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextCreateEnumHandle0 == "on"]
+foreign {
+    // param-hint: enumTemplate optional
+    func FwpmProviderContextCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_PROVIDER_CONTEXT_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<FWPM_PROVIDER_CONTEXT_ENUM_HANDLE>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextCreateEnumHandle0 == "on"]
+public unsafe func Windows_FwpmProviderContextCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_PROVIDER_CONTEXT_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<FWPM_PROVIDER_CONTEXT_ENUM_HANDLE>): UInt32 {
+    return FwpmProviderContextCreateEnumHandle0(engineHandle, enumTemplate, enumHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextDeleteById0 == "on"]
+foreign {
+    func FwpmProviderContextDeleteById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextDeleteById0 == "on"]
+public unsafe func Windows_FwpmProviderContextDeleteById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64): UInt32 {
+    return FwpmProviderContextDeleteById0(engineHandle, id)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextDeleteByKey0 == "on"]
+foreign {
+    func FwpmProviderContextDeleteByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextDeleteByKey0 == "on"]
+public unsafe func Windows_FwpmProviderContextDeleteByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>): UInt32 {
+    return FwpmProviderContextDeleteByKey0(engineHandle, key)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextDestroyEnumHandle0 == "on"]
+foreign {
+    func FwpmProviderContextDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_PROVIDER_CONTEXT_ENUM_HANDLE): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextDestroyEnumHandle0 == "on"]
+public unsafe func Windows_FwpmProviderContextDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_PROVIDER_CONTEXT_ENUM_HANDLE): UInt32 {
+    return FwpmProviderContextDestroyEnumHandle0(engineHandle, enumHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextEnum0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func FwpmProviderContextEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_PROVIDER_CONTEXT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_PROVIDER_CONTEXT0Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextEnum0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmProviderContextEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_PROVIDER_CONTEXT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_PROVIDER_CONTEXT0Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32 {
+    return FwpmProviderContextEnum0(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextEnum1 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func FwpmProviderContextEnum1(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_PROVIDER_CONTEXT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_PROVIDER_CONTEXT1Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextEnum1 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmProviderContextEnum1(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_PROVIDER_CONTEXT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_PROVIDER_CONTEXT1Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32 {
+    return FwpmProviderContextEnum1(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextEnum2 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func FwpmProviderContextEnum2(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_PROVIDER_CONTEXT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_PROVIDER_CONTEXT2Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextEnum2 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmProviderContextEnum2(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_PROVIDER_CONTEXT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_PROVIDER_CONTEXT2Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32 {
+    return FwpmProviderContextEnum2(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextEnum3 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func FwpmProviderContextEnum3(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_PROVIDER_CONTEXT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_PROVIDER_CONTEXT3Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextEnum3 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmProviderContextEnum3(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_PROVIDER_CONTEXT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_PROVIDER_CONTEXT3Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32 {
+    return FwpmProviderContextEnum3(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextGetById0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func FwpmProviderContextGetById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, providerContext: CPointer<CPointer<FWPM_PROVIDER_CONTEXT0Abi>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextGetById0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmProviderContextGetById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, providerContext: CPointer<CPointer<FWPM_PROVIDER_CONTEXT0Abi>>): UInt32 {
+    return FwpmProviderContextGetById0(engineHandle, id, providerContext)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextGetById1 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func FwpmProviderContextGetById1(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, providerContext: CPointer<CPointer<FWPM_PROVIDER_CONTEXT1Abi>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextGetById1 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmProviderContextGetById1(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, providerContext: CPointer<CPointer<FWPM_PROVIDER_CONTEXT1Abi>>): UInt32 {
+    return FwpmProviderContextGetById1(engineHandle, id, providerContext)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextGetById2 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func FwpmProviderContextGetById2(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, providerContext: CPointer<CPointer<FWPM_PROVIDER_CONTEXT2Abi>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextGetById2 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmProviderContextGetById2(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, providerContext: CPointer<CPointer<FWPM_PROVIDER_CONTEXT2Abi>>): UInt32 {
+    return FwpmProviderContextGetById2(engineHandle, id, providerContext)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextGetById3 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func FwpmProviderContextGetById3(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, providerContext: CPointer<CPointer<FWPM_PROVIDER_CONTEXT3Abi>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextGetById3 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmProviderContextGetById3(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, providerContext: CPointer<CPointer<FWPM_PROVIDER_CONTEXT3Abi>>): UInt32 {
+    return FwpmProviderContextGetById3(engineHandle, id, providerContext)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextGetByKey0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func FwpmProviderContextGetByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, providerContext: CPointer<CPointer<FWPM_PROVIDER_CONTEXT0Abi>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextGetByKey0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmProviderContextGetByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, providerContext: CPointer<CPointer<FWPM_PROVIDER_CONTEXT0Abi>>): UInt32 {
+    return FwpmProviderContextGetByKey0(engineHandle, key, providerContext)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextGetByKey1 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func FwpmProviderContextGetByKey1(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, providerContext: CPointer<CPointer<FWPM_PROVIDER_CONTEXT1Abi>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextGetByKey1 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmProviderContextGetByKey1(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, providerContext: CPointer<CPointer<FWPM_PROVIDER_CONTEXT1Abi>>): UInt32 {
+    return FwpmProviderContextGetByKey1(engineHandle, key, providerContext)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextGetByKey2 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func FwpmProviderContextGetByKey2(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, providerContext: CPointer<CPointer<FWPM_PROVIDER_CONTEXT2Abi>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextGetByKey2 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmProviderContextGetByKey2(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, providerContext: CPointer<CPointer<FWPM_PROVIDER_CONTEXT2Abi>>): UInt32 {
+    return FwpmProviderContextGetByKey2(engineHandle, key, providerContext)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextGetByKey3 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func FwpmProviderContextGetByKey3(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, providerContext: CPointer<CPointer<FWPM_PROVIDER_CONTEXT3Abi>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextGetByKey3 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmProviderContextGetByKey3(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, providerContext: CPointer<CPointer<FWPM_PROVIDER_CONTEXT3Abi>>): UInt32 {
+    return FwpmProviderContextGetByKey3(engineHandle, key, providerContext)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextGetSecurityInfoByKey0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: key optional
     func FwpmProviderContextGetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACLAbi>>, sacl: CPointer<CPointer<Win32_Security.ACLAbi>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextGetSecurityInfoByKey0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmProviderContextGetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACLAbi>>, sacl: CPointer<CPointer<Win32_Security.ACLAbi>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32 {
+    return FwpmProviderContextGetSecurityInfoByKey0(engineHandle, key, securityInfo, sidOwner, sidGroup, dacl, sacl, securityDescriptor)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextSetSecurityInfoByKey0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: key optional
     // param-hint: sidOwner optional
     // param-hint: sidGroup optional
     // param-hint: dacl optional
     // param-hint: sacl optional
     func FwpmProviderContextSetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SIDAbi>, sidGroup: CPointer<Win32_Security.SIDAbi>, dacl: CPointer<Win32_Security.ACLAbi>, sacl: CPointer<Win32_Security.ACLAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextSetSecurityInfoByKey0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmProviderContextSetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SIDAbi>, sidGroup: CPointer<Win32_Security.SIDAbi>, dacl: CPointer<Win32_Security.ACLAbi>, sacl: CPointer<Win32_Security.ACLAbi>): UInt32 {
+    return FwpmProviderContextSetSecurityInfoByKey0(engineHandle, key, securityInfo, sidOwner, sidGroup, dacl, sacl)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextSubscribeChanges0 == "on"]
+foreign {
+    // param-hint: context optional
+    func FwpmProviderContextSubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_PROVIDER_CONTEXT_SUBSCRIPTION0Abi>, callback: FWPM_PROVIDER_CONTEXT_CHANGE_CALLBACK0, context: CPointer<Unit>, changeHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextSubscribeChanges0 == "on"]
+public unsafe func Windows_FwpmProviderContextSubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_PROVIDER_CONTEXT_SUBSCRIPTION0Abi>, callback: FWPM_PROVIDER_CONTEXT_CHANGE_CALLBACK0, context: CPointer<Unit>, changeHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return FwpmProviderContextSubscribeChanges0(engineHandle, subscription, callback, context, changeHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextSubscriptionsGet0 == "on"]
+foreign {
+    func FwpmProviderContextSubscriptionsGet0(engineHandle: FWPM_ENGINE_HANDLE, entries: CPointer<CPointer<CPointer<FWPM_PROVIDER_CONTEXT_SUBSCRIPTION0Abi>>>, numEntries: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextSubscriptionsGet0 == "on"]
+public unsafe func Windows_FwpmProviderContextSubscriptionsGet0(engineHandle: FWPM_ENGINE_HANDLE, entries: CPointer<CPointer<CPointer<FWPM_PROVIDER_CONTEXT_SUBSCRIPTION0Abi>>>, numEntries: CPointer<UInt32>): UInt32 {
+    return FwpmProviderContextSubscriptionsGet0(engineHandle, entries, numEntries)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextUnsubscribeChanges0 == "on"]
+foreign {
+    func FwpmProviderContextUnsubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, changeHandle: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderContextUnsubscribeChanges0 == "on"]
+public unsafe func Windows_FwpmProviderContextUnsubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, changeHandle: CPointer<Unit>): UInt32 {
+    return FwpmProviderContextUnsubscribeChanges0(engineHandle, changeHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderCreateEnumHandle0 == "on"]
+foreign {
+    // param-hint: enumTemplate optional
+    func FwpmProviderCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_PROVIDER_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<FWPM_PROVIDER_ENUM_HANDLE>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderCreateEnumHandle0 == "on"]
+public unsafe func Windows_FwpmProviderCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_PROVIDER_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<FWPM_PROVIDER_ENUM_HANDLE>): UInt32 {
+    return FwpmProviderCreateEnumHandle0(engineHandle, enumTemplate, enumHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderDeleteByKey0 == "on"]
+foreign {
+    func FwpmProviderDeleteByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderDeleteByKey0 == "on"]
+public unsafe func Windows_FwpmProviderDeleteByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>): UInt32 {
+    return FwpmProviderDeleteByKey0(engineHandle, key)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderDestroyEnumHandle0 == "on"]
+foreign {
+    func FwpmProviderDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_PROVIDER_ENUM_HANDLE): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderDestroyEnumHandle0 == "on"]
+public unsafe func Windows_FwpmProviderDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_PROVIDER_ENUM_HANDLE): UInt32 {
+    return FwpmProviderDestroyEnumHandle0(engineHandle, enumHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderEnum0 == "on"]
+foreign {
+    func FwpmProviderEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_PROVIDER_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_PROVIDER0Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderEnum0 == "on"]
+public unsafe func Windows_FwpmProviderEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_PROVIDER_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_PROVIDER0Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32 {
+    return FwpmProviderEnum0(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderGetByKey0 == "on"]
+foreign {
+    func FwpmProviderGetByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, provider: CPointer<CPointer<FWPM_PROVIDER0Abi>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderGetByKey0 == "on"]
+public unsafe func Windows_FwpmProviderGetByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, provider: CPointer<CPointer<FWPM_PROVIDER0Abi>>): UInt32 {
+    return FwpmProviderGetByKey0(engineHandle, key, provider)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderGetSecurityInfoByKey0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: key optional
     func FwpmProviderGetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACLAbi>>, sacl: CPointer<CPointer<Win32_Security.ACLAbi>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderGetSecurityInfoByKey0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmProviderGetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACLAbi>>, sacl: CPointer<CPointer<Win32_Security.ACLAbi>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32 {
+    return FwpmProviderGetSecurityInfoByKey0(engineHandle, key, securityInfo, sidOwner, sidGroup, dacl, sacl, securityDescriptor)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderSetSecurityInfoByKey0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: key optional
     // param-hint: sidOwner optional
     // param-hint: sidGroup optional
     // param-hint: dacl optional
     // param-hint: sacl optional
     func FwpmProviderSetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SIDAbi>, sidGroup: CPointer<Win32_Security.SIDAbi>, dacl: CPointer<Win32_Security.ACLAbi>, sacl: CPointer<Win32_Security.ACLAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderSetSecurityInfoByKey0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmProviderSetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SIDAbi>, sidGroup: CPointer<Win32_Security.SIDAbi>, dacl: CPointer<Win32_Security.ACLAbi>, sacl: CPointer<Win32_Security.ACLAbi>): UInt32 {
+    return FwpmProviderSetSecurityInfoByKey0(engineHandle, key, securityInfo, sidOwner, sidGroup, dacl, sacl)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderSubscribeChanges0 == "on"]
+foreign {
+    // param-hint: context optional
+    func FwpmProviderSubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_PROVIDER_SUBSCRIPTION0Abi>, callback: FWPM_PROVIDER_CHANGE_CALLBACK0, context: CPointer<Unit>, changeHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderSubscribeChanges0 == "on"]
+public unsafe func Windows_FwpmProviderSubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_PROVIDER_SUBSCRIPTION0Abi>, callback: FWPM_PROVIDER_CHANGE_CALLBACK0, context: CPointer<Unit>, changeHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return FwpmProviderSubscribeChanges0(engineHandle, subscription, callback, context, changeHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderSubscriptionsGet0 == "on"]
+foreign {
+    func FwpmProviderSubscriptionsGet0(engineHandle: FWPM_ENGINE_HANDLE, entries: CPointer<CPointer<CPointer<FWPM_PROVIDER_SUBSCRIPTION0Abi>>>, numEntries: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderSubscriptionsGet0 == "on"]
+public unsafe func Windows_FwpmProviderSubscriptionsGet0(engineHandle: FWPM_ENGINE_HANDLE, entries: CPointer<CPointer<CPointer<FWPM_PROVIDER_SUBSCRIPTION0Abi>>>, numEntries: CPointer<UInt32>): UInt32 {
+    return FwpmProviderSubscriptionsGet0(engineHandle, entries, numEntries)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderUnsubscribeChanges0 == "on"]
+foreign {
+    func FwpmProviderUnsubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, changeHandle: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmProviderUnsubscribeChanges0 == "on"]
+public unsafe func Windows_FwpmProviderUnsubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, changeHandle: CPointer<Unit>): UInt32 {
+    return FwpmProviderUnsubscribeChanges0(engineHandle, changeHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSessionCreateEnumHandle0 == "on"]
+foreign {
+    // param-hint: enumTemplate optional
+    func FwpmSessionCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_SESSION_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<FWPM_SESSION_ENUM_HANDLE>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSessionCreateEnumHandle0 == "on"]
+public unsafe func Windows_FwpmSessionCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_SESSION_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<FWPM_SESSION_ENUM_HANDLE>): UInt32 {
+    return FwpmSessionCreateEnumHandle0(engineHandle, enumTemplate, enumHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSessionDestroyEnumHandle0 == "on"]
+foreign {
+    func FwpmSessionDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_SESSION_ENUM_HANDLE): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSessionDestroyEnumHandle0 == "on"]
+public unsafe func Windows_FwpmSessionDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_SESSION_ENUM_HANDLE): UInt32 {
+    return FwpmSessionDestroyEnumHandle0(engineHandle, enumHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSessionEnum0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func FwpmSessionEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_SESSION_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_SESSION0Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSessionEnum0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmSessionEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_SESSION_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_SESSION0Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32 {
+    return FwpmSessionEnum0(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSubLayerAdd0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: sd optional
     func FwpmSubLayerAdd0(engineHandle: FWPM_ENGINE_HANDLE, subLayer: CPointer<FWPM_SUBLAYER0Abi>, sd: Win32_Security.PSECURITY_DESCRIPTOR): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSubLayerAdd0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmSubLayerAdd0(engineHandle: FWPM_ENGINE_HANDLE, subLayer: CPointer<FWPM_SUBLAYER0Abi>, sd: Win32_Security.PSECURITY_DESCRIPTOR): UInt32 {
+    return FwpmSubLayerAdd0(engineHandle, subLayer, sd)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSubLayerCreateEnumHandle0 == "on"]
+foreign {
+    // param-hint: enumTemplate optional
+    func FwpmSubLayerCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_SUBLAYER_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<FWPM_SUBLAYER_ENUM_HANDLE>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSubLayerCreateEnumHandle0 == "on"]
+public unsafe func Windows_FwpmSubLayerCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_SUBLAYER_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<FWPM_SUBLAYER_ENUM_HANDLE>): UInt32 {
+    return FwpmSubLayerCreateEnumHandle0(engineHandle, enumTemplate, enumHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSubLayerDeleteByKey0 == "on"]
+foreign {
+    func FwpmSubLayerDeleteByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSubLayerDeleteByKey0 == "on"]
+public unsafe func Windows_FwpmSubLayerDeleteByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>): UInt32 {
+    return FwpmSubLayerDeleteByKey0(engineHandle, key)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSubLayerDestroyEnumHandle0 == "on"]
+foreign {
+    func FwpmSubLayerDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_SUBLAYER_ENUM_HANDLE): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSubLayerDestroyEnumHandle0 == "on"]
+public unsafe func Windows_FwpmSubLayerDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_SUBLAYER_ENUM_HANDLE): UInt32 {
+    return FwpmSubLayerDestroyEnumHandle0(engineHandle, enumHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSubLayerEnum0 == "on"]
+foreign {
+    func FwpmSubLayerEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_SUBLAYER_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_SUBLAYER0Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSubLayerEnum0 == "on"]
+public unsafe func Windows_FwpmSubLayerEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_SUBLAYER_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_SUBLAYER0Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32 {
+    return FwpmSubLayerEnum0(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSubLayerGetByKey0 == "on"]
+foreign {
+    func FwpmSubLayerGetByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, subLayer: CPointer<CPointer<FWPM_SUBLAYER0Abi>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSubLayerGetByKey0 == "on"]
+public unsafe func Windows_FwpmSubLayerGetByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, subLayer: CPointer<CPointer<FWPM_SUBLAYER0Abi>>): UInt32 {
+    return FwpmSubLayerGetByKey0(engineHandle, key, subLayer)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSubLayerGetSecurityInfoByKey0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: key optional
     func FwpmSubLayerGetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACLAbi>>, sacl: CPointer<CPointer<Win32_Security.ACLAbi>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSubLayerGetSecurityInfoByKey0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmSubLayerGetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACLAbi>>, sacl: CPointer<CPointer<Win32_Security.ACLAbi>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32 {
+    return FwpmSubLayerGetSecurityInfoByKey0(engineHandle, key, securityInfo, sidOwner, sidGroup, dacl, sacl, securityDescriptor)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSubLayerSetSecurityInfoByKey0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: key optional
     // param-hint: sidOwner optional
     // param-hint: sidGroup optional
     // param-hint: dacl optional
     // param-hint: sacl optional
     func FwpmSubLayerSetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SIDAbi>, sidGroup: CPointer<Win32_Security.SIDAbi>, dacl: CPointer<Win32_Security.ACLAbi>, sacl: CPointer<Win32_Security.ACLAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSubLayerSetSecurityInfoByKey0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmSubLayerSetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SIDAbi>, sidGroup: CPointer<Win32_Security.SIDAbi>, dacl: CPointer<Win32_Security.ACLAbi>, sacl: CPointer<Win32_Security.ACLAbi>): UInt32 {
+    return FwpmSubLayerSetSecurityInfoByKey0(engineHandle, key, securityInfo, sidOwner, sidGroup, dacl, sacl)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSubLayerSubscribeChanges0 == "on"]
+foreign {
+    // param-hint: context optional
+    func FwpmSubLayerSubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_SUBLAYER_SUBSCRIPTION0Abi>, callback: FWPM_SUBLAYER_CHANGE_CALLBACK0, context: CPointer<Unit>, changeHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSubLayerSubscribeChanges0 == "on"]
+public unsafe func Windows_FwpmSubLayerSubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_SUBLAYER_SUBSCRIPTION0Abi>, callback: FWPM_SUBLAYER_CHANGE_CALLBACK0, context: CPointer<Unit>, changeHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return FwpmSubLayerSubscribeChanges0(engineHandle, subscription, callback, context, changeHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSubLayerSubscriptionsGet0 == "on"]
+foreign {
+    func FwpmSubLayerSubscriptionsGet0(engineHandle: FWPM_ENGINE_HANDLE, entries: CPointer<CPointer<CPointer<FWPM_SUBLAYER_SUBSCRIPTION0Abi>>>, numEntries: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSubLayerSubscriptionsGet0 == "on"]
+public unsafe func Windows_FwpmSubLayerSubscriptionsGet0(engineHandle: FWPM_ENGINE_HANDLE, entries: CPointer<CPointer<CPointer<FWPM_SUBLAYER_SUBSCRIPTION0Abi>>>, numEntries: CPointer<UInt32>): UInt32 {
+    return FwpmSubLayerSubscriptionsGet0(engineHandle, entries, numEntries)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSubLayerUnsubscribeChanges0 == "on"]
+foreign {
+    func FwpmSubLayerUnsubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, changeHandle: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSubLayerUnsubscribeChanges0 == "on"]
+public unsafe func Windows_FwpmSubLayerUnsubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, changeHandle: CPointer<Unit>): UInt32 {
+    return FwpmSubLayerUnsubscribeChanges0(engineHandle, changeHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSystemPortsGet0 == "on"]
+foreign {
+    // param-hint: engineHandle optional
+    func FwpmSystemPortsGet0(engineHandle: FWPM_ENGINE_HANDLE, sysPorts: CPointer<CPointer<FWPM_SYSTEM_PORTS0Abi>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSystemPortsGet0 == "on"]
+public unsafe func Windows_FwpmSystemPortsGet0(engineHandle: FWPM_ENGINE_HANDLE, sysPorts: CPointer<CPointer<FWPM_SYSTEM_PORTS0Abi>>): UInt32 {
+    return FwpmSystemPortsGet0(engineHandle, sysPorts)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSystemPortsSubscribe0 == "on"]
+foreign {
+    // param-hint: engineHandle optional
+    // param-hint: reserved optional reserved
+    // param-hint: context optional
+    func FwpmSystemPortsSubscribe0(engineHandle: FWPM_ENGINE_HANDLE, reserved: CPointer<Unit>, callback: FWPM_SYSTEM_PORTS_CALLBACK0, context: CPointer<Unit>, sysPortsHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSystemPortsSubscribe0 == "on"]
+public unsafe func Windows_FwpmSystemPortsSubscribe0(engineHandle: FWPM_ENGINE_HANDLE, reserved: CPointer<Unit>, callback: FWPM_SYSTEM_PORTS_CALLBACK0, context: CPointer<Unit>, sysPortsHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return FwpmSystemPortsSubscribe0(engineHandle, reserved, callback, context, sysPortsHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSystemPortsUnsubscribe0 == "on"]
+foreign {
+    // param-hint: engineHandle optional
+    func FwpmSystemPortsUnsubscribe0(engineHandle: FWPM_ENGINE_HANDLE, sysPortsHandle: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmSystemPortsUnsubscribe0 == "on"]
+public unsafe func Windows_FwpmSystemPortsUnsubscribe0(engineHandle: FWPM_ENGINE_HANDLE, sysPortsHandle: CPointer<Unit>): UInt32 {
+    return FwpmSystemPortsUnsubscribe0(engineHandle, sysPortsHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmTransactionAbort0 == "on"]
+foreign {
+    func FwpmTransactionAbort0(engineHandle: FWPM_ENGINE_HANDLE): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmTransactionAbort0 == "on"]
+public unsafe func Windows_FwpmTransactionAbort0(engineHandle: FWPM_ENGINE_HANDLE): UInt32 {
+    return FwpmTransactionAbort0(engineHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmTransactionBegin0 == "on"]
+foreign {
+    func FwpmTransactionBegin0(engineHandle: FWPM_ENGINE_HANDLE, flags: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmTransactionBegin0 == "on"]
+public unsafe func Windows_FwpmTransactionBegin0(engineHandle: FWPM_ENGINE_HANDLE, flags: UInt32): UInt32 {
+    return FwpmTransactionBegin0(engineHandle, flags)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmTransactionCommit0 == "on"]
+foreign {
+    func FwpmTransactionCommit0(engineHandle: FWPM_ENGINE_HANDLE): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmTransactionCommit0 == "on"]
+public unsafe func Windows_FwpmTransactionCommit0(engineHandle: FWPM_ENGINE_HANDLE): UInt32 {
+    return FwpmTransactionCommit0(engineHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmvSwitchEventSubscribe0 == "on"]
+foreign {
+    // param-hint: context optional
+    func FwpmvSwitchEventSubscribe0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_VSWITCH_EVENT_SUBSCRIPTION0Abi>, callback: FWPM_VSWITCH_EVENT_CALLBACK0, context: CPointer<Unit>, subscriptionHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmvSwitchEventSubscribe0 == "on"]
+public unsafe func Windows_FwpmvSwitchEventSubscribe0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_VSWITCH_EVENT_SUBSCRIPTION0Abi>, callback: FWPM_VSWITCH_EVENT_CALLBACK0, context: CPointer<Unit>, subscriptionHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return FwpmvSwitchEventSubscribe0(engineHandle, subscription, callback, context, subscriptionHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmvSwitchEventUnsubscribe0 == "on"]
+foreign {
+    func FwpmvSwitchEventUnsubscribe0(engineHandle: FWPM_ENGINE_HANDLE, subscriptionHandle: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmvSwitchEventUnsubscribe0 == "on"]
+public unsafe func Windows_FwpmvSwitchEventUnsubscribe0(engineHandle: FWPM_ENGINE_HANDLE, subscriptionHandle: CPointer<Unit>): UInt32 {
+    return FwpmvSwitchEventUnsubscribe0(engineHandle, subscriptionHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmvSwitchEventsGetSecurityInfo0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func FwpmvSwitchEventsGetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACLAbi>>, sacl: CPointer<CPointer<Win32_Security.ACLAbi>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmvSwitchEventsGetSecurityInfo0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmvSwitchEventsGetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACLAbi>>, sacl: CPointer<CPointer<Win32_Security.ACLAbi>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32 {
+    return FwpmvSwitchEventsGetSecurityInfo0(engineHandle, securityInfo, sidOwner, sidGroup, dacl, sacl, securityDescriptor)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmvSwitchEventsSetSecurityInfo0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: sidOwner optional
     // param-hint: sidGroup optional
     // param-hint: dacl optional
     // param-hint: sacl optional
     func FwpmvSwitchEventsSetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SIDAbi>, sidGroup: CPointer<Win32_Security.SIDAbi>, dacl: CPointer<Win32_Security.ACLAbi>, sacl: CPointer<Win32_Security.ACLAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmvSwitchEventsSetSecurityInfo0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmvSwitchEventsSetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SIDAbi>, sidGroup: CPointer<Win32_Security.SIDAbi>, dacl: CPointer<Win32_Security.ACLAbi>, sacl: CPointer<Win32_Security.ACLAbi>): UInt32 {
+    return FwpmvSwitchEventsSetSecurityInfo0(engineHandle, securityInfo, sidOwner, sidGroup, dacl, sacl)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecDospGetSecurityInfo0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func IPsecDospGetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACLAbi>>, sacl: CPointer<CPointer<Win32_Security.ACLAbi>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecDospGetSecurityInfo0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_IPsecDospGetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACLAbi>>, sacl: CPointer<CPointer<Win32_Security.ACLAbi>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32 {
+    return IPsecDospGetSecurityInfo0(engineHandle, securityInfo, sidOwner, sidGroup, dacl, sacl, securityDescriptor)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecDospGetStatistics0 == "on"]
+foreign {
+    func IPsecDospGetStatistics0(engineHandle: FWPM_ENGINE_HANDLE, idpStatistics: CPointer<IPSEC_DOSP_STATISTICS0Abi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecDospGetStatistics0 == "on"]
+public unsafe func Windows_IPsecDospGetStatistics0(engineHandle: FWPM_ENGINE_HANDLE, idpStatistics: CPointer<IPSEC_DOSP_STATISTICS0Abi>): UInt32 {
+    return IPsecDospGetStatistics0(engineHandle, idpStatistics)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecDospSetSecurityInfo0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: sidOwner optional
     // param-hint: sidGroup optional
     // param-hint: dacl optional
     // param-hint: sacl optional
     func IPsecDospSetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SIDAbi>, sidGroup: CPointer<Win32_Security.SIDAbi>, dacl: CPointer<Win32_Security.ACLAbi>, sacl: CPointer<Win32_Security.ACLAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecDospSetSecurityInfo0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_IPsecDospSetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SIDAbi>, sidGroup: CPointer<Win32_Security.SIDAbi>, dacl: CPointer<Win32_Security.ACLAbi>, sacl: CPointer<Win32_Security.ACLAbi>): UInt32 {
+    return IPsecDospSetSecurityInfo0(engineHandle, securityInfo, sidOwner, sidGroup, dacl, sacl)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecDospStateCreateEnumHandle0 == "on"]
+foreign {
+    // param-hint: enumTemplate optional
+    func IPsecDospStateCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<IPSEC_DOSP_STATE_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<IPSEC_DOSP_STATE_ENUM_HANDLE>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecDospStateCreateEnumHandle0 == "on"]
+public unsafe func Windows_IPsecDospStateCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<IPSEC_DOSP_STATE_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<IPSEC_DOSP_STATE_ENUM_HANDLE>): UInt32 {
+    return IPsecDospStateCreateEnumHandle0(engineHandle, enumTemplate, enumHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecDospStateDestroyEnumHandle0 == "on"]
+foreign {
+    func IPsecDospStateDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IPSEC_DOSP_STATE_ENUM_HANDLE): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecDospStateDestroyEnumHandle0 == "on"]
+public unsafe func Windows_IPsecDospStateDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IPSEC_DOSP_STATE_ENUM_HANDLE): UInt32 {
+    return IPsecDospStateDestroyEnumHandle0(engineHandle, enumHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecDospStateEnum0 == "on"]
+foreign {
+    func IPsecDospStateEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IPSEC_DOSP_STATE_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<IPSEC_DOSP_STATE0Abi>>>, numEntries: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecDospStateEnum0 == "on"]
+public unsafe func Windows_IPsecDospStateEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IPSEC_DOSP_STATE_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<IPSEC_DOSP_STATE0Abi>>>, numEntries: CPointer<UInt32>): UInt32 {
+    return IPsecDospStateEnum0(engineHandle, enumHandle, numEntriesRequested, entries, numEntries)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecGetStatistics0 == "on"]
+foreign {
+    func IPsecGetStatistics0(engineHandle: FWPM_ENGINE_HANDLE, ipsecStatistics: CPointer<IPSEC_STATISTICS0Abi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecGetStatistics0 == "on"]
+public unsafe func Windows_IPsecGetStatistics0(engineHandle: FWPM_ENGINE_HANDLE, ipsecStatistics: CPointer<IPSEC_STATISTICS0Abi>): UInt32 {
+    return IPsecGetStatistics0(engineHandle, ipsecStatistics)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecGetStatistics1 == "on"]
+foreign {
+    func IPsecGetStatistics1(engineHandle: FWPM_ENGINE_HANDLE, ipsecStatistics: CPointer<IPSEC_STATISTICS1Abi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecGetStatistics1 == "on"]
+public unsafe func Windows_IPsecGetStatistics1(engineHandle: FWPM_ENGINE_HANDLE, ipsecStatistics: CPointer<IPSEC_STATISTICS1Abi>): UInt32 {
+    return IPsecGetStatistics1(engineHandle, ipsecStatistics)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecKeyManagerAddAndRegister0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func IPsecKeyManagerAddAndRegister0(engineHandle: FWPM_ENGINE_HANDLE, keyManager: CPointer<IPSEC_KEY_MANAGER0Abi>, keyManagerCallbacks: CPointer<IPSEC_KEY_MANAGER_CALLBACKS0Abi>, keyMgmtHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecKeyManagerAddAndRegister0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_IPsecKeyManagerAddAndRegister0(engineHandle: FWPM_ENGINE_HANDLE, keyManager: CPointer<IPSEC_KEY_MANAGER0Abi>, keyManagerCallbacks: CPointer<IPSEC_KEY_MANAGER_CALLBACKS0Abi>, keyMgmtHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return IPsecKeyManagerAddAndRegister0(engineHandle, keyManager, keyManagerCallbacks, keyMgmtHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecKeyManagerGetSecurityInfoByKey0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: reserved optional reserved
     func IPsecKeyManagerGetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, reserved: CPointer<Unit>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACLAbi>>, sacl: CPointer<CPointer<Win32_Security.ACLAbi>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecKeyManagerGetSecurityInfoByKey0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_IPsecKeyManagerGetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, reserved: CPointer<Unit>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACLAbi>>, sacl: CPointer<CPointer<Win32_Security.ACLAbi>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32 {
+    return IPsecKeyManagerGetSecurityInfoByKey0(engineHandle, reserved, securityInfo, sidOwner, sidGroup, dacl, sacl, securityDescriptor)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecKeyManagerSetSecurityInfoByKey0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: reserved optional reserved
     // param-hint: sidOwner optional
     // param-hint: sidGroup optional
     // param-hint: dacl optional
     // param-hint: sacl optional
     func IPsecKeyManagerSetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, reserved: CPointer<Unit>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SIDAbi>, sidGroup: CPointer<Win32_Security.SIDAbi>, dacl: CPointer<Win32_Security.ACLAbi>, sacl: CPointer<Win32_Security.ACLAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecKeyManagerSetSecurityInfoByKey0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_IPsecKeyManagerSetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, reserved: CPointer<Unit>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SIDAbi>, sidGroup: CPointer<Win32_Security.SIDAbi>, dacl: CPointer<Win32_Security.ACLAbi>, sacl: CPointer<Win32_Security.ACLAbi>): UInt32 {
+    return IPsecKeyManagerSetSecurityInfoByKey0(engineHandle, reserved, securityInfo, sidOwner, sidGroup, dacl, sacl)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecKeyManagerUnregisterAndDelete0 == "on"]
+foreign {
+    func IPsecKeyManagerUnregisterAndDelete0(engineHandle: FWPM_ENGINE_HANDLE, keyMgmtHandle: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecKeyManagerUnregisterAndDelete0 == "on"]
+public unsafe func Windows_IPsecKeyManagerUnregisterAndDelete0(engineHandle: FWPM_ENGINE_HANDLE, keyMgmtHandle: CPointer<Unit>): UInt32 {
+    return IPsecKeyManagerUnregisterAndDelete0(engineHandle, keyMgmtHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecKeyManagersGet0 == "on"]
+foreign {
+    func IPsecKeyManagersGet0(engineHandle: FWPM_ENGINE_HANDLE, entries: CPointer<CPointer<CPointer<IPSEC_KEY_MANAGER0Abi>>>, numEntries: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecKeyManagersGet0 == "on"]
+public unsafe func Windows_IPsecKeyManagersGet0(engineHandle: FWPM_ENGINE_HANDLE, entries: CPointer<CPointer<CPointer<IPSEC_KEY_MANAGER0Abi>>>, numEntries: CPointer<UInt32>): UInt32 {
+    return IPsecKeyManagersGet0(engineHandle, entries, numEntries)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextAddInbound0 == "on"]
+foreign {
+    func IPsecSaContextAddInbound0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, inboundBundle: CPointer<IPSEC_SA_BUNDLE0Abi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextAddInbound0 == "on"]
+public unsafe func Windows_IPsecSaContextAddInbound0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, inboundBundle: CPointer<IPSEC_SA_BUNDLE0Abi>): UInt32 {
+    return IPsecSaContextAddInbound0(engineHandle, id, inboundBundle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextAddInbound1 == "on"]
+foreign {
+    func IPsecSaContextAddInbound1(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, inboundBundle: CPointer<IPSEC_SA_BUNDLE1Abi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextAddInbound1 == "on"]
+public unsafe func Windows_IPsecSaContextAddInbound1(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, inboundBundle: CPointer<IPSEC_SA_BUNDLE1Abi>): UInt32 {
+    return IPsecSaContextAddInbound1(engineHandle, id, inboundBundle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextAddOutbound0 == "on"]
+foreign {
+    func IPsecSaContextAddOutbound0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, outboundBundle: CPointer<IPSEC_SA_BUNDLE0Abi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextAddOutbound0 == "on"]
+public unsafe func Windows_IPsecSaContextAddOutbound0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, outboundBundle: CPointer<IPSEC_SA_BUNDLE0Abi>): UInt32 {
+    return IPsecSaContextAddOutbound0(engineHandle, id, outboundBundle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextAddOutbound1 == "on"]
+foreign {
+    func IPsecSaContextAddOutbound1(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, outboundBundle: CPointer<IPSEC_SA_BUNDLE1Abi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextAddOutbound1 == "on"]
+public unsafe func Windows_IPsecSaContextAddOutbound1(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, outboundBundle: CPointer<IPSEC_SA_BUNDLE1Abi>): UInt32 {
+    return IPsecSaContextAddOutbound1(engineHandle, id, outboundBundle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextCreate0 == "on"]
+foreign {
+    // param-hint: inboundFilterId optional
+    func IPsecSaContextCreate0(engineHandle: FWPM_ENGINE_HANDLE, outboundTraffic: CPointer<IPSEC_TRAFFIC0Abi>, inboundFilterId: CPointer<UInt64>, id: CPointer<UInt64>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextCreate0 == "on"]
+public unsafe func Windows_IPsecSaContextCreate0(engineHandle: FWPM_ENGINE_HANDLE, outboundTraffic: CPointer<IPSEC_TRAFFIC0Abi>, inboundFilterId: CPointer<UInt64>, id: CPointer<UInt64>): UInt32 {
+    return IPsecSaContextCreate0(engineHandle, outboundTraffic, inboundFilterId, id)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextCreate1 == "on"]
+foreign {
+    // param-hint: virtualIfTunnelInfo optional
+    // param-hint: inboundFilterId optional
+    func IPsecSaContextCreate1(engineHandle: FWPM_ENGINE_HANDLE, outboundTraffic: CPointer<IPSEC_TRAFFIC1Abi>, virtualIfTunnelInfo: CPointer<IPSEC_VIRTUAL_IF_TUNNEL_INFO0Abi>, inboundFilterId: CPointer<UInt64>, id: CPointer<UInt64>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextCreate1 == "on"]
+public unsafe func Windows_IPsecSaContextCreate1(engineHandle: FWPM_ENGINE_HANDLE, outboundTraffic: CPointer<IPSEC_TRAFFIC1Abi>, virtualIfTunnelInfo: CPointer<IPSEC_VIRTUAL_IF_TUNNEL_INFO0Abi>, inboundFilterId: CPointer<UInt64>, id: CPointer<UInt64>): UInt32 {
+    return IPsecSaContextCreate1(engineHandle, outboundTraffic, virtualIfTunnelInfo, inboundFilterId, id)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextCreateEnumHandle0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: enumTemplate optional
     func IPsecSaContextCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<IPSEC_SA_CONTEXT_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<IPSEC_SA_CONTEXT_ENUM_HANDLE>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextCreateEnumHandle0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_IPsecSaContextCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<IPSEC_SA_CONTEXT_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<IPSEC_SA_CONTEXT_ENUM_HANDLE>): UInt32 {
+    return IPsecSaContextCreateEnumHandle0(engineHandle, enumTemplate, enumHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextDeleteById0 == "on"]
+foreign {
+    func IPsecSaContextDeleteById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextDeleteById0 == "on"]
+public unsafe func Windows_IPsecSaContextDeleteById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64): UInt32 {
+    return IPsecSaContextDeleteById0(engineHandle, id)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextDestroyEnumHandle0 == "on"]
+foreign {
+    func IPsecSaContextDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IPSEC_SA_CONTEXT_ENUM_HANDLE): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextDestroyEnumHandle0 == "on"]
+public unsafe func Windows_IPsecSaContextDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IPSEC_SA_CONTEXT_ENUM_HANDLE): UInt32 {
+    return IPsecSaContextDestroyEnumHandle0(engineHandle, enumHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextEnum0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func IPsecSaContextEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IPSEC_SA_CONTEXT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<IPSEC_SA_CONTEXT0Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextEnum0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_IPsecSaContextEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IPSEC_SA_CONTEXT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<IPSEC_SA_CONTEXT0Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32 {
+    return IPsecSaContextEnum0(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextEnum1 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func IPsecSaContextEnum1(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IPSEC_SA_CONTEXT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<IPSEC_SA_CONTEXT1Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextEnum1 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_IPsecSaContextEnum1(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IPSEC_SA_CONTEXT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<IPSEC_SA_CONTEXT1Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32 {
+    return IPsecSaContextEnum1(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextExpire0 == "on"]
+foreign {
+    func IPsecSaContextExpire0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextExpire0 == "on"]
+public unsafe func Windows_IPsecSaContextExpire0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64): UInt32 {
+    return IPsecSaContextExpire0(engineHandle, id)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextGetById0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func IPsecSaContextGetById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, saContext: CPointer<CPointer<IPSEC_SA_CONTEXT0Abi>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextGetById0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_IPsecSaContextGetById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, saContext: CPointer<CPointer<IPSEC_SA_CONTEXT0Abi>>): UInt32 {
+    return IPsecSaContextGetById0(engineHandle, id, saContext)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextGetById1 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func IPsecSaContextGetById1(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, saContext: CPointer<CPointer<IPSEC_SA_CONTEXT1Abi>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextGetById1 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_IPsecSaContextGetById1(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, saContext: CPointer<CPointer<IPSEC_SA_CONTEXT1Abi>>): UInt32 {
+    return IPsecSaContextGetById1(engineHandle, id, saContext)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextGetSpi0 == "on"]
+foreign {
+    func IPsecSaContextGetSpi0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, getSpi: CPointer<IPSEC_GETSPI0Abi>, inboundSpi: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextGetSpi0 == "on"]
+public unsafe func Windows_IPsecSaContextGetSpi0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, getSpi: CPointer<IPSEC_GETSPI0Abi>, inboundSpi: CPointer<UInt32>): UInt32 {
+    return IPsecSaContextGetSpi0(engineHandle, id, getSpi, inboundSpi)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextGetSpi1 == "on"]
+foreign {
+    func IPsecSaContextGetSpi1(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, getSpi: CPointer<IPSEC_GETSPI1Abi>, inboundSpi: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextGetSpi1 == "on"]
+public unsafe func Windows_IPsecSaContextGetSpi1(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, getSpi: CPointer<IPSEC_GETSPI1Abi>, inboundSpi: CPointer<UInt32>): UInt32 {
+    return IPsecSaContextGetSpi1(engineHandle, id, getSpi, inboundSpi)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextSetSpi0 == "on"]
+foreign {
+    func IPsecSaContextSetSpi0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, getSpi: CPointer<IPSEC_GETSPI1Abi>, inboundSpi: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextSetSpi0 == "on"]
+public unsafe func Windows_IPsecSaContextSetSpi0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, getSpi: CPointer<IPSEC_GETSPI1Abi>, inboundSpi: UInt32): UInt32 {
+    return IPsecSaContextSetSpi0(engineHandle, id, getSpi, inboundSpi)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextSubscribe0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: context optional
     func IPsecSaContextSubscribe0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<IPSEC_SA_CONTEXT_SUBSCRIPTION0Abi>, callback: IPSEC_SA_CONTEXT_CALLBACK0, context: CPointer<Unit>, eventsHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextSubscribe0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_IPsecSaContextSubscribe0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<IPSEC_SA_CONTEXT_SUBSCRIPTION0Abi>, callback: IPSEC_SA_CONTEXT_CALLBACK0, context: CPointer<Unit>, eventsHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return IPsecSaContextSubscribe0(engineHandle, subscription, callback, context, eventsHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextSubscriptionsGet0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func IPsecSaContextSubscriptionsGet0(engineHandle: FWPM_ENGINE_HANDLE, entries: CPointer<CPointer<CPointer<IPSEC_SA_CONTEXT_SUBSCRIPTION0Abi>>>, numEntries: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextSubscriptionsGet0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_IPsecSaContextSubscriptionsGet0(engineHandle: FWPM_ENGINE_HANDLE, entries: CPointer<CPointer<CPointer<IPSEC_SA_CONTEXT_SUBSCRIPTION0Abi>>>, numEntries: CPointer<UInt32>): UInt32 {
+    return IPsecSaContextSubscriptionsGet0(engineHandle, entries, numEntries)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextUnsubscribe0 == "on"]
+foreign {
+    func IPsecSaContextUnsubscribe0(engineHandle: FWPM_ENGINE_HANDLE, eventsHandle: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextUnsubscribe0 == "on"]
+public unsafe func Windows_IPsecSaContextUnsubscribe0(engineHandle: FWPM_ENGINE_HANDLE, eventsHandle: CPointer<Unit>): UInt32 {
+    return IPsecSaContextUnsubscribe0(engineHandle, eventsHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextUpdate0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func IPsecSaContextUpdate0(engineHandle: FWPM_ENGINE_HANDLE, flags: UInt64, newValues: CPointer<IPSEC_SA_CONTEXT1Abi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaContextUpdate0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_IPsecSaContextUpdate0(engineHandle: FWPM_ENGINE_HANDLE, flags: UInt64, newValues: CPointer<IPSEC_SA_CONTEXT1Abi>): UInt32 {
+    return IPsecSaContextUpdate0(engineHandle, flags, newValues)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaCreateEnumHandle0 == "on"]
+foreign {
+    // param-hint: enumTemplate optional
+    func IPsecSaCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<IPSEC_SA_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<IPSEC_SA_ENUM_HANDLE>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaCreateEnumHandle0 == "on"]
+public unsafe func Windows_IPsecSaCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<IPSEC_SA_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<IPSEC_SA_ENUM_HANDLE>): UInt32 {
+    return IPsecSaCreateEnumHandle0(engineHandle, enumTemplate, enumHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaDbGetSecurityInfo0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func IPsecSaDbGetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACLAbi>>, sacl: CPointer<CPointer<Win32_Security.ACLAbi>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaDbGetSecurityInfo0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_IPsecSaDbGetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACLAbi>>, sacl: CPointer<CPointer<Win32_Security.ACLAbi>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32 {
+    return IPsecSaDbGetSecurityInfo0(engineHandle, securityInfo, sidOwner, sidGroup, dacl, sacl, securityDescriptor)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaDbSetSecurityInfo0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: sidOwner optional
     // param-hint: sidGroup optional
     // param-hint: dacl optional
     // param-hint: sacl optional
     func IPsecSaDbSetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SIDAbi>, sidGroup: CPointer<Win32_Security.SIDAbi>, dacl: CPointer<Win32_Security.ACLAbi>, sacl: CPointer<Win32_Security.ACLAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaDbSetSecurityInfo0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_IPsecSaDbSetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SIDAbi>, sidGroup: CPointer<Win32_Security.SIDAbi>, dacl: CPointer<Win32_Security.ACLAbi>, sacl: CPointer<Win32_Security.ACLAbi>): UInt32 {
+    return IPsecSaDbSetSecurityInfo0(engineHandle, securityInfo, sidOwner, sidGroup, dacl, sacl)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaDestroyEnumHandle0 == "on"]
+foreign {
+    func IPsecSaDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IPSEC_SA_ENUM_HANDLE): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaDestroyEnumHandle0 == "on"]
+public unsafe func Windows_IPsecSaDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IPSEC_SA_ENUM_HANDLE): UInt32 {
+    return IPsecSaDestroyEnumHandle0(engineHandle, enumHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaEnum0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func IPsecSaEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IPSEC_SA_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<IPSEC_SA_DETAILS0Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaEnum0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_IPsecSaEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IPSEC_SA_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<IPSEC_SA_DETAILS0Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32 {
+    return IPsecSaEnum0(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaEnum1 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func IPsecSaEnum1(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IPSEC_SA_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<IPSEC_SA_DETAILS1Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IPsecSaEnum1 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_IPsecSaEnum1(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IPSEC_SA_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<IPSEC_SA_DETAILS1Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32 {
+    return IPsecSaEnum1(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IkeextGetStatistics0 == "on"]
+foreign {
+    func IkeextGetStatistics0(engineHandle: FWPM_ENGINE_HANDLE, ikeextStatistics: CPointer<IKEEXT_STATISTICS0Abi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IkeextGetStatistics0 == "on"]
+public unsafe func Windows_IkeextGetStatistics0(engineHandle: FWPM_ENGINE_HANDLE, ikeextStatistics: CPointer<IKEEXT_STATISTICS0Abi>): UInt32 {
+    return IkeextGetStatistics0(engineHandle, ikeextStatistics)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IkeextGetStatistics1 == "on"]
+foreign {
+    func IkeextGetStatistics1(engineHandle: FWPM_ENGINE_HANDLE, ikeextStatistics: CPointer<IKEEXT_STATISTICS1Abi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IkeextGetStatistics1 == "on"]
+public unsafe func Windows_IkeextGetStatistics1(engineHandle: FWPM_ENGINE_HANDLE, ikeextStatistics: CPointer<IKEEXT_STATISTICS1Abi>): UInt32 {
+    return IkeextGetStatistics1(engineHandle, ikeextStatistics)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IkeextSaCreateEnumHandle0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: enumTemplate optional
     func IkeextSaCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<IKEEXT_SA_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<IKEEXT_SA_ENUM_HANDLE>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IkeextSaCreateEnumHandle0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_IkeextSaCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<IKEEXT_SA_ENUM_TEMPLATE0Abi>, enumHandle: CPointer<IKEEXT_SA_ENUM_HANDLE>): UInt32 {
+    return IkeextSaCreateEnumHandle0(engineHandle, enumTemplate, enumHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IkeextSaDbGetSecurityInfo0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     func IkeextSaDbGetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACLAbi>>, sacl: CPointer<CPointer<Win32_Security.ACLAbi>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IkeextSaDbGetSecurityInfo0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_IkeextSaDbGetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACLAbi>>, sacl: CPointer<CPointer<Win32_Security.ACLAbi>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32 {
+    return IkeextSaDbGetSecurityInfo0(engineHandle, securityInfo, sidOwner, sidGroup, dacl, sacl, securityDescriptor)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IkeextSaDbSetSecurityInfo0 == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: sidOwner optional
     // param-hint: sidGroup optional
     // param-hint: dacl optional
     // param-hint: sacl optional
     func IkeextSaDbSetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SIDAbi>, sidGroup: CPointer<Win32_Security.SIDAbi>, dacl: CPointer<Win32_Security.ACLAbi>, sacl: CPointer<Win32_Security.ACLAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IkeextSaDbSetSecurityInfo0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_IkeextSaDbSetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SIDAbi>, sidGroup: CPointer<Win32_Security.SIDAbi>, dacl: CPointer<Win32_Security.ACLAbi>, sacl: CPointer<Win32_Security.ACLAbi>): UInt32 {
+    return IkeextSaDbSetSecurityInfo0(engineHandle, securityInfo, sidOwner, sidGroup, dacl, sacl)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IkeextSaDeleteById0 == "on"]
+foreign {
+    func IkeextSaDeleteById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IkeextSaDeleteById0 == "on"]
+public unsafe func Windows_IkeextSaDeleteById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64): UInt32 {
+    return IkeextSaDeleteById0(engineHandle, id)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IkeextSaDestroyEnumHandle0 == "on"]
+foreign {
+    func IkeextSaDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IKEEXT_SA_ENUM_HANDLE): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IkeextSaDestroyEnumHandle0 == "on"]
+public unsafe func Windows_IkeextSaDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IKEEXT_SA_ENUM_HANDLE): UInt32 {
+    return IkeextSaDestroyEnumHandle0(engineHandle, enumHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IkeextSaEnum0 == "on"]
+foreign {
+    func IkeextSaEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IKEEXT_SA_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<IKEEXT_SA_DETAILS0Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IkeextSaEnum0 == "on"]
+public unsafe func Windows_IkeextSaEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IKEEXT_SA_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<IKEEXT_SA_DETAILS0Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32 {
+    return IkeextSaEnum0(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IkeextSaEnum1 == "on"]
+foreign {
+    func IkeextSaEnum1(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IKEEXT_SA_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<IKEEXT_SA_DETAILS1Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IkeextSaEnum1 == "on"]
+public unsafe func Windows_IkeextSaEnum1(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IKEEXT_SA_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<IKEEXT_SA_DETAILS1Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32 {
+    return IkeextSaEnum1(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IkeextSaEnum2 == "on"]
+foreign {
+    func IkeextSaEnum2(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IKEEXT_SA_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<IKEEXT_SA_DETAILS2Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IkeextSaEnum2 == "on"]
+public unsafe func Windows_IkeextSaEnum2(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IKEEXT_SA_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<IKEEXT_SA_DETAILS2Abi>>>, numEntriesReturned: CPointer<UInt32>): UInt32 {
+    return IkeextSaEnum2(engineHandle, enumHandle, numEntriesRequested, entries, numEntriesReturned)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IkeextSaGetById0 == "on"]
+foreign {
+    func IkeextSaGetById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, sa: CPointer<CPointer<IKEEXT_SA_DETAILS0Abi>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IkeextSaGetById0 == "on"]
+public unsafe func Windows_IkeextSaGetById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, sa: CPointer<CPointer<IKEEXT_SA_DETAILS0Abi>>): UInt32 {
+    return IkeextSaGetById0(engineHandle, id, sa)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IkeextSaGetById1 == "on"]
+foreign {
+    // param-hint: saLookupContext optional
+    func IkeextSaGetById1(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, saLookupContext: CPointer<GUID>, sa: CPointer<CPointer<IKEEXT_SA_DETAILS1Abi>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IkeextSaGetById1 == "on"]
+public unsafe func Windows_IkeextSaGetById1(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, saLookupContext: CPointer<GUID>, sa: CPointer<CPointer<IKEEXT_SA_DETAILS1Abi>>): UInt32 {
+    return IkeextSaGetById1(engineHandle, id, saLookupContext, sa)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IkeextSaGetById2 == "on"]
+foreign {
+    // param-hint: saLookupContext optional
+    func IkeextSaGetById2(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, saLookupContext: CPointer<GUID>, sa: CPointer<CPointer<IKEEXT_SA_DETAILS2Abi>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_IkeextSaGetById2 == "on"]
+public unsafe func Windows_IkeextSaGetById2(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, saLookupContext: CPointer<GUID>, sa: CPointer<CPointer<IKEEXT_SA_DETAILS2Abi>>): UInt32 {
+    return IkeextSaGetById2(engineHandle, id, saLookupContext, sa)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmConnectionPolicyAdd0 == "on" && Windows_Win32_Security == "on"]
+func __windowsBindgen_FwpmConnectionPolicyAdd0Proc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("fwpuclnt.dll", "FwpmConnectionPolicyAdd0")
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmConnectionPolicyAdd0 == "on" && Windows_Win32_Security == "on"]
+unsafe func FwpmConnectionPolicyAdd0(engineHandle: FWPM_ENGINE_HANDLE, connectionPolicy: CPointer<FWPM_PROVIDER_CONTEXT3Abi>, ipVersion: FWP_IP_VERSIONAbi, weight: UInt64, numFilterConditions: UInt32, filterConditions: CPointer<FWPM_FILTER_CONDITION0Abi>, sd: Win32_Security.PSECURITY_DESCRIPTOR): UInt32 {
+    let call = CFunc<(FWPM_ENGINE_HANDLE, CPointer<FWPM_PROVIDER_CONTEXT3Abi>, FWP_IP_VERSIONAbi, UInt64, UInt32, CPointer<FWPM_FILTER_CONDITION0Abi>, Win32_Security.PSECURITY_DESCRIPTOR) -> UInt32>(__windowsBindgen_FwpmConnectionPolicyAdd0Proc())
+    return unsafe { call(engineHandle, connectionPolicy, ipVersion, weight, numFilterConditions, filterConditions, sd) }
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmConnectionPolicyAdd0 == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_FwpmConnectionPolicyAdd0(engineHandle: FWPM_ENGINE_HANDLE, connectionPolicy: CPointer<FWPM_PROVIDER_CONTEXT3Abi>, ipVersion: FWP_IP_VERSIONAbi, weight: UInt64, numFilterConditions: UInt32, filterConditions: CPointer<FWPM_FILTER_CONDITION0Abi>, sd: Win32_Security.PSECURITY_DESCRIPTOR): UInt32 {
+    return FwpmConnectionPolicyAdd0(engineHandle, connectionPolicy, ipVersion, weight, numFilterConditions, filterConditions, sd)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmConnectionPolicyDeleteByKey0 == "on"]
+func __windowsBindgen_FwpmConnectionPolicyDeleteByKey0Proc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("fwpuclnt.dll", "FwpmConnectionPolicyDeleteByKey0")
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmConnectionPolicyDeleteByKey0 == "on"]
+unsafe func FwpmConnectionPolicyDeleteByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>): UInt32 {
+    let call = CFunc<(FWPM_ENGINE_HANDLE, CPointer<GUID>) -> UInt32>(__windowsBindgen_FwpmConnectionPolicyDeleteByKey0Proc())
+    return unsafe { call(engineHandle, key) }
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && FWPUCLNT == "on" && Windows_Win32_NetworkManagement_WindowsFilteringPlatform_FwpmConnectionPolicyDeleteByKey0 == "on"]
+public unsafe func Windows_FwpmConnectionPolicyDeleteByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>): UInt32 {
+    return FwpmConnectionPolicyDeleteByKey0(engineHandle, key)
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]

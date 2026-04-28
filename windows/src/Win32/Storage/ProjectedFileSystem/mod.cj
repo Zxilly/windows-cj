@@ -8,7 +8,6 @@ import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result
 import windows_core as windows_core
 import windows_interface.{GUID}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 
@@ -1745,43 +1744,210 @@ extend PRJ_CALLBACKS <: windows_core.CopyType & windows_core.RuntimeType & windo
     }
 }
 
-@When[PROJECTEDFSLIB == "on"]
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjAllocateAlignedBuffer == "on"]
 foreign {
     func PrjAllocateAlignedBuffer(namespaceVirtualizationContext: PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, size: UIntNative): CPointer<Unit>
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjAllocateAlignedBuffer == "on"]
+public unsafe func Windows_PrjAllocateAlignedBuffer(namespaceVirtualizationContext: PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, size: UIntNative): CPointer<Unit> {
+    return PrjAllocateAlignedBuffer(namespaceVirtualizationContext, size)
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjClearNegativePathCache == "on"]
+foreign {
     // param-hint: totalEntryNumber optional
     func PrjClearNegativePathCache(namespaceVirtualizationContext: PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, totalEntryNumber: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjClearNegativePathCache == "on"]
+public unsafe func Windows_PrjClearNegativePathCache(namespaceVirtualizationContext: PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, totalEntryNumber: CPointer<UInt32>): Int32 {
+    return PrjClearNegativePathCache(namespaceVirtualizationContext, totalEntryNumber)
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjCompleteCommand == "on"]
+foreign {
     // param-hint: extendedParameters optional
     func PrjCompleteCommand(namespaceVirtualizationContext: PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, commandId: Int32, completionResult: Int32, extendedParameters: CPointer<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERSAbi>): Int32
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjCompleteCommand == "on"]
+public unsafe func Windows_PrjCompleteCommand(namespaceVirtualizationContext: PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, commandId: Int32, completionResult: Int32, extendedParameters: CPointer<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERSAbi>): Int32 {
+    return PrjCompleteCommand(namespaceVirtualizationContext, commandId, completionResult, extendedParameters)
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjDeleteFile == "on"]
+foreign {
     // param-hint: updateFlags optional
     // param-hint: failureReason optional
     func PrjDeleteFile(namespaceVirtualizationContext: PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, destinationFileName: CPointer<UInt16>, updateFlags: PRJ_UPDATE_TYPESAbi, failureReason: CPointer<PRJ_UPDATE_FAILURE_CAUSESAbi>): Int32
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjDeleteFile == "on"]
+public unsafe func Windows_PrjDeleteFile(namespaceVirtualizationContext: PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, destinationFileName: CPointer<UInt16>, updateFlags: PRJ_UPDATE_TYPESAbi, failureReason: CPointer<PRJ_UPDATE_FAILURE_CAUSESAbi>): Int32 {
+    return PrjDeleteFile(namespaceVirtualizationContext, destinationFileName, updateFlags, failureReason)
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjDoesNameContainWildCards == "on"]
+foreign {
     func PrjDoesNameContainWildCards(fileName: CPointer<UInt16>): UInt8
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjDoesNameContainWildCards == "on"]
+public unsafe func Windows_PrjDoesNameContainWildCards(fileName: CPointer<UInt16>): UInt8 {
+    return PrjDoesNameContainWildCards(fileName)
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjFileNameCompare == "on"]
+foreign {
     func PrjFileNameCompare(fileName1: CPointer<UInt16>, fileName2: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjFileNameCompare == "on"]
+public unsafe func Windows_PrjFileNameCompare(fileName1: CPointer<UInt16>, fileName2: CPointer<UInt16>): Int32 {
+    return PrjFileNameCompare(fileName1, fileName2)
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjFileNameMatch == "on"]
+foreign {
     func PrjFileNameMatch(fileNameToCheck: CPointer<UInt16>, pattern: CPointer<UInt16>): UInt8
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjFileNameMatch == "on"]
+public unsafe func Windows_PrjFileNameMatch(fileNameToCheck: CPointer<UInt16>, pattern: CPointer<UInt16>): UInt8 {
+    return PrjFileNameMatch(fileNameToCheck, pattern)
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjFillDirEntryBuffer == "on"]
+foreign {
     // param-hint: fileBasicInfo optional
     func PrjFillDirEntryBuffer(fileName: CPointer<UInt16>, fileBasicInfo: CPointer<PRJ_FILE_BASIC_INFOAbi>, dirEntryBufferHandle: PRJ_DIR_ENTRY_BUFFER_HANDLE): Int32
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjFillDirEntryBuffer == "on"]
+public unsafe func Windows_PrjFillDirEntryBuffer(fileName: CPointer<UInt16>, fileBasicInfo: CPointer<PRJ_FILE_BASIC_INFOAbi>, dirEntryBufferHandle: PRJ_DIR_ENTRY_BUFFER_HANDLE): Int32 {
+    return PrjFillDirEntryBuffer(fileName, fileBasicInfo, dirEntryBufferHandle)
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjFillDirEntryBuffer2 == "on"]
+foreign {
     // param-hint: fileBasicInfo optional
     // param-hint: extendedInfo optional
     func PrjFillDirEntryBuffer2(dirEntryBufferHandle: PRJ_DIR_ENTRY_BUFFER_HANDLE, fileName: CPointer<UInt16>, fileBasicInfo: CPointer<PRJ_FILE_BASIC_INFOAbi>, extendedInfo: CPointer<PRJ_EXTENDED_INFOAbi>): Int32
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjFillDirEntryBuffer2 == "on"]
+public unsafe func Windows_PrjFillDirEntryBuffer2(dirEntryBufferHandle: PRJ_DIR_ENTRY_BUFFER_HANDLE, fileName: CPointer<UInt16>, fileBasicInfo: CPointer<PRJ_FILE_BASIC_INFOAbi>, extendedInfo: CPointer<PRJ_EXTENDED_INFOAbi>): Int32 {
+    return PrjFillDirEntryBuffer2(dirEntryBufferHandle, fileName, fileBasicInfo, extendedInfo)
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjFreeAlignedBuffer == "on"]
+foreign {
     func PrjFreeAlignedBuffer(buffer: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjFreeAlignedBuffer == "on"]
+public unsafe func Windows_PrjFreeAlignedBuffer(buffer: CPointer<Unit>): Unit {
+    PrjFreeAlignedBuffer(buffer)
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjGetOnDiskFileState == "on"]
+foreign {
     func PrjGetOnDiskFileState(destinationFileName: CPointer<UInt16>, fileState: CPointer<PRJ_FILE_STATEAbi>): Int32
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjGetOnDiskFileState == "on"]
+public unsafe func Windows_PrjGetOnDiskFileState(destinationFileName: CPointer<UInt16>, fileState: CPointer<PRJ_FILE_STATEAbi>): Int32 {
+    return PrjGetOnDiskFileState(destinationFileName, fileState)
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjGetVirtualizationInstanceInfo == "on"]
+foreign {
     func PrjGetVirtualizationInstanceInfo(namespaceVirtualizationContext: PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, virtualizationInstanceInfo: CPointer<PRJ_VIRTUALIZATION_INSTANCE_INFOAbi>): Int32
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjGetVirtualizationInstanceInfo == "on"]
+public unsafe func Windows_PrjGetVirtualizationInstanceInfo(namespaceVirtualizationContext: PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, virtualizationInstanceInfo: CPointer<PRJ_VIRTUALIZATION_INSTANCE_INFOAbi>): Int32 {
+    return PrjGetVirtualizationInstanceInfo(namespaceVirtualizationContext, virtualizationInstanceInfo)
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjMarkDirectoryAsPlaceholder == "on"]
+foreign {
     // param-hint: targetPathName optional
     // param-hint: versionInfo optional
     func PrjMarkDirectoryAsPlaceholder(rootPathName: CPointer<UInt16>, targetPathName: CPointer<UInt16>, versionInfo: CPointer<PRJ_PLACEHOLDER_VERSION_INFOAbi>, virtualizationInstanceID: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjMarkDirectoryAsPlaceholder == "on"]
+public unsafe func Windows_PrjMarkDirectoryAsPlaceholder(rootPathName: CPointer<UInt16>, targetPathName: CPointer<UInt16>, versionInfo: CPointer<PRJ_PLACEHOLDER_VERSION_INFOAbi>, virtualizationInstanceID: CPointer<GUID>): Int32 {
+    return PrjMarkDirectoryAsPlaceholder(rootPathName, targetPathName, versionInfo, virtualizationInstanceID)
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjStartVirtualizing == "on"]
+foreign {
     // param-hint: instanceContext optional
     // param-hint: options optional
     func PrjStartVirtualizing(virtualizationRootPath: CPointer<UInt16>, callbacks: CPointer<PRJ_CALLBACKSAbi>, instanceContext: CPointer<Unit>, options: CPointer<PRJ_STARTVIRTUALIZING_OPTIONSAbi>, namespaceVirtualizationContext: CPointer<PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT>): Int32
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjStartVirtualizing == "on"]
+public unsafe func Windows_PrjStartVirtualizing(virtualizationRootPath: CPointer<UInt16>, callbacks: CPointer<PRJ_CALLBACKSAbi>, instanceContext: CPointer<Unit>, options: CPointer<PRJ_STARTVIRTUALIZING_OPTIONSAbi>, namespaceVirtualizationContext: CPointer<PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT>): Int32 {
+    return PrjStartVirtualizing(virtualizationRootPath, callbacks, instanceContext, options, namespaceVirtualizationContext)
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjStopVirtualizing == "on"]
+foreign {
     func PrjStopVirtualizing(namespaceVirtualizationContext: PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT): Unit
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjStopVirtualizing == "on"]
+public unsafe func Windows_PrjStopVirtualizing(namespaceVirtualizationContext: PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT): Unit {
+    PrjStopVirtualizing(namespaceVirtualizationContext)
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjUpdateFileIfNeeded == "on"]
+foreign {
     // param-hint: placeholderInfo bytes=param[3]
     // param-hint: updateFlags optional
     // param-hint: failureReason optional
     func PrjUpdateFileIfNeeded(namespaceVirtualizationContext: PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, destinationFileName: CPointer<UInt16>, placeholderInfo: CPointer<PRJ_PLACEHOLDER_INFOAbi>, placeholderInfoSize: UInt32, updateFlags: PRJ_UPDATE_TYPESAbi, failureReason: CPointer<PRJ_UPDATE_FAILURE_CAUSESAbi>): Int32
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjUpdateFileIfNeeded == "on"]
+public unsafe func Windows_PrjUpdateFileIfNeeded(namespaceVirtualizationContext: PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, destinationFileName: CPointer<UInt16>, placeholderInfo: CPointer<PRJ_PLACEHOLDER_INFOAbi>, placeholderInfoSize: UInt32, updateFlags: PRJ_UPDATE_TYPESAbi, failureReason: CPointer<PRJ_UPDATE_FAILURE_CAUSESAbi>): Int32 {
+    return PrjUpdateFileIfNeeded(namespaceVirtualizationContext, destinationFileName, placeholderInfo, placeholderInfoSize, updateFlags, failureReason)
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjWriteFileData == "on"]
+foreign {
     // param-hint: buffer bytes=param[4]
     func PrjWriteFileData(namespaceVirtualizationContext: PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, dataStreamId: CPointer<GUID>, buffer: CPointer<Unit>, byteOffset: UInt64, length: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjWriteFileData == "on"]
+public unsafe func Windows_PrjWriteFileData(namespaceVirtualizationContext: PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, dataStreamId: CPointer<GUID>, buffer: CPointer<Unit>, byteOffset: UInt64, length: UInt32): Int32 {
+    return PrjWriteFileData(namespaceVirtualizationContext, dataStreamId, buffer, byteOffset, length)
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjWritePlaceholderInfo == "on"]
+foreign {
     // param-hint: placeholderInfo bytes=param[3]
     func PrjWritePlaceholderInfo(namespaceVirtualizationContext: PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, destinationFileName: CPointer<UInt16>, placeholderInfo: CPointer<PRJ_PLACEHOLDER_INFOAbi>, placeholderInfoSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjWritePlaceholderInfo == "on"]
+public unsafe func Windows_PrjWritePlaceholderInfo(namespaceVirtualizationContext: PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, destinationFileName: CPointer<UInt16>, placeholderInfo: CPointer<PRJ_PLACEHOLDER_INFOAbi>, placeholderInfoSize: UInt32): Int32 {
+    return PrjWritePlaceholderInfo(namespaceVirtualizationContext, destinationFileName, placeholderInfo, placeholderInfoSize)
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjWritePlaceholderInfo2 == "on"]
+foreign {
     // param-hint: placeholderInfo bytes=param[3]
     // param-hint: ExtendedInfo optional
     func PrjWritePlaceholderInfo2(namespaceVirtualizationContext: PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, destinationFileName: CPointer<UInt16>, placeholderInfo: CPointer<PRJ_PLACEHOLDER_INFOAbi>, placeholderInfoSize: UInt32, ExtendedInfo: CPointer<PRJ_EXTENDED_INFOAbi>): Int32
+}
+
+@When[Windows_Win32_Storage_ProjectedFileSystem == "on" && PROJECTEDFSLIB == "on" && Windows_Win32_Storage_ProjectedFileSystem_PrjWritePlaceholderInfo2 == "on"]
+public unsafe func Windows_PrjWritePlaceholderInfo2(namespaceVirtualizationContext: PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, destinationFileName: CPointer<UInt16>, placeholderInfo: CPointer<PRJ_PLACEHOLDER_INFOAbi>, placeholderInfoSize: UInt32, ExtendedInfo: CPointer<PRJ_EXTENDED_INFOAbi>): Int32 {
+    return PrjWritePlaceholderInfo2(namespaceVirtualizationContext, destinationFileName, placeholderInfo, placeholderInfoSize, ExtendedInfo)
 }

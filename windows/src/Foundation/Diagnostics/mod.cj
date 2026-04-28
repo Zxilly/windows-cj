@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l1 as _impl_l1
 import windows_collections as windows_collections
@@ -593,9 +592,9 @@ extend IErrorReportingSettings <: windows_core.Interface<IErrorReportingSettings
 @C
 public struct ILogFileGeneratedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var File: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var File: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -665,7 +664,7 @@ public class ILogFileGeneratedEventArgs <: InterfaceWrapperBase & ComInterface &
         readVtbl<ILogFileGeneratedEventArgsVtbl>(ILogFileGeneratedEventArgsVtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func File(): _impl_l1.StorageFile {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1039,7 +1038,7 @@ public class LogFileGeneratedEventArgs <: InterfaceWrapperBase & ComInterface & 
         }
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func File(): _impl_l1.StorageFile {
         return defaultInterface().File()
     }
@@ -3091,16 +3090,16 @@ extend ILoggingOptions <: windows_core.Interface<ILoggingOptions> {}
 public struct ILoggingSessionVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var SaveToFileAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var SaveToFileAsync: UIntNative = UIntNative(0)
     public var AddLoggingChannel: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var AddLoggingChannelWithLevel: CFunc<(CPointer<Unit>, CPointer<Unit>, LoggingLevelAbi) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveLoggingChannel: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public static func new<Identity>(offset!: Int64 = 0): ILoggingSessionVtbl where Identity <: ILoggingSession_Impl {
         let _ = offset
         var vtbl = ILoggingSessionVtbl()
@@ -3141,7 +3140,7 @@ public struct ILoggingSessionVtbl {
         return vtbl
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage == "on"]
+    @When[(Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on") && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")]
     public static func __assignSaveToFileAsync<Identity>(vtbl: ILoggingSessionVtbl): ILoggingSessionVtbl where Identity <: ILoggingSession_Impl {
         var next = vtbl
         next.SaveToFileAsync = { instanceRaw, arg0, arg1, result__ =>
@@ -3155,7 +3154,7 @@ public struct ILoggingSessionVtbl {
         return next
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage != "on"]
+    @When[(Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on") && (Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on")]
     public static func __assignSaveToFileAsync<Identity>(vtbl: ILoggingSessionVtbl): ILoggingSessionVtbl where Identity <: ILoggingSession_Impl {
         return vtbl
     }
@@ -3173,7 +3172,7 @@ public struct ILoggingSessionVtbl {
     }
 }
 
-@When[Windows_Foundation_Diagnostics == "on" && Windows_Storage == "on"]
+@When[Windows_Foundation_Diagnostics == "on" && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")]
 public interface ILoggingSession_ImplErased {
     public func __winrtThunk_Name(result__: CPointer<CPointer<Unit>>): Int32
 
@@ -3186,7 +3185,7 @@ public interface ILoggingSession_ImplErased {
     public func __winrtThunk_RemoveLoggingChannel(arg0: CPointer<Unit>): Int32
 }
 
-@When[Windows_Foundation_Diagnostics == "on" && Windows_Storage == "on"]
+@When[Windows_Foundation_Diagnostics == "on" && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")]
 public interface ILoggingSession_Impl <: ILoggingSession_ImplErased & Foundation.IClosable_Impl {
     public func Name(): windows_core.Result<windows_core.HString>
 
@@ -3356,7 +3355,7 @@ public class ILoggingSession <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return windows_core.HString.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func SaveToFileAsync(folder: _impl_l1.IStorageFolder, fileName: windows_core.HString): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4028,15 +4027,15 @@ public struct IFileLoggingSessionVtbl {
     public var AddLoggingChannel: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var AddLoggingChannelWithLevel: CFunc<(CPointer<Unit>, CPointer<Unit>, LoggingLevelAbi) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveLoggingChannel: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var CloseAndSaveToFileAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var CloseAndSaveToFileAsync: UIntNative = UIntNative(0)
     public var LogFileGenerated: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveLogFileGenerated: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public static func new<Identity>(offset!: Int64 = 0): IFileLoggingSessionVtbl where Identity <: IFileLoggingSession_Impl {
         let _ = offset
         var vtbl = IFileLoggingSessionVtbl()
@@ -4093,7 +4092,7 @@ public struct IFileLoggingSessionVtbl {
         return vtbl
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage == "on"]
+    @When[(Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on") && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")]
     public static func __assignCloseAndSaveToFileAsync<Identity>(vtbl: IFileLoggingSessionVtbl): IFileLoggingSessionVtbl where Identity <: IFileLoggingSession_Impl {
         var next = vtbl
         next.CloseAndSaveToFileAsync = { instanceRaw, result__ =>
@@ -4107,7 +4106,7 @@ public struct IFileLoggingSessionVtbl {
         return next
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage != "on"]
+    @When[(Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on") && (Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on")]
     public static func __assignCloseAndSaveToFileAsync<Identity>(vtbl: IFileLoggingSessionVtbl): IFileLoggingSessionVtbl where Identity <: IFileLoggingSession_Impl {
         return vtbl
     }
@@ -4125,7 +4124,7 @@ public struct IFileLoggingSessionVtbl {
     }
 }
 
-@When[Windows_Foundation_Diagnostics == "on" && Windows_Storage == "on"]
+@When[Windows_Foundation_Diagnostics == "on" && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")]
 public interface IFileLoggingSession_ImplErased {
     public func __winrtThunk_Name(result__: CPointer<CPointer<Unit>>): Int32
 
@@ -4142,7 +4141,7 @@ public interface IFileLoggingSession_ImplErased {
     public func __winrtThunk_RemoveLogFileGenerated(arg0: windows_collections.EventRegistrationTokenAbi): Int32
 }
 
-@When[Windows_Foundation_Diagnostics == "on" && Windows_Storage == "on"]
+@When[Windows_Foundation_Diagnostics == "on" && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")]
 public interface IFileLoggingSession_Impl <: IFileLoggingSession_ImplErased & Foundation.IClosable_Impl {
     public func Name(): windows_core.Result<windows_core.HString>
 
@@ -4356,7 +4355,7 @@ public class IFileLoggingSession <: InterfaceWrapperBase & ComInterface & Runtim
         HRESULT(hr).ok()
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func CloseAndSaveToFileAsync(): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4586,7 +4585,7 @@ public class FileLoggingSession <: InterfaceWrapperBase & ComInterface & windows
         defaultInterface().RemoveLoggingChannel(loggingChannel)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func CloseAndSaveToFileAsync(): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
         return defaultInterface().CloseAndSaveToFileAsync()
     }
@@ -6795,7 +6794,7 @@ public class LoggingSession <: InterfaceWrapperBase & ComInterface & windows_int
         return defaultInterface().Name()
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func SaveToFileAsync(folder: _impl_l1.IStorageFolder, fileName: windows_core.HString): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
         return defaultInterface().SaveToFileAsync(folder, fileName)
     }

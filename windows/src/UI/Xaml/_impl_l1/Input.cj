@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Devices_Input == "on"]
 import windows.Devices.Input as Devices_Input
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows.UI.Xaml._impl_l0 as UI_Xaml__impl_l0
 import windows._impl_l0 as _impl_l0
@@ -216,12 +214,14 @@ public class DoubleTappedEventHandler <: InterfaceWrapperBase & ComInterface & w
 @When[Windows_UI_Xaml_Input == "on"]
 extend DoubleTappedEventHandler <: windows_core.Interface<DoubleTappedEventHandler> {}
 
+@When[Windows_UI_Xaml_Input == "on"]
 private open class DoubleTappedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Input == "on"]
 private open class DoubleTappedEventHandlerInvoker <: DoubleTappedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<DoubleTappedRoutedEventArgs>): Unit {
         ()
@@ -233,6 +233,7 @@ private open class DoubleTappedEventHandlerInvoker <: DoubleTappedEventHandlerIn
     }
 }
 
+@When[Windows_UI_Xaml_Input == "on"]
 private class DoubleTappedEventHandlerBox <: DoubleTappedEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<DoubleTappedRoutedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<DoubleTappedEventHandlerVtbl>
@@ -251,6 +252,7 @@ private class DoubleTappedEventHandlerBox <: DoubleTappedEventHandlerInvoker {
     }
 }
 
+@When[Windows_UI_Xaml_Input == "on"]
 func buildDoubleTappedEventHandlerBoxVtbl(): DoubleTappedEventHandlerVtbl {
     var vtbl = DoubleTappedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -776,12 +778,14 @@ public class HoldingEventHandler <: InterfaceWrapperBase & ComInterface & window
 @When[Windows_UI_Xaml_Input == "on"]
 extend HoldingEventHandler <: windows_core.Interface<HoldingEventHandler> {}
 
+@When[Windows_UI_Xaml_Input == "on"]
 private open class HoldingEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Input == "on"]
 private open class HoldingEventHandlerInvoker <: HoldingEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<HoldingRoutedEventArgs>): Unit {
         ()
@@ -793,6 +797,7 @@ private open class HoldingEventHandlerInvoker <: HoldingEventHandlerInvokerErase
     }
 }
 
+@When[Windows_UI_Xaml_Input == "on"]
 private class HoldingEventHandlerBox <: HoldingEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<HoldingRoutedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<HoldingEventHandlerVtbl>
@@ -811,6 +816,7 @@ private class HoldingEventHandlerBox <: HoldingEventHandlerInvoker {
     }
 }
 
+@When[Windows_UI_Xaml_Input == "on"]
 func buildHoldingEventHandlerBoxVtbl(): HoldingEventHandlerVtbl {
     var vtbl = HoldingEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -2827,9 +2833,9 @@ public struct IPointerRoutedEventArgsVtbl {
     public var GetCurrentPoint: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Input != "on" || Windows_UI_Xaml != "on"]
     public var GetCurrentPoint: UIntNative = UIntNative(0)
-    @When[Windows_UI_Input == "on" && Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Input == "on" && Windows_UI_Xaml == "on"]
     public var GetIntermediatePoints: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Input != "on" || Windows_UI_Xaml != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_UI_Input != "on" || Windows_UI_Xaml != "on"]
     public var GetIntermediatePoints: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -2939,7 +2945,7 @@ public class IPointerRoutedEventArgs <: InterfaceWrapperBase & ComInterface & Ru
         return _impl_l1.PointerPoint.fromAbiTake(result__)
     }
 
-    @When[Windows_UI_Input == "on" && Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Input == "on" && Windows_UI_Xaml == "on"]
     public unsafe func GetIntermediatePoints(relativeTo: UIElement): windows_collections.IVector<_impl_l1.PointerPoint> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3296,7 +3302,10 @@ public struct IXamlUICommandVtbl {
     public var SetIconSource: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Xaml_Controls != "on"]
     public var SetIconSource: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var KeyboardAccelerators: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var KeyboardAccelerators: UIntNative = UIntNative(0)
     public var AccessKey: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetAccessKey: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Description: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -3406,6 +3415,7 @@ public class IXamlUICommand <: InterfaceWrapperBase & ComInterface & RuntimeName
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func KeyboardAccelerators(): windows_collections.IVector<UI_Xaml__impl_l0.KeyboardAccelerator> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3666,6 +3676,7 @@ public class InputScope <: InterfaceWrapperBase & ComInterface & windows_interfa
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Names(): windows_collections.IVector<UI_Xaml__impl_l0.InputScopeName> {
         return defaultInterface().Names()
     }
@@ -3765,12 +3776,14 @@ public class ManipulationCompletedEventHandler <: InterfaceWrapperBase & ComInte
 @When[Windows_UI_Xaml_Input == "on"]
 extend ManipulationCompletedEventHandler <: windows_core.Interface<ManipulationCompletedEventHandler> {}
 
+@When[Windows_UI_Xaml_Input == "on"]
 private open class ManipulationCompletedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Input == "on"]
 private open class ManipulationCompletedEventHandlerInvoker <: ManipulationCompletedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<ManipulationCompletedRoutedEventArgs>): Unit {
         ()
@@ -3782,6 +3795,7 @@ private open class ManipulationCompletedEventHandlerInvoker <: ManipulationCompl
     }
 }
 
+@When[Windows_UI_Xaml_Input == "on"]
 private class ManipulationCompletedEventHandlerBox <: ManipulationCompletedEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<ManipulationCompletedRoutedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<ManipulationCompletedEventHandlerVtbl>
@@ -3800,6 +3814,7 @@ private class ManipulationCompletedEventHandlerBox <: ManipulationCompletedEvent
     }
 }
 
+@When[Windows_UI_Xaml_Input == "on"]
 func buildManipulationCompletedEventHandlerBoxVtbl(): ManipulationCompletedEventHandlerVtbl {
     var vtbl = ManipulationCompletedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -4032,12 +4047,14 @@ public class ManipulationDeltaEventHandler <: InterfaceWrapperBase & ComInterfac
 @When[Windows_UI_Xaml_Input == "on"]
 extend ManipulationDeltaEventHandler <: windows_core.Interface<ManipulationDeltaEventHandler> {}
 
+@When[Windows_UI_Xaml_Input == "on"]
 private open class ManipulationDeltaEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Input == "on"]
 private open class ManipulationDeltaEventHandlerInvoker <: ManipulationDeltaEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<ManipulationDeltaRoutedEventArgs>): Unit {
         ()
@@ -4049,6 +4066,7 @@ private open class ManipulationDeltaEventHandlerInvoker <: ManipulationDeltaEven
     }
 }
 
+@When[Windows_UI_Xaml_Input == "on"]
 private class ManipulationDeltaEventHandlerBox <: ManipulationDeltaEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<ManipulationDeltaRoutedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<ManipulationDeltaEventHandlerVtbl>
@@ -4067,6 +4085,7 @@ private class ManipulationDeltaEventHandlerBox <: ManipulationDeltaEventHandlerI
     }
 }
 
+@When[Windows_UI_Xaml_Input == "on"]
 func buildManipulationDeltaEventHandlerBoxVtbl(): ManipulationDeltaEventHandlerVtbl {
     var vtbl = ManipulationDeltaEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -4308,12 +4327,14 @@ public class ManipulationInertiaStartingEventHandler <: InterfaceWrapperBase & C
 @When[Windows_UI_Xaml_Input == "on"]
 extend ManipulationInertiaStartingEventHandler <: windows_core.Interface<ManipulationInertiaStartingEventHandler> {}
 
+@When[Windows_UI_Xaml_Input == "on"]
 private open class ManipulationInertiaStartingEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Input == "on"]
 private open class ManipulationInertiaStartingEventHandlerInvoker <: ManipulationInertiaStartingEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<ManipulationInertiaStartingRoutedEventArgs>): Unit {
         ()
@@ -4325,6 +4346,7 @@ private open class ManipulationInertiaStartingEventHandlerInvoker <: Manipulatio
     }
 }
 
+@When[Windows_UI_Xaml_Input == "on"]
 private class ManipulationInertiaStartingEventHandlerBox <: ManipulationInertiaStartingEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<ManipulationInertiaStartingRoutedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<ManipulationInertiaStartingEventHandlerVtbl>
@@ -4343,6 +4365,7 @@ private class ManipulationInertiaStartingEventHandlerBox <: ManipulationInertiaS
     }
 }
 
+@When[Windows_UI_Xaml_Input == "on"]
 func buildManipulationInertiaStartingEventHandlerBoxVtbl(): ManipulationInertiaStartingEventHandlerVtbl {
     var vtbl = ManipulationInertiaStartingEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -4596,12 +4619,14 @@ public class ManipulationStartedEventHandler <: InterfaceWrapperBase & ComInterf
 @When[Windows_UI_Xaml_Input == "on"]
 extend ManipulationStartedEventHandler <: windows_core.Interface<ManipulationStartedEventHandler> {}
 
+@When[Windows_UI_Xaml_Input == "on"]
 private open class ManipulationStartedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Input == "on"]
 private open class ManipulationStartedEventHandlerInvoker <: ManipulationStartedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<ManipulationStartedRoutedEventArgs>): Unit {
         ()
@@ -4613,6 +4638,7 @@ private open class ManipulationStartedEventHandlerInvoker <: ManipulationStarted
     }
 }
 
+@When[Windows_UI_Xaml_Input == "on"]
 private class ManipulationStartedEventHandlerBox <: ManipulationStartedEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<ManipulationStartedRoutedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<ManipulationStartedEventHandlerVtbl>
@@ -4631,6 +4657,7 @@ private class ManipulationStartedEventHandlerBox <: ManipulationStartedEventHand
     }
 }
 
+@When[Windows_UI_Xaml_Input == "on"]
 func buildManipulationStartedEventHandlerBoxVtbl(): ManipulationStartedEventHandlerVtbl {
     var vtbl = ManipulationStartedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -4859,12 +4886,14 @@ public class ManipulationStartingEventHandler <: InterfaceWrapperBase & ComInter
 @When[Windows_UI_Xaml_Input == "on"]
 extend ManipulationStartingEventHandler <: windows_core.Interface<ManipulationStartingEventHandler> {}
 
+@When[Windows_UI_Xaml_Input == "on"]
 private open class ManipulationStartingEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Input == "on"]
 private open class ManipulationStartingEventHandlerInvoker <: ManipulationStartingEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<ManipulationStartingRoutedEventArgs>): Unit {
         ()
@@ -4876,6 +4905,7 @@ private open class ManipulationStartingEventHandlerInvoker <: ManipulationStarti
     }
 }
 
+@When[Windows_UI_Xaml_Input == "on"]
 private class ManipulationStartingEventHandlerBox <: ManipulationStartingEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<ManipulationStartingRoutedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<ManipulationStartingEventHandlerVtbl>
@@ -4894,6 +4924,7 @@ private class ManipulationStartingEventHandlerBox <: ManipulationStartingEventHa
     }
 }
 
+@When[Windows_UI_Xaml_Input == "on"]
 func buildManipulationStartingEventHandlerBoxVtbl(): ManipulationStartingEventHandlerVtbl {
     var vtbl = ManipulationStartingEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -5124,12 +5155,14 @@ public class PointerEventHandler <: InterfaceWrapperBase & ComInterface & window
 @When[Windows_UI_Xaml_Input == "on"]
 extend PointerEventHandler <: windows_core.Interface<PointerEventHandler> {}
 
+@When[Windows_UI_Xaml_Input == "on"]
 private open class PointerEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Input == "on"]
 private open class PointerEventHandlerInvoker <: PointerEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<PointerRoutedEventArgs>): Unit {
         ()
@@ -5141,6 +5174,7 @@ private open class PointerEventHandlerInvoker <: PointerEventHandlerInvokerErase
     }
 }
 
+@When[Windows_UI_Xaml_Input == "on"]
 private class PointerEventHandlerBox <: PointerEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<PointerRoutedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<PointerEventHandlerVtbl>
@@ -5159,6 +5193,7 @@ private class PointerEventHandlerBox <: PointerEventHandlerInvoker {
     }
 }
 
+@When[Windows_UI_Xaml_Input == "on"]
 func buildPointerEventHandlerBoxVtbl(): PointerEventHandlerVtbl {
     var vtbl = PointerEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -5271,7 +5306,7 @@ public class PointerRoutedEventArgs <: InterfaceWrapperBase & ComInterface & win
         return defaultInterface().GetCurrentPoint(relativeTo)
     }
 
-    @When[Windows_UI_Input == "on" && Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Input == "on" && Windows_UI_Xaml == "on"]
     public unsafe func GetIntermediatePoints(relativeTo: UIElement): windows_collections.IVector<_impl_l1.PointerPoint> {
         return defaultInterface().GetIntermediatePoints(relativeTo)
     }
@@ -5371,12 +5406,14 @@ public class RightTappedEventHandler <: InterfaceWrapperBase & ComInterface & wi
 @When[Windows_UI_Xaml_Input == "on"]
 extend RightTappedEventHandler <: windows_core.Interface<RightTappedEventHandler> {}
 
+@When[Windows_UI_Xaml_Input == "on"]
 private open class RightTappedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Input == "on"]
 private open class RightTappedEventHandlerInvoker <: RightTappedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<RightTappedRoutedEventArgs>): Unit {
         ()
@@ -5388,6 +5425,7 @@ private open class RightTappedEventHandlerInvoker <: RightTappedEventHandlerInvo
     }
 }
 
+@When[Windows_UI_Xaml_Input == "on"]
 private class RightTappedEventHandlerBox <: RightTappedEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<RightTappedRoutedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<RightTappedEventHandlerVtbl>
@@ -5406,6 +5444,7 @@ private class RightTappedEventHandlerBox <: RightTappedEventHandlerInvoker {
     }
 }
 
+@When[Windows_UI_Xaml_Input == "on"]
 func buildRightTappedEventHandlerBoxVtbl(): RightTappedEventHandlerVtbl {
     var vtbl = RightTappedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -5785,12 +5824,14 @@ public class TappedEventHandler <: InterfaceWrapperBase & ComInterface & windows
 @When[Windows_UI_Xaml_Input == "on"]
 extend TappedEventHandler <: windows_core.Interface<TappedEventHandler> {}
 
+@When[Windows_UI_Xaml_Input == "on"]
 private open class TappedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Input == "on"]
 private open class TappedEventHandlerInvoker <: TappedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<TappedRoutedEventArgs>): Unit {
         ()
@@ -5802,6 +5843,7 @@ private open class TappedEventHandlerInvoker <: TappedEventHandlerInvokerErased 
     }
 }
 
+@When[Windows_UI_Xaml_Input == "on"]
 private class TappedEventHandlerBox <: TappedEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<TappedRoutedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<TappedEventHandlerVtbl>
@@ -5820,6 +5862,7 @@ private class TappedEventHandlerBox <: TappedEventHandlerInvoker {
     }
 }
 
+@When[Windows_UI_Xaml_Input == "on"]
 func buildTappedEventHandlerBoxVtbl(): TappedEventHandlerVtbl {
     var vtbl = TappedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -6059,6 +6102,7 @@ public class XamlUICommand <: InterfaceWrapperBase & ComInterface & windows_inte
         defaultInterface().SetIconSource(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func KeyboardAccelerators(): windows_collections.IVector<UI_Xaml__impl_l0.KeyboardAccelerator> {
         return defaultInterface().KeyboardAccelerators()
     }

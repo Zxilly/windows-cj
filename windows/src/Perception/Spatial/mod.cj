@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Perception == "on"]
 import windows.Perception as Perception
 import windows._impl_l0 as _impl_l0
 import windows._impl_l2 as _impl_l2
@@ -2197,7 +2195,10 @@ extend ISpatialAnchorStatics <: windows_core.Interface<ISpatialAnchorStatics> {}
 @C
 public struct ISpatialAnchorStoreVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAllSavedAnchors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAllSavedAnchors: UIntNative = UIntNative(0)
     public var TrySave: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var Remove: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Clear: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
@@ -2269,6 +2270,7 @@ public class ISpatialAnchorStore <: InterfaceWrapperBase & ComInterface & Runtim
         readVtbl<ISpatialAnchorStoreVtbl>(ISpatialAnchorStoreVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAllSavedAnchors(): windows_collections.IMapView<windows_core.HString, SpatialAnchor> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2305,13 +2307,13 @@ extend ISpatialAnchorStore <: windows_core.Interface<ISpatialAnchorStore> {}
 @C
 public struct ISpatialAnchorTransferManagerStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var TryImportAnchorsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
     public var TryImportAnchorsAsync: UIntNative = UIntNative(0)
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var TryExportAnchorsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
     public var TryExportAnchorsAsync: UIntNative = UIntNative(0)
     public var RequestAccessAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -2382,7 +2384,7 @@ public class ISpatialAnchorTransferManagerStatics <: InterfaceWrapperBase & ComI
         readVtbl<ISpatialAnchorTransferManagerStaticsVtbl>(ISpatialAnchorTransferManagerStaticsVtbl())
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func TryImportAnchorsAsync(stream: _impl_l0.IInputStream): windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, SpatialAnchor>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2391,7 +2393,7 @@ public class ISpatialAnchorTransferManagerStatics <: InterfaceWrapperBase & ComI
         return windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, SpatialAnchor>>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func TryExportAnchorsAsync(anchors: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, SpatialAnchor>>, stream: _impl_l0.IOutputStream): windows_future.IAsyncOperation<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4601,6 +4603,7 @@ public class SpatialAnchorStore <: InterfaceWrapperBase & ComInterface & windows
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAllSavedAnchors(): windows_collections.IMapView<windows_core.HString, SpatialAnchor> {
         return defaultInterface().GetAllSavedAnchors()
     }
@@ -4656,7 +4659,7 @@ public class SpatialAnchorTransferManager <: windows_interface.RuntimeName & win
         windows_core.activationFactory<SpatialAnchorTransferManager>().ok()
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public static unsafe func TryImportAnchorsAsync(stream: _impl_l0.IInputStream): windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, SpatialAnchor>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, SpatialAnchor>>> = Option<windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, SpatialAnchor>>>.None
         try (factory__ = windows_core.factory<SpatialAnchorTransferManager, ISpatialAnchorTransferManagerStatics>().unwrap()) {
@@ -4668,7 +4671,7 @@ public class SpatialAnchorTransferManager <: windows_interface.RuntimeName & win
         }
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public static unsafe func TryExportAnchorsAsync(anchors: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, SpatialAnchor>>, stream: _impl_l0.IOutputStream): windows_future.IAsyncOperation<Bool> {
         var result__: Option<windows_future.IAsyncOperation<Bool>> = Option<windows_future.IAsyncOperation<Bool>>.None
         try (factory__ = windows_core.factory<SpatialAnchorTransferManager, ISpatialAnchorTransferManagerStatics>().unwrap()) {

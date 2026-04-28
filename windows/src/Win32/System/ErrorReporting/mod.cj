@@ -8,7 +8,6 @@ import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result
 import windows_core as windows_core
 import windows_interface.{GUID}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
@@ -1895,78 +1894,427 @@ extend WER_REPORT_METADATA_V3 <: windows_core.CopyType & windows_core.RuntimeTyp
     }
 }
 
-@When[KERNEL32 == "on"]
+@When[Windows_Win32_System_ErrorReporting == "on" && KERNEL32 == "on" && Windows_Win32_System_ErrorReporting_WerGetFlags == "on"]
 foreign {
     func WerGetFlags(hProcess: CPointer<Unit>, pdwFlags: CPointer<WER_FAULT_REPORTINGAbi>): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && KERNEL32 == "on" && Windows_Win32_System_ErrorReporting_WerGetFlags == "on"]
+public unsafe func Windows_WerGetFlags(hProcess: CPointer<Unit>, pdwFlags: CPointer<WER_FAULT_REPORTINGAbi>): Int32 {
+    return WerGetFlags(hProcess, pdwFlags)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && KERNEL32 == "on" && Windows_Win32_System_ErrorReporting_WerRegisterAdditionalProcess == "on"]
+foreign {
     func WerRegisterAdditionalProcess(processId: UInt32, captureExtraInfoForThreadId: UInt32): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && KERNEL32 == "on" && Windows_Win32_System_ErrorReporting_WerRegisterAdditionalProcess == "on"]
+public unsafe func Windows_WerRegisterAdditionalProcess(processId: UInt32, captureExtraInfoForThreadId: UInt32): Int32 {
+    return WerRegisterAdditionalProcess(processId, captureExtraInfoForThreadId)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && KERNEL32 == "on" && Windows_Win32_System_ErrorReporting_WerRegisterAppLocalDump == "on"]
+foreign {
     func WerRegisterAppLocalDump(localAppDataRelativePath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && KERNEL32 == "on" && Windows_Win32_System_ErrorReporting_WerRegisterAppLocalDump == "on"]
+public unsafe func Windows_WerRegisterAppLocalDump(localAppDataRelativePath: CPointer<UInt16>): Int32 {
+    return WerRegisterAppLocalDump(localAppDataRelativePath)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && KERNEL32 == "on" && Windows_Win32_System_ErrorReporting_WerRegisterCustomMetadata == "on"]
+foreign {
     func WerRegisterCustomMetadata(key: CPointer<UInt16>, value: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && KERNEL32 == "on" && Windows_Win32_System_ErrorReporting_WerRegisterCustomMetadata == "on"]
+public unsafe func Windows_WerRegisterCustomMetadata(key: CPointer<UInt16>, value: CPointer<UInt16>): Int32 {
+    return WerRegisterCustomMetadata(key, value)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && KERNEL32 == "on" && Windows_Win32_System_ErrorReporting_WerRegisterExcludedMemoryBlock == "on"]
+foreign {
     func WerRegisterExcludedMemoryBlock(address: CPointer<Unit>, size: UInt32): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && KERNEL32 == "on" && Windows_Win32_System_ErrorReporting_WerRegisterExcludedMemoryBlock == "on"]
+public unsafe func Windows_WerRegisterExcludedMemoryBlock(address: CPointer<Unit>, size: UInt32): Int32 {
+    return WerRegisterExcludedMemoryBlock(address, size)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && KERNEL32 == "on" && Windows_Win32_System_ErrorReporting_WerRegisterFile == "on"]
+foreign {
     func WerRegisterFile(pwzFile: CPointer<UInt16>, regFileType: WER_REGISTER_FILE_TYPEAbi, dwFlags: WER_FILEAbi): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && KERNEL32 == "on" && Windows_Win32_System_ErrorReporting_WerRegisterFile == "on"]
+public unsafe func Windows_WerRegisterFile(pwzFile: CPointer<UInt16>, regFileType: WER_REGISTER_FILE_TYPEAbi, dwFlags: WER_FILEAbi): Int32 {
+    return WerRegisterFile(pwzFile, regFileType, dwFlags)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && KERNEL32 == "on" && Windows_Win32_System_ErrorReporting_WerRegisterMemoryBlock == "on"]
+foreign {
     func WerRegisterMemoryBlock(pvAddress: CPointer<Unit>, dwSize: UInt32): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && KERNEL32 == "on" && Windows_Win32_System_ErrorReporting_WerRegisterMemoryBlock == "on"]
+public unsafe func Windows_WerRegisterMemoryBlock(pvAddress: CPointer<Unit>, dwSize: UInt32): Int32 {
+    return WerRegisterMemoryBlock(pvAddress, dwSize)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && KERNEL32 == "on" && Windows_Win32_System_ErrorReporting_WerRegisterRuntimeExceptionModule == "on"]
+foreign {
     func WerRegisterRuntimeExceptionModule(pwszOutOfProcessCallbackDll: CPointer<UInt16>, pContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && KERNEL32 == "on" && Windows_Win32_System_ErrorReporting_WerRegisterRuntimeExceptionModule == "on"]
+public unsafe func Windows_WerRegisterRuntimeExceptionModule(pwszOutOfProcessCallbackDll: CPointer<UInt16>, pContext: CPointer<Unit>): Int32 {
+    return WerRegisterRuntimeExceptionModule(pwszOutOfProcessCallbackDll, pContext)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && KERNEL32 == "on" && Windows_Win32_System_ErrorReporting_WerSetFlags == "on"]
+foreign {
     func WerSetFlags(dwFlags: WER_FAULT_REPORTINGAbi): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && KERNEL32 == "on" && Windows_Win32_System_ErrorReporting_WerSetFlags == "on"]
+public unsafe func Windows_WerSetFlags(dwFlags: WER_FAULT_REPORTINGAbi): Int32 {
+    return WerSetFlags(dwFlags)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && KERNEL32 == "on" && Windows_Win32_System_ErrorReporting_WerUnregisterAdditionalProcess == "on"]
+foreign {
     func WerUnregisterAdditionalProcess(processId: UInt32): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && KERNEL32 == "on" && Windows_Win32_System_ErrorReporting_WerUnregisterAdditionalProcess == "on"]
+public unsafe func Windows_WerUnregisterAdditionalProcess(processId: UInt32): Int32 {
+    return WerUnregisterAdditionalProcess(processId)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && KERNEL32 == "on" && Windows_Win32_System_ErrorReporting_WerUnregisterAppLocalDump == "on"]
+foreign {
     func WerUnregisterAppLocalDump(): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && KERNEL32 == "on" && Windows_Win32_System_ErrorReporting_WerUnregisterAppLocalDump == "on"]
+public unsafe func Windows_WerUnregisterAppLocalDump(): Int32 {
+    return WerUnregisterAppLocalDump()
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && KERNEL32 == "on" && Windows_Win32_System_ErrorReporting_WerUnregisterCustomMetadata == "on"]
+foreign {
     func WerUnregisterCustomMetadata(key: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && KERNEL32 == "on" && Windows_Win32_System_ErrorReporting_WerUnregisterCustomMetadata == "on"]
+public unsafe func Windows_WerUnregisterCustomMetadata(key: CPointer<UInt16>): Int32 {
+    return WerUnregisterCustomMetadata(key)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && KERNEL32 == "on" && Windows_Win32_System_ErrorReporting_WerUnregisterExcludedMemoryBlock == "on"]
+foreign {
     func WerUnregisterExcludedMemoryBlock(address: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && KERNEL32 == "on" && Windows_Win32_System_ErrorReporting_WerUnregisterExcludedMemoryBlock == "on"]
+public unsafe func Windows_WerUnregisterExcludedMemoryBlock(address: CPointer<Unit>): Int32 {
+    return WerUnregisterExcludedMemoryBlock(address)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && KERNEL32 == "on" && Windows_Win32_System_ErrorReporting_WerUnregisterFile == "on"]
+foreign {
     func WerUnregisterFile(pwzFilePath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && KERNEL32 == "on" && Windows_Win32_System_ErrorReporting_WerUnregisterFile == "on"]
+public unsafe func Windows_WerUnregisterFile(pwzFilePath: CPointer<UInt16>): Int32 {
+    return WerUnregisterFile(pwzFilePath)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && KERNEL32 == "on" && Windows_Win32_System_ErrorReporting_WerUnregisterMemoryBlock == "on"]
+foreign {
     func WerUnregisterMemoryBlock(pvAddress: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && KERNEL32 == "on" && Windows_Win32_System_ErrorReporting_WerUnregisterMemoryBlock == "on"]
+public unsafe func Windows_WerUnregisterMemoryBlock(pvAddress: CPointer<Unit>): Int32 {
+    return WerUnregisterMemoryBlock(pvAddress)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && KERNEL32 == "on" && Windows_Win32_System_ErrorReporting_WerUnregisterRuntimeExceptionModule == "on"]
+foreign {
     func WerUnregisterRuntimeExceptionModule(pwszOutOfProcessCallbackDll: CPointer<UInt16>, pContext: CPointer<Unit>): Int32
 }
 
-@When[FAULTREP == "on"]
+@When[Windows_Win32_System_ErrorReporting == "on" && KERNEL32 == "on" && Windows_Win32_System_ErrorReporting_WerUnregisterRuntimeExceptionModule == "on"]
+public unsafe func Windows_WerUnregisterRuntimeExceptionModule(pwszOutOfProcessCallbackDll: CPointer<UInt16>, pContext: CPointer<Unit>): Int32 {
+    return WerUnregisterRuntimeExceptionModule(pwszOutOfProcessCallbackDll, pContext)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && FAULTREP == "on" && Windows_Win32_System_ErrorReporting_AddERExcludedApplicationA == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func AddERExcludedApplicationA(szApplication: CPointer<UInt8>): Int32
-    // pinvoke-hint: SetLastError
-    func AddERExcludedApplicationW(wszApplication: CPointer<UInt16>): Int32
-    // param-hint: pwzHungApplicationName optional
-    func WerReportHang(hwndHungApp: CPointer<Unit>, pwzHungApplicationName: CPointer<UInt16>): Int32
 }
 
-@When[FAULTREP == "on" && (((arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "x86_64" && ((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on")) && Windows_Win32_System_Diagnostics_Debug == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Diagnostics_Debug == "on")]
+@When[Windows_Win32_System_ErrorReporting == "on" && FAULTREP == "on" && Windows_Win32_System_ErrorReporting_AddERExcludedApplicationA == "on"]
+public unsafe func Windows_AddERExcludedApplicationA(szApplication: CPointer<UInt8>): Int32 {
+    return AddERExcludedApplicationA(szApplication)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && FAULTREP == "on" && Windows_Win32_System_ErrorReporting_AddERExcludedApplicationW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func AddERExcludedApplicationW(wszApplication: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && FAULTREP == "on" && Windows_Win32_System_ErrorReporting_AddERExcludedApplicationW == "on"]
+public unsafe func Windows_AddERExcludedApplicationW(wszApplication: CPointer<UInt16>): Int32 {
+    return AddERExcludedApplicationW(wszApplication)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && FAULTREP == "on" && Windows_Win32_System_ErrorReporting_ReportFault == "on" && (((arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "x86_64" && ((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on")) && Windows_Win32_System_Diagnostics_Debug == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Diagnostics_Debug == "on")]
 foreign {
     func ReportFault(pep: CPointer<Win32__impl_l2.EXCEPTION_POINTERSAbi>, dwOpt: UInt32): EFaultRepRetValAbi
 }
 
-@When[WER == "on"]
-foreign {
-    func WerAddExcludedApplication(pwzExeName: CPointer<UInt16>, bAllUsers: Int32): Int32
-    func WerFreeString(pwszStr: CPointer<UInt16>): Unit
-    func WerRemoveExcludedApplication(pwzExeName: CPointer<UInt16>, bAllUsers: Int32): Int32
-    func WerReportAddFile(hReportHandle: HREPORT, pwzPath: CPointer<UInt16>, repFileType: WER_FILE_TYPEAbi, dwFileFlags: WER_FILEAbi): Int32
-    func WerReportCloseHandle(hReportHandle: HREPORT): Int32
-    // param-hint: pReportInformation optional
-    func WerReportCreate(pwzEventType: CPointer<UInt16>, repType: WER_REPORT_TYPEAbi, pReportInformation: CPointer<WER_REPORT_INFORMATIONAbi>, phReportHandle: CPointer<HREPORT>): Int32
-    // param-hint: pwzName optional
-    func WerReportSetParameter(hReportHandle: HREPORT, dwparamID: UInt32, pwzName: CPointer<UInt16>, pwzValue: CPointer<UInt16>): Int32
-    func WerReportSetUIOption(hReportHandle: HREPORT, repUITypeID: WER_REPORT_UIAbi, pwzValue: CPointer<UInt16>): Int32
-    // param-hint: pSubmitResult optional
-    func WerReportSubmit(hReportHandle: HREPORT, consent: WER_CONSENTAbi, dwFlags: WER_SUBMIT_FLAGSAbi, pSubmitResult: CPointer<WER_SUBMIT_RESULTAbi>): Int32
-    // param-hint: hReportStore optional
-    func WerStoreClose(hReportStore: HREPORTSTORE): Unit
-    // param-hint: ppszReportKey optional
-    func WerStoreGetFirstReportKey(hReportStore: HREPORTSTORE, ppszReportKey: CPointer<CPointer<UInt16>>): Int32
-    // param-hint: ppszReportKey optional
-    func WerStoreGetNextReportKey(hReportStore: HREPORTSTORE, ppszReportKey: CPointer<CPointer<UInt16>>): Int32
-    func WerStoreGetReportCount(hReportStore: HREPORTSTORE, pdwReportCount: CPointer<UInt32>): Int32
-    func WerStoreGetSizeOnDisk(hReportStore: HREPORTSTORE, pqwSizeInBytes: CPointer<UInt64>): Int32
-    func WerStoreOpen(repStoreType: REPORT_STORE_TYPESAbi, phReportStore: CPointer<HREPORTSTORE>): Int32
-    func WerStorePurge(): Int32
-    func WerStoreQueryReportMetadataV1(hReportStore: HREPORTSTORE, pszReportKey: CPointer<UInt16>, pReportMetadata: CPointer<WER_REPORT_METADATA_V1Abi>): Int32
-    func WerStoreQueryReportMetadataV2(hReportStore: HREPORTSTORE, pszReportKey: CPointer<UInt16>, pReportMetadata: CPointer<WER_REPORT_METADATA_V2Abi>): Int32
-    func WerStoreQueryReportMetadataV3(hReportStore: HREPORTSTORE, pszReportKey: CPointer<UInt16>, pReportMetadata: CPointer<WER_REPORT_METADATA_V3Abi>): Int32
-    // param-hint: pSubmitResult optional
-    func WerStoreUploadReport(hReportStore: HREPORTSTORE, pszReportKey: CPointer<UInt16>, dwFlags: UInt32, pSubmitResult: CPointer<WER_SUBMIT_RESULTAbi>): Int32
+@When[Windows_Win32_System_ErrorReporting == "on" && FAULTREP == "on" && Windows_Win32_System_ErrorReporting_ReportFault == "on" && (((arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "x86_64" && ((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on")) && Windows_Win32_System_Diagnostics_Debug == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Diagnostics_Debug == "on")]
+public unsafe func Windows_ReportFault(pep: CPointer<Win32__impl_l2.EXCEPTION_POINTERSAbi>, dwOpt: UInt32): EFaultRepRetValAbi {
+    return ReportFault(pep, dwOpt)
 }
 
-@When[WER == "on" && (((arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "x86_64" && ((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on")) && Windows_Win32_System_Diagnostics_Debug == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Diagnostics_Debug == "on")]
+@When[Windows_Win32_System_ErrorReporting == "on" && FAULTREP == "on" && Windows_Win32_System_ErrorReporting_WerReportHang == "on"]
+foreign {
+    // param-hint: pwzHungApplicationName optional
+    func WerReportHang(hwndHungApp: CPointer<Unit>, pwzHungApplicationName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && FAULTREP == "on" && Windows_Win32_System_ErrorReporting_WerReportHang == "on"]
+public unsafe func Windows_WerReportHang(hwndHungApp: CPointer<Unit>, pwzHungApplicationName: CPointer<UInt16>): Int32 {
+    return WerReportHang(hwndHungApp, pwzHungApplicationName)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerAddExcludedApplication == "on"]
+foreign {
+    func WerAddExcludedApplication(pwzExeName: CPointer<UInt16>, bAllUsers: Int32): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerAddExcludedApplication == "on"]
+public unsafe func Windows_WerAddExcludedApplication(pwzExeName: CPointer<UInt16>, bAllUsers: Int32): Int32 {
+    return WerAddExcludedApplication(pwzExeName, bAllUsers)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerFreeString == "on"]
+foreign {
+    func WerFreeString(pwszStr: CPointer<UInt16>): Unit
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerFreeString == "on"]
+public unsafe func Windows_WerFreeString(pwszStr: CPointer<UInt16>): Unit {
+    WerFreeString(pwszStr)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerRemoveExcludedApplication == "on"]
+foreign {
+    func WerRemoveExcludedApplication(pwzExeName: CPointer<UInt16>, bAllUsers: Int32): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerRemoveExcludedApplication == "on"]
+public unsafe func Windows_WerRemoveExcludedApplication(pwzExeName: CPointer<UInt16>, bAllUsers: Int32): Int32 {
+    return WerRemoveExcludedApplication(pwzExeName, bAllUsers)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerReportAddDump == "on" && (((arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "x86_64" && ((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on")) && Windows_Win32_System_Diagnostics_Debug == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Diagnostics_Debug == "on")]
 foreign {
     // param-hint: hThread optional
     // param-hint: pExceptionParam optional
     // param-hint: pDumpCustomOptions optional
     func WerReportAddDump(hReportHandle: HREPORT, hProcess: CPointer<Unit>, hThread: CPointer<Unit>, dumpType: WER_DUMP_TYPEAbi, pExceptionParam: CPointer<WER_EXCEPTION_INFORMATIONAbi>, pDumpCustomOptions: CPointer<WER_DUMP_CUSTOM_OPTIONSAbi>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerReportAddDump == "on" && (((arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "x86_64" && ((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on")) && Windows_Win32_System_Diagnostics_Debug == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_Diagnostics_Debug == "on")]
+public unsafe func Windows_WerReportAddDump(hReportHandle: HREPORT, hProcess: CPointer<Unit>, hThread: CPointer<Unit>, dumpType: WER_DUMP_TYPEAbi, pExceptionParam: CPointer<WER_EXCEPTION_INFORMATIONAbi>, pDumpCustomOptions: CPointer<WER_DUMP_CUSTOM_OPTIONSAbi>, dwFlags: UInt32): Int32 {
+    return WerReportAddDump(hReportHandle, hProcess, hThread, dumpType, pExceptionParam, pDumpCustomOptions, dwFlags)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerReportAddFile == "on"]
+foreign {
+    func WerReportAddFile(hReportHandle: HREPORT, pwzPath: CPointer<UInt16>, repFileType: WER_FILE_TYPEAbi, dwFileFlags: WER_FILEAbi): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerReportAddFile == "on"]
+public unsafe func Windows_WerReportAddFile(hReportHandle: HREPORT, pwzPath: CPointer<UInt16>, repFileType: WER_FILE_TYPEAbi, dwFileFlags: WER_FILEAbi): Int32 {
+    return WerReportAddFile(hReportHandle, pwzPath, repFileType, dwFileFlags)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerReportCloseHandle == "on"]
+foreign {
+    func WerReportCloseHandle(hReportHandle: HREPORT): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerReportCloseHandle == "on"]
+public unsafe func Windows_WerReportCloseHandle(hReportHandle: HREPORT): Int32 {
+    return WerReportCloseHandle(hReportHandle)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerReportCreate == "on"]
+foreign {
+    // param-hint: pReportInformation optional
+    func WerReportCreate(pwzEventType: CPointer<UInt16>, repType: WER_REPORT_TYPEAbi, pReportInformation: CPointer<WER_REPORT_INFORMATIONAbi>, phReportHandle: CPointer<HREPORT>): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerReportCreate == "on"]
+public unsafe func Windows_WerReportCreate(pwzEventType: CPointer<UInt16>, repType: WER_REPORT_TYPEAbi, pReportInformation: CPointer<WER_REPORT_INFORMATIONAbi>, phReportHandle: CPointer<HREPORT>): Int32 {
+    return WerReportCreate(pwzEventType, repType, pReportInformation, phReportHandle)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerReportSetParameter == "on"]
+foreign {
+    // param-hint: pwzName optional
+    func WerReportSetParameter(hReportHandle: HREPORT, dwparamID: UInt32, pwzName: CPointer<UInt16>, pwzValue: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerReportSetParameter == "on"]
+public unsafe func Windows_WerReportSetParameter(hReportHandle: HREPORT, dwparamID: UInt32, pwzName: CPointer<UInt16>, pwzValue: CPointer<UInt16>): Int32 {
+    return WerReportSetParameter(hReportHandle, dwparamID, pwzName, pwzValue)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerReportSetUIOption == "on"]
+foreign {
+    func WerReportSetUIOption(hReportHandle: HREPORT, repUITypeID: WER_REPORT_UIAbi, pwzValue: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerReportSetUIOption == "on"]
+public unsafe func Windows_WerReportSetUIOption(hReportHandle: HREPORT, repUITypeID: WER_REPORT_UIAbi, pwzValue: CPointer<UInt16>): Int32 {
+    return WerReportSetUIOption(hReportHandle, repUITypeID, pwzValue)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerReportSubmit == "on"]
+foreign {
+    // param-hint: pSubmitResult optional
+    func WerReportSubmit(hReportHandle: HREPORT, consent: WER_CONSENTAbi, dwFlags: WER_SUBMIT_FLAGSAbi, pSubmitResult: CPointer<WER_SUBMIT_RESULTAbi>): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerReportSubmit == "on"]
+public unsafe func Windows_WerReportSubmit(hReportHandle: HREPORT, consent: WER_CONSENTAbi, dwFlags: WER_SUBMIT_FLAGSAbi, pSubmitResult: CPointer<WER_SUBMIT_RESULTAbi>): Int32 {
+    return WerReportSubmit(hReportHandle, consent, dwFlags, pSubmitResult)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerStoreClose == "on"]
+foreign {
+    // param-hint: hReportStore optional
+    func WerStoreClose(hReportStore: HREPORTSTORE): Unit
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerStoreClose == "on"]
+public unsafe func Windows_WerStoreClose(hReportStore: HREPORTSTORE): Unit {
+    WerStoreClose(hReportStore)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerStoreGetFirstReportKey == "on"]
+foreign {
+    // param-hint: ppszReportKey optional
+    func WerStoreGetFirstReportKey(hReportStore: HREPORTSTORE, ppszReportKey: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerStoreGetFirstReportKey == "on"]
+public unsafe func Windows_WerStoreGetFirstReportKey(hReportStore: HREPORTSTORE, ppszReportKey: CPointer<CPointer<UInt16>>): Int32 {
+    return WerStoreGetFirstReportKey(hReportStore, ppszReportKey)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerStoreGetNextReportKey == "on"]
+foreign {
+    // param-hint: ppszReportKey optional
+    func WerStoreGetNextReportKey(hReportStore: HREPORTSTORE, ppszReportKey: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerStoreGetNextReportKey == "on"]
+public unsafe func Windows_WerStoreGetNextReportKey(hReportStore: HREPORTSTORE, ppszReportKey: CPointer<CPointer<UInt16>>): Int32 {
+    return WerStoreGetNextReportKey(hReportStore, ppszReportKey)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerStoreGetReportCount == "on"]
+foreign {
+    func WerStoreGetReportCount(hReportStore: HREPORTSTORE, pdwReportCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerStoreGetReportCount == "on"]
+public unsafe func Windows_WerStoreGetReportCount(hReportStore: HREPORTSTORE, pdwReportCount: CPointer<UInt32>): Int32 {
+    return WerStoreGetReportCount(hReportStore, pdwReportCount)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerStoreGetSizeOnDisk == "on"]
+foreign {
+    func WerStoreGetSizeOnDisk(hReportStore: HREPORTSTORE, pqwSizeInBytes: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerStoreGetSizeOnDisk == "on"]
+public unsafe func Windows_WerStoreGetSizeOnDisk(hReportStore: HREPORTSTORE, pqwSizeInBytes: CPointer<UInt64>): Int32 {
+    return WerStoreGetSizeOnDisk(hReportStore, pqwSizeInBytes)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerStoreOpen == "on"]
+foreign {
+    func WerStoreOpen(repStoreType: REPORT_STORE_TYPESAbi, phReportStore: CPointer<HREPORTSTORE>): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerStoreOpen == "on"]
+public unsafe func Windows_WerStoreOpen(repStoreType: REPORT_STORE_TYPESAbi, phReportStore: CPointer<HREPORTSTORE>): Int32 {
+    return WerStoreOpen(repStoreType, phReportStore)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerStorePurge == "on"]
+foreign {
+    func WerStorePurge(): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerStorePurge == "on"]
+public unsafe func Windows_WerStorePurge(): Int32 {
+    return WerStorePurge()
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerStoreQueryReportMetadataV1 == "on"]
+foreign {
+    func WerStoreQueryReportMetadataV1(hReportStore: HREPORTSTORE, pszReportKey: CPointer<UInt16>, pReportMetadata: CPointer<WER_REPORT_METADATA_V1Abi>): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerStoreQueryReportMetadataV1 == "on"]
+public unsafe func Windows_WerStoreQueryReportMetadataV1(hReportStore: HREPORTSTORE, pszReportKey: CPointer<UInt16>, pReportMetadata: CPointer<WER_REPORT_METADATA_V1Abi>): Int32 {
+    return WerStoreQueryReportMetadataV1(hReportStore, pszReportKey, pReportMetadata)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerStoreQueryReportMetadataV2 == "on"]
+foreign {
+    func WerStoreQueryReportMetadataV2(hReportStore: HREPORTSTORE, pszReportKey: CPointer<UInt16>, pReportMetadata: CPointer<WER_REPORT_METADATA_V2Abi>): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerStoreQueryReportMetadataV2 == "on"]
+public unsafe func Windows_WerStoreQueryReportMetadataV2(hReportStore: HREPORTSTORE, pszReportKey: CPointer<UInt16>, pReportMetadata: CPointer<WER_REPORT_METADATA_V2Abi>): Int32 {
+    return WerStoreQueryReportMetadataV2(hReportStore, pszReportKey, pReportMetadata)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerStoreQueryReportMetadataV3 == "on"]
+foreign {
+    func WerStoreQueryReportMetadataV3(hReportStore: HREPORTSTORE, pszReportKey: CPointer<UInt16>, pReportMetadata: CPointer<WER_REPORT_METADATA_V3Abi>): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerStoreQueryReportMetadataV3 == "on"]
+public unsafe func Windows_WerStoreQueryReportMetadataV3(hReportStore: HREPORTSTORE, pszReportKey: CPointer<UInt16>, pReportMetadata: CPointer<WER_REPORT_METADATA_V3Abi>): Int32 {
+    return WerStoreQueryReportMetadataV3(hReportStore, pszReportKey, pReportMetadata)
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerStoreUploadReport == "on"]
+foreign {
+    // param-hint: pSubmitResult optional
+    func WerStoreUploadReport(hReportStore: HREPORTSTORE, pszReportKey: CPointer<UInt16>, dwFlags: UInt32, pSubmitResult: CPointer<WER_SUBMIT_RESULTAbi>): Int32
+}
+
+@When[Windows_Win32_System_ErrorReporting == "on" && WER == "on" && Windows_Win32_System_ErrorReporting_WerStoreUploadReport == "on"]
+public unsafe func Windows_WerStoreUploadReport(hReportStore: HREPORTSTORE, pszReportKey: CPointer<UInt16>, dwFlags: UInt32, pSubmitResult: CPointer<WER_SUBMIT_RESULTAbi>): Int32 {
+    return WerStoreUploadReport(hReportStore, pszReportKey, dwFlags, pSubmitResult)
 }
 
 @When[Windows_Win32_System_ErrorReporting == "on"]

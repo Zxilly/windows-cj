@@ -183,7 +183,7 @@ extend HttpBufferContent <: windows_core.HandleWinrtType<HttpBufferContent> {
     }
 }
 
-@When[Windows_Web_Http == "on"]
+@When[Windows_Web_Http == "on" && Windows_Foundation_Collections == "on"]
 public class HttpCookieCollection <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -288,7 +288,7 @@ public class HttpCookieCollection <: InterfaceWrapperBase & ComInterface & windo
     }
 }
 
-@When[Windows_Web_Http == "on"]
+@When[Windows_Web_Http == "on" && Windows_Foundation_Collections == "on"]
 extend HttpCookieCollection <: windows_core.HandleWinrtType<HttpCookieCollection> {
     public static func intoWinrtHandle(value: HttpCookieCollection): CPointer<Unit> {
         value.asRaw()
@@ -387,6 +387,7 @@ public class HttpCookieManager <: InterfaceWrapperBase & ComInterface & windows_
         defaultInterface().DeleteCookie(cookie)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetCookies(uri: Foundation.Uri): HttpCookieCollection {
         return defaultInterface().GetCookies(uri)
     }
@@ -533,6 +534,7 @@ public class HttpFormUrlEncodedContent <: InterfaceWrapperBase & ComInterface & 
         return asIStringable().ToString()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Create(content: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, windows_core.HString>>): HttpFormUrlEncodedContent {
         var result__: Option<HttpFormUrlEncodedContent> = Option<HttpFormUrlEncodedContent>.None
         try (factory__ = windows_core.factory<HttpFormUrlEncodedContent, IHttpFormUrlEncodedContentFactory>().unwrap()) {
@@ -1835,7 +1837,10 @@ public struct IHttpCookieManagerVtbl {
     public var SetCookie: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var SetCookieWithThirdParty: CFunc<(CPointer<Unit>, CPointer<Unit>, Bool, CPointer<Bool>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var DeleteCookie: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetCookies: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetCookies: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1926,6 +1931,7 @@ public class IHttpCookieManager <: InterfaceWrapperBase & ComInterface & Runtime
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetCookies(uri: Foundation.Uri): HttpCookieCollection {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1942,7 +1948,10 @@ extend IHttpCookieManager <: windows_core.Interface<IHttpCookieManager> {}
 @C
 public struct IHttpFormUrlEncodedContentFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Create: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2011,6 +2020,7 @@ public class IHttpFormUrlEncodedContentFactory <: InterfaceWrapperBase & ComInte
         readVtbl<IHttpFormUrlEncodedContentFactoryVtbl>(IHttpFormUrlEncodedContentFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create(content: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, windows_core.HString>>): HttpFormUrlEncodedContent {
         let v = vtbl()
         var result__ = CPointer<Unit>()

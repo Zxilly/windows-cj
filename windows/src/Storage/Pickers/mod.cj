@@ -15,7 +15,7 @@ import windows_collections as windows_collections
 import windows_future as windows_future
 
 
-@When[Windows_Storage_Pickers == "on"]
+@When[Windows_Storage_Pickers == "on" && Windows_Foundation_Collections == "on"]
 public class FileExtensionVector <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -152,7 +152,7 @@ public class FileExtensionVector <: InterfaceWrapperBase & ComInterface & window
     }
 }
 
-@When[Windows_Storage_Pickers == "on"]
+@When[Windows_Storage_Pickers == "on" && Windows_Foundation_Collections == "on"]
 extend FileExtensionVector <: windows_core.HandleWinrtType<FileExtensionVector> {
     public static func intoWinrtHandle(value: FileExtensionVector): CPointer<Unit> {
         value.asRaw()
@@ -170,7 +170,7 @@ extend FileExtensionVector <: windows_core.HandleWinrtType<FileExtensionVector> 
     }
 }
 
-@When[Windows_Storage_Pickers == "on"]
+@When[Windows_Storage_Pickers == "on" && Windows_Foundation_Collections == "on"]
 public class FilePickerFileTypesOrderedMap <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -287,7 +287,7 @@ public class FilePickerFileTypesOrderedMap <: InterfaceWrapperBase & ComInterfac
     }
 }
 
-@When[Windows_Storage_Pickers == "on"]
+@When[Windows_Storage_Pickers == "on" && Windows_Foundation_Collections == "on"]
 extend FilePickerFileTypesOrderedMap <: windows_core.HandleWinrtType<FilePickerFileTypesOrderedMap> {
     public static func intoWinrtHandle(value: FilePickerFileTypesOrderedMap): CPointer<Unit> {
         value.asRaw()
@@ -305,7 +305,7 @@ extend FilePickerFileTypesOrderedMap <: windows_core.HandleWinrtType<FilePickerF
     }
 }
 
-@When[Windows_Storage_Pickers == "on"]
+@When[Windows_Storage_Pickers == "on" && Windows_Foundation_Collections == "on"]
 public class FilePickerSelectedFilesArray <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -410,7 +410,7 @@ public class FilePickerSelectedFilesArray <: InterfaceWrapperBase & ComInterface
     }
 }
 
-@When[Windows_Storage_Pickers == "on"]
+@When[Windows_Storage_Pickers == "on" && Windows_Foundation_Collections == "on"]
 extend FilePickerSelectedFilesArray <: windows_core.HandleWinrtType<FilePickerSelectedFilesArray> {
     public static func intoWinrtHandle(value: FilePickerSelectedFilesArray): CPointer<Unit> {
         value.asRaw()
@@ -624,9 +624,9 @@ extend IFileOpenPicker3 <: windows_core.Interface<IFileOpenPicker3> {}
 @C
 public struct IFileOpenPickerStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var ResumePickSingleFileAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var ResumePickSingleFileAsync: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -696,7 +696,7 @@ public class IFileOpenPickerStatics <: InterfaceWrapperBase & ComInterface & Run
         readVtbl<IFileOpenPickerStaticsVtbl>(IFileOpenPickerStaticsVtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func ResumePickSingleFileAsync(): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -713,9 +713,9 @@ extend IFileOpenPickerStatics <: windows_core.Interface<IFileOpenPickerStatics> 
 @C
 public struct IFileOpenPickerWithOperationIdVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var PickSingleFileAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var PickSingleFileAsync: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -785,7 +785,7 @@ public class IFileOpenPickerWithOperationId <: InterfaceWrapperBase & ComInterfa
         readVtbl<IFileOpenPickerWithOperationIdVtbl>(IFileOpenPickerWithOperationIdVtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func PickSingleFileAsync(pickerOperationId: windows_core.HString): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1404,14 +1404,17 @@ public struct IFileOpenPickerVtbl {
     public var SetSuggestedStartLocation: CFunc<(CPointer<Unit>, PickerLocationIdAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CommitButtonText: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetCommitButtonText: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var FileTypeFilter: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections != "on"]
+    public var FileTypeFilter: UIntNative = UIntNative(0)
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var PickSingleFileAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var PickSingleFileAsync: UIntNative = UIntNative(0)
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var PickMultipleFilesAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var PickMultipleFilesAsync: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -1537,6 +1540,7 @@ public class IFileOpenPicker <: InterfaceWrapperBase & ComInterface & RuntimeNam
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FileTypeFilter(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1545,7 +1549,7 @@ public class IFileOpenPicker <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return windows_collections.IVector<windows_core.HString>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func PickSingleFileAsync(): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1554,7 +1558,7 @@ public class IFileOpenPicker <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return windows_future.IAsyncOperation<_impl_l1.StorageFile>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func PickMultipleFilesAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.StorageFile>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1577,22 +1581,25 @@ public struct IFileSavePickerVtbl {
     public var SetSuggestedStartLocation: CFunc<(CPointer<Unit>, PickerLocationIdAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CommitButtonText: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetCommitButtonText: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var FileTypeChoices: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FileTypeChoices: UIntNative = UIntNative(0)
     public var DefaultFileExtension: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetDefaultFileExtension: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var SuggestedSaveFile: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var SuggestedSaveFile: UIntNative = UIntNative(0)
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var SetSuggestedSaveFile: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var SetSuggestedSaveFile: UIntNative = UIntNative(0)
     public var SuggestedFileName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetSuggestedFileName: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var PickSaveFileAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var PickSaveFileAsync: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -1704,6 +1711,7 @@ public class IFileSavePicker <: InterfaceWrapperBase & ComInterface & RuntimeNam
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FileTypeChoices(): windows_collections.IMap<windows_core.HString, windows_collections.IVector<windows_core.HString>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1726,7 +1734,7 @@ public class IFileSavePicker <: InterfaceWrapperBase & ComInterface & RuntimeNam
         HRESULT(hr).ok()
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func SuggestedSaveFile(): _impl_l1.StorageFile {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1735,7 +1743,7 @@ public class IFileSavePicker <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return _impl_l1.StorageFile.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func SetSuggestedSaveFile(value: _impl_l1.StorageFile): Unit {
         let v = vtbl()
         let hr = v.SetSuggestedSaveFile(asRaw(), value.asRaw())
@@ -1756,7 +1764,7 @@ public class IFileSavePicker <: InterfaceWrapperBase & ComInterface & RuntimeNam
         HRESULT(hr).ok()
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func PickSaveFileAsync(): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1781,7 +1789,10 @@ public struct IFolderPickerVtbl {
     public var SetSuggestedStartLocation: CFunc<(CPointer<Unit>, PickerLocationIdAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CommitButtonText: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetCommitButtonText: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var FileTypeFilter: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FileTypeFilter: UIntNative = UIntNative(0)
     @When[Windows_Storage == "on"]
     public var PickSingleFolderAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Storage != "on"]
@@ -1910,6 +1921,7 @@ public class IFolderPicker <: InterfaceWrapperBase & ComInterface & RuntimeName 
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FileTypeFilter(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2043,21 +2055,22 @@ public class FileOpenPicker <: InterfaceWrapperBase & ComInterface & windows_int
         defaultInterface().SetCommitButtonText(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FileTypeFilter(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().FileTypeFilter()
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func PickSingleFileAsync(): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
         return defaultInterface().PickSingleFileAsync()
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func PickMultipleFilesAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.StorageFile>> {
         return defaultInterface().PickMultipleFilesAsync()
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public static unsafe func ResumePickSingleFileAsync(): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
         var result__: Option<windows_future.IAsyncOperation<_impl_l1.StorageFile>> = Option<windows_future.IAsyncOperation<_impl_l1.StorageFile>>.None
         try (factory__ = windows_core.factory<FileOpenPicker, IFileOpenPickerStatics>().unwrap()) {
@@ -2204,6 +2217,7 @@ public class FileSavePicker <: InterfaceWrapperBase & ComInterface & windows_int
         defaultInterface().SetCommitButtonText(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FileTypeChoices(): windows_collections.IMap<windows_core.HString, windows_collections.IVector<windows_core.HString>> {
         return defaultInterface().FileTypeChoices()
     }
@@ -2216,12 +2230,12 @@ public class FileSavePicker <: InterfaceWrapperBase & ComInterface & windows_int
         defaultInterface().SetDefaultFileExtension(value)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func SuggestedSaveFile(): _impl_l1.StorageFile {
         return defaultInterface().SuggestedSaveFile()
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func SetSuggestedSaveFile(value: _impl_l1.StorageFile): Unit {
         defaultInterface().SetSuggestedSaveFile(value)
     }
@@ -2234,7 +2248,7 @@ public class FileSavePicker <: InterfaceWrapperBase & ComInterface & windows_int
         defaultInterface().SetSuggestedFileName(value)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func PickSaveFileAsync(): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
         return defaultInterface().PickSaveFileAsync()
     }
@@ -2382,6 +2396,7 @@ public class FolderPicker <: InterfaceWrapperBase & ComInterface & windows_inter
         defaultInterface().SetCommitButtonText(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FileTypeFilter(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().FileTypeFilter()
     }

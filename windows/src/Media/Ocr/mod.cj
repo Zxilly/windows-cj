@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Graphics_Imaging == "on"]
 import windows.Graphics.Imaging as Graphics_Imaging
 import windows._impl_l1 as _impl_l1
 import windows_collections as windows_collections
@@ -213,7 +211,10 @@ extend OcrWord <: windows_core.HandleWinrtType<OcrWord> {
 @C
 public struct IOcrLineVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Words: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Words: UIntNative = UIntNative(0)
     public var Text: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -283,6 +284,7 @@ public class IOcrLine <: InterfaceWrapperBase & ComInterface & RuntimeName & win
         readVtbl<IOcrLineVtbl>(IOcrLineVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Words(): windows_collections.IVectorView<OcrWord> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -372,6 +374,7 @@ public class OcrLine <: InterfaceWrapperBase & ComInterface & windows_interface.
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Words(): windows_collections.IVectorView<OcrWord> {
         return defaultInterface().Words()
     }
@@ -403,7 +406,10 @@ extend OcrLine <: windows_core.HandleWinrtType<OcrLine> {
 @C
 public struct IOcrResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Lines: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Lines: UIntNative = UIntNative(0)
     public var TextAngle: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Text: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -474,6 +480,7 @@ public class IOcrResult <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         readVtbl<IOcrResultVtbl>(IOcrResultVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Lines(): windows_collections.IVectorView<OcrLine> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -571,6 +578,7 @@ public class OcrResult <: InterfaceWrapperBase & ComInterface & windows_interfac
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Lines(): windows_collections.IVectorView<OcrLine> {
         return defaultInterface().Lines()
     }
@@ -709,9 +717,9 @@ extend IOcrEngine <: windows_core.Interface<IOcrEngine> {}
 public struct IOcrEngineStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var MaxImageDimension: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Globalization == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Globalization == "on"]
     public var AvailableRecognizerLanguages: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Globalization != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Globalization != "on"]
     public var AvailableRecognizerLanguages: UIntNative = UIntNative(0)
     @When[Windows_Globalization == "on"]
     public var IsLanguageSupported: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -798,7 +806,7 @@ public class IOcrEngineStatics <: InterfaceWrapperBase & ComInterface & RuntimeN
         return result__
     }
 
-    @When[Windows_Globalization == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Globalization == "on"]
     public unsafe func AvailableRecognizerLanguages(): windows_collections.IVectorView<_impl_l1.Language> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -927,7 +935,7 @@ public class OcrEngine <: InterfaceWrapperBase & ComInterface & windows_interfac
         }
     }
 
-    @When[Windows_Globalization == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Globalization == "on"]
     public static unsafe func AvailableRecognizerLanguages(): windows_collections.IVectorView<_impl_l1.Language> {
         var result__: Option<windows_collections.IVectorView<_impl_l1.Language>> = Option<windows_collections.IVectorView<_impl_l1.Language>>.None
         try (factory__ = windows_core.factory<OcrEngine, IOcrEngineStatics>().unwrap()) {

@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_UI == "on"]
 import windows.UI as UI
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -17320,7 +17318,7 @@ extend Transition <: windows_core.HandleWinrtType<Transition> {
     }
 }
 
-@When[Windows_UI_Xaml_Media_Animation == "on"]
+@When[Windows_UI_Xaml_Media_Animation == "on" && Windows_Foundation_Collections == "on"]
 public class TransitionCollection <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -17468,7 +17466,7 @@ public class TransitionCollection <: InterfaceWrapperBase & ComInterface & windo
     }
 }
 
-@When[Windows_UI_Xaml_Media_Animation == "on"]
+@When[Windows_UI_Xaml_Media_Animation == "on" && Windows_Foundation_Collections == "on"]
 extend TransitionCollection <: windows_core.HandleWinrtType<TransitionCollection> {
     public static func intoWinrtHandle(value: TransitionCollection): CPointer<Unit> {
         value.asRaw()

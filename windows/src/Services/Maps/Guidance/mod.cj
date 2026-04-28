@@ -10,13 +10,9 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Devices_Geolocation == "on"]
 import windows.Devices.Geolocation as Devices_Geolocation
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Services_Maps == "on"]
 import windows.Services.Maps as Services_Maps
-@When[Windows_UI == "on"]
 import windows.UI as UI
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -580,7 +576,10 @@ extend GuidanceMode <: windows_core.CopyType & windows_core.RuntimeType & window
 public struct IGuidanceAudioNotificationRequestedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var AudioNotification: CFunc<(CPointer<Unit>, CPointer<GuidanceAudioNotificationKindAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var AudioFilePaths: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AudioFilePaths: UIntNative = UIntNative(0)
     public var AudioText: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -658,6 +657,7 @@ public class IGuidanceAudioNotificationRequestedEventArgs <: InterfaceWrapperBas
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<GuidanceAudioNotificationKind>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AudioFilePaths(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1117,7 +1117,10 @@ public struct IGuidanceRoadSignpostVtbl {
     public var ForegroundColor: CFunc<(CPointer<Unit>, CPointer<UI.ColorAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI != "on"]
     public var ForegroundColor: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var ExitDirections: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ExitDirections: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1220,6 +1223,7 @@ public class IGuidanceRoadSignpost <: InterfaceWrapperBase & ComInterface & Runt
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<UI.Color>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ExitDirections(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1436,6 +1440,7 @@ public class GuidanceAudioNotificationRequestedEventArgs <: InterfaceWrapperBase
         return defaultInterface().AudioNotification()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AudioFilePaths(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().AudioFilePaths()
     }
@@ -1771,6 +1776,7 @@ public class GuidanceRoadSignpost <: InterfaceWrapperBase & ComInterface & windo
         return defaultInterface().ForegroundColor()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ExitDirections(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().ExitDirections()
     }
@@ -2359,7 +2365,10 @@ public struct IGuidanceRouteVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Duration: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Distance: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Maneuvers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Maneuvers: UIntNative = UIntNative(0)
     @When[Windows_Devices_Geolocation == "on"]
     public var BoundingBox: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Geolocation != "on"]
@@ -2368,7 +2377,10 @@ public struct IGuidanceRouteVtbl {
     public var Path: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Geolocation != "on"]
     public var Path: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var RoadSegments: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RoadSegments: UIntNative = UIntNative(0)
     @When[Windows_Services_Maps == "on"]
     public var ConvertToMapRoute: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Services_Maps != "on"]
@@ -2457,6 +2469,7 @@ public class IGuidanceRoute <: InterfaceWrapperBase & ComInterface & RuntimeName
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Maneuvers(): windows_collections.IVectorView<GuidanceManeuver> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2483,6 +2496,7 @@ public class IGuidanceRoute <: InterfaceWrapperBase & ComInterface & RuntimeName
         return Devices_Geolocation.Geopath.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RoadSegments(): windows_collections.IVectorView<GuidanceRoadSegment> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2897,6 +2911,7 @@ public class GuidanceRoute <: InterfaceWrapperBase & ComInterface & windows_inte
         return defaultInterface().Distance()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Maneuvers(): windows_collections.IVectorView<GuidanceManeuver> {
         return defaultInterface().Maneuvers()
     }
@@ -2911,6 +2926,7 @@ public class GuidanceRoute <: InterfaceWrapperBase & ComInterface & windows_inte
         return defaultInterface().Path()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RoadSegments(): windows_collections.IVectorView<GuidanceRoadSegment> {
         return defaultInterface().RoadSegments()
     }
@@ -3211,6 +3227,7 @@ public class GuidanceUpdatedEventArgs <: InterfaceWrapperBase & ComInterface & w
         return defaultInterface().IsNewManeuver()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func LaneInfo(): windows_collections.IVectorView<GuidanceLaneInfo> {
         return defaultInterface().LaneInfo()
     }
@@ -4014,7 +4031,10 @@ public struct IGuidanceUpdatedEventArgsVtbl {
     public var Route: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CurrentLocation: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsNewManeuver: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var LaneInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var LaneInfo: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4187,6 +4207,7 @@ public class IGuidanceUpdatedEventArgs <: InterfaceWrapperBase & ComInterface & 
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func LaneInfo(): windows_collections.IVectorView<GuidanceLaneInfo> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

@@ -158,9 +158,9 @@ extend IProcessDiagnosticInfo <: windows_core.Interface<IProcessDiagnosticInfo> 
 @C
 public struct IProcessDiagnosticInfo2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
     public var GetAppDiagnosticInfos: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_System != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_System != "on"]
     public var GetAppDiagnosticInfos: UIntNative = UIntNative(0)
     public var IsPackaged: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -231,7 +231,7 @@ public class IProcessDiagnosticInfo2 <: InterfaceWrapperBase & ComInterface & Ru
         readVtbl<IProcessDiagnosticInfo2Vtbl>(IProcessDiagnosticInfo2Vtbl())
     }
 
-    @When[Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
     public unsafe func GetAppDiagnosticInfos(): windows_collections.IVector<AppDiagnosticInfo> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -256,7 +256,10 @@ extend IProcessDiagnosticInfo2 <: windows_core.Interface<IProcessDiagnosticInfo2
 @C
 public struct IProcessDiagnosticInfoStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetForProcesses: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetForProcesses: UIntNative = UIntNative(0)
     public var GetForCurrentProcess: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -326,6 +329,7 @@ public class IProcessDiagnosticInfoStatics <: InterfaceWrapperBase & ComInterfac
         readVtbl<IProcessDiagnosticInfoStaticsVtbl>(IProcessDiagnosticInfoStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetForProcesses(): windows_collections.IVectorView<ProcessDiagnosticInfo> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -528,6 +532,7 @@ public class ProcessDiagnosticInfo <: InterfaceWrapperBase & ComInterface & wind
         return defaultInterface().CpuUsage()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetForProcesses(): windows_collections.IVectorView<ProcessDiagnosticInfo> {
         var result__: Option<windows_collections.IVectorView<ProcessDiagnosticInfo>> = Option<windows_collections.IVectorView<ProcessDiagnosticInfo>>.None
         try (factory__ = windows_core.factory<ProcessDiagnosticInfo, IProcessDiagnosticInfoStatics>().unwrap()) {

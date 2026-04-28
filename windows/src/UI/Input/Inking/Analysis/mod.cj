@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_UI_Input_Inking == "on"]
 import windows.UI.Input.Inking as UI_Input_Inking
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -302,12 +301,22 @@ public struct IInkAnalysisNodeVtbl {
     public var Id: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Kind: CFunc<(CPointer<Unit>, CPointer<InkAnalysisNodeKindAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var BoundingRect: CFunc<(CPointer<Unit>, CPointer<windows_future.RectAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var RotatedBoundingRect: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RotatedBoundingRect: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Children: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Children: UIntNative = UIntNative(0)
     public var Parent: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetStrokeIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetStrokeIds: UIntNative = UIntNative(0)
     public init() {}
 
+    @When[Windows_Foundation_Collections == "on"]
     public static func new<Identity>(offset!: Int64 = 0): IInkAnalysisNodeVtbl where Identity <: IInkAnalysisNode_Impl {
         let _ = offset
         var vtbl = IInkAnalysisNodeVtbl()
@@ -336,22 +345,8 @@ public struct IInkAnalysisNodeVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.RotatedBoundingRect = { instanceRaw, result__ =>
-            match (unsafe { asImplFromRaw<IInkAnalysisNode_ImplErased>(instanceRaw) }) {
-                case Some(impl) =>
-                    impl.__winrtThunk_RotatedBoundingRect(result__)
-                case None =>
-                    E_NOINTERFACE.value
-            }
-        }
-        vtbl.Children = { instanceRaw, result__ =>
-            match (unsafe { asImplFromRaw<IInkAnalysisNode_ImplErased>(instanceRaw) }) {
-                case Some(impl) =>
-                    impl.__winrtThunk_Children(result__)
-                case None =>
-                    E_NOINTERFACE.value
-            }
-        }
+        vtbl = IInkAnalysisNodeVtbl.__assignRotatedBoundingRect<Identity>(vtbl)
+        vtbl = IInkAnalysisNodeVtbl.__assignChildren<Identity>(vtbl)
         vtbl.Parent = { instanceRaw, result__ =>
             match (unsafe { asImplFromRaw<IInkAnalysisNode_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
@@ -360,7 +355,52 @@ public struct IInkAnalysisNodeVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetStrokeIds = { instanceRaw, result__ =>
+        vtbl = IInkAnalysisNodeVtbl.__assignGetStrokeIds<Identity>(vtbl)
+        return vtbl
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections == "on"]
+    public static func __assignRotatedBoundingRect<Identity>(vtbl: IInkAnalysisNodeVtbl): IInkAnalysisNodeVtbl where Identity <: IInkAnalysisNode_Impl {
+        var next = vtbl
+        next.RotatedBoundingRect = { instanceRaw, result__ =>
+            match (unsafe { asImplFromRaw<IInkAnalysisNode_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_RotatedBoundingRect(result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        return next
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections != "on"]
+    public static func __assignRotatedBoundingRect<Identity>(vtbl: IInkAnalysisNodeVtbl): IInkAnalysisNodeVtbl where Identity <: IInkAnalysisNode_Impl {
+        return vtbl
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections == "on"]
+    public static func __assignChildren<Identity>(vtbl: IInkAnalysisNodeVtbl): IInkAnalysisNodeVtbl where Identity <: IInkAnalysisNode_Impl {
+        var next = vtbl
+        next.Children = { instanceRaw, result__ =>
+            match (unsafe { asImplFromRaw<IInkAnalysisNode_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_Children(result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        return next
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections != "on"]
+    public static func __assignChildren<Identity>(vtbl: IInkAnalysisNodeVtbl): IInkAnalysisNodeVtbl where Identity <: IInkAnalysisNode_Impl {
+        return vtbl
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections == "on"]
+    public static func __assignGetStrokeIds<Identity>(vtbl: IInkAnalysisNodeVtbl): IInkAnalysisNodeVtbl where Identity <: IInkAnalysisNode_Impl {
+        var next = vtbl
+        next.GetStrokeIds = { instanceRaw, result__ =>
             match (unsafe { asImplFromRaw<IInkAnalysisNode_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
                     impl.__winrtThunk_GetStrokeIds(result__)
@@ -368,6 +408,11 @@ public struct IInkAnalysisNodeVtbl {
                     E_NOINTERFACE.value
             }
         }
+        return next
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections != "on"]
+    public static func __assignGetStrokeIds<Identity>(vtbl: IInkAnalysisNodeVtbl): IInkAnalysisNodeVtbl where Identity <: IInkAnalysisNode_Impl {
         return vtbl
     }
 
@@ -379,7 +424,7 @@ public struct IInkAnalysisNodeVtbl {
     }
 }
 
-@When[Windows_UI_Input_Inking_Analysis == "on"]
+@When[Windows_UI_Input_Inking_Analysis == "on" && Windows_Foundation_Collections == "on"]
 public interface IInkAnalysisNode_ImplErased {
     public func __winrtThunk_Id(result__: CPointer<UInt32>): Int32
 
@@ -396,7 +441,7 @@ public interface IInkAnalysisNode_ImplErased {
     public func __winrtThunk_GetStrokeIds(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_UI_Input_Inking_Analysis == "on"]
+@When[Windows_UI_Input_Inking_Analysis == "on" && Windows_Foundation_Collections == "on"]
 public interface IInkAnalysisNode_Impl <: IInkAnalysisNode_ImplErased {
     public func Id(): windows_core.Result<UInt32>
 
@@ -613,6 +658,7 @@ public class IInkAnalysisNode <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<windows_future.Rect>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RotatedBoundingRect(): windows_collections.IVectorView<windows_future.Point> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -621,6 +667,7 @@ public class IInkAnalysisNode <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_collections.IVectorView<windows_future.Point>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Children(): windows_collections.IVectorView<IInkAnalysisNode> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -637,6 +684,7 @@ public class IInkAnalysisNode <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return IInkAnalysisNode.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetStrokeIds(): windows_collections.IVectorView<UInt32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -836,7 +884,10 @@ extend IInkAnalysisResult <: windows_core.Interface<IInkAnalysisResult> {}
 public struct IInkAnalysisRootVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var RecognizedText: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindNodes: CFunc<(CPointer<Unit>, InkAnalysisNodeKindAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindNodes: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -925,6 +976,7 @@ public class IInkAnalysisRoot <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindNodes(nodeKind: InkAnalysisNodeKind): windows_collections.IVectorView<IInkAnalysisNode> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1115,10 +1167,12 @@ public class InkAnalysisNode <: InterfaceWrapperBase & ComInterface & windows_in
         return defaultInterface().BoundingRect()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RotatedBoundingRect(): windows_collections.IVectorView<windows_future.Point> {
         return defaultInterface().RotatedBoundingRect()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Children(): windows_collections.IVectorView<IInkAnalysisNode> {
         return defaultInterface().Children()
     }
@@ -1127,6 +1181,7 @@ public class InkAnalysisNode <: InterfaceWrapperBase & ComInterface & windows_in
         return defaultInterface().Parent()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetStrokeIds(): windows_collections.IVectorView<UInt32> {
         return defaultInterface().GetStrokeIds()
     }
@@ -1242,10 +1297,12 @@ public class InkAnalysisParagraph <: InterfaceWrapperBase & ComInterface & windo
         return asIInkAnalysisNode().BoundingRect()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RotatedBoundingRect(): windows_collections.IVectorView<windows_future.Point> {
         return asIInkAnalysisNode().RotatedBoundingRect()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Children(): windows_collections.IVectorView<IInkAnalysisNode> {
         return asIInkAnalysisNode().Children()
     }
@@ -1254,6 +1311,7 @@ public class InkAnalysisParagraph <: InterfaceWrapperBase & ComInterface & windo
         return asIInkAnalysisNode().Parent()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetStrokeIds(): windows_collections.IVectorView<UInt32> {
         return asIInkAnalysisNode().GetStrokeIds()
     }
@@ -1449,6 +1507,7 @@ public class InkAnalysisRoot <: InterfaceWrapperBase & ComInterface & windows_in
         return defaultInterface().RecognizedText()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindNodes(nodeKind: InkAnalysisNodeKind): windows_collections.IVectorView<IInkAnalysisNode> {
         return defaultInterface().FindNodes(nodeKind)
     }
@@ -1465,10 +1524,12 @@ public class InkAnalysisRoot <: InterfaceWrapperBase & ComInterface & windows_in
         return asIInkAnalysisNode().BoundingRect()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RotatedBoundingRect(): windows_collections.IVectorView<windows_future.Point> {
         return asIInkAnalysisNode().RotatedBoundingRect()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Children(): windows_collections.IVectorView<IInkAnalysisNode> {
         return asIInkAnalysisNode().Children()
     }
@@ -1477,6 +1538,7 @@ public class InkAnalysisRoot <: InterfaceWrapperBase & ComInterface & windows_in
         return asIInkAnalysisNode().Parent()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetStrokeIds(): windows_collections.IVectorView<UInt32> {
         return asIInkAnalysisNode().GetStrokeIds()
     }
@@ -1592,10 +1654,12 @@ public class InkAnalysisWritingRegion <: InterfaceWrapperBase & ComInterface & w
         return asIInkAnalysisNode().BoundingRect()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RotatedBoundingRect(): windows_collections.IVectorView<windows_future.Point> {
         return asIInkAnalysisNode().RotatedBoundingRect()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Children(): windows_collections.IVectorView<IInkAnalysisNode> {
         return asIInkAnalysisNode().Children()
     }
@@ -1604,6 +1668,7 @@ public class InkAnalysisWritingRegion <: InterfaceWrapperBase & ComInterface & w
         return asIInkAnalysisNode().Parent()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetStrokeIds(): windows_collections.IVectorView<UInt32> {
         return asIInkAnalysisNode().GetStrokeIds()
     }
@@ -1730,7 +1795,10 @@ public struct IInkAnalysisInkDrawingVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var DrawingKind: CFunc<(CPointer<Unit>, CPointer<InkAnalysisDrawingKindAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Center: CFunc<(CPointer<Unit>, CPointer<windows_future.PointAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Points: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Points: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1827,6 +1895,7 @@ public class IInkAnalysisInkDrawing <: InterfaceWrapperBase & ComInterface & Run
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<windows_future.Point>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Points(): windows_collections.IVectorView<windows_future.Point> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1844,7 +1913,10 @@ extend IInkAnalysisInkDrawing <: windows_core.Interface<IInkAnalysisInkDrawing> 
 public struct IInkAnalysisInkWordVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var RecognizedText: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var TextAlternates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var TextAlternates: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1933,6 +2005,7 @@ public class IInkAnalysisInkWord <: InterfaceWrapperBase & ComInterface & Runtim
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TextAlternates(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2158,13 +2231,16 @@ public struct IInkAnalyzerVtbl {
     public var AddDataForStroke: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Input_Inking != "on"]
     public var AddDataForStroke: UIntNative = UIntNative(0)
-    @When[Windows_UI_Input_Inking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Input_Inking == "on"]
     public var AddDataForStrokes: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Input_Inking != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_UI_Input_Inking != "on"]
     public var AddDataForStrokes: UIntNative = UIntNative(0)
     public var ClearDataForAllStrokes: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
     public var RemoveDataForStroke: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var RemoveDataForStrokes: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RemoveDataForStrokes: UIntNative = UIntNative(0)
     @When[Windows_UI_Input_Inking == "on"]
     public var ReplaceDataForStroke: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Input_Inking != "on"]
@@ -2262,7 +2338,7 @@ public class IInkAnalyzer <: InterfaceWrapperBase & ComInterface & RuntimeName &
         HRESULT(hr).ok()
     }
 
-    @When[Windows_UI_Input_Inking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Input_Inking == "on"]
     public unsafe func AddDataForStrokes(strokes: windows_collections.IIterable<UI_Input_Inking.InkStroke>): Unit {
         let v = vtbl()
         let hr = v.AddDataForStrokes(asRaw(), strokes.asRaw())
@@ -2281,6 +2357,7 @@ public class IInkAnalyzer <: InterfaceWrapperBase & ComInterface & RuntimeName &
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RemoveDataForStrokes(strokeIds: windows_collections.IIterable<UInt32>): Unit {
         let v = vtbl()
         let hr = v.RemoveDataForStrokes(asRaw(), strokeIds.asRaw())
@@ -2404,10 +2481,12 @@ public class InkAnalysisInkBullet <: InterfaceWrapperBase & ComInterface & windo
         return asIInkAnalysisNode().BoundingRect()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RotatedBoundingRect(): windows_collections.IVectorView<windows_future.Point> {
         return asIInkAnalysisNode().RotatedBoundingRect()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Children(): windows_collections.IVectorView<IInkAnalysisNode> {
         return asIInkAnalysisNode().Children()
     }
@@ -2416,6 +2495,7 @@ public class InkAnalysisInkBullet <: InterfaceWrapperBase & ComInterface & windo
         return asIInkAnalysisNode().Parent()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetStrokeIds(): windows_collections.IVectorView<UInt32> {
         return asIInkAnalysisNode().GetStrokeIds()
     }
@@ -2523,6 +2603,7 @@ public class InkAnalysisInkDrawing <: InterfaceWrapperBase & ComInterface & wind
         return defaultInterface().Center()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Points(): windows_collections.IVectorView<windows_future.Point> {
         return defaultInterface().Points()
     }
@@ -2539,10 +2620,12 @@ public class InkAnalysisInkDrawing <: InterfaceWrapperBase & ComInterface & wind
         return asIInkAnalysisNode().BoundingRect()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RotatedBoundingRect(): windows_collections.IVectorView<windows_future.Point> {
         return asIInkAnalysisNode().RotatedBoundingRect()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Children(): windows_collections.IVectorView<IInkAnalysisNode> {
         return asIInkAnalysisNode().Children()
     }
@@ -2551,6 +2634,7 @@ public class InkAnalysisInkDrawing <: InterfaceWrapperBase & ComInterface & wind
         return asIInkAnalysisNode().Parent()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetStrokeIds(): windows_collections.IVectorView<UInt32> {
         return asIInkAnalysisNode().GetStrokeIds()
     }
@@ -2654,6 +2738,7 @@ public class InkAnalysisInkWord <: InterfaceWrapperBase & ComInterface & windows
         return defaultInterface().RecognizedText()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TextAlternates(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().TextAlternates()
     }
@@ -2670,10 +2755,12 @@ public class InkAnalysisInkWord <: InterfaceWrapperBase & ComInterface & windows
         return asIInkAnalysisNode().BoundingRect()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RotatedBoundingRect(): windows_collections.IVectorView<windows_future.Point> {
         return asIInkAnalysisNode().RotatedBoundingRect()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Children(): windows_collections.IVectorView<IInkAnalysisNode> {
         return asIInkAnalysisNode().Children()
     }
@@ -2682,6 +2769,7 @@ public class InkAnalysisInkWord <: InterfaceWrapperBase & ComInterface & windows
         return asIInkAnalysisNode().Parent()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetStrokeIds(): windows_collections.IVectorView<UInt32> {
         return asIInkAnalysisNode().GetStrokeIds()
     }
@@ -2801,10 +2889,12 @@ public class InkAnalysisLine <: InterfaceWrapperBase & ComInterface & windows_in
         return asIInkAnalysisNode().BoundingRect()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RotatedBoundingRect(): windows_collections.IVectorView<windows_future.Point> {
         return asIInkAnalysisNode().RotatedBoundingRect()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Children(): windows_collections.IVectorView<IInkAnalysisNode> {
         return asIInkAnalysisNode().Children()
     }
@@ -2813,6 +2903,7 @@ public class InkAnalysisLine <: InterfaceWrapperBase & ComInterface & windows_in
         return asIInkAnalysisNode().Parent()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetStrokeIds(): windows_collections.IVectorView<UInt32> {
         return asIInkAnalysisNode().GetStrokeIds()
     }
@@ -2928,10 +3019,12 @@ public class InkAnalysisListItem <: InterfaceWrapperBase & ComInterface & window
         return asIInkAnalysisNode().BoundingRect()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RotatedBoundingRect(): windows_collections.IVectorView<windows_future.Point> {
         return asIInkAnalysisNode().RotatedBoundingRect()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Children(): windows_collections.IVectorView<IInkAnalysisNode> {
         return asIInkAnalysisNode().Children()
     }
@@ -2940,6 +3033,7 @@ public class InkAnalysisListItem <: InterfaceWrapperBase & ComInterface & window
         return asIInkAnalysisNode().Parent()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetStrokeIds(): windows_collections.IVectorView<UInt32> {
         return asIInkAnalysisNode().GetStrokeIds()
     }
@@ -3056,7 +3150,7 @@ public class InkAnalyzer <: InterfaceWrapperBase & ComInterface & windows_interf
         defaultInterface().AddDataForStroke(stroke)
     }
 
-    @When[Windows_UI_Input_Inking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Input_Inking == "on"]
     public unsafe func AddDataForStrokes(strokes: windows_collections.IIterable<UI_Input_Inking.InkStroke>): Unit {
         defaultInterface().AddDataForStrokes(strokes)
     }
@@ -3069,6 +3163,7 @@ public class InkAnalyzer <: InterfaceWrapperBase & ComInterface & windows_interf
         defaultInterface().RemoveDataForStroke(strokeId)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RemoveDataForStrokes(strokeIds: windows_collections.IIterable<UInt32>): Unit {
         defaultInterface().RemoveDataForStrokes(strokeIds)
     }

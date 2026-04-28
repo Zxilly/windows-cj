@@ -4,15 +4,10 @@ package windows_sys.Graphics.Capture
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_Graphics == "on"]
 import windows_sys.Graphics as Graphics
-@When[Windows_Graphics_DirectX == "on"]
 import windows_sys.Graphics.DirectX as Graphics_DirectX
-@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
 import windows_sys.Graphics.DirectX.Direct3D11 as Graphics_DirectX_Direct3D11
-@When[Windows_Security_Authorization_AppCapabilityAccess == "on"]
 import windows_sys.Security.Authorization.AppCapabilityAccess as Security_Authorization_AppCapabilityAccess
-@When[Windows_UI == "on"]
 import windows_sys.UI as UI
 import windows_sys._impl_l1 as _impl_l1
 
@@ -142,7 +137,7 @@ public class IDirect3D11CaptureFrame <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IDirect3D11CaptureFrame2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Graphics == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics == "on"]
     public var DirtyRegions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var DirtyRegionMode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -188,7 +183,7 @@ public class IDirect3D11CaptureFrame2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IDirect3D11CaptureFrame2Vtbl>(IDirect3D11CaptureFrame2Vtbl())
     }
 
-    @When[Windows_Graphics == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics == "on"]
     public unsafe func DirtyRegions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

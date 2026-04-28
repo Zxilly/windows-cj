@@ -3,15 +3,10 @@ package windows_sys.Devices
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Devices_Adc_Provider == "on"]
 import windows_sys.Devices.Adc.Provider as Devices_Adc_Provider
-@When[Windows_Devices_Gpio_Provider == "on"]
 import windows_sys.Devices.Gpio.Provider as Devices_Gpio_Provider
-@When[Windows_Devices_I2c_Provider == "on"]
 import windows_sys.Devices.I2c.Provider as Devices_I2c_Provider
-@When[Windows_Devices_Pwm_Provider == "on"]
 import windows_sys.Devices.Pwm.Provider as Devices_Pwm_Provider
-@When[Windows_Devices_Spi_Provider == "on"]
 import windows_sys.Devices.Spi.Provider as Devices_Spi_Provider
 
 

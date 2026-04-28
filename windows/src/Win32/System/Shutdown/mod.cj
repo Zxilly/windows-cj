@@ -6,7 +6,6 @@ package windows.Win32.System.Shutdown
 import std.collection.*
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge}
 import windows_core as windows_core
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 
@@ -442,52 +441,170 @@ extend SHUTDOWN_REASON <: windows_core.CopyType & windows_core.RuntimeType & win
     }
 }
 
-@When[ADVAPI32 == "on"]
+@When[Windows_Win32_System_Shutdown == "on" && ADVAPI32 == "on" && Windows_Win32_System_Shutdown_AbortSystemShutdownA == "on"]
 foreign {
     // param-hint: lpMachineName optional
     // pinvoke-hint: SetLastError
     func AbortSystemShutdownA(lpMachineName: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Shutdown == "on" && ADVAPI32 == "on" && Windows_Win32_System_Shutdown_AbortSystemShutdownA == "on"]
+public unsafe func Windows_AbortSystemShutdownA(lpMachineName: CPointer<UInt8>): Int32 {
+    return AbortSystemShutdownA(lpMachineName)
+}
+
+@When[Windows_Win32_System_Shutdown == "on" && ADVAPI32 == "on" && Windows_Win32_System_Shutdown_AbortSystemShutdownW == "on"]
+foreign {
     // param-hint: lpMachineName optional
     // pinvoke-hint: SetLastError
     func AbortSystemShutdownW(lpMachineName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Shutdown == "on" && ADVAPI32 == "on" && Windows_Win32_System_Shutdown_AbortSystemShutdownW == "on"]
+public unsafe func Windows_AbortSystemShutdownW(lpMachineName: CPointer<UInt16>): Int32 {
+    return AbortSystemShutdownW(lpMachineName)
+}
+
+@When[Windows_Win32_System_Shutdown == "on" && ADVAPI32 == "on" && Windows_Win32_System_Shutdown_CheckForHiberboot == "on"]
+foreign {
     func CheckForHiberboot(pHiberboot: CPointer<UInt8>, bClearFlag: UInt8): UInt32
+}
+
+@When[Windows_Win32_System_Shutdown == "on" && ADVAPI32 == "on" && Windows_Win32_System_Shutdown_CheckForHiberboot == "on"]
+public unsafe func Windows_CheckForHiberboot(pHiberboot: CPointer<UInt8>, bClearFlag: UInt8): UInt32 {
+    return CheckForHiberboot(pHiberboot, bClearFlag)
+}
+
+@When[Windows_Win32_System_Shutdown == "on" && ADVAPI32 == "on" && Windows_Win32_System_Shutdown_InitiateShutdownA == "on"]
+foreign {
     // param-hint: lpMachineName optional
     // param-hint: lpMessage optional
     func InitiateShutdownA(lpMachineName: CPointer<UInt8>, lpMessage: CPointer<UInt8>, dwGracePeriod: UInt32, dwShutdownFlags: SHUTDOWN_FLAGSAbi, dwReason: SHUTDOWN_REASONAbi): UInt32
+}
+
+@When[Windows_Win32_System_Shutdown == "on" && ADVAPI32 == "on" && Windows_Win32_System_Shutdown_InitiateShutdownA == "on"]
+public unsafe func Windows_InitiateShutdownA(lpMachineName: CPointer<UInt8>, lpMessage: CPointer<UInt8>, dwGracePeriod: UInt32, dwShutdownFlags: SHUTDOWN_FLAGSAbi, dwReason: SHUTDOWN_REASONAbi): UInt32 {
+    return InitiateShutdownA(lpMachineName, lpMessage, dwGracePeriod, dwShutdownFlags, dwReason)
+}
+
+@When[Windows_Win32_System_Shutdown == "on" && ADVAPI32 == "on" && Windows_Win32_System_Shutdown_InitiateShutdownW == "on"]
+foreign {
     // param-hint: lpMachineName optional
     // param-hint: lpMessage optional
     func InitiateShutdownW(lpMachineName: CPointer<UInt16>, lpMessage: CPointer<UInt16>, dwGracePeriod: UInt32, dwShutdownFlags: SHUTDOWN_FLAGSAbi, dwReason: SHUTDOWN_REASONAbi): UInt32
+}
+
+@When[Windows_Win32_System_Shutdown == "on" && ADVAPI32 == "on" && Windows_Win32_System_Shutdown_InitiateShutdownW == "on"]
+public unsafe func Windows_InitiateShutdownW(lpMachineName: CPointer<UInt16>, lpMessage: CPointer<UInt16>, dwGracePeriod: UInt32, dwShutdownFlags: SHUTDOWN_FLAGSAbi, dwReason: SHUTDOWN_REASONAbi): UInt32 {
+    return InitiateShutdownW(lpMachineName, lpMessage, dwGracePeriod, dwShutdownFlags, dwReason)
+}
+
+@When[Windows_Win32_System_Shutdown == "on" && ADVAPI32 == "on" && Windows_Win32_System_Shutdown_InitiateSystemShutdownA == "on"]
+foreign {
     // param-hint: lpMachineName optional
     // param-hint: lpMessage optional
     // pinvoke-hint: SetLastError
     func InitiateSystemShutdownA(lpMachineName: CPointer<UInt8>, lpMessage: CPointer<UInt8>, dwTimeout: UInt32, bForceAppsClosed: Int32, bRebootAfterShutdown: Int32): Int32
+}
+
+@When[Windows_Win32_System_Shutdown == "on" && ADVAPI32 == "on" && Windows_Win32_System_Shutdown_InitiateSystemShutdownA == "on"]
+public unsafe func Windows_InitiateSystemShutdownA(lpMachineName: CPointer<UInt8>, lpMessage: CPointer<UInt8>, dwTimeout: UInt32, bForceAppsClosed: Int32, bRebootAfterShutdown: Int32): Int32 {
+    return InitiateSystemShutdownA(lpMachineName, lpMessage, dwTimeout, bForceAppsClosed, bRebootAfterShutdown)
+}
+
+@When[Windows_Win32_System_Shutdown == "on" && ADVAPI32 == "on" && Windows_Win32_System_Shutdown_InitiateSystemShutdownExA == "on"]
+foreign {
     // param-hint: lpMachineName optional
     // param-hint: lpMessage optional
     // pinvoke-hint: SetLastError
     func InitiateSystemShutdownExA(lpMachineName: CPointer<UInt8>, lpMessage: CPointer<UInt8>, dwTimeout: UInt32, bForceAppsClosed: Int32, bRebootAfterShutdown: Int32, dwReason: SHUTDOWN_REASONAbi): Int32
+}
+
+@When[Windows_Win32_System_Shutdown == "on" && ADVAPI32 == "on" && Windows_Win32_System_Shutdown_InitiateSystemShutdownExA == "on"]
+public unsafe func Windows_InitiateSystemShutdownExA(lpMachineName: CPointer<UInt8>, lpMessage: CPointer<UInt8>, dwTimeout: UInt32, bForceAppsClosed: Int32, bRebootAfterShutdown: Int32, dwReason: SHUTDOWN_REASONAbi): Int32 {
+    return InitiateSystemShutdownExA(lpMachineName, lpMessage, dwTimeout, bForceAppsClosed, bRebootAfterShutdown, dwReason)
+}
+
+@When[Windows_Win32_System_Shutdown == "on" && ADVAPI32 == "on" && Windows_Win32_System_Shutdown_InitiateSystemShutdownExW == "on"]
+foreign {
     // param-hint: lpMachineName optional
     // param-hint: lpMessage optional
     // pinvoke-hint: SetLastError
     func InitiateSystemShutdownExW(lpMachineName: CPointer<UInt16>, lpMessage: CPointer<UInt16>, dwTimeout: UInt32, bForceAppsClosed: Int32, bRebootAfterShutdown: Int32, dwReason: SHUTDOWN_REASONAbi): Int32
+}
+
+@When[Windows_Win32_System_Shutdown == "on" && ADVAPI32 == "on" && Windows_Win32_System_Shutdown_InitiateSystemShutdownExW == "on"]
+public unsafe func Windows_InitiateSystemShutdownExW(lpMachineName: CPointer<UInt16>, lpMessage: CPointer<UInt16>, dwTimeout: UInt32, bForceAppsClosed: Int32, bRebootAfterShutdown: Int32, dwReason: SHUTDOWN_REASONAbi): Int32 {
+    return InitiateSystemShutdownExW(lpMachineName, lpMessage, dwTimeout, bForceAppsClosed, bRebootAfterShutdown, dwReason)
+}
+
+@When[Windows_Win32_System_Shutdown == "on" && ADVAPI32 == "on" && Windows_Win32_System_Shutdown_InitiateSystemShutdownW == "on"]
+foreign {
     // param-hint: lpMachineName optional
     // param-hint: lpMessage optional
     // pinvoke-hint: SetLastError
     func InitiateSystemShutdownW(lpMachineName: CPointer<UInt16>, lpMessage: CPointer<UInt16>, dwTimeout: UInt32, bForceAppsClosed: Int32, bRebootAfterShutdown: Int32): Int32
 }
 
-@When[USER32 == "on"]
+@When[Windows_Win32_System_Shutdown == "on" && ADVAPI32 == "on" && Windows_Win32_System_Shutdown_InitiateSystemShutdownW == "on"]
+public unsafe func Windows_InitiateSystemShutdownW(lpMachineName: CPointer<UInt16>, lpMessage: CPointer<UInt16>, dwTimeout: UInt32, bForceAppsClosed: Int32, bRebootAfterShutdown: Int32): Int32 {
+    return InitiateSystemShutdownW(lpMachineName, lpMessage, dwTimeout, bForceAppsClosed, bRebootAfterShutdown)
+}
+
+@When[Windows_Win32_System_Shutdown == "on" && USER32 == "on" && Windows_Win32_System_Shutdown_ExitWindowsEx == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func ExitWindowsEx(uFlags: EXIT_WINDOWS_FLAGSAbi, dwReason: SHUTDOWN_REASONAbi): Int32
+}
+
+@When[Windows_Win32_System_Shutdown == "on" && USER32 == "on" && Windows_Win32_System_Shutdown_ExitWindowsEx == "on"]
+public unsafe func Windows_ExitWindowsEx(uFlags: EXIT_WINDOWS_FLAGSAbi, dwReason: SHUTDOWN_REASONAbi): Int32 {
+    return ExitWindowsEx(uFlags, dwReason)
+}
+
+@When[Windows_Win32_System_Shutdown == "on" && USER32 == "on" && Windows_Win32_System_Shutdown_LockWorkStation == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func LockWorkStation(): Int32
+}
+
+@When[Windows_Win32_System_Shutdown == "on" && USER32 == "on" && Windows_Win32_System_Shutdown_LockWorkStation == "on"]
+public unsafe func Windows_LockWorkStation(): Int32 {
+    return LockWorkStation()
+}
+
+@When[Windows_Win32_System_Shutdown == "on" && USER32 == "on" && Windows_Win32_System_Shutdown_ShutdownBlockReasonCreate == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ShutdownBlockReasonCreate(hWnd: CPointer<Unit>, pwszReason: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Shutdown == "on" && USER32 == "on" && Windows_Win32_System_Shutdown_ShutdownBlockReasonCreate == "on"]
+public unsafe func Windows_ShutdownBlockReasonCreate(hWnd: CPointer<Unit>, pwszReason: CPointer<UInt16>): Int32 {
+    return ShutdownBlockReasonCreate(hWnd, pwszReason)
+}
+
+@When[Windows_Win32_System_Shutdown == "on" && USER32 == "on" && Windows_Win32_System_Shutdown_ShutdownBlockReasonDestroy == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ShutdownBlockReasonDestroy(hWnd: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Shutdown == "on" && USER32 == "on" && Windows_Win32_System_Shutdown_ShutdownBlockReasonDestroy == "on"]
+public unsafe func Windows_ShutdownBlockReasonDestroy(hWnd: CPointer<Unit>): Int32 {
+    return ShutdownBlockReasonDestroy(hWnd)
+}
+
+@When[Windows_Win32_System_Shutdown == "on" && USER32 == "on" && Windows_Win32_System_Shutdown_ShutdownBlockReasonQuery == "on"]
+foreign {
     // param-hint: pwszBuff len=param[2] optional
     // pinvoke-hint: SetLastError
     func ShutdownBlockReasonQuery(hWnd: CPointer<Unit>, pwszBuff: CPointer<UInt16>, pcchBuff: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Shutdown == "on" && USER32 == "on" && Windows_Win32_System_Shutdown_ShutdownBlockReasonQuery == "on"]
+public unsafe func Windows_ShutdownBlockReasonQuery(hWnd: CPointer<Unit>, pwszBuff: CPointer<UInt16>, pcchBuff: CPointer<UInt32>): Int32 {
+    return ShutdownBlockReasonQuery(hWnd, pwszBuff, pcchBuff)
 }
 
 @When[Windows_Win32_System_Shutdown == "on"]

@@ -16,7 +16,7 @@ import windows_collections as windows_collections
 import windows_future as windows_future
 
 
-@When[Windows_Storage == "on"]
+@When[Windows_Storage == "on" && Windows_Foundation_Collections == "on"]
 public class ApplicationDataCompositeValue <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -166,7 +166,7 @@ public class ApplicationDataCompositeValue <: InterfaceWrapperBase & ComInterfac
     }
 }
 
-@When[Windows_Storage == "on"]
+@When[Windows_Storage == "on" && Windows_Foundation_Collections == "on"]
 extend ApplicationDataCompositeValue <: windows_core.HandleWinrtType<ApplicationDataCompositeValue> {
     public static func intoWinrtHandle(value: ApplicationDataCompositeValue): CPointer<Unit> {
         value.asRaw()
@@ -273,6 +273,7 @@ public class ApplicationDataContainer <: InterfaceWrapperBase & ComInterface & w
         return defaultInterface().Values()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Containers(): windows_collections.IMapView<windows_core.HString, ApplicationDataContainer> {
         return defaultInterface().Containers()
     }
@@ -308,7 +309,7 @@ extend ApplicationDataContainer <: windows_core.HandleWinrtType<ApplicationDataC
     }
 }
 
-@When[Windows_Storage == "on"]
+@When[Windows_Storage == "on" && Windows_Foundation_Collections == "on"]
 public class ApplicationDataContainerSettings <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -447,7 +448,7 @@ public class ApplicationDataContainerSettings <: InterfaceWrapperBase & ComInter
     }
 }
 
-@When[Windows_Storage == "on"]
+@When[Windows_Storage == "on" && Windows_Foundation_Collections == "on"]
 extend ApplicationDataContainerSettings <: windows_core.HandleWinrtType<ApplicationDataContainerSettings> {
     public static func intoWinrtHandle(value: ApplicationDataContainerSettings): CPointer<Unit> {
         value.asRaw()
@@ -943,7 +944,10 @@ public struct IApplicationDataContainerVtbl {
     public var Values: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Foundation_Collections != "on"]
     public var Values: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Containers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Containers: UIntNative = UIntNative(0)
     public var CreateContainer: CFunc<(CPointer<Unit>, CPointer<Unit>, ApplicationDataCreateDispositionAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var DeleteContainer: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -1039,6 +1043,7 @@ public class IApplicationDataContainer <: InterfaceWrapperBase & ComInterface & 
         return windows_collections.IPropertySet.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Containers(): windows_collections.IMapView<windows_core.HString, ApplicationDataContainer> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1084,20 +1089,29 @@ public struct IPathIOStaticsVtbl {
     public var AppendTextWithEncodingAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UnicodeEncodingAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams != "on"]
     public var AppendTextWithEncodingAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var ReadLinesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections != "on"]
+    public var ReadLinesAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var ReadLinesWithEncodingAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, UnicodeEncodingAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
     public var ReadLinesWithEncodingAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var WriteLinesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections != "on"]
+    public var WriteLinesAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var WriteLinesWithEncodingAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UnicodeEncodingAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
     public var WriteLinesWithEncodingAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var AppendLinesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections != "on"]
+    public var AppendLinesAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var AppendLinesWithEncodingAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UnicodeEncodingAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
     public var AppendLinesWithEncodingAsync: UIntNative = UIntNative(0)
     @When[Windows_Storage_Streams == "on"]
     public var ReadBufferAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -1227,6 +1241,7 @@ public class IPathIOStatics <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReadLinesAsync(absolutePath: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVector<windows_core.HString>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1235,7 +1250,7 @@ public class IPathIOStatics <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_future.IAsyncOperation<windows_collections.IVector<windows_core.HString>>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func ReadLinesWithEncodingAsync(absolutePath: windows_core.HString, encoding: UnicodeEncoding): windows_future.IAsyncOperation<windows_collections.IVector<windows_core.HString>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1244,6 +1259,7 @@ public class IPathIOStatics <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_future.IAsyncOperation<windows_collections.IVector<windows_core.HString>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func WriteLinesAsync(absolutePath: windows_core.HString, lines: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1252,7 +1268,7 @@ public class IPathIOStatics <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func WriteLinesWithEncodingAsync(absolutePath: windows_core.HString, lines: windows_collections.IIterable<windows_core.HString>, encoding: UnicodeEncoding): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1261,6 +1277,7 @@ public class IPathIOStatics <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AppendLinesAsync(absolutePath: windows_core.HString, lines: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1269,7 +1286,7 @@ public class IPathIOStatics <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func AppendLinesWithEncodingAsync(absolutePath: windows_core.HString, lines: windows_collections.IIterable<windows_core.HString>, encoding: UnicodeEncoding): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()

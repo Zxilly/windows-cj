@@ -22,7 +22,10 @@ public struct IUserDataAccountProviderAddAccountOperationVtbl {
     public var ContentKinds: CFunc<(CPointer<Unit>, CPointer<_impl_l0.UserDataAccountContentKindsAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel_UserDataAccounts != "on"]
     public var ContentKinds: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var PartnerAccountInfos: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var PartnerAccountInfos: UIntNative = UIntNative(0)
     public var ReportCompleted: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -113,6 +116,7 @@ public class IUserDataAccountProviderAddAccountOperation <: InterfaceWrapperBase
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.UserDataAccountContentKinds>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PartnerAccountInfos(): windows_collections.IVectorView<UserDataAccountPartnerAccountInfo> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -520,6 +524,7 @@ public class UserDataAccountProviderAddAccountOperation <: InterfaceWrapperBase 
         return defaultInterface().ContentKinds()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PartnerAccountInfos(): windows_collections.IVectorView<UserDataAccountPartnerAccountInfo> {
         return defaultInterface().PartnerAccountInfos()
     }

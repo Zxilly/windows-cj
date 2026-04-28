@@ -11,7 +11,7 @@ public struct IBluetoothLEAdvertisementWatcherTriggerDetailsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     @When[Windows_Devices_Bluetooth == "on"]
     public var Error: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Devices_Bluetooth_Advertisement == "on"]
+    @When[Windows_Devices_Bluetooth_Advertisement == "on" && Windows_Foundation_Collections == "on"]
     public var Advertisements: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Devices_Bluetooth == "on"]
     public var SignalStrengthFilter: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -65,7 +65,7 @@ public class IBluetoothLEAdvertisementWatcherTriggerDetails <: InterfaceWrapperB
         return __vt.Error(__liveRaw, result__)
     }
 
-    @When[Windows_Devices_Bluetooth_Advertisement == "on"]
+    @When[Windows_Devices_Bluetooth_Advertisement == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func Advertisements(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -153,7 +153,7 @@ public struct IGattCharacteristicNotificationTriggerDetails2Vtbl {
     @When[Windows_Devices_Bluetooth == "on"]
     public var Error: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var EventTriggeringMode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Devices_Bluetooth_GenericAttributeProfile == "on"]
+    @When[Windows_Devices_Bluetooth_GenericAttributeProfile == "on" && Windows_Foundation_Collections == "on"]
     public var ValueChangedEvents: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -211,7 +211,7 @@ public class IGattCharacteristicNotificationTriggerDetails2 <: InterfaceWrapperB
         return __vt.EventTriggeringMode(__liveRaw, result__)
     }
 
-    @When[Windows_Devices_Bluetooth_GenericAttributeProfile == "on"]
+    @When[Windows_Devices_Bluetooth_GenericAttributeProfile == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func ValueChangedEvents(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

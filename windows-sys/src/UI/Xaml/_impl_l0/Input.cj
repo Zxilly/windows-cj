@@ -1637,6 +1637,7 @@ public class IInertiaTranslationBehavior <: InterfaceWrapperBase & ComInterface 
 @C
 public struct IInputScopeVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Names: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1681,6 +1682,7 @@ public class IInputScope <: InterfaceWrapperBase & ComInterface {
         readVtbl<IInputScopeVtbl>(IInputScopeVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Names(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

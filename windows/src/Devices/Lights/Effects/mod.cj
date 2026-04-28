@@ -10,13 +10,9 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Devices_Lights == "on"]
 import windows.Devices.Lights as Devices_Lights
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Graphics_Imaging == "on"]
 import windows.Graphics.Imaging as Graphics_Imaging
-@When[Windows_UI == "on"]
 import windows.UI as UI
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -2076,9 +2072,18 @@ extend ILampArrayCustomEffectFactory <: windows_core.Interface<ILampArrayCustomE
 @C
 public struct ILampArrayEffectPlaylistStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var StartAll: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var StartAll: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var StopAll: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var StopAll: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var PauseAll: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var PauseAll: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2147,18 +2152,21 @@ public class ILampArrayEffectPlaylistStatics <: InterfaceWrapperBase & ComInterf
         readVtbl<ILampArrayEffectPlaylistStaticsVtbl>(ILampArrayEffectPlaylistStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StartAll(value: windows_collections.IIterable<LampArrayEffectPlaylist>): Unit {
         let v = vtbl()
         let hr = v.StartAll(asRaw(), value.asRaw())
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StopAll(value: windows_collections.IIterable<LampArrayEffectPlaylist>): Unit {
         let v = vtbl()
         let hr = v.StopAll(asRaw(), value.asRaw())
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PauseAll(value: windows_collections.IIterable<LampArrayEffectPlaylist>): Unit {
         let v = vtbl()
         let hr = v.PauseAll(asRaw(), value.asRaw())
@@ -3044,6 +3052,7 @@ public class LampArrayEffectPlaylist <: InterfaceWrapperBase & ComInterface & wi
         return asIIterable().First()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func StartAll(value: windows_collections.IIterable<LampArrayEffectPlaylist>): Unit {
         try (factory__ = windows_core.factory<LampArrayEffectPlaylist, ILampArrayEffectPlaylistStatics>().unwrap()) {
             factory__.StartAll(value)
@@ -3051,6 +3060,7 @@ public class LampArrayEffectPlaylist <: InterfaceWrapperBase & ComInterface & wi
         return ()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func StopAll(value: windows_collections.IIterable<LampArrayEffectPlaylist>): Unit {
         try (factory__ = windows_core.factory<LampArrayEffectPlaylist, ILampArrayEffectPlaylistStatics>().unwrap()) {
             factory__.StopAll(value)
@@ -3058,6 +3068,7 @@ public class LampArrayEffectPlaylist <: InterfaceWrapperBase & ComInterface & wi
         return ()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func PauseAll(value: windows_collections.IIterable<LampArrayEffectPlaylist>): Unit {
         try (factory__ = windows_core.factory<LampArrayEffectPlaylist, ILampArrayEffectPlaylistStatics>().unwrap()) {
             factory__.PauseAll(value)

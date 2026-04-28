@@ -10,11 +10,8 @@ import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrap
 import windows_interface as windows_interface
 import windows_polyfill.{unionReadUInt16, unionReadUInt32, unionWriteUInt16, unionWriteUInt32}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Dxgi_Common == "on"]
 import windows.Win32.Graphics.Dxgi.Common as Win32_Graphics_Dxgi_Common
-@When[Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
@@ -23633,13 +23630,34 @@ public class ID3D11InfoQueue <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+@When[Windows_Win32_Graphics_Direct3D11 == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D11_D3DDisassemble11Trace == "on" && Windows_Win32_Graphics_Direct3D == "on"]
 foreign {
     // param-hint: pSrcData bytes=param[1]
     func D3DDisassemble11Trace(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, pTrace: CPointer<Unit>, StartStep: UInt32, NumSteps: UInt32, Flags: UInt32, ppDisassembly: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[D3D11 == "on" && (Windows_Win32_Graphics_Direct3D == "on" && Windows_Win32_Graphics_Dxgi == "on" && Windows_Win32_Graphics_Dxgi == "on" && Windows_Win32_Graphics_Dxgi_Common == "on")]
+@When[Windows_Win32_Graphics_Direct3D11 == "on" && D3DCOMPILER_47 == "on" && Windows_Win32_Graphics_Direct3D11_D3DDisassemble11Trace == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+public unsafe func Windows_D3DDisassemble11Trace(pSrcData: CPointer<Unit>, SrcDataSize: UIntNative, pTrace: CPointer<Unit>, StartStep: UInt32, NumSteps: UInt32, Flags: UInt32, ppDisassembly: CPointer<CPointer<Unit>>): Int32 {
+    return D3DDisassemble11Trace(pSrcData, SrcDataSize, pTrace, StartStep, NumSteps, Flags, ppDisassembly)
+}
+
+@When[Windows_Win32_Graphics_Direct3D11 == "on" && D3D11 == "on" && Windows_Win32_Graphics_Direct3D11_D3D11CreateDevice == "on" && Windows_Win32_Graphics_Direct3D == "on" && Windows_Win32_Graphics_Dxgi == "on"]
+foreign {
+    // param-hint: pAdapter optional
+    // param-hint: Software optional
+    // param-hint: pFeatureLevels len=param[5] optional
+    // param-hint: ppDevice optional
+    // param-hint: pFeatureLevel optional
+    // param-hint: ppImmediateContext optional
+    func D3D11CreateDevice(pAdapter: CPointer<Unit>, DriverType: Win32__impl_l0.D3D_DRIVER_TYPEAbi, Software: CPointer<Unit>, Flags: D3D11_CREATE_DEVICE_FLAGAbi, pFeatureLevels: CPointer<Win32__impl_l0.D3D_FEATURE_LEVELAbi>, FeatureLevels: UInt32, SDKVersion: UInt32, ppDevice: CPointer<CPointer<Unit>>, pFeatureLevel: CPointer<Win32__impl_l0.D3D_FEATURE_LEVELAbi>, ppImmediateContext: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D11 == "on" && D3D11 == "on" && Windows_Win32_Graphics_Direct3D11_D3D11CreateDevice == "on" && Windows_Win32_Graphics_Direct3D == "on" && Windows_Win32_Graphics_Dxgi == "on"]
+public unsafe func Windows_D3D11CreateDevice(pAdapter: CPointer<Unit>, DriverType: Win32__impl_l0.D3D_DRIVER_TYPEAbi, Software: CPointer<Unit>, Flags: D3D11_CREATE_DEVICE_FLAGAbi, pFeatureLevels: CPointer<Win32__impl_l0.D3D_FEATURE_LEVELAbi>, FeatureLevels: UInt32, SDKVersion: UInt32, ppDevice: CPointer<CPointer<Unit>>, pFeatureLevel: CPointer<Win32__impl_l0.D3D_FEATURE_LEVELAbi>, ppImmediateContext: CPointer<CPointer<Unit>>): Int32 {
+    return D3D11CreateDevice(pAdapter, DriverType, Software, Flags, pFeatureLevels, FeatureLevels, SDKVersion, ppDevice, pFeatureLevel, ppImmediateContext)
+}
+
+@When[Windows_Win32_Graphics_Direct3D11 == "on" && D3D11 == "on" && Windows_Win32_Graphics_Direct3D11_D3D11CreateDeviceAndSwapChain == "on" && Windows_Win32_Graphics_Direct3D == "on" && Windows_Win32_Graphics_Dxgi == "on" && Windows_Win32_Graphics_Dxgi == "on" && Windows_Win32_Graphics_Dxgi_Common == "on"]
 foreign {
     // param-hint: pAdapter optional
     // param-hint: pFeatureLevels len=param[5] optional
@@ -23651,28 +23669,99 @@ foreign {
     func D3D11CreateDeviceAndSwapChain(pAdapter: CPointer<Unit>, DriverType: Win32__impl_l0.D3D_DRIVER_TYPEAbi, Software: CPointer<Unit>, Flags: D3D11_CREATE_DEVICE_FLAGAbi, pFeatureLevels: CPointer<Win32__impl_l0.D3D_FEATURE_LEVELAbi>, FeatureLevels: UInt32, SDKVersion: UInt32, pSwapChainDesc: CPointer<Win32__impl_l1.DXGI_SWAP_CHAIN_DESCAbi>, ppSwapChain: CPointer<CPointer<Unit>>, ppDevice: CPointer<CPointer<Unit>>, pFeatureLevel: CPointer<Win32__impl_l0.D3D_FEATURE_LEVELAbi>, ppImmediateContext: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[D3D11 == "on" && (Windows_Win32_Graphics_Direct3D == "on" && Windows_Win32_Graphics_Dxgi == "on")]
-foreign {
-    // param-hint: pAdapter optional
-    // param-hint: Software optional
-    // param-hint: pFeatureLevels len=param[5] optional
-    // param-hint: ppDevice optional
-    // param-hint: pFeatureLevel optional
-    // param-hint: ppImmediateContext optional
-    func D3D11CreateDevice(pAdapter: CPointer<Unit>, DriverType: Win32__impl_l0.D3D_DRIVER_TYPEAbi, Software: CPointer<Unit>, Flags: D3D11_CREATE_DEVICE_FLAGAbi, pFeatureLevels: CPointer<Win32__impl_l0.D3D_FEATURE_LEVELAbi>, FeatureLevels: UInt32, SDKVersion: UInt32, ppDevice: CPointer<CPointer<Unit>>, pFeatureLevel: CPointer<Win32__impl_l0.D3D_FEATURE_LEVELAbi>, ppImmediateContext: CPointer<CPointer<Unit>>): Int32
+@When[Windows_Win32_Graphics_Direct3D11 == "on" && D3D11 == "on" && Windows_Win32_Graphics_Direct3D11_D3D11CreateDeviceAndSwapChain == "on" && Windows_Win32_Graphics_Direct3D == "on" && Windows_Win32_Graphics_Dxgi == "on" && Windows_Win32_Graphics_Dxgi == "on" && Windows_Win32_Graphics_Dxgi_Common == "on"]
+public unsafe func Windows_D3D11CreateDeviceAndSwapChain(pAdapter: CPointer<Unit>, DriverType: Win32__impl_l0.D3D_DRIVER_TYPEAbi, Software: CPointer<Unit>, Flags: D3D11_CREATE_DEVICE_FLAGAbi, pFeatureLevels: CPointer<Win32__impl_l0.D3D_FEATURE_LEVELAbi>, FeatureLevels: UInt32, SDKVersion: UInt32, pSwapChainDesc: CPointer<Win32__impl_l1.DXGI_SWAP_CHAIN_DESCAbi>, ppSwapChain: CPointer<CPointer<Unit>>, ppDevice: CPointer<CPointer<Unit>>, pFeatureLevel: CPointer<Win32__impl_l0.D3D_FEATURE_LEVELAbi>, ppImmediateContext: CPointer<CPointer<Unit>>): Int32 {
+    return D3D11CreateDeviceAndSwapChain(pAdapter, DriverType, Software, Flags, pFeatureLevels, FeatureLevels, SDKVersion, pSwapChainDesc, ppSwapChain, ppDevice, pFeatureLevel, ppImmediateContext)
 }
 
-@When[D3DCSX == "on"]
+@When[Windows_Win32_Graphics_Direct3D11 == "on" && D3DCSX == "on" && Windows_Win32_Graphics_Direct3D11_D3DX11CreateFFT == "on"]
 foreign {
     func D3DX11CreateFFT(pDeviceContext: CPointer<Unit>, pDesc: CPointer<D3DX11_FFT_DESCAbi>, Flags: UInt32, pBufferInfo: CPointer<D3DX11_FFT_BUFFER_INFOAbi>, ppFFT: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D11 == "on" && D3DCSX == "on" && Windows_Win32_Graphics_Direct3D11_D3DX11CreateFFT == "on"]
+public unsafe func Windows_D3DX11CreateFFT(pDeviceContext: CPointer<Unit>, pDesc: CPointer<D3DX11_FFT_DESCAbi>, Flags: UInt32, pBufferInfo: CPointer<D3DX11_FFT_BUFFER_INFOAbi>, ppFFT: CPointer<CPointer<Unit>>): Int32 {
+    return D3DX11CreateFFT(pDeviceContext, pDesc, Flags, pBufferInfo, ppFFT)
+}
+
+@When[Windows_Win32_Graphics_Direct3D11 == "on" && D3DCSX == "on" && Windows_Win32_Graphics_Direct3D11_D3DX11CreateFFT1DComplex == "on"]
+foreign {
     func D3DX11CreateFFT1DComplex(pDeviceContext: CPointer<Unit>, X: UInt32, Flags: UInt32, pBufferInfo: CPointer<D3DX11_FFT_BUFFER_INFOAbi>, ppFFT: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D11 == "on" && D3DCSX == "on" && Windows_Win32_Graphics_Direct3D11_D3DX11CreateFFT1DComplex == "on"]
+public unsafe func Windows_D3DX11CreateFFT1DComplex(pDeviceContext: CPointer<Unit>, X: UInt32, Flags: UInt32, pBufferInfo: CPointer<D3DX11_FFT_BUFFER_INFOAbi>, ppFFT: CPointer<CPointer<Unit>>): Int32 {
+    return D3DX11CreateFFT1DComplex(pDeviceContext, X, Flags, pBufferInfo, ppFFT)
+}
+
+@When[Windows_Win32_Graphics_Direct3D11 == "on" && D3DCSX == "on" && Windows_Win32_Graphics_Direct3D11_D3DX11CreateFFT1DReal == "on"]
+foreign {
     func D3DX11CreateFFT1DReal(pDeviceContext: CPointer<Unit>, X: UInt32, Flags: UInt32, pBufferInfo: CPointer<D3DX11_FFT_BUFFER_INFOAbi>, ppFFT: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D11 == "on" && D3DCSX == "on" && Windows_Win32_Graphics_Direct3D11_D3DX11CreateFFT1DReal == "on"]
+public unsafe func Windows_D3DX11CreateFFT1DReal(pDeviceContext: CPointer<Unit>, X: UInt32, Flags: UInt32, pBufferInfo: CPointer<D3DX11_FFT_BUFFER_INFOAbi>, ppFFT: CPointer<CPointer<Unit>>): Int32 {
+    return D3DX11CreateFFT1DReal(pDeviceContext, X, Flags, pBufferInfo, ppFFT)
+}
+
+@When[Windows_Win32_Graphics_Direct3D11 == "on" && D3DCSX == "on" && Windows_Win32_Graphics_Direct3D11_D3DX11CreateFFT2DComplex == "on"]
+foreign {
     func D3DX11CreateFFT2DComplex(pDeviceContext: CPointer<Unit>, X: UInt32, Y: UInt32, Flags: UInt32, pBufferInfo: CPointer<D3DX11_FFT_BUFFER_INFOAbi>, ppFFT: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D11 == "on" && D3DCSX == "on" && Windows_Win32_Graphics_Direct3D11_D3DX11CreateFFT2DComplex == "on"]
+public unsafe func Windows_D3DX11CreateFFT2DComplex(pDeviceContext: CPointer<Unit>, X: UInt32, Y: UInt32, Flags: UInt32, pBufferInfo: CPointer<D3DX11_FFT_BUFFER_INFOAbi>, ppFFT: CPointer<CPointer<Unit>>): Int32 {
+    return D3DX11CreateFFT2DComplex(pDeviceContext, X, Y, Flags, pBufferInfo, ppFFT)
+}
+
+@When[Windows_Win32_Graphics_Direct3D11 == "on" && D3DCSX == "on" && Windows_Win32_Graphics_Direct3D11_D3DX11CreateFFT2DReal == "on"]
+foreign {
     func D3DX11CreateFFT2DReal(pDeviceContext: CPointer<Unit>, X: UInt32, Y: UInt32, Flags: UInt32, pBufferInfo: CPointer<D3DX11_FFT_BUFFER_INFOAbi>, ppFFT: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D11 == "on" && D3DCSX == "on" && Windows_Win32_Graphics_Direct3D11_D3DX11CreateFFT2DReal == "on"]
+public unsafe func Windows_D3DX11CreateFFT2DReal(pDeviceContext: CPointer<Unit>, X: UInt32, Y: UInt32, Flags: UInt32, pBufferInfo: CPointer<D3DX11_FFT_BUFFER_INFOAbi>, ppFFT: CPointer<CPointer<Unit>>): Int32 {
+    return D3DX11CreateFFT2DReal(pDeviceContext, X, Y, Flags, pBufferInfo, ppFFT)
+}
+
+@When[Windows_Win32_Graphics_Direct3D11 == "on" && D3DCSX == "on" && Windows_Win32_Graphics_Direct3D11_D3DX11CreateFFT3DComplex == "on"]
+foreign {
     func D3DX11CreateFFT3DComplex(pDeviceContext: CPointer<Unit>, X: UInt32, Y: UInt32, Z: UInt32, Flags: UInt32, pBufferInfo: CPointer<D3DX11_FFT_BUFFER_INFOAbi>, ppFFT: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D11 == "on" && D3DCSX == "on" && Windows_Win32_Graphics_Direct3D11_D3DX11CreateFFT3DComplex == "on"]
+public unsafe func Windows_D3DX11CreateFFT3DComplex(pDeviceContext: CPointer<Unit>, X: UInt32, Y: UInt32, Z: UInt32, Flags: UInt32, pBufferInfo: CPointer<D3DX11_FFT_BUFFER_INFOAbi>, ppFFT: CPointer<CPointer<Unit>>): Int32 {
+    return D3DX11CreateFFT3DComplex(pDeviceContext, X, Y, Z, Flags, pBufferInfo, ppFFT)
+}
+
+@When[Windows_Win32_Graphics_Direct3D11 == "on" && D3DCSX == "on" && Windows_Win32_Graphics_Direct3D11_D3DX11CreateFFT3DReal == "on"]
+foreign {
     func D3DX11CreateFFT3DReal(pDeviceContext: CPointer<Unit>, X: UInt32, Y: UInt32, Z: UInt32, Flags: UInt32, pBufferInfo: CPointer<D3DX11_FFT_BUFFER_INFOAbi>, ppFFT: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D11 == "on" && D3DCSX == "on" && Windows_Win32_Graphics_Direct3D11_D3DX11CreateFFT3DReal == "on"]
+public unsafe func Windows_D3DX11CreateFFT3DReal(pDeviceContext: CPointer<Unit>, X: UInt32, Y: UInt32, Z: UInt32, Flags: UInt32, pBufferInfo: CPointer<D3DX11_FFT_BUFFER_INFOAbi>, ppFFT: CPointer<CPointer<Unit>>): Int32 {
+    return D3DX11CreateFFT3DReal(pDeviceContext, X, Y, Z, Flags, pBufferInfo, ppFFT)
+}
+
+@When[Windows_Win32_Graphics_Direct3D11 == "on" && D3DCSX == "on" && Windows_Win32_Graphics_Direct3D11_D3DX11CreateScan == "on"]
+foreign {
     func D3DX11CreateScan(pDeviceContext: CPointer<Unit>, MaxElementScanSize: UInt32, MaxScanCount: UInt32, ppScan: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D11 == "on" && D3DCSX == "on" && Windows_Win32_Graphics_Direct3D11_D3DX11CreateScan == "on"]
+public unsafe func Windows_D3DX11CreateScan(pDeviceContext: CPointer<Unit>, MaxElementScanSize: UInt32, MaxScanCount: UInt32, ppScan: CPointer<CPointer<Unit>>): Int32 {
+    return D3DX11CreateScan(pDeviceContext, MaxElementScanSize, MaxScanCount, ppScan)
+}
+
+@When[Windows_Win32_Graphics_Direct3D11 == "on" && D3DCSX == "on" && Windows_Win32_Graphics_Direct3D11_D3DX11CreateSegmentedScan == "on"]
+foreign {
     func D3DX11CreateSegmentedScan(pDeviceContext: CPointer<Unit>, MaxElementScanSize: UInt32, ppScan: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D11 == "on" && D3DCSX == "on" && Windows_Win32_Graphics_Direct3D11_D3DX11CreateSegmentedScan == "on"]
+public unsafe func Windows_D3DX11CreateSegmentedScan(pDeviceContext: CPointer<Unit>, MaxElementScanSize: UInt32, ppScan: CPointer<CPointer<Unit>>): Int32 {
+    return D3DX11CreateSegmentedScan(pDeviceContext, MaxElementScanSize, ppScan)
 }
 
 @When[Windows_Win32_Graphics_Direct3D11 == "on"]

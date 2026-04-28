@@ -3,10 +3,8 @@ package windows_sys.Devices.PointOfService.Provider
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Devices_PointOfService == "on"]
 import windows_sys.Devices.PointOfService as Devices_PointOfService
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_Graphics_Imaging == "on"]
 import windows_sys.Graphics.Imaging as Graphics_Imaging
 import windows_sys._impl_l0 as _impl_l0
 
@@ -599,6 +597,7 @@ public class IBarcodeScannerHideVideoPreviewRequest2 <: InterfaceWrapperBase & C
 @C
 public struct IBarcodeScannerSetActiveSymbologiesRequestVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Symbologies: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ReportCompletedAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ReportFailedAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -645,6 +644,7 @@ public class IBarcodeScannerSetActiveSymbologiesRequest <: InterfaceWrapperBase 
         readVtbl<IBarcodeScannerSetActiveSymbologiesRequestVtbl>(IBarcodeScannerSetActiveSymbologiesRequestVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Symbologies(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1885,6 +1885,7 @@ public struct IBarcodeScannerProviderConnectionVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Id: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var VideoDeviceId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedSymbologies: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CompanyName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetCompanyName: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -1971,6 +1972,7 @@ public class IBarcodeScannerProviderConnection <: InterfaceWrapperBase & ComInte
         return __vt.VideoDeviceId(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedSymbologies(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

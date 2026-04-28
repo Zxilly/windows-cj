@@ -18,243 +18,1307 @@ import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
 
 
-@When[OLE32 == "on"]
-foreign {
-    // param-hint: hGlobal optional
-    func CreateILockBytesOnHGlobal(hGlobal: CPointer<Unit>, fDeleteOnRelease: Int32, pplkbyt: CPointer<CPointer<Unit>>): Int32
-    func FmtIdToPropStgName(pfmtid: CPointer<GUID>, oszName: CPointer<UInt16>): Int32
-    func GetConvertStg(pStg: CPointer<Unit>): Int32
-    func GetHGlobalFromILockBytes(plkbyt: CPointer<Unit>, phglobal: CPointer<CPointer<Unit>>): Int32
-    func PropStgNameToFmtId(oszName: CPointer<UInt16>, pfmtid: CPointer<GUID>): Int32
-    func ReadClassStg(pStg: CPointer<Unit>, pclsid: CPointer<GUID>): Int32
-    // param-hint: lplpszUserType optional
-    func ReadFmtUserTypeStg(pstg: CPointer<Unit>, pcf: CPointer<UInt16>, lplpszUserType: CPointer<CPointer<UInt16>>): Int32
-    func SetConvertStg(pStg: CPointer<Unit>, fConvert: Int32): Int32
-    // param-hint: dwReserved optional reserved
-    func StgCreatePropSetStg(pStorage: CPointer<Unit>, dwReserved: UInt32, ppPropSetStg: CPointer<CPointer<Unit>>): Int32
-    func StgIsStorageFile(pwcsName: CPointer<UInt16>): Int32
-    func StgIsStorageILockBytes(plkbyt: CPointer<Unit>): Int32
-    // param-hint: pctime optional
-    // param-hint: patime optional
-    // param-hint: pmtime optional
-    func StgSetTimes(lpszName: CPointer<UInt16>, pctime: CPointer<Win32_Foundation.FILETIMEAbi>, patime: CPointer<Win32_Foundation.FILETIMEAbi>, pmtime: CPointer<Win32_Foundation.FILETIMEAbi>): Int32
-    func WriteClassStg(pStg: CPointer<Unit>, rclsid: CPointer<GUID>): Int32
-    func WriteFmtUserTypeStg(pstg: CPointer<Unit>, cf: UInt16, lpszUserType: CPointer<UInt16>): Int32
-}
-
-@When[OLE32 == "on" && (Windows_Win32_Security == "on" && Windows_Win32_System_Com == "on")]
-foreign {
-    // param-hint: pwcsName optional
-    // param-hint: pStgOptions optional
-    // param-hint: pSecurityDescriptor optional
-    func StgCreateStorageEx(pwcsName: CPointer<UInt16>, grfMode: Win32__impl_l0.STGMAbi, stgfmt: Win32__impl_l0.STGFMTAbi, grfAttrs: UInt32, pStgOptions: CPointer<Win32__impl_l0.STGOPTIONSAbi>, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, riid: CPointer<GUID>, ppObjectOpen: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pStgOptions optional
-    // param-hint: pSecurityDescriptor optional
-    func StgOpenStorageEx(pwcsName: CPointer<UInt16>, grfMode: Win32__impl_l0.STGMAbi, stgfmt: Win32__impl_l0.STGFMTAbi, grfAttrs: UInt32, pStgOptions: CPointer<Win32__impl_l0.STGOPTIONSAbi>, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, riid: CPointer<GUID>, ppObjectOpen: CPointer<CPointer<Unit>>): Int32
-}
-
-@When[OLE32 == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on")]
-foreign {
-    // param-hint: rgvars len=param[0]
-    func FreePropVariantArray(cVariants: UInt32, rgvars: CPointer<PROPVARIANTAbi>): Int32
-    func PropVariantClear(pvar: CPointer<PROPVARIANTAbi>): Int32
-    func PropVariantCopy(pvarDest: CPointer<PROPVARIANTAbi>, pvarSrc: CPointer<PROPVARIANTAbi>): Int32
-}
-
-@When[OLE32 == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_CoGetInstanceFromFile == "on" && Windows_Win32_System_Com == "on"]
 foreign {
     // param-hint: pServerInfo optional
     // param-hint: pClsid optional
     // param-hint: punkOuter optional
     // param-hint: pResults len=param[6]
     func CoGetInstanceFromFile(pServerInfo: CPointer<Win32__impl_l1.COSERVERINFOAbi>, pClsid: CPointer<GUID>, punkOuter: CPointer<Unit>, dwClsCtx: Win32__impl_l0.CLSCTXAbi, grfMode: UInt32, pwszName: CPointer<UInt16>, dwCount: UInt32, pResults: CPointer<Win32__impl_l1.MULTI_QIAbi>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_CoGetInstanceFromFile == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CoGetInstanceFromFile(pServerInfo: CPointer<Win32__impl_l1.COSERVERINFOAbi>, pClsid: CPointer<GUID>, punkOuter: CPointer<Unit>, dwClsCtx: Win32__impl_l0.CLSCTXAbi, grfMode: UInt32, pwszName: CPointer<UInt16>, dwCount: UInt32, pResults: CPointer<Win32__impl_l1.MULTI_QIAbi>): Int32 {
+    return CoGetInstanceFromFile(pServerInfo, pClsid, punkOuter, dwClsCtx, grfMode, pwszName, dwCount, pResults)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_CoGetInstanceFromIStorage == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pServerInfo optional
     // param-hint: pClsid optional
     // param-hint: punkOuter optional
     // param-hint: pResults len=param[5]
     func CoGetInstanceFromIStorage(pServerInfo: CPointer<Win32__impl_l1.COSERVERINFOAbi>, pClsid: CPointer<GUID>, punkOuter: CPointer<Unit>, dwClsCtx: Win32__impl_l0.CLSCTXAbi, pstg: CPointer<Unit>, dwCount: UInt32, pResults: CPointer<Win32__impl_l1.MULTI_QIAbi>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_CoGetInstanceFromIStorage == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CoGetInstanceFromIStorage(pServerInfo: CPointer<Win32__impl_l1.COSERVERINFOAbi>, pClsid: CPointer<GUID>, punkOuter: CPointer<Unit>, dwClsCtx: Win32__impl_l0.CLSCTXAbi, pstg: CPointer<Unit>, dwCount: UInt32, pResults: CPointer<Win32__impl_l1.MULTI_QIAbi>): Int32 {
+    return CoGetInstanceFromIStorage(pServerInfo, pClsid, punkOuter, dwClsCtx, pstg, dwCount, pResults)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_CoGetInterfaceAndReleaseStream == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func CoGetInterfaceAndReleaseStream(pStm: CPointer<Unit>, iid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_CoGetInterfaceAndReleaseStream == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CoGetInterfaceAndReleaseStream(pStm: CPointer<Unit>, iid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return CoGetInterfaceAndReleaseStream(pStm, iid, ppv)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_CreateILockBytesOnHGlobal == "on"]
+foreign {
+    // param-hint: hGlobal optional
+    func CreateILockBytesOnHGlobal(hGlobal: CPointer<Unit>, fDeleteOnRelease: Int32, pplkbyt: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_CreateILockBytesOnHGlobal == "on"]
+public unsafe func Windows_CreateILockBytesOnHGlobal(hGlobal: CPointer<Unit>, fDeleteOnRelease: Int32, pplkbyt: CPointer<CPointer<Unit>>): Int32 {
+    return CreateILockBytesOnHGlobal(hGlobal, fDeleteOnRelease, pplkbyt)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_CreateStreamOnHGlobal == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: hGlobal optional
     func CreateStreamOnHGlobal(hGlobal: CPointer<Unit>, fDeleteOnRelease: Int32, ppstm: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_CreateStreamOnHGlobal == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CreateStreamOnHGlobal(hGlobal: CPointer<Unit>, fDeleteOnRelease: Int32, ppstm: CPointer<CPointer<Unit>>): Int32 {
+    return CreateStreamOnHGlobal(hGlobal, fDeleteOnRelease, ppstm)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_FmtIdToPropStgName == "on"]
+foreign {
+    func FmtIdToPropStgName(pfmtid: CPointer<GUID>, oszName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_FmtIdToPropStgName == "on"]
+public unsafe func Windows_FmtIdToPropStgName(pfmtid: CPointer<GUID>, oszName: CPointer<UInt16>): Int32 {
+    return FmtIdToPropStgName(pfmtid, oszName)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_FreePropVariantArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    // param-hint: rgvars len=param[0]
+    func FreePropVariantArray(cVariants: UInt32, rgvars: CPointer<PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_FreePropVariantArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_FreePropVariantArray(cVariants: UInt32, rgvars: CPointer<PROPVARIANTAbi>): Int32 {
+    return FreePropVariantArray(cVariants, rgvars)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_GetConvertStg == "on"]
+foreign {
+    func GetConvertStg(pStg: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_GetConvertStg == "on"]
+public unsafe func Windows_GetConvertStg(pStg: CPointer<Unit>): Int32 {
+    return GetConvertStg(pStg)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_GetHGlobalFromILockBytes == "on"]
+foreign {
+    func GetHGlobalFromILockBytes(plkbyt: CPointer<Unit>, phglobal: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_GetHGlobalFromILockBytes == "on"]
+public unsafe func Windows_GetHGlobalFromILockBytes(plkbyt: CPointer<Unit>, phglobal: CPointer<CPointer<Unit>>): Int32 {
+    return GetHGlobalFromILockBytes(plkbyt, phglobal)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_GetHGlobalFromStream == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func GetHGlobalFromStream(pstm: CPointer<Unit>, phglobal: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_GetHGlobalFromStream == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_GetHGlobalFromStream(pstm: CPointer<Unit>, phglobal: CPointer<CPointer<Unit>>): Int32 {
+    return GetHGlobalFromStream(pstm, phglobal)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_PropStgNameToFmtId == "on"]
+foreign {
+    func PropStgNameToFmtId(oszName: CPointer<UInt16>, pfmtid: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_PropStgNameToFmtId == "on"]
+public unsafe func Windows_PropStgNameToFmtId(oszName: CPointer<UInt16>, pfmtid: CPointer<GUID>): Int32 {
+    return PropStgNameToFmtId(oszName, pfmtid)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantClear == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantClear(pvar: CPointer<PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantClear == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantClear(pvar: CPointer<PROPVARIANTAbi>): Int32 {
+    return PropVariantClear(pvar)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantCopy == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantCopy(pvarDest: CPointer<PROPVARIANTAbi>, pvarSrc: CPointer<PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantCopy == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantCopy(pvarDest: CPointer<PROPVARIANTAbi>, pvarSrc: CPointer<PROPVARIANTAbi>): Int32 {
+    return PropVariantCopy(pvarDest, pvarSrc)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_ReadClassStg == "on"]
+foreign {
+    func ReadClassStg(pStg: CPointer<Unit>, pclsid: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_ReadClassStg == "on"]
+public unsafe func Windows_ReadClassStg(pStg: CPointer<Unit>, pclsid: CPointer<GUID>): Int32 {
+    return ReadClassStg(pStg, pclsid)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_ReadClassStm == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func ReadClassStm(pStm: CPointer<Unit>, pclsid: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_ReadClassStm == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_ReadClassStm(pStm: CPointer<Unit>, pclsid: CPointer<GUID>): Int32 {
+    return ReadClassStm(pStm, pclsid)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_ReadFmtUserTypeStg == "on"]
+foreign {
+    // param-hint: lplpszUserType optional
+    func ReadFmtUserTypeStg(pstg: CPointer<Unit>, pcf: CPointer<UInt16>, lplpszUserType: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_ReadFmtUserTypeStg == "on"]
+public unsafe func Windows_ReadFmtUserTypeStg(pstg: CPointer<Unit>, pcf: CPointer<UInt16>, lplpszUserType: CPointer<CPointer<UInt16>>): Int32 {
+    return ReadFmtUserTypeStg(pstg, pcf, lplpszUserType)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_SetConvertStg == "on"]
+foreign {
+    func SetConvertStg(pStg: CPointer<Unit>, fConvert: Int32): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_SetConvertStg == "on"]
+public unsafe func Windows_SetConvertStg(pStg: CPointer<Unit>, fConvert: Int32): Int32 {
+    return SetConvertStg(pStg, fConvert)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgCreateDocfile == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pwcsName optional
     // param-hint: reserved optional reserved
     func StgCreateDocfile(pwcsName: CPointer<UInt16>, grfMode: Win32__impl_l0.STGMAbi, reserved: UInt32, ppstgOpen: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgCreateDocfile == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_StgCreateDocfile(pwcsName: CPointer<UInt16>, grfMode: Win32__impl_l0.STGMAbi, reserved: UInt32, ppstgOpen: CPointer<CPointer<Unit>>): Int32 {
+    return StgCreateDocfile(pwcsName, grfMode, reserved, ppstgOpen)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgCreateDocfileOnILockBytes == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func StgCreateDocfileOnILockBytes(plkbyt: CPointer<Unit>, grfMode: Win32__impl_l0.STGMAbi, reserved: UInt32, ppstgOpen: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgCreateDocfileOnILockBytes == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_StgCreateDocfileOnILockBytes(plkbyt: CPointer<Unit>, grfMode: Win32__impl_l0.STGMAbi, reserved: UInt32, ppstgOpen: CPointer<CPointer<Unit>>): Int32 {
+    return StgCreateDocfileOnILockBytes(plkbyt, grfMode, reserved, ppstgOpen)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgCreatePropSetStg == "on"]
+foreign {
+    // param-hint: dwReserved optional reserved
+    func StgCreatePropSetStg(pStorage: CPointer<Unit>, dwReserved: UInt32, ppPropSetStg: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgCreatePropSetStg == "on"]
+public unsafe func Windows_StgCreatePropSetStg(pStorage: CPointer<Unit>, dwReserved: UInt32, ppPropSetStg: CPointer<CPointer<Unit>>): Int32 {
+    return StgCreatePropSetStg(pStorage, dwReserved, ppPropSetStg)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgCreatePropStg == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: dwReserved optional reserved
     func StgCreatePropStg(pUnk: CPointer<Unit>, fmtid: CPointer<GUID>, pclsid: CPointer<GUID>, grfFlags: UInt32, dwReserved: UInt32, ppPropStg: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgCreatePropStg == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_StgCreatePropStg(pUnk: CPointer<Unit>, fmtid: CPointer<GUID>, pclsid: CPointer<GUID>, grfFlags: UInt32, dwReserved: UInt32, ppPropStg: CPointer<CPointer<Unit>>): Int32 {
+    return StgCreatePropStg(pUnk, fmtid, pclsid, grfFlags, dwReserved, ppPropStg)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgCreateStorageEx == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: pwcsName optional
+    // param-hint: pStgOptions optional
+    // param-hint: pSecurityDescriptor optional
+    func StgCreateStorageEx(pwcsName: CPointer<UInt16>, grfMode: Win32__impl_l0.STGMAbi, stgfmt: Win32__impl_l0.STGFMTAbi, grfAttrs: UInt32, pStgOptions: CPointer<Win32__impl_l0.STGOPTIONSAbi>, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, riid: CPointer<GUID>, ppObjectOpen: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgCreateStorageEx == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_StgCreateStorageEx(pwcsName: CPointer<UInt16>, grfMode: Win32__impl_l0.STGMAbi, stgfmt: Win32__impl_l0.STGFMTAbi, grfAttrs: UInt32, pStgOptions: CPointer<Win32__impl_l0.STGOPTIONSAbi>, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, riid: CPointer<GUID>, ppObjectOpen: CPointer<CPointer<Unit>>): Int32 {
+    return StgCreateStorageEx(pwcsName, grfMode, stgfmt, grfAttrs, pStgOptions, pSecurityDescriptor, riid, ppObjectOpen)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgIsStorageFile == "on"]
+foreign {
+    func StgIsStorageFile(pwcsName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgIsStorageFile == "on"]
+public unsafe func Windows_StgIsStorageFile(pwcsName: CPointer<UInt16>): Int32 {
+    return StgIsStorageFile(pwcsName)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgIsStorageILockBytes == "on"]
+foreign {
+    func StgIsStorageILockBytes(plkbyt: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgIsStorageILockBytes == "on"]
+public unsafe func Windows_StgIsStorageILockBytes(plkbyt: CPointer<Unit>): Int32 {
+    return StgIsStorageILockBytes(plkbyt)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgOpenPropStg == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: dwReserved optional reserved
     func StgOpenPropStg(pUnk: CPointer<Unit>, fmtid: CPointer<GUID>, grfFlags: UInt32, dwReserved: UInt32, ppPropStg: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgOpenPropStg == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_StgOpenPropStg(pUnk: CPointer<Unit>, fmtid: CPointer<GUID>, grfFlags: UInt32, dwReserved: UInt32, ppPropStg: CPointer<CPointer<Unit>>): Int32 {
+    return StgOpenPropStg(pUnk, fmtid, grfFlags, dwReserved, ppPropStg)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgOpenStorage == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pwcsName optional
     // param-hint: pstgPriority optional
     // param-hint: snbExclude optional
     func StgOpenStorage(pwcsName: CPointer<UInt16>, pstgPriority: CPointer<Unit>, grfMode: Win32__impl_l0.STGMAbi, snbExclude: CPointer<CPointer<UInt16>>, reserved: UInt32, ppstgOpen: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgOpenStorage == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_StgOpenStorage(pwcsName: CPointer<UInt16>, pstgPriority: CPointer<Unit>, grfMode: Win32__impl_l0.STGMAbi, snbExclude: CPointer<CPointer<UInt16>>, reserved: UInt32, ppstgOpen: CPointer<CPointer<Unit>>): Int32 {
+    return StgOpenStorage(pwcsName, pstgPriority, grfMode, snbExclude, reserved, ppstgOpen)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgOpenStorageEx == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: pStgOptions optional
+    // param-hint: pSecurityDescriptor optional
+    func StgOpenStorageEx(pwcsName: CPointer<UInt16>, grfMode: Win32__impl_l0.STGMAbi, stgfmt: Win32__impl_l0.STGFMTAbi, grfAttrs: UInt32, pStgOptions: CPointer<Win32__impl_l0.STGOPTIONSAbi>, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, riid: CPointer<GUID>, ppObjectOpen: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgOpenStorageEx == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_StgOpenStorageEx(pwcsName: CPointer<UInt16>, grfMode: Win32__impl_l0.STGMAbi, stgfmt: Win32__impl_l0.STGFMTAbi, grfAttrs: UInt32, pStgOptions: CPointer<Win32__impl_l0.STGOPTIONSAbi>, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, riid: CPointer<GUID>, ppObjectOpen: CPointer<CPointer<Unit>>): Int32 {
+    return StgOpenStorageEx(pwcsName, grfMode, stgfmt, grfAttrs, pStgOptions, pSecurityDescriptor, riid, ppObjectOpen)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgOpenStorageOnILockBytes == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pstgPriority optional
     // param-hint: snbExclude optional
     // param-hint: reserved optional reserved
     func StgOpenStorageOnILockBytes(plkbyt: CPointer<Unit>, pstgPriority: CPointer<Unit>, grfMode: Win32__impl_l0.STGMAbi, snbExclude: CPointer<CPointer<UInt16>>, reserved: UInt32, ppstgOpen: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgOpenStorageOnILockBytes == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_StgOpenStorageOnILockBytes(plkbyt: CPointer<Unit>, pstgPriority: CPointer<Unit>, grfMode: Win32__impl_l0.STGMAbi, snbExclude: CPointer<CPointer<UInt16>>, reserved: UInt32, ppstgOpen: CPointer<CPointer<Unit>>): Int32 {
+    return StgOpenStorageOnILockBytes(plkbyt, pstgPriority, grfMode, snbExclude, reserved, ppstgOpen)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgSetTimes == "on"]
+foreign {
+    // param-hint: pctime optional
+    // param-hint: patime optional
+    // param-hint: pmtime optional
+    func StgSetTimes(lpszName: CPointer<UInt16>, pctime: CPointer<Win32_Foundation.FILETIMEAbi>, patime: CPointer<Win32_Foundation.FILETIMEAbi>, pmtime: CPointer<Win32_Foundation.FILETIMEAbi>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgSetTimes == "on"]
+public unsafe func Windows_StgSetTimes(lpszName: CPointer<UInt16>, pctime: CPointer<Win32_Foundation.FILETIMEAbi>, patime: CPointer<Win32_Foundation.FILETIMEAbi>, pmtime: CPointer<Win32_Foundation.FILETIMEAbi>): Int32 {
+    return StgSetTimes(lpszName, pctime, patime, pmtime)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_WriteClassStg == "on"]
+foreign {
+    func WriteClassStg(pStg: CPointer<Unit>, rclsid: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_WriteClassStg == "on"]
+public unsafe func Windows_WriteClassStg(pStg: CPointer<Unit>, rclsid: CPointer<GUID>): Int32 {
+    return WriteClassStg(pStg, rclsid)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_WriteClassStm == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func WriteClassStm(pStm: CPointer<Unit>, rclsid: CPointer<GUID>): Int32
 }
 
-@When[PROPSYS == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on")]
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_WriteClassStm == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_WriteClassStm(pStm: CPointer<Unit>, rclsid: CPointer<GUID>): Int32 {
+    return WriteClassStm(pStm, rclsid)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_WriteFmtUserTypeStg == "on"]
+foreign {
+    func WriteFmtUserTypeStg(pstg: CPointer<Unit>, cf: UInt16, lpszUserType: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_WriteFmtUserTypeStg == "on"]
+public unsafe func Windows_WriteFmtUserTypeStg(pstg: CPointer<Unit>, cf: UInt16, lpszUserType: CPointer<UInt16>): Int32 {
+    return WriteFmtUserTypeStg(pstg, cf, lpszUserType)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_ClearPropVariantArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    // param-hint: rgPropVar len=param[1]
+    func ClearPropVariantArray(rgPropVar: CPointer<PROPVARIANTAbi>, cVars: UInt32): Unit
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_ClearPropVariantArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_ClearPropVariantArray(rgPropVar: CPointer<PROPVARIANTAbi>, cVars: UInt32): Unit {
+    ClearPropVariantArray(rgPropVar, cVars)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromBooleanVector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    // param-hint: prgf len=param[1] optional
+    func InitPropVariantFromBooleanVector(prgf: CPointer<Int32>, cElems: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromBooleanVector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_InitPropVariantFromBooleanVector(prgf: CPointer<Int32>, cElems: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32 {
+    return InitPropVariantFromBooleanVector(prgf, cElems, ppropvar)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromBuffer == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    // param-hint: pv bytes=param[1]
+    func InitPropVariantFromBuffer(pv: CPointer<Unit>, cb: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromBuffer == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_InitPropVariantFromBuffer(pv: CPointer<Unit>, cb: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32 {
+    return InitPropVariantFromBuffer(pv, cb, ppropvar)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromCLSID == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func InitPropVariantFromCLSID(clsid: CPointer<GUID>, ppropvar: CPointer<PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromCLSID == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_InitPropVariantFromCLSID(clsid: CPointer<GUID>, ppropvar: CPointer<PROPVARIANTAbi>): Int32 {
+    return InitPropVariantFromCLSID(clsid, ppropvar)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromDoubleVector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    // param-hint: prgn len=param[1] optional
+    func InitPropVariantFromDoubleVector(prgn: CPointer<Float64>, cElems: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromDoubleVector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_InitPropVariantFromDoubleVector(prgn: CPointer<Float64>, cElems: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32 {
+    return InitPropVariantFromDoubleVector(prgn, cElems, ppropvar)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromFileTime == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func InitPropVariantFromFileTime(pftIn: CPointer<Win32_Foundation.FILETIMEAbi>, ppropvar: CPointer<PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromFileTime == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_InitPropVariantFromFileTime(pftIn: CPointer<Win32_Foundation.FILETIMEAbi>, ppropvar: CPointer<PROPVARIANTAbi>): Int32 {
+    return InitPropVariantFromFileTime(pftIn, ppropvar)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromFileTimeVector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    // param-hint: prgft len=param[1] optional
+    func InitPropVariantFromFileTimeVector(prgft: CPointer<Win32_Foundation.FILETIMEAbi>, cElems: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromFileTimeVector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_InitPropVariantFromFileTimeVector(prgft: CPointer<Win32_Foundation.FILETIMEAbi>, cElems: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32 {
+    return InitPropVariantFromFileTimeVector(prgft, cElems, ppropvar)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromGUIDAsString == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func InitPropVariantFromGUIDAsString(guid: CPointer<GUID>, ppropvar: CPointer<PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromGUIDAsString == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_InitPropVariantFromGUIDAsString(guid: CPointer<GUID>, ppropvar: CPointer<PROPVARIANTAbi>): Int32 {
+    return InitPropVariantFromGUIDAsString(guid, ppropvar)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromInt16Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    // param-hint: prgn len=param[1] optional
+    func InitPropVariantFromInt16Vector(prgn: CPointer<Int16>, cElems: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromInt16Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_InitPropVariantFromInt16Vector(prgn: CPointer<Int16>, cElems: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32 {
+    return InitPropVariantFromInt16Vector(prgn, cElems, ppropvar)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromInt32Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    // param-hint: prgn len=param[1] optional
+    func InitPropVariantFromInt32Vector(prgn: CPointer<Int32>, cElems: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromInt32Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_InitPropVariantFromInt32Vector(prgn: CPointer<Int32>, cElems: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32 {
+    return InitPropVariantFromInt32Vector(prgn, cElems, ppropvar)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromInt64Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    // param-hint: prgn len=param[1] optional
+    func InitPropVariantFromInt64Vector(prgn: CPointer<Int64>, cElems: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromInt64Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_InitPropVariantFromInt64Vector(prgn: CPointer<Int64>, cElems: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32 {
+    return InitPropVariantFromInt64Vector(prgn, cElems, ppropvar)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromPropVariantVectorElem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func InitPropVariantFromPropVariantVectorElem(propvarIn: CPointer<PROPVARIANTAbi>, iElem: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromPropVariantVectorElem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_InitPropVariantFromPropVariantVectorElem(propvarIn: CPointer<PROPVARIANTAbi>, iElem: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32 {
+    return InitPropVariantFromPropVariantVectorElem(propvarIn, iElem, ppropvar)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromResource == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func InitPropVariantFromResource(hinst: CPointer<Unit>, id: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromResource == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_InitPropVariantFromResource(hinst: CPointer<Unit>, id: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32 {
+    return InitPropVariantFromResource(hinst, id, ppropvar)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromStringAsVector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    // param-hint: psz optional
+    func InitPropVariantFromStringAsVector(psz: CPointer<UInt16>, ppropvar: CPointer<PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromStringAsVector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_InitPropVariantFromStringAsVector(psz: CPointer<UInt16>, ppropvar: CPointer<PROPVARIANTAbi>): Int32 {
+    return InitPropVariantFromStringAsVector(psz, ppropvar)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromStringVector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    // param-hint: prgsz len=param[1] optional
+    func InitPropVariantFromStringVector(prgsz: CPointer<CPointer<UInt16>>, cElems: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromStringVector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_InitPropVariantFromStringVector(prgsz: CPointer<CPointer<UInt16>>, cElems: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32 {
+    return InitPropVariantFromStringVector(prgsz, cElems, ppropvar)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromUInt16Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    // param-hint: prgn len=param[1] optional
+    func InitPropVariantFromUInt16Vector(prgn: CPointer<UInt16>, cElems: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromUInt16Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_InitPropVariantFromUInt16Vector(prgn: CPointer<UInt16>, cElems: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32 {
+    return InitPropVariantFromUInt16Vector(prgn, cElems, ppropvar)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromUInt32Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    // param-hint: prgn len=param[1] optional
+    func InitPropVariantFromUInt32Vector(prgn: CPointer<UInt32>, cElems: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromUInt32Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_InitPropVariantFromUInt32Vector(prgn: CPointer<UInt32>, cElems: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32 {
+    return InitPropVariantFromUInt32Vector(prgn, cElems, ppropvar)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromUInt64Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    // param-hint: prgn len=param[1] optional
+    func InitPropVariantFromUInt64Vector(prgn: CPointer<UInt64>, cElems: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantFromUInt64Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_InitPropVariantFromUInt64Vector(prgn: CPointer<UInt64>, cElems: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32 {
+    return InitPropVariantFromUInt64Vector(prgn, cElems, ppropvar)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantVectorFromPropVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func InitPropVariantVectorFromPropVariant(propvarSingle: CPointer<PROPVARIANTAbi>, ppropvarVector: CPointer<PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_InitPropVariantVectorFromPropVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_InitPropVariantVectorFromPropVariant(propvarSingle: CPointer<PROPVARIANTAbi>, ppropvarVector: CPointer<PROPVARIANTAbi>): Int32 {
+    return InitPropVariantVectorFromPropVariant(propvarSingle, ppropvarVector)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantChangeType == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantChangeType(ppropvarDest: CPointer<PROPVARIANTAbi>, propvarSrc: CPointer<PROPVARIANTAbi>, flags: Win32__impl_l0.PROPVAR_CHANGE_FLAGSAbi, vt: Win32__impl_l0.VARENUMAbi): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantChangeType == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantChangeType(ppropvarDest: CPointer<PROPVARIANTAbi>, propvarSrc: CPointer<PROPVARIANTAbi>, flags: Win32__impl_l0.PROPVAR_CHANGE_FLAGSAbi, vt: Win32__impl_l0.VARENUMAbi): Int32 {
+    return PropVariantChangeType(ppropvarDest, propvarSrc, flags, vt)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantCompareEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantCompareEx(propvar1: CPointer<PROPVARIANTAbi>, propvar2: CPointer<PROPVARIANTAbi>, unit: Win32__impl_l0.PROPVAR_COMPARE_UNITAbi, flags: Win32__impl_l0.PROPVAR_COMPARE_FLAGSAbi): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantCompareEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantCompareEx(propvar1: CPointer<PROPVARIANTAbi>, propvar2: CPointer<PROPVARIANTAbi>, unit: Win32__impl_l0.PROPVAR_COMPARE_UNITAbi, flags: Win32__impl_l0.PROPVAR_COMPARE_FLAGSAbi): Int32 {
+    return PropVariantCompareEx(propvar1, propvar2, unit, flags)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantGetBooleanElem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantGetBooleanElem(propvar: CPointer<PROPVARIANTAbi>, iElem: UInt32, pfVal: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantGetBooleanElem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantGetBooleanElem(propvar: CPointer<PROPVARIANTAbi>, iElem: UInt32, pfVal: CPointer<Int32>): Int32 {
+    return PropVariantGetBooleanElem(propvar, iElem, pfVal)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantGetDoubleElem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantGetDoubleElem(propvar: CPointer<PROPVARIANTAbi>, iElem: UInt32, pnVal: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantGetDoubleElem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantGetDoubleElem(propvar: CPointer<PROPVARIANTAbi>, iElem: UInt32, pnVal: CPointer<Float64>): Int32 {
+    return PropVariantGetDoubleElem(propvar, iElem, pnVal)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantGetElementCount == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantGetElementCount(propvar: CPointer<PROPVARIANTAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantGetElementCount == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantGetElementCount(propvar: CPointer<PROPVARIANTAbi>): UInt32 {
+    return PropVariantGetElementCount(propvar)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantGetFileTimeElem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantGetFileTimeElem(propvar: CPointer<PROPVARIANTAbi>, iElem: UInt32, pftVal: CPointer<Win32_Foundation.FILETIMEAbi>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantGetFileTimeElem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantGetFileTimeElem(propvar: CPointer<PROPVARIANTAbi>, iElem: UInt32, pftVal: CPointer<Win32_Foundation.FILETIMEAbi>): Int32 {
+    return PropVariantGetFileTimeElem(propvar, iElem, pftVal)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantGetInt16Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantGetInt16Elem(propvar: CPointer<PROPVARIANTAbi>, iElem: UInt32, pnVal: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantGetInt16Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantGetInt16Elem(propvar: CPointer<PROPVARIANTAbi>, iElem: UInt32, pnVal: CPointer<Int16>): Int32 {
+    return PropVariantGetInt16Elem(propvar, iElem, pnVal)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantGetInt32Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantGetInt32Elem(propvar: CPointer<PROPVARIANTAbi>, iElem: UInt32, pnVal: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantGetInt32Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantGetInt32Elem(propvar: CPointer<PROPVARIANTAbi>, iElem: UInt32, pnVal: CPointer<Int32>): Int32 {
+    return PropVariantGetInt32Elem(propvar, iElem, pnVal)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantGetInt64Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantGetInt64Elem(propvar: CPointer<PROPVARIANTAbi>, iElem: UInt32, pnVal: CPointer<Int64>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantGetInt64Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantGetInt64Elem(propvar: CPointer<PROPVARIANTAbi>, iElem: UInt32, pnVal: CPointer<Int64>): Int32 {
+    return PropVariantGetInt64Elem(propvar, iElem, pnVal)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantGetStringElem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantGetStringElem(propvar: CPointer<PROPVARIANTAbi>, iElem: UInt32, ppszVal: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantGetStringElem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantGetStringElem(propvar: CPointer<PROPVARIANTAbi>, iElem: UInt32, ppszVal: CPointer<CPointer<UInt16>>): Int32 {
+    return PropVariantGetStringElem(propvar, iElem, ppszVal)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantGetUInt16Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantGetUInt16Elem(propvar: CPointer<PROPVARIANTAbi>, iElem: UInt32, pnVal: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantGetUInt16Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantGetUInt16Elem(propvar: CPointer<PROPVARIANTAbi>, iElem: UInt32, pnVal: CPointer<UInt16>): Int32 {
+    return PropVariantGetUInt16Elem(propvar, iElem, pnVal)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantGetUInt32Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantGetUInt32Elem(propvar: CPointer<PROPVARIANTAbi>, iElem: UInt32, pnVal: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantGetUInt32Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantGetUInt32Elem(propvar: CPointer<PROPVARIANTAbi>, iElem: UInt32, pnVal: CPointer<UInt32>): Int32 {
+    return PropVariantGetUInt32Elem(propvar, iElem, pnVal)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantGetUInt64Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantGetUInt64Elem(propvar: CPointer<PROPVARIANTAbi>, iElem: UInt32, pnVal: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantGetUInt64Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantGetUInt64Elem(propvar: CPointer<PROPVARIANTAbi>, iElem: UInt32, pnVal: CPointer<UInt64>): Int32 {
+    return PropVariantGetUInt64Elem(propvar, iElem, pnVal)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToBSTR == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantToBSTR(propvar: CPointer<PROPVARIANTAbi>, pbstrOut: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToBSTR == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToBSTR(propvar: CPointer<PROPVARIANTAbi>, pbstrOut: CPointer<CPointer<UInt16>>): Int32 {
+    return PropVariantToBSTR(propvar, pbstrOut)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToBoolean == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantToBoolean(propvarIn: CPointer<PROPVARIANTAbi>, pfRet: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToBoolean == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToBoolean(propvarIn: CPointer<PROPVARIANTAbi>, pfRet: CPointer<Int32>): Int32 {
+    return PropVariantToBoolean(propvarIn, pfRet)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToBooleanVector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    // param-hint: prgf len=param[2]
+    func PropVariantToBooleanVector(propvar: CPointer<PROPVARIANTAbi>, prgf: CPointer<Int32>, crgf: UInt32, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToBooleanVector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToBooleanVector(propvar: CPointer<PROPVARIANTAbi>, prgf: CPointer<Int32>, crgf: UInt32, pcElem: CPointer<UInt32>): Int32 {
+    return PropVariantToBooleanVector(propvar, prgf, crgf, pcElem)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToBooleanVectorAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantToBooleanVectorAlloc(propvar: CPointer<PROPVARIANTAbi>, pprgf: CPointer<CPointer<Int32>>, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToBooleanVectorAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToBooleanVectorAlloc(propvar: CPointer<PROPVARIANTAbi>, pprgf: CPointer<CPointer<Int32>>, pcElem: CPointer<UInt32>): Int32 {
+    return PropVariantToBooleanVectorAlloc(propvar, pprgf, pcElem)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToBooleanWithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantToBooleanWithDefault(propvarIn: CPointer<PROPVARIANTAbi>, fDefault: Int32): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToBooleanWithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToBooleanWithDefault(propvarIn: CPointer<PROPVARIANTAbi>, fDefault: Int32): Int32 {
+    return PropVariantToBooleanWithDefault(propvarIn, fDefault)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToBuffer == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    // param-hint: pv bytes=param[2]
+    func PropVariantToBuffer(propvar: CPointer<PROPVARIANTAbi>, pv: CPointer<Unit>, cb: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToBuffer == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToBuffer(propvar: CPointer<PROPVARIANTAbi>, pv: CPointer<Unit>, cb: UInt32): Int32 {
+    return PropVariantToBuffer(propvar, pv, cb)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToDouble == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantToDouble(propvarIn: CPointer<PROPVARIANTAbi>, pdblRet: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToDouble == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToDouble(propvarIn: CPointer<PROPVARIANTAbi>, pdblRet: CPointer<Float64>): Int32 {
+    return PropVariantToDouble(propvarIn, pdblRet)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToDoubleVector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    // param-hint: prgn len=param[2]
+    func PropVariantToDoubleVector(propvar: CPointer<PROPVARIANTAbi>, prgn: CPointer<Float64>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToDoubleVector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToDoubleVector(propvar: CPointer<PROPVARIANTAbi>, prgn: CPointer<Float64>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32 {
+    return PropVariantToDoubleVector(propvar, prgn, crgn, pcElem)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToDoubleVectorAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantToDoubleVectorAlloc(propvar: CPointer<PROPVARIANTAbi>, pprgn: CPointer<CPointer<Float64>>, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToDoubleVectorAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToDoubleVectorAlloc(propvar: CPointer<PROPVARIANTAbi>, pprgn: CPointer<CPointer<Float64>>, pcElem: CPointer<UInt32>): Int32 {
+    return PropVariantToDoubleVectorAlloc(propvar, pprgn, pcElem)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToDoubleWithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantToDoubleWithDefault(propvarIn: CPointer<PROPVARIANTAbi>, dblDefault: Float64): Float64
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToDoubleWithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToDoubleWithDefault(propvarIn: CPointer<PROPVARIANTAbi>, dblDefault: Float64): Float64 {
+    return PropVariantToDoubleWithDefault(propvarIn, dblDefault)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToFileTime == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantToFileTime(propvar: CPointer<PROPVARIANTAbi>, pstfOut: Win32__impl_l0.PSTIME_FLAGSAbi, pftOut: CPointer<Win32_Foundation.FILETIMEAbi>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToFileTime == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToFileTime(propvar: CPointer<PROPVARIANTAbi>, pstfOut: Win32__impl_l0.PSTIME_FLAGSAbi, pftOut: CPointer<Win32_Foundation.FILETIMEAbi>): Int32 {
+    return PropVariantToFileTime(propvar, pstfOut, pftOut)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToFileTimeVector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    // param-hint: prgft len=param[2]
+    func PropVariantToFileTimeVector(propvar: CPointer<PROPVARIANTAbi>, prgft: CPointer<Win32_Foundation.FILETIMEAbi>, crgft: UInt32, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToFileTimeVector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToFileTimeVector(propvar: CPointer<PROPVARIANTAbi>, prgft: CPointer<Win32_Foundation.FILETIMEAbi>, crgft: UInt32, pcElem: CPointer<UInt32>): Int32 {
+    return PropVariantToFileTimeVector(propvar, prgft, crgft, pcElem)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToFileTimeVectorAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantToFileTimeVectorAlloc(propvar: CPointer<PROPVARIANTAbi>, pprgft: CPointer<CPointer<Win32_Foundation.FILETIMEAbi>>, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToFileTimeVectorAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToFileTimeVectorAlloc(propvar: CPointer<PROPVARIANTAbi>, pprgft: CPointer<CPointer<Win32_Foundation.FILETIMEAbi>>, pcElem: CPointer<UInt32>): Int32 {
+    return PropVariantToFileTimeVectorAlloc(propvar, pprgft, pcElem)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToGUID == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantToGUID(propvar: CPointer<PROPVARIANTAbi>, pguid: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToGUID == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToGUID(propvar: CPointer<PROPVARIANTAbi>, pguid: CPointer<GUID>): Int32 {
+    return PropVariantToGUID(propvar, pguid)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt16 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantToInt16(propvarIn: CPointer<PROPVARIANTAbi>, piRet: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt16 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToInt16(propvarIn: CPointer<PROPVARIANTAbi>, piRet: CPointer<Int16>): Int32 {
+    return PropVariantToInt16(propvarIn, piRet)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt16Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    // param-hint: prgn len=param[2]
+    func PropVariantToInt16Vector(propvar: CPointer<PROPVARIANTAbi>, prgn: CPointer<Int16>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt16Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToInt16Vector(propvar: CPointer<PROPVARIANTAbi>, prgn: CPointer<Int16>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32 {
+    return PropVariantToInt16Vector(propvar, prgn, crgn, pcElem)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt16VectorAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantToInt16VectorAlloc(propvar: CPointer<PROPVARIANTAbi>, pprgn: CPointer<CPointer<Int16>>, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt16VectorAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToInt16VectorAlloc(propvar: CPointer<PROPVARIANTAbi>, pprgn: CPointer<CPointer<Int16>>, pcElem: CPointer<UInt32>): Int32 {
+    return PropVariantToInt16VectorAlloc(propvar, pprgn, pcElem)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt16WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantToInt16WithDefault(propvarIn: CPointer<PROPVARIANTAbi>, iDefault: Int16): Int16
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt16WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToInt16WithDefault(propvarIn: CPointer<PROPVARIANTAbi>, iDefault: Int16): Int16 {
+    return PropVariantToInt16WithDefault(propvarIn, iDefault)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt32 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantToInt32(propvarIn: CPointer<PROPVARIANTAbi>, plRet: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt32 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToInt32(propvarIn: CPointer<PROPVARIANTAbi>, plRet: CPointer<Int32>): Int32 {
+    return PropVariantToInt32(propvarIn, plRet)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt32Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    // param-hint: prgn len=param[2]
+    func PropVariantToInt32Vector(propvar: CPointer<PROPVARIANTAbi>, prgn: CPointer<Int32>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt32Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToInt32Vector(propvar: CPointer<PROPVARIANTAbi>, prgn: CPointer<Int32>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32 {
+    return PropVariantToInt32Vector(propvar, prgn, crgn, pcElem)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt32VectorAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantToInt32VectorAlloc(propvar: CPointer<PROPVARIANTAbi>, pprgn: CPointer<CPointer<Int32>>, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt32VectorAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToInt32VectorAlloc(propvar: CPointer<PROPVARIANTAbi>, pprgn: CPointer<CPointer<Int32>>, pcElem: CPointer<UInt32>): Int32 {
+    return PropVariantToInt32VectorAlloc(propvar, pprgn, pcElem)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt32WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantToInt32WithDefault(propvarIn: CPointer<PROPVARIANTAbi>, lDefault: Int32): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt32WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToInt32WithDefault(propvarIn: CPointer<PROPVARIANTAbi>, lDefault: Int32): Int32 {
+    return PropVariantToInt32WithDefault(propvarIn, lDefault)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt64 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantToInt64(propvarIn: CPointer<PROPVARIANTAbi>, pllRet: CPointer<Int64>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt64 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToInt64(propvarIn: CPointer<PROPVARIANTAbi>, pllRet: CPointer<Int64>): Int32 {
+    return PropVariantToInt64(propvarIn, pllRet)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt64Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    // param-hint: prgn len=param[2]
+    func PropVariantToInt64Vector(propvar: CPointer<PROPVARIANTAbi>, prgn: CPointer<Int64>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt64Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToInt64Vector(propvar: CPointer<PROPVARIANTAbi>, prgn: CPointer<Int64>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32 {
+    return PropVariantToInt64Vector(propvar, prgn, crgn, pcElem)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt64VectorAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantToInt64VectorAlloc(propvar: CPointer<PROPVARIANTAbi>, pprgn: CPointer<CPointer<Int64>>, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt64VectorAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToInt64VectorAlloc(propvar: CPointer<PROPVARIANTAbi>, pprgn: CPointer<CPointer<Int64>>, pcElem: CPointer<UInt32>): Int32 {
+    return PropVariantToInt64VectorAlloc(propvar, pprgn, pcElem)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt64WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantToInt64WithDefault(propvarIn: CPointer<PROPVARIANTAbi>, llDefault: Int64): Int64
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToInt64WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToInt64WithDefault(propvarIn: CPointer<PROPVARIANTAbi>, llDefault: Int64): Int64 {
+    return PropVariantToInt64WithDefault(propvarIn, llDefault)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToString == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    // param-hint: psz len=param[2]
+    func PropVariantToString(propvar: CPointer<PROPVARIANTAbi>, psz: CPointer<UInt16>, cch: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToString == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToString(propvar: CPointer<PROPVARIANTAbi>, psz: CPointer<UInt16>, cch: UInt32): Int32 {
+    return PropVariantToString(propvar, psz, cch)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToStringAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantToStringAlloc(propvar: CPointer<PROPVARIANTAbi>, ppszOut: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToStringAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToStringAlloc(propvar: CPointer<PROPVARIANTAbi>, ppszOut: CPointer<CPointer<UInt16>>): Int32 {
+    return PropVariantToStringAlloc(propvar, ppszOut)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToStringVector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    // param-hint: prgsz len=param[2]
+    func PropVariantToStringVector(propvar: CPointer<PROPVARIANTAbi>, prgsz: CPointer<CPointer<UInt16>>, crgsz: UInt32, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToStringVector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToStringVector(propvar: CPointer<PROPVARIANTAbi>, prgsz: CPointer<CPointer<UInt16>>, crgsz: UInt32, pcElem: CPointer<UInt32>): Int32 {
+    return PropVariantToStringVector(propvar, prgsz, crgsz, pcElem)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToStringVectorAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantToStringVectorAlloc(propvar: CPointer<PROPVARIANTAbi>, pprgsz: CPointer<CPointer<CPointer<UInt16>>>, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToStringVectorAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToStringVectorAlloc(propvar: CPointer<PROPVARIANTAbi>, pprgsz: CPointer<CPointer<CPointer<UInt16>>>, pcElem: CPointer<UInt32>): Int32 {
+    return PropVariantToStringVectorAlloc(propvar, pprgsz, pcElem)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToStringWithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    // param-hint: pszDefault optional
+    func PropVariantToStringWithDefault(propvarIn: CPointer<PROPVARIANTAbi>, pszDefault: CPointer<UInt16>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToStringWithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToStringWithDefault(propvarIn: CPointer<PROPVARIANTAbi>, pszDefault: CPointer<UInt16>): CPointer<UInt16> {
+    return PropVariantToStringWithDefault(propvarIn, pszDefault)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt16 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantToUInt16(propvarIn: CPointer<PROPVARIANTAbi>, puiRet: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt16 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToUInt16(propvarIn: CPointer<PROPVARIANTAbi>, puiRet: CPointer<UInt16>): Int32 {
+    return PropVariantToUInt16(propvarIn, puiRet)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt16Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    // param-hint: prgn len=param[2]
+    func PropVariantToUInt16Vector(propvar: CPointer<PROPVARIANTAbi>, prgn: CPointer<UInt16>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt16Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToUInt16Vector(propvar: CPointer<PROPVARIANTAbi>, prgn: CPointer<UInt16>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32 {
+    return PropVariantToUInt16Vector(propvar, prgn, crgn, pcElem)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt16VectorAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantToUInt16VectorAlloc(propvar: CPointer<PROPVARIANTAbi>, pprgn: CPointer<CPointer<UInt16>>, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt16VectorAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToUInt16VectorAlloc(propvar: CPointer<PROPVARIANTAbi>, pprgn: CPointer<CPointer<UInt16>>, pcElem: CPointer<UInt32>): Int32 {
+    return PropVariantToUInt16VectorAlloc(propvar, pprgn, pcElem)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt16WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantToUInt16WithDefault(propvarIn: CPointer<PROPVARIANTAbi>, uiDefault: UInt16): UInt16
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt16WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToUInt16WithDefault(propvarIn: CPointer<PROPVARIANTAbi>, uiDefault: UInt16): UInt16 {
+    return PropVariantToUInt16WithDefault(propvarIn, uiDefault)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt32 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantToUInt32(propvarIn: CPointer<PROPVARIANTAbi>, pulRet: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt32 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToUInt32(propvarIn: CPointer<PROPVARIANTAbi>, pulRet: CPointer<UInt32>): Int32 {
+    return PropVariantToUInt32(propvarIn, pulRet)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt32Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    // param-hint: prgn len=param[2]
+    func PropVariantToUInt32Vector(propvar: CPointer<PROPVARIANTAbi>, prgn: CPointer<UInt32>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt32Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToUInt32Vector(propvar: CPointer<PROPVARIANTAbi>, prgn: CPointer<UInt32>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32 {
+    return PropVariantToUInt32Vector(propvar, prgn, crgn, pcElem)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt32VectorAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantToUInt32VectorAlloc(propvar: CPointer<PROPVARIANTAbi>, pprgn: CPointer<CPointer<UInt32>>, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt32VectorAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToUInt32VectorAlloc(propvar: CPointer<PROPVARIANTAbi>, pprgn: CPointer<CPointer<UInt32>>, pcElem: CPointer<UInt32>): Int32 {
+    return PropVariantToUInt32VectorAlloc(propvar, pprgn, pcElem)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt32WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantToUInt32WithDefault(propvarIn: CPointer<PROPVARIANTAbi>, ulDefault: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt32WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToUInt32WithDefault(propvarIn: CPointer<PROPVARIANTAbi>, ulDefault: UInt32): UInt32 {
+    return PropVariantToUInt32WithDefault(propvarIn, ulDefault)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt64 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantToUInt64(propvarIn: CPointer<PROPVARIANTAbi>, pullRet: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt64 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToUInt64(propvarIn: CPointer<PROPVARIANTAbi>, pullRet: CPointer<UInt64>): Int32 {
+    return PropVariantToUInt64(propvarIn, pullRet)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt64Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    // param-hint: prgn len=param[2]
+    func PropVariantToUInt64Vector(propvar: CPointer<PROPVARIANTAbi>, prgn: CPointer<UInt64>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt64Vector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToUInt64Vector(propvar: CPointer<PROPVARIANTAbi>, prgn: CPointer<UInt64>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32 {
+    return PropVariantToUInt64Vector(propvar, prgn, crgn, pcElem)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt64VectorAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantToUInt64VectorAlloc(propvar: CPointer<PROPVARIANTAbi>, pprgn: CPointer<CPointer<UInt64>>, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt64VectorAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToUInt64VectorAlloc(propvar: CPointer<PROPVARIANTAbi>, pprgn: CPointer<CPointer<UInt64>>, pcElem: CPointer<UInt32>): Int32 {
+    return PropVariantToUInt64VectorAlloc(propvar, pprgn, pcElem)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt64WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantToUInt64WithDefault(propvarIn: CPointer<PROPVARIANTAbi>, ullDefault: UInt64): UInt64
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToUInt64WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToUInt64WithDefault(propvarIn: CPointer<PROPVARIANTAbi>, ullDefault: UInt64): UInt64 {
+    return PropVariantToUInt64WithDefault(propvarIn, ullDefault)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantToVariant(pPropVar: CPointer<PROPVARIANTAbi>, pVar: CPointer<VARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToVariant(pPropVar: CPointer<PROPVARIANTAbi>, pVar: CPointer<VARIANTAbi>): Int32 {
+    return PropVariantToVariant(pPropVar, pVar)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToWinRTPropertyValue == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func PropVariantToWinRTPropertyValue(propvar: CPointer<PROPVARIANTAbi>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_PropVariantToWinRTPropertyValue == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_PropVariantToWinRTPropertyValue(propvar: CPointer<PROPVARIANTAbi>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return PropVariantToWinRTPropertyValue(propvar, riid, ppv)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_StgDeserializePropVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func StgDeserializePropVariant(pprop: CPointer<Win32__impl_l0.SERIALIZEDPROPERTYVALUEAbi>, cbMax: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_StgDeserializePropVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_StgDeserializePropVariant(pprop: CPointer<Win32__impl_l0.SERIALIZEDPROPERTYVALUEAbi>, cbMax: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32 {
+    return StgDeserializePropVariant(pprop, cbMax, ppropvar)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_StgSerializePropVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func StgSerializePropVariant(ppropvar: CPointer<PROPVARIANTAbi>, ppProp: CPointer<CPointer<Win32__impl_l0.SERIALIZEDPROPERTYVALUEAbi>>, pcb: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_StgSerializePropVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_StgSerializePropVariant(ppropvar: CPointer<PROPVARIANTAbi>, ppProp: CPointer<CPointer<Win32__impl_l0.SERIALIZEDPROPERTYVALUEAbi>>, pcb: CPointer<UInt32>): Int32 {
+    return StgSerializePropVariant(ppropvar, ppProp, pcb)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_VariantToPropVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
+    func VariantToPropVariant(pVar: CPointer<VARIANTAbi>, pPropVar: CPointer<PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_VariantToPropVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_VariantToPropVariant(pVar: CPointer<VARIANTAbi>, pPropVar: CPointer<PROPVARIANTAbi>): Int32 {
+    return VariantToPropVariant(pVar, pPropVar)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_WinRTPropertyValueToPropVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
 foreign {
     // param-hint: punkPropertyValue optional
     func WinRTPropertyValueToPropVariant(punkPropertyValue: CPointer<Unit>, ppropvar: CPointer<PROPVARIANTAbi>): Int32
 }
 
-@When[PROPSYS == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on")]
-foreign {
-    func PropVariantToVariant(pPropVar: CPointer<PROPVARIANTAbi>, pVar: CPointer<VARIANTAbi>): Int32
-    func VariantToPropVariant(pVar: CPointer<VARIANTAbi>, pPropVar: CPointer<PROPVARIANTAbi>): Int32
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && PROPSYS == "on" && Windows_Win32_System_Com_StructuredStorage_WinRTPropertyValueToPropVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_WinRTPropertyValueToPropVariant(punkPropertyValue: CPointer<Unit>, ppropvar: CPointer<PROPVARIANTAbi>): Int32 {
+    return WinRTPropertyValueToPropVariant(punkPropertyValue, ppropvar)
 }
 
-@When[PROPSYS == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on")]
-foreign {
-    func PropVariantChangeType(ppropvarDest: CPointer<PROPVARIANTAbi>, propvarSrc: CPointer<PROPVARIANTAbi>, flags: Win32__impl_l0.PROPVAR_CHANGE_FLAGSAbi, vt: Win32__impl_l0.VARENUMAbi): Int32
-    func PropVariantToFileTime(propvar: CPointer<PROPVARIANTAbi>, pstfOut: Win32__impl_l0.PSTIME_FLAGSAbi, pftOut: CPointer<Win32_Foundation.FILETIMEAbi>): Int32
-}
-
-@When[PROPSYS == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on")]
-foreign {
-    // param-hint: rgPropVar len=param[1]
-    func ClearPropVariantArray(rgPropVar: CPointer<PROPVARIANTAbi>, cVars: UInt32): Unit
-    // param-hint: prgf len=param[1] optional
-    func InitPropVariantFromBooleanVector(prgf: CPointer<Int32>, cElems: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32
-    // param-hint: pv bytes=param[1]
-    func InitPropVariantFromBuffer(pv: CPointer<Unit>, cb: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32
-    func InitPropVariantFromCLSID(clsid: CPointer<GUID>, ppropvar: CPointer<PROPVARIANTAbi>): Int32
-    // param-hint: prgn len=param[1] optional
-    func InitPropVariantFromDoubleVector(prgn: CPointer<Float64>, cElems: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32
-    func InitPropVariantFromFileTime(pftIn: CPointer<Win32_Foundation.FILETIMEAbi>, ppropvar: CPointer<PROPVARIANTAbi>): Int32
-    // param-hint: prgft len=param[1] optional
-    func InitPropVariantFromFileTimeVector(prgft: CPointer<Win32_Foundation.FILETIMEAbi>, cElems: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32
-    func InitPropVariantFromGUIDAsString(guid: CPointer<GUID>, ppropvar: CPointer<PROPVARIANTAbi>): Int32
-    // param-hint: prgn len=param[1] optional
-    func InitPropVariantFromInt16Vector(prgn: CPointer<Int16>, cElems: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32
-    // param-hint: prgn len=param[1] optional
-    func InitPropVariantFromInt32Vector(prgn: CPointer<Int32>, cElems: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32
-    // param-hint: prgn len=param[1] optional
-    func InitPropVariantFromInt64Vector(prgn: CPointer<Int64>, cElems: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32
-    func InitPropVariantFromPropVariantVectorElem(propvarIn: CPointer<PROPVARIANTAbi>, iElem: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32
-    func InitPropVariantFromResource(hinst: CPointer<Unit>, id: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32
-    // param-hint: psz optional
-    func InitPropVariantFromStringAsVector(psz: CPointer<UInt16>, ppropvar: CPointer<PROPVARIANTAbi>): Int32
-    // param-hint: prgsz len=param[1] optional
-    func InitPropVariantFromStringVector(prgsz: CPointer<CPointer<UInt16>>, cElems: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32
-    // param-hint: prgn len=param[1] optional
-    func InitPropVariantFromUInt16Vector(prgn: CPointer<UInt16>, cElems: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32
-    // param-hint: prgn len=param[1] optional
-    func InitPropVariantFromUInt32Vector(prgn: CPointer<UInt32>, cElems: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32
-    // param-hint: prgn len=param[1] optional
-    func InitPropVariantFromUInt64Vector(prgn: CPointer<UInt64>, cElems: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32
-    func InitPropVariantVectorFromPropVariant(propvarSingle: CPointer<PROPVARIANTAbi>, ppropvarVector: CPointer<PROPVARIANTAbi>): Int32
-    func PropVariantCompareEx(propvar1: CPointer<PROPVARIANTAbi>, propvar2: CPointer<PROPVARIANTAbi>, unit: Win32__impl_l0.PROPVAR_COMPARE_UNITAbi, flags: Win32__impl_l0.PROPVAR_COMPARE_FLAGSAbi): Int32
-    func PropVariantGetBooleanElem(propvar: CPointer<PROPVARIANTAbi>, iElem: UInt32, pfVal: CPointer<Int32>): Int32
-    func PropVariantGetDoubleElem(propvar: CPointer<PROPVARIANTAbi>, iElem: UInt32, pnVal: CPointer<Float64>): Int32
-    func PropVariantGetElementCount(propvar: CPointer<PROPVARIANTAbi>): UInt32
-    func PropVariantGetFileTimeElem(propvar: CPointer<PROPVARIANTAbi>, iElem: UInt32, pftVal: CPointer<Win32_Foundation.FILETIMEAbi>): Int32
-    func PropVariantGetInt16Elem(propvar: CPointer<PROPVARIANTAbi>, iElem: UInt32, pnVal: CPointer<Int16>): Int32
-    func PropVariantGetInt32Elem(propvar: CPointer<PROPVARIANTAbi>, iElem: UInt32, pnVal: CPointer<Int32>): Int32
-    func PropVariantGetInt64Elem(propvar: CPointer<PROPVARIANTAbi>, iElem: UInt32, pnVal: CPointer<Int64>): Int32
-    func PropVariantGetStringElem(propvar: CPointer<PROPVARIANTAbi>, iElem: UInt32, ppszVal: CPointer<CPointer<UInt16>>): Int32
-    func PropVariantGetUInt16Elem(propvar: CPointer<PROPVARIANTAbi>, iElem: UInt32, pnVal: CPointer<UInt16>): Int32
-    func PropVariantGetUInt32Elem(propvar: CPointer<PROPVARIANTAbi>, iElem: UInt32, pnVal: CPointer<UInt32>): Int32
-    func PropVariantGetUInt64Elem(propvar: CPointer<PROPVARIANTAbi>, iElem: UInt32, pnVal: CPointer<UInt64>): Int32
-    func PropVariantToBSTR(propvar: CPointer<PROPVARIANTAbi>, pbstrOut: CPointer<CPointer<UInt16>>): Int32
-    func PropVariantToBoolean(propvarIn: CPointer<PROPVARIANTAbi>, pfRet: CPointer<Int32>): Int32
-    // param-hint: prgf len=param[2]
-    func PropVariantToBooleanVector(propvar: CPointer<PROPVARIANTAbi>, prgf: CPointer<Int32>, crgf: UInt32, pcElem: CPointer<UInt32>): Int32
-    func PropVariantToBooleanVectorAlloc(propvar: CPointer<PROPVARIANTAbi>, pprgf: CPointer<CPointer<Int32>>, pcElem: CPointer<UInt32>): Int32
-    func PropVariantToBooleanWithDefault(propvarIn: CPointer<PROPVARIANTAbi>, fDefault: Int32): Int32
-    // param-hint: pv bytes=param[2]
-    func PropVariantToBuffer(propvar: CPointer<PROPVARIANTAbi>, pv: CPointer<Unit>, cb: UInt32): Int32
-    func PropVariantToDouble(propvarIn: CPointer<PROPVARIANTAbi>, pdblRet: CPointer<Float64>): Int32
-    // param-hint: prgn len=param[2]
-    func PropVariantToDoubleVector(propvar: CPointer<PROPVARIANTAbi>, prgn: CPointer<Float64>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32
-    func PropVariantToDoubleVectorAlloc(propvar: CPointer<PROPVARIANTAbi>, pprgn: CPointer<CPointer<Float64>>, pcElem: CPointer<UInt32>): Int32
-    func PropVariantToDoubleWithDefault(propvarIn: CPointer<PROPVARIANTAbi>, dblDefault: Float64): Float64
-    // param-hint: prgft len=param[2]
-    func PropVariantToFileTimeVector(propvar: CPointer<PROPVARIANTAbi>, prgft: CPointer<Win32_Foundation.FILETIMEAbi>, crgft: UInt32, pcElem: CPointer<UInt32>): Int32
-    func PropVariantToFileTimeVectorAlloc(propvar: CPointer<PROPVARIANTAbi>, pprgft: CPointer<CPointer<Win32_Foundation.FILETIMEAbi>>, pcElem: CPointer<UInt32>): Int32
-    func PropVariantToGUID(propvar: CPointer<PROPVARIANTAbi>, pguid: CPointer<GUID>): Int32
-    func PropVariantToInt16(propvarIn: CPointer<PROPVARIANTAbi>, piRet: CPointer<Int16>): Int32
-    // param-hint: prgn len=param[2]
-    func PropVariantToInt16Vector(propvar: CPointer<PROPVARIANTAbi>, prgn: CPointer<Int16>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32
-    func PropVariantToInt16VectorAlloc(propvar: CPointer<PROPVARIANTAbi>, pprgn: CPointer<CPointer<Int16>>, pcElem: CPointer<UInt32>): Int32
-    func PropVariantToInt16WithDefault(propvarIn: CPointer<PROPVARIANTAbi>, iDefault: Int16): Int16
-    func PropVariantToInt32(propvarIn: CPointer<PROPVARIANTAbi>, plRet: CPointer<Int32>): Int32
-    // param-hint: prgn len=param[2]
-    func PropVariantToInt32Vector(propvar: CPointer<PROPVARIANTAbi>, prgn: CPointer<Int32>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32
-    func PropVariantToInt32VectorAlloc(propvar: CPointer<PROPVARIANTAbi>, pprgn: CPointer<CPointer<Int32>>, pcElem: CPointer<UInt32>): Int32
-    func PropVariantToInt32WithDefault(propvarIn: CPointer<PROPVARIANTAbi>, lDefault: Int32): Int32
-    func PropVariantToInt64(propvarIn: CPointer<PROPVARIANTAbi>, pllRet: CPointer<Int64>): Int32
-    // param-hint: prgn len=param[2]
-    func PropVariantToInt64Vector(propvar: CPointer<PROPVARIANTAbi>, prgn: CPointer<Int64>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32
-    func PropVariantToInt64VectorAlloc(propvar: CPointer<PROPVARIANTAbi>, pprgn: CPointer<CPointer<Int64>>, pcElem: CPointer<UInt32>): Int32
-    func PropVariantToInt64WithDefault(propvarIn: CPointer<PROPVARIANTAbi>, llDefault: Int64): Int64
-    // param-hint: psz len=param[2]
-    func PropVariantToString(propvar: CPointer<PROPVARIANTAbi>, psz: CPointer<UInt16>, cch: UInt32): Int32
-    func PropVariantToStringAlloc(propvar: CPointer<PROPVARIANTAbi>, ppszOut: CPointer<CPointer<UInt16>>): Int32
-    // param-hint: prgsz len=param[2]
-    func PropVariantToStringVector(propvar: CPointer<PROPVARIANTAbi>, prgsz: CPointer<CPointer<UInt16>>, crgsz: UInt32, pcElem: CPointer<UInt32>): Int32
-    func PropVariantToStringVectorAlloc(propvar: CPointer<PROPVARIANTAbi>, pprgsz: CPointer<CPointer<CPointer<UInt16>>>, pcElem: CPointer<UInt32>): Int32
-    // param-hint: pszDefault optional
-    func PropVariantToStringWithDefault(propvarIn: CPointer<PROPVARIANTAbi>, pszDefault: CPointer<UInt16>): CPointer<UInt16>
-    func PropVariantToUInt16(propvarIn: CPointer<PROPVARIANTAbi>, puiRet: CPointer<UInt16>): Int32
-    // param-hint: prgn len=param[2]
-    func PropVariantToUInt16Vector(propvar: CPointer<PROPVARIANTAbi>, prgn: CPointer<UInt16>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32
-    func PropVariantToUInt16VectorAlloc(propvar: CPointer<PROPVARIANTAbi>, pprgn: CPointer<CPointer<UInt16>>, pcElem: CPointer<UInt32>): Int32
-    func PropVariantToUInt16WithDefault(propvarIn: CPointer<PROPVARIANTAbi>, uiDefault: UInt16): UInt16
-    func PropVariantToUInt32(propvarIn: CPointer<PROPVARIANTAbi>, pulRet: CPointer<UInt32>): Int32
-    // param-hint: prgn len=param[2]
-    func PropVariantToUInt32Vector(propvar: CPointer<PROPVARIANTAbi>, prgn: CPointer<UInt32>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32
-    func PropVariantToUInt32VectorAlloc(propvar: CPointer<PROPVARIANTAbi>, pprgn: CPointer<CPointer<UInt32>>, pcElem: CPointer<UInt32>): Int32
-    func PropVariantToUInt32WithDefault(propvarIn: CPointer<PROPVARIANTAbi>, ulDefault: UInt32): UInt32
-    func PropVariantToUInt64(propvarIn: CPointer<PROPVARIANTAbi>, pullRet: CPointer<UInt64>): Int32
-    // param-hint: prgn len=param[2]
-    func PropVariantToUInt64Vector(propvar: CPointer<PROPVARIANTAbi>, prgn: CPointer<UInt64>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32
-    func PropVariantToUInt64VectorAlloc(propvar: CPointer<PROPVARIANTAbi>, pprgn: CPointer<CPointer<UInt64>>, pcElem: CPointer<UInt32>): Int32
-    func PropVariantToUInt64WithDefault(propvarIn: CPointer<PROPVARIANTAbi>, ullDefault: UInt64): UInt64
-    func PropVariantToWinRTPropertyValue(propvar: CPointer<PROPVARIANTAbi>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
-    func StgDeserializePropVariant(pprop: CPointer<Win32__impl_l0.SERIALIZEDPROPERTYVALUEAbi>, cbMax: UInt32, ppropvar: CPointer<PROPVARIANTAbi>): Int32
-    func StgSerializePropVariant(ppropvar: CPointer<PROPVARIANTAbi>, ppProp: CPointer<CPointer<Win32__impl_l0.SERIALIZEDPROPERTYVALUEAbi>>, pcb: CPointer<UInt32>): Int32
-}
-
-@When[DFLAYOUT == "on"]
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && DFLAYOUT == "on" && Windows_Win32_System_Com_StructuredStorage_StgOpenLayoutDocfile == "on"]
 foreign {
     func StgOpenLayoutDocfile(pwcsDfName: CPointer<UInt16>, grfMode: UInt32, reserved: UInt32, ppstgOpen: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[OLE32 == "on"]
-foreign {
-    func OleConvertIStorageToOLESTREAM(pstg: CPointer<Unit>, lpolestream: CPointer<Win32__impl_l1.OLESTREAMAbi>): Int32
-    func StgGetIFillLockBytesOnFile(pwcsName: CPointer<UInt16>, ppflb: CPointer<CPointer<Unit>>): Int32
-    func StgGetIFillLockBytesOnILockBytes(pilb: CPointer<Unit>, ppflb: CPointer<CPointer<Unit>>): Int32
-    func StgOpenAsyncDocfileOnIFillLockBytes(pflb: CPointer<Unit>, grfMode: UInt32, asyncFlags: UInt32, ppstgOpen: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pProp bytes=param[1]
-    // param-hint: bReserved optional reserved
-    func StgPropertyLengthAsVariant(pProp: CPointer<Win32__impl_l0.SERIALIZEDPROPERTYVALUEAbi>, cbProp: UInt32, CodePage: UInt16, bReserved: UInt8): UInt32
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && DFLAYOUT == "on" && Windows_Win32_System_Com_StructuredStorage_StgOpenLayoutDocfile == "on"]
+public unsafe func Windows_StgOpenLayoutDocfile(pwcsDfName: CPointer<UInt16>, grfMode: UInt32, reserved: UInt32, ppstgOpen: CPointer<CPointer<Unit>>): Int32 {
+    return StgOpenLayoutDocfile(pwcsDfName, grfMode, reserved, ppstgOpen)
 }
 
-@When[OLE32 == "on" && (Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on")]
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_OleConvertIStorageToOLESTREAM == "on"]
+foreign {
+    func OleConvertIStorageToOLESTREAM(pstg: CPointer<Unit>, lpolestream: CPointer<Win32__impl_l1.OLESTREAMAbi>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_OleConvertIStorageToOLESTREAM == "on"]
+public unsafe func Windows_OleConvertIStorageToOLESTREAM(pstg: CPointer<Unit>, lpolestream: CPointer<Win32__impl_l1.OLESTREAMAbi>): Int32 {
+    return OleConvertIStorageToOLESTREAM(pstg, lpolestream)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_OleConvertIStorageToOLESTREAMEx == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on"]
 foreign {
     func OleConvertIStorageToOLESTREAMEx(pstg: CPointer<Unit>, cfFormat: UInt16, lWidth: Int32, lHeight: Int32, dwSize: UInt32, pmedium: CPointer<STGMEDIUMAbi>, polestm: CPointer<Win32__impl_l1.OLESTREAMAbi>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_OleConvertIStorageToOLESTREAMEx == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_OleConvertIStorageToOLESTREAMEx(pstg: CPointer<Unit>, cfFormat: UInt16, lWidth: Int32, lHeight: Int32, dwSize: UInt32, pmedium: CPointer<STGMEDIUMAbi>, polestm: CPointer<Win32__impl_l1.OLESTREAMAbi>): Int32 {
+    return OleConvertIStorageToOLESTREAMEx(pstg, cfFormat, lWidth, lHeight, dwSize, pmedium, polestm)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_OleConvertOLESTREAMToIStorage == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func OleConvertOLESTREAMToIStorage(lpolestream: CPointer<Win32__impl_l1.OLESTREAMAbi>, pstg: CPointer<Unit>, ptd: CPointer<Win32__impl_l0.DVTARGETDEVICEAbi>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_OleConvertOLESTREAMToIStorage == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_OleConvertOLESTREAMToIStorage(lpolestream: CPointer<Win32__impl_l1.OLESTREAMAbi>, pstg: CPointer<Unit>, ptd: CPointer<Win32__impl_l0.DVTARGETDEVICEAbi>): Int32 {
+    return OleConvertOLESTREAMToIStorage(lpolestream, pstg, ptd)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_OleConvertOLESTREAMToIStorageEx == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func OleConvertOLESTREAMToIStorageEx(polestm: CPointer<Win32__impl_l1.OLESTREAMAbi>, pstg: CPointer<Unit>, pcfFormat: CPointer<UInt16>, plwWidth: CPointer<Int32>, plHeight: CPointer<Int32>, pdwSize: CPointer<UInt32>, pmedium: CPointer<STGMEDIUMAbi>): Int32
 }
 
-@When[OLE32 == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on")]
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_OleConvertOLESTREAMToIStorageEx == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_OleConvertOLESTREAMToIStorageEx(polestm: CPointer<Win32__impl_l1.OLESTREAMAbi>, pstg: CPointer<Unit>, pcfFormat: CPointer<UInt16>, plwWidth: CPointer<Int32>, plHeight: CPointer<Int32>, pdwSize: CPointer<UInt32>, pmedium: CPointer<STGMEDIUMAbi>): Int32 {
+    return OleConvertOLESTREAMToIStorageEx(polestm, pstg, pcfFormat, plwWidth, plHeight, pdwSize, pmedium)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgConvertPropertyToVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
 foreign {
     func StgConvertPropertyToVariant(pprop: CPointer<Win32__impl_l0.SERIALIZEDPROPERTYVALUEAbi>, CodePage: UInt16, pvar: CPointer<PROPVARIANTAbi>, pma: CPointer<Unit>): UInt8
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgConvertPropertyToVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_StgConvertPropertyToVariant(pprop: CPointer<Win32__impl_l0.SERIALIZEDPROPERTYVALUEAbi>, CodePage: UInt16, pvar: CPointer<PROPVARIANTAbi>, pma: CPointer<Unit>): UInt8 {
+    return StgConvertPropertyToVariant(pprop, CodePage, pvar, pma)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgConvertVariantToProperty == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
     // param-hint: pprop bytes=param[3] optional
     // param-hint: fReserved optional reserved
     // param-hint: pcIndirect optional
     func StgConvertVariantToProperty(pvar: CPointer<PROPVARIANTAbi>, CodePage: UInt16, pprop: CPointer<Win32__impl_l0.SERIALIZEDPROPERTYVALUEAbi>, pcb: CPointer<UInt32>, pid: UInt32, fReserved: UInt8, pcIndirect: CPointer<UInt32>): CPointer<Win32__impl_l0.SERIALIZEDPROPERTYVALUEAbi>
 }
 
-@When[OLE32 == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgConvertVariantToProperty == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_StgConvertVariantToProperty(pvar: CPointer<PROPVARIANTAbi>, CodePage: UInt16, pprop: CPointer<Win32__impl_l0.SERIALIZEDPROPERTYVALUEAbi>, pcb: CPointer<UInt32>, pid: UInt32, fReserved: UInt8, pcIndirect: CPointer<UInt32>): CPointer<Win32__impl_l0.SERIALIZEDPROPERTYVALUEAbi> {
+    return StgConvertVariantToProperty(pvar, CodePage, pprop, pcb, pid, fReserved, pcIndirect)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgGetIFillLockBytesOnFile == "on"]
 foreign {
-    func OleConvertOLESTREAMToIStorage(lpolestream: CPointer<Win32__impl_l1.OLESTREAMAbi>, pstg: CPointer<Unit>, ptd: CPointer<Win32__impl_l0.DVTARGETDEVICEAbi>): Int32
+    func StgGetIFillLockBytesOnFile(pwcsName: CPointer<UInt16>, ppflb: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgGetIFillLockBytesOnFile == "on"]
+public unsafe func Windows_StgGetIFillLockBytesOnFile(pwcsName: CPointer<UInt16>, ppflb: CPointer<CPointer<Unit>>): Int32 {
+    return StgGetIFillLockBytesOnFile(pwcsName, ppflb)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgGetIFillLockBytesOnILockBytes == "on"]
+foreign {
+    func StgGetIFillLockBytesOnILockBytes(pilb: CPointer<Unit>, ppflb: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgGetIFillLockBytesOnILockBytes == "on"]
+public unsafe func Windows_StgGetIFillLockBytesOnILockBytes(pilb: CPointer<Unit>, ppflb: CPointer<CPointer<Unit>>): Int32 {
+    return StgGetIFillLockBytesOnILockBytes(pilb, ppflb)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgOpenAsyncDocfileOnIFillLockBytes == "on"]
+foreign {
+    func StgOpenAsyncDocfileOnIFillLockBytes(pflb: CPointer<Unit>, grfMode: UInt32, asyncFlags: UInt32, ppstgOpen: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgOpenAsyncDocfileOnIFillLockBytes == "on"]
+public unsafe func Windows_StgOpenAsyncDocfileOnIFillLockBytes(pflb: CPointer<Unit>, grfMode: UInt32, asyncFlags: UInt32, ppstgOpen: CPointer<CPointer<Unit>>): Int32 {
+    return StgOpenAsyncDocfileOnIFillLockBytes(pflb, grfMode, asyncFlags, ppstgOpen)
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgPropertyLengthAsVariant == "on"]
+foreign {
+    // param-hint: pProp bytes=param[1]
+    // param-hint: bReserved optional reserved
+    func StgPropertyLengthAsVariant(pProp: CPointer<Win32__impl_l0.SERIALIZEDPROPERTYVALUEAbi>, cbProp: UInt32, CodePage: UInt16, bReserved: UInt8): UInt32
+}
+
+@When[Windows_Win32_System_Com_StructuredStorage == "on" && OLE32 == "on" && Windows_Win32_System_Com_StructuredStorage_StgPropertyLengthAsVariant == "on"]
+public unsafe func Windows_StgPropertyLengthAsVariant(pProp: CPointer<Win32__impl_l0.SERIALIZEDPROPERTYVALUEAbi>, cbProp: UInt32, CodePage: UInt16, bReserved: UInt8): UInt32 {
+    return StgPropertyLengthAsVariant(pProp, cbProp, CodePage, bReserved)
 }
 
 @When[Windows_Win32_System_Com_StructuredStorage == "on"]

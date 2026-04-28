@@ -3,9 +3,7 @@ package windows_sys.Win32.Gaming
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_System_WinRT == "on"]
 import windows_sys.Win32.System.WinRT as Win32_System_WinRT
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 
@@ -1059,98 +1057,332 @@ public class IXblIdpAuthManager2 <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[API_MS_WIN_GAMING_DEVICEINFORMATION_L1_1_0 == "on"]
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_DEVICEINFORMATION_L1_1_0 == "on" && Windows_Win32_Gaming_GetGamingDeviceModelInformation == "on"]
 foreign {
     func GetGamingDeviceModelInformation(information: CPointer<GAMING_DEVICE_MODEL_INFORMATION>): Int32
 }
 
-@When[API_MS_WIN_GAMING_EXPANDEDRESOURCES_L1_1_0 == "on"]
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_DEVICEINFORMATION_L1_1_0 == "on" && Windows_Win32_Gaming_GetGamingDeviceModelInformation == "on"]
+public unsafe func Windows_GetGamingDeviceModelInformation(information: CPointer<GAMING_DEVICE_MODEL_INFORMATION>): Int32 {
+    return GetGamingDeviceModelInformation(information)
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_EXPANDEDRESOURCES_L1_1_0 == "on" && Windows_Win32_Gaming_GetExpandedResourceExclusiveCpuCount == "on"]
 foreign {
     func GetExpandedResourceExclusiveCpuCount(exclusiveCpuCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_EXPANDEDRESOURCES_L1_1_0 == "on" && Windows_Win32_Gaming_GetExpandedResourceExclusiveCpuCount == "on"]
+public unsafe func Windows_GetExpandedResourceExclusiveCpuCount(exclusiveCpuCount: CPointer<UInt32>): Int32 {
+    return GetExpandedResourceExclusiveCpuCount(exclusiveCpuCount)
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_EXPANDEDRESOURCES_L1_1_0 == "on" && Windows_Win32_Gaming_HasExpandedResources == "on"]
+foreign {
     func HasExpandedResources(hasExpandedResources: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_EXPANDEDRESOURCES_L1_1_0 == "on" && Windows_Win32_Gaming_HasExpandedResources == "on"]
+public unsafe func Windows_HasExpandedResources(hasExpandedResources: CPointer<Int32>): Int32 {
+    return HasExpandedResources(hasExpandedResources)
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_EXPANDEDRESOURCES_L1_1_0 == "on" && Windows_Win32_Gaming_ReleaseExclusiveCpuSets == "on"]
+foreign {
     func ReleaseExclusiveCpuSets(): Int32
 }
 
-@When[API_MS_WIN_GAMING_TCUI_L1_1_0 == "on"]
-foreign {
-    func ProcessPendingGameUI(waitForCompletion: Int32): Int32
-    // param-hint: context optional
-    func ShowTitleAchievementsUI(titleId: UInt32, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32
-    func TryCancelPendingGameUI(): Int32
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_EXPANDEDRESOURCES_L1_1_0 == "on" && Windows_Win32_Gaming_ReleaseExclusiveCpuSets == "on"]
+public unsafe func Windows_ReleaseExclusiveCpuSets(): Int32 {
+    return ReleaseExclusiveCpuSets()
 }
 
-@When[API_MS_WIN_GAMING_TCUI_L1_1_0 == "on" && Windows_Win32_System_WinRT == "on"]
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_0 == "on" && Windows_Win32_Gaming_ProcessPendingGameUI == "on"]
+foreign {
+    func ProcessPendingGameUI(waitForCompletion: Int32): Int32
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_0 == "on" && Windows_Win32_Gaming_ProcessPendingGameUI == "on"]
+public unsafe func Windows_ProcessPendingGameUI(waitForCompletion: Int32): Int32 {
+    return ProcessPendingGameUI(waitForCompletion)
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_0 == "on" && Windows_Win32_Gaming_ShowChangeFriendRelationshipUI == "on" && Windows_Win32_System_WinRT == "on"]
 foreign {
     // param-hint: context optional
     func ShowChangeFriendRelationshipUI(targetUserXuid: Win32_System_WinRT.HSTRING, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_0 == "on" && Windows_Win32_Gaming_ShowChangeFriendRelationshipUI == "on" && Windows_Win32_System_WinRT == "on"]
+public unsafe func Windows_ShowChangeFriendRelationshipUI(targetUserXuid: Win32_System_WinRT.HSTRING, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32 {
+    return ShowChangeFriendRelationshipUI(targetUserXuid, completionRoutine, context)
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_0 == "on" && Windows_Win32_Gaming_ShowGameInviteUI == "on" && Windows_Win32_System_WinRT == "on"]
+foreign {
     // param-hint: context optional
     func ShowGameInviteUI(serviceConfigurationId: Win32_System_WinRT.HSTRING, sessionTemplateName: Win32_System_WinRT.HSTRING, sessionId: Win32_System_WinRT.HSTRING, invitationDisplayText: Win32_System_WinRT.HSTRING, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_0 == "on" && Windows_Win32_Gaming_ShowGameInviteUI == "on" && Windows_Win32_System_WinRT == "on"]
+public unsafe func Windows_ShowGameInviteUI(serviceConfigurationId: Win32_System_WinRT.HSTRING, sessionTemplateName: Win32_System_WinRT.HSTRING, sessionId: Win32_System_WinRT.HSTRING, invitationDisplayText: Win32_System_WinRT.HSTRING, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32 {
+    return ShowGameInviteUI(serviceConfigurationId, sessionTemplateName, sessionId, invitationDisplayText, completionRoutine, context)
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_0 == "on" && Windows_Win32_Gaming_ShowPlayerPickerUI == "on" && Windows_Win32_System_WinRT == "on"]
+foreign {
     // param-hint: xuids len=param[2]
     // param-hint: preSelectedXuids len=param[4] optional
     // param-hint: context optional
     func ShowPlayerPickerUI(promptDisplayText: Win32_System_WinRT.HSTRING, xuids: CPointer<Win32_System_WinRT.HSTRING>, xuidsCount: UIntNative, preSelectedXuids: CPointer<Win32_System_WinRT.HSTRING>, preSelectedXuidsCount: UIntNative, minSelectionCount: UIntNative, maxSelectionCount: UIntNative, completionRoutine: PlayerPickerUICompletionRoutine, context: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_0 == "on" && Windows_Win32_Gaming_ShowPlayerPickerUI == "on" && Windows_Win32_System_WinRT == "on"]
+public unsafe func Windows_ShowPlayerPickerUI(promptDisplayText: Win32_System_WinRT.HSTRING, xuids: CPointer<Win32_System_WinRT.HSTRING>, xuidsCount: UIntNative, preSelectedXuids: CPointer<Win32_System_WinRT.HSTRING>, preSelectedXuidsCount: UIntNative, minSelectionCount: UIntNative, maxSelectionCount: UIntNative, completionRoutine: PlayerPickerUICompletionRoutine, context: CPointer<Unit>): Int32 {
+    return ShowPlayerPickerUI(promptDisplayText, xuids, xuidsCount, preSelectedXuids, preSelectedXuidsCount, minSelectionCount, maxSelectionCount, completionRoutine, context)
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_0 == "on" && Windows_Win32_Gaming_ShowProfileCardUI == "on" && Windows_Win32_System_WinRT == "on"]
+foreign {
     // param-hint: context optional
     func ShowProfileCardUI(targetUserXuid: Win32_System_WinRT.HSTRING, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32
 }
 
-@When[API_MS_WIN_GAMING_TCUI_L1_1_1 == "on" && Windows_Win32_System_WinRT == "on"]
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_0 == "on" && Windows_Win32_Gaming_ShowProfileCardUI == "on" && Windows_Win32_System_WinRT == "on"]
+public unsafe func Windows_ShowProfileCardUI(targetUserXuid: Win32_System_WinRT.HSTRING, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32 {
+    return ShowProfileCardUI(targetUserXuid, completionRoutine, context)
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_0 == "on" && Windows_Win32_Gaming_ShowTitleAchievementsUI == "on"]
+foreign {
+    // param-hint: context optional
+    func ShowTitleAchievementsUI(titleId: UInt32, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_0 == "on" && Windows_Win32_Gaming_ShowTitleAchievementsUI == "on"]
+public unsafe func Windows_ShowTitleAchievementsUI(titleId: UInt32, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32 {
+    return ShowTitleAchievementsUI(titleId, completionRoutine, context)
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_0 == "on" && Windows_Win32_Gaming_TryCancelPendingGameUI == "on"]
+foreign {
+    func TryCancelPendingGameUI(): Int32
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_0 == "on" && Windows_Win32_Gaming_TryCancelPendingGameUI == "on"]
+public unsafe func Windows_TryCancelPendingGameUI(): Int32 {
+    return TryCancelPendingGameUI()
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_1 == "on" && Windows_Win32_Gaming_CheckGamingPrivilegeSilently == "on" && Windows_Win32_System_WinRT == "on"]
 foreign {
     func CheckGamingPrivilegeSilently(privilegeId: UInt32, scope: Win32_System_WinRT.HSTRING, policy: Win32_System_WinRT.HSTRING, hasPrivilege: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_1 == "on" && Windows_Win32_Gaming_CheckGamingPrivilegeSilently == "on" && Windows_Win32_System_WinRT == "on"]
+public unsafe func Windows_CheckGamingPrivilegeSilently(privilegeId: UInt32, scope: Win32_System_WinRT.HSTRING, policy: Win32_System_WinRT.HSTRING, hasPrivilege: CPointer<Int32>): Int32 {
+    return CheckGamingPrivilegeSilently(privilegeId, scope, policy, hasPrivilege)
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_1 == "on" && Windows_Win32_Gaming_CheckGamingPrivilegeWithUI == "on" && Windows_Win32_System_WinRT == "on"]
+foreign {
     // param-hint: friendlyMessage optional
     // param-hint: context optional
     func CheckGamingPrivilegeWithUI(privilegeId: UInt32, scope: Win32_System_WinRT.HSTRING, policy: Win32_System_WinRT.HSTRING, friendlyMessage: Win32_System_WinRT.HSTRING, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32
 }
 
-@When[API_MS_WIN_GAMING_TCUI_L1_1_2 == "on" && Windows_Win32_System_WinRT == "on"]
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_1 == "on" && Windows_Win32_Gaming_CheckGamingPrivilegeWithUI == "on" && Windows_Win32_System_WinRT == "on"]
+public unsafe func Windows_CheckGamingPrivilegeWithUI(privilegeId: UInt32, scope: Win32_System_WinRT.HSTRING, policy: Win32_System_WinRT.HSTRING, friendlyMessage: Win32_System_WinRT.HSTRING, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32 {
+    return CheckGamingPrivilegeWithUI(privilegeId, scope, policy, friendlyMessage, completionRoutine, context)
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_2 == "on" && Windows_Win32_Gaming_CheckGamingPrivilegeSilentlyForUser == "on" && Windows_Win32_System_WinRT == "on"]
 foreign {
     func CheckGamingPrivilegeSilentlyForUser(user: CPointer<Unit>, privilegeId: UInt32, scope: Win32_System_WinRT.HSTRING, policy: Win32_System_WinRT.HSTRING, hasPrivilege: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_2 == "on" && Windows_Win32_Gaming_CheckGamingPrivilegeSilentlyForUser == "on" && Windows_Win32_System_WinRT == "on"]
+public unsafe func Windows_CheckGamingPrivilegeSilentlyForUser(user: CPointer<Unit>, privilegeId: UInt32, scope: Win32_System_WinRT.HSTRING, policy: Win32_System_WinRT.HSTRING, hasPrivilege: CPointer<Int32>): Int32 {
+    return CheckGamingPrivilegeSilentlyForUser(user, privilegeId, scope, policy, hasPrivilege)
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_2 == "on" && Windows_Win32_Gaming_CheckGamingPrivilegeWithUIForUser == "on" && Windows_Win32_System_WinRT == "on"]
+foreign {
     // param-hint: friendlyMessage optional
     // param-hint: context optional
     func CheckGamingPrivilegeWithUIForUser(user: CPointer<Unit>, privilegeId: UInt32, scope: Win32_System_WinRT.HSTRING, policy: Win32_System_WinRT.HSTRING, friendlyMessage: Win32_System_WinRT.HSTRING, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_2 == "on" && Windows_Win32_Gaming_CheckGamingPrivilegeWithUIForUser == "on" && Windows_Win32_System_WinRT == "on"]
+public unsafe func Windows_CheckGamingPrivilegeWithUIForUser(user: CPointer<Unit>, privilegeId: UInt32, scope: Win32_System_WinRT.HSTRING, policy: Win32_System_WinRT.HSTRING, friendlyMessage: Win32_System_WinRT.HSTRING, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32 {
+    return CheckGamingPrivilegeWithUIForUser(user, privilegeId, scope, policy, friendlyMessage, completionRoutine, context)
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_2 == "on" && Windows_Win32_Gaming_ShowChangeFriendRelationshipUIForUser == "on" && Windows_Win32_System_WinRT == "on"]
+foreign {
     // param-hint: context optional
     func ShowChangeFriendRelationshipUIForUser(user: CPointer<Unit>, targetUserXuid: Win32_System_WinRT.HSTRING, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_2 == "on" && Windows_Win32_Gaming_ShowChangeFriendRelationshipUIForUser == "on" && Windows_Win32_System_WinRT == "on"]
+public unsafe func Windows_ShowChangeFriendRelationshipUIForUser(user: CPointer<Unit>, targetUserXuid: Win32_System_WinRT.HSTRING, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32 {
+    return ShowChangeFriendRelationshipUIForUser(user, targetUserXuid, completionRoutine, context)
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_2 == "on" && Windows_Win32_Gaming_ShowGameInviteUIForUser == "on" && Windows_Win32_System_WinRT == "on"]
+foreign {
     // param-hint: context optional
     func ShowGameInviteUIForUser(user: CPointer<Unit>, serviceConfigurationId: Win32_System_WinRT.HSTRING, sessionTemplateName: Win32_System_WinRT.HSTRING, sessionId: Win32_System_WinRT.HSTRING, invitationDisplayText: Win32_System_WinRT.HSTRING, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_2 == "on" && Windows_Win32_Gaming_ShowGameInviteUIForUser == "on" && Windows_Win32_System_WinRT == "on"]
+public unsafe func Windows_ShowGameInviteUIForUser(user: CPointer<Unit>, serviceConfigurationId: Win32_System_WinRT.HSTRING, sessionTemplateName: Win32_System_WinRT.HSTRING, sessionId: Win32_System_WinRT.HSTRING, invitationDisplayText: Win32_System_WinRT.HSTRING, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32 {
+    return ShowGameInviteUIForUser(user, serviceConfigurationId, sessionTemplateName, sessionId, invitationDisplayText, completionRoutine, context)
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_2 == "on" && Windows_Win32_Gaming_ShowPlayerPickerUIForUser == "on" && Windows_Win32_System_WinRT == "on"]
+foreign {
     // param-hint: xuids len=param[3]
     // param-hint: preSelectedXuids len=param[5] optional
     // param-hint: context optional
     func ShowPlayerPickerUIForUser(user: CPointer<Unit>, promptDisplayText: Win32_System_WinRT.HSTRING, xuids: CPointer<Win32_System_WinRT.HSTRING>, xuidsCount: UIntNative, preSelectedXuids: CPointer<Win32_System_WinRT.HSTRING>, preSelectedXuidsCount: UIntNative, minSelectionCount: UIntNative, maxSelectionCount: UIntNative, completionRoutine: PlayerPickerUICompletionRoutine, context: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_2 == "on" && Windows_Win32_Gaming_ShowPlayerPickerUIForUser == "on" && Windows_Win32_System_WinRT == "on"]
+public unsafe func Windows_ShowPlayerPickerUIForUser(user: CPointer<Unit>, promptDisplayText: Win32_System_WinRT.HSTRING, xuids: CPointer<Win32_System_WinRT.HSTRING>, xuidsCount: UIntNative, preSelectedXuids: CPointer<Win32_System_WinRT.HSTRING>, preSelectedXuidsCount: UIntNative, minSelectionCount: UIntNative, maxSelectionCount: UIntNative, completionRoutine: PlayerPickerUICompletionRoutine, context: CPointer<Unit>): Int32 {
+    return ShowPlayerPickerUIForUser(user, promptDisplayText, xuids, xuidsCount, preSelectedXuids, preSelectedXuidsCount, minSelectionCount, maxSelectionCount, completionRoutine, context)
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_2 == "on" && Windows_Win32_Gaming_ShowProfileCardUIForUser == "on" && Windows_Win32_System_WinRT == "on"]
+foreign {
     // param-hint: context optional
     func ShowProfileCardUIForUser(user: CPointer<Unit>, targetUserXuid: Win32_System_WinRT.HSTRING, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_2 == "on" && Windows_Win32_Gaming_ShowProfileCardUIForUser == "on" && Windows_Win32_System_WinRT == "on"]
+public unsafe func Windows_ShowProfileCardUIForUser(user: CPointer<Unit>, targetUserXuid: Win32_System_WinRT.HSTRING, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32 {
+    return ShowProfileCardUIForUser(user, targetUserXuid, completionRoutine, context)
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_2 == "on" && Windows_Win32_Gaming_ShowTitleAchievementsUIForUser == "on" && Windows_Win32_System_WinRT == "on"]
+foreign {
     // param-hint: context optional
     func ShowTitleAchievementsUIForUser(user: CPointer<Unit>, titleId: UInt32, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32
 }
 
-@When[API_MS_WIN_GAMING_TCUI_L1_1_3 == "on" && Windows_Win32_System_WinRT == "on"]
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_2 == "on" && Windows_Win32_Gaming_ShowTitleAchievementsUIForUser == "on" && Windows_Win32_System_WinRT == "on"]
+public unsafe func Windows_ShowTitleAchievementsUIForUser(user: CPointer<Unit>, titleId: UInt32, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32 {
+    return ShowTitleAchievementsUIForUser(user, titleId, completionRoutine, context)
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_3 == "on" && Windows_Win32_Gaming_ShowGameInviteUIWithContext == "on" && Windows_Win32_System_WinRT == "on"]
 foreign {
     // param-hint: context optional
     func ShowGameInviteUIWithContext(serviceConfigurationId: Win32_System_WinRT.HSTRING, sessionTemplateName: Win32_System_WinRT.HSTRING, sessionId: Win32_System_WinRT.HSTRING, invitationDisplayText: Win32_System_WinRT.HSTRING, customActivationContext: Win32_System_WinRT.HSTRING, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_3 == "on" && Windows_Win32_Gaming_ShowGameInviteUIWithContext == "on" && Windows_Win32_System_WinRT == "on"]
+public unsafe func Windows_ShowGameInviteUIWithContext(serviceConfigurationId: Win32_System_WinRT.HSTRING, sessionTemplateName: Win32_System_WinRT.HSTRING, sessionId: Win32_System_WinRT.HSTRING, invitationDisplayText: Win32_System_WinRT.HSTRING, customActivationContext: Win32_System_WinRT.HSTRING, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32 {
+    return ShowGameInviteUIWithContext(serviceConfigurationId, sessionTemplateName, sessionId, invitationDisplayText, customActivationContext, completionRoutine, context)
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_3 == "on" && Windows_Win32_Gaming_ShowGameInviteUIWithContextForUser == "on" && Windows_Win32_System_WinRT == "on"]
+foreign {
     // param-hint: context optional
     func ShowGameInviteUIWithContextForUser(user: CPointer<Unit>, serviceConfigurationId: Win32_System_WinRT.HSTRING, sessionTemplateName: Win32_System_WinRT.HSTRING, sessionId: Win32_System_WinRT.HSTRING, invitationDisplayText: Win32_System_WinRT.HSTRING, customActivationContext: Win32_System_WinRT.HSTRING, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32
 }
 
-@When[API_MS_WIN_GAMING_TCUI_L1_1_4 == "on"]
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_3 == "on" && Windows_Win32_Gaming_ShowGameInviteUIWithContextForUser == "on" && Windows_Win32_System_WinRT == "on"]
+public unsafe func Windows_ShowGameInviteUIWithContextForUser(user: CPointer<Unit>, serviceConfigurationId: Win32_System_WinRT.HSTRING, sessionTemplateName: Win32_System_WinRT.HSTRING, sessionId: Win32_System_WinRT.HSTRING, invitationDisplayText: Win32_System_WinRT.HSTRING, customActivationContext: Win32_System_WinRT.HSTRING, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32 {
+    return ShowGameInviteUIWithContextForUser(user, serviceConfigurationId, sessionTemplateName, sessionId, invitationDisplayText, customActivationContext, completionRoutine, context)
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_4 == "on" && Windows_Win32_Gaming_ShowCustomizeUserProfileUI == "on"]
 foreign {
     // param-hint: context optional
     func ShowCustomizeUserProfileUI(completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_4 == "on" && Windows_Win32_Gaming_ShowCustomizeUserProfileUI == "on"]
+public unsafe func Windows_ShowCustomizeUserProfileUI(completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32 {
+    return ShowCustomizeUserProfileUI(completionRoutine, context)
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_4 == "on" && Windows_Win32_Gaming_ShowCustomizeUserProfileUIForUser == "on" && Windows_Win32_System_WinRT == "on"]
+foreign {
+    // param-hint: context optional
+    func ShowCustomizeUserProfileUIForUser(user: CPointer<Unit>, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_4 == "on" && Windows_Win32_Gaming_ShowCustomizeUserProfileUIForUser == "on" && Windows_Win32_System_WinRT == "on"]
+public unsafe func Windows_ShowCustomizeUserProfileUIForUser(user: CPointer<Unit>, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32 {
+    return ShowCustomizeUserProfileUIForUser(user, completionRoutine, context)
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_4 == "on" && Windows_Win32_Gaming_ShowFindFriendsUI == "on"]
+foreign {
     // param-hint: context optional
     func ShowFindFriendsUI(completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_4 == "on" && Windows_Win32_Gaming_ShowFindFriendsUI == "on"]
+public unsafe func Windows_ShowFindFriendsUI(completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32 {
+    return ShowFindFriendsUI(completionRoutine, context)
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_4 == "on" && Windows_Win32_Gaming_ShowFindFriendsUIForUser == "on" && Windows_Win32_System_WinRT == "on"]
+foreign {
+    // param-hint: context optional
+    func ShowFindFriendsUIForUser(user: CPointer<Unit>, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_4 == "on" && Windows_Win32_Gaming_ShowFindFriendsUIForUser == "on" && Windows_Win32_System_WinRT == "on"]
+public unsafe func Windows_ShowFindFriendsUIForUser(user: CPointer<Unit>, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32 {
+    return ShowFindFriendsUIForUser(user, completionRoutine, context)
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_4 == "on" && Windows_Win32_Gaming_ShowGameInfoUI == "on"]
+foreign {
     // param-hint: context optional
     func ShowGameInfoUI(titleId: UInt32, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_4 == "on" && Windows_Win32_Gaming_ShowGameInfoUI == "on"]
+public unsafe func Windows_ShowGameInfoUI(titleId: UInt32, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32 {
+    return ShowGameInfoUI(titleId, completionRoutine, context)
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_4 == "on" && Windows_Win32_Gaming_ShowGameInfoUIForUser == "on" && Windows_Win32_System_WinRT == "on"]
+foreign {
+    // param-hint: context optional
+    func ShowGameInfoUIForUser(user: CPointer<Unit>, titleId: UInt32, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_4 == "on" && Windows_Win32_Gaming_ShowGameInfoUIForUser == "on" && Windows_Win32_System_WinRT == "on"]
+public unsafe func Windows_ShowGameInfoUIForUser(user: CPointer<Unit>, titleId: UInt32, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32 {
+    return ShowGameInfoUIForUser(user, titleId, completionRoutine, context)
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_4 == "on" && Windows_Win32_Gaming_ShowUserSettingsUI == "on"]
+foreign {
     // param-hint: context optional
     func ShowUserSettingsUI(completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32
 }
 
-@When[API_MS_WIN_GAMING_TCUI_L1_1_4 == "on" && Windows_Win32_System_WinRT == "on"]
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_4 == "on" && Windows_Win32_Gaming_ShowUserSettingsUI == "on"]
+public unsafe func Windows_ShowUserSettingsUI(completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32 {
+    return ShowUserSettingsUI(completionRoutine, context)
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_4 == "on" && Windows_Win32_Gaming_ShowUserSettingsUIForUser == "on" && Windows_Win32_System_WinRT == "on"]
 foreign {
     // param-hint: context optional
-    func ShowCustomizeUserProfileUIForUser(user: CPointer<Unit>, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32
-    // param-hint: context optional
-    func ShowFindFriendsUIForUser(user: CPointer<Unit>, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32
-    // param-hint: context optional
-    func ShowGameInfoUIForUser(user: CPointer<Unit>, titleId: UInt32, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32
-    // param-hint: context optional
     func ShowUserSettingsUIForUser(user: CPointer<Unit>, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Gaming == "on" && API_MS_WIN_GAMING_TCUI_L1_1_4 == "on" && Windows_Win32_Gaming_ShowUserSettingsUIForUser == "on" && Windows_Win32_System_WinRT == "on"]
+public unsafe func Windows_ShowUserSettingsUIForUser(user: CPointer<Unit>, completionRoutine: GameUICompletionRoutine, context: CPointer<Unit>): Int32 {
+    return ShowUserSettingsUIForUser(user, completionRoutine, context)
 }
 
 @When[Windows_Win32_Gaming == "on"]

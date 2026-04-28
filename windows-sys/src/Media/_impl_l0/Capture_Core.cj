@@ -10,7 +10,7 @@ import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
 @C
 public struct IVariablePhotoCapturedEventArgsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Media_Capture == "on"]
+    @When[Windows_Media_Capture == "on" && Windows_Media_Capture == "on" && Windows_Storage_Streams == "on"]
     public var Frame: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CaptureTimeOffset: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.TimeSpan>) -> Int32> = { _, _ => 0 }
     public var UsedFrameControllerIndex: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -59,7 +59,7 @@ public class IVariablePhotoCapturedEventArgs <: InterfaceWrapperBase & ComInterf
         readVtbl<IVariablePhotoCapturedEventArgsVtbl>(IVariablePhotoCapturedEventArgsVtbl())
     }
 
-    @When[Windows_Media_Capture == "on"]
+    @When[Windows_Media_Capture == "on" && Windows_Media_Capture == "on" && Windows_Storage_Streams == "on"]
     public unsafe func Frame(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

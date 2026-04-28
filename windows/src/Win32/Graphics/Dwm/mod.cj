@@ -10,9 +10,7 @@ import windows_interface.{GUID}
 import windows_interface as windows_interface
 import windows_polyfill.{packedReadFloat64, packedReadInt32, packedReadUInt32, packedReadUInt64, packedReadUInt8, packedReadValue, packedWriteFloat64, packedWriteInt32, packedWriteUInt32, packedWriteUInt64, packedWriteUInt8, packedWriteValue}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
 import windows.Win32._impl_l0 as Win32__impl_l0
 
@@ -2003,53 +2001,320 @@ public struct DWM_TIMING_INFO {
     public init() {}
 }
 
-@When[DWMAPI == "on"]
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmAttachMilContent == "on"]
 foreign {
     func DwmAttachMilContent(hwnd: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmAttachMilContent == "on"]
+public unsafe func Windows_DwmAttachMilContent(hwnd: CPointer<Unit>): Int32 {
+    return DwmAttachMilContent(hwnd)
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmDefWindowProc == "on"]
+foreign {
     func DwmDefWindowProc(hWnd: CPointer<Unit>, msg: UInt32, wParam: UIntNative, lParam: IntNative, plResult: CPointer<IntNative>): Int32
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmDefWindowProc == "on"]
+public unsafe func Windows_DwmDefWindowProc(hWnd: CPointer<Unit>, msg: UInt32, wParam: UIntNative, lParam: IntNative, plResult: CPointer<IntNative>): Int32 {
+    return DwmDefWindowProc(hWnd, msg, wParam, lParam, plResult)
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmDetachMilContent == "on"]
+foreign {
     func DwmDetachMilContent(hwnd: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmDetachMilContent == "on"]
+public unsafe func Windows_DwmDetachMilContent(hwnd: CPointer<Unit>): Int32 {
+    return DwmDetachMilContent(hwnd)
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmEnableBlurBehindWindow == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func DwmEnableBlurBehindWindow(hWnd: CPointer<Unit>, pBlurBehind: CPointer<DWM_BLURBEHIND>): Int32
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmEnableBlurBehindWindow == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DwmEnableBlurBehindWindow(hWnd: CPointer<Unit>, pBlurBehind: CPointer<DWM_BLURBEHIND>): Int32 {
+    return DwmEnableBlurBehindWindow(hWnd, pBlurBehind)
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmEnableComposition == "on"]
+foreign {
     func DwmEnableComposition(uCompositionAction: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmEnableComposition == "on"]
+public unsafe func Windows_DwmEnableComposition(uCompositionAction: UInt32): Int32 {
+    return DwmEnableComposition(uCompositionAction)
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmEnableMMCSS == "on"]
+foreign {
     func DwmEnableMMCSS(fEnableMMCSS: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmEnableMMCSS == "on"]
+public unsafe func Windows_DwmEnableMMCSS(fEnableMMCSS: Int32): Int32 {
+    return DwmEnableMMCSS(fEnableMMCSS)
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmExtendFrameIntoClientArea == "on" && Windows_Win32_UI_Controls == "on"]
+foreign {
+    func DwmExtendFrameIntoClientArea(hWnd: CPointer<Unit>, pMarInset: CPointer<Win32__impl_l0.MARGINSAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmExtendFrameIntoClientArea == "on" && Windows_Win32_UI_Controls == "on"]
+public unsafe func Windows_DwmExtendFrameIntoClientArea(hWnd: CPointer<Unit>, pMarInset: CPointer<Win32__impl_l0.MARGINSAbi>): Int32 {
+    return DwmExtendFrameIntoClientArea(hWnd, pMarInset)
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmFlush == "on"]
+foreign {
     func DwmFlush(): Int32
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmFlush == "on"]
+public unsafe func Windows_DwmFlush(): Int32 {
+    return DwmFlush()
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmGetColorizationColor == "on"]
+foreign {
     func DwmGetColorizationColor(pcrColorization: CPointer<UInt32>, pfOpaqueBlend: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmGetColorizationColor == "on"]
+public unsafe func Windows_DwmGetColorizationColor(pcrColorization: CPointer<UInt32>, pfOpaqueBlend: CPointer<Int32>): Int32 {
+    return DwmGetColorizationColor(pcrColorization, pfOpaqueBlend)
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmGetCompositionTimingInfo == "on"]
+foreign {
     func DwmGetCompositionTimingInfo(hwnd: CPointer<Unit>, pTimingInfo: CPointer<DWM_TIMING_INFO>): Int32
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmGetCompositionTimingInfo == "on"]
+public unsafe func Windows_DwmGetCompositionTimingInfo(hwnd: CPointer<Unit>, pTimingInfo: CPointer<DWM_TIMING_INFO>): Int32 {
+    return DwmGetCompositionTimingInfo(hwnd, pTimingInfo)
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmGetGraphicsStreamClient == "on"]
+foreign {
     func DwmGetGraphicsStreamClient(uIndex: UInt32, pClientUuid: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmGetGraphicsStreamClient == "on"]
+public unsafe func Windows_DwmGetGraphicsStreamClient(uIndex: UInt32, pClientUuid: CPointer<GUID>): Int32 {
+    return DwmGetGraphicsStreamClient(uIndex, pClientUuid)
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmGetGraphicsStreamTransformHint == "on"]
+foreign {
     func DwmGetGraphicsStreamTransformHint(uIndex: UInt32, pTransform: CPointer<MilMatrix3x2D>): Int32
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmGetGraphicsStreamTransformHint == "on"]
+public unsafe func Windows_DwmGetGraphicsStreamTransformHint(uIndex: UInt32, pTransform: CPointer<MilMatrix3x2D>): Int32 {
+    return DwmGetGraphicsStreamTransformHint(uIndex, pTransform)
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmGetTransportAttributes == "on"]
+foreign {
     func DwmGetTransportAttributes(pfIsRemoting: CPointer<Int32>, pfIsConnected: CPointer<Int32>, pDwGeneration: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmGetTransportAttributes == "on"]
+public unsafe func Windows_DwmGetTransportAttributes(pfIsRemoting: CPointer<Int32>, pfIsConnected: CPointer<Int32>, pDwGeneration: CPointer<UInt32>): Int32 {
+    return DwmGetTransportAttributes(pfIsRemoting, pfIsConnected, pDwGeneration)
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmGetUnmetTabRequirements == "on"]
+foreign {
     // param-hint: appWindow optional
     func DwmGetUnmetTabRequirements(appWindow: CPointer<Unit>, value: CPointer<DWM_TAB_WINDOW_REQUIREMENTSAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmGetUnmetTabRequirements == "on"]
+public unsafe func Windows_DwmGetUnmetTabRequirements(appWindow: CPointer<Unit>, value: CPointer<DWM_TAB_WINDOW_REQUIREMENTSAbi>): Int32 {
+    return DwmGetUnmetTabRequirements(appWindow, value)
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmGetWindowAttribute == "on"]
+foreign {
     // param-hint: pvAttribute bytes=param[3]
     func DwmGetWindowAttribute(hwnd: CPointer<Unit>, dwAttribute: UInt32, pvAttribute: CPointer<Unit>, cbAttribute: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmGetWindowAttribute == "on"]
+public unsafe func Windows_DwmGetWindowAttribute(hwnd: CPointer<Unit>, dwAttribute: UInt32, pvAttribute: CPointer<Unit>, cbAttribute: UInt32): Int32 {
+    return DwmGetWindowAttribute(hwnd, dwAttribute, pvAttribute, cbAttribute)
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmInvalidateIconicBitmaps == "on"]
+foreign {
     func DwmInvalidateIconicBitmaps(hwnd: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmInvalidateIconicBitmaps == "on"]
+public unsafe func Windows_DwmInvalidateIconicBitmaps(hwnd: CPointer<Unit>): Int32 {
+    return DwmInvalidateIconicBitmaps(hwnd)
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmIsCompositionEnabled == "on"]
+foreign {
     func DwmIsCompositionEnabled(pfEnabled: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmIsCompositionEnabled == "on"]
+public unsafe func Windows_DwmIsCompositionEnabled(pfEnabled: CPointer<Int32>): Int32 {
+    return DwmIsCompositionEnabled(pfEnabled)
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmModifyPreviousDxFrameDuration == "on"]
+foreign {
     func DwmModifyPreviousDxFrameDuration(hwnd: CPointer<Unit>, cRefreshes: Int32, fRelative: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmModifyPreviousDxFrameDuration == "on"]
+public unsafe func Windows_DwmModifyPreviousDxFrameDuration(hwnd: CPointer<Unit>, cRefreshes: Int32, fRelative: Int32): Int32 {
+    return DwmModifyPreviousDxFrameDuration(hwnd, cRefreshes, fRelative)
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmQueryThumbnailSourceSize == "on"]
+foreign {
     func DwmQueryThumbnailSourceSize(hThumbnail: IntNative, pSize: CPointer<Win32_Foundation.SIZEAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmQueryThumbnailSourceSize == "on"]
+public unsafe func Windows_DwmQueryThumbnailSourceSize(hThumbnail: IntNative, pSize: CPointer<Win32_Foundation.SIZEAbi>): Int32 {
+    return DwmQueryThumbnailSourceSize(hThumbnail, pSize)
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmRegisterThumbnail == "on"]
+foreign {
     func DwmRegisterThumbnail(hwndDestination: CPointer<Unit>, hwndSource: CPointer<Unit>, phThumbnailId: CPointer<IntNative>): Int32
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmRegisterThumbnail == "on"]
+public unsafe func Windows_DwmRegisterThumbnail(hwndDestination: CPointer<Unit>, hwndSource: CPointer<Unit>, phThumbnailId: CPointer<IntNative>): Int32 {
+    return DwmRegisterThumbnail(hwndDestination, hwndSource, phThumbnailId)
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmRenderGesture == "on"]
+foreign {
     // param-hint: pdwPointerID len=param[1]
     // param-hint: pPoints len=param[1]
     func DwmRenderGesture(gt: GESTURE_TYPEAbi, cContacts: UInt32, pdwPointerID: CPointer<UInt32>, pPoints: CPointer<Win32_Foundation.POINTAbi>): Int32
-    func DwmSetDxFrameDuration(hwnd: CPointer<Unit>, cRefreshes: Int32): Int32
-    func DwmSetPresentParameters(hwnd: CPointer<Unit>, pPresentParams: CPointer<DWM_PRESENT_PARAMETERS>): Int32
-    // param-hint: pvAttribute bytes=param[3]
-    func DwmSetWindowAttribute(hwnd: CPointer<Unit>, dwAttribute: UInt32, pvAttribute: CPointer<Unit>, cbAttribute: UInt32): Int32
-    func DwmShowContact(dwPointerID: UInt32, eShowContact: DWM_SHOWCONTACTAbi): Int32
-    func DwmTetherContact(dwPointerID: UInt32, fEnable: Int32, ptTether: Win32_Foundation.POINTAbi): Int32
-    func DwmTransitionOwnedWindow(hwnd: CPointer<Unit>, target: DWMTRANSITION_OWNEDWINDOW_TARGETAbi): Int32
-    func DwmUnregisterThumbnail(hThumbnailId: IntNative): Int32
-    func DwmUpdateThumbnailProperties(hThumbnailId: IntNative, ptnProperties: CPointer<DWM_THUMBNAIL_PROPERTIES>): Int32
 }
 
-@When[DWMAPI == "on" && Windows_Win32_Graphics_Gdi == "on"]
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmRenderGesture == "on"]
+public unsafe func Windows_DwmRenderGesture(gt: GESTURE_TYPEAbi, cContacts: UInt32, pdwPointerID: CPointer<UInt32>, pPoints: CPointer<Win32_Foundation.POINTAbi>): Int32 {
+    return DwmRenderGesture(gt, cContacts, pdwPointerID, pPoints)
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmSetDxFrameDuration == "on"]
 foreign {
-    func DwmEnableBlurBehindWindow(hWnd: CPointer<Unit>, pBlurBehind: CPointer<DWM_BLURBEHIND>): Int32
+    func DwmSetDxFrameDuration(hwnd: CPointer<Unit>, cRefreshes: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmSetDxFrameDuration == "on"]
+public unsafe func Windows_DwmSetDxFrameDuration(hwnd: CPointer<Unit>, cRefreshes: Int32): Int32 {
+    return DwmSetDxFrameDuration(hwnd, cRefreshes)
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmSetIconicLivePreviewBitmap == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: pptClient optional
     func DwmSetIconicLivePreviewBitmap(hwnd: CPointer<Unit>, hbmp: Win32_Graphics_Gdi.HBITMAP, pptClient: CPointer<Win32_Foundation.POINTAbi>, dwSITFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmSetIconicLivePreviewBitmap == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DwmSetIconicLivePreviewBitmap(hwnd: CPointer<Unit>, hbmp: Win32_Graphics_Gdi.HBITMAP, pptClient: CPointer<Win32_Foundation.POINTAbi>, dwSITFlags: UInt32): Int32 {
+    return DwmSetIconicLivePreviewBitmap(hwnd, hbmp, pptClient, dwSITFlags)
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmSetIconicThumbnail == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func DwmSetIconicThumbnail(hwnd: CPointer<Unit>, hbmp: Win32_Graphics_Gdi.HBITMAP, dwSITFlags: UInt32): Int32
 }
 
-@When[DWMAPI == "on" && Windows_Win32_UI_Controls == "on"]
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmSetIconicThumbnail == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DwmSetIconicThumbnail(hwnd: CPointer<Unit>, hbmp: Win32_Graphics_Gdi.HBITMAP, dwSITFlags: UInt32): Int32 {
+    return DwmSetIconicThumbnail(hwnd, hbmp, dwSITFlags)
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmSetPresentParameters == "on"]
 foreign {
-    func DwmExtendFrameIntoClientArea(hWnd: CPointer<Unit>, pMarInset: CPointer<Win32__impl_l0.MARGINSAbi>): Int32
+    func DwmSetPresentParameters(hwnd: CPointer<Unit>, pPresentParams: CPointer<DWM_PRESENT_PARAMETERS>): Int32
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmSetPresentParameters == "on"]
+public unsafe func Windows_DwmSetPresentParameters(hwnd: CPointer<Unit>, pPresentParams: CPointer<DWM_PRESENT_PARAMETERS>): Int32 {
+    return DwmSetPresentParameters(hwnd, pPresentParams)
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmSetWindowAttribute == "on"]
+foreign {
+    // param-hint: pvAttribute bytes=param[3]
+    func DwmSetWindowAttribute(hwnd: CPointer<Unit>, dwAttribute: UInt32, pvAttribute: CPointer<Unit>, cbAttribute: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmSetWindowAttribute == "on"]
+public unsafe func Windows_DwmSetWindowAttribute(hwnd: CPointer<Unit>, dwAttribute: UInt32, pvAttribute: CPointer<Unit>, cbAttribute: UInt32): Int32 {
+    return DwmSetWindowAttribute(hwnd, dwAttribute, pvAttribute, cbAttribute)
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmShowContact == "on"]
+foreign {
+    func DwmShowContact(dwPointerID: UInt32, eShowContact: DWM_SHOWCONTACTAbi): Int32
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmShowContact == "on"]
+public unsafe func Windows_DwmShowContact(dwPointerID: UInt32, eShowContact: DWM_SHOWCONTACTAbi): Int32 {
+    return DwmShowContact(dwPointerID, eShowContact)
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmTetherContact == "on"]
+foreign {
+    func DwmTetherContact(dwPointerID: UInt32, fEnable: Int32, ptTether: Win32_Foundation.POINTAbi): Int32
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmTetherContact == "on"]
+public unsafe func Windows_DwmTetherContact(dwPointerID: UInt32, fEnable: Int32, ptTether: Win32_Foundation.POINTAbi): Int32 {
+    return DwmTetherContact(dwPointerID, fEnable, ptTether)
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmTransitionOwnedWindow == "on"]
+foreign {
+    func DwmTransitionOwnedWindow(hwnd: CPointer<Unit>, target: DWMTRANSITION_OWNEDWINDOW_TARGETAbi): Int32
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmTransitionOwnedWindow == "on"]
+public unsafe func Windows_DwmTransitionOwnedWindow(hwnd: CPointer<Unit>, target: DWMTRANSITION_OWNEDWINDOW_TARGETAbi): Int32 {
+    return DwmTransitionOwnedWindow(hwnd, target)
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmUnregisterThumbnail == "on"]
+foreign {
+    func DwmUnregisterThumbnail(hThumbnailId: IntNative): Int32
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmUnregisterThumbnail == "on"]
+public unsafe func Windows_DwmUnregisterThumbnail(hThumbnailId: IntNative): Int32 {
+    return DwmUnregisterThumbnail(hThumbnailId)
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmUpdateThumbnailProperties == "on"]
+foreign {
+    func DwmUpdateThumbnailProperties(hThumbnailId: IntNative, ptnProperties: CPointer<DWM_THUMBNAIL_PROPERTIES>): Int32
+}
+
+@When[Windows_Win32_Graphics_Dwm == "on" && DWMAPI == "on" && Windows_Win32_Graphics_Dwm_DwmUpdateThumbnailProperties == "on"]
+public unsafe func Windows_DwmUpdateThumbnailProperties(hThumbnailId: IntNative, ptnProperties: CPointer<DWM_THUMBNAIL_PROPERTIES>): Int32 {
+    return DwmUpdateThumbnailProperties(hThumbnailId, ptnProperties)
 }
 
 @When[Windows_Win32_Graphics_Dwm == "on"]

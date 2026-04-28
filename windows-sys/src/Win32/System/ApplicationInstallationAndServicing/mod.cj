@@ -5,11 +5,8 @@ import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrap
 import windows_interface as windows_interface
 import windows_polyfill.{unionReadInt32, unionWriteInt32}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_System_Registry == "on"]
 import windows_sys.Win32.System.Registry as Win32_System_Registry
-@When[Windows_Win32_System_WindowsProgramming == "on"]
 import windows_sys.Win32.System.WindowsProgramming as Win32_System_WindowsProgramming
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
@@ -8659,20 +8656,111 @@ public class IPMEnumerationManager <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[KERNEL32 == "on"]
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && KERNEL32 == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ActivateActCtx == "on"]
 foreign {
     // param-hint: hActCtx optional
     // pinvoke-hint: SetLastError
     func ActivateActCtx(hActCtx: CPointer<Unit>, lpCookie: CPointer<UIntNative>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && KERNEL32 == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ActivateActCtx == "on"]
+public unsafe func Windows_ActivateActCtx(hActCtx: CPointer<Unit>, lpCookie: CPointer<UIntNative>): Int32 {
+    return ActivateActCtx(hActCtx, lpCookie)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && KERNEL32 == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_AddRefActCtx == "on"]
+foreign {
     func AddRefActCtx(hActCtx: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && KERNEL32 == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_AddRefActCtx == "on"]
+public unsafe func Windows_AddRefActCtx(hActCtx: CPointer<Unit>): Unit {
+    AddRefActCtx(hActCtx)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && KERNEL32 == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_CreateActCtxA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CreateActCtxA(pActCtx: CPointer<ACTCTXA>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && KERNEL32 == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_CreateActCtxA == "on"]
+public unsafe func Windows_CreateActCtxA(pActCtx: CPointer<ACTCTXA>): CPointer<Unit> {
+    return CreateActCtxA(pActCtx)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && KERNEL32 == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_CreateActCtxW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CreateActCtxW(pActCtx: CPointer<ACTCTXW>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && KERNEL32 == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_CreateActCtxW == "on"]
+public unsafe func Windows_CreateActCtxW(pActCtx: CPointer<ACTCTXW>): CPointer<Unit> {
+    return CreateActCtxW(pActCtx)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && KERNEL32 == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_DeactivateActCtx == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func DeactivateActCtx(dwFlags: UInt32, ulCookie: UIntNative): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && KERNEL32 == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_DeactivateActCtx == "on"]
+public unsafe func Windows_DeactivateActCtx(dwFlags: UInt32, ulCookie: UIntNative): Int32 {
+    return DeactivateActCtx(dwFlags, ulCookie)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && KERNEL32 == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_FindActCtxSectionGuid == "on" && Windows_Win32_System_WindowsProgramming == "on"]
+foreign {
+    // param-hint: lpExtensionGuid optional reserved
+    // param-hint: lpGuidToFind optional
+    // pinvoke-hint: SetLastError
+    func FindActCtxSectionGuid(dwFlags: UInt32, lpExtensionGuid: CPointer<GUID>, ulSectionId: UInt32, lpGuidToFind: CPointer<GUID>, ReturnedData: CPointer<ACTCTX_SECTION_KEYED_DATA>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && KERNEL32 == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_FindActCtxSectionGuid == "on" && Windows_Win32_System_WindowsProgramming == "on"]
+public unsafe func Windows_FindActCtxSectionGuid(dwFlags: UInt32, lpExtensionGuid: CPointer<GUID>, ulSectionId: UInt32, lpGuidToFind: CPointer<GUID>, ReturnedData: CPointer<ACTCTX_SECTION_KEYED_DATA>): Int32 {
+    return FindActCtxSectionGuid(dwFlags, lpExtensionGuid, ulSectionId, lpGuidToFind, ReturnedData)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && KERNEL32 == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_FindActCtxSectionStringA == "on" && Windows_Win32_System_WindowsProgramming == "on"]
+foreign {
+    // param-hint: lpExtensionGuid optional reserved
+    // pinvoke-hint: SetLastError
+    func FindActCtxSectionStringA(dwFlags: UInt32, lpExtensionGuid: CPointer<GUID>, ulSectionId: UInt32, lpStringToFind: CPointer<UInt8>, ReturnedData: CPointer<ACTCTX_SECTION_KEYED_DATA>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && KERNEL32 == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_FindActCtxSectionStringA == "on" && Windows_Win32_System_WindowsProgramming == "on"]
+public unsafe func Windows_FindActCtxSectionStringA(dwFlags: UInt32, lpExtensionGuid: CPointer<GUID>, ulSectionId: UInt32, lpStringToFind: CPointer<UInt8>, ReturnedData: CPointer<ACTCTX_SECTION_KEYED_DATA>): Int32 {
+    return FindActCtxSectionStringA(dwFlags, lpExtensionGuid, ulSectionId, lpStringToFind, ReturnedData)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && KERNEL32 == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_FindActCtxSectionStringW == "on" && Windows_Win32_System_WindowsProgramming == "on"]
+foreign {
+    // param-hint: lpExtensionGuid optional reserved
+    // pinvoke-hint: SetLastError
+    func FindActCtxSectionStringW(dwFlags: UInt32, lpExtensionGuid: CPointer<GUID>, ulSectionId: UInt32, lpStringToFind: CPointer<UInt16>, ReturnedData: CPointer<ACTCTX_SECTION_KEYED_DATA>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && KERNEL32 == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_FindActCtxSectionStringW == "on" && Windows_Win32_System_WindowsProgramming == "on"]
+public unsafe func Windows_FindActCtxSectionStringW(dwFlags: UInt32, lpExtensionGuid: CPointer<GUID>, ulSectionId: UInt32, lpStringToFind: CPointer<UInt16>, ReturnedData: CPointer<ACTCTX_SECTION_KEYED_DATA>): Int32 {
+    return FindActCtxSectionStringW(dwFlags, lpExtensionGuid, ulSectionId, lpStringToFind, ReturnedData)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && KERNEL32 == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_GetCurrentActCtx == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetCurrentActCtx(lphActCtx: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && KERNEL32 == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_GetCurrentActCtx == "on"]
+public unsafe func Windows_GetCurrentActCtx(lphActCtx: CPointer<CPointer<Unit>>): Int32 {
+    return GetCurrentActCtx(lphActCtx)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && KERNEL32 == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_QueryActCtxSettingsW == "on"]
+foreign {
     // param-hint: dwFlags optional
     // param-hint: hActCtx optional
     // param-hint: settingsNameSpace optional
@@ -8680,188 +8768,949 @@ foreign {
     // param-hint: pdwWrittenOrRequired optional
     // pinvoke-hint: SetLastError
     func QueryActCtxSettingsW(dwFlags: UInt32, hActCtx: CPointer<Unit>, settingsNameSpace: CPointer<UInt16>, settingName: CPointer<UInt16>, pvBuffer: CPointer<UInt16>, dwBuffer: UIntNative, pdwWrittenOrRequired: CPointer<UIntNative>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && KERNEL32 == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_QueryActCtxSettingsW == "on"]
+public unsafe func Windows_QueryActCtxSettingsW(dwFlags: UInt32, hActCtx: CPointer<Unit>, settingsNameSpace: CPointer<UInt16>, settingName: CPointer<UInt16>, pvBuffer: CPointer<UInt16>, dwBuffer: UIntNative, pdwWrittenOrRequired: CPointer<UIntNative>): Int32 {
+    return QueryActCtxSettingsW(dwFlags, hActCtx, settingsNameSpace, settingName, pvBuffer, dwBuffer, pdwWrittenOrRequired)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && KERNEL32 == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_QueryActCtxW == "on"]
+foreign {
     // param-hint: pvSubInstance optional
     // param-hint: pvBuffer bytes=param[5] optional
     // param-hint: pcbWrittenOrRequired optional
     // pinvoke-hint: SetLastError
     func QueryActCtxW(dwFlags: UInt32, hActCtx: CPointer<Unit>, pvSubInstance: CPointer<Unit>, ulInfoClass: UInt32, pvBuffer: CPointer<Unit>, cbBuffer: UIntNative, pcbWrittenOrRequired: CPointer<UIntNative>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && KERNEL32 == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_QueryActCtxW == "on"]
+public unsafe func Windows_QueryActCtxW(dwFlags: UInt32, hActCtx: CPointer<Unit>, pvSubInstance: CPointer<Unit>, ulInfoClass: UInt32, pvBuffer: CPointer<Unit>, cbBuffer: UIntNative, pcbWrittenOrRequired: CPointer<UIntNative>): Int32 {
+    return QueryActCtxW(dwFlags, hActCtx, pvSubInstance, ulInfoClass, pvBuffer, cbBuffer, pcbWrittenOrRequired)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && KERNEL32 == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ReleaseActCtx == "on"]
+foreign {
     func ReleaseActCtx(hActCtx: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && KERNEL32 == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ReleaseActCtx == "on"]
+public unsafe func Windows_ReleaseActCtx(hActCtx: CPointer<Unit>): Unit {
+    ReleaseActCtx(hActCtx)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && KERNEL32 == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ZombifyActCtx == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ZombifyActCtx(hActCtx: CPointer<Unit>): Int32
 }
 
-@When[KERNEL32 == "on" && Windows_Win32_System_WindowsProgramming == "on"]
-foreign {
-    // param-hint: lpExtensionGuid optional reserved
-    // param-hint: lpGuidToFind optional
-    // pinvoke-hint: SetLastError
-    func FindActCtxSectionGuid(dwFlags: UInt32, lpExtensionGuid: CPointer<GUID>, ulSectionId: UInt32, lpGuidToFind: CPointer<GUID>, ReturnedData: CPointer<ACTCTX_SECTION_KEYED_DATA>): Int32
-    // param-hint: lpExtensionGuid optional reserved
-    // pinvoke-hint: SetLastError
-    func FindActCtxSectionStringA(dwFlags: UInt32, lpExtensionGuid: CPointer<GUID>, ulSectionId: UInt32, lpStringToFind: CPointer<UInt8>, ReturnedData: CPointer<ACTCTX_SECTION_KEYED_DATA>): Int32
-    // param-hint: lpExtensionGuid optional reserved
-    // pinvoke-hint: SetLastError
-    func FindActCtxSectionStringW(dwFlags: UInt32, lpExtensionGuid: CPointer<GUID>, ulSectionId: UInt32, lpStringToFind: CPointer<UInt16>, ReturnedData: CPointer<ACTCTX_SECTION_KEYED_DATA>): Int32
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && KERNEL32 == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ZombifyActCtx == "on"]
+public unsafe func Windows_ZombifyActCtx(hActCtx: CPointer<Unit>): Int32 {
+    return ZombifyActCtx(hActCtx)
 }
 
-@When[MSDELTA == "on"]
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ApplyDeltaA == "on"]
 foreign {
     func ApplyDeltaA(ApplyFlags: Int64, lpSourceName: CPointer<UInt8>, lpDeltaName: CPointer<UInt8>, lpTargetName: CPointer<UInt8>): Int32
-    func ApplyDeltaB(ApplyFlags: Int64, Source: DELTA_INPUT, Delta: DELTA_INPUT, lpTarget: CPointer<DELTA_OUTPUT>): Int32
-    // param-hint: lpReverseFileTime optional
-    func ApplyDeltaGetReverseB(ApplyFlags: Int64, Source: DELTA_INPUT, Delta: DELTA_INPUT, lpReverseFileTime: CPointer<Win32_Foundation.FILETIME>, lpTarget: CPointer<DELTA_OUTPUT>, lpTargetReverse: CPointer<DELTA_OUTPUT>): Int32
-    // param-hint: lpTarget bytes=param[4]
-    func ApplyDeltaProvidedB(ApplyFlags: Int64, Source: DELTA_INPUT, Delta: DELTA_INPUT, lpTarget: CPointer<Unit>, uTargetSize: UIntNative): Int32
-    func ApplyDeltaW(ApplyFlags: Int64, lpSourceName: CPointer<UInt16>, lpDeltaName: CPointer<UInt16>, lpTargetName: CPointer<UInt16>): Int32
-    func DeltaFree(lpMemory: CPointer<Unit>): Int32
-    // param-hint: lpSource bytes=param[4]
-    func DeltaNormalizeProvidedB(FileTypeSet: Int64, NormalizeFlags: Int64, NormalizeOptions: DELTA_INPUT, lpSource: CPointer<Unit>, uSourceSize: UIntNative): Int32
 }
 
-@When[MSDELTA == "on" && Windows_Win32_Security_Cryptography == "on"]
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ApplyDeltaA == "on"]
+public unsafe func Windows_ApplyDeltaA(ApplyFlags: Int64, lpSourceName: CPointer<UInt8>, lpDeltaName: CPointer<UInt8>, lpTargetName: CPointer<UInt8>): Int32 {
+    return ApplyDeltaA(ApplyFlags, lpSourceName, lpDeltaName, lpTargetName)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ApplyDeltaB == "on"]
+foreign {
+    func ApplyDeltaB(ApplyFlags: Int64, Source: DELTA_INPUT, Delta: DELTA_INPUT, lpTarget: CPointer<DELTA_OUTPUT>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ApplyDeltaB == "on"]
+public unsafe func Windows_ApplyDeltaB(ApplyFlags: Int64, Source: DELTA_INPUT, Delta: DELTA_INPUT, lpTarget: CPointer<DELTA_OUTPUT>): Int32 {
+    return ApplyDeltaB(ApplyFlags, Source, Delta, lpTarget)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ApplyDeltaGetReverseB == "on"]
+foreign {
+    // param-hint: lpReverseFileTime optional
+    func ApplyDeltaGetReverseB(ApplyFlags: Int64, Source: DELTA_INPUT, Delta: DELTA_INPUT, lpReverseFileTime: CPointer<Win32_Foundation.FILETIME>, lpTarget: CPointer<DELTA_OUTPUT>, lpTargetReverse: CPointer<DELTA_OUTPUT>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ApplyDeltaGetReverseB == "on"]
+public unsafe func Windows_ApplyDeltaGetReverseB(ApplyFlags: Int64, Source: DELTA_INPUT, Delta: DELTA_INPUT, lpReverseFileTime: CPointer<Win32_Foundation.FILETIME>, lpTarget: CPointer<DELTA_OUTPUT>, lpTargetReverse: CPointer<DELTA_OUTPUT>): Int32 {
+    return ApplyDeltaGetReverseB(ApplyFlags, Source, Delta, lpReverseFileTime, lpTarget, lpTargetReverse)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ApplyDeltaProvidedB == "on"]
+foreign {
+    // param-hint: lpTarget bytes=param[4]
+    func ApplyDeltaProvidedB(ApplyFlags: Int64, Source: DELTA_INPUT, Delta: DELTA_INPUT, lpTarget: CPointer<Unit>, uTargetSize: UIntNative): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ApplyDeltaProvidedB == "on"]
+public unsafe func Windows_ApplyDeltaProvidedB(ApplyFlags: Int64, Source: DELTA_INPUT, Delta: DELTA_INPUT, lpTarget: CPointer<Unit>, uTargetSize: UIntNative): Int32 {
+    return ApplyDeltaProvidedB(ApplyFlags, Source, Delta, lpTarget, uTargetSize)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ApplyDeltaW == "on"]
+foreign {
+    func ApplyDeltaW(ApplyFlags: Int64, lpSourceName: CPointer<UInt16>, lpDeltaName: CPointer<UInt16>, lpTargetName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ApplyDeltaW == "on"]
+public unsafe func Windows_ApplyDeltaW(ApplyFlags: Int64, lpSourceName: CPointer<UInt16>, lpDeltaName: CPointer<UInt16>, lpTargetName: CPointer<UInt16>): Int32 {
+    return ApplyDeltaW(ApplyFlags, lpSourceName, lpDeltaName, lpTargetName)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_CreateDeltaA == "on" && Windows_Win32_Security_Cryptography == "on"]
 foreign {
     // param-hint: lpSourceOptionsName optional
     // param-hint: lpTargetOptionsName optional
     // param-hint: lpTargetFileTime optional
     func CreateDeltaA(FileTypeSet: Int64, SetFlags: Int64, ResetFlags: Int64, lpSourceName: CPointer<UInt8>, lpTargetName: CPointer<UInt8>, lpSourceOptionsName: CPointer<UInt8>, lpTargetOptionsName: CPointer<UInt8>, GlobalOptions: DELTA_INPUT, lpTargetFileTime: CPointer<Win32_Foundation.FILETIME>, HashAlgId: UInt32, lpDeltaName: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_CreateDeltaA == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_CreateDeltaA(FileTypeSet: Int64, SetFlags: Int64, ResetFlags: Int64, lpSourceName: CPointer<UInt8>, lpTargetName: CPointer<UInt8>, lpSourceOptionsName: CPointer<UInt8>, lpTargetOptionsName: CPointer<UInt8>, GlobalOptions: DELTA_INPUT, lpTargetFileTime: CPointer<Win32_Foundation.FILETIME>, HashAlgId: UInt32, lpDeltaName: CPointer<UInt8>): Int32 {
+    return CreateDeltaA(FileTypeSet, SetFlags, ResetFlags, lpSourceName, lpTargetName, lpSourceOptionsName, lpTargetOptionsName, GlobalOptions, lpTargetFileTime, HashAlgId, lpDeltaName)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_CreateDeltaB == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
     // param-hint: lpTargetFileTime optional
     func CreateDeltaB(FileTypeSet: Int64, SetFlags: Int64, ResetFlags: Int64, Source: DELTA_INPUT, Target: DELTA_INPUT, SourceOptions: DELTA_INPUT, TargetOptions: DELTA_INPUT, GlobalOptions: DELTA_INPUT, lpTargetFileTime: CPointer<Win32_Foundation.FILETIME>, HashAlgId: UInt32, lpDelta: CPointer<DELTA_OUTPUT>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_CreateDeltaB == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_CreateDeltaB(FileTypeSet: Int64, SetFlags: Int64, ResetFlags: Int64, Source: DELTA_INPUT, Target: DELTA_INPUT, SourceOptions: DELTA_INPUT, TargetOptions: DELTA_INPUT, GlobalOptions: DELTA_INPUT, lpTargetFileTime: CPointer<Win32_Foundation.FILETIME>, HashAlgId: UInt32, lpDelta: CPointer<DELTA_OUTPUT>): Int32 {
+    return CreateDeltaB(FileTypeSet, SetFlags, ResetFlags, Source, Target, SourceOptions, TargetOptions, GlobalOptions, lpTargetFileTime, HashAlgId, lpDelta)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_CreateDeltaW == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
     // param-hint: lpSourceOptionsName optional
     // param-hint: lpTargetOptionsName optional
     // param-hint: lpTargetFileTime optional
     func CreateDeltaW(FileTypeSet: Int64, SetFlags: Int64, ResetFlags: Int64, lpSourceName: CPointer<UInt16>, lpTargetName: CPointer<UInt16>, lpSourceOptionsName: CPointer<UInt16>, lpTargetOptionsName: CPointer<UInt16>, GlobalOptions: DELTA_INPUT, lpTargetFileTime: CPointer<Win32_Foundation.FILETIME>, HashAlgId: UInt32, lpDeltaName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_CreateDeltaW == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_CreateDeltaW(FileTypeSet: Int64, SetFlags: Int64, ResetFlags: Int64, lpSourceName: CPointer<UInt16>, lpTargetName: CPointer<UInt16>, lpSourceOptionsName: CPointer<UInt16>, lpTargetOptionsName: CPointer<UInt16>, GlobalOptions: DELTA_INPUT, lpTargetFileTime: CPointer<Win32_Foundation.FILETIME>, HashAlgId: UInt32, lpDeltaName: CPointer<UInt16>): Int32 {
+    return CreateDeltaW(FileTypeSet, SetFlags, ResetFlags, lpSourceName, lpTargetName, lpSourceOptionsName, lpTargetOptionsName, GlobalOptions, lpTargetFileTime, HashAlgId, lpDeltaName)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_DeltaFree == "on"]
+foreign {
+    func DeltaFree(lpMemory: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_DeltaFree == "on"]
+public unsafe func Windows_DeltaFree(lpMemory: CPointer<Unit>): Int32 {
+    return DeltaFree(lpMemory)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_DeltaNormalizeProvidedB == "on"]
+foreign {
+    // param-hint: lpSource bytes=param[4]
+    func DeltaNormalizeProvidedB(FileTypeSet: Int64, NormalizeFlags: Int64, NormalizeOptions: DELTA_INPUT, lpSource: CPointer<Unit>, uSourceSize: UIntNative): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_DeltaNormalizeProvidedB == "on"]
+public unsafe func Windows_DeltaNormalizeProvidedB(FileTypeSet: Int64, NormalizeFlags: Int64, NormalizeOptions: DELTA_INPUT, lpSource: CPointer<Unit>, uSourceSize: UIntNative): Int32 {
+    return DeltaNormalizeProvidedB(FileTypeSet, NormalizeFlags, NormalizeOptions, lpSource, uSourceSize)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_GetDeltaInfoA == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
     func GetDeltaInfoA(lpDeltaName: CPointer<UInt8>, lpHeaderInfo: CPointer<DELTA_HEADER_INFO>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_GetDeltaInfoA == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_GetDeltaInfoA(lpDeltaName: CPointer<UInt8>, lpHeaderInfo: CPointer<DELTA_HEADER_INFO>): Int32 {
+    return GetDeltaInfoA(lpDeltaName, lpHeaderInfo)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_GetDeltaInfoB == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
     func GetDeltaInfoB(Delta: DELTA_INPUT, lpHeaderInfo: CPointer<DELTA_HEADER_INFO>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_GetDeltaInfoB == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_GetDeltaInfoB(Delta: DELTA_INPUT, lpHeaderInfo: CPointer<DELTA_HEADER_INFO>): Int32 {
+    return GetDeltaInfoB(Delta, lpHeaderInfo)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_GetDeltaInfoW == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
     func GetDeltaInfoW(lpDeltaName: CPointer<UInt16>, lpHeaderInfo: CPointer<DELTA_HEADER_INFO>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_GetDeltaInfoW == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_GetDeltaInfoW(lpDeltaName: CPointer<UInt16>, lpHeaderInfo: CPointer<DELTA_HEADER_INFO>): Int32 {
+    return GetDeltaInfoW(lpDeltaName, lpHeaderInfo)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_GetDeltaSignatureA == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
     func GetDeltaSignatureA(FileTypeSet: Int64, HashAlgId: UInt32, lpSourceName: CPointer<UInt8>, lpHash: CPointer<DELTA_HASH>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_GetDeltaSignatureA == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_GetDeltaSignatureA(FileTypeSet: Int64, HashAlgId: UInt32, lpSourceName: CPointer<UInt8>, lpHash: CPointer<DELTA_HASH>): Int32 {
+    return GetDeltaSignatureA(FileTypeSet, HashAlgId, lpSourceName, lpHash)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_GetDeltaSignatureB == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
     func GetDeltaSignatureB(FileTypeSet: Int64, HashAlgId: UInt32, Source: DELTA_INPUT, lpHash: CPointer<DELTA_HASH>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_GetDeltaSignatureB == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_GetDeltaSignatureB(FileTypeSet: Int64, HashAlgId: UInt32, Source: DELTA_INPUT, lpHash: CPointer<DELTA_HASH>): Int32 {
+    return GetDeltaSignatureB(FileTypeSet, HashAlgId, Source, lpHash)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_GetDeltaSignatureW == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
     func GetDeltaSignatureW(FileTypeSet: Int64, HashAlgId: UInt32, lpSourceName: CPointer<UInt16>, lpHash: CPointer<DELTA_HASH>): Int32
 }
 
-@When[MSI == "on"]
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSDELTA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_GetDeltaSignatureW == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_GetDeltaSignatureW(FileTypeSet: Int64, HashAlgId: UInt32, lpSourceName: CPointer<UInt16>, lpHash: CPointer<DELTA_HASH>): Int32 {
+    return GetDeltaSignatureW(FileTypeSet, HashAlgId, lpSourceName, lpHash)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiAdvertiseProductA == "on"]
 foreign {
     // param-hint: szScriptfilePath optional
     // param-hint: szTransforms optional
     func MsiAdvertiseProductA(szPackagePath: CPointer<UInt8>, szScriptfilePath: CPointer<UInt8>, szTransforms: CPointer<UInt8>, lgidLanguage: UInt16): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiAdvertiseProductA == "on"]
+public unsafe func Windows_MsiAdvertiseProductA(szPackagePath: CPointer<UInt8>, szScriptfilePath: CPointer<UInt8>, szTransforms: CPointer<UInt8>, lgidLanguage: UInt16): UInt32 {
+    return MsiAdvertiseProductA(szPackagePath, szScriptfilePath, szTransforms, lgidLanguage)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiAdvertiseProductExA == "on"]
+foreign {
     // param-hint: szScriptfilePath optional
     // param-hint: szTransforms optional
     func MsiAdvertiseProductExA(szPackagePath: CPointer<UInt8>, szScriptfilePath: CPointer<UInt8>, szTransforms: CPointer<UInt8>, lgidLanguage: UInt16, dwPlatform: UInt32, dwOptions: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiAdvertiseProductExA == "on"]
+public unsafe func Windows_MsiAdvertiseProductExA(szPackagePath: CPointer<UInt8>, szScriptfilePath: CPointer<UInt8>, szTransforms: CPointer<UInt8>, lgidLanguage: UInt16, dwPlatform: UInt32, dwOptions: UInt32): UInt32 {
+    return MsiAdvertiseProductExA(szPackagePath, szScriptfilePath, szTransforms, lgidLanguage, dwPlatform, dwOptions)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiAdvertiseProductExW == "on"]
+foreign {
     // param-hint: szScriptfilePath optional
     // param-hint: szTransforms optional
     func MsiAdvertiseProductExW(szPackagePath: CPointer<UInt16>, szScriptfilePath: CPointer<UInt16>, szTransforms: CPointer<UInt16>, lgidLanguage: UInt16, dwPlatform: UInt32, dwOptions: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiAdvertiseProductExW == "on"]
+public unsafe func Windows_MsiAdvertiseProductExW(szPackagePath: CPointer<UInt16>, szScriptfilePath: CPointer<UInt16>, szTransforms: CPointer<UInt16>, lgidLanguage: UInt16, dwPlatform: UInt32, dwOptions: UInt32): UInt32 {
+    return MsiAdvertiseProductExW(szPackagePath, szScriptfilePath, szTransforms, lgidLanguage, dwPlatform, dwOptions)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiAdvertiseProductW == "on"]
+foreign {
     // param-hint: szScriptfilePath optional
     // param-hint: szTransforms optional
     func MsiAdvertiseProductW(szPackagePath: CPointer<UInt16>, szScriptfilePath: CPointer<UInt16>, szTransforms: CPointer<UInt16>, lgidLanguage: UInt16): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiAdvertiseProductW == "on"]
+public unsafe func Windows_MsiAdvertiseProductW(szPackagePath: CPointer<UInt16>, szScriptfilePath: CPointer<UInt16>, szTransforms: CPointer<UInt16>, lgidLanguage: UInt16): UInt32 {
+    return MsiAdvertiseProductW(szPackagePath, szScriptfilePath, szTransforms, lgidLanguage)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiAdvertiseScriptA == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: phRegData optional
+    func MsiAdvertiseScriptA(szScriptFile: CPointer<UInt8>, dwFlags: UInt32, phRegData: CPointer<Win32_System_Registry.HKEY>, fRemoveItems: Int32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiAdvertiseScriptA == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_MsiAdvertiseScriptA(szScriptFile: CPointer<UInt8>, dwFlags: UInt32, phRegData: CPointer<Win32_System_Registry.HKEY>, fRemoveItems: Int32): UInt32 {
+    return MsiAdvertiseScriptA(szScriptFile, dwFlags, phRegData, fRemoveItems)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiAdvertiseScriptW == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: phRegData optional
+    func MsiAdvertiseScriptW(szScriptFile: CPointer<UInt16>, dwFlags: UInt32, phRegData: CPointer<Win32_System_Registry.HKEY>, fRemoveItems: Int32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiAdvertiseScriptW == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_MsiAdvertiseScriptW(szScriptFile: CPointer<UInt16>, dwFlags: UInt32, phRegData: CPointer<Win32_System_Registry.HKEY>, fRemoveItems: Int32): UInt32 {
+    return MsiAdvertiseScriptW(szScriptFile, dwFlags, phRegData, fRemoveItems)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiApplyMultiplePatchesA == "on"]
+foreign {
     // param-hint: szProductCode optional
     // param-hint: szPropertiesList optional
     func MsiApplyMultiplePatchesA(szPatchPackages: CPointer<UInt8>, szProductCode: CPointer<UInt8>, szPropertiesList: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiApplyMultiplePatchesA == "on"]
+public unsafe func Windows_MsiApplyMultiplePatchesA(szPatchPackages: CPointer<UInt8>, szProductCode: CPointer<UInt8>, szPropertiesList: CPointer<UInt8>): UInt32 {
+    return MsiApplyMultiplePatchesA(szPatchPackages, szProductCode, szPropertiesList)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiApplyMultiplePatchesW == "on"]
+foreign {
     // param-hint: szProductCode optional
     // param-hint: szPropertiesList optional
     func MsiApplyMultiplePatchesW(szPatchPackages: CPointer<UInt16>, szProductCode: CPointer<UInt16>, szPropertiesList: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiApplyMultiplePatchesW == "on"]
+public unsafe func Windows_MsiApplyMultiplePatchesW(szPatchPackages: CPointer<UInt16>, szProductCode: CPointer<UInt16>, szPropertiesList: CPointer<UInt16>): UInt32 {
+    return MsiApplyMultiplePatchesW(szPatchPackages, szProductCode, szPropertiesList)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiApplyPatchA == "on"]
+foreign {
     // param-hint: szInstallPackage optional
     // param-hint: szCommandLine optional
     func MsiApplyPatchA(szPatchPackage: CPointer<UInt8>, szInstallPackage: CPointer<UInt8>, eInstallType: Int32, szCommandLine: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiApplyPatchA == "on"]
+public unsafe func Windows_MsiApplyPatchA(szPatchPackage: CPointer<UInt8>, szInstallPackage: CPointer<UInt8>, eInstallType: Int32, szCommandLine: CPointer<UInt8>): UInt32 {
+    return MsiApplyPatchA(szPatchPackage, szInstallPackage, eInstallType, szCommandLine)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiApplyPatchW == "on"]
+foreign {
     // param-hint: szInstallPackage optional
     // param-hint: szCommandLine optional
     func MsiApplyPatchW(szPatchPackage: CPointer<UInt16>, szInstallPackage: CPointer<UInt16>, eInstallType: Int32, szCommandLine: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiApplyPatchW == "on"]
+public unsafe func Windows_MsiApplyPatchW(szPatchPackage: CPointer<UInt16>, szInstallPackage: CPointer<UInt16>, eInstallType: Int32, szCommandLine: CPointer<UInt16>): UInt32 {
+    return MsiApplyPatchW(szPatchPackage, szInstallPackage, eInstallType, szCommandLine)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiBeginTransactionA == "on"]
+foreign {
     func MsiBeginTransactionA(szName: CPointer<UInt8>, dwTransactionAttributes: UInt32, phTransactionHandle: CPointer<MSIHANDLE>, phChangeOfOwnerEvent: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiBeginTransactionA == "on"]
+public unsafe func Windows_MsiBeginTransactionA(szName: CPointer<UInt8>, dwTransactionAttributes: UInt32, phTransactionHandle: CPointer<MSIHANDLE>, phChangeOfOwnerEvent: CPointer<CPointer<Unit>>): UInt32 {
+    return MsiBeginTransactionA(szName, dwTransactionAttributes, phTransactionHandle, phChangeOfOwnerEvent)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiBeginTransactionW == "on"]
+foreign {
     func MsiBeginTransactionW(szName: CPointer<UInt16>, dwTransactionAttributes: UInt32, phTransactionHandle: CPointer<MSIHANDLE>, phChangeOfOwnerEvent: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiBeginTransactionW == "on"]
+public unsafe func Windows_MsiBeginTransactionW(szName: CPointer<UInt16>, dwTransactionAttributes: UInt32, phTransactionHandle: CPointer<MSIHANDLE>, phChangeOfOwnerEvent: CPointer<CPointer<Unit>>): UInt32 {
+    return MsiBeginTransactionW(szName, dwTransactionAttributes, phTransactionHandle, phChangeOfOwnerEvent)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiCloseAllHandles == "on"]
+foreign {
     func MsiCloseAllHandles(): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiCloseAllHandles == "on"]
+public unsafe func Windows_MsiCloseAllHandles(): UInt32 {
+    return MsiCloseAllHandles()
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiCloseHandle == "on"]
+foreign {
     func MsiCloseHandle(hAny: MSIHANDLE): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiCloseHandle == "on"]
+public unsafe func Windows_MsiCloseHandle(hAny: MSIHANDLE): UInt32 {
+    return MsiCloseHandle(hAny)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiCollectUserInfoA == "on"]
+foreign {
     func MsiCollectUserInfoA(szProduct: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiCollectUserInfoA == "on"]
+public unsafe func Windows_MsiCollectUserInfoA(szProduct: CPointer<UInt8>): UInt32 {
+    return MsiCollectUserInfoA(szProduct)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiCollectUserInfoW == "on"]
+foreign {
     func MsiCollectUserInfoW(szProduct: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiCollectUserInfoW == "on"]
+public unsafe func Windows_MsiCollectUserInfoW(szProduct: CPointer<UInt16>): UInt32 {
+    return MsiCollectUserInfoW(szProduct)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiConfigureFeatureA == "on"]
+foreign {
     func MsiConfigureFeatureA(szProduct: CPointer<UInt8>, szFeature: CPointer<UInt8>, eInstallState: Int32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiConfigureFeatureA == "on"]
+public unsafe func Windows_MsiConfigureFeatureA(szProduct: CPointer<UInt8>, szFeature: CPointer<UInt8>, eInstallState: Int32): UInt32 {
+    return MsiConfigureFeatureA(szProduct, szFeature, eInstallState)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiConfigureFeatureW == "on"]
+foreign {
     func MsiConfigureFeatureW(szProduct: CPointer<UInt16>, szFeature: CPointer<UInt16>, eInstallState: Int32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiConfigureFeatureW == "on"]
+public unsafe func Windows_MsiConfigureFeatureW(szProduct: CPointer<UInt16>, szFeature: CPointer<UInt16>, eInstallState: Int32): UInt32 {
+    return MsiConfigureFeatureW(szProduct, szFeature, eInstallState)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiConfigureProductA == "on"]
+foreign {
     func MsiConfigureProductA(szProduct: CPointer<UInt8>, iInstallLevel: Int32, eInstallState: Int32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiConfigureProductA == "on"]
+public unsafe func Windows_MsiConfigureProductA(szProduct: CPointer<UInt8>, iInstallLevel: Int32, eInstallState: Int32): UInt32 {
+    return MsiConfigureProductA(szProduct, iInstallLevel, eInstallState)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiConfigureProductExA == "on"]
+foreign {
     // param-hint: szCommandLine optional
     func MsiConfigureProductExA(szProduct: CPointer<UInt8>, iInstallLevel: Int32, eInstallState: Int32, szCommandLine: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiConfigureProductExA == "on"]
+public unsafe func Windows_MsiConfigureProductExA(szProduct: CPointer<UInt8>, iInstallLevel: Int32, eInstallState: Int32, szCommandLine: CPointer<UInt8>): UInt32 {
+    return MsiConfigureProductExA(szProduct, iInstallLevel, eInstallState, szCommandLine)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiConfigureProductExW == "on"]
+foreign {
     // param-hint: szCommandLine optional
     func MsiConfigureProductExW(szProduct: CPointer<UInt16>, iInstallLevel: Int32, eInstallState: Int32, szCommandLine: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiConfigureProductExW == "on"]
+public unsafe func Windows_MsiConfigureProductExW(szProduct: CPointer<UInt16>, iInstallLevel: Int32, eInstallState: Int32, szCommandLine: CPointer<UInt16>): UInt32 {
+    return MsiConfigureProductExW(szProduct, iInstallLevel, eInstallState, szCommandLine)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiConfigureProductW == "on"]
+foreign {
     func MsiConfigureProductW(szProduct: CPointer<UInt16>, iInstallLevel: Int32, eInstallState: Int32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiConfigureProductW == "on"]
+public unsafe func Windows_MsiConfigureProductW(szProduct: CPointer<UInt16>, iInstallLevel: Int32, eInstallState: Int32): UInt32 {
+    return MsiConfigureProductW(szProduct, iInstallLevel, eInstallState)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiCreateRecord == "on"]
+foreign {
     func MsiCreateRecord(cParams: UInt32): MSIHANDLE
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiCreateRecord == "on"]
+public unsafe func Windows_MsiCreateRecord(cParams: UInt32): MSIHANDLE {
+    return MsiCreateRecord(cParams)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiCreateTransformSummaryInfoA == "on"]
+foreign {
     func MsiCreateTransformSummaryInfoA(hDatabase: MSIHANDLE, hDatabaseReference: MSIHANDLE, szTransformFile: CPointer<UInt8>, iErrorConditions: Int32, iValidation: Int32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiCreateTransformSummaryInfoA == "on"]
+public unsafe func Windows_MsiCreateTransformSummaryInfoA(hDatabase: MSIHANDLE, hDatabaseReference: MSIHANDLE, szTransformFile: CPointer<UInt8>, iErrorConditions: Int32, iValidation: Int32): UInt32 {
+    return MsiCreateTransformSummaryInfoA(hDatabase, hDatabaseReference, szTransformFile, iErrorConditions, iValidation)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiCreateTransformSummaryInfoW == "on"]
+foreign {
     func MsiCreateTransformSummaryInfoW(hDatabase: MSIHANDLE, hDatabaseReference: MSIHANDLE, szTransformFile: CPointer<UInt16>, iErrorConditions: Int32, iValidation: Int32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiCreateTransformSummaryInfoW == "on"]
+public unsafe func Windows_MsiCreateTransformSummaryInfoW(hDatabase: MSIHANDLE, hDatabaseReference: MSIHANDLE, szTransformFile: CPointer<UInt16>, iErrorConditions: Int32, iValidation: Int32): UInt32 {
+    return MsiCreateTransformSummaryInfoW(hDatabase, hDatabaseReference, szTransformFile, iErrorConditions, iValidation)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseApplyTransformA == "on"]
+foreign {
     func MsiDatabaseApplyTransformA(hDatabase: MSIHANDLE, szTransformFile: CPointer<UInt8>, iErrorConditions: Int32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseApplyTransformA == "on"]
+public unsafe func Windows_MsiDatabaseApplyTransformA(hDatabase: MSIHANDLE, szTransformFile: CPointer<UInt8>, iErrorConditions: Int32): UInt32 {
+    return MsiDatabaseApplyTransformA(hDatabase, szTransformFile, iErrorConditions)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseApplyTransformW == "on"]
+foreign {
     func MsiDatabaseApplyTransformW(hDatabase: MSIHANDLE, szTransformFile: CPointer<UInt16>, iErrorConditions: Int32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseApplyTransformW == "on"]
+public unsafe func Windows_MsiDatabaseApplyTransformW(hDatabase: MSIHANDLE, szTransformFile: CPointer<UInt16>, iErrorConditions: Int32): UInt32 {
+    return MsiDatabaseApplyTransformW(hDatabase, szTransformFile, iErrorConditions)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseCommit == "on"]
+foreign {
     func MsiDatabaseCommit(hDatabase: MSIHANDLE): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseCommit == "on"]
+public unsafe func Windows_MsiDatabaseCommit(hDatabase: MSIHANDLE): UInt32 {
+    return MsiDatabaseCommit(hDatabase)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseExportA == "on"]
+foreign {
     func MsiDatabaseExportA(hDatabase: MSIHANDLE, szTableName: CPointer<UInt8>, szFolderPath: CPointer<UInt8>, szFileName: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseExportA == "on"]
+public unsafe func Windows_MsiDatabaseExportA(hDatabase: MSIHANDLE, szTableName: CPointer<UInt8>, szFolderPath: CPointer<UInt8>, szFileName: CPointer<UInt8>): UInt32 {
+    return MsiDatabaseExportA(hDatabase, szTableName, szFolderPath, szFileName)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseExportW == "on"]
+foreign {
     func MsiDatabaseExportW(hDatabase: MSIHANDLE, szTableName: CPointer<UInt16>, szFolderPath: CPointer<UInt16>, szFileName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseExportW == "on"]
+public unsafe func Windows_MsiDatabaseExportW(hDatabase: MSIHANDLE, szTableName: CPointer<UInt16>, szFolderPath: CPointer<UInt16>, szFileName: CPointer<UInt16>): UInt32 {
+    return MsiDatabaseExportW(hDatabase, szTableName, szFolderPath, szFileName)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseGenerateTransformA == "on"]
+foreign {
     func MsiDatabaseGenerateTransformA(hDatabase: MSIHANDLE, hDatabaseReference: MSIHANDLE, szTransformFile: CPointer<UInt8>, iReserved1: Int32, iReserved2: Int32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseGenerateTransformA == "on"]
+public unsafe func Windows_MsiDatabaseGenerateTransformA(hDatabase: MSIHANDLE, hDatabaseReference: MSIHANDLE, szTransformFile: CPointer<UInt8>, iReserved1: Int32, iReserved2: Int32): UInt32 {
+    return MsiDatabaseGenerateTransformA(hDatabase, hDatabaseReference, szTransformFile, iReserved1, iReserved2)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseGenerateTransformW == "on"]
+foreign {
     func MsiDatabaseGenerateTransformW(hDatabase: MSIHANDLE, hDatabaseReference: MSIHANDLE, szTransformFile: CPointer<UInt16>, iReserved1: Int32, iReserved2: Int32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseGenerateTransformW == "on"]
+public unsafe func Windows_MsiDatabaseGenerateTransformW(hDatabase: MSIHANDLE, hDatabaseReference: MSIHANDLE, szTransformFile: CPointer<UInt16>, iReserved1: Int32, iReserved2: Int32): UInt32 {
+    return MsiDatabaseGenerateTransformW(hDatabase, hDatabaseReference, szTransformFile, iReserved1, iReserved2)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseGetPrimaryKeysA == "on"]
+foreign {
     func MsiDatabaseGetPrimaryKeysA(hDatabase: MSIHANDLE, szTableName: CPointer<UInt8>, phRecord: CPointer<MSIHANDLE>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseGetPrimaryKeysA == "on"]
+public unsafe func Windows_MsiDatabaseGetPrimaryKeysA(hDatabase: MSIHANDLE, szTableName: CPointer<UInt8>, phRecord: CPointer<MSIHANDLE>): UInt32 {
+    return MsiDatabaseGetPrimaryKeysA(hDatabase, szTableName, phRecord)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseGetPrimaryKeysW == "on"]
+foreign {
     func MsiDatabaseGetPrimaryKeysW(hDatabase: MSIHANDLE, szTableName: CPointer<UInt16>, phRecord: CPointer<MSIHANDLE>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseGetPrimaryKeysW == "on"]
+public unsafe func Windows_MsiDatabaseGetPrimaryKeysW(hDatabase: MSIHANDLE, szTableName: CPointer<UInt16>, phRecord: CPointer<MSIHANDLE>): UInt32 {
+    return MsiDatabaseGetPrimaryKeysW(hDatabase, szTableName, phRecord)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseImportA == "on"]
+foreign {
     func MsiDatabaseImportA(hDatabase: MSIHANDLE, szFolderPath: CPointer<UInt8>, szFileName: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseImportA == "on"]
+public unsafe func Windows_MsiDatabaseImportA(hDatabase: MSIHANDLE, szFolderPath: CPointer<UInt8>, szFileName: CPointer<UInt8>): UInt32 {
+    return MsiDatabaseImportA(hDatabase, szFolderPath, szFileName)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseImportW == "on"]
+foreign {
     func MsiDatabaseImportW(hDatabase: MSIHANDLE, szFolderPath: CPointer<UInt16>, szFileName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseImportW == "on"]
+public unsafe func Windows_MsiDatabaseImportW(hDatabase: MSIHANDLE, szFolderPath: CPointer<UInt16>, szFileName: CPointer<UInt16>): UInt32 {
+    return MsiDatabaseImportW(hDatabase, szFolderPath, szFileName)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseIsTablePersistentA == "on"]
+foreign {
     func MsiDatabaseIsTablePersistentA(hDatabase: MSIHANDLE, szTableName: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseIsTablePersistentA == "on"]
+public unsafe func Windows_MsiDatabaseIsTablePersistentA(hDatabase: MSIHANDLE, szTableName: CPointer<UInt8>): Int32 {
+    return MsiDatabaseIsTablePersistentA(hDatabase, szTableName)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseIsTablePersistentW == "on"]
+foreign {
     func MsiDatabaseIsTablePersistentW(hDatabase: MSIHANDLE, szTableName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseIsTablePersistentW == "on"]
+public unsafe func Windows_MsiDatabaseIsTablePersistentW(hDatabase: MSIHANDLE, szTableName: CPointer<UInt16>): Int32 {
+    return MsiDatabaseIsTablePersistentW(hDatabase, szTableName)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseMergeA == "on"]
+foreign {
     func MsiDatabaseMergeA(hDatabase: MSIHANDLE, hDatabaseMerge: MSIHANDLE, szTableName: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseMergeA == "on"]
+public unsafe func Windows_MsiDatabaseMergeA(hDatabase: MSIHANDLE, hDatabaseMerge: MSIHANDLE, szTableName: CPointer<UInt8>): UInt32 {
+    return MsiDatabaseMergeA(hDatabase, hDatabaseMerge, szTableName)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseMergeW == "on"]
+foreign {
     func MsiDatabaseMergeW(hDatabase: MSIHANDLE, hDatabaseMerge: MSIHANDLE, szTableName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseMergeW == "on"]
+public unsafe func Windows_MsiDatabaseMergeW(hDatabase: MSIHANDLE, hDatabaseMerge: MSIHANDLE, szTableName: CPointer<UInt16>): UInt32 {
+    return MsiDatabaseMergeW(hDatabase, hDatabaseMerge, szTableName)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseOpenViewA == "on"]
+foreign {
     func MsiDatabaseOpenViewA(hDatabase: MSIHANDLE, szQuery: CPointer<UInt8>, phView: CPointer<MSIHANDLE>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseOpenViewA == "on"]
+public unsafe func Windows_MsiDatabaseOpenViewA(hDatabase: MSIHANDLE, szQuery: CPointer<UInt8>, phView: CPointer<MSIHANDLE>): UInt32 {
+    return MsiDatabaseOpenViewA(hDatabase, szQuery, phView)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseOpenViewW == "on"]
+foreign {
     func MsiDatabaseOpenViewW(hDatabase: MSIHANDLE, szQuery: CPointer<UInt16>, phView: CPointer<MSIHANDLE>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDatabaseOpenViewW == "on"]
+public unsafe func Windows_MsiDatabaseOpenViewW(hDatabase: MSIHANDLE, szQuery: CPointer<UInt16>, phView: CPointer<MSIHANDLE>): UInt32 {
+    return MsiDatabaseOpenViewW(hDatabase, szQuery, phView)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDetermineApplicablePatchesA == "on"]
+foreign {
     // param-hint: pPatchInfo len=param[1]
     func MsiDetermineApplicablePatchesA(szProductPackagePath: CPointer<UInt8>, cPatchInfo: UInt32, pPatchInfo: CPointer<MSIPATCHSEQUENCEINFOA>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDetermineApplicablePatchesA == "on"]
+public unsafe func Windows_MsiDetermineApplicablePatchesA(szProductPackagePath: CPointer<UInt8>, cPatchInfo: UInt32, pPatchInfo: CPointer<MSIPATCHSEQUENCEINFOA>): UInt32 {
+    return MsiDetermineApplicablePatchesA(szProductPackagePath, cPatchInfo, pPatchInfo)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDetermineApplicablePatchesW == "on"]
+foreign {
     // param-hint: pPatchInfo len=param[1]
     func MsiDetermineApplicablePatchesW(szProductPackagePath: CPointer<UInt16>, cPatchInfo: UInt32, pPatchInfo: CPointer<MSIPATCHSEQUENCEINFOW>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDetermineApplicablePatchesW == "on"]
+public unsafe func Windows_MsiDetermineApplicablePatchesW(szProductPackagePath: CPointer<UInt16>, cPatchInfo: UInt32, pPatchInfo: CPointer<MSIPATCHSEQUENCEINFOW>): UInt32 {
+    return MsiDetermineApplicablePatchesW(szProductPackagePath, cPatchInfo, pPatchInfo)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDeterminePatchSequenceA == "on"]
+foreign {
     // param-hint: szUserSid optional
     // param-hint: pPatchInfo len=param[3]
     func MsiDeterminePatchSequenceA(szProductCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: Int32, cPatchInfo: UInt32, pPatchInfo: CPointer<MSIPATCHSEQUENCEINFOA>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDeterminePatchSequenceA == "on"]
+public unsafe func Windows_MsiDeterminePatchSequenceA(szProductCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: Int32, cPatchInfo: UInt32, pPatchInfo: CPointer<MSIPATCHSEQUENCEINFOA>): UInt32 {
+    return MsiDeterminePatchSequenceA(szProductCode, szUserSid, dwContext, cPatchInfo, pPatchInfo)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDeterminePatchSequenceW == "on"]
+foreign {
     // param-hint: szUserSid optional
     // param-hint: pPatchInfo len=param[3]
     func MsiDeterminePatchSequenceW(szProductCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: Int32, cPatchInfo: UInt32, pPatchInfo: CPointer<MSIPATCHSEQUENCEINFOW>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDeterminePatchSequenceW == "on"]
+public unsafe func Windows_MsiDeterminePatchSequenceW(szProductCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: Int32, cPatchInfo: UInt32, pPatchInfo: CPointer<MSIPATCHSEQUENCEINFOW>): UInt32 {
+    return MsiDeterminePatchSequenceW(szProductCode, szUserSid, dwContext, cPatchInfo, pPatchInfo)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDoActionA == "on"]
+foreign {
     func MsiDoActionA(hInstall: MSIHANDLE, szAction: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDoActionA == "on"]
+public unsafe func Windows_MsiDoActionA(hInstall: MSIHANDLE, szAction: CPointer<UInt8>): UInt32 {
+    return MsiDoActionA(hInstall, szAction)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDoActionW == "on"]
+foreign {
     func MsiDoActionW(hInstall: MSIHANDLE, szAction: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiDoActionW == "on"]
+public unsafe func Windows_MsiDoActionW(hInstall: MSIHANDLE, szAction: CPointer<UInt16>): UInt32 {
+    return MsiDoActionW(hInstall, szAction)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnableLogA == "on"]
+foreign {
     // param-hint: szLogFile optional
     func MsiEnableLogA(dwLogMode: UInt32, szLogFile: CPointer<UInt8>, dwLogAttributes: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnableLogA == "on"]
+public unsafe func Windows_MsiEnableLogA(dwLogMode: UInt32, szLogFile: CPointer<UInt8>, dwLogAttributes: UInt32): UInt32 {
+    return MsiEnableLogA(dwLogMode, szLogFile, dwLogAttributes)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnableLogW == "on"]
+foreign {
     // param-hint: szLogFile optional
     func MsiEnableLogW(dwLogMode: UInt32, szLogFile: CPointer<UInt16>, dwLogAttributes: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnableLogW == "on"]
+public unsafe func Windows_MsiEnableLogW(dwLogMode: UInt32, szLogFile: CPointer<UInt16>, dwLogAttributes: UInt32): UInt32 {
+    return MsiEnableLogW(dwLogMode, szLogFile, dwLogAttributes)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnableUIPreview == "on"]
+foreign {
     func MsiEnableUIPreview(hDatabase: MSIHANDLE, phPreview: CPointer<MSIHANDLE>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnableUIPreview == "on"]
+public unsafe func Windows_MsiEnableUIPreview(hDatabase: MSIHANDLE, phPreview: CPointer<MSIHANDLE>): UInt32 {
+    return MsiEnableUIPreview(hDatabase, phPreview)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEndTransaction == "on"]
+foreign {
     func MsiEndTransaction(dwTransactionState: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEndTransaction == "on"]
+public unsafe func Windows_MsiEndTransaction(dwTransactionState: UInt32): UInt32 {
+    return MsiEndTransaction(dwTransactionState)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumClientsA == "on"]
+foreign {
     func MsiEnumClientsA(szComponent: CPointer<UInt8>, iProductIndex: UInt32, lpProductBuf: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumClientsA == "on"]
+public unsafe func Windows_MsiEnumClientsA(szComponent: CPointer<UInt8>, iProductIndex: UInt32, lpProductBuf: CPointer<UInt8>): UInt32 {
+    return MsiEnumClientsA(szComponent, iProductIndex, lpProductBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumClientsExA == "on"]
+foreign {
     // param-hint: szUserSid optional
     // param-hint: szProductBuf fixed=39 optional
     // param-hint: pdwInstalledContext optional
     // param-hint: szSid len=param[7] optional
     // param-hint: pcchSid optional
     func MsiEnumClientsExA(szComponent: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: UInt32, dwProductIndex: UInt32, szProductBuf: CPointer<UInt8>, pdwInstalledContext: CPointer<Int32>, szSid: CPointer<UInt8>, pcchSid: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumClientsExA == "on"]
+public unsafe func Windows_MsiEnumClientsExA(szComponent: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: UInt32, dwProductIndex: UInt32, szProductBuf: CPointer<UInt8>, pdwInstalledContext: CPointer<Int32>, szSid: CPointer<UInt8>, pcchSid: CPointer<UInt32>): UInt32 {
+    return MsiEnumClientsExA(szComponent, szUserSid, dwContext, dwProductIndex, szProductBuf, pdwInstalledContext, szSid, pcchSid)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumClientsExW == "on"]
+foreign {
     // param-hint: szUserSid optional
     // param-hint: szProductBuf fixed=39 optional
     // param-hint: pdwInstalledContext optional
     // param-hint: szSid len=param[7] optional
     // param-hint: pcchSid optional
     func MsiEnumClientsExW(szComponent: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: UInt32, dwProductIndex: UInt32, szProductBuf: CPointer<UInt16>, pdwInstalledContext: CPointer<Int32>, szSid: CPointer<UInt16>, pcchSid: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumClientsExW == "on"]
+public unsafe func Windows_MsiEnumClientsExW(szComponent: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: UInt32, dwProductIndex: UInt32, szProductBuf: CPointer<UInt16>, pdwInstalledContext: CPointer<Int32>, szSid: CPointer<UInt16>, pcchSid: CPointer<UInt32>): UInt32 {
+    return MsiEnumClientsExW(szComponent, szUserSid, dwContext, dwProductIndex, szProductBuf, pdwInstalledContext, szSid, pcchSid)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumClientsW == "on"]
+foreign {
     func MsiEnumClientsW(szComponent: CPointer<UInt16>, iProductIndex: UInt32, lpProductBuf: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumClientsW == "on"]
+public unsafe func Windows_MsiEnumClientsW(szComponent: CPointer<UInt16>, iProductIndex: UInt32, lpProductBuf: CPointer<UInt16>): UInt32 {
+    return MsiEnumClientsW(szComponent, iProductIndex, lpProductBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumComponentCostsA == "on"]
+foreign {
     // param-hint: szDriveBuf len=param[5]
     func MsiEnumComponentCostsA(hInstall: MSIHANDLE, szComponent: CPointer<UInt8>, dwIndex: UInt32, iState: Int32, szDriveBuf: CPointer<UInt8>, pcchDriveBuf: CPointer<UInt32>, piCost: CPointer<Int32>, piTempCost: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumComponentCostsA == "on"]
+public unsafe func Windows_MsiEnumComponentCostsA(hInstall: MSIHANDLE, szComponent: CPointer<UInt8>, dwIndex: UInt32, iState: Int32, szDriveBuf: CPointer<UInt8>, pcchDriveBuf: CPointer<UInt32>, piCost: CPointer<Int32>, piTempCost: CPointer<Int32>): UInt32 {
+    return MsiEnumComponentCostsA(hInstall, szComponent, dwIndex, iState, szDriveBuf, pcchDriveBuf, piCost, piTempCost)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumComponentCostsW == "on"]
+foreign {
     // param-hint: szDriveBuf len=param[5]
     func MsiEnumComponentCostsW(hInstall: MSIHANDLE, szComponent: CPointer<UInt16>, dwIndex: UInt32, iState: Int32, szDriveBuf: CPointer<UInt16>, pcchDriveBuf: CPointer<UInt32>, piCost: CPointer<Int32>, piTempCost: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumComponentCostsW == "on"]
+public unsafe func Windows_MsiEnumComponentCostsW(hInstall: MSIHANDLE, szComponent: CPointer<UInt16>, dwIndex: UInt32, iState: Int32, szDriveBuf: CPointer<UInt16>, pcchDriveBuf: CPointer<UInt32>, piCost: CPointer<Int32>, piTempCost: CPointer<Int32>): UInt32 {
+    return MsiEnumComponentCostsW(hInstall, szComponent, dwIndex, iState, szDriveBuf, pcchDriveBuf, piCost, piTempCost)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumComponentQualifiersA == "on"]
+foreign {
     // param-hint: lpQualifierBuf len=param[3]
     // param-hint: lpApplicationDataBuf len=param[5] optional
     // param-hint: pcchApplicationDataBuf optional
     func MsiEnumComponentQualifiersA(szComponent: CPointer<UInt8>, iIndex: UInt32, lpQualifierBuf: CPointer<UInt8>, pcchQualifierBuf: CPointer<UInt32>, lpApplicationDataBuf: CPointer<UInt8>, pcchApplicationDataBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumComponentQualifiersA == "on"]
+public unsafe func Windows_MsiEnumComponentQualifiersA(szComponent: CPointer<UInt8>, iIndex: UInt32, lpQualifierBuf: CPointer<UInt8>, pcchQualifierBuf: CPointer<UInt32>, lpApplicationDataBuf: CPointer<UInt8>, pcchApplicationDataBuf: CPointer<UInt32>): UInt32 {
+    return MsiEnumComponentQualifiersA(szComponent, iIndex, lpQualifierBuf, pcchQualifierBuf, lpApplicationDataBuf, pcchApplicationDataBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumComponentQualifiersW == "on"]
+foreign {
     // param-hint: lpQualifierBuf len=param[3]
     // param-hint: lpApplicationDataBuf len=param[5] optional
     // param-hint: pcchApplicationDataBuf optional
     func MsiEnumComponentQualifiersW(szComponent: CPointer<UInt16>, iIndex: UInt32, lpQualifierBuf: CPointer<UInt16>, pcchQualifierBuf: CPointer<UInt32>, lpApplicationDataBuf: CPointer<UInt16>, pcchApplicationDataBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumComponentQualifiersW == "on"]
+public unsafe func Windows_MsiEnumComponentQualifiersW(szComponent: CPointer<UInt16>, iIndex: UInt32, lpQualifierBuf: CPointer<UInt16>, pcchQualifierBuf: CPointer<UInt32>, lpApplicationDataBuf: CPointer<UInt16>, pcchApplicationDataBuf: CPointer<UInt32>): UInt32 {
+    return MsiEnumComponentQualifiersW(szComponent, iIndex, lpQualifierBuf, pcchQualifierBuf, lpApplicationDataBuf, pcchApplicationDataBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumComponentsA == "on"]
+foreign {
     func MsiEnumComponentsA(iComponentIndex: UInt32, lpComponentBuf: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumComponentsA == "on"]
+public unsafe func Windows_MsiEnumComponentsA(iComponentIndex: UInt32, lpComponentBuf: CPointer<UInt8>): UInt32 {
+    return MsiEnumComponentsA(iComponentIndex, lpComponentBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumComponentsExA == "on"]
+foreign {
     // param-hint: szUserSid optional
     // param-hint: szInstalledComponentCode fixed=39 optional
     // param-hint: pdwInstalledContext optional
     // param-hint: szSid len=param[6] optional
     // param-hint: pcchSid optional
     func MsiEnumComponentsExA(szUserSid: CPointer<UInt8>, dwContext: UInt32, dwIndex: UInt32, szInstalledComponentCode: CPointer<UInt8>, pdwInstalledContext: CPointer<Int32>, szSid: CPointer<UInt8>, pcchSid: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumComponentsExA == "on"]
+public unsafe func Windows_MsiEnumComponentsExA(szUserSid: CPointer<UInt8>, dwContext: UInt32, dwIndex: UInt32, szInstalledComponentCode: CPointer<UInt8>, pdwInstalledContext: CPointer<Int32>, szSid: CPointer<UInt8>, pcchSid: CPointer<UInt32>): UInt32 {
+    return MsiEnumComponentsExA(szUserSid, dwContext, dwIndex, szInstalledComponentCode, pdwInstalledContext, szSid, pcchSid)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumComponentsExW == "on"]
+foreign {
     // param-hint: szUserSid optional
     // param-hint: szInstalledComponentCode fixed=39 optional
     // param-hint: pdwInstalledContext optional
     // param-hint: szSid len=param[6] optional
     // param-hint: pcchSid optional
     func MsiEnumComponentsExW(szUserSid: CPointer<UInt16>, dwContext: UInt32, dwIndex: UInt32, szInstalledComponentCode: CPointer<UInt16>, pdwInstalledContext: CPointer<Int32>, szSid: CPointer<UInt16>, pcchSid: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumComponentsExW == "on"]
+public unsafe func Windows_MsiEnumComponentsExW(szUserSid: CPointer<UInt16>, dwContext: UInt32, dwIndex: UInt32, szInstalledComponentCode: CPointer<UInt16>, pdwInstalledContext: CPointer<Int32>, szSid: CPointer<UInt16>, pcchSid: CPointer<UInt32>): UInt32 {
+    return MsiEnumComponentsExW(szUserSid, dwContext, dwIndex, szInstalledComponentCode, pdwInstalledContext, szSid, pcchSid)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumComponentsW == "on"]
+foreign {
     func MsiEnumComponentsW(iComponentIndex: UInt32, lpComponentBuf: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumComponentsW == "on"]
+public unsafe func Windows_MsiEnumComponentsW(iComponentIndex: UInt32, lpComponentBuf: CPointer<UInt16>): UInt32 {
+    return MsiEnumComponentsW(iComponentIndex, lpComponentBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumFeaturesA == "on"]
+foreign {
     // param-hint: lpParentBuf optional
     func MsiEnumFeaturesA(szProduct: CPointer<UInt8>, iFeatureIndex: UInt32, lpFeatureBuf: CPointer<UInt8>, lpParentBuf: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumFeaturesA == "on"]
+public unsafe func Windows_MsiEnumFeaturesA(szProduct: CPointer<UInt8>, iFeatureIndex: UInt32, lpFeatureBuf: CPointer<UInt8>, lpParentBuf: CPointer<UInt8>): UInt32 {
+    return MsiEnumFeaturesA(szProduct, iFeatureIndex, lpFeatureBuf, lpParentBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumFeaturesW == "on"]
+foreign {
     // param-hint: lpParentBuf optional
     func MsiEnumFeaturesW(szProduct: CPointer<UInt16>, iFeatureIndex: UInt32, lpFeatureBuf: CPointer<UInt16>, lpParentBuf: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumFeaturesW == "on"]
+public unsafe func Windows_MsiEnumFeaturesW(szProduct: CPointer<UInt16>, iFeatureIndex: UInt32, lpFeatureBuf: CPointer<UInt16>, lpParentBuf: CPointer<UInt16>): UInt32 {
+    return MsiEnumFeaturesW(szProduct, iFeatureIndex, lpFeatureBuf, lpParentBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumPatchesA == "on"]
+foreign {
     // param-hint: lpTransformsBuf len=param[4]
     func MsiEnumPatchesA(szProduct: CPointer<UInt8>, iPatchIndex: UInt32, lpPatchBuf: CPointer<UInt8>, lpTransformsBuf: CPointer<UInt8>, pcchTransformsBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumPatchesA == "on"]
+public unsafe func Windows_MsiEnumPatchesA(szProduct: CPointer<UInt8>, iPatchIndex: UInt32, lpPatchBuf: CPointer<UInt8>, lpTransformsBuf: CPointer<UInt8>, pcchTransformsBuf: CPointer<UInt32>): UInt32 {
+    return MsiEnumPatchesA(szProduct, iPatchIndex, lpPatchBuf, lpTransformsBuf, pcchTransformsBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumPatchesExA == "on"]
+foreign {
     // param-hint: szProductCode optional
     // param-hint: szUserSid optional
     // param-hint: szPatchCode fixed=39 optional
@@ -8870,6 +9719,15 @@ foreign {
     // param-hint: szTargetUserSid len=param[9] optional
     // param-hint: pcchTargetUserSid optional
     func MsiEnumPatchesExA(szProductCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: UInt32, dwFilter: UInt32, dwIndex: UInt32, szPatchCode: CPointer<UInt8>, szTargetProductCode: CPointer<UInt8>, pdwTargetProductContext: CPointer<Int32>, szTargetUserSid: CPointer<UInt8>, pcchTargetUserSid: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumPatchesExA == "on"]
+public unsafe func Windows_MsiEnumPatchesExA(szProductCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: UInt32, dwFilter: UInt32, dwIndex: UInt32, szPatchCode: CPointer<UInt8>, szTargetProductCode: CPointer<UInt8>, pdwTargetProductContext: CPointer<Int32>, szTargetUserSid: CPointer<UInt8>, pcchTargetUserSid: CPointer<UInt32>): UInt32 {
+    return MsiEnumPatchesExA(szProductCode, szUserSid, dwContext, dwFilter, dwIndex, szPatchCode, szTargetProductCode, pdwTargetProductContext, szTargetUserSid, pcchTargetUserSid)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumPatchesExW == "on"]
+foreign {
     // param-hint: szProductCode optional
     // param-hint: szUserSid optional
     // param-hint: szPatchCode fixed=39 optional
@@ -8878,9 +9736,36 @@ foreign {
     // param-hint: szTargetUserSid len=param[9] optional
     // param-hint: pcchTargetUserSid optional
     func MsiEnumPatchesExW(szProductCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: UInt32, dwFilter: UInt32, dwIndex: UInt32, szPatchCode: CPointer<UInt16>, szTargetProductCode: CPointer<UInt16>, pdwTargetProductContext: CPointer<Int32>, szTargetUserSid: CPointer<UInt16>, pcchTargetUserSid: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumPatchesExW == "on"]
+public unsafe func Windows_MsiEnumPatchesExW(szProductCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: UInt32, dwFilter: UInt32, dwIndex: UInt32, szPatchCode: CPointer<UInt16>, szTargetProductCode: CPointer<UInt16>, pdwTargetProductContext: CPointer<Int32>, szTargetUserSid: CPointer<UInt16>, pcchTargetUserSid: CPointer<UInt32>): UInt32 {
+    return MsiEnumPatchesExW(szProductCode, szUserSid, dwContext, dwFilter, dwIndex, szPatchCode, szTargetProductCode, pdwTargetProductContext, szTargetUserSid, pcchTargetUserSid)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumPatchesW == "on"]
+foreign {
     // param-hint: lpTransformsBuf len=param[4]
     func MsiEnumPatchesW(szProduct: CPointer<UInt16>, iPatchIndex: UInt32, lpPatchBuf: CPointer<UInt16>, lpTransformsBuf: CPointer<UInt16>, pcchTransformsBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumPatchesW == "on"]
+public unsafe func Windows_MsiEnumPatchesW(szProduct: CPointer<UInt16>, iPatchIndex: UInt32, lpPatchBuf: CPointer<UInt16>, lpTransformsBuf: CPointer<UInt16>, pcchTransformsBuf: CPointer<UInt32>): UInt32 {
+    return MsiEnumPatchesW(szProduct, iPatchIndex, lpPatchBuf, lpTransformsBuf, pcchTransformsBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumProductsA == "on"]
+foreign {
     func MsiEnumProductsA(iProductIndex: UInt32, lpProductBuf: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumProductsA == "on"]
+public unsafe func Windows_MsiEnumProductsA(iProductIndex: UInt32, lpProductBuf: CPointer<UInt8>): UInt32 {
+    return MsiEnumProductsA(iProductIndex, lpProductBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumProductsExA == "on"]
+foreign {
     // param-hint: szProductCode optional
     // param-hint: szUserSid optional
     // param-hint: szInstalledProductCode fixed=39 optional
@@ -8888,6 +9773,15 @@ foreign {
     // param-hint: szSid len=param[7] optional
     // param-hint: pcchSid optional
     func MsiEnumProductsExA(szProductCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: UInt32, dwIndex: UInt32, szInstalledProductCode: CPointer<UInt8>, pdwInstalledContext: CPointer<Int32>, szSid: CPointer<UInt8>, pcchSid: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumProductsExA == "on"]
+public unsafe func Windows_MsiEnumProductsExA(szProductCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: UInt32, dwIndex: UInt32, szInstalledProductCode: CPointer<UInt8>, pdwInstalledContext: CPointer<Int32>, szSid: CPointer<UInt8>, pcchSid: CPointer<UInt32>): UInt32 {
+    return MsiEnumProductsExA(szProductCode, szUserSid, dwContext, dwIndex, szInstalledProductCode, pdwInstalledContext, szSid, pcchSid)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumProductsExW == "on"]
+foreign {
     // param-hint: szProductCode optional
     // param-hint: szUserSid optional
     // param-hint: szInstalledProductCode fixed=39 optional
@@ -8895,115 +9789,553 @@ foreign {
     // param-hint: szSid len=param[7] optional
     // param-hint: pcchSid optional
     func MsiEnumProductsExW(szProductCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: UInt32, dwIndex: UInt32, szInstalledProductCode: CPointer<UInt16>, pdwInstalledContext: CPointer<Int32>, szSid: CPointer<UInt16>, pcchSid: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumProductsExW == "on"]
+public unsafe func Windows_MsiEnumProductsExW(szProductCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: UInt32, dwIndex: UInt32, szInstalledProductCode: CPointer<UInt16>, pdwInstalledContext: CPointer<Int32>, szSid: CPointer<UInt16>, pcchSid: CPointer<UInt32>): UInt32 {
+    return MsiEnumProductsExW(szProductCode, szUserSid, dwContext, dwIndex, szInstalledProductCode, pdwInstalledContext, szSid, pcchSid)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumProductsW == "on"]
+foreign {
     func MsiEnumProductsW(iProductIndex: UInt32, lpProductBuf: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumProductsW == "on"]
+public unsafe func Windows_MsiEnumProductsW(iProductIndex: UInt32, lpProductBuf: CPointer<UInt16>): UInt32 {
+    return MsiEnumProductsW(iProductIndex, lpProductBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumRelatedProductsA == "on"]
+foreign {
     // param-hint: dwReserved optional reserved
     func MsiEnumRelatedProductsA(lpUpgradeCode: CPointer<UInt8>, dwReserved: UInt32, iProductIndex: UInt32, lpProductBuf: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumRelatedProductsA == "on"]
+public unsafe func Windows_MsiEnumRelatedProductsA(lpUpgradeCode: CPointer<UInt8>, dwReserved: UInt32, iProductIndex: UInt32, lpProductBuf: CPointer<UInt8>): UInt32 {
+    return MsiEnumRelatedProductsA(lpUpgradeCode, dwReserved, iProductIndex, lpProductBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumRelatedProductsW == "on"]
+foreign {
     // param-hint: dwReserved optional reserved
     func MsiEnumRelatedProductsW(lpUpgradeCode: CPointer<UInt16>, dwReserved: UInt32, iProductIndex: UInt32, lpProductBuf: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEnumRelatedProductsW == "on"]
+public unsafe func Windows_MsiEnumRelatedProductsW(lpUpgradeCode: CPointer<UInt16>, dwReserved: UInt32, iProductIndex: UInt32, lpProductBuf: CPointer<UInt16>): UInt32 {
+    return MsiEnumRelatedProductsW(lpUpgradeCode, dwReserved, iProductIndex, lpProductBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEvaluateConditionA == "on"]
+foreign {
     func MsiEvaluateConditionA(hInstall: MSIHANDLE, szCondition: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEvaluateConditionA == "on"]
+public unsafe func Windows_MsiEvaluateConditionA(hInstall: MSIHANDLE, szCondition: CPointer<UInt8>): Int32 {
+    return MsiEvaluateConditionA(hInstall, szCondition)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEvaluateConditionW == "on"]
+foreign {
     func MsiEvaluateConditionW(hInstall: MSIHANDLE, szCondition: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiEvaluateConditionW == "on"]
+public unsafe func Windows_MsiEvaluateConditionW(hInstall: MSIHANDLE, szCondition: CPointer<UInt16>): Int32 {
+    return MsiEvaluateConditionW(hInstall, szCondition)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiExtractPatchXMLDataA == "on"]
+foreign {
     // param-hint: dwReserved optional reserved
     // param-hint: szXMLData len=param[3] optional
     // param-hint: pcchXMLData optional
     func MsiExtractPatchXMLDataA(szPatchPath: CPointer<UInt8>, dwReserved: UInt32, szXMLData: CPointer<UInt8>, pcchXMLData: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiExtractPatchXMLDataA == "on"]
+public unsafe func Windows_MsiExtractPatchXMLDataA(szPatchPath: CPointer<UInt8>, dwReserved: UInt32, szXMLData: CPointer<UInt8>, pcchXMLData: CPointer<UInt32>): UInt32 {
+    return MsiExtractPatchXMLDataA(szPatchPath, dwReserved, szXMLData, pcchXMLData)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiExtractPatchXMLDataW == "on"]
+foreign {
     // param-hint: dwReserved optional reserved
     // param-hint: szXMLData len=param[3] optional
     // param-hint: pcchXMLData optional
     func MsiExtractPatchXMLDataW(szPatchPath: CPointer<UInt16>, dwReserved: UInt32, szXMLData: CPointer<UInt16>, pcchXMLData: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiExtractPatchXMLDataW == "on"]
+public unsafe func Windows_MsiExtractPatchXMLDataW(szPatchPath: CPointer<UInt16>, dwReserved: UInt32, szXMLData: CPointer<UInt16>, pcchXMLData: CPointer<UInt32>): UInt32 {
+    return MsiExtractPatchXMLDataW(szPatchPath, dwReserved, szXMLData, pcchXMLData)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiFormatRecordA == "on"]
+foreign {
     // param-hint: szResultBuf len=param[3] optional
     // param-hint: pcchResultBuf optional
     func MsiFormatRecordA(hInstall: MSIHANDLE, hRecord: MSIHANDLE, szResultBuf: CPointer<UInt8>, pcchResultBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiFormatRecordA == "on"]
+public unsafe func Windows_MsiFormatRecordA(hInstall: MSIHANDLE, hRecord: MSIHANDLE, szResultBuf: CPointer<UInt8>, pcchResultBuf: CPointer<UInt32>): UInt32 {
+    return MsiFormatRecordA(hInstall, hRecord, szResultBuf, pcchResultBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiFormatRecordW == "on"]
+foreign {
     // param-hint: szResultBuf len=param[3] optional
     // param-hint: pcchResultBuf optional
     func MsiFormatRecordW(hInstall: MSIHANDLE, hRecord: MSIHANDLE, szResultBuf: CPointer<UInt16>, pcchResultBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiFormatRecordW == "on"]
+public unsafe func Windows_MsiFormatRecordW(hInstall: MSIHANDLE, hRecord: MSIHANDLE, szResultBuf: CPointer<UInt16>, pcchResultBuf: CPointer<UInt32>): UInt32 {
+    return MsiFormatRecordW(hInstall, hRecord, szResultBuf, pcchResultBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetActiveDatabase == "on"]
+foreign {
     func MsiGetActiveDatabase(hInstall: MSIHANDLE): MSIHANDLE
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetActiveDatabase == "on"]
+public unsafe func Windows_MsiGetActiveDatabase(hInstall: MSIHANDLE): MSIHANDLE {
+    return MsiGetActiveDatabase(hInstall)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetComponentPathA == "on"]
+foreign {
     // param-hint: lpPathBuf len=param[3] optional
     // param-hint: pcchBuf optional
     func MsiGetComponentPathA(szProduct: CPointer<UInt8>, szComponent: CPointer<UInt8>, lpPathBuf: CPointer<UInt8>, pcchBuf: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetComponentPathA == "on"]
+public unsafe func Windows_MsiGetComponentPathA(szProduct: CPointer<UInt8>, szComponent: CPointer<UInt8>, lpPathBuf: CPointer<UInt8>, pcchBuf: CPointer<UInt32>): Int32 {
+    return MsiGetComponentPathA(szProduct, szComponent, lpPathBuf, pcchBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetComponentPathExA == "on"]
+foreign {
     // param-hint: szUserSid optional
     // param-hint: dwContext optional
     // param-hint: lpOutPathBuffer len=param[5] optional
     // param-hint: pcchOutPathBuffer optional
     func MsiGetComponentPathExA(szProductCode: CPointer<UInt8>, szComponentCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: Int32, lpOutPathBuffer: CPointer<UInt8>, pcchOutPathBuffer: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetComponentPathExA == "on"]
+public unsafe func Windows_MsiGetComponentPathExA(szProductCode: CPointer<UInt8>, szComponentCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: Int32, lpOutPathBuffer: CPointer<UInt8>, pcchOutPathBuffer: CPointer<UInt32>): Int32 {
+    return MsiGetComponentPathExA(szProductCode, szComponentCode, szUserSid, dwContext, lpOutPathBuffer, pcchOutPathBuffer)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetComponentPathExW == "on"]
+foreign {
     // param-hint: szUserSid optional
     // param-hint: dwContext optional
     // param-hint: lpOutPathBuffer len=param[5] optional
     // param-hint: pcchOutPathBuffer optional
     func MsiGetComponentPathExW(szProductCode: CPointer<UInt16>, szComponentCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: Int32, lpOutPathBuffer: CPointer<UInt16>, pcchOutPathBuffer: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetComponentPathExW == "on"]
+public unsafe func Windows_MsiGetComponentPathExW(szProductCode: CPointer<UInt16>, szComponentCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: Int32, lpOutPathBuffer: CPointer<UInt16>, pcchOutPathBuffer: CPointer<UInt32>): Int32 {
+    return MsiGetComponentPathExW(szProductCode, szComponentCode, szUserSid, dwContext, lpOutPathBuffer, pcchOutPathBuffer)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetComponentPathW == "on"]
+foreign {
     // param-hint: lpPathBuf len=param[3] optional
     // param-hint: pcchBuf optional
     func MsiGetComponentPathW(szProduct: CPointer<UInt16>, szComponent: CPointer<UInt16>, lpPathBuf: CPointer<UInt16>, pcchBuf: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetComponentPathW == "on"]
+public unsafe func Windows_MsiGetComponentPathW(szProduct: CPointer<UInt16>, szComponent: CPointer<UInt16>, lpPathBuf: CPointer<UInt16>, pcchBuf: CPointer<UInt32>): Int32 {
+    return MsiGetComponentPathW(szProduct, szComponent, lpPathBuf, pcchBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetComponentStateA == "on"]
+foreign {
     func MsiGetComponentStateA(hInstall: MSIHANDLE, szComponent: CPointer<UInt8>, piInstalled: CPointer<Int32>, piAction: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetComponentStateA == "on"]
+public unsafe func Windows_MsiGetComponentStateA(hInstall: MSIHANDLE, szComponent: CPointer<UInt8>, piInstalled: CPointer<Int32>, piAction: CPointer<Int32>): UInt32 {
+    return MsiGetComponentStateA(hInstall, szComponent, piInstalled, piAction)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetComponentStateW == "on"]
+foreign {
     func MsiGetComponentStateW(hInstall: MSIHANDLE, szComponent: CPointer<UInt16>, piInstalled: CPointer<Int32>, piAction: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetComponentStateW == "on"]
+public unsafe func Windows_MsiGetComponentStateW(hInstall: MSIHANDLE, szComponent: CPointer<UInt16>, piInstalled: CPointer<Int32>, piAction: CPointer<Int32>): UInt32 {
+    return MsiGetComponentStateW(hInstall, szComponent, piInstalled, piAction)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetDatabaseState == "on"]
+foreign {
     func MsiGetDatabaseState(hDatabase: MSIHANDLE): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetDatabaseState == "on"]
+public unsafe func Windows_MsiGetDatabaseState(hDatabase: MSIHANDLE): Int32 {
+    return MsiGetDatabaseState(hDatabase)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFeatureCostA == "on"]
+foreign {
     func MsiGetFeatureCostA(hInstall: MSIHANDLE, szFeature: CPointer<UInt8>, iCostTree: Int32, iState: Int32, piCost: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFeatureCostA == "on"]
+public unsafe func Windows_MsiGetFeatureCostA(hInstall: MSIHANDLE, szFeature: CPointer<UInt8>, iCostTree: Int32, iState: Int32, piCost: CPointer<Int32>): UInt32 {
+    return MsiGetFeatureCostA(hInstall, szFeature, iCostTree, iState, piCost)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFeatureCostW == "on"]
+foreign {
     func MsiGetFeatureCostW(hInstall: MSIHANDLE, szFeature: CPointer<UInt16>, iCostTree: Int32, iState: Int32, piCost: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFeatureCostW == "on"]
+public unsafe func Windows_MsiGetFeatureCostW(hInstall: MSIHANDLE, szFeature: CPointer<UInt16>, iCostTree: Int32, iState: Int32, piCost: CPointer<Int32>): UInt32 {
+    return MsiGetFeatureCostW(hInstall, szFeature, iCostTree, iState, piCost)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFeatureInfoA == "on"]
+foreign {
     // param-hint: lpAttributes optional
     // param-hint: lpTitleBuf len=param[4] optional
     // param-hint: pcchTitleBuf optional
     // param-hint: lpHelpBuf len=param[6] optional
     // param-hint: pcchHelpBuf optional
     func MsiGetFeatureInfoA(hProduct: MSIHANDLE, szFeature: CPointer<UInt8>, lpAttributes: CPointer<UInt32>, lpTitleBuf: CPointer<UInt8>, pcchTitleBuf: CPointer<UInt32>, lpHelpBuf: CPointer<UInt8>, pcchHelpBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFeatureInfoA == "on"]
+public unsafe func Windows_MsiGetFeatureInfoA(hProduct: MSIHANDLE, szFeature: CPointer<UInt8>, lpAttributes: CPointer<UInt32>, lpTitleBuf: CPointer<UInt8>, pcchTitleBuf: CPointer<UInt32>, lpHelpBuf: CPointer<UInt8>, pcchHelpBuf: CPointer<UInt32>): UInt32 {
+    return MsiGetFeatureInfoA(hProduct, szFeature, lpAttributes, lpTitleBuf, pcchTitleBuf, lpHelpBuf, pcchHelpBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFeatureInfoW == "on"]
+foreign {
     // param-hint: lpAttributes optional
     // param-hint: lpTitleBuf len=param[4] optional
     // param-hint: pcchTitleBuf optional
     // param-hint: lpHelpBuf len=param[6] optional
     // param-hint: pcchHelpBuf optional
     func MsiGetFeatureInfoW(hProduct: MSIHANDLE, szFeature: CPointer<UInt16>, lpAttributes: CPointer<UInt32>, lpTitleBuf: CPointer<UInt16>, pcchTitleBuf: CPointer<UInt32>, lpHelpBuf: CPointer<UInt16>, pcchHelpBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFeatureInfoW == "on"]
+public unsafe func Windows_MsiGetFeatureInfoW(hProduct: MSIHANDLE, szFeature: CPointer<UInt16>, lpAttributes: CPointer<UInt32>, lpTitleBuf: CPointer<UInt16>, pcchTitleBuf: CPointer<UInt32>, lpHelpBuf: CPointer<UInt16>, pcchHelpBuf: CPointer<UInt32>): UInt32 {
+    return MsiGetFeatureInfoW(hProduct, szFeature, lpAttributes, lpTitleBuf, pcchTitleBuf, lpHelpBuf, pcchHelpBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFeatureStateA == "on"]
+foreign {
     func MsiGetFeatureStateA(hInstall: MSIHANDLE, szFeature: CPointer<UInt8>, piInstalled: CPointer<Int32>, piAction: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFeatureStateA == "on"]
+public unsafe func Windows_MsiGetFeatureStateA(hInstall: MSIHANDLE, szFeature: CPointer<UInt8>, piInstalled: CPointer<Int32>, piAction: CPointer<Int32>): UInt32 {
+    return MsiGetFeatureStateA(hInstall, szFeature, piInstalled, piAction)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFeatureStateW == "on"]
+foreign {
     func MsiGetFeatureStateW(hInstall: MSIHANDLE, szFeature: CPointer<UInt16>, piInstalled: CPointer<Int32>, piAction: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFeatureStateW == "on"]
+public unsafe func Windows_MsiGetFeatureStateW(hInstall: MSIHANDLE, szFeature: CPointer<UInt16>, piInstalled: CPointer<Int32>, piAction: CPointer<Int32>): UInt32 {
+    return MsiGetFeatureStateW(hInstall, szFeature, piInstalled, piAction)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFeatureUsageA == "on"]
+foreign {
     // param-hint: pdwUseCount optional
     // param-hint: pwDateUsed optional
     func MsiGetFeatureUsageA(szProduct: CPointer<UInt8>, szFeature: CPointer<UInt8>, pdwUseCount: CPointer<UInt32>, pwDateUsed: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFeatureUsageA == "on"]
+public unsafe func Windows_MsiGetFeatureUsageA(szProduct: CPointer<UInt8>, szFeature: CPointer<UInt8>, pdwUseCount: CPointer<UInt32>, pwDateUsed: CPointer<UInt16>): UInt32 {
+    return MsiGetFeatureUsageA(szProduct, szFeature, pdwUseCount, pwDateUsed)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFeatureUsageW == "on"]
+foreign {
     // param-hint: pdwUseCount optional
     // param-hint: pwDateUsed optional
     func MsiGetFeatureUsageW(szProduct: CPointer<UInt16>, szFeature: CPointer<UInt16>, pdwUseCount: CPointer<UInt32>, pwDateUsed: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFeatureUsageW == "on"]
+public unsafe func Windows_MsiGetFeatureUsageW(szProduct: CPointer<UInt16>, szFeature: CPointer<UInt16>, pdwUseCount: CPointer<UInt32>, pwDateUsed: CPointer<UInt16>): UInt32 {
+    return MsiGetFeatureUsageW(szProduct, szFeature, pdwUseCount, pwDateUsed)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFeatureValidStatesA == "on"]
+foreign {
     func MsiGetFeatureValidStatesA(hInstall: MSIHANDLE, szFeature: CPointer<UInt8>, lpInstallStates: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFeatureValidStatesA == "on"]
+public unsafe func Windows_MsiGetFeatureValidStatesA(hInstall: MSIHANDLE, szFeature: CPointer<UInt8>, lpInstallStates: CPointer<UInt32>): UInt32 {
+    return MsiGetFeatureValidStatesA(hInstall, szFeature, lpInstallStates)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFeatureValidStatesW == "on"]
+foreign {
     func MsiGetFeatureValidStatesW(hInstall: MSIHANDLE, szFeature: CPointer<UInt16>, lpInstallStates: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFeatureValidStatesW == "on"]
+public unsafe func Windows_MsiGetFeatureValidStatesW(hInstall: MSIHANDLE, szFeature: CPointer<UInt16>, lpInstallStates: CPointer<UInt32>): UInt32 {
+    return MsiGetFeatureValidStatesW(hInstall, szFeature, lpInstallStates)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFileHashA == "on"]
+foreign {
     func MsiGetFileHashA(szFilePath: CPointer<UInt8>, dwOptions: UInt32, pHash: CPointer<MSIFILEHASHINFO>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFileHashA == "on"]
+public unsafe func Windows_MsiGetFileHashA(szFilePath: CPointer<UInt8>, dwOptions: UInt32, pHash: CPointer<MSIFILEHASHINFO>): UInt32 {
+    return MsiGetFileHashA(szFilePath, dwOptions, pHash)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFileHashW == "on"]
+foreign {
     func MsiGetFileHashW(szFilePath: CPointer<UInt16>, dwOptions: UInt32, pHash: CPointer<MSIFILEHASHINFO>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFileHashW == "on"]
+public unsafe func Windows_MsiGetFileHashW(szFilePath: CPointer<UInt16>, dwOptions: UInt32, pHash: CPointer<MSIFILEHASHINFO>): UInt32 {
+    return MsiGetFileHashW(szFilePath, dwOptions, pHash)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFileSignatureInformationA == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
+    // param-hint: pbHashData bytes=param[4] optional
+    // param-hint: pcbHashData optional
+    func MsiGetFileSignatureInformationA(szSignedObjectPath: CPointer<UInt8>, dwFlags: UInt32, ppcCertContext: CPointer<CPointer<Win32__impl_l2.CERT_CONTEXT>>, pbHashData: CPointer<UInt8>, pcbHashData: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFileSignatureInformationA == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_MsiGetFileSignatureInformationA(szSignedObjectPath: CPointer<UInt8>, dwFlags: UInt32, ppcCertContext: CPointer<CPointer<Win32__impl_l2.CERT_CONTEXT>>, pbHashData: CPointer<UInt8>, pcbHashData: CPointer<UInt32>): Int32 {
+    return MsiGetFileSignatureInformationA(szSignedObjectPath, dwFlags, ppcCertContext, pbHashData, pcbHashData)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFileSignatureInformationW == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
+    // param-hint: pbHashData bytes=param[4] optional
+    // param-hint: pcbHashData optional
+    func MsiGetFileSignatureInformationW(szSignedObjectPath: CPointer<UInt16>, dwFlags: UInt32, ppcCertContext: CPointer<CPointer<Win32__impl_l2.CERT_CONTEXT>>, pbHashData: CPointer<UInt8>, pcbHashData: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFileSignatureInformationW == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_MsiGetFileSignatureInformationW(szSignedObjectPath: CPointer<UInt16>, dwFlags: UInt32, ppcCertContext: CPointer<CPointer<Win32__impl_l2.CERT_CONTEXT>>, pbHashData: CPointer<UInt8>, pcbHashData: CPointer<UInt32>): Int32 {
+    return MsiGetFileSignatureInformationW(szSignedObjectPath, dwFlags, ppcCertContext, pbHashData, pcbHashData)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFileVersionA == "on"]
+foreign {
     // param-hint: lpVersionBuf len=param[2] optional
     // param-hint: pcchVersionBuf optional
     // param-hint: lpLangBuf len=param[4] optional
     // param-hint: pcchLangBuf optional
     func MsiGetFileVersionA(szFilePath: CPointer<UInt8>, lpVersionBuf: CPointer<UInt8>, pcchVersionBuf: CPointer<UInt32>, lpLangBuf: CPointer<UInt8>, pcchLangBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFileVersionA == "on"]
+public unsafe func Windows_MsiGetFileVersionA(szFilePath: CPointer<UInt8>, lpVersionBuf: CPointer<UInt8>, pcchVersionBuf: CPointer<UInt32>, lpLangBuf: CPointer<UInt8>, pcchLangBuf: CPointer<UInt32>): UInt32 {
+    return MsiGetFileVersionA(szFilePath, lpVersionBuf, pcchVersionBuf, lpLangBuf, pcchLangBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFileVersionW == "on"]
+foreign {
     // param-hint: lpVersionBuf len=param[2] optional
     // param-hint: pcchVersionBuf optional
     // param-hint: lpLangBuf len=param[4] optional
     // param-hint: pcchLangBuf optional
     func MsiGetFileVersionW(szFilePath: CPointer<UInt16>, lpVersionBuf: CPointer<UInt16>, pcchVersionBuf: CPointer<UInt32>, lpLangBuf: CPointer<UInt16>, pcchLangBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetFileVersionW == "on"]
+public unsafe func Windows_MsiGetFileVersionW(szFilePath: CPointer<UInt16>, lpVersionBuf: CPointer<UInt16>, pcchVersionBuf: CPointer<UInt32>, lpLangBuf: CPointer<UInt16>, pcchLangBuf: CPointer<UInt32>): UInt32 {
+    return MsiGetFileVersionW(szFilePath, lpVersionBuf, pcchVersionBuf, lpLangBuf, pcchLangBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetLanguage == "on"]
+foreign {
     func MsiGetLanguage(hInstall: MSIHANDLE): UInt16
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetLanguage == "on"]
+public unsafe func Windows_MsiGetLanguage(hInstall: MSIHANDLE): UInt16 {
+    return MsiGetLanguage(hInstall)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetLastErrorRecord == "on"]
+foreign {
     func MsiGetLastErrorRecord(): MSIHANDLE
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetLastErrorRecord == "on"]
+public unsafe func Windows_MsiGetLastErrorRecord(): MSIHANDLE {
+    return MsiGetLastErrorRecord()
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetMode == "on"]
+foreign {
     func MsiGetMode(hInstall: MSIHANDLE, eRunMode: Int32): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetMode == "on"]
+public unsafe func Windows_MsiGetMode(hInstall: MSIHANDLE, eRunMode: Int32): Int32 {
+    return MsiGetMode(hInstall, eRunMode)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetPatchFileListA == "on"]
+foreign {
     func MsiGetPatchFileListA(szProductCode: CPointer<UInt8>, szPatchPackages: CPointer<UInt8>, pcFiles: CPointer<UInt32>, pphFileRecords: CPointer<CPointer<MSIHANDLE>>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetPatchFileListA == "on"]
+public unsafe func Windows_MsiGetPatchFileListA(szProductCode: CPointer<UInt8>, szPatchPackages: CPointer<UInt8>, pcFiles: CPointer<UInt32>, pphFileRecords: CPointer<CPointer<MSIHANDLE>>): UInt32 {
+    return MsiGetPatchFileListA(szProductCode, szPatchPackages, pcFiles, pphFileRecords)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetPatchFileListW == "on"]
+foreign {
     func MsiGetPatchFileListW(szProductCode: CPointer<UInt16>, szPatchPackages: CPointer<UInt16>, pcFiles: CPointer<UInt32>, pphFileRecords: CPointer<CPointer<MSIHANDLE>>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetPatchFileListW == "on"]
+public unsafe func Windows_MsiGetPatchFileListW(szProductCode: CPointer<UInt16>, szPatchPackages: CPointer<UInt16>, pcFiles: CPointer<UInt32>, pphFileRecords: CPointer<CPointer<MSIHANDLE>>): UInt32 {
+    return MsiGetPatchFileListW(szProductCode, szPatchPackages, pcFiles, pphFileRecords)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetPatchInfoA == "on"]
+foreign {
     // param-hint: lpValueBuf len=param[3] optional
     // param-hint: pcchValueBuf optional
     func MsiGetPatchInfoA(szPatch: CPointer<UInt8>, szAttribute: CPointer<UInt8>, lpValueBuf: CPointer<UInt8>, pcchValueBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetPatchInfoA == "on"]
+public unsafe func Windows_MsiGetPatchInfoA(szPatch: CPointer<UInt8>, szAttribute: CPointer<UInt8>, lpValueBuf: CPointer<UInt8>, pcchValueBuf: CPointer<UInt32>): UInt32 {
+    return MsiGetPatchInfoA(szPatch, szAttribute, lpValueBuf, pcchValueBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetPatchInfoExA == "on"]
+foreign {
     // param-hint: szUserSid optional
     // param-hint: lpValue len=param[6] optional
     // param-hint: pcchValue optional
     func MsiGetPatchInfoExA(szPatchCode: CPointer<UInt8>, szProductCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: Int32, szProperty: CPointer<UInt8>, lpValue: CPointer<UInt8>, pcchValue: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetPatchInfoExA == "on"]
+public unsafe func Windows_MsiGetPatchInfoExA(szPatchCode: CPointer<UInt8>, szProductCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: Int32, szProperty: CPointer<UInt8>, lpValue: CPointer<UInt8>, pcchValue: CPointer<UInt32>): UInt32 {
+    return MsiGetPatchInfoExA(szPatchCode, szProductCode, szUserSid, dwContext, szProperty, lpValue, pcchValue)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetPatchInfoExW == "on"]
+foreign {
     // param-hint: szUserSid optional
     // param-hint: lpValue len=param[6] optional
     // param-hint: pcchValue optional
     func MsiGetPatchInfoExW(szPatchCode: CPointer<UInt16>, szProductCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: Int32, szProperty: CPointer<UInt16>, lpValue: CPointer<UInt16>, pcchValue: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetPatchInfoExW == "on"]
+public unsafe func Windows_MsiGetPatchInfoExW(szPatchCode: CPointer<UInt16>, szProductCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: Int32, szProperty: CPointer<UInt16>, lpValue: CPointer<UInt16>, pcchValue: CPointer<UInt32>): UInt32 {
+    return MsiGetPatchInfoExW(szPatchCode, szProductCode, szUserSid, dwContext, szProperty, lpValue, pcchValue)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetPatchInfoW == "on"]
+foreign {
     // param-hint: lpValueBuf len=param[3] optional
     // param-hint: pcchValueBuf optional
     func MsiGetPatchInfoW(szPatch: CPointer<UInt16>, szAttribute: CPointer<UInt16>, lpValueBuf: CPointer<UInt16>, pcchValueBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetPatchInfoW == "on"]
+public unsafe func Windows_MsiGetPatchInfoW(szPatch: CPointer<UInt16>, szAttribute: CPointer<UInt16>, lpValueBuf: CPointer<UInt16>, pcchValueBuf: CPointer<UInt32>): UInt32 {
+    return MsiGetPatchInfoW(szPatch, szAttribute, lpValueBuf, pcchValueBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetProductCodeA == "on"]
+foreign {
     func MsiGetProductCodeA(szComponent: CPointer<UInt8>, lpBuf39: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetProductCodeA == "on"]
+public unsafe func Windows_MsiGetProductCodeA(szComponent: CPointer<UInt8>, lpBuf39: CPointer<UInt8>): UInt32 {
+    return MsiGetProductCodeA(szComponent, lpBuf39)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetProductCodeW == "on"]
+foreign {
     func MsiGetProductCodeW(szComponent: CPointer<UInt16>, lpBuf39: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetProductCodeW == "on"]
+public unsafe func Windows_MsiGetProductCodeW(szComponent: CPointer<UInt16>, lpBuf39: CPointer<UInt16>): UInt32 {
+    return MsiGetProductCodeW(szComponent, lpBuf39)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetProductInfoA == "on"]
+foreign {
     // param-hint: lpValueBuf len=param[3] optional
     // param-hint: pcchValueBuf optional
     func MsiGetProductInfoA(szProduct: CPointer<UInt8>, szAttribute: CPointer<UInt8>, lpValueBuf: CPointer<UInt8>, pcchValueBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetProductInfoA == "on"]
+public unsafe func Windows_MsiGetProductInfoA(szProduct: CPointer<UInt8>, szAttribute: CPointer<UInt8>, lpValueBuf: CPointer<UInt8>, pcchValueBuf: CPointer<UInt32>): UInt32 {
+    return MsiGetProductInfoA(szProduct, szAttribute, lpValueBuf, pcchValueBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetProductInfoExA == "on"]
+foreign {
     // param-hint: szUserSid optional
     // param-hint: szValue len=param[5] optional
     // param-hint: pcchValue optional
     func MsiGetProductInfoExA(szProductCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: Int32, szProperty: CPointer<UInt8>, szValue: CPointer<UInt8>, pcchValue: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetProductInfoExA == "on"]
+public unsafe func Windows_MsiGetProductInfoExA(szProductCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: Int32, szProperty: CPointer<UInt8>, szValue: CPointer<UInt8>, pcchValue: CPointer<UInt32>): UInt32 {
+    return MsiGetProductInfoExA(szProductCode, szUserSid, dwContext, szProperty, szValue, pcchValue)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetProductInfoExW == "on"]
+foreign {
     // param-hint: szUserSid optional
     // param-hint: szValue len=param[5] optional
     // param-hint: pcchValue optional
     func MsiGetProductInfoExW(szProductCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: Int32, szProperty: CPointer<UInt16>, szValue: CPointer<UInt16>, pcchValue: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetProductInfoExW == "on"]
+public unsafe func Windows_MsiGetProductInfoExW(szProductCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: Int32, szProperty: CPointer<UInt16>, szValue: CPointer<UInt16>, pcchValue: CPointer<UInt32>): UInt32 {
+    return MsiGetProductInfoExW(szProductCode, szUserSid, dwContext, szProperty, szValue, pcchValue)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetProductInfoFromScriptA == "on"]
+foreign {
     // param-hint: lpProductBuf39 optional
     // param-hint: plgidLanguage optional
     // param-hint: pdwVersion optional
@@ -9012,6 +10344,15 @@ foreign {
     // param-hint: lpPackageBuf len=param[7] optional
     // param-hint: pcchPackageBuf optional
     func MsiGetProductInfoFromScriptA(szScriptFile: CPointer<UInt8>, lpProductBuf39: CPointer<UInt8>, plgidLanguage: CPointer<UInt16>, pdwVersion: CPointer<UInt32>, lpNameBuf: CPointer<UInt8>, pcchNameBuf: CPointer<UInt32>, lpPackageBuf: CPointer<UInt8>, pcchPackageBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetProductInfoFromScriptA == "on"]
+public unsafe func Windows_MsiGetProductInfoFromScriptA(szScriptFile: CPointer<UInt8>, lpProductBuf39: CPointer<UInt8>, plgidLanguage: CPointer<UInt16>, pdwVersion: CPointer<UInt32>, lpNameBuf: CPointer<UInt8>, pcchNameBuf: CPointer<UInt32>, lpPackageBuf: CPointer<UInt8>, pcchPackageBuf: CPointer<UInt32>): UInt32 {
+    return MsiGetProductInfoFromScriptA(szScriptFile, lpProductBuf39, plgidLanguage, pdwVersion, lpNameBuf, pcchNameBuf, lpPackageBuf, pcchPackageBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetProductInfoFromScriptW == "on"]
+foreign {
     // param-hint: lpProductBuf39 optional
     // param-hint: plgidLanguage optional
     // param-hint: pdwVersion optional
@@ -9020,43 +10361,169 @@ foreign {
     // param-hint: lpPackageBuf len=param[7] optional
     // param-hint: pcchPackageBuf optional
     func MsiGetProductInfoFromScriptW(szScriptFile: CPointer<UInt16>, lpProductBuf39: CPointer<UInt16>, plgidLanguage: CPointer<UInt16>, pdwVersion: CPointer<UInt32>, lpNameBuf: CPointer<UInt16>, pcchNameBuf: CPointer<UInt32>, lpPackageBuf: CPointer<UInt16>, pcchPackageBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetProductInfoFromScriptW == "on"]
+public unsafe func Windows_MsiGetProductInfoFromScriptW(szScriptFile: CPointer<UInt16>, lpProductBuf39: CPointer<UInt16>, plgidLanguage: CPointer<UInt16>, pdwVersion: CPointer<UInt32>, lpNameBuf: CPointer<UInt16>, pcchNameBuf: CPointer<UInt32>, lpPackageBuf: CPointer<UInt16>, pcchPackageBuf: CPointer<UInt32>): UInt32 {
+    return MsiGetProductInfoFromScriptW(szScriptFile, lpProductBuf39, plgidLanguage, pdwVersion, lpNameBuf, pcchNameBuf, lpPackageBuf, pcchPackageBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetProductInfoW == "on"]
+foreign {
     // param-hint: lpValueBuf len=param[3] optional
     // param-hint: pcchValueBuf optional
     func MsiGetProductInfoW(szProduct: CPointer<UInt16>, szAttribute: CPointer<UInt16>, lpValueBuf: CPointer<UInt16>, pcchValueBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetProductInfoW == "on"]
+public unsafe func Windows_MsiGetProductInfoW(szProduct: CPointer<UInt16>, szAttribute: CPointer<UInt16>, lpValueBuf: CPointer<UInt16>, pcchValueBuf: CPointer<UInt32>): UInt32 {
+    return MsiGetProductInfoW(szProduct, szAttribute, lpValueBuf, pcchValueBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetProductPropertyA == "on"]
+foreign {
     // param-hint: lpValueBuf len=param[3] optional
     // param-hint: pcchValueBuf optional
     func MsiGetProductPropertyA(hProduct: MSIHANDLE, szProperty: CPointer<UInt8>, lpValueBuf: CPointer<UInt8>, pcchValueBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetProductPropertyA == "on"]
+public unsafe func Windows_MsiGetProductPropertyA(hProduct: MSIHANDLE, szProperty: CPointer<UInt8>, lpValueBuf: CPointer<UInt8>, pcchValueBuf: CPointer<UInt32>): UInt32 {
+    return MsiGetProductPropertyA(hProduct, szProperty, lpValueBuf, pcchValueBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetProductPropertyW == "on"]
+foreign {
     // param-hint: lpValueBuf len=param[3] optional
     // param-hint: pcchValueBuf optional
     func MsiGetProductPropertyW(hProduct: MSIHANDLE, szProperty: CPointer<UInt16>, lpValueBuf: CPointer<UInt16>, pcchValueBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetProductPropertyW == "on"]
+public unsafe func Windows_MsiGetProductPropertyW(hProduct: MSIHANDLE, szProperty: CPointer<UInt16>, lpValueBuf: CPointer<UInt16>, pcchValueBuf: CPointer<UInt32>): UInt32 {
+    return MsiGetProductPropertyW(hProduct, szProperty, lpValueBuf, pcchValueBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetPropertyA == "on"]
+foreign {
     // param-hint: szValueBuf len=param[3] optional
     // param-hint: pcchValueBuf optional
     func MsiGetPropertyA(hInstall: MSIHANDLE, szName: CPointer<UInt8>, szValueBuf: CPointer<UInt8>, pcchValueBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetPropertyA == "on"]
+public unsafe func Windows_MsiGetPropertyA(hInstall: MSIHANDLE, szName: CPointer<UInt8>, szValueBuf: CPointer<UInt8>, pcchValueBuf: CPointer<UInt32>): UInt32 {
+    return MsiGetPropertyA(hInstall, szName, szValueBuf, pcchValueBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetPropertyW == "on"]
+foreign {
     // param-hint: szValueBuf len=param[3] optional
     // param-hint: pcchValueBuf optional
     func MsiGetPropertyW(hInstall: MSIHANDLE, szName: CPointer<UInt16>, szValueBuf: CPointer<UInt16>, pcchValueBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetPropertyW == "on"]
+public unsafe func Windows_MsiGetPropertyW(hInstall: MSIHANDLE, szName: CPointer<UInt16>, szValueBuf: CPointer<UInt16>, pcchValueBuf: CPointer<UInt32>): UInt32 {
+    return MsiGetPropertyW(hInstall, szName, szValueBuf, pcchValueBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetShortcutTargetA == "on"]
+foreign {
     // param-hint: szProductCode optional
     // param-hint: szFeatureId optional
     // param-hint: szComponentCode optional
     func MsiGetShortcutTargetA(szShortcutPath: CPointer<UInt8>, szProductCode: CPointer<UInt8>, szFeatureId: CPointer<UInt8>, szComponentCode: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetShortcutTargetA == "on"]
+public unsafe func Windows_MsiGetShortcutTargetA(szShortcutPath: CPointer<UInt8>, szProductCode: CPointer<UInt8>, szFeatureId: CPointer<UInt8>, szComponentCode: CPointer<UInt8>): UInt32 {
+    return MsiGetShortcutTargetA(szShortcutPath, szProductCode, szFeatureId, szComponentCode)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetShortcutTargetW == "on"]
+foreign {
     // param-hint: szProductCode optional
     // param-hint: szFeatureId optional
     // param-hint: szComponentCode optional
     func MsiGetShortcutTargetW(szShortcutPath: CPointer<UInt16>, szProductCode: CPointer<UInt16>, szFeatureId: CPointer<UInt16>, szComponentCode: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetShortcutTargetW == "on"]
+public unsafe func Windows_MsiGetShortcutTargetW(szShortcutPath: CPointer<UInt16>, szProductCode: CPointer<UInt16>, szFeatureId: CPointer<UInt16>, szComponentCode: CPointer<UInt16>): UInt32 {
+    return MsiGetShortcutTargetW(szShortcutPath, szProductCode, szFeatureId, szComponentCode)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetSourcePathA == "on"]
+foreign {
     // param-hint: szPathBuf len=param[3] optional
     // param-hint: pcchPathBuf optional
     func MsiGetSourcePathA(hInstall: MSIHANDLE, szFolder: CPointer<UInt8>, szPathBuf: CPointer<UInt8>, pcchPathBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetSourcePathA == "on"]
+public unsafe func Windows_MsiGetSourcePathA(hInstall: MSIHANDLE, szFolder: CPointer<UInt8>, szPathBuf: CPointer<UInt8>, pcchPathBuf: CPointer<UInt32>): UInt32 {
+    return MsiGetSourcePathA(hInstall, szFolder, szPathBuf, pcchPathBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetSourcePathW == "on"]
+foreign {
     // param-hint: szPathBuf len=param[3] optional
     // param-hint: pcchPathBuf optional
     func MsiGetSourcePathW(hInstall: MSIHANDLE, szFolder: CPointer<UInt16>, szPathBuf: CPointer<UInt16>, pcchPathBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetSourcePathW == "on"]
+public unsafe func Windows_MsiGetSourcePathW(hInstall: MSIHANDLE, szFolder: CPointer<UInt16>, szPathBuf: CPointer<UInt16>, pcchPathBuf: CPointer<UInt32>): UInt32 {
+    return MsiGetSourcePathW(hInstall, szFolder, szPathBuf, pcchPathBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetSummaryInformationA == "on"]
+foreign {
     func MsiGetSummaryInformationA(hDatabase: MSIHANDLE, szDatabasePath: CPointer<UInt8>, uiUpdateCount: UInt32, phSummaryInfo: CPointer<MSIHANDLE>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetSummaryInformationA == "on"]
+public unsafe func Windows_MsiGetSummaryInformationA(hDatabase: MSIHANDLE, szDatabasePath: CPointer<UInt8>, uiUpdateCount: UInt32, phSummaryInfo: CPointer<MSIHANDLE>): UInt32 {
+    return MsiGetSummaryInformationA(hDatabase, szDatabasePath, uiUpdateCount, phSummaryInfo)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetSummaryInformationW == "on"]
+foreign {
     func MsiGetSummaryInformationW(hDatabase: MSIHANDLE, szDatabasePath: CPointer<UInt16>, uiUpdateCount: UInt32, phSummaryInfo: CPointer<MSIHANDLE>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetSummaryInformationW == "on"]
+public unsafe func Windows_MsiGetSummaryInformationW(hDatabase: MSIHANDLE, szDatabasePath: CPointer<UInt16>, uiUpdateCount: UInt32, phSummaryInfo: CPointer<MSIHANDLE>): UInt32 {
+    return MsiGetSummaryInformationW(hDatabase, szDatabasePath, uiUpdateCount, phSummaryInfo)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetTargetPathA == "on"]
+foreign {
     // param-hint: szPathBuf len=param[3] optional
     // param-hint: pcchPathBuf optional
     func MsiGetTargetPathA(hInstall: MSIHANDLE, szFolder: CPointer<UInt8>, szPathBuf: CPointer<UInt8>, pcchPathBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetTargetPathA == "on"]
+public unsafe func Windows_MsiGetTargetPathA(hInstall: MSIHANDLE, szFolder: CPointer<UInt8>, szPathBuf: CPointer<UInt8>, pcchPathBuf: CPointer<UInt32>): UInt32 {
+    return MsiGetTargetPathA(hInstall, szFolder, szPathBuf, pcchPathBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetTargetPathW == "on"]
+foreign {
     // param-hint: szPathBuf len=param[3] optional
     // param-hint: pcchPathBuf optional
     func MsiGetTargetPathW(hInstall: MSIHANDLE, szFolder: CPointer<UInt16>, szPathBuf: CPointer<UInt16>, pcchPathBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetTargetPathW == "on"]
+public unsafe func Windows_MsiGetTargetPathW(hInstall: MSIHANDLE, szFolder: CPointer<UInt16>, szPathBuf: CPointer<UInt16>, pcchPathBuf: CPointer<UInt32>): UInt32 {
+    return MsiGetTargetPathW(hInstall, szFolder, szPathBuf, pcchPathBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetUserInfoA == "on"]
+foreign {
     // param-hint: lpUserNameBuf len=param[2] optional
     // param-hint: pcchUserNameBuf optional
     // param-hint: lpOrgNameBuf len=param[4] optional
@@ -9064,6 +10531,15 @@ foreign {
     // param-hint: lpSerialBuf len=param[6] optional
     // param-hint: pcchSerialBuf optional
     func MsiGetUserInfoA(szProduct: CPointer<UInt8>, lpUserNameBuf: CPointer<UInt8>, pcchUserNameBuf: CPointer<UInt32>, lpOrgNameBuf: CPointer<UInt8>, pcchOrgNameBuf: CPointer<UInt32>, lpSerialBuf: CPointer<UInt8>, pcchSerialBuf: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetUserInfoA == "on"]
+public unsafe func Windows_MsiGetUserInfoA(szProduct: CPointer<UInt8>, lpUserNameBuf: CPointer<UInt8>, pcchUserNameBuf: CPointer<UInt32>, lpOrgNameBuf: CPointer<UInt8>, pcchOrgNameBuf: CPointer<UInt32>, lpSerialBuf: CPointer<UInt8>, pcchSerialBuf: CPointer<UInt32>): Int32 {
+    return MsiGetUserInfoA(szProduct, lpUserNameBuf, pcchUserNameBuf, lpOrgNameBuf, pcchOrgNameBuf, lpSerialBuf, pcchSerialBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetUserInfoW == "on"]
+foreign {
     // param-hint: lpUserNameBuf len=param[2] optional
     // param-hint: pcchUserNameBuf optional
     // param-hint: lpOrgNameBuf len=param[4] optional
@@ -9071,174 +10547,1044 @@ foreign {
     // param-hint: lpSerialBuf len=param[6] optional
     // param-hint: pcchSerialBuf optional
     func MsiGetUserInfoW(szProduct: CPointer<UInt16>, lpUserNameBuf: CPointer<UInt16>, pcchUserNameBuf: CPointer<UInt32>, lpOrgNameBuf: CPointer<UInt16>, pcchOrgNameBuf: CPointer<UInt32>, lpSerialBuf: CPointer<UInt16>, pcchSerialBuf: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiGetUserInfoW == "on"]
+public unsafe func Windows_MsiGetUserInfoW(szProduct: CPointer<UInt16>, lpUserNameBuf: CPointer<UInt16>, pcchUserNameBuf: CPointer<UInt32>, lpOrgNameBuf: CPointer<UInt16>, pcchOrgNameBuf: CPointer<UInt32>, lpSerialBuf: CPointer<UInt16>, pcchSerialBuf: CPointer<UInt32>): Int32 {
+    return MsiGetUserInfoW(szProduct, lpUserNameBuf, pcchUserNameBuf, lpOrgNameBuf, pcchOrgNameBuf, lpSerialBuf, pcchSerialBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiInstallMissingComponentA == "on"]
+foreign {
     func MsiInstallMissingComponentA(szProduct: CPointer<UInt8>, szComponent: CPointer<UInt8>, eInstallState: Int32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiInstallMissingComponentA == "on"]
+public unsafe func Windows_MsiInstallMissingComponentA(szProduct: CPointer<UInt8>, szComponent: CPointer<UInt8>, eInstallState: Int32): UInt32 {
+    return MsiInstallMissingComponentA(szProduct, szComponent, eInstallState)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiInstallMissingComponentW == "on"]
+foreign {
     func MsiInstallMissingComponentW(szProduct: CPointer<UInt16>, szComponent: CPointer<UInt16>, eInstallState: Int32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiInstallMissingComponentW == "on"]
+public unsafe func Windows_MsiInstallMissingComponentW(szProduct: CPointer<UInt16>, szComponent: CPointer<UInt16>, eInstallState: Int32): UInt32 {
+    return MsiInstallMissingComponentW(szProduct, szComponent, eInstallState)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiInstallMissingFileA == "on"]
+foreign {
     func MsiInstallMissingFileA(szProduct: CPointer<UInt8>, szFile: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiInstallMissingFileA == "on"]
+public unsafe func Windows_MsiInstallMissingFileA(szProduct: CPointer<UInt8>, szFile: CPointer<UInt8>): UInt32 {
+    return MsiInstallMissingFileA(szProduct, szFile)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiInstallMissingFileW == "on"]
+foreign {
     func MsiInstallMissingFileW(szProduct: CPointer<UInt16>, szFile: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiInstallMissingFileW == "on"]
+public unsafe func Windows_MsiInstallMissingFileW(szProduct: CPointer<UInt16>, szFile: CPointer<UInt16>): UInt32 {
+    return MsiInstallMissingFileW(szProduct, szFile)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiInstallProductA == "on"]
+foreign {
     // param-hint: szCommandLine optional
     func MsiInstallProductA(szPackagePath: CPointer<UInt8>, szCommandLine: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiInstallProductA == "on"]
+public unsafe func Windows_MsiInstallProductA(szPackagePath: CPointer<UInt8>, szCommandLine: CPointer<UInt8>): UInt32 {
+    return MsiInstallProductA(szPackagePath, szCommandLine)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiInstallProductW == "on"]
+foreign {
     // param-hint: szCommandLine optional
     func MsiInstallProductW(szPackagePath: CPointer<UInt16>, szCommandLine: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiInstallProductW == "on"]
+public unsafe func Windows_MsiInstallProductW(szPackagePath: CPointer<UInt16>, szCommandLine: CPointer<UInt16>): UInt32 {
+    return MsiInstallProductW(szPackagePath, szCommandLine)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiIsProductElevatedA == "on"]
+foreign {
     func MsiIsProductElevatedA(szProduct: CPointer<UInt8>, pfElevated: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiIsProductElevatedA == "on"]
+public unsafe func Windows_MsiIsProductElevatedA(szProduct: CPointer<UInt8>, pfElevated: CPointer<Int32>): UInt32 {
+    return MsiIsProductElevatedA(szProduct, pfElevated)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiIsProductElevatedW == "on"]
+foreign {
     func MsiIsProductElevatedW(szProduct: CPointer<UInt16>, pfElevated: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiIsProductElevatedW == "on"]
+public unsafe func Windows_MsiIsProductElevatedW(szProduct: CPointer<UInt16>, pfElevated: CPointer<Int32>): UInt32 {
+    return MsiIsProductElevatedW(szProduct, pfElevated)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiJoinTransaction == "on"]
+foreign {
     func MsiJoinTransaction(hTransactionHandle: MSIHANDLE, dwTransactionAttributes: UInt32, phChangeOfOwnerEvent: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiJoinTransaction == "on"]
+public unsafe func Windows_MsiJoinTransaction(hTransactionHandle: MSIHANDLE, dwTransactionAttributes: UInt32, phChangeOfOwnerEvent: CPointer<CPointer<Unit>>): UInt32 {
+    return MsiJoinTransaction(hTransactionHandle, dwTransactionAttributes, phChangeOfOwnerEvent)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiLocateComponentA == "on"]
+foreign {
     // param-hint: lpPathBuf len=param[2] optional
     // param-hint: pcchBuf optional
     func MsiLocateComponentA(szComponent: CPointer<UInt8>, lpPathBuf: CPointer<UInt8>, pcchBuf: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiLocateComponentA == "on"]
+public unsafe func Windows_MsiLocateComponentA(szComponent: CPointer<UInt8>, lpPathBuf: CPointer<UInt8>, pcchBuf: CPointer<UInt32>): Int32 {
+    return MsiLocateComponentA(szComponent, lpPathBuf, pcchBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiLocateComponentW == "on"]
+foreign {
     // param-hint: lpPathBuf len=param[2] optional
     // param-hint: pcchBuf optional
     func MsiLocateComponentW(szComponent: CPointer<UInt16>, lpPathBuf: CPointer<UInt16>, pcchBuf: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiLocateComponentW == "on"]
+public unsafe func Windows_MsiLocateComponentW(szComponent: CPointer<UInt16>, lpPathBuf: CPointer<UInt16>, pcchBuf: CPointer<UInt32>): Int32 {
+    return MsiLocateComponentW(szComponent, lpPathBuf, pcchBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiNotifySidChangeA == "on"]
+foreign {
     func MsiNotifySidChangeA(pOldSid: CPointer<UInt8>, pNewSid: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiNotifySidChangeA == "on"]
+public unsafe func Windows_MsiNotifySidChangeA(pOldSid: CPointer<UInt8>, pNewSid: CPointer<UInt8>): UInt32 {
+    return MsiNotifySidChangeA(pOldSid, pNewSid)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiNotifySidChangeW == "on"]
+foreign {
     func MsiNotifySidChangeW(pOldSid: CPointer<UInt16>, pNewSid: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiNotifySidChangeW == "on"]
+public unsafe func Windows_MsiNotifySidChangeW(pOldSid: CPointer<UInt16>, pNewSid: CPointer<UInt16>): UInt32 {
+    return MsiNotifySidChangeW(pOldSid, pNewSid)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiOpenDatabaseA == "on"]
+foreign {
     func MsiOpenDatabaseA(szDatabasePath: CPointer<UInt8>, szPersist: CPointer<UInt8>, phDatabase: CPointer<MSIHANDLE>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiOpenDatabaseA == "on"]
+public unsafe func Windows_MsiOpenDatabaseA(szDatabasePath: CPointer<UInt8>, szPersist: CPointer<UInt8>, phDatabase: CPointer<MSIHANDLE>): UInt32 {
+    return MsiOpenDatabaseA(szDatabasePath, szPersist, phDatabase)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiOpenDatabaseW == "on"]
+foreign {
     func MsiOpenDatabaseW(szDatabasePath: CPointer<UInt16>, szPersist: CPointer<UInt16>, phDatabase: CPointer<MSIHANDLE>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiOpenDatabaseW == "on"]
+public unsafe func Windows_MsiOpenDatabaseW(szDatabasePath: CPointer<UInt16>, szPersist: CPointer<UInt16>, phDatabase: CPointer<MSIHANDLE>): UInt32 {
+    return MsiOpenDatabaseW(szDatabasePath, szPersist, phDatabase)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiOpenPackageA == "on"]
+foreign {
     func MsiOpenPackageA(szPackagePath: CPointer<UInt8>, hProduct: CPointer<MSIHANDLE>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiOpenPackageA == "on"]
+public unsafe func Windows_MsiOpenPackageA(szPackagePath: CPointer<UInt8>, hProduct: CPointer<MSIHANDLE>): UInt32 {
+    return MsiOpenPackageA(szPackagePath, hProduct)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiOpenPackageExA == "on"]
+foreign {
     func MsiOpenPackageExA(szPackagePath: CPointer<UInt8>, dwOptions: UInt32, hProduct: CPointer<MSIHANDLE>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiOpenPackageExA == "on"]
+public unsafe func Windows_MsiOpenPackageExA(szPackagePath: CPointer<UInt8>, dwOptions: UInt32, hProduct: CPointer<MSIHANDLE>): UInt32 {
+    return MsiOpenPackageExA(szPackagePath, dwOptions, hProduct)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiOpenPackageExW == "on"]
+foreign {
     func MsiOpenPackageExW(szPackagePath: CPointer<UInt16>, dwOptions: UInt32, hProduct: CPointer<MSIHANDLE>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiOpenPackageExW == "on"]
+public unsafe func Windows_MsiOpenPackageExW(szPackagePath: CPointer<UInt16>, dwOptions: UInt32, hProduct: CPointer<MSIHANDLE>): UInt32 {
+    return MsiOpenPackageExW(szPackagePath, dwOptions, hProduct)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiOpenPackageW == "on"]
+foreign {
     func MsiOpenPackageW(szPackagePath: CPointer<UInt16>, hProduct: CPointer<MSIHANDLE>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiOpenPackageW == "on"]
+public unsafe func Windows_MsiOpenPackageW(szPackagePath: CPointer<UInt16>, hProduct: CPointer<MSIHANDLE>): UInt32 {
+    return MsiOpenPackageW(szPackagePath, hProduct)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiOpenProductA == "on"]
+foreign {
     func MsiOpenProductA(szProduct: CPointer<UInt8>, hProduct: CPointer<MSIHANDLE>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiOpenProductA == "on"]
+public unsafe func Windows_MsiOpenProductA(szProduct: CPointer<UInt8>, hProduct: CPointer<MSIHANDLE>): UInt32 {
+    return MsiOpenProductA(szProduct, hProduct)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiOpenProductW == "on"]
+foreign {
     func MsiOpenProductW(szProduct: CPointer<UInt16>, hProduct: CPointer<MSIHANDLE>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiOpenProductW == "on"]
+public unsafe func Windows_MsiOpenProductW(szProduct: CPointer<UInt16>, hProduct: CPointer<MSIHANDLE>): UInt32 {
+    return MsiOpenProductW(szProduct, hProduct)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiPreviewBillboardA == "on"]
+foreign {
     func MsiPreviewBillboardA(hPreview: MSIHANDLE, szControlName: CPointer<UInt8>, szBillboard: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiPreviewBillboardA == "on"]
+public unsafe func Windows_MsiPreviewBillboardA(hPreview: MSIHANDLE, szControlName: CPointer<UInt8>, szBillboard: CPointer<UInt8>): UInt32 {
+    return MsiPreviewBillboardA(hPreview, szControlName, szBillboard)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiPreviewBillboardW == "on"]
+foreign {
     func MsiPreviewBillboardW(hPreview: MSIHANDLE, szControlName: CPointer<UInt16>, szBillboard: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiPreviewBillboardW == "on"]
+public unsafe func Windows_MsiPreviewBillboardW(hPreview: MSIHANDLE, szControlName: CPointer<UInt16>, szBillboard: CPointer<UInt16>): UInt32 {
+    return MsiPreviewBillboardW(hPreview, szControlName, szBillboard)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiPreviewDialogA == "on"]
+foreign {
     func MsiPreviewDialogA(hPreview: MSIHANDLE, szDialogName: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiPreviewDialogA == "on"]
+public unsafe func Windows_MsiPreviewDialogA(hPreview: MSIHANDLE, szDialogName: CPointer<UInt8>): UInt32 {
+    return MsiPreviewDialogA(hPreview, szDialogName)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiPreviewDialogW == "on"]
+foreign {
     func MsiPreviewDialogW(hPreview: MSIHANDLE, szDialogName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiPreviewDialogW == "on"]
+public unsafe func Windows_MsiPreviewDialogW(hPreview: MSIHANDLE, szDialogName: CPointer<UInt16>): UInt32 {
+    return MsiPreviewDialogW(hPreview, szDialogName)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiProcessAdvertiseScriptA == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: szIconFolder optional
+    // param-hint: hRegData optional
+    func MsiProcessAdvertiseScriptA(szScriptFile: CPointer<UInt8>, szIconFolder: CPointer<UInt8>, hRegData: Win32_System_Registry.HKEY, fShortcuts: Int32, fRemoveItems: Int32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiProcessAdvertiseScriptA == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_MsiProcessAdvertiseScriptA(szScriptFile: CPointer<UInt8>, szIconFolder: CPointer<UInt8>, hRegData: Win32_System_Registry.HKEY, fShortcuts: Int32, fRemoveItems: Int32): UInt32 {
+    return MsiProcessAdvertiseScriptA(szScriptFile, szIconFolder, hRegData, fShortcuts, fRemoveItems)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiProcessAdvertiseScriptW == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: szIconFolder optional
+    // param-hint: hRegData optional
+    func MsiProcessAdvertiseScriptW(szScriptFile: CPointer<UInt16>, szIconFolder: CPointer<UInt16>, hRegData: Win32_System_Registry.HKEY, fShortcuts: Int32, fRemoveItems: Int32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiProcessAdvertiseScriptW == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_MsiProcessAdvertiseScriptW(szScriptFile: CPointer<UInt16>, szIconFolder: CPointer<UInt16>, hRegData: Win32_System_Registry.HKEY, fShortcuts: Int32, fRemoveItems: Int32): UInt32 {
+    return MsiProcessAdvertiseScriptW(szScriptFile, szIconFolder, hRegData, fShortcuts, fRemoveItems)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiProcessMessage == "on"]
+foreign {
     func MsiProcessMessage(hInstall: MSIHANDLE, eMessageType: Int32, hRecord: MSIHANDLE): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiProcessMessage == "on"]
+public unsafe func Windows_MsiProcessMessage(hInstall: MSIHANDLE, eMessageType: Int32, hRecord: MSIHANDLE): Int32 {
+    return MsiProcessMessage(hInstall, eMessageType, hRecord)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiProvideAssemblyA == "on"]
+foreign {
     // param-hint: szAppContext optional
     // param-hint: lpPathBuf len=param[5] optional
     // param-hint: pcchPathBuf optional
     func MsiProvideAssemblyA(szAssemblyName: CPointer<UInt8>, szAppContext: CPointer<UInt8>, dwInstallMode: UInt32, dwAssemblyInfo: UInt32, lpPathBuf: CPointer<UInt8>, pcchPathBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiProvideAssemblyA == "on"]
+public unsafe func Windows_MsiProvideAssemblyA(szAssemblyName: CPointer<UInt8>, szAppContext: CPointer<UInt8>, dwInstallMode: UInt32, dwAssemblyInfo: UInt32, lpPathBuf: CPointer<UInt8>, pcchPathBuf: CPointer<UInt32>): UInt32 {
+    return MsiProvideAssemblyA(szAssemblyName, szAppContext, dwInstallMode, dwAssemblyInfo, lpPathBuf, pcchPathBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiProvideAssemblyW == "on"]
+foreign {
     // param-hint: szAppContext optional
     // param-hint: lpPathBuf len=param[5] optional
     // param-hint: pcchPathBuf optional
     func MsiProvideAssemblyW(szAssemblyName: CPointer<UInt16>, szAppContext: CPointer<UInt16>, dwInstallMode: UInt32, dwAssemblyInfo: UInt32, lpPathBuf: CPointer<UInt16>, pcchPathBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiProvideAssemblyW == "on"]
+public unsafe func Windows_MsiProvideAssemblyW(szAssemblyName: CPointer<UInt16>, szAppContext: CPointer<UInt16>, dwInstallMode: UInt32, dwAssemblyInfo: UInt32, lpPathBuf: CPointer<UInt16>, pcchPathBuf: CPointer<UInt32>): UInt32 {
+    return MsiProvideAssemblyW(szAssemblyName, szAppContext, dwInstallMode, dwAssemblyInfo, lpPathBuf, pcchPathBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiProvideComponentA == "on"]
+foreign {
     // param-hint: lpPathBuf len=param[5] optional
     // param-hint: pcchPathBuf optional
     func MsiProvideComponentA(szProduct: CPointer<UInt8>, szFeature: CPointer<UInt8>, szComponent: CPointer<UInt8>, dwInstallMode: UInt32, lpPathBuf: CPointer<UInt8>, pcchPathBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiProvideComponentA == "on"]
+public unsafe func Windows_MsiProvideComponentA(szProduct: CPointer<UInt8>, szFeature: CPointer<UInt8>, szComponent: CPointer<UInt8>, dwInstallMode: UInt32, lpPathBuf: CPointer<UInt8>, pcchPathBuf: CPointer<UInt32>): UInt32 {
+    return MsiProvideComponentA(szProduct, szFeature, szComponent, dwInstallMode, lpPathBuf, pcchPathBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiProvideComponentW == "on"]
+foreign {
     // param-hint: lpPathBuf len=param[5] optional
     // param-hint: pcchPathBuf optional
     func MsiProvideComponentW(szProduct: CPointer<UInt16>, szFeature: CPointer<UInt16>, szComponent: CPointer<UInt16>, dwInstallMode: UInt32, lpPathBuf: CPointer<UInt16>, pcchPathBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiProvideComponentW == "on"]
+public unsafe func Windows_MsiProvideComponentW(szProduct: CPointer<UInt16>, szFeature: CPointer<UInt16>, szComponent: CPointer<UInt16>, dwInstallMode: UInt32, lpPathBuf: CPointer<UInt16>, pcchPathBuf: CPointer<UInt32>): UInt32 {
+    return MsiProvideComponentW(szProduct, szFeature, szComponent, dwInstallMode, lpPathBuf, pcchPathBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiProvideQualifiedComponentA == "on"]
+foreign {
     // param-hint: lpPathBuf len=param[4] optional
     // param-hint: pcchPathBuf optional
     func MsiProvideQualifiedComponentA(szCategory: CPointer<UInt8>, szQualifier: CPointer<UInt8>, dwInstallMode: UInt32, lpPathBuf: CPointer<UInt8>, pcchPathBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiProvideQualifiedComponentA == "on"]
+public unsafe func Windows_MsiProvideQualifiedComponentA(szCategory: CPointer<UInt8>, szQualifier: CPointer<UInt8>, dwInstallMode: UInt32, lpPathBuf: CPointer<UInt8>, pcchPathBuf: CPointer<UInt32>): UInt32 {
+    return MsiProvideQualifiedComponentA(szCategory, szQualifier, dwInstallMode, lpPathBuf, pcchPathBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiProvideQualifiedComponentExA == "on"]
+foreign {
     // param-hint: szProduct optional
     // param-hint: dwUnused1 optional reserved
     // param-hint: dwUnused2 optional reserved
     // param-hint: lpPathBuf len=param[7] optional
     // param-hint: pcchPathBuf optional
     func MsiProvideQualifiedComponentExA(szCategory: CPointer<UInt8>, szQualifier: CPointer<UInt8>, dwInstallMode: UInt32, szProduct: CPointer<UInt8>, dwUnused1: UInt32, dwUnused2: UInt32, lpPathBuf: CPointer<UInt8>, pcchPathBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiProvideQualifiedComponentExA == "on"]
+public unsafe func Windows_MsiProvideQualifiedComponentExA(szCategory: CPointer<UInt8>, szQualifier: CPointer<UInt8>, dwInstallMode: UInt32, szProduct: CPointer<UInt8>, dwUnused1: UInt32, dwUnused2: UInt32, lpPathBuf: CPointer<UInt8>, pcchPathBuf: CPointer<UInt32>): UInt32 {
+    return MsiProvideQualifiedComponentExA(szCategory, szQualifier, dwInstallMode, szProduct, dwUnused1, dwUnused2, lpPathBuf, pcchPathBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiProvideQualifiedComponentExW == "on"]
+foreign {
     // param-hint: szProduct optional
     // param-hint: dwUnused1 optional reserved
     // param-hint: dwUnused2 optional reserved
     // param-hint: lpPathBuf len=param[7] optional
     // param-hint: pcchPathBuf optional
     func MsiProvideQualifiedComponentExW(szCategory: CPointer<UInt16>, szQualifier: CPointer<UInt16>, dwInstallMode: UInt32, szProduct: CPointer<UInt16>, dwUnused1: UInt32, dwUnused2: UInt32, lpPathBuf: CPointer<UInt16>, pcchPathBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiProvideQualifiedComponentExW == "on"]
+public unsafe func Windows_MsiProvideQualifiedComponentExW(szCategory: CPointer<UInt16>, szQualifier: CPointer<UInt16>, dwInstallMode: UInt32, szProduct: CPointer<UInt16>, dwUnused1: UInt32, dwUnused2: UInt32, lpPathBuf: CPointer<UInt16>, pcchPathBuf: CPointer<UInt32>): UInt32 {
+    return MsiProvideQualifiedComponentExW(szCategory, szQualifier, dwInstallMode, szProduct, dwUnused1, dwUnused2, lpPathBuf, pcchPathBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiProvideQualifiedComponentW == "on"]
+foreign {
     // param-hint: lpPathBuf len=param[4] optional
     // param-hint: pcchPathBuf optional
     func MsiProvideQualifiedComponentW(szCategory: CPointer<UInt16>, szQualifier: CPointer<UInt16>, dwInstallMode: UInt32, lpPathBuf: CPointer<UInt16>, pcchPathBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiProvideQualifiedComponentW == "on"]
+public unsafe func Windows_MsiProvideQualifiedComponentW(szCategory: CPointer<UInt16>, szQualifier: CPointer<UInt16>, dwInstallMode: UInt32, lpPathBuf: CPointer<UInt16>, pcchPathBuf: CPointer<UInt32>): UInt32 {
+    return MsiProvideQualifiedComponentW(szCategory, szQualifier, dwInstallMode, lpPathBuf, pcchPathBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiQueryComponentStateA == "on"]
+foreign {
     // param-hint: szUserSid optional
     // param-hint: pdwState optional
     func MsiQueryComponentStateA(szProductCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: Int32, szComponentCode: CPointer<UInt8>, pdwState: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiQueryComponentStateA == "on"]
+public unsafe func Windows_MsiQueryComponentStateA(szProductCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: Int32, szComponentCode: CPointer<UInt8>, pdwState: CPointer<Int32>): UInt32 {
+    return MsiQueryComponentStateA(szProductCode, szUserSid, dwContext, szComponentCode, pdwState)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiQueryComponentStateW == "on"]
+foreign {
     // param-hint: szUserSid optional
     // param-hint: pdwState optional
     func MsiQueryComponentStateW(szProductCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: Int32, szComponentCode: CPointer<UInt16>, pdwState: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiQueryComponentStateW == "on"]
+public unsafe func Windows_MsiQueryComponentStateW(szProductCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: Int32, szComponentCode: CPointer<UInt16>, pdwState: CPointer<Int32>): UInt32 {
+    return MsiQueryComponentStateW(szProductCode, szUserSid, dwContext, szComponentCode, pdwState)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiQueryFeatureStateA == "on"]
+foreign {
     func MsiQueryFeatureStateA(szProduct: CPointer<UInt8>, szFeature: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiQueryFeatureStateA == "on"]
+public unsafe func Windows_MsiQueryFeatureStateA(szProduct: CPointer<UInt8>, szFeature: CPointer<UInt8>): Int32 {
+    return MsiQueryFeatureStateA(szProduct, szFeature)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiQueryFeatureStateExA == "on"]
+foreign {
     // param-hint: szUserSid optional
     // param-hint: pdwState optional
     func MsiQueryFeatureStateExA(szProductCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: Int32, szFeature: CPointer<UInt8>, pdwState: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiQueryFeatureStateExA == "on"]
+public unsafe func Windows_MsiQueryFeatureStateExA(szProductCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: Int32, szFeature: CPointer<UInt8>, pdwState: CPointer<Int32>): UInt32 {
+    return MsiQueryFeatureStateExA(szProductCode, szUserSid, dwContext, szFeature, pdwState)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiQueryFeatureStateExW == "on"]
+foreign {
     // param-hint: szUserSid optional
     // param-hint: pdwState optional
     func MsiQueryFeatureStateExW(szProductCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: Int32, szFeature: CPointer<UInt16>, pdwState: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiQueryFeatureStateExW == "on"]
+public unsafe func Windows_MsiQueryFeatureStateExW(szProductCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: Int32, szFeature: CPointer<UInt16>, pdwState: CPointer<Int32>): UInt32 {
+    return MsiQueryFeatureStateExW(szProductCode, szUserSid, dwContext, szFeature, pdwState)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiQueryFeatureStateW == "on"]
+foreign {
     func MsiQueryFeatureStateW(szProduct: CPointer<UInt16>, szFeature: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiQueryFeatureStateW == "on"]
+public unsafe func Windows_MsiQueryFeatureStateW(szProduct: CPointer<UInt16>, szFeature: CPointer<UInt16>): Int32 {
+    return MsiQueryFeatureStateW(szProduct, szFeature)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiQueryProductStateA == "on"]
+foreign {
     func MsiQueryProductStateA(szProduct: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiQueryProductStateA == "on"]
+public unsafe func Windows_MsiQueryProductStateA(szProduct: CPointer<UInt8>): Int32 {
+    return MsiQueryProductStateA(szProduct)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiQueryProductStateW == "on"]
+foreign {
     func MsiQueryProductStateW(szProduct: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiQueryProductStateW == "on"]
+public unsafe func Windows_MsiQueryProductStateW(szProduct: CPointer<UInt16>): Int32 {
+    return MsiQueryProductStateW(szProduct)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiRecordClearData == "on"]
+foreign {
     func MsiRecordClearData(hRecord: MSIHANDLE): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiRecordClearData == "on"]
+public unsafe func Windows_MsiRecordClearData(hRecord: MSIHANDLE): UInt32 {
+    return MsiRecordClearData(hRecord)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiRecordDataSize == "on"]
+foreign {
     func MsiRecordDataSize(hRecord: MSIHANDLE, iField: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiRecordDataSize == "on"]
+public unsafe func Windows_MsiRecordDataSize(hRecord: MSIHANDLE, iField: UInt32): UInt32 {
+    return MsiRecordDataSize(hRecord, iField)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiRecordGetFieldCount == "on"]
+foreign {
     func MsiRecordGetFieldCount(hRecord: MSIHANDLE): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiRecordGetFieldCount == "on"]
+public unsafe func Windows_MsiRecordGetFieldCount(hRecord: MSIHANDLE): UInt32 {
+    return MsiRecordGetFieldCount(hRecord)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiRecordGetInteger == "on"]
+foreign {
     func MsiRecordGetInteger(hRecord: MSIHANDLE, iField: UInt32): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiRecordGetInteger == "on"]
+public unsafe func Windows_MsiRecordGetInteger(hRecord: MSIHANDLE, iField: UInt32): Int32 {
+    return MsiRecordGetInteger(hRecord, iField)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiRecordGetStringA == "on"]
+foreign {
     // param-hint: szValueBuf len=param[3] optional
     // param-hint: pcchValueBuf optional
     func MsiRecordGetStringA(hRecord: MSIHANDLE, iField: UInt32, szValueBuf: CPointer<UInt8>, pcchValueBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiRecordGetStringA == "on"]
+public unsafe func Windows_MsiRecordGetStringA(hRecord: MSIHANDLE, iField: UInt32, szValueBuf: CPointer<UInt8>, pcchValueBuf: CPointer<UInt32>): UInt32 {
+    return MsiRecordGetStringA(hRecord, iField, szValueBuf, pcchValueBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiRecordGetStringW == "on"]
+foreign {
     // param-hint: szValueBuf len=param[3] optional
     // param-hint: pcchValueBuf optional
     func MsiRecordGetStringW(hRecord: MSIHANDLE, iField: UInt32, szValueBuf: CPointer<UInt16>, pcchValueBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiRecordGetStringW == "on"]
+public unsafe func Windows_MsiRecordGetStringW(hRecord: MSIHANDLE, iField: UInt32, szValueBuf: CPointer<UInt16>, pcchValueBuf: CPointer<UInt32>): UInt32 {
+    return MsiRecordGetStringW(hRecord, iField, szValueBuf, pcchValueBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiRecordIsNull == "on"]
+foreign {
     func MsiRecordIsNull(hRecord: MSIHANDLE, iField: UInt32): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiRecordIsNull == "on"]
+public unsafe func Windows_MsiRecordIsNull(hRecord: MSIHANDLE, iField: UInt32): Int32 {
+    return MsiRecordIsNull(hRecord, iField)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiRecordReadStream == "on"]
+foreign {
     // param-hint: szDataBuf bytes=param[3] optional
     func MsiRecordReadStream(hRecord: MSIHANDLE, iField: UInt32, szDataBuf: CPointer<UInt8>, pcbDataBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiRecordReadStream == "on"]
+public unsafe func Windows_MsiRecordReadStream(hRecord: MSIHANDLE, iField: UInt32, szDataBuf: CPointer<UInt8>, pcbDataBuf: CPointer<UInt32>): UInt32 {
+    return MsiRecordReadStream(hRecord, iField, szDataBuf, pcbDataBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiRecordSetInteger == "on"]
+foreign {
     func MsiRecordSetInteger(hRecord: MSIHANDLE, iField: UInt32, iValue: Int32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiRecordSetInteger == "on"]
+public unsafe func Windows_MsiRecordSetInteger(hRecord: MSIHANDLE, iField: UInt32, iValue: Int32): UInt32 {
+    return MsiRecordSetInteger(hRecord, iField, iValue)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiRecordSetStreamA == "on"]
+foreign {
     func MsiRecordSetStreamA(hRecord: MSIHANDLE, iField: UInt32, szFilePath: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiRecordSetStreamA == "on"]
+public unsafe func Windows_MsiRecordSetStreamA(hRecord: MSIHANDLE, iField: UInt32, szFilePath: CPointer<UInt8>): UInt32 {
+    return MsiRecordSetStreamA(hRecord, iField, szFilePath)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiRecordSetStreamW == "on"]
+foreign {
     func MsiRecordSetStreamW(hRecord: MSIHANDLE, iField: UInt32, szFilePath: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiRecordSetStreamW == "on"]
+public unsafe func Windows_MsiRecordSetStreamW(hRecord: MSIHANDLE, iField: UInt32, szFilePath: CPointer<UInt16>): UInt32 {
+    return MsiRecordSetStreamW(hRecord, iField, szFilePath)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiRecordSetStringA == "on"]
+foreign {
     func MsiRecordSetStringA(hRecord: MSIHANDLE, iField: UInt32, szValue: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiRecordSetStringA == "on"]
+public unsafe func Windows_MsiRecordSetStringA(hRecord: MSIHANDLE, iField: UInt32, szValue: CPointer<UInt8>): UInt32 {
+    return MsiRecordSetStringA(hRecord, iField, szValue)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiRecordSetStringW == "on"]
+foreign {
     func MsiRecordSetStringW(hRecord: MSIHANDLE, iField: UInt32, szValue: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiRecordSetStringW == "on"]
+public unsafe func Windows_MsiRecordSetStringW(hRecord: MSIHANDLE, iField: UInt32, szValue: CPointer<UInt16>): UInt32 {
+    return MsiRecordSetStringW(hRecord, iField, szValue)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiReinstallFeatureA == "on"]
+foreign {
     func MsiReinstallFeatureA(szProduct: CPointer<UInt8>, szFeature: CPointer<UInt8>, dwReinstallMode: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiReinstallFeatureA == "on"]
+public unsafe func Windows_MsiReinstallFeatureA(szProduct: CPointer<UInt8>, szFeature: CPointer<UInt8>, dwReinstallMode: UInt32): UInt32 {
+    return MsiReinstallFeatureA(szProduct, szFeature, dwReinstallMode)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiReinstallFeatureW == "on"]
+foreign {
     func MsiReinstallFeatureW(szProduct: CPointer<UInt16>, szFeature: CPointer<UInt16>, dwReinstallMode: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiReinstallFeatureW == "on"]
+public unsafe func Windows_MsiReinstallFeatureW(szProduct: CPointer<UInt16>, szFeature: CPointer<UInt16>, dwReinstallMode: UInt32): UInt32 {
+    return MsiReinstallFeatureW(szProduct, szFeature, dwReinstallMode)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiReinstallProductA == "on"]
+foreign {
     func MsiReinstallProductA(szProduct: CPointer<UInt8>, szReinstallMode: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiReinstallProductA == "on"]
+public unsafe func Windows_MsiReinstallProductA(szProduct: CPointer<UInt8>, szReinstallMode: UInt32): UInt32 {
+    return MsiReinstallProductA(szProduct, szReinstallMode)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiReinstallProductW == "on"]
+foreign {
     func MsiReinstallProductW(szProduct: CPointer<UInt16>, szReinstallMode: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiReinstallProductW == "on"]
+public unsafe func Windows_MsiReinstallProductW(szProduct: CPointer<UInt16>, szReinstallMode: UInt32): UInt32 {
+    return MsiReinstallProductW(szProduct, szReinstallMode)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiRemovePatchesA == "on"]
+foreign {
     // param-hint: szPropertyList optional
     func MsiRemovePatchesA(szPatchList: CPointer<UInt8>, szProductCode: CPointer<UInt8>, eUninstallType: Int32, szPropertyList: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiRemovePatchesA == "on"]
+public unsafe func Windows_MsiRemovePatchesA(szPatchList: CPointer<UInt8>, szProductCode: CPointer<UInt8>, eUninstallType: Int32, szPropertyList: CPointer<UInt8>): UInt32 {
+    return MsiRemovePatchesA(szPatchList, szProductCode, eUninstallType, szPropertyList)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiRemovePatchesW == "on"]
+foreign {
     // param-hint: szPropertyList optional
     func MsiRemovePatchesW(szPatchList: CPointer<UInt16>, szProductCode: CPointer<UInt16>, eUninstallType: Int32, szPropertyList: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiRemovePatchesW == "on"]
+public unsafe func Windows_MsiRemovePatchesW(szPatchList: CPointer<UInt16>, szProductCode: CPointer<UInt16>, eUninstallType: Int32, szPropertyList: CPointer<UInt16>): UInt32 {
+    return MsiRemovePatchesW(szPatchList, szProductCode, eUninstallType, szPropertyList)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSequenceA == "on"]
+foreign {
     func MsiSequenceA(hInstall: MSIHANDLE, szTable: CPointer<UInt8>, iSequenceMode: Int32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSequenceA == "on"]
+public unsafe func Windows_MsiSequenceA(hInstall: MSIHANDLE, szTable: CPointer<UInt8>, iSequenceMode: Int32): UInt32 {
+    return MsiSequenceA(hInstall, szTable, iSequenceMode)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSequenceW == "on"]
+foreign {
     func MsiSequenceW(hInstall: MSIHANDLE, szTable: CPointer<UInt16>, iSequenceMode: Int32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSequenceW == "on"]
+public unsafe func Windows_MsiSequenceW(hInstall: MSIHANDLE, szTable: CPointer<UInt16>, iSequenceMode: Int32): UInt32 {
+    return MsiSequenceW(hInstall, szTable, iSequenceMode)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSetComponentStateA == "on"]
+foreign {
     func MsiSetComponentStateA(hInstall: MSIHANDLE, szComponent: CPointer<UInt8>, iState: Int32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSetComponentStateA == "on"]
+public unsafe func Windows_MsiSetComponentStateA(hInstall: MSIHANDLE, szComponent: CPointer<UInt8>, iState: Int32): UInt32 {
+    return MsiSetComponentStateA(hInstall, szComponent, iState)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSetComponentStateW == "on"]
+foreign {
     func MsiSetComponentStateW(hInstall: MSIHANDLE, szComponent: CPointer<UInt16>, iState: Int32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSetComponentStateW == "on"]
+public unsafe func Windows_MsiSetComponentStateW(hInstall: MSIHANDLE, szComponent: CPointer<UInt16>, iState: Int32): UInt32 {
+    return MsiSetComponentStateW(hInstall, szComponent, iState)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSetExternalUIA == "on"]
+foreign {
     // param-hint: puiHandler optional
     // param-hint: pvContext optional
     func MsiSetExternalUIA(puiHandler: INSTALLUI_HANDLERA, dwMessageFilter: UInt32, pvContext: CPointer<Unit>): INSTALLUI_HANDLERA
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSetExternalUIA == "on"]
+public unsafe func Windows_MsiSetExternalUIA(puiHandler: INSTALLUI_HANDLERA, dwMessageFilter: UInt32, pvContext: CPointer<Unit>): INSTALLUI_HANDLERA {
+    return MsiSetExternalUIA(puiHandler, dwMessageFilter, pvContext)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSetExternalUIRecord == "on"]
+foreign {
     // param-hint: puiHandler optional
     // param-hint: pvContext optional
     // param-hint: ppuiPrevHandler optional
     func MsiSetExternalUIRecord(puiHandler: PINSTALLUI_HANDLER_RECORD, dwMessageFilter: UInt32, pvContext: CPointer<Unit>, ppuiPrevHandler: PINSTALLUI_HANDLER_RECORD): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSetExternalUIRecord == "on"]
+public unsafe func Windows_MsiSetExternalUIRecord(puiHandler: PINSTALLUI_HANDLER_RECORD, dwMessageFilter: UInt32, pvContext: CPointer<Unit>, ppuiPrevHandler: PINSTALLUI_HANDLER_RECORD): UInt32 {
+    return MsiSetExternalUIRecord(puiHandler, dwMessageFilter, pvContext, ppuiPrevHandler)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSetExternalUIW == "on"]
+foreign {
     // param-hint: puiHandler optional
     // param-hint: pvContext optional
     func MsiSetExternalUIW(puiHandler: INSTALLUI_HANDLERW, dwMessageFilter: UInt32, pvContext: CPointer<Unit>): INSTALLUI_HANDLERW
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSetExternalUIW == "on"]
+public unsafe func Windows_MsiSetExternalUIW(puiHandler: INSTALLUI_HANDLERW, dwMessageFilter: UInt32, pvContext: CPointer<Unit>): INSTALLUI_HANDLERW {
+    return MsiSetExternalUIW(puiHandler, dwMessageFilter, pvContext)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSetFeatureAttributesA == "on"]
+foreign {
     func MsiSetFeatureAttributesA(hInstall: MSIHANDLE, szFeature: CPointer<UInt8>, dwAttributes: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSetFeatureAttributesA == "on"]
+public unsafe func Windows_MsiSetFeatureAttributesA(hInstall: MSIHANDLE, szFeature: CPointer<UInt8>, dwAttributes: UInt32): UInt32 {
+    return MsiSetFeatureAttributesA(hInstall, szFeature, dwAttributes)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSetFeatureAttributesW == "on"]
+foreign {
     func MsiSetFeatureAttributesW(hInstall: MSIHANDLE, szFeature: CPointer<UInt16>, dwAttributes: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSetFeatureAttributesW == "on"]
+public unsafe func Windows_MsiSetFeatureAttributesW(hInstall: MSIHANDLE, szFeature: CPointer<UInt16>, dwAttributes: UInt32): UInt32 {
+    return MsiSetFeatureAttributesW(hInstall, szFeature, dwAttributes)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSetFeatureStateA == "on"]
+foreign {
     func MsiSetFeatureStateA(hInstall: MSIHANDLE, szFeature: CPointer<UInt8>, iState: Int32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSetFeatureStateA == "on"]
+public unsafe func Windows_MsiSetFeatureStateA(hInstall: MSIHANDLE, szFeature: CPointer<UInt8>, iState: Int32): UInt32 {
+    return MsiSetFeatureStateA(hInstall, szFeature, iState)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSetFeatureStateW == "on"]
+foreign {
     func MsiSetFeatureStateW(hInstall: MSIHANDLE, szFeature: CPointer<UInt16>, iState: Int32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSetFeatureStateW == "on"]
+public unsafe func Windows_MsiSetFeatureStateW(hInstall: MSIHANDLE, szFeature: CPointer<UInt16>, iState: Int32): UInt32 {
+    return MsiSetFeatureStateW(hInstall, szFeature, iState)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSetInstallLevel == "on"]
+foreign {
     func MsiSetInstallLevel(hInstall: MSIHANDLE, iInstallLevel: Int32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSetInstallLevel == "on"]
+public unsafe func Windows_MsiSetInstallLevel(hInstall: MSIHANDLE, iInstallLevel: Int32): UInt32 {
+    return MsiSetInstallLevel(hInstall, iInstallLevel)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSetInternalUI == "on"]
+foreign {
     // param-hint: phWnd optional
     func MsiSetInternalUI(dwUILevel: Int32, phWnd: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSetInternalUI == "on"]
+public unsafe func Windows_MsiSetInternalUI(dwUILevel: Int32, phWnd: CPointer<CPointer<Unit>>): Int32 {
+    return MsiSetInternalUI(dwUILevel, phWnd)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSetMode == "on"]
+foreign {
     func MsiSetMode(hInstall: MSIHANDLE, eRunMode: Int32, fState: Int32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSetMode == "on"]
+public unsafe func Windows_MsiSetMode(hInstall: MSIHANDLE, eRunMode: Int32, fState: Int32): UInt32 {
+    return MsiSetMode(hInstall, eRunMode, fState)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSetPropertyA == "on"]
+foreign {
     func MsiSetPropertyA(hInstall: MSIHANDLE, szName: CPointer<UInt8>, szValue: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSetPropertyA == "on"]
+public unsafe func Windows_MsiSetPropertyA(hInstall: MSIHANDLE, szName: CPointer<UInt8>, szValue: CPointer<UInt8>): UInt32 {
+    return MsiSetPropertyA(hInstall, szName, szValue)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSetPropertyW == "on"]
+foreign {
     func MsiSetPropertyW(hInstall: MSIHANDLE, szName: CPointer<UInt16>, szValue: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSetPropertyW == "on"]
+public unsafe func Windows_MsiSetPropertyW(hInstall: MSIHANDLE, szName: CPointer<UInt16>, szValue: CPointer<UInt16>): UInt32 {
+    return MsiSetPropertyW(hInstall, szName, szValue)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSetTargetPathA == "on"]
+foreign {
     func MsiSetTargetPathA(hInstall: MSIHANDLE, szFolder: CPointer<UInt8>, szFolderPath: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSetTargetPathA == "on"]
+public unsafe func Windows_MsiSetTargetPathA(hInstall: MSIHANDLE, szFolder: CPointer<UInt8>, szFolderPath: CPointer<UInt8>): UInt32 {
+    return MsiSetTargetPathA(hInstall, szFolder, szFolderPath)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSetTargetPathW == "on"]
+foreign {
     func MsiSetTargetPathW(hInstall: MSIHANDLE, szFolder: CPointer<UInt16>, szFolderPath: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSetTargetPathW == "on"]
+public unsafe func Windows_MsiSetTargetPathW(hInstall: MSIHANDLE, szFolder: CPointer<UInt16>, szFolderPath: CPointer<UInt16>): UInt32 {
+    return MsiSetTargetPathW(hInstall, szFolder, szFolderPath)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListAddMediaDiskA == "on"]
+foreign {
     // param-hint: szUserSid optional
     // param-hint: szVolumeLabel optional
     // param-hint: szDiskPrompt optional
     func MsiSourceListAddMediaDiskA(szProductCodeOrPatchCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: Int32, dwOptions: UInt32, dwDiskId: UInt32, szVolumeLabel: CPointer<UInt8>, szDiskPrompt: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListAddMediaDiskA == "on"]
+public unsafe func Windows_MsiSourceListAddMediaDiskA(szProductCodeOrPatchCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: Int32, dwOptions: UInt32, dwDiskId: UInt32, szVolumeLabel: CPointer<UInt8>, szDiskPrompt: CPointer<UInt8>): UInt32 {
+    return MsiSourceListAddMediaDiskA(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions, dwDiskId, szVolumeLabel, szDiskPrompt)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListAddMediaDiskW == "on"]
+foreign {
     // param-hint: szUserSid optional
     // param-hint: szVolumeLabel optional
     // param-hint: szDiskPrompt optional
     func MsiSourceListAddMediaDiskW(szProductCodeOrPatchCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: Int32, dwOptions: UInt32, dwDiskId: UInt32, szVolumeLabel: CPointer<UInt16>, szDiskPrompt: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListAddMediaDiskW == "on"]
+public unsafe func Windows_MsiSourceListAddMediaDiskW(szProductCodeOrPatchCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: Int32, dwOptions: UInt32, dwDiskId: UInt32, szVolumeLabel: CPointer<UInt16>, szDiskPrompt: CPointer<UInt16>): UInt32 {
+    return MsiSourceListAddMediaDiskW(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions, dwDiskId, szVolumeLabel, szDiskPrompt)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListAddSourceA == "on"]
+foreign {
     // param-hint: szUserName optional
     // param-hint: dwReserved optional reserved
     func MsiSourceListAddSourceA(szProduct: CPointer<UInt8>, szUserName: CPointer<UInt8>, dwReserved: UInt32, szSource: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListAddSourceA == "on"]
+public unsafe func Windows_MsiSourceListAddSourceA(szProduct: CPointer<UInt8>, szUserName: CPointer<UInt8>, dwReserved: UInt32, szSource: CPointer<UInt8>): UInt32 {
+    return MsiSourceListAddSourceA(szProduct, szUserName, dwReserved, szSource)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListAddSourceExA == "on"]
+foreign {
     // param-hint: szUserSid optional
     func MsiSourceListAddSourceExA(szProductCodeOrPatchCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: Int32, dwOptions: UInt32, szSource: CPointer<UInt8>, dwIndex: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListAddSourceExA == "on"]
+public unsafe func Windows_MsiSourceListAddSourceExA(szProductCodeOrPatchCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: Int32, dwOptions: UInt32, szSource: CPointer<UInt8>, dwIndex: UInt32): UInt32 {
+    return MsiSourceListAddSourceExA(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions, szSource, dwIndex)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListAddSourceExW == "on"]
+foreign {
     // param-hint: szUserSid optional
     func MsiSourceListAddSourceExW(szProductCodeOrPatchCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: Int32, dwOptions: UInt32, szSource: CPointer<UInt16>, dwIndex: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListAddSourceExW == "on"]
+public unsafe func Windows_MsiSourceListAddSourceExW(szProductCodeOrPatchCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: Int32, dwOptions: UInt32, szSource: CPointer<UInt16>, dwIndex: UInt32): UInt32 {
+    return MsiSourceListAddSourceExW(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions, szSource, dwIndex)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListAddSourceW == "on"]
+foreign {
     // param-hint: szUserName optional
     // param-hint: dwReserved optional reserved
     func MsiSourceListAddSourceW(szProduct: CPointer<UInt16>, szUserName: CPointer<UInt16>, dwReserved: UInt32, szSource: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListAddSourceW == "on"]
+public unsafe func Windows_MsiSourceListAddSourceW(szProduct: CPointer<UInt16>, szUserName: CPointer<UInt16>, dwReserved: UInt32, szSource: CPointer<UInt16>): UInt32 {
+    return MsiSourceListAddSourceW(szProduct, szUserName, dwReserved, szSource)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListClearAllA == "on"]
+foreign {
     // param-hint: szUserName optional
     // param-hint: dwReserved optional reserved
     func MsiSourceListClearAllA(szProduct: CPointer<UInt8>, szUserName: CPointer<UInt8>, dwReserved: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListClearAllA == "on"]
+public unsafe func Windows_MsiSourceListClearAllA(szProduct: CPointer<UInt8>, szUserName: CPointer<UInt8>, dwReserved: UInt32): UInt32 {
+    return MsiSourceListClearAllA(szProduct, szUserName, dwReserved)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListClearAllExA == "on"]
+foreign {
     // param-hint: szUserSid optional
     func MsiSourceListClearAllExA(szProductCodeOrPatchCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: Int32, dwOptions: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListClearAllExA == "on"]
+public unsafe func Windows_MsiSourceListClearAllExA(szProductCodeOrPatchCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: Int32, dwOptions: UInt32): UInt32 {
+    return MsiSourceListClearAllExA(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListClearAllExW == "on"]
+foreign {
     // param-hint: szUserSid optional
     func MsiSourceListClearAllExW(szProductCodeOrPatchCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: Int32, dwOptions: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListClearAllExW == "on"]
+public unsafe func Windows_MsiSourceListClearAllExW(szProductCodeOrPatchCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: Int32, dwOptions: UInt32): UInt32 {
+    return MsiSourceListClearAllExW(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListClearAllW == "on"]
+foreign {
     // param-hint: szUserName optional
     // param-hint: dwReserved optional reserved
     func MsiSourceListClearAllW(szProduct: CPointer<UInt16>, szUserName: CPointer<UInt16>, dwReserved: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListClearAllW == "on"]
+public unsafe func Windows_MsiSourceListClearAllW(szProduct: CPointer<UInt16>, szUserName: CPointer<UInt16>, dwReserved: UInt32): UInt32 {
+    return MsiSourceListClearAllW(szProduct, szUserName, dwReserved)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListClearMediaDiskA == "on"]
+foreign {
     // param-hint: szUserSid optional
     func MsiSourceListClearMediaDiskA(szProductCodeOrPatchCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: Int32, dwOptions: UInt32, dwDiskId: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListClearMediaDiskA == "on"]
+public unsafe func Windows_MsiSourceListClearMediaDiskA(szProductCodeOrPatchCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: Int32, dwOptions: UInt32, dwDiskId: UInt32): UInt32 {
+    return MsiSourceListClearMediaDiskA(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions, dwDiskId)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListClearMediaDiskW == "on"]
+foreign {
     // param-hint: szUserSid optional
     func MsiSourceListClearMediaDiskW(szProductCodeOrPatchCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: Int32, dwOptions: UInt32, dwDiskId: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListClearMediaDiskW == "on"]
+public unsafe func Windows_MsiSourceListClearMediaDiskW(szProductCodeOrPatchCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: Int32, dwOptions: UInt32, dwDiskId: UInt32): UInt32 {
+    return MsiSourceListClearMediaDiskW(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions, dwDiskId)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListClearSourceA == "on"]
+foreign {
     // param-hint: szUserSid optional
     func MsiSourceListClearSourceA(szProductCodeOrPatchCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: Int32, dwOptions: UInt32, szSource: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListClearSourceA == "on"]
+public unsafe func Windows_MsiSourceListClearSourceA(szProductCodeOrPatchCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: Int32, dwOptions: UInt32, szSource: CPointer<UInt8>): UInt32 {
+    return MsiSourceListClearSourceA(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions, szSource)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListClearSourceW == "on"]
+foreign {
     // param-hint: szUserSid optional
     func MsiSourceListClearSourceW(szProductCodeOrPatchCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: Int32, dwOptions: UInt32, szSource: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListClearSourceW == "on"]
+public unsafe func Windows_MsiSourceListClearSourceW(szProductCodeOrPatchCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: Int32, dwOptions: UInt32, szSource: CPointer<UInt16>): UInt32 {
+    return MsiSourceListClearSourceW(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions, szSource)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListEnumMediaDisksA == "on"]
+foreign {
     // param-hint: szUserSid optional
     // param-hint: pdwDiskId optional
     // param-hint: szVolumeLabel len=param[7] optional
@@ -9246,6 +11592,15 @@ foreign {
     // param-hint: szDiskPrompt len=param[9] optional
     // param-hint: pcchDiskPrompt optional
     func MsiSourceListEnumMediaDisksA(szProductCodeOrPatchCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: Int32, dwOptions: UInt32, dwIndex: UInt32, pdwDiskId: CPointer<UInt32>, szVolumeLabel: CPointer<UInt8>, pcchVolumeLabel: CPointer<UInt32>, szDiskPrompt: CPointer<UInt8>, pcchDiskPrompt: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListEnumMediaDisksA == "on"]
+public unsafe func Windows_MsiSourceListEnumMediaDisksA(szProductCodeOrPatchCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: Int32, dwOptions: UInt32, dwIndex: UInt32, pdwDiskId: CPointer<UInt32>, szVolumeLabel: CPointer<UInt8>, pcchVolumeLabel: CPointer<UInt32>, szDiskPrompt: CPointer<UInt8>, pcchDiskPrompt: CPointer<UInt32>): UInt32 {
+    return MsiSourceListEnumMediaDisksA(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions, dwIndex, pdwDiskId, szVolumeLabel, pcchVolumeLabel, szDiskPrompt, pcchDiskPrompt)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListEnumMediaDisksW == "on"]
+foreign {
     // param-hint: szUserSid optional
     // param-hint: pdwDiskId optional
     // param-hint: szVolumeLabel len=param[7] optional
@@ -9253,98 +11608,358 @@ foreign {
     // param-hint: szDiskPrompt len=param[9] optional
     // param-hint: pcchDiskPrompt optional
     func MsiSourceListEnumMediaDisksW(szProductCodeOrPatchCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: Int32, dwOptions: UInt32, dwIndex: UInt32, pdwDiskId: CPointer<UInt32>, szVolumeLabel: CPointer<UInt16>, pcchVolumeLabel: CPointer<UInt32>, szDiskPrompt: CPointer<UInt16>, pcchDiskPrompt: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListEnumMediaDisksW == "on"]
+public unsafe func Windows_MsiSourceListEnumMediaDisksW(szProductCodeOrPatchCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: Int32, dwOptions: UInt32, dwIndex: UInt32, pdwDiskId: CPointer<UInt32>, szVolumeLabel: CPointer<UInt16>, pcchVolumeLabel: CPointer<UInt32>, szDiskPrompt: CPointer<UInt16>, pcchDiskPrompt: CPointer<UInt32>): UInt32 {
+    return MsiSourceListEnumMediaDisksW(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions, dwIndex, pdwDiskId, szVolumeLabel, pcchVolumeLabel, szDiskPrompt, pcchDiskPrompt)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListEnumSourcesA == "on"]
+foreign {
     // param-hint: szUserSid optional
     // param-hint: szSource len=param[6] optional
     // param-hint: pcchSource optional
     func MsiSourceListEnumSourcesA(szProductCodeOrPatchCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: Int32, dwOptions: UInt32, dwIndex: UInt32, szSource: CPointer<UInt8>, pcchSource: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListEnumSourcesA == "on"]
+public unsafe func Windows_MsiSourceListEnumSourcesA(szProductCodeOrPatchCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: Int32, dwOptions: UInt32, dwIndex: UInt32, szSource: CPointer<UInt8>, pcchSource: CPointer<UInt32>): UInt32 {
+    return MsiSourceListEnumSourcesA(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions, dwIndex, szSource, pcchSource)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListEnumSourcesW == "on"]
+foreign {
     // param-hint: szUserSid optional
     // param-hint: szSource len=param[6] optional
     // param-hint: pcchSource optional
     func MsiSourceListEnumSourcesW(szProductCodeOrPatchCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: Int32, dwOptions: UInt32, dwIndex: UInt32, szSource: CPointer<UInt16>, pcchSource: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListEnumSourcesW == "on"]
+public unsafe func Windows_MsiSourceListEnumSourcesW(szProductCodeOrPatchCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: Int32, dwOptions: UInt32, dwIndex: UInt32, szSource: CPointer<UInt16>, pcchSource: CPointer<UInt32>): UInt32 {
+    return MsiSourceListEnumSourcesW(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions, dwIndex, szSource, pcchSource)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListForceResolutionA == "on"]
+foreign {
     // param-hint: szUserName optional
     // param-hint: dwReserved optional reserved
     func MsiSourceListForceResolutionA(szProduct: CPointer<UInt8>, szUserName: CPointer<UInt8>, dwReserved: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListForceResolutionA == "on"]
+public unsafe func Windows_MsiSourceListForceResolutionA(szProduct: CPointer<UInt8>, szUserName: CPointer<UInt8>, dwReserved: UInt32): UInt32 {
+    return MsiSourceListForceResolutionA(szProduct, szUserName, dwReserved)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListForceResolutionExA == "on"]
+foreign {
     // param-hint: szUserSid optional
     func MsiSourceListForceResolutionExA(szProductCodeOrPatchCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: Int32, dwOptions: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListForceResolutionExA == "on"]
+public unsafe func Windows_MsiSourceListForceResolutionExA(szProductCodeOrPatchCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: Int32, dwOptions: UInt32): UInt32 {
+    return MsiSourceListForceResolutionExA(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListForceResolutionExW == "on"]
+foreign {
     // param-hint: szUserSid optional
     func MsiSourceListForceResolutionExW(szProductCodeOrPatchCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: Int32, dwOptions: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListForceResolutionExW == "on"]
+public unsafe func Windows_MsiSourceListForceResolutionExW(szProductCodeOrPatchCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: Int32, dwOptions: UInt32): UInt32 {
+    return MsiSourceListForceResolutionExW(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListForceResolutionW == "on"]
+foreign {
     // param-hint: szUserName optional
     // param-hint: dwReserved optional reserved
     func MsiSourceListForceResolutionW(szProduct: CPointer<UInt16>, szUserName: CPointer<UInt16>, dwReserved: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListForceResolutionW == "on"]
+public unsafe func Windows_MsiSourceListForceResolutionW(szProduct: CPointer<UInt16>, szUserName: CPointer<UInt16>, dwReserved: UInt32): UInt32 {
+    return MsiSourceListForceResolutionW(szProduct, szUserName, dwReserved)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListGetInfoA == "on"]
+foreign {
     // param-hint: szUserSid optional
     // param-hint: szValue len=param[6] optional
     // param-hint: pcchValue optional
     func MsiSourceListGetInfoA(szProductCodeOrPatchCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: Int32, dwOptions: UInt32, szProperty: CPointer<UInt8>, szValue: CPointer<UInt8>, pcchValue: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListGetInfoA == "on"]
+public unsafe func Windows_MsiSourceListGetInfoA(szProductCodeOrPatchCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: Int32, dwOptions: UInt32, szProperty: CPointer<UInt8>, szValue: CPointer<UInt8>, pcchValue: CPointer<UInt32>): UInt32 {
+    return MsiSourceListGetInfoA(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions, szProperty, szValue, pcchValue)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListGetInfoW == "on"]
+foreign {
     // param-hint: szUserSid optional
     // param-hint: szValue len=param[6] optional
     // param-hint: pcchValue optional
     func MsiSourceListGetInfoW(szProductCodeOrPatchCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: Int32, dwOptions: UInt32, szProperty: CPointer<UInt16>, szValue: CPointer<UInt16>, pcchValue: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListGetInfoW == "on"]
+public unsafe func Windows_MsiSourceListGetInfoW(szProductCodeOrPatchCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: Int32, dwOptions: UInt32, szProperty: CPointer<UInt16>, szValue: CPointer<UInt16>, pcchValue: CPointer<UInt32>): UInt32 {
+    return MsiSourceListGetInfoW(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions, szProperty, szValue, pcchValue)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListSetInfoA == "on"]
+foreign {
     // param-hint: szUserSid optional
     func MsiSourceListSetInfoA(szProductCodeOrPatchCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: Int32, dwOptions: UInt32, szProperty: CPointer<UInt8>, szValue: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListSetInfoA == "on"]
+public unsafe func Windows_MsiSourceListSetInfoA(szProductCodeOrPatchCode: CPointer<UInt8>, szUserSid: CPointer<UInt8>, dwContext: Int32, dwOptions: UInt32, szProperty: CPointer<UInt8>, szValue: CPointer<UInt8>): UInt32 {
+    return MsiSourceListSetInfoA(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions, szProperty, szValue)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListSetInfoW == "on"]
+foreign {
     // param-hint: szUserSid optional
     func MsiSourceListSetInfoW(szProductCodeOrPatchCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: Int32, dwOptions: UInt32, szProperty: CPointer<UInt16>, szValue: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSourceListSetInfoW == "on"]
+public unsafe func Windows_MsiSourceListSetInfoW(szProductCodeOrPatchCode: CPointer<UInt16>, szUserSid: CPointer<UInt16>, dwContext: Int32, dwOptions: UInt32, szProperty: CPointer<UInt16>, szValue: CPointer<UInt16>): UInt32 {
+    return MsiSourceListSetInfoW(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions, szProperty, szValue)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSummaryInfoGetPropertyA == "on"]
+foreign {
     // param-hint: pftValue optional
     // param-hint: szValueBuf len=param[6] optional
     // param-hint: pcchValueBuf optional
     func MsiSummaryInfoGetPropertyA(hSummaryInfo: MSIHANDLE, uiProperty: UInt32, puiDataType: CPointer<UInt32>, piValue: CPointer<Int32>, pftValue: CPointer<Win32_Foundation.FILETIME>, szValueBuf: CPointer<UInt8>, pcchValueBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSummaryInfoGetPropertyA == "on"]
+public unsafe func Windows_MsiSummaryInfoGetPropertyA(hSummaryInfo: MSIHANDLE, uiProperty: UInt32, puiDataType: CPointer<UInt32>, piValue: CPointer<Int32>, pftValue: CPointer<Win32_Foundation.FILETIME>, szValueBuf: CPointer<UInt8>, pcchValueBuf: CPointer<UInt32>): UInt32 {
+    return MsiSummaryInfoGetPropertyA(hSummaryInfo, uiProperty, puiDataType, piValue, pftValue, szValueBuf, pcchValueBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSummaryInfoGetPropertyCount == "on"]
+foreign {
     func MsiSummaryInfoGetPropertyCount(hSummaryInfo: MSIHANDLE, puiPropertyCount: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSummaryInfoGetPropertyCount == "on"]
+public unsafe func Windows_MsiSummaryInfoGetPropertyCount(hSummaryInfo: MSIHANDLE, puiPropertyCount: CPointer<UInt32>): UInt32 {
+    return MsiSummaryInfoGetPropertyCount(hSummaryInfo, puiPropertyCount)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSummaryInfoGetPropertyW == "on"]
+foreign {
     // param-hint: pftValue optional
     // param-hint: szValueBuf len=param[6] optional
     // param-hint: pcchValueBuf optional
     func MsiSummaryInfoGetPropertyW(hSummaryInfo: MSIHANDLE, uiProperty: UInt32, puiDataType: CPointer<UInt32>, piValue: CPointer<Int32>, pftValue: CPointer<Win32_Foundation.FILETIME>, szValueBuf: CPointer<UInt16>, pcchValueBuf: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSummaryInfoGetPropertyW == "on"]
+public unsafe func Windows_MsiSummaryInfoGetPropertyW(hSummaryInfo: MSIHANDLE, uiProperty: UInt32, puiDataType: CPointer<UInt32>, piValue: CPointer<Int32>, pftValue: CPointer<Win32_Foundation.FILETIME>, szValueBuf: CPointer<UInt16>, pcchValueBuf: CPointer<UInt32>): UInt32 {
+    return MsiSummaryInfoGetPropertyW(hSummaryInfo, uiProperty, puiDataType, piValue, pftValue, szValueBuf, pcchValueBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSummaryInfoPersist == "on"]
+foreign {
     func MsiSummaryInfoPersist(hSummaryInfo: MSIHANDLE): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSummaryInfoPersist == "on"]
+public unsafe func Windows_MsiSummaryInfoPersist(hSummaryInfo: MSIHANDLE): UInt32 {
+    return MsiSummaryInfoPersist(hSummaryInfo)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSummaryInfoSetPropertyA == "on"]
+foreign {
     func MsiSummaryInfoSetPropertyA(hSummaryInfo: MSIHANDLE, uiProperty: UInt32, uiDataType: UInt32, iValue: Int32, pftValue: CPointer<Win32_Foundation.FILETIME>, szValue: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSummaryInfoSetPropertyA == "on"]
+public unsafe func Windows_MsiSummaryInfoSetPropertyA(hSummaryInfo: MSIHANDLE, uiProperty: UInt32, uiDataType: UInt32, iValue: Int32, pftValue: CPointer<Win32_Foundation.FILETIME>, szValue: CPointer<UInt8>): UInt32 {
+    return MsiSummaryInfoSetPropertyA(hSummaryInfo, uiProperty, uiDataType, iValue, pftValue, szValue)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSummaryInfoSetPropertyW == "on"]
+foreign {
     func MsiSummaryInfoSetPropertyW(hSummaryInfo: MSIHANDLE, uiProperty: UInt32, uiDataType: UInt32, iValue: Int32, pftValue: CPointer<Win32_Foundation.FILETIME>, szValue: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiSummaryInfoSetPropertyW == "on"]
+public unsafe func Windows_MsiSummaryInfoSetPropertyW(hSummaryInfo: MSIHANDLE, uiProperty: UInt32, uiDataType: UInt32, iValue: Int32, pftValue: CPointer<Win32_Foundation.FILETIME>, szValue: CPointer<UInt16>): UInt32 {
+    return MsiSummaryInfoSetPropertyW(hSummaryInfo, uiProperty, uiDataType, iValue, pftValue, szValue)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiUseFeatureA == "on"]
+foreign {
     func MsiUseFeatureA(szProduct: CPointer<UInt8>, szFeature: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiUseFeatureA == "on"]
+public unsafe func Windows_MsiUseFeatureA(szProduct: CPointer<UInt8>, szFeature: CPointer<UInt8>): Int32 {
+    return MsiUseFeatureA(szProduct, szFeature)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiUseFeatureExA == "on"]
+foreign {
     // param-hint: dwReserved optional reserved
     func MsiUseFeatureExA(szProduct: CPointer<UInt8>, szFeature: CPointer<UInt8>, dwInstallMode: UInt32, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiUseFeatureExA == "on"]
+public unsafe func Windows_MsiUseFeatureExA(szProduct: CPointer<UInt8>, szFeature: CPointer<UInt8>, dwInstallMode: UInt32, dwReserved: UInt32): Int32 {
+    return MsiUseFeatureExA(szProduct, szFeature, dwInstallMode, dwReserved)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiUseFeatureExW == "on"]
+foreign {
     // param-hint: dwReserved optional reserved
     func MsiUseFeatureExW(szProduct: CPointer<UInt16>, szFeature: CPointer<UInt16>, dwInstallMode: UInt32, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiUseFeatureExW == "on"]
+public unsafe func Windows_MsiUseFeatureExW(szProduct: CPointer<UInt16>, szFeature: CPointer<UInt16>, dwInstallMode: UInt32, dwReserved: UInt32): Int32 {
+    return MsiUseFeatureExW(szProduct, szFeature, dwInstallMode, dwReserved)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiUseFeatureW == "on"]
+foreign {
     func MsiUseFeatureW(szProduct: CPointer<UInt16>, szFeature: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiUseFeatureW == "on"]
+public unsafe func Windows_MsiUseFeatureW(szProduct: CPointer<UInt16>, szFeature: CPointer<UInt16>): Int32 {
+    return MsiUseFeatureW(szProduct, szFeature)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiVerifyDiskSpace == "on"]
+foreign {
     func MsiVerifyDiskSpace(hInstall: MSIHANDLE): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiVerifyDiskSpace == "on"]
+public unsafe func Windows_MsiVerifyDiskSpace(hInstall: MSIHANDLE): UInt32 {
+    return MsiVerifyDiskSpace(hInstall)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiVerifyPackageA == "on"]
+foreign {
     func MsiVerifyPackageA(szPackagePath: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiVerifyPackageA == "on"]
+public unsafe func Windows_MsiVerifyPackageA(szPackagePath: CPointer<UInt8>): UInt32 {
+    return MsiVerifyPackageA(szPackagePath)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiVerifyPackageW == "on"]
+foreign {
     func MsiVerifyPackageW(szPackagePath: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiVerifyPackageW == "on"]
+public unsafe func Windows_MsiVerifyPackageW(szPackagePath: CPointer<UInt16>): UInt32 {
+    return MsiVerifyPackageW(szPackagePath)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiViewClose == "on"]
+foreign {
     func MsiViewClose(hView: MSIHANDLE): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiViewClose == "on"]
+public unsafe func Windows_MsiViewClose(hView: MSIHANDLE): UInt32 {
+    return MsiViewClose(hView)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiViewExecute == "on"]
+foreign {
     func MsiViewExecute(hView: MSIHANDLE, hRecord: MSIHANDLE): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiViewExecute == "on"]
+public unsafe func Windows_MsiViewExecute(hView: MSIHANDLE, hRecord: MSIHANDLE): UInt32 {
+    return MsiViewExecute(hView, hRecord)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiViewFetch == "on"]
+foreign {
     func MsiViewFetch(hView: MSIHANDLE, phRecord: CPointer<MSIHANDLE>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiViewFetch == "on"]
+public unsafe func Windows_MsiViewFetch(hView: MSIHANDLE, phRecord: CPointer<MSIHANDLE>): UInt32 {
+    return MsiViewFetch(hView, phRecord)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiViewGetColumnInfo == "on"]
+foreign {
     func MsiViewGetColumnInfo(hView: MSIHANDLE, eColumnInfo: Int32, phRecord: CPointer<MSIHANDLE>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiViewGetColumnInfo == "on"]
+public unsafe func Windows_MsiViewGetColumnInfo(hView: MSIHANDLE, eColumnInfo: Int32, phRecord: CPointer<MSIHANDLE>): UInt32 {
+    return MsiViewGetColumnInfo(hView, eColumnInfo, phRecord)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiViewGetErrorA == "on"]
+foreign {
     // param-hint: szColumnNameBuffer len=param[2] optional
     // param-hint: pcchBuf optional
     func MsiViewGetErrorA(hView: MSIHANDLE, szColumnNameBuffer: CPointer<UInt8>, pcchBuf: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiViewGetErrorA == "on"]
+public unsafe func Windows_MsiViewGetErrorA(hView: MSIHANDLE, szColumnNameBuffer: CPointer<UInt8>, pcchBuf: CPointer<UInt32>): Int32 {
+    return MsiViewGetErrorA(hView, szColumnNameBuffer, pcchBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiViewGetErrorW == "on"]
+foreign {
     // param-hint: szColumnNameBuffer len=param[2] optional
     // param-hint: pcchBuf optional
     func MsiViewGetErrorW(hView: MSIHANDLE, szColumnNameBuffer: CPointer<UInt16>, pcchBuf: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiViewGetErrorW == "on"]
+public unsafe func Windows_MsiViewGetErrorW(hView: MSIHANDLE, szColumnNameBuffer: CPointer<UInt16>, pcchBuf: CPointer<UInt32>): Int32 {
+    return MsiViewGetErrorW(hView, szColumnNameBuffer, pcchBuf)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiViewModify == "on"]
+foreign {
     func MsiViewModify(hView: MSIHANDLE, eModifyMode: Int32, hRecord: MSIHANDLE): UInt32
 }
 
-@When[MSI == "on" && Windows_Win32_Security_Cryptography == "on"]
-foreign {
-    // param-hint: pbHashData bytes=param[4] optional
-    // param-hint: pcbHashData optional
-    func MsiGetFileSignatureInformationA(szSignedObjectPath: CPointer<UInt8>, dwFlags: UInt32, ppcCertContext: CPointer<CPointer<Win32__impl_l2.CERT_CONTEXT>>, pbHashData: CPointer<UInt8>, pcbHashData: CPointer<UInt32>): Int32
-    // param-hint: pbHashData bytes=param[4] optional
-    // param-hint: pcbHashData optional
-    func MsiGetFileSignatureInformationW(szSignedObjectPath: CPointer<UInt16>, dwFlags: UInt32, ppcCertContext: CPointer<CPointer<Win32__impl_l2.CERT_CONTEXT>>, pbHashData: CPointer<UInt8>, pcbHashData: CPointer<UInt32>): Int32
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSI == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_MsiViewModify == "on"]
+public unsafe func Windows_MsiViewModify(hView: MSIHANDLE, eModifyMode: Int32, hRecord: MSIHANDLE): UInt32 {
+    return MsiViewModify(hView, eModifyMode, hRecord)
 }
 
-@When[MSI == "on" && Windows_Win32_System_Registry == "on"]
-foreign {
-    // param-hint: phRegData optional
-    func MsiAdvertiseScriptA(szScriptFile: CPointer<UInt8>, dwFlags: UInt32, phRegData: CPointer<Win32_System_Registry.HKEY>, fRemoveItems: Int32): UInt32
-    // param-hint: phRegData optional
-    func MsiAdvertiseScriptW(szScriptFile: CPointer<UInt16>, dwFlags: UInt32, phRegData: CPointer<Win32_System_Registry.HKEY>, fRemoveItems: Int32): UInt32
-    // param-hint: szIconFolder optional
-    // param-hint: hRegData optional
-    func MsiProcessAdvertiseScriptA(szScriptFile: CPointer<UInt8>, szIconFolder: CPointer<UInt8>, hRegData: Win32_System_Registry.HKEY, fShortcuts: Int32, fRemoveItems: Int32): UInt32
-    // param-hint: szIconFolder optional
-    // param-hint: hRegData optional
-    func MsiProcessAdvertiseScriptW(szScriptFile: CPointer<UInt16>, szIconFolder: CPointer<UInt16>, hRegData: Win32_System_Registry.HKEY, fShortcuts: Int32, fRemoveItems: Int32): UInt32
-}
-
-@When[MSPATCHA == "on"]
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ApplyPatchToFileA == "on"]
 foreign {
     // param-hint: OldFileName optional
     func ApplyPatchToFileA(PatchFileName: CPointer<UInt8>, OldFileName: CPointer<UInt8>, NewFileName: CPointer<UInt8>, ApplyOptionFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ApplyPatchToFileA == "on"]
+public unsafe func Windows_ApplyPatchToFileA(PatchFileName: CPointer<UInt8>, OldFileName: CPointer<UInt8>, NewFileName: CPointer<UInt8>, ApplyOptionFlags: UInt32): Int32 {
+    return ApplyPatchToFileA(PatchFileName, OldFileName, NewFileName, ApplyOptionFlags)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ApplyPatchToFileByBuffers == "on"]
+foreign {
     // param-hint: PatchFileMapped bytes=param[1]
     // param-hint: OldFileMapped bytes=param[3] optional
     // param-hint: NewFileBuffer bytes=param[5]
@@ -9353,100 +11968,336 @@ foreign {
     // param-hint: ProgressCallback optional
     // param-hint: CallbackContext optional
     func ApplyPatchToFileByBuffers(PatchFileMapped: CPointer<UInt8>, PatchFileSize: UInt32, OldFileMapped: CPointer<UInt8>, OldFileSize: UInt32, NewFileBuffer: CPointer<CPointer<UInt8>>, NewFileBufferSize: UInt32, NewFileActualSize: CPointer<UInt32>, NewFileTime: CPointer<Win32_Foundation.FILETIME>, ApplyOptionFlags: UInt32, ProgressCallback: PPATCH_PROGRESS_CALLBACK, CallbackContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ApplyPatchToFileByBuffers == "on"]
+public unsafe func Windows_ApplyPatchToFileByBuffers(PatchFileMapped: CPointer<UInt8>, PatchFileSize: UInt32, OldFileMapped: CPointer<UInt8>, OldFileSize: UInt32, NewFileBuffer: CPointer<CPointer<UInt8>>, NewFileBufferSize: UInt32, NewFileActualSize: CPointer<UInt32>, NewFileTime: CPointer<Win32_Foundation.FILETIME>, ApplyOptionFlags: UInt32, ProgressCallback: PPATCH_PROGRESS_CALLBACK, CallbackContext: CPointer<Unit>): Int32 {
+    return ApplyPatchToFileByBuffers(PatchFileMapped, PatchFileSize, OldFileMapped, OldFileSize, NewFileBuffer, NewFileBufferSize, NewFileActualSize, NewFileTime, ApplyOptionFlags, ProgressCallback, CallbackContext)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ApplyPatchToFileByHandles == "on"]
+foreign {
     // param-hint: OldFileHandle optional
     func ApplyPatchToFileByHandles(PatchFileHandle: CPointer<Unit>, OldFileHandle: CPointer<Unit>, NewFileHandle: CPointer<Unit>, ApplyOptionFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ApplyPatchToFileByHandles == "on"]
+public unsafe func Windows_ApplyPatchToFileByHandles(PatchFileHandle: CPointer<Unit>, OldFileHandle: CPointer<Unit>, NewFileHandle: CPointer<Unit>, ApplyOptionFlags: UInt32): Int32 {
+    return ApplyPatchToFileByHandles(PatchFileHandle, OldFileHandle, NewFileHandle, ApplyOptionFlags)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ApplyPatchToFileByHandlesEx == "on"]
+foreign {
     // param-hint: OldFileHandle optional
     // param-hint: ProgressCallback optional
     // param-hint: CallbackContext optional
     func ApplyPatchToFileByHandlesEx(PatchFileHandle: CPointer<Unit>, OldFileHandle: CPointer<Unit>, NewFileHandle: CPointer<Unit>, ApplyOptionFlags: UInt32, ProgressCallback: PPATCH_PROGRESS_CALLBACK, CallbackContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ApplyPatchToFileByHandlesEx == "on"]
+public unsafe func Windows_ApplyPatchToFileByHandlesEx(PatchFileHandle: CPointer<Unit>, OldFileHandle: CPointer<Unit>, NewFileHandle: CPointer<Unit>, ApplyOptionFlags: UInt32, ProgressCallback: PPATCH_PROGRESS_CALLBACK, CallbackContext: CPointer<Unit>): Int32 {
+    return ApplyPatchToFileByHandlesEx(PatchFileHandle, OldFileHandle, NewFileHandle, ApplyOptionFlags, ProgressCallback, CallbackContext)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ApplyPatchToFileExA == "on"]
+foreign {
     // param-hint: OldFileName optional
     // param-hint: ProgressCallback optional
     // param-hint: CallbackContext optional
     func ApplyPatchToFileExA(PatchFileName: CPointer<UInt8>, OldFileName: CPointer<UInt8>, NewFileName: CPointer<UInt8>, ApplyOptionFlags: UInt32, ProgressCallback: PPATCH_PROGRESS_CALLBACK, CallbackContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ApplyPatchToFileExA == "on"]
+public unsafe func Windows_ApplyPatchToFileExA(PatchFileName: CPointer<UInt8>, OldFileName: CPointer<UInt8>, NewFileName: CPointer<UInt8>, ApplyOptionFlags: UInt32, ProgressCallback: PPATCH_PROGRESS_CALLBACK, CallbackContext: CPointer<Unit>): Int32 {
+    return ApplyPatchToFileExA(PatchFileName, OldFileName, NewFileName, ApplyOptionFlags, ProgressCallback, CallbackContext)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ApplyPatchToFileExW == "on"]
+foreign {
     // param-hint: OldFileName optional
     // param-hint: ProgressCallback optional
     // param-hint: CallbackContext optional
     func ApplyPatchToFileExW(PatchFileName: CPointer<UInt16>, OldFileName: CPointer<UInt16>, NewFileName: CPointer<UInt16>, ApplyOptionFlags: UInt32, ProgressCallback: PPATCH_PROGRESS_CALLBACK, CallbackContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ApplyPatchToFileExW == "on"]
+public unsafe func Windows_ApplyPatchToFileExW(PatchFileName: CPointer<UInt16>, OldFileName: CPointer<UInt16>, NewFileName: CPointer<UInt16>, ApplyOptionFlags: UInt32, ProgressCallback: PPATCH_PROGRESS_CALLBACK, CallbackContext: CPointer<Unit>): Int32 {
+    return ApplyPatchToFileExW(PatchFileName, OldFileName, NewFileName, ApplyOptionFlags, ProgressCallback, CallbackContext)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ApplyPatchToFileW == "on"]
+foreign {
     // param-hint: OldFileName optional
     func ApplyPatchToFileW(PatchFileName: CPointer<UInt16>, OldFileName: CPointer<UInt16>, NewFileName: CPointer<UInt16>, ApplyOptionFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ApplyPatchToFileW == "on"]
+public unsafe func Windows_ApplyPatchToFileW(PatchFileName: CPointer<UInt16>, OldFileName: CPointer<UInt16>, NewFileName: CPointer<UInt16>, ApplyOptionFlags: UInt32): Int32 {
+    return ApplyPatchToFileW(PatchFileName, OldFileName, NewFileName, ApplyOptionFlags)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_GetFilePatchSignatureA == "on"]
+foreign {
     // param-hint: OptionData optional
     // param-hint: IgnoreRangeArray len=param[3] optional
     // param-hint: RetainRangeArray len=param[5] optional
     // param-hint: SignatureBuffer bytes=param[7]
     func GetFilePatchSignatureA(FileName: CPointer<UInt8>, OptionFlags: UInt32, OptionData: CPointer<Unit>, IgnoreRangeCount: UInt32, IgnoreRangeArray: CPointer<PATCH_IGNORE_RANGE>, RetainRangeCount: UInt32, RetainRangeArray: CPointer<PATCH_RETAIN_RANGE>, SignatureBufferSize: UInt32, SignatureBuffer: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_GetFilePatchSignatureA == "on"]
+public unsafe func Windows_GetFilePatchSignatureA(FileName: CPointer<UInt8>, OptionFlags: UInt32, OptionData: CPointer<Unit>, IgnoreRangeCount: UInt32, IgnoreRangeArray: CPointer<PATCH_IGNORE_RANGE>, RetainRangeCount: UInt32, RetainRangeArray: CPointer<PATCH_RETAIN_RANGE>, SignatureBufferSize: UInt32, SignatureBuffer: CPointer<UInt8>): Int32 {
+    return GetFilePatchSignatureA(FileName, OptionFlags, OptionData, IgnoreRangeCount, IgnoreRangeArray, RetainRangeCount, RetainRangeArray, SignatureBufferSize, SignatureBuffer)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_GetFilePatchSignatureByBuffer == "on"]
+foreign {
     // param-hint: FileBufferWritable bytes=param[1]
     // param-hint: OptionData optional
     // param-hint: IgnoreRangeArray len=param[4] optional
     // param-hint: RetainRangeArray len=param[6] optional
     // param-hint: SignatureBuffer bytes=param[8]
     func GetFilePatchSignatureByBuffer(FileBufferWritable: CPointer<UInt8>, FileSize: UInt32, OptionFlags: UInt32, OptionData: CPointer<Unit>, IgnoreRangeCount: UInt32, IgnoreRangeArray: CPointer<PATCH_IGNORE_RANGE>, RetainRangeCount: UInt32, RetainRangeArray: CPointer<PATCH_RETAIN_RANGE>, SignatureBufferSize: UInt32, SignatureBuffer: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_GetFilePatchSignatureByBuffer == "on"]
+public unsafe func Windows_GetFilePatchSignatureByBuffer(FileBufferWritable: CPointer<UInt8>, FileSize: UInt32, OptionFlags: UInt32, OptionData: CPointer<Unit>, IgnoreRangeCount: UInt32, IgnoreRangeArray: CPointer<PATCH_IGNORE_RANGE>, RetainRangeCount: UInt32, RetainRangeArray: CPointer<PATCH_RETAIN_RANGE>, SignatureBufferSize: UInt32, SignatureBuffer: CPointer<UInt8>): Int32 {
+    return GetFilePatchSignatureByBuffer(FileBufferWritable, FileSize, OptionFlags, OptionData, IgnoreRangeCount, IgnoreRangeArray, RetainRangeCount, RetainRangeArray, SignatureBufferSize, SignatureBuffer)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_GetFilePatchSignatureByHandle == "on"]
+foreign {
     // param-hint: OptionData optional
     // param-hint: IgnoreRangeArray len=param[3] optional
     // param-hint: RetainRangeArray len=param[5] optional
     // param-hint: SignatureBuffer bytes=param[7]
     func GetFilePatchSignatureByHandle(FileHandle: CPointer<Unit>, OptionFlags: UInt32, OptionData: CPointer<Unit>, IgnoreRangeCount: UInt32, IgnoreRangeArray: CPointer<PATCH_IGNORE_RANGE>, RetainRangeCount: UInt32, RetainRangeArray: CPointer<PATCH_RETAIN_RANGE>, SignatureBufferSize: UInt32, SignatureBuffer: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_GetFilePatchSignatureByHandle == "on"]
+public unsafe func Windows_GetFilePatchSignatureByHandle(FileHandle: CPointer<Unit>, OptionFlags: UInt32, OptionData: CPointer<Unit>, IgnoreRangeCount: UInt32, IgnoreRangeArray: CPointer<PATCH_IGNORE_RANGE>, RetainRangeCount: UInt32, RetainRangeArray: CPointer<PATCH_RETAIN_RANGE>, SignatureBufferSize: UInt32, SignatureBuffer: CPointer<UInt8>): Int32 {
+    return GetFilePatchSignatureByHandle(FileHandle, OptionFlags, OptionData, IgnoreRangeCount, IgnoreRangeArray, RetainRangeCount, RetainRangeArray, SignatureBufferSize, SignatureBuffer)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_GetFilePatchSignatureW == "on"]
+foreign {
     // param-hint: OptionData optional
     // param-hint: IgnoreRangeArray len=param[3] optional
     // param-hint: RetainRangeArray len=param[5] optional
     // param-hint: SignatureBuffer bytes=param[7]
     func GetFilePatchSignatureW(FileName: CPointer<UInt16>, OptionFlags: UInt32, OptionData: CPointer<Unit>, IgnoreRangeCount: UInt32, IgnoreRangeArray: CPointer<PATCH_IGNORE_RANGE>, RetainRangeCount: UInt32, RetainRangeArray: CPointer<PATCH_RETAIN_RANGE>, SignatureBufferSize: UInt32, SignatureBuffer: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_GetFilePatchSignatureW == "on"]
+public unsafe func Windows_GetFilePatchSignatureW(FileName: CPointer<UInt16>, OptionFlags: UInt32, OptionData: CPointer<Unit>, IgnoreRangeCount: UInt32, IgnoreRangeArray: CPointer<PATCH_IGNORE_RANGE>, RetainRangeCount: UInt32, RetainRangeArray: CPointer<PATCH_RETAIN_RANGE>, SignatureBufferSize: UInt32, SignatureBuffer: CPointer<UInt16>): Int32 {
+    return GetFilePatchSignatureW(FileName, OptionFlags, OptionData, IgnoreRangeCount, IgnoreRangeArray, RetainRangeCount, RetainRangeArray, SignatureBufferSize, SignatureBuffer)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_NormalizeFileForPatchSignature == "on"]
+foreign {
     // param-hint: FileBuffer bytes=param[1]
     // param-hint: OptionData optional
     // param-hint: IgnoreRangeArray len=param[6] optional
     // param-hint: RetainRangeArray len=param[8] optional
     func NormalizeFileForPatchSignature(FileBuffer: CPointer<Unit>, FileSize: UInt32, OptionFlags: UInt32, OptionData: CPointer<PATCH_OPTION_DATA>, NewFileCoffBase: UInt32, NewFileCoffTime: UInt32, IgnoreRangeCount: UInt32, IgnoreRangeArray: CPointer<PATCH_IGNORE_RANGE>, RetainRangeCount: UInt32, RetainRangeArray: CPointer<PATCH_RETAIN_RANGE>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_NormalizeFileForPatchSignature == "on"]
+public unsafe func Windows_NormalizeFileForPatchSignature(FileBuffer: CPointer<Unit>, FileSize: UInt32, OptionFlags: UInt32, OptionData: CPointer<PATCH_OPTION_DATA>, NewFileCoffBase: UInt32, NewFileCoffTime: UInt32, IgnoreRangeCount: UInt32, IgnoreRangeArray: CPointer<PATCH_IGNORE_RANGE>, RetainRangeCount: UInt32, RetainRangeArray: CPointer<PATCH_RETAIN_RANGE>): Int32 {
+    return NormalizeFileForPatchSignature(FileBuffer, FileSize, OptionFlags, OptionData, NewFileCoffBase, NewFileCoffTime, IgnoreRangeCount, IgnoreRangeArray, RetainRangeCount, RetainRangeArray)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_TestApplyPatchToFileA == "on"]
+foreign {
     func TestApplyPatchToFileA(PatchFileName: CPointer<UInt8>, OldFileName: CPointer<UInt8>, ApplyOptionFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_TestApplyPatchToFileA == "on"]
+public unsafe func Windows_TestApplyPatchToFileA(PatchFileName: CPointer<UInt8>, OldFileName: CPointer<UInt8>, ApplyOptionFlags: UInt32): Int32 {
+    return TestApplyPatchToFileA(PatchFileName, OldFileName, ApplyOptionFlags)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_TestApplyPatchToFileByBuffers == "on"]
+foreign {
     // param-hint: PatchFileBuffer bytes=param[1]
     // param-hint: OldFileBuffer bytes=param[3] optional
     // param-hint: NewFileSize optional
     func TestApplyPatchToFileByBuffers(PatchFileBuffer: CPointer<UInt8>, PatchFileSize: UInt32, OldFileBuffer: CPointer<UInt8>, OldFileSize: UInt32, NewFileSize: CPointer<UInt32>, ApplyOptionFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_TestApplyPatchToFileByBuffers == "on"]
+public unsafe func Windows_TestApplyPatchToFileByBuffers(PatchFileBuffer: CPointer<UInt8>, PatchFileSize: UInt32, OldFileBuffer: CPointer<UInt8>, OldFileSize: UInt32, NewFileSize: CPointer<UInt32>, ApplyOptionFlags: UInt32): Int32 {
+    return TestApplyPatchToFileByBuffers(PatchFileBuffer, PatchFileSize, OldFileBuffer, OldFileSize, NewFileSize, ApplyOptionFlags)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_TestApplyPatchToFileByHandles == "on"]
+foreign {
     func TestApplyPatchToFileByHandles(PatchFileHandle: CPointer<Unit>, OldFileHandle: CPointer<Unit>, ApplyOptionFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_TestApplyPatchToFileByHandles == "on"]
+public unsafe func Windows_TestApplyPatchToFileByHandles(PatchFileHandle: CPointer<Unit>, OldFileHandle: CPointer<Unit>, ApplyOptionFlags: UInt32): Int32 {
+    return TestApplyPatchToFileByHandles(PatchFileHandle, OldFileHandle, ApplyOptionFlags)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_TestApplyPatchToFileW == "on"]
+foreign {
     func TestApplyPatchToFileW(PatchFileName: CPointer<UInt16>, OldFileName: CPointer<UInt16>, ApplyOptionFlags: UInt32): Int32
 }
 
-@When[MSPATCHC == "on"]
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHA == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_TestApplyPatchToFileW == "on"]
+public unsafe func Windows_TestApplyPatchToFileW(PatchFileName: CPointer<UInt16>, OldFileName: CPointer<UInt16>, ApplyOptionFlags: UInt32): Int32 {
+    return TestApplyPatchToFileW(PatchFileName, OldFileName, ApplyOptionFlags)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHC == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_CreatePatchFileA == "on"]
 foreign {
     // param-hint: OldFileName optional
     // param-hint: OptionData optional
     func CreatePatchFileA(OldFileName: CPointer<UInt8>, NewFileName: CPointer<UInt8>, PatchFileName: CPointer<UInt8>, OptionFlags: UInt32, OptionData: CPointer<PATCH_OPTION_DATA>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHC == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_CreatePatchFileA == "on"]
+public unsafe func Windows_CreatePatchFileA(OldFileName: CPointer<UInt8>, NewFileName: CPointer<UInt8>, PatchFileName: CPointer<UInt8>, OptionFlags: UInt32, OptionData: CPointer<PATCH_OPTION_DATA>): Int32 {
+    return CreatePatchFileA(OldFileName, NewFileName, PatchFileName, OptionFlags, OptionData)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHC == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_CreatePatchFileByHandles == "on"]
+foreign {
     // param-hint: OldFileHandle optional
     // param-hint: OptionData optional
     func CreatePatchFileByHandles(OldFileHandle: CPointer<Unit>, NewFileHandle: CPointer<Unit>, PatchFileHandle: CPointer<Unit>, OptionFlags: UInt32, OptionData: CPointer<PATCH_OPTION_DATA>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHC == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_CreatePatchFileByHandles == "on"]
+public unsafe func Windows_CreatePatchFileByHandles(OldFileHandle: CPointer<Unit>, NewFileHandle: CPointer<Unit>, PatchFileHandle: CPointer<Unit>, OptionFlags: UInt32, OptionData: CPointer<PATCH_OPTION_DATA>): Int32 {
+    return CreatePatchFileByHandles(OldFileHandle, NewFileHandle, PatchFileHandle, OptionFlags, OptionData)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHC == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_CreatePatchFileByHandlesEx == "on"]
+foreign {
     // param-hint: OldFileInfoArray len=param[0]
     // param-hint: OptionData optional
     // param-hint: ProgressCallback optional
     // param-hint: CallbackContext optional
     func CreatePatchFileByHandlesEx(OldFileCount: UInt32, OldFileInfoArray: CPointer<PATCH_OLD_FILE_INFO_H>, NewFileHandle: CPointer<Unit>, PatchFileHandle: CPointer<Unit>, OptionFlags: UInt32, OptionData: CPointer<PATCH_OPTION_DATA>, ProgressCallback: PPATCH_PROGRESS_CALLBACK, CallbackContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHC == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_CreatePatchFileByHandlesEx == "on"]
+public unsafe func Windows_CreatePatchFileByHandlesEx(OldFileCount: UInt32, OldFileInfoArray: CPointer<PATCH_OLD_FILE_INFO_H>, NewFileHandle: CPointer<Unit>, PatchFileHandle: CPointer<Unit>, OptionFlags: UInt32, OptionData: CPointer<PATCH_OPTION_DATA>, ProgressCallback: PPATCH_PROGRESS_CALLBACK, CallbackContext: CPointer<Unit>): Int32 {
+    return CreatePatchFileByHandlesEx(OldFileCount, OldFileInfoArray, NewFileHandle, PatchFileHandle, OptionFlags, OptionData, ProgressCallback, CallbackContext)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHC == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_CreatePatchFileExA == "on"]
+foreign {
     // param-hint: OldFileInfoArray len=param[0]
     // param-hint: OptionData optional
     // param-hint: ProgressCallback optional
     // param-hint: CallbackContext optional
     func CreatePatchFileExA(OldFileCount: UInt32, OldFileInfoArray: CPointer<PATCH_OLD_FILE_INFO_A>, NewFileName: CPointer<UInt8>, PatchFileName: CPointer<UInt8>, OptionFlags: UInt32, OptionData: CPointer<PATCH_OPTION_DATA>, ProgressCallback: PPATCH_PROGRESS_CALLBACK, CallbackContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHC == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_CreatePatchFileExA == "on"]
+public unsafe func Windows_CreatePatchFileExA(OldFileCount: UInt32, OldFileInfoArray: CPointer<PATCH_OLD_FILE_INFO_A>, NewFileName: CPointer<UInt8>, PatchFileName: CPointer<UInt8>, OptionFlags: UInt32, OptionData: CPointer<PATCH_OPTION_DATA>, ProgressCallback: PPATCH_PROGRESS_CALLBACK, CallbackContext: CPointer<Unit>): Int32 {
+    return CreatePatchFileExA(OldFileCount, OldFileInfoArray, NewFileName, PatchFileName, OptionFlags, OptionData, ProgressCallback, CallbackContext)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHC == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_CreatePatchFileExW == "on"]
+foreign {
     // param-hint: OldFileInfoArray len=param[0]
     // param-hint: OptionData optional
     // param-hint: ProgressCallback optional
     // param-hint: CallbackContext optional
     func CreatePatchFileExW(OldFileCount: UInt32, OldFileInfoArray: CPointer<PATCH_OLD_FILE_INFO_W>, NewFileName: CPointer<UInt16>, PatchFileName: CPointer<UInt16>, OptionFlags: UInt32, OptionData: CPointer<PATCH_OPTION_DATA>, ProgressCallback: PPATCH_PROGRESS_CALLBACK, CallbackContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHC == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_CreatePatchFileExW == "on"]
+public unsafe func Windows_CreatePatchFileExW(OldFileCount: UInt32, OldFileInfoArray: CPointer<PATCH_OLD_FILE_INFO_W>, NewFileName: CPointer<UInt16>, PatchFileName: CPointer<UInt16>, OptionFlags: UInt32, OptionData: CPointer<PATCH_OPTION_DATA>, ProgressCallback: PPATCH_PROGRESS_CALLBACK, CallbackContext: CPointer<Unit>): Int32 {
+    return CreatePatchFileExW(OldFileCount, OldFileInfoArray, NewFileName, PatchFileName, OptionFlags, OptionData, ProgressCallback, CallbackContext)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHC == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_CreatePatchFileW == "on"]
+foreign {
     // param-hint: OldFileName optional
     // param-hint: OptionData optional
     func CreatePatchFileW(OldFileName: CPointer<UInt16>, NewFileName: CPointer<UInt16>, PatchFileName: CPointer<UInt16>, OptionFlags: UInt32, OptionData: CPointer<PATCH_OPTION_DATA>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHC == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_CreatePatchFileW == "on"]
+public unsafe func Windows_CreatePatchFileW(OldFileName: CPointer<UInt16>, NewFileName: CPointer<UInt16>, PatchFileName: CPointer<UInt16>, OptionFlags: UInt32, OptionData: CPointer<PATCH_OPTION_DATA>): Int32 {
+    return CreatePatchFileW(OldFileName, NewFileName, PatchFileName, OptionFlags, OptionData)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHC == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ExtractPatchHeaderToFileA == "on"]
+foreign {
     func ExtractPatchHeaderToFileA(PatchFileName: CPointer<UInt8>, PatchHeaderFileName: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHC == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ExtractPatchHeaderToFileA == "on"]
+public unsafe func Windows_ExtractPatchHeaderToFileA(PatchFileName: CPointer<UInt8>, PatchHeaderFileName: CPointer<UInt8>): Int32 {
+    return ExtractPatchHeaderToFileA(PatchFileName, PatchHeaderFileName)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHC == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ExtractPatchHeaderToFileByHandles == "on"]
+foreign {
     func ExtractPatchHeaderToFileByHandles(PatchFileHandle: CPointer<Unit>, PatchHeaderFileHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHC == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ExtractPatchHeaderToFileByHandles == "on"]
+public unsafe func Windows_ExtractPatchHeaderToFileByHandles(PatchFileHandle: CPointer<Unit>, PatchHeaderFileHandle: CPointer<Unit>): Int32 {
+    return ExtractPatchHeaderToFileByHandles(PatchFileHandle, PatchHeaderFileHandle)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHC == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ExtractPatchHeaderToFileW == "on"]
+foreign {
     func ExtractPatchHeaderToFileW(PatchFileName: CPointer<UInt16>, PatchHeaderFileName: CPointer<UInt16>): Int32
 }
 
-@When[SFC == "on"]
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && MSPATCHC == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_ExtractPatchHeaderToFileW == "on"]
+public unsafe func Windows_ExtractPatchHeaderToFileW(PatchFileName: CPointer<UInt16>, PatchHeaderFileName: CPointer<UInt16>): Int32 {
+    return ExtractPatchHeaderToFileW(PatchFileName, PatchHeaderFileName)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && SFC == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_SfcGetNextProtectedFile == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func SfcGetNextProtectedFile(RpcHandle: CPointer<Unit>, ProtFileData: CPointer<PROTECTED_FILE_DATA>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && SFC == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_SfcGetNextProtectedFile == "on"]
+public unsafe func Windows_SfcGetNextProtectedFile(RpcHandle: CPointer<Unit>, ProtFileData: CPointer<PROTECTED_FILE_DATA>): Int32 {
+    return SfcGetNextProtectedFile(RpcHandle, ProtFileData)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && SFC == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_SfcIsFileProtected == "on"]
+foreign {
     func SfcIsFileProtected(RpcHandle: CPointer<Unit>, ProtFileName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && SFC == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_SfcIsFileProtected == "on"]
+public unsafe func Windows_SfcIsFileProtected(RpcHandle: CPointer<Unit>, ProtFileName: CPointer<UInt16>): Int32 {
+    return SfcIsFileProtected(RpcHandle, ProtFileName)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && SFC == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_SfcIsKeyProtected == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    func SfcIsKeyProtected(KeyHandle: Win32_System_Registry.HKEY, SubKeyName: CPointer<UInt16>, KeySam: UInt32): Int32
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && SFC == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_SfcIsKeyProtected == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_SfcIsKeyProtected(KeyHandle: Win32_System_Registry.HKEY, SubKeyName: CPointer<UInt16>, KeySam: UInt32): Int32 {
+    return SfcIsKeyProtected(KeyHandle, SubKeyName, KeySam)
+}
+
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && SFC == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_SfpVerifyFile == "on"]
+foreign {
     // param-hint: pszError len=param[2]
     func SfpVerifyFile(pszFileName: CPointer<UInt8>, pszError: CPointer<UInt8>, dwErrSize: UInt32): Int32
 }
 
-@When[SFC == "on" && Windows_Win32_System_Registry == "on"]
-foreign {
-    func SfcIsKeyProtected(KeyHandle: Win32_System_Registry.HKEY, SubKeyName: CPointer<UInt16>, KeySam: UInt32): Int32
+@When[Windows_Win32_System_ApplicationInstallationAndServicing == "on" && SFC == "on" && Windows_Win32_System_ApplicationInstallationAndServicing_SfpVerifyFile == "on"]
+public unsafe func Windows_SfpVerifyFile(pszFileName: CPointer<UInt8>, pszError: CPointer<UInt8>, dwErrSize: UInt32): Int32 {
+    return SfpVerifyFile(pszFileName, pszError, dwErrSize)
 }
 
 @When[Windows_Win32_System_ApplicationInstallationAndServicing == "on"]

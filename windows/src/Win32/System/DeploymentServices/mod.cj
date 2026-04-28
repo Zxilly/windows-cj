@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrap
 import windows_interface as windows_interface
 import windows_polyfill.{packedReadUInt16, packedReadUInt32, packedReadUInt8, packedReadValue, packedWriteUInt16, packedWriteUInt32, packedWriteUInt8, packedWriteValue, unionReadUInt32, unionWriteUInt32}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_System_Registry == "on"]
 import windows.Win32.System.Registry as Win32_System_Registry
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l2 as Win32__impl_l2
@@ -4509,199 +4507,994 @@ extend WDS_TRANSPORTCLIENT_REQUEST <: windows_core.CopyType & windows_core.Runti
     }
 }
 
-@When[WDSBP == "on"]
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSBP == "on" && Windows_Win32_System_DeploymentServices_WdsBpAddOption == "on"]
 foreign {
     // param-hint: pValue bytes=param[2]
     func WdsBpAddOption(hHandle: CPointer<Unit>, uOption: UInt32, uValueLen: UInt32, pValue: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSBP == "on" && Windows_Win32_System_DeploymentServices_WdsBpAddOption == "on"]
+public unsafe func Windows_WdsBpAddOption(hHandle: CPointer<Unit>, uOption: UInt32, uValueLen: UInt32, pValue: CPointer<Unit>): UInt32 {
+    return WdsBpAddOption(hHandle, uOption, uValueLen, pValue)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSBP == "on" && Windows_Win32_System_DeploymentServices_WdsBpCloseHandle == "on"]
+foreign {
     func WdsBpCloseHandle(hHandle: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSBP == "on" && Windows_Win32_System_DeploymentServices_WdsBpCloseHandle == "on"]
+public unsafe func Windows_WdsBpCloseHandle(hHandle: CPointer<Unit>): UInt32 {
+    return WdsBpCloseHandle(hHandle)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSBP == "on" && Windows_Win32_System_DeploymentServices_WdsBpGetOptionBuffer == "on"]
+foreign {
     // param-hint: pBuffer bytes=param[1]
     func WdsBpGetOptionBuffer(hHandle: CPointer<Unit>, uBufferLen: UInt32, pBuffer: CPointer<Unit>, puBytes: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSBP == "on" && Windows_Win32_System_DeploymentServices_WdsBpGetOptionBuffer == "on"]
+public unsafe func Windows_WdsBpGetOptionBuffer(hHandle: CPointer<Unit>, uBufferLen: UInt32, pBuffer: CPointer<Unit>, puBytes: CPointer<UInt32>): UInt32 {
+    return WdsBpGetOptionBuffer(hHandle, uBufferLen, pBuffer, puBytes)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSBP == "on" && Windows_Win32_System_DeploymentServices_WdsBpInitialize == "on"]
+foreign {
     func WdsBpInitialize(bPacketType: UInt8, phHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSBP == "on" && Windows_Win32_System_DeploymentServices_WdsBpInitialize == "on"]
+public unsafe func Windows_WdsBpInitialize(bPacketType: UInt8, phHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return WdsBpInitialize(bPacketType, phHandle)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSBP == "on" && Windows_Win32_System_DeploymentServices_WdsBpParseInitialize == "on"]
+foreign {
     // param-hint: pPacket bytes=param[1]
     // param-hint: pbPacketType optional
     func WdsBpParseInitialize(pPacket: CPointer<Unit>, uPacketLen: UInt32, pbPacketType: CPointer<UInt8>, phHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSBP == "on" && Windows_Win32_System_DeploymentServices_WdsBpParseInitialize == "on"]
+public unsafe func Windows_WdsBpParseInitialize(pPacket: CPointer<Unit>, uPacketLen: UInt32, pbPacketType: CPointer<UInt8>, phHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return WdsBpParseInitialize(pPacket, uPacketLen, pbPacketType, phHandle)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSBP == "on" && Windows_Win32_System_DeploymentServices_WdsBpParseInitializev6 == "on"]
+foreign {
     // param-hint: pPacket bytes=param[1]
     // param-hint: pbPacketType optional
     func WdsBpParseInitializev6(pPacket: CPointer<Unit>, uPacketLen: UInt32, pbPacketType: CPointer<UInt8>, phHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSBP == "on" && Windows_Win32_System_DeploymentServices_WdsBpParseInitializev6 == "on"]
+public unsafe func Windows_WdsBpParseInitializev6(pPacket: CPointer<Unit>, uPacketLen: UInt32, pbPacketType: CPointer<UInt8>, phHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return WdsBpParseInitializev6(pPacket, uPacketLen, pbPacketType, phHandle)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSBP == "on" && Windows_Win32_System_DeploymentServices_WdsBpQueryOption == "on"]
+foreign {
     // param-hint: pValue bytes=param[2]
     // param-hint: puBytes optional
     func WdsBpQueryOption(hHandle: CPointer<Unit>, uOption: UInt32, uValueLen: UInt32, pValue: CPointer<Unit>, puBytes: CPointer<UInt32>): UInt32
 }
 
-@When[WDSCLIENTAPI == "on"]
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSBP == "on" && Windows_Win32_System_DeploymentServices_WdsBpQueryOption == "on"]
+public unsafe func Windows_WdsBpQueryOption(hHandle: CPointer<Unit>, uOption: UInt32, uValueLen: UInt32, pValue: CPointer<Unit>, puBytes: CPointer<UInt32>): UInt32 {
+    return WdsBpQueryOption(hHandle, uOption, uValueLen, pValue, puBytes)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliLog == "on"]
 @CallingConv[CDECL]
 foreign {
     // pinvoke-hint: cc=cdecl
     func WdsCliLog(hSession: CPointer<Unit>, ulLogLevel: UInt32, ulMessageCode: UInt32, ...): Int32
 }
 
-@When[WDSCLIENTAPI == "on"]
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliAuthorizeSession == "on"]
 foreign {
     // param-hint: pCred optional
     func WdsCliAuthorizeSession(hSession: CPointer<Unit>, pCred: CPointer<WDS_CLI_CREDAbi>): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliAuthorizeSession == "on"]
+public unsafe func Windows_WdsCliAuthorizeSession(hSession: CPointer<Unit>, pCred: CPointer<WDS_CLI_CREDAbi>): Int32 {
+    return WdsCliAuthorizeSession(hSession, pCred)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliCancelTransfer == "on"]
+foreign {
     func WdsCliCancelTransfer(hTransfer: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliCancelTransfer == "on"]
+public unsafe func Windows_WdsCliCancelTransfer(hTransfer: CPointer<Unit>): Int32 {
+    return WdsCliCancelTransfer(hTransfer)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliClose == "on"]
+foreign {
     func WdsCliClose(Handle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliClose == "on"]
+public unsafe func Windows_WdsCliClose(Handle: CPointer<Unit>): Int32 {
+    return WdsCliClose(Handle)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliCreateSession == "on"]
+foreign {
     // param-hint: pCred optional
     // pinvoke-hint: SetLastError
     func WdsCliCreateSession(pwszServer: CPointer<UInt16>, pCred: CPointer<WDS_CLI_CREDAbi>, phSession: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliCreateSession == "on"]
+public unsafe func Windows_WdsCliCreateSession(pwszServer: CPointer<UInt16>, pCred: CPointer<WDS_CLI_CREDAbi>, phSession: CPointer<CPointer<Unit>>): Int32 {
+    return WdsCliCreateSession(pwszServer, pCred, phSession)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliFindFirstImage == "on"]
+foreign {
     func WdsCliFindFirstImage(hSession: CPointer<Unit>, phFindHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliFindFirstImage == "on"]
+public unsafe func Windows_WdsCliFindFirstImage(hSession: CPointer<Unit>, phFindHandle: CPointer<CPointer<Unit>>): Int32 {
+    return WdsCliFindFirstImage(hSession, phFindHandle)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliFindNextImage == "on"]
+foreign {
     func WdsCliFindNextImage(Handle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliFindNextImage == "on"]
+public unsafe func Windows_WdsCliFindNextImage(Handle: CPointer<Unit>): Int32 {
+    return WdsCliFindNextImage(Handle)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliFreeStringArray == "on"]
+foreign {
     // param-hint: ppwszArray len=param[1] optional
     func WdsCliFreeStringArray(ppwszArray: CPointer<CPointer<UInt16>>, ulCount: UInt32): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliFreeStringArray == "on"]
+public unsafe func Windows_WdsCliFreeStringArray(ppwszArray: CPointer<CPointer<UInt16>>, ulCount: UInt32): Int32 {
+    return WdsCliFreeStringArray(ppwszArray, ulCount)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetDriverQueryXml == "on"]
+foreign {
     // param-hint: pwszWinDirPath optional
     func WdsCliGetDriverQueryXml(pwszWinDirPath: CPointer<UInt16>, ppwszDriverQuery: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetDriverQueryXml == "on"]
+public unsafe func Windows_WdsCliGetDriverQueryXml(pwszWinDirPath: CPointer<UInt16>, ppwszDriverQuery: CPointer<CPointer<UInt16>>): Int32 {
+    return WdsCliGetDriverQueryXml(pwszWinDirPath, ppwszDriverQuery)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetEnumerationFlags == "on"]
+foreign {
     func WdsCliGetEnumerationFlags(Handle: CPointer<Unit>, pdwFlags: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetEnumerationFlags == "on"]
+public unsafe func Windows_WdsCliGetEnumerationFlags(Handle: CPointer<Unit>, pdwFlags: CPointer<UInt32>): Int32 {
+    return WdsCliGetEnumerationFlags(Handle, pdwFlags)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageArchitecture == "on"]
+foreign {
     func WdsCliGetImageArchitecture(hIfh: CPointer<Unit>, pdwValue: CPointer<CPU_ARCHITECTUREAbi>): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageArchitecture == "on"]
+public unsafe func Windows_WdsCliGetImageArchitecture(hIfh: CPointer<Unit>, pdwValue: CPointer<CPU_ARCHITECTUREAbi>): Int32 {
+    return WdsCliGetImageArchitecture(hIfh, pdwValue)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageDescription == "on"]
+foreign {
     func WdsCliGetImageDescription(hIfh: CPointer<Unit>, ppwszValue: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageDescription == "on"]
+public unsafe func Windows_WdsCliGetImageDescription(hIfh: CPointer<Unit>, ppwszValue: CPointer<CPointer<UInt16>>): Int32 {
+    return WdsCliGetImageDescription(hIfh, ppwszValue)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageFiles == "on"]
+foreign {
     func WdsCliGetImageFiles(hIfh: CPointer<Unit>, pppwszFiles: CPointer<CPointer<CPointer<UInt16>>>, pdwCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageFiles == "on"]
+public unsafe func Windows_WdsCliGetImageFiles(hIfh: CPointer<Unit>, pppwszFiles: CPointer<CPointer<CPointer<UInt16>>>, pdwCount: CPointer<UInt32>): Int32 {
+    return WdsCliGetImageFiles(hIfh, pppwszFiles, pdwCount)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageGroup == "on"]
+foreign {
     func WdsCliGetImageGroup(hIfh: CPointer<Unit>, ppwszValue: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageGroup == "on"]
+public unsafe func Windows_WdsCliGetImageGroup(hIfh: CPointer<Unit>, ppwszValue: CPointer<CPointer<UInt16>>): Int32 {
+    return WdsCliGetImageGroup(hIfh, ppwszValue)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageHalName == "on"]
+foreign {
     func WdsCliGetImageHalName(hIfh: CPointer<Unit>, ppwszValue: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageHalName == "on"]
+public unsafe func Windows_WdsCliGetImageHalName(hIfh: CPointer<Unit>, ppwszValue: CPointer<CPointer<UInt16>>): Int32 {
+    return WdsCliGetImageHalName(hIfh, ppwszValue)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageHandleFromFindHandle == "on"]
+foreign {
     func WdsCliGetImageHandleFromFindHandle(FindHandle: CPointer<Unit>, phImageHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageHandleFromFindHandle == "on"]
+public unsafe func Windows_WdsCliGetImageHandleFromFindHandle(FindHandle: CPointer<Unit>, phImageHandle: CPointer<CPointer<Unit>>): Int32 {
+    return WdsCliGetImageHandleFromFindHandle(FindHandle, phImageHandle)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageHandleFromTransferHandle == "on"]
+foreign {
     func WdsCliGetImageHandleFromTransferHandle(hTransfer: CPointer<Unit>, phImageHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageHandleFromTransferHandle == "on"]
+public unsafe func Windows_WdsCliGetImageHandleFromTransferHandle(hTransfer: CPointer<Unit>, phImageHandle: CPointer<CPointer<Unit>>): Int32 {
+    return WdsCliGetImageHandleFromTransferHandle(hTransfer, phImageHandle)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageIndex == "on"]
+foreign {
     func WdsCliGetImageIndex(hIfh: CPointer<Unit>, pdwValue: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageIndex == "on"]
+public unsafe func Windows_WdsCliGetImageIndex(hIfh: CPointer<Unit>, pdwValue: CPointer<UInt32>): Int32 {
+    return WdsCliGetImageIndex(hIfh, pdwValue)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageLanguage == "on"]
+foreign {
     func WdsCliGetImageLanguage(hIfh: CPointer<Unit>, ppwszValue: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageLanguage == "on"]
+public unsafe func Windows_WdsCliGetImageLanguage(hIfh: CPointer<Unit>, ppwszValue: CPointer<CPointer<UInt16>>): Int32 {
+    return WdsCliGetImageLanguage(hIfh, ppwszValue)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageLanguages == "on"]
+foreign {
     func WdsCliGetImageLanguages(hIfh: CPointer<Unit>, pppszValues: CPointer<CPointer<CPointer<Int8>>>, pdwNumValues: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageLanguages == "on"]
+public unsafe func Windows_WdsCliGetImageLanguages(hIfh: CPointer<Unit>, pppszValues: CPointer<CPointer<CPointer<Int8>>>, pdwNumValues: CPointer<UInt32>): Int32 {
+    return WdsCliGetImageLanguages(hIfh, pppszValues, pdwNumValues)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageLastModifiedTime == "on"]
+foreign {
     func WdsCliGetImageLastModifiedTime(hIfh: CPointer<Unit>, ppSysTimeValue: CPointer<CPointer<Win32_Foundation.SYSTEMTIMEAbi>>): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageLastModifiedTime == "on"]
+public unsafe func Windows_WdsCliGetImageLastModifiedTime(hIfh: CPointer<Unit>, ppSysTimeValue: CPointer<CPointer<Win32_Foundation.SYSTEMTIMEAbi>>): Int32 {
+    return WdsCliGetImageLastModifiedTime(hIfh, ppSysTimeValue)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageName == "on"]
+foreign {
     func WdsCliGetImageName(hIfh: CPointer<Unit>, ppwszValue: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageName == "on"]
+public unsafe func Windows_WdsCliGetImageName(hIfh: CPointer<Unit>, ppwszValue: CPointer<CPointer<UInt16>>): Int32 {
+    return WdsCliGetImageName(hIfh, ppwszValue)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageNamespace == "on"]
+foreign {
     func WdsCliGetImageNamespace(hIfh: CPointer<Unit>, ppwszValue: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageNamespace == "on"]
+public unsafe func Windows_WdsCliGetImageNamespace(hIfh: CPointer<Unit>, ppwszValue: CPointer<CPointer<UInt16>>): Int32 {
+    return WdsCliGetImageNamespace(hIfh, ppwszValue)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageParameter == "on"]
+foreign {
     // param-hint: pResponse bytes=param[3]
     func WdsCliGetImageParameter(hIfh: CPointer<Unit>, ParamType: WDS_CLI_IMAGE_PARAM_TYPEAbi, pResponse: CPointer<Unit>, uResponseLen: UInt32): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageParameter == "on"]
+public unsafe func Windows_WdsCliGetImageParameter(hIfh: CPointer<Unit>, ParamType: WDS_CLI_IMAGE_PARAM_TYPEAbi, pResponse: CPointer<Unit>, uResponseLen: UInt32): Int32 {
+    return WdsCliGetImageParameter(hIfh, ParamType, pResponse, uResponseLen)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImagePath == "on"]
+foreign {
     func WdsCliGetImagePath(hIfh: CPointer<Unit>, ppwszValue: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImagePath == "on"]
+public unsafe func Windows_WdsCliGetImagePath(hIfh: CPointer<Unit>, ppwszValue: CPointer<CPointer<UInt16>>): Int32 {
+    return WdsCliGetImagePath(hIfh, ppwszValue)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageSize == "on"]
+foreign {
     func WdsCliGetImageSize(hIfh: CPointer<Unit>, pullValue: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageSize == "on"]
+public unsafe func Windows_WdsCliGetImageSize(hIfh: CPointer<Unit>, pullValue: CPointer<UInt64>): Int32 {
+    return WdsCliGetImageSize(hIfh, pullValue)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageType == "on"]
+foreign {
     func WdsCliGetImageType(hIfh: CPointer<Unit>, pImageType: CPointer<WDS_CLI_IMAGE_TYPEAbi>): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageType == "on"]
+public unsafe func Windows_WdsCliGetImageType(hIfh: CPointer<Unit>, pImageType: CPointer<WDS_CLI_IMAGE_TYPEAbi>): Int32 {
+    return WdsCliGetImageType(hIfh, pImageType)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageVersion == "on"]
+foreign {
     func WdsCliGetImageVersion(hIfh: CPointer<Unit>, ppwszValue: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetImageVersion == "on"]
+public unsafe func Windows_WdsCliGetImageVersion(hIfh: CPointer<Unit>, ppwszValue: CPointer<CPointer<UInt16>>): Int32 {
+    return WdsCliGetImageVersion(hIfh, ppwszValue)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetTransferSize == "on"]
+foreign {
     func WdsCliGetTransferSize(hIfh: CPointer<Unit>, pullValue: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliGetTransferSize == "on"]
+public unsafe func Windows_WdsCliGetTransferSize(hIfh: CPointer<Unit>, pullValue: CPointer<UInt64>): Int32 {
+    return WdsCliGetTransferSize(hIfh, pullValue)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliInitializeLog == "on"]
+foreign {
     func WdsCliInitializeLog(hSession: CPointer<Unit>, ulClientArchitecture: CPU_ARCHITECTUREAbi, pwszClientId: CPointer<UInt16>, pwszClientAddress: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliInitializeLog == "on"]
+public unsafe func Windows_WdsCliInitializeLog(hSession: CPointer<Unit>, ulClientArchitecture: CPU_ARCHITECTUREAbi, pwszClientId: CPointer<UInt16>, pwszClientAddress: CPointer<UInt16>): Int32 {
+    return WdsCliInitializeLog(hSession, ulClientArchitecture, pwszClientId, pwszClientAddress)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliObtainDriverPackages == "on"]
+foreign {
     func WdsCliObtainDriverPackages(hImage: CPointer<Unit>, ppwszServerName: CPointer<CPointer<UInt16>>, pppwszDriverPackages: CPointer<CPointer<CPointer<UInt16>>>, pulCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliObtainDriverPackages == "on"]
+public unsafe func Windows_WdsCliObtainDriverPackages(hImage: CPointer<Unit>, ppwszServerName: CPointer<CPointer<UInt16>>, pppwszDriverPackages: CPointer<CPointer<CPointer<UInt16>>>, pulCount: CPointer<UInt32>): Int32 {
+    return WdsCliObtainDriverPackages(hImage, ppwszServerName, pppwszDriverPackages, pulCount)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliObtainDriverPackagesEx == "on"]
+foreign {
     func WdsCliObtainDriverPackagesEx(hSession: CPointer<Unit>, pwszMachineInfo: CPointer<UInt16>, ppwszServerName: CPointer<CPointer<UInt16>>, pppwszDriverPackages: CPointer<CPointer<CPointer<UInt16>>>, pulCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliObtainDriverPackagesEx == "on"]
+public unsafe func Windows_WdsCliObtainDriverPackagesEx(hSession: CPointer<Unit>, pwszMachineInfo: CPointer<UInt16>, ppwszServerName: CPointer<CPointer<UInt16>>, pppwszDriverPackages: CPointer<CPointer<CPointer<UInt16>>>, pulCount: CPointer<UInt32>): Int32 {
+    return WdsCliObtainDriverPackagesEx(hSession, pwszMachineInfo, ppwszServerName, pppwszDriverPackages, pulCount)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliRegisterTrace == "on"]
+foreign {
     // param-hint: pfn optional
     func WdsCliRegisterTrace(pfn: PFN_WdsCliTraceFunction): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliRegisterTrace == "on"]
+public unsafe func Windows_WdsCliRegisterTrace(pfn: PFN_WdsCliTraceFunction): Int32 {
+    return WdsCliRegisterTrace(pfn)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliSetTransferBufferSize == "on"]
+foreign {
     func WdsCliSetTransferBufferSize(ulSizeInBytes: UInt32): Unit
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliSetTransferBufferSize == "on"]
+public unsafe func Windows_WdsCliSetTransferBufferSize(ulSizeInBytes: UInt32): Unit {
+    WdsCliSetTransferBufferSize(ulSizeInBytes)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliTransferFile == "on"]
+foreign {
     // param-hint: pfnWdsCliCallback optional
     // param-hint: pvUserData optional
     func WdsCliTransferFile(pwszServer: CPointer<UInt16>, pwszNamespace: CPointer<UInt16>, pwszRemoteFilePath: CPointer<UInt16>, pwszLocalFilePath: CPointer<UInt16>, dwFlags: UInt32, dwReserved: UInt32, pfnWdsCliCallback: PFN_WdsCliCallback, pvUserData: CPointer<Unit>, phTransfer: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliTransferFile == "on"]
+public unsafe func Windows_WdsCliTransferFile(pwszServer: CPointer<UInt16>, pwszNamespace: CPointer<UInt16>, pwszRemoteFilePath: CPointer<UInt16>, pwszLocalFilePath: CPointer<UInt16>, dwFlags: UInt32, dwReserved: UInt32, pfnWdsCliCallback: PFN_WdsCliCallback, pvUserData: CPointer<Unit>, phTransfer: CPointer<CPointer<Unit>>): Int32 {
+    return WdsCliTransferFile(pwszServer, pwszNamespace, pwszRemoteFilePath, pwszLocalFilePath, dwFlags, dwReserved, pfnWdsCliCallback, pvUserData, phTransfer)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliTransferImage == "on"]
+foreign {
     // param-hint: pfnWdsCliCallback optional
     // param-hint: pvUserData optional
     func WdsCliTransferImage(hImage: CPointer<Unit>, pwszLocalPath: CPointer<UInt16>, dwFlags: UInt32, dwReserved: UInt32, pfnWdsCliCallback: PFN_WdsCliCallback, pvUserData: CPointer<Unit>, phTransfer: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliTransferImage == "on"]
+public unsafe func Windows_WdsCliTransferImage(hImage: CPointer<Unit>, pwszLocalPath: CPointer<UInt16>, dwFlags: UInt32, dwReserved: UInt32, pfnWdsCliCallback: PFN_WdsCliCallback, pvUserData: CPointer<Unit>, phTransfer: CPointer<CPointer<Unit>>): Int32 {
+    return WdsCliTransferImage(hImage, pwszLocalPath, dwFlags, dwReserved, pfnWdsCliCallback, pvUserData, phTransfer)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliWaitForTransfer == "on"]
+foreign {
     func WdsCliWaitForTransfer(hTransfer: CPointer<Unit>): Int32
 }
 
-@When[WDSMC == "on"]
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSCLIENTAPI == "on" && Windows_Win32_System_DeploymentServices_WdsCliWaitForTransfer == "on"]
+public unsafe func Windows_WdsCliWaitForTransfer(hTransfer: CPointer<Unit>): Int32 {
+    return WdsCliWaitForTransfer(hTransfer)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSMC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportServerTrace == "on"]
 @CallingConv[CDECL]
 foreign {
     // pinvoke-hint: cc=cdecl
     func WdsTransportServerTrace(hProvider: CPointer<Unit>, Severity: UInt32, pwszFormat: CPointer<UInt16>, ...): Int32
 }
 
-@When[WDSMC == "on"]
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSMC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportServerAllocateBuffer == "on"]
 foreign {
     func WdsTransportServerAllocateBuffer(hProvider: CPointer<Unit>, ulBufferSize: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSMC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportServerAllocateBuffer == "on"]
+public unsafe func Windows_WdsTransportServerAllocateBuffer(hProvider: CPointer<Unit>, ulBufferSize: UInt32): CPointer<Unit> {
+    return WdsTransportServerAllocateBuffer(hProvider, ulBufferSize)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSMC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportServerCompleteRead == "on"]
+foreign {
     func WdsTransportServerCompleteRead(hProvider: CPointer<Unit>, ulBytesRead: UInt32, pvUserData: CPointer<Unit>, hReadResult: Int32): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSMC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportServerCompleteRead == "on"]
+public unsafe func Windows_WdsTransportServerCompleteRead(hProvider: CPointer<Unit>, ulBytesRead: UInt32, pvUserData: CPointer<Unit>, hReadResult: Int32): Int32 {
+    return WdsTransportServerCompleteRead(hProvider, ulBytesRead, pvUserData, hReadResult)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSMC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportServerFreeBuffer == "on"]
+foreign {
     func WdsTransportServerFreeBuffer(hProvider: CPointer<Unit>, pvBuffer: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSMC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportServerFreeBuffer == "on"]
+public unsafe func Windows_WdsTransportServerFreeBuffer(hProvider: CPointer<Unit>, pvBuffer: CPointer<Unit>): Int32 {
+    return WdsTransportServerFreeBuffer(hProvider, pvBuffer)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSMC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportServerRegisterCallback == "on"]
+foreign {
     func WdsTransportServerRegisterCallback(hProvider: CPointer<Unit>, CallbackId: TRANSPORTPROVIDER_CALLBACK_IDAbi, pfnCallback: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSMC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportServerRegisterCallback == "on"]
+public unsafe func Windows_WdsTransportServerRegisterCallback(hProvider: CPointer<Unit>, CallbackId: TRANSPORTPROVIDER_CALLBACK_IDAbi, pfnCallback: CPointer<Unit>): Int32 {
+    return WdsTransportServerRegisterCallback(hProvider, CallbackId, pfnCallback)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSMC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportServerTraceV == "on"]
+foreign {
     func WdsTransportServerTraceV(hProvider: CPointer<Unit>, Severity: UInt32, pwszFormat: CPointer<UInt16>, Params: CPointer<Int8>): Int32
 }
 
-@When[WDSPXE == "on"]
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSMC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportServerTraceV == "on"]
+public unsafe func Windows_WdsTransportServerTraceV(hProvider: CPointer<Unit>, Severity: UInt32, pwszFormat: CPointer<UInt16>, Params: CPointer<Int8>): Int32 {
+    return WdsTransportServerTraceV(hProvider, Severity, pwszFormat, Params)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeTrace == "on"]
 @CallingConv[CDECL]
 foreign {
     // pinvoke-hint: cc=cdecl
     func PxeTrace(hProvider: CPointer<Unit>, Severity: UInt32, pszFormat: CPointer<UInt16>, ...): UInt32
 }
 
-@When[WDSPXE == "on"]
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeAsyncRecvDone == "on"]
 foreign {
     func PxeAsyncRecvDone(hClientRequest: CPointer<Unit>, Action: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeAsyncRecvDone == "on"]
+public unsafe func Windows_PxeAsyncRecvDone(hClientRequest: CPointer<Unit>, Action: UInt32): UInt32 {
+    return PxeAsyncRecvDone(hClientRequest, Action)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeDhcpAppendOption == "on"]
+foreign {
     // param-hint: pReplyPacket bytes=param[1]
     // param-hint: pValue bytes=param[4] optional
     func PxeDhcpAppendOption(pReplyPacket: CPointer<Unit>, uMaxReplyPacketLen: UInt32, puReplyPacketLen: CPointer<UInt32>, bOption: UInt8, bOptionLen: UInt8, pValue: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeDhcpAppendOption == "on"]
+public unsafe func Windows_PxeDhcpAppendOption(pReplyPacket: CPointer<Unit>, uMaxReplyPacketLen: UInt32, puReplyPacketLen: CPointer<UInt32>, bOption: UInt8, bOptionLen: UInt8, pValue: CPointer<Unit>): UInt32 {
+    return PxeDhcpAppendOption(pReplyPacket, uMaxReplyPacketLen, puReplyPacketLen, bOption, bOptionLen, pValue)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeDhcpAppendOptionRaw == "on"]
+foreign {
     // param-hint: pReplyPacket bytes=param[1]
     // param-hint: pBuffer bytes=param[3]
     func PxeDhcpAppendOptionRaw(pReplyPacket: CPointer<Unit>, uMaxReplyPacketLen: UInt32, puReplyPacketLen: CPointer<UInt32>, uBufferLen: UInt16, pBuffer: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeDhcpAppendOptionRaw == "on"]
+public unsafe func Windows_PxeDhcpAppendOptionRaw(pReplyPacket: CPointer<Unit>, uMaxReplyPacketLen: UInt32, puReplyPacketLen: CPointer<UInt32>, uBufferLen: UInt16, pBuffer: CPointer<Unit>): UInt32 {
+    return PxeDhcpAppendOptionRaw(pReplyPacket, uMaxReplyPacketLen, puReplyPacketLen, uBufferLen, pBuffer)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeDhcpGetOptionValue == "on"]
+foreign {
     // param-hint: pPacket bytes=param[1]
     // param-hint: pbOptionLen optional
     // param-hint: ppOptionValue optional
     func PxeDhcpGetOptionValue(pPacket: CPointer<Unit>, uPacketLen: UInt32, uInstance: UInt32, bOption: UInt8, pbOptionLen: CPointer<UInt8>, ppOptionValue: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeDhcpGetOptionValue == "on"]
+public unsafe func Windows_PxeDhcpGetOptionValue(pPacket: CPointer<Unit>, uPacketLen: UInt32, uInstance: UInt32, bOption: UInt8, pbOptionLen: CPointer<UInt8>, ppOptionValue: CPointer<CPointer<Unit>>): UInt32 {
+    return PxeDhcpGetOptionValue(pPacket, uPacketLen, uInstance, bOption, pbOptionLen, ppOptionValue)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeDhcpGetVendorOptionValue == "on"]
+foreign {
     // param-hint: pPacket bytes=param[1]
     // param-hint: pbOptionLen optional
     // param-hint: ppOptionValue optional
     func PxeDhcpGetVendorOptionValue(pPacket: CPointer<Unit>, uPacketLen: UInt32, bOption: UInt8, uInstance: UInt32, pbOptionLen: CPointer<UInt8>, ppOptionValue: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeDhcpGetVendorOptionValue == "on"]
+public unsafe func Windows_PxeDhcpGetVendorOptionValue(pPacket: CPointer<Unit>, uPacketLen: UInt32, bOption: UInt8, uInstance: UInt32, pbOptionLen: CPointer<UInt8>, ppOptionValue: CPointer<CPointer<Unit>>): UInt32 {
+    return PxeDhcpGetVendorOptionValue(pPacket, uPacketLen, bOption, uInstance, pbOptionLen, ppOptionValue)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeDhcpInitialize == "on"]
+foreign {
     // param-hint: pRecvPacket bytes=param[1]
     // param-hint: pReplyPacket bytes=param[3]
     func PxeDhcpInitialize(pRecvPacket: CPointer<Unit>, uRecvPacketLen: UInt32, pReplyPacket: CPointer<Unit>, uMaxReplyPacketLen: UInt32, puReplyPacketLen: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeDhcpInitialize == "on"]
+public unsafe func Windows_PxeDhcpInitialize(pRecvPacket: CPointer<Unit>, uRecvPacketLen: UInt32, pReplyPacket: CPointer<Unit>, uMaxReplyPacketLen: UInt32, puReplyPacketLen: CPointer<UInt32>): UInt32 {
+    return PxeDhcpInitialize(pRecvPacket, uRecvPacketLen, pReplyPacket, uMaxReplyPacketLen, puReplyPacketLen)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeDhcpIsValid == "on"]
+foreign {
     // param-hint: pPacket bytes=param[1]
     // param-hint: pbPxeOptionPresent optional
     func PxeDhcpIsValid(pPacket: CPointer<Unit>, uPacketLen: UInt32, bRequestPacket: Int32, pbPxeOptionPresent: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeDhcpIsValid == "on"]
+public unsafe func Windows_PxeDhcpIsValid(pPacket: CPointer<Unit>, uPacketLen: UInt32, bRequestPacket: Int32, pbPxeOptionPresent: CPointer<Int32>): UInt32 {
+    return PxeDhcpIsValid(pPacket, uPacketLen, bRequestPacket, pbPxeOptionPresent)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeDhcpv6AppendOption == "on"]
+foreign {
     // param-hint: pReply bytes=param[1]
     // param-hint: pOption bytes=param[4]
     func PxeDhcpv6AppendOption(pReply: CPointer<Unit>, cbReply: UInt32, pcbReplyUsed: CPointer<UInt32>, wOptionType: UInt16, cbOption: UInt16, pOption: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeDhcpv6AppendOption == "on"]
+public unsafe func Windows_PxeDhcpv6AppendOption(pReply: CPointer<Unit>, cbReply: UInt32, pcbReplyUsed: CPointer<UInt32>, wOptionType: UInt16, cbOption: UInt16, pOption: CPointer<Unit>): UInt32 {
+    return PxeDhcpv6AppendOption(pReply, cbReply, pcbReplyUsed, wOptionType, cbOption, pOption)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeDhcpv6AppendOptionRaw == "on"]
+foreign {
     // param-hint: pReply bytes=param[1]
     // param-hint: pBuffer bytes=param[3]
     func PxeDhcpv6AppendOptionRaw(pReply: CPointer<Unit>, cbReply: UInt32, pcbReplyUsed: CPointer<UInt32>, cbBuffer: UInt16, pBuffer: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeDhcpv6AppendOptionRaw == "on"]
+public unsafe func Windows_PxeDhcpv6AppendOptionRaw(pReply: CPointer<Unit>, cbReply: UInt32, pcbReplyUsed: CPointer<UInt32>, cbBuffer: UInt16, pBuffer: CPointer<Unit>): UInt32 {
+    return PxeDhcpv6AppendOptionRaw(pReply, cbReply, pcbReplyUsed, cbBuffer, pBuffer)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeDhcpv6CreateRelayRepl == "on"]
+foreign {
     // param-hint: pRelayMessages len=param[1]
     // param-hint: pInnerPacket bytes=param[3]
     // param-hint: pReplyBuffer bytes=param[5]
     func PxeDhcpv6CreateRelayRepl(pRelayMessages: CPointer<PXE_DHCPV6_NESTED_RELAY_MESSAGEAbi>, nRelayMessages: UInt32, pInnerPacket: CPointer<UInt8>, cbInnerPacket: UInt32, pReplyBuffer: CPointer<Unit>, cbReplyBuffer: UInt32, pcbReplyBuffer: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeDhcpv6CreateRelayRepl == "on"]
+public unsafe func Windows_PxeDhcpv6CreateRelayRepl(pRelayMessages: CPointer<PXE_DHCPV6_NESTED_RELAY_MESSAGEAbi>, nRelayMessages: UInt32, pInnerPacket: CPointer<UInt8>, cbInnerPacket: UInt32, pReplyBuffer: CPointer<Unit>, cbReplyBuffer: UInt32, pcbReplyBuffer: CPointer<UInt32>): UInt32 {
+    return PxeDhcpv6CreateRelayRepl(pRelayMessages, nRelayMessages, pInnerPacket, cbInnerPacket, pReplyBuffer, cbReplyBuffer, pcbReplyBuffer)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeDhcpv6GetOptionValue == "on"]
+foreign {
     // param-hint: pPacket bytes=param[1]
     // param-hint: pwOptionLen optional
     // param-hint: ppOptionValue optional
     func PxeDhcpv6GetOptionValue(pPacket: CPointer<Unit>, uPacketLen: UInt32, uInstance: UInt32, wOption: UInt16, pwOptionLen: CPointer<UInt16>, ppOptionValue: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeDhcpv6GetOptionValue == "on"]
+public unsafe func Windows_PxeDhcpv6GetOptionValue(pPacket: CPointer<Unit>, uPacketLen: UInt32, uInstance: UInt32, wOption: UInt16, pwOptionLen: CPointer<UInt16>, ppOptionValue: CPointer<CPointer<Unit>>): UInt32 {
+    return PxeDhcpv6GetOptionValue(pPacket, uPacketLen, uInstance, wOption, pwOptionLen, ppOptionValue)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeDhcpv6GetVendorOptionValue == "on"]
+foreign {
     // param-hint: pPacket bytes=param[1]
     // param-hint: pwOptionLen optional
     // param-hint: ppOptionValue optional
     func PxeDhcpv6GetVendorOptionValue(pPacket: CPointer<Unit>, uPacketLen: UInt32, dwEnterpriseNumber: UInt32, wOption: UInt16, uInstance: UInt32, pwOptionLen: CPointer<UInt16>, ppOptionValue: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeDhcpv6GetVendorOptionValue == "on"]
+public unsafe func Windows_PxeDhcpv6GetVendorOptionValue(pPacket: CPointer<Unit>, uPacketLen: UInt32, dwEnterpriseNumber: UInt32, wOption: UInt16, uInstance: UInt32, pwOptionLen: CPointer<UInt16>, ppOptionValue: CPointer<CPointer<Unit>>): UInt32 {
+    return PxeDhcpv6GetVendorOptionValue(pPacket, uPacketLen, dwEnterpriseNumber, wOption, uInstance, pwOptionLen, ppOptionValue)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeDhcpv6Initialize == "on"]
+foreign {
     // param-hint: pRequest bytes=param[1]
     // param-hint: pReply bytes=param[3]
     func PxeDhcpv6Initialize(pRequest: CPointer<Unit>, cbRequest: UInt32, pReply: CPointer<Unit>, cbReply: UInt32, pcbReplyUsed: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeDhcpv6Initialize == "on"]
+public unsafe func Windows_PxeDhcpv6Initialize(pRequest: CPointer<Unit>, cbRequest: UInt32, pReply: CPointer<Unit>, cbReply: UInt32, pcbReplyUsed: CPointer<UInt32>): UInt32 {
+    return PxeDhcpv6Initialize(pRequest, cbRequest, pReply, cbReply, pcbReplyUsed)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeDhcpv6IsValid == "on"]
+foreign {
     // param-hint: pPacket bytes=param[1]
     // param-hint: pbPxeOptionPresent optional
     func PxeDhcpv6IsValid(pPacket: CPointer<Unit>, uPacketLen: UInt32, bRequestPacket: Int32, pbPxeOptionPresent: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeDhcpv6IsValid == "on"]
+public unsafe func Windows_PxeDhcpv6IsValid(pPacket: CPointer<Unit>, uPacketLen: UInt32, bRequestPacket: Int32, pbPxeOptionPresent: CPointer<Int32>): UInt32 {
+    return PxeDhcpv6IsValid(pPacket, uPacketLen, bRequestPacket, pbPxeOptionPresent)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeDhcpv6ParseRelayForw == "on"]
+foreign {
     // param-hint: pRelayForwPacket bytes=param[1]
     // param-hint: pRelayMessages len=param[3]
     func PxeDhcpv6ParseRelayForw(pRelayForwPacket: CPointer<Unit>, uRelayForwPacketLen: UInt32, pRelayMessages: CPointer<PXE_DHCPV6_NESTED_RELAY_MESSAGEAbi>, nRelayMessages: UInt32, pnRelayMessages: CPointer<UInt32>, ppInnerPacket: CPointer<CPointer<UInt8>>, pcbInnerPacket: CPointer<UInt32>): UInt32
-    // param-hint: pBuffer bytes=param[2]
-    func PxeGetServerInfo(uInfoType: UInt32, pBuffer: CPointer<Unit>, uBufferLen: UInt32): UInt32
-    // param-hint: pBuffer bytes=param[2]
-    func PxeGetServerInfoEx(uInfoType: UInt32, pBuffer: CPointer<Unit>, uBufferLen: UInt32, puBufferUsed: CPointer<UInt32>): UInt32
-    // pinvoke-hint: SetLastError
-    func PxePacketAllocate(hProvider: CPointer<Unit>, hClientRequest: CPointer<Unit>, uSize: UInt32): CPointer<Unit>
-    func PxePacketFree(hProvider: CPointer<Unit>, hClientRequest: CPointer<Unit>, pPacket: CPointer<Unit>): UInt32
-    func PxeProviderEnumClose(hEnum: CPointer<Unit>): UInt32
-    func PxeProviderEnumFirst(phEnum: CPointer<CPointer<Unit>>): UInt32
-    func PxeProviderEnumNext(hEnum: CPointer<Unit>, ppProvider: CPointer<CPointer<PXE_PROVIDERAbi>>): UInt32
-    func PxeProviderFreeInfo(pProvider: CPointer<PXE_PROVIDERAbi>): UInt32
-    func PxeProviderQueryIndex(pszProviderName: CPointer<UInt16>, puIndex: CPointer<UInt32>): UInt32
-    // param-hint: pParameterBuffer bytes=param[3]
-    func PxeProviderSetAttribute(hProvider: CPointer<Unit>, Attribute: UInt32, pParameterBuffer: CPointer<Unit>, uParamLen: UInt32): UInt32
-    func PxeProviderUnRegister(pszProviderName: CPointer<UInt16>): UInt32
-    // param-hint: pContext optional
-    func PxeRegisterCallback(hProvider: CPointer<Unit>, CallbackType: UInt32, pCallbackFunction: CPointer<Unit>, pContext: CPointer<Unit>): UInt32
-    // param-hint: pPacket bytes=param[2]
-    func PxeSendReply(hClientRequest: CPointer<Unit>, pPacket: CPointer<Unit>, uPacketLen: UInt32, pAddress: CPointer<PXE_ADDRESSAbi>): UInt32
-    func PxeTraceV(hProvider: CPointer<Unit>, Severity: UInt32, pszFormat: CPointer<UInt16>, Params: CPointer<Int8>): UInt32
 }
 
-@When[WDSPXE == "on" && Windows_Win32_System_Registry == "on"]
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeDhcpv6ParseRelayForw == "on"]
+public unsafe func Windows_PxeDhcpv6ParseRelayForw(pRelayForwPacket: CPointer<Unit>, uRelayForwPacketLen: UInt32, pRelayMessages: CPointer<PXE_DHCPV6_NESTED_RELAY_MESSAGEAbi>, nRelayMessages: UInt32, pnRelayMessages: CPointer<UInt32>, ppInnerPacket: CPointer<CPointer<UInt8>>, pcbInnerPacket: CPointer<UInt32>): UInt32 {
+    return PxeDhcpv6ParseRelayForw(pRelayForwPacket, uRelayForwPacketLen, pRelayMessages, nRelayMessages, pnRelayMessages, ppInnerPacket, pcbInnerPacket)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeGetServerInfo == "on"]
+foreign {
+    // param-hint: pBuffer bytes=param[2]
+    func PxeGetServerInfo(uInfoType: UInt32, pBuffer: CPointer<Unit>, uBufferLen: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeGetServerInfo == "on"]
+public unsafe func Windows_PxeGetServerInfo(uInfoType: UInt32, pBuffer: CPointer<Unit>, uBufferLen: UInt32): UInt32 {
+    return PxeGetServerInfo(uInfoType, pBuffer, uBufferLen)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeGetServerInfoEx == "on"]
+foreign {
+    // param-hint: pBuffer bytes=param[2]
+    func PxeGetServerInfoEx(uInfoType: UInt32, pBuffer: CPointer<Unit>, uBufferLen: UInt32, puBufferUsed: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeGetServerInfoEx == "on"]
+public unsafe func Windows_PxeGetServerInfoEx(uInfoType: UInt32, pBuffer: CPointer<Unit>, uBufferLen: UInt32, puBufferUsed: CPointer<UInt32>): UInt32 {
+    return PxeGetServerInfoEx(uInfoType, pBuffer, uBufferLen, puBufferUsed)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxePacketAllocate == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func PxePacketAllocate(hProvider: CPointer<Unit>, hClientRequest: CPointer<Unit>, uSize: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxePacketAllocate == "on"]
+public unsafe func Windows_PxePacketAllocate(hProvider: CPointer<Unit>, hClientRequest: CPointer<Unit>, uSize: UInt32): CPointer<Unit> {
+    return PxePacketAllocate(hProvider, hClientRequest, uSize)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxePacketFree == "on"]
+foreign {
+    func PxePacketFree(hProvider: CPointer<Unit>, hClientRequest: CPointer<Unit>, pPacket: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxePacketFree == "on"]
+public unsafe func Windows_PxePacketFree(hProvider: CPointer<Unit>, hClientRequest: CPointer<Unit>, pPacket: CPointer<Unit>): UInt32 {
+    return PxePacketFree(hProvider, hClientRequest, pPacket)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeProviderEnumClose == "on"]
+foreign {
+    func PxeProviderEnumClose(hEnum: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeProviderEnumClose == "on"]
+public unsafe func Windows_PxeProviderEnumClose(hEnum: CPointer<Unit>): UInt32 {
+    return PxeProviderEnumClose(hEnum)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeProviderEnumFirst == "on"]
+foreign {
+    func PxeProviderEnumFirst(phEnum: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeProviderEnumFirst == "on"]
+public unsafe func Windows_PxeProviderEnumFirst(phEnum: CPointer<CPointer<Unit>>): UInt32 {
+    return PxeProviderEnumFirst(phEnum)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeProviderEnumNext == "on"]
+foreign {
+    func PxeProviderEnumNext(hEnum: CPointer<Unit>, ppProvider: CPointer<CPointer<PXE_PROVIDERAbi>>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeProviderEnumNext == "on"]
+public unsafe func Windows_PxeProviderEnumNext(hEnum: CPointer<Unit>, ppProvider: CPointer<CPointer<PXE_PROVIDERAbi>>): UInt32 {
+    return PxeProviderEnumNext(hEnum, ppProvider)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeProviderFreeInfo == "on"]
+foreign {
+    func PxeProviderFreeInfo(pProvider: CPointer<PXE_PROVIDERAbi>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeProviderFreeInfo == "on"]
+public unsafe func Windows_PxeProviderFreeInfo(pProvider: CPointer<PXE_PROVIDERAbi>): UInt32 {
+    return PxeProviderFreeInfo(pProvider)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeProviderQueryIndex == "on"]
+foreign {
+    func PxeProviderQueryIndex(pszProviderName: CPointer<UInt16>, puIndex: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeProviderQueryIndex == "on"]
+public unsafe func Windows_PxeProviderQueryIndex(pszProviderName: CPointer<UInt16>, puIndex: CPointer<UInt32>): UInt32 {
+    return PxeProviderQueryIndex(pszProviderName, puIndex)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeProviderRegister == "on" && Windows_Win32_System_Registry == "on"]
 foreign {
     // param-hint: phProviderKey optional
     func PxeProviderRegister(pszProviderName: CPointer<UInt16>, pszModulePath: CPointer<UInt16>, Index: UInt32, bIsCritical: Int32, phProviderKey: CPointer<Win32_System_Registry.HKEY>): UInt32
 }
 
-@When[WDSTPTC == "on"]
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeProviderRegister == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_PxeProviderRegister(pszProviderName: CPointer<UInt16>, pszModulePath: CPointer<UInt16>, Index: UInt32, bIsCritical: Int32, phProviderKey: CPointer<Win32_System_Registry.HKEY>): UInt32 {
+    return PxeProviderRegister(pszProviderName, pszModulePath, Index, bIsCritical, phProviderKey)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeProviderSetAttribute == "on"]
+foreign {
+    // param-hint: pParameterBuffer bytes=param[3]
+    func PxeProviderSetAttribute(hProvider: CPointer<Unit>, Attribute: UInt32, pParameterBuffer: CPointer<Unit>, uParamLen: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeProviderSetAttribute == "on"]
+public unsafe func Windows_PxeProviderSetAttribute(hProvider: CPointer<Unit>, Attribute: UInt32, pParameterBuffer: CPointer<Unit>, uParamLen: UInt32): UInt32 {
+    return PxeProviderSetAttribute(hProvider, Attribute, pParameterBuffer, uParamLen)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeProviderUnRegister == "on"]
+foreign {
+    func PxeProviderUnRegister(pszProviderName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeProviderUnRegister == "on"]
+public unsafe func Windows_PxeProviderUnRegister(pszProviderName: CPointer<UInt16>): UInt32 {
+    return PxeProviderUnRegister(pszProviderName)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeRegisterCallback == "on"]
+foreign {
+    // param-hint: pContext optional
+    func PxeRegisterCallback(hProvider: CPointer<Unit>, CallbackType: UInt32, pCallbackFunction: CPointer<Unit>, pContext: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeRegisterCallback == "on"]
+public unsafe func Windows_PxeRegisterCallback(hProvider: CPointer<Unit>, CallbackType: UInt32, pCallbackFunction: CPointer<Unit>, pContext: CPointer<Unit>): UInt32 {
+    return PxeRegisterCallback(hProvider, CallbackType, pCallbackFunction, pContext)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeSendReply == "on"]
+foreign {
+    // param-hint: pPacket bytes=param[2]
+    func PxeSendReply(hClientRequest: CPointer<Unit>, pPacket: CPointer<Unit>, uPacketLen: UInt32, pAddress: CPointer<PXE_ADDRESSAbi>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeSendReply == "on"]
+public unsafe func Windows_PxeSendReply(hClientRequest: CPointer<Unit>, pPacket: CPointer<Unit>, uPacketLen: UInt32, pAddress: CPointer<PXE_ADDRESSAbi>): UInt32 {
+    return PxeSendReply(hClientRequest, pPacket, uPacketLen, pAddress)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeTraceV == "on"]
+foreign {
+    func PxeTraceV(hProvider: CPointer<Unit>, Severity: UInt32, pszFormat: CPointer<UInt16>, Params: CPointer<Int8>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSPXE == "on" && Windows_Win32_System_DeploymentServices_PxeTraceV == "on"]
+public unsafe func Windows_PxeTraceV(hProvider: CPointer<Unit>, Severity: UInt32, pszFormat: CPointer<UInt16>, Params: CPointer<Int8>): UInt32 {
+    return PxeTraceV(hProvider, Severity, pszFormat, Params)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSTPTC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportClientAddRefBuffer == "on"]
 foreign {
     func WdsTransportClientAddRefBuffer(pvBuffer: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSTPTC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportClientAddRefBuffer == "on"]
+public unsafe func Windows_WdsTransportClientAddRefBuffer(pvBuffer: CPointer<Unit>): UInt32 {
+    return WdsTransportClientAddRefBuffer(pvBuffer)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSTPTC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportClientCancelSession == "on"]
+foreign {
     func WdsTransportClientCancelSession(hSessionKey: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSTPTC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportClientCancelSession == "on"]
+public unsafe func Windows_WdsTransportClientCancelSession(hSessionKey: CPointer<Unit>): UInt32 {
+    return WdsTransportClientCancelSession(hSessionKey)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSTPTC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportClientCancelSessionEx == "on"]
+foreign {
     func WdsTransportClientCancelSessionEx(hSessionKey: CPointer<Unit>, dwErrorCode: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSTPTC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportClientCancelSessionEx == "on"]
+public unsafe func Windows_WdsTransportClientCancelSessionEx(hSessionKey: CPointer<Unit>, dwErrorCode: UInt32): UInt32 {
+    return WdsTransportClientCancelSessionEx(hSessionKey, dwErrorCode)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSTPTC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportClientCloseSession == "on"]
+foreign {
     func WdsTransportClientCloseSession(hSessionKey: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSTPTC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportClientCloseSession == "on"]
+public unsafe func Windows_WdsTransportClientCloseSession(hSessionKey: CPointer<Unit>): UInt32 {
+    return WdsTransportClientCloseSession(hSessionKey)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSTPTC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportClientCompleteReceive == "on"]
+foreign {
     func WdsTransportClientCompleteReceive(hSessionKey: CPointer<Unit>, ulSize: UInt32, pullOffset: CPointer<UInt64>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSTPTC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportClientCompleteReceive == "on"]
+public unsafe func Windows_WdsTransportClientCompleteReceive(hSessionKey: CPointer<Unit>, ulSize: UInt32, pullOffset: CPointer<UInt64>): UInt32 {
+    return WdsTransportClientCompleteReceive(hSessionKey, ulSize, pullOffset)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSTPTC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportClientInitialize == "on"]
+foreign {
     func WdsTransportClientInitialize(): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSTPTC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportClientInitialize == "on"]
+public unsafe func Windows_WdsTransportClientInitialize(): UInt32 {
+    return WdsTransportClientInitialize()
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSTPTC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportClientInitializeSession == "on"]
+foreign {
     func WdsTransportClientInitializeSession(pSessionRequest: CPointer<WDS_TRANSPORTCLIENT_REQUESTAbi>, pCallerData: CPointer<Unit>, hSessionKey: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSTPTC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportClientInitializeSession == "on"]
+public unsafe func Windows_WdsTransportClientInitializeSession(pSessionRequest: CPointer<WDS_TRANSPORTCLIENT_REQUESTAbi>, pCallerData: CPointer<Unit>, hSessionKey: CPointer<CPointer<Unit>>): UInt32 {
+    return WdsTransportClientInitializeSession(pSessionRequest, pCallerData, hSessionKey)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSTPTC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportClientQueryStatus == "on"]
+foreign {
     func WdsTransportClientQueryStatus(hSessionKey: CPointer<Unit>, puStatus: CPointer<UInt32>, puErrorCode: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSTPTC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportClientQueryStatus == "on"]
+public unsafe func Windows_WdsTransportClientQueryStatus(hSessionKey: CPointer<Unit>, puStatus: CPointer<UInt32>, puErrorCode: CPointer<UInt32>): UInt32 {
+    return WdsTransportClientQueryStatus(hSessionKey, puStatus, puErrorCode)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSTPTC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportClientRegisterCallback == "on"]
+foreign {
     func WdsTransportClientRegisterCallback(hSessionKey: CPointer<Unit>, CallbackId: TRANSPORTCLIENT_CALLBACK_IDAbi, pfnCallback: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSTPTC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportClientRegisterCallback == "on"]
+public unsafe func Windows_WdsTransportClientRegisterCallback(hSessionKey: CPointer<Unit>, CallbackId: TRANSPORTCLIENT_CALLBACK_IDAbi, pfnCallback: CPointer<Unit>): UInt32 {
+    return WdsTransportClientRegisterCallback(hSessionKey, CallbackId, pfnCallback)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSTPTC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportClientReleaseBuffer == "on"]
+foreign {
     func WdsTransportClientReleaseBuffer(pvBuffer: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSTPTC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportClientReleaseBuffer == "on"]
+public unsafe func Windows_WdsTransportClientReleaseBuffer(pvBuffer: CPointer<Unit>): UInt32 {
+    return WdsTransportClientReleaseBuffer(pvBuffer)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSTPTC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportClientShutdown == "on"]
+foreign {
     func WdsTransportClientShutdown(): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSTPTC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportClientShutdown == "on"]
+public unsafe func Windows_WdsTransportClientShutdown(): UInt32 {
+    return WdsTransportClientShutdown()
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSTPTC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportClientStartSession == "on"]
+foreign {
     func WdsTransportClientStartSession(hSessionKey: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSTPTC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportClientStartSession == "on"]
+public unsafe func Windows_WdsTransportClientStartSession(hSessionKey: CPointer<Unit>): UInt32 {
+    return WdsTransportClientStartSession(hSessionKey)
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSTPTC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportClientWaitForCompletion == "on"]
+foreign {
     func WdsTransportClientWaitForCompletion(hSessionKey: CPointer<Unit>, uTimeout: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_DeploymentServices == "on" && WDSTPTC == "on" && Windows_Win32_System_DeploymentServices_WdsTransportClientWaitForCompletion == "on"]
+public unsafe func Windows_WdsTransportClientWaitForCompletion(hSessionKey: CPointer<Unit>, uTimeout: UInt32): UInt32 {
+    return WdsTransportClientWaitForCompletion(hSessionKey, uTimeout)
 }
 
 @When[Windows_Win32_System_DeploymentServices == "on"]

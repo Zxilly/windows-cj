@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Graphics_Imaging == "on"]
 import windows.Graphics.Imaging as Graphics_Imaging
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -2829,7 +2827,10 @@ extend IJournalPrinterCapabilities2 <: windows_core.Interface<IJournalPrinterCap
 public struct ILineDisplayCustomGlyphsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var SizeInPixels: CFunc<(CPointer<Unit>, CPointer<windows_future.SizeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedGlyphCodes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedGlyphCodes: UIntNative = UIntNative(0)
     @When[Windows_Storage_Streams == "on"]
     public var TryRedefineAsync: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams != "on"]
@@ -2910,6 +2911,7 @@ public class ILineDisplayCustomGlyphs <: InterfaceWrapperBase & ComInterface & R
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<windows_future.Size>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedGlyphCodes(): windows_collections.IVectorView<UInt32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4349,6 +4351,7 @@ public class LineDisplayCustomGlyphs <: InterfaceWrapperBase & ComInterface & wi
         return defaultInterface().SizeInPixels()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedGlyphCodes(): windows_collections.IVectorView<UInt32> {
         return defaultInterface().SupportedGlyphCodes()
     }
@@ -10315,9 +10318,13 @@ public struct ICommonPosPrintStationCapabilitiesVtbl {
     public var IsDoubleHighDoubleWidePrintSupported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsPaperEmptySensorSupported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsPaperNearEndSensorSupported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedCharactersPerLine: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedCharactersPerLine: UIntNative = UIntNative(0)
     public init() {}
 
+    @When[Windows_Foundation_Collections == "on"]
     public static func new<Identity>(offset!: Int64 = 0): ICommonPosPrintStationCapabilitiesVtbl where Identity <: ICommonPosPrintStationCapabilities_Impl {
         let _ = offset
         var vtbl = ICommonPosPrintStationCapabilitiesVtbl()
@@ -10418,7 +10425,14 @@ public struct ICommonPosPrintStationCapabilitiesVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.SupportedCharactersPerLine = { instanceRaw, result__ =>
+        vtbl = ICommonPosPrintStationCapabilitiesVtbl.__assignSupportedCharactersPerLine<Identity>(vtbl)
+        return vtbl
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections == "on"]
+    public static func __assignSupportedCharactersPerLine<Identity>(vtbl: ICommonPosPrintStationCapabilitiesVtbl): ICommonPosPrintStationCapabilitiesVtbl where Identity <: ICommonPosPrintStationCapabilities_Impl {
+        var next = vtbl
+        next.SupportedCharactersPerLine = { instanceRaw, result__ =>
             match (unsafe { asImplFromRaw<ICommonPosPrintStationCapabilities_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
                     impl.__winrtThunk_SupportedCharactersPerLine(result__)
@@ -10426,6 +10440,11 @@ public struct ICommonPosPrintStationCapabilitiesVtbl {
                     E_NOINTERFACE.value
             }
         }
+        return next
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections != "on"]
+    public static func __assignSupportedCharactersPerLine<Identity>(vtbl: ICommonPosPrintStationCapabilitiesVtbl): ICommonPosPrintStationCapabilitiesVtbl where Identity <: ICommonPosPrintStationCapabilities_Impl {
         return vtbl
     }
 
@@ -10437,7 +10456,7 @@ public struct ICommonPosPrintStationCapabilitiesVtbl {
     }
 }
 
-@When[Windows_Devices_PointOfService == "on"]
+@When[Windows_Devices_PointOfService == "on" && Windows_Foundation_Collections == "on"]
 public interface ICommonPosPrintStationCapabilities_ImplErased {
     public func __winrtThunk_IsPrinterPresent(result__: CPointer<Bool>): Int32
 
@@ -10466,7 +10485,7 @@ public interface ICommonPosPrintStationCapabilities_ImplErased {
     public func __winrtThunk_SupportedCharactersPerLine(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Devices_PointOfService == "on"]
+@When[Windows_Devices_PointOfService == "on" && Windows_Foundation_Collections == "on"]
 public interface ICommonPosPrintStationCapabilities_Impl <: ICommonPosPrintStationCapabilities_ImplErased {
     public func IsPrinterPresent(): windows_core.Result<Bool>
 
@@ -10830,6 +10849,7 @@ public class ICommonPosPrintStationCapabilities <: InterfaceWrapperBase & ComInt
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedCharactersPerLine(): windows_collections.IVectorView<UInt32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -10853,10 +10873,17 @@ public struct ICommonReceiptSlipCapabilitiesVtbl {
     public var Is180RotationSupported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsPrintAreaSupported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var RuledLineCapabilities: CFunc<(CPointer<Unit>, CPointer<PosPrinterRuledLineCapabilitiesAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedBarcodeRotations: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedBarcodeRotations: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedBitmapRotations: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedBitmapRotations: UIntNative = UIntNative(0)
     public init() {}
 
+    @When[Windows_Foundation_Collections == "on"]
     public static func new<Identity>(offset!: Int64 = 0): ICommonReceiptSlipCapabilitiesVtbl where Identity <: ICommonReceiptSlipCapabilities_Impl {
         let _ = offset
         var vtbl = ICommonReceiptSlipCapabilitiesVtbl()
@@ -10917,7 +10944,15 @@ public struct ICommonReceiptSlipCapabilitiesVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.SupportedBarcodeRotations = { instanceRaw, result__ =>
+        vtbl = ICommonReceiptSlipCapabilitiesVtbl.__assignSupportedBarcodeRotations<Identity>(vtbl)
+        vtbl = ICommonReceiptSlipCapabilitiesVtbl.__assignSupportedBitmapRotations<Identity>(vtbl)
+        return vtbl
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections == "on"]
+    public static func __assignSupportedBarcodeRotations<Identity>(vtbl: ICommonReceiptSlipCapabilitiesVtbl): ICommonReceiptSlipCapabilitiesVtbl where Identity <: ICommonReceiptSlipCapabilities_Impl {
+        var next = vtbl
+        next.SupportedBarcodeRotations = { instanceRaw, result__ =>
             match (unsafe { asImplFromRaw<ICommonReceiptSlipCapabilities_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
                     impl.__winrtThunk_SupportedBarcodeRotations(result__)
@@ -10925,7 +10960,18 @@ public struct ICommonReceiptSlipCapabilitiesVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.SupportedBitmapRotations = { instanceRaw, result__ =>
+        return next
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections != "on"]
+    public static func __assignSupportedBarcodeRotations<Identity>(vtbl: ICommonReceiptSlipCapabilitiesVtbl): ICommonReceiptSlipCapabilitiesVtbl where Identity <: ICommonReceiptSlipCapabilities_Impl {
+        return vtbl
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections == "on"]
+    public static func __assignSupportedBitmapRotations<Identity>(vtbl: ICommonReceiptSlipCapabilitiesVtbl): ICommonReceiptSlipCapabilitiesVtbl where Identity <: ICommonReceiptSlipCapabilities_Impl {
+        var next = vtbl
+        next.SupportedBitmapRotations = { instanceRaw, result__ =>
             match (unsafe { asImplFromRaw<ICommonReceiptSlipCapabilities_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
                     impl.__winrtThunk_SupportedBitmapRotations(result__)
@@ -10933,6 +10979,11 @@ public struct ICommonReceiptSlipCapabilitiesVtbl {
                     E_NOINTERFACE.value
             }
         }
+        return next
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections != "on"]
+    public static func __assignSupportedBitmapRotations<Identity>(vtbl: ICommonReceiptSlipCapabilitiesVtbl): ICommonReceiptSlipCapabilitiesVtbl where Identity <: ICommonReceiptSlipCapabilities_Impl {
         return vtbl
     }
 
@@ -10949,7 +11000,7 @@ public struct ICommonReceiptSlipCapabilitiesVtbl {
     }
 }
 
-@When[Windows_Devices_PointOfService == "on"]
+@When[Windows_Devices_PointOfService == "on" && Windows_Foundation_Collections == "on"]
 public interface ICommonReceiptSlipCapabilities_ImplErased {
     public func __winrtThunk_IsBarcodeSupported(result__: CPointer<Bool>): Int32
 
@@ -10970,7 +11021,7 @@ public interface ICommonReceiptSlipCapabilities_ImplErased {
     public func __winrtThunk_SupportedBitmapRotations(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Devices_PointOfService == "on"]
+@When[Windows_Devices_PointOfService == "on" && Windows_Foundation_Collections == "on"]
 public interface ICommonReceiptSlipCapabilities_Impl <: ICommonReceiptSlipCapabilities_ImplErased & ICommonPosPrintStationCapabilities_Impl {
     public func IsBarcodeSupported(): windows_core.Result<Bool>
 
@@ -11425,6 +11476,7 @@ public class ICommonReceiptSlipCapabilities <: InterfaceWrapperBase & ComInterfa
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<PosPrinterRuledLineCapabilities>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedBarcodeRotations(): windows_collections.IVectorView<PosPrinterRotation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -11433,6 +11485,7 @@ public class ICommonReceiptSlipCapabilities <: InterfaceWrapperBase & ComInterfa
         return windows_collections.IVectorView<PosPrinterRotation>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedBitmapRotations(): windows_collections.IVectorView<PosPrinterRotation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -12559,7 +12612,10 @@ public struct IMagneticStripeReaderReportVtbl {
     public var Track2: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Track3: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Track4: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     @When[Windows_Storage_Streams == "on"]
     public var CardAuthenticationData: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams != "on"]
@@ -12677,6 +12733,7 @@ public class IMagneticStripeReaderReport <: InterfaceWrapperBase & ComInterface 
         return MagneticStripeReaderTrackData.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -12900,7 +12957,10 @@ public struct IPosPrinterFontPropertyVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var TypeFace: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsScalableToAnySize: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var CharacterSizes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CharacterSizes: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -12985,6 +13045,7 @@ public class IPosPrinterFontProperty <: InterfaceWrapperBase & ComInterface & Ru
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CharacterSizes(): windows_collections.IVectorView<SizeUInt32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -14603,6 +14664,7 @@ public class JournalPrinterCapabilities <: InterfaceWrapperBase & ComInterface &
         return asICommonPosPrintStationCapabilities().IsPaperNearEndSensorSupported()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedCharactersPerLine(): windows_collections.IVectorView<UInt32> {
         return asICommonPosPrintStationCapabilities().SupportedCharactersPerLine()
     }
@@ -15339,6 +15401,7 @@ public class MagneticStripeReaderReport <: InterfaceWrapperBase & ComInterface &
         return defaultInterface().Track4()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, windows_core.HString> {
         return defaultInterface().Properties()
     }
@@ -15549,6 +15612,7 @@ public class PosPrinterFontProperty <: InterfaceWrapperBase & ComInterface & win
         return defaultInterface().IsScalableToAnySize()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CharacterSizes(): windows_collections.IVectorView<SizeUInt32> {
         return defaultInterface().CharacterSizes()
     }
@@ -15994,10 +16058,12 @@ public class ReceiptPrinterCapabilities <: InterfaceWrapperBase & ComInterface &
         return asICommonReceiptSlipCapabilities().RuledLineCapabilities()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedBarcodeRotations(): windows_collections.IVectorView<PosPrinterRotation> {
         return asICommonReceiptSlipCapabilities().SupportedBarcodeRotations()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedBitmapRotations(): windows_collections.IVectorView<PosPrinterRotation> {
         return asICommonReceiptSlipCapabilities().SupportedBitmapRotations()
     }
@@ -16050,6 +16116,7 @@ public class ReceiptPrinterCapabilities <: InterfaceWrapperBase & ComInterface &
         return asICommonPosPrintStationCapabilities().IsPaperNearEndSensorSupported()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedCharactersPerLine(): windows_collections.IVectorView<UInt32> {
         return asICommonPosPrintStationCapabilities().SupportedCharactersPerLine()
     }
@@ -16192,10 +16259,12 @@ public class SlipPrinterCapabilities <: InterfaceWrapperBase & ComInterface & wi
         return asICommonReceiptSlipCapabilities().RuledLineCapabilities()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedBarcodeRotations(): windows_collections.IVectorView<PosPrinterRotation> {
         return asICommonReceiptSlipCapabilities().SupportedBarcodeRotations()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedBitmapRotations(): windows_collections.IVectorView<PosPrinterRotation> {
         return asICommonReceiptSlipCapabilities().SupportedBitmapRotations()
     }
@@ -16248,6 +16317,7 @@ public class SlipPrinterCapabilities <: InterfaceWrapperBase & ComInterface & wi
         return asICommonPosPrintStationCapabilities().IsPaperNearEndSensorSupported()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedCharactersPerLine(): windows_collections.IVectorView<UInt32> {
         return asICommonPosPrintStationCapabilities().SupportedCharactersPerLine()
     }
@@ -17326,7 +17396,10 @@ extend IMagneticStripeReaderVendorSpecificCardDataReceivedEventArgs <: windows_c
 @C
 public struct IPosPrinter2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedBarcodeSymbologies: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedBarcodeSymbologies: UIntNative = UIntNative(0)
     public var GetFontProperty: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -17396,6 +17469,7 @@ public class IPosPrinter2 <: InterfaceWrapperBase & ComInterface & RuntimeName &
         readVtbl<IPosPrinter2Vtbl>(IPosPrinter2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedBarcodeSymbologies(): windows_collections.IVectorView<UInt32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -19483,25 +19557,25 @@ public struct ILineDisplayWindow2Vtbl {
     public var Marquee: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ReadCharacterAtCursorAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var TryDisplayStoredBitmapAtCursorAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var TryDisplayStorageFileBitmapAtCursorAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var TryDisplayStorageFileBitmapAtCursorAsync: UIntNative = UIntNative(0)
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var TryDisplayStorageFileBitmapAtCursorWithAlignmentAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, LineDisplayHorizontalAlignmentAbi, LineDisplayVerticalAlignmentAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var TryDisplayStorageFileBitmapAtCursorWithAlignmentAsync: UIntNative = UIntNative(0)
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var TryDisplayStorageFileBitmapAtCursorWithAlignmentAndWidthAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, LineDisplayHorizontalAlignmentAbi, LineDisplayVerticalAlignmentAbi, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var TryDisplayStorageFileBitmapAtCursorWithAlignmentAndWidthAsync: UIntNative = UIntNative(0)
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var TryDisplayStorageFileBitmapAtPointAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, windows_future.PointAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var TryDisplayStorageFileBitmapAtPointAsync: UIntNative = UIntNative(0)
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var TryDisplayStorageFileBitmapAtPointWithWidthAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, windows_future.PointAbi, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var TryDisplayStorageFileBitmapAtPointWithWidthAsync: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -19603,7 +19677,7 @@ public class ILineDisplayWindow2 <: InterfaceWrapperBase & ComInterface & Runtim
         return windows_future.IAsyncOperation<Bool>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func TryDisplayStorageFileBitmapAtCursorAsync(bitmap: _impl_l1.StorageFile): windows_future.IAsyncOperation<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -19612,7 +19686,7 @@ public class ILineDisplayWindow2 <: InterfaceWrapperBase & ComInterface & Runtim
         return windows_future.IAsyncOperation<Bool>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func TryDisplayStorageFileBitmapAtCursorWithAlignmentAsync(bitmap: _impl_l1.StorageFile, horizontalAlignment: LineDisplayHorizontalAlignment, verticalAlignment: LineDisplayVerticalAlignment): windows_future.IAsyncOperation<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -19621,7 +19695,7 @@ public class ILineDisplayWindow2 <: InterfaceWrapperBase & ComInterface & Runtim
         return windows_future.IAsyncOperation<Bool>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func TryDisplayStorageFileBitmapAtCursorWithAlignmentAndWidthAsync(bitmap: _impl_l1.StorageFile, horizontalAlignment: LineDisplayHorizontalAlignment, verticalAlignment: LineDisplayVerticalAlignment, widthInPixels: Int32): windows_future.IAsyncOperation<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -19630,7 +19704,7 @@ public class ILineDisplayWindow2 <: InterfaceWrapperBase & ComInterface & Runtim
         return windows_future.IAsyncOperation<Bool>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func TryDisplayStorageFileBitmapAtPointAsync(bitmap: _impl_l1.StorageFile, offsetInPixels: windows_future.Point): windows_future.IAsyncOperation<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -19639,7 +19713,7 @@ public class ILineDisplayWindow2 <: InterfaceWrapperBase & ComInterface & Runtim
         return windows_future.IAsyncOperation<Bool>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func TryDisplayStorageFileBitmapAtPointWithWidthAsync(bitmap: _impl_l1.StorageFile, offsetInPixels: windows_future.Point, widthInPixels: Int32): windows_future.IAsyncOperation<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -20804,6 +20878,7 @@ public class BarcodeScanner <: InterfaceWrapperBase & ComInterface & windows_int
         return defaultInterface().CheckHealthAsync(level)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSupportedSymbologiesAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<UInt32>> {
         return defaultInterface().GetSupportedSymbologiesAsync()
     }
@@ -20812,11 +20887,12 @@ public class BarcodeScanner <: InterfaceWrapperBase & ComInterface & windows_int
         return defaultInterface().IsSymbologySupportedAsync(barcodeSymbology)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func RetrieveStatisticsAsync(statisticsCategories: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<_impl_l0.IBuffer> {
         return defaultInterface().RetrieveStatisticsAsync(statisticsCategories)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSupportedProfiles(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().GetSupportedProfiles()
     }
@@ -21310,6 +21386,7 @@ public class CashDrawer <: InterfaceWrapperBase & ComInterface & windows_interfa
         return defaultInterface().CheckHealthAsync(level)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetStatisticsAsync(statisticsCategories: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<windows_core.HString> {
         return defaultInterface().GetStatisticsAsync(statisticsCategories)
     }
@@ -21921,14 +21998,17 @@ public class ClaimedBarcodeScanner <: InterfaceWrapperBase & ComInterface & wind
         defaultInterface().RetainDevice()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetActiveSymbologiesAsync(symbologies: windows_collections.IIterable<UInt32>): windows_future.IAsyncAction {
         return defaultInterface().SetActiveSymbologiesAsync(symbologies)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ResetStatisticsAsync(statisticsCategories: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncAction {
         return defaultInterface().ResetStatisticsAsync(statisticsCategories)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UpdateStatisticsAsync(statistics: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, windows_core.HString>>): windows_future.IAsyncAction {
         return defaultInterface().UpdateStatisticsAsync(statistics)
     }
@@ -22116,10 +22196,12 @@ public class ClaimedCashDrawer <: InterfaceWrapperBase & ComInterface & windows_
         return defaultInterface().RetainDeviceAsync()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ResetStatisticsAsync(statisticsCategories: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<Bool> {
         return defaultInterface().ResetStatisticsAsync(statisticsCategories)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UpdateStatisticsAsync(statistics: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, windows_core.HString>>): windows_future.IAsyncOperation<Bool> {
         return defaultInterface().UpdateStatisticsAsync(statistics)
     }
@@ -22492,10 +22574,12 @@ public class ClaimedMagneticStripeReader <: InterfaceWrapperBase & ComInterface 
         return defaultInterface().UpdateKeyAsync(key, keyName)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ResetStatisticsAsync(statisticsCategories: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncAction {
         return defaultInterface().ResetStatisticsAsync(statisticsCategories)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UpdateStatisticsAsync(statistics: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, windows_core.HString>>): windows_future.IAsyncAction {
         return defaultInterface().UpdateStatisticsAsync(statistics)
     }
@@ -22699,10 +22783,12 @@ public class ClaimedPosPrinter <: InterfaceWrapperBase & ComInterface & windows_
         return defaultInterface().RetainDeviceAsync()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ResetStatisticsAsync(statisticsCategories: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<Bool> {
         return defaultInterface().ResetStatisticsAsync(statisticsCategories)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UpdateStatisticsAsync(statistics: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, windows_core.HString>>): windows_future.IAsyncOperation<Bool> {
         return defaultInterface().UpdateStatisticsAsync(statistics)
     }
@@ -22746,13 +22832,19 @@ public struct IBarcodeScannerVtbl {
     public var Capabilities: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ClaimScannerAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CheckHealthAsync: CFunc<(CPointer<Unit>, UnifiedPosHealthCheckLevelAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSupportedSymbologiesAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetSupportedSymbologiesAsync: UIntNative = UIntNative(0)
     public var IsSymbologySupportedAsync: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var RetrieveStatisticsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
     public var RetrieveStatisticsAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSupportedProfiles: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetSupportedProfiles: UIntNative = UIntNative(0)
     public var IsProfileSupported: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var StatusUpdated: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveStatusUpdated: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -22856,6 +22948,7 @@ public class IBarcodeScanner <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return windows_future.IAsyncOperation<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSupportedSymbologiesAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<UInt32>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -22872,7 +22965,7 @@ public class IBarcodeScanner <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return windows_future.IAsyncOperation<Bool>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func RetrieveStatisticsAsync(statisticsCategories: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<_impl_l0.IBuffer> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -22881,6 +22974,7 @@ public class IBarcodeScanner <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return windows_future.IAsyncOperation<_impl_l0.IBuffer>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSupportedProfiles(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -23306,7 +23400,10 @@ public struct ICashDrawerVtbl {
     public var DrawerEventSource: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ClaimDrawerAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CheckHealthAsync: CFunc<(CPointer<Unit>, UnifiedPosHealthCheckLevelAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetStatisticsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetStatisticsAsync: UIntNative = UIntNative(0)
     public var StatusUpdated: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveStatusUpdated: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -23433,6 +23530,7 @@ public class ICashDrawer <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         return windows_future.IAsyncOperation<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetStatisticsAsync(statisticsCategories: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -23983,9 +24081,18 @@ public struct IClaimedBarcodeScannerVtbl {
     public var EnableAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var DisableAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var RetainDevice: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetActiveSymbologiesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SetActiveSymbologiesAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var ResetStatisticsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ResetStatisticsAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var UpdateStatisticsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var UpdateStatisticsAsync: UIntNative = UIntNative(0)
     public var SetActiveProfileAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var DataReceived: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveDataReceived: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -24133,6 +24240,7 @@ public class IClaimedBarcodeScanner <: InterfaceWrapperBase & ComInterface & Run
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetActiveSymbologiesAsync(symbologies: windows_collections.IIterable<UInt32>): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -24141,6 +24249,7 @@ public class IClaimedBarcodeScanner <: InterfaceWrapperBase & ComInterface & Run
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ResetStatisticsAsync(statisticsCategories: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -24149,6 +24258,7 @@ public class IClaimedBarcodeScanner <: InterfaceWrapperBase & ComInterface & Run
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UpdateStatisticsAsync(statistics: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, windows_core.HString>>): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -24357,8 +24467,14 @@ public struct IClaimedCashDrawerVtbl {
     public var EnableAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var DisableAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var RetainDeviceAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var ResetStatisticsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ResetStatisticsAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var UpdateStatisticsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var UpdateStatisticsAsync: UIntNative = UIntNative(0)
     public var ReleaseDeviceRequested: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveReleaseDeviceRequested: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -24493,6 +24609,7 @@ public class IClaimedCashDrawer <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_future.IAsyncOperation<Bool>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ResetStatisticsAsync(statisticsCategories: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -24501,6 +24618,7 @@ public class IClaimedCashDrawer <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_future.IAsyncOperation<Bool>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UpdateStatisticsAsync(statistics: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, windows_core.HString>>): windows_future.IAsyncOperation<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -24794,31 +24912,40 @@ extend IClaimedLineDisplay <: windows_core.Interface<IClaimedLineDisplay> {}
 @C
 public struct IClaimedLineDisplay2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetStatisticsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetStatisticsAsync: UIntNative = UIntNative(0)
     public var CheckHealthAsync: CFunc<(CPointer<Unit>, UnifiedPosHealthCheckLevelAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var CheckPowerStatusAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var StatusUpdated: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveStatusUpdated: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedScreenSizesInCharacters: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedScreenSizesInCharacters: UIntNative = UIntNative(0)
     public var MaxBitmapSizeInPixels: CFunc<(CPointer<Unit>, CPointer<windows_future.SizeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedCharacterSets: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedCharacterSets: UIntNative = UIntNative(0)
     public var CustomGlyphs: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetAttributes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var TryUpdateAttributesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var TrySetDescriptorAsync: CFunc<(CPointer<Unit>, UInt32, LineDisplayDescriptorStateAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var TryClearDescriptorsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var TryCreateWindowAsync: CFunc<(CPointer<Unit>, windows_future.RectAbi, windows_future.SizeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var TryStoreStorageFileBitmapAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var TryStoreStorageFileBitmapAsync: UIntNative = UIntNative(0)
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var TryStoreStorageFileBitmapWithAlignmentAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, LineDisplayHorizontalAlignmentAbi, LineDisplayVerticalAlignmentAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var TryStoreStorageFileBitmapWithAlignmentAsync: UIntNative = UIntNative(0)
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var TryStoreStorageFileBitmapWithAlignmentAndWidthAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, LineDisplayHorizontalAlignmentAbi, LineDisplayVerticalAlignmentAbi, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var TryStoreStorageFileBitmapWithAlignmentAndWidthAsync: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -24888,6 +25015,7 @@ public class IClaimedLineDisplay2 <: InterfaceWrapperBase & ComInterface & Runti
         readVtbl<IClaimedLineDisplay2Vtbl>(IClaimedLineDisplay2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetStatisticsAsync(statisticsCategories: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -24926,6 +25054,7 @@ public class IClaimedLineDisplay2 <: InterfaceWrapperBase & ComInterface & Runti
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedScreenSizesInCharacters(): windows_collections.IVectorView<windows_future.Size> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -24942,6 +25071,7 @@ public class IClaimedLineDisplay2 <: InterfaceWrapperBase & ComInterface & Runti
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<windows_future.Size>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedCharacterSets(): windows_collections.IVectorView<Int32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -24998,7 +25128,7 @@ public class IClaimedLineDisplay2 <: InterfaceWrapperBase & ComInterface & Runti
         return windows_future.IAsyncOperation<LineDisplayWindow>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func TryStoreStorageFileBitmapAsync(bitmap: _impl_l1.StorageFile): windows_future.IAsyncOperation<LineDisplayStoredBitmap> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -25007,7 +25137,7 @@ public class IClaimedLineDisplay2 <: InterfaceWrapperBase & ComInterface & Runti
         return windows_future.IAsyncOperation<LineDisplayStoredBitmap>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func TryStoreStorageFileBitmapWithAlignmentAsync(bitmap: _impl_l1.StorageFile, horizontalAlignment: LineDisplayHorizontalAlignment, verticalAlignment: LineDisplayVerticalAlignment): windows_future.IAsyncOperation<LineDisplayStoredBitmap> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -25016,7 +25146,7 @@ public class IClaimedLineDisplay2 <: InterfaceWrapperBase & ComInterface & Runti
         return windows_future.IAsyncOperation<LineDisplayStoredBitmap>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func TryStoreStorageFileBitmapWithAlignmentAndWidthAsync(bitmap: _impl_l1.StorageFile, horizontalAlignment: LineDisplayHorizontalAlignment, verticalAlignment: LineDisplayVerticalAlignment, widthInPixels: Int32): windows_future.IAsyncOperation<LineDisplayStoredBitmap> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -25252,8 +25382,14 @@ public struct IClaimedMagneticStripeReaderVtbl {
     public var AuthenticateDeviceAsync: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt8>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var DeAuthenticateDeviceAsync: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt8>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var UpdateKeyAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var ResetStatisticsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ResetStatisticsAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var UpdateStatisticsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var UpdateStatisticsAsync: UIntNative = UIntNative(0)
     public var BankCardDataReceived: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveBankCardDataReceived: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var AamvaCardDataReceived: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -25487,6 +25623,7 @@ public class IClaimedMagneticStripeReader <: InterfaceWrapperBase & ComInterface
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ResetStatisticsAsync(statisticsCategories: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -25495,6 +25632,7 @@ public class IClaimedMagneticStripeReader <: InterfaceWrapperBase & ComInterface
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UpdateStatisticsAsync(statistics: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, windows_core.HString>>): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -25688,8 +25826,14 @@ public struct IClaimedPosPrinterVtbl {
     public var EnableAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var DisableAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var RetainDeviceAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var ResetStatisticsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ResetStatisticsAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var UpdateStatisticsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var UpdateStatisticsAsync: UIntNative = UIntNative(0)
     public var ReleaseDeviceRequested: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveReleaseDeviceRequested: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -25874,6 +26018,7 @@ public class IClaimedPosPrinter <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_future.IAsyncOperation<Bool>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ResetStatisticsAsync(statisticsCategories: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -25882,6 +26027,7 @@ public class IClaimedPosPrinter <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_future.IAsyncOperation<Bool>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UpdateStatisticsAsync(statistics: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, windows_core.HString>>): windows_future.IAsyncOperation<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -26270,9 +26416,9 @@ public struct IMagneticStripeReaderVtbl {
     public var DeviceAuthenticationProtocol: CFunc<(CPointer<Unit>, CPointer<MagneticStripeReaderAuthenticationProtocolAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CheckHealthAsync: CFunc<(CPointer<Unit>, UnifiedPosHealthCheckLevelAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var ClaimReaderAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var RetrieveStatisticsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
     public var RetrieveStatisticsAsync: UIntNative = UIntNative(0)
     public var GetErrorReportingType: CFunc<(CPointer<Unit>, CPointer<MagneticStripeReaderErrorReportingTypeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var StatusUpdated: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -26394,7 +26540,7 @@ public class IMagneticStripeReader <: InterfaceWrapperBase & ComInterface & Runt
         return windows_future.IAsyncOperation<ClaimedMagneticStripeReader>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func RetrieveStatisticsAsync(statisticsCategories: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<_impl_l0.IBuffer> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -26668,12 +26814,21 @@ public struct IPosPrinterVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var DeviceId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Capabilities: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedCharacterSets: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedCharacterSets: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedTypeFaces: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedTypeFaces: UIntNative = UIntNative(0)
     public var Status: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ClaimPrinterAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CheckHealthAsync: CFunc<(CPointer<Unit>, UnifiedPosHealthCheckLevelAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetStatisticsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetStatisticsAsync: UIntNative = UIntNative(0)
     public var StatusUpdated: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveStatusUpdated: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -26760,6 +26915,7 @@ public class IPosPrinter <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         return PosPrinterCapabilities.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedCharacterSets(): windows_collections.IVectorView<UInt32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -26768,6 +26924,7 @@ public class IPosPrinter <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         return windows_collections.IVectorView<UInt32>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedTypeFaces(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -26800,6 +26957,7 @@ public class IPosPrinter <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         return windows_future.IAsyncOperation<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetStatisticsAsync(statisticsCategories: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -27300,7 +27458,7 @@ public class MagneticStripeReader <: InterfaceWrapperBase & ComInterface & windo
         return defaultInterface().ClaimReaderAsync()
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func RetrieveStatisticsAsync(statisticsCategories: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<_impl_l0.IBuffer> {
         return defaultInterface().RetrieveStatisticsAsync(statisticsCategories)
     }
@@ -27580,10 +27738,12 @@ public class PosPrinter <: InterfaceWrapperBase & ComInterface & windows_interfa
         return defaultInterface().Capabilities()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedCharacterSets(): windows_collections.IVectorView<UInt32> {
         return defaultInterface().SupportedCharacterSets()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedTypeFaces(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().SupportedTypeFaces()
     }
@@ -27600,6 +27760,7 @@ public class PosPrinter <: InterfaceWrapperBase & ComInterface & windows_interfa
         return defaultInterface().CheckHealthAsync(level)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetStatisticsAsync(statisticsCategories: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<windows_core.HString> {
         return defaultInterface().GetStatisticsAsync(statisticsCategories)
     }

@@ -705,6 +705,7 @@ public class HttpRequestMessage <: InterfaceWrapperBase & ComInterface & windows
         defaultInterface().SetMethod(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMap<windows_core.HString, IInspectable> {
         return defaultInterface().Properties()
     }
@@ -1164,12 +1165,12 @@ public class HttpTransportInformation <: InterfaceWrapperBase & ComInterface & w
         return defaultInterface().ServerCertificateErrorSeverity()
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func ServerCertificateErrors(): windows_collections.IVectorView<_impl_l0.ChainValidationResult> {
         return defaultInterface().ServerCertificateErrors()
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func ServerIntermediateCertificates(): windows_collections.IVectorView<_impl_l1.Certificate> {
         return defaultInterface().ServerIntermediateCertificates()
     }
@@ -2022,7 +2023,10 @@ public struct IHttpRequestMessageVtbl {
     public var Headers: UIntNative = UIntNative(0)
     public var Method: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetMethod: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     public var RequestUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetRequestUri: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var TransportInformation: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -2131,6 +2135,7 @@ public class IHttpRequestMessage <: InterfaceWrapperBase & ComInterface & Runtim
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMap<windows_core.HString, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2662,13 +2667,13 @@ public struct IHttpTransportInformationVtbl {
     public var ServerCertificateErrorSeverity: CFunc<(CPointer<Unit>, CPointer<_impl_l0.SocketSslErrorSeverityAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Networking_Sockets != "on"]
     public var ServerCertificateErrorSeverity: UIntNative = UIntNative(0)
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public var ServerCertificateErrors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Security_Cryptography_Certificates != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Security_Cryptography_Certificates != "on"]
     public var ServerCertificateErrors: UIntNative = UIntNative(0)
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public var ServerIntermediateCertificates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Security_Cryptography_Certificates != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Security_Cryptography_Certificates != "on"]
     public var ServerIntermediateCertificates: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -2756,7 +2761,7 @@ public class IHttpTransportInformation <: InterfaceWrapperBase & ComInterface & 
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.SocketSslErrorSeverity>()).unwrap()
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func ServerCertificateErrors(): windows_collections.IVectorView<_impl_l0.ChainValidationResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2765,7 +2770,7 @@ public class IHttpTransportInformation <: InterfaceWrapperBase & ComInterface & 
         return windows_collections.IVectorView<_impl_l0.ChainValidationResult>.fromAbiTake(result__)
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func ServerIntermediateCertificates(): windows_collections.IVectorView<_impl_l1.Certificate> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

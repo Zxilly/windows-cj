@@ -6,7 +6,6 @@ package windows.Win32.Storage.Compression
 import std.collection.*
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 
@@ -182,43 +181,147 @@ extend COMPRESS_ALLOCATION_ROUTINES <: windows_core.CopyType & windows_core.Runt
     }
 }
 
-@When[CABINET == "on"]
+@When[Windows_Win32_Storage_Compression == "on" && CABINET == "on" && Windows_Win32_Storage_Compression_CloseCompressor == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func CloseCompressor(CompressorHandle: COMPRESSOR_HANDLE): Int32
+}
+
+@When[Windows_Win32_Storage_Compression == "on" && CABINET == "on" && Windows_Win32_Storage_Compression_CloseCompressor == "on"]
+public unsafe func Windows_CloseCompressor(CompressorHandle: COMPRESSOR_HANDLE): Int32 {
+    return CloseCompressor(CompressorHandle)
+}
+
+@When[Windows_Win32_Storage_Compression == "on" && CABINET == "on" && Windows_Win32_Storage_Compression_CloseDecompressor == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CloseDecompressor(DecompressorHandle: DECOMPRESSOR_HANDLE): Int32
+}
+
+@When[Windows_Win32_Storage_Compression == "on" && CABINET == "on" && Windows_Win32_Storage_Compression_CloseDecompressor == "on"]
+public unsafe func Windows_CloseDecompressor(DecompressorHandle: DECOMPRESSOR_HANDLE): Int32 {
+    return CloseDecompressor(DecompressorHandle)
+}
+
+@When[Windows_Win32_Storage_Compression == "on" && CABINET == "on" && Windows_Win32_Storage_Compression_Compress == "on"]
+foreign {
     // param-hint: UncompressedData bytes=param[2] optional
     // param-hint: CompressedBuffer bytes=param[4] optional
     // pinvoke-hint: SetLastError
     func Compress(CompressorHandle: COMPRESSOR_HANDLE, UncompressedData: CPointer<Unit>, UncompressedDataSize: UIntNative, CompressedBuffer: CPointer<Unit>, CompressedBufferSize: UIntNative, CompressedDataSize: CPointer<UIntNative>): Int32
+}
+
+@When[Windows_Win32_Storage_Compression == "on" && CABINET == "on" && Windows_Win32_Storage_Compression_Compress == "on"]
+public unsafe func Windows_Compress(CompressorHandle: COMPRESSOR_HANDLE, UncompressedData: CPointer<Unit>, UncompressedDataSize: UIntNative, CompressedBuffer: CPointer<Unit>, CompressedBufferSize: UIntNative, CompressedDataSize: CPointer<UIntNative>): Int32 {
+    return Compress(CompressorHandle, UncompressedData, UncompressedDataSize, CompressedBuffer, CompressedBufferSize, CompressedDataSize)
+}
+
+@When[Windows_Win32_Storage_Compression == "on" && CABINET == "on" && Windows_Win32_Storage_Compression_CreateCompressor == "on"]
+foreign {
     // param-hint: AllocationRoutines optional
     // pinvoke-hint: SetLastError
     func CreateCompressor(Algorithm: COMPRESS_ALGORITHMAbi, AllocationRoutines: CPointer<COMPRESS_ALLOCATION_ROUTINESAbi>, CompressorHandle: CPointer<COMPRESSOR_HANDLE>): Int32
+}
+
+@When[Windows_Win32_Storage_Compression == "on" && CABINET == "on" && Windows_Win32_Storage_Compression_CreateCompressor == "on"]
+public unsafe func Windows_CreateCompressor(Algorithm: COMPRESS_ALGORITHMAbi, AllocationRoutines: CPointer<COMPRESS_ALLOCATION_ROUTINESAbi>, CompressorHandle: CPointer<COMPRESSOR_HANDLE>): Int32 {
+    return CreateCompressor(Algorithm, AllocationRoutines, CompressorHandle)
+}
+
+@When[Windows_Win32_Storage_Compression == "on" && CABINET == "on" && Windows_Win32_Storage_Compression_CreateDecompressor == "on"]
+foreign {
     // param-hint: AllocationRoutines optional
     // pinvoke-hint: SetLastError
     func CreateDecompressor(Algorithm: COMPRESS_ALGORITHMAbi, AllocationRoutines: CPointer<COMPRESS_ALLOCATION_ROUTINESAbi>, DecompressorHandle: CPointer<DECOMPRESSOR_HANDLE>): Int32
+}
+
+@When[Windows_Win32_Storage_Compression == "on" && CABINET == "on" && Windows_Win32_Storage_Compression_CreateDecompressor == "on"]
+public unsafe func Windows_CreateDecompressor(Algorithm: COMPRESS_ALGORITHMAbi, AllocationRoutines: CPointer<COMPRESS_ALLOCATION_ROUTINESAbi>, DecompressorHandle: CPointer<DECOMPRESSOR_HANDLE>): Int32 {
+    return CreateDecompressor(Algorithm, AllocationRoutines, DecompressorHandle)
+}
+
+@When[Windows_Win32_Storage_Compression == "on" && CABINET == "on" && Windows_Win32_Storage_Compression_Decompress == "on"]
+foreign {
     // param-hint: CompressedData bytes=param[2] optional
     // param-hint: UncompressedBuffer bytes=param[4] optional
     // param-hint: UncompressedDataSize optional
     // pinvoke-hint: SetLastError
     func Decompress(DecompressorHandle: DECOMPRESSOR_HANDLE, CompressedData: CPointer<Unit>, CompressedDataSize: UIntNative, UncompressedBuffer: CPointer<Unit>, UncompressedBufferSize: UIntNative, UncompressedDataSize: CPointer<UIntNative>): Int32
+}
+
+@When[Windows_Win32_Storage_Compression == "on" && CABINET == "on" && Windows_Win32_Storage_Compression_Decompress == "on"]
+public unsafe func Windows_Decompress(DecompressorHandle: DECOMPRESSOR_HANDLE, CompressedData: CPointer<Unit>, CompressedDataSize: UIntNative, UncompressedBuffer: CPointer<Unit>, UncompressedBufferSize: UIntNative, UncompressedDataSize: CPointer<UIntNative>): Int32 {
+    return Decompress(DecompressorHandle, CompressedData, CompressedDataSize, UncompressedBuffer, UncompressedBufferSize, UncompressedDataSize)
+}
+
+@When[Windows_Win32_Storage_Compression == "on" && CABINET == "on" && Windows_Win32_Storage_Compression_QueryCompressorInformation == "on"]
+foreign {
     // param-hint: CompressInformation bytes=param[3]
     // pinvoke-hint: SetLastError
     func QueryCompressorInformation(CompressorHandle: COMPRESSOR_HANDLE, CompressInformationClass: COMPRESS_INFORMATION_CLASSAbi, CompressInformation: CPointer<Unit>, CompressInformationSize: UIntNative): Int32
+}
+
+@When[Windows_Win32_Storage_Compression == "on" && CABINET == "on" && Windows_Win32_Storage_Compression_QueryCompressorInformation == "on"]
+public unsafe func Windows_QueryCompressorInformation(CompressorHandle: COMPRESSOR_HANDLE, CompressInformationClass: COMPRESS_INFORMATION_CLASSAbi, CompressInformation: CPointer<Unit>, CompressInformationSize: UIntNative): Int32 {
+    return QueryCompressorInformation(CompressorHandle, CompressInformationClass, CompressInformation, CompressInformationSize)
+}
+
+@When[Windows_Win32_Storage_Compression == "on" && CABINET == "on" && Windows_Win32_Storage_Compression_QueryDecompressorInformation == "on"]
+foreign {
     // param-hint: CompressInformation bytes=param[3]
     // pinvoke-hint: SetLastError
     func QueryDecompressorInformation(DecompressorHandle: DECOMPRESSOR_HANDLE, CompressInformationClass: COMPRESS_INFORMATION_CLASSAbi, CompressInformation: CPointer<Unit>, CompressInformationSize: UIntNative): Int32
+}
+
+@When[Windows_Win32_Storage_Compression == "on" && CABINET == "on" && Windows_Win32_Storage_Compression_QueryDecompressorInformation == "on"]
+public unsafe func Windows_QueryDecompressorInformation(DecompressorHandle: DECOMPRESSOR_HANDLE, CompressInformationClass: COMPRESS_INFORMATION_CLASSAbi, CompressInformation: CPointer<Unit>, CompressInformationSize: UIntNative): Int32 {
+    return QueryDecompressorInformation(DecompressorHandle, CompressInformationClass, CompressInformation, CompressInformationSize)
+}
+
+@When[Windows_Win32_Storage_Compression == "on" && CABINET == "on" && Windows_Win32_Storage_Compression_ResetCompressor == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ResetCompressor(CompressorHandle: COMPRESSOR_HANDLE): Int32
+}
+
+@When[Windows_Win32_Storage_Compression == "on" && CABINET == "on" && Windows_Win32_Storage_Compression_ResetCompressor == "on"]
+public unsafe func Windows_ResetCompressor(CompressorHandle: COMPRESSOR_HANDLE): Int32 {
+    return ResetCompressor(CompressorHandle)
+}
+
+@When[Windows_Win32_Storage_Compression == "on" && CABINET == "on" && Windows_Win32_Storage_Compression_ResetDecompressor == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ResetDecompressor(DecompressorHandle: DECOMPRESSOR_HANDLE): Int32
+}
+
+@When[Windows_Win32_Storage_Compression == "on" && CABINET == "on" && Windows_Win32_Storage_Compression_ResetDecompressor == "on"]
+public unsafe func Windows_ResetDecompressor(DecompressorHandle: DECOMPRESSOR_HANDLE): Int32 {
+    return ResetDecompressor(DecompressorHandle)
+}
+
+@When[Windows_Win32_Storage_Compression == "on" && CABINET == "on" && Windows_Win32_Storage_Compression_SetCompressorInformation == "on"]
+foreign {
     // param-hint: CompressInformation bytes=param[3]
     // pinvoke-hint: SetLastError
     func SetCompressorInformation(CompressorHandle: COMPRESSOR_HANDLE, CompressInformationClass: COMPRESS_INFORMATION_CLASSAbi, CompressInformation: CPointer<Unit>, CompressInformationSize: UIntNative): Int32
+}
+
+@When[Windows_Win32_Storage_Compression == "on" && CABINET == "on" && Windows_Win32_Storage_Compression_SetCompressorInformation == "on"]
+public unsafe func Windows_SetCompressorInformation(CompressorHandle: COMPRESSOR_HANDLE, CompressInformationClass: COMPRESS_INFORMATION_CLASSAbi, CompressInformation: CPointer<Unit>, CompressInformationSize: UIntNative): Int32 {
+    return SetCompressorInformation(CompressorHandle, CompressInformationClass, CompressInformation, CompressInformationSize)
+}
+
+@When[Windows_Win32_Storage_Compression == "on" && CABINET == "on" && Windows_Win32_Storage_Compression_SetDecompressorInformation == "on"]
+foreign {
     // param-hint: CompressInformation bytes=param[3]
     // pinvoke-hint: SetLastError
     func SetDecompressorInformation(DecompressorHandle: DECOMPRESSOR_HANDLE, CompressInformationClass: COMPRESS_INFORMATION_CLASSAbi, CompressInformation: CPointer<Unit>, CompressInformationSize: UIntNative): Int32
+}
+
+@When[Windows_Win32_Storage_Compression == "on" && CABINET == "on" && Windows_Win32_Storage_Compression_SetDecompressorInformation == "on"]
+public unsafe func Windows_SetDecompressorInformation(DecompressorHandle: DECOMPRESSOR_HANDLE, CompressInformationClass: COMPRESS_INFORMATION_CLASSAbi, CompressInformation: CPointer<Unit>, CompressInformationSize: UIntNative): Int32 {
+    return SetDecompressorInformation(DecompressorHandle, CompressInformationClass, CompressInformation, CompressInformationSize)
 }
 
 @When[Windows_Win32_Storage_Compression == "on"]

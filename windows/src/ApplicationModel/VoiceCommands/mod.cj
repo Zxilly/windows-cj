@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l1 as _impl_l1
 import windows._impl_l2 as _impl_l2
@@ -23,7 +22,10 @@ import windows_future as windows_future
 public struct IVoiceCommandVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var CommandName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     @When[Windows_Media_SpeechRecognition == "on"]
     public var get_SpeechRecognitionResult: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Media_SpeechRecognition != "on"]
@@ -104,6 +106,7 @@ public class IVoiceCommand <: InterfaceWrapperBase & ComInterface & RuntimeName 
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, windows_collections.IVectorView<windows_core.HString>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -216,7 +219,10 @@ public struct IVoiceCommandDefinitionVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Language: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetPhraseListAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SetPhraseListAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -301,6 +307,7 @@ public class IVoiceCommandDefinition <: InterfaceWrapperBase & ComInterface & Ru
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetPhraseListAsync(phraseListName: windows_core.HString, phraseList: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -494,6 +501,7 @@ public class VoiceCommand <: InterfaceWrapperBase & ComInterface & windows_inter
         return defaultInterface().CommandName()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, windows_collections.IVectorView<windows_core.HString>> {
         return defaultInterface().Properties()
     }
@@ -832,6 +840,7 @@ public class VoiceCommandDefinition <: InterfaceWrapperBase & ComInterface & win
         return defaultInterface().Name()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetPhraseListAsync(phraseListName: windows_core.HString, phraseList: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncAction {
         return defaultInterface().SetPhraseListAsync(phraseListName, phraseList)
     }
@@ -1271,11 +1280,14 @@ extend IVoiceCommandContentTile <: windows_core.Interface<IVoiceCommandContentTi
 @C
 public struct IVoiceCommandDefinitionManagerStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var InstallCommandDefinitionsFromStorageFileAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var InstallCommandDefinitionsFromStorageFileAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var InstalledCommandDefinitions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var InstalledCommandDefinitions: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1344,7 +1356,7 @@ public class IVoiceCommandDefinitionManagerStatics <: InterfaceWrapperBase & Com
         readVtbl<IVoiceCommandDefinitionManagerStaticsVtbl>(IVoiceCommandDefinitionManagerStaticsVtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func InstallCommandDefinitionsFromStorageFileAsync(file: _impl_l1.StorageFile): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1353,6 +1365,7 @@ public class IVoiceCommandDefinitionManagerStatics <: InterfaceWrapperBase & Com
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InstalledCommandDefinitions(): windows_collections.IMapView<windows_core.HString, VoiceCommandDefinition> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1642,7 +1655,7 @@ public class VoiceCommandDefinitionManager <: windows_interface.RuntimeName & wi
         windows_core.activationFactory<VoiceCommandDefinitionManager>().ok()
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public static unsafe func InstallCommandDefinitionsFromStorageFileAsync(file: _impl_l1.StorageFile): windows_future.IAsyncAction {
         var result__: Option<windows_future.IAsyncAction> = Option<windows_future.IAsyncAction>.None
         try (factory__ = windows_core.factory<VoiceCommandDefinitionManager, IVoiceCommandDefinitionManagerStatics>().unwrap()) {
@@ -1654,6 +1667,7 @@ public class VoiceCommandDefinitionManager <: windows_interface.RuntimeName & wi
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func InstalledCommandDefinitions(): windows_collections.IMapView<windows_core.HString, VoiceCommandDefinition> {
         var result__: Option<windows_collections.IMapView<windows_core.HString, VoiceCommandDefinition>> = Option<windows_collections.IMapView<windows_core.HString, VoiceCommandDefinition>>.None
         try (factory__ = windows_core.factory<VoiceCommandDefinitionManager, IVoiceCommandDefinitionManagerStatics>().unwrap()) {
@@ -1761,7 +1775,10 @@ public struct IVoiceCommandResponseVtbl {
     public var SetRepeatMessage: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var AppLaunchArgument: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetAppLaunchArgument: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var VoiceCommandContentTiles: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var VoiceCommandContentTiles: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1872,6 +1889,7 @@ public class IVoiceCommandResponse <: InterfaceWrapperBase & ComInterface & Runt
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func VoiceCommandContentTiles(): windows_collections.IVector<VoiceCommandContentTile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1982,9 +2000,15 @@ public struct IVoiceCommandResponseStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var MaxSupportedVoiceCommandContentTiles: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CreateResponse: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateResponseWithTiles: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateResponseWithTiles: UIntNative = UIntNative(0)
     public var CreateResponseForPrompt: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateResponseForPromptWithTiles: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateResponseForPromptWithTiles: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2069,6 +2093,7 @@ public class IVoiceCommandResponseStatics <: InterfaceWrapperBase & ComInterface
         return VoiceCommandResponse.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateResponseWithTiles(message: VoiceCommandUserMessage, contentTiles: windows_collections.IIterable<VoiceCommandContentTile>): VoiceCommandResponse {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2085,6 +2110,7 @@ public class IVoiceCommandResponseStatics <: InterfaceWrapperBase & ComInterface
         return VoiceCommandResponse.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateResponseForPromptWithTiles(message: VoiceCommandUserMessage, repeatMessage: VoiceCommandUserMessage, contentTiles: windows_collections.IIterable<VoiceCommandContentTile>): VoiceCommandResponse {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2447,6 +2473,7 @@ public class VoiceCommandResponse <: InterfaceWrapperBase & ComInterface & windo
         defaultInterface().SetAppLaunchArgument(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func VoiceCommandContentTiles(): windows_collections.IVector<VoiceCommandContentTile> {
         return defaultInterface().VoiceCommandContentTiles()
     }
@@ -2473,6 +2500,7 @@ public class VoiceCommandResponse <: InterfaceWrapperBase & ComInterface & windo
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateResponseWithTiles(message: VoiceCommandUserMessage, contentTiles: windows_collections.IIterable<VoiceCommandContentTile>): VoiceCommandResponse {
         var result__: Option<VoiceCommandResponse> = Option<VoiceCommandResponse>.None
         try (factory__ = windows_core.factory<VoiceCommandResponse, IVoiceCommandResponseStatics>().unwrap()) {
@@ -2495,6 +2523,7 @@ public class VoiceCommandResponse <: InterfaceWrapperBase & ComInterface & windo
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateResponseForPromptWithTiles(message: VoiceCommandUserMessage, repeatMessage: VoiceCommandUserMessage, contentTiles: windows_collections.IIterable<VoiceCommandContentTile>): VoiceCommandResponse {
         var result__: Option<VoiceCommandResponse> = Option<VoiceCommandResponse>.None
         try (factory__ = windows_core.factory<VoiceCommandResponse, IVoiceCommandResponseStatics>().unwrap()) {

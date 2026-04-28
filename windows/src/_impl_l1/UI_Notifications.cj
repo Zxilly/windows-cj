@@ -124,6 +124,7 @@ public class AdaptiveNotificationText <: InterfaceWrapperBase & ComInterface & w
         return asIAdaptiveNotificationContent().Kind()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Hints(): windows_collections.IMap<windows_core.HString, windows_core.HString> {
         return asIAdaptiveNotificationContent().Hints()
     }
@@ -570,8 +571,14 @@ public struct INotificationBindingVtbl {
     public var SetTemplate: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Language: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetLanguage: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Hints: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Hints: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetTextElements: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetTextElements: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -668,6 +675,7 @@ public class INotificationBinding <: InterfaceWrapperBase & ComInterface & Runti
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Hints(): windows_collections.IMap<windows_core.HString, windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -676,6 +684,7 @@ public class INotificationBinding <: InterfaceWrapperBase & ComInterface & Runti
         return windows_collections.IMap<windows_core.HString, windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetTextElements(): windows_collections.IVectorView<AdaptiveNotificationText> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -694,7 +703,10 @@ public struct INotificationVisualVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Language: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetLanguage: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Bindings: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Bindings: UIntNative = UIntNative(0)
     public var GetBinding: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -778,6 +790,7 @@ public class INotificationVisual <: InterfaceWrapperBase & ComInterface & Runtim
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Bindings(): windows_collections.IVector<NotificationBinding> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1676,7 +1689,10 @@ extend ITileNotificationFactory <: windows_core.Interface<ITileNotificationFacto
 public struct IToastCollectionManagerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var SaveToastCollectionAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllToastCollectionsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllToastCollectionsAsync: UIntNative = UIntNative(0)
     public var GetToastCollectionAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveToastCollectionAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveAllToastCollectionsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1761,6 +1777,7 @@ public class IToastCollectionManager <: InterfaceWrapperBase & ComInterface & Ru
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllToastCollectionsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l0.ToastCollection>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2168,8 +2185,14 @@ extend IToastNotificationFactory <: windows_core.Interface<IToastNotificationFac
 @C
 public struct IToastNotificationHistory2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetHistory: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetHistory: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetHistoryWithId: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetHistoryWithId: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2238,6 +2261,7 @@ public class IToastNotificationHistory2 <: InterfaceWrapperBase & ComInterface &
         readVtbl<IToastNotificationHistory2Vtbl>(IToastNotificationHistory2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetHistory(): windows_collections.IVectorView<ToastNotification> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2246,6 +2270,7 @@ public class IToastNotificationHistory2 <: InterfaceWrapperBase & ComInterface &
         return windows_collections.IVectorView<ToastNotification>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetHistoryWithId(applicationId: windows_core.HString): windows_collections.IVectorView<ToastNotification> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2552,10 +2577,12 @@ public class NotificationBinding <: InterfaceWrapperBase & ComInterface & window
         defaultInterface().SetLanguage(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Hints(): windows_collections.IMap<windows_core.HString, windows_core.HString> {
         return defaultInterface().Hints()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetTextElements(): windows_collections.IVectorView<AdaptiveNotificationText> {
         return defaultInterface().GetTextElements()
     }
@@ -2656,6 +2683,7 @@ public class NotificationVisual <: InterfaceWrapperBase & ComInterface & windows
         defaultInterface().SetLanguage(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Bindings(): windows_collections.IVector<NotificationBinding> {
         return defaultInterface().Bindings()
     }
@@ -3260,6 +3288,7 @@ public class ToastCollectionManager <: InterfaceWrapperBase & ComInterface & win
         return defaultInterface().SaveToastCollectionAsync(collection)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllToastCollectionsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l0.ToastCollection>> {
         return defaultInterface().FindAllToastCollectionsAsync()
     }

@@ -246,13 +246,13 @@ extend IPhoneCallOrigin2 <: windows_core.Interface<IPhoneCallOrigin2> {}
 @C
 public struct IPhoneCallOrigin3Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var DisplayPicture: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var DisplayPicture: UIntNative = UIntNative(0)
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var SetDisplayPicture: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var SetDisplayPicture: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -341,7 +341,7 @@ public class IPhoneCallOrigin3 <: InterfaceWrapperBase & ComInterface & RuntimeN
         readVtbl<IPhoneCallOrigin3Vtbl>(IPhoneCallOrigin3Vtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func DisplayPicture(): _impl_l1.StorageFile {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -350,7 +350,7 @@ public class IPhoneCallOrigin3 <: InterfaceWrapperBase & ComInterface & RuntimeN
         return _impl_l1.StorageFile.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func SetDisplayPicture(value: _impl_l1.StorageFile): Unit {
         let v = vtbl()
         let hr = v.SetDisplayPicture(asRaw(), value.asRaw())

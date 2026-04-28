@@ -3,7 +3,6 @@ package windows_sys.Devices.Input.Preview
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Devices_HumanInterfaceDevice == "on"]
 import windows_sys.Devices.HumanInterfaceDevice as Devices_HumanInterfaceDevice
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
 
@@ -50,9 +49,9 @@ public struct IGazeDevicePreviewVtbl {
     public var CanTrackHead: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var ConfigurationState: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var RequestCalibrationAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Devices_HumanInterfaceDevice == "on"]
+    @When[Windows_Devices_HumanInterfaceDevice == "on" && Windows_Foundation_Collections == "on"]
     public var GetNumericControlDescriptions: CFunc<(CPointer<Unit>, UInt16, UInt16, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
-    @When[Windows_Devices_HumanInterfaceDevice == "on"]
+    @When[Windows_Devices_HumanInterfaceDevice == "on" && Windows_Foundation_Collections == "on"]
     public var GetBooleanControlDescriptions: CFunc<(CPointer<Unit>, UInt16, UInt16, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -127,14 +126,14 @@ public class IGazeDevicePreview <: InterfaceWrapperBase & ComInterface {
         return __vt.RequestCalibrationAsync(__liveRaw, result__)
     }
 
-    @When[Windows_Devices_HumanInterfaceDevice == "on"]
+    @When[Windows_Devices_HumanInterfaceDevice == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func GetNumericControlDescriptions(usagePage: UInt16, usageId: UInt16, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetNumericControlDescriptions(__liveRaw, usagePage, usageId, result__)
     }
 
-    @When[Windows_Devices_HumanInterfaceDevice == "on"]
+    @When[Windows_Devices_HumanInterfaceDevice == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func GetBooleanControlDescriptions(usagePage: UInt16, usageId: UInt16, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -537,6 +536,7 @@ public struct IGazeMovedPreviewEventArgsVtbl {
     public var Handled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var SetHandled: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
     public var CurrentPoint: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetIntermediatePoints: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -599,6 +599,7 @@ public class IGazeMovedPreviewEventArgs <: InterfaceWrapperBase & ComInterface {
         return __vt.CurrentPoint(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetIntermediatePoints(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

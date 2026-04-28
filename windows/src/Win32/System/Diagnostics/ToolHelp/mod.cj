@@ -6,7 +6,6 @@ package windows.Win32.System.Diagnostics.ToolHelp
 import std.collection.*
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 
@@ -607,39 +606,179 @@ extend HEAPENTRY32 <: windows_core.CopyType & windows_core.RuntimeType & windows
     }
 }
 
-@When[KERNEL32 == "on"]
+@When[Windows_Win32_System_Diagnostics_ToolHelp == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ToolHelp_CreateToolhelp32Snapshot == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func CreateToolhelp32Snapshot(dwFlags: CREATE_TOOLHELP_SNAPSHOT_FLAGSAbi, th32ProcessID: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Diagnostics_ToolHelp == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ToolHelp_CreateToolhelp32Snapshot == "on"]
+public unsafe func Windows_CreateToolhelp32Snapshot(dwFlags: CREATE_TOOLHELP_SNAPSHOT_FLAGSAbi, th32ProcessID: UInt32): CPointer<Unit> {
+    return CreateToolhelp32Snapshot(dwFlags, th32ProcessID)
+}
+
+@When[Windows_Win32_System_Diagnostics_ToolHelp == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ToolHelp_Heap32First == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func Heap32First(lphe: CPointer<HEAPENTRY32Abi>, th32ProcessID: UInt32, th32HeapID: UIntNative): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_ToolHelp == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ToolHelp_Heap32First == "on"]
+public unsafe func Windows_Heap32First(lphe: CPointer<HEAPENTRY32Abi>, th32ProcessID: UInt32, th32HeapID: UIntNative): Int32 {
+    return Heap32First(lphe, th32ProcessID, th32HeapID)
+}
+
+@When[Windows_Win32_System_Diagnostics_ToolHelp == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ToolHelp_Heap32ListFirst == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func Heap32ListFirst(hSnapshot: CPointer<Unit>, lphl: CPointer<HEAPLIST32Abi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_ToolHelp == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ToolHelp_Heap32ListFirst == "on"]
+public unsafe func Windows_Heap32ListFirst(hSnapshot: CPointer<Unit>, lphl: CPointer<HEAPLIST32Abi>): Int32 {
+    return Heap32ListFirst(hSnapshot, lphl)
+}
+
+@When[Windows_Win32_System_Diagnostics_ToolHelp == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ToolHelp_Heap32ListNext == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func Heap32ListNext(hSnapshot: CPointer<Unit>, lphl: CPointer<HEAPLIST32Abi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_ToolHelp == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ToolHelp_Heap32ListNext == "on"]
+public unsafe func Windows_Heap32ListNext(hSnapshot: CPointer<Unit>, lphl: CPointer<HEAPLIST32Abi>): Int32 {
+    return Heap32ListNext(hSnapshot, lphl)
+}
+
+@When[Windows_Win32_System_Diagnostics_ToolHelp == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ToolHelp_Heap32Next == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func Heap32Next(lphe: CPointer<HEAPENTRY32Abi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_ToolHelp == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ToolHelp_Heap32Next == "on"]
+public unsafe func Windows_Heap32Next(lphe: CPointer<HEAPENTRY32Abi>): Int32 {
+    return Heap32Next(lphe)
+}
+
+@When[Windows_Win32_System_Diagnostics_ToolHelp == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ToolHelp_Module32First == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func Module32First(hSnapshot: CPointer<Unit>, lpme: CPointer<MODULEENTRY32Abi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_ToolHelp == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ToolHelp_Module32First == "on"]
+public unsafe func Windows_Module32First(hSnapshot: CPointer<Unit>, lpme: CPointer<MODULEENTRY32Abi>): Int32 {
+    return Module32First(hSnapshot, lpme)
+}
+
+@When[Windows_Win32_System_Diagnostics_ToolHelp == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ToolHelp_Module32FirstW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func Module32FirstW(hSnapshot: CPointer<Unit>, lpme: CPointer<MODULEENTRY32WAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_ToolHelp == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ToolHelp_Module32FirstW == "on"]
+public unsafe func Windows_Module32FirstW(hSnapshot: CPointer<Unit>, lpme: CPointer<MODULEENTRY32WAbi>): Int32 {
+    return Module32FirstW(hSnapshot, lpme)
+}
+
+@When[Windows_Win32_System_Diagnostics_ToolHelp == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ToolHelp_Module32Next == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func Module32Next(hSnapshot: CPointer<Unit>, lpme: CPointer<MODULEENTRY32Abi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_ToolHelp == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ToolHelp_Module32Next == "on"]
+public unsafe func Windows_Module32Next(hSnapshot: CPointer<Unit>, lpme: CPointer<MODULEENTRY32Abi>): Int32 {
+    return Module32Next(hSnapshot, lpme)
+}
+
+@When[Windows_Win32_System_Diagnostics_ToolHelp == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ToolHelp_Module32NextW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func Module32NextW(hSnapshot: CPointer<Unit>, lpme: CPointer<MODULEENTRY32WAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_ToolHelp == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ToolHelp_Module32NextW == "on"]
+public unsafe func Windows_Module32NextW(hSnapshot: CPointer<Unit>, lpme: CPointer<MODULEENTRY32WAbi>): Int32 {
+    return Module32NextW(hSnapshot, lpme)
+}
+
+@When[Windows_Win32_System_Diagnostics_ToolHelp == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ToolHelp_Process32First == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func Process32First(hSnapshot: CPointer<Unit>, lppe: CPointer<PROCESSENTRY32Abi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_ToolHelp == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ToolHelp_Process32First == "on"]
+public unsafe func Windows_Process32First(hSnapshot: CPointer<Unit>, lppe: CPointer<PROCESSENTRY32Abi>): Int32 {
+    return Process32First(hSnapshot, lppe)
+}
+
+@When[Windows_Win32_System_Diagnostics_ToolHelp == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ToolHelp_Process32FirstW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func Process32FirstW(hSnapshot: CPointer<Unit>, lppe: CPointer<PROCESSENTRY32WAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_ToolHelp == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ToolHelp_Process32FirstW == "on"]
+public unsafe func Windows_Process32FirstW(hSnapshot: CPointer<Unit>, lppe: CPointer<PROCESSENTRY32WAbi>): Int32 {
+    return Process32FirstW(hSnapshot, lppe)
+}
+
+@When[Windows_Win32_System_Diagnostics_ToolHelp == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ToolHelp_Process32Next == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func Process32Next(hSnapshot: CPointer<Unit>, lppe: CPointer<PROCESSENTRY32Abi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_ToolHelp == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ToolHelp_Process32Next == "on"]
+public unsafe func Windows_Process32Next(hSnapshot: CPointer<Unit>, lppe: CPointer<PROCESSENTRY32Abi>): Int32 {
+    return Process32Next(hSnapshot, lppe)
+}
+
+@When[Windows_Win32_System_Diagnostics_ToolHelp == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ToolHelp_Process32NextW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func Process32NextW(hSnapshot: CPointer<Unit>, lppe: CPointer<PROCESSENTRY32WAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_ToolHelp == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ToolHelp_Process32NextW == "on"]
+public unsafe func Windows_Process32NextW(hSnapshot: CPointer<Unit>, lppe: CPointer<PROCESSENTRY32WAbi>): Int32 {
+    return Process32NextW(hSnapshot, lppe)
+}
+
+@When[Windows_Win32_System_Diagnostics_ToolHelp == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ToolHelp_Thread32First == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func Thread32First(hSnapshot: CPointer<Unit>, lpte: CPointer<THREADENTRY32Abi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_ToolHelp == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ToolHelp_Thread32First == "on"]
+public unsafe func Windows_Thread32First(hSnapshot: CPointer<Unit>, lpte: CPointer<THREADENTRY32Abi>): Int32 {
+    return Thread32First(hSnapshot, lpte)
+}
+
+@When[Windows_Win32_System_Diagnostics_ToolHelp == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ToolHelp_Thread32Next == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func Thread32Next(hSnapshot: CPointer<Unit>, lpte: CPointer<THREADENTRY32Abi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_ToolHelp == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ToolHelp_Thread32Next == "on"]
+public unsafe func Windows_Thread32Next(hSnapshot: CPointer<Unit>, lpte: CPointer<THREADENTRY32Abi>): Int32 {
+    return Thread32Next(hSnapshot, lpte)
+}
+
+@When[Windows_Win32_System_Diagnostics_ToolHelp == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ToolHelp_Toolhelp32ReadProcessMemory == "on"]
+foreign {
     func Toolhelp32ReadProcessMemory(th32ProcessID: UInt32, lpBaseAddress: CPointer<Unit>, lpBuffer: CPointer<Unit>, cbRead: UIntNative, lpNumberOfBytesRead: CPointer<UIntNative>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_ToolHelp == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ToolHelp_Toolhelp32ReadProcessMemory == "on"]
+public unsafe func Windows_Toolhelp32ReadProcessMemory(th32ProcessID: UInt32, lpBaseAddress: CPointer<Unit>, lpBuffer: CPointer<Unit>, cbRead: UIntNative, lpNumberOfBytesRead: CPointer<UIntNative>): Int32 {
+    return Toolhelp32ReadProcessMemory(th32ProcessID, lpBaseAddress, lpBuffer, cbRead, lpNumberOfBytesRead)
 }
 
 @When[Windows_Win32_System_Diagnostics_ToolHelp == "on"]

@@ -9,21 +9,30 @@ import windows_sys.Win32.UI.WindowsAndMessaging.*
 public import windows_core.*
 public import windows_result.{Win32Exception}
 
+@When[Windows_Win32_Foundation == "on"]
 public import windows_sys.Win32.Foundation.{HANDLE, HWND, HINSTANCE, HMODULE,
     BOOL, LRESULT, WPARAM, LPARAM, TRUE, FALSE, MAX_PATH, POINT, RECT, SIZE,
     FILETIME, WAIT_EVENT, GENERIC_ACCESS_RIGHTS}
+@When[Windows_Win32_Graphics_Gdi == "on"]
 public import windows_sys.Win32.Graphics.Gdi.{HBRUSH, HDC, HGDIOBJ}
+@When[Windows_Win32_Security == "on"]
 public import windows_sys.Win32.Security.{SECURITY_ATTRIBUTES}
+@When[Windows_Win32_Storage_FileSystem == "on"]
 public import windows_sys.Win32.Storage.FileSystem.{FILE_SHARE_MODE,
     FILE_ACCESS_RIGHTS, FILE_CREATION_DISPOSITION, FILE_FLAGS_AND_ATTRIBUTES,
     SET_FILE_POINTER_MOVE_METHOD, WIN32_FIND_DATAW}
+@When[Windows_Win32_System_Console == "on"]
 public import windows_sys.Win32.System.Console.{STD_HANDLE}
+@When[Windows_Win32_System_IO == "on"]
 public import windows_sys.Win32.System.IO.{OVERLAPPED}
+@When[Windows_Win32_System_Memory == "on"]
 public import windows_sys.Win32.System.Memory.{VIRTUAL_ALLOCATION_TYPE,
     VIRTUAL_FREE_TYPE, PAGE_PROTECTION_FLAGS}
 @When[Windows_Win32_System_Kernel == "on"]
 public import windows_sys.Win32.System.Threading.CRITICAL_SECTION
+@When[Windows_Win32_System_Threading == "on"]
 public import windows_sys.Win32.System.Threading.{STARTUPINFOW, PROCESS_INFORMATION, INFINITE}
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public import windows_sys.Win32.UI.WindowsAndMessaging.{HICON, HCURSOR,
     HMENU, WNDCLASSEXW, MSG, CREATESTRUCTW, MESSAGEBOX_STYLE,
     MESSAGEBOX_RESULT, WINDOW_STYLE, WINDOW_EX_STYLE, SHOW_WINDOW_CMD,
@@ -37,153 +46,284 @@ public import windows_sys.Win32.UI.WindowsAndMessaging.{HICON, HCURSOR,
 
 public type ATOM = UInt16
 
+@When[Windows_Win32_Foundation == "on"]
 public let WAIT_OBJECT_0 = WAIT_EVENT_WAIT_OBJECT_0
+@When[Windows_Win32_Foundation == "on"]
 public let WAIT_ABANDONED = WAIT_EVENT_WAIT_ABANDONED
+@When[Windows_Win32_Foundation == "on"]
 public let WAIT_TIMEOUT = WAIT_EVENT_WAIT_TIMEOUT
+@When[Windows_Win32_Foundation == "on"]
 public let WAIT_FAILED = WAIT_EVENT_WAIT_FAILED
 
+@When[Windows_Win32_Foundation == "on"]
 public let GENERIC_READ = GENERIC_ACCESS_RIGHTS_GENERIC_READ
+@When[Windows_Win32_Foundation == "on"]
 public let GENERIC_WRITE = GENERIC_ACCESS_RIGHTS_GENERIC_WRITE
+@When[Windows_Win32_Foundation == "on"]
 public let GENERIC_EXECUTE = GENERIC_ACCESS_RIGHTS_GENERIC_EXECUTE
+@When[Windows_Win32_Foundation == "on"]
 public let GENERIC_ALL = GENERIC_ACCESS_RIGHTS_GENERIC_ALL
 
+@When[Windows_Win32_Foundation == "on"]
 public let ERROR_SUCCESS = WIN32_ERROR_ERROR_SUCCESS.value
+@When[Windows_Win32_Foundation == "on"]
 public let ERROR_FILE_NOT_FOUND = WIN32_ERROR_ERROR_FILE_NOT_FOUND.value
+@When[Windows_Win32_Foundation == "on"]
 public let ERROR_PATH_NOT_FOUND = WIN32_ERROR_ERROR_PATH_NOT_FOUND.value
+@When[Windows_Win32_Foundation == "on"]
 public let ERROR_ACCESS_DENIED = WIN32_ERROR_ERROR_ACCESS_DENIED.value
+@When[Windows_Win32_Foundation == "on"]
 public let ERROR_INVALID_HANDLE = WIN32_ERROR_ERROR_INVALID_HANDLE.value
+@When[Windows_Win32_Foundation == "on"]
 public let ERROR_NOT_ENOUGH_MEMORY = WIN32_ERROR_ERROR_NOT_ENOUGH_MEMORY.value
+@When[Windows_Win32_Foundation == "on"]
 public let ERROR_INVALID_DATA = WIN32_ERROR_ERROR_INVALID_DATA.value
+@When[Windows_Win32_Foundation == "on"]
 public let ERROR_OUTOFMEMORY = WIN32_ERROR_ERROR_OUTOFMEMORY.value
+@When[Windows_Win32_Foundation == "on"]
 public let ERROR_INVALID_PARAMETER = WIN32_ERROR_ERROR_INVALID_PARAMETER.value
+@When[Windows_Win32_Foundation == "on"]
 public let ERROR_INSUFFICIENT_BUFFER = WIN32_ERROR_ERROR_INSUFFICIENT_BUFFER.value
+@When[Windows_Win32_Foundation == "on"]
 public let ERROR_ALREADY_EXISTS = WIN32_ERROR_ERROR_ALREADY_EXISTS.value
+@When[Windows_Win32_Foundation == "on"]
 public let ERROR_MORE_DATA = WIN32_ERROR_ERROR_MORE_DATA.value
+@When[Windows_Win32_Foundation == "on"]
 public let ERROR_NO_MORE_FILES = WIN32_ERROR_ERROR_NO_MORE_FILES.value
+@When[Windows_Win32_Foundation == "on"]
 public let ERROR_IO_PENDING = WIN32_ERROR_ERROR_IO_PENDING.value
 
+@When[Windows_Win32_Storage_FileSystem == "on"]
 public let FILE_SHARE_NONE = FILE_SHARE_MODE_FILE_SHARE_NONE
+@When[Windows_Win32_Storage_FileSystem == "on"]
 public let FILE_SHARE_READ = FILE_SHARE_MODE_FILE_SHARE_READ
+@When[Windows_Win32_Storage_FileSystem == "on"]
 public let FILE_SHARE_WRITE = FILE_SHARE_MODE_FILE_SHARE_WRITE
+@When[Windows_Win32_Storage_FileSystem == "on"]
 public let FILE_SHARE_DELETE = FILE_SHARE_MODE_FILE_SHARE_DELETE
 
+@When[Windows_Win32_Storage_FileSystem == "on"]
 public let FILE_READ_DATA = FILE_ACCESS_RIGHTS_FILE_READ_DATA
+@When[Windows_Win32_Storage_FileSystem == "on"]
 public let FILE_WRITE_DATA = FILE_ACCESS_RIGHTS_FILE_WRITE_DATA
+@When[Windows_Win32_Storage_FileSystem == "on"]
 public let FILE_APPEND_DATA = FILE_ACCESS_RIGHTS_FILE_APPEND_DATA
+@When[Windows_Win32_Storage_FileSystem == "on"]
 public let FILE_READ_ATTRIBUTES = FILE_ACCESS_RIGHTS_FILE_READ_ATTRIBUTES
+@When[Windows_Win32_Storage_FileSystem == "on"]
 public let FILE_WRITE_ATTRIBUTES = FILE_ACCESS_RIGHTS_FILE_WRITE_ATTRIBUTES
 
+@When[Windows_Win32_Storage_FileSystem == "on"]
 public let CREATE_NEW = FILE_CREATION_DISPOSITION_CREATE_NEW
+@When[Windows_Win32_Storage_FileSystem == "on"]
 public let CREATE_ALWAYS = FILE_CREATION_DISPOSITION_CREATE_ALWAYS
+@When[Windows_Win32_Storage_FileSystem == "on"]
 public let OPEN_EXISTING = FILE_CREATION_DISPOSITION_OPEN_EXISTING
+@When[Windows_Win32_Storage_FileSystem == "on"]
 public let OPEN_ALWAYS = FILE_CREATION_DISPOSITION_OPEN_ALWAYS
+@When[Windows_Win32_Storage_FileSystem == "on"]
 public let TRUNCATE_EXISTING = FILE_CREATION_DISPOSITION_TRUNCATE_EXISTING
 
+@When[Windows_Win32_Storage_FileSystem == "on"]
 public let FILE_ATTRIBUTE_READONLY = FILE_FLAGS_AND_ATTRIBUTES_FILE_ATTRIBUTE_READONLY
+@When[Windows_Win32_Storage_FileSystem == "on"]
 public let FILE_ATTRIBUTE_HIDDEN = FILE_FLAGS_AND_ATTRIBUTES_FILE_ATTRIBUTE_HIDDEN
+@When[Windows_Win32_Storage_FileSystem == "on"]
 public let FILE_ATTRIBUTE_SYSTEM = FILE_FLAGS_AND_ATTRIBUTES_FILE_ATTRIBUTE_SYSTEM
+@When[Windows_Win32_Storage_FileSystem == "on"]
 public let FILE_ATTRIBUTE_DIRECTORY = FILE_FLAGS_AND_ATTRIBUTES_FILE_ATTRIBUTE_DIRECTORY
+@When[Windows_Win32_Storage_FileSystem == "on"]
 public let FILE_ATTRIBUTE_ARCHIVE = FILE_FLAGS_AND_ATTRIBUTES_FILE_ATTRIBUTE_ARCHIVE
+@When[Windows_Win32_Storage_FileSystem == "on"]
 public let FILE_ATTRIBUTE_NORMAL = FILE_FLAGS_AND_ATTRIBUTES_FILE_ATTRIBUTE_NORMAL
+@When[Windows_Win32_Storage_FileSystem == "on"]
 public let FILE_ATTRIBUTE_TEMPORARY = FILE_FLAGS_AND_ATTRIBUTES_FILE_ATTRIBUTE_TEMPORARY
+@When[Windows_Win32_Storage_FileSystem == "on"]
 public let FILE_FLAG_WRITE_THROUGH = FILE_FLAGS_AND_ATTRIBUTES_FILE_FLAG_WRITE_THROUGH
+@When[Windows_Win32_Storage_FileSystem == "on"]
 public let FILE_FLAG_OVERLAPPED = FILE_FLAGS_AND_ATTRIBUTES_FILE_FLAG_OVERLAPPED
+@When[Windows_Win32_Storage_FileSystem == "on"]
 public let FILE_FLAG_NO_BUFFERING = FILE_FLAGS_AND_ATTRIBUTES_FILE_FLAG_NO_BUFFERING
+@When[Windows_Win32_Storage_FileSystem == "on"]
 public let FILE_FLAG_RANDOM_ACCESS = FILE_FLAGS_AND_ATTRIBUTES_FILE_FLAG_RANDOM_ACCESS
+@When[Windows_Win32_Storage_FileSystem == "on"]
 public let FILE_FLAG_SEQUENTIAL_SCAN = FILE_FLAGS_AND_ATTRIBUTES_FILE_FLAG_SEQUENTIAL_SCAN
+@When[Windows_Win32_Storage_FileSystem == "on"]
 public let FILE_FLAG_DELETE_ON_CLOSE = FILE_FLAGS_AND_ATTRIBUTES_FILE_FLAG_DELETE_ON_CLOSE
 
+@When[Windows_Win32_Storage_FileSystem == "on"]
 public let FILE_BEGIN = SET_FILE_POINTER_MOVE_METHOD_FILE_BEGIN
+@When[Windows_Win32_Storage_FileSystem == "on"]
 public let FILE_CURRENT = SET_FILE_POINTER_MOVE_METHOD_FILE_CURRENT
+@When[Windows_Win32_Storage_FileSystem == "on"]
 public let FILE_END = SET_FILE_POINTER_MOVE_METHOD_FILE_END
 
+@When[Windows_Win32_System_Console == "on"]
 public let STD_INPUT_HANDLE = STD_HANDLE_STD_INPUT_HANDLE
+@When[Windows_Win32_System_Console == "on"]
 public let STD_OUTPUT_HANDLE = STD_HANDLE_STD_OUTPUT_HANDLE
+@When[Windows_Win32_System_Console == "on"]
 public let STD_ERROR_HANDLE = STD_HANDLE_STD_ERROR_HANDLE
 
+@When[Windows_Win32_System_Memory == "on"]
 public let MEM_COMMIT = VIRTUAL_ALLOCATION_TYPE_MEM_COMMIT
+@When[Windows_Win32_System_Memory == "on"]
 public let MEM_RESERVE = VIRTUAL_ALLOCATION_TYPE_MEM_RESERVE
+@When[Windows_Win32_System_Memory == "on"]
 public let MEM_DECOMMIT = VIRTUAL_FREE_TYPE_MEM_DECOMMIT
+@When[Windows_Win32_System_Memory == "on"]
 public let MEM_RELEASE = VIRTUAL_FREE_TYPE_MEM_RELEASE
+@When[Windows_Win32_System_Memory == "on"]
 public let PAGE_NOACCESS = PAGE_PROTECTION_FLAGS_PAGE_NOACCESS
+@When[Windows_Win32_System_Memory == "on"]
 public let PAGE_READONLY = PAGE_PROTECTION_FLAGS_PAGE_READONLY
+@When[Windows_Win32_System_Memory == "on"]
 public let PAGE_READWRITE = PAGE_PROTECTION_FLAGS_PAGE_READWRITE
+@When[Windows_Win32_System_Memory == "on"]
 public let PAGE_EXECUTE = PAGE_PROTECTION_FLAGS_PAGE_EXECUTE
+@When[Windows_Win32_System_Memory == "on"]
 public let PAGE_EXECUTE_READ = PAGE_PROTECTION_FLAGS_PAGE_EXECUTE_READ
+@When[Windows_Win32_System_Memory == "on"]
 public let PAGE_EXECUTE_READWRITE = PAGE_PROTECTION_FLAGS_PAGE_EXECUTE_READWRITE
 
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let WS_OVERLAPPED = WINDOW_STYLE_WS_OVERLAPPED
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let WS_POPUP = WINDOW_STYLE_WS_POPUP
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let WS_CHILD = WINDOW_STYLE_WS_CHILD
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let WS_MINIMIZE = WINDOW_STYLE_WS_MINIMIZE
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let WS_VISIBLE = WINDOW_STYLE_WS_VISIBLE
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let WS_DISABLED = WINDOW_STYLE_WS_DISABLED
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let WS_CLIPSIBLINGS = WINDOW_STYLE_WS_CLIPSIBLINGS
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let WS_CLIPCHILDREN = WINDOW_STYLE_WS_CLIPCHILDREN
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let WS_MAXIMIZE = WINDOW_STYLE_WS_MAXIMIZE
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let WS_CAPTION = WINDOW_STYLE_WS_CAPTION
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let WS_BORDER = WINDOW_STYLE_WS_BORDER
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let WS_DLGFRAME = WINDOW_STYLE_WS_DLGFRAME
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let WS_VSCROLL = WINDOW_STYLE_WS_VSCROLL
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let WS_HSCROLL = WINDOW_STYLE_WS_HSCROLL
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let WS_SYSMENU = WINDOW_STYLE_WS_SYSMENU
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let WS_THICKFRAME = WINDOW_STYLE_WS_THICKFRAME
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let WS_MINIMIZEBOX = WINDOW_STYLE_WS_MINIMIZEBOX
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let WS_MAXIMIZEBOX = WINDOW_STYLE_WS_MAXIMIZEBOX
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let WS_OVERLAPPEDWINDOW = WINDOW_STYLE_WS_OVERLAPPEDWINDOW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let WS_POPUPWINDOW = WINDOW_STYLE_WS_POPUPWINDOW
 
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let WS_EX_DLGMODALFRAME = WINDOW_EX_STYLE_WS_EX_DLGMODALFRAME
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let WS_EX_TOPMOST = WINDOW_EX_STYLE_WS_EX_TOPMOST
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let WS_EX_ACCEPTFILES = WINDOW_EX_STYLE_WS_EX_ACCEPTFILES
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let WS_EX_TRANSPARENT = WINDOW_EX_STYLE_WS_EX_TRANSPARENT
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let WS_EX_APPWINDOW = WINDOW_EX_STYLE_WS_EX_APPWINDOW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let WS_EX_OVERLAPPEDWINDOW = WINDOW_EX_STYLE_WS_EX_OVERLAPPEDWINDOW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let WS_EX_CLIENTEDGE = WINDOW_EX_STYLE_WS_EX_CLIENTEDGE
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let WS_EX_WINDOWEDGE = WINDOW_EX_STYLE_WS_EX_WINDOWEDGE
 
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let MB_OK = MESSAGEBOX_STYLE_MB_OK
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let MB_OKCANCEL = MESSAGEBOX_STYLE_MB_OKCANCEL
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let MB_ABORTRETRYIGNORE = MESSAGEBOX_STYLE_MB_ABORTRETRYIGNORE
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let MB_YESNOCANCEL = MESSAGEBOX_STYLE_MB_YESNOCANCEL
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let MB_YESNO = MESSAGEBOX_STYLE_MB_YESNO
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let MB_RETRYCANCEL = MESSAGEBOX_STYLE_MB_RETRYCANCEL
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let MB_ICONHAND = MESSAGEBOX_STYLE_MB_ICONHAND
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let MB_ICONQUESTION = MESSAGEBOX_STYLE_MB_ICONQUESTION
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let MB_ICONEXCLAMATION = MESSAGEBOX_STYLE_MB_ICONEXCLAMATION
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let MB_ICONASTERISK = MESSAGEBOX_STYLE_MB_ICONASTERISK
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let MB_ICONERROR = MESSAGEBOX_STYLE_MB_ICONERROR
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let MB_ICONWARNING = MESSAGEBOX_STYLE_MB_ICONWARNING
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let MB_ICONINFORMATION = MESSAGEBOX_STYLE_MB_ICONINFORMATION
 
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let IDOK = MESSAGEBOX_RESULT_IDOK
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let IDCANCEL = MESSAGEBOX_RESULT_IDCANCEL
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let IDABORT = MESSAGEBOX_RESULT_IDABORT
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let IDRETRY = MESSAGEBOX_RESULT_IDRETRY
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let IDIGNORE = MESSAGEBOX_RESULT_IDIGNORE
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let IDYES = MESSAGEBOX_RESULT_IDYES
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let IDNO = MESSAGEBOX_RESULT_IDNO
 
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let SW_HIDE = SHOW_WINDOW_CMD_SW_HIDE
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let SW_SHOWNORMAL = SHOW_WINDOW_CMD_SW_SHOWNORMAL
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let SW_SHOWMINIMIZED = SHOW_WINDOW_CMD_SW_SHOWMINIMIZED
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let SW_SHOWMAXIMIZED = SHOW_WINDOW_CMD_SW_SHOWMAXIMIZED
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let SW_MAXIMIZE = SHOW_WINDOW_CMD_SW_MAXIMIZE
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let SW_SHOWNOACTIVATE = SHOW_WINDOW_CMD_SW_SHOWNOACTIVATE
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let SW_SHOW = SHOW_WINDOW_CMD_SW_SHOW
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let SW_MINIMIZE = SHOW_WINDOW_CMD_SW_MINIMIZE
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let SW_SHOWMINNOACTIVE = SHOW_WINDOW_CMD_SW_SHOWMINNOACTIVE
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let SW_SHOWNA = SHOW_WINDOW_CMD_SW_SHOWNA
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let SW_RESTORE = SHOW_WINDOW_CMD_SW_RESTORE
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let SW_SHOWDEFAULT = SHOW_WINDOW_CMD_SW_SHOWDEFAULT
 
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let SWP_NOSIZE = SET_WINDOW_POS_FLAGS_SWP_NOSIZE
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let SWP_NOMOVE = SET_WINDOW_POS_FLAGS_SWP_NOMOVE
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let SWP_NOZORDER = SET_WINDOW_POS_FLAGS_SWP_NOZORDER
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
 public let SWP_SHOWWINDOW = SET_WINDOW_POS_FLAGS_SWP_SHOWWINDOW
 
+@When[Windows_Win32_Foundation == "on"]
 public let NULL_HANDLE: HANDLE = CPointer<Unit>()
 
+@When[Windows_Win32_Foundation == "on"]
 public func isInvalidHandle(h: HANDLE): Bool {
     h.toUIntNative() == !UIntNative(0)
 }

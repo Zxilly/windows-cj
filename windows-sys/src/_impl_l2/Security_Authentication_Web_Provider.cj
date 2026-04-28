@@ -12,6 +12,7 @@ import windows_sys._impl_l0 as _impl_l0
 public struct IWebAccountProviderTokenOperationVtbl {
     public var base_: _impl_l0.IWebAccountProviderOperationVtbl = _impl_l0.IWebAccountProviderOperationVtbl()
     public var ProviderRequest: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ProviderResponses: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetCacheExpirationTime: CFunc<(CPointer<Unit>, Foundation__impl_l0.DateTime) -> Int32> = { _, _ => 0 }
     public var CacheExpirationTime: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.DateTime>) -> Int32> = { _, _ => 0 }
@@ -64,6 +65,7 @@ public class IWebAccountProviderTokenOperation <: InterfaceWrapperBase & ComInte
         return __vt.ProviderRequest(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ProviderResponses(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

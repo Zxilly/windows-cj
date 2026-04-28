@@ -691,6 +691,7 @@ public class IProtectionCapabilities <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IRevocationAndRenewalInformationVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Items: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -735,6 +736,7 @@ public class IRevocationAndRenewalInformation <: InterfaceWrapperBase & ComInter
         readVtbl<IRevocationAndRenewalInformationVtbl>(IRevocationAndRenewalInformationVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

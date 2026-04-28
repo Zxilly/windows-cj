@@ -787,6 +787,7 @@ public class IInlineUIContainer <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IParagraphVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Inlines: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var TextIndent: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => 0 }
     public var SetTextIndent: CFunc<(CPointer<Unit>, Float64) -> Int32> = { _, _ => 0 }
@@ -833,6 +834,7 @@ public class IParagraph <: InterfaceWrapperBase & ComInterface {
         readVtbl<IParagraphVtbl>(IParagraphVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Inlines(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -856,7 +858,9 @@ public class IParagraph <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ISpanVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Inlines: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetInlines: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -901,12 +905,14 @@ public class ISpan <: InterfaceWrapperBase & ComInterface {
         readVtbl<ISpanVtbl>(ISpanVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Inlines(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Inlines(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetInlines(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1453,6 +1459,7 @@ public class ITextElement5 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ITextHighlighterVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Ranges: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Xaml_Media == "on"]
     public var Foreground: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -1505,6 +1512,7 @@ public class ITextHighlighter <: InterfaceWrapperBase & ComInterface {
         readVtbl<ITextHighlighterVtbl>(ITextHighlighterVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Ranges(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

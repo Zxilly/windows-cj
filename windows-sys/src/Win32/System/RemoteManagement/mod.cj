@@ -5,7 +5,6 @@ import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrap
 import windows_interface as windows_interface
 import windows_polyfill.{unionReadUInt32, unionWriteUInt32}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l2 as Win32__impl_l2
@@ -2119,82 +2118,375 @@ public struct WSMAN_SHELL_ASYNC {
     public init() {}
 }
 
-@When[WSMSVC == "on"]
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManCloseCommand == "on"]
 foreign {
     // param-hint: commandHandle optional
     func WSManCloseCommand(commandHandle: WSMAN_COMMAND_HANDLE, flags: UInt32, async: CPointer<WSMAN_SHELL_ASYNC>): Unit
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManCloseCommand == "on"]
+public unsafe func Windows_WSManCloseCommand(commandHandle: WSMAN_COMMAND_HANDLE, flags: UInt32, async: CPointer<WSMAN_SHELL_ASYNC>): Unit {
+    WSManCloseCommand(commandHandle, flags, async)
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManCloseOperation == "on"]
+foreign {
     // param-hint: operationHandle optional
     func WSManCloseOperation(operationHandle: WSMAN_OPERATION_HANDLE, flags: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManCloseOperation == "on"]
+public unsafe func Windows_WSManCloseOperation(operationHandle: WSMAN_OPERATION_HANDLE, flags: UInt32): UInt32 {
+    return WSManCloseOperation(operationHandle, flags)
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManCloseSession == "on"]
+foreign {
     // param-hint: session optional
     func WSManCloseSession(session: WSMAN_SESSION_HANDLE, flags: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManCloseSession == "on"]
+public unsafe func Windows_WSManCloseSession(session: WSMAN_SESSION_HANDLE, flags: UInt32): UInt32 {
+    return WSManCloseSession(session, flags)
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManCloseShell == "on"]
+foreign {
     // param-hint: shellHandle optional
     func WSManCloseShell(shellHandle: WSMAN_SHELL_HANDLE, flags: UInt32, async: CPointer<WSMAN_SHELL_ASYNC>): Unit
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManCloseShell == "on"]
+public unsafe func Windows_WSManCloseShell(shellHandle: WSMAN_SHELL_HANDLE, flags: UInt32, async: CPointer<WSMAN_SHELL_ASYNC>): Unit {
+    WSManCloseShell(shellHandle, flags, async)
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManConnectShell == "on"]
+foreign {
     // param-hint: options optional
     // param-hint: connectXml optional
     func WSManConnectShell(session: WSMAN_SESSION_HANDLE, flags: UInt32, resourceUri: CPointer<UInt16>, shellID: CPointer<UInt16>, options: CPointer<WSMAN_OPTION_SET>, connectXml: CPointer<WSMAN_DATA>, async: CPointer<WSMAN_SHELL_ASYNC>, shell: CPointer<WSMAN_SHELL_HANDLE>): Unit
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManConnectShell == "on"]
+public unsafe func Windows_WSManConnectShell(session: WSMAN_SESSION_HANDLE, flags: UInt32, resourceUri: CPointer<UInt16>, shellID: CPointer<UInt16>, options: CPointer<WSMAN_OPTION_SET>, connectXml: CPointer<WSMAN_DATA>, async: CPointer<WSMAN_SHELL_ASYNC>, shell: CPointer<WSMAN_SHELL_HANDLE>): Unit {
+    WSManConnectShell(session, flags, resourceUri, shellID, options, connectXml, async, shell)
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManConnectShellCommand == "on"]
+foreign {
     // param-hint: options optional
     // param-hint: connectXml optional
     func WSManConnectShellCommand(shell: WSMAN_SHELL_HANDLE, flags: UInt32, commandID: CPointer<UInt16>, options: CPointer<WSMAN_OPTION_SET>, connectXml: CPointer<WSMAN_DATA>, async: CPointer<WSMAN_SHELL_ASYNC>, command: CPointer<WSMAN_COMMAND_HANDLE>): Unit
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManConnectShellCommand == "on"]
+public unsafe func Windows_WSManConnectShellCommand(shell: WSMAN_SHELL_HANDLE, flags: UInt32, commandID: CPointer<UInt16>, options: CPointer<WSMAN_OPTION_SET>, connectXml: CPointer<WSMAN_DATA>, async: CPointer<WSMAN_SHELL_ASYNC>, command: CPointer<WSMAN_COMMAND_HANDLE>): Unit {
+    WSManConnectShellCommand(shell, flags, commandID, options, connectXml, async, command)
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManCreateSession == "on"]
+foreign {
     // param-hint: connection optional
     // param-hint: serverAuthenticationCredentials optional
     // param-hint: proxyInfo optional
     func WSManCreateSession(apiHandle: WSMAN_API_HANDLE, connection: CPointer<UInt16>, flags: UInt32, serverAuthenticationCredentials: CPointer<WSMAN_AUTHENTICATION_CREDENTIALS>, proxyInfo: CPointer<WSMAN_PROXY_INFO>, session: CPointer<WSMAN_SESSION_HANDLE>): UInt32
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManCreateSession == "on"]
+public unsafe func Windows_WSManCreateSession(apiHandle: WSMAN_API_HANDLE, connection: CPointer<UInt16>, flags: UInt32, serverAuthenticationCredentials: CPointer<WSMAN_AUTHENTICATION_CREDENTIALS>, proxyInfo: CPointer<WSMAN_PROXY_INFO>, session: CPointer<WSMAN_SESSION_HANDLE>): UInt32 {
+    return WSManCreateSession(apiHandle, connection, flags, serverAuthenticationCredentials, proxyInfo, session)
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManCreateShell == "on"]
+foreign {
     // param-hint: startupInfo optional
     // param-hint: options optional
     // param-hint: createXml optional
     func WSManCreateShell(session: WSMAN_SESSION_HANDLE, flags: UInt32, resourceUri: CPointer<UInt16>, startupInfo: CPointer<WSMAN_SHELL_STARTUP_INFO_V11>, options: CPointer<WSMAN_OPTION_SET>, createXml: CPointer<WSMAN_DATA>, async: CPointer<WSMAN_SHELL_ASYNC>, shell: CPointer<WSMAN_SHELL_HANDLE>): Unit
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManCreateShell == "on"]
+public unsafe func Windows_WSManCreateShell(session: WSMAN_SESSION_HANDLE, flags: UInt32, resourceUri: CPointer<UInt16>, startupInfo: CPointer<WSMAN_SHELL_STARTUP_INFO_V11>, options: CPointer<WSMAN_OPTION_SET>, createXml: CPointer<WSMAN_DATA>, async: CPointer<WSMAN_SHELL_ASYNC>, shell: CPointer<WSMAN_SHELL_HANDLE>): Unit {
+    WSManCreateShell(session, flags, resourceUri, startupInfo, options, createXml, async, shell)
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManCreateShellEx == "on"]
+foreign {
     // param-hint: startupInfo optional
     // param-hint: options optional
     // param-hint: createXml optional
     func WSManCreateShellEx(session: WSMAN_SESSION_HANDLE, flags: UInt32, resourceUri: CPointer<UInt16>, shellId: CPointer<UInt16>, startupInfo: CPointer<WSMAN_SHELL_STARTUP_INFO_V11>, options: CPointer<WSMAN_OPTION_SET>, createXml: CPointer<WSMAN_DATA>, async: CPointer<WSMAN_SHELL_ASYNC>, shell: CPointer<WSMAN_SHELL_HANDLE>): Unit
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManCreateShellEx == "on"]
+public unsafe func Windows_WSManCreateShellEx(session: WSMAN_SESSION_HANDLE, flags: UInt32, resourceUri: CPointer<UInt16>, shellId: CPointer<UInt16>, startupInfo: CPointer<WSMAN_SHELL_STARTUP_INFO_V11>, options: CPointer<WSMAN_OPTION_SET>, createXml: CPointer<WSMAN_DATA>, async: CPointer<WSMAN_SHELL_ASYNC>, shell: CPointer<WSMAN_SHELL_HANDLE>): Unit {
+    WSManCreateShellEx(session, flags, resourceUri, shellId, startupInfo, options, createXml, async, shell)
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManDeinitialize == "on"]
+foreign {
     // param-hint: apiHandle optional
     func WSManDeinitialize(apiHandle: WSMAN_API_HANDLE, flags: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManDeinitialize == "on"]
+public unsafe func Windows_WSManDeinitialize(apiHandle: WSMAN_API_HANDLE, flags: UInt32): UInt32 {
+    return WSManDeinitialize(apiHandle, flags)
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManDisconnectShell == "on"]
+foreign {
     func WSManDisconnectShell(shell: WSMAN_SHELL_HANDLE, flags: UInt32, disconnectInfo: CPointer<WSMAN_SHELL_DISCONNECT_INFO>, async: CPointer<WSMAN_SHELL_ASYNC>): Unit
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManDisconnectShell == "on"]
+public unsafe func Windows_WSManDisconnectShell(shell: WSMAN_SHELL_HANDLE, flags: UInt32, disconnectInfo: CPointer<WSMAN_SHELL_DISCONNECT_INFO>, async: CPointer<WSMAN_SHELL_ASYNC>): Unit {
+    WSManDisconnectShell(shell, flags, disconnectInfo, async)
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManGetErrorMessage == "on"]
+foreign {
     // param-hint: flags optional reserved
     // param-hint: languageCode optional
     // param-hint: message len=param[4] optional
     func WSManGetErrorMessage(apiHandle: WSMAN_API_HANDLE, flags: UInt32, languageCode: CPointer<UInt16>, errorCode: UInt32, messageLength: UInt32, message: CPointer<UInt16>, messageLengthUsed: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManGetErrorMessage == "on"]
+public unsafe func Windows_WSManGetErrorMessage(apiHandle: WSMAN_API_HANDLE, flags: UInt32, languageCode: CPointer<UInt16>, errorCode: UInt32, messageLength: UInt32, message: CPointer<UInt16>, messageLengthUsed: CPointer<UInt32>): UInt32 {
+    return WSManGetErrorMessage(apiHandle, flags, languageCode, errorCode, messageLength, message, messageLengthUsed)
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManGetSessionOptionAsDword == "on"]
+foreign {
     func WSManGetSessionOptionAsDword(session: WSMAN_SESSION_HANDLE, option: Int32, value: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManGetSessionOptionAsDword == "on"]
+public unsafe func Windows_WSManGetSessionOptionAsDword(session: WSMAN_SESSION_HANDLE, option: Int32, value: CPointer<UInt32>): UInt32 {
+    return WSManGetSessionOptionAsDword(session, option, value)
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManGetSessionOptionAsString == "on"]
+foreign {
     // param-hint: string len=param[2] optional
     func WSManGetSessionOptionAsString(session: WSMAN_SESSION_HANDLE, option: Int32, stringLength: UInt32, string: CPointer<UInt16>, stringLengthUsed: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManGetSessionOptionAsString == "on"]
+public unsafe func Windows_WSManGetSessionOptionAsString(session: WSMAN_SESSION_HANDLE, option: Int32, stringLength: UInt32, string: CPointer<UInt16>, stringLengthUsed: CPointer<UInt32>): UInt32 {
+    return WSManGetSessionOptionAsString(session, option, stringLength, string, stringLengthUsed)
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManInitialize == "on"]
+foreign {
     func WSManInitialize(flags: UInt32, apiHandle: CPointer<WSMAN_API_HANDLE>): UInt32
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManInitialize == "on"]
+public unsafe func Windows_WSManInitialize(flags: UInt32, apiHandle: CPointer<WSMAN_API_HANDLE>): UInt32 {
+    return WSManInitialize(flags, apiHandle)
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManPluginAuthzOperationComplete == "on"]
+foreign {
     // param-hint: userAuthorizationContext optional
     // param-hint: extendedErrorInformation optional
     func WSManPluginAuthzOperationComplete(senderDetails: CPointer<WSMAN_SENDER_DETAILS>, flags: UInt32, userAuthorizationContext: CPointer<Unit>, errorCode: UInt32, extendedErrorInformation: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManPluginAuthzOperationComplete == "on"]
+public unsafe func Windows_WSManPluginAuthzOperationComplete(senderDetails: CPointer<WSMAN_SENDER_DETAILS>, flags: UInt32, userAuthorizationContext: CPointer<Unit>, errorCode: UInt32, extendedErrorInformation: CPointer<UInt16>): UInt32 {
+    return WSManPluginAuthzOperationComplete(senderDetails, flags, userAuthorizationContext, errorCode, extendedErrorInformation)
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManPluginAuthzQueryQuotaComplete == "on"]
+foreign {
     // param-hint: quota optional
     // param-hint: extendedErrorInformation optional
     func WSManPluginAuthzQueryQuotaComplete(senderDetails: CPointer<WSMAN_SENDER_DETAILS>, flags: UInt32, quota: CPointer<WSMAN_AUTHZ_QUOTA>, errorCode: UInt32, extendedErrorInformation: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManPluginAuthzQueryQuotaComplete == "on"]
+public unsafe func Windows_WSManPluginAuthzQueryQuotaComplete(senderDetails: CPointer<WSMAN_SENDER_DETAILS>, flags: UInt32, quota: CPointer<WSMAN_AUTHZ_QUOTA>, errorCode: UInt32, extendedErrorInformation: CPointer<UInt16>): UInt32 {
+    return WSManPluginAuthzQueryQuotaComplete(senderDetails, flags, quota, errorCode, extendedErrorInformation)
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManPluginAuthzUserComplete == "on"]
+foreign {
     // param-hint: userAuthorizationContext optional
     // param-hint: impersonationToken optional
     // param-hint: extendedErrorInformation optional
     func WSManPluginAuthzUserComplete(senderDetails: CPointer<WSMAN_SENDER_DETAILS>, flags: UInt32, userAuthorizationContext: CPointer<Unit>, impersonationToken: CPointer<Unit>, userIsAdministrator: Int32, errorCode: UInt32, extendedErrorInformation: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManPluginAuthzUserComplete == "on"]
+public unsafe func Windows_WSManPluginAuthzUserComplete(senderDetails: CPointer<WSMAN_SENDER_DETAILS>, flags: UInt32, userAuthorizationContext: CPointer<Unit>, impersonationToken: CPointer<Unit>, userIsAdministrator: Int32, errorCode: UInt32, extendedErrorInformation: CPointer<UInt16>): UInt32 {
+    return WSManPluginAuthzUserComplete(senderDetails, flags, userAuthorizationContext, impersonationToken, userIsAdministrator, errorCode, extendedErrorInformation)
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManPluginFreeRequestDetails == "on"]
+foreign {
     func WSManPluginFreeRequestDetails(requestDetails: CPointer<WSMAN_PLUGIN_REQUEST>): UInt32
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManPluginFreeRequestDetails == "on"]
+public unsafe func Windows_WSManPluginFreeRequestDetails(requestDetails: CPointer<WSMAN_PLUGIN_REQUEST>): UInt32 {
+    return WSManPluginFreeRequestDetails(requestDetails)
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManPluginGetConfiguration == "on"]
+foreign {
     func WSManPluginGetConfiguration(pluginContext: CPointer<Unit>, flags: UInt32, data: CPointer<WSMAN_DATA>): UInt32
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManPluginGetConfiguration == "on"]
+public unsafe func Windows_WSManPluginGetConfiguration(pluginContext: CPointer<Unit>, flags: UInt32, data: CPointer<WSMAN_DATA>): UInt32 {
+    return WSManPluginGetConfiguration(pluginContext, flags, data)
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManPluginGetOperationParameters == "on"]
+foreign {
     func WSManPluginGetOperationParameters(requestDetails: CPointer<WSMAN_PLUGIN_REQUEST>, flags: UInt32, data: CPointer<WSMAN_DATA>): UInt32
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManPluginGetOperationParameters == "on"]
+public unsafe func Windows_WSManPluginGetOperationParameters(requestDetails: CPointer<WSMAN_PLUGIN_REQUEST>, flags: UInt32, data: CPointer<WSMAN_DATA>): UInt32 {
+    return WSManPluginGetOperationParameters(requestDetails, flags, data)
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManPluginOperationComplete == "on"]
+foreign {
     // param-hint: extendedInformation optional
     func WSManPluginOperationComplete(requestDetails: CPointer<WSMAN_PLUGIN_REQUEST>, flags: UInt32, errorCode: UInt32, extendedInformation: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManPluginOperationComplete == "on"]
+public unsafe func Windows_WSManPluginOperationComplete(requestDetails: CPointer<WSMAN_PLUGIN_REQUEST>, flags: UInt32, errorCode: UInt32, extendedInformation: CPointer<UInt16>): UInt32 {
+    return WSManPluginOperationComplete(requestDetails, flags, errorCode, extendedInformation)
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManPluginReceiveResult == "on"]
+foreign {
     // param-hint: stream optional
     // param-hint: streamResult optional
     // param-hint: commandState optional
     func WSManPluginReceiveResult(requestDetails: CPointer<WSMAN_PLUGIN_REQUEST>, flags: UInt32, stream: CPointer<UInt16>, streamResult: CPointer<WSMAN_DATA>, commandState: CPointer<UInt16>, exitCode: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManPluginReceiveResult == "on"]
+public unsafe func Windows_WSManPluginReceiveResult(requestDetails: CPointer<WSMAN_PLUGIN_REQUEST>, flags: UInt32, stream: CPointer<UInt16>, streamResult: CPointer<WSMAN_DATA>, commandState: CPointer<UInt16>, exitCode: UInt32): UInt32 {
+    return WSManPluginReceiveResult(requestDetails, flags, stream, streamResult, commandState, exitCode)
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManPluginReportCompletion == "on"]
+foreign {
     func WSManPluginReportCompletion(pluginContext: CPointer<Unit>, flags: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManPluginReportCompletion == "on"]
+public unsafe func Windows_WSManPluginReportCompletion(pluginContext: CPointer<Unit>, flags: UInt32): UInt32 {
+    return WSManPluginReportCompletion(pluginContext, flags)
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManPluginReportContext == "on"]
+foreign {
     func WSManPluginReportContext(requestDetails: CPointer<WSMAN_PLUGIN_REQUEST>, flags: UInt32, context: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManPluginReportContext == "on"]
+public unsafe func Windows_WSManPluginReportContext(requestDetails: CPointer<WSMAN_PLUGIN_REQUEST>, flags: UInt32, context: CPointer<Unit>): UInt32 {
+    return WSManPluginReportContext(requestDetails, flags, context)
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManReceiveShellOutput == "on"]
+foreign {
     // param-hint: command optional
     // param-hint: desiredStreamSet optional
     func WSManReceiveShellOutput(shell: WSMAN_SHELL_HANDLE, command: WSMAN_COMMAND_HANDLE, flags: UInt32, desiredStreamSet: CPointer<WSMAN_STREAM_ID_SET>, async: CPointer<WSMAN_SHELL_ASYNC>, receiveOperation: CPointer<WSMAN_OPERATION_HANDLE>): Unit
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManReceiveShellOutput == "on"]
+public unsafe func Windows_WSManReceiveShellOutput(shell: WSMAN_SHELL_HANDLE, command: WSMAN_COMMAND_HANDLE, flags: UInt32, desiredStreamSet: CPointer<WSMAN_STREAM_ID_SET>, async: CPointer<WSMAN_SHELL_ASYNC>, receiveOperation: CPointer<WSMAN_OPERATION_HANDLE>): Unit {
+    WSManReceiveShellOutput(shell, command, flags, desiredStreamSet, async, receiveOperation)
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManReconnectShell == "on"]
+foreign {
     func WSManReconnectShell(shell: WSMAN_SHELL_HANDLE, flags: UInt32, async: CPointer<WSMAN_SHELL_ASYNC>): Unit
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManReconnectShell == "on"]
+public unsafe func Windows_WSManReconnectShell(shell: WSMAN_SHELL_HANDLE, flags: UInt32, async: CPointer<WSMAN_SHELL_ASYNC>): Unit {
+    WSManReconnectShell(shell, flags, async)
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManReconnectShellCommand == "on"]
+foreign {
     func WSManReconnectShellCommand(commandHandle: WSMAN_COMMAND_HANDLE, flags: UInt32, async: CPointer<WSMAN_SHELL_ASYNC>): Unit
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManReconnectShellCommand == "on"]
+public unsafe func Windows_WSManReconnectShellCommand(commandHandle: WSMAN_COMMAND_HANDLE, flags: UInt32, async: CPointer<WSMAN_SHELL_ASYNC>): Unit {
+    WSManReconnectShellCommand(commandHandle, flags, async)
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManRunShellCommand == "on"]
+foreign {
     // param-hint: args optional
     // param-hint: options optional
     func WSManRunShellCommand(shell: WSMAN_SHELL_HANDLE, flags: UInt32, commandLine: CPointer<UInt16>, args: CPointer<WSMAN_COMMAND_ARG_SET>, options: CPointer<WSMAN_OPTION_SET>, async: CPointer<WSMAN_SHELL_ASYNC>, command: CPointer<WSMAN_COMMAND_HANDLE>): Unit
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManRunShellCommand == "on"]
+public unsafe func Windows_WSManRunShellCommand(shell: WSMAN_SHELL_HANDLE, flags: UInt32, commandLine: CPointer<UInt16>, args: CPointer<WSMAN_COMMAND_ARG_SET>, options: CPointer<WSMAN_OPTION_SET>, async: CPointer<WSMAN_SHELL_ASYNC>, command: CPointer<WSMAN_COMMAND_HANDLE>): Unit {
+    WSManRunShellCommand(shell, flags, commandLine, args, options, async, command)
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManRunShellCommandEx == "on"]
+foreign {
     // param-hint: args optional
     // param-hint: options optional
     func WSManRunShellCommandEx(shell: WSMAN_SHELL_HANDLE, flags: UInt32, commandId: CPointer<UInt16>, commandLine: CPointer<UInt16>, args: CPointer<WSMAN_COMMAND_ARG_SET>, options: CPointer<WSMAN_OPTION_SET>, async: CPointer<WSMAN_SHELL_ASYNC>, command: CPointer<WSMAN_COMMAND_HANDLE>): Unit
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManRunShellCommandEx == "on"]
+public unsafe func Windows_WSManRunShellCommandEx(shell: WSMAN_SHELL_HANDLE, flags: UInt32, commandId: CPointer<UInt16>, commandLine: CPointer<UInt16>, args: CPointer<WSMAN_COMMAND_ARG_SET>, options: CPointer<WSMAN_OPTION_SET>, async: CPointer<WSMAN_SHELL_ASYNC>, command: CPointer<WSMAN_COMMAND_HANDLE>): Unit {
+    WSManRunShellCommandEx(shell, flags, commandId, commandLine, args, options, async, command)
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManSendShellInput == "on"]
+foreign {
     // param-hint: command optional
     func WSManSendShellInput(shell: WSMAN_SHELL_HANDLE, command: WSMAN_COMMAND_HANDLE, flags: UInt32, streamId: CPointer<UInt16>, streamData: CPointer<WSMAN_DATA>, endOfStream: Int32, async: CPointer<WSMAN_SHELL_ASYNC>, sendOperation: CPointer<WSMAN_OPERATION_HANDLE>): Unit
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManSendShellInput == "on"]
+public unsafe func Windows_WSManSendShellInput(shell: WSMAN_SHELL_HANDLE, command: WSMAN_COMMAND_HANDLE, flags: UInt32, streamId: CPointer<UInt16>, streamData: CPointer<WSMAN_DATA>, endOfStream: Int32, async: CPointer<WSMAN_SHELL_ASYNC>, sendOperation: CPointer<WSMAN_OPERATION_HANDLE>): Unit {
+    WSManSendShellInput(shell, command, flags, streamId, streamData, endOfStream, async, sendOperation)
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManSetSessionOption == "on"]
+foreign {
     func WSManSetSessionOption(session: WSMAN_SESSION_HANDLE, option: Int32, data: CPointer<WSMAN_DATA>): UInt32
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManSetSessionOption == "on"]
+public unsafe func Windows_WSManSetSessionOption(session: WSMAN_SESSION_HANDLE, option: Int32, data: CPointer<WSMAN_DATA>): UInt32 {
+    return WSManSetSessionOption(session, option, data)
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManSignalShell == "on"]
+foreign {
     // param-hint: command optional
     func WSManSignalShell(shell: WSMAN_SHELL_HANDLE, command: WSMAN_COMMAND_HANDLE, flags: UInt32, code: CPointer<UInt16>, async: CPointer<WSMAN_SHELL_ASYNC>, signalOperation: CPointer<WSMAN_OPERATION_HANDLE>): Unit
+}
+
+@When[Windows_Win32_System_RemoteManagement == "on" && WSMSVC == "on" && Windows_Win32_System_RemoteManagement_WSManSignalShell == "on"]
+public unsafe func Windows_WSManSignalShell(shell: WSMAN_SHELL_HANDLE, command: WSMAN_COMMAND_HANDLE, flags: UInt32, code: CPointer<UInt16>, async: CPointer<WSMAN_SHELL_ASYNC>, signalOperation: CPointer<WSMAN_OPERATION_HANDLE>): Unit {
+    WSManSignalShell(shell, command, flags, code, async, signalOperation)
 }
 
 @When[Windows_Win32_System_RemoteManagement == "on"]

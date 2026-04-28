@@ -11,7 +11,7 @@ import windows_sys._impl_l0 as _impl_l0
 @C
 public struct IFindAllAccountsResultVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Security_Credentials == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Credentials == "on"]
     public var Accounts: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Status: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var ProviderError: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -58,7 +58,7 @@ public class IFindAllAccountsResult <: InterfaceWrapperBase & ComInterface {
         readVtbl<IFindAllAccountsResultVtbl>(IFindAllAccountsResultVtbl())
     }
 
-    @When[Windows_Security_Credentials == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Credentials == "on"]
     public unsafe func Accounts(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -293,6 +293,7 @@ public struct IWebAuthenticationAddAccountResponseVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     @When[Windows_Security_Credentials == "on"]
     public var WebAccount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -344,6 +345,7 @@ public class IWebAuthenticationAddAccountResponse <: InterfaceWrapperBase & ComI
         return __vt.WebAccount(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -485,6 +487,7 @@ public struct IWebAuthenticationTransferTokenRequestVtbl {
     public var WebAccountProvider: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var TransferToken: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetTransferToken: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CorrelationId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetCorrelationId: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -550,6 +553,7 @@ public class IWebAuthenticationTransferTokenRequest <: InterfaceWrapperBase & Co
         return __vt.SetTransferToken(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -644,6 +648,7 @@ public struct IWebTokenRequestVtbl {
     public var Scope: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ClientId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var PromptType: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -713,6 +718,7 @@ public class IWebTokenRequest <: InterfaceWrapperBase & ComInterface {
         return __vt.PromptType(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -808,6 +814,7 @@ public class IWebTokenRequestFactory <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IWebTokenRequestResultVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ResponseData: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ResponseStatus: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var ResponseError: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -855,6 +862,7 @@ public class IWebTokenRequestResult <: InterfaceWrapperBase & ComInterface {
         readVtbl<IWebTokenRequestResultVtbl>(IWebTokenRequestResultVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ResponseData(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -888,6 +896,7 @@ public struct IWebTokenResponseVtbl {
     public var ProviderError: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Security_Credentials == "on"]
     public var WebAccount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -951,6 +960,7 @@ public class IWebTokenResponse <: InterfaceWrapperBase & ComInterface {
         return __vt.WebAccount(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

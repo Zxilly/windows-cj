@@ -139,6 +139,7 @@ public class DtdEntity <: InterfaceWrapperBase & ComInterface & windows_interfac
         return asIXmlNode().ParentNode()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ChildNodes(): XmlNodeList {
         return asIXmlNode().ChildNodes()
     }
@@ -159,6 +160,7 @@ public class DtdEntity <: InterfaceWrapperBase & ComInterface & windows_interfac
         return asIXmlNode().NextSibling()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Attributes(): XmlNamedNodeMap {
         return asIXmlNode().Attributes()
     }
@@ -215,6 +217,7 @@ public class DtdEntity <: InterfaceWrapperBase & ComInterface & windows_interfac
         return asIXmlNodeSelector().SelectSingleNode(xpath)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SelectNodes(xpath: windows_core.HString): XmlNodeList {
         return asIXmlNodeSelector().SelectNodes(xpath)
     }
@@ -223,6 +226,7 @@ public class DtdEntity <: InterfaceWrapperBase & ComInterface & windows_interfac
         return asIXmlNodeSelector().SelectSingleNodeNS(xpath, namespaces)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SelectNodesNS(xpath: windows_core.HString, namespaces: IInspectable): XmlNodeList {
         return asIXmlNodeSelector().SelectNodesNS(xpath, namespaces)
     }
@@ -376,6 +380,7 @@ public class DtdNotation <: InterfaceWrapperBase & ComInterface & windows_interf
         return asIXmlNode().ParentNode()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ChildNodes(): XmlNodeList {
         return asIXmlNode().ChildNodes()
     }
@@ -396,6 +401,7 @@ public class DtdNotation <: InterfaceWrapperBase & ComInterface & windows_interf
         return asIXmlNode().NextSibling()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Attributes(): XmlNamedNodeMap {
         return asIXmlNode().Attributes()
     }
@@ -452,6 +458,7 @@ public class DtdNotation <: InterfaceWrapperBase & ComInterface & windows_interf
         return asIXmlNodeSelector().SelectSingleNode(xpath)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SelectNodes(xpath: windows_core.HString): XmlNodeList {
         return asIXmlNodeSelector().SelectNodes(xpath)
     }
@@ -460,6 +467,7 @@ public class DtdNotation <: InterfaceWrapperBase & ComInterface & windows_interf
         return asIXmlNodeSelector().SelectSingleNodeNS(xpath, namespaces)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SelectNodesNS(xpath: windows_core.HString, namespaces: IInspectable): XmlNodeList {
         return asIXmlNodeSelector().SelectNodesNS(xpath, namespaces)
     }
@@ -1010,6 +1018,7 @@ public struct IXmlCharacterDataVtbl {
     public var ReplaceData: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public init() {}
 
+    @When[Windows_Foundation_Collections == "on"]
     public static func new<Identity>(offset!: Int64 = 0): IXmlCharacterDataVtbl where Identity <: IXmlCharacterData_Impl {
         let _ = offset
         var vtbl = IXmlCharacterDataVtbl()
@@ -1094,7 +1103,7 @@ public struct IXmlCharacterDataVtbl {
     }
 }
 
-@When[Windows_Data_Xml_Dom == "on"]
+@When[Windows_Data_Xml_Dom == "on" && Windows_Foundation_Collections == "on"]
 public interface IXmlCharacterData_ImplErased {
     public func __winrtThunk_Data(result__: CPointer<CPointer<Unit>>): Int32
 
@@ -1113,7 +1122,7 @@ public interface IXmlCharacterData_ImplErased {
     public func __winrtThunk_ReplaceData(arg0: UInt32, arg1: UInt32, arg2: CPointer<Unit>): Int32
 }
 
-@When[Windows_Data_Xml_Dom == "on"]
+@When[Windows_Data_Xml_Dom == "on" && Windows_Foundation_Collections == "on"]
 public interface IXmlCharacterData_Impl <: IXmlCharacterData_ImplErased & IXmlNode_Impl & IXmlNodeSelector_Impl & _impl_l0.IXmlNodeSerializer_Impl {
     public func Data(): windows_core.Result<windows_core.HString>
 
@@ -1992,7 +2001,10 @@ public struct IXmlDocumentVtbl {
     public var CreateProcessingInstruction: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var CreateAttribute: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var CreateEntityReference: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetElementsByTagName: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetElementsByTagName: UIntNative = UIntNative(0)
     public var CreateCDataSection: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var DocumentUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CreateAttributeNS: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
@@ -2173,6 +2185,7 @@ public class IXmlDocument <: InterfaceWrapperBase & ComInterface & RuntimeName &
         return XmlEntityReference.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetElementsByTagName(tagName: windows_core.HString): XmlNodeList {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2661,8 +2674,14 @@ extend IXmlDocumentStatics <: windows_core.Interface<IXmlDocumentStatics> {}
 public struct IXmlDocumentTypeVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Entities: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Entities: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Notations: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Notations: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2765,6 +2784,7 @@ public class IXmlDocumentType <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Entities(): XmlNamedNodeMap {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2773,6 +2793,7 @@ public class IXmlDocumentType <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return XmlNamedNodeMap.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Notations(): XmlNamedNodeMap {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2796,7 +2817,10 @@ public struct IXmlElementVtbl {
     public var GetAttributeNode: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var SetAttributeNode: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveAttributeNode: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetElementsByTagName: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetElementsByTagName: UIntNative = UIntNative(0)
     public var SetAttributeNS: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var GetAttributeNS: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var RemoveAttributeNS: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -2948,6 +2972,7 @@ public class IXmlElement <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         return XmlAttribute.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetElementsByTagName(tagName: windows_core.HString): XmlNodeList {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3282,12 +3307,18 @@ public struct IXmlNodeVtbl {
     public var get_NodeType: CFunc<(CPointer<Unit>, CPointer<_impl_l0.NodeTypeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var NodeName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ParentNode: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var ChildNodes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ChildNodes: UIntNative = UIntNative(0)
     public var FirstChild: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var LastChild: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var PreviousSibling: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var NextSibling: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Attributes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Attributes: UIntNative = UIntNative(0)
     public var HasChildNodes: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var OwnerDocument: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var InsertBefore: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
@@ -3302,6 +3333,7 @@ public struct IXmlNodeVtbl {
     public var SetPrefix: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 
+    @When[Windows_Foundation_Collections == "on"]
     public static func new<Identity>(offset!: Int64 = 0): IXmlNodeVtbl where Identity <: IXmlNode_Impl {
         let _ = offset
         var vtbl = IXmlNodeVtbl()
@@ -3346,14 +3378,7 @@ public struct IXmlNodeVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.ChildNodes = { instanceRaw, result__ =>
-            match (unsafe { asImplFromRaw<IXmlNode_ImplErased>(instanceRaw) }) {
-                case Some(impl) =>
-                    impl.__winrtThunk_ChildNodes(result__)
-                case None =>
-                    E_NOINTERFACE.value
-            }
-        }
+        vtbl = IXmlNodeVtbl.__assignChildNodes<Identity>(vtbl)
         vtbl.FirstChild = { instanceRaw, result__ =>
             match (unsafe { asImplFromRaw<IXmlNode_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
@@ -3386,14 +3411,7 @@ public struct IXmlNodeVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.Attributes = { instanceRaw, result__ =>
-            match (unsafe { asImplFromRaw<IXmlNode_ImplErased>(instanceRaw) }) {
-                case Some(impl) =>
-                    impl.__winrtThunk_Attributes(result__)
-                case None =>
-                    E_NOINTERFACE.value
-            }
-        }
+        vtbl = IXmlNodeVtbl.__assignAttributes<Identity>(vtbl)
         vtbl.HasChildNodes = { instanceRaw, result__ =>
             match (unsafe { asImplFromRaw<IXmlNode_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
@@ -3493,6 +3511,44 @@ public struct IXmlNodeVtbl {
         return vtbl
     }
 
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections == "on"]
+    public static func __assignChildNodes<Identity>(vtbl: IXmlNodeVtbl): IXmlNodeVtbl where Identity <: IXmlNode_Impl {
+        var next = vtbl
+        next.ChildNodes = { instanceRaw, result__ =>
+            match (unsafe { asImplFromRaw<IXmlNode_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_ChildNodes(result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        return next
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections != "on"]
+    public static func __assignChildNodes<Identity>(vtbl: IXmlNodeVtbl): IXmlNodeVtbl where Identity <: IXmlNode_Impl {
+        return vtbl
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections == "on"]
+    public static func __assignAttributes<Identity>(vtbl: IXmlNodeVtbl): IXmlNodeVtbl where Identity <: IXmlNode_Impl {
+        var next = vtbl
+        next.Attributes = { instanceRaw, result__ =>
+            match (unsafe { asImplFromRaw<IXmlNode_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_Attributes(result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        return next
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections != "on"]
+    public static func __assignAttributes<Identity>(vtbl: IXmlNodeVtbl): IXmlNodeVtbl where Identity <: IXmlNode_Impl {
+        return vtbl
+    }
+
     public static func matches(iid: GUID): Bool {
         if (iid == IXmlNode.iid()) {
             return true
@@ -3506,7 +3562,7 @@ public struct IXmlNodeVtbl {
     }
 }
 
-@When[Windows_Data_Xml_Dom == "on"]
+@When[Windows_Data_Xml_Dom == "on" && Windows_Foundation_Collections == "on"]
 public interface IXmlNode_ImplErased {
     public func __winrtThunk_NodeValue(result__: CPointer<CPointer<Unit>>): Int32
 
@@ -3555,7 +3611,7 @@ public interface IXmlNode_ImplErased {
     public func __winrtThunk_SetPrefix(arg0: CPointer<Unit>): Int32
 }
 
-@When[Windows_Data_Xml_Dom == "on"]
+@When[Windows_Data_Xml_Dom == "on" && Windows_Foundation_Collections == "on"]
 public interface IXmlNode_Impl <: IXmlNode_ImplErased & IXmlNodeSelector_Impl & _impl_l0.IXmlNodeSerializer_Impl {
     public func NodeValue(): windows_core.Result<IInspectable>
 
@@ -4220,6 +4276,7 @@ public class IXmlNode <: InterfaceWrapperBase & ComInterface & RuntimeName & win
         return IXmlNode.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ChildNodes(): XmlNodeList {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4260,6 +4317,7 @@ public class IXmlNode <: InterfaceWrapperBase & ComInterface & RuntimeName & win
         return IXmlNode.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Attributes(): XmlNamedNodeMap {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4490,11 +4548,18 @@ extend IXmlNodeList <: windows_core.Interface<IXmlNodeList> {}
 public struct IXmlNodeSelectorVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var SelectSingleNode: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SelectNodes: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SelectNodes: UIntNative = UIntNative(0)
     public var SelectSingleNodeNS: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SelectNodesNS: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SelectNodesNS: UIntNative = UIntNative(0)
     public init() {}
 
+    @When[Windows_Foundation_Collections == "on"]
     public static func new<Identity>(offset!: Int64 = 0): IXmlNodeSelectorVtbl where Identity <: IXmlNodeSelector_Impl {
         let _ = offset
         var vtbl = IXmlNodeSelectorVtbl()
@@ -4507,14 +4572,7 @@ public struct IXmlNodeSelectorVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.SelectNodes = { instanceRaw, arg0, result__ =>
-            match (unsafe { asImplFromRaw<IXmlNodeSelector_ImplErased>(instanceRaw) }) {
-                case Some(impl) =>
-                    impl.__winrtThunk_SelectNodes(arg0, result__)
-                case None =>
-                    E_NOINTERFACE.value
-            }
-        }
+        vtbl = IXmlNodeSelectorVtbl.__assignSelectNodes<Identity>(vtbl)
         vtbl.SelectSingleNodeNS = { instanceRaw, arg0, arg1, result__ =>
             match (unsafe { asImplFromRaw<IXmlNodeSelector_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
@@ -4523,7 +4581,33 @@ public struct IXmlNodeSelectorVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.SelectNodesNS = { instanceRaw, arg0, arg1, result__ =>
+        vtbl = IXmlNodeSelectorVtbl.__assignSelectNodesNS<Identity>(vtbl)
+        return vtbl
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections == "on"]
+    public static func __assignSelectNodes<Identity>(vtbl: IXmlNodeSelectorVtbl): IXmlNodeSelectorVtbl where Identity <: IXmlNodeSelector_Impl {
+        var next = vtbl
+        next.SelectNodes = { instanceRaw, arg0, result__ =>
+            match (unsafe { asImplFromRaw<IXmlNodeSelector_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_SelectNodes(arg0, result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        return next
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections != "on"]
+    public static func __assignSelectNodes<Identity>(vtbl: IXmlNodeSelectorVtbl): IXmlNodeSelectorVtbl where Identity <: IXmlNodeSelector_Impl {
+        return vtbl
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections == "on"]
+    public static func __assignSelectNodesNS<Identity>(vtbl: IXmlNodeSelectorVtbl): IXmlNodeSelectorVtbl where Identity <: IXmlNodeSelector_Impl {
+        var next = vtbl
+        next.SelectNodesNS = { instanceRaw, arg0, arg1, result__ =>
             match (unsafe { asImplFromRaw<IXmlNodeSelector_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
                     impl.__winrtThunk_SelectNodesNS(arg0, arg1, result__)
@@ -4531,6 +4615,11 @@ public struct IXmlNodeSelectorVtbl {
                     E_NOINTERFACE.value
             }
         }
+        return next
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections != "on"]
+    public static func __assignSelectNodesNS<Identity>(vtbl: IXmlNodeSelectorVtbl): IXmlNodeSelectorVtbl where Identity <: IXmlNodeSelector_Impl {
         return vtbl
     }
 
@@ -4542,7 +4631,7 @@ public struct IXmlNodeSelectorVtbl {
     }
 }
 
-@When[Windows_Data_Xml_Dom == "on"]
+@When[Windows_Data_Xml_Dom == "on" && Windows_Foundation_Collections == "on"]
 public interface IXmlNodeSelector_ImplErased {
     public func __winrtThunk_SelectSingleNode(arg0: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32
 
@@ -4553,7 +4642,7 @@ public interface IXmlNodeSelector_ImplErased {
     public func __winrtThunk_SelectNodesNS(arg0: CPointer<Unit>, arg1: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Data_Xml_Dom == "on"]
+@When[Windows_Data_Xml_Dom == "on" && Windows_Foundation_Collections == "on"]
 public interface IXmlNodeSelector_Impl <: IXmlNodeSelector_ImplErased {
     public func SelectSingleNode(xpath: InParam<windows_core.HString>): windows_core.Result<IXmlNode>
 
@@ -4709,6 +4798,7 @@ public class IXmlNodeSelector <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return IXmlNode.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SelectNodes(xpath: windows_core.HString): XmlNodeList {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4725,6 +4815,7 @@ public class IXmlNodeSelector <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return IXmlNode.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SelectNodesNS(xpath: windows_core.HString, namespaces: IInspectable): XmlNodeList {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4871,6 +4962,7 @@ public struct IXmlTextVtbl {
     public var SplitText: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 
+    @When[Windows_Foundation_Collections == "on"]
     public static func new<Identity>(offset!: Int64 = 0): IXmlTextVtbl where Identity <: IXmlText_Impl {
         let _ = offset
         var vtbl = IXmlTextVtbl()
@@ -4899,12 +4991,12 @@ public struct IXmlTextVtbl {
     }
 }
 
-@When[Windows_Data_Xml_Dom == "on"]
+@When[Windows_Data_Xml_Dom == "on" && Windows_Foundation_Collections == "on"]
 public interface IXmlText_ImplErased {
     public func __winrtThunk_SplitText(arg0: UInt32, result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Data_Xml_Dom == "on"]
+@When[Windows_Data_Xml_Dom == "on" && Windows_Foundation_Collections == "on"]
 public interface IXmlText_Impl <: IXmlText_ImplErased & IXmlCharacterData_Impl & IXmlNode_Impl & IXmlNodeSelector_Impl & _impl_l0.IXmlNodeSerializer_Impl {
     public func SplitText(offset: UInt32): windows_core.Result<IXmlText>
 
@@ -5751,6 +5843,7 @@ public class XmlAttribute <: InterfaceWrapperBase & ComInterface & windows_inter
         return asIXmlNode().ParentNode()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ChildNodes(): XmlNodeList {
         return asIXmlNode().ChildNodes()
     }
@@ -5771,6 +5864,7 @@ public class XmlAttribute <: InterfaceWrapperBase & ComInterface & windows_inter
         return asIXmlNode().NextSibling()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Attributes(): XmlNamedNodeMap {
         return asIXmlNode().Attributes()
     }
@@ -5827,6 +5921,7 @@ public class XmlAttribute <: InterfaceWrapperBase & ComInterface & windows_inter
         return asIXmlNodeSelector().SelectSingleNode(xpath)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SelectNodes(xpath: windows_core.HString): XmlNodeList {
         return asIXmlNodeSelector().SelectNodes(xpath)
     }
@@ -5835,6 +5930,7 @@ public class XmlAttribute <: InterfaceWrapperBase & ComInterface & windows_inter
         return asIXmlNodeSelector().SelectSingleNodeNS(xpath, namespaces)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SelectNodesNS(xpath: windows_core.HString, namespaces: IInspectable): XmlNodeList {
         return asIXmlNodeSelector().SelectNodesNS(xpath, namespaces)
     }
@@ -6030,6 +6126,7 @@ public class XmlCDataSection <: InterfaceWrapperBase & ComInterface & windows_in
         return asIXmlNode().ParentNode()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ChildNodes(): XmlNodeList {
         return asIXmlNode().ChildNodes()
     }
@@ -6050,6 +6147,7 @@ public class XmlCDataSection <: InterfaceWrapperBase & ComInterface & windows_in
         return asIXmlNode().NextSibling()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Attributes(): XmlNamedNodeMap {
         return asIXmlNode().Attributes()
     }
@@ -6106,6 +6204,7 @@ public class XmlCDataSection <: InterfaceWrapperBase & ComInterface & windows_in
         return asIXmlNodeSelector().SelectSingleNode(xpath)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SelectNodes(xpath: windows_core.HString): XmlNodeList {
         return asIXmlNodeSelector().SelectNodes(xpath)
     }
@@ -6114,6 +6213,7 @@ public class XmlCDataSection <: InterfaceWrapperBase & ComInterface & windows_in
         return asIXmlNodeSelector().SelectSingleNodeNS(xpath, namespaces)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SelectNodesNS(xpath: windows_core.HString, namespaces: IInspectable): XmlNodeList {
         return asIXmlNodeSelector().SelectNodesNS(xpath, namespaces)
     }
@@ -6298,6 +6398,7 @@ public class XmlComment <: InterfaceWrapperBase & ComInterface & windows_interfa
         return asIXmlNode().ParentNode()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ChildNodes(): XmlNodeList {
         return asIXmlNode().ChildNodes()
     }
@@ -6318,6 +6419,7 @@ public class XmlComment <: InterfaceWrapperBase & ComInterface & windows_interfa
         return asIXmlNode().NextSibling()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Attributes(): XmlNamedNodeMap {
         return asIXmlNode().Attributes()
     }
@@ -6374,6 +6476,7 @@ public class XmlComment <: InterfaceWrapperBase & ComInterface & windows_interfa
         return asIXmlNodeSelector().SelectSingleNode(xpath)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SelectNodes(xpath: windows_core.HString): XmlNodeList {
         return asIXmlNodeSelector().SelectNodes(xpath)
     }
@@ -6382,6 +6485,7 @@ public class XmlComment <: InterfaceWrapperBase & ComInterface & windows_interfa
         return asIXmlNodeSelector().SelectSingleNodeNS(xpath, namespaces)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SelectNodesNS(xpath: windows_core.HString, namespaces: IInspectable): XmlNodeList {
         return asIXmlNodeSelector().SelectNodesNS(xpath, namespaces)
     }
@@ -6558,6 +6662,7 @@ public class XmlDocument <: InterfaceWrapperBase & ComInterface & windows_interf
         return defaultInterface().CreateEntityReference(name)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetElementsByTagName(tagName: windows_core.HString): XmlNodeList {
         return defaultInterface().GetElementsByTagName(tagName)
     }
@@ -6606,6 +6711,7 @@ public class XmlDocument <: InterfaceWrapperBase & ComInterface & windows_interf
         return asIXmlNode().ParentNode()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ChildNodes(): XmlNodeList {
         return asIXmlNode().ChildNodes()
     }
@@ -6626,6 +6732,7 @@ public class XmlDocument <: InterfaceWrapperBase & ComInterface & windows_interf
         return asIXmlNode().NextSibling()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Attributes(): XmlNamedNodeMap {
         return asIXmlNode().Attributes()
     }
@@ -6682,6 +6789,7 @@ public class XmlDocument <: InterfaceWrapperBase & ComInterface & windows_interf
         return asIXmlNodeSelector().SelectSingleNode(xpath)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SelectNodes(xpath: windows_core.HString): XmlNodeList {
         return asIXmlNodeSelector().SelectNodes(xpath)
     }
@@ -6690,6 +6798,7 @@ public class XmlDocument <: InterfaceWrapperBase & ComInterface & windows_interf
         return asIXmlNodeSelector().SelectSingleNodeNS(xpath, namespaces)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SelectNodesNS(xpath: windows_core.HString, namespaces: IInspectable): XmlNodeList {
         return asIXmlNodeSelector().SelectNodesNS(xpath, namespaces)
     }
@@ -6881,6 +6990,7 @@ public class XmlDocumentFragment <: InterfaceWrapperBase & ComInterface & window
         return asIXmlNode().ParentNode()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ChildNodes(): XmlNodeList {
         return asIXmlNode().ChildNodes()
     }
@@ -6901,6 +7011,7 @@ public class XmlDocumentFragment <: InterfaceWrapperBase & ComInterface & window
         return asIXmlNode().NextSibling()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Attributes(): XmlNamedNodeMap {
         return asIXmlNode().Attributes()
     }
@@ -6957,6 +7068,7 @@ public class XmlDocumentFragment <: InterfaceWrapperBase & ComInterface & window
         return asIXmlNodeSelector().SelectSingleNode(xpath)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SelectNodes(xpath: windows_core.HString): XmlNodeList {
         return asIXmlNodeSelector().SelectNodes(xpath)
     }
@@ -6965,6 +7077,7 @@ public class XmlDocumentFragment <: InterfaceWrapperBase & ComInterface & window
         return asIXmlNodeSelector().SelectSingleNodeNS(xpath, namespaces)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SelectNodesNS(xpath: windows_core.HString, namespaces: IInspectable): XmlNodeList {
         return asIXmlNodeSelector().SelectNodesNS(xpath, namespaces)
     }
@@ -7094,10 +7207,12 @@ public class XmlDocumentType <: InterfaceWrapperBase & ComInterface & windows_in
         return defaultInterface().Name()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Entities(): XmlNamedNodeMap {
         return defaultInterface().Entities()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Notations(): XmlNamedNodeMap {
         return defaultInterface().Notations()
     }
@@ -7122,6 +7237,7 @@ public class XmlDocumentType <: InterfaceWrapperBase & ComInterface & windows_in
         return asIXmlNode().ParentNode()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ChildNodes(): XmlNodeList {
         return asIXmlNode().ChildNodes()
     }
@@ -7142,6 +7258,7 @@ public class XmlDocumentType <: InterfaceWrapperBase & ComInterface & windows_in
         return asIXmlNode().NextSibling()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Attributes(): XmlNamedNodeMap {
         return asIXmlNode().Attributes()
     }
@@ -7198,6 +7315,7 @@ public class XmlDocumentType <: InterfaceWrapperBase & ComInterface & windows_in
         return asIXmlNodeSelector().SelectSingleNode(xpath)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SelectNodes(xpath: windows_core.HString): XmlNodeList {
         return asIXmlNodeSelector().SelectNodes(xpath)
     }
@@ -7206,6 +7324,7 @@ public class XmlDocumentType <: InterfaceWrapperBase & ComInterface & windows_in
         return asIXmlNodeSelector().SelectSingleNodeNS(xpath, namespaces)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SelectNodesNS(xpath: windows_core.HString, namespaces: IInspectable): XmlNodeList {
         return asIXmlNodeSelector().SelectNodesNS(xpath, namespaces)
     }
@@ -7359,6 +7478,7 @@ public class XmlElement <: InterfaceWrapperBase & ComInterface & windows_interfa
         return defaultInterface().RemoveAttributeNode(attributeNode)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetElementsByTagName(tagName: windows_core.HString): XmlNodeList {
         return defaultInterface().GetElementsByTagName(tagName)
     }
@@ -7403,6 +7523,7 @@ public class XmlElement <: InterfaceWrapperBase & ComInterface & windows_interfa
         return asIXmlNode().ParentNode()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ChildNodes(): XmlNodeList {
         return asIXmlNode().ChildNodes()
     }
@@ -7423,6 +7544,7 @@ public class XmlElement <: InterfaceWrapperBase & ComInterface & windows_interfa
         return asIXmlNode().NextSibling()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Attributes(): XmlNamedNodeMap {
         return asIXmlNode().Attributes()
     }
@@ -7479,6 +7601,7 @@ public class XmlElement <: InterfaceWrapperBase & ComInterface & windows_interfa
         return asIXmlNodeSelector().SelectSingleNode(xpath)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SelectNodes(xpath: windows_core.HString): XmlNodeList {
         return asIXmlNodeSelector().SelectNodes(xpath)
     }
@@ -7487,6 +7610,7 @@ public class XmlElement <: InterfaceWrapperBase & ComInterface & windows_interfa
         return asIXmlNodeSelector().SelectSingleNodeNS(xpath, namespaces)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SelectNodesNS(xpath: windows_core.HString, namespaces: IInspectable): XmlNodeList {
         return asIXmlNodeSelector().SelectNodesNS(xpath, namespaces)
     }
@@ -7632,6 +7756,7 @@ public class XmlEntityReference <: InterfaceWrapperBase & ComInterface & windows
         return asIXmlNode().ParentNode()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ChildNodes(): XmlNodeList {
         return asIXmlNode().ChildNodes()
     }
@@ -7652,6 +7777,7 @@ public class XmlEntityReference <: InterfaceWrapperBase & ComInterface & windows
         return asIXmlNode().NextSibling()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Attributes(): XmlNamedNodeMap {
         return asIXmlNode().Attributes()
     }
@@ -7708,6 +7834,7 @@ public class XmlEntityReference <: InterfaceWrapperBase & ComInterface & windows
         return asIXmlNodeSelector().SelectSingleNode(xpath)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SelectNodes(xpath: windows_core.HString): XmlNodeList {
         return asIXmlNodeSelector().SelectNodes(xpath)
     }
@@ -7716,6 +7843,7 @@ public class XmlEntityReference <: InterfaceWrapperBase & ComInterface & windows
         return asIXmlNodeSelector().SelectSingleNodeNS(xpath, namespaces)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SelectNodesNS(xpath: windows_core.HString, namespaces: IInspectable): XmlNodeList {
         return asIXmlNodeSelector().SelectNodesNS(xpath, namespaces)
     }
@@ -7751,7 +7879,7 @@ extend XmlEntityReference <: windows_core.HandleWinrtType<XmlEntityReference> {
     }
 }
 
-@When[Windows_Data_Xml_Dom == "on"]
+@When[Windows_Data_Xml_Dom == "on" && Windows_Foundation_Collections == "on"]
 public class XmlNamedNodeMap <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -7903,7 +8031,7 @@ public class XmlNamedNodeMap <: InterfaceWrapperBase & ComInterface & windows_in
     }
 }
 
-@When[Windows_Data_Xml_Dom == "on"]
+@When[Windows_Data_Xml_Dom == "on" && Windows_Foundation_Collections == "on"]
 extend XmlNamedNodeMap <: windows_core.HandleWinrtType<XmlNamedNodeMap> {
     public static func intoWinrtHandle(value: XmlNamedNodeMap): CPointer<Unit> {
         value.asRaw()
@@ -7921,7 +8049,7 @@ extend XmlNamedNodeMap <: windows_core.HandleWinrtType<XmlNamedNodeMap> {
     }
 }
 
-@When[Windows_Data_Xml_Dom == "on"]
+@When[Windows_Data_Xml_Dom == "on" && Windows_Foundation_Collections == "on"]
 public class XmlNodeList <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8043,7 +8171,7 @@ public class XmlNodeList <: InterfaceWrapperBase & ComInterface & windows_interf
     }
 }
 
-@When[Windows_Data_Xml_Dom == "on"]
+@When[Windows_Data_Xml_Dom == "on" && Windows_Foundation_Collections == "on"]
 extend XmlNodeList <: windows_core.HandleWinrtType<XmlNodeList> {
     public static func intoWinrtHandle(value: XmlNodeList): CPointer<Unit> {
         value.asRaw()
@@ -8183,6 +8311,7 @@ public class XmlProcessingInstruction <: InterfaceWrapperBase & ComInterface & w
         return asIXmlNode().ParentNode()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ChildNodes(): XmlNodeList {
         return asIXmlNode().ChildNodes()
     }
@@ -8203,6 +8332,7 @@ public class XmlProcessingInstruction <: InterfaceWrapperBase & ComInterface & w
         return asIXmlNode().NextSibling()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Attributes(): XmlNamedNodeMap {
         return asIXmlNode().Attributes()
     }
@@ -8259,6 +8389,7 @@ public class XmlProcessingInstruction <: InterfaceWrapperBase & ComInterface & w
         return asIXmlNodeSelector().SelectSingleNode(xpath)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SelectNodes(xpath: windows_core.HString): XmlNodeList {
         return asIXmlNodeSelector().SelectNodes(xpath)
     }
@@ -8267,6 +8398,7 @@ public class XmlProcessingInstruction <: InterfaceWrapperBase & ComInterface & w
         return asIXmlNodeSelector().SelectSingleNodeNS(xpath, namespaces)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SelectNodesNS(xpath: windows_core.HString, namespaces: IInspectable): XmlNodeList {
         return asIXmlNodeSelector().SelectNodesNS(xpath, namespaces)
     }
@@ -8455,6 +8587,7 @@ public class XmlText <: InterfaceWrapperBase & ComInterface & windows_interface.
         return asIXmlNode().ParentNode()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ChildNodes(): XmlNodeList {
         return asIXmlNode().ChildNodes()
     }
@@ -8475,6 +8608,7 @@ public class XmlText <: InterfaceWrapperBase & ComInterface & windows_interface.
         return asIXmlNode().NextSibling()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Attributes(): XmlNamedNodeMap {
         return asIXmlNode().Attributes()
     }
@@ -8531,6 +8665,7 @@ public class XmlText <: InterfaceWrapperBase & ComInterface & windows_interface.
         return asIXmlNodeSelector().SelectSingleNode(xpath)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SelectNodes(xpath: windows_core.HString): XmlNodeList {
         return asIXmlNodeSelector().SelectNodes(xpath)
     }
@@ -8539,6 +8674,7 @@ public class XmlText <: InterfaceWrapperBase & ComInterface & windows_interface.
         return asIXmlNodeSelector().SelectSingleNodeNS(xpath, namespaces)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SelectNodesNS(xpath: windows_core.HString, namespaces: IInspectable): XmlNodeList {
         return asIXmlNodeSelector().SelectNodesNS(xpath, namespaces)
     }

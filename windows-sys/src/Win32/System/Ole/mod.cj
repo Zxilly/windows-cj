@@ -33,4 +33,895 @@ public import windows_sys.Win32._impl_l2.{PARAMDESC, PARAMDESCEX}
 public import windows_sys.Win32._impl_l1.PICTDESC
 @When[Windows_Win32_System_Ole == "on" && (Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on")]
 public import windows_sys.Win32._impl_l2.QACONTAINER
-
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_BstrFromVector == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BstrFromVector
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_ClearCustData == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ClearCustData
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_CreateDispTypeInfo == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateDispTypeInfo
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_CreateErrorInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateErrorInfo
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_CreateOleAdviseHolder == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateOleAdviseHolder
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_CreateStdDispatch == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateStdDispatch
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_CreateTypeLib == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateTypeLib
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_CreateTypeLib2 == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateTypeLib2
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_DispCallFunc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DispCallFunc
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_DispGetIDsOfNames == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DispGetIDsOfNames
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_DispGetParam == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DispGetParam
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_DispInvoke == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DispInvoke
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_DoDragDrop == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DoDragDrop
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_GetActiveObject == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetActiveObject
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_GetAltMonthNames == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetAltMonthNames
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_GetRecordInfoFromGuids == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetRecordInfoFromGuids
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_GetRecordInfoFromTypeInfo == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetRecordInfoFromTypeInfo
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_HRGN_UserFree == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HRGN_UserFree
+@When[Windows_Win32_System_Ole == "on" && API_MS_WIN_CORE_MARSHAL_L1_1_0 == "on" && Windows_Win32_System_Ole_HRGN_UserFree64 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HRGN_UserFree64
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_HRGN_UserMarshal == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HRGN_UserMarshal
+@When[Windows_Win32_System_Ole == "on" && API_MS_WIN_CORE_MARSHAL_L1_1_0 == "on" && Windows_Win32_System_Ole_HRGN_UserMarshal64 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HRGN_UserMarshal64
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_HRGN_UserSize == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HRGN_UserSize
+@When[Windows_Win32_System_Ole == "on" && API_MS_WIN_CORE_MARSHAL_L1_1_0 == "on" && Windows_Win32_System_Ole_HRGN_UserSize64 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HRGN_UserSize64
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_HRGN_UserUnmarshal == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HRGN_UserUnmarshal
+@When[Windows_Win32_System_Ole == "on" && API_MS_WIN_CORE_MARSHAL_L1_1_0 == "on" && Windows_Win32_System_Ole_HRGN_UserUnmarshal64 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HRGN_UserUnmarshal64
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_IsAccelerator == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsAccelerator
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_LHashValOfNameSys == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LHashValOfNameSys
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_LHashValOfNameSysA == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LHashValOfNameSysA
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_LoadRegTypeLib == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LoadRegTypeLib
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_LoadTypeLib == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LoadTypeLib
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_LoadTypeLibEx == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LoadTypeLibEx
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OaBuildVersion == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OaBuildVersion
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OaEnablePerUserTLibRegistration == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OaEnablePerUserTLibRegistration
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleBuildVersion == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleBuildVersion
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleConvertOLESTREAMToIStorage2 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleConvertOLESTREAMToIStorage2
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleConvertOLESTREAMToIStorageEx2 == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleConvertOLESTREAMToIStorageEx2
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreate == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleCreate
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateDefaultHandler == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleCreateDefaultHandler
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateEmbeddingHelper == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleCreateEmbeddingHelper
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleCreateEx
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleCreateFontIndirect == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleCreateFontIndirect
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateFromData == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleCreateFromData
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateFromDataEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleCreateFromDataEx
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateFromFile == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleCreateFromFile
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateFromFileEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleCreateFromFileEx
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateLink == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleCreateLink
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateLinkEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleCreateLinkEx
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateLinkFromData == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleCreateLinkFromData
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateLinkFromDataEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleCreateLinkFromDataEx
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateLinkToFile == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleCreateLinkToFile
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateLinkToFileEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleCreateLinkToFileEx
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateMenuDescriptor == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleCreateMenuDescriptor
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleCreatePictureIndirect == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleCreatePictureIndirect
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleCreatePropertyFrame == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleCreatePropertyFrame
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleCreatePropertyFrameIndirect == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleCreatePropertyFrameIndirect
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleCreateStaticFromData == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleCreateStaticFromData
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleDestroyMenuDescriptor == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleDestroyMenuDescriptor
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleDoAutoConvert == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleDoAutoConvert
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleDraw == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleDraw
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleDuplicateData == "on" && Windows_Win32_System_Memory == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleDuplicateData
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleFlushClipboard == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleFlushClipboard
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleGetAutoConvert == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleGetAutoConvert
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleGetClipboard == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleGetClipboard
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleGetClipboardWithEnterpriseInfo == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleGetClipboardWithEnterpriseInfo
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleGetIconOfClass == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleGetIconOfClass
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleGetIconOfFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleGetIconOfFile
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleIconToCursor == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleIconToCursor
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleInitialize == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleInitialize
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleIsCurrentClipboard == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleIsCurrentClipboard
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleIsRunning == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleIsRunning
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleLoad == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleLoad
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleLoadFromStream == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleLoadFromStream
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleLoadPicture == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleLoadPicture
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleLoadPictureEx == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleLoadPictureEx
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleLoadPictureFile == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleLoadPictureFile
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleLoadPictureFileEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleLoadPictureFileEx
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleLoadPicturePath == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleLoadPicturePath
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleLockRunning == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleLockRunning
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleMetafilePictFromIconAndLabel == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleMetafilePictFromIconAndLabel
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleNoteObjectVisible == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleNoteObjectVisible
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleQueryCreateFromData == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleQueryCreateFromData
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleQueryLinkFromData == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleQueryLinkFromData
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleRegEnumFormatEtc == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleRegEnumFormatEtc
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleRegEnumVerbs == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleRegEnumVerbs
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleRegGetMiscStatus == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleRegGetMiscStatus
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleRegGetUserType == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleRegGetUserType
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleRun == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleRun
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleSave == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleSave
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleSavePictureFile == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleSavePictureFile
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleSaveToStream == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleSaveToStream
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleSetAutoConvert == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleSetAutoConvert
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleSetClipboard == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleSetClipboard
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleSetContainedObject == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleSetContainedObject
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleSetMenuDescriptor == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleSetMenuDescriptor
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleTranslateAccelerator == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleTranslateAccelerator
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_OleTranslateColor == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleTranslateColor
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIAddVerbMenuA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleUIAddVerbMenuA
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIAddVerbMenuW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleUIAddVerbMenuW
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIBusyA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleUIBusyA
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIBusyW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleUIBusyW
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUICanConvertOrActivateAs == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleUICanConvertOrActivateAs
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIChangeIconA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleUIChangeIconA
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIChangeIconW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleUIChangeIconW
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIChangeSourceA == "on" && (((arch == "x86_64" && Windows_Win32_UI_Controls_Dialogs == "on") || (arch == "aarch64" && Windows_Win32_UI_Controls_Dialogs == "on")) && Windows_Win32_UI_Controls_Dialogs == "on")]
+public import windows_sys.Win32._impl_l2.Windows_OleUIChangeSourceA
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIChangeSourceW == "on" && (((arch == "x86_64" && Windows_Win32_UI_Controls_Dialogs == "on") || (arch == "aarch64" && Windows_Win32_UI_Controls_Dialogs == "on")) && Windows_Win32_UI_Controls_Dialogs == "on")]
+public import windows_sys.Win32._impl_l2.Windows_OleUIChangeSourceW
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIConvertA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleUIConvertA
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIConvertW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleUIConvertW
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIEditLinksA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleUIEditLinksA
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIEditLinksW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleUIEditLinksW
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIInsertObjectA == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleUIInsertObjectA
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIInsertObjectW == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleUIInsertObjectW
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIObjectPropertiesA == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_Controls == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleUIObjectPropertiesA
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIObjectPropertiesW == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_Controls == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleUIObjectPropertiesW
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIPasteSpecialA == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleUIPasteSpecialA
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIPasteSpecialW == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleUIPasteSpecialW
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIUpdateLinksA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleUIUpdateLinksA
+@When[Windows_Win32_System_Ole == "on" && OLEDLG == "on" && Windows_Win32_System_Ole_OleUIUpdateLinksW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleUIUpdateLinksW
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_OleUninitialize == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OleUninitialize
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_QueryPathOfRegTypeLib == "on"]
+public import windows_sys.Win32._impl_l2.Windows_QueryPathOfRegTypeLib
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_RegisterActiveObject == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RegisterActiveObject
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_RegisterDragDrop == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RegisterDragDrop
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_RegisterTypeLib == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RegisterTypeLib
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_RegisterTypeLibForUser == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RegisterTypeLibForUser
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_ReleaseStgMedium == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReleaseStgMedium
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_RevokeActiveObject == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RevokeActiveObject
+@When[Windows_Win32_System_Ole == "on" && OLE32 == "on" && Windows_Win32_System_Ole_RevokeDragDrop == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RevokeDragDrop
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayAccessData == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SafeArrayAccessData
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayAddRef == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SafeArrayAddRef
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayAllocData == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SafeArrayAllocData
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayAllocDescriptor == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SafeArrayAllocDescriptor
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayAllocDescriptorEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SafeArrayAllocDescriptorEx
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayCopy == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SafeArrayCopy
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayCopyData == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SafeArrayCopyData
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayCreate == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SafeArrayCreate
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayCreateEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SafeArrayCreateEx
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayCreateVector == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SafeArrayCreateVector
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayCreateVectorEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SafeArrayCreateVectorEx
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayDestroy == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SafeArrayDestroy
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayDestroyData == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SafeArrayDestroyData
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayDestroyDescriptor == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SafeArrayDestroyDescriptor
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayGetDim == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SafeArrayGetDim
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayGetElement == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SafeArrayGetElement
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayGetElemsize == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SafeArrayGetElemsize
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayGetIID == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SafeArrayGetIID
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayGetLBound == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SafeArrayGetLBound
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayGetRecordInfo == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SafeArrayGetRecordInfo
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayGetUBound == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SafeArrayGetUBound
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayGetVartype == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SafeArrayGetVartype
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayLock == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SafeArrayLock
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayPtrOfIndex == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SafeArrayPtrOfIndex
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayPutElement == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SafeArrayPutElement
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayRedim == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SafeArrayRedim
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayReleaseData == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SafeArrayReleaseData
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayReleaseDescriptor == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SafeArrayReleaseDescriptor
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArraySetIID == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SafeArraySetIID
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArraySetRecordInfo == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SafeArraySetRecordInfo
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayUnaccessData == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SafeArrayUnaccessData
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_SafeArrayUnlock == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SafeArrayUnlock
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_UnRegisterTypeLib == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UnRegisterTypeLib
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_UnRegisterTypeLibForUser == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UnRegisterTypeLibForUser
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarAbs == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarAbs
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarAdd == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarAdd
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarAnd == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarAnd
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromCy == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarBoolFromCy
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromDate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarBoolFromDate
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromDec == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarBoolFromDec
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromDisp == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarBoolFromDisp
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromI1 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarBoolFromI1
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromI2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarBoolFromI2
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromI4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarBoolFromI4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromI8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarBoolFromI8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromR4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarBoolFromR4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromR8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarBoolFromR8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromStr == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarBoolFromStr
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromUI1 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarBoolFromUI1
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromUI2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarBoolFromUI2
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromUI4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarBoolFromUI4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBoolFromUI8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarBoolFromUI8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrCat == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarBstrCat
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrCmp == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarBstrCmp
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromBool == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarBstrFromBool
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromCy == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarBstrFromCy
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromDate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarBstrFromDate
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromDec == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarBstrFromDec
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromDisp == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarBstrFromDisp
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromI1 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarBstrFromI1
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromI2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarBstrFromI2
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromI4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarBstrFromI4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromI8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarBstrFromI8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromR4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarBstrFromR4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromR8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarBstrFromR8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromUI1 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarBstrFromUI1
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromUI2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarBstrFromUI2
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromUI4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarBstrFromUI4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarBstrFromUI8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarBstrFromUI8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCat == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarCat
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCmp == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarCmp
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyAbs == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarCyAbs
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyAdd == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarCyAdd
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyCmp == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarCyCmp
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyCmpR8 == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarCyCmpR8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFix == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarCyFix
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromBool == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarCyFromBool
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromDate == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarCyFromDate
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromDec == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarCyFromDec
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromDisp == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarCyFromDisp
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromI1 == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarCyFromI1
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromI2 == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarCyFromI2
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromI4 == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarCyFromI4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromI8 == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarCyFromI8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromR4 == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarCyFromR4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromR8 == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarCyFromR8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromStr == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarCyFromStr
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromUI1 == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarCyFromUI1
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromUI2 == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarCyFromUI2
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromUI4 == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarCyFromUI4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyFromUI8 == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarCyFromUI8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyInt == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarCyInt
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyMul == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarCyMul
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyMulI4 == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarCyMulI4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyMulI8 == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarCyMulI8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyNeg == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarCyNeg
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCyRound == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarCyRound
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarCySub == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarCySub
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromBool == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDateFromBool
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromCy == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDateFromCy
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromDec == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDateFromDec
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromDisp == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDateFromDisp
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromI1 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDateFromI1
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromI2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDateFromI2
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromI4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDateFromI4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromI8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDateFromI8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromR4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDateFromR4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromR8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDateFromR8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromStr == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDateFromStr
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromUI1 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDateFromUI1
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromUI2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDateFromUI2
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromUI4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDateFromUI4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromUI8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDateFromUI8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromUdate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDateFromUdate
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDateFromUdateEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDateFromUdateEx
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecAbs == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDecAbs
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecAdd == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDecAdd
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecCmp == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDecCmp
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecCmpR8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDecCmpR8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecDiv == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDecDiv
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFix == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDecFix
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromBool == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDecFromBool
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromCy == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDecFromCy
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromDate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDecFromDate
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromDisp == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDecFromDisp
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromI1 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDecFromI1
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromI2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDecFromI2
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromI4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDecFromI4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromI8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDecFromI8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromR4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDecFromR4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromR8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDecFromR8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromStr == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDecFromStr
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromUI1 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDecFromUI1
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromUI2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDecFromUI2
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromUI4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDecFromUI4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecFromUI8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDecFromUI8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecInt == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDecInt
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecMul == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDecMul
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecNeg == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDecNeg
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecRound == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDecRound
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDecSub == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDecSub
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarDiv == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarDiv
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarEqv == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarEqv
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarFix == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarFix
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarFormat == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarFormat
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarFormatCurrency == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarFormatCurrency
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarFormatDateTime == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarFormatDateTime
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarFormatFromTokens == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarFormatFromTokens
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarFormatNumber == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarFormatNumber
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarFormatPercent == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarFormatPercent
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromBool == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI1FromBool
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromCy == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI1FromCy
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromDate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI1FromDate
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromDec == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI1FromDec
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromDisp == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI1FromDisp
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromI2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI1FromI2
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromI4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI1FromI4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromI8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI1FromI8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromR4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI1FromR4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromR8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI1FromR8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromStr == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI1FromStr
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromUI1 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI1FromUI1
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromUI2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI1FromUI2
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromUI4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI1FromUI4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI1FromUI8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI1FromUI8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromBool == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI2FromBool
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromCy == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI2FromCy
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromDate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI2FromDate
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromDec == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI2FromDec
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromDisp == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI2FromDisp
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromI1 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI2FromI1
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromI4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI2FromI4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromI8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI2FromI8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromR4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI2FromR4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromR8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI2FromR8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromStr == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI2FromStr
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromUI1 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI2FromUI1
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromUI2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI2FromUI2
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromUI4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI2FromUI4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI2FromUI8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI2FromUI8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromBool == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI4FromBool
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromCy == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI4FromCy
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromDate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI4FromDate
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromDec == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI4FromDec
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromDisp == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI4FromDisp
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromI1 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI4FromI1
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromI2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI4FromI2
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromI8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI4FromI8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromR4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI4FromR4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromR8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI4FromR8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromStr == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI4FromStr
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromUI1 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI4FromUI1
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromUI2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI4FromUI2
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromUI4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI4FromUI4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI4FromUI8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI4FromUI8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromBool == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI8FromBool
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromCy == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI8FromCy
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromDate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI8FromDate
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromDec == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI8FromDec
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromDisp == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI8FromDisp
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromI1 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI8FromI1
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromI2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI8FromI2
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromR4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI8FromR4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromR8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI8FromR8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromStr == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI8FromStr
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromUI1 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI8FromUI1
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromUI2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI8FromUI2
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromUI4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI8FromUI4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarI8FromUI8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarI8FromUI8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarIdiv == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarIdiv
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarImp == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarImp
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarInt == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarInt
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarMod == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarMod
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarMonthName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarMonthName
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarMul == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarMul
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarNeg == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarNeg
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarNot == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarNot
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarNumFromParseNum == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarNumFromParseNum
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarOr == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarOr
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarParseNumFromStr == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarParseNumFromStr
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarPow == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarPow
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4CmpR8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarR4CmpR8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromBool == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarR4FromBool
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromCy == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarR4FromCy
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromDate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarR4FromDate
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromDec == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarR4FromDec
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromDisp == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarR4FromDisp
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromI1 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarR4FromI1
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromI2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarR4FromI2
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromI4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarR4FromI4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromI8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarR4FromI8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromR8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarR4FromR8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromStr == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarR4FromStr
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromUI1 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarR4FromUI1
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromUI2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarR4FromUI2
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromUI4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarR4FromUI4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR4FromUI8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarR4FromUI8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromBool == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarR8FromBool
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromCy == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarR8FromCy
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromDate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarR8FromDate
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromDec == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarR8FromDec
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromDisp == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarR8FromDisp
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromI1 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarR8FromI1
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromI2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarR8FromI2
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromI4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarR8FromI4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromI8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarR8FromI8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromR4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarR8FromR4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromStr == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarR8FromStr
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromUI1 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarR8FromUI1
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromUI2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarR8FromUI2
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromUI4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarR8FromUI4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8FromUI8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarR8FromUI8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8Pow == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarR8Pow
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarR8Round == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarR8Round
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarRound == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarRound
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarSub == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarSub
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarTokenizeFormatString == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarTokenizeFormatString
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromBool == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI1FromBool
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromCy == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI1FromCy
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromDate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI1FromDate
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromDec == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI1FromDec
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromDisp == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI1FromDisp
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromI1 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI1FromI1
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromI2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI1FromI2
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromI4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI1FromI4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromI8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI1FromI8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromR4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI1FromR4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromR8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI1FromR8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromStr == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI1FromStr
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromUI2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI1FromUI2
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromUI4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI1FromUI4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI1FromUI8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI1FromUI8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromBool == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI2FromBool
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromCy == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI2FromCy
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromDate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI2FromDate
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromDec == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI2FromDec
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromDisp == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI2FromDisp
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromI1 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI2FromI1
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromI2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI2FromI2
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromI4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI2FromI4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromI8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI2FromI8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromR4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI2FromR4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromR8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI2FromR8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromStr == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI2FromStr
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromUI1 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI2FromUI1
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromUI4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI2FromUI4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI2FromUI8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI2FromUI8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromBool == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI4FromBool
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromCy == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI4FromCy
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromDate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI4FromDate
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromDec == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI4FromDec
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromDisp == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI4FromDisp
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromI1 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI4FromI1
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromI2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI4FromI2
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromI4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI4FromI4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromI8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI4FromI8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromR4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI4FromR4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromR8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI4FromR8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromStr == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI4FromStr
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromUI1 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI4FromUI1
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromUI2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI4FromUI2
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI4FromUI8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI4FromUI8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromBool == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI8FromBool
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromCy == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI8FromCy
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromDate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI8FromDate
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromDec == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI8FromDec
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromDisp == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI8FromDisp
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromI1 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI8FromI1
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromI2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI8FromI2
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromI8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI8FromI8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromR4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI8FromR4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromR8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI8FromR8
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromStr == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI8FromStr
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromUI1 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI8FromUI1
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromUI2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI8FromUI2
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUI8FromUI4 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUI8FromUI4
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarUdateFromDate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarUdateFromDate
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarWeekdayName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarWeekdayName
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VarXor == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VarXor
+@When[Windows_Win32_System_Ole == "on" && OLEAUT32 == "on" && Windows_Win32_System_Ole_VectorFromBstr == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VectorFromBstr

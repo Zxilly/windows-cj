@@ -2599,7 +2599,7 @@ public class FileActivatedEventArgs <: InterfaceWrapperBase & ComInterface & win
         }
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func Files(): windows_collections.IVectorView<IStorageItem> {
         return defaultInterface().Files()
     }
@@ -2887,7 +2887,7 @@ public class FileOpenPickerContinuationEventArgs <: InterfaceWrapperBase & ComIn
         }
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func Files(): windows_collections.IVectorView<StorageFile> {
         return defaultInterface().Files()
     }
@@ -3023,7 +3023,7 @@ public class FileSavePickerContinuationEventArgs <: InterfaceWrapperBase & ComIn
         }
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func File(): StorageFile {
         return defaultInterface().File()
     }
@@ -9120,14 +9120,14 @@ extend IDialReceiverActivatedEventArgs <: windows_core.Interface<IDialReceiverAc
 @C
 public struct IFileActivatedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var Files: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage != "on"]
     public var Files: UIntNative = UIntNative(0)
     public var Verb: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public static func new<Identity>(offset!: Int64 = 0): IFileActivatedEventArgsVtbl where Identity <: IFileActivatedEventArgs_Impl {
         let _ = offset
         var vtbl = IFileActivatedEventArgsVtbl()
@@ -9144,7 +9144,7 @@ public struct IFileActivatedEventArgsVtbl {
         return vtbl
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage == "on"]
+    @When[(Windows_Foundation_Collections == "on" && Windows_Storage == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")]
     public static func __assignFiles<Identity>(vtbl: IFileActivatedEventArgsVtbl): IFileActivatedEventArgsVtbl where Identity <: IFileActivatedEventArgs_Impl {
         var next = vtbl
         next.Files = { instanceRaw, result__ =>
@@ -9158,7 +9158,7 @@ public struct IFileActivatedEventArgsVtbl {
         return next
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage != "on"]
+    @When[(Windows_Foundation_Collections == "on" && Windows_Storage == "on") && (Windows_Foundation_Collections != "on" || Windows_Storage != "on")]
     public static func __assignFiles<Identity>(vtbl: IFileActivatedEventArgsVtbl): IFileActivatedEventArgsVtbl where Identity <: IFileActivatedEventArgs_Impl {
         return vtbl
     }
@@ -9176,14 +9176,14 @@ public struct IFileActivatedEventArgsVtbl {
     }
 }
 
-@When[Windows_ApplicationModel_Activation == "on" && Windows_Storage == "on"]
+@When[Windows_ApplicationModel_Activation == "on" && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")]
 public interface IFileActivatedEventArgs_ImplErased {
     public func __winrtThunk_Files(result__: CPointer<CPointer<Unit>>): Int32
 
     public func __winrtThunk_Verb(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_ApplicationModel_Activation == "on" && Windows_Storage == "on"]
+@When[Windows_ApplicationModel_Activation == "on" && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")]
 public interface IFileActivatedEventArgs_Impl <: IFileActivatedEventArgs_ImplErased & _impl_l0.IActivatedEventArgs_Impl {
     public func Files(): windows_core.Result<windows_collections.IVectorView<IStorageItem>>
 
@@ -9347,7 +9347,7 @@ public class IFileActivatedEventArgs <: InterfaceWrapperBase & ComInterface & Ru
         readVtbl<IFileActivatedEventArgsVtbl>(IFileActivatedEventArgsVtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func Files(): windows_collections.IVectorView<IStorageItem> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -9574,7 +9574,7 @@ public struct IFileActivatedEventArgsWithNeighboringFilesVtbl {
     public var NeighboringFilesQuery: UIntNative = UIntNative(0)
     public init() {}
 
-    @When[(Windows_Storage_Search == "on") && (Windows_Storage == "on")]
+    @When[(Windows_Storage_Search == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")]
     public static func new<Identity>(offset!: Int64 = 0): IFileActivatedEventArgsWithNeighboringFilesVtbl where Identity <: IFileActivatedEventArgsWithNeighboringFiles_Impl {
         let _ = offset
         var vtbl = IFileActivatedEventArgsWithNeighboringFilesVtbl()
@@ -9583,7 +9583,7 @@ public struct IFileActivatedEventArgsWithNeighboringFilesVtbl {
         return vtbl
     }
 
-    @When[((Windows_Storage_Search == "on") && (Windows_Storage == "on")) && Windows_Storage_Search == "on"]
+    @When[((Windows_Storage_Search == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && Windows_Storage_Search == "on"]
     public static func __assignNeighboringFilesQuery<Identity>(vtbl: IFileActivatedEventArgsWithNeighboringFilesVtbl): IFileActivatedEventArgsWithNeighboringFilesVtbl where Identity <: IFileActivatedEventArgsWithNeighboringFiles_Impl {
         var next = vtbl
         next.NeighboringFilesQuery = { instanceRaw, result__ =>
@@ -9597,7 +9597,7 @@ public struct IFileActivatedEventArgsWithNeighboringFilesVtbl {
         return next
     }
 
-    @When[((Windows_Storage_Search == "on") && (Windows_Storage == "on")) && Windows_Storage_Search != "on"]
+    @When[((Windows_Storage_Search == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")) && Windows_Storage_Search != "on"]
     public static func __assignNeighboringFilesQuery<Identity>(vtbl: IFileActivatedEventArgsWithNeighboringFilesVtbl): IFileActivatedEventArgsWithNeighboringFilesVtbl where Identity <: IFileActivatedEventArgsWithNeighboringFiles_Impl {
         return vtbl
     }
@@ -9615,12 +9615,12 @@ public struct IFileActivatedEventArgsWithNeighboringFilesVtbl {
     }
 }
 
-@When[Windows_ApplicationModel_Activation == "on" && ((Windows_Storage_Search == "on") && (Windows_Storage == "on"))]
+@When[Windows_ApplicationModel_Activation == "on" && ((Windows_Storage_Search == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage == "on"))]
 public interface IFileActivatedEventArgsWithNeighboringFiles_ImplErased {
     public func __winrtThunk_NeighboringFilesQuery(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_ApplicationModel_Activation == "on" && ((Windows_Storage_Search == "on") && (Windows_Storage == "on"))]
+@When[Windows_ApplicationModel_Activation == "on" && ((Windows_Storage_Search == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage == "on"))]
 public interface IFileActivatedEventArgsWithNeighboringFiles_Impl <: IFileActivatedEventArgsWithNeighboringFiles_ImplErased & IFileActivatedEventArgs_Impl & _impl_l0.IActivatedEventArgs_Impl {
     public func NeighboringFilesQuery(): windows_core.Result<StorageFileQueryResult>
 
@@ -10037,13 +10037,13 @@ extend IFileOpenPickerActivatedEventArgs <: windows_core.Interface<IFileOpenPick
 @C
 public struct IFileOpenPickerContinuationEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var Files: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var Files: UIntNative = UIntNative(0)
     public init() {}
 
-    @When[(Windows_Storage == "on") && (Windows_Foundation_Collections == "on")]
+    @When[(Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on")]
     public static func new<Identity>(offset!: Int64 = 0): IFileOpenPickerContinuationEventArgsVtbl where Identity <: IFileOpenPickerContinuationEventArgs_Impl {
         let _ = offset
         var vtbl = IFileOpenPickerContinuationEventArgsVtbl()
@@ -10052,7 +10052,7 @@ public struct IFileOpenPickerContinuationEventArgsVtbl {
         return vtbl
     }
 
-    @When[((Windows_Storage == "on") && (Windows_Foundation_Collections == "on")) && Windows_Storage == "on"]
+    @When[((Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on")) && (Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")]
     public static func __assignFiles<Identity>(vtbl: IFileOpenPickerContinuationEventArgsVtbl): IFileOpenPickerContinuationEventArgsVtbl where Identity <: IFileOpenPickerContinuationEventArgs_Impl {
         var next = vtbl
         next.Files = { instanceRaw, result__ =>
@@ -10066,7 +10066,7 @@ public struct IFileOpenPickerContinuationEventArgsVtbl {
         return next
     }
 
-    @When[((Windows_Storage == "on") && (Windows_Foundation_Collections == "on")) && Windows_Storage != "on"]
+    @When[((Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on")) && (Windows_Foundation_Collections != "on" || Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on")]
     public static func __assignFiles<Identity>(vtbl: IFileOpenPickerContinuationEventArgsVtbl): IFileOpenPickerContinuationEventArgsVtbl where Identity <: IFileOpenPickerContinuationEventArgs_Impl {
         return vtbl
     }
@@ -10084,12 +10084,12 @@ public struct IFileOpenPickerContinuationEventArgsVtbl {
     }
 }
 
-@When[Windows_ApplicationModel_Activation == "on" && ((Windows_Storage == "on") && (Windows_Foundation_Collections == "on"))]
+@When[Windows_ApplicationModel_Activation == "on" && ((Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on"))]
 public interface IFileOpenPickerContinuationEventArgs_ImplErased {
     public func __winrtThunk_Files(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_ApplicationModel_Activation == "on" && ((Windows_Storage == "on") && (Windows_Foundation_Collections == "on"))]
+@When[Windows_ApplicationModel_Activation == "on" && ((Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on"))]
 public interface IFileOpenPickerContinuationEventArgs_Impl <: IFileOpenPickerContinuationEventArgs_ImplErased & IContinuationActivatedEventArgs_Impl & _impl_l0.IActivatedEventArgs_Impl {
     public func Files(): windows_core.Result<windows_collections.IVectorView<StorageFile>>
 
@@ -10258,7 +10258,7 @@ public class IFileOpenPickerContinuationEventArgs <: InterfaceWrapperBase & ComI
         readVtbl<IFileOpenPickerContinuationEventArgsVtbl>(IFileOpenPickerContinuationEventArgsVtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func Files(): windows_collections.IVectorView<StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -10275,13 +10275,13 @@ extend IFileOpenPickerContinuationEventArgs <: windows_core.Interface<IFileOpenP
 @C
 public struct IFileSavePickerContinuationEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var File: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var File: UIntNative = UIntNative(0)
     public init() {}
 
-    @When[(Windows_Storage == "on") && (Windows_Foundation_Collections == "on")]
+    @When[(Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on")]
     public static func new<Identity>(offset!: Int64 = 0): IFileSavePickerContinuationEventArgsVtbl where Identity <: IFileSavePickerContinuationEventArgs_Impl {
         let _ = offset
         var vtbl = IFileSavePickerContinuationEventArgsVtbl()
@@ -10290,7 +10290,7 @@ public struct IFileSavePickerContinuationEventArgsVtbl {
         return vtbl
     }
 
-    @When[((Windows_Storage == "on") && (Windows_Foundation_Collections == "on")) && Windows_Storage == "on"]
+    @When[((Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on")) && (Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on")]
     public static func __assignFile<Identity>(vtbl: IFileSavePickerContinuationEventArgsVtbl): IFileSavePickerContinuationEventArgsVtbl where Identity <: IFileSavePickerContinuationEventArgs_Impl {
         var next = vtbl
         next.File = { instanceRaw, result__ =>
@@ -10304,7 +10304,7 @@ public struct IFileSavePickerContinuationEventArgsVtbl {
         return next
     }
 
-    @When[((Windows_Storage == "on") && (Windows_Foundation_Collections == "on")) && Windows_Storage != "on"]
+    @When[((Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on")) && (Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on")]
     public static func __assignFile<Identity>(vtbl: IFileSavePickerContinuationEventArgsVtbl): IFileSavePickerContinuationEventArgsVtbl where Identity <: IFileSavePickerContinuationEventArgs_Impl {
         return vtbl
     }
@@ -10322,12 +10322,12 @@ public struct IFileSavePickerContinuationEventArgsVtbl {
     }
 }
 
-@When[Windows_ApplicationModel_Activation == "on" && ((Windows_Storage == "on") && (Windows_Foundation_Collections == "on"))]
+@When[Windows_ApplicationModel_Activation == "on" && ((Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on"))]
 public interface IFileSavePickerContinuationEventArgs_ImplErased {
     public func __winrtThunk_File(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_ApplicationModel_Activation == "on" && ((Windows_Storage == "on") && (Windows_Foundation_Collections == "on"))]
+@When[Windows_ApplicationModel_Activation == "on" && ((Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on"))]
 public interface IFileSavePickerContinuationEventArgs_Impl <: IFileSavePickerContinuationEventArgs_ImplErased & IContinuationActivatedEventArgs_Impl & _impl_l0.IActivatedEventArgs_Impl {
     public func File(): windows_core.Result<StorageFile>
 
@@ -10496,7 +10496,7 @@ public class IFileSavePickerContinuationEventArgs <: InterfaceWrapperBase & ComI
         readVtbl<IFileSavePickerContinuationEventArgsVtbl>(IFileSavePickerContinuationEventArgsVtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func File(): StorageFile {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -14121,9 +14121,9 @@ extend IStartupTaskActivatedEventArgs <: windows_core.Interface<IStartupTaskActi
 @C
 public struct ITileActivatedInfoVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_UI_Notifications == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Notifications == "on"]
     public var RecentlyShownNotifications: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Notifications != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_UI_Notifications != "on"]
     public var RecentlyShownNotifications: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -14193,7 +14193,7 @@ public class ITileActivatedInfo <: InterfaceWrapperBase & ComInterface & Runtime
         readVtbl<ITileActivatedInfoVtbl>(ITileActivatedInfoVtbl())
     }
 
-    @When[Windows_UI_Notifications == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Notifications == "on"]
     public unsafe func RecentlyShownNotifications(): windows_collections.IVectorView<_impl_l0.ShownTileNotification> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -17650,7 +17650,7 @@ public class TileActivatedInfo <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
-    @When[Windows_UI_Notifications == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Notifications == "on"]
     public unsafe func RecentlyShownNotifications(): windows_collections.IVectorView<_impl_l0.ShownTileNotification> {
         return defaultInterface().RecentlyShownNotifications()
     }

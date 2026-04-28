@@ -490,6 +490,7 @@ public class DisplayEnhancementOverrideCapabilities <: InterfaceWrapperBase & Co
         return defaultInterface().IsBrightnessNitsControlSupported()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSupportedNitRanges(): windows_collections.IVectorView<_impl_l0.NitRange> {
         return defaultInterface().GetSupportedNitRanges()
     }

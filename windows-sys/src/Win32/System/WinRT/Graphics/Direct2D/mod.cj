@@ -4,11 +4,8 @@ package windows_sys.Win32.System.WinRT.Graphics.Direct2D
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_Graphics_Effects == "on"]
 import windows_sys.Graphics.Effects as Graphics_Effects
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Direct2D == "on"]
 import windows_sys.Win32.Graphics.Direct2D as Win32_Graphics_Direct2D
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 

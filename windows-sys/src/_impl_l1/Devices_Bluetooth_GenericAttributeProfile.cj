@@ -11,6 +11,7 @@ import windows_sys._impl_l0 as _impl_l0
 @C
 public struct IGattCharacteristicVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetDescriptors: CFunc<(CPointer<Unit>, GUID, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var CharacteristicProperties: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var ProtectionLevel: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -18,6 +19,7 @@ public struct IGattCharacteristicVtbl {
     public var UserDescription: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Uuid: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => 0 }
     public var AttributeHandle: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var PresentationFormats: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ReadValueAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Devices_Bluetooth == "on"]
@@ -73,6 +75,7 @@ public class IGattCharacteristic <: InterfaceWrapperBase & ComInterface {
         readVtbl<IGattCharacteristicVtbl>(IGattCharacteristicVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetDescriptors(descriptorUuid: GUID, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -115,6 +118,7 @@ public class IGattCharacteristic <: InterfaceWrapperBase & ComInterface {
         return __vt.AttributeHandle(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PresentationFormats(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -178,6 +182,7 @@ public class IGattCharacteristic <: InterfaceWrapperBase & ComInterface {
 public struct IGattCharacteristic2Vtbl {
     public var base_: IGattCharacteristicVtbl = IGattCharacteristicVtbl()
     public var Service: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAllDescriptors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -228,6 +233,7 @@ public class IGattCharacteristic2 <: InterfaceWrapperBase & ComInterface {
         return __vt.Service(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAllDescriptors(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -346,6 +352,7 @@ public struct IGattCharacteristicsResultVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Status: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var ProtocolError: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Characteristics: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -402,6 +409,7 @@ public class IGattCharacteristicsResult <: InterfaceWrapperBase & ComInterface {
         return __vt.ProtocolError(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Characteristics(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -642,6 +650,7 @@ public struct IGattDescriptorsResultVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Status: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var ProtocolError: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Descriptors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -698,6 +707,7 @@ public class IGattDescriptorsResult <: InterfaceWrapperBase & ComInterface {
         return __vt.ProtocolError(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Descriptors(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -709,7 +719,9 @@ public class IGattDescriptorsResult <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IGattDeviceServiceVtbl {
     public var base_: Foundation__impl_l0.IClosableVtbl = Foundation__impl_l0.IClosableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetCharacteristics: CFunc<(CPointer<Unit>, GUID, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetIncludedServices: CFunc<(CPointer<Unit>, GUID, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var DeviceId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Uuid: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => 0 }
@@ -757,12 +769,14 @@ public class IGattDeviceService <: InterfaceWrapperBase & ComInterface {
         readVtbl<IGattDeviceServiceVtbl>(IGattDeviceServiceVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetCharacteristics(characteristicUuid: GUID, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetCharacteristics(__liveRaw, characteristicUuid, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetIncludedServices(serviceUuid: GUID, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -794,8 +808,11 @@ public struct IGattDeviceService2Vtbl {
     public var base_: IGattDeviceServiceVtbl = IGattDeviceServiceVtbl()
     @When[Windows_Devices_Bluetooth == "on"]
     public var Device: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ParentServices: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAllCharacteristics: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAllIncludedServices: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -847,18 +864,21 @@ public class IGattDeviceService2 <: InterfaceWrapperBase & ComInterface {
         return __vt.Device(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ParentServices(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ParentServices(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAllCharacteristics(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAllCharacteristics(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAllIncludedServices(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1190,6 +1210,7 @@ public struct IGattDeviceServicesResultVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Status: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var ProtocolError: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Services: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1246,6 +1267,7 @@ public class IGattDeviceServicesResult <: InterfaceWrapperBase & ComInterface {
         return __vt.ProtocolError(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Services(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1264,9 +1286,12 @@ public struct IGattLocalCharacteristicVtbl {
     public var ReadProtectionLevel: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var WriteProtectionLevel: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var CreateDescriptorAsync: CFunc<(CPointer<Unit>, GUID, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Descriptors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var UserDescription: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var PresentationFormats: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SubscribedClients: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SubscribedClientsChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveSubscribedClientsChanged: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
@@ -1274,7 +1299,7 @@ public struct IGattLocalCharacteristicVtbl {
     public var RemoveReadRequested: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
     public var WriteRequested: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveWriteRequested: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var NotifyValueAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Storage_Streams == "on"]
     public var NotifyValueForSubscribedClientAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
@@ -1358,6 +1383,7 @@ public class IGattLocalCharacteristic <: InterfaceWrapperBase & ComInterface {
         return __vt.CreateDescriptorAsync(__liveRaw, descriptorUuid, parameters, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Descriptors(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1370,12 +1396,14 @@ public class IGattLocalCharacteristic <: InterfaceWrapperBase & ComInterface {
         return __vt.UserDescription(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PresentationFormats(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.PresentationFormats(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SubscribedClients(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1418,7 +1446,7 @@ public class IGattLocalCharacteristic <: InterfaceWrapperBase & ComInterface {
         return __vt.RemoveWriteRequested(__liveRaw, token)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func NotifyValueAsync(value: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1449,6 +1477,7 @@ public struct IGattLocalCharacteristicParametersVtbl {
     public var WriteProtectionLevel: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetUserDescription: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var UserDescription: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var PresentationFormats: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1555,6 +1584,7 @@ public class IGattLocalCharacteristicParameters <: InterfaceWrapperBase & ComInt
         return __vt.UserDescription(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PresentationFormats(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1802,6 +1832,7 @@ public struct IGattLocalServiceVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Uuid: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => 0 }
     public var CreateCharacteristicAsync: CFunc<(CPointer<Unit>, GUID, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Characteristics: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1858,6 +1889,7 @@ public class IGattLocalService <: InterfaceWrapperBase & ComInterface {
         return __vt.CreateCharacteristicAsync(__liveRaw, characteristicUuid, parameters, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Characteristics(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

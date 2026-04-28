@@ -843,6 +843,7 @@ public struct IStoreConfigurationStaticsVtbl {
     public var SetStoreWebAccountId: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var IsStoreWebAccountId: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => 0 }
     public var HardwareManufacturerInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FilterUnsupportedSystemFeaturesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -917,6 +918,7 @@ public class IStoreConfigurationStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.HardwareManufacturerInfo(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FilterUnsupportedSystemFeaturesAsync(systemFeatures: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1041,6 +1043,7 @@ public struct IStorePreviewProductInfoVtbl {
     public var ProductType: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Title: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Description: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SkuInfoList: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1109,6 +1112,7 @@ public class IStorePreviewProductInfo <: InterfaceWrapperBase & ComInterface {
         return __vt.Description(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SkuInfoList(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1176,6 +1180,7 @@ public class IStorePreviewPurchaseResults <: InterfaceWrapperBase & ComInterface
 public struct IStorePreviewVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var RequestProductPurchaseByProductIdAndSkuIdAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var LoadAddOnProductInfosAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1226,6 +1231,7 @@ public class IStorePreview <: InterfaceWrapperBase & ComInterface {
         return __vt.RequestProductPurchaseByProductIdAndSkuIdAsync(__liveRaw, productId, skuId, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func LoadAddOnProductInfosAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

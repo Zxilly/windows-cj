@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Graphics_Printing == "on"]
 import windows.Graphics.Printing as Graphics_Printing
 import windows._impl_l1 as _impl_l1
 import windows_collections as windows_collections
@@ -3500,14 +3498,25 @@ extend IPrintCustomTextOptionDetails <: windows_core.Interface<IPrintCustomTextO
 @C
 public struct IPrintItemListOptionDetailsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Items: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Items: UIntNative = UIntNative(0)
     public init() {}
 
+    @When[Windows_Foundation_Collections == "on"]
     public static func new<Identity>(offset!: Int64 = 0): IPrintItemListOptionDetailsVtbl where Identity <: IPrintItemListOptionDetails_Impl {
         let _ = offset
         var vtbl = IPrintItemListOptionDetailsVtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.Items = { instanceRaw, result__ =>
+        vtbl = IPrintItemListOptionDetailsVtbl.__assignItems<Identity>(vtbl)
+        return vtbl
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections == "on"]
+    public static func __assignItems<Identity>(vtbl: IPrintItemListOptionDetailsVtbl): IPrintItemListOptionDetailsVtbl where Identity <: IPrintItemListOptionDetails_Impl {
+        var next = vtbl
+        next.Items = { instanceRaw, result__ =>
             match (unsafe { asImplFromRaw<IPrintItemListOptionDetails_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
                     impl.__winrtThunk_Items(result__)
@@ -3515,6 +3524,11 @@ public struct IPrintItemListOptionDetailsVtbl {
                     E_NOINTERFACE.value
             }
         }
+        return next
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections != "on"]
+    public static func __assignItems<Identity>(vtbl: IPrintItemListOptionDetailsVtbl): IPrintItemListOptionDetailsVtbl where Identity <: IPrintItemListOptionDetails_Impl {
         return vtbl
     }
 
@@ -3531,12 +3545,12 @@ public struct IPrintItemListOptionDetailsVtbl {
     }
 }
 
-@When[Windows_Graphics_Printing_OptionDetails == "on"]
+@When[Windows_Graphics_Printing_OptionDetails == "on" && Windows_Foundation_Collections == "on"]
 public interface IPrintItemListOptionDetails_ImplErased {
     public func __winrtThunk_Items(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Graphics_Printing_OptionDetails == "on"]
+@When[Windows_Graphics_Printing_OptionDetails == "on" && Windows_Foundation_Collections == "on"]
 public interface IPrintItemListOptionDetails_Impl <: IPrintItemListOptionDetails_ImplErased & IPrintOptionDetails_Impl {
     public func Items(): windows_core.Result<windows_collections.IVectorView<IInspectable>>
 
@@ -3747,6 +3761,7 @@ public class IPrintItemListOptionDetails <: InterfaceWrapperBase & ComInterface 
         readVtbl<IPrintItemListOptionDetailsVtbl>(IPrintItemListOptionDetailsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVectorView<IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4159,6 +4174,7 @@ public class PrintBindingOptionDetails <: InterfaceWrapperBase & ComInterface & 
         return defaultInterface().TrySetValue(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVectorView<IInspectable> {
         return asIPrintItemListOptionDetails().Items()
     }
@@ -4290,6 +4306,7 @@ public class PrintBorderingOptionDetails <: InterfaceWrapperBase & ComInterface 
         return defaultInterface().TrySetValue(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVectorView<IInspectable> {
         return asIPrintItemListOptionDetails().Items()
     }
@@ -4421,6 +4438,7 @@ public class PrintCollationOptionDetails <: InterfaceWrapperBase & ComInterface 
         return defaultInterface().TrySetValue(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVectorView<IInspectable> {
         return asIPrintItemListOptionDetails().Items()
     }
@@ -4552,6 +4570,7 @@ public class PrintColorModeOptionDetails <: InterfaceWrapperBase & ComInterface 
         return defaultInterface().TrySetValue(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVectorView<IInspectable> {
         return asIPrintItemListOptionDetails().Items()
     }
@@ -5088,6 +5107,7 @@ public class PrintDuplexOptionDetails <: InterfaceWrapperBase & ComInterface & w
         return defaultInterface().TrySetValue(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVectorView<IInspectable> {
         return asIPrintItemListOptionDetails().Items()
     }
@@ -5219,6 +5239,7 @@ public class PrintHolePunchOptionDetails <: InterfaceWrapperBase & ComInterface 
         return defaultInterface().TrySetValue(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVectorView<IInspectable> {
         return asIPrintItemListOptionDetails().Items()
     }
@@ -5350,6 +5371,7 @@ public class PrintMediaSizeOptionDetails <: InterfaceWrapperBase & ComInterface 
         return defaultInterface().TrySetValue(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVectorView<IInspectable> {
         return asIPrintItemListOptionDetails().Items()
     }
@@ -5481,6 +5503,7 @@ public class PrintMediaTypeOptionDetails <: InterfaceWrapperBase & ComInterface 
         return defaultInterface().TrySetValue(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVectorView<IInspectable> {
         return asIPrintItemListOptionDetails().Items()
     }
@@ -5612,6 +5635,7 @@ public class PrintOrientationOptionDetails <: InterfaceWrapperBase & ComInterfac
         return defaultInterface().TrySetValue(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVectorView<IInspectable> {
         return asIPrintItemListOptionDetails().Items()
     }
@@ -5743,6 +5767,7 @@ public class PrintQualityOptionDetails <: InterfaceWrapperBase & ComInterface & 
         return defaultInterface().TrySetValue(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVectorView<IInspectable> {
         return asIPrintItemListOptionDetails().Items()
     }
@@ -5874,6 +5899,7 @@ public class PrintStapleOptionDetails <: InterfaceWrapperBase & ComInterface & w
         return defaultInterface().TrySetValue(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVectorView<IInspectable> {
         return asIPrintItemListOptionDetails().Items()
     }
@@ -6214,6 +6240,7 @@ public class PrintCustomItemListOptionDetails <: InterfaceWrapperBase & ComInter
         return asIPrintCustomOptionDetails().DisplayName()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVectorView<IInspectable> {
         return asIPrintItemListOptionDetails().Items()
     }
@@ -6241,7 +6268,10 @@ extend PrintCustomItemListOptionDetails <: windows_core.HandleWinrtType<PrintCus
 @C
 public struct IPrintTaskOptionDetailsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Options: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Options: UIntNative = UIntNative(0)
     public var CreateItemListOption: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var CreateTextOption: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var OptionChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -6316,6 +6346,7 @@ public class IPrintTaskOptionDetails <: InterfaceWrapperBase & ComInterface & Ru
         readVtbl<IPrintTaskOptionDetailsVtbl>(IPrintTaskOptionDetailsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Options(): windows_collections.IMapView<windows_core.HString, IPrintOptionDetails> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6544,6 +6575,7 @@ public class PrintTaskOptionDetails <: InterfaceWrapperBase & ComInterface & win
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Options(): windows_collections.IMapView<windows_core.HString, IPrintOptionDetails> {
         return defaultInterface().Options()
     }
@@ -6576,6 +6608,7 @@ public class PrintTaskOptionDetails <: InterfaceWrapperBase & ComInterface & win
         return asIPrintTaskOptionsCore().GetPageDescription(jobPageNumber)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DisplayedOptions(): windows_collections.IVector<windows_core.HString> {
         return asIPrintTaskOptionsCoreUIConfiguration().DisplayedOptions()
     }

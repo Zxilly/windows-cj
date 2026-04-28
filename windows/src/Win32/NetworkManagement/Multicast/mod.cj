@@ -8,7 +8,6 @@ import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeTy
 import windows_core as windows_core
 import windows_polyfill.{unionReadUInt32, unionWriteUInt32}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 
@@ -304,15 +303,74 @@ extend MCAST_SCOPE_ENTRY <: windows_core.CopyType & windows_core.RuntimeType & w
     }
 }
 
-@When[DHCPCSVC == "on"]
+@When[Windows_Win32_NetworkManagement_Multicast == "on" && DHCPCSVC == "on" && Windows_Win32_NetworkManagement_Multicast_McastApiCleanup == "on"]
 foreign {
     func McastApiCleanup(): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Multicast == "on" && DHCPCSVC == "on" && Windows_Win32_NetworkManagement_Multicast_McastApiCleanup == "on"]
+public unsafe func Windows_McastApiCleanup(): Unit {
+    McastApiCleanup()
+}
+
+@When[Windows_Win32_NetworkManagement_Multicast == "on" && DHCPCSVC == "on" && Windows_Win32_NetworkManagement_Multicast_McastApiStartup == "on"]
+foreign {
     func McastApiStartup(Version: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Multicast == "on" && DHCPCSVC == "on" && Windows_Win32_NetworkManagement_Multicast_McastApiStartup == "on"]
+public unsafe func Windows_McastApiStartup(Version: CPointer<UInt32>): UInt32 {
+    return McastApiStartup(Version)
+}
+
+@When[Windows_Win32_NetworkManagement_Multicast == "on" && DHCPCSVC == "on" && Windows_Win32_NetworkManagement_Multicast_McastEnumerateScopes == "on"]
+foreign {
     func McastEnumerateScopes(AddrFamily: UInt16, ReQuery: Int32, pScopeList: CPointer<MCAST_SCOPE_ENTRYAbi>, pScopeLen: CPointer<UInt32>, pScopeCount: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Multicast == "on" && DHCPCSVC == "on" && Windows_Win32_NetworkManagement_Multicast_McastEnumerateScopes == "on"]
+public unsafe func Windows_McastEnumerateScopes(AddrFamily: UInt16, ReQuery: Int32, pScopeList: CPointer<MCAST_SCOPE_ENTRYAbi>, pScopeLen: CPointer<UInt32>, pScopeCount: CPointer<UInt32>): UInt32 {
+    return McastEnumerateScopes(AddrFamily, ReQuery, pScopeList, pScopeLen, pScopeCount)
+}
+
+@When[Windows_Win32_NetworkManagement_Multicast == "on" && DHCPCSVC == "on" && Windows_Win32_NetworkManagement_Multicast_McastGenUID == "on"]
+foreign {
     func McastGenUID(pRequestID: CPointer<MCAST_CLIENT_UIDAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Multicast == "on" && DHCPCSVC == "on" && Windows_Win32_NetworkManagement_Multicast_McastGenUID == "on"]
+public unsafe func Windows_McastGenUID(pRequestID: CPointer<MCAST_CLIENT_UIDAbi>): UInt32 {
+    return McastGenUID(pRequestID)
+}
+
+@When[Windows_Win32_NetworkManagement_Multicast == "on" && DHCPCSVC == "on" && Windows_Win32_NetworkManagement_Multicast_McastReleaseAddress == "on"]
+foreign {
     func McastReleaseAddress(AddrFamily: UInt16, pRequestID: CPointer<MCAST_CLIENT_UIDAbi>, pReleaseRequest: CPointer<MCAST_LEASE_REQUESTAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Multicast == "on" && DHCPCSVC == "on" && Windows_Win32_NetworkManagement_Multicast_McastReleaseAddress == "on"]
+public unsafe func Windows_McastReleaseAddress(AddrFamily: UInt16, pRequestID: CPointer<MCAST_CLIENT_UIDAbi>, pReleaseRequest: CPointer<MCAST_LEASE_REQUESTAbi>): UInt32 {
+    return McastReleaseAddress(AddrFamily, pRequestID, pReleaseRequest)
+}
+
+@When[Windows_Win32_NetworkManagement_Multicast == "on" && DHCPCSVC == "on" && Windows_Win32_NetworkManagement_Multicast_McastRenewAddress == "on"]
+foreign {
     func McastRenewAddress(AddrFamily: UInt16, pRequestID: CPointer<MCAST_CLIENT_UIDAbi>, pRenewRequest: CPointer<MCAST_LEASE_REQUESTAbi>, pRenewResponse: CPointer<MCAST_LEASE_RESPONSEAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Multicast == "on" && DHCPCSVC == "on" && Windows_Win32_NetworkManagement_Multicast_McastRenewAddress == "on"]
+public unsafe func Windows_McastRenewAddress(AddrFamily: UInt16, pRequestID: CPointer<MCAST_CLIENT_UIDAbi>, pRenewRequest: CPointer<MCAST_LEASE_REQUESTAbi>, pRenewResponse: CPointer<MCAST_LEASE_RESPONSEAbi>): UInt32 {
+    return McastRenewAddress(AddrFamily, pRequestID, pRenewRequest, pRenewResponse)
+}
+
+@When[Windows_Win32_NetworkManagement_Multicast == "on" && DHCPCSVC == "on" && Windows_Win32_NetworkManagement_Multicast_McastRequestAddress == "on"]
+foreign {
     func McastRequestAddress(AddrFamily: UInt16, pRequestID: CPointer<MCAST_CLIENT_UIDAbi>, pScopeCtx: CPointer<MCAST_SCOPE_CTXAbi>, pAddrRequest: CPointer<MCAST_LEASE_REQUESTAbi>, pAddrResponse: CPointer<MCAST_LEASE_RESPONSEAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Multicast == "on" && DHCPCSVC == "on" && Windows_Win32_NetworkManagement_Multicast_McastRequestAddress == "on"]
+public unsafe func Windows_McastRequestAddress(AddrFamily: UInt16, pRequestID: CPointer<MCAST_CLIENT_UIDAbi>, pScopeCtx: CPointer<MCAST_SCOPE_CTXAbi>, pAddrRequest: CPointer<MCAST_LEASE_REQUESTAbi>, pAddrResponse: CPointer<MCAST_LEASE_RESPONSEAbi>): UInt32 {
+    return McastRequestAddress(AddrFamily, pRequestID, pScopeCtx, pAddrRequest, pAddrResponse)
 }
 
 @When[Windows_Win32_NetworkManagement_Multicast == "on"]

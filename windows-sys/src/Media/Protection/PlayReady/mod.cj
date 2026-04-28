@@ -351,7 +351,7 @@ public class INDStartResult <: InterfaceWrapperBase & ComInterface {
 @C
 public struct INDStorageFileHelperVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var GetFileURLs: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -396,7 +396,7 @@ public class INDStorageFileHelper <: InterfaceWrapperBase & ComInterface {
         readVtbl<INDStorageFileHelperVtbl>(INDStorageFileHelperVtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func GetFileURLs(file: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1506,7 +1506,7 @@ public class INDMessenger <: InterfaceWrapperBase & ComInterface {
 public struct INDStreamParserNotifierVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var OnContentIDReceived: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Core == "on"]
     public var OnMediaStreamDescriptorCreated: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Media_Core == "on"]
     public var OnSampleParsed: CFunc<(CPointer<Unit>, UInt32, Int32, CPointer<Unit>, Int64, Int32, UInt32, CPointer<UInt8>) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
@@ -1561,7 +1561,7 @@ public class INDStreamParserNotifier <: InterfaceWrapperBase & ComInterface {
         return __vt.OnContentIDReceived(__liveRaw, licenseFetchDescriptor)
     }
 
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Core == "on"]
     public unsafe func OnMediaStreamDescriptorCreated(audioStreamDescriptors: CPointer<Unit>, videoStreamDescriptors: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3567,6 +3567,7 @@ public class IPlayReadyContentResolver <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IPlayReadyDomainIterableFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateInstance: CFunc<(CPointer<Unit>, GUID, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -3611,6 +3612,7 @@ public class IPlayReadyDomainIterableFactory <: InterfaceWrapperBase & ComInterf
         readVtbl<IPlayReadyDomainIterableFactoryVtbl>(IPlayReadyDomainIterableFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateInstance(domainAccountId: GUID, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3753,6 +3755,7 @@ public class IPlayReadyLicenseAcquisitionServiceRequest2 <: InterfaceWrapperBase
 @C
 public struct IPlayReadyLicenseAcquisitionServiceRequest3Vtbl {
     public var base_: IPlayReadyLicenseAcquisitionServiceRequest2Vtbl = IPlayReadyLicenseAcquisitionServiceRequest2Vtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateLicenseIterable: CFunc<(CPointer<Unit>, CPointer<Unit>, Bool, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -3797,6 +3800,7 @@ public class IPlayReadyLicenseAcquisitionServiceRequest3 <: InterfaceWrapperBase
         readVtbl<IPlayReadyLicenseAcquisitionServiceRequest3Vtbl>(IPlayReadyLicenseAcquisitionServiceRequest3Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateLicenseIterable(contentHeader: CPointer<Unit>, fullyEvaluated: Bool, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3808,6 +3812,7 @@ public class IPlayReadyLicenseAcquisitionServiceRequest3 <: InterfaceWrapperBase
 @C
 public struct IPlayReadyLicenseIterableFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateInstance: CFunc<(CPointer<Unit>, CPointer<Unit>, Bool, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -3852,6 +3857,7 @@ public class IPlayReadyLicenseIterableFactory <: InterfaceWrapperBase & ComInter
         readVtbl<IPlayReadyLicenseIterableFactoryVtbl>(IPlayReadyLicenseIterableFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateInstance(contentHeader: CPointer<Unit>, fullyEvaluated: Bool, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3982,6 +3988,7 @@ public class IPlayReadyLicenseSession <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IPlayReadyLicenseSession2Vtbl {
     public var base_: IPlayReadyLicenseSessionVtbl = IPlayReadyLicenseSessionVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateLicenseIterable: CFunc<(CPointer<Unit>, CPointer<Unit>, Bool, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -4026,6 +4033,7 @@ public class IPlayReadyLicenseSession2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IPlayReadyLicenseSession2Vtbl>(IPlayReadyLicenseSession2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateLicenseIterable(contentHeader: CPointer<Unit>, fullyEvaluated: Bool, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4094,6 +4102,7 @@ public class IPlayReadyLicenseSessionFactory <: InterfaceWrapperBase & ComInterf
 @C
 public struct IPlayReadySecureStopIterableFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateInstance: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt8>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -4138,6 +4147,7 @@ public class IPlayReadySecureStopIterableFactory <: InterfaceWrapperBase & ComIn
         readVtbl<IPlayReadySecureStopIterableFactoryVtbl>(IPlayReadySecureStopIterableFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateInstance(publisherCertBytesSize: UInt32, publisherCertBytes: CPointer<UInt8>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4149,7 +4159,9 @@ public class IPlayReadySecureStopIterableFactory <: InterfaceWrapperBase & ComIn
 @C
 public struct IPlayReadySecureStopServiceRequestFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Media_Protection == "on"]
     public var CreateInstance: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt8>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Media_Protection == "on"]
     public var CreateInstanceFromSessionID: CFunc<(CPointer<Unit>, GUID, UInt32, CPointer<UInt8>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -4194,12 +4206,14 @@ public class IPlayReadySecureStopServiceRequestFactory <: InterfaceWrapperBase &
         readVtbl<IPlayReadySecureStopServiceRequestFactoryVtbl>(IPlayReadySecureStopServiceRequestFactoryVtbl())
     }
 
+    @When[Windows_Media_Protection == "on"]
     public unsafe func CreateInstance(publisherCertBytesSize: UInt32, publisherCertBytes: CPointer<UInt8>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateInstance(__liveRaw, publisherCertBytesSize, publisherCertBytes, result__)
     }
 
+    @When[Windows_Media_Protection == "on"]
     public unsafe func CreateInstanceFromSessionID(sessionID: GUID, publisherCertBytesSize: UInt32, publisherCertBytes: CPointer<UInt8>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

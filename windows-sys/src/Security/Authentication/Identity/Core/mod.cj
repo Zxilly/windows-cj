@@ -342,6 +342,7 @@ public class IMicrosoftAccountMultiFactorSessionInfo <: InterfaceWrapperBase & C
 @C
 public struct IMicrosoftAccountMultiFactorGetSessionsResultVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Sessions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ServiceResponse: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -387,6 +388,7 @@ public class IMicrosoftAccountMultiFactorGetSessionsResult <: InterfaceWrapperBa
         readVtbl<IMicrosoftAccountMultiFactorGetSessionsResultVtbl>(IMicrosoftAccountMultiFactorGetSessionsResultVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Sessions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -404,7 +406,9 @@ public class IMicrosoftAccountMultiFactorGetSessionsResult <: InterfaceWrapperBa
 @C
 public struct IMicrosoftAccountMultiFactorUnregisteredAccountsAndSessionInfoVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Sessions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var UnregisteredAccounts: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ServiceResponse: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -450,12 +454,14 @@ public class IMicrosoftAccountMultiFactorUnregisteredAccountsAndSessionInfo <: I
         readVtbl<IMicrosoftAccountMultiFactorUnregisteredAccountsAndSessionInfoVtbl>(IMicrosoftAccountMultiFactorUnregisteredAccountsAndSessionInfoVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Sessions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Sessions(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UnregisteredAccounts(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -477,7 +483,9 @@ public struct IMicrosoftAccountMultiFactorAuthenticationManagerVtbl {
     public var AddDeviceAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var RemoveDeviceAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var UpdateWnsChannelAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSessionsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSessionsAndUnregisteredAccountsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var ApproveSessionUsingAuthSessionInfoAsync: CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var ApproveSessionAsync: CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
@@ -550,12 +558,14 @@ public class IMicrosoftAccountMultiFactorAuthenticationManager <: InterfaceWrapp
         return __vt.UpdateWnsChannelAsync(__liveRaw, userAccountId, channelUri, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSessionsAsync(userAccountIdList: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetSessionsAsync(__liveRaw, userAccountIdList, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSessionsAndUnregisteredAccountsAsync(userAccountIdList: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

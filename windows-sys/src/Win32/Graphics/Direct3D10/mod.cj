@@ -5,9 +5,7 @@ import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrap
 import windows_interface as windows_interface
 import windows_polyfill.{unionReadUInt32, unionWriteUInt32}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Dxgi_Common == "on"]
 import windows_sys.Win32.Graphics.Dxgi.Common as Win32_Graphics_Dxgi_Common
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
@@ -10047,30 +10045,58 @@ public type PFN_D3D10_CREATE_DEVICE1 = CFunc<(CPointer<Unit>, Int32, CPointer<Un
 @When[Windows_Win32_Graphics_Direct3D10 == "on" && (Windows_Win32_Graphics_Dxgi == "on" && Windows_Win32_Graphics_Dxgi == "on" && Windows_Win32_Graphics_Dxgi_Common == "on")]
 public type PFN_D3D10_CREATE_DEVICE_AND_SWAP_CHAIN1 = CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, UInt32, Int32, UInt32, CPointer<Win32__impl_l1.DXGI_SWAP_CHAIN_DESC>, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>) -> Int32>
 
-@When[D3D10 == "on"]
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10CompileEffectFromMemory == "on" && Windows_Win32_Graphics_Direct3D == "on"]
 foreign {
     // param-hint: pData bytes=param[1]
-    // param-hint: pEffectPool optional
-    func D3D10CreateEffectFromMemory(pData: CPointer<Unit>, DataLength: UIntNative, FXFlags: UInt32, pDevice: CPointer<Unit>, pEffectPool: CPointer<Unit>, ppEffect: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pData bytes=param[1]
-    func D3D10CreateEffectPoolFromMemory(pData: CPointer<Unit>, DataLength: UIntNative, FXFlags: UInt32, pDevice: CPointer<Unit>, ppEffectPool: CPointer<CPointer<Unit>>): Int32
-    func D3D10CreateStateBlock(pDevice: CPointer<Unit>, pStateBlockMask: CPointer<D3D10_STATE_BLOCK_MASK>, ppStateBlock: CPointer<CPointer<Unit>>): Int32
-    func D3D10GetGeometryShaderProfile(pDevice: CPointer<Unit>): CPointer<UInt8>
-    func D3D10GetPixelShaderProfile(pDevice: CPointer<Unit>): CPointer<UInt8>
-    func D3D10GetVertexShaderProfile(pDevice: CPointer<Unit>): CPointer<UInt8>
-    // param-hint: pShaderBytecode bytes=param[1]
-    func D3D10ReflectShader(pShaderBytecode: CPointer<Unit>, BytecodeLength: UIntNative, ppReflector: CPointer<CPointer<Unit>>): Int32
-    func D3D10StateBlockMaskDifference(pA: CPointer<D3D10_STATE_BLOCK_MASK>, pB: CPointer<D3D10_STATE_BLOCK_MASK>, pResult: CPointer<D3D10_STATE_BLOCK_MASK>): Int32
-    func D3D10StateBlockMaskDisableAll(pMask: CPointer<D3D10_STATE_BLOCK_MASK>): Int32
-    func D3D10StateBlockMaskDisableCapture(pMask: CPointer<D3D10_STATE_BLOCK_MASK>, StateType: Int32, RangeStart: UInt32, RangeLength: UInt32): Int32
-    func D3D10StateBlockMaskEnableAll(pMask: CPointer<D3D10_STATE_BLOCK_MASK>): Int32
-    func D3D10StateBlockMaskEnableCapture(pMask: CPointer<D3D10_STATE_BLOCK_MASK>, StateType: Int32, RangeStart: UInt32, RangeLength: UInt32): Int32
-    func D3D10StateBlockMaskGetSetting(pMask: CPointer<D3D10_STATE_BLOCK_MASK>, StateType: Int32, Entry: UInt32): Int32
-    func D3D10StateBlockMaskIntersect(pA: CPointer<D3D10_STATE_BLOCK_MASK>, pB: CPointer<D3D10_STATE_BLOCK_MASK>, pResult: CPointer<D3D10_STATE_BLOCK_MASK>): Int32
-    func D3D10StateBlockMaskUnion(pA: CPointer<D3D10_STATE_BLOCK_MASK>, pB: CPointer<D3D10_STATE_BLOCK_MASK>, pResult: CPointer<D3D10_STATE_BLOCK_MASK>): Int32
+    // param-hint: pDefines optional
+    // param-hint: pInclude optional
+    // param-hint: ppErrors optional
+    func D3D10CompileEffectFromMemory(pData: CPointer<Unit>, DataLength: UIntNative, pSrcFileName: CPointer<UInt8>, pDefines: CPointer<Win32__impl_l0.D3D_SHADER_MACRO>, pInclude: CPointer<Unit>, HLSLFlags: UInt32, FXFlags: UInt32, ppCompiledEffect: CPointer<CPointer<Unit>>, ppErrors: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[D3D10 == "on" && (Windows_Win32_Graphics_Dxgi == "on" && Windows_Win32_Graphics_Dxgi == "on" && Windows_Win32_Graphics_Dxgi_Common == "on")]
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10CompileEffectFromMemory == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+public unsafe func Windows_D3D10CompileEffectFromMemory(pData: CPointer<Unit>, DataLength: UIntNative, pSrcFileName: CPointer<UInt8>, pDefines: CPointer<Win32__impl_l0.D3D_SHADER_MACRO>, pInclude: CPointer<Unit>, HLSLFlags: UInt32, FXFlags: UInt32, ppCompiledEffect: CPointer<CPointer<Unit>>, ppErrors: CPointer<CPointer<Unit>>): Int32 {
+    return D3D10CompileEffectFromMemory(pData, DataLength, pSrcFileName, pDefines, pInclude, HLSLFlags, FXFlags, ppCompiledEffect, ppErrors)
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10CompileShader == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+foreign {
+    // param-hint: pSrcData bytes=param[1]
+    // param-hint: pFileName optional
+    // param-hint: pDefines optional
+    // param-hint: pInclude optional
+    // param-hint: ppErrorMsgs optional
+    func D3D10CompileShader(pSrcData: CPointer<UInt8>, SrcDataSize: UIntNative, pFileName: CPointer<UInt8>, pDefines: CPointer<Win32__impl_l0.D3D_SHADER_MACRO>, pInclude: CPointer<Unit>, pFunctionName: CPointer<UInt8>, pProfile: CPointer<UInt8>, Flags: UInt32, ppShader: CPointer<CPointer<Unit>>, ppErrorMsgs: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10CompileShader == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+public unsafe func Windows_D3D10CompileShader(pSrcData: CPointer<UInt8>, SrcDataSize: UIntNative, pFileName: CPointer<UInt8>, pDefines: CPointer<Win32__impl_l0.D3D_SHADER_MACRO>, pInclude: CPointer<Unit>, pFunctionName: CPointer<UInt8>, pProfile: CPointer<UInt8>, Flags: UInt32, ppShader: CPointer<CPointer<Unit>>, ppErrorMsgs: CPointer<CPointer<Unit>>): Int32 {
+    return D3D10CompileShader(pSrcData, SrcDataSize, pFileName, pDefines, pInclude, pFunctionName, pProfile, Flags, ppShader, ppErrorMsgs)
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10CreateBlob == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+foreign {
+    func D3D10CreateBlob(NumBytes: UIntNative, ppBuffer: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10CreateBlob == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+public unsafe func Windows_D3D10CreateBlob(NumBytes: UIntNative, ppBuffer: CPointer<CPointer<Unit>>): Int32 {
+    return D3D10CreateBlob(NumBytes, ppBuffer)
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10CreateDevice == "on" && Windows_Win32_Graphics_Dxgi == "on"]
+foreign {
+    // param-hint: pAdapter optional
+    // param-hint: ppDevice optional
+    func D3D10CreateDevice(pAdapter: CPointer<Unit>, DriverType: Int32, Software: CPointer<Unit>, Flags: UInt32, SDKVersion: UInt32, ppDevice: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10CreateDevice == "on" && Windows_Win32_Graphics_Dxgi == "on"]
+public unsafe func Windows_D3D10CreateDevice(pAdapter: CPointer<Unit>, DriverType: Int32, Software: CPointer<Unit>, Flags: UInt32, SDKVersion: UInt32, ppDevice: CPointer<CPointer<Unit>>): Int32 {
+    return D3D10CreateDevice(pAdapter, DriverType, Software, Flags, SDKVersion, ppDevice)
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10CreateDeviceAndSwapChain == "on" && Windows_Win32_Graphics_Dxgi == "on" && Windows_Win32_Graphics_Dxgi == "on" && Windows_Win32_Graphics_Dxgi_Common == "on"]
 foreign {
     // param-hint: pAdapter optional
     // param-hint: pSwapChainDesc optional
@@ -10079,32 +10105,142 @@ foreign {
     func D3D10CreateDeviceAndSwapChain(pAdapter: CPointer<Unit>, DriverType: Int32, Software: CPointer<Unit>, Flags: UInt32, SDKVersion: UInt32, pSwapChainDesc: CPointer<Win32__impl_l1.DXGI_SWAP_CHAIN_DESC>, ppSwapChain: CPointer<CPointer<Unit>>, ppDevice: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[D3D10 == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10CreateDeviceAndSwapChain == "on" && Windows_Win32_Graphics_Dxgi == "on" && Windows_Win32_Graphics_Dxgi == "on" && Windows_Win32_Graphics_Dxgi_Common == "on"]
+public unsafe func Windows_D3D10CreateDeviceAndSwapChain(pAdapter: CPointer<Unit>, DriverType: Int32, Software: CPointer<Unit>, Flags: UInt32, SDKVersion: UInt32, pSwapChainDesc: CPointer<Win32__impl_l1.DXGI_SWAP_CHAIN_DESC>, ppSwapChain: CPointer<CPointer<Unit>>, ppDevice: CPointer<CPointer<Unit>>): Int32 {
+    return D3D10CreateDeviceAndSwapChain(pAdapter, DriverType, Software, Flags, SDKVersion, pSwapChainDesc, ppSwapChain, ppDevice)
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10CreateEffectFromMemory == "on"]
 foreign {
     // param-hint: pData bytes=param[1]
-    // param-hint: pDefines optional
-    // param-hint: pInclude optional
-    // param-hint: ppErrors optional
-    func D3D10CompileEffectFromMemory(pData: CPointer<Unit>, DataLength: UIntNative, pSrcFileName: CPointer<UInt8>, pDefines: CPointer<Win32__impl_l0.D3D_SHADER_MACRO>, pInclude: CPointer<Unit>, HLSLFlags: UInt32, FXFlags: UInt32, ppCompiledEffect: CPointer<CPointer<Unit>>, ppErrors: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pSrcData bytes=param[1]
-    // param-hint: pFileName optional
-    // param-hint: pDefines optional
-    // param-hint: pInclude optional
-    // param-hint: ppErrorMsgs optional
-    func D3D10CompileShader(pSrcData: CPointer<UInt8>, SrcDataSize: UIntNative, pFileName: CPointer<UInt8>, pDefines: CPointer<Win32__impl_l0.D3D_SHADER_MACRO>, pInclude: CPointer<Unit>, pFunctionName: CPointer<UInt8>, pProfile: CPointer<UInt8>, Flags: UInt32, ppShader: CPointer<CPointer<Unit>>, ppErrorMsgs: CPointer<CPointer<Unit>>): Int32
-    func D3D10CreateBlob(NumBytes: UIntNative, ppBuffer: CPointer<CPointer<Unit>>): Int32
+    // param-hint: pEffectPool optional
+    func D3D10CreateEffectFromMemory(pData: CPointer<Unit>, DataLength: UIntNative, FXFlags: UInt32, pDevice: CPointer<Unit>, pEffectPool: CPointer<Unit>, ppEffect: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10CreateEffectFromMemory == "on"]
+public unsafe func Windows_D3D10CreateEffectFromMemory(pData: CPointer<Unit>, DataLength: UIntNative, FXFlags: UInt32, pDevice: CPointer<Unit>, pEffectPool: CPointer<Unit>, ppEffect: CPointer<CPointer<Unit>>): Int32 {
+    return D3D10CreateEffectFromMemory(pData, DataLength, FXFlags, pDevice, pEffectPool, ppEffect)
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10CreateEffectPoolFromMemory == "on"]
+foreign {
+    // param-hint: pData bytes=param[1]
+    func D3D10CreateEffectPoolFromMemory(pData: CPointer<Unit>, DataLength: UIntNative, FXFlags: UInt32, pDevice: CPointer<Unit>, ppEffectPool: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10CreateEffectPoolFromMemory == "on"]
+public unsafe func Windows_D3D10CreateEffectPoolFromMemory(pData: CPointer<Unit>, DataLength: UIntNative, FXFlags: UInt32, pDevice: CPointer<Unit>, ppEffectPool: CPointer<CPointer<Unit>>): Int32 {
+    return D3D10CreateEffectPoolFromMemory(pData, DataLength, FXFlags, pDevice, ppEffectPool)
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10CreateStateBlock == "on"]
+foreign {
+    func D3D10CreateStateBlock(pDevice: CPointer<Unit>, pStateBlockMask: CPointer<D3D10_STATE_BLOCK_MASK>, ppStateBlock: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10CreateStateBlock == "on"]
+public unsafe func Windows_D3D10CreateStateBlock(pDevice: CPointer<Unit>, pStateBlockMask: CPointer<D3D10_STATE_BLOCK_MASK>, ppStateBlock: CPointer<CPointer<Unit>>): Int32 {
+    return D3D10CreateStateBlock(pDevice, pStateBlockMask, ppStateBlock)
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10DisassembleEffect == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+foreign {
     func D3D10DisassembleEffect(pEffect: CPointer<Unit>, EnableColorCode: Int32, ppDisassembly: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10DisassembleEffect == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+public unsafe func Windows_D3D10DisassembleEffect(pEffect: CPointer<Unit>, EnableColorCode: Int32, ppDisassembly: CPointer<CPointer<Unit>>): Int32 {
+    return D3D10DisassembleEffect(pEffect, EnableColorCode, ppDisassembly)
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10DisassembleShader == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+foreign {
     // param-hint: pShader bytes=param[1]
     // param-hint: pComments optional
     func D3D10DisassembleShader(pShader: CPointer<Unit>, BytecodeLength: UIntNative, EnableColorCode: Int32, pComments: CPointer<UInt8>, ppDisassembly: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10DisassembleShader == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+public unsafe func Windows_D3D10DisassembleShader(pShader: CPointer<Unit>, BytecodeLength: UIntNative, EnableColorCode: Int32, pComments: CPointer<UInt8>, ppDisassembly: CPointer<CPointer<Unit>>): Int32 {
+    return D3D10DisassembleShader(pShader, BytecodeLength, EnableColorCode, pComments, ppDisassembly)
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10GetGeometryShaderProfile == "on"]
+foreign {
+    func D3D10GetGeometryShaderProfile(pDevice: CPointer<Unit>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10GetGeometryShaderProfile == "on"]
+public unsafe func Windows_D3D10GetGeometryShaderProfile(pDevice: CPointer<Unit>): CPointer<UInt8> {
+    return D3D10GetGeometryShaderProfile(pDevice)
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10GetInputAndOutputSignatureBlob == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+foreign {
     // param-hint: pShaderBytecode bytes=param[1]
     func D3D10GetInputAndOutputSignatureBlob(pShaderBytecode: CPointer<Unit>, BytecodeLength: UIntNative, ppSignatureBlob: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10GetInputAndOutputSignatureBlob == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+public unsafe func Windows_D3D10GetInputAndOutputSignatureBlob(pShaderBytecode: CPointer<Unit>, BytecodeLength: UIntNative, ppSignatureBlob: CPointer<CPointer<Unit>>): Int32 {
+    return D3D10GetInputAndOutputSignatureBlob(pShaderBytecode, BytecodeLength, ppSignatureBlob)
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10GetInputSignatureBlob == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+foreign {
     // param-hint: pShaderBytecode bytes=param[1]
     func D3D10GetInputSignatureBlob(pShaderBytecode: CPointer<Unit>, BytecodeLength: UIntNative, ppSignatureBlob: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10GetInputSignatureBlob == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+public unsafe func Windows_D3D10GetInputSignatureBlob(pShaderBytecode: CPointer<Unit>, BytecodeLength: UIntNative, ppSignatureBlob: CPointer<CPointer<Unit>>): Int32 {
+    return D3D10GetInputSignatureBlob(pShaderBytecode, BytecodeLength, ppSignatureBlob)
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10GetOutputSignatureBlob == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+foreign {
     // param-hint: pShaderBytecode bytes=param[1]
     func D3D10GetOutputSignatureBlob(pShaderBytecode: CPointer<Unit>, BytecodeLength: UIntNative, ppSignatureBlob: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10GetOutputSignatureBlob == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+public unsafe func Windows_D3D10GetOutputSignatureBlob(pShaderBytecode: CPointer<Unit>, BytecodeLength: UIntNative, ppSignatureBlob: CPointer<CPointer<Unit>>): Int32 {
+    return D3D10GetOutputSignatureBlob(pShaderBytecode, BytecodeLength, ppSignatureBlob)
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10GetPixelShaderProfile == "on"]
+foreign {
+    func D3D10GetPixelShaderProfile(pDevice: CPointer<Unit>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10GetPixelShaderProfile == "on"]
+public unsafe func Windows_D3D10GetPixelShaderProfile(pDevice: CPointer<Unit>): CPointer<UInt8> {
+    return D3D10GetPixelShaderProfile(pDevice)
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10GetShaderDebugInfo == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+foreign {
     // param-hint: pShaderBytecode bytes=param[1]
     func D3D10GetShaderDebugInfo(pShaderBytecode: CPointer<Unit>, BytecodeLength: UIntNative, ppDebugInfo: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10GetShaderDebugInfo == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+public unsafe func Windows_D3D10GetShaderDebugInfo(pShaderBytecode: CPointer<Unit>, BytecodeLength: UIntNative, ppDebugInfo: CPointer<CPointer<Unit>>): Int32 {
+    return D3D10GetShaderDebugInfo(pShaderBytecode, BytecodeLength, ppDebugInfo)
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10GetVertexShaderProfile == "on"]
+foreign {
+    func D3D10GetVertexShaderProfile(pDevice: CPointer<Unit>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10GetVertexShaderProfile == "on"]
+public unsafe func Windows_D3D10GetVertexShaderProfile(pDevice: CPointer<Unit>): CPointer<UInt8> {
+    return D3D10GetVertexShaderProfile(pDevice)
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10PreprocessShader == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+foreign {
     // param-hint: pSrcData bytes=param[1]
     // param-hint: pFileName optional
     // param-hint: pDefines optional
@@ -10113,14 +10249,115 @@ foreign {
     func D3D10PreprocessShader(pSrcData: CPointer<UInt8>, SrcDataSize: UIntNative, pFileName: CPointer<UInt8>, pDefines: CPointer<Win32__impl_l0.D3D_SHADER_MACRO>, pInclude: CPointer<Unit>, ppShaderText: CPointer<CPointer<Unit>>, ppErrorMsgs: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[D3D10 == "on" && Windows_Win32_Graphics_Dxgi == "on"]
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10PreprocessShader == "on" && Windows_Win32_Graphics_Direct3D == "on"]
+public unsafe func Windows_D3D10PreprocessShader(pSrcData: CPointer<UInt8>, SrcDataSize: UIntNative, pFileName: CPointer<UInt8>, pDefines: CPointer<Win32__impl_l0.D3D_SHADER_MACRO>, pInclude: CPointer<Unit>, ppShaderText: CPointer<CPointer<Unit>>, ppErrorMsgs: CPointer<CPointer<Unit>>): Int32 {
+    return D3D10PreprocessShader(pSrcData, SrcDataSize, pFileName, pDefines, pInclude, ppShaderText, ppErrorMsgs)
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10ReflectShader == "on"]
+foreign {
+    // param-hint: pShaderBytecode bytes=param[1]
+    func D3D10ReflectShader(pShaderBytecode: CPointer<Unit>, BytecodeLength: UIntNative, ppReflector: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10ReflectShader == "on"]
+public unsafe func Windows_D3D10ReflectShader(pShaderBytecode: CPointer<Unit>, BytecodeLength: UIntNative, ppReflector: CPointer<CPointer<Unit>>): Int32 {
+    return D3D10ReflectShader(pShaderBytecode, BytecodeLength, ppReflector)
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10StateBlockMaskDifference == "on"]
+foreign {
+    func D3D10StateBlockMaskDifference(pA: CPointer<D3D10_STATE_BLOCK_MASK>, pB: CPointer<D3D10_STATE_BLOCK_MASK>, pResult: CPointer<D3D10_STATE_BLOCK_MASK>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10StateBlockMaskDifference == "on"]
+public unsafe func Windows_D3D10StateBlockMaskDifference(pA: CPointer<D3D10_STATE_BLOCK_MASK>, pB: CPointer<D3D10_STATE_BLOCK_MASK>, pResult: CPointer<D3D10_STATE_BLOCK_MASK>): Int32 {
+    return D3D10StateBlockMaskDifference(pA, pB, pResult)
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10StateBlockMaskDisableAll == "on"]
+foreign {
+    func D3D10StateBlockMaskDisableAll(pMask: CPointer<D3D10_STATE_BLOCK_MASK>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10StateBlockMaskDisableAll == "on"]
+public unsafe func Windows_D3D10StateBlockMaskDisableAll(pMask: CPointer<D3D10_STATE_BLOCK_MASK>): Int32 {
+    return D3D10StateBlockMaskDisableAll(pMask)
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10StateBlockMaskDisableCapture == "on"]
+foreign {
+    func D3D10StateBlockMaskDisableCapture(pMask: CPointer<D3D10_STATE_BLOCK_MASK>, StateType: Int32, RangeStart: UInt32, RangeLength: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10StateBlockMaskDisableCapture == "on"]
+public unsafe func Windows_D3D10StateBlockMaskDisableCapture(pMask: CPointer<D3D10_STATE_BLOCK_MASK>, StateType: Int32, RangeStart: UInt32, RangeLength: UInt32): Int32 {
+    return D3D10StateBlockMaskDisableCapture(pMask, StateType, RangeStart, RangeLength)
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10StateBlockMaskEnableAll == "on"]
+foreign {
+    func D3D10StateBlockMaskEnableAll(pMask: CPointer<D3D10_STATE_BLOCK_MASK>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10StateBlockMaskEnableAll == "on"]
+public unsafe func Windows_D3D10StateBlockMaskEnableAll(pMask: CPointer<D3D10_STATE_BLOCK_MASK>): Int32 {
+    return D3D10StateBlockMaskEnableAll(pMask)
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10StateBlockMaskEnableCapture == "on"]
+foreign {
+    func D3D10StateBlockMaskEnableCapture(pMask: CPointer<D3D10_STATE_BLOCK_MASK>, StateType: Int32, RangeStart: UInt32, RangeLength: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10StateBlockMaskEnableCapture == "on"]
+public unsafe func Windows_D3D10StateBlockMaskEnableCapture(pMask: CPointer<D3D10_STATE_BLOCK_MASK>, StateType: Int32, RangeStart: UInt32, RangeLength: UInt32): Int32 {
+    return D3D10StateBlockMaskEnableCapture(pMask, StateType, RangeStart, RangeLength)
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10StateBlockMaskGetSetting == "on"]
+foreign {
+    func D3D10StateBlockMaskGetSetting(pMask: CPointer<D3D10_STATE_BLOCK_MASK>, StateType: Int32, Entry: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10StateBlockMaskGetSetting == "on"]
+public unsafe func Windows_D3D10StateBlockMaskGetSetting(pMask: CPointer<D3D10_STATE_BLOCK_MASK>, StateType: Int32, Entry: UInt32): Int32 {
+    return D3D10StateBlockMaskGetSetting(pMask, StateType, Entry)
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10StateBlockMaskIntersect == "on"]
+foreign {
+    func D3D10StateBlockMaskIntersect(pA: CPointer<D3D10_STATE_BLOCK_MASK>, pB: CPointer<D3D10_STATE_BLOCK_MASK>, pResult: CPointer<D3D10_STATE_BLOCK_MASK>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10StateBlockMaskIntersect == "on"]
+public unsafe func Windows_D3D10StateBlockMaskIntersect(pA: CPointer<D3D10_STATE_BLOCK_MASK>, pB: CPointer<D3D10_STATE_BLOCK_MASK>, pResult: CPointer<D3D10_STATE_BLOCK_MASK>): Int32 {
+    return D3D10StateBlockMaskIntersect(pA, pB, pResult)
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10StateBlockMaskUnion == "on"]
+foreign {
+    func D3D10StateBlockMaskUnion(pA: CPointer<D3D10_STATE_BLOCK_MASK>, pB: CPointer<D3D10_STATE_BLOCK_MASK>, pResult: CPointer<D3D10_STATE_BLOCK_MASK>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10StateBlockMaskUnion == "on"]
+public unsafe func Windows_D3D10StateBlockMaskUnion(pA: CPointer<D3D10_STATE_BLOCK_MASK>, pB: CPointer<D3D10_STATE_BLOCK_MASK>, pResult: CPointer<D3D10_STATE_BLOCK_MASK>): Int32 {
+    return D3D10StateBlockMaskUnion(pA, pB, pResult)
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10_1 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10CreateDevice1 == "on" && Windows_Win32_Graphics_Dxgi == "on"]
 foreign {
     // param-hint: pAdapter optional
     // param-hint: ppDevice optional
-    func D3D10CreateDevice(pAdapter: CPointer<Unit>, DriverType: Int32, Software: CPointer<Unit>, Flags: UInt32, SDKVersion: UInt32, ppDevice: CPointer<CPointer<Unit>>): Int32
+    func D3D10CreateDevice1(pAdapter: CPointer<Unit>, DriverType: Int32, Software: CPointer<Unit>, Flags: UInt32, HardwareLevel: Int32, SDKVersion: UInt32, ppDevice: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[D3D10_1 == "on" && (Windows_Win32_Graphics_Dxgi == "on" && Windows_Win32_Graphics_Dxgi == "on" && Windows_Win32_Graphics_Dxgi_Common == "on")]
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10_1 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10CreateDevice1 == "on" && Windows_Win32_Graphics_Dxgi == "on"]
+public unsafe func Windows_D3D10CreateDevice1(pAdapter: CPointer<Unit>, DriverType: Int32, Software: CPointer<Unit>, Flags: UInt32, HardwareLevel: Int32, SDKVersion: UInt32, ppDevice: CPointer<CPointer<Unit>>): Int32 {
+    return D3D10CreateDevice1(pAdapter, DriverType, Software, Flags, HardwareLevel, SDKVersion, ppDevice)
+}
+
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10_1 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10CreateDeviceAndSwapChain1 == "on" && Windows_Win32_Graphics_Dxgi == "on" && Windows_Win32_Graphics_Dxgi == "on" && Windows_Win32_Graphics_Dxgi_Common == "on"]
 foreign {
     // param-hint: pAdapter optional
     // param-hint: pSwapChainDesc optional
@@ -10129,11 +10366,9 @@ foreign {
     func D3D10CreateDeviceAndSwapChain1(pAdapter: CPointer<Unit>, DriverType: Int32, Software: CPointer<Unit>, Flags: UInt32, HardwareLevel: Int32, SDKVersion: UInt32, pSwapChainDesc: CPointer<Win32__impl_l1.DXGI_SWAP_CHAIN_DESC>, ppSwapChain: CPointer<CPointer<Unit>>, ppDevice: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[D3D10_1 == "on" && Windows_Win32_Graphics_Dxgi == "on"]
-foreign {
-    // param-hint: pAdapter optional
-    // param-hint: ppDevice optional
-    func D3D10CreateDevice1(pAdapter: CPointer<Unit>, DriverType: Int32, Software: CPointer<Unit>, Flags: UInt32, HardwareLevel: Int32, SDKVersion: UInt32, ppDevice: CPointer<CPointer<Unit>>): Int32
+@When[Windows_Win32_Graphics_Direct3D10 == "on" && D3D10_1 == "on" && Windows_Win32_Graphics_Direct3D10_D3D10CreateDeviceAndSwapChain1 == "on" && Windows_Win32_Graphics_Dxgi == "on" && Windows_Win32_Graphics_Dxgi == "on" && Windows_Win32_Graphics_Dxgi_Common == "on"]
+public unsafe func Windows_D3D10CreateDeviceAndSwapChain1(pAdapter: CPointer<Unit>, DriverType: Int32, Software: CPointer<Unit>, Flags: UInt32, HardwareLevel: Int32, SDKVersion: UInt32, pSwapChainDesc: CPointer<Win32__impl_l1.DXGI_SWAP_CHAIN_DESC>, ppSwapChain: CPointer<CPointer<Unit>>, ppDevice: CPointer<CPointer<Unit>>): Int32 {
+    return D3D10CreateDeviceAndSwapChain1(pAdapter, DriverType, Software, Flags, HardwareLevel, SDKVersion, pSwapChainDesc, ppSwapChain, ppDevice)
 }
 
 @When[Windows_Win32_Graphics_Direct3D10 == "on"]

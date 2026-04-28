@@ -1476,6 +1476,7 @@ public class HingeAngleReading <: InterfaceWrapperBase & ComInterface & windows_
         return defaultInterface().AngleInDegrees()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         return defaultInterface().Properties()
     }
@@ -1686,6 +1687,7 @@ public class HumanPresenceFeatures <: InterfaceWrapperBase & ComInterface & wind
         return defaultInterface().SensorId()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedWakeOrLockDistancesInMillimeters(): windows_collections.IVectorView<UInt32> {
         return defaultInterface().SupportedWakeOrLockDistancesInMillimeters()
     }
@@ -2333,7 +2335,10 @@ extend IAccelerometerReading <: windows_core.Interface<IAccelerometerReading> {}
 public struct IAccelerometerReading2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var PerformanceCount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2410,6 +2415,7 @@ public class IAccelerometerReading2 <: InterfaceWrapperBase & ComInterface & Run
         return Foundation.IReference<windows_future.TimeSpan>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2902,7 +2908,10 @@ extend IAltimeterReading <: windows_core.Interface<IAltimeterReading> {}
 public struct IAltimeterReading2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var PerformanceCount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2979,6 +2988,7 @@ public class IAltimeterReading2 <: InterfaceWrapperBase & ComInterface & Runtime
         return Foundation.IReference<windows_future.TimeSpan>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3283,7 +3293,10 @@ extend IBarometerReading <: windows_core.Interface<IBarometerReading> {}
 public struct IBarometerReading2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var PerformanceCount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3360,6 +3373,7 @@ public class IBarometerReading2 <: InterfaceWrapperBase & ComInterface & Runtime
         return Foundation.IReference<windows_future.TimeSpan>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3858,7 +3872,10 @@ extend ICompassReading <: windows_core.Interface<ICompassReading> {}
 public struct ICompassReading2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var PerformanceCount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3935,6 +3952,7 @@ public class ICompassReading2 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return Foundation.IReference<windows_future.TimeSpan>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4559,7 +4577,10 @@ extend IGyrometerReading <: windows_core.Interface<IGyrometerReading> {}
 public struct IGyrometerReading2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var PerformanceCount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4636,6 +4657,7 @@ public class IGyrometerReading2 <: InterfaceWrapperBase & ComInterface & Runtime
         return Foundation.IReference<windows_future.TimeSpan>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4851,7 +4873,10 @@ public struct IHingeAngleReadingVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Timestamp: CFunc<(CPointer<Unit>, CPointer<windows_future.DateTimeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var AngleInDegrees: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4936,6 +4961,7 @@ public class IHingeAngleReading <: InterfaceWrapperBase & ComInterface & Runtime
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4953,7 +4979,10 @@ extend IHingeAngleReading <: windows_core.Interface<IHingeAngleReading> {}
 public struct IHumanPresenceFeaturesVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var SensorId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedWakeOrLockDistancesInMillimeters: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedWakeOrLockDistancesInMillimeters: UIntNative = UIntNative(0)
     public var IsWakeOnApproachSupported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsLockOnLeaveSupported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsAttentionAwareDimmingSupported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -5033,6 +5062,7 @@ public class IHumanPresenceFeatures <: InterfaceWrapperBase & ComInterface & Run
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedWakeOrLockDistancesInMillimeters(): windows_collections.IVectorView<UInt32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5570,7 +5600,10 @@ extend IHumanPresenceSensorReading <: windows_core.Interface<IHumanPresenceSenso
 @C
 public struct IHumanPresenceSensorReading2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -5639,6 +5672,7 @@ public class IHumanPresenceSensorReading2 <: InterfaceWrapperBase & ComInterface
         readVtbl<IHumanPresenceSensorReading2Vtbl>(IHumanPresenceSensorReading2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6607,7 +6641,10 @@ extend IInclinometerReading <: windows_core.Interface<IInclinometerReading> {}
 public struct IInclinometerReading2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var PerformanceCount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -6684,6 +6721,7 @@ public class IInclinometerReading2 <: InterfaceWrapperBase & ComInterface & Runt
         return Foundation.IReference<windows_future.TimeSpan>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7351,7 +7389,10 @@ extend ILightSensorReading <: windows_core.Interface<ILightSensorReading> {}
 public struct ILightSensorReading2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var PerformanceCount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -7428,6 +7469,7 @@ public class ILightSensorReading2 <: InterfaceWrapperBase & ComInterface & Runti
         return Foundation.IReference<windows_future.TimeSpan>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -8153,7 +8195,10 @@ extend IMagnetometerReading <: windows_core.Interface<IMagnetometerReading> {}
 public struct IMagnetometerReading2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var PerformanceCount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -8230,6 +8275,7 @@ public class IMagnetometerReading2 <: InterfaceWrapperBase & ComInterface & Runt
         return Foundation.IReference<windows_future.TimeSpan>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -8650,7 +8696,10 @@ extend IOrientationSensorDeviceId <: windows_core.Interface<IOrientationSensorDe
 public struct IOrientationSensorReading2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var PerformanceCount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -8727,6 +8776,7 @@ public class IOrientationSensorReading2 <: InterfaceWrapperBase & ComInterface &
         return Foundation.IReference<windows_future.TimeSpan>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

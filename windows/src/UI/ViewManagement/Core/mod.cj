@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_UI == "on"]
 import windows.UI as UI
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -1207,7 +1205,10 @@ extend CoreInputViewTransferringXYFocusEventArgs <: windows_core.HandleWinrtType
 @C
 public struct ICoreFrameworkInputViewAnimationStartingEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Occlusions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Occlusions: UIntNative = UIntNative(0)
     public var FrameworkAnimationRecommended: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var AnimationDuration: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -1278,6 +1279,7 @@ public class ICoreFrameworkInputViewAnimationStartingEventArgs <: InterfaceWrapp
         readVtbl<ICoreFrameworkInputViewAnimationStartingEventArgsVtbl>(ICoreFrameworkInputViewAnimationStartingEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Occlusions(): windows_collections.IVectorView<CoreInputViewOcclusion> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1310,7 +1312,10 @@ extend ICoreFrameworkInputViewAnimationStartingEventArgs <: windows_core.Interfa
 @C
 public struct ICoreFrameworkInputViewOcclusionsChangedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Occlusions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Occlusions: UIntNative = UIntNative(0)
     public var Handled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -1380,6 +1385,7 @@ public class ICoreFrameworkInputViewOcclusionsChangedEventArgs <: InterfaceWrapp
         readVtbl<ICoreFrameworkInputViewOcclusionsChangedEventArgsVtbl>(ICoreFrameworkInputViewOcclusionsChangedEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Occlusions(): windows_collections.IVectorView<CoreInputViewOcclusion> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1404,7 +1410,10 @@ extend ICoreFrameworkInputViewOcclusionsChangedEventArgs <: windows_core.Interfa
 @C
 public struct ICoreInputViewAnimationStartingEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Occlusions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Occlusions: UIntNative = UIntNative(0)
     public var Handled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetHandled: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var AnimationDuration: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1476,6 +1485,7 @@ public class ICoreInputViewAnimationStartingEventArgs <: InterfaceWrapperBase & 
         readVtbl<ICoreInputViewAnimationStartingEventArgsVtbl>(ICoreInputViewAnimationStartingEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Occlusions(): windows_collections.IVectorView<CoreInputViewOcclusion> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1514,7 +1524,10 @@ extend ICoreInputViewAnimationStartingEventArgs <: windows_core.Interface<ICoreI
 @C
 public struct ICoreInputViewOcclusionsChangedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Occlusions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Occlusions: UIntNative = UIntNative(0)
     public var Handled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetHandled: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -1585,6 +1598,7 @@ public class ICoreInputViewOcclusionsChangedEventArgs <: InterfaceWrapperBase & 
         readVtbl<ICoreInputViewOcclusionsChangedEventArgsVtbl>(ICoreInputViewOcclusionsChangedEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Occlusions(): windows_collections.IVectorView<CoreInputViewOcclusion> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1680,6 +1694,7 @@ public class CoreFrameworkInputViewAnimationStartingEventArgs <: InterfaceWrappe
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Occlusions(): windows_collections.IVectorView<CoreInputViewOcclusion> {
         return defaultInterface().Occlusions()
     }
@@ -1780,6 +1795,7 @@ public class CoreFrameworkInputViewOcclusionsChangedEventArgs <: InterfaceWrappe
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Occlusions(): windows_collections.IVectorView<CoreInputViewOcclusion> {
         return defaultInterface().Occlusions()
     }
@@ -1876,6 +1892,7 @@ public class CoreInputViewAnimationStartingEventArgs <: InterfaceWrapperBase & C
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Occlusions(): windows_collections.IVectorView<CoreInputViewOcclusion> {
         return defaultInterface().Occlusions()
     }
@@ -1980,6 +1997,7 @@ public class CoreInputViewOcclusionsChangedEventArgs <: InterfaceWrapperBase & C
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Occlusions(): windows_collections.IVectorView<CoreInputViewOcclusion> {
         return defaultInterface().Occlusions()
     }
@@ -2215,6 +2233,7 @@ public class CoreInputView <: InterfaceWrapperBase & ComInterface & windows_inte
         defaultInterface().RemoveOcclusionsChanged(token)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetCoreInputViewOcclusions(): windows_collections.IVectorView<CoreInputViewOcclusion> {
         return defaultInterface().GetCoreInputViewOcclusions()
     }
@@ -2481,7 +2500,10 @@ public struct ICoreInputViewVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var OcclusionsChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveOcclusionsChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetCoreInputViewOcclusions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetCoreInputViewOcclusions: UIntNative = UIntNative(0)
     public var TryShowPrimaryView: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var TryHidePrimaryView: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -2566,6 +2588,7 @@ public class ICoreInputView <: InterfaceWrapperBase & ComInterface & RuntimeName
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetCoreInputViewOcclusions(): windows_collections.IVectorView<CoreInputViewOcclusion> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

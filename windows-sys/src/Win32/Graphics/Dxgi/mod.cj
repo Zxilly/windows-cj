@@ -13,4 +13,15 @@ public import windows_sys.Win32._impl_l0.{DXGI_OUTPUT_DESC, DXGI_OUTPUT_DESC1}
 public import windows_sys.Win32._impl_l1.{DXGI_SWAP_CHAIN_DESC, DXGI_SWAP_CHAIN_DESC1}
 @When[Windows_Win32_Graphics_Dxgi == "on"]
 public import windows_sys.Win32._impl_l2.{IDXGIAdapter, IDXGIAdapter1, IDXGIAdapter1Vtbl, IDXGIAdapter2, IDXGIAdapter2Vtbl, IDXGIAdapter3, IDXGIAdapter3Vtbl, IDXGIAdapter4, IDXGIAdapter4Vtbl, IDXGIAdapterVtbl, IDXGIDevice, IDXGIDevice1, IDXGIDevice1Vtbl, IDXGIDevice2, IDXGIDevice2Vtbl, IDXGIDevice3, IDXGIDevice3Vtbl, IDXGIDevice4, IDXGIDevice4Vtbl, IDXGIDeviceVtbl, IDXGIFactory, IDXGIFactory1, IDXGIFactory1Vtbl, IDXGIFactory2, IDXGIFactory2Vtbl, IDXGIFactory3, IDXGIFactory3Vtbl, IDXGIFactory4, IDXGIFactory4Vtbl, IDXGIFactory5, IDXGIFactory5Vtbl, IDXGIFactory6, IDXGIFactory6Vtbl, IDXGIFactory7, IDXGIFactory7Vtbl, IDXGIFactoryMedia, IDXGIFactoryMediaVtbl, IDXGIFactoryVtbl, IDXGIInfoQueue, IDXGIInfoQueueVtbl, IDXGIKeyedMutex, IDXGIKeyedMutexVtbl, IDXGIOutput, IDXGIOutput1, IDXGIOutput1Vtbl, IDXGIOutput2, IDXGIOutput2Vtbl, IDXGIOutput3, IDXGIOutput3Vtbl, IDXGIOutput4, IDXGIOutput4Vtbl, IDXGIOutput5, IDXGIOutput5Vtbl, IDXGIOutput6, IDXGIOutput6Vtbl, IDXGIOutputDuplication, IDXGIOutputDuplicationVtbl, IDXGIOutputVtbl, IDXGIResource, IDXGIResource1, IDXGIResource1Vtbl, IDXGIResourceVtbl, IDXGISurface, IDXGISurface1, IDXGISurface1Vtbl, IDXGISurface2, IDXGISurface2Vtbl, IDXGISurfaceVtbl, IDXGISwapChain, IDXGISwapChain1, IDXGISwapChain1Vtbl, IDXGISwapChain2, IDXGISwapChain2Vtbl, IDXGISwapChain3, IDXGISwapChain3Vtbl, IDXGISwapChain4, IDXGISwapChain4Vtbl, IDXGISwapChainVtbl}
-
+@When[Windows_Win32_Graphics_Dxgi == "on" && DXGI == "on" && Windows_Win32_Graphics_Dxgi_CreateDXGIFactory == "on"]
+public import windows_sys.Win32._impl_l1.Windows_CreateDXGIFactory
+@When[Windows_Win32_Graphics_Dxgi == "on" && DXGI == "on" && Windows_Win32_Graphics_Dxgi_CreateDXGIFactory1 == "on"]
+public import windows_sys.Win32._impl_l1.Windows_CreateDXGIFactory1
+@When[Windows_Win32_Graphics_Dxgi == "on" && DXGI == "on" && Windows_Win32_Graphics_Dxgi_CreateDXGIFactory2 == "on"]
+public import windows_sys.Win32._impl_l1.Windows_CreateDXGIFactory2
+@When[Windows_Win32_Graphics_Dxgi == "on" && DXGI == "on" && Windows_Win32_Graphics_Dxgi_DXGIDeclareAdapterRemovalSupport == "on"]
+public import windows_sys.Win32._impl_l1.Windows_DXGIDeclareAdapterRemovalSupport
+@When[Windows_Win32_Graphics_Dxgi == "on" && DXGI == "on" && Windows_Win32_Graphics_Dxgi_DXGIDisableVBlankVirtualization == "on"]
+public import windows_sys.Win32._impl_l1.Windows_DXGIDisableVBlankVirtualization
+@When[Windows_Win32_Graphics_Dxgi == "on" && DXGI == "on" && Windows_Win32_Graphics_Dxgi_DXGIGetDebugInterface1 == "on"]
+public import windows_sys.Win32._impl_l1.Windows_DXGIGetDebugInterface1

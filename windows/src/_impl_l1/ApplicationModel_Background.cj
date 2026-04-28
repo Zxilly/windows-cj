@@ -97,7 +97,7 @@ public class ActivitySensorTrigger <: InterfaceWrapperBase & ComInterface & wind
         }
     }
 
-    @When[Windows_Devices_Sensors == "on"]
+    @When[Windows_Devices_Sensors == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func SubscribedActivities(): windows_collections.IVector<_impl_l0.ActivityType> {
         return defaultInterface().SubscribedActivities()
     }
@@ -106,7 +106,7 @@ public class ActivitySensorTrigger <: InterfaceWrapperBase & ComInterface & wind
         return defaultInterface().ReportInterval()
     }
 
-    @When[Windows_Devices_Sensors == "on"]
+    @When[Windows_Devices_Sensors == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func SupportedActivities(): windows_collections.IVectorView<_impl_l0.ActivityType> {
         return defaultInterface().SupportedActivities()
     }
@@ -856,12 +856,14 @@ public class BackgroundTaskCanceledEventHandler <: InterfaceWrapperBase & ComInt
 @When[Windows_ApplicationModel_Background == "on"]
 extend BackgroundTaskCanceledEventHandler <: windows_core.Interface<BackgroundTaskCanceledEventHandler> {}
 
+@When[Windows_ApplicationModel_Background == "on"]
 private open class BackgroundTaskCanceledEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: _impl_l0.BackgroundTaskCancellationReasonAbi): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_ApplicationModel_Background == "on"]
 private open class BackgroundTaskCanceledEventHandlerInvoker <: BackgroundTaskCanceledEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IBackgroundTaskInstance>, reason: _impl_l0.BackgroundTaskCancellationReason): Unit {
         ()
@@ -873,6 +875,7 @@ private open class BackgroundTaskCanceledEventHandlerInvoker <: BackgroundTaskCa
     }
 }
 
+@When[Windows_ApplicationModel_Background == "on"]
 private class BackgroundTaskCanceledEventHandlerBox <: BackgroundTaskCanceledEventHandlerInvoker {
     public let invoke_: (InParam<IBackgroundTaskInstance>, _impl_l0.BackgroundTaskCancellationReason) -> Unit
     private let vtblHandle: CPointerHandle<BackgroundTaskCanceledEventHandlerVtbl>
@@ -891,6 +894,7 @@ private class BackgroundTaskCanceledEventHandlerBox <: BackgroundTaskCanceledEve
     }
 }
 
+@When[Windows_ApplicationModel_Background == "on"]
 func buildBackgroundTaskCanceledEventHandlerBoxVtbl(): BackgroundTaskCanceledEventHandlerVtbl {
     var vtbl = BackgroundTaskCanceledEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -981,12 +985,14 @@ public class BackgroundTaskCompletedEventHandler <: InterfaceWrapperBase & ComIn
 @When[Windows_ApplicationModel_Background == "on"]
 extend BackgroundTaskCompletedEventHandler <: windows_core.Interface<BackgroundTaskCompletedEventHandler> {}
 
+@When[Windows_ApplicationModel_Background == "on"]
 private open class BackgroundTaskCompletedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_ApplicationModel_Background == "on"]
 private open class BackgroundTaskCompletedEventHandlerInvoker <: BackgroundTaskCompletedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<BackgroundTaskRegistration>, args: InParam<_impl_l0.BackgroundTaskCompletedEventArgs>): Unit {
         ()
@@ -998,6 +1004,7 @@ private open class BackgroundTaskCompletedEventHandlerInvoker <: BackgroundTaskC
     }
 }
 
+@When[Windows_ApplicationModel_Background == "on"]
 private class BackgroundTaskCompletedEventHandlerBox <: BackgroundTaskCompletedEventHandlerInvoker {
     public let invoke_: (InParam<BackgroundTaskRegistration>, InParam<_impl_l0.BackgroundTaskCompletedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<BackgroundTaskCompletedEventHandlerVtbl>
@@ -1016,6 +1023,7 @@ private class BackgroundTaskCompletedEventHandlerBox <: BackgroundTaskCompletedE
     }
 }
 
+@When[Windows_ApplicationModel_Background == "on"]
 func buildBackgroundTaskCompletedEventHandlerBoxVtbl(): BackgroundTaskCompletedEventHandlerVtbl {
     var vtbl = BackgroundTaskCompletedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -1106,12 +1114,14 @@ public class BackgroundTaskProgressEventHandler <: InterfaceWrapperBase & ComInt
 @When[Windows_ApplicationModel_Background == "on"]
 extend BackgroundTaskProgressEventHandler <: windows_core.Interface<BackgroundTaskProgressEventHandler> {}
 
+@When[Windows_ApplicationModel_Background == "on"]
 private open class BackgroundTaskProgressEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_ApplicationModel_Background == "on"]
 private open class BackgroundTaskProgressEventHandlerInvoker <: BackgroundTaskProgressEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<BackgroundTaskRegistration>, args: InParam<_impl_l0.BackgroundTaskProgressEventArgs>): Unit {
         ()
@@ -1123,6 +1133,7 @@ private open class BackgroundTaskProgressEventHandlerInvoker <: BackgroundTaskPr
     }
 }
 
+@When[Windows_ApplicationModel_Background == "on"]
 private class BackgroundTaskProgressEventHandlerBox <: BackgroundTaskProgressEventHandlerInvoker {
     public let invoke_: (InParam<BackgroundTaskRegistration>, InParam<_impl_l0.BackgroundTaskProgressEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<BackgroundTaskProgressEventHandlerVtbl>
@@ -1141,6 +1152,7 @@ private class BackgroundTaskProgressEventHandlerBox <: BackgroundTaskProgressEve
     }
 }
 
+@When[Windows_ApplicationModel_Background == "on"]
 func buildBackgroundTaskProgressEventHandlerBoxVtbl(): BackgroundTaskProgressEventHandlerVtbl {
     var vtbl = BackgroundTaskProgressEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -1274,6 +1286,7 @@ public class BackgroundTaskRegistration <: InterfaceWrapperBase & ComInterface &
         return asIBackgroundTaskRegistration3().TaskGroup()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func AllTaskGroups(): windows_collections.IMapView<windows_core.HString, BackgroundTaskRegistrationGroup> {
         var result__: Option<windows_collections.IMapView<windows_core.HString, BackgroundTaskRegistrationGroup>> = Option<windows_collections.IMapView<windows_core.HString, BackgroundTaskRegistrationGroup>>.None
         try (factory__ = windows_core.factory<BackgroundTaskRegistration, IBackgroundTaskRegistrationStatics2>().unwrap()) {
@@ -1296,6 +1309,7 @@ public class BackgroundTaskRegistration <: InterfaceWrapperBase & ComInterface &
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func AllTasks(): windows_collections.IMapView<GuidValue, IBackgroundTaskRegistration> {
         var result__: Option<windows_collections.IMapView<GuidValue, IBackgroundTaskRegistration>> = Option<windows_collections.IMapView<GuidValue, IBackgroundTaskRegistration>>.None
         try (factory__ = windows_core.factory<BackgroundTaskRegistration, IBackgroundTaskRegistrationStatics>().unwrap()) {
@@ -1412,6 +1426,7 @@ public class BackgroundTaskRegistrationGroup <: InterfaceWrapperBase & ComInterf
         defaultInterface().RemoveBackgroundActivated(token)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AllTasks(): windows_collections.IMapView<GuidValue, BackgroundTaskRegistration> {
         return defaultInterface().AllTasks()
     }
@@ -5933,7 +5948,10 @@ public struct IBackgroundTaskRegistrationGroupVtbl {
     @When[Windows_ApplicationModel_Activation != "on"]
     public var BackgroundActivated: UIntNative = UIntNative(0)
     public var RemoveBackgroundActivated: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var AllTasks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AllTasks: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -6033,6 +6051,7 @@ public class IBackgroundTaskRegistrationGroup <: InterfaceWrapperBase & ComInter
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AllTasks(): windows_collections.IMapView<GuidValue, BackgroundTaskRegistration> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6143,7 +6162,10 @@ extend IBackgroundTaskRegistrationGroupFactory <: windows_core.Interface<IBackgr
 @C
 public struct IBackgroundTaskRegistrationStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AllTasks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AllTasks: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -6212,6 +6234,7 @@ public class IBackgroundTaskRegistrationStatics <: InterfaceWrapperBase & ComInt
         readVtbl<IBackgroundTaskRegistrationStaticsVtbl>(IBackgroundTaskRegistrationStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AllTasks(): windows_collections.IMapView<GuidValue, IBackgroundTaskRegistration> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6228,7 +6251,10 @@ extend IBackgroundTaskRegistrationStatics <: windows_core.Interface<IBackgroundT
 @C
 public struct IBackgroundTaskRegistrationStatics2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AllTaskGroups: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AllTaskGroups: UIntNative = UIntNative(0)
     public var GetTaskGroup: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -6298,6 +6324,7 @@ public class IBackgroundTaskRegistrationStatics2 <: InterfaceWrapperBase & ComIn
         readVtbl<IBackgroundTaskRegistrationStatics2Vtbl>(IBackgroundTaskRegistrationStatics2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AllTaskGroups(): windows_collections.IMapView<windows_core.HString, BackgroundTaskRegistrationGroup> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -8461,9 +8488,9 @@ public struct IStorageLibraryContentChangedTriggerStaticsVtbl {
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_Storage != "on"]
     public var Create: UIntNative = UIntNative(0)
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var CreateFromLibraries: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage != "on"]
     public var CreateFromLibraries: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -8542,7 +8569,7 @@ public class IStorageLibraryContentChangedTriggerStatics <: InterfaceWrapperBase
         return StorageLibraryContentChangedTrigger.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func CreateFromLibraries(storageLibraries: windows_collections.IIterable<StorageLibrary>): StorageLibraryContentChangedTrigger {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -10316,7 +10343,7 @@ public class StorageLibraryContentChangedTrigger <: InterfaceWrapperBase & ComIn
         }
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public static unsafe func CreateFromLibraries(storageLibraries: windows_collections.IIterable<StorageLibrary>): StorageLibraryContentChangedTrigger {
         var result__: Option<StorageLibraryContentChangedTrigger> = Option<StorageLibraryContentChangedTrigger>.None
         try (factory__ = windows_core.factory<StorageLibraryContentChangedTrigger, IStorageLibraryContentChangedTriggerStatics>().unwrap()) {

@@ -5,7 +5,6 @@ import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrap
 import windows_interface as windows_interface
 import windows_polyfill.{packedReadFloat32, packedReadInt32, packedReadIntNative, packedReadUInt16, packedReadUInt32, packedReadUIntNative, packedReadValue, packedWriteFloat32, packedWriteInt32, packedWriteIntNative, packedWriteUInt16, packedWriteUInt32, packedWriteUIntNative, packedWriteValue, unionReadUInt16, unionReadUInt32, unionWriteUInt16, unionWriteUInt32}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
@@ -5227,284 +5226,1674 @@ public struct AUXCAPSW {
     public init() {}
 }
 
-@When[MMDEVAPI == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on")]
+@When[Windows_Win32_Media_Audio == "on" && MMDEVAPI == "on" && Windows_Win32_Media_Audio_ActivateAudioInterfaceAsync == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
 foreign {
     // param-hint: activationParams optional
     func ActivateAudioInterfaceAsync(deviceInterfacePath: CPointer<UInt16>, riid: CPointer<GUID>, activationParams: CPointer<Win32__impl_l2.PROPVARIANT>, completionHandler: CPointer<Unit>, activationOperation: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[MSACM32 == "on"]
+@When[Windows_Win32_Media_Audio == "on" && MMDEVAPI == "on" && Windows_Win32_Media_Audio_ActivateAudioInterfaceAsync == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_ActivateAudioInterfaceAsync(deviceInterfacePath: CPointer<UInt16>, riid: CPointer<GUID>, activationParams: CPointer<Win32__impl_l2.PROPVARIANT>, completionHandler: CPointer<Unit>, activationOperation: CPointer<CPointer<Unit>>): Int32 {
+    return ActivateAudioInterfaceAsync(deviceInterfacePath, riid, activationParams, completionHandler, activationOperation)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmDriverAddA == "on"]
 foreign {
     func acmDriverAddA(phadid: CPointer<HACMDRIVERID>, hinstModule: CPointer<Unit>, lParam: IntNative, dwPriority: UInt32, fdwAdd: UInt32): UInt32
-    func acmDriverAddW(phadid: CPointer<HACMDRIVERID>, hinstModule: CPointer<Unit>, lParam: IntNative, dwPriority: UInt32, fdwAdd: UInt32): UInt32
-    func acmDriverClose(had: HACMDRIVER, fdwClose: UInt32): UInt32
-    func acmDriverEnum(fnCallback: ACMDRIVERENUMCB, dwInstance: UIntNative, fdwEnum: UInt32): UInt32
-    func acmDriverID(hao: HACMOBJ, phadid: CPointer<HACMDRIVERID>, fdwDriverID: UInt32): UInt32
-    func acmDriverMessage(had: HACMDRIVER, uMsg: UInt32, lParam1: IntNative, lParam2: IntNative): IntNative
-    func acmDriverOpen(phad: CPointer<HACMDRIVER>, hadid: HACMDRIVERID, fdwOpen: UInt32): UInt32
-    func acmDriverPriority(hadid: HACMDRIVERID, dwPriority: UInt32, fdwPriority: UInt32): UInt32
-    func acmDriverRemove(hadid: HACMDRIVERID, fdwRemove: UInt32): UInt32
-    func acmFilterChooseA(pafltrc: CPointer<ACMFILTERCHOOSEA>): UInt32
-    func acmFilterChooseW(pafltrc: CPointer<ACMFILTERCHOOSEW>): UInt32
-    func acmFilterDetailsA(had: HACMDRIVER, pafd: CPointer<ACMFILTERDETAILSA>, fdwDetails: UInt32): UInt32
-    func acmFilterDetailsW(had: HACMDRIVER, pafd: CPointer<ACMFILTERDETAILSW>, fdwDetails: UInt32): UInt32
-    func acmFilterEnumA(had: HACMDRIVER, pafd: CPointer<ACMFILTERDETAILSA>, fnCallback: ACMFILTERENUMCBA, dwInstance: UIntNative, fdwEnum: UInt32): UInt32
-    func acmFilterEnumW(had: HACMDRIVER, pafd: CPointer<ACMFILTERDETAILSW>, fnCallback: ACMFILTERENUMCBW, dwInstance: UIntNative, fdwEnum: UInt32): UInt32
-    func acmFilterTagDetailsA(had: HACMDRIVER, paftd: CPointer<ACMFILTERTAGDETAILSA>, fdwDetails: UInt32): UInt32
-    func acmFilterTagDetailsW(had: HACMDRIVER, paftd: CPointer<ACMFILTERTAGDETAILSW>, fdwDetails: UInt32): UInt32
-    func acmFilterTagEnumA(had: HACMDRIVER, paftd: CPointer<ACMFILTERTAGDETAILSA>, fnCallback: ACMFILTERTAGENUMCBA, dwInstance: UIntNative, fdwEnum: UInt32): UInt32
-    func acmFilterTagEnumW(had: HACMDRIVER, paftd: CPointer<ACMFILTERTAGDETAILSW>, fnCallback: ACMFILTERTAGENUMCBW, dwInstance: UIntNative, fdwEnum: UInt32): UInt32
-    func acmFormatChooseA(pafmtc: CPointer<ACMFORMATCHOOSEA>): UInt32
-    func acmFormatChooseW(pafmtc: CPointer<ACMFORMATCHOOSEW>): UInt32
-    func acmFormatDetailsA(had: HACMDRIVER, pafd: CPointer<ACMFORMATDETAILSA>, fdwDetails: UInt32): UInt32
-    func acmFormatDetailsW(had: HACMDRIVER, pafd: CPointer<tACMFORMATDETAILSW>, fdwDetails: UInt32): UInt32
-    func acmFormatEnumA(had: HACMDRIVER, pafd: CPointer<ACMFORMATDETAILSA>, fnCallback: ACMFORMATENUMCBA, dwInstance: UIntNative, fdwEnum: UInt32): UInt32
-    func acmFormatEnumW(had: HACMDRIVER, pafd: CPointer<tACMFORMATDETAILSW>, fnCallback: ACMFORMATENUMCBW, dwInstance: UIntNative, fdwEnum: UInt32): UInt32
-    func acmFormatSuggest(had: HACMDRIVER, pwfxSrc: CPointer<WAVEFORMATEX>, pwfxDst: CPointer<WAVEFORMATEX>, cbwfxDst: UInt32, fdwSuggest: UInt32): UInt32
-    func acmFormatTagDetailsA(had: HACMDRIVER, paftd: CPointer<ACMFORMATTAGDETAILSA>, fdwDetails: UInt32): UInt32
-    func acmFormatTagDetailsW(had: HACMDRIVER, paftd: CPointer<ACMFORMATTAGDETAILSW>, fdwDetails: UInt32): UInt32
-    func acmFormatTagEnumA(had: HACMDRIVER, paftd: CPointer<ACMFORMATTAGDETAILSA>, fnCallback: ACMFORMATTAGENUMCBA, dwInstance: UIntNative, fdwEnum: UInt32): UInt32
-    func acmFormatTagEnumW(had: HACMDRIVER, paftd: CPointer<ACMFORMATTAGDETAILSW>, fnCallback: ACMFORMATTAGENUMCBW, dwInstance: UIntNative, fdwEnum: UInt32): UInt32
-    func acmGetVersion(): UInt32
-    func acmMetrics(hao: HACMOBJ, uMetric: UInt32, pMetric: CPointer<Unit>): UInt32
-    func acmStreamClose(has: HACMSTREAM, fdwClose: UInt32): UInt32
-    func acmStreamMessage(has: HACMSTREAM, uMsg: UInt32, lParam1: IntNative, lParam2: IntNative): UInt32
-    func acmStreamOpen(phas: CPointer<HACMSTREAM>, had: HACMDRIVER, pwfxSrc: CPointer<WAVEFORMATEX>, pwfxDst: CPointer<WAVEFORMATEX>, pwfltr: CPointer<WAVEFILTER>, dwCallback: UIntNative, dwInstance: UIntNative, fdwOpen: UInt32): UInt32
-    func acmStreamReset(has: HACMSTREAM, fdwReset: UInt32): UInt32
-    func acmStreamSize(has: HACMSTREAM, cbInput: UInt32, pdwOutputBytes: CPointer<UInt32>, fdwSize: UInt32): UInt32
 }
 
-@When[MSACM32 == "on" && ((arch == "x86_64" || arch == "aarch64"))]
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmDriverAddA == "on"]
+public unsafe func Windows_acmDriverAddA(phadid: CPointer<HACMDRIVERID>, hinstModule: CPointer<Unit>, lParam: IntNative, dwPriority: UInt32, fdwAdd: UInt32): UInt32 {
+    return acmDriverAddA(phadid, hinstModule, lParam, dwPriority, fdwAdd)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmDriverAddW == "on"]
 foreign {
-    func acmStreamConvert(has: HACMSTREAM, pash: CPointer<ACMSTREAMHEADER>, fdwConvert: UInt32): UInt32
-    func acmStreamPrepareHeader(has: HACMSTREAM, pash: CPointer<ACMSTREAMHEADER>, fdwPrepare: UInt32): UInt32
-    func acmStreamUnprepareHeader(has: HACMSTREAM, pash: CPointer<ACMSTREAMHEADER>, fdwUnprepare: UInt32): UInt32
+    func acmDriverAddW(phadid: CPointer<HACMDRIVERID>, hinstModule: CPointer<Unit>, lParam: IntNative, dwPriority: UInt32, fdwAdd: UInt32): UInt32
 }
 
-@When[MSACM32 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmDriverAddW == "on"]
+public unsafe func Windows_acmDriverAddW(phadid: CPointer<HACMDRIVERID>, hinstModule: CPointer<Unit>, lParam: IntNative, dwPriority: UInt32, fdwAdd: UInt32): UInt32 {
+    return acmDriverAddW(phadid, hinstModule, lParam, dwPriority, fdwAdd)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmDriverClose == "on"]
+foreign {
+    func acmDriverClose(had: HACMDRIVER, fdwClose: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmDriverClose == "on"]
+public unsafe func Windows_acmDriverClose(had: HACMDRIVER, fdwClose: UInt32): UInt32 {
+    return acmDriverClose(had, fdwClose)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmDriverDetailsA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
     func acmDriverDetailsA(hadid: HACMDRIVERID, padd: CPointer<ACMDRIVERDETAILSA>, fdwDetails: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmDriverDetailsA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_acmDriverDetailsA(hadid: HACMDRIVERID, padd: CPointer<ACMDRIVERDETAILSA>, fdwDetails: UInt32): UInt32 {
+    return acmDriverDetailsA(hadid, padd, fdwDetails)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmDriverDetailsW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
     func acmDriverDetailsW(hadid: HACMDRIVERID, padd: CPointer<ACMDRIVERDETAILSW>, fdwDetails: UInt32): UInt32
 }
 
-@When[OLE32 == "on"]
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmDriverDetailsW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_acmDriverDetailsW(hadid: HACMDRIVERID, padd: CPointer<ACMDRIVERDETAILSW>, fdwDetails: UInt32): UInt32 {
+    return acmDriverDetailsW(hadid, padd, fdwDetails)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmDriverEnum == "on"]
+foreign {
+    func acmDriverEnum(fnCallback: ACMDRIVERENUMCB, dwInstance: UIntNative, fdwEnum: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmDriverEnum == "on"]
+public unsafe func Windows_acmDriverEnum(fnCallback: ACMDRIVERENUMCB, dwInstance: UIntNative, fdwEnum: UInt32): UInt32 {
+    return acmDriverEnum(fnCallback, dwInstance, fdwEnum)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmDriverID == "on"]
+foreign {
+    func acmDriverID(hao: HACMOBJ, phadid: CPointer<HACMDRIVERID>, fdwDriverID: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmDriverID == "on"]
+public unsafe func Windows_acmDriverID(hao: HACMOBJ, phadid: CPointer<HACMDRIVERID>, fdwDriverID: UInt32): UInt32 {
+    return acmDriverID(hao, phadid, fdwDriverID)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmDriverMessage == "on"]
+foreign {
+    func acmDriverMessage(had: HACMDRIVER, uMsg: UInt32, lParam1: IntNative, lParam2: IntNative): IntNative
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmDriverMessage == "on"]
+public unsafe func Windows_acmDriverMessage(had: HACMDRIVER, uMsg: UInt32, lParam1: IntNative, lParam2: IntNative): IntNative {
+    return acmDriverMessage(had, uMsg, lParam1, lParam2)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmDriverOpen == "on"]
+foreign {
+    func acmDriverOpen(phad: CPointer<HACMDRIVER>, hadid: HACMDRIVERID, fdwOpen: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmDriverOpen == "on"]
+public unsafe func Windows_acmDriverOpen(phad: CPointer<HACMDRIVER>, hadid: HACMDRIVERID, fdwOpen: UInt32): UInt32 {
+    return acmDriverOpen(phad, hadid, fdwOpen)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmDriverPriority == "on"]
+foreign {
+    func acmDriverPriority(hadid: HACMDRIVERID, dwPriority: UInt32, fdwPriority: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmDriverPriority == "on"]
+public unsafe func Windows_acmDriverPriority(hadid: HACMDRIVERID, dwPriority: UInt32, fdwPriority: UInt32): UInt32 {
+    return acmDriverPriority(hadid, dwPriority, fdwPriority)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmDriverRemove == "on"]
+foreign {
+    func acmDriverRemove(hadid: HACMDRIVERID, fdwRemove: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmDriverRemove == "on"]
+public unsafe func Windows_acmDriverRemove(hadid: HACMDRIVERID, fdwRemove: UInt32): UInt32 {
+    return acmDriverRemove(hadid, fdwRemove)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFilterChooseA == "on"]
+foreign {
+    func acmFilterChooseA(pafltrc: CPointer<ACMFILTERCHOOSEA>): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFilterChooseA == "on"]
+public unsafe func Windows_acmFilterChooseA(pafltrc: CPointer<ACMFILTERCHOOSEA>): UInt32 {
+    return acmFilterChooseA(pafltrc)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFilterChooseW == "on"]
+foreign {
+    func acmFilterChooseW(pafltrc: CPointer<ACMFILTERCHOOSEW>): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFilterChooseW == "on"]
+public unsafe func Windows_acmFilterChooseW(pafltrc: CPointer<ACMFILTERCHOOSEW>): UInt32 {
+    return acmFilterChooseW(pafltrc)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFilterDetailsA == "on"]
+foreign {
+    func acmFilterDetailsA(had: HACMDRIVER, pafd: CPointer<ACMFILTERDETAILSA>, fdwDetails: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFilterDetailsA == "on"]
+public unsafe func Windows_acmFilterDetailsA(had: HACMDRIVER, pafd: CPointer<ACMFILTERDETAILSA>, fdwDetails: UInt32): UInt32 {
+    return acmFilterDetailsA(had, pafd, fdwDetails)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFilterDetailsW == "on"]
+foreign {
+    func acmFilterDetailsW(had: HACMDRIVER, pafd: CPointer<ACMFILTERDETAILSW>, fdwDetails: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFilterDetailsW == "on"]
+public unsafe func Windows_acmFilterDetailsW(had: HACMDRIVER, pafd: CPointer<ACMFILTERDETAILSW>, fdwDetails: UInt32): UInt32 {
+    return acmFilterDetailsW(had, pafd, fdwDetails)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFilterEnumA == "on"]
+foreign {
+    func acmFilterEnumA(had: HACMDRIVER, pafd: CPointer<ACMFILTERDETAILSA>, fnCallback: ACMFILTERENUMCBA, dwInstance: UIntNative, fdwEnum: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFilterEnumA == "on"]
+public unsafe func Windows_acmFilterEnumA(had: HACMDRIVER, pafd: CPointer<ACMFILTERDETAILSA>, fnCallback: ACMFILTERENUMCBA, dwInstance: UIntNative, fdwEnum: UInt32): UInt32 {
+    return acmFilterEnumA(had, pafd, fnCallback, dwInstance, fdwEnum)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFilterEnumW == "on"]
+foreign {
+    func acmFilterEnumW(had: HACMDRIVER, pafd: CPointer<ACMFILTERDETAILSW>, fnCallback: ACMFILTERENUMCBW, dwInstance: UIntNative, fdwEnum: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFilterEnumW == "on"]
+public unsafe func Windows_acmFilterEnumW(had: HACMDRIVER, pafd: CPointer<ACMFILTERDETAILSW>, fnCallback: ACMFILTERENUMCBW, dwInstance: UIntNative, fdwEnum: UInt32): UInt32 {
+    return acmFilterEnumW(had, pafd, fnCallback, dwInstance, fdwEnum)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFilterTagDetailsA == "on"]
+foreign {
+    func acmFilterTagDetailsA(had: HACMDRIVER, paftd: CPointer<ACMFILTERTAGDETAILSA>, fdwDetails: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFilterTagDetailsA == "on"]
+public unsafe func Windows_acmFilterTagDetailsA(had: HACMDRIVER, paftd: CPointer<ACMFILTERTAGDETAILSA>, fdwDetails: UInt32): UInt32 {
+    return acmFilterTagDetailsA(had, paftd, fdwDetails)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFilterTagDetailsW == "on"]
+foreign {
+    func acmFilterTagDetailsW(had: HACMDRIVER, paftd: CPointer<ACMFILTERTAGDETAILSW>, fdwDetails: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFilterTagDetailsW == "on"]
+public unsafe func Windows_acmFilterTagDetailsW(had: HACMDRIVER, paftd: CPointer<ACMFILTERTAGDETAILSW>, fdwDetails: UInt32): UInt32 {
+    return acmFilterTagDetailsW(had, paftd, fdwDetails)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFilterTagEnumA == "on"]
+foreign {
+    func acmFilterTagEnumA(had: HACMDRIVER, paftd: CPointer<ACMFILTERTAGDETAILSA>, fnCallback: ACMFILTERTAGENUMCBA, dwInstance: UIntNative, fdwEnum: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFilterTagEnumA == "on"]
+public unsafe func Windows_acmFilterTagEnumA(had: HACMDRIVER, paftd: CPointer<ACMFILTERTAGDETAILSA>, fnCallback: ACMFILTERTAGENUMCBA, dwInstance: UIntNative, fdwEnum: UInt32): UInt32 {
+    return acmFilterTagEnumA(had, paftd, fnCallback, dwInstance, fdwEnum)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFilterTagEnumW == "on"]
+foreign {
+    func acmFilterTagEnumW(had: HACMDRIVER, paftd: CPointer<ACMFILTERTAGDETAILSW>, fnCallback: ACMFILTERTAGENUMCBW, dwInstance: UIntNative, fdwEnum: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFilterTagEnumW == "on"]
+public unsafe func Windows_acmFilterTagEnumW(had: HACMDRIVER, paftd: CPointer<ACMFILTERTAGDETAILSW>, fnCallback: ACMFILTERTAGENUMCBW, dwInstance: UIntNative, fdwEnum: UInt32): UInt32 {
+    return acmFilterTagEnumW(had, paftd, fnCallback, dwInstance, fdwEnum)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFormatChooseA == "on"]
+foreign {
+    func acmFormatChooseA(pafmtc: CPointer<ACMFORMATCHOOSEA>): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFormatChooseA == "on"]
+public unsafe func Windows_acmFormatChooseA(pafmtc: CPointer<ACMFORMATCHOOSEA>): UInt32 {
+    return acmFormatChooseA(pafmtc)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFormatChooseW == "on"]
+foreign {
+    func acmFormatChooseW(pafmtc: CPointer<ACMFORMATCHOOSEW>): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFormatChooseW == "on"]
+public unsafe func Windows_acmFormatChooseW(pafmtc: CPointer<ACMFORMATCHOOSEW>): UInt32 {
+    return acmFormatChooseW(pafmtc)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFormatDetailsA == "on"]
+foreign {
+    func acmFormatDetailsA(had: HACMDRIVER, pafd: CPointer<ACMFORMATDETAILSA>, fdwDetails: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFormatDetailsA == "on"]
+public unsafe func Windows_acmFormatDetailsA(had: HACMDRIVER, pafd: CPointer<ACMFORMATDETAILSA>, fdwDetails: UInt32): UInt32 {
+    return acmFormatDetailsA(had, pafd, fdwDetails)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFormatDetailsW == "on"]
+foreign {
+    func acmFormatDetailsW(had: HACMDRIVER, pafd: CPointer<tACMFORMATDETAILSW>, fdwDetails: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFormatDetailsW == "on"]
+public unsafe func Windows_acmFormatDetailsW(had: HACMDRIVER, pafd: CPointer<tACMFORMATDETAILSW>, fdwDetails: UInt32): UInt32 {
+    return acmFormatDetailsW(had, pafd, fdwDetails)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFormatEnumA == "on"]
+foreign {
+    func acmFormatEnumA(had: HACMDRIVER, pafd: CPointer<ACMFORMATDETAILSA>, fnCallback: ACMFORMATENUMCBA, dwInstance: UIntNative, fdwEnum: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFormatEnumA == "on"]
+public unsafe func Windows_acmFormatEnumA(had: HACMDRIVER, pafd: CPointer<ACMFORMATDETAILSA>, fnCallback: ACMFORMATENUMCBA, dwInstance: UIntNative, fdwEnum: UInt32): UInt32 {
+    return acmFormatEnumA(had, pafd, fnCallback, dwInstance, fdwEnum)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFormatEnumW == "on"]
+foreign {
+    func acmFormatEnumW(had: HACMDRIVER, pafd: CPointer<tACMFORMATDETAILSW>, fnCallback: ACMFORMATENUMCBW, dwInstance: UIntNative, fdwEnum: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFormatEnumW == "on"]
+public unsafe func Windows_acmFormatEnumW(had: HACMDRIVER, pafd: CPointer<tACMFORMATDETAILSW>, fnCallback: ACMFORMATENUMCBW, dwInstance: UIntNative, fdwEnum: UInt32): UInt32 {
+    return acmFormatEnumW(had, pafd, fnCallback, dwInstance, fdwEnum)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFormatSuggest == "on"]
+foreign {
+    func acmFormatSuggest(had: HACMDRIVER, pwfxSrc: CPointer<WAVEFORMATEX>, pwfxDst: CPointer<WAVEFORMATEX>, cbwfxDst: UInt32, fdwSuggest: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFormatSuggest == "on"]
+public unsafe func Windows_acmFormatSuggest(had: HACMDRIVER, pwfxSrc: CPointer<WAVEFORMATEX>, pwfxDst: CPointer<WAVEFORMATEX>, cbwfxDst: UInt32, fdwSuggest: UInt32): UInt32 {
+    return acmFormatSuggest(had, pwfxSrc, pwfxDst, cbwfxDst, fdwSuggest)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFormatTagDetailsA == "on"]
+foreign {
+    func acmFormatTagDetailsA(had: HACMDRIVER, paftd: CPointer<ACMFORMATTAGDETAILSA>, fdwDetails: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFormatTagDetailsA == "on"]
+public unsafe func Windows_acmFormatTagDetailsA(had: HACMDRIVER, paftd: CPointer<ACMFORMATTAGDETAILSA>, fdwDetails: UInt32): UInt32 {
+    return acmFormatTagDetailsA(had, paftd, fdwDetails)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFormatTagDetailsW == "on"]
+foreign {
+    func acmFormatTagDetailsW(had: HACMDRIVER, paftd: CPointer<ACMFORMATTAGDETAILSW>, fdwDetails: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFormatTagDetailsW == "on"]
+public unsafe func Windows_acmFormatTagDetailsW(had: HACMDRIVER, paftd: CPointer<ACMFORMATTAGDETAILSW>, fdwDetails: UInt32): UInt32 {
+    return acmFormatTagDetailsW(had, paftd, fdwDetails)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFormatTagEnumA == "on"]
+foreign {
+    func acmFormatTagEnumA(had: HACMDRIVER, paftd: CPointer<ACMFORMATTAGDETAILSA>, fnCallback: ACMFORMATTAGENUMCBA, dwInstance: UIntNative, fdwEnum: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFormatTagEnumA == "on"]
+public unsafe func Windows_acmFormatTagEnumA(had: HACMDRIVER, paftd: CPointer<ACMFORMATTAGDETAILSA>, fnCallback: ACMFORMATTAGENUMCBA, dwInstance: UIntNative, fdwEnum: UInt32): UInt32 {
+    return acmFormatTagEnumA(had, paftd, fnCallback, dwInstance, fdwEnum)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFormatTagEnumW == "on"]
+foreign {
+    func acmFormatTagEnumW(had: HACMDRIVER, paftd: CPointer<ACMFORMATTAGDETAILSW>, fnCallback: ACMFORMATTAGENUMCBW, dwInstance: UIntNative, fdwEnum: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFormatTagEnumW == "on"]
+public unsafe func Windows_acmFormatTagEnumW(had: HACMDRIVER, paftd: CPointer<ACMFORMATTAGDETAILSW>, fnCallback: ACMFORMATTAGENUMCBW, dwInstance: UIntNative, fdwEnum: UInt32): UInt32 {
+    return acmFormatTagEnumW(had, paftd, fnCallback, dwInstance, fdwEnum)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmGetVersion == "on"]
+foreign {
+    func acmGetVersion(): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmGetVersion == "on"]
+public unsafe func Windows_acmGetVersion(): UInt32 {
+    return acmGetVersion()
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmMetrics == "on"]
+foreign {
+    func acmMetrics(hao: HACMOBJ, uMetric: UInt32, pMetric: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmMetrics == "on"]
+public unsafe func Windows_acmMetrics(hao: HACMOBJ, uMetric: UInt32, pMetric: CPointer<Unit>): UInt32 {
+    return acmMetrics(hao, uMetric, pMetric)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmStreamClose == "on"]
+foreign {
+    func acmStreamClose(has: HACMSTREAM, fdwClose: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmStreamClose == "on"]
+public unsafe func Windows_acmStreamClose(has: HACMSTREAM, fdwClose: UInt32): UInt32 {
+    return acmStreamClose(has, fdwClose)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmStreamConvert == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func acmStreamConvert(has: HACMSTREAM, pash: CPointer<ACMSTREAMHEADER>, fdwConvert: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmStreamConvert == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_acmStreamConvert(has: HACMSTREAM, pash: CPointer<ACMSTREAMHEADER>, fdwConvert: UInt32): UInt32 {
+    return acmStreamConvert(has, pash, fdwConvert)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmStreamMessage == "on"]
+foreign {
+    func acmStreamMessage(has: HACMSTREAM, uMsg: UInt32, lParam1: IntNative, lParam2: IntNative): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmStreamMessage == "on"]
+public unsafe func Windows_acmStreamMessage(has: HACMSTREAM, uMsg: UInt32, lParam1: IntNative, lParam2: IntNative): UInt32 {
+    return acmStreamMessage(has, uMsg, lParam1, lParam2)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmStreamOpen == "on"]
+foreign {
+    func acmStreamOpen(phas: CPointer<HACMSTREAM>, had: HACMDRIVER, pwfxSrc: CPointer<WAVEFORMATEX>, pwfxDst: CPointer<WAVEFORMATEX>, pwfltr: CPointer<WAVEFILTER>, dwCallback: UIntNative, dwInstance: UIntNative, fdwOpen: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmStreamOpen == "on"]
+public unsafe func Windows_acmStreamOpen(phas: CPointer<HACMSTREAM>, had: HACMDRIVER, pwfxSrc: CPointer<WAVEFORMATEX>, pwfxDst: CPointer<WAVEFORMATEX>, pwfltr: CPointer<WAVEFILTER>, dwCallback: UIntNative, dwInstance: UIntNative, fdwOpen: UInt32): UInt32 {
+    return acmStreamOpen(phas, had, pwfxSrc, pwfxDst, pwfltr, dwCallback, dwInstance, fdwOpen)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmStreamPrepareHeader == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func acmStreamPrepareHeader(has: HACMSTREAM, pash: CPointer<ACMSTREAMHEADER>, fdwPrepare: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmStreamPrepareHeader == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_acmStreamPrepareHeader(has: HACMSTREAM, pash: CPointer<ACMSTREAMHEADER>, fdwPrepare: UInt32): UInt32 {
+    return acmStreamPrepareHeader(has, pash, fdwPrepare)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmStreamReset == "on"]
+foreign {
+    func acmStreamReset(has: HACMSTREAM, fdwReset: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmStreamReset == "on"]
+public unsafe func Windows_acmStreamReset(has: HACMSTREAM, fdwReset: UInt32): UInt32 {
+    return acmStreamReset(has, fdwReset)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmStreamSize == "on"]
+foreign {
+    func acmStreamSize(has: HACMSTREAM, cbInput: UInt32, pdwOutputBytes: CPointer<UInt32>, fdwSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmStreamSize == "on"]
+public unsafe func Windows_acmStreamSize(has: HACMSTREAM, cbInput: UInt32, pdwOutputBytes: CPointer<UInt32>, fdwSize: UInt32): UInt32 {
+    return acmStreamSize(has, cbInput, pdwOutputBytes, fdwSize)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmStreamUnprepareHeader == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func acmStreamUnprepareHeader(has: HACMSTREAM, pash: CPointer<ACMSTREAMHEADER>, fdwUnprepare: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmStreamUnprepareHeader == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_acmStreamUnprepareHeader(has: HACMSTREAM, pash: CPointer<ACMSTREAMHEADER>, fdwUnprepare: UInt32): UInt32 {
+    return acmStreamUnprepareHeader(has, pash, fdwUnprepare)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && OLE32 == "on" && Windows_Win32_Media_Audio_CoRegisterMessageFilter == "on"]
 foreign {
     // param-hint: lpMessageFilter optional
     // param-hint: lplpMessageFilter optional
     func CoRegisterMessageFilter(lpMessageFilter: CPointer<Unit>, lplpMessageFilter: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[WINMM == "on"]
+@When[Windows_Win32_Media_Audio == "on" && OLE32 == "on" && Windows_Win32_Media_Audio_CoRegisterMessageFilter == "on"]
+public unsafe func Windows_CoRegisterMessageFilter(lpMessageFilter: CPointer<Unit>, lplpMessageFilter: CPointer<CPointer<Unit>>): Int32 {
+    return CoRegisterMessageFilter(lpMessageFilter, lplpMessageFilter)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_PlaySoundA == "on"]
 foreign {
     // param-hint: pszSound optional
     // param-hint: hmod optional
     func PlaySoundA(pszSound: CPointer<UInt8>, hmod: CPointer<Unit>, fdwSound: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_PlaySoundA == "on"]
+public unsafe func Windows_PlaySoundA(pszSound: CPointer<UInt8>, hmod: CPointer<Unit>, fdwSound: UInt32): Int32 {
+    return PlaySoundA(pszSound, hmod, fdwSound)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_PlaySoundW == "on"]
+foreign {
     // param-hint: pszSound optional
     // param-hint: hmod optional
     func PlaySoundW(pszSound: CPointer<UInt16>, hmod: CPointer<Unit>, fdwSound: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_PlaySoundW == "on"]
+public unsafe func Windows_PlaySoundW(pszSound: CPointer<UInt16>, hmod: CPointer<Unit>, fdwSound: UInt32): Int32 {
+    return PlaySoundW(pszSound, hmod, fdwSound)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_auxGetDevCapsA == "on"]
+foreign {
     // param-hint: pac bytes=param[2]
     func auxGetDevCapsA(uDeviceID: UIntNative, pac: CPointer<AUXCAPSA>, cbac: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_auxGetDevCapsA == "on"]
+public unsafe func Windows_auxGetDevCapsA(uDeviceID: UIntNative, pac: CPointer<AUXCAPSA>, cbac: UInt32): UInt32 {
+    return auxGetDevCapsA(uDeviceID, pac, cbac)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_auxGetDevCapsW == "on"]
+foreign {
     // param-hint: pac bytes=param[2]
     func auxGetDevCapsW(uDeviceID: UIntNative, pac: CPointer<AUXCAPSW>, cbac: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_auxGetDevCapsW == "on"]
+public unsafe func Windows_auxGetDevCapsW(uDeviceID: UIntNative, pac: CPointer<AUXCAPSW>, cbac: UInt32): UInt32 {
+    return auxGetDevCapsW(uDeviceID, pac, cbac)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_auxGetNumDevs == "on"]
+foreign {
     func auxGetNumDevs(): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_auxGetNumDevs == "on"]
+public unsafe func Windows_auxGetNumDevs(): UInt32 {
+    return auxGetNumDevs()
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_auxGetVolume == "on"]
+foreign {
     func auxGetVolume(uDeviceID: UInt32, pdwVolume: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_auxGetVolume == "on"]
+public unsafe func Windows_auxGetVolume(uDeviceID: UInt32, pdwVolume: CPointer<UInt32>): UInt32 {
+    return auxGetVolume(uDeviceID, pdwVolume)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_auxOutMessage == "on"]
+foreign {
     // param-hint: dw1 optional
     // param-hint: dw2 optional
     func auxOutMessage(uDeviceID: UInt32, uMsg: UInt32, dw1: UIntNative, dw2: UIntNative): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_auxOutMessage == "on"]
+public unsafe func Windows_auxOutMessage(uDeviceID: UInt32, uMsg: UInt32, dw1: UIntNative, dw2: UIntNative): UInt32 {
+    return auxOutMessage(uDeviceID, uMsg, dw1, dw2)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_auxSetVolume == "on"]
+foreign {
     func auxSetVolume(uDeviceID: UInt32, dwVolume: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_auxSetVolume == "on"]
+public unsafe func Windows_auxSetVolume(uDeviceID: UInt32, dwVolume: UInt32): UInt32 {
+    return auxSetVolume(uDeviceID, dwVolume)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiConnect == "on"]
+foreign {
     // param-hint: pReserved optional
     func midiConnect(hmi: HMIDI, hmo: HMIDIOUT, pReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiConnect == "on"]
+public unsafe func Windows_midiConnect(hmi: HMIDI, hmo: HMIDIOUT, pReserved: CPointer<Unit>): UInt32 {
+    return midiConnect(hmi, hmo, pReserved)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiDisconnect == "on"]
+foreign {
     // param-hint: pReserved optional
     func midiDisconnect(hmi: HMIDI, hmo: HMIDIOUT, pReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiDisconnect == "on"]
+public unsafe func Windows_midiDisconnect(hmi: HMIDI, hmo: HMIDIOUT, pReserved: CPointer<Unit>): UInt32 {
+    return midiDisconnect(hmi, hmo, pReserved)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInAddBuffer == "on"]
+foreign {
     // param-hint: pmh bytes=param[2]
     func midiInAddBuffer(hmi: HMIDIIN, pmh: CPointer<MIDIHDR>, cbmh: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInAddBuffer == "on"]
+public unsafe func Windows_midiInAddBuffer(hmi: HMIDIIN, pmh: CPointer<MIDIHDR>, cbmh: UInt32): UInt32 {
+    return midiInAddBuffer(hmi, pmh, cbmh)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInClose == "on"]
+foreign {
     func midiInClose(hmi: HMIDIIN): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInClose == "on"]
+public unsafe func Windows_midiInClose(hmi: HMIDIIN): UInt32 {
+    return midiInClose(hmi)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInGetDevCapsA == "on"]
+foreign {
     // param-hint: pmic bytes=param[2]
     func midiInGetDevCapsA(uDeviceID: UIntNative, pmic: CPointer<MIDIINCAPSA>, cbmic: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInGetDevCapsA == "on"]
+public unsafe func Windows_midiInGetDevCapsA(uDeviceID: UIntNative, pmic: CPointer<MIDIINCAPSA>, cbmic: UInt32): UInt32 {
+    return midiInGetDevCapsA(uDeviceID, pmic, cbmic)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInGetDevCapsW == "on"]
+foreign {
     // param-hint: pmic bytes=param[2]
     func midiInGetDevCapsW(uDeviceID: UIntNative, pmic: CPointer<MIDIINCAPSW>, cbmic: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInGetDevCapsW == "on"]
+public unsafe func Windows_midiInGetDevCapsW(uDeviceID: UIntNative, pmic: CPointer<MIDIINCAPSW>, cbmic: UInt32): UInt32 {
+    return midiInGetDevCapsW(uDeviceID, pmic, cbmic)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInGetErrorTextA == "on"]
+foreign {
     // param-hint: pszText len=param[2]
     func midiInGetErrorTextA(mmrError: UInt32, pszText: CPointer<UInt8>, cchText: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInGetErrorTextA == "on"]
+public unsafe func Windows_midiInGetErrorTextA(mmrError: UInt32, pszText: CPointer<UInt8>, cchText: UInt32): UInt32 {
+    return midiInGetErrorTextA(mmrError, pszText, cchText)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInGetErrorTextW == "on"]
+foreign {
     // param-hint: pszText len=param[2]
     func midiInGetErrorTextW(mmrError: UInt32, pszText: CPointer<UInt16>, cchText: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInGetErrorTextW == "on"]
+public unsafe func Windows_midiInGetErrorTextW(mmrError: UInt32, pszText: CPointer<UInt16>, cchText: UInt32): UInt32 {
+    return midiInGetErrorTextW(mmrError, pszText, cchText)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInGetID == "on"]
+foreign {
     func midiInGetID(hmi: HMIDIIN, puDeviceID: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInGetID == "on"]
+public unsafe func Windows_midiInGetID(hmi: HMIDIIN, puDeviceID: CPointer<UInt32>): UInt32 {
+    return midiInGetID(hmi, puDeviceID)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInGetNumDevs == "on"]
+foreign {
     func midiInGetNumDevs(): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInGetNumDevs == "on"]
+public unsafe func Windows_midiInGetNumDevs(): UInt32 {
+    return midiInGetNumDevs()
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInMessage == "on"]
+foreign {
     // param-hint: hmi optional
     // param-hint: dw1 optional
     // param-hint: dw2 optional
     func midiInMessage(hmi: HMIDIIN, uMsg: UInt32, dw1: UIntNative, dw2: UIntNative): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInMessage == "on"]
+public unsafe func Windows_midiInMessage(hmi: HMIDIIN, uMsg: UInt32, dw1: UIntNative, dw2: UIntNative): UInt32 {
+    return midiInMessage(hmi, uMsg, dw1, dw2)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInOpen == "on"]
+foreign {
     // param-hint: dwCallback optional
     // param-hint: dwInstance optional
     func midiInOpen(phmi: CPointer<HMIDIIN>, uDeviceID: UInt32, dwCallback: UIntNative, dwInstance: UIntNative, fdwOpen: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInOpen == "on"]
+public unsafe func Windows_midiInOpen(phmi: CPointer<HMIDIIN>, uDeviceID: UInt32, dwCallback: UIntNative, dwInstance: UIntNative, fdwOpen: UInt32): UInt32 {
+    return midiInOpen(phmi, uDeviceID, dwCallback, dwInstance, fdwOpen)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInPrepareHeader == "on"]
+foreign {
     // param-hint: pmh bytes=param[2]
     func midiInPrepareHeader(hmi: HMIDIIN, pmh: CPointer<MIDIHDR>, cbmh: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInPrepareHeader == "on"]
+public unsafe func Windows_midiInPrepareHeader(hmi: HMIDIIN, pmh: CPointer<MIDIHDR>, cbmh: UInt32): UInt32 {
+    return midiInPrepareHeader(hmi, pmh, cbmh)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInReset == "on"]
+foreign {
     func midiInReset(hmi: HMIDIIN): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInReset == "on"]
+public unsafe func Windows_midiInReset(hmi: HMIDIIN): UInt32 {
+    return midiInReset(hmi)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInStart == "on"]
+foreign {
     func midiInStart(hmi: HMIDIIN): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInStart == "on"]
+public unsafe func Windows_midiInStart(hmi: HMIDIIN): UInt32 {
+    return midiInStart(hmi)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInStop == "on"]
+foreign {
     func midiInStop(hmi: HMIDIIN): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInStop == "on"]
+public unsafe func Windows_midiInStop(hmi: HMIDIIN): UInt32 {
+    return midiInStop(hmi)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInUnprepareHeader == "on"]
+foreign {
     // param-hint: pmh bytes=param[2]
     func midiInUnprepareHeader(hmi: HMIDIIN, pmh: CPointer<MIDIHDR>, cbmh: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInUnprepareHeader == "on"]
+public unsafe func Windows_midiInUnprepareHeader(hmi: HMIDIIN, pmh: CPointer<MIDIHDR>, cbmh: UInt32): UInt32 {
+    return midiInUnprepareHeader(hmi, pmh, cbmh)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutCacheDrumPatches == "on"]
+foreign {
     // param-hint: pwkya fixed=128
     func midiOutCacheDrumPatches(hmo: HMIDIOUT, uPatch: UInt32, pwkya: CPointer<UInt16>, fuCache: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutCacheDrumPatches == "on"]
+public unsafe func Windows_midiOutCacheDrumPatches(hmo: HMIDIOUT, uPatch: UInt32, pwkya: CPointer<UInt16>, fuCache: UInt32): UInt32 {
+    return midiOutCacheDrumPatches(hmo, uPatch, pwkya, fuCache)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutCachePatches == "on"]
+foreign {
     // param-hint: pwpa fixed=128
     func midiOutCachePatches(hmo: HMIDIOUT, uBank: UInt32, pwpa: CPointer<UInt16>, fuCache: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutCachePatches == "on"]
+public unsafe func Windows_midiOutCachePatches(hmo: HMIDIOUT, uBank: UInt32, pwpa: CPointer<UInt16>, fuCache: UInt32): UInt32 {
+    return midiOutCachePatches(hmo, uBank, pwpa, fuCache)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutClose == "on"]
+foreign {
     func midiOutClose(hmo: HMIDIOUT): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutClose == "on"]
+public unsafe func Windows_midiOutClose(hmo: HMIDIOUT): UInt32 {
+    return midiOutClose(hmo)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutGetDevCapsA == "on"]
+foreign {
     // param-hint: pmoc bytes=param[2]
     func midiOutGetDevCapsA(uDeviceID: UIntNative, pmoc: CPointer<MIDIOUTCAPSA>, cbmoc: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutGetDevCapsA == "on"]
+public unsafe func Windows_midiOutGetDevCapsA(uDeviceID: UIntNative, pmoc: CPointer<MIDIOUTCAPSA>, cbmoc: UInt32): UInt32 {
+    return midiOutGetDevCapsA(uDeviceID, pmoc, cbmoc)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutGetDevCapsW == "on"]
+foreign {
     // param-hint: pmoc bytes=param[2]
     func midiOutGetDevCapsW(uDeviceID: UIntNative, pmoc: CPointer<MIDIOUTCAPSW>, cbmoc: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutGetDevCapsW == "on"]
+public unsafe func Windows_midiOutGetDevCapsW(uDeviceID: UIntNative, pmoc: CPointer<MIDIOUTCAPSW>, cbmoc: UInt32): UInt32 {
+    return midiOutGetDevCapsW(uDeviceID, pmoc, cbmoc)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutGetErrorTextA == "on"]
+foreign {
     // param-hint: pszText len=param[2]
     func midiOutGetErrorTextA(mmrError: UInt32, pszText: CPointer<UInt8>, cchText: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutGetErrorTextA == "on"]
+public unsafe func Windows_midiOutGetErrorTextA(mmrError: UInt32, pszText: CPointer<UInt8>, cchText: UInt32): UInt32 {
+    return midiOutGetErrorTextA(mmrError, pszText, cchText)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutGetErrorTextW == "on"]
+foreign {
     // param-hint: pszText len=param[2]
     func midiOutGetErrorTextW(mmrError: UInt32, pszText: CPointer<UInt16>, cchText: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutGetErrorTextW == "on"]
+public unsafe func Windows_midiOutGetErrorTextW(mmrError: UInt32, pszText: CPointer<UInt16>, cchText: UInt32): UInt32 {
+    return midiOutGetErrorTextW(mmrError, pszText, cchText)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutGetID == "on"]
+foreign {
     func midiOutGetID(hmo: HMIDIOUT, puDeviceID: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutGetID == "on"]
+public unsafe func Windows_midiOutGetID(hmo: HMIDIOUT, puDeviceID: CPointer<UInt32>): UInt32 {
+    return midiOutGetID(hmo, puDeviceID)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutGetNumDevs == "on"]
+foreign {
     func midiOutGetNumDevs(): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutGetNumDevs == "on"]
+public unsafe func Windows_midiOutGetNumDevs(): UInt32 {
+    return midiOutGetNumDevs()
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutGetVolume == "on"]
+foreign {
     // param-hint: hmo optional
     func midiOutGetVolume(hmo: HMIDIOUT, pdwVolume: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutGetVolume == "on"]
+public unsafe func Windows_midiOutGetVolume(hmo: HMIDIOUT, pdwVolume: CPointer<UInt32>): UInt32 {
+    return midiOutGetVolume(hmo, pdwVolume)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutLongMsg == "on"]
+foreign {
     // param-hint: pmh bytes=param[2]
     func midiOutLongMsg(hmo: HMIDIOUT, pmh: CPointer<MIDIHDR>, cbmh: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutLongMsg == "on"]
+public unsafe func Windows_midiOutLongMsg(hmo: HMIDIOUT, pmh: CPointer<MIDIHDR>, cbmh: UInt32): UInt32 {
+    return midiOutLongMsg(hmo, pmh, cbmh)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutMessage == "on"]
+foreign {
     // param-hint: hmo optional
     // param-hint: dw1 optional
     // param-hint: dw2 optional
     func midiOutMessage(hmo: HMIDIOUT, uMsg: UInt32, dw1: UIntNative, dw2: UIntNative): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutMessage == "on"]
+public unsafe func Windows_midiOutMessage(hmo: HMIDIOUT, uMsg: UInt32, dw1: UIntNative, dw2: UIntNative): UInt32 {
+    return midiOutMessage(hmo, uMsg, dw1, dw2)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutOpen == "on"]
+foreign {
     // param-hint: dwCallback optional
     // param-hint: dwInstance optional
     func midiOutOpen(phmo: CPointer<HMIDIOUT>, uDeviceID: UInt32, dwCallback: UIntNative, dwInstance: UIntNative, fdwOpen: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutOpen == "on"]
+public unsafe func Windows_midiOutOpen(phmo: CPointer<HMIDIOUT>, uDeviceID: UInt32, dwCallback: UIntNative, dwInstance: UIntNative, fdwOpen: UInt32): UInt32 {
+    return midiOutOpen(phmo, uDeviceID, dwCallback, dwInstance, fdwOpen)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutPrepareHeader == "on"]
+foreign {
     // param-hint: pmh bytes=param[2]
     func midiOutPrepareHeader(hmo: HMIDIOUT, pmh: CPointer<MIDIHDR>, cbmh: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutPrepareHeader == "on"]
+public unsafe func Windows_midiOutPrepareHeader(hmo: HMIDIOUT, pmh: CPointer<MIDIHDR>, cbmh: UInt32): UInt32 {
+    return midiOutPrepareHeader(hmo, pmh, cbmh)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutReset == "on"]
+foreign {
     func midiOutReset(hmo: HMIDIOUT): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutReset == "on"]
+public unsafe func Windows_midiOutReset(hmo: HMIDIOUT): UInt32 {
+    return midiOutReset(hmo)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutSetVolume == "on"]
+foreign {
     // param-hint: hmo optional
     func midiOutSetVolume(hmo: HMIDIOUT, dwVolume: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutSetVolume == "on"]
+public unsafe func Windows_midiOutSetVolume(hmo: HMIDIOUT, dwVolume: UInt32): UInt32 {
+    return midiOutSetVolume(hmo, dwVolume)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutShortMsg == "on"]
+foreign {
     func midiOutShortMsg(hmo: HMIDIOUT, dwMsg: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutShortMsg == "on"]
+public unsafe func Windows_midiOutShortMsg(hmo: HMIDIOUT, dwMsg: UInt32): UInt32 {
+    return midiOutShortMsg(hmo, dwMsg)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutUnprepareHeader == "on"]
+foreign {
     // param-hint: pmh bytes=param[2]
     func midiOutUnprepareHeader(hmo: HMIDIOUT, pmh: CPointer<MIDIHDR>, cbmh: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutUnprepareHeader == "on"]
+public unsafe func Windows_midiOutUnprepareHeader(hmo: HMIDIOUT, pmh: CPointer<MIDIHDR>, cbmh: UInt32): UInt32 {
+    return midiOutUnprepareHeader(hmo, pmh, cbmh)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiStreamClose == "on"]
+foreign {
     func midiStreamClose(hms: HMIDISTRM): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiStreamClose == "on"]
+public unsafe func Windows_midiStreamClose(hms: HMIDISTRM): UInt32 {
+    return midiStreamClose(hms)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiStreamOpen == "on"]
+foreign {
     // param-hint: puDeviceID len=param[2]
     // param-hint: dwCallback optional
     // param-hint: dwInstance optional
     func midiStreamOpen(phms: CPointer<HMIDISTRM>, puDeviceID: CPointer<UInt32>, cMidi: UInt32, dwCallback: UIntNative, dwInstance: UIntNative, fdwOpen: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiStreamOpen == "on"]
+public unsafe func Windows_midiStreamOpen(phms: CPointer<HMIDISTRM>, puDeviceID: CPointer<UInt32>, cMidi: UInt32, dwCallback: UIntNative, dwInstance: UIntNative, fdwOpen: UInt32): UInt32 {
+    return midiStreamOpen(phms, puDeviceID, cMidi, dwCallback, dwInstance, fdwOpen)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiStreamOut == "on"]
+foreign {
     // param-hint: pmh bytes=param[2]
     func midiStreamOut(hms: HMIDISTRM, pmh: CPointer<MIDIHDR>, cbmh: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiStreamOut == "on"]
+public unsafe func Windows_midiStreamOut(hms: HMIDISTRM, pmh: CPointer<MIDIHDR>, cbmh: UInt32): UInt32 {
+    return midiStreamOut(hms, pmh, cbmh)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiStreamPause == "on"]
+foreign {
     func midiStreamPause(hms: HMIDISTRM): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiStreamPause == "on"]
+public unsafe func Windows_midiStreamPause(hms: HMIDISTRM): UInt32 {
+    return midiStreamPause(hms)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiStreamPosition == "on" && Windows_Win32_Media == "on"]
+foreign {
+    // param-hint: lpmmt bytes=param[2]
+    func midiStreamPosition(hms: HMIDISTRM, lpmmt: CPointer<MMTIME>, cbmmt: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiStreamPosition == "on" && Windows_Win32_Media == "on"]
+public unsafe func Windows_midiStreamPosition(hms: HMIDISTRM, lpmmt: CPointer<MMTIME>, cbmmt: UInt32): UInt32 {
+    return midiStreamPosition(hms, lpmmt, cbmmt)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiStreamProperty == "on"]
+foreign {
     func midiStreamProperty(hms: HMIDISTRM, lppropdata: CPointer<UInt8>, dwProperty: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiStreamProperty == "on"]
+public unsafe func Windows_midiStreamProperty(hms: HMIDISTRM, lppropdata: CPointer<UInt8>, dwProperty: UInt32): UInt32 {
+    return midiStreamProperty(hms, lppropdata, dwProperty)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiStreamRestart == "on"]
+foreign {
     func midiStreamRestart(hms: HMIDISTRM): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiStreamRestart == "on"]
+public unsafe func Windows_midiStreamRestart(hms: HMIDISTRM): UInt32 {
+    return midiStreamRestart(hms)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiStreamStop == "on"]
+foreign {
     func midiStreamStop(hms: HMIDISTRM): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiStreamStop == "on"]
+public unsafe func Windows_midiStreamStop(hms: HMIDISTRM): UInt32 {
+    return midiStreamStop(hms)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerClose == "on"]
+foreign {
     func mixerClose(hmx: HMIXER): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerClose == "on"]
+public unsafe func Windows_mixerClose(hmx: HMIXER): UInt32 {
+    return mixerClose(hmx)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerGetControlDetailsA == "on"]
+foreign {
     // param-hint: hmxobj optional
     func mixerGetControlDetailsA(hmxobj: HMIXEROBJ, pmxcd: CPointer<MIXERCONTROLDETAILS>, fdwDetails: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerGetControlDetailsA == "on"]
+public unsafe func Windows_mixerGetControlDetailsA(hmxobj: HMIXEROBJ, pmxcd: CPointer<MIXERCONTROLDETAILS>, fdwDetails: UInt32): UInt32 {
+    return mixerGetControlDetailsA(hmxobj, pmxcd, fdwDetails)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerGetControlDetailsW == "on"]
+foreign {
     // param-hint: hmxobj optional
     func mixerGetControlDetailsW(hmxobj: HMIXEROBJ, pmxcd: CPointer<MIXERCONTROLDETAILS>, fdwDetails: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerGetControlDetailsW == "on"]
+public unsafe func Windows_mixerGetControlDetailsW(hmxobj: HMIXEROBJ, pmxcd: CPointer<MIXERCONTROLDETAILS>, fdwDetails: UInt32): UInt32 {
+    return mixerGetControlDetailsW(hmxobj, pmxcd, fdwDetails)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerGetDevCapsA == "on"]
+foreign {
     // param-hint: pmxcaps bytes=param[2]
     func mixerGetDevCapsA(uMxId: UIntNative, pmxcaps: CPointer<MIXERCAPSA>, cbmxcaps: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerGetDevCapsA == "on"]
+public unsafe func Windows_mixerGetDevCapsA(uMxId: UIntNative, pmxcaps: CPointer<MIXERCAPSA>, cbmxcaps: UInt32): UInt32 {
+    return mixerGetDevCapsA(uMxId, pmxcaps, cbmxcaps)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerGetDevCapsW == "on"]
+foreign {
     // param-hint: pmxcaps bytes=param[2]
     func mixerGetDevCapsW(uMxId: UIntNative, pmxcaps: CPointer<MIXERCAPSW>, cbmxcaps: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerGetDevCapsW == "on"]
+public unsafe func Windows_mixerGetDevCapsW(uMxId: UIntNative, pmxcaps: CPointer<MIXERCAPSW>, cbmxcaps: UInt32): UInt32 {
+    return mixerGetDevCapsW(uMxId, pmxcaps, cbmxcaps)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerGetID == "on"]
+foreign {
     // param-hint: hmxobj optional
     func mixerGetID(hmxobj: HMIXEROBJ, puMxId: CPointer<UInt32>, fdwId: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerGetID == "on"]
+public unsafe func Windows_mixerGetID(hmxobj: HMIXEROBJ, puMxId: CPointer<UInt32>, fdwId: UInt32): UInt32 {
+    return mixerGetID(hmxobj, puMxId, fdwId)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerGetLineControlsA == "on"]
+foreign {
     // param-hint: hmxobj optional
     func mixerGetLineControlsA(hmxobj: HMIXEROBJ, pmxlc: CPointer<MIXERLINECONTROLSA>, fdwControls: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerGetLineControlsA == "on"]
+public unsafe func Windows_mixerGetLineControlsA(hmxobj: HMIXEROBJ, pmxlc: CPointer<MIXERLINECONTROLSA>, fdwControls: UInt32): UInt32 {
+    return mixerGetLineControlsA(hmxobj, pmxlc, fdwControls)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerGetLineControlsW == "on"]
+foreign {
     // param-hint: hmxobj optional
     func mixerGetLineControlsW(hmxobj: HMIXEROBJ, pmxlc: CPointer<MIXERLINECONTROLSW>, fdwControls: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerGetLineControlsW == "on"]
+public unsafe func Windows_mixerGetLineControlsW(hmxobj: HMIXEROBJ, pmxlc: CPointer<MIXERLINECONTROLSW>, fdwControls: UInt32): UInt32 {
+    return mixerGetLineControlsW(hmxobj, pmxlc, fdwControls)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerGetLineInfoA == "on"]
+foreign {
     // param-hint: hmxobj optional
     func mixerGetLineInfoA(hmxobj: HMIXEROBJ, pmxl: CPointer<MIXERLINEA>, fdwInfo: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerGetLineInfoA == "on"]
+public unsafe func Windows_mixerGetLineInfoA(hmxobj: HMIXEROBJ, pmxl: CPointer<MIXERLINEA>, fdwInfo: UInt32): UInt32 {
+    return mixerGetLineInfoA(hmxobj, pmxl, fdwInfo)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerGetLineInfoW == "on"]
+foreign {
     // param-hint: hmxobj optional
     func mixerGetLineInfoW(hmxobj: HMIXEROBJ, pmxl: CPointer<MIXERLINEW>, fdwInfo: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerGetLineInfoW == "on"]
+public unsafe func Windows_mixerGetLineInfoW(hmxobj: HMIXEROBJ, pmxl: CPointer<MIXERLINEW>, fdwInfo: UInt32): UInt32 {
+    return mixerGetLineInfoW(hmxobj, pmxl, fdwInfo)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerGetNumDevs == "on"]
+foreign {
     func mixerGetNumDevs(): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerGetNumDevs == "on"]
+public unsafe func Windows_mixerGetNumDevs(): UInt32 {
+    return mixerGetNumDevs()
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerMessage == "on"]
+foreign {
     // param-hint: hmx optional
     // param-hint: dwParam1 optional
     // param-hint: dwParam2 optional
     func mixerMessage(hmx: HMIXER, uMsg: UInt32, dwParam1: UIntNative, dwParam2: UIntNative): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerMessage == "on"]
+public unsafe func Windows_mixerMessage(hmx: HMIXER, uMsg: UInt32, dwParam1: UIntNative, dwParam2: UIntNative): UInt32 {
+    return mixerMessage(hmx, uMsg, dwParam1, dwParam2)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerOpen == "on"]
+foreign {
     // param-hint: phmx optional
     // param-hint: dwCallback optional
     // param-hint: dwInstance optional
     func mixerOpen(phmx: CPointer<HMIXER>, uMxId: UInt32, dwCallback: UIntNative, dwInstance: UIntNative, fdwOpen: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerOpen == "on"]
+public unsafe func Windows_mixerOpen(phmx: CPointer<HMIXER>, uMxId: UInt32, dwCallback: UIntNative, dwInstance: UIntNative, fdwOpen: UInt32): UInt32 {
+    return mixerOpen(phmx, uMxId, dwCallback, dwInstance, fdwOpen)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerSetControlDetails == "on"]
+foreign {
     // param-hint: hmxobj optional
     func mixerSetControlDetails(hmxobj: HMIXEROBJ, pmxcd: CPointer<MIXERCONTROLDETAILS>, fdwDetails: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerSetControlDetails == "on"]
+public unsafe func Windows_mixerSetControlDetails(hmxobj: HMIXEROBJ, pmxcd: CPointer<MIXERCONTROLDETAILS>, fdwDetails: UInt32): UInt32 {
+    return mixerSetControlDetails(hmxobj, pmxcd, fdwDetails)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_sndPlaySoundA == "on"]
+foreign {
     // param-hint: pszSound optional
     func sndPlaySoundA(pszSound: CPointer<UInt8>, fuSound: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_sndPlaySoundA == "on"]
+public unsafe func Windows_sndPlaySoundA(pszSound: CPointer<UInt8>, fuSound: UInt32): Int32 {
+    return sndPlaySoundA(pszSound, fuSound)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_sndPlaySoundW == "on"]
+foreign {
     // param-hint: pszSound optional
     func sndPlaySoundW(pszSound: CPointer<UInt16>, fuSound: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_sndPlaySoundW == "on"]
+public unsafe func Windows_sndPlaySoundW(pszSound: CPointer<UInt16>, fuSound: UInt32): Int32 {
+    return sndPlaySoundW(pszSound, fuSound)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInAddBuffer == "on"]
+foreign {
     // param-hint: pwh bytes=param[2]
     func waveInAddBuffer(hwi: HWAVEIN, pwh: CPointer<WAVEHDR>, cbwh: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInAddBuffer == "on"]
+public unsafe func Windows_waveInAddBuffer(hwi: HWAVEIN, pwh: CPointer<WAVEHDR>, cbwh: UInt32): UInt32 {
+    return waveInAddBuffer(hwi, pwh, cbwh)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInClose == "on"]
+foreign {
     func waveInClose(hwi: HWAVEIN): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInClose == "on"]
+public unsafe func Windows_waveInClose(hwi: HWAVEIN): UInt32 {
+    return waveInClose(hwi)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInGetDevCapsA == "on"]
+foreign {
     // param-hint: pwic bytes=param[2]
     func waveInGetDevCapsA(uDeviceID: UIntNative, pwic: CPointer<WAVEINCAPSA>, cbwic: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInGetDevCapsA == "on"]
+public unsafe func Windows_waveInGetDevCapsA(uDeviceID: UIntNative, pwic: CPointer<WAVEINCAPSA>, cbwic: UInt32): UInt32 {
+    return waveInGetDevCapsA(uDeviceID, pwic, cbwic)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInGetDevCapsW == "on"]
+foreign {
     // param-hint: pwic bytes=param[2]
     func waveInGetDevCapsW(uDeviceID: UIntNative, pwic: CPointer<WAVEINCAPSW>, cbwic: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInGetDevCapsW == "on"]
+public unsafe func Windows_waveInGetDevCapsW(uDeviceID: UIntNative, pwic: CPointer<WAVEINCAPSW>, cbwic: UInt32): UInt32 {
+    return waveInGetDevCapsW(uDeviceID, pwic, cbwic)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInGetErrorTextA == "on"]
+foreign {
     // param-hint: pszText len=param[2]
     func waveInGetErrorTextA(mmrError: UInt32, pszText: CPointer<UInt8>, cchText: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInGetErrorTextA == "on"]
+public unsafe func Windows_waveInGetErrorTextA(mmrError: UInt32, pszText: CPointer<UInt8>, cchText: UInt32): UInt32 {
+    return waveInGetErrorTextA(mmrError, pszText, cchText)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInGetErrorTextW == "on"]
+foreign {
     // param-hint: pszText len=param[2]
     func waveInGetErrorTextW(mmrError: UInt32, pszText: CPointer<UInt16>, cchText: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInGetErrorTextW == "on"]
+public unsafe func Windows_waveInGetErrorTextW(mmrError: UInt32, pszText: CPointer<UInt16>, cchText: UInt32): UInt32 {
+    return waveInGetErrorTextW(mmrError, pszText, cchText)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInGetID == "on"]
+foreign {
     func waveInGetID(hwi: HWAVEIN, puDeviceID: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInGetID == "on"]
+public unsafe func Windows_waveInGetID(hwi: HWAVEIN, puDeviceID: CPointer<UInt32>): UInt32 {
+    return waveInGetID(hwi, puDeviceID)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInGetNumDevs == "on"]
+foreign {
     func waveInGetNumDevs(): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInGetNumDevs == "on"]
+public unsafe func Windows_waveInGetNumDevs(): UInt32 {
+    return waveInGetNumDevs()
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInGetPosition == "on" && Windows_Win32_Media == "on"]
+foreign {
+    // param-hint: pmmt bytes=param[2]
+    func waveInGetPosition(hwi: HWAVEIN, pmmt: CPointer<MMTIME>, cbmmt: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInGetPosition == "on" && Windows_Win32_Media == "on"]
+public unsafe func Windows_waveInGetPosition(hwi: HWAVEIN, pmmt: CPointer<MMTIME>, cbmmt: UInt32): UInt32 {
+    return waveInGetPosition(hwi, pmmt, cbmmt)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInMessage == "on"]
+foreign {
     // param-hint: hwi optional
     // param-hint: dw1 optional
     // param-hint: dw2 optional
     func waveInMessage(hwi: HWAVEIN, uMsg: UInt32, dw1: UIntNative, dw2: UIntNative): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInMessage == "on"]
+public unsafe func Windows_waveInMessage(hwi: HWAVEIN, uMsg: UInt32, dw1: UIntNative, dw2: UIntNative): UInt32 {
+    return waveInMessage(hwi, uMsg, dw1, dw2)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInOpen == "on"]
+foreign {
     // param-hint: phwi optional
     // param-hint: dwCallback optional
     // param-hint: dwInstance optional
     func waveInOpen(phwi: CPointer<HWAVEIN>, uDeviceID: UInt32, pwfx: CPointer<WAVEFORMATEX>, dwCallback: UIntNative, dwInstance: UIntNative, fdwOpen: UInt32): UInt32
-    // param-hint: pwh bytes=param[2]
-    func waveInPrepareHeader(hwi: HWAVEIN, pwh: CPointer<WAVEHDR>, cbwh: UInt32): UInt32
-    func waveInReset(hwi: HWAVEIN): UInt32
-    func waveInStart(hwi: HWAVEIN): UInt32
-    func waveInStop(hwi: HWAVEIN): UInt32
-    // param-hint: pwh bytes=param[2]
-    func waveInUnprepareHeader(hwi: HWAVEIN, pwh: CPointer<WAVEHDR>, cbwh: UInt32): UInt32
-    func waveOutBreakLoop(hwo: HWAVEOUT): UInt32
-    func waveOutClose(hwo: HWAVEOUT): UInt32
-    func waveOutGetDevCapsA(uDeviceID: UIntNative, pwoc: CPointer<WAVEOUTCAPSA>, cbwoc: UInt32): UInt32
-    func waveOutGetDevCapsW(uDeviceID: UIntNative, pwoc: CPointer<WAVEOUTCAPSW>, cbwoc: UInt32): UInt32
-    // param-hint: pszText len=param[2]
-    func waveOutGetErrorTextA(mmrError: UInt32, pszText: CPointer<UInt8>, cchText: UInt32): UInt32
-    // param-hint: pszText len=param[2]
-    func waveOutGetErrorTextW(mmrError: UInt32, pszText: CPointer<UInt16>, cchText: UInt32): UInt32
-    func waveOutGetID(hwo: HWAVEOUT, puDeviceID: CPointer<UInt32>): UInt32
-    func waveOutGetNumDevs(): UInt32
-    func waveOutGetPitch(hwo: HWAVEOUT, pdwPitch: CPointer<UInt32>): UInt32
-    func waveOutGetPlaybackRate(hwo: HWAVEOUT, pdwRate: CPointer<UInt32>): UInt32
-    // param-hint: hwo optional
-    func waveOutGetVolume(hwo: HWAVEOUT, pdwVolume: CPointer<UInt32>): UInt32
-    // param-hint: hwo optional
-    func waveOutMessage(hwo: HWAVEOUT, uMsg: UInt32, dw1: UIntNative, dw2: UIntNative): UInt32
-    // param-hint: phwo optional
-    // param-hint: dwCallback optional
-    // param-hint: dwInstance optional
-    func waveOutOpen(phwo: CPointer<HWAVEOUT>, uDeviceID: UInt32, pwfx: CPointer<WAVEFORMATEX>, dwCallback: UIntNative, dwInstance: UIntNative, fdwOpen: UInt32): UInt32
-    func waveOutPause(hwo: HWAVEOUT): UInt32
-    // param-hint: pwh bytes=param[2]
-    func waveOutPrepareHeader(hwo: HWAVEOUT, pwh: CPointer<WAVEHDR>, cbwh: UInt32): UInt32
-    func waveOutReset(hwo: HWAVEOUT): UInt32
-    func waveOutRestart(hwo: HWAVEOUT): UInt32
-    func waveOutSetPitch(hwo: HWAVEOUT, dwPitch: UInt32): UInt32
-    func waveOutSetPlaybackRate(hwo: HWAVEOUT, dwRate: UInt32): UInt32
-    // param-hint: hwo optional
-    func waveOutSetVolume(hwo: HWAVEOUT, dwVolume: UInt32): UInt32
-    // param-hint: pwh bytes=param[2]
-    func waveOutUnprepareHeader(hwo: HWAVEOUT, pwh: CPointer<WAVEHDR>, cbwh: UInt32): UInt32
-    // param-hint: pwh bytes=param[2]
-    func waveOutWrite(hwo: HWAVEOUT, pwh: CPointer<WAVEHDR>, cbwh: UInt32): UInt32
 }
 
-@When[WINMM == "on" && Windows_Win32_Media == "on"]
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInOpen == "on"]
+public unsafe func Windows_waveInOpen(phwi: CPointer<HWAVEIN>, uDeviceID: UInt32, pwfx: CPointer<WAVEFORMATEX>, dwCallback: UIntNative, dwInstance: UIntNative, fdwOpen: UInt32): UInt32 {
+    return waveInOpen(phwi, uDeviceID, pwfx, dwCallback, dwInstance, fdwOpen)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInPrepareHeader == "on"]
 foreign {
-    // param-hint: lpmmt bytes=param[2]
-    func midiStreamPosition(hms: HMIDISTRM, lpmmt: CPointer<MMTIME>, cbmmt: UInt32): UInt32
-    // param-hint: pmmt bytes=param[2]
-    func waveInGetPosition(hwi: HWAVEIN, pmmt: CPointer<MMTIME>, cbmmt: UInt32): UInt32
+    // param-hint: pwh bytes=param[2]
+    func waveInPrepareHeader(hwi: HWAVEIN, pwh: CPointer<WAVEHDR>, cbwh: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInPrepareHeader == "on"]
+public unsafe func Windows_waveInPrepareHeader(hwi: HWAVEIN, pwh: CPointer<WAVEHDR>, cbwh: UInt32): UInt32 {
+    return waveInPrepareHeader(hwi, pwh, cbwh)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInReset == "on"]
+foreign {
+    func waveInReset(hwi: HWAVEIN): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInReset == "on"]
+public unsafe func Windows_waveInReset(hwi: HWAVEIN): UInt32 {
+    return waveInReset(hwi)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInStart == "on"]
+foreign {
+    func waveInStart(hwi: HWAVEIN): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInStart == "on"]
+public unsafe func Windows_waveInStart(hwi: HWAVEIN): UInt32 {
+    return waveInStart(hwi)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInStop == "on"]
+foreign {
+    func waveInStop(hwi: HWAVEIN): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInStop == "on"]
+public unsafe func Windows_waveInStop(hwi: HWAVEIN): UInt32 {
+    return waveInStop(hwi)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInUnprepareHeader == "on"]
+foreign {
+    // param-hint: pwh bytes=param[2]
+    func waveInUnprepareHeader(hwi: HWAVEIN, pwh: CPointer<WAVEHDR>, cbwh: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInUnprepareHeader == "on"]
+public unsafe func Windows_waveInUnprepareHeader(hwi: HWAVEIN, pwh: CPointer<WAVEHDR>, cbwh: UInt32): UInt32 {
+    return waveInUnprepareHeader(hwi, pwh, cbwh)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutBreakLoop == "on"]
+foreign {
+    func waveOutBreakLoop(hwo: HWAVEOUT): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutBreakLoop == "on"]
+public unsafe func Windows_waveOutBreakLoop(hwo: HWAVEOUT): UInt32 {
+    return waveOutBreakLoop(hwo)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutClose == "on"]
+foreign {
+    func waveOutClose(hwo: HWAVEOUT): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutClose == "on"]
+public unsafe func Windows_waveOutClose(hwo: HWAVEOUT): UInt32 {
+    return waveOutClose(hwo)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutGetDevCapsA == "on"]
+foreign {
+    func waveOutGetDevCapsA(uDeviceID: UIntNative, pwoc: CPointer<WAVEOUTCAPSA>, cbwoc: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutGetDevCapsA == "on"]
+public unsafe func Windows_waveOutGetDevCapsA(uDeviceID: UIntNative, pwoc: CPointer<WAVEOUTCAPSA>, cbwoc: UInt32): UInt32 {
+    return waveOutGetDevCapsA(uDeviceID, pwoc, cbwoc)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutGetDevCapsW == "on"]
+foreign {
+    func waveOutGetDevCapsW(uDeviceID: UIntNative, pwoc: CPointer<WAVEOUTCAPSW>, cbwoc: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutGetDevCapsW == "on"]
+public unsafe func Windows_waveOutGetDevCapsW(uDeviceID: UIntNative, pwoc: CPointer<WAVEOUTCAPSW>, cbwoc: UInt32): UInt32 {
+    return waveOutGetDevCapsW(uDeviceID, pwoc, cbwoc)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutGetErrorTextA == "on"]
+foreign {
+    // param-hint: pszText len=param[2]
+    func waveOutGetErrorTextA(mmrError: UInt32, pszText: CPointer<UInt8>, cchText: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutGetErrorTextA == "on"]
+public unsafe func Windows_waveOutGetErrorTextA(mmrError: UInt32, pszText: CPointer<UInt8>, cchText: UInt32): UInt32 {
+    return waveOutGetErrorTextA(mmrError, pszText, cchText)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutGetErrorTextW == "on"]
+foreign {
+    // param-hint: pszText len=param[2]
+    func waveOutGetErrorTextW(mmrError: UInt32, pszText: CPointer<UInt16>, cchText: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutGetErrorTextW == "on"]
+public unsafe func Windows_waveOutGetErrorTextW(mmrError: UInt32, pszText: CPointer<UInt16>, cchText: UInt32): UInt32 {
+    return waveOutGetErrorTextW(mmrError, pszText, cchText)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutGetID == "on"]
+foreign {
+    func waveOutGetID(hwo: HWAVEOUT, puDeviceID: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutGetID == "on"]
+public unsafe func Windows_waveOutGetID(hwo: HWAVEOUT, puDeviceID: CPointer<UInt32>): UInt32 {
+    return waveOutGetID(hwo, puDeviceID)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutGetNumDevs == "on"]
+foreign {
+    func waveOutGetNumDevs(): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutGetNumDevs == "on"]
+public unsafe func Windows_waveOutGetNumDevs(): UInt32 {
+    return waveOutGetNumDevs()
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutGetPitch == "on"]
+foreign {
+    func waveOutGetPitch(hwo: HWAVEOUT, pdwPitch: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutGetPitch == "on"]
+public unsafe func Windows_waveOutGetPitch(hwo: HWAVEOUT, pdwPitch: CPointer<UInt32>): UInt32 {
+    return waveOutGetPitch(hwo, pdwPitch)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutGetPlaybackRate == "on"]
+foreign {
+    func waveOutGetPlaybackRate(hwo: HWAVEOUT, pdwRate: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutGetPlaybackRate == "on"]
+public unsafe func Windows_waveOutGetPlaybackRate(hwo: HWAVEOUT, pdwRate: CPointer<UInt32>): UInt32 {
+    return waveOutGetPlaybackRate(hwo, pdwRate)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutGetPosition == "on" && Windows_Win32_Media == "on"]
+foreign {
     // param-hint: pmmt bytes=param[2]
     func waveOutGetPosition(hwo: HWAVEOUT, pmmt: CPointer<MMTIME>, cbmmt: UInt32): UInt32
 }
 
-@When[WINDOWS_MEDIA_MEDIACONTROL == "on"]
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutGetPosition == "on" && Windows_Win32_Media == "on"]
+public unsafe func Windows_waveOutGetPosition(hwo: HWAVEOUT, pmmt: CPointer<MMTIME>, cbmmt: UInt32): UInt32 {
+    return waveOutGetPosition(hwo, pmmt, cbmmt)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutGetVolume == "on"]
+foreign {
+    // param-hint: hwo optional
+    func waveOutGetVolume(hwo: HWAVEOUT, pdwVolume: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutGetVolume == "on"]
+public unsafe func Windows_waveOutGetVolume(hwo: HWAVEOUT, pdwVolume: CPointer<UInt32>): UInt32 {
+    return waveOutGetVolume(hwo, pdwVolume)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutMessage == "on"]
+foreign {
+    // param-hint: hwo optional
+    func waveOutMessage(hwo: HWAVEOUT, uMsg: UInt32, dw1: UIntNative, dw2: UIntNative): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutMessage == "on"]
+public unsafe func Windows_waveOutMessage(hwo: HWAVEOUT, uMsg: UInt32, dw1: UIntNative, dw2: UIntNative): UInt32 {
+    return waveOutMessage(hwo, uMsg, dw1, dw2)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutOpen == "on"]
+foreign {
+    // param-hint: phwo optional
+    // param-hint: dwCallback optional
+    // param-hint: dwInstance optional
+    func waveOutOpen(phwo: CPointer<HWAVEOUT>, uDeviceID: UInt32, pwfx: CPointer<WAVEFORMATEX>, dwCallback: UIntNative, dwInstance: UIntNative, fdwOpen: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutOpen == "on"]
+public unsafe func Windows_waveOutOpen(phwo: CPointer<HWAVEOUT>, uDeviceID: UInt32, pwfx: CPointer<WAVEFORMATEX>, dwCallback: UIntNative, dwInstance: UIntNative, fdwOpen: UInt32): UInt32 {
+    return waveOutOpen(phwo, uDeviceID, pwfx, dwCallback, dwInstance, fdwOpen)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutPause == "on"]
+foreign {
+    func waveOutPause(hwo: HWAVEOUT): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutPause == "on"]
+public unsafe func Windows_waveOutPause(hwo: HWAVEOUT): UInt32 {
+    return waveOutPause(hwo)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutPrepareHeader == "on"]
+foreign {
+    // param-hint: pwh bytes=param[2]
+    func waveOutPrepareHeader(hwo: HWAVEOUT, pwh: CPointer<WAVEHDR>, cbwh: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutPrepareHeader == "on"]
+public unsafe func Windows_waveOutPrepareHeader(hwo: HWAVEOUT, pwh: CPointer<WAVEHDR>, cbwh: UInt32): UInt32 {
+    return waveOutPrepareHeader(hwo, pwh, cbwh)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutReset == "on"]
+foreign {
+    func waveOutReset(hwo: HWAVEOUT): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutReset == "on"]
+public unsafe func Windows_waveOutReset(hwo: HWAVEOUT): UInt32 {
+    return waveOutReset(hwo)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutRestart == "on"]
+foreign {
+    func waveOutRestart(hwo: HWAVEOUT): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutRestart == "on"]
+public unsafe func Windows_waveOutRestart(hwo: HWAVEOUT): UInt32 {
+    return waveOutRestart(hwo)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutSetPitch == "on"]
+foreign {
+    func waveOutSetPitch(hwo: HWAVEOUT, dwPitch: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutSetPitch == "on"]
+public unsafe func Windows_waveOutSetPitch(hwo: HWAVEOUT, dwPitch: UInt32): UInt32 {
+    return waveOutSetPitch(hwo, dwPitch)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutSetPlaybackRate == "on"]
+foreign {
+    func waveOutSetPlaybackRate(hwo: HWAVEOUT, dwRate: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutSetPlaybackRate == "on"]
+public unsafe func Windows_waveOutSetPlaybackRate(hwo: HWAVEOUT, dwRate: UInt32): UInt32 {
+    return waveOutSetPlaybackRate(hwo, dwRate)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutSetVolume == "on"]
+foreign {
+    // param-hint: hwo optional
+    func waveOutSetVolume(hwo: HWAVEOUT, dwVolume: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutSetVolume == "on"]
+public unsafe func Windows_waveOutSetVolume(hwo: HWAVEOUT, dwVolume: UInt32): UInt32 {
+    return waveOutSetVolume(hwo, dwVolume)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutUnprepareHeader == "on"]
+foreign {
+    // param-hint: pwh bytes=param[2]
+    func waveOutUnprepareHeader(hwo: HWAVEOUT, pwh: CPointer<WAVEHDR>, cbwh: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutUnprepareHeader == "on"]
+public unsafe func Windows_waveOutUnprepareHeader(hwo: HWAVEOUT, pwh: CPointer<WAVEHDR>, cbwh: UInt32): UInt32 {
+    return waveOutUnprepareHeader(hwo, pwh, cbwh)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutWrite == "on"]
+foreign {
+    // param-hint: pwh bytes=param[2]
+    func waveOutWrite(hwo: HWAVEOUT, pwh: CPointer<WAVEHDR>, cbwh: UInt32): UInt32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutWrite == "on"]
+public unsafe func Windows_waveOutWrite(hwo: HWAVEOUT, pwh: CPointer<WAVEHDR>, cbwh: UInt32): UInt32 {
+    return waveOutWrite(hwo, pwh, cbwh)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINDOWS_MEDIA_MEDIACONTROL == "on" && Windows_Win32_Media_Audio_CreateCaptureAudioStateMonitor == "on"]
 foreign {
     func CreateCaptureAudioStateMonitor(audioStateMonitor: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINDOWS_MEDIA_MEDIACONTROL == "on" && Windows_Win32_Media_Audio_CreateCaptureAudioStateMonitor == "on"]
+public unsafe func Windows_CreateCaptureAudioStateMonitor(audioStateMonitor: CPointer<CPointer<Unit>>): Int32 {
+    return CreateCaptureAudioStateMonitor(audioStateMonitor)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINDOWS_MEDIA_MEDIACONTROL == "on" && Windows_Win32_Media_Audio_CreateCaptureAudioStateMonitorForCategory == "on"]
+foreign {
     func CreateCaptureAudioStateMonitorForCategory(category: Int32, audioStateMonitor: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINDOWS_MEDIA_MEDIACONTROL == "on" && Windows_Win32_Media_Audio_CreateCaptureAudioStateMonitorForCategory == "on"]
+public unsafe func Windows_CreateCaptureAudioStateMonitorForCategory(category: Int32, audioStateMonitor: CPointer<CPointer<Unit>>): Int32 {
+    return CreateCaptureAudioStateMonitorForCategory(category, audioStateMonitor)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINDOWS_MEDIA_MEDIACONTROL == "on" && Windows_Win32_Media_Audio_CreateCaptureAudioStateMonitorForCategoryAndDeviceId == "on"]
+foreign {
     func CreateCaptureAudioStateMonitorForCategoryAndDeviceId(category: Int32, deviceId: CPointer<UInt16>, audioStateMonitor: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINDOWS_MEDIA_MEDIACONTROL == "on" && Windows_Win32_Media_Audio_CreateCaptureAudioStateMonitorForCategoryAndDeviceId == "on"]
+public unsafe func Windows_CreateCaptureAudioStateMonitorForCategoryAndDeviceId(category: Int32, deviceId: CPointer<UInt16>, audioStateMonitor: CPointer<CPointer<Unit>>): Int32 {
+    return CreateCaptureAudioStateMonitorForCategoryAndDeviceId(category, deviceId, audioStateMonitor)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINDOWS_MEDIA_MEDIACONTROL == "on" && Windows_Win32_Media_Audio_CreateCaptureAudioStateMonitorForCategoryAndDeviceRole == "on"]
+foreign {
     func CreateCaptureAudioStateMonitorForCategoryAndDeviceRole(category: Int32, role: Int32, audioStateMonitor: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINDOWS_MEDIA_MEDIACONTROL == "on" && Windows_Win32_Media_Audio_CreateCaptureAudioStateMonitorForCategoryAndDeviceRole == "on"]
+public unsafe func Windows_CreateCaptureAudioStateMonitorForCategoryAndDeviceRole(category: Int32, role: Int32, audioStateMonitor: CPointer<CPointer<Unit>>): Int32 {
+    return CreateCaptureAudioStateMonitorForCategoryAndDeviceRole(category, role, audioStateMonitor)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINDOWS_MEDIA_MEDIACONTROL == "on" && Windows_Win32_Media_Audio_CreateRenderAudioStateMonitor == "on"]
+foreign {
     func CreateRenderAudioStateMonitor(audioStateMonitor: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINDOWS_MEDIA_MEDIACONTROL == "on" && Windows_Win32_Media_Audio_CreateRenderAudioStateMonitor == "on"]
+public unsafe func Windows_CreateRenderAudioStateMonitor(audioStateMonitor: CPointer<CPointer<Unit>>): Int32 {
+    return CreateRenderAudioStateMonitor(audioStateMonitor)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINDOWS_MEDIA_MEDIACONTROL == "on" && Windows_Win32_Media_Audio_CreateRenderAudioStateMonitorForCategory == "on"]
+foreign {
     func CreateRenderAudioStateMonitorForCategory(category: Int32, audioStateMonitor: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINDOWS_MEDIA_MEDIACONTROL == "on" && Windows_Win32_Media_Audio_CreateRenderAudioStateMonitorForCategory == "on"]
+public unsafe func Windows_CreateRenderAudioStateMonitorForCategory(category: Int32, audioStateMonitor: CPointer<CPointer<Unit>>): Int32 {
+    return CreateRenderAudioStateMonitorForCategory(category, audioStateMonitor)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINDOWS_MEDIA_MEDIACONTROL == "on" && Windows_Win32_Media_Audio_CreateRenderAudioStateMonitorForCategoryAndDeviceId == "on"]
+foreign {
     func CreateRenderAudioStateMonitorForCategoryAndDeviceId(category: Int32, deviceId: CPointer<UInt16>, audioStateMonitor: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINDOWS_MEDIA_MEDIACONTROL == "on" && Windows_Win32_Media_Audio_CreateRenderAudioStateMonitorForCategoryAndDeviceId == "on"]
+public unsafe func Windows_CreateRenderAudioStateMonitorForCategoryAndDeviceId(category: Int32, deviceId: CPointer<UInt16>, audioStateMonitor: CPointer<CPointer<Unit>>): Int32 {
+    return CreateRenderAudioStateMonitorForCategoryAndDeviceId(category, deviceId, audioStateMonitor)
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINDOWS_MEDIA_MEDIACONTROL == "on" && Windows_Win32_Media_Audio_CreateRenderAudioStateMonitorForCategoryAndDeviceRole == "on"]
+foreign {
     func CreateRenderAudioStateMonitorForCategoryAndDeviceRole(category: Int32, role: Int32, audioStateMonitor: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_Audio == "on" && WINDOWS_MEDIA_MEDIACONTROL == "on" && Windows_Win32_Media_Audio_CreateRenderAudioStateMonitorForCategoryAndDeviceRole == "on"]
+public unsafe func Windows_CreateRenderAudioStateMonitorForCategoryAndDeviceRole(category: Int32, role: Int32, audioStateMonitor: CPointer<CPointer<Unit>>): Int32 {
+    return CreateRenderAudioStateMonitorForCategoryAndDeviceRole(category, role, audioStateMonitor)
 }
 
 @When[Windows_Win32_Media_Audio == "on"]

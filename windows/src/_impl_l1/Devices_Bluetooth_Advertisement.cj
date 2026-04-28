@@ -113,22 +113,27 @@ public class BluetoothLEAdvertisement <: InterfaceWrapperBase & ComInterface & w
         defaultInterface().SetLocalName(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ServiceUuids(): windows_collections.IVector<GuidValue> {
         return defaultInterface().ServiceUuids()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ManufacturerData(): windows_collections.IVector<BluetoothLEManufacturerData> {
         return defaultInterface().ManufacturerData()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DataSections(): windows_collections.IVector<BluetoothLEAdvertisementDataSection> {
         return defaultInterface().DataSections()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetManufacturerDataByCompanyId(companyId: UInt16): windows_collections.IVectorView<BluetoothLEManufacturerData> {
         return defaultInterface().GetManufacturerDataByCompanyId(companyId)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSectionsByType(type_: UInt8): windows_collections.IVectorView<BluetoothLEAdvertisementDataSection> {
         return defaultInterface().GetSectionsByType(type_)
     }
@@ -506,6 +511,7 @@ public class BluetoothLEAdvertisementFilter <: InterfaceWrapperBase & ComInterfa
         defaultInterface().SetAdvertisement(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func BytePatterns(): windows_collections.IVector<BluetoothLEAdvertisementBytePattern> {
         return defaultInterface().BytePatterns()
     }
@@ -1278,11 +1284,26 @@ public struct IBluetoothLEAdvertisementVtbl {
     public var SetFlags: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var LocalName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetLocalName: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var ServiceUuids: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ServiceUuids: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var ManufacturerData: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ManufacturerData: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var DataSections: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var DataSections: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetManufacturerDataByCompanyId: CFunc<(CPointer<Unit>, UInt16, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetManufacturerDataByCompanyId: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSectionsByType: CFunc<(CPointer<Unit>, UInt8, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetSectionsByType: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1379,6 +1400,7 @@ public class IBluetoothLEAdvertisement <: InterfaceWrapperBase & ComInterface & 
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ServiceUuids(): windows_collections.IVector<GuidValue> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1387,6 +1409,7 @@ public class IBluetoothLEAdvertisement <: InterfaceWrapperBase & ComInterface & 
         return windows_collections.IVector<GuidValue>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ManufacturerData(): windows_collections.IVector<BluetoothLEManufacturerData> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1395,6 +1418,7 @@ public class IBluetoothLEAdvertisement <: InterfaceWrapperBase & ComInterface & 
         return windows_collections.IVector<BluetoothLEManufacturerData>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DataSections(): windows_collections.IVector<BluetoothLEAdvertisementDataSection> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1403,6 +1427,7 @@ public class IBluetoothLEAdvertisement <: InterfaceWrapperBase & ComInterface & 
         return windows_collections.IVector<BluetoothLEAdvertisementDataSection>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetManufacturerDataByCompanyId(companyId: UInt16): windows_collections.IVectorView<BluetoothLEManufacturerData> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1411,6 +1436,7 @@ public class IBluetoothLEAdvertisement <: InterfaceWrapperBase & ComInterface & 
         return windows_collections.IVectorView<BluetoothLEManufacturerData>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSectionsByType(type_: UInt8): windows_collections.IVectorView<BluetoothLEAdvertisementDataSection> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1607,7 +1633,10 @@ public struct IBluetoothLEAdvertisementFilterVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Advertisement: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetAdvertisement: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var BytePatterns: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var BytePatterns: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1690,6 +1719,7 @@ public class IBluetoothLEAdvertisementFilter <: InterfaceWrapperBase & ComInterf
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func BytePatterns(): windows_collections.IVector<BluetoothLEAdvertisementBytePattern> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

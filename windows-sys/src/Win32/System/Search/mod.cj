@@ -59,4 +59,365 @@ public import windows_sys.Win32._impl_l1.SEARCH_ITEM_CHANGE
 public import windows_sys.Win32._impl_l1.SEC_OBJECT
 @When[Windows_Win32_System_Search == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Com == "on")]
 public import windows_sys.Win32._impl_l1.SSVARIANT
-
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_ODBCGetTryWaitValue == "on"]
+public import windows_sys.Win32._impl_l0.Windows_ODBCGetTryWaitValue
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_ODBCSetTryWaitValue == "on"]
+public import windows_sys.Win32._impl_l0.Windows_ODBCSetTryWaitValue
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLAllocConnect == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLAllocConnect
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLAllocEnv == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLAllocEnv
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLAllocHandle == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLAllocHandle
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLAllocHandleStd == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLAllocHandleStd
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLAllocStmt == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLAllocStmt
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLBindCol == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l0.Windows_SQLBindCol
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLBindParam == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l0.Windows_SQLBindParam
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLBindParameter == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l0.Windows_SQLBindParameter
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLBrowseConnect == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLBrowseConnect
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLBrowseConnectA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLBrowseConnectA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLBrowseConnectW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLBrowseConnectW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLBulkOperations == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLBulkOperations
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLCancel == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLCancel
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLCancelHandle == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLCancelHandle
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLCloseCursor == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLCloseCursor
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_SQLCloseEnumServers == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLCloseEnumServers
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColAttribute == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l0.Windows_SQLColAttribute
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColAttributeA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l0.Windows_SQLColAttributeA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColAttributeW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l0.Windows_SQLColAttributeW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColAttributes == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l0.Windows_SQLColAttributes
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColAttributesA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l0.Windows_SQLColAttributesA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColAttributesW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l0.Windows_SQLColAttributesW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColumnPrivileges == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLColumnPrivileges
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColumnPrivilegesA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLColumnPrivilegesA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColumnPrivilegesW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLColumnPrivilegesW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColumns == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLColumns
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColumnsA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLColumnsA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColumnsW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLColumnsW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLCompleteAsync == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLCompleteAsync
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLConnect == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLConnect
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLConnectA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLConnectA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLConnectW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLConnectW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLCopyDesc == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLCopyDesc
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDataSources == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLDataSources
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDataSourcesA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLDataSourcesA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDataSourcesW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLDataSourcesW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDescribeCol == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l0.Windows_SQLDescribeCol
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDescribeColA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l0.Windows_SQLDescribeColA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDescribeColW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l0.Windows_SQLDescribeColW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDescribeParam == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l0.Windows_SQLDescribeParam
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDisconnect == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLDisconnect
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDriverConnect == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLDriverConnect
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDriverConnectA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLDriverConnectA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDriverConnectW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLDriverConnectW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDrivers == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLDrivers
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDriversA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLDriversA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDriversW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLDriversW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLEndTran == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLEndTran
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLError == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLError
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLErrorA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLErrorA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLErrorW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLErrorW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLExecDirect == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLExecDirect
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLExecDirectA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLExecDirectA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLExecDirectW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLExecDirectW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLExecute == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLExecute
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLExtendedFetch == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l0.Windows_SQLExtendedFetch
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLFetch == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLFetch
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLFetchScroll == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l0.Windows_SQLFetchScroll
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLForeignKeys == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLForeignKeys
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLForeignKeysA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLForeignKeysA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLForeignKeysW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLForeignKeysW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLFreeConnect == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLFreeConnect
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLFreeEnv == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLFreeEnv
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLFreeHandle == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLFreeHandle
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLFreeStmt == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLFreeStmt
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetConnectAttr == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetConnectAttr
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetConnectAttrA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetConnectAttrA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetConnectAttrW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetConnectAttrW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetConnectOption == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetConnectOption
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetConnectOptionA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetConnectOptionA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetConnectOptionW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetConnectOptionW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetCursorName == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetCursorName
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetCursorNameA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetCursorNameA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetCursorNameW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetCursorNameW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetData == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetData
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDescField == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetDescField
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDescFieldA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetDescFieldA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDescFieldW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetDescFieldW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDescRec == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetDescRec
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDescRecA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetDescRecA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDescRecW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetDescRecW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDiagField == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetDiagField
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDiagFieldA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetDiagFieldA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDiagFieldW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetDiagFieldW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDiagRec == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetDiagRec
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDiagRecA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetDiagRecA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDiagRecW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetDiagRecW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetEnvAttr == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetEnvAttr
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetFunctions == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetFunctions
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetInfo == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetInfo
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetInfoA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetInfoA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetInfoW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetInfoW
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_SQLGetNextEnumeration == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetNextEnumeration
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetStmtAttr == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetStmtAttr
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetStmtAttrA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetStmtAttrA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetStmtAttrW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetStmtAttrW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetStmtOption == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetStmtOption
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetTypeInfo == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetTypeInfo
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetTypeInfoA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetTypeInfoA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetTypeInfoW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLGetTypeInfoW
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_SQLInitEnumServers == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLInitEnumServers
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_SQLLinkedCatalogsA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLLinkedCatalogsA
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_SQLLinkedCatalogsW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLLinkedCatalogsW
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_SQLLinkedServers == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLLinkedServers
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLMoreResults == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLMoreResults
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLNativeSql == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLNativeSql
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLNativeSqlA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLNativeSqlA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLNativeSqlW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLNativeSqlW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLNumParams == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLNumParams
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLNumResultCols == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLNumResultCols
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLParamData == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLParamData
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLParamOptions == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l0.Windows_SQLParamOptions
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLPrepare == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLPrepare
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLPrepareA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLPrepareA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLPrepareW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLPrepareW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLPrimaryKeys == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLPrimaryKeys
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLPrimaryKeysA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLPrimaryKeysA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLPrimaryKeysW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLPrimaryKeysW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLProcedureColumns == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLProcedureColumns
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLProcedureColumnsA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLProcedureColumnsA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLProcedureColumnsW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLProcedureColumnsW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLProcedures == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLProcedures
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLProceduresA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLProceduresA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLProceduresW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLProceduresW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLPutData == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l0.Windows_SQLPutData
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLRowCount == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l0.Windows_SQLRowCount
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetConnectAttr == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLSetConnectAttr
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetConnectAttrA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLSetConnectAttrA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetConnectAttrW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLSetConnectAttrW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetConnectOption == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l0.Windows_SQLSetConnectOption
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetConnectOptionA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l0.Windows_SQLSetConnectOptionA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetConnectOptionW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l0.Windows_SQLSetConnectOptionW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetCursorName == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLSetCursorName
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetCursorNameA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLSetCursorNameA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetCursorNameW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLSetCursorNameW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetDescField == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLSetDescField
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetDescFieldW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLSetDescFieldW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetDescRec == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l0.Windows_SQLSetDescRec
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetEnvAttr == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLSetEnvAttr
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetParam == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l0.Windows_SQLSetParam
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetPos == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l0.Windows_SQLSetPos
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetScrollOptions == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l0.Windows_SQLSetScrollOptions
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetStmtAttr == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLSetStmtAttr
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetStmtAttrW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLSetStmtAttrW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetStmtOption == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l0.Windows_SQLSetStmtOption
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSpecialColumns == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLSpecialColumns
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSpecialColumnsA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLSpecialColumnsA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSpecialColumnsW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLSpecialColumnsW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLStatistics == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLStatistics
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLStatisticsA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLStatisticsA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLStatisticsW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLStatisticsW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLTablePrivileges == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLTablePrivileges
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLTablePrivilegesA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLTablePrivilegesA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLTablePrivilegesW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLTablePrivilegesW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLTables == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLTables
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLTablesA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLTablesA
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLTablesW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLTablesW
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLTransact == "on"]
+public import windows_sys.Win32._impl_l0.Windows_SQLTransact
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_batch == "on"]
+public import windows_sys.Win32._impl_l0.Windows_bcp_batch
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_bind == "on"]
+public import windows_sys.Win32._impl_l0.Windows_bcp_bind
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_colfmt == "on"]
+public import windows_sys.Win32._impl_l0.Windows_bcp_colfmt
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_collen == "on"]
+public import windows_sys.Win32._impl_l0.Windows_bcp_collen
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_colptr == "on"]
+public import windows_sys.Win32._impl_l0.Windows_bcp_colptr
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_columns == "on"]
+public import windows_sys.Win32._impl_l0.Windows_bcp_columns
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_control == "on"]
+public import windows_sys.Win32._impl_l0.Windows_bcp_control
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_done == "on"]
+public import windows_sys.Win32._impl_l0.Windows_bcp_done
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_exec == "on"]
+public import windows_sys.Win32._impl_l0.Windows_bcp_exec
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_getcolfmt == "on"]
+public import windows_sys.Win32._impl_l0.Windows_bcp_getcolfmt
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_initA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_bcp_initA
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_initW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_bcp_initW
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_moretext == "on"]
+public import windows_sys.Win32._impl_l0.Windows_bcp_moretext
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_readfmtA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_bcp_readfmtA
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_readfmtW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_bcp_readfmtW
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_sendrow == "on"]
+public import windows_sys.Win32._impl_l0.Windows_bcp_sendrow
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_setcolfmt == "on"]
+public import windows_sys.Win32._impl_l0.Windows_bcp_setcolfmt
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_writefmtA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_bcp_writefmtA
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_writefmtW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_bcp_writefmtW
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_dbprtypeA == "on"]
+public import windows_sys.Win32._impl_l0.Windows_dbprtypeA
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_dbprtypeW == "on"]
+public import windows_sys.Win32._impl_l0.Windows_dbprtypeW

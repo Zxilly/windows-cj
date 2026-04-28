@@ -128,6 +128,7 @@ public class IPwmControllerProvider <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IPwmProviderVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetControllers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -172,6 +173,7 @@ public class IPwmProvider <: InterfaceWrapperBase & ComInterface {
         readVtbl<IPwmProviderVtbl>(IPwmProviderVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetControllers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

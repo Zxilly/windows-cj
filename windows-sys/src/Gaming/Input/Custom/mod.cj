@@ -4,7 +4,6 @@ package windows_sys.Gaming.Input.Custom
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_Gaming_Input == "on"]
 import windows_sys.Gaming.Input as Gaming_Input
 import windows_sys._impl_l0 as _impl_l0
 

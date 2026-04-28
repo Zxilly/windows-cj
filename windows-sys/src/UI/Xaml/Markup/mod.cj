@@ -4,7 +4,6 @@ package windows_sys.UI.Xaml.Markup
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_UI_Xaml_Interop == "on"]
 import windows_sys.UI.Xaml.Interop as UI_Xaml_Interop
 import windows_sys.UI.Xaml._impl_l0 as UI_Xaml__impl_l0
 import windows_sys.UI.Xaml._impl_l1 as UI_Xaml__impl_l1
@@ -983,7 +982,7 @@ public class IMarkupExtensionFactory <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IXamlBinaryWriterStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var Write: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<XamlBinaryWriterErrorInformation>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -1028,7 +1027,7 @@ public class IXamlBinaryWriterStatics <: InterfaceWrapperBase & ComInterface {
         readVtbl<IXamlBinaryWriterStaticsVtbl>(IXamlBinaryWriterStaticsVtbl())
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func Write(inputStreams: CPointer<Unit>, outputStreams: CPointer<Unit>, xamlMetadataProvider: CPointer<Unit>, result__: CPointer<XamlBinaryWriterErrorInformation>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

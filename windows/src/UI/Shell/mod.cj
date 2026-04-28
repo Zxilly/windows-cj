@@ -10,13 +10,9 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Graphics_Imaging == "on"]
 import windows.Graphics.Imaging as Graphics_Imaging
-@When[Windows_UI == "on"]
 import windows.UI as UI
-@When[Windows_UI_StartScreen == "on"]
 import windows.UI.StartScreen as UI_StartScreen
 import windows._impl_l1 as _impl_l1
 import windows._impl_l2 as _impl_l2

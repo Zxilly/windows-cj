@@ -115,6 +115,7 @@ public class IRawNotification <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IRawNotification2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Headers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ChannelId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -160,6 +161,7 @@ public class IRawNotification2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IRawNotification2Vtbl>(IRawNotification2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Headers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

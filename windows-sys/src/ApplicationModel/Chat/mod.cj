@@ -601,6 +601,7 @@ public struct IChatConversationThreadingInfoVtbl {
     public var SetCustom: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var ConversationId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetConversationId: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Participants: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Kind: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetKind: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -683,6 +684,7 @@ public class IChatConversationThreadingInfo <: InterfaceWrapperBase & ComInterfa
         return __vt.SetConversationId(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Participants(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1223,6 +1225,7 @@ public struct IChatMessageTransportConfigurationVtbl {
     public var MaxRecipientCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     @When[Windows_Media_MediaProperties == "on"]
     public var SupportedVideoFormat: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ExtendedProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1292,6 +1295,7 @@ public class IChatMessageTransportConfiguration <: InterfaceWrapperBase & ComInt
         return __vt.SupportedVideoFormat(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ExtendedProperties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1566,7 +1570,9 @@ public class IChatRecipientDeliveryInfo <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IChatSearchReaderVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ReadBatchAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ReadBatchWithCountAsync: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -1611,12 +1617,14 @@ public class IChatSearchReader <: InterfaceWrapperBase & ComInterface {
         readVtbl<IChatSearchReaderVtbl>(IChatSearchReaderVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReadBatchAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ReadBatchAsync(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReadBatchWithCountAsync(count: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2411,6 +2419,7 @@ public struct IRcsEndUserMessageVtbl {
     public var Title: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Text: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IsPinRequired: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Actions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SendResponseAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var SendResponseWithPinAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
@@ -2481,6 +2490,7 @@ public class IRcsEndUserMessage <: InterfaceWrapperBase & ComInterface {
         return __vt.IsPinRequired(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Actions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2628,6 +2638,7 @@ public struct IChatConversationVtbl {
     public var IsConversationMuted: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var SetIsConversationMuted: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
     public var MostRecentMessageId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Participants: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ThreadingInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var DeleteAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -2724,6 +2735,7 @@ public class IChatConversation <: InterfaceWrapperBase & ComInterface {
         return __vt.MostRecentMessageId(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Participants(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2795,7 +2807,9 @@ public class IChatConversation <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IChatConversationReaderVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ReadBatchAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ReadBatchWithCountAsync: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -2840,12 +2854,14 @@ public class IChatConversationReader <: InterfaceWrapperBase & ComInterface {
         readVtbl<IChatConversationReaderVtbl>(IChatConversationReaderVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReadBatchAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ReadBatchAsync(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReadBatchWithCountAsync(count: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2857,6 +2873,7 @@ public class IChatConversationReader <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IChatMessageVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Attachments: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Body: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetBody: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -2867,7 +2884,9 @@ public struct IChatMessageVtbl {
     public var IsRead: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var LocalTimestamp: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.DateTime>) -> Int32> = { _, _ => 0 }
     public var NetworkTimestamp: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.DateTime>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Recipients: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var RecipientSendStatuses: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Status: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Subject: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -2917,6 +2936,7 @@ public class IChatMessage <: InterfaceWrapperBase & ComInterface {
         readVtbl<IChatMessageVtbl>(IChatMessageVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Attachments(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2977,12 +2997,14 @@ public class IChatMessage <: InterfaceWrapperBase & ComInterface {
         return __vt.NetworkTimestamp(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Recipients(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Recipients(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RecipientSendStatuses(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3051,6 +3073,7 @@ public struct IChatMessage2Vtbl {
     public var SetShouldSuppressNotification: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
     public var ThreadingInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetThreadingInfo: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var RecipientsDeliveryInfos: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -3257,6 +3280,7 @@ public class IChatMessage2 <: InterfaceWrapperBase & ComInterface {
         return __vt.SetThreadingInfo(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RecipientsDeliveryInfos(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3506,6 +3530,7 @@ public struct IChatMessageChangeReaderVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var AcceptChanges: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var AcceptChangesThrough: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ReadBatchAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -3562,6 +3587,7 @@ public class IChatMessageChangeReader <: InterfaceWrapperBase & ComInterface {
         return __vt.AcceptChangesThrough(__liveRaw, lastChangeToAcknowledge)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReadBatchAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3704,6 +3730,7 @@ public class IChatMessageManager2Statics <: InterfaceWrapperBase & ComInterface 
 @C
 public struct IChatMessageManagerStaticVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetTransportsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var RequestStoreAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ShowComposeSmsMessageAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -3751,6 +3778,7 @@ public class IChatMessageManagerStatic <: InterfaceWrapperBase & ComInterface {
         readVtbl<IChatMessageManagerStaticVtbl>(IChatMessageManagerStaticVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetTransportsAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3966,6 +3994,7 @@ public class IChatMessageNotificationTriggerDetails2 <: InterfaceWrapperBase & C
 @C
 public struct IChatMessageReaderVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ReadBatchAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -4010,6 +4039,7 @@ public class IChatMessageReader <: InterfaceWrapperBase & ComInterface {
         readVtbl<IChatMessageReaderVtbl>(IChatMessageReaderVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReadBatchAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4021,6 +4051,7 @@ public class IChatMessageReader <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IChatMessageReader2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ReadBatchWithCountAsync: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -4065,6 +4096,7 @@ public class IChatMessageReader2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IChatMessageReader2Vtbl>(IChatMessageReader2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReadBatchWithCountAsync(count: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4208,16 +4240,21 @@ public class IChatMessageStore <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IChatMessageStore2Vtbl {
     public var base_: IChatMessageStoreVtbl = IChatMessageStoreVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ForwardMessageAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var GetConversationAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetConversationForTransportsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var GetConversationFromThreadingInfoAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetConversationReader: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetConversationForTransportsReader: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetMessageByRemoteIdAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var GetUnseenCountAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetUnseenCountForTransportsReaderAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var MarkAsSeenAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var MarkAsSeenForTransportsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetSearchReader: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var SaveMessageAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -4268,6 +4305,7 @@ public class IChatMessageStore2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IChatMessageStore2Vtbl>(IChatMessageStore2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ForwardMessageAsync(localChatMessageId: CPointer<Unit>, addresses: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4280,6 +4318,7 @@ public class IChatMessageStore2 <: InterfaceWrapperBase & ComInterface {
         return __vt.GetConversationAsync(__liveRaw, conversationId, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetConversationForTransportsAsync(conversationId: CPointer<Unit>, transportIds: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4298,6 +4337,7 @@ public class IChatMessageStore2 <: InterfaceWrapperBase & ComInterface {
         return __vt.GetConversationReader(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetConversationForTransportsReader(transportIds: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4316,6 +4356,7 @@ public class IChatMessageStore2 <: InterfaceWrapperBase & ComInterface {
         return __vt.GetUnseenCountAsync(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetUnseenCountForTransportsReaderAsync(transportIds: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4328,6 +4369,7 @@ public class IChatMessageStore2 <: InterfaceWrapperBase & ComInterface {
         return __vt.MarkAsSeenAsync(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MarkAsSeenForTransportsAsync(transportIds: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4493,6 +4535,7 @@ public class IRcsEndUserMessageManager <: InterfaceWrapperBase & ComInterface {
 public struct IRcsManagerStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var GetEndUserMessageManager: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetTransportsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetTransportAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var LeaveConversationAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -4545,6 +4588,7 @@ public class IRcsManagerStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.GetEndUserMessageManager(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetTransportsAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4568,6 +4612,7 @@ public class IRcsManagerStatics <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IRcsTransportVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ExtendedProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IsActive: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var TransportFriendlyName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -4620,6 +4665,7 @@ public class IRcsTransport <: InterfaceWrapperBase & ComInterface {
         readVtbl<IRcsTransportVtbl>(IRcsTransportVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ExtendedProperties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

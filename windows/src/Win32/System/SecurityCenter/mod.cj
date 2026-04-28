@@ -8,7 +8,6 @@ import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeTy
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l2 as Win32__impl_l2
@@ -442,18 +441,64 @@ extend WSC_SECURITY_SIGNATURE_STATUS <: windows_core.CopyType & windows_core.Run
     }
 }
 
-@When[WSCAPI == "on"]
+@When[Windows_Win32_System_SecurityCenter == "on" && WSCAPI == "on" && Windows_Win32_System_SecurityCenter_WscGetAntiMalwareUri == "on"]
 foreign {
     func WscGetAntiMalwareUri(ppszUri: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_SecurityCenter == "on" && WSCAPI == "on" && Windows_Win32_System_SecurityCenter_WscGetAntiMalwareUri == "on"]
+public unsafe func Windows_WscGetAntiMalwareUri(ppszUri: CPointer<CPointer<UInt16>>): Int32 {
+    return WscGetAntiMalwareUri(ppszUri)
+}
+
+@When[Windows_Win32_System_SecurityCenter == "on" && WSCAPI == "on" && Windows_Win32_System_SecurityCenter_WscGetSecurityProviderHealth == "on"]
+foreign {
     func WscGetSecurityProviderHealth(Providers: UInt32, pHealth: CPointer<WSC_SECURITY_PROVIDER_HEALTHAbi>): Int32
+}
+
+@When[Windows_Win32_System_SecurityCenter == "on" && WSCAPI == "on" && Windows_Win32_System_SecurityCenter_WscGetSecurityProviderHealth == "on"]
+public unsafe func Windows_WscGetSecurityProviderHealth(Providers: UInt32, pHealth: CPointer<WSC_SECURITY_PROVIDER_HEALTHAbi>): Int32 {
+    return WscGetSecurityProviderHealth(Providers, pHealth)
+}
+
+@When[Windows_Win32_System_SecurityCenter == "on" && WSCAPI == "on" && Windows_Win32_System_SecurityCenter_WscQueryAntiMalwareUri == "on"]
+foreign {
     func WscQueryAntiMalwareUri(): Int32
+}
+
+@When[Windows_Win32_System_SecurityCenter == "on" && WSCAPI == "on" && Windows_Win32_System_SecurityCenter_WscQueryAntiMalwareUri == "on"]
+public unsafe func Windows_WscQueryAntiMalwareUri(): Int32 {
+    return WscQueryAntiMalwareUri()
+}
+
+@When[Windows_Win32_System_SecurityCenter == "on" && WSCAPI == "on" && Windows_Win32_System_SecurityCenter_WscRegisterForChanges == "on" && Windows_Win32_System_Threading == "on"]
+foreign {
+    func WscRegisterForChanges(Reserved: CPointer<Unit>, phCallbackRegistration: CPointer<CPointer<Unit>>, lpCallbackAddress: Win32__impl_l0.LPTHREAD_START_ROUTINE, pContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_SecurityCenter == "on" && WSCAPI == "on" && Windows_Win32_System_SecurityCenter_WscRegisterForChanges == "on" && Windows_Win32_System_Threading == "on"]
+public unsafe func Windows_WscRegisterForChanges(Reserved: CPointer<Unit>, phCallbackRegistration: CPointer<CPointer<Unit>>, lpCallbackAddress: Win32__impl_l0.LPTHREAD_START_ROUTINE, pContext: CPointer<Unit>): Int32 {
+    return WscRegisterForChanges(Reserved, phCallbackRegistration, lpCallbackAddress, pContext)
+}
+
+@When[Windows_Win32_System_SecurityCenter == "on" && WSCAPI == "on" && Windows_Win32_System_SecurityCenter_WscRegisterForUserNotifications == "on"]
+foreign {
     func WscRegisterForUserNotifications(): Int32
+}
+
+@When[Windows_Win32_System_SecurityCenter == "on" && WSCAPI == "on" && Windows_Win32_System_SecurityCenter_WscRegisterForUserNotifications == "on"]
+public unsafe func Windows_WscRegisterForUserNotifications(): Int32 {
+    return WscRegisterForUserNotifications()
+}
+
+@When[Windows_Win32_System_SecurityCenter == "on" && WSCAPI == "on" && Windows_Win32_System_SecurityCenter_WscUnRegisterChanges == "on"]
+foreign {
     func WscUnRegisterChanges(hRegistrationHandle: CPointer<Unit>): Int32
 }
 
-@When[WSCAPI == "on" && Windows_Win32_System_Threading == "on"]
-foreign {
-    func WscRegisterForChanges(Reserved: CPointer<Unit>, phCallbackRegistration: CPointer<CPointer<Unit>>, lpCallbackAddress: Win32__impl_l0.LPTHREAD_START_ROUTINE, pContext: CPointer<Unit>): Int32
+@When[Windows_Win32_System_SecurityCenter == "on" && WSCAPI == "on" && Windows_Win32_System_SecurityCenter_WscUnRegisterChanges == "on"]
+public unsafe func Windows_WscUnRegisterChanges(hRegistrationHandle: CPointer<Unit>): Int32 {
+    return WscUnRegisterChanges(hRegistrationHandle)
 }
 
 @When[Windows_Win32_System_SecurityCenter == "on" && Windows_Win32_System_Com == "on"]

@@ -7,4 +7,3 @@ public import windows_sys._impl_l0.{HttpCacheReadBehavior, HttpCacheReadBehavior
 public import windows_sys._impl_l2.{IHttpBaseProtocolFilter, IHttpBaseProtocolFilter4, IHttpBaseProtocolFilter4Vtbl, IHttpBaseProtocolFilterStatics, IHttpBaseProtocolFilterStaticsVtbl, IHttpBaseProtocolFilterVtbl, IHttpFilter, IHttpFilterVtbl, IHttpServerCustomValidationRequestedEventArgs, IHttpServerCustomValidationRequestedEventArgsVtbl}
 @When[Windows_Web_Http_Filters == "on"]
 public import windows_sys._impl_l1.{IHttpBaseProtocolFilter5, IHttpBaseProtocolFilter5Vtbl}
-

@@ -414,12 +414,14 @@ public class ApplicationDataSetVersionHandler <: InterfaceWrapperBase & ComInter
 @When[Windows_Storage == "on"]
 extend ApplicationDataSetVersionHandler <: windows_core.Interface<ApplicationDataSetVersionHandler> {}
 
+@When[Windows_Storage == "on"]
 private open class ApplicationDataSetVersionHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_Storage == "on"]
 private open class ApplicationDataSetVersionHandlerInvoker <: ApplicationDataSetVersionHandlerInvokerErased {
     public open func Invoke(setVersionRequest: InParam<SetVersionRequest>): Unit {
         ()
@@ -431,6 +433,7 @@ private open class ApplicationDataSetVersionHandlerInvoker <: ApplicationDataSet
     }
 }
 
+@When[Windows_Storage == "on"]
 private class ApplicationDataSetVersionHandlerBox <: ApplicationDataSetVersionHandlerInvoker {
     public let invoke_: (InParam<SetVersionRequest>) -> Unit
     private let vtblHandle: CPointerHandle<ApplicationDataSetVersionHandlerVtbl>
@@ -449,6 +452,7 @@ private class ApplicationDataSetVersionHandlerBox <: ApplicationDataSetVersionHa
     }
 }
 
+@When[Windows_Storage == "on"]
 func buildApplicationDataSetVersionHandlerBoxVtbl(): ApplicationDataSetVersionHandlerVtbl {
     var vtbl = ApplicationDataSetVersionHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -523,6 +527,7 @@ public class DownloadsFolder <: windows_interface.RuntimeName & windows_core.Run
         windows_core.activationFactory<DownloadsFolder>().ok()
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public static unsafe func CreateFileAsync(desiredName: windows_core.HString): windows_future.IAsyncOperation<StorageFile> {
         var result__: Option<windows_future.IAsyncOperation<StorageFile>> = Option<windows_future.IAsyncOperation<StorageFile>>.None
         try (factory__ = windows_core.factory<DownloadsFolder, IDownloadsFolderStatics>().unwrap()) {
@@ -545,6 +550,7 @@ public class DownloadsFolder <: windows_interface.RuntimeName & windows_core.Run
         }
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public static unsafe func CreateFileWithCollisionOptionAsync(desiredName: windows_core.HString, option: _impl_l0.CreationCollisionOption): windows_future.IAsyncOperation<StorageFile> {
         var result__: Option<windows_future.IAsyncOperation<StorageFile>> = Option<windows_future.IAsyncOperation<StorageFile>>.None
         try (factory__ = windows_core.factory<DownloadsFolder, IDownloadsFolderStatics>().unwrap()) {
@@ -567,7 +573,7 @@ public class DownloadsFolder <: windows_interface.RuntimeName & windows_core.Run
         }
     }
 
-    @When[Windows_System == "on"]
+    @When[Windows_Storage_Streams == "on" && Windows_System == "on"]
     public static unsafe func CreateFileForUserAsync(user: User, desiredName: windows_core.HString): windows_future.IAsyncOperation<StorageFile> {
         var result__: Option<windows_future.IAsyncOperation<StorageFile>> = Option<windows_future.IAsyncOperation<StorageFile>>.None
         try (factory__ = windows_core.factory<DownloadsFolder, IDownloadsFolderStatics2>().unwrap()) {
@@ -591,7 +597,7 @@ public class DownloadsFolder <: windows_interface.RuntimeName & windows_core.Run
         }
     }
 
-    @When[Windows_System == "on"]
+    @When[Windows_Storage_Streams == "on" && Windows_System == "on"]
     public static unsafe func CreateFileForUserWithCollisionOptionAsync(user: User, desiredName: windows_core.HString, option: _impl_l0.CreationCollisionOption): windows_future.IAsyncOperation<StorageFile> {
         var result__: Option<windows_future.IAsyncOperation<StorageFile>> = Option<windows_future.IAsyncOperation<StorageFile>>.None
         try (factory__ = windows_core.factory<DownloadsFolder, IDownloadsFolderStatics2>().unwrap()) {
@@ -705,6 +711,7 @@ public class FileIO <: windows_interface.RuntimeName & windows_core.RuntimeName 
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func ReadLinesAsync(file: IStorageFile): windows_future.IAsyncOperation<windows_collections.IVector<windows_core.HString>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVector<windows_core.HString>>> = Option<windows_future.IAsyncOperation<windows_collections.IVector<windows_core.HString>>>.None
         try (factory__ = windows_core.factory<FileIO, IFileIOStatics>().unwrap()) {
@@ -716,7 +723,7 @@ public class FileIO <: windows_interface.RuntimeName & windows_core.RuntimeName 
         }
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public static unsafe func ReadLinesWithEncodingAsync(file: IStorageFile, encoding: _impl_l0.UnicodeEncoding): windows_future.IAsyncOperation<windows_collections.IVector<windows_core.HString>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVector<windows_core.HString>>> = Option<windows_future.IAsyncOperation<windows_collections.IVector<windows_core.HString>>>.None
         try (factory__ = windows_core.factory<FileIO, IFileIOStatics>().unwrap()) {
@@ -728,6 +735,7 @@ public class FileIO <: windows_interface.RuntimeName & windows_core.RuntimeName 
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func WriteLinesAsync(file: IStorageFile, lines: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncAction {
         var result__: Option<windows_future.IAsyncAction> = Option<windows_future.IAsyncAction>.None
         try (factory__ = windows_core.factory<FileIO, IFileIOStatics>().unwrap()) {
@@ -739,7 +747,7 @@ public class FileIO <: windows_interface.RuntimeName & windows_core.RuntimeName 
         }
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public static unsafe func WriteLinesWithEncodingAsync(file: IStorageFile, lines: windows_collections.IIterable<windows_core.HString>, encoding: _impl_l0.UnicodeEncoding): windows_future.IAsyncAction {
         var result__: Option<windows_future.IAsyncAction> = Option<windows_future.IAsyncAction>.None
         try (factory__ = windows_core.factory<FileIO, IFileIOStatics>().unwrap()) {
@@ -751,6 +759,7 @@ public class FileIO <: windows_interface.RuntimeName & windows_core.RuntimeName 
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func AppendLinesAsync(file: IStorageFile, lines: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncAction {
         var result__: Option<windows_future.IAsyncAction> = Option<windows_future.IAsyncAction>.None
         try (factory__ = windows_core.factory<FileIO, IFileIOStatics>().unwrap()) {
@@ -762,7 +771,7 @@ public class FileIO <: windows_interface.RuntimeName & windows_core.RuntimeName 
         }
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public static unsafe func AppendLinesWithEncodingAsync(file: IStorageFile, lines: windows_collections.IIterable<windows_core.HString>, encoding: _impl_l0.UnicodeEncoding): windows_future.IAsyncAction {
         var result__: Option<windows_future.IAsyncAction> = Option<windows_future.IAsyncAction>.None
         try (factory__ = windows_core.factory<FileIO, IFileIOStatics>().unwrap()) {
@@ -1559,9 +1568,15 @@ extend ICachedFileManagerStatics <: windows_core.Interface<ICachedFileManagerSta
 @C
 public struct IDownloadsFolderStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Storage_Streams == "on"]
     public var CreateFileAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Storage_Streams != "on"]
+    public var CreateFileAsync: UIntNative = UIntNative(0)
     public var CreateFolderAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Storage_Streams == "on"]
     public var CreateFileWithCollisionOptionAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, _impl_l0.CreationCollisionOptionAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Storage_Streams != "on"]
+    public var CreateFileWithCollisionOptionAsync: UIntNative = UIntNative(0)
     public var CreateFolderWithCollisionOptionAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, _impl_l0.CreationCollisionOptionAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -1631,6 +1646,7 @@ public class IDownloadsFolderStatics <: InterfaceWrapperBase & ComInterface & Ru
         readVtbl<IDownloadsFolderStaticsVtbl>(IDownloadsFolderStaticsVtbl())
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func CreateFileAsync(desiredName: windows_core.HString): windows_future.IAsyncOperation<StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1647,6 +1663,7 @@ public class IDownloadsFolderStatics <: InterfaceWrapperBase & ComInterface & Ru
         return windows_future.IAsyncOperation<StorageFolder>.fromAbiTake(result__)
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func CreateFileWithCollisionOptionAsync(desiredName: windows_core.HString, option: _impl_l0.CreationCollisionOption): windows_future.IAsyncOperation<StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1671,17 +1688,17 @@ extend IDownloadsFolderStatics <: windows_core.Interface<IDownloadsFolderStatics
 @C
 public struct IDownloadsFolderStatics2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_System == "on"]
+    @When[Windows_Storage_Streams == "on" && Windows_System == "on"]
     public var CreateFileForUserAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_System != "on"]
+    @When[Windows_Storage_Streams != "on" || Windows_System != "on"]
     public var CreateFileForUserAsync: UIntNative = UIntNative(0)
     @When[Windows_System == "on"]
     public var CreateFolderForUserAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_System != "on"]
     public var CreateFolderForUserAsync: UIntNative = UIntNative(0)
-    @When[Windows_System == "on"]
+    @When[Windows_Storage_Streams == "on" && Windows_System == "on"]
     public var CreateFileForUserWithCollisionOptionAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, _impl_l0.CreationCollisionOptionAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_System != "on"]
+    @When[Windows_Storage_Streams != "on" || Windows_System != "on"]
     public var CreateFileForUserWithCollisionOptionAsync: UIntNative = UIntNative(0)
     @When[Windows_System == "on"]
     public var CreateFolderForUserWithCollisionOptionAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, _impl_l0.CreationCollisionOptionAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
@@ -1755,7 +1772,7 @@ public class IDownloadsFolderStatics2 <: InterfaceWrapperBase & ComInterface & R
         readVtbl<IDownloadsFolderStatics2Vtbl>(IDownloadsFolderStatics2Vtbl())
     }
 
-    @When[Windows_System == "on"]
+    @When[Windows_Storage_Streams == "on" && Windows_System == "on"]
     public unsafe func CreateFileForUserAsync(user: User, desiredName: windows_core.HString): windows_future.IAsyncOperation<StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1773,7 +1790,7 @@ public class IDownloadsFolderStatics2 <: InterfaceWrapperBase & ComInterface & R
         return windows_future.IAsyncOperation<StorageFolder>.fromAbiTake(result__)
     }
 
-    @When[Windows_System == "on"]
+    @When[Windows_Storage_Streams == "on" && Windows_System == "on"]
     public unsafe func CreateFileForUserWithCollisionOptionAsync(user: User, desiredName: windows_core.HString, option: _impl_l0.CreationCollisionOption): windows_future.IAsyncOperation<StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1814,20 +1831,29 @@ public struct IFileIOStaticsVtbl {
     public var AppendTextWithEncodingAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, _impl_l0.UnicodeEncodingAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams != "on"]
     public var AppendTextWithEncodingAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var ReadLinesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections != "on"]
+    public var ReadLinesAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var ReadLinesWithEncodingAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, _impl_l0.UnicodeEncodingAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
     public var ReadLinesWithEncodingAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var WriteLinesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections != "on"]
+    public var WriteLinesAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var WriteLinesWithEncodingAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, _impl_l0.UnicodeEncodingAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
     public var WriteLinesWithEncodingAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var AppendLinesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections != "on"]
+    public var AppendLinesAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var AppendLinesWithEncodingAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, _impl_l0.UnicodeEncodingAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
     public var AppendLinesWithEncodingAsync: UIntNative = UIntNative(0)
     @When[Windows_Storage_Streams == "on"]
     public var ReadBufferAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -1957,6 +1983,7 @@ public class IFileIOStatics <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReadLinesAsync(file: IStorageFile): windows_future.IAsyncOperation<windows_collections.IVector<windows_core.HString>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1965,7 +1992,7 @@ public class IFileIOStatics <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_future.IAsyncOperation<windows_collections.IVector<windows_core.HString>>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func ReadLinesWithEncodingAsync(file: IStorageFile, encoding: _impl_l0.UnicodeEncoding): windows_future.IAsyncOperation<windows_collections.IVector<windows_core.HString>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1974,6 +2001,7 @@ public class IFileIOStatics <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_future.IAsyncOperation<windows_collections.IVector<windows_core.HString>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func WriteLinesAsync(file: IStorageFile, lines: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1982,7 +2010,7 @@ public class IFileIOStatics <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func WriteLinesWithEncodingAsync(file: IStorageFile, lines: windows_collections.IIterable<windows_core.HString>, encoding: _impl_l0.UnicodeEncoding): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1991,6 +2019,7 @@ public class IFileIOStatics <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AppendLinesAsync(file: IStorageFile, lines: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1999,7 +2028,7 @@ public class IFileIOStatics <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func AppendLinesWithEncodingAsync(file: IStorageFile, lines: windows_collections.IIterable<windows_core.HString>, encoding: _impl_l0.UnicodeEncoding): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2845,9 +2874,18 @@ public struct IStorageFileVtbl {
     @When[Windows_Storage_Streams != "on"]
     public var OpenAsync: UIntNative = UIntNative(0)
     public var OpenTransactedWriteAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Storage_Streams == "on"]
     public var CopyOverloadDefaultNameAndOptions: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Storage_Streams != "on"]
+    public var CopyOverloadDefaultNameAndOptions: UIntNative = UIntNative(0)
+    @When[Windows_Storage_Streams == "on"]
     public var CopyOverloadDefaultOptions: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Storage_Streams != "on"]
+    public var CopyOverloadDefaultOptions: UIntNative = UIntNative(0)
+    @When[Windows_Storage_Streams == "on"]
     public var CopyOverload: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, _impl_l0.NameCollisionOptionAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Storage_Streams != "on"]
+    public var CopyOverload: UIntNative = UIntNative(0)
     public var CopyAndReplaceAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var MoveOverloadDefaultNameAndOptions: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var MoveOverloadDefaultOptions: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
@@ -2885,30 +2923,9 @@ public struct IStorageFileVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.CopyOverloadDefaultNameAndOptions = { instanceRaw, arg0, result__ =>
-            match (unsafe { asImplFromRaw<IStorageFile_ImplErased>(instanceRaw) }) {
-                case Some(impl) =>
-                    impl.__winrtThunk_CopyOverloadDefaultNameAndOptions(arg0, result__)
-                case None =>
-                    E_NOINTERFACE.value
-            }
-        }
-        vtbl.CopyOverloadDefaultOptions = { instanceRaw, arg0, arg1, result__ =>
-            match (unsafe { asImplFromRaw<IStorageFile_ImplErased>(instanceRaw) }) {
-                case Some(impl) =>
-                    impl.__winrtThunk_CopyOverloadDefaultOptions(arg0, arg1, result__)
-                case None =>
-                    E_NOINTERFACE.value
-            }
-        }
-        vtbl.CopyOverload = { instanceRaw, arg0, arg1, arg2, result__ =>
-            match (unsafe { asImplFromRaw<IStorageFile_ImplErased>(instanceRaw) }) {
-                case Some(impl) =>
-                    impl.__winrtThunk_CopyOverload(arg0, arg1, arg2, result__)
-                case None =>
-                    E_NOINTERFACE.value
-            }
-        }
+        vtbl = IStorageFileVtbl.__assignCopyOverloadDefaultNameAndOptions<Identity>(vtbl)
+        vtbl = IStorageFileVtbl.__assignCopyOverloadDefaultOptions<Identity>(vtbl)
+        vtbl = IStorageFileVtbl.__assignCopyOverload<Identity>(vtbl)
         vtbl.CopyAndReplaceAsync = { instanceRaw, arg0, result__ =>
             match (unsafe { asImplFromRaw<IStorageFile_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
@@ -2968,6 +2985,63 @@ public struct IStorageFileVtbl {
 
     @When[((Windows_Storage_Streams == "on") && (Windows_Storage_FileProperties == "on")) && Windows_Storage_Streams != "on"]
     public static func __assignOpenAsync<Identity>(vtbl: IStorageFileVtbl): IStorageFileVtbl where Identity <: IStorageFile_Impl {
+        return vtbl
+    }
+
+    @When[((Windows_Storage_Streams == "on") && (Windows_Storage_FileProperties == "on")) && Windows_Storage_Streams == "on"]
+    public static func __assignCopyOverloadDefaultNameAndOptions<Identity>(vtbl: IStorageFileVtbl): IStorageFileVtbl where Identity <: IStorageFile_Impl {
+        var next = vtbl
+        next.CopyOverloadDefaultNameAndOptions = { instanceRaw, arg0, result__ =>
+            match (unsafe { asImplFromRaw<IStorageFile_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_CopyOverloadDefaultNameAndOptions(arg0, result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        return next
+    }
+
+    @When[((Windows_Storage_Streams == "on") && (Windows_Storage_FileProperties == "on")) && Windows_Storage_Streams != "on"]
+    public static func __assignCopyOverloadDefaultNameAndOptions<Identity>(vtbl: IStorageFileVtbl): IStorageFileVtbl where Identity <: IStorageFile_Impl {
+        return vtbl
+    }
+
+    @When[((Windows_Storage_Streams == "on") && (Windows_Storage_FileProperties == "on")) && Windows_Storage_Streams == "on"]
+    public static func __assignCopyOverloadDefaultOptions<Identity>(vtbl: IStorageFileVtbl): IStorageFileVtbl where Identity <: IStorageFile_Impl {
+        var next = vtbl
+        next.CopyOverloadDefaultOptions = { instanceRaw, arg0, arg1, result__ =>
+            match (unsafe { asImplFromRaw<IStorageFile_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_CopyOverloadDefaultOptions(arg0, arg1, result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        return next
+    }
+
+    @When[((Windows_Storage_Streams == "on") && (Windows_Storage_FileProperties == "on")) && Windows_Storage_Streams != "on"]
+    public static func __assignCopyOverloadDefaultOptions<Identity>(vtbl: IStorageFileVtbl): IStorageFileVtbl where Identity <: IStorageFile_Impl {
+        return vtbl
+    }
+
+    @When[((Windows_Storage_Streams == "on") && (Windows_Storage_FileProperties == "on")) && Windows_Storage_Streams == "on"]
+    public static func __assignCopyOverload<Identity>(vtbl: IStorageFileVtbl): IStorageFileVtbl where Identity <: IStorageFile_Impl {
+        var next = vtbl
+        next.CopyOverload = { instanceRaw, arg0, arg1, arg2, result__ =>
+            match (unsafe { asImplFromRaw<IStorageFile_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_CopyOverload(arg0, arg1, arg2, result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        return next
+    }
+
+    @When[((Windows_Storage_Streams == "on") && (Windows_Storage_FileProperties == "on")) && Windows_Storage_Streams != "on"]
+    public static func __assignCopyOverload<Identity>(vtbl: IStorageFileVtbl): IStorageFileVtbl where Identity <: IStorageFile_Impl {
         return vtbl
     }
 
@@ -3579,6 +3653,7 @@ public class IStorageFile <: InterfaceWrapperBase & ComInterface & RuntimeName &
         return windows_future.IAsyncOperation<StorageStreamTransaction>.fromAbiTake(result__)
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func CopyOverloadDefaultNameAndOptions(destinationFolder: IStorageFolder): windows_future.IAsyncOperation<StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3587,6 +3662,7 @@ public class IStorageFile <: InterfaceWrapperBase & ComInterface & RuntimeName &
         return windows_future.IAsyncOperation<StorageFile>.fromAbiTake(result__)
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func CopyOverloadDefaultOptions(destinationFolder: IStorageFolder, desiredNewName: windows_core.HString): windows_future.IAsyncOperation<StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3595,6 +3671,7 @@ public class IStorageFile <: InterfaceWrapperBase & ComInterface & RuntimeName &
         return windows_future.IAsyncOperation<StorageFile>.fromAbiTake(result__)
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func CopyOverload(destinationFolder: IStorageFolder, desiredNewName: windows_core.HString, option: _impl_l0.NameCollisionOption): windows_future.IAsyncOperation<StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3842,8 +3919,14 @@ extend IStorageFile2 <: windows_core.Interface<IStorageFile2> {}
 @C
 public struct IStorageFileStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Storage_Streams == "on"]
     public var GetFileFromPathAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Storage_Streams != "on"]
+    public var GetFileFromPathAsync: UIntNative = UIntNative(0)
+    @When[Windows_Storage_Streams == "on"]
     public var GetFileFromApplicationUriAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Storage_Streams != "on"]
+    public var GetFileFromApplicationUriAsync: UIntNative = UIntNative(0)
     @When[Windows_Storage_Streams == "on"]
     public var CreateStreamedFileAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams != "on"]
@@ -3928,6 +4011,7 @@ public class IStorageFileStatics <: InterfaceWrapperBase & ComInterface & Runtim
         readVtbl<IStorageFileStaticsVtbl>(IStorageFileStaticsVtbl())
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func GetFileFromPathAsync(path: windows_core.HString): windows_future.IAsyncOperation<StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3936,6 +4020,7 @@ public class IStorageFileStatics <: InterfaceWrapperBase & ComInterface & Runtim
         return windows_future.IAsyncOperation<StorageFile>.fromAbiTake(result__)
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func GetFileFromApplicationUriAsync(uri: Foundation.Uri): windows_future.IAsyncOperation<StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3988,9 +4073,9 @@ extend IStorageFileStatics <: windows_core.Interface<IStorageFileStatics> {}
 @C
 public struct IStorageFileStatics2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_System == "on"]
+    @When[Windows_Storage_Streams == "on" && Windows_System == "on"]
     public var GetFileFromPathForUserAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_System != "on"]
+    @When[Windows_Storage_Streams != "on" || Windows_System != "on"]
     public var GetFileFromPathForUserAsync: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -4060,7 +4145,7 @@ public class IStorageFileStatics2 <: InterfaceWrapperBase & ComInterface & Runti
         readVtbl<IStorageFileStatics2Vtbl>(IStorageFileStatics2Vtbl())
     }
 
-    @When[Windows_System == "on"]
+    @When[Windows_Storage_Streams == "on" && Windows_System == "on"]
     public unsafe func GetFileFromPathForUserAsync(user: User, path: windows_core.HString): windows_future.IAsyncOperation<StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4077,39 +4162,43 @@ extend IStorageFileStatics2 <: windows_core.Interface<IStorageFileStatics2> {}
 @C
 public struct IStorageFolderVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Storage_Streams == "on"]
     public var CreateFileAsyncOverloadDefaultOptions: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Storage_Streams != "on"]
+    public var CreateFileAsyncOverloadDefaultOptions: UIntNative = UIntNative(0)
+    @When[Windows_Storage_Streams == "on"]
     public var CreateFileAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, _impl_l0.CreationCollisionOptionAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Storage_Streams != "on"]
+    public var CreateFileAsync: UIntNative = UIntNative(0)
     public var CreateFolderAsyncOverloadDefaultOptions: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var CreateFolderAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, _impl_l0.CreationCollisionOptionAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Storage_Streams == "on"]
     public var GetFileAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Storage_Streams != "on"]
+    public var GetFileAsync: UIntNative = UIntNative(0)
     public var GetFolderAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var GetItemAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var GetFilesAsyncOverloadDefaultOptionsStartAndCount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
+    public var GetFilesAsyncOverloadDefaultOptionsStartAndCount: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetFoldersAsyncOverloadDefaultOptionsStartAndCount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetFoldersAsyncOverloadDefaultOptionsStartAndCount: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetItemsAsyncOverloadDefaultStartAndCount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetItemsAsyncOverloadDefaultStartAndCount: UIntNative = UIntNative(0)
     public init() {}
 
-    @When[Windows_Storage_FileProperties == "on"]
+    @When[((((Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_FileProperties == "on")]
     public static func new<Identity>(offset!: Int64 = 0): IStorageFolderVtbl where Identity <: IStorageFolder_Impl {
         let _ = offset
         var vtbl = IStorageFolderVtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.CreateFileAsyncOverloadDefaultOptions = { instanceRaw, arg0, result__ =>
-            match (unsafe { asImplFromRaw<IStorageFolder_ImplErased>(instanceRaw) }) {
-                case Some(impl) =>
-                    impl.__winrtThunk_CreateFileAsyncOverloadDefaultOptions(arg0, result__)
-                case None =>
-                    E_NOINTERFACE.value
-            }
-        }
-        vtbl.CreateFileAsync = { instanceRaw, arg0, arg1, result__ =>
-            match (unsafe { asImplFromRaw<IStorageFolder_ImplErased>(instanceRaw) }) {
-                case Some(impl) =>
-                    impl.__winrtThunk_CreateFileAsync(arg0, arg1, result__)
-                case None =>
-                    E_NOINTERFACE.value
-            }
-        }
+        vtbl = IStorageFolderVtbl.__assignCreateFileAsyncOverloadDefaultOptions<Identity>(vtbl)
+        vtbl = IStorageFolderVtbl.__assignCreateFileAsync<Identity>(vtbl)
         vtbl.CreateFolderAsyncOverloadDefaultOptions = { instanceRaw, arg0, result__ =>
             match (unsafe { asImplFromRaw<IStorageFolder_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
@@ -4126,14 +4215,7 @@ public struct IStorageFolderVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetFileAsync = { instanceRaw, arg0, result__ =>
-            match (unsafe { asImplFromRaw<IStorageFolder_ImplErased>(instanceRaw) }) {
-                case Some(impl) =>
-                    impl.__winrtThunk_GetFileAsync(arg0, result__)
-                case None =>
-                    E_NOINTERFACE.value
-            }
-        }
+        vtbl = IStorageFolderVtbl.__assignGetFileAsync<Identity>(vtbl)
         vtbl.GetFolderAsync = { instanceRaw, arg0, result__ =>
             match (unsafe { asImplFromRaw<IStorageFolder_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
@@ -4150,7 +4232,73 @@ public struct IStorageFolderVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetFilesAsyncOverloadDefaultOptionsStartAndCount = { instanceRaw, result__ =>
+        vtbl = IStorageFolderVtbl.__assignGetFilesAsyncOverloadDefaultOptionsStartAndCount<Identity>(vtbl)
+        vtbl = IStorageFolderVtbl.__assignGetFoldersAsyncOverloadDefaultOptionsStartAndCount<Identity>(vtbl)
+        vtbl = IStorageFolderVtbl.__assignGetItemsAsyncOverloadDefaultStartAndCount<Identity>(vtbl)
+        return vtbl
+    }
+
+    @When[(((((Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_FileProperties == "on")) && Windows_Storage_Streams == "on"]
+    public static func __assignCreateFileAsyncOverloadDefaultOptions<Identity>(vtbl: IStorageFolderVtbl): IStorageFolderVtbl where Identity <: IStorageFolder_Impl {
+        var next = vtbl
+        next.CreateFileAsyncOverloadDefaultOptions = { instanceRaw, arg0, result__ =>
+            match (unsafe { asImplFromRaw<IStorageFolder_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_CreateFileAsyncOverloadDefaultOptions(arg0, result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        return next
+    }
+
+    @When[(((((Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_FileProperties == "on")) && Windows_Storage_Streams != "on"]
+    public static func __assignCreateFileAsyncOverloadDefaultOptions<Identity>(vtbl: IStorageFolderVtbl): IStorageFolderVtbl where Identity <: IStorageFolder_Impl {
+        return vtbl
+    }
+
+    @When[(((((Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_FileProperties == "on")) && Windows_Storage_Streams == "on"]
+    public static func __assignCreateFileAsync<Identity>(vtbl: IStorageFolderVtbl): IStorageFolderVtbl where Identity <: IStorageFolder_Impl {
+        var next = vtbl
+        next.CreateFileAsync = { instanceRaw, arg0, arg1, result__ =>
+            match (unsafe { asImplFromRaw<IStorageFolder_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_CreateFileAsync(arg0, arg1, result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        return next
+    }
+
+    @When[(((((Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_FileProperties == "on")) && Windows_Storage_Streams != "on"]
+    public static func __assignCreateFileAsync<Identity>(vtbl: IStorageFolderVtbl): IStorageFolderVtbl where Identity <: IStorageFolder_Impl {
+        return vtbl
+    }
+
+    @When[(((((Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_FileProperties == "on")) && Windows_Storage_Streams == "on"]
+    public static func __assignGetFileAsync<Identity>(vtbl: IStorageFolderVtbl): IStorageFolderVtbl where Identity <: IStorageFolder_Impl {
+        var next = vtbl
+        next.GetFileAsync = { instanceRaw, arg0, result__ =>
+            match (unsafe { asImplFromRaw<IStorageFolder_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_GetFileAsync(arg0, result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        return next
+    }
+
+    @When[(((((Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_FileProperties == "on")) && Windows_Storage_Streams != "on"]
+    public static func __assignGetFileAsync<Identity>(vtbl: IStorageFolderVtbl): IStorageFolderVtbl where Identity <: IStorageFolder_Impl {
+        return vtbl
+    }
+
+    @When[(((((Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_FileProperties == "on")) && (Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on")]
+    public static func __assignGetFilesAsyncOverloadDefaultOptionsStartAndCount<Identity>(vtbl: IStorageFolderVtbl): IStorageFolderVtbl where Identity <: IStorageFolder_Impl {
+        var next = vtbl
+        next.GetFilesAsyncOverloadDefaultOptionsStartAndCount = { instanceRaw, result__ =>
             match (unsafe { asImplFromRaw<IStorageFolder_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
                     impl.__winrtThunk_GetFilesAsyncOverloadDefaultOptionsStartAndCount(result__)
@@ -4158,7 +4306,18 @@ public struct IStorageFolderVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetFoldersAsyncOverloadDefaultOptionsStartAndCount = { instanceRaw, result__ =>
+        return next
+    }
+
+    @When[(((((Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_FileProperties == "on")) && (Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on")]
+    public static func __assignGetFilesAsyncOverloadDefaultOptionsStartAndCount<Identity>(vtbl: IStorageFolderVtbl): IStorageFolderVtbl where Identity <: IStorageFolder_Impl {
+        return vtbl
+    }
+
+    @When[(((((Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_FileProperties == "on")) && Windows_Foundation_Collections == "on"]
+    public static func __assignGetFoldersAsyncOverloadDefaultOptionsStartAndCount<Identity>(vtbl: IStorageFolderVtbl): IStorageFolderVtbl where Identity <: IStorageFolder_Impl {
+        var next = vtbl
+        next.GetFoldersAsyncOverloadDefaultOptionsStartAndCount = { instanceRaw, result__ =>
             match (unsafe { asImplFromRaw<IStorageFolder_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
                     impl.__winrtThunk_GetFoldersAsyncOverloadDefaultOptionsStartAndCount(result__)
@@ -4166,7 +4325,18 @@ public struct IStorageFolderVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetItemsAsyncOverloadDefaultStartAndCount = { instanceRaw, result__ =>
+        return next
+    }
+
+    @When[(((((Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_FileProperties == "on")) && Windows_Foundation_Collections != "on"]
+    public static func __assignGetFoldersAsyncOverloadDefaultOptionsStartAndCount<Identity>(vtbl: IStorageFolderVtbl): IStorageFolderVtbl where Identity <: IStorageFolder_Impl {
+        return vtbl
+    }
+
+    @When[(((((Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_FileProperties == "on")) && Windows_Foundation_Collections == "on"]
+    public static func __assignGetItemsAsyncOverloadDefaultStartAndCount<Identity>(vtbl: IStorageFolderVtbl): IStorageFolderVtbl where Identity <: IStorageFolder_Impl {
+        var next = vtbl
+        next.GetItemsAsyncOverloadDefaultStartAndCount = { instanceRaw, result__ =>
             match (unsafe { asImplFromRaw<IStorageFolder_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
                     impl.__winrtThunk_GetItemsAsyncOverloadDefaultStartAndCount(result__)
@@ -4174,6 +4344,11 @@ public struct IStorageFolderVtbl {
                     E_NOINTERFACE.value
             }
         }
+        return next
+    }
+
+    @When[(((((Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_FileProperties == "on")) && Windows_Foundation_Collections != "on"]
+    public static func __assignGetItemsAsyncOverloadDefaultStartAndCount<Identity>(vtbl: IStorageFolderVtbl): IStorageFolderVtbl where Identity <: IStorageFolder_Impl {
         return vtbl
     }
 
@@ -4190,7 +4365,7 @@ public struct IStorageFolderVtbl {
     }
 }
 
-@When[Windows_Storage == "on" && Windows_Storage_FileProperties == "on"]
+@When[Windows_Storage == "on" && (((((Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_FileProperties == "on"))]
 public interface IStorageFolder_ImplErased {
     public func __winrtThunk_CreateFileAsyncOverloadDefaultOptions(arg0: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32
 
@@ -4213,7 +4388,7 @@ public interface IStorageFolder_ImplErased {
     public func __winrtThunk_GetItemsAsyncOverloadDefaultStartAndCount(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Storage == "on" && Windows_Storage_FileProperties == "on"]
+@When[Windows_Storage == "on" && (((((Windows_Storage_Streams == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Foundation_Collections == "on")) && (Windows_Storage_FileProperties == "on"))]
 public interface IStorageFolder_Impl <: IStorageFolder_ImplErased & IStorageItem_Impl {
     public func CreateFileAsyncOverloadDefaultOptions(desiredName: InParam<windows_core.HString>): windows_core.Result<windows_future.IAsyncOperation<StorageFile>>
 
@@ -4658,6 +4833,7 @@ public class IStorageFolder <: InterfaceWrapperBase & ComInterface & RuntimeName
         readVtbl<IStorageFolderVtbl>(IStorageFolderVtbl())
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func CreateFileAsyncOverloadDefaultOptions(desiredName: windows_core.HString): windows_future.IAsyncOperation<StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4666,6 +4842,7 @@ public class IStorageFolder <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_future.IAsyncOperation<StorageFile>.fromAbiTake(result__)
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func CreateFileAsync(desiredName: windows_core.HString, options: _impl_l0.CreationCollisionOption): windows_future.IAsyncOperation<StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4690,6 +4867,7 @@ public class IStorageFolder <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_future.IAsyncOperation<StorageFolder>.fromAbiTake(result__)
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func GetFileAsync(name: windows_core.HString): windows_future.IAsyncOperation<StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4714,6 +4892,7 @@ public class IStorageFolder <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_future.IAsyncOperation<IStorageItem>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetFilesAsyncOverloadDefaultOptionsStartAndCount(): windows_future.IAsyncOperation<windows_collections.IVectorView<StorageFile>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4722,6 +4901,7 @@ public class IStorageFolder <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_future.IAsyncOperation<windows_collections.IVectorView<StorageFile>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetFoldersAsyncOverloadDefaultOptionsStartAndCount(): windows_future.IAsyncOperation<windows_collections.IVectorView<StorageFolder>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4730,6 +4910,7 @@ public class IStorageFolder <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_future.IAsyncOperation<windows_collections.IVectorView<StorageFolder>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetItemsAsyncOverloadDefaultStartAndCount(): windows_future.IAsyncOperation<windows_collections.IVectorView<IStorageItem>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5980,17 +6161,17 @@ extend IStorageItem2 <: windows_core.Interface<IStorageItem2> {}
 @C
 public struct IStorageItemPropertiesVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Storage_FileProperties == "on"]
+    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
     public var GetThumbnailAsyncOverloadDefaultSizeDefaultOptions: CFunc<(CPointer<Unit>, _impl_l0.ThumbnailModeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_FileProperties != "on"]
+    @When[Windows_Storage_FileProperties != "on" || Windows_Storage_Streams != "on"]
     public var GetThumbnailAsyncOverloadDefaultSizeDefaultOptions: UIntNative = UIntNative(0)
-    @When[Windows_Storage_FileProperties == "on"]
+    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
     public var GetThumbnailAsyncOverloadDefaultOptions: CFunc<(CPointer<Unit>, _impl_l0.ThumbnailModeAbi, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_FileProperties != "on"]
+    @When[Windows_Storage_FileProperties != "on" || Windows_Storage_Streams != "on"]
     public var GetThumbnailAsyncOverloadDefaultOptions: UIntNative = UIntNative(0)
-    @When[Windows_Storage_FileProperties == "on"]
+    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
     public var GetThumbnailAsync: CFunc<(CPointer<Unit>, _impl_l0.ThumbnailModeAbi, UInt32, _impl_l0.ThumbnailOptionsAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_FileProperties != "on"]
+    @When[Windows_Storage_FileProperties != "on" || Windows_Storage_Streams != "on"]
     public var GetThumbnailAsync: UIntNative = UIntNative(0)
     public var DisplayName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var DisplayType: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -6001,7 +6182,7 @@ public struct IStorageItemPropertiesVtbl {
     public var Properties: UIntNative = UIntNative(0)
     public init() {}
 
-    @When[Windows_Storage_FileProperties == "on"]
+    @When[(Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on") && (Windows_Storage_FileProperties == "on")]
     public static func new<Identity>(offset!: Int64 = 0): IStorageItemPropertiesVtbl where Identity <: IStorageItemProperties_Impl {
         let _ = offset
         var vtbl = IStorageItemPropertiesVtbl()
@@ -6037,7 +6218,7 @@ public struct IStorageItemPropertiesVtbl {
         return vtbl
     }
 
-    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_FileProperties == "on"]
+    @When[((Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on") && (Windows_Storage_FileProperties == "on")) && (Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on")]
     public static func __assignGetThumbnailAsyncOverloadDefaultSizeDefaultOptions<Identity>(vtbl: IStorageItemPropertiesVtbl): IStorageItemPropertiesVtbl where Identity <: IStorageItemProperties_Impl {
         var next = vtbl
         next.GetThumbnailAsyncOverloadDefaultSizeDefaultOptions = { instanceRaw, arg0, result__ =>
@@ -6051,12 +6232,12 @@ public struct IStorageItemPropertiesVtbl {
         return next
     }
 
-    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_FileProperties != "on"]
+    @When[((Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on") && (Windows_Storage_FileProperties == "on")) && (Windows_Storage_FileProperties != "on" || Windows_Storage_Streams != "on")]
     public static func __assignGetThumbnailAsyncOverloadDefaultSizeDefaultOptions<Identity>(vtbl: IStorageItemPropertiesVtbl): IStorageItemPropertiesVtbl where Identity <: IStorageItemProperties_Impl {
         return vtbl
     }
 
-    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_FileProperties == "on"]
+    @When[((Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on") && (Windows_Storage_FileProperties == "on")) && (Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on")]
     public static func __assignGetThumbnailAsyncOverloadDefaultOptions<Identity>(vtbl: IStorageItemPropertiesVtbl): IStorageItemPropertiesVtbl where Identity <: IStorageItemProperties_Impl {
         var next = vtbl
         next.GetThumbnailAsyncOverloadDefaultOptions = { instanceRaw, arg0, arg1, result__ =>
@@ -6070,12 +6251,12 @@ public struct IStorageItemPropertiesVtbl {
         return next
     }
 
-    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_FileProperties != "on"]
+    @When[((Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on") && (Windows_Storage_FileProperties == "on")) && (Windows_Storage_FileProperties != "on" || Windows_Storage_Streams != "on")]
     public static func __assignGetThumbnailAsyncOverloadDefaultOptions<Identity>(vtbl: IStorageItemPropertiesVtbl): IStorageItemPropertiesVtbl where Identity <: IStorageItemProperties_Impl {
         return vtbl
     }
 
-    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_FileProperties == "on"]
+    @When[((Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on") && (Windows_Storage_FileProperties == "on")) && (Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on")]
     public static func __assignGetThumbnailAsync<Identity>(vtbl: IStorageItemPropertiesVtbl): IStorageItemPropertiesVtbl where Identity <: IStorageItemProperties_Impl {
         var next = vtbl
         next.GetThumbnailAsync = { instanceRaw, arg0, arg1, arg2, result__ =>
@@ -6089,12 +6270,12 @@ public struct IStorageItemPropertiesVtbl {
         return next
     }
 
-    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_FileProperties != "on"]
+    @When[((Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on") && (Windows_Storage_FileProperties == "on")) && (Windows_Storage_FileProperties != "on" || Windows_Storage_Streams != "on")]
     public static func __assignGetThumbnailAsync<Identity>(vtbl: IStorageItemPropertiesVtbl): IStorageItemPropertiesVtbl where Identity <: IStorageItemProperties_Impl {
         return vtbl
     }
 
-    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_FileProperties == "on"]
+    @When[((Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on") && (Windows_Storage_FileProperties == "on")) && Windows_Storage_FileProperties == "on"]
     public static func __assignProperties<Identity>(vtbl: IStorageItemPropertiesVtbl): IStorageItemPropertiesVtbl where Identity <: IStorageItemProperties_Impl {
         var next = vtbl
         next.Properties = { instanceRaw, result__ =>
@@ -6108,7 +6289,7 @@ public struct IStorageItemPropertiesVtbl {
         return next
     }
 
-    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_FileProperties != "on"]
+    @When[((Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on") && (Windows_Storage_FileProperties == "on")) && Windows_Storage_FileProperties != "on"]
     public static func __assignProperties<Identity>(vtbl: IStorageItemPropertiesVtbl): IStorageItemPropertiesVtbl where Identity <: IStorageItemProperties_Impl {
         return vtbl
     }
@@ -6121,7 +6302,7 @@ public struct IStorageItemPropertiesVtbl {
     }
 }
 
-@When[Windows_Storage == "on" && Windows_Storage_FileProperties == "on"]
+@When[Windows_Storage == "on" && ((Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on") && (Windows_Storage_FileProperties == "on"))]
 public interface IStorageItemProperties_ImplErased {
     public func __winrtThunk_GetThumbnailAsyncOverloadDefaultSizeDefaultOptions(arg0: _impl_l0.ThumbnailModeAbi, result__: CPointer<CPointer<Unit>>): Int32
 
@@ -6138,7 +6319,7 @@ public interface IStorageItemProperties_ImplErased {
     public func __winrtThunk_Properties(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Storage == "on" && Windows_Storage_FileProperties == "on"]
+@When[Windows_Storage == "on" && ((Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on") && (Windows_Storage_FileProperties == "on"))]
 public interface IStorageItemProperties_Impl <: IStorageItemProperties_ImplErased {
     public func GetThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode: _impl_l0.ThumbnailMode): windows_core.Result<windows_future.IAsyncOperation<StorageItemThumbnail>>
 
@@ -6346,7 +6527,7 @@ public class IStorageItemProperties <: InterfaceWrapperBase & ComInterface & Run
         readVtbl<IStorageItemPropertiesVtbl>(IStorageItemPropertiesVtbl())
     }
 
-    @When[Windows_Storage_FileProperties == "on"]
+    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode: _impl_l0.ThumbnailMode): windows_future.IAsyncOperation<StorageItemThumbnail> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6355,7 +6536,7 @@ public class IStorageItemProperties <: InterfaceWrapperBase & ComInterface & Run
         return windows_future.IAsyncOperation<StorageItemThumbnail>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage_FileProperties == "on"]
+    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetThumbnailAsyncOverloadDefaultOptions(mode: _impl_l0.ThumbnailMode, requestedSize: UInt32): windows_future.IAsyncOperation<StorageItemThumbnail> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6364,7 +6545,7 @@ public class IStorageItemProperties <: InterfaceWrapperBase & ComInterface & Run
         return windows_future.IAsyncOperation<StorageItemThumbnail>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage_FileProperties == "on"]
+    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetThumbnailAsync(mode: _impl_l0.ThumbnailMode, requestedSize: UInt32, options: _impl_l0.ThumbnailOptions): windows_future.IAsyncOperation<StorageItemThumbnail> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6414,21 +6595,21 @@ extend IStorageItemProperties <: windows_core.Interface<IStorageItemProperties> 
 @C
 public struct IStorageItemProperties2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Storage_FileProperties == "on"]
+    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
     public var GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions: CFunc<(CPointer<Unit>, _impl_l0.ThumbnailModeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_FileProperties != "on"]
+    @When[Windows_Storage_FileProperties != "on" || Windows_Storage_Streams != "on"]
     public var GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions: UIntNative = UIntNative(0)
-    @When[Windows_Storage_FileProperties == "on"]
+    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
     public var GetScaledImageAsThumbnailAsyncOverloadDefaultOptions: CFunc<(CPointer<Unit>, _impl_l0.ThumbnailModeAbi, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_FileProperties != "on"]
+    @When[Windows_Storage_FileProperties != "on" || Windows_Storage_Streams != "on"]
     public var GetScaledImageAsThumbnailAsyncOverloadDefaultOptions: UIntNative = UIntNative(0)
-    @When[Windows_Storage_FileProperties == "on"]
+    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
     public var GetScaledImageAsThumbnailAsync: CFunc<(CPointer<Unit>, _impl_l0.ThumbnailModeAbi, UInt32, _impl_l0.ThumbnailOptionsAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_FileProperties != "on"]
+    @When[Windows_Storage_FileProperties != "on" || Windows_Storage_Streams != "on"]
     public var GetScaledImageAsThumbnailAsync: UIntNative = UIntNative(0)
     public init() {}
 
-    @When[Windows_Storage_FileProperties == "on"]
+    @When[(Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on") && ((Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on") && (Windows_Storage_FileProperties == "on"))]
     public static func new<Identity>(offset!: Int64 = 0): IStorageItemProperties2Vtbl where Identity <: IStorageItemProperties2_Impl {
         let _ = offset
         var vtbl = IStorageItemProperties2Vtbl()
@@ -6439,7 +6620,7 @@ public struct IStorageItemProperties2Vtbl {
         return vtbl
     }
 
-    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_FileProperties == "on"]
+    @When[((Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on") && ((Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on") && (Windows_Storage_FileProperties == "on"))) && (Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on")]
     public static func __assignGetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions<Identity>(vtbl: IStorageItemProperties2Vtbl): IStorageItemProperties2Vtbl where Identity <: IStorageItemProperties2_Impl {
         var next = vtbl
         next.GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions = { instanceRaw, arg0, result__ =>
@@ -6453,12 +6634,12 @@ public struct IStorageItemProperties2Vtbl {
         return next
     }
 
-    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_FileProperties != "on"]
+    @When[((Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on") && ((Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on") && (Windows_Storage_FileProperties == "on"))) && (Windows_Storage_FileProperties != "on" || Windows_Storage_Streams != "on")]
     public static func __assignGetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions<Identity>(vtbl: IStorageItemProperties2Vtbl): IStorageItemProperties2Vtbl where Identity <: IStorageItemProperties2_Impl {
         return vtbl
     }
 
-    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_FileProperties == "on"]
+    @When[((Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on") && ((Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on") && (Windows_Storage_FileProperties == "on"))) && (Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on")]
     public static func __assignGetScaledImageAsThumbnailAsyncOverloadDefaultOptions<Identity>(vtbl: IStorageItemProperties2Vtbl): IStorageItemProperties2Vtbl where Identity <: IStorageItemProperties2_Impl {
         var next = vtbl
         next.GetScaledImageAsThumbnailAsyncOverloadDefaultOptions = { instanceRaw, arg0, arg1, result__ =>
@@ -6472,12 +6653,12 @@ public struct IStorageItemProperties2Vtbl {
         return next
     }
 
-    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_FileProperties != "on"]
+    @When[((Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on") && ((Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on") && (Windows_Storage_FileProperties == "on"))) && (Windows_Storage_FileProperties != "on" || Windows_Storage_Streams != "on")]
     public static func __assignGetScaledImageAsThumbnailAsyncOverloadDefaultOptions<Identity>(vtbl: IStorageItemProperties2Vtbl): IStorageItemProperties2Vtbl where Identity <: IStorageItemProperties2_Impl {
         return vtbl
     }
 
-    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_FileProperties == "on"]
+    @When[((Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on") && ((Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on") && (Windows_Storage_FileProperties == "on"))) && (Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on")]
     public static func __assignGetScaledImageAsThumbnailAsync<Identity>(vtbl: IStorageItemProperties2Vtbl): IStorageItemProperties2Vtbl where Identity <: IStorageItemProperties2_Impl {
         var next = vtbl
         next.GetScaledImageAsThumbnailAsync = { instanceRaw, arg0, arg1, arg2, result__ =>
@@ -6491,7 +6672,7 @@ public struct IStorageItemProperties2Vtbl {
         return next
     }
 
-    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_FileProperties != "on"]
+    @When[((Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on") && ((Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on") && (Windows_Storage_FileProperties == "on"))) && (Windows_Storage_FileProperties != "on" || Windows_Storage_Streams != "on")]
     public static func __assignGetScaledImageAsThumbnailAsync<Identity>(vtbl: IStorageItemProperties2Vtbl): IStorageItemProperties2Vtbl where Identity <: IStorageItemProperties2_Impl {
         return vtbl
     }
@@ -6509,7 +6690,7 @@ public struct IStorageItemProperties2Vtbl {
     }
 }
 
-@When[Windows_Storage == "on" && Windows_Storage_FileProperties == "on"]
+@When[Windows_Storage == "on" && ((Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on") && ((Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on") && (Windows_Storage_FileProperties == "on")))]
 public interface IStorageItemProperties2_ImplErased {
     public func __winrtThunk_GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions(arg0: _impl_l0.ThumbnailModeAbi, result__: CPointer<CPointer<Unit>>): Int32
 
@@ -6518,7 +6699,7 @@ public interface IStorageItemProperties2_ImplErased {
     public func __winrtThunk_GetScaledImageAsThumbnailAsync(arg0: _impl_l0.ThumbnailModeAbi, arg1: UInt32, arg2: _impl_l0.ThumbnailOptionsAbi, result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Storage == "on" && Windows_Storage_FileProperties == "on"]
+@When[Windows_Storage == "on" && ((Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on") && ((Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on") && (Windows_Storage_FileProperties == "on")))]
 public interface IStorageItemProperties2_Impl <: IStorageItemProperties2_ImplErased & IStorageItemProperties_Impl {
     public func GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode: _impl_l0.ThumbnailMode): windows_core.Result<windows_future.IAsyncOperation<StorageItemThumbnail>>
 
@@ -6784,7 +6965,7 @@ public class IStorageItemProperties2 <: InterfaceWrapperBase & ComInterface & Ru
         readVtbl<IStorageItemProperties2Vtbl>(IStorageItemProperties2Vtbl())
     }
 
-    @When[Windows_Storage_FileProperties == "on"]
+    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode: _impl_l0.ThumbnailMode): windows_future.IAsyncOperation<StorageItemThumbnail> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6793,7 +6974,7 @@ public class IStorageItemProperties2 <: InterfaceWrapperBase & ComInterface & Ru
         return windows_future.IAsyncOperation<StorageItemThumbnail>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage_FileProperties == "on"]
+    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetScaledImageAsThumbnailAsyncOverloadDefaultOptions(mode: _impl_l0.ThumbnailMode, requestedSize: UInt32): windows_future.IAsyncOperation<StorageItemThumbnail> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6802,7 +6983,7 @@ public class IStorageItemProperties2 <: InterfaceWrapperBase & ComInterface & Ru
         return windows_future.IAsyncOperation<StorageItemThumbnail>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage_FileProperties == "on"]
+    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetScaledImageAsThumbnailAsync(mode: _impl_l0.ThumbnailMode, requestedSize: UInt32, options: _impl_l0.ThumbnailOptions): windows_future.IAsyncOperation<StorageItemThumbnail> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6822,7 +7003,7 @@ public struct IStorageItemPropertiesWithProviderVtbl {
     public var Provider: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 
-    @When[Windows_Storage_FileProperties == "on"]
+    @When[(Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on") && (Windows_Storage_FileProperties == "on")]
     public static func new<Identity>(offset!: Int64 = 0): IStorageItemPropertiesWithProviderVtbl where Identity <: IStorageItemPropertiesWithProvider_Impl {
         let _ = offset
         var vtbl = IStorageItemPropertiesWithProviderVtbl()
@@ -6851,12 +7032,12 @@ public struct IStorageItemPropertiesWithProviderVtbl {
     }
 }
 
-@When[Windows_Storage == "on" && Windows_Storage_FileProperties == "on"]
+@When[Windows_Storage == "on" && ((Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on") && (Windows_Storage_FileProperties == "on"))]
 public interface IStorageItemPropertiesWithProvider_ImplErased {
     public func __winrtThunk_Provider(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Storage == "on" && Windows_Storage_FileProperties == "on"]
+@When[Windows_Storage == "on" && ((Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on") && (Windows_Storage_FileProperties == "on"))]
 public interface IStorageItemPropertiesWithProvider_Impl <: IStorageItemPropertiesWithProvider_ImplErased & IStorageItemProperties_Impl {
     public func Provider(): windows_core.Result<StorageProvider>
 
@@ -7100,7 +7281,10 @@ public struct IStorageLibraryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var RequestAddFolderAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var RequestRemoveFolderAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Folders: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Folders: UIntNative = UIntNative(0)
     public var SaveFolder: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var DefinitionChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveDefinitionChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -7188,6 +7372,7 @@ public class IStorageLibrary <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return windows_future.IAsyncOperation<Bool>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Folders(): windows_collections.IObservableVector<StorageFolder> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7432,7 +7617,10 @@ extend IStorageLibraryChange <: windows_core.Interface<IStorageLibraryChange> {}
 @C
 public struct IStorageLibraryChangeReaderVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ReadBatchAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ReadBatchAsync: UIntNative = UIntNative(0)
     public var AcceptChangesAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -7502,6 +7690,7 @@ public class IStorageLibraryChangeReader <: InterfaceWrapperBase & ComInterface 
         readVtbl<IStorageLibraryChangeReaderVtbl>(IStorageLibraryChangeReaderVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReadBatchAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<StorageLibraryChange>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -8585,6 +8774,7 @@ public class PathIO <: windows_interface.RuntimeName & windows_core.RuntimeName 
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func ReadLinesAsync(absolutePath: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVector<windows_core.HString>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVector<windows_core.HString>>> = Option<windows_future.IAsyncOperation<windows_collections.IVector<windows_core.HString>>>.None
         try (factory__ = windows_core.factory<PathIO, _impl_l0.IPathIOStatics>().unwrap()) {
@@ -8596,7 +8786,7 @@ public class PathIO <: windows_interface.RuntimeName & windows_core.RuntimeName 
         }
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public static unsafe func ReadLinesWithEncodingAsync(absolutePath: windows_core.HString, encoding: _impl_l0.UnicodeEncoding): windows_future.IAsyncOperation<windows_collections.IVector<windows_core.HString>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVector<windows_core.HString>>> = Option<windows_future.IAsyncOperation<windows_collections.IVector<windows_core.HString>>>.None
         try (factory__ = windows_core.factory<PathIO, _impl_l0.IPathIOStatics>().unwrap()) {
@@ -8608,6 +8798,7 @@ public class PathIO <: windows_interface.RuntimeName & windows_core.RuntimeName 
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func WriteLinesAsync(absolutePath: windows_core.HString, lines: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncAction {
         var result__: Option<windows_future.IAsyncAction> = Option<windows_future.IAsyncAction>.None
         try (factory__ = windows_core.factory<PathIO, _impl_l0.IPathIOStatics>().unwrap()) {
@@ -8619,7 +8810,7 @@ public class PathIO <: windows_interface.RuntimeName & windows_core.RuntimeName 
         }
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public static unsafe func WriteLinesWithEncodingAsync(absolutePath: windows_core.HString, lines: windows_collections.IIterable<windows_core.HString>, encoding: _impl_l0.UnicodeEncoding): windows_future.IAsyncAction {
         var result__: Option<windows_future.IAsyncAction> = Option<windows_future.IAsyncAction>.None
         try (factory__ = windows_core.factory<PathIO, _impl_l0.IPathIOStatics>().unwrap()) {
@@ -8631,6 +8822,7 @@ public class PathIO <: windows_interface.RuntimeName & windows_core.RuntimeName 
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func AppendLinesAsync(absolutePath: windows_core.HString, lines: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncAction {
         var result__: Option<windows_future.IAsyncAction> = Option<windows_future.IAsyncAction>.None
         try (factory__ = windows_core.factory<PathIO, _impl_l0.IPathIOStatics>().unwrap()) {
@@ -8642,7 +8834,7 @@ public class PathIO <: windows_interface.RuntimeName & windows_core.RuntimeName 
         }
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public static unsafe func AppendLinesWithEncodingAsync(absolutePath: windows_core.HString, lines: windows_collections.IIterable<windows_core.HString>, encoding: _impl_l0.UnicodeEncoding): windows_future.IAsyncAction {
         var result__: Option<windows_future.IAsyncAction> = Option<windows_future.IAsyncAction>.None
         try (factory__ = windows_core.factory<PathIO, _impl_l0.IPathIOStatics>().unwrap()) {
@@ -8790,7 +8982,7 @@ extend SetVersionRequest <: windows_core.HandleWinrtType<SetVersionRequest> {
     }
 }
 
-@When[Windows_Storage == "on"]
+@When[Windows_Storage == "on" && Windows_Storage_Streams == "on"]
 public class StorageFile <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8935,14 +9127,17 @@ public class StorageFile <: InterfaceWrapperBase & ComInterface & windows_interf
         return defaultInterface().OpenTransactedWriteAsync()
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func CopyOverloadDefaultNameAndOptions(destinationFolder: IStorageFolder): windows_future.IAsyncOperation<StorageFile> {
         return defaultInterface().CopyOverloadDefaultNameAndOptions(destinationFolder)
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func CopyOverloadDefaultOptions(destinationFolder: IStorageFolder, desiredNewName: windows_core.HString): windows_future.IAsyncOperation<StorageFile> {
         return defaultInterface().CopyOverloadDefaultOptions(destinationFolder, desiredNewName)
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func CopyOverload(destinationFolder: IStorageFolder, desiredNewName: windows_core.HString, option: _impl_l0.NameCollisionOption): windows_future.IAsyncOperation<StorageFile> {
         return defaultInterface().CopyOverload(destinationFolder, desiredNewName, option)
     }
@@ -9016,17 +9211,17 @@ public class StorageFile <: InterfaceWrapperBase & ComInterface & windows_interf
         return asIInputStreamReference().OpenSequentialReadAsync()
     }
 
-    @When[Windows_Storage_FileProperties == "on"]
+    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode: _impl_l0.ThumbnailMode): windows_future.IAsyncOperation<StorageItemThumbnail> {
         return asIStorageItemProperties().GetThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode)
     }
 
-    @When[Windows_Storage_FileProperties == "on"]
+    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetThumbnailAsyncOverloadDefaultOptions(mode: _impl_l0.ThumbnailMode, requestedSize: UInt32): windows_future.IAsyncOperation<StorageItemThumbnail> {
         return asIStorageItemProperties().GetThumbnailAsyncOverloadDefaultOptions(mode, requestedSize)
     }
 
-    @When[Windows_Storage_FileProperties == "on"]
+    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetThumbnailAsync(mode: _impl_l0.ThumbnailMode, requestedSize: UInt32, options: _impl_l0.ThumbnailOptions): windows_future.IAsyncOperation<StorageItemThumbnail> {
         return asIStorageItemProperties().GetThumbnailAsync(mode, requestedSize, options)
     }
@@ -9048,17 +9243,17 @@ public class StorageFile <: InterfaceWrapperBase & ComInterface & windows_interf
         return asIStorageItemProperties().Properties()
     }
 
-    @When[Windows_Storage_FileProperties == "on"]
+    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode: _impl_l0.ThumbnailMode): windows_future.IAsyncOperation<StorageItemThumbnail> {
         return asIStorageItemProperties2().GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode)
     }
 
-    @When[Windows_Storage_FileProperties == "on"]
+    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetScaledImageAsThumbnailAsyncOverloadDefaultOptions(mode: _impl_l0.ThumbnailMode, requestedSize: UInt32): windows_future.IAsyncOperation<StorageItemThumbnail> {
         return asIStorageItemProperties2().GetScaledImageAsThumbnailAsyncOverloadDefaultOptions(mode, requestedSize)
     }
 
-    @When[Windows_Storage_FileProperties == "on"]
+    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetScaledImageAsThumbnailAsync(mode: _impl_l0.ThumbnailMode, requestedSize: UInt32, options: _impl_l0.ThumbnailOptions): windows_future.IAsyncOperation<StorageItemThumbnail> {
         return asIStorageItemProperties2().GetScaledImageAsThumbnailAsync(mode, requestedSize, options)
     }
@@ -9088,7 +9283,7 @@ public class StorageFile <: InterfaceWrapperBase & ComInterface & windows_interf
         return asIStorageFile2().OpenTransactedWriteWithOptionsAsync(options)
     }
 
-    @When[Windows_System == "on"]
+    @When[Windows_Storage_Streams == "on" && Windows_System == "on"]
     public static unsafe func GetFileFromPathForUserAsync(user: User, path: windows_core.HString): windows_future.IAsyncOperation<StorageFile> {
         var result__: Option<windows_future.IAsyncOperation<StorageFile>> = Option<windows_future.IAsyncOperation<StorageFile>>.None
         try (factory__ = windows_core.factory<StorageFile, IStorageFileStatics2>().unwrap()) {
@@ -9100,6 +9295,7 @@ public class StorageFile <: InterfaceWrapperBase & ComInterface & windows_interf
         }
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public static unsafe func GetFileFromPathAsync(path: windows_core.HString): windows_future.IAsyncOperation<StorageFile> {
         var result__: Option<windows_future.IAsyncOperation<StorageFile>> = Option<windows_future.IAsyncOperation<StorageFile>>.None
         try (factory__ = windows_core.factory<StorageFile, IStorageFileStatics>().unwrap()) {
@@ -9111,6 +9307,7 @@ public class StorageFile <: InterfaceWrapperBase & ComInterface & windows_interf
         }
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public static unsafe func GetFileFromApplicationUriAsync(uri: Foundation.Uri): windows_future.IAsyncOperation<StorageFile> {
         var result__: Option<windows_future.IAsyncOperation<StorageFile>> = Option<windows_future.IAsyncOperation<StorageFile>>.None
         try (factory__ = windows_core.factory<StorageFile, IStorageFileStatics>().unwrap()) {
@@ -9171,7 +9368,7 @@ public class StorageFile <: InterfaceWrapperBase & ComInterface & windows_interf
     }
 }
 
-@When[Windows_Storage == "on"]
+@When[Windows_Storage == "on" && Windows_Storage_Streams == "on"]
 extend StorageFile <: windows_core.HandleWinrtType<StorageFile> {
     public static func intoWinrtHandle(value: StorageFile): CPointer<Unit> {
         value.asRaw()
@@ -9303,10 +9500,12 @@ public class StorageFolder <: InterfaceWrapperBase & ComInterface & windows_inte
         }
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func CreateFileAsyncOverloadDefaultOptions(desiredName: windows_core.HString): windows_future.IAsyncOperation<StorageFile> {
         return defaultInterface().CreateFileAsyncOverloadDefaultOptions(desiredName)
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func CreateFileAsync(desiredName: windows_core.HString, options: _impl_l0.CreationCollisionOption): windows_future.IAsyncOperation<StorageFile> {
         return defaultInterface().CreateFileAsync(desiredName, options)
     }
@@ -9319,6 +9518,7 @@ public class StorageFolder <: InterfaceWrapperBase & ComInterface & windows_inte
         return defaultInterface().CreateFolderAsync(desiredName, options)
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func GetFileAsync(name: windows_core.HString): windows_future.IAsyncOperation<StorageFile> {
         return defaultInterface().GetFileAsync(name)
     }
@@ -9331,14 +9531,17 @@ public class StorageFolder <: InterfaceWrapperBase & ComInterface & windows_inte
         return defaultInterface().GetItemAsync(name)
     }
 
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetFilesAsyncOverloadDefaultOptionsStartAndCount(): windows_future.IAsyncOperation<windows_collections.IVectorView<StorageFile>> {
         return defaultInterface().GetFilesAsyncOverloadDefaultOptionsStartAndCount()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetFoldersAsyncOverloadDefaultOptionsStartAndCount(): windows_future.IAsyncOperation<windows_collections.IVectorView<StorageFolder>> {
         return defaultInterface().GetFoldersAsyncOverloadDefaultOptionsStartAndCount()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetItemsAsyncOverloadDefaultStartAndCount(): windows_future.IAsyncOperation<windows_collections.IVectorView<IStorageItem>> {
         return defaultInterface().GetItemsAsyncOverloadDefaultStartAndCount()
     }
@@ -9420,27 +9623,27 @@ public class StorageFolder <: InterfaceWrapperBase & ComInterface & windows_inte
         return asIStorageFolderQueryOperations().CreateItemQueryWithOptions(queryOptions)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetFilesAsync(query: _impl_l0.CommonFileQuery, startIndex: UInt32, maxItemsToRetrieve: UInt32): windows_future.IAsyncOperation<windows_collections.IVectorView<StorageFile>> {
         return asIStorageFolderQueryOperations().GetFilesAsync(query, startIndex, maxItemsToRetrieve)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetFilesAsyncOverloadDefaultStartAndCount(query: _impl_l0.CommonFileQuery): windows_future.IAsyncOperation<windows_collections.IVectorView<StorageFile>> {
         return asIStorageFolderQueryOperations().GetFilesAsyncOverloadDefaultStartAndCount(query)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func GetFoldersAsync(query: _impl_l0.CommonFolderQuery, startIndex: UInt32, maxItemsToRetrieve: UInt32): windows_future.IAsyncOperation<windows_collections.IVectorView<StorageFolder>> {
         return asIStorageFolderQueryOperations().GetFoldersAsync(query, startIndex, maxItemsToRetrieve)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func GetFoldersAsyncOverloadDefaultStartAndCount(query: _impl_l0.CommonFolderQuery): windows_future.IAsyncOperation<windows_collections.IVectorView<StorageFolder>> {
         return asIStorageFolderQueryOperations().GetFoldersAsyncOverloadDefaultStartAndCount(query)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func GetItemsAsync(startIndex: UInt32, maxItemsToRetrieve: UInt32): windows_future.IAsyncOperation<windows_collections.IVectorView<IStorageItem>> {
         return asIStorageFolderQueryOperations().GetItemsAsync(startIndex, maxItemsToRetrieve)
     }
@@ -9457,17 +9660,17 @@ public class StorageFolder <: InterfaceWrapperBase & ComInterface & windows_inte
         return asIStorageFolderQueryOperations().IsCommonFileQuerySupported(query)
     }
 
-    @When[Windows_Storage_FileProperties == "on"]
+    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode: _impl_l0.ThumbnailMode): windows_future.IAsyncOperation<StorageItemThumbnail> {
         return asIStorageItemProperties().GetThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode)
     }
 
-    @When[Windows_Storage_FileProperties == "on"]
+    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetThumbnailAsyncOverloadDefaultOptions(mode: _impl_l0.ThumbnailMode, requestedSize: UInt32): windows_future.IAsyncOperation<StorageItemThumbnail> {
         return asIStorageItemProperties().GetThumbnailAsyncOverloadDefaultOptions(mode, requestedSize)
     }
 
-    @When[Windows_Storage_FileProperties == "on"]
+    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetThumbnailAsync(mode: _impl_l0.ThumbnailMode, requestedSize: UInt32, options: _impl_l0.ThumbnailOptions): windows_future.IAsyncOperation<StorageItemThumbnail> {
         return asIStorageItemProperties().GetThumbnailAsync(mode, requestedSize, options)
     }
@@ -9489,17 +9692,17 @@ public class StorageFolder <: InterfaceWrapperBase & ComInterface & windows_inte
         return asIStorageItemProperties().Properties()
     }
 
-    @When[Windows_Storage_FileProperties == "on"]
+    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode: _impl_l0.ThumbnailMode): windows_future.IAsyncOperation<StorageItemThumbnail> {
         return asIStorageItemProperties2().GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode)
     }
 
-    @When[Windows_Storage_FileProperties == "on"]
+    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetScaledImageAsThumbnailAsyncOverloadDefaultOptions(mode: _impl_l0.ThumbnailMode, requestedSize: UInt32): windows_future.IAsyncOperation<StorageItemThumbnail> {
         return asIStorageItemProperties2().GetScaledImageAsThumbnailAsyncOverloadDefaultOptions(mode, requestedSize)
     }
 
-    @When[Windows_Storage_FileProperties == "on"]
+    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetScaledImageAsThumbnailAsync(mode: _impl_l0.ThumbnailMode, requestedSize: UInt32, options: _impl_l0.ThumbnailOptions): windows_future.IAsyncOperation<StorageItemThumbnail> {
         return asIStorageItemProperties2().GetScaledImageAsThumbnailAsync(mode, requestedSize, options)
     }
@@ -9635,6 +9838,7 @@ public class StorageLibrary <: InterfaceWrapperBase & ComInterface & windows_int
         return defaultInterface().RequestRemoveFolderAsync(folder)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Folders(): windows_collections.IObservableVector<StorageFolder> {
         return defaultInterface().Folders()
     }
@@ -9870,6 +10074,7 @@ public class StorageLibraryChangeReader <: InterfaceWrapperBase & ComInterface &
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReadBatchAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<StorageLibraryChange>> {
         return defaultInterface().ReadBatchAsync()
     }
@@ -10193,7 +10398,7 @@ extend StorageStreamTransaction <: windows_core.HandleWinrtType<StorageStreamTra
     }
 }
 
-@When[Windows_Storage == "on"]
+@When[Windows_Storage == "on" && Windows_Storage_Streams == "on"]
 public class StreamedFileDataRequest <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -10289,7 +10494,7 @@ public class StreamedFileDataRequest <: InterfaceWrapperBase & ComInterface & wi
     }
 }
 
-@When[Windows_Storage == "on"]
+@When[Windows_Storage == "on" && Windows_Storage_Streams == "on"]
 extend StreamedFileDataRequest <: windows_core.HandleWinrtType<StreamedFileDataRequest> {
     public static func intoWinrtHandle(value: StreamedFileDataRequest): CPointer<Unit> {
         value.asRaw()
@@ -10307,15 +10512,16 @@ extend StreamedFileDataRequest <: windows_core.HandleWinrtType<StreamedFileDataR
     }
 }
 
-@When[Windows_Storage == "on"]
+@When[Windows_Storage == "on" && Windows_Storage_Streams == "on"]
 @C
 public struct StreamedFileDataRequestedHandlerVtbl {
     public var base_: IUnknownVtbl = IUnknownVtbl()
+    @When[Windows_Storage_Streams == "on"]
     public var Invoke: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
 
-@When[Windows_Storage == "on"]
+@When[Windows_Storage == "on" && Windows_Storage_Streams == "on"]
 public class StreamedFileDataRequestedHandler <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -10367,6 +10573,7 @@ public class StreamedFileDataRequestedHandler <: InterfaceWrapperBase & ComInter
         readVtbl<StreamedFileDataRequestedHandlerVtbl>(StreamedFileDataRequestedHandlerVtbl())
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func Invoke(stream: StreamedFileDataRequest): Unit {
         let v = vtbl()
         let hr = v.Invoke(asRaw(), stream.asRaw())
@@ -10380,15 +10587,17 @@ public class StreamedFileDataRequestedHandler <: InterfaceWrapperBase & ComInter
     }
 }
 
-@When[Windows_Storage == "on"]
+@When[Windows_Storage == "on" && Windows_Storage_Streams == "on"]
 extend StreamedFileDataRequestedHandler <: windows_core.Interface<StreamedFileDataRequestedHandler> {}
 
+@When[Windows_Storage == "on" && Windows_Storage_Streams == "on"]
 private open class StreamedFileDataRequestedHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_Storage == "on" && Windows_Storage_Streams == "on"]
 private open class StreamedFileDataRequestedHandlerInvoker <: StreamedFileDataRequestedHandlerInvokerErased {
     public open func Invoke(stream: InParam<StreamedFileDataRequest>): Unit {
         ()
@@ -10400,6 +10609,7 @@ private open class StreamedFileDataRequestedHandlerInvoker <: StreamedFileDataRe
     }
 }
 
+@When[Windows_Storage == "on" && Windows_Storage_Streams == "on"]
 private class StreamedFileDataRequestedHandlerBox <: StreamedFileDataRequestedHandlerInvoker {
     public let invoke_: (InParam<StreamedFileDataRequest>) -> Unit
     private let vtblHandle: CPointerHandle<StreamedFileDataRequestedHandlerVtbl>
@@ -10418,6 +10628,7 @@ private class StreamedFileDataRequestedHandlerBox <: StreamedFileDataRequestedHa
     }
 }
 
+@When[Windows_Storage == "on" && Windows_Storage_Streams == "on"]
 func buildStreamedFileDataRequestedHandlerBoxVtbl(): StreamedFileDataRequestedHandlerVtbl {
     var vtbl = StreamedFileDataRequestedHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()

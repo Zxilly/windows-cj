@@ -3,9 +3,7 @@ package windows_sys.Win32.System.RealTimeCommunications
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Media_DirectShow == "on"]
 import windows_sys.Win32.Media.DirectShow as Win32_Media_DirectShow
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l2 as Win32__impl_l2

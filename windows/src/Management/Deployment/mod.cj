@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -243,7 +242,10 @@ extend DeploymentProgressState <: windows_core.CopyType & windows_core.RuntimeTy
 @C
 public struct IAddPackageOptions2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ExpectedDigests: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ExpectedDigests: UIntNative = UIntNative(0)
     public var LimitToExistingPackages: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetLimitToExistingPackages: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -314,6 +316,7 @@ public class IAddPackageOptions2 <: InterfaceWrapperBase & ComInterface & Runtim
         readVtbl<IAddPackageOptions2Vtbl>(IAddPackageOptions2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ExpectedDigests(): windows_collections.IMap<Foundation.Uri, windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -368,10 +371,22 @@ public struct IAutoUpdateSettingsOptionsVtbl {
     public var SetForceUpdateFromAnyVersion: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsAutoRepairEnabled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetIsAutoRepairEnabled: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var UpdateUris: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var UpdateUris: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var RepairUris: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RepairUris: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var DependencyPackageUris: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var DependencyPackageUris: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var OptionalPackageUris: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var OptionalPackageUris: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -568,6 +583,7 @@ public class IAutoUpdateSettingsOptions <: InterfaceWrapperBase & ComInterface &
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UpdateUris(): windows_collections.IVector<Foundation.Uri> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -576,6 +592,7 @@ public class IAutoUpdateSettingsOptions <: InterfaceWrapperBase & ComInterface &
         return windows_collections.IVector<Foundation.Uri>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RepairUris(): windows_collections.IVector<Foundation.Uri> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -584,6 +601,7 @@ public class IAutoUpdateSettingsOptions <: InterfaceWrapperBase & ComInterface &
         return windows_collections.IVector<Foundation.Uri>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DependencyPackageUris(): windows_collections.IVector<Foundation.Uri> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -592,6 +610,7 @@ public class IAutoUpdateSettingsOptions <: InterfaceWrapperBase & ComInterface &
         return windows_collections.IVector<Foundation.Uri>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OptionalPackageUris(): windows_collections.IVector<Foundation.Uri> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1012,8 +1031,14 @@ extend IFindSharedPackageContainerOptions <: windows_core.Interface<IFindSharedP
 @C
 public struct IPackageAllUserProvisioningOptionsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var OptionalPackageFamilyNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var OptionalPackageFamilyNames: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var ProjectionOrderPackageFamilyNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ProjectionOrderPackageFamilyNames: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1082,6 +1107,7 @@ public class IPackageAllUserProvisioningOptions <: InterfaceWrapperBase & ComInt
         readVtbl<IPackageAllUserProvisioningOptionsVtbl>(IPackageAllUserProvisioningOptionsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OptionalPackageFamilyNames(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1090,6 +1116,7 @@ public class IPackageAllUserProvisioningOptions <: InterfaceWrapperBase & ComInt
         return windows_collections.IVector<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ProjectionOrderPackageFamilyNames(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1515,7 +1542,10 @@ extend IPackageVolume2 <: windows_core.Interface<IPackageVolume2> {}
 @C
 public struct IRegisterPackageOptions2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ExpectedDigests: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ExpectedDigests: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1584,6 +1614,7 @@ public class IRegisterPackageOptions2 <: InterfaceWrapperBase & ComInterface & R
         readVtbl<IRegisterPackageOptions2Vtbl>(IRegisterPackageOptions2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ExpectedDigests(): windows_collections.IMap<Foundation.Uri, windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1901,7 +1932,10 @@ extend ISharedPackageContainerMember <: windows_core.Interface<ISharedPackageCon
 @C
 public struct IStagePackageOptions2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ExpectedDigests: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ExpectedDigests: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1970,6 +2004,7 @@ public class IStagePackageOptions2 <: InterfaceWrapperBase & ComInterface & Runt
         readVtbl<IStagePackageOptions2Vtbl>(IStagePackageOptions2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ExpectedDigests(): windows_collections.IMap<Foundation.Uri, windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2170,10 +2205,12 @@ public class PackageAllUserProvisioningOptions <: InterfaceWrapperBase & ComInte
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OptionalPackageFamilyNames(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().OptionalPackageFamilyNames()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ProjectionOrderPackageFamilyNames(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().ProjectionOrderPackageFamilyNames()
     }
@@ -3948,31 +3985,37 @@ extend IPackageManager11 <: windows_core.Interface<IPackageManager11> {}
 public struct IPackageManager2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var RemovePackageWithOptionsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, RemovalOptionsAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var StagePackageWithOptionsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, DeploymentOptionsAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var StagePackageWithOptionsAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var RegisterPackageByFullNameAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, DeploymentOptionsAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_Foundation_Collections != "on"]
+    public var RegisterPackageByFullNameAsync: UIntNative = UIntNative(0)
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindPackagesWithPackageTypes: CFunc<(CPointer<Unit>, PackageTypesAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel != "on"]
+    @When[Windows_ApplicationModel != "on" || Windows_Foundation_Collections != "on"]
     public var FindPackagesWithPackageTypes: UIntNative = UIntNative(0)
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindPackagesByUserSecurityIdWithPackageTypes: CFunc<(CPointer<Unit>, CPointer<Unit>, PackageTypesAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel != "on"]
+    @When[Windows_ApplicationModel != "on" || Windows_Foundation_Collections != "on"]
     public var FindPackagesByUserSecurityIdWithPackageTypes: UIntNative = UIntNative(0)
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindPackagesByNamePublisherWithPackageTypes: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, PackageTypesAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel != "on"]
+    @When[Windows_ApplicationModel != "on" || Windows_Foundation_Collections != "on"]
     public var FindPackagesByNamePublisherWithPackageTypes: UIntNative = UIntNative(0)
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindPackagesByUserSecurityIdNamePublisherWithPackageTypes: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, PackageTypesAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel != "on"]
+    @When[Windows_ApplicationModel != "on" || Windows_Foundation_Collections != "on"]
     public var FindPackagesByUserSecurityIdNamePublisherWithPackageTypes: UIntNative = UIntNative(0)
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindPackagesByPackageFamilyNameWithPackageTypes: CFunc<(CPointer<Unit>, CPointer<Unit>, PackageTypesAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel != "on"]
+    @When[Windows_ApplicationModel != "on" || Windows_Foundation_Collections != "on"]
     public var FindPackagesByPackageFamilyNameWithPackageTypes: UIntNative = UIntNative(0)
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindPackagesByUserSecurityIdPackageFamilyNameWithPackageTypes: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, PackageTypesAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel != "on"]
+    @When[Windows_ApplicationModel != "on" || Windows_Foundation_Collections != "on"]
     public var FindPackagesByUserSecurityIdPackageFamilyNameWithPackageTypes: UIntNative = UIntNative(0)
     public var StageUserDataAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
@@ -4051,6 +4094,7 @@ public class IPackageManager2 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StagePackageWithOptionsAsync(packageUri: Foundation.Uri, dependencyPackageUris: windows_collections.IIterable<Foundation.Uri>, deploymentOptions: DeploymentOptions): windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4059,6 +4103,7 @@ public class IPackageManager2 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RegisterPackageByFullNameAsync(mainPackageFullName: windows_core.HString, dependencyPackageFullNames: windows_collections.IIterable<windows_core.HString>, deploymentOptions: DeploymentOptions): windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4067,7 +4112,7 @@ public class IPackageManager2 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesWithPackageTypes(packageTypes: PackageTypes): windows_collections.IIterable<_impl_l2.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4076,7 +4121,7 @@ public class IPackageManager2 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_collections.IIterable<_impl_l2.Package>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByUserSecurityIdWithPackageTypes(userSecurityId: windows_core.HString, packageTypes: PackageTypes): windows_collections.IIterable<_impl_l2.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4085,7 +4130,7 @@ public class IPackageManager2 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_collections.IIterable<_impl_l2.Package>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByNamePublisherWithPackageTypes(packageName: windows_core.HString, packagePublisher: windows_core.HString, packageTypes: PackageTypes): windows_collections.IIterable<_impl_l2.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4094,7 +4139,7 @@ public class IPackageManager2 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_collections.IIterable<_impl_l2.Package>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByUserSecurityIdNamePublisherWithPackageTypes(userSecurityId: windows_core.HString, packageName: windows_core.HString, packagePublisher: windows_core.HString, packageTypes: PackageTypes): windows_collections.IIterable<_impl_l2.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4103,7 +4148,7 @@ public class IPackageManager2 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_collections.IIterable<_impl_l2.Package>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByPackageFamilyNameWithPackageTypes(packageFamilyName: windows_core.HString, packageTypes: PackageTypes): windows_collections.IIterable<_impl_l2.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4112,7 +4157,7 @@ public class IPackageManager2 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_collections.IIterable<_impl_l2.Package>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByUserSecurityIdPackageFamilyNameWithPackageTypes(userSecurityId: windows_core.HString, packageFamilyName: windows_core.HString, packageTypes: PackageTypes): windows_collections.IIterable<_impl_l2.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4322,61 +4367,61 @@ public struct IPackageVolumeVtbl {
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var PackageStorePath: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SupportsHardLinks: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindPackages: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel != "on"]
+    @When[Windows_ApplicationModel != "on" || Windows_Foundation_Collections != "on"]
     public var FindPackages: UIntNative = UIntNative(0)
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindPackagesByNamePublisher: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel != "on"]
+    @When[Windows_ApplicationModel != "on" || Windows_Foundation_Collections != "on"]
     public var FindPackagesByNamePublisher: UIntNative = UIntNative(0)
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindPackagesByPackageFamilyName: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel != "on"]
+    @When[Windows_ApplicationModel != "on" || Windows_Foundation_Collections != "on"]
     public var FindPackagesByPackageFamilyName: UIntNative = UIntNative(0)
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindPackagesWithPackageTypes: CFunc<(CPointer<Unit>, PackageTypesAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel != "on"]
+    @When[Windows_ApplicationModel != "on" || Windows_Foundation_Collections != "on"]
     public var FindPackagesWithPackageTypes: UIntNative = UIntNative(0)
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindPackagesByNamePublisherWithPackagesTypes: CFunc<(CPointer<Unit>, PackageTypesAbi, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel != "on"]
+    @When[Windows_ApplicationModel != "on" || Windows_Foundation_Collections != "on"]
     public var FindPackagesByNamePublisherWithPackagesTypes: UIntNative = UIntNative(0)
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindPackagesByPackageFamilyNameWithPackageTypes: CFunc<(CPointer<Unit>, PackageTypesAbi, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel != "on"]
+    @When[Windows_ApplicationModel != "on" || Windows_Foundation_Collections != "on"]
     public var FindPackagesByPackageFamilyNameWithPackageTypes: UIntNative = UIntNative(0)
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindPackageByPackageFullName: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel != "on"]
+    @When[Windows_ApplicationModel != "on" || Windows_Foundation_Collections != "on"]
     public var FindPackageByPackageFullName: UIntNative = UIntNative(0)
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindPackagesByUserSecurityId: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel != "on"]
+    @When[Windows_ApplicationModel != "on" || Windows_Foundation_Collections != "on"]
     public var FindPackagesByUserSecurityId: UIntNative = UIntNative(0)
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindPackagesByUserSecurityIdNamePublisher: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel != "on"]
+    @When[Windows_ApplicationModel != "on" || Windows_Foundation_Collections != "on"]
     public var FindPackagesByUserSecurityIdNamePublisher: UIntNative = UIntNative(0)
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindPackagesByUserSecurityIdPackageFamilyName: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel != "on"]
+    @When[Windows_ApplicationModel != "on" || Windows_Foundation_Collections != "on"]
     public var FindPackagesByUserSecurityIdPackageFamilyName: UIntNative = UIntNative(0)
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindPackagesByUserSecurityIdWithPackageTypes: CFunc<(CPointer<Unit>, CPointer<Unit>, PackageTypesAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel != "on"]
+    @When[Windows_ApplicationModel != "on" || Windows_Foundation_Collections != "on"]
     public var FindPackagesByUserSecurityIdWithPackageTypes: UIntNative = UIntNative(0)
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindPackagesByUserSecurityIdNamePublisherWithPackageTypes: CFunc<(CPointer<Unit>, CPointer<Unit>, PackageTypesAbi, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel != "on"]
+    @When[Windows_ApplicationModel != "on" || Windows_Foundation_Collections != "on"]
     public var FindPackagesByUserSecurityIdNamePublisherWithPackageTypes: UIntNative = UIntNative(0)
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindPackagesByUserSecurityIdPackageFamilyNameWithPackagesTypes: CFunc<(CPointer<Unit>, CPointer<Unit>, PackageTypesAbi, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel != "on"]
+    @When[Windows_ApplicationModel != "on" || Windows_Foundation_Collections != "on"]
     public var FindPackagesByUserSecurityIdPackageFamilyNameWithPackagesTypes: UIntNative = UIntNative(0)
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindPackageByUserSecurityIdPackageFullName: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel != "on"]
+    @When[Windows_ApplicationModel != "on" || Windows_Foundation_Collections != "on"]
     public var FindPackageByUserSecurityIdPackageFullName: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -4494,7 +4539,7 @@ public class IPackageVolume <: InterfaceWrapperBase & ComInterface & RuntimeName
         return result__
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackages(): windows_collections.IVector<_impl_l2.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4503,7 +4548,7 @@ public class IPackageVolume <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_collections.IVector<_impl_l2.Package>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByNamePublisher(packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4512,7 +4557,7 @@ public class IPackageVolume <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_collections.IVector<_impl_l2.Package>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByPackageFamilyName(packageFamilyName: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4521,7 +4566,7 @@ public class IPackageVolume <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_collections.IVector<_impl_l2.Package>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesWithPackageTypes(packageTypes: PackageTypes): windows_collections.IVector<_impl_l2.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4530,7 +4575,7 @@ public class IPackageVolume <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_collections.IVector<_impl_l2.Package>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByNamePublisherWithPackagesTypes(packageTypes: PackageTypes, packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4539,7 +4584,7 @@ public class IPackageVolume <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_collections.IVector<_impl_l2.Package>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByPackageFamilyNameWithPackageTypes(packageTypes: PackageTypes, packageFamilyName: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4548,7 +4593,7 @@ public class IPackageVolume <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_collections.IVector<_impl_l2.Package>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackageByPackageFullName(packageFullName: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4557,7 +4602,7 @@ public class IPackageVolume <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_collections.IVector<_impl_l2.Package>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByUserSecurityId(userSecurityId: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4566,7 +4611,7 @@ public class IPackageVolume <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_collections.IVector<_impl_l2.Package>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByUserSecurityIdNamePublisher(userSecurityId: windows_core.HString, packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4575,7 +4620,7 @@ public class IPackageVolume <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_collections.IVector<_impl_l2.Package>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByUserSecurityIdPackageFamilyName(userSecurityId: windows_core.HString, packageFamilyName: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4584,7 +4629,7 @@ public class IPackageVolume <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_collections.IVector<_impl_l2.Package>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByUserSecurityIdWithPackageTypes(userSecurityId: windows_core.HString, packageTypes: PackageTypes): windows_collections.IVector<_impl_l2.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4593,7 +4638,7 @@ public class IPackageVolume <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_collections.IVector<_impl_l2.Package>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByUserSecurityIdNamePublisherWithPackageTypes(userSecurityId: windows_core.HString, packageTypes: PackageTypes, packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4602,7 +4647,7 @@ public class IPackageVolume <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_collections.IVector<_impl_l2.Package>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByUserSecurityIdPackageFamilyNameWithPackagesTypes(userSecurityId: windows_core.HString, packageTypes: PackageTypes, packageFamilyName: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4611,7 +4656,7 @@ public class IPackageVolume <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_collections.IVector<_impl_l2.Package>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackageByUserSecurityIdPackageFullName(userSecurityId: windows_core.HString, packageFullName: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4999,72 +5044,72 @@ public class PackageVolume <: InterfaceWrapperBase & ComInterface & windows_inte
         return defaultInterface().SupportsHardLinks()
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackages(): windows_collections.IVector<_impl_l2.Package> {
         return defaultInterface().FindPackages()
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByNamePublisher(packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
         return defaultInterface().FindPackagesByNamePublisher(packageName, packagePublisher)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByPackageFamilyName(packageFamilyName: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
         return defaultInterface().FindPackagesByPackageFamilyName(packageFamilyName)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesWithPackageTypes(packageTypes: PackageTypes): windows_collections.IVector<_impl_l2.Package> {
         return defaultInterface().FindPackagesWithPackageTypes(packageTypes)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByNamePublisherWithPackagesTypes(packageTypes: PackageTypes, packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
         return defaultInterface().FindPackagesByNamePublisherWithPackagesTypes(packageTypes, packageName, packagePublisher)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByPackageFamilyNameWithPackageTypes(packageTypes: PackageTypes, packageFamilyName: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
         return defaultInterface().FindPackagesByPackageFamilyNameWithPackageTypes(packageTypes, packageFamilyName)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackageByPackageFullName(packageFullName: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
         return defaultInterface().FindPackageByPackageFullName(packageFullName)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByUserSecurityId(userSecurityId: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
         return defaultInterface().FindPackagesByUserSecurityId(userSecurityId)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByUserSecurityIdNamePublisher(userSecurityId: windows_core.HString, packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
         return defaultInterface().FindPackagesByUserSecurityIdNamePublisher(userSecurityId, packageName, packagePublisher)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByUserSecurityIdPackageFamilyName(userSecurityId: windows_core.HString, packageFamilyName: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
         return defaultInterface().FindPackagesByUserSecurityIdPackageFamilyName(userSecurityId, packageFamilyName)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByUserSecurityIdWithPackageTypes(userSecurityId: windows_core.HString, packageTypes: PackageTypes): windows_collections.IVector<_impl_l2.Package> {
         return defaultInterface().FindPackagesByUserSecurityIdWithPackageTypes(userSecurityId, packageTypes)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByUserSecurityIdNamePublisherWithPackageTypes(userSecurityId: windows_core.HString, packageTypes: PackageTypes, packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
         return defaultInterface().FindPackagesByUserSecurityIdNamePublisherWithPackageTypes(userSecurityId, packageTypes, packageName, packagePublisher)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByUserSecurityIdPackageFamilyNameWithPackagesTypes(userSecurityId: windows_core.HString, packageTypes: PackageTypes, packageFamilyName: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
         return defaultInterface().FindPackagesByUserSecurityIdPackageFamilyNameWithPackagesTypes(userSecurityId, packageTypes, packageFamilyName)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackageByUserSecurityIdPackageFullName(userSecurityId: windows_core.HString, packageFullName: windows_core.HString): windows_collections.IVector<_impl_l2.Package> {
         return defaultInterface().FindPackageByUserSecurityIdPackageFullName(userSecurityId, packageFullName)
     }
@@ -5284,12 +5329,24 @@ extend DeleteSharedPackageContainerResult <: windows_core.HandleWinrtType<Delete
 @C
 public struct IAddPackageOptionsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var DependencyPackageUris: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var DependencyPackageUris: UIntNative = UIntNative(0)
     public var TargetVolume: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetTargetVolume: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var OptionalPackageFamilyNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var OptionalPackageFamilyNames: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var OptionalPackageUris: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var OptionalPackageUris: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var RelatedPackageUris: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RelatedPackageUris: UIntNative = UIntNative(0)
     public var ExternalLocationUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetExternalLocationUri: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var get_StubPackageOption: CFunc<(CPointer<Unit>, CPointer<StubPackageOptionAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -5382,6 +5439,7 @@ public class IAddPackageOptions <: InterfaceWrapperBase & ComInterface & Runtime
         readVtbl<IAddPackageOptionsVtbl>(IAddPackageOptionsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DependencyPackageUris(): windows_collections.IVector<Foundation.Uri> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5404,6 +5462,7 @@ public class IAddPackageOptions <: InterfaceWrapperBase & ComInterface & Runtime
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OptionalPackageFamilyNames(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5412,6 +5471,7 @@ public class IAddPackageOptions <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_collections.IVector<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OptionalPackageUris(): windows_collections.IVector<Foundation.Uri> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5420,6 +5480,7 @@ public class IAddPackageOptions <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_collections.IVector<Foundation.Uri>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RelatedPackageUris(): windows_collections.IVector<Foundation.Uri> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5604,41 +5665,56 @@ extend IAddPackageOptions <: windows_core.Interface<IAddPackageOptions> {}
 @C
 public struct IPackageManagerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AddPackageAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, DeploymentOptionsAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AddPackageAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var UpdatePackageAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, DeploymentOptionsAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var UpdatePackageAsync: UIntNative = UIntNative(0)
     public var RemovePackageAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var StagePackageAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var StagePackageAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var RegisterPackageAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, DeploymentOptionsAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_Foundation_Collections != "on"]
+    public var RegisterPackageAsync: UIntNative = UIntNative(0)
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindPackages: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel != "on"]
+    @When[Windows_ApplicationModel != "on" || Windows_Foundation_Collections != "on"]
     public var FindPackages: UIntNative = UIntNative(0)
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindPackagesByUserSecurityId: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel != "on"]
+    @When[Windows_ApplicationModel != "on" || Windows_Foundation_Collections != "on"]
     public var FindPackagesByUserSecurityId: UIntNative = UIntNative(0)
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindPackagesByNamePublisher: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel != "on"]
+    @When[Windows_ApplicationModel != "on" || Windows_Foundation_Collections != "on"]
     public var FindPackagesByNamePublisher: UIntNative = UIntNative(0)
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindPackagesByUserSecurityIdNamePublisher: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel != "on"]
+    @When[Windows_ApplicationModel != "on" || Windows_Foundation_Collections != "on"]
     public var FindPackagesByUserSecurityIdNamePublisher: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var FindUsers: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindUsers: UIntNative = UIntNative(0)
     public var SetPackageState: CFunc<(CPointer<Unit>, CPointer<Unit>, PackageStateAbi) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel == "on"]
     public var FindPackageByPackageFullName: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel != "on"]
     public var FindPackageByPackageFullName: UIntNative = UIntNative(0)
     public var CleanupPackageForUserAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindPackagesByPackageFamilyName: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel != "on"]
+    @When[Windows_ApplicationModel != "on" || Windows_Foundation_Collections != "on"]
     public var FindPackagesByPackageFamilyName: UIntNative = UIntNative(0)
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindPackagesByUserSecurityIdPackageFamilyName: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel != "on"]
+    @When[Windows_ApplicationModel != "on" || Windows_Foundation_Collections != "on"]
     public var FindPackagesByUserSecurityIdPackageFamilyName: UIntNative = UIntNative(0)
     @When[Windows_ApplicationModel == "on"]
     public var FindPackageByUserSecurityIdPackageFullName: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
@@ -5712,6 +5788,7 @@ public class IPackageManager <: InterfaceWrapperBase & ComInterface & RuntimeNam
         readVtbl<IPackageManagerVtbl>(IPackageManagerVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AddPackageAsync(packageUri: Foundation.Uri, dependencyPackageUris: windows_collections.IIterable<Foundation.Uri>, deploymentOptions: DeploymentOptions): windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5720,6 +5797,7 @@ public class IPackageManager <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UpdatePackageAsync(packageUri: Foundation.Uri, dependencyPackageUris: windows_collections.IIterable<Foundation.Uri>, deploymentOptions: DeploymentOptions): windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5736,6 +5814,7 @@ public class IPackageManager <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StagePackageAsync(packageUri: Foundation.Uri, dependencyPackageUris: windows_collections.IIterable<Foundation.Uri>): windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5744,6 +5823,7 @@ public class IPackageManager <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RegisterPackageAsync(manifestUri: Foundation.Uri, dependencyPackageUris: windows_collections.IIterable<Foundation.Uri>, deploymentOptions: DeploymentOptions): windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5752,7 +5832,7 @@ public class IPackageManager <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackages(): windows_collections.IIterable<_impl_l2.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5761,7 +5841,7 @@ public class IPackageManager <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return windows_collections.IIterable<_impl_l2.Package>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByUserSecurityId(userSecurityId: windows_core.HString): windows_collections.IIterable<_impl_l2.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5770,7 +5850,7 @@ public class IPackageManager <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return windows_collections.IIterable<_impl_l2.Package>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByNamePublisher(packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IIterable<_impl_l2.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5779,7 +5859,7 @@ public class IPackageManager <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return windows_collections.IIterable<_impl_l2.Package>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByUserSecurityIdNamePublisher(userSecurityId: windows_core.HString, packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IIterable<_impl_l2.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5788,6 +5868,7 @@ public class IPackageManager <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return windows_collections.IIterable<_impl_l2.Package>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindUsers(packageFullName: windows_core.HString): windows_collections.IIterable<PackageUserInformation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5819,7 +5900,7 @@ public class IPackageManager <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByPackageFamilyName(packageFamilyName: windows_core.HString): windows_collections.IIterable<_impl_l2.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5828,7 +5909,7 @@ public class IPackageManager <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return windows_collections.IIterable<_impl_l2.Package>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByUserSecurityIdPackageFamilyName(userSecurityId: windows_core.HString, packageFamilyName: windows_core.HString): windows_collections.IIterable<_impl_l2.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5855,11 +5936,20 @@ extend IPackageManager <: windows_core.Interface<IPackageManager> {}
 public struct IPackageManager3Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var AddPackageVolumeAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var AddPackageToVolumeAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, DeploymentOptionsAbi, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AddPackageToVolumeAsync: UIntNative = UIntNative(0)
     public var ClearPackageStatus: CFunc<(CPointer<Unit>, CPointer<Unit>, PackageStatusAbi) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var RegisterPackageWithAppDataVolumeAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, DeploymentOptionsAbi, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RegisterPackageWithAppDataVolumeAsync: UIntNative = UIntNative(0)
     public var FindPackageVolumeByName: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindPackageVolumes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindPackageVolumes: UIntNative = UIntNative(0)
     public var GetDefaultPackageVolume: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var MovePackageToVolumeAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, DeploymentOptionsAbi, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
     public var RemovePackageVolumeAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -5867,7 +5957,10 @@ public struct IPackageManager3Vtbl {
     public var SetPackageStatus: CFunc<(CPointer<Unit>, CPointer<Unit>, PackageStatusAbi) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var SetPackageVolumeOfflineAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var SetPackageVolumeOnlineAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var StagePackageToVolumeAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, DeploymentOptionsAbi, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var StagePackageToVolumeAsync: UIntNative = UIntNative(0)
     public var StageUserDataWithOptionsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, DeploymentOptionsAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -5945,6 +6038,7 @@ public class IPackageManager3 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_future.IAsyncOperation<PackageVolume>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AddPackageToVolumeAsync(packageUri: Foundation.Uri, dependencyPackageUris: windows_collections.IIterable<Foundation.Uri>, deploymentOptions: DeploymentOptions, targetVolume: PackageVolume): windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5959,6 +6053,7 @@ public class IPackageManager3 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RegisterPackageWithAppDataVolumeAsync(manifestUri: Foundation.Uri, dependencyPackageUris: windows_collections.IIterable<Foundation.Uri>, deploymentOptions: DeploymentOptions, appDataVolume: PackageVolume): windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5975,6 +6070,7 @@ public class IPackageManager3 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return PackageVolume.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindPackageVolumes(): windows_collections.IIterable<PackageVolume> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6035,6 +6131,7 @@ public class IPackageManager3 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StagePackageToVolumeAsync(packageUri: Foundation.Uri, dependencyPackageUris: windows_collections.IIterable<Foundation.Uri>, deploymentOptions: DeploymentOptions, targetVolume: PackageVolume): windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6059,7 +6156,10 @@ extend IPackageManager3 <: windows_core.Interface<IPackageManager3> {}
 @C
 public struct IPackageManager4Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetPackageVolumesAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetPackageVolumesAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -6128,6 +6228,7 @@ public class IPackageManager4 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         readVtbl<IPackageManager4Vtbl>(IPackageManager4Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetPackageVolumesAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<PackageVolume>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6144,9 +6245,18 @@ extend IPackageManager4 <: windows_core.Interface<IPackageManager4> {}
 @C
 public struct IPackageManager5Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AddPackageToVolumeAndOptionalPackagesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, DeploymentOptionsAbi, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AddPackageToVolumeAndOptionalPackagesAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var StagePackageToVolumeAndOptionalPackagesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, DeploymentOptionsAbi, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var StagePackageToVolumeAndOptionalPackagesAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var RegisterPackageByFamilyNameAndOptionalPackagesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, DeploymentOptionsAbi, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RegisterPackageByFamilyNameAndOptionalPackagesAsync: UIntNative = UIntNative(0)
     public var DebugSettings: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -6216,6 +6326,7 @@ public class IPackageManager5 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         readVtbl<IPackageManager5Vtbl>(IPackageManager5Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AddPackageToVolumeAndOptionalPackagesAsync(packageUri: Foundation.Uri, dependencyPackageUris: windows_collections.IIterable<Foundation.Uri>, deploymentOptions: DeploymentOptions, targetVolume: PackageVolume, optionalPackageFamilyNames: windows_collections.IIterable<windows_core.HString>, externalPackageUris: windows_collections.IIterable<Foundation.Uri>): windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6224,6 +6335,7 @@ public class IPackageManager5 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StagePackageToVolumeAndOptionalPackagesAsync(packageUri: Foundation.Uri, dependencyPackageUris: windows_collections.IIterable<Foundation.Uri>, deploymentOptions: DeploymentOptions, targetVolume: PackageVolume, optionalPackageFamilyNames: windows_collections.IIterable<windows_core.HString>, externalPackageUris: windows_collections.IIterable<Foundation.Uri>): windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6232,6 +6344,7 @@ public class IPackageManager5 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RegisterPackageByFamilyNameAndOptionalPackagesAsync(mainPackageFamilyName: windows_core.HString, dependencyPackageFamilyNames: windows_collections.IIterable<windows_core.HString>, deploymentOptions: DeploymentOptions, appDataVolume: PackageVolume, optionalPackageFamilyNames: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6259,9 +6372,18 @@ public struct IPackageManager6Vtbl {
     public var ProvisionPackageForAllUsersAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var AddPackageByAppInstallerFileAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, AddPackageByAppInstallerOptionsAbi, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
     public var RequestAddPackageByAppInstallerFileAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, AddPackageByAppInstallerOptionsAbi, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var AddPackageToVolumeAndRelatedSetAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, DeploymentOptionsAbi, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AddPackageToVolumeAndRelatedSetAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var StagePackageToVolumeAndRelatedSetAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, DeploymentOptionsAbi, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var StagePackageToVolumeAndRelatedSetAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var RequestAddPackageAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, DeploymentOptionsAbi, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RequestAddPackageAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -6354,6 +6476,7 @@ public class IPackageManager6 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AddPackageToVolumeAndRelatedSetAsync(packageUri: Foundation.Uri, dependencyPackageUris: windows_collections.IIterable<Foundation.Uri>, options: DeploymentOptions, targetVolume: PackageVolume, optionalPackageFamilyNames: windows_collections.IIterable<windows_core.HString>, packageUrisToInstall: windows_collections.IIterable<Foundation.Uri>, relatedPackageUris: windows_collections.IIterable<Foundation.Uri>): windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6362,6 +6485,7 @@ public class IPackageManager6 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StagePackageToVolumeAndRelatedSetAsync(packageUri: Foundation.Uri, dependencyPackageUris: windows_collections.IIterable<Foundation.Uri>, options: DeploymentOptions, targetVolume: PackageVolume, optionalPackageFamilyNames: windows_collections.IIterable<windows_core.HString>, packageUrisToInstall: windows_collections.IIterable<Foundation.Uri>, relatedPackageUris: windows_collections.IIterable<Foundation.Uri>): windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6370,6 +6494,7 @@ public class IPackageManager6 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RequestAddPackageAsync(packageUri: Foundation.Uri, dependencyPackageUris: windows_collections.IIterable<Foundation.Uri>, deploymentOptions: DeploymentOptions, targetVolume: PackageVolume, optionalPackageFamilyNames: windows_collections.IIterable<windows_core.HString>, relatedPackageUris: windows_collections.IIterable<Foundation.Uri>): windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6386,7 +6511,10 @@ extend IPackageManager6 <: windows_core.Interface<IPackageManager6> {}
 @C
 public struct IPackageManager7Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var RequestAddPackageAndRelatedSetAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, DeploymentOptionsAbi, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RequestAddPackageAndRelatedSetAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -6455,6 +6583,7 @@ public class IPackageManager7 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         readVtbl<IPackageManager7Vtbl>(IPackageManager7Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RequestAddPackageAndRelatedSetAsync(packageUri: Foundation.Uri, dependencyPackageUris: windows_collections.IIterable<Foundation.Uri>, deploymentOptions: DeploymentOptions, targetVolume: PackageVolume, optionalPackageFamilyNames: windows_collections.IIterable<windows_core.HString>, relatedPackageUris: windows_collections.IIterable<Foundation.Uri>, packageUrisToInstall: windows_collections.IIterable<Foundation.Uri>): windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6471,10 +6600,16 @@ extend IPackageManager7 <: windows_core.Interface<IPackageManager7> {}
 @C
 public struct IRegisterPackageOptionsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var DependencyPackageUris: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var DependencyPackageUris: UIntNative = UIntNative(0)
     public var AppDataVolume: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetAppDataVolume: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var OptionalPackageFamilyNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var OptionalPackageFamilyNames: UIntNative = UIntNative(0)
     public var ExternalLocationUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetExternalLocationUri: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var DeveloperMode: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -6561,6 +6696,7 @@ public class IRegisterPackageOptions <: InterfaceWrapperBase & ComInterface & Ru
         readVtbl<IRegisterPackageOptionsVtbl>(IRegisterPackageOptionsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DependencyPackageUris(): windows_collections.IVector<Foundation.Uri> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6583,6 +6719,7 @@ public class IRegisterPackageOptions <: InterfaceWrapperBase & ComInterface & Ru
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OptionalPackageFamilyNames(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6725,12 +6862,24 @@ extend IRegisterPackageOptions <: windows_core.Interface<IRegisterPackageOptions
 @C
 public struct IStagePackageOptionsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var DependencyPackageUris: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var DependencyPackageUris: UIntNative = UIntNative(0)
     public var TargetVolume: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetTargetVolume: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var OptionalPackageFamilyNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var OptionalPackageFamilyNames: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var OptionalPackageUris: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var OptionalPackageUris: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var RelatedPackageUris: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RelatedPackageUris: UIntNative = UIntNative(0)
     public var ExternalLocationUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetExternalLocationUri: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var get_StubPackageOption: CFunc<(CPointer<Unit>, CPointer<StubPackageOptionAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -6815,6 +6964,7 @@ public class IStagePackageOptions <: InterfaceWrapperBase & ComInterface & Runti
         readVtbl<IStagePackageOptionsVtbl>(IStagePackageOptionsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DependencyPackageUris(): windows_collections.IVector<Foundation.Uri> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6837,6 +6987,7 @@ public class IStagePackageOptions <: InterfaceWrapperBase & ComInterface & Runti
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OptionalPackageFamilyNames(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6845,6 +6996,7 @@ public class IStagePackageOptions <: InterfaceWrapperBase & ComInterface & Runti
         return windows_collections.IVector<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OptionalPackageUris(): windows_collections.IVector<Foundation.Uri> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6853,6 +7005,7 @@ public class IStagePackageOptions <: InterfaceWrapperBase & ComInterface & Runti
         return windows_collections.IVector<Foundation.Uri>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RelatedPackageUris(): windows_collections.IVector<Foundation.Uri> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7057,6 +7210,7 @@ public class RegisterPackageOptions <: InterfaceWrapperBase & ComInterface & win
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DependencyPackageUris(): windows_collections.IVector<Foundation.Uri> {
         return defaultInterface().DependencyPackageUris()
     }
@@ -7069,6 +7223,7 @@ public class RegisterPackageOptions <: InterfaceWrapperBase & ComInterface & win
         defaultInterface().SetAppDataVolume(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OptionalPackageFamilyNames(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().OptionalPackageFamilyNames()
     }
@@ -7244,6 +7399,7 @@ public class StagePackageOptions <: InterfaceWrapperBase & ComInterface & window
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DependencyPackageUris(): windows_collections.IVector<Foundation.Uri> {
         return defaultInterface().DependencyPackageUris()
     }
@@ -7256,14 +7412,17 @@ public class StagePackageOptions <: InterfaceWrapperBase & ComInterface & window
         defaultInterface().SetTargetVolume(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OptionalPackageFamilyNames(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().OptionalPackageFamilyNames()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OptionalPackageUris(): windows_collections.IVector<Foundation.Uri> {
         return defaultInterface().OptionalPackageUris()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RelatedPackageUris(): windows_collections.IVector<Foundation.Uri> {
         return defaultInterface().RelatedPackageUris()
     }
@@ -7431,6 +7590,7 @@ public class AddPackageOptions <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DependencyPackageUris(): windows_collections.IVector<Foundation.Uri> {
         return defaultInterface().DependencyPackageUris()
     }
@@ -7443,14 +7603,17 @@ public class AddPackageOptions <: InterfaceWrapperBase & ComInterface & windows_
         defaultInterface().SetTargetVolume(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OptionalPackageFamilyNames(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().OptionalPackageFamilyNames()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OptionalPackageUris(): windows_collections.IVector<Foundation.Uri> {
         return defaultInterface().OptionalPackageUris()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RelatedPackageUris(): windows_collections.IVector<Foundation.Uri> {
         return defaultInterface().RelatedPackageUris()
     }
@@ -7574,14 +7737,17 @@ extend AddPackageOptions <: windows_core.HandleWinrtType<AddPackageOptions> {
 @C
 public struct IPackageManager9Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindProvisionedPackages: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel != "on"]
+    @When[Windows_ApplicationModel != "on" || Windows_Foundation_Collections != "on"]
     public var FindProvisionedPackages: UIntNative = UIntNative(0)
     public var AddPackageByUriAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var StagePackageByUriAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var RegisterPackageByUriAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var RegisterPackagesByFullNameAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RegisterPackagesByFullNameAsync: UIntNative = UIntNative(0)
     public var SetPackageStubPreference: CFunc<(CPointer<Unit>, CPointer<Unit>, PackageStubPreferenceAbi) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var GetPackageStubPreference: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<PackageStubPreferenceAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
@@ -7652,7 +7818,7 @@ public class IPackageManager9 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         readVtbl<IPackageManager9Vtbl>(IPackageManager9Vtbl())
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindProvisionedPackages(): windows_collections.IVector<_impl_l2.Package> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7685,6 +7851,7 @@ public class IPackageManager9 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RegisterPackagesByFullNameAsync(packageFullNames: windows_collections.IIterable<windows_core.HString>, options: RegisterPackageOptions): windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7791,10 +7958,12 @@ public class PackageManager <: InterfaceWrapperBase & ComInterface & windows_int
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AddPackageAsync(packageUri: Foundation.Uri, dependencyPackageUris: windows_collections.IIterable<Foundation.Uri>, deploymentOptions: DeploymentOptions): windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress> {
         return defaultInterface().AddPackageAsync(packageUri, dependencyPackageUris, deploymentOptions)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UpdatePackageAsync(packageUri: Foundation.Uri, dependencyPackageUris: windows_collections.IIterable<Foundation.Uri>, deploymentOptions: DeploymentOptions): windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress> {
         return defaultInterface().UpdatePackageAsync(packageUri, dependencyPackageUris, deploymentOptions)
     }
@@ -7803,34 +7972,37 @@ public class PackageManager <: InterfaceWrapperBase & ComInterface & windows_int
         return defaultInterface().RemovePackageAsync(packageFullName)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StagePackageAsync(packageUri: Foundation.Uri, dependencyPackageUris: windows_collections.IIterable<Foundation.Uri>): windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress> {
         return defaultInterface().StagePackageAsync(packageUri, dependencyPackageUris)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RegisterPackageAsync(manifestUri: Foundation.Uri, dependencyPackageUris: windows_collections.IIterable<Foundation.Uri>, deploymentOptions: DeploymentOptions): windows_future.IAsyncOperationWithProgress<DeploymentResult, DeploymentProgress> {
         return defaultInterface().RegisterPackageAsync(manifestUri, dependencyPackageUris, deploymentOptions)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackages(): windows_collections.IIterable<_impl_l2.Package> {
         return defaultInterface().FindPackages()
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByUserSecurityId(userSecurityId: windows_core.HString): windows_collections.IIterable<_impl_l2.Package> {
         return defaultInterface().FindPackagesByUserSecurityId(userSecurityId)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByNamePublisher(packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IIterable<_impl_l2.Package> {
         return defaultInterface().FindPackagesByNamePublisher(packageName, packagePublisher)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByUserSecurityIdNamePublisher(userSecurityId: windows_core.HString, packageName: windows_core.HString, packagePublisher: windows_core.HString): windows_collections.IIterable<_impl_l2.Package> {
         return defaultInterface().FindPackagesByUserSecurityIdNamePublisher(userSecurityId, packageName, packagePublisher)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindUsers(packageFullName: windows_core.HString): windows_collections.IIterable<PackageUserInformation> {
         return defaultInterface().FindUsers(packageFullName)
     }
@@ -7848,12 +8020,12 @@ public class PackageManager <: InterfaceWrapperBase & ComInterface & windows_int
         return defaultInterface().CleanupPackageForUserAsync(packageName, userSecurityId)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByPackageFamilyName(packageFamilyName: windows_core.HString): windows_collections.IIterable<_impl_l2.Package> {
         return defaultInterface().FindPackagesByPackageFamilyName(packageFamilyName)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindPackagesByUserSecurityIdPackageFamilyName(userSecurityId: windows_core.HString, packageFamilyName: windows_core.HString): windows_collections.IIterable<_impl_l2.Package> {
         return defaultInterface().FindPackagesByUserSecurityIdPackageFamilyName(userSecurityId, packageFamilyName)
     }
@@ -8158,18 +8330,22 @@ public class AutoUpdateSettingsOptions <: InterfaceWrapperBase & ComInterface & 
         defaultInterface().SetIsAutoRepairEnabled(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UpdateUris(): windows_collections.IVector<Foundation.Uri> {
         return defaultInterface().UpdateUris()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RepairUris(): windows_collections.IVector<Foundation.Uri> {
         return defaultInterface().RepairUris()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DependencyPackageUris(): windows_collections.IVector<Foundation.Uri> {
         return defaultInterface().DependencyPackageUris()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OptionalPackageUris(): windows_collections.IVector<Foundation.Uri> {
         return defaultInterface().OptionalPackageUris()
     }
@@ -8285,6 +8461,7 @@ public class CreateSharedPackageContainerOptions <: InterfaceWrapperBase & ComIn
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Members(): windows_collections.IVector<SharedPackageContainerMember> {
         return defaultInterface().Members()
     }
@@ -8708,7 +8885,10 @@ extend IAutoUpdateSettingsOptionsStatics <: windows_core.Interface<IAutoUpdateSe
 @C
 public struct ICreateSharedPackageContainerOptionsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Members: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Members: UIntNative = UIntNative(0)
     public var ForceAppShutdown: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetForceAppShutdown: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CreateCollisionOption: CFunc<(CPointer<Unit>, CPointer<SharedPackageContainerCreationCollisionOptionsAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -8781,6 +8961,7 @@ public class ICreateSharedPackageContainerOptions <: InterfaceWrapperBase & ComI
         readVtbl<ICreateSharedPackageContainerOptionsVtbl>(ICreateSharedPackageContainerOptionsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Members(): windows_collections.IVector<SharedPackageContainerMember> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -8930,7 +9111,10 @@ public struct ISharedPackageContainerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Id: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetMembers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetMembers: UIntNative = UIntNative(0)
     public var RemovePackageFamily: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var ResetData: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -9017,6 +9201,7 @@ public class ISharedPackageContainer <: InterfaceWrapperBase & ComInterface & Ru
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetMembers(): windows_collections.IVector<SharedPackageContainerMember> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -9052,8 +9237,14 @@ public struct ISharedPackageContainerManagerVtbl {
     public var CreateContainer: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var DeleteContainer: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var GetContainer: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindContainers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindContainers: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var FindContainersWithOptions: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindContainersWithOptions: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -9146,6 +9337,7 @@ public class ISharedPackageContainerManager <: InterfaceWrapperBase & ComInterfa
         return SharedPackageContainer.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindContainers(): windows_collections.IVector<SharedPackageContainer> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -9154,6 +9346,7 @@ public class ISharedPackageContainerManager <: InterfaceWrapperBase & ComInterfa
         return windows_collections.IVector<SharedPackageContainer>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindContainersWithOptions(options: FindSharedPackageContainerOptions): windows_collections.IVector<SharedPackageContainer> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -9431,6 +9624,7 @@ public class SharedPackageContainer <: InterfaceWrapperBase & ComInterface & win
         return defaultInterface().Id()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetMembers(): windows_collections.IVector<SharedPackageContainerMember> {
         return defaultInterface().GetMembers()
     }
@@ -9543,10 +9737,12 @@ public class SharedPackageContainerManager <: InterfaceWrapperBase & ComInterfac
         return defaultInterface().GetContainer(id)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindContainers(): windows_collections.IVector<SharedPackageContainer> {
         return defaultInterface().FindContainers()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindContainersWithOptions(options: FindSharedPackageContainerOptions): windows_collections.IVector<SharedPackageContainer> {
         return defaultInterface().FindContainersWithOptions(options)
     }

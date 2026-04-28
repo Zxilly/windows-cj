@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Graphics_Imaging == "on"]
 import windows.Graphics.Imaging as Graphics_Imaging
 import windows._impl_l1 as _impl_l1
 import windows_collections as windows_collections
@@ -246,7 +245,10 @@ extend ILearningModelBindingPreview <: windows_core.Interface<ILearningModelBind
 public struct ILearningModelEvaluationResultPreviewVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var CorrelationId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Outputs: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Outputs: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -323,6 +325,7 @@ public class ILearningModelEvaluationResultPreview <: InterfaceWrapperBase & Com
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Outputs(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -470,6 +473,7 @@ public class LearningModelEvaluationResultPreview <: InterfaceWrapperBase & ComI
         return defaultInterface().CorrelationId()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Outputs(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         return defaultInterface().Outputs()
     }
@@ -990,8 +994,14 @@ extend ILearningModelVariableDescriptorPreview <: windows_core.Interface<ILearni
 public struct IMapVariableDescriptorPreviewVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var KeyKind: CFunc<(CPointer<Unit>, CPointer<FeatureElementKindPreviewAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var ValidStringKeys: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ValidStringKeys: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var ValidIntegerKeys: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ValidIntegerKeys: UIntNative = UIntNative(0)
     public var Fields: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -1081,6 +1091,7 @@ public class IMapVariableDescriptorPreview <: InterfaceWrapperBase & ComInterfac
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<FeatureElementKindPreview>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ValidStringKeys(): windows_collections.IIterable<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1089,6 +1100,7 @@ public class IMapVariableDescriptorPreview <: InterfaceWrapperBase & ComInterfac
         return windows_collections.IIterable<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ValidIntegerKeys(): windows_collections.IIterable<Int64> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1211,7 +1223,10 @@ extend ISequenceVariableDescriptorPreview <: windows_core.Interface<ISequenceVar
 public struct ITensorVariableDescriptorPreviewVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var DataType: CFunc<(CPointer<Unit>, CPointer<FeatureElementKindPreviewAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Shape: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Shape: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1300,6 +1315,7 @@ public class ITensorVariableDescriptorPreview <: InterfaceWrapperBase & ComInter
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<FeatureElementKindPreview>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Shape(): windows_collections.IIterable<Int64> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1612,10 +1628,12 @@ public class MapVariableDescriptorPreview <: InterfaceWrapperBase & ComInterface
         return defaultInterface().KeyKind()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ValidStringKeys(): windows_collections.IIterable<windows_core.HString> {
         return defaultInterface().ValidStringKeys()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ValidIntegerKeys(): windows_collections.IIterable<Int64> {
         return defaultInterface().ValidIntegerKeys()
     }
@@ -1846,6 +1864,7 @@ public class TensorVariableDescriptorPreview <: InterfaceWrapperBase & ComInterf
         return defaultInterface().DataType()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Shape(): windows_collections.IIterable<Int64> {
         return defaultInterface().Shape()
     }
@@ -2013,9 +2032,18 @@ public struct ILearningModelDescriptionPreviewVtbl {
     public var Domain: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Description: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Version: CFunc<(CPointer<Unit>, CPointer<Int64>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Metadata: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Metadata: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var InputFeatures: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var InputFeatures: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var OutputFeatures: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var OutputFeatures: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2124,6 +2152,7 @@ public class ILearningModelDescriptionPreview <: InterfaceWrapperBase & ComInter
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Metadata(): windows_collections.IMapView<windows_core.HString, windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2132,6 +2161,7 @@ public class ILearningModelDescriptionPreview <: InterfaceWrapperBase & ComInter
         return windows_collections.IMapView<windows_core.HString, windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InputFeatures(): windows_collections.IIterable<ILearningModelVariableDescriptorPreview> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2140,6 +2170,7 @@ public class ILearningModelDescriptionPreview <: InterfaceWrapperBase & ComInter
         return windows_collections.IIterable<ILearningModelVariableDescriptorPreview>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OutputFeatures(): windows_collections.IIterable<ILearningModelVariableDescriptorPreview> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2357,14 +2388,17 @@ public class LearningModelDescriptionPreview <: InterfaceWrapperBase & ComInterf
         return defaultInterface().Version()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Metadata(): windows_collections.IMapView<windows_core.HString, windows_core.HString> {
         return defaultInterface().Metadata()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InputFeatures(): windows_collections.IIterable<ILearningModelVariableDescriptorPreview> {
         return defaultInterface().InputFeatures()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OutputFeatures(): windows_collections.IIterable<ILearningModelVariableDescriptorPreview> {
         return defaultInterface().OutputFeatures()
     }
@@ -2392,7 +2426,10 @@ extend LearningModelDescriptionPreview <: windows_core.HandleWinrtType<LearningM
 @C
 public struct ILearningModelBindingPreviewFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromModel: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateFromModel: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2461,6 +2498,7 @@ public class ILearningModelBindingPreviewFactory <: InterfaceWrapperBase & ComIn
         readVtbl<ILearningModelBindingPreviewFactoryVtbl>(ILearningModelBindingPreviewFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromModel(model: LearningModelPreview): LearningModelBindingPreview {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2477,8 +2515,14 @@ extend ILearningModelBindingPreviewFactory <: windows_core.Interface<ILearningMo
 @C
 public struct ILearningModelPreviewVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var EvaluateAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var EvaluateAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var EvaluateFeaturesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var EvaluateFeaturesAsync: UIntNative = UIntNative(0)
     public var Description: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var InferencingOptions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetInferencingOptions: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -2550,6 +2594,7 @@ public class ILearningModelPreview <: InterfaceWrapperBase & ComInterface & Runt
         readVtbl<ILearningModelPreviewVtbl>(ILearningModelPreviewVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func EvaluateAsync(binding: LearningModelBindingPreview, correlationId: windows_core.HString): windows_future.IAsyncOperation<LearningModelEvaluationResultPreview> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2558,6 +2603,7 @@ public class ILearningModelPreview <: InterfaceWrapperBase & ComInterface & Runt
         return windows_future.IAsyncOperation<LearningModelEvaluationResultPreview>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func EvaluateFeaturesAsync(features: windows_collections.IMap<windows_core.HString, IInspectable>, correlationId: windows_core.HString): windows_future.IAsyncOperation<LearningModelEvaluationResultPreview> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2694,7 +2740,7 @@ public class ILearningModelPreviewStatics <: InterfaceWrapperBase & ComInterface
 @When[Windows_AI_MachineLearning_Preview == "on"]
 extend ILearningModelPreviewStatics <: windows_core.Interface<ILearningModelPreviewStatics> {}
 
-@When[Windows_AI_MachineLearning_Preview == "on"]
+@When[Windows_AI_MachineLearning_Preview == "on" && Windows_Foundation_Collections == "on"]
 public class LearningModelBindingPreview <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -2816,6 +2862,7 @@ public class LearningModelBindingPreview <: InterfaceWrapperBase & ComInterface 
         return asIIterable().First()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromModel(model: LearningModelPreview): LearningModelBindingPreview {
         var result__: Option<LearningModelBindingPreview> = Option<LearningModelBindingPreview>.None
         try (factory__ = windows_core.factory<LearningModelBindingPreview, ILearningModelBindingPreviewFactory>().unwrap()) {
@@ -2828,7 +2875,7 @@ public class LearningModelBindingPreview <: InterfaceWrapperBase & ComInterface 
     }
 }
 
-@When[Windows_AI_MachineLearning_Preview == "on"]
+@When[Windows_AI_MachineLearning_Preview == "on" && Windows_Foundation_Collections == "on"]
 extend LearningModelBindingPreview <: windows_core.HandleWinrtType<LearningModelBindingPreview> {
     public static func intoWinrtHandle(value: LearningModelBindingPreview): CPointer<Unit> {
         value.asRaw()
@@ -2911,10 +2958,12 @@ public class LearningModelPreview <: InterfaceWrapperBase & ComInterface & windo
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func EvaluateAsync(binding: LearningModelBindingPreview, correlationId: windows_core.HString): windows_future.IAsyncOperation<LearningModelEvaluationResultPreview> {
         return defaultInterface().EvaluateAsync(binding, correlationId)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func EvaluateFeaturesAsync(features: windows_collections.IMap<windows_core.HString, IInspectable>, correlationId: windows_core.HString): windows_future.IAsyncOperation<LearningModelEvaluationResultPreview> {
         return defaultInterface().EvaluateFeaturesAsync(features, correlationId)
     }

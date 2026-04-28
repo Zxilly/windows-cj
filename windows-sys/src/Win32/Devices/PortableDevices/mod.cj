@@ -3,9 +3,7 @@ package windows_sys.Win32.Devices.PortableDevices
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Devices_Properties == "on"]
 import windows_sys.Win32.Devices.Properties as Win32_Devices_Properties
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
@@ -4156,10 +4154,15 @@ public class IWpdSerializer <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[DMPROCESSXMLFILTERED == "on"]
+@When[Windows_Win32_Devices_PortableDevices == "on" && DMPROCESSXMLFILTERED == "on" && Windows_Win32_Devices_PortableDevices_DMProcessConfigXMLFiltered == "on"]
 foreign {
     // param-hint: rgszAllowedCspNodes len=param[2]
     func DMProcessConfigXMLFiltered(pszXmlIn: CPointer<UInt16>, rgszAllowedCspNodes: CPointer<CPointer<UInt16>>, dwNumAllowedCspNodes: UInt32, pbstrXmlOut: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_Devices_PortableDevices == "on" && DMPROCESSXMLFILTERED == "on" && Windows_Win32_Devices_PortableDevices_DMProcessConfigXMLFiltered == "on"]
+public unsafe func Windows_DMProcessConfigXMLFiltered(pszXmlIn: CPointer<UInt16>, rgszAllowedCspNodes: CPointer<CPointer<UInt16>>, dwNumAllowedCspNodes: UInt32, pbstrXmlOut: CPointer<CPointer<UInt16>>): Int32 {
+    return DMProcessConfigXMLFiltered(pszXmlIn, rgszAllowedCspNodes, dwNumAllowedCspNodes, pbstrXmlOut)
 }
 
 @When[Windows_Win32_Devices_PortableDevices == "on"]

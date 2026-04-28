@@ -3,7 +3,6 @@ package windows_sys.ApplicationModel.UserActivities.Core
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_ApplicationModel_UserActivities == "on"]
 import windows_sys.ApplicationModel.UserActivities as ApplicationModel_UserActivities
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
 

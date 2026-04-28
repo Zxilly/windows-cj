@@ -5,9 +5,7 @@ import windows_interface.{GUID}
 import windows_interface as windows_interface
 import windows_polyfill.{unionReadInt32, unionWriteInt32}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_System_IO == "on"]
 import windows_sys.Win32.System.IO as Win32_System_IO
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
@@ -2516,354 +2514,2106 @@ public struct PEER_COLLAB_EVENT_DATA__Anonymous_e__Union {
     public init() {}
 }
 
-@When[P2P == "on"]
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabAddContact == "on"]
 foreign {
     // param-hint: ppContact optional
     func PeerCollabAddContact(pwzContactData: CPointer<UInt16>, ppContact: CPointer<CPointer<PEER_CONTACT>>): Int32
-    func PeerCollabCancelInvitation(hInvitation: CPointer<Unit>): Int32
-    func PeerCollabCloseHandle(hInvitation: CPointer<Unit>): Int32
-    func PeerCollabDeleteContact(pwzPeerName: CPointer<UInt16>): Int32
-    func PeerCollabDeleteObject(pObjectId: CPointer<GUID>): Int32
-    func PeerCollabEnumApplicationRegistrationInfo(registrationType: Int32, phPeerEnum: CPointer<CPointer<Unit>>): Int32
-    func PeerCollabEnumContacts(phPeerEnum: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pcContact optional
-    func PeerCollabEnumEndpoints(pcContact: CPointer<PEER_CONTACT>, phPeerEnum: CPointer<CPointer<Unit>>): Int32
-    func PeerCollabEnumPeopleNearMe(phPeerEnum: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pwzPeerName optional
-    func PeerCollabExportContact(pwzPeerName: CPointer<UInt16>, ppwzContactData: CPointer<CPointer<UInt16>>): Int32
-    func PeerCollabGetApplicationRegistrationInfo(pApplicationId: CPointer<GUID>, registrationType: Int32, ppApplication: CPointer<CPointer<PEER_APPLICATION_REGISTRATION_INFO>>): Int32
-    // param-hint: pwzPeerName optional
-    func PeerCollabGetContact(pwzPeerName: CPointer<UInt16>, ppContact: CPointer<CPointer<PEER_CONTACT>>): Int32
-    func PeerCollabGetEndpointName(ppwzEndpointName: CPointer<CPointer<UInt16>>): Int32
-    func PeerCollabGetInvitationResponse(hInvitation: CPointer<Unit>, ppInvitationResponse: CPointer<CPointer<PEER_INVITATION_RESPONSE>>): Int32
-    func PeerCollabGetSigninOptions(pdwSigninOptions: CPointer<UInt32>): Int32
-    func PeerCollabParseContact(pwzContactData: CPointer<UInt16>, ppContact: CPointer<CPointer<PEER_CONTACT>>): Int32
-    func PeerCollabRegisterApplication(pcApplication: CPointer<PEER_APPLICATION_REGISTRATION_INFO>, registrationType: Int32): Int32
-    // param-hint: pEventRegistrations len=param[1]
-    func PeerCollabRegisterEvent(hEvent: CPointer<Unit>, cEventRegistration: UInt32, pEventRegistrations: CPointer<PEER_COLLAB_EVENT_REGISTRATION>, phPeerEvent: CPointer<CPointer<Unit>>): Int32
-    func PeerCollabSetEndpointName(pwzEndpointName: CPointer<UInt16>): Int32
-    func PeerCollabSetObject(pcObject: CPointer<PEER_OBJECT>): Int32
-    func PeerCollabSetPresenceInfo(pcPresenceInfo: CPointer<PEER_PRESENCE_INFO>): Int32
-    func PeerCollabShutdown(): Int32
-    // param-hint: hwndParent optional
-    func PeerCollabSignin(hwndParent: CPointer<Unit>, dwSigninOptions: UInt32): Int32
-    func PeerCollabSignout(dwSigninOptions: UInt32): Int32
-    func PeerCollabStartup(wVersionRequested: UInt16): Int32
-    func PeerCollabUnregisterApplication(pApplicationId: CPointer<GUID>, registrationType: Int32): Int32
-    func PeerCollabUnregisterEvent(hPeerEvent: CPointer<Unit>): Int32
-    func PeerCollabUpdateContact(pContact: CPointer<PEER_CONTACT>): Int32
-    // param-hint: pwzIdentity optional
-    // param-hint: pwzClassifier optional
-    func PeerCreatePeerName(pwzIdentity: CPointer<UInt16>, pwzClassifier: CPointer<UInt16>, ppwzPeerName: CPointer<CPointer<UInt16>>): Int32
-    func PeerEndEnumeration(hPeerEnum: CPointer<Unit>): Int32
-    func PeerEnumGroups(pwzIdentity: CPointer<UInt16>, phPeerEnum: CPointer<CPointer<Unit>>): Int32
-    func PeerEnumIdentities(phPeerEnum: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pvData optional
-    func PeerFreeData(pvData: CPointer<Unit>): Unit
-    func PeerGetItemCount(hPeerEnum: CPointer<Unit>, pCount: CPointer<UInt32>): Int32
-    func PeerGetNextItem(hPeerEnum: CPointer<Unit>, pCount: CPointer<UInt32>, pppvItems: CPointer<CPointer<CPointer<Unit>>>): Int32
-    func PeerGroupAddRecord(hGroup: CPointer<Unit>, pRecord: CPointer<PEER_RECORD>, pRecordId: CPointer<GUID>): Int32
-    func PeerGroupClose(hGroup: CPointer<Unit>): Int32
-    func PeerGroupCloseDirectConnection(hGroup: CPointer<Unit>, ullConnectionId: UInt64): Int32
-    func PeerGroupConnect(hGroup: CPointer<Unit>): Int32
-    func PeerGroupCreate(pProperties: CPointer<PEER_GROUP_PROPERTIES>, phGroup: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pftExpiration optional
-    // param-hint: pRoles len=param[3] optional
-    func PeerGroupCreateInvitation(hGroup: CPointer<Unit>, pwzIdentityInfo: CPointer<UInt16>, pftExpiration: CPointer<Win32_Foundation.FILETIME>, cRoles: UInt32, pRoles: CPointer<GUID>, ppwzInvitation: CPointer<CPointer<UInt16>>): Int32
-    func PeerGroupCreatePasswordInvitation(hGroup: CPointer<Unit>, ppwzInvitation: CPointer<CPointer<UInt16>>): Int32
-    func PeerGroupDelete(pwzIdentity: CPointer<UInt16>, pwzGroupPeerName: CPointer<UInt16>): Int32
-    func PeerGroupDeleteRecord(hGroup: CPointer<Unit>, pRecordId: CPointer<GUID>): Int32
-    func PeerGroupEnumConnections(hGroup: CPointer<Unit>, dwFlags: UInt32, phPeerEnum: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pwzIdentity optional
-    func PeerGroupEnumMembers(hGroup: CPointer<Unit>, dwFlags: UInt32, pwzIdentity: CPointer<UInt16>, phPeerEnum: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pRecordType optional
-    func PeerGroupEnumRecords(hGroup: CPointer<Unit>, pRecordType: CPointer<GUID>, phPeerEnum: CPointer<CPointer<Unit>>): Int32
-    func PeerGroupExportConfig(hGroup: CPointer<Unit>, pwzPassword: CPointer<UInt16>, ppwzXML: CPointer<CPointer<UInt16>>): Int32
-    func PeerGroupExportDatabase(hGroup: CPointer<Unit>, pwzFilePath: CPointer<UInt16>): Int32
-    func PeerGroupGetEventData(hPeerEvent: CPointer<Unit>, ppEventData: CPointer<CPointer<PEER_GROUP_EVENT_DATA>>): Int32
-    func PeerGroupGetProperties(hGroup: CPointer<Unit>, ppProperties: CPointer<CPointer<PEER_GROUP_PROPERTIES>>): Int32
-    func PeerGroupGetRecord(hGroup: CPointer<Unit>, pRecordId: CPointer<GUID>, ppRecord: CPointer<CPointer<PEER_RECORD>>): Int32
-    func PeerGroupGetStatus(hGroup: CPointer<Unit>, pdwStatus: CPointer<UInt32>): Int32
-    func PeerGroupImportConfig(pwzXML: CPointer<UInt16>, pwzPassword: CPointer<UInt16>, fOverwrite: Int32, ppwzIdentity: CPointer<CPointer<UInt16>>, ppwzGroup: CPointer<CPointer<UInt16>>): Int32
-    func PeerGroupImportDatabase(hGroup: CPointer<Unit>, pwzFilePath: CPointer<UInt16>): Int32
-    // param-hint: pwzCloud optional
-    func PeerGroupJoin(pwzIdentity: CPointer<UInt16>, pwzInvitation: CPointer<UInt16>, pwzCloud: CPointer<UInt16>, phGroup: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pwzCloud optional
-    func PeerGroupOpen(pwzIdentity: CPointer<UInt16>, pwzGroupPeerName: CPointer<UInt16>, pwzCloud: CPointer<UInt16>, phGroup: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pwzCloud optional
-    func PeerGroupPasswordJoin(pwzIdentity: CPointer<UInt16>, pwzInvitation: CPointer<UInt16>, pwzPassword: CPointer<UInt16>, pwzCloud: CPointer<UInt16>, phGroup: CPointer<CPointer<Unit>>): Int32
-    func PeerGroupPeerTimeToUniversalTime(hGroup: CPointer<Unit>, pftPeerTime: CPointer<Win32_Foundation.FILETIME>, pftUniversalTime: CPointer<Win32_Foundation.FILETIME>): Int32
-    // param-hint: pEventRegistrations len=param[2]
-    func PeerGroupRegisterEvent(hGroup: CPointer<Unit>, hEvent: CPointer<Unit>, cEventRegistration: UInt32, pEventRegistrations: CPointer<PEER_GROUP_EVENT_REGISTRATION>, phPeerEvent: CPointer<CPointer<Unit>>): Int32
-    func PeerGroupResumePasswordAuthentication(hGroup: CPointer<Unit>, hPeerEventHandle: CPointer<Unit>): Int32
-    func PeerGroupSearchRecords(hGroup: CPointer<Unit>, pwzCriteria: CPointer<UInt16>, phPeerEnum: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pvData bytes=param[3]
-    func PeerGroupSendData(hGroup: CPointer<Unit>, ullConnectionId: UInt64, pType: CPointer<GUID>, cbData: UInt32, pvData: CPointer<Unit>): Int32
-    func PeerGroupSetProperties(hGroup: CPointer<Unit>, pProperties: CPointer<PEER_GROUP_PROPERTIES>): Int32
-    func PeerGroupShutdown(): Int32
-    func PeerGroupStartup(wVersionRequested: UInt16, pVersionData: CPointer<PEER_VERSION_DATA>): Int32
-    func PeerGroupUniversalTimeToPeerTime(hGroup: CPointer<Unit>, pftUniversalTime: CPointer<Win32_Foundation.FILETIME>, pftPeerTime: CPointer<Win32_Foundation.FILETIME>): Int32
-    func PeerGroupUnregisterEvent(hPeerEvent: CPointer<Unit>): Int32
-    func PeerGroupUpdateRecord(hGroup: CPointer<Unit>, pRecord: CPointer<PEER_RECORD>): Int32
-    func PeerHostNameToPeerName(pwzHostName: CPointer<UInt16>, ppwzPeerName: CPointer<CPointer<UInt16>>): Int32
-    // param-hint: pwzClassifier optional
-    // param-hint: pwzFriendlyName optional
-    // param-hint: hCryptProv optional
-    func PeerIdentityCreate(pwzClassifier: CPointer<UInt16>, pwzFriendlyName: CPointer<UInt16>, hCryptProv: UIntNative, ppwzIdentity: CPointer<CPointer<UInt16>>): Int32
-    func PeerIdentityDelete(pwzIdentity: CPointer<UInt16>): Int32
-    // param-hint: pwzIdentity optional
-    func PeerIdentityExport(pwzIdentity: CPointer<UInt16>, pwzPassword: CPointer<UInt16>, ppwzExportXML: CPointer<CPointer<UInt16>>): Int32
-    // param-hint: pwzIdentity optional
-    func PeerIdentityGetCryptKey(pwzIdentity: CPointer<UInt16>, phCryptProv: CPointer<UIntNative>): Int32
-    func PeerIdentityGetDefault(ppwzPeerName: CPointer<CPointer<UInt16>>): Int32
-    // param-hint: pwzIdentity optional
-    func PeerIdentityGetFriendlyName(pwzIdentity: CPointer<UInt16>, ppwzFriendlyName: CPointer<CPointer<UInt16>>): Int32
-    // param-hint: pwzIdentity optional
-    func PeerIdentityGetXML(pwzIdentity: CPointer<UInt16>, ppwzIdentityXML: CPointer<CPointer<UInt16>>): Int32
-    func PeerIdentityImport(pwzImportXML: CPointer<UInt16>, pwzPassword: CPointer<UInt16>, ppwzIdentity: CPointer<CPointer<UInt16>>): Int32
-    // param-hint: pwzIdentity optional
-    func PeerIdentitySetFriendlyName(pwzIdentity: CPointer<UInt16>, pwzFriendlyName: CPointer<UInt16>): Int32
-    func PeerNameToPeerHostName(pwzPeerName: CPointer<UInt16>, ppwzHostName: CPointer<CPointer<UInt16>>): Int32
-    func PeerPnrpEndResolve(hResolve: CPointer<Unit>): Int32
-    func PeerPnrpGetCloudInfo(pcNumClouds: CPointer<UInt32>, ppCloudInfo: CPointer<CPointer<PEER_PNRP_CLOUD_INFO>>): Int32
-    func PeerPnrpShutdown(): Int32
-    // param-hint: pcwzCloudName optional
-    // param-hint: cMaxEndpoints optional
-    func PeerPnrpStartResolve(pcwzPeerName: CPointer<UInt16>, pcwzCloudName: CPointer<UInt16>, cMaxEndpoints: UInt32, hEvent: CPointer<Unit>, phResolve: CPointer<CPointer<Unit>>): Int32
-    func PeerPnrpStartup(wVersionRequested: UInt16): Int32
-    func PeerPnrpUnregister(hRegistration: CPointer<Unit>): Int32
 }
 
-@When[P2P == "on" && Windows_Win32_Networking_WinSock == "on"]
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabAddContact == "on"]
+public unsafe func Windows_PeerCollabAddContact(pwzContactData: CPointer<UInt16>, ppContact: CPointer<CPointer<PEER_CONTACT>>): Int32 {
+    return PeerCollabAddContact(pwzContactData, ppContact)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabAsyncInviteContact == "on" && Windows_Win32_Networking_WinSock == "on"]
 foreign {
     // param-hint: pcContact optional
     // param-hint: hEvent optional
     // param-hint: phInvitation optional
     func PeerCollabAsyncInviteContact(pcContact: CPointer<PEER_CONTACT>, pcEndpoint: CPointer<PEER_ENDPOINT>, pcInvitation: CPointer<PEER_INVITATION>, hEvent: CPointer<Unit>, phInvitation: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabAsyncInviteContact == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_PeerCollabAsyncInviteContact(pcContact: CPointer<PEER_CONTACT>, pcEndpoint: CPointer<PEER_ENDPOINT>, pcInvitation: CPointer<PEER_INVITATION>, hEvent: CPointer<Unit>, phInvitation: CPointer<CPointer<Unit>>): Int32 {
+    return PeerCollabAsyncInviteContact(pcContact, pcEndpoint, pcInvitation, hEvent, phInvitation)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabAsyncInviteEndpoint == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
     // param-hint: hEvent optional
     // param-hint: phInvitation optional
     func PeerCollabAsyncInviteEndpoint(pcEndpoint: CPointer<PEER_ENDPOINT>, pcInvitation: CPointer<PEER_INVITATION>, hEvent: CPointer<Unit>, phInvitation: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabAsyncInviteEndpoint == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_PeerCollabAsyncInviteEndpoint(pcEndpoint: CPointer<PEER_ENDPOINT>, pcInvitation: CPointer<PEER_INVITATION>, hEvent: CPointer<Unit>, phInvitation: CPointer<CPointer<Unit>>): Int32 {
+    return PeerCollabAsyncInviteEndpoint(pcEndpoint, pcInvitation, hEvent, phInvitation)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabCancelInvitation == "on"]
+foreign {
+    func PeerCollabCancelInvitation(hInvitation: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabCancelInvitation == "on"]
+public unsafe func Windows_PeerCollabCancelInvitation(hInvitation: CPointer<Unit>): Int32 {
+    return PeerCollabCancelInvitation(hInvitation)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabCloseHandle == "on"]
+foreign {
+    func PeerCollabCloseHandle(hInvitation: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabCloseHandle == "on"]
+public unsafe func Windows_PeerCollabCloseHandle(hInvitation: CPointer<Unit>): Int32 {
+    return PeerCollabCloseHandle(hInvitation)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabDeleteContact == "on"]
+foreign {
+    func PeerCollabDeleteContact(pwzPeerName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabDeleteContact == "on"]
+public unsafe func Windows_PeerCollabDeleteContact(pwzPeerName: CPointer<UInt16>): Int32 {
+    return PeerCollabDeleteContact(pwzPeerName)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabDeleteEndpointData == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
     func PeerCollabDeleteEndpointData(pcEndpoint: CPointer<PEER_ENDPOINT>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabDeleteEndpointData == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_PeerCollabDeleteEndpointData(pcEndpoint: CPointer<PEER_ENDPOINT>): Int32 {
+    return PeerCollabDeleteEndpointData(pcEndpoint)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabDeleteObject == "on"]
+foreign {
+    func PeerCollabDeleteObject(pObjectId: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabDeleteObject == "on"]
+public unsafe func Windows_PeerCollabDeleteObject(pObjectId: CPointer<GUID>): Int32 {
+    return PeerCollabDeleteObject(pObjectId)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabEnumApplicationRegistrationInfo == "on"]
+foreign {
+    func PeerCollabEnumApplicationRegistrationInfo(registrationType: Int32, phPeerEnum: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabEnumApplicationRegistrationInfo == "on"]
+public unsafe func Windows_PeerCollabEnumApplicationRegistrationInfo(registrationType: Int32, phPeerEnum: CPointer<CPointer<Unit>>): Int32 {
+    return PeerCollabEnumApplicationRegistrationInfo(registrationType, phPeerEnum)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabEnumApplications == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
     // param-hint: pcEndpoint optional
     // param-hint: pApplicationId optional
     func PeerCollabEnumApplications(pcEndpoint: CPointer<PEER_ENDPOINT>, pApplicationId: CPointer<GUID>, phPeerEnum: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabEnumApplications == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_PeerCollabEnumApplications(pcEndpoint: CPointer<PEER_ENDPOINT>, pApplicationId: CPointer<GUID>, phPeerEnum: CPointer<CPointer<Unit>>): Int32 {
+    return PeerCollabEnumApplications(pcEndpoint, pApplicationId, phPeerEnum)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabEnumContacts == "on"]
+foreign {
+    func PeerCollabEnumContacts(phPeerEnum: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabEnumContacts == "on"]
+public unsafe func Windows_PeerCollabEnumContacts(phPeerEnum: CPointer<CPointer<Unit>>): Int32 {
+    return PeerCollabEnumContacts(phPeerEnum)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabEnumEndpoints == "on"]
+foreign {
+    // param-hint: pcContact optional
+    func PeerCollabEnumEndpoints(pcContact: CPointer<PEER_CONTACT>, phPeerEnum: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabEnumEndpoints == "on"]
+public unsafe func Windows_PeerCollabEnumEndpoints(pcContact: CPointer<PEER_CONTACT>, phPeerEnum: CPointer<CPointer<Unit>>): Int32 {
+    return PeerCollabEnumEndpoints(pcContact, phPeerEnum)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabEnumObjects == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
     // param-hint: pcEndpoint optional
     // param-hint: pObjectId optional
     func PeerCollabEnumObjects(pcEndpoint: CPointer<PEER_ENDPOINT>, pObjectId: CPointer<GUID>, phPeerEnum: CPointer<CPointer<Unit>>): Int32
-    func PeerCollabGetAppLaunchInfo(ppLaunchInfo: CPointer<CPointer<PEER_APP_LAUNCH_INFO>>): Int32
-    func PeerCollabGetEventData(hPeerEvent: CPointer<Unit>, ppEventData: CPointer<CPointer<PEER_COLLAB_EVENT_DATA>>): Int32
-    // param-hint: pcEndpoint optional
-    func PeerCollabGetPresenceInfo(pcEndpoint: CPointer<PEER_ENDPOINT>, ppPresenceInfo: CPointer<CPointer<PEER_PRESENCE_INFO>>): Int32
-    // param-hint: pcContact optional
-    func PeerCollabInviteContact(pcContact: CPointer<PEER_CONTACT>, pcEndpoint: CPointer<PEER_ENDPOINT>, pcInvitation: CPointer<PEER_INVITATION>, ppResponse: CPointer<CPointer<PEER_INVITATION_RESPONSE>>): Int32
-    func PeerCollabInviteEndpoint(pcEndpoint: CPointer<PEER_ENDPOINT>, pcInvitation: CPointer<PEER_INVITATION>, ppResponse: CPointer<CPointer<PEER_INVITATION_RESPONSE>>): Int32
-    // param-hint: pcEndpoint optional
-    func PeerCollabQueryContactData(pcEndpoint: CPointer<PEER_ENDPOINT>, ppwzContactData: CPointer<CPointer<UInt16>>): Int32
-    func PeerCollabRefreshEndpointData(pcEndpoint: CPointer<PEER_ENDPOINT>): Int32
-    func PeerCollabSubscribeEndpointData(pcEndpoint: CPointer<PEER_ENDPOINT>): Int32
-    func PeerCollabUnsubscribeEndpointData(pcEndpoint: CPointer<PEER_ENDPOINT>): Int32
-    // param-hint: pAddresses len=param[1]
-    func PeerGroupConnectByAddress(hGroup: CPointer<Unit>, cAddresses: UInt32, pAddresses: CPointer<PEER_ADDRESS>): Int32
-    func PeerGroupOpenDirectConnection(hGroup: CPointer<Unit>, pwzIdentity: CPointer<UInt16>, pAddress: CPointer<PEER_ADDRESS>, pullConnectionId: CPointer<UInt64>): Int32
-    func PeerPnrpGetEndpoint(hResolve: CPointer<Unit>, ppEndpoint: CPointer<CPointer<PEER_PNRP_ENDPOINT_INFO>>): Int32
-    // param-hint: pRegistrationInfo optional
-    func PeerPnrpRegister(pcwzPeerName: CPointer<UInt16>, pRegistrationInfo: CPointer<PEER_PNRP_REGISTRATION_INFO>, phRegistration: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pcwzCloudName optional
-    func PeerPnrpResolve(pcwzPeerName: CPointer<UInt16>, pcwzCloudName: CPointer<UInt16>, pcEndpoints: CPointer<UInt32>, ppEndpoints: CPointer<CPointer<PEER_PNRP_ENDPOINT_INFO>>): Int32
-    func PeerPnrpUpdateRegistration(hRegistration: CPointer<Unit>, pRegistrationInfo: CPointer<PEER_PNRP_REGISTRATION_INFO>): Int32
 }
 
-@When[P2P == "on" && Windows_Win32_Security_Cryptography == "on"]
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabEnumObjects == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_PeerCollabEnumObjects(pcEndpoint: CPointer<PEER_ENDPOINT>, pObjectId: CPointer<GUID>, phPeerEnum: CPointer<CPointer<Unit>>): Int32 {
+    return PeerCollabEnumObjects(pcEndpoint, pObjectId, phPeerEnum)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabEnumPeopleNearMe == "on"]
+foreign {
+    func PeerCollabEnumPeopleNearMe(phPeerEnum: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabEnumPeopleNearMe == "on"]
+public unsafe func Windows_PeerCollabEnumPeopleNearMe(phPeerEnum: CPointer<CPointer<Unit>>): Int32 {
+    return PeerCollabEnumPeopleNearMe(phPeerEnum)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabExportContact == "on"]
+foreign {
+    // param-hint: pwzPeerName optional
+    func PeerCollabExportContact(pwzPeerName: CPointer<UInt16>, ppwzContactData: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabExportContact == "on"]
+public unsafe func Windows_PeerCollabExportContact(pwzPeerName: CPointer<UInt16>, ppwzContactData: CPointer<CPointer<UInt16>>): Int32 {
+    return PeerCollabExportContact(pwzPeerName, ppwzContactData)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabGetAppLaunchInfo == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func PeerCollabGetAppLaunchInfo(ppLaunchInfo: CPointer<CPointer<PEER_APP_LAUNCH_INFO>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabGetAppLaunchInfo == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_PeerCollabGetAppLaunchInfo(ppLaunchInfo: CPointer<CPointer<PEER_APP_LAUNCH_INFO>>): Int32 {
+    return PeerCollabGetAppLaunchInfo(ppLaunchInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabGetApplicationRegistrationInfo == "on"]
+foreign {
+    func PeerCollabGetApplicationRegistrationInfo(pApplicationId: CPointer<GUID>, registrationType: Int32, ppApplication: CPointer<CPointer<PEER_APPLICATION_REGISTRATION_INFO>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabGetApplicationRegistrationInfo == "on"]
+public unsafe func Windows_PeerCollabGetApplicationRegistrationInfo(pApplicationId: CPointer<GUID>, registrationType: Int32, ppApplication: CPointer<CPointer<PEER_APPLICATION_REGISTRATION_INFO>>): Int32 {
+    return PeerCollabGetApplicationRegistrationInfo(pApplicationId, registrationType, ppApplication)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabGetContact == "on"]
+foreign {
+    // param-hint: pwzPeerName optional
+    func PeerCollabGetContact(pwzPeerName: CPointer<UInt16>, ppContact: CPointer<CPointer<PEER_CONTACT>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabGetContact == "on"]
+public unsafe func Windows_PeerCollabGetContact(pwzPeerName: CPointer<UInt16>, ppContact: CPointer<CPointer<PEER_CONTACT>>): Int32 {
+    return PeerCollabGetContact(pwzPeerName, ppContact)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabGetEndpointName == "on"]
+foreign {
+    func PeerCollabGetEndpointName(ppwzEndpointName: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabGetEndpointName == "on"]
+public unsafe func Windows_PeerCollabGetEndpointName(ppwzEndpointName: CPointer<CPointer<UInt16>>): Int32 {
+    return PeerCollabGetEndpointName(ppwzEndpointName)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabGetEventData == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func PeerCollabGetEventData(hPeerEvent: CPointer<Unit>, ppEventData: CPointer<CPointer<PEER_COLLAB_EVENT_DATA>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabGetEventData == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_PeerCollabGetEventData(hPeerEvent: CPointer<Unit>, ppEventData: CPointer<CPointer<PEER_COLLAB_EVENT_DATA>>): Int32 {
+    return PeerCollabGetEventData(hPeerEvent, ppEventData)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabGetInvitationResponse == "on"]
+foreign {
+    func PeerCollabGetInvitationResponse(hInvitation: CPointer<Unit>, ppInvitationResponse: CPointer<CPointer<PEER_INVITATION_RESPONSE>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabGetInvitationResponse == "on"]
+public unsafe func Windows_PeerCollabGetInvitationResponse(hInvitation: CPointer<Unit>, ppInvitationResponse: CPointer<CPointer<PEER_INVITATION_RESPONSE>>): Int32 {
+    return PeerCollabGetInvitationResponse(hInvitation, ppInvitationResponse)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabGetPresenceInfo == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: pcEndpoint optional
+    func PeerCollabGetPresenceInfo(pcEndpoint: CPointer<PEER_ENDPOINT>, ppPresenceInfo: CPointer<CPointer<PEER_PRESENCE_INFO>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabGetPresenceInfo == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_PeerCollabGetPresenceInfo(pcEndpoint: CPointer<PEER_ENDPOINT>, ppPresenceInfo: CPointer<CPointer<PEER_PRESENCE_INFO>>): Int32 {
+    return PeerCollabGetPresenceInfo(pcEndpoint, ppPresenceInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabGetSigninOptions == "on"]
+foreign {
+    func PeerCollabGetSigninOptions(pdwSigninOptions: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabGetSigninOptions == "on"]
+public unsafe func Windows_PeerCollabGetSigninOptions(pdwSigninOptions: CPointer<UInt32>): Int32 {
+    return PeerCollabGetSigninOptions(pdwSigninOptions)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabInviteContact == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: pcContact optional
+    func PeerCollabInviteContact(pcContact: CPointer<PEER_CONTACT>, pcEndpoint: CPointer<PEER_ENDPOINT>, pcInvitation: CPointer<PEER_INVITATION>, ppResponse: CPointer<CPointer<PEER_INVITATION_RESPONSE>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabInviteContact == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_PeerCollabInviteContact(pcContact: CPointer<PEER_CONTACT>, pcEndpoint: CPointer<PEER_ENDPOINT>, pcInvitation: CPointer<PEER_INVITATION>, ppResponse: CPointer<CPointer<PEER_INVITATION_RESPONSE>>): Int32 {
+    return PeerCollabInviteContact(pcContact, pcEndpoint, pcInvitation, ppResponse)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabInviteEndpoint == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func PeerCollabInviteEndpoint(pcEndpoint: CPointer<PEER_ENDPOINT>, pcInvitation: CPointer<PEER_INVITATION>, ppResponse: CPointer<CPointer<PEER_INVITATION_RESPONSE>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabInviteEndpoint == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_PeerCollabInviteEndpoint(pcEndpoint: CPointer<PEER_ENDPOINT>, pcInvitation: CPointer<PEER_INVITATION>, ppResponse: CPointer<CPointer<PEER_INVITATION_RESPONSE>>): Int32 {
+    return PeerCollabInviteEndpoint(pcEndpoint, pcInvitation, ppResponse)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabParseContact == "on"]
+foreign {
+    func PeerCollabParseContact(pwzContactData: CPointer<UInt16>, ppContact: CPointer<CPointer<PEER_CONTACT>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabParseContact == "on"]
+public unsafe func Windows_PeerCollabParseContact(pwzContactData: CPointer<UInt16>, ppContact: CPointer<CPointer<PEER_CONTACT>>): Int32 {
+    return PeerCollabParseContact(pwzContactData, ppContact)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabQueryContactData == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: pcEndpoint optional
+    func PeerCollabQueryContactData(pcEndpoint: CPointer<PEER_ENDPOINT>, ppwzContactData: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabQueryContactData == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_PeerCollabQueryContactData(pcEndpoint: CPointer<PEER_ENDPOINT>, ppwzContactData: CPointer<CPointer<UInt16>>): Int32 {
+    return PeerCollabQueryContactData(pcEndpoint, ppwzContactData)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabRefreshEndpointData == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func PeerCollabRefreshEndpointData(pcEndpoint: CPointer<PEER_ENDPOINT>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabRefreshEndpointData == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_PeerCollabRefreshEndpointData(pcEndpoint: CPointer<PEER_ENDPOINT>): Int32 {
+    return PeerCollabRefreshEndpointData(pcEndpoint)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabRegisterApplication == "on"]
+foreign {
+    func PeerCollabRegisterApplication(pcApplication: CPointer<PEER_APPLICATION_REGISTRATION_INFO>, registrationType: Int32): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabRegisterApplication == "on"]
+public unsafe func Windows_PeerCollabRegisterApplication(pcApplication: CPointer<PEER_APPLICATION_REGISTRATION_INFO>, registrationType: Int32): Int32 {
+    return PeerCollabRegisterApplication(pcApplication, registrationType)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabRegisterEvent == "on"]
+foreign {
+    // param-hint: pEventRegistrations len=param[1]
+    func PeerCollabRegisterEvent(hEvent: CPointer<Unit>, cEventRegistration: UInt32, pEventRegistrations: CPointer<PEER_COLLAB_EVENT_REGISTRATION>, phPeerEvent: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabRegisterEvent == "on"]
+public unsafe func Windows_PeerCollabRegisterEvent(hEvent: CPointer<Unit>, cEventRegistration: UInt32, pEventRegistrations: CPointer<PEER_COLLAB_EVENT_REGISTRATION>, phPeerEvent: CPointer<CPointer<Unit>>): Int32 {
+    return PeerCollabRegisterEvent(hEvent, cEventRegistration, pEventRegistrations, phPeerEvent)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabSetEndpointName == "on"]
+foreign {
+    func PeerCollabSetEndpointName(pwzEndpointName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabSetEndpointName == "on"]
+public unsafe func Windows_PeerCollabSetEndpointName(pwzEndpointName: CPointer<UInt16>): Int32 {
+    return PeerCollabSetEndpointName(pwzEndpointName)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabSetObject == "on"]
+foreign {
+    func PeerCollabSetObject(pcObject: CPointer<PEER_OBJECT>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabSetObject == "on"]
+public unsafe func Windows_PeerCollabSetObject(pcObject: CPointer<PEER_OBJECT>): Int32 {
+    return PeerCollabSetObject(pcObject)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabSetPresenceInfo == "on"]
+foreign {
+    func PeerCollabSetPresenceInfo(pcPresenceInfo: CPointer<PEER_PRESENCE_INFO>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabSetPresenceInfo == "on"]
+public unsafe func Windows_PeerCollabSetPresenceInfo(pcPresenceInfo: CPointer<PEER_PRESENCE_INFO>): Int32 {
+    return PeerCollabSetPresenceInfo(pcPresenceInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabShutdown == "on"]
+foreign {
+    func PeerCollabShutdown(): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabShutdown == "on"]
+public unsafe func Windows_PeerCollabShutdown(): Int32 {
+    return PeerCollabShutdown()
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabSignin == "on"]
+foreign {
+    // param-hint: hwndParent optional
+    func PeerCollabSignin(hwndParent: CPointer<Unit>, dwSigninOptions: UInt32): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabSignin == "on"]
+public unsafe func Windows_PeerCollabSignin(hwndParent: CPointer<Unit>, dwSigninOptions: UInt32): Int32 {
+    return PeerCollabSignin(hwndParent, dwSigninOptions)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabSignout == "on"]
+foreign {
+    func PeerCollabSignout(dwSigninOptions: UInt32): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabSignout == "on"]
+public unsafe func Windows_PeerCollabSignout(dwSigninOptions: UInt32): Int32 {
+    return PeerCollabSignout(dwSigninOptions)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabStartup == "on"]
+foreign {
+    func PeerCollabStartup(wVersionRequested: UInt16): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabStartup == "on"]
+public unsafe func Windows_PeerCollabStartup(wVersionRequested: UInt16): Int32 {
+    return PeerCollabStartup(wVersionRequested)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabSubscribeEndpointData == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func PeerCollabSubscribeEndpointData(pcEndpoint: CPointer<PEER_ENDPOINT>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabSubscribeEndpointData == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_PeerCollabSubscribeEndpointData(pcEndpoint: CPointer<PEER_ENDPOINT>): Int32 {
+    return PeerCollabSubscribeEndpointData(pcEndpoint)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabUnregisterApplication == "on"]
+foreign {
+    func PeerCollabUnregisterApplication(pApplicationId: CPointer<GUID>, registrationType: Int32): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabUnregisterApplication == "on"]
+public unsafe func Windows_PeerCollabUnregisterApplication(pApplicationId: CPointer<GUID>, registrationType: Int32): Int32 {
+    return PeerCollabUnregisterApplication(pApplicationId, registrationType)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabUnregisterEvent == "on"]
+foreign {
+    func PeerCollabUnregisterEvent(hPeerEvent: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabUnregisterEvent == "on"]
+public unsafe func Windows_PeerCollabUnregisterEvent(hPeerEvent: CPointer<Unit>): Int32 {
+    return PeerCollabUnregisterEvent(hPeerEvent)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabUnsubscribeEndpointData == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func PeerCollabUnsubscribeEndpointData(pcEndpoint: CPointer<PEER_ENDPOINT>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabUnsubscribeEndpointData == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_PeerCollabUnsubscribeEndpointData(pcEndpoint: CPointer<PEER_ENDPOINT>): Int32 {
+    return PeerCollabUnsubscribeEndpointData(pcEndpoint)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabUpdateContact == "on"]
+foreign {
+    func PeerCollabUpdateContact(pContact: CPointer<PEER_CONTACT>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCollabUpdateContact == "on"]
+public unsafe func Windows_PeerCollabUpdateContact(pContact: CPointer<PEER_CONTACT>): Int32 {
+    return PeerCollabUpdateContact(pContact)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCreatePeerName == "on"]
+foreign {
+    // param-hint: pwzIdentity optional
+    // param-hint: pwzClassifier optional
+    func PeerCreatePeerName(pwzIdentity: CPointer<UInt16>, pwzClassifier: CPointer<UInt16>, ppwzPeerName: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerCreatePeerName == "on"]
+public unsafe func Windows_PeerCreatePeerName(pwzIdentity: CPointer<UInt16>, pwzClassifier: CPointer<UInt16>, ppwzPeerName: CPointer<CPointer<UInt16>>): Int32 {
+    return PeerCreatePeerName(pwzIdentity, pwzClassifier, ppwzPeerName)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerEndEnumeration == "on"]
+foreign {
+    func PeerEndEnumeration(hPeerEnum: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerEndEnumeration == "on"]
+public unsafe func Windows_PeerEndEnumeration(hPeerEnum: CPointer<Unit>): Int32 {
+    return PeerEndEnumeration(hPeerEnum)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerEnumGroups == "on"]
+foreign {
+    func PeerEnumGroups(pwzIdentity: CPointer<UInt16>, phPeerEnum: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerEnumGroups == "on"]
+public unsafe func Windows_PeerEnumGroups(pwzIdentity: CPointer<UInt16>, phPeerEnum: CPointer<CPointer<Unit>>): Int32 {
+    return PeerEnumGroups(pwzIdentity, phPeerEnum)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerEnumIdentities == "on"]
+foreign {
+    func PeerEnumIdentities(phPeerEnum: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerEnumIdentities == "on"]
+public unsafe func Windows_PeerEnumIdentities(phPeerEnum: CPointer<CPointer<Unit>>): Int32 {
+    return PeerEnumIdentities(phPeerEnum)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerFreeData == "on"]
+foreign {
+    // param-hint: pvData optional
+    func PeerFreeData(pvData: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerFreeData == "on"]
+public unsafe func Windows_PeerFreeData(pvData: CPointer<Unit>): Unit {
+    PeerFreeData(pvData)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGetItemCount == "on"]
+foreign {
+    func PeerGetItemCount(hPeerEnum: CPointer<Unit>, pCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGetItemCount == "on"]
+public unsafe func Windows_PeerGetItemCount(hPeerEnum: CPointer<Unit>, pCount: CPointer<UInt32>): Int32 {
+    return PeerGetItemCount(hPeerEnum, pCount)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGetNextItem == "on"]
+foreign {
+    func PeerGetNextItem(hPeerEnum: CPointer<Unit>, pCount: CPointer<UInt32>, pppvItems: CPointer<CPointer<CPointer<Unit>>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGetNextItem == "on"]
+public unsafe func Windows_PeerGetNextItem(hPeerEnum: CPointer<Unit>, pCount: CPointer<UInt32>, pppvItems: CPointer<CPointer<CPointer<Unit>>>): Int32 {
+    return PeerGetNextItem(hPeerEnum, pCount, pppvItems)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupAddRecord == "on"]
+foreign {
+    func PeerGroupAddRecord(hGroup: CPointer<Unit>, pRecord: CPointer<PEER_RECORD>, pRecordId: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupAddRecord == "on"]
+public unsafe func Windows_PeerGroupAddRecord(hGroup: CPointer<Unit>, pRecord: CPointer<PEER_RECORD>, pRecordId: CPointer<GUID>): Int32 {
+    return PeerGroupAddRecord(hGroup, pRecord, pRecordId)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupClose == "on"]
+foreign {
+    func PeerGroupClose(hGroup: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupClose == "on"]
+public unsafe func Windows_PeerGroupClose(hGroup: CPointer<Unit>): Int32 {
+    return PeerGroupClose(hGroup)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupCloseDirectConnection == "on"]
+foreign {
+    func PeerGroupCloseDirectConnection(hGroup: CPointer<Unit>, ullConnectionId: UInt64): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupCloseDirectConnection == "on"]
+public unsafe func Windows_PeerGroupCloseDirectConnection(hGroup: CPointer<Unit>, ullConnectionId: UInt64): Int32 {
+    return PeerGroupCloseDirectConnection(hGroup, ullConnectionId)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupConnect == "on"]
+foreign {
+    func PeerGroupConnect(hGroup: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupConnect == "on"]
+public unsafe func Windows_PeerGroupConnect(hGroup: CPointer<Unit>): Int32 {
+    return PeerGroupConnect(hGroup)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupConnectByAddress == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: pAddresses len=param[1]
+    func PeerGroupConnectByAddress(hGroup: CPointer<Unit>, cAddresses: UInt32, pAddresses: CPointer<PEER_ADDRESS>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupConnectByAddress == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_PeerGroupConnectByAddress(hGroup: CPointer<Unit>, cAddresses: UInt32, pAddresses: CPointer<PEER_ADDRESS>): Int32 {
+    return PeerGroupConnectByAddress(hGroup, cAddresses, pAddresses)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupCreate == "on"]
+foreign {
+    func PeerGroupCreate(pProperties: CPointer<PEER_GROUP_PROPERTIES>, phGroup: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupCreate == "on"]
+public unsafe func Windows_PeerGroupCreate(pProperties: CPointer<PEER_GROUP_PROPERTIES>, phGroup: CPointer<CPointer<Unit>>): Int32 {
+    return PeerGroupCreate(pProperties, phGroup)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupCreateInvitation == "on"]
+foreign {
+    // param-hint: pftExpiration optional
+    // param-hint: pRoles len=param[3] optional
+    func PeerGroupCreateInvitation(hGroup: CPointer<Unit>, pwzIdentityInfo: CPointer<UInt16>, pftExpiration: CPointer<Win32_Foundation.FILETIME>, cRoles: UInt32, pRoles: CPointer<GUID>, ppwzInvitation: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupCreateInvitation == "on"]
+public unsafe func Windows_PeerGroupCreateInvitation(hGroup: CPointer<Unit>, pwzIdentityInfo: CPointer<UInt16>, pftExpiration: CPointer<Win32_Foundation.FILETIME>, cRoles: UInt32, pRoles: CPointer<GUID>, ppwzInvitation: CPointer<CPointer<UInt16>>): Int32 {
+    return PeerGroupCreateInvitation(hGroup, pwzIdentityInfo, pftExpiration, cRoles, pRoles, ppwzInvitation)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupCreatePasswordInvitation == "on"]
+foreign {
+    func PeerGroupCreatePasswordInvitation(hGroup: CPointer<Unit>, ppwzInvitation: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupCreatePasswordInvitation == "on"]
+public unsafe func Windows_PeerGroupCreatePasswordInvitation(hGroup: CPointer<Unit>, ppwzInvitation: CPointer<CPointer<UInt16>>): Int32 {
+    return PeerGroupCreatePasswordInvitation(hGroup, ppwzInvitation)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupDelete == "on"]
+foreign {
+    func PeerGroupDelete(pwzIdentity: CPointer<UInt16>, pwzGroupPeerName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupDelete == "on"]
+public unsafe func Windows_PeerGroupDelete(pwzIdentity: CPointer<UInt16>, pwzGroupPeerName: CPointer<UInt16>): Int32 {
+    return PeerGroupDelete(pwzIdentity, pwzGroupPeerName)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupDeleteRecord == "on"]
+foreign {
+    func PeerGroupDeleteRecord(hGroup: CPointer<Unit>, pRecordId: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupDeleteRecord == "on"]
+public unsafe func Windows_PeerGroupDeleteRecord(hGroup: CPointer<Unit>, pRecordId: CPointer<GUID>): Int32 {
+    return PeerGroupDeleteRecord(hGroup, pRecordId)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupEnumConnections == "on"]
+foreign {
+    func PeerGroupEnumConnections(hGroup: CPointer<Unit>, dwFlags: UInt32, phPeerEnum: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupEnumConnections == "on"]
+public unsafe func Windows_PeerGroupEnumConnections(hGroup: CPointer<Unit>, dwFlags: UInt32, phPeerEnum: CPointer<CPointer<Unit>>): Int32 {
+    return PeerGroupEnumConnections(hGroup, dwFlags, phPeerEnum)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupEnumMembers == "on"]
+foreign {
+    // param-hint: pwzIdentity optional
+    func PeerGroupEnumMembers(hGroup: CPointer<Unit>, dwFlags: UInt32, pwzIdentity: CPointer<UInt16>, phPeerEnum: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupEnumMembers == "on"]
+public unsafe func Windows_PeerGroupEnumMembers(hGroup: CPointer<Unit>, dwFlags: UInt32, pwzIdentity: CPointer<UInt16>, phPeerEnum: CPointer<CPointer<Unit>>): Int32 {
+    return PeerGroupEnumMembers(hGroup, dwFlags, pwzIdentity, phPeerEnum)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupEnumRecords == "on"]
+foreign {
+    // param-hint: pRecordType optional
+    func PeerGroupEnumRecords(hGroup: CPointer<Unit>, pRecordType: CPointer<GUID>, phPeerEnum: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupEnumRecords == "on"]
+public unsafe func Windows_PeerGroupEnumRecords(hGroup: CPointer<Unit>, pRecordType: CPointer<GUID>, phPeerEnum: CPointer<CPointer<Unit>>): Int32 {
+    return PeerGroupEnumRecords(hGroup, pRecordType, phPeerEnum)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupExportConfig == "on"]
+foreign {
+    func PeerGroupExportConfig(hGroup: CPointer<Unit>, pwzPassword: CPointer<UInt16>, ppwzXML: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupExportConfig == "on"]
+public unsafe func Windows_PeerGroupExportConfig(hGroup: CPointer<Unit>, pwzPassword: CPointer<UInt16>, ppwzXML: CPointer<CPointer<UInt16>>): Int32 {
+    return PeerGroupExportConfig(hGroup, pwzPassword, ppwzXML)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupExportDatabase == "on"]
+foreign {
+    func PeerGroupExportDatabase(hGroup: CPointer<Unit>, pwzFilePath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupExportDatabase == "on"]
+public unsafe func Windows_PeerGroupExportDatabase(hGroup: CPointer<Unit>, pwzFilePath: CPointer<UInt16>): Int32 {
+    return PeerGroupExportDatabase(hGroup, pwzFilePath)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupGetEventData == "on"]
+foreign {
+    func PeerGroupGetEventData(hPeerEvent: CPointer<Unit>, ppEventData: CPointer<CPointer<PEER_GROUP_EVENT_DATA>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupGetEventData == "on"]
+public unsafe func Windows_PeerGroupGetEventData(hPeerEvent: CPointer<Unit>, ppEventData: CPointer<CPointer<PEER_GROUP_EVENT_DATA>>): Int32 {
+    return PeerGroupGetEventData(hPeerEvent, ppEventData)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupGetProperties == "on"]
+foreign {
+    func PeerGroupGetProperties(hGroup: CPointer<Unit>, ppProperties: CPointer<CPointer<PEER_GROUP_PROPERTIES>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupGetProperties == "on"]
+public unsafe func Windows_PeerGroupGetProperties(hGroup: CPointer<Unit>, ppProperties: CPointer<CPointer<PEER_GROUP_PROPERTIES>>): Int32 {
+    return PeerGroupGetProperties(hGroup, ppProperties)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupGetRecord == "on"]
+foreign {
+    func PeerGroupGetRecord(hGroup: CPointer<Unit>, pRecordId: CPointer<GUID>, ppRecord: CPointer<CPointer<PEER_RECORD>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupGetRecord == "on"]
+public unsafe func Windows_PeerGroupGetRecord(hGroup: CPointer<Unit>, pRecordId: CPointer<GUID>, ppRecord: CPointer<CPointer<PEER_RECORD>>): Int32 {
+    return PeerGroupGetRecord(hGroup, pRecordId, ppRecord)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupGetStatus == "on"]
+foreign {
+    func PeerGroupGetStatus(hGroup: CPointer<Unit>, pdwStatus: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupGetStatus == "on"]
+public unsafe func Windows_PeerGroupGetStatus(hGroup: CPointer<Unit>, pdwStatus: CPointer<UInt32>): Int32 {
+    return PeerGroupGetStatus(hGroup, pdwStatus)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupImportConfig == "on"]
+foreign {
+    func PeerGroupImportConfig(pwzXML: CPointer<UInt16>, pwzPassword: CPointer<UInt16>, fOverwrite: Int32, ppwzIdentity: CPointer<CPointer<UInt16>>, ppwzGroup: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupImportConfig == "on"]
+public unsafe func Windows_PeerGroupImportConfig(pwzXML: CPointer<UInt16>, pwzPassword: CPointer<UInt16>, fOverwrite: Int32, ppwzIdentity: CPointer<CPointer<UInt16>>, ppwzGroup: CPointer<CPointer<UInt16>>): Int32 {
+    return PeerGroupImportConfig(pwzXML, pwzPassword, fOverwrite, ppwzIdentity, ppwzGroup)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupImportDatabase == "on"]
+foreign {
+    func PeerGroupImportDatabase(hGroup: CPointer<Unit>, pwzFilePath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupImportDatabase == "on"]
+public unsafe func Windows_PeerGroupImportDatabase(hGroup: CPointer<Unit>, pwzFilePath: CPointer<UInt16>): Int32 {
+    return PeerGroupImportDatabase(hGroup, pwzFilePath)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupIssueCredentials == "on" && Windows_Win32_Security_Cryptography == "on"]
 foreign {
     // param-hint: pCredentialInfo optional
     // param-hint: ppwzInvitation optional
     func PeerGroupIssueCredentials(hGroup: CPointer<Unit>, pwzSubjectIdentity: CPointer<UInt16>, pCredentialInfo: CPointer<PEER_CREDENTIAL_INFO>, dwFlags: UInt32, ppwzInvitation: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupIssueCredentials == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_PeerGroupIssueCredentials(hGroup: CPointer<Unit>, pwzSubjectIdentity: CPointer<UInt16>, pCredentialInfo: CPointer<PEER_CREDENTIAL_INFO>, dwFlags: UInt32, ppwzInvitation: CPointer<CPointer<UInt16>>): Int32 {
+    return PeerGroupIssueCredentials(hGroup, pwzSubjectIdentity, pCredentialInfo, dwFlags, ppwzInvitation)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupJoin == "on"]
+foreign {
+    // param-hint: pwzCloud optional
+    func PeerGroupJoin(pwzIdentity: CPointer<UInt16>, pwzInvitation: CPointer<UInt16>, pwzCloud: CPointer<UInt16>, phGroup: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupJoin == "on"]
+public unsafe func Windows_PeerGroupJoin(pwzIdentity: CPointer<UInt16>, pwzInvitation: CPointer<UInt16>, pwzCloud: CPointer<UInt16>, phGroup: CPointer<CPointer<Unit>>): Int32 {
+    return PeerGroupJoin(pwzIdentity, pwzInvitation, pwzCloud, phGroup)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupOpen == "on"]
+foreign {
+    // param-hint: pwzCloud optional
+    func PeerGroupOpen(pwzIdentity: CPointer<UInt16>, pwzGroupPeerName: CPointer<UInt16>, pwzCloud: CPointer<UInt16>, phGroup: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupOpen == "on"]
+public unsafe func Windows_PeerGroupOpen(pwzIdentity: CPointer<UInt16>, pwzGroupPeerName: CPointer<UInt16>, pwzCloud: CPointer<UInt16>, phGroup: CPointer<CPointer<Unit>>): Int32 {
+    return PeerGroupOpen(pwzIdentity, pwzGroupPeerName, pwzCloud, phGroup)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupOpenDirectConnection == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func PeerGroupOpenDirectConnection(hGroup: CPointer<Unit>, pwzIdentity: CPointer<UInt16>, pAddress: CPointer<PEER_ADDRESS>, pullConnectionId: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupOpenDirectConnection == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_PeerGroupOpenDirectConnection(hGroup: CPointer<Unit>, pwzIdentity: CPointer<UInt16>, pAddress: CPointer<PEER_ADDRESS>, pullConnectionId: CPointer<UInt64>): Int32 {
+    return PeerGroupOpenDirectConnection(hGroup, pwzIdentity, pAddress, pullConnectionId)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupParseInvitation == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
     func PeerGroupParseInvitation(pwzInvitation: CPointer<UInt16>, ppInvitationInfo: CPointer<CPointer<PEER_INVITATION_INFO>>): Int32
 }
 
-@When[P2PGRAPH == "on"]
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupParseInvitation == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_PeerGroupParseInvitation(pwzInvitation: CPointer<UInt16>, ppInvitationInfo: CPointer<CPointer<PEER_INVITATION_INFO>>): Int32 {
+    return PeerGroupParseInvitation(pwzInvitation, ppInvitationInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupPasswordJoin == "on"]
+foreign {
+    // param-hint: pwzCloud optional
+    func PeerGroupPasswordJoin(pwzIdentity: CPointer<UInt16>, pwzInvitation: CPointer<UInt16>, pwzPassword: CPointer<UInt16>, pwzCloud: CPointer<UInt16>, phGroup: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupPasswordJoin == "on"]
+public unsafe func Windows_PeerGroupPasswordJoin(pwzIdentity: CPointer<UInt16>, pwzInvitation: CPointer<UInt16>, pwzPassword: CPointer<UInt16>, pwzCloud: CPointer<UInt16>, phGroup: CPointer<CPointer<Unit>>): Int32 {
+    return PeerGroupPasswordJoin(pwzIdentity, pwzInvitation, pwzPassword, pwzCloud, phGroup)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupPeerTimeToUniversalTime == "on"]
+foreign {
+    func PeerGroupPeerTimeToUniversalTime(hGroup: CPointer<Unit>, pftPeerTime: CPointer<Win32_Foundation.FILETIME>, pftUniversalTime: CPointer<Win32_Foundation.FILETIME>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupPeerTimeToUniversalTime == "on"]
+public unsafe func Windows_PeerGroupPeerTimeToUniversalTime(hGroup: CPointer<Unit>, pftPeerTime: CPointer<Win32_Foundation.FILETIME>, pftUniversalTime: CPointer<Win32_Foundation.FILETIME>): Int32 {
+    return PeerGroupPeerTimeToUniversalTime(hGroup, pftPeerTime, pftUniversalTime)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupRegisterEvent == "on"]
+foreign {
+    // param-hint: pEventRegistrations len=param[2]
+    func PeerGroupRegisterEvent(hGroup: CPointer<Unit>, hEvent: CPointer<Unit>, cEventRegistration: UInt32, pEventRegistrations: CPointer<PEER_GROUP_EVENT_REGISTRATION>, phPeerEvent: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupRegisterEvent == "on"]
+public unsafe func Windows_PeerGroupRegisterEvent(hGroup: CPointer<Unit>, hEvent: CPointer<Unit>, cEventRegistration: UInt32, pEventRegistrations: CPointer<PEER_GROUP_EVENT_REGISTRATION>, phPeerEvent: CPointer<CPointer<Unit>>): Int32 {
+    return PeerGroupRegisterEvent(hGroup, hEvent, cEventRegistration, pEventRegistrations, phPeerEvent)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupResumePasswordAuthentication == "on"]
+foreign {
+    func PeerGroupResumePasswordAuthentication(hGroup: CPointer<Unit>, hPeerEventHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupResumePasswordAuthentication == "on"]
+public unsafe func Windows_PeerGroupResumePasswordAuthentication(hGroup: CPointer<Unit>, hPeerEventHandle: CPointer<Unit>): Int32 {
+    return PeerGroupResumePasswordAuthentication(hGroup, hPeerEventHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupSearchRecords == "on"]
+foreign {
+    func PeerGroupSearchRecords(hGroup: CPointer<Unit>, pwzCriteria: CPointer<UInt16>, phPeerEnum: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupSearchRecords == "on"]
+public unsafe func Windows_PeerGroupSearchRecords(hGroup: CPointer<Unit>, pwzCriteria: CPointer<UInt16>, phPeerEnum: CPointer<CPointer<Unit>>): Int32 {
+    return PeerGroupSearchRecords(hGroup, pwzCriteria, phPeerEnum)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupSendData == "on"]
+foreign {
+    // param-hint: pvData bytes=param[3]
+    func PeerGroupSendData(hGroup: CPointer<Unit>, ullConnectionId: UInt64, pType: CPointer<GUID>, cbData: UInt32, pvData: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupSendData == "on"]
+public unsafe func Windows_PeerGroupSendData(hGroup: CPointer<Unit>, ullConnectionId: UInt64, pType: CPointer<GUID>, cbData: UInt32, pvData: CPointer<Unit>): Int32 {
+    return PeerGroupSendData(hGroup, ullConnectionId, pType, cbData, pvData)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupSetProperties == "on"]
+foreign {
+    func PeerGroupSetProperties(hGroup: CPointer<Unit>, pProperties: CPointer<PEER_GROUP_PROPERTIES>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupSetProperties == "on"]
+public unsafe func Windows_PeerGroupSetProperties(hGroup: CPointer<Unit>, pProperties: CPointer<PEER_GROUP_PROPERTIES>): Int32 {
+    return PeerGroupSetProperties(hGroup, pProperties)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupShutdown == "on"]
+foreign {
+    func PeerGroupShutdown(): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupShutdown == "on"]
+public unsafe func Windows_PeerGroupShutdown(): Int32 {
+    return PeerGroupShutdown()
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupStartup == "on"]
+foreign {
+    func PeerGroupStartup(wVersionRequested: UInt16, pVersionData: CPointer<PEER_VERSION_DATA>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupStartup == "on"]
+public unsafe func Windows_PeerGroupStartup(wVersionRequested: UInt16, pVersionData: CPointer<PEER_VERSION_DATA>): Int32 {
+    return PeerGroupStartup(wVersionRequested, pVersionData)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupUniversalTimeToPeerTime == "on"]
+foreign {
+    func PeerGroupUniversalTimeToPeerTime(hGroup: CPointer<Unit>, pftUniversalTime: CPointer<Win32_Foundation.FILETIME>, pftPeerTime: CPointer<Win32_Foundation.FILETIME>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupUniversalTimeToPeerTime == "on"]
+public unsafe func Windows_PeerGroupUniversalTimeToPeerTime(hGroup: CPointer<Unit>, pftUniversalTime: CPointer<Win32_Foundation.FILETIME>, pftPeerTime: CPointer<Win32_Foundation.FILETIME>): Int32 {
+    return PeerGroupUniversalTimeToPeerTime(hGroup, pftUniversalTime, pftPeerTime)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupUnregisterEvent == "on"]
+foreign {
+    func PeerGroupUnregisterEvent(hPeerEvent: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupUnregisterEvent == "on"]
+public unsafe func Windows_PeerGroupUnregisterEvent(hPeerEvent: CPointer<Unit>): Int32 {
+    return PeerGroupUnregisterEvent(hPeerEvent)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupUpdateRecord == "on"]
+foreign {
+    func PeerGroupUpdateRecord(hGroup: CPointer<Unit>, pRecord: CPointer<PEER_RECORD>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerGroupUpdateRecord == "on"]
+public unsafe func Windows_PeerGroupUpdateRecord(hGroup: CPointer<Unit>, pRecord: CPointer<PEER_RECORD>): Int32 {
+    return PeerGroupUpdateRecord(hGroup, pRecord)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerHostNameToPeerName == "on"]
+foreign {
+    func PeerHostNameToPeerName(pwzHostName: CPointer<UInt16>, ppwzPeerName: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerHostNameToPeerName == "on"]
+public unsafe func Windows_PeerHostNameToPeerName(pwzHostName: CPointer<UInt16>, ppwzPeerName: CPointer<CPointer<UInt16>>): Int32 {
+    return PeerHostNameToPeerName(pwzHostName, ppwzPeerName)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerIdentityCreate == "on"]
+foreign {
+    // param-hint: pwzClassifier optional
+    // param-hint: pwzFriendlyName optional
+    // param-hint: hCryptProv optional
+    func PeerIdentityCreate(pwzClassifier: CPointer<UInt16>, pwzFriendlyName: CPointer<UInt16>, hCryptProv: UIntNative, ppwzIdentity: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerIdentityCreate == "on"]
+public unsafe func Windows_PeerIdentityCreate(pwzClassifier: CPointer<UInt16>, pwzFriendlyName: CPointer<UInt16>, hCryptProv: UIntNative, ppwzIdentity: CPointer<CPointer<UInt16>>): Int32 {
+    return PeerIdentityCreate(pwzClassifier, pwzFriendlyName, hCryptProv, ppwzIdentity)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerIdentityDelete == "on"]
+foreign {
+    func PeerIdentityDelete(pwzIdentity: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerIdentityDelete == "on"]
+public unsafe func Windows_PeerIdentityDelete(pwzIdentity: CPointer<UInt16>): Int32 {
+    return PeerIdentityDelete(pwzIdentity)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerIdentityExport == "on"]
+foreign {
+    // param-hint: pwzIdentity optional
+    func PeerIdentityExport(pwzIdentity: CPointer<UInt16>, pwzPassword: CPointer<UInt16>, ppwzExportXML: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerIdentityExport == "on"]
+public unsafe func Windows_PeerIdentityExport(pwzIdentity: CPointer<UInt16>, pwzPassword: CPointer<UInt16>, ppwzExportXML: CPointer<CPointer<UInt16>>): Int32 {
+    return PeerIdentityExport(pwzIdentity, pwzPassword, ppwzExportXML)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerIdentityGetCryptKey == "on"]
+foreign {
+    // param-hint: pwzIdentity optional
+    func PeerIdentityGetCryptKey(pwzIdentity: CPointer<UInt16>, phCryptProv: CPointer<UIntNative>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerIdentityGetCryptKey == "on"]
+public unsafe func Windows_PeerIdentityGetCryptKey(pwzIdentity: CPointer<UInt16>, phCryptProv: CPointer<UIntNative>): Int32 {
+    return PeerIdentityGetCryptKey(pwzIdentity, phCryptProv)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerIdentityGetDefault == "on"]
+foreign {
+    func PeerIdentityGetDefault(ppwzPeerName: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerIdentityGetDefault == "on"]
+public unsafe func Windows_PeerIdentityGetDefault(ppwzPeerName: CPointer<CPointer<UInt16>>): Int32 {
+    return PeerIdentityGetDefault(ppwzPeerName)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerIdentityGetFriendlyName == "on"]
+foreign {
+    // param-hint: pwzIdentity optional
+    func PeerIdentityGetFriendlyName(pwzIdentity: CPointer<UInt16>, ppwzFriendlyName: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerIdentityGetFriendlyName == "on"]
+public unsafe func Windows_PeerIdentityGetFriendlyName(pwzIdentity: CPointer<UInt16>, ppwzFriendlyName: CPointer<CPointer<UInt16>>): Int32 {
+    return PeerIdentityGetFriendlyName(pwzIdentity, ppwzFriendlyName)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerIdentityGetXML == "on"]
+foreign {
+    // param-hint: pwzIdentity optional
+    func PeerIdentityGetXML(pwzIdentity: CPointer<UInt16>, ppwzIdentityXML: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerIdentityGetXML == "on"]
+public unsafe func Windows_PeerIdentityGetXML(pwzIdentity: CPointer<UInt16>, ppwzIdentityXML: CPointer<CPointer<UInt16>>): Int32 {
+    return PeerIdentityGetXML(pwzIdentity, ppwzIdentityXML)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerIdentityImport == "on"]
+foreign {
+    func PeerIdentityImport(pwzImportXML: CPointer<UInt16>, pwzPassword: CPointer<UInt16>, ppwzIdentity: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerIdentityImport == "on"]
+public unsafe func Windows_PeerIdentityImport(pwzImportXML: CPointer<UInt16>, pwzPassword: CPointer<UInt16>, ppwzIdentity: CPointer<CPointer<UInt16>>): Int32 {
+    return PeerIdentityImport(pwzImportXML, pwzPassword, ppwzIdentity)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerIdentitySetFriendlyName == "on"]
+foreign {
+    // param-hint: pwzIdentity optional
+    func PeerIdentitySetFriendlyName(pwzIdentity: CPointer<UInt16>, pwzFriendlyName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerIdentitySetFriendlyName == "on"]
+public unsafe func Windows_PeerIdentitySetFriendlyName(pwzIdentity: CPointer<UInt16>, pwzFriendlyName: CPointer<UInt16>): Int32 {
+    return PeerIdentitySetFriendlyName(pwzIdentity, pwzFriendlyName)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerNameToPeerHostName == "on"]
+foreign {
+    func PeerNameToPeerHostName(pwzPeerName: CPointer<UInt16>, ppwzHostName: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerNameToPeerHostName == "on"]
+public unsafe func Windows_PeerNameToPeerHostName(pwzPeerName: CPointer<UInt16>, ppwzHostName: CPointer<CPointer<UInt16>>): Int32 {
+    return PeerNameToPeerHostName(pwzPeerName, ppwzHostName)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerPnrpEndResolve == "on"]
+foreign {
+    func PeerPnrpEndResolve(hResolve: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerPnrpEndResolve == "on"]
+public unsafe func Windows_PeerPnrpEndResolve(hResolve: CPointer<Unit>): Int32 {
+    return PeerPnrpEndResolve(hResolve)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerPnrpGetCloudInfo == "on"]
+foreign {
+    func PeerPnrpGetCloudInfo(pcNumClouds: CPointer<UInt32>, ppCloudInfo: CPointer<CPointer<PEER_PNRP_CLOUD_INFO>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerPnrpGetCloudInfo == "on"]
+public unsafe func Windows_PeerPnrpGetCloudInfo(pcNumClouds: CPointer<UInt32>, ppCloudInfo: CPointer<CPointer<PEER_PNRP_CLOUD_INFO>>): Int32 {
+    return PeerPnrpGetCloudInfo(pcNumClouds, ppCloudInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerPnrpGetEndpoint == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func PeerPnrpGetEndpoint(hResolve: CPointer<Unit>, ppEndpoint: CPointer<CPointer<PEER_PNRP_ENDPOINT_INFO>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerPnrpGetEndpoint == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_PeerPnrpGetEndpoint(hResolve: CPointer<Unit>, ppEndpoint: CPointer<CPointer<PEER_PNRP_ENDPOINT_INFO>>): Int32 {
+    return PeerPnrpGetEndpoint(hResolve, ppEndpoint)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerPnrpRegister == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: pRegistrationInfo optional
+    func PeerPnrpRegister(pcwzPeerName: CPointer<UInt16>, pRegistrationInfo: CPointer<PEER_PNRP_REGISTRATION_INFO>, phRegistration: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerPnrpRegister == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_PeerPnrpRegister(pcwzPeerName: CPointer<UInt16>, pRegistrationInfo: CPointer<PEER_PNRP_REGISTRATION_INFO>, phRegistration: CPointer<CPointer<Unit>>): Int32 {
+    return PeerPnrpRegister(pcwzPeerName, pRegistrationInfo, phRegistration)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerPnrpResolve == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: pcwzCloudName optional
+    func PeerPnrpResolve(pcwzPeerName: CPointer<UInt16>, pcwzCloudName: CPointer<UInt16>, pcEndpoints: CPointer<UInt32>, ppEndpoints: CPointer<CPointer<PEER_PNRP_ENDPOINT_INFO>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerPnrpResolve == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_PeerPnrpResolve(pcwzPeerName: CPointer<UInt16>, pcwzCloudName: CPointer<UInt16>, pcEndpoints: CPointer<UInt32>, ppEndpoints: CPointer<CPointer<PEER_PNRP_ENDPOINT_INFO>>): Int32 {
+    return PeerPnrpResolve(pcwzPeerName, pcwzCloudName, pcEndpoints, ppEndpoints)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerPnrpShutdown == "on"]
+foreign {
+    func PeerPnrpShutdown(): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerPnrpShutdown == "on"]
+public unsafe func Windows_PeerPnrpShutdown(): Int32 {
+    return PeerPnrpShutdown()
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerPnrpStartResolve == "on"]
+foreign {
+    // param-hint: pcwzCloudName optional
+    // param-hint: cMaxEndpoints optional
+    func PeerPnrpStartResolve(pcwzPeerName: CPointer<UInt16>, pcwzCloudName: CPointer<UInt16>, cMaxEndpoints: UInt32, hEvent: CPointer<Unit>, phResolve: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerPnrpStartResolve == "on"]
+public unsafe func Windows_PeerPnrpStartResolve(pcwzPeerName: CPointer<UInt16>, pcwzCloudName: CPointer<UInt16>, cMaxEndpoints: UInt32, hEvent: CPointer<Unit>, phResolve: CPointer<CPointer<Unit>>): Int32 {
+    return PeerPnrpStartResolve(pcwzPeerName, pcwzCloudName, cMaxEndpoints, hEvent, phResolve)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerPnrpStartup == "on"]
+foreign {
+    func PeerPnrpStartup(wVersionRequested: UInt16): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerPnrpStartup == "on"]
+public unsafe func Windows_PeerPnrpStartup(wVersionRequested: UInt16): Int32 {
+    return PeerPnrpStartup(wVersionRequested)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerPnrpUnregister == "on"]
+foreign {
+    func PeerPnrpUnregister(hRegistration: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerPnrpUnregister == "on"]
+public unsafe func Windows_PeerPnrpUnregister(hRegistration: CPointer<Unit>): Int32 {
+    return PeerPnrpUnregister(hRegistration)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerPnrpUpdateRegistration == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func PeerPnrpUpdateRegistration(hRegistration: CPointer<Unit>, pRegistrationInfo: CPointer<PEER_PNRP_REGISTRATION_INFO>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2P == "on" && Windows_Win32_NetworkManagement_P2P_PeerPnrpUpdateRegistration == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_PeerPnrpUpdateRegistration(hRegistration: CPointer<Unit>, pRegistrationInfo: CPointer<PEER_PNRP_REGISTRATION_INFO>): Int32 {
+    return PeerPnrpUpdateRegistration(hRegistration, pRegistrationInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphAddRecord == "on"]
 foreign {
     func PeerGraphAddRecord(hGraph: CPointer<Unit>, pRecord: CPointer<PEER_RECORD>, pRecordId: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphAddRecord == "on"]
+public unsafe func Windows_PeerGraphAddRecord(hGraph: CPointer<Unit>, pRecord: CPointer<PEER_RECORD>, pRecordId: CPointer<GUID>): Int32 {
+    return PeerGraphAddRecord(hGraph, pRecord, pRecordId)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphClose == "on"]
+foreign {
     func PeerGraphClose(hGraph: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphClose == "on"]
+public unsafe func Windows_PeerGraphClose(hGraph: CPointer<Unit>): Int32 {
+    return PeerGraphClose(hGraph)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphCloseDirectConnection == "on"]
+foreign {
     func PeerGraphCloseDirectConnection(hGraph: CPointer<Unit>, ullConnectionId: UInt64): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphCloseDirectConnection == "on"]
+public unsafe func Windows_PeerGraphCloseDirectConnection(hGraph: CPointer<Unit>, ullConnectionId: UInt64): Int32 {
+    return PeerGraphCloseDirectConnection(hGraph, ullConnectionId)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphConnect == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: pwzPeerId optional
+    func PeerGraphConnect(hGraph: CPointer<Unit>, pwzPeerId: CPointer<UInt16>, pAddress: CPointer<PEER_ADDRESS>, pullConnectionId: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphConnect == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_PeerGraphConnect(hGraph: CPointer<Unit>, pwzPeerId: CPointer<UInt16>, pAddress: CPointer<PEER_ADDRESS>, pullConnectionId: CPointer<UInt64>): Int32 {
+    return PeerGraphConnect(hGraph, pwzPeerId, pAddress, pullConnectionId)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphCreate == "on"]
+foreign {
     // param-hint: pSecurityInterface optional
     func PeerGraphCreate(pGraphProperties: CPointer<PEER_GRAPH_PROPERTIES>, pwzDatabaseName: CPointer<UInt16>, pSecurityInterface: CPointer<PEER_SECURITY_INTERFACE>, phGraph: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphCreate == "on"]
+public unsafe func Windows_PeerGraphCreate(pGraphProperties: CPointer<PEER_GRAPH_PROPERTIES>, pwzDatabaseName: CPointer<UInt16>, pSecurityInterface: CPointer<PEER_SECURITY_INTERFACE>, phGraph: CPointer<CPointer<Unit>>): Int32 {
+    return PeerGraphCreate(pGraphProperties, pwzDatabaseName, pSecurityInterface, phGraph)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphDelete == "on"]
+foreign {
     func PeerGraphDelete(pwzGraphId: CPointer<UInt16>, pwzPeerId: CPointer<UInt16>, pwzDatabaseName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphDelete == "on"]
+public unsafe func Windows_PeerGraphDelete(pwzGraphId: CPointer<UInt16>, pwzPeerId: CPointer<UInt16>, pwzDatabaseName: CPointer<UInt16>): Int32 {
+    return PeerGraphDelete(pwzGraphId, pwzPeerId, pwzDatabaseName)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphDeleteRecord == "on"]
+foreign {
     func PeerGraphDeleteRecord(hGraph: CPointer<Unit>, pRecordId: CPointer<GUID>, fLocal: Int32): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphDeleteRecord == "on"]
+public unsafe func Windows_PeerGraphDeleteRecord(hGraph: CPointer<Unit>, pRecordId: CPointer<GUID>, fLocal: Int32): Int32 {
+    return PeerGraphDeleteRecord(hGraph, pRecordId, fLocal)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphEndEnumeration == "on"]
+foreign {
     func PeerGraphEndEnumeration(hPeerEnum: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphEndEnumeration == "on"]
+public unsafe func Windows_PeerGraphEndEnumeration(hPeerEnum: CPointer<Unit>): Int32 {
+    return PeerGraphEndEnumeration(hPeerEnum)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphEnumConnections == "on"]
+foreign {
     func PeerGraphEnumConnections(hGraph: CPointer<Unit>, dwFlags: UInt32, phPeerEnum: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphEnumConnections == "on"]
+public unsafe func Windows_PeerGraphEnumConnections(hGraph: CPointer<Unit>, dwFlags: UInt32, phPeerEnum: CPointer<CPointer<Unit>>): Int32 {
+    return PeerGraphEnumConnections(hGraph, dwFlags, phPeerEnum)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphEnumNodes == "on"]
+foreign {
     // param-hint: pwzPeerId optional
     func PeerGraphEnumNodes(hGraph: CPointer<Unit>, pwzPeerId: CPointer<UInt16>, phPeerEnum: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphEnumNodes == "on"]
+public unsafe func Windows_PeerGraphEnumNodes(hGraph: CPointer<Unit>, pwzPeerId: CPointer<UInt16>, phPeerEnum: CPointer<CPointer<Unit>>): Int32 {
+    return PeerGraphEnumNodes(hGraph, pwzPeerId, phPeerEnum)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphEnumRecords == "on"]
+foreign {
     // param-hint: pRecordType optional
     // param-hint: pwzPeerId optional
     func PeerGraphEnumRecords(hGraph: CPointer<Unit>, pRecordType: CPointer<GUID>, pwzPeerId: CPointer<UInt16>, phPeerEnum: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphEnumRecords == "on"]
+public unsafe func Windows_PeerGraphEnumRecords(hGraph: CPointer<Unit>, pRecordType: CPointer<GUID>, pwzPeerId: CPointer<UInt16>, phPeerEnum: CPointer<CPointer<Unit>>): Int32 {
+    return PeerGraphEnumRecords(hGraph, pRecordType, pwzPeerId, phPeerEnum)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphExportDatabase == "on"]
+foreign {
     func PeerGraphExportDatabase(hGraph: CPointer<Unit>, pwzFilePath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphExportDatabase == "on"]
+public unsafe func Windows_PeerGraphExportDatabase(hGraph: CPointer<Unit>, pwzFilePath: CPointer<UInt16>): Int32 {
+    return PeerGraphExportDatabase(hGraph, pwzFilePath)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphFreeData == "on"]
+foreign {
     func PeerGraphFreeData(pvData: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphFreeData == "on"]
+public unsafe func Windows_PeerGraphFreeData(pvData: CPointer<Unit>): Unit {
+    PeerGraphFreeData(pvData)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphGetEventData == "on"]
+foreign {
     func PeerGraphGetEventData(hPeerEvent: CPointer<Unit>, ppEventData: CPointer<CPointer<PEER_GRAPH_EVENT_DATA>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphGetEventData == "on"]
+public unsafe func Windows_PeerGraphGetEventData(hPeerEvent: CPointer<Unit>, ppEventData: CPointer<CPointer<PEER_GRAPH_EVENT_DATA>>): Int32 {
+    return PeerGraphGetEventData(hPeerEvent, ppEventData)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphGetItemCount == "on"]
+foreign {
     func PeerGraphGetItemCount(hPeerEnum: CPointer<Unit>, pCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphGetItemCount == "on"]
+public unsafe func Windows_PeerGraphGetItemCount(hPeerEnum: CPointer<Unit>, pCount: CPointer<UInt32>): Int32 {
+    return PeerGraphGetItemCount(hPeerEnum, pCount)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphGetNextItem == "on"]
+foreign {
     func PeerGraphGetNextItem(hPeerEnum: CPointer<Unit>, pCount: CPointer<UInt32>, pppvItems: CPointer<CPointer<CPointer<Unit>>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphGetNextItem == "on"]
+public unsafe func Windows_PeerGraphGetNextItem(hPeerEnum: CPointer<Unit>, pCount: CPointer<UInt32>, pppvItems: CPointer<CPointer<CPointer<Unit>>>): Int32 {
+    return PeerGraphGetNextItem(hPeerEnum, pCount, pppvItems)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphGetNodeInfo == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func PeerGraphGetNodeInfo(hGraph: CPointer<Unit>, ullNodeId: UInt64, ppNodeInfo: CPointer<CPointer<PEER_NODE_INFO>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphGetNodeInfo == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_PeerGraphGetNodeInfo(hGraph: CPointer<Unit>, ullNodeId: UInt64, ppNodeInfo: CPointer<CPointer<PEER_NODE_INFO>>): Int32 {
+    return PeerGraphGetNodeInfo(hGraph, ullNodeId, ppNodeInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphGetProperties == "on"]
+foreign {
     func PeerGraphGetProperties(hGraph: CPointer<Unit>, ppGraphProperties: CPointer<CPointer<PEER_GRAPH_PROPERTIES>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphGetProperties == "on"]
+public unsafe func Windows_PeerGraphGetProperties(hGraph: CPointer<Unit>, ppGraphProperties: CPointer<CPointer<PEER_GRAPH_PROPERTIES>>): Int32 {
+    return PeerGraphGetProperties(hGraph, ppGraphProperties)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphGetRecord == "on"]
+foreign {
     func PeerGraphGetRecord(hGraph: CPointer<Unit>, pRecordId: CPointer<GUID>, ppRecord: CPointer<CPointer<PEER_RECORD>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphGetRecord == "on"]
+public unsafe func Windows_PeerGraphGetRecord(hGraph: CPointer<Unit>, pRecordId: CPointer<GUID>, ppRecord: CPointer<CPointer<PEER_RECORD>>): Int32 {
+    return PeerGraphGetRecord(hGraph, pRecordId, ppRecord)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphGetStatus == "on"]
+foreign {
     func PeerGraphGetStatus(hGraph: CPointer<Unit>, pdwStatus: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphGetStatus == "on"]
+public unsafe func Windows_PeerGraphGetStatus(hGraph: CPointer<Unit>, pdwStatus: CPointer<UInt32>): Int32 {
+    return PeerGraphGetStatus(hGraph, pdwStatus)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphImportDatabase == "on"]
+foreign {
     func PeerGraphImportDatabase(hGraph: CPointer<Unit>, pwzFilePath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphImportDatabase == "on"]
+public unsafe func Windows_PeerGraphImportDatabase(hGraph: CPointer<Unit>, pwzFilePath: CPointer<UInt16>): Int32 {
+    return PeerGraphImportDatabase(hGraph, pwzFilePath)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphListen == "on"]
+foreign {
     // param-hint: dwScope optional
     // param-hint: dwScopeId optional
     // param-hint: wPort optional
     func PeerGraphListen(hGraph: CPointer<Unit>, dwScope: UInt32, dwScopeId: UInt32, wPort: UInt16): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphListen == "on"]
+public unsafe func Windows_PeerGraphListen(hGraph: CPointer<Unit>, dwScope: UInt32, dwScopeId: UInt32, wPort: UInt16): Int32 {
+    return PeerGraphListen(hGraph, dwScope, dwScopeId, wPort)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphOpen == "on"]
+foreign {
     // param-hint: pSecurityInterface optional
     // param-hint: pRecordTypeSyncPrecedence len=param[4] optional
     func PeerGraphOpen(pwzGraphId: CPointer<UInt16>, pwzPeerId: CPointer<UInt16>, pwzDatabaseName: CPointer<UInt16>, pSecurityInterface: CPointer<PEER_SECURITY_INTERFACE>, cRecordTypeSyncPrecedence: UInt32, pRecordTypeSyncPrecedence: CPointer<GUID>, phGraph: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphOpen == "on"]
+public unsafe func Windows_PeerGraphOpen(pwzGraphId: CPointer<UInt16>, pwzPeerId: CPointer<UInt16>, pwzDatabaseName: CPointer<UInt16>, pSecurityInterface: CPointer<PEER_SECURITY_INTERFACE>, cRecordTypeSyncPrecedence: UInt32, pRecordTypeSyncPrecedence: CPointer<GUID>, phGraph: CPointer<CPointer<Unit>>): Int32 {
+    return PeerGraphOpen(pwzGraphId, pwzPeerId, pwzDatabaseName, pSecurityInterface, cRecordTypeSyncPrecedence, pRecordTypeSyncPrecedence, phGraph)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphOpenDirectConnection == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func PeerGraphOpenDirectConnection(hGraph: CPointer<Unit>, pwzPeerId: CPointer<UInt16>, pAddress: CPointer<PEER_ADDRESS>, pullConnectionId: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphOpenDirectConnection == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_PeerGraphOpenDirectConnection(hGraph: CPointer<Unit>, pwzPeerId: CPointer<UInt16>, pAddress: CPointer<PEER_ADDRESS>, pullConnectionId: CPointer<UInt64>): Int32 {
+    return PeerGraphOpenDirectConnection(hGraph, pwzPeerId, pAddress, pullConnectionId)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphPeerTimeToUniversalTime == "on"]
+foreign {
     func PeerGraphPeerTimeToUniversalTime(hGraph: CPointer<Unit>, pftPeerTime: CPointer<Win32_Foundation.FILETIME>, pftUniversalTime: CPointer<Win32_Foundation.FILETIME>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphPeerTimeToUniversalTime == "on"]
+public unsafe func Windows_PeerGraphPeerTimeToUniversalTime(hGraph: CPointer<Unit>, pftPeerTime: CPointer<Win32_Foundation.FILETIME>, pftUniversalTime: CPointer<Win32_Foundation.FILETIME>): Int32 {
+    return PeerGraphPeerTimeToUniversalTime(hGraph, pftPeerTime, pftUniversalTime)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphRegisterEvent == "on"]
+foreign {
     // param-hint: pEventRegistrations len=param[2]
     func PeerGraphRegisterEvent(hGraph: CPointer<Unit>, hEvent: CPointer<Unit>, cEventRegistrations: UInt32, pEventRegistrations: CPointer<PEER_GRAPH_EVENT_REGISTRATION>, phPeerEvent: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphRegisterEvent == "on"]
+public unsafe func Windows_PeerGraphRegisterEvent(hGraph: CPointer<Unit>, hEvent: CPointer<Unit>, cEventRegistrations: UInt32, pEventRegistrations: CPointer<PEER_GRAPH_EVENT_REGISTRATION>, phPeerEvent: CPointer<CPointer<Unit>>): Int32 {
+    return PeerGraphRegisterEvent(hGraph, hEvent, cEventRegistrations, pEventRegistrations, phPeerEvent)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphSearchRecords == "on"]
+foreign {
     func PeerGraphSearchRecords(hGraph: CPointer<Unit>, pwzCriteria: CPointer<UInt16>, phPeerEnum: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphSearchRecords == "on"]
+public unsafe func Windows_PeerGraphSearchRecords(hGraph: CPointer<Unit>, pwzCriteria: CPointer<UInt16>, phPeerEnum: CPointer<CPointer<Unit>>): Int32 {
+    return PeerGraphSearchRecords(hGraph, pwzCriteria, phPeerEnum)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphSendData == "on"]
+foreign {
     // param-hint: pvData bytes=param[3]
     func PeerGraphSendData(hGraph: CPointer<Unit>, ullConnectionId: UInt64, pType: CPointer<GUID>, cbData: UInt32, pvData: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphSendData == "on"]
+public unsafe func Windows_PeerGraphSendData(hGraph: CPointer<Unit>, ullConnectionId: UInt64, pType: CPointer<GUID>, cbData: UInt32, pvData: CPointer<Unit>): Int32 {
+    return PeerGraphSendData(hGraph, ullConnectionId, pType, cbData, pvData)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphSetNodeAttributes == "on"]
+foreign {
     func PeerGraphSetNodeAttributes(hGraph: CPointer<Unit>, pwzAttributes: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphSetNodeAttributes == "on"]
+public unsafe func Windows_PeerGraphSetNodeAttributes(hGraph: CPointer<Unit>, pwzAttributes: CPointer<UInt16>): Int32 {
+    return PeerGraphSetNodeAttributes(hGraph, pwzAttributes)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphSetPresence == "on"]
+foreign {
     func PeerGraphSetPresence(hGraph: CPointer<Unit>, fPresent: Int32): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphSetPresence == "on"]
+public unsafe func Windows_PeerGraphSetPresence(hGraph: CPointer<Unit>, fPresent: Int32): Int32 {
+    return PeerGraphSetPresence(hGraph, fPresent)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphSetProperties == "on"]
+foreign {
     func PeerGraphSetProperties(hGraph: CPointer<Unit>, pGraphProperties: CPointer<PEER_GRAPH_PROPERTIES>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphSetProperties == "on"]
+public unsafe func Windows_PeerGraphSetProperties(hGraph: CPointer<Unit>, pGraphProperties: CPointer<PEER_GRAPH_PROPERTIES>): Int32 {
+    return PeerGraphSetProperties(hGraph, pGraphProperties)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphShutdown == "on"]
+foreign {
     func PeerGraphShutdown(): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphShutdown == "on"]
+public unsafe func Windows_PeerGraphShutdown(): Int32 {
+    return PeerGraphShutdown()
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphStartup == "on"]
+foreign {
     func PeerGraphStartup(wVersionRequested: UInt16, pVersionData: CPointer<PEER_VERSION_DATA>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphStartup == "on"]
+public unsafe func Windows_PeerGraphStartup(wVersionRequested: UInt16, pVersionData: CPointer<PEER_VERSION_DATA>): Int32 {
+    return PeerGraphStartup(wVersionRequested, pVersionData)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphUniversalTimeToPeerTime == "on"]
+foreign {
     func PeerGraphUniversalTimeToPeerTime(hGraph: CPointer<Unit>, pftUniversalTime: CPointer<Win32_Foundation.FILETIME>, pftPeerTime: CPointer<Win32_Foundation.FILETIME>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphUniversalTimeToPeerTime == "on"]
+public unsafe func Windows_PeerGraphUniversalTimeToPeerTime(hGraph: CPointer<Unit>, pftUniversalTime: CPointer<Win32_Foundation.FILETIME>, pftPeerTime: CPointer<Win32_Foundation.FILETIME>): Int32 {
+    return PeerGraphUniversalTimeToPeerTime(hGraph, pftUniversalTime, pftPeerTime)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphUnregisterEvent == "on"]
+foreign {
     func PeerGraphUnregisterEvent(hPeerEvent: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphUnregisterEvent == "on"]
+public unsafe func Windows_PeerGraphUnregisterEvent(hPeerEvent: CPointer<Unit>): Int32 {
+    return PeerGraphUnregisterEvent(hPeerEvent)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphUpdateRecord == "on"]
+foreign {
     func PeerGraphUpdateRecord(hGraph: CPointer<Unit>, pRecord: CPointer<PEER_RECORD>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphUpdateRecord == "on"]
+public unsafe func Windows_PeerGraphUpdateRecord(hGraph: CPointer<Unit>, pRecord: CPointer<PEER_RECORD>): Int32 {
+    return PeerGraphUpdateRecord(hGraph, pRecord)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphValidateDeferredRecords == "on"]
+foreign {
     // param-hint: pRecordIds len=param[1]
     func PeerGraphValidateDeferredRecords(hGraph: CPointer<Unit>, cRecordIds: UInt32, pRecordIds: CPointer<GUID>): Int32
 }
 
-@When[P2PGRAPH == "on" && Windows_Win32_Networking_WinSock == "on"]
-foreign {
-    // param-hint: pwzPeerId optional
-    func PeerGraphConnect(hGraph: CPointer<Unit>, pwzPeerId: CPointer<UInt16>, pAddress: CPointer<PEER_ADDRESS>, pullConnectionId: CPointer<UInt64>): Int32
-    func PeerGraphGetNodeInfo(hGraph: CPointer<Unit>, ullNodeId: UInt64, ppNodeInfo: CPointer<CPointer<PEER_NODE_INFO>>): Int32
-    func PeerGraphOpenDirectConnection(hGraph: CPointer<Unit>, pwzPeerId: CPointer<UInt16>, pAddress: CPointer<PEER_ADDRESS>, pullConnectionId: CPointer<UInt64>): Int32
+@When[Windows_Win32_NetworkManagement_P2P == "on" && P2PGRAPH == "on" && Windows_Win32_NetworkManagement_P2P_PeerGraphValidateDeferredRecords == "on"]
+public unsafe func Windows_PeerGraphValidateDeferredRecords(hGraph: CPointer<Unit>, cRecordIds: UInt32, pRecordIds: CPointer<GUID>): Int32 {
+    return PeerGraphValidateDeferredRecords(hGraph, cRecordIds, pRecordIds)
 }
 
-@When[PEERDIST == "on"]
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistClientAddContentInformation == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    // param-hint: pBuffer bytes=param[2]
+    func PeerDistClientAddContentInformation(hPeerDist: IntNative, hContentHandle: IntNative, cbNumberOfBytes: UInt32, pBuffer: CPointer<UInt8>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistClientAddContentInformation == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_PeerDistClientAddContentInformation(hPeerDist: IntNative, hContentHandle: IntNative, cbNumberOfBytes: UInt32, pBuffer: CPointer<UInt8>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32 {
+    return PeerDistClientAddContentInformation(hPeerDist, hContentHandle, cbNumberOfBytes, pBuffer, lpOverlapped)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistClientAddData == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    // param-hint: pBuffer bytes=param[2]
+    func PeerDistClientAddData(hPeerDist: IntNative, hContentHandle: IntNative, cbNumberOfBytes: UInt32, pBuffer: CPointer<UInt8>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistClientAddData == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_PeerDistClientAddData(hPeerDist: IntNative, hContentHandle: IntNative, cbNumberOfBytes: UInt32, pBuffer: CPointer<UInt8>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32 {
+    return PeerDistClientAddData(hPeerDist, hContentHandle, cbNumberOfBytes, pBuffer, lpOverlapped)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistClientBlockRead == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    // param-hint: pBuffer bytes=param[2] optional
+    func PeerDistClientBlockRead(hPeerDist: IntNative, hContentHandle: IntNative, cbMaxNumberOfBytes: UInt32, pBuffer: CPointer<UInt8>, dwTimeoutInMilliseconds: UInt32, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistClientBlockRead == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_PeerDistClientBlockRead(hPeerDist: IntNative, hContentHandle: IntNative, cbMaxNumberOfBytes: UInt32, pBuffer: CPointer<UInt8>, dwTimeoutInMilliseconds: UInt32, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32 {
+    return PeerDistClientBlockRead(hPeerDist, hContentHandle, cbMaxNumberOfBytes, pBuffer, dwTimeoutInMilliseconds, lpOverlapped)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistClientCancelAsyncOperation == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    // param-hint: pOverlapped optional
+    // pinvoke-hint: SetLastError
+    func PeerDistClientCancelAsyncOperation(hPeerDist: IntNative, hContentHandle: IntNative, pOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistClientCancelAsyncOperation == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_PeerDistClientCancelAsyncOperation(hPeerDist: IntNative, hContentHandle: IntNative, pOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32 {
+    return PeerDistClientCancelAsyncOperation(hPeerDist, hContentHandle, pOverlapped)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistClientCloseContent == "on"]
 foreign {
     func PeerDistClientCloseContent(hPeerDist: IntNative, hContentHandle: IntNative): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistClientCloseContent == "on"]
+public unsafe func Windows_PeerDistClientCloseContent(hPeerDist: IntNative, hContentHandle: IntNative): UInt32 {
+    return PeerDistClientCloseContent(hPeerDist, hContentHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistClientCompleteContentInformation == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    func PeerDistClientCompleteContentInformation(hPeerDist: IntNative, hContentHandle: IntNative, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistClientCompleteContentInformation == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_PeerDistClientCompleteContentInformation(hPeerDist: IntNative, hContentHandle: IntNative, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32 {
+    return PeerDistClientCompleteContentInformation(hPeerDist, hContentHandle, lpOverlapped)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistClientFlushContent == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    // param-hint: hCompletionPort optional
+    // param-hint: ulCompletionKey optional
+    func PeerDistClientFlushContent(hPeerDist: IntNative, pContentTag: CPointer<PEERDIST_CONTENT_TAG>, hCompletionPort: CPointer<Unit>, ulCompletionKey: UIntNative, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistClientFlushContent == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_PeerDistClientFlushContent(hPeerDist: IntNative, pContentTag: CPointer<PEERDIST_CONTENT_TAG>, hCompletionPort: CPointer<Unit>, ulCompletionKey: UIntNative, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32 {
+    return PeerDistClientFlushContent(hPeerDist, pContentTag, hCompletionPort, ulCompletionKey, lpOverlapped)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistClientGetInformationByHandle == "on"]
+foreign {
     // param-hint: lpInformation bytes=param[3]
     func PeerDistClientGetInformationByHandle(hPeerDist: IntNative, hContentHandle: IntNative, PeerDistClientInfoClass: Int32, dwBufferSize: UInt32, lpInformation: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistClientGetInformationByHandle == "on"]
+public unsafe func Windows_PeerDistClientGetInformationByHandle(hPeerDist: IntNative, hContentHandle: IntNative, PeerDistClientInfoClass: Int32, dwBufferSize: UInt32, lpInformation: CPointer<Unit>): UInt32 {
+    return PeerDistClientGetInformationByHandle(hPeerDist, hContentHandle, PeerDistClientInfoClass, dwBufferSize, lpInformation)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistClientOpenContent == "on"]
+foreign {
     // param-hint: hCompletionPort optional
     // param-hint: ulCompletionKey optional
     func PeerDistClientOpenContent(hPeerDist: IntNative, pContentTag: CPointer<PEERDIST_CONTENT_TAG>, hCompletionPort: CPointer<Unit>, ulCompletionKey: UIntNative, phContentHandle: CPointer<IntNative>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistClientOpenContent == "on"]
+public unsafe func Windows_PeerDistClientOpenContent(hPeerDist: IntNative, pContentTag: CPointer<PEERDIST_CONTENT_TAG>, hCompletionPort: CPointer<Unit>, ulCompletionKey: UIntNative, phContentHandle: CPointer<IntNative>): UInt32 {
+    return PeerDistClientOpenContent(hPeerDist, pContentTag, hCompletionPort, ulCompletionKey, phContentHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistClientStreamRead == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    // param-hint: pBuffer bytes=param[2] optional
+    func PeerDistClientStreamRead(hPeerDist: IntNative, hContentHandle: IntNative, cbMaxNumberOfBytes: UInt32, pBuffer: CPointer<UInt8>, dwTimeoutInMilliseconds: UInt32, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistClientStreamRead == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_PeerDistClientStreamRead(hPeerDist: IntNative, hContentHandle: IntNative, cbMaxNumberOfBytes: UInt32, pBuffer: CPointer<UInt8>, dwTimeoutInMilliseconds: UInt32, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32 {
+    return PeerDistClientStreamRead(hPeerDist, hContentHandle, cbMaxNumberOfBytes, pBuffer, dwTimeoutInMilliseconds, lpOverlapped)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistGetOverlappedResult == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    func PeerDistGetOverlappedResult(lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>, lpNumberOfBytesTransferred: CPointer<UInt32>, bWait: Int32): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistGetOverlappedResult == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_PeerDistGetOverlappedResult(lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>, lpNumberOfBytesTransferred: CPointer<UInt32>, bWait: Int32): Int32 {
+    return PeerDistGetOverlappedResult(lpOverlapped, lpNumberOfBytesTransferred, bWait)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistGetStatus == "on"]
+foreign {
     func PeerDistGetStatus(hPeerDist: IntNative, pPeerDistStatus: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistGetStatus == "on"]
+public unsafe func Windows_PeerDistGetStatus(hPeerDist: IntNative, pPeerDistStatus: CPointer<Int32>): UInt32 {
+    return PeerDistGetStatus(hPeerDist, pPeerDistStatus)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistGetStatusEx == "on"]
+foreign {
     func PeerDistGetStatusEx(hPeerDist: IntNative, pPeerDistStatus: CPointer<PEERDIST_STATUS_INFO>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistGetStatusEx == "on"]
+public unsafe func Windows_PeerDistGetStatusEx(hPeerDist: IntNative, pPeerDistStatus: CPointer<PEERDIST_STATUS_INFO>): UInt32 {
+    return PeerDistGetStatusEx(hPeerDist, pPeerDistStatus)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistRegisterForStatusChangeNotification == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    // param-hint: hCompletionPort optional
+    // param-hint: ulCompletionKey optional
+    func PeerDistRegisterForStatusChangeNotification(hPeerDist: IntNative, hCompletionPort: CPointer<Unit>, ulCompletionKey: UIntNative, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>, pPeerDistStatus: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistRegisterForStatusChangeNotification == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_PeerDistRegisterForStatusChangeNotification(hPeerDist: IntNative, hCompletionPort: CPointer<Unit>, ulCompletionKey: UIntNative, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>, pPeerDistStatus: CPointer<Int32>): UInt32 {
+    return PeerDistRegisterForStatusChangeNotification(hPeerDist, hCompletionPort, ulCompletionKey, lpOverlapped, pPeerDistStatus)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistRegisterForStatusChangeNotificationEx == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    // param-hint: hCompletionPort optional
+    // param-hint: ulCompletionKey optional
+    func PeerDistRegisterForStatusChangeNotificationEx(hPeerDist: IntNative, hCompletionPort: CPointer<Unit>, ulCompletionKey: UIntNative, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>, pPeerDistStatus: CPointer<PEERDIST_STATUS_INFO>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistRegisterForStatusChangeNotificationEx == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_PeerDistRegisterForStatusChangeNotificationEx(hPeerDist: IntNative, hCompletionPort: CPointer<Unit>, ulCompletionKey: UIntNative, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>, pPeerDistStatus: CPointer<PEERDIST_STATUS_INFO>): UInt32 {
+    return PeerDistRegisterForStatusChangeNotificationEx(hPeerDist, hCompletionPort, ulCompletionKey, lpOverlapped, pPeerDistStatus)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistServerCancelAsyncOperation == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    // param-hint: pContentIdentifier bytes=param[1]
+    // pinvoke-hint: SetLastError
+    func PeerDistServerCancelAsyncOperation(hPeerDist: IntNative, cbContentIdentifier: UInt32, pContentIdentifier: CPointer<UInt8>, pOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistServerCancelAsyncOperation == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_PeerDistServerCancelAsyncOperation(hPeerDist: IntNative, cbContentIdentifier: UInt32, pContentIdentifier: CPointer<UInt8>, pOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32 {
+    return PeerDistServerCancelAsyncOperation(hPeerDist, cbContentIdentifier, pContentIdentifier, pOverlapped)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistServerCloseContentInformation == "on"]
+foreign {
     func PeerDistServerCloseContentInformation(hPeerDist: IntNative, hContentInfo: IntNative): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistServerCloseContentInformation == "on"]
+public unsafe func Windows_PeerDistServerCloseContentInformation(hPeerDist: IntNative, hContentInfo: IntNative): UInt32 {
+    return PeerDistServerCloseContentInformation(hPeerDist, hContentInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistServerCloseStreamHandle == "on"]
+foreign {
     func PeerDistServerCloseStreamHandle(hPeerDist: IntNative, hStream: IntNative): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistServerCloseStreamHandle == "on"]
+public unsafe func Windows_PeerDistServerCloseStreamHandle(hPeerDist: IntNative, hStream: IntNative): UInt32 {
+    return PeerDistServerCloseStreamHandle(hPeerDist, hStream)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistServerOpenContentInformation == "on"]
+foreign {
     // param-hint: pContentIdentifier bytes=param[1]
     // param-hint: hCompletionPort optional
     // param-hint: ulCompletionKey optional
     func PeerDistServerOpenContentInformation(hPeerDist: IntNative, cbContentIdentifier: UInt32, pContentIdentifier: CPointer<UInt8>, ullContentOffset: UInt64, cbContentLength: UInt64, hCompletionPort: CPointer<Unit>, ulCompletionKey: UIntNative, phContentInfo: CPointer<IntNative>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistServerOpenContentInformation == "on"]
+public unsafe func Windows_PeerDistServerOpenContentInformation(hPeerDist: IntNative, cbContentIdentifier: UInt32, pContentIdentifier: CPointer<UInt8>, ullContentOffset: UInt64, cbContentLength: UInt64, hCompletionPort: CPointer<Unit>, ulCompletionKey: UIntNative, phContentInfo: CPointer<IntNative>): UInt32 {
+    return PeerDistServerOpenContentInformation(hPeerDist, cbContentIdentifier, pContentIdentifier, ullContentOffset, cbContentLength, hCompletionPort, ulCompletionKey, phContentInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistServerOpenContentInformationEx == "on"]
+foreign {
     // param-hint: pContentIdentifier bytes=param[1]
     // param-hint: hCompletionPort optional
     // param-hint: ulCompletionKey optional
     func PeerDistServerOpenContentInformationEx(hPeerDist: IntNative, cbContentIdentifier: UInt32, pContentIdentifier: CPointer<UInt8>, ullContentOffset: UInt64, cbContentLength: UInt64, pRetrievalOptions: CPointer<PEERDIST_RETRIEVAL_OPTIONS>, hCompletionPort: CPointer<Unit>, ulCompletionKey: UIntNative, phContentInfo: CPointer<IntNative>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistServerOpenContentInformationEx == "on"]
+public unsafe func Windows_PeerDistServerOpenContentInformationEx(hPeerDist: IntNative, cbContentIdentifier: UInt32, pContentIdentifier: CPointer<UInt8>, ullContentOffset: UInt64, cbContentLength: UInt64, pRetrievalOptions: CPointer<PEERDIST_RETRIEVAL_OPTIONS>, hCompletionPort: CPointer<Unit>, ulCompletionKey: UIntNative, phContentInfo: CPointer<IntNative>): UInt32 {
+    return PeerDistServerOpenContentInformationEx(hPeerDist, cbContentIdentifier, pContentIdentifier, ullContentOffset, cbContentLength, pRetrievalOptions, hCompletionPort, ulCompletionKey, phContentInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistServerPublishAddToStream == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    // param-hint: pBuffer bytes=param[2]
+    func PeerDistServerPublishAddToStream(hPeerDist: IntNative, hStream: IntNative, cbNumberOfBytes: UInt32, pBuffer: CPointer<UInt8>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistServerPublishAddToStream == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_PeerDistServerPublishAddToStream(hPeerDist: IntNative, hStream: IntNative, cbNumberOfBytes: UInt32, pBuffer: CPointer<UInt8>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32 {
+    return PeerDistServerPublishAddToStream(hPeerDist, hStream, cbNumberOfBytes, pBuffer, lpOverlapped)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistServerPublishCompleteStream == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    func PeerDistServerPublishCompleteStream(hPeerDist: IntNative, hStream: IntNative, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistServerPublishCompleteStream == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_PeerDistServerPublishCompleteStream(hPeerDist: IntNative, hStream: IntNative, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32 {
+    return PeerDistServerPublishCompleteStream(hPeerDist, hStream, lpOverlapped)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistServerPublishStream == "on"]
+foreign {
     // param-hint: pContentIdentifier bytes=param[1]
     // param-hint: pPublishOptions optional
     // param-hint: hCompletionPort optional
     // param-hint: ulCompletionKey optional
     func PeerDistServerPublishStream(hPeerDist: IntNative, cbContentIdentifier: UInt32, pContentIdentifier: CPointer<UInt8>, cbContentLength: UInt64, pPublishOptions: CPointer<PEERDIST_PUBLICATION_OPTIONS>, hCompletionPort: CPointer<Unit>, ulCompletionKey: UIntNative, phStream: CPointer<IntNative>): UInt32
-    // param-hint: pContentIdentifier bytes=param[1]
-    func PeerDistServerUnpublish(hPeerDist: IntNative, cbContentIdentifier: UInt32, pContentIdentifier: CPointer<UInt8>): UInt32
-    func PeerDistShutdown(hPeerDist: IntNative): UInt32
-    // param-hint: pdwSupportedVersion optional
-    func PeerDistStartup(dwVersionRequested: UInt32, phPeerDist: CPointer<IntNative>, pdwSupportedVersion: CPointer<UInt32>): UInt32
-    // pinvoke-hint: SetLastError
-    func PeerDistUnregisterForStatusChangeNotification(hPeerDist: IntNative): UInt32
 }
 
-@When[PEERDIST == "on" && Windows_Win32_System_IO == "on"]
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistServerPublishStream == "on"]
+public unsafe func Windows_PeerDistServerPublishStream(hPeerDist: IntNative, cbContentIdentifier: UInt32, pContentIdentifier: CPointer<UInt8>, cbContentLength: UInt64, pPublishOptions: CPointer<PEERDIST_PUBLICATION_OPTIONS>, hCompletionPort: CPointer<Unit>, ulCompletionKey: UIntNative, phStream: CPointer<IntNative>): UInt32 {
+    return PeerDistServerPublishStream(hPeerDist, cbContentIdentifier, pContentIdentifier, cbContentLength, pPublishOptions, hCompletionPort, ulCompletionKey, phStream)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistServerRetrieveContentInformation == "on" && Windows_Win32_System_IO == "on"]
 foreign {
-    // param-hint: pBuffer bytes=param[2]
-    func PeerDistClientAddContentInformation(hPeerDist: IntNative, hContentHandle: IntNative, cbNumberOfBytes: UInt32, pBuffer: CPointer<UInt8>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
-    // param-hint: pBuffer bytes=param[2]
-    func PeerDistClientAddData(hPeerDist: IntNative, hContentHandle: IntNative, cbNumberOfBytes: UInt32, pBuffer: CPointer<UInt8>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
-    // param-hint: pBuffer bytes=param[2] optional
-    func PeerDistClientBlockRead(hPeerDist: IntNative, hContentHandle: IntNative, cbMaxNumberOfBytes: UInt32, pBuffer: CPointer<UInt8>, dwTimeoutInMilliseconds: UInt32, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
-    // param-hint: pOverlapped optional
-    // pinvoke-hint: SetLastError
-    func PeerDistClientCancelAsyncOperation(hPeerDist: IntNative, hContentHandle: IntNative, pOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
-    func PeerDistClientCompleteContentInformation(hPeerDist: IntNative, hContentHandle: IntNative, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
-    // param-hint: hCompletionPort optional
-    // param-hint: ulCompletionKey optional
-    func PeerDistClientFlushContent(hPeerDist: IntNative, pContentTag: CPointer<PEERDIST_CONTENT_TAG>, hCompletionPort: CPointer<Unit>, ulCompletionKey: UIntNative, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
-    // param-hint: pBuffer bytes=param[2] optional
-    func PeerDistClientStreamRead(hPeerDist: IntNative, hContentHandle: IntNative, cbMaxNumberOfBytes: UInt32, pBuffer: CPointer<UInt8>, dwTimeoutInMilliseconds: UInt32, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
-    func PeerDistGetOverlappedResult(lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>, lpNumberOfBytesTransferred: CPointer<UInt32>, bWait: Int32): Int32
-    // param-hint: hCompletionPort optional
-    // param-hint: ulCompletionKey optional
-    func PeerDistRegisterForStatusChangeNotification(hPeerDist: IntNative, hCompletionPort: CPointer<Unit>, ulCompletionKey: UIntNative, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>, pPeerDistStatus: CPointer<Int32>): UInt32
-    // param-hint: hCompletionPort optional
-    // param-hint: ulCompletionKey optional
-    func PeerDistRegisterForStatusChangeNotificationEx(hPeerDist: IntNative, hCompletionPort: CPointer<Unit>, ulCompletionKey: UIntNative, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>, pPeerDistStatus: CPointer<PEERDIST_STATUS_INFO>): UInt32
-    // param-hint: pContentIdentifier bytes=param[1]
-    // pinvoke-hint: SetLastError
-    func PeerDistServerCancelAsyncOperation(hPeerDist: IntNative, cbContentIdentifier: UInt32, pContentIdentifier: CPointer<UInt8>, pOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
-    // param-hint: pBuffer bytes=param[2]
-    func PeerDistServerPublishAddToStream(hPeerDist: IntNative, hStream: IntNative, cbNumberOfBytes: UInt32, pBuffer: CPointer<UInt8>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
-    func PeerDistServerPublishCompleteStream(hPeerDist: IntNative, hStream: IntNative, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
     // param-hint: pBuffer bytes=param[2]
     func PeerDistServerRetrieveContentInformation(hPeerDist: IntNative, hContentInfo: IntNative, cbMaxNumberOfBytes: UInt32, pBuffer: CPointer<UInt8>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
 }
 
-@When[DRT == "on"]
-foreign {
-    func DrtClose(hDrt: CPointer<Unit>): Unit
-    func DrtContinueSearch(hSearchContext: CPointer<Unit>): Int32
-    func DrtEndSearch(hSearchContext: CPointer<Unit>): Int32
-    func DrtGetEventDataSize(hDrt: CPointer<Unit>, pulEventDataLen: CPointer<UInt32>): Int32
-    // param-hint: pwzDrtInstanceName bytes=param[1]
-    func DrtGetInstanceName(hDrt: CPointer<Unit>, ulcbInstanceNameSize: UInt32, pwzDrtInstanceName: CPointer<UInt16>): Int32
-    func DrtGetInstanceNameSize(hDrt: CPointer<Unit>, pulcbInstanceNameSize: CPointer<UInt32>): Int32
-    func DrtGetSearchPathSize(hSearchContext: CPointer<Unit>, pulSearchPathSize: CPointer<UInt32>): Int32
-    // param-hint: pSearchResult bytes=param[1]
-    func DrtGetSearchResult(hSearchContext: CPointer<Unit>, ulSearchResultSize: UInt32, pSearchResult: CPointer<DRT_SEARCH_RESULT>): Int32
-    func DrtGetSearchResultSize(hSearchContext: CPointer<Unit>, pulSearchResultSize: CPointer<UInt32>): Int32
-    // param-hint: hEvent optional
-    // param-hint: pvContext optional
-    func DrtOpen(pSettings: CPointer<DRT_SETTINGS>, hEvent: CPointer<Unit>, pvContext: CPointer<Unit>, phDrt: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pvKeyContext optional
-    func DrtRegisterKey(hDrt: CPointer<Unit>, pRegistration: CPointer<DRT_REGISTRATION>, pvKeyContext: CPointer<Unit>, phKeyRegistration: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pInfo optional
-    // param-hint: pvContext optional
-    func DrtStartSearch(hDrt: CPointer<Unit>, pKey: CPointer<DRT_DATA>, pInfo: CPointer<DRT_SEARCH_INFO>, timeout: UInt32, hEvent: CPointer<Unit>, pvContext: CPointer<Unit>, hSearchContext: CPointer<CPointer<Unit>>): Int32
-    func DrtUnregisterKey(hKeyRegistration: CPointer<Unit>): Unit
-    func DrtUpdateKey(hKeyRegistration: CPointer<Unit>, pAppData: CPointer<DRT_DATA>): Int32
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistServerRetrieveContentInformation == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_PeerDistServerRetrieveContentInformation(hPeerDist: IntNative, hContentInfo: IntNative, cbMaxNumberOfBytes: UInt32, pBuffer: CPointer<UInt8>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32 {
+    return PeerDistServerRetrieveContentInformation(hPeerDist, hContentInfo, cbMaxNumberOfBytes, pBuffer, lpOverlapped)
 }
 
-@When[DRT == "on" && Windows_Win32_Networking_WinSock == "on"]
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistServerUnpublish == "on"]
+foreign {
+    // param-hint: pContentIdentifier bytes=param[1]
+    func PeerDistServerUnpublish(hPeerDist: IntNative, cbContentIdentifier: UInt32, pContentIdentifier: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistServerUnpublish == "on"]
+public unsafe func Windows_PeerDistServerUnpublish(hPeerDist: IntNative, cbContentIdentifier: UInt32, pContentIdentifier: CPointer<UInt8>): UInt32 {
+    return PeerDistServerUnpublish(hPeerDist, cbContentIdentifier, pContentIdentifier)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistShutdown == "on"]
+foreign {
+    func PeerDistShutdown(hPeerDist: IntNative): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistShutdown == "on"]
+public unsafe func Windows_PeerDistShutdown(hPeerDist: IntNative): UInt32 {
+    return PeerDistShutdown(hPeerDist)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistStartup == "on"]
+foreign {
+    // param-hint: pdwSupportedVersion optional
+    func PeerDistStartup(dwVersionRequested: UInt32, phPeerDist: CPointer<IntNative>, pdwSupportedVersion: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistStartup == "on"]
+public unsafe func Windows_PeerDistStartup(dwVersionRequested: UInt32, phPeerDist: CPointer<IntNative>, pdwSupportedVersion: CPointer<UInt32>): UInt32 {
+    return PeerDistStartup(dwVersionRequested, phPeerDist, pdwSupportedVersion)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistUnregisterForStatusChangeNotification == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func PeerDistUnregisterForStatusChangeNotification(hPeerDist: IntNative): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && PEERDIST == "on" && Windows_Win32_NetworkManagement_P2P_PeerDistUnregisterForStatusChangeNotification == "on"]
+public unsafe func Windows_PeerDistUnregisterForStatusChangeNotification(hPeerDist: IntNative): UInt32 {
+    return PeerDistUnregisterForStatusChangeNotification(hPeerDist)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRT == "on" && Windows_Win32_NetworkManagement_P2P_DrtClose == "on"]
+foreign {
+    func DrtClose(hDrt: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRT == "on" && Windows_Win32_NetworkManagement_P2P_DrtClose == "on"]
+public unsafe func Windows_DrtClose(hDrt: CPointer<Unit>): Unit {
+    DrtClose(hDrt)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRT == "on" && Windows_Win32_NetworkManagement_P2P_DrtContinueSearch == "on"]
+foreign {
+    func DrtContinueSearch(hSearchContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRT == "on" && Windows_Win32_NetworkManagement_P2P_DrtContinueSearch == "on"]
+public unsafe func Windows_DrtContinueSearch(hSearchContext: CPointer<Unit>): Int32 {
+    return DrtContinueSearch(hSearchContext)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRT == "on" && Windows_Win32_NetworkManagement_P2P_DrtEndSearch == "on"]
+foreign {
+    func DrtEndSearch(hSearchContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRT == "on" && Windows_Win32_NetworkManagement_P2P_DrtEndSearch == "on"]
+public unsafe func Windows_DrtEndSearch(hSearchContext: CPointer<Unit>): Int32 {
+    return DrtEndSearch(hSearchContext)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRT == "on" && Windows_Win32_NetworkManagement_P2P_DrtGetEventData == "on" && Windows_Win32_Networking_WinSock == "on"]
 foreign {
     // param-hint: pEventData bytes=param[1]
     func DrtGetEventData(hDrt: CPointer<Unit>, ulEventDataLen: UInt32, pEventData: CPointer<DRT_EVENT_DATA>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRT == "on" && Windows_Win32_NetworkManagement_P2P_DrtGetEventData == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_DrtGetEventData(hDrt: CPointer<Unit>, ulEventDataLen: UInt32, pEventData: CPointer<DRT_EVENT_DATA>): Int32 {
+    return DrtGetEventData(hDrt, ulEventDataLen, pEventData)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRT == "on" && Windows_Win32_NetworkManagement_P2P_DrtGetEventDataSize == "on"]
+foreign {
+    func DrtGetEventDataSize(hDrt: CPointer<Unit>, pulEventDataLen: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRT == "on" && Windows_Win32_NetworkManagement_P2P_DrtGetEventDataSize == "on"]
+public unsafe func Windows_DrtGetEventDataSize(hDrt: CPointer<Unit>, pulEventDataLen: CPointer<UInt32>): Int32 {
+    return DrtGetEventDataSize(hDrt, pulEventDataLen)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRT == "on" && Windows_Win32_NetworkManagement_P2P_DrtGetInstanceName == "on"]
+foreign {
+    // param-hint: pwzDrtInstanceName bytes=param[1]
+    func DrtGetInstanceName(hDrt: CPointer<Unit>, ulcbInstanceNameSize: UInt32, pwzDrtInstanceName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRT == "on" && Windows_Win32_NetworkManagement_P2P_DrtGetInstanceName == "on"]
+public unsafe func Windows_DrtGetInstanceName(hDrt: CPointer<Unit>, ulcbInstanceNameSize: UInt32, pwzDrtInstanceName: CPointer<UInt16>): Int32 {
+    return DrtGetInstanceName(hDrt, ulcbInstanceNameSize, pwzDrtInstanceName)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRT == "on" && Windows_Win32_NetworkManagement_P2P_DrtGetInstanceNameSize == "on"]
+foreign {
+    func DrtGetInstanceNameSize(hDrt: CPointer<Unit>, pulcbInstanceNameSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRT == "on" && Windows_Win32_NetworkManagement_P2P_DrtGetInstanceNameSize == "on"]
+public unsafe func Windows_DrtGetInstanceNameSize(hDrt: CPointer<Unit>, pulcbInstanceNameSize: CPointer<UInt32>): Int32 {
+    return DrtGetInstanceNameSize(hDrt, pulcbInstanceNameSize)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRT == "on" && Windows_Win32_NetworkManagement_P2P_DrtGetSearchPath == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
     // param-hint: pSearchPath bytes=param[1]
     func DrtGetSearchPath(hSearchContext: CPointer<Unit>, ulSearchPathSize: UInt32, pSearchPath: CPointer<DRT_ADDRESS_LIST>): Int32
 }
 
-@When[DRTPROV == "on"]
-foreign {
-    func DrtCreateDnsBootstrapResolver(port: UInt16, pwszAddress: CPointer<UInt16>, ppModule: CPointer<CPointer<DRT_BOOTSTRAP_PROVIDER>>): Int32
-    func DrtCreateNullSecurityProvider(ppSecurityProvider: CPointer<CPointer<DRT_SECURITY_PROVIDER>>): Int32
-    // param-hint: pwzCloudName optional
-    // param-hint: pwzPublishingIdentity optional
-    func DrtCreatePnrpBootstrapResolver(fPublish: Int32, pwzPeerName: CPointer<UInt16>, pwzCloudName: CPointer<UInt16>, pwzPublishingIdentity: CPointer<UInt16>, ppResolver: CPointer<CPointer<DRT_BOOTSTRAP_PROVIDER>>): Int32
-    func DrtDeleteDerivedKeySecurityProvider(pSecurityProvider: CPointer<DRT_SECURITY_PROVIDER>): Unit
-    func DrtDeleteDnsBootstrapResolver(pResolver: CPointer<DRT_BOOTSTRAP_PROVIDER>): Unit
-    func DrtDeleteNullSecurityProvider(pSecurityProvider: CPointer<DRT_SECURITY_PROVIDER>): Unit
-    func DrtDeletePnrpBootstrapResolver(pResolver: CPointer<DRT_BOOTSTRAP_PROVIDER>): Unit
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRT == "on" && Windows_Win32_NetworkManagement_P2P_DrtGetSearchPath == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_DrtGetSearchPath(hSearchContext: CPointer<Unit>, ulSearchPathSize: UInt32, pSearchPath: CPointer<DRT_ADDRESS_LIST>): Int32 {
+    return DrtGetSearchPath(hSearchContext, ulSearchPathSize, pSearchPath)
 }
 
-@When[DRTPROV == "on" && Windows_Win32_Security_Cryptography == "on"]
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRT == "on" && Windows_Win32_NetworkManagement_P2P_DrtGetSearchPathSize == "on"]
+foreign {
+    func DrtGetSearchPathSize(hSearchContext: CPointer<Unit>, pulSearchPathSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRT == "on" && Windows_Win32_NetworkManagement_P2P_DrtGetSearchPathSize == "on"]
+public unsafe func Windows_DrtGetSearchPathSize(hSearchContext: CPointer<Unit>, pulSearchPathSize: CPointer<UInt32>): Int32 {
+    return DrtGetSearchPathSize(hSearchContext, pulSearchPathSize)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRT == "on" && Windows_Win32_NetworkManagement_P2P_DrtGetSearchResult == "on"]
+foreign {
+    // param-hint: pSearchResult bytes=param[1]
+    func DrtGetSearchResult(hSearchContext: CPointer<Unit>, ulSearchResultSize: UInt32, pSearchResult: CPointer<DRT_SEARCH_RESULT>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRT == "on" && Windows_Win32_NetworkManagement_P2P_DrtGetSearchResult == "on"]
+public unsafe func Windows_DrtGetSearchResult(hSearchContext: CPointer<Unit>, ulSearchResultSize: UInt32, pSearchResult: CPointer<DRT_SEARCH_RESULT>): Int32 {
+    return DrtGetSearchResult(hSearchContext, ulSearchResultSize, pSearchResult)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRT == "on" && Windows_Win32_NetworkManagement_P2P_DrtGetSearchResultSize == "on"]
+foreign {
+    func DrtGetSearchResultSize(hSearchContext: CPointer<Unit>, pulSearchResultSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRT == "on" && Windows_Win32_NetworkManagement_P2P_DrtGetSearchResultSize == "on"]
+public unsafe func Windows_DrtGetSearchResultSize(hSearchContext: CPointer<Unit>, pulSearchResultSize: CPointer<UInt32>): Int32 {
+    return DrtGetSearchResultSize(hSearchContext, pulSearchResultSize)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRT == "on" && Windows_Win32_NetworkManagement_P2P_DrtOpen == "on"]
+foreign {
+    // param-hint: hEvent optional
+    // param-hint: pvContext optional
+    func DrtOpen(pSettings: CPointer<DRT_SETTINGS>, hEvent: CPointer<Unit>, pvContext: CPointer<Unit>, phDrt: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRT == "on" && Windows_Win32_NetworkManagement_P2P_DrtOpen == "on"]
+public unsafe func Windows_DrtOpen(pSettings: CPointer<DRT_SETTINGS>, hEvent: CPointer<Unit>, pvContext: CPointer<Unit>, phDrt: CPointer<CPointer<Unit>>): Int32 {
+    return DrtOpen(pSettings, hEvent, pvContext, phDrt)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRT == "on" && Windows_Win32_NetworkManagement_P2P_DrtRegisterKey == "on"]
+foreign {
+    // param-hint: pvKeyContext optional
+    func DrtRegisterKey(hDrt: CPointer<Unit>, pRegistration: CPointer<DRT_REGISTRATION>, pvKeyContext: CPointer<Unit>, phKeyRegistration: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRT == "on" && Windows_Win32_NetworkManagement_P2P_DrtRegisterKey == "on"]
+public unsafe func Windows_DrtRegisterKey(hDrt: CPointer<Unit>, pRegistration: CPointer<DRT_REGISTRATION>, pvKeyContext: CPointer<Unit>, phKeyRegistration: CPointer<CPointer<Unit>>): Int32 {
+    return DrtRegisterKey(hDrt, pRegistration, pvKeyContext, phKeyRegistration)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRT == "on" && Windows_Win32_NetworkManagement_P2P_DrtStartSearch == "on"]
+foreign {
+    // param-hint: pInfo optional
+    // param-hint: pvContext optional
+    func DrtStartSearch(hDrt: CPointer<Unit>, pKey: CPointer<DRT_DATA>, pInfo: CPointer<DRT_SEARCH_INFO>, timeout: UInt32, hEvent: CPointer<Unit>, pvContext: CPointer<Unit>, hSearchContext: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRT == "on" && Windows_Win32_NetworkManagement_P2P_DrtStartSearch == "on"]
+public unsafe func Windows_DrtStartSearch(hDrt: CPointer<Unit>, pKey: CPointer<DRT_DATA>, pInfo: CPointer<DRT_SEARCH_INFO>, timeout: UInt32, hEvent: CPointer<Unit>, pvContext: CPointer<Unit>, hSearchContext: CPointer<CPointer<Unit>>): Int32 {
+    return DrtStartSearch(hDrt, pKey, pInfo, timeout, hEvent, pvContext, hSearchContext)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRT == "on" && Windows_Win32_NetworkManagement_P2P_DrtUnregisterKey == "on"]
+foreign {
+    func DrtUnregisterKey(hKeyRegistration: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRT == "on" && Windows_Win32_NetworkManagement_P2P_DrtUnregisterKey == "on"]
+public unsafe func Windows_DrtUnregisterKey(hKeyRegistration: CPointer<Unit>): Unit {
+    DrtUnregisterKey(hKeyRegistration)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRT == "on" && Windows_Win32_NetworkManagement_P2P_DrtUpdateKey == "on"]
+foreign {
+    func DrtUpdateKey(hKeyRegistration: CPointer<Unit>, pAppData: CPointer<DRT_DATA>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRT == "on" && Windows_Win32_NetworkManagement_P2P_DrtUpdateKey == "on"]
+public unsafe func Windows_DrtUpdateKey(hKeyRegistration: CPointer<Unit>, pAppData: CPointer<DRT_DATA>): Int32 {
+    return DrtUpdateKey(hKeyRegistration, pAppData)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRTPROV == "on" && Windows_Win32_NetworkManagement_P2P_DrtCreateDerivedKey == "on" && Windows_Win32_Security_Cryptography == "on"]
 foreign {
     func DrtCreateDerivedKey(pLocalCert: CPointer<Win32__impl_l2.CERT_CONTEXT>, pKey: CPointer<DRT_DATA>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRTPROV == "on" && Windows_Win32_NetworkManagement_P2P_DrtCreateDerivedKey == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_DrtCreateDerivedKey(pLocalCert: CPointer<Win32__impl_l2.CERT_CONTEXT>, pKey: CPointer<DRT_DATA>): Int32 {
+    return DrtCreateDerivedKey(pLocalCert, pKey)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRTPROV == "on" && Windows_Win32_NetworkManagement_P2P_DrtCreateDerivedKeySecurityProvider == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
     // param-hint: pLocalCert optional
     func DrtCreateDerivedKeySecurityProvider(pRootCert: CPointer<Win32__impl_l2.CERT_CONTEXT>, pLocalCert: CPointer<Win32__impl_l2.CERT_CONTEXT>, ppSecurityProvider: CPointer<CPointer<DRT_SECURITY_PROVIDER>>): Int32
 }
 
-@When[DRTTRANSPORT == "on"]
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRTPROV == "on" && Windows_Win32_NetworkManagement_P2P_DrtCreateDerivedKeySecurityProvider == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_DrtCreateDerivedKeySecurityProvider(pRootCert: CPointer<Win32__impl_l2.CERT_CONTEXT>, pLocalCert: CPointer<Win32__impl_l2.CERT_CONTEXT>, ppSecurityProvider: CPointer<CPointer<DRT_SECURITY_PROVIDER>>): Int32 {
+    return DrtCreateDerivedKeySecurityProvider(pRootCert, pLocalCert, ppSecurityProvider)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRTPROV == "on" && Windows_Win32_NetworkManagement_P2P_DrtCreateDnsBootstrapResolver == "on"]
+foreign {
+    func DrtCreateDnsBootstrapResolver(port: UInt16, pwszAddress: CPointer<UInt16>, ppModule: CPointer<CPointer<DRT_BOOTSTRAP_PROVIDER>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRTPROV == "on" && Windows_Win32_NetworkManagement_P2P_DrtCreateDnsBootstrapResolver == "on"]
+public unsafe func Windows_DrtCreateDnsBootstrapResolver(port: UInt16, pwszAddress: CPointer<UInt16>, ppModule: CPointer<CPointer<DRT_BOOTSTRAP_PROVIDER>>): Int32 {
+    return DrtCreateDnsBootstrapResolver(port, pwszAddress, ppModule)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRTPROV == "on" && Windows_Win32_NetworkManagement_P2P_DrtCreateNullSecurityProvider == "on"]
+foreign {
+    func DrtCreateNullSecurityProvider(ppSecurityProvider: CPointer<CPointer<DRT_SECURITY_PROVIDER>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRTPROV == "on" && Windows_Win32_NetworkManagement_P2P_DrtCreateNullSecurityProvider == "on"]
+public unsafe func Windows_DrtCreateNullSecurityProvider(ppSecurityProvider: CPointer<CPointer<DRT_SECURITY_PROVIDER>>): Int32 {
+    return DrtCreateNullSecurityProvider(ppSecurityProvider)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRTPROV == "on" && Windows_Win32_NetworkManagement_P2P_DrtCreatePnrpBootstrapResolver == "on"]
+foreign {
+    // param-hint: pwzCloudName optional
+    // param-hint: pwzPublishingIdentity optional
+    func DrtCreatePnrpBootstrapResolver(fPublish: Int32, pwzPeerName: CPointer<UInt16>, pwzCloudName: CPointer<UInt16>, pwzPublishingIdentity: CPointer<UInt16>, ppResolver: CPointer<CPointer<DRT_BOOTSTRAP_PROVIDER>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRTPROV == "on" && Windows_Win32_NetworkManagement_P2P_DrtCreatePnrpBootstrapResolver == "on"]
+public unsafe func Windows_DrtCreatePnrpBootstrapResolver(fPublish: Int32, pwzPeerName: CPointer<UInt16>, pwzCloudName: CPointer<UInt16>, pwzPublishingIdentity: CPointer<UInt16>, ppResolver: CPointer<CPointer<DRT_BOOTSTRAP_PROVIDER>>): Int32 {
+    return DrtCreatePnrpBootstrapResolver(fPublish, pwzPeerName, pwzCloudName, pwzPublishingIdentity, ppResolver)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRTPROV == "on" && Windows_Win32_NetworkManagement_P2P_DrtDeleteDerivedKeySecurityProvider == "on"]
+foreign {
+    func DrtDeleteDerivedKeySecurityProvider(pSecurityProvider: CPointer<DRT_SECURITY_PROVIDER>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRTPROV == "on" && Windows_Win32_NetworkManagement_P2P_DrtDeleteDerivedKeySecurityProvider == "on"]
+public unsafe func Windows_DrtDeleteDerivedKeySecurityProvider(pSecurityProvider: CPointer<DRT_SECURITY_PROVIDER>): Unit {
+    DrtDeleteDerivedKeySecurityProvider(pSecurityProvider)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRTPROV == "on" && Windows_Win32_NetworkManagement_P2P_DrtDeleteDnsBootstrapResolver == "on"]
+foreign {
+    func DrtDeleteDnsBootstrapResolver(pResolver: CPointer<DRT_BOOTSTRAP_PROVIDER>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRTPROV == "on" && Windows_Win32_NetworkManagement_P2P_DrtDeleteDnsBootstrapResolver == "on"]
+public unsafe func Windows_DrtDeleteDnsBootstrapResolver(pResolver: CPointer<DRT_BOOTSTRAP_PROVIDER>): Unit {
+    DrtDeleteDnsBootstrapResolver(pResolver)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRTPROV == "on" && Windows_Win32_NetworkManagement_P2P_DrtDeleteNullSecurityProvider == "on"]
+foreign {
+    func DrtDeleteNullSecurityProvider(pSecurityProvider: CPointer<DRT_SECURITY_PROVIDER>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRTPROV == "on" && Windows_Win32_NetworkManagement_P2P_DrtDeleteNullSecurityProvider == "on"]
+public unsafe func Windows_DrtDeleteNullSecurityProvider(pSecurityProvider: CPointer<DRT_SECURITY_PROVIDER>): Unit {
+    DrtDeleteNullSecurityProvider(pSecurityProvider)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRTPROV == "on" && Windows_Win32_NetworkManagement_P2P_DrtDeletePnrpBootstrapResolver == "on"]
+foreign {
+    func DrtDeletePnrpBootstrapResolver(pResolver: CPointer<DRT_BOOTSTRAP_PROVIDER>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRTPROV == "on" && Windows_Win32_NetworkManagement_P2P_DrtDeletePnrpBootstrapResolver == "on"]
+public unsafe func Windows_DrtDeletePnrpBootstrapResolver(pResolver: CPointer<DRT_BOOTSTRAP_PROVIDER>): Unit {
+    DrtDeletePnrpBootstrapResolver(pResolver)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRTTRANSPORT == "on" && Windows_Win32_NetworkManagement_P2P_DrtCreateIpv6UdpTransport == "on"]
 foreign {
     func DrtCreateIpv6UdpTransport(scope: Int32, dwScopeId: UInt32, dwLocalityThreshold: UInt32, pwPort: CPointer<UInt16>, phTransport: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRTTRANSPORT == "on" && Windows_Win32_NetworkManagement_P2P_DrtCreateIpv6UdpTransport == "on"]
+public unsafe func Windows_DrtCreateIpv6UdpTransport(scope: Int32, dwScopeId: UInt32, dwLocalityThreshold: UInt32, pwPort: CPointer<UInt16>, phTransport: CPointer<CPointer<Unit>>): Int32 {
+    return DrtCreateIpv6UdpTransport(scope, dwScopeId, dwLocalityThreshold, pwPort, phTransport)
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRTTRANSPORT == "on" && Windows_Win32_NetworkManagement_P2P_DrtDeleteIpv6UdpTransport == "on"]
+foreign {
     func DrtDeleteIpv6UdpTransport(hTransport: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && DRTTRANSPORT == "on" && Windows_Win32_NetworkManagement_P2P_DrtDeleteIpv6UdpTransport == "on"]
+public unsafe func Windows_DrtDeleteIpv6UdpTransport(hTransport: CPointer<Unit>): Int32 {
+    return DrtDeleteIpv6UdpTransport(hTransport)
 }
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]

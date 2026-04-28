@@ -10,9 +10,7 @@ import windows_interface.{GUID}
 import windows_interface as windows_interface
 import windows_polyfill.{unionReadInt32, unionReadUInt16, unionReadUInt32, unionReadUInt64, unionReadUInt8, unionWriteInt32, unionWriteUInt16, unionWriteUInt32, unionWriteUInt64, unionWriteUInt8}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_System_HostComputeSystem == "on"]
 import windows.Win32.System.HostComputeSystem as Win32_System_HostComputeSystem
 import windows.Win32._impl_l0 as Win32__impl_l0
 
@@ -13216,208 +13214,1318 @@ extend WHV_EMULATOR_CALLBACKS <: windows_core.CopyType & windows_core.RuntimeTyp
     }
 }
 
-@When[VMSAVEDSTATEDUMPPROVIDER == "on"]
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_ApplyGuestMemoryFix == "on"]
 foreign {
     func ApplyGuestMemoryFix(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, virtualAddress: UInt64, fixBuffer: CPointer<Unit>, fixBufferSize: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_ApplyGuestMemoryFix == "on"]
+public unsafe func Windows_ApplyGuestMemoryFix(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, virtualAddress: UInt64, fixBuffer: CPointer<Unit>, fixBufferSize: UInt32): Int32 {
+    return ApplyGuestMemoryFix(vmSavedStateDumpHandle, vpId, virtualAddress, fixBuffer, fixBufferSize)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_ApplyPendingSavedStateFileReplayLog == "on"]
+foreign {
     func ApplyPendingSavedStateFileReplayLog(vmrsFile: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_ApplyPendingSavedStateFileReplayLog == "on"]
+public unsafe func Windows_ApplyPendingSavedStateFileReplayLog(vmrsFile: CPointer<UInt16>): Int32 {
+    return ApplyPendingSavedStateFileReplayLog(vmrsFile)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_CallStackUnwind == "on"]
+foreign {
     func CallStackUnwind(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, imageInfo: CPointer<MODULE_INFOAbi>, imageInfoCount: UInt32, frameCount: UInt32, callStack: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_CallStackUnwind == "on"]
+public unsafe func Windows_CallStackUnwind(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, imageInfo: CPointer<MODULE_INFOAbi>, imageInfoCount: UInt32, frameCount: UInt32, callStack: CPointer<CPointer<UInt16>>): Int32 {
+    return CallStackUnwind(vmSavedStateDumpHandle, vpId, imageInfo, imageInfoCount, frameCount, callStack)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_FindSavedStateSymbolFieldInType == "on"]
+foreign {
     func FindSavedStateSymbolFieldInType(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, typeName: CPointer<UInt8>, fieldName: CPointer<UInt16>, offset: CPointer<UInt32>, found: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_FindSavedStateSymbolFieldInType == "on"]
+public unsafe func Windows_FindSavedStateSymbolFieldInType(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, typeName: CPointer<UInt8>, fieldName: CPointer<UInt16>, offset: CPointer<UInt32>, found: CPointer<Int32>): Int32 {
+    return FindSavedStateSymbolFieldInType(vmSavedStateDumpHandle, vpId, typeName, fieldName, offset, found)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_ForceActiveVirtualTrustLevel == "on"]
+foreign {
     func ForceActiveVirtualTrustLevel(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, virtualTrustLevel: UInt8): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_ForceActiveVirtualTrustLevel == "on"]
+public unsafe func Windows_ForceActiveVirtualTrustLevel(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, virtualTrustLevel: UInt8): Int32 {
+    return ForceActiveVirtualTrustLevel(vmSavedStateDumpHandle, vpId, virtualTrustLevel)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_ForceArchitecture == "on"]
+foreign {
     func ForceArchitecture(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, architecture: VIRTUAL_PROCESSOR_ARCHAbi): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_ForceArchitecture == "on"]
+public unsafe func Windows_ForceArchitecture(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, architecture: VIRTUAL_PROCESSOR_ARCHAbi): Int32 {
+    return ForceArchitecture(vmSavedStateDumpHandle, vpId, architecture)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_ForceNestedHostMode == "on"]
+foreign {
     // param-hint: oldMode optional
     func ForceNestedHostMode(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, hostMode: Int32, oldMode: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_ForceNestedHostMode == "on"]
+public unsafe func Windows_ForceNestedHostMode(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, hostMode: Int32, oldMode: CPointer<Int32>): Int32 {
+    return ForceNestedHostMode(vmSavedStateDumpHandle, vpId, hostMode, oldMode)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_ForcePagingMode == "on"]
+foreign {
     func ForcePagingMode(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, pagingMode: PAGING_MODEAbi): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_ForcePagingMode == "on"]
+public unsafe func Windows_ForcePagingMode(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, pagingMode: PAGING_MODEAbi): Int32 {
+    return ForcePagingMode(vmSavedStateDumpHandle, vpId, pagingMode)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GetActiveVirtualTrustLevel == "on"]
+foreign {
     func GetActiveVirtualTrustLevel(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, virtualTrustLevel: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GetActiveVirtualTrustLevel == "on"]
+public unsafe func Windows_GetActiveVirtualTrustLevel(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, virtualTrustLevel: CPointer<UInt8>): Int32 {
+    return GetActiveVirtualTrustLevel(vmSavedStateDumpHandle, vpId, virtualTrustLevel)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GetArchitecture == "on"]
+foreign {
     func GetArchitecture(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, architecture: CPointer<VIRTUAL_PROCESSOR_ARCHAbi>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GetArchitecture == "on"]
+public unsafe func Windows_GetArchitecture(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, architecture: CPointer<VIRTUAL_PROCESSOR_ARCHAbi>): Int32 {
+    return GetArchitecture(vmSavedStateDumpHandle, vpId, architecture)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GetEnabledVirtualTrustLevels == "on"]
+foreign {
     func GetEnabledVirtualTrustLevels(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, virtualTrustLevels: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GetEnabledVirtualTrustLevels == "on"]
+public unsafe func Windows_GetEnabledVirtualTrustLevels(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, virtualTrustLevels: CPointer<UInt32>): Int32 {
+    return GetEnabledVirtualTrustLevels(vmSavedStateDumpHandle, vpId, virtualTrustLevels)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GetGuestEnabledVirtualTrustLevels == "on"]
+foreign {
     func GetGuestEnabledVirtualTrustLevels(vmSavedStateDumpHandle: CPointer<Unit>, virtualTrustLevels: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GetGuestEnabledVirtualTrustLevels == "on"]
+public unsafe func Windows_GetGuestEnabledVirtualTrustLevels(vmSavedStateDumpHandle: CPointer<Unit>, virtualTrustLevels: CPointer<UInt32>): Int32 {
+    return GetGuestEnabledVirtualTrustLevels(vmSavedStateDumpHandle, virtualTrustLevels)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GetGuestOsInfo == "on"]
+foreign {
     func GetGuestOsInfo(vmSavedStateDumpHandle: CPointer<Unit>, virtualTrustLevel: UInt8, guestOsInfo: CPointer<GUEST_OS_INFO>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GetGuestOsInfo == "on"]
+public unsafe func Windows_GetGuestOsInfo(vmSavedStateDumpHandle: CPointer<Unit>, virtualTrustLevel: UInt8, guestOsInfo: CPointer<GUEST_OS_INFO>): Int32 {
+    return GetGuestOsInfo(vmSavedStateDumpHandle, virtualTrustLevel, guestOsInfo)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GetGuestPhysicalMemoryChunks == "on"]
+foreign {
     func GetGuestPhysicalMemoryChunks(vmSavedStateDumpHandle: CPointer<Unit>, memoryChunkPageSize: CPointer<UInt64>, memoryChunks: CPointer<GPA_MEMORY_CHUNKAbi>, memoryChunkCount: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GetGuestPhysicalMemoryChunks == "on"]
+public unsafe func Windows_GetGuestPhysicalMemoryChunks(vmSavedStateDumpHandle: CPointer<Unit>, memoryChunkPageSize: CPointer<UInt64>, memoryChunks: CPointer<GPA_MEMORY_CHUNKAbi>, memoryChunkCount: CPointer<UInt64>): Int32 {
+    return GetGuestPhysicalMemoryChunks(vmSavedStateDumpHandle, memoryChunkPageSize, memoryChunks, memoryChunkCount)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GetGuestRawSavedMemorySize == "on"]
+foreign {
     func GetGuestRawSavedMemorySize(vmSavedStateDumpHandle: CPointer<Unit>, guestRawSavedMemorySize: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GetGuestRawSavedMemorySize == "on"]
+public unsafe func Windows_GetGuestRawSavedMemorySize(vmSavedStateDumpHandle: CPointer<Unit>, guestRawSavedMemorySize: CPointer<UInt64>): Int32 {
+    return GetGuestRawSavedMemorySize(vmSavedStateDumpHandle, guestRawSavedMemorySize)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GetMemoryBlockCacheLimit == "on"]
+foreign {
     func GetMemoryBlockCacheLimit(vmSavedStateDumpHandle: CPointer<Unit>, memoryBlockCacheLimit: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GetMemoryBlockCacheLimit == "on"]
+public unsafe func Windows_GetMemoryBlockCacheLimit(vmSavedStateDumpHandle: CPointer<Unit>, memoryBlockCacheLimit: CPointer<UInt64>): Int32 {
+    return GetMemoryBlockCacheLimit(vmSavedStateDumpHandle, memoryBlockCacheLimit)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GetNestedVirtualizationMode == "on"]
+foreign {
     func GetNestedVirtualizationMode(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, enabled: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GetNestedVirtualizationMode == "on"]
+public unsafe func Windows_GetNestedVirtualizationMode(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, enabled: CPointer<Int32>): Int32 {
+    return GetNestedVirtualizationMode(vmSavedStateDumpHandle, vpId, enabled)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GetPagingMode == "on"]
+foreign {
     func GetPagingMode(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, pagingMode: CPointer<PAGING_MODEAbi>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GetPagingMode == "on"]
+public unsafe func Windows_GetPagingMode(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, pagingMode: CPointer<PAGING_MODEAbi>): Int32 {
+    return GetPagingMode(vmSavedStateDumpHandle, vpId, pagingMode)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GetRegisterValue == "on"]
+foreign {
     func GetRegisterValue(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, registerId: UInt32, registerValue: CPointer<VIRTUAL_PROCESSOR_REGISTER>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GetRegisterValue == "on"]
+public unsafe func Windows_GetRegisterValue(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, registerId: UInt32, registerValue: CPointer<VIRTUAL_PROCESSOR_REGISTER>): Int32 {
+    return GetRegisterValue(vmSavedStateDumpHandle, vpId, registerId, registerValue)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GetSavedStateSymbolFieldInfo == "on"]
+foreign {
     func GetSavedStateSymbolFieldInfo(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, typeName: CPointer<UInt8>, typeFieldInfoMap: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GetSavedStateSymbolFieldInfo == "on"]
+public unsafe func Windows_GetSavedStateSymbolFieldInfo(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, typeName: CPointer<UInt8>, typeFieldInfoMap: CPointer<CPointer<UInt16>>): Int32 {
+    return GetSavedStateSymbolFieldInfo(vmSavedStateDumpHandle, vpId, typeName, typeFieldInfoMap)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GetSavedStateSymbolProviderHandle == "on"]
+foreign {
     func GetSavedStateSymbolProviderHandle(vmSavedStateDumpHandle: CPointer<Unit>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GetSavedStateSymbolProviderHandle == "on"]
+public unsafe func Windows_GetSavedStateSymbolProviderHandle(vmSavedStateDumpHandle: CPointer<Unit>): CPointer<Unit> {
+    return GetSavedStateSymbolProviderHandle(vmSavedStateDumpHandle)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GetSavedStateSymbolTypeSize == "on"]
+foreign {
     func GetSavedStateSymbolTypeSize(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, typeName: CPointer<UInt8>, size: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GetSavedStateSymbolTypeSize == "on"]
+public unsafe func Windows_GetSavedStateSymbolTypeSize(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, typeName: CPointer<UInt8>, size: CPointer<UInt32>): Int32 {
+    return GetSavedStateSymbolTypeSize(vmSavedStateDumpHandle, vpId, typeName, size)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GetVpCount == "on"]
+foreign {
     func GetVpCount(vmSavedStateDumpHandle: CPointer<Unit>, vpCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GetVpCount == "on"]
+public unsafe func Windows_GetVpCount(vmSavedStateDumpHandle: CPointer<Unit>, vpCount: CPointer<UInt32>): Int32 {
+    return GetVpCount(vmSavedStateDumpHandle, vpCount)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GuestPhysicalAddressToRawSavedMemoryOffset == "on"]
+foreign {
     func GuestPhysicalAddressToRawSavedMemoryOffset(vmSavedStateDumpHandle: CPointer<Unit>, physicalAddress: UInt64, rawSavedMemoryOffset: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GuestPhysicalAddressToRawSavedMemoryOffset == "on"]
+public unsafe func Windows_GuestPhysicalAddressToRawSavedMemoryOffset(vmSavedStateDumpHandle: CPointer<Unit>, physicalAddress: UInt64, rawSavedMemoryOffset: CPointer<UInt64>): Int32 {
+    return GuestPhysicalAddressToRawSavedMemoryOffset(vmSavedStateDumpHandle, physicalAddress, rawSavedMemoryOffset)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GuestVirtualAddressToPhysicalAddress == "on"]
+foreign {
     // param-hint: unmappedRegionSize optional
     func GuestVirtualAddressToPhysicalAddress(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, virtualAddress: UInt64, physicalAddress: CPointer<UInt64>, unmappedRegionSize: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_GuestVirtualAddressToPhysicalAddress == "on"]
+public unsafe func Windows_GuestVirtualAddressToPhysicalAddress(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, virtualAddress: UInt64, physicalAddress: CPointer<UInt64>, unmappedRegionSize: CPointer<UInt64>): Int32 {
+    return GuestVirtualAddressToPhysicalAddress(vmSavedStateDumpHandle, vpId, virtualAddress, physicalAddress, unmappedRegionSize)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_InKernelSpace == "on"]
+foreign {
     func InKernelSpace(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, inKernelSpace: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_InKernelSpace == "on"]
+public unsafe func Windows_InKernelSpace(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, inKernelSpace: CPointer<Int32>): Int32 {
+    return InKernelSpace(vmSavedStateDumpHandle, vpId, inKernelSpace)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_IsActiveVirtualTrustLevelEnabled == "on"]
+foreign {
     func IsActiveVirtualTrustLevelEnabled(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, activeVirtualTrustLevelEnabled: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_IsActiveVirtualTrustLevelEnabled == "on"]
+public unsafe func Windows_IsActiveVirtualTrustLevelEnabled(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, activeVirtualTrustLevelEnabled: CPointer<Int32>): Int32 {
+    return IsActiveVirtualTrustLevelEnabled(vmSavedStateDumpHandle, vpId, activeVirtualTrustLevelEnabled)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_IsNestedVirtualizationEnabled == "on"]
+foreign {
     func IsNestedVirtualizationEnabled(vmSavedStateDumpHandle: CPointer<Unit>, enabled: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_IsNestedVirtualizationEnabled == "on"]
+public unsafe func Windows_IsNestedVirtualizationEnabled(vmSavedStateDumpHandle: CPointer<Unit>, enabled: CPointer<Int32>): Int32 {
+    return IsNestedVirtualizationEnabled(vmSavedStateDumpHandle, enabled)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_LoadSavedStateFile == "on"]
+foreign {
     func LoadSavedStateFile(vmrsFile: CPointer<UInt16>, vmSavedStateDumpHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_LoadSavedStateFile == "on"]
+public unsafe func Windows_LoadSavedStateFile(vmrsFile: CPointer<UInt16>, vmSavedStateDumpHandle: CPointer<CPointer<Unit>>): Int32 {
+    return LoadSavedStateFile(vmrsFile, vmSavedStateDumpHandle)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_LoadSavedStateFiles == "on"]
+foreign {
     func LoadSavedStateFiles(binFile: CPointer<UInt16>, vsvFile: CPointer<UInt16>, vmSavedStateDumpHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_LoadSavedStateFiles == "on"]
+public unsafe func Windows_LoadSavedStateFiles(binFile: CPointer<UInt16>, vsvFile: CPointer<UInt16>, vmSavedStateDumpHandle: CPointer<CPointer<Unit>>): Int32 {
+    return LoadSavedStateFiles(binFile, vsvFile, vmSavedStateDumpHandle)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_LoadSavedStateModuleSymbols == "on"]
+foreign {
     func LoadSavedStateModuleSymbols(vmSavedStateDumpHandle: CPointer<Unit>, imageName: CPointer<UInt8>, moduleName: CPointer<UInt8>, baseAddress: UInt64, sizeOfBase: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_LoadSavedStateModuleSymbols == "on"]
+public unsafe func Windows_LoadSavedStateModuleSymbols(vmSavedStateDumpHandle: CPointer<Unit>, imageName: CPointer<UInt8>, moduleName: CPointer<UInt8>, baseAddress: UInt64, sizeOfBase: UInt32): Int32 {
+    return LoadSavedStateModuleSymbols(vmSavedStateDumpHandle, imageName, moduleName, baseAddress, sizeOfBase)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_LoadSavedStateModuleSymbolsEx == "on"]
+foreign {
     func LoadSavedStateModuleSymbolsEx(vmSavedStateDumpHandle: CPointer<Unit>, imageName: CPointer<UInt8>, imageTimestamp: UInt32, moduleName: CPointer<UInt8>, baseAddress: UInt64, sizeOfBase: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_LoadSavedStateModuleSymbolsEx == "on"]
+public unsafe func Windows_LoadSavedStateModuleSymbolsEx(vmSavedStateDumpHandle: CPointer<Unit>, imageName: CPointer<UInt8>, imageTimestamp: UInt32, moduleName: CPointer<UInt8>, baseAddress: UInt64, sizeOfBase: UInt32): Int32 {
+    return LoadSavedStateModuleSymbolsEx(vmSavedStateDumpHandle, imageName, imageTimestamp, moduleName, baseAddress, sizeOfBase)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_LoadSavedStateSymbolProvider == "on"]
+foreign {
     // param-hint: userSymbols optional
     func LoadSavedStateSymbolProvider(vmSavedStateDumpHandle: CPointer<Unit>, userSymbols: CPointer<UInt16>, force: Int32): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_LoadSavedStateSymbolProvider == "on"]
+public unsafe func Windows_LoadSavedStateSymbolProvider(vmSavedStateDumpHandle: CPointer<Unit>, userSymbols: CPointer<UInt16>, force: Int32): Int32 {
+    return LoadSavedStateSymbolProvider(vmSavedStateDumpHandle, userSymbols, force)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_LocateSavedStateFiles == "on"]
+foreign {
     // param-hint: snapshotName optional
     func LocateSavedStateFiles(vmName: CPointer<UInt16>, snapshotName: CPointer<UInt16>, binPath: CPointer<CPointer<UInt16>>, vsvPath: CPointer<CPointer<UInt16>>, vmrsPath: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_LocateSavedStateFiles == "on"]
+public unsafe func Windows_LocateSavedStateFiles(vmName: CPointer<UInt16>, snapshotName: CPointer<UInt16>, binPath: CPointer<CPointer<UInt16>>, vsvPath: CPointer<CPointer<UInt16>>, vmrsPath: CPointer<CPointer<UInt16>>): Int32 {
+    return LocateSavedStateFiles(vmName, snapshotName, binPath, vsvPath, vmrsPath)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_ReadGuestPhysicalAddress == "on"]
+foreign {
     // param-hint: buffer bytes=param[3]
     // param-hint: bytesRead optional
     func ReadGuestPhysicalAddress(vmSavedStateDumpHandle: CPointer<Unit>, physicalAddress: UInt64, buffer: CPointer<Unit>, bufferSize: UInt32, bytesRead: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_ReadGuestPhysicalAddress == "on"]
+public unsafe func Windows_ReadGuestPhysicalAddress(vmSavedStateDumpHandle: CPointer<Unit>, physicalAddress: UInt64, buffer: CPointer<Unit>, bufferSize: UInt32, bytesRead: CPointer<UInt32>): Int32 {
+    return ReadGuestPhysicalAddress(vmSavedStateDumpHandle, physicalAddress, buffer, bufferSize, bytesRead)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_ReadGuestRawSavedMemory == "on"]
+foreign {
     // param-hint: buffer bytes=param[3]
     // param-hint: bytesRead optional
     func ReadGuestRawSavedMemory(vmSavedStateDumpHandle: CPointer<Unit>, rawSavedMemoryOffset: UInt64, buffer: CPointer<Unit>, bufferSize: UInt32, bytesRead: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_ReadGuestRawSavedMemory == "on"]
+public unsafe func Windows_ReadGuestRawSavedMemory(vmSavedStateDumpHandle: CPointer<Unit>, rawSavedMemoryOffset: UInt64, buffer: CPointer<Unit>, bufferSize: UInt32, bytesRead: CPointer<UInt32>): Int32 {
+    return ReadGuestRawSavedMemory(vmSavedStateDumpHandle, rawSavedMemoryOffset, buffer, bufferSize, bytesRead)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_ReadSavedStateGlobalVariable == "on"]
+foreign {
     func ReadSavedStateGlobalVariable(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, globalName: CPointer<UInt8>, buffer: CPointer<Unit>, bufferSize: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_ReadSavedStateGlobalVariable == "on"]
+public unsafe func Windows_ReadSavedStateGlobalVariable(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, globalName: CPointer<UInt8>, buffer: CPointer<Unit>, bufferSize: UInt32): Int32 {
+    return ReadSavedStateGlobalVariable(vmSavedStateDumpHandle, vpId, globalName, buffer, bufferSize)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_ReleaseSavedStateFiles == "on"]
+foreign {
     func ReleaseSavedStateFiles(vmSavedStateDumpHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_ReleaseSavedStateFiles == "on"]
+public unsafe func Windows_ReleaseSavedStateFiles(vmSavedStateDumpHandle: CPointer<Unit>): Int32 {
+    return ReleaseSavedStateFiles(vmSavedStateDumpHandle)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_ReleaseSavedStateSymbolProvider == "on"]
+foreign {
     func ReleaseSavedStateSymbolProvider(vmSavedStateDumpHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_ReleaseSavedStateSymbolProvider == "on"]
+public unsafe func Windows_ReleaseSavedStateSymbolProvider(vmSavedStateDumpHandle: CPointer<Unit>): Int32 {
+    return ReleaseSavedStateSymbolProvider(vmSavedStateDumpHandle)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_ResolveSavedStateGlobalVariableAddress == "on"]
+foreign {
     // param-hint: size optional
     func ResolveSavedStateGlobalVariableAddress(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, globalName: CPointer<UInt8>, virtualAddress: CPointer<UInt64>, size: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_ResolveSavedStateGlobalVariableAddress == "on"]
+public unsafe func Windows_ResolveSavedStateGlobalVariableAddress(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, globalName: CPointer<UInt8>, virtualAddress: CPointer<UInt64>, size: CPointer<UInt32>): Int32 {
+    return ResolveSavedStateGlobalVariableAddress(vmSavedStateDumpHandle, vpId, globalName, virtualAddress, size)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_ScanMemoryForDosImages == "on"]
+foreign {
     func ScanMemoryForDosImages(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, startAddress: UInt64, endAddress: UInt64, callbackContext: CPointer<Unit>, foundImageCallback: FOUND_IMAGE_CALLBACK, standaloneAddress: CPointer<UInt64>, standaloneAddressCount: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_ScanMemoryForDosImages == "on"]
+public unsafe func Windows_ScanMemoryForDosImages(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, startAddress: UInt64, endAddress: UInt64, callbackContext: CPointer<Unit>, foundImageCallback: FOUND_IMAGE_CALLBACK, standaloneAddress: CPointer<UInt64>, standaloneAddressCount: UInt32): Int32 {
+    return ScanMemoryForDosImages(vmSavedStateDumpHandle, vpId, startAddress, endAddress, callbackContext, foundImageCallback, standaloneAddress, standaloneAddressCount)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_SetMemoryBlockCacheLimit == "on"]
+foreign {
     func SetMemoryBlockCacheLimit(vmSavedStateDumpHandle: CPointer<Unit>, memoryBlockCacheLimit: UInt64): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_SetMemoryBlockCacheLimit == "on"]
+public unsafe func Windows_SetMemoryBlockCacheLimit(vmSavedStateDumpHandle: CPointer<Unit>, memoryBlockCacheLimit: UInt64): Int32 {
+    return SetMemoryBlockCacheLimit(vmSavedStateDumpHandle, memoryBlockCacheLimit)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_SetSavedStateSymbolProviderDebugInfoCallback == "on"]
+foreign {
     func SetSavedStateSymbolProviderDebugInfoCallback(vmSavedStateDumpHandle: CPointer<Unit>, Callback: GUEST_SYMBOLS_PROVIDER_DEBUG_INFO_CALLBACK): Int32
 }
 
-@When[WINHVEMULATION == "on"]
+@When[Windows_Win32_System_Hypervisor == "on" && VMSAVEDSTATEDUMPPROVIDER == "on" && Windows_Win32_System_Hypervisor_SetSavedStateSymbolProviderDebugInfoCallback == "on"]
+public unsafe func Windows_SetSavedStateSymbolProviderDebugInfoCallback(vmSavedStateDumpHandle: CPointer<Unit>, Callback: GUEST_SYMBOLS_PROVIDER_DEBUG_INFO_CALLBACK): Int32 {
+    return SetSavedStateSymbolProviderDebugInfoCallback(vmSavedStateDumpHandle, Callback)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVEMULATION == "on" && Windows_Win32_System_Hypervisor_WHvEmulatorCreateEmulator == "on"]
 foreign {
     func WHvEmulatorCreateEmulator(Callbacks: CPointer<WHV_EMULATOR_CALLBACKSAbi>, Emulator: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVEMULATION == "on" && Windows_Win32_System_Hypervisor_WHvEmulatorCreateEmulator == "on"]
+public unsafe func Windows_WHvEmulatorCreateEmulator(Callbacks: CPointer<WHV_EMULATOR_CALLBACKSAbi>, Emulator: CPointer<CPointer<Unit>>): Int32 {
+    return WHvEmulatorCreateEmulator(Callbacks, Emulator)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVEMULATION == "on" && Windows_Win32_System_Hypervisor_WHvEmulatorDestroyEmulator == "on"]
+foreign {
     func WHvEmulatorDestroyEmulator(Emulator: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVEMULATION == "on" && Windows_Win32_System_Hypervisor_WHvEmulatorDestroyEmulator == "on"]
+public unsafe func Windows_WHvEmulatorDestroyEmulator(Emulator: CPointer<Unit>): Int32 {
+    return WHvEmulatorDestroyEmulator(Emulator)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVEMULATION == "on" && Windows_Win32_System_Hypervisor_WHvEmulatorTryIoEmulation == "on"]
+foreign {
     func WHvEmulatorTryIoEmulation(Emulator: CPointer<Unit>, Context: CPointer<Unit>, VpContext: CPointer<WHV_VP_EXIT_CONTEXTAbi>, IoInstructionContext: CPointer<WHV_X64_IO_PORT_ACCESS_CONTEXTAbi>, EmulatorReturnStatus: CPointer<WHV_EMULATOR_STATUS>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVEMULATION == "on" && Windows_Win32_System_Hypervisor_WHvEmulatorTryIoEmulation == "on"]
+public unsafe func Windows_WHvEmulatorTryIoEmulation(Emulator: CPointer<Unit>, Context: CPointer<Unit>, VpContext: CPointer<WHV_VP_EXIT_CONTEXTAbi>, IoInstructionContext: CPointer<WHV_X64_IO_PORT_ACCESS_CONTEXTAbi>, EmulatorReturnStatus: CPointer<WHV_EMULATOR_STATUS>): Int32 {
+    return WHvEmulatorTryIoEmulation(Emulator, Context, VpContext, IoInstructionContext, EmulatorReturnStatus)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVEMULATION == "on" && Windows_Win32_System_Hypervisor_WHvEmulatorTryMmioEmulation == "on"]
+foreign {
     func WHvEmulatorTryMmioEmulation(Emulator: CPointer<Unit>, Context: CPointer<Unit>, VpContext: CPointer<WHV_VP_EXIT_CONTEXTAbi>, MmioInstructionContext: CPointer<WHV_MEMORY_ACCESS_CONTEXTAbi>, EmulatorReturnStatus: CPointer<WHV_EMULATOR_STATUS>): Int32
 }
 
-@When[WINHVPLATFORM == "on"]
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVEMULATION == "on" && Windows_Win32_System_Hypervisor_WHvEmulatorTryMmioEmulation == "on"]
+public unsafe func Windows_WHvEmulatorTryMmioEmulation(Emulator: CPointer<Unit>, Context: CPointer<Unit>, VpContext: CPointer<WHV_VP_EXIT_CONTEXTAbi>, MmioInstructionContext: CPointer<WHV_MEMORY_ACCESS_CONTEXTAbi>, EmulatorReturnStatus: CPointer<WHV_EMULATOR_STATUS>): Int32 {
+    return WHvEmulatorTryMmioEmulation(Emulator, Context, VpContext, MmioInstructionContext, EmulatorReturnStatus)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvAcceptPartitionMigration == "on"]
 foreign {
     func WHvAcceptPartitionMigration(MigrationHandle: CPointer<Unit>, Partition: CPointer<WHV_PARTITION_HANDLE>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvAcceptPartitionMigration == "on"]
+public unsafe func Windows_WHvAcceptPartitionMigration(MigrationHandle: CPointer<Unit>, Partition: CPointer<WHV_PARTITION_HANDLE>): Int32 {
+    return WHvAcceptPartitionMigration(MigrationHandle, Partition)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvAdviseGpaRange == "on"]
+foreign {
     // param-hint: GpaRanges len=param[2]
     // param-hint: AdviceBuffer bytes=param[5]
     func WHvAdviseGpaRange(Partition: WHV_PARTITION_HANDLE, GpaRanges: CPointer<WHV_MEMORY_RANGE_ENTRYAbi>, GpaRangesCount: UInt32, Advice: WHV_ADVISE_GPA_RANGE_CODEAbi, AdviceBuffer: CPointer<Unit>, AdviceBufferSizeInBytes: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvAdviseGpaRange == "on"]
+public unsafe func Windows_WHvAdviseGpaRange(Partition: WHV_PARTITION_HANDLE, GpaRanges: CPointer<WHV_MEMORY_RANGE_ENTRYAbi>, GpaRangesCount: UInt32, Advice: WHV_ADVISE_GPA_RANGE_CODEAbi, AdviceBuffer: CPointer<Unit>, AdviceBufferSizeInBytes: UInt32): Int32 {
+    return WHvAdviseGpaRange(Partition, GpaRanges, GpaRangesCount, Advice, AdviceBuffer, AdviceBufferSizeInBytes)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvAllocateVpciResource == "on"]
+foreign {
     // param-hint: ProviderId optional
     // param-hint: ResourceDescriptor len=param[3] optional
     func WHvAllocateVpciResource(ProviderId: CPointer<GUID>, Flags: WHV_ALLOCATE_VPCI_RESOURCE_FLAGSAbi, ResourceDescriptor: CPointer<Unit>, ResourceDescriptorSizeInBytes: UInt32, VpciResource: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvAllocateVpciResource == "on"]
+public unsafe func Windows_WHvAllocateVpciResource(ProviderId: CPointer<GUID>, Flags: WHV_ALLOCATE_VPCI_RESOURCE_FLAGSAbi, ResourceDescriptor: CPointer<Unit>, ResourceDescriptorSizeInBytes: UInt32, VpciResource: CPointer<CPointer<Unit>>): Int32 {
+    return WHvAllocateVpciResource(ProviderId, Flags, ResourceDescriptor, ResourceDescriptorSizeInBytes, VpciResource)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvCancelPartitionMigration == "on"]
+foreign {
     func WHvCancelPartitionMigration(Partition: WHV_PARTITION_HANDLE): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvCancelPartitionMigration == "on"]
+public unsafe func Windows_WHvCancelPartitionMigration(Partition: WHV_PARTITION_HANDLE): Int32 {
+    return WHvCancelPartitionMigration(Partition)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvCancelRunVirtualProcessor == "on"]
+foreign {
     func WHvCancelRunVirtualProcessor(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvCancelRunVirtualProcessor == "on"]
+public unsafe func Windows_WHvCancelRunVirtualProcessor(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, Flags: UInt32): Int32 {
+    return WHvCancelRunVirtualProcessor(Partition, VpIndex, Flags)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvCompletePartitionMigration == "on"]
+foreign {
     func WHvCompletePartitionMigration(Partition: WHV_PARTITION_HANDLE): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvCompletePartitionMigration == "on"]
+public unsafe func Windows_WHvCompletePartitionMigration(Partition: WHV_PARTITION_HANDLE): Int32 {
+    return WHvCompletePartitionMigration(Partition)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvCreateNotificationPort == "on"]
+foreign {
     func WHvCreateNotificationPort(Partition: WHV_PARTITION_HANDLE, Parameters: CPointer<WHV_NOTIFICATION_PORT_PARAMETERSAbi>, EventHandle: CPointer<Unit>, PortHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvCreateNotificationPort == "on"]
+public unsafe func Windows_WHvCreateNotificationPort(Partition: WHV_PARTITION_HANDLE, Parameters: CPointer<WHV_NOTIFICATION_PORT_PARAMETERSAbi>, EventHandle: CPointer<Unit>, PortHandle: CPointer<CPointer<Unit>>): Int32 {
+    return WHvCreateNotificationPort(Partition, Parameters, EventHandle, PortHandle)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvCreatePartition == "on"]
+foreign {
     func WHvCreatePartition(Partition: CPointer<WHV_PARTITION_HANDLE>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvCreatePartition == "on"]
+public unsafe func Windows_WHvCreatePartition(Partition: CPointer<WHV_PARTITION_HANDLE>): Int32 {
+    return WHvCreatePartition(Partition)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvCreateTrigger == "on"]
+foreign {
     func WHvCreateTrigger(Partition: WHV_PARTITION_HANDLE, Parameters: CPointer<WHV_TRIGGER_PARAMETERSAbi>, TriggerHandle: CPointer<CPointer<Unit>>, EventHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvCreateTrigger == "on"]
+public unsafe func Windows_WHvCreateTrigger(Partition: WHV_PARTITION_HANDLE, Parameters: CPointer<WHV_TRIGGER_PARAMETERSAbi>, TriggerHandle: CPointer<CPointer<Unit>>, EventHandle: CPointer<CPointer<Unit>>): Int32 {
+    return WHvCreateTrigger(Partition, Parameters, TriggerHandle, EventHandle)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvCreateVirtualProcessor == "on"]
+foreign {
     func WHvCreateVirtualProcessor(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvCreateVirtualProcessor == "on"]
+public unsafe func Windows_WHvCreateVirtualProcessor(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, Flags: UInt32): Int32 {
+    return WHvCreateVirtualProcessor(Partition, VpIndex, Flags)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvCreateVirtualProcessor2 == "on"]
+foreign {
     // param-hint: Properties len=param[3]
     func WHvCreateVirtualProcessor2(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, Properties: CPointer<WHV_VIRTUAL_PROCESSOR_PROPERTYAbi>, PropertyCount: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvCreateVirtualProcessor2 == "on"]
+public unsafe func Windows_WHvCreateVirtualProcessor2(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, Properties: CPointer<WHV_VIRTUAL_PROCESSOR_PROPERTYAbi>, PropertyCount: UInt32): Int32 {
+    return WHvCreateVirtualProcessor2(Partition, VpIndex, Properties, PropertyCount)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvCreateVpciDevice == "on"]
+foreign {
     // param-hint: NotificationEventHandle optional
     func WHvCreateVpciDevice(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, VpciResource: CPointer<Unit>, Flags: WHV_CREATE_VPCI_DEVICE_FLAGSAbi, NotificationEventHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvCreateVpciDevice == "on"]
+public unsafe func Windows_WHvCreateVpciDevice(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, VpciResource: CPointer<Unit>, Flags: WHV_CREATE_VPCI_DEVICE_FLAGSAbi, NotificationEventHandle: CPointer<Unit>): Int32 {
+    return WHvCreateVpciDevice(Partition, LogicalDeviceId, VpciResource, Flags, NotificationEventHandle)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvDeleteNotificationPort == "on"]
+foreign {
     func WHvDeleteNotificationPort(Partition: WHV_PARTITION_HANDLE, PortHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvDeleteNotificationPort == "on"]
+public unsafe func Windows_WHvDeleteNotificationPort(Partition: WHV_PARTITION_HANDLE, PortHandle: CPointer<Unit>): Int32 {
+    return WHvDeleteNotificationPort(Partition, PortHandle)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvDeletePartition == "on"]
+foreign {
     func WHvDeletePartition(Partition: WHV_PARTITION_HANDLE): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvDeletePartition == "on"]
+public unsafe func Windows_WHvDeletePartition(Partition: WHV_PARTITION_HANDLE): Int32 {
+    return WHvDeletePartition(Partition)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvDeleteTrigger == "on"]
+foreign {
     func WHvDeleteTrigger(Partition: WHV_PARTITION_HANDLE, TriggerHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvDeleteTrigger == "on"]
+public unsafe func Windows_WHvDeleteTrigger(Partition: WHV_PARTITION_HANDLE, TriggerHandle: CPointer<Unit>): Int32 {
+    return WHvDeleteTrigger(Partition, TriggerHandle)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvDeleteVirtualProcessor == "on"]
+foreign {
     func WHvDeleteVirtualProcessor(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvDeleteVirtualProcessor == "on"]
+public unsafe func Windows_WHvDeleteVirtualProcessor(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32): Int32 {
+    return WHvDeleteVirtualProcessor(Partition, VpIndex)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvDeleteVpciDevice == "on"]
+foreign {
     func WHvDeleteVpciDevice(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvDeleteVpciDevice == "on"]
+public unsafe func Windows_WHvDeleteVpciDevice(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64): Int32 {
+    return WHvDeleteVpciDevice(Partition, LogicalDeviceId)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvGetCapability == "on"]
+foreign {
     // param-hint: CapabilityBuffer bytes=param[2]
     // param-hint: WrittenSizeInBytes optional
     func WHvGetCapability(CapabilityCode: WHV_CAPABILITY_CODEAbi, CapabilityBuffer: CPointer<Unit>, CapabilityBufferSizeInBytes: UInt32, WrittenSizeInBytes: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvGetCapability == "on"]
+public unsafe func Windows_WHvGetCapability(CapabilityCode: WHV_CAPABILITY_CODEAbi, CapabilityBuffer: CPointer<Unit>, CapabilityBufferSizeInBytes: UInt32, WrittenSizeInBytes: CPointer<UInt32>): Int32 {
+    return WHvGetCapability(CapabilityCode, CapabilityBuffer, CapabilityBufferSizeInBytes, WrittenSizeInBytes)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvGetInterruptTargetVpSet == "on"]
+foreign {
     // param-hint: TargetVps len=param[4]
     func WHvGetInterruptTargetVpSet(Partition: WHV_PARTITION_HANDLE, Destination: UInt64, DestinationMode: WHV_INTERRUPT_DESTINATION_MODEAbi, TargetVps: CPointer<UInt32>, VpCount: UInt32, TargetVpCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvGetInterruptTargetVpSet == "on"]
+public unsafe func Windows_WHvGetInterruptTargetVpSet(Partition: WHV_PARTITION_HANDLE, Destination: UInt64, DestinationMode: WHV_INTERRUPT_DESTINATION_MODEAbi, TargetVps: CPointer<UInt32>, VpCount: UInt32, TargetVpCount: CPointer<UInt32>): Int32 {
+    return WHvGetInterruptTargetVpSet(Partition, Destination, DestinationMode, TargetVps, VpCount, TargetVpCount)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvGetPartitionCounters == "on"]
+foreign {
     // param-hint: Buffer bytes=param[3]
     // param-hint: BytesWritten optional
     func WHvGetPartitionCounters(Partition: WHV_PARTITION_HANDLE, CounterSet: WHV_PARTITION_COUNTER_SETAbi, Buffer: CPointer<Unit>, BufferSizeInBytes: UInt32, BytesWritten: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvGetPartitionCounters == "on"]
+public unsafe func Windows_WHvGetPartitionCounters(Partition: WHV_PARTITION_HANDLE, CounterSet: WHV_PARTITION_COUNTER_SETAbi, Buffer: CPointer<Unit>, BufferSizeInBytes: UInt32, BytesWritten: CPointer<UInt32>): Int32 {
+    return WHvGetPartitionCounters(Partition, CounterSet, Buffer, BufferSizeInBytes, BytesWritten)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvGetPartitionProperty == "on"]
+foreign {
     // param-hint: PropertyBuffer bytes=param[3]
     // param-hint: WrittenSizeInBytes optional
     func WHvGetPartitionProperty(Partition: WHV_PARTITION_HANDLE, PropertyCode: WHV_PARTITION_PROPERTY_CODEAbi, PropertyBuffer: CPointer<Unit>, PropertyBufferSizeInBytes: UInt32, WrittenSizeInBytes: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvGetPartitionProperty == "on"]
+public unsafe func Windows_WHvGetPartitionProperty(Partition: WHV_PARTITION_HANDLE, PropertyCode: WHV_PARTITION_PROPERTY_CODEAbi, PropertyBuffer: CPointer<Unit>, PropertyBufferSizeInBytes: UInt32, WrittenSizeInBytes: CPointer<UInt32>): Int32 {
+    return WHvGetPartitionProperty(Partition, PropertyCode, PropertyBuffer, PropertyBufferSizeInBytes, WrittenSizeInBytes)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvGetVirtualProcessorCounters == "on"]
+foreign {
     // param-hint: Buffer bytes=param[4]
     // param-hint: BytesWritten optional
     func WHvGetVirtualProcessorCounters(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, CounterSet: WHV_PROCESSOR_COUNTER_SETAbi, Buffer: CPointer<Unit>, BufferSizeInBytes: UInt32, BytesWritten: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvGetVirtualProcessorCounters == "on"]
+public unsafe func Windows_WHvGetVirtualProcessorCounters(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, CounterSet: WHV_PROCESSOR_COUNTER_SETAbi, Buffer: CPointer<Unit>, BufferSizeInBytes: UInt32, BytesWritten: CPointer<UInt32>): Int32 {
+    return WHvGetVirtualProcessorCounters(Partition, VpIndex, CounterSet, Buffer, BufferSizeInBytes, BytesWritten)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvGetVirtualProcessorCpuidOutput == "on"]
+foreign {
     func WHvGetVirtualProcessorCpuidOutput(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, Eax: UInt32, Ecx: UInt32, CpuidOutput: CPointer<WHV_CPUID_OUTPUTAbi>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvGetVirtualProcessorCpuidOutput == "on"]
+public unsafe func Windows_WHvGetVirtualProcessorCpuidOutput(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, Eax: UInt32, Ecx: UInt32, CpuidOutput: CPointer<WHV_CPUID_OUTPUTAbi>): Int32 {
+    return WHvGetVirtualProcessorCpuidOutput(Partition, VpIndex, Eax, Ecx, CpuidOutput)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvGetVirtualProcessorInterruptControllerState == "on"]
+foreign {
     // param-hint: State bytes=param[3]
     // param-hint: WrittenSize optional
     func WHvGetVirtualProcessorInterruptControllerState(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, State: CPointer<Unit>, StateSize: UInt32, WrittenSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvGetVirtualProcessorInterruptControllerState == "on"]
+public unsafe func Windows_WHvGetVirtualProcessorInterruptControllerState(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, State: CPointer<Unit>, StateSize: UInt32, WrittenSize: CPointer<UInt32>): Int32 {
+    return WHvGetVirtualProcessorInterruptControllerState(Partition, VpIndex, State, StateSize, WrittenSize)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvGetVirtualProcessorInterruptControllerState2 == "on"]
+foreign {
     // param-hint: State bytes=param[3]
     // param-hint: WrittenSize optional
     func WHvGetVirtualProcessorInterruptControllerState2(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, State: CPointer<Unit>, StateSize: UInt32, WrittenSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvGetVirtualProcessorInterruptControllerState2 == "on"]
+public unsafe func Windows_WHvGetVirtualProcessorInterruptControllerState2(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, State: CPointer<Unit>, StateSize: UInt32, WrittenSize: CPointer<UInt32>): Int32 {
+    return WHvGetVirtualProcessorInterruptControllerState2(Partition, VpIndex, State, StateSize, WrittenSize)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvGetVirtualProcessorRegisters == "on"]
+foreign {
     // param-hint: RegisterNames len=param[3]
     // param-hint: RegisterValues len=param[3]
     func WHvGetVirtualProcessorRegisters(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, RegisterNames: CPointer<WHV_REGISTER_NAMEAbi>, RegisterCount: UInt32, RegisterValues: CPointer<WHV_REGISTER_VALUE>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvGetVirtualProcessorRegisters == "on"]
+public unsafe func Windows_WHvGetVirtualProcessorRegisters(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, RegisterNames: CPointer<WHV_REGISTER_NAMEAbi>, RegisterCount: UInt32, RegisterValues: CPointer<WHV_REGISTER_VALUE>): Int32 {
+    return WHvGetVirtualProcessorRegisters(Partition, VpIndex, RegisterNames, RegisterCount, RegisterValues)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvGetVirtualProcessorState == "on"]
+foreign {
     // param-hint: Buffer bytes=param[4]
     // param-hint: BytesWritten optional
     func WHvGetVirtualProcessorState(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, StateType: WHV_VIRTUAL_PROCESSOR_STATE_TYPEAbi, Buffer: CPointer<Unit>, BufferSizeInBytes: UInt32, BytesWritten: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvGetVirtualProcessorState == "on"]
+public unsafe func Windows_WHvGetVirtualProcessorState(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, StateType: WHV_VIRTUAL_PROCESSOR_STATE_TYPEAbi, Buffer: CPointer<Unit>, BufferSizeInBytes: UInt32, BytesWritten: CPointer<UInt32>): Int32 {
+    return WHvGetVirtualProcessorState(Partition, VpIndex, StateType, Buffer, BufferSizeInBytes, BytesWritten)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvGetVirtualProcessorXsaveState == "on"]
+foreign {
     // param-hint: Buffer bytes=param[3]
     func WHvGetVirtualProcessorXsaveState(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, Buffer: CPointer<Unit>, BufferSizeInBytes: UInt32, BytesWritten: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvGetVirtualProcessorXsaveState == "on"]
+public unsafe func Windows_WHvGetVirtualProcessorXsaveState(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, Buffer: CPointer<Unit>, BufferSizeInBytes: UInt32, BytesWritten: CPointer<UInt32>): Int32 {
+    return WHvGetVirtualProcessorXsaveState(Partition, VpIndex, Buffer, BufferSizeInBytes, BytesWritten)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvGetVpciDeviceInterruptTarget == "on"]
+foreign {
     // param-hint: Target bytes=param[5]
     // param-hint: BytesWritten optional
     func WHvGetVpciDeviceInterruptTarget(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, Index: UInt32, MultiMessageNumber: UInt32, Target: CPointer<WHV_VPCI_INTERRUPT_TARGETAbi>, TargetSizeInBytes: UInt32, BytesWritten: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvGetVpciDeviceInterruptTarget == "on"]
+public unsafe func Windows_WHvGetVpciDeviceInterruptTarget(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, Index: UInt32, MultiMessageNumber: UInt32, Target: CPointer<WHV_VPCI_INTERRUPT_TARGETAbi>, TargetSizeInBytes: UInt32, BytesWritten: CPointer<UInt32>): Int32 {
+    return WHvGetVpciDeviceInterruptTarget(Partition, LogicalDeviceId, Index, MultiMessageNumber, Target, TargetSizeInBytes, BytesWritten)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvGetVpciDeviceNotification == "on"]
+foreign {
     // param-hint: Notification bytes=param[3]
     func WHvGetVpciDeviceNotification(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, Notification: CPointer<WHV_VPCI_DEVICE_NOTIFICATIONAbi>, NotificationSizeInBytes: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvGetVpciDeviceNotification == "on"]
+public unsafe func Windows_WHvGetVpciDeviceNotification(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, Notification: CPointer<WHV_VPCI_DEVICE_NOTIFICATIONAbi>, NotificationSizeInBytes: UInt32): Int32 {
+    return WHvGetVpciDeviceNotification(Partition, LogicalDeviceId, Notification, NotificationSizeInBytes)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvGetVpciDeviceProperty == "on"]
+foreign {
     // param-hint: PropertyBuffer bytes=param[4]
     // param-hint: WrittenSizeInBytes optional
     func WHvGetVpciDeviceProperty(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, PropertyCode: WHV_VPCI_DEVICE_PROPERTY_CODEAbi, PropertyBuffer: CPointer<Unit>, PropertyBufferSizeInBytes: UInt32, WrittenSizeInBytes: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvGetVpciDeviceProperty == "on"]
+public unsafe func Windows_WHvGetVpciDeviceProperty(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, PropertyCode: WHV_VPCI_DEVICE_PROPERTY_CODEAbi, PropertyBuffer: CPointer<Unit>, PropertyBufferSizeInBytes: UInt32, WrittenSizeInBytes: CPointer<UInt32>): Int32 {
+    return WHvGetVpciDeviceProperty(Partition, LogicalDeviceId, PropertyCode, PropertyBuffer, PropertyBufferSizeInBytes, WrittenSizeInBytes)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvMapGpaRange == "on"]
+foreign {
     func WHvMapGpaRange(Partition: WHV_PARTITION_HANDLE, SourceAddress: CPointer<Unit>, GuestAddress: UInt64, SizeInBytes: UInt64, Flags: WHV_MAP_GPA_RANGE_FLAGSAbi): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvMapGpaRange == "on"]
+public unsafe func Windows_WHvMapGpaRange(Partition: WHV_PARTITION_HANDLE, SourceAddress: CPointer<Unit>, GuestAddress: UInt64, SizeInBytes: UInt64, Flags: WHV_MAP_GPA_RANGE_FLAGSAbi): Int32 {
+    return WHvMapGpaRange(Partition, SourceAddress, GuestAddress, SizeInBytes, Flags)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvMapGpaRange2 == "on"]
+foreign {
     func WHvMapGpaRange2(Partition: WHV_PARTITION_HANDLE, Process: CPointer<Unit>, SourceAddress: CPointer<Unit>, GuestAddress: UInt64, SizeInBytes: UInt64, Flags: WHV_MAP_GPA_RANGE_FLAGSAbi): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvMapGpaRange2 == "on"]
+public unsafe func Windows_WHvMapGpaRange2(Partition: WHV_PARTITION_HANDLE, Process: CPointer<Unit>, SourceAddress: CPointer<Unit>, GuestAddress: UInt64, SizeInBytes: UInt64, Flags: WHV_MAP_GPA_RANGE_FLAGSAbi): Int32 {
+    return WHvMapGpaRange2(Partition, Process, SourceAddress, GuestAddress, SizeInBytes, Flags)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvMapVpciDeviceInterrupt == "on"]
+foreign {
     func WHvMapVpciDeviceInterrupt(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, Index: UInt32, MessageCount: UInt32, Target: CPointer<WHV_VPCI_INTERRUPT_TARGETAbi>, MsiAddress: CPointer<UInt64>, MsiData: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvMapVpciDeviceInterrupt == "on"]
+public unsafe func Windows_WHvMapVpciDeviceInterrupt(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, Index: UInt32, MessageCount: UInt32, Target: CPointer<WHV_VPCI_INTERRUPT_TARGETAbi>, MsiAddress: CPointer<UInt64>, MsiData: CPointer<UInt32>): Int32 {
+    return WHvMapVpciDeviceInterrupt(Partition, LogicalDeviceId, Index, MessageCount, Target, MsiAddress, MsiData)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvMapVpciDeviceMmioRanges == "on"]
+foreign {
     func WHvMapVpciDeviceMmioRanges(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, MappingCount: CPointer<UInt32>, Mappings: CPointer<CPointer<WHV_VPCI_MMIO_MAPPINGAbi>>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvMapVpciDeviceMmioRanges == "on"]
+public unsafe func Windows_WHvMapVpciDeviceMmioRanges(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, MappingCount: CPointer<UInt32>, Mappings: CPointer<CPointer<WHV_VPCI_MMIO_MAPPINGAbi>>): Int32 {
+    return WHvMapVpciDeviceMmioRanges(Partition, LogicalDeviceId, MappingCount, Mappings)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvPostVirtualProcessorSynicMessage == "on"]
+foreign {
     // param-hint: Message bytes=param[4]
     func WHvPostVirtualProcessorSynicMessage(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, SintIndex: UInt32, Message: CPointer<Unit>, MessageSizeInBytes: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvPostVirtualProcessorSynicMessage == "on"]
+public unsafe func Windows_WHvPostVirtualProcessorSynicMessage(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, SintIndex: UInt32, Message: CPointer<Unit>, MessageSizeInBytes: UInt32): Int32 {
+    return WHvPostVirtualProcessorSynicMessage(Partition, VpIndex, SintIndex, Message, MessageSizeInBytes)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvQueryGpaRangeDirtyBitmap == "on"]
+foreign {
     // param-hint: Bitmap bytes=param[4] optional
     func WHvQueryGpaRangeDirtyBitmap(Partition: WHV_PARTITION_HANDLE, GuestAddress: UInt64, RangeSizeInBytes: UInt64, Bitmap: CPointer<UInt64>, BitmapSizeInBytes: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvQueryGpaRangeDirtyBitmap == "on"]
+public unsafe func Windows_WHvQueryGpaRangeDirtyBitmap(Partition: WHV_PARTITION_HANDLE, GuestAddress: UInt64, RangeSizeInBytes: UInt64, Bitmap: CPointer<UInt64>, BitmapSizeInBytes: UInt32): Int32 {
+    return WHvQueryGpaRangeDirtyBitmap(Partition, GuestAddress, RangeSizeInBytes, Bitmap, BitmapSizeInBytes)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvReadGpaRange == "on"]
+foreign {
     // param-hint: Data bytes=param[5]
     func WHvReadGpaRange(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, GuestAddress: UInt64, Controls: WHV_ACCESS_GPA_CONTROLS, Data: CPointer<Unit>, DataSizeInBytes: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvReadGpaRange == "on"]
+public unsafe func Windows_WHvReadGpaRange(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, GuestAddress: UInt64, Controls: WHV_ACCESS_GPA_CONTROLS, Data: CPointer<Unit>, DataSizeInBytes: UInt32): Int32 {
+    return WHvReadGpaRange(Partition, VpIndex, GuestAddress, Controls, Data, DataSizeInBytes)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvReadVpciDeviceRegister == "on"]
+foreign {
     func WHvReadVpciDeviceRegister(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, Register: CPointer<WHV_VPCI_DEVICE_REGISTERAbi>, Data: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvReadVpciDeviceRegister == "on"]
+public unsafe func Windows_WHvReadVpciDeviceRegister(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, Register: CPointer<WHV_VPCI_DEVICE_REGISTERAbi>, Data: CPointer<Unit>): Int32 {
+    return WHvReadVpciDeviceRegister(Partition, LogicalDeviceId, Register, Data)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvRegisterPartitionDoorbellEvent == "on"]
+foreign {
     func WHvRegisterPartitionDoorbellEvent(Partition: WHV_PARTITION_HANDLE, MatchData: CPointer<WHV_DOORBELL_MATCH_DATAAbi>, EventHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvRegisterPartitionDoorbellEvent == "on"]
+public unsafe func Windows_WHvRegisterPartitionDoorbellEvent(Partition: WHV_PARTITION_HANDLE, MatchData: CPointer<WHV_DOORBELL_MATCH_DATAAbi>, EventHandle: CPointer<Unit>): Int32 {
+    return WHvRegisterPartitionDoorbellEvent(Partition, MatchData, EventHandle)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvRequestInterrupt == "on"]
+foreign {
     func WHvRequestInterrupt(Partition: WHV_PARTITION_HANDLE, Interrupt: CPointer<WHV_INTERRUPT_CONTROLAbi>, InterruptControlSize: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvRequestInterrupt == "on"]
+public unsafe func Windows_WHvRequestInterrupt(Partition: WHV_PARTITION_HANDLE, Interrupt: CPointer<WHV_INTERRUPT_CONTROLAbi>, InterruptControlSize: UInt32): Int32 {
+    return WHvRequestInterrupt(Partition, Interrupt, InterruptControlSize)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvRequestVpciDeviceInterrupt == "on"]
+foreign {
     func WHvRequestVpciDeviceInterrupt(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, MsiAddress: UInt64, MsiData: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvRequestVpciDeviceInterrupt == "on"]
+public unsafe func Windows_WHvRequestVpciDeviceInterrupt(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, MsiAddress: UInt64, MsiData: UInt32): Int32 {
+    return WHvRequestVpciDeviceInterrupt(Partition, LogicalDeviceId, MsiAddress, MsiData)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvResetPartition == "on"]
+foreign {
     func WHvResetPartition(Partition: WHV_PARTITION_HANDLE): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvResetPartition == "on"]
+public unsafe func Windows_WHvResetPartition(Partition: WHV_PARTITION_HANDLE): Int32 {
+    return WHvResetPartition(Partition)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvResumePartitionTime == "on"]
+foreign {
     func WHvResumePartitionTime(Partition: WHV_PARTITION_HANDLE): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvResumePartitionTime == "on"]
+public unsafe func Windows_WHvResumePartitionTime(Partition: WHV_PARTITION_HANDLE): Int32 {
+    return WHvResumePartitionTime(Partition)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvRetargetVpciDeviceInterrupt == "on"]
+foreign {
     func WHvRetargetVpciDeviceInterrupt(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, MsiAddress: UInt64, MsiData: UInt32, Target: CPointer<WHV_VPCI_INTERRUPT_TARGETAbi>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvRetargetVpciDeviceInterrupt == "on"]
+public unsafe func Windows_WHvRetargetVpciDeviceInterrupt(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, MsiAddress: UInt64, MsiData: UInt32, Target: CPointer<WHV_VPCI_INTERRUPT_TARGETAbi>): Int32 {
+    return WHvRetargetVpciDeviceInterrupt(Partition, LogicalDeviceId, MsiAddress, MsiData, Target)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvRunVirtualProcessor == "on"]
+foreign {
     // param-hint: ExitContext bytes=param[3]
     func WHvRunVirtualProcessor(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, ExitContext: CPointer<Unit>, ExitContextSizeInBytes: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvRunVirtualProcessor == "on"]
+public unsafe func Windows_WHvRunVirtualProcessor(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, ExitContext: CPointer<Unit>, ExitContextSizeInBytes: UInt32): Int32 {
+    return WHvRunVirtualProcessor(Partition, VpIndex, ExitContext, ExitContextSizeInBytes)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvSetNotificationPortProperty == "on"]
+foreign {
     func WHvSetNotificationPortProperty(Partition: WHV_PARTITION_HANDLE, PortHandle: CPointer<Unit>, PropertyCode: WHV_NOTIFICATION_PORT_PROPERTY_CODEAbi, PropertyValue: UInt64): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvSetNotificationPortProperty == "on"]
+public unsafe func Windows_WHvSetNotificationPortProperty(Partition: WHV_PARTITION_HANDLE, PortHandle: CPointer<Unit>, PropertyCode: WHV_NOTIFICATION_PORT_PROPERTY_CODEAbi, PropertyValue: UInt64): Int32 {
+    return WHvSetNotificationPortProperty(Partition, PortHandle, PropertyCode, PropertyValue)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvSetPartitionProperty == "on"]
+foreign {
     // param-hint: PropertyBuffer bytes=param[3]
     func WHvSetPartitionProperty(Partition: WHV_PARTITION_HANDLE, PropertyCode: WHV_PARTITION_PROPERTY_CODEAbi, PropertyBuffer: CPointer<Unit>, PropertyBufferSizeInBytes: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvSetPartitionProperty == "on"]
+public unsafe func Windows_WHvSetPartitionProperty(Partition: WHV_PARTITION_HANDLE, PropertyCode: WHV_PARTITION_PROPERTY_CODEAbi, PropertyBuffer: CPointer<Unit>, PropertyBufferSizeInBytes: UInt32): Int32 {
+    return WHvSetPartitionProperty(Partition, PropertyCode, PropertyBuffer, PropertyBufferSizeInBytes)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvSetVirtualProcessorInterruptControllerState == "on"]
+foreign {
     // param-hint: State bytes=param[3]
     func WHvSetVirtualProcessorInterruptControllerState(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, State: CPointer<Unit>, StateSize: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvSetVirtualProcessorInterruptControllerState == "on"]
+public unsafe func Windows_WHvSetVirtualProcessorInterruptControllerState(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, State: CPointer<Unit>, StateSize: UInt32): Int32 {
+    return WHvSetVirtualProcessorInterruptControllerState(Partition, VpIndex, State, StateSize)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvSetVirtualProcessorInterruptControllerState2 == "on"]
+foreign {
     // param-hint: State bytes=param[3]
     func WHvSetVirtualProcessorInterruptControllerState2(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, State: CPointer<Unit>, StateSize: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvSetVirtualProcessorInterruptControllerState2 == "on"]
+public unsafe func Windows_WHvSetVirtualProcessorInterruptControllerState2(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, State: CPointer<Unit>, StateSize: UInt32): Int32 {
+    return WHvSetVirtualProcessorInterruptControllerState2(Partition, VpIndex, State, StateSize)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvSetVirtualProcessorRegisters == "on"]
+foreign {
     // param-hint: RegisterNames len=param[3]
     // param-hint: RegisterValues len=param[3]
     func WHvSetVirtualProcessorRegisters(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, RegisterNames: CPointer<WHV_REGISTER_NAMEAbi>, RegisterCount: UInt32, RegisterValues: CPointer<WHV_REGISTER_VALUE>): Int32
-    // param-hint: Buffer bytes=param[4]
-    func WHvSetVirtualProcessorState(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, StateType: WHV_VIRTUAL_PROCESSOR_STATE_TYPEAbi, Buffer: CPointer<Unit>, BufferSizeInBytes: UInt32): Int32
-    // param-hint: Buffer bytes=param[3]
-    func WHvSetVirtualProcessorXsaveState(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, Buffer: CPointer<Unit>, BufferSizeInBytes: UInt32): Int32
-    func WHvSetupPartition(Partition: WHV_PARTITION_HANDLE): Int32
-    // param-hint: NewlySignaled optional
-    func WHvSignalVirtualProcessorSynicEvent(Partition: WHV_PARTITION_HANDLE, SynicEvent: WHV_SYNIC_EVENT_PARAMETERSAbi, NewlySignaled: CPointer<Int32>): Int32
-    func WHvStartPartitionMigration(Partition: WHV_PARTITION_HANDLE, MigrationHandle: CPointer<CPointer<Unit>>): Int32
-    func WHvSuspendPartitionTime(Partition: WHV_PARTITION_HANDLE): Int32
-    func WHvTranslateGva(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, Gva: UInt64, TranslateFlags: WHV_TRANSLATE_GVA_FLAGSAbi, TranslationResult: CPointer<WHV_TRANSLATE_GVA_RESULTAbi>, Gpa: CPointer<UInt64>): Int32
-    func WHvUnmapGpaRange(Partition: WHV_PARTITION_HANDLE, GuestAddress: UInt64, SizeInBytes: UInt64): Int32
-    func WHvUnmapVpciDeviceInterrupt(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, Index: UInt32): Int32
-    func WHvUnmapVpciDeviceMmioRanges(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64): Int32
-    func WHvUnregisterPartitionDoorbellEvent(Partition: WHV_PARTITION_HANDLE, MatchData: CPointer<WHV_DOORBELL_MATCH_DATAAbi>): Int32
-    func WHvUpdateTriggerParameters(Partition: WHV_PARTITION_HANDLE, Parameters: CPointer<WHV_TRIGGER_PARAMETERSAbi>, TriggerHandle: CPointer<Unit>): Int32
-    // param-hint: Data bytes=param[5]
-    func WHvWriteGpaRange(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, GuestAddress: UInt64, Controls: WHV_ACCESS_GPA_CONTROLS, Data: CPointer<Unit>, DataSizeInBytes: UInt32): Int32
-    func WHvWriteVpciDeviceRegister(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, Register: CPointer<WHV_VPCI_DEVICE_REGISTERAbi>, Data: CPointer<Unit>): Int32
 }
 
-@When[WINHVPLATFORM == "on" && Windows_Win32_System_Power == "on"]
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvSetVirtualProcessorRegisters == "on"]
+public unsafe func Windows_WHvSetVirtualProcessorRegisters(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, RegisterNames: CPointer<WHV_REGISTER_NAMEAbi>, RegisterCount: UInt32, RegisterValues: CPointer<WHV_REGISTER_VALUE>): Int32 {
+    return WHvSetVirtualProcessorRegisters(Partition, VpIndex, RegisterNames, RegisterCount, RegisterValues)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvSetVirtualProcessorState == "on"]
+foreign {
+    // param-hint: Buffer bytes=param[4]
+    func WHvSetVirtualProcessorState(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, StateType: WHV_VIRTUAL_PROCESSOR_STATE_TYPEAbi, Buffer: CPointer<Unit>, BufferSizeInBytes: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvSetVirtualProcessorState == "on"]
+public unsafe func Windows_WHvSetVirtualProcessorState(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, StateType: WHV_VIRTUAL_PROCESSOR_STATE_TYPEAbi, Buffer: CPointer<Unit>, BufferSizeInBytes: UInt32): Int32 {
+    return WHvSetVirtualProcessorState(Partition, VpIndex, StateType, Buffer, BufferSizeInBytes)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvSetVirtualProcessorXsaveState == "on"]
+foreign {
+    // param-hint: Buffer bytes=param[3]
+    func WHvSetVirtualProcessorXsaveState(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, Buffer: CPointer<Unit>, BufferSizeInBytes: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvSetVirtualProcessorXsaveState == "on"]
+public unsafe func Windows_WHvSetVirtualProcessorXsaveState(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, Buffer: CPointer<Unit>, BufferSizeInBytes: UInt32): Int32 {
+    return WHvSetVirtualProcessorXsaveState(Partition, VpIndex, Buffer, BufferSizeInBytes)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvSetVpciDevicePowerState == "on" && Windows_Win32_System_Power == "on"]
 foreign {
     func WHvSetVpciDevicePowerState(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, PowerState: Win32__impl_l0.DEVICE_POWER_STATEAbi): Int32
 }
 
-@When[VMDEVICEHOST == "on"]
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvSetVpciDevicePowerState == "on" && Windows_Win32_System_Power == "on"]
+public unsafe func Windows_WHvSetVpciDevicePowerState(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, PowerState: Win32__impl_l0.DEVICE_POWER_STATEAbi): Int32 {
+    return WHvSetVpciDevicePowerState(Partition, LogicalDeviceId, PowerState)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvSetupPartition == "on"]
+foreign {
+    func WHvSetupPartition(Partition: WHV_PARTITION_HANDLE): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvSetupPartition == "on"]
+public unsafe func Windows_WHvSetupPartition(Partition: WHV_PARTITION_HANDLE): Int32 {
+    return WHvSetupPartition(Partition)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvSignalVirtualProcessorSynicEvent == "on"]
+foreign {
+    // param-hint: NewlySignaled optional
+    func WHvSignalVirtualProcessorSynicEvent(Partition: WHV_PARTITION_HANDLE, SynicEvent: WHV_SYNIC_EVENT_PARAMETERSAbi, NewlySignaled: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvSignalVirtualProcessorSynicEvent == "on"]
+public unsafe func Windows_WHvSignalVirtualProcessorSynicEvent(Partition: WHV_PARTITION_HANDLE, SynicEvent: WHV_SYNIC_EVENT_PARAMETERSAbi, NewlySignaled: CPointer<Int32>): Int32 {
+    return WHvSignalVirtualProcessorSynicEvent(Partition, SynicEvent, NewlySignaled)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvStartPartitionMigration == "on"]
+foreign {
+    func WHvStartPartitionMigration(Partition: WHV_PARTITION_HANDLE, MigrationHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvStartPartitionMigration == "on"]
+public unsafe func Windows_WHvStartPartitionMigration(Partition: WHV_PARTITION_HANDLE, MigrationHandle: CPointer<CPointer<Unit>>): Int32 {
+    return WHvStartPartitionMigration(Partition, MigrationHandle)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvSuspendPartitionTime == "on"]
+foreign {
+    func WHvSuspendPartitionTime(Partition: WHV_PARTITION_HANDLE): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvSuspendPartitionTime == "on"]
+public unsafe func Windows_WHvSuspendPartitionTime(Partition: WHV_PARTITION_HANDLE): Int32 {
+    return WHvSuspendPartitionTime(Partition)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvTranslateGva == "on"]
+foreign {
+    func WHvTranslateGva(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, Gva: UInt64, TranslateFlags: WHV_TRANSLATE_GVA_FLAGSAbi, TranslationResult: CPointer<WHV_TRANSLATE_GVA_RESULTAbi>, Gpa: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvTranslateGva == "on"]
+public unsafe func Windows_WHvTranslateGva(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, Gva: UInt64, TranslateFlags: WHV_TRANSLATE_GVA_FLAGSAbi, TranslationResult: CPointer<WHV_TRANSLATE_GVA_RESULTAbi>, Gpa: CPointer<UInt64>): Int32 {
+    return WHvTranslateGva(Partition, VpIndex, Gva, TranslateFlags, TranslationResult, Gpa)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvUnmapGpaRange == "on"]
+foreign {
+    func WHvUnmapGpaRange(Partition: WHV_PARTITION_HANDLE, GuestAddress: UInt64, SizeInBytes: UInt64): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvUnmapGpaRange == "on"]
+public unsafe func Windows_WHvUnmapGpaRange(Partition: WHV_PARTITION_HANDLE, GuestAddress: UInt64, SizeInBytes: UInt64): Int32 {
+    return WHvUnmapGpaRange(Partition, GuestAddress, SizeInBytes)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvUnmapVpciDeviceInterrupt == "on"]
+foreign {
+    func WHvUnmapVpciDeviceInterrupt(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, Index: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvUnmapVpciDeviceInterrupt == "on"]
+public unsafe func Windows_WHvUnmapVpciDeviceInterrupt(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, Index: UInt32): Int32 {
+    return WHvUnmapVpciDeviceInterrupt(Partition, LogicalDeviceId, Index)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvUnmapVpciDeviceMmioRanges == "on"]
+foreign {
+    func WHvUnmapVpciDeviceMmioRanges(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvUnmapVpciDeviceMmioRanges == "on"]
+public unsafe func Windows_WHvUnmapVpciDeviceMmioRanges(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64): Int32 {
+    return WHvUnmapVpciDeviceMmioRanges(Partition, LogicalDeviceId)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvUnregisterPartitionDoorbellEvent == "on"]
+foreign {
+    func WHvUnregisterPartitionDoorbellEvent(Partition: WHV_PARTITION_HANDLE, MatchData: CPointer<WHV_DOORBELL_MATCH_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvUnregisterPartitionDoorbellEvent == "on"]
+public unsafe func Windows_WHvUnregisterPartitionDoorbellEvent(Partition: WHV_PARTITION_HANDLE, MatchData: CPointer<WHV_DOORBELL_MATCH_DATAAbi>): Int32 {
+    return WHvUnregisterPartitionDoorbellEvent(Partition, MatchData)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvUpdateTriggerParameters == "on"]
+foreign {
+    func WHvUpdateTriggerParameters(Partition: WHV_PARTITION_HANDLE, Parameters: CPointer<WHV_TRIGGER_PARAMETERSAbi>, TriggerHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvUpdateTriggerParameters == "on"]
+public unsafe func Windows_WHvUpdateTriggerParameters(Partition: WHV_PARTITION_HANDLE, Parameters: CPointer<WHV_TRIGGER_PARAMETERSAbi>, TriggerHandle: CPointer<Unit>): Int32 {
+    return WHvUpdateTriggerParameters(Partition, Parameters, TriggerHandle)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvWriteGpaRange == "on"]
+foreign {
+    // param-hint: Data bytes=param[5]
+    func WHvWriteGpaRange(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, GuestAddress: UInt64, Controls: WHV_ACCESS_GPA_CONTROLS, Data: CPointer<Unit>, DataSizeInBytes: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvWriteGpaRange == "on"]
+public unsafe func Windows_WHvWriteGpaRange(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, GuestAddress: UInt64, Controls: WHV_ACCESS_GPA_CONTROLS, Data: CPointer<Unit>, DataSizeInBytes: UInt32): Int32 {
+    return WHvWriteGpaRange(Partition, VpIndex, GuestAddress, Controls, Data, DataSizeInBytes)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvWriteVpciDeviceRegister == "on"]
+foreign {
+    func WHvWriteVpciDeviceRegister(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, Register: CPointer<WHV_VPCI_DEVICE_REGISTERAbi>, Data: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && WINHVPLATFORM == "on" && Windows_Win32_System_Hypervisor_WHvWriteVpciDeviceRegister == "on"]
+public unsafe func Windows_WHvWriteVpciDeviceRegister(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, Register: CPointer<WHV_VPCI_DEVICE_REGISTERAbi>, Data: CPointer<Unit>): Int32 {
+    return WHvWriteVpciDeviceRegister(Partition, LogicalDeviceId, Register, Data)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMDEVICEHOST == "on" && Windows_Win32_System_Hypervisor_HdvCreateDeviceInstance == "on"]
 foreign {
     // param-hint: deviceContext optional
     func HdvCreateDeviceInstance(deviceHostHandle: CPointer<Unit>, deviceType: HDV_DEVICE_TYPEAbi, deviceClassId: CPointer<GUID>, deviceInstanceId: CPointer<GUID>, deviceInterface: CPointer<Unit>, deviceContext: CPointer<Unit>, deviceHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMDEVICEHOST == "on" && Windows_Win32_System_Hypervisor_HdvCreateDeviceInstance == "on"]
+public unsafe func Windows_HdvCreateDeviceInstance(deviceHostHandle: CPointer<Unit>, deviceType: HDV_DEVICE_TYPEAbi, deviceClassId: CPointer<GUID>, deviceInstanceId: CPointer<GUID>, deviceInterface: CPointer<Unit>, deviceContext: CPointer<Unit>, deviceHandle: CPointer<CPointer<Unit>>): Int32 {
+    return HdvCreateDeviceInstance(deviceHostHandle, deviceType, deviceClassId, deviceInstanceId, deviceInterface, deviceContext, deviceHandle)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMDEVICEHOST == "on" && Windows_Win32_System_Hypervisor_HdvCreateGuestMemoryAperture == "on"]
+foreign {
     func HdvCreateGuestMemoryAperture(requestor: CPointer<Unit>, guestPhysicalAddress: UInt64, byteCount: UInt32, writeProtected: Int32, mappedAddress: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMDEVICEHOST == "on" && Windows_Win32_System_Hypervisor_HdvCreateGuestMemoryAperture == "on"]
+public unsafe func Windows_HdvCreateGuestMemoryAperture(requestor: CPointer<Unit>, guestPhysicalAddress: UInt64, byteCount: UInt32, writeProtected: Int32, mappedAddress: CPointer<CPointer<Unit>>): Int32 {
+    return HdvCreateGuestMemoryAperture(requestor, guestPhysicalAddress, byteCount, writeProtected, mappedAddress)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMDEVICEHOST == "on" && Windows_Win32_System_Hypervisor_HdvCreateSectionBackedMmioRange == "on"]
+foreign {
     func HdvCreateSectionBackedMmioRange(requestor: CPointer<Unit>, barIndex: HDV_PCI_BAR_SELECTORAbi, offsetInPages: UInt64, lengthInPages: UInt64, MappingFlags: HDV_MMIO_MAPPING_FLAGSAbi, sectionHandle: CPointer<Unit>, sectionOffsetInPages: UInt64): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMDEVICEHOST == "on" && Windows_Win32_System_Hypervisor_HdvCreateSectionBackedMmioRange == "on"]
+public unsafe func Windows_HdvCreateSectionBackedMmioRange(requestor: CPointer<Unit>, barIndex: HDV_PCI_BAR_SELECTORAbi, offsetInPages: UInt64, lengthInPages: UInt64, MappingFlags: HDV_MMIO_MAPPING_FLAGSAbi, sectionHandle: CPointer<Unit>, sectionOffsetInPages: UInt64): Int32 {
+    return HdvCreateSectionBackedMmioRange(requestor, barIndex, offsetInPages, lengthInPages, MappingFlags, sectionHandle, sectionOffsetInPages)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMDEVICEHOST == "on" && Windows_Win32_System_Hypervisor_HdvDeliverGuestInterrupt == "on"]
+foreign {
     func HdvDeliverGuestInterrupt(requestor: CPointer<Unit>, msiAddress: UInt64, msiData: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMDEVICEHOST == "on" && Windows_Win32_System_Hypervisor_HdvDeliverGuestInterrupt == "on"]
+public unsafe func Windows_HdvDeliverGuestInterrupt(requestor: CPointer<Unit>, msiAddress: UInt64, msiData: UInt32): Int32 {
+    return HdvDeliverGuestInterrupt(requestor, msiAddress, msiData)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMDEVICEHOST == "on" && Windows_Win32_System_Hypervisor_HdvDestroyGuestMemoryAperture == "on"]
+foreign {
     func HdvDestroyGuestMemoryAperture(requestor: CPointer<Unit>, mappedAddress: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMDEVICEHOST == "on" && Windows_Win32_System_Hypervisor_HdvDestroyGuestMemoryAperture == "on"]
+public unsafe func Windows_HdvDestroyGuestMemoryAperture(requestor: CPointer<Unit>, mappedAddress: CPointer<Unit>): Int32 {
+    return HdvDestroyGuestMemoryAperture(requestor, mappedAddress)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMDEVICEHOST == "on" && Windows_Win32_System_Hypervisor_HdvDestroySectionBackedMmioRange == "on"]
+foreign {
     func HdvDestroySectionBackedMmioRange(requestor: CPointer<Unit>, barIndex: HDV_PCI_BAR_SELECTORAbi, offsetInPages: UInt64): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMDEVICEHOST == "on" && Windows_Win32_System_Hypervisor_HdvDestroySectionBackedMmioRange == "on"]
+public unsafe func Windows_HdvDestroySectionBackedMmioRange(requestor: CPointer<Unit>, barIndex: HDV_PCI_BAR_SELECTORAbi, offsetInPages: UInt64): Int32 {
+    return HdvDestroySectionBackedMmioRange(requestor, barIndex, offsetInPages)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMDEVICEHOST == "on" && Windows_Win32_System_Hypervisor_HdvInitializeDeviceHost == "on" && Windows_Win32_System_HostComputeSystem == "on"]
+foreign {
+    func HdvInitializeDeviceHost(computeSystem: Win32_System_HostComputeSystem.HCS_SYSTEM, deviceHostHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMDEVICEHOST == "on" && Windows_Win32_System_Hypervisor_HdvInitializeDeviceHost == "on" && Windows_Win32_System_HostComputeSystem == "on"]
+public unsafe func Windows_HdvInitializeDeviceHost(computeSystem: Win32_System_HostComputeSystem.HCS_SYSTEM, deviceHostHandle: CPointer<CPointer<Unit>>): Int32 {
+    return HdvInitializeDeviceHost(computeSystem, deviceHostHandle)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMDEVICEHOST == "on" && Windows_Win32_System_Hypervisor_HdvInitializeDeviceHostEx == "on" && Windows_Win32_System_HostComputeSystem == "on"]
+foreign {
+    func HdvInitializeDeviceHostEx(computeSystem: Win32_System_HostComputeSystem.HCS_SYSTEM, flags: HDV_DEVICE_HOST_FLAGSAbi, deviceHostHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMDEVICEHOST == "on" && Windows_Win32_System_Hypervisor_HdvInitializeDeviceHostEx == "on" && Windows_Win32_System_HostComputeSystem == "on"]
+public unsafe func Windows_HdvInitializeDeviceHostEx(computeSystem: Win32_System_HostComputeSystem.HCS_SYSTEM, flags: HDV_DEVICE_HOST_FLAGSAbi, deviceHostHandle: CPointer<CPointer<Unit>>): Int32 {
+    return HdvInitializeDeviceHostEx(computeSystem, flags, deviceHostHandle)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMDEVICEHOST == "on" && Windows_Win32_System_Hypervisor_HdvReadGuestMemory == "on"]
+foreign {
     // param-hint: buffer len=param[2]
     func HdvReadGuestMemory(requestor: CPointer<Unit>, guestPhysicalAddress: UInt64, byteCount: UInt32, buffer: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMDEVICEHOST == "on" && Windows_Win32_System_Hypervisor_HdvReadGuestMemory == "on"]
+public unsafe func Windows_HdvReadGuestMemory(requestor: CPointer<Unit>, guestPhysicalAddress: UInt64, byteCount: UInt32, buffer: CPointer<UInt8>): Int32 {
+    return HdvReadGuestMemory(requestor, guestPhysicalAddress, byteCount, buffer)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMDEVICEHOST == "on" && Windows_Win32_System_Hypervisor_HdvRegisterDoorbell == "on"]
+foreign {
     func HdvRegisterDoorbell(requestor: CPointer<Unit>, BarIndex: HDV_PCI_BAR_SELECTORAbi, BarOffset: UInt64, TriggerValue: UInt64, Flags: UInt64, DoorbellEvent: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMDEVICEHOST == "on" && Windows_Win32_System_Hypervisor_HdvRegisterDoorbell == "on"]
+public unsafe func Windows_HdvRegisterDoorbell(requestor: CPointer<Unit>, BarIndex: HDV_PCI_BAR_SELECTORAbi, BarOffset: UInt64, TriggerValue: UInt64, Flags: UInt64, DoorbellEvent: CPointer<Unit>): Int32 {
+    return HdvRegisterDoorbell(requestor, BarIndex, BarOffset, TriggerValue, Flags, DoorbellEvent)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMDEVICEHOST == "on" && Windows_Win32_System_Hypervisor_HdvTeardownDeviceHost == "on"]
+foreign {
     func HdvTeardownDeviceHost(deviceHostHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMDEVICEHOST == "on" && Windows_Win32_System_Hypervisor_HdvTeardownDeviceHost == "on"]
+public unsafe func Windows_HdvTeardownDeviceHost(deviceHostHandle: CPointer<Unit>): Int32 {
+    return HdvTeardownDeviceHost(deviceHostHandle)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMDEVICEHOST == "on" && Windows_Win32_System_Hypervisor_HdvUnregisterDoorbell == "on"]
+foreign {
     func HdvUnregisterDoorbell(requestor: CPointer<Unit>, BarIndex: HDV_PCI_BAR_SELECTORAbi, BarOffset: UInt64, TriggerValue: UInt64, Flags: UInt64): Int32
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMDEVICEHOST == "on" && Windows_Win32_System_Hypervisor_HdvUnregisterDoorbell == "on"]
+public unsafe func Windows_HdvUnregisterDoorbell(requestor: CPointer<Unit>, BarIndex: HDV_PCI_BAR_SELECTORAbi, BarOffset: UInt64, TriggerValue: UInt64, Flags: UInt64): Int32 {
+    return HdvUnregisterDoorbell(requestor, BarIndex, BarOffset, TriggerValue, Flags)
+}
+
+@When[Windows_Win32_System_Hypervisor == "on" && VMDEVICEHOST == "on" && Windows_Win32_System_Hypervisor_HdvWriteGuestMemory == "on"]
+foreign {
     // param-hint: buffer len=param[2]
     func HdvWriteGuestMemory(requestor: CPointer<Unit>, guestPhysicalAddress: UInt64, byteCount: UInt32, buffer: CPointer<UInt8>): Int32
 }
 
-@When[VMDEVICEHOST == "on" && Windows_Win32_System_HostComputeSystem == "on"]
-foreign {
-    func HdvInitializeDeviceHost(computeSystem: Win32_System_HostComputeSystem.HCS_SYSTEM, deviceHostHandle: CPointer<CPointer<Unit>>): Int32
-    func HdvInitializeDeviceHostEx(computeSystem: Win32_System_HostComputeSystem.HCS_SYSTEM, flags: HDV_DEVICE_HOST_FLAGSAbi, deviceHostHandle: CPointer<CPointer<Unit>>): Int32
+@When[Windows_Win32_System_Hypervisor == "on" && VMDEVICEHOST == "on" && Windows_Win32_System_Hypervisor_HdvWriteGuestMemory == "on"]
+public unsafe func Windows_HdvWriteGuestMemory(requestor: CPointer<Unit>, guestPhysicalAddress: UInt64, byteCount: UInt32, buffer: CPointer<UInt8>): Int32 {
+    return HdvWriteGuestMemory(requestor, guestPhysicalAddress, byteCount, buffer)
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]

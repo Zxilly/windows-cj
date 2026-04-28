@@ -91,6 +91,7 @@ public class DocumentProperties <: InterfaceWrapperBase & ComInterface & windows
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Author(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().Author()
     }
@@ -103,6 +104,7 @@ public class DocumentProperties <: InterfaceWrapperBase & ComInterface & windows
         defaultInterface().SetTitle(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Keywords(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().Keywords()
     }
@@ -115,10 +117,12 @@ public class DocumentProperties <: InterfaceWrapperBase & ComInterface & windows
         defaultInterface().SetComment(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RetrievePropertiesAsync(propertiesToRetrieve: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<windows_collections.IMap<windows_core.HString, IInspectable>> {
         return asIStorageItemExtraProperties().RetrievePropertiesAsync(propertiesToRetrieve)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SavePropertiesAsync(propertiesToSave: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, IInspectable>>): windows_future.IAsyncAction {
         return asIStorageItemExtraProperties().SavePropertiesAsync(propertiesToSave)
     }
@@ -522,6 +526,7 @@ public class ImageProperties <: InterfaceWrapperBase & ComInterface & windows_in
         defaultInterface().SetRating(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Keywords(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().Keywords()
     }
@@ -578,14 +583,17 @@ public class ImageProperties <: InterfaceWrapperBase & ComInterface & windows_in
         return defaultInterface().Orientation()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PeopleNames(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().PeopleNames()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RetrievePropertiesAsync(propertiesToRetrieve: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<windows_collections.IMap<windows_core.HString, IInspectable>> {
         return asIStorageItemExtraProperties().RetrievePropertiesAsync(propertiesToRetrieve)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SavePropertiesAsync(propertiesToSave: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, IInspectable>>): windows_future.IAsyncAction {
         return asIStorageItemExtraProperties().SavePropertiesAsync(propertiesToSave)
     }
@@ -701,6 +709,7 @@ public class MusicProperties <: InterfaceWrapperBase & ComInterface & windows_in
         defaultInterface().SetArtist(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Genre(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().Genre()
     }
@@ -745,10 +754,12 @@ public class MusicProperties <: InterfaceWrapperBase & ComInterface & windows_in
         defaultInterface().SetAlbumArtist(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Composers(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().Composers()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Conductors(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().Conductors()
     }
@@ -761,6 +772,7 @@ public class MusicProperties <: InterfaceWrapperBase & ComInterface & windows_in
         defaultInterface().SetSubtitle(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Producers(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().Producers()
     }
@@ -773,6 +785,7 @@ public class MusicProperties <: InterfaceWrapperBase & ComInterface & windows_in
         defaultInterface().SetPublisher(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Writers(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().Writers()
     }
@@ -785,10 +798,12 @@ public class MusicProperties <: InterfaceWrapperBase & ComInterface & windows_in
         defaultInterface().SetYear(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RetrievePropertiesAsync(propertiesToRetrieve: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<windows_collections.IMap<windows_core.HString, IInspectable>> {
         return asIStorageItemExtraProperties().RetrievePropertiesAsync(propertiesToRetrieve)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SavePropertiesAsync(propertiesToSave: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, IInspectable>>): windows_future.IAsyncAction {
         return asIStorageItemExtraProperties().SavePropertiesAsync(propertiesToSave)
     }
@@ -904,10 +919,12 @@ public class StorageItemContentProperties <: InterfaceWrapperBase & ComInterface
         return defaultInterface().GetDocumentPropertiesAsync()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RetrievePropertiesAsync(propertiesToRetrieve: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<windows_collections.IMap<windows_core.HString, IInspectable>> {
         return asIStorageItemExtraProperties().RetrievePropertiesAsync(propertiesToRetrieve)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SavePropertiesAsync(propertiesToSave: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, IInspectable>>): windows_future.IAsyncAction {
         return asIStorageItemExtraProperties().SavePropertiesAsync(propertiesToSave)
     }
@@ -935,7 +952,7 @@ extend StorageItemContentProperties <: windows_core.HandleWinrtType<StorageItemC
     }
 }
 
-@When[Windows_Storage_FileProperties == "on"]
+@When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
 public class StorageItemThumbnail <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1092,7 +1109,7 @@ public class StorageItemThumbnail <: InterfaceWrapperBase & ComInterface & windo
     }
 }
 
-@When[Windows_Storage_FileProperties == "on"]
+@When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
 extend StorageItemThumbnail <: windows_core.HandleWinrtType<StorageItemThumbnail> {
     public static func intoWinrtHandle(value: StorageItemThumbnail): CPointer<Unit> {
         value.asRaw()
@@ -1190,6 +1207,7 @@ public class VideoProperties <: InterfaceWrapperBase & ComInterface & windows_in
         defaultInterface().SetRating(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Keywords(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().Keywords()
     }
@@ -1230,6 +1248,7 @@ public class VideoProperties <: InterfaceWrapperBase & ComInterface & windows_in
         defaultInterface().SetSubtitle(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Producers(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().Producers()
     }
@@ -1242,6 +1261,7 @@ public class VideoProperties <: InterfaceWrapperBase & ComInterface & windows_in
         defaultInterface().SetPublisher(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Writers(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().Writers()
     }
@@ -1258,6 +1278,7 @@ public class VideoProperties <: InterfaceWrapperBase & ComInterface & windows_in
         return defaultInterface().Bitrate()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Directors(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().Directors()
     }
@@ -1266,10 +1287,12 @@ public class VideoProperties <: InterfaceWrapperBase & ComInterface & windows_in
         return defaultInterface().Orientation()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RetrievePropertiesAsync(propertiesToRetrieve: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<windows_collections.IMap<windows_core.HString, IInspectable>> {
         return asIStorageItemExtraProperties().RetrievePropertiesAsync(propertiesToRetrieve)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SavePropertiesAsync(propertiesToSave: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, IInspectable>>): windows_future.IAsyncAction {
         return asIStorageItemExtraProperties().SavePropertiesAsync(propertiesToSave)
     }

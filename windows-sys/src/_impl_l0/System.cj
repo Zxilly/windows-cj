@@ -2031,6 +2031,7 @@ public struct IRemoteLauncherOptionsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var FallbackUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetFallbackUri: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var PreferredAppIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -2087,6 +2088,7 @@ public class IRemoteLauncherOptions <: InterfaceWrapperBase & ComInterface {
         return __vt.SetFallbackUri(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PreferredAppIds(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2161,6 +2163,7 @@ public class IShutdownManagerStatics <: InterfaceWrapperBase & ComInterface {
 public struct ITimeZoneSettingsStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var CurrentTimeZoneDisplayName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedTimeZoneDisplayNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CanChangeTimeZone: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var ChangeTimeZoneByDisplayName: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -2213,6 +2216,7 @@ public class ITimeZoneSettingsStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.CurrentTimeZoneDisplayName(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedTimeZoneDisplayNames(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2401,6 +2405,7 @@ public class IUserAuthenticationStatusChangeDeferral <: InterfaceWrapperBase & C
 @C
 public struct IUserChangedEventArgs2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ChangedPropertyKinds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -2445,6 +2450,7 @@ public class IUserChangedEventArgs2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IUserChangedEventArgs2Vtbl>(IUserChangedEventArgs2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ChangedPropertyKinds(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

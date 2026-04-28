@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 @When[Windows_UI_Xaml_Interop == "on"]
 import windows.UI.Xaml.Interop as UI_Xaml_Interop
@@ -385,12 +384,14 @@ public class LoadCompletedEventHandler <: InterfaceWrapperBase & ComInterface & 
 @When[Windows_UI_Xaml_Navigation == "on"]
 extend LoadCompletedEventHandler <: windows_core.Interface<LoadCompletedEventHandler> {}
 
+@When[Windows_UI_Xaml_Navigation == "on"]
 private open class LoadCompletedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Navigation == "on"]
 private open class LoadCompletedEventHandlerInvoker <: LoadCompletedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<NavigationEventArgs>): Unit {
         ()
@@ -402,6 +403,7 @@ private open class LoadCompletedEventHandlerInvoker <: LoadCompletedEventHandler
     }
 }
 
+@When[Windows_UI_Xaml_Navigation == "on"]
 private class LoadCompletedEventHandlerBox <: LoadCompletedEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<NavigationEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<LoadCompletedEventHandlerVtbl>
@@ -420,6 +422,7 @@ private class LoadCompletedEventHandlerBox <: LoadCompletedEventHandlerInvoker {
     }
 }
 
+@When[Windows_UI_Xaml_Navigation == "on"]
 func buildLoadCompletedEventHandlerBoxVtbl(): LoadCompletedEventHandlerVtbl {
     var vtbl = LoadCompletedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -510,12 +513,14 @@ public class NavigatedEventHandler <: InterfaceWrapperBase & ComInterface & wind
 @When[Windows_UI_Xaml_Navigation == "on"]
 extend NavigatedEventHandler <: windows_core.Interface<NavigatedEventHandler> {}
 
+@When[Windows_UI_Xaml_Navigation == "on"]
 private open class NavigatedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Navigation == "on"]
 private open class NavigatedEventHandlerInvoker <: NavigatedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<NavigationEventArgs>): Unit {
         ()
@@ -527,6 +532,7 @@ private open class NavigatedEventHandlerInvoker <: NavigatedEventHandlerInvokerE
     }
 }
 
+@When[Windows_UI_Xaml_Navigation == "on"]
 private class NavigatedEventHandlerBox <: NavigatedEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<NavigationEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<NavigatedEventHandlerVtbl>
@@ -545,6 +551,7 @@ private class NavigatedEventHandlerBox <: NavigatedEventHandlerInvoker {
     }
 }
 
+@When[Windows_UI_Xaml_Navigation == "on"]
 func buildNavigatedEventHandlerBoxVtbl(): NavigatedEventHandlerVtbl {
     var vtbl = NavigatedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -740,12 +747,14 @@ public class NavigatingCancelEventHandler <: InterfaceWrapperBase & ComInterface
 @When[Windows_UI_Xaml_Navigation == "on"]
 extend NavigatingCancelEventHandler <: windows_core.Interface<NavigatingCancelEventHandler> {}
 
+@When[Windows_UI_Xaml_Navigation == "on"]
 private open class NavigatingCancelEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Navigation == "on"]
 private open class NavigatingCancelEventHandlerInvoker <: NavigatingCancelEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<NavigatingCancelEventArgs>): Unit {
         ()
@@ -757,6 +766,7 @@ private open class NavigatingCancelEventHandlerInvoker <: NavigatingCancelEventH
     }
 }
 
+@When[Windows_UI_Xaml_Navigation == "on"]
 private class NavigatingCancelEventHandlerBox <: NavigatingCancelEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<NavigatingCancelEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<NavigatingCancelEventHandlerVtbl>
@@ -775,6 +785,7 @@ private class NavigatingCancelEventHandlerBox <: NavigatingCancelEventHandlerInv
     }
 }
 
+@When[Windows_UI_Xaml_Navigation == "on"]
 func buildNavigatingCancelEventHandlerBoxVtbl(): NavigatingCancelEventHandlerVtbl {
     var vtbl = NavigatingCancelEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -978,12 +989,14 @@ public class NavigationStoppedEventHandler <: InterfaceWrapperBase & ComInterfac
 @When[Windows_UI_Xaml_Navigation == "on"]
 extend NavigationStoppedEventHandler <: windows_core.Interface<NavigationStoppedEventHandler> {}
 
+@When[Windows_UI_Xaml_Navigation == "on"]
 private open class NavigationStoppedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Navigation == "on"]
 private open class NavigationStoppedEventHandlerInvoker <: NavigationStoppedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<NavigationEventArgs>): Unit {
         ()
@@ -995,6 +1008,7 @@ private open class NavigationStoppedEventHandlerInvoker <: NavigationStoppedEven
     }
 }
 
+@When[Windows_UI_Xaml_Navigation == "on"]
 private class NavigationStoppedEventHandlerBox <: NavigationStoppedEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<NavigationEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<NavigationStoppedEventHandlerVtbl>
@@ -1013,6 +1027,7 @@ private class NavigationStoppedEventHandlerBox <: NavigationStoppedEventHandlerI
     }
 }
 
+@When[Windows_UI_Xaml_Navigation == "on"]
 func buildNavigationStoppedEventHandlerBoxVtbl(): NavigationStoppedEventHandlerVtbl {
     var vtbl = NavigationStoppedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()

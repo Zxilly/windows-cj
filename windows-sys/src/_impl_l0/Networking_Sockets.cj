@@ -946,7 +946,7 @@ public class IStreamSocketControl <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IStreamSocketControl2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public var IgnorableServerCertificateErrors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -991,7 +991,7 @@ public class IStreamSocketControl2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IStreamSocketControl2Vtbl>(IStreamSocketControl2Vtbl())
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func IgnorableServerCertificateErrors(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

@@ -10,15 +10,10 @@ import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrap
 import windows_interface as windows_interface
 import windows_polyfill.{unionReadUInt32, unionWriteUInt32}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-@When[Windows_Win32_Networking_WinHttp == "on"]
 import windows.Win32.Networking.WinHttp as Win32_Networking_WinHttp
-@When[Windows_Win32_Security_Authentication_Identity == "on"]
 import windows.Win32.Security.Authentication.Identity as Win32_Security_Authentication_Identity
-@When[Windows_Win32_System_WinRT == "on"]
 import windows.Win32.System.WinRT as Win32_System_WinRT
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l2 as Win32__impl_l2
@@ -7078,101 +7073,497 @@ public type pfnInternetInitializeAutoProxyDll = CFunc<(UInt32, CPointer<UInt8>, 
 @When[Windows_Win32_Networking_WinInet == "on"]
 public type GOPHER_ATTRIBUTE_ENUMERATOR = CFunc<(CPointer<GOPHER_ATTRIBUTE_TYPEAbi>, UInt32) -> Int32>
 
-@When[WININET == "on"]
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheCheckManifest == "on"]
 foreign {
     // param-hint: pwszMasterUrl optional
     // param-hint: pbManifestData bytes=param[3]
     // param-hint: pbManifestResponseHeaders bytes=param[5]
     func AppCacheCheckManifest(pwszMasterUrl: CPointer<UInt16>, pwszManifestUrl: CPointer<UInt16>, pbManifestData: CPointer<UInt8>, dwManifestDataSize: UInt32, pbManifestResponseHeaders: CPointer<UInt8>, dwManifestResponseHeadersSize: UInt32, peState: CPointer<APP_CACHE_STATEAbi>, phNewAppCache: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheCheckManifest == "on"]
+public unsafe func Windows_AppCacheCheckManifest(pwszMasterUrl: CPointer<UInt16>, pwszManifestUrl: CPointer<UInt16>, pbManifestData: CPointer<UInt8>, dwManifestDataSize: UInt32, pbManifestResponseHeaders: CPointer<UInt8>, dwManifestResponseHeadersSize: UInt32, peState: CPointer<APP_CACHE_STATEAbi>, phNewAppCache: CPointer<CPointer<Unit>>): UInt32 {
+    return AppCacheCheckManifest(pwszMasterUrl, pwszManifestUrl, pbManifestData, dwManifestDataSize, pbManifestResponseHeaders, dwManifestResponseHeadersSize, peState, phNewAppCache)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheCloseHandle == "on"]
+foreign {
     func AppCacheCloseHandle(hAppCache: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheCloseHandle == "on"]
+public unsafe func Windows_AppCacheCloseHandle(hAppCache: CPointer<Unit>): Unit {
+    AppCacheCloseHandle(hAppCache)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheCreateAndCommitFile == "on"]
+foreign {
     // param-hint: pbResponseHeaders bytes=param[4]
     func AppCacheCreateAndCommitFile(hAppCache: CPointer<Unit>, pwszSourceFilePath: CPointer<UInt16>, pwszUrl: CPointer<UInt16>, pbResponseHeaders: CPointer<UInt8>, dwResponseHeadersSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheCreateAndCommitFile == "on"]
+public unsafe func Windows_AppCacheCreateAndCommitFile(hAppCache: CPointer<Unit>, pwszSourceFilePath: CPointer<UInt16>, pwszUrl: CPointer<UInt16>, pbResponseHeaders: CPointer<UInt8>, dwResponseHeadersSize: UInt32): UInt32 {
+    return AppCacheCreateAndCommitFile(hAppCache, pwszSourceFilePath, pwszUrl, pbResponseHeaders, dwResponseHeadersSize)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheDeleteGroup == "on"]
+foreign {
     func AppCacheDeleteGroup(pwszManifestUrl: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheDeleteGroup == "on"]
+public unsafe func Windows_AppCacheDeleteGroup(pwszManifestUrl: CPointer<UInt16>): UInt32 {
+    return AppCacheDeleteGroup(pwszManifestUrl)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheDeleteIEGroup == "on"]
+foreign {
     func AppCacheDeleteIEGroup(pwszManifestUrl: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheDeleteIEGroup == "on"]
+public unsafe func Windows_AppCacheDeleteIEGroup(pwszManifestUrl: CPointer<UInt16>): UInt32 {
+    return AppCacheDeleteIEGroup(pwszManifestUrl)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheDuplicateHandle == "on"]
+foreign {
     func AppCacheDuplicateHandle(hAppCache: CPointer<Unit>, phDuplicatedAppCache: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheDuplicateHandle == "on"]
+public unsafe func Windows_AppCacheDuplicateHandle(hAppCache: CPointer<Unit>, phDuplicatedAppCache: CPointer<CPointer<Unit>>): UInt32 {
+    return AppCacheDuplicateHandle(hAppCache, phDuplicatedAppCache)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheFinalize == "on"]
+foreign {
     // param-hint: pbManifestData bytes=param[2]
     func AppCacheFinalize(hAppCache: CPointer<Unit>, pbManifestData: CPointer<UInt8>, dwManifestDataSize: UInt32, peState: CPointer<APP_CACHE_FINALIZE_STATEAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheFinalize == "on"]
+public unsafe func Windows_AppCacheFinalize(hAppCache: CPointer<Unit>, pbManifestData: CPointer<UInt8>, dwManifestDataSize: UInt32, peState: CPointer<APP_CACHE_FINALIZE_STATEAbi>): UInt32 {
+    return AppCacheFinalize(hAppCache, pbManifestData, dwManifestDataSize, peState)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheFreeDownloadList == "on"]
+foreign {
     func AppCacheFreeDownloadList(pDownloadList: CPointer<APP_CACHE_DOWNLOAD_LISTAbi>): Unit
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheFreeDownloadList == "on"]
+public unsafe func Windows_AppCacheFreeDownloadList(pDownloadList: CPointer<APP_CACHE_DOWNLOAD_LISTAbi>): Unit {
+    AppCacheFreeDownloadList(pDownloadList)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheFreeGroupList == "on"]
+foreign {
     func AppCacheFreeGroupList(pAppCacheGroupList: CPointer<APP_CACHE_GROUP_LISTAbi>): Unit
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheFreeGroupList == "on"]
+public unsafe func Windows_AppCacheFreeGroupList(pAppCacheGroupList: CPointer<APP_CACHE_GROUP_LISTAbi>): Unit {
+    AppCacheFreeGroupList(pAppCacheGroupList)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheFreeIESpace == "on"]
+foreign {
     func AppCacheFreeIESpace(ftCutOff: Win32_Foundation.FILETIMEAbi): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheFreeIESpace == "on"]
+public unsafe func Windows_AppCacheFreeIESpace(ftCutOff: Win32_Foundation.FILETIMEAbi): UInt32 {
+    return AppCacheFreeIESpace(ftCutOff)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheFreeSpace == "on"]
+foreign {
     func AppCacheFreeSpace(ftCutOff: Win32_Foundation.FILETIMEAbi): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheFreeSpace == "on"]
+public unsafe func Windows_AppCacheFreeSpace(ftCutOff: Win32_Foundation.FILETIMEAbi): UInt32 {
+    return AppCacheFreeSpace(ftCutOff)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheGetDownloadList == "on"]
+foreign {
     func AppCacheGetDownloadList(hAppCache: CPointer<Unit>, pDownloadList: CPointer<APP_CACHE_DOWNLOAD_LISTAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheGetDownloadList == "on"]
+public unsafe func Windows_AppCacheGetDownloadList(hAppCache: CPointer<Unit>, pDownloadList: CPointer<APP_CACHE_DOWNLOAD_LISTAbi>): UInt32 {
+    return AppCacheGetDownloadList(hAppCache, pDownloadList)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheGetFallbackUrl == "on"]
+foreign {
     func AppCacheGetFallbackUrl(hAppCache: CPointer<Unit>, pwszUrl: CPointer<UInt16>, ppwszFallbackUrl: CPointer<CPointer<UInt16>>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheGetFallbackUrl == "on"]
+public unsafe func Windows_AppCacheGetFallbackUrl(hAppCache: CPointer<Unit>, pwszUrl: CPointer<UInt16>, ppwszFallbackUrl: CPointer<CPointer<UInt16>>): UInt32 {
+    return AppCacheGetFallbackUrl(hAppCache, pwszUrl, ppwszFallbackUrl)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheGetGroupList == "on"]
+foreign {
     func AppCacheGetGroupList(pAppCacheGroupList: CPointer<APP_CACHE_GROUP_LISTAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheGetGroupList == "on"]
+public unsafe func Windows_AppCacheGetGroupList(pAppCacheGroupList: CPointer<APP_CACHE_GROUP_LISTAbi>): UInt32 {
+    return AppCacheGetGroupList(pAppCacheGroupList)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheGetIEGroupList == "on"]
+foreign {
     func AppCacheGetIEGroupList(pAppCacheGroupList: CPointer<APP_CACHE_GROUP_LISTAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheGetIEGroupList == "on"]
+public unsafe func Windows_AppCacheGetIEGroupList(pAppCacheGroupList: CPointer<APP_CACHE_GROUP_LISTAbi>): UInt32 {
+    return AppCacheGetIEGroupList(pAppCacheGroupList)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheGetInfo == "on"]
+foreign {
     func AppCacheGetInfo(hAppCache: CPointer<Unit>, pAppCacheInfo: CPointer<APP_CACHE_GROUP_INFOAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheGetInfo == "on"]
+public unsafe func Windows_AppCacheGetInfo(hAppCache: CPointer<Unit>, pAppCacheInfo: CPointer<APP_CACHE_GROUP_INFOAbi>): UInt32 {
+    return AppCacheGetInfo(hAppCache, pAppCacheInfo)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheGetManifestUrl == "on"]
+foreign {
     func AppCacheGetManifestUrl(hAppCache: CPointer<Unit>, ppwszManifestUrl: CPointer<CPointer<UInt16>>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheGetManifestUrl == "on"]
+public unsafe func Windows_AppCacheGetManifestUrl(hAppCache: CPointer<Unit>, ppwszManifestUrl: CPointer<CPointer<UInt16>>): UInt32 {
+    return AppCacheGetManifestUrl(hAppCache, ppwszManifestUrl)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheLookup == "on"]
+foreign {
     func AppCacheLookup(pwszUrl: CPointer<UInt16>, dwFlags: UInt32, phAppCache: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_AppCacheLookup == "on"]
+public unsafe func Windows_AppCacheLookup(pwszUrl: CPointer<UInt16>, dwFlags: UInt32, phAppCache: CPointer<CPointer<Unit>>): UInt32 {
+    return AppCacheLookup(pwszUrl, dwFlags, phAppCache)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_CommitUrlCacheEntryA == "on"]
+foreign {
     // param-hint: lpszLocalFileName optional
     // param-hint: lpHeaderInfo len=param[6] optional
     // param-hint: lpszFileExtension optional reserved
     // param-hint: lpszOriginalUrl optional
     // pinvoke-hint: SetLastError
     func CommitUrlCacheEntryA(lpszUrlName: CPointer<UInt8>, lpszLocalFileName: CPointer<UInt8>, ExpireTime: Win32_Foundation.FILETIMEAbi, LastModifiedTime: Win32_Foundation.FILETIMEAbi, CacheEntryType: UInt32, lpHeaderInfo: CPointer<UInt8>, cchHeaderInfo: UInt32, lpszFileExtension: CPointer<UInt8>, lpszOriginalUrl: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_CommitUrlCacheEntryA == "on"]
+public unsafe func Windows_CommitUrlCacheEntryA(lpszUrlName: CPointer<UInt8>, lpszLocalFileName: CPointer<UInt8>, ExpireTime: Win32_Foundation.FILETIMEAbi, LastModifiedTime: Win32_Foundation.FILETIMEAbi, CacheEntryType: UInt32, lpHeaderInfo: CPointer<UInt8>, cchHeaderInfo: UInt32, lpszFileExtension: CPointer<UInt8>, lpszOriginalUrl: CPointer<UInt8>): Int32 {
+    return CommitUrlCacheEntryA(lpszUrlName, lpszLocalFileName, ExpireTime, LastModifiedTime, CacheEntryType, lpHeaderInfo, cchHeaderInfo, lpszFileExtension, lpszOriginalUrl)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_CommitUrlCacheEntryBinaryBlob == "on"]
+foreign {
     // param-hint: pbBlob len=param[5] optional
     func CommitUrlCacheEntryBinaryBlob(pwszUrlName: CPointer<UInt16>, dwType: UInt32, ftExpireTime: Win32_Foundation.FILETIMEAbi, ftModifiedTime: Win32_Foundation.FILETIMEAbi, pbBlob: CPointer<UInt8>, cbBlob: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_CommitUrlCacheEntryBinaryBlob == "on"]
+public unsafe func Windows_CommitUrlCacheEntryBinaryBlob(pwszUrlName: CPointer<UInt16>, dwType: UInt32, ftExpireTime: Win32_Foundation.FILETIMEAbi, ftModifiedTime: Win32_Foundation.FILETIMEAbi, pbBlob: CPointer<UInt8>, cbBlob: UInt32): UInt32 {
+    return CommitUrlCacheEntryBinaryBlob(pwszUrlName, dwType, ftExpireTime, ftModifiedTime, pbBlob, cbBlob)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_CommitUrlCacheEntryW == "on"]
+foreign {
     // param-hint: lpszLocalFileName optional
     // param-hint: lpszHeaderInfo len=param[6] optional
     // param-hint: lpszFileExtension optional reserved
     // param-hint: lpszOriginalUrl optional
     // pinvoke-hint: SetLastError
     func CommitUrlCacheEntryW(lpszUrlName: CPointer<UInt16>, lpszLocalFileName: CPointer<UInt16>, ExpireTime: Win32_Foundation.FILETIMEAbi, LastModifiedTime: Win32_Foundation.FILETIMEAbi, CacheEntryType: UInt32, lpszHeaderInfo: CPointer<UInt16>, cchHeaderInfo: UInt32, lpszFileExtension: CPointer<UInt16>, lpszOriginalUrl: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_CommitUrlCacheEntryW == "on"]
+public unsafe func Windows_CommitUrlCacheEntryW(lpszUrlName: CPointer<UInt16>, lpszLocalFileName: CPointer<UInt16>, ExpireTime: Win32_Foundation.FILETIMEAbi, LastModifiedTime: Win32_Foundation.FILETIMEAbi, CacheEntryType: UInt32, lpszHeaderInfo: CPointer<UInt16>, cchHeaderInfo: UInt32, lpszFileExtension: CPointer<UInt16>, lpszOriginalUrl: CPointer<UInt16>): Int32 {
+    return CommitUrlCacheEntryW(lpszUrlName, lpszLocalFileName, ExpireTime, LastModifiedTime, CacheEntryType, lpszHeaderInfo, cchHeaderInfo, lpszFileExtension, lpszOriginalUrl)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_CreateMD5SSOHash == "on"]
+foreign {
     func CreateMD5SSOHash(pszChallengeInfo: CPointer<UInt16>, pwszRealm: CPointer<UInt16>, pwszTarget: CPointer<UInt16>, pbHexHash: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_CreateMD5SSOHash == "on"]
+public unsafe func Windows_CreateMD5SSOHash(pszChallengeInfo: CPointer<UInt16>, pwszRealm: CPointer<UInt16>, pwszTarget: CPointer<UInt16>, pbHexHash: CPointer<UInt8>): Int32 {
+    return CreateMD5SSOHash(pszChallengeInfo, pwszRealm, pwszTarget, pbHexHash)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_CreateUrlCacheContainerA == "on"]
+foreign {
     // param-hint: lpszCachePath optional
     // param-hint: pvBuffer optional reserved
     // param-hint: cbBuffer optional reserved
     // pinvoke-hint: SetLastError
     func CreateUrlCacheContainerA(Name: CPointer<UInt8>, lpCachePrefix: CPointer<UInt8>, lpszCachePath: CPointer<UInt8>, KBCacheLimit: UInt32, dwContainerType: UInt32, dwOptions: UInt32, pvBuffer: CPointer<Unit>, cbBuffer: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_CreateUrlCacheContainerA == "on"]
+public unsafe func Windows_CreateUrlCacheContainerA(Name: CPointer<UInt8>, lpCachePrefix: CPointer<UInt8>, lpszCachePath: CPointer<UInt8>, KBCacheLimit: UInt32, dwContainerType: UInt32, dwOptions: UInt32, pvBuffer: CPointer<Unit>, cbBuffer: CPointer<UInt32>): Int32 {
+    return CreateUrlCacheContainerA(Name, lpCachePrefix, lpszCachePath, KBCacheLimit, dwContainerType, dwOptions, pvBuffer, cbBuffer)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_CreateUrlCacheContainerW == "on"]
+foreign {
     // param-hint: lpszCachePath optional
     // param-hint: pvBuffer optional reserved
     // param-hint: cbBuffer optional reserved
     // pinvoke-hint: SetLastError
     func CreateUrlCacheContainerW(Name: CPointer<UInt16>, lpCachePrefix: CPointer<UInt16>, lpszCachePath: CPointer<UInt16>, KBCacheLimit: UInt32, dwContainerType: UInt32, dwOptions: UInt32, pvBuffer: CPointer<Unit>, cbBuffer: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_CreateUrlCacheContainerW == "on"]
+public unsafe func Windows_CreateUrlCacheContainerW(Name: CPointer<UInt16>, lpCachePrefix: CPointer<UInt16>, lpszCachePath: CPointer<UInt16>, KBCacheLimit: UInt32, dwContainerType: UInt32, dwOptions: UInt32, pvBuffer: CPointer<Unit>, cbBuffer: CPointer<UInt32>): Int32 {
+    return CreateUrlCacheContainerW(Name, lpCachePrefix, lpszCachePath, KBCacheLimit, dwContainerType, dwOptions, pvBuffer, cbBuffer)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_CreateUrlCacheEntryA == "on"]
+foreign {
     // param-hint: lpszFileExtension optional
     // param-hint: lpszFileName fixed=260
     // pinvoke-hint: SetLastError
     func CreateUrlCacheEntryA(lpszUrlName: CPointer<UInt8>, dwExpectedFileSize: UInt32, lpszFileExtension: CPointer<UInt8>, lpszFileName: CPointer<UInt8>, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_CreateUrlCacheEntryA == "on"]
+public unsafe func Windows_CreateUrlCacheEntryA(lpszUrlName: CPointer<UInt8>, dwExpectedFileSize: UInt32, lpszFileExtension: CPointer<UInt8>, lpszFileName: CPointer<UInt8>, dwReserved: UInt32): Int32 {
+    return CreateUrlCacheEntryA(lpszUrlName, dwExpectedFileSize, lpszFileExtension, lpszFileName, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_CreateUrlCacheEntryExW == "on"]
+foreign {
     // param-hint: lpszFileExtension optional
     // param-hint: lpszFileName fixed=260
     func CreateUrlCacheEntryExW(lpszUrlName: CPointer<UInt16>, dwExpectedFileSize: UInt32, lpszFileExtension: CPointer<UInt16>, lpszFileName: CPointer<UInt16>, dwReserved: UInt32, fPreserveIncomingFileName: Int32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_CreateUrlCacheEntryExW == "on"]
+public unsafe func Windows_CreateUrlCacheEntryExW(lpszUrlName: CPointer<UInt16>, dwExpectedFileSize: UInt32, lpszFileExtension: CPointer<UInt16>, lpszFileName: CPointer<UInt16>, dwReserved: UInt32, fPreserveIncomingFileName: Int32): Int32 {
+    return CreateUrlCacheEntryExW(lpszUrlName, dwExpectedFileSize, lpszFileExtension, lpszFileName, dwReserved, fPreserveIncomingFileName)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_CreateUrlCacheEntryW == "on"]
+foreign {
     // param-hint: lpszFileExtension optional
     // param-hint: lpszFileName fixed=260
     // pinvoke-hint: SetLastError
     func CreateUrlCacheEntryW(lpszUrlName: CPointer<UInt16>, dwExpectedFileSize: UInt32, lpszFileExtension: CPointer<UInt16>, lpszFileName: CPointer<UInt16>, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_CreateUrlCacheEntryW == "on"]
+public unsafe func Windows_CreateUrlCacheEntryW(lpszUrlName: CPointer<UInt16>, dwExpectedFileSize: UInt32, lpszFileExtension: CPointer<UInt16>, lpszFileName: CPointer<UInt16>, dwReserved: UInt32): Int32 {
+    return CreateUrlCacheEntryW(lpszUrlName, dwExpectedFileSize, lpszFileExtension, lpszFileName, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_CreateUrlCacheGroup == "on"]
+foreign {
     // param-hint: lpReserved optional reserved
     // pinvoke-hint: SetLastError
     func CreateUrlCacheGroup(dwFlags: UInt32, lpReserved: CPointer<Unit>): Int64
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_CreateUrlCacheGroup == "on"]
+public unsafe func Windows_CreateUrlCacheGroup(dwFlags: UInt32, lpReserved: CPointer<Unit>): Int64 {
+    return CreateUrlCacheGroup(dwFlags, lpReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_DeleteIE3Cache == "on"]
+foreign {
     func DeleteIE3Cache(hwnd: CPointer<Unit>, hinst: CPointer<Unit>, lpszCmd: CPointer<UInt8>, nCmdShow: Int32): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_DeleteIE3Cache == "on"]
+public unsafe func Windows_DeleteIE3Cache(hwnd: CPointer<Unit>, hinst: CPointer<Unit>, lpszCmd: CPointer<UInt8>, nCmdShow: Int32): UInt32 {
+    return DeleteIE3Cache(hwnd, hinst, lpszCmd, nCmdShow)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_DeleteUrlCacheContainerA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func DeleteUrlCacheContainerA(Name: CPointer<UInt8>, dwOptions: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_DeleteUrlCacheContainerA == "on"]
+public unsafe func Windows_DeleteUrlCacheContainerA(Name: CPointer<UInt8>, dwOptions: UInt32): Int32 {
+    return DeleteUrlCacheContainerA(Name, dwOptions)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_DeleteUrlCacheContainerW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func DeleteUrlCacheContainerW(Name: CPointer<UInt16>, dwOptions: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_DeleteUrlCacheContainerW == "on"]
+public unsafe func Windows_DeleteUrlCacheContainerW(Name: CPointer<UInt16>, dwOptions: UInt32): Int32 {
+    return DeleteUrlCacheContainerW(Name, dwOptions)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_DeleteUrlCacheEntry == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func DeleteUrlCacheEntry(lpszUrlName: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_DeleteUrlCacheEntry == "on"]
+public unsafe func Windows_DeleteUrlCacheEntry(lpszUrlName: CPointer<UInt8>): Int32 {
+    return DeleteUrlCacheEntry(lpszUrlName)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_DeleteUrlCacheEntryA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func DeleteUrlCacheEntryA(lpszUrlName: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_DeleteUrlCacheEntryA == "on"]
+public unsafe func Windows_DeleteUrlCacheEntryA(lpszUrlName: CPointer<UInt8>): Int32 {
+    return DeleteUrlCacheEntryA(lpszUrlName)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_DeleteUrlCacheEntryW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func DeleteUrlCacheEntryW(lpszUrlName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_DeleteUrlCacheEntryW == "on"]
+public unsafe func Windows_DeleteUrlCacheEntryW(lpszUrlName: CPointer<UInt16>): Int32 {
+    return DeleteUrlCacheEntryW(lpszUrlName)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_DeleteUrlCacheGroup == "on"]
+foreign {
     // param-hint: lpReserved optional reserved
     // pinvoke-hint: SetLastError
     func DeleteUrlCacheGroup(GroupId: Int64, dwFlags: UInt32, lpReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_DeleteUrlCacheGroup == "on"]
+public unsafe func Windows_DeleteUrlCacheGroup(GroupId: Int64, dwFlags: UInt32, lpReserved: CPointer<Unit>): Int32 {
+    return DeleteUrlCacheGroup(GroupId, dwFlags, lpReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_DeleteWpadCacheForNetworks == "on"]
+foreign {
     func DeleteWpadCacheForNetworks(param0: WPAD_CACHE_DELETEAbi): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_DeleteWpadCacheForNetworks == "on"]
+public unsafe func Windows_DeleteWpadCacheForNetworks(param0: WPAD_CACHE_DELETEAbi): Int32 {
+    return DeleteWpadCacheForNetworks(param0)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_DetectAutoProxyUrl == "on"]
+foreign {
     // param-hint: pszAutoProxyUrl len=param[1]
     // pinvoke-hint: SetLastError
     func DetectAutoProxyUrl(pszAutoProxyUrl: CPointer<UInt8>, cchAutoProxyUrl: UInt32, dwDetectFlags: PROXY_AUTO_DETECT_TYPEAbi): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_DetectAutoProxyUrl == "on"]
+public unsafe func Windows_DetectAutoProxyUrl(pszAutoProxyUrl: CPointer<UInt8>, cchAutoProxyUrl: UInt32, dwDetectFlags: PROXY_AUTO_DETECT_TYPEAbi): Int32 {
+    return DetectAutoProxyUrl(pszAutoProxyUrl, cchAutoProxyUrl, dwDetectFlags)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_DoConnectoidsExist == "on"]
+foreign {
     func DoConnectoidsExist(): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_DoConnectoidsExist == "on"]
+public unsafe func Windows_DoConnectoidsExist(): Int32 {
+    return DoConnectoidsExist()
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_ExportCookieFileA == "on"]
+foreign {
     func ExportCookieFileA(szFilename: CPointer<UInt8>, fAppend: Int32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_ExportCookieFileA == "on"]
+public unsafe func Windows_ExportCookieFileA(szFilename: CPointer<UInt8>, fAppend: Int32): Int32 {
+    return ExportCookieFileA(szFilename, fAppend)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_ExportCookieFileW == "on"]
+foreign {
     func ExportCookieFileW(szFilename: CPointer<UInt16>, fAppend: Int32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_ExportCookieFileW == "on"]
+public unsafe func Windows_ExportCookieFileW(szFilename: CPointer<UInt16>, fAppend: Int32): Int32 {
+    return ExportCookieFileW(szFilename, fAppend)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FindCloseUrlCache == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func FindCloseUrlCache(hEnumHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FindCloseUrlCache == "on"]
+public unsafe func Windows_FindCloseUrlCache(hEnumHandle: CPointer<Unit>): Int32 {
+    return FindCloseUrlCache(hEnumHandle)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FindFirstUrlCacheContainerA == "on"]
+foreign {
     // param-hint: lpContainerInfo bytes=param[2]
     func FindFirstUrlCacheContainerA(pdwModified: CPointer<UInt32>, lpContainerInfo: CPointer<INTERNET_CACHE_CONTAINER_INFOAAbi>, lpcbContainerInfo: CPointer<UInt32>, dwOptions: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FindFirstUrlCacheContainerA == "on"]
+public unsafe func Windows_FindFirstUrlCacheContainerA(pdwModified: CPointer<UInt32>, lpContainerInfo: CPointer<INTERNET_CACHE_CONTAINER_INFOAAbi>, lpcbContainerInfo: CPointer<UInt32>, dwOptions: UInt32): CPointer<Unit> {
+    return FindFirstUrlCacheContainerA(pdwModified, lpContainerInfo, lpcbContainerInfo, dwOptions)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FindFirstUrlCacheContainerW == "on"]
+foreign {
     // param-hint: lpContainerInfo bytes=param[2]
     func FindFirstUrlCacheContainerW(pdwModified: CPointer<UInt32>, lpContainerInfo: CPointer<INTERNET_CACHE_CONTAINER_INFOWAbi>, lpcbContainerInfo: CPointer<UInt32>, dwOptions: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FindFirstUrlCacheContainerW == "on"]
+public unsafe func Windows_FindFirstUrlCacheContainerW(pdwModified: CPointer<UInt32>, lpContainerInfo: CPointer<INTERNET_CACHE_CONTAINER_INFOWAbi>, lpcbContainerInfo: CPointer<UInt32>, dwOptions: UInt32): CPointer<Unit> {
+    return FindFirstUrlCacheContainerW(pdwModified, lpContainerInfo, lpcbContainerInfo, dwOptions)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FindFirstUrlCacheEntryA == "on"]
+foreign {
     // param-hint: lpszUrlSearchPattern optional
     // param-hint: lpFirstCacheEntryInfo bytes=param[2] optional
     // pinvoke-hint: SetLastError
     func FindFirstUrlCacheEntryA(lpszUrlSearchPattern: CPointer<UInt8>, lpFirstCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOAAbi>, lpcbCacheEntryInfo: CPointer<UInt32>): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FindFirstUrlCacheEntryA == "on"]
+public unsafe func Windows_FindFirstUrlCacheEntryA(lpszUrlSearchPattern: CPointer<UInt8>, lpFirstCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOAAbi>, lpcbCacheEntryInfo: CPointer<UInt32>): CPointer<Unit> {
+    return FindFirstUrlCacheEntryA(lpszUrlSearchPattern, lpFirstCacheEntryInfo, lpcbCacheEntryInfo)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FindFirstUrlCacheEntryExA == "on"]
+foreign {
     // param-hint: lpszUrlSearchPattern optional
     // param-hint: lpFirstCacheEntryInfo bytes=param[5] optional
     // param-hint: lpGroupAttributes optional reserved
@@ -7180,6 +7571,15 @@ foreign {
     // param-hint: lpReserved optional reserved
     // pinvoke-hint: SetLastError
     func FindFirstUrlCacheEntryExA(lpszUrlSearchPattern: CPointer<UInt8>, dwFlags: UInt32, dwFilter: UInt32, GroupId: Int64, lpFirstCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOAAbi>, lpcbCacheEntryInfo: CPointer<UInt32>, lpGroupAttributes: CPointer<Unit>, lpcbGroupAttributes: CPointer<UInt32>, lpReserved: CPointer<Unit>): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FindFirstUrlCacheEntryExA == "on"]
+public unsafe func Windows_FindFirstUrlCacheEntryExA(lpszUrlSearchPattern: CPointer<UInt8>, dwFlags: UInt32, dwFilter: UInt32, GroupId: Int64, lpFirstCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOAAbi>, lpcbCacheEntryInfo: CPointer<UInt32>, lpGroupAttributes: CPointer<Unit>, lpcbGroupAttributes: CPointer<UInt32>, lpReserved: CPointer<Unit>): CPointer<Unit> {
+    return FindFirstUrlCacheEntryExA(lpszUrlSearchPattern, dwFlags, dwFilter, GroupId, lpFirstCacheEntryInfo, lpcbCacheEntryInfo, lpGroupAttributes, lpcbGroupAttributes, lpReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FindFirstUrlCacheEntryExW == "on"]
+foreign {
     // param-hint: lpszUrlSearchPattern optional
     // param-hint: lpFirstCacheEntryInfo bytes=param[5] optional
     // param-hint: lpGroupAttributes optional reserved
@@ -7187,120 +7587,517 @@ foreign {
     // param-hint: lpReserved optional reserved
     // pinvoke-hint: SetLastError
     func FindFirstUrlCacheEntryExW(lpszUrlSearchPattern: CPointer<UInt16>, dwFlags: UInt32, dwFilter: UInt32, GroupId: Int64, lpFirstCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOWAbi>, lpcbCacheEntryInfo: CPointer<UInt32>, lpGroupAttributes: CPointer<Unit>, lpcbGroupAttributes: CPointer<UInt32>, lpReserved: CPointer<Unit>): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FindFirstUrlCacheEntryExW == "on"]
+public unsafe func Windows_FindFirstUrlCacheEntryExW(lpszUrlSearchPattern: CPointer<UInt16>, dwFlags: UInt32, dwFilter: UInt32, GroupId: Int64, lpFirstCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOWAbi>, lpcbCacheEntryInfo: CPointer<UInt32>, lpGroupAttributes: CPointer<Unit>, lpcbGroupAttributes: CPointer<UInt32>, lpReserved: CPointer<Unit>): CPointer<Unit> {
+    return FindFirstUrlCacheEntryExW(lpszUrlSearchPattern, dwFlags, dwFilter, GroupId, lpFirstCacheEntryInfo, lpcbCacheEntryInfo, lpGroupAttributes, lpcbGroupAttributes, lpReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FindFirstUrlCacheEntryW == "on"]
+foreign {
     // param-hint: lpszUrlSearchPattern optional
     // param-hint: lpFirstCacheEntryInfo bytes=param[2] optional
     // pinvoke-hint: SetLastError
     func FindFirstUrlCacheEntryW(lpszUrlSearchPattern: CPointer<UInt16>, lpFirstCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOWAbi>, lpcbCacheEntryInfo: CPointer<UInt32>): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FindFirstUrlCacheEntryW == "on"]
+public unsafe func Windows_FindFirstUrlCacheEntryW(lpszUrlSearchPattern: CPointer<UInt16>, lpFirstCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOWAbi>, lpcbCacheEntryInfo: CPointer<UInt32>): CPointer<Unit> {
+    return FindFirstUrlCacheEntryW(lpszUrlSearchPattern, lpFirstCacheEntryInfo, lpcbCacheEntryInfo)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FindFirstUrlCacheGroup == "on"]
+foreign {
     // param-hint: lpSearchCondition optional reserved
     // param-hint: dwSearchCondition optional reserved
     // param-hint: lpReserved optional reserved
     // pinvoke-hint: SetLastError
     func FindFirstUrlCacheGroup(dwFlags: UInt32, dwFilter: UInt32, lpSearchCondition: CPointer<Unit>, dwSearchCondition: UInt32, lpGroupId: CPointer<Int64>, lpReserved: CPointer<Unit>): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FindFirstUrlCacheGroup == "on"]
+public unsafe func Windows_FindFirstUrlCacheGroup(dwFlags: UInt32, dwFilter: UInt32, lpSearchCondition: CPointer<Unit>, dwSearchCondition: UInt32, lpGroupId: CPointer<Int64>, lpReserved: CPointer<Unit>): CPointer<Unit> {
+    return FindFirstUrlCacheGroup(dwFlags, dwFilter, lpSearchCondition, dwSearchCondition, lpGroupId, lpReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FindNextUrlCacheContainerA == "on"]
+foreign {
     // param-hint: lpContainerInfo bytes=param[2]
     func FindNextUrlCacheContainerA(hEnumHandle: CPointer<Unit>, lpContainerInfo: CPointer<INTERNET_CACHE_CONTAINER_INFOAAbi>, lpcbContainerInfo: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FindNextUrlCacheContainerA == "on"]
+public unsafe func Windows_FindNextUrlCacheContainerA(hEnumHandle: CPointer<Unit>, lpContainerInfo: CPointer<INTERNET_CACHE_CONTAINER_INFOAAbi>, lpcbContainerInfo: CPointer<UInt32>): Int32 {
+    return FindNextUrlCacheContainerA(hEnumHandle, lpContainerInfo, lpcbContainerInfo)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FindNextUrlCacheContainerW == "on"]
+foreign {
     // param-hint: lpContainerInfo bytes=param[2]
     func FindNextUrlCacheContainerW(hEnumHandle: CPointer<Unit>, lpContainerInfo: CPointer<INTERNET_CACHE_CONTAINER_INFOWAbi>, lpcbContainerInfo: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FindNextUrlCacheContainerW == "on"]
+public unsafe func Windows_FindNextUrlCacheContainerW(hEnumHandle: CPointer<Unit>, lpContainerInfo: CPointer<INTERNET_CACHE_CONTAINER_INFOWAbi>, lpcbContainerInfo: CPointer<UInt32>): Int32 {
+    return FindNextUrlCacheContainerW(hEnumHandle, lpContainerInfo, lpcbContainerInfo)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FindNextUrlCacheEntryA == "on"]
+foreign {
     // param-hint: lpNextCacheEntryInfo bytes=param[2] optional
     // pinvoke-hint: SetLastError
     func FindNextUrlCacheEntryA(hEnumHandle: CPointer<Unit>, lpNextCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOAAbi>, lpcbCacheEntryInfo: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FindNextUrlCacheEntryA == "on"]
+public unsafe func Windows_FindNextUrlCacheEntryA(hEnumHandle: CPointer<Unit>, lpNextCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOAAbi>, lpcbCacheEntryInfo: CPointer<UInt32>): Int32 {
+    return FindNextUrlCacheEntryA(hEnumHandle, lpNextCacheEntryInfo, lpcbCacheEntryInfo)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FindNextUrlCacheEntryExA == "on"]
+foreign {
     // param-hint: lpNextCacheEntryInfo bytes=param[2] optional
     // param-hint: lpGroupAttributes optional reserved
     // param-hint: lpcbGroupAttributes optional reserved
     // param-hint: lpReserved optional reserved
     // pinvoke-hint: SetLastError
     func FindNextUrlCacheEntryExA(hEnumHandle: CPointer<Unit>, lpNextCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOAAbi>, lpcbCacheEntryInfo: CPointer<UInt32>, lpGroupAttributes: CPointer<Unit>, lpcbGroupAttributes: CPointer<UInt32>, lpReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FindNextUrlCacheEntryExA == "on"]
+public unsafe func Windows_FindNextUrlCacheEntryExA(hEnumHandle: CPointer<Unit>, lpNextCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOAAbi>, lpcbCacheEntryInfo: CPointer<UInt32>, lpGroupAttributes: CPointer<Unit>, lpcbGroupAttributes: CPointer<UInt32>, lpReserved: CPointer<Unit>): Int32 {
+    return FindNextUrlCacheEntryExA(hEnumHandle, lpNextCacheEntryInfo, lpcbCacheEntryInfo, lpGroupAttributes, lpcbGroupAttributes, lpReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FindNextUrlCacheEntryExW == "on"]
+foreign {
     // param-hint: lpNextCacheEntryInfo bytes=param[2] optional
     // param-hint: lpGroupAttributes optional reserved
     // param-hint: lpcbGroupAttributes optional reserved
     // param-hint: lpReserved optional reserved
     // pinvoke-hint: SetLastError
     func FindNextUrlCacheEntryExW(hEnumHandle: CPointer<Unit>, lpNextCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOWAbi>, lpcbCacheEntryInfo: CPointer<UInt32>, lpGroupAttributes: CPointer<Unit>, lpcbGroupAttributes: CPointer<UInt32>, lpReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FindNextUrlCacheEntryExW == "on"]
+public unsafe func Windows_FindNextUrlCacheEntryExW(hEnumHandle: CPointer<Unit>, lpNextCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOWAbi>, lpcbCacheEntryInfo: CPointer<UInt32>, lpGroupAttributes: CPointer<Unit>, lpcbGroupAttributes: CPointer<UInt32>, lpReserved: CPointer<Unit>): Int32 {
+    return FindNextUrlCacheEntryExW(hEnumHandle, lpNextCacheEntryInfo, lpcbCacheEntryInfo, lpGroupAttributes, lpcbGroupAttributes, lpReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FindNextUrlCacheEntryW == "on"]
+foreign {
     // param-hint: lpNextCacheEntryInfo bytes=param[2] optional
     // pinvoke-hint: SetLastError
     func FindNextUrlCacheEntryW(hEnumHandle: CPointer<Unit>, lpNextCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOWAbi>, lpcbCacheEntryInfo: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FindNextUrlCacheEntryW == "on"]
+public unsafe func Windows_FindNextUrlCacheEntryW(hEnumHandle: CPointer<Unit>, lpNextCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOWAbi>, lpcbCacheEntryInfo: CPointer<UInt32>): Int32 {
+    return FindNextUrlCacheEntryW(hEnumHandle, lpNextCacheEntryInfo, lpcbCacheEntryInfo)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FindNextUrlCacheGroup == "on"]
+foreign {
     // param-hint: lpReserved optional reserved
     // pinvoke-hint: SetLastError
     func FindNextUrlCacheGroup(hFind: CPointer<Unit>, lpGroupId: CPointer<Int64>, lpReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FindNextUrlCacheGroup == "on"]
+public unsafe func Windows_FindNextUrlCacheGroup(hFind: CPointer<Unit>, lpGroupId: CPointer<Int64>, lpReserved: CPointer<Unit>): Int32 {
+    return FindNextUrlCacheGroup(hFind, lpGroupId, lpReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FindP3PPolicySymbol == "on"]
+foreign {
     func FindP3PPolicySymbol(pszSymbol: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FindP3PPolicySymbol == "on"]
+public unsafe func Windows_FindP3PPolicySymbol(pszSymbol: CPointer<UInt8>): Int32 {
+    return FindP3PPolicySymbol(pszSymbol)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FreeUrlCacheSpaceA == "on"]
+foreign {
     // param-hint: lpszCachePath optional
     // pinvoke-hint: SetLastError
     func FreeUrlCacheSpaceA(lpszCachePath: CPointer<UInt8>, dwSize: UInt32, dwFilter: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FreeUrlCacheSpaceA == "on"]
+public unsafe func Windows_FreeUrlCacheSpaceA(lpszCachePath: CPointer<UInt8>, dwSize: UInt32, dwFilter: UInt32): Int32 {
+    return FreeUrlCacheSpaceA(lpszCachePath, dwSize, dwFilter)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FreeUrlCacheSpaceW == "on"]
+foreign {
     // param-hint: lpszCachePath optional
     // pinvoke-hint: SetLastError
     func FreeUrlCacheSpaceW(lpszCachePath: CPointer<UInt16>, dwSize: UInt32, dwFilter: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FreeUrlCacheSpaceW == "on"]
+public unsafe func Windows_FreeUrlCacheSpaceW(lpszCachePath: CPointer<UInt16>, dwSize: UInt32, dwFilter: UInt32): Int32 {
+    return FreeUrlCacheSpaceW(lpszCachePath, dwSize, dwFilter)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpCommandA == "on"]
+foreign {
     // param-hint: dwContext optional
     // param-hint: phFtpCommand optional
     // pinvoke-hint: SetLastError
     func FtpCommandA(hConnect: CPointer<Unit>, fExpectResponse: Int32, dwFlags: FTP_FLAGSAbi, lpszCommand: CPointer<UInt8>, dwContext: UIntNative, phFtpCommand: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpCommandA == "on"]
+public unsafe func Windows_FtpCommandA(hConnect: CPointer<Unit>, fExpectResponse: Int32, dwFlags: FTP_FLAGSAbi, lpszCommand: CPointer<UInt8>, dwContext: UIntNative, phFtpCommand: CPointer<CPointer<Unit>>): Int32 {
+    return FtpCommandA(hConnect, fExpectResponse, dwFlags, lpszCommand, dwContext, phFtpCommand)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpCommandW == "on"]
+foreign {
     // param-hint: dwContext optional
     // param-hint: phFtpCommand optional
     // pinvoke-hint: SetLastError
     func FtpCommandW(hConnect: CPointer<Unit>, fExpectResponse: Int32, dwFlags: FTP_FLAGSAbi, lpszCommand: CPointer<UInt16>, dwContext: UIntNative, phFtpCommand: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpCommandW == "on"]
+public unsafe func Windows_FtpCommandW(hConnect: CPointer<Unit>, fExpectResponse: Int32, dwFlags: FTP_FLAGSAbi, lpszCommand: CPointer<UInt16>, dwContext: UIntNative, phFtpCommand: CPointer<CPointer<Unit>>): Int32 {
+    return FtpCommandW(hConnect, fExpectResponse, dwFlags, lpszCommand, dwContext, phFtpCommand)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpCreateDirectoryA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func FtpCreateDirectoryA(hConnect: CPointer<Unit>, lpszDirectory: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpCreateDirectoryA == "on"]
+public unsafe func Windows_FtpCreateDirectoryA(hConnect: CPointer<Unit>, lpszDirectory: CPointer<UInt8>): Int32 {
+    return FtpCreateDirectoryA(hConnect, lpszDirectory)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpCreateDirectoryW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func FtpCreateDirectoryW(hConnect: CPointer<Unit>, lpszDirectory: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpCreateDirectoryW == "on"]
+public unsafe func Windows_FtpCreateDirectoryW(hConnect: CPointer<Unit>, lpszDirectory: CPointer<UInt16>): Int32 {
+    return FtpCreateDirectoryW(hConnect, lpszDirectory)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpDeleteFileA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func FtpDeleteFileA(hConnect: CPointer<Unit>, lpszFileName: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpDeleteFileA == "on"]
+public unsafe func Windows_FtpDeleteFileA(hConnect: CPointer<Unit>, lpszFileName: CPointer<UInt8>): Int32 {
+    return FtpDeleteFileA(hConnect, lpszFileName)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpDeleteFileW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func FtpDeleteFileW(hConnect: CPointer<Unit>, lpszFileName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpDeleteFileW == "on"]
+public unsafe func Windows_FtpDeleteFileW(hConnect: CPointer<Unit>, lpszFileName: CPointer<UInt16>): Int32 {
+    return FtpDeleteFileW(hConnect, lpszFileName)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpFindFirstFileA == "on" && Windows_Win32_Storage_FileSystem == "on"]
+foreign {
+    // param-hint: lpszSearchFile optional
+    // param-hint: lpFindFileData optional
+    // param-hint: dwContext optional
+    // pinvoke-hint: SetLastError
+    func FtpFindFirstFileA(hConnect: CPointer<Unit>, lpszSearchFile: CPointer<UInt8>, lpFindFileData: CPointer<Win32__impl_l0.WIN32_FIND_DATAAAbi>, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpFindFirstFileA == "on" && Windows_Win32_Storage_FileSystem == "on"]
+public unsafe func Windows_FtpFindFirstFileA(hConnect: CPointer<Unit>, lpszSearchFile: CPointer<UInt8>, lpFindFileData: CPointer<Win32__impl_l0.WIN32_FIND_DATAAAbi>, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit> {
+    return FtpFindFirstFileA(hConnect, lpszSearchFile, lpFindFileData, dwFlags, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpFindFirstFileW == "on" && Windows_Win32_Storage_FileSystem == "on"]
+foreign {
+    // param-hint: lpszSearchFile optional
+    // param-hint: lpFindFileData optional
+    // param-hint: dwContext optional
+    // pinvoke-hint: SetLastError
+    func FtpFindFirstFileW(hConnect: CPointer<Unit>, lpszSearchFile: CPointer<UInt16>, lpFindFileData: CPointer<Win32__impl_l0.WIN32_FIND_DATAWAbi>, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpFindFirstFileW == "on" && Windows_Win32_Storage_FileSystem == "on"]
+public unsafe func Windows_FtpFindFirstFileW(hConnect: CPointer<Unit>, lpszSearchFile: CPointer<UInt16>, lpFindFileData: CPointer<Win32__impl_l0.WIN32_FIND_DATAWAbi>, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit> {
+    return FtpFindFirstFileW(hConnect, lpszSearchFile, lpFindFileData, dwFlags, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpGetCurrentDirectoryA == "on"]
+foreign {
     // param-hint: lpszCurrentDirectory len=param[2]
     // pinvoke-hint: SetLastError
     func FtpGetCurrentDirectoryA(hConnect: CPointer<Unit>, lpszCurrentDirectory: CPointer<UInt8>, lpdwCurrentDirectory: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpGetCurrentDirectoryA == "on"]
+public unsafe func Windows_FtpGetCurrentDirectoryA(hConnect: CPointer<Unit>, lpszCurrentDirectory: CPointer<UInt8>, lpdwCurrentDirectory: CPointer<UInt32>): Int32 {
+    return FtpGetCurrentDirectoryA(hConnect, lpszCurrentDirectory, lpdwCurrentDirectory)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpGetCurrentDirectoryW == "on"]
+foreign {
     // param-hint: lpszCurrentDirectory len=param[2]
     // pinvoke-hint: SetLastError
     func FtpGetCurrentDirectoryW(hConnect: CPointer<Unit>, lpszCurrentDirectory: CPointer<UInt16>, lpdwCurrentDirectory: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpGetCurrentDirectoryW == "on"]
+public unsafe func Windows_FtpGetCurrentDirectoryW(hConnect: CPointer<Unit>, lpszCurrentDirectory: CPointer<UInt16>, lpdwCurrentDirectory: CPointer<UInt32>): Int32 {
+    return FtpGetCurrentDirectoryW(hConnect, lpszCurrentDirectory, lpdwCurrentDirectory)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpGetFileA == "on"]
+foreign {
     // param-hint: dwContext optional
     // pinvoke-hint: SetLastError
     func FtpGetFileA(hConnect: CPointer<Unit>, lpszRemoteFile: CPointer<UInt8>, lpszNewFile: CPointer<UInt8>, fFailIfExists: Int32, dwFlagsAndAttributes: UInt32, dwFlags: UInt32, dwContext: UIntNative): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpGetFileA == "on"]
+public unsafe func Windows_FtpGetFileA(hConnect: CPointer<Unit>, lpszRemoteFile: CPointer<UInt8>, lpszNewFile: CPointer<UInt8>, fFailIfExists: Int32, dwFlagsAndAttributes: UInt32, dwFlags: UInt32, dwContext: UIntNative): Int32 {
+    return FtpGetFileA(hConnect, lpszRemoteFile, lpszNewFile, fFailIfExists, dwFlagsAndAttributes, dwFlags, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpGetFileEx == "on"]
+foreign {
     // param-hint: dwContext optional
     func FtpGetFileEx(hFtpSession: CPointer<Unit>, lpszRemoteFile: CPointer<UInt8>, lpszNewFile: CPointer<UInt16>, fFailIfExists: Int32, dwFlagsAndAttributes: UInt32, dwFlags: UInt32, dwContext: UIntNative): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpGetFileEx == "on"]
+public unsafe func Windows_FtpGetFileEx(hFtpSession: CPointer<Unit>, lpszRemoteFile: CPointer<UInt8>, lpszNewFile: CPointer<UInt16>, fFailIfExists: Int32, dwFlagsAndAttributes: UInt32, dwFlags: UInt32, dwContext: UIntNative): Int32 {
+    return FtpGetFileEx(hFtpSession, lpszRemoteFile, lpszNewFile, fFailIfExists, dwFlagsAndAttributes, dwFlags, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpGetFileSize == "on"]
+foreign {
     // param-hint: lpdwFileSizeHigh optional
     func FtpGetFileSize(hFile: CPointer<Unit>, lpdwFileSizeHigh: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpGetFileSize == "on"]
+public unsafe func Windows_FtpGetFileSize(hFile: CPointer<Unit>, lpdwFileSizeHigh: CPointer<UInt32>): UInt32 {
+    return FtpGetFileSize(hFile, lpdwFileSizeHigh)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpGetFileW == "on"]
+foreign {
     // param-hint: dwContext optional
     // pinvoke-hint: SetLastError
     func FtpGetFileW(hConnect: CPointer<Unit>, lpszRemoteFile: CPointer<UInt16>, lpszNewFile: CPointer<UInt16>, fFailIfExists: Int32, dwFlagsAndAttributes: UInt32, dwFlags: UInt32, dwContext: UIntNative): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpGetFileW == "on"]
+public unsafe func Windows_FtpGetFileW(hConnect: CPointer<Unit>, lpszRemoteFile: CPointer<UInt16>, lpszNewFile: CPointer<UInt16>, fFailIfExists: Int32, dwFlagsAndAttributes: UInt32, dwFlags: UInt32, dwContext: UIntNative): Int32 {
+    return FtpGetFileW(hConnect, lpszRemoteFile, lpszNewFile, fFailIfExists, dwFlagsAndAttributes, dwFlags, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpOpenFileA == "on"]
+foreign {
     // param-hint: dwContext optional
     // pinvoke-hint: SetLastError
     func FtpOpenFileA(hConnect: CPointer<Unit>, lpszFileName: CPointer<UInt8>, dwAccess: UInt32, dwFlags: FTP_FLAGSAbi, dwContext: UIntNative): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpOpenFileA == "on"]
+public unsafe func Windows_FtpOpenFileA(hConnect: CPointer<Unit>, lpszFileName: CPointer<UInt8>, dwAccess: UInt32, dwFlags: FTP_FLAGSAbi, dwContext: UIntNative): CPointer<Unit> {
+    return FtpOpenFileA(hConnect, lpszFileName, dwAccess, dwFlags, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpOpenFileW == "on"]
+foreign {
     // param-hint: dwContext optional
     // pinvoke-hint: SetLastError
     func FtpOpenFileW(hConnect: CPointer<Unit>, lpszFileName: CPointer<UInt16>, dwAccess: UInt32, dwFlags: FTP_FLAGSAbi, dwContext: UIntNative): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpOpenFileW == "on"]
+public unsafe func Windows_FtpOpenFileW(hConnect: CPointer<Unit>, lpszFileName: CPointer<UInt16>, dwAccess: UInt32, dwFlags: FTP_FLAGSAbi, dwContext: UIntNative): CPointer<Unit> {
+    return FtpOpenFileW(hConnect, lpszFileName, dwAccess, dwFlags, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpPutFileA == "on"]
+foreign {
     // param-hint: dwContext optional
     // pinvoke-hint: SetLastError
     func FtpPutFileA(hConnect: CPointer<Unit>, lpszLocalFile: CPointer<UInt8>, lpszNewRemoteFile: CPointer<UInt8>, dwFlags: FTP_FLAGSAbi, dwContext: UIntNative): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpPutFileA == "on"]
+public unsafe func Windows_FtpPutFileA(hConnect: CPointer<Unit>, lpszLocalFile: CPointer<UInt8>, lpszNewRemoteFile: CPointer<UInt8>, dwFlags: FTP_FLAGSAbi, dwContext: UIntNative): Int32 {
+    return FtpPutFileA(hConnect, lpszLocalFile, lpszNewRemoteFile, dwFlags, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpPutFileEx == "on"]
+foreign {
     // param-hint: dwContext optional
     func FtpPutFileEx(hFtpSession: CPointer<Unit>, lpszLocalFile: CPointer<UInt16>, lpszNewRemoteFile: CPointer<UInt8>, dwFlags: UInt32, dwContext: UIntNative): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpPutFileEx == "on"]
+public unsafe func Windows_FtpPutFileEx(hFtpSession: CPointer<Unit>, lpszLocalFile: CPointer<UInt16>, lpszNewRemoteFile: CPointer<UInt8>, dwFlags: UInt32, dwContext: UIntNative): Int32 {
+    return FtpPutFileEx(hFtpSession, lpszLocalFile, lpszNewRemoteFile, dwFlags, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpPutFileW == "on"]
+foreign {
     // param-hint: dwContext optional
     // pinvoke-hint: SetLastError
     func FtpPutFileW(hConnect: CPointer<Unit>, lpszLocalFile: CPointer<UInt16>, lpszNewRemoteFile: CPointer<UInt16>, dwFlags: FTP_FLAGSAbi, dwContext: UIntNative): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpPutFileW == "on"]
+public unsafe func Windows_FtpPutFileW(hConnect: CPointer<Unit>, lpszLocalFile: CPointer<UInt16>, lpszNewRemoteFile: CPointer<UInt16>, dwFlags: FTP_FLAGSAbi, dwContext: UIntNative): Int32 {
+    return FtpPutFileW(hConnect, lpszLocalFile, lpszNewRemoteFile, dwFlags, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpRemoveDirectoryA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func FtpRemoveDirectoryA(hConnect: CPointer<Unit>, lpszDirectory: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpRemoveDirectoryA == "on"]
+public unsafe func Windows_FtpRemoveDirectoryA(hConnect: CPointer<Unit>, lpszDirectory: CPointer<UInt8>): Int32 {
+    return FtpRemoveDirectoryA(hConnect, lpszDirectory)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpRemoveDirectoryW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func FtpRemoveDirectoryW(hConnect: CPointer<Unit>, lpszDirectory: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpRemoveDirectoryW == "on"]
+public unsafe func Windows_FtpRemoveDirectoryW(hConnect: CPointer<Unit>, lpszDirectory: CPointer<UInt16>): Int32 {
+    return FtpRemoveDirectoryW(hConnect, lpszDirectory)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpRenameFileA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func FtpRenameFileA(hConnect: CPointer<Unit>, lpszExisting: CPointer<UInt8>, lpszNew: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpRenameFileA == "on"]
+public unsafe func Windows_FtpRenameFileA(hConnect: CPointer<Unit>, lpszExisting: CPointer<UInt8>, lpszNew: CPointer<UInt8>): Int32 {
+    return FtpRenameFileA(hConnect, lpszExisting, lpszNew)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpRenameFileW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func FtpRenameFileW(hConnect: CPointer<Unit>, lpszExisting: CPointer<UInt16>, lpszNew: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpRenameFileW == "on"]
+public unsafe func Windows_FtpRenameFileW(hConnect: CPointer<Unit>, lpszExisting: CPointer<UInt16>, lpszNew: CPointer<UInt16>): Int32 {
+    return FtpRenameFileW(hConnect, lpszExisting, lpszNew)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpSetCurrentDirectoryA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func FtpSetCurrentDirectoryA(hConnect: CPointer<Unit>, lpszDirectory: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpSetCurrentDirectoryA == "on"]
+public unsafe func Windows_FtpSetCurrentDirectoryA(hConnect: CPointer<Unit>, lpszDirectory: CPointer<UInt8>): Int32 {
+    return FtpSetCurrentDirectoryA(hConnect, lpszDirectory)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpSetCurrentDirectoryW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func FtpSetCurrentDirectoryW(hConnect: CPointer<Unit>, lpszDirectory: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_FtpSetCurrentDirectoryW == "on"]
+public unsafe func Windows_FtpSetCurrentDirectoryW(hConnect: CPointer<Unit>, lpszDirectory: CPointer<UInt16>): Int32 {
+    return FtpSetCurrentDirectoryW(hConnect, lpszDirectory)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GetDiskInfoA == "on"]
+foreign {
     // param-hint: pdwClusterSize optional
     // param-hint: pdlAvail optional
     // param-hint: pdlTotal optional
     func GetDiskInfoA(pszPath: CPointer<UInt8>, pdwClusterSize: CPointer<UInt32>, pdlAvail: CPointer<UInt64>, pdlTotal: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GetDiskInfoA == "on"]
+public unsafe func Windows_GetDiskInfoA(pszPath: CPointer<UInt8>, pdwClusterSize: CPointer<UInt32>, pdlAvail: CPointer<UInt64>, pdlTotal: CPointer<UInt64>): Int32 {
+    return GetDiskInfoA(pszPath, pdwClusterSize, pdlAvail, pdlTotal)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GetUrlCacheConfigInfoA == "on"]
+foreign {
     // param-hint: lpcbCacheConfigInfo optional reserved
     // pinvoke-hint: SetLastError
     func GetUrlCacheConfigInfoA(lpCacheConfigInfo: CPointer<INTERNET_CACHE_CONFIG_INFOAAbi>, lpcbCacheConfigInfo: CPointer<UInt32>, dwFieldControl: CACHE_CONFIGAbi): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GetUrlCacheConfigInfoA == "on"]
+public unsafe func Windows_GetUrlCacheConfigInfoA(lpCacheConfigInfo: CPointer<INTERNET_CACHE_CONFIG_INFOAAbi>, lpcbCacheConfigInfo: CPointer<UInt32>, dwFieldControl: CACHE_CONFIGAbi): Int32 {
+    return GetUrlCacheConfigInfoA(lpCacheConfigInfo, lpcbCacheConfigInfo, dwFieldControl)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GetUrlCacheConfigInfoW == "on"]
+foreign {
     // param-hint: lpcbCacheConfigInfo optional reserved
     // pinvoke-hint: SetLastError
     func GetUrlCacheConfigInfoW(lpCacheConfigInfo: CPointer<INTERNET_CACHE_CONFIG_INFOWAbi>, lpcbCacheConfigInfo: CPointer<UInt32>, dwFieldControl: CACHE_CONFIGAbi): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GetUrlCacheConfigInfoW == "on"]
+public unsafe func Windows_GetUrlCacheConfigInfoW(lpCacheConfigInfo: CPointer<INTERNET_CACHE_CONFIG_INFOWAbi>, lpcbCacheConfigInfo: CPointer<UInt32>, dwFieldControl: CACHE_CONFIGAbi): Int32 {
+    return GetUrlCacheConfigInfoW(lpCacheConfigInfo, lpcbCacheConfigInfo, dwFieldControl)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GetUrlCacheEntryBinaryBlob == "on"]
+foreign {
     func GetUrlCacheEntryBinaryBlob(pwszUrlName: CPointer<UInt16>, dwType: CPointer<UInt32>, pftExpireTime: CPointer<Win32_Foundation.FILETIMEAbi>, pftAccessTime: CPointer<Win32_Foundation.FILETIMEAbi>, pftModifiedTime: CPointer<Win32_Foundation.FILETIMEAbi>, ppbBlob: CPointer<CPointer<UInt8>>, pcbBlob: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GetUrlCacheEntryBinaryBlob == "on"]
+public unsafe func Windows_GetUrlCacheEntryBinaryBlob(pwszUrlName: CPointer<UInt16>, dwType: CPointer<UInt32>, pftExpireTime: CPointer<Win32_Foundation.FILETIMEAbi>, pftAccessTime: CPointer<Win32_Foundation.FILETIMEAbi>, pftModifiedTime: CPointer<Win32_Foundation.FILETIMEAbi>, ppbBlob: CPointer<CPointer<UInt8>>, pcbBlob: CPointer<UInt32>): UInt32 {
+    return GetUrlCacheEntryBinaryBlob(pwszUrlName, dwType, pftExpireTime, pftAccessTime, pftModifiedTime, ppbBlob, pcbBlob)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GetUrlCacheEntryInfoA == "on"]
+foreign {
     // param-hint: lpCacheEntryInfo bytes=param[2] optional
     // param-hint: lpcbCacheEntryInfo optional
     // pinvoke-hint: SetLastError
     func GetUrlCacheEntryInfoA(lpszUrlName: CPointer<UInt8>, lpCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOAAbi>, lpcbCacheEntryInfo: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GetUrlCacheEntryInfoA == "on"]
+public unsafe func Windows_GetUrlCacheEntryInfoA(lpszUrlName: CPointer<UInt8>, lpCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOAAbi>, lpcbCacheEntryInfo: CPointer<UInt32>): Int32 {
+    return GetUrlCacheEntryInfoA(lpszUrlName, lpCacheEntryInfo, lpcbCacheEntryInfo)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GetUrlCacheEntryInfoExA == "on"]
+foreign {
     // param-hint: lpCacheEntryInfo bytes=param[2] optional
     // param-hint: lpcbCacheEntryInfo optional
     // param-hint: lpszRedirectUrl optional reserved
@@ -7308,6 +8105,15 @@ foreign {
     // param-hint: lpReserved optional reserved
     // pinvoke-hint: SetLastError
     func GetUrlCacheEntryInfoExA(lpszUrl: CPointer<UInt8>, lpCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOAAbi>, lpcbCacheEntryInfo: CPointer<UInt32>, lpszRedirectUrl: CPointer<UInt8>, lpcbRedirectUrl: CPointer<UInt32>, lpReserved: CPointer<Unit>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GetUrlCacheEntryInfoExA == "on"]
+public unsafe func Windows_GetUrlCacheEntryInfoExA(lpszUrl: CPointer<UInt8>, lpCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOAAbi>, lpcbCacheEntryInfo: CPointer<UInt32>, lpszRedirectUrl: CPointer<UInt8>, lpcbRedirectUrl: CPointer<UInt32>, lpReserved: CPointer<Unit>, dwFlags: UInt32): Int32 {
+    return GetUrlCacheEntryInfoExA(lpszUrl, lpCacheEntryInfo, lpcbCacheEntryInfo, lpszRedirectUrl, lpcbRedirectUrl, lpReserved, dwFlags)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GetUrlCacheEntryInfoExW == "on"]
+foreign {
     // param-hint: lpCacheEntryInfo bytes=param[2] optional
     // param-hint: lpcbCacheEntryInfo optional
     // param-hint: lpszRedirectUrl optional reserved
@@ -7315,89 +8121,332 @@ foreign {
     // param-hint: lpReserved optional reserved
     // pinvoke-hint: SetLastError
     func GetUrlCacheEntryInfoExW(lpszUrl: CPointer<UInt16>, lpCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOWAbi>, lpcbCacheEntryInfo: CPointer<UInt32>, lpszRedirectUrl: CPointer<UInt16>, lpcbRedirectUrl: CPointer<UInt32>, lpReserved: CPointer<Unit>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GetUrlCacheEntryInfoExW == "on"]
+public unsafe func Windows_GetUrlCacheEntryInfoExW(lpszUrl: CPointer<UInt16>, lpCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOWAbi>, lpcbCacheEntryInfo: CPointer<UInt32>, lpszRedirectUrl: CPointer<UInt16>, lpcbRedirectUrl: CPointer<UInt32>, lpReserved: CPointer<Unit>, dwFlags: UInt32): Int32 {
+    return GetUrlCacheEntryInfoExW(lpszUrl, lpCacheEntryInfo, lpcbCacheEntryInfo, lpszRedirectUrl, lpcbRedirectUrl, lpReserved, dwFlags)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GetUrlCacheEntryInfoW == "on"]
+foreign {
     // param-hint: lpCacheEntryInfo bytes=param[2] optional
     // param-hint: lpcbCacheEntryInfo optional
     // pinvoke-hint: SetLastError
     func GetUrlCacheEntryInfoW(lpszUrlName: CPointer<UInt16>, lpCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOWAbi>, lpcbCacheEntryInfo: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GetUrlCacheEntryInfoW == "on"]
+public unsafe func Windows_GetUrlCacheEntryInfoW(lpszUrlName: CPointer<UInt16>, lpCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOWAbi>, lpcbCacheEntryInfo: CPointer<UInt32>): Int32 {
+    return GetUrlCacheEntryInfoW(lpszUrlName, lpCacheEntryInfo, lpcbCacheEntryInfo)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GetUrlCacheGroupAttributeA == "on"]
+foreign {
     // param-hint: dwFlags optional reserved
     // param-hint: lpGroupInfo bytes=param[4]
     // param-hint: lpReserved optional reserved
     // pinvoke-hint: SetLastError
     func GetUrlCacheGroupAttributeA(gid: Int64, dwFlags: UInt32, dwAttributes: UInt32, lpGroupInfo: CPointer<INTERNET_CACHE_GROUP_INFOAAbi>, lpcbGroupInfo: CPointer<UInt32>, lpReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GetUrlCacheGroupAttributeA == "on"]
+public unsafe func Windows_GetUrlCacheGroupAttributeA(gid: Int64, dwFlags: UInt32, dwAttributes: UInt32, lpGroupInfo: CPointer<INTERNET_CACHE_GROUP_INFOAAbi>, lpcbGroupInfo: CPointer<UInt32>, lpReserved: CPointer<Unit>): Int32 {
+    return GetUrlCacheGroupAttributeA(gid, dwFlags, dwAttributes, lpGroupInfo, lpcbGroupInfo, lpReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GetUrlCacheGroupAttributeW == "on"]
+foreign {
     // param-hint: dwFlags optional reserved
     // param-hint: lpGroupInfo bytes=param[4]
     // param-hint: lpReserved optional reserved
     // pinvoke-hint: SetLastError
     func GetUrlCacheGroupAttributeW(gid: Int64, dwFlags: UInt32, dwAttributes: UInt32, lpGroupInfo: CPointer<INTERNET_CACHE_GROUP_INFOWAbi>, lpcbGroupInfo: CPointer<UInt32>, lpReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GetUrlCacheGroupAttributeW == "on"]
+public unsafe func Windows_GetUrlCacheGroupAttributeW(gid: Int64, dwFlags: UInt32, dwAttributes: UInt32, lpGroupInfo: CPointer<INTERNET_CACHE_GROUP_INFOWAbi>, lpcbGroupInfo: CPointer<UInt32>, lpReserved: CPointer<Unit>): Int32 {
+    return GetUrlCacheGroupAttributeW(gid, dwFlags, dwAttributes, lpGroupInfo, lpcbGroupInfo, lpReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GetUrlCacheHeaderData == "on"]
+foreign {
     func GetUrlCacheHeaderData(nIdx: UInt32, lpdwData: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GetUrlCacheHeaderData == "on"]
+public unsafe func Windows_GetUrlCacheHeaderData(nIdx: UInt32, lpdwData: CPointer<UInt32>): Int32 {
+    return GetUrlCacheHeaderData(nIdx, lpdwData)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GopherCreateLocatorA == "on"]
+foreign {
     // param-hint: lpszDisplayString optional
     // param-hint: lpszSelectorString optional
     // param-hint: lpszLocator len=param[6] optional
     // pinvoke-hint: SetLastError
     func GopherCreateLocatorA(lpszHost: CPointer<UInt8>, nServerPort: UInt16, lpszDisplayString: CPointer<UInt8>, lpszSelectorString: CPointer<UInt8>, dwGopherType: UInt32, lpszLocator: CPointer<UInt8>, lpdwBufferLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GopherCreateLocatorA == "on"]
+public unsafe func Windows_GopherCreateLocatorA(lpszHost: CPointer<UInt8>, nServerPort: UInt16, lpszDisplayString: CPointer<UInt8>, lpszSelectorString: CPointer<UInt8>, dwGopherType: UInt32, lpszLocator: CPointer<UInt8>, lpdwBufferLength: CPointer<UInt32>): Int32 {
+    return GopherCreateLocatorA(lpszHost, nServerPort, lpszDisplayString, lpszSelectorString, dwGopherType, lpszLocator, lpdwBufferLength)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GopherCreateLocatorW == "on"]
+foreign {
     // param-hint: lpszDisplayString optional
     // param-hint: lpszSelectorString optional
     // param-hint: lpszLocator len=param[6] optional
     // pinvoke-hint: SetLastError
     func GopherCreateLocatorW(lpszHost: CPointer<UInt16>, nServerPort: UInt16, lpszDisplayString: CPointer<UInt16>, lpszSelectorString: CPointer<UInt16>, dwGopherType: UInt32, lpszLocator: CPointer<UInt16>, lpdwBufferLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GopherCreateLocatorW == "on"]
+public unsafe func Windows_GopherCreateLocatorW(lpszHost: CPointer<UInt16>, nServerPort: UInt16, lpszDisplayString: CPointer<UInt16>, lpszSelectorString: CPointer<UInt16>, dwGopherType: UInt32, lpszLocator: CPointer<UInt16>, lpdwBufferLength: CPointer<UInt32>): Int32 {
+    return GopherCreateLocatorW(lpszHost, nServerPort, lpszDisplayString, lpszSelectorString, dwGopherType, lpszLocator, lpdwBufferLength)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GopherFindFirstFileA == "on"]
+foreign {
     // param-hint: lpszLocator optional
     // param-hint: lpszSearchString optional
     // param-hint: lpFindData optional
     // param-hint: dwContext optional
     // pinvoke-hint: SetLastError
     func GopherFindFirstFileA(hConnect: CPointer<Unit>, lpszLocator: CPointer<UInt8>, lpszSearchString: CPointer<UInt8>, lpFindData: CPointer<GOPHER_FIND_DATAAAbi>, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GopherFindFirstFileA == "on"]
+public unsafe func Windows_GopherFindFirstFileA(hConnect: CPointer<Unit>, lpszLocator: CPointer<UInt8>, lpszSearchString: CPointer<UInt8>, lpFindData: CPointer<GOPHER_FIND_DATAAAbi>, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit> {
+    return GopherFindFirstFileA(hConnect, lpszLocator, lpszSearchString, lpFindData, dwFlags, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GopherFindFirstFileW == "on"]
+foreign {
     // param-hint: lpszLocator optional
     // param-hint: lpszSearchString optional
     // param-hint: lpFindData optional
     // param-hint: dwContext optional
     // pinvoke-hint: SetLastError
     func GopherFindFirstFileW(hConnect: CPointer<Unit>, lpszLocator: CPointer<UInt16>, lpszSearchString: CPointer<UInt16>, lpFindData: CPointer<GOPHER_FIND_DATAWAbi>, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GopherFindFirstFileW == "on"]
+public unsafe func Windows_GopherFindFirstFileW(hConnect: CPointer<Unit>, lpszLocator: CPointer<UInt16>, lpszSearchString: CPointer<UInt16>, lpFindData: CPointer<GOPHER_FIND_DATAWAbi>, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit> {
+    return GopherFindFirstFileW(hConnect, lpszLocator, lpszSearchString, lpFindData, dwFlags, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GopherGetAttributeA == "on"]
+foreign {
     // param-hint: lpszAttributeName optional
     // param-hint: lpBuffer len=param[4]
     // param-hint: lpfnEnumerator optional
     // param-hint: dwContext optional
     // pinvoke-hint: SetLastError
     func GopherGetAttributeA(hConnect: CPointer<Unit>, lpszLocator: CPointer<UInt8>, lpszAttributeName: CPointer<UInt8>, lpBuffer: CPointer<UInt8>, dwBufferLength: UInt32, lpdwCharactersReturned: CPointer<UInt32>, lpfnEnumerator: GOPHER_ATTRIBUTE_ENUMERATOR, dwContext: UIntNative): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GopherGetAttributeA == "on"]
+public unsafe func Windows_GopherGetAttributeA(hConnect: CPointer<Unit>, lpszLocator: CPointer<UInt8>, lpszAttributeName: CPointer<UInt8>, lpBuffer: CPointer<UInt8>, dwBufferLength: UInt32, lpdwCharactersReturned: CPointer<UInt32>, lpfnEnumerator: GOPHER_ATTRIBUTE_ENUMERATOR, dwContext: UIntNative): Int32 {
+    return GopherGetAttributeA(hConnect, lpszLocator, lpszAttributeName, lpBuffer, dwBufferLength, lpdwCharactersReturned, lpfnEnumerator, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GopherGetAttributeW == "on"]
+foreign {
     // param-hint: lpszAttributeName optional
     // param-hint: lpBuffer len=param[4]
     // param-hint: lpfnEnumerator optional
     // param-hint: dwContext optional
     // pinvoke-hint: SetLastError
     func GopherGetAttributeW(hConnect: CPointer<Unit>, lpszLocator: CPointer<UInt16>, lpszAttributeName: CPointer<UInt16>, lpBuffer: CPointer<UInt8>, dwBufferLength: UInt32, lpdwCharactersReturned: CPointer<UInt32>, lpfnEnumerator: GOPHER_ATTRIBUTE_ENUMERATOR, dwContext: UIntNative): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GopherGetAttributeW == "on"]
+public unsafe func Windows_GopherGetAttributeW(hConnect: CPointer<Unit>, lpszLocator: CPointer<UInt16>, lpszAttributeName: CPointer<UInt16>, lpBuffer: CPointer<UInt8>, dwBufferLength: UInt32, lpdwCharactersReturned: CPointer<UInt32>, lpfnEnumerator: GOPHER_ATTRIBUTE_ENUMERATOR, dwContext: UIntNative): Int32 {
+    return GopherGetAttributeW(hConnect, lpszLocator, lpszAttributeName, lpBuffer, dwBufferLength, lpdwCharactersReturned, lpfnEnumerator, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GopherGetLocatorTypeA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GopherGetLocatorTypeA(lpszLocator: CPointer<UInt8>, lpdwGopherType: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GopherGetLocatorTypeA == "on"]
+public unsafe func Windows_GopherGetLocatorTypeA(lpszLocator: CPointer<UInt8>, lpdwGopherType: CPointer<UInt32>): Int32 {
+    return GopherGetLocatorTypeA(lpszLocator, lpdwGopherType)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GopherGetLocatorTypeW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GopherGetLocatorTypeW(lpszLocator: CPointer<UInt16>, lpdwGopherType: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GopherGetLocatorTypeW == "on"]
+public unsafe func Windows_GopherGetLocatorTypeW(lpszLocator: CPointer<UInt16>, lpdwGopherType: CPointer<UInt32>): Int32 {
+    return GopherGetLocatorTypeW(lpszLocator, lpdwGopherType)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GopherOpenFileA == "on"]
+foreign {
     // param-hint: lpszView optional
     // param-hint: dwContext optional
     // pinvoke-hint: SetLastError
     func GopherOpenFileA(hConnect: CPointer<Unit>, lpszLocator: CPointer<UInt8>, lpszView: CPointer<UInt8>, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GopherOpenFileA == "on"]
+public unsafe func Windows_GopherOpenFileA(hConnect: CPointer<Unit>, lpszLocator: CPointer<UInt8>, lpszView: CPointer<UInt8>, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit> {
+    return GopherOpenFileA(hConnect, lpszLocator, lpszView, dwFlags, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GopherOpenFileW == "on"]
+foreign {
     // param-hint: lpszView optional
     // param-hint: dwContext optional
     // pinvoke-hint: SetLastError
     func GopherOpenFileW(hConnect: CPointer<Unit>, lpszLocator: CPointer<UInt16>, lpszView: CPointer<UInt16>, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_GopherOpenFileW == "on"]
+public unsafe func Windows_GopherOpenFileW(hConnect: CPointer<Unit>, lpszLocator: CPointer<UInt16>, lpszView: CPointer<UInt16>, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit> {
+    return GopherOpenFileW(hConnect, lpszLocator, lpszView, dwFlags, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpAddRequestHeadersA == "on"]
+foreign {
     // param-hint: lpszHeaders len=param[2]
     // pinvoke-hint: SetLastError
     func HttpAddRequestHeadersA(hRequest: CPointer<Unit>, lpszHeaders: CPointer<UInt8>, dwHeadersLength: UInt32, dwModifiers: HTTP_ADDREQ_FLAGAbi): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpAddRequestHeadersA == "on"]
+public unsafe func Windows_HttpAddRequestHeadersA(hRequest: CPointer<Unit>, lpszHeaders: CPointer<UInt8>, dwHeadersLength: UInt32, dwModifiers: HTTP_ADDREQ_FLAGAbi): Int32 {
+    return HttpAddRequestHeadersA(hRequest, lpszHeaders, dwHeadersLength, dwModifiers)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpAddRequestHeadersW == "on"]
+foreign {
     // param-hint: lpszHeaders len=param[2]
     // pinvoke-hint: SetLastError
     func HttpAddRequestHeadersW(hRequest: CPointer<Unit>, lpszHeaders: CPointer<UInt16>, dwHeadersLength: UInt32, dwModifiers: HTTP_ADDREQ_FLAGAbi): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpAddRequestHeadersW == "on"]
+public unsafe func Windows_HttpAddRequestHeadersW(hRequest: CPointer<Unit>, lpszHeaders: CPointer<UInt16>, dwHeadersLength: UInt32, dwModifiers: HTTP_ADDREQ_FLAGAbi): Int32 {
+    return HttpAddRequestHeadersW(hRequest, lpszHeaders, dwHeadersLength, dwModifiers)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpCheckDavComplianceA == "on"]
+foreign {
     func HttpCheckDavComplianceA(lpszUrl: CPointer<UInt8>, lpszComplianceToken: CPointer<UInt8>, lpfFound: CPointer<Int32>, hWnd: CPointer<Unit>, lpvReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpCheckDavComplianceA == "on"]
+public unsafe func Windows_HttpCheckDavComplianceA(lpszUrl: CPointer<UInt8>, lpszComplianceToken: CPointer<UInt8>, lpfFound: CPointer<Int32>, hWnd: CPointer<Unit>, lpvReserved: CPointer<Unit>): Int32 {
+    return HttpCheckDavComplianceA(lpszUrl, lpszComplianceToken, lpfFound, hWnd, lpvReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpCheckDavComplianceW == "on"]
+foreign {
     func HttpCheckDavComplianceW(lpszUrl: CPointer<UInt16>, lpszComplianceToken: CPointer<UInt16>, lpfFound: CPointer<Int32>, hWnd: CPointer<Unit>, lpvReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpCheckDavComplianceW == "on"]
+public unsafe func Windows_HttpCheckDavComplianceW(lpszUrl: CPointer<UInt16>, lpszComplianceToken: CPointer<UInt16>, lpfFound: CPointer<Int32>, hWnd: CPointer<Unit>, lpvReserved: CPointer<Unit>): Int32 {
+    return HttpCheckDavComplianceW(lpszUrl, lpszComplianceToken, lpfFound, hWnd, lpvReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpCloseDependencyHandle == "on"]
+foreign {
     func HttpCloseDependencyHandle(hDependencyHandle: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpCloseDependencyHandle == "on"]
+public unsafe func Windows_HttpCloseDependencyHandle(hDependencyHandle: CPointer<Unit>): Unit {
+    HttpCloseDependencyHandle(hDependencyHandle)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpDuplicateDependencyHandle == "on"]
+foreign {
     func HttpDuplicateDependencyHandle(hDependencyHandle: CPointer<Unit>, phDuplicatedDependencyHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpDuplicateDependencyHandle == "on"]
+public unsafe func Windows_HttpDuplicateDependencyHandle(hDependencyHandle: CPointer<Unit>, phDuplicatedDependencyHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return HttpDuplicateDependencyHandle(hDependencyHandle, phDuplicatedDependencyHandle)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpEndRequestA == "on"]
+foreign {
     // param-hint: lpBuffersOut optional
     // param-hint: dwContext optional
     // pinvoke-hint: SetLastError
     func HttpEndRequestA(hRequest: CPointer<Unit>, lpBuffersOut: CPointer<INTERNET_BUFFERSAAbi>, dwFlags: UInt32, dwContext: UIntNative): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpEndRequestA == "on"]
+public unsafe func Windows_HttpEndRequestA(hRequest: CPointer<Unit>, lpBuffersOut: CPointer<INTERNET_BUFFERSAAbi>, dwFlags: UInt32, dwContext: UIntNative): Int32 {
+    return HttpEndRequestA(hRequest, lpBuffersOut, dwFlags, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpEndRequestW == "on"]
+foreign {
     // param-hint: lpBuffersOut optional
     // param-hint: dwContext optional
     // pinvoke-hint: SetLastError
     func HttpEndRequestW(hRequest: CPointer<Unit>, lpBuffersOut: CPointer<INTERNET_BUFFERSWAbi>, dwFlags: UInt32, dwContext: UIntNative): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpEndRequestW == "on"]
+public unsafe func Windows_HttpEndRequestW(hRequest: CPointer<Unit>, lpBuffersOut: CPointer<INTERNET_BUFFERSWAbi>, dwFlags: UInt32, dwContext: UIntNative): Int32 {
+    return HttpEndRequestW(hRequest, lpBuffersOut, dwFlags, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpGetServerCredentials == "on"]
+foreign {
     func HttpGetServerCredentials(pwszUrl: CPointer<UInt16>, ppwszUserName: CPointer<CPointer<UInt16>>, ppwszPassword: CPointer<CPointer<UInt16>>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpGetServerCredentials == "on"]
+public unsafe func Windows_HttpGetServerCredentials(pwszUrl: CPointer<UInt16>, ppwszUserName: CPointer<CPointer<UInt16>>, ppwszPassword: CPointer<CPointer<UInt16>>): UInt32 {
+    return HttpGetServerCredentials(pwszUrl, ppwszUserName, ppwszPassword)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpIndicatePageLoadComplete == "on"]
+foreign {
     func HttpIndicatePageLoadComplete(hDependencyHandle: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpIndicatePageLoadComplete == "on"]
+public unsafe func Windows_HttpIndicatePageLoadComplete(hDependencyHandle: CPointer<Unit>): UInt32 {
+    return HttpIndicatePageLoadComplete(hDependencyHandle)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpIsHostHstsEnabled == "on"]
+foreign {
     func HttpIsHostHstsEnabled(pcwszUrl: CPointer<UInt16>, pfIsHsts: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpIsHostHstsEnabled == "on"]
+public unsafe func Windows_HttpIsHostHstsEnabled(pcwszUrl: CPointer<UInt16>, pfIsHsts: CPointer<Int32>): UInt32 {
+    return HttpIsHostHstsEnabled(pcwszUrl, pfIsHsts)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpOpenDependencyHandle == "on"]
+foreign {
     func HttpOpenDependencyHandle(hRequestHandle: CPointer<Unit>, fBackground: Int32, phDependencyHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpOpenDependencyHandle == "on"]
+public unsafe func Windows_HttpOpenDependencyHandle(hRequestHandle: CPointer<Unit>, fBackground: Int32, phDependencyHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return HttpOpenDependencyHandle(hRequestHandle, fBackground, phDependencyHandle)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpOpenRequestA == "on"]
+foreign {
     // param-hint: lpszVerb optional
     // param-hint: lpszObjectName optional
     // param-hint: lpszVersion optional
@@ -7406,6 +8455,15 @@ foreign {
     // param-hint: dwContext optional
     // pinvoke-hint: SetLastError
     func HttpOpenRequestA(hConnect: CPointer<Unit>, lpszVerb: CPointer<UInt8>, lpszObjectName: CPointer<UInt8>, lpszVersion: CPointer<UInt8>, lpszReferrer: CPointer<UInt8>, lplpszAcceptTypes: CPointer<CPointer<UInt8>>, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpOpenRequestA == "on"]
+public unsafe func Windows_HttpOpenRequestA(hConnect: CPointer<Unit>, lpszVerb: CPointer<UInt8>, lpszObjectName: CPointer<UInt8>, lpszVersion: CPointer<UInt8>, lpszReferrer: CPointer<UInt8>, lplpszAcceptTypes: CPointer<CPointer<UInt8>>, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit> {
+    return HttpOpenRequestA(hConnect, lpszVerb, lpszObjectName, lpszVersion, lpszReferrer, lplpszAcceptTypes, dwFlags, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpOpenRequestW == "on"]
+foreign {
     // param-hint: lpszVerb optional
     // param-hint: lpszObjectName optional
     // param-hint: lpszVersion optional
@@ -7414,332 +8472,1535 @@ foreign {
     // param-hint: dwContext optional
     // pinvoke-hint: SetLastError
     func HttpOpenRequestW(hConnect: CPointer<Unit>, lpszVerb: CPointer<UInt16>, lpszObjectName: CPointer<UInt16>, lpszVersion: CPointer<UInt16>, lpszReferrer: CPointer<UInt16>, lplpszAcceptTypes: CPointer<CPointer<UInt16>>, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpOpenRequestW == "on"]
+public unsafe func Windows_HttpOpenRequestW(hConnect: CPointer<Unit>, lpszVerb: CPointer<UInt16>, lpszObjectName: CPointer<UInt16>, lpszVersion: CPointer<UInt16>, lpszReferrer: CPointer<UInt16>, lplpszAcceptTypes: CPointer<CPointer<UInt16>>, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit> {
+    return HttpOpenRequestW(hConnect, lpszVerb, lpszObjectName, lpszVersion, lpszReferrer, lplpszAcceptTypes, dwFlags, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpPushClose == "on"]
+foreign {
     func HttpPushClose(hWait: HTTP_PUSH_WAIT_HANDLE): Unit
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpPushClose == "on"]
+public unsafe func Windows_HttpPushClose(hWait: HTTP_PUSH_WAIT_HANDLE): Unit {
+    HttpPushClose(hWait)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpPushEnable == "on"]
+foreign {
     func HttpPushEnable(hRequest: CPointer<Unit>, pTransportSetting: CPointer<HTTP_PUSH_TRANSPORT_SETTINGAbi>, phWait: CPointer<HTTP_PUSH_WAIT_HANDLE>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpPushEnable == "on"]
+public unsafe func Windows_HttpPushEnable(hRequest: CPointer<Unit>, pTransportSetting: CPointer<HTTP_PUSH_TRANSPORT_SETTINGAbi>, phWait: CPointer<HTTP_PUSH_WAIT_HANDLE>): UInt32 {
+    return HttpPushEnable(hRequest, pTransportSetting, phWait)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpPushWait == "on"]
+foreign {
     // param-hint: pNotificationStatus optional
     func HttpPushWait(hWait: HTTP_PUSH_WAIT_HANDLE, eType: HTTP_PUSH_WAIT_TYPEAbi, pNotificationStatus: CPointer<HTTP_PUSH_NOTIFICATION_STATUSAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpPushWait == "on"]
+public unsafe func Windows_HttpPushWait(hWait: HTTP_PUSH_WAIT_HANDLE, eType: HTTP_PUSH_WAIT_TYPEAbi, pNotificationStatus: CPointer<HTTP_PUSH_NOTIFICATION_STATUSAbi>): UInt32 {
+    return HttpPushWait(hWait, eType, pNotificationStatus)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpQueryInfoA == "on"]
+foreign {
     // param-hint: lpBuffer bytes=param[3] optional
     // param-hint: lpdwIndex optional
     // pinvoke-hint: SetLastError
     func HttpQueryInfoA(hRequest: CPointer<Unit>, dwInfoLevel: UInt32, lpBuffer: CPointer<Unit>, lpdwBufferLength: CPointer<UInt32>, lpdwIndex: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpQueryInfoA == "on"]
+public unsafe func Windows_HttpQueryInfoA(hRequest: CPointer<Unit>, dwInfoLevel: UInt32, lpBuffer: CPointer<Unit>, lpdwBufferLength: CPointer<UInt32>, lpdwIndex: CPointer<UInt32>): Int32 {
+    return HttpQueryInfoA(hRequest, dwInfoLevel, lpBuffer, lpdwBufferLength, lpdwIndex)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpQueryInfoW == "on"]
+foreign {
     // param-hint: lpBuffer bytes=param[3] optional
     // param-hint: lpdwIndex optional
     // pinvoke-hint: SetLastError
     func HttpQueryInfoW(hRequest: CPointer<Unit>, dwInfoLevel: UInt32, lpBuffer: CPointer<Unit>, lpdwBufferLength: CPointer<UInt32>, lpdwIndex: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpQueryInfoW == "on"]
+public unsafe func Windows_HttpQueryInfoW(hRequest: CPointer<Unit>, dwInfoLevel: UInt32, lpBuffer: CPointer<Unit>, lpdwBufferLength: CPointer<UInt32>, lpdwIndex: CPointer<UInt32>): Int32 {
+    return HttpQueryInfoW(hRequest, dwInfoLevel, lpBuffer, lpdwBufferLength, lpdwIndex)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpSendRequestA == "on"]
+foreign {
     // param-hint: lpszHeaders len=param[2] optional
     // param-hint: lpOptional bytes=param[4] optional
     // pinvoke-hint: SetLastError
     func HttpSendRequestA(hRequest: CPointer<Unit>, lpszHeaders: CPointer<UInt8>, dwHeadersLength: UInt32, lpOptional: CPointer<Unit>, dwOptionalLength: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpSendRequestA == "on"]
+public unsafe func Windows_HttpSendRequestA(hRequest: CPointer<Unit>, lpszHeaders: CPointer<UInt8>, dwHeadersLength: UInt32, lpOptional: CPointer<Unit>, dwOptionalLength: UInt32): Int32 {
+    return HttpSendRequestA(hRequest, lpszHeaders, dwHeadersLength, lpOptional, dwOptionalLength)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpSendRequestExA == "on"]
+foreign {
     // param-hint: lpBuffersIn optional
     // param-hint: lpBuffersOut optional
     // param-hint: dwContext optional
     // pinvoke-hint: SetLastError
     func HttpSendRequestExA(hRequest: CPointer<Unit>, lpBuffersIn: CPointer<INTERNET_BUFFERSAAbi>, lpBuffersOut: CPointer<INTERNET_BUFFERSAAbi>, dwFlags: UInt32, dwContext: UIntNative): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpSendRequestExA == "on"]
+public unsafe func Windows_HttpSendRequestExA(hRequest: CPointer<Unit>, lpBuffersIn: CPointer<INTERNET_BUFFERSAAbi>, lpBuffersOut: CPointer<INTERNET_BUFFERSAAbi>, dwFlags: UInt32, dwContext: UIntNative): Int32 {
+    return HttpSendRequestExA(hRequest, lpBuffersIn, lpBuffersOut, dwFlags, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpSendRequestExW == "on"]
+foreign {
     // param-hint: lpBuffersIn optional
     // param-hint: lpBuffersOut optional
     // param-hint: dwContext optional
     // pinvoke-hint: SetLastError
     func HttpSendRequestExW(hRequest: CPointer<Unit>, lpBuffersIn: CPointer<INTERNET_BUFFERSWAbi>, lpBuffersOut: CPointer<INTERNET_BUFFERSWAbi>, dwFlags: UInt32, dwContext: UIntNative): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpSendRequestExW == "on"]
+public unsafe func Windows_HttpSendRequestExW(hRequest: CPointer<Unit>, lpBuffersIn: CPointer<INTERNET_BUFFERSWAbi>, lpBuffersOut: CPointer<INTERNET_BUFFERSWAbi>, dwFlags: UInt32, dwContext: UIntNative): Int32 {
+    return HttpSendRequestExW(hRequest, lpBuffersIn, lpBuffersOut, dwFlags, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpSendRequestW == "on"]
+foreign {
     // param-hint: lpszHeaders len=param[2] optional
     // param-hint: lpOptional bytes=param[4] optional
     // pinvoke-hint: SetLastError
     func HttpSendRequestW(hRequest: CPointer<Unit>, lpszHeaders: CPointer<UInt16>, dwHeadersLength: UInt32, lpOptional: CPointer<Unit>, dwOptionalLength: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpSendRequestW == "on"]
+public unsafe func Windows_HttpSendRequestW(hRequest: CPointer<Unit>, lpszHeaders: CPointer<UInt16>, dwHeadersLength: UInt32, lpOptional: CPointer<Unit>, dwOptionalLength: UInt32): Int32 {
+    return HttpSendRequestW(hRequest, lpszHeaders, dwHeadersLength, lpOptional, dwOptionalLength)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpWebSocketClose == "on"]
+foreign {
     // param-hint: pvReason bytes=param[3] optional
     func HttpWebSocketClose(hWebSocket: CPointer<Unit>, usStatus: UInt16, pvReason: CPointer<Unit>, dwReasonLength: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpWebSocketClose == "on"]
+public unsafe func Windows_HttpWebSocketClose(hWebSocket: CPointer<Unit>, usStatus: UInt16, pvReason: CPointer<Unit>, dwReasonLength: UInt32): Int32 {
+    return HttpWebSocketClose(hWebSocket, usStatus, pvReason, dwReasonLength)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpWebSocketCompleteUpgrade == "on"]
+foreign {
     func HttpWebSocketCompleteUpgrade(hRequest: CPointer<Unit>, dwContext: UIntNative): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpWebSocketCompleteUpgrade == "on"]
+public unsafe func Windows_HttpWebSocketCompleteUpgrade(hRequest: CPointer<Unit>, dwContext: UIntNative): CPointer<Unit> {
+    return HttpWebSocketCompleteUpgrade(hRequest, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpWebSocketQueryCloseStatus == "on"]
+foreign {
     // param-hint: pvReason bytes=param[3] optional
     func HttpWebSocketQueryCloseStatus(hWebSocket: CPointer<Unit>, pusStatus: CPointer<UInt16>, pvReason: CPointer<Unit>, dwReasonLength: UInt32, pdwReasonLengthConsumed: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpWebSocketQueryCloseStatus == "on"]
+public unsafe func Windows_HttpWebSocketQueryCloseStatus(hWebSocket: CPointer<Unit>, pusStatus: CPointer<UInt16>, pvReason: CPointer<Unit>, dwReasonLength: UInt32, pdwReasonLengthConsumed: CPointer<UInt32>): Int32 {
+    return HttpWebSocketQueryCloseStatus(hWebSocket, pusStatus, pvReason, dwReasonLength, pdwReasonLengthConsumed)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpWebSocketReceive == "on"]
+foreign {
     // param-hint: pvBuffer bytes=param[2]
     func HttpWebSocketReceive(hWebSocket: CPointer<Unit>, pvBuffer: CPointer<Unit>, dwBufferLength: UInt32, pdwBytesRead: CPointer<UInt32>, pBufferType: CPointer<HTTP_WEB_SOCKET_BUFFER_TYPEAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpWebSocketReceive == "on"]
+public unsafe func Windows_HttpWebSocketReceive(hWebSocket: CPointer<Unit>, pvBuffer: CPointer<Unit>, dwBufferLength: UInt32, pdwBytesRead: CPointer<UInt32>, pBufferType: CPointer<HTTP_WEB_SOCKET_BUFFER_TYPEAbi>): Int32 {
+    return HttpWebSocketReceive(hWebSocket, pvBuffer, dwBufferLength, pdwBytesRead, pBufferType)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpWebSocketSend == "on"]
+foreign {
     // param-hint: pvBuffer bytes=param[3] optional
     func HttpWebSocketSend(hWebSocket: CPointer<Unit>, BufferType: HTTP_WEB_SOCKET_BUFFER_TYPEAbi, pvBuffer: CPointer<Unit>, dwBufferLength: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpWebSocketSend == "on"]
+public unsafe func Windows_HttpWebSocketSend(hWebSocket: CPointer<Unit>, BufferType: HTTP_WEB_SOCKET_BUFFER_TYPEAbi, pvBuffer: CPointer<Unit>, dwBufferLength: UInt32): Int32 {
+    return HttpWebSocketSend(hWebSocket, BufferType, pvBuffer, dwBufferLength)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpWebSocketShutdown == "on"]
+foreign {
     // param-hint: pvReason bytes=param[3] optional
     func HttpWebSocketShutdown(hWebSocket: CPointer<Unit>, usStatus: UInt16, pvReason: CPointer<Unit>, dwReasonLength: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_HttpWebSocketShutdown == "on"]
+public unsafe func Windows_HttpWebSocketShutdown(hWebSocket: CPointer<Unit>, usStatus: UInt16, pvReason: CPointer<Unit>, dwReasonLength: UInt32): Int32 {
+    return HttpWebSocketShutdown(hWebSocket, usStatus, pvReason, dwReasonLength)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_ImportCookieFileA == "on"]
+foreign {
     func ImportCookieFileA(szFilename: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_ImportCookieFileA == "on"]
+public unsafe func Windows_ImportCookieFileA(szFilename: CPointer<UInt8>): Int32 {
+    return ImportCookieFileA(szFilename)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_ImportCookieFileW == "on"]
+foreign {
     func ImportCookieFileW(szFilename: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_ImportCookieFileW == "on"]
+public unsafe func Windows_ImportCookieFileW(szFilename: CPointer<UInt16>): Int32 {
+    return ImportCookieFileW(szFilename)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_IncrementUrlCacheHeaderData == "on"]
+foreign {
     func IncrementUrlCacheHeaderData(nIdx: UInt32, lpdwData: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_IncrementUrlCacheHeaderData == "on"]
+public unsafe func Windows_IncrementUrlCacheHeaderData(nIdx: UInt32, lpdwData: CPointer<UInt32>): Int32 {
+    return IncrementUrlCacheHeaderData(nIdx, lpdwData)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternalInternetGetCookie == "on"]
+foreign {
     // param-hint: lpszCookieData len=param[2]
     func InternalInternetGetCookie(lpszUrl: CPointer<UInt8>, lpszCookieData: CPointer<UInt8>, lpdwDataSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternalInternetGetCookie == "on"]
+public unsafe func Windows_InternalInternetGetCookie(lpszUrl: CPointer<UInt8>, lpszCookieData: CPointer<UInt8>, lpdwDataSize: CPointer<UInt32>): UInt32 {
+    return InternalInternetGetCookie(lpszUrl, lpszCookieData, lpdwDataSize)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetAlgIdToStringA == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
+    // param-hint: lpstr len=param[2]
+    // param-hint: dwReserved optional reserved
+    func InternetAlgIdToStringA(ai: Win32__impl_l0.ALG_IDAbi, lpstr: CPointer<UInt8>, lpdwstrLength: CPointer<UInt32>, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetAlgIdToStringA == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_InternetAlgIdToStringA(ai: Win32__impl_l0.ALG_IDAbi, lpstr: CPointer<UInt8>, lpdwstrLength: CPointer<UInt32>, dwReserved: UInt32): Int32 {
+    return InternetAlgIdToStringA(ai, lpstr, lpdwstrLength, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetAlgIdToStringW == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
+    // param-hint: lpstr len=param[2]
+    // param-hint: dwReserved optional reserved
+    func InternetAlgIdToStringW(ai: Win32__impl_l0.ALG_IDAbi, lpstr: CPointer<UInt16>, lpdwstrLength: CPointer<UInt32>, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetAlgIdToStringW == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_InternetAlgIdToStringW(ai: Win32__impl_l0.ALG_IDAbi, lpstr: CPointer<UInt16>, lpdwstrLength: CPointer<UInt32>, dwReserved: UInt32): Int32 {
+    return InternetAlgIdToStringW(ai, lpstr, lpdwstrLength, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetAttemptConnect == "on"]
+foreign {
     func InternetAttemptConnect(dwReserved: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetAttemptConnect == "on"]
+public unsafe func Windows_InternetAttemptConnect(dwReserved: UInt32): UInt32 {
+    return InternetAttemptConnect(dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetAutodial == "on"]
+foreign {
     // param-hint: hwndParent optional
     // pinvoke-hint: SetLastError
     func InternetAutodial(dwFlags: INTERNET_AUTODIALAbi, hwndParent: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetAutodial == "on"]
+public unsafe func Windows_InternetAutodial(dwFlags: INTERNET_AUTODIALAbi, hwndParent: CPointer<Unit>): Int32 {
+    return InternetAutodial(dwFlags, hwndParent)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetAutodialHangup == "on"]
+foreign {
     // param-hint: dwReserved optional reserved
     // pinvoke-hint: SetLastError
     func InternetAutodialHangup(dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetAutodialHangup == "on"]
+public unsafe func Windows_InternetAutodialHangup(dwReserved: UInt32): Int32 {
+    return InternetAutodialHangup(dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetCanonicalizeUrlA == "on"]
+foreign {
     // param-hint: lpszBuffer len=param[2]
     // pinvoke-hint: SetLastError
     func InternetCanonicalizeUrlA(lpszUrl: CPointer<UInt8>, lpszBuffer: CPointer<UInt8>, lpdwBufferLength: CPointer<UInt32>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetCanonicalizeUrlA == "on"]
+public unsafe func Windows_InternetCanonicalizeUrlA(lpszUrl: CPointer<UInt8>, lpszBuffer: CPointer<UInt8>, lpdwBufferLength: CPointer<UInt32>, dwFlags: UInt32): Int32 {
+    return InternetCanonicalizeUrlA(lpszUrl, lpszBuffer, lpdwBufferLength, dwFlags)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetCanonicalizeUrlW == "on"]
+foreign {
     // param-hint: lpszBuffer len=param[2]
     // pinvoke-hint: SetLastError
     func InternetCanonicalizeUrlW(lpszUrl: CPointer<UInt16>, lpszBuffer: CPointer<UInt16>, lpdwBufferLength: CPointer<UInt32>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetCanonicalizeUrlW == "on"]
+public unsafe func Windows_InternetCanonicalizeUrlW(lpszUrl: CPointer<UInt16>, lpszBuffer: CPointer<UInt16>, lpdwBufferLength: CPointer<UInt32>, dwFlags: UInt32): Int32 {
+    return InternetCanonicalizeUrlW(lpszUrl, lpszBuffer, lpdwBufferLength, dwFlags)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetCheckConnectionA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func InternetCheckConnectionA(lpszUrl: CPointer<UInt8>, dwFlags: UInt32, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetCheckConnectionA == "on"]
+public unsafe func Windows_InternetCheckConnectionA(lpszUrl: CPointer<UInt8>, dwFlags: UInt32, dwReserved: UInt32): Int32 {
+    return InternetCheckConnectionA(lpszUrl, dwFlags, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetCheckConnectionW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func InternetCheckConnectionW(lpszUrl: CPointer<UInt16>, dwFlags: UInt32, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetCheckConnectionW == "on"]
+public unsafe func Windows_InternetCheckConnectionW(lpszUrl: CPointer<UInt16>, dwFlags: UInt32, dwReserved: UInt32): Int32 {
+    return InternetCheckConnectionW(lpszUrl, dwFlags, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetClearAllPerSiteCookieDecisions == "on"]
+foreign {
     func InternetClearAllPerSiteCookieDecisions(): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetClearAllPerSiteCookieDecisions == "on"]
+public unsafe func Windows_InternetClearAllPerSiteCookieDecisions(): Int32 {
+    return InternetClearAllPerSiteCookieDecisions()
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetCloseHandle == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func InternetCloseHandle(hInternet: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetCloseHandle == "on"]
+public unsafe func Windows_InternetCloseHandle(hInternet: CPointer<Unit>): Int32 {
+    return InternetCloseHandle(hInternet)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetCombineUrlA == "on"]
+foreign {
     // param-hint: lpszBuffer len=param[3]
     // pinvoke-hint: SetLastError
     func InternetCombineUrlA(lpszBaseUrl: CPointer<UInt8>, lpszRelativeUrl: CPointer<UInt8>, lpszBuffer: CPointer<UInt8>, lpdwBufferLength: CPointer<UInt32>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetCombineUrlA == "on"]
+public unsafe func Windows_InternetCombineUrlA(lpszBaseUrl: CPointer<UInt8>, lpszRelativeUrl: CPointer<UInt8>, lpszBuffer: CPointer<UInt8>, lpdwBufferLength: CPointer<UInt32>, dwFlags: UInt32): Int32 {
+    return InternetCombineUrlA(lpszBaseUrl, lpszRelativeUrl, lpszBuffer, lpdwBufferLength, dwFlags)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetCombineUrlW == "on"]
+foreign {
     // param-hint: lpszBuffer len=param[3]
     // pinvoke-hint: SetLastError
     func InternetCombineUrlW(lpszBaseUrl: CPointer<UInt16>, lpszRelativeUrl: CPointer<UInt16>, lpszBuffer: CPointer<UInt16>, lpdwBufferLength: CPointer<UInt32>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetCombineUrlW == "on"]
+public unsafe func Windows_InternetCombineUrlW(lpszBaseUrl: CPointer<UInt16>, lpszRelativeUrl: CPointer<UInt16>, lpszBuffer: CPointer<UInt16>, lpdwBufferLength: CPointer<UInt32>, dwFlags: UInt32): Int32 {
+    return InternetCombineUrlW(lpszBaseUrl, lpszRelativeUrl, lpszBuffer, lpdwBufferLength, dwFlags)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetConfirmZoneCrossing == "on"]
+foreign {
     func InternetConfirmZoneCrossing(hWnd: CPointer<Unit>, szUrlPrev: CPointer<UInt8>, szUrlNew: CPointer<UInt8>, bPost: Int32): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetConfirmZoneCrossing == "on"]
+public unsafe func Windows_InternetConfirmZoneCrossing(hWnd: CPointer<Unit>, szUrlPrev: CPointer<UInt8>, szUrlNew: CPointer<UInt8>, bPost: Int32): UInt32 {
+    return InternetConfirmZoneCrossing(hWnd, szUrlPrev, szUrlNew, bPost)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetConfirmZoneCrossingA == "on"]
+foreign {
     func InternetConfirmZoneCrossingA(hWnd: CPointer<Unit>, szUrlPrev: CPointer<UInt8>, szUrlNew: CPointer<UInt8>, bPost: Int32): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetConfirmZoneCrossingA == "on"]
+public unsafe func Windows_InternetConfirmZoneCrossingA(hWnd: CPointer<Unit>, szUrlPrev: CPointer<UInt8>, szUrlNew: CPointer<UInt8>, bPost: Int32): UInt32 {
+    return InternetConfirmZoneCrossingA(hWnd, szUrlPrev, szUrlNew, bPost)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetConfirmZoneCrossingW == "on"]
+foreign {
     func InternetConfirmZoneCrossingW(hWnd: CPointer<Unit>, szUrlPrev: CPointer<UInt16>, szUrlNew: CPointer<UInt16>, bPost: Int32): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetConfirmZoneCrossingW == "on"]
+public unsafe func Windows_InternetConfirmZoneCrossingW(hWnd: CPointer<Unit>, szUrlPrev: CPointer<UInt16>, szUrlNew: CPointer<UInt16>, bPost: Int32): UInt32 {
+    return InternetConfirmZoneCrossingW(hWnd, szUrlPrev, szUrlNew, bPost)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetConnectA == "on"]
+foreign {
     // param-hint: lpszUserName optional
     // param-hint: lpszPassword optional
     // param-hint: dwContext optional
     // pinvoke-hint: SetLastError
     func InternetConnectA(hInternet: CPointer<Unit>, lpszServerName: CPointer<UInt8>, nServerPort: UInt16, lpszUserName: CPointer<UInt8>, lpszPassword: CPointer<UInt8>, dwService: UInt32, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetConnectA == "on"]
+public unsafe func Windows_InternetConnectA(hInternet: CPointer<Unit>, lpszServerName: CPointer<UInt8>, nServerPort: UInt16, lpszUserName: CPointer<UInt8>, lpszPassword: CPointer<UInt8>, dwService: UInt32, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit> {
+    return InternetConnectA(hInternet, lpszServerName, nServerPort, lpszUserName, lpszPassword, dwService, dwFlags, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetConnectW == "on"]
+foreign {
     // param-hint: lpszUserName optional
     // param-hint: lpszPassword optional
     // param-hint: dwContext optional
     // pinvoke-hint: SetLastError
     func InternetConnectW(hInternet: CPointer<Unit>, lpszServerName: CPointer<UInt16>, nServerPort: UInt16, lpszUserName: CPointer<UInt16>, lpszPassword: CPointer<UInt16>, dwService: UInt32, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetConnectW == "on"]
+public unsafe func Windows_InternetConnectW(hInternet: CPointer<Unit>, lpszServerName: CPointer<UInt16>, nServerPort: UInt16, lpszUserName: CPointer<UInt16>, lpszPassword: CPointer<UInt16>, dwService: UInt32, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit> {
+    return InternetConnectW(hInternet, lpszServerName, nServerPort, lpszUserName, lpszPassword, dwService, dwFlags, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetConvertUrlFromWireToWideChar == "on"]
+foreign {
     // param-hint: pcszUrl len=param[1]
     func InternetConvertUrlFromWireToWideChar(pcszUrl: CPointer<UInt8>, cchUrl: UInt32, pcwszBaseUrl: CPointer<UInt16>, dwCodePageHost: UInt32, dwCodePagePath: UInt32, fEncodePathExtra: Int32, dwCodePageExtra: UInt32, ppwszConvertedUrl: CPointer<CPointer<UInt16>>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetConvertUrlFromWireToWideChar == "on"]
+public unsafe func Windows_InternetConvertUrlFromWireToWideChar(pcszUrl: CPointer<UInt8>, cchUrl: UInt32, pcwszBaseUrl: CPointer<UInt16>, dwCodePageHost: UInt32, dwCodePagePath: UInt32, fEncodePathExtra: Int32, dwCodePageExtra: UInt32, ppwszConvertedUrl: CPointer<CPointer<UInt16>>): UInt32 {
+    return InternetConvertUrlFromWireToWideChar(pcszUrl, cchUrl, pcwszBaseUrl, dwCodePageHost, dwCodePagePath, fEncodePathExtra, dwCodePageExtra, ppwszConvertedUrl)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetCrackUrlA == "on" && Windows_Win32_Networking_WinHttp == "on"]
+foreign {
+    // param-hint: lpszUrl len=param[1]
+    // pinvoke-hint: SetLastError
+    func InternetCrackUrlA(lpszUrl: CPointer<UInt8>, dwUrlLength: UInt32, dwFlags: Win32_Networking_WinHttp.WIN_HTTP_CREATE_URL_FLAGSAbi, lpUrlComponents: CPointer<URL_COMPONENTSAAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetCrackUrlA == "on" && Windows_Win32_Networking_WinHttp == "on"]
+public unsafe func Windows_InternetCrackUrlA(lpszUrl: CPointer<UInt8>, dwUrlLength: UInt32, dwFlags: Win32_Networking_WinHttp.WIN_HTTP_CREATE_URL_FLAGSAbi, lpUrlComponents: CPointer<URL_COMPONENTSAAbi>): Int32 {
+    return InternetCrackUrlA(lpszUrl, dwUrlLength, dwFlags, lpUrlComponents)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetCrackUrlW == "on" && Windows_Win32_Networking_WinHttp == "on"]
+foreign {
+    // param-hint: lpszUrl len=param[1]
+    // pinvoke-hint: SetLastError
+    func InternetCrackUrlW(lpszUrl: CPointer<UInt16>, dwUrlLength: UInt32, dwFlags: Win32_Networking_WinHttp.WIN_HTTP_CREATE_URL_FLAGSAbi, lpUrlComponents: CPointer<URL_COMPONENTSWAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetCrackUrlW == "on" && Windows_Win32_Networking_WinHttp == "on"]
+public unsafe func Windows_InternetCrackUrlW(lpszUrl: CPointer<UInt16>, dwUrlLength: UInt32, dwFlags: Win32_Networking_WinHttp.WIN_HTTP_CREATE_URL_FLAGSAbi, lpUrlComponents: CPointer<URL_COMPONENTSWAbi>): Int32 {
+    return InternetCrackUrlW(lpszUrl, dwUrlLength, dwFlags, lpUrlComponents)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetCreateUrlA == "on"]
+foreign {
     // param-hint: lpszUrl len=param[3] optional
     // pinvoke-hint: SetLastError
     func InternetCreateUrlA(lpUrlComponents: CPointer<URL_COMPONENTSAAbi>, dwFlags: UInt32, lpszUrl: CPointer<UInt8>, lpdwUrlLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetCreateUrlA == "on"]
+public unsafe func Windows_InternetCreateUrlA(lpUrlComponents: CPointer<URL_COMPONENTSAAbi>, dwFlags: UInt32, lpszUrl: CPointer<UInt8>, lpdwUrlLength: CPointer<UInt32>): Int32 {
+    return InternetCreateUrlA(lpUrlComponents, dwFlags, lpszUrl, lpdwUrlLength)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetCreateUrlW == "on"]
+foreign {
     // param-hint: lpszUrl len=param[3] optional
     // pinvoke-hint: SetLastError
     func InternetCreateUrlW(lpUrlComponents: CPointer<URL_COMPONENTSWAbi>, dwFlags: UInt32, lpszUrl: CPointer<UInt16>, lpdwUrlLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetCreateUrlW == "on"]
+public unsafe func Windows_InternetCreateUrlW(lpUrlComponents: CPointer<URL_COMPONENTSWAbi>, dwFlags: UInt32, lpszUrl: CPointer<UInt16>, lpdwUrlLength: CPointer<UInt32>): Int32 {
+    return InternetCreateUrlW(lpUrlComponents, dwFlags, lpszUrl, lpdwUrlLength)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetDial == "on"]
+foreign {
     // param-hint: lpszConnectoid optional
     func InternetDial(hwndParent: CPointer<Unit>, lpszConnectoid: CPointer<UInt8>, dwFlags: UInt32, lpdwConnection: CPointer<UInt32>, dwReserved: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetDial == "on"]
+public unsafe func Windows_InternetDial(hwndParent: CPointer<Unit>, lpszConnectoid: CPointer<UInt8>, dwFlags: UInt32, lpdwConnection: CPointer<UInt32>, dwReserved: UInt32): UInt32 {
+    return InternetDial(hwndParent, lpszConnectoid, dwFlags, lpdwConnection, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetDialA == "on"]
+foreign {
     // param-hint: lpszConnectoid optional
     // param-hint: dwReserved optional reserved
     func InternetDialA(hwndParent: CPointer<Unit>, lpszConnectoid: CPointer<UInt8>, dwFlags: UInt32, lpdwConnection: CPointer<UIntNative>, dwReserved: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetDialA == "on"]
+public unsafe func Windows_InternetDialA(hwndParent: CPointer<Unit>, lpszConnectoid: CPointer<UInt8>, dwFlags: UInt32, lpdwConnection: CPointer<UIntNative>, dwReserved: UInt32): UInt32 {
+    return InternetDialA(hwndParent, lpszConnectoid, dwFlags, lpdwConnection, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetDialW == "on"]
+foreign {
     // param-hint: lpszConnectoid optional
     // param-hint: dwReserved optional reserved
     func InternetDialW(hwndParent: CPointer<Unit>, lpszConnectoid: CPointer<UInt16>, dwFlags: UInt32, lpdwConnection: CPointer<UIntNative>, dwReserved: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetDialW == "on"]
+public unsafe func Windows_InternetDialW(hwndParent: CPointer<Unit>, lpszConnectoid: CPointer<UInt16>, dwFlags: UInt32, lpdwConnection: CPointer<UIntNative>, dwReserved: UInt32): UInt32 {
+    return InternetDialW(hwndParent, lpszConnectoid, dwFlags, lpdwConnection, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetEnumPerSiteCookieDecisionA == "on"]
+foreign {
     // param-hint: pszSiteName len=param[1]
     func InternetEnumPerSiteCookieDecisionA(pszSiteName: CPointer<UInt8>, pcSiteNameSize: CPointer<UInt32>, pdwDecision: CPointer<UInt32>, dwIndex: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetEnumPerSiteCookieDecisionA == "on"]
+public unsafe func Windows_InternetEnumPerSiteCookieDecisionA(pszSiteName: CPointer<UInt8>, pcSiteNameSize: CPointer<UInt32>, pdwDecision: CPointer<UInt32>, dwIndex: UInt32): Int32 {
+    return InternetEnumPerSiteCookieDecisionA(pszSiteName, pcSiteNameSize, pdwDecision, dwIndex)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetEnumPerSiteCookieDecisionW == "on"]
+foreign {
     // param-hint: pszSiteName len=param[1]
     func InternetEnumPerSiteCookieDecisionW(pszSiteName: CPointer<UInt16>, pcSiteNameSize: CPointer<UInt32>, pdwDecision: CPointer<UInt32>, dwIndex: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetEnumPerSiteCookieDecisionW == "on"]
+public unsafe func Windows_InternetEnumPerSiteCookieDecisionW(pszSiteName: CPointer<UInt16>, pcSiteNameSize: CPointer<UInt32>, pdwDecision: CPointer<UInt32>, dwIndex: UInt32): Int32 {
+    return InternetEnumPerSiteCookieDecisionW(pszSiteName, pcSiteNameSize, pdwDecision, dwIndex)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetErrorDlg == "on"]
+foreign {
     // param-hint: hRequest optional
     // param-hint: lppvData optional
     func InternetErrorDlg(hWnd: CPointer<Unit>, hRequest: CPointer<Unit>, dwError: UInt32, dwFlags: UInt32, lppvData: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetErrorDlg == "on"]
+public unsafe func Windows_InternetErrorDlg(hWnd: CPointer<Unit>, hRequest: CPointer<Unit>, dwError: UInt32, dwFlags: UInt32, lppvData: CPointer<CPointer<Unit>>): UInt32 {
+    return InternetErrorDlg(hWnd, hRequest, dwError, dwFlags, lppvData)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetFindNextFileA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func InternetFindNextFileA(hFind: CPointer<Unit>, lpvFindData: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetFindNextFileA == "on"]
+public unsafe func Windows_InternetFindNextFileA(hFind: CPointer<Unit>, lpvFindData: CPointer<Unit>): Int32 {
+    return InternetFindNextFileA(hFind, lpvFindData)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetFindNextFileW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func InternetFindNextFileW(hFind: CPointer<Unit>, lpvFindData: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetFindNextFileW == "on"]
+public unsafe func Windows_InternetFindNextFileW(hFind: CPointer<Unit>, lpvFindData: CPointer<Unit>): Int32 {
+    return InternetFindNextFileW(hFind, lpvFindData)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetFortezzaCommand == "on"]
+foreign {
     // param-hint: dwReserved optional reserved
     func InternetFortezzaCommand(dwCommand: UInt32, hwnd: CPointer<Unit>, dwReserved: UIntNative): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetFortezzaCommand == "on"]
+public unsafe func Windows_InternetFortezzaCommand(dwCommand: UInt32, hwnd: CPointer<Unit>, dwReserved: UIntNative): Int32 {
+    return InternetFortezzaCommand(dwCommand, hwnd, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetFreeCookies == "on"]
+foreign {
     // param-hint: pCookies optional
     func InternetFreeCookies(pCookies: CPointer<INTERNET_COOKIE2Abi>, dwCookieCount: UInt32): Unit
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetFreeCookies == "on"]
+public unsafe func Windows_InternetFreeCookies(pCookies: CPointer<INTERNET_COOKIE2Abi>, dwCookieCount: UInt32): Unit {
+    InternetFreeCookies(pCookies, dwCookieCount)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetFreeProxyInfoList == "on"]
+foreign {
     func InternetFreeProxyInfoList(pProxyInfoList: CPointer<WININET_PROXY_INFO_LISTAbi>): Unit
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetFreeProxyInfoList == "on"]
+public unsafe func Windows_InternetFreeProxyInfoList(pProxyInfoList: CPointer<WININET_PROXY_INFO_LISTAbi>): Unit {
+    InternetFreeProxyInfoList(pProxyInfoList)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetConnectedState == "on"]
+foreign {
     // param-hint: dwReserved optional reserved
     // pinvoke-hint: SetLastError
     func InternetGetConnectedState(lpdwFlags: CPointer<INTERNET_CONNECTIONAbi>, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetConnectedState == "on"]
+public unsafe func Windows_InternetGetConnectedState(lpdwFlags: CPointer<INTERNET_CONNECTIONAbi>, dwReserved: UInt32): Int32 {
+    return InternetGetConnectedState(lpdwFlags, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetConnectedStateEx == "on"]
+foreign {
     // param-hint: lpszConnectionName len=param[2] optional
     // pinvoke-hint: SetLastError
     func InternetGetConnectedStateEx(lpdwFlags: CPointer<INTERNET_CONNECTIONAbi>, lpszConnectionName: CPointer<UInt8>, dwNameLen: UInt32, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetConnectedStateEx == "on"]
+public unsafe func Windows_InternetGetConnectedStateEx(lpdwFlags: CPointer<INTERNET_CONNECTIONAbi>, lpszConnectionName: CPointer<UInt8>, dwNameLen: UInt32, dwReserved: UInt32): Int32 {
+    return InternetGetConnectedStateEx(lpdwFlags, lpszConnectionName, dwNameLen, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetConnectedStateExA == "on"]
+foreign {
     // param-hint: lpdwFlags optional
     // param-hint: lpszConnectionName len=param[2] optional
     // param-hint: dwReserved optional reserved
     // pinvoke-hint: SetLastError
     func InternetGetConnectedStateExA(lpdwFlags: CPointer<INTERNET_CONNECTIONAbi>, lpszConnectionName: CPointer<UInt8>, cchNameLen: UInt32, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetConnectedStateExA == "on"]
+public unsafe func Windows_InternetGetConnectedStateExA(lpdwFlags: CPointer<INTERNET_CONNECTIONAbi>, lpszConnectionName: CPointer<UInt8>, cchNameLen: UInt32, dwReserved: UInt32): Int32 {
+    return InternetGetConnectedStateExA(lpdwFlags, lpszConnectionName, cchNameLen, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetConnectedStateExW == "on"]
+foreign {
     // param-hint: lpdwFlags optional
     // param-hint: lpszConnectionName len=param[2] optional
     // param-hint: dwReserved optional reserved
     // pinvoke-hint: SetLastError
     func InternetGetConnectedStateExW(lpdwFlags: CPointer<INTERNET_CONNECTIONAbi>, lpszConnectionName: CPointer<UInt16>, cchNameLen: UInt32, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetConnectedStateExW == "on"]
+public unsafe func Windows_InternetGetConnectedStateExW(lpdwFlags: CPointer<INTERNET_CONNECTIONAbi>, lpszConnectionName: CPointer<UInt16>, cchNameLen: UInt32, dwReserved: UInt32): Int32 {
+    return InternetGetConnectedStateExW(lpdwFlags, lpszConnectionName, cchNameLen, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetCookieA == "on"]
+foreign {
     // param-hint: lpszCookieName optional
     // param-hint: lpszCookieData len=param[3] optional
     // pinvoke-hint: SetLastError
     func InternetGetCookieA(lpszUrl: CPointer<UInt8>, lpszCookieName: CPointer<UInt8>, lpszCookieData: CPointer<UInt8>, lpdwSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetCookieA == "on"]
+public unsafe func Windows_InternetGetCookieA(lpszUrl: CPointer<UInt8>, lpszCookieName: CPointer<UInt8>, lpszCookieData: CPointer<UInt8>, lpdwSize: CPointer<UInt32>): Int32 {
+    return InternetGetCookieA(lpszUrl, lpszCookieName, lpszCookieData, lpdwSize)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetCookieEx2 == "on"]
+foreign {
     // param-hint: pcwszCookieName optional
     func InternetGetCookieEx2(pcwszUrl: CPointer<UInt16>, pcwszCookieName: CPointer<UInt16>, dwFlags: UInt32, ppCookies: CPointer<CPointer<INTERNET_COOKIE2Abi>>, pdwCookieCount: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetCookieEx2 == "on"]
+public unsafe func Windows_InternetGetCookieEx2(pcwszUrl: CPointer<UInt16>, pcwszCookieName: CPointer<UInt16>, dwFlags: UInt32, ppCookies: CPointer<CPointer<INTERNET_COOKIE2Abi>>, pdwCookieCount: CPointer<UInt32>): UInt32 {
+    return InternetGetCookieEx2(pcwszUrl, pcwszCookieName, dwFlags, ppCookies, pdwCookieCount)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetCookieExA == "on"]
+foreign {
     // param-hint: lpszCookieName optional
     // param-hint: lpszCookieData len=param[3] optional
     // param-hint: lpReserved optional reserved
     // pinvoke-hint: SetLastError
     func InternetGetCookieExA(lpszUrl: CPointer<UInt8>, lpszCookieName: CPointer<UInt8>, lpszCookieData: CPointer<UInt8>, lpdwSize: CPointer<UInt32>, dwFlags: INTERNET_COOKIE_FLAGSAbi, lpReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetCookieExA == "on"]
+public unsafe func Windows_InternetGetCookieExA(lpszUrl: CPointer<UInt8>, lpszCookieName: CPointer<UInt8>, lpszCookieData: CPointer<UInt8>, lpdwSize: CPointer<UInt32>, dwFlags: INTERNET_COOKIE_FLAGSAbi, lpReserved: CPointer<Unit>): Int32 {
+    return InternetGetCookieExA(lpszUrl, lpszCookieName, lpszCookieData, lpdwSize, dwFlags, lpReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetCookieExW == "on"]
+foreign {
     // param-hint: lpszCookieName optional
     // param-hint: lpszCookieData len=param[3] optional
     // param-hint: lpReserved optional reserved
     // pinvoke-hint: SetLastError
     func InternetGetCookieExW(lpszUrl: CPointer<UInt16>, lpszCookieName: CPointer<UInt16>, lpszCookieData: CPointer<UInt16>, lpdwSize: CPointer<UInt32>, dwFlags: INTERNET_COOKIE_FLAGSAbi, lpReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetCookieExW == "on"]
+public unsafe func Windows_InternetGetCookieExW(lpszUrl: CPointer<UInt16>, lpszCookieName: CPointer<UInt16>, lpszCookieData: CPointer<UInt16>, lpdwSize: CPointer<UInt32>, dwFlags: INTERNET_COOKIE_FLAGSAbi, lpReserved: CPointer<Unit>): Int32 {
+    return InternetGetCookieExW(lpszUrl, lpszCookieName, lpszCookieData, lpdwSize, dwFlags, lpReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetCookieW == "on"]
+foreign {
     // param-hint: lpszCookieName optional
     // param-hint: lpszCookieData len=param[3] optional
     // pinvoke-hint: SetLastError
     func InternetGetCookieW(lpszUrl: CPointer<UInt16>, lpszCookieName: CPointer<UInt16>, lpszCookieData: CPointer<UInt16>, lpdwSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetCookieW == "on"]
+public unsafe func Windows_InternetGetCookieW(lpszUrl: CPointer<UInt16>, lpszCookieName: CPointer<UInt16>, lpszCookieData: CPointer<UInt16>, lpdwSize: CPointer<UInt32>): Int32 {
+    return InternetGetCookieW(lpszUrl, lpszCookieName, lpszCookieData, lpdwSize)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetLastResponseInfoA == "on"]
+foreign {
     // param-hint: lpszBuffer len=param[2] optional
     // pinvoke-hint: SetLastError
     func InternetGetLastResponseInfoA(lpdwError: CPointer<UInt32>, lpszBuffer: CPointer<UInt8>, lpdwBufferLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetLastResponseInfoA == "on"]
+public unsafe func Windows_InternetGetLastResponseInfoA(lpdwError: CPointer<UInt32>, lpszBuffer: CPointer<UInt8>, lpdwBufferLength: CPointer<UInt32>): Int32 {
+    return InternetGetLastResponseInfoA(lpdwError, lpszBuffer, lpdwBufferLength)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetLastResponseInfoW == "on"]
+foreign {
     // param-hint: lpszBuffer len=param[2] optional
     // pinvoke-hint: SetLastError
     func InternetGetLastResponseInfoW(lpdwError: CPointer<UInt32>, lpszBuffer: CPointer<UInt16>, lpdwBufferLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetLastResponseInfoW == "on"]
+public unsafe func Windows_InternetGetLastResponseInfoW(lpdwError: CPointer<UInt32>, lpszBuffer: CPointer<UInt16>, lpdwBufferLength: CPointer<UInt32>): Int32 {
+    return InternetGetLastResponseInfoW(lpdwError, lpszBuffer, lpdwBufferLength)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetPerSiteCookieDecisionA == "on"]
+foreign {
     func InternetGetPerSiteCookieDecisionA(pchHostName: CPointer<UInt8>, pResult: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetPerSiteCookieDecisionA == "on"]
+public unsafe func Windows_InternetGetPerSiteCookieDecisionA(pchHostName: CPointer<UInt8>, pResult: CPointer<UInt32>): Int32 {
+    return InternetGetPerSiteCookieDecisionA(pchHostName, pResult)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetPerSiteCookieDecisionW == "on"]
+foreign {
     func InternetGetPerSiteCookieDecisionW(pchHostName: CPointer<UInt16>, pResult: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetPerSiteCookieDecisionW == "on"]
+public unsafe func Windows_InternetGetPerSiteCookieDecisionW(pchHostName: CPointer<UInt16>, pResult: CPointer<UInt32>): Int32 {
+    return InternetGetPerSiteCookieDecisionW(pchHostName, pResult)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetProxyForUrl == "on"]
+foreign {
     func InternetGetProxyForUrl(hInternet: CPointer<Unit>, pcwszUrl: CPointer<UInt16>, pProxyInfoList: CPointer<WININET_PROXY_INFO_LISTAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetProxyForUrl == "on"]
+public unsafe func Windows_InternetGetProxyForUrl(hInternet: CPointer<Unit>, pcwszUrl: CPointer<UInt16>, pProxyInfoList: CPointer<WININET_PROXY_INFO_LISTAbi>): UInt32 {
+    return InternetGetProxyForUrl(hInternet, pcwszUrl, pProxyInfoList)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetSecurityInfoByURL == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
+    func InternetGetSecurityInfoByURL(lpszURL: CPointer<UInt8>, ppCertChain: CPointer<CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXTAbi>>, pdwSecureFlags: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetSecurityInfoByURL == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_InternetGetSecurityInfoByURL(lpszURL: CPointer<UInt8>, ppCertChain: CPointer<CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXTAbi>>, pdwSecureFlags: CPointer<UInt32>): Int32 {
+    return InternetGetSecurityInfoByURL(lpszURL, ppCertChain, pdwSecureFlags)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetSecurityInfoByURLA == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
+    func InternetGetSecurityInfoByURLA(lpszURL: CPointer<UInt8>, ppCertChain: CPointer<CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXTAbi>>, pdwSecureFlags: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetSecurityInfoByURLA == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_InternetGetSecurityInfoByURLA(lpszURL: CPointer<UInt8>, ppCertChain: CPointer<CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXTAbi>>, pdwSecureFlags: CPointer<UInt32>): Int32 {
+    return InternetGetSecurityInfoByURLA(lpszURL, ppCertChain, pdwSecureFlags)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetSecurityInfoByURLW == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
+    func InternetGetSecurityInfoByURLW(lpszURL: CPointer<UInt16>, ppCertChain: CPointer<CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXTAbi>>, pdwSecureFlags: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGetSecurityInfoByURLW == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_InternetGetSecurityInfoByURLW(lpszURL: CPointer<UInt16>, ppCertChain: CPointer<CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXTAbi>>, pdwSecureFlags: CPointer<UInt32>): Int32 {
+    return InternetGetSecurityInfoByURLW(lpszURL, ppCertChain, pdwSecureFlags)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGoOnline == "on"]
+foreign {
     // param-hint: lpszURL optional
     // pinvoke-hint: SetLastError
     func InternetGoOnline(lpszURL: CPointer<UInt8>, hwndParent: CPointer<Unit>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGoOnline == "on"]
+public unsafe func Windows_InternetGoOnline(lpszURL: CPointer<UInt8>, hwndParent: CPointer<Unit>, dwFlags: UInt32): Int32 {
+    return InternetGoOnline(lpszURL, hwndParent, dwFlags)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGoOnlineA == "on"]
+foreign {
     // param-hint: lpszURL optional
     // pinvoke-hint: SetLastError
     func InternetGoOnlineA(lpszURL: CPointer<UInt8>, hwndParent: CPointer<Unit>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGoOnlineA == "on"]
+public unsafe func Windows_InternetGoOnlineA(lpszURL: CPointer<UInt8>, hwndParent: CPointer<Unit>, dwFlags: UInt32): Int32 {
+    return InternetGoOnlineA(lpszURL, hwndParent, dwFlags)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGoOnlineW == "on"]
+foreign {
     // param-hint: lpszURL optional
     // pinvoke-hint: SetLastError
     func InternetGoOnlineW(lpszURL: CPointer<UInt16>, hwndParent: CPointer<Unit>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetGoOnlineW == "on"]
+public unsafe func Windows_InternetGoOnlineW(lpszURL: CPointer<UInt16>, hwndParent: CPointer<Unit>, dwFlags: UInt32): Int32 {
+    return InternetGoOnlineW(lpszURL, hwndParent, dwFlags)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetHangUp == "on"]
+foreign {
     // param-hint: dwReserved optional reserved
     func InternetHangUp(dwConnection: UIntNative, dwReserved: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetHangUp == "on"]
+public unsafe func Windows_InternetHangUp(dwConnection: UIntNative, dwReserved: UInt32): UInt32 {
+    return InternetHangUp(dwConnection, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetInitializeAutoProxyDll == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func InternetInitializeAutoProxyDll(dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetInitializeAutoProxyDll == "on"]
+public unsafe func Windows_InternetInitializeAutoProxyDll(dwReserved: UInt32): Int32 {
+    return InternetInitializeAutoProxyDll(dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetLockRequestFile == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func InternetLockRequestFile(hInternet: CPointer<Unit>, lphLockRequestInfo: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetLockRequestFile == "on"]
+public unsafe func Windows_InternetLockRequestFile(hInternet: CPointer<Unit>, lphLockRequestInfo: CPointer<CPointer<Unit>>): Int32 {
+    return InternetLockRequestFile(hInternet, lphLockRequestInfo)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetOpenA == "on"]
+foreign {
     // param-hint: lpszAgent optional
     // param-hint: lpszProxy optional
     // param-hint: lpszProxyBypass optional
     // pinvoke-hint: SetLastError
     func InternetOpenA(lpszAgent: CPointer<UInt8>, dwAccessType: UInt32, lpszProxy: CPointer<UInt8>, lpszProxyBypass: CPointer<UInt8>, dwFlags: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetOpenA == "on"]
+public unsafe func Windows_InternetOpenA(lpszAgent: CPointer<UInt8>, dwAccessType: UInt32, lpszProxy: CPointer<UInt8>, lpszProxyBypass: CPointer<UInt8>, dwFlags: UInt32): CPointer<Unit> {
+    return InternetOpenA(lpszAgent, dwAccessType, lpszProxy, lpszProxyBypass, dwFlags)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetOpenUrlA == "on"]
+foreign {
     // param-hint: lpszHeaders len=param[3] optional
     // param-hint: dwContext optional
     // pinvoke-hint: SetLastError
     func InternetOpenUrlA(hInternet: CPointer<Unit>, lpszUrl: CPointer<UInt8>, lpszHeaders: CPointer<UInt8>, dwHeadersLength: UInt32, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetOpenUrlA == "on"]
+public unsafe func Windows_InternetOpenUrlA(hInternet: CPointer<Unit>, lpszUrl: CPointer<UInt8>, lpszHeaders: CPointer<UInt8>, dwHeadersLength: UInt32, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit> {
+    return InternetOpenUrlA(hInternet, lpszUrl, lpszHeaders, dwHeadersLength, dwFlags, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetOpenUrlW == "on"]
+foreign {
     // param-hint: lpszHeaders len=param[3] optional
     // param-hint: dwContext optional
     // pinvoke-hint: SetLastError
     func InternetOpenUrlW(hInternet: CPointer<Unit>, lpszUrl: CPointer<UInt16>, lpszHeaders: CPointer<UInt16>, dwHeadersLength: UInt32, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetOpenUrlW == "on"]
+public unsafe func Windows_InternetOpenUrlW(hInternet: CPointer<Unit>, lpszUrl: CPointer<UInt16>, lpszHeaders: CPointer<UInt16>, dwHeadersLength: UInt32, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit> {
+    return InternetOpenUrlW(hInternet, lpszUrl, lpszHeaders, dwHeadersLength, dwFlags, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetOpenW == "on"]
+foreign {
     // param-hint: lpszAgent optional
     // param-hint: lpszProxy optional
     // param-hint: lpszProxyBypass optional
     // pinvoke-hint: SetLastError
     func InternetOpenW(lpszAgent: CPointer<UInt16>, dwAccessType: UInt32, lpszProxy: CPointer<UInt16>, lpszProxyBypass: CPointer<UInt16>, dwFlags: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetOpenW == "on"]
+public unsafe func Windows_InternetOpenW(lpszAgent: CPointer<UInt16>, dwAccessType: UInt32, lpszProxy: CPointer<UInt16>, lpszProxyBypass: CPointer<UInt16>, dwFlags: UInt32): CPointer<Unit> {
+    return InternetOpenW(lpszAgent, dwAccessType, lpszProxy, lpszProxyBypass, dwFlags)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetQueryDataAvailable == "on"]
+foreign {
     // param-hint: lpdwNumberOfBytesAvailable optional
     // param-hint: dwContext optional
     // pinvoke-hint: SetLastError
     func InternetQueryDataAvailable(hFile: CPointer<Unit>, lpdwNumberOfBytesAvailable: CPointer<UInt32>, dwFlags: UInt32, dwContext: UIntNative): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetQueryDataAvailable == "on"]
+public unsafe func Windows_InternetQueryDataAvailable(hFile: CPointer<Unit>, lpdwNumberOfBytesAvailable: CPointer<UInt32>, dwFlags: UInt32, dwContext: UIntNative): Int32 {
+    return InternetQueryDataAvailable(hFile, lpdwNumberOfBytesAvailable, dwFlags, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetQueryFortezzaStatus == "on"]
+foreign {
     // param-hint: dwReserved optional reserved
     func InternetQueryFortezzaStatus(pdwStatus: CPointer<UInt32>, dwReserved: UIntNative): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetQueryFortezzaStatus == "on"]
+public unsafe func Windows_InternetQueryFortezzaStatus(pdwStatus: CPointer<UInt32>, dwReserved: UIntNative): Int32 {
+    return InternetQueryFortezzaStatus(pdwStatus, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetQueryOptionA == "on"]
+foreign {
     // param-hint: hInternet optional
     // param-hint: lpBuffer bytes=param[3] optional
     // pinvoke-hint: SetLastError
     func InternetQueryOptionA(hInternet: CPointer<Unit>, dwOption: UInt32, lpBuffer: CPointer<Unit>, lpdwBufferLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetQueryOptionA == "on"]
+public unsafe func Windows_InternetQueryOptionA(hInternet: CPointer<Unit>, dwOption: UInt32, lpBuffer: CPointer<Unit>, lpdwBufferLength: CPointer<UInt32>): Int32 {
+    return InternetQueryOptionA(hInternet, dwOption, lpBuffer, lpdwBufferLength)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetQueryOptionW == "on"]
+foreign {
     // param-hint: hInternet optional
     // param-hint: lpBuffer bytes=param[3] optional
     // pinvoke-hint: SetLastError
     func InternetQueryOptionW(hInternet: CPointer<Unit>, dwOption: UInt32, lpBuffer: CPointer<Unit>, lpdwBufferLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetQueryOptionW == "on"]
+public unsafe func Windows_InternetQueryOptionW(hInternet: CPointer<Unit>, dwOption: UInt32, lpBuffer: CPointer<Unit>, lpdwBufferLength: CPointer<UInt32>): Int32 {
+    return InternetQueryOptionW(hInternet, dwOption, lpBuffer, lpdwBufferLength)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetReadFile == "on"]
+foreign {
     // param-hint: lpBuffer bytes=param[2]
     // pinvoke-hint: SetLastError
     func InternetReadFile(hFile: CPointer<Unit>, lpBuffer: CPointer<Unit>, dwNumberOfBytesToRead: UInt32, lpdwNumberOfBytesRead: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetReadFile == "on"]
+public unsafe func Windows_InternetReadFile(hFile: CPointer<Unit>, lpBuffer: CPointer<Unit>, dwNumberOfBytesToRead: UInt32, lpdwNumberOfBytesRead: CPointer<UInt32>): Int32 {
+    return InternetReadFile(hFile, lpBuffer, dwNumberOfBytesToRead, lpdwNumberOfBytesRead)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetReadFileExA == "on"]
+foreign {
     // param-hint: dwContext optional
     // pinvoke-hint: SetLastError
     func InternetReadFileExA(hFile: CPointer<Unit>, lpBuffersOut: CPointer<INTERNET_BUFFERSAAbi>, dwFlags: UInt32, dwContext: UIntNative): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetReadFileExA == "on"]
+public unsafe func Windows_InternetReadFileExA(hFile: CPointer<Unit>, lpBuffersOut: CPointer<INTERNET_BUFFERSAAbi>, dwFlags: UInt32, dwContext: UIntNative): Int32 {
+    return InternetReadFileExA(hFile, lpBuffersOut, dwFlags, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetReadFileExW == "on"]
+foreign {
     // param-hint: dwContext optional
     // pinvoke-hint: SetLastError
     func InternetReadFileExW(hFile: CPointer<Unit>, lpBuffersOut: CPointer<INTERNET_BUFFERSWAbi>, dwFlags: UInt32, dwContext: UIntNative): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetReadFileExW == "on"]
+public unsafe func Windows_InternetReadFileExW(hFile: CPointer<Unit>, lpBuffersOut: CPointer<INTERNET_BUFFERSWAbi>, dwFlags: UInt32, dwContext: UIntNative): Int32 {
+    return InternetReadFileExW(hFile, lpBuffersOut, dwFlags, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSecurityProtocolToStringA == "on"]
+foreign {
     // param-hint: lpstr len=param[2] optional
     // param-hint: dwReserved optional reserved
     func InternetSecurityProtocolToStringA(dwProtocol: UInt32, lpstr: CPointer<UInt8>, lpdwstrLength: CPointer<UInt32>, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSecurityProtocolToStringA == "on"]
+public unsafe func Windows_InternetSecurityProtocolToStringA(dwProtocol: UInt32, lpstr: CPointer<UInt8>, lpdwstrLength: CPointer<UInt32>, dwReserved: UInt32): Int32 {
+    return InternetSecurityProtocolToStringA(dwProtocol, lpstr, lpdwstrLength, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSecurityProtocolToStringW == "on"]
+foreign {
     // param-hint: lpstr len=param[2] optional
     // param-hint: dwReserved optional reserved
     func InternetSecurityProtocolToStringW(dwProtocol: UInt32, lpstr: CPointer<UInt16>, lpdwstrLength: CPointer<UInt32>, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSecurityProtocolToStringW == "on"]
+public unsafe func Windows_InternetSecurityProtocolToStringW(dwProtocol: UInt32, lpstr: CPointer<UInt16>, lpdwstrLength: CPointer<UInt32>, dwReserved: UInt32): Int32 {
+    return InternetSecurityProtocolToStringW(dwProtocol, lpstr, lpdwstrLength, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetCookieA == "on"]
+foreign {
     // param-hint: lpszCookieName optional
     // pinvoke-hint: SetLastError
     func InternetSetCookieA(lpszUrl: CPointer<UInt8>, lpszCookieName: CPointer<UInt8>, lpszCookieData: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetCookieA == "on"]
+public unsafe func Windows_InternetSetCookieA(lpszUrl: CPointer<UInt8>, lpszCookieName: CPointer<UInt8>, lpszCookieData: CPointer<UInt8>): Int32 {
+    return InternetSetCookieA(lpszUrl, lpszCookieName, lpszCookieData)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetCookieEx2 == "on"]
+foreign {
     // param-hint: pcwszP3PPolicy optional
     func InternetSetCookieEx2(pcwszUrl: CPointer<UInt16>, pCookie: CPointer<INTERNET_COOKIE2Abi>, pcwszP3PPolicy: CPointer<UInt16>, dwFlags: UInt32, pdwCookieState: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetCookieEx2 == "on"]
+public unsafe func Windows_InternetSetCookieEx2(pcwszUrl: CPointer<UInt16>, pCookie: CPointer<INTERNET_COOKIE2Abi>, pcwszP3PPolicy: CPointer<UInt16>, dwFlags: UInt32, pdwCookieState: CPointer<UInt32>): UInt32 {
+    return InternetSetCookieEx2(pcwszUrl, pCookie, pcwszP3PPolicy, dwFlags, pdwCookieState)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetCookieExA == "on"]
+foreign {
     // param-hint: lpszCookieName optional
     // param-hint: dwReserved optional
     // pinvoke-hint: SetLastError
     func InternetSetCookieExA(lpszUrl: CPointer<UInt8>, lpszCookieName: CPointer<UInt8>, lpszCookieData: CPointer<UInt8>, dwFlags: UInt32, dwReserved: UIntNative): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetCookieExA == "on"]
+public unsafe func Windows_InternetSetCookieExA(lpszUrl: CPointer<UInt8>, lpszCookieName: CPointer<UInt8>, lpszCookieData: CPointer<UInt8>, dwFlags: UInt32, dwReserved: UIntNative): UInt32 {
+    return InternetSetCookieExA(lpszUrl, lpszCookieName, lpszCookieData, dwFlags, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetCookieExW == "on"]
+foreign {
     // param-hint: lpszCookieName optional
     // param-hint: dwReserved optional
     // pinvoke-hint: SetLastError
     func InternetSetCookieExW(lpszUrl: CPointer<UInt16>, lpszCookieName: CPointer<UInt16>, lpszCookieData: CPointer<UInt16>, dwFlags: UInt32, dwReserved: UIntNative): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetCookieExW == "on"]
+public unsafe func Windows_InternetSetCookieExW(lpszUrl: CPointer<UInt16>, lpszCookieName: CPointer<UInt16>, lpszCookieData: CPointer<UInt16>, dwFlags: UInt32, dwReserved: UIntNative): UInt32 {
+    return InternetSetCookieExW(lpszUrl, lpszCookieName, lpszCookieData, dwFlags, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetCookieW == "on"]
+foreign {
     // param-hint: lpszCookieName optional
     // pinvoke-hint: SetLastError
     func InternetSetCookieW(lpszUrl: CPointer<UInt16>, lpszCookieName: CPointer<UInt16>, lpszCookieData: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetCookieW == "on"]
+public unsafe func Windows_InternetSetCookieW(lpszUrl: CPointer<UInt16>, lpszCookieName: CPointer<UInt16>, lpszCookieData: CPointer<UInt16>): Int32 {
+    return InternetSetCookieW(lpszUrl, lpszCookieName, lpszCookieData)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetDialState == "on"]
+foreign {
     // param-hint: lpszConnectoid optional
     func InternetSetDialState(lpszConnectoid: CPointer<UInt8>, dwState: UInt32, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetDialState == "on"]
+public unsafe func Windows_InternetSetDialState(lpszConnectoid: CPointer<UInt8>, dwState: UInt32, dwReserved: UInt32): Int32 {
+    return InternetSetDialState(lpszConnectoid, dwState, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetDialStateA == "on"]
+foreign {
     // param-hint: lpszConnectoid optional
     // param-hint: dwReserved optional reserved
     func InternetSetDialStateA(lpszConnectoid: CPointer<UInt8>, dwState: UInt32, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetDialStateA == "on"]
+public unsafe func Windows_InternetSetDialStateA(lpszConnectoid: CPointer<UInt8>, dwState: UInt32, dwReserved: UInt32): Int32 {
+    return InternetSetDialStateA(lpszConnectoid, dwState, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetDialStateW == "on"]
+foreign {
     // param-hint: lpszConnectoid optional
     // param-hint: dwReserved optional reserved
     func InternetSetDialStateW(lpszConnectoid: CPointer<UInt16>, dwState: UInt32, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetDialStateW == "on"]
+public unsafe func Windows_InternetSetDialStateW(lpszConnectoid: CPointer<UInt16>, dwState: UInt32, dwReserved: UInt32): Int32 {
+    return InternetSetDialStateW(lpszConnectoid, dwState, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetFilePointer == "on"]
+foreign {
     // param-hint: lpDistanceToMoveHigh optional
     // param-hint: dwContext optional reserved
     // pinvoke-hint: SetLastError
     func InternetSetFilePointer(hFile: CPointer<Unit>, lDistanceToMove: Int32, lpDistanceToMoveHigh: CPointer<Int32>, dwMoveMethod: UInt32, dwContext: UIntNative): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetFilePointer == "on"]
+public unsafe func Windows_InternetSetFilePointer(hFile: CPointer<Unit>, lDistanceToMove: Int32, lpDistanceToMoveHigh: CPointer<Int32>, dwMoveMethod: UInt32, dwContext: UIntNative): UInt32 {
+    return InternetSetFilePointer(hFile, lDistanceToMove, lpDistanceToMoveHigh, dwMoveMethod, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetOptionA == "on"]
+foreign {
     // param-hint: hInternet optional
     // param-hint: lpBuffer optional
     // pinvoke-hint: SetLastError
     func InternetSetOptionA(hInternet: CPointer<Unit>, dwOption: UInt32, lpBuffer: CPointer<Unit>, dwBufferLength: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetOptionA == "on"]
+public unsafe func Windows_InternetSetOptionA(hInternet: CPointer<Unit>, dwOption: UInt32, lpBuffer: CPointer<Unit>, dwBufferLength: UInt32): Int32 {
+    return InternetSetOptionA(hInternet, dwOption, lpBuffer, dwBufferLength)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetOptionExA == "on"]
+foreign {
     // param-hint: hInternet optional
     // param-hint: lpBuffer optional
     func InternetSetOptionExA(hInternet: CPointer<Unit>, dwOption: UInt32, lpBuffer: CPointer<Unit>, dwBufferLength: UInt32, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetOptionExA == "on"]
+public unsafe func Windows_InternetSetOptionExA(hInternet: CPointer<Unit>, dwOption: UInt32, lpBuffer: CPointer<Unit>, dwBufferLength: UInt32, dwFlags: UInt32): Int32 {
+    return InternetSetOptionExA(hInternet, dwOption, lpBuffer, dwBufferLength, dwFlags)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetOptionExW == "on"]
+foreign {
     // param-hint: hInternet optional
     // param-hint: lpBuffer optional
     func InternetSetOptionExW(hInternet: CPointer<Unit>, dwOption: UInt32, lpBuffer: CPointer<Unit>, dwBufferLength: UInt32, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetOptionExW == "on"]
+public unsafe func Windows_InternetSetOptionExW(hInternet: CPointer<Unit>, dwOption: UInt32, lpBuffer: CPointer<Unit>, dwBufferLength: UInt32, dwFlags: UInt32): Int32 {
+    return InternetSetOptionExW(hInternet, dwOption, lpBuffer, dwBufferLength, dwFlags)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetOptionW == "on"]
+foreign {
     // param-hint: hInternet optional
     // param-hint: lpBuffer optional
     // pinvoke-hint: SetLastError
     func InternetSetOptionW(hInternet: CPointer<Unit>, dwOption: UInt32, lpBuffer: CPointer<Unit>, dwBufferLength: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetOptionW == "on"]
+public unsafe func Windows_InternetSetOptionW(hInternet: CPointer<Unit>, dwOption: UInt32, lpBuffer: CPointer<Unit>, dwBufferLength: UInt32): Int32 {
+    return InternetSetOptionW(hInternet, dwOption, lpBuffer, dwBufferLength)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetPerSiteCookieDecisionA == "on"]
+foreign {
     func InternetSetPerSiteCookieDecisionA(pchHostName: CPointer<UInt8>, dwDecision: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetPerSiteCookieDecisionA == "on"]
+public unsafe func Windows_InternetSetPerSiteCookieDecisionA(pchHostName: CPointer<UInt8>, dwDecision: UInt32): Int32 {
+    return InternetSetPerSiteCookieDecisionA(pchHostName, dwDecision)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetPerSiteCookieDecisionW == "on"]
+foreign {
     func InternetSetPerSiteCookieDecisionW(pchHostName: CPointer<UInt16>, dwDecision: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetPerSiteCookieDecisionW == "on"]
+public unsafe func Windows_InternetSetPerSiteCookieDecisionW(pchHostName: CPointer<UInt16>, dwDecision: UInt32): Int32 {
+    return InternetSetPerSiteCookieDecisionW(pchHostName, dwDecision)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetStatusCallback == "on"]
+foreign {
     // param-hint: lpfnInternetCallback optional
     func InternetSetStatusCallback(hInternet: CPointer<Unit>, lpfnInternetCallback: LPINTERNET_STATUS_CALLBACK): LPINTERNET_STATUS_CALLBACK
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetStatusCallback == "on"]
+public unsafe func Windows_InternetSetStatusCallback(hInternet: CPointer<Unit>, lpfnInternetCallback: LPINTERNET_STATUS_CALLBACK): LPINTERNET_STATUS_CALLBACK {
+    return InternetSetStatusCallback(hInternet, lpfnInternetCallback)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetStatusCallbackA == "on"]
+foreign {
     // param-hint: lpfnInternetCallback optional
     func InternetSetStatusCallbackA(hInternet: CPointer<Unit>, lpfnInternetCallback: LPINTERNET_STATUS_CALLBACK): LPINTERNET_STATUS_CALLBACK
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetStatusCallbackA == "on"]
+public unsafe func Windows_InternetSetStatusCallbackA(hInternet: CPointer<Unit>, lpfnInternetCallback: LPINTERNET_STATUS_CALLBACK): LPINTERNET_STATUS_CALLBACK {
+    return InternetSetStatusCallbackA(hInternet, lpfnInternetCallback)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetStatusCallbackW == "on"]
+foreign {
     // param-hint: lpfnInternetCallback optional
     func InternetSetStatusCallbackW(hInternet: CPointer<Unit>, lpfnInternetCallback: LPINTERNET_STATUS_CALLBACK): LPINTERNET_STATUS_CALLBACK
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetSetStatusCallbackW == "on"]
+public unsafe func Windows_InternetSetStatusCallbackW(hInternet: CPointer<Unit>, lpfnInternetCallback: LPINTERNET_STATUS_CALLBACK): LPINTERNET_STATUS_CALLBACK {
+    return InternetSetStatusCallbackW(hInternet, lpfnInternetCallback)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetShowSecurityInfoByURL == "on"]
+foreign {
     func InternetShowSecurityInfoByURL(lpszURL: CPointer<UInt8>, hwndParent: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetShowSecurityInfoByURL == "on"]
+public unsafe func Windows_InternetShowSecurityInfoByURL(lpszURL: CPointer<UInt8>, hwndParent: CPointer<Unit>): Int32 {
+    return InternetShowSecurityInfoByURL(lpszURL, hwndParent)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetShowSecurityInfoByURLA == "on"]
+foreign {
     func InternetShowSecurityInfoByURLA(lpszURL: CPointer<UInt8>, hwndParent: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetShowSecurityInfoByURLA == "on"]
+public unsafe func Windows_InternetShowSecurityInfoByURLA(lpszURL: CPointer<UInt8>, hwndParent: CPointer<Unit>): Int32 {
+    return InternetShowSecurityInfoByURLA(lpszURL, hwndParent)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetShowSecurityInfoByURLW == "on"]
+foreign {
     func InternetShowSecurityInfoByURLW(lpszURL: CPointer<UInt16>, hwndParent: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetShowSecurityInfoByURLW == "on"]
+public unsafe func Windows_InternetShowSecurityInfoByURLW(lpszURL: CPointer<UInt16>, hwndParent: CPointer<Unit>): Int32 {
+    return InternetShowSecurityInfoByURLW(lpszURL, hwndParent)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetTimeFromSystemTime == "on"]
+foreign {
     // param-hint: lpszTime bytes=param[3]
     // pinvoke-hint: SetLastError
     func InternetTimeFromSystemTime(pst: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, dwRFC: UInt32, lpszTime: CPointer<UInt8>, cbTime: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetTimeFromSystemTime == "on"]
+public unsafe func Windows_InternetTimeFromSystemTime(pst: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, dwRFC: UInt32, lpszTime: CPointer<UInt8>, cbTime: UInt32): Int32 {
+    return InternetTimeFromSystemTime(pst, dwRFC, lpszTime, cbTime)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetTimeFromSystemTimeA == "on"]
+foreign {
     // param-hint: lpszTime bytes=param[3]
     // pinvoke-hint: SetLastError
     func InternetTimeFromSystemTimeA(pst: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, dwRFC: UInt32, lpszTime: CPointer<UInt8>, cbTime: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetTimeFromSystemTimeA == "on"]
+public unsafe func Windows_InternetTimeFromSystemTimeA(pst: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, dwRFC: UInt32, lpszTime: CPointer<UInt8>, cbTime: UInt32): Int32 {
+    return InternetTimeFromSystemTimeA(pst, dwRFC, lpszTime, cbTime)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetTimeFromSystemTimeW == "on"]
+foreign {
     // param-hint: lpszTime bytes=param[3]
     // pinvoke-hint: SetLastError
     func InternetTimeFromSystemTimeW(pst: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, dwRFC: UInt32, lpszTime: CPointer<UInt16>, cbTime: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetTimeFromSystemTimeW == "on"]
+public unsafe func Windows_InternetTimeFromSystemTimeW(pst: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, dwRFC: UInt32, lpszTime: CPointer<UInt16>, cbTime: UInt32): Int32 {
+    return InternetTimeFromSystemTimeW(pst, dwRFC, lpszTime, cbTime)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetTimeToSystemTime == "on"]
+foreign {
     // param-hint: dwReserved optional reserved
     // pinvoke-hint: SetLastError
     func InternetTimeToSystemTime(lpszTime: CPointer<UInt8>, pst: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetTimeToSystemTime == "on"]
+public unsafe func Windows_InternetTimeToSystemTime(lpszTime: CPointer<UInt8>, pst: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, dwReserved: UInt32): Int32 {
+    return InternetTimeToSystemTime(lpszTime, pst, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetTimeToSystemTimeA == "on"]
+foreign {
     // param-hint: dwReserved optional reserved
     // pinvoke-hint: SetLastError
     func InternetTimeToSystemTimeA(lpszTime: CPointer<UInt8>, pst: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetTimeToSystemTimeA == "on"]
+public unsafe func Windows_InternetTimeToSystemTimeA(lpszTime: CPointer<UInt8>, pst: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, dwReserved: UInt32): Int32 {
+    return InternetTimeToSystemTimeA(lpszTime, pst, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetTimeToSystemTimeW == "on"]
+foreign {
     // param-hint: dwReserved optional reserved
     // pinvoke-hint: SetLastError
     func InternetTimeToSystemTimeW(lpszTime: CPointer<UInt16>, pst: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetTimeToSystemTimeW == "on"]
+public unsafe func Windows_InternetTimeToSystemTimeW(lpszTime: CPointer<UInt16>, pst: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, dwReserved: UInt32): Int32 {
+    return InternetTimeToSystemTimeW(lpszTime, pst, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetUnlockRequestFile == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func InternetUnlockRequestFile(hLockRequestInfo: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetUnlockRequestFile == "on"]
+public unsafe func Windows_InternetUnlockRequestFile(hLockRequestInfo: CPointer<Unit>): Int32 {
+    return InternetUnlockRequestFile(hLockRequestInfo)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetWriteFile == "on"]
+foreign {
     // param-hint: lpBuffer bytes=param[2]
     // pinvoke-hint: SetLastError
     func InternetWriteFile(hFile: CPointer<Unit>, lpBuffer: CPointer<Unit>, dwNumberOfBytesToWrite: UInt32, lpdwNumberOfBytesWritten: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetWriteFile == "on"]
+public unsafe func Windows_InternetWriteFile(hFile: CPointer<Unit>, lpBuffer: CPointer<Unit>, dwNumberOfBytesToWrite: UInt32, lpdwNumberOfBytesWritten: CPointer<UInt32>): Int32 {
+    return InternetWriteFile(hFile, lpBuffer, dwNumberOfBytesToWrite, lpdwNumberOfBytesWritten)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetWriteFileExA == "on"]
+foreign {
     // param-hint: dwContext optional
     func InternetWriteFileExA(hFile: CPointer<Unit>, lpBuffersIn: CPointer<INTERNET_BUFFERSAAbi>, dwFlags: UInt32, dwContext: UIntNative): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetWriteFileExA == "on"]
+public unsafe func Windows_InternetWriteFileExA(hFile: CPointer<Unit>, lpBuffersIn: CPointer<INTERNET_BUFFERSAAbi>, dwFlags: UInt32, dwContext: UIntNative): Int32 {
+    return InternetWriteFileExA(hFile, lpBuffersIn, dwFlags, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetWriteFileExW == "on"]
+foreign {
     // param-hint: dwContext optional
     func InternetWriteFileExW(hFile: CPointer<Unit>, lpBuffersIn: CPointer<INTERNET_BUFFERSWAbi>, dwFlags: UInt32, dwContext: UIntNative): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_InternetWriteFileExW == "on"]
+public unsafe func Windows_InternetWriteFileExW(hFile: CPointer<Unit>, lpBuffersIn: CPointer<INTERNET_BUFFERSWAbi>, dwFlags: UInt32, dwContext: UIntNative): Int32 {
+    return InternetWriteFileExW(hFile, lpBuffersIn, dwFlags, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_IsDomainLegalCookieDomainA == "on"]
+foreign {
     func IsDomainLegalCookieDomainA(pchDomain: CPointer<UInt8>, pchFullDomain: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_IsDomainLegalCookieDomainA == "on"]
+public unsafe func Windows_IsDomainLegalCookieDomainA(pchDomain: CPointer<UInt8>, pchFullDomain: CPointer<UInt8>): Int32 {
+    return IsDomainLegalCookieDomainA(pchDomain, pchFullDomain)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_IsDomainLegalCookieDomainW == "on"]
+foreign {
     func IsDomainLegalCookieDomainW(pchDomain: CPointer<UInt16>, pchFullDomain: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_IsDomainLegalCookieDomainW == "on"]
+public unsafe func Windows_IsDomainLegalCookieDomainW(pchDomain: CPointer<UInt16>, pchFullDomain: CPointer<UInt16>): Int32 {
+    return IsDomainLegalCookieDomainW(pchDomain, pchFullDomain)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_IsHostInProxyBypassList == "on"]
+foreign {
     // param-hint: lpszHost len=param[2]
     func IsHostInProxyBypassList(tScheme: INTERNET_SCHEMEAbi, lpszHost: CPointer<UInt8>, cchHost: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_IsHostInProxyBypassList == "on"]
+public unsafe func Windows_IsHostInProxyBypassList(tScheme: INTERNET_SCHEMEAbi, lpszHost: CPointer<UInt8>, cchHost: UInt32): Int32 {
+    return IsHostInProxyBypassList(tScheme, lpszHost, cchHost)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_IsProfilesEnabled == "on"]
+foreign {
     func IsProfilesEnabled(): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_IsProfilesEnabled == "on"]
+public unsafe func Windows_IsProfilesEnabled(): Int32 {
+    return IsProfilesEnabled()
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_IsUrlCacheEntryExpiredA == "on"]
+foreign {
     func IsUrlCacheEntryExpiredA(lpszUrlName: CPointer<UInt8>, dwFlags: UInt32, pftLastModified: CPointer<Win32_Foundation.FILETIMEAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_IsUrlCacheEntryExpiredA == "on"]
+public unsafe func Windows_IsUrlCacheEntryExpiredA(lpszUrlName: CPointer<UInt8>, dwFlags: UInt32, pftLastModified: CPointer<Win32_Foundation.FILETIMEAbi>): Int32 {
+    return IsUrlCacheEntryExpiredA(lpszUrlName, dwFlags, pftLastModified)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_IsUrlCacheEntryExpiredW == "on"]
+foreign {
     func IsUrlCacheEntryExpiredW(lpszUrlName: CPointer<UInt16>, dwFlags: UInt32, pftLastModified: CPointer<Win32_Foundation.FILETIMEAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_IsUrlCacheEntryExpiredW == "on"]
+public unsafe func Windows_IsUrlCacheEntryExpiredW(lpszUrlName: CPointer<UInt16>, dwFlags: UInt32, pftLastModified: CPointer<Win32_Foundation.FILETIMEAbi>): Int32 {
+    return IsUrlCacheEntryExpiredW(lpszUrlName, dwFlags, pftLastModified)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_LoadUrlCacheContent == "on"]
+foreign {
     func LoadUrlCacheContent(): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_LoadUrlCacheContent == "on"]
+public unsafe func Windows_LoadUrlCacheContent(): Int32 {
+    return LoadUrlCacheContent()
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_ParseX509EncodedCertificateForListBoxEntry == "on"]
+foreign {
     // param-hint: lpCert bytes=param[1]
     // param-hint: lpszListBoxEntry len=param[3] optional
     func ParseX509EncodedCertificateForListBoxEntry(lpCert: CPointer<UInt8>, cbCert: UInt32, lpszListBoxEntry: CPointer<UInt8>, lpdwListBoxEntry: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_ParseX509EncodedCertificateForListBoxEntry == "on"]
+public unsafe func Windows_ParseX509EncodedCertificateForListBoxEntry(lpCert: CPointer<UInt8>, cbCert: UInt32, lpszListBoxEntry: CPointer<UInt8>, lpdwListBoxEntry: CPointer<UInt32>): UInt32 {
+    return ParseX509EncodedCertificateForListBoxEntry(lpCert, cbCert, lpszListBoxEntry, lpdwListBoxEntry)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_PerformOperationOverUrlCacheA == "on"]
+foreign {
     // param-hint: pszUrlSearchPattern optional
     // param-hint: pReserved1 optional reserved
     // param-hint: pdwReserved2 optional reserved
     // param-hint: pReserved3 optional reserved
     func PerformOperationOverUrlCacheA(pszUrlSearchPattern: CPointer<UInt8>, dwFlags: UInt32, dwFilter: UInt32, GroupId: Int64, pReserved1: CPointer<Unit>, pdwReserved2: CPointer<UInt32>, pReserved3: CPointer<Unit>, op: CACHE_OPERATOR, pOperatorData: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_PerformOperationOverUrlCacheA == "on"]
+public unsafe func Windows_PerformOperationOverUrlCacheA(pszUrlSearchPattern: CPointer<UInt8>, dwFlags: UInt32, dwFilter: UInt32, GroupId: Int64, pReserved1: CPointer<Unit>, pdwReserved2: CPointer<UInt32>, pReserved3: CPointer<Unit>, op: CACHE_OPERATOR, pOperatorData: CPointer<Unit>): Int32 {
+    return PerformOperationOverUrlCacheA(pszUrlSearchPattern, dwFlags, dwFilter, GroupId, pReserved1, pdwReserved2, pReserved3, op, pOperatorData)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_PrivacyGetZonePreferenceW == "on"]
+foreign {
     // param-hint: pdwTemplate optional
     // param-hint: pszBuffer len=param[4] optional
     // param-hint: pdwBufferLength optional
     func PrivacyGetZonePreferenceW(dwZone: UInt32, dwType: UInt32, pdwTemplate: CPointer<UInt32>, pszBuffer: CPointer<UInt16>, pdwBufferLength: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_PrivacyGetZonePreferenceW == "on"]
+public unsafe func Windows_PrivacyGetZonePreferenceW(dwZone: UInt32, dwType: UInt32, pdwTemplate: CPointer<UInt32>, pszBuffer: CPointer<UInt16>, pdwBufferLength: CPointer<UInt32>): UInt32 {
+    return PrivacyGetZonePreferenceW(dwZone, dwType, pdwTemplate, pszBuffer, pdwBufferLength)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_PrivacySetZonePreferenceW == "on"]
+foreign {
     // param-hint: pszPreference optional
     func PrivacySetZonePreferenceW(dwZone: UInt32, dwType: UInt32, dwTemplate: UInt32, pszPreference: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_PrivacySetZonePreferenceW == "on"]
+public unsafe func Windows_PrivacySetZonePreferenceW(dwZone: UInt32, dwType: UInt32, dwTemplate: UInt32, pszPreference: CPointer<UInt16>): UInt32 {
+    return PrivacySetZonePreferenceW(dwZone, dwType, dwTemplate, pszPreference)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_ReadGuidsForConnectedNetworks == "on"]
+foreign {
     // param-hint: pcNetworks optional
     // param-hint: pppwszNetworkGuids optional
     // param-hint: pppbstrNetworkNames optional
@@ -7747,146 +10008,524 @@ foreign {
     // param-hint: pcGatewayMacs optional
     // param-hint: pdwFlags optional
     func ReadGuidsForConnectedNetworks(pcNetworks: CPointer<UInt32>, pppwszNetworkGuids: CPointer<CPointer<CPointer<UInt16>>>, pppbstrNetworkNames: CPointer<CPointer<CPointer<UInt16>>>, pppwszGWMacs: CPointer<CPointer<CPointer<UInt16>>>, pcGatewayMacs: CPointer<UInt32>, pdwFlags: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_ReadGuidsForConnectedNetworks == "on"]
+public unsafe func Windows_ReadGuidsForConnectedNetworks(pcNetworks: CPointer<UInt32>, pppwszNetworkGuids: CPointer<CPointer<CPointer<UInt16>>>, pppbstrNetworkNames: CPointer<CPointer<CPointer<UInt16>>>, pppwszGWMacs: CPointer<CPointer<CPointer<UInt16>>>, pcGatewayMacs: CPointer<UInt32>, pdwFlags: CPointer<UInt32>): Int32 {
+    return ReadGuidsForConnectedNetworks(pcNetworks, pppwszNetworkGuids, pppbstrNetworkNames, pppwszGWMacs, pcGatewayMacs, pdwFlags)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_ReadUrlCacheEntryStream == "on"]
+foreign {
     // param-hint: lpBuffer bytes=param[3]
     // param-hint: Reserved optional reserved
     // pinvoke-hint: SetLastError
     func ReadUrlCacheEntryStream(hUrlCacheStream: CPointer<Unit>, dwLocation: UInt32, lpBuffer: CPointer<Unit>, lpdwLen: CPointer<UInt32>, Reserved: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_ReadUrlCacheEntryStream == "on"]
+public unsafe func Windows_ReadUrlCacheEntryStream(hUrlCacheStream: CPointer<Unit>, dwLocation: UInt32, lpBuffer: CPointer<Unit>, lpdwLen: CPointer<UInt32>, Reserved: UInt32): Int32 {
+    return ReadUrlCacheEntryStream(hUrlCacheStream, dwLocation, lpBuffer, lpdwLen, Reserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_ReadUrlCacheEntryStreamEx == "on"]
+foreign {
     // param-hint: lpBuffer bytes=param[3]
     func ReadUrlCacheEntryStreamEx(hUrlCacheStream: CPointer<Unit>, qwLocation: UInt64, lpBuffer: CPointer<Unit>, lpdwLen: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_ReadUrlCacheEntryStreamEx == "on"]
+public unsafe func Windows_ReadUrlCacheEntryStreamEx(hUrlCacheStream: CPointer<Unit>, qwLocation: UInt64, lpBuffer: CPointer<Unit>, lpdwLen: CPointer<UInt32>): Int32 {
+    return ReadUrlCacheEntryStreamEx(hUrlCacheStream, qwLocation, lpBuffer, lpdwLen)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_RegisterUrlCacheNotification == "on"]
+foreign {
     // param-hint: hWnd optional
     func RegisterUrlCacheNotification(hWnd: CPointer<Unit>, uMsg: UInt32, gid: Int64, dwOpsFilter: UInt32, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_RegisterUrlCacheNotification == "on"]
+public unsafe func Windows_RegisterUrlCacheNotification(hWnd: CPointer<Unit>, uMsg: UInt32, gid: Int64, dwOpsFilter: UInt32, dwReserved: UInt32): Int32 {
+    return RegisterUrlCacheNotification(hWnd, uMsg, gid, dwOpsFilter, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_ResumeSuspendedDownload == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ResumeSuspendedDownload(hRequest: CPointer<Unit>, dwResultCode: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_ResumeSuspendedDownload == "on"]
+public unsafe func Windows_ResumeSuspendedDownload(hRequest: CPointer<Unit>, dwResultCode: UInt32): Int32 {
+    return ResumeSuspendedDownload(hRequest, dwResultCode)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_RetrieveUrlCacheEntryFileA == "on"]
+foreign {
     // param-hint: lpCacheEntryInfo bytes=param[2] optional
     // param-hint: dwReserved optional reserved
     // pinvoke-hint: SetLastError
     func RetrieveUrlCacheEntryFileA(lpszUrlName: CPointer<UInt8>, lpCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOAAbi>, lpcbCacheEntryInfo: CPointer<UInt32>, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_RetrieveUrlCacheEntryFileA == "on"]
+public unsafe func Windows_RetrieveUrlCacheEntryFileA(lpszUrlName: CPointer<UInt8>, lpCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOAAbi>, lpcbCacheEntryInfo: CPointer<UInt32>, dwReserved: UInt32): Int32 {
+    return RetrieveUrlCacheEntryFileA(lpszUrlName, lpCacheEntryInfo, lpcbCacheEntryInfo, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_RetrieveUrlCacheEntryFileW == "on"]
+foreign {
     // param-hint: lpCacheEntryInfo bytes=param[2] optional
     // param-hint: dwReserved optional reserved
     // pinvoke-hint: SetLastError
     func RetrieveUrlCacheEntryFileW(lpszUrlName: CPointer<UInt16>, lpCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOWAbi>, lpcbCacheEntryInfo: CPointer<UInt32>, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_RetrieveUrlCacheEntryFileW == "on"]
+public unsafe func Windows_RetrieveUrlCacheEntryFileW(lpszUrlName: CPointer<UInt16>, lpCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOWAbi>, lpcbCacheEntryInfo: CPointer<UInt32>, dwReserved: UInt32): Int32 {
+    return RetrieveUrlCacheEntryFileW(lpszUrlName, lpCacheEntryInfo, lpcbCacheEntryInfo, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_RetrieveUrlCacheEntryStreamA == "on"]
+foreign {
     // param-hint: lpCacheEntryInfo bytes=param[2] optional
     // param-hint: dwReserved optional reserved
     // pinvoke-hint: SetLastError
     func RetrieveUrlCacheEntryStreamA(lpszUrlName: CPointer<UInt8>, lpCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOAAbi>, lpcbCacheEntryInfo: CPointer<UInt32>, fRandomRead: Int32, dwReserved: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_RetrieveUrlCacheEntryStreamA == "on"]
+public unsafe func Windows_RetrieveUrlCacheEntryStreamA(lpszUrlName: CPointer<UInt8>, lpCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOAAbi>, lpcbCacheEntryInfo: CPointer<UInt32>, fRandomRead: Int32, dwReserved: UInt32): CPointer<Unit> {
+    return RetrieveUrlCacheEntryStreamA(lpszUrlName, lpCacheEntryInfo, lpcbCacheEntryInfo, fRandomRead, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_RetrieveUrlCacheEntryStreamW == "on"]
+foreign {
     // param-hint: lpCacheEntryInfo bytes=param[2] optional
     // param-hint: dwReserved optional reserved
     // pinvoke-hint: SetLastError
     func RetrieveUrlCacheEntryStreamW(lpszUrlName: CPointer<UInt16>, lpCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOWAbi>, lpcbCacheEntryInfo: CPointer<UInt32>, fRandomRead: Int32, dwReserved: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_RetrieveUrlCacheEntryStreamW == "on"]
+public unsafe func Windows_RetrieveUrlCacheEntryStreamW(lpszUrlName: CPointer<UInt16>, lpCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOWAbi>, lpcbCacheEntryInfo: CPointer<UInt32>, fRandomRead: Int32, dwReserved: UInt32): CPointer<Unit> {
+    return RetrieveUrlCacheEntryStreamW(lpszUrlName, lpCacheEntryInfo, lpcbCacheEntryInfo, fRandomRead, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_RunOnceUrlCache == "on"]
+foreign {
     func RunOnceUrlCache(hwnd: CPointer<Unit>, hinst: CPointer<Unit>, lpszCmd: CPointer<UInt8>, nCmdShow: Int32): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_RunOnceUrlCache == "on"]
+public unsafe func Windows_RunOnceUrlCache(hwnd: CPointer<Unit>, hinst: CPointer<Unit>, lpszCmd: CPointer<UInt8>, nCmdShow: Int32): UInt32 {
+    return RunOnceUrlCache(hwnd, hinst, lpszCmd, nCmdShow)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_SetUrlCacheConfigInfoA == "on"]
+foreign {
     func SetUrlCacheConfigInfoA(lpCacheConfigInfo: CPointer<INTERNET_CACHE_CONFIG_INFOAAbi>, dwFieldControl: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_SetUrlCacheConfigInfoA == "on"]
+public unsafe func Windows_SetUrlCacheConfigInfoA(lpCacheConfigInfo: CPointer<INTERNET_CACHE_CONFIG_INFOAAbi>, dwFieldControl: UInt32): Int32 {
+    return SetUrlCacheConfigInfoA(lpCacheConfigInfo, dwFieldControl)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_SetUrlCacheConfigInfoW == "on"]
+foreign {
     func SetUrlCacheConfigInfoW(lpCacheConfigInfo: CPointer<INTERNET_CACHE_CONFIG_INFOWAbi>, dwFieldControl: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_SetUrlCacheConfigInfoW == "on"]
+public unsafe func Windows_SetUrlCacheConfigInfoW(lpCacheConfigInfo: CPointer<INTERNET_CACHE_CONFIG_INFOWAbi>, dwFieldControl: UInt32): Int32 {
+    return SetUrlCacheConfigInfoW(lpCacheConfigInfo, dwFieldControl)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_SetUrlCacheEntryGroup == "on"]
+foreign {
     // param-hint: pbGroupAttributes optional reserved
     // param-hint: cbGroupAttributes optional reserved
     // param-hint: lpReserved optional reserved
     func SetUrlCacheEntryGroup(lpszUrlName: CPointer<UInt8>, dwFlags: UInt32, GroupId: Int64, pbGroupAttributes: CPointer<UInt8>, cbGroupAttributes: UInt32, lpReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_SetUrlCacheEntryGroup == "on"]
+public unsafe func Windows_SetUrlCacheEntryGroup(lpszUrlName: CPointer<UInt8>, dwFlags: UInt32, GroupId: Int64, pbGroupAttributes: CPointer<UInt8>, cbGroupAttributes: UInt32, lpReserved: CPointer<Unit>): Int32 {
+    return SetUrlCacheEntryGroup(lpszUrlName, dwFlags, GroupId, pbGroupAttributes, cbGroupAttributes, lpReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_SetUrlCacheEntryGroupA == "on"]
+foreign {
     // param-hint: pbGroupAttributes optional reserved
     // param-hint: cbGroupAttributes optional reserved
     // param-hint: lpReserved optional reserved
     func SetUrlCacheEntryGroupA(lpszUrlName: CPointer<UInt8>, dwFlags: UInt32, GroupId: Int64, pbGroupAttributes: CPointer<UInt8>, cbGroupAttributes: UInt32, lpReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_SetUrlCacheEntryGroupA == "on"]
+public unsafe func Windows_SetUrlCacheEntryGroupA(lpszUrlName: CPointer<UInt8>, dwFlags: UInt32, GroupId: Int64, pbGroupAttributes: CPointer<UInt8>, cbGroupAttributes: UInt32, lpReserved: CPointer<Unit>): Int32 {
+    return SetUrlCacheEntryGroupA(lpszUrlName, dwFlags, GroupId, pbGroupAttributes, cbGroupAttributes, lpReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_SetUrlCacheEntryGroupW == "on"]
+foreign {
     // param-hint: pbGroupAttributes optional reserved
     // param-hint: cbGroupAttributes optional reserved
     // param-hint: lpReserved optional reserved
     func SetUrlCacheEntryGroupW(lpszUrlName: CPointer<UInt16>, dwFlags: UInt32, GroupId: Int64, pbGroupAttributes: CPointer<UInt8>, cbGroupAttributes: UInt32, lpReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_SetUrlCacheEntryGroupW == "on"]
+public unsafe func Windows_SetUrlCacheEntryGroupW(lpszUrlName: CPointer<UInt16>, dwFlags: UInt32, GroupId: Int64, pbGroupAttributes: CPointer<UInt8>, cbGroupAttributes: UInt32, lpReserved: CPointer<Unit>): Int32 {
+    return SetUrlCacheEntryGroupW(lpszUrlName, dwFlags, GroupId, pbGroupAttributes, cbGroupAttributes, lpReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_SetUrlCacheEntryInfoA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetUrlCacheEntryInfoA(lpszUrlName: CPointer<UInt8>, lpCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOAAbi>, dwFieldControl: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_SetUrlCacheEntryInfoA == "on"]
+public unsafe func Windows_SetUrlCacheEntryInfoA(lpszUrlName: CPointer<UInt8>, lpCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOAAbi>, dwFieldControl: UInt32): Int32 {
+    return SetUrlCacheEntryInfoA(lpszUrlName, lpCacheEntryInfo, dwFieldControl)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_SetUrlCacheEntryInfoW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetUrlCacheEntryInfoW(lpszUrlName: CPointer<UInt16>, lpCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOWAbi>, dwFieldControl: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_SetUrlCacheEntryInfoW == "on"]
+public unsafe func Windows_SetUrlCacheEntryInfoW(lpszUrlName: CPointer<UInt16>, lpCacheEntryInfo: CPointer<INTERNET_CACHE_ENTRY_INFOWAbi>, dwFieldControl: UInt32): Int32 {
+    return SetUrlCacheEntryInfoW(lpszUrlName, lpCacheEntryInfo, dwFieldControl)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_SetUrlCacheGroupAttributeA == "on"]
+foreign {
     // param-hint: dwFlags optional reserved
     // param-hint: lpReserved optional reserved
     // pinvoke-hint: SetLastError
     func SetUrlCacheGroupAttributeA(gid: Int64, dwFlags: UInt32, dwAttributes: UInt32, lpGroupInfo: CPointer<INTERNET_CACHE_GROUP_INFOAAbi>, lpReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_SetUrlCacheGroupAttributeA == "on"]
+public unsafe func Windows_SetUrlCacheGroupAttributeA(gid: Int64, dwFlags: UInt32, dwAttributes: UInt32, lpGroupInfo: CPointer<INTERNET_CACHE_GROUP_INFOAAbi>, lpReserved: CPointer<Unit>): Int32 {
+    return SetUrlCacheGroupAttributeA(gid, dwFlags, dwAttributes, lpGroupInfo, lpReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_SetUrlCacheGroupAttributeW == "on"]
+foreign {
     // param-hint: dwFlags optional reserved
     // param-hint: lpReserved optional reserved
     // pinvoke-hint: SetLastError
     func SetUrlCacheGroupAttributeW(gid: Int64, dwFlags: UInt32, dwAttributes: UInt32, lpGroupInfo: CPointer<INTERNET_CACHE_GROUP_INFOWAbi>, lpReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_SetUrlCacheGroupAttributeW == "on"]
+public unsafe func Windows_SetUrlCacheGroupAttributeW(gid: Int64, dwFlags: UInt32, dwAttributes: UInt32, lpGroupInfo: CPointer<INTERNET_CACHE_GROUP_INFOWAbi>, lpReserved: CPointer<Unit>): Int32 {
+    return SetUrlCacheGroupAttributeW(gid, dwFlags, dwAttributes, lpGroupInfo, lpReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_SetUrlCacheHeaderData == "on"]
+foreign {
     func SetUrlCacheHeaderData(nIdx: UInt32, dwData: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_SetUrlCacheHeaderData == "on"]
+public unsafe func Windows_SetUrlCacheHeaderData(nIdx: UInt32, dwData: UInt32): Int32 {
+    return SetUrlCacheHeaderData(nIdx, dwData)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_ShowClientAuthCerts == "on"]
+foreign {
     func ShowClientAuthCerts(hWndParent: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_ShowClientAuthCerts == "on"]
+public unsafe func Windows_ShowClientAuthCerts(hWndParent: CPointer<Unit>): UInt32 {
+    return ShowClientAuthCerts(hWndParent)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_ShowSecurityInfo == "on" && Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
+    func ShowSecurityInfo(hWndParent: CPointer<Unit>, pSecurityInfo: CPointer<INTERNET_SECURITY_INFOAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_ShowSecurityInfo == "on" && Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_ShowSecurityInfo(hWndParent: CPointer<Unit>, pSecurityInfo: CPointer<INTERNET_SECURITY_INFOAbi>): UInt32 {
+    return ShowSecurityInfo(hWndParent, pSecurityInfo)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_ShowX509EncodedCertificate == "on"]
+foreign {
     // param-hint: lpCert bytes=param[2]
     func ShowX509EncodedCertificate(hWndParent: CPointer<Unit>, lpCert: CPointer<UInt8>, cbCert: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_ShowX509EncodedCertificate == "on"]
+public unsafe func Windows_ShowX509EncodedCertificate(hWndParent: CPointer<Unit>, lpCert: CPointer<UInt8>, cbCert: UInt32): UInt32 {
+    return ShowX509EncodedCertificate(hWndParent, lpCert, cbCert)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UnlockUrlCacheEntryFile == "on"]
+foreign {
     // param-hint: dwReserved optional reserved
     // pinvoke-hint: SetLastError
     func UnlockUrlCacheEntryFile(lpszUrlName: CPointer<UInt8>, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UnlockUrlCacheEntryFile == "on"]
+public unsafe func Windows_UnlockUrlCacheEntryFile(lpszUrlName: CPointer<UInt8>, dwReserved: UInt32): Int32 {
+    return UnlockUrlCacheEntryFile(lpszUrlName, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UnlockUrlCacheEntryFileA == "on"]
+foreign {
     // param-hint: dwReserved optional reserved
     // pinvoke-hint: SetLastError
     func UnlockUrlCacheEntryFileA(lpszUrlName: CPointer<UInt8>, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UnlockUrlCacheEntryFileA == "on"]
+public unsafe func Windows_UnlockUrlCacheEntryFileA(lpszUrlName: CPointer<UInt8>, dwReserved: UInt32): Int32 {
+    return UnlockUrlCacheEntryFileA(lpszUrlName, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UnlockUrlCacheEntryFileW == "on"]
+foreign {
     // param-hint: dwReserved optional reserved
     // pinvoke-hint: SetLastError
     func UnlockUrlCacheEntryFileW(lpszUrlName: CPointer<UInt16>, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UnlockUrlCacheEntryFileW == "on"]
+public unsafe func Windows_UnlockUrlCacheEntryFileW(lpszUrlName: CPointer<UInt16>, dwReserved: UInt32): Int32 {
+    return UnlockUrlCacheEntryFileW(lpszUrlName, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UnlockUrlCacheEntryStream == "on"]
+foreign {
     // param-hint: Reserved optional reserved
     // pinvoke-hint: SetLastError
     func UnlockUrlCacheEntryStream(hUrlCacheStream: CPointer<Unit>, Reserved: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UnlockUrlCacheEntryStream == "on"]
+public unsafe func Windows_UnlockUrlCacheEntryStream(hUrlCacheStream: CPointer<Unit>, Reserved: UInt32): Int32 {
+    return UnlockUrlCacheEntryStream(hUrlCacheStream, Reserved)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UpdateUrlCacheContentPath == "on"]
+foreign {
     func UpdateUrlCacheContentPath(szNewPath: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UpdateUrlCacheContentPath == "on"]
+public unsafe func Windows_UpdateUrlCacheContentPath(szNewPath: CPointer<UInt8>): Int32 {
+    return UpdateUrlCacheContentPath(szNewPath)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheCheckEntriesExist == "on"]
+foreign {
     // param-hint: rgpwszUrls len=param[1]
     // param-hint: rgfExist len=param[1]
     func UrlCacheCheckEntriesExist(rgpwszUrls: CPointer<CPointer<UInt16>>, cEntries: UInt32, rgfExist: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheCheckEntriesExist == "on"]
+public unsafe func Windows_UrlCacheCheckEntriesExist(rgpwszUrls: CPointer<CPointer<UInt16>>, cEntries: UInt32, rgfExist: CPointer<Int32>): UInt32 {
+    return UrlCacheCheckEntriesExist(rgpwszUrls, cEntries, rgfExist)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheCloseEntryHandle == "on"]
+foreign {
     func UrlCacheCloseEntryHandle(hEntryFile: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheCloseEntryHandle == "on"]
+public unsafe func Windows_UrlCacheCloseEntryHandle(hEntryFile: CPointer<Unit>): Unit {
+    UrlCacheCloseEntryHandle(hEntryFile)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheContainerSetEntryMaximumAge == "on"]
+foreign {
     func UrlCacheContainerSetEntryMaximumAge(pwszPrefix: CPointer<UInt16>, dwEntryMaxAge: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheContainerSetEntryMaximumAge == "on"]
+public unsafe func Windows_UrlCacheContainerSetEntryMaximumAge(pwszPrefix: CPointer<UInt16>, dwEntryMaxAge: UInt32): UInt32 {
+    return UrlCacheContainerSetEntryMaximumAge(pwszPrefix, dwEntryMaxAge)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheCreateContainer == "on"]
+foreign {
     func UrlCacheCreateContainer(pwszName: CPointer<UInt16>, pwszPrefix: CPointer<UInt16>, pwszDirectory: CPointer<UInt16>, ullLimit: UInt64, dwOptions: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheCreateContainer == "on"]
+public unsafe func Windows_UrlCacheCreateContainer(pwszName: CPointer<UInt16>, pwszPrefix: CPointer<UInt16>, pwszDirectory: CPointer<UInt16>, ullLimit: UInt64, dwOptions: UInt32): UInt32 {
+    return UrlCacheCreateContainer(pwszName, pwszPrefix, pwszDirectory, ullLimit, dwOptions)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheFindFirstEntry == "on"]
+foreign {
     // param-hint: pwszPrefix optional
     func UrlCacheFindFirstEntry(pwszPrefix: CPointer<UInt16>, dwFlags: UInt32, dwFilter: UInt32, GroupId: Int64, pCacheEntryInfo: CPointer<URLCACHE_ENTRY_INFOAbi>, phFind: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheFindFirstEntry == "on"]
+public unsafe func Windows_UrlCacheFindFirstEntry(pwszPrefix: CPointer<UInt16>, dwFlags: UInt32, dwFilter: UInt32, GroupId: Int64, pCacheEntryInfo: CPointer<URLCACHE_ENTRY_INFOAbi>, phFind: CPointer<CPointer<Unit>>): UInt32 {
+    return UrlCacheFindFirstEntry(pwszPrefix, dwFlags, dwFilter, GroupId, pCacheEntryInfo, phFind)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheFindNextEntry == "on"]
+foreign {
     func UrlCacheFindNextEntry(hFind: CPointer<Unit>, pCacheEntryInfo: CPointer<URLCACHE_ENTRY_INFOAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheFindNextEntry == "on"]
+public unsafe func Windows_UrlCacheFindNextEntry(hFind: CPointer<Unit>, pCacheEntryInfo: CPointer<URLCACHE_ENTRY_INFOAbi>): UInt32 {
+    return UrlCacheFindNextEntry(hFind, pCacheEntryInfo)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheFreeEntryInfo == "on"]
+foreign {
     func UrlCacheFreeEntryInfo(pCacheEntryInfo: CPointer<URLCACHE_ENTRY_INFOAbi>): Unit
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheFreeEntryInfo == "on"]
+public unsafe func Windows_UrlCacheFreeEntryInfo(pCacheEntryInfo: CPointer<URLCACHE_ENTRY_INFOAbi>): Unit {
+    UrlCacheFreeEntryInfo(pCacheEntryInfo)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheFreeGlobalSpace == "on"]
+foreign {
     func UrlCacheFreeGlobalSpace(ullTargetSize: UInt64, dwFilter: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheFreeGlobalSpace == "on"]
+public unsafe func Windows_UrlCacheFreeGlobalSpace(ullTargetSize: UInt64, dwFilter: UInt32): UInt32 {
+    return UrlCacheFreeGlobalSpace(ullTargetSize, dwFilter)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheGetContentPaths == "on"]
+foreign {
     func UrlCacheGetContentPaths(pppwszDirectories: CPointer<CPointer<CPointer<UInt16>>>, pcDirectories: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheGetContentPaths == "on"]
+public unsafe func Windows_UrlCacheGetContentPaths(pppwszDirectories: CPointer<CPointer<CPointer<UInt16>>>, pcDirectories: CPointer<UInt32>): UInt32 {
+    return UrlCacheGetContentPaths(pppwszDirectories, pcDirectories)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheGetEntryInfo == "on"]
+foreign {
     // param-hint: hAppCache optional
     // param-hint: pCacheEntryInfo optional
     func UrlCacheGetEntryInfo(hAppCache: CPointer<Unit>, pcwszUrl: CPointer<UInt16>, pCacheEntryInfo: CPointer<URLCACHE_ENTRY_INFOAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheGetEntryInfo == "on"]
+public unsafe func Windows_UrlCacheGetEntryInfo(hAppCache: CPointer<Unit>, pcwszUrl: CPointer<UInt16>, pCacheEntryInfo: CPointer<URLCACHE_ENTRY_INFOAbi>): UInt32 {
+    return UrlCacheGetEntryInfo(hAppCache, pcwszUrl, pCacheEntryInfo)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheGetGlobalCacheSize == "on"]
+foreign {
     func UrlCacheGetGlobalCacheSize(dwFilter: UInt32, pullSize: CPointer<UInt64>, pullLimit: CPointer<UInt64>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheGetGlobalCacheSize == "on"]
+public unsafe func Windows_UrlCacheGetGlobalCacheSize(dwFilter: UInt32, pullSize: CPointer<UInt64>, pullLimit: CPointer<UInt64>): UInt32 {
+    return UrlCacheGetGlobalCacheSize(dwFilter, pullSize, pullLimit)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheGetGlobalLimit == "on"]
+foreign {
     func UrlCacheGetGlobalLimit(limitType: URL_CACHE_LIMIT_TYPEAbi, pullLimit: CPointer<UInt64>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheGetGlobalLimit == "on"]
+public unsafe func Windows_UrlCacheGetGlobalLimit(limitType: URL_CACHE_LIMIT_TYPEAbi, pullLimit: CPointer<UInt64>): UInt32 {
+    return UrlCacheGetGlobalLimit(limitType, pullLimit)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheReadEntryStream == "on"]
+foreign {
     func UrlCacheReadEntryStream(hUrlCacheStream: CPointer<Unit>, ullLocation: UInt64, pBuffer: CPointer<Unit>, dwBufferLen: UInt32, pdwBufferLen: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheReadEntryStream == "on"]
+public unsafe func Windows_UrlCacheReadEntryStream(hUrlCacheStream: CPointer<Unit>, ullLocation: UInt64, pBuffer: CPointer<Unit>, dwBufferLen: UInt32, pdwBufferLen: CPointer<UInt32>): UInt32 {
+    return UrlCacheReadEntryStream(hUrlCacheStream, ullLocation, pBuffer, dwBufferLen, pdwBufferLen)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheReloadSettings == "on"]
+foreign {
     func UrlCacheReloadSettings(): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheReloadSettings == "on"]
+public unsafe func Windows_UrlCacheReloadSettings(): UInt32 {
+    return UrlCacheReloadSettings()
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheRetrieveEntryFile == "on"]
+foreign {
     // param-hint: hAppCache optional
     func UrlCacheRetrieveEntryFile(hAppCache: CPointer<Unit>, pcwszUrl: CPointer<UInt16>, pCacheEntryInfo: CPointer<URLCACHE_ENTRY_INFOAbi>, phEntryFile: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheRetrieveEntryFile == "on"]
+public unsafe func Windows_UrlCacheRetrieveEntryFile(hAppCache: CPointer<Unit>, pcwszUrl: CPointer<UInt16>, pCacheEntryInfo: CPointer<URLCACHE_ENTRY_INFOAbi>, phEntryFile: CPointer<CPointer<Unit>>): UInt32 {
+    return UrlCacheRetrieveEntryFile(hAppCache, pcwszUrl, pCacheEntryInfo, phEntryFile)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheRetrieveEntryStream == "on"]
+foreign {
     // param-hint: hAppCache optional
     func UrlCacheRetrieveEntryStream(hAppCache: CPointer<Unit>, pcwszUrl: CPointer<UInt16>, fRandomRead: Int32, pCacheEntryInfo: CPointer<URLCACHE_ENTRY_INFOAbi>, phEntryStream: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheRetrieveEntryStream == "on"]
+public unsafe func Windows_UrlCacheRetrieveEntryStream(hAppCache: CPointer<Unit>, pcwszUrl: CPointer<UInt16>, fRandomRead: Int32, pCacheEntryInfo: CPointer<URLCACHE_ENTRY_INFOAbi>, phEntryStream: CPointer<CPointer<Unit>>): UInt32 {
+    return UrlCacheRetrieveEntryStream(hAppCache, pcwszUrl, fRandomRead, pCacheEntryInfo, phEntryStream)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheServer == "on"]
+foreign {
     func UrlCacheServer(): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheServer == "on"]
+public unsafe func Windows_UrlCacheServer(): UInt32 {
+    return UrlCacheServer()
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheSetGlobalLimit == "on"]
+foreign {
     func UrlCacheSetGlobalLimit(limitType: URL_CACHE_LIMIT_TYPEAbi, ullLimit: UInt64): UInt32
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheSetGlobalLimit == "on"]
+public unsafe func Windows_UrlCacheSetGlobalLimit(limitType: URL_CACHE_LIMIT_TYPEAbi, ullLimit: UInt64): UInt32 {
+    return UrlCacheSetGlobalLimit(limitType, ullLimit)
+}
+
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheUpdateEntryExtraData == "on"]
+foreign {
     // param-hint: hAppCache optional
     // param-hint: pbExtraData bytes=param[3]
     func UrlCacheUpdateEntryExtraData(hAppCache: CPointer<Unit>, pcwszUrl: CPointer<UInt16>, pbExtraData: CPointer<UInt8>, cbExtraData: UInt32): UInt32
 }
 
-@When[WININET == "on" && (Windows_Win32_Security_Authentication_Identity == "on" && Windows_Win32_Security_Cryptography == "on")]
-foreign {
-    func ShowSecurityInfo(hWndParent: CPointer<Unit>, pSecurityInfo: CPointer<INTERNET_SECURITY_INFOAbi>): UInt32
-}
-
-@When[WININET == "on" && Windows_Win32_Networking_WinHttp == "on"]
-foreign {
-    // param-hint: lpszUrl len=param[1]
-    // pinvoke-hint: SetLastError
-    func InternetCrackUrlA(lpszUrl: CPointer<UInt8>, dwUrlLength: UInt32, dwFlags: Win32_Networking_WinHttp.WIN_HTTP_CREATE_URL_FLAGSAbi, lpUrlComponents: CPointer<URL_COMPONENTSAAbi>): Int32
-    // param-hint: lpszUrl len=param[1]
-    // pinvoke-hint: SetLastError
-    func InternetCrackUrlW(lpszUrl: CPointer<UInt16>, dwUrlLength: UInt32, dwFlags: Win32_Networking_WinHttp.WIN_HTTP_CREATE_URL_FLAGSAbi, lpUrlComponents: CPointer<URL_COMPONENTSWAbi>): Int32
-}
-
-@When[WININET == "on" && Windows_Win32_Security_Cryptography == "on"]
-foreign {
-    // param-hint: lpstr len=param[2]
-    // param-hint: dwReserved optional reserved
-    func InternetAlgIdToStringA(ai: Win32__impl_l0.ALG_IDAbi, lpstr: CPointer<UInt8>, lpdwstrLength: CPointer<UInt32>, dwReserved: UInt32): Int32
-    // param-hint: lpstr len=param[2]
-    // param-hint: dwReserved optional reserved
-    func InternetAlgIdToStringW(ai: Win32__impl_l0.ALG_IDAbi, lpstr: CPointer<UInt16>, lpdwstrLength: CPointer<UInt32>, dwReserved: UInt32): Int32
-    func InternetGetSecurityInfoByURL(lpszURL: CPointer<UInt8>, ppCertChain: CPointer<CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXTAbi>>, pdwSecureFlags: CPointer<UInt32>): Int32
-    func InternetGetSecurityInfoByURLA(lpszURL: CPointer<UInt8>, ppCertChain: CPointer<CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXTAbi>>, pdwSecureFlags: CPointer<UInt32>): Int32
-    func InternetGetSecurityInfoByURLW(lpszURL: CPointer<UInt16>, ppCertChain: CPointer<CPointer<Win32__impl_l2.CERT_CHAIN_CONTEXTAbi>>, pdwSecureFlags: CPointer<UInt32>): Int32
-}
-
-@When[WININET == "on" && Windows_Win32_Storage_FileSystem == "on"]
-foreign {
-    // param-hint: lpszSearchFile optional
-    // param-hint: lpFindFileData optional
-    // param-hint: dwContext optional
-    // pinvoke-hint: SetLastError
-    func FtpFindFirstFileA(hConnect: CPointer<Unit>, lpszSearchFile: CPointer<UInt8>, lpFindFileData: CPointer<Win32__impl_l0.WIN32_FIND_DATAAAbi>, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit>
-    // param-hint: lpszSearchFile optional
-    // param-hint: lpFindFileData optional
-    // param-hint: dwContext optional
-    // pinvoke-hint: SetLastError
-    func FtpFindFirstFileW(hConnect: CPointer<Unit>, lpszSearchFile: CPointer<UInt16>, lpFindFileData: CPointer<Win32__impl_l0.WIN32_FIND_DATAWAbi>, dwFlags: UInt32, dwContext: UIntNative): CPointer<Unit>
+@When[Windows_Win32_Networking_WinInet == "on" && WININET == "on" && Windows_Win32_Networking_WinInet_UrlCacheUpdateEntryExtraData == "on"]
+public unsafe func Windows_UrlCacheUpdateEntryExtraData(hAppCache: CPointer<Unit>, pcwszUrl: CPointer<UInt16>, pbExtraData: CPointer<UInt8>, cbExtraData: UInt32): UInt32 {
+    return UrlCacheUpdateEntryExtraData(hAppCache, pcwszUrl, pbExtraData, cbExtraData)
 }
 
 @When[Windows_Win32_Networking_WinInet == "on"]

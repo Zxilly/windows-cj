@@ -7,125 +7,463 @@ import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
 
 
-@When[URLMON == "on"]
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoGetClassObjectFromURL == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: pvReserved optional reserved
+    func CoGetClassObjectFromURL(rCLASSID: CPointer<GUID>, szCODE: CPointer<UInt16>, dwFileVersionMS: UInt32, dwFileVersionLS: UInt32, szTYPE: CPointer<UInt16>, pBindCtx: CPointer<Unit>, dwClsContext: UInt32, pvReserved: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoGetClassObjectFromURL == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CoGetClassObjectFromURL(rCLASSID: CPointer<GUID>, szCODE: CPointer<UInt16>, dwFileVersionMS: UInt32, dwFileVersionLS: UInt32, szTYPE: CPointer<UInt16>, pBindCtx: CPointer<Unit>, dwClsContext: UInt32, pvReserved: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return CoGetClassObjectFromURL(rCLASSID, szCODE, dwFileVersionMS, dwFileVersionLS, szTYPE, pBindCtx, dwClsContext, pvReserved, riid, ppv)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetCombineIUri == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: dwReserved optional
+    func CoInternetCombineIUri(pBaseUri: CPointer<Unit>, pRelativeUri: CPointer<Unit>, dwCombineFlags: UInt32, ppCombinedUri: CPointer<CPointer<Unit>>, dwReserved: UIntNative): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetCombineIUri == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CoInternetCombineIUri(pBaseUri: CPointer<Unit>, pRelativeUri: CPointer<Unit>, dwCombineFlags: UInt32, ppCombinedUri: CPointer<CPointer<Unit>>, dwReserved: UIntNative): Int32 {
+    return CoInternetCombineIUri(pBaseUri, pRelativeUri, dwCombineFlags, ppCombinedUri, dwReserved)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetCombineUrl == "on"]
 foreign {
     // param-hint: pszResult len=param[4]
     // param-hint: pcchResult optional
     // param-hint: dwReserved optional reserved
     func CoInternetCombineUrl(pwzBaseUrl: CPointer<UInt16>, pwzRelativeUrl: CPointer<UInt16>, dwCombineFlags: UInt32, pszResult: CPointer<UInt16>, cchResult: UInt32, pcchResult: CPointer<UInt32>, dwReserved: UInt32): Int32
-    func CoInternetCompareUrl(pwzUrl1: CPointer<UInt16>, pwzUrl2: CPointer<UInt16>, dwFlags: UInt32): Int32
-    func CoInternetGetProtocolFlags(pwzUrl: CPointer<UInt16>, pdwFlags: CPointer<UInt32>, dwReserved: UInt32): Int32
-    // param-hint: dwReserved optional reserved
-    func CoInternetGetSecurityUrl(pwszUrl: CPointer<UInt16>, ppwszSecUrl: CPointer<CPointer<UInt16>>, psuAction: Int32, dwReserved: UInt32): Int32
-    func CoInternetGetSession(dwSessionMode: UInt32, ppIInternetSession: CPointer<CPointer<Unit>>, dwReserved: UInt32): Int32
-    func CoInternetIsFeatureEnabled(FeatureEntry: Int32, dwFlags: UInt32): Int32
-    // param-hint: szURL optional
-    // param-hint: pSecMgr optional
-    func CoInternetIsFeatureEnabledForUrl(FeatureEntry: Int32, dwFlags: UInt32, szURL: CPointer<UInt16>, pSecMgr: CPointer<Unit>): Int32
-    // param-hint: szFromURL optional
-    // param-hint: pSecMgr optional
-    func CoInternetIsFeatureZoneElevationEnabled(szFromURL: CPointer<UInt16>, szToURL: CPointer<UInt16>, pSecMgr: CPointer<Unit>, dwFlags: UInt32): Int32
-    // param-hint: pszResult len=param[4]
-    func CoInternetParseUrl(pwzUrl: CPointer<UInt16>, ParseAction: Int32, dwFlags: UInt32, pszResult: CPointer<UInt16>, cchResult: UInt32, pcchResult: CPointer<UInt32>, dwReserved: UInt32): Int32
-    // param-hint: pvBuffer bytes=param[4]
-    // param-hint: pcbBuffer optional
-    func CoInternetQueryInfo(pwzUrl: CPointer<UInt16>, QueryOptions: Int32, dwQueryFlags: UInt32, pvBuffer: CPointer<Unit>, cbBuffer: UInt32, pcbBuffer: CPointer<UInt32>, dwReserved: UInt32): Int32
-    func CoInternetSetFeatureEnabled(FeatureEntry: Int32, dwFlags: UInt32, fEnable: Int32): Int32
-    // param-hint: pbSecurityId1 len=param[1]
-    // param-hint: pbSecurityId2 len=param[3]
-    func CompareSecurityIds(pbSecurityId1: CPointer<UInt8>, dwLen1: UInt32, pbSecurityId2: CPointer<UInt8>, dwLen2: UInt32, dwReserved: UInt32): Int32
-    func CompatFlagsFromClsid(pclsid: CPointer<GUID>, pdwCompatFlags: CPointer<UInt32>, pdwMiscStatusFlags: CPointer<UInt32>): Int32
-    func FindMediaType(rgszTypes: CPointer<UInt8>, rgcfTypes: CPointer<UInt16>): Int32
-    func GetClassURL(szURL: CPointer<UInt16>, pClsID: CPointer<GUID>): Int32
-    func GetSoftwareUpdateInfo(szDistUnit: CPointer<UInt16>, psdi: CPointer<Win32__impl_l0.SOFTDISTINFO>): Int32
-    func IEGetUserPrivateNamespaceName(): CPointer<UInt16>
-    func IEInstallScope(pdwScope: CPointer<UInt32>): Int32
-    func IsLoggingEnabledA(pszUrl: CPointer<UInt8>): Int32
-    func IsLoggingEnabledW(pwszUrl: CPointer<UInt16>): Int32
-    // param-hint: pszUAOut len=param[2]
-    func ObtainUserAgentString(dwOption: UInt32, pszUAOut: CPointer<UInt8>, cbSize: CPointer<UInt32>): Int32
-    // param-hint: rgszTypes len=param[0]
-    // param-hint: rgcfTypes len=param[0]
-    func RegisterMediaTypes(ctypes: UInt32, rgszTypes: CPointer<CPointer<UInt8>>, rgcfTypes: CPointer<UInt16>): Int32
-    func SetAccessForIEAppContainer(hObject: CPointer<Unit>, ieObjectType: Int32, dwAccessMask: UInt32): Int32
-    func SetSoftwareUpdateAdvertisementState(szDistUnit: CPointer<UInt16>, dwAdState: UInt32, dwAdvertisedVersionMS: UInt32, dwAdvertisedVersionLS: UInt32): Int32
-    // param-hint: pBuffer bytes=param[2] optional
-    // param-hint: dwReserved optional reserved
-    func UrlMkGetSessionOption(dwOption: UInt32, pBuffer: CPointer<Unit>, dwBufferLength: UInt32, pdwBufferLengthOut: CPointer<UInt32>, dwReserved: UInt32): Int32
-    // param-hint: pBuffer bytes=param[2] optional
-    // param-hint: dwReserved optional reserved
-    func UrlMkSetSessionOption(dwOption: UInt32, pBuffer: CPointer<Unit>, dwBufferLength: UInt32, dwReserved: UInt32): Int32
-    func WriteHitLogging(lpLogginginfo: CPointer<Win32__impl_l0.HIT_LOGGING_INFO>): Int32
 }
 
-@When[URLMON == "on" && (Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on")]
-foreign {
-    func CopyBindInfo(pcbiSrc: CPointer<BINDINFO>, pbiDest: CPointer<BINDINFO>): Int32
-    func ReleaseBindInfo(pbindinfo: CPointer<BINDINFO>): Unit
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetCombineUrl == "on"]
+public unsafe func Windows_CoInternetCombineUrl(pwzBaseUrl: CPointer<UInt16>, pwzRelativeUrl: CPointer<UInt16>, dwCombineFlags: UInt32, pszResult: CPointer<UInt16>, cchResult: UInt32, pcchResult: CPointer<UInt32>, dwReserved: UInt32): Int32 {
+    return CoInternetCombineUrl(pwzBaseUrl, pwzRelativeUrl, dwCombineFlags, pszResult, cchResult, pcchResult, dwReserved)
 }
 
-@When[URLMON == "on" && (Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com == "on")]
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetCombineUrlEx == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func CopyStgMedium(pcstgmedSrc: CPointer<STGMEDIUM>, pstgmedDest: CPointer<STGMEDIUM>): Int32
-}
-
-@When[URLMON == "on" && Windows_Win32_System_Com == "on"]
-foreign {
-    // param-hint: pvReserved optional reserved
-    func CoGetClassObjectFromURL(rCLASSID: CPointer<GUID>, szCODE: CPointer<UInt16>, dwFileVersionMS: UInt32, dwFileVersionLS: UInt32, szTYPE: CPointer<UInt16>, pBindCtx: CPointer<Unit>, dwClsContext: UInt32, pvReserved: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
-    // param-hint: dwReserved optional
-    func CoInternetCombineIUri(pBaseUri: CPointer<Unit>, pRelativeUri: CPointer<Unit>, dwCombineFlags: UInt32, ppCombinedUri: CPointer<CPointer<Unit>>, dwReserved: UIntNative): Int32
     // param-hint: pBaseUri optional
     // param-hint: pwzRelativeUrl optional
     // param-hint: dwReserved optional
     func CoInternetCombineUrlEx(pBaseUri: CPointer<Unit>, pwzRelativeUrl: CPointer<UInt16>, dwCombineFlags: UInt32, ppCombinedUri: CPointer<CPointer<Unit>>, dwReserved: UIntNative): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetCombineUrlEx == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CoInternetCombineUrlEx(pBaseUri: CPointer<Unit>, pwzRelativeUrl: CPointer<UInt16>, dwCombineFlags: UInt32, ppCombinedUri: CPointer<CPointer<Unit>>, dwReserved: UIntNative): Int32 {
+    return CoInternetCombineUrlEx(pBaseUri, pwzRelativeUrl, dwCombineFlags, ppCombinedUri, dwReserved)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetCompareUrl == "on"]
+foreign {
+    func CoInternetCompareUrl(pwzUrl1: CPointer<UInt16>, pwzUrl2: CPointer<UInt16>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetCompareUrl == "on"]
+public unsafe func Windows_CoInternetCompareUrl(pwzUrl1: CPointer<UInt16>, pwzUrl2: CPointer<UInt16>, dwFlags: UInt32): Int32 {
+    return CoInternetCompareUrl(pwzUrl1, pwzUrl2, dwFlags)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetCreateSecurityManager == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pSP optional
     func CoInternetCreateSecurityManager(pSP: CPointer<Unit>, ppSM: CPointer<CPointer<Unit>>, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetCreateSecurityManager == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CoInternetCreateSecurityManager(pSP: CPointer<Unit>, ppSM: CPointer<CPointer<Unit>>, dwReserved: UInt32): Int32 {
+    return CoInternetCreateSecurityManager(pSP, ppSM, dwReserved)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetCreateZoneManager == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pSP optional
     func CoInternetCreateZoneManager(pSP: CPointer<Unit>, ppZM: CPointer<CPointer<Unit>>, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetCreateZoneManager == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CoInternetCreateZoneManager(pSP: CPointer<Unit>, ppZM: CPointer<CPointer<Unit>>, dwReserved: UInt32): Int32 {
+    return CoInternetCreateZoneManager(pSP, ppZM, dwReserved)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetGetProtocolFlags == "on"]
+foreign {
+    func CoInternetGetProtocolFlags(pwzUrl: CPointer<UInt16>, pdwFlags: CPointer<UInt32>, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetGetProtocolFlags == "on"]
+public unsafe func Windows_CoInternetGetProtocolFlags(pwzUrl: CPointer<UInt16>, pdwFlags: CPointer<UInt32>, dwReserved: UInt32): Int32 {
+    return CoInternetGetProtocolFlags(pwzUrl, pdwFlags, dwReserved)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetGetSecurityUrl == "on"]
+foreign {
+    // param-hint: dwReserved optional reserved
+    func CoInternetGetSecurityUrl(pwszUrl: CPointer<UInt16>, ppwszSecUrl: CPointer<CPointer<UInt16>>, psuAction: Int32, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetGetSecurityUrl == "on"]
+public unsafe func Windows_CoInternetGetSecurityUrl(pwszUrl: CPointer<UInt16>, ppwszSecUrl: CPointer<CPointer<UInt16>>, psuAction: Int32, dwReserved: UInt32): Int32 {
+    return CoInternetGetSecurityUrl(pwszUrl, ppwszSecUrl, psuAction, dwReserved)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetGetSecurityUrlEx == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: dwReserved optional reserved
     func CoInternetGetSecurityUrlEx(pUri: CPointer<Unit>, ppSecUri: CPointer<CPointer<Unit>>, psuAction: Int32, dwReserved: UIntNative): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetGetSecurityUrlEx == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CoInternetGetSecurityUrlEx(pUri: CPointer<Unit>, ppSecUri: CPointer<CPointer<Unit>>, psuAction: Int32, dwReserved: UIntNative): Int32 {
+    return CoInternetGetSecurityUrlEx(pUri, ppSecUri, psuAction, dwReserved)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetGetSession == "on"]
+foreign {
+    func CoInternetGetSession(dwSessionMode: UInt32, ppIInternetSession: CPointer<CPointer<Unit>>, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetGetSession == "on"]
+public unsafe func Windows_CoInternetGetSession(dwSessionMode: UInt32, ppIInternetSession: CPointer<CPointer<Unit>>, dwReserved: UInt32): Int32 {
+    return CoInternetGetSession(dwSessionMode, ppIInternetSession, dwReserved)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetIsFeatureEnabled == "on"]
+foreign {
+    func CoInternetIsFeatureEnabled(FeatureEntry: Int32, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetIsFeatureEnabled == "on"]
+public unsafe func Windows_CoInternetIsFeatureEnabled(FeatureEntry: Int32, dwFlags: UInt32): Int32 {
+    return CoInternetIsFeatureEnabled(FeatureEntry, dwFlags)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetIsFeatureEnabledForIUri == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pIUri optional
     // param-hint: pSecMgr optional
     func CoInternetIsFeatureEnabledForIUri(FeatureEntry: Int32, dwFlags: UInt32, pIUri: CPointer<Unit>, pSecMgr: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetIsFeatureEnabledForIUri == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CoInternetIsFeatureEnabledForIUri(FeatureEntry: Int32, dwFlags: UInt32, pIUri: CPointer<Unit>, pSecMgr: CPointer<Unit>): Int32 {
+    return CoInternetIsFeatureEnabledForIUri(FeatureEntry, dwFlags, pIUri, pSecMgr)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetIsFeatureEnabledForUrl == "on"]
+foreign {
+    // param-hint: szURL optional
+    // param-hint: pSecMgr optional
+    func CoInternetIsFeatureEnabledForUrl(FeatureEntry: Int32, dwFlags: UInt32, szURL: CPointer<UInt16>, pSecMgr: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetIsFeatureEnabledForUrl == "on"]
+public unsafe func Windows_CoInternetIsFeatureEnabledForUrl(FeatureEntry: Int32, dwFlags: UInt32, szURL: CPointer<UInt16>, pSecMgr: CPointer<Unit>): Int32 {
+    return CoInternetIsFeatureEnabledForUrl(FeatureEntry, dwFlags, szURL, pSecMgr)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetIsFeatureZoneElevationEnabled == "on"]
+foreign {
+    // param-hint: szFromURL optional
+    // param-hint: pSecMgr optional
+    func CoInternetIsFeatureZoneElevationEnabled(szFromURL: CPointer<UInt16>, szToURL: CPointer<UInt16>, pSecMgr: CPointer<Unit>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetIsFeatureZoneElevationEnabled == "on"]
+public unsafe func Windows_CoInternetIsFeatureZoneElevationEnabled(szFromURL: CPointer<UInt16>, szToURL: CPointer<UInt16>, pSecMgr: CPointer<Unit>, dwFlags: UInt32): Int32 {
+    return CoInternetIsFeatureZoneElevationEnabled(szFromURL, szToURL, pSecMgr, dwFlags)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetParseIUri == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pwzResult len=param[4]
     // param-hint: dwReserved optional reserved
     func CoInternetParseIUri(pIUri: CPointer<Unit>, ParseAction: Int32, dwFlags: UInt32, pwzResult: CPointer<UInt16>, cchResult: UInt32, pcchResult: CPointer<UInt32>, dwReserved: UIntNative): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetParseIUri == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CoInternetParseIUri(pIUri: CPointer<Unit>, ParseAction: Int32, dwFlags: UInt32, pwzResult: CPointer<UInt16>, cchResult: UInt32, pcchResult: CPointer<UInt32>, dwReserved: UIntNative): Int32 {
+    return CoInternetParseIUri(pIUri, ParseAction, dwFlags, pwzResult, cchResult, pcchResult, dwReserved)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetParseUrl == "on"]
+foreign {
+    // param-hint: pszResult len=param[4]
+    func CoInternetParseUrl(pwzUrl: CPointer<UInt16>, ParseAction: Int32, dwFlags: UInt32, pszResult: CPointer<UInt16>, cchResult: UInt32, pcchResult: CPointer<UInt32>, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetParseUrl == "on"]
+public unsafe func Windows_CoInternetParseUrl(pwzUrl: CPointer<UInt16>, ParseAction: Int32, dwFlags: UInt32, pszResult: CPointer<UInt16>, cchResult: UInt32, pcchResult: CPointer<UInt32>, dwReserved: UInt32): Int32 {
+    return CoInternetParseUrl(pwzUrl, ParseAction, dwFlags, pszResult, cchResult, pcchResult, dwReserved)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetQueryInfo == "on"]
+foreign {
+    // param-hint: pvBuffer bytes=param[4]
+    // param-hint: pcbBuffer optional
+    func CoInternetQueryInfo(pwzUrl: CPointer<UInt16>, QueryOptions: Int32, dwQueryFlags: UInt32, pvBuffer: CPointer<Unit>, cbBuffer: UInt32, pcbBuffer: CPointer<UInt32>, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetQueryInfo == "on"]
+public unsafe func Windows_CoInternetQueryInfo(pwzUrl: CPointer<UInt16>, QueryOptions: Int32, dwQueryFlags: UInt32, pvBuffer: CPointer<Unit>, cbBuffer: UInt32, pcbBuffer: CPointer<UInt32>, dwReserved: UInt32): Int32 {
+    return CoInternetQueryInfo(pwzUrl, QueryOptions, dwQueryFlags, pvBuffer, cbBuffer, pcbBuffer, dwReserved)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetSetFeatureEnabled == "on"]
+foreign {
+    func CoInternetSetFeatureEnabled(FeatureEntry: Int32, dwFlags: UInt32, fEnable: Int32): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetSetFeatureEnabled == "on"]
+public unsafe func Windows_CoInternetSetFeatureEnabled(FeatureEntry: Int32, dwFlags: UInt32, fEnable: Int32): Int32 {
+    return CoInternetSetFeatureEnabled(FeatureEntry, dwFlags, fEnable)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CompareSecurityIds == "on"]
+foreign {
+    // param-hint: pbSecurityId1 len=param[1]
+    // param-hint: pbSecurityId2 len=param[3]
+    func CompareSecurityIds(pbSecurityId1: CPointer<UInt8>, dwLen1: UInt32, pbSecurityId2: CPointer<UInt8>, dwLen2: UInt32, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CompareSecurityIds == "on"]
+public unsafe func Windows_CompareSecurityIds(pbSecurityId1: CPointer<UInt8>, dwLen1: UInt32, pbSecurityId2: CPointer<UInt8>, dwLen2: UInt32, dwReserved: UInt32): Int32 {
+    return CompareSecurityIds(pbSecurityId1, dwLen1, pbSecurityId2, dwLen2, dwReserved)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CompatFlagsFromClsid == "on"]
+foreign {
+    func CompatFlagsFromClsid(pclsid: CPointer<GUID>, pdwCompatFlags: CPointer<UInt32>, pdwMiscStatusFlags: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CompatFlagsFromClsid == "on"]
+public unsafe func Windows_CompatFlagsFromClsid(pclsid: CPointer<GUID>, pdwCompatFlags: CPointer<UInt32>, pdwMiscStatusFlags: CPointer<UInt32>): Int32 {
+    return CompatFlagsFromClsid(pclsid, pdwCompatFlags, pdwMiscStatusFlags)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CopyBindInfo == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func CopyBindInfo(pcbiSrc: CPointer<BINDINFO>, pbiDest: CPointer<BINDINFO>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CopyBindInfo == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CopyBindInfo(pcbiSrc: CPointer<BINDINFO>, pbiDest: CPointer<BINDINFO>): Int32 {
+    return CopyBindInfo(pcbiSrc, pbiDest)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CopyStgMedium == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func CopyStgMedium(pcstgmedSrc: CPointer<STGMEDIUM>, pstgmedDest: CPointer<STGMEDIUM>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CopyStgMedium == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CopyStgMedium(pcstgmedSrc: CPointer<STGMEDIUM>, pstgmedDest: CPointer<STGMEDIUM>): Int32 {
+    return CopyStgMedium(pcstgmedSrc, pstgmedDest)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CreateAsyncBindCtx == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pEFetc optional
     func CreateAsyncBindCtx(reserved: UInt32, pBSCb: CPointer<Unit>, pEFetc: CPointer<Unit>, ppBC: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CreateAsyncBindCtx == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CreateAsyncBindCtx(reserved: UInt32, pBSCb: CPointer<Unit>, pEFetc: CPointer<Unit>, ppBC: CPointer<CPointer<Unit>>): Int32 {
+    return CreateAsyncBindCtx(reserved, pBSCb, pEFetc, ppBC)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CreateAsyncBindCtxEx == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pEnum optional
     func CreateAsyncBindCtxEx(pbc: CPointer<Unit>, dwOptions: UInt32, pBSCb: CPointer<Unit>, pEnum: CPointer<Unit>, ppBC: CPointer<CPointer<Unit>>, reserved: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CreateAsyncBindCtxEx == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CreateAsyncBindCtxEx(pbc: CPointer<Unit>, dwOptions: UInt32, pBSCb: CPointer<Unit>, pEnum: CPointer<Unit>, ppBC: CPointer<CPointer<Unit>>, reserved: UInt32): Int32 {
+    return CreateAsyncBindCtxEx(pbc, dwOptions, pBSCb, pEnum, ppBC, reserved)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CreateFormatEnumerator == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: rgfmtetc len=param[0]
     func CreateFormatEnumerator(cfmtetc: UInt32, rgfmtetc: CPointer<Win32__impl_l1.FORMATETC>, ppenumfmtetc: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CreateFormatEnumerator == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CreateFormatEnumerator(cfmtetc: UInt32, rgfmtetc: CPointer<Win32__impl_l1.FORMATETC>, ppenumfmtetc: CPointer<CPointer<Unit>>): Int32 {
+    return CreateFormatEnumerator(cfmtetc, rgfmtetc, ppenumfmtetc)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CreateURLMoniker == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pMkCtx optional
     func CreateURLMoniker(pMkCtx: CPointer<Unit>, szURL: CPointer<UInt16>, ppmk: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CreateURLMoniker == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CreateURLMoniker(pMkCtx: CPointer<Unit>, szURL: CPointer<UInt16>, ppmk: CPointer<CPointer<Unit>>): Int32 {
+    return CreateURLMoniker(pMkCtx, szURL, ppmk)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CreateURLMonikerEx == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pMkCtx optional
     func CreateURLMonikerEx(pMkCtx: CPointer<Unit>, szURL: CPointer<UInt16>, ppmk: CPointer<CPointer<Unit>>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CreateURLMonikerEx == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CreateURLMonikerEx(pMkCtx: CPointer<Unit>, szURL: CPointer<UInt16>, ppmk: CPointer<CPointer<Unit>>, dwFlags: UInt32): Int32 {
+    return CreateURLMonikerEx(pMkCtx, szURL, ppmk, dwFlags)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CreateURLMonikerEx2 == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pMkCtx optional
     func CreateURLMonikerEx2(pMkCtx: CPointer<Unit>, pUri: CPointer<Unit>, ppmk: CPointer<CPointer<Unit>>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CreateURLMonikerEx2 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CreateURLMonikerEx2(pMkCtx: CPointer<Unit>, pUri: CPointer<Unit>, ppmk: CPointer<CPointer<Unit>>, dwFlags: UInt32): Int32 {
+    return CreateURLMonikerEx2(pMkCtx, pUri, ppmk, dwFlags)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_FaultInIEFeature == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pQuery optional
     func FaultInIEFeature(hWnd: CPointer<Unit>, pClassSpec: CPointer<Win32__impl_l0.uCLSSPEC>, pQuery: CPointer<Win32__impl_l1.QUERYCONTEXT>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_FaultInIEFeature == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_FaultInIEFeature(hWnd: CPointer<Unit>, pClassSpec: CPointer<Win32__impl_l0.uCLSSPEC>, pQuery: CPointer<Win32__impl_l1.QUERYCONTEXT>, dwFlags: UInt32): Int32 {
+    return FaultInIEFeature(hWnd, pClassSpec, pQuery, dwFlags)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_FindMediaType == "on"]
+foreign {
+    func FindMediaType(rgszTypes: CPointer<UInt8>, rgcfTypes: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_FindMediaType == "on"]
+public unsafe func Windows_FindMediaType(rgszTypes: CPointer<UInt8>, rgcfTypes: CPointer<UInt16>): Int32 {
+    return FindMediaType(rgszTypes, rgcfTypes)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_FindMediaTypeClass == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func FindMediaTypeClass(pBC: CPointer<Unit>, szType: CPointer<UInt8>, pclsID: CPointer<GUID>, reserved: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_FindMediaTypeClass == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_FindMediaTypeClass(pBC: CPointer<Unit>, szType: CPointer<UInt8>, pclsID: CPointer<GUID>, reserved: UInt32): Int32 {
+    return FindMediaTypeClass(pBC, szType, pclsID, reserved)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_FindMimeFromData == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pBC optional
     // param-hint: pwzUrl optional
     // param-hint: pBuffer bytes=param[3] optional
     // param-hint: pwzMimeProposed optional
     // param-hint: dwReserved optional reserved
     func FindMimeFromData(pBC: CPointer<Unit>, pwzUrl: CPointer<UInt16>, pBuffer: CPointer<Unit>, cbSize: UInt32, pwzMimeProposed: CPointer<UInt16>, dwMimeFlags: UInt32, ppwzMimeOut: CPointer<CPointer<UInt16>>, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_FindMimeFromData == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_FindMimeFromData(pBC: CPointer<Unit>, pwzUrl: CPointer<UInt16>, pBuffer: CPointer<Unit>, cbSize: UInt32, pwzMimeProposed: CPointer<UInt16>, dwMimeFlags: UInt32, ppwzMimeOut: CPointer<CPointer<UInt16>>, dwReserved: UInt32): Int32 {
+    return FindMimeFromData(pBC, pwzUrl, pBuffer, cbSize, pwzMimeProposed, dwMimeFlags, ppwzMimeOut, dwReserved)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_GetClassFileOrMime == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pBC optional
     // param-hint: szFilename optional
     // param-hint: pBuffer bytes=param[3] optional
     // param-hint: szMime optional
     func GetClassFileOrMime(pBC: CPointer<Unit>, szFilename: CPointer<UInt16>, pBuffer: CPointer<Unit>, cbSize: UInt32, szMime: CPointer<UInt16>, dwReserved: UInt32, pclsid: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_GetClassFileOrMime == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_GetClassFileOrMime(pBC: CPointer<Unit>, szFilename: CPointer<UInt16>, pBuffer: CPointer<Unit>, cbSize: UInt32, szMime: CPointer<UInt16>, dwReserved: UInt32, pclsid: CPointer<GUID>): Int32 {
+    return GetClassFileOrMime(pBC, szFilename, pBuffer, cbSize, szMime, dwReserved, pclsid)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_GetClassURL == "on"]
+foreign {
+    func GetClassURL(szURL: CPointer<UInt16>, pClsID: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_GetClassURL == "on"]
+public unsafe func Windows_GetClassURL(szURL: CPointer<UInt16>, pClsID: CPointer<GUID>): Int32 {
+    return GetClassURL(szURL, pClsID)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_GetComponentIDFromCLSSPEC == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func GetComponentIDFromCLSSPEC(pClassspec: CPointer<Win32__impl_l0.uCLSSPEC>, ppszComponentID: CPointer<CPointer<UInt8>>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_GetComponentIDFromCLSSPEC == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_GetComponentIDFromCLSSPEC(pClassspec: CPointer<Win32__impl_l0.uCLSSPEC>, ppszComponentID: CPointer<CPointer<UInt8>>): Int32 {
+    return GetComponentIDFromCLSSPEC(pClassspec, ppszComponentID)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_GetSoftwareUpdateInfo == "on"]
+foreign {
+    func GetSoftwareUpdateInfo(szDistUnit: CPointer<UInt16>, psdi: CPointer<Win32__impl_l0.SOFTDISTINFO>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_GetSoftwareUpdateInfo == "on"]
+public unsafe func Windows_GetSoftwareUpdateInfo(szDistUnit: CPointer<UInt16>, psdi: CPointer<Win32__impl_l0.SOFTDISTINFO>): Int32 {
+    return GetSoftwareUpdateInfo(szDistUnit, psdi)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_HlinkGoBack == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func HlinkGoBack(pUnk: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_HlinkGoBack == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_HlinkGoBack(pUnk: CPointer<Unit>): Int32 {
+    return HlinkGoBack(pUnk)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_HlinkGoForward == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func HlinkGoForward(pUnk: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_HlinkGoForward == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_HlinkGoForward(pUnk: CPointer<Unit>): Int32 {
+    return HlinkGoForward(pUnk)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_HlinkNavigateMoniker == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pUnk optional
     // param-hint: pmkTarget optional
     func HlinkNavigateMoniker(pUnk: CPointer<Unit>, pmkTarget: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_HlinkNavigateMoniker == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_HlinkNavigateMoniker(pUnk: CPointer<Unit>, pmkTarget: CPointer<Unit>): Int32 {
+    return HlinkNavigateMoniker(pUnk, pmkTarget)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_HlinkNavigateString == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pUnk optional
     // param-hint: szTarget optional
     func HlinkNavigateString(pUnk: CPointer<Unit>, szTarget: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_HlinkNavigateString == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_HlinkNavigateString(pUnk: CPointer<Unit>, szTarget: CPointer<UInt16>): Int32 {
+    return HlinkNavigateString(pUnk, szTarget)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_HlinkSimpleNavigateToMoniker == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pmkTarget optional
     // param-hint: szLocation optional
     // param-hint: szTargetFrameName optional
@@ -133,57 +471,360 @@ foreign {
     // param-hint: pbc optional
     // param-hint: param5 optional
     func HlinkSimpleNavigateToMoniker(pmkTarget: CPointer<Unit>, szLocation: CPointer<UInt16>, szTargetFrameName: CPointer<UInt16>, pUnk: CPointer<Unit>, pbc: CPointer<Unit>, param5: CPointer<Unit>, grfHLNF: UInt32, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_HlinkSimpleNavigateToMoniker == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_HlinkSimpleNavigateToMoniker(pmkTarget: CPointer<Unit>, szLocation: CPointer<UInt16>, szTargetFrameName: CPointer<UInt16>, pUnk: CPointer<Unit>, pbc: CPointer<Unit>, param5: CPointer<Unit>, grfHLNF: UInt32, dwReserved: UInt32): Int32 {
+    return HlinkSimpleNavigateToMoniker(pmkTarget, szLocation, szTargetFrameName, pUnk, pbc, param5, grfHLNF, dwReserved)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_HlinkSimpleNavigateToString == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: szTarget optional
     // param-hint: szLocation optional
     // param-hint: szTargetFrameName optional
     // param-hint: pbc optional
     // param-hint: param5 optional
     func HlinkSimpleNavigateToString(szTarget: CPointer<UInt16>, szLocation: CPointer<UInt16>, szTargetFrameName: CPointer<UInt16>, pUnk: CPointer<Unit>, pbc: CPointer<Unit>, param5: CPointer<Unit>, grfHLNF: UInt32, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_HlinkSimpleNavigateToString == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_HlinkSimpleNavigateToString(szTarget: CPointer<UInt16>, szLocation: CPointer<UInt16>, szTargetFrameName: CPointer<UInt16>, pUnk: CPointer<Unit>, pbc: CPointer<Unit>, param5: CPointer<Unit>, grfHLNF: UInt32, dwReserved: UInt32): Int32 {
+    return HlinkSimpleNavigateToString(szTarget, szLocation, szTargetFrameName, pUnk, pbc, param5, grfHLNF, dwReserved)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_IEGetUserPrivateNamespaceName == "on"]
+foreign {
+    func IEGetUserPrivateNamespaceName(): CPointer<UInt16>
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_IEGetUserPrivateNamespaceName == "on"]
+public unsafe func Windows_IEGetUserPrivateNamespaceName(): CPointer<UInt16> {
+    return IEGetUserPrivateNamespaceName()
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_IEInstallScope == "on"]
+foreign {
+    func IEInstallScope(pdwScope: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_IEInstallScope == "on"]
+public unsafe func Windows_IEInstallScope(pdwScope: CPointer<UInt32>): Int32 {
+    return IEInstallScope(pdwScope)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_IsAsyncMoniker == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func IsAsyncMoniker(pmk: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_IsAsyncMoniker == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_IsAsyncMoniker(pmk: CPointer<Unit>): Int32 {
+    return IsAsyncMoniker(pmk)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_IsLoggingEnabledA == "on"]
+foreign {
+    func IsLoggingEnabledA(pszUrl: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_IsLoggingEnabledA == "on"]
+public unsafe func Windows_IsLoggingEnabledA(pszUrl: CPointer<UInt8>): Int32 {
+    return IsLoggingEnabledA(pszUrl)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_IsLoggingEnabledW == "on"]
+foreign {
+    func IsLoggingEnabledW(pwszUrl: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_IsLoggingEnabledW == "on"]
+public unsafe func Windows_IsLoggingEnabledW(pwszUrl: CPointer<UInt16>): Int32 {
+    return IsLoggingEnabledW(pwszUrl)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_IsValidURL == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pBC optional
     func IsValidURL(pBC: CPointer<Unit>, szURL: CPointer<UInt16>, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_IsValidURL == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_IsValidURL(pBC: CPointer<Unit>, szURL: CPointer<UInt16>, dwReserved: UInt32): Int32 {
+    return IsValidURL(pBC, szURL, dwReserved)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_MkParseDisplayNameEx == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func MkParseDisplayNameEx(pbc: CPointer<Unit>, szDisplayName: CPointer<UInt16>, pchEaten: CPointer<UInt32>, ppmk: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_MkParseDisplayNameEx == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MkParseDisplayNameEx(pbc: CPointer<Unit>, szDisplayName: CPointer<UInt16>, pchEaten: CPointer<UInt32>, ppmk: CPointer<CPointer<Unit>>): Int32 {
+    return MkParseDisplayNameEx(pbc, szDisplayName, pchEaten, ppmk)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_ObtainUserAgentString == "on"]
+foreign {
+    // param-hint: pszUAOut len=param[2]
+    func ObtainUserAgentString(dwOption: UInt32, pszUAOut: CPointer<UInt8>, cbSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_ObtainUserAgentString == "on"]
+public unsafe func Windows_ObtainUserAgentString(dwOption: UInt32, pszUAOut: CPointer<UInt8>, cbSize: CPointer<UInt32>): Int32 {
+    return ObtainUserAgentString(dwOption, pszUAOut, cbSize)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_RegisterBindStatusCallback == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func RegisterBindStatusCallback(pBC: CPointer<Unit>, pBSCb: CPointer<Unit>, ppBSCBPrev: CPointer<CPointer<Unit>>, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_RegisterBindStatusCallback == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_RegisterBindStatusCallback(pBC: CPointer<Unit>, pBSCb: CPointer<Unit>, ppBSCBPrev: CPointer<CPointer<Unit>>, dwReserved: UInt32): Int32 {
+    return RegisterBindStatusCallback(pBC, pBSCb, ppBSCBPrev, dwReserved)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_RegisterFormatEnumerator == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func RegisterFormatEnumerator(pBC: CPointer<Unit>, pEFetc: CPointer<Unit>, reserved: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_RegisterFormatEnumerator == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_RegisterFormatEnumerator(pBC: CPointer<Unit>, pEFetc: CPointer<Unit>, reserved: UInt32): Int32 {
+    return RegisterFormatEnumerator(pBC, pEFetc, reserved)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_RegisterMediaTypeClass == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: rgszTypes len=param[1]
     // param-hint: rgclsID len=param[1]
     func RegisterMediaTypeClass(pBC: CPointer<Unit>, ctypes: UInt32, rgszTypes: CPointer<CPointer<UInt8>>, rgclsID: CPointer<GUID>, reserved: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_RegisterMediaTypeClass == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_RegisterMediaTypeClass(pBC: CPointer<Unit>, ctypes: UInt32, rgszTypes: CPointer<CPointer<UInt8>>, rgclsID: CPointer<GUID>, reserved: UInt32): Int32 {
+    return RegisterMediaTypeClass(pBC, ctypes, rgszTypes, rgclsID, reserved)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_RegisterMediaTypes == "on"]
+foreign {
+    // param-hint: rgszTypes len=param[0]
+    // param-hint: rgcfTypes len=param[0]
+    func RegisterMediaTypes(ctypes: UInt32, rgszTypes: CPointer<CPointer<UInt8>>, rgcfTypes: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_RegisterMediaTypes == "on"]
+public unsafe func Windows_RegisterMediaTypes(ctypes: UInt32, rgszTypes: CPointer<CPointer<UInt8>>, rgcfTypes: CPointer<UInt16>): Int32 {
+    return RegisterMediaTypes(ctypes, rgszTypes, rgcfTypes)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_ReleaseBindInfo == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func ReleaseBindInfo(pbindinfo: CPointer<BINDINFO>): Unit
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_ReleaseBindInfo == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_ReleaseBindInfo(pbindinfo: CPointer<BINDINFO>): Unit {
+    ReleaseBindInfo(pbindinfo)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_RevokeBindStatusCallback == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func RevokeBindStatusCallback(pBC: CPointer<Unit>, pBSCb: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_RevokeBindStatusCallback == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_RevokeBindStatusCallback(pBC: CPointer<Unit>, pBSCb: CPointer<Unit>): Int32 {
+    return RevokeBindStatusCallback(pBC, pBSCb)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_RevokeFormatEnumerator == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func RevokeFormatEnumerator(pBC: CPointer<Unit>, pEFetc: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_RevokeFormatEnumerator == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_RevokeFormatEnumerator(pBC: CPointer<Unit>, pEFetc: CPointer<Unit>): Int32 {
+    return RevokeFormatEnumerator(pBC, pEFetc)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_SetAccessForIEAppContainer == "on"]
+foreign {
+    func SetAccessForIEAppContainer(hObject: CPointer<Unit>, ieObjectType: Int32, dwAccessMask: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_SetAccessForIEAppContainer == "on"]
+public unsafe func Windows_SetAccessForIEAppContainer(hObject: CPointer<Unit>, ieObjectType: Int32, dwAccessMask: UInt32): Int32 {
+    return SetAccessForIEAppContainer(hObject, ieObjectType, dwAccessMask)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_SetSoftwareUpdateAdvertisementState == "on"]
+foreign {
+    func SetSoftwareUpdateAdvertisementState(szDistUnit: CPointer<UInt16>, dwAdState: UInt32, dwAdvertisedVersionMS: UInt32, dwAdvertisedVersionLS: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_SetSoftwareUpdateAdvertisementState == "on"]
+public unsafe func Windows_SetSoftwareUpdateAdvertisementState(szDistUnit: CPointer<UInt16>, dwAdState: UInt32, dwAdvertisedVersionMS: UInt32, dwAdvertisedVersionLS: UInt32): Int32 {
+    return SetSoftwareUpdateAdvertisementState(szDistUnit, dwAdState, dwAdvertisedVersionMS, dwAdvertisedVersionLS)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_URLDownloadToCacheFileA == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: param0 optional
     // param-hint: param2 len=param[3]
     // param-hint: param5 optional
     func URLDownloadToCacheFileA(param0: CPointer<Unit>, param1: CPointer<UInt8>, param2: CPointer<UInt8>, cchFileName: UInt32, param4: UInt32, param5: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_URLDownloadToCacheFileA == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_URLDownloadToCacheFileA(param0: CPointer<Unit>, param1: CPointer<UInt8>, param2: CPointer<UInt8>, cchFileName: UInt32, param4: UInt32, param5: CPointer<Unit>): Int32 {
+    return URLDownloadToCacheFileA(param0, param1, param2, cchFileName, param4, param5)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_URLDownloadToCacheFileW == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: param0 optional
     // param-hint: param2 len=param[3]
     // param-hint: param5 optional
     func URLDownloadToCacheFileW(param0: CPointer<Unit>, param1: CPointer<UInt16>, param2: CPointer<UInt16>, cchFileName: UInt32, param4: UInt32, param5: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_URLDownloadToCacheFileW == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_URLDownloadToCacheFileW(param0: CPointer<Unit>, param1: CPointer<UInt16>, param2: CPointer<UInt16>, cchFileName: UInt32, param4: UInt32, param5: CPointer<Unit>): Int32 {
+    return URLDownloadToCacheFileW(param0, param1, param2, cchFileName, param4, param5)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_URLDownloadToFileA == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: param0 optional
     // param-hint: param2 optional
     // param-hint: param4 optional
     func URLDownloadToFileA(param0: CPointer<Unit>, param1: CPointer<UInt8>, param2: CPointer<UInt8>, param3: UInt32, param4: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_URLDownloadToFileA == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_URLDownloadToFileA(param0: CPointer<Unit>, param1: CPointer<UInt8>, param2: CPointer<UInt8>, param3: UInt32, param4: CPointer<Unit>): Int32 {
+    return URLDownloadToFileA(param0, param1, param2, param3, param4)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_URLDownloadToFileW == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: param0 optional
     // param-hint: param2 optional
     // param-hint: param4 optional
     func URLDownloadToFileW(param0: CPointer<Unit>, param1: CPointer<UInt16>, param2: CPointer<UInt16>, param3: UInt32, param4: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_URLDownloadToFileW == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_URLDownloadToFileW(param0: CPointer<Unit>, param1: CPointer<UInt16>, param2: CPointer<UInt16>, param3: UInt32, param4: CPointer<Unit>): Int32 {
+    return URLDownloadToFileW(param0, param1, param2, param3, param4)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_URLOpenBlockingStreamA == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: param0 optional
     // param-hint: param4 optional
     func URLOpenBlockingStreamA(param0: CPointer<Unit>, param1: CPointer<UInt8>, param2: CPointer<CPointer<Unit>>, param3: UInt32, param4: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_URLOpenBlockingStreamA == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_URLOpenBlockingStreamA(param0: CPointer<Unit>, param1: CPointer<UInt8>, param2: CPointer<CPointer<Unit>>, param3: UInt32, param4: CPointer<Unit>): Int32 {
+    return URLOpenBlockingStreamA(param0, param1, param2, param3, param4)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_URLOpenBlockingStreamW == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: param0 optional
     // param-hint: param4 optional
     func URLOpenBlockingStreamW(param0: CPointer<Unit>, param1: CPointer<UInt16>, param2: CPointer<CPointer<Unit>>, param3: UInt32, param4: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_URLOpenBlockingStreamW == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_URLOpenBlockingStreamW(param0: CPointer<Unit>, param1: CPointer<UInt16>, param2: CPointer<CPointer<Unit>>, param3: UInt32, param4: CPointer<Unit>): Int32 {
+    return URLOpenBlockingStreamW(param0, param1, param2, param3, param4)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_URLOpenPullStreamA == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: param0 optional
     // param-hint: param3 optional
     func URLOpenPullStreamA(param0: CPointer<Unit>, param1: CPointer<UInt8>, param2: UInt32, param3: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_URLOpenPullStreamA == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_URLOpenPullStreamA(param0: CPointer<Unit>, param1: CPointer<UInt8>, param2: UInt32, param3: CPointer<Unit>): Int32 {
+    return URLOpenPullStreamA(param0, param1, param2, param3)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_URLOpenPullStreamW == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: param0 optional
     // param-hint: param3 optional
     func URLOpenPullStreamW(param0: CPointer<Unit>, param1: CPointer<UInt16>, param2: UInt32, param3: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_URLOpenPullStreamW == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_URLOpenPullStreamW(param0: CPointer<Unit>, param1: CPointer<UInt16>, param2: UInt32, param3: CPointer<Unit>): Int32 {
+    return URLOpenPullStreamW(param0, param1, param2, param3)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_URLOpenStreamA == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: param0 optional
     // param-hint: param3 optional
     func URLOpenStreamA(param0: CPointer<Unit>, param1: CPointer<UInt8>, param2: UInt32, param3: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_URLOpenStreamA == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_URLOpenStreamA(param0: CPointer<Unit>, param1: CPointer<UInt8>, param2: UInt32, param3: CPointer<Unit>): Int32 {
+    return URLOpenStreamA(param0, param1, param2, param3)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_URLOpenStreamW == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: param0 optional
     // param-hint: param3 optional
     func URLOpenStreamW(param0: CPointer<Unit>, param1: CPointer<UInt16>, param2: UInt32, param3: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_URLOpenStreamW == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_URLOpenStreamW(param0: CPointer<Unit>, param1: CPointer<UInt16>, param2: UInt32, param3: CPointer<Unit>): Int32 {
+    return URLOpenStreamW(param0, param1, param2, param3)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_UrlMkGetSessionOption == "on"]
+foreign {
+    // param-hint: pBuffer bytes=param[2] optional
+    // param-hint: dwReserved optional reserved
+    func UrlMkGetSessionOption(dwOption: UInt32, pBuffer: CPointer<Unit>, dwBufferLength: UInt32, pdwBufferLengthOut: CPointer<UInt32>, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_UrlMkGetSessionOption == "on"]
+public unsafe func Windows_UrlMkGetSessionOption(dwOption: UInt32, pBuffer: CPointer<Unit>, dwBufferLength: UInt32, pdwBufferLengthOut: CPointer<UInt32>, dwReserved: UInt32): Int32 {
+    return UrlMkGetSessionOption(dwOption, pBuffer, dwBufferLength, pdwBufferLengthOut, dwReserved)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_UrlMkSetSessionOption == "on"]
+foreign {
+    // param-hint: pBuffer bytes=param[2] optional
+    // param-hint: dwReserved optional reserved
+    func UrlMkSetSessionOption(dwOption: UInt32, pBuffer: CPointer<Unit>, dwBufferLength: UInt32, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_UrlMkSetSessionOption == "on"]
+public unsafe func Windows_UrlMkSetSessionOption(dwOption: UInt32, pBuffer: CPointer<Unit>, dwBufferLength: UInt32, dwReserved: UInt32): Int32 {
+    return UrlMkSetSessionOption(dwOption, pBuffer, dwBufferLength, dwReserved)
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_WriteHitLogging == "on"]
+foreign {
+    func WriteHitLogging(lpLogginginfo: CPointer<Win32__impl_l0.HIT_LOGGING_INFO>): Int32
+}
+
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_WriteHitLogging == "on"]
+public unsafe func Windows_WriteHitLogging(lpLogginginfo: CPointer<Win32__impl_l0.HIT_LOGGING_INFO>): Int32 {
+    return WriteHitLogging(lpLogginginfo)
 }
 
 @When[Windows_Win32_System_Com_Urlmon == "on"]

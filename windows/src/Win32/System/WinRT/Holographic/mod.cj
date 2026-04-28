@@ -8,11 +8,8 @@ import windows_core.{RuntimeType}
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase, RuntimeType, RuntimeTypeContract}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Direct3D12 == "on"]
 import windows.Win32.Graphics.Direct3D12 as Win32_Graphics_Direct3D12
-@When[Windows_Win32_System_WinRT == "on"]
 import windows.Win32.System.WinRT as Win32_System_WinRT
 
 

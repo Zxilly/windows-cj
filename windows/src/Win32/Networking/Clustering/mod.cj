@@ -4,21 +4,17 @@
 package windows.Win32.Networking.Clustering
 
 import std.collection.*
+import windows_libloading
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_polyfill.{unionReadInt32, unionReadUInt32, unionReadUInt64, unionWriteInt32, unionWriteUInt32, unionWriteUInt64}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-@When[Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
-@When[Windows_Win32_System_Registry == "on"]
 import windows.Win32.System.Registry as Win32_System_Registry
-@When[Windows_Win32_System_Services == "on"]
 import windows.Win32.System.Services as Win32_System_Services
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l2 as Win32__impl_l2
@@ -18690,369 +18686,2175 @@ extend SR_RESOURCE_TYPE_REPLICATED_PARTITION_ARRAY <: windows_core.CopyType & wi
     }
 }
 
-@When[CLUSAPI == "on"]
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_AddClusterGroupDependency == "on"]
 foreign {
     func AddClusterGroupDependency(hDependentGroup: HGROUP, hProviderGroup: HGROUP): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_AddClusterGroupDependency == "on"]
+public unsafe func Windows_AddClusterGroupDependency(hDependentGroup: HGROUP, hProviderGroup: HGROUP): UInt32 {
+    return AddClusterGroupDependency(hDependentGroup, hProviderGroup)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_AddClusterGroupDependencyEx == "on"]
+foreign {
     // param-hint: lpszReason optional
     func AddClusterGroupDependencyEx(hDependentGroup: HGROUP, hProviderGroup: HGROUP, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_AddClusterGroupDependencyEx == "on"]
+public unsafe func Windows_AddClusterGroupDependencyEx(hDependentGroup: HGROUP, hProviderGroup: HGROUP, lpszReason: CPointer<UInt16>): UInt32 {
+    return AddClusterGroupDependencyEx(hDependentGroup, hProviderGroup, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_AddClusterGroupSetDependency == "on"]
+foreign {
     func AddClusterGroupSetDependency(hDependentGroupSet: HGROUPSET, hProviderGroupSet: HGROUPSET): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_AddClusterGroupSetDependency == "on"]
+public unsafe func Windows_AddClusterGroupSetDependency(hDependentGroupSet: HGROUPSET, hProviderGroupSet: HGROUPSET): UInt32 {
+    return AddClusterGroupSetDependency(hDependentGroupSet, hProviderGroupSet)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_AddClusterGroupSetDependencyEx == "on"]
+foreign {
     // param-hint: lpszReason optional
     func AddClusterGroupSetDependencyEx(hDependentGroupSet: HGROUPSET, hProviderGroupSet: HGROUPSET, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_AddClusterGroupSetDependencyEx == "on"]
+public unsafe func Windows_AddClusterGroupSetDependencyEx(hDependentGroupSet: HGROUPSET, hProviderGroupSet: HGROUPSET, lpszReason: CPointer<UInt16>): UInt32 {
+    return AddClusterGroupSetDependencyEx(hDependentGroupSet, hProviderGroupSet, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_AddClusterGroupToGroupSetDependency == "on"]
+foreign {
     func AddClusterGroupToGroupSetDependency(hDependentGroup: HGROUP, hProviderGroupSet: HGROUPSET): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_AddClusterGroupToGroupSetDependency == "on"]
+public unsafe func Windows_AddClusterGroupToGroupSetDependency(hDependentGroup: HGROUP, hProviderGroupSet: HGROUPSET): UInt32 {
+    return AddClusterGroupToGroupSetDependency(hDependentGroup, hProviderGroupSet)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_AddClusterGroupToGroupSetDependencyEx == "on"]
+foreign {
     // param-hint: lpszReason optional
     func AddClusterGroupToGroupSetDependencyEx(hDependentGroup: HGROUP, hProviderGroupSet: HGROUPSET, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_AddClusterGroupToGroupSetDependencyEx == "on"]
+public unsafe func Windows_AddClusterGroupToGroupSetDependencyEx(hDependentGroup: HGROUP, hProviderGroupSet: HGROUPSET, lpszReason: CPointer<UInt16>): UInt32 {
+    return AddClusterGroupToGroupSetDependencyEx(hDependentGroup, hProviderGroupSet, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_AddClusterNode == "on"]
+foreign {
     // param-hint: pfnProgressCallback optional
     // param-hint: pvCallbackArg optional
     // pinvoke-hint: SetLastError
     func AddClusterNode(hCluster: HCLUSTER, lpszNodeName: CPointer<UInt16>, pfnProgressCallback: PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg: CPointer<Unit>): HNODE
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_AddClusterNode == "on"]
+public unsafe func Windows_AddClusterNode(hCluster: HCLUSTER, lpszNodeName: CPointer<UInt16>, pfnProgressCallback: PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg: CPointer<Unit>): HNODE {
+    return AddClusterNode(hCluster, lpszNodeName, pfnProgressCallback, pvCallbackArg)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_AddClusterNodeEx == "on"]
+foreign {
     // param-hint: pfnProgressCallback optional
     // param-hint: pvCallbackArg optional
     func AddClusterNodeEx(hCluster: HCLUSTER, lpszNodeName: CPointer<UInt16>, dwFlags: UInt32, pfnProgressCallback: PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg: CPointer<Unit>): HNODE
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_AddClusterNodeEx == "on"]
+public unsafe func Windows_AddClusterNodeEx(hCluster: HCLUSTER, lpszNodeName: CPointer<UInt16>, dwFlags: UInt32, pfnProgressCallback: PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg: CPointer<Unit>): HNODE {
+    return AddClusterNodeEx(hCluster, lpszNodeName, dwFlags, pfnProgressCallback, pvCallbackArg)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_AddClusterResourceDependency == "on"]
+foreign {
     func AddClusterResourceDependency(hResource: HRESOURCE, hDependsOn: HRESOURCE): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_AddClusterResourceDependency == "on"]
+public unsafe func Windows_AddClusterResourceDependency(hResource: HRESOURCE, hDependsOn: HRESOURCE): UInt32 {
+    return AddClusterResourceDependency(hResource, hDependsOn)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_AddClusterResourceDependencyEx == "on"]
+foreign {
     // param-hint: lpszReason optional
     func AddClusterResourceDependencyEx(hResource: HRESOURCE, hDependsOn: HRESOURCE, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_AddClusterResourceDependencyEx == "on"]
+public unsafe func Windows_AddClusterResourceDependencyEx(hResource: HRESOURCE, hDependsOn: HRESOURCE, lpszReason: CPointer<UInt16>): UInt32 {
+    return AddClusterResourceDependencyEx(hResource, hDependsOn, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_AddClusterResourceNode == "on"]
+foreign {
     func AddClusterResourceNode(hResource: HRESOURCE, hNode: HNODE): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_AddClusterResourceNode == "on"]
+public unsafe func Windows_AddClusterResourceNode(hResource: HRESOURCE, hNode: HNODE): UInt32 {
+    return AddClusterResourceNode(hResource, hNode)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_AddClusterResourceNodeEx == "on"]
+foreign {
     // param-hint: lpszReason optional
     func AddClusterResourceNodeEx(hResource: HRESOURCE, hNode: HNODE, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_AddClusterResourceNodeEx == "on"]
+public unsafe func Windows_AddClusterResourceNodeEx(hResource: HRESOURCE, hNode: HNODE, lpszReason: CPointer<UInt16>): UInt32 {
+    return AddClusterResourceNodeEx(hResource, hNode, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_AddClusterStorageNode == "on"]
+foreign {
     // param-hint: pfnProgressCallback optional
     // param-hint: pvCallbackArg optional
     // param-hint: lpszClusterStorageNodeDescription optional
     // param-hint: lpszClusterStorageNodeLocation optional
     func AddClusterStorageNode(hCluster: HCLUSTER, lpszNodeName: CPointer<UInt16>, pfnProgressCallback: PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg: CPointer<Unit>, lpszClusterStorageNodeDescription: CPointer<UInt16>, lpszClusterStorageNodeLocation: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_AddClusterStorageNode == "on"]
+public unsafe func Windows_AddClusterStorageNode(hCluster: HCLUSTER, lpszNodeName: CPointer<UInt16>, pfnProgressCallback: PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg: CPointer<Unit>, lpszClusterStorageNodeDescription: CPointer<UInt16>, lpszClusterStorageNodeLocation: CPointer<UInt16>): UInt32 {
+    return AddClusterStorageNode(hCluster, lpszNodeName, pfnProgressCallback, pvCallbackArg, lpszClusterStorageNodeDescription, lpszClusterStorageNodeLocation)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_AddCrossClusterGroupSetDependency == "on"]
+foreign {
     func AddCrossClusterGroupSetDependency(hDependentGroupSet: HGROUPSET, lpRemoteClusterName: CPointer<UInt16>, lpRemoteGroupSetName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_AddCrossClusterGroupSetDependency == "on"]
+public unsafe func Windows_AddCrossClusterGroupSetDependency(hDependentGroupSet: HGROUPSET, lpRemoteClusterName: CPointer<UInt16>, lpRemoteGroupSetName: CPointer<UInt16>): UInt32 {
+    return AddCrossClusterGroupSetDependency(hDependentGroupSet, lpRemoteClusterName, lpRemoteGroupSetName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_AddResourceToClusterSharedVolumes == "on"]
+foreign {
     func AddResourceToClusterSharedVolumes(hResource: HRESOURCE): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_AddResourceToClusterSharedVolumes == "on"]
+public unsafe func Windows_AddResourceToClusterSharedVolumes(hResource: HRESOURCE): UInt32 {
+    return AddResourceToClusterSharedVolumes(hResource)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_BackupClusterDatabase == "on"]
+foreign {
     func BackupClusterDatabase(hCluster: HCLUSTER, lpszPathName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_BackupClusterDatabase == "on"]
+public unsafe func Windows_BackupClusterDatabase(hCluster: HCLUSTER, lpszPathName: CPointer<UInt16>): UInt32 {
+    return BackupClusterDatabase(hCluster, lpszPathName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CanResourceBeDependent == "on"]
+foreign {
     func CanResourceBeDependent(hResource: HRESOURCE, hResourceDependent: HRESOURCE): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CanResourceBeDependent == "on"]
+public unsafe func Windows_CanResourceBeDependent(hResource: HRESOURCE, hResourceDependent: HRESOURCE): Int32 {
+    return CanResourceBeDependent(hResource, hResourceDependent)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CancelClusterGroupOperation == "on"]
+foreign {
     func CancelClusterGroupOperation(hGroup: HGROUP, dwCancelFlags_RESERVED: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CancelClusterGroupOperation == "on"]
+public unsafe func Windows_CancelClusterGroupOperation(hGroup: HGROUP, dwCancelFlags_RESERVED: UInt32): UInt32 {
+    return CancelClusterGroupOperation(hGroup, dwCancelFlags_RESERVED)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ChangeClusterResourceGroup == "on"]
+foreign {
     func ChangeClusterResourceGroup(hResource: HRESOURCE, hGroup: HGROUP): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ChangeClusterResourceGroup == "on"]
+public unsafe func Windows_ChangeClusterResourceGroup(hResource: HRESOURCE, hGroup: HGROUP): UInt32 {
+    return ChangeClusterResourceGroup(hResource, hGroup)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ChangeClusterResourceGroupEx == "on"]
+foreign {
     func ChangeClusterResourceGroupEx(hResource: HRESOURCE, hGroup: HGROUP, Flags: UInt64): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ChangeClusterResourceGroupEx == "on"]
+public unsafe func Windows_ChangeClusterResourceGroupEx(hResource: HRESOURCE, hGroup: HGROUP, Flags: UInt64): UInt32 {
+    return ChangeClusterResourceGroupEx(hResource, hGroup, Flags)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ChangeClusterResourceGroupEx2 == "on"]
+foreign {
     // param-hint: lpszReason optional
     func ChangeClusterResourceGroupEx2(hResource: HRESOURCE, hGroup: HGROUP, Flags: UInt64, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ChangeClusterResourceGroupEx2 == "on"]
+public unsafe func Windows_ChangeClusterResourceGroupEx2(hResource: HRESOURCE, hGroup: HGROUP, Flags: UInt64, lpszReason: CPointer<UInt16>): UInt32 {
+    return ChangeClusterResourceGroupEx2(hResource, hGroup, Flags, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CloseCluster == "on"]
+foreign {
     func CloseCluster(hCluster: HCLUSTER): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CloseCluster == "on"]
+public unsafe func Windows_CloseCluster(hCluster: HCLUSTER): Int32 {
+    return CloseCluster(hCluster)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CloseClusterGroup == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CloseClusterGroup(hGroup: HGROUP): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CloseClusterGroup == "on"]
+public unsafe func Windows_CloseClusterGroup(hGroup: HGROUP): Int32 {
+    return CloseClusterGroup(hGroup)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CloseClusterGroupSet == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CloseClusterGroupSet(hGroupSet: HGROUPSET): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CloseClusterGroupSet == "on"]
+public unsafe func Windows_CloseClusterGroupSet(hGroupSet: HGROUPSET): Int32 {
+    return CloseClusterGroupSet(hGroupSet)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CloseClusterNetInterface == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CloseClusterNetInterface(hNetInterface: HNETINTERFACE): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CloseClusterNetInterface == "on"]
+public unsafe func Windows_CloseClusterNetInterface(hNetInterface: HNETINTERFACE): Int32 {
+    return CloseClusterNetInterface(hNetInterface)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CloseClusterNetwork == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CloseClusterNetwork(hNetwork: HNETWORK): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CloseClusterNetwork == "on"]
+public unsafe func Windows_CloseClusterNetwork(hNetwork: HNETWORK): Int32 {
+    return CloseClusterNetwork(hNetwork)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CloseClusterNode == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CloseClusterNode(hNode: HNODE): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CloseClusterNode == "on"]
+public unsafe func Windows_CloseClusterNode(hNode: HNODE): Int32 {
+    return CloseClusterNode(hNode)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CloseClusterNotifyPort == "on"]
+foreign {
     func CloseClusterNotifyPort(hChange: HCHANGE): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CloseClusterNotifyPort == "on"]
+public unsafe func Windows_CloseClusterNotifyPort(hChange: HCHANGE): Int32 {
+    return CloseClusterNotifyPort(hChange)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CloseClusterResource == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CloseClusterResource(hResource: HRESOURCE): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CloseClusterResource == "on"]
+public unsafe func Windows_CloseClusterResource(hResource: HRESOURCE): Int32 {
+    return CloseClusterResource(hResource)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusapiSetReasonHandler == "on"]
+foreign {
     func ClusapiSetReasonHandler(lpHandler: CPointer<CLUSAPI_REASON_HANDLERAbi>): CPointer<CLUSAPI_REASON_HANDLERAbi>
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusapiSetReasonHandler == "on"]
+public unsafe func Windows_ClusapiSetReasonHandler(lpHandler: CPointer<CLUSAPI_REASON_HANDLERAbi>): CPointer<CLUSAPI_REASON_HANDLERAbi> {
+    return ClusapiSetReasonHandler(lpHandler)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterAddGroupToAffinityRule == "on"]
+foreign {
     func ClusterAddGroupToAffinityRule(hCluster: HCLUSTER, ruleName: CPointer<UInt16>, hGroup: HGROUP): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterAddGroupToAffinityRule == "on"]
+public unsafe func Windows_ClusterAddGroupToAffinityRule(hCluster: HCLUSTER, ruleName: CPointer<UInt16>, hGroup: HGROUP): UInt32 {
+    return ClusterAddGroupToAffinityRule(hCluster, ruleName, hGroup)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterAddGroupToGroupSet == "on"]
+foreign {
     func ClusterAddGroupToGroupSet(hGroupSet: HGROUPSET, hGroup: HGROUP): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterAddGroupToGroupSet == "on"]
+public unsafe func Windows_ClusterAddGroupToGroupSet(hGroupSet: HGROUPSET, hGroup: HGROUP): UInt32 {
+    return ClusterAddGroupToGroupSet(hGroupSet, hGroup)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterAddGroupToGroupSetWithDomains == "on"]
+foreign {
     func ClusterAddGroupToGroupSetWithDomains(hGroupSet: HGROUPSET, hGroup: HGROUP, faultDomain: UInt32, updateDomain: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterAddGroupToGroupSetWithDomains == "on"]
+public unsafe func Windows_ClusterAddGroupToGroupSetWithDomains(hGroupSet: HGROUPSET, hGroup: HGROUP, faultDomain: UInt32, updateDomain: UInt32): UInt32 {
+    return ClusterAddGroupToGroupSetWithDomains(hGroupSet, hGroup, faultDomain, updateDomain)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterAddGroupToGroupSetWithDomainsEx == "on"]
+foreign {
     // param-hint: lpszReason optional
     func ClusterAddGroupToGroupSetWithDomainsEx(hGroupSet: HGROUPSET, hGroup: HGROUP, faultDomain: UInt32, updateDomain: UInt32, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterAddGroupToGroupSetWithDomainsEx == "on"]
+public unsafe func Windows_ClusterAddGroupToGroupSetWithDomainsEx(hGroupSet: HGROUPSET, hGroup: HGROUP, faultDomain: UInt32, updateDomain: UInt32, lpszReason: CPointer<UInt16>): UInt32 {
+    return ClusterAddGroupToGroupSetWithDomainsEx(hGroupSet, hGroup, faultDomain, updateDomain, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterAffinityRuleControl == "on"]
+foreign {
     // param-hint: hHostNode optional
     // param-hint: lpInBuffer bytes=param[5] optional
     // param-hint: lpOutBuffer bytes=param[7] optional
     // param-hint: lpBytesReturned optional
     func ClusterAffinityRuleControl(hCluster: HCLUSTER, affinityRuleName: CPointer<UInt16>, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, cbInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, cbOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterAffinityRuleControl == "on"]
+public unsafe func Windows_ClusterAffinityRuleControl(hCluster: HCLUSTER, affinityRuleName: CPointer<UInt16>, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, cbInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, cbOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>): UInt32 {
+    return ClusterAffinityRuleControl(hCluster, affinityRuleName, hHostNode, dwControlCode, lpInBuffer, cbInBufferSize, lpOutBuffer, cbOutBufferSize, lpBytesReturned)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterCloseEnum == "on"]
+foreign {
     func ClusterCloseEnum(hEnum: HCLUSENUM): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterCloseEnum == "on"]
+public unsafe func Windows_ClusterCloseEnum(hEnum: HCLUSENUM): UInt32 {
+    return ClusterCloseEnum(hEnum)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterCloseEnumEx == "on"]
+foreign {
     func ClusterCloseEnumEx(hClusterEnum: HCLUSENUMEX): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterCloseEnumEx == "on"]
+public unsafe func Windows_ClusterCloseEnumEx(hClusterEnum: HCLUSENUMEX): UInt32 {
+    return ClusterCloseEnumEx(hClusterEnum)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterControl == "on"]
+foreign {
     // param-hint: hHostNode optional
     // param-hint: lpInBuffer bytes=param[4] optional
     // param-hint: lpOutBuffer bytes=param[6] optional
     // param-hint: lpBytesReturned optional
     func ClusterControl(hCluster: HCLUSTER, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterControl == "on"]
+public unsafe func Windows_ClusterControl(hCluster: HCLUSTER, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>): UInt32 {
+    return ClusterControl(hCluster, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterControlEx == "on"]
+foreign {
     // param-hint: hHostNode optional
     // param-hint: lpInBuffer bytes=param[4] optional
     // param-hint: lpOutBuffer bytes=param[6] optional
     // param-hint: lpBytesReturned optional
     // param-hint: lpszReason optional
     func ClusterControlEx(hCluster: HCLUSTER, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterControlEx == "on"]
+public unsafe func Windows_ClusterControlEx(hCluster: HCLUSTER, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>, lpszReason: CPointer<UInt16>): UInt32 {
+    return ClusterControlEx(hCluster, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterCreateAffinityRule == "on"]
+foreign {
     func ClusterCreateAffinityRule(hCluster: HCLUSTER, ruleName: CPointer<UInt16>, ruleType: CLUS_AFFINITY_RULE_TYPEAbi): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterCreateAffinityRule == "on"]
+public unsafe func Windows_ClusterCreateAffinityRule(hCluster: HCLUSTER, ruleName: CPointer<UInt16>, ruleType: CLUS_AFFINITY_RULE_TYPEAbi): UInt32 {
+    return ClusterCreateAffinityRule(hCluster, ruleName, ruleType)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterEnum == "on"]
+foreign {
     // param-hint: lpszName len=param[4]
     func ClusterEnum(hEnum: HCLUSENUM, dwIndex: UInt32, lpdwType: CPointer<UInt32>, lpszName: CPointer<UInt16>, lpcchName: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterEnum == "on"]
+public unsafe func Windows_ClusterEnum(hEnum: HCLUSENUM, dwIndex: UInt32, lpdwType: CPointer<UInt32>, lpszName: CPointer<UInt16>, lpcchName: CPointer<UInt32>): UInt32 {
+    return ClusterEnum(hEnum, dwIndex, lpdwType, lpszName, lpcchName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterEnumEx == "on"]
+foreign {
     func ClusterEnumEx(hClusterEnum: HCLUSENUMEX, dwIndex: UInt32, pItem: CPointer<CLUSTER_ENUM_ITEMAbi>, cbItem: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterEnumEx == "on"]
+public unsafe func Windows_ClusterEnumEx(hClusterEnum: HCLUSENUMEX, dwIndex: UInt32, pItem: CPointer<CLUSTER_ENUM_ITEMAbi>, cbItem: CPointer<UInt32>): UInt32 {
+    return ClusterEnumEx(hClusterEnum, dwIndex, pItem, cbItem)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGetEnumCount == "on"]
+foreign {
     func ClusterGetEnumCount(hEnum: HCLUSENUM): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGetEnumCount == "on"]
+public unsafe func Windows_ClusterGetEnumCount(hEnum: HCLUSENUM): UInt32 {
+    return ClusterGetEnumCount(hEnum)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGetEnumCountEx == "on"]
+foreign {
     func ClusterGetEnumCountEx(hClusterEnum: HCLUSENUMEX): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGetEnumCountEx == "on"]
+public unsafe func Windows_ClusterGetEnumCountEx(hClusterEnum: HCLUSENUMEX): UInt32 {
+    return ClusterGetEnumCountEx(hClusterEnum)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGroupCloseEnum == "on"]
+foreign {
     func ClusterGroupCloseEnum(hGroupEnum: HGROUPENUM): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGroupCloseEnum == "on"]
+public unsafe func Windows_ClusterGroupCloseEnum(hGroupEnum: HGROUPENUM): UInt32 {
+    return ClusterGroupCloseEnum(hGroupEnum)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGroupCloseEnumEx == "on"]
+foreign {
     func ClusterGroupCloseEnumEx(hGroupEnumEx: HGROUPENUMEX): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGroupCloseEnumEx == "on"]
+public unsafe func Windows_ClusterGroupCloseEnumEx(hGroupEnumEx: HGROUPENUMEX): UInt32 {
+    return ClusterGroupCloseEnumEx(hGroupEnumEx)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGroupControl == "on"]
+foreign {
     // param-hint: hHostNode optional
     // param-hint: lpInBuffer bytes=param[4] optional
     // param-hint: lpOutBuffer bytes=param[6] optional
     // param-hint: lpBytesReturned optional
     func ClusterGroupControl(hGroup: HGROUP, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGroupControl == "on"]
+public unsafe func Windows_ClusterGroupControl(hGroup: HGROUP, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>): UInt32 {
+    return ClusterGroupControl(hGroup, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGroupControlEx == "on"]
+foreign {
     // param-hint: hHostNode optional
     // param-hint: lpInBuffer bytes=param[4] optional
     // param-hint: lpOutBuffer bytes=param[6] optional
     // param-hint: lpBytesReturned optional
     // param-hint: lpszReason optional
     func ClusterGroupControlEx(hGroup: HGROUP, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGroupControlEx == "on"]
+public unsafe func Windows_ClusterGroupControlEx(hGroup: HGROUP, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>, lpszReason: CPointer<UInt16>): UInt32 {
+    return ClusterGroupControlEx(hGroup, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGroupEnum == "on"]
+foreign {
     // param-hint: lpszResourceName len=param[4]
     func ClusterGroupEnum(hGroupEnum: HGROUPENUM, dwIndex: UInt32, lpdwType: CPointer<UInt32>, lpszResourceName: CPointer<UInt16>, lpcchName: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGroupEnum == "on"]
+public unsafe func Windows_ClusterGroupEnum(hGroupEnum: HGROUPENUM, dwIndex: UInt32, lpdwType: CPointer<UInt32>, lpszResourceName: CPointer<UInt16>, lpcchName: CPointer<UInt32>): UInt32 {
+    return ClusterGroupEnum(hGroupEnum, dwIndex, lpdwType, lpszResourceName, lpcchName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGroupEnumEx == "on"]
+foreign {
     func ClusterGroupEnumEx(hGroupEnumEx: HGROUPENUMEX, dwIndex: UInt32, pItem: CPointer<CLUSTER_GROUP_ENUM_ITEMAbi>, cbItem: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGroupEnumEx == "on"]
+public unsafe func Windows_ClusterGroupEnumEx(hGroupEnumEx: HGROUPENUMEX, dwIndex: UInt32, pItem: CPointer<CLUSTER_GROUP_ENUM_ITEMAbi>, cbItem: CPointer<UInt32>): UInt32 {
+    return ClusterGroupEnumEx(hGroupEnumEx, dwIndex, pItem, cbItem)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGroupGetEnumCount == "on"]
+foreign {
     func ClusterGroupGetEnumCount(hGroupEnum: HGROUPENUM): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGroupGetEnumCount == "on"]
+public unsafe func Windows_ClusterGroupGetEnumCount(hGroupEnum: HGROUPENUM): UInt32 {
+    return ClusterGroupGetEnumCount(hGroupEnum)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGroupGetEnumCountEx == "on"]
+foreign {
     func ClusterGroupGetEnumCountEx(hGroupEnumEx: HGROUPENUMEX): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGroupGetEnumCountEx == "on"]
+public unsafe func Windows_ClusterGroupGetEnumCountEx(hGroupEnumEx: HGROUPENUMEX): UInt32 {
+    return ClusterGroupGetEnumCountEx(hGroupEnumEx)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGroupOpenEnum == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ClusterGroupOpenEnum(hGroup: HGROUP, dwType: UInt32): HGROUPENUM
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGroupOpenEnum == "on"]
+public unsafe func Windows_ClusterGroupOpenEnum(hGroup: HGROUP, dwType: UInt32): HGROUPENUM {
+    return ClusterGroupOpenEnum(hGroup, dwType)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGroupOpenEnumEx == "on"]
+foreign {
     // param-hint: lpszProperties bytes=param[2] optional
     // param-hint: lpszRoProperties bytes=param[4] optional
     func ClusterGroupOpenEnumEx(hCluster: HCLUSTER, lpszProperties: CPointer<UInt16>, cbProperties: UInt32, lpszRoProperties: CPointer<UInt16>, cbRoProperties: UInt32, dwFlags: UInt32): HGROUPENUMEX
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGroupOpenEnumEx == "on"]
+public unsafe func Windows_ClusterGroupOpenEnumEx(hCluster: HCLUSTER, lpszProperties: CPointer<UInt16>, cbProperties: UInt32, lpszRoProperties: CPointer<UInt16>, cbRoProperties: UInt32, dwFlags: UInt32): HGROUPENUMEX {
+    return ClusterGroupOpenEnumEx(hCluster, lpszProperties, cbProperties, lpszRoProperties, cbRoProperties, dwFlags)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGroupSetCloseEnum == "on"]
+foreign {
     func ClusterGroupSetCloseEnum(hGroupSetEnum: HGROUPSETENUM): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGroupSetCloseEnum == "on"]
+public unsafe func Windows_ClusterGroupSetCloseEnum(hGroupSetEnum: HGROUPSETENUM): UInt32 {
+    return ClusterGroupSetCloseEnum(hGroupSetEnum)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGroupSetControl == "on"]
+foreign {
     // param-hint: hHostNode optional
     // param-hint: lpInBuffer bytes=param[4] optional
     // param-hint: lpOutBuffer bytes=param[6] optional
     // param-hint: lpBytesReturned optional
     func ClusterGroupSetControl(hGroupSet: HGROUPSET, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, cbInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, cbOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGroupSetControl == "on"]
+public unsafe func Windows_ClusterGroupSetControl(hGroupSet: HGROUPSET, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, cbInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, cbOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>): UInt32 {
+    return ClusterGroupSetControl(hGroupSet, hHostNode, dwControlCode, lpInBuffer, cbInBufferSize, lpOutBuffer, cbOutBufferSize, lpBytesReturned)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGroupSetControlEx == "on"]
+foreign {
     // param-hint: hHostNode optional
     // param-hint: lpInBuffer bytes=param[4] optional
     // param-hint: lpOutBuffer bytes=param[6] optional
     // param-hint: lpBytesReturned optional
     // param-hint: lpszReason optional
     func ClusterGroupSetControlEx(hGroupSet: HGROUPSET, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, cbInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, cbOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGroupSetControlEx == "on"]
+public unsafe func Windows_ClusterGroupSetControlEx(hGroupSet: HGROUPSET, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, cbInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, cbOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>, lpszReason: CPointer<UInt16>): UInt32 {
+    return ClusterGroupSetControlEx(hGroupSet, hHostNode, dwControlCode, lpInBuffer, cbInBufferSize, lpOutBuffer, cbOutBufferSize, lpBytesReturned, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGroupSetEnum == "on"]
+foreign {
     // param-hint: lpszName len=param[3]
     func ClusterGroupSetEnum(hGroupSetEnum: HGROUPSETENUM, dwIndex: UInt32, lpszName: CPointer<UInt16>, lpcchName: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGroupSetEnum == "on"]
+public unsafe func Windows_ClusterGroupSetEnum(hGroupSetEnum: HGROUPSETENUM, dwIndex: UInt32, lpszName: CPointer<UInt16>, lpcchName: CPointer<UInt32>): UInt32 {
+    return ClusterGroupSetEnum(hGroupSetEnum, dwIndex, lpszName, lpcchName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGroupSetGetEnumCount == "on"]
+foreign {
     func ClusterGroupSetGetEnumCount(hGroupSetEnum: HGROUPSETENUM): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGroupSetGetEnumCount == "on"]
+public unsafe func Windows_ClusterGroupSetGetEnumCount(hGroupSetEnum: HGROUPSETENUM): UInt32 {
+    return ClusterGroupSetGetEnumCount(hGroupSetEnum)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGroupSetOpenEnum == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ClusterGroupSetOpenEnum(hCluster: HCLUSTER): HGROUPSETENUM
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterGroupSetOpenEnum == "on"]
+public unsafe func Windows_ClusterGroupSetOpenEnum(hCluster: HCLUSTER): HGROUPSETENUM {
+    return ClusterGroupSetOpenEnum(hCluster)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNetInterfaceCloseEnum == "on"]
+foreign {
     func ClusterNetInterfaceCloseEnum(hNetInterfaceEnum: HNETINTERFACEENUM): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNetInterfaceCloseEnum == "on"]
+public unsafe func Windows_ClusterNetInterfaceCloseEnum(hNetInterfaceEnum: HNETINTERFACEENUM): UInt32 {
+    return ClusterNetInterfaceCloseEnum(hNetInterfaceEnum)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNetInterfaceControl == "on"]
+foreign {
     // param-hint: hHostNode optional
     // param-hint: lpInBuffer bytes=param[4] optional
     // param-hint: lpOutBuffer bytes=param[6] optional
     // param-hint: lpBytesReturned optional
     func ClusterNetInterfaceControl(hNetInterface: HNETINTERFACE, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNetInterfaceControl == "on"]
+public unsafe func Windows_ClusterNetInterfaceControl(hNetInterface: HNETINTERFACE, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>): UInt32 {
+    return ClusterNetInterfaceControl(hNetInterface, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNetInterfaceControlEx == "on"]
+foreign {
     // param-hint: hHostNode optional
     // param-hint: lpInBuffer bytes=param[4] optional
     // param-hint: lpOutBuffer bytes=param[6] optional
     // param-hint: lpBytesReturned optional
     // param-hint: lpszReason optional
     func ClusterNetInterfaceControlEx(hNetInterface: HNETINTERFACE, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNetInterfaceControlEx == "on"]
+public unsafe func Windows_ClusterNetInterfaceControlEx(hNetInterface: HNETINTERFACE, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>, lpszReason: CPointer<UInt16>): UInt32 {
+    return ClusterNetInterfaceControlEx(hNetInterface, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNetInterfaceEnum == "on"]
+foreign {
     // param-hint: lpszName len=param[3]
     func ClusterNetInterfaceEnum(hNetInterfaceEnum: HNETINTERFACEENUM, dwIndex: UInt32, lpszName: CPointer<UInt16>, lpcchName: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNetInterfaceEnum == "on"]
+public unsafe func Windows_ClusterNetInterfaceEnum(hNetInterfaceEnum: HNETINTERFACEENUM, dwIndex: UInt32, lpszName: CPointer<UInt16>, lpcchName: CPointer<UInt32>): UInt32 {
+    return ClusterNetInterfaceEnum(hNetInterfaceEnum, dwIndex, lpszName, lpcchName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNetInterfaceOpenEnum == "on"]
+foreign {
     // param-hint: lpszNodeName optional
     // param-hint: lpszNetworkName optional
     // pinvoke-hint: SetLastError
     func ClusterNetInterfaceOpenEnum(hCluster: HCLUSTER, lpszNodeName: CPointer<UInt16>, lpszNetworkName: CPointer<UInt16>): HNETINTERFACEENUM
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNetInterfaceOpenEnum == "on"]
+public unsafe func Windows_ClusterNetInterfaceOpenEnum(hCluster: HCLUSTER, lpszNodeName: CPointer<UInt16>, lpszNetworkName: CPointer<UInt16>): HNETINTERFACEENUM {
+    return ClusterNetInterfaceOpenEnum(hCluster, lpszNodeName, lpszNetworkName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNetworkCloseEnum == "on"]
+foreign {
     func ClusterNetworkCloseEnum(hNetworkEnum: HNETWORKENUM): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNetworkCloseEnum == "on"]
+public unsafe func Windows_ClusterNetworkCloseEnum(hNetworkEnum: HNETWORKENUM): UInt32 {
+    return ClusterNetworkCloseEnum(hNetworkEnum)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNetworkControl == "on"]
+foreign {
     // param-hint: hHostNode optional
     // param-hint: lpInBuffer bytes=param[4] optional
     // param-hint: lpOutBuffer bytes=param[6] optional
     // param-hint: lpBytesReturned optional
     func ClusterNetworkControl(hNetwork: HNETWORK, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNetworkControl == "on"]
+public unsafe func Windows_ClusterNetworkControl(hNetwork: HNETWORK, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>): UInt32 {
+    return ClusterNetworkControl(hNetwork, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNetworkControlEx == "on"]
+foreign {
     // param-hint: hHostNode optional
     // param-hint: lpInBuffer bytes=param[4] optional
     // param-hint: lpOutBuffer bytes=param[6] optional
     // param-hint: lpBytesReturned optional
     // param-hint: lpszReason optional
     func ClusterNetworkControlEx(hNetwork: HNETWORK, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNetworkControlEx == "on"]
+public unsafe func Windows_ClusterNetworkControlEx(hNetwork: HNETWORK, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>, lpszReason: CPointer<UInt16>): UInt32 {
+    return ClusterNetworkControlEx(hNetwork, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNetworkEnum == "on"]
+foreign {
     // param-hint: lpszName len=param[4]
     func ClusterNetworkEnum(hNetworkEnum: HNETWORKENUM, dwIndex: UInt32, lpdwType: CPointer<UInt32>, lpszName: CPointer<UInt16>, lpcchName: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNetworkEnum == "on"]
+public unsafe func Windows_ClusterNetworkEnum(hNetworkEnum: HNETWORKENUM, dwIndex: UInt32, lpdwType: CPointer<UInt32>, lpszName: CPointer<UInt16>, lpcchName: CPointer<UInt32>): UInt32 {
+    return ClusterNetworkEnum(hNetworkEnum, dwIndex, lpdwType, lpszName, lpcchName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNetworkGetEnumCount == "on"]
+foreign {
     func ClusterNetworkGetEnumCount(hNetworkEnum: HNETWORKENUM): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNetworkGetEnumCount == "on"]
+public unsafe func Windows_ClusterNetworkGetEnumCount(hNetworkEnum: HNETWORKENUM): UInt32 {
+    return ClusterNetworkGetEnumCount(hNetworkEnum)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNetworkOpenEnum == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ClusterNetworkOpenEnum(hNetwork: HNETWORK, dwType: UInt32): HNETWORKENUM
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNetworkOpenEnum == "on"]
+public unsafe func Windows_ClusterNetworkOpenEnum(hNetwork: HNETWORK, dwType: UInt32): HNETWORKENUM {
+    return ClusterNetworkOpenEnum(hNetwork, dwType)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNodeCloseEnum == "on"]
+foreign {
     func ClusterNodeCloseEnum(hNodeEnum: HNODEENUM): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNodeCloseEnum == "on"]
+public unsafe func Windows_ClusterNodeCloseEnum(hNodeEnum: HNODEENUM): UInt32 {
+    return ClusterNodeCloseEnum(hNodeEnum)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNodeCloseEnumEx == "on"]
+foreign {
     func ClusterNodeCloseEnumEx(hNodeEnum: HNODEENUMEX): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNodeCloseEnumEx == "on"]
+public unsafe func Windows_ClusterNodeCloseEnumEx(hNodeEnum: HNODEENUMEX): UInt32 {
+    return ClusterNodeCloseEnumEx(hNodeEnum)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNodeControl == "on"]
+foreign {
     // param-hint: hHostNode optional
     // param-hint: lpInBuffer bytes=param[4] optional
     // param-hint: lpOutBuffer bytes=param[6] optional
     // param-hint: lpBytesReturned optional
     func ClusterNodeControl(hNode: HNODE, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNodeControl == "on"]
+public unsafe func Windows_ClusterNodeControl(hNode: HNODE, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>): UInt32 {
+    return ClusterNodeControl(hNode, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNodeControlEx == "on"]
+foreign {
     // param-hint: hHostNode optional
     // param-hint: lpInBuffer bytes=param[4] optional
     // param-hint: lpOutBuffer bytes=param[6] optional
     // param-hint: lpBytesReturned optional
     // param-hint: lpszReason optional
     func ClusterNodeControlEx(hNode: HNODE, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNodeControlEx == "on"]
+public unsafe func Windows_ClusterNodeControlEx(hNode: HNODE, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>, lpszReason: CPointer<UInt16>): UInt32 {
+    return ClusterNodeControlEx(hNode, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNodeEnum == "on"]
+foreign {
     // param-hint: lpszName len=param[4]
     func ClusterNodeEnum(hNodeEnum: HNODEENUM, dwIndex: UInt32, lpdwType: CPointer<UInt32>, lpszName: CPointer<UInt16>, lpcchName: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNodeEnum == "on"]
+public unsafe func Windows_ClusterNodeEnum(hNodeEnum: HNODEENUM, dwIndex: UInt32, lpdwType: CPointer<UInt32>, lpszName: CPointer<UInt16>, lpcchName: CPointer<UInt32>): UInt32 {
+    return ClusterNodeEnum(hNodeEnum, dwIndex, lpdwType, lpszName, lpcchName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNodeEnumEx == "on"]
+foreign {
     func ClusterNodeEnumEx(hNodeEnum: HNODEENUMEX, dwIndex: UInt32, pItem: CPointer<CLUSTER_ENUM_ITEMAbi>, cbItem: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNodeEnumEx == "on"]
+public unsafe func Windows_ClusterNodeEnumEx(hNodeEnum: HNODEENUMEX, dwIndex: UInt32, pItem: CPointer<CLUSTER_ENUM_ITEMAbi>, cbItem: CPointer<UInt32>): UInt32 {
+    return ClusterNodeEnumEx(hNodeEnum, dwIndex, pItem, cbItem)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNodeGetEnumCount == "on"]
+foreign {
     func ClusterNodeGetEnumCount(hNodeEnum: HNODEENUM): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNodeGetEnumCount == "on"]
+public unsafe func Windows_ClusterNodeGetEnumCount(hNodeEnum: HNODEENUM): UInt32 {
+    return ClusterNodeGetEnumCount(hNodeEnum)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNodeGetEnumCountEx == "on"]
+foreign {
     func ClusterNodeGetEnumCountEx(hNodeEnum: HNODEENUMEX): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNodeGetEnumCountEx == "on"]
+public unsafe func Windows_ClusterNodeGetEnumCountEx(hNodeEnum: HNODEENUMEX): UInt32 {
+    return ClusterNodeGetEnumCountEx(hNodeEnum)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNodeOpenEnum == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ClusterNodeOpenEnum(hNode: HNODE, dwType: UInt32): HNODEENUM
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNodeOpenEnum == "on"]
+public unsafe func Windows_ClusterNodeOpenEnum(hNode: HNODE, dwType: UInt32): HNODEENUM {
+    return ClusterNodeOpenEnum(hNode, dwType)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNodeOpenEnumEx == "on"]
+foreign {
     // param-hint: pOptions optional
     // pinvoke-hint: SetLastError
     func ClusterNodeOpenEnumEx(hNode: HNODE, dwType: UInt32, pOptions: CPointer<Unit>): HNODEENUMEX
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNodeOpenEnumEx == "on"]
+public unsafe func Windows_ClusterNodeOpenEnumEx(hNode: HNODE, dwType: UInt32, pOptions: CPointer<Unit>): HNODEENUMEX {
+    return ClusterNodeOpenEnumEx(hNode, dwType, pOptions)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNodeReplacement == "on"]
+foreign {
     func ClusterNodeReplacement(hCluster: HCLUSTER, lpszNodeNameCurrent: CPointer<UInt16>, lpszNodeNameNew: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterNodeReplacement == "on"]
+public unsafe func Windows_ClusterNodeReplacement(hCluster: HCLUSTER, lpszNodeNameCurrent: CPointer<UInt16>, lpszNodeNameNew: CPointer<UInt16>): UInt32 {
+    return ClusterNodeReplacement(hCluster, lpszNodeNameCurrent, lpszNodeNameNew)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterOpenEnum == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ClusterOpenEnum(hCluster: HCLUSTER, dwType: UInt32): HCLUSENUM
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterOpenEnum == "on"]
+public unsafe func Windows_ClusterOpenEnum(hCluster: HCLUSTER, dwType: UInt32): HCLUSENUM {
+    return ClusterOpenEnum(hCluster, dwType)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterOpenEnumEx == "on"]
+foreign {
     // param-hint: pOptions optional
     // pinvoke-hint: SetLastError
     func ClusterOpenEnumEx(hCluster: HCLUSTER, dwType: UInt32, pOptions: CPointer<Unit>): HCLUSENUMEX
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterOpenEnumEx == "on"]
+public unsafe func Windows_ClusterOpenEnumEx(hCluster: HCLUSTER, dwType: UInt32, pOptions: CPointer<Unit>): HCLUSENUMEX {
+    return ClusterOpenEnumEx(hCluster, dwType, pOptions)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegBatchAddCommand == "on"]
+foreign {
     // param-hint: wzName optional
     // param-hint: lpData bytes=param[5] optional
     func ClusterRegBatchAddCommand(hRegBatch: HREGBATCH, dwCommand: CLUSTER_REG_COMMANDAbi, wzName: CPointer<UInt16>, dwOptions: UInt32, lpData: CPointer<Unit>, cbData: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegBatchAddCommand == "on"]
+public unsafe func Windows_ClusterRegBatchAddCommand(hRegBatch: HREGBATCH, dwCommand: CLUSTER_REG_COMMANDAbi, wzName: CPointer<UInt16>, dwOptions: UInt32, lpData: CPointer<Unit>, cbData: UInt32): Int32 {
+    return ClusterRegBatchAddCommand(hRegBatch, dwCommand, wzName, dwOptions, lpData, cbData)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegBatchCloseNotification == "on"]
+foreign {
     func ClusterRegBatchCloseNotification(hBatchNotification: HREGBATCHNOTIFICATION): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegBatchCloseNotification == "on"]
+public unsafe func Windows_ClusterRegBatchCloseNotification(hBatchNotification: HREGBATCHNOTIFICATION): Int32 {
+    return ClusterRegBatchCloseNotification(hBatchNotification)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegBatchReadCommand == "on"]
+foreign {
     func ClusterRegBatchReadCommand(hBatchNotification: HREGBATCHNOTIFICATION, pBatchCommand: CPointer<CLUSTER_BATCH_COMMANDAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegBatchReadCommand == "on"]
+public unsafe func Windows_ClusterRegBatchReadCommand(hBatchNotification: HREGBATCHNOTIFICATION, pBatchCommand: CPointer<CLUSTER_BATCH_COMMANDAbi>): Int32 {
+    return ClusterRegBatchReadCommand(hBatchNotification, pBatchCommand)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegCloseBatch == "on"]
+foreign {
     // param-hint: failedCommandNumber optional
     func ClusterRegCloseBatch(hRegBatch: HREGBATCH, bCommit: Int32, failedCommandNumber: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegCloseBatch == "on"]
+public unsafe func Windows_ClusterRegCloseBatch(hRegBatch: HREGBATCH, bCommit: Int32, failedCommandNumber: CPointer<Int32>): Int32 {
+    return ClusterRegCloseBatch(hRegBatch, bCommit, failedCommandNumber)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegCloseBatchEx == "on"]
+foreign {
     // param-hint: failedCommandNumber optional
     func ClusterRegCloseBatchEx(hRegBatch: HREGBATCH, flags: UInt32, failedCommandNumber: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegCloseBatchEx == "on"]
+public unsafe func Windows_ClusterRegCloseBatchEx(hRegBatch: HREGBATCH, flags: UInt32, failedCommandNumber: CPointer<Int32>): Int32 {
+    return ClusterRegCloseBatchEx(hRegBatch, flags, failedCommandNumber)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegCloseBatchNotifyPort == "on"]
+foreign {
     func ClusterRegCloseBatchNotifyPort(hBatchNotifyPort: HREGBATCHPORT): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegCloseBatchNotifyPort == "on"]
+public unsafe func Windows_ClusterRegCloseBatchNotifyPort(hBatchNotifyPort: HREGBATCHPORT): Int32 {
+    return ClusterRegCloseBatchNotifyPort(hBatchNotifyPort)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegCloseKey == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    func ClusterRegCloseKey(hKey: Win32_System_Registry.HKEY): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegCloseKey == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ClusterRegCloseKey(hKey: Win32_System_Registry.HKEY): Int32 {
+    return ClusterRegCloseKey(hKey)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegCloseReadBatch == "on"]
+foreign {
     func ClusterRegCloseReadBatch(hRegReadBatch: HREGREADBATCH, phRegReadBatchReply: CPointer<HREGREADBATCHREPLY>): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegCloseReadBatch == "on"]
+public unsafe func Windows_ClusterRegCloseReadBatch(hRegReadBatch: HREGREADBATCH, phRegReadBatchReply: CPointer<HREGREADBATCHREPLY>): Int32 {
+    return ClusterRegCloseReadBatch(hRegReadBatch, phRegReadBatchReply)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegCloseReadBatchEx == "on"]
+foreign {
     func ClusterRegCloseReadBatchEx(hRegReadBatch: HREGREADBATCH, flags: UInt32, phRegReadBatchReply: CPointer<HREGREADBATCHREPLY>): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegCloseReadBatchEx == "on"]
+public unsafe func Windows_ClusterRegCloseReadBatchEx(hRegReadBatch: HREGREADBATCH, flags: UInt32, phRegReadBatchReply: CPointer<HREGREADBATCHREPLY>): Int32 {
+    return ClusterRegCloseReadBatchEx(hRegReadBatch, flags, phRegReadBatchReply)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegCloseReadBatchReply == "on"]
+foreign {
     func ClusterRegCloseReadBatchReply(hRegReadBatchReply: HREGREADBATCHREPLY): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegCloseReadBatchReply == "on"]
+public unsafe func Windows_ClusterRegCloseReadBatchReply(hRegReadBatchReply: HREGREADBATCHREPLY): Int32 {
+    return ClusterRegCloseReadBatchReply(hRegReadBatchReply)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegCreateBatch == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: hKey optional
+    func ClusterRegCreateBatch(hKey: Win32_System_Registry.HKEY, pHREGBATCH: CPointer<HREGBATCH>): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegCreateBatch == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ClusterRegCreateBatch(hKey: Win32_System_Registry.HKEY, pHREGBATCH: CPointer<HREGBATCH>): Int32 {
+    return ClusterRegCreateBatch(hKey, pHREGBATCH)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegCreateBatchNotifyPort == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    func ClusterRegCreateBatchNotifyPort(hKey: Win32_System_Registry.HKEY, phBatchNotifyPort: CPointer<HREGBATCHPORT>): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegCreateBatchNotifyPort == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ClusterRegCreateBatchNotifyPort(hKey: Win32_System_Registry.HKEY, phBatchNotifyPort: CPointer<HREGBATCHPORT>): Int32 {
+    return ClusterRegCreateBatchNotifyPort(hKey, phBatchNotifyPort)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegCreateKey == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: lpSecurityAttributes optional
+    // param-hint: lpdwDisposition optional
+    func ClusterRegCreateKey(hKey: Win32_System_Registry.HKEY, lpszSubKey: CPointer<UInt16>, dwOptions: UInt32, samDesired: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, phkResult: CPointer<Win32_System_Registry.HKEY>, lpdwDisposition: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegCreateKey == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ClusterRegCreateKey(hKey: Win32_System_Registry.HKEY, lpszSubKey: CPointer<UInt16>, dwOptions: UInt32, samDesired: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, phkResult: CPointer<Win32_System_Registry.HKEY>, lpdwDisposition: CPointer<UInt32>): Int32 {
+    return ClusterRegCreateKey(hKey, lpszSubKey, dwOptions, samDesired, lpSecurityAttributes, phkResult, lpdwDisposition)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegCreateKeyEx == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: lpSecurityAttributes optional
+    // param-hint: lpdwDisposition optional
+    // param-hint: lpszReason optional
+    func ClusterRegCreateKeyEx(hKey: Win32_System_Registry.HKEY, lpSubKey: CPointer<UInt16>, dwOptions: UInt32, samDesired: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, phkResult: CPointer<Win32_System_Registry.HKEY>, lpdwDisposition: CPointer<UInt32>, lpszReason: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegCreateKeyEx == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ClusterRegCreateKeyEx(hKey: Win32_System_Registry.HKEY, lpSubKey: CPointer<UInt16>, dwOptions: UInt32, samDesired: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, phkResult: CPointer<Win32_System_Registry.HKEY>, lpdwDisposition: CPointer<UInt32>, lpszReason: CPointer<UInt16>): Int32 {
+    return ClusterRegCreateKeyEx(hKey, lpSubKey, dwOptions, samDesired, lpSecurityAttributes, phkResult, lpdwDisposition, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegCreateReadBatch == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    func ClusterRegCreateReadBatch(hKey: Win32_System_Registry.HKEY, phRegReadBatch: CPointer<HREGREADBATCH>): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegCreateReadBatch == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ClusterRegCreateReadBatch(hKey: Win32_System_Registry.HKEY, phRegReadBatch: CPointer<HREGREADBATCH>): Int32 {
+    return ClusterRegCreateReadBatch(hKey, phRegReadBatch)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegDeleteKey == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    func ClusterRegDeleteKey(hKey: Win32_System_Registry.HKEY, lpszSubKey: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegDeleteKey == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ClusterRegDeleteKey(hKey: Win32_System_Registry.HKEY, lpszSubKey: CPointer<UInt16>): Int32 {
+    return ClusterRegDeleteKey(hKey, lpszSubKey)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegDeleteKeyEx == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: lpszReason optional
+    func ClusterRegDeleteKeyEx(hKey: Win32_System_Registry.HKEY, lpSubKey: CPointer<UInt16>, lpszReason: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegDeleteKeyEx == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ClusterRegDeleteKeyEx(hKey: Win32_System_Registry.HKEY, lpSubKey: CPointer<UInt16>, lpszReason: CPointer<UInt16>): Int32 {
+    return ClusterRegDeleteKeyEx(hKey, lpSubKey, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegDeleteValue == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    func ClusterRegDeleteValue(hKey: Win32_System_Registry.HKEY, lpszValueName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegDeleteValue == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ClusterRegDeleteValue(hKey: Win32_System_Registry.HKEY, lpszValueName: CPointer<UInt16>): UInt32 {
+    return ClusterRegDeleteValue(hKey, lpszValueName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegDeleteValueEx == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: lpszReason optional
+    func ClusterRegDeleteValueEx(hKey: Win32_System_Registry.HKEY, lpszValueName: CPointer<UInt16>, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegDeleteValueEx == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ClusterRegDeleteValueEx(hKey: Win32_System_Registry.HKEY, lpszValueName: CPointer<UInt16>, lpszReason: CPointer<UInt16>): UInt32 {
+    return ClusterRegDeleteValueEx(hKey, lpszValueName, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegEnumKey == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: lpszName len=param[3]
+    // param-hint: lpftLastWriteTime optional
+    func ClusterRegEnumKey(hKey: Win32_System_Registry.HKEY, dwIndex: UInt32, lpszName: CPointer<UInt16>, lpcchName: CPointer<UInt32>, lpftLastWriteTime: CPointer<Win32_Foundation.FILETIMEAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegEnumKey == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ClusterRegEnumKey(hKey: Win32_System_Registry.HKEY, dwIndex: UInt32, lpszName: CPointer<UInt16>, lpcchName: CPointer<UInt32>, lpftLastWriteTime: CPointer<Win32_Foundation.FILETIMEAbi>): Int32 {
+    return ClusterRegEnumKey(hKey, dwIndex, lpszName, lpcchName, lpftLastWriteTime)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegEnumValue == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: lpszValueName len=param[3]
+    // param-hint: lpdwType optional
+    // param-hint: lpData bytes=param[6] optional
+    // param-hint: lpcbData optional
+    func ClusterRegEnumValue(hKey: Win32_System_Registry.HKEY, dwIndex: UInt32, lpszValueName: CPointer<UInt16>, lpcchValueName: CPointer<UInt32>, lpdwType: CPointer<UInt32>, lpData: CPointer<UInt8>, lpcbData: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegEnumValue == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ClusterRegEnumValue(hKey: Win32_System_Registry.HKEY, dwIndex: UInt32, lpszValueName: CPointer<UInt16>, lpcchValueName: CPointer<UInt32>, lpdwType: CPointer<UInt32>, lpData: CPointer<UInt8>, lpcbData: CPointer<UInt32>): UInt32 {
+    return ClusterRegEnumValue(hKey, dwIndex, lpszValueName, lpcchValueName, lpdwType, lpData, lpcbData)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegGetBatchNotification == "on"]
+foreign {
     func ClusterRegGetBatchNotification(hBatchNotify: HREGBATCHPORT, phBatchNotification: CPointer<HREGBATCHNOTIFICATION>): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegGetBatchNotification == "on"]
+public unsafe func Windows_ClusterRegGetBatchNotification(hBatchNotify: HREGBATCHPORT, phBatchNotification: CPointer<HREGBATCHNOTIFICATION>): Int32 {
+    return ClusterRegGetBatchNotification(hBatchNotify, phBatchNotification)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegGetKeySecurity == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pSecurityDescriptor bytes=param[3]
+    func ClusterRegGetKeySecurity(hKey: Win32_System_Registry.HKEY, RequestedInformation: UInt32, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, lpcbSecurityDescriptor: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegGetKeySecurity == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ClusterRegGetKeySecurity(hKey: Win32_System_Registry.HKEY, RequestedInformation: UInt32, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, lpcbSecurityDescriptor: CPointer<UInt32>): Int32 {
+    return ClusterRegGetKeySecurity(hKey, RequestedInformation, pSecurityDescriptor, lpcbSecurityDescriptor)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegOpenKey == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    func ClusterRegOpenKey(hKey: Win32_System_Registry.HKEY, lpszSubKey: CPointer<UInt16>, samDesired: UInt32, phkResult: CPointer<Win32_System_Registry.HKEY>): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegOpenKey == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ClusterRegOpenKey(hKey: Win32_System_Registry.HKEY, lpszSubKey: CPointer<UInt16>, samDesired: UInt32, phkResult: CPointer<Win32_System_Registry.HKEY>): Int32 {
+    return ClusterRegOpenKey(hKey, lpszSubKey, samDesired, phkResult)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegQueryInfoKey == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    func ClusterRegQueryInfoKey(hKey: Win32_System_Registry.HKEY, lpcSubKeys: CPointer<UInt32>, lpcchMaxSubKeyLen: CPointer<UInt32>, lpcValues: CPointer<UInt32>, lpcchMaxValueNameLen: CPointer<UInt32>, lpcbMaxValueLen: CPointer<UInt32>, lpcbSecurityDescriptor: CPointer<UInt32>, lpftLastWriteTime: CPointer<Win32_Foundation.FILETIMEAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegQueryInfoKey == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ClusterRegQueryInfoKey(hKey: Win32_System_Registry.HKEY, lpcSubKeys: CPointer<UInt32>, lpcchMaxSubKeyLen: CPointer<UInt32>, lpcValues: CPointer<UInt32>, lpcchMaxValueNameLen: CPointer<UInt32>, lpcbMaxValueLen: CPointer<UInt32>, lpcbSecurityDescriptor: CPointer<UInt32>, lpftLastWriteTime: CPointer<Win32_Foundation.FILETIMEAbi>): Int32 {
+    return ClusterRegQueryInfoKey(hKey, lpcSubKeys, lpcchMaxSubKeyLen, lpcValues, lpcchMaxValueNameLen, lpcbMaxValueLen, lpcbSecurityDescriptor, lpftLastWriteTime)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegQueryValue == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: lpdwValueType optional
+    // param-hint: lpData bytes=param[4] optional
+    // param-hint: lpcbData optional
+    func ClusterRegQueryValue(hKey: Win32_System_Registry.HKEY, lpszValueName: CPointer<UInt16>, lpdwValueType: CPointer<UInt32>, lpData: CPointer<UInt8>, lpcbData: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegQueryValue == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ClusterRegQueryValue(hKey: Win32_System_Registry.HKEY, lpszValueName: CPointer<UInt16>, lpdwValueType: CPointer<UInt32>, lpData: CPointer<UInt8>, lpcbData: CPointer<UInt32>): Int32 {
+    return ClusterRegQueryValue(hKey, lpszValueName, lpdwValueType, lpData, lpcbData)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegReadBatchAddCommand == "on"]
+foreign {
     func ClusterRegReadBatchAddCommand(hRegReadBatch: HREGREADBATCH, wzSubkeyName: CPointer<UInt16>, wzValueName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegReadBatchAddCommand == "on"]
+public unsafe func Windows_ClusterRegReadBatchAddCommand(hRegReadBatch: HREGREADBATCH, wzSubkeyName: CPointer<UInt16>, wzValueName: CPointer<UInt16>): Int32 {
+    return ClusterRegReadBatchAddCommand(hRegReadBatch, wzSubkeyName, wzValueName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegReadBatchReplyNextCommand == "on"]
+foreign {
     func ClusterRegReadBatchReplyNextCommand(hRegReadBatchReply: HREGREADBATCHREPLY, pBatchCommand: CPointer<CLUSTER_READ_BATCH_COMMANDAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegReadBatchReplyNextCommand == "on"]
+public unsafe func Windows_ClusterRegReadBatchReplyNextCommand(hRegReadBatchReply: HREGREADBATCHREPLY, pBatchCommand: CPointer<CLUSTER_READ_BATCH_COMMANDAbi>): Int32 {
+    return ClusterRegReadBatchReplyNextCommand(hRegReadBatchReply, pBatchCommand)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegSetKeySecurity == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    func ClusterRegSetKeySecurity(hKey: Win32_System_Registry.HKEY, SecurityInformation: UInt32, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegSetKeySecurity == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ClusterRegSetKeySecurity(hKey: Win32_System_Registry.HKEY, SecurityInformation: UInt32, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): Int32 {
+    return ClusterRegSetKeySecurity(hKey, SecurityInformation, pSecurityDescriptor)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegSetKeySecurityEx == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: lpszReason optional
+    func ClusterRegSetKeySecurityEx(hKey: Win32_System_Registry.HKEY, SecurityInformation: Win32_Security.OBJECT_SECURITY_INFORMATIONAbi, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, lpszReason: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegSetKeySecurityEx == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ClusterRegSetKeySecurityEx(hKey: Win32_System_Registry.HKEY, SecurityInformation: Win32_Security.OBJECT_SECURITY_INFORMATIONAbi, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, lpszReason: CPointer<UInt16>): Int32 {
+    return ClusterRegSetKeySecurityEx(hKey, SecurityInformation, pSecurityDescriptor, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegSetValue == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func ClusterRegSetValue(hKey: Win32_System_Registry.HKEY, lpszValueName: CPointer<UInt16>, dwType: UInt32, lpData: CPointer<UInt8>, cbData: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegSetValue == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ClusterRegSetValue(hKey: Win32_System_Registry.HKEY, lpszValueName: CPointer<UInt16>, dwType: UInt32, lpData: CPointer<UInt8>, cbData: UInt32): UInt32 {
+    return ClusterRegSetValue(hKey, lpszValueName, dwType, lpData, cbData)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegSetValueEx == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: lpszReason optional
+    func ClusterRegSetValueEx(hKey: Win32_System_Registry.HKEY, lpszValueName: CPointer<UInt16>, dwType: UInt32, lpData: CPointer<UInt8>, cbData: UInt32, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegSetValueEx == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ClusterRegSetValueEx(hKey: Win32_System_Registry.HKEY, lpszValueName: CPointer<UInt16>, dwType: UInt32, lpData: CPointer<UInt8>, cbData: UInt32, lpszReason: CPointer<UInt16>): UInt32 {
+    return ClusterRegSetValueEx(hKey, lpszValueName, dwType, lpData, cbData, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegSyncDatabase == "on"]
+foreign {
     func ClusterRegSyncDatabase(hCluster: HCLUSTER, flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRegSyncDatabase == "on"]
+public unsafe func Windows_ClusterRegSyncDatabase(hCluster: HCLUSTER, flags: UInt32): Int32 {
+    return ClusterRegSyncDatabase(hCluster, flags)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRemoveAffinityRule == "on"]
+foreign {
     func ClusterRemoveAffinityRule(hCluster: HCLUSTER, ruleName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRemoveAffinityRule == "on"]
+public unsafe func Windows_ClusterRemoveAffinityRule(hCluster: HCLUSTER, ruleName: CPointer<UInt16>): UInt32 {
+    return ClusterRemoveAffinityRule(hCluster, ruleName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRemoveGroupFromAffinityRule == "on"]
+foreign {
     func ClusterRemoveGroupFromAffinityRule(hCluster: HCLUSTER, ruleName: CPointer<UInt16>, hGroup: HGROUP): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRemoveGroupFromAffinityRule == "on"]
+public unsafe func Windows_ClusterRemoveGroupFromAffinityRule(hCluster: HCLUSTER, ruleName: CPointer<UInt16>, hGroup: HGROUP): UInt32 {
+    return ClusterRemoveGroupFromAffinityRule(hCluster, ruleName, hGroup)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRemoveGroupFromGroupSet == "on"]
+foreign {
     func ClusterRemoveGroupFromGroupSet(hGroup: HGROUP): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRemoveGroupFromGroupSet == "on"]
+public unsafe func Windows_ClusterRemoveGroupFromGroupSet(hGroup: HGROUP): UInt32 {
+    return ClusterRemoveGroupFromGroupSet(hGroup)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRemoveGroupFromGroupSetEx == "on"]
+foreign {
     // param-hint: lpszReason optional
     func ClusterRemoveGroupFromGroupSetEx(hGroup: HGROUP, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterRemoveGroupFromGroupSetEx == "on"]
+public unsafe func Windows_ClusterRemoveGroupFromGroupSetEx(hGroup: HGROUP, lpszReason: CPointer<UInt16>): UInt32 {
+    return ClusterRemoveGroupFromGroupSetEx(hGroup, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceCloseEnum == "on"]
+foreign {
     func ClusterResourceCloseEnum(hResEnum: HRESENUM): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceCloseEnum == "on"]
+public unsafe func Windows_ClusterResourceCloseEnum(hResEnum: HRESENUM): UInt32 {
+    return ClusterResourceCloseEnum(hResEnum)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceCloseEnumEx == "on"]
+foreign {
     func ClusterResourceCloseEnumEx(hResourceEnumEx: HRESENUMEX): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceCloseEnumEx == "on"]
+public unsafe func Windows_ClusterResourceCloseEnumEx(hResourceEnumEx: HRESENUMEX): UInt32 {
+    return ClusterResourceCloseEnumEx(hResourceEnumEx)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceControl == "on"]
+foreign {
     // param-hint: hHostNode optional
     // param-hint: lpInBuffer bytes=param[4] optional
     // param-hint: lpOutBuffer bytes=param[6] optional
     // param-hint: lpBytesReturned optional
     func ClusterResourceControl(hResource: HRESOURCE, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, cbInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, cbOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceControl == "on"]
+public unsafe func Windows_ClusterResourceControl(hResource: HRESOURCE, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, cbInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, cbOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>): UInt32 {
+    return ClusterResourceControl(hResource, hHostNode, dwControlCode, lpInBuffer, cbInBufferSize, lpOutBuffer, cbOutBufferSize, lpBytesReturned)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceControlAsUser == "on"]
+foreign {
     // param-hint: hHostNode optional
     // param-hint: lpInBuffer bytes=param[4] optional
     // param-hint: lpOutBuffer bytes=param[6] optional
     // param-hint: lpBytesReturned optional
     func ClusterResourceControlAsUser(hResource: HRESOURCE, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, cbInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, cbOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceControlAsUser == "on"]
+public unsafe func Windows_ClusterResourceControlAsUser(hResource: HRESOURCE, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, cbInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, cbOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>): UInt32 {
+    return ClusterResourceControlAsUser(hResource, hHostNode, dwControlCode, lpInBuffer, cbInBufferSize, lpOutBuffer, cbOutBufferSize, lpBytesReturned)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceControlAsUserEx == "on"]
+foreign {
     // param-hint: hHostNode optional
     // param-hint: lpInBuffer bytes=param[4] optional
     // param-hint: lpOutBuffer bytes=param[6] optional
     // param-hint: lpBytesReturned optional
     // param-hint: lpszReason optional
     func ClusterResourceControlAsUserEx(hResource: HRESOURCE, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, cbInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, cbOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceControlAsUserEx == "on"]
+public unsafe func Windows_ClusterResourceControlAsUserEx(hResource: HRESOURCE, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, cbInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, cbOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>, lpszReason: CPointer<UInt16>): UInt32 {
+    return ClusterResourceControlAsUserEx(hResource, hHostNode, dwControlCode, lpInBuffer, cbInBufferSize, lpOutBuffer, cbOutBufferSize, lpBytesReturned, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceControlEx == "on"]
+foreign {
     // param-hint: hHostNode optional
     // param-hint: lpInBuffer bytes=param[4] optional
     // param-hint: lpOutBuffer bytes=param[6] optional
     // param-hint: lpBytesReturned optional
     // param-hint: lpszReason optional
     func ClusterResourceControlEx(hResource: HRESOURCE, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, cbInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, cbOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceControlEx == "on"]
+public unsafe func Windows_ClusterResourceControlEx(hResource: HRESOURCE, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, cbInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, cbOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>, lpszReason: CPointer<UInt16>): UInt32 {
+    return ClusterResourceControlEx(hResource, hHostNode, dwControlCode, lpInBuffer, cbInBufferSize, lpOutBuffer, cbOutBufferSize, lpBytesReturned, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceEnum == "on"]
+foreign {
     // param-hint: lpszName len=param[4]
     func ClusterResourceEnum(hResEnum: HRESENUM, dwIndex: UInt32, lpdwType: CPointer<UInt32>, lpszName: CPointer<UInt16>, lpcchName: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceEnum == "on"]
+public unsafe func Windows_ClusterResourceEnum(hResEnum: HRESENUM, dwIndex: UInt32, lpdwType: CPointer<UInt32>, lpszName: CPointer<UInt16>, lpcchName: CPointer<UInt32>): UInt32 {
+    return ClusterResourceEnum(hResEnum, dwIndex, lpdwType, lpszName, lpcchName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceEnumEx == "on"]
+foreign {
     func ClusterResourceEnumEx(hResourceEnumEx: HRESENUMEX, dwIndex: UInt32, pItem: CPointer<CLUSTER_RESOURCE_ENUM_ITEMAbi>, cbItem: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceEnumEx == "on"]
+public unsafe func Windows_ClusterResourceEnumEx(hResourceEnumEx: HRESENUMEX, dwIndex: UInt32, pItem: CPointer<CLUSTER_RESOURCE_ENUM_ITEMAbi>, cbItem: CPointer<UInt32>): UInt32 {
+    return ClusterResourceEnumEx(hResourceEnumEx, dwIndex, pItem, cbItem)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceGetEnumCount == "on"]
+foreign {
     func ClusterResourceGetEnumCount(hResEnum: HRESENUM): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceGetEnumCount == "on"]
+public unsafe func Windows_ClusterResourceGetEnumCount(hResEnum: HRESENUM): UInt32 {
+    return ClusterResourceGetEnumCount(hResEnum)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceGetEnumCountEx == "on"]
+foreign {
     func ClusterResourceGetEnumCountEx(hResourceEnumEx: HRESENUMEX): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceGetEnumCountEx == "on"]
+public unsafe func Windows_ClusterResourceGetEnumCountEx(hResourceEnumEx: HRESENUMEX): UInt32 {
+    return ClusterResourceGetEnumCountEx(hResourceEnumEx)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceOpenEnum == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ClusterResourceOpenEnum(hResource: HRESOURCE, dwType: UInt32): HRESENUM
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceOpenEnum == "on"]
+public unsafe func Windows_ClusterResourceOpenEnum(hResource: HRESOURCE, dwType: UInt32): HRESENUM {
+    return ClusterResourceOpenEnum(hResource, dwType)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceOpenEnumEx == "on"]
+foreign {
     // param-hint: lpszProperties bytes=param[2] optional
     // param-hint: lpszRoProperties bytes=param[4] optional
     // pinvoke-hint: SetLastError
     func ClusterResourceOpenEnumEx(hCluster: HCLUSTER, lpszProperties: CPointer<UInt16>, cbProperties: UInt32, lpszRoProperties: CPointer<UInt16>, cbRoProperties: UInt32, dwFlags: UInt32): HRESENUMEX
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceOpenEnumEx == "on"]
+public unsafe func Windows_ClusterResourceOpenEnumEx(hCluster: HCLUSTER, lpszProperties: CPointer<UInt16>, cbProperties: UInt32, lpszRoProperties: CPointer<UInt16>, cbRoProperties: UInt32, dwFlags: UInt32): HRESENUMEX {
+    return ClusterResourceOpenEnumEx(hCluster, lpszProperties, cbProperties, lpszRoProperties, cbRoProperties, dwFlags)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceTypeCloseEnum == "on"]
+foreign {
     func ClusterResourceTypeCloseEnum(hResTypeEnum: HRESTYPEENUM): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceTypeCloseEnum == "on"]
+public unsafe func Windows_ClusterResourceTypeCloseEnum(hResTypeEnum: HRESTYPEENUM): UInt32 {
+    return ClusterResourceTypeCloseEnum(hResTypeEnum)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceTypeControl == "on"]
+foreign {
     // param-hint: hHostNode optional
     // param-hint: lpInBuffer bytes=param[5] optional
     // param-hint: lpOutBuffer bytes=param[7] optional
     // param-hint: lpBytesReturned optional
     func ClusterResourceTypeControl(hCluster: HCLUSTER, lpszResourceTypeName: CPointer<UInt16>, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceTypeControl == "on"]
+public unsafe func Windows_ClusterResourceTypeControl(hCluster: HCLUSTER, lpszResourceTypeName: CPointer<UInt16>, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>): UInt32 {
+    return ClusterResourceTypeControl(hCluster, lpszResourceTypeName, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceTypeControlAsUser == "on"]
+foreign {
     // param-hint: hHostNode optional
     // param-hint: lpInBuffer bytes=param[5] optional
     // param-hint: lpOutBuffer bytes=param[7] optional
     // param-hint: lpBytesReturned optional
     func ClusterResourceTypeControlAsUser(hCluster: HCLUSTER, lpszResourceTypeName: CPointer<UInt16>, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceTypeControlAsUser == "on"]
+public unsafe func Windows_ClusterResourceTypeControlAsUser(hCluster: HCLUSTER, lpszResourceTypeName: CPointer<UInt16>, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>): UInt32 {
+    return ClusterResourceTypeControlAsUser(hCluster, lpszResourceTypeName, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceTypeControlAsUserEx == "on"]
+foreign {
     // param-hint: hHostNode optional
     // param-hint: lpInBuffer bytes=param[5] optional
     // param-hint: lpOutBuffer bytes=param[7] optional
     // param-hint: lpBytesReturned optional
     // param-hint: lpszReason optional
     func ClusterResourceTypeControlAsUserEx(hCluster: HCLUSTER, lpszResourceTypeName: CPointer<UInt16>, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceTypeControlAsUserEx == "on"]
+public unsafe func Windows_ClusterResourceTypeControlAsUserEx(hCluster: HCLUSTER, lpszResourceTypeName: CPointer<UInt16>, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>, lpszReason: CPointer<UInt16>): UInt32 {
+    return ClusterResourceTypeControlAsUserEx(hCluster, lpszResourceTypeName, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceTypeControlEx == "on"]
+foreign {
     // param-hint: hHostNode optional
     // param-hint: lpInBuffer bytes=param[5] optional
     // param-hint: lpOutBuffer bytes=param[7] optional
     // param-hint: lpBytesReturned optional
     // param-hint: lpszReason optional
     func ClusterResourceTypeControlEx(hCluster: HCLUSTER, lpszResourceTypeName: CPointer<UInt16>, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceTypeControlEx == "on"]
+public unsafe func Windows_ClusterResourceTypeControlEx(hCluster: HCLUSTER, lpszResourceTypeName: CPointer<UInt16>, hHostNode: HNODE, dwControlCode: UInt32, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesReturned: CPointer<UInt32>, lpszReason: CPointer<UInt16>): UInt32 {
+    return ClusterResourceTypeControlEx(hCluster, lpszResourceTypeName, hHostNode, dwControlCode, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesReturned, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceTypeEnum == "on"]
+foreign {
     // param-hint: lpszName len=param[4]
     func ClusterResourceTypeEnum(hResTypeEnum: HRESTYPEENUM, dwIndex: UInt32, lpdwType: CPointer<UInt32>, lpszName: CPointer<UInt16>, lpcchName: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceTypeEnum == "on"]
+public unsafe func Windows_ClusterResourceTypeEnum(hResTypeEnum: HRESTYPEENUM, dwIndex: UInt32, lpdwType: CPointer<UInt32>, lpszName: CPointer<UInt16>, lpcchName: CPointer<UInt32>): UInt32 {
+    return ClusterResourceTypeEnum(hResTypeEnum, dwIndex, lpdwType, lpszName, lpcchName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceTypeGetEnumCount == "on"]
+foreign {
     func ClusterResourceTypeGetEnumCount(hResTypeEnum: HRESTYPEENUM): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceTypeGetEnumCount == "on"]
+public unsafe func Windows_ClusterResourceTypeGetEnumCount(hResTypeEnum: HRESTYPEENUM): UInt32 {
+    return ClusterResourceTypeGetEnumCount(hResTypeEnum)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceTypeOpenEnum == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ClusterResourceTypeOpenEnum(hCluster: HCLUSTER, lpszResourceTypeName: CPointer<UInt16>, dwType: UInt32): HRESTYPEENUM
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterResourceTypeOpenEnum == "on"]
+public unsafe func Windows_ClusterResourceTypeOpenEnum(hCluster: HCLUSTER, lpszResourceTypeName: CPointer<UInt16>, dwType: UInt32): HRESTYPEENUM {
+    return ClusterResourceTypeOpenEnum(hCluster, lpszResourceTypeName, dwType)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterSetAccountAccess == "on"]
+foreign {
     func ClusterSetAccountAccess(hCluster: HCLUSTER, szAccountSID: CPointer<UInt16>, dwAccess: UInt32, dwControlType: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterSetAccountAccess == "on"]
+public unsafe func Windows_ClusterSetAccountAccess(hCluster: HCLUSTER, szAccountSID: CPointer<UInt16>, dwAccess: UInt32, dwControlType: UInt32): UInt32 {
+    return ClusterSetAccountAccess(hCluster, szAccountSID, dwAccess, dwControlType)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterSharedVolumeSetSnapshotState == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ClusterSharedVolumeSetSnapshotState(guidSnapshotSet: GUID, lpszVolumeName: CPointer<UInt16>, state: CLUSTER_SHARED_VOLUME_SNAPSHOT_STATEAbi): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterSharedVolumeSetSnapshotState == "on"]
+public unsafe func Windows_ClusterSharedVolumeSetSnapshotState(guidSnapshotSet: GUID, lpszVolumeName: CPointer<UInt16>, state: CLUSTER_SHARED_VOLUME_SNAPSHOT_STATEAbi): UInt32 {
+    return ClusterSharedVolumeSetSnapshotState(guidSnapshotSet, lpszVolumeName, state)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterUpgradeFunctionalLevel == "on"]
+foreign {
     // param-hint: pfnProgressCallback optional
     // param-hint: pvCallbackArg optional
     func ClusterUpgradeFunctionalLevel(hCluster: HCLUSTER, perform: Int32, pfnProgressCallback: PCLUSTER_UPGRADE_PROGRESS_CALLBACK, pvCallbackArg: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ClusterUpgradeFunctionalLevel == "on"]
+public unsafe func Windows_ClusterUpgradeFunctionalLevel(hCluster: HCLUSTER, perform: Int32, pfnProgressCallback: PCLUSTER_UPGRADE_PROGRESS_CALLBACK, pvCallbackArg: CPointer<Unit>): UInt32 {
+    return ClusterUpgradeFunctionalLevel(hCluster, perform, pfnProgressCallback, pvCallbackArg)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CreateCluster == "on"]
+foreign {
     // param-hint: pfnProgressCallback optional
     // param-hint: pvCallbackArg optional
     // pinvoke-hint: SetLastError
     func CreateCluster(pConfig: CPointer<CREATE_CLUSTER_CONFIGAbi>, pfnProgressCallback: PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg: CPointer<Unit>): HCLUSTER
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CreateCluster == "on"]
+public unsafe func Windows_CreateCluster(pConfig: CPointer<CREATE_CLUSTER_CONFIGAbi>, pfnProgressCallback: PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg: CPointer<Unit>): HCLUSTER {
+    return CreateCluster(pConfig, pfnProgressCallback, pvCallbackArg)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CreateClusterAvailabilitySet == "on"]
+foreign {
     func CreateClusterAvailabilitySet(hCluster: HCLUSTER, lpAvailabilitySetName: CPointer<UInt16>, pAvailabilitySetConfig: CPointer<CLUSTER_AVAILABILITY_SET_CONFIGAbi>): HGROUPSET
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CreateClusterAvailabilitySet == "on"]
+public unsafe func Windows_CreateClusterAvailabilitySet(hCluster: HCLUSTER, lpAvailabilitySetName: CPointer<UInt16>, pAvailabilitySetConfig: CPointer<CLUSTER_AVAILABILITY_SET_CONFIGAbi>): HGROUPSET {
+    return CreateClusterAvailabilitySet(hCluster, lpAvailabilitySetName, pAvailabilitySetConfig)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CreateClusterGroup == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CreateClusterGroup(hCluster: HCLUSTER, lpszGroupName: CPointer<UInt16>): HGROUP
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CreateClusterGroup == "on"]
+public unsafe func Windows_CreateClusterGroup(hCluster: HCLUSTER, lpszGroupName: CPointer<UInt16>): HGROUP {
+    return CreateClusterGroup(hCluster, lpszGroupName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CreateClusterGroupEx == "on"]
+foreign {
     // param-hint: pGroupInfo optional
     func CreateClusterGroupEx(hCluster: HCLUSTER, lpszGroupName: CPointer<UInt16>, pGroupInfo: CPointer<CLUSTER_CREATE_GROUP_INFOAbi>): HGROUP
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CreateClusterGroupEx == "on"]
+public unsafe func Windows_CreateClusterGroupEx(hCluster: HCLUSTER, lpszGroupName: CPointer<UInt16>, pGroupInfo: CPointer<CLUSTER_CREATE_GROUP_INFOAbi>): HGROUP {
+    return CreateClusterGroupEx(hCluster, lpszGroupName, pGroupInfo)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CreateClusterGroupSet == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CreateClusterGroupSet(hCluster: HCLUSTER, groupSetName: CPointer<UInt16>): HGROUPSET
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CreateClusterGroupSet == "on"]
+public unsafe func Windows_CreateClusterGroupSet(hCluster: HCLUSTER, groupSetName: CPointer<UInt16>): HGROUPSET {
+    return CreateClusterGroupSet(hCluster, groupSetName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CreateClusterNameAccount == "on"]
+foreign {
     // param-hint: pfnProgressCallback optional
     // param-hint: pvCallbackArg optional
     func CreateClusterNameAccount(hCluster: HCLUSTER, pConfig: CPointer<CREATE_CLUSTER_NAME_ACCOUNTAbi>, pfnProgressCallback: PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CreateClusterNameAccount == "on"]
+public unsafe func Windows_CreateClusterNameAccount(hCluster: HCLUSTER, pConfig: CPointer<CREATE_CLUSTER_NAME_ACCOUNTAbi>, pfnProgressCallback: PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg: CPointer<Unit>): UInt32 {
+    return CreateClusterNameAccount(hCluster, pConfig, pfnProgressCallback, pvCallbackArg)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CreateClusterNotifyPort == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CreateClusterNotifyPort(hChange: HCHANGE, hCluster: HCLUSTER, dwFilter: UInt32, dwNotifyKey: UIntNative): HCHANGE
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CreateClusterNotifyPort == "on"]
+public unsafe func Windows_CreateClusterNotifyPort(hChange: HCHANGE, hCluster: HCLUSTER, dwFilter: UInt32, dwNotifyKey: UIntNative): HCHANGE {
+    return CreateClusterNotifyPort(hChange, hCluster, dwFilter, dwNotifyKey)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CreateClusterNotifyPortV2 == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CreateClusterNotifyPortV2(hChange: HCHANGE, hCluster: HCLUSTER, Filters: CPointer<NOTIFY_FILTER_AND_TYPEAbi>, dwFilterCount: UInt32, dwNotifyKey: UIntNative): HCHANGE
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CreateClusterNotifyPortV2 == "on"]
+public unsafe func Windows_CreateClusterNotifyPortV2(hChange: HCHANGE, hCluster: HCLUSTER, Filters: CPointer<NOTIFY_FILTER_AND_TYPEAbi>, dwFilterCount: UInt32, dwNotifyKey: UIntNative): HCHANGE {
+    return CreateClusterNotifyPortV2(hChange, hCluster, Filters, dwFilterCount, dwNotifyKey)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CreateClusterResource == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CreateClusterResource(hGroup: HGROUP, lpszResourceName: CPointer<UInt16>, lpszResourceType: CPointer<UInt16>, dwFlags: UInt32): HRESOURCE
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CreateClusterResource == "on"]
+public unsafe func Windows_CreateClusterResource(hGroup: HGROUP, lpszResourceName: CPointer<UInt16>, lpszResourceType: CPointer<UInt16>, dwFlags: UInt32): HRESOURCE {
+    return CreateClusterResource(hGroup, lpszResourceName, lpszResourceType, dwFlags)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CreateClusterResourceEx == "on"]
+foreign {
     // param-hint: lpszReason optional
     func CreateClusterResourceEx(hGroup: HGROUP, lpszResourceName: CPointer<UInt16>, lpszResourceType: CPointer<UInt16>, dwFlags: UInt32, lpszReason: CPointer<UInt16>): HRESOURCE
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CreateClusterResourceEx == "on"]
+public unsafe func Windows_CreateClusterResourceEx(hGroup: HGROUP, lpszResourceName: CPointer<UInt16>, lpszResourceType: CPointer<UInt16>, dwFlags: UInt32, lpszReason: CPointer<UInt16>): HRESOURCE {
+    return CreateClusterResourceEx(hGroup, lpszResourceName, lpszResourceType, dwFlags, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CreateClusterResourceType == "on"]
+foreign {
     func CreateClusterResourceType(hCluster: HCLUSTER, lpszResourceTypeName: CPointer<UInt16>, lpszDisplayName: CPointer<UInt16>, lpszResourceTypeDll: CPointer<UInt16>, dwLooksAlivePollInterval: UInt32, dwIsAlivePollInterval: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CreateClusterResourceType == "on"]
+public unsafe func Windows_CreateClusterResourceType(hCluster: HCLUSTER, lpszResourceTypeName: CPointer<UInt16>, lpszDisplayName: CPointer<UInt16>, lpszResourceTypeDll: CPointer<UInt16>, dwLooksAlivePollInterval: UInt32, dwIsAlivePollInterval: UInt32): UInt32 {
+    return CreateClusterResourceType(hCluster, lpszResourceTypeName, lpszDisplayName, lpszResourceTypeDll, dwLooksAlivePollInterval, dwIsAlivePollInterval)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CreateClusterResourceTypeEx == "on"]
+foreign {
     // param-hint: lpszReason optional
     func CreateClusterResourceTypeEx(hCluster: HCLUSTER, lpszResourceTypeName: CPointer<UInt16>, lpszDisplayName: CPointer<UInt16>, lpszResourceTypeDll: CPointer<UInt16>, dwLooksAlivePollInterval: UInt32, dwIsAlivePollInterval: UInt32, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_CreateClusterResourceTypeEx == "on"]
+public unsafe func Windows_CreateClusterResourceTypeEx(hCluster: HCLUSTER, lpszResourceTypeName: CPointer<UInt16>, lpszDisplayName: CPointer<UInt16>, lpszResourceTypeDll: CPointer<UInt16>, dwLooksAlivePollInterval: UInt32, dwIsAlivePollInterval: UInt32, lpszReason: CPointer<UInt16>): UInt32 {
+    return CreateClusterResourceTypeEx(hCluster, lpszResourceTypeName, lpszDisplayName, lpszResourceTypeDll, dwLooksAlivePollInterval, dwIsAlivePollInterval, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_DeleteClusterGroup == "on"]
+foreign {
     func DeleteClusterGroup(hGroup: HGROUP): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_DeleteClusterGroup == "on"]
+public unsafe func Windows_DeleteClusterGroup(hGroup: HGROUP): UInt32 {
+    return DeleteClusterGroup(hGroup)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_DeleteClusterGroupEx == "on"]
+foreign {
     // param-hint: lpszReason optional
     func DeleteClusterGroupEx(hGroup: HGROUP, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_DeleteClusterGroupEx == "on"]
+public unsafe func Windows_DeleteClusterGroupEx(hGroup: HGROUP, lpszReason: CPointer<UInt16>): UInt32 {
+    return DeleteClusterGroupEx(hGroup, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_DeleteClusterGroupSet == "on"]
+foreign {
     func DeleteClusterGroupSet(hGroupSet: HGROUPSET): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_DeleteClusterGroupSet == "on"]
+public unsafe func Windows_DeleteClusterGroupSet(hGroupSet: HGROUPSET): UInt32 {
+    return DeleteClusterGroupSet(hGroupSet)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_DeleteClusterGroupSetEx == "on"]
+foreign {
     // param-hint: lpszReason optional
     func DeleteClusterGroupSetEx(hGroupSet: HGROUPSET, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_DeleteClusterGroupSetEx == "on"]
+public unsafe func Windows_DeleteClusterGroupSetEx(hGroupSet: HGROUPSET, lpszReason: CPointer<UInt16>): UInt32 {
+    return DeleteClusterGroupSetEx(hGroupSet, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_DeleteClusterResource == "on"]
+foreign {
     func DeleteClusterResource(hResource: HRESOURCE): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_DeleteClusterResource == "on"]
+public unsafe func Windows_DeleteClusterResource(hResource: HRESOURCE): UInt32 {
+    return DeleteClusterResource(hResource)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_DeleteClusterResourceEx == "on"]
+foreign {
     // param-hint: lpszReason optional
     func DeleteClusterResourceEx(hResource: HRESOURCE, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_DeleteClusterResourceEx == "on"]
+public unsafe func Windows_DeleteClusterResourceEx(hResource: HRESOURCE, lpszReason: CPointer<UInt16>): UInt32 {
+    return DeleteClusterResourceEx(hResource, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_DeleteClusterResourceType == "on"]
+foreign {
     func DeleteClusterResourceType(hCluster: HCLUSTER, lpszResourceTypeName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_DeleteClusterResourceType == "on"]
+public unsafe func Windows_DeleteClusterResourceType(hCluster: HCLUSTER, lpszResourceTypeName: CPointer<UInt16>): UInt32 {
+    return DeleteClusterResourceType(hCluster, lpszResourceTypeName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_DeleteClusterResourceTypeEx == "on"]
+foreign {
     // param-hint: lpszReason optional
     func DeleteClusterResourceTypeEx(hCluster: HCLUSTER, lpszTypeName: CPointer<UInt16>, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_DeleteClusterResourceTypeEx == "on"]
+public unsafe func Windows_DeleteClusterResourceTypeEx(hCluster: HCLUSTER, lpszTypeName: CPointer<UInt16>, lpszReason: CPointer<UInt16>): UInt32 {
+    return DeleteClusterResourceTypeEx(hCluster, lpszTypeName, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_DestroyCluster == "on"]
+foreign {
     // param-hint: pfnProgressCallback optional
     // param-hint: pvCallbackArg optional
     func DestroyCluster(hCluster: HCLUSTER, pfnProgressCallback: PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg: CPointer<Unit>, fdeleteVirtualComputerObjects: Int32): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_DestroyCluster == "on"]
+public unsafe func Windows_DestroyCluster(hCluster: HCLUSTER, pfnProgressCallback: PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg: CPointer<Unit>, fdeleteVirtualComputerObjects: Int32): UInt32 {
+    return DestroyCluster(hCluster, pfnProgressCallback, pvCallbackArg, fdeleteVirtualComputerObjects)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_DestroyClusterGroup == "on"]
+foreign {
     func DestroyClusterGroup(hGroup: HGROUP): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_DestroyClusterGroup == "on"]
+public unsafe func Windows_DestroyClusterGroup(hGroup: HGROUP): UInt32 {
+    return DestroyClusterGroup(hGroup)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_DestroyClusterGroupEx == "on"]
+foreign {
     // param-hint: lpszReason optional
     func DestroyClusterGroupEx(hGroup: HGROUP, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_DestroyClusterGroupEx == "on"]
+public unsafe func Windows_DestroyClusterGroupEx(hGroup: HGROUP, lpszReason: CPointer<UInt16>): UInt32 {
+    return DestroyClusterGroupEx(hGroup, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_DetermineCNOResTypeFromCluster == "on"]
+foreign {
     func DetermineCNOResTypeFromCluster(hCluster: HCLUSTER, pCNOResType: CPointer<CLUSTER_MGMT_POINT_RESTYPEAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_DetermineCNOResTypeFromCluster == "on"]
+public unsafe func Windows_DetermineCNOResTypeFromCluster(hCluster: HCLUSTER, pCNOResType: CPointer<CLUSTER_MGMT_POINT_RESTYPEAbi>): UInt32 {
+    return DetermineCNOResTypeFromCluster(hCluster, pCNOResType)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_DetermineCNOResTypeFromNodelist == "on"]
+foreign {
     func DetermineCNOResTypeFromNodelist(cNodes: UInt32, ppszNodeNames: CPointer<CPointer<UInt16>>, pCNOResType: CPointer<CLUSTER_MGMT_POINT_RESTYPEAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_DetermineCNOResTypeFromNodelist == "on"]
+public unsafe func Windows_DetermineCNOResTypeFromNodelist(cNodes: UInt32, ppszNodeNames: CPointer<CPointer<UInt16>>, pCNOResType: CPointer<CLUSTER_MGMT_POINT_RESTYPEAbi>): UInt32 {
+    return DetermineCNOResTypeFromNodelist(cNodes, ppszNodeNames, pCNOResType)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_DetermineClusterCloudTypeFromCluster == "on"]
+foreign {
     func DetermineClusterCloudTypeFromCluster(hCluster: HCLUSTER, pCloudType: CPointer<CLUSTER_CLOUD_TYPEAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_DetermineClusterCloudTypeFromCluster == "on"]
+public unsafe func Windows_DetermineClusterCloudTypeFromCluster(hCluster: HCLUSTER, pCloudType: CPointer<CLUSTER_CLOUD_TYPEAbi>): UInt32 {
+    return DetermineClusterCloudTypeFromCluster(hCluster, pCloudType)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_DetermineClusterCloudTypeFromNodelist == "on"]
+foreign {
     func DetermineClusterCloudTypeFromNodelist(cNodes: UInt32, ppszNodeNames: CPointer<CPointer<UInt16>>, pCloudType: CPointer<CLUSTER_CLOUD_TYPEAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_DetermineClusterCloudTypeFromNodelist == "on"]
+public unsafe func Windows_DetermineClusterCloudTypeFromNodelist(cNodes: UInt32, ppszNodeNames: CPointer<CPointer<UInt16>>, pCloudType: CPointer<CLUSTER_CLOUD_TYPEAbi>): UInt32 {
+    return DetermineClusterCloudTypeFromNodelist(cNodes, ppszNodeNames, pCloudType)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_EvictClusterNode == "on"]
+foreign {
     func EvictClusterNode(hNode: HNODE): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_EvictClusterNode == "on"]
+public unsafe func Windows_EvictClusterNode(hNode: HNODE): UInt32 {
+    return EvictClusterNode(hNode)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_EvictClusterNodeEx == "on"]
+foreign {
     func EvictClusterNodeEx(hNode: HNODE, dwTimeOut: UInt32, phrCleanupStatus: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_EvictClusterNodeEx == "on"]
+public unsafe func Windows_EvictClusterNodeEx(hNode: HNODE, dwTimeOut: UInt32, phrCleanupStatus: CPointer<Int32>): UInt32 {
+    return EvictClusterNodeEx(hNode, dwTimeOut, phrCleanupStatus)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_EvictClusterNodeEx2 == "on"]
+foreign {
     // param-hint: lpszReason optional
     func EvictClusterNodeEx2(hNode: HNODE, dwTimeout: UInt32, phrCleanupStatus: CPointer<Int32>, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_EvictClusterNodeEx2 == "on"]
+public unsafe func Windows_EvictClusterNodeEx2(hNode: HNODE, dwTimeout: UInt32, phrCleanupStatus: CPointer<Int32>, lpszReason: CPointer<UInt16>): UInt32 {
+    return EvictClusterNodeEx2(hNode, dwTimeout, phrCleanupStatus, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_FailClusterResource == "on"]
+foreign {
     func FailClusterResource(hResource: HRESOURCE): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_FailClusterResource == "on"]
+public unsafe func Windows_FailClusterResource(hResource: HRESOURCE): UInt32 {
+    return FailClusterResource(hResource)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_FailClusterResourceEx == "on"]
+foreign {
     // param-hint: lpszReason optional
     func FailClusterResourceEx(hResource: HRESOURCE, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_FailClusterResourceEx == "on"]
+public unsafe func Windows_FailClusterResourceEx(hResource: HRESOURCE, lpszReason: CPointer<UInt16>): UInt32 {
+    return FailClusterResourceEx(hResource, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterFromGroup == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetClusterFromGroup(hGroup: HGROUP): HCLUSTER
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterFromGroup == "on"]
+public unsafe func Windows_GetClusterFromGroup(hGroup: HGROUP): HCLUSTER {
+    return GetClusterFromGroup(hGroup)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterFromNetInterface == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetClusterFromNetInterface(hNetInterface: HNETINTERFACE): HCLUSTER
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterFromNetInterface == "on"]
+public unsafe func Windows_GetClusterFromNetInterface(hNetInterface: HNETINTERFACE): HCLUSTER {
+    return GetClusterFromNetInterface(hNetInterface)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterFromNetwork == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetClusterFromNetwork(hNetwork: HNETWORK): HCLUSTER
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterFromNetwork == "on"]
+public unsafe func Windows_GetClusterFromNetwork(hNetwork: HNETWORK): HCLUSTER {
+    return GetClusterFromNetwork(hNetwork)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterFromNode == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetClusterFromNode(hNode: HNODE): HCLUSTER
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterFromNode == "on"]
+public unsafe func Windows_GetClusterFromNode(hNode: HNODE): HCLUSTER {
+    return GetClusterFromNode(hNode)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterFromResource == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetClusterFromResource(hResource: HRESOURCE): HCLUSTER
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterFromResource == "on"]
+public unsafe func Windows_GetClusterFromResource(hResource: HRESOURCE): HCLUSTER {
+    return GetClusterFromResource(hResource)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterGroupKey == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func GetClusterGroupKey(hGroup: HGROUP, samDesired: UInt32): Win32_System_Registry.HKEY
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterGroupKey == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_GetClusterGroupKey(hGroup: HGROUP, samDesired: UInt32): Win32_System_Registry.HKEY {
+    return GetClusterGroupKey(hGroup, samDesired)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterGroupState == "on"]
+foreign {
     // param-hint: lpszNodeName len=param[2] optional
     // param-hint: lpcchNodeName optional
     // pinvoke-hint: SetLastError
     func GetClusterGroupState(hGroup: HGROUP, lpszNodeName: CPointer<UInt16>, lpcchNodeName: CPointer<UInt32>): CLUSTER_GROUP_STATEAbi
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterGroupState == "on"]
+public unsafe func Windows_GetClusterGroupState(hGroup: HGROUP, lpszNodeName: CPointer<UInt16>, lpcchNodeName: CPointer<UInt32>): CLUSTER_GROUP_STATEAbi {
+    return GetClusterGroupState(hGroup, lpszNodeName, lpcchNodeName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterInformation == "on"]
+foreign {
     // param-hint: lpszClusterName len=param[2]
     // param-hint: lpClusterInfo optional
     func GetClusterInformation(hCluster: HCLUSTER, lpszClusterName: CPointer<UInt16>, lpcchClusterName: CPointer<UInt32>, lpClusterInfo: CPointer<CLUSTERVERSIONINFOAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterInformation == "on"]
+public unsafe func Windows_GetClusterInformation(hCluster: HCLUSTER, lpszClusterName: CPointer<UInt16>, lpcchClusterName: CPointer<UInt32>, lpClusterInfo: CPointer<CLUSTERVERSIONINFOAbi>): UInt32 {
+    return GetClusterInformation(hCluster, lpszClusterName, lpcchClusterName, lpClusterInfo)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterKey == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func GetClusterKey(hCluster: HCLUSTER, samDesired: UInt32): Win32_System_Registry.HKEY
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterKey == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_GetClusterKey(hCluster: HCLUSTER, samDesired: UInt32): Win32_System_Registry.HKEY {
+    return GetClusterKey(hCluster, samDesired)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterNetInterface == "on"]
+foreign {
     // param-hint: lpszInterfaceName len=param[4]
     func GetClusterNetInterface(hCluster: HCLUSTER, lpszNodeName: CPointer<UInt16>, lpszNetworkName: CPointer<UInt16>, lpszInterfaceName: CPointer<UInt16>, lpcchInterfaceName: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterNetInterface == "on"]
+public unsafe func Windows_GetClusterNetInterface(hCluster: HCLUSTER, lpszNodeName: CPointer<UInt16>, lpszNetworkName: CPointer<UInt16>, lpszInterfaceName: CPointer<UInt16>, lpcchInterfaceName: CPointer<UInt32>): UInt32 {
+    return GetClusterNetInterface(hCluster, lpszNodeName, lpszNetworkName, lpszInterfaceName, lpcchInterfaceName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterNetInterfaceKey == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func GetClusterNetInterfaceKey(hNetInterface: HNETINTERFACE, samDesired: UInt32): Win32_System_Registry.HKEY
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterNetInterfaceKey == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_GetClusterNetInterfaceKey(hNetInterface: HNETINTERFACE, samDesired: UInt32): Win32_System_Registry.HKEY {
+    return GetClusterNetInterfaceKey(hNetInterface, samDesired)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterNetInterfaceState == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetClusterNetInterfaceState(hNetInterface: HNETINTERFACE): CLUSTER_NETINTERFACE_STATEAbi
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterNetInterfaceState == "on"]
+public unsafe func Windows_GetClusterNetInterfaceState(hNetInterface: HNETINTERFACE): CLUSTER_NETINTERFACE_STATEAbi {
+    return GetClusterNetInterfaceState(hNetInterface)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterNetworkId == "on"]
+foreign {
     // param-hint: lpszNetworkId len=param[2]
     func GetClusterNetworkId(hNetwork: HNETWORK, lpszNetworkId: CPointer<UInt16>, lpcchName: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterNetworkId == "on"]
+public unsafe func Windows_GetClusterNetworkId(hNetwork: HNETWORK, lpszNetworkId: CPointer<UInt16>, lpcchName: CPointer<UInt32>): UInt32 {
+    return GetClusterNetworkId(hNetwork, lpszNetworkId, lpcchName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterNetworkKey == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func GetClusterNetworkKey(hNetwork: HNETWORK, samDesired: UInt32): Win32_System_Registry.HKEY
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterNetworkKey == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_GetClusterNetworkKey(hNetwork: HNETWORK, samDesired: UInt32): Win32_System_Registry.HKEY {
+    return GetClusterNetworkKey(hNetwork, samDesired)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterNetworkState == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetClusterNetworkState(hNetwork: HNETWORK): CLUSTER_NETWORK_STATEAbi
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterNetworkState == "on"]
+public unsafe func Windows_GetClusterNetworkState(hNetwork: HNETWORK): CLUSTER_NETWORK_STATEAbi {
+    return GetClusterNetworkState(hNetwork)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterNodeId == "on"]
+foreign {
     // param-hint: hNode optional
     // param-hint: lpszNodeId len=param[2]
     func GetClusterNodeId(hNode: HNODE, lpszNodeId: CPointer<UInt16>, lpcchName: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterNodeId == "on"]
+public unsafe func Windows_GetClusterNodeId(hNode: HNODE, lpszNodeId: CPointer<UInt16>, lpcchName: CPointer<UInt32>): UInt32 {
+    return GetClusterNodeId(hNode, lpszNodeId, lpcchName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterNodeKey == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func GetClusterNodeKey(hNode: HNODE, samDesired: UInt32): Win32_System_Registry.HKEY
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterNodeKey == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_GetClusterNodeKey(hNode: HNODE, samDesired: UInt32): Win32_System_Registry.HKEY {
+    return GetClusterNodeKey(hNode, samDesired)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterNodeState == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetClusterNodeState(hNode: HNODE): CLUSTER_NODE_STATEAbi
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterNodeState == "on"]
+public unsafe func Windows_GetClusterNodeState(hNode: HNODE): CLUSTER_NODE_STATEAbi {
+    return GetClusterNodeState(hNode)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterNotify == "on"]
+foreign {
     // param-hint: lpszName len=param[4]
     func GetClusterNotify(hChange: HCHANGE, lpdwNotifyKey: CPointer<UIntNative>, lpdwFilterType: CPointer<UInt32>, lpszName: CPointer<UInt16>, lpcchName: CPointer<UInt32>, dwMilliseconds: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterNotify == "on"]
+public unsafe func Windows_GetClusterNotify(hChange: HCHANGE, lpdwNotifyKey: CPointer<UIntNative>, lpdwFilterType: CPointer<UInt32>, lpszName: CPointer<UInt16>, lpcchName: CPointer<UInt32>, dwMilliseconds: UInt32): UInt32 {
+    return GetClusterNotify(hChange, lpdwNotifyKey, lpdwFilterType, lpszName, lpcchName, dwMilliseconds)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterNotifyV2 == "on"]
+foreign {
     // param-hint: pFilterAndType optional
     // param-hint: buffer bytes=param[4] optional
     // param-hint: lpbBufferSize optional
@@ -19066,449 +20868,2273 @@ foreign {
     // param-hint: lpcchType optional
     // param-hint: dwMilliseconds optional
     func GetClusterNotifyV2(hChange: HCHANGE, lpdwNotifyKey: CPointer<UIntNative>, pFilterAndType: CPointer<NOTIFY_FILTER_AND_TYPEAbi>, buffer: CPointer<UInt8>, lpbBufferSize: CPointer<UInt32>, lpszObjectId: CPointer<UInt16>, lpcchObjectId: CPointer<UInt32>, lpszParentId: CPointer<UInt16>, lpcchParentId: CPointer<UInt32>, lpszName: CPointer<UInt16>, lpcchName: CPointer<UInt32>, lpszType: CPointer<UInt16>, lpcchType: CPointer<UInt32>, dwMilliseconds: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterNotifyV2 == "on"]
+public unsafe func Windows_GetClusterNotifyV2(hChange: HCHANGE, lpdwNotifyKey: CPointer<UIntNative>, pFilterAndType: CPointer<NOTIFY_FILTER_AND_TYPEAbi>, buffer: CPointer<UInt8>, lpbBufferSize: CPointer<UInt32>, lpszObjectId: CPointer<UInt16>, lpcchObjectId: CPointer<UInt32>, lpszParentId: CPointer<UInt16>, lpcchParentId: CPointer<UInt32>, lpszName: CPointer<UInt16>, lpcchName: CPointer<UInt32>, lpszType: CPointer<UInt16>, lpcchType: CPointer<UInt32>, dwMilliseconds: UInt32): UInt32 {
+    return GetClusterNotifyV2(hChange, lpdwNotifyKey, pFilterAndType, buffer, lpbBufferSize, lpszObjectId, lpcchObjectId, lpszParentId, lpcchParentId, lpszName, lpcchName, lpszType, lpcchType, dwMilliseconds)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterQuorumResource == "on"]
+foreign {
     // param-hint: lpszResourceName len=param[2]
     // param-hint: lpszDeviceName len=param[4]
     func GetClusterQuorumResource(hCluster: HCLUSTER, lpszResourceName: CPointer<UInt16>, lpcchResourceName: CPointer<UInt32>, lpszDeviceName: CPointer<UInt16>, lpcchDeviceName: CPointer<UInt32>, lpdwMaxQuorumLogSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterQuorumResource == "on"]
+public unsafe func Windows_GetClusterQuorumResource(hCluster: HCLUSTER, lpszResourceName: CPointer<UInt16>, lpcchResourceName: CPointer<UInt32>, lpszDeviceName: CPointer<UInt16>, lpcchDeviceName: CPointer<UInt32>, lpdwMaxQuorumLogSize: CPointer<UInt32>): UInt32 {
+    return GetClusterQuorumResource(hCluster, lpszResourceName, lpcchResourceName, lpszDeviceName, lpcchDeviceName, lpdwMaxQuorumLogSize)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterResourceDependencyExpression == "on"]
+foreign {
     // param-hint: lpszDependencyExpression len=param[2] optional
     func GetClusterResourceDependencyExpression(hResource: HRESOURCE, lpszDependencyExpression: CPointer<UInt16>, lpcchDependencyExpression: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterResourceDependencyExpression == "on"]
+public unsafe func Windows_GetClusterResourceDependencyExpression(hResource: HRESOURCE, lpszDependencyExpression: CPointer<UInt16>, lpcchDependencyExpression: CPointer<UInt32>): UInt32 {
+    return GetClusterResourceDependencyExpression(hResource, lpszDependencyExpression, lpcchDependencyExpression)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterResourceKey == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func GetClusterResourceKey(hResource: HRESOURCE, samDesired: UInt32): Win32_System_Registry.HKEY
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterResourceKey == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_GetClusterResourceKey(hResource: HRESOURCE, samDesired: UInt32): Win32_System_Registry.HKEY {
+    return GetClusterResourceKey(hResource, samDesired)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterResourceNetworkName == "on"]
+foreign {
     // param-hint: lpBuffer len=param[2]
     // pinvoke-hint: SetLastError
     func GetClusterResourceNetworkName(hResource: HRESOURCE, lpBuffer: CPointer<UInt16>, nSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterResourceNetworkName == "on"]
+public unsafe func Windows_GetClusterResourceNetworkName(hResource: HRESOURCE, lpBuffer: CPointer<UInt16>, nSize: CPointer<UInt32>): Int32 {
+    return GetClusterResourceNetworkName(hResource, lpBuffer, nSize)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterResourceState == "on"]
+foreign {
     // param-hint: lpszNodeName len=param[2] optional
     // param-hint: lpcchNodeName optional
     // param-hint: lpszGroupName len=param[4] optional
     // param-hint: lpcchGroupName optional
     // pinvoke-hint: SetLastError
     func GetClusterResourceState(hResource: HRESOURCE, lpszNodeName: CPointer<UInt16>, lpcchNodeName: CPointer<UInt32>, lpszGroupName: CPointer<UInt16>, lpcchGroupName: CPointer<UInt32>): CLUSTER_RESOURCE_STATEAbi
-    func GetNodeCloudTypeDW(ppszNodeName: CPointer<UInt16>, NodeCloudType: CPointer<UInt32>): UInt32
-    // param-hint: lpszNodeName optional
-    func GetNodeClusterState(lpszNodeName: CPointer<UInt16>, pdwClusterState: CPointer<UInt32>): UInt32
-    func GetNotifyEventHandle(hChange: HCHANGE, lphTargetEvent: CPointer<CPointer<Unit>>): UInt32
-    func IsFileOnClusterSharedVolume(lpszPathName: CPointer<UInt16>, pbFileIsOnSharedVolume: CPointer<Int32>): UInt32
-    // param-hint: hDestinationNode optional
-    func MoveClusterGroup(hGroup: HGROUP, hDestinationNode: HNODE): UInt32
-    // param-hint: hDestinationNode optional
-    // param-hint: lpInBuffer bytes=param[4] optional
-    func MoveClusterGroupEx(hGroup: HGROUP, hDestinationNode: HNODE, dwMoveFlags: UInt32, lpInBuffer: CPointer<UInt8>, cbInBufferSize: UInt32): UInt32
-    // param-hint: hDestinationNode optional
-    // param-hint: lpInBuffer bytes=param[4] optional
-    // param-hint: lpszReason optional
-    func MoveClusterGroupEx2(hGroup: HGROUP, hDestinationNode: HNODE, dwMoveFlags: UInt32, lpInBuffer: CPointer<UInt8>, cbInBufferSize: UInt32, lpszReason: CPointer<UInt16>): UInt32
-    func OfflineClusterGroup(hGroup: HGROUP): UInt32
-    // param-hint: lpInBuffer bytes=param[3] optional
-    func OfflineClusterGroupEx(hGroup: HGROUP, dwOfflineFlags: UInt32, lpInBuffer: CPointer<UInt8>, cbInBufferSize: UInt32): UInt32
-    // param-hint: lpInBuffer optional
-    // param-hint: lpszReason optional
-    func OfflineClusterGroupEx2(hGroup: HGROUP, dwOfflineFlags: UInt32, lpInBuffer: CPointer<UInt8>, cbInBufferSize: UInt32, lpszReason: CPointer<UInt16>): UInt32
-    func OfflineClusterResource(hResource: HRESOURCE): UInt32
-    // param-hint: lpInBuffer bytes=param[3] optional
-    func OfflineClusterResourceEx(hResource: HRESOURCE, dwOfflineFlags: UInt32, lpInBuffer: CPointer<UInt8>, cbInBufferSize: UInt32): UInt32
-    // param-hint: lpInBuffer bytes=param[3] optional
-    // param-hint: lpszReason optional
-    func OfflineClusterResourceEx2(hResource: HRESOURCE, dwOfflineFlags: UInt32, lpInBuffer: CPointer<UInt8>, cbInBufferSize: UInt32, lpszReason: CPointer<UInt16>): UInt32
-    // param-hint: hDestinationNode optional
-    func OnlineClusterGroup(hGroup: HGROUP, hDestinationNode: HNODE): UInt32
-    // param-hint: hDestinationNode optional
-    // param-hint: lpInBuffer bytes=param[4] optional
-    func OnlineClusterGroupEx(hGroup: HGROUP, hDestinationNode: HNODE, dwOnlineFlags: UInt32, lpInBuffer: CPointer<UInt8>, cbInBufferSize: UInt32): UInt32
-    // param-hint: hDestinationNode optional
-    // param-hint: lpInBuffer bytes=param[4] optional
-    // param-hint: lpszReason optional
-    func OnlineClusterGroupEx2(hGroup: HGROUP, hDestinationNode: HNODE, dwOnlineFlags: UInt32, lpInBuffer: CPointer<UInt8>, cbInBufferSize: UInt32, lpszReason: CPointer<UInt16>): UInt32
-    func OnlineClusterResource(hResource: HRESOURCE): UInt32
-    // param-hint: lpInBuffer bytes=param[3] optional
-    func OnlineClusterResourceEx(hResource: HRESOURCE, dwOnlineFlags: UInt32, lpInBuffer: CPointer<UInt8>, cbInBufferSize: UInt32): UInt32
-    // param-hint: lpInBuffer bytes=param[3] optional
-    // param-hint: lpszReason optional
-    func OnlineClusterResourceEx2(hResource: HRESOURCE, dwOnlineFlags: UInt32, lpInBuffer: CPointer<UInt8>, cbInBufferSize: UInt32, lpszReason: CPointer<UInt16>): UInt32
-    // param-hint: lpszClusterName optional
-    // pinvoke-hint: SetLastError
-    func OpenCluster(lpszClusterName: CPointer<UInt16>): HCLUSTER
-    // param-hint: lpszClusterName optional
-    // param-hint: GrantedAccess optional
-    // pinvoke-hint: SetLastError
-    func OpenClusterEx(lpszClusterName: CPointer<UInt16>, DesiredAccess: UInt32, GrantedAccess: CPointer<UInt32>): HCLUSTER
-    // pinvoke-hint: SetLastError
-    func OpenClusterGroup(hCluster: HCLUSTER, lpszGroupName: CPointer<UInt16>): HGROUP
-    // param-hint: lpszGroupName optional
-    // param-hint: lpdwGrantedAccess optional
-    // pinvoke-hint: SetLastError
-    func OpenClusterGroupEx(hCluster: HCLUSTER, lpszGroupName: CPointer<UInt16>, dwDesiredAccess: UInt32, lpdwGrantedAccess: CPointer<UInt32>): HGROUP
-    // pinvoke-hint: SetLastError
-    func OpenClusterGroupSet(hCluster: HCLUSTER, lpszGroupSetName: CPointer<UInt16>): HGROUPSET
-    // pinvoke-hint: SetLastError
-    func OpenClusterNetInterface(hCluster: HCLUSTER, lpszInterfaceName: CPointer<UInt16>): HNETINTERFACE
-    // param-hint: lpszInterfaceName optional
-    // param-hint: lpdwGrantedAccess optional
-    // pinvoke-hint: SetLastError
-    func OpenClusterNetInterfaceEx(hCluster: HCLUSTER, lpszInterfaceName: CPointer<UInt16>, dwDesiredAccess: UInt32, lpdwGrantedAccess: CPointer<UInt32>): HNETINTERFACE
-    // pinvoke-hint: SetLastError
-    func OpenClusterNetwork(hCluster: HCLUSTER, lpszNetworkName: CPointer<UInt16>): HNETWORK
-    // param-hint: lpszNetworkName optional
-    // param-hint: lpdwGrantedAccess optional
-    // pinvoke-hint: SetLastError
-    func OpenClusterNetworkEx(hCluster: HCLUSTER, lpszNetworkName: CPointer<UInt16>, dwDesiredAccess: UInt32, lpdwGrantedAccess: CPointer<UInt32>): HNETWORK
-    // pinvoke-hint: SetLastError
-    func OpenClusterNode(hCluster: HCLUSTER, lpszNodeName: CPointer<UInt16>): HNODE
-    func OpenClusterNodeById(hCluster: HCLUSTER, nodeId: UInt32): HNODE
-    // param-hint: lpszNodeName optional
-    // param-hint: lpdwGrantedAccess optional
-    // pinvoke-hint: SetLastError
-    func OpenClusterNodeEx(hCluster: HCLUSTER, lpszNodeName: CPointer<UInt16>, dwDesiredAccess: UInt32, lpdwGrantedAccess: CPointer<UInt32>): HNODE
-    // pinvoke-hint: SetLastError
-    func OpenClusterResource(hCluster: HCLUSTER, lpszResourceName: CPointer<UInt16>): HRESOURCE
-    // param-hint: lpszResourceName optional
-    // param-hint: lpdwGrantedAccess optional
-    // pinvoke-hint: SetLastError
-    func OpenClusterResourceEx(hCluster: HCLUSTER, lpszResourceName: CPointer<UInt16>, dwDesiredAccess: UInt32, lpdwGrantedAccess: CPointer<UInt32>): HRESOURCE
-    func PauseClusterNode(hNode: HNODE): UInt32
-    // param-hint: hNodeDrainTarget optional
-    func PauseClusterNodeEx(hNode: HNODE, bDrainNode: Int32, dwPauseFlags: UInt32, hNodeDrainTarget: HNODE): UInt32
-    // param-hint: hNodeDrainTarget optional
-    // param-hint: lpszReason optional
-    func PauseClusterNodeEx2(hNode: HNODE, bDrainNode: Int32, dwPauseFlags: UInt32, hNodeDrainTarget: HNODE, lpszReason: CPointer<UInt16>): UInt32
-    func RegisterClusterNotify(hChange: HCHANGE, dwFilterType: UInt32, hObject: CPointer<Unit>, dwNotifyKey: UIntNative): UInt32
-    func RegisterClusterNotifyV2(hChange: HCHANGE, Filter: NOTIFY_FILTER_AND_TYPEAbi, hObject: CPointer<Unit>, dwNotifyKey: UIntNative): UInt32
-    func RegisterClusterResourceTypeNotifyV2(hChange: HCHANGE, hCluster: HCLUSTER, Flags: Int64, resTypeName: CPointer<UInt16>, dwNotifyKey: UIntNative): UInt32
-    func RemoveClusterGroupDependency(hGroup: HGROUP, hDependsOn: HGROUP): UInt32
-    // param-hint: lpszReason optional
-    func RemoveClusterGroupDependencyEx(hGroup: HGROUP, hDependsOn: HGROUP, lpszReason: CPointer<UInt16>): UInt32
-    func RemoveClusterGroupSetDependency(hGroupSet: HGROUPSET, hDependsOn: HGROUPSET): UInt32
-    // param-hint: lpszReason optional
-    func RemoveClusterGroupSetDependencyEx(hGroupSet: HGROUPSET, hDependsOn: HGROUPSET, lpszReason: CPointer<UInt16>): UInt32
-    func RemoveClusterGroupToGroupSetDependency(hGroup: HGROUP, hDependsOn: HGROUPSET): UInt32
-    // param-hint: lpszReason optional
-    func RemoveClusterGroupToGroupSetDependencyEx(hGroup: HGROUP, hDependsOn: HGROUPSET, lpszReason: CPointer<UInt16>): UInt32
-    func RemoveClusterNameAccount(hCluster: HCLUSTER, bDeleteComputerObjects: Int32): UInt32
-    func RemoveClusterResourceDependency(hResource: HRESOURCE, hDependsOn: HRESOURCE): UInt32
-    // param-hint: lpszReason optional
-    func RemoveClusterResourceDependencyEx(hResource: HRESOURCE, hDependsOn: HRESOURCE, lpszReason: CPointer<UInt16>): UInt32
-    func RemoveClusterResourceNode(hResource: HRESOURCE, hNode: HNODE): UInt32
-    // param-hint: lpszReason optional
-    func RemoveClusterResourceNodeEx(hResource: HRESOURCE, hNode: HNODE, lpszReason: CPointer<UInt16>): UInt32
-    func RemoveClusterStorageNode(hCluster: HCLUSTER, lpszClusterStorageEnclosureName: CPointer<UInt16>, dwTimeout: UInt32, dwFlags: UInt32): UInt32
-    func RemoveCrossClusterGroupSetDependency(hDependentGroupSet: HGROUPSET, lpRemoteClusterName: CPointer<UInt16>, lpRemoteGroupSetName: CPointer<UInt16>): UInt32
-    func RemoveResourceFromClusterSharedVolumes(hResource: HRESOURCE): UInt32
-    // param-hint: pfnProgressCallback optional
-    // param-hint: pvCallbackArg optional
-    func RepairClusterNameAccount(hCluster: HCLUSTER, pConfig: CPointer<REPAIR_CLUSTER_NAME_ACCOUNT_CONFIGAbi>, pfnProgressCallback: PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg: CPointer<Unit>): UInt32
-    func RestartClusterResource(hResource: HRESOURCE, dwFlags: UInt32): UInt32
-    // param-hint: lpszReason optional
-    func RestartClusterResourceEx(hResource: HRESOURCE, dwFlags: UInt32, lpszReason: CPointer<UInt16>): UInt32
-    // param-hint: lpszQuorumDriveLetter optional
-    func RestoreClusterDatabase(lpszPathName: CPointer<UInt16>, bForce: Int32, lpszQuorumDriveLetter: CPointer<UInt16>): UInt32
-    func ResumeClusterNode(hNode: HNODE): UInt32
-    func ResumeClusterNodeEx(hNode: HNODE, eResumeFailbackType: CLUSTER_NODE_RESUME_FAILBACK_TYPEAbi, dwResumeFlagsReserved: UInt32): UInt32
-    // param-hint: lpszReason optional
-    func ResumeClusterNodeEx2(hNode: HNODE, eResumeFailbackType: CLUSTER_NODE_RESUME_FAILBACK_TYPEAbi, dwResumeFlagsReserved: UInt32, lpszReason: CPointer<UInt16>): UInt32
-    func SetClusterGroupName(hGroup: HGROUP, lpszGroupName: CPointer<UInt16>): UInt32
-    // param-hint: lpszReason optional
-    func SetClusterGroupNameEx(hGroup: HGROUP, lpszGroupName: CPointer<UInt16>, lpszReason: CPointer<UInt16>): UInt32
-    // param-hint: NodeList len=param[1] optional
-    func SetClusterGroupNodeList(hGroup: HGROUP, NodeCount: UInt32, NodeList: CPointer<HNODE>): UInt32
-    // param-hint: NodeList len=param[1]
-    // param-hint: lpszReason optional
-    func SetClusterGroupNodeListEx(hGroup: HGROUP, NodeCount: UInt32, NodeList: CPointer<HNODE>, lpszReason: CPointer<UInt16>): UInt32
-    func SetClusterGroupSetDependencyExpression(hGroupSet: HGROUPSET, lpszDependencyExprssion: CPointer<UInt16>): UInt32
-    // param-hint: lpszReason optional
-    func SetClusterGroupSetDependencyExpressionEx(hGroupSet: HGROUPSET, lpszDependencyExpression: CPointer<UInt16>, lpszReason: CPointer<UInt16>): UInt32
-    func SetClusterName(hCluster: HCLUSTER, lpszNewClusterName: CPointer<UInt16>): UInt32
-    // param-hint: lpszReason optional
-    func SetClusterNameEx(hCluster: HCLUSTER, lpszNewClusterName: CPointer<UInt16>, lpszReason: CPointer<UInt16>): UInt32
-    func SetClusterNetworkName(hNetwork: HNETWORK, lpszName: CPointer<UInt16>): UInt32
-    // param-hint: lpszReason optional
-    func SetClusterNetworkNameEx(hNetwork: HNETWORK, lpszName: CPointer<UInt16>, lpszReason: CPointer<UInt16>): UInt32
-    // param-hint: NetworkList len=param[1]
-    func SetClusterNetworkPriorityOrder(hCluster: HCLUSTER, NetworkCount: UInt32, NetworkList: CPointer<HNETWORK>): UInt32
-    // param-hint: lpszDeviceName optional
-    func SetClusterQuorumResource(hResource: HRESOURCE, lpszDeviceName: CPointer<UInt16>, dwMaxQuoLogSize: UInt32): UInt32
-    // param-hint: lpszDeviceName optional
-    // param-hint: lpszReason optional
-    func SetClusterQuorumResourceEx(hResource: HRESOURCE, lpszDeviceName: CPointer<UInt16>, dwMaxQuorumLogSize: UInt32, lpszReason: CPointer<UInt16>): UInt32
-    func SetClusterResourceDependencyExpression(hResource: HRESOURCE, lpszDependencyExpression: CPointer<UInt16>): UInt32
-    func SetClusterResourceName(hResource: HRESOURCE, lpszResourceName: CPointer<UInt16>): UInt32
-    // param-hint: lpszReason optional
-    func SetClusterResourceNameEx(hResource: HRESOURCE, lpszResourceName: CPointer<UInt16>, lpszReason: CPointer<UInt16>): UInt32
-    // param-hint: lpReturnStatusBuffer bytes=param[4] optional
-    func SetClusterServiceAccountPassword(lpszClusterName: CPointer<UInt16>, lpszNewPassword: CPointer<UInt16>, dwFlags: UInt32, lpReturnStatusBuffer: CPointer<CLUSTER_SET_PASSWORD_STATUSAbi>, lpcbReturnStatusBufferSize: CPointer<UInt32>): UInt32
-    func SetGroupDependencyExpression(hGroup: HGROUP, lpszDependencyExpression: CPointer<UInt16>): UInt32
-    // param-hint: lpszReason optional
-    func SetGroupDependencyExpressionEx(hGroup: HGROUP, lpszDependencyExpression: CPointer<UInt16>, lpszReason: CPointer<UInt16>): UInt32
 }
 
-@When[CLUSAPI == "on" && (Windows_Win32_Security == "on" && Windows_Win32_System_Registry == "on")]
-foreign {
-    // param-hint: lpSecurityAttributes optional
-    // param-hint: lpdwDisposition optional
-    func ClusterRegCreateKey(hKey: Win32_System_Registry.HKEY, lpszSubKey: CPointer<UInt16>, dwOptions: UInt32, samDesired: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, phkResult: CPointer<Win32_System_Registry.HKEY>, lpdwDisposition: CPointer<UInt32>): Int32
-    // param-hint: lpSecurityAttributes optional
-    // param-hint: lpdwDisposition optional
-    // param-hint: lpszReason optional
-    func ClusterRegCreateKeyEx(hKey: Win32_System_Registry.HKEY, lpSubKey: CPointer<UInt16>, dwOptions: UInt32, samDesired: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, phkResult: CPointer<Win32_System_Registry.HKEY>, lpdwDisposition: CPointer<UInt32>, lpszReason: CPointer<UInt16>): Int32
-    // param-hint: pSecurityDescriptor bytes=param[3]
-    func ClusterRegGetKeySecurity(hKey: Win32_System_Registry.HKEY, RequestedInformation: UInt32, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, lpcbSecurityDescriptor: CPointer<UInt32>): Int32
-    func ClusterRegSetKeySecurity(hKey: Win32_System_Registry.HKEY, SecurityInformation: UInt32, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): Int32
-    // param-hint: lpszReason optional
-    func ClusterRegSetKeySecurityEx(hKey: Win32_System_Registry.HKEY, SecurityInformation: Win32_Security.OBJECT_SECURITY_INFORMATIONAbi, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, lpszReason: CPointer<UInt16>): Int32
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterResourceState == "on"]
+public unsafe func Windows_GetClusterResourceState(hResource: HRESOURCE, lpszNodeName: CPointer<UInt16>, lpcchNodeName: CPointer<UInt32>, lpszGroupName: CPointer<UInt16>, lpcchGroupName: CPointer<UInt32>): CLUSTER_RESOURCE_STATEAbi {
+    return GetClusterResourceState(hResource, lpszNodeName, lpcchNodeName, lpszGroupName, lpcchGroupName)
 }
 
-@When[CLUSAPI == "on" && Windows_Win32_System_Registry == "on"]
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterResourceTypeKey == "on" && Windows_Win32_System_Registry == "on"]
 foreign {
-    func ClusterRegCloseKey(hKey: Win32_System_Registry.HKEY): Int32
-    // param-hint: hKey optional
-    func ClusterRegCreateBatch(hKey: Win32_System_Registry.HKEY, pHREGBATCH: CPointer<HREGBATCH>): Int32
-    func ClusterRegCreateBatchNotifyPort(hKey: Win32_System_Registry.HKEY, phBatchNotifyPort: CPointer<HREGBATCHPORT>): Int32
-    func ClusterRegCreateReadBatch(hKey: Win32_System_Registry.HKEY, phRegReadBatch: CPointer<HREGREADBATCH>): Int32
-    func ClusterRegDeleteKey(hKey: Win32_System_Registry.HKEY, lpszSubKey: CPointer<UInt16>): Int32
-    // param-hint: lpszReason optional
-    func ClusterRegDeleteKeyEx(hKey: Win32_System_Registry.HKEY, lpSubKey: CPointer<UInt16>, lpszReason: CPointer<UInt16>): Int32
-    func ClusterRegDeleteValue(hKey: Win32_System_Registry.HKEY, lpszValueName: CPointer<UInt16>): UInt32
-    // param-hint: lpszReason optional
-    func ClusterRegDeleteValueEx(hKey: Win32_System_Registry.HKEY, lpszValueName: CPointer<UInt16>, lpszReason: CPointer<UInt16>): UInt32
-    // param-hint: lpszName len=param[3]
-    // param-hint: lpftLastWriteTime optional
-    func ClusterRegEnumKey(hKey: Win32_System_Registry.HKEY, dwIndex: UInt32, lpszName: CPointer<UInt16>, lpcchName: CPointer<UInt32>, lpftLastWriteTime: CPointer<Win32_Foundation.FILETIMEAbi>): Int32
-    // param-hint: lpszValueName len=param[3]
-    // param-hint: lpdwType optional
-    // param-hint: lpData bytes=param[6] optional
-    // param-hint: lpcbData optional
-    func ClusterRegEnumValue(hKey: Win32_System_Registry.HKEY, dwIndex: UInt32, lpszValueName: CPointer<UInt16>, lpcchValueName: CPointer<UInt32>, lpdwType: CPointer<UInt32>, lpData: CPointer<UInt8>, lpcbData: CPointer<UInt32>): UInt32
-    func ClusterRegOpenKey(hKey: Win32_System_Registry.HKEY, lpszSubKey: CPointer<UInt16>, samDesired: UInt32, phkResult: CPointer<Win32_System_Registry.HKEY>): Int32
-    func ClusterRegQueryInfoKey(hKey: Win32_System_Registry.HKEY, lpcSubKeys: CPointer<UInt32>, lpcchMaxSubKeyLen: CPointer<UInt32>, lpcValues: CPointer<UInt32>, lpcchMaxValueNameLen: CPointer<UInt32>, lpcbMaxValueLen: CPointer<UInt32>, lpcbSecurityDescriptor: CPointer<UInt32>, lpftLastWriteTime: CPointer<Win32_Foundation.FILETIMEAbi>): Int32
-    // param-hint: lpdwValueType optional
-    // param-hint: lpData bytes=param[4] optional
-    // param-hint: lpcbData optional
-    func ClusterRegQueryValue(hKey: Win32_System_Registry.HKEY, lpszValueName: CPointer<UInt16>, lpdwValueType: CPointer<UInt32>, lpData: CPointer<UInt8>, lpcbData: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func ClusterRegSetValue(hKey: Win32_System_Registry.HKEY, lpszValueName: CPointer<UInt16>, dwType: UInt32, lpData: CPointer<UInt8>, cbData: UInt32): UInt32
-    // param-hint: lpszReason optional
-    func ClusterRegSetValueEx(hKey: Win32_System_Registry.HKEY, lpszValueName: CPointer<UInt16>, dwType: UInt32, lpData: CPointer<UInt8>, cbData: UInt32, lpszReason: CPointer<UInt16>): UInt32
-    // pinvoke-hint: SetLastError
-    func GetClusterGroupKey(hGroup: HGROUP, samDesired: UInt32): Win32_System_Registry.HKEY
-    // pinvoke-hint: SetLastError
-    func GetClusterKey(hCluster: HCLUSTER, samDesired: UInt32): Win32_System_Registry.HKEY
-    // pinvoke-hint: SetLastError
-    func GetClusterNetInterfaceKey(hNetInterface: HNETINTERFACE, samDesired: UInt32): Win32_System_Registry.HKEY
-    // pinvoke-hint: SetLastError
-    func GetClusterNetworkKey(hNetwork: HNETWORK, samDesired: UInt32): Win32_System_Registry.HKEY
-    // pinvoke-hint: SetLastError
-    func GetClusterNodeKey(hNode: HNODE, samDesired: UInt32): Win32_System_Registry.HKEY
-    // pinvoke-hint: SetLastError
-    func GetClusterResourceKey(hResource: HRESOURCE, samDesired: UInt32): Win32_System_Registry.HKEY
     // pinvoke-hint: SetLastError
     func GetClusterResourceTypeKey(hCluster: HCLUSTER, lpszTypeName: CPointer<UInt16>, samDesired: UInt32): Win32_System_Registry.HKEY
 }
 
-@When[NTLANMAN == "on"]
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetClusterResourceTypeKey == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_GetClusterResourceTypeKey(hCluster: HCLUSTER, lpszTypeName: CPointer<UInt16>, samDesired: UInt32): Win32_System_Registry.HKEY {
+    return GetClusterResourceTypeKey(hCluster, lpszTypeName, samDesired)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetNodeCloudTypeDW == "on"]
+foreign {
+    func GetNodeCloudTypeDW(ppszNodeName: CPointer<UInt16>, NodeCloudType: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetNodeCloudTypeDW == "on"]
+public unsafe func Windows_GetNodeCloudTypeDW(ppszNodeName: CPointer<UInt16>, NodeCloudType: CPointer<UInt32>): UInt32 {
+    return GetNodeCloudTypeDW(ppszNodeName, NodeCloudType)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetNodeClusterState == "on"]
+foreign {
+    // param-hint: lpszNodeName optional
+    func GetNodeClusterState(lpszNodeName: CPointer<UInt16>, pdwClusterState: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetNodeClusterState == "on"]
+public unsafe func Windows_GetNodeClusterState(lpszNodeName: CPointer<UInt16>, pdwClusterState: CPointer<UInt32>): UInt32 {
+    return GetNodeClusterState(lpszNodeName, pdwClusterState)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetNotifyEventHandle == "on"]
+foreign {
+    func GetNotifyEventHandle(hChange: HCHANGE, lphTargetEvent: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_GetNotifyEventHandle == "on"]
+public unsafe func Windows_GetNotifyEventHandle(hChange: HCHANGE, lphTargetEvent: CPointer<CPointer<Unit>>): UInt32 {
+    return GetNotifyEventHandle(hChange, lphTargetEvent)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_IsFileOnClusterSharedVolume == "on"]
+foreign {
+    func IsFileOnClusterSharedVolume(lpszPathName: CPointer<UInt16>, pbFileIsOnSharedVolume: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_IsFileOnClusterSharedVolume == "on"]
+public unsafe func Windows_IsFileOnClusterSharedVolume(lpszPathName: CPointer<UInt16>, pbFileIsOnSharedVolume: CPointer<Int32>): UInt32 {
+    return IsFileOnClusterSharedVolume(lpszPathName, pbFileIsOnSharedVolume)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_MoveClusterGroup == "on"]
+foreign {
+    // param-hint: hDestinationNode optional
+    func MoveClusterGroup(hGroup: HGROUP, hDestinationNode: HNODE): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_MoveClusterGroup == "on"]
+public unsafe func Windows_MoveClusterGroup(hGroup: HGROUP, hDestinationNode: HNODE): UInt32 {
+    return MoveClusterGroup(hGroup, hDestinationNode)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_MoveClusterGroupEx == "on"]
+foreign {
+    // param-hint: hDestinationNode optional
+    // param-hint: lpInBuffer bytes=param[4] optional
+    func MoveClusterGroupEx(hGroup: HGROUP, hDestinationNode: HNODE, dwMoveFlags: UInt32, lpInBuffer: CPointer<UInt8>, cbInBufferSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_MoveClusterGroupEx == "on"]
+public unsafe func Windows_MoveClusterGroupEx(hGroup: HGROUP, hDestinationNode: HNODE, dwMoveFlags: UInt32, lpInBuffer: CPointer<UInt8>, cbInBufferSize: UInt32): UInt32 {
+    return MoveClusterGroupEx(hGroup, hDestinationNode, dwMoveFlags, lpInBuffer, cbInBufferSize)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_MoveClusterGroupEx2 == "on"]
+foreign {
+    // param-hint: hDestinationNode optional
+    // param-hint: lpInBuffer bytes=param[4] optional
+    // param-hint: lpszReason optional
+    func MoveClusterGroupEx2(hGroup: HGROUP, hDestinationNode: HNODE, dwMoveFlags: UInt32, lpInBuffer: CPointer<UInt8>, cbInBufferSize: UInt32, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_MoveClusterGroupEx2 == "on"]
+public unsafe func Windows_MoveClusterGroupEx2(hGroup: HGROUP, hDestinationNode: HNODE, dwMoveFlags: UInt32, lpInBuffer: CPointer<UInt8>, cbInBufferSize: UInt32, lpszReason: CPointer<UInt16>): UInt32 {
+    return MoveClusterGroupEx2(hGroup, hDestinationNode, dwMoveFlags, lpInBuffer, cbInBufferSize, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OfflineClusterGroup == "on"]
+foreign {
+    func OfflineClusterGroup(hGroup: HGROUP): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OfflineClusterGroup == "on"]
+public unsafe func Windows_OfflineClusterGroup(hGroup: HGROUP): UInt32 {
+    return OfflineClusterGroup(hGroup)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OfflineClusterGroupEx == "on"]
+foreign {
+    // param-hint: lpInBuffer bytes=param[3] optional
+    func OfflineClusterGroupEx(hGroup: HGROUP, dwOfflineFlags: UInt32, lpInBuffer: CPointer<UInt8>, cbInBufferSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OfflineClusterGroupEx == "on"]
+public unsafe func Windows_OfflineClusterGroupEx(hGroup: HGROUP, dwOfflineFlags: UInt32, lpInBuffer: CPointer<UInt8>, cbInBufferSize: UInt32): UInt32 {
+    return OfflineClusterGroupEx(hGroup, dwOfflineFlags, lpInBuffer, cbInBufferSize)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OfflineClusterGroupEx2 == "on"]
+foreign {
+    // param-hint: lpInBuffer optional
+    // param-hint: lpszReason optional
+    func OfflineClusterGroupEx2(hGroup: HGROUP, dwOfflineFlags: UInt32, lpInBuffer: CPointer<UInt8>, cbInBufferSize: UInt32, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OfflineClusterGroupEx2 == "on"]
+public unsafe func Windows_OfflineClusterGroupEx2(hGroup: HGROUP, dwOfflineFlags: UInt32, lpInBuffer: CPointer<UInt8>, cbInBufferSize: UInt32, lpszReason: CPointer<UInt16>): UInt32 {
+    return OfflineClusterGroupEx2(hGroup, dwOfflineFlags, lpInBuffer, cbInBufferSize, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OfflineClusterResource == "on"]
+foreign {
+    func OfflineClusterResource(hResource: HRESOURCE): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OfflineClusterResource == "on"]
+public unsafe func Windows_OfflineClusterResource(hResource: HRESOURCE): UInt32 {
+    return OfflineClusterResource(hResource)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OfflineClusterResourceEx == "on"]
+foreign {
+    // param-hint: lpInBuffer bytes=param[3] optional
+    func OfflineClusterResourceEx(hResource: HRESOURCE, dwOfflineFlags: UInt32, lpInBuffer: CPointer<UInt8>, cbInBufferSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OfflineClusterResourceEx == "on"]
+public unsafe func Windows_OfflineClusterResourceEx(hResource: HRESOURCE, dwOfflineFlags: UInt32, lpInBuffer: CPointer<UInt8>, cbInBufferSize: UInt32): UInt32 {
+    return OfflineClusterResourceEx(hResource, dwOfflineFlags, lpInBuffer, cbInBufferSize)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OfflineClusterResourceEx2 == "on"]
+foreign {
+    // param-hint: lpInBuffer bytes=param[3] optional
+    // param-hint: lpszReason optional
+    func OfflineClusterResourceEx2(hResource: HRESOURCE, dwOfflineFlags: UInt32, lpInBuffer: CPointer<UInt8>, cbInBufferSize: UInt32, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OfflineClusterResourceEx2 == "on"]
+public unsafe func Windows_OfflineClusterResourceEx2(hResource: HRESOURCE, dwOfflineFlags: UInt32, lpInBuffer: CPointer<UInt8>, cbInBufferSize: UInt32, lpszReason: CPointer<UInt16>): UInt32 {
+    return OfflineClusterResourceEx2(hResource, dwOfflineFlags, lpInBuffer, cbInBufferSize, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OnlineClusterGroup == "on"]
+foreign {
+    // param-hint: hDestinationNode optional
+    func OnlineClusterGroup(hGroup: HGROUP, hDestinationNode: HNODE): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OnlineClusterGroup == "on"]
+public unsafe func Windows_OnlineClusterGroup(hGroup: HGROUP, hDestinationNode: HNODE): UInt32 {
+    return OnlineClusterGroup(hGroup, hDestinationNode)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OnlineClusterGroupEx == "on"]
+foreign {
+    // param-hint: hDestinationNode optional
+    // param-hint: lpInBuffer bytes=param[4] optional
+    func OnlineClusterGroupEx(hGroup: HGROUP, hDestinationNode: HNODE, dwOnlineFlags: UInt32, lpInBuffer: CPointer<UInt8>, cbInBufferSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OnlineClusterGroupEx == "on"]
+public unsafe func Windows_OnlineClusterGroupEx(hGroup: HGROUP, hDestinationNode: HNODE, dwOnlineFlags: UInt32, lpInBuffer: CPointer<UInt8>, cbInBufferSize: UInt32): UInt32 {
+    return OnlineClusterGroupEx(hGroup, hDestinationNode, dwOnlineFlags, lpInBuffer, cbInBufferSize)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OnlineClusterGroupEx2 == "on"]
+foreign {
+    // param-hint: hDestinationNode optional
+    // param-hint: lpInBuffer bytes=param[4] optional
+    // param-hint: lpszReason optional
+    func OnlineClusterGroupEx2(hGroup: HGROUP, hDestinationNode: HNODE, dwOnlineFlags: UInt32, lpInBuffer: CPointer<UInt8>, cbInBufferSize: UInt32, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OnlineClusterGroupEx2 == "on"]
+public unsafe func Windows_OnlineClusterGroupEx2(hGroup: HGROUP, hDestinationNode: HNODE, dwOnlineFlags: UInt32, lpInBuffer: CPointer<UInt8>, cbInBufferSize: UInt32, lpszReason: CPointer<UInt16>): UInt32 {
+    return OnlineClusterGroupEx2(hGroup, hDestinationNode, dwOnlineFlags, lpInBuffer, cbInBufferSize, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OnlineClusterResource == "on"]
+foreign {
+    func OnlineClusterResource(hResource: HRESOURCE): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OnlineClusterResource == "on"]
+public unsafe func Windows_OnlineClusterResource(hResource: HRESOURCE): UInt32 {
+    return OnlineClusterResource(hResource)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OnlineClusterResourceEx == "on"]
+foreign {
+    // param-hint: lpInBuffer bytes=param[3] optional
+    func OnlineClusterResourceEx(hResource: HRESOURCE, dwOnlineFlags: UInt32, lpInBuffer: CPointer<UInt8>, cbInBufferSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OnlineClusterResourceEx == "on"]
+public unsafe func Windows_OnlineClusterResourceEx(hResource: HRESOURCE, dwOnlineFlags: UInt32, lpInBuffer: CPointer<UInt8>, cbInBufferSize: UInt32): UInt32 {
+    return OnlineClusterResourceEx(hResource, dwOnlineFlags, lpInBuffer, cbInBufferSize)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OnlineClusterResourceEx2 == "on"]
+foreign {
+    // param-hint: lpInBuffer bytes=param[3] optional
+    // param-hint: lpszReason optional
+    func OnlineClusterResourceEx2(hResource: HRESOURCE, dwOnlineFlags: UInt32, lpInBuffer: CPointer<UInt8>, cbInBufferSize: UInt32, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OnlineClusterResourceEx2 == "on"]
+public unsafe func Windows_OnlineClusterResourceEx2(hResource: HRESOURCE, dwOnlineFlags: UInt32, lpInBuffer: CPointer<UInt8>, cbInBufferSize: UInt32, lpszReason: CPointer<UInt16>): UInt32 {
+    return OnlineClusterResourceEx2(hResource, dwOnlineFlags, lpInBuffer, cbInBufferSize, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OpenCluster == "on"]
+foreign {
+    // param-hint: lpszClusterName optional
+    // pinvoke-hint: SetLastError
+    func OpenCluster(lpszClusterName: CPointer<UInt16>): HCLUSTER
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OpenCluster == "on"]
+public unsafe func Windows_OpenCluster(lpszClusterName: CPointer<UInt16>): HCLUSTER {
+    return OpenCluster(lpszClusterName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OpenClusterEx == "on"]
+foreign {
+    // param-hint: lpszClusterName optional
+    // param-hint: GrantedAccess optional
+    // pinvoke-hint: SetLastError
+    func OpenClusterEx(lpszClusterName: CPointer<UInt16>, DesiredAccess: UInt32, GrantedAccess: CPointer<UInt32>): HCLUSTER
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OpenClusterEx == "on"]
+public unsafe func Windows_OpenClusterEx(lpszClusterName: CPointer<UInt16>, DesiredAccess: UInt32, GrantedAccess: CPointer<UInt32>): HCLUSTER {
+    return OpenClusterEx(lpszClusterName, DesiredAccess, GrantedAccess)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OpenClusterGroup == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func OpenClusterGroup(hCluster: HCLUSTER, lpszGroupName: CPointer<UInt16>): HGROUP
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OpenClusterGroup == "on"]
+public unsafe func Windows_OpenClusterGroup(hCluster: HCLUSTER, lpszGroupName: CPointer<UInt16>): HGROUP {
+    return OpenClusterGroup(hCluster, lpszGroupName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OpenClusterGroupEx == "on"]
+foreign {
+    // param-hint: lpszGroupName optional
+    // param-hint: lpdwGrantedAccess optional
+    // pinvoke-hint: SetLastError
+    func OpenClusterGroupEx(hCluster: HCLUSTER, lpszGroupName: CPointer<UInt16>, dwDesiredAccess: UInt32, lpdwGrantedAccess: CPointer<UInt32>): HGROUP
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OpenClusterGroupEx == "on"]
+public unsafe func Windows_OpenClusterGroupEx(hCluster: HCLUSTER, lpszGroupName: CPointer<UInt16>, dwDesiredAccess: UInt32, lpdwGrantedAccess: CPointer<UInt32>): HGROUP {
+    return OpenClusterGroupEx(hCluster, lpszGroupName, dwDesiredAccess, lpdwGrantedAccess)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OpenClusterGroupSet == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func OpenClusterGroupSet(hCluster: HCLUSTER, lpszGroupSetName: CPointer<UInt16>): HGROUPSET
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OpenClusterGroupSet == "on"]
+public unsafe func Windows_OpenClusterGroupSet(hCluster: HCLUSTER, lpszGroupSetName: CPointer<UInt16>): HGROUPSET {
+    return OpenClusterGroupSet(hCluster, lpszGroupSetName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OpenClusterNetInterface == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func OpenClusterNetInterface(hCluster: HCLUSTER, lpszInterfaceName: CPointer<UInt16>): HNETINTERFACE
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OpenClusterNetInterface == "on"]
+public unsafe func Windows_OpenClusterNetInterface(hCluster: HCLUSTER, lpszInterfaceName: CPointer<UInt16>): HNETINTERFACE {
+    return OpenClusterNetInterface(hCluster, lpszInterfaceName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OpenClusterNetInterfaceEx == "on"]
+foreign {
+    // param-hint: lpszInterfaceName optional
+    // param-hint: lpdwGrantedAccess optional
+    // pinvoke-hint: SetLastError
+    func OpenClusterNetInterfaceEx(hCluster: HCLUSTER, lpszInterfaceName: CPointer<UInt16>, dwDesiredAccess: UInt32, lpdwGrantedAccess: CPointer<UInt32>): HNETINTERFACE
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OpenClusterNetInterfaceEx == "on"]
+public unsafe func Windows_OpenClusterNetInterfaceEx(hCluster: HCLUSTER, lpszInterfaceName: CPointer<UInt16>, dwDesiredAccess: UInt32, lpdwGrantedAccess: CPointer<UInt32>): HNETINTERFACE {
+    return OpenClusterNetInterfaceEx(hCluster, lpszInterfaceName, dwDesiredAccess, lpdwGrantedAccess)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OpenClusterNetwork == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func OpenClusterNetwork(hCluster: HCLUSTER, lpszNetworkName: CPointer<UInt16>): HNETWORK
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OpenClusterNetwork == "on"]
+public unsafe func Windows_OpenClusterNetwork(hCluster: HCLUSTER, lpszNetworkName: CPointer<UInt16>): HNETWORK {
+    return OpenClusterNetwork(hCluster, lpszNetworkName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OpenClusterNetworkEx == "on"]
+foreign {
+    // param-hint: lpszNetworkName optional
+    // param-hint: lpdwGrantedAccess optional
+    // pinvoke-hint: SetLastError
+    func OpenClusterNetworkEx(hCluster: HCLUSTER, lpszNetworkName: CPointer<UInt16>, dwDesiredAccess: UInt32, lpdwGrantedAccess: CPointer<UInt32>): HNETWORK
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OpenClusterNetworkEx == "on"]
+public unsafe func Windows_OpenClusterNetworkEx(hCluster: HCLUSTER, lpszNetworkName: CPointer<UInt16>, dwDesiredAccess: UInt32, lpdwGrantedAccess: CPointer<UInt32>): HNETWORK {
+    return OpenClusterNetworkEx(hCluster, lpszNetworkName, dwDesiredAccess, lpdwGrantedAccess)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OpenClusterNode == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func OpenClusterNode(hCluster: HCLUSTER, lpszNodeName: CPointer<UInt16>): HNODE
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OpenClusterNode == "on"]
+public unsafe func Windows_OpenClusterNode(hCluster: HCLUSTER, lpszNodeName: CPointer<UInt16>): HNODE {
+    return OpenClusterNode(hCluster, lpszNodeName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OpenClusterNodeById == "on"]
+foreign {
+    func OpenClusterNodeById(hCluster: HCLUSTER, nodeId: UInt32): HNODE
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OpenClusterNodeById == "on"]
+public unsafe func Windows_OpenClusterNodeById(hCluster: HCLUSTER, nodeId: UInt32): HNODE {
+    return OpenClusterNodeById(hCluster, nodeId)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OpenClusterNodeEx == "on"]
+foreign {
+    // param-hint: lpszNodeName optional
+    // param-hint: lpdwGrantedAccess optional
+    // pinvoke-hint: SetLastError
+    func OpenClusterNodeEx(hCluster: HCLUSTER, lpszNodeName: CPointer<UInt16>, dwDesiredAccess: UInt32, lpdwGrantedAccess: CPointer<UInt32>): HNODE
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OpenClusterNodeEx == "on"]
+public unsafe func Windows_OpenClusterNodeEx(hCluster: HCLUSTER, lpszNodeName: CPointer<UInt16>, dwDesiredAccess: UInt32, lpdwGrantedAccess: CPointer<UInt32>): HNODE {
+    return OpenClusterNodeEx(hCluster, lpszNodeName, dwDesiredAccess, lpdwGrantedAccess)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OpenClusterResource == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func OpenClusterResource(hCluster: HCLUSTER, lpszResourceName: CPointer<UInt16>): HRESOURCE
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OpenClusterResource == "on"]
+public unsafe func Windows_OpenClusterResource(hCluster: HCLUSTER, lpszResourceName: CPointer<UInt16>): HRESOURCE {
+    return OpenClusterResource(hCluster, lpszResourceName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OpenClusterResourceEx == "on"]
+foreign {
+    // param-hint: lpszResourceName optional
+    // param-hint: lpdwGrantedAccess optional
+    // pinvoke-hint: SetLastError
+    func OpenClusterResourceEx(hCluster: HCLUSTER, lpszResourceName: CPointer<UInt16>, dwDesiredAccess: UInt32, lpdwGrantedAccess: CPointer<UInt32>): HRESOURCE
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_OpenClusterResourceEx == "on"]
+public unsafe func Windows_OpenClusterResourceEx(hCluster: HCLUSTER, lpszResourceName: CPointer<UInt16>, dwDesiredAccess: UInt32, lpdwGrantedAccess: CPointer<UInt32>): HRESOURCE {
+    return OpenClusterResourceEx(hCluster, lpszResourceName, dwDesiredAccess, lpdwGrantedAccess)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_PauseClusterNode == "on"]
+foreign {
+    func PauseClusterNode(hNode: HNODE): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_PauseClusterNode == "on"]
+public unsafe func Windows_PauseClusterNode(hNode: HNODE): UInt32 {
+    return PauseClusterNode(hNode)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_PauseClusterNodeEx == "on"]
+foreign {
+    // param-hint: hNodeDrainTarget optional
+    func PauseClusterNodeEx(hNode: HNODE, bDrainNode: Int32, dwPauseFlags: UInt32, hNodeDrainTarget: HNODE): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_PauseClusterNodeEx == "on"]
+public unsafe func Windows_PauseClusterNodeEx(hNode: HNODE, bDrainNode: Int32, dwPauseFlags: UInt32, hNodeDrainTarget: HNODE): UInt32 {
+    return PauseClusterNodeEx(hNode, bDrainNode, dwPauseFlags, hNodeDrainTarget)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_PauseClusterNodeEx2 == "on"]
+foreign {
+    // param-hint: hNodeDrainTarget optional
+    // param-hint: lpszReason optional
+    func PauseClusterNodeEx2(hNode: HNODE, bDrainNode: Int32, dwPauseFlags: UInt32, hNodeDrainTarget: HNODE, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_PauseClusterNodeEx2 == "on"]
+public unsafe func Windows_PauseClusterNodeEx2(hNode: HNODE, bDrainNode: Int32, dwPauseFlags: UInt32, hNodeDrainTarget: HNODE, lpszReason: CPointer<UInt16>): UInt32 {
+    return PauseClusterNodeEx2(hNode, bDrainNode, dwPauseFlags, hNodeDrainTarget, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RegisterClusterNotify == "on"]
+foreign {
+    func RegisterClusterNotify(hChange: HCHANGE, dwFilterType: UInt32, hObject: CPointer<Unit>, dwNotifyKey: UIntNative): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RegisterClusterNotify == "on"]
+public unsafe func Windows_RegisterClusterNotify(hChange: HCHANGE, dwFilterType: UInt32, hObject: CPointer<Unit>, dwNotifyKey: UIntNative): UInt32 {
+    return RegisterClusterNotify(hChange, dwFilterType, hObject, dwNotifyKey)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RegisterClusterNotifyV2 == "on"]
+foreign {
+    func RegisterClusterNotifyV2(hChange: HCHANGE, Filter: NOTIFY_FILTER_AND_TYPEAbi, hObject: CPointer<Unit>, dwNotifyKey: UIntNative): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RegisterClusterNotifyV2 == "on"]
+public unsafe func Windows_RegisterClusterNotifyV2(hChange: HCHANGE, Filter: NOTIFY_FILTER_AND_TYPEAbi, hObject: CPointer<Unit>, dwNotifyKey: UIntNative): UInt32 {
+    return RegisterClusterNotifyV2(hChange, Filter, hObject, dwNotifyKey)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RegisterClusterResourceTypeNotifyV2 == "on"]
+foreign {
+    func RegisterClusterResourceTypeNotifyV2(hChange: HCHANGE, hCluster: HCLUSTER, Flags: Int64, resTypeName: CPointer<UInt16>, dwNotifyKey: UIntNative): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RegisterClusterResourceTypeNotifyV2 == "on"]
+public unsafe func Windows_RegisterClusterResourceTypeNotifyV2(hChange: HCHANGE, hCluster: HCLUSTER, Flags: Int64, resTypeName: CPointer<UInt16>, dwNotifyKey: UIntNative): UInt32 {
+    return RegisterClusterResourceTypeNotifyV2(hChange, hCluster, Flags, resTypeName, dwNotifyKey)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RemoveClusterGroupDependency == "on"]
+foreign {
+    func RemoveClusterGroupDependency(hGroup: HGROUP, hDependsOn: HGROUP): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RemoveClusterGroupDependency == "on"]
+public unsafe func Windows_RemoveClusterGroupDependency(hGroup: HGROUP, hDependsOn: HGROUP): UInt32 {
+    return RemoveClusterGroupDependency(hGroup, hDependsOn)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RemoveClusterGroupDependencyEx == "on"]
+foreign {
+    // param-hint: lpszReason optional
+    func RemoveClusterGroupDependencyEx(hGroup: HGROUP, hDependsOn: HGROUP, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RemoveClusterGroupDependencyEx == "on"]
+public unsafe func Windows_RemoveClusterGroupDependencyEx(hGroup: HGROUP, hDependsOn: HGROUP, lpszReason: CPointer<UInt16>): UInt32 {
+    return RemoveClusterGroupDependencyEx(hGroup, hDependsOn, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RemoveClusterGroupSetDependency == "on"]
+foreign {
+    func RemoveClusterGroupSetDependency(hGroupSet: HGROUPSET, hDependsOn: HGROUPSET): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RemoveClusterGroupSetDependency == "on"]
+public unsafe func Windows_RemoveClusterGroupSetDependency(hGroupSet: HGROUPSET, hDependsOn: HGROUPSET): UInt32 {
+    return RemoveClusterGroupSetDependency(hGroupSet, hDependsOn)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RemoveClusterGroupSetDependencyEx == "on"]
+foreign {
+    // param-hint: lpszReason optional
+    func RemoveClusterGroupSetDependencyEx(hGroupSet: HGROUPSET, hDependsOn: HGROUPSET, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RemoveClusterGroupSetDependencyEx == "on"]
+public unsafe func Windows_RemoveClusterGroupSetDependencyEx(hGroupSet: HGROUPSET, hDependsOn: HGROUPSET, lpszReason: CPointer<UInt16>): UInt32 {
+    return RemoveClusterGroupSetDependencyEx(hGroupSet, hDependsOn, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RemoveClusterGroupToGroupSetDependency == "on"]
+foreign {
+    func RemoveClusterGroupToGroupSetDependency(hGroup: HGROUP, hDependsOn: HGROUPSET): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RemoveClusterGroupToGroupSetDependency == "on"]
+public unsafe func Windows_RemoveClusterGroupToGroupSetDependency(hGroup: HGROUP, hDependsOn: HGROUPSET): UInt32 {
+    return RemoveClusterGroupToGroupSetDependency(hGroup, hDependsOn)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RemoveClusterGroupToGroupSetDependencyEx == "on"]
+foreign {
+    // param-hint: lpszReason optional
+    func RemoveClusterGroupToGroupSetDependencyEx(hGroup: HGROUP, hDependsOn: HGROUPSET, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RemoveClusterGroupToGroupSetDependencyEx == "on"]
+public unsafe func Windows_RemoveClusterGroupToGroupSetDependencyEx(hGroup: HGROUP, hDependsOn: HGROUPSET, lpszReason: CPointer<UInt16>): UInt32 {
+    return RemoveClusterGroupToGroupSetDependencyEx(hGroup, hDependsOn, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RemoveClusterNameAccount == "on"]
+foreign {
+    func RemoveClusterNameAccount(hCluster: HCLUSTER, bDeleteComputerObjects: Int32): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RemoveClusterNameAccount == "on"]
+public unsafe func Windows_RemoveClusterNameAccount(hCluster: HCLUSTER, bDeleteComputerObjects: Int32): UInt32 {
+    return RemoveClusterNameAccount(hCluster, bDeleteComputerObjects)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RemoveClusterResourceDependency == "on"]
+foreign {
+    func RemoveClusterResourceDependency(hResource: HRESOURCE, hDependsOn: HRESOURCE): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RemoveClusterResourceDependency == "on"]
+public unsafe func Windows_RemoveClusterResourceDependency(hResource: HRESOURCE, hDependsOn: HRESOURCE): UInt32 {
+    return RemoveClusterResourceDependency(hResource, hDependsOn)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RemoveClusterResourceDependencyEx == "on"]
+foreign {
+    // param-hint: lpszReason optional
+    func RemoveClusterResourceDependencyEx(hResource: HRESOURCE, hDependsOn: HRESOURCE, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RemoveClusterResourceDependencyEx == "on"]
+public unsafe func Windows_RemoveClusterResourceDependencyEx(hResource: HRESOURCE, hDependsOn: HRESOURCE, lpszReason: CPointer<UInt16>): UInt32 {
+    return RemoveClusterResourceDependencyEx(hResource, hDependsOn, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RemoveClusterResourceNode == "on"]
+foreign {
+    func RemoveClusterResourceNode(hResource: HRESOURCE, hNode: HNODE): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RemoveClusterResourceNode == "on"]
+public unsafe func Windows_RemoveClusterResourceNode(hResource: HRESOURCE, hNode: HNODE): UInt32 {
+    return RemoveClusterResourceNode(hResource, hNode)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RemoveClusterResourceNodeEx == "on"]
+foreign {
+    // param-hint: lpszReason optional
+    func RemoveClusterResourceNodeEx(hResource: HRESOURCE, hNode: HNODE, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RemoveClusterResourceNodeEx == "on"]
+public unsafe func Windows_RemoveClusterResourceNodeEx(hResource: HRESOURCE, hNode: HNODE, lpszReason: CPointer<UInt16>): UInt32 {
+    return RemoveClusterResourceNodeEx(hResource, hNode, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RemoveClusterStorageNode == "on"]
+foreign {
+    func RemoveClusterStorageNode(hCluster: HCLUSTER, lpszClusterStorageEnclosureName: CPointer<UInt16>, dwTimeout: UInt32, dwFlags: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RemoveClusterStorageNode == "on"]
+public unsafe func Windows_RemoveClusterStorageNode(hCluster: HCLUSTER, lpszClusterStorageEnclosureName: CPointer<UInt16>, dwTimeout: UInt32, dwFlags: UInt32): UInt32 {
+    return RemoveClusterStorageNode(hCluster, lpszClusterStorageEnclosureName, dwTimeout, dwFlags)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RemoveCrossClusterGroupSetDependency == "on"]
+foreign {
+    func RemoveCrossClusterGroupSetDependency(hDependentGroupSet: HGROUPSET, lpRemoteClusterName: CPointer<UInt16>, lpRemoteGroupSetName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RemoveCrossClusterGroupSetDependency == "on"]
+public unsafe func Windows_RemoveCrossClusterGroupSetDependency(hDependentGroupSet: HGROUPSET, lpRemoteClusterName: CPointer<UInt16>, lpRemoteGroupSetName: CPointer<UInt16>): UInt32 {
+    return RemoveCrossClusterGroupSetDependency(hDependentGroupSet, lpRemoteClusterName, lpRemoteGroupSetName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RemoveResourceFromClusterSharedVolumes == "on"]
+foreign {
+    func RemoveResourceFromClusterSharedVolumes(hResource: HRESOURCE): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RemoveResourceFromClusterSharedVolumes == "on"]
+public unsafe func Windows_RemoveResourceFromClusterSharedVolumes(hResource: HRESOURCE): UInt32 {
+    return RemoveResourceFromClusterSharedVolumes(hResource)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RestartClusterResource == "on"]
+foreign {
+    func RestartClusterResource(hResource: HRESOURCE, dwFlags: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RestartClusterResource == "on"]
+public unsafe func Windows_RestartClusterResource(hResource: HRESOURCE, dwFlags: UInt32): UInt32 {
+    return RestartClusterResource(hResource, dwFlags)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RestartClusterResourceEx == "on"]
+foreign {
+    // param-hint: lpszReason optional
+    func RestartClusterResourceEx(hResource: HRESOURCE, dwFlags: UInt32, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RestartClusterResourceEx == "on"]
+public unsafe func Windows_RestartClusterResourceEx(hResource: HRESOURCE, dwFlags: UInt32, lpszReason: CPointer<UInt16>): UInt32 {
+    return RestartClusterResourceEx(hResource, dwFlags, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RestoreClusterDatabase == "on"]
+foreign {
+    // param-hint: lpszQuorumDriveLetter optional
+    func RestoreClusterDatabase(lpszPathName: CPointer<UInt16>, bForce: Int32, lpszQuorumDriveLetter: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RestoreClusterDatabase == "on"]
+public unsafe func Windows_RestoreClusterDatabase(lpszPathName: CPointer<UInt16>, bForce: Int32, lpszQuorumDriveLetter: CPointer<UInt16>): UInt32 {
+    return RestoreClusterDatabase(lpszPathName, bForce, lpszQuorumDriveLetter)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ResumeClusterNode == "on"]
+foreign {
+    func ResumeClusterNode(hNode: HNODE): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ResumeClusterNode == "on"]
+public unsafe func Windows_ResumeClusterNode(hNode: HNODE): UInt32 {
+    return ResumeClusterNode(hNode)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ResumeClusterNodeEx == "on"]
+foreign {
+    func ResumeClusterNodeEx(hNode: HNODE, eResumeFailbackType: CLUSTER_NODE_RESUME_FAILBACK_TYPEAbi, dwResumeFlagsReserved: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ResumeClusterNodeEx == "on"]
+public unsafe func Windows_ResumeClusterNodeEx(hNode: HNODE, eResumeFailbackType: CLUSTER_NODE_RESUME_FAILBACK_TYPEAbi, dwResumeFlagsReserved: UInt32): UInt32 {
+    return ResumeClusterNodeEx(hNode, eResumeFailbackType, dwResumeFlagsReserved)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ResumeClusterNodeEx2 == "on"]
+foreign {
+    // param-hint: lpszReason optional
+    func ResumeClusterNodeEx2(hNode: HNODE, eResumeFailbackType: CLUSTER_NODE_RESUME_FAILBACK_TYPEAbi, dwResumeFlagsReserved: UInt32, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_ResumeClusterNodeEx2 == "on"]
+public unsafe func Windows_ResumeClusterNodeEx2(hNode: HNODE, eResumeFailbackType: CLUSTER_NODE_RESUME_FAILBACK_TYPEAbi, dwResumeFlagsReserved: UInt32, lpszReason: CPointer<UInt16>): UInt32 {
+    return ResumeClusterNodeEx2(hNode, eResumeFailbackType, dwResumeFlagsReserved, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterGroupName == "on"]
+foreign {
+    func SetClusterGroupName(hGroup: HGROUP, lpszGroupName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterGroupName == "on"]
+public unsafe func Windows_SetClusterGroupName(hGroup: HGROUP, lpszGroupName: CPointer<UInt16>): UInt32 {
+    return SetClusterGroupName(hGroup, lpszGroupName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterGroupNameEx == "on"]
+foreign {
+    // param-hint: lpszReason optional
+    func SetClusterGroupNameEx(hGroup: HGROUP, lpszGroupName: CPointer<UInt16>, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterGroupNameEx == "on"]
+public unsafe func Windows_SetClusterGroupNameEx(hGroup: HGROUP, lpszGroupName: CPointer<UInt16>, lpszReason: CPointer<UInt16>): UInt32 {
+    return SetClusterGroupNameEx(hGroup, lpszGroupName, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterGroupNodeList == "on"]
+foreign {
+    // param-hint: NodeList len=param[1] optional
+    func SetClusterGroupNodeList(hGroup: HGROUP, NodeCount: UInt32, NodeList: CPointer<HNODE>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterGroupNodeList == "on"]
+public unsafe func Windows_SetClusterGroupNodeList(hGroup: HGROUP, NodeCount: UInt32, NodeList: CPointer<HNODE>): UInt32 {
+    return SetClusterGroupNodeList(hGroup, NodeCount, NodeList)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterGroupNodeListEx == "on"]
+foreign {
+    // param-hint: NodeList len=param[1]
+    // param-hint: lpszReason optional
+    func SetClusterGroupNodeListEx(hGroup: HGROUP, NodeCount: UInt32, NodeList: CPointer<HNODE>, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterGroupNodeListEx == "on"]
+public unsafe func Windows_SetClusterGroupNodeListEx(hGroup: HGROUP, NodeCount: UInt32, NodeList: CPointer<HNODE>, lpszReason: CPointer<UInt16>): UInt32 {
+    return SetClusterGroupNodeListEx(hGroup, NodeCount, NodeList, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterGroupSetDependencyExpression == "on"]
+foreign {
+    func SetClusterGroupSetDependencyExpression(hGroupSet: HGROUPSET, lpszDependencyExprssion: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterGroupSetDependencyExpression == "on"]
+public unsafe func Windows_SetClusterGroupSetDependencyExpression(hGroupSet: HGROUPSET, lpszDependencyExprssion: CPointer<UInt16>): UInt32 {
+    return SetClusterGroupSetDependencyExpression(hGroupSet, lpszDependencyExprssion)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterGroupSetDependencyExpressionEx == "on"]
+foreign {
+    // param-hint: lpszReason optional
+    func SetClusterGroupSetDependencyExpressionEx(hGroupSet: HGROUPSET, lpszDependencyExpression: CPointer<UInt16>, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterGroupSetDependencyExpressionEx == "on"]
+public unsafe func Windows_SetClusterGroupSetDependencyExpressionEx(hGroupSet: HGROUPSET, lpszDependencyExpression: CPointer<UInt16>, lpszReason: CPointer<UInt16>): UInt32 {
+    return SetClusterGroupSetDependencyExpressionEx(hGroupSet, lpszDependencyExpression, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterName == "on"]
+foreign {
+    func SetClusterName(hCluster: HCLUSTER, lpszNewClusterName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterName == "on"]
+public unsafe func Windows_SetClusterName(hCluster: HCLUSTER, lpszNewClusterName: CPointer<UInt16>): UInt32 {
+    return SetClusterName(hCluster, lpszNewClusterName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterNameEx == "on"]
+foreign {
+    // param-hint: lpszReason optional
+    func SetClusterNameEx(hCluster: HCLUSTER, lpszNewClusterName: CPointer<UInt16>, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterNameEx == "on"]
+public unsafe func Windows_SetClusterNameEx(hCluster: HCLUSTER, lpszNewClusterName: CPointer<UInt16>, lpszReason: CPointer<UInt16>): UInt32 {
+    return SetClusterNameEx(hCluster, lpszNewClusterName, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterNetworkName == "on"]
+foreign {
+    func SetClusterNetworkName(hNetwork: HNETWORK, lpszName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterNetworkName == "on"]
+public unsafe func Windows_SetClusterNetworkName(hNetwork: HNETWORK, lpszName: CPointer<UInt16>): UInt32 {
+    return SetClusterNetworkName(hNetwork, lpszName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterNetworkNameEx == "on"]
+foreign {
+    // param-hint: lpszReason optional
+    func SetClusterNetworkNameEx(hNetwork: HNETWORK, lpszName: CPointer<UInt16>, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterNetworkNameEx == "on"]
+public unsafe func Windows_SetClusterNetworkNameEx(hNetwork: HNETWORK, lpszName: CPointer<UInt16>, lpszReason: CPointer<UInt16>): UInt32 {
+    return SetClusterNetworkNameEx(hNetwork, lpszName, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterNetworkPriorityOrder == "on"]
+foreign {
+    // param-hint: NetworkList len=param[1]
+    func SetClusterNetworkPriorityOrder(hCluster: HCLUSTER, NetworkCount: UInt32, NetworkList: CPointer<HNETWORK>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterNetworkPriorityOrder == "on"]
+public unsafe func Windows_SetClusterNetworkPriorityOrder(hCluster: HCLUSTER, NetworkCount: UInt32, NetworkList: CPointer<HNETWORK>): UInt32 {
+    return SetClusterNetworkPriorityOrder(hCluster, NetworkCount, NetworkList)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterQuorumResource == "on"]
+foreign {
+    // param-hint: lpszDeviceName optional
+    func SetClusterQuorumResource(hResource: HRESOURCE, lpszDeviceName: CPointer<UInt16>, dwMaxQuoLogSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterQuorumResource == "on"]
+public unsafe func Windows_SetClusterQuorumResource(hResource: HRESOURCE, lpszDeviceName: CPointer<UInt16>, dwMaxQuoLogSize: UInt32): UInt32 {
+    return SetClusterQuorumResource(hResource, lpszDeviceName, dwMaxQuoLogSize)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterQuorumResourceEx == "on"]
+foreign {
+    // param-hint: lpszDeviceName optional
+    // param-hint: lpszReason optional
+    func SetClusterQuorumResourceEx(hResource: HRESOURCE, lpszDeviceName: CPointer<UInt16>, dwMaxQuorumLogSize: UInt32, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterQuorumResourceEx == "on"]
+public unsafe func Windows_SetClusterQuorumResourceEx(hResource: HRESOURCE, lpszDeviceName: CPointer<UInt16>, dwMaxQuorumLogSize: UInt32, lpszReason: CPointer<UInt16>): UInt32 {
+    return SetClusterQuorumResourceEx(hResource, lpszDeviceName, dwMaxQuorumLogSize, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterResourceDependencyExpression == "on"]
+foreign {
+    func SetClusterResourceDependencyExpression(hResource: HRESOURCE, lpszDependencyExpression: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterResourceDependencyExpression == "on"]
+public unsafe func Windows_SetClusterResourceDependencyExpression(hResource: HRESOURCE, lpszDependencyExpression: CPointer<UInt16>): UInt32 {
+    return SetClusterResourceDependencyExpression(hResource, lpszDependencyExpression)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterResourceName == "on"]
+foreign {
+    func SetClusterResourceName(hResource: HRESOURCE, lpszResourceName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterResourceName == "on"]
+public unsafe func Windows_SetClusterResourceName(hResource: HRESOURCE, lpszResourceName: CPointer<UInt16>): UInt32 {
+    return SetClusterResourceName(hResource, lpszResourceName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterResourceNameEx == "on"]
+foreign {
+    // param-hint: lpszReason optional
+    func SetClusterResourceNameEx(hResource: HRESOURCE, lpszResourceName: CPointer<UInt16>, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterResourceNameEx == "on"]
+public unsafe func Windows_SetClusterResourceNameEx(hResource: HRESOURCE, lpszResourceName: CPointer<UInt16>, lpszReason: CPointer<UInt16>): UInt32 {
+    return SetClusterResourceNameEx(hResource, lpszResourceName, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterServiceAccountPassword == "on"]
+foreign {
+    // param-hint: lpReturnStatusBuffer bytes=param[4] optional
+    func SetClusterServiceAccountPassword(lpszClusterName: CPointer<UInt16>, lpszNewPassword: CPointer<UInt16>, dwFlags: UInt32, lpReturnStatusBuffer: CPointer<CLUSTER_SET_PASSWORD_STATUSAbi>, lpcbReturnStatusBufferSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetClusterServiceAccountPassword == "on"]
+public unsafe func Windows_SetClusterServiceAccountPassword(lpszClusterName: CPointer<UInt16>, lpszNewPassword: CPointer<UInt16>, dwFlags: UInt32, lpReturnStatusBuffer: CPointer<CLUSTER_SET_PASSWORD_STATUSAbi>, lpcbReturnStatusBufferSize: CPointer<UInt32>): UInt32 {
+    return SetClusterServiceAccountPassword(lpszClusterName, lpszNewPassword, dwFlags, lpReturnStatusBuffer, lpcbReturnStatusBufferSize)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetGroupDependencyExpression == "on"]
+foreign {
+    func SetGroupDependencyExpression(hGroup: HGROUP, lpszDependencyExpression: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetGroupDependencyExpression == "on"]
+public unsafe func Windows_SetGroupDependencyExpression(hGroup: HGROUP, lpszDependencyExpression: CPointer<UInt16>): UInt32 {
+    return SetGroupDependencyExpression(hGroup, lpszDependencyExpression)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetGroupDependencyExpressionEx == "on"]
+foreign {
+    // param-hint: lpszReason optional
+    func SetGroupDependencyExpressionEx(hGroup: HGROUP, lpszDependencyExpression: CPointer<UInt16>, lpszReason: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_SetGroupDependencyExpressionEx == "on"]
+public unsafe func Windows_SetGroupDependencyExpressionEx(hGroup: HGROUP, lpszDependencyExpression: CPointer<UInt16>, lpszReason: CPointer<UInt16>): UInt32 {
+    return SetGroupDependencyExpressionEx(hGroup, lpszDependencyExpression, lpszReason)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && NTLANMAN == "on" && Windows_Win32_Networking_Clustering_QueryAppInstanceVersion == "on"]
 foreign {
     func QueryAppInstanceVersion(AppInstanceId: CPointer<GUID>, InstanceVersionHigh: CPointer<UInt64>, InstanceVersionLow: CPointer<UInt64>, VersionStatus: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && NTLANMAN == "on" && Windows_Win32_Networking_Clustering_QueryAppInstanceVersion == "on"]
+public unsafe func Windows_QueryAppInstanceVersion(AppInstanceId: CPointer<GUID>, InstanceVersionHigh: CPointer<UInt64>, InstanceVersionLow: CPointer<UInt64>, VersionStatus: CPointer<Int32>): UInt32 {
+    return QueryAppInstanceVersion(AppInstanceId, InstanceVersionHigh, InstanceVersionLow, VersionStatus)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && NTLANMAN == "on" && Windows_Win32_Networking_Clustering_RegisterAppInstance == "on"]
+foreign {
     func RegisterAppInstance(ProcessHandle: CPointer<Unit>, AppInstanceId: CPointer<GUID>, ChildrenInheritAppInstance: Int32): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && NTLANMAN == "on" && Windows_Win32_Networking_Clustering_RegisterAppInstance == "on"]
+public unsafe func Windows_RegisterAppInstance(ProcessHandle: CPointer<Unit>, AppInstanceId: CPointer<GUID>, ChildrenInheritAppInstance: Int32): UInt32 {
+    return RegisterAppInstance(ProcessHandle, AppInstanceId, ChildrenInheritAppInstance)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && NTLANMAN == "on" && Windows_Win32_Networking_Clustering_RegisterAppInstanceVersion == "on"]
+foreign {
     func RegisterAppInstanceVersion(AppInstanceId: CPointer<GUID>, InstanceVersionHigh: UInt64, InstanceVersionLow: UInt64): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && NTLANMAN == "on" && Windows_Win32_Networking_Clustering_RegisterAppInstanceVersion == "on"]
+public unsafe func Windows_RegisterAppInstanceVersion(AppInstanceId: CPointer<GUID>, InstanceVersionHigh: UInt64, InstanceVersionLow: UInt64): UInt32 {
+    return RegisterAppInstanceVersion(AppInstanceId, InstanceVersionHigh, InstanceVersionLow)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && NTLANMAN == "on" && Windows_Win32_Networking_Clustering_ResetAllAppInstanceVersions == "on"]
+foreign {
     func ResetAllAppInstanceVersions(): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && NTLANMAN == "on" && Windows_Win32_Networking_Clustering_ResetAllAppInstanceVersions == "on"]
+public unsafe func Windows_ResetAllAppInstanceVersions(): UInt32 {
+    return ResetAllAppInstanceVersions()
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && NTLANMAN == "on" && Windows_Win32_Networking_Clustering_SetAppInstanceCsvFlags == "on"]
+foreign {
     func SetAppInstanceCsvFlags(ProcessHandle: CPointer<Unit>, Mask: UInt32, Flags: UInt32): UInt32
 }
 
-@When[RESUTILS == "on"]
+@When[Windows_Win32_Networking_Clustering == "on" && NTLANMAN == "on" && Windows_Win32_Networking_Clustering_SetAppInstanceCsvFlags == "on"]
+public unsafe func Windows_SetAppInstanceCsvFlags(ProcessHandle: CPointer<Unit>, Mask: UInt32, Flags: UInt32): UInt32 {
+    return SetAppInstanceCsvFlags(ProcessHandle, Mask, Flags)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_CloseClusterCryptProvider == "on"]
 foreign {
     func CloseClusterCryptProvider(hClusCryptProvider: HCLUSCRYPTPROVIDER): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_CloseClusterCryptProvider == "on"]
+public unsafe func Windows_CloseClusterCryptProvider(hClusCryptProvider: HCLUSCRYPTPROVIDER): UInt32 {
+    return CloseClusterCryptProvider(hClusCryptProvider)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ClusAddClusterHealthFault == "on"]
+foreign {
     func ClusAddClusterHealthFault(hCluster: HCLUSTER, failure: CPointer<CLUSTER_HEALTH_FAULTAbi>, param2: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ClusAddClusterHealthFault == "on"]
+public unsafe func Windows_ClusAddClusterHealthFault(hCluster: HCLUSTER, failure: CPointer<CLUSTER_HEALTH_FAULTAbi>, param2: UInt32): UInt32 {
+    return ClusAddClusterHealthFault(hCluster, failure, param2)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ClusGetClusterHealthFaults == "on"]
+foreign {
     func ClusGetClusterHealthFaults(hCluster: HCLUSTER, objects: CPointer<CLUSTER_HEALTH_FAULT_ARRAYAbi>, flags: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ClusGetClusterHealthFaults == "on"]
+public unsafe func Windows_ClusGetClusterHealthFaults(hCluster: HCLUSTER, objects: CPointer<CLUSTER_HEALTH_FAULT_ARRAYAbi>, flags: UInt32): UInt32 {
+    return ClusGetClusterHealthFaults(hCluster, objects, flags)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ClusRemoveClusterHealthFault == "on"]
+foreign {
     func ClusRemoveClusterHealthFault(hCluster: HCLUSTER, id: CPointer<UInt16>, flags: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ClusRemoveClusterHealthFault == "on"]
+public unsafe func Windows_ClusRemoveClusterHealthFault(hCluster: HCLUSTER, id: CPointer<UInt16>, flags: UInt32): UInt32 {
+    return ClusRemoveClusterHealthFault(hCluster, id, flags)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ClusWorkerCheckTerminate == "on"]
+foreign {
     func ClusWorkerCheckTerminate(lpWorker: CPointer<CLUS_WORKERAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ClusWorkerCheckTerminate == "on"]
+public unsafe func Windows_ClusWorkerCheckTerminate(lpWorker: CPointer<CLUS_WORKERAbi>): Int32 {
+    return ClusWorkerCheckTerminate(lpWorker)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ClusWorkerCreate == "on"]
+foreign {
     func ClusWorkerCreate(lpWorker: CPointer<CLUS_WORKERAbi>, lpStartAddress: PWORKER_START_ROUTINE, lpParameter: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ClusWorkerCreate == "on"]
+public unsafe func Windows_ClusWorkerCreate(lpWorker: CPointer<CLUS_WORKERAbi>, lpStartAddress: PWORKER_START_ROUTINE, lpParameter: CPointer<Unit>): UInt32 {
+    return ClusWorkerCreate(lpWorker, lpStartAddress, lpParameter)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ClusWorkerTerminate == "on"]
+foreign {
     func ClusWorkerTerminate(lpWorker: CPointer<CLUS_WORKERAbi>): Unit
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ClusWorkerTerminate == "on"]
+public unsafe func Windows_ClusWorkerTerminate(lpWorker: CPointer<CLUS_WORKERAbi>): Unit {
+    ClusWorkerTerminate(lpWorker)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ClusWorkerTerminateEx == "on"]
+foreign {
     func ClusWorkerTerminateEx(ClusWorker: CPointer<CLUS_WORKERAbi>, TimeoutInMilliseconds: UInt32, WaitOnly: Int32): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ClusWorkerTerminateEx == "on"]
+public unsafe func Windows_ClusWorkerTerminateEx(ClusWorker: CPointer<CLUS_WORKERAbi>, TimeoutInMilliseconds: UInt32, WaitOnly: Int32): UInt32 {
+    return ClusWorkerTerminateEx(ClusWorker, TimeoutInMilliseconds, WaitOnly)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ClusWorkersTerminate == "on"]
+foreign {
     // param-hint: ClusWorkers len=param[1]
     func ClusWorkersTerminate(ClusWorkers: CPointer<CPointer<CLUS_WORKERAbi>>, ClusWorkersCount: UIntNative, TimeoutInMilliseconds: UInt32, WaitOnly: Int32): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ClusWorkersTerminate == "on"]
+public unsafe func Windows_ClusWorkersTerminate(ClusWorkers: CPointer<CPointer<CLUS_WORKERAbi>>, ClusWorkersCount: UIntNative, TimeoutInMilliseconds: UInt32, WaitOnly: Int32): UInt32 {
+    return ClusWorkersTerminate(ClusWorkers, ClusWorkersCount, TimeoutInMilliseconds, WaitOnly)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ClusterClearBackupStateForSharedVolume == "on"]
+foreign {
     func ClusterClearBackupStateForSharedVolume(lpszVolumePathName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ClusterClearBackupStateForSharedVolume == "on"]
+public unsafe func Windows_ClusterClearBackupStateForSharedVolume(lpszVolumePathName: CPointer<UInt16>): UInt32 {
+    return ClusterClearBackupStateForSharedVolume(lpszVolumePathName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ClusterDecrypt == "on"]
+foreign {
     func ClusterDecrypt(hClusCryptProvider: HCLUSCRYPTPROVIDER, pCryptInput: CPointer<UInt8>, cbCryptInput: UInt32, ppCryptOutput: CPointer<CPointer<UInt8>>, pcbCryptOutput: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ClusterDecrypt == "on"]
+public unsafe func Windows_ClusterDecrypt(hClusCryptProvider: HCLUSCRYPTPROVIDER, pCryptInput: CPointer<UInt8>, cbCryptInput: UInt32, ppCryptOutput: CPointer<CPointer<UInt8>>, pcbCryptOutput: CPointer<UInt32>): UInt32 {
+    return ClusterDecrypt(hClusCryptProvider, pCryptInput, cbCryptInput, ppCryptOutput, pcbCryptOutput)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ClusterEncrypt == "on"]
+foreign {
     // param-hint: pData len=param[2]
     func ClusterEncrypt(hClusCryptProvider: HCLUSCRYPTPROVIDER, pData: CPointer<UInt8>, cbData: UInt32, ppData: CPointer<CPointer<UInt8>>, pcbData: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ClusterEncrypt == "on"]
+public unsafe func Windows_ClusterEncrypt(hClusCryptProvider: HCLUSCRYPTPROVIDER, pData: CPointer<UInt8>, cbData: UInt32, ppData: CPointer<CPointer<UInt8>>, pcbData: CPointer<UInt32>): UInt32 {
+    return ClusterEncrypt(hClusCryptProvider, pData, cbData, ppData, pcbData)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ClusterGetVolumeNameForVolumeMountPoint == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ClusterGetVolumeNameForVolumeMountPoint(lpszVolumeMountPoint: CPointer<UInt16>, lpszVolumeName: CPointer<UInt16>, cchBufferLength: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ClusterGetVolumeNameForVolumeMountPoint == "on"]
+public unsafe func Windows_ClusterGetVolumeNameForVolumeMountPoint(lpszVolumeMountPoint: CPointer<UInt16>, lpszVolumeName: CPointer<UInt16>, cchBufferLength: UInt32): Int32 {
+    return ClusterGetVolumeNameForVolumeMountPoint(lpszVolumeMountPoint, lpszVolumeName, cchBufferLength)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ClusterGetVolumePathName == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ClusterGetVolumePathName(lpszFileName: CPointer<UInt16>, lpszVolumePathName: CPointer<UInt16>, cchBufferLength: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ClusterGetVolumePathName == "on"]
+public unsafe func Windows_ClusterGetVolumePathName(lpszFileName: CPointer<UInt16>, lpszVolumePathName: CPointer<UInt16>, cchBufferLength: UInt32): Int32 {
+    return ClusterGetVolumePathName(lpszFileName, lpszVolumePathName, cchBufferLength)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ClusterIsPathOnSharedVolume == "on"]
+foreign {
     func ClusterIsPathOnSharedVolume(lpszPathName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ClusterIsPathOnSharedVolume == "on"]
+public unsafe func Windows_ClusterIsPathOnSharedVolume(lpszPathName: CPointer<UInt16>): Int32 {
+    return ClusterIsPathOnSharedVolume(lpszPathName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ClusterPrepareSharedVolumeForBackup == "on"]
+foreign {
     func ClusterPrepareSharedVolumeForBackup(lpszFileName: CPointer<UInt16>, lpszVolumePathName: CPointer<UInt16>, lpcchVolumePathName: CPointer<UInt32>, lpszVolumeName: CPointer<UInt16>, lpcchVolumeName: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ClusterPrepareSharedVolumeForBackup == "on"]
+public unsafe func Windows_ClusterPrepareSharedVolumeForBackup(lpszFileName: CPointer<UInt16>, lpszVolumePathName: CPointer<UInt16>, lpcchVolumePathName: CPointer<UInt32>, lpszVolumeName: CPointer<UInt16>, lpcchVolumeName: CPointer<UInt32>): UInt32 {
+    return ClusterPrepareSharedVolumeForBackup(lpszFileName, lpszVolumePathName, lpcchVolumePathName, lpszVolumeName, lpcchVolumeName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_FreeClusterCrypt == "on"]
+foreign {
     func FreeClusterCrypt(pCryptInfo: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_FreeClusterCrypt == "on"]
+public unsafe func Windows_FreeClusterCrypt(pCryptInfo: CPointer<Unit>): UInt32 {
+    return FreeClusterCrypt(pCryptInfo)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_FreeClusterHealthFault == "on"]
+foreign {
     func FreeClusterHealthFault(clusterHealthFault: CPointer<CLUSTER_HEALTH_FAULTAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_FreeClusterHealthFault == "on"]
+public unsafe func Windows_FreeClusterHealthFault(clusterHealthFault: CPointer<CLUSTER_HEALTH_FAULTAbi>): UInt32 {
+    return FreeClusterHealthFault(clusterHealthFault)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_FreeClusterHealthFaultArray == "on"]
+foreign {
     func FreeClusterHealthFaultArray(clusterHealthFaultArray: CPointer<CLUSTER_HEALTH_FAULT_ARRAYAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_FreeClusterHealthFaultArray == "on"]
+public unsafe func Windows_FreeClusterHealthFaultArray(clusterHealthFaultArray: CPointer<CLUSTER_HEALTH_FAULT_ARRAYAbi>): UInt32 {
+    return FreeClusterHealthFaultArray(clusterHealthFaultArray)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_InitializeClusterHealthFault == "on"]
+foreign {
     func InitializeClusterHealthFault(clusterHealthFault: CPointer<CLUSTER_HEALTH_FAULTAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_InitializeClusterHealthFault == "on"]
+public unsafe func Windows_InitializeClusterHealthFault(clusterHealthFault: CPointer<CLUSTER_HEALTH_FAULTAbi>): UInt32 {
+    return InitializeClusterHealthFault(clusterHealthFault)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_InitializeClusterHealthFaultArray == "on"]
+foreign {
     func InitializeClusterHealthFaultArray(clusterHealthFaultArray: CPointer<CLUSTER_HEALTH_FAULT_ARRAYAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_InitializeClusterHealthFaultArray == "on"]
+public unsafe func Windows_InitializeClusterHealthFaultArray(clusterHealthFaultArray: CPointer<CLUSTER_HEALTH_FAULT_ARRAYAbi>): UInt32 {
+    return InitializeClusterHealthFaultArray(clusterHealthFaultArray)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_OpenClusterCryptProvider == "on"]
+foreign {
     func OpenClusterCryptProvider(lpszResource: CPointer<UInt16>, lpszProvider: CPointer<Int8>, dwType: UInt32, dwFlags: UInt32): HCLUSCRYPTPROVIDER
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_OpenClusterCryptProvider == "on"]
+public unsafe func Windows_OpenClusterCryptProvider(lpszResource: CPointer<UInt16>, lpszProvider: CPointer<Int8>, dwType: UInt32, dwFlags: UInt32): HCLUSCRYPTPROVIDER {
+    return OpenClusterCryptProvider(lpszResource, lpszProvider, dwType, dwFlags)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_OpenClusterCryptProviderEx == "on"]
+foreign {
     func OpenClusterCryptProviderEx(lpszResource: CPointer<UInt16>, lpszKeyname: CPointer<UInt16>, lpszProvider: CPointer<Int8>, dwType: UInt32, dwFlags: UInt32): HCLUSCRYPTPROVIDER
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_OpenClusterCryptProviderEx == "on"]
+public unsafe func Windows_OpenClusterCryptProviderEx(lpszResource: CPointer<UInt16>, lpszKeyname: CPointer<UInt16>, lpszProvider: CPointer<Int8>, dwType: UInt32, dwFlags: UInt32): HCLUSCRYPTPROVIDER {
+    return OpenClusterCryptProviderEx(lpszResource, lpszKeyname, lpszProvider, dwType, dwFlags)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilAddUnknownProperties == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    func ResUtilAddUnknownProperties(hkeyClusterKey: Win32_System_Registry.HKEY, pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>, pOutPropertyList: CPointer<Unit>, pcbOutPropertyListSize: UInt32, pcbBytesReturned: CPointer<UInt32>, pcbRequired: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilAddUnknownProperties == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ResUtilAddUnknownProperties(hkeyClusterKey: Win32_System_Registry.HKEY, pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>, pOutPropertyList: CPointer<Unit>, pcbOutPropertyListSize: UInt32, pcbBytesReturned: CPointer<UInt32>, pcbRequired: CPointer<UInt32>): UInt32 {
+    return ResUtilAddUnknownProperties(hkeyClusterKey, pPropertyTable, pOutPropertyList, pcbOutPropertyListSize, pcbBytesReturned, pcbRequired)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilCreateDirectoryTree == "on"]
+foreign {
     func ResUtilCreateDirectoryTree(pszPath: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilCreateDirectoryTree == "on"]
+public unsafe func Windows_ResUtilCreateDirectoryTree(pszPath: CPointer<UInt16>): UInt32 {
+    return ResUtilCreateDirectoryTree(pszPath)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilDupGroup == "on"]
+foreign {
     func ResUtilDupGroup(group: HGROUP, copy: CPointer<HGROUP>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilDupGroup == "on"]
+public unsafe func Windows_ResUtilDupGroup(group: HGROUP, copy: CPointer<HGROUP>): UInt32 {
+    return ResUtilDupGroup(group, copy)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilDupParameterBlock == "on"]
+foreign {
     func ResUtilDupParameterBlock(pOutParams: CPointer<UInt8>, pInParams: CPointer<UInt8>, pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilDupParameterBlock == "on"]
+public unsafe func Windows_ResUtilDupParameterBlock(pOutParams: CPointer<UInt8>, pInParams: CPointer<UInt8>, pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>): UInt32 {
+    return ResUtilDupParameterBlock(pOutParams, pInParams, pPropertyTable)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilDupResource == "on"]
+foreign {
     func ResUtilDupResource(group: HRESOURCE, copy: CPointer<HRESOURCE>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilDupResource == "on"]
+public unsafe func Windows_ResUtilDupResource(group: HRESOURCE, copy: CPointer<HRESOURCE>): UInt32 {
+    return ResUtilDupResource(group, copy)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilDupString == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ResUtilDupString(pszInString: CPointer<UInt16>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilDupString == "on"]
+public unsafe func Windows_ResUtilDupString(pszInString: CPointer<UInt16>): CPointer<UInt16> {
+    return ResUtilDupString(pszInString)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilEnumGroups == "on"]
+foreign {
     func ResUtilEnumGroups(hCluster: HCLUSTER, hSelf: HGROUP, pResCallBack: LPGROUP_CALLBACK_EX, pParameter: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilEnumGroups == "on"]
+public unsafe func Windows_ResUtilEnumGroups(hCluster: HCLUSTER, hSelf: HGROUP, pResCallBack: LPGROUP_CALLBACK_EX, pParameter: CPointer<Unit>): UInt32 {
+    return ResUtilEnumGroups(hCluster, hSelf, pResCallBack, pParameter)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilEnumGroupsEx == "on"]
+foreign {
     func ResUtilEnumGroupsEx(hCluster: HCLUSTER, hSelf: HGROUP, groupType: CLUSGROUP_TYPEAbi, pResCallBack: LPGROUP_CALLBACK_EX, pParameter: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilEnumGroupsEx == "on"]
+public unsafe func Windows_ResUtilEnumGroupsEx(hCluster: HCLUSTER, hSelf: HGROUP, groupType: CLUSGROUP_TYPEAbi, pResCallBack: LPGROUP_CALLBACK_EX, pParameter: CPointer<Unit>): UInt32 {
+    return ResUtilEnumGroupsEx(hCluster, hSelf, groupType, pResCallBack, pParameter)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilEnumPrivateProperties == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pszOutProperties bytes=param[2]
+    func ResUtilEnumPrivateProperties(hkeyClusterKey: Win32_System_Registry.HKEY, pszOutProperties: CPointer<UInt16>, cbOutPropertiesSize: UInt32, pcbBytesReturned: CPointer<UInt32>, pcbRequired: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilEnumPrivateProperties == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ResUtilEnumPrivateProperties(hkeyClusterKey: Win32_System_Registry.HKEY, pszOutProperties: CPointer<UInt16>, cbOutPropertiesSize: UInt32, pcbBytesReturned: CPointer<UInt32>, pcbRequired: CPointer<UInt32>): UInt32 {
+    return ResUtilEnumPrivateProperties(hkeyClusterKey, pszOutProperties, cbOutPropertiesSize, pcbBytesReturned, pcbRequired)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilEnumProperties == "on"]
+foreign {
     // param-hint: pszOutProperties bytes=param[2]
     func ResUtilEnumProperties(pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>, pszOutProperties: CPointer<UInt16>, cbOutPropertiesSize: UInt32, pcbBytesReturned: CPointer<UInt32>, pcbRequired: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilEnumProperties == "on"]
+public unsafe func Windows_ResUtilEnumProperties(pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>, pszOutProperties: CPointer<UInt16>, cbOutPropertiesSize: UInt32, pcbBytesReturned: CPointer<UInt32>, pcbRequired: CPointer<UInt32>): UInt32 {
+    return ResUtilEnumProperties(pPropertyTable, pszOutProperties, cbOutPropertiesSize, pcbBytesReturned, pcbRequired)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilEnumResources == "on"]
+foreign {
     func ResUtilEnumResources(hSelf: HRESOURCE, lpszResTypeName: CPointer<UInt16>, pResCallBack: LPRESOURCE_CALLBACK, pParameter: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilEnumResources == "on"]
+public unsafe func Windows_ResUtilEnumResources(hSelf: HRESOURCE, lpszResTypeName: CPointer<UInt16>, pResCallBack: LPRESOURCE_CALLBACK, pParameter: CPointer<Unit>): UInt32 {
+    return ResUtilEnumResources(hSelf, lpszResTypeName, pResCallBack, pParameter)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilEnumResourcesEx == "on"]
+foreign {
     func ResUtilEnumResourcesEx(hCluster: HCLUSTER, hSelf: HRESOURCE, lpszResTypeName: CPointer<UInt16>, pResCallBack: LPRESOURCE_CALLBACK_EX, pParameter: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilEnumResourcesEx == "on"]
+public unsafe func Windows_ResUtilEnumResourcesEx(hCluster: HCLUSTER, hSelf: HRESOURCE, lpszResTypeName: CPointer<UInt16>, pResCallBack: LPRESOURCE_CALLBACK_EX, pParameter: CPointer<Unit>): UInt32 {
+    return ResUtilEnumResourcesEx(hCluster, hSelf, lpszResTypeName, pResCallBack, pParameter)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilEnumResourcesEx2 == "on"]
+foreign {
     func ResUtilEnumResourcesEx2(hCluster: HCLUSTER, hSelf: HRESOURCE, lpszResTypeName: CPointer<UInt16>, pResCallBack: LPRESOURCE_CALLBACK_EX, pParameter: CPointer<Unit>, dwDesiredAccess: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilEnumResourcesEx2 == "on"]
+public unsafe func Windows_ResUtilEnumResourcesEx2(hCluster: HCLUSTER, hSelf: HRESOURCE, lpszResTypeName: CPointer<UInt16>, pResCallBack: LPRESOURCE_CALLBACK_EX, pParameter: CPointer<Unit>, dwDesiredAccess: UInt32): UInt32 {
+    return ResUtilEnumResourcesEx2(hCluster, hSelf, lpszResTypeName, pResCallBack, pParameter, dwDesiredAccess)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilExpandEnvironmentStrings == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ResUtilExpandEnvironmentStrings(pszSrc: CPointer<UInt16>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilExpandEnvironmentStrings == "on"]
+public unsafe func Windows_ResUtilExpandEnvironmentStrings(pszSrc: CPointer<UInt16>): CPointer<UInt16> {
+    return ResUtilExpandEnvironmentStrings(pszSrc)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilFindBinaryProperty == "on"]
+foreign {
     // param-hint: pPropertyList bytes=param[1]
     // param-hint: pbPropertyValue optional
     // param-hint: pcbPropertyValueSize optional
     func ResUtilFindBinaryProperty(pPropertyList: CPointer<Unit>, cbPropertyListSize: UInt32, pszPropertyName: CPointer<UInt16>, pbPropertyValue: CPointer<CPointer<UInt8>>, pcbPropertyValueSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilFindBinaryProperty == "on"]
+public unsafe func Windows_ResUtilFindBinaryProperty(pPropertyList: CPointer<Unit>, cbPropertyListSize: UInt32, pszPropertyName: CPointer<UInt16>, pbPropertyValue: CPointer<CPointer<UInt8>>, pcbPropertyValueSize: CPointer<UInt32>): UInt32 {
+    return ResUtilFindBinaryProperty(pPropertyList, cbPropertyListSize, pszPropertyName, pbPropertyValue, pcbPropertyValueSize)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilFindDependentDiskResourceDriveLetter == "on"]
+foreign {
     // param-hint: pszDriveLetter len=param[3]
     // pinvoke-hint: SetLastError
     func ResUtilFindDependentDiskResourceDriveLetter(hCluster: HCLUSTER, hResource: HRESOURCE, pszDriveLetter: CPointer<UInt16>, pcchDriveLetter: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilFindDependentDiskResourceDriveLetter == "on"]
+public unsafe func Windows_ResUtilFindDependentDiskResourceDriveLetter(hCluster: HCLUSTER, hResource: HRESOURCE, pszDriveLetter: CPointer<UInt16>, pcchDriveLetter: CPointer<UInt32>): UInt32 {
+    return ResUtilFindDependentDiskResourceDriveLetter(hCluster, hResource, pszDriveLetter, pcchDriveLetter)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilFindDwordProperty == "on"]
+foreign {
     // param-hint: pPropertyList bytes=param[1]
     func ResUtilFindDwordProperty(pPropertyList: CPointer<Unit>, cbPropertyListSize: UInt32, pszPropertyName: CPointer<UInt16>, pdwPropertyValue: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilFindDwordProperty == "on"]
+public unsafe func Windows_ResUtilFindDwordProperty(pPropertyList: CPointer<Unit>, cbPropertyListSize: UInt32, pszPropertyName: CPointer<UInt16>, pdwPropertyValue: CPointer<UInt32>): UInt32 {
+    return ResUtilFindDwordProperty(pPropertyList, cbPropertyListSize, pszPropertyName, pdwPropertyValue)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilFindExpandSzProperty == "on"]
+foreign {
     // param-hint: pPropertyList bytes=param[1]
     // param-hint: pszPropertyValue optional
     func ResUtilFindExpandSzProperty(pPropertyList: CPointer<Unit>, cbPropertyListSize: UInt32, pszPropertyName: CPointer<UInt16>, pszPropertyValue: CPointer<CPointer<UInt16>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilFindExpandSzProperty == "on"]
+public unsafe func Windows_ResUtilFindExpandSzProperty(pPropertyList: CPointer<Unit>, cbPropertyListSize: UInt32, pszPropertyName: CPointer<UInt16>, pszPropertyValue: CPointer<CPointer<UInt16>>): UInt32 {
+    return ResUtilFindExpandSzProperty(pPropertyList, cbPropertyListSize, pszPropertyName, pszPropertyValue)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilFindExpandedSzProperty == "on"]
+foreign {
     // param-hint: pPropertyList bytes=param[1]
     // param-hint: pszPropertyValue optional
     func ResUtilFindExpandedSzProperty(pPropertyList: CPointer<Unit>, cbPropertyListSize: UInt32, pszPropertyName: CPointer<UInt16>, pszPropertyValue: CPointer<CPointer<UInt16>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilFindExpandedSzProperty == "on"]
+public unsafe func Windows_ResUtilFindExpandedSzProperty(pPropertyList: CPointer<Unit>, cbPropertyListSize: UInt32, pszPropertyName: CPointer<UInt16>, pszPropertyValue: CPointer<CPointer<UInt16>>): UInt32 {
+    return ResUtilFindExpandedSzProperty(pPropertyList, cbPropertyListSize, pszPropertyName, pszPropertyValue)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilFindFileTimeProperty == "on"]
+foreign {
     // param-hint: pPropertyList bytes=param[1]
     func ResUtilFindFileTimeProperty(pPropertyList: CPointer<Unit>, cbPropertyListSize: UInt32, pszPropertyName: CPointer<UInt16>, pftPropertyValue: CPointer<Win32_Foundation.FILETIMEAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilFindFileTimeProperty == "on"]
+public unsafe func Windows_ResUtilFindFileTimeProperty(pPropertyList: CPointer<Unit>, cbPropertyListSize: UInt32, pszPropertyName: CPointer<UInt16>, pftPropertyValue: CPointer<Win32_Foundation.FILETIMEAbi>): UInt32 {
+    return ResUtilFindFileTimeProperty(pPropertyList, cbPropertyListSize, pszPropertyName, pftPropertyValue)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilFindLongProperty == "on"]
+foreign {
     // param-hint: pPropertyList bytes=param[1]
     func ResUtilFindLongProperty(pPropertyList: CPointer<Unit>, cbPropertyListSize: UInt32, pszPropertyName: CPointer<UInt16>, plPropertyValue: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilFindLongProperty == "on"]
+public unsafe func Windows_ResUtilFindLongProperty(pPropertyList: CPointer<Unit>, cbPropertyListSize: UInt32, pszPropertyName: CPointer<UInt16>, plPropertyValue: CPointer<Int32>): UInt32 {
+    return ResUtilFindLongProperty(pPropertyList, cbPropertyListSize, pszPropertyName, plPropertyValue)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilFindMultiSzProperty == "on"]
+foreign {
     // param-hint: pPropertyList bytes=param[1]
     func ResUtilFindMultiSzProperty(pPropertyList: CPointer<Unit>, cbPropertyListSize: UInt32, pszPropertyName: CPointer<UInt16>, pszPropertyValue: CPointer<CPointer<UInt16>>, pcbPropertyValueSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilFindMultiSzProperty == "on"]
+public unsafe func Windows_ResUtilFindMultiSzProperty(pPropertyList: CPointer<Unit>, cbPropertyListSize: UInt32, pszPropertyName: CPointer<UInt16>, pszPropertyValue: CPointer<CPointer<UInt16>>, pcbPropertyValueSize: CPointer<UInt32>): UInt32 {
+    return ResUtilFindMultiSzProperty(pPropertyList, cbPropertyListSize, pszPropertyName, pszPropertyValue, pcbPropertyValueSize)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilFindSzProperty == "on"]
+foreign {
     // param-hint: pPropertyList bytes=param[1]
     // param-hint: pszPropertyValue optional
     func ResUtilFindSzProperty(pPropertyList: CPointer<Unit>, cbPropertyListSize: UInt32, pszPropertyName: CPointer<UInt16>, pszPropertyValue: CPointer<CPointer<UInt16>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilFindSzProperty == "on"]
+public unsafe func Windows_ResUtilFindSzProperty(pPropertyList: CPointer<Unit>, cbPropertyListSize: UInt32, pszPropertyName: CPointer<UInt16>, pszPropertyValue: CPointer<CPointer<UInt16>>): UInt32 {
+    return ResUtilFindSzProperty(pPropertyList, cbPropertyListSize, pszPropertyName, pszPropertyValue)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilFindULargeIntegerProperty == "on"]
+foreign {
     // param-hint: pPropertyList bytes=param[1]
     func ResUtilFindULargeIntegerProperty(pPropertyList: CPointer<Unit>, cbPropertyListSize: UInt32, pszPropertyName: CPointer<UInt16>, plPropertyValue: CPointer<UInt64>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilFindULargeIntegerProperty == "on"]
+public unsafe func Windows_ResUtilFindULargeIntegerProperty(pPropertyList: CPointer<Unit>, cbPropertyListSize: UInt32, pszPropertyName: CPointer<UInt16>, plPropertyValue: CPointer<UInt64>): UInt32 {
+    return ResUtilFindULargeIntegerProperty(pPropertyList, cbPropertyListSize, pszPropertyName, plPropertyValue)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilFreeEnvironment == "on"]
+foreign {
     func ResUtilFreeEnvironment(lpEnvironment: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilFreeEnvironment == "on"]
+public unsafe func Windows_ResUtilFreeEnvironment(lpEnvironment: CPointer<Unit>): UInt32 {
+    return ResUtilFreeEnvironment(lpEnvironment)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilFreeParameterBlock == "on"]
+foreign {
     func ResUtilFreeParameterBlock(pOutParams: CPointer<UInt8>, pInParams: CPointer<UInt8>, pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>): Unit
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilFreeParameterBlock == "on"]
+public unsafe func Windows_ResUtilFreeParameterBlock(pOutParams: CPointer<UInt8>, pInParams: CPointer<UInt8>, pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>): Unit {
+    ResUtilFreeParameterBlock(pOutParams, pInParams, pPropertyTable)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetAllProperties == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pOutPropertyList bytes=param[3]
+    func ResUtilGetAllProperties(hkeyClusterKey: Win32_System_Registry.HKEY, pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>, pOutPropertyList: CPointer<Unit>, cbOutPropertyListSize: UInt32, pcbBytesReturned: CPointer<UInt32>, pcbRequired: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetAllProperties == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ResUtilGetAllProperties(hkeyClusterKey: Win32_System_Registry.HKEY, pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>, pOutPropertyList: CPointer<Unit>, cbOutPropertyListSize: UInt32, pcbBytesReturned: CPointer<UInt32>, pcbRequired: CPointer<UInt32>): UInt32 {
+    return ResUtilGetAllProperties(hkeyClusterKey, pPropertyTable, pOutPropertyList, cbOutPropertyListSize, pcbBytesReturned, pcbRequired)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetBinaryProperty == "on"]
+foreign {
     // param-hint: pbOldValue bytes=param[4] optional
     // param-hint: ppPropertyList bytes=param[6]
     func ResUtilGetBinaryProperty(ppbOutValue: CPointer<CPointer<UInt8>>, pcbOutValueSize: CPointer<UInt32>, pValueStruct: CPointer<CLUSPROP_BINARYAbi>, pbOldValue: CPointer<UInt8>, cbOldValueSize: UInt32, ppPropertyList: CPointer<CPointer<UInt8>>, pcbPropertyListSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetBinaryProperty == "on"]
+public unsafe func Windows_ResUtilGetBinaryProperty(ppbOutValue: CPointer<CPointer<UInt8>>, pcbOutValueSize: CPointer<UInt32>, pValueStruct: CPointer<CLUSPROP_BINARYAbi>, pbOldValue: CPointer<UInt8>, cbOldValueSize: UInt32, ppPropertyList: CPointer<CPointer<UInt8>>, pcbPropertyListSize: CPointer<UInt32>): UInt32 {
+    return ResUtilGetBinaryProperty(ppbOutValue, pcbOutValueSize, pValueStruct, pbOldValue, cbOldValueSize, ppPropertyList, pcbPropertyListSize)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetBinaryValue == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    func ResUtilGetBinaryValue(hkeyClusterKey: Win32_System_Registry.HKEY, pszValueName: CPointer<UInt16>, ppbOutValue: CPointer<CPointer<UInt8>>, pcbOutValueSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetBinaryValue == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ResUtilGetBinaryValue(hkeyClusterKey: Win32_System_Registry.HKEY, pszValueName: CPointer<UInt16>, ppbOutValue: CPointer<CPointer<UInt8>>, pcbOutValueSize: CPointer<UInt32>): UInt32 {
+    return ResUtilGetBinaryValue(hkeyClusterKey, pszValueName, ppbOutValue, pcbOutValueSize)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetClusterGroupType == "on"]
+foreign {
     func ResUtilGetClusterGroupType(hGroup: HGROUP, groupType: CPointer<CLUSGROUP_TYPEAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetClusterGroupType == "on"]
+public unsafe func Windows_ResUtilGetClusterGroupType(hGroup: HGROUP, groupType: CPointer<CLUSGROUP_TYPEAbi>): UInt32 {
+    return ResUtilGetClusterGroupType(hGroup, groupType)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetClusterId == "on"]
+foreign {
     func ResUtilGetClusterId(hCluster: HCLUSTER, guid: CPointer<GUID>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetClusterId == "on"]
+public unsafe func Windows_ResUtilGetClusterId(hCluster: HCLUSTER, guid: CPointer<GUID>): UInt32 {
+    return ResUtilGetClusterId(hCluster, guid)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetClusterRoleState == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ResUtilGetClusterRoleState(hCluster: HCLUSTER, eClusterRole: CLUSTER_ROLEAbi): CLUSTER_ROLE_STATEAbi
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetClusterRoleState == "on"]
+public unsafe func Windows_ResUtilGetClusterRoleState(hCluster: HCLUSTER, eClusterRole: CLUSTER_ROLEAbi): CLUSTER_ROLE_STATEAbi {
+    return ResUtilGetClusterRoleState(hCluster, eClusterRole)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetCoreClusterResources == "on"]
+foreign {
     func ResUtilGetCoreClusterResources(hCluster: HCLUSTER, phClusterNameResource: CPointer<HRESOURCE>, phClusterIPAddressResource: CPointer<HRESOURCE>, phClusterQuorumResource: CPointer<HRESOURCE>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetCoreClusterResources == "on"]
+public unsafe func Windows_ResUtilGetCoreClusterResources(hCluster: HCLUSTER, phClusterNameResource: CPointer<HRESOURCE>, phClusterIPAddressResource: CPointer<HRESOURCE>, phClusterQuorumResource: CPointer<HRESOURCE>): UInt32 {
+    return ResUtilGetCoreClusterResources(hCluster, phClusterNameResource, phClusterIPAddressResource, phClusterQuorumResource)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetCoreClusterResourcesEx == "on"]
+foreign {
     // param-hint: phClusterNameResourceOut optional
     // param-hint: phClusterQuorumResourceOut optional
     func ResUtilGetCoreClusterResourcesEx(hClusterIn: HCLUSTER, phClusterNameResourceOut: CPointer<HRESOURCE>, phClusterQuorumResourceOut: CPointer<HRESOURCE>, dwDesiredAccess: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetCoreClusterResourcesEx == "on"]
+public unsafe func Windows_ResUtilGetCoreClusterResourcesEx(hClusterIn: HCLUSTER, phClusterNameResourceOut: CPointer<HRESOURCE>, phClusterQuorumResourceOut: CPointer<HRESOURCE>, dwDesiredAccess: UInt32): UInt32 {
+    return ResUtilGetCoreClusterResourcesEx(hClusterIn, phClusterNameResourceOut, phClusterQuorumResourceOut, dwDesiredAccess)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetCoreGroup == "on"]
+foreign {
     func ResUtilGetCoreGroup(hCluster: HCLUSTER): HGROUP
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetCoreGroup == "on"]
+public unsafe func Windows_ResUtilGetCoreGroup(hCluster: HCLUSTER): HGROUP {
+    return ResUtilGetCoreGroup(hCluster)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetDwordProperty == "on"]
+foreign {
     func ResUtilGetDwordProperty(pdwOutValue: CPointer<UInt32>, pValueStruct: CPointer<CLUSPROP_DWORDAbi>, dwOldValue: UInt32, dwMinimum: UInt32, dwMaximum: UInt32, ppPropertyList: CPointer<CPointer<UInt8>>, pcbPropertyListSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetDwordProperty == "on"]
+public unsafe func Windows_ResUtilGetDwordProperty(pdwOutValue: CPointer<UInt32>, pValueStruct: CPointer<CLUSPROP_DWORDAbi>, dwOldValue: UInt32, dwMinimum: UInt32, dwMaximum: UInt32, ppPropertyList: CPointer<CPointer<UInt8>>, pcbPropertyListSize: CPointer<UInt32>): UInt32 {
+    return ResUtilGetDwordProperty(pdwOutValue, pValueStruct, dwOldValue, dwMinimum, dwMaximum, ppPropertyList, pcbPropertyListSize)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetDwordValue == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    func ResUtilGetDwordValue(hkeyClusterKey: Win32_System_Registry.HKEY, pszValueName: CPointer<UInt16>, pdwOutValue: CPointer<UInt32>, dwDefaultValue: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetDwordValue == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ResUtilGetDwordValue(hkeyClusterKey: Win32_System_Registry.HKEY, pszValueName: CPointer<UInt16>, pdwOutValue: CPointer<UInt32>, dwDefaultValue: UInt32): UInt32 {
+    return ResUtilGetDwordValue(hkeyClusterKey, pszValueName, pdwOutValue, dwDefaultValue)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetEnvironmentWithNetName == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ResUtilGetEnvironmentWithNetName(hResource: HRESOURCE): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetEnvironmentWithNetName == "on"]
+public unsafe func Windows_ResUtilGetEnvironmentWithNetName(hResource: HRESOURCE): CPointer<Unit> {
+    return ResUtilGetEnvironmentWithNetName(hResource)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetFileTimeProperty == "on"]
+foreign {
     func ResUtilGetFileTimeProperty(pftOutValue: CPointer<Win32_Foundation.FILETIMEAbi>, pValueStruct: CPointer<CLUSPROP_FILETIMEAbi>, ftOldValue: Win32_Foundation.FILETIMEAbi, ftMinimum: Win32_Foundation.FILETIMEAbi, ftMaximum: Win32_Foundation.FILETIMEAbi, ppPropertyList: CPointer<CPointer<UInt8>>, pcbPropertyListSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetFileTimeProperty == "on"]
+public unsafe func Windows_ResUtilGetFileTimeProperty(pftOutValue: CPointer<Win32_Foundation.FILETIMEAbi>, pValueStruct: CPointer<CLUSPROP_FILETIMEAbi>, ftOldValue: Win32_Foundation.FILETIMEAbi, ftMinimum: Win32_Foundation.FILETIMEAbi, ftMaximum: Win32_Foundation.FILETIMEAbi, ppPropertyList: CPointer<CPointer<UInt8>>, pcbPropertyListSize: CPointer<UInt32>): UInt32 {
+    return ResUtilGetFileTimeProperty(pftOutValue, pValueStruct, ftOldValue, ftMinimum, ftMaximum, ppPropertyList, pcbPropertyListSize)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetLongProperty == "on"]
+foreign {
     func ResUtilGetLongProperty(plOutValue: CPointer<Int32>, pValueStruct: CPointer<CLUSPROP_LONGAbi>, lOldValue: Int32, lMinimum: Int32, lMaximum: Int32, ppPropertyList: CPointer<CPointer<UInt8>>, pcbPropertyListSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetLongProperty == "on"]
+public unsafe func Windows_ResUtilGetLongProperty(plOutValue: CPointer<Int32>, pValueStruct: CPointer<CLUSPROP_LONGAbi>, lOldValue: Int32, lMinimum: Int32, lMaximum: Int32, ppPropertyList: CPointer<CPointer<UInt8>>, pcbPropertyListSize: CPointer<UInt32>): UInt32 {
+    return ResUtilGetLongProperty(plOutValue, pValueStruct, lOldValue, lMinimum, lMaximum, ppPropertyList, pcbPropertyListSize)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetMultiSzProperty == "on"]
+foreign {
     // param-hint: pszOldValue bytes=param[4] optional
     // param-hint: ppPropertyList bytes=param[6]
     func ResUtilGetMultiSzProperty(ppszOutValue: CPointer<CPointer<UInt16>>, pcbOutValueSize: CPointer<UInt32>, pValueStruct: CPointer<CLUSPROP_SZAbi>, pszOldValue: CPointer<UInt16>, cbOldValueSize: UInt32, ppPropertyList: CPointer<CPointer<UInt8>>, pcbPropertyListSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetMultiSzProperty == "on"]
+public unsafe func Windows_ResUtilGetMultiSzProperty(ppszOutValue: CPointer<CPointer<UInt16>>, pcbOutValueSize: CPointer<UInt32>, pValueStruct: CPointer<CLUSPROP_SZAbi>, pszOldValue: CPointer<UInt16>, cbOldValueSize: UInt32, ppPropertyList: CPointer<CPointer<UInt8>>, pcbPropertyListSize: CPointer<UInt32>): UInt32 {
+    return ResUtilGetMultiSzProperty(ppszOutValue, pcbOutValueSize, pValueStruct, pszOldValue, cbOldValueSize, ppPropertyList, pcbPropertyListSize)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetPrivateProperties == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pOutPropertyList bytes=param[2]
+    func ResUtilGetPrivateProperties(hkeyClusterKey: Win32_System_Registry.HKEY, pOutPropertyList: CPointer<Unit>, cbOutPropertyListSize: UInt32, pcbBytesReturned: CPointer<UInt32>, pcbRequired: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetPrivateProperties == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ResUtilGetPrivateProperties(hkeyClusterKey: Win32_System_Registry.HKEY, pOutPropertyList: CPointer<Unit>, cbOutPropertyListSize: UInt32, pcbBytesReturned: CPointer<UInt32>, pcbRequired: CPointer<UInt32>): UInt32 {
+    return ResUtilGetPrivateProperties(hkeyClusterKey, pOutPropertyList, cbOutPropertyListSize, pcbBytesReturned, pcbRequired)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetProperties == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pOutPropertyList bytes=param[3]
+    func ResUtilGetProperties(hkeyClusterKey: Win32_System_Registry.HKEY, pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>, pOutPropertyList: CPointer<Unit>, cbOutPropertyListSize: UInt32, pcbBytesReturned: CPointer<UInt32>, pcbRequired: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetProperties == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ResUtilGetProperties(hkeyClusterKey: Win32_System_Registry.HKEY, pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>, pOutPropertyList: CPointer<Unit>, cbOutPropertyListSize: UInt32, pcbBytesReturned: CPointer<UInt32>, pcbRequired: CPointer<UInt32>): UInt32 {
+    return ResUtilGetProperties(hkeyClusterKey, pPropertyTable, pOutPropertyList, cbOutPropertyListSize, pcbBytesReturned, pcbRequired)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetPropertiesToParameterBlock == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    func ResUtilGetPropertiesToParameterBlock(hkeyClusterKey: Win32_System_Registry.HKEY, pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>, pOutParams: CPointer<UInt8>, bCheckForRequiredProperties: Int32, pszNameOfPropInError: CPointer<CPointer<UInt16>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetPropertiesToParameterBlock == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ResUtilGetPropertiesToParameterBlock(hkeyClusterKey: Win32_System_Registry.HKEY, pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>, pOutParams: CPointer<UInt8>, bCheckForRequiredProperties: Int32, pszNameOfPropInError: CPointer<CPointer<UInt16>>): UInt32 {
+    return ResUtilGetPropertiesToParameterBlock(hkeyClusterKey, pPropertyTable, pOutParams, bCheckForRequiredProperties, pszNameOfPropInError)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetProperty == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: pOutPropertyItem bytes=param[3]
+    func ResUtilGetProperty(hkeyClusterKey: Win32_System_Registry.HKEY, pPropertyTableItem: CPointer<RESUTIL_PROPERTY_ITEMAbi>, pOutPropertyItem: CPointer<CPointer<Unit>>, pcbOutPropertyItemSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetProperty == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ResUtilGetProperty(hkeyClusterKey: Win32_System_Registry.HKEY, pPropertyTableItem: CPointer<RESUTIL_PROPERTY_ITEMAbi>, pOutPropertyItem: CPointer<CPointer<Unit>>, pcbOutPropertyItemSize: CPointer<UInt32>): UInt32 {
+    return ResUtilGetProperty(hkeyClusterKey, pPropertyTableItem, pOutPropertyItem, pcbOutPropertyItemSize)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetPropertyFormats == "on"]
+foreign {
     // param-hint: pOutPropertyFormatList bytes=param[2]
     func ResUtilGetPropertyFormats(pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>, pOutPropertyFormatList: CPointer<Unit>, cbPropertyFormatListSize: UInt32, pcbBytesReturned: CPointer<UInt32>, pcbRequired: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetPropertyFormats == "on"]
+public unsafe func Windows_ResUtilGetPropertyFormats(pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>, pOutPropertyFormatList: CPointer<Unit>, cbPropertyFormatListSize: UInt32, pcbBytesReturned: CPointer<UInt32>, pcbRequired: CPointer<UInt32>): UInt32 {
+    return ResUtilGetPropertyFormats(pPropertyTable, pOutPropertyFormatList, cbPropertyFormatListSize, pcbBytesReturned, pcbRequired)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetPropertySize == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    func ResUtilGetPropertySize(hkeyClusterKey: Win32_System_Registry.HKEY, pPropertyTableItem: CPointer<RESUTIL_PROPERTY_ITEMAbi>, pcbOutPropertyListSize: CPointer<UInt32>, pnPropertyCount: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetPropertySize == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ResUtilGetPropertySize(hkeyClusterKey: Win32_System_Registry.HKEY, pPropertyTableItem: CPointer<RESUTIL_PROPERTY_ITEMAbi>, pcbOutPropertyListSize: CPointer<UInt32>, pnPropertyCount: CPointer<UInt32>): UInt32 {
+    return ResUtilGetPropertySize(hkeyClusterKey, pPropertyTableItem, pcbOutPropertyListSize, pnPropertyCount)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetQwordValue == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    func ResUtilGetQwordValue(hkeyClusterKey: Win32_System_Registry.HKEY, pszValueName: CPointer<UInt16>, pqwOutValue: CPointer<UInt64>, qwDefaultValue: UInt64): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetQwordValue == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ResUtilGetQwordValue(hkeyClusterKey: Win32_System_Registry.HKEY, pszValueName: CPointer<UInt16>, pqwOutValue: CPointer<UInt64>, qwDefaultValue: UInt64): UInt32 {
+    return ResUtilGetQwordValue(hkeyClusterKey, pszValueName, pqwOutValue, qwDefaultValue)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetResourceDependency == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ResUtilGetResourceDependency(hSelf: CPointer<Unit>, lpszResourceType: CPointer<UInt16>): HRESOURCE
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetResourceDependency == "on"]
+public unsafe func Windows_ResUtilGetResourceDependency(hSelf: CPointer<Unit>, lpszResourceType: CPointer<UInt16>): HRESOURCE {
+    return ResUtilGetResourceDependency(hSelf, lpszResourceType)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetResourceDependencyByClass == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ResUtilGetResourceDependencyByClass(hCluster: HCLUSTER, hSelf: CPointer<Unit>, prci: CPointer<CLUS_RESOURCE_CLASS_INFOAbi>, bRecurse: Int32): HRESOURCE
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetResourceDependencyByClass == "on"]
+public unsafe func Windows_ResUtilGetResourceDependencyByClass(hCluster: HCLUSTER, hSelf: CPointer<Unit>, prci: CPointer<CLUS_RESOURCE_CLASS_INFOAbi>, bRecurse: Int32): HRESOURCE {
+    return ResUtilGetResourceDependencyByClass(hCluster, hSelf, prci, bRecurse)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetResourceDependencyByClassEx == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ResUtilGetResourceDependencyByClassEx(hCluster: HCLUSTER, hSelf: CPointer<Unit>, prci: CPointer<CLUS_RESOURCE_CLASS_INFOAbi>, bRecurse: Int32, dwDesiredAccess: UInt32): HRESOURCE
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetResourceDependencyByClassEx == "on"]
+public unsafe func Windows_ResUtilGetResourceDependencyByClassEx(hCluster: HCLUSTER, hSelf: CPointer<Unit>, prci: CPointer<CLUS_RESOURCE_CLASS_INFOAbi>, bRecurse: Int32, dwDesiredAccess: UInt32): HRESOURCE {
+    return ResUtilGetResourceDependencyByClassEx(hCluster, hSelf, prci, bRecurse, dwDesiredAccess)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetResourceDependencyByName == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ResUtilGetResourceDependencyByName(hCluster: HCLUSTER, hSelf: CPointer<Unit>, lpszResourceType: CPointer<UInt16>, bRecurse: Int32): HRESOURCE
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetResourceDependencyByName == "on"]
+public unsafe func Windows_ResUtilGetResourceDependencyByName(hCluster: HCLUSTER, hSelf: CPointer<Unit>, lpszResourceType: CPointer<UInt16>, bRecurse: Int32): HRESOURCE {
+    return ResUtilGetResourceDependencyByName(hCluster, hSelf, lpszResourceType, bRecurse)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetResourceDependencyByNameEx == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ResUtilGetResourceDependencyByNameEx(hCluster: HCLUSTER, hSelf: CPointer<Unit>, lpszResourceType: CPointer<UInt16>, bRecurse: Int32, dwDesiredAccess: UInt32): HRESOURCE
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetResourceDependencyByNameEx == "on"]
+public unsafe func Windows_ResUtilGetResourceDependencyByNameEx(hCluster: HCLUSTER, hSelf: CPointer<Unit>, lpszResourceType: CPointer<UInt16>, bRecurse: Int32, dwDesiredAccess: UInt32): HRESOURCE {
+    return ResUtilGetResourceDependencyByNameEx(hCluster, hSelf, lpszResourceType, bRecurse, dwDesiredAccess)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetResourceDependencyEx == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ResUtilGetResourceDependencyEx(hSelf: CPointer<Unit>, lpszResourceType: CPointer<UInt16>, dwDesiredAccess: UInt32): HRESOURCE
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetResourceDependencyEx == "on"]
+public unsafe func Windows_ResUtilGetResourceDependencyEx(hSelf: CPointer<Unit>, lpszResourceType: CPointer<UInt16>, dwDesiredAccess: UInt32): HRESOURCE {
+    return ResUtilGetResourceDependencyEx(hSelf, lpszResourceType, dwDesiredAccess)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetResourceDependentIPAddressProps == "on"]
+foreign {
     // param-hint: pszAddress len=param[2]
     // param-hint: pszSubnetMask len=param[4]
     // param-hint: pszNetwork len=param[6]
     func ResUtilGetResourceDependentIPAddressProps(hResource: HRESOURCE, pszAddress: CPointer<UInt16>, pcchAddress: CPointer<UInt32>, pszSubnetMask: CPointer<UInt16>, pcchSubnetMask: CPointer<UInt32>, pszNetwork: CPointer<UInt16>, pcchNetwork: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetResourceDependentIPAddressProps == "on"]
+public unsafe func Windows_ResUtilGetResourceDependentIPAddressProps(hResource: HRESOURCE, pszAddress: CPointer<UInt16>, pcchAddress: CPointer<UInt32>, pszSubnetMask: CPointer<UInt16>, pcchSubnetMask: CPointer<UInt32>, pszNetwork: CPointer<UInt16>, pcchNetwork: CPointer<UInt32>): UInt32 {
+    return ResUtilGetResourceDependentIPAddressProps(hResource, pszAddress, pcchAddress, pszSubnetMask, pcchSubnetMask, pszNetwork, pcchNetwork)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetResourceName == "on"]
+foreign {
     // param-hint: pszResourceName len=param[2]
     func ResUtilGetResourceName(hResource: HRESOURCE, pszResourceName: CPointer<UInt16>, pcchResourceNameInOut: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetResourceName == "on"]
+public unsafe func Windows_ResUtilGetResourceName(hResource: HRESOURCE, pszResourceName: CPointer<UInt16>, pcchResourceNameInOut: CPointer<UInt32>): UInt32 {
+    return ResUtilGetResourceName(hResource, pszResourceName, pcchResourceNameInOut)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetResourceNameDependency == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ResUtilGetResourceNameDependency(lpszResourceName: CPointer<UInt16>, lpszResourceType: CPointer<UInt16>): HRESOURCE
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetResourceNameDependency == "on"]
+public unsafe func Windows_ResUtilGetResourceNameDependency(lpszResourceName: CPointer<UInt16>, lpszResourceType: CPointer<UInt16>): HRESOURCE {
+    return ResUtilGetResourceNameDependency(lpszResourceName, lpszResourceType)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetResourceNameDependencyEx == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ResUtilGetResourceNameDependencyEx(lpszResourceName: CPointer<UInt16>, lpszResourceType: CPointer<UInt16>, dwDesiredAccess: UInt32): HRESOURCE
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetResourceNameDependencyEx == "on"]
+public unsafe func Windows_ResUtilGetResourceNameDependencyEx(lpszResourceName: CPointer<UInt16>, lpszResourceType: CPointer<UInt16>, dwDesiredAccess: UInt32): HRESOURCE {
+    return ResUtilGetResourceNameDependencyEx(lpszResourceName, lpszResourceType, dwDesiredAccess)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetSzProperty == "on"]
+foreign {
     // param-hint: pszOldValue optional
     // param-hint: ppPropertyList bytes=param[4]
     func ResUtilGetSzProperty(ppszOutValue: CPointer<CPointer<UInt16>>, pValueStruct: CPointer<CLUSPROP_SZAbi>, pszOldValue: CPointer<UInt16>, ppPropertyList: CPointer<CPointer<UInt8>>, pcbPropertyListSize: CPointer<UInt32>): UInt32
-    func ResUtilGroupsEqual(hSelf: HGROUP, hGroup: HGROUP, pEqual: CPointer<Int32>): UInt32
-    func ResUtilIsPathValid(pszPath: CPointer<UInt16>): Int32
-    func ResUtilIsResourceClassEqual(prci: CPointer<CLUS_RESOURCE_CLASS_INFOAbi>, hResource: HRESOURCE): Int32
-    func ResUtilLeftPaxosIsLessThanRight(left: CPointer<PaxosTagCStructAbi>, right: CPointer<PaxosTagCStructAbi>): Int32
-    func ResUtilNodeEnum(hCluster: HCLUSTER, pNodeCallBack: LPNODE_CALLBACK, pParameter: CPointer<Unit>): UInt32
-    func ResUtilPaxosComparer(left: CPointer<PaxosTagCStructAbi>, right: CPointer<PaxosTagCStructAbi>): Int32
-    // param-hint: pOutPropertyList bytes=param[2] optional
-    func ResUtilPropertyListFromParameterBlock(pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>, pOutPropertyList: CPointer<Unit>, pcbOutPropertyListSize: CPointer<UInt32>, pInParams: CPointer<UInt8>, pcbBytesReturned: CPointer<UInt32>, pcbRequired: CPointer<UInt32>): UInt32
-    func ResUtilRemoveResourceServiceEnvironment(pszServiceName: CPointer<UInt16>, pfnLogEvent: PLOG_EVENT_ROUTINE, hResourceHandle: IntNative): UInt32
-    func ResUtilResourceDepEnum(hSelf: HRESOURCE, enumType: UInt32, pResCallBack: LPRESOURCE_CALLBACK_EX, pParameter: CPointer<Unit>): UInt32
-    func ResUtilResourceTypesEqual(lpszResourceTypeName: CPointer<UInt16>, hResource: HRESOURCE): Int32
-    func ResUtilResourcesEqual(hSelf: HRESOURCE, hResource: HRESOURCE): Int32
-    func ResUtilSetResourceServiceEnvironment(pszServiceName: CPointer<UInt16>, hResource: HRESOURCE, pfnLogEvent: PLOG_EVENT_ROUTINE, hResourceHandle: IntNative): UInt32
-    func ResUtilStopResourceService(pszServiceName: CPointer<UInt16>): UInt32
-    func ResUtilTerminateServiceProcessFromResDll(dwServicePid: UInt32, bOffline: Int32, pdwResourceState: CPointer<UInt32>, pfnLogEvent: PLOG_EVENT_ROUTINE, hResourceHandle: IntNative): UInt32
-    // param-hint: pInPropertyList bytes=param[1]
-    func ResUtilVerifyPrivatePropertyList(pInPropertyList: CPointer<Unit>, cbInPropertyListSize: UInt32): UInt32
-    // param-hint: Reserved optional reserved
-    // param-hint: pInPropertyList bytes=param[4]
-    // param-hint: pOutParams optional
-    func ResUtilVerifyPropertyTable(pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>, Reserved: CPointer<Unit>, bAllowUnknownProperties: Int32, pInPropertyList: CPointer<Unit>, cbInPropertyListSize: UInt32, pOutParams: CPointer<UInt8>): UInt32
-    func ResUtilVerifyResourceService(pszServiceName: CPointer<UInt16>): UInt32
-    func ResUtilVerifyShutdownSafe(flags: UInt32, reason: UInt32, pResult: CPointer<UInt32>): UInt32
 }
 
-@When[RESUTILS == "on" && Windows_Win32_System_Registry == "on"]
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetSzProperty == "on"]
+public unsafe func Windows_ResUtilGetSzProperty(ppszOutValue: CPointer<CPointer<UInt16>>, pValueStruct: CPointer<CLUSPROP_SZAbi>, pszOldValue: CPointer<UInt16>, ppPropertyList: CPointer<CPointer<UInt8>>, pcbPropertyListSize: CPointer<UInt32>): UInt32 {
+    return ResUtilGetSzProperty(ppszOutValue, pValueStruct, pszOldValue, ppPropertyList, pcbPropertyListSize)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetSzValue == "on" && Windows_Win32_System_Registry == "on"]
 foreign {
-    func ResUtilAddUnknownProperties(hkeyClusterKey: Win32_System_Registry.HKEY, pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>, pOutPropertyList: CPointer<Unit>, pcbOutPropertyListSize: UInt32, pcbBytesReturned: CPointer<UInt32>, pcbRequired: CPointer<UInt32>): UInt32
-    // param-hint: pszOutProperties bytes=param[2]
-    func ResUtilEnumPrivateProperties(hkeyClusterKey: Win32_System_Registry.HKEY, pszOutProperties: CPointer<UInt16>, cbOutPropertiesSize: UInt32, pcbBytesReturned: CPointer<UInt32>, pcbRequired: CPointer<UInt32>): UInt32
-    // param-hint: pOutPropertyList bytes=param[3]
-    func ResUtilGetAllProperties(hkeyClusterKey: Win32_System_Registry.HKEY, pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>, pOutPropertyList: CPointer<Unit>, cbOutPropertyListSize: UInt32, pcbBytesReturned: CPointer<UInt32>, pcbRequired: CPointer<UInt32>): UInt32
-    func ResUtilGetBinaryValue(hkeyClusterKey: Win32_System_Registry.HKEY, pszValueName: CPointer<UInt16>, ppbOutValue: CPointer<CPointer<UInt8>>, pcbOutValueSize: CPointer<UInt32>): UInt32
-    func ResUtilGetDwordValue(hkeyClusterKey: Win32_System_Registry.HKEY, pszValueName: CPointer<UInt16>, pdwOutValue: CPointer<UInt32>, dwDefaultValue: UInt32): UInt32
-    // param-hint: pOutPropertyList bytes=param[2]
-    func ResUtilGetPrivateProperties(hkeyClusterKey: Win32_System_Registry.HKEY, pOutPropertyList: CPointer<Unit>, cbOutPropertyListSize: UInt32, pcbBytesReturned: CPointer<UInt32>, pcbRequired: CPointer<UInt32>): UInt32
-    // param-hint: pOutPropertyList bytes=param[3]
-    func ResUtilGetProperties(hkeyClusterKey: Win32_System_Registry.HKEY, pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>, pOutPropertyList: CPointer<Unit>, cbOutPropertyListSize: UInt32, pcbBytesReturned: CPointer<UInt32>, pcbRequired: CPointer<UInt32>): UInt32
-    func ResUtilGetPropertiesToParameterBlock(hkeyClusterKey: Win32_System_Registry.HKEY, pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>, pOutParams: CPointer<UInt8>, bCheckForRequiredProperties: Int32, pszNameOfPropInError: CPointer<CPointer<UInt16>>): UInt32
-    // param-hint: pOutPropertyItem bytes=param[3]
-    func ResUtilGetProperty(hkeyClusterKey: Win32_System_Registry.HKEY, pPropertyTableItem: CPointer<RESUTIL_PROPERTY_ITEMAbi>, pOutPropertyItem: CPointer<CPointer<Unit>>, pcbOutPropertyItemSize: CPointer<UInt32>): UInt32
-    func ResUtilGetPropertySize(hkeyClusterKey: Win32_System_Registry.HKEY, pPropertyTableItem: CPointer<RESUTIL_PROPERTY_ITEMAbi>, pcbOutPropertyListSize: CPointer<UInt32>, pnPropertyCount: CPointer<UInt32>): UInt32
-    func ResUtilGetQwordValue(hkeyClusterKey: Win32_System_Registry.HKEY, pszValueName: CPointer<UInt16>, pqwOutValue: CPointer<UInt64>, qwDefaultValue: UInt64): UInt32
     // pinvoke-hint: SetLastError
     func ResUtilGetSzValue(hkeyClusterKey: Win32_System_Registry.HKEY, pszValueName: CPointer<UInt16>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGetSzValue == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ResUtilGetSzValue(hkeyClusterKey: Win32_System_Registry.HKEY, pszValueName: CPointer<UInt16>): CPointer<UInt16> {
+    return ResUtilGetSzValue(hkeyClusterKey, pszValueName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGroupsEqual == "on"]
+foreign {
+    func ResUtilGroupsEqual(hSelf: HGROUP, hGroup: HGROUP, pEqual: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilGroupsEqual == "on"]
+public unsafe func Windows_ResUtilGroupsEqual(hSelf: HGROUP, hGroup: HGROUP, pEqual: CPointer<Int32>): UInt32 {
+    return ResUtilGroupsEqual(hSelf, hGroup, pEqual)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilIsPathValid == "on"]
+foreign {
+    func ResUtilIsPathValid(pszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilIsPathValid == "on"]
+public unsafe func Windows_ResUtilIsPathValid(pszPath: CPointer<UInt16>): Int32 {
+    return ResUtilIsPathValid(pszPath)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilIsResourceClassEqual == "on"]
+foreign {
+    func ResUtilIsResourceClassEqual(prci: CPointer<CLUS_RESOURCE_CLASS_INFOAbi>, hResource: HRESOURCE): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilIsResourceClassEqual == "on"]
+public unsafe func Windows_ResUtilIsResourceClassEqual(prci: CPointer<CLUS_RESOURCE_CLASS_INFOAbi>, hResource: HRESOURCE): Int32 {
+    return ResUtilIsResourceClassEqual(prci, hResource)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilLeftPaxosIsLessThanRight == "on"]
+foreign {
+    func ResUtilLeftPaxosIsLessThanRight(left: CPointer<PaxosTagCStructAbi>, right: CPointer<PaxosTagCStructAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilLeftPaxosIsLessThanRight == "on"]
+public unsafe func Windows_ResUtilLeftPaxosIsLessThanRight(left: CPointer<PaxosTagCStructAbi>, right: CPointer<PaxosTagCStructAbi>): Int32 {
+    return ResUtilLeftPaxosIsLessThanRight(left, right)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilNodeEnum == "on"]
+foreign {
+    func ResUtilNodeEnum(hCluster: HCLUSTER, pNodeCallBack: LPNODE_CALLBACK, pParameter: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilNodeEnum == "on"]
+public unsafe func Windows_ResUtilNodeEnum(hCluster: HCLUSTER, pNodeCallBack: LPNODE_CALLBACK, pParameter: CPointer<Unit>): UInt32 {
+    return ResUtilNodeEnum(hCluster, pNodeCallBack, pParameter)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilPaxosComparer == "on"]
+foreign {
+    func ResUtilPaxosComparer(left: CPointer<PaxosTagCStructAbi>, right: CPointer<PaxosTagCStructAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilPaxosComparer == "on"]
+public unsafe func Windows_ResUtilPaxosComparer(left: CPointer<PaxosTagCStructAbi>, right: CPointer<PaxosTagCStructAbi>): Int32 {
+    return ResUtilPaxosComparer(left, right)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilPropertyListFromParameterBlock == "on"]
+foreign {
+    // param-hint: pOutPropertyList bytes=param[2] optional
+    func ResUtilPropertyListFromParameterBlock(pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>, pOutPropertyList: CPointer<Unit>, pcbOutPropertyListSize: CPointer<UInt32>, pInParams: CPointer<UInt8>, pcbBytesReturned: CPointer<UInt32>, pcbRequired: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilPropertyListFromParameterBlock == "on"]
+public unsafe func Windows_ResUtilPropertyListFromParameterBlock(pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>, pOutPropertyList: CPointer<Unit>, pcbOutPropertyListSize: CPointer<UInt32>, pInParams: CPointer<UInt8>, pcbBytesReturned: CPointer<UInt32>, pcbRequired: CPointer<UInt32>): UInt32 {
+    return ResUtilPropertyListFromParameterBlock(pPropertyTable, pOutPropertyList, pcbOutPropertyListSize, pInParams, pcbBytesReturned, pcbRequired)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilRemoveResourceServiceEnvironment == "on"]
+foreign {
+    func ResUtilRemoveResourceServiceEnvironment(pszServiceName: CPointer<UInt16>, pfnLogEvent: PLOG_EVENT_ROUTINE, hResourceHandle: IntNative): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilRemoveResourceServiceEnvironment == "on"]
+public unsafe func Windows_ResUtilRemoveResourceServiceEnvironment(pszServiceName: CPointer<UInt16>, pfnLogEvent: PLOG_EVENT_ROUTINE, hResourceHandle: IntNative): UInt32 {
+    return ResUtilRemoveResourceServiceEnvironment(pszServiceName, pfnLogEvent, hResourceHandle)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilResourceDepEnum == "on"]
+foreign {
+    func ResUtilResourceDepEnum(hSelf: HRESOURCE, enumType: UInt32, pResCallBack: LPRESOURCE_CALLBACK_EX, pParameter: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilResourceDepEnum == "on"]
+public unsafe func Windows_ResUtilResourceDepEnum(hSelf: HRESOURCE, enumType: UInt32, pResCallBack: LPRESOURCE_CALLBACK_EX, pParameter: CPointer<Unit>): UInt32 {
+    return ResUtilResourceDepEnum(hSelf, enumType, pResCallBack, pParameter)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilResourceTypesEqual == "on"]
+foreign {
+    func ResUtilResourceTypesEqual(lpszResourceTypeName: CPointer<UInt16>, hResource: HRESOURCE): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilResourceTypesEqual == "on"]
+public unsafe func Windows_ResUtilResourceTypesEqual(lpszResourceTypeName: CPointer<UInt16>, hResource: HRESOURCE): Int32 {
+    return ResUtilResourceTypesEqual(lpszResourceTypeName, hResource)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilResourcesEqual == "on"]
+foreign {
+    func ResUtilResourcesEqual(hSelf: HRESOURCE, hResource: HRESOURCE): Int32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilResourcesEqual == "on"]
+public unsafe func Windows_ResUtilResourcesEqual(hSelf: HRESOURCE, hResource: HRESOURCE): Int32 {
+    return ResUtilResourcesEqual(hSelf, hResource)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilSetBinaryValue == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: pbNewValue bytes=param[3]
     // param-hint: ppbOutValue bytes=param[5] optional
     func ResUtilSetBinaryValue(hkeyClusterKey: Win32_System_Registry.HKEY, pszValueName: CPointer<UInt16>, pbNewValue: CPointer<UInt8>, cbNewValueSize: UInt32, ppbOutValue: CPointer<CPointer<UInt8>>, pcbOutValueSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilSetBinaryValue == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ResUtilSetBinaryValue(hkeyClusterKey: Win32_System_Registry.HKEY, pszValueName: CPointer<UInt16>, pbNewValue: CPointer<UInt8>, cbNewValueSize: UInt32, ppbOutValue: CPointer<CPointer<UInt8>>, pcbOutValueSize: CPointer<UInt32>): UInt32 {
+    return ResUtilSetBinaryValue(hkeyClusterKey, pszValueName, pbNewValue, cbNewValueSize, ppbOutValue, pcbOutValueSize)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilSetDwordValue == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     func ResUtilSetDwordValue(hkeyClusterKey: Win32_System_Registry.HKEY, pszValueName: CPointer<UInt16>, dwNewValue: UInt32, pdwOutValue: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilSetDwordValue == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ResUtilSetDwordValue(hkeyClusterKey: Win32_System_Registry.HKEY, pszValueName: CPointer<UInt16>, dwNewValue: UInt32, pdwOutValue: CPointer<UInt32>): UInt32 {
+    return ResUtilSetDwordValue(hkeyClusterKey, pszValueName, dwNewValue, pdwOutValue)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilSetExpandSzValue == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: ppszOutString optional
     func ResUtilSetExpandSzValue(hkeyClusterKey: Win32_System_Registry.HKEY, pszValueName: CPointer<UInt16>, pszNewValue: CPointer<UInt16>, ppszOutString: CPointer<CPointer<UInt16>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilSetExpandSzValue == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ResUtilSetExpandSzValue(hkeyClusterKey: Win32_System_Registry.HKEY, pszValueName: CPointer<UInt16>, pszNewValue: CPointer<UInt16>, ppszOutString: CPointer<CPointer<UInt16>>): UInt32 {
+    return ResUtilSetExpandSzValue(hkeyClusterKey, pszValueName, pszNewValue, ppszOutString)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilSetMultiSzValue == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: pszNewValue bytes=param[3]
     // param-hint: ppszOutValue optional
     // param-hint: pcbOutValueSize optional
     func ResUtilSetMultiSzValue(hkeyClusterKey: Win32_System_Registry.HKEY, pszValueName: CPointer<UInt16>, pszNewValue: CPointer<UInt16>, cbNewValueSize: UInt32, ppszOutValue: CPointer<CPointer<UInt16>>, pcbOutValueSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilSetMultiSzValue == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ResUtilSetMultiSzValue(hkeyClusterKey: Win32_System_Registry.HKEY, pszValueName: CPointer<UInt16>, pszNewValue: CPointer<UInt16>, cbNewValueSize: UInt32, ppszOutValue: CPointer<CPointer<UInt16>>, pcbOutValueSize: CPointer<UInt32>): UInt32 {
+    return ResUtilSetMultiSzValue(hkeyClusterKey, pszValueName, pszNewValue, cbNewValueSize, ppszOutValue, pcbOutValueSize)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilSetPrivatePropertyList == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: pInPropertyList bytes=param[2]
     func ResUtilSetPrivatePropertyList(hkeyClusterKey: Win32_System_Registry.HKEY, pInPropertyList: CPointer<Unit>, cbInPropertyListSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilSetPrivatePropertyList == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ResUtilSetPrivatePropertyList(hkeyClusterKey: Win32_System_Registry.HKEY, pInPropertyList: CPointer<Unit>, cbInPropertyListSize: UInt32): UInt32 {
+    return ResUtilSetPrivatePropertyList(hkeyClusterKey, pInPropertyList, cbInPropertyListSize)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilSetPropertyParameterBlock == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     func ResUtilSetPropertyParameterBlock(hkeyClusterKey: Win32_System_Registry.HKEY, pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>, Reserved: CPointer<Unit>, pInParams: CPointer<UInt8>, pInPropertyList: CPointer<Unit>, cbInPropertyListSize: UInt32, pOutParams: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilSetPropertyParameterBlock == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ResUtilSetPropertyParameterBlock(hkeyClusterKey: Win32_System_Registry.HKEY, pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>, Reserved: CPointer<Unit>, pInParams: CPointer<UInt8>, pInPropertyList: CPointer<Unit>, cbInPropertyListSize: UInt32, pOutParams: CPointer<UInt8>): UInt32 {
+    return ResUtilSetPropertyParameterBlock(hkeyClusterKey, pPropertyTable, Reserved, pInParams, pInPropertyList, cbInPropertyListSize, pOutParams)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilSetPropertyParameterBlockEx == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     func ResUtilSetPropertyParameterBlockEx(hkeyClusterKey: Win32_System_Registry.HKEY, pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>, Reserved: CPointer<Unit>, pInParams: CPointer<UInt8>, pInPropertyList: CPointer<Unit>, cbInPropertyListSize: UInt32, bForceWrite: Int32, pOutParams: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilSetPropertyParameterBlockEx == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ResUtilSetPropertyParameterBlockEx(hkeyClusterKey: Win32_System_Registry.HKEY, pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>, Reserved: CPointer<Unit>, pInParams: CPointer<UInt8>, pInPropertyList: CPointer<Unit>, cbInPropertyListSize: UInt32, bForceWrite: Int32, pOutParams: CPointer<UInt8>): UInt32 {
+    return ResUtilSetPropertyParameterBlockEx(hkeyClusterKey, pPropertyTable, Reserved, pInParams, pInPropertyList, cbInPropertyListSize, bForceWrite, pOutParams)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilSetPropertyTable == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: Reserved optional reserved
     // param-hint: pInPropertyList bytes=param[5]
     // param-hint: pOutParams optional
     func ResUtilSetPropertyTable(hkeyClusterKey: Win32_System_Registry.HKEY, pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>, Reserved: CPointer<Unit>, bAllowUnknownProperties: Int32, pInPropertyList: CPointer<Unit>, cbInPropertyListSize: UInt32, pOutParams: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilSetPropertyTable == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ResUtilSetPropertyTable(hkeyClusterKey: Win32_System_Registry.HKEY, pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>, Reserved: CPointer<Unit>, bAllowUnknownProperties: Int32, pInPropertyList: CPointer<Unit>, cbInPropertyListSize: UInt32, pOutParams: CPointer<UInt8>): UInt32 {
+    return ResUtilSetPropertyTable(hkeyClusterKey, pPropertyTable, Reserved, bAllowUnknownProperties, pInPropertyList, cbInPropertyListSize, pOutParams)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilSetPropertyTableEx == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     func ResUtilSetPropertyTableEx(hkeyClusterKey: Win32_System_Registry.HKEY, pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>, Reserved: CPointer<Unit>, bAllowUnknownProperties: Int32, pInPropertyList: CPointer<Unit>, cbInPropertyListSize: UInt32, bForceWrite: Int32, pOutParams: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilSetPropertyTableEx == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ResUtilSetPropertyTableEx(hkeyClusterKey: Win32_System_Registry.HKEY, pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>, Reserved: CPointer<Unit>, bAllowUnknownProperties: Int32, pInPropertyList: CPointer<Unit>, cbInPropertyListSize: UInt32, bForceWrite: Int32, pOutParams: CPointer<UInt8>): UInt32 {
+    return ResUtilSetPropertyTableEx(hkeyClusterKey, pPropertyTable, Reserved, bAllowUnknownProperties, pInPropertyList, cbInPropertyListSize, bForceWrite, pOutParams)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilSetQwordValue == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: pqwOutValue optional
     func ResUtilSetQwordValue(hkeyClusterKey: Win32_System_Registry.HKEY, pszValueName: CPointer<UInt16>, qwNewValue: UInt64, pqwOutValue: CPointer<UInt64>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilSetQwordValue == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ResUtilSetQwordValue(hkeyClusterKey: Win32_System_Registry.HKEY, pszValueName: CPointer<UInt16>, qwNewValue: UInt64, pqwOutValue: CPointer<UInt64>): UInt32 {
+    return ResUtilSetQwordValue(hkeyClusterKey, pszValueName, qwNewValue, pqwOutValue)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilSetResourceServiceEnvironment == "on"]
+foreign {
+    func ResUtilSetResourceServiceEnvironment(pszServiceName: CPointer<UInt16>, hResource: HRESOURCE, pfnLogEvent: PLOG_EVENT_ROUTINE, hResourceHandle: IntNative): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilSetResourceServiceEnvironment == "on"]
+public unsafe func Windows_ResUtilSetResourceServiceEnvironment(pszServiceName: CPointer<UInt16>, hResource: HRESOURCE, pfnLogEvent: PLOG_EVENT_ROUTINE, hResourceHandle: IntNative): UInt32 {
+    return ResUtilSetResourceServiceEnvironment(pszServiceName, hResource, pfnLogEvent, hResourceHandle)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilSetResourceServiceStartParameters == "on" && Windows_Win32_System_Services == "on"]
+foreign {
+    func ResUtilSetResourceServiceStartParameters(pszServiceName: CPointer<UInt16>, schSCMHandle: Win32_System_Services.SC_HANDLE, phService: CPointer<Win32_System_Services.SC_HANDLE>, pfnLogEvent: PLOG_EVENT_ROUTINE, hResourceHandle: IntNative): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilSetResourceServiceStartParameters == "on" && Windows_Win32_System_Services == "on"]
+public unsafe func Windows_ResUtilSetResourceServiceStartParameters(pszServiceName: CPointer<UInt16>, schSCMHandle: Win32_System_Services.SC_HANDLE, phService: CPointer<Win32_System_Services.SC_HANDLE>, pfnLogEvent: PLOG_EVENT_ROUTINE, hResourceHandle: IntNative): UInt32 {
+    return ResUtilSetResourceServiceStartParameters(pszServiceName, schSCMHandle, phService, pfnLogEvent, hResourceHandle)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilSetResourceServiceStartParametersEx == "on" && Windows_Win32_System_Services == "on"]
+foreign {
+    func ResUtilSetResourceServiceStartParametersEx(pszServiceName: CPointer<UInt16>, schSCMHandle: Win32_System_Services.SC_HANDLE, phService: CPointer<Win32_System_Services.SC_HANDLE>, dwDesiredAccess: UInt32, pfnLogEvent: PLOG_EVENT_ROUTINE, hResourceHandle: IntNative): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilSetResourceServiceStartParametersEx == "on" && Windows_Win32_System_Services == "on"]
+public unsafe func Windows_ResUtilSetResourceServiceStartParametersEx(pszServiceName: CPointer<UInt16>, schSCMHandle: Win32_System_Services.SC_HANDLE, phService: CPointer<Win32_System_Services.SC_HANDLE>, dwDesiredAccess: UInt32, pfnLogEvent: PLOG_EVENT_ROUTINE, hResourceHandle: IntNative): UInt32 {
+    return ResUtilSetResourceServiceStartParametersEx(pszServiceName, schSCMHandle, phService, dwDesiredAccess, pfnLogEvent, hResourceHandle)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilSetSzValue == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: ppszOutString optional
     func ResUtilSetSzValue(hkeyClusterKey: Win32_System_Registry.HKEY, pszValueName: CPointer<UInt16>, pszNewValue: CPointer<UInt16>, ppszOutString: CPointer<CPointer<UInt16>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilSetSzValue == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ResUtilSetSzValue(hkeyClusterKey: Win32_System_Registry.HKEY, pszValueName: CPointer<UInt16>, pszNewValue: CPointer<UInt16>, ppszOutString: CPointer<CPointer<UInt16>>): UInt32 {
+    return ResUtilSetSzValue(hkeyClusterKey, pszValueName, pszNewValue, ppszOutString)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilSetUnknownProperties == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: pInPropertyList bytes=param[3]
     func ResUtilSetUnknownProperties(hkeyClusterKey: Win32_System_Registry.HKEY, pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>, pInPropertyList: CPointer<Unit>, cbInPropertyListSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilSetUnknownProperties == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ResUtilSetUnknownProperties(hkeyClusterKey: Win32_System_Registry.HKEY, pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>, pInPropertyList: CPointer<Unit>, cbInPropertyListSize: UInt32): UInt32 {
+    return ResUtilSetUnknownProperties(hkeyClusterKey, pPropertyTable, pInPropertyList, cbInPropertyListSize)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilSetValueEx == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     // param-hint: valueData bytes=param[4]
     func ResUtilSetValueEx(hkeyClusterKey: Win32_System_Registry.HKEY, valueName: CPointer<UInt16>, valueType: UInt32, valueData: CPointer<UInt8>, valueSize: UInt32, flags: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilSetValueEx == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ResUtilSetValueEx(hkeyClusterKey: Win32_System_Registry.HKEY, valueName: CPointer<UInt16>, valueType: UInt32, valueData: CPointer<UInt8>, valueSize: UInt32, flags: UInt32): UInt32 {
+    return ResUtilSetValueEx(hkeyClusterKey, valueName, valueType, valueData, valueSize, flags)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilStartResourceService == "on" && Windows_Win32_System_Services == "on"]
+foreign {
+    func ResUtilStartResourceService(pszServiceName: CPointer<UInt16>, phServiceHandle: CPointer<Win32_System_Services.SC_HANDLE>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilStartResourceService == "on" && Windows_Win32_System_Services == "on"]
+public unsafe func Windows_ResUtilStartResourceService(pszServiceName: CPointer<UInt16>, phServiceHandle: CPointer<Win32_System_Services.SC_HANDLE>): UInt32 {
+    return ResUtilStartResourceService(pszServiceName, phServiceHandle)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilStopResourceService == "on"]
+foreign {
+    func ResUtilStopResourceService(pszServiceName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilStopResourceService == "on"]
+public unsafe func Windows_ResUtilStopResourceService(pszServiceName: CPointer<UInt16>): UInt32 {
+    return ResUtilStopResourceService(pszServiceName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilStopService == "on" && Windows_Win32_System_Services == "on"]
+foreign {
+    func ResUtilStopService(hServiceHandle: Win32_System_Services.SC_HANDLE): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilStopService == "on" && Windows_Win32_System_Services == "on"]
+public unsafe func Windows_ResUtilStopService(hServiceHandle: Win32_System_Services.SC_HANDLE): UInt32 {
+    return ResUtilStopService(hServiceHandle)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilTerminateServiceProcessFromResDll == "on"]
+foreign {
+    func ResUtilTerminateServiceProcessFromResDll(dwServicePid: UInt32, bOffline: Int32, pdwResourceState: CPointer<UInt32>, pfnLogEvent: PLOG_EVENT_ROUTINE, hResourceHandle: IntNative): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilTerminateServiceProcessFromResDll == "on"]
+public unsafe func Windows_ResUtilTerminateServiceProcessFromResDll(dwServicePid: UInt32, bOffline: Int32, pdwResourceState: CPointer<UInt32>, pfnLogEvent: PLOG_EVENT_ROUTINE, hResourceHandle: IntNative): UInt32 {
+    return ResUtilTerminateServiceProcessFromResDll(dwServicePid, bOffline, pdwResourceState, pfnLogEvent, hResourceHandle)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilVerifyPrivatePropertyList == "on"]
+foreign {
+    // param-hint: pInPropertyList bytes=param[1]
+    func ResUtilVerifyPrivatePropertyList(pInPropertyList: CPointer<Unit>, cbInPropertyListSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilVerifyPrivatePropertyList == "on"]
+public unsafe func Windows_ResUtilVerifyPrivatePropertyList(pInPropertyList: CPointer<Unit>, cbInPropertyListSize: UInt32): UInt32 {
+    return ResUtilVerifyPrivatePropertyList(pInPropertyList, cbInPropertyListSize)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilVerifyPropertyTable == "on"]
+foreign {
+    // param-hint: Reserved optional reserved
+    // param-hint: pInPropertyList bytes=param[4]
+    // param-hint: pOutParams optional
+    func ResUtilVerifyPropertyTable(pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>, Reserved: CPointer<Unit>, bAllowUnknownProperties: Int32, pInPropertyList: CPointer<Unit>, cbInPropertyListSize: UInt32, pOutParams: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilVerifyPropertyTable == "on"]
+public unsafe func Windows_ResUtilVerifyPropertyTable(pPropertyTable: CPointer<RESUTIL_PROPERTY_ITEMAbi>, Reserved: CPointer<Unit>, bAllowUnknownProperties: Int32, pInPropertyList: CPointer<Unit>, cbInPropertyListSize: UInt32, pOutParams: CPointer<UInt8>): UInt32 {
+    return ResUtilVerifyPropertyTable(pPropertyTable, Reserved, bAllowUnknownProperties, pInPropertyList, cbInPropertyListSize, pOutParams)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilVerifyResourceService == "on"]
+foreign {
+    func ResUtilVerifyResourceService(pszServiceName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilVerifyResourceService == "on"]
+public unsafe func Windows_ResUtilVerifyResourceService(pszServiceName: CPointer<UInt16>): UInt32 {
+    return ResUtilVerifyResourceService(pszServiceName)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilVerifyService == "on" && Windows_Win32_System_Services == "on"]
+foreign {
+    func ResUtilVerifyService(hServiceHandle: Win32_System_Services.SC_HANDLE): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilVerifyService == "on" && Windows_Win32_System_Services == "on"]
+public unsafe func Windows_ResUtilVerifyService(hServiceHandle: Win32_System_Services.SC_HANDLE): UInt32 {
+    return ResUtilVerifyService(hServiceHandle)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilVerifyShutdownSafe == "on"]
+foreign {
+    func ResUtilVerifyShutdownSafe(flags: UInt32, reason: UInt32, pResult: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilVerifyShutdownSafe == "on"]
+public unsafe func Windows_ResUtilVerifyShutdownSafe(flags: UInt32, reason: UInt32, pResult: CPointer<UInt32>): UInt32 {
+    return ResUtilVerifyShutdownSafe(flags, reason, pResult)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilsDeleteKeyTree == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
     func ResUtilsDeleteKeyTree(key: Win32_System_Registry.HKEY, keyName: CPointer<UInt16>, treatNoKeyAsError: Int32): UInt32
 }
 
-@When[RESUTILS == "on" && Windows_Win32_System_Services == "on"]
-foreign {
-    func ResUtilSetResourceServiceStartParameters(pszServiceName: CPointer<UInt16>, schSCMHandle: Win32_System_Services.SC_HANDLE, phService: CPointer<Win32_System_Services.SC_HANDLE>, pfnLogEvent: PLOG_EVENT_ROUTINE, hResourceHandle: IntNative): UInt32
-    func ResUtilSetResourceServiceStartParametersEx(pszServiceName: CPointer<UInt16>, schSCMHandle: Win32_System_Services.SC_HANDLE, phService: CPointer<Win32_System_Services.SC_HANDLE>, dwDesiredAccess: UInt32, pfnLogEvent: PLOG_EVENT_ROUTINE, hResourceHandle: IntNative): UInt32
-    func ResUtilStartResourceService(pszServiceName: CPointer<UInt16>, phServiceHandle: CPointer<Win32_System_Services.SC_HANDLE>): UInt32
-    func ResUtilStopService(hServiceHandle: Win32_System_Services.SC_HANDLE): UInt32
-    func ResUtilVerifyService(hServiceHandle: Win32_System_Services.SC_HANDLE): UInt32
+@When[Windows_Win32_Networking_Clustering == "on" && RESUTILS == "on" && Windows_Win32_Networking_Clustering_ResUtilsDeleteKeyTree == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_ResUtilsDeleteKeyTree(key: Win32_System_Registry.HKEY, keyName: CPointer<UInt16>, treatNoKeyAsError: Int32): UInt32 {
+    return ResUtilsDeleteKeyTree(key, keyName, treatNoKeyAsError)
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RepairClusterNameAccount == "on"]
+func __windowsBindgen_RepairClusterNameAccountProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("CLUSAPI.dll", "RepairClusterNameAccount")
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RepairClusterNameAccount == "on"]
+unsafe func RepairClusterNameAccount(hCluster: HCLUSTER, pConfig: CPointer<REPAIR_CLUSTER_NAME_ACCOUNT_CONFIGAbi>, pfnProgressCallback: PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg: CPointer<Unit>): UInt32 {
+    let call = CFunc<(HCLUSTER, CPointer<REPAIR_CLUSTER_NAME_ACCOUNT_CONFIGAbi>, PCLUSTER_SETUP_PROGRESS_CALLBACK, CPointer<Unit>) -> UInt32>(__windowsBindgen_RepairClusterNameAccountProc())
+    return unsafe { call(hCluster, pConfig, pfnProgressCallback, pvCallbackArg) }
+}
+
+@When[Windows_Win32_Networking_Clustering == "on" && CLUSAPI == "on" && Windows_Win32_Networking_Clustering_RepairClusterNameAccount == "on"]
+public unsafe func Windows_RepairClusterNameAccount(hCluster: HCLUSTER, pConfig: CPointer<REPAIR_CLUSTER_NAME_ACCOUNT_CONFIGAbi>, pfnProgressCallback: PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg: CPointer<Unit>): UInt32 {
+    return RepairClusterNameAccount(hCluster, pConfig, pfnProgressCallback, pvCallbackArg)
 }
 
 @When[Windows_Win32_Networking_Clustering == "on"]

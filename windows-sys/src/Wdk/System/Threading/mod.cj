@@ -2,9 +2,7 @@
 package windows_sys.Wdk.System.Threading
 
 import windows_sys.Wdk._impl_l0 as Wdk__impl_l0
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_System_WindowsProgramming == "on"]
 import windows_sys.Win32.System.WindowsProgramming as Win32_System_WindowsProgramming
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 
@@ -417,67 +415,263 @@ public let TIMER_SET_INFORMATION_CLASS_TimerSetCoalescableTimer: TIMER_SET_INFOR
 @When[Windows_Wdk_System_Threading == "on"]
 public let TIMER_SET_INFORMATION_CLASS_MaxTimerInfoClass: TIMER_SET_INFORMATION_CLASS = TIMER_SET_INFORMATION_CLASS(1)
 
-@When[NTDLL == "on"]
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_NtCancelTimer == "on"]
 foreign {
     // param-hint: CurrentState optional
     func NtCancelTimer(TimerHandle: CPointer<Unit>, CurrentState: CPointer<UInt8>): Int32
-    func NtQueryInformationProcess(ProcessHandle: CPointer<Unit>, ProcessInformationClass: Int32, ProcessInformation: CPointer<Unit>, ProcessInformationLength: UInt32, ReturnLength: CPointer<UInt32>): Int32
-    func NtQueryInformationThread(ThreadHandle: CPointer<Unit>, ThreadInformationClass: Int32, ThreadInformation: CPointer<Unit>, ThreadInformationLength: UInt32, ReturnLength: CPointer<UInt32>): Int32
-    // param-hint: ThreadInformation bytes=param[3]
-    func NtSetInformationThread(ThreadHandle: CPointer<Unit>, ThreadInformationClass: Int32, ThreadInformation: CPointer<Unit>, ThreadInformationLength: UInt32): Int32
-    // param-hint: TimerSetInformation bytes=param[3] optional
-    func NtSetTimerEx(TimerHandle: CPointer<Unit>, TimerSetInformationClass: Int32, TimerSetInformation: CPointer<Unit>, TimerSetInformationLength: UInt32): Int32
-    // param-hint: ProcessHandle optional
-    func NtTerminateProcess(ProcessHandle: CPointer<Unit>, ExitStatus: Int32): Int32
-    func NtWaitForSingleObject(Handle: CPointer<Unit>, Alertable: UInt8, Timeout: CPointer<Int64>): Int32
-    // param-hint: CurrentState optional
-    func ZwCancelTimer(TimerHandle: CPointer<Unit>, CurrentState: CPointer<UInt8>): Int32
-    func ZwQueryInformationProcess(ProcessHandle: CPointer<Unit>, ProcessInformationClass: Int32, ProcessInformation: CPointer<Unit>, ProcessInformationLength: UInt32, ReturnLength: CPointer<UInt32>): Int32
-    func ZwQueryInformationThread(ThreadHandle: CPointer<Unit>, ThreadInformationClass: Int32, ThreadInformation: CPointer<Unit>, ThreadInformationLength: UInt32, ReturnLength: CPointer<UInt32>): Int32
-    // param-hint: ThreadInformation bytes=param[3]
-    func ZwSetInformationThread(ThreadHandle: CPointer<Unit>, ThreadInformationClass: Int32, ThreadInformation: CPointer<Unit>, ThreadInformationLength: UInt32): Int32
-    // param-hint: TimerSetInformation bytes=param[3] optional
-    func ZwSetTimerEx(TimerHandle: CPointer<Unit>, TimerSetInformationClass: Int32, TimerSetInformation: CPointer<Unit>, TimerSetInformationLength: UInt32): Int32
-    // param-hint: ProcessHandle optional
-    func ZwTerminateProcess(ProcessHandle: CPointer<Unit>, ExitStatus: Int32): Int32
-    // param-hint: Timeout optional
-    func ZwWaitForSingleObject(Handle: CPointer<Unit>, Alertable: UInt8, Timeout: CPointer<Int64>): Int32
 }
 
-@When[NTDLL == "on" && (Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on")]
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_NtCancelTimer == "on"]
+public unsafe func Windows_NtCancelTimer(TimerHandle: CPointer<Unit>, CurrentState: CPointer<UInt8>): Int32 {
+    return NtCancelTimer(TimerHandle, CurrentState)
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_NtCreateTimer == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on"]
 foreign {
     // param-hint: ObjectAttributes optional
     func NtCreateTimer(TimerHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>, TimerType: Int32): Int32
-    // param-hint: ObjectAttributes optional
-    func ZwCreateTimer(TimerHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>, TimerType: Int32): Int32
 }
 
-@When[NTDLL == "on" && (Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_WindowsProgramming == "on")]
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_NtCreateTimer == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on"]
+public unsafe func Windows_NtCreateTimer(TimerHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>, TimerType: Int32): Int32 {
+    return NtCreateTimer(TimerHandle, DesiredAccess, ObjectAttributes, TimerType)
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_NtOpenEvent == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+foreign {
+    func NtOpenEvent(EventHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>): Int32
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_NtOpenEvent == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_NtOpenEvent(EventHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>): Int32 {
+    return NtOpenEvent(EventHandle, DesiredAccess, ObjectAttributes)
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_NtOpenProcess == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_WindowsProgramming == "on"]
 foreign {
     // param-hint: ClientId optional
     func NtOpenProcess(ProcessHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>, ClientId: CPointer<Win32_System_WindowsProgramming.CLIENT_ID>): Int32
-    // param-hint: ClientId optional
-    func ZwOpenProcess(ProcessHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>, ClientId: CPointer<Win32_System_WindowsProgramming.CLIENT_ID>): Int32
 }
 
-@When[NTDLL == "on" && (Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on")]
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_NtOpenProcess == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_WindowsProgramming == "on"]
+public unsafe func Windows_NtOpenProcess(ProcessHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>, ClientId: CPointer<Win32_System_WindowsProgramming.CLIENT_ID>): Int32 {
+    return NtOpenProcess(ProcessHandle, DesiredAccess, ObjectAttributes, ClientId)
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_NtOpenTimer == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
 foreign {
-    func NtOpenEvent(EventHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>): Int32
     func NtOpenTimer(TimerHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>): Int32
-    func ZwOpenEvent(EventHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>): Int32
-    func ZwOpenTimer(TimerHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>): Int32
 }
 
-@When[NTDLL == "on" && Windows_Wdk_System_SystemServices == "on"]
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_NtOpenTimer == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_NtOpenTimer(TimerHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>): Int32 {
+    return NtOpenTimer(TimerHandle, DesiredAccess, ObjectAttributes)
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_NtQueryInformationProcess == "on"]
+foreign {
+    func NtQueryInformationProcess(ProcessHandle: CPointer<Unit>, ProcessInformationClass: Int32, ProcessInformation: CPointer<Unit>, ProcessInformationLength: UInt32, ReturnLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_NtQueryInformationProcess == "on"]
+public unsafe func Windows_NtQueryInformationProcess(ProcessHandle: CPointer<Unit>, ProcessInformationClass: Int32, ProcessInformation: CPointer<Unit>, ProcessInformationLength: UInt32, ReturnLength: CPointer<UInt32>): Int32 {
+    return NtQueryInformationProcess(ProcessHandle, ProcessInformationClass, ProcessInformation, ProcessInformationLength, ReturnLength)
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_NtQueryInformationThread == "on"]
+foreign {
+    func NtQueryInformationThread(ThreadHandle: CPointer<Unit>, ThreadInformationClass: Int32, ThreadInformation: CPointer<Unit>, ThreadInformationLength: UInt32, ReturnLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_NtQueryInformationThread == "on"]
+public unsafe func Windows_NtQueryInformationThread(ThreadHandle: CPointer<Unit>, ThreadInformationClass: Int32, ThreadInformation: CPointer<Unit>, ThreadInformationLength: UInt32, ReturnLength: CPointer<UInt32>): Int32 {
+    return NtQueryInformationThread(ThreadHandle, ThreadInformationClass, ThreadInformation, ThreadInformationLength, ReturnLength)
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_NtSetInformationThread == "on"]
+foreign {
+    // param-hint: ThreadInformation bytes=param[3]
+    func NtSetInformationThread(ThreadHandle: CPointer<Unit>, ThreadInformationClass: Int32, ThreadInformation: CPointer<Unit>, ThreadInformationLength: UInt32): Int32
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_NtSetInformationThread == "on"]
+public unsafe func Windows_NtSetInformationThread(ThreadHandle: CPointer<Unit>, ThreadInformationClass: Int32, ThreadInformation: CPointer<Unit>, ThreadInformationLength: UInt32): Int32 {
+    return NtSetInformationThread(ThreadHandle, ThreadInformationClass, ThreadInformation, ThreadInformationLength)
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_NtSetTimer == "on" && Windows_Wdk_System_SystemServices == "on"]
 foreign {
     // param-hint: TimerApcRoutine optional
     // param-hint: TimerContext optional
     // param-hint: Period optional
     // param-hint: PreviousState optional
     func NtSetTimer(TimerHandle: CPointer<Unit>, DueTime: CPointer<Int64>, TimerApcRoutine: Wdk__impl_l0.PTIMER_APC_ROUTINE, TimerContext: CPointer<Unit>, ResumeTimer: UInt8, Period: Int32, PreviousState: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_NtSetTimer == "on" && Windows_Wdk_System_SystemServices == "on"]
+public unsafe func Windows_NtSetTimer(TimerHandle: CPointer<Unit>, DueTime: CPointer<Int64>, TimerApcRoutine: Wdk__impl_l0.PTIMER_APC_ROUTINE, TimerContext: CPointer<Unit>, ResumeTimer: UInt8, Period: Int32, PreviousState: CPointer<UInt8>): Int32 {
+    return NtSetTimer(TimerHandle, DueTime, TimerApcRoutine, TimerContext, ResumeTimer, Period, PreviousState)
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_NtSetTimerEx == "on"]
+foreign {
+    // param-hint: TimerSetInformation bytes=param[3] optional
+    func NtSetTimerEx(TimerHandle: CPointer<Unit>, TimerSetInformationClass: Int32, TimerSetInformation: CPointer<Unit>, TimerSetInformationLength: UInt32): Int32
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_NtSetTimerEx == "on"]
+public unsafe func Windows_NtSetTimerEx(TimerHandle: CPointer<Unit>, TimerSetInformationClass: Int32, TimerSetInformation: CPointer<Unit>, TimerSetInformationLength: UInt32): Int32 {
+    return NtSetTimerEx(TimerHandle, TimerSetInformationClass, TimerSetInformation, TimerSetInformationLength)
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_NtTerminateProcess == "on"]
+foreign {
+    // param-hint: ProcessHandle optional
+    func NtTerminateProcess(ProcessHandle: CPointer<Unit>, ExitStatus: Int32): Int32
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_NtTerminateProcess == "on"]
+public unsafe func Windows_NtTerminateProcess(ProcessHandle: CPointer<Unit>, ExitStatus: Int32): Int32 {
+    return NtTerminateProcess(ProcessHandle, ExitStatus)
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_NtWaitForSingleObject == "on"]
+foreign {
+    func NtWaitForSingleObject(Handle: CPointer<Unit>, Alertable: UInt8, Timeout: CPointer<Int64>): Int32
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_NtWaitForSingleObject == "on"]
+public unsafe func Windows_NtWaitForSingleObject(Handle: CPointer<Unit>, Alertable: UInt8, Timeout: CPointer<Int64>): Int32 {
+    return NtWaitForSingleObject(Handle, Alertable, Timeout)
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_ZwCancelTimer == "on"]
+foreign {
+    // param-hint: CurrentState optional
+    func ZwCancelTimer(TimerHandle: CPointer<Unit>, CurrentState: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_ZwCancelTimer == "on"]
+public unsafe func Windows_ZwCancelTimer(TimerHandle: CPointer<Unit>, CurrentState: CPointer<UInt8>): Int32 {
+    return ZwCancelTimer(TimerHandle, CurrentState)
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_ZwCreateTimer == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on"]
+foreign {
+    // param-hint: ObjectAttributes optional
+    func ZwCreateTimer(TimerHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>, TimerType: Int32): Int32
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_ZwCreateTimer == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on"]
+public unsafe func Windows_ZwCreateTimer(TimerHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>, TimerType: Int32): Int32 {
+    return ZwCreateTimer(TimerHandle, DesiredAccess, ObjectAttributes, TimerType)
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_ZwOpenEvent == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+foreign {
+    func ZwOpenEvent(EventHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>): Int32
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_ZwOpenEvent == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_ZwOpenEvent(EventHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>): Int32 {
+    return ZwOpenEvent(EventHandle, DesiredAccess, ObjectAttributes)
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_ZwOpenProcess == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_WindowsProgramming == "on"]
+foreign {
+    // param-hint: ClientId optional
+    func ZwOpenProcess(ProcessHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>, ClientId: CPointer<Win32_System_WindowsProgramming.CLIENT_ID>): Int32
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_ZwOpenProcess == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_WindowsProgramming == "on"]
+public unsafe func Windows_ZwOpenProcess(ProcessHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>, ClientId: CPointer<Win32_System_WindowsProgramming.CLIENT_ID>): Int32 {
+    return ZwOpenProcess(ProcessHandle, DesiredAccess, ObjectAttributes, ClientId)
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_ZwOpenTimer == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+foreign {
+    func ZwOpenTimer(TimerHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>): Int32
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_ZwOpenTimer == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_ZwOpenTimer(TimerHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>): Int32 {
+    return ZwOpenTimer(TimerHandle, DesiredAccess, ObjectAttributes)
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_ZwQueryInformationProcess == "on"]
+foreign {
+    func ZwQueryInformationProcess(ProcessHandle: CPointer<Unit>, ProcessInformationClass: Int32, ProcessInformation: CPointer<Unit>, ProcessInformationLength: UInt32, ReturnLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_ZwQueryInformationProcess == "on"]
+public unsafe func Windows_ZwQueryInformationProcess(ProcessHandle: CPointer<Unit>, ProcessInformationClass: Int32, ProcessInformation: CPointer<Unit>, ProcessInformationLength: UInt32, ReturnLength: CPointer<UInt32>): Int32 {
+    return ZwQueryInformationProcess(ProcessHandle, ProcessInformationClass, ProcessInformation, ProcessInformationLength, ReturnLength)
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_ZwQueryInformationThread == "on"]
+foreign {
+    func ZwQueryInformationThread(ThreadHandle: CPointer<Unit>, ThreadInformationClass: Int32, ThreadInformation: CPointer<Unit>, ThreadInformationLength: UInt32, ReturnLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_ZwQueryInformationThread == "on"]
+public unsafe func Windows_ZwQueryInformationThread(ThreadHandle: CPointer<Unit>, ThreadInformationClass: Int32, ThreadInformation: CPointer<Unit>, ThreadInformationLength: UInt32, ReturnLength: CPointer<UInt32>): Int32 {
+    return ZwQueryInformationThread(ThreadHandle, ThreadInformationClass, ThreadInformation, ThreadInformationLength, ReturnLength)
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_ZwSetInformationThread == "on"]
+foreign {
+    // param-hint: ThreadInformation bytes=param[3]
+    func ZwSetInformationThread(ThreadHandle: CPointer<Unit>, ThreadInformationClass: Int32, ThreadInformation: CPointer<Unit>, ThreadInformationLength: UInt32): Int32
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_ZwSetInformationThread == "on"]
+public unsafe func Windows_ZwSetInformationThread(ThreadHandle: CPointer<Unit>, ThreadInformationClass: Int32, ThreadInformation: CPointer<Unit>, ThreadInformationLength: UInt32): Int32 {
+    return ZwSetInformationThread(ThreadHandle, ThreadInformationClass, ThreadInformation, ThreadInformationLength)
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_ZwSetTimer == "on" && Windows_Wdk_System_SystemServices == "on"]
+foreign {
     // param-hint: TimerApcRoutine optional
     // param-hint: TimerContext optional
     // param-hint: Period optional
     // param-hint: PreviousState optional
     func ZwSetTimer(TimerHandle: CPointer<Unit>, DueTime: CPointer<Int64>, TimerApcRoutine: Wdk__impl_l0.PTIMER_APC_ROUTINE, TimerContext: CPointer<Unit>, ResumeTimer: UInt8, Period: Int32, PreviousState: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_ZwSetTimer == "on" && Windows_Wdk_System_SystemServices == "on"]
+public unsafe func Windows_ZwSetTimer(TimerHandle: CPointer<Unit>, DueTime: CPointer<Int64>, TimerApcRoutine: Wdk__impl_l0.PTIMER_APC_ROUTINE, TimerContext: CPointer<Unit>, ResumeTimer: UInt8, Period: Int32, PreviousState: CPointer<UInt8>): Int32 {
+    return ZwSetTimer(TimerHandle, DueTime, TimerApcRoutine, TimerContext, ResumeTimer, Period, PreviousState)
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_ZwSetTimerEx == "on"]
+foreign {
+    // param-hint: TimerSetInformation bytes=param[3] optional
+    func ZwSetTimerEx(TimerHandle: CPointer<Unit>, TimerSetInformationClass: Int32, TimerSetInformation: CPointer<Unit>, TimerSetInformationLength: UInt32): Int32
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_ZwSetTimerEx == "on"]
+public unsafe func Windows_ZwSetTimerEx(TimerHandle: CPointer<Unit>, TimerSetInformationClass: Int32, TimerSetInformation: CPointer<Unit>, TimerSetInformationLength: UInt32): Int32 {
+    return ZwSetTimerEx(TimerHandle, TimerSetInformationClass, TimerSetInformation, TimerSetInformationLength)
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_ZwTerminateProcess == "on"]
+foreign {
+    // param-hint: ProcessHandle optional
+    func ZwTerminateProcess(ProcessHandle: CPointer<Unit>, ExitStatus: Int32): Int32
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_ZwTerminateProcess == "on"]
+public unsafe func Windows_ZwTerminateProcess(ProcessHandle: CPointer<Unit>, ExitStatus: Int32): Int32 {
+    return ZwTerminateProcess(ProcessHandle, ExitStatus)
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_ZwWaitForSingleObject == "on"]
+foreign {
+    // param-hint: Timeout optional
+    func ZwWaitForSingleObject(Handle: CPointer<Unit>, Alertable: UInt8, Timeout: CPointer<Int64>): Int32
+}
+
+@When[Windows_Wdk_System_Threading == "on" && NTDLL == "on" && Windows_Wdk_System_Threading_ZwWaitForSingleObject == "on"]
+public unsafe func Windows_ZwWaitForSingleObject(Handle: CPointer<Unit>, Alertable: UInt8, Timeout: CPointer<Int64>): Int32 {
+    return ZwWaitForSingleObject(Handle, Alertable, Timeout)
 }

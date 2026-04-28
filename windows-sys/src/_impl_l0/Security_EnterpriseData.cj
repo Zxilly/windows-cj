@@ -439,6 +439,7 @@ public class IFileUnprotectOptionsFactory <: InterfaceWrapperBase & ComInterface
 @C
 public struct IProtectedAccessResumedEventArgsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Identities: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -483,6 +484,7 @@ public class IProtectedAccessResumedEventArgs <: InterfaceWrapperBase & ComInter
         readVtbl<IProtectedAccessResumedEventArgsVtbl>(IProtectedAccessResumedEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Identities(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -494,6 +496,7 @@ public class IProtectedAccessResumedEventArgs <: InterfaceWrapperBase & ComInter
 @C
 public struct IProtectedAccessSuspendingEventArgsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Identities: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Deadline: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.DateTime>) -> Int32> = { _, _ => 0 }
     public var GetDeferral: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -540,6 +543,7 @@ public class IProtectedAccessSuspendingEventArgs <: InterfaceWrapperBase & ComIn
         readVtbl<IProtectedAccessSuspendingEventArgsVtbl>(IProtectedAccessSuspendingEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Identities(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -563,6 +567,7 @@ public class IProtectedAccessSuspendingEventArgs <: InterfaceWrapperBase & ComIn
 @C
 public struct IProtectedContentRevokedEventArgsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Identities: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -607,6 +612,7 @@ public class IProtectedContentRevokedEventArgs <: InterfaceWrapperBase & ComInte
         readVtbl<IProtectedContentRevokedEventArgsVtbl>(IProtectedContentRevokedEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Identities(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

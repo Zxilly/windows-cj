@@ -8,7 +8,6 @@ import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeTy
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
@@ -4055,12 +4054,44 @@ public type PFN_HSE_IO_COMPLETION = CFunc<(CPointer<EXTENSION_CONTROL_BLOCKAbi>,
 @When[Windows_Win32_System_Iis == "on"]
 public type PFN_HTTPEXTENSIONPROC = CFunc<(CPointer<EXTENSION_CONTROL_BLOCKAbi>) -> UInt32>
 
-@When[RPCPROXY == "on"]
+@When[Windows_Win32_System_Iis == "on" && RPCPROXY == "on" && Windows_Win32_System_Iis_GetExtensionVersion == "on"]
 foreign {
     func GetExtensionVersion(pVer: CPointer<HSE_VERSION_INFOAbi>): Int32
+}
+
+@When[Windows_Win32_System_Iis == "on" && RPCPROXY == "on" && Windows_Win32_System_Iis_GetExtensionVersion == "on"]
+public unsafe func Windows_GetExtensionVersion(pVer: CPointer<HSE_VERSION_INFOAbi>): Int32 {
+    return GetExtensionVersion(pVer)
+}
+
+@When[Windows_Win32_System_Iis == "on" && RPCPROXY == "on" && Windows_Win32_System_Iis_GetFilterVersion == "on"]
+foreign {
     func GetFilterVersion(pVer: CPointer<HTTP_FILTER_VERSIONAbi>): Int32
+}
+
+@When[Windows_Win32_System_Iis == "on" && RPCPROXY == "on" && Windows_Win32_System_Iis_GetFilterVersion == "on"]
+public unsafe func Windows_GetFilterVersion(pVer: CPointer<HTTP_FILTER_VERSIONAbi>): Int32 {
+    return GetFilterVersion(pVer)
+}
+
+@When[Windows_Win32_System_Iis == "on" && RPCPROXY == "on" && Windows_Win32_System_Iis_HttpExtensionProc == "on"]
+foreign {
     func HttpExtensionProc(pECB: CPointer<EXTENSION_CONTROL_BLOCKAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Iis == "on" && RPCPROXY == "on" && Windows_Win32_System_Iis_HttpExtensionProc == "on"]
+public unsafe func Windows_HttpExtensionProc(pECB: CPointer<EXTENSION_CONTROL_BLOCKAbi>): UInt32 {
+    return HttpExtensionProc(pECB)
+}
+
+@When[Windows_Win32_System_Iis == "on" && RPCPROXY == "on" && Windows_Win32_System_Iis_HttpFilterProc == "on"]
+foreign {
     func HttpFilterProc(pfc: CPointer<HTTP_FILTER_CONTEXTAbi>, NotificationType: UInt32, pvNotification: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_Iis == "on" && RPCPROXY == "on" && Windows_Win32_System_Iis_HttpFilterProc == "on"]
+public unsafe func Windows_HttpFilterProc(pfc: CPointer<HTTP_FILTER_CONTEXTAbi>, NotificationType: UInt32, pvNotification: CPointer<Unit>): UInt32 {
+    return HttpFilterProc(pfc, NotificationType, pvNotification)
 }
 
 @When[Windows_Win32_System_Iis == "on"]

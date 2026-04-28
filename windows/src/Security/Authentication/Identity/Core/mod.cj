@@ -768,7 +768,10 @@ extend MicrosoftAccountMultiFactorSessionInfo <: windows_core.HandleWinrtType<Mi
 @C
 public struct IMicrosoftAccountMultiFactorGetSessionsResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Sessions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Sessions: UIntNative = UIntNative(0)
     public var ServiceResponse: CFunc<(CPointer<Unit>, CPointer<MicrosoftAccountMultiFactorServiceResponseAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -838,6 +841,7 @@ public class IMicrosoftAccountMultiFactorGetSessionsResult <: InterfaceWrapperBa
         readVtbl<IMicrosoftAccountMultiFactorGetSessionsResultVtbl>(IMicrosoftAccountMultiFactorGetSessionsResultVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Sessions(): windows_collections.IVectorView<MicrosoftAccountMultiFactorSessionInfo> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -862,8 +866,14 @@ extend IMicrosoftAccountMultiFactorGetSessionsResult <: windows_core.Interface<I
 @C
 public struct IMicrosoftAccountMultiFactorUnregisteredAccountsAndSessionInfoVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Sessions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Sessions: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var UnregisteredAccounts: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var UnregisteredAccounts: UIntNative = UIntNative(0)
     public var ServiceResponse: CFunc<(CPointer<Unit>, CPointer<MicrosoftAccountMultiFactorServiceResponseAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -933,6 +943,7 @@ public class IMicrosoftAccountMultiFactorUnregisteredAccountsAndSessionInfo <: I
         readVtbl<IMicrosoftAccountMultiFactorUnregisteredAccountsAndSessionInfoVtbl>(IMicrosoftAccountMultiFactorUnregisteredAccountsAndSessionInfoVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Sessions(): windows_collections.IVectorView<MicrosoftAccountMultiFactorSessionInfo> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -941,6 +952,7 @@ public class IMicrosoftAccountMultiFactorUnregisteredAccountsAndSessionInfo <: I
         return windows_collections.IVectorView<MicrosoftAccountMultiFactorSessionInfo>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UnregisteredAccounts(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1030,6 +1042,7 @@ public class MicrosoftAccountMultiFactorGetSessionsResult <: InterfaceWrapperBas
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Sessions(): windows_collections.IVectorView<MicrosoftAccountMultiFactorSessionInfo> {
         return defaultInterface().Sessions()
     }
@@ -1126,10 +1139,12 @@ public class MicrosoftAccountMultiFactorUnregisteredAccountsAndSessionInfo <: In
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Sessions(): windows_collections.IVectorView<MicrosoftAccountMultiFactorSessionInfo> {
         return defaultInterface().Sessions()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UnregisteredAccounts(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().UnregisteredAccounts()
     }
@@ -1165,8 +1180,14 @@ public struct IMicrosoftAccountMultiFactorAuthenticationManagerVtbl {
     public var AddDeviceAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
     public var RemoveDeviceAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var UpdateWnsChannelAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSessionsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetSessionsAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSessionsAndUnregisteredAccountsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetSessionsAndUnregisteredAccountsAsync: UIntNative = UIntNative(0)
     public var ApproveSessionUsingAuthSessionInfoAsync: CFunc<(CPointer<Unit>, MicrosoftAccountMultiFactorSessionAuthenticationStatusAbi, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var ApproveSessionAsync: CFunc<(CPointer<Unit>, MicrosoftAccountMultiFactorSessionAuthenticationStatusAbi, CPointer<Unit>, CPointer<Unit>, MicrosoftAccountMultiFactorAuthenticationTypeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
     public var DenySessionUsingAuthSessionInfoAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -1271,6 +1292,7 @@ public class IMicrosoftAccountMultiFactorAuthenticationManager <: InterfaceWrapp
         return windows_future.IAsyncOperation<MicrosoftAccountMultiFactorServiceResponse>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSessionsAsync(userAccountIdList: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<MicrosoftAccountMultiFactorGetSessionsResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1279,6 +1301,7 @@ public class IMicrosoftAccountMultiFactorAuthenticationManager <: InterfaceWrapp
         return windows_future.IAsyncOperation<MicrosoftAccountMultiFactorGetSessionsResult>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSessionsAndUnregisteredAccountsAsync(userAccountIdList: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<MicrosoftAccountMultiFactorUnregisteredAccountsAndSessionInfo> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1493,10 +1516,12 @@ public class MicrosoftAccountMultiFactorAuthenticationManager <: InterfaceWrappe
         return defaultInterface().UpdateWnsChannelAsync(userAccountId, channelUri)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSessionsAsync(userAccountIdList: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<MicrosoftAccountMultiFactorGetSessionsResult> {
         return defaultInterface().GetSessionsAsync(userAccountIdList)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSessionsAndUnregisteredAccountsAsync(userAccountIdList: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<MicrosoftAccountMultiFactorUnregisteredAccountsAndSessionInfo> {
         return defaultInterface().GetSessionsAndUnregisteredAccountsAsync(userAccountIdList)
     }

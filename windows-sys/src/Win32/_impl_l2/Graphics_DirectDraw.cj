@@ -35,23 +35,74 @@ public struct ATTACHLIST {
     public init() {}
 }
 
-@When[DDRAW == "on"]
+@When[Windows_Win32_Graphics_DirectDraw == "on" && DDRAW == "on" && Windows_Win32_Graphics_DirectDraw_DirectDrawCreate == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func DirectDrawEnumerateA(lpCallback: Win32__impl_l0.LPDDENUMCALLBACKA, lpContext: CPointer<Unit>): Int32
-    func DirectDrawEnumerateW(lpCallback: Win32__impl_l0.LPDDENUMCALLBACKW, lpContext: CPointer<Unit>): Int32
+    func DirectDrawCreate(lpGUID: CPointer<GUID>, lplpDD: CPointer<CPointer<Unit>>, pUnkOuter: CPointer<Unit>): Int32
 }
 
-@When[DDRAW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+@When[Windows_Win32_Graphics_DirectDraw == "on" && DDRAW == "on" && Windows_Win32_Graphics_DirectDraw_DirectDrawCreate == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_DirectDrawCreate(lpGUID: CPointer<GUID>, lplpDD: CPointer<CPointer<Unit>>, pUnkOuter: CPointer<Unit>): Int32 {
+    return DirectDrawCreate(lpGUID, lplpDD, pUnkOuter)
+}
+
+@When[Windows_Win32_Graphics_DirectDraw == "on" && DDRAW == "on" && Windows_Win32_Graphics_DirectDraw_DirectDrawCreateClipper == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func DirectDrawCreateClipper(dwFlags: UInt32, lplpDDClipper: CPointer<CPointer<Unit>>, pUnkOuter: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Graphics_DirectDraw == "on" && DDRAW == "on" && Windows_Win32_Graphics_DirectDraw_DirectDrawCreateClipper == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_DirectDrawCreateClipper(dwFlags: UInt32, lplpDDClipper: CPointer<CPointer<Unit>>, pUnkOuter: CPointer<Unit>): Int32 {
+    return DirectDrawCreateClipper(dwFlags, lplpDDClipper, pUnkOuter)
+}
+
+@When[Windows_Win32_Graphics_DirectDraw == "on" && DDRAW == "on" && Windows_Win32_Graphics_DirectDraw_DirectDrawCreateEx == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func DirectDrawCreateEx(lpGuid: CPointer<GUID>, lplpDD: CPointer<CPointer<Unit>>, iid: CPointer<GUID>, pUnkOuter: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Graphics_DirectDraw == "on" && DDRAW == "on" && Windows_Win32_Graphics_DirectDraw_DirectDrawCreateEx == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_DirectDrawCreateEx(lpGuid: CPointer<GUID>, lplpDD: CPointer<CPointer<Unit>>, iid: CPointer<GUID>, pUnkOuter: CPointer<Unit>): Int32 {
+    return DirectDrawCreateEx(lpGuid, lplpDD, iid, pUnkOuter)
+}
+
+@When[Windows_Win32_Graphics_DirectDraw == "on" && DDRAW == "on" && Windows_Win32_Graphics_DirectDraw_DirectDrawEnumerateA == "on"]
+foreign {
+    func DirectDrawEnumerateA(lpCallback: Win32__impl_l0.LPDDENUMCALLBACKA, lpContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Graphics_DirectDraw == "on" && DDRAW == "on" && Windows_Win32_Graphics_DirectDraw_DirectDrawEnumerateA == "on"]
+public unsafe func Windows_DirectDrawEnumerateA(lpCallback: Win32__impl_l0.LPDDENUMCALLBACKA, lpContext: CPointer<Unit>): Int32 {
+    return DirectDrawEnumerateA(lpCallback, lpContext)
+}
+
+@When[Windows_Win32_Graphics_DirectDraw == "on" && DDRAW == "on" && Windows_Win32_Graphics_DirectDraw_DirectDrawEnumerateExA == "on" && Windows_Win32_Graphics_Gdi == "on"]
 foreign {
     func DirectDrawEnumerateExA(lpCallback: Win32__impl_l0.LPDDENUMCALLBACKEXA, lpContext: CPointer<Unit>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_DirectDraw == "on" && DDRAW == "on" && Windows_Win32_Graphics_DirectDraw_DirectDrawEnumerateExA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DirectDrawEnumerateExA(lpCallback: Win32__impl_l0.LPDDENUMCALLBACKEXA, lpContext: CPointer<Unit>, dwFlags: UInt32): Int32 {
+    return DirectDrawEnumerateExA(lpCallback, lpContext, dwFlags)
+}
+
+@When[Windows_Win32_Graphics_DirectDraw == "on" && DDRAW == "on" && Windows_Win32_Graphics_DirectDraw_DirectDrawEnumerateExW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func DirectDrawEnumerateExW(lpCallback: Win32__impl_l0.LPDDENUMCALLBACKEXW, lpContext: CPointer<Unit>, dwFlags: UInt32): Int32
 }
 
-@When[DDRAW == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_Graphics_DirectDraw == "on" && DDRAW == "on" && Windows_Win32_Graphics_DirectDraw_DirectDrawEnumerateExW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_DirectDrawEnumerateExW(lpCallback: Win32__impl_l0.LPDDENUMCALLBACKEXW, lpContext: CPointer<Unit>, dwFlags: UInt32): Int32 {
+    return DirectDrawEnumerateExW(lpCallback, lpContext, dwFlags)
+}
+
+@When[Windows_Win32_Graphics_DirectDraw == "on" && DDRAW == "on" && Windows_Win32_Graphics_DirectDraw_DirectDrawEnumerateW == "on"]
 foreign {
-    func DirectDrawCreate(lpGUID: CPointer<GUID>, lplpDD: CPointer<CPointer<Unit>>, pUnkOuter: CPointer<Unit>): Int32
-    func DirectDrawCreateClipper(dwFlags: UInt32, lplpDDClipper: CPointer<CPointer<Unit>>, pUnkOuter: CPointer<Unit>): Int32
-    func DirectDrawCreateEx(lpGuid: CPointer<GUID>, lplpDD: CPointer<CPointer<Unit>>, iid: CPointer<GUID>, pUnkOuter: CPointer<Unit>): Int32
+    func DirectDrawEnumerateW(lpCallback: Win32__impl_l0.LPDDENUMCALLBACKW, lpContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Graphics_DirectDraw == "on" && DDRAW == "on" && Windows_Win32_Graphics_DirectDraw_DirectDrawEnumerateW == "on"]
+public unsafe func Windows_DirectDrawEnumerateW(lpCallback: Win32__impl_l0.LPDDENUMCALLBACKW, lpContext: CPointer<Unit>): Int32 {
+    return DirectDrawEnumerateW(lpCallback, lpContext)
 }
 
 @When[Windows_Win32_Graphics_DirectDraw == "on"]

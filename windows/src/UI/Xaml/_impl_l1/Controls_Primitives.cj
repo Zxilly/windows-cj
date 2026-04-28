@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_UI == "on"]
 import windows.UI as UI
 @When[Windows_UI_Xaml_Interop == "on"]
 import windows.UI.Xaml.Interop as UI_Xaml_Interop
@@ -685,7 +683,7 @@ public class CarouselPanel <: InterfaceWrapperBase & ComInterface & windows_inte
         asIScrollSnapPointsInfo().RemoveVerticalSnapPointsChanged(token)
     }
 
-    @When[Windows_UI_Xaml_Controls == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Controls == "on"]
     public unsafe func GetIrregularSnapPoints(orientation: UI_Xaml__impl_l0.Orientation, alignment: UI_Xaml__impl_l0.SnapPointsAlignment): windows_collections.IVectorView<Float32> {
         return asIScrollSnapPointsInfo().GetIrregularSnapPoints(orientation, alignment)
     }
@@ -7024,8 +7022,14 @@ public struct ILoopingSelectorVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var ShouldLoop: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetShouldLoop: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Items: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Items: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SetItems: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SetItems: UIntNative = UIntNative(0)
     public var SelectedIndex: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetSelectedIndex: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SelectedItem: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -7129,6 +7133,7 @@ public class ILoopingSelector <: InterfaceWrapperBase & ComInterface & RuntimeNa
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVector<IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7137,6 +7142,7 @@ public class ILoopingSelector <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_collections.IVector<IInspectable>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetItems(value: windows_collections.IVector<IInspectable>): Unit {
         let v = vtbl()
         let hr = v.SetItems(asRaw(), value.asRaw())
@@ -7896,13 +7902,13 @@ public struct IPopupVtbl {
     public var SetHorizontalOffset: CFunc<(CPointer<Unit>, Float64) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var VerticalOffset: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetVerticalOffset: CFunc<(CPointer<Unit>, Float64) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public var ChildTransitions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Xaml_Media_Animation != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_UI_Xaml_Media_Animation != "on"]
     public var ChildTransitions: UIntNative = UIntNative(0)
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public var SetChildTransitions: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Xaml_Media_Animation != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_UI_Xaml_Media_Animation != "on"]
     public var SetChildTransitions: UIntNative = UIntNative(0)
     public var IsLightDismissEnabled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetIsLightDismissEnabled: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -8036,7 +8042,7 @@ public class IPopup <: InterfaceWrapperBase & ComInterface & RuntimeName & windo
         HRESULT(hr).ok()
     }
 
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public unsafe func ChildTransitions(): UI_Xaml__impl_l0.TransitionCollection {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -8045,7 +8051,7 @@ public class IPopup <: InterfaceWrapperBase & ComInterface & RuntimeName & windo
         return UI_Xaml__impl_l0.TransitionCollection.fromAbiTake(result__)
     }
 
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public unsafe func SetChildTransitions(value: UI_Xaml__impl_l0.TransitionCollection): Unit {
         let v = vtbl()
         let hr = v.SetChildTransitions(asRaw(), value.asRaw())
@@ -8433,9 +8439,9 @@ public struct ISettingsFlyoutTemplateSettingsVtbl {
     public var IconSource: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Xaml_Media != "on"]
     public var IconSource: UIntNative = UIntNative(0)
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public var ContentTransitions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Xaml_Media_Animation != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_UI_Xaml_Media_Animation != "on"]
     public var ContentTransitions: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -8550,7 +8556,7 @@ public class ISettingsFlyoutTemplateSettings <: InterfaceWrapperBase & ComInterf
         return UI_Xaml__impl_l0.ImageSource.fromAbiTake(result__)
     }
 
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public unsafe func ContentTransitions(): UI_Xaml__impl_l0.TransitionCollection {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -10391,10 +10397,12 @@ public class LoopingSelector <: InterfaceWrapperBase & ComInterface & windows_in
         defaultInterface().SetShouldLoop(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVector<IInspectable> {
         return defaultInterface().Items()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetItems(value: windows_collections.IVector<IInspectable>): Unit {
         defaultInterface().SetItems(value)
     }
@@ -10847,7 +10855,7 @@ public class LoopingSelectorPanel <: InterfaceWrapperBase & ComInterface & windo
         asIScrollSnapPointsInfo().RemoveVerticalSnapPointsChanged(token)
     }
 
-    @When[Windows_UI_Xaml_Controls == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Controls == "on"]
     public unsafe func GetIrregularSnapPoints(orientation: UI_Xaml__impl_l0.Orientation, alignment: UI_Xaml__impl_l0.SnapPointsAlignment): windows_collections.IVectorView<Float32> {
         return asIScrollSnapPointsInfo().GetIrregularSnapPoints(orientation, alignment)
     }
@@ -11320,7 +11328,7 @@ public class OrientedVirtualizingPanel <: InterfaceWrapperBase & ComInterface & 
         asIScrollSnapPointsInfo().RemoveVerticalSnapPointsChanged(token)
     }
 
-    @When[Windows_UI_Xaml_Controls == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Controls == "on"]
     public unsafe func GetIrregularSnapPoints(orientation: UI_Xaml__impl_l0.Orientation, alignment: UI_Xaml__impl_l0.SnapPointsAlignment): windows_collections.IVectorView<Float32> {
         return asIScrollSnapPointsInfo().GetIrregularSnapPoints(orientation, alignment)
     }
@@ -11961,7 +11969,7 @@ public class PivotPanel <: InterfaceWrapperBase & ComInterface & windows_interfa
         asIScrollSnapPointsInfo().RemoveVerticalSnapPointsChanged(token)
     }
 
-    @When[Windows_UI_Xaml_Controls == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Controls == "on"]
     public unsafe func GetIrregularSnapPoints(orientation: UI_Xaml__impl_l0.Orientation, alignment: UI_Xaml__impl_l0.SnapPointsAlignment): windows_collections.IVectorView<Float32> {
         return asIScrollSnapPointsInfo().GetIrregularSnapPoints(orientation, alignment)
     }
@@ -12143,12 +12151,12 @@ public class Popup <: InterfaceWrapperBase & ComInterface & windows_interface.Ru
         defaultInterface().SetVerticalOffset(value)
     }
 
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public unsafe func ChildTransitions(): UI_Xaml__impl_l0.TransitionCollection {
         return defaultInterface().ChildTransitions()
     }
 
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public unsafe func SetChildTransitions(value: UI_Xaml__impl_l0.TransitionCollection): Unit {
         defaultInterface().SetChildTransitions(value)
     }
@@ -13558,7 +13566,7 @@ public class SettingsFlyoutTemplateSettings <: InterfaceWrapperBase & ComInterfa
         return defaultInterface().IconSource()
     }
 
-    @When[Windows_UI_Xaml_Media_Animation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Media_Animation == "on"]
     public unsafe func ContentTransitions(): UI_Xaml__impl_l0.TransitionCollection {
         return defaultInterface().ContentTransitions()
     }

@@ -2296,6 +2296,7 @@ public struct IWindowsUpdateAdministratorVtbl {
     public var RevokeWindowsUpdateActionApproval: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     public var ApproveWindowsUpdate: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     public var RevokeWindowsUpdateApproval: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetUpdates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -2370,6 +2371,7 @@ public class IWindowsUpdateAdministrator <: InterfaceWrapperBase & ComInterface 
         return __vt.RevokeWindowsUpdateApproval(__liveRaw, updateId)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetUpdates(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2508,6 +2510,7 @@ public struct IWindowsUpdateScanCompletedEventArgsVtbl {
     public var ProviderId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Succeeded: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var ExtendedError: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.HResult>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Updates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -2570,6 +2573,7 @@ public class IWindowsUpdateScanCompletedEventArgs <: InterfaceWrapperBase & ComI
         return __vt.ExtendedError(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Updates(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2660,6 +2664,7 @@ public struct IWindowsSoftwareUpdateVtbl {
     public var CurrentAction: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ActionResultInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ApprovalInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ApprovedActions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var AttentionRequiredInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ActionProgress: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -2812,6 +2817,7 @@ public class IWindowsSoftwareUpdate <: InterfaceWrapperBase & ComInterface {
         return __vt.ApprovalInfo(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ApprovedActions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3403,6 +3409,7 @@ public class IWindowsSoftwareUpdateOptionalActionInfoFactory <: InterfaceWrapper
 @C
 public struct IWindowsSoftwareUpdateOptionalInfoVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var LocalizationInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ComplianceDeadlineInDays: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ComplianceGracePeriodInDays: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -3449,6 +3456,7 @@ public class IWindowsSoftwareUpdateOptionalInfo <: InterfaceWrapperBase & ComInt
         readVtbl<IWindowsSoftwareUpdateOptionalInfoVtbl>(IWindowsSoftwareUpdateOptionalInfoVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func LocalizationInfo(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3473,6 +3481,7 @@ public class IWindowsSoftwareUpdateOptionalInfo <: InterfaceWrapperBase & ComInt
 public struct IWindowsSoftwareUpdateOptionalInfoFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var CreateInstance: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateInstance2: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -3523,6 +3532,7 @@ public class IWindowsSoftwareUpdateOptionalInfoFactory <: InterfaceWrapperBase &
         return __vt.CreateInstance(__liveRaw, complianceDeadlineInDays, complianceGracePeriodInDays, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateInstance2(localizationInfo: CPointer<Unit>, complianceDeadlineInDays: CPointer<Unit>, complianceGracePeriodInDays: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3544,6 +3554,7 @@ public struct IWindowsSoftwareUpdateProviderVtbl {
     public var ScanFileName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ScanFileArguments: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Type: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var PayloadFiles: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var TrustState: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var RegistrationType: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -3653,6 +3664,7 @@ public class IWindowsSoftwareUpdateProvider <: InterfaceWrapperBase & ComInterfa
         return __vt.Type(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PayloadFiles(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3801,6 +3813,7 @@ public struct IWindowsSoftwareUpdateProviderStatusVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var CancelRequested: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveCancelRequested: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetScanResult: CFunc<(CPointer<Unit>, Bool, UInt32, UInt64, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public var SetActionProgress: CFunc<(CPointer<Unit>, UInt64, UInt64, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var SetActionResult: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -3859,6 +3872,7 @@ public class IWindowsSoftwareUpdateProviderStatus <: InterfaceWrapperBase & ComI
         return __vt.RemoveCancelRequested(__liveRaw, token)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetScanResult(succeeded: Bool, resultCode: UInt32, extendedError: UInt64, updates: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4009,6 +4023,7 @@ public struct IWindowsSoftwareUpdateScanResultVtbl {
     public var Succeeded: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var ResultCode: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var ExtendedError: CFunc<(CPointer<Unit>, CPointer<UInt64>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Updates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -4071,6 +4086,7 @@ public class IWindowsSoftwareUpdateScanResult <: InterfaceWrapperBase & ComInter
         return __vt.ExtendedError(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Updates(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4082,7 +4098,9 @@ public class IWindowsSoftwareUpdateScanResult <: InterfaceWrapperBase & ComInter
 @C
 public struct IWindowsSoftwareUpdateScanResultFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateInstance: CFunc<(CPointer<Unit>, Bool, UInt32, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateInstance2: CFunc<(CPointer<Unit>, Bool, UInt32, UInt64, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -4127,12 +4145,14 @@ public class IWindowsSoftwareUpdateScanResultFactory <: InterfaceWrapperBase & C
         readVtbl<IWindowsSoftwareUpdateScanResultFactoryVtbl>(IWindowsSoftwareUpdateScanResultFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateInstance(succeeded: Bool, resultCode: UInt32, updates: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateInstance(__liveRaw, succeeded, resultCode, updates, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateInstance2(succeeded: Bool, resultCode: UInt32, extendedError: UInt64, updates: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4366,8 +4386,11 @@ public struct IWindowsUpdateManagerVtbl {
     public var IsScanning: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var IsWorking: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var LastSuccessfulScanTimestamp: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetApplicableUpdates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetMostRecentCompletedUpdates: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetMostRecentCompletedUpdatesAsync: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var StartScan: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -4503,18 +4526,21 @@ public class IWindowsUpdateManager <: InterfaceWrapperBase & ComInterface {
         return __vt.LastSuccessfulScanTimestamp(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetApplicableUpdates(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetApplicableUpdates(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetMostRecentCompletedUpdates(count: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetMostRecentCompletedUpdates(__liveRaw, count, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetMostRecentCompletedUpdatesAsync(count: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4534,6 +4560,7 @@ public struct IWindowsUpdateManager2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var GetProvider: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var ProviderIds: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<CPointer<Unit>>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetApplicableSoftwareUpdates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var PerformScan: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -4591,6 +4618,7 @@ public class IWindowsUpdateManager2 <: InterfaceWrapperBase & ComInterface {
         return __vt.ProviderIds(__liveRaw, resultSize__, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetApplicableSoftwareUpdates(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

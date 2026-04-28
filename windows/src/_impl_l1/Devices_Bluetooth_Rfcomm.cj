@@ -35,13 +35,13 @@ public struct IRfcommDeviceServiceVtbl {
     public var MaxProtectionLevel: CFunc<(CPointer<Unit>, CPointer<_impl_l0.SocketProtectionLevelAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Networking_Sockets != "on"]
     public var MaxProtectionLevel: UIntNative = UIntNative(0)
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var GetSdpRawAttributesAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
     public var GetSdpRawAttributesAsync: UIntNative = UIntNative(0)
-    @When[Windows_Devices_Bluetooth == "on" && Windows_Storage_Streams == "on"]
+    @When[Windows_Devices_Bluetooth == "on" && Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var GetSdpRawAttributesWithCacheModeAsync: CFunc<(CPointer<Unit>, _impl_l0.BluetoothCacheModeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Devices_Bluetooth != "on" || Windows_Storage_Streams != "on"]
+    @When[Windows_Devices_Bluetooth != "on" || Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
     public var GetSdpRawAttributesWithCacheModeAsync: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -154,7 +154,7 @@ public class IRfcommDeviceService <: InterfaceWrapperBase & ComInterface & Runti
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.SocketProtectionLevel>()).unwrap()
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetSdpRawAttributesAsync(): windows_future.IAsyncOperation<windows_collections.IMapView<UInt32, _impl_l0.IBuffer>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -163,7 +163,7 @@ public class IRfcommDeviceService <: InterfaceWrapperBase & ComInterface & Runti
         return windows_future.IAsyncOperation<windows_collections.IMapView<UInt32, _impl_l0.IBuffer>>.fromAbiTake(result__)
     }
 
-    @When[Windows_Devices_Bluetooth == "on" && Windows_Storage_Streams == "on"]
+    @When[Windows_Devices_Bluetooth == "on" && Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetSdpRawAttributesWithCacheModeAsync(cacheMode: _impl_l0.BluetoothCacheMode): windows_future.IAsyncOperation<windows_collections.IMapView<UInt32, _impl_l0.IBuffer>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -640,7 +640,10 @@ public struct IRfcommDeviceServicesResultVtbl {
     public var Error: CFunc<(CPointer<Unit>, CPointer<_impl_l0.BluetoothErrorAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Bluetooth != "on"]
     public var Error: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Services: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Services: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -718,6 +721,7 @@ public class IRfcommDeviceServicesResult <: InterfaceWrapperBase & ComInterface 
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.BluetoothError>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Services(): windows_collections.IVectorView<RfcommDeviceService> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -829,12 +833,12 @@ public class RfcommDeviceService <: InterfaceWrapperBase & ComInterface & window
         return defaultInterface().MaxProtectionLevel()
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetSdpRawAttributesAsync(): windows_future.IAsyncOperation<windows_collections.IMapView<UInt32, _impl_l0.IBuffer>> {
         return defaultInterface().GetSdpRawAttributesAsync()
     }
 
-    @When[Windows_Devices_Bluetooth == "on" && Windows_Storage_Streams == "on"]
+    @When[Windows_Devices_Bluetooth == "on" && Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetSdpRawAttributesWithCacheModeAsync(cacheMode: _impl_l0.BluetoothCacheMode): windows_future.IAsyncOperation<windows_collections.IMapView<UInt32, _impl_l0.IBuffer>> {
         return defaultInterface().GetSdpRawAttributesWithCacheModeAsync(cacheMode)
     }
@@ -1006,6 +1010,7 @@ public class RfcommDeviceServicesResult <: InterfaceWrapperBase & ComInterface &
         return defaultInterface().Error()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Services(): windows_collections.IVectorView<RfcommDeviceService> {
         return defaultInterface().Services()
     }

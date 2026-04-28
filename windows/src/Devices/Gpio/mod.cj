@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Devices_Gpio_Provider == "on"]
 import windows.Devices.Gpio.Provider as Devices_Gpio_Provider
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -788,7 +786,10 @@ public struct IGpioChangeReaderVtbl {
     public var Clear: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
     public var GetNextItem: CFunc<(CPointer<Unit>, CPointer<GpioChangeRecordAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var PeekNextItem: CFunc<(CPointer<Unit>, CPointer<GpioChangeRecordAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAllItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAllItems: UIntNative = UIntNative(0)
     public var WaitForItemsAsync: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -958,6 +959,7 @@ public class IGpioChangeReader <: InterfaceWrapperBase & ComInterface & RuntimeN
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<GpioChangeRecord>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAllItems(): windows_collections.IVector<GpioChangeRecord> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1240,6 +1242,7 @@ public class GpioChangeReader <: InterfaceWrapperBase & ComInterface & windows_i
         return defaultInterface().PeekNextItem()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAllItems(): windows_collections.IVector<GpioChangeRecord> {
         return defaultInterface().GetAllItems()
     }
@@ -1378,7 +1381,7 @@ public class GpioController <: InterfaceWrapperBase & ComInterface & windows_int
         return defaultInterface().TryOpenPin(pinNumber, sharingMode, pin, openStatus)
     }
 
-    @When[Windows_Devices_Gpio_Provider == "on"]
+    @When[Windows_Devices_Gpio_Provider == "on" && Windows_Foundation_Collections == "on"]
     public static unsafe func GetControllersAsync(provider: Devices_Gpio_Provider.IGpioProvider): windows_future.IAsyncOperation<windows_collections.IVectorView<GpioController>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<GpioController>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<GpioController>>>.None
         try (factory__ = windows_core.factory<GpioController, IGpioControllerStatics2>().unwrap()) {
@@ -1954,9 +1957,9 @@ extend IGpioControllerStatics <: windows_core.Interface<IGpioControllerStatics> 
 @C
 public struct IGpioControllerStatics2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Devices_Gpio_Provider == "on"]
+    @When[Windows_Devices_Gpio_Provider == "on" && Windows_Foundation_Collections == "on"]
     public var GetControllersAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Devices_Gpio_Provider != "on"]
+    @When[Windows_Devices_Gpio_Provider != "on" || Windows_Foundation_Collections != "on"]
     public var GetControllersAsync: UIntNative = UIntNative(0)
     public var GetDefaultAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -2027,7 +2030,7 @@ public class IGpioControllerStatics2 <: InterfaceWrapperBase & ComInterface & Ru
         readVtbl<IGpioControllerStatics2Vtbl>(IGpioControllerStatics2Vtbl())
     }
 
-    @When[Windows_Devices_Gpio_Provider == "on"]
+    @When[Windows_Devices_Gpio_Provider == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func GetControllersAsync(provider: Devices_Gpio_Provider.IGpioProvider): windows_future.IAsyncOperation<windows_collections.IVectorView<GpioController>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

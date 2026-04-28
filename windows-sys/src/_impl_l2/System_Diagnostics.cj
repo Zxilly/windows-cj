@@ -108,7 +108,7 @@ public class IProcessDiagnosticInfo <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IProcessDiagnosticInfo2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
     public var GetAppDiagnosticInfos: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IsPackaged: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -154,7 +154,7 @@ public class IProcessDiagnosticInfo2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IProcessDiagnosticInfo2Vtbl>(IProcessDiagnosticInfo2Vtbl())
     }
 
-    @When[Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
     public unsafe func GetAppDiagnosticInfos(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -172,6 +172,7 @@ public class IProcessDiagnosticInfo2 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IProcessDiagnosticInfoStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetForProcesses: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetForCurrentProcess: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -217,6 +218,7 @@ public class IProcessDiagnosticInfoStatics <: InterfaceWrapperBase & ComInterfac
         readVtbl<IProcessDiagnosticInfoStaticsVtbl>(IProcessDiagnosticInfoStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetForProcesses(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

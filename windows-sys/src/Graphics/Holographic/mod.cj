@@ -3,16 +3,11 @@ package windows_sys.Graphics.Holographic
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Foundation_Numerics == "on"]
 import windows_sys.Foundation.Numerics as Foundation_Numerics
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_Graphics_DirectX == "on"]
 import windows_sys.Graphics.DirectX as Graphics_DirectX
-@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
 import windows_sys.Graphics.DirectX.Direct3D11 as Graphics_DirectX_Direct3D11
-@When[Windows_Perception == "on"]
 import windows_sys.Perception as Perception
-@When[Windows_Perception_Spatial == "on"]
 import windows_sys.Perception.Spatial as Perception_Spatial
 import windows_sys._impl_l1 as _impl_l1
 
@@ -1567,6 +1562,7 @@ public class IHolographicSpaceStatics3 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IHolographicViewConfiguration2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedDepthReprojectionMethods: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1611,6 +1607,7 @@ public class IHolographicViewConfiguration2 <: InterfaceWrapperBase & ComInterfa
         readVtbl<IHolographicViewConfiguration2Vtbl>(IHolographicViewConfiguration2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedDepthReprojectionMethods(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1622,6 +1619,7 @@ public class IHolographicViewConfiguration2 <: InterfaceWrapperBase & ComInterfa
 @C
 public struct IHolographicFramePresentationMonitorVtbl {
     public var base_: Foundation__impl_l0.IClosableVtbl = Foundation__impl_l0.IClosableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ReadReports: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1666,6 +1664,7 @@ public class IHolographicFramePresentationMonitor <: InterfaceWrapperBase & ComI
         readVtbl<IHolographicFramePresentationMonitorVtbl>(IHolographicFramePresentationMonitorVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReadReports(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1760,6 +1759,7 @@ public class IHolographicFrameScanoutReport <: InterfaceWrapperBase & ComInterfa
 @C
 public struct IHolographicFrameScanoutMonitorVtbl {
     public var base_: Foundation__impl_l0.IClosableVtbl = Foundation__impl_l0.IClosableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ReadReports: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1804,6 +1804,7 @@ public class IHolographicFrameScanoutMonitor <: InterfaceWrapperBase & ComInterf
         readVtbl<IHolographicFrameScanoutMonitorVtbl>(IHolographicFrameScanoutMonitorVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReadReports(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1942,6 +1943,7 @@ public struct IHolographicCamera3Vtbl {
     public var IsPrimaryLayerEnabled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var SetIsPrimaryLayerEnabled: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
     public var MaxQuadLayerCount: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var QuadLayers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -2004,6 +2006,7 @@ public class IHolographicCamera3 <: InterfaceWrapperBase & ComInterface {
         return __vt.MaxQuadLayerCount(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func QuadLayers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2292,7 +2295,9 @@ public class IHolographicDisplayStatics <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IHolographicFrameVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AddedCameras: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var RemovedCameras: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetRenderingParameters: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var Duration: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.TimeSpan>) -> Int32> = { _, _ => 0 }
@@ -2344,12 +2349,14 @@ public class IHolographicFrame <: InterfaceWrapperBase & ComInterface {
         readVtbl<IHolographicFrameVtbl>(IHolographicFrameVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AddedCameras(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AddedCameras(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RemovedCameras(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2458,6 +2465,7 @@ public class IHolographicFrame2 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IHolographicFramePredictionVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CameraPoses: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Perception == "on"]
     public var Timestamp: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -2504,6 +2512,7 @@ public class IHolographicFramePrediction <: InterfaceWrapperBase & ComInterface 
         readVtbl<IHolographicFramePredictionVtbl>(IHolographicFramePredictionVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CameraPoses(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2952,7 +2961,7 @@ public struct IHolographicViewConfigurationVtbl {
     public var NativeRenderTargetSize: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.Size>) -> Int32> = { _, _ => 0 }
     public var RenderTargetSize: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.Size>) -> Int32> = { _, _ => 0 }
     public var RequestRenderTargetSize: CFunc<(CPointer<Unit>, Foundation__impl_l0.Size, CPointer<Foundation__impl_l0.Size>) -> Int32> = { _, _, _ => 0 }
-    @When[Windows_Graphics_DirectX == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_DirectX == "on"]
     public var SupportedPixelFormats: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Graphics_DirectX == "on"]
     public var PixelFormat: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -3025,7 +3034,7 @@ public class IHolographicViewConfiguration <: InterfaceWrapperBase & ComInterfac
         return __vt.RequestRenderTargetSize(__liveRaw, size, result__)
     }
 
-    @When[Windows_Graphics_DirectX == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_DirectX == "on"]
     public unsafe func SupportedPixelFormats(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

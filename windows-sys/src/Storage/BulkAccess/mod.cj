@@ -22,7 +22,7 @@ public struct IStorageItemInformationVtbl {
     public var DocumentProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Storage_FileProperties == "on"]
     public var BasicProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Storage_FileProperties == "on"]
+    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
     public var Thumbnail: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ThumbnailUpdated: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveThumbnailUpdated: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
@@ -106,7 +106,7 @@ public class IStorageItemInformation <: InterfaceWrapperBase & ComInterface {
         return __vt.BasicProperties(__liveRaw, result__)
     }
 
-    @When[Windows_Storage_FileProperties == "on"]
+    @When[Windows_Storage_FileProperties == "on" && Windows_Storage_Streams == "on"]
     public unsafe func Thumbnail(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -142,11 +142,17 @@ public class IStorageItemInformation <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IFileInformationFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetItemsAsync: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetItemsAsyncDefaultStartAndCount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetFilesAsync: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetFilesAsyncDefaultStartAndCount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetFoldersAsync: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetFoldersAsyncDefaultStartAndCount: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetVirtualizedItemsVector: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetVirtualizedFilesVector: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -194,36 +200,42 @@ public class IFileInformationFactory <: InterfaceWrapperBase & ComInterface {
         readVtbl<IFileInformationFactoryVtbl>(IFileInformationFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetItemsAsync(startIndex: UInt32, maxItemsToRetrieve: UInt32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetItemsAsync(__liveRaw, startIndex, maxItemsToRetrieve, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetItemsAsyncDefaultStartAndCount(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetItemsAsyncDefaultStartAndCount(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetFilesAsync(startIndex: UInt32, maxItemsToRetrieve: UInt32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetFilesAsync(__liveRaw, startIndex, maxItemsToRetrieve, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetFilesAsyncDefaultStartAndCount(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetFilesAsyncDefaultStartAndCount(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetFoldersAsync(startIndex: UInt32, maxItemsToRetrieve: UInt32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetFoldersAsync(__liveRaw, startIndex, maxItemsToRetrieve, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetFoldersAsyncDefaultStartAndCount(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

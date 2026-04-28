@@ -3,14 +3,10 @@ package windows_sys.Graphics.Printing.PrintSupport
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Devices_Printers == "on"]
 import windows_sys.Devices.Printers as Devices_Printers
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_Graphics_Printing_PrintTicket == "on"]
 import windows_sys.Graphics.Printing.PrintTicket as Graphics_Printing_PrintTicket
-@When[Windows_UI == "on"]
 import windows_sys.UI as UI
-@When[Windows_UI_Shell == "on"]
 import windows_sys.UI.Shell as UI_Shell
 import windows_sys._impl_l0 as _impl_l0
 import windows_sys._impl_l1 as _impl_l1
@@ -1103,7 +1099,9 @@ public struct IPrintSupportPrinterSelectedEventArgsVtbl {
     public var PrintTicket: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Graphics_Printing_PrintTicket == "on"]
     public var SetPrintTicket: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetAdditionalFeatures: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetAdditionalParameters: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var AllowedAdditionalFeaturesAndParametersCount: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Shell == "on"]
@@ -1173,12 +1171,14 @@ public class IPrintSupportPrinterSelectedEventArgs <: InterfaceWrapperBase & Com
         return __vt.SetPrintTicket(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetAdditionalFeatures(features: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetAdditionalFeatures(__liveRaw, features)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetAdditionalParameters(parameters: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1879,6 +1879,7 @@ public class IPrintSupportExtensionTriggerDetails <: InterfaceWrapperBase & ComI
 @C
 public struct IPrintSupportPrintDeviceCapabilitiesChangedEventArgs2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SetSupportedPdlPassthroughContentTypes: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var ResourceLanguage: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Data_Xml_Dom == "on"]
@@ -1929,6 +1930,7 @@ public class IPrintSupportPrintDeviceCapabilitiesChangedEventArgs2 <: InterfaceW
         readVtbl<IPrintSupportPrintDeviceCapabilitiesChangedEventArgs2Vtbl>(IPrintSupportPrintDeviceCapabilitiesChangedEventArgs2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetSupportedPdlPassthroughContentTypes(supportedPdlContentTypes: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -619,9 +618,9 @@ public struct IEmailMailboxForwardMeetingRequestVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var EmailMailboxId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var EmailMessageId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel_Email == "on"]
+    @When[Windows_ApplicationModel_Email == "on" && Windows_Foundation_Collections == "on"]
     public var Recipients: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel_Email != "on"]
+    @When[Windows_ApplicationModel_Email != "on" || Windows_Foundation_Collections != "on"]
     public var Recipients: UIntNative = UIntNative(0)
     public var Subject: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel_Email == "on"]
@@ -716,7 +715,7 @@ public class IEmailMailboxForwardMeetingRequest <: InterfaceWrapperBase & ComInt
         return windows_core.HString.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel_Email == "on"]
+    @When[Windows_ApplicationModel_Email == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func Recipients(): windows_collections.IVectorView<_impl_l0.EmailRecipient> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1181,10 +1180,13 @@ extend IEmailMailboxProposeNewTimeForMeetingRequest <: windows_core.Interface<IE
 public struct IEmailMailboxResolveRecipientsRequestVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var EmailMailboxId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Recipients: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel_Email == "on"]
+    @When[Windows_Foundation_Collections != "on"]
+    public var Recipients: UIntNative = UIntNative(0)
+    @When[Windows_ApplicationModel_Email == "on" && Windows_Foundation_Collections == "on"]
     public var ReportCompletedAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel_Email != "on"]
+    @When[Windows_ApplicationModel_Email != "on" || Windows_Foundation_Collections != "on"]
     public var ReportCompletedAsync: UIntNative = UIntNative(0)
     public var ReportFailedAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -1263,6 +1265,7 @@ public class IEmailMailboxResolveRecipientsRequest <: InterfaceWrapperBase & Com
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Recipients(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1271,7 +1274,7 @@ public class IEmailMailboxResolveRecipientsRequest <: InterfaceWrapperBase & Com
         return windows_collections.IVectorView<windows_core.HString>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel_Email == "on"]
+    @When[Windows_ApplicationModel_Email == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func ReportCompletedAsync(resolutionResults: windows_collections.IIterable<_impl_l2.EmailRecipientResolutionResult>): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1828,13 +1831,13 @@ extend IEmailMailboxUpdateMeetingResponseRequest <: windows_core.Interface<IEmai
 public struct IEmailMailboxValidateCertificatesRequestVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var EmailMailboxId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public var Certificates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Security_Cryptography_Certificates != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Security_Cryptography_Certificates != "on"]
     public var Certificates: UIntNative = UIntNative(0)
-    @When[Windows_ApplicationModel_Email == "on"]
+    @When[Windows_ApplicationModel_Email == "on" && Windows_Foundation_Collections == "on"]
     public var ReportCompletedAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel_Email != "on"]
+    @When[Windows_ApplicationModel_Email != "on" || Windows_Foundation_Collections != "on"]
     public var ReportCompletedAsync: UIntNative = UIntNative(0)
     public var ReportFailedAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -1913,7 +1916,7 @@ public class IEmailMailboxValidateCertificatesRequest <: InterfaceWrapperBase & 
         return windows_core.HString.fromAbiTake(result__)
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func Certificates(): windows_collections.IVectorView<_impl_l1.Certificate> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1922,7 +1925,7 @@ public class IEmailMailboxValidateCertificatesRequest <: InterfaceWrapperBase & 
         return windows_collections.IVectorView<_impl_l1.Certificate>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel_Email == "on"]
+    @When[Windows_ApplicationModel_Email == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func ReportCompletedAsync(validationStatuses: windows_collections.IIterable<_impl_l0.EmailCertificateValidationStatus>): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2552,7 +2555,7 @@ public class EmailMailboxForwardMeetingRequest <: InterfaceWrapperBase & ComInte
         return defaultInterface().EmailMessageId()
     }
 
-    @When[Windows_ApplicationModel_Email == "on"]
+    @When[Windows_ApplicationModel_Email == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func Recipients(): windows_collections.IVectorView<_impl_l0.EmailRecipient> {
         return defaultInterface().Recipients()
     }
@@ -3012,11 +3015,12 @@ public class EmailMailboxResolveRecipientsRequest <: InterfaceWrapperBase & ComI
         return defaultInterface().EmailMailboxId()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Recipients(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().Recipients()
     }
 
-    @When[Windows_ApplicationModel_Email == "on"]
+    @When[Windows_ApplicationModel_Email == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func ReportCompletedAsync(resolutionResults: windows_collections.IIterable<_impl_l2.EmailRecipientResolutionResult>): windows_future.IAsyncAction {
         return defaultInterface().ReportCompletedAsync(resolutionResults)
     }
@@ -3566,12 +3570,12 @@ public class EmailMailboxValidateCertificatesRequest <: InterfaceWrapperBase & C
         return defaultInterface().EmailMailboxId()
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func Certificates(): windows_collections.IVectorView<_impl_l1.Certificate> {
         return defaultInterface().Certificates()
     }
 
-    @When[Windows_ApplicationModel_Email == "on"]
+    @When[Windows_ApplicationModel_Email == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func ReportCompletedAsync(validationStatuses: windows_collections.IIterable<_impl_l0.EmailCertificateValidationStatus>): windows_future.IAsyncAction {
         return defaultInterface().ReportCompletedAsync(validationStatuses)
     }

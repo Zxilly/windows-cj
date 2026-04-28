@@ -112,10 +112,12 @@ public class ClipboardContentOptions <: InterfaceWrapperBase & ComInterface & wi
         defaultInterface().SetIsAllowedInHistory(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RoamingFormats(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().RoamingFormats()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func HistoryFormats(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().HistoryFormats()
     }
@@ -593,8 +595,14 @@ public struct IClipboardContentOptionsVtbl {
     public var SetIsRoamable: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsAllowedInHistory: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetIsAllowedInHistory: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var RoamingFormats: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RoamingFormats: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var HistoryFormats: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var HistoryFormats: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -691,6 +699,7 @@ public class IClipboardContentOptions <: InterfaceWrapperBase & ComInterface & R
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RoamingFormats(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -699,6 +708,7 @@ public class IClipboardContentOptions <: InterfaceWrapperBase & ComInterface & R
         return windows_collections.IVector<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func HistoryFormats(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

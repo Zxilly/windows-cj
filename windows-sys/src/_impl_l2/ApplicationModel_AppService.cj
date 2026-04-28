@@ -11,7 +11,7 @@ import windows_sys._impl_l0 as _impl_l0
 @C
 public struct IAppServiceCatalogStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindAppServiceProvidersAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -56,7 +56,7 @@ public class IAppServiceCatalogStatics <: InterfaceWrapperBase & ComInterface {
         readVtbl<IAppServiceCatalogStaticsVtbl>(IAppServiceCatalogStaticsVtbl())
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindAppServiceProvidersAsync(appServiceName: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

@@ -3,17 +3,11 @@ package windows_sys.Win32.Graphics.Direct2D
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_DirectWrite == "on"]
 import windows_sys.Win32.Graphics.DirectWrite as Win32_Graphics_DirectWrite
-@When[Windows_Win32_Graphics_Dxgi_Common == "on"]
 import windows_sys.Win32.Graphics.Dxgi.Common as Win32_Graphics_Dxgi_Common
-@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows_sys.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-@When[Windows_Win32_Graphics_Imaging == "on"]
 import windows_sys.Win32.Graphics.Imaging as Win32_Graphics_Imaging
-@When[Windows_Win32_Storage_Xps_Printing == "on"]
 import windows_sys.Win32.Storage.Xps.Printing as Win32_Storage_Xps_Printing
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
@@ -15350,32 +15344,137 @@ public class ID2D1TransformedImageSource <: InterfaceWrapperBase & ComInterface 
     }
 }
 
-@When[D2D1 == "on"]
-foreign {
-    // param-hint: pFactoryOptions optional
-    func D2D1CreateFactory(factoryType: Int32, riid: CPointer<GUID>, pFactoryOptions: CPointer<D2D1_FACTORY_OPTIONS>, ppIFactory: CPointer<CPointer<Unit>>): Int32
-    func D2D1SinCos(angle: Float32, s: CPointer<Float32>, c: CPointer<Float32>): Unit
-    func D2D1Tan(angle: Float32): Float32
-    func D2D1Vec3Length(x: Float32, y: Float32, z: Float32): Float32
-}
-
-@When[D2D1 == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
+@When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1ComputeMaximumScaleFactor == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
 foreign {
     func D2D1ComputeMaximumScaleFactor(matrix: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_F>): Float32
-    func D2D1ConvertColorSpace(sourceColorSpace: Int32, destinationColorSpace: Int32, color: CPointer<Win32__impl_l0.D2D1_COLOR_F>): Win32__impl_l0.D2D1_COLOR_F
-    func D2D1GetGradientMeshInteriorPointsFromCoonsPatch(pPoint0: CPointer<Win32__impl_l0.D2D_POINT_2F>, pPoint1: CPointer<Win32__impl_l0.D2D_POINT_2F>, pPoint2: CPointer<Win32__impl_l0.D2D_POINT_2F>, pPoint3: CPointer<Win32__impl_l0.D2D_POINT_2F>, pPoint4: CPointer<Win32__impl_l0.D2D_POINT_2F>, pPoint5: CPointer<Win32__impl_l0.D2D_POINT_2F>, pPoint6: CPointer<Win32__impl_l0.D2D_POINT_2F>, pPoint7: CPointer<Win32__impl_l0.D2D_POINT_2F>, pPoint8: CPointer<Win32__impl_l0.D2D_POINT_2F>, pPoint9: CPointer<Win32__impl_l0.D2D_POINT_2F>, pPoint10: CPointer<Win32__impl_l0.D2D_POINT_2F>, pPoint11: CPointer<Win32__impl_l0.D2D_POINT_2F>, pTensorPoint11: CPointer<Win32__impl_l0.D2D_POINT_2F>, pTensorPoint12: CPointer<Win32__impl_l0.D2D_POINT_2F>, pTensorPoint21: CPointer<Win32__impl_l0.D2D_POINT_2F>, pTensorPoint22: CPointer<Win32__impl_l0.D2D_POINT_2F>): Unit
-    func D2D1InvertMatrix(matrix: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_F>): Int32
-    func D2D1IsMatrixInvertible(matrix: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_F>): Int32
-    func D2D1MakeRotateMatrix(angle: Float32, center: Win32__impl_l0.D2D_POINT_2F, matrix: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_F>): Unit
-    func D2D1MakeSkewMatrix(angleX: Float32, angleY: Float32, center: Win32__impl_l0.D2D_POINT_2F, matrix: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_F>): Unit
 }
 
-@When[D2D1 == "on" && Windows_Win32_Graphics_Dxgi == "on"]
+@When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1ComputeMaximumScaleFactor == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
+public unsafe func Windows_D2D1ComputeMaximumScaleFactor(matrix: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_F>): Float32 {
+    return D2D1ComputeMaximumScaleFactor(matrix)
+}
+
+@When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1ConvertColorSpace == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
+foreign {
+    func D2D1ConvertColorSpace(sourceColorSpace: Int32, destinationColorSpace: Int32, color: CPointer<Win32__impl_l0.D2D1_COLOR_F>): Win32__impl_l0.D2D1_COLOR_F
+}
+
+@When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1ConvertColorSpace == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
+public unsafe func Windows_D2D1ConvertColorSpace(sourceColorSpace: Int32, destinationColorSpace: Int32, color: CPointer<Win32__impl_l0.D2D1_COLOR_F>): Win32__impl_l0.D2D1_COLOR_F {
+    return D2D1ConvertColorSpace(sourceColorSpace, destinationColorSpace, color)
+}
+
+@When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1CreateDevice == "on" && Windows_Win32_Graphics_Dxgi == "on"]
 foreign {
     // param-hint: creationProperties optional
     func D2D1CreateDevice(dxgiDevice: CPointer<Unit>, creationProperties: CPointer<D2D1_CREATION_PROPERTIES>, d2dDevice: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1CreateDevice == "on" && Windows_Win32_Graphics_Dxgi == "on"]
+public unsafe func Windows_D2D1CreateDevice(dxgiDevice: CPointer<Unit>, creationProperties: CPointer<D2D1_CREATION_PROPERTIES>, d2dDevice: CPointer<CPointer<Unit>>): Int32 {
+    return D2D1CreateDevice(dxgiDevice, creationProperties, d2dDevice)
+}
+
+@When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1CreateDeviceContext == "on" && Windows_Win32_Graphics_Dxgi == "on"]
+foreign {
     // param-hint: creationProperties optional
     func D2D1CreateDeviceContext(dxgiSurface: CPointer<Unit>, creationProperties: CPointer<D2D1_CREATION_PROPERTIES>, d2dDeviceContext: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1CreateDeviceContext == "on" && Windows_Win32_Graphics_Dxgi == "on"]
+public unsafe func Windows_D2D1CreateDeviceContext(dxgiSurface: CPointer<Unit>, creationProperties: CPointer<D2D1_CREATION_PROPERTIES>, d2dDeviceContext: CPointer<CPointer<Unit>>): Int32 {
+    return D2D1CreateDeviceContext(dxgiSurface, creationProperties, d2dDeviceContext)
+}
+
+@When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1CreateFactory == "on"]
+foreign {
+    // param-hint: pFactoryOptions optional
+    func D2D1CreateFactory(factoryType: Int32, riid: CPointer<GUID>, pFactoryOptions: CPointer<D2D1_FACTORY_OPTIONS>, ppIFactory: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1CreateFactory == "on"]
+public unsafe func Windows_D2D1CreateFactory(factoryType: Int32, riid: CPointer<GUID>, pFactoryOptions: CPointer<D2D1_FACTORY_OPTIONS>, ppIFactory: CPointer<CPointer<Unit>>): Int32 {
+    return D2D1CreateFactory(factoryType, riid, pFactoryOptions, ppIFactory)
+}
+
+@When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1GetGradientMeshInteriorPointsFromCoonsPatch == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
+foreign {
+    func D2D1GetGradientMeshInteriorPointsFromCoonsPatch(pPoint0: CPointer<Win32__impl_l0.D2D_POINT_2F>, pPoint1: CPointer<Win32__impl_l0.D2D_POINT_2F>, pPoint2: CPointer<Win32__impl_l0.D2D_POINT_2F>, pPoint3: CPointer<Win32__impl_l0.D2D_POINT_2F>, pPoint4: CPointer<Win32__impl_l0.D2D_POINT_2F>, pPoint5: CPointer<Win32__impl_l0.D2D_POINT_2F>, pPoint6: CPointer<Win32__impl_l0.D2D_POINT_2F>, pPoint7: CPointer<Win32__impl_l0.D2D_POINT_2F>, pPoint8: CPointer<Win32__impl_l0.D2D_POINT_2F>, pPoint9: CPointer<Win32__impl_l0.D2D_POINT_2F>, pPoint10: CPointer<Win32__impl_l0.D2D_POINT_2F>, pPoint11: CPointer<Win32__impl_l0.D2D_POINT_2F>, pTensorPoint11: CPointer<Win32__impl_l0.D2D_POINT_2F>, pTensorPoint12: CPointer<Win32__impl_l0.D2D_POINT_2F>, pTensorPoint21: CPointer<Win32__impl_l0.D2D_POINT_2F>, pTensorPoint22: CPointer<Win32__impl_l0.D2D_POINT_2F>): Unit
+}
+
+@When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1GetGradientMeshInteriorPointsFromCoonsPatch == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
+public unsafe func Windows_D2D1GetGradientMeshInteriorPointsFromCoonsPatch(pPoint0: CPointer<Win32__impl_l0.D2D_POINT_2F>, pPoint1: CPointer<Win32__impl_l0.D2D_POINT_2F>, pPoint2: CPointer<Win32__impl_l0.D2D_POINT_2F>, pPoint3: CPointer<Win32__impl_l0.D2D_POINT_2F>, pPoint4: CPointer<Win32__impl_l0.D2D_POINT_2F>, pPoint5: CPointer<Win32__impl_l0.D2D_POINT_2F>, pPoint6: CPointer<Win32__impl_l0.D2D_POINT_2F>, pPoint7: CPointer<Win32__impl_l0.D2D_POINT_2F>, pPoint8: CPointer<Win32__impl_l0.D2D_POINT_2F>, pPoint9: CPointer<Win32__impl_l0.D2D_POINT_2F>, pPoint10: CPointer<Win32__impl_l0.D2D_POINT_2F>, pPoint11: CPointer<Win32__impl_l0.D2D_POINT_2F>, pTensorPoint11: CPointer<Win32__impl_l0.D2D_POINT_2F>, pTensorPoint12: CPointer<Win32__impl_l0.D2D_POINT_2F>, pTensorPoint21: CPointer<Win32__impl_l0.D2D_POINT_2F>, pTensorPoint22: CPointer<Win32__impl_l0.D2D_POINT_2F>): Unit {
+    D2D1GetGradientMeshInteriorPointsFromCoonsPatch(pPoint0, pPoint1, pPoint2, pPoint3, pPoint4, pPoint5, pPoint6, pPoint7, pPoint8, pPoint9, pPoint10, pPoint11, pTensorPoint11, pTensorPoint12, pTensorPoint21, pTensorPoint22)
+}
+
+@When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1InvertMatrix == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
+foreign {
+    func D2D1InvertMatrix(matrix: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_F>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1InvertMatrix == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
+public unsafe func Windows_D2D1InvertMatrix(matrix: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_F>): Int32 {
+    return D2D1InvertMatrix(matrix)
+}
+
+@When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1IsMatrixInvertible == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
+foreign {
+    func D2D1IsMatrixInvertible(matrix: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_F>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1IsMatrixInvertible == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
+public unsafe func Windows_D2D1IsMatrixInvertible(matrix: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_F>): Int32 {
+    return D2D1IsMatrixInvertible(matrix)
+}
+
+@When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1MakeRotateMatrix == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
+foreign {
+    func D2D1MakeRotateMatrix(angle: Float32, center: Win32__impl_l0.D2D_POINT_2F, matrix: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_F>): Unit
+}
+
+@When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1MakeRotateMatrix == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
+public unsafe func Windows_D2D1MakeRotateMatrix(angle: Float32, center: Win32__impl_l0.D2D_POINT_2F, matrix: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_F>): Unit {
+    D2D1MakeRotateMatrix(angle, center, matrix)
+}
+
+@When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1MakeSkewMatrix == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
+foreign {
+    func D2D1MakeSkewMatrix(angleX: Float32, angleY: Float32, center: Win32__impl_l0.D2D_POINT_2F, matrix: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_F>): Unit
+}
+
+@When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1MakeSkewMatrix == "on" && Windows_Win32_Graphics_Direct2D_Common == "on"]
+public unsafe func Windows_D2D1MakeSkewMatrix(angleX: Float32, angleY: Float32, center: Win32__impl_l0.D2D_POINT_2F, matrix: CPointer<Win32__impl_l0.D2D_MATRIX_3X2_F>): Unit {
+    D2D1MakeSkewMatrix(angleX, angleY, center, matrix)
+}
+
+@When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1SinCos == "on"]
+foreign {
+    func D2D1SinCos(angle: Float32, s: CPointer<Float32>, c: CPointer<Float32>): Unit
+}
+
+@When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1SinCos == "on"]
+public unsafe func Windows_D2D1SinCos(angle: Float32, s: CPointer<Float32>, c: CPointer<Float32>): Unit {
+    D2D1SinCos(angle, s, c)
+}
+
+@When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1Tan == "on"]
+foreign {
+    func D2D1Tan(angle: Float32): Float32
+}
+
+@When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1Tan == "on"]
+public unsafe func Windows_D2D1Tan(angle: Float32): Float32 {
+    return D2D1Tan(angle)
+}
+
+@When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1Vec3Length == "on"]
+foreign {
+    func D2D1Vec3Length(x: Float32, y: Float32, z: Float32): Float32
+}
+
+@When[Windows_Win32_Graphics_Direct2D == "on" && D2D1 == "on" && Windows_Win32_Graphics_Direct2D_D2D1Vec3Length == "on"]
+public unsafe func Windows_D2D1Vec3Length(x: Float32, y: Float32, z: Float32): Float32 {
+    return D2D1Vec3Length(x, y, z)
 }
 
 @When[Windows_Win32_Graphics_Direct2D == "on"]

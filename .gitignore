@@ -3,6 +3,7 @@
 **/target_*/
 **/__pycache__/
 *.py[cod]
+cfg.toml
 
 # Local build and probe artifacts.
 *.cjo
@@ -23,6 +24,10 @@
 **/tmp/
 **/tmp_*/
 /windows-*-probe/
+
+# cfggen output written into user-project / workspace root, not source.
+windows-cj-link-options.txt
+**/windows-cj-link-options.txt
 
 # OS/editor noise.
 .DS_Store

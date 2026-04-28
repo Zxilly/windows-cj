@@ -8,11 +8,8 @@ import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeTy
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Dwm == "on"]
 import windows.Win32.Graphics.Dwm as Win32_Graphics_Dwm
-@When[Windows_Win32_Graphics_Imaging == "on"]
 import windows.Win32.Graphics.Imaging as Win32_Graphics_Imaging
 import windows.Win32._impl_l0 as Win32__impl_l0
 

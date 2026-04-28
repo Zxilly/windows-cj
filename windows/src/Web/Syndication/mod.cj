@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -1819,19 +1818,34 @@ extend ISyndicationContentFactory <: windows_core.Interface<ISyndicationContentF
 @C
 public struct ISyndicationFeedVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Authors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Authors: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Categories: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Categories: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Contributors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Contributors: UIntNative = UIntNative(0)
     public var Generator: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetGenerator: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IconUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetIconUri: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Id: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetId: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Items: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Items: UIntNative = UIntNative(0)
     public var LastUpdatedTime: CFunc<(CPointer<Unit>, CPointer<windows_future.DateTimeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetLastUpdatedTime: CFunc<(CPointer<Unit>, windows_future.DateTimeAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Links: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Links: UIntNative = UIntNative(0)
     public var ImageUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetImageUri: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Rights: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1930,6 +1944,7 @@ public class ISyndicationFeed <: InterfaceWrapperBase & ComInterface & RuntimeNa
         readVtbl<ISyndicationFeedVtbl>(ISyndicationFeedVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Authors(): windows_collections.IVector<SyndicationPerson> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1938,6 +1953,7 @@ public class ISyndicationFeed <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_collections.IVector<SyndicationPerson>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Categories(): windows_collections.IVector<SyndicationCategory> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1946,6 +1962,7 @@ public class ISyndicationFeed <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_collections.IVector<SyndicationCategory>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Contributors(): windows_collections.IVector<SyndicationPerson> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1996,6 +2013,7 @@ public class ISyndicationFeed <: InterfaceWrapperBase & ComInterface & RuntimeNa
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVector<SyndicationItem> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2018,6 +2036,7 @@ public class ISyndicationFeed <: InterfaceWrapperBase & ComInterface & RuntimeNa
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Links(): windows_collections.IVector<SyndicationLink> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2313,16 +2332,28 @@ extend ISyndicationGeneratorFactory <: windows_core.Interface<ISyndicationGenera
 @C
 public struct ISyndicationItemVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Authors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Authors: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Categories: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Categories: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Contributors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Contributors: UIntNative = UIntNative(0)
     public var Content: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetContent: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Id: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetId: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var LastUpdatedTime: CFunc<(CPointer<Unit>, CPointer<windows_future.DateTimeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetLastUpdatedTime: CFunc<(CPointer<Unit>, windows_future.DateTimeAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Links: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Links: UIntNative = UIntNative(0)
     public var PublishedDate: CFunc<(CPointer<Unit>, CPointer<windows_future.DateTimeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetPublishedDate: CFunc<(CPointer<Unit>, windows_future.DateTimeAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Rights: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -2424,6 +2455,7 @@ public class ISyndicationItem <: InterfaceWrapperBase & ComInterface & RuntimeNa
         readVtbl<ISyndicationItemVtbl>(ISyndicationItemVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Authors(): windows_collections.IVector<SyndicationPerson> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2432,6 +2464,7 @@ public class ISyndicationItem <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_collections.IVector<SyndicationPerson>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Categories(): windows_collections.IVector<SyndicationCategory> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2440,6 +2473,7 @@ public class ISyndicationItem <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_collections.IVector<SyndicationCategory>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Contributors(): windows_collections.IVector<SyndicationPerson> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2490,6 +2524,7 @@ public class ISyndicationItem <: InterfaceWrapperBase & ComInterface & RuntimeNa
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Links(): windows_collections.IVector<SyndicationLink> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3008,15 +3043,21 @@ public struct ISyndicationNodeVtbl {
     public var SetLanguage: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var BaseUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetBaseUri: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var AttributeExtensions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AttributeExtensions: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var ElementExtensions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ElementExtensions: UIntNative = UIntNative(0)
     @When[Windows_Data_Xml_Dom == "on"]
     public var GetXmlDocument: CFunc<(CPointer<Unit>, SyndicationFormatAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_Data_Xml_Dom != "on"]
     public var GetXmlDocument: UIntNative = UIntNative(0)
     public init() {}
 
-    @When[Windows_Data_Xml_Dom == "on"]
+    @When[(Windows_Foundation_Collections == "on") && (Windows_Data_Xml_Dom == "on")]
     public static func new<Identity>(offset!: Int64 = 0): ISyndicationNodeVtbl where Identity <: ISyndicationNode_Impl {
         let _ = offset
         var vtbl = ISyndicationNodeVtbl()
@@ -3101,7 +3142,16 @@ public struct ISyndicationNodeVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.AttributeExtensions = { instanceRaw, result__ =>
+        vtbl = ISyndicationNodeVtbl.__assignAttributeExtensions<Identity>(vtbl)
+        vtbl = ISyndicationNodeVtbl.__assignElementExtensions<Identity>(vtbl)
+        vtbl = ISyndicationNodeVtbl.__assignGetXmlDocument<Identity>(vtbl)
+        return vtbl
+    }
+
+    @When[((Windows_Foundation_Collections == "on") && (Windows_Data_Xml_Dom == "on")) && Windows_Foundation_Collections == "on"]
+    public static func __assignAttributeExtensions<Identity>(vtbl: ISyndicationNodeVtbl): ISyndicationNodeVtbl where Identity <: ISyndicationNode_Impl {
+        var next = vtbl
+        next.AttributeExtensions = { instanceRaw, result__ =>
             match (unsafe { asImplFromRaw<ISyndicationNode_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
                     impl.__winrtThunk_AttributeExtensions(result__)
@@ -3109,7 +3159,18 @@ public struct ISyndicationNodeVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.ElementExtensions = { instanceRaw, result__ =>
+        return next
+    }
+
+    @When[((Windows_Foundation_Collections == "on") && (Windows_Data_Xml_Dom == "on")) && Windows_Foundation_Collections != "on"]
+    public static func __assignAttributeExtensions<Identity>(vtbl: ISyndicationNodeVtbl): ISyndicationNodeVtbl where Identity <: ISyndicationNode_Impl {
+        return vtbl
+    }
+
+    @When[((Windows_Foundation_Collections == "on") && (Windows_Data_Xml_Dom == "on")) && Windows_Foundation_Collections == "on"]
+    public static func __assignElementExtensions<Identity>(vtbl: ISyndicationNodeVtbl): ISyndicationNodeVtbl where Identity <: ISyndicationNode_Impl {
+        var next = vtbl
+        next.ElementExtensions = { instanceRaw, result__ =>
             match (unsafe { asImplFromRaw<ISyndicationNode_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
                     impl.__winrtThunk_ElementExtensions(result__)
@@ -3117,11 +3178,15 @@ public struct ISyndicationNodeVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl = ISyndicationNodeVtbl.__assignGetXmlDocument<Identity>(vtbl)
+        return next
+    }
+
+    @When[((Windows_Foundation_Collections == "on") && (Windows_Data_Xml_Dom == "on")) && Windows_Foundation_Collections != "on"]
+    public static func __assignElementExtensions<Identity>(vtbl: ISyndicationNodeVtbl): ISyndicationNodeVtbl where Identity <: ISyndicationNode_Impl {
         return vtbl
     }
 
-    @When[Windows_Data_Xml_Dom == "on" && Windows_Data_Xml_Dom == "on"]
+    @When[((Windows_Foundation_Collections == "on") && (Windows_Data_Xml_Dom == "on")) && Windows_Data_Xml_Dom == "on"]
     public static func __assignGetXmlDocument<Identity>(vtbl: ISyndicationNodeVtbl): ISyndicationNodeVtbl where Identity <: ISyndicationNode_Impl {
         var next = vtbl
         next.GetXmlDocument = { instanceRaw, arg0, result__ =>
@@ -3135,7 +3200,7 @@ public struct ISyndicationNodeVtbl {
         return next
     }
 
-    @When[Windows_Data_Xml_Dom == "on" && Windows_Data_Xml_Dom != "on"]
+    @When[((Windows_Foundation_Collections == "on") && (Windows_Data_Xml_Dom == "on")) && Windows_Data_Xml_Dom != "on"]
     public static func __assignGetXmlDocument<Identity>(vtbl: ISyndicationNodeVtbl): ISyndicationNodeVtbl where Identity <: ISyndicationNode_Impl {
         return vtbl
     }
@@ -3148,7 +3213,7 @@ public struct ISyndicationNodeVtbl {
     }
 }
 
-@When[Windows_Web_Syndication == "on" && Windows_Data_Xml_Dom == "on"]
+@When[Windows_Web_Syndication == "on" && ((Windows_Foundation_Collections == "on") && (Windows_Data_Xml_Dom == "on"))]
 public interface ISyndicationNode_ImplErased {
     public func __winrtThunk_NodeName(result__: CPointer<CPointer<Unit>>): Int32
 
@@ -3177,7 +3242,7 @@ public interface ISyndicationNode_ImplErased {
     public func __winrtThunk_GetXmlDocument(arg0: SyndicationFormatAbi, result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Web_Syndication == "on" && Windows_Data_Xml_Dom == "on"]
+@When[Windows_Web_Syndication == "on" && ((Windows_Foundation_Collections == "on") && (Windows_Data_Xml_Dom == "on"))]
 public interface ISyndicationNode_Impl <: ISyndicationNode_ImplErased {
     public func NodeName(): windows_core.Result<windows_core.HString>
 
@@ -3530,6 +3595,7 @@ public class ISyndicationNode <: InterfaceWrapperBase & ComInterface & RuntimeNa
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AttributeExtensions(): windows_collections.IVector<SyndicationAttribute> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3538,6 +3604,7 @@ public class ISyndicationNode <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_collections.IVector<SyndicationAttribute>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ElementExtensions(): windows_collections.IVector<ISyndicationNode> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3892,7 +3959,7 @@ public struct ISyndicationTextVtbl {
     public var SetXml: UIntNative = UIntNative(0)
     public init() {}
 
-    @When[Windows_Data_Xml_Dom == "on"]
+    @When[(Windows_Data_Xml_Dom == "on") && ((Windows_Foundation_Collections == "on") && (Windows_Data_Xml_Dom == "on"))]
     public static func new<Identity>(offset!: Int64 = 0): ISyndicationTextVtbl where Identity <: ISyndicationText_Impl {
         let _ = offset
         var vtbl = ISyndicationTextVtbl()
@@ -3934,7 +4001,7 @@ public struct ISyndicationTextVtbl {
         return vtbl
     }
 
-    @When[Windows_Data_Xml_Dom == "on" && Windows_Data_Xml_Dom == "on"]
+    @When[((Windows_Data_Xml_Dom == "on") && ((Windows_Foundation_Collections == "on") && (Windows_Data_Xml_Dom == "on"))) && Windows_Data_Xml_Dom == "on"]
     public static func __assignXml<Identity>(vtbl: ISyndicationTextVtbl): ISyndicationTextVtbl where Identity <: ISyndicationText_Impl {
         var next = vtbl
         next.Xml = { instanceRaw, result__ =>
@@ -3948,12 +4015,12 @@ public struct ISyndicationTextVtbl {
         return next
     }
 
-    @When[Windows_Data_Xml_Dom == "on" && Windows_Data_Xml_Dom != "on"]
+    @When[((Windows_Data_Xml_Dom == "on") && ((Windows_Foundation_Collections == "on") && (Windows_Data_Xml_Dom == "on"))) && Windows_Data_Xml_Dom != "on"]
     public static func __assignXml<Identity>(vtbl: ISyndicationTextVtbl): ISyndicationTextVtbl where Identity <: ISyndicationText_Impl {
         return vtbl
     }
 
-    @When[Windows_Data_Xml_Dom == "on" && Windows_Data_Xml_Dom == "on"]
+    @When[((Windows_Data_Xml_Dom == "on") && ((Windows_Foundation_Collections == "on") && (Windows_Data_Xml_Dom == "on"))) && Windows_Data_Xml_Dom == "on"]
     public static func __assignSetXml<Identity>(vtbl: ISyndicationTextVtbl): ISyndicationTextVtbl where Identity <: ISyndicationText_Impl {
         var next = vtbl
         next.SetXml = { instanceRaw, arg0 =>
@@ -3967,7 +4034,7 @@ public struct ISyndicationTextVtbl {
         return next
     }
 
-    @When[Windows_Data_Xml_Dom == "on" && Windows_Data_Xml_Dom != "on"]
+    @When[((Windows_Data_Xml_Dom == "on") && ((Windows_Foundation_Collections == "on") && (Windows_Data_Xml_Dom == "on"))) && Windows_Data_Xml_Dom != "on"]
     public static func __assignSetXml<Identity>(vtbl: ISyndicationTextVtbl): ISyndicationTextVtbl where Identity <: ISyndicationText_Impl {
         return vtbl
     }
@@ -3985,7 +4052,7 @@ public struct ISyndicationTextVtbl {
     }
 }
 
-@When[Windows_Web_Syndication == "on" && Windows_Data_Xml_Dom == "on"]
+@When[Windows_Web_Syndication == "on" && ((Windows_Data_Xml_Dom == "on") && ((Windows_Foundation_Collections == "on") && (Windows_Data_Xml_Dom == "on")))]
 public interface ISyndicationText_ImplErased {
     public func __winrtThunk_Text(result__: CPointer<CPointer<Unit>>): Int32
 
@@ -4000,7 +4067,7 @@ public interface ISyndicationText_ImplErased {
     public func __winrtThunk_SetXml(arg0: CPointer<Unit>): Int32
 }
 
-@When[Windows_Web_Syndication == "on" && Windows_Data_Xml_Dom == "on"]
+@When[Windows_Web_Syndication == "on" && ((Windows_Data_Xml_Dom == "on") && ((Windows_Foundation_Collections == "on") && (Windows_Data_Xml_Dom == "on")))]
 public interface ISyndicationText_Impl <: ISyndicationText_ImplErased & ISyndicationNode_Impl {
     public func Text(): windows_core.Result<windows_core.HString>
 
@@ -4789,10 +4856,12 @@ public class SyndicationCategory <: InterfaceWrapperBase & ComInterface & window
         asISyndicationNode().SetBaseUri(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AttributeExtensions(): windows_collections.IVector<SyndicationAttribute> {
         return asISyndicationNode().AttributeExtensions()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ElementExtensions(): windows_collections.IVector<ISyndicationNode> {
         return asISyndicationNode().ElementExtensions()
     }
@@ -5174,10 +5243,12 @@ public class SyndicationContent <: InterfaceWrapperBase & ComInterface & windows
         asISyndicationNode().SetBaseUri(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AttributeExtensions(): windows_collections.IVector<SyndicationAttribute> {
         return asISyndicationNode().AttributeExtensions()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ElementExtensions(): windows_collections.IVector<ISyndicationNode> {
         return asISyndicationNode().ElementExtensions()
     }
@@ -5315,14 +5386,17 @@ public class SyndicationFeed <: InterfaceWrapperBase & ComInterface & windows_in
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Authors(): windows_collections.IVector<SyndicationPerson> {
         return defaultInterface().Authors()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Categories(): windows_collections.IVector<SyndicationCategory> {
         return defaultInterface().Categories()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Contributors(): windows_collections.IVector<SyndicationPerson> {
         return defaultInterface().Contributors()
     }
@@ -5351,6 +5425,7 @@ public class SyndicationFeed <: InterfaceWrapperBase & ComInterface & windows_in
         defaultInterface().SetId(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVector<SyndicationItem> {
         return defaultInterface().Items()
     }
@@ -5363,6 +5438,7 @@ public class SyndicationFeed <: InterfaceWrapperBase & ComInterface & windows_in
         defaultInterface().SetLastUpdatedTime(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Links(): windows_collections.IVector<SyndicationLink> {
         return defaultInterface().Links()
     }
@@ -5468,10 +5544,12 @@ public class SyndicationFeed <: InterfaceWrapperBase & ComInterface & windows_in
         asISyndicationNode().SetBaseUri(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AttributeExtensions(): windows_collections.IVector<SyndicationAttribute> {
         return asISyndicationNode().AttributeExtensions()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ElementExtensions(): windows_collections.IVector<ISyndicationNode> {
         return asISyndicationNode().ElementExtensions()
     }
@@ -5662,10 +5740,12 @@ public class SyndicationGenerator <: InterfaceWrapperBase & ComInterface & windo
         asISyndicationNode().SetBaseUri(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AttributeExtensions(): windows_collections.IVector<SyndicationAttribute> {
         return asISyndicationNode().AttributeExtensions()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ElementExtensions(): windows_collections.IVector<ISyndicationNode> {
         return asISyndicationNode().ElementExtensions()
     }
@@ -5792,14 +5872,17 @@ public class SyndicationItem <: InterfaceWrapperBase & ComInterface & windows_in
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Authors(): windows_collections.IVector<SyndicationPerson> {
         return defaultInterface().Authors()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Categories(): windows_collections.IVector<SyndicationCategory> {
         return defaultInterface().Categories()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Contributors(): windows_collections.IVector<SyndicationPerson> {
         return defaultInterface().Contributors()
     }
@@ -5828,6 +5911,7 @@ public class SyndicationItem <: InterfaceWrapperBase & ComInterface & windows_in
         defaultInterface().SetLastUpdatedTime(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Links(): windows_collections.IVector<SyndicationLink> {
         return defaultInterface().Links()
     }
@@ -5945,10 +6029,12 @@ public class SyndicationItem <: InterfaceWrapperBase & ComInterface & windows_in
         asISyndicationNode().SetBaseUri(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AttributeExtensions(): windows_collections.IVector<SyndicationAttribute> {
         return asISyndicationNode().AttributeExtensions()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ElementExtensions(): windows_collections.IVector<ISyndicationNode> {
         return asISyndicationNode().ElementExtensions()
     }
@@ -6163,10 +6249,12 @@ public class SyndicationLink <: InterfaceWrapperBase & ComInterface & windows_in
         asISyndicationNode().SetBaseUri(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AttributeExtensions(): windows_collections.IVector<SyndicationAttribute> {
         return asISyndicationNode().AttributeExtensions()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ElementExtensions(): windows_collections.IVector<ISyndicationNode> {
         return asISyndicationNode().ElementExtensions()
     }
@@ -6337,10 +6425,12 @@ public class SyndicationNode <: InterfaceWrapperBase & ComInterface & windows_in
         defaultInterface().SetBaseUri(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AttributeExtensions(): windows_collections.IVector<SyndicationAttribute> {
         return defaultInterface().AttributeExtensions()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ElementExtensions(): windows_collections.IVector<ISyndicationNode> {
         return defaultInterface().ElementExtensions()
     }
@@ -6531,10 +6621,12 @@ public class SyndicationPerson <: InterfaceWrapperBase & ComInterface & windows_
         asISyndicationNode().SetBaseUri(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AttributeExtensions(): windows_collections.IVector<SyndicationAttribute> {
         return asISyndicationNode().AttributeExtensions()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ElementExtensions(): windows_collections.IVector<ISyndicationNode> {
         return asISyndicationNode().ElementExtensions()
     }
@@ -6738,10 +6830,12 @@ public class SyndicationText <: InterfaceWrapperBase & ComInterface & windows_in
         asISyndicationNode().SetBaseUri(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AttributeExtensions(): windows_collections.IVector<SyndicationAttribute> {
         return asISyndicationNode().AttributeExtensions()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ElementExtensions(): windows_collections.IVector<ISyndicationNode> {
         return asISyndicationNode().ElementExtensions()
     }

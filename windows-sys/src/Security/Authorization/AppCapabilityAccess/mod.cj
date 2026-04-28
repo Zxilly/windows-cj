@@ -246,8 +246,9 @@ public class IAppCapability <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IAppCapabilityStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var RequestAccessForCapabilitiesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
-    @When[Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
     public var RequestAccessForCapabilitiesForUserAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_System == "on"]
@@ -295,13 +296,14 @@ public class IAppCapabilityStatics <: InterfaceWrapperBase & ComInterface {
         readVtbl<IAppCapabilityStaticsVtbl>(IAppCapabilityStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RequestAccessForCapabilitiesAsync(capabilityNames: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RequestAccessForCapabilitiesAsync(__liveRaw, capabilityNames, result__)
     }
 
-    @When[Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
     public unsafe func RequestAccessForCapabilitiesForUserAsync(user: CPointer<Unit>, capabilityNames: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

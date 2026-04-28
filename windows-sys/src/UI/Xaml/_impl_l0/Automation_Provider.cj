@@ -3,7 +3,6 @@ package windows_sys.UI.Xaml._impl_l0
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_UI == "on"]
 import windows_sys.UI as UI
 
 

@@ -10,15 +10,10 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Graphics == "on"]
 import windows.Graphics as Graphics
-@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
 import windows.Graphics.DirectX.Direct3D11 as Graphics_DirectX_Direct3D11
-@When[Windows_Graphics_Imaging == "on"]
 import windows.Graphics.Imaging as Graphics_Imaging
-@When[Windows_Media == "on"]
 import windows.Media as Media
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -445,7 +440,10 @@ public struct ILearningModelEvaluationResultVtbl {
     public var CorrelationId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ErrorStatus: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Succeeded: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Outputs: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Outputs: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -538,6 +536,7 @@ public class ILearningModelEvaluationResult <: InterfaceWrapperBase & ComInterfa
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Outputs(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -919,7 +918,10 @@ extend ILearningModelSessionOptions3 <: windows_core.Interface<ILearningModelSes
 @C
 public struct ITensorBooleanVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAsVectorView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAsVectorView: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -988,6 +990,7 @@ public class ITensorBoolean <: InterfaceWrapperBase & ComInterface & RuntimeName
         readVtbl<ITensorBooleanVtbl>(ITensorBooleanVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(): windows_collections.IVectorView<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1004,7 +1007,10 @@ extend ITensorBoolean <: windows_core.Interface<ITensorBoolean> {}
 @C
 public struct ITensorDoubleVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAsVectorView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAsVectorView: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1073,6 +1079,7 @@ public class ITensorDouble <: InterfaceWrapperBase & ComInterface & RuntimeName 
         readVtbl<ITensorDoubleVtbl>(ITensorDoubleVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(): windows_collections.IVectorView<Float64> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1089,7 +1096,10 @@ extend ITensorDouble <: windows_core.Interface<ITensorDouble> {}
 @C
 public struct ITensorFloatVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAsVectorView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAsVectorView: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1158,6 +1168,7 @@ public class ITensorFloat <: InterfaceWrapperBase & ComInterface & RuntimeName &
         readVtbl<ITensorFloatVtbl>(ITensorFloatVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(): windows_collections.IVectorView<Float32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1174,7 +1185,10 @@ extend ITensorFloat <: windows_core.Interface<ITensorFloat> {}
 @C
 public struct ITensorFloat16BitVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAsVectorView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAsVectorView: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1243,6 +1257,7 @@ public class ITensorFloat16Bit <: InterfaceWrapperBase & ComInterface & RuntimeN
         readVtbl<ITensorFloat16BitVtbl>(ITensorFloat16BitVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(): windows_collections.IVectorView<Float32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1259,7 +1274,10 @@ extend ITensorFloat16Bit <: windows_core.Interface<ITensorFloat16Bit> {}
 @C
 public struct ITensorInt16BitVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAsVectorView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAsVectorView: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1328,6 +1346,7 @@ public class ITensorInt16Bit <: InterfaceWrapperBase & ComInterface & RuntimeNam
         readVtbl<ITensorInt16BitVtbl>(ITensorInt16BitVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(): windows_collections.IVectorView<Int16> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1344,7 +1363,10 @@ extend ITensorInt16Bit <: windows_core.Interface<ITensorInt16Bit> {}
 @C
 public struct ITensorInt32BitVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAsVectorView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAsVectorView: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1413,6 +1435,7 @@ public class ITensorInt32Bit <: InterfaceWrapperBase & ComInterface & RuntimeNam
         readVtbl<ITensorInt32BitVtbl>(ITensorInt32BitVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(): windows_collections.IVectorView<Int32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1429,7 +1452,10 @@ extend ITensorInt32Bit <: windows_core.Interface<ITensorInt32Bit> {}
 @C
 public struct ITensorInt64BitVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAsVectorView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAsVectorView: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1498,6 +1524,7 @@ public class ITensorInt64Bit <: InterfaceWrapperBase & ComInterface & RuntimeNam
         readVtbl<ITensorInt64BitVtbl>(ITensorInt64BitVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(): windows_collections.IVectorView<Int64> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1514,7 +1541,10 @@ extend ITensorInt64Bit <: windows_core.Interface<ITensorInt64Bit> {}
 @C
 public struct ITensorInt8BitVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAsVectorView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAsVectorView: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1583,6 +1613,7 @@ public class ITensorInt8Bit <: InterfaceWrapperBase & ComInterface & RuntimeName
         readVtbl<ITensorInt8BitVtbl>(ITensorInt8BitVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(): windows_collections.IVectorView<UInt8> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1599,7 +1630,10 @@ extend ITensorInt8Bit <: windows_core.Interface<ITensorInt8Bit> {}
 @C
 public struct ITensorStringVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAsVectorView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAsVectorView: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1668,6 +1702,7 @@ public class ITensorString <: InterfaceWrapperBase & ComInterface & RuntimeName 
         readVtbl<ITensorStringVtbl>(ITensorStringVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1684,7 +1719,10 @@ extend ITensorString <: windows_core.Interface<ITensorString> {}
 @C
 public struct ITensorUInt16BitVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAsVectorView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAsVectorView: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1753,6 +1791,7 @@ public class ITensorUInt16Bit <: InterfaceWrapperBase & ComInterface & RuntimeNa
         readVtbl<ITensorUInt16BitVtbl>(ITensorUInt16BitVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(): windows_collections.IVectorView<UInt16> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1769,7 +1808,10 @@ extend ITensorUInt16Bit <: windows_core.Interface<ITensorUInt16Bit> {}
 @C
 public struct ITensorUInt32BitVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAsVectorView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAsVectorView: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1838,6 +1880,7 @@ public class ITensorUInt32Bit <: InterfaceWrapperBase & ComInterface & RuntimeNa
         readVtbl<ITensorUInt32BitVtbl>(ITensorUInt32BitVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(): windows_collections.IVectorView<UInt32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1854,7 +1897,10 @@ extend ITensorUInt32Bit <: windows_core.Interface<ITensorUInt32Bit> {}
 @C
 public struct ITensorUInt64BitVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAsVectorView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAsVectorView: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1923,6 +1969,7 @@ public class ITensorUInt64Bit <: InterfaceWrapperBase & ComInterface & RuntimeNa
         readVtbl<ITensorUInt64BitVtbl>(ITensorUInt64BitVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(): windows_collections.IVectorView<UInt64> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1939,7 +1986,10 @@ extend ITensorUInt64Bit <: windows_core.Interface<ITensorUInt64Bit> {}
 @C
 public struct ITensorUInt8BitVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAsVectorView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetAsVectorView: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2008,6 +2058,7 @@ public class ITensorUInt8Bit <: InterfaceWrapperBase & ComInterface & RuntimeNam
         readVtbl<ITensorUInt8BitVtbl>(ITensorUInt8BitVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(): windows_collections.IVectorView<UInt8> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2164,6 +2215,7 @@ public class LearningModelEvaluationResult <: InterfaceWrapperBase & ComInterfac
         return defaultInterface().Succeeded()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Outputs(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         return defaultInterface().Outputs()
     }
@@ -3179,9 +3231,13 @@ extend ISequenceFeatureDescriptor <: windows_core.Interface<ISequenceFeatureDesc
 public struct ITensorVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var get_TensorKind: CFunc<(CPointer<Unit>, CPointer<TensorKindAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Shape: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Shape: UIntNative = UIntNative(0)
     public init() {}
 
+    @When[Windows_Foundation_Collections == "on"]
     public static func new<Identity>(offset!: Int64 = 0): ITensorVtbl where Identity <: ITensor_Impl {
         let _ = offset
         var vtbl = ITensorVtbl()
@@ -3194,7 +3250,14 @@ public struct ITensorVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.Shape = { instanceRaw, result__ =>
+        vtbl = ITensorVtbl.__assignShape<Identity>(vtbl)
+        return vtbl
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections == "on"]
+    public static func __assignShape<Identity>(vtbl: ITensorVtbl): ITensorVtbl where Identity <: ITensor_Impl {
+        var next = vtbl
+        next.Shape = { instanceRaw, result__ =>
             match (unsafe { asImplFromRaw<ITensor_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
                     impl.__winrtThunk_Shape(result__)
@@ -3202,6 +3265,11 @@ public struct ITensorVtbl {
                     E_NOINTERFACE.value
             }
         }
+        return next
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections != "on"]
+    public static func __assignShape<Identity>(vtbl: ITensorVtbl): ITensorVtbl where Identity <: ITensor_Impl {
         return vtbl
     }
 
@@ -3218,14 +3286,14 @@ public struct ITensorVtbl {
     }
 }
 
-@When[Windows_AI_MachineLearning == "on"]
+@When[Windows_AI_MachineLearning == "on" && Windows_Foundation_Collections == "on"]
 public interface ITensor_ImplErased {
     public func __winrtThunk_get_TensorKind(result__: CPointer<TensorKindAbi>): Int32
 
     public func __winrtThunk_Shape(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_AI_MachineLearning == "on"]
+@When[Windows_AI_MachineLearning == "on" && Windows_Foundation_Collections == "on"]
 public interface ITensor_Impl <: ITensor_ImplErased & ILearningModelFeatureValue_Impl {
     public func get_TensorKind(): windows_core.Result<TensorKind>
 
@@ -3361,6 +3429,7 @@ public class ITensor <: InterfaceWrapperBase & ComInterface & RuntimeName & wind
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<TensorKind>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Shape(): windows_collections.IVectorView<Int64> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3378,7 +3447,10 @@ extend ITensor <: windows_core.Interface<ITensor> {}
 public struct ITensorFeatureDescriptorVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var get_TensorKind: CFunc<(CPointer<Unit>, CPointer<TensorKindAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Shape: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Shape: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3455,6 +3527,7 @@ public class ITensorFeatureDescriptor <: InterfaceWrapperBase & ComInterface & R
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<TensorKind>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Shape(): windows_collections.IVectorView<Int64> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3910,6 +3983,7 @@ public class TensorFeatureDescriptor <: InterfaceWrapperBase & ComInterface & wi
         return defaultInterface().get_TensorKind()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Shape(): windows_collections.IVectorView<Int64> {
         return defaultInterface().Shape()
     }
@@ -3958,9 +4032,18 @@ public struct ILearningModelVtbl {
     public var Domain: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Description: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Version: CFunc<(CPointer<Unit>, CPointer<Int64>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Metadata: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Metadata: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var InputFeatures: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var InputFeatures: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var OutputFeatures: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var OutputFeatures: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4069,6 +4152,7 @@ public class ILearningModel <: InterfaceWrapperBase & ComInterface & RuntimeName
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Metadata(): windows_collections.IMapView<windows_core.HString, windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4077,6 +4161,7 @@ public class ILearningModel <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_collections.IMapView<windows_core.HString, windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InputFeatures(): windows_collections.IVectorView<ILearningModelFeatureDescriptor> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4085,6 +4170,7 @@ public class ILearningModel <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_collections.IVectorView<ILearningModelFeatureDescriptor>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OutputFeatures(): windows_collections.IVectorView<ILearningModelFeatureDescriptor> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4456,9 +4542,15 @@ public struct ILearningModelSessionVtbl {
     @When[Windows_Foundation_Collections != "on"]
     public var EvaluationProperties: UIntNative = UIntNative(0)
     public var EvaluateAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var EvaluateFeaturesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var EvaluateFeaturesAsync: UIntNative = UIntNative(0)
     public var Evaluate: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var EvaluateFeatures: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var EvaluateFeatures: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4560,6 +4652,7 @@ public class ILearningModelSession <: InterfaceWrapperBase & ComInterface & Runt
         return windows_future.IAsyncOperation<LearningModelEvaluationResult>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func EvaluateFeaturesAsync(features: windows_collections.IMap<windows_core.HString, IInspectable>, correlationId: windows_core.HString): windows_future.IAsyncOperation<LearningModelEvaluationResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4576,6 +4669,7 @@ public class ILearningModelSession <: InterfaceWrapperBase & ComInterface & Runt
         return LearningModelEvaluationResult.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func EvaluateFeatures(features: windows_collections.IMap<windows_core.HString, IInspectable>, correlationId: windows_core.HString): LearningModelEvaluationResult {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4944,9 +5038,18 @@ extend ILearningModelStatics <: windows_core.Interface<ILearningModelStatics> {}
 public struct ITensorBooleanStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Create: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Create2: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Create2: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromArray: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Bool>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateFromArray: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromIterable: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateFromIterable: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -5023,6 +5126,7 @@ public class ITensorBooleanStatics <: InterfaceWrapperBase & ComInterface & Runt
         return TensorBoolean.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create2(shape: windows_collections.IIterable<Int64>): TensorBoolean {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5031,6 +5135,7 @@ public class ITensorBooleanStatics <: InterfaceWrapperBase & ComInterface & Runt
         return TensorBoolean.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromArray(shape: windows_collections.IIterable<Int64>, dataSize: UInt32, data: CPointer<Bool>): TensorBoolean {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5039,6 +5144,7 @@ public class ITensorBooleanStatics <: InterfaceWrapperBase & ComInterface & Runt
         return TensorBoolean.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromIterable(shape: windows_collections.IIterable<Int64>, data: windows_collections.IIterable<Bool>): TensorBoolean {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5154,9 +5260,18 @@ extend ITensorBooleanStatics2 <: windows_core.Interface<ITensorBooleanStatics2> 
 public struct ITensorDoubleStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Create: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Create2: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Create2: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromArray: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Float64>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateFromArray: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromIterable: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateFromIterable: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -5233,6 +5348,7 @@ public class ITensorDoubleStatics <: InterfaceWrapperBase & ComInterface & Runti
         return TensorDouble.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create2(shape: windows_collections.IIterable<Int64>): TensorDouble {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5241,6 +5357,7 @@ public class ITensorDoubleStatics <: InterfaceWrapperBase & ComInterface & Runti
         return TensorDouble.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromArray(shape: windows_collections.IIterable<Int64>, dataSize: UInt32, data: CPointer<Float64>): TensorDouble {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5249,6 +5366,7 @@ public class ITensorDoubleStatics <: InterfaceWrapperBase & ComInterface & Runti
         return TensorDouble.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromIterable(shape: windows_collections.IIterable<Int64>, data: windows_collections.IIterable<Float64>): TensorDouble {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5364,9 +5482,18 @@ extend ITensorDoubleStatics2 <: windows_core.Interface<ITensorDoubleStatics2> {}
 public struct ITensorFloat16BitStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Create: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Create2: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Create2: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromArray: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Float32>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateFromArray: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromIterable: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateFromIterable: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -5443,6 +5570,7 @@ public class ITensorFloat16BitStatics <: InterfaceWrapperBase & ComInterface & R
         return TensorFloat16Bit.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create2(shape: windows_collections.IIterable<Int64>): TensorFloat16Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5451,6 +5579,7 @@ public class ITensorFloat16BitStatics <: InterfaceWrapperBase & ComInterface & R
         return TensorFloat16Bit.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromArray(shape: windows_collections.IIterable<Int64>, dataSize: UInt32, data: CPointer<Float32>): TensorFloat16Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5459,6 +5588,7 @@ public class ITensorFloat16BitStatics <: InterfaceWrapperBase & ComInterface & R
         return TensorFloat16Bit.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromIterable(shape: windows_collections.IIterable<Int64>, data: windows_collections.IIterable<Float32>): TensorFloat16Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5574,9 +5704,18 @@ extend ITensorFloat16BitStatics2 <: windows_core.Interface<ITensorFloat16BitStat
 public struct ITensorFloatStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Create: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Create2: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Create2: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromArray: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Float32>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateFromArray: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromIterable: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateFromIterable: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -5653,6 +5792,7 @@ public class ITensorFloatStatics <: InterfaceWrapperBase & ComInterface & Runtim
         return TensorFloat.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create2(shape: windows_collections.IIterable<Int64>): TensorFloat {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5661,6 +5801,7 @@ public class ITensorFloatStatics <: InterfaceWrapperBase & ComInterface & Runtim
         return TensorFloat.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromArray(shape: windows_collections.IIterable<Int64>, dataSize: UInt32, data: CPointer<Float32>): TensorFloat {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5669,6 +5810,7 @@ public class ITensorFloatStatics <: InterfaceWrapperBase & ComInterface & Runtim
         return TensorFloat.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromIterable(shape: windows_collections.IIterable<Int64>, data: windows_collections.IIterable<Float32>): TensorFloat {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5784,9 +5926,18 @@ extend ITensorFloatStatics2 <: windows_core.Interface<ITensorFloatStatics2> {}
 public struct ITensorInt16BitStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Create: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Create2: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Create2: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromArray: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Int16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateFromArray: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromIterable: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateFromIterable: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -5863,6 +6014,7 @@ public class ITensorInt16BitStatics <: InterfaceWrapperBase & ComInterface & Run
         return TensorInt16Bit.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create2(shape: windows_collections.IIterable<Int64>): TensorInt16Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5871,6 +6023,7 @@ public class ITensorInt16BitStatics <: InterfaceWrapperBase & ComInterface & Run
         return TensorInt16Bit.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromArray(shape: windows_collections.IIterable<Int64>, dataSize: UInt32, data: CPointer<Int16>): TensorInt16Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5879,6 +6032,7 @@ public class ITensorInt16BitStatics <: InterfaceWrapperBase & ComInterface & Run
         return TensorInt16Bit.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromIterable(shape: windows_collections.IIterable<Int64>, data: windows_collections.IIterable<Int16>): TensorInt16Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5994,9 +6148,18 @@ extend ITensorInt16BitStatics2 <: windows_core.Interface<ITensorInt16BitStatics2
 public struct ITensorInt32BitStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Create: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Create2: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Create2: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromArray: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Int32>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateFromArray: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromIterable: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateFromIterable: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -6073,6 +6236,7 @@ public class ITensorInt32BitStatics <: InterfaceWrapperBase & ComInterface & Run
         return TensorInt32Bit.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create2(shape: windows_collections.IIterable<Int64>): TensorInt32Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6081,6 +6245,7 @@ public class ITensorInt32BitStatics <: InterfaceWrapperBase & ComInterface & Run
         return TensorInt32Bit.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromArray(shape: windows_collections.IIterable<Int64>, dataSize: UInt32, data: CPointer<Int32>): TensorInt32Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6089,6 +6254,7 @@ public class ITensorInt32BitStatics <: InterfaceWrapperBase & ComInterface & Run
         return TensorInt32Bit.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromIterable(shape: windows_collections.IIterable<Int64>, data: windows_collections.IIterable<Int32>): TensorInt32Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6204,9 +6370,18 @@ extend ITensorInt32BitStatics2 <: windows_core.Interface<ITensorInt32BitStatics2
 public struct ITensorInt64BitStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Create: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Create2: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Create2: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromArray: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Int64>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateFromArray: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromIterable: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateFromIterable: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -6283,6 +6458,7 @@ public class ITensorInt64BitStatics <: InterfaceWrapperBase & ComInterface & Run
         return TensorInt64Bit.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create2(shape: windows_collections.IIterable<Int64>): TensorInt64Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6291,6 +6467,7 @@ public class ITensorInt64BitStatics <: InterfaceWrapperBase & ComInterface & Run
         return TensorInt64Bit.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromArray(shape: windows_collections.IIterable<Int64>, dataSize: UInt32, data: CPointer<Int64>): TensorInt64Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6299,6 +6476,7 @@ public class ITensorInt64BitStatics <: InterfaceWrapperBase & ComInterface & Run
         return TensorInt64Bit.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromIterable(shape: windows_collections.IIterable<Int64>, data: windows_collections.IIterable<Int64>): TensorInt64Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6414,9 +6592,18 @@ extend ITensorInt64BitStatics2 <: windows_core.Interface<ITensorInt64BitStatics2
 public struct ITensorInt8BitStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Create: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Create2: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Create2: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromArray: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<UInt8>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateFromArray: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromIterable: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateFromIterable: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -6493,6 +6680,7 @@ public class ITensorInt8BitStatics <: InterfaceWrapperBase & ComInterface & Runt
         return TensorInt8Bit.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create2(shape: windows_collections.IIterable<Int64>): TensorInt8Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6501,6 +6689,7 @@ public class ITensorInt8BitStatics <: InterfaceWrapperBase & ComInterface & Runt
         return TensorInt8Bit.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromArray(shape: windows_collections.IIterable<Int64>, dataSize: UInt32, data: CPointer<UInt8>): TensorInt8Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6509,6 +6698,7 @@ public class ITensorInt8BitStatics <: InterfaceWrapperBase & ComInterface & Runt
         return TensorInt8Bit.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromIterable(shape: windows_collections.IIterable<Int64>, data: windows_collections.IIterable<UInt8>): TensorInt8Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6624,9 +6814,18 @@ extend ITensorInt8BitStatics2 <: windows_core.Interface<ITensorInt8BitStatics2> 
 public struct ITensorStringStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Create: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Create2: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Create2: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromArray: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateFromArray: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromIterable: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateFromIterable: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -6703,6 +6902,7 @@ public class ITensorStringStatics <: InterfaceWrapperBase & ComInterface & Runti
         return TensorString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create2(shape: windows_collections.IIterable<Int64>): TensorString {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6711,6 +6911,7 @@ public class ITensorStringStatics <: InterfaceWrapperBase & ComInterface & Runti
         return TensorString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromArray(shape: windows_collections.IIterable<Int64>, dataSize: UInt32, data: CPointer<CPointer<Unit>>): TensorString {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6719,6 +6920,7 @@ public class ITensorStringStatics <: InterfaceWrapperBase & ComInterface & Runti
         return TensorString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromIterable(shape: windows_collections.IIterable<Int64>, data: windows_collections.IIterable<windows_core.HString>): TensorString {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6821,9 +7023,18 @@ extend ITensorStringStatics2 <: windows_core.Interface<ITensorStringStatics2> {}
 public struct ITensorUInt16BitStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Create: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Create2: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Create2: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromArray: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateFromArray: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromIterable: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateFromIterable: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -6900,6 +7111,7 @@ public class ITensorUInt16BitStatics <: InterfaceWrapperBase & ComInterface & Ru
         return TensorUInt16Bit.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create2(shape: windows_collections.IIterable<Int64>): TensorUInt16Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6908,6 +7120,7 @@ public class ITensorUInt16BitStatics <: InterfaceWrapperBase & ComInterface & Ru
         return TensorUInt16Bit.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromArray(shape: windows_collections.IIterable<Int64>, dataSize: UInt32, data: CPointer<UInt16>): TensorUInt16Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6916,6 +7129,7 @@ public class ITensorUInt16BitStatics <: InterfaceWrapperBase & ComInterface & Ru
         return TensorUInt16Bit.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromIterable(shape: windows_collections.IIterable<Int64>, data: windows_collections.IIterable<UInt16>): TensorUInt16Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7031,9 +7245,18 @@ extend ITensorUInt16BitStatics2 <: windows_core.Interface<ITensorUInt16BitStatic
 public struct ITensorUInt32BitStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Create: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Create2: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Create2: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromArray: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<UInt32>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateFromArray: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromIterable: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateFromIterable: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -7110,6 +7333,7 @@ public class ITensorUInt32BitStatics <: InterfaceWrapperBase & ComInterface & Ru
         return TensorUInt32Bit.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create2(shape: windows_collections.IIterable<Int64>): TensorUInt32Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7118,6 +7342,7 @@ public class ITensorUInt32BitStatics <: InterfaceWrapperBase & ComInterface & Ru
         return TensorUInt32Bit.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromArray(shape: windows_collections.IIterable<Int64>, dataSize: UInt32, data: CPointer<UInt32>): TensorUInt32Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7126,6 +7351,7 @@ public class ITensorUInt32BitStatics <: InterfaceWrapperBase & ComInterface & Ru
         return TensorUInt32Bit.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromIterable(shape: windows_collections.IIterable<Int64>, data: windows_collections.IIterable<UInt32>): TensorUInt32Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7241,9 +7467,18 @@ extend ITensorUInt32BitStatics2 <: windows_core.Interface<ITensorUInt32BitStatic
 public struct ITensorUInt64BitStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Create: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Create2: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Create2: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromArray: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<UInt64>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateFromArray: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromIterable: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateFromIterable: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -7320,6 +7555,7 @@ public class ITensorUInt64BitStatics <: InterfaceWrapperBase & ComInterface & Ru
         return TensorUInt64Bit.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create2(shape: windows_collections.IIterable<Int64>): TensorUInt64Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7328,6 +7564,7 @@ public class ITensorUInt64BitStatics <: InterfaceWrapperBase & ComInterface & Ru
         return TensorUInt64Bit.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromArray(shape: windows_collections.IIterable<Int64>, dataSize: UInt32, data: CPointer<UInt64>): TensorUInt64Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7336,6 +7573,7 @@ public class ITensorUInt64BitStatics <: InterfaceWrapperBase & ComInterface & Ru
         return TensorUInt64Bit.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromIterable(shape: windows_collections.IIterable<Int64>, data: windows_collections.IIterable<UInt64>): TensorUInt64Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7451,9 +7689,18 @@ extend ITensorUInt64BitStatics2 <: windows_core.Interface<ITensorUInt64BitStatic
 public struct ITensorUInt8BitStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Create: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Create2: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Create2: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromArray: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<UInt8>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateFromArray: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromIterable: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateFromIterable: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -7530,6 +7777,7 @@ public class ITensorUInt8BitStatics <: InterfaceWrapperBase & ComInterface & Run
         return TensorUInt8Bit.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create2(shape: windows_collections.IIterable<Int64>): TensorUInt8Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7538,6 +7786,7 @@ public class ITensorUInt8BitStatics <: InterfaceWrapperBase & ComInterface & Run
         return TensorUInt8Bit.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromArray(shape: windows_collections.IIterable<Int64>, dataSize: UInt32, data: CPointer<UInt8>): TensorUInt8Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7546,6 +7795,7 @@ public class ITensorUInt8BitStatics <: InterfaceWrapperBase & ComInterface & Run
         return TensorUInt8Bit.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromIterable(shape: windows_collections.IIterable<Int64>, data: windows_collections.IIterable<UInt8>): TensorUInt8Bit {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7868,14 +8118,17 @@ public class LearningModel <: InterfaceWrapperBase & ComInterface & windows_inte
         return defaultInterface().Version()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Metadata(): windows_collections.IMapView<windows_core.HString, windows_core.HString> {
         return defaultInterface().Metadata()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InputFeatures(): windows_collections.IVectorView<ILearningModelFeatureDescriptor> {
         return defaultInterface().InputFeatures()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OutputFeatures(): windows_collections.IVectorView<ILearningModelFeatureDescriptor> {
         return defaultInterface().OutputFeatures()
     }
@@ -8365,6 +8618,7 @@ public class LearningModelSession <: InterfaceWrapperBase & ComInterface & windo
         return defaultInterface().EvaluateAsync(bindings, correlationId)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func EvaluateFeaturesAsync(features: windows_collections.IMap<windows_core.HString, IInspectable>, correlationId: windows_core.HString): windows_future.IAsyncOperation<LearningModelEvaluationResult> {
         return defaultInterface().EvaluateFeaturesAsync(features, correlationId)
     }
@@ -8373,6 +8627,7 @@ public class LearningModelSession <: InterfaceWrapperBase & ComInterface & windo
         return defaultInterface().Evaluate(bindings, correlationId)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func EvaluateFeatures(features: windows_collections.IMap<windows_core.HString, IInspectable>, correlationId: windows_core.HString): LearningModelEvaluationResult {
         return defaultInterface().EvaluateFeatures(features, correlationId)
     }
@@ -8530,6 +8785,7 @@ public class TensorBoolean <: InterfaceWrapperBase & ComInterface & windows_inte
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(): windows_collections.IVectorView<Bool> {
         return defaultInterface().GetAsVectorView()
     }
@@ -8538,6 +8794,7 @@ public class TensorBoolean <: InterfaceWrapperBase & ComInterface & windows_inte
         return asITensor().get_TensorKind()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Shape(): windows_collections.IVectorView<Int64> {
         return asITensor().Shape()
     }
@@ -8565,6 +8822,7 @@ public class TensorBoolean <: InterfaceWrapperBase & ComInterface & windows_inte
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Create2(shape: windows_collections.IIterable<Int64>): TensorBoolean {
         var result__: Option<TensorBoolean> = Option<TensorBoolean>.None
         try (factory__ = windows_core.factory<TensorBoolean, ITensorBooleanStatics>().unwrap()) {
@@ -8576,6 +8834,7 @@ public class TensorBoolean <: InterfaceWrapperBase & ComInterface & windows_inte
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromArray(shape: windows_collections.IIterable<Int64>, dataSize: UInt32, data: CPointer<Bool>): TensorBoolean {
         var result__: Option<TensorBoolean> = Option<TensorBoolean>.None
         try (factory__ = windows_core.factory<TensorBoolean, ITensorBooleanStatics>().unwrap()) {
@@ -8587,6 +8846,7 @@ public class TensorBoolean <: InterfaceWrapperBase & ComInterface & windows_inte
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromIterable(shape: windows_collections.IIterable<Int64>, data: windows_collections.IIterable<Bool>): TensorBoolean {
         var result__: Option<TensorBoolean> = Option<TensorBoolean>.None
         try (factory__ = windows_core.factory<TensorBoolean, ITensorBooleanStatics>().unwrap()) {
@@ -8737,6 +8997,7 @@ public class TensorDouble <: InterfaceWrapperBase & ComInterface & windows_inter
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(): windows_collections.IVectorView<Float64> {
         return defaultInterface().GetAsVectorView()
     }
@@ -8745,6 +9006,7 @@ public class TensorDouble <: InterfaceWrapperBase & ComInterface & windows_inter
         return asITensor().get_TensorKind()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Shape(): windows_collections.IVectorView<Int64> {
         return asITensor().Shape()
     }
@@ -8772,6 +9034,7 @@ public class TensorDouble <: InterfaceWrapperBase & ComInterface & windows_inter
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Create2(shape: windows_collections.IIterable<Int64>): TensorDouble {
         var result__: Option<TensorDouble> = Option<TensorDouble>.None
         try (factory__ = windows_core.factory<TensorDouble, ITensorDoubleStatics>().unwrap()) {
@@ -8783,6 +9046,7 @@ public class TensorDouble <: InterfaceWrapperBase & ComInterface & windows_inter
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromArray(shape: windows_collections.IIterable<Int64>, dataSize: UInt32, data: CPointer<Float64>): TensorDouble {
         var result__: Option<TensorDouble> = Option<TensorDouble>.None
         try (factory__ = windows_core.factory<TensorDouble, ITensorDoubleStatics>().unwrap()) {
@@ -8794,6 +9058,7 @@ public class TensorDouble <: InterfaceWrapperBase & ComInterface & windows_inter
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromIterable(shape: windows_collections.IIterable<Int64>, data: windows_collections.IIterable<Float64>): TensorDouble {
         var result__: Option<TensorDouble> = Option<TensorDouble>.None
         try (factory__ = windows_core.factory<TensorDouble, ITensorDoubleStatics>().unwrap()) {
@@ -8944,6 +9209,7 @@ public class TensorFloat <: InterfaceWrapperBase & ComInterface & windows_interf
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(): windows_collections.IVectorView<Float32> {
         return defaultInterface().GetAsVectorView()
     }
@@ -8952,6 +9218,7 @@ public class TensorFloat <: InterfaceWrapperBase & ComInterface & windows_interf
         return asITensor().get_TensorKind()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Shape(): windows_collections.IVectorView<Int64> {
         return asITensor().Shape()
     }
@@ -8979,6 +9246,7 @@ public class TensorFloat <: InterfaceWrapperBase & ComInterface & windows_interf
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Create2(shape: windows_collections.IIterable<Int64>): TensorFloat {
         var result__: Option<TensorFloat> = Option<TensorFloat>.None
         try (factory__ = windows_core.factory<TensorFloat, ITensorFloatStatics>().unwrap()) {
@@ -8990,6 +9258,7 @@ public class TensorFloat <: InterfaceWrapperBase & ComInterface & windows_interf
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromArray(shape: windows_collections.IIterable<Int64>, dataSize: UInt32, data: CPointer<Float32>): TensorFloat {
         var result__: Option<TensorFloat> = Option<TensorFloat>.None
         try (factory__ = windows_core.factory<TensorFloat, ITensorFloatStatics>().unwrap()) {
@@ -9001,6 +9270,7 @@ public class TensorFloat <: InterfaceWrapperBase & ComInterface & windows_interf
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromIterable(shape: windows_collections.IIterable<Int64>, data: windows_collections.IIterable<Float32>): TensorFloat {
         var result__: Option<TensorFloat> = Option<TensorFloat>.None
         try (factory__ = windows_core.factory<TensorFloat, ITensorFloatStatics>().unwrap()) {
@@ -9151,6 +9421,7 @@ public class TensorFloat16Bit <: InterfaceWrapperBase & ComInterface & windows_i
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(): windows_collections.IVectorView<Float32> {
         return defaultInterface().GetAsVectorView()
     }
@@ -9159,6 +9430,7 @@ public class TensorFloat16Bit <: InterfaceWrapperBase & ComInterface & windows_i
         return asITensor().get_TensorKind()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Shape(): windows_collections.IVectorView<Int64> {
         return asITensor().Shape()
     }
@@ -9209,6 +9481,7 @@ public class TensorFloat16Bit <: InterfaceWrapperBase & ComInterface & windows_i
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Create2(shape: windows_collections.IIterable<Int64>): TensorFloat16Bit {
         var result__: Option<TensorFloat16Bit> = Option<TensorFloat16Bit>.None
         try (factory__ = windows_core.factory<TensorFloat16Bit, ITensorFloat16BitStatics>().unwrap()) {
@@ -9220,6 +9493,7 @@ public class TensorFloat16Bit <: InterfaceWrapperBase & ComInterface & windows_i
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromArray(shape: windows_collections.IIterable<Int64>, dataSize: UInt32, data: CPointer<Float32>): TensorFloat16Bit {
         var result__: Option<TensorFloat16Bit> = Option<TensorFloat16Bit>.None
         try (factory__ = windows_core.factory<TensorFloat16Bit, ITensorFloat16BitStatics>().unwrap()) {
@@ -9231,6 +9505,7 @@ public class TensorFloat16Bit <: InterfaceWrapperBase & ComInterface & windows_i
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromIterable(shape: windows_collections.IIterable<Int64>, data: windows_collections.IIterable<Float32>): TensorFloat16Bit {
         var result__: Option<TensorFloat16Bit> = Option<TensorFloat16Bit>.None
         try (factory__ = windows_core.factory<TensorFloat16Bit, ITensorFloat16BitStatics>().unwrap()) {
@@ -9358,6 +9633,7 @@ public class TensorInt16Bit <: InterfaceWrapperBase & ComInterface & windows_int
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(): windows_collections.IVectorView<Int16> {
         return defaultInterface().GetAsVectorView()
     }
@@ -9366,6 +9642,7 @@ public class TensorInt16Bit <: InterfaceWrapperBase & ComInterface & windows_int
         return asITensor().get_TensorKind()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Shape(): windows_collections.IVectorView<Int64> {
         return asITensor().Shape()
     }
@@ -9393,6 +9670,7 @@ public class TensorInt16Bit <: InterfaceWrapperBase & ComInterface & windows_int
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Create2(shape: windows_collections.IIterable<Int64>): TensorInt16Bit {
         var result__: Option<TensorInt16Bit> = Option<TensorInt16Bit>.None
         try (factory__ = windows_core.factory<TensorInt16Bit, ITensorInt16BitStatics>().unwrap()) {
@@ -9404,6 +9682,7 @@ public class TensorInt16Bit <: InterfaceWrapperBase & ComInterface & windows_int
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromArray(shape: windows_collections.IIterable<Int64>, dataSize: UInt32, data: CPointer<Int16>): TensorInt16Bit {
         var result__: Option<TensorInt16Bit> = Option<TensorInt16Bit>.None
         try (factory__ = windows_core.factory<TensorInt16Bit, ITensorInt16BitStatics>().unwrap()) {
@@ -9415,6 +9694,7 @@ public class TensorInt16Bit <: InterfaceWrapperBase & ComInterface & windows_int
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromIterable(shape: windows_collections.IIterable<Int64>, data: windows_collections.IIterable<Int16>): TensorInt16Bit {
         var result__: Option<TensorInt16Bit> = Option<TensorInt16Bit>.None
         try (factory__ = windows_core.factory<TensorInt16Bit, ITensorInt16BitStatics>().unwrap()) {
@@ -9565,6 +9845,7 @@ public class TensorInt32Bit <: InterfaceWrapperBase & ComInterface & windows_int
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(): windows_collections.IVectorView<Int32> {
         return defaultInterface().GetAsVectorView()
     }
@@ -9573,6 +9854,7 @@ public class TensorInt32Bit <: InterfaceWrapperBase & ComInterface & windows_int
         return asITensor().get_TensorKind()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Shape(): windows_collections.IVectorView<Int64> {
         return asITensor().Shape()
     }
@@ -9623,6 +9905,7 @@ public class TensorInt32Bit <: InterfaceWrapperBase & ComInterface & windows_int
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Create2(shape: windows_collections.IIterable<Int64>): TensorInt32Bit {
         var result__: Option<TensorInt32Bit> = Option<TensorInt32Bit>.None
         try (factory__ = windows_core.factory<TensorInt32Bit, ITensorInt32BitStatics>().unwrap()) {
@@ -9634,6 +9917,7 @@ public class TensorInt32Bit <: InterfaceWrapperBase & ComInterface & windows_int
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromArray(shape: windows_collections.IIterable<Int64>, dataSize: UInt32, data: CPointer<Int32>): TensorInt32Bit {
         var result__: Option<TensorInt32Bit> = Option<TensorInt32Bit>.None
         try (factory__ = windows_core.factory<TensorInt32Bit, ITensorInt32BitStatics>().unwrap()) {
@@ -9645,6 +9929,7 @@ public class TensorInt32Bit <: InterfaceWrapperBase & ComInterface & windows_int
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromIterable(shape: windows_collections.IIterable<Int64>, data: windows_collections.IIterable<Int32>): TensorInt32Bit {
         var result__: Option<TensorInt32Bit> = Option<TensorInt32Bit>.None
         try (factory__ = windows_core.factory<TensorInt32Bit, ITensorInt32BitStatics>().unwrap()) {
@@ -9772,6 +10057,7 @@ public class TensorInt64Bit <: InterfaceWrapperBase & ComInterface & windows_int
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(): windows_collections.IVectorView<Int64> {
         return defaultInterface().GetAsVectorView()
     }
@@ -9780,6 +10066,7 @@ public class TensorInt64Bit <: InterfaceWrapperBase & ComInterface & windows_int
         return asITensor().get_TensorKind()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Shape(): windows_collections.IVectorView<Int64> {
         return asITensor().Shape()
     }
@@ -9807,6 +10094,7 @@ public class TensorInt64Bit <: InterfaceWrapperBase & ComInterface & windows_int
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Create2(shape: windows_collections.IIterable<Int64>): TensorInt64Bit {
         var result__: Option<TensorInt64Bit> = Option<TensorInt64Bit>.None
         try (factory__ = windows_core.factory<TensorInt64Bit, ITensorInt64BitStatics>().unwrap()) {
@@ -9818,6 +10106,7 @@ public class TensorInt64Bit <: InterfaceWrapperBase & ComInterface & windows_int
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromArray(shape: windows_collections.IIterable<Int64>, dataSize: UInt32, data: CPointer<Int64>): TensorInt64Bit {
         var result__: Option<TensorInt64Bit> = Option<TensorInt64Bit>.None
         try (factory__ = windows_core.factory<TensorInt64Bit, ITensorInt64BitStatics>().unwrap()) {
@@ -9829,6 +10118,7 @@ public class TensorInt64Bit <: InterfaceWrapperBase & ComInterface & windows_int
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromIterable(shape: windows_collections.IIterable<Int64>, data: windows_collections.IIterable<Int64>): TensorInt64Bit {
         var result__: Option<TensorInt64Bit> = Option<TensorInt64Bit>.None
         try (factory__ = windows_core.factory<TensorInt64Bit, ITensorInt64BitStatics>().unwrap()) {
@@ -9979,6 +10269,7 @@ public class TensorInt8Bit <: InterfaceWrapperBase & ComInterface & windows_inte
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(): windows_collections.IVectorView<UInt8> {
         return defaultInterface().GetAsVectorView()
     }
@@ -9987,6 +10278,7 @@ public class TensorInt8Bit <: InterfaceWrapperBase & ComInterface & windows_inte
         return asITensor().get_TensorKind()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Shape(): windows_collections.IVectorView<Int64> {
         return asITensor().Shape()
     }
@@ -10037,6 +10329,7 @@ public class TensorInt8Bit <: InterfaceWrapperBase & ComInterface & windows_inte
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Create2(shape: windows_collections.IIterable<Int64>): TensorInt8Bit {
         var result__: Option<TensorInt8Bit> = Option<TensorInt8Bit>.None
         try (factory__ = windows_core.factory<TensorInt8Bit, ITensorInt8BitStatics>().unwrap()) {
@@ -10048,6 +10341,7 @@ public class TensorInt8Bit <: InterfaceWrapperBase & ComInterface & windows_inte
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromArray(shape: windows_collections.IIterable<Int64>, dataSize: UInt32, data: CPointer<UInt8>): TensorInt8Bit {
         var result__: Option<TensorInt8Bit> = Option<TensorInt8Bit>.None
         try (factory__ = windows_core.factory<TensorInt8Bit, ITensorInt8BitStatics>().unwrap()) {
@@ -10059,6 +10353,7 @@ public class TensorInt8Bit <: InterfaceWrapperBase & ComInterface & windows_inte
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromIterable(shape: windows_collections.IIterable<Int64>, data: windows_collections.IIterable<UInt8>): TensorInt8Bit {
         var result__: Option<TensorInt8Bit> = Option<TensorInt8Bit>.None
         try (factory__ = windows_core.factory<TensorInt8Bit, ITensorInt8BitStatics>().unwrap()) {
@@ -10186,6 +10481,7 @@ public class TensorString <: InterfaceWrapperBase & ComInterface & windows_inter
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().GetAsVectorView()
     }
@@ -10194,6 +10490,7 @@ public class TensorString <: InterfaceWrapperBase & ComInterface & windows_inter
         return asITensor().get_TensorKind()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Shape(): windows_collections.IVectorView<Int64> {
         return asITensor().Shape()
     }
@@ -10232,6 +10529,7 @@ public class TensorString <: InterfaceWrapperBase & ComInterface & windows_inter
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Create2(shape: windows_collections.IIterable<Int64>): TensorString {
         var result__: Option<TensorString> = Option<TensorString>.None
         try (factory__ = windows_core.factory<TensorString, ITensorStringStatics>().unwrap()) {
@@ -10243,6 +10541,7 @@ public class TensorString <: InterfaceWrapperBase & ComInterface & windows_inter
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromArray(shape: windows_collections.IIterable<Int64>, dataSize: UInt32, data: CPointer<CPointer<Unit>>): TensorString {
         var result__: Option<TensorString> = Option<TensorString>.None
         try (factory__ = windows_core.factory<TensorString, ITensorStringStatics>().unwrap()) {
@@ -10254,6 +10553,7 @@ public class TensorString <: InterfaceWrapperBase & ComInterface & windows_inter
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromIterable(shape: windows_collections.IIterable<Int64>, data: windows_collections.IIterable<windows_core.HString>): TensorString {
         var result__: Option<TensorString> = Option<TensorString>.None
         try (factory__ = windows_core.factory<TensorString, ITensorStringStatics>().unwrap()) {
@@ -10381,6 +10681,7 @@ public class TensorUInt16Bit <: InterfaceWrapperBase & ComInterface & windows_in
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(): windows_collections.IVectorView<UInt16> {
         return defaultInterface().GetAsVectorView()
     }
@@ -10389,6 +10690,7 @@ public class TensorUInt16Bit <: InterfaceWrapperBase & ComInterface & windows_in
         return asITensor().get_TensorKind()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Shape(): windows_collections.IVectorView<Int64> {
         return asITensor().Shape()
     }
@@ -10416,6 +10718,7 @@ public class TensorUInt16Bit <: InterfaceWrapperBase & ComInterface & windows_in
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Create2(shape: windows_collections.IIterable<Int64>): TensorUInt16Bit {
         var result__: Option<TensorUInt16Bit> = Option<TensorUInt16Bit>.None
         try (factory__ = windows_core.factory<TensorUInt16Bit, ITensorUInt16BitStatics>().unwrap()) {
@@ -10427,6 +10730,7 @@ public class TensorUInt16Bit <: InterfaceWrapperBase & ComInterface & windows_in
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromArray(shape: windows_collections.IIterable<Int64>, dataSize: UInt32, data: CPointer<UInt16>): TensorUInt16Bit {
         var result__: Option<TensorUInt16Bit> = Option<TensorUInt16Bit>.None
         try (factory__ = windows_core.factory<TensorUInt16Bit, ITensorUInt16BitStatics>().unwrap()) {
@@ -10438,6 +10742,7 @@ public class TensorUInt16Bit <: InterfaceWrapperBase & ComInterface & windows_in
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromIterable(shape: windows_collections.IIterable<Int64>, data: windows_collections.IIterable<UInt16>): TensorUInt16Bit {
         var result__: Option<TensorUInt16Bit> = Option<TensorUInt16Bit>.None
         try (factory__ = windows_core.factory<TensorUInt16Bit, ITensorUInt16BitStatics>().unwrap()) {
@@ -10588,6 +10893,7 @@ public class TensorUInt32Bit <: InterfaceWrapperBase & ComInterface & windows_in
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(): windows_collections.IVectorView<UInt32> {
         return defaultInterface().GetAsVectorView()
     }
@@ -10596,6 +10902,7 @@ public class TensorUInt32Bit <: InterfaceWrapperBase & ComInterface & windows_in
         return asITensor().get_TensorKind()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Shape(): windows_collections.IVectorView<Int64> {
         return asITensor().Shape()
     }
@@ -10623,6 +10930,7 @@ public class TensorUInt32Bit <: InterfaceWrapperBase & ComInterface & windows_in
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Create2(shape: windows_collections.IIterable<Int64>): TensorUInt32Bit {
         var result__: Option<TensorUInt32Bit> = Option<TensorUInt32Bit>.None
         try (factory__ = windows_core.factory<TensorUInt32Bit, ITensorUInt32BitStatics>().unwrap()) {
@@ -10634,6 +10942,7 @@ public class TensorUInt32Bit <: InterfaceWrapperBase & ComInterface & windows_in
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromArray(shape: windows_collections.IIterable<Int64>, dataSize: UInt32, data: CPointer<UInt32>): TensorUInt32Bit {
         var result__: Option<TensorUInt32Bit> = Option<TensorUInt32Bit>.None
         try (factory__ = windows_core.factory<TensorUInt32Bit, ITensorUInt32BitStatics>().unwrap()) {
@@ -10645,6 +10954,7 @@ public class TensorUInt32Bit <: InterfaceWrapperBase & ComInterface & windows_in
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromIterable(shape: windows_collections.IIterable<Int64>, data: windows_collections.IIterable<UInt32>): TensorUInt32Bit {
         var result__: Option<TensorUInt32Bit> = Option<TensorUInt32Bit>.None
         try (factory__ = windows_core.factory<TensorUInt32Bit, ITensorUInt32BitStatics>().unwrap()) {
@@ -10795,6 +11105,7 @@ public class TensorUInt64Bit <: InterfaceWrapperBase & ComInterface & windows_in
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(): windows_collections.IVectorView<UInt64> {
         return defaultInterface().GetAsVectorView()
     }
@@ -10803,6 +11114,7 @@ public class TensorUInt64Bit <: InterfaceWrapperBase & ComInterface & windows_in
         return asITensor().get_TensorKind()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Shape(): windows_collections.IVectorView<Int64> {
         return asITensor().Shape()
     }
@@ -10853,6 +11165,7 @@ public class TensorUInt64Bit <: InterfaceWrapperBase & ComInterface & windows_in
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Create2(shape: windows_collections.IIterable<Int64>): TensorUInt64Bit {
         var result__: Option<TensorUInt64Bit> = Option<TensorUInt64Bit>.None
         try (factory__ = windows_core.factory<TensorUInt64Bit, ITensorUInt64BitStatics>().unwrap()) {
@@ -10864,6 +11177,7 @@ public class TensorUInt64Bit <: InterfaceWrapperBase & ComInterface & windows_in
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromArray(shape: windows_collections.IIterable<Int64>, dataSize: UInt32, data: CPointer<UInt64>): TensorUInt64Bit {
         var result__: Option<TensorUInt64Bit> = Option<TensorUInt64Bit>.None
         try (factory__ = windows_core.factory<TensorUInt64Bit, ITensorUInt64BitStatics>().unwrap()) {
@@ -10875,6 +11189,7 @@ public class TensorUInt64Bit <: InterfaceWrapperBase & ComInterface & windows_in
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromIterable(shape: windows_collections.IIterable<Int64>, data: windows_collections.IIterable<UInt64>): TensorUInt64Bit {
         var result__: Option<TensorUInt64Bit> = Option<TensorUInt64Bit>.None
         try (factory__ = windows_core.factory<TensorUInt64Bit, ITensorUInt64BitStatics>().unwrap()) {
@@ -11002,6 +11317,7 @@ public class TensorUInt8Bit <: InterfaceWrapperBase & ComInterface & windows_int
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(): windows_collections.IVectorView<UInt8> {
         return defaultInterface().GetAsVectorView()
     }
@@ -11010,6 +11326,7 @@ public class TensorUInt8Bit <: InterfaceWrapperBase & ComInterface & windows_int
         return asITensor().get_TensorKind()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Shape(): windows_collections.IVectorView<Int64> {
         return asITensor().Shape()
     }
@@ -11037,6 +11354,7 @@ public class TensorUInt8Bit <: InterfaceWrapperBase & ComInterface & windows_int
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Create2(shape: windows_collections.IIterable<Int64>): TensorUInt8Bit {
         var result__: Option<TensorUInt8Bit> = Option<TensorUInt8Bit>.None
         try (factory__ = windows_core.factory<TensorUInt8Bit, ITensorUInt8BitStatics>().unwrap()) {
@@ -11048,6 +11366,7 @@ public class TensorUInt8Bit <: InterfaceWrapperBase & ComInterface & windows_int
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromArray(shape: windows_collections.IIterable<Int64>, dataSize: UInt32, data: CPointer<UInt8>): TensorUInt8Bit {
         var result__: Option<TensorUInt8Bit> = Option<TensorUInt8Bit>.None
         try (factory__ = windows_core.factory<TensorUInt8Bit, ITensorUInt8BitStatics>().unwrap()) {
@@ -11059,6 +11378,7 @@ public class TensorUInt8Bit <: InterfaceWrapperBase & ComInterface & windows_int
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateFromIterable(shape: windows_collections.IIterable<Int64>, data: windows_collections.IIterable<UInt8>): TensorUInt8Bit {
         var result__: Option<TensorUInt8Bit> = Option<TensorUInt8Bit>.None
         try (factory__ = windows_core.factory<TensorUInt8Bit, ITensorUInt8BitStatics>().unwrap()) {

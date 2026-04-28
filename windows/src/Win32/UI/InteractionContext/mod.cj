@@ -6,7 +6,6 @@ package windows.Win32.UI.InteractionContext
 import std.collection.*
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
@@ -1524,51 +1523,309 @@ public type INTERACTION_CONTEXT_OUTPUT_CALLBACK = CFunc<(CPointer<Unit>, CPointe
 @When[Windows_Win32_UI_InteractionContext == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 public type INTERACTION_CONTEXT_OUTPUT_CALLBACK2 = CFunc<(CPointer<Unit>, CPointer<INTERACTION_CONTEXT_OUTPUT2Abi>) -> Unit>
 
-@When[NINPUT == "on"]
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_AddPointerInteractionContext == "on"]
 foreign {
     func AddPointerInteractionContext(interactionContext: HINTERACTIONCONTEXT, pointerId: UInt32): Int32
-    func CreateInteractionContext(interactionContext: CPointer<HINTERACTIONCONTEXT>): Int32
-    func DestroyInteractionContext(interactionContext: HINTERACTIONCONTEXT): Int32
-    func GetCrossSlideParameterInteractionContext(interactionContext: HINTERACTIONCONTEXT, threshold: CROSS_SLIDE_THRESHOLDAbi, distance: CPointer<Float32>): Int32
-    func GetHoldParameterInteractionContext(interactionContext: HINTERACTIONCONTEXT, parameter: HOLD_PARAMETERAbi, value: CPointer<Float32>): Int32
-    func GetInertiaParameterInteractionContext(interactionContext: HINTERACTIONCONTEXT, inertiaParameter: INERTIA_PARAMETERAbi, value: CPointer<Float32>): Int32
-    // param-hint: configuration len=param[1]
-    func GetInteractionConfigurationInteractionContext(interactionContext: HINTERACTIONCONTEXT, configurationCount: UInt32, configuration: CPointer<INTERACTION_CONTEXT_CONFIGURATIONAbi>): Int32
-    func GetMouseWheelParameterInteractionContext(interactionContext: HINTERACTIONCONTEXT, parameter: MOUSE_WHEEL_PARAMETERAbi, value: CPointer<Float32>): Int32
-    func GetPropertyInteractionContext(interactionContext: HINTERACTIONCONTEXT, contextProperty: INTERACTION_CONTEXT_PROPERTYAbi, value: CPointer<UInt32>): Int32
-    func GetTapParameterInteractionContext(interactionContext: HINTERACTIONCONTEXT, parameter: TAP_PARAMETERAbi, value: CPointer<Float32>): Int32
-    func GetTranslationParameterInteractionContext(interactionContext: HINTERACTIONCONTEXT, parameter: TRANSLATION_PARAMETERAbi, value: CPointer<Float32>): Int32
-    func ProcessBufferedPacketsInteractionContext(interactionContext: HINTERACTIONCONTEXT): Int32
-    func ProcessInertiaInteractionContext(interactionContext: HINTERACTIONCONTEXT): Int32
-    func RemovePointerInteractionContext(interactionContext: HINTERACTIONCONTEXT, pointerId: UInt32): Int32
-    func ResetInteractionContext(interactionContext: HINTERACTIONCONTEXT): Int32
-    // param-hint: crossSlideParameters len=param[1]
-    func SetCrossSlideParametersInteractionContext(interactionContext: HINTERACTIONCONTEXT, parameterCount: UInt32, crossSlideParameters: CPointer<CROSS_SLIDE_PARAMETERAbi>): Int32
-    func SetHoldParameterInteractionContext(interactionContext: HINTERACTIONCONTEXT, parameter: HOLD_PARAMETERAbi, value: Float32): Int32
-    func SetInertiaParameterInteractionContext(interactionContext: HINTERACTIONCONTEXT, inertiaParameter: INERTIA_PARAMETERAbi, value: Float32): Int32
-    // param-hint: configuration len=param[1]
-    func SetInteractionConfigurationInteractionContext(interactionContext: HINTERACTIONCONTEXT, configurationCount: UInt32, configuration: CPointer<INTERACTION_CONTEXT_CONFIGURATIONAbi>): Int32
-    func SetMouseWheelParameterInteractionContext(interactionContext: HINTERACTIONCONTEXT, parameter: MOUSE_WHEEL_PARAMETERAbi, value: Float32): Int32
-    func SetPivotInteractionContext(interactionContext: HINTERACTIONCONTEXT, x: Float32, y: Float32, radius: Float32): Int32
-    func SetPropertyInteractionContext(interactionContext: HINTERACTIONCONTEXT, contextProperty: INTERACTION_CONTEXT_PROPERTYAbi, value: UInt32): Int32
-    func SetTapParameterInteractionContext(interactionContext: HINTERACTIONCONTEXT, parameter: TAP_PARAMETERAbi, value: Float32): Int32
-    func SetTranslationParameterInteractionContext(interactionContext: HINTERACTIONCONTEXT, parameter: TRANSLATION_PARAMETERAbi, value: Float32): Int32
-    func StopInteractionContext(interactionContext: HINTERACTIONCONTEXT): Int32
 }
 
-@When[NINPUT == "on" && (Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_WindowsAndMessaging == "on")]
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_AddPointerInteractionContext == "on"]
+public unsafe func Windows_AddPointerInteractionContext(interactionContext: HINTERACTIONCONTEXT, pointerId: UInt32): Int32 {
+    return AddPointerInteractionContext(interactionContext, pointerId)
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_BufferPointerPacketsInteractionContext == "on" && Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
     // param-hint: pointerInfo len=param[1]
     func BufferPointerPacketsInteractionContext(interactionContext: HINTERACTIONCONTEXT, entriesCount: UInt32, pointerInfo: CPointer<Win32__impl_l1.POINTER_INFOAbi>): Int32
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_BufferPointerPacketsInteractionContext == "on" && Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_BufferPointerPacketsInteractionContext(interactionContext: HINTERACTIONCONTEXT, entriesCount: UInt32, pointerInfo: CPointer<Win32__impl_l1.POINTER_INFOAbi>): Int32 {
+    return BufferPointerPacketsInteractionContext(interactionContext, entriesCount, pointerInfo)
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_CreateInteractionContext == "on"]
+foreign {
+    func CreateInteractionContext(interactionContext: CPointer<HINTERACTIONCONTEXT>): Int32
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_CreateInteractionContext == "on"]
+public unsafe func Windows_CreateInteractionContext(interactionContext: CPointer<HINTERACTIONCONTEXT>): Int32 {
+    return CreateInteractionContext(interactionContext)
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_DestroyInteractionContext == "on"]
+foreign {
+    func DestroyInteractionContext(interactionContext: HINTERACTIONCONTEXT): Int32
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_DestroyInteractionContext == "on"]
+public unsafe func Windows_DestroyInteractionContext(interactionContext: HINTERACTIONCONTEXT): Int32 {
+    return DestroyInteractionContext(interactionContext)
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_GetCrossSlideParameterInteractionContext == "on"]
+foreign {
+    func GetCrossSlideParameterInteractionContext(interactionContext: HINTERACTIONCONTEXT, threshold: CROSS_SLIDE_THRESHOLDAbi, distance: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_GetCrossSlideParameterInteractionContext == "on"]
+public unsafe func Windows_GetCrossSlideParameterInteractionContext(interactionContext: HINTERACTIONCONTEXT, threshold: CROSS_SLIDE_THRESHOLDAbi, distance: CPointer<Float32>): Int32 {
+    return GetCrossSlideParameterInteractionContext(interactionContext, threshold, distance)
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_GetHoldParameterInteractionContext == "on"]
+foreign {
+    func GetHoldParameterInteractionContext(interactionContext: HINTERACTIONCONTEXT, parameter: HOLD_PARAMETERAbi, value: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_GetHoldParameterInteractionContext == "on"]
+public unsafe func Windows_GetHoldParameterInteractionContext(interactionContext: HINTERACTIONCONTEXT, parameter: HOLD_PARAMETERAbi, value: CPointer<Float32>): Int32 {
+    return GetHoldParameterInteractionContext(interactionContext, parameter, value)
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_GetInertiaParameterInteractionContext == "on"]
+foreign {
+    func GetInertiaParameterInteractionContext(interactionContext: HINTERACTIONCONTEXT, inertiaParameter: INERTIA_PARAMETERAbi, value: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_GetInertiaParameterInteractionContext == "on"]
+public unsafe func Windows_GetInertiaParameterInteractionContext(interactionContext: HINTERACTIONCONTEXT, inertiaParameter: INERTIA_PARAMETERAbi, value: CPointer<Float32>): Int32 {
+    return GetInertiaParameterInteractionContext(interactionContext, inertiaParameter, value)
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_GetInteractionConfigurationInteractionContext == "on"]
+foreign {
+    // param-hint: configuration len=param[1]
+    func GetInteractionConfigurationInteractionContext(interactionContext: HINTERACTIONCONTEXT, configurationCount: UInt32, configuration: CPointer<INTERACTION_CONTEXT_CONFIGURATIONAbi>): Int32
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_GetInteractionConfigurationInteractionContext == "on"]
+public unsafe func Windows_GetInteractionConfigurationInteractionContext(interactionContext: HINTERACTIONCONTEXT, configurationCount: UInt32, configuration: CPointer<INTERACTION_CONTEXT_CONFIGURATIONAbi>): Int32 {
+    return GetInteractionConfigurationInteractionContext(interactionContext, configurationCount, configuration)
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_GetMouseWheelParameterInteractionContext == "on"]
+foreign {
+    func GetMouseWheelParameterInteractionContext(interactionContext: HINTERACTIONCONTEXT, parameter: MOUSE_WHEEL_PARAMETERAbi, value: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_GetMouseWheelParameterInteractionContext == "on"]
+public unsafe func Windows_GetMouseWheelParameterInteractionContext(interactionContext: HINTERACTIONCONTEXT, parameter: MOUSE_WHEEL_PARAMETERAbi, value: CPointer<Float32>): Int32 {
+    return GetMouseWheelParameterInteractionContext(interactionContext, parameter, value)
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_GetPropertyInteractionContext == "on"]
+foreign {
+    func GetPropertyInteractionContext(interactionContext: HINTERACTIONCONTEXT, contextProperty: INTERACTION_CONTEXT_PROPERTYAbi, value: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_GetPropertyInteractionContext == "on"]
+public unsafe func Windows_GetPropertyInteractionContext(interactionContext: HINTERACTIONCONTEXT, contextProperty: INTERACTION_CONTEXT_PROPERTYAbi, value: CPointer<UInt32>): Int32 {
+    return GetPropertyInteractionContext(interactionContext, contextProperty, value)
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_GetStateInteractionContext == "on" && Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
     // param-hint: pointerInfo optional
     func GetStateInteractionContext(interactionContext: HINTERACTIONCONTEXT, pointerInfo: CPointer<Win32__impl_l1.POINTER_INFOAbi>, state: CPointer<INTERACTION_STATEAbi>): Int32
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_GetStateInteractionContext == "on" && Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_GetStateInteractionContext(interactionContext: HINTERACTIONCONTEXT, pointerInfo: CPointer<Win32__impl_l1.POINTER_INFOAbi>, state: CPointer<INTERACTION_STATEAbi>): Int32 {
+    return GetStateInteractionContext(interactionContext, pointerInfo, state)
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_GetTapParameterInteractionContext == "on"]
+foreign {
+    func GetTapParameterInteractionContext(interactionContext: HINTERACTIONCONTEXT, parameter: TAP_PARAMETERAbi, value: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_GetTapParameterInteractionContext == "on"]
+public unsafe func Windows_GetTapParameterInteractionContext(interactionContext: HINTERACTIONCONTEXT, parameter: TAP_PARAMETERAbi, value: CPointer<Float32>): Int32 {
+    return GetTapParameterInteractionContext(interactionContext, parameter, value)
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_GetTranslationParameterInteractionContext == "on"]
+foreign {
+    func GetTranslationParameterInteractionContext(interactionContext: HINTERACTIONCONTEXT, parameter: TRANSLATION_PARAMETERAbi, value: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_GetTranslationParameterInteractionContext == "on"]
+public unsafe func Windows_GetTranslationParameterInteractionContext(interactionContext: HINTERACTIONCONTEXT, parameter: TRANSLATION_PARAMETERAbi, value: CPointer<Float32>): Int32 {
+    return GetTranslationParameterInteractionContext(interactionContext, parameter, value)
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_ProcessBufferedPacketsInteractionContext == "on"]
+foreign {
+    func ProcessBufferedPacketsInteractionContext(interactionContext: HINTERACTIONCONTEXT): Int32
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_ProcessBufferedPacketsInteractionContext == "on"]
+public unsafe func Windows_ProcessBufferedPacketsInteractionContext(interactionContext: HINTERACTIONCONTEXT): Int32 {
+    return ProcessBufferedPacketsInteractionContext(interactionContext)
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_ProcessInertiaInteractionContext == "on"]
+foreign {
+    func ProcessInertiaInteractionContext(interactionContext: HINTERACTIONCONTEXT): Int32
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_ProcessInertiaInteractionContext == "on"]
+public unsafe func Windows_ProcessInertiaInteractionContext(interactionContext: HINTERACTIONCONTEXT): Int32 {
+    return ProcessInertiaInteractionContext(interactionContext)
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_ProcessPointerFramesInteractionContext == "on" && Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
     func ProcessPointerFramesInteractionContext(interactionContext: HINTERACTIONCONTEXT, entriesCount: UInt32, pointerCount: UInt32, pointerInfo: CPointer<Win32__impl_l1.POINTER_INFOAbi>): Int32
 }
 
-@When[NINPUT == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_ProcessPointerFramesInteractionContext == "on" && Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_ProcessPointerFramesInteractionContext(interactionContext: HINTERACTIONCONTEXT, entriesCount: UInt32, pointerCount: UInt32, pointerInfo: CPointer<Win32__impl_l1.POINTER_INFOAbi>): Int32 {
+    return ProcessPointerFramesInteractionContext(interactionContext, entriesCount, pointerCount, pointerInfo)
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_RegisterOutputCallbackInteractionContext == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
     // param-hint: clientData optional
     func RegisterOutputCallbackInteractionContext(interactionContext: HINTERACTIONCONTEXT, outputCallback: INTERACTION_CONTEXT_OUTPUT_CALLBACK, clientData: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_RegisterOutputCallbackInteractionContext == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_RegisterOutputCallbackInteractionContext(interactionContext: HINTERACTIONCONTEXT, outputCallback: INTERACTION_CONTEXT_OUTPUT_CALLBACK, clientData: CPointer<Unit>): Int32 {
+    return RegisterOutputCallbackInteractionContext(interactionContext, outputCallback, clientData)
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_RegisterOutputCallbackInteractionContext2 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
     // param-hint: clientData optional
     func RegisterOutputCallbackInteractionContext2(interactionContext: HINTERACTIONCONTEXT, outputCallback: INTERACTION_CONTEXT_OUTPUT_CALLBACK2, clientData: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_RegisterOutputCallbackInteractionContext2 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_RegisterOutputCallbackInteractionContext2(interactionContext: HINTERACTIONCONTEXT, outputCallback: INTERACTION_CONTEXT_OUTPUT_CALLBACK2, clientData: CPointer<Unit>): Int32 {
+    return RegisterOutputCallbackInteractionContext2(interactionContext, outputCallback, clientData)
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_RemovePointerInteractionContext == "on"]
+foreign {
+    func RemovePointerInteractionContext(interactionContext: HINTERACTIONCONTEXT, pointerId: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_RemovePointerInteractionContext == "on"]
+public unsafe func Windows_RemovePointerInteractionContext(interactionContext: HINTERACTIONCONTEXT, pointerId: UInt32): Int32 {
+    return RemovePointerInteractionContext(interactionContext, pointerId)
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_ResetInteractionContext == "on"]
+foreign {
+    func ResetInteractionContext(interactionContext: HINTERACTIONCONTEXT): Int32
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_ResetInteractionContext == "on"]
+public unsafe func Windows_ResetInteractionContext(interactionContext: HINTERACTIONCONTEXT): Int32 {
+    return ResetInteractionContext(interactionContext)
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_SetCrossSlideParametersInteractionContext == "on"]
+foreign {
+    // param-hint: crossSlideParameters len=param[1]
+    func SetCrossSlideParametersInteractionContext(interactionContext: HINTERACTIONCONTEXT, parameterCount: UInt32, crossSlideParameters: CPointer<CROSS_SLIDE_PARAMETERAbi>): Int32
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_SetCrossSlideParametersInteractionContext == "on"]
+public unsafe func Windows_SetCrossSlideParametersInteractionContext(interactionContext: HINTERACTIONCONTEXT, parameterCount: UInt32, crossSlideParameters: CPointer<CROSS_SLIDE_PARAMETERAbi>): Int32 {
+    return SetCrossSlideParametersInteractionContext(interactionContext, parameterCount, crossSlideParameters)
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_SetHoldParameterInteractionContext == "on"]
+foreign {
+    func SetHoldParameterInteractionContext(interactionContext: HINTERACTIONCONTEXT, parameter: HOLD_PARAMETERAbi, value: Float32): Int32
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_SetHoldParameterInteractionContext == "on"]
+public unsafe func Windows_SetHoldParameterInteractionContext(interactionContext: HINTERACTIONCONTEXT, parameter: HOLD_PARAMETERAbi, value: Float32): Int32 {
+    return SetHoldParameterInteractionContext(interactionContext, parameter, value)
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_SetInertiaParameterInteractionContext == "on"]
+foreign {
+    func SetInertiaParameterInteractionContext(interactionContext: HINTERACTIONCONTEXT, inertiaParameter: INERTIA_PARAMETERAbi, value: Float32): Int32
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_SetInertiaParameterInteractionContext == "on"]
+public unsafe func Windows_SetInertiaParameterInteractionContext(interactionContext: HINTERACTIONCONTEXT, inertiaParameter: INERTIA_PARAMETERAbi, value: Float32): Int32 {
+    return SetInertiaParameterInteractionContext(interactionContext, inertiaParameter, value)
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_SetInteractionConfigurationInteractionContext == "on"]
+foreign {
+    // param-hint: configuration len=param[1]
+    func SetInteractionConfigurationInteractionContext(interactionContext: HINTERACTIONCONTEXT, configurationCount: UInt32, configuration: CPointer<INTERACTION_CONTEXT_CONFIGURATIONAbi>): Int32
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_SetInteractionConfigurationInteractionContext == "on"]
+public unsafe func Windows_SetInteractionConfigurationInteractionContext(interactionContext: HINTERACTIONCONTEXT, configurationCount: UInt32, configuration: CPointer<INTERACTION_CONTEXT_CONFIGURATIONAbi>): Int32 {
+    return SetInteractionConfigurationInteractionContext(interactionContext, configurationCount, configuration)
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_SetMouseWheelParameterInteractionContext == "on"]
+foreign {
+    func SetMouseWheelParameterInteractionContext(interactionContext: HINTERACTIONCONTEXT, parameter: MOUSE_WHEEL_PARAMETERAbi, value: Float32): Int32
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_SetMouseWheelParameterInteractionContext == "on"]
+public unsafe func Windows_SetMouseWheelParameterInteractionContext(interactionContext: HINTERACTIONCONTEXT, parameter: MOUSE_WHEEL_PARAMETERAbi, value: Float32): Int32 {
+    return SetMouseWheelParameterInteractionContext(interactionContext, parameter, value)
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_SetPivotInteractionContext == "on"]
+foreign {
+    func SetPivotInteractionContext(interactionContext: HINTERACTIONCONTEXT, x: Float32, y: Float32, radius: Float32): Int32
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_SetPivotInteractionContext == "on"]
+public unsafe func Windows_SetPivotInteractionContext(interactionContext: HINTERACTIONCONTEXT, x: Float32, y: Float32, radius: Float32): Int32 {
+    return SetPivotInteractionContext(interactionContext, x, y, radius)
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_SetPropertyInteractionContext == "on"]
+foreign {
+    func SetPropertyInteractionContext(interactionContext: HINTERACTIONCONTEXT, contextProperty: INTERACTION_CONTEXT_PROPERTYAbi, value: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_SetPropertyInteractionContext == "on"]
+public unsafe func Windows_SetPropertyInteractionContext(interactionContext: HINTERACTIONCONTEXT, contextProperty: INTERACTION_CONTEXT_PROPERTYAbi, value: UInt32): Int32 {
+    return SetPropertyInteractionContext(interactionContext, contextProperty, value)
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_SetTapParameterInteractionContext == "on"]
+foreign {
+    func SetTapParameterInteractionContext(interactionContext: HINTERACTIONCONTEXT, parameter: TAP_PARAMETERAbi, value: Float32): Int32
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_SetTapParameterInteractionContext == "on"]
+public unsafe func Windows_SetTapParameterInteractionContext(interactionContext: HINTERACTIONCONTEXT, parameter: TAP_PARAMETERAbi, value: Float32): Int32 {
+    return SetTapParameterInteractionContext(interactionContext, parameter, value)
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_SetTranslationParameterInteractionContext == "on"]
+foreign {
+    func SetTranslationParameterInteractionContext(interactionContext: HINTERACTIONCONTEXT, parameter: TRANSLATION_PARAMETERAbi, value: Float32): Int32
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_SetTranslationParameterInteractionContext == "on"]
+public unsafe func Windows_SetTranslationParameterInteractionContext(interactionContext: HINTERACTIONCONTEXT, parameter: TRANSLATION_PARAMETERAbi, value: Float32): Int32 {
+    return SetTranslationParameterInteractionContext(interactionContext, parameter, value)
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_StopInteractionContext == "on"]
+foreign {
+    func StopInteractionContext(interactionContext: HINTERACTIONCONTEXT): Int32
+}
+
+@When[Windows_Win32_UI_InteractionContext == "on" && NINPUT == "on" && Windows_Win32_UI_InteractionContext_StopInteractionContext == "on"]
+public unsafe func Windows_StopInteractionContext(interactionContext: HINTERACTIONCONTEXT): Int32 {
+    return StopInteractionContext(interactionContext)
 }

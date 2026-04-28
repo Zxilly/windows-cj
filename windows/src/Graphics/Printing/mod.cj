@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l1 as _impl_l1
 import windows_collections as windows_collections
@@ -514,14 +513,25 @@ extend IPrintTask2 <: windows_core.Interface<IPrintTask2> {}
 @C
 public struct IPrintTaskOptionsCoreUIConfigurationVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var DisplayedOptions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var DisplayedOptions: UIntNative = UIntNative(0)
     public init() {}
 
+    @When[Windows_Foundation_Collections == "on"]
     public static func new<Identity>(offset!: Int64 = 0): IPrintTaskOptionsCoreUIConfigurationVtbl where Identity <: IPrintTaskOptionsCoreUIConfiguration_Impl {
         let _ = offset
         var vtbl = IPrintTaskOptionsCoreUIConfigurationVtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.DisplayedOptions = { instanceRaw, result__ =>
+        vtbl = IPrintTaskOptionsCoreUIConfigurationVtbl.__assignDisplayedOptions<Identity>(vtbl)
+        return vtbl
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections == "on"]
+    public static func __assignDisplayedOptions<Identity>(vtbl: IPrintTaskOptionsCoreUIConfigurationVtbl): IPrintTaskOptionsCoreUIConfigurationVtbl where Identity <: IPrintTaskOptionsCoreUIConfiguration_Impl {
+        var next = vtbl
+        next.DisplayedOptions = { instanceRaw, result__ =>
             match (unsafe { asImplFromRaw<IPrintTaskOptionsCoreUIConfiguration_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
                     impl.__winrtThunk_DisplayedOptions(result__)
@@ -529,6 +539,11 @@ public struct IPrintTaskOptionsCoreUIConfigurationVtbl {
                     E_NOINTERFACE.value
             }
         }
+        return next
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections != "on"]
+    public static func __assignDisplayedOptions<Identity>(vtbl: IPrintTaskOptionsCoreUIConfigurationVtbl): IPrintTaskOptionsCoreUIConfigurationVtbl where Identity <: IPrintTaskOptionsCoreUIConfiguration_Impl {
         return vtbl
     }
 
@@ -540,12 +555,12 @@ public struct IPrintTaskOptionsCoreUIConfigurationVtbl {
     }
 }
 
-@When[Windows_Graphics_Printing == "on"]
+@When[Windows_Graphics_Printing == "on" && Windows_Foundation_Collections == "on"]
 public interface IPrintTaskOptionsCoreUIConfiguration_ImplErased {
     public func __winrtThunk_DisplayedOptions(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Graphics_Printing == "on"]
+@When[Windows_Graphics_Printing == "on" && Windows_Foundation_Collections == "on"]
 public interface IPrintTaskOptionsCoreUIConfiguration_Impl <: IPrintTaskOptionsCoreUIConfiguration_ImplErased {
     public func DisplayedOptions(): windows_core.Result<windows_collections.IVector<windows_core.HString>>
 
@@ -633,6 +648,7 @@ public class IPrintTaskOptionsCoreUIConfiguration <: InterfaceWrapperBase & ComI
         readVtbl<IPrintTaskOptionsCoreUIConfigurationVtbl>(IPrintTaskOptionsCoreUIConfigurationVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DisplayedOptions(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5150,12 +5166,14 @@ public class PrintTaskSourceRequestedHandler <: InterfaceWrapperBase & ComInterf
 @When[Windows_Graphics_Printing == "on"]
 extend PrintTaskSourceRequestedHandler <: windows_core.Interface<PrintTaskSourceRequestedHandler> {}
 
+@When[Windows_Graphics_Printing == "on"]
 private open class PrintTaskSourceRequestedHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_Graphics_Printing == "on"]
 private open class PrintTaskSourceRequestedHandlerInvoker <: PrintTaskSourceRequestedHandlerInvokerErased {
     public open func Invoke(args: InParam<PrintTaskSourceRequestedArgs>): Unit {
         ()
@@ -5167,6 +5185,7 @@ private open class PrintTaskSourceRequestedHandlerInvoker <: PrintTaskSourceRequ
     }
 }
 
+@When[Windows_Graphics_Printing == "on"]
 private class PrintTaskSourceRequestedHandlerBox <: PrintTaskSourceRequestedHandlerInvoker {
     public let invoke_: (InParam<PrintTaskSourceRequestedArgs>) -> Unit
     private let vtblHandle: CPointerHandle<PrintTaskSourceRequestedHandlerVtbl>
@@ -5185,6 +5204,7 @@ private class PrintTaskSourceRequestedHandlerBox <: PrintTaskSourceRequestedHand
     }
 }
 
+@When[Windows_Graphics_Printing == "on"]
 func buildPrintTaskSourceRequestedHandlerBoxVtbl(): PrintTaskSourceRequestedHandlerVtbl {
     var vtbl = PrintTaskSourceRequestedHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -5588,9 +5608,9 @@ extend IPrintPageRangeFactory <: windows_core.Interface<IPrintPageRangeFactory> 
 @C
 public struct IPrintTaskVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_ApplicationModel_DataTransfer == "on"]
+    @When[Windows_ApplicationModel_DataTransfer == "on" && Windows_ApplicationModel_DataTransfer == "on" && Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel_DataTransfer != "on"]
+    @When[Windows_ApplicationModel_DataTransfer != "on" || Windows_ApplicationModel_DataTransfer != "on" || Windows_Foundation_Collections != "on"]
     public var Properties: UIntNative = UIntNative(0)
     public var Source: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Options: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -5670,7 +5690,7 @@ public class IPrintTask <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         readVtbl<IPrintTaskVtbl>(IPrintTaskVtbl())
     }
 
-    @When[Windows_ApplicationModel_DataTransfer == "on"]
+    @When[Windows_ApplicationModel_DataTransfer == "on" && Windows_ApplicationModel_DataTransfer == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): _impl_l1.DataPackagePropertySet {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5760,7 +5780,10 @@ extend IPrintTask <: windows_core.Interface<IPrintTask> {}
 public struct IPrintTaskOptions2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var PageRangeOptions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var CustomPageRanges: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CustomPageRanges: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -5837,6 +5860,7 @@ public class IPrintTaskOptions2 <: InterfaceWrapperBase & ComInterface & Runtime
         return PrintPageRangeOptions.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CustomPageRanges(): windows_collections.IVector<PrintPageRange> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6353,7 +6377,7 @@ public class PrintTask <: InterfaceWrapperBase & ComInterface & windows_interfac
         }
     }
 
-    @When[Windows_ApplicationModel_DataTransfer == "on"]
+    @When[Windows_ApplicationModel_DataTransfer == "on" && Windows_ApplicationModel_DataTransfer == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): _impl_l1.DataPackagePropertySet {
         return defaultInterface().Properties()
     }
@@ -6600,6 +6624,7 @@ public class PrintTaskOptions <: InterfaceWrapperBase & ComInterface & windows_i
         return asIPrintTaskOptionsCoreProperties().NumberOfCopies()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DisplayedOptions(): windows_collections.IVector<windows_core.HString> {
         return asIPrintTaskOptionsCoreUIConfiguration().DisplayedOptions()
     }

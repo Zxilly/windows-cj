@@ -275,6 +275,7 @@ public struct ISearchSuggestionManagerVtbl {
     public var SetQueryWithLanguage: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_ApplicationModel_Search == "on"]
     public var SetQueryWithSearchQueryLinguisticDetails: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Suggestions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var AddToHistory: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var AddToHistoryWithLanguage: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
@@ -376,6 +377,7 @@ public class ISearchSuggestionManager <: InterfaceWrapperBase & ComInterface {
         return __vt.SetQueryWithSearchQueryLinguisticDetails(__liveRaw, queryText, language, linguisticDetails)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Suggestions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

@@ -5,9 +5,7 @@ import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrap
 import windows_interface as windows_interface
 import windows_polyfill.{unionReadFloat32, unionReadInt32, unionReadUInt16, unionReadUInt32, unionWriteFloat32, unionWriteInt32, unionWriteUInt16, unionWriteUInt32}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows_sys.Win32.Graphics.Gdi as Win32_Graphics_Gdi
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
@@ -9107,17 +9105,94 @@ public class IDirect3DVolumeTexture9 <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[D3D9 == "on"]
+@When[Windows_Win32_Graphics_Direct3D9 == "on" && D3D9 == "on" && Windows_Win32_Graphics_Direct3D9_D3DPERF_BeginEvent == "on"]
 foreign {
     func D3DPERF_BeginEvent(col: UInt32, wszName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D9 == "on" && D3D9 == "on" && Windows_Win32_Graphics_Direct3D9_D3DPERF_BeginEvent == "on"]
+public unsafe func Windows_D3DPERF_BeginEvent(col: UInt32, wszName: CPointer<UInt16>): Int32 {
+    return D3DPERF_BeginEvent(col, wszName)
+}
+
+@When[Windows_Win32_Graphics_Direct3D9 == "on" && D3D9 == "on" && Windows_Win32_Graphics_Direct3D9_D3DPERF_EndEvent == "on"]
+foreign {
     func D3DPERF_EndEvent(): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D9 == "on" && D3D9 == "on" && Windows_Win32_Graphics_Direct3D9_D3DPERF_EndEvent == "on"]
+public unsafe func Windows_D3DPERF_EndEvent(): Int32 {
+    return D3DPERF_EndEvent()
+}
+
+@When[Windows_Win32_Graphics_Direct3D9 == "on" && D3D9 == "on" && Windows_Win32_Graphics_Direct3D9_D3DPERF_GetStatus == "on"]
+foreign {
     func D3DPERF_GetStatus(): UInt32
+}
+
+@When[Windows_Win32_Graphics_Direct3D9 == "on" && D3D9 == "on" && Windows_Win32_Graphics_Direct3D9_D3DPERF_GetStatus == "on"]
+public unsafe func Windows_D3DPERF_GetStatus(): UInt32 {
+    return D3DPERF_GetStatus()
+}
+
+@When[Windows_Win32_Graphics_Direct3D9 == "on" && D3D9 == "on" && Windows_Win32_Graphics_Direct3D9_D3DPERF_QueryRepeatFrame == "on"]
+foreign {
     func D3DPERF_QueryRepeatFrame(): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D9 == "on" && D3D9 == "on" && Windows_Win32_Graphics_Direct3D9_D3DPERF_QueryRepeatFrame == "on"]
+public unsafe func Windows_D3DPERF_QueryRepeatFrame(): Int32 {
+    return D3DPERF_QueryRepeatFrame()
+}
+
+@When[Windows_Win32_Graphics_Direct3D9 == "on" && D3D9 == "on" && Windows_Win32_Graphics_Direct3D9_D3DPERF_SetMarker == "on"]
+foreign {
     func D3DPERF_SetMarker(col: UInt32, wszName: CPointer<UInt16>): Unit
+}
+
+@When[Windows_Win32_Graphics_Direct3D9 == "on" && D3D9 == "on" && Windows_Win32_Graphics_Direct3D9_D3DPERF_SetMarker == "on"]
+public unsafe func Windows_D3DPERF_SetMarker(col: UInt32, wszName: CPointer<UInt16>): Unit {
+    D3DPERF_SetMarker(col, wszName)
+}
+
+@When[Windows_Win32_Graphics_Direct3D9 == "on" && D3D9 == "on" && Windows_Win32_Graphics_Direct3D9_D3DPERF_SetOptions == "on"]
+foreign {
     func D3DPERF_SetOptions(dwOptions: UInt32): Unit
+}
+
+@When[Windows_Win32_Graphics_Direct3D9 == "on" && D3D9 == "on" && Windows_Win32_Graphics_Direct3D9_D3DPERF_SetOptions == "on"]
+public unsafe func Windows_D3DPERF_SetOptions(dwOptions: UInt32): Unit {
+    D3DPERF_SetOptions(dwOptions)
+}
+
+@When[Windows_Win32_Graphics_Direct3D9 == "on" && D3D9 == "on" && Windows_Win32_Graphics_Direct3D9_D3DPERF_SetRegion == "on"]
+foreign {
     func D3DPERF_SetRegion(col: UInt32, wszName: CPointer<UInt16>): Unit
+}
+
+@When[Windows_Win32_Graphics_Direct3D9 == "on" && D3D9 == "on" && Windows_Win32_Graphics_Direct3D9_D3DPERF_SetRegion == "on"]
+public unsafe func Windows_D3DPERF_SetRegion(col: UInt32, wszName: CPointer<UInt16>): Unit {
+    D3DPERF_SetRegion(col, wszName)
+}
+
+@When[Windows_Win32_Graphics_Direct3D9 == "on" && D3D9 == "on" && Windows_Win32_Graphics_Direct3D9_Direct3DCreate9 == "on"]
+foreign {
     func Direct3DCreate9(SDKVersion: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_Graphics_Direct3D9 == "on" && D3D9 == "on" && Windows_Win32_Graphics_Direct3D9_Direct3DCreate9 == "on"]
+public unsafe func Windows_Direct3DCreate9(SDKVersion: UInt32): CPointer<Unit> {
+    return Direct3DCreate9(SDKVersion)
+}
+
+@When[Windows_Win32_Graphics_Direct3D9 == "on" && D3D9 == "on" && Windows_Win32_Graphics_Direct3D9_Direct3DCreate9Ex == "on"]
+foreign {
     func Direct3DCreate9Ex(SDKVersion: UInt32, param1: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D9 == "on" && D3D9 == "on" && Windows_Win32_Graphics_Direct3D9_Direct3DCreate9Ex == "on"]
+public unsafe func Windows_Direct3DCreate9Ex(SDKVersion: UInt32, param1: CPointer<CPointer<Unit>>): Int32 {
+    return Direct3DCreate9Ex(SDKVersion, param1)
 }
 
 @When[Windows_Win32_Graphics_Direct3D9 == "on"]

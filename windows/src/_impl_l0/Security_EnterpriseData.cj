@@ -827,7 +827,10 @@ extend IFileUnprotectOptionsFactory <: windows_core.Interface<IFileUnprotectOpti
 @C
 public struct IProtectedAccessResumedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Identities: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Identities: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -896,6 +899,7 @@ public class IProtectedAccessResumedEventArgs <: InterfaceWrapperBase & ComInter
         readVtbl<IProtectedAccessResumedEventArgsVtbl>(IProtectedAccessResumedEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Identities(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -912,7 +916,10 @@ extend IProtectedAccessResumedEventArgs <: windows_core.Interface<IProtectedAcce
 @C
 public struct IProtectedAccessSuspendingEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Identities: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Identities: UIntNative = UIntNative(0)
     public var Deadline: CFunc<(CPointer<Unit>, CPointer<windows_future.DateTimeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetDeferral: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -983,6 +990,7 @@ public class IProtectedAccessSuspendingEventArgs <: InterfaceWrapperBase & ComIn
         readVtbl<IProtectedAccessSuspendingEventArgsVtbl>(IProtectedAccessSuspendingEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Identities(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1015,7 +1023,10 @@ extend IProtectedAccessSuspendingEventArgs <: windows_core.Interface<IProtectedA
 @C
 public struct IProtectedContentRevokedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Identities: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Identities: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1084,6 +1095,7 @@ public class IProtectedContentRevokedEventArgs <: InterfaceWrapperBase & ComInte
         readVtbl<IProtectedContentRevokedEventArgsVtbl>(IProtectedContentRevokedEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Identities(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1720,6 +1732,7 @@ public class ProtectedAccessResumedEventArgs <: InterfaceWrapperBase & ComInterf
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Identities(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().Identities()
     }
@@ -1812,6 +1825,7 @@ public class ProtectedAccessSuspendingEventArgs <: InterfaceWrapperBase & ComInt
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Identities(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().Identities()
     }
@@ -1912,6 +1926,7 @@ public class ProtectedContentRevokedEventArgs <: InterfaceWrapperBase & ComInter
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Identities(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().Identities()
     }

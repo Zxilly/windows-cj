@@ -4,11 +4,8 @@ package windows_sys.UI.StartScreen
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_Perception_Spatial == "on"]
 import windows_sys.Perception.Spatial as Perception_Spatial
-@When[Windows_UI == "on"]
 import windows_sys.UI as UI
-@When[Windows_UI_Popups == "on"]
 import windows_sys.UI.Popups as UI_Popups
 import windows_sys._impl_l1 as _impl_l1
 import windows_sys._impl_l2 as _impl_l2
@@ -1330,6 +1327,7 @@ public class ISecondaryTileVisualElements4 <: InterfaceWrapperBase & ComInterfac
 public struct IVisualElementsRequestVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var VisualElements: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var AlternateVisualElements: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Deadline: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.DateTime>) -> Int32> = { _, _ => 0 }
     public var GetDeferral: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -1382,6 +1380,7 @@ public class IVisualElementsRequest <: InterfaceWrapperBase & ComInterface {
         return __vt.VisualElements(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AlternateVisualElements(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1460,6 +1459,7 @@ public class IVisualElementsRequestedEventArgs <: InterfaceWrapperBase & ComInte
 @C
 public struct IJumpListVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Items: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SystemGroupKind: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetSystemGroupKind: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -1507,6 +1507,7 @@ public class IJumpList <: InterfaceWrapperBase & ComInterface {
         readVtbl<IJumpListVtbl>(IJumpListVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1882,8 +1883,11 @@ public class ISecondaryTileFactory2 <: InterfaceWrapperBase & ComInterface {
 public struct ISecondaryTileStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Exists: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllForApplicationAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllForPackageAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1934,18 +1938,21 @@ public class ISecondaryTileStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.Exists(__liveRaw, tileId, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindAllAsync(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllForApplicationAsync(applicationId: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindAllForApplicationAsync(__liveRaw, applicationId, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllForPackageAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

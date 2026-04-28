@@ -10,12 +10,9 @@ import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrap
 import windows_interface as windows_interface
 import windows_polyfill.{packedReadInt64, packedReadUInt32, packedReadUIntNative, packedReadValue, packedWriteInt64, packedWriteUInt32, packedWriteUIntNative, packedWriteValue}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Media_Audio_DirectSound == "on"]
 import windows.Win32.Media.Audio.DirectSound as Win32_Media_Audio_DirectSound
 import windows.Win32.Media._impl_l0 as Win32_Media__impl_l0
-@When[Windows_Win32_System_IO == "on"]
 import windows.Win32.System.IO as Win32_System_IO
 import windows.Win32._impl_l0 as Win32__impl_l0
 

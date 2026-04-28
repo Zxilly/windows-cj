@@ -4,7 +4,6 @@ package windows_sys.Media.Miracast
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_Graphics == "on"]
 import windows_sys.Graphics as Graphics
 import windows_sys.Media._impl_l0 as Media__impl_l0
 import windows_sys._impl_l1 as _impl_l1
@@ -1522,7 +1521,7 @@ public class IMiracastReceiverKeyboardDevice <: InterfaceWrapperBase & ComInterf
 public struct IMiracastReceiverMediaSourceCreatedEventArgsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Connection: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Media_Core == "on" && Windows_Media_Core == "on" && Windows_Media_Playback == "on"]
     public var MediaSource: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CursorImageChannelSettings: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetDeferral: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -1575,7 +1574,7 @@ public class IMiracastReceiverMediaSourceCreatedEventArgs <: InterfaceWrapperBas
         return __vt.Connection(__liveRaw, result__)
     }
 
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Media_Core == "on" && Windows_Media_Core == "on" && Windows_Media_Playback == "on"]
     public unsafe func MediaSource(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1735,6 +1734,7 @@ public struct IMiracastReceiverStatusVtbl {
     public var WiFiStatus: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var IsConnectionTakeoverSupported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var MaxSimultaneousConnections: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var KnownTransmitters: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1803,6 +1803,7 @@ public class IMiracastReceiverStatus <: InterfaceWrapperBase & ComInterface {
         return __vt.MaxSimultaneousConnections(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func KnownTransmitters(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1818,6 +1819,7 @@ public struct IMiracastTransmitterVtbl {
     public var SetName: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var AuthorizationStatus: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetAuthorizationStatus: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetConnections: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var MacAddress: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var LastConnectionTime: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.DateTime>) -> Int32> = { _, _ => 0 }
@@ -1888,6 +1890,7 @@ public class IMiracastTransmitter <: InterfaceWrapperBase & ComInterface {
         return __vt.SetAuthorizationStatus(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetConnections(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

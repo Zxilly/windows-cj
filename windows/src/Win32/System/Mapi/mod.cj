@@ -6,13 +6,17 @@ package windows.Win32.System.Mapi
 import std.collection.*
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 
-@When[MAPI32 == "on"]
+@When[Windows_Win32_System_Mapi == "on" && MAPI32 == "on" && Windows_Win32_System_Mapi_MAPIFreeBuffer == "on"]
 foreign {
     func MAPIFreeBuffer(pv: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_Mapi == "on" && MAPI32 == "on" && Windows_Win32_System_Mapi_MAPIFreeBuffer == "on"]
+public unsafe func Windows_MAPIFreeBuffer(pv: CPointer<Unit>): UInt32 {
+    return MAPIFreeBuffer(pv)
 }
 
 @When[Windows_Win32_System_Mapi == "on"]

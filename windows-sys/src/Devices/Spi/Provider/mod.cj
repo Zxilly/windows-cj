@@ -382,6 +382,7 @@ public class ISpiDeviceProvider <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ISpiProviderVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetControllersAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -426,6 +427,7 @@ public class ISpiProvider <: InterfaceWrapperBase & ComInterface {
         readVtbl<ISpiProviderVtbl>(ISpiProviderVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetControllersAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

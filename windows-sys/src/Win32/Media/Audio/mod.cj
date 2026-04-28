@@ -11,4 +11,319 @@ public import windows_sys.Win32.Media._impl_l0.ACMSTREAMHEADER
 public import windows_sys.Win32.Media._impl_l0.{LPMIDICALLBACK, LPWAVECALLBACK}
 @When[Windows_Win32_Media_Audio == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on")]
 public import windows_sys.Win32.Media._impl_l0.{SpatialAudioObjectRenderStreamForMetadataActivationParams, SpatialAudioObjectRenderStreamForMetadataActivationParams2}
-
+@When[Windows_Win32_Media_Audio == "on" && MMDEVAPI == "on" && Windows_Win32_Media_Audio_ActivateAudioInterfaceAsync == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_ActivateAudioInterfaceAsync
+@When[Windows_Win32_Media_Audio == "on" && OLE32 == "on" && Windows_Win32_Media_Audio_CoRegisterMessageFilter == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_CoRegisterMessageFilter
+@When[Windows_Win32_Media_Audio == "on" && WINDOWS_MEDIA_MEDIACONTROL == "on" && Windows_Win32_Media_Audio_CreateCaptureAudioStateMonitor == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_CreateCaptureAudioStateMonitor
+@When[Windows_Win32_Media_Audio == "on" && WINDOWS_MEDIA_MEDIACONTROL == "on" && Windows_Win32_Media_Audio_CreateCaptureAudioStateMonitorForCategory == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_CreateCaptureAudioStateMonitorForCategory
+@When[Windows_Win32_Media_Audio == "on" && WINDOWS_MEDIA_MEDIACONTROL == "on" && Windows_Win32_Media_Audio_CreateCaptureAudioStateMonitorForCategoryAndDeviceId == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_CreateCaptureAudioStateMonitorForCategoryAndDeviceId
+@When[Windows_Win32_Media_Audio == "on" && WINDOWS_MEDIA_MEDIACONTROL == "on" && Windows_Win32_Media_Audio_CreateCaptureAudioStateMonitorForCategoryAndDeviceRole == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_CreateCaptureAudioStateMonitorForCategoryAndDeviceRole
+@When[Windows_Win32_Media_Audio == "on" && WINDOWS_MEDIA_MEDIACONTROL == "on" && Windows_Win32_Media_Audio_CreateRenderAudioStateMonitor == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_CreateRenderAudioStateMonitor
+@When[Windows_Win32_Media_Audio == "on" && WINDOWS_MEDIA_MEDIACONTROL == "on" && Windows_Win32_Media_Audio_CreateRenderAudioStateMonitorForCategory == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_CreateRenderAudioStateMonitorForCategory
+@When[Windows_Win32_Media_Audio == "on" && WINDOWS_MEDIA_MEDIACONTROL == "on" && Windows_Win32_Media_Audio_CreateRenderAudioStateMonitorForCategoryAndDeviceId == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_CreateRenderAudioStateMonitorForCategoryAndDeviceId
+@When[Windows_Win32_Media_Audio == "on" && WINDOWS_MEDIA_MEDIACONTROL == "on" && Windows_Win32_Media_Audio_CreateRenderAudioStateMonitorForCategoryAndDeviceRole == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_CreateRenderAudioStateMonitorForCategoryAndDeviceRole
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_PlaySoundA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_PlaySoundA
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_PlaySoundW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_PlaySoundW
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmDriverAddA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmDriverAddA
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmDriverAddW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmDriverAddW
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmDriverClose == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmDriverClose
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmDriverDetailsA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmDriverDetailsA
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmDriverDetailsW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmDriverDetailsW
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmDriverEnum == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmDriverEnum
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmDriverID == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmDriverID
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmDriverMessage == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmDriverMessage
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmDriverOpen == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmDriverOpen
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmDriverPriority == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmDriverPriority
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmDriverRemove == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmDriverRemove
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFilterChooseA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmFilterChooseA
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFilterChooseW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmFilterChooseW
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFilterDetailsA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmFilterDetailsA
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFilterDetailsW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmFilterDetailsW
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFilterEnumA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmFilterEnumA
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFilterEnumW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmFilterEnumW
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFilterTagDetailsA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmFilterTagDetailsA
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFilterTagDetailsW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmFilterTagDetailsW
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFilterTagEnumA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmFilterTagEnumA
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFilterTagEnumW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmFilterTagEnumW
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFormatChooseA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmFormatChooseA
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFormatChooseW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmFormatChooseW
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFormatDetailsA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmFormatDetailsA
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFormatDetailsW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmFormatDetailsW
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFormatEnumA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmFormatEnumA
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFormatEnumW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmFormatEnumW
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFormatSuggest == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmFormatSuggest
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFormatTagDetailsA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmFormatTagDetailsA
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFormatTagDetailsW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmFormatTagDetailsW
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFormatTagEnumA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmFormatTagEnumA
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmFormatTagEnumW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmFormatTagEnumW
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmGetVersion == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmGetVersion
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmMetrics == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmMetrics
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmStreamClose == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmStreamClose
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmStreamConvert == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmStreamConvert
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmStreamMessage == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmStreamMessage
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmStreamOpen == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmStreamOpen
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmStreamPrepareHeader == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmStreamPrepareHeader
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmStreamReset == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmStreamReset
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmStreamSize == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmStreamSize
+@When[Windows_Win32_Media_Audio == "on" && MSACM32 == "on" && Windows_Win32_Media_Audio_acmStreamUnprepareHeader == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32.Media._impl_l0.Windows_acmStreamUnprepareHeader
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_auxGetDevCapsA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_auxGetDevCapsA
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_auxGetDevCapsW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_auxGetDevCapsW
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_auxGetNumDevs == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_auxGetNumDevs
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_auxGetVolume == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_auxGetVolume
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_auxOutMessage == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_auxOutMessage
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_auxSetVolume == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_auxSetVolume
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiConnect == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiConnect
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiDisconnect == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiDisconnect
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInAddBuffer == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiInAddBuffer
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInClose == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiInClose
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInGetDevCapsA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiInGetDevCapsA
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInGetDevCapsW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiInGetDevCapsW
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInGetErrorTextA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiInGetErrorTextA
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInGetErrorTextW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiInGetErrorTextW
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInGetID == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiInGetID
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInGetNumDevs == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiInGetNumDevs
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInMessage == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiInMessage
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInOpen == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiInOpen
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInPrepareHeader == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiInPrepareHeader
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInReset == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiInReset
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInStart == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiInStart
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInStop == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiInStop
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiInUnprepareHeader == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiInUnprepareHeader
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutCacheDrumPatches == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiOutCacheDrumPatches
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutCachePatches == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiOutCachePatches
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutClose == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiOutClose
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutGetDevCapsA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiOutGetDevCapsA
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutGetDevCapsW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiOutGetDevCapsW
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutGetErrorTextA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiOutGetErrorTextA
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutGetErrorTextW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiOutGetErrorTextW
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutGetID == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiOutGetID
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutGetNumDevs == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiOutGetNumDevs
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutGetVolume == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiOutGetVolume
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutLongMsg == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiOutLongMsg
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutMessage == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiOutMessage
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutOpen == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiOutOpen
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutPrepareHeader == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiOutPrepareHeader
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutReset == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiOutReset
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutSetVolume == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiOutSetVolume
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutShortMsg == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiOutShortMsg
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiOutUnprepareHeader == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiOutUnprepareHeader
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiStreamClose == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiStreamClose
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiStreamOpen == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiStreamOpen
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiStreamOut == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiStreamOut
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiStreamPause == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiStreamPause
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiStreamPosition == "on" && Windows_Win32_Media == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiStreamPosition
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiStreamProperty == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiStreamProperty
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiStreamRestart == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiStreamRestart
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_midiStreamStop == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_midiStreamStop
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerClose == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mixerClose
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerGetControlDetailsA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mixerGetControlDetailsA
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerGetControlDetailsW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mixerGetControlDetailsW
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerGetDevCapsA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mixerGetDevCapsA
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerGetDevCapsW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mixerGetDevCapsW
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerGetID == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mixerGetID
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerGetLineControlsA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mixerGetLineControlsA
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerGetLineControlsW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mixerGetLineControlsW
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerGetLineInfoA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mixerGetLineInfoA
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerGetLineInfoW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mixerGetLineInfoW
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerGetNumDevs == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mixerGetNumDevs
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerMessage == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mixerMessage
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerOpen == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mixerOpen
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_mixerSetControlDetails == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mixerSetControlDetails
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_sndPlaySoundA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_sndPlaySoundA
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_sndPlaySoundW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_sndPlaySoundW
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInAddBuffer == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveInAddBuffer
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInClose == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveInClose
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInGetDevCapsA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveInGetDevCapsA
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInGetDevCapsW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveInGetDevCapsW
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInGetErrorTextA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveInGetErrorTextA
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInGetErrorTextW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveInGetErrorTextW
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInGetID == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveInGetID
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInGetNumDevs == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveInGetNumDevs
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInGetPosition == "on" && Windows_Win32_Media == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveInGetPosition
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInMessage == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveInMessage
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInOpen == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveInOpen
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInPrepareHeader == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveInPrepareHeader
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInReset == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveInReset
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInStart == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveInStart
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInStop == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveInStop
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveInUnprepareHeader == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveInUnprepareHeader
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutBreakLoop == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveOutBreakLoop
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutClose == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveOutClose
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutGetDevCapsA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveOutGetDevCapsA
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutGetDevCapsW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveOutGetDevCapsW
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutGetErrorTextA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveOutGetErrorTextA
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutGetErrorTextW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveOutGetErrorTextW
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutGetID == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveOutGetID
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutGetNumDevs == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveOutGetNumDevs
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutGetPitch == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveOutGetPitch
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutGetPlaybackRate == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveOutGetPlaybackRate
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutGetPosition == "on" && Windows_Win32_Media == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveOutGetPosition
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutGetVolume == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveOutGetVolume
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutMessage == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveOutMessage
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutOpen == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveOutOpen
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutPause == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveOutPause
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutPrepareHeader == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveOutPrepareHeader
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutReset == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveOutReset
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutRestart == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveOutRestart
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutSetPitch == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveOutSetPitch
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutSetPlaybackRate == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveOutSetPlaybackRate
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutSetVolume == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveOutSetVolume
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutUnprepareHeader == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveOutUnprepareHeader
+@When[Windows_Win32_Media_Audio == "on" && WINMM == "on" && Windows_Win32_Media_Audio_waveOutWrite == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_waveOutWrite

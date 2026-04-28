@@ -4,28 +4,21 @@
 package windows.Win32.Media.MediaFoundation
 
 import std.collection.*
+import windows_libloading
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_polyfill.{packedReadInt32, packedReadUInt16, packedReadUInt32, packedReadUInt64, packedReadUInt8, packedReadValue, packedWriteInt32, packedWriteUInt16, packedWriteUInt32, packedWriteUInt64, packedWriteUInt8, packedWriteValue, unionReadFloat64, unionReadInt32, unionReadUInt32, unionReadUInt64, unionWriteFloat64, unionWriteInt32, unionWriteUInt32, unionWriteUInt64}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Devices_Properties == "on"]
 import windows.Win32.Devices.Properties as Win32_Devices_Properties
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Direct3D12 == "on"]
 import windows.Win32.Graphics.Direct3D12 as Win32_Graphics_Direct3D12
-@When[Windows_Win32_Graphics_Direct3D9 == "on"]
 import windows.Win32.Graphics.Direct3D9 as Win32_Graphics_Direct3D9
-@When[Windows_Win32_Graphics_Dxgi_Common == "on"]
 import windows.Win32.Graphics.Dxgi.Common as Win32_Graphics_Dxgi_Common
-@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-@When[Windows_Win32_Media_DxMediaObjects == "on"]
 import windows.Win32.Media.DxMediaObjects as Win32_Media_DxMediaObjects
 import windows.Win32.Media._impl_l0 as Win32_Media__impl_l0
-@When[Windows_Win32_System_WinRT == "on"]
 import windows.Win32.System.WinRT as Win32_System_WinRT
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
@@ -93568,242 +93561,2079 @@ public class IMFCaptureEngine <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[EVR == "on"]
-foreign {
-    func MFCreateVideoSampleAllocator(riid: CPointer<GUID>, ppSampleAllocator: CPointer<CPointer<Unit>>): Int32
-    func MFGetPlaneSize(format: UInt32, dwWidth: UInt32, dwHeight: UInt32, pdwPlaneSize: CPointer<UInt32>): Int32
-    func MFIsFormatYUV(Format: UInt32): Int32
-}
-
-@When[EVR == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_Media_MediaFoundation == "on" && EVR == "on" && Windows_Win32_Media_MediaFoundation_MFCreateVideoMixer == "on" && Windows_Win32_System_Com == "on"]
 foreign {
     // param-hint: pOwner optional
     func MFCreateVideoMixer(pOwner: CPointer<Unit>, riidDevice: CPointer<GUID>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && EVR == "on" && Windows_Win32_Media_MediaFoundation_MFCreateVideoMixer == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFCreateVideoMixer(pOwner: CPointer<Unit>, riidDevice: CPointer<GUID>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateVideoMixer(pOwner, riidDevice, riid, ppv)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && EVR == "on" && Windows_Win32_Media_MediaFoundation_MFCreateVideoMixerAndPresenter == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pMixerOwner optional
     // param-hint: pPresenterOwner optional
     func MFCreateVideoMixerAndPresenter(pMixerOwner: CPointer<Unit>, pPresenterOwner: CPointer<Unit>, riidMixer: CPointer<GUID>, ppvVideoMixer: CPointer<CPointer<Unit>>, riidPresenter: CPointer<GUID>, ppvVideoPresenter: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && EVR == "on" && Windows_Win32_Media_MediaFoundation_MFCreateVideoMixerAndPresenter == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFCreateVideoMixerAndPresenter(pMixerOwner: CPointer<Unit>, pPresenterOwner: CPointer<Unit>, riidMixer: CPointer<GUID>, ppvVideoMixer: CPointer<CPointer<Unit>>, riidPresenter: CPointer<GUID>, ppvVideoPresenter: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateVideoMixerAndPresenter(pMixerOwner, pPresenterOwner, riidMixer, ppvVideoMixer, riidPresenter, ppvVideoPresenter)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && EVR == "on" && Windows_Win32_Media_MediaFoundation_MFCreateVideoPresenter == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pOwner optional
     func MFCreateVideoPresenter(pOwner: CPointer<Unit>, riidDevice: CPointer<GUID>, riid: CPointer<GUID>, ppVideoPresenter: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && EVR == "on" && Windows_Win32_Media_MediaFoundation_MFCreateVideoPresenter == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFCreateVideoPresenter(pOwner: CPointer<Unit>, riidDevice: CPointer<GUID>, riid: CPointer<GUID>, ppVideoPresenter: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateVideoPresenter(pOwner, riidDevice, riid, ppVideoPresenter)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && EVR == "on" && Windows_Win32_Media_MediaFoundation_MFCreateVideoSampleAllocator == "on"]
+foreign {
+    func MFCreateVideoSampleAllocator(riid: CPointer<GUID>, ppSampleAllocator: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && EVR == "on" && Windows_Win32_Media_MediaFoundation_MFCreateVideoSampleAllocator == "on"]
+public unsafe func Windows_MFCreateVideoSampleAllocator(riid: CPointer<GUID>, ppSampleAllocator: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateVideoSampleAllocator(riid, ppSampleAllocator)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && EVR == "on" && Windows_Win32_Media_MediaFoundation_MFCreateVideoSampleFromSurface == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func MFCreateVideoSampleFromSurface(pUnkSurface: CPointer<Unit>, ppSample: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[MF == "on"]
+@When[Windows_Win32_Media_MediaFoundation == "on" && EVR == "on" && Windows_Win32_Media_MediaFoundation_MFCreateVideoSampleFromSurface == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFCreateVideoSampleFromSurface(pUnkSurface: CPointer<Unit>, ppSample: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateVideoSampleFromSurface(pUnkSurface, ppSample)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && EVR == "on" && Windows_Win32_Media_MediaFoundation_MFGetPlaneSize == "on"]
+foreign {
+    func MFGetPlaneSize(format: UInt32, dwWidth: UInt32, dwHeight: UInt32, pdwPlaneSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && EVR == "on" && Windows_Win32_Media_MediaFoundation_MFGetPlaneSize == "on"]
+public unsafe func Windows_MFGetPlaneSize(format: UInt32, dwWidth: UInt32, dwHeight: UInt32, pdwPlaneSize: CPointer<UInt32>): Int32 {
+    return MFGetPlaneSize(format, dwWidth, dwHeight, pdwPlaneSize)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && EVR == "on" && Windows_Win32_Media_MediaFoundation_MFIsFormatYUV == "on"]
+foreign {
+    func MFIsFormatYUV(Format: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && EVR == "on" && Windows_Win32_Media_MediaFoundation_MFIsFormatYUV == "on"]
+public unsafe func Windows_MFIsFormatYUV(Format: UInt32): Int32 {
+    return MFIsFormatYUV(Format)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_CreateNamedPropertyStore == "on" && Windows_Win32_UI_Shell_PropertiesSystem == "on"]
+foreign {
+    func CreateNamedPropertyStore(ppStore: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_CreateNamedPropertyStore == "on" && Windows_Win32_UI_Shell_PropertiesSystem == "on"]
+public unsafe func Windows_CreateNamedPropertyStore(ppStore: CPointer<CPointer<Unit>>): Int32 {
+    return CreateNamedPropertyStore(ppStore)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreate3GPMediaSink == "on"]
 foreign {
     // param-hint: pVideoMediaType optional
     // param-hint: pAudioMediaType optional
     func MFCreate3GPMediaSink(pIByteStream: CPointer<Unit>, pVideoMediaType: CPointer<Unit>, pAudioMediaType: CPointer<Unit>, ppIMediaSink: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreate3GPMediaSink == "on"]
+public unsafe func Windows_MFCreate3GPMediaSink(pIByteStream: CPointer<Unit>, pVideoMediaType: CPointer<Unit>, pAudioMediaType: CPointer<Unit>, ppIMediaSink: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreate3GPMediaSink(pIByteStream, pVideoMediaType, pAudioMediaType, ppIMediaSink)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateAC3MediaSink == "on"]
+foreign {
     func MFCreateAC3MediaSink(pTargetByteStream: CPointer<Unit>, pAudioMediaType: CPointer<Unit>, ppMediaSink: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateAC3MediaSink == "on"]
+public unsafe func Windows_MFCreateAC3MediaSink(pTargetByteStream: CPointer<Unit>, pAudioMediaType: CPointer<Unit>, ppMediaSink: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateAC3MediaSink(pTargetByteStream, pAudioMediaType, ppMediaSink)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateADTSMediaSink == "on"]
+foreign {
     func MFCreateADTSMediaSink(pTargetByteStream: CPointer<Unit>, pAudioMediaType: CPointer<Unit>, ppMediaSink: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateADTSMediaSink == "on"]
+public unsafe func Windows_MFCreateADTSMediaSink(pTargetByteStream: CPointer<Unit>, pAudioMediaType: CPointer<Unit>, ppMediaSink: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateADTSMediaSink(pTargetByteStream, pAudioMediaType, ppMediaSink)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateASFContentInfo == "on"]
+foreign {
     func MFCreateASFContentInfo(ppIContentInfo: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateASFContentInfo == "on"]
+public unsafe func Windows_MFCreateASFContentInfo(ppIContentInfo: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateASFContentInfo(ppIContentInfo)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateASFIndexer == "on"]
+foreign {
     func MFCreateASFIndexer(ppIIndexer: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateASFIndexer == "on"]
+public unsafe func Windows_MFCreateASFIndexer(ppIIndexer: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateASFIndexer(ppIIndexer)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateASFIndexerByteStream == "on"]
+foreign {
     func MFCreateASFIndexerByteStream(pIContentByteStream: CPointer<Unit>, cbIndexStartOffset: UInt64, pIIndexByteStream: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateASFIndexerByteStream == "on"]
+public unsafe func Windows_MFCreateASFIndexerByteStream(pIContentByteStream: CPointer<Unit>, cbIndexStartOffset: UInt64, pIIndexByteStream: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateASFIndexerByteStream(pIContentByteStream, cbIndexStartOffset, pIIndexByteStream)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateASFMediaSink == "on"]
+foreign {
     func MFCreateASFMediaSink(pIByteStream: CPointer<Unit>, ppIMediaSink: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateASFMediaSink == "on"]
+public unsafe func Windows_MFCreateASFMediaSink(pIByteStream: CPointer<Unit>, ppIMediaSink: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateASFMediaSink(pIByteStream, ppIMediaSink)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateASFMediaSinkActivate == "on"]
+foreign {
     func MFCreateASFMediaSinkActivate(pwszFileName: CPointer<UInt16>, pContentInfo: CPointer<Unit>, ppIActivate: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateASFMediaSinkActivate == "on"]
+public unsafe func Windows_MFCreateASFMediaSinkActivate(pwszFileName: CPointer<UInt16>, pContentInfo: CPointer<Unit>, ppIActivate: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateASFMediaSinkActivate(pwszFileName, pContentInfo, ppIActivate)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateASFMultiplexer == "on"]
+foreign {
     func MFCreateASFMultiplexer(ppIMultiplexer: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateASFMultiplexer == "on"]
+public unsafe func Windows_MFCreateASFMultiplexer(ppIMultiplexer: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateASFMultiplexer(ppIMultiplexer)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateASFProfile == "on"]
+foreign {
     func MFCreateASFProfile(ppIProfile: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateASFProfile == "on"]
+public unsafe func Windows_MFCreateASFProfile(ppIProfile: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateASFProfile(ppIProfile)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateASFProfileFromPresentationDescriptor == "on"]
+foreign {
     func MFCreateASFProfileFromPresentationDescriptor(pIPD: CPointer<Unit>, ppIProfile: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateASFProfileFromPresentationDescriptor == "on"]
+public unsafe func Windows_MFCreateASFProfileFromPresentationDescriptor(pIPD: CPointer<Unit>, ppIProfile: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateASFProfileFromPresentationDescriptor(pIPD, ppIProfile)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateASFSplitter == "on"]
+foreign {
     func MFCreateASFSplitter(ppISplitter: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateASFSplitter == "on"]
+public unsafe func Windows_MFCreateASFSplitter(ppISplitter: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateASFSplitter(ppISplitter)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateASFStreamSelector == "on"]
+foreign {
     func MFCreateASFStreamSelector(pIASFProfile: CPointer<Unit>, ppSelector: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateASFStreamSelector == "on"]
+public unsafe func Windows_MFCreateASFStreamSelector(pIASFProfile: CPointer<Unit>, ppSelector: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateASFStreamSelector(pIASFProfile, ppSelector)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateASFStreamingMediaSink == "on"]
+foreign {
     func MFCreateASFStreamingMediaSink(pIByteStream: CPointer<Unit>, ppIMediaSink: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateASFStreamingMediaSink == "on"]
+public unsafe func Windows_MFCreateASFStreamingMediaSink(pIByteStream: CPointer<Unit>, ppIMediaSink: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateASFStreamingMediaSink(pIByteStream, ppIMediaSink)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateASFStreamingMediaSinkActivate == "on"]
+foreign {
     func MFCreateASFStreamingMediaSinkActivate(pByteStreamActivate: CPointer<Unit>, pContentInfo: CPointer<Unit>, ppIActivate: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateASFStreamingMediaSinkActivate == "on"]
+public unsafe func Windows_MFCreateASFStreamingMediaSinkActivate(pByteStreamActivate: CPointer<Unit>, pContentInfo: CPointer<Unit>, ppIActivate: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateASFStreamingMediaSinkActivate(pByteStreamActivate, pContentInfo, ppIActivate)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateAggregateSource == "on"]
+foreign {
     func MFCreateAggregateSource(pSourceCollection: CPointer<Unit>, ppAggSource: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateAggregateSource == "on"]
+public unsafe func Windows_MFCreateAggregateSource(pSourceCollection: CPointer<Unit>, ppAggSource: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateAggregateSource(pSourceCollection, ppAggSource)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateAudioRenderer == "on"]
+foreign {
     func MFCreateAudioRenderer(pAudioAttributes: CPointer<Unit>, ppSink: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateAudioRenderer == "on"]
+public unsafe func Windows_MFCreateAudioRenderer(pAudioAttributes: CPointer<Unit>, ppSink: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateAudioRenderer(pAudioAttributes, ppSink)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateAudioRendererActivate == "on"]
+foreign {
     func MFCreateAudioRendererActivate(ppActivate: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateAudioRendererActivate == "on"]
+public unsafe func Windows_MFCreateAudioRendererActivate(ppActivate: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateAudioRendererActivate(ppActivate)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateCredentialCache == "on"]
+foreign {
     func MFCreateCredentialCache(ppCache: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateCredentialCache == "on"]
+public unsafe func Windows_MFCreateCredentialCache(ppCache: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateCredentialCache(ppCache)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateDeviceSource == "on"]
+foreign {
     func MFCreateDeviceSource(pAttributes: CPointer<Unit>, ppSource: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateDeviceSource == "on"]
+public unsafe func Windows_MFCreateDeviceSource(pAttributes: CPointer<Unit>, ppSource: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateDeviceSource(pAttributes, ppSource)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateDeviceSourceActivate == "on"]
+foreign {
     func MFCreateDeviceSourceActivate(pAttributes: CPointer<Unit>, ppActivate: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateDeviceSourceActivate == "on"]
+public unsafe func Windows_MFCreateDeviceSourceActivate(pAttributes: CPointer<Unit>, ppActivate: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateDeviceSourceActivate(pAttributes, ppActivate)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateEncryptedMediaExtensionsStoreActivate == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func MFCreateEncryptedMediaExtensionsStoreActivate(pmpHost: CPointer<Unit>, objectStream: CPointer<Unit>, classId: CPointer<UInt16>, activate: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateEncryptedMediaExtensionsStoreActivate == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFCreateEncryptedMediaExtensionsStoreActivate(pmpHost: CPointer<Unit>, objectStream: CPointer<Unit>, classId: CPointer<UInt16>, activate: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateEncryptedMediaExtensionsStoreActivate(pmpHost, objectStream, classId, activate)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateFMPEG4MediaSink == "on"]
+foreign {
     // param-hint: pVideoMediaType optional
     // param-hint: pAudioMediaType optional
     func MFCreateFMPEG4MediaSink(pIByteStream: CPointer<Unit>, pVideoMediaType: CPointer<Unit>, pAudioMediaType: CPointer<Unit>, ppIMediaSink: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateFMPEG4MediaSink == "on"]
+public unsafe func Windows_MFCreateFMPEG4MediaSink(pIByteStream: CPointer<Unit>, pVideoMediaType: CPointer<Unit>, pAudioMediaType: CPointer<Unit>, ppIMediaSink: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateFMPEG4MediaSink(pIByteStream, pVideoMediaType, pAudioMediaType, ppIMediaSink)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMP3MediaSink == "on"]
+foreign {
     func MFCreateMP3MediaSink(pTargetByteStream: CPointer<Unit>, ppMediaSink: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMP3MediaSink == "on"]
+public unsafe func Windows_MFCreateMP3MediaSink(pTargetByteStream: CPointer<Unit>, ppMediaSink: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateMP3MediaSink(pTargetByteStream, ppMediaSink)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMPEG4MediaSink == "on"]
+foreign {
     // param-hint: pVideoMediaType optional
     // param-hint: pAudioMediaType optional
     func MFCreateMPEG4MediaSink(pIByteStream: CPointer<Unit>, pVideoMediaType: CPointer<Unit>, pAudioMediaType: CPointer<Unit>, ppIMediaSink: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMPEG4MediaSink == "on"]
+public unsafe func Windows_MFCreateMPEG4MediaSink(pIByteStream: CPointer<Unit>, pVideoMediaType: CPointer<Unit>, pAudioMediaType: CPointer<Unit>, ppIMediaSink: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateMPEG4MediaSink(pIByteStream, pVideoMediaType, pAudioMediaType, ppIMediaSink)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMediaSession == "on"]
+foreign {
     func MFCreateMediaSession(pConfiguration: CPointer<Unit>, ppMediaSession: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMediaSession == "on"]
+public unsafe func Windows_MFCreateMediaSession(pConfiguration: CPointer<Unit>, ppMediaSession: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateMediaSession(pConfiguration, ppMediaSession)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMuxSink == "on"]
+foreign {
     // param-hint: pOutputAttributes optional
     // param-hint: pOutputByteStream optional
     func MFCreateMuxSink(guidOutputSubType: GUID, pOutputAttributes: CPointer<Unit>, pOutputByteStream: CPointer<Unit>, ppMuxSink: CPointer<CPointer<Unit>>): Int32
-    func MFCreateNetSchemePlugin(riid: CPointer<GUID>, ppvHandler: CPointer<CPointer<Unit>>): Int32
-    // param-hint: ppEnablerActivate optional
-    func MFCreatePMPMediaSession(dwCreationFlags: UInt32, pConfiguration: CPointer<Unit>, ppMediaSession: CPointer<CPointer<Unit>>, ppEnablerActivate: CPointer<CPointer<Unit>>): Int32
-    func MFCreatePMPServer(dwCreationFlags: UInt32, ppPMPServer: CPointer<CPointer<Unit>>): Int32
-    func MFCreatePresentationClock(ppPresentationClock: CPointer<CPointer<Unit>>): Int32
-    func MFCreatePresentationDescriptorFromASFProfile(pIProfile: CPointer<Unit>, ppIPD: CPointer<CPointer<Unit>>): Int32
-    func MFCreateProtectedEnvironmentAccess(ppAccess: CPointer<CPointer<Unit>>): Int32
-    func MFCreateRemoteDesktopPlugin(ppPlugin: CPointer<CPointer<Unit>>): Int32
-    func MFCreateSampleCopierMFT(ppCopierMFT: CPointer<CPointer<Unit>>): Int32
-    func MFCreateSampleGrabberSinkActivate(pIMFMediaType: CPointer<Unit>, pIMFSampleGrabberSinkCallback: CPointer<Unit>, ppIActivate: CPointer<CPointer<Unit>>): Int32
-    func MFCreateSimpleTypeHandler(ppHandler: CPointer<CPointer<Unit>>): Int32
-    func MFCreateStandardQualityManager(ppQualityManager: CPointer<CPointer<Unit>>): Int32
-    func MFCreateTopoLoader(ppObj: CPointer<CPointer<Unit>>): Int32
-    func MFCreateTopology(ppTopo: CPointer<CPointer<Unit>>): Int32
-    func MFCreateTopologyNode(NodeType: MF_TOPOLOGY_TYPEAbi, ppNode: CPointer<CPointer<Unit>>): Int32
-    func MFCreateTranscodeProfile(ppTranscodeProfile: CPointer<CPointer<Unit>>): Int32
-    func MFCreateTranscodeSinkActivate(ppActivate: CPointer<CPointer<Unit>>): Int32
-    func MFCreateTranscodeTopology(pSrc: CPointer<Unit>, pwszOutputFilePath: CPointer<UInt16>, pProfile: CPointer<Unit>, ppTranscodeTopo: CPointer<CPointer<Unit>>): Int32
-    func MFCreateTranscodeTopologyFromByteStream(pSrc: CPointer<Unit>, pOutputStream: CPointer<Unit>, pProfile: CPointer<Unit>, ppTranscodeTopo: CPointer<CPointer<Unit>>): Int32
-    func MFCreateVideoRenderer(riidRenderer: CPointer<GUID>, ppVideoRenderer: CPointer<CPointer<Unit>>): Int32
-    func MFCreateVideoRendererActivate(hwndVideo: CPointer<Unit>, ppActivate: CPointer<CPointer<Unit>>): Int32
-    func MFEnumDeviceSources(pAttributes: CPointer<Unit>, pppSourceActivate: CPointer<CPointer<CPointer<Unit>>>, pcSourceActivate: CPointer<UInt32>): Int32
-    // param-hint: verifier bytes=param[1]
-    func MFGetLocalId(verifier: CPointer<UInt8>, size: UInt32, id: CPointer<CPointer<UInt16>>): Int32
-    func MFGetSystemId(ppId: CPointer<CPointer<Unit>>): Int32
-    func MFGetTopoNodeCurrentType(pNode: CPointer<Unit>, dwStreamIndex: UInt32, fOutput: Int32, ppType: CPointer<CPointer<Unit>>): Int32
-    func MFLoadSignedLibrary(pszName: CPointer<UInt16>, ppLib: CPointer<CPointer<Unit>>): Int32
-    func MFRequireProtectedEnvironment(pPresentationDescriptor: CPointer<Unit>): Int32
-    // param-hint: pCodecConfig optional
-    func MFTranscodeGetAudioOutputAvailableTypes(guidSubType: CPointer<GUID>, dwMFTFlags: UInt32, pCodecConfig: CPointer<Unit>, ppAvailableTypes: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[MF == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on")]
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMuxSink == "on"]
+public unsafe func Windows_MFCreateMuxSink(guidOutputSubType: GUID, pOutputAttributes: CPointer<Unit>, pOutputByteStream: CPointer<Unit>, ppMuxSink: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateMuxSink(guidOutputSubType, pOutputAttributes, pOutputByteStream, ppMuxSink)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateNetSchemePlugin == "on"]
+foreign {
+    func MFCreateNetSchemePlugin(riid: CPointer<GUID>, ppvHandler: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateNetSchemePlugin == "on"]
+public unsafe func Windows_MFCreateNetSchemePlugin(riid: CPointer<GUID>, ppvHandler: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateNetSchemePlugin(riid, ppvHandler)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreatePMPMediaSession == "on"]
+foreign {
+    // param-hint: ppEnablerActivate optional
+    func MFCreatePMPMediaSession(dwCreationFlags: UInt32, pConfiguration: CPointer<Unit>, ppMediaSession: CPointer<CPointer<Unit>>, ppEnablerActivate: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreatePMPMediaSession == "on"]
+public unsafe func Windows_MFCreatePMPMediaSession(dwCreationFlags: UInt32, pConfiguration: CPointer<Unit>, ppMediaSession: CPointer<CPointer<Unit>>, ppEnablerActivate: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreatePMPMediaSession(dwCreationFlags, pConfiguration, ppMediaSession, ppEnablerActivate)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreatePMPServer == "on"]
+foreign {
+    func MFCreatePMPServer(dwCreationFlags: UInt32, ppPMPServer: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreatePMPServer == "on"]
+public unsafe func Windows_MFCreatePMPServer(dwCreationFlags: UInt32, ppPMPServer: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreatePMPServer(dwCreationFlags, ppPMPServer)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreatePresentationClock == "on"]
+foreign {
+    func MFCreatePresentationClock(ppPresentationClock: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreatePresentationClock == "on"]
+public unsafe func Windows_MFCreatePresentationClock(ppPresentationClock: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreatePresentationClock(ppPresentationClock)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreatePresentationDescriptorFromASFProfile == "on"]
+foreign {
+    func MFCreatePresentationDescriptorFromASFProfile(pIProfile: CPointer<Unit>, ppIPD: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreatePresentationDescriptorFromASFProfile == "on"]
+public unsafe func Windows_MFCreatePresentationDescriptorFromASFProfile(pIProfile: CPointer<Unit>, ppIPD: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreatePresentationDescriptorFromASFProfile(pIProfile, ppIPD)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateProtectedEnvironmentAccess == "on"]
+foreign {
+    func MFCreateProtectedEnvironmentAccess(ppAccess: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateProtectedEnvironmentAccess == "on"]
+public unsafe func Windows_MFCreateProtectedEnvironmentAccess(ppAccess: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateProtectedEnvironmentAccess(ppAccess)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateProxyLocator == "on" && Windows_Win32_UI_Shell_PropertiesSystem == "on"]
+foreign {
+    func MFCreateProxyLocator(pszProtocol: CPointer<UInt16>, pProxyConfig: CPointer<Unit>, ppProxyLocator: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateProxyLocator == "on" && Windows_Win32_UI_Shell_PropertiesSystem == "on"]
+public unsafe func Windows_MFCreateProxyLocator(pszProtocol: CPointer<UInt16>, pProxyConfig: CPointer<Unit>, ppProxyLocator: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateProxyLocator(pszProtocol, pProxyConfig, ppProxyLocator)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateRemoteDesktopPlugin == "on"]
+foreign {
+    func MFCreateRemoteDesktopPlugin(ppPlugin: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateRemoteDesktopPlugin == "on"]
+public unsafe func Windows_MFCreateRemoteDesktopPlugin(ppPlugin: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateRemoteDesktopPlugin(ppPlugin)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSampleCopierMFT == "on"]
+foreign {
+    func MFCreateSampleCopierMFT(ppCopierMFT: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSampleCopierMFT == "on"]
+public unsafe func Windows_MFCreateSampleCopierMFT(ppCopierMFT: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateSampleCopierMFT(ppCopierMFT)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSampleGrabberSinkActivate == "on"]
+foreign {
+    func MFCreateSampleGrabberSinkActivate(pIMFMediaType: CPointer<Unit>, pIMFSampleGrabberSinkCallback: CPointer<Unit>, ppIActivate: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSampleGrabberSinkActivate == "on"]
+public unsafe func Windows_MFCreateSampleGrabberSinkActivate(pIMFMediaType: CPointer<Unit>, pIMFSampleGrabberSinkCallback: CPointer<Unit>, ppIActivate: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateSampleGrabberSinkActivate(pIMFMediaType, pIMFSampleGrabberSinkCallback, ppIActivate)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSequencerSegmentOffset == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
 foreign {
     func MFCreateSequencerSegmentOffset(dwId: UInt32, hnsOffset: Int64, pvarSegmentOffset: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32
 }
 
-@When[MF == "on" && Windows_Win32_System_Com == "on"]
-foreign {
-    func MFCreateEncryptedMediaExtensionsStoreActivate(pmpHost: CPointer<Unit>, objectStream: CPointer<Unit>, classId: CPointer<UInt16>, activate: CPointer<CPointer<Unit>>): Int32
-    func MFCreateSequencerSource(pReserved: CPointer<Unit>, ppSequencerSource: CPointer<CPointer<Unit>>): Int32
-    func MFGetService(punkObject: CPointer<Unit>, guidService: CPointer<GUID>, riid: CPointer<GUID>, ppvObject: CPointer<CPointer<Unit>>): Int32
-    func MFShutdownObject(pUnk: CPointer<Unit>): Int32
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSequencerSegmentOffset == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_MFCreateSequencerSegmentOffset(dwId: UInt32, hnsOffset: Int64, pvarSegmentOffset: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    return MFCreateSequencerSegmentOffset(dwId, hnsOffset, pvarSegmentOffset)
 }
 
-@When[MF == "on" && Windows_Win32_UI_Shell_PropertiesSystem == "on"]
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSequencerSource == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func CreateNamedPropertyStore(ppStore: CPointer<CPointer<Unit>>): Int32
-    func MFCreateProxyLocator(pszProtocol: CPointer<UInt16>, pProxyConfig: CPointer<Unit>, ppProxyLocator: CPointer<CPointer<Unit>>): Int32
+    func MFCreateSequencerSource(pReserved: CPointer<Unit>, ppSequencerSource: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSequencerSource == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFCreateSequencerSource(pReserved: CPointer<Unit>, ppSequencerSource: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateSequencerSource(pReserved, ppSequencerSource)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSimpleTypeHandler == "on"]
+foreign {
+    func MFCreateSimpleTypeHandler(ppHandler: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSimpleTypeHandler == "on"]
+public unsafe func Windows_MFCreateSimpleTypeHandler(ppHandler: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateSimpleTypeHandler(ppHandler)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateStandardQualityManager == "on"]
+foreign {
+    func MFCreateStandardQualityManager(ppQualityManager: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateStandardQualityManager == "on"]
+public unsafe func Windows_MFCreateStandardQualityManager(ppQualityManager: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateStandardQualityManager(ppQualityManager)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateTopoLoader == "on"]
+foreign {
+    func MFCreateTopoLoader(ppObj: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateTopoLoader == "on"]
+public unsafe func Windows_MFCreateTopoLoader(ppObj: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateTopoLoader(ppObj)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateTopology == "on"]
+foreign {
+    func MFCreateTopology(ppTopo: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateTopology == "on"]
+public unsafe func Windows_MFCreateTopology(ppTopo: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateTopology(ppTopo)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateTopologyNode == "on"]
+foreign {
+    func MFCreateTopologyNode(NodeType: MF_TOPOLOGY_TYPEAbi, ppNode: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateTopologyNode == "on"]
+public unsafe func Windows_MFCreateTopologyNode(NodeType: MF_TOPOLOGY_TYPEAbi, ppNode: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateTopologyNode(NodeType, ppNode)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateTranscodeProfile == "on"]
+foreign {
+    func MFCreateTranscodeProfile(ppTranscodeProfile: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateTranscodeProfile == "on"]
+public unsafe func Windows_MFCreateTranscodeProfile(ppTranscodeProfile: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateTranscodeProfile(ppTranscodeProfile)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateTranscodeSinkActivate == "on"]
+foreign {
+    func MFCreateTranscodeSinkActivate(ppActivate: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateTranscodeSinkActivate == "on"]
+public unsafe func Windows_MFCreateTranscodeSinkActivate(ppActivate: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateTranscodeSinkActivate(ppActivate)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateTranscodeTopology == "on"]
+foreign {
+    func MFCreateTranscodeTopology(pSrc: CPointer<Unit>, pwszOutputFilePath: CPointer<UInt16>, pProfile: CPointer<Unit>, ppTranscodeTopo: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateTranscodeTopology == "on"]
+public unsafe func Windows_MFCreateTranscodeTopology(pSrc: CPointer<Unit>, pwszOutputFilePath: CPointer<UInt16>, pProfile: CPointer<Unit>, ppTranscodeTopo: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateTranscodeTopology(pSrc, pwszOutputFilePath, pProfile, ppTranscodeTopo)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateTranscodeTopologyFromByteStream == "on"]
+foreign {
+    func MFCreateTranscodeTopologyFromByteStream(pSrc: CPointer<Unit>, pOutputStream: CPointer<Unit>, pProfile: CPointer<Unit>, ppTranscodeTopo: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateTranscodeTopologyFromByteStream == "on"]
+public unsafe func Windows_MFCreateTranscodeTopologyFromByteStream(pSrc: CPointer<Unit>, pOutputStream: CPointer<Unit>, pProfile: CPointer<Unit>, ppTranscodeTopo: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateTranscodeTopologyFromByteStream(pSrc, pOutputStream, pProfile, ppTranscodeTopo)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateVideoRenderer == "on"]
+foreign {
+    func MFCreateVideoRenderer(riidRenderer: CPointer<GUID>, ppVideoRenderer: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateVideoRenderer == "on"]
+public unsafe func Windows_MFCreateVideoRenderer(riidRenderer: CPointer<GUID>, ppVideoRenderer: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateVideoRenderer(riidRenderer, ppVideoRenderer)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateVideoRendererActivate == "on"]
+foreign {
+    func MFCreateVideoRendererActivate(hwndVideo: CPointer<Unit>, ppActivate: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateVideoRendererActivate == "on"]
+public unsafe func Windows_MFCreateVideoRendererActivate(hwndVideo: CPointer<Unit>, ppActivate: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateVideoRendererActivate(hwndVideo, ppActivate)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateWMAEncoderActivate == "on" && Windows_Win32_UI_Shell_PropertiesSystem == "on"]
+foreign {
     func MFCreateWMAEncoderActivate(pMediaType: CPointer<Unit>, pEncodingConfigurationProperties: CPointer<Unit>, ppActivate: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateWMAEncoderActivate == "on" && Windows_Win32_UI_Shell_PropertiesSystem == "on"]
+public unsafe func Windows_MFCreateWMAEncoderActivate(pMediaType: CPointer<Unit>, pEncodingConfigurationProperties: CPointer<Unit>, ppActivate: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateWMAEncoderActivate(pMediaType, pEncodingConfigurationProperties, ppActivate)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateWMVEncoderActivate == "on" && Windows_Win32_UI_Shell_PropertiesSystem == "on"]
+foreign {
     func MFCreateWMVEncoderActivate(pMediaType: CPointer<Unit>, pEncodingConfigurationProperties: CPointer<Unit>, ppActivate: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[MFCORE == "on"]
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFCreateWMVEncoderActivate == "on" && Windows_Win32_UI_Shell_PropertiesSystem == "on"]
+public unsafe func Windows_MFCreateWMVEncoderActivate(pMediaType: CPointer<Unit>, pEncodingConfigurationProperties: CPointer<Unit>, ppActivate: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateWMVEncoderActivate(pMediaType, pEncodingConfigurationProperties, ppActivate)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFEnumDeviceSources == "on"]
+foreign {
+    func MFEnumDeviceSources(pAttributes: CPointer<Unit>, pppSourceActivate: CPointer<CPointer<CPointer<Unit>>>, pcSourceActivate: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFEnumDeviceSources == "on"]
+public unsafe func Windows_MFEnumDeviceSources(pAttributes: CPointer<Unit>, pppSourceActivate: CPointer<CPointer<CPointer<Unit>>>, pcSourceActivate: CPointer<UInt32>): Int32 {
+    return MFEnumDeviceSources(pAttributes, pppSourceActivate, pcSourceActivate)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFGetLocalId == "on"]
+foreign {
+    // param-hint: verifier bytes=param[1]
+    func MFGetLocalId(verifier: CPointer<UInt8>, size: UInt32, id: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFGetLocalId == "on"]
+public unsafe func Windows_MFGetLocalId(verifier: CPointer<UInt8>, size: UInt32, id: CPointer<CPointer<UInt16>>): Int32 {
+    return MFGetLocalId(verifier, size, id)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFGetService == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func MFGetService(punkObject: CPointer<Unit>, guidService: CPointer<GUID>, riid: CPointer<GUID>, ppvObject: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFGetService == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFGetService(punkObject: CPointer<Unit>, guidService: CPointer<GUID>, riid: CPointer<GUID>, ppvObject: CPointer<CPointer<Unit>>): Int32 {
+    return MFGetService(punkObject, guidService, riid, ppvObject)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFGetSystemId == "on"]
+foreign {
+    func MFGetSystemId(ppId: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFGetSystemId == "on"]
+public unsafe func Windows_MFGetSystemId(ppId: CPointer<CPointer<Unit>>): Int32 {
+    return MFGetSystemId(ppId)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFGetTopoNodeCurrentType == "on"]
+foreign {
+    func MFGetTopoNodeCurrentType(pNode: CPointer<Unit>, dwStreamIndex: UInt32, fOutput: Int32, ppType: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFGetTopoNodeCurrentType == "on"]
+public unsafe func Windows_MFGetTopoNodeCurrentType(pNode: CPointer<Unit>, dwStreamIndex: UInt32, fOutput: Int32, ppType: CPointer<CPointer<Unit>>): Int32 {
+    return MFGetTopoNodeCurrentType(pNode, dwStreamIndex, fOutput, ppType)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFLoadSignedLibrary == "on"]
+foreign {
+    func MFLoadSignedLibrary(pszName: CPointer<UInt16>, ppLib: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFLoadSignedLibrary == "on"]
+public unsafe func Windows_MFLoadSignedLibrary(pszName: CPointer<UInt16>, ppLib: CPointer<CPointer<Unit>>): Int32 {
+    return MFLoadSignedLibrary(pszName, ppLib)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFRequireProtectedEnvironment == "on"]
+foreign {
+    func MFRequireProtectedEnvironment(pPresentationDescriptor: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFRequireProtectedEnvironment == "on"]
+public unsafe func Windows_MFRequireProtectedEnvironment(pPresentationDescriptor: CPointer<Unit>): Int32 {
+    return MFRequireProtectedEnvironment(pPresentationDescriptor)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFShutdownObject == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func MFShutdownObject(pUnk: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFShutdownObject == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFShutdownObject(pUnk: CPointer<Unit>): Int32 {
+    return MFShutdownObject(pUnk)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFTranscodeGetAudioOutputAvailableTypes == "on"]
+foreign {
+    // param-hint: pCodecConfig optional
+    func MFTranscodeGetAudioOutputAvailableTypes(guidSubType: CPointer<GUID>, dwMFTFlags: UInt32, pCodecConfig: CPointer<Unit>, ppAvailableTypes: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MF == "on" && Windows_Win32_Media_MediaFoundation_MFTranscodeGetAudioOutputAvailableTypes == "on"]
+public unsafe func Windows_MFTranscodeGetAudioOutputAvailableTypes(guidSubType: CPointer<GUID>, dwMFTFlags: UInt32, pCodecConfig: CPointer<Unit>, ppAvailableTypes: CPointer<CPointer<Unit>>): Int32 {
+    return MFTranscodeGetAudioOutputAvailableTypes(guidSubType, dwMFTFlags, pCodecConfig, ppAvailableTypes)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFCORE == "on" && Windows_Win32_Media_MediaFoundation_MFCreateExtendedCameraIntrinsicModel == "on"]
 foreign {
     func MFCreateExtendedCameraIntrinsicModel(distortionModelType: MFCameraIntrinsic_DistortionModelTypeAbi, ppExtendedCameraIntrinsicModel: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFCORE == "on" && Windows_Win32_Media_MediaFoundation_MFCreateExtendedCameraIntrinsicModel == "on"]
+public unsafe func Windows_MFCreateExtendedCameraIntrinsicModel(distortionModelType: MFCameraIntrinsic_DistortionModelTypeAbi, ppExtendedCameraIntrinsicModel: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateExtendedCameraIntrinsicModel(distortionModelType, ppExtendedCameraIntrinsicModel)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFCORE == "on" && Windows_Win32_Media_MediaFoundation_MFCreateExtendedCameraIntrinsics == "on"]
+foreign {
     func MFCreateExtendedCameraIntrinsics(ppExtendedCameraIntrinsics: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[MFPLAT == "on" && Windows_Win32_System_Com == "on"]
-foreign {
-    func MFCreateDXGICrossAdapterBuffer(riid: CPointer<GUID>, punkDevice: CPointer<Unit>, pMediaType: CPointer<Unit>, uSubresource: UInt32, ppBuffer: CPointer<CPointer<Unit>>): Int32
-    func MFGetDXGIDeviceManageMode(pDeviceManager: CPointer<Unit>, mode: CPointer<MF_DXGI_DEVICE_MANAGER_MODEAbi>): Int32
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFCORE == "on" && Windows_Win32_Media_MediaFoundation_MFCreateExtendedCameraIntrinsics == "on"]
+public unsafe func Windows_MFCreateExtendedCameraIntrinsics(ppExtendedCameraIntrinsics: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateExtendedCameraIntrinsics(ppExtendedCameraIntrinsics)
 }
 
-@When[MFPLAT == "on"]
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_CreatePropertyStore == "on" && Windows_Win32_UI_Shell_PropertiesSystem == "on"]
+foreign {
+    func CreatePropertyStore(ppStore: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_CreatePropertyStore == "on" && Windows_Win32_UI_Shell_PropertiesSystem == "on"]
+public unsafe func Windows_CreatePropertyStore(ppStore: CPointer<CPointer<Unit>>): Int32 {
+    return CreatePropertyStore(ppStore)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFAddPeriodicCallback == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: pdwKey optional
+    func MFAddPeriodicCallback(Callback: MFPERIODICCALLBACK, pContext: CPointer<Unit>, pdwKey: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFAddPeriodicCallback == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFAddPeriodicCallback(Callback: MFPERIODICCALLBACK, pContext: CPointer<Unit>, pdwKey: CPointer<UInt32>): Int32 {
+    return MFAddPeriodicCallback(Callback, pContext, pdwKey)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFAllocateSerialWorkQueue == "on"]
 foreign {
     func MFAllocateSerialWorkQueue(dwWorkQueue: UInt32, pdwWorkQueue: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFAllocateSerialWorkQueue == "on"]
+public unsafe func Windows_MFAllocateSerialWorkQueue(dwWorkQueue: UInt32, pdwWorkQueue: CPointer<UInt32>): Int32 {
+    return MFAllocateSerialWorkQueue(dwWorkQueue, pdwWorkQueue)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFAllocateWorkQueue == "on"]
+foreign {
     func MFAllocateWorkQueue(pdwWorkQueue: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFAllocateWorkQueue == "on"]
+public unsafe func Windows_MFAllocateWorkQueue(pdwWorkQueue: CPointer<UInt32>): Int32 {
+    return MFAllocateWorkQueue(pdwWorkQueue)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFAllocateWorkQueueEx == "on"]
+foreign {
     func MFAllocateWorkQueueEx(WorkQueueType: MFASYNC_WORKQUEUE_TYPEAbi, pdwWorkQueue: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFAllocateWorkQueueEx == "on"]
+public unsafe func Windows_MFAllocateWorkQueueEx(WorkQueueType: MFASYNC_WORKQUEUE_TYPEAbi, pdwWorkQueue: CPointer<UInt32>): Int32 {
+    return MFAllocateWorkQueueEx(WorkQueueType, pdwWorkQueue)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFAverageTimePerFrameToFrameRate == "on"]
+foreign {
     func MFAverageTimePerFrameToFrameRate(unAverageTimePerFrame: UInt64, punNumerator: CPointer<UInt32>, punDenominator: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFAverageTimePerFrameToFrameRate == "on"]
+public unsafe func Windows_MFAverageTimePerFrameToFrameRate(unAverageTimePerFrame: UInt64, punNumerator: CPointer<UInt32>, punDenominator: CPointer<UInt32>): Int32 {
+    return MFAverageTimePerFrameToFrameRate(unAverageTimePerFrame, punNumerator, punDenominator)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFBeginCreateFile == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func MFBeginCreateFile(AccessMode: MF_FILE_ACCESSMODEAbi, OpenMode: MF_FILE_OPENMODEAbi, fFlags: MF_FILE_FLAGSAbi, pwszFilePath: CPointer<UInt16>, pCallback: CPointer<Unit>, pState: CPointer<Unit>, ppCancelCookie: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFBeginCreateFile == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFBeginCreateFile(AccessMode: MF_FILE_ACCESSMODEAbi, OpenMode: MF_FILE_OPENMODEAbi, fFlags: MF_FILE_FLAGSAbi, pwszFilePath: CPointer<UInt16>, pCallback: CPointer<Unit>, pState: CPointer<Unit>, ppCancelCookie: CPointer<CPointer<Unit>>): Int32 {
+    return MFBeginCreateFile(AccessMode, OpenMode, fFlags, pwszFilePath, pCallback, pState, ppCancelCookie)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFBeginRegisterWorkQueueWithMMCSS == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func MFBeginRegisterWorkQueueWithMMCSS(dwWorkQueueId: UInt32, wszClass: CPointer<UInt16>, dwTaskId: UInt32, pDoneCallback: CPointer<Unit>, pDoneState: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFBeginRegisterWorkQueueWithMMCSS == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFBeginRegisterWorkQueueWithMMCSS(dwWorkQueueId: UInt32, wszClass: CPointer<UInt16>, dwTaskId: UInt32, pDoneCallback: CPointer<Unit>, pDoneState: CPointer<Unit>): Int32 {
+    return MFBeginRegisterWorkQueueWithMMCSS(dwWorkQueueId, wszClass, dwTaskId, pDoneCallback, pDoneState)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFBeginRegisterWorkQueueWithMMCSSEx == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func MFBeginRegisterWorkQueueWithMMCSSEx(dwWorkQueueId: UInt32, wszClass: CPointer<UInt16>, dwTaskId: UInt32, lPriority: Int32, pDoneCallback: CPointer<Unit>, pDoneState: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFBeginRegisterWorkQueueWithMMCSSEx == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFBeginRegisterWorkQueueWithMMCSSEx(dwWorkQueueId: UInt32, wszClass: CPointer<UInt16>, dwTaskId: UInt32, lPriority: Int32, pDoneCallback: CPointer<Unit>, pDoneState: CPointer<Unit>): Int32 {
+    return MFBeginRegisterWorkQueueWithMMCSSEx(dwWorkQueueId, wszClass, dwTaskId, lPriority, pDoneCallback, pDoneState)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFBeginUnregisterWorkQueueWithMMCSS == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func MFBeginUnregisterWorkQueueWithMMCSS(dwWorkQueueId: UInt32, pDoneCallback: CPointer<Unit>, pDoneState: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFBeginUnregisterWorkQueueWithMMCSS == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFBeginUnregisterWorkQueueWithMMCSS(dwWorkQueueId: UInt32, pDoneCallback: CPointer<Unit>, pDoneState: CPointer<Unit>): Int32 {
+    return MFBeginUnregisterWorkQueueWithMMCSS(dwWorkQueueId, pDoneCallback, pDoneState)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCalculateBitmapImageSize == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    // param-hint: pBMIH bytes=param[1]
+    // param-hint: pbKnown optional
+    func MFCalculateBitmapImageSize(pBMIH: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, cbBufSize: UInt32, pcbImageSize: CPointer<UInt32>, pbKnown: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCalculateBitmapImageSize == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_MFCalculateBitmapImageSize(pBMIH: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, cbBufSize: UInt32, pcbImageSize: CPointer<UInt32>, pbKnown: CPointer<Int32>): Int32 {
+    return MFCalculateBitmapImageSize(pBMIH, cbBufSize, pcbImageSize, pbKnown)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCalculateImageSize == "on"]
+foreign {
     func MFCalculateImageSize(guidSubtype: CPointer<GUID>, unWidth: UInt32, unHeight: UInt32, pcbImageSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCalculateImageSize == "on"]
+public unsafe func Windows_MFCalculateImageSize(guidSubtype: CPointer<GUID>, unWidth: UInt32, unHeight: UInt32, pcbImageSize: CPointer<UInt32>): Int32 {
+    return MFCalculateImageSize(guidSubtype, unWidth, unHeight, pcbImageSize)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCancelCreateFile == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func MFCancelCreateFile(pCancelCookie: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCancelCreateFile == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFCancelCreateFile(pCancelCookie: CPointer<Unit>): Int32 {
+    return MFCancelCreateFile(pCancelCookie)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCancelWorkItem == "on"]
+foreign {
     func MFCancelWorkItem(Key: UInt64): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCancelWorkItem == "on"]
+public unsafe func Windows_MFCancelWorkItem(Key: UInt64): Int32 {
+    return MFCancelWorkItem(Key)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCombineSamples == "on"]
+foreign {
     func MFCombineSamples(pSample: CPointer<Unit>, pSampleToAdd: CPointer<Unit>, dwMaxMergedDurationInMS: UInt32, pMerged: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCombineSamples == "on"]
+public unsafe func Windows_MFCombineSamples(pSample: CPointer<Unit>, pSampleToAdd: CPointer<Unit>, dwMaxMergedDurationInMS: UInt32, pMerged: CPointer<Int32>): Int32 {
+    return MFCombineSamples(pSample, pSampleToAdd, dwMaxMergedDurationInMS, pMerged)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCompareFullToPartialMediaType == "on"]
+foreign {
     func MFCompareFullToPartialMediaType(pMFTypeFull: CPointer<Unit>, pMFTypePartial: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCompareFullToPartialMediaType == "on"]
+public unsafe func Windows_MFCompareFullToPartialMediaType(pMFTypeFull: CPointer<Unit>, pMFTypePartial: CPointer<Unit>): Int32 {
+    return MFCompareFullToPartialMediaType(pMFTypeFull, pMFTypePartial)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFConvertColorInfoFromDXVA == "on"]
+foreign {
     func MFConvertColorInfoFromDXVA(pToFormat: CPointer<MFVIDEOFORMATAbi>, dwFromDXVA: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFConvertColorInfoFromDXVA == "on"]
+public unsafe func Windows_MFConvertColorInfoFromDXVA(pToFormat: CPointer<MFVIDEOFORMATAbi>, dwFromDXVA: UInt32): Int32 {
+    return MFConvertColorInfoFromDXVA(pToFormat, dwFromDXVA)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFConvertColorInfoToDXVA == "on"]
+foreign {
     func MFConvertColorInfoToDXVA(pdwToDXVA: CPointer<UInt32>, pFromFormat: CPointer<MFVIDEOFORMATAbi>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFConvertColorInfoToDXVA == "on"]
+public unsafe func Windows_MFConvertColorInfoToDXVA(pdwToDXVA: CPointer<UInt32>, pFromFormat: CPointer<MFVIDEOFORMATAbi>): Int32 {
+    return MFConvertColorInfoToDXVA(pdwToDXVA, pFromFormat)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFConvertFromFP16Array == "on"]
+foreign {
     // param-hint: pDest len=param[2]
     // param-hint: pSrc len=param[2]
     func MFConvertFromFP16Array(pDest: CPointer<Float32>, pSrc: CPointer<UInt16>, dwCount: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFConvertFromFP16Array == "on"]
+public unsafe func Windows_MFConvertFromFP16Array(pDest: CPointer<Float32>, pSrc: CPointer<UInt16>, dwCount: UInt32): Int32 {
+    return MFConvertFromFP16Array(pDest, pSrc, dwCount)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFConvertToFP16Array == "on"]
+foreign {
     // param-hint: pDest len=param[2]
     // param-hint: pSrc len=param[2]
     func MFConvertToFP16Array(pDest: CPointer<UInt16>, pSrc: CPointer<Float32>, dwCount: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFConvertToFP16Array == "on"]
+public unsafe func Windows_MFConvertToFP16Array(pDest: CPointer<UInt16>, pSrc: CPointer<Float32>, dwCount: UInt32): Int32 {
+    return MFConvertToFP16Array(pDest, pSrc, dwCount)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCopyImage == "on"]
+foreign {
     func MFCopyImage(pDest: CPointer<UInt8>, lDestStride: Int32, pSrc: CPointer<UInt8>, lSrcStride: Int32, dwWidthInBytes: UInt32, dwLines: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCopyImage == "on"]
+public unsafe func Windows_MFCopyImage(pDest: CPointer<UInt8>, lDestStride: Int32, pSrc: CPointer<UInt8>, lSrcStride: Int32, dwWidthInBytes: UInt32, dwLines: UInt32): Int32 {
+    return MFCopyImage(pDest, lDestStride, pSrc, lSrcStride, dwWidthInBytes, dwLines)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreate2DMediaBuffer == "on"]
+foreign {
     func MFCreate2DMediaBuffer(dwWidth: UInt32, dwHeight: UInt32, dwFourCC: UInt32, fBottomUp: Int32, ppBuffer: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreate2DMediaBuffer == "on"]
+public unsafe func Windows_MFCreate2DMediaBuffer(dwWidth: UInt32, dwHeight: UInt32, dwFourCC: UInt32, fBottomUp: Int32, ppBuffer: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreate2DMediaBuffer(dwWidth, dwHeight, dwFourCC, fBottomUp, ppBuffer)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateAMMediaTypeFromMFMediaType == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func MFCreateAMMediaTypeFromMFMediaType(pMFType: CPointer<Unit>, guidFormatBlockType: GUID, ppAMType: CPointer<CPointer<AM_MEDIA_TYPEAbi>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateAMMediaTypeFromMFMediaType == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFCreateAMMediaTypeFromMFMediaType(pMFType: CPointer<Unit>, guidFormatBlockType: GUID, ppAMType: CPointer<CPointer<AM_MEDIA_TYPEAbi>>): Int32 {
+    return MFCreateAMMediaTypeFromMFMediaType(pMFType, guidFormatBlockType, ppAMType)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateAlignedMemoryBuffer == "on"]
+foreign {
     func MFCreateAlignedMemoryBuffer(cbMaxLength: UInt32, cbAligment: UInt32, ppBuffer: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateAlignedMemoryBuffer == "on"]
+public unsafe func Windows_MFCreateAlignedMemoryBuffer(cbMaxLength: UInt32, cbAligment: UInt32, ppBuffer: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateAlignedMemoryBuffer(cbMaxLength, cbAligment, ppBuffer)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateAsyncResult == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func MFCreateAsyncResult(punkObject: CPointer<Unit>, pCallback: CPointer<Unit>, punkState: CPointer<Unit>, ppAsyncResult: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateAsyncResult == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFCreateAsyncResult(punkObject: CPointer<Unit>, pCallback: CPointer<Unit>, punkState: CPointer<Unit>, ppAsyncResult: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateAsyncResult(punkObject, pCallback, punkState, ppAsyncResult)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateAttributes == "on"]
+foreign {
     func MFCreateAttributes(ppMFAttributes: CPointer<CPointer<Unit>>, cInitialSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateAttributes == "on"]
+public unsafe func Windows_MFCreateAttributes(ppMFAttributes: CPointer<CPointer<Unit>>, cInitialSize: UInt32): Int32 {
+    return MFCreateAttributes(ppMFAttributes, cInitialSize)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateAudioMediaType == "on" && Windows_Win32_Media_Audio == "on"]
+foreign {
+    func MFCreateAudioMediaType(pAudioFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, ppIAudioMediaType: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateAudioMediaType == "on" && Windows_Win32_Media_Audio == "on"]
+public unsafe func Windows_MFCreateAudioMediaType(pAudioFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, ppIAudioMediaType: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateAudioMediaType(pAudioFormat, ppIAudioMediaType)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateCollection == "on"]
+foreign {
     func MFCreateCollection(ppIMFCollection: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateCollection == "on"]
+public unsafe func Windows_MFCreateCollection(ppIMFCollection: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateCollection(ppIMFCollection)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateContentDecryptorContext == "on"]
+foreign {
     // param-hint: pD3DManager optional
     func MFCreateContentDecryptorContext(guidMediaProtectionSystemId: CPointer<GUID>, pD3DManager: CPointer<Unit>, pContentProtectionDevice: CPointer<Unit>, ppContentDecryptorContext: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateContentDecryptorContext == "on"]
+public unsafe func Windows_MFCreateContentDecryptorContext(guidMediaProtectionSystemId: CPointer<GUID>, pD3DManager: CPointer<Unit>, pContentProtectionDevice: CPointer<Unit>, ppContentDecryptorContext: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateContentDecryptorContext(guidMediaProtectionSystemId, pD3DManager, pContentProtectionDevice, ppContentDecryptorContext)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateContentProtectionDevice == "on"]
+foreign {
     func MFCreateContentProtectionDevice(ProtectionSystemId: CPointer<GUID>, ContentProtectionDevice: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateContentProtectionDevice == "on"]
+public unsafe func Windows_MFCreateContentProtectionDevice(ProtectionSystemId: CPointer<GUID>, ContentProtectionDevice: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateContentProtectionDevice(ProtectionSystemId, ContentProtectionDevice)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateD3D12SynchronizationObject == "on" && Windows_Win32_Graphics_Direct3D12 == "on"]
+foreign {
+    func MFCreateD3D12SynchronizationObject(pDevice: CPointer<Unit>, riid: CPointer<GUID>, ppvSyncObject: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateD3D12SynchronizationObject == "on" && Windows_Win32_Graphics_Direct3D12 == "on"]
+public unsafe func Windows_MFCreateD3D12SynchronizationObject(pDevice: CPointer<Unit>, riid: CPointer<GUID>, ppvSyncObject: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateD3D12SynchronizationObject(pDevice, riid, ppvSyncObject)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateDXGIDeviceManager == "on"]
+foreign {
     func MFCreateDXGIDeviceManager(resetToken: CPointer<UInt32>, ppDeviceManager: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateDXGIDeviceManager == "on"]
+public unsafe func Windows_MFCreateDXGIDeviceManager(resetToken: CPointer<UInt32>, ppDeviceManager: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateDXGIDeviceManager(resetToken, ppDeviceManager)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateDXGISurfaceBuffer == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func MFCreateDXGISurfaceBuffer(riid: CPointer<GUID>, punkSurface: CPointer<Unit>, uSubresourceIndex: UInt32, fBottomUpWhenLinear: Int32, ppBuffer: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateDXGISurfaceBuffer == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFCreateDXGISurfaceBuffer(riid: CPointer<GUID>, punkSurface: CPointer<Unit>, uSubresourceIndex: UInt32, fBottomUpWhenLinear: Int32, ppBuffer: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateDXGISurfaceBuffer(riid, punkSurface, uSubresourceIndex, fBottomUpWhenLinear, ppBuffer)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateDXSurfaceBuffer == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func MFCreateDXSurfaceBuffer(riid: CPointer<GUID>, punkSurface: CPointer<Unit>, fBottomUpWhenLinear: Int32, ppBuffer: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateDXSurfaceBuffer == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFCreateDXSurfaceBuffer(riid: CPointer<GUID>, punkSurface: CPointer<Unit>, fBottomUpWhenLinear: Int32, ppBuffer: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateDXSurfaceBuffer(riid, punkSurface, fBottomUpWhenLinear, ppBuffer)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateEventQueue == "on"]
+foreign {
     func MFCreateEventQueue(ppMediaEventQueue: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateEventQueue == "on"]
+public unsafe func Windows_MFCreateEventQueue(ppMediaEventQueue: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateEventQueue(ppMediaEventQueue)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateFile == "on"]
+foreign {
     func MFCreateFile(AccessMode: MF_FILE_ACCESSMODEAbi, OpenMode: MF_FILE_OPENMODEAbi, fFlags: MF_FILE_FLAGSAbi, pwszFileURL: CPointer<UInt16>, ppIByteStream: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateFile == "on"]
+public unsafe func Windows_MFCreateFile(AccessMode: MF_FILE_ACCESSMODEAbi, OpenMode: MF_FILE_OPENMODEAbi, fFlags: MF_FILE_FLAGSAbi, pwszFileURL: CPointer<UInt16>, ppIByteStream: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateFile(AccessMode, OpenMode, fFlags, pwszFileURL, ppIByteStream)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateLegacyMediaBufferOnMFMediaBuffer == "on" && Windows_Win32_Media_DxMediaObjects == "on"]
+foreign {
+    // param-hint: pSample optional
+    func MFCreateLegacyMediaBufferOnMFMediaBuffer(pSample: CPointer<Unit>, pMFMediaBuffer: CPointer<Unit>, cbOffset: UInt32, ppMediaBuffer: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateLegacyMediaBufferOnMFMediaBuffer == "on" && Windows_Win32_Media_DxMediaObjects == "on"]
+public unsafe func Windows_MFCreateLegacyMediaBufferOnMFMediaBuffer(pSample: CPointer<Unit>, pMFMediaBuffer: CPointer<Unit>, cbOffset: UInt32, ppMediaBuffer: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateLegacyMediaBufferOnMFMediaBuffer(pSample, pMFMediaBuffer, cbOffset, ppMediaBuffer)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMFByteStreamOnStream == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func MFCreateMFByteStreamOnStream(pStream: CPointer<Unit>, ppByteStream: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMFByteStreamOnStream == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFCreateMFByteStreamOnStream(pStream: CPointer<Unit>, ppByteStream: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateMFByteStreamOnStream(pStream, ppByteStream)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMFByteStreamOnStreamEx == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func MFCreateMFByteStreamOnStreamEx(punkStream: CPointer<Unit>, ppByteStream: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMFByteStreamOnStreamEx == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFCreateMFByteStreamOnStreamEx(punkStream: CPointer<Unit>, ppByteStream: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateMFByteStreamOnStreamEx(punkStream, ppByteStream)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMFByteStreamWrapper == "on"]
+foreign {
     func MFCreateMFByteStreamWrapper(pStream: CPointer<Unit>, ppStreamWrapper: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMFByteStreamWrapper == "on"]
+public unsafe func Windows_MFCreateMFByteStreamWrapper(pStream: CPointer<Unit>, ppStreamWrapper: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateMFByteStreamWrapper(pStream, ppStreamWrapper)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMFVideoFormatFromMFMediaType == "on"]
+foreign {
     // param-hint: pcbSize optional
     func MFCreateMFVideoFormatFromMFMediaType(pMFType: CPointer<Unit>, ppMFVF: CPointer<CPointer<MFVIDEOFORMATAbi>>, pcbSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMFVideoFormatFromMFMediaType == "on"]
+public unsafe func Windows_MFCreateMFVideoFormatFromMFMediaType(pMFType: CPointer<Unit>, ppMFVF: CPointer<CPointer<MFVIDEOFORMATAbi>>, pcbSize: CPointer<UInt32>): Int32 {
+    return MFCreateMFVideoFormatFromMFMediaType(pMFType, ppMFVF, pcbSize)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMediaBufferFromMediaType == "on"]
+foreign {
     func MFCreateMediaBufferFromMediaType(pMediaType: CPointer<Unit>, llDuration: Int64, dwMinLength: UInt32, dwMinAlignment: UInt32, ppBuffer: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMediaBufferFromMediaType == "on"]
+public unsafe func Windows_MFCreateMediaBufferFromMediaType(pMediaType: CPointer<Unit>, llDuration: Int64, dwMinLength: UInt32, dwMinAlignment: UInt32, ppBuffer: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateMediaBufferFromMediaType(pMediaType, llDuration, dwMinLength, dwMinAlignment, ppBuffer)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMediaBufferWrapper == "on"]
+foreign {
     func MFCreateMediaBufferWrapper(pBuffer: CPointer<Unit>, cbOffset: UInt32, dwLength: UInt32, ppBuffer: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMediaBufferWrapper == "on"]
+public unsafe func Windows_MFCreateMediaBufferWrapper(pBuffer: CPointer<Unit>, cbOffset: UInt32, dwLength: UInt32, ppBuffer: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateMediaBufferWrapper(pBuffer, cbOffset, dwLength, ppBuffer)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMediaEvent == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    // param-hint: pvValue optional
+    func MFCreateMediaEvent(met: UInt32, guidExtendedType: CPointer<GUID>, hrStatus: Int32, pvValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>, ppEvent: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMediaEvent == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_MFCreateMediaEvent(met: UInt32, guidExtendedType: CPointer<GUID>, hrStatus: Int32, pvValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>, ppEvent: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateMediaEvent(met, guidExtendedType, hrStatus, pvValue, ppEvent)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMediaExtensionActivate == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: pConfiguration optional
+    func MFCreateMediaExtensionActivate(szActivatableClassId: CPointer<UInt16>, pConfiguration: CPointer<Unit>, riid: CPointer<GUID>, ppvObject: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMediaExtensionActivate == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFCreateMediaExtensionActivate(szActivatableClassId: CPointer<UInt16>, pConfiguration: CPointer<Unit>, riid: CPointer<GUID>, ppvObject: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateMediaExtensionActivate(szActivatableClassId, pConfiguration, riid, ppvObject)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMediaType == "on"]
+foreign {
     func MFCreateMediaType(ppMFType: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMediaType == "on"]
+public unsafe func Windows_MFCreateMediaType(ppMFType: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateMediaType(ppMFType)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMediaTypeFromProperties == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func MFCreateMediaTypeFromProperties(punkStream: CPointer<Unit>, ppMediaType: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMediaTypeFromProperties == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFCreateMediaTypeFromProperties(punkStream: CPointer<Unit>, ppMediaType: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateMediaTypeFromProperties(punkStream, ppMediaType)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMediaTypeFromRepresentation == "on"]
+foreign {
     func MFCreateMediaTypeFromRepresentation(guidRepresentation: GUID, pvRepresentation: CPointer<Unit>, ppIMediaType: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMediaTypeFromRepresentation == "on"]
+public unsafe func Windows_MFCreateMediaTypeFromRepresentation(guidRepresentation: GUID, pvRepresentation: CPointer<Unit>, ppIMediaType: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateMediaTypeFromRepresentation(guidRepresentation, pvRepresentation, ppIMediaType)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMemoryBuffer == "on"]
+foreign {
     func MFCreateMemoryBuffer(cbMaxLength: UInt32, ppBuffer: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMemoryBuffer == "on"]
+public unsafe func Windows_MFCreateMemoryBuffer(cbMaxLength: UInt32, ppBuffer: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateMemoryBuffer(cbMaxLength, ppBuffer)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMuxStreamAttributes == "on"]
+foreign {
     func MFCreateMuxStreamAttributes(pAttributesToMux: CPointer<Unit>, ppMuxAttribs: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMuxStreamAttributes == "on"]
+public unsafe func Windows_MFCreateMuxStreamAttributes(pAttributesToMux: CPointer<Unit>, ppMuxAttribs: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateMuxStreamAttributes(pAttributesToMux, ppMuxAttribs)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMuxStreamMediaType == "on"]
+foreign {
     func MFCreateMuxStreamMediaType(pMediaTypesToMux: CPointer<Unit>, ppMuxMediaType: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMuxStreamMediaType == "on"]
+public unsafe func Windows_MFCreateMuxStreamMediaType(pMediaTypesToMux: CPointer<Unit>, ppMuxMediaType: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateMuxStreamMediaType(pMediaTypesToMux, ppMuxMediaType)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMuxStreamSample == "on"]
+foreign {
     func MFCreateMuxStreamSample(pSamplesToMux: CPointer<Unit>, ppMuxSample: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateMuxStreamSample == "on"]
+public unsafe func Windows_MFCreateMuxStreamSample(pSamplesToMux: CPointer<Unit>, ppMuxSample: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateMuxStreamSample(pSamplesToMux, ppMuxSample)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreatePresentationDescriptor == "on"]
+foreign {
     // param-hint: apStreamDescriptors len=param[0] optional
     func MFCreatePresentationDescriptor(cStreamDescriptors: UInt32, apStreamDescriptors: CPointer<CPointer<Unit>>, ppPresentationDescriptor: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreatePresentationDescriptor == "on"]
+public unsafe func Windows_MFCreatePresentationDescriptor(cStreamDescriptors: UInt32, apStreamDescriptors: CPointer<CPointer<Unit>>, ppPresentationDescriptor: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreatePresentationDescriptor(cStreamDescriptors, apStreamDescriptors, ppPresentationDescriptor)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreatePropertiesFromMediaType == "on"]
+foreign {
     func MFCreatePropertiesFromMediaType(pMediaType: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreatePropertiesFromMediaType == "on"]
+public unsafe func Windows_MFCreatePropertiesFromMediaType(pMediaType: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreatePropertiesFromMediaType(pMediaType, riid, ppv)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSample == "on"]
+foreign {
     func MFCreateSample(ppIMFSample: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSample == "on"]
+public unsafe func Windows_MFCreateSample(ppIMFSample: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateSample(ppIMFSample)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSourceResolver == "on"]
+foreign {
     func MFCreateSourceResolver(ppISourceResolver: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSourceResolver == "on"]
+public unsafe func Windows_MFCreateSourceResolver(ppISourceResolver: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateSourceResolver(ppISourceResolver)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateStreamDescriptor == "on"]
+foreign {
     // param-hint: apMediaTypes len=param[1]
     func MFCreateStreamDescriptor(dwStreamIdentifier: UInt32, cMediaTypes: UInt32, apMediaTypes: CPointer<CPointer<Unit>>, ppDescriptor: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateStreamDescriptor == "on"]
+public unsafe func Windows_MFCreateStreamDescriptor(dwStreamIdentifier: UInt32, cMediaTypes: UInt32, apMediaTypes: CPointer<CPointer<Unit>>, ppDescriptor: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateStreamDescriptor(dwStreamIdentifier, cMediaTypes, apMediaTypes, ppDescriptor)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateStreamOnMFByteStream == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func MFCreateStreamOnMFByteStream(pByteStream: CPointer<Unit>, ppStream: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateStreamOnMFByteStream == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFCreateStreamOnMFByteStream(pByteStream: CPointer<Unit>, ppStream: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateStreamOnMFByteStream(pByteStream, ppStream)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateStreamOnMFByteStreamEx == "on"]
+foreign {
     func MFCreateStreamOnMFByteStreamEx(pByteStream: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateStreamOnMFByteStreamEx == "on"]
+public unsafe func Windows_MFCreateStreamOnMFByteStreamEx(pByteStream: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateStreamOnMFByteStreamEx(pByteStream, riid, ppv)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSystemTimeSource == "on"]
+foreign {
     func MFCreateSystemTimeSource(ppSystemTimeSource: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSystemTimeSource == "on"]
+public unsafe func Windows_MFCreateSystemTimeSource(ppSystemTimeSource: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateSystemTimeSource(ppSystemTimeSource)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateTempFile == "on"]
+foreign {
     func MFCreateTempFile(AccessMode: MF_FILE_ACCESSMODEAbi, OpenMode: MF_FILE_OPENMODEAbi, fFlags: MF_FILE_FLAGSAbi, ppIByteStream: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateTempFile == "on"]
+public unsafe func Windows_MFCreateTempFile(AccessMode: MF_FILE_ACCESSMODEAbi, OpenMode: MF_FILE_OPENMODEAbi, fFlags: MF_FILE_FLAGSAbi, ppIByteStream: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateTempFile(AccessMode, OpenMode, fFlags, ppIByteStream)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateTrackedSample == "on"]
+foreign {
     func MFCreateTrackedSample(ppMFSample: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateTrackedSample == "on"]
+public unsafe func Windows_MFCreateTrackedSample(ppMFSample: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateTrackedSample(ppMFSample)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateTransformActivate == "on"]
+foreign {
     func MFCreateTransformActivate(ppActivate: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateTransformActivate == "on"]
+public unsafe func Windows_MFCreateTransformActivate(ppActivate: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateTransformActivate(ppActivate)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateVideoMediaType == "on"]
+foreign {
     func MFCreateVideoMediaType(pVideoFormat: CPointer<MFVIDEOFORMATAbi>, ppIVideoMediaType: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateVideoMediaType == "on"]
+public unsafe func Windows_MFCreateVideoMediaType(pVideoFormat: CPointer<MFVIDEOFORMATAbi>, ppIVideoMediaType: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateVideoMediaType(pVideoFormat, ppIVideoMediaType)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateVideoMediaTypeFromBitMapInfoHeader == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func MFCreateVideoMediaTypeFromBitMapInfoHeader(pbmihBitMapInfoHeader: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, dwPixelAspectRatioX: UInt32, dwPixelAspectRatioY: UInt32, InterlaceMode: MFVideoInterlaceModeAbi, VideoFlags: UInt64, qwFramesPerSecondNumerator: UInt64, qwFramesPerSecondDenominator: UInt64, dwMaxBitRate: UInt32, ppIVideoMediaType: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateVideoMediaTypeFromBitMapInfoHeader == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_MFCreateVideoMediaTypeFromBitMapInfoHeader(pbmihBitMapInfoHeader: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, dwPixelAspectRatioX: UInt32, dwPixelAspectRatioY: UInt32, InterlaceMode: MFVideoInterlaceModeAbi, VideoFlags: UInt64, qwFramesPerSecondNumerator: UInt64, qwFramesPerSecondDenominator: UInt64, dwMaxBitRate: UInt32, ppIVideoMediaType: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateVideoMediaTypeFromBitMapInfoHeader(pbmihBitMapInfoHeader, dwPixelAspectRatioX, dwPixelAspectRatioY, InterlaceMode, VideoFlags, qwFramesPerSecondNumerator, qwFramesPerSecondDenominator, dwMaxBitRate, ppIVideoMediaType)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateVideoMediaTypeFromBitMapInfoHeaderEx == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    // param-hint: pbmihBitMapInfoHeader bytes=param[1]
+    func MFCreateVideoMediaTypeFromBitMapInfoHeaderEx(pbmihBitMapInfoHeader: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, cbBitMapInfoHeader: UInt32, dwPixelAspectRatioX: UInt32, dwPixelAspectRatioY: UInt32, InterlaceMode: MFVideoInterlaceModeAbi, VideoFlags: UInt64, dwFramesPerSecondNumerator: UInt32, dwFramesPerSecondDenominator: UInt32, dwMaxBitRate: UInt32, ppIVideoMediaType: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateVideoMediaTypeFromBitMapInfoHeaderEx == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_MFCreateVideoMediaTypeFromBitMapInfoHeaderEx(pbmihBitMapInfoHeader: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, cbBitMapInfoHeader: UInt32, dwPixelAspectRatioX: UInt32, dwPixelAspectRatioY: UInt32, InterlaceMode: MFVideoInterlaceModeAbi, VideoFlags: UInt64, dwFramesPerSecondNumerator: UInt32, dwFramesPerSecondDenominator: UInt32, dwMaxBitRate: UInt32, ppIVideoMediaType: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateVideoMediaTypeFromBitMapInfoHeaderEx(pbmihBitMapInfoHeader, cbBitMapInfoHeader, dwPixelAspectRatioX, dwPixelAspectRatioY, InterlaceMode, VideoFlags, dwFramesPerSecondNumerator, dwFramesPerSecondDenominator, dwMaxBitRate, ppIVideoMediaType)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateVideoMediaTypeFromSubtype == "on"]
+foreign {
     func MFCreateVideoMediaTypeFromSubtype(pAMSubtype: CPointer<GUID>, ppIVideoMediaType: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateVideoMediaTypeFromSubtype == "on"]
+public unsafe func Windows_MFCreateVideoMediaTypeFromSubtype(pAMSubtype: CPointer<GUID>, ppIVideoMediaType: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateVideoMediaTypeFromSubtype(pAMSubtype, ppIVideoMediaType)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateVideoSampleAllocatorEx == "on"]
+foreign {
     func MFCreateVideoSampleAllocatorEx(riid: CPointer<GUID>, ppSampleAllocator: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateVideoSampleAllocatorEx == "on"]
+public unsafe func Windows_MFCreateVideoSampleAllocatorEx(riid: CPointer<GUID>, ppSampleAllocator: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateVideoSampleAllocatorEx(riid, ppSampleAllocator)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateWICBitmapBuffer == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func MFCreateWICBitmapBuffer(riid: CPointer<GUID>, punkSurface: CPointer<Unit>, ppBuffer: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateWICBitmapBuffer == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFCreateWICBitmapBuffer(riid: CPointer<GUID>, punkSurface: CPointer<Unit>, ppBuffer: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateWICBitmapBuffer(riid, punkSurface, ppBuffer)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateWaveFormatExFromMFMediaType == "on" && Windows_Win32_Media_Audio == "on"]
+foreign {
+    // param-hint: pcbSize optional
+    func MFCreateWaveFormatExFromMFMediaType(pMFType: CPointer<Unit>, ppWF: CPointer<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>, pcbSize: CPointer<UInt32>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateWaveFormatExFromMFMediaType == "on" && Windows_Win32_Media_Audio == "on"]
+public unsafe func Windows_MFCreateWaveFormatExFromMFMediaType(pMFType: CPointer<Unit>, ppWF: CPointer<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>, pcbSize: CPointer<UInt32>, Flags: UInt32): Int32 {
+    return MFCreateWaveFormatExFromMFMediaType(pMFType, ppWF, pcbSize, Flags)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFDeserializeAttributesFromStream == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func MFDeserializeAttributesFromStream(pAttr: CPointer<Unit>, dwOptions: UInt32, pStm: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFDeserializeAttributesFromStream == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFDeserializeAttributesFromStream(pAttr: CPointer<Unit>, dwOptions: UInt32, pStm: CPointer<Unit>): Int32 {
+    return MFDeserializeAttributesFromStream(pAttr, dwOptions, pStm)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFDeserializePresentationDescriptor == "on"]
+foreign {
     // param-hint: pbData len=param[0]
     func MFDeserializePresentationDescriptor(cbData: UInt32, pbData: CPointer<UInt8>, ppPD: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFDeserializePresentationDescriptor == "on"]
+public unsafe func Windows_MFDeserializePresentationDescriptor(cbData: UInt32, pbData: CPointer<UInt8>, ppPD: CPointer<CPointer<Unit>>): Int32 {
+    return MFDeserializePresentationDescriptor(cbData, pbData, ppPD)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFEndCreateFile == "on"]
+foreign {
     func MFEndCreateFile(pResult: CPointer<Unit>, ppFile: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFEndCreateFile == "on"]
+public unsafe func Windows_MFEndCreateFile(pResult: CPointer<Unit>, ppFile: CPointer<CPointer<Unit>>): Int32 {
+    return MFEndCreateFile(pResult, ppFile)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFEndRegisterWorkQueueWithMMCSS == "on"]
+foreign {
     func MFEndRegisterWorkQueueWithMMCSS(pResult: CPointer<Unit>, pdwTaskId: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFEndRegisterWorkQueueWithMMCSS == "on"]
+public unsafe func Windows_MFEndRegisterWorkQueueWithMMCSS(pResult: CPointer<Unit>, pdwTaskId: CPointer<UInt32>): Int32 {
+    return MFEndRegisterWorkQueueWithMMCSS(pResult, pdwTaskId)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFEndUnregisterWorkQueueWithMMCSS == "on"]
+foreign {
     func MFEndUnregisterWorkQueueWithMMCSS(pResult: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFEndUnregisterWorkQueueWithMMCSS == "on"]
+public unsafe func Windows_MFEndUnregisterWorkQueueWithMMCSS(pResult: CPointer<Unit>): Int32 {
+    return MFEndUnregisterWorkQueueWithMMCSS(pResult)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFFrameRateToAverageTimePerFrame == "on"]
+foreign {
     func MFFrameRateToAverageTimePerFrame(unNumerator: UInt32, unDenominator: UInt32, punAverageTimePerFrame: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFFrameRateToAverageTimePerFrame == "on"]
+public unsafe func Windows_MFFrameRateToAverageTimePerFrame(unNumerator: UInt32, unDenominator: UInt32, punAverageTimePerFrame: CPointer<UInt64>): Int32 {
+    return MFFrameRateToAverageTimePerFrame(unNumerator, unDenominator, punAverageTimePerFrame)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetAttributesAsBlob == "on"]
+foreign {
     // param-hint: pBuf bytes=param[2]
     func MFGetAttributesAsBlob(pAttributes: CPointer<Unit>, pBuf: CPointer<UInt8>, cbBufSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetAttributesAsBlob == "on"]
+public unsafe func Windows_MFGetAttributesAsBlob(pAttributes: CPointer<Unit>, pBuf: CPointer<UInt8>, cbBufSize: UInt32): Int32 {
+    return MFGetAttributesAsBlob(pAttributes, pBuf, cbBufSize)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetAttributesAsBlobSize == "on"]
+foreign {
     func MFGetAttributesAsBlobSize(pAttributes: CPointer<Unit>, pcbBufSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetAttributesAsBlobSize == "on"]
+public unsafe func Windows_MFGetAttributesAsBlobSize(pAttributes: CPointer<Unit>, pcbBufSize: CPointer<UInt32>): Int32 {
+    return MFGetAttributesAsBlobSize(pAttributes, pcbBufSize)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetContentProtectionSystemCLSID == "on"]
+foreign {
     func MFGetContentProtectionSystemCLSID(guidProtectionSystemID: CPointer<GUID>, pclsid: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetContentProtectionSystemCLSID == "on"]
+public unsafe func Windows_MFGetContentProtectionSystemCLSID(guidProtectionSystemID: CPointer<GUID>, pclsid: CPointer<GUID>): Int32 {
+    return MFGetContentProtectionSystemCLSID(guidProtectionSystemID, pclsid)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetMFTMerit == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: verifier bytes=param[1]
+    func MFGetMFTMerit(pMFT: CPointer<Unit>, cbVerifier: UInt32, verifier: CPointer<UInt8>, merit: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetMFTMerit == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFGetMFTMerit(pMFT: CPointer<Unit>, cbVerifier: UInt32, verifier: CPointer<UInt8>, merit: CPointer<UInt32>): Int32 {
+    return MFGetMFTMerit(pMFT, cbVerifier, verifier, merit)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetPluginControl == "on"]
+foreign {
     func MFGetPluginControl(ppPluginControl: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetPluginControl == "on"]
+public unsafe func Windows_MFGetPluginControl(ppPluginControl: CPointer<CPointer<Unit>>): Int32 {
+    return MFGetPluginControl(ppPluginControl)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetStrideForBitmapInfoHeader == "on"]
+foreign {
     func MFGetStrideForBitmapInfoHeader(format: UInt32, dwWidth: UInt32, pStride: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetStrideForBitmapInfoHeader == "on"]
+public unsafe func Windows_MFGetStrideForBitmapInfoHeader(format: UInt32, dwWidth: UInt32, pStride: CPointer<Int32>): Int32 {
+    return MFGetStrideForBitmapInfoHeader(format, dwWidth, pStride)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetSupportedMimeTypes == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func MFGetSupportedMimeTypes(pPropVarMimeTypeArray: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetSupportedMimeTypes == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_MFGetSupportedMimeTypes(pPropVarMimeTypeArray: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    return MFGetSupportedMimeTypes(pPropVarMimeTypeArray)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetSupportedSchemes == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func MFGetSupportedSchemes(pPropVarSchemeArray: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetSupportedSchemes == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_MFGetSupportedSchemes(pPropVarSchemeArray: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    return MFGetSupportedSchemes(pPropVarSchemeArray)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetSystemTime == "on"]
+foreign {
     func MFGetSystemTime(): Int64
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetSystemTime == "on"]
+public unsafe func Windows_MFGetSystemTime(): Int64 {
+    return MFGetSystemTime()
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetTimerPeriodicity == "on"]
+foreign {
     func MFGetTimerPeriodicity(Periodicity: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetTimerPeriodicity == "on"]
+public unsafe func Windows_MFGetTimerPeriodicity(Periodicity: CPointer<UInt32>): Int32 {
+    return MFGetTimerPeriodicity(Periodicity)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetUncompressedVideoFormat == "on"]
+foreign {
     func MFGetUncompressedVideoFormat(pVideoFormat: CPointer<MFVIDEOFORMATAbi>): UInt32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetUncompressedVideoFormat == "on"]
+public unsafe func Windows_MFGetUncompressedVideoFormat(pVideoFormat: CPointer<MFVIDEOFORMATAbi>): UInt32 {
+    return MFGetUncompressedVideoFormat(pVideoFormat)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetWorkQueueMMCSSClass == "on"]
+foreign {
     // param-hint: pwszClass len=param[2] optional
     func MFGetWorkQueueMMCSSClass(dwWorkQueueId: UInt32, pwszClass: CPointer<UInt16>, pcchClass: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetWorkQueueMMCSSClass == "on"]
+public unsafe func Windows_MFGetWorkQueueMMCSSClass(dwWorkQueueId: UInt32, pwszClass: CPointer<UInt16>, pcchClass: CPointer<UInt32>): Int32 {
+    return MFGetWorkQueueMMCSSClass(dwWorkQueueId, pwszClass, pcchClass)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetWorkQueueMMCSSPriority == "on"]
+foreign {
     func MFGetWorkQueueMMCSSPriority(dwWorkQueueId: UInt32, lPriority: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetWorkQueueMMCSSPriority == "on"]
+public unsafe func Windows_MFGetWorkQueueMMCSSPriority(dwWorkQueueId: UInt32, lPriority: CPointer<Int32>): Int32 {
+    return MFGetWorkQueueMMCSSPriority(dwWorkQueueId, lPriority)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetWorkQueueMMCSSTaskId == "on"]
+foreign {
     func MFGetWorkQueueMMCSSTaskId(dwWorkQueueId: UInt32, pdwTaskId: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetWorkQueueMMCSSTaskId == "on"]
+public unsafe func Windows_MFGetWorkQueueMMCSSTaskId(dwWorkQueueId: UInt32, pdwTaskId: CPointer<UInt32>): Int32 {
+    return MFGetWorkQueueMMCSSTaskId(dwWorkQueueId, pdwTaskId)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFHeapAlloc == "on"]
+foreign {
     // param-hint: pszFile optional
     func MFHeapAlloc(nSize: UIntNative, dwFlags: UInt32, pszFile: CPointer<UInt8>, line: Int32, eat: EAllocationTypeAbi): CPointer<Unit>
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFHeapAlloc == "on"]
+public unsafe func Windows_MFHeapAlloc(nSize: UIntNative, dwFlags: UInt32, pszFile: CPointer<UInt8>, line: Int32, eat: EAllocationTypeAbi): CPointer<Unit> {
+    return MFHeapAlloc(nSize, dwFlags, pszFile, line, eat)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFHeapFree == "on"]
+foreign {
     func MFHeapFree(pv: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFHeapFree == "on"]
+public unsafe func Windows_MFHeapFree(pv: CPointer<Unit>): Unit {
+    MFHeapFree(pv)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFInitAMMediaTypeFromMFMediaType == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func MFInitAMMediaTypeFromMFMediaType(pMFType: CPointer<Unit>, guidFormatBlockType: GUID, pAMType: CPointer<AM_MEDIA_TYPEAbi>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFInitAMMediaTypeFromMFMediaType == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFInitAMMediaTypeFromMFMediaType(pMFType: CPointer<Unit>, guidFormatBlockType: GUID, pAMType: CPointer<AM_MEDIA_TYPEAbi>): Int32 {
+    return MFInitAMMediaTypeFromMFMediaType(pMFType, guidFormatBlockType, pAMType)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFInitAttributesFromBlob == "on"]
+foreign {
     // param-hint: pBuf bytes=param[2]
     func MFInitAttributesFromBlob(pAttributes: CPointer<Unit>, pBuf: CPointer<UInt8>, cbBufSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFInitAttributesFromBlob == "on"]
+public unsafe func Windows_MFInitAttributesFromBlob(pAttributes: CPointer<Unit>, pBuf: CPointer<UInt8>, cbBufSize: UInt32): Int32 {
+    return MFInitAttributesFromBlob(pAttributes, pBuf, cbBufSize)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFInitMediaTypeFromAMMediaType == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func MFInitMediaTypeFromAMMediaType(pMFType: CPointer<Unit>, pAMType: CPointer<AM_MEDIA_TYPEAbi>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFInitMediaTypeFromAMMediaType == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFInitMediaTypeFromAMMediaType(pMFType: CPointer<Unit>, pAMType: CPointer<AM_MEDIA_TYPEAbi>): Int32 {
+    return MFInitMediaTypeFromAMMediaType(pMFType, pAMType)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFInitMediaTypeFromMFVideoFormat == "on"]
+foreign {
     // param-hint: pMFVF bytes=param[2]
     func MFInitMediaTypeFromMFVideoFormat(pMFType: CPointer<Unit>, pMFVF: CPointer<MFVIDEOFORMATAbi>, cbBufSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFInitMediaTypeFromMFVideoFormat == "on"]
+public unsafe func Windows_MFInitMediaTypeFromMFVideoFormat(pMFType: CPointer<Unit>, pMFVF: CPointer<MFVIDEOFORMATAbi>, cbBufSize: UInt32): Int32 {
+    return MFInitMediaTypeFromMFVideoFormat(pMFType, pMFVF, cbBufSize)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFInitMediaTypeFromMPEG1VideoInfo == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    // param-hint: pMP1VI bytes=param[2]
+    // param-hint: pSubtype optional
+    func MFInitMediaTypeFromMPEG1VideoInfo(pMFType: CPointer<Unit>, pMP1VI: CPointer<MPEG1VIDEOINFOAbi>, cbBufSize: UInt32, pSubtype: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFInitMediaTypeFromMPEG1VideoInfo == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_MFInitMediaTypeFromMPEG1VideoInfo(pMFType: CPointer<Unit>, pMP1VI: CPointer<MPEG1VIDEOINFOAbi>, cbBufSize: UInt32, pSubtype: CPointer<GUID>): Int32 {
+    return MFInitMediaTypeFromMPEG1VideoInfo(pMFType, pMP1VI, cbBufSize, pSubtype)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFInitMediaTypeFromMPEG2VideoInfo == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    // param-hint: pMP2VI bytes=param[2]
+    // param-hint: pSubtype optional
+    func MFInitMediaTypeFromMPEG2VideoInfo(pMFType: CPointer<Unit>, pMP2VI: CPointer<MPEG2VIDEOINFOAbi>, cbBufSize: UInt32, pSubtype: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFInitMediaTypeFromMPEG2VideoInfo == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_MFInitMediaTypeFromMPEG2VideoInfo(pMFType: CPointer<Unit>, pMP2VI: CPointer<MPEG2VIDEOINFOAbi>, cbBufSize: UInt32, pSubtype: CPointer<GUID>): Int32 {
+    return MFInitMediaTypeFromMPEG2VideoInfo(pMFType, pMP2VI, cbBufSize, pSubtype)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFInitMediaTypeFromVideoInfoHeader == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    // param-hint: pVIH bytes=param[2]
+    // param-hint: pSubtype optional
+    func MFInitMediaTypeFromVideoInfoHeader(pMFType: CPointer<Unit>, pVIH: CPointer<VIDEOINFOHEADERAbi>, cbBufSize: UInt32, pSubtype: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFInitMediaTypeFromVideoInfoHeader == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_MFInitMediaTypeFromVideoInfoHeader(pMFType: CPointer<Unit>, pVIH: CPointer<VIDEOINFOHEADERAbi>, cbBufSize: UInt32, pSubtype: CPointer<GUID>): Int32 {
+    return MFInitMediaTypeFromVideoInfoHeader(pMFType, pVIH, cbBufSize, pSubtype)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFInitMediaTypeFromVideoInfoHeader2 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    // param-hint: pVIH2 bytes=param[2]
+    // param-hint: pSubtype optional
+    func MFInitMediaTypeFromVideoInfoHeader2(pMFType: CPointer<Unit>, pVIH2: CPointer<VIDEOINFOHEADER2Abi>, cbBufSize: UInt32, pSubtype: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFInitMediaTypeFromVideoInfoHeader2 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_MFInitMediaTypeFromVideoInfoHeader2(pMFType: CPointer<Unit>, pVIH2: CPointer<VIDEOINFOHEADER2Abi>, cbBufSize: UInt32, pSubtype: CPointer<GUID>): Int32 {
+    return MFInitMediaTypeFromVideoInfoHeader2(pMFType, pVIH2, cbBufSize, pSubtype)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFInitMediaTypeFromWaveFormatEx == "on" && Windows_Win32_Media_Audio == "on"]
+foreign {
+    // param-hint: pWaveFormat bytes=param[2]
+    func MFInitMediaTypeFromWaveFormatEx(pMFType: CPointer<Unit>, pWaveFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, cbBufSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFInitMediaTypeFromWaveFormatEx == "on" && Windows_Win32_Media_Audio == "on"]
+public unsafe func Windows_MFInitMediaTypeFromWaveFormatEx(pMFType: CPointer<Unit>, pWaveFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, cbBufSize: UInt32): Int32 {
+    return MFInitMediaTypeFromWaveFormatEx(pMFType, pWaveFormat, cbBufSize)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFInitVideoFormat == "on"]
+foreign {
     func MFInitVideoFormat(pVideoFormat: CPointer<MFVIDEOFORMATAbi>, type_: MFStandardVideoFormatAbi): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFInitVideoFormat == "on"]
+public unsafe func Windows_MFInitVideoFormat(pVideoFormat: CPointer<MFVIDEOFORMATAbi>, type_: MFStandardVideoFormatAbi): Int32 {
+    return MFInitVideoFormat(pVideoFormat, type_)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFInitVideoFormat_RGB == "on"]
+foreign {
     func MFInitVideoFormat_RGB(pVideoFormat: CPointer<MFVIDEOFORMATAbi>, dwWidth: UInt32, dwHeight: UInt32, D3Dfmt: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFInitVideoFormat_RGB == "on"]
+public unsafe func Windows_MFInitVideoFormat_RGB(pVideoFormat: CPointer<MFVIDEOFORMATAbi>, dwWidth: UInt32, dwHeight: UInt32, D3Dfmt: UInt32): Int32 {
+    return MFInitVideoFormat_RGB(pVideoFormat, dwWidth, dwHeight, D3Dfmt)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFInvokeCallback == "on"]
+foreign {
     func MFInvokeCallback(pAsyncResult: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFInvokeCallback == "on"]
+public unsafe func Windows_MFInvokeCallback(pAsyncResult: CPointer<Unit>): Int32 {
+    return MFInvokeCallback(pAsyncResult)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFIsContentProtectionDeviceSupported == "on"]
+foreign {
     func MFIsContentProtectionDeviceSupported(ProtectionSystemId: CPointer<GUID>, isSupported: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFIsContentProtectionDeviceSupported == "on"]
+public unsafe func Windows_MFIsContentProtectionDeviceSupported(ProtectionSystemId: CPointer<GUID>, isSupported: CPointer<Int32>): Int32 {
+    return MFIsContentProtectionDeviceSupported(ProtectionSystemId, isSupported)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFLockDXGIDeviceManager == "on"]
+foreign {
     // param-hint: pResetToken optional
     func MFLockDXGIDeviceManager(pResetToken: CPointer<UInt32>, ppManager: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFLockDXGIDeviceManager == "on"]
+public unsafe func Windows_MFLockDXGIDeviceManager(pResetToken: CPointer<UInt32>, ppManager: CPointer<CPointer<Unit>>): Int32 {
+    return MFLockDXGIDeviceManager(pResetToken, ppManager)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFLockPlatform == "on"]
+foreign {
     func MFLockPlatform(): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFLockPlatform == "on"]
+public unsafe func Windows_MFLockPlatform(): Int32 {
+    return MFLockPlatform()
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFLockSharedWorkQueue == "on"]
+foreign {
     func MFLockSharedWorkQueue(wszClass: CPointer<UInt16>, BasePriority: Int32, pdwTaskId: CPointer<UInt32>, pID: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFLockSharedWorkQueue == "on"]
+public unsafe func Windows_MFLockSharedWorkQueue(wszClass: CPointer<UInt16>, BasePriority: Int32, pdwTaskId: CPointer<UInt32>, pID: CPointer<UInt32>): Int32 {
+    return MFLockSharedWorkQueue(wszClass, BasePriority, pdwTaskId, pID)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFLockWorkQueue == "on"]
+foreign {
     func MFLockWorkQueue(dwWorkQueue: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFLockWorkQueue == "on"]
+public unsafe func Windows_MFLockWorkQueue(dwWorkQueue: UInt32): Int32 {
+    return MFLockWorkQueue(dwWorkQueue)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFMapDX9FormatToDXGIFormat == "on" && Windows_Win32_Graphics_Dxgi_Common == "on"]
+foreign {
+    func MFMapDX9FormatToDXGIFormat(dx9: UInt32): Win32_Graphics_Dxgi_Common.DXGI_FORMATAbi
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFMapDX9FormatToDXGIFormat == "on" && Windows_Win32_Graphics_Dxgi_Common == "on"]
+public unsafe func Windows_MFMapDX9FormatToDXGIFormat(dx9: UInt32): Win32_Graphics_Dxgi_Common.DXGI_FORMATAbi {
+    return MFMapDX9FormatToDXGIFormat(dx9)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFMapDXGIFormatToDX9Format == "on" && Windows_Win32_Graphics_Dxgi_Common == "on"]
+foreign {
+    func MFMapDXGIFormatToDX9Format(dx11: Win32_Graphics_Dxgi_Common.DXGI_FORMATAbi): UInt32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFMapDXGIFormatToDX9Format == "on" && Windows_Win32_Graphics_Dxgi_Common == "on"]
+public unsafe func Windows_MFMapDXGIFormatToDX9Format(dx11: Win32_Graphics_Dxgi_Common.DXGI_FORMATAbi): UInt32 {
+    return MFMapDXGIFormatToDX9Format(dx11)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFPutWaitingWorkItem == "on"]
+foreign {
     // param-hint: pKey optional
     func MFPutWaitingWorkItem(hEvent: CPointer<Unit>, Priority: Int32, pResult: CPointer<Unit>, pKey: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFPutWaitingWorkItem == "on"]
+public unsafe func Windows_MFPutWaitingWorkItem(hEvent: CPointer<Unit>, Priority: Int32, pResult: CPointer<Unit>, pKey: CPointer<UInt64>): Int32 {
+    return MFPutWaitingWorkItem(hEvent, Priority, pResult, pKey)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFPutWorkItem == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func MFPutWorkItem(dwQueue: UInt32, pCallback: CPointer<Unit>, pState: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFPutWorkItem == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFPutWorkItem(dwQueue: UInt32, pCallback: CPointer<Unit>, pState: CPointer<Unit>): Int32 {
+    return MFPutWorkItem(dwQueue, pCallback, pState)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFPutWorkItem2 == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: pState optional
+    func MFPutWorkItem2(dwQueue: UInt32, Priority: Int32, pCallback: CPointer<Unit>, pState: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFPutWorkItem2 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFPutWorkItem2(dwQueue: UInt32, Priority: Int32, pCallback: CPointer<Unit>, pState: CPointer<Unit>): Int32 {
+    return MFPutWorkItem2(dwQueue, Priority, pCallback, pState)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFPutWorkItemEx == "on"]
+foreign {
     func MFPutWorkItemEx(dwQueue: UInt32, pResult: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFPutWorkItemEx == "on"]
+public unsafe func Windows_MFPutWorkItemEx(dwQueue: UInt32, pResult: CPointer<Unit>): Int32 {
+    return MFPutWorkItemEx(dwQueue, pResult)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFPutWorkItemEx2 == "on"]
+foreign {
     func MFPutWorkItemEx2(dwQueue: UInt32, Priority: Int32, pResult: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFPutWorkItemEx2 == "on"]
+public unsafe func Windows_MFPutWorkItemEx2(dwQueue: UInt32, Priority: Int32, pResult: CPointer<Unit>): Int32 {
+    return MFPutWorkItemEx2(dwQueue, Priority, pResult)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFRegisterLocalByteStreamHandler == "on"]
+foreign {
     func MFRegisterLocalByteStreamHandler(szFileExtension: CPointer<UInt16>, szMimeType: CPointer<UInt16>, pActivate: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFRegisterLocalByteStreamHandler == "on"]
+public unsafe func Windows_MFRegisterLocalByteStreamHandler(szFileExtension: CPointer<UInt16>, szMimeType: CPointer<UInt16>, pActivate: CPointer<Unit>): Int32 {
+    return MFRegisterLocalByteStreamHandler(szFileExtension, szMimeType, pActivate)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFRegisterLocalSchemeHandler == "on"]
+foreign {
     func MFRegisterLocalSchemeHandler(szScheme: CPointer<UInt16>, pActivate: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFRegisterLocalSchemeHandler == "on"]
+public unsafe func Windows_MFRegisterLocalSchemeHandler(szScheme: CPointer<UInt16>, pActivate: CPointer<Unit>): Int32 {
+    return MFRegisterLocalSchemeHandler(szScheme, pActivate)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFRegisterPlatformWithMMCSS == "on"]
+foreign {
     func MFRegisterPlatformWithMMCSS(wszClass: CPointer<UInt16>, pdwTaskId: CPointer<UInt32>, lPriority: Int32): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFRegisterPlatformWithMMCSS == "on"]
+public unsafe func Windows_MFRegisterPlatformWithMMCSS(wszClass: CPointer<UInt16>, pdwTaskId: CPointer<UInt32>, lPriority: Int32): Int32 {
+    return MFRegisterPlatformWithMMCSS(wszClass, pdwTaskId, lPriority)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFRemovePeriodicCallback == "on"]
+foreign {
     func MFRemovePeriodicCallback(dwKey: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFRemovePeriodicCallback == "on"]
+public unsafe func Windows_MFRemovePeriodicCallback(dwKey: UInt32): Int32 {
+    return MFRemovePeriodicCallback(dwKey)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFScheduleWorkItem == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: pKey optional
+    func MFScheduleWorkItem(pCallback: CPointer<Unit>, pState: CPointer<Unit>, Timeout: Int64, pKey: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFScheduleWorkItem == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFScheduleWorkItem(pCallback: CPointer<Unit>, pState: CPointer<Unit>, Timeout: Int64, pKey: CPointer<UInt64>): Int32 {
+    return MFScheduleWorkItem(pCallback, pState, Timeout, pKey)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFScheduleWorkItemEx == "on"]
+foreign {
     // param-hint: pKey optional
     func MFScheduleWorkItemEx(pResult: CPointer<Unit>, Timeout: Int64, pKey: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFScheduleWorkItemEx == "on"]
+public unsafe func Windows_MFScheduleWorkItemEx(pResult: CPointer<Unit>, Timeout: Int64, pKey: CPointer<UInt64>): Int32 {
+    return MFScheduleWorkItemEx(pResult, Timeout, pKey)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFSerializeAttributesToStream == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func MFSerializeAttributesToStream(pAttr: CPointer<Unit>, dwOptions: UInt32, pStm: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFSerializeAttributesToStream == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFSerializeAttributesToStream(pAttr: CPointer<Unit>, dwOptions: UInt32, pStm: CPointer<Unit>): Int32 {
+    return MFSerializeAttributesToStream(pAttr, dwOptions, pStm)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFSerializePresentationDescriptor == "on"]
+foreign {
     func MFSerializePresentationDescriptor(pPD: CPointer<Unit>, pcbData: CPointer<UInt32>, ppbData: CPointer<CPointer<UInt8>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFSerializePresentationDescriptor == "on"]
+public unsafe func Windows_MFSerializePresentationDescriptor(pPD: CPointer<Unit>, pcbData: CPointer<UInt32>, ppbData: CPointer<CPointer<UInt8>>): Int32 {
+    return MFSerializePresentationDescriptor(pPD, pcbData, ppbData)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFShutdown == "on"]
+foreign {
     func MFShutdown(): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFShutdown == "on"]
+public unsafe func Windows_MFShutdown(): Int32 {
+    return MFShutdown()
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFSplitSample == "on"]
+foreign {
     // param-hint: pOutputSamples len=param[2]
     func MFSplitSample(pSample: CPointer<Unit>, pOutputSamples: CPointer<CPointer<Unit>>, dwOutputSampleMaxCount: UInt32, pdwOutputSampleCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFSplitSample == "on"]
+public unsafe func Windows_MFSplitSample(pSample: CPointer<Unit>, pOutputSamples: CPointer<CPointer<Unit>>, dwOutputSampleMaxCount: UInt32, pdwOutputSampleCount: CPointer<UInt32>): Int32 {
+    return MFSplitSample(pSample, pOutputSamples, dwOutputSampleMaxCount, pdwOutputSampleCount)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFStartup == "on"]
+foreign {
     func MFStartup(Version: UInt32, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFStartup == "on"]
+public unsafe func Windows_MFStartup(Version: UInt32, dwFlags: UInt32): Int32 {
+    return MFStartup(Version, dwFlags)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFTEnum == "on"]
+foreign {
     // param-hint: pInputType optional
     // param-hint: pOutputType optional
     // param-hint: pAttributes optional
     func MFTEnum(guidCategory: GUID, Flags: UInt32, pInputType: CPointer<MFT_REGISTER_TYPE_INFOAbi>, pOutputType: CPointer<MFT_REGISTER_TYPE_INFOAbi>, pAttributes: CPointer<Unit>, ppclsidMFT: CPointer<CPointer<GUID>>, pcMFTs: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFTEnum == "on"]
+public unsafe func Windows_MFTEnum(guidCategory: GUID, Flags: UInt32, pInputType: CPointer<MFT_REGISTER_TYPE_INFOAbi>, pOutputType: CPointer<MFT_REGISTER_TYPE_INFOAbi>, pAttributes: CPointer<Unit>, ppclsidMFT: CPointer<CPointer<GUID>>, pcMFTs: CPointer<UInt32>): Int32 {
+    return MFTEnum(guidCategory, Flags, pInputType, pOutputType, pAttributes, ppclsidMFT, pcMFTs)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFTEnum2 == "on"]
+foreign {
     // param-hint: pInputType optional
     // param-hint: pOutputType optional
     // param-hint: pAttributes optional
     func MFTEnum2(guidCategory: GUID, Flags: UInt32, pInputType: CPointer<MFT_REGISTER_TYPE_INFOAbi>, pOutputType: CPointer<MFT_REGISTER_TYPE_INFOAbi>, pAttributes: CPointer<Unit>, pppMFTActivate: CPointer<CPointer<CPointer<Unit>>>, pnumMFTActivate: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFTEnum2 == "on"]
+public unsafe func Windows_MFTEnum2(guidCategory: GUID, Flags: UInt32, pInputType: CPointer<MFT_REGISTER_TYPE_INFOAbi>, pOutputType: CPointer<MFT_REGISTER_TYPE_INFOAbi>, pAttributes: CPointer<Unit>, pppMFTActivate: CPointer<CPointer<CPointer<Unit>>>, pnumMFTActivate: CPointer<UInt32>): Int32 {
+    return MFTEnum2(guidCategory, Flags, pInputType, pOutputType, pAttributes, pppMFTActivate, pnumMFTActivate)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFTEnumEx == "on"]
+foreign {
     // param-hint: pInputType optional
     // param-hint: pOutputType optional
     func MFTEnumEx(guidCategory: GUID, Flags: UInt32, pInputType: CPointer<MFT_REGISTER_TYPE_INFOAbi>, pOutputType: CPointer<MFT_REGISTER_TYPE_INFOAbi>, pppMFTActivate: CPointer<CPointer<CPointer<Unit>>>, pnumMFTActivate: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFTEnumEx == "on"]
+public unsafe func Windows_MFTEnumEx(guidCategory: GUID, Flags: UInt32, pInputType: CPointer<MFT_REGISTER_TYPE_INFOAbi>, pOutputType: CPointer<MFT_REGISTER_TYPE_INFOAbi>, pppMFTActivate: CPointer<CPointer<CPointer<Unit>>>, pnumMFTActivate: CPointer<UInt32>): Int32 {
+    return MFTEnumEx(guidCategory, Flags, pInputType, pOutputType, pppMFTActivate, pnumMFTActivate)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFTGetInfo == "on"]
+foreign {
     // param-hint: pszName optional
     // param-hint: ppInputTypes optional
     // param-hint: pcInputTypes optional
@@ -93811,126 +95641,163 @@ foreign {
     // param-hint: pcOutputTypes optional
     // param-hint: ppAttributes optional
     func MFTGetInfo(clsidMFT: GUID, pszName: CPointer<CPointer<UInt16>>, ppInputTypes: CPointer<CPointer<MFT_REGISTER_TYPE_INFOAbi>>, pcInputTypes: CPointer<UInt32>, ppOutputTypes: CPointer<CPointer<MFT_REGISTER_TYPE_INFOAbi>>, pcOutputTypes: CPointer<UInt32>, ppAttributes: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFTGetInfo == "on"]
+public unsafe func Windows_MFTGetInfo(clsidMFT: GUID, pszName: CPointer<CPointer<UInt16>>, ppInputTypes: CPointer<CPointer<MFT_REGISTER_TYPE_INFOAbi>>, pcInputTypes: CPointer<UInt32>, ppOutputTypes: CPointer<CPointer<MFT_REGISTER_TYPE_INFOAbi>>, pcOutputTypes: CPointer<UInt32>, ppAttributes: CPointer<CPointer<Unit>>): Int32 {
+    return MFTGetInfo(clsidMFT, pszName, ppInputTypes, pcInputTypes, ppOutputTypes, pcOutputTypes, ppAttributes)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFTRegister == "on"]
+foreign {
     // param-hint: pInputTypes len=param[4] optional
     // param-hint: pOutputTypes len=param[6] optional
     // param-hint: pAttributes optional
     func MFTRegister(clsidMFT: GUID, guidCategory: GUID, pszName: CPointer<UInt16>, Flags: UInt32, cInputTypes: UInt32, pInputTypes: CPointer<MFT_REGISTER_TYPE_INFOAbi>, cOutputTypes: UInt32, pOutputTypes: CPointer<MFT_REGISTER_TYPE_INFOAbi>, pAttributes: CPointer<Unit>): Int32
-    // param-hint: pInputTypes len=param[4] optional
-    // param-hint: pOutputTypes len=param[6] optional
-    func MFTRegisterLocalByCLSID(clisdMFT: CPointer<GUID>, guidCategory: CPointer<GUID>, pszName: CPointer<UInt16>, Flags: UInt32, cInputTypes: UInt32, pInputTypes: CPointer<MFT_REGISTER_TYPE_INFOAbi>, cOutputTypes: UInt32, pOutputTypes: CPointer<MFT_REGISTER_TYPE_INFOAbi>): Int32
-    func MFTUnregister(clsidMFT: GUID): Int32
-    func MFTUnregisterLocalByCLSID(clsidMFT: GUID): Int32
-    func MFUnlockDXGIDeviceManager(): Int32
-    func MFUnlockPlatform(): Int32
-    func MFUnlockWorkQueue(dwWorkQueue: UInt32): Int32
-    func MFUnregisterPlatformFromMMCSS(): Int32
-    func MFUnwrapMediaType(pWrap: CPointer<Unit>, ppOrig: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pBlock bytes=param[2] optional
-    func MFValidateMediaTypeSize(FormatType: GUID, pBlock: CPointer<UInt8>, cbSize: UInt32): Int32
-    func MFWrapMediaType(pOrig: CPointer<Unit>, MajorType: CPointer<GUID>, SubType: CPointer<GUID>, ppWrap: CPointer<CPointer<Unit>>): Int32
-    func MFllMulDiv(a: Int64, b: Int64, c: Int64, d: Int64): Int64
 }
 
-@When[MFPLAT == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on")]
-foreign {
-    // param-hint: pvValue optional
-    func MFCreateMediaEvent(met: UInt32, guidExtendedType: CPointer<GUID>, hrStatus: Int32, pvValue: CPointer<Win32__impl_l2.PROPVARIANTAbi>, ppEvent: CPointer<CPointer<Unit>>): Int32
-    func MFGetSupportedMimeTypes(pPropVarMimeTypeArray: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32
-    func MFGetSupportedSchemes(pPropVarSchemeArray: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFTRegister == "on"]
+public unsafe func Windows_MFTRegister(clsidMFT: GUID, guidCategory: GUID, pszName: CPointer<UInt16>, Flags: UInt32, cInputTypes: UInt32, pInputTypes: CPointer<MFT_REGISTER_TYPE_INFOAbi>, cOutputTypes: UInt32, pOutputTypes: CPointer<MFT_REGISTER_TYPE_INFOAbi>, pAttributes: CPointer<Unit>): Int32 {
+    return MFTRegister(clsidMFT, guidCategory, pszName, Flags, cInputTypes, pInputTypes, cOutputTypes, pOutputTypes, pAttributes)
 }
 
-@When[MFPLAT == "on" && Windows_Win32_Graphics_Direct3D12 == "on"]
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFTRegisterLocal == "on" && Windows_Win32_System_Com == "on"]
 foreign {
-    func MFCreateD3D12SynchronizationObject(pDevice: CPointer<Unit>, riid: CPointer<GUID>, ppvSyncObject: CPointer<CPointer<Unit>>): Int32
-}
-
-@When[MFPLAT == "on" && Windows_Win32_Graphics_Dxgi_Common == "on"]
-foreign {
-    func MFMapDX9FormatToDXGIFormat(dx9: UInt32): Win32_Graphics_Dxgi_Common.DXGI_FORMATAbi
-    func MFMapDXGIFormatToDX9Format(dx11: Win32_Graphics_Dxgi_Common.DXGI_FORMATAbi): UInt32
-}
-
-@When[MFPLAT == "on" && Windows_Win32_Graphics_Gdi == "on"]
-foreign {
-    // param-hint: pBMIH bytes=param[1]
-    // param-hint: pbKnown optional
-    func MFCalculateBitmapImageSize(pBMIH: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, cbBufSize: UInt32, pcbImageSize: CPointer<UInt32>, pbKnown: CPointer<Int32>): Int32
-    func MFCreateVideoMediaTypeFromBitMapInfoHeader(pbmihBitMapInfoHeader: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, dwPixelAspectRatioX: UInt32, dwPixelAspectRatioY: UInt32, InterlaceMode: MFVideoInterlaceModeAbi, VideoFlags: UInt64, qwFramesPerSecondNumerator: UInt64, qwFramesPerSecondDenominator: UInt64, dwMaxBitRate: UInt32, ppIVideoMediaType: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pbmihBitMapInfoHeader bytes=param[1]
-    func MFCreateVideoMediaTypeFromBitMapInfoHeaderEx(pbmihBitMapInfoHeader: CPointer<Win32_Graphics_Gdi.BITMAPINFOHEADERAbi>, cbBitMapInfoHeader: UInt32, dwPixelAspectRatioX: UInt32, dwPixelAspectRatioY: UInt32, InterlaceMode: MFVideoInterlaceModeAbi, VideoFlags: UInt64, dwFramesPerSecondNumerator: UInt32, dwFramesPerSecondDenominator: UInt32, dwMaxBitRate: UInt32, ppIVideoMediaType: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pMP1VI bytes=param[2]
-    // param-hint: pSubtype optional
-    func MFInitMediaTypeFromMPEG1VideoInfo(pMFType: CPointer<Unit>, pMP1VI: CPointer<MPEG1VIDEOINFOAbi>, cbBufSize: UInt32, pSubtype: CPointer<GUID>): Int32
-    // param-hint: pMP2VI bytes=param[2]
-    // param-hint: pSubtype optional
-    func MFInitMediaTypeFromMPEG2VideoInfo(pMFType: CPointer<Unit>, pMP2VI: CPointer<MPEG2VIDEOINFOAbi>, cbBufSize: UInt32, pSubtype: CPointer<GUID>): Int32
-    // param-hint: pVIH bytes=param[2]
-    // param-hint: pSubtype optional
-    func MFInitMediaTypeFromVideoInfoHeader(pMFType: CPointer<Unit>, pVIH: CPointer<VIDEOINFOHEADERAbi>, cbBufSize: UInt32, pSubtype: CPointer<GUID>): Int32
-    // param-hint: pVIH2 bytes=param[2]
-    // param-hint: pSubtype optional
-    func MFInitMediaTypeFromVideoInfoHeader2(pMFType: CPointer<Unit>, pVIH2: CPointer<VIDEOINFOHEADER2Abi>, cbBufSize: UInt32, pSubtype: CPointer<GUID>): Int32
-}
-
-@When[MFPLAT == "on" && Windows_Win32_Media_Audio == "on"]
-foreign {
-    func MFCreateAudioMediaType(pAudioFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, ppIAudioMediaType: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pcbSize optional
-    func MFCreateWaveFormatExFromMFMediaType(pMFType: CPointer<Unit>, ppWF: CPointer<CPointer<Win32_Media__impl_l0.WAVEFORMATEX>>, pcbSize: CPointer<UInt32>, Flags: UInt32): Int32
-    // param-hint: pWaveFormat bytes=param[2]
-    func MFInitMediaTypeFromWaveFormatEx(pMFType: CPointer<Unit>, pWaveFormat: CPointer<Win32_Media__impl_l0.WAVEFORMATEX>, cbBufSize: UInt32): Int32
-}
-
-@When[MFPLAT == "on" && Windows_Win32_Media_DxMediaObjects == "on"]
-foreign {
-    // param-hint: pSample optional
-    func MFCreateLegacyMediaBufferOnMFMediaBuffer(pSample: CPointer<Unit>, pMFMediaBuffer: CPointer<Unit>, cbOffset: UInt32, ppMediaBuffer: CPointer<CPointer<Unit>>): Int32
-}
-
-@When[MFPLAT == "on" && Windows_Win32_System_Com == "on"]
-foreign {
-    // param-hint: pdwKey optional
-    func MFAddPeriodicCallback(Callback: MFPERIODICCALLBACK, pContext: CPointer<Unit>, pdwKey: CPointer<UInt32>): Int32
-    func MFBeginCreateFile(AccessMode: MF_FILE_ACCESSMODEAbi, OpenMode: MF_FILE_OPENMODEAbi, fFlags: MF_FILE_FLAGSAbi, pwszFilePath: CPointer<UInt16>, pCallback: CPointer<Unit>, pState: CPointer<Unit>, ppCancelCookie: CPointer<CPointer<Unit>>): Int32
-    func MFBeginRegisterWorkQueueWithMMCSS(dwWorkQueueId: UInt32, wszClass: CPointer<UInt16>, dwTaskId: UInt32, pDoneCallback: CPointer<Unit>, pDoneState: CPointer<Unit>): Int32
-    func MFBeginRegisterWorkQueueWithMMCSSEx(dwWorkQueueId: UInt32, wszClass: CPointer<UInt16>, dwTaskId: UInt32, lPriority: Int32, pDoneCallback: CPointer<Unit>, pDoneState: CPointer<Unit>): Int32
-    func MFBeginUnregisterWorkQueueWithMMCSS(dwWorkQueueId: UInt32, pDoneCallback: CPointer<Unit>, pDoneState: CPointer<Unit>): Int32
-    func MFCancelCreateFile(pCancelCookie: CPointer<Unit>): Int32
-    func MFCreateAMMediaTypeFromMFMediaType(pMFType: CPointer<Unit>, guidFormatBlockType: GUID, ppAMType: CPointer<CPointer<AM_MEDIA_TYPEAbi>>): Int32
-    func MFCreateAsyncResult(punkObject: CPointer<Unit>, pCallback: CPointer<Unit>, punkState: CPointer<Unit>, ppAsyncResult: CPointer<CPointer<Unit>>): Int32
-    func MFCreateDXGISurfaceBuffer(riid: CPointer<GUID>, punkSurface: CPointer<Unit>, uSubresourceIndex: UInt32, fBottomUpWhenLinear: Int32, ppBuffer: CPointer<CPointer<Unit>>): Int32
-    func MFCreateDXSurfaceBuffer(riid: CPointer<GUID>, punkSurface: CPointer<Unit>, fBottomUpWhenLinear: Int32, ppBuffer: CPointer<CPointer<Unit>>): Int32
-    func MFCreateMFByteStreamOnStream(pStream: CPointer<Unit>, ppByteStream: CPointer<CPointer<Unit>>): Int32
-    func MFCreateMFByteStreamOnStreamEx(punkStream: CPointer<Unit>, ppByteStream: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pConfiguration optional
-    func MFCreateMediaExtensionActivate(szActivatableClassId: CPointer<UInt16>, pConfiguration: CPointer<Unit>, riid: CPointer<GUID>, ppvObject: CPointer<CPointer<Unit>>): Int32
-    func MFCreateMediaTypeFromProperties(punkStream: CPointer<Unit>, ppMediaType: CPointer<CPointer<Unit>>): Int32
-    func MFCreateStreamOnMFByteStream(pByteStream: CPointer<Unit>, ppStream: CPointer<CPointer<Unit>>): Int32
-    func MFCreateWICBitmapBuffer(riid: CPointer<GUID>, punkSurface: CPointer<Unit>, ppBuffer: CPointer<CPointer<Unit>>): Int32
-    func MFDeserializeAttributesFromStream(pAttr: CPointer<Unit>, dwOptions: UInt32, pStm: CPointer<Unit>): Int32
-    // param-hint: verifier bytes=param[1]
-    func MFGetMFTMerit(pMFT: CPointer<Unit>, cbVerifier: UInt32, verifier: CPointer<UInt8>, merit: CPointer<UInt32>): Int32
-    func MFInitAMMediaTypeFromMFMediaType(pMFType: CPointer<Unit>, guidFormatBlockType: GUID, pAMType: CPointer<AM_MEDIA_TYPEAbi>): Int32
-    func MFInitMediaTypeFromAMMediaType(pMFType: CPointer<Unit>, pAMType: CPointer<AM_MEDIA_TYPEAbi>): Int32
-    func MFPutWorkItem(dwQueue: UInt32, pCallback: CPointer<Unit>, pState: CPointer<Unit>): Int32
-    // param-hint: pState optional
-    func MFPutWorkItem2(dwQueue: UInt32, Priority: Int32, pCallback: CPointer<Unit>, pState: CPointer<Unit>): Int32
-    // param-hint: pKey optional
-    func MFScheduleWorkItem(pCallback: CPointer<Unit>, pState: CPointer<Unit>, Timeout: Int64, pKey: CPointer<UInt64>): Int32
-    func MFSerializeAttributesToStream(pAttr: CPointer<Unit>, dwOptions: UInt32, pStm: CPointer<Unit>): Int32
     // param-hint: pInputTypes len=param[4] optional
     // param-hint: pOutputTypes len=param[6] optional
     func MFTRegisterLocal(pClassFactory: CPointer<Unit>, guidCategory: CPointer<GUID>, pszName: CPointer<UInt16>, Flags: UInt32, cInputTypes: UInt32, pInputTypes: CPointer<MFT_REGISTER_TYPE_INFOAbi>, cOutputTypes: UInt32, pOutputTypes: CPointer<MFT_REGISTER_TYPE_INFOAbi>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFTRegisterLocal == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFTRegisterLocal(pClassFactory: CPointer<Unit>, guidCategory: CPointer<GUID>, pszName: CPointer<UInt16>, Flags: UInt32, cInputTypes: UInt32, pInputTypes: CPointer<MFT_REGISTER_TYPE_INFOAbi>, cOutputTypes: UInt32, pOutputTypes: CPointer<MFT_REGISTER_TYPE_INFOAbi>): Int32 {
+    return MFTRegisterLocal(pClassFactory, guidCategory, pszName, Flags, cInputTypes, pInputTypes, cOutputTypes, pOutputTypes)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFTRegisterLocalByCLSID == "on"]
+foreign {
+    // param-hint: pInputTypes len=param[4] optional
+    // param-hint: pOutputTypes len=param[6] optional
+    func MFTRegisterLocalByCLSID(clisdMFT: CPointer<GUID>, guidCategory: CPointer<GUID>, pszName: CPointer<UInt16>, Flags: UInt32, cInputTypes: UInt32, pInputTypes: CPointer<MFT_REGISTER_TYPE_INFOAbi>, cOutputTypes: UInt32, pOutputTypes: CPointer<MFT_REGISTER_TYPE_INFOAbi>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFTRegisterLocalByCLSID == "on"]
+public unsafe func Windows_MFTRegisterLocalByCLSID(clisdMFT: CPointer<GUID>, guidCategory: CPointer<GUID>, pszName: CPointer<UInt16>, Flags: UInt32, cInputTypes: UInt32, pInputTypes: CPointer<MFT_REGISTER_TYPE_INFOAbi>, cOutputTypes: UInt32, pOutputTypes: CPointer<MFT_REGISTER_TYPE_INFOAbi>): Int32 {
+    return MFTRegisterLocalByCLSID(clisdMFT, guidCategory, pszName, Flags, cInputTypes, pInputTypes, cOutputTypes, pOutputTypes)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFTUnregister == "on"]
+foreign {
+    func MFTUnregister(clsidMFT: GUID): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFTUnregister == "on"]
+public unsafe func Windows_MFTUnregister(clsidMFT: GUID): Int32 {
+    return MFTUnregister(clsidMFT)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFTUnregisterLocal == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pClassFactory optional
     func MFTUnregisterLocal(pClassFactory: CPointer<Unit>): Int32
 }
 
-@When[MFPLAT == "on" && Windows_Win32_UI_Shell_PropertiesSystem == "on"]
-foreign {
-    func CreatePropertyStore(ppStore: CPointer<CPointer<Unit>>): Int32
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFTUnregisterLocal == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFTUnregisterLocal(pClassFactory: CPointer<Unit>): Int32 {
+    return MFTUnregisterLocal(pClassFactory)
 }
 
-@When[MFPLAY == "on"]
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFTUnregisterLocalByCLSID == "on"]
+foreign {
+    func MFTUnregisterLocalByCLSID(clsidMFT: GUID): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFTUnregisterLocalByCLSID == "on"]
+public unsafe func Windows_MFTUnregisterLocalByCLSID(clsidMFT: GUID): Int32 {
+    return MFTUnregisterLocalByCLSID(clsidMFT)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFUnlockDXGIDeviceManager == "on"]
+foreign {
+    func MFUnlockDXGIDeviceManager(): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFUnlockDXGIDeviceManager == "on"]
+public unsafe func Windows_MFUnlockDXGIDeviceManager(): Int32 {
+    return MFUnlockDXGIDeviceManager()
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFUnlockPlatform == "on"]
+foreign {
+    func MFUnlockPlatform(): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFUnlockPlatform == "on"]
+public unsafe func Windows_MFUnlockPlatform(): Int32 {
+    return MFUnlockPlatform()
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFUnlockWorkQueue == "on"]
+foreign {
+    func MFUnlockWorkQueue(dwWorkQueue: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFUnlockWorkQueue == "on"]
+public unsafe func Windows_MFUnlockWorkQueue(dwWorkQueue: UInt32): Int32 {
+    return MFUnlockWorkQueue(dwWorkQueue)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFUnregisterPlatformFromMMCSS == "on"]
+foreign {
+    func MFUnregisterPlatformFromMMCSS(): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFUnregisterPlatformFromMMCSS == "on"]
+public unsafe func Windows_MFUnregisterPlatformFromMMCSS(): Int32 {
+    return MFUnregisterPlatformFromMMCSS()
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFUnwrapMediaType == "on"]
+foreign {
+    func MFUnwrapMediaType(pWrap: CPointer<Unit>, ppOrig: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFUnwrapMediaType == "on"]
+public unsafe func Windows_MFUnwrapMediaType(pWrap: CPointer<Unit>, ppOrig: CPointer<CPointer<Unit>>): Int32 {
+    return MFUnwrapMediaType(pWrap, ppOrig)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFValidateMediaTypeSize == "on"]
+foreign {
+    // param-hint: pBlock bytes=param[2] optional
+    func MFValidateMediaTypeSize(FormatType: GUID, pBlock: CPointer<UInt8>, cbSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFValidateMediaTypeSize == "on"]
+public unsafe func Windows_MFValidateMediaTypeSize(FormatType: GUID, pBlock: CPointer<UInt8>, cbSize: UInt32): Int32 {
+    return MFValidateMediaTypeSize(FormatType, pBlock, cbSize)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFWrapMediaType == "on"]
+foreign {
+    func MFWrapMediaType(pOrig: CPointer<Unit>, MajorType: CPointer<GUID>, SubType: CPointer<GUID>, ppWrap: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFWrapMediaType == "on"]
+public unsafe func Windows_MFWrapMediaType(pOrig: CPointer<Unit>, MajorType: CPointer<GUID>, SubType: CPointer<GUID>, ppWrap: CPointer<CPointer<Unit>>): Int32 {
+    return MFWrapMediaType(pOrig, MajorType, SubType, ppWrap)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFllMulDiv == "on"]
+foreign {
+    func MFllMulDiv(a: Int64, b: Int64, c: Int64, d: Int64): Int64
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFllMulDiv == "on"]
+public unsafe func Windows_MFllMulDiv(a: Int64, b: Int64, c: Int64, d: Int64): Int64 {
+    return MFllMulDiv(a, b, c, d)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAY == "on" && Windows_Win32_Media_MediaFoundation_MFPCreateMediaPlayer == "on"]
 foreign {
     // param-hint: pwszURL optional
     // param-hint: pCallback optional
@@ -93939,70 +95806,313 @@ foreign {
     func MFPCreateMediaPlayer(pwszURL: CPointer<UInt16>, fStartPlayback: Int32, creationOptions: MFP_CREATION_OPTIONSAbi, pCallback: CPointer<Unit>, hWnd: CPointer<Unit>, ppMediaPlayer: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[MFREADWRITE == "on"]
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAY == "on" && Windows_Win32_Media_MediaFoundation_MFPCreateMediaPlayer == "on"]
+public unsafe func Windows_MFPCreateMediaPlayer(pwszURL: CPointer<UInt16>, fStartPlayback: Int32, creationOptions: MFP_CREATION_OPTIONSAbi, pCallback: CPointer<Unit>, hWnd: CPointer<Unit>, ppMediaPlayer: CPointer<CPointer<Unit>>): Int32 {
+    return MFPCreateMediaPlayer(pwszURL, fStartPlayback, creationOptions, pCallback, hWnd, ppMediaPlayer)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFREADWRITE == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSinkWriterFromMediaSink == "on"]
 foreign {
     // param-hint: pAttributes optional
     func MFCreateSinkWriterFromMediaSink(pMediaSink: CPointer<Unit>, pAttributes: CPointer<Unit>, ppSinkWriter: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFREADWRITE == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSinkWriterFromMediaSink == "on"]
+public unsafe func Windows_MFCreateSinkWriterFromMediaSink(pMediaSink: CPointer<Unit>, pAttributes: CPointer<Unit>, ppSinkWriter: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateSinkWriterFromMediaSink(pMediaSink, pAttributes, ppSinkWriter)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFREADWRITE == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSinkWriterFromURL == "on"]
+foreign {
     // param-hint: pwszOutputURL optional
     // param-hint: pByteStream optional
     // param-hint: pAttributes optional
     func MFCreateSinkWriterFromURL(pwszOutputURL: CPointer<UInt16>, pByteStream: CPointer<Unit>, pAttributes: CPointer<Unit>, ppSinkWriter: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFREADWRITE == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSinkWriterFromURL == "on"]
+public unsafe func Windows_MFCreateSinkWriterFromURL(pwszOutputURL: CPointer<UInt16>, pByteStream: CPointer<Unit>, pAttributes: CPointer<Unit>, ppSinkWriter: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateSinkWriterFromURL(pwszOutputURL, pByteStream, pAttributes, ppSinkWriter)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFREADWRITE == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSourceReaderFromByteStream == "on"]
+foreign {
     // param-hint: pAttributes optional
     func MFCreateSourceReaderFromByteStream(pByteStream: CPointer<Unit>, pAttributes: CPointer<Unit>, ppSourceReader: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFREADWRITE == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSourceReaderFromByteStream == "on"]
+public unsafe func Windows_MFCreateSourceReaderFromByteStream(pByteStream: CPointer<Unit>, pAttributes: CPointer<Unit>, ppSourceReader: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateSourceReaderFromByteStream(pByteStream, pAttributes, ppSourceReader)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFREADWRITE == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSourceReaderFromMediaSource == "on"]
+foreign {
     // param-hint: pAttributes optional
     func MFCreateSourceReaderFromMediaSource(pMediaSource: CPointer<Unit>, pAttributes: CPointer<Unit>, ppSourceReader: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFREADWRITE == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSourceReaderFromMediaSource == "on"]
+public unsafe func Windows_MFCreateSourceReaderFromMediaSource(pMediaSource: CPointer<Unit>, pAttributes: CPointer<Unit>, ppSourceReader: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateSourceReaderFromMediaSource(pMediaSource, pAttributes, ppSourceReader)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFREADWRITE == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSourceReaderFromURL == "on"]
+foreign {
     // param-hint: pAttributes optional
     func MFCreateSourceReaderFromURL(pwszURL: CPointer<UInt16>, pAttributes: CPointer<Unit>, ppSourceReader: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[MFSENSORGROUP == "on"]
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFREADWRITE == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSourceReaderFromURL == "on"]
+public unsafe func Windows_MFCreateSourceReaderFromURL(pwszURL: CPointer<UInt16>, pAttributes: CPointer<Unit>, ppSourceReader: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateSourceReaderFromURL(pwszURL, pAttributes, ppSourceReader)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFSENSORGROUP == "on" && Windows_Win32_Media_MediaFoundation_MFCreateCameraControlMonitor == "on"]
 foreign {
     func MFCreateCameraControlMonitor(symbolicLink: CPointer<UInt16>, callback: CPointer<Unit>, ppCameraControlMonitor: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFSENSORGROUP == "on" && Windows_Win32_Media_MediaFoundation_MFCreateCameraControlMonitor == "on"]
+public unsafe func Windows_MFCreateCameraControlMonitor(symbolicLink: CPointer<UInt16>, callback: CPointer<Unit>, ppCameraControlMonitor: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateCameraControlMonitor(symbolicLink, callback, ppCameraControlMonitor)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFSENSORGROUP == "on" && Windows_Win32_Media_MediaFoundation_MFCreateCameraOcclusionStateMonitor == "on"]
+foreign {
     func MFCreateCameraOcclusionStateMonitor(symbolicLink: CPointer<UInt16>, callback: CPointer<Unit>, occlusionStateMonitor: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFSENSORGROUP == "on" && Windows_Win32_Media_MediaFoundation_MFCreateCameraOcclusionStateMonitor == "on"]
+public unsafe func Windows_MFCreateCameraOcclusionStateMonitor(symbolicLink: CPointer<UInt16>, callback: CPointer<Unit>, occlusionStateMonitor: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateCameraOcclusionStateMonitor(symbolicLink, callback, occlusionStateMonitor)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFSENSORGROUP == "on" && Windows_Win32_Media_MediaFoundation_MFCreateRelativePanelWatcher == "on"]
+foreign {
     func MFCreateRelativePanelWatcher(videoDeviceId: CPointer<UInt16>, displayMonitorDeviceId: CPointer<UInt16>, ppRelativePanelWatcher: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFSENSORGROUP == "on" && Windows_Win32_Media_MediaFoundation_MFCreateRelativePanelWatcher == "on"]
+public unsafe func Windows_MFCreateRelativePanelWatcher(videoDeviceId: CPointer<UInt16>, displayMonitorDeviceId: CPointer<UInt16>, ppRelativePanelWatcher: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateRelativePanelWatcher(videoDeviceId, displayMonitorDeviceId, ppRelativePanelWatcher)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFSENSORGROUP == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSensorActivityMonitor == "on"]
+foreign {
     func MFCreateSensorActivityMonitor(pCallback: CPointer<Unit>, ppActivityMonitor: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFSENSORGROUP == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSensorActivityMonitor == "on"]
+public unsafe func Windows_MFCreateSensorActivityMonitor(pCallback: CPointer<Unit>, ppActivityMonitor: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateSensorActivityMonitor(pCallback, ppActivityMonitor)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFSENSORGROUP == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSensorGroup == "on"]
+foreign {
     func MFCreateSensorGroup(SensorGroupSymbolicLink: CPointer<UInt16>, ppSensorGroup: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFSENSORGROUP == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSensorGroup == "on"]
+public unsafe func Windows_MFCreateSensorGroup(SensorGroupSymbolicLink: CPointer<UInt16>, ppSensorGroup: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateSensorGroup(SensorGroupSymbolicLink, ppSensorGroup)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFSENSORGROUP == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSensorProfile == "on"]
+foreign {
     // param-hint: Constraints optional
     func MFCreateSensorProfile(ProfileType: CPointer<GUID>, ProfileIndex: UInt32, Constraints: CPointer<UInt16>, ppProfile: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFSENSORGROUP == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSensorProfile == "on"]
+public unsafe func Windows_MFCreateSensorProfile(ProfileType: CPointer<GUID>, ProfileIndex: UInt32, Constraints: CPointer<UInt16>, ppProfile: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateSensorProfile(ProfileType, ProfileIndex, Constraints, ppProfile)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFSENSORGROUP == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSensorProfileCollection == "on"]
+foreign {
     func MFCreateSensorProfileCollection(ppSensorProfile: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFSENSORGROUP == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSensorProfileCollection == "on"]
+public unsafe func Windows_MFCreateSensorProfileCollection(ppSensorProfile: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateSensorProfileCollection(ppSensorProfile)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFSENSORGROUP == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSensorStream == "on"]
+foreign {
     // param-hint: pAttributes optional
     func MFCreateSensorStream(StreamId: UInt32, pAttributes: CPointer<Unit>, pMediaTypeCollection: CPointer<Unit>, ppStream: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFSENSORGROUP == "on" && Windows_Win32_Media_MediaFoundation_MFCreateSensorStream == "on"]
+public unsafe func Windows_MFCreateSensorStream(StreamId: UInt32, pAttributes: CPointer<Unit>, pMediaTypeCollection: CPointer<Unit>, ppStream: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateSensorStream(StreamId, pAttributes, pMediaTypeCollection, ppStream)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFSENSORGROUP == "on" && Windows_Win32_Media_MediaFoundation_MFCreateVirtualCamera == "on"]
+foreign {
     // param-hint: categories len=param[6] optional
     func MFCreateVirtualCamera(type_: MFVirtualCameraTypeAbi, lifetime: MFVirtualCameraLifetimeAbi, access: MFVirtualCameraAccessAbi, friendlyName: CPointer<UInt16>, sourceId: CPointer<UInt16>, categories: CPointer<GUID>, categoryCount: UInt32, virtualCamera: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFSENSORGROUP == "on" && Windows_Win32_Media_MediaFoundation_MFCreateVirtualCamera == "on"]
+public unsafe func Windows_MFCreateVirtualCamera(type_: MFVirtualCameraTypeAbi, lifetime: MFVirtualCameraLifetimeAbi, access: MFVirtualCameraAccessAbi, friendlyName: CPointer<UInt16>, sourceId: CPointer<UInt16>, categories: CPointer<GUID>, categoryCount: UInt32, virtualCamera: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateVirtualCamera(type_, lifetime, access, friendlyName, sourceId, categories, categoryCount, virtualCamera)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFSENSORGROUP == "on" && Windows_Win32_Media_MediaFoundation_MFIsVirtualCameraTypeSupported == "on"]
+foreign {
     func MFIsVirtualCameraTypeSupported(type_: MFVirtualCameraTypeAbi, supported: CPointer<Int32>): Int32
 }
 
-@When[OPMXBOX == "on"]
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFSENSORGROUP == "on" && Windows_Win32_Media_MediaFoundation_MFIsVirtualCameraTypeSupported == "on"]
+public unsafe func Windows_MFIsVirtualCameraTypeSupported(type_: MFVirtualCameraTypeAbi, supported: CPointer<Int32>): Int32 {
+    return MFIsVirtualCameraTypeSupported(type_, supported)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && OPMXBOX == "on" && Windows_Win32_Media_MediaFoundation_OPMXboxEnableHDCP == "on"]
 foreign {
     func OPMXboxEnableHDCP(HDCPType: OPM_HDCP_TYPEAbi): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && OPMXBOX == "on" && Windows_Win32_Media_MediaFoundation_OPMXboxEnableHDCP == "on"]
+public unsafe func Windows_OPMXboxEnableHDCP(HDCPType: OPM_HDCP_TYPEAbi): Int32 {
+    return OPMXboxEnableHDCP(HDCPType)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && OPMXBOX == "on" && Windows_Win32_Media_MediaFoundation_OPMXboxGetHDCPStatus == "on"]
+foreign {
     func OPMXboxGetHDCPStatus(pHDCPStatus: CPointer<OPM_HDCP_STATUSAbi>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && OPMXBOX == "on" && Windows_Win32_Media_MediaFoundation_OPMXboxGetHDCPStatus == "on"]
+public unsafe func Windows_OPMXboxGetHDCPStatus(pHDCPStatus: CPointer<OPM_HDCP_STATUSAbi>): Int32 {
+    return OPMXboxGetHDCPStatus(pHDCPStatus)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && OPMXBOX == "on" && Windows_Win32_Media_MediaFoundation_OPMXboxGetHDCPStatusAndType == "on"]
+foreign {
     func OPMXboxGetHDCPStatusAndType(pHDCPStatus: CPointer<OPM_HDCP_STATUSAbi>, pHDCPType: CPointer<OPM_HDCP_TYPEAbi>): Int32
 }
 
-@When[DXVA2 == "on"]
+@When[Windows_Win32_Media_MediaFoundation == "on" && OPMXBOX == "on" && Windows_Win32_Media_MediaFoundation_OPMXboxGetHDCPStatusAndType == "on"]
+public unsafe func Windows_OPMXboxGetHDCPStatusAndType(pHDCPStatus: CPointer<OPM_HDCP_STATUSAbi>, pHDCPType: CPointer<OPM_HDCP_TYPEAbi>): Int32 {
+    return OPMXboxGetHDCPStatusAndType(pHDCPStatus, pHDCPType)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && DXVA2 == "on" && Windows_Win32_Media_MediaFoundation_DXVA2CreateDirect3DDeviceManager9 == "on"]
 foreign {
     func DXVA2CreateDirect3DDeviceManager9(pResetToken: CPointer<UInt32>, ppDeviceManager: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && DXVA2 == "on" && Windows_Win32_Media_MediaFoundation_DXVA2CreateDirect3DDeviceManager9 == "on"]
+public unsafe func Windows_DXVA2CreateDirect3DDeviceManager9(pResetToken: CPointer<UInt32>, ppDeviceManager: CPointer<CPointer<Unit>>): Int32 {
+    return DXVA2CreateDirect3DDeviceManager9(pResetToken, ppDeviceManager)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && DXVA2 == "on" && Windows_Win32_Media_MediaFoundation_DXVA2CreateVideoService == "on" && Windows_Win32_Graphics_Direct3D9 == "on"]
+foreign {
+    func DXVA2CreateVideoService(pDD: CPointer<Unit>, riid: CPointer<GUID>, ppService: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && DXVA2 == "on" && Windows_Win32_Media_MediaFoundation_DXVA2CreateVideoService == "on" && Windows_Win32_Graphics_Direct3D9 == "on"]
+public unsafe func Windows_DXVA2CreateVideoService(pDD: CPointer<Unit>, riid: CPointer<GUID>, ppService: CPointer<CPointer<Unit>>): Int32 {
+    return DXVA2CreateVideoService(pDD, riid, ppService)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && DXVA2 == "on" && Windows_Win32_Media_MediaFoundation_DXVAHD_CreateDevice == "on" && Windows_Win32_Graphics_Direct3D9 == "on"]
+foreign {
+    // param-hint: pPlugin optional
+    func DXVAHD_CreateDevice(pD3DDevice: CPointer<Unit>, pContentDesc: CPointer<DXVAHD_CONTENT_DESCAbi>, Usage: DXVAHD_DEVICE_USAGEAbi, pPlugin: PDXVAHDSW_Plugin, ppDevice: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && DXVA2 == "on" && Windows_Win32_Media_MediaFoundation_DXVAHD_CreateDevice == "on" && Windows_Win32_Graphics_Direct3D9 == "on"]
+public unsafe func Windows_DXVAHD_CreateDevice(pD3DDevice: CPointer<Unit>, pContentDesc: CPointer<DXVAHD_CONTENT_DESCAbi>, Usage: DXVAHD_DEVICE_USAGEAbi, pPlugin: PDXVAHDSW_Plugin, ppDevice: CPointer<CPointer<Unit>>): Int32 {
+    return DXVAHD_CreateDevice(pD3DDevice, pContentDesc, Usage, pPlugin, ppDevice)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && DXVA2 == "on" && Windows_Win32_Media_MediaFoundation_OPMGetVideoOutputForTarget == "on"]
+foreign {
     func OPMGetVideoOutputForTarget(pAdapterLuid: CPointer<Win32_Foundation.LUIDAbi>, VidPnTarget: UInt32, vos: OPM_VIDEO_OUTPUT_SEMANTICSAbi, ppOPMVideoOutput: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[DXVA2 == "on" && Windows_Win32_Graphics_Direct3D9 == "on"]
-foreign {
-    func DXVA2CreateVideoService(pDD: CPointer<Unit>, riid: CPointer<GUID>, ppService: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pPlugin optional
-    func DXVAHD_CreateDevice(pD3DDevice: CPointer<Unit>, pContentDesc: CPointer<DXVAHD_CONTENT_DESCAbi>, Usage: DXVAHD_DEVICE_USAGEAbi, pPlugin: PDXVAHDSW_Plugin, ppDevice: CPointer<CPointer<Unit>>): Int32
-    func OPMGetVideoOutputsFromIDirect3DDevice9Object(pDirect3DDevice9: CPointer<Unit>, vos: OPM_VIDEO_OUTPUT_SEMANTICSAbi, pulNumVideoOutputs: CPointer<UInt32>, pppOPMVideoOutputArray: CPointer<CPointer<CPointer<Unit>>>): Int32
+@When[Windows_Win32_Media_MediaFoundation == "on" && DXVA2 == "on" && Windows_Win32_Media_MediaFoundation_OPMGetVideoOutputForTarget == "on"]
+public unsafe func Windows_OPMGetVideoOutputForTarget(pAdapterLuid: CPointer<Win32_Foundation.LUIDAbi>, VidPnTarget: UInt32, vos: OPM_VIDEO_OUTPUT_SEMANTICSAbi, ppOPMVideoOutput: CPointer<CPointer<Unit>>): Int32 {
+    return OPMGetVideoOutputForTarget(pAdapterLuid, VidPnTarget, vos, ppOPMVideoOutput)
 }
 
-@When[DXVA2 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+@When[Windows_Win32_Media_MediaFoundation == "on" && DXVA2 == "on" && Windows_Win32_Media_MediaFoundation_OPMGetVideoOutputsFromHMONITOR == "on" && Windows_Win32_Graphics_Gdi == "on"]
 foreign {
     func OPMGetVideoOutputsFromHMONITOR(hMonitor: Win32_Graphics_Gdi.HMONITOR, vos: OPM_VIDEO_OUTPUT_SEMANTICSAbi, pulNumVideoOutputs: CPointer<UInt32>, pppOPMVideoOutputArray: CPointer<CPointer<CPointer<Unit>>>): Int32
 }
 
-@When[MFSRCSNK == "on"]
+@When[Windows_Win32_Media_MediaFoundation == "on" && DXVA2 == "on" && Windows_Win32_Media_MediaFoundation_OPMGetVideoOutputsFromHMONITOR == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_OPMGetVideoOutputsFromHMONITOR(hMonitor: Win32_Graphics_Gdi.HMONITOR, vos: OPM_VIDEO_OUTPUT_SEMANTICSAbi, pulNumVideoOutputs: CPointer<UInt32>, pppOPMVideoOutputArray: CPointer<CPointer<CPointer<Unit>>>): Int32 {
+    return OPMGetVideoOutputsFromHMONITOR(hMonitor, vos, pulNumVideoOutputs, pppOPMVideoOutputArray)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && DXVA2 == "on" && Windows_Win32_Media_MediaFoundation_OPMGetVideoOutputsFromIDirect3DDevice9Object == "on" && Windows_Win32_Graphics_Direct3D9 == "on"]
+foreign {
+    func OPMGetVideoOutputsFromIDirect3DDevice9Object(pDirect3DDevice9: CPointer<Unit>, vos: OPM_VIDEO_OUTPUT_SEMANTICSAbi, pulNumVideoOutputs: CPointer<UInt32>, pppOPMVideoOutputArray: CPointer<CPointer<CPointer<Unit>>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && DXVA2 == "on" && Windows_Win32_Media_MediaFoundation_OPMGetVideoOutputsFromIDirect3DDevice9Object == "on" && Windows_Win32_Graphics_Direct3D9 == "on"]
+public unsafe func Windows_OPMGetVideoOutputsFromIDirect3DDevice9Object(pDirect3DDevice9: CPointer<Unit>, vos: OPM_VIDEO_OUTPUT_SEMANTICSAbi, pulNumVideoOutputs: CPointer<UInt32>, pppOPMVideoOutputArray: CPointer<CPointer<CPointer<Unit>>>): Int32 {
+    return OPMGetVideoOutputsFromIDirect3DDevice9Object(pDirect3DDevice9, vos, pulNumVideoOutputs, pppOPMVideoOutputArray)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFSRCSNK == "on" && Windows_Win32_Media_MediaFoundation_MFCreateAVIMediaSink == "on"]
 foreign {
     // param-hint: pAudioMediaType optional
     func MFCreateAVIMediaSink(pIByteStream: CPointer<Unit>, pVideoMediaType: CPointer<Unit>, pAudioMediaType: CPointer<Unit>, ppIMediaSink: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFSRCSNK == "on" && Windows_Win32_Media_MediaFoundation_MFCreateAVIMediaSink == "on"]
+public unsafe func Windows_MFCreateAVIMediaSink(pIByteStream: CPointer<Unit>, pVideoMediaType: CPointer<Unit>, pAudioMediaType: CPointer<Unit>, ppIMediaSink: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateAVIMediaSink(pIByteStream, pVideoMediaType, pAudioMediaType, ppIMediaSink)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFSRCSNK == "on" && Windows_Win32_Media_MediaFoundation_MFCreateWAVEMediaSink == "on"]
+foreign {
     func MFCreateWAVEMediaSink(pTargetByteStream: CPointer<Unit>, pAudioMediaType: CPointer<Unit>, ppMediaSink: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFSRCSNK == "on" && Windows_Win32_Media_MediaFoundation_MFCreateWAVEMediaSink == "on"]
+public unsafe func Windows_MFCreateWAVEMediaSink(pTargetByteStream: CPointer<Unit>, pAudioMediaType: CPointer<Unit>, ppMediaSink: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateWAVEMediaSink(pTargetByteStream, pAudioMediaType, ppMediaSink)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateDXGICrossAdapterBuffer == "on" && Windows_Win32_System_Com == "on"]
+func __windowsBindgen_MFCreateDXGICrossAdapterBufferProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("MFPlat.DLL", "MFCreateDXGICrossAdapterBuffer")
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateDXGICrossAdapterBuffer == "on" && Windows_Win32_System_Com == "on"]
+unsafe func MFCreateDXGICrossAdapterBuffer(riid: CPointer<GUID>, punkDevice: CPointer<Unit>, pMediaType: CPointer<Unit>, uSubresource: UInt32, ppBuffer: CPointer<CPointer<Unit>>): Int32 {
+    let call = CFunc<(CPointer<GUID>, CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32>(__windowsBindgen_MFCreateDXGICrossAdapterBufferProc())
+    return unsafe { call(riid, punkDevice, pMediaType, uSubresource, ppBuffer) }
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFCreateDXGICrossAdapterBuffer == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFCreateDXGICrossAdapterBuffer(riid: CPointer<GUID>, punkDevice: CPointer<Unit>, pMediaType: CPointer<Unit>, uSubresource: UInt32, ppBuffer: CPointer<CPointer<Unit>>): Int32 {
+    return MFCreateDXGICrossAdapterBuffer(riid, punkDevice, pMediaType, uSubresource, ppBuffer)
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetDXGIDeviceManageMode == "on" && Windows_Win32_System_Com == "on"]
+func __windowsBindgen_MFGetDXGIDeviceManageModeProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("MFPlat.DLL", "MFGetDXGIDeviceManageMode")
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetDXGIDeviceManageMode == "on" && Windows_Win32_System_Com == "on"]
+unsafe func MFGetDXGIDeviceManageMode(pDeviceManager: CPointer<Unit>, mode: CPointer<MF_DXGI_DEVICE_MANAGER_MODEAbi>): Int32 {
+    let call = CFunc<(CPointer<Unit>, CPointer<MF_DXGI_DEVICE_MANAGER_MODEAbi>) -> Int32>(__windowsBindgen_MFGetDXGIDeviceManageModeProc())
+    return unsafe { call(pDeviceManager, mode) }
+}
+
+@When[Windows_Win32_Media_MediaFoundation == "on" && MFPLAT == "on" && Windows_Win32_Media_MediaFoundation_MFGetDXGIDeviceManageMode == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MFGetDXGIDeviceManageMode(pDeviceManager: CPointer<Unit>, mode: CPointer<MF_DXGI_DEVICE_MANAGER_MODEAbi>): Int32 {
+    return MFGetDXGIDeviceManageMode(pDeviceManager, mode)
 }
 
 @When[Windows_Win32_Media_MediaFoundation == "on"]

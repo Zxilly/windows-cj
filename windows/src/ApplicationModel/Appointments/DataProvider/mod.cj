@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -176,7 +175,10 @@ public struct IAppointmentCalendarCreateOrUpdateAppointmentRequestVtbl {
     @When[Windows_ApplicationModel_Appointments != "on"]
     public var get_Appointment: UIntNative = UIntNative(0)
     public var NotifyInvitees: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var ChangedProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ChangedProperties: UIntNative = UIntNative(0)
     @When[Windows_ApplicationModel_Appointments == "on"]
     public var ReportCompletedAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel_Appointments != "on"]
@@ -275,6 +277,7 @@ public class IAppointmentCalendarCreateOrUpdateAppointmentRequest <: InterfaceWr
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ChangedProperties(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -311,9 +314,9 @@ public struct IAppointmentCalendarForwardMeetingRequestVtbl {
     public var AppointmentCalendarLocalId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var AppointmentLocalId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var AppointmentOriginalStartTime: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel_Appointments == "on"]
+    @When[Windows_ApplicationModel_Appointments == "on" && Windows_Foundation_Collections == "on"]
     public var Invitees: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel_Appointments != "on"]
+    @When[Windows_ApplicationModel_Appointments != "on" || Windows_Foundation_Collections != "on"]
     public var Invitees: UIntNative = UIntNative(0)
     public var Subject: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ForwardHeader: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -412,7 +415,7 @@ public class IAppointmentCalendarForwardMeetingRequest <: InterfaceWrapperBase &
         return Foundation.IReference<windows_future.DateTime>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel_Appointments == "on"]
+    @When[Windows_ApplicationModel_Appointments == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func Invitees(): windows_collections.IVectorView<_impl_l1.AppointmentInvitee> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1088,6 +1091,7 @@ public class AppointmentCalendarCreateOrUpdateAppointmentRequest <: InterfaceWra
         return defaultInterface().NotifyInvitees()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ChangedProperties(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().ChangedProperties()
     }
@@ -1201,7 +1205,7 @@ public class AppointmentCalendarForwardMeetingRequest <: InterfaceWrapperBase & 
         return defaultInterface().AppointmentOriginalStartTime()
     }
 
-    @When[Windows_ApplicationModel_Appointments == "on"]
+    @When[Windows_ApplicationModel_Appointments == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func Invitees(): windows_collections.IVectorView<_impl_l1.AppointmentInvitee> {
         return defaultInterface().Invitees()
     }

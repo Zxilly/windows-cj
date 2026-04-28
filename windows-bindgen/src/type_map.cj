@@ -304,7 +304,7 @@ public class TypeMap {
         return true
     }
 
-    func dependenciesForEntry(index: TypeIndex, entry: BindgenTypeEntry): ArrayList<TypeName> {
+    public func dependenciesForEntry(index: TypeIndex, entry: BindgenTypeEntry): ArrayList<TypeName> {
         let entryKey = entry.key()
         if (!dependencyGraph.contains(entryKey)) {
             dependencyGraph[entryKey] = collectTypeDependencies(index, entry.fileIdx, entry.row)
@@ -353,6 +353,9 @@ public class TypeMap {
             case Interface =>
                 let dependencies = collectInterfaceTypeSurfaceDependencies(index, fileIdx, row)
                 return dependencyCfgTagsForTypesInternal(index, ownerNamespace, dependencies, sameNamespaceSeen)
+            case Class =>
+                let dependencies = collectClassTypeSurfaceDependencies(index, fileIdx, row)
+                return dependencyCfgTagsForTypesInternal(index, ownerNamespace, dependencies, sameNamespaceSeen)
             case Struct =>
                 let dependencies = collectCppTypeSurfaceDependencies(index, fileIdx, row)
                 return dependencyCfgTagsForTypesInternal(index, ownerNamespace, dependencies, sameNamespaceSeen)
@@ -389,9 +392,9 @@ public class TypeMap {
         let dependencies = ArrayList<TypeName>()
         let seen = HashMap<TypeName, Bool>()
         let signature = index.methodDefSignature(fileIdx, row, generics)
-        collectCppMetadataTypeDependencies(signature.returnType, dependencies, seen)
+        collectMetadataTypeDependencies(signature.returnType, dependencies, seen)
         for (paramType in signature.paramTypes) {
-            collectCppMetadataTypeDependencies(paramType, dependencies, seen)
+            collectMetadataTypeDependencies(paramType, dependencies, seen)
         }
         return dependencyCfgTagsForTypesInternal(index, ownerNamespace, dependencies, sameNamespaceSeen)
     }
@@ -520,7 +523,7 @@ public class TypeMap {
     ): ArrayList<String> {
         let archTags = architectureCfgTags(index.arches(TABLE_TYPE_DEF, entry.fileIdx, entry.row))
         match (index.typeDefCategory(entry.fileIdx, entry.row)) {
-            case Struct | Delegate =>
+            case Struct | Delegate | Class =>
                 let surfaceTags = dependencyCfgTagsForTypeSurfaceInternal(index, ownerNamespace, entry.fileIdx, entry.row,
                     sameNamespaceSeen)
                 return mergeTypeMapCfgTags(archTags, surfaceTags)
@@ -852,6 +855,20 @@ func collectProjectedClassDependencies(
         case _ => return
     }
 
+    match (winmdDefaultClassInterfaceType(index, fileIdx, row)) {
+        case Some(defaultInterface) =>
+            let defaultInterfaceName = defaultInterface.definition()
+            addDependency(defaultInterfaceName, result, seen)
+            let candidates = index.get(defaultInterfaceName)
+            if (!candidates.isEmpty()) {
+                let entry = candidates[0]
+                for (iface in winmdCollectInterfaceAncestors(index, entry.fileIdx, entry.row)) {
+                    addDependency(iface, result, seen)
+                }
+            }
+        case None => ()
+    }
+
     for (baseType in winmdCollectClassBases(index, fileIdx, row)) {
         addDependency(baseType, result, seen)
         let candidates = index.get(baseType.definition())
@@ -911,6 +928,27 @@ func collectInterfaceTypeSurfaceDependencies(index: TypeIndex, fileIdx: Int64, r
 
     match (winmdFindBaseInterface(index, fileIdx, row)) {
         case Some(baseInterface) => addDependency(baseInterface.definition(), result, seen)
+        case None => ()
+    }
+
+    return result
+}
+
+func collectClassTypeSurfaceDependencies(index: TypeIndex, fileIdx: Int64, row: Int64): ArrayList<TypeName> {
+    let result = ArrayList<TypeName>()
+    let seen = HashMap<TypeName, Bool>()
+
+    match (winmdDefaultClassInterfaceType(index, fileIdx, row)) {
+        case Some(defaultInterface) =>
+            let defaultInterfaceName = defaultInterface.definition()
+            addDependency(defaultInterfaceName, result, seen)
+            let candidates = index.get(defaultInterfaceName)
+            if (!candidates.isEmpty()) {
+                let entry = candidates[0]
+                for (iface in winmdCollectInterfaceAncestors(index, entry.fileIdx, entry.row)) {
+                    addDependency(iface, result, seen)
+                }
+            }
         case None => ()
     }
 

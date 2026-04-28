@@ -6,7 +6,6 @@ package windows.Win32.System.PasswordManagement
 import std.collection.*
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 
@@ -150,8 +149,22 @@ extend SAMPR_ENCRYPTED_USER_PASSWORD <: windows_core.CopyType & windows_core.Run
     }
 }
 
-@When[ADVAPI32 == "on"]
+@When[Windows_Win32_System_PasswordManagement == "on" && ADVAPI32 == "on" && Windows_Win32_System_PasswordManagement_MSChapSrvChangePassword == "on"]
 foreign {
     func MSChapSrvChangePassword(ServerName: CPointer<UInt16>, UserName: CPointer<UInt16>, LmOldPresent: UInt8, LmOldOwfPassword: CPointer<LM_OWF_PASSWORDAbi>, LmNewOwfPassword: CPointer<LM_OWF_PASSWORDAbi>, NtOldOwfPassword: CPointer<LM_OWF_PASSWORDAbi>, NtNewOwfPassword: CPointer<LM_OWF_PASSWORDAbi>): UInt32
+}
+
+@When[Windows_Win32_System_PasswordManagement == "on" && ADVAPI32 == "on" && Windows_Win32_System_PasswordManagement_MSChapSrvChangePassword == "on"]
+public unsafe func Windows_MSChapSrvChangePassword(ServerName: CPointer<UInt16>, UserName: CPointer<UInt16>, LmOldPresent: UInt8, LmOldOwfPassword: CPointer<LM_OWF_PASSWORDAbi>, LmNewOwfPassword: CPointer<LM_OWF_PASSWORDAbi>, NtOldOwfPassword: CPointer<LM_OWF_PASSWORDAbi>, NtNewOwfPassword: CPointer<LM_OWF_PASSWORDAbi>): UInt32 {
+    return MSChapSrvChangePassword(ServerName, UserName, LmOldPresent, LmOldOwfPassword, LmNewOwfPassword, NtOldOwfPassword, NtNewOwfPassword)
+}
+
+@When[Windows_Win32_System_PasswordManagement == "on" && ADVAPI32 == "on" && Windows_Win32_System_PasswordManagement_MSChapSrvChangePassword2 == "on"]
+foreign {
     func MSChapSrvChangePassword2(ServerName: CPointer<UInt16>, UserName: CPointer<UInt16>, NewPasswordEncryptedWithOldNt: CPointer<SAMPR_ENCRYPTED_USER_PASSWORDAbi>, OldNtOwfPasswordEncryptedWithNewNt: CPointer<ENCRYPTED_LM_OWF_PASSWORDAbi>, LmPresent: UInt8, NewPasswordEncryptedWithOldLm: CPointer<SAMPR_ENCRYPTED_USER_PASSWORDAbi>, OldLmOwfPasswordEncryptedWithNewLmOrNt: CPointer<ENCRYPTED_LM_OWF_PASSWORDAbi>): UInt32
+}
+
+@When[Windows_Win32_System_PasswordManagement == "on" && ADVAPI32 == "on" && Windows_Win32_System_PasswordManagement_MSChapSrvChangePassword2 == "on"]
+public unsafe func Windows_MSChapSrvChangePassword2(ServerName: CPointer<UInt16>, UserName: CPointer<UInt16>, NewPasswordEncryptedWithOldNt: CPointer<SAMPR_ENCRYPTED_USER_PASSWORDAbi>, OldNtOwfPasswordEncryptedWithNewNt: CPointer<ENCRYPTED_LM_OWF_PASSWORDAbi>, LmPresent: UInt8, NewPasswordEncryptedWithOldLm: CPointer<SAMPR_ENCRYPTED_USER_PASSWORDAbi>, OldLmOwfPasswordEncryptedWithNewLmOrNt: CPointer<ENCRYPTED_LM_OWF_PASSWORDAbi>): UInt32 {
+    return MSChapSrvChangePassword2(ServerName, UserName, NewPasswordEncryptedWithOldNt, OldNtOwfPasswordEncryptedWithNewNt, LmPresent, NewPasswordEncryptedWithOldLm, OldLmOwfPasswordEncryptedWithNewLmOrNt)
 }

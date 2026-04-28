@@ -1106,9 +1106,9 @@ public struct IApplicationView9Vtbl {
     public var get_WindowingEnvironment: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_WindowManagement != "on"]
     public var get_WindowingEnvironment: UIntNative = UIntNative(0)
-    @When[Windows_UI_WindowManagement == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_WindowManagement == "on"]
     public var GetDisplayRegions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_WindowManagement != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_UI_WindowManagement != "on"]
     public var GetDisplayRegions: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -1187,7 +1187,7 @@ public class IApplicationView9 <: InterfaceWrapperBase & ComInterface & RuntimeN
         return WindowingEnvironment.fromAbiTake(result__)
     }
 
-    @When[Windows_UI_WindowManagement == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_WindowManagement == "on"]
     public unsafe func GetDisplayRegions(): windows_collections.IVectorView<DisplayRegion> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

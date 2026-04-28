@@ -177,6 +177,7 @@ public struct IAdaptiveMediaSourceVtbl {
     public var SetInitialBitrate: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
     public var CurrentDownloadBitrate: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var CurrentPlaybackBitrate: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var AvailableBitrates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var DesiredMinBitrate: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetDesiredMinBitrate: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -186,14 +187,19 @@ public struct IAdaptiveMediaSourceVtbl {
     public var InboundBitsPerSecond: CFunc<(CPointer<Unit>, CPointer<UInt64>) -> Int32> = { _, _ => 0 }
     public var InboundBitsPerSecondWindow: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.TimeSpan>) -> Int32> = { _, _ => 0 }
     public var SetInboundBitsPerSecondWindow: CFunc<(CPointer<Unit>, Foundation__impl_l0.TimeSpan) -> Int32> = { _, _ => 0 }
+    @When[Windows_Media_Core == "on"]
     public var DownloadBitrateChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveDownloadBitrateChanged: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
+    @When[Windows_Media_Core == "on"]
     public var PlaybackBitrateChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemovePlaybackBitrateChanged: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
+    @When[Windows_Media_Core == "on"]
     public var DownloadRequested: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveDownloadRequested: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
+    @When[Windows_Media_Core == "on"]
     public var DownloadCompleted: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveDownloadCompleted: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
+    @When[Windows_Media_Core == "on"]
     public var DownloadFailed: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveDownloadFailed: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -281,6 +287,7 @@ public class IAdaptiveMediaSource <: InterfaceWrapperBase & ComInterface {
         return __vt.CurrentPlaybackBitrate(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AvailableBitrates(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -335,6 +342,7 @@ public class IAdaptiveMediaSource <: InterfaceWrapperBase & ComInterface {
         return __vt.SetInboundBitsPerSecondWindow(__liveRaw, value)
     }
 
+    @When[Windows_Media_Core == "on"]
     public unsafe func DownloadBitrateChanged(handler: CPointer<Unit>, result__: CPointer<Foundation__impl_l0.EventRegistrationToken>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -347,6 +355,7 @@ public class IAdaptiveMediaSource <: InterfaceWrapperBase & ComInterface {
         return __vt.RemoveDownloadBitrateChanged(__liveRaw, token)
     }
 
+    @When[Windows_Media_Core == "on"]
     public unsafe func PlaybackBitrateChanged(handler: CPointer<Unit>, result__: CPointer<Foundation__impl_l0.EventRegistrationToken>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -359,6 +368,7 @@ public class IAdaptiveMediaSource <: InterfaceWrapperBase & ComInterface {
         return __vt.RemovePlaybackBitrateChanged(__liveRaw, token)
     }
 
+    @When[Windows_Media_Core == "on"]
     public unsafe func DownloadRequested(handler: CPointer<Unit>, result__: CPointer<Foundation__impl_l0.EventRegistrationToken>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -371,6 +381,7 @@ public class IAdaptiveMediaSource <: InterfaceWrapperBase & ComInterface {
         return __vt.RemoveDownloadRequested(__liveRaw, token)
     }
 
+    @When[Windows_Media_Core == "on"]
     public unsafe func DownloadCompleted(handler: CPointer<Unit>, result__: CPointer<Foundation__impl_l0.EventRegistrationToken>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -383,6 +394,7 @@ public class IAdaptiveMediaSource <: InterfaceWrapperBase & ComInterface {
         return __vt.RemoveDownloadCompleted(__liveRaw, token)
     }
 
+    @When[Windows_Media_Core == "on"]
     public unsafe func DownloadFailed(handler: CPointer<Unit>, result__: CPointer<Foundation__impl_l0.EventRegistrationToken>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -705,6 +717,7 @@ public class IAdaptiveMediaSourceCorrelatedTimes <: InterfaceWrapperBase & ComIn
 public struct IAdaptiveMediaSourceCreationResultVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Status: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Media_Core == "on"]
     public var MediaSource: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Web_Http == "on"]
     public var HttpResponseMessage: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -757,6 +770,7 @@ public class IAdaptiveMediaSourceCreationResult <: InterfaceWrapperBase & ComInt
         return __vt.Status(__liveRaw, result__)
     }
 
+    @When[Windows_Media_Core == "on"]
     public unsafe func MediaSource(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

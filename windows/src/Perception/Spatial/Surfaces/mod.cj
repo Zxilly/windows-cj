@@ -10,11 +10,8 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Graphics_DirectX == "on"]
 import windows.Graphics.DirectX as Graphics_DirectX
-@When[Windows_Perception_Spatial == "on"]
 import windows.Perception.Spatial as Perception_Spatial
 import windows._impl_l0 as _impl_l0
 import windows_collections as windows_collections
@@ -310,17 +307,17 @@ extend ISpatialSurfaceMeshOptions <: windows_core.Interface<ISpatialSurfaceMeshO
 @C
 public struct ISpatialSurfaceMeshOptionsStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Graphics_DirectX == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_DirectX == "on"]
     public var SupportedVertexPositionFormats: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Graphics_DirectX != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Graphics_DirectX != "on"]
     public var SupportedVertexPositionFormats: UIntNative = UIntNative(0)
-    @When[Windows_Graphics_DirectX == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_DirectX == "on"]
     public var SupportedTriangleIndexFormats: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Graphics_DirectX != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Graphics_DirectX != "on"]
     public var SupportedTriangleIndexFormats: UIntNative = UIntNative(0)
-    @When[Windows_Graphics_DirectX == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_DirectX == "on"]
     public var SupportedVertexNormalFormats: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Graphics_DirectX != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Graphics_DirectX != "on"]
     public var SupportedVertexNormalFormats: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -390,7 +387,7 @@ public class ISpatialSurfaceMeshOptionsStatics <: InterfaceWrapperBase & ComInte
         readVtbl<ISpatialSurfaceMeshOptionsStaticsVtbl>(ISpatialSurfaceMeshOptionsStaticsVtbl())
     }
 
-    @When[Windows_Graphics_DirectX == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_DirectX == "on"]
     public unsafe func SupportedVertexPositionFormats(): windows_collections.IVectorView<Graphics_DirectX.DirectXPixelFormat> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -399,7 +396,7 @@ public class ISpatialSurfaceMeshOptionsStatics <: InterfaceWrapperBase & ComInte
         return windows_collections.IVectorView<Graphics_DirectX.DirectXPixelFormat>.fromAbiTake(result__)
     }
 
-    @When[Windows_Graphics_DirectX == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_DirectX == "on"]
     public unsafe func SupportedTriangleIndexFormats(): windows_collections.IVectorView<Graphics_DirectX.DirectXPixelFormat> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -408,7 +405,7 @@ public class ISpatialSurfaceMeshOptionsStatics <: InterfaceWrapperBase & ComInte
         return windows_collections.IVectorView<Graphics_DirectX.DirectXPixelFormat>.fromAbiTake(result__)
     }
 
-    @When[Windows_Graphics_DirectX == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_DirectX == "on"]
     public unsafe func SupportedVertexNormalFormats(): windows_collections.IVectorView<Graphics_DirectX.DirectXPixelFormat> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -831,7 +828,7 @@ public class SpatialSurfaceMeshOptions <: InterfaceWrapperBase & ComInterface & 
         defaultInterface().SetIncludeVertexNormals(value)
     }
 
-    @When[Windows_Graphics_DirectX == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_DirectX == "on"]
     public static unsafe func SupportedVertexPositionFormats(): windows_collections.IVectorView<Graphics_DirectX.DirectXPixelFormat> {
         var result__: Option<windows_collections.IVectorView<Graphics_DirectX.DirectXPixelFormat>> = Option<windows_collections.IVectorView<Graphics_DirectX.DirectXPixelFormat>>.None
         try (factory__ = windows_core.factory<SpatialSurfaceMeshOptions, ISpatialSurfaceMeshOptionsStatics>().unwrap()) {
@@ -843,7 +840,7 @@ public class SpatialSurfaceMeshOptions <: InterfaceWrapperBase & ComInterface & 
         }
     }
 
-    @When[Windows_Graphics_DirectX == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_DirectX == "on"]
     public static unsafe func SupportedTriangleIndexFormats(): windows_collections.IVectorView<Graphics_DirectX.DirectXPixelFormat> {
         var result__: Option<windows_collections.IVectorView<Graphics_DirectX.DirectXPixelFormat>> = Option<windows_collections.IVectorView<Graphics_DirectX.DirectXPixelFormat>>.None
         try (factory__ = windows_core.factory<SpatialSurfaceMeshOptions, ISpatialSurfaceMeshOptionsStatics>().unwrap()) {
@@ -855,7 +852,7 @@ public class SpatialSurfaceMeshOptions <: InterfaceWrapperBase & ComInterface & 
         }
     }
 
-    @When[Windows_Graphics_DirectX == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_DirectX == "on"]
     public static unsafe func SupportedVertexNormalFormats(): windows_collections.IVectorView<Graphics_DirectX.DirectXPixelFormat> {
         var result__: Option<windows_collections.IVectorView<Graphics_DirectX.DirectXPixelFormat>> = Option<windows_collections.IVectorView<Graphics_DirectX.DirectXPixelFormat>>.None
         try (factory__ = windows_core.factory<SpatialSurfaceMeshOptions, ISpatialSurfaceMeshOptionsStatics>().unwrap()) {
@@ -1153,14 +1150,17 @@ extend ISpatialSurfaceMesh <: windows_core.Interface<ISpatialSurfaceMesh> {}
 @C
 public struct ISpatialSurfaceObserverVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetObservedSurfaces: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetObservedSurfaces: UIntNative = UIntNative(0)
     @When[Windows_Perception_Spatial == "on"]
     public var SetBoundingVolume: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Perception_Spatial != "on"]
     public var SetBoundingVolume: UIntNative = UIntNative(0)
-    @When[Windows_Perception_Spatial == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Perception_Spatial == "on"]
     public var SetBoundingVolumes: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Perception_Spatial != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Perception_Spatial != "on"]
     public var SetBoundingVolumes: UIntNative = UIntNative(0)
     public var ObservedSurfacesChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveObservedSurfacesChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1232,6 +1232,7 @@ public class ISpatialSurfaceObserver <: InterfaceWrapperBase & ComInterface & Ru
         readVtbl<ISpatialSurfaceObserverVtbl>(ISpatialSurfaceObserverVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetObservedSurfaces(): windows_collections.IMapView<GuidValue, SpatialSurfaceInfo> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1247,7 +1248,7 @@ public class ISpatialSurfaceObserver <: InterfaceWrapperBase & ComInterface & Ru
         HRESULT(hr).ok()
     }
 
-    @When[Windows_Perception_Spatial == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Perception_Spatial == "on"]
     public unsafe func SetBoundingVolumes(bounds: windows_collections.IIterable<Perception_Spatial.SpatialBoundingVolume>): Unit {
         let v = vtbl()
         let hr = v.SetBoundingVolumes(asRaw(), bounds.asRaw())
@@ -1575,6 +1576,7 @@ public class SpatialSurfaceObserver <: InterfaceWrapperBase & ComInterface & win
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetObservedSurfaces(): windows_collections.IMapView<GuidValue, SpatialSurfaceInfo> {
         return defaultInterface().GetObservedSurfaces()
     }
@@ -1584,7 +1586,7 @@ public class SpatialSurfaceObserver <: InterfaceWrapperBase & ComInterface & win
         defaultInterface().SetBoundingVolume(bounds)
     }
 
-    @When[Windows_Perception_Spatial == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Perception_Spatial == "on"]
     public unsafe func SetBoundingVolumes(bounds: windows_collections.IIterable<Perception_Spatial.SpatialBoundingVolume>): Unit {
         defaultInterface().SetBoundingVolumes(bounds)
     }

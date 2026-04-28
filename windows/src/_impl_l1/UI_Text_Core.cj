@@ -89,6 +89,7 @@ public class CoreTextCompositionCompletedEventArgs <: InterfaceWrapperBase & Com
         return defaultInterface().IsCanceled()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CompositionSegments(): windows_collections.IVectorView<CoreTextCompositionSegment> {
         return defaultInterface().CompositionSegments()
     }
@@ -1498,7 +1499,10 @@ extend CoreTextTextUpdatingEventArgs <: windows_core.HandleWinrtType<CoreTextTex
 public struct ICoreTextCompositionCompletedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var IsCanceled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var CompositionSegments: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CompositionSegments: UIntNative = UIntNative(0)
     public var GetDeferral: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -1576,6 +1580,7 @@ public class ICoreTextCompositionCompletedEventArgs <: InterfaceWrapperBase & Co
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CompositionSegments(): windows_collections.IVectorView<CoreTextCompositionSegment> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

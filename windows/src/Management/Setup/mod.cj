@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -1317,12 +1316,14 @@ public class DeploymentSessionHeartbeatRequested <: InterfaceWrapperBase & ComIn
 @When[Windows_Management_Setup == "on"]
 extend DeploymentSessionHeartbeatRequested <: windows_core.Interface<DeploymentSessionHeartbeatRequested> {}
 
+@When[Windows_Management_Setup == "on"]
 private open class DeploymentSessionHeartbeatRequestedInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_Management_Setup == "on"]
 private open class DeploymentSessionHeartbeatRequestedInvoker <: DeploymentSessionHeartbeatRequestedInvokerErased {
     public open func Invoke(eventArgs: InParam<DeploymentSessionHeartbeatRequestedEventArgs>): Unit {
         ()
@@ -1334,6 +1335,7 @@ private open class DeploymentSessionHeartbeatRequestedInvoker <: DeploymentSessi
     }
 }
 
+@When[Windows_Management_Setup == "on"]
 private class DeploymentSessionHeartbeatRequestedBox <: DeploymentSessionHeartbeatRequestedInvoker {
     public let invoke_: (InParam<DeploymentSessionHeartbeatRequestedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<DeploymentSessionHeartbeatRequestedVtbl>
@@ -1352,6 +1354,7 @@ private class DeploymentSessionHeartbeatRequestedBox <: DeploymentSessionHeartbe
     }
 }
 
+@When[Windows_Management_Setup == "on"]
 func buildDeploymentSessionHeartbeatRequestedBoxVtbl(): DeploymentSessionHeartbeatRequestedVtbl {
     var vtbl = DeploymentSessionHeartbeatRequestedVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -1482,6 +1485,7 @@ public class AgentProvisioningProgressReport <: InterfaceWrapperBase & ComInterf
         defaultInterface().SetDisplayProgressSecondary(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Batches(): windows_collections.IVector<DeploymentWorkloadBatch> {
         return defaultInterface().Batches()
     }
@@ -1761,6 +1765,7 @@ public class DeploymentWorkloadBatch <: InterfaceWrapperBase & ComInterface & wi
         defaultInterface().SetDisplayCategoryTitle(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func BatchWorkloads(): windows_collections.IVector<DeploymentWorkload> {
         return defaultInterface().BatchWorkloads()
     }
@@ -1809,7 +1814,10 @@ public struct IAgentProvisioningProgressReportVtbl {
     public var SetDisplayProgress: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var DisplayProgressSecondary: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetDisplayProgressSecondary: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Batches: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Batches: UIntNative = UIntNative(0)
     public var CurrentBatchIndex: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetCurrentBatchIndex: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -1950,6 +1958,7 @@ public class IAgentProvisioningProgressReport <: InterfaceWrapperBase & ComInter
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Batches(): windows_collections.IVector<DeploymentWorkloadBatch> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1983,7 +1992,10 @@ public struct IDeploymentWorkloadBatchVtbl {
     public var Id: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var DisplayCategoryTitle: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetDisplayCategoryTitle: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var BatchWorkloads: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var BatchWorkloads: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2074,6 +2086,7 @@ public class IDeploymentWorkloadBatch <: InterfaceWrapperBase & ComInterface & R
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func BatchWorkloads(): windows_collections.IVector<DeploymentWorkload> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

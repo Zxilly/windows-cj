@@ -4,6 +4,7 @@
 package windows.Win32._impl_l2
 
 import std.collection.*
+import windows_libloading
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
@@ -64,20 +65,52 @@ extend APC_CALLBACK_DATA <: windows_core.CopyType & windows_core.RuntimeType & w
     }
 }
 
-@When[ADVAPI32 == "on"]
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Debug_CloseThreadWaitChainSession == "on"]
 foreign {
     func CloseThreadWaitChainSession(WctHandle: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Debug_CloseThreadWaitChainSession == "on"]
+public unsafe func Windows_CloseThreadWaitChainSession(WctHandle: CPointer<Unit>): Unit {
+    CloseThreadWaitChainSession(WctHandle)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Debug_GetThreadWaitChain == "on"]
+foreign {
     // param-hint: Context optional
     // param-hint: NodeInfoArray len=param[4]
     // pinvoke-hint: SetLastError
     func GetThreadWaitChain(WctHandle: CPointer<Unit>, Context: UIntNative, Flags: Win32__impl_l0.WAIT_CHAIN_THREAD_OPTIONSAbi, ThreadId: UInt32, NodeCount: CPointer<UInt32>, NodeInfoArray: CPointer<Win32__impl_l1.WAITCHAIN_NODE_INFOAbi>, IsCycle: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Debug_GetThreadWaitChain == "on"]
+public unsafe func Windows_GetThreadWaitChain(WctHandle: CPointer<Unit>, Context: UIntNative, Flags: Win32__impl_l0.WAIT_CHAIN_THREAD_OPTIONSAbi, ThreadId: UInt32, NodeCount: CPointer<UInt32>, NodeInfoArray: CPointer<Win32__impl_l1.WAITCHAIN_NODE_INFOAbi>, IsCycle: CPointer<Int32>): Int32 {
+    return GetThreadWaitChain(WctHandle, Context, Flags, ThreadId, NodeCount, NodeInfoArray, IsCycle)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Debug_OpenThreadWaitChainSession == "on"]
+foreign {
     // param-hint: callback optional
     // pinvoke-hint: SetLastError
     func OpenThreadWaitChainSession(Flags: Win32__impl_l0.OPEN_THREAD_WAIT_CHAIN_SESSION_FLAGSAbi, callback: Win32__impl_l1.PWAITCHAINCALLBACK): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Debug_OpenThreadWaitChainSession == "on"]
+public unsafe func Windows_OpenThreadWaitChainSession(Flags: Win32__impl_l0.OPEN_THREAD_WAIT_CHAIN_SESSION_FLAGSAbi, callback: Win32__impl_l1.PWAITCHAINCALLBACK): CPointer<Unit> {
+    return OpenThreadWaitChainSession(Flags, callback)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Debug_RegisterWaitChainCOMCallback == "on"]
+foreign {
     func RegisterWaitChainCOMCallback(CallStateCallback: Win32__impl_l0.PCOGETCALLSTATE, ActivationStateCallback: Win32__impl_l0.PCOGETACTIVATIONSTATE): Unit
 }
 
-@When[KERNEL32 == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Debug_RegisterWaitChainCOMCallback == "on"]
+public unsafe func Windows_RegisterWaitChainCOMCallback(CallStateCallback: Win32__impl_l0.PCOGETCALLSTATE, ActivationStateCallback: Win32__impl_l0.PCOGETACTIVATIONSTATE): Unit {
+    RegisterWaitChainCOMCallback(CallStateCallback, ActivationStateCallback)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlRestoreContext == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
 @CallingConv[CDECL]
 foreign {
     // param-hint: ExceptionRecord optional
@@ -85,137 +118,580 @@ foreign {
     func RtlRestoreContext(ContextRecord: CPointer<Win32__impl_l1.CONTEXTAbi>, ExceptionRecord: CPointer<Win32__impl_l0.EXCEPTION_RECORDAbi>): Unit
 }
 
-@When[KERNEL32 == "on"]
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlRestoreContext == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public unsafe func Windows_RtlRestoreContext(ContextRecord: CPointer<Win32__impl_l1.CONTEXTAbi>, ExceptionRecord: CPointer<Win32__impl_l0.EXCEPTION_RECORDAbi>): Unit {
+    RtlRestoreContext(ContextRecord, ExceptionRecord)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_AddVectoredContinueHandler == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+foreign {
+    func AddVectoredContinueHandler(First: UInt32, Handler: PVECTORED_EXCEPTION_HANDLER): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_AddVectoredContinueHandler == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public unsafe func Windows_AddVectoredContinueHandler(First: UInt32, Handler: PVECTORED_EXCEPTION_HANDLER): CPointer<Unit> {
+    return AddVectoredContinueHandler(First, Handler)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_AddVectoredExceptionHandler == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+foreign {
+    func AddVectoredExceptionHandler(First: UInt32, Handler: PVECTORED_EXCEPTION_HANDLER): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_AddVectoredExceptionHandler == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public unsafe func Windows_AddVectoredExceptionHandler(First: UInt32, Handler: PVECTORED_EXCEPTION_HANDLER): CPointer<Unit> {
+    return AddVectoredExceptionHandler(First, Handler)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_Beep == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func Beep(dwFreq: UInt32, dwDuration: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_Beep == "on"]
+public unsafe func Windows_Beep(dwFreq: UInt32, dwDuration: UInt32): Int32 {
+    return Beep(dwFreq, dwDuration)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_CheckRemoteDebuggerPresent == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CheckRemoteDebuggerPresent(hProcess: CPointer<Unit>, pbDebuggerPresent: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_CheckRemoteDebuggerPresent == "on"]
+public unsafe func Windows_CheckRemoteDebuggerPresent(hProcess: CPointer<Unit>, pbDebuggerPresent: CPointer<Int32>): Int32 {
+    return CheckRemoteDebuggerPresent(hProcess, pbDebuggerPresent)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_ContinueDebugEvent == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ContinueDebugEvent(dwProcessId: UInt32, dwThreadId: UInt32, dwContinueStatus: Int32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_ContinueDebugEvent == "on"]
+public unsafe func Windows_ContinueDebugEvent(dwProcessId: UInt32, dwThreadId: UInt32, dwContinueStatus: Int32): Int32 {
+    return ContinueDebugEvent(dwProcessId, dwThreadId, dwContinueStatus)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_CopyContext == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func CopyContext(Destination: CPointer<Win32__impl_l1.CONTEXTAbi>, ContextFlags: Win32__impl_l0.CONTEXT_FLAGSAbi, Source: CPointer<Win32__impl_l1.CONTEXTAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_CopyContext == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public unsafe func Windows_CopyContext(Destination: CPointer<Win32__impl_l1.CONTEXTAbi>, ContextFlags: Win32__impl_l0.CONTEXT_FLAGSAbi, Source: CPointer<Win32__impl_l1.CONTEXTAbi>): Int32 {
+    return CopyContext(Destination, ContextFlags, Source)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_DebugActiveProcess == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func DebugActiveProcess(dwProcessId: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_DebugActiveProcess == "on"]
+public unsafe func Windows_DebugActiveProcess(dwProcessId: UInt32): Int32 {
+    return DebugActiveProcess(dwProcessId)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_DebugActiveProcessStop == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func DebugActiveProcessStop(dwProcessId: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_DebugActiveProcessStop == "on"]
+public unsafe func Windows_DebugActiveProcessStop(dwProcessId: UInt32): Int32 {
+    return DebugActiveProcessStop(dwProcessId)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_DebugBreak == "on"]
+foreign {
     func DebugBreak(): Unit
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_DebugBreak == "on"]
+public unsafe func Windows_DebugBreak(): Unit {
+    DebugBreak()
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_DebugBreakProcess == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func DebugBreakProcess(Process: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_DebugBreakProcess == "on"]
+public unsafe func Windows_DebugBreakProcess(Process: CPointer<Unit>): Int32 {
+    return DebugBreakProcess(Process)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_DebugSetProcessKillOnExit == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func DebugSetProcessKillOnExit(KillOnExit: Int32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_DebugSetProcessKillOnExit == "on"]
+public unsafe func Windows_DebugSetProcessKillOnExit(KillOnExit: Int32): Int32 {
+    return DebugSetProcessKillOnExit(KillOnExit)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_DecodePointer == "on"]
+foreign {
     // param-hint: Ptr optional
     func DecodePointer(Ptr: CPointer<Unit>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_DecodePointer == "on"]
+public unsafe func Windows_DecodePointer(Ptr: CPointer<Unit>): CPointer<Unit> {
+    return DecodePointer(Ptr)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_DecodeSystemPointer == "on"]
+foreign {
     // param-hint: Ptr optional
     func DecodeSystemPointer(Ptr: CPointer<Unit>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_DecodeSystemPointer == "on"]
+public unsafe func Windows_DecodeSystemPointer(Ptr: CPointer<Unit>): CPointer<Unit> {
+    return DecodeSystemPointer(Ptr)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_EncodePointer == "on"]
+foreign {
     // param-hint: Ptr optional
     func EncodePointer(Ptr: CPointer<Unit>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_EncodePointer == "on"]
+public unsafe func Windows_EncodePointer(Ptr: CPointer<Unit>): CPointer<Unit> {
+    return EncodePointer(Ptr)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_EncodeSystemPointer == "on"]
+foreign {
     // param-hint: Ptr optional
     func EncodeSystemPointer(Ptr: CPointer<Unit>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_EncodeSystemPointer == "on"]
+public unsafe func Windows_EncodeSystemPointer(Ptr: CPointer<Unit>): CPointer<Unit> {
+    return EncodeSystemPointer(Ptr)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_FatalAppExitA == "on"]
+foreign {
     func FatalAppExitA(uAction: UInt32, lpMessageText: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_FatalAppExitA == "on"]
+public unsafe func Windows_FatalAppExitA(uAction: UInt32, lpMessageText: CPointer<UInt8>): Unit {
+    FatalAppExitA(uAction, lpMessageText)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_FatalAppExitW == "on"]
+foreign {
     func FatalAppExitW(uAction: UInt32, lpMessageText: CPointer<UInt16>): Unit
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_FatalAppExitW == "on"]
+public unsafe func Windows_FatalAppExitW(uAction: UInt32, lpMessageText: CPointer<UInt16>): Unit {
+    FatalAppExitW(uAction, lpMessageText)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_FatalExit == "on"]
+foreign {
     func FatalExit(ExitCode: Int32): Unit
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_FatalExit == "on"]
+public unsafe func Windows_FatalExit(ExitCode: Int32): Unit {
+    FatalExit(ExitCode)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_FlushInstructionCache == "on"]
+foreign {
     // param-hint: lpBaseAddress bytes=param[2] optional
     // pinvoke-hint: SetLastError
     func FlushInstructionCache(hProcess: CPointer<Unit>, lpBaseAddress: CPointer<Unit>, dwSize: UIntNative): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_FlushInstructionCache == "on"]
+public unsafe func Windows_FlushInstructionCache(hProcess: CPointer<Unit>, lpBaseAddress: CPointer<Unit>, dwSize: UIntNative): Int32 {
+    return FlushInstructionCache(hProcess, lpBaseAddress, dwSize)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_FormatMessageA == "on"]
+foreign {
     // param-hint: lpSource optional
     // param-hint: Arguments optional
     // pinvoke-hint: SetLastError
     func FormatMessageA(dwFlags: Win32__impl_l0.FORMAT_MESSAGE_OPTIONSAbi, lpSource: CPointer<Unit>, dwMessageId: UInt32, dwLanguageId: UInt32, lpBuffer: CPointer<UInt8>, nSize: UInt32, Arguments: CPointer<CPointer<Int8>>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_FormatMessageA == "on"]
+public unsafe func Windows_FormatMessageA(dwFlags: Win32__impl_l0.FORMAT_MESSAGE_OPTIONSAbi, lpSource: CPointer<Unit>, dwMessageId: UInt32, dwLanguageId: UInt32, lpBuffer: CPointer<UInt8>, nSize: UInt32, Arguments: CPointer<CPointer<Int8>>): UInt32 {
+    return FormatMessageA(dwFlags, lpSource, dwMessageId, dwLanguageId, lpBuffer, nSize, Arguments)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_FormatMessageW == "on"]
+foreign {
     // param-hint: lpSource optional
     // param-hint: Arguments optional
     // pinvoke-hint: SetLastError
     func FormatMessageW(dwFlags: Win32__impl_l0.FORMAT_MESSAGE_OPTIONSAbi, lpSource: CPointer<Unit>, dwMessageId: UInt32, dwLanguageId: UInt32, lpBuffer: CPointer<UInt16>, nSize: UInt32, Arguments: CPointer<CPointer<Int8>>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_FormatMessageW == "on"]
+public unsafe func Windows_FormatMessageW(dwFlags: Win32__impl_l0.FORMAT_MESSAGE_OPTIONSAbi, lpSource: CPointer<Unit>, dwMessageId: UInt32, dwLanguageId: UInt32, lpBuffer: CPointer<UInt16>, nSize: UInt32, Arguments: CPointer<CPointer<Int8>>): UInt32 {
+    return FormatMessageW(dwFlags, lpSource, dwMessageId, dwLanguageId, lpBuffer, nSize, Arguments)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_GetEnabledXStateFeatures == "on"]
+foreign {
     func GetEnabledXStateFeatures(): UInt64
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_GetEnabledXStateFeatures == "on"]
+public unsafe func Windows_GetEnabledXStateFeatures(): UInt64 {
+    return GetEnabledXStateFeatures()
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_GetErrorMode == "on"]
+foreign {
     func GetErrorMode(): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_GetErrorMode == "on"]
+public unsafe func Windows_GetErrorMode(): UInt32 {
+    return GetErrorMode()
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_GetThreadContext == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func GetThreadContext(hThread: CPointer<Unit>, lpContext: CPointer<Win32__impl_l1.CONTEXTAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_GetThreadContext == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public unsafe func Windows_GetThreadContext(hThread: CPointer<Unit>, lpContext: CPointer<Win32__impl_l1.CONTEXTAbi>): Int32 {
+    return GetThreadContext(hThread, lpContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_GetThreadErrorMode == "on"]
+foreign {
     func GetThreadErrorMode(): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_GetThreadErrorMode == "on"]
+public unsafe func Windows_GetThreadErrorMode(): UInt32 {
+    return GetThreadErrorMode()
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_GetThreadSelectorEntry == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetThreadSelectorEntry(hThread: CPointer<Unit>, dwSelector: UInt32, lpSelectorEntry: CPointer<Win32__impl_l0.LDT_ENTRYAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_GetThreadSelectorEntry == "on"]
+public unsafe func Windows_GetThreadSelectorEntry(hThread: CPointer<Unit>, dwSelector: UInt32, lpSelectorEntry: CPointer<Win32__impl_l0.LDT_ENTRYAbi>): Int32 {
+    return GetThreadSelectorEntry(hThread, dwSelector, lpSelectorEntry)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_GetXStateFeaturesMask == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+foreign {
+    func GetXStateFeaturesMask(Context: CPointer<Win32__impl_l1.CONTEXTAbi>, FeatureMask: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_GetXStateFeaturesMask == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public unsafe func Windows_GetXStateFeaturesMask(Context: CPointer<Win32__impl_l1.CONTEXTAbi>, FeatureMask: CPointer<UInt64>): Int32 {
+    return GetXStateFeaturesMask(Context, FeatureMask)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_InitializeContext == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+foreign {
+    // param-hint: Buffer bytes=param[3] optional
+    // pinvoke-hint: SetLastError
+    func InitializeContext(Buffer: CPointer<Unit>, ContextFlags: Win32__impl_l0.CONTEXT_FLAGSAbi, Context: CPointer<CPointer<Win32__impl_l1.CONTEXTAbi>>, ContextLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_InitializeContext == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public unsafe func Windows_InitializeContext(Buffer: CPointer<Unit>, ContextFlags: Win32__impl_l0.CONTEXT_FLAGSAbi, Context: CPointer<CPointer<Win32__impl_l1.CONTEXTAbi>>, ContextLength: CPointer<UInt32>): Int32 {
+    return InitializeContext(Buffer, ContextFlags, Context, ContextLength)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_InitializeContext2 == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+foreign {
+    // param-hint: Buffer bytes=param[3] optional
+    // pinvoke-hint: SetLastError
+    func InitializeContext2(Buffer: CPointer<Unit>, ContextFlags: Win32__impl_l0.CONTEXT_FLAGSAbi, Context: CPointer<CPointer<Win32__impl_l1.CONTEXTAbi>>, ContextLength: CPointer<UInt32>, XStateCompactionMask: UInt64): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_InitializeContext2 == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public unsafe func Windows_InitializeContext2(Buffer: CPointer<Unit>, ContextFlags: Win32__impl_l0.CONTEXT_FLAGSAbi, Context: CPointer<CPointer<Win32__impl_l1.CONTEXTAbi>>, ContextLength: CPointer<UInt32>, XStateCompactionMask: UInt64): Int32 {
+    return InitializeContext2(Buffer, ContextFlags, Context, ContextLength, XStateCompactionMask)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_IsDebuggerPresent == "on"]
+foreign {
     func IsDebuggerPresent(): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_IsDebuggerPresent == "on"]
+public unsafe func Windows_IsDebuggerPresent(): Int32 {
+    return IsDebuggerPresent()
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_LocateXStateFeature == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+foreign {
+    // param-hint: Length optional
+    func LocateXStateFeature(Context: CPointer<Win32__impl_l1.CONTEXTAbi>, FeatureId: UInt32, Length: CPointer<UInt32>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_LocateXStateFeature == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public unsafe func Windows_LocateXStateFeature(Context: CPointer<Win32__impl_l1.CONTEXTAbi>, FeatureId: UInt32, Length: CPointer<UInt32>): CPointer<Unit> {
+    return LocateXStateFeature(Context, FeatureId, Length)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_OutputDebugStringA == "on"]
+foreign {
     // param-hint: lpOutputString optional
     func OutputDebugStringA(lpOutputString: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_OutputDebugStringA == "on"]
+public unsafe func Windows_OutputDebugStringA(lpOutputString: CPointer<UInt8>): Unit {
+    OutputDebugStringA(lpOutputString)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_OutputDebugStringW == "on"]
+foreign {
     // param-hint: lpOutputString optional
     func OutputDebugStringW(lpOutputString: CPointer<UInt16>): Unit
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_OutputDebugStringW == "on"]
+public unsafe func Windows_OutputDebugStringW(lpOutputString: CPointer<UInt16>): Unit {
+    OutputDebugStringW(lpOutputString)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RaiseException == "on"]
+foreign {
     // param-hint: lpArguments len=param[2] optional
     func RaiseException(dwExceptionCode: UInt32, dwExceptionFlags: UInt32, nNumberOfArguments: UInt32, lpArguments: CPointer<UIntNative>): Unit
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RaiseException == "on"]
+public unsafe func Windows_RaiseException(dwExceptionCode: UInt32, dwExceptionFlags: UInt32, nNumberOfArguments: UInt32, lpArguments: CPointer<UIntNative>): Unit {
+    RaiseException(dwExceptionCode, dwExceptionFlags, nNumberOfArguments, lpArguments)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RaiseFailFastException == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+foreign {
+    // param-hint: pExceptionRecord optional
+    // param-hint: pContextRecord optional
+    func RaiseFailFastException(pExceptionRecord: CPointer<Win32__impl_l0.EXCEPTION_RECORDAbi>, pContextRecord: CPointer<Win32__impl_l1.CONTEXTAbi>, dwFlags: UInt32): Unit
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RaiseFailFastException == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public unsafe func Windows_RaiseFailFastException(pExceptionRecord: CPointer<Win32__impl_l0.EXCEPTION_RECORDAbi>, pContextRecord: CPointer<Win32__impl_l1.CONTEXTAbi>, dwFlags: UInt32): Unit {
+    RaiseFailFastException(pExceptionRecord, pContextRecord, dwFlags)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_ReadProcessMemory == "on"]
+foreign {
     // param-hint: lpBuffer bytes=param[3]
     // param-hint: lpNumberOfBytesRead optional
     // pinvoke-hint: SetLastError
     func ReadProcessMemory(hProcess: CPointer<Unit>, lpBaseAddress: CPointer<Unit>, lpBuffer: CPointer<Unit>, nSize: UIntNative, lpNumberOfBytesRead: CPointer<UIntNative>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_ReadProcessMemory == "on"]
+public unsafe func Windows_ReadProcessMemory(hProcess: CPointer<Unit>, lpBaseAddress: CPointer<Unit>, lpBuffer: CPointer<Unit>, nSize: UIntNative, lpNumberOfBytesRead: CPointer<UIntNative>): Int32 {
+    return ReadProcessMemory(hProcess, lpBaseAddress, lpBuffer, nSize, lpNumberOfBytesRead)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RemoveVectoredContinueHandler == "on"]
+foreign {
     func RemoveVectoredContinueHandler(Handle: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RemoveVectoredContinueHandler == "on"]
+public unsafe func Windows_RemoveVectoredContinueHandler(Handle: CPointer<Unit>): UInt32 {
+    return RemoveVectoredContinueHandler(Handle)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RemoveVectoredExceptionHandler == "on"]
+foreign {
     func RemoveVectoredExceptionHandler(Handle: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RemoveVectoredExceptionHandler == "on"]
+public unsafe func Windows_RemoveVectoredExceptionHandler(Handle: CPointer<Unit>): UInt32 {
+    return RemoveVectoredExceptionHandler(Handle)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlAddFunctionTable == "on" && arch == "aarch64"]
+foreign {
+    // param-hint: FunctionTable len=param[1]
+    func RtlAddFunctionTable(FunctionTable: CPointer<Win32__impl_l0.IMAGE_ARM64_RUNTIME_FUNCTION_ENTRYAbi>, EntryCount: UInt32, BaseAddress: UIntNative): UInt8
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlAddFunctionTable == "on" && arch == "aarch64"]
+public unsafe func Windows_RtlAddFunctionTable(FunctionTable: CPointer<Win32__impl_l0.IMAGE_ARM64_RUNTIME_FUNCTION_ENTRYAbi>, EntryCount: UInt32, BaseAddress: UIntNative): UInt8 {
+    return RtlAddFunctionTable(FunctionTable, EntryCount, BaseAddress)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlAddFunctionTable == "on" && arch == "x86_64"]
+foreign {
+    // param-hint: FunctionTable len=param[1]
+    func RtlAddFunctionTable(FunctionTable: CPointer<Win32__impl_l0.IMAGE_RUNTIME_FUNCTION_ENTRYAbi>, EntryCount: UInt32, BaseAddress: UInt64): UInt8
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlAddFunctionTable == "on" && arch == "x86_64"]
+public unsafe func Windows_RtlAddFunctionTable(FunctionTable: CPointer<Win32__impl_l0.IMAGE_RUNTIME_FUNCTION_ENTRYAbi>, EntryCount: UInt32, BaseAddress: UInt64): UInt8 {
+    return RtlAddFunctionTable(FunctionTable, EntryCount, BaseAddress)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlCaptureContext == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+foreign {
+    func RtlCaptureContext(ContextRecord: CPointer<Win32__impl_l1.CONTEXTAbi>): Unit
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlCaptureContext == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public unsafe func Windows_RtlCaptureContext(ContextRecord: CPointer<Win32__impl_l1.CONTEXTAbi>): Unit {
+    RtlCaptureContext(ContextRecord)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlCaptureContext2 == "on" && (arch == "x86_64" && (arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+foreign {
+    func RtlCaptureContext2(ContextRecord: CPointer<Win32__impl_l1.CONTEXTAbi>): Unit
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlCaptureContext2 == "on" && (arch == "x86_64" && (arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public unsafe func Windows_RtlCaptureContext2(ContextRecord: CPointer<Win32__impl_l1.CONTEXTAbi>): Unit {
+    RtlCaptureContext2(ContextRecord)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlCaptureStackBackTrace == "on"]
+foreign {
     // param-hint: BackTrace len=param[1]
     // param-hint: BackTraceHash optional
     func RtlCaptureStackBackTrace(FramesToSkip: UInt32, FramesToCapture: UInt32, BackTrace: CPointer<CPointer<Unit>>, BackTraceHash: CPointer<UInt32>): UInt16
-    func RtlPcToFileHeader(PcValue: CPointer<Unit>, BaseOfImage: CPointer<CPointer<Unit>>): CPointer<Unit>
-    func RtlRaiseException(ExceptionRecord: CPointer<Win32__impl_l0.EXCEPTION_RECORDAbi>): Unit
-    // param-hint: TargetFrame optional
-    // param-hint: TargetIp optional
-    // param-hint: ExceptionRecord optional
-    func RtlUnwind(TargetFrame: CPointer<Unit>, TargetIp: CPointer<Unit>, ExceptionRecord: CPointer<Win32__impl_l0.EXCEPTION_RECORDAbi>, ReturnValue: CPointer<Unit>): Unit
-    func SetErrorMode(uMode: Win32__impl_l0.THREAD_ERROR_MODEAbi): Win32__impl_l0.THREAD_ERROR_MODEAbi
-    // param-hint: lpOldMode optional
-    // pinvoke-hint: SetLastError
-    func SetThreadErrorMode(dwNewMode: Win32__impl_l0.THREAD_ERROR_MODEAbi, lpOldMode: CPointer<Win32__impl_l0.THREAD_ERROR_MODEAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func Wow64GetThreadContext(hThread: CPointer<Unit>, lpContext: CPointer<Win32__impl_l1.WOW64_CONTEXTAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func Wow64GetThreadSelectorEntry(hThread: CPointer<Unit>, dwSelector: UInt32, lpSelectorEntry: CPointer<Win32__impl_l0.WOW64_LDT_ENTRYAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func Wow64SetThreadContext(hThread: CPointer<Unit>, lpContext: CPointer<Win32__impl_l1.WOW64_CONTEXTAbi>): Int32
-    // param-hint: lpBuffer bytes=param[3]
-    // param-hint: lpNumberOfBytesWritten optional
-    // pinvoke-hint: SetLastError
-    func WriteProcessMemory(hProcess: CPointer<Unit>, lpBaseAddress: CPointer<Unit>, lpBuffer: CPointer<Unit>, nSize: UIntNative, lpNumberOfBytesWritten: CPointer<UIntNative>): Int32
 }
 
-@When[KERNEL32 == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlCaptureStackBackTrace == "on"]
+public unsafe func Windows_RtlCaptureStackBackTrace(FramesToSkip: UInt32, FramesToCapture: UInt32, BackTrace: CPointer<CPointer<Unit>>, BackTraceHash: CPointer<UInt32>): UInt16 {
+    return RtlCaptureStackBackTrace(FramesToSkip, FramesToCapture, BackTrace, BackTraceHash)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlDeleteFunctionTable == "on" && arch == "aarch64"]
 foreign {
-    func AddVectoredContinueHandler(First: UInt32, Handler: PVECTORED_EXCEPTION_HANDLER): CPointer<Unit>
-    func AddVectoredExceptionHandler(First: UInt32, Handler: PVECTORED_EXCEPTION_HANDLER): CPointer<Unit>
-    // pinvoke-hint: SetLastError
-    func CopyContext(Destination: CPointer<Win32__impl_l1.CONTEXTAbi>, ContextFlags: Win32__impl_l0.CONTEXT_FLAGSAbi, Source: CPointer<Win32__impl_l1.CONTEXTAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func GetThreadContext(hThread: CPointer<Unit>, lpContext: CPointer<Win32__impl_l1.CONTEXTAbi>): Int32
-    func GetXStateFeaturesMask(Context: CPointer<Win32__impl_l1.CONTEXTAbi>, FeatureMask: CPointer<UInt64>): Int32
-    // param-hint: Buffer bytes=param[3] optional
-    // pinvoke-hint: SetLastError
-    func InitializeContext(Buffer: CPointer<Unit>, ContextFlags: Win32__impl_l0.CONTEXT_FLAGSAbi, Context: CPointer<CPointer<Win32__impl_l1.CONTEXTAbi>>, ContextLength: CPointer<UInt32>): Int32
-    // param-hint: Buffer bytes=param[3] optional
-    // pinvoke-hint: SetLastError
-    func InitializeContext2(Buffer: CPointer<Unit>, ContextFlags: Win32__impl_l0.CONTEXT_FLAGSAbi, Context: CPointer<CPointer<Win32__impl_l1.CONTEXTAbi>>, ContextLength: CPointer<UInt32>, XStateCompactionMask: UInt64): Int32
-    // param-hint: Length optional
-    func LocateXStateFeature(Context: CPointer<Win32__impl_l1.CONTEXTAbi>, FeatureId: UInt32, Length: CPointer<UInt32>): CPointer<Unit>
-    // param-hint: pExceptionRecord optional
-    // param-hint: pContextRecord optional
-    func RaiseFailFastException(pExceptionRecord: CPointer<Win32__impl_l0.EXCEPTION_RECORDAbi>, pContextRecord: CPointer<Win32__impl_l1.CONTEXTAbi>, dwFlags: UInt32): Unit
-    func RtlCaptureContext(ContextRecord: CPointer<Win32__impl_l1.CONTEXTAbi>): Unit
-    // pinvoke-hint: SetLastError
-    func SetThreadContext(hThread: CPointer<Unit>, lpContext: CPointer<Win32__impl_l1.CONTEXTAbi>): Int32
-    // param-hint: lpTopLevelExceptionFilter optional
-    func SetUnhandledExceptionFilter(lpTopLevelExceptionFilter: LPTOP_LEVEL_EXCEPTION_FILTER): LPTOP_LEVEL_EXCEPTION_FILTER
-    func SetXStateFeaturesMask(Context: CPointer<Win32__impl_l1.CONTEXTAbi>, FeatureMask: UInt64): Int32
-    func UnhandledExceptionFilter(ExceptionInfo: CPointer<EXCEPTION_POINTERSAbi>): Int32
+    func RtlDeleteFunctionTable(FunctionTable: CPointer<Win32__impl_l0.IMAGE_ARM64_RUNTIME_FUNCTION_ENTRYAbi>): UInt8
 }
 
-@When[KERNEL32 == "on" && (arch == "aarch64" && ((arch == "x86_64" && (arch == "aarch64" || arch == "x86_64")) || (arch == "aarch64" && (arch == "aarch64" || arch == "x86_64"))))]
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlDeleteFunctionTable == "on" && arch == "aarch64"]
+public unsafe func Windows_RtlDeleteFunctionTable(FunctionTable: CPointer<Win32__impl_l0.IMAGE_ARM64_RUNTIME_FUNCTION_ENTRYAbi>): UInt8 {
+    return RtlDeleteFunctionTable(FunctionTable)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlDeleteFunctionTable == "on" && arch == "x86_64"]
 foreign {
-    // param-hint: HistoryTable optional
-    func RtlLookupFunctionEntry(ControlPc: UIntNative, ImageBase: CPointer<UIntNative>, HistoryTable: CPointer<Win32__impl_l1.UNWIND_HISTORY_TABLEAbi>): CPointer<Win32__impl_l0.IMAGE_ARM64_RUNTIME_FUNCTION_ENTRYAbi>
+    func RtlDeleteFunctionTable(FunctionTable: CPointer<Win32__impl_l0.IMAGE_RUNTIME_FUNCTION_ENTRYAbi>): UInt8
 }
 
-@When[KERNEL32 == "on" && (arch == "aarch64" && (arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && (arch == "aarch64" || arch == "x86_64") && Windows_Win32_System_Kernel == "on")]
-foreign {
-    // param-hint: ContextPointers optional
-    func RtlVirtualUnwind(HandlerType: Win32__impl_l0.RTL_VIRTUAL_UNWIND_HANDLER_TYPEAbi, ImageBase: UIntNative, ControlPc: UIntNative, FunctionEntry: CPointer<Win32__impl_l0.IMAGE_ARM64_RUNTIME_FUNCTION_ENTRYAbi>, ContextRecord: CPointer<Win32__impl_l1.CONTEXTAbi>, HandlerData: CPointer<CPointer<Unit>>, EstablisherFrame: CPointer<UIntNative>, ContextPointers: CPointer<Win32__impl_l1.KNONVOLATILE_CONTEXT_POINTERSAbi>): EXCEPTION_ROUTINE
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlDeleteFunctionTable == "on" && arch == "x86_64"]
+public unsafe func Windows_RtlDeleteFunctionTable(FunctionTable: CPointer<Win32__impl_l0.IMAGE_RUNTIME_FUNCTION_ENTRYAbi>): UInt8 {
+    return RtlDeleteFunctionTable(FunctionTable)
 }
 
-@When[KERNEL32 == "on" && (arch == "aarch64" && (arch == "aarch64" || arch == "x86_64"))]
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlInstallFunctionTableCallback == "on" && (arch == "aarch64" && (arch == "aarch64" || arch == "x86_64"))]
 foreign {
     // param-hint: Context optional
     // param-hint: OutOfProcessCallbackDll optional
     func RtlInstallFunctionTableCallback(TableIdentifier: UInt64, BaseAddress: UInt64, Length: UInt32, Callback: Win32__impl_l1.PGET_RUNTIME_FUNCTION_CALLBACK, Context: CPointer<Unit>, OutOfProcessCallbackDll: CPointer<UInt16>): UInt8
 }
 
-@When[KERNEL32 == "on" && (arch == "x86_64" && ((arch == "x86_64" && (arch == "aarch64" || arch == "x86_64")) || (arch == "aarch64" && (arch == "aarch64" || arch == "x86_64"))) && (arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on" || arch == "aarch64" && ((arch == "x86_64" && (arch == "aarch64" || arch == "x86_64")) || (arch == "aarch64" && (arch == "aarch64" || arch == "x86_64"))) && (arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlInstallFunctionTableCallback == "on" && (arch == "aarch64" && (arch == "aarch64" || arch == "x86_64"))]
+public unsafe func Windows_RtlInstallFunctionTableCallback(TableIdentifier: UInt64, BaseAddress: UInt64, Length: UInt32, Callback: Win32__impl_l1.PGET_RUNTIME_FUNCTION_CALLBACK, Context: CPointer<Unit>, OutOfProcessCallbackDll: CPointer<UInt16>): UInt8 {
+    return RtlInstallFunctionTableCallback(TableIdentifier, BaseAddress, Length, Callback, Context, OutOfProcessCallbackDll)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlInstallFunctionTableCallback == "on" && (arch == "x86_64" && (arch == "aarch64" || arch == "x86_64"))]
+foreign {
+    // param-hint: Context optional
+    // param-hint: OutOfProcessCallbackDll optional
+    func RtlInstallFunctionTableCallback(TableIdentifier: UInt64, BaseAddress: UInt64, Length: UInt32, Callback: Win32__impl_l1.PGET_RUNTIME_FUNCTION_CALLBACK, Context: CPointer<Unit>, OutOfProcessCallbackDll: CPointer<UInt16>): UInt8
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlInstallFunctionTableCallback == "on" && (arch == "x86_64" && (arch == "aarch64" || arch == "x86_64"))]
+public unsafe func Windows_RtlInstallFunctionTableCallback(TableIdentifier: UInt64, BaseAddress: UInt64, Length: UInt32, Callback: Win32__impl_l1.PGET_RUNTIME_FUNCTION_CALLBACK, Context: CPointer<Unit>, OutOfProcessCallbackDll: CPointer<UInt16>): UInt8 {
+    return RtlInstallFunctionTableCallback(TableIdentifier, BaseAddress, Length, Callback, Context, OutOfProcessCallbackDll)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlLookupFunctionEntry == "on" && (arch == "aarch64" && ((arch == "x86_64" && (arch == "aarch64" || arch == "x86_64")) || (arch == "aarch64" && (arch == "aarch64" || arch == "x86_64"))))]
+foreign {
+    // param-hint: HistoryTable optional
+    func RtlLookupFunctionEntry(ControlPc: UIntNative, ImageBase: CPointer<UIntNative>, HistoryTable: CPointer<Win32__impl_l1.UNWIND_HISTORY_TABLEAbi>): CPointer<Win32__impl_l0.IMAGE_ARM64_RUNTIME_FUNCTION_ENTRYAbi>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlLookupFunctionEntry == "on" && (arch == "aarch64" && ((arch == "x86_64" && (arch == "aarch64" || arch == "x86_64")) || (arch == "aarch64" && (arch == "aarch64" || arch == "x86_64"))))]
+public unsafe func Windows_RtlLookupFunctionEntry(ControlPc: UIntNative, ImageBase: CPointer<UIntNative>, HistoryTable: CPointer<Win32__impl_l1.UNWIND_HISTORY_TABLEAbi>): CPointer<Win32__impl_l0.IMAGE_ARM64_RUNTIME_FUNCTION_ENTRYAbi> {
+    return RtlLookupFunctionEntry(ControlPc, ImageBase, HistoryTable)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlLookupFunctionEntry == "on" && (arch == "x86_64" && ((arch == "x86_64" && (arch == "aarch64" || arch == "x86_64")) || (arch == "aarch64" && (arch == "aarch64" || arch == "x86_64"))))]
+foreign {
+    // param-hint: HistoryTable optional
+    func RtlLookupFunctionEntry(ControlPc: UInt64, ImageBase: CPointer<UInt64>, HistoryTable: CPointer<Win32__impl_l1.UNWIND_HISTORY_TABLEAbi>): CPointer<Win32__impl_l0.IMAGE_RUNTIME_FUNCTION_ENTRYAbi>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlLookupFunctionEntry == "on" && (arch == "x86_64" && ((arch == "x86_64" && (arch == "aarch64" || arch == "x86_64")) || (arch == "aarch64" && (arch == "aarch64" || arch == "x86_64"))))]
+public unsafe func Windows_RtlLookupFunctionEntry(ControlPc: UInt64, ImageBase: CPointer<UInt64>, HistoryTable: CPointer<Win32__impl_l1.UNWIND_HISTORY_TABLEAbi>): CPointer<Win32__impl_l0.IMAGE_RUNTIME_FUNCTION_ENTRYAbi> {
+    return RtlLookupFunctionEntry(ControlPc, ImageBase, HistoryTable)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlPcToFileHeader == "on"]
+foreign {
+    func RtlPcToFileHeader(PcValue: CPointer<Unit>, BaseOfImage: CPointer<CPointer<Unit>>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlPcToFileHeader == "on"]
+public unsafe func Windows_RtlPcToFileHeader(PcValue: CPointer<Unit>, BaseOfImage: CPointer<CPointer<Unit>>): CPointer<Unit> {
+    return RtlPcToFileHeader(PcValue, BaseOfImage)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlRaiseException == "on"]
+foreign {
+    func RtlRaiseException(ExceptionRecord: CPointer<Win32__impl_l0.EXCEPTION_RECORDAbi>): Unit
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlRaiseException == "on"]
+public unsafe func Windows_RtlRaiseException(ExceptionRecord: CPointer<Win32__impl_l0.EXCEPTION_RECORDAbi>): Unit {
+    RtlRaiseException(ExceptionRecord)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlUnwind == "on"]
+foreign {
+    // param-hint: TargetFrame optional
+    // param-hint: TargetIp optional
+    // param-hint: ExceptionRecord optional
+    func RtlUnwind(TargetFrame: CPointer<Unit>, TargetIp: CPointer<Unit>, ExceptionRecord: CPointer<Win32__impl_l0.EXCEPTION_RECORDAbi>, ReturnValue: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlUnwind == "on"]
+public unsafe func Windows_RtlUnwind(TargetFrame: CPointer<Unit>, TargetIp: CPointer<Unit>, ExceptionRecord: CPointer<Win32__impl_l0.EXCEPTION_RECORDAbi>, ReturnValue: CPointer<Unit>): Unit {
+    RtlUnwind(TargetFrame, TargetIp, ExceptionRecord, ReturnValue)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlUnwindEx == "on" && (arch == "x86_64" && ((arch == "x86_64" && (arch == "aarch64" || arch == "x86_64")) || (arch == "aarch64" && (arch == "aarch64" || arch == "x86_64"))) && (arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on" || arch == "aarch64" && ((arch == "x86_64" && (arch == "aarch64" || arch == "x86_64")) || (arch == "aarch64" && (arch == "aarch64" || arch == "x86_64"))) && (arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
 foreign {
     // param-hint: TargetFrame optional
     // param-hint: TargetIp optional
@@ -224,631 +700,524 @@ foreign {
     func RtlUnwindEx(TargetFrame: CPointer<Unit>, TargetIp: CPointer<Unit>, ExceptionRecord: CPointer<Win32__impl_l0.EXCEPTION_RECORDAbi>, ReturnValue: CPointer<Unit>, ContextRecord: CPointer<Win32__impl_l1.CONTEXTAbi>, HistoryTable: CPointer<Win32__impl_l1.UNWIND_HISTORY_TABLEAbi>): Unit
 }
 
-@When[KERNEL32 == "on" && (arch == "x86_64" && ((arch == "x86_64" && (arch == "aarch64" || arch == "x86_64")) || (arch == "aarch64" && (arch == "aarch64" || arch == "x86_64"))))]
-foreign {
-    // param-hint: HistoryTable optional
-    func RtlLookupFunctionEntry(ControlPc: UInt64, ImageBase: CPointer<UInt64>, HistoryTable: CPointer<Win32__impl_l1.UNWIND_HISTORY_TABLEAbi>): CPointer<Win32__impl_l0.IMAGE_RUNTIME_FUNCTION_ENTRYAbi>
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlUnwindEx == "on" && (arch == "x86_64" && ((arch == "x86_64" && (arch == "aarch64" || arch == "x86_64")) || (arch == "aarch64" && (arch == "aarch64" || arch == "x86_64"))) && (arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on" || arch == "aarch64" && ((arch == "x86_64" && (arch == "aarch64" || arch == "x86_64")) || (arch == "aarch64" && (arch == "aarch64" || arch == "x86_64"))) && (arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public unsafe func Windows_RtlUnwindEx(TargetFrame: CPointer<Unit>, TargetIp: CPointer<Unit>, ExceptionRecord: CPointer<Win32__impl_l0.EXCEPTION_RECORDAbi>, ReturnValue: CPointer<Unit>, ContextRecord: CPointer<Win32__impl_l1.CONTEXTAbi>, HistoryTable: CPointer<Win32__impl_l1.UNWIND_HISTORY_TABLEAbi>): Unit {
+    RtlUnwindEx(TargetFrame, TargetIp, ExceptionRecord, ReturnValue, ContextRecord, HistoryTable)
 }
 
-@When[KERNEL32 == "on" && (arch == "x86_64" && (arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && (arch == "aarch64" || arch == "x86_64") && Windows_Win32_System_Kernel == "on")]
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlVirtualUnwind == "on" && (arch == "aarch64" && (arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && (arch == "aarch64" || arch == "x86_64") && Windows_Win32_System_Kernel == "on")]
+foreign {
+    // param-hint: ContextPointers optional
+    func RtlVirtualUnwind(HandlerType: Win32__impl_l0.RTL_VIRTUAL_UNWIND_HANDLER_TYPEAbi, ImageBase: UIntNative, ControlPc: UIntNative, FunctionEntry: CPointer<Win32__impl_l0.IMAGE_ARM64_RUNTIME_FUNCTION_ENTRYAbi>, ContextRecord: CPointer<Win32__impl_l1.CONTEXTAbi>, HandlerData: CPointer<CPointer<Unit>>, EstablisherFrame: CPointer<UIntNative>, ContextPointers: CPointer<Win32__impl_l1.KNONVOLATILE_CONTEXT_POINTERSAbi>): EXCEPTION_ROUTINE
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlVirtualUnwind == "on" && (arch == "aarch64" && (arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && (arch == "aarch64" || arch == "x86_64") && Windows_Win32_System_Kernel == "on")]
+public unsafe func Windows_RtlVirtualUnwind(HandlerType: Win32__impl_l0.RTL_VIRTUAL_UNWIND_HANDLER_TYPEAbi, ImageBase: UIntNative, ControlPc: UIntNative, FunctionEntry: CPointer<Win32__impl_l0.IMAGE_ARM64_RUNTIME_FUNCTION_ENTRYAbi>, ContextRecord: CPointer<Win32__impl_l1.CONTEXTAbi>, HandlerData: CPointer<CPointer<Unit>>, EstablisherFrame: CPointer<UIntNative>, ContextPointers: CPointer<Win32__impl_l1.KNONVOLATILE_CONTEXT_POINTERSAbi>): EXCEPTION_ROUTINE {
+    return RtlVirtualUnwind(HandlerType, ImageBase, ControlPc, FunctionEntry, ContextRecord, HandlerData, EstablisherFrame, ContextPointers)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlVirtualUnwind == "on" && (arch == "x86_64" && (arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && (arch == "aarch64" || arch == "x86_64") && Windows_Win32_System_Kernel == "on")]
 foreign {
     // param-hint: ContextPointers optional
     func RtlVirtualUnwind(HandlerType: Win32__impl_l0.RTL_VIRTUAL_UNWIND_HANDLER_TYPEAbi, ImageBase: UInt64, ControlPc: UInt64, FunctionEntry: CPointer<Win32__impl_l0.IMAGE_RUNTIME_FUNCTION_ENTRYAbi>, ContextRecord: CPointer<Win32__impl_l1.CONTEXTAbi>, HandlerData: CPointer<CPointer<Unit>>, EstablisherFrame: CPointer<UInt64>, ContextPointers: CPointer<Win32__impl_l1.KNONVOLATILE_CONTEXT_POINTERSAbi>): EXCEPTION_ROUTINE
 }
 
-@When[KERNEL32 == "on" && (arch == "x86_64" && (arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
-foreign {
-    func RtlCaptureContext2(ContextRecord: CPointer<Win32__impl_l1.CONTEXTAbi>): Unit
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlVirtualUnwind == "on" && (arch == "x86_64" && (arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && (arch == "aarch64" || arch == "x86_64") && Windows_Win32_System_Kernel == "on")]
+public unsafe func Windows_RtlVirtualUnwind(HandlerType: Win32__impl_l0.RTL_VIRTUAL_UNWIND_HANDLER_TYPEAbi, ImageBase: UInt64, ControlPc: UInt64, FunctionEntry: CPointer<Win32__impl_l0.IMAGE_RUNTIME_FUNCTION_ENTRYAbi>, ContextRecord: CPointer<Win32__impl_l1.CONTEXTAbi>, HandlerData: CPointer<CPointer<Unit>>, EstablisherFrame: CPointer<UInt64>, ContextPointers: CPointer<Win32__impl_l1.KNONVOLATILE_CONTEXT_POINTERSAbi>): EXCEPTION_ROUTINE {
+    return RtlVirtualUnwind(HandlerType, ImageBase, ControlPc, FunctionEntry, ContextRecord, HandlerData, EstablisherFrame, ContextPointers)
 }
 
-@When[KERNEL32 == "on" && (arch == "x86_64" && (arch == "aarch64" || arch == "x86_64"))]
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_SetErrorMode == "on"]
 foreign {
-    // param-hint: Context optional
-    // param-hint: OutOfProcessCallbackDll optional
-    func RtlInstallFunctionTableCallback(TableIdentifier: UInt64, BaseAddress: UInt64, Length: UInt32, Callback: Win32__impl_l1.PGET_RUNTIME_FUNCTION_CALLBACK, Context: CPointer<Unit>, OutOfProcessCallbackDll: CPointer<UInt16>): UInt8
+    func SetErrorMode(uMode: Win32__impl_l0.THREAD_ERROR_MODEAbi): Win32__impl_l0.THREAD_ERROR_MODEAbi
 }
 
-@When[KERNEL32 == "on" && Windows_Win32_System_Threading == "on"]
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_SetErrorMode == "on"]
+public unsafe func Windows_SetErrorMode(uMode: Win32__impl_l0.THREAD_ERROR_MODEAbi): Win32__impl_l0.THREAD_ERROR_MODEAbi {
+    return SetErrorMode(uMode)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_SetThreadContext == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetThreadContext(hThread: CPointer<Unit>, lpContext: CPointer<Win32__impl_l1.CONTEXTAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_SetThreadContext == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public unsafe func Windows_SetThreadContext(hThread: CPointer<Unit>, lpContext: CPointer<Win32__impl_l1.CONTEXTAbi>): Int32 {
+    return SetThreadContext(hThread, lpContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_SetThreadErrorMode == "on"]
+foreign {
+    // param-hint: lpOldMode optional
+    // pinvoke-hint: SetLastError
+    func SetThreadErrorMode(dwNewMode: Win32__impl_l0.THREAD_ERROR_MODEAbi, lpOldMode: CPointer<Win32__impl_l0.THREAD_ERROR_MODEAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_SetThreadErrorMode == "on"]
+public unsafe func Windows_SetThreadErrorMode(dwNewMode: Win32__impl_l0.THREAD_ERROR_MODEAbi, lpOldMode: CPointer<Win32__impl_l0.THREAD_ERROR_MODEAbi>): Int32 {
+    return SetThreadErrorMode(dwNewMode, lpOldMode)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_SetUnhandledExceptionFilter == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+foreign {
+    // param-hint: lpTopLevelExceptionFilter optional
+    func SetUnhandledExceptionFilter(lpTopLevelExceptionFilter: LPTOP_LEVEL_EXCEPTION_FILTER): LPTOP_LEVEL_EXCEPTION_FILTER
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_SetUnhandledExceptionFilter == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public unsafe func Windows_SetUnhandledExceptionFilter(lpTopLevelExceptionFilter: LPTOP_LEVEL_EXCEPTION_FILTER): LPTOP_LEVEL_EXCEPTION_FILTER {
+    return SetUnhandledExceptionFilter(lpTopLevelExceptionFilter)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_SetXStateFeaturesMask == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+foreign {
+    func SetXStateFeaturesMask(Context: CPointer<Win32__impl_l1.CONTEXTAbi>, FeatureMask: UInt64): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_SetXStateFeaturesMask == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public unsafe func Windows_SetXStateFeaturesMask(Context: CPointer<Win32__impl_l1.CONTEXTAbi>, FeatureMask: UInt64): Int32 {
+    return SetXStateFeaturesMask(Context, FeatureMask)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_UnhandledExceptionFilter == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+foreign {
+    func UnhandledExceptionFilter(ExceptionInfo: CPointer<EXCEPTION_POINTERSAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_UnhandledExceptionFilter == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public unsafe func Windows_UnhandledExceptionFilter(ExceptionInfo: CPointer<EXCEPTION_POINTERSAbi>): Int32 {
+    return UnhandledExceptionFilter(ExceptionInfo)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_WaitForDebugEvent == "on" && Windows_Win32_System_Threading == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func WaitForDebugEvent(lpDebugEvent: CPointer<Win32__impl_l1.DEBUG_EVENTAbi>, dwMilliseconds: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_WaitForDebugEvent == "on" && Windows_Win32_System_Threading == "on"]
+public unsafe func Windows_WaitForDebugEvent(lpDebugEvent: CPointer<Win32__impl_l1.DEBUG_EVENTAbi>, dwMilliseconds: UInt32): Int32 {
+    return WaitForDebugEvent(lpDebugEvent, dwMilliseconds)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_WaitForDebugEventEx == "on" && Windows_Win32_System_Threading == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func WaitForDebugEventEx(lpDebugEvent: CPointer<Win32__impl_l1.DEBUG_EVENTAbi>, dwMilliseconds: UInt32): Int32
 }
 
-@When[KERNEL32 == "on" && arch == "aarch64"]
-foreign {
-    // param-hint: FunctionTable len=param[1]
-    func RtlAddFunctionTable(FunctionTable: CPointer<Win32__impl_l0.IMAGE_ARM64_RUNTIME_FUNCTION_ENTRYAbi>, EntryCount: UInt32, BaseAddress: UIntNative): UInt8
-    func RtlDeleteFunctionTable(FunctionTable: CPointer<Win32__impl_l0.IMAGE_ARM64_RUNTIME_FUNCTION_ENTRYAbi>): UInt8
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_WaitForDebugEventEx == "on" && Windows_Win32_System_Threading == "on"]
+public unsafe func Windows_WaitForDebugEventEx(lpDebugEvent: CPointer<Win32__impl_l1.DEBUG_EVENTAbi>, dwMilliseconds: UInt32): Int32 {
+    return WaitForDebugEventEx(lpDebugEvent, dwMilliseconds)
 }
 
-@When[KERNEL32 == "on" && arch == "x86_64"]
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_Wow64GetThreadContext == "on"]
 foreign {
-    // param-hint: FunctionTable len=param[1]
-    func RtlAddFunctionTable(FunctionTable: CPointer<Win32__impl_l0.IMAGE_RUNTIME_FUNCTION_ENTRYAbi>, EntryCount: UInt32, BaseAddress: UInt64): UInt8
-    func RtlDeleteFunctionTable(FunctionTable: CPointer<Win32__impl_l0.IMAGE_RUNTIME_FUNCTION_ENTRYAbi>): UInt8
+    // pinvoke-hint: SetLastError
+    func Wow64GetThreadContext(hThread: CPointer<Unit>, lpContext: CPointer<Win32__impl_l1.WOW64_CONTEXTAbi>): Int32
 }
 
-@When[USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_Wow64GetThreadContext == "on"]
+public unsafe func Windows_Wow64GetThreadContext(hThread: CPointer<Unit>, lpContext: CPointer<Win32__impl_l1.WOW64_CONTEXTAbi>): Int32 {
+    return Wow64GetThreadContext(hThread, lpContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_Wow64GetThreadSelectorEntry == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func Wow64GetThreadSelectorEntry(hThread: CPointer<Unit>, dwSelector: UInt32, lpSelectorEntry: CPointer<Win32__impl_l0.WOW64_LDT_ENTRYAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_Wow64GetThreadSelectorEntry == "on"]
+public unsafe func Windows_Wow64GetThreadSelectorEntry(hThread: CPointer<Unit>, dwSelector: UInt32, lpSelectorEntry: CPointer<Win32__impl_l0.WOW64_LDT_ENTRYAbi>): Int32 {
+    return Wow64GetThreadSelectorEntry(hThread, dwSelector, lpSelectorEntry)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_Wow64SetThreadContext == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func Wow64SetThreadContext(hThread: CPointer<Unit>, lpContext: CPointer<Win32__impl_l1.WOW64_CONTEXTAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_Wow64SetThreadContext == "on"]
+public unsafe func Windows_Wow64SetThreadContext(hThread: CPointer<Unit>, lpContext: CPointer<Win32__impl_l1.WOW64_CONTEXTAbi>): Int32 {
+    return Wow64SetThreadContext(hThread, lpContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_WriteProcessMemory == "on"]
+foreign {
+    // param-hint: lpBuffer bytes=param[3]
+    // param-hint: lpNumberOfBytesWritten optional
+    // pinvoke-hint: SetLastError
+    func WriteProcessMemory(hProcess: CPointer<Unit>, lpBaseAddress: CPointer<Unit>, lpBuffer: CPointer<Unit>, nSize: UIntNative, lpNumberOfBytesWritten: CPointer<UIntNative>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_WriteProcessMemory == "on"]
+public unsafe func Windows_WriteProcessMemory(hProcess: CPointer<Unit>, lpBaseAddress: CPointer<Unit>, lpBuffer: CPointer<Unit>, nSize: UIntNative, lpNumberOfBytesWritten: CPointer<UIntNative>): Int32 {
+    return WriteProcessMemory(hProcess, lpBaseAddress, lpBuffer, nSize, lpNumberOfBytesWritten)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && USER32 == "on" && Windows_Win32_System_Diagnostics_Debug_MessageBeep == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func MessageBeep(uType: Win32__impl_l0.MESSAGEBOX_STYLEAbi): Int32
 }
 
-@When[API_MS_WIN_CORE_ERRORHANDLING_L1_1_3 == "on"]
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && USER32 == "on" && Windows_Win32_System_Diagnostics_Debug_MessageBeep == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_MessageBeep(uType: Win32__impl_l0.MESSAGEBOX_STYLEAbi): Int32 {
+    return MessageBeep(uType)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && API_MS_WIN_CORE_ERRORHANDLING_L1_1_3 == "on" && Windows_Win32_System_Diagnostics_Debug_TerminateProcessOnMemoryExhaustion == "on"]
 foreign {
     func TerminateProcessOnMemoryExhaustion(FailedAllocationSize: UIntNative): Unit
 }
 
-@When[API_MS_WIN_CORE_UTIL_L1_1_1 == "on"]
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && API_MS_WIN_CORE_ERRORHANDLING_L1_1_3 == "on" && Windows_Win32_System_Diagnostics_Debug_TerminateProcessOnMemoryExhaustion == "on"]
+public unsafe func Windows_TerminateProcessOnMemoryExhaustion(FailedAllocationSize: UIntNative): Unit {
+    TerminateProcessOnMemoryExhaustion(FailedAllocationSize)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && API_MS_WIN_CORE_UTIL_L1_1_1 == "on" && Windows_Win32_System_Diagnostics_Debug_DecodeRemotePointer == "on"]
 foreign {
     // param-hint: Ptr optional
     func DecodeRemotePointer(ProcessHandle: CPointer<Unit>, Ptr: CPointer<Unit>, DecodedPtr: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && API_MS_WIN_CORE_UTIL_L1_1_1 == "on" && Windows_Win32_System_Diagnostics_Debug_DecodeRemotePointer == "on"]
+public unsafe func Windows_DecodeRemotePointer(ProcessHandle: CPointer<Unit>, Ptr: CPointer<Unit>, DecodedPtr: CPointer<CPointer<Unit>>): Int32 {
+    return DecodeRemotePointer(ProcessHandle, Ptr, DecodedPtr)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && API_MS_WIN_CORE_UTIL_L1_1_1 == "on" && Windows_Win32_System_Diagnostics_Debug_EncodeRemotePointer == "on"]
+foreign {
     // param-hint: Ptr optional
     func EncodeRemotePointer(ProcessHandle: CPointer<Unit>, Ptr: CPointer<Unit>, EncodedPtr: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[DBGHELP == "on"]
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && API_MS_WIN_CORE_UTIL_L1_1_1 == "on" && Windows_Win32_System_Diagnostics_Debug_EncodeRemotePointer == "on"]
+public unsafe func Windows_EncodeRemotePointer(ProcessHandle: CPointer<Unit>, Ptr: CPointer<Unit>, EncodedPtr: CPointer<CPointer<Unit>>): Int32 {
+    return EncodeRemotePointer(ProcessHandle, Ptr, EncodedPtr)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_DbgHelpCreateUserDump == "on"]
 foreign {
     // param-hint: FileName optional
     // param-hint: UserData optional
     func DbgHelpCreateUserDump(FileName: CPointer<UInt8>, Callback: Win32__impl_l0.PDBGHELP_CREATE_USER_DUMP_CALLBACK, UserData: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_DbgHelpCreateUserDump == "on"]
+public unsafe func Windows_DbgHelpCreateUserDump(FileName: CPointer<UInt8>, Callback: Win32__impl_l0.PDBGHELP_CREATE_USER_DUMP_CALLBACK, UserData: CPointer<Unit>): Int32 {
+    return DbgHelpCreateUserDump(FileName, Callback, UserData)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_DbgHelpCreateUserDumpW == "on"]
+foreign {
     // param-hint: FileName optional
     // param-hint: UserData optional
     func DbgHelpCreateUserDumpW(FileName: CPointer<UInt16>, Callback: Win32__impl_l0.PDBGHELP_CREATE_USER_DUMP_CALLBACK, UserData: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_DbgHelpCreateUserDumpW == "on"]
+public unsafe func Windows_DbgHelpCreateUserDumpW(FileName: CPointer<UInt16>, Callback: Win32__impl_l0.PDBGHELP_CREATE_USER_DUMP_CALLBACK, UserData: CPointer<Unit>): Int32 {
+    return DbgHelpCreateUserDumpW(FileName, Callback, UserData)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_EnumDirTree == "on"]
+foreign {
     // param-hint: hProcess optional
     // param-hint: OutputPathBuffer optional
     // param-hint: cb optional
     // param-hint: data optional
     // pinvoke-hint: SetLastError
     func EnumDirTree(hProcess: CPointer<Unit>, RootPath: CPointer<UInt8>, InputPathName: CPointer<UInt8>, OutputPathBuffer: CPointer<UInt8>, cb: Win32__impl_l0.PENUMDIRTREE_CALLBACK, data: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_EnumDirTree == "on"]
+public unsafe func Windows_EnumDirTree(hProcess: CPointer<Unit>, RootPath: CPointer<UInt8>, InputPathName: CPointer<UInt8>, OutputPathBuffer: CPointer<UInt8>, cb: Win32__impl_l0.PENUMDIRTREE_CALLBACK, data: CPointer<Unit>): Int32 {
+    return EnumDirTree(hProcess, RootPath, InputPathName, OutputPathBuffer, cb, data)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_EnumDirTreeW == "on"]
+foreign {
     // param-hint: hProcess optional
     // param-hint: OutputPathBuffer optional
     // param-hint: cb optional
     // param-hint: data optional
     // pinvoke-hint: SetLastError
     func EnumDirTreeW(hProcess: CPointer<Unit>, RootPath: CPointer<UInt16>, InputPathName: CPointer<UInt16>, OutputPathBuffer: CPointer<UInt16>, cb: Win32__impl_l0.PENUMDIRTREE_CALLBACKW, data: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_EnumDirTreeW == "on"]
+public unsafe func Windows_EnumDirTreeW(hProcess: CPointer<Unit>, RootPath: CPointer<UInt16>, InputPathName: CPointer<UInt16>, OutputPathBuffer: CPointer<UInt16>, cb: Win32__impl_l0.PENUMDIRTREE_CALLBACKW, data: CPointer<Unit>): Int32 {
+    return EnumDirTreeW(hProcess, RootPath, InputPathName, OutputPathBuffer, cb, data)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_EnumerateLoadedModules64 == "on"]
+foreign {
     // param-hint: UserContext optional
     // pinvoke-hint: SetLastError
     func EnumerateLoadedModules64(hProcess: CPointer<Unit>, EnumLoadedModulesCallback: Win32__impl_l0.PENUMLOADED_MODULES_CALLBACK64, UserContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_EnumerateLoadedModules64 == "on"]
+public unsafe func Windows_EnumerateLoadedModules64(hProcess: CPointer<Unit>, EnumLoadedModulesCallback: Win32__impl_l0.PENUMLOADED_MODULES_CALLBACK64, UserContext: CPointer<Unit>): Int32 {
+    return EnumerateLoadedModules64(hProcess, EnumLoadedModulesCallback, UserContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_EnumerateLoadedModulesEx == "on"]
+foreign {
     // param-hint: UserContext optional
     // pinvoke-hint: SetLastError
     func EnumerateLoadedModulesEx(hProcess: CPointer<Unit>, EnumLoadedModulesCallback: Win32__impl_l0.PENUMLOADED_MODULES_CALLBACK64, UserContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_EnumerateLoadedModulesEx == "on"]
+public unsafe func Windows_EnumerateLoadedModulesEx(hProcess: CPointer<Unit>, EnumLoadedModulesCallback: Win32__impl_l0.PENUMLOADED_MODULES_CALLBACK64, UserContext: CPointer<Unit>): Int32 {
+    return EnumerateLoadedModulesEx(hProcess, EnumLoadedModulesCallback, UserContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_EnumerateLoadedModulesExW == "on"]
+foreign {
     // param-hint: UserContext optional
     // pinvoke-hint: SetLastError
     func EnumerateLoadedModulesExW(hProcess: CPointer<Unit>, EnumLoadedModulesCallback: Win32__impl_l0.PENUMLOADED_MODULES_CALLBACKW64, UserContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_EnumerateLoadedModulesExW == "on"]
+public unsafe func Windows_EnumerateLoadedModulesExW(hProcess: CPointer<Unit>, EnumLoadedModulesCallback: Win32__impl_l0.PENUMLOADED_MODULES_CALLBACKW64, UserContext: CPointer<Unit>): Int32 {
+    return EnumerateLoadedModulesExW(hProcess, EnumLoadedModulesCallback, UserContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_EnumerateLoadedModulesW64 == "on"]
+foreign {
     // param-hint: UserContext optional
     // pinvoke-hint: SetLastError
     func EnumerateLoadedModulesW64(hProcess: CPointer<Unit>, EnumLoadedModulesCallback: Win32__impl_l0.PENUMLOADED_MODULES_CALLBACKW64, UserContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_EnumerateLoadedModulesW64 == "on"]
+public unsafe func Windows_EnumerateLoadedModulesW64(hProcess: CPointer<Unit>, EnumLoadedModulesCallback: Win32__impl_l0.PENUMLOADED_MODULES_CALLBACKW64, UserContext: CPointer<Unit>): Int32 {
+    return EnumerateLoadedModulesW64(hProcess, EnumLoadedModulesCallback, UserContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_FindDebugInfoFile == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func FindDebugInfoFile(FileName: CPointer<UInt8>, SymbolPath: CPointer<UInt8>, DebugFilePath: CPointer<UInt8>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_FindDebugInfoFile == "on"]
+public unsafe func Windows_FindDebugInfoFile(FileName: CPointer<UInt8>, SymbolPath: CPointer<UInt8>, DebugFilePath: CPointer<UInt8>): CPointer<Unit> {
+    return FindDebugInfoFile(FileName, SymbolPath, DebugFilePath)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_FindDebugInfoFileEx == "on"]
+foreign {
     // param-hint: Callback optional
     // param-hint: CallerData optional
     // pinvoke-hint: SetLastError
     func FindDebugInfoFileEx(FileName: CPointer<UInt8>, SymbolPath: CPointer<UInt8>, DebugFilePath: CPointer<UInt8>, Callback: Win32__impl_l0.PFIND_DEBUG_FILE_CALLBACK, CallerData: CPointer<Unit>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_FindDebugInfoFileEx == "on"]
+public unsafe func Windows_FindDebugInfoFileEx(FileName: CPointer<UInt8>, SymbolPath: CPointer<UInt8>, DebugFilePath: CPointer<UInt8>, Callback: Win32__impl_l0.PFIND_DEBUG_FILE_CALLBACK, CallerData: CPointer<Unit>): CPointer<Unit> {
+    return FindDebugInfoFileEx(FileName, SymbolPath, DebugFilePath, Callback, CallerData)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_FindDebugInfoFileExW == "on"]
+foreign {
     // param-hint: Callback optional
     // param-hint: CallerData optional
     // pinvoke-hint: SetLastError
     func FindDebugInfoFileExW(FileName: CPointer<UInt16>, SymbolPath: CPointer<UInt16>, DebugFilePath: CPointer<UInt16>, Callback: Win32__impl_l0.PFIND_DEBUG_FILE_CALLBACKW, CallerData: CPointer<Unit>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_FindDebugInfoFileExW == "on"]
+public unsafe func Windows_FindDebugInfoFileExW(FileName: CPointer<UInt16>, SymbolPath: CPointer<UInt16>, DebugFilePath: CPointer<UInt16>, Callback: Win32__impl_l0.PFIND_DEBUG_FILE_CALLBACKW, CallerData: CPointer<Unit>): CPointer<Unit> {
+    return FindDebugInfoFileExW(FileName, SymbolPath, DebugFilePath, Callback, CallerData)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_FindExecutableImage == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func FindExecutableImage(FileName: CPointer<UInt8>, SymbolPath: CPointer<UInt8>, ImageFilePath: CPointer<UInt8>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_FindExecutableImage == "on"]
+public unsafe func Windows_FindExecutableImage(FileName: CPointer<UInt8>, SymbolPath: CPointer<UInt8>, ImageFilePath: CPointer<UInt8>): CPointer<Unit> {
+    return FindExecutableImage(FileName, SymbolPath, ImageFilePath)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_FindExecutableImageEx == "on"]
+foreign {
     // param-hint: Callback optional
     // param-hint: CallerData optional
     // pinvoke-hint: SetLastError
     func FindExecutableImageEx(FileName: CPointer<UInt8>, SymbolPath: CPointer<UInt8>, ImageFilePath: CPointer<UInt8>, Callback: Win32__impl_l0.PFIND_EXE_FILE_CALLBACK, CallerData: CPointer<Unit>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_FindExecutableImageEx == "on"]
+public unsafe func Windows_FindExecutableImageEx(FileName: CPointer<UInt8>, SymbolPath: CPointer<UInt8>, ImageFilePath: CPointer<UInt8>, Callback: Win32__impl_l0.PFIND_EXE_FILE_CALLBACK, CallerData: CPointer<Unit>): CPointer<Unit> {
+    return FindExecutableImageEx(FileName, SymbolPath, ImageFilePath, Callback, CallerData)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_FindExecutableImageExW == "on"]
+foreign {
     // param-hint: Callback optional
     // pinvoke-hint: SetLastError
     func FindExecutableImageExW(FileName: CPointer<UInt16>, SymbolPath: CPointer<UInt16>, ImageFilePath: CPointer<UInt16>, Callback: Win32__impl_l0.PFIND_EXE_FILE_CALLBACKW, CallerData: CPointer<Unit>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_FindExecutableImageExW == "on"]
+public unsafe func Windows_FindExecutableImageExW(FileName: CPointer<UInt16>, SymbolPath: CPointer<UInt16>, ImageFilePath: CPointer<UInt16>, Callback: Win32__impl_l0.PFIND_EXE_FILE_CALLBACKW, CallerData: CPointer<Unit>): CPointer<Unit> {
+    return FindExecutableImageExW(FileName, SymbolPath, ImageFilePath, Callback, CallerData)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_FindFileInPath == "on"]
+foreign {
     func FindFileInPath(hprocess: CPointer<Unit>, SearchPathA: CPointer<UInt8>, FileName: CPointer<UInt8>, id: CPointer<Unit>, two: UInt32, three: UInt32, flags: UInt32, FilePath: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_FindFileInPath == "on"]
+public unsafe func Windows_FindFileInPath(hprocess: CPointer<Unit>, SearchPathA: CPointer<UInt8>, FileName: CPointer<UInt8>, id: CPointer<Unit>, two: UInt32, three: UInt32, flags: UInt32, FilePath: CPointer<UInt8>): Int32 {
+    return FindFileInPath(hprocess, SearchPathA, FileName, id, two, three, flags, FilePath)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_FindFileInSearchPath == "on"]
+foreign {
     func FindFileInSearchPath(hprocess: CPointer<Unit>, SearchPathA: CPointer<UInt8>, FileName: CPointer<UInt8>, one: UInt32, two: UInt32, three: UInt32, FilePath: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_FindFileInSearchPath == "on"]
+public unsafe func Windows_FindFileInSearchPath(hprocess: CPointer<Unit>, SearchPathA: CPointer<UInt8>, FileName: CPointer<UInt8>, one: UInt32, two: UInt32, three: UInt32, FilePath: CPointer<UInt8>): Int32 {
+    return FindFileInSearchPath(hprocess, SearchPathA, FileName, one, two, three, FilePath)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_GetSymLoadError == "on"]
+foreign {
     func GetSymLoadError(): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_GetSymLoadError == "on"]
+public unsafe func Windows_GetSymLoadError(): UInt32 {
+    return GetSymLoadError()
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_GetTimestampForLoadedLibrary == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetTimestampForLoadedLibrary(Module: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_GetTimestampForLoadedLibrary == "on"]
+public unsafe func Windows_GetTimestampForLoadedLibrary(Module: CPointer<Unit>): UInt32 {
+    return GetTimestampForLoadedLibrary(Module)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageDirectoryEntryToData == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ImageDirectoryEntryToData(Base: CPointer<Unit>, MappedAsImage: UInt8, DirectoryEntry: Win32__impl_l0.IMAGE_DIRECTORY_ENTRYAbi, Size: CPointer<UInt32>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageDirectoryEntryToData == "on"]
+public unsafe func Windows_ImageDirectoryEntryToData(Base: CPointer<Unit>, MappedAsImage: UInt8, DirectoryEntry: Win32__impl_l0.IMAGE_DIRECTORY_ENTRYAbi, Size: CPointer<UInt32>): CPointer<Unit> {
+    return ImageDirectoryEntryToData(Base, MappedAsImage, DirectoryEntry, Size)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageDirectoryEntryToDataEx == "on"]
+foreign {
     // param-hint: FoundHeader optional
     // pinvoke-hint: SetLastError
     func ImageDirectoryEntryToDataEx(Base: CPointer<Unit>, MappedAsImage: UInt8, DirectoryEntry: Win32__impl_l0.IMAGE_DIRECTORY_ENTRYAbi, Size: CPointer<UInt32>, FoundHeader: CPointer<CPointer<Win32__impl_l1.IMAGE_SECTION_HEADERAbi>>): CPointer<Unit>
-    func ImagehlpApiVersion(): CPointer<Win32__impl_l0.API_VERSIONAbi>
-    func ImagehlpApiVersionEx(AppVersion: CPointer<Win32__impl_l0.API_VERSIONAbi>): CPointer<Win32__impl_l0.API_VERSIONAbi>
-    // pinvoke-hint: SetLastError
-    func MakeSureDirectoryPathExists(DirPath: CPointer<UInt8>): Int32
-    // param-hint: StreamSize optional
-    func MiniDumpReadDumpStream(BaseOfDump: CPointer<Unit>, StreamNumber: UInt32, Dir: CPointer<CPointer<Win32__impl_l1.MINIDUMP_DIRECTORY>>, StreamPointer: CPointer<CPointer<Unit>>, StreamSize: CPointer<UInt32>): Int32
-    // param-hint: ImageName optional
-    // param-hint: MappedImage bytes=param[3]
-    func RangeMapAddPeImageSections(RmapHandle: CPointer<Unit>, ImageName: CPointer<UInt16>, MappedImage: CPointer<Unit>, MappingBytes: UInt32, ImageBase: UInt64, UserTag: UInt64, MappingFlags: UInt32): Int32
-    func RangeMapCreate(): CPointer<Unit>
-    // param-hint: RmapHandle optional
-    func RangeMapFree(RmapHandle: CPointer<Unit>): Unit
-    // param-hint: Buffer bytes=param[3]
-    // param-hint: DoneBytes optional
-    func RangeMapRead(RmapHandle: CPointer<Unit>, Offset: UInt64, Buffer: CPointer<Unit>, RequestBytes: UInt32, Flags: UInt32, DoneBytes: CPointer<UInt32>): Int32
-    func RangeMapRemove(RmapHandle: CPointer<Unit>, UserTag: UInt64): Int32
-    // param-hint: Buffer bytes=param[3]
-    // param-hint: DoneBytes optional
-    func RangeMapWrite(RmapHandle: CPointer<Unit>, Offset: UInt64, Buffer: CPointer<Unit>, RequestBytes: UInt32, Flags: UInt32, DoneBytes: CPointer<UInt32>): Int32
-    func RemoveInvalidModuleList(hProcess: CPointer<Unit>): Unit
-    // param-hint: pLoadModule optional
-    func ReportSymbolLoadSummary(hProcess: CPointer<Unit>, pLoadModule: CPointer<UInt16>, pSymbolData: CPointer<Win32__impl_l0.DBGHELP_DATA_REPORT_STRUCTAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func SearchTreeForFile(RootPath: CPointer<UInt8>, InputPathName: CPointer<UInt8>, OutputPathBuffer: CPointer<UInt8>): Int32
-    // pinvoke-hint: SetLastError
-    func SearchTreeForFileW(RootPath: CPointer<UInt16>, InputPathName: CPointer<UInt16>, OutputPathBuffer: CPointer<UInt16>): Int32
-    func SetCheckUserInterruptShared(lpStartAddress: Win32__impl_l0.LPCALL_BACK_USER_INTERRUPT_ROUTINE): Unit
-    func SetSymLoadError(error: UInt32): Unit
-    // param-hint: ReadMemoryRoutine optional
-    // param-hint: FunctionTableAccessRoutine optional
-    // param-hint: GetModuleBaseRoutine optional
-    // param-hint: TranslateAddress optional
-    // param-hint: GetTargetAttributeValue optional
-    func StackWalk2(MachineType: UInt32, hProcess: CPointer<Unit>, hThread: CPointer<Unit>, StackFrame: CPointer<Win32__impl_l1.STACKFRAME_EXAbi>, ContextRecord: CPointer<Unit>, ReadMemoryRoutine: Win32__impl_l0.PREAD_PROCESS_MEMORY_ROUTINE64, FunctionTableAccessRoutine: Win32__impl_l0.PFUNCTION_TABLE_ACCESS_ROUTINE64, GetModuleBaseRoutine: Win32__impl_l0.PGET_MODULE_BASE_ROUTINE64, TranslateAddress: Win32__impl_l1.PTRANSLATE_ADDRESS_ROUTINE64, GetTargetAttributeValue: Win32__impl_l0.PGET_TARGET_ATTRIBUTE_VALUE64, Flags: UInt32): Int32
-    // param-hint: ReadMemoryRoutine optional
-    // param-hint: FunctionTableAccessRoutine optional
-    // param-hint: GetModuleBaseRoutine optional
-    // param-hint: TranslateAddress optional
-    func StackWalk64(MachineType: UInt32, hProcess: CPointer<Unit>, hThread: CPointer<Unit>, StackFrame: CPointer<Win32__impl_l1.STACKFRAME64Abi>, ContextRecord: CPointer<Unit>, ReadMemoryRoutine: Win32__impl_l0.PREAD_PROCESS_MEMORY_ROUTINE64, FunctionTableAccessRoutine: Win32__impl_l0.PFUNCTION_TABLE_ACCESS_ROUTINE64, GetModuleBaseRoutine: Win32__impl_l0.PGET_MODULE_BASE_ROUTINE64, TranslateAddress: Win32__impl_l1.PTRANSLATE_ADDRESS_ROUTINE64): Int32
-    // param-hint: ReadMemoryRoutine optional
-    // param-hint: FunctionTableAccessRoutine optional
-    // param-hint: GetModuleBaseRoutine optional
-    // param-hint: TranslateAddress optional
-    func StackWalkEx(MachineType: UInt32, hProcess: CPointer<Unit>, hThread: CPointer<Unit>, StackFrame: CPointer<Win32__impl_l1.STACKFRAME_EXAbi>, ContextRecord: CPointer<Unit>, ReadMemoryRoutine: Win32__impl_l0.PREAD_PROCESS_MEMORY_ROUTINE64, FunctionTableAccessRoutine: Win32__impl_l0.PFUNCTION_TABLE_ACCESS_ROUTINE64, GetModuleBaseRoutine: Win32__impl_l0.PGET_MODULE_BASE_ROUTINE64, TranslateAddress: Win32__impl_l1.PTRANSLATE_ADDRESS_ROUTINE64, Flags: UInt32): Int32
-    // param-hint: StreamFile optional
-    // param-hint: Buffer bytes=param[4] optional
-    // pinvoke-hint: SetLastError
-    func SymAddSourceStream(hProcess: CPointer<Unit>, Base: UInt64, StreamFile: CPointer<UInt8>, Buffer: CPointer<UInt8>, Size: UIntNative): Int32
-    // param-hint: StreamFile optional
-    // param-hint: Buffer bytes=param[4] optional
-    func SymAddSourceStreamA(hProcess: CPointer<Unit>, Base: UInt64, StreamFile: CPointer<UInt8>, Buffer: CPointer<UInt8>, Size: UIntNative): Int32
-    // param-hint: FileSpec optional
-    // param-hint: Buffer bytes=param[4] optional
-    // pinvoke-hint: SetLastError
-    func SymAddSourceStreamW(hProcess: CPointer<Unit>, Base: UInt64, FileSpec: CPointer<UInt16>, Buffer: CPointer<UInt8>, Size: UIntNative): Int32
-    // pinvoke-hint: SetLastError
-    func SymAddSymbol(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Name: CPointer<UInt8>, Address: UInt64, Size: UInt32, Flags: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func SymAddSymbolW(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Name: CPointer<UInt16>, Address: UInt64, Size: UInt32, Flags: UInt32): Int32
-    func SymAddrIncludeInlineTrace(hProcess: CPointer<Unit>, Address: UInt64): UInt32
-    // pinvoke-hint: SetLastError
-    func SymCleanup(hProcess: CPointer<Unit>): Int32
-    func SymCompareInlineTrace(hProcess: CPointer<Unit>, Address1: UInt64, InlineContext1: UInt32, RetAddress1: UInt64, Address2: UInt64, RetAddress2: UInt64): UInt32
-    // param-hint: Name optional
-    // pinvoke-hint: SetLastError
-    func SymDeleteSymbol(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Name: CPointer<UInt8>, Address: UInt64, Flags: UInt32): Int32
-    // param-hint: Name optional
-    // pinvoke-hint: SetLastError
-    func SymDeleteSymbolW(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Name: CPointer<UInt16>, Address: UInt64, Flags: UInt32): Int32
-    // param-hint: Obj optional
-    // param-hint: File optional
-    // param-hint: UserContext optional
-    // pinvoke-hint: SetLastError
-    func SymEnumLines(hProcess: CPointer<Unit>, Base: UInt64, Obj: CPointer<UInt8>, File: CPointer<UInt8>, EnumLinesCallback: Win32__impl_l1.PSYM_ENUMLINES_CALLBACK, UserContext: CPointer<Unit>): Int32
-    // param-hint: Obj optional
-    // param-hint: File optional
-    // param-hint: UserContext optional
-    // pinvoke-hint: SetLastError
-    func SymEnumLinesW(hProcess: CPointer<Unit>, Base: UInt64, Obj: CPointer<UInt16>, File: CPointer<UInt16>, EnumLinesCallback: Win32__impl_l1.PSYM_ENUMLINES_CALLBACKW, UserContext: CPointer<Unit>): Int32
-    // pinvoke-hint: SetLastError
-    func SymEnumProcesses(EnumProcessesCallback: Win32__impl_l0.PSYM_ENUMPROCESSES_CALLBACK, UserContext: CPointer<Unit>): Int32
-    // pinvoke-hint: SetLastError
-    func SymEnumSourceFileTokens(hProcess: CPointer<Unit>, Base: UInt64, Callback: Win32__impl_l0.PENUMSOURCEFILETOKENSCALLBACK): Int32
-    // param-hint: Mask optional
-    // param-hint: UserContext optional
-    // pinvoke-hint: SetLastError
-    func SymEnumSourceFiles(hProcess: CPointer<Unit>, ModBase: UInt64, Mask: CPointer<UInt8>, cbSrcFiles: Win32__impl_l1.PSYM_ENUMSOURCEFILES_CALLBACK, UserContext: CPointer<Unit>): Int32
-    // param-hint: Mask optional
-    // param-hint: UserContext optional
-    // pinvoke-hint: SetLastError
-    func SymEnumSourceFilesW(hProcess: CPointer<Unit>, ModBase: UInt64, Mask: CPointer<UInt16>, cbSrcFiles: Win32__impl_l1.PSYM_ENUMSOURCEFILES_CALLBACKW, UserContext: CPointer<Unit>): Int32
-    // param-hint: Obj optional
-    // param-hint: File optional
-    // param-hint: Line optional
-    // param-hint: UserContext optional
-    // pinvoke-hint: SetLastError
-    func SymEnumSourceLines(hProcess: CPointer<Unit>, Base: UInt64, Obj: CPointer<UInt8>, File: CPointer<UInt8>, Line: UInt32, Flags: UInt32, EnumLinesCallback: Win32__impl_l1.PSYM_ENUMLINES_CALLBACK, UserContext: CPointer<Unit>): Int32
-    // param-hint: Obj optional
-    // param-hint: File optional
-    // param-hint: Line optional
-    // param-hint: UserContext optional
-    // pinvoke-hint: SetLastError
-    func SymEnumSourceLinesW(hProcess: CPointer<Unit>, Base: UInt64, Obj: CPointer<UInt16>, File: CPointer<UInt16>, Line: UInt32, Flags: UInt32, EnumLinesCallback: Win32__impl_l1.PSYM_ENUMLINES_CALLBACKW, UserContext: CPointer<Unit>): Int32
-    // param-hint: UserContext optional
-    func SymEnumSym(hProcess: CPointer<Unit>, BaseOfDll: UInt64, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACK, UserContext: CPointer<Unit>): Int32
-    // param-hint: Mask optional
-    // param-hint: UserContext optional
-    // pinvoke-hint: SetLastError
-    func SymEnumSymbols(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Mask: CPointer<UInt8>, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACK, UserContext: CPointer<Unit>): Int32
-    // param-hint: Mask optional
-    // param-hint: UserContext optional
-    // pinvoke-hint: SetLastError
-    func SymEnumSymbolsEx(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Mask: CPointer<UInt8>, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACK, UserContext: CPointer<Unit>, Options: UInt32): Int32
-    // param-hint: Mask optional
-    // param-hint: UserContext optional
-    // pinvoke-hint: SetLastError
-    func SymEnumSymbolsExW(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Mask: CPointer<UInt16>, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext: CPointer<Unit>, Options: UInt32): Int32
-    // param-hint: UserContext optional
-    // pinvoke-hint: SetLastError
-    func SymEnumSymbolsForAddr(hProcess: CPointer<Unit>, Address: UInt64, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACK, UserContext: CPointer<Unit>): Int32
-    // param-hint: UserContext optional
-    // pinvoke-hint: SetLastError
-    func SymEnumSymbolsForAddrW(hProcess: CPointer<Unit>, Address: UInt64, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext: CPointer<Unit>): Int32
-    // param-hint: Mask optional
-    // param-hint: UserContext optional
-    // pinvoke-hint: SetLastError
-    func SymEnumSymbolsW(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Mask: CPointer<UInt16>, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext: CPointer<Unit>): Int32
-    // param-hint: UserContext optional
-    // pinvoke-hint: SetLastError
-    func SymEnumTypes(hProcess: CPointer<Unit>, BaseOfDll: UInt64, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACK, UserContext: CPointer<Unit>): Int32
-    // param-hint: mask optional
-    // param-hint: UserContext optional
-    // pinvoke-hint: SetLastError
-    func SymEnumTypesByName(hProcess: CPointer<Unit>, BaseOfDll: UInt64, mask: CPointer<UInt8>, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACK, UserContext: CPointer<Unit>): Int32
-    // param-hint: mask optional
-    // param-hint: UserContext optional
-    // pinvoke-hint: SetLastError
-    func SymEnumTypesByNameW(hProcess: CPointer<Unit>, BaseOfDll: UInt64, mask: CPointer<UInt16>, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext: CPointer<Unit>): Int32
-    // param-hint: UserContext optional
-    // pinvoke-hint: SetLastError
-    func SymEnumTypesW(hProcess: CPointer<Unit>, BaseOfDll: UInt64, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext: CPointer<Unit>): Int32
-    // param-hint: UserContext optional
-    // pinvoke-hint: SetLastError
-    func SymEnumerateModules64(hProcess: CPointer<Unit>, EnumModulesCallback: Win32__impl_l0.PSYM_ENUMMODULES_CALLBACK64, UserContext: CPointer<Unit>): Int32
-    // param-hint: UserContext optional
-    // pinvoke-hint: SetLastError
-    func SymEnumerateModulesW64(hProcess: CPointer<Unit>, EnumModulesCallback: Win32__impl_l0.PSYM_ENUMMODULES_CALLBACKW64, UserContext: CPointer<Unit>): Int32
-    // param-hint: UserContext optional
-    // pinvoke-hint: SetLastError
-    func SymEnumerateSymbols64(hProcess: CPointer<Unit>, BaseOfDll: UInt64, EnumSymbolsCallback: Win32__impl_l0.PSYM_ENUMSYMBOLS_CALLBACK64, UserContext: CPointer<Unit>): Int32
-    // param-hint: UserContext optional
-    // pinvoke-hint: SetLastError
-    func SymEnumerateSymbolsW64(hProcess: CPointer<Unit>, BaseOfDll: UInt64, EnumSymbolsCallback: Win32__impl_l0.PSYM_ENUMSYMBOLS_CALLBACK64W, UserContext: CPointer<Unit>): Int32
-    // param-hint: Callback optional
-    // param-hint: CallerData optional
-    // pinvoke-hint: SetLastError
-    func SymFindDebugInfoFile(hProcess: CPointer<Unit>, FileName: CPointer<UInt8>, DebugFilePath: CPointer<UInt8>, Callback: Win32__impl_l0.PFIND_DEBUG_FILE_CALLBACK, CallerData: CPointer<Unit>): CPointer<Unit>
-    // param-hint: Callback optional
-    // param-hint: CallerData optional
-    // pinvoke-hint: SetLastError
-    func SymFindDebugInfoFileW(hProcess: CPointer<Unit>, FileName: CPointer<UInt16>, DebugFilePath: CPointer<UInt16>, Callback: Win32__impl_l0.PFIND_DEBUG_FILE_CALLBACKW, CallerData: CPointer<Unit>): CPointer<Unit>
-    // pinvoke-hint: SetLastError
-    func SymFindExecutableImage(hProcess: CPointer<Unit>, FileName: CPointer<UInt8>, ImageFilePath: CPointer<UInt8>, Callback: Win32__impl_l0.PFIND_EXE_FILE_CALLBACK, CallerData: CPointer<Unit>): CPointer<Unit>
-    // pinvoke-hint: SetLastError
-    func SymFindExecutableImageW(hProcess: CPointer<Unit>, FileName: CPointer<UInt16>, ImageFilePath: CPointer<UInt16>, Callback: Win32__impl_l0.PFIND_EXE_FILE_CALLBACKW, CallerData: CPointer<Unit>): CPointer<Unit>
-    // param-hint: SearchPathA optional
-    // param-hint: id optional
-    // param-hint: callback optional
-    // param-hint: context optional
-    // pinvoke-hint: SetLastError
-    func SymFindFileInPath(hprocess: CPointer<Unit>, SearchPathA: CPointer<UInt8>, FileName: CPointer<UInt8>, id: CPointer<Unit>, two: UInt32, three: UInt32, flags: Win32__impl_l0.SYM_FIND_ID_OPTIONAbi, FoundFile: CPointer<UInt8>, callback: Win32__impl_l0.PFINDFILEINPATHCALLBACK, context: CPointer<Unit>): Int32
-    // param-hint: SearchPathA optional
-    // param-hint: id optional
-    // param-hint: callback optional
-    // param-hint: context optional
-    // pinvoke-hint: SetLastError
-    func SymFindFileInPathW(hprocess: CPointer<Unit>, SearchPathA: CPointer<UInt16>, FileName: CPointer<UInt16>, id: CPointer<Unit>, two: UInt32, three: UInt32, flags: Win32__impl_l0.SYM_FIND_ID_OPTIONAbi, FoundFile: CPointer<UInt16>, callback: Win32__impl_l0.PFINDFILEINPATHCALLBACKW, context: CPointer<Unit>): Int32
-    // param-hint: Displacement optional
-    // pinvoke-hint: SetLastError
-    func SymFromAddr(hProcess: CPointer<Unit>, Address: UInt64, Displacement: CPointer<UInt64>, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOAbi>): Int32
-    // param-hint: Displacement optional
-    // pinvoke-hint: SetLastError
-    func SymFromAddrW(hProcess: CPointer<Unit>, Address: UInt64, Displacement: CPointer<UInt64>, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOWAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func SymFromIndex(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Index: UInt32, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func SymFromIndexW(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Index: UInt32, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOWAbi>): Int32
-    // param-hint: Displacement optional
-    // pinvoke-hint: SetLastError
-    func SymFromInlineContext(hProcess: CPointer<Unit>, Address: UInt64, InlineContext: UInt32, Displacement: CPointer<UInt64>, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOAbi>): Int32
-    // param-hint: Displacement optional
-    // pinvoke-hint: SetLastError
-    func SymFromInlineContextW(hProcess: CPointer<Unit>, Address: UInt64, InlineContext: UInt32, Displacement: CPointer<UInt64>, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOWAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func SymFromName(hProcess: CPointer<Unit>, Name: CPointer<UInt8>, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func SymFromNameW(hProcess: CPointer<Unit>, Name: CPointer<UInt16>, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOWAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func SymFromToken(hProcess: CPointer<Unit>, Base: UInt64, Token: UInt32, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func SymFromTokenW(hProcess: CPointer<Unit>, Base: UInt64, Token: UInt32, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOWAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func SymFunctionTableAccess64(hProcess: CPointer<Unit>, AddrBase: UInt64): CPointer<Unit>
-    // param-hint: ReadMemoryRoutine optional
-    // param-hint: GetModuleBaseRoutine optional
-    func SymFunctionTableAccess64AccessRoutines(hProcess: CPointer<Unit>, AddrBase: UInt64, ReadMemoryRoutine: Win32__impl_l0.PREAD_PROCESS_MEMORY_ROUTINE64, GetModuleBaseRoutine: Win32__impl_l0.PGET_MODULE_BASE_ROUTINE64): CPointer<Unit>
-    func SymGetExtendedOption(option: Win32__impl_l0.IMAGEHLP_EXTENDED_OPTIONSAbi): Int32
-    // param-hint: ModuleName optional
-    // param-hint: Buffer len=param[4]
-    // pinvoke-hint: SetLastError
-    func SymGetFileLineOffsets64(hProcess: CPointer<Unit>, ModuleName: CPointer<UInt8>, FileName: CPointer<UInt8>, Buffer: CPointer<UInt64>, BufferLines: UInt32): UInt32
-    // param-hint: dir len=param[2]
-    // pinvoke-hint: SetLastError
-    func SymGetHomeDirectory(type_: UInt32, dir: CPointer<UInt8>, size: UIntNative): CPointer<UInt8>
-    // param-hint: dir len=param[2]
-    // pinvoke-hint: SetLastError
-    func SymGetHomeDirectoryW(type_: UInt32, dir: CPointer<UInt16>, size: UIntNative): CPointer<UInt16>
-    // pinvoke-hint: SetLastError
-    func SymGetLineFromAddr64(hProcess: CPointer<Unit>, qwAddr: UInt64, pdwDisplacement: CPointer<UInt32>, Line64: CPointer<Win32__impl_l0.IMAGEHLP_LINE64Abi>): Int32
-    // pinvoke-hint: SetLastError
-    func SymGetLineFromAddrW64(hProcess: CPointer<Unit>, dwAddr: UInt64, pdwDisplacement: CPointer<UInt32>, Line: CPointer<Win32__impl_l0.IMAGEHLP_LINEW64Abi>): Int32
-    // param-hint: qwModuleBaseAddress optional
-    // pinvoke-hint: SetLastError
-    func SymGetLineFromInlineContext(hProcess: CPointer<Unit>, qwAddr: UInt64, InlineContext: UInt32, qwModuleBaseAddress: UInt64, pdwDisplacement: CPointer<UInt32>, Line64: CPointer<Win32__impl_l0.IMAGEHLP_LINE64Abi>): Int32
-    // param-hint: qwModuleBaseAddress optional
-    // pinvoke-hint: SetLastError
-    func SymGetLineFromInlineContextW(hProcess: CPointer<Unit>, dwAddr: UInt64, InlineContext: UInt32, qwModuleBaseAddress: UInt64, pdwDisplacement: CPointer<UInt32>, Line: CPointer<Win32__impl_l0.IMAGEHLP_LINEW64Abi>): Int32
-    // param-hint: ModuleName optional
-    // param-hint: FileName optional
-    // pinvoke-hint: SetLastError
-    func SymGetLineFromName64(hProcess: CPointer<Unit>, ModuleName: CPointer<UInt8>, FileName: CPointer<UInt8>, dwLineNumber: UInt32, plDisplacement: CPointer<Int32>, Line: CPointer<Win32__impl_l0.IMAGEHLP_LINE64Abi>): Int32
-    // param-hint: ModuleName optional
-    // param-hint: FileName optional
-    // pinvoke-hint: SetLastError
-    func SymGetLineFromNameW64(hProcess: CPointer<Unit>, ModuleName: CPointer<UInt16>, FileName: CPointer<UInt16>, dwLineNumber: UInt32, plDisplacement: CPointer<Int32>, Line: CPointer<Win32__impl_l0.IMAGEHLP_LINEW64Abi>): Int32
-    // pinvoke-hint: SetLastError
-    func SymGetLineNext64(hProcess: CPointer<Unit>, Line: CPointer<Win32__impl_l0.IMAGEHLP_LINE64Abi>): Int32
-    // pinvoke-hint: SetLastError
-    func SymGetLineNextW64(hProcess: CPointer<Unit>, Line: CPointer<Win32__impl_l0.IMAGEHLP_LINEW64Abi>): Int32
-    // pinvoke-hint: SetLastError
-    func SymGetLinePrev64(hProcess: CPointer<Unit>, Line: CPointer<Win32__impl_l0.IMAGEHLP_LINE64Abi>): Int32
-    // pinvoke-hint: SetLastError
-    func SymGetLinePrevW64(hProcess: CPointer<Unit>, Line: CPointer<Win32__impl_l0.IMAGEHLP_LINEW64Abi>): Int32
-    // pinvoke-hint: SetLastError
-    func SymGetModuleBase64(hProcess: CPointer<Unit>, qwAddr: UInt64): UInt64
-    // pinvoke-hint: SetLastError
-    func SymGetModuleInfo64(hProcess: CPointer<Unit>, qwAddr: UInt64, ModuleInfo: CPointer<Win32__impl_l1.IMAGEHLP_MODULE64Abi>): Int32
-    // pinvoke-hint: SetLastError
-    func SymGetModuleInfoW64(hProcess: CPointer<Unit>, qwAddr: UInt64, ModuleInfo: CPointer<Win32__impl_l1.IMAGEHLP_MODULEW64Abi>): Int32
-    // pinvoke-hint: SetLastError
-    func SymGetOmaps(hProcess: CPointer<Unit>, BaseOfDll: UInt64, OmapTo: CPointer<CPointer<Win32__impl_l0.OMAPAbi>>, cOmapTo: CPointer<UInt64>, OmapFrom: CPointer<CPointer<Win32__impl_l0.OMAPAbi>>, cOmapFrom: CPointer<UInt64>): Int32
-    func SymGetOptions(): UInt32
-    func SymGetParentWindow(pHwnd: CPointer<CPointer<Unit>>): Int32
-    // pinvoke-hint: SetLastError
-    func SymGetScope(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Index: UInt32, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func SymGetScopeW(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Index: UInt32, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOWAbi>): Int32
-    // param-hint: SearchPathA len=param[2]
-    // pinvoke-hint: SetLastError
-    func SymGetSearchPath(hProcess: CPointer<Unit>, SearchPathA: CPointer<UInt8>, SearchPathLength: UInt32): Int32
-    // param-hint: SearchPathA len=param[2]
-    // pinvoke-hint: SetLastError
-    func SymGetSearchPathW(hProcess: CPointer<Unit>, SearchPathA: CPointer<UInt16>, SearchPathLength: UInt32): Int32
-    // param-hint: Params optional
-    // param-hint: FilePath len=param[5]
-    // pinvoke-hint: SetLastError
-    func SymGetSourceFile(hProcess: CPointer<Unit>, Base: UInt64, Params: CPointer<UInt8>, FileSpec: CPointer<UInt8>, FilePath: CPointer<UInt8>, Size: UInt32): Int32
-    // param-hint: pChecksum len=param[5]
-    // pinvoke-hint: SetLastError
-    func SymGetSourceFileChecksum(hProcess: CPointer<Unit>, Base: UInt64, FileSpec: CPointer<UInt8>, pCheckSumType: CPointer<UInt32>, pChecksum: CPointer<UInt8>, checksumSize: UInt32, pActualBytesWritten: CPointer<UInt32>): Int32
-    // param-hint: pChecksum len=param[5]
-    // pinvoke-hint: SetLastError
-    func SymGetSourceFileChecksumW(hProcess: CPointer<Unit>, Base: UInt64, FileSpec: CPointer<UInt16>, pCheckSumType: CPointer<UInt32>, pChecksum: CPointer<UInt8>, checksumSize: UInt32, pActualBytesWritten: CPointer<UInt32>): Int32
-    // param-hint: Params optional
-    // param-hint: FilePath len=param[4]
-    // pinvoke-hint: SetLastError
-    func SymGetSourceFileFromToken(hProcess: CPointer<Unit>, Token: CPointer<Unit>, Params: CPointer<UInt8>, FilePath: CPointer<UInt8>, Size: UInt32): Int32
-    // param-hint: TokenName optional
-    // param-hint: Params optional
-    // param-hint: FilePath len=param[5]
-    func SymGetSourceFileFromTokenByTokenName(hProcess: CPointer<Unit>, Token: CPointer<Unit>, TokenName: CPointer<UInt8>, Params: CPointer<UInt8>, FilePath: CPointer<UInt8>, Size: UInt32): Int32
-    // param-hint: TokenName optional
-    // param-hint: Params optional
-    // param-hint: FilePath len=param[5]
-    func SymGetSourceFileFromTokenByTokenNameW(hProcess: CPointer<Unit>, Token: CPointer<Unit>, TokenName: CPointer<UInt16>, Params: CPointer<UInt16>, FilePath: CPointer<UInt16>, Size: UInt32): Int32
-    // param-hint: Params optional
-    // param-hint: FilePath len=param[4]
-    // pinvoke-hint: SetLastError
-    func SymGetSourceFileFromTokenW(hProcess: CPointer<Unit>, Token: CPointer<Unit>, Params: CPointer<UInt16>, FilePath: CPointer<UInt16>, Size: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func SymGetSourceFileToken(hProcess: CPointer<Unit>, Base: UInt64, FileSpec: CPointer<UInt8>, Token: CPointer<CPointer<Unit>>, Size: CPointer<UInt32>): Int32
-    // param-hint: TokenParameters optional
-    func SymGetSourceFileTokenByTokenName(hProcess: CPointer<Unit>, Base: UInt64, FileSpec: CPointer<UInt8>, TokenName: CPointer<UInt8>, TokenParameters: CPointer<UInt8>, Token: CPointer<CPointer<Unit>>, Size: CPointer<UInt32>): Int32
-    // param-hint: TokenParameters optional
-    func SymGetSourceFileTokenByTokenNameW(hProcess: CPointer<Unit>, Base: UInt64, FileSpec: CPointer<UInt16>, TokenName: CPointer<UInt16>, TokenParameters: CPointer<UInt16>, Token: CPointer<CPointer<Unit>>, Size: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func SymGetSourceFileTokenW(hProcess: CPointer<Unit>, Base: UInt64, FileSpec: CPointer<UInt16>, Token: CPointer<CPointer<Unit>>, Size: CPointer<UInt32>): Int32
-    // param-hint: Params optional
-    // param-hint: FilePath len=param[5]
-    // pinvoke-hint: SetLastError
-    func SymGetSourceFileW(hProcess: CPointer<Unit>, Base: UInt64, Params: CPointer<UInt16>, FileSpec: CPointer<UInt16>, FilePath: CPointer<UInt16>, Size: UInt32): Int32
-    // param-hint: Params optional
-    // param-hint: Value len=param[5]
-    // pinvoke-hint: SetLastError
-    func SymGetSourceVarFromToken(hProcess: CPointer<Unit>, Token: CPointer<Unit>, Params: CPointer<UInt8>, VarName: CPointer<UInt8>, Value: CPointer<UInt8>, Size: UInt32): Int32
-    // param-hint: Params optional
-    // param-hint: Value len=param[5]
-    // pinvoke-hint: SetLastError
-    func SymGetSourceVarFromTokenW(hProcess: CPointer<Unit>, Token: CPointer<Unit>, Params: CPointer<UInt16>, VarName: CPointer<UInt16>, Value: CPointer<UInt16>, Size: UInt32): Int32
-    // param-hint: pdwDisplacement optional
-    // pinvoke-hint: SetLastError
-    func SymGetSymFromAddr64(hProcess: CPointer<Unit>, qwAddr: UInt64, pdwDisplacement: CPointer<UInt64>, Symbol: CPointer<Win32__impl_l0.IMAGEHLP_SYMBOL64Abi>): Int32
-    // pinvoke-hint: SetLastError
-    func SymGetSymFromName64(hProcess: CPointer<Unit>, Name: CPointer<UInt8>, Symbol: CPointer<Win32__impl_l0.IMAGEHLP_SYMBOL64Abi>): Int32
-    // pinvoke-hint: SetLastError
-    func SymGetSymNext64(hProcess: CPointer<Unit>, Symbol: CPointer<Win32__impl_l0.IMAGEHLP_SYMBOL64Abi>): Int32
-    // pinvoke-hint: SetLastError
-    func SymGetSymPrev64(hProcess: CPointer<Unit>, Symbol: CPointer<Win32__impl_l0.IMAGEHLP_SYMBOL64Abi>): Int32
-    // param-hint: hProcess optional
-    // param-hint: SymPath optional
-    // param-hint: SymbolFile len=param[5]
-    // param-hint: DbgFile len=param[7]
-    // pinvoke-hint: SetLastError
-    func SymGetSymbolFile(hProcess: CPointer<Unit>, SymPath: CPointer<UInt8>, ImageFile: CPointer<UInt8>, Type: UInt32, SymbolFile: CPointer<UInt8>, cSymbolFile: UIntNative, DbgFile: CPointer<UInt8>, cDbgFile: UIntNative): Int32
-    // param-hint: hProcess optional
-    // param-hint: SymPath optional
-    // param-hint: SymbolFile len=param[5]
-    // param-hint: DbgFile len=param[7]
-    // pinvoke-hint: SetLastError
-    func SymGetSymbolFileW(hProcess: CPointer<Unit>, SymPath: CPointer<UInt16>, ImageFile: CPointer<UInt16>, Type: UInt32, SymbolFile: CPointer<UInt16>, cSymbolFile: UIntNative, DbgFile: CPointer<UInt16>, cDbgFile: UIntNative): Int32
-    // pinvoke-hint: SetLastError
-    func SymGetTypeFromName(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Name: CPointer<UInt8>, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func SymGetTypeFromNameW(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Name: CPointer<UInt16>, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOWAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func SymGetTypeInfo(hProcess: CPointer<Unit>, ModBase: UInt64, TypeId: UInt32, GetType: Win32__impl_l0.IMAGEHLP_SYMBOL_TYPE_INFOAbi, pInfo: CPointer<Unit>): Int32
-    // pinvoke-hint: SetLastError
-    func SymGetTypeInfoEx(hProcess: CPointer<Unit>, ModBase: UInt64, Params: CPointer<Win32__impl_l1.IMAGEHLP_GET_TYPE_INFO_PARAMSAbi>): Int32
-    // param-hint: Buffer bytes=param[3] optional
-    func SymGetUnwindInfo(hProcess: CPointer<Unit>, Address: UInt64, Buffer: CPointer<Unit>, Size: CPointer<UInt32>): Int32
-    // param-hint: UserSearchPath optional
-    // pinvoke-hint: SetLastError
-    func SymInitialize(hProcess: CPointer<Unit>, UserSearchPath: CPointer<UInt8>, fInvadeProcess: Int32): Int32
-    // param-hint: UserSearchPath optional
-    // pinvoke-hint: SetLastError
-    func SymInitializeW(hProcess: CPointer<Unit>, UserSearchPath: CPointer<UInt16>, fInvadeProcess: Int32): Int32
-    // param-hint: hFile optional
-    // param-hint: ImageName optional
-    // param-hint: ModuleName optional
-    // pinvoke-hint: SetLastError
-    func SymLoadModule64(hProcess: CPointer<Unit>, hFile: CPointer<Unit>, ImageName: CPointer<UInt8>, ModuleName: CPointer<UInt8>, BaseOfDll: UInt64, SizeOfDll: UInt32): UInt64
-    // param-hint: hFile optional
-    // param-hint: ImageName optional
-    // param-hint: ModuleName optional
-    // param-hint: Data optional
-    // param-hint: Flags optional
-    // pinvoke-hint: SetLastError
-    func SymLoadModuleEx(hProcess: CPointer<Unit>, hFile: CPointer<Unit>, ImageName: CPointer<UInt8>, ModuleName: CPointer<UInt8>, BaseOfDll: UInt64, DllSize: UInt32, Data: CPointer<Win32__impl_l1.MODLOAD_DATAAbi>, Flags: Win32__impl_l0.SYM_LOAD_FLAGSAbi): UInt64
-    // param-hint: hFile optional
-    // param-hint: ImageName optional
-    // param-hint: ModuleName optional
-    // param-hint: Data optional
-    // param-hint: Flags optional
-    // pinvoke-hint: SetLastError
-    func SymLoadModuleExW(hProcess: CPointer<Unit>, hFile: CPointer<Unit>, ImageName: CPointer<UInt16>, ModuleName: CPointer<UInt16>, BaseOfDll: UInt64, DllSize: UInt32, Data: CPointer<Win32__impl_l1.MODLOAD_DATAAbi>, Flags: Win32__impl_l0.SYM_LOAD_FLAGSAbi): UInt64
-    // param-hint: FileNameStop optional
-    // param-hint: MatchStop optional
-    // pinvoke-hint: SetLastError
-    func SymMatchFileName(FileName: CPointer<UInt8>, Match: CPointer<UInt8>, FileNameStop: CPointer<CPointer<UInt8>>, MatchStop: CPointer<CPointer<UInt8>>): Int32
-    // param-hint: FileNameStop optional
-    // param-hint: MatchStop optional
-    // pinvoke-hint: SetLastError
-    func SymMatchFileNameW(FileName: CPointer<UInt16>, Match: CPointer<UInt16>, FileNameStop: CPointer<CPointer<UInt16>>, MatchStop: CPointer<CPointer<UInt16>>): Int32
-    // pinvoke-hint: SetLastError
-    func SymMatchString(string: CPointer<UInt8>, expression: CPointer<UInt8>, fCase: Int32): Int32
-    func SymMatchStringA(string: CPointer<UInt8>, expression: CPointer<UInt8>, fCase: Int32): Int32
-    // pinvoke-hint: SetLastError
-    func SymMatchStringW(string: CPointer<UInt16>, expression: CPointer<UInt16>, fCase: Int32): Int32
-    // pinvoke-hint: SetLastError
-    func SymNext(hProcess: CPointer<Unit>, si: CPointer<Win32__impl_l1.SYMBOL_INFOAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func SymNextW(hProcess: CPointer<Unit>, siw: CPointer<Win32__impl_l1.SYMBOL_INFOWAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func SymPrev(hProcess: CPointer<Unit>, si: CPointer<Win32__impl_l1.SYMBOL_INFOAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func SymPrevW(hProcess: CPointer<Unit>, siw: CPointer<Win32__impl_l1.SYMBOL_INFOWAbi>): Int32
-    // pinvoke-hint: SetLastError
-    func SymQueryInlineTrace(hProcess: CPointer<Unit>, StartAddress: UInt64, StartContext: UInt32, StartRetAddress: UInt64, CurAddress: UInt64, CurContext: CPointer<UInt32>, CurFrameIndex: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func SymRefreshModuleList(hProcess: CPointer<Unit>): Int32
-    // pinvoke-hint: SetLastError
-    func SymRegisterCallback64(hProcess: CPointer<Unit>, CallbackFunction: Win32__impl_l0.PSYMBOL_REGISTERED_CALLBACK64, UserContext: UInt64): Int32
-    // pinvoke-hint: SetLastError
-    func SymRegisterCallbackW64(hProcess: CPointer<Unit>, CallbackFunction: Win32__impl_l0.PSYMBOL_REGISTERED_CALLBACK64, UserContext: UInt64): Int32
-    // pinvoke-hint: SetLastError
-    func SymRegisterFunctionEntryCallback64(hProcess: CPointer<Unit>, CallbackFunction: Win32__impl_l0.PSYMBOL_FUNCENTRY_CALLBACK64, UserContext: UInt64): Int32
-    // param-hint: Index optional
-    // param-hint: SymTag optional
-    // param-hint: Mask optional
-    // param-hint: Address optional
-    // param-hint: UserContext optional
-    // pinvoke-hint: SetLastError
-    func SymSearch(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Index: UInt32, SymTag: UInt32, Mask: CPointer<UInt8>, Address: UInt64, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACK, UserContext: CPointer<Unit>, Options: UInt32): Int32
-    // param-hint: Index optional
-    // param-hint: SymTag optional
-    // param-hint: Mask optional
-    // param-hint: Address optional
-    // param-hint: UserContext optional
-    // pinvoke-hint: SetLastError
-    func SymSearchW(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Index: UInt32, SymTag: UInt32, Mask: CPointer<UInt16>, Address: UInt64, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext: CPointer<Unit>, Options: UInt32): Int32
-    // param-hint: Context optional
-    // pinvoke-hint: SetLastError
-    func SymSetContext(hProcess: CPointer<Unit>, StackFrame: CPointer<Win32__impl_l0.IMAGEHLP_STACK_FRAMEAbi>, Context: CPointer<Unit>): Int32
-    func SymSetExtendedOption(option: Win32__impl_l0.IMAGEHLP_EXTENDED_OPTIONSAbi, value: Int32): Int32
-    // param-hint: hProcess optional
-    // param-hint: dir optional
-    // pinvoke-hint: SetLastError
-    func SymSetHomeDirectory(hProcess: CPointer<Unit>, dir: CPointer<UInt8>): CPointer<UInt8>
-    // param-hint: hProcess optional
-    // param-hint: dir optional
-    // pinvoke-hint: SetLastError
-    func SymSetHomeDirectoryW(hProcess: CPointer<Unit>, dir: CPointer<UInt16>): CPointer<UInt16>
-    func SymSetOptions(SymOptions: UInt32): UInt32
-    // pinvoke-hint: SetLastError
-    func SymSetParentWindow(hwnd: CPointer<Unit>): Int32
-    // pinvoke-hint: SetLastError
-    func SymSetScopeFromAddr(hProcess: CPointer<Unit>, Address: UInt64): Int32
-    // pinvoke-hint: SetLastError
-    func SymSetScopeFromIndex(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Index: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func SymSetScopeFromInlineContext(hProcess: CPointer<Unit>, Address: UInt64, InlineContext: UInt32): Int32
-    // param-hint: SearchPathA optional
-    // pinvoke-hint: SetLastError
-    func SymSetSearchPath(hProcess: CPointer<Unit>, SearchPathA: CPointer<UInt8>): Int32
-    // param-hint: SearchPathA optional
-    // pinvoke-hint: SetLastError
-    func SymSetSearchPathW(hProcess: CPointer<Unit>, SearchPathA: CPointer<UInt16>): Int32
-    // param-hint: SymPath optional
-    // pinvoke-hint: SetLastError
-    func SymSrvDeltaName(hProcess: CPointer<Unit>, SymPath: CPointer<UInt8>, Type: CPointer<UInt8>, File1: CPointer<UInt8>, File2: CPointer<UInt8>): CPointer<UInt8>
-    // param-hint: SymPath optional
-    // pinvoke-hint: SetLastError
-    func SymSrvDeltaNameW(hProcess: CPointer<Unit>, SymPath: CPointer<UInt16>, Type: CPointer<UInt16>, File1: CPointer<UInt16>, File2: CPointer<UInt16>): CPointer<UInt16>
-    // pinvoke-hint: SetLastError
-    func SymSrvGetFileIndexInfo(File: CPointer<UInt8>, Info: CPointer<Win32__impl_l0.SYMSRV_INDEX_INFOAbi>, Flags: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func SymSrvGetFileIndexInfoW(File: CPointer<UInt16>, Info: CPointer<Win32__impl_l0.SYMSRV_INDEX_INFOWAbi>, Flags: UInt32): Int32
-    // param-hint: SrvPath optional
-    // param-hint: Index len=param[4]
-    // pinvoke-hint: SetLastError
-    func SymSrvGetFileIndexString(hProcess: CPointer<Unit>, SrvPath: CPointer<UInt8>, File: CPointer<UInt8>, Index: CPointer<UInt8>, Size: UIntNative, Flags: UInt32): Int32
-    // param-hint: SrvPath optional
-    // param-hint: Index len=param[4]
-    // pinvoke-hint: SetLastError
-    func SymSrvGetFileIndexStringW(hProcess: CPointer<Unit>, SrvPath: CPointer<UInt16>, File: CPointer<UInt16>, Index: CPointer<UInt16>, Size: UIntNative, Flags: UInt32): Int32
-    // param-hint: Val2 optional
-    // pinvoke-hint: SetLastError
-    func SymSrvGetFileIndexes(File: CPointer<UInt8>, Id: CPointer<GUID>, Val1: CPointer<UInt32>, Val2: CPointer<UInt32>, Flags: UInt32): Int32
-    // param-hint: Val2 optional
-    // pinvoke-hint: SetLastError
-    func SymSrvGetFileIndexesW(File: CPointer<UInt16>, Id: CPointer<GUID>, Val1: CPointer<UInt32>, Val2: CPointer<UInt32>, Flags: UInt32): Int32
-    // param-hint: SymPath optional
-    // pinvoke-hint: SetLastError
-    func SymSrvGetSupplement(hProcess: CPointer<Unit>, SymPath: CPointer<UInt8>, Node: CPointer<UInt8>, File: CPointer<UInt8>): CPointer<UInt8>
-    // param-hint: SymPath optional
-    // pinvoke-hint: SetLastError
-    func SymSrvGetSupplementW(hProcess: CPointer<Unit>, SymPath: CPointer<UInt16>, Node: CPointer<UInt16>, File: CPointer<UInt16>): CPointer<UInt16>
-    // param-hint: hProcess optional
-    // pinvoke-hint: SetLastError
-    func SymSrvIsStore(hProcess: CPointer<Unit>, path: CPointer<UInt8>): Int32
-    // param-hint: hProcess optional
-    // pinvoke-hint: SetLastError
-    func SymSrvIsStoreW(hProcess: CPointer<Unit>, path: CPointer<UInt16>): Int32
-    // param-hint: SrvPath optional
-    // pinvoke-hint: SetLastError
-    func SymSrvStoreFile(hProcess: CPointer<Unit>, SrvPath: CPointer<UInt8>, File: CPointer<UInt8>, Flags: Win32__impl_l0.SYM_SRV_STORE_FILE_FLAGSAbi): CPointer<UInt8>
-    // param-hint: SrvPath optional
-    // pinvoke-hint: SetLastError
-    func SymSrvStoreFileW(hProcess: CPointer<Unit>, SrvPath: CPointer<UInt16>, File: CPointer<UInt16>, Flags: Win32__impl_l0.SYM_SRV_STORE_FILE_FLAGSAbi): CPointer<UInt16>
-    // param-hint: SrvPath optional
-    // pinvoke-hint: SetLastError
-    func SymSrvStoreSupplement(hProcess: CPointer<Unit>, SrvPath: CPointer<UInt8>, Node: CPointer<UInt8>, File: CPointer<UInt8>, Flags: UInt32): CPointer<UInt8>
-    // param-hint: SymPath optional
-    // pinvoke-hint: SetLastError
-    func SymSrvStoreSupplementW(hProcess: CPointer<Unit>, SymPath: CPointer<UInt16>, Node: CPointer<UInt16>, File: CPointer<UInt16>, Flags: UInt32): CPointer<UInt16>
-    // param-hint: UnDecName len=param[2]
-    // pinvoke-hint: SetLastError
-    func SymUnDName64(sym: CPointer<Win32__impl_l0.IMAGEHLP_SYMBOL64Abi>, UnDecName: CPointer<UInt8>, UnDecNameLength: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func SymUnloadModule64(hProcess: CPointer<Unit>, BaseOfDll: UInt64): Int32
-    // param-hint: outputString len=param[2]
-    // pinvoke-hint: SetLastError
-    func UnDecorateSymbolName(name: CPointer<UInt8>, outputString: CPointer<UInt8>, maxStringLength: UInt32, flags: UInt32): UInt32
-    // param-hint: outputString len=param[2]
-    // pinvoke-hint: SetLastError
-    func UnDecorateSymbolNameW(name: CPointer<UInt16>, outputString: CPointer<UInt16>, maxStringLength: UInt32, flags: UInt32): UInt32
 }
 
-@When[DBGHELP == "on" && (((arch == "x86_64" && (arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on") || (arch == "aarch64" && (arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")) && ((arch == "x86_64" && (arch == "aarch64" || arch == "x86_64") && Windows_Win32_Storage_FileSystem == "on" && Windows_Win32_System_Memory == "on") || (arch == "aarch64" && (arch == "aarch64" || arch == "x86_64") && Windows_Win32_Storage_FileSystem == "on" && Windows_Win32_System_Memory == "on")) && ((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64")) || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64"))))]
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageDirectoryEntryToDataEx == "on"]
+public unsafe func Windows_ImageDirectoryEntryToDataEx(Base: CPointer<Unit>, MappedAsImage: UInt8, DirectoryEntry: Win32__impl_l0.IMAGE_DIRECTORY_ENTRYAbi, Size: CPointer<UInt32>, FoundHeader: CPointer<CPointer<Win32__impl_l1.IMAGE_SECTION_HEADERAbi>>): CPointer<Unit> {
+    return ImageDirectoryEntryToDataEx(Base, MappedAsImage, DirectoryEntry, Size, FoundHeader)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageNtHeader == "on" && (arch == "x86_64" && Windows_Win32_System_SystemInformation == "on" || arch == "aarch64" && Windows_Win32_System_SystemInformation == "on")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func ImageNtHeader(Base: CPointer<Unit>): CPointer<Win32__impl_l1.IMAGE_NT_HEADERS64Abi>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageNtHeader == "on" && (arch == "x86_64" && Windows_Win32_System_SystemInformation == "on" || arch == "aarch64" && Windows_Win32_System_SystemInformation == "on")]
+public unsafe func Windows_ImageNtHeader(Base: CPointer<Unit>): CPointer<Win32__impl_l1.IMAGE_NT_HEADERS64Abi> {
+    return ImageNtHeader(Base)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageRvaToSection == "on" && (arch == "x86_64" && Windows_Win32_System_SystemInformation == "on" || arch == "aarch64" && Windows_Win32_System_SystemInformation == "on")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func ImageRvaToSection(NtHeaders: CPointer<Win32__impl_l1.IMAGE_NT_HEADERS64Abi>, Base: CPointer<Unit>, Rva: UInt32): CPointer<Win32__impl_l1.IMAGE_SECTION_HEADERAbi>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageRvaToSection == "on" && (arch == "x86_64" && Windows_Win32_System_SystemInformation == "on" || arch == "aarch64" && Windows_Win32_System_SystemInformation == "on")]
+public unsafe func Windows_ImageRvaToSection(NtHeaders: CPointer<Win32__impl_l1.IMAGE_NT_HEADERS64Abi>, Base: CPointer<Unit>, Rva: UInt32): CPointer<Win32__impl_l1.IMAGE_SECTION_HEADERAbi> {
+    return ImageRvaToSection(NtHeaders, Base, Rva)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageRvaToVa == "on" && (arch == "x86_64" && Windows_Win32_System_SystemInformation == "on" || arch == "aarch64" && Windows_Win32_System_SystemInformation == "on")]
+foreign {
+    // param-hint: LastRvaSection optional
+    // pinvoke-hint: SetLastError
+    func ImageRvaToVa(NtHeaders: CPointer<Win32__impl_l1.IMAGE_NT_HEADERS64Abi>, Base: CPointer<Unit>, Rva: UInt32, LastRvaSection: CPointer<CPointer<Win32__impl_l1.IMAGE_SECTION_HEADERAbi>>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageRvaToVa == "on" && (arch == "x86_64" && Windows_Win32_System_SystemInformation == "on" || arch == "aarch64" && Windows_Win32_System_SystemInformation == "on")]
+public unsafe func Windows_ImageRvaToVa(NtHeaders: CPointer<Win32__impl_l1.IMAGE_NT_HEADERS64Abi>, Base: CPointer<Unit>, Rva: UInt32, LastRvaSection: CPointer<CPointer<Win32__impl_l1.IMAGE_SECTION_HEADERAbi>>): CPointer<Unit> {
+    return ImageRvaToVa(NtHeaders, Base, Rva, LastRvaSection)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_ImagehlpApiVersion == "on"]
+foreign {
+    func ImagehlpApiVersion(): CPointer<Win32__impl_l0.API_VERSIONAbi>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_ImagehlpApiVersion == "on"]
+public unsafe func Windows_ImagehlpApiVersion(): CPointer<Win32__impl_l0.API_VERSIONAbi> {
+    return ImagehlpApiVersion()
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_ImagehlpApiVersionEx == "on"]
+foreign {
+    func ImagehlpApiVersionEx(AppVersion: CPointer<Win32__impl_l0.API_VERSIONAbi>): CPointer<Win32__impl_l0.API_VERSIONAbi>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_ImagehlpApiVersionEx == "on"]
+public unsafe func Windows_ImagehlpApiVersionEx(AppVersion: CPointer<Win32__impl_l0.API_VERSIONAbi>): CPointer<Win32__impl_l0.API_VERSIONAbi> {
+    return ImagehlpApiVersionEx(AppVersion)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_MakeSureDirectoryPathExists == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func MakeSureDirectoryPathExists(DirPath: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_MakeSureDirectoryPathExists == "on"]
+public unsafe func Windows_MakeSureDirectoryPathExists(DirPath: CPointer<UInt8>): Int32 {
+    return MakeSureDirectoryPathExists(DirPath)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_MiniDumpReadDumpStream == "on"]
+foreign {
+    // param-hint: StreamSize optional
+    func MiniDumpReadDumpStream(BaseOfDump: CPointer<Unit>, StreamNumber: UInt32, Dir: CPointer<CPointer<Win32__impl_l1.MINIDUMP_DIRECTORY>>, StreamPointer: CPointer<CPointer<Unit>>, StreamSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_MiniDumpReadDumpStream == "on"]
+public unsafe func Windows_MiniDumpReadDumpStream(BaseOfDump: CPointer<Unit>, StreamNumber: UInt32, Dir: CPointer<CPointer<Win32__impl_l1.MINIDUMP_DIRECTORY>>, StreamPointer: CPointer<CPointer<Unit>>, StreamSize: CPointer<UInt32>): Int32 {
+    return MiniDumpReadDumpStream(BaseOfDump, StreamNumber, Dir, StreamPointer, StreamSize)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_MiniDumpWriteDump == "on" && (((arch == "x86_64" && (arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on") || (arch == "aarch64" && (arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")) && ((arch == "x86_64" && (arch == "aarch64" || arch == "x86_64") && Windows_Win32_Storage_FileSystem == "on" && Windows_Win32_System_Memory == "on") || (arch == "aarch64" && (arch == "aarch64" || arch == "x86_64") && Windows_Win32_Storage_FileSystem == "on" && Windows_Win32_System_Memory == "on")) && ((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64")) || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64"))))]
 foreign {
     // param-hint: ExceptionParam optional
     // param-hint: UserStreamParam optional
@@ -857,106 +1226,2306 @@ foreign {
     func MiniDumpWriteDump(hProcess: CPointer<Unit>, ProcessId: UInt32, hFile: CPointer<Unit>, DumpType: Win32__impl_l0.MINIDUMP_TYPEAbi, ExceptionParam: CPointer<MINIDUMP_EXCEPTION_INFORMATION>, UserStreamParam: CPointer<Win32__impl_l1.MINIDUMP_USER_STREAM_INFORMATION>, CallbackParam: CPointer<MINIDUMP_CALLBACK_INFORMATION>): Int32
 }
 
-@When[DBGHELP == "on" && (arch == "x86_64" && Windows_Win32_System_SystemInformation == "on" || arch == "aarch64" && Windows_Win32_System_SystemInformation == "on")]
-foreign {
-    // pinvoke-hint: SetLastError
-    func ImageNtHeader(Base: CPointer<Unit>): CPointer<Win32__impl_l1.IMAGE_NT_HEADERS64Abi>
-    // pinvoke-hint: SetLastError
-    func ImageRvaToSection(NtHeaders: CPointer<Win32__impl_l1.IMAGE_NT_HEADERS64Abi>, Base: CPointer<Unit>, Rva: UInt32): CPointer<Win32__impl_l1.IMAGE_SECTION_HEADERAbi>
-    // param-hint: LastRvaSection optional
-    // pinvoke-hint: SetLastError
-    func ImageRvaToVa(NtHeaders: CPointer<Win32__impl_l1.IMAGE_NT_HEADERS64Abi>, Base: CPointer<Unit>, Rva: UInt32, LastRvaSection: CPointer<CPointer<Win32__impl_l1.IMAGE_SECTION_HEADERAbi>>): CPointer<Unit>
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_MiniDumpWriteDump == "on" && (((arch == "x86_64" && (arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on") || (arch == "aarch64" && (arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")) && ((arch == "x86_64" && (arch == "aarch64" || arch == "x86_64") && Windows_Win32_Storage_FileSystem == "on" && Windows_Win32_System_Memory == "on") || (arch == "aarch64" && (arch == "aarch64" || arch == "x86_64") && Windows_Win32_Storage_FileSystem == "on" && Windows_Win32_System_Memory == "on")) && ((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64")) || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64"))))]
+public unsafe func Windows_MiniDumpWriteDump(hProcess: CPointer<Unit>, ProcessId: UInt32, hFile: CPointer<Unit>, DumpType: Win32__impl_l0.MINIDUMP_TYPEAbi, ExceptionParam: CPointer<MINIDUMP_EXCEPTION_INFORMATION>, UserStreamParam: CPointer<Win32__impl_l1.MINIDUMP_USER_STREAM_INFORMATION>, CallbackParam: CPointer<MINIDUMP_CALLBACK_INFORMATION>): Int32 {
+    return MiniDumpWriteDump(hProcess, ProcessId, hFile, DumpType, ExceptionParam, UserStreamParam, CallbackParam)
 }
 
-@When[IMAGEHLP == "on"]
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_RangeMapAddPeImageSections == "on"]
+foreign {
+    // param-hint: ImageName optional
+    // param-hint: MappedImage bytes=param[3]
+    func RangeMapAddPeImageSections(RmapHandle: CPointer<Unit>, ImageName: CPointer<UInt16>, MappedImage: CPointer<Unit>, MappingBytes: UInt32, ImageBase: UInt64, UserTag: UInt64, MappingFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_RangeMapAddPeImageSections == "on"]
+public unsafe func Windows_RangeMapAddPeImageSections(RmapHandle: CPointer<Unit>, ImageName: CPointer<UInt16>, MappedImage: CPointer<Unit>, MappingBytes: UInt32, ImageBase: UInt64, UserTag: UInt64, MappingFlags: UInt32): Int32 {
+    return RangeMapAddPeImageSections(RmapHandle, ImageName, MappedImage, MappingBytes, ImageBase, UserTag, MappingFlags)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_RangeMapCreate == "on"]
+foreign {
+    func RangeMapCreate(): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_RangeMapCreate == "on"]
+public unsafe func Windows_RangeMapCreate(): CPointer<Unit> {
+    return RangeMapCreate()
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_RangeMapFree == "on"]
+foreign {
+    // param-hint: RmapHandle optional
+    func RangeMapFree(RmapHandle: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_RangeMapFree == "on"]
+public unsafe func Windows_RangeMapFree(RmapHandle: CPointer<Unit>): Unit {
+    RangeMapFree(RmapHandle)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_RangeMapRead == "on"]
+foreign {
+    // param-hint: Buffer bytes=param[3]
+    // param-hint: DoneBytes optional
+    func RangeMapRead(RmapHandle: CPointer<Unit>, Offset: UInt64, Buffer: CPointer<Unit>, RequestBytes: UInt32, Flags: UInt32, DoneBytes: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_RangeMapRead == "on"]
+public unsafe func Windows_RangeMapRead(RmapHandle: CPointer<Unit>, Offset: UInt64, Buffer: CPointer<Unit>, RequestBytes: UInt32, Flags: UInt32, DoneBytes: CPointer<UInt32>): Int32 {
+    return RangeMapRead(RmapHandle, Offset, Buffer, RequestBytes, Flags, DoneBytes)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_RangeMapRemove == "on"]
+foreign {
+    func RangeMapRemove(RmapHandle: CPointer<Unit>, UserTag: UInt64): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_RangeMapRemove == "on"]
+public unsafe func Windows_RangeMapRemove(RmapHandle: CPointer<Unit>, UserTag: UInt64): Int32 {
+    return RangeMapRemove(RmapHandle, UserTag)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_RangeMapWrite == "on"]
+foreign {
+    // param-hint: Buffer bytes=param[3]
+    // param-hint: DoneBytes optional
+    func RangeMapWrite(RmapHandle: CPointer<Unit>, Offset: UInt64, Buffer: CPointer<Unit>, RequestBytes: UInt32, Flags: UInt32, DoneBytes: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_RangeMapWrite == "on"]
+public unsafe func Windows_RangeMapWrite(RmapHandle: CPointer<Unit>, Offset: UInt64, Buffer: CPointer<Unit>, RequestBytes: UInt32, Flags: UInt32, DoneBytes: CPointer<UInt32>): Int32 {
+    return RangeMapWrite(RmapHandle, Offset, Buffer, RequestBytes, Flags, DoneBytes)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_RemoveInvalidModuleList == "on"]
+foreign {
+    func RemoveInvalidModuleList(hProcess: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_RemoveInvalidModuleList == "on"]
+public unsafe func Windows_RemoveInvalidModuleList(hProcess: CPointer<Unit>): Unit {
+    RemoveInvalidModuleList(hProcess)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_ReportSymbolLoadSummary == "on"]
+foreign {
+    // param-hint: pLoadModule optional
+    func ReportSymbolLoadSummary(hProcess: CPointer<Unit>, pLoadModule: CPointer<UInt16>, pSymbolData: CPointer<Win32__impl_l0.DBGHELP_DATA_REPORT_STRUCTAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_ReportSymbolLoadSummary == "on"]
+public unsafe func Windows_ReportSymbolLoadSummary(hProcess: CPointer<Unit>, pLoadModule: CPointer<UInt16>, pSymbolData: CPointer<Win32__impl_l0.DBGHELP_DATA_REPORT_STRUCTAbi>): Int32 {
+    return ReportSymbolLoadSummary(hProcess, pLoadModule, pSymbolData)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SearchTreeForFile == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SearchTreeForFile(RootPath: CPointer<UInt8>, InputPathName: CPointer<UInt8>, OutputPathBuffer: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SearchTreeForFile == "on"]
+public unsafe func Windows_SearchTreeForFile(RootPath: CPointer<UInt8>, InputPathName: CPointer<UInt8>, OutputPathBuffer: CPointer<UInt8>): Int32 {
+    return SearchTreeForFile(RootPath, InputPathName, OutputPathBuffer)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SearchTreeForFileW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SearchTreeForFileW(RootPath: CPointer<UInt16>, InputPathName: CPointer<UInt16>, OutputPathBuffer: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SearchTreeForFileW == "on"]
+public unsafe func Windows_SearchTreeForFileW(RootPath: CPointer<UInt16>, InputPathName: CPointer<UInt16>, OutputPathBuffer: CPointer<UInt16>): Int32 {
+    return SearchTreeForFileW(RootPath, InputPathName, OutputPathBuffer)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SetCheckUserInterruptShared == "on"]
+foreign {
+    func SetCheckUserInterruptShared(lpStartAddress: Win32__impl_l0.LPCALL_BACK_USER_INTERRUPT_ROUTINE): Unit
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SetCheckUserInterruptShared == "on"]
+public unsafe func Windows_SetCheckUserInterruptShared(lpStartAddress: Win32__impl_l0.LPCALL_BACK_USER_INTERRUPT_ROUTINE): Unit {
+    SetCheckUserInterruptShared(lpStartAddress)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SetSymLoadError == "on"]
+foreign {
+    func SetSymLoadError(error: UInt32): Unit
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SetSymLoadError == "on"]
+public unsafe func Windows_SetSymLoadError(error: UInt32): Unit {
+    SetSymLoadError(error)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_StackWalk2 == "on"]
+foreign {
+    // param-hint: ReadMemoryRoutine optional
+    // param-hint: FunctionTableAccessRoutine optional
+    // param-hint: GetModuleBaseRoutine optional
+    // param-hint: TranslateAddress optional
+    // param-hint: GetTargetAttributeValue optional
+    func StackWalk2(MachineType: UInt32, hProcess: CPointer<Unit>, hThread: CPointer<Unit>, StackFrame: CPointer<Win32__impl_l1.STACKFRAME_EXAbi>, ContextRecord: CPointer<Unit>, ReadMemoryRoutine: Win32__impl_l0.PREAD_PROCESS_MEMORY_ROUTINE64, FunctionTableAccessRoutine: Win32__impl_l0.PFUNCTION_TABLE_ACCESS_ROUTINE64, GetModuleBaseRoutine: Win32__impl_l0.PGET_MODULE_BASE_ROUTINE64, TranslateAddress: Win32__impl_l1.PTRANSLATE_ADDRESS_ROUTINE64, GetTargetAttributeValue: Win32__impl_l0.PGET_TARGET_ATTRIBUTE_VALUE64, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_StackWalk2 == "on"]
+public unsafe func Windows_StackWalk2(MachineType: UInt32, hProcess: CPointer<Unit>, hThread: CPointer<Unit>, StackFrame: CPointer<Win32__impl_l1.STACKFRAME_EXAbi>, ContextRecord: CPointer<Unit>, ReadMemoryRoutine: Win32__impl_l0.PREAD_PROCESS_MEMORY_ROUTINE64, FunctionTableAccessRoutine: Win32__impl_l0.PFUNCTION_TABLE_ACCESS_ROUTINE64, GetModuleBaseRoutine: Win32__impl_l0.PGET_MODULE_BASE_ROUTINE64, TranslateAddress: Win32__impl_l1.PTRANSLATE_ADDRESS_ROUTINE64, GetTargetAttributeValue: Win32__impl_l0.PGET_TARGET_ATTRIBUTE_VALUE64, Flags: UInt32): Int32 {
+    return StackWalk2(MachineType, hProcess, hThread, StackFrame, ContextRecord, ReadMemoryRoutine, FunctionTableAccessRoutine, GetModuleBaseRoutine, TranslateAddress, GetTargetAttributeValue, Flags)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_StackWalk64 == "on"]
+foreign {
+    // param-hint: ReadMemoryRoutine optional
+    // param-hint: FunctionTableAccessRoutine optional
+    // param-hint: GetModuleBaseRoutine optional
+    // param-hint: TranslateAddress optional
+    func StackWalk64(MachineType: UInt32, hProcess: CPointer<Unit>, hThread: CPointer<Unit>, StackFrame: CPointer<Win32__impl_l1.STACKFRAME64Abi>, ContextRecord: CPointer<Unit>, ReadMemoryRoutine: Win32__impl_l0.PREAD_PROCESS_MEMORY_ROUTINE64, FunctionTableAccessRoutine: Win32__impl_l0.PFUNCTION_TABLE_ACCESS_ROUTINE64, GetModuleBaseRoutine: Win32__impl_l0.PGET_MODULE_BASE_ROUTINE64, TranslateAddress: Win32__impl_l1.PTRANSLATE_ADDRESS_ROUTINE64): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_StackWalk64 == "on"]
+public unsafe func Windows_StackWalk64(MachineType: UInt32, hProcess: CPointer<Unit>, hThread: CPointer<Unit>, StackFrame: CPointer<Win32__impl_l1.STACKFRAME64Abi>, ContextRecord: CPointer<Unit>, ReadMemoryRoutine: Win32__impl_l0.PREAD_PROCESS_MEMORY_ROUTINE64, FunctionTableAccessRoutine: Win32__impl_l0.PFUNCTION_TABLE_ACCESS_ROUTINE64, GetModuleBaseRoutine: Win32__impl_l0.PGET_MODULE_BASE_ROUTINE64, TranslateAddress: Win32__impl_l1.PTRANSLATE_ADDRESS_ROUTINE64): Int32 {
+    return StackWalk64(MachineType, hProcess, hThread, StackFrame, ContextRecord, ReadMemoryRoutine, FunctionTableAccessRoutine, GetModuleBaseRoutine, TranslateAddress)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_StackWalkEx == "on"]
+foreign {
+    // param-hint: ReadMemoryRoutine optional
+    // param-hint: FunctionTableAccessRoutine optional
+    // param-hint: GetModuleBaseRoutine optional
+    // param-hint: TranslateAddress optional
+    func StackWalkEx(MachineType: UInt32, hProcess: CPointer<Unit>, hThread: CPointer<Unit>, StackFrame: CPointer<Win32__impl_l1.STACKFRAME_EXAbi>, ContextRecord: CPointer<Unit>, ReadMemoryRoutine: Win32__impl_l0.PREAD_PROCESS_MEMORY_ROUTINE64, FunctionTableAccessRoutine: Win32__impl_l0.PFUNCTION_TABLE_ACCESS_ROUTINE64, GetModuleBaseRoutine: Win32__impl_l0.PGET_MODULE_BASE_ROUTINE64, TranslateAddress: Win32__impl_l1.PTRANSLATE_ADDRESS_ROUTINE64, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_StackWalkEx == "on"]
+public unsafe func Windows_StackWalkEx(MachineType: UInt32, hProcess: CPointer<Unit>, hThread: CPointer<Unit>, StackFrame: CPointer<Win32__impl_l1.STACKFRAME_EXAbi>, ContextRecord: CPointer<Unit>, ReadMemoryRoutine: Win32__impl_l0.PREAD_PROCESS_MEMORY_ROUTINE64, FunctionTableAccessRoutine: Win32__impl_l0.PFUNCTION_TABLE_ACCESS_ROUTINE64, GetModuleBaseRoutine: Win32__impl_l0.PGET_MODULE_BASE_ROUTINE64, TranslateAddress: Win32__impl_l1.PTRANSLATE_ADDRESS_ROUTINE64, Flags: UInt32): Int32 {
+    return StackWalkEx(MachineType, hProcess, hThread, StackFrame, ContextRecord, ReadMemoryRoutine, FunctionTableAccessRoutine, GetModuleBaseRoutine, TranslateAddress, Flags)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymAddSourceStream == "on"]
+foreign {
+    // param-hint: StreamFile optional
+    // param-hint: Buffer bytes=param[4] optional
+    // pinvoke-hint: SetLastError
+    func SymAddSourceStream(hProcess: CPointer<Unit>, Base: UInt64, StreamFile: CPointer<UInt8>, Buffer: CPointer<UInt8>, Size: UIntNative): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymAddSourceStream == "on"]
+public unsafe func Windows_SymAddSourceStream(hProcess: CPointer<Unit>, Base: UInt64, StreamFile: CPointer<UInt8>, Buffer: CPointer<UInt8>, Size: UIntNative): Int32 {
+    return SymAddSourceStream(hProcess, Base, StreamFile, Buffer, Size)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymAddSourceStreamA == "on"]
+foreign {
+    // param-hint: StreamFile optional
+    // param-hint: Buffer bytes=param[4] optional
+    func SymAddSourceStreamA(hProcess: CPointer<Unit>, Base: UInt64, StreamFile: CPointer<UInt8>, Buffer: CPointer<UInt8>, Size: UIntNative): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymAddSourceStreamA == "on"]
+public unsafe func Windows_SymAddSourceStreamA(hProcess: CPointer<Unit>, Base: UInt64, StreamFile: CPointer<UInt8>, Buffer: CPointer<UInt8>, Size: UIntNative): Int32 {
+    return SymAddSourceStreamA(hProcess, Base, StreamFile, Buffer, Size)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymAddSourceStreamW == "on"]
+foreign {
+    // param-hint: FileSpec optional
+    // param-hint: Buffer bytes=param[4] optional
+    // pinvoke-hint: SetLastError
+    func SymAddSourceStreamW(hProcess: CPointer<Unit>, Base: UInt64, FileSpec: CPointer<UInt16>, Buffer: CPointer<UInt8>, Size: UIntNative): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymAddSourceStreamW == "on"]
+public unsafe func Windows_SymAddSourceStreamW(hProcess: CPointer<Unit>, Base: UInt64, FileSpec: CPointer<UInt16>, Buffer: CPointer<UInt8>, Size: UIntNative): Int32 {
+    return SymAddSourceStreamW(hProcess, Base, FileSpec, Buffer, Size)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymAddSymbol == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymAddSymbol(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Name: CPointer<UInt8>, Address: UInt64, Size: UInt32, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymAddSymbol == "on"]
+public unsafe func Windows_SymAddSymbol(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Name: CPointer<UInt8>, Address: UInt64, Size: UInt32, Flags: UInt32): Int32 {
+    return SymAddSymbol(hProcess, BaseOfDll, Name, Address, Size, Flags)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymAddSymbolW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymAddSymbolW(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Name: CPointer<UInt16>, Address: UInt64, Size: UInt32, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymAddSymbolW == "on"]
+public unsafe func Windows_SymAddSymbolW(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Name: CPointer<UInt16>, Address: UInt64, Size: UInt32, Flags: UInt32): Int32 {
+    return SymAddSymbolW(hProcess, BaseOfDll, Name, Address, Size, Flags)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymAddrIncludeInlineTrace == "on"]
+foreign {
+    func SymAddrIncludeInlineTrace(hProcess: CPointer<Unit>, Address: UInt64): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymAddrIncludeInlineTrace == "on"]
+public unsafe func Windows_SymAddrIncludeInlineTrace(hProcess: CPointer<Unit>, Address: UInt64): UInt32 {
+    return SymAddrIncludeInlineTrace(hProcess, Address)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymCleanup == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymCleanup(hProcess: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymCleanup == "on"]
+public unsafe func Windows_SymCleanup(hProcess: CPointer<Unit>): Int32 {
+    return SymCleanup(hProcess)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymCompareInlineTrace == "on"]
+foreign {
+    func SymCompareInlineTrace(hProcess: CPointer<Unit>, Address1: UInt64, InlineContext1: UInt32, RetAddress1: UInt64, Address2: UInt64, RetAddress2: UInt64): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymCompareInlineTrace == "on"]
+public unsafe func Windows_SymCompareInlineTrace(hProcess: CPointer<Unit>, Address1: UInt64, InlineContext1: UInt32, RetAddress1: UInt64, Address2: UInt64, RetAddress2: UInt64): UInt32 {
+    return SymCompareInlineTrace(hProcess, Address1, InlineContext1, RetAddress1, Address2, RetAddress2)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymDeleteSymbol == "on"]
+foreign {
+    // param-hint: Name optional
+    // pinvoke-hint: SetLastError
+    func SymDeleteSymbol(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Name: CPointer<UInt8>, Address: UInt64, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymDeleteSymbol == "on"]
+public unsafe func Windows_SymDeleteSymbol(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Name: CPointer<UInt8>, Address: UInt64, Flags: UInt32): Int32 {
+    return SymDeleteSymbol(hProcess, BaseOfDll, Name, Address, Flags)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymDeleteSymbolW == "on"]
+foreign {
+    // param-hint: Name optional
+    // pinvoke-hint: SetLastError
+    func SymDeleteSymbolW(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Name: CPointer<UInt16>, Address: UInt64, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymDeleteSymbolW == "on"]
+public unsafe func Windows_SymDeleteSymbolW(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Name: CPointer<UInt16>, Address: UInt64, Flags: UInt32): Int32 {
+    return SymDeleteSymbolW(hProcess, BaseOfDll, Name, Address, Flags)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumLines == "on"]
+foreign {
+    // param-hint: Obj optional
+    // param-hint: File optional
+    // param-hint: UserContext optional
+    // pinvoke-hint: SetLastError
+    func SymEnumLines(hProcess: CPointer<Unit>, Base: UInt64, Obj: CPointer<UInt8>, File: CPointer<UInt8>, EnumLinesCallback: Win32__impl_l1.PSYM_ENUMLINES_CALLBACK, UserContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumLines == "on"]
+public unsafe func Windows_SymEnumLines(hProcess: CPointer<Unit>, Base: UInt64, Obj: CPointer<UInt8>, File: CPointer<UInt8>, EnumLinesCallback: Win32__impl_l1.PSYM_ENUMLINES_CALLBACK, UserContext: CPointer<Unit>): Int32 {
+    return SymEnumLines(hProcess, Base, Obj, File, EnumLinesCallback, UserContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumLinesW == "on"]
+foreign {
+    // param-hint: Obj optional
+    // param-hint: File optional
+    // param-hint: UserContext optional
+    // pinvoke-hint: SetLastError
+    func SymEnumLinesW(hProcess: CPointer<Unit>, Base: UInt64, Obj: CPointer<UInt16>, File: CPointer<UInt16>, EnumLinesCallback: Win32__impl_l1.PSYM_ENUMLINES_CALLBACKW, UserContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumLinesW == "on"]
+public unsafe func Windows_SymEnumLinesW(hProcess: CPointer<Unit>, Base: UInt64, Obj: CPointer<UInt16>, File: CPointer<UInt16>, EnumLinesCallback: Win32__impl_l1.PSYM_ENUMLINES_CALLBACKW, UserContext: CPointer<Unit>): Int32 {
+    return SymEnumLinesW(hProcess, Base, Obj, File, EnumLinesCallback, UserContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumProcesses == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymEnumProcesses(EnumProcessesCallback: Win32__impl_l0.PSYM_ENUMPROCESSES_CALLBACK, UserContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumProcesses == "on"]
+public unsafe func Windows_SymEnumProcesses(EnumProcessesCallback: Win32__impl_l0.PSYM_ENUMPROCESSES_CALLBACK, UserContext: CPointer<Unit>): Int32 {
+    return SymEnumProcesses(EnumProcessesCallback, UserContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSourceFileTokens == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymEnumSourceFileTokens(hProcess: CPointer<Unit>, Base: UInt64, Callback: Win32__impl_l0.PENUMSOURCEFILETOKENSCALLBACK): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSourceFileTokens == "on"]
+public unsafe func Windows_SymEnumSourceFileTokens(hProcess: CPointer<Unit>, Base: UInt64, Callback: Win32__impl_l0.PENUMSOURCEFILETOKENSCALLBACK): Int32 {
+    return SymEnumSourceFileTokens(hProcess, Base, Callback)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSourceFiles == "on"]
+foreign {
+    // param-hint: Mask optional
+    // param-hint: UserContext optional
+    // pinvoke-hint: SetLastError
+    func SymEnumSourceFiles(hProcess: CPointer<Unit>, ModBase: UInt64, Mask: CPointer<UInt8>, cbSrcFiles: Win32__impl_l1.PSYM_ENUMSOURCEFILES_CALLBACK, UserContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSourceFiles == "on"]
+public unsafe func Windows_SymEnumSourceFiles(hProcess: CPointer<Unit>, ModBase: UInt64, Mask: CPointer<UInt8>, cbSrcFiles: Win32__impl_l1.PSYM_ENUMSOURCEFILES_CALLBACK, UserContext: CPointer<Unit>): Int32 {
+    return SymEnumSourceFiles(hProcess, ModBase, Mask, cbSrcFiles, UserContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSourceFilesW == "on"]
+foreign {
+    // param-hint: Mask optional
+    // param-hint: UserContext optional
+    // pinvoke-hint: SetLastError
+    func SymEnumSourceFilesW(hProcess: CPointer<Unit>, ModBase: UInt64, Mask: CPointer<UInt16>, cbSrcFiles: Win32__impl_l1.PSYM_ENUMSOURCEFILES_CALLBACKW, UserContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSourceFilesW == "on"]
+public unsafe func Windows_SymEnumSourceFilesW(hProcess: CPointer<Unit>, ModBase: UInt64, Mask: CPointer<UInt16>, cbSrcFiles: Win32__impl_l1.PSYM_ENUMSOURCEFILES_CALLBACKW, UserContext: CPointer<Unit>): Int32 {
+    return SymEnumSourceFilesW(hProcess, ModBase, Mask, cbSrcFiles, UserContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSourceLines == "on"]
+foreign {
+    // param-hint: Obj optional
+    // param-hint: File optional
+    // param-hint: Line optional
+    // param-hint: UserContext optional
+    // pinvoke-hint: SetLastError
+    func SymEnumSourceLines(hProcess: CPointer<Unit>, Base: UInt64, Obj: CPointer<UInt8>, File: CPointer<UInt8>, Line: UInt32, Flags: UInt32, EnumLinesCallback: Win32__impl_l1.PSYM_ENUMLINES_CALLBACK, UserContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSourceLines == "on"]
+public unsafe func Windows_SymEnumSourceLines(hProcess: CPointer<Unit>, Base: UInt64, Obj: CPointer<UInt8>, File: CPointer<UInt8>, Line: UInt32, Flags: UInt32, EnumLinesCallback: Win32__impl_l1.PSYM_ENUMLINES_CALLBACK, UserContext: CPointer<Unit>): Int32 {
+    return SymEnumSourceLines(hProcess, Base, Obj, File, Line, Flags, EnumLinesCallback, UserContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSourceLinesW == "on"]
+foreign {
+    // param-hint: Obj optional
+    // param-hint: File optional
+    // param-hint: Line optional
+    // param-hint: UserContext optional
+    // pinvoke-hint: SetLastError
+    func SymEnumSourceLinesW(hProcess: CPointer<Unit>, Base: UInt64, Obj: CPointer<UInt16>, File: CPointer<UInt16>, Line: UInt32, Flags: UInt32, EnumLinesCallback: Win32__impl_l1.PSYM_ENUMLINES_CALLBACKW, UserContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSourceLinesW == "on"]
+public unsafe func Windows_SymEnumSourceLinesW(hProcess: CPointer<Unit>, Base: UInt64, Obj: CPointer<UInt16>, File: CPointer<UInt16>, Line: UInt32, Flags: UInt32, EnumLinesCallback: Win32__impl_l1.PSYM_ENUMLINES_CALLBACKW, UserContext: CPointer<Unit>): Int32 {
+    return SymEnumSourceLinesW(hProcess, Base, Obj, File, Line, Flags, EnumLinesCallback, UserContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSym == "on"]
+foreign {
+    // param-hint: UserContext optional
+    func SymEnumSym(hProcess: CPointer<Unit>, BaseOfDll: UInt64, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACK, UserContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSym == "on"]
+public unsafe func Windows_SymEnumSym(hProcess: CPointer<Unit>, BaseOfDll: UInt64, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACK, UserContext: CPointer<Unit>): Int32 {
+    return SymEnumSym(hProcess, BaseOfDll, EnumSymbolsCallback, UserContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSymbols == "on"]
+foreign {
+    // param-hint: Mask optional
+    // param-hint: UserContext optional
+    // pinvoke-hint: SetLastError
+    func SymEnumSymbols(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Mask: CPointer<UInt8>, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACK, UserContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSymbols == "on"]
+public unsafe func Windows_SymEnumSymbols(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Mask: CPointer<UInt8>, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACK, UserContext: CPointer<Unit>): Int32 {
+    return SymEnumSymbols(hProcess, BaseOfDll, Mask, EnumSymbolsCallback, UserContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSymbolsEx == "on"]
+foreign {
+    // param-hint: Mask optional
+    // param-hint: UserContext optional
+    // pinvoke-hint: SetLastError
+    func SymEnumSymbolsEx(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Mask: CPointer<UInt8>, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACK, UserContext: CPointer<Unit>, Options: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSymbolsEx == "on"]
+public unsafe func Windows_SymEnumSymbolsEx(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Mask: CPointer<UInt8>, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACK, UserContext: CPointer<Unit>, Options: UInt32): Int32 {
+    return SymEnumSymbolsEx(hProcess, BaseOfDll, Mask, EnumSymbolsCallback, UserContext, Options)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSymbolsExW == "on"]
+foreign {
+    // param-hint: Mask optional
+    // param-hint: UserContext optional
+    // pinvoke-hint: SetLastError
+    func SymEnumSymbolsExW(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Mask: CPointer<UInt16>, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext: CPointer<Unit>, Options: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSymbolsExW == "on"]
+public unsafe func Windows_SymEnumSymbolsExW(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Mask: CPointer<UInt16>, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext: CPointer<Unit>, Options: UInt32): Int32 {
+    return SymEnumSymbolsExW(hProcess, BaseOfDll, Mask, EnumSymbolsCallback, UserContext, Options)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSymbolsForAddr == "on"]
+foreign {
+    // param-hint: UserContext optional
+    // pinvoke-hint: SetLastError
+    func SymEnumSymbolsForAddr(hProcess: CPointer<Unit>, Address: UInt64, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACK, UserContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSymbolsForAddr == "on"]
+public unsafe func Windows_SymEnumSymbolsForAddr(hProcess: CPointer<Unit>, Address: UInt64, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACK, UserContext: CPointer<Unit>): Int32 {
+    return SymEnumSymbolsForAddr(hProcess, Address, EnumSymbolsCallback, UserContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSymbolsForAddrW == "on"]
+foreign {
+    // param-hint: UserContext optional
+    // pinvoke-hint: SetLastError
+    func SymEnumSymbolsForAddrW(hProcess: CPointer<Unit>, Address: UInt64, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSymbolsForAddrW == "on"]
+public unsafe func Windows_SymEnumSymbolsForAddrW(hProcess: CPointer<Unit>, Address: UInt64, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext: CPointer<Unit>): Int32 {
+    return SymEnumSymbolsForAddrW(hProcess, Address, EnumSymbolsCallback, UserContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSymbolsW == "on"]
+foreign {
+    // param-hint: Mask optional
+    // param-hint: UserContext optional
+    // pinvoke-hint: SetLastError
+    func SymEnumSymbolsW(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Mask: CPointer<UInt16>, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSymbolsW == "on"]
+public unsafe func Windows_SymEnumSymbolsW(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Mask: CPointer<UInt16>, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext: CPointer<Unit>): Int32 {
+    return SymEnumSymbolsW(hProcess, BaseOfDll, Mask, EnumSymbolsCallback, UserContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumTypes == "on"]
+foreign {
+    // param-hint: UserContext optional
+    // pinvoke-hint: SetLastError
+    func SymEnumTypes(hProcess: CPointer<Unit>, BaseOfDll: UInt64, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACK, UserContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumTypes == "on"]
+public unsafe func Windows_SymEnumTypes(hProcess: CPointer<Unit>, BaseOfDll: UInt64, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACK, UserContext: CPointer<Unit>): Int32 {
+    return SymEnumTypes(hProcess, BaseOfDll, EnumSymbolsCallback, UserContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumTypesByName == "on"]
+foreign {
+    // param-hint: mask optional
+    // param-hint: UserContext optional
+    // pinvoke-hint: SetLastError
+    func SymEnumTypesByName(hProcess: CPointer<Unit>, BaseOfDll: UInt64, mask: CPointer<UInt8>, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACK, UserContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumTypesByName == "on"]
+public unsafe func Windows_SymEnumTypesByName(hProcess: CPointer<Unit>, BaseOfDll: UInt64, mask: CPointer<UInt8>, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACK, UserContext: CPointer<Unit>): Int32 {
+    return SymEnumTypesByName(hProcess, BaseOfDll, mask, EnumSymbolsCallback, UserContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumTypesByNameW == "on"]
+foreign {
+    // param-hint: mask optional
+    // param-hint: UserContext optional
+    // pinvoke-hint: SetLastError
+    func SymEnumTypesByNameW(hProcess: CPointer<Unit>, BaseOfDll: UInt64, mask: CPointer<UInt16>, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumTypesByNameW == "on"]
+public unsafe func Windows_SymEnumTypesByNameW(hProcess: CPointer<Unit>, BaseOfDll: UInt64, mask: CPointer<UInt16>, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext: CPointer<Unit>): Int32 {
+    return SymEnumTypesByNameW(hProcess, BaseOfDll, mask, EnumSymbolsCallback, UserContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumTypesW == "on"]
+foreign {
+    // param-hint: UserContext optional
+    // pinvoke-hint: SetLastError
+    func SymEnumTypesW(hProcess: CPointer<Unit>, BaseOfDll: UInt64, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumTypesW == "on"]
+public unsafe func Windows_SymEnumTypesW(hProcess: CPointer<Unit>, BaseOfDll: UInt64, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext: CPointer<Unit>): Int32 {
+    return SymEnumTypesW(hProcess, BaseOfDll, EnumSymbolsCallback, UserContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumerateModules64 == "on"]
+foreign {
+    // param-hint: UserContext optional
+    // pinvoke-hint: SetLastError
+    func SymEnumerateModules64(hProcess: CPointer<Unit>, EnumModulesCallback: Win32__impl_l0.PSYM_ENUMMODULES_CALLBACK64, UserContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumerateModules64 == "on"]
+public unsafe func Windows_SymEnumerateModules64(hProcess: CPointer<Unit>, EnumModulesCallback: Win32__impl_l0.PSYM_ENUMMODULES_CALLBACK64, UserContext: CPointer<Unit>): Int32 {
+    return SymEnumerateModules64(hProcess, EnumModulesCallback, UserContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumerateModulesW64 == "on"]
+foreign {
+    // param-hint: UserContext optional
+    // pinvoke-hint: SetLastError
+    func SymEnumerateModulesW64(hProcess: CPointer<Unit>, EnumModulesCallback: Win32__impl_l0.PSYM_ENUMMODULES_CALLBACKW64, UserContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumerateModulesW64 == "on"]
+public unsafe func Windows_SymEnumerateModulesW64(hProcess: CPointer<Unit>, EnumModulesCallback: Win32__impl_l0.PSYM_ENUMMODULES_CALLBACKW64, UserContext: CPointer<Unit>): Int32 {
+    return SymEnumerateModulesW64(hProcess, EnumModulesCallback, UserContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumerateSymbols64 == "on"]
+foreign {
+    // param-hint: UserContext optional
+    // pinvoke-hint: SetLastError
+    func SymEnumerateSymbols64(hProcess: CPointer<Unit>, BaseOfDll: UInt64, EnumSymbolsCallback: Win32__impl_l0.PSYM_ENUMSYMBOLS_CALLBACK64, UserContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumerateSymbols64 == "on"]
+public unsafe func Windows_SymEnumerateSymbols64(hProcess: CPointer<Unit>, BaseOfDll: UInt64, EnumSymbolsCallback: Win32__impl_l0.PSYM_ENUMSYMBOLS_CALLBACK64, UserContext: CPointer<Unit>): Int32 {
+    return SymEnumerateSymbols64(hProcess, BaseOfDll, EnumSymbolsCallback, UserContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumerateSymbolsW64 == "on"]
+foreign {
+    // param-hint: UserContext optional
+    // pinvoke-hint: SetLastError
+    func SymEnumerateSymbolsW64(hProcess: CPointer<Unit>, BaseOfDll: UInt64, EnumSymbolsCallback: Win32__impl_l0.PSYM_ENUMSYMBOLS_CALLBACK64W, UserContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumerateSymbolsW64 == "on"]
+public unsafe func Windows_SymEnumerateSymbolsW64(hProcess: CPointer<Unit>, BaseOfDll: UInt64, EnumSymbolsCallback: Win32__impl_l0.PSYM_ENUMSYMBOLS_CALLBACK64W, UserContext: CPointer<Unit>): Int32 {
+    return SymEnumerateSymbolsW64(hProcess, BaseOfDll, EnumSymbolsCallback, UserContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFindDebugInfoFile == "on"]
+foreign {
+    // param-hint: Callback optional
+    // param-hint: CallerData optional
+    // pinvoke-hint: SetLastError
+    func SymFindDebugInfoFile(hProcess: CPointer<Unit>, FileName: CPointer<UInt8>, DebugFilePath: CPointer<UInt8>, Callback: Win32__impl_l0.PFIND_DEBUG_FILE_CALLBACK, CallerData: CPointer<Unit>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFindDebugInfoFile == "on"]
+public unsafe func Windows_SymFindDebugInfoFile(hProcess: CPointer<Unit>, FileName: CPointer<UInt8>, DebugFilePath: CPointer<UInt8>, Callback: Win32__impl_l0.PFIND_DEBUG_FILE_CALLBACK, CallerData: CPointer<Unit>): CPointer<Unit> {
+    return SymFindDebugInfoFile(hProcess, FileName, DebugFilePath, Callback, CallerData)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFindDebugInfoFileW == "on"]
+foreign {
+    // param-hint: Callback optional
+    // param-hint: CallerData optional
+    // pinvoke-hint: SetLastError
+    func SymFindDebugInfoFileW(hProcess: CPointer<Unit>, FileName: CPointer<UInt16>, DebugFilePath: CPointer<UInt16>, Callback: Win32__impl_l0.PFIND_DEBUG_FILE_CALLBACKW, CallerData: CPointer<Unit>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFindDebugInfoFileW == "on"]
+public unsafe func Windows_SymFindDebugInfoFileW(hProcess: CPointer<Unit>, FileName: CPointer<UInt16>, DebugFilePath: CPointer<UInt16>, Callback: Win32__impl_l0.PFIND_DEBUG_FILE_CALLBACKW, CallerData: CPointer<Unit>): CPointer<Unit> {
+    return SymFindDebugInfoFileW(hProcess, FileName, DebugFilePath, Callback, CallerData)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFindExecutableImage == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymFindExecutableImage(hProcess: CPointer<Unit>, FileName: CPointer<UInt8>, ImageFilePath: CPointer<UInt8>, Callback: Win32__impl_l0.PFIND_EXE_FILE_CALLBACK, CallerData: CPointer<Unit>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFindExecutableImage == "on"]
+public unsafe func Windows_SymFindExecutableImage(hProcess: CPointer<Unit>, FileName: CPointer<UInt8>, ImageFilePath: CPointer<UInt8>, Callback: Win32__impl_l0.PFIND_EXE_FILE_CALLBACK, CallerData: CPointer<Unit>): CPointer<Unit> {
+    return SymFindExecutableImage(hProcess, FileName, ImageFilePath, Callback, CallerData)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFindExecutableImageW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymFindExecutableImageW(hProcess: CPointer<Unit>, FileName: CPointer<UInt16>, ImageFilePath: CPointer<UInt16>, Callback: Win32__impl_l0.PFIND_EXE_FILE_CALLBACKW, CallerData: CPointer<Unit>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFindExecutableImageW == "on"]
+public unsafe func Windows_SymFindExecutableImageW(hProcess: CPointer<Unit>, FileName: CPointer<UInt16>, ImageFilePath: CPointer<UInt16>, Callback: Win32__impl_l0.PFIND_EXE_FILE_CALLBACKW, CallerData: CPointer<Unit>): CPointer<Unit> {
+    return SymFindExecutableImageW(hProcess, FileName, ImageFilePath, Callback, CallerData)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFindFileInPath == "on"]
+foreign {
+    // param-hint: SearchPathA optional
+    // param-hint: id optional
+    // param-hint: callback optional
+    // param-hint: context optional
+    // pinvoke-hint: SetLastError
+    func SymFindFileInPath(hprocess: CPointer<Unit>, SearchPathA: CPointer<UInt8>, FileName: CPointer<UInt8>, id: CPointer<Unit>, two: UInt32, three: UInt32, flags: Win32__impl_l0.SYM_FIND_ID_OPTIONAbi, FoundFile: CPointer<UInt8>, callback: Win32__impl_l0.PFINDFILEINPATHCALLBACK, context: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFindFileInPath == "on"]
+public unsafe func Windows_SymFindFileInPath(hprocess: CPointer<Unit>, SearchPathA: CPointer<UInt8>, FileName: CPointer<UInt8>, id: CPointer<Unit>, two: UInt32, three: UInt32, flags: Win32__impl_l0.SYM_FIND_ID_OPTIONAbi, FoundFile: CPointer<UInt8>, callback: Win32__impl_l0.PFINDFILEINPATHCALLBACK, context: CPointer<Unit>): Int32 {
+    return SymFindFileInPath(hprocess, SearchPathA, FileName, id, two, three, flags, FoundFile, callback, context)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFindFileInPathW == "on"]
+foreign {
+    // param-hint: SearchPathA optional
+    // param-hint: id optional
+    // param-hint: callback optional
+    // param-hint: context optional
+    // pinvoke-hint: SetLastError
+    func SymFindFileInPathW(hprocess: CPointer<Unit>, SearchPathA: CPointer<UInt16>, FileName: CPointer<UInt16>, id: CPointer<Unit>, two: UInt32, three: UInt32, flags: Win32__impl_l0.SYM_FIND_ID_OPTIONAbi, FoundFile: CPointer<UInt16>, callback: Win32__impl_l0.PFINDFILEINPATHCALLBACKW, context: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFindFileInPathW == "on"]
+public unsafe func Windows_SymFindFileInPathW(hprocess: CPointer<Unit>, SearchPathA: CPointer<UInt16>, FileName: CPointer<UInt16>, id: CPointer<Unit>, two: UInt32, three: UInt32, flags: Win32__impl_l0.SYM_FIND_ID_OPTIONAbi, FoundFile: CPointer<UInt16>, callback: Win32__impl_l0.PFINDFILEINPATHCALLBACKW, context: CPointer<Unit>): Int32 {
+    return SymFindFileInPathW(hprocess, SearchPathA, FileName, id, two, three, flags, FoundFile, callback, context)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFromAddr == "on"]
+foreign {
+    // param-hint: Displacement optional
+    // pinvoke-hint: SetLastError
+    func SymFromAddr(hProcess: CPointer<Unit>, Address: UInt64, Displacement: CPointer<UInt64>, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFromAddr == "on"]
+public unsafe func Windows_SymFromAddr(hProcess: CPointer<Unit>, Address: UInt64, Displacement: CPointer<UInt64>, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOAbi>): Int32 {
+    return SymFromAddr(hProcess, Address, Displacement, Symbol)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFromAddrW == "on"]
+foreign {
+    // param-hint: Displacement optional
+    // pinvoke-hint: SetLastError
+    func SymFromAddrW(hProcess: CPointer<Unit>, Address: UInt64, Displacement: CPointer<UInt64>, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOWAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFromAddrW == "on"]
+public unsafe func Windows_SymFromAddrW(hProcess: CPointer<Unit>, Address: UInt64, Displacement: CPointer<UInt64>, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOWAbi>): Int32 {
+    return SymFromAddrW(hProcess, Address, Displacement, Symbol)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFromIndex == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymFromIndex(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Index: UInt32, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFromIndex == "on"]
+public unsafe func Windows_SymFromIndex(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Index: UInt32, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOAbi>): Int32 {
+    return SymFromIndex(hProcess, BaseOfDll, Index, Symbol)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFromIndexW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymFromIndexW(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Index: UInt32, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOWAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFromIndexW == "on"]
+public unsafe func Windows_SymFromIndexW(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Index: UInt32, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOWAbi>): Int32 {
+    return SymFromIndexW(hProcess, BaseOfDll, Index, Symbol)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFromInlineContext == "on"]
+foreign {
+    // param-hint: Displacement optional
+    // pinvoke-hint: SetLastError
+    func SymFromInlineContext(hProcess: CPointer<Unit>, Address: UInt64, InlineContext: UInt32, Displacement: CPointer<UInt64>, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFromInlineContext == "on"]
+public unsafe func Windows_SymFromInlineContext(hProcess: CPointer<Unit>, Address: UInt64, InlineContext: UInt32, Displacement: CPointer<UInt64>, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOAbi>): Int32 {
+    return SymFromInlineContext(hProcess, Address, InlineContext, Displacement, Symbol)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFromInlineContextW == "on"]
+foreign {
+    // param-hint: Displacement optional
+    // pinvoke-hint: SetLastError
+    func SymFromInlineContextW(hProcess: CPointer<Unit>, Address: UInt64, InlineContext: UInt32, Displacement: CPointer<UInt64>, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOWAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFromInlineContextW == "on"]
+public unsafe func Windows_SymFromInlineContextW(hProcess: CPointer<Unit>, Address: UInt64, InlineContext: UInt32, Displacement: CPointer<UInt64>, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOWAbi>): Int32 {
+    return SymFromInlineContextW(hProcess, Address, InlineContext, Displacement, Symbol)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFromName == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymFromName(hProcess: CPointer<Unit>, Name: CPointer<UInt8>, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFromName == "on"]
+public unsafe func Windows_SymFromName(hProcess: CPointer<Unit>, Name: CPointer<UInt8>, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOAbi>): Int32 {
+    return SymFromName(hProcess, Name, Symbol)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFromNameW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymFromNameW(hProcess: CPointer<Unit>, Name: CPointer<UInt16>, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOWAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFromNameW == "on"]
+public unsafe func Windows_SymFromNameW(hProcess: CPointer<Unit>, Name: CPointer<UInt16>, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOWAbi>): Int32 {
+    return SymFromNameW(hProcess, Name, Symbol)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFromToken == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymFromToken(hProcess: CPointer<Unit>, Base: UInt64, Token: UInt32, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFromToken == "on"]
+public unsafe func Windows_SymFromToken(hProcess: CPointer<Unit>, Base: UInt64, Token: UInt32, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOAbi>): Int32 {
+    return SymFromToken(hProcess, Base, Token, Symbol)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFromTokenW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymFromTokenW(hProcess: CPointer<Unit>, Base: UInt64, Token: UInt32, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOWAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFromTokenW == "on"]
+public unsafe func Windows_SymFromTokenW(hProcess: CPointer<Unit>, Base: UInt64, Token: UInt32, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOWAbi>): Int32 {
+    return SymFromTokenW(hProcess, Base, Token, Symbol)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFunctionTableAccess64 == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymFunctionTableAccess64(hProcess: CPointer<Unit>, AddrBase: UInt64): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFunctionTableAccess64 == "on"]
+public unsafe func Windows_SymFunctionTableAccess64(hProcess: CPointer<Unit>, AddrBase: UInt64): CPointer<Unit> {
+    return SymFunctionTableAccess64(hProcess, AddrBase)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFunctionTableAccess64AccessRoutines == "on"]
+foreign {
+    // param-hint: ReadMemoryRoutine optional
+    // param-hint: GetModuleBaseRoutine optional
+    func SymFunctionTableAccess64AccessRoutines(hProcess: CPointer<Unit>, AddrBase: UInt64, ReadMemoryRoutine: Win32__impl_l0.PREAD_PROCESS_MEMORY_ROUTINE64, GetModuleBaseRoutine: Win32__impl_l0.PGET_MODULE_BASE_ROUTINE64): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFunctionTableAccess64AccessRoutines == "on"]
+public unsafe func Windows_SymFunctionTableAccess64AccessRoutines(hProcess: CPointer<Unit>, AddrBase: UInt64, ReadMemoryRoutine: Win32__impl_l0.PREAD_PROCESS_MEMORY_ROUTINE64, GetModuleBaseRoutine: Win32__impl_l0.PGET_MODULE_BASE_ROUTINE64): CPointer<Unit> {
+    return SymFunctionTableAccess64AccessRoutines(hProcess, AddrBase, ReadMemoryRoutine, GetModuleBaseRoutine)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetExtendedOption == "on"]
+foreign {
+    func SymGetExtendedOption(option: Win32__impl_l0.IMAGEHLP_EXTENDED_OPTIONSAbi): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetExtendedOption == "on"]
+public unsafe func Windows_SymGetExtendedOption(option: Win32__impl_l0.IMAGEHLP_EXTENDED_OPTIONSAbi): Int32 {
+    return SymGetExtendedOption(option)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetFileLineOffsets64 == "on"]
+foreign {
+    // param-hint: ModuleName optional
+    // param-hint: Buffer len=param[4]
+    // pinvoke-hint: SetLastError
+    func SymGetFileLineOffsets64(hProcess: CPointer<Unit>, ModuleName: CPointer<UInt8>, FileName: CPointer<UInt8>, Buffer: CPointer<UInt64>, BufferLines: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetFileLineOffsets64 == "on"]
+public unsafe func Windows_SymGetFileLineOffsets64(hProcess: CPointer<Unit>, ModuleName: CPointer<UInt8>, FileName: CPointer<UInt8>, Buffer: CPointer<UInt64>, BufferLines: UInt32): UInt32 {
+    return SymGetFileLineOffsets64(hProcess, ModuleName, FileName, Buffer, BufferLines)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetHomeDirectory == "on"]
+foreign {
+    // param-hint: dir len=param[2]
+    // pinvoke-hint: SetLastError
+    func SymGetHomeDirectory(type_: UInt32, dir: CPointer<UInt8>, size: UIntNative): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetHomeDirectory == "on"]
+public unsafe func Windows_SymGetHomeDirectory(type_: UInt32, dir: CPointer<UInt8>, size: UIntNative): CPointer<UInt8> {
+    return SymGetHomeDirectory(type_, dir, size)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetHomeDirectoryW == "on"]
+foreign {
+    // param-hint: dir len=param[2]
+    // pinvoke-hint: SetLastError
+    func SymGetHomeDirectoryW(type_: UInt32, dir: CPointer<UInt16>, size: UIntNative): CPointer<UInt16>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetHomeDirectoryW == "on"]
+public unsafe func Windows_SymGetHomeDirectoryW(type_: UInt32, dir: CPointer<UInt16>, size: UIntNative): CPointer<UInt16> {
+    return SymGetHomeDirectoryW(type_, dir, size)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetLineFromAddr64 == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymGetLineFromAddr64(hProcess: CPointer<Unit>, qwAddr: UInt64, pdwDisplacement: CPointer<UInt32>, Line64: CPointer<Win32__impl_l0.IMAGEHLP_LINE64Abi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetLineFromAddr64 == "on"]
+public unsafe func Windows_SymGetLineFromAddr64(hProcess: CPointer<Unit>, qwAddr: UInt64, pdwDisplacement: CPointer<UInt32>, Line64: CPointer<Win32__impl_l0.IMAGEHLP_LINE64Abi>): Int32 {
+    return SymGetLineFromAddr64(hProcess, qwAddr, pdwDisplacement, Line64)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetLineFromAddrW64 == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymGetLineFromAddrW64(hProcess: CPointer<Unit>, dwAddr: UInt64, pdwDisplacement: CPointer<UInt32>, Line: CPointer<Win32__impl_l0.IMAGEHLP_LINEW64Abi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetLineFromAddrW64 == "on"]
+public unsafe func Windows_SymGetLineFromAddrW64(hProcess: CPointer<Unit>, dwAddr: UInt64, pdwDisplacement: CPointer<UInt32>, Line: CPointer<Win32__impl_l0.IMAGEHLP_LINEW64Abi>): Int32 {
+    return SymGetLineFromAddrW64(hProcess, dwAddr, pdwDisplacement, Line)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetLineFromInlineContext == "on"]
+foreign {
+    // param-hint: qwModuleBaseAddress optional
+    // pinvoke-hint: SetLastError
+    func SymGetLineFromInlineContext(hProcess: CPointer<Unit>, qwAddr: UInt64, InlineContext: UInt32, qwModuleBaseAddress: UInt64, pdwDisplacement: CPointer<UInt32>, Line64: CPointer<Win32__impl_l0.IMAGEHLP_LINE64Abi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetLineFromInlineContext == "on"]
+public unsafe func Windows_SymGetLineFromInlineContext(hProcess: CPointer<Unit>, qwAddr: UInt64, InlineContext: UInt32, qwModuleBaseAddress: UInt64, pdwDisplacement: CPointer<UInt32>, Line64: CPointer<Win32__impl_l0.IMAGEHLP_LINE64Abi>): Int32 {
+    return SymGetLineFromInlineContext(hProcess, qwAddr, InlineContext, qwModuleBaseAddress, pdwDisplacement, Line64)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetLineFromInlineContextW == "on"]
+foreign {
+    // param-hint: qwModuleBaseAddress optional
+    // pinvoke-hint: SetLastError
+    func SymGetLineFromInlineContextW(hProcess: CPointer<Unit>, dwAddr: UInt64, InlineContext: UInt32, qwModuleBaseAddress: UInt64, pdwDisplacement: CPointer<UInt32>, Line: CPointer<Win32__impl_l0.IMAGEHLP_LINEW64Abi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetLineFromInlineContextW == "on"]
+public unsafe func Windows_SymGetLineFromInlineContextW(hProcess: CPointer<Unit>, dwAddr: UInt64, InlineContext: UInt32, qwModuleBaseAddress: UInt64, pdwDisplacement: CPointer<UInt32>, Line: CPointer<Win32__impl_l0.IMAGEHLP_LINEW64Abi>): Int32 {
+    return SymGetLineFromInlineContextW(hProcess, dwAddr, InlineContext, qwModuleBaseAddress, pdwDisplacement, Line)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetLineFromName64 == "on"]
+foreign {
+    // param-hint: ModuleName optional
+    // param-hint: FileName optional
+    // pinvoke-hint: SetLastError
+    func SymGetLineFromName64(hProcess: CPointer<Unit>, ModuleName: CPointer<UInt8>, FileName: CPointer<UInt8>, dwLineNumber: UInt32, plDisplacement: CPointer<Int32>, Line: CPointer<Win32__impl_l0.IMAGEHLP_LINE64Abi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetLineFromName64 == "on"]
+public unsafe func Windows_SymGetLineFromName64(hProcess: CPointer<Unit>, ModuleName: CPointer<UInt8>, FileName: CPointer<UInt8>, dwLineNumber: UInt32, plDisplacement: CPointer<Int32>, Line: CPointer<Win32__impl_l0.IMAGEHLP_LINE64Abi>): Int32 {
+    return SymGetLineFromName64(hProcess, ModuleName, FileName, dwLineNumber, plDisplacement, Line)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetLineFromNameW64 == "on"]
+foreign {
+    // param-hint: ModuleName optional
+    // param-hint: FileName optional
+    // pinvoke-hint: SetLastError
+    func SymGetLineFromNameW64(hProcess: CPointer<Unit>, ModuleName: CPointer<UInt16>, FileName: CPointer<UInt16>, dwLineNumber: UInt32, plDisplacement: CPointer<Int32>, Line: CPointer<Win32__impl_l0.IMAGEHLP_LINEW64Abi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetLineFromNameW64 == "on"]
+public unsafe func Windows_SymGetLineFromNameW64(hProcess: CPointer<Unit>, ModuleName: CPointer<UInt16>, FileName: CPointer<UInt16>, dwLineNumber: UInt32, plDisplacement: CPointer<Int32>, Line: CPointer<Win32__impl_l0.IMAGEHLP_LINEW64Abi>): Int32 {
+    return SymGetLineFromNameW64(hProcess, ModuleName, FileName, dwLineNumber, plDisplacement, Line)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetLineNext64 == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymGetLineNext64(hProcess: CPointer<Unit>, Line: CPointer<Win32__impl_l0.IMAGEHLP_LINE64Abi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetLineNext64 == "on"]
+public unsafe func Windows_SymGetLineNext64(hProcess: CPointer<Unit>, Line: CPointer<Win32__impl_l0.IMAGEHLP_LINE64Abi>): Int32 {
+    return SymGetLineNext64(hProcess, Line)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetLineNextW64 == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymGetLineNextW64(hProcess: CPointer<Unit>, Line: CPointer<Win32__impl_l0.IMAGEHLP_LINEW64Abi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetLineNextW64 == "on"]
+public unsafe func Windows_SymGetLineNextW64(hProcess: CPointer<Unit>, Line: CPointer<Win32__impl_l0.IMAGEHLP_LINEW64Abi>): Int32 {
+    return SymGetLineNextW64(hProcess, Line)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetLinePrev64 == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymGetLinePrev64(hProcess: CPointer<Unit>, Line: CPointer<Win32__impl_l0.IMAGEHLP_LINE64Abi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetLinePrev64 == "on"]
+public unsafe func Windows_SymGetLinePrev64(hProcess: CPointer<Unit>, Line: CPointer<Win32__impl_l0.IMAGEHLP_LINE64Abi>): Int32 {
+    return SymGetLinePrev64(hProcess, Line)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetLinePrevW64 == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymGetLinePrevW64(hProcess: CPointer<Unit>, Line: CPointer<Win32__impl_l0.IMAGEHLP_LINEW64Abi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetLinePrevW64 == "on"]
+public unsafe func Windows_SymGetLinePrevW64(hProcess: CPointer<Unit>, Line: CPointer<Win32__impl_l0.IMAGEHLP_LINEW64Abi>): Int32 {
+    return SymGetLinePrevW64(hProcess, Line)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetModuleBase64 == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymGetModuleBase64(hProcess: CPointer<Unit>, qwAddr: UInt64): UInt64
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetModuleBase64 == "on"]
+public unsafe func Windows_SymGetModuleBase64(hProcess: CPointer<Unit>, qwAddr: UInt64): UInt64 {
+    return SymGetModuleBase64(hProcess, qwAddr)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetModuleInfo64 == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymGetModuleInfo64(hProcess: CPointer<Unit>, qwAddr: UInt64, ModuleInfo: CPointer<Win32__impl_l1.IMAGEHLP_MODULE64Abi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetModuleInfo64 == "on"]
+public unsafe func Windows_SymGetModuleInfo64(hProcess: CPointer<Unit>, qwAddr: UInt64, ModuleInfo: CPointer<Win32__impl_l1.IMAGEHLP_MODULE64Abi>): Int32 {
+    return SymGetModuleInfo64(hProcess, qwAddr, ModuleInfo)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetModuleInfoW64 == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymGetModuleInfoW64(hProcess: CPointer<Unit>, qwAddr: UInt64, ModuleInfo: CPointer<Win32__impl_l1.IMAGEHLP_MODULEW64Abi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetModuleInfoW64 == "on"]
+public unsafe func Windows_SymGetModuleInfoW64(hProcess: CPointer<Unit>, qwAddr: UInt64, ModuleInfo: CPointer<Win32__impl_l1.IMAGEHLP_MODULEW64Abi>): Int32 {
+    return SymGetModuleInfoW64(hProcess, qwAddr, ModuleInfo)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetOmaps == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymGetOmaps(hProcess: CPointer<Unit>, BaseOfDll: UInt64, OmapTo: CPointer<CPointer<Win32__impl_l0.OMAPAbi>>, cOmapTo: CPointer<UInt64>, OmapFrom: CPointer<CPointer<Win32__impl_l0.OMAPAbi>>, cOmapFrom: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetOmaps == "on"]
+public unsafe func Windows_SymGetOmaps(hProcess: CPointer<Unit>, BaseOfDll: UInt64, OmapTo: CPointer<CPointer<Win32__impl_l0.OMAPAbi>>, cOmapTo: CPointer<UInt64>, OmapFrom: CPointer<CPointer<Win32__impl_l0.OMAPAbi>>, cOmapFrom: CPointer<UInt64>): Int32 {
+    return SymGetOmaps(hProcess, BaseOfDll, OmapTo, cOmapTo, OmapFrom, cOmapFrom)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetOptions == "on"]
+foreign {
+    func SymGetOptions(): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetOptions == "on"]
+public unsafe func Windows_SymGetOptions(): UInt32 {
+    return SymGetOptions()
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetScope == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymGetScope(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Index: UInt32, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetScope == "on"]
+public unsafe func Windows_SymGetScope(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Index: UInt32, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOAbi>): Int32 {
+    return SymGetScope(hProcess, BaseOfDll, Index, Symbol)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetScopeW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymGetScopeW(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Index: UInt32, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOWAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetScopeW == "on"]
+public unsafe func Windows_SymGetScopeW(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Index: UInt32, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOWAbi>): Int32 {
+    return SymGetScopeW(hProcess, BaseOfDll, Index, Symbol)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSearchPath == "on"]
+foreign {
+    // param-hint: SearchPathA len=param[2]
+    // pinvoke-hint: SetLastError
+    func SymGetSearchPath(hProcess: CPointer<Unit>, SearchPathA: CPointer<UInt8>, SearchPathLength: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSearchPath == "on"]
+public unsafe func Windows_SymGetSearchPath(hProcess: CPointer<Unit>, SearchPathA: CPointer<UInt8>, SearchPathLength: UInt32): Int32 {
+    return SymGetSearchPath(hProcess, SearchPathA, SearchPathLength)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSearchPathW == "on"]
+foreign {
+    // param-hint: SearchPathA len=param[2]
+    // pinvoke-hint: SetLastError
+    func SymGetSearchPathW(hProcess: CPointer<Unit>, SearchPathA: CPointer<UInt16>, SearchPathLength: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSearchPathW == "on"]
+public unsafe func Windows_SymGetSearchPathW(hProcess: CPointer<Unit>, SearchPathA: CPointer<UInt16>, SearchPathLength: UInt32): Int32 {
+    return SymGetSearchPathW(hProcess, SearchPathA, SearchPathLength)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFile == "on"]
+foreign {
+    // param-hint: Params optional
+    // param-hint: FilePath len=param[5]
+    // pinvoke-hint: SetLastError
+    func SymGetSourceFile(hProcess: CPointer<Unit>, Base: UInt64, Params: CPointer<UInt8>, FileSpec: CPointer<UInt8>, FilePath: CPointer<UInt8>, Size: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFile == "on"]
+public unsafe func Windows_SymGetSourceFile(hProcess: CPointer<Unit>, Base: UInt64, Params: CPointer<UInt8>, FileSpec: CPointer<UInt8>, FilePath: CPointer<UInt8>, Size: UInt32): Int32 {
+    return SymGetSourceFile(hProcess, Base, Params, FileSpec, FilePath, Size)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFileChecksum == "on"]
+foreign {
+    // param-hint: pChecksum len=param[5]
+    // pinvoke-hint: SetLastError
+    func SymGetSourceFileChecksum(hProcess: CPointer<Unit>, Base: UInt64, FileSpec: CPointer<UInt8>, pCheckSumType: CPointer<UInt32>, pChecksum: CPointer<UInt8>, checksumSize: UInt32, pActualBytesWritten: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFileChecksum == "on"]
+public unsafe func Windows_SymGetSourceFileChecksum(hProcess: CPointer<Unit>, Base: UInt64, FileSpec: CPointer<UInt8>, pCheckSumType: CPointer<UInt32>, pChecksum: CPointer<UInt8>, checksumSize: UInt32, pActualBytesWritten: CPointer<UInt32>): Int32 {
+    return SymGetSourceFileChecksum(hProcess, Base, FileSpec, pCheckSumType, pChecksum, checksumSize, pActualBytesWritten)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFileChecksumW == "on"]
+foreign {
+    // param-hint: pChecksum len=param[5]
+    // pinvoke-hint: SetLastError
+    func SymGetSourceFileChecksumW(hProcess: CPointer<Unit>, Base: UInt64, FileSpec: CPointer<UInt16>, pCheckSumType: CPointer<UInt32>, pChecksum: CPointer<UInt8>, checksumSize: UInt32, pActualBytesWritten: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFileChecksumW == "on"]
+public unsafe func Windows_SymGetSourceFileChecksumW(hProcess: CPointer<Unit>, Base: UInt64, FileSpec: CPointer<UInt16>, pCheckSumType: CPointer<UInt32>, pChecksum: CPointer<UInt8>, checksumSize: UInt32, pActualBytesWritten: CPointer<UInt32>): Int32 {
+    return SymGetSourceFileChecksumW(hProcess, Base, FileSpec, pCheckSumType, pChecksum, checksumSize, pActualBytesWritten)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFileFromToken == "on"]
+foreign {
+    // param-hint: Params optional
+    // param-hint: FilePath len=param[4]
+    // pinvoke-hint: SetLastError
+    func SymGetSourceFileFromToken(hProcess: CPointer<Unit>, Token: CPointer<Unit>, Params: CPointer<UInt8>, FilePath: CPointer<UInt8>, Size: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFileFromToken == "on"]
+public unsafe func Windows_SymGetSourceFileFromToken(hProcess: CPointer<Unit>, Token: CPointer<Unit>, Params: CPointer<UInt8>, FilePath: CPointer<UInt8>, Size: UInt32): Int32 {
+    return SymGetSourceFileFromToken(hProcess, Token, Params, FilePath, Size)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFileFromTokenByTokenName == "on"]
+foreign {
+    // param-hint: TokenName optional
+    // param-hint: Params optional
+    // param-hint: FilePath len=param[5]
+    func SymGetSourceFileFromTokenByTokenName(hProcess: CPointer<Unit>, Token: CPointer<Unit>, TokenName: CPointer<UInt8>, Params: CPointer<UInt8>, FilePath: CPointer<UInt8>, Size: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFileFromTokenByTokenName == "on"]
+public unsafe func Windows_SymGetSourceFileFromTokenByTokenName(hProcess: CPointer<Unit>, Token: CPointer<Unit>, TokenName: CPointer<UInt8>, Params: CPointer<UInt8>, FilePath: CPointer<UInt8>, Size: UInt32): Int32 {
+    return SymGetSourceFileFromTokenByTokenName(hProcess, Token, TokenName, Params, FilePath, Size)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFileFromTokenByTokenNameW == "on"]
+foreign {
+    // param-hint: TokenName optional
+    // param-hint: Params optional
+    // param-hint: FilePath len=param[5]
+    func SymGetSourceFileFromTokenByTokenNameW(hProcess: CPointer<Unit>, Token: CPointer<Unit>, TokenName: CPointer<UInt16>, Params: CPointer<UInt16>, FilePath: CPointer<UInt16>, Size: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFileFromTokenByTokenNameW == "on"]
+public unsafe func Windows_SymGetSourceFileFromTokenByTokenNameW(hProcess: CPointer<Unit>, Token: CPointer<Unit>, TokenName: CPointer<UInt16>, Params: CPointer<UInt16>, FilePath: CPointer<UInt16>, Size: UInt32): Int32 {
+    return SymGetSourceFileFromTokenByTokenNameW(hProcess, Token, TokenName, Params, FilePath, Size)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFileFromTokenW == "on"]
+foreign {
+    // param-hint: Params optional
+    // param-hint: FilePath len=param[4]
+    // pinvoke-hint: SetLastError
+    func SymGetSourceFileFromTokenW(hProcess: CPointer<Unit>, Token: CPointer<Unit>, Params: CPointer<UInt16>, FilePath: CPointer<UInt16>, Size: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFileFromTokenW == "on"]
+public unsafe func Windows_SymGetSourceFileFromTokenW(hProcess: CPointer<Unit>, Token: CPointer<Unit>, Params: CPointer<UInt16>, FilePath: CPointer<UInt16>, Size: UInt32): Int32 {
+    return SymGetSourceFileFromTokenW(hProcess, Token, Params, FilePath, Size)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFileToken == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymGetSourceFileToken(hProcess: CPointer<Unit>, Base: UInt64, FileSpec: CPointer<UInt8>, Token: CPointer<CPointer<Unit>>, Size: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFileToken == "on"]
+public unsafe func Windows_SymGetSourceFileToken(hProcess: CPointer<Unit>, Base: UInt64, FileSpec: CPointer<UInt8>, Token: CPointer<CPointer<Unit>>, Size: CPointer<UInt32>): Int32 {
+    return SymGetSourceFileToken(hProcess, Base, FileSpec, Token, Size)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFileTokenByTokenName == "on"]
+foreign {
+    // param-hint: TokenParameters optional
+    func SymGetSourceFileTokenByTokenName(hProcess: CPointer<Unit>, Base: UInt64, FileSpec: CPointer<UInt8>, TokenName: CPointer<UInt8>, TokenParameters: CPointer<UInt8>, Token: CPointer<CPointer<Unit>>, Size: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFileTokenByTokenName == "on"]
+public unsafe func Windows_SymGetSourceFileTokenByTokenName(hProcess: CPointer<Unit>, Base: UInt64, FileSpec: CPointer<UInt8>, TokenName: CPointer<UInt8>, TokenParameters: CPointer<UInt8>, Token: CPointer<CPointer<Unit>>, Size: CPointer<UInt32>): Int32 {
+    return SymGetSourceFileTokenByTokenName(hProcess, Base, FileSpec, TokenName, TokenParameters, Token, Size)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFileTokenByTokenNameW == "on"]
+foreign {
+    // param-hint: TokenParameters optional
+    func SymGetSourceFileTokenByTokenNameW(hProcess: CPointer<Unit>, Base: UInt64, FileSpec: CPointer<UInt16>, TokenName: CPointer<UInt16>, TokenParameters: CPointer<UInt16>, Token: CPointer<CPointer<Unit>>, Size: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFileTokenByTokenNameW == "on"]
+public unsafe func Windows_SymGetSourceFileTokenByTokenNameW(hProcess: CPointer<Unit>, Base: UInt64, FileSpec: CPointer<UInt16>, TokenName: CPointer<UInt16>, TokenParameters: CPointer<UInt16>, Token: CPointer<CPointer<Unit>>, Size: CPointer<UInt32>): Int32 {
+    return SymGetSourceFileTokenByTokenNameW(hProcess, Base, FileSpec, TokenName, TokenParameters, Token, Size)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFileTokenW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymGetSourceFileTokenW(hProcess: CPointer<Unit>, Base: UInt64, FileSpec: CPointer<UInt16>, Token: CPointer<CPointer<Unit>>, Size: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFileTokenW == "on"]
+public unsafe func Windows_SymGetSourceFileTokenW(hProcess: CPointer<Unit>, Base: UInt64, FileSpec: CPointer<UInt16>, Token: CPointer<CPointer<Unit>>, Size: CPointer<UInt32>): Int32 {
+    return SymGetSourceFileTokenW(hProcess, Base, FileSpec, Token, Size)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFileW == "on"]
+foreign {
+    // param-hint: Params optional
+    // param-hint: FilePath len=param[5]
+    // pinvoke-hint: SetLastError
+    func SymGetSourceFileW(hProcess: CPointer<Unit>, Base: UInt64, Params: CPointer<UInt16>, FileSpec: CPointer<UInt16>, FilePath: CPointer<UInt16>, Size: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFileW == "on"]
+public unsafe func Windows_SymGetSourceFileW(hProcess: CPointer<Unit>, Base: UInt64, Params: CPointer<UInt16>, FileSpec: CPointer<UInt16>, FilePath: CPointer<UInt16>, Size: UInt32): Int32 {
+    return SymGetSourceFileW(hProcess, Base, Params, FileSpec, FilePath, Size)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceVarFromToken == "on"]
+foreign {
+    // param-hint: Params optional
+    // param-hint: Value len=param[5]
+    // pinvoke-hint: SetLastError
+    func SymGetSourceVarFromToken(hProcess: CPointer<Unit>, Token: CPointer<Unit>, Params: CPointer<UInt8>, VarName: CPointer<UInt8>, Value: CPointer<UInt8>, Size: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceVarFromToken == "on"]
+public unsafe func Windows_SymGetSourceVarFromToken(hProcess: CPointer<Unit>, Token: CPointer<Unit>, Params: CPointer<UInt8>, VarName: CPointer<UInt8>, Value: CPointer<UInt8>, Size: UInt32): Int32 {
+    return SymGetSourceVarFromToken(hProcess, Token, Params, VarName, Value, Size)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceVarFromTokenW == "on"]
+foreign {
+    // param-hint: Params optional
+    // param-hint: Value len=param[5]
+    // pinvoke-hint: SetLastError
+    func SymGetSourceVarFromTokenW(hProcess: CPointer<Unit>, Token: CPointer<Unit>, Params: CPointer<UInt16>, VarName: CPointer<UInt16>, Value: CPointer<UInt16>, Size: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceVarFromTokenW == "on"]
+public unsafe func Windows_SymGetSourceVarFromTokenW(hProcess: CPointer<Unit>, Token: CPointer<Unit>, Params: CPointer<UInt16>, VarName: CPointer<UInt16>, Value: CPointer<UInt16>, Size: UInt32): Int32 {
+    return SymGetSourceVarFromTokenW(hProcess, Token, Params, VarName, Value, Size)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSymFromAddr64 == "on"]
+foreign {
+    // param-hint: pdwDisplacement optional
+    // pinvoke-hint: SetLastError
+    func SymGetSymFromAddr64(hProcess: CPointer<Unit>, qwAddr: UInt64, pdwDisplacement: CPointer<UInt64>, Symbol: CPointer<Win32__impl_l0.IMAGEHLP_SYMBOL64Abi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSymFromAddr64 == "on"]
+public unsafe func Windows_SymGetSymFromAddr64(hProcess: CPointer<Unit>, qwAddr: UInt64, pdwDisplacement: CPointer<UInt64>, Symbol: CPointer<Win32__impl_l0.IMAGEHLP_SYMBOL64Abi>): Int32 {
+    return SymGetSymFromAddr64(hProcess, qwAddr, pdwDisplacement, Symbol)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSymFromName64 == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymGetSymFromName64(hProcess: CPointer<Unit>, Name: CPointer<UInt8>, Symbol: CPointer<Win32__impl_l0.IMAGEHLP_SYMBOL64Abi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSymFromName64 == "on"]
+public unsafe func Windows_SymGetSymFromName64(hProcess: CPointer<Unit>, Name: CPointer<UInt8>, Symbol: CPointer<Win32__impl_l0.IMAGEHLP_SYMBOL64Abi>): Int32 {
+    return SymGetSymFromName64(hProcess, Name, Symbol)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSymNext64 == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymGetSymNext64(hProcess: CPointer<Unit>, Symbol: CPointer<Win32__impl_l0.IMAGEHLP_SYMBOL64Abi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSymNext64 == "on"]
+public unsafe func Windows_SymGetSymNext64(hProcess: CPointer<Unit>, Symbol: CPointer<Win32__impl_l0.IMAGEHLP_SYMBOL64Abi>): Int32 {
+    return SymGetSymNext64(hProcess, Symbol)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSymPrev64 == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymGetSymPrev64(hProcess: CPointer<Unit>, Symbol: CPointer<Win32__impl_l0.IMAGEHLP_SYMBOL64Abi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSymPrev64 == "on"]
+public unsafe func Windows_SymGetSymPrev64(hProcess: CPointer<Unit>, Symbol: CPointer<Win32__impl_l0.IMAGEHLP_SYMBOL64Abi>): Int32 {
+    return SymGetSymPrev64(hProcess, Symbol)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSymbolFile == "on"]
+foreign {
+    // param-hint: hProcess optional
+    // param-hint: SymPath optional
+    // param-hint: SymbolFile len=param[5]
+    // param-hint: DbgFile len=param[7]
+    // pinvoke-hint: SetLastError
+    func SymGetSymbolFile(hProcess: CPointer<Unit>, SymPath: CPointer<UInt8>, ImageFile: CPointer<UInt8>, Type: UInt32, SymbolFile: CPointer<UInt8>, cSymbolFile: UIntNative, DbgFile: CPointer<UInt8>, cDbgFile: UIntNative): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSymbolFile == "on"]
+public unsafe func Windows_SymGetSymbolFile(hProcess: CPointer<Unit>, SymPath: CPointer<UInt8>, ImageFile: CPointer<UInt8>, Type: UInt32, SymbolFile: CPointer<UInt8>, cSymbolFile: UIntNative, DbgFile: CPointer<UInt8>, cDbgFile: UIntNative): Int32 {
+    return SymGetSymbolFile(hProcess, SymPath, ImageFile, Type, SymbolFile, cSymbolFile, DbgFile, cDbgFile)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSymbolFileW == "on"]
+foreign {
+    // param-hint: hProcess optional
+    // param-hint: SymPath optional
+    // param-hint: SymbolFile len=param[5]
+    // param-hint: DbgFile len=param[7]
+    // pinvoke-hint: SetLastError
+    func SymGetSymbolFileW(hProcess: CPointer<Unit>, SymPath: CPointer<UInt16>, ImageFile: CPointer<UInt16>, Type: UInt32, SymbolFile: CPointer<UInt16>, cSymbolFile: UIntNative, DbgFile: CPointer<UInt16>, cDbgFile: UIntNative): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSymbolFileW == "on"]
+public unsafe func Windows_SymGetSymbolFileW(hProcess: CPointer<Unit>, SymPath: CPointer<UInt16>, ImageFile: CPointer<UInt16>, Type: UInt32, SymbolFile: CPointer<UInt16>, cSymbolFile: UIntNative, DbgFile: CPointer<UInt16>, cDbgFile: UIntNative): Int32 {
+    return SymGetSymbolFileW(hProcess, SymPath, ImageFile, Type, SymbolFile, cSymbolFile, DbgFile, cDbgFile)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetTypeFromName == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymGetTypeFromName(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Name: CPointer<UInt8>, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetTypeFromName == "on"]
+public unsafe func Windows_SymGetTypeFromName(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Name: CPointer<UInt8>, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOAbi>): Int32 {
+    return SymGetTypeFromName(hProcess, BaseOfDll, Name, Symbol)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetTypeFromNameW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymGetTypeFromNameW(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Name: CPointer<UInt16>, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOWAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetTypeFromNameW == "on"]
+public unsafe func Windows_SymGetTypeFromNameW(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Name: CPointer<UInt16>, Symbol: CPointer<Win32__impl_l1.SYMBOL_INFOWAbi>): Int32 {
+    return SymGetTypeFromNameW(hProcess, BaseOfDll, Name, Symbol)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetTypeInfo == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymGetTypeInfo(hProcess: CPointer<Unit>, ModBase: UInt64, TypeId: UInt32, GetType: Win32__impl_l0.IMAGEHLP_SYMBOL_TYPE_INFOAbi, pInfo: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetTypeInfo == "on"]
+public unsafe func Windows_SymGetTypeInfo(hProcess: CPointer<Unit>, ModBase: UInt64, TypeId: UInt32, GetType: Win32__impl_l0.IMAGEHLP_SYMBOL_TYPE_INFOAbi, pInfo: CPointer<Unit>): Int32 {
+    return SymGetTypeInfo(hProcess, ModBase, TypeId, GetType, pInfo)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetTypeInfoEx == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymGetTypeInfoEx(hProcess: CPointer<Unit>, ModBase: UInt64, Params: CPointer<Win32__impl_l1.IMAGEHLP_GET_TYPE_INFO_PARAMSAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetTypeInfoEx == "on"]
+public unsafe func Windows_SymGetTypeInfoEx(hProcess: CPointer<Unit>, ModBase: UInt64, Params: CPointer<Win32__impl_l1.IMAGEHLP_GET_TYPE_INFO_PARAMSAbi>): Int32 {
+    return SymGetTypeInfoEx(hProcess, ModBase, Params)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetUnwindInfo == "on"]
+foreign {
+    // param-hint: Buffer bytes=param[3] optional
+    func SymGetUnwindInfo(hProcess: CPointer<Unit>, Address: UInt64, Buffer: CPointer<Unit>, Size: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetUnwindInfo == "on"]
+public unsafe func Windows_SymGetUnwindInfo(hProcess: CPointer<Unit>, Address: UInt64, Buffer: CPointer<Unit>, Size: CPointer<UInt32>): Int32 {
+    return SymGetUnwindInfo(hProcess, Address, Buffer, Size)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymInitialize == "on"]
+foreign {
+    // param-hint: UserSearchPath optional
+    // pinvoke-hint: SetLastError
+    func SymInitialize(hProcess: CPointer<Unit>, UserSearchPath: CPointer<UInt8>, fInvadeProcess: Int32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymInitialize == "on"]
+public unsafe func Windows_SymInitialize(hProcess: CPointer<Unit>, UserSearchPath: CPointer<UInt8>, fInvadeProcess: Int32): Int32 {
+    return SymInitialize(hProcess, UserSearchPath, fInvadeProcess)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymInitializeW == "on"]
+foreign {
+    // param-hint: UserSearchPath optional
+    // pinvoke-hint: SetLastError
+    func SymInitializeW(hProcess: CPointer<Unit>, UserSearchPath: CPointer<UInt16>, fInvadeProcess: Int32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymInitializeW == "on"]
+public unsafe func Windows_SymInitializeW(hProcess: CPointer<Unit>, UserSearchPath: CPointer<UInt16>, fInvadeProcess: Int32): Int32 {
+    return SymInitializeW(hProcess, UserSearchPath, fInvadeProcess)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymLoadModule64 == "on"]
+foreign {
+    // param-hint: hFile optional
+    // param-hint: ImageName optional
+    // param-hint: ModuleName optional
+    // pinvoke-hint: SetLastError
+    func SymLoadModule64(hProcess: CPointer<Unit>, hFile: CPointer<Unit>, ImageName: CPointer<UInt8>, ModuleName: CPointer<UInt8>, BaseOfDll: UInt64, SizeOfDll: UInt32): UInt64
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymLoadModule64 == "on"]
+public unsafe func Windows_SymLoadModule64(hProcess: CPointer<Unit>, hFile: CPointer<Unit>, ImageName: CPointer<UInt8>, ModuleName: CPointer<UInt8>, BaseOfDll: UInt64, SizeOfDll: UInt32): UInt64 {
+    return SymLoadModule64(hProcess, hFile, ImageName, ModuleName, BaseOfDll, SizeOfDll)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymLoadModuleEx == "on"]
+foreign {
+    // param-hint: hFile optional
+    // param-hint: ImageName optional
+    // param-hint: ModuleName optional
+    // param-hint: Data optional
+    // param-hint: Flags optional
+    // pinvoke-hint: SetLastError
+    func SymLoadModuleEx(hProcess: CPointer<Unit>, hFile: CPointer<Unit>, ImageName: CPointer<UInt8>, ModuleName: CPointer<UInt8>, BaseOfDll: UInt64, DllSize: UInt32, Data: CPointer<Win32__impl_l1.MODLOAD_DATAAbi>, Flags: Win32__impl_l0.SYM_LOAD_FLAGSAbi): UInt64
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymLoadModuleEx == "on"]
+public unsafe func Windows_SymLoadModuleEx(hProcess: CPointer<Unit>, hFile: CPointer<Unit>, ImageName: CPointer<UInt8>, ModuleName: CPointer<UInt8>, BaseOfDll: UInt64, DllSize: UInt32, Data: CPointer<Win32__impl_l1.MODLOAD_DATAAbi>, Flags: Win32__impl_l0.SYM_LOAD_FLAGSAbi): UInt64 {
+    return SymLoadModuleEx(hProcess, hFile, ImageName, ModuleName, BaseOfDll, DllSize, Data, Flags)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymLoadModuleExW == "on"]
+foreign {
+    // param-hint: hFile optional
+    // param-hint: ImageName optional
+    // param-hint: ModuleName optional
+    // param-hint: Data optional
+    // param-hint: Flags optional
+    // pinvoke-hint: SetLastError
+    func SymLoadModuleExW(hProcess: CPointer<Unit>, hFile: CPointer<Unit>, ImageName: CPointer<UInt16>, ModuleName: CPointer<UInt16>, BaseOfDll: UInt64, DllSize: UInt32, Data: CPointer<Win32__impl_l1.MODLOAD_DATAAbi>, Flags: Win32__impl_l0.SYM_LOAD_FLAGSAbi): UInt64
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymLoadModuleExW == "on"]
+public unsafe func Windows_SymLoadModuleExW(hProcess: CPointer<Unit>, hFile: CPointer<Unit>, ImageName: CPointer<UInt16>, ModuleName: CPointer<UInt16>, BaseOfDll: UInt64, DllSize: UInt32, Data: CPointer<Win32__impl_l1.MODLOAD_DATAAbi>, Flags: Win32__impl_l0.SYM_LOAD_FLAGSAbi): UInt64 {
+    return SymLoadModuleExW(hProcess, hFile, ImageName, ModuleName, BaseOfDll, DllSize, Data, Flags)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymMatchFileName == "on"]
+foreign {
+    // param-hint: FileNameStop optional
+    // param-hint: MatchStop optional
+    // pinvoke-hint: SetLastError
+    func SymMatchFileName(FileName: CPointer<UInt8>, Match: CPointer<UInt8>, FileNameStop: CPointer<CPointer<UInt8>>, MatchStop: CPointer<CPointer<UInt8>>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymMatchFileName == "on"]
+public unsafe func Windows_SymMatchFileName(FileName: CPointer<UInt8>, Match: CPointer<UInt8>, FileNameStop: CPointer<CPointer<UInt8>>, MatchStop: CPointer<CPointer<UInt8>>): Int32 {
+    return SymMatchFileName(FileName, Match, FileNameStop, MatchStop)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymMatchFileNameW == "on"]
+foreign {
+    // param-hint: FileNameStop optional
+    // param-hint: MatchStop optional
+    // pinvoke-hint: SetLastError
+    func SymMatchFileNameW(FileName: CPointer<UInt16>, Match: CPointer<UInt16>, FileNameStop: CPointer<CPointer<UInt16>>, MatchStop: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymMatchFileNameW == "on"]
+public unsafe func Windows_SymMatchFileNameW(FileName: CPointer<UInt16>, Match: CPointer<UInt16>, FileNameStop: CPointer<CPointer<UInt16>>, MatchStop: CPointer<CPointer<UInt16>>): Int32 {
+    return SymMatchFileNameW(FileName, Match, FileNameStop, MatchStop)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymMatchString == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymMatchString(string: CPointer<UInt8>, expression: CPointer<UInt8>, fCase: Int32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymMatchString == "on"]
+public unsafe func Windows_SymMatchString(string: CPointer<UInt8>, expression: CPointer<UInt8>, fCase: Int32): Int32 {
+    return SymMatchString(string, expression, fCase)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymMatchStringA == "on"]
+foreign {
+    func SymMatchStringA(string: CPointer<UInt8>, expression: CPointer<UInt8>, fCase: Int32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymMatchStringA == "on"]
+public unsafe func Windows_SymMatchStringA(string: CPointer<UInt8>, expression: CPointer<UInt8>, fCase: Int32): Int32 {
+    return SymMatchStringA(string, expression, fCase)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymMatchStringW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymMatchStringW(string: CPointer<UInt16>, expression: CPointer<UInt16>, fCase: Int32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymMatchStringW == "on"]
+public unsafe func Windows_SymMatchStringW(string: CPointer<UInt16>, expression: CPointer<UInt16>, fCase: Int32): Int32 {
+    return SymMatchStringW(string, expression, fCase)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymNext == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymNext(hProcess: CPointer<Unit>, si: CPointer<Win32__impl_l1.SYMBOL_INFOAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymNext == "on"]
+public unsafe func Windows_SymNext(hProcess: CPointer<Unit>, si: CPointer<Win32__impl_l1.SYMBOL_INFOAbi>): Int32 {
+    return SymNext(hProcess, si)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymNextW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymNextW(hProcess: CPointer<Unit>, siw: CPointer<Win32__impl_l1.SYMBOL_INFOWAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymNextW == "on"]
+public unsafe func Windows_SymNextW(hProcess: CPointer<Unit>, siw: CPointer<Win32__impl_l1.SYMBOL_INFOWAbi>): Int32 {
+    return SymNextW(hProcess, siw)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymPrev == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymPrev(hProcess: CPointer<Unit>, si: CPointer<Win32__impl_l1.SYMBOL_INFOAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymPrev == "on"]
+public unsafe func Windows_SymPrev(hProcess: CPointer<Unit>, si: CPointer<Win32__impl_l1.SYMBOL_INFOAbi>): Int32 {
+    return SymPrev(hProcess, si)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymPrevW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymPrevW(hProcess: CPointer<Unit>, siw: CPointer<Win32__impl_l1.SYMBOL_INFOWAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymPrevW == "on"]
+public unsafe func Windows_SymPrevW(hProcess: CPointer<Unit>, siw: CPointer<Win32__impl_l1.SYMBOL_INFOWAbi>): Int32 {
+    return SymPrevW(hProcess, siw)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymQueryInlineTrace == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymQueryInlineTrace(hProcess: CPointer<Unit>, StartAddress: UInt64, StartContext: UInt32, StartRetAddress: UInt64, CurAddress: UInt64, CurContext: CPointer<UInt32>, CurFrameIndex: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymQueryInlineTrace == "on"]
+public unsafe func Windows_SymQueryInlineTrace(hProcess: CPointer<Unit>, StartAddress: UInt64, StartContext: UInt32, StartRetAddress: UInt64, CurAddress: UInt64, CurContext: CPointer<UInt32>, CurFrameIndex: CPointer<UInt32>): Int32 {
+    return SymQueryInlineTrace(hProcess, StartAddress, StartContext, StartRetAddress, CurAddress, CurContext, CurFrameIndex)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymRefreshModuleList == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymRefreshModuleList(hProcess: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymRefreshModuleList == "on"]
+public unsafe func Windows_SymRefreshModuleList(hProcess: CPointer<Unit>): Int32 {
+    return SymRefreshModuleList(hProcess)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymRegisterCallback64 == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymRegisterCallback64(hProcess: CPointer<Unit>, CallbackFunction: Win32__impl_l0.PSYMBOL_REGISTERED_CALLBACK64, UserContext: UInt64): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymRegisterCallback64 == "on"]
+public unsafe func Windows_SymRegisterCallback64(hProcess: CPointer<Unit>, CallbackFunction: Win32__impl_l0.PSYMBOL_REGISTERED_CALLBACK64, UserContext: UInt64): Int32 {
+    return SymRegisterCallback64(hProcess, CallbackFunction, UserContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymRegisterCallbackW64 == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymRegisterCallbackW64(hProcess: CPointer<Unit>, CallbackFunction: Win32__impl_l0.PSYMBOL_REGISTERED_CALLBACK64, UserContext: UInt64): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymRegisterCallbackW64 == "on"]
+public unsafe func Windows_SymRegisterCallbackW64(hProcess: CPointer<Unit>, CallbackFunction: Win32__impl_l0.PSYMBOL_REGISTERED_CALLBACK64, UserContext: UInt64): Int32 {
+    return SymRegisterCallbackW64(hProcess, CallbackFunction, UserContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymRegisterFunctionEntryCallback64 == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymRegisterFunctionEntryCallback64(hProcess: CPointer<Unit>, CallbackFunction: Win32__impl_l0.PSYMBOL_FUNCENTRY_CALLBACK64, UserContext: UInt64): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymRegisterFunctionEntryCallback64 == "on"]
+public unsafe func Windows_SymRegisterFunctionEntryCallback64(hProcess: CPointer<Unit>, CallbackFunction: Win32__impl_l0.PSYMBOL_FUNCENTRY_CALLBACK64, UserContext: UInt64): Int32 {
+    return SymRegisterFunctionEntryCallback64(hProcess, CallbackFunction, UserContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSearch == "on"]
+foreign {
+    // param-hint: Index optional
+    // param-hint: SymTag optional
+    // param-hint: Mask optional
+    // param-hint: Address optional
+    // param-hint: UserContext optional
+    // pinvoke-hint: SetLastError
+    func SymSearch(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Index: UInt32, SymTag: UInt32, Mask: CPointer<UInt8>, Address: UInt64, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACK, UserContext: CPointer<Unit>, Options: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSearch == "on"]
+public unsafe func Windows_SymSearch(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Index: UInt32, SymTag: UInt32, Mask: CPointer<UInt8>, Address: UInt64, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACK, UserContext: CPointer<Unit>, Options: UInt32): Int32 {
+    return SymSearch(hProcess, BaseOfDll, Index, SymTag, Mask, Address, EnumSymbolsCallback, UserContext, Options)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSearchW == "on"]
+foreign {
+    // param-hint: Index optional
+    // param-hint: SymTag optional
+    // param-hint: Mask optional
+    // param-hint: Address optional
+    // param-hint: UserContext optional
+    // pinvoke-hint: SetLastError
+    func SymSearchW(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Index: UInt32, SymTag: UInt32, Mask: CPointer<UInt16>, Address: UInt64, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext: CPointer<Unit>, Options: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSearchW == "on"]
+public unsafe func Windows_SymSearchW(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Index: UInt32, SymTag: UInt32, Mask: CPointer<UInt16>, Address: UInt64, EnumSymbolsCallback: Win32__impl_l1.PSYM_ENUMERATESYMBOLS_CALLBACKW, UserContext: CPointer<Unit>, Options: UInt32): Int32 {
+    return SymSearchW(hProcess, BaseOfDll, Index, SymTag, Mask, Address, EnumSymbolsCallback, UserContext, Options)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSetContext == "on"]
+foreign {
+    // param-hint: Context optional
+    // pinvoke-hint: SetLastError
+    func SymSetContext(hProcess: CPointer<Unit>, StackFrame: CPointer<Win32__impl_l0.IMAGEHLP_STACK_FRAMEAbi>, Context: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSetContext == "on"]
+public unsafe func Windows_SymSetContext(hProcess: CPointer<Unit>, StackFrame: CPointer<Win32__impl_l0.IMAGEHLP_STACK_FRAMEAbi>, Context: CPointer<Unit>): Int32 {
+    return SymSetContext(hProcess, StackFrame, Context)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSetExtendedOption == "on"]
+foreign {
+    func SymSetExtendedOption(option: Win32__impl_l0.IMAGEHLP_EXTENDED_OPTIONSAbi, value: Int32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSetExtendedOption == "on"]
+public unsafe func Windows_SymSetExtendedOption(option: Win32__impl_l0.IMAGEHLP_EXTENDED_OPTIONSAbi, value: Int32): Int32 {
+    return SymSetExtendedOption(option, value)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSetHomeDirectory == "on"]
+foreign {
+    // param-hint: hProcess optional
+    // param-hint: dir optional
+    // pinvoke-hint: SetLastError
+    func SymSetHomeDirectory(hProcess: CPointer<Unit>, dir: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSetHomeDirectory == "on"]
+public unsafe func Windows_SymSetHomeDirectory(hProcess: CPointer<Unit>, dir: CPointer<UInt8>): CPointer<UInt8> {
+    return SymSetHomeDirectory(hProcess, dir)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSetHomeDirectoryW == "on"]
+foreign {
+    // param-hint: hProcess optional
+    // param-hint: dir optional
+    // pinvoke-hint: SetLastError
+    func SymSetHomeDirectoryW(hProcess: CPointer<Unit>, dir: CPointer<UInt16>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSetHomeDirectoryW == "on"]
+public unsafe func Windows_SymSetHomeDirectoryW(hProcess: CPointer<Unit>, dir: CPointer<UInt16>): CPointer<UInt16> {
+    return SymSetHomeDirectoryW(hProcess, dir)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSetOptions == "on"]
+foreign {
+    func SymSetOptions(SymOptions: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSetOptions == "on"]
+public unsafe func Windows_SymSetOptions(SymOptions: UInt32): UInt32 {
+    return SymSetOptions(SymOptions)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSetParentWindow == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymSetParentWindow(hwnd: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSetParentWindow == "on"]
+public unsafe func Windows_SymSetParentWindow(hwnd: CPointer<Unit>): Int32 {
+    return SymSetParentWindow(hwnd)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSetScopeFromAddr == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymSetScopeFromAddr(hProcess: CPointer<Unit>, Address: UInt64): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSetScopeFromAddr == "on"]
+public unsafe func Windows_SymSetScopeFromAddr(hProcess: CPointer<Unit>, Address: UInt64): Int32 {
+    return SymSetScopeFromAddr(hProcess, Address)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSetScopeFromIndex == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymSetScopeFromIndex(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Index: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSetScopeFromIndex == "on"]
+public unsafe func Windows_SymSetScopeFromIndex(hProcess: CPointer<Unit>, BaseOfDll: UInt64, Index: UInt32): Int32 {
+    return SymSetScopeFromIndex(hProcess, BaseOfDll, Index)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSetScopeFromInlineContext == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymSetScopeFromInlineContext(hProcess: CPointer<Unit>, Address: UInt64, InlineContext: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSetScopeFromInlineContext == "on"]
+public unsafe func Windows_SymSetScopeFromInlineContext(hProcess: CPointer<Unit>, Address: UInt64, InlineContext: UInt32): Int32 {
+    return SymSetScopeFromInlineContext(hProcess, Address, InlineContext)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSetSearchPath == "on"]
+foreign {
+    // param-hint: SearchPathA optional
+    // pinvoke-hint: SetLastError
+    func SymSetSearchPath(hProcess: CPointer<Unit>, SearchPathA: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSetSearchPath == "on"]
+public unsafe func Windows_SymSetSearchPath(hProcess: CPointer<Unit>, SearchPathA: CPointer<UInt8>): Int32 {
+    return SymSetSearchPath(hProcess, SearchPathA)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSetSearchPathW == "on"]
+foreign {
+    // param-hint: SearchPathA optional
+    // pinvoke-hint: SetLastError
+    func SymSetSearchPathW(hProcess: CPointer<Unit>, SearchPathA: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSetSearchPathW == "on"]
+public unsafe func Windows_SymSetSearchPathW(hProcess: CPointer<Unit>, SearchPathA: CPointer<UInt16>): Int32 {
+    return SymSetSearchPathW(hProcess, SearchPathA)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvDeltaName == "on"]
+foreign {
+    // param-hint: SymPath optional
+    // pinvoke-hint: SetLastError
+    func SymSrvDeltaName(hProcess: CPointer<Unit>, SymPath: CPointer<UInt8>, Type: CPointer<UInt8>, File1: CPointer<UInt8>, File2: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvDeltaName == "on"]
+public unsafe func Windows_SymSrvDeltaName(hProcess: CPointer<Unit>, SymPath: CPointer<UInt8>, Type: CPointer<UInt8>, File1: CPointer<UInt8>, File2: CPointer<UInt8>): CPointer<UInt8> {
+    return SymSrvDeltaName(hProcess, SymPath, Type, File1, File2)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvDeltaNameW == "on"]
+foreign {
+    // param-hint: SymPath optional
+    // pinvoke-hint: SetLastError
+    func SymSrvDeltaNameW(hProcess: CPointer<Unit>, SymPath: CPointer<UInt16>, Type: CPointer<UInt16>, File1: CPointer<UInt16>, File2: CPointer<UInt16>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvDeltaNameW == "on"]
+public unsafe func Windows_SymSrvDeltaNameW(hProcess: CPointer<Unit>, SymPath: CPointer<UInt16>, Type: CPointer<UInt16>, File1: CPointer<UInt16>, File2: CPointer<UInt16>): CPointer<UInt16> {
+    return SymSrvDeltaNameW(hProcess, SymPath, Type, File1, File2)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvGetFileIndexInfo == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymSrvGetFileIndexInfo(File: CPointer<UInt8>, Info: CPointer<Win32__impl_l0.SYMSRV_INDEX_INFOAbi>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvGetFileIndexInfo == "on"]
+public unsafe func Windows_SymSrvGetFileIndexInfo(File: CPointer<UInt8>, Info: CPointer<Win32__impl_l0.SYMSRV_INDEX_INFOAbi>, Flags: UInt32): Int32 {
+    return SymSrvGetFileIndexInfo(File, Info, Flags)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvGetFileIndexInfoW == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymSrvGetFileIndexInfoW(File: CPointer<UInt16>, Info: CPointer<Win32__impl_l0.SYMSRV_INDEX_INFOWAbi>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvGetFileIndexInfoW == "on"]
+public unsafe func Windows_SymSrvGetFileIndexInfoW(File: CPointer<UInt16>, Info: CPointer<Win32__impl_l0.SYMSRV_INDEX_INFOWAbi>, Flags: UInt32): Int32 {
+    return SymSrvGetFileIndexInfoW(File, Info, Flags)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvGetFileIndexString == "on"]
+foreign {
+    // param-hint: SrvPath optional
+    // param-hint: Index len=param[4]
+    // pinvoke-hint: SetLastError
+    func SymSrvGetFileIndexString(hProcess: CPointer<Unit>, SrvPath: CPointer<UInt8>, File: CPointer<UInt8>, Index: CPointer<UInt8>, Size: UIntNative, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvGetFileIndexString == "on"]
+public unsafe func Windows_SymSrvGetFileIndexString(hProcess: CPointer<Unit>, SrvPath: CPointer<UInt8>, File: CPointer<UInt8>, Index: CPointer<UInt8>, Size: UIntNative, Flags: UInt32): Int32 {
+    return SymSrvGetFileIndexString(hProcess, SrvPath, File, Index, Size, Flags)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvGetFileIndexStringW == "on"]
+foreign {
+    // param-hint: SrvPath optional
+    // param-hint: Index len=param[4]
+    // pinvoke-hint: SetLastError
+    func SymSrvGetFileIndexStringW(hProcess: CPointer<Unit>, SrvPath: CPointer<UInt16>, File: CPointer<UInt16>, Index: CPointer<UInt16>, Size: UIntNative, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvGetFileIndexStringW == "on"]
+public unsafe func Windows_SymSrvGetFileIndexStringW(hProcess: CPointer<Unit>, SrvPath: CPointer<UInt16>, File: CPointer<UInt16>, Index: CPointer<UInt16>, Size: UIntNative, Flags: UInt32): Int32 {
+    return SymSrvGetFileIndexStringW(hProcess, SrvPath, File, Index, Size, Flags)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvGetFileIndexes == "on"]
+foreign {
+    // param-hint: Val2 optional
+    // pinvoke-hint: SetLastError
+    func SymSrvGetFileIndexes(File: CPointer<UInt8>, Id: CPointer<GUID>, Val1: CPointer<UInt32>, Val2: CPointer<UInt32>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvGetFileIndexes == "on"]
+public unsafe func Windows_SymSrvGetFileIndexes(File: CPointer<UInt8>, Id: CPointer<GUID>, Val1: CPointer<UInt32>, Val2: CPointer<UInt32>, Flags: UInt32): Int32 {
+    return SymSrvGetFileIndexes(File, Id, Val1, Val2, Flags)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvGetFileIndexesW == "on"]
+foreign {
+    // param-hint: Val2 optional
+    // pinvoke-hint: SetLastError
+    func SymSrvGetFileIndexesW(File: CPointer<UInt16>, Id: CPointer<GUID>, Val1: CPointer<UInt32>, Val2: CPointer<UInt32>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvGetFileIndexesW == "on"]
+public unsafe func Windows_SymSrvGetFileIndexesW(File: CPointer<UInt16>, Id: CPointer<GUID>, Val1: CPointer<UInt32>, Val2: CPointer<UInt32>, Flags: UInt32): Int32 {
+    return SymSrvGetFileIndexesW(File, Id, Val1, Val2, Flags)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvGetSupplement == "on"]
+foreign {
+    // param-hint: SymPath optional
+    // pinvoke-hint: SetLastError
+    func SymSrvGetSupplement(hProcess: CPointer<Unit>, SymPath: CPointer<UInt8>, Node: CPointer<UInt8>, File: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvGetSupplement == "on"]
+public unsafe func Windows_SymSrvGetSupplement(hProcess: CPointer<Unit>, SymPath: CPointer<UInt8>, Node: CPointer<UInt8>, File: CPointer<UInt8>): CPointer<UInt8> {
+    return SymSrvGetSupplement(hProcess, SymPath, Node, File)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvGetSupplementW == "on"]
+foreign {
+    // param-hint: SymPath optional
+    // pinvoke-hint: SetLastError
+    func SymSrvGetSupplementW(hProcess: CPointer<Unit>, SymPath: CPointer<UInt16>, Node: CPointer<UInt16>, File: CPointer<UInt16>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvGetSupplementW == "on"]
+public unsafe func Windows_SymSrvGetSupplementW(hProcess: CPointer<Unit>, SymPath: CPointer<UInt16>, Node: CPointer<UInt16>, File: CPointer<UInt16>): CPointer<UInt16> {
+    return SymSrvGetSupplementW(hProcess, SymPath, Node, File)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvIsStore == "on"]
+foreign {
+    // param-hint: hProcess optional
+    // pinvoke-hint: SetLastError
+    func SymSrvIsStore(hProcess: CPointer<Unit>, path: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvIsStore == "on"]
+public unsafe func Windows_SymSrvIsStore(hProcess: CPointer<Unit>, path: CPointer<UInt8>): Int32 {
+    return SymSrvIsStore(hProcess, path)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvIsStoreW == "on"]
+foreign {
+    // param-hint: hProcess optional
+    // pinvoke-hint: SetLastError
+    func SymSrvIsStoreW(hProcess: CPointer<Unit>, path: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvIsStoreW == "on"]
+public unsafe func Windows_SymSrvIsStoreW(hProcess: CPointer<Unit>, path: CPointer<UInt16>): Int32 {
+    return SymSrvIsStoreW(hProcess, path)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvStoreFile == "on"]
+foreign {
+    // param-hint: SrvPath optional
+    // pinvoke-hint: SetLastError
+    func SymSrvStoreFile(hProcess: CPointer<Unit>, SrvPath: CPointer<UInt8>, File: CPointer<UInt8>, Flags: Win32__impl_l0.SYM_SRV_STORE_FILE_FLAGSAbi): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvStoreFile == "on"]
+public unsafe func Windows_SymSrvStoreFile(hProcess: CPointer<Unit>, SrvPath: CPointer<UInt8>, File: CPointer<UInt8>, Flags: Win32__impl_l0.SYM_SRV_STORE_FILE_FLAGSAbi): CPointer<UInt8> {
+    return SymSrvStoreFile(hProcess, SrvPath, File, Flags)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvStoreFileW == "on"]
+foreign {
+    // param-hint: SrvPath optional
+    // pinvoke-hint: SetLastError
+    func SymSrvStoreFileW(hProcess: CPointer<Unit>, SrvPath: CPointer<UInt16>, File: CPointer<UInt16>, Flags: Win32__impl_l0.SYM_SRV_STORE_FILE_FLAGSAbi): CPointer<UInt16>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvStoreFileW == "on"]
+public unsafe func Windows_SymSrvStoreFileW(hProcess: CPointer<Unit>, SrvPath: CPointer<UInt16>, File: CPointer<UInt16>, Flags: Win32__impl_l0.SYM_SRV_STORE_FILE_FLAGSAbi): CPointer<UInt16> {
+    return SymSrvStoreFileW(hProcess, SrvPath, File, Flags)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvStoreSupplement == "on"]
+foreign {
+    // param-hint: SrvPath optional
+    // pinvoke-hint: SetLastError
+    func SymSrvStoreSupplement(hProcess: CPointer<Unit>, SrvPath: CPointer<UInt8>, Node: CPointer<UInt8>, File: CPointer<UInt8>, Flags: UInt32): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvStoreSupplement == "on"]
+public unsafe func Windows_SymSrvStoreSupplement(hProcess: CPointer<Unit>, SrvPath: CPointer<UInt8>, Node: CPointer<UInt8>, File: CPointer<UInt8>, Flags: UInt32): CPointer<UInt8> {
+    return SymSrvStoreSupplement(hProcess, SrvPath, Node, File, Flags)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvStoreSupplementW == "on"]
+foreign {
+    // param-hint: SymPath optional
+    // pinvoke-hint: SetLastError
+    func SymSrvStoreSupplementW(hProcess: CPointer<Unit>, SymPath: CPointer<UInt16>, Node: CPointer<UInt16>, File: CPointer<UInt16>, Flags: UInt32): CPointer<UInt16>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvStoreSupplementW == "on"]
+public unsafe func Windows_SymSrvStoreSupplementW(hProcess: CPointer<Unit>, SymPath: CPointer<UInt16>, Node: CPointer<UInt16>, File: CPointer<UInt16>, Flags: UInt32): CPointer<UInt16> {
+    return SymSrvStoreSupplementW(hProcess, SymPath, Node, File, Flags)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymUnDName64 == "on"]
+foreign {
+    // param-hint: UnDecName len=param[2]
+    // pinvoke-hint: SetLastError
+    func SymUnDName64(sym: CPointer<Win32__impl_l0.IMAGEHLP_SYMBOL64Abi>, UnDecName: CPointer<UInt8>, UnDecNameLength: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymUnDName64 == "on"]
+public unsafe func Windows_SymUnDName64(sym: CPointer<Win32__impl_l0.IMAGEHLP_SYMBOL64Abi>, UnDecName: CPointer<UInt8>, UnDecNameLength: UInt32): Int32 {
+    return SymUnDName64(sym, UnDecName, UnDecNameLength)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymUnloadModule64 == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SymUnloadModule64(hProcess: CPointer<Unit>, BaseOfDll: UInt64): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymUnloadModule64 == "on"]
+public unsafe func Windows_SymUnloadModule64(hProcess: CPointer<Unit>, BaseOfDll: UInt64): Int32 {
+    return SymUnloadModule64(hProcess, BaseOfDll)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_UnDecorateSymbolName == "on"]
+foreign {
+    // param-hint: outputString len=param[2]
+    // pinvoke-hint: SetLastError
+    func UnDecorateSymbolName(name: CPointer<UInt8>, outputString: CPointer<UInt8>, maxStringLength: UInt32, flags: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_UnDecorateSymbolName == "on"]
+public unsafe func Windows_UnDecorateSymbolName(name: CPointer<UInt8>, outputString: CPointer<UInt8>, maxStringLength: UInt32, flags: UInt32): UInt32 {
+    return UnDecorateSymbolName(name, outputString, maxStringLength, flags)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_UnDecorateSymbolNameW == "on"]
+foreign {
+    // param-hint: outputString len=param[2]
+    // pinvoke-hint: SetLastError
+    func UnDecorateSymbolNameW(name: CPointer<UInt16>, outputString: CPointer<UInt16>, maxStringLength: UInt32, flags: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_UnDecorateSymbolNameW == "on"]
+public unsafe func Windows_UnDecorateSymbolNameW(name: CPointer<UInt16>, outputString: CPointer<UInt16>, maxStringLength: UInt32, flags: UInt32): UInt32 {
+    return UnDecorateSymbolNameW(name, outputString, maxStringLength, flags)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_BindImage == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func BindImage(ImageName: CPointer<UInt8>, DllPath: CPointer<UInt8>, SymbolPath: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_BindImage == "on"]
+public unsafe func Windows_BindImage(ImageName: CPointer<UInt8>, DllPath: CPointer<UInt8>, SymbolPath: CPointer<UInt8>): Int32 {
+    return BindImage(ImageName, DllPath, SymbolPath)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_BindImageEx == "on"]
+foreign {
     // param-hint: StatusRoutine optional
     // pinvoke-hint: SetLastError
     func BindImageEx(Flags: UInt32, ImageName: CPointer<UInt8>, DllPath: CPointer<UInt8>, SymbolPath: CPointer<UInt8>, StatusRoutine: Win32__impl_l1.PIMAGEHLP_STATUS_ROUTINE): Int32
-    // param-hint: Indices len=param[4] optional
-    // param-hint: IndexCount optional
-    // pinvoke-hint: SetLastError
-    func ImageEnumerateCertificates(FileHandle: CPointer<Unit>, TypeFilter: UInt16, CertificateCount: CPointer<UInt32>, Indices: CPointer<UInt32>, IndexCount: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func ImageGetDigestStream(FileHandle: CPointer<Unit>, DigestLevel: UInt32, DigestFunction: Win32__impl_l0.DIGEST_FUNCTION, DigestHandle: CPointer<Unit>): Int32
-    // pinvoke-hint: SetLastError
-    func ImageRemoveCertificate(FileHandle: CPointer<Unit>, Index: UInt32): Int32
-    func MapFileAndCheckSumA(Filename: CPointer<UInt8>, HeaderSum: CPointer<UInt32>, CheckSum: CPointer<UInt32>): UInt32
-    func MapFileAndCheckSumW(Filename: CPointer<UInt16>, HeaderSum: CPointer<UInt32>, CheckSum: CPointer<UInt32>): UInt32
-    // pinvoke-hint: SetLastError
-    func ReBaseImage(CurrentImageName: CPointer<UInt8>, SymbolPath: CPointer<UInt8>, fReBase: Int32, fRebaseSysfileOk: Int32, fGoingDown: Int32, CheckImageSize: UInt32, OldImageSize: CPointer<UInt32>, OldImageBase: CPointer<UIntNative>, NewImageSize: CPointer<UInt32>, NewImageBase: CPointer<UIntNative>, TimeStamp: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func ReBaseImage64(CurrentImageName: CPointer<UInt8>, SymbolPath: CPointer<UInt8>, fReBase: Int32, fRebaseSysfileOk: Int32, fGoingDown: Int32, CheckImageSize: UInt32, OldImageSize: CPointer<UInt32>, OldImageBase: CPointer<UInt64>, NewImageSize: CPointer<UInt32>, NewImageBase: CPointer<UInt64>, TimeStamp: UInt32): Int32
-    // param-hint: pSystemTime optional
-    // pinvoke-hint: SetLastError
-    func TouchFileTimes(FileHandle: CPointer<Unit>, pSystemTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>): Int32
 }
 
-@When[IMAGEHLP == "on" && (((arch == "x86_64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Kernel == "on")]
-foreign {
-    // pinvoke-hint: SetLastError
-    func GetImageUnusedHeaderBytes(LoadedImage: CPointer<LOADED_IMAGEAbi>, SizeUnusedHeaderBytes: CPointer<UInt32>): UInt32
-    // param-hint: DllPath optional
-    // pinvoke-hint: SetLastError
-    func ImageLoad(DllName: CPointer<UInt8>, DllPath: CPointer<UInt8>): CPointer<LOADED_IMAGEAbi>
-    // pinvoke-hint: SetLastError
-    func ImageUnload(LoadedImage: CPointer<LOADED_IMAGEAbi>): Int32
-    // param-hint: DllPath optional
-    // pinvoke-hint: SetLastError
-    func MapAndLoad(ImageName: CPointer<UInt8>, DllPath: CPointer<UInt8>, LoadedImage: CPointer<LOADED_IMAGEAbi>, DotDll: Int32, ReadOnly: Int32): Int32
-    // pinvoke-hint: SetLastError
-    func UnMapAndLoad(LoadedImage: CPointer<LOADED_IMAGEAbi>): Int32
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_BindImageEx == "on"]
+public unsafe func Windows_BindImageEx(Flags: UInt32, ImageName: CPointer<UInt8>, DllPath: CPointer<UInt8>, SymbolPath: CPointer<UInt8>, StatusRoutine: Win32__impl_l1.PIMAGEHLP_STATUS_ROUTINE): Int32 {
+    return BindImageEx(Flags, ImageName, DllPath, SymbolPath, StatusRoutine)
 }
 
-@When[IMAGEHLP == "on" && (arch == "x86_64" && ((arch == "x86_64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Kernel == "on" || arch == "aarch64" && ((arch == "x86_64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Kernel == "on")]
-foreign {
-    // pinvoke-hint: SetLastError
-    func GetImageConfigInformation(LoadedImage: CPointer<LOADED_IMAGEAbi>, ImageConfigInformation: CPointer<Win32__impl_l1.IMAGE_LOAD_CONFIG_DIRECTORY64>): Int32
-    // pinvoke-hint: SetLastError
-    func SetImageConfigInformation(LoadedImage: CPointer<LOADED_IMAGEAbi>, ImageConfigInformation: CPointer<Win32__impl_l1.IMAGE_LOAD_CONFIG_DIRECTORY64>): Int32
-}
-
-@When[IMAGEHLP == "on" && (arch == "x86_64" && Windows_Win32_System_SystemInformation == "on" || arch == "aarch64" && Windows_Win32_System_SystemInformation == "on")]
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_CheckSumMappedFile == "on" && (arch == "x86_64" && Windows_Win32_System_SystemInformation == "on" || arch == "aarch64" && Windows_Win32_System_SystemInformation == "on")]
 foreign {
     // pinvoke-hint: SetLastError
     func CheckSumMappedFile(BaseAddress: CPointer<Unit>, FileLength: UInt32, HeaderSum: CPointer<UInt32>, CheckSum: CPointer<UInt32>): CPointer<Win32__impl_l1.IMAGE_NT_HEADERS64Abi>
 }
 
-@When[IMAGEHLP == "on" && Windows_Win32_Security_WinTrust == "on"]
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_CheckSumMappedFile == "on" && (arch == "x86_64" && Windows_Win32_System_SystemInformation == "on" || arch == "aarch64" && Windows_Win32_System_SystemInformation == "on")]
+public unsafe func Windows_CheckSumMappedFile(BaseAddress: CPointer<Unit>, FileLength: UInt32, HeaderSum: CPointer<UInt32>, CheckSum: CPointer<UInt32>): CPointer<Win32__impl_l1.IMAGE_NT_HEADERS64Abi> {
+    return CheckSumMappedFile(BaseAddress, FileLength, HeaderSum, CheckSum)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_GetImageConfigInformation == "on" && (arch == "x86_64" && ((arch == "x86_64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Kernel == "on" || arch == "aarch64" && ((arch == "x86_64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Kernel == "on")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func GetImageConfigInformation(LoadedImage: CPointer<LOADED_IMAGEAbi>, ImageConfigInformation: CPointer<Win32__impl_l1.IMAGE_LOAD_CONFIG_DIRECTORY64>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_GetImageConfigInformation == "on" && (arch == "x86_64" && ((arch == "x86_64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Kernel == "on" || arch == "aarch64" && ((arch == "x86_64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Kernel == "on")]
+public unsafe func Windows_GetImageConfigInformation(LoadedImage: CPointer<LOADED_IMAGEAbi>, ImageConfigInformation: CPointer<Win32__impl_l1.IMAGE_LOAD_CONFIG_DIRECTORY64>): Int32 {
+    return GetImageConfigInformation(LoadedImage, ImageConfigInformation)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_GetImageUnusedHeaderBytes == "on" && (((arch == "x86_64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Kernel == "on")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func GetImageUnusedHeaderBytes(LoadedImage: CPointer<LOADED_IMAGEAbi>, SizeUnusedHeaderBytes: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_GetImageUnusedHeaderBytes == "on" && (((arch == "x86_64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Kernel == "on")]
+public unsafe func Windows_GetImageUnusedHeaderBytes(LoadedImage: CPointer<LOADED_IMAGEAbi>, SizeUnusedHeaderBytes: CPointer<UInt32>): UInt32 {
+    return GetImageUnusedHeaderBytes(LoadedImage, SizeUnusedHeaderBytes)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageAddCertificate == "on" && Windows_Win32_Security_WinTrust == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func ImageAddCertificate(FileHandle: CPointer<Unit>, Certificate: CPointer<Win32__impl_l0.WIN_CERTIFICATEAbi>, Index: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageAddCertificate == "on" && Windows_Win32_Security_WinTrust == "on"]
+public unsafe func Windows_ImageAddCertificate(FileHandle: CPointer<Unit>, Certificate: CPointer<Win32__impl_l0.WIN_CERTIFICATEAbi>, Index: CPointer<UInt32>): Int32 {
+    return ImageAddCertificate(FileHandle, Certificate, Index)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageEnumerateCertificates == "on"]
+foreign {
+    // param-hint: Indices len=param[4] optional
+    // param-hint: IndexCount optional
+    // pinvoke-hint: SetLastError
+    func ImageEnumerateCertificates(FileHandle: CPointer<Unit>, TypeFilter: UInt16, CertificateCount: CPointer<UInt32>, Indices: CPointer<UInt32>, IndexCount: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageEnumerateCertificates == "on"]
+public unsafe func Windows_ImageEnumerateCertificates(FileHandle: CPointer<Unit>, TypeFilter: UInt16, CertificateCount: CPointer<UInt32>, Indices: CPointer<UInt32>, IndexCount: UInt32): Int32 {
+    return ImageEnumerateCertificates(FileHandle, TypeFilter, CertificateCount, Indices, IndexCount)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageGetCertificateData == "on" && Windows_Win32_Security_WinTrust == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ImageGetCertificateData(FileHandle: CPointer<Unit>, CertificateIndex: UInt32, Certificate: CPointer<Win32__impl_l0.WIN_CERTIFICATEAbi>, RequiredLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageGetCertificateData == "on" && Windows_Win32_Security_WinTrust == "on"]
+public unsafe func Windows_ImageGetCertificateData(FileHandle: CPointer<Unit>, CertificateIndex: UInt32, Certificate: CPointer<Win32__impl_l0.WIN_CERTIFICATEAbi>, RequiredLength: CPointer<UInt32>): Int32 {
+    return ImageGetCertificateData(FileHandle, CertificateIndex, Certificate, RequiredLength)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageGetCertificateHeader == "on" && Windows_Win32_Security_WinTrust == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ImageGetCertificateHeader(FileHandle: CPointer<Unit>, CertificateIndex: UInt32, Certificateheader: CPointer<Win32__impl_l0.WIN_CERTIFICATEAbi>): Int32
 }
 
-@When[IMAGEHLP == "on" && Windows_Win32_System_SystemInformation == "on"]
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageGetCertificateHeader == "on" && Windows_Win32_Security_WinTrust == "on"]
+public unsafe func Windows_ImageGetCertificateHeader(FileHandle: CPointer<Unit>, CertificateIndex: UInt32, Certificateheader: CPointer<Win32__impl_l0.WIN_CERTIFICATEAbi>): Int32 {
+    return ImageGetCertificateHeader(FileHandle, CertificateIndex, Certificateheader)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageGetDigestStream == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func ImageGetDigestStream(FileHandle: CPointer<Unit>, DigestLevel: UInt32, DigestFunction: Win32__impl_l0.DIGEST_FUNCTION, DigestHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageGetDigestStream == "on"]
+public unsafe func Windows_ImageGetDigestStream(FileHandle: CPointer<Unit>, DigestLevel: UInt32, DigestFunction: Win32__impl_l0.DIGEST_FUNCTION, DigestHandle: CPointer<Unit>): Int32 {
+    return ImageGetDigestStream(FileHandle, DigestLevel, DigestFunction, DigestHandle)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageLoad == "on" && (((arch == "x86_64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Kernel == "on")]
+foreign {
+    // param-hint: DllPath optional
+    // pinvoke-hint: SetLastError
+    func ImageLoad(DllName: CPointer<UInt8>, DllPath: CPointer<UInt8>): CPointer<LOADED_IMAGEAbi>
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageLoad == "on" && (((arch == "x86_64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Kernel == "on")]
+public unsafe func Windows_ImageLoad(DllName: CPointer<UInt8>, DllPath: CPointer<UInt8>): CPointer<LOADED_IMAGEAbi> {
+    return ImageLoad(DllName, DllPath)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageRemoveCertificate == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func ImageRemoveCertificate(FileHandle: CPointer<Unit>, Index: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageRemoveCertificate == "on"]
+public unsafe func Windows_ImageRemoveCertificate(FileHandle: CPointer<Unit>, Index: UInt32): Int32 {
+    return ImageRemoveCertificate(FileHandle, Index)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageUnload == "on" && (((arch == "x86_64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Kernel == "on")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func ImageUnload(LoadedImage: CPointer<LOADED_IMAGEAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageUnload == "on" && (((arch == "x86_64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Kernel == "on")]
+public unsafe func Windows_ImageUnload(LoadedImage: CPointer<LOADED_IMAGEAbi>): Int32 {
+    return ImageUnload(LoadedImage)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_MapAndLoad == "on" && (((arch == "x86_64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Kernel == "on")]
+foreign {
+    // param-hint: DllPath optional
+    // pinvoke-hint: SetLastError
+    func MapAndLoad(ImageName: CPointer<UInt8>, DllPath: CPointer<UInt8>, LoadedImage: CPointer<LOADED_IMAGEAbi>, DotDll: Int32, ReadOnly: Int32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_MapAndLoad == "on" && (((arch == "x86_64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Kernel == "on")]
+public unsafe func Windows_MapAndLoad(ImageName: CPointer<UInt8>, DllPath: CPointer<UInt8>, LoadedImage: CPointer<LOADED_IMAGEAbi>, DotDll: Int32, ReadOnly: Int32): Int32 {
+    return MapAndLoad(ImageName, DllPath, LoadedImage, DotDll, ReadOnly)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_MapFileAndCheckSumA == "on"]
+foreign {
+    func MapFileAndCheckSumA(Filename: CPointer<UInt8>, HeaderSum: CPointer<UInt32>, CheckSum: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_MapFileAndCheckSumA == "on"]
+public unsafe func Windows_MapFileAndCheckSumA(Filename: CPointer<UInt8>, HeaderSum: CPointer<UInt32>, CheckSum: CPointer<UInt32>): UInt32 {
+    return MapFileAndCheckSumA(Filename, HeaderSum, CheckSum)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_MapFileAndCheckSumW == "on"]
+foreign {
+    func MapFileAndCheckSumW(Filename: CPointer<UInt16>, HeaderSum: CPointer<UInt32>, CheckSum: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_MapFileAndCheckSumW == "on"]
+public unsafe func Windows_MapFileAndCheckSumW(Filename: CPointer<UInt16>, HeaderSum: CPointer<UInt32>, CheckSum: CPointer<UInt32>): UInt32 {
+    return MapFileAndCheckSumW(Filename, HeaderSum, CheckSum)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_ReBaseImage == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func ReBaseImage(CurrentImageName: CPointer<UInt8>, SymbolPath: CPointer<UInt8>, fReBase: Int32, fRebaseSysfileOk: Int32, fGoingDown: Int32, CheckImageSize: UInt32, OldImageSize: CPointer<UInt32>, OldImageBase: CPointer<UIntNative>, NewImageSize: CPointer<UInt32>, NewImageBase: CPointer<UIntNative>, TimeStamp: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_ReBaseImage == "on"]
+public unsafe func Windows_ReBaseImage(CurrentImageName: CPointer<UInt8>, SymbolPath: CPointer<UInt8>, fReBase: Int32, fRebaseSysfileOk: Int32, fGoingDown: Int32, CheckImageSize: UInt32, OldImageSize: CPointer<UInt32>, OldImageBase: CPointer<UIntNative>, NewImageSize: CPointer<UInt32>, NewImageBase: CPointer<UIntNative>, TimeStamp: UInt32): Int32 {
+    return ReBaseImage(CurrentImageName, SymbolPath, fReBase, fRebaseSysfileOk, fGoingDown, CheckImageSize, OldImageSize, OldImageBase, NewImageSize, NewImageBase, TimeStamp)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_ReBaseImage64 == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func ReBaseImage64(CurrentImageName: CPointer<UInt8>, SymbolPath: CPointer<UInt8>, fReBase: Int32, fRebaseSysfileOk: Int32, fGoingDown: Int32, CheckImageSize: UInt32, OldImageSize: CPointer<UInt32>, OldImageBase: CPointer<UInt64>, NewImageSize: CPointer<UInt32>, NewImageBase: CPointer<UInt64>, TimeStamp: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_ReBaseImage64 == "on"]
+public unsafe func Windows_ReBaseImage64(CurrentImageName: CPointer<UInt8>, SymbolPath: CPointer<UInt8>, fReBase: Int32, fRebaseSysfileOk: Int32, fGoingDown: Int32, CheckImageSize: UInt32, OldImageSize: CPointer<UInt32>, OldImageBase: CPointer<UInt64>, NewImageSize: CPointer<UInt32>, NewImageBase: CPointer<UInt64>, TimeStamp: UInt32): Int32 {
+    return ReBaseImage64(CurrentImageName, SymbolPath, fReBase, fRebaseSysfileOk, fGoingDown, CheckImageSize, OldImageSize, OldImageBase, NewImageSize, NewImageBase, TimeStamp)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_SetImageConfigInformation == "on" && (arch == "x86_64" && ((arch == "x86_64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Kernel == "on" || arch == "aarch64" && ((arch == "x86_64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Kernel == "on")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetImageConfigInformation(LoadedImage: CPointer<LOADED_IMAGEAbi>, ImageConfigInformation: CPointer<Win32__impl_l1.IMAGE_LOAD_CONFIG_DIRECTORY64>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_SetImageConfigInformation == "on" && (arch == "x86_64" && ((arch == "x86_64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Kernel == "on" || arch == "aarch64" && ((arch == "x86_64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Kernel == "on")]
+public unsafe func Windows_SetImageConfigInformation(LoadedImage: CPointer<LOADED_IMAGEAbi>, ImageConfigInformation: CPointer<Win32__impl_l1.IMAGE_LOAD_CONFIG_DIRECTORY64>): Int32 {
+    return SetImageConfigInformation(LoadedImage, ImageConfigInformation)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_TouchFileTimes == "on"]
+foreign {
+    // param-hint: pSystemTime optional
+    // pinvoke-hint: SetLastError
+    func TouchFileTimes(FileHandle: CPointer<Unit>, pSystemTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_TouchFileTimes == "on"]
+public unsafe func Windows_TouchFileTimes(FileHandle: CPointer<Unit>, pSystemTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>): Int32 {
+    return TouchFileTimes(FileHandle, pSystemTime)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_UnMapAndLoad == "on" && (((arch == "x86_64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Kernel == "on")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func UnMapAndLoad(LoadedImage: CPointer<LOADED_IMAGEAbi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_UnMapAndLoad == "on" && (((arch == "x86_64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Kernel == "on")]
+public unsafe func Windows_UnMapAndLoad(LoadedImage: CPointer<LOADED_IMAGEAbi>): Int32 {
+    return UnMapAndLoad(LoadedImage)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_UpdateDebugInfoFile == "on" && Windows_Win32_System_SystemInformation == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func UpdateDebugInfoFile(ImageFileName: CPointer<UInt8>, SymbolPath: CPointer<UInt8>, DebugFilePath: CPointer<UInt8>, NtHeaders: CPointer<Win32__impl_l1.IMAGE_NT_HEADERS32Abi>): Int32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_UpdateDebugInfoFile == "on" && Windows_Win32_System_SystemInformation == "on"]
+public unsafe func Windows_UpdateDebugInfoFile(ImageFileName: CPointer<UInt8>, SymbolPath: CPointer<UInt8>, DebugFilePath: CPointer<UInt8>, NtHeaders: CPointer<Win32__impl_l1.IMAGE_NT_HEADERS32Abi>): Int32 {
+    return UpdateDebugInfoFile(ImageFileName, SymbolPath, DebugFilePath, NtHeaders)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_UpdateDebugInfoFileEx == "on" && Windows_Win32_System_SystemInformation == "on"]
+foreign {
     func UpdateDebugInfoFileEx(ImageFileName: CPointer<UInt8>, SymbolPath: CPointer<UInt8>, DebugFilePath: CPointer<UInt8>, NtHeaders: CPointer<Win32__impl_l1.IMAGE_NT_HEADERS32Abi>, OldCheckSum: UInt32): Int32
 }
 
-@When[NTDLL == "on" && (arch == "x86_64" || arch == "aarch64")]
-foreign {
-    func RtlDeleteGrowableFunctionTable(DynamicTable: CPointer<Unit>): Unit
-    func RtlGrowFunctionTable(DynamicTable: CPointer<Unit>, NewEntryCount: UInt32): Unit
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_UpdateDebugInfoFileEx == "on" && Windows_Win32_System_SystemInformation == "on"]
+public unsafe func Windows_UpdateDebugInfoFileEx(ImageFileName: CPointer<UInt8>, SymbolPath: CPointer<UInt8>, DebugFilePath: CPointer<UInt8>, NtHeaders: CPointer<Win32__impl_l1.IMAGE_NT_HEADERS32Abi>, OldCheckSum: UInt32): Int32 {
+    return UpdateDebugInfoFileEx(ImageFileName, SymbolPath, DebugFilePath, NtHeaders, OldCheckSum)
 }
 
-@When[NTDLL == "on" && arch == "aarch64"]
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && NTDLL == "on" && Windows_Win32_System_Diagnostics_Debug_RtlAddGrowableFunctionTable == "on" && arch == "aarch64"]
 foreign {
     // param-hint: FunctionTable len=param[3]
     func RtlAddGrowableFunctionTable(DynamicTable: CPointer<CPointer<Unit>>, FunctionTable: CPointer<Win32__impl_l0.IMAGE_ARM64_RUNTIME_FUNCTION_ENTRYAbi>, EntryCount: UInt32, MaximumEntryCount: UInt32, RangeBase: UIntNative, RangeEnd: UIntNative): UInt32
 }
 
-@When[NTDLL == "on" && arch == "x86_64"]
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && NTDLL == "on" && Windows_Win32_System_Diagnostics_Debug_RtlAddGrowableFunctionTable == "on" && arch == "aarch64"]
+public unsafe func Windows_RtlAddGrowableFunctionTable(DynamicTable: CPointer<CPointer<Unit>>, FunctionTable: CPointer<Win32__impl_l0.IMAGE_ARM64_RUNTIME_FUNCTION_ENTRYAbi>, EntryCount: UInt32, MaximumEntryCount: UInt32, RangeBase: UIntNative, RangeEnd: UIntNative): UInt32 {
+    return RtlAddGrowableFunctionTable(DynamicTable, FunctionTable, EntryCount, MaximumEntryCount, RangeBase, RangeEnd)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && NTDLL == "on" && Windows_Win32_System_Diagnostics_Debug_RtlAddGrowableFunctionTable == "on" && arch == "x86_64"]
 foreign {
     // param-hint: FunctionTable len=param[3]
     func RtlAddGrowableFunctionTable(DynamicTable: CPointer<CPointer<Unit>>, FunctionTable: CPointer<Win32__impl_l0.IMAGE_RUNTIME_FUNCTION_ENTRYAbi>, EntryCount: UInt32, MaximumEntryCount: UInt32, RangeBase: UIntNative, RangeEnd: UIntNative): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && NTDLL == "on" && Windows_Win32_System_Diagnostics_Debug_RtlAddGrowableFunctionTable == "on" && arch == "x86_64"]
+public unsafe func Windows_RtlAddGrowableFunctionTable(DynamicTable: CPointer<CPointer<Unit>>, FunctionTable: CPointer<Win32__impl_l0.IMAGE_RUNTIME_FUNCTION_ENTRYAbi>, EntryCount: UInt32, MaximumEntryCount: UInt32, RangeBase: UIntNative, RangeEnd: UIntNative): UInt32 {
+    return RtlAddGrowableFunctionTable(DynamicTable, FunctionTable, EntryCount, MaximumEntryCount, RangeBase, RangeEnd)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && NTDLL == "on" && Windows_Win32_System_Diagnostics_Debug_RtlDeleteGrowableFunctionTable == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func RtlDeleteGrowableFunctionTable(DynamicTable: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && NTDLL == "on" && Windows_Win32_System_Diagnostics_Debug_RtlDeleteGrowableFunctionTable == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_RtlDeleteGrowableFunctionTable(DynamicTable: CPointer<Unit>): Unit {
+    RtlDeleteGrowableFunctionTable(DynamicTable)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && NTDLL == "on" && Windows_Win32_System_Diagnostics_Debug_RtlGrowFunctionTable == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func RtlGrowFunctionTable(DynamicTable: CPointer<Unit>, NewEntryCount: UInt32): Unit
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && NTDLL == "on" && Windows_Win32_System_Diagnostics_Debug_RtlGrowFunctionTable == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_RtlGrowFunctionTable(DynamicTable: CPointer<Unit>, NewEntryCount: UInt32): Unit {
+    RtlGrowFunctionTable(DynamicTable, NewEntryCount)
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetParentWindow == "on"]
+func __windowsBindgen_SymGetParentWindowProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("dbghelp.dll", "SymGetParentWindow")
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetParentWindow == "on"]
+unsafe func SymGetParentWindow(pHwnd: CPointer<CPointer<Unit>>): Int32 {
+    let call = CFunc<(CPointer<CPointer<Unit>>) -> Int32>(__windowsBindgen_SymGetParentWindowProc())
+    return unsafe { call(pHwnd) }
+}
+
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetParentWindow == "on"]
+public unsafe func Windows_SymGetParentWindow(pHwnd: CPointer<CPointer<Unit>>): Int32 {
+    return SymGetParentWindow(pHwnd)
 }
 
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]

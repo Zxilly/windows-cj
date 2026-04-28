@@ -6,7 +6,6 @@ package windows.Win32.System.ApplicationVerifier
 import std.collection.*
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 
@@ -537,9 +536,14 @@ public type AVRF_HANDLEOPERATION_ENUMERATE_CALLBACK = CFunc<(CPointer<AVRF_HANDL
 @When[Windows_Win32_System_ApplicationVerifier == "on"]
 public type AVRF_HEAPALLOCATION_ENUMERATE_CALLBACK = CFunc<(CPointer<AVRF_HEAP_ALLOCATIONAbi>, CPointer<Unit>, CPointer<UInt32>) -> UInt32>
 
-@When[VERIFIER == "on"]
+@When[Windows_Win32_System_ApplicationVerifier == "on" && VERIFIER == "on" && Windows_Win32_System_ApplicationVerifier_VerifierEnumerateResource == "on"]
 foreign {
     func VerifierEnumerateResource(Process: CPointer<Unit>, Flags: VERIFIER_ENUM_RESOURCE_FLAGSAbi, ResourceType: UInt32, ResourceCallback: AVRF_RESOURCE_ENUMERATE_CALLBACK, EnumerationContext: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_ApplicationVerifier == "on" && VERIFIER == "on" && Windows_Win32_System_ApplicationVerifier_VerifierEnumerateResource == "on"]
+public unsafe func Windows_VerifierEnumerateResource(Process: CPointer<Unit>, Flags: VERIFIER_ENUM_RESOURCE_FLAGSAbi, ResourceType: UInt32, ResourceCallback: AVRF_RESOURCE_ENUMERATE_CALLBACK, EnumerationContext: CPointer<Unit>): UInt32 {
+    return VerifierEnumerateResource(Process, Flags, ResourceType, ResourceCallback, EnumerationContext)
 }
 
 @When[Windows_Win32_System_ApplicationVerifier == "on"]

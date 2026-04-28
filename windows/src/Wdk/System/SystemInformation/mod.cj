@@ -90,12 +90,62 @@ extend SYSTEM_INFORMATION_CLASS <: windows_core.CopyType & windows_core.RuntimeT
     }
 }
 
-@When[NTDLL == "on"]
+@When[Windows_Wdk_System_SystemInformation == "on" && NTDLL == "on" && Windows_Wdk_System_SystemInformation_NtQuerySystemInformation == "on"]
 foreign {
     func NtQuerySystemInformation(SystemInformationClass: SYSTEM_INFORMATION_CLASSAbi, SystemInformation: CPointer<Unit>, SystemInformationLength: UInt32, ReturnLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Wdk_System_SystemInformation == "on" && NTDLL == "on" && Windows_Wdk_System_SystemInformation_NtQuerySystemInformation == "on"]
+public unsafe func Windows_NtQuerySystemInformation(SystemInformationClass: SYSTEM_INFORMATION_CLASSAbi, SystemInformation: CPointer<Unit>, SystemInformationLength: UInt32, ReturnLength: CPointer<UInt32>): Int32 {
+    return NtQuerySystemInformation(SystemInformationClass, SystemInformation, SystemInformationLength, ReturnLength)
+}
+
+@When[Windows_Wdk_System_SystemInformation == "on" && NTDLL == "on" && Windows_Wdk_System_SystemInformation_NtQuerySystemTime == "on"]
+foreign {
     func NtQuerySystemTime(SystemTime: CPointer<Int64>): Int32
+}
+
+@When[Windows_Wdk_System_SystemInformation == "on" && NTDLL == "on" && Windows_Wdk_System_SystemInformation_NtQuerySystemTime == "on"]
+public unsafe func Windows_NtQuerySystemTime(SystemTime: CPointer<Int64>): Int32 {
+    return NtQuerySystemTime(SystemTime)
+}
+
+@When[Windows_Wdk_System_SystemInformation == "on" && NTDLL == "on" && Windows_Wdk_System_SystemInformation_NtQueryTimerResolution == "on"]
+foreign {
     func NtQueryTimerResolution(MaximumTime: CPointer<UInt32>, MinimumTime: CPointer<UInt32>, CurrentTime: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Wdk_System_SystemInformation == "on" && NTDLL == "on" && Windows_Wdk_System_SystemInformation_NtQueryTimerResolution == "on"]
+public unsafe func Windows_NtQueryTimerResolution(MaximumTime: CPointer<UInt32>, MinimumTime: CPointer<UInt32>, CurrentTime: CPointer<UInt32>): Int32 {
+    return NtQueryTimerResolution(MaximumTime, MinimumTime, CurrentTime)
+}
+
+@When[Windows_Wdk_System_SystemInformation == "on" && NTDLL == "on" && Windows_Wdk_System_SystemInformation_ZwQuerySystemInformation == "on"]
+foreign {
     func ZwQuerySystemInformation(SystemInformationClass: SYSTEM_INFORMATION_CLASSAbi, SystemInformation: CPointer<Unit>, SystemInformationLength: UInt32, ReturnLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Wdk_System_SystemInformation == "on" && NTDLL == "on" && Windows_Wdk_System_SystemInformation_ZwQuerySystemInformation == "on"]
+public unsafe func Windows_ZwQuerySystemInformation(SystemInformationClass: SYSTEM_INFORMATION_CLASSAbi, SystemInformation: CPointer<Unit>, SystemInformationLength: UInt32, ReturnLength: CPointer<UInt32>): Int32 {
+    return ZwQuerySystemInformation(SystemInformationClass, SystemInformation, SystemInformationLength, ReturnLength)
+}
+
+@When[Windows_Wdk_System_SystemInformation == "on" && NTDLL == "on" && Windows_Wdk_System_SystemInformation_ZwQuerySystemTime == "on"]
+foreign {
     func ZwQuerySystemTime(SystemTime: CPointer<Int64>): Int32
+}
+
+@When[Windows_Wdk_System_SystemInformation == "on" && NTDLL == "on" && Windows_Wdk_System_SystemInformation_ZwQuerySystemTime == "on"]
+public unsafe func Windows_ZwQuerySystemTime(SystemTime: CPointer<Int64>): Int32 {
+    return ZwQuerySystemTime(SystemTime)
+}
+
+@When[Windows_Wdk_System_SystemInformation == "on" && NTDLL == "on" && Windows_Wdk_System_SystemInformation_ZwQueryTimerResolution == "on"]
+foreign {
     func ZwQueryTimerResolution(MaximumTime: CPointer<UInt32>, MinimumTime: CPointer<UInt32>, CurrentTime: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Wdk_System_SystemInformation == "on" && NTDLL == "on" && Windows_Wdk_System_SystemInformation_ZwQueryTimerResolution == "on"]
+public unsafe func Windows_ZwQueryTimerResolution(MaximumTime: CPointer<UInt32>, MinimumTime: CPointer<UInt32>, CurrentTime: CPointer<UInt32>): Int32 {
+    return ZwQueryTimerResolution(MaximumTime, MinimumTime, CurrentTime)
 }

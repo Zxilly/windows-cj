@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -22,8 +21,14 @@ public struct IPaymentAddressVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Country: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetCountry: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var AddressLines: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AddressLines: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SetAddressLines: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SetAddressLines: UIntNative = UIntNative(0)
     public var Region: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetRegion: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var City: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -128,6 +133,7 @@ public class IPaymentAddress <: InterfaceWrapperBase & ComInterface & RuntimeNam
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AddressLines(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -136,6 +142,7 @@ public class IPaymentAddress <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return windows_collections.IVectorView<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetAddressLines(value: windows_collections.IVectorView<windows_core.HString>): Unit {
         let v = vtbl()
         let hr = v.SetAddressLines(asRaw(), value.asRaw())
@@ -503,7 +510,10 @@ extend IPaymentMerchantInfo <: windows_core.Interface<IPaymentMerchantInfo> {}
 @C
 public struct IPaymentMethodDataVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedMethodIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedMethodIds: UIntNative = UIntNative(0)
     public var JsonData: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -573,6 +583,7 @@ public class IPaymentMethodData <: InterfaceWrapperBase & ComInterface & Runtime
         readVtbl<IPaymentMethodDataVtbl>(IPaymentMethodDataVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedMethodIds(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -860,10 +871,12 @@ public class PaymentAddress <: InterfaceWrapperBase & ComInterface & windows_int
         defaultInterface().SetCountry(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AddressLines(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().AddressLines()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetAddressLines(value: windows_collections.IVectorView<windows_core.HString>): Unit {
         defaultInterface().SetAddressLines(value)
     }
@@ -1880,12 +1893,30 @@ public struct IPaymentDetailsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Total: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetTotal: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var DisplayItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var DisplayItems: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SetDisplayItems: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SetDisplayItems: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var ShippingOptions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ShippingOptions: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SetShippingOptions: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SetShippingOptions: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Modifiers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Modifiers: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SetModifiers: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SetModifiers: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1968,6 +1999,7 @@ public class IPaymentDetails <: InterfaceWrapperBase & ComInterface & RuntimeNam
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DisplayItems(): windows_collections.IVectorView<PaymentItem> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1976,12 +2008,14 @@ public class IPaymentDetails <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return windows_collections.IVectorView<PaymentItem>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetDisplayItems(value: windows_collections.IVectorView<PaymentItem>): Unit {
         let v = vtbl()
         let hr = v.SetDisplayItems(asRaw(), value.asRaw())
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ShippingOptions(): windows_collections.IVectorView<PaymentShippingOption> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1990,12 +2024,14 @@ public class IPaymentDetails <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return windows_collections.IVectorView<PaymentShippingOption>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetShippingOptions(value: windows_collections.IVectorView<PaymentShippingOption>): Unit {
         let v = vtbl()
         let hr = v.SetShippingOptions(asRaw(), value.asRaw())
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Modifiers(): windows_collections.IVectorView<PaymentDetailsModifier> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2004,6 +2040,7 @@ public class IPaymentDetails <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return windows_collections.IVectorView<PaymentDetailsModifier>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetModifiers(value: windows_collections.IVectorView<PaymentDetailsModifier>): Unit {
         let v = vtbl()
         let hr = v.SetModifiers(asRaw(), value.asRaw())
@@ -2019,7 +2056,10 @@ extend IPaymentDetails <: windows_core.Interface<IPaymentDetails> {}
 public struct IPaymentDetailsFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateWithDisplayItems: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateWithDisplayItems: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2096,6 +2136,7 @@ public class IPaymentDetailsFactory <: InterfaceWrapperBase & ComInterface & Run
         return PaymentDetails.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateWithDisplayItems(total: PaymentItem, displayItems: windows_collections.IIterable<PaymentItem>): PaymentDetails {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2113,9 +2154,15 @@ extend IPaymentDetailsFactory <: windows_core.Interface<IPaymentDetailsFactory> 
 public struct IPaymentDetailsModifierVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var JsonData: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedMethodIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedMethodIds: UIntNative = UIntNative(0)
     public var Total: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var AdditionalDisplayItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AdditionalDisplayItems: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2192,6 +2239,7 @@ public class IPaymentDetailsModifier <: InterfaceWrapperBase & ComInterface & Ru
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedMethodIds(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2208,6 +2256,7 @@ public class IPaymentDetailsModifier <: InterfaceWrapperBase & ComInterface & Ru
         return PaymentItem.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AdditionalDisplayItems(): windows_collections.IVectorView<PaymentItem> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2224,9 +2273,18 @@ extend IPaymentDetailsModifier <: windows_core.Interface<IPaymentDetailsModifier
 @C
 public struct IPaymentDetailsModifierFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Create: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateWithAdditionalDisplayItems: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateWithAdditionalDisplayItems: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateWithAdditionalDisplayItemsAndJsonData: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateWithAdditionalDisplayItemsAndJsonData: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2295,6 +2353,7 @@ public class IPaymentDetailsModifierFactory <: InterfaceWrapperBase & ComInterfa
         readVtbl<IPaymentDetailsModifierFactoryVtbl>(IPaymentDetailsModifierFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create(supportedMethodIds: windows_collections.IIterable<windows_core.HString>, total: PaymentItem): PaymentDetailsModifier {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2303,6 +2362,7 @@ public class IPaymentDetailsModifierFactory <: InterfaceWrapperBase & ComInterfa
         return PaymentDetailsModifier.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateWithAdditionalDisplayItems(supportedMethodIds: windows_collections.IIterable<windows_core.HString>, total: PaymentItem, additionalDisplayItems: windows_collections.IIterable<PaymentItem>): PaymentDetailsModifier {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2311,6 +2371,7 @@ public class IPaymentDetailsModifierFactory <: InterfaceWrapperBase & ComInterfa
         return PaymentDetailsModifier.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateWithAdditionalDisplayItemsAndJsonData(supportedMethodIds: windows_collections.IIterable<windows_core.HString>, total: PaymentItem, additionalDisplayItems: windows_collections.IIterable<PaymentItem>, jsonData: windows_core.HString): PaymentDetailsModifier {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2536,7 +2597,10 @@ extend IPaymentItemFactory <: windows_core.Interface<IPaymentItemFactory> {}
 @C
 public struct IPaymentMediatorVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSupportedMethodIdsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetSupportedMethodIdsAsync: UIntNative = UIntNative(0)
     public var SubmitPaymentRequestAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var SubmitPaymentRequestWithChangeHandlerAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public init() {}
@@ -2607,6 +2671,7 @@ public class IPaymentMediator <: InterfaceWrapperBase & ComInterface & RuntimeNa
         readVtbl<IPaymentMediatorVtbl>(IPaymentMediatorVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSupportedMethodIdsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<windows_core.HString>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2809,8 +2874,14 @@ extend IPaymentMerchantInfoFactory <: windows_core.Interface<IPaymentMerchantInf
 @C
 public struct IPaymentMethodDataFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Create: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateWithJsonData: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateWithJsonData: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2879,6 +2950,7 @@ public class IPaymentMethodDataFactory <: InterfaceWrapperBase & ComInterface & 
         readVtbl<IPaymentMethodDataFactoryVtbl>(IPaymentMethodDataFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create(supportedMethodIds: windows_collections.IIterable<windows_core.HString>): PaymentMethodData {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2887,6 +2959,7 @@ public class IPaymentMethodDataFactory <: InterfaceWrapperBase & ComInterface & 
         return PaymentMethodData.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateWithJsonData(supportedMethodIds: windows_collections.IIterable<windows_core.HString>, jsonData: windows_core.HString): PaymentMethodData {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2905,7 +2978,10 @@ public struct IPaymentRequestVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var MerchantInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Details: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var MethodData: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var MethodData: UIntNative = UIntNative(0)
     public var Options: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -2991,6 +3067,7 @@ public class IPaymentRequest <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return PaymentDetails.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MethodData(): windows_collections.IVectorView<PaymentMethodData> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3343,9 +3420,18 @@ extend IPaymentRequestChangedResultFactory <: windows_core.Interface<IPaymentReq
 @C
 public struct IPaymentRequestFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Create: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateWithMerchantInfo: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateWithMerchantInfo: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateWithMerchantInfoAndOptions: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateWithMerchantInfoAndOptions: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3414,6 +3500,7 @@ public class IPaymentRequestFactory <: InterfaceWrapperBase & ComInterface & Run
         readVtbl<IPaymentRequestFactoryVtbl>(IPaymentRequestFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create(details: PaymentDetails, methodData: windows_collections.IIterable<PaymentMethodData>): PaymentRequest {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3422,6 +3509,7 @@ public class IPaymentRequestFactory <: InterfaceWrapperBase & ComInterface & Run
         return PaymentRequest.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateWithMerchantInfo(details: PaymentDetails, methodData: windows_collections.IIterable<PaymentMethodData>, merchantInfo: PaymentMerchantInfo): PaymentRequest {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3430,6 +3518,7 @@ public class IPaymentRequestFactory <: InterfaceWrapperBase & ComInterface & Run
         return PaymentRequest.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateWithMerchantInfoAndOptions(details: PaymentDetails, methodData: windows_collections.IIterable<PaymentMethodData>, merchantInfo: PaymentMerchantInfo, options: PaymentOptions): PaymentRequest {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3446,7 +3535,10 @@ extend IPaymentRequestFactory <: windows_core.Interface<IPaymentRequestFactory> 
 @C
 public struct IPaymentRequestFactory2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateWithMerchantInfoOptionsAndId: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateWithMerchantInfoOptionsAndId: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3515,6 +3607,7 @@ public class IPaymentRequestFactory2 <: InterfaceWrapperBase & ComInterface & Ru
         readVtbl<IPaymentRequestFactory2Vtbl>(IPaymentRequestFactory2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateWithMerchantInfoOptionsAndId(details: PaymentDetails, methodData: windows_collections.IIterable<PaymentMethodData>, merchantInfo: PaymentMerchantInfo, options: PaymentOptions, id: windows_core.HString): PaymentRequest {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4422,26 +4515,32 @@ public class PaymentDetails <: InterfaceWrapperBase & ComInterface & windows_int
         defaultInterface().SetTotal(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DisplayItems(): windows_collections.IVectorView<PaymentItem> {
         return defaultInterface().DisplayItems()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetDisplayItems(value: windows_collections.IVectorView<PaymentItem>): Unit {
         defaultInterface().SetDisplayItems(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ShippingOptions(): windows_collections.IVectorView<PaymentShippingOption> {
         return defaultInterface().ShippingOptions()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetShippingOptions(value: windows_collections.IVectorView<PaymentShippingOption>): Unit {
         defaultInterface().SetShippingOptions(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Modifiers(): windows_collections.IVectorView<PaymentDetailsModifier> {
         return defaultInterface().Modifiers()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetModifiers(value: windows_collections.IVectorView<PaymentDetailsModifier>): Unit {
         defaultInterface().SetModifiers(value)
     }
@@ -4457,6 +4556,7 @@ public class PaymentDetails <: InterfaceWrapperBase & ComInterface & windows_int
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateWithDisplayItems(total: PaymentItem, displayItems: windows_collections.IIterable<PaymentItem>): PaymentDetails {
         var result__: Option<PaymentDetails> = Option<PaymentDetails>.None
         try (factory__ = windows_core.factory<PaymentDetails, IPaymentDetailsFactory>().unwrap()) {
@@ -4560,6 +4660,7 @@ public class PaymentDetailsModifier <: InterfaceWrapperBase & ComInterface & win
         return defaultInterface().JsonData()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedMethodIds(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().SupportedMethodIds()
     }
@@ -4568,10 +4669,12 @@ public class PaymentDetailsModifier <: InterfaceWrapperBase & ComInterface & win
         return defaultInterface().Total()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AdditionalDisplayItems(): windows_collections.IVectorView<PaymentItem> {
         return defaultInterface().AdditionalDisplayItems()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Create(supportedMethodIds: windows_collections.IIterable<windows_core.HString>, total: PaymentItem): PaymentDetailsModifier {
         var result__: Option<PaymentDetailsModifier> = Option<PaymentDetailsModifier>.None
         try (factory__ = windows_core.factory<PaymentDetailsModifier, IPaymentDetailsModifierFactory>().unwrap()) {
@@ -4583,6 +4686,7 @@ public class PaymentDetailsModifier <: InterfaceWrapperBase & ComInterface & win
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateWithAdditionalDisplayItems(supportedMethodIds: windows_collections.IIterable<windows_core.HString>, total: PaymentItem, additionalDisplayItems: windows_collections.IIterable<PaymentItem>): PaymentDetailsModifier {
         var result__: Option<PaymentDetailsModifier> = Option<PaymentDetailsModifier>.None
         try (factory__ = windows_core.factory<PaymentDetailsModifier, IPaymentDetailsModifierFactory>().unwrap()) {
@@ -4594,6 +4698,7 @@ public class PaymentDetailsModifier <: InterfaceWrapperBase & ComInterface & win
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateWithAdditionalDisplayItemsAndJsonData(supportedMethodIds: windows_collections.IIterable<windows_core.HString>, total: PaymentItem, additionalDisplayItems: windows_collections.IIterable<PaymentItem>, jsonData: windows_core.HString): PaymentDetailsModifier {
         var result__: Option<PaymentDetailsModifier> = Option<PaymentDetailsModifier>.None
         try (factory__ = windows_core.factory<PaymentDetailsModifier, IPaymentDetailsModifierFactory>().unwrap()) {
@@ -4827,6 +4932,7 @@ public class PaymentMediator <: InterfaceWrapperBase & ComInterface & windows_in
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSupportedMethodIdsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<windows_core.HString>> {
         return defaultInterface().GetSupportedMethodIdsAsync()
     }
@@ -5045,6 +5151,7 @@ public class PaymentMethodData <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedMethodIds(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().SupportedMethodIds()
     }
@@ -5053,6 +5160,7 @@ public class PaymentMethodData <: InterfaceWrapperBase & ComInterface & windows_
         return defaultInterface().JsonData()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Create(supportedMethodIds: windows_collections.IIterable<windows_core.HString>): PaymentMethodData {
         var result__: Option<PaymentMethodData> = Option<PaymentMethodData>.None
         try (factory__ = windows_core.factory<PaymentMethodData, IPaymentMethodDataFactory>().unwrap()) {
@@ -5064,6 +5172,7 @@ public class PaymentMethodData <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateWithJsonData(supportedMethodIds: windows_collections.IIterable<windows_core.HString>, jsonData: windows_core.HString): PaymentMethodData {
         var result__: Option<PaymentMethodData> = Option<PaymentMethodData>.None
         try (factory__ = windows_core.factory<PaymentMethodData, IPaymentMethodDataFactory>().unwrap()) {
@@ -5171,6 +5280,7 @@ public class PaymentRequest <: InterfaceWrapperBase & ComInterface & windows_int
         return defaultInterface().Details()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MethodData(): windows_collections.IVectorView<PaymentMethodData> {
         return defaultInterface().MethodData()
     }
@@ -5179,6 +5289,7 @@ public class PaymentRequest <: InterfaceWrapperBase & ComInterface & windows_int
         return defaultInterface().Options()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateWithMerchantInfoOptionsAndId(details: PaymentDetails, methodData: windows_collections.IIterable<PaymentMethodData>, merchantInfo: PaymentMerchantInfo, options: PaymentOptions, id: windows_core.HString): PaymentRequest {
         var result__: Option<PaymentRequest> = Option<PaymentRequest>.None
         try (factory__ = windows_core.factory<PaymentRequest, IPaymentRequestFactory2>().unwrap()) {
@@ -5190,6 +5301,7 @@ public class PaymentRequest <: InterfaceWrapperBase & ComInterface & windows_int
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Create(details: PaymentDetails, methodData: windows_collections.IIterable<PaymentMethodData>): PaymentRequest {
         var result__: Option<PaymentRequest> = Option<PaymentRequest>.None
         try (factory__ = windows_core.factory<PaymentRequest, IPaymentRequestFactory>().unwrap()) {
@@ -5201,6 +5313,7 @@ public class PaymentRequest <: InterfaceWrapperBase & ComInterface & windows_int
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateWithMerchantInfo(details: PaymentDetails, methodData: windows_collections.IIterable<PaymentMethodData>, merchantInfo: PaymentMerchantInfo): PaymentRequest {
         var result__: Option<PaymentRequest> = Option<PaymentRequest>.None
         try (factory__ = windows_core.factory<PaymentRequest, IPaymentRequestFactory>().unwrap()) {
@@ -5212,6 +5325,7 @@ public class PaymentRequest <: InterfaceWrapperBase & ComInterface & windows_int
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateWithMerchantInfoAndOptions(details: PaymentDetails, methodData: windows_collections.IIterable<PaymentMethodData>, merchantInfo: PaymentMerchantInfo, options: PaymentOptions): PaymentRequest {
         var result__: Option<PaymentRequest> = Option<PaymentRequest>.None
         try (factory__ = windows_core.factory<PaymentRequest, IPaymentRequestFactory>().unwrap()) {
@@ -5422,12 +5536,14 @@ public class PaymentRequestChangedHandler <: InterfaceWrapperBase & ComInterface
 @When[Windows_ApplicationModel_Payments == "on"]
 extend PaymentRequestChangedHandler <: windows_core.Interface<PaymentRequestChangedHandler> {}
 
+@When[Windows_ApplicationModel_Payments == "on"]
 private open class PaymentRequestChangedHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_ApplicationModel_Payments == "on"]
 private open class PaymentRequestChangedHandlerInvoker <: PaymentRequestChangedHandlerInvokerErased {
     public open func Invoke(paymentRequest: InParam<PaymentRequest>, args: InParam<PaymentRequestChangedArgs>): Unit {
         ()
@@ -5439,6 +5555,7 @@ private open class PaymentRequestChangedHandlerInvoker <: PaymentRequestChangedH
     }
 }
 
+@When[Windows_ApplicationModel_Payments == "on"]
 private class PaymentRequestChangedHandlerBox <: PaymentRequestChangedHandlerInvoker {
     public let invoke_: (InParam<PaymentRequest>, InParam<PaymentRequestChangedArgs>) -> Unit
     private let vtblHandle: CPointerHandle<PaymentRequestChangedHandlerVtbl>
@@ -5457,6 +5574,7 @@ private class PaymentRequestChangedHandlerBox <: PaymentRequestChangedHandlerInv
     }
 }
 
+@When[Windows_ApplicationModel_Payments == "on"]
 func buildPaymentRequestChangedHandlerBoxVtbl(): PaymentRequestChangedHandlerVtbl {
     var vtbl = PaymentRequestChangedHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()

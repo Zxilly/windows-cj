@@ -4,7 +4,6 @@ package windows_sys.Media._impl_l0
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_UI == "on"]
 import windows_sys.UI as UI
 
 
@@ -18,6 +17,7 @@ public struct IBackgroundAudioTrackVtbl {
     public var SetTrimTimeFromEnd: CFunc<(CPointer<Unit>, Foundation__impl_l0.TimeSpan) -> Int32> = { _, _ => 0 }
     public var OriginalDuration: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.TimeSpan>) -> Int32> = { _, _ => 0 }
     public var TrimmedDuration: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.TimeSpan>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var UserData: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetDelay: CFunc<(CPointer<Unit>, Foundation__impl_l0.TimeSpan) -> Int32> = { _, _ => 0 }
     public var Delay: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.TimeSpan>) -> Int32> = { _, _ => 0 }
@@ -26,7 +26,7 @@ public struct IBackgroundAudioTrackVtbl {
     public var Clone: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Media_MediaProperties == "on"]
     public var GetAudioEncodingProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Media_Effects == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on"]
     public var AudioEffectDefinitions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -107,6 +107,7 @@ public class IBackgroundAudioTrack <: InterfaceWrapperBase & ComInterface {
         return __vt.TrimmedDuration(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UserData(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -150,7 +151,7 @@ public class IBackgroundAudioTrack <: InterfaceWrapperBase & ComInterface {
         return __vt.GetAudioEncodingProperties(__liveRaw, result__)
     }
 
-    @When[Windows_Media_Effects == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on"]
     public unsafe func AudioEffectDefinitions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -289,10 +290,12 @@ public struct IMediaClipVtbl {
     public var SetTrimTimeFromEnd: CFunc<(CPointer<Unit>, Foundation__impl_l0.TimeSpan) -> Int32> = { _, _ => 0 }
     public var OriginalDuration: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.TimeSpan>) -> Int32> = { _, _ => 0 }
     public var TrimmedDuration: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.TimeSpan>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var UserData: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Clone: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var StartTimeInComposition: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.TimeSpan>) -> Int32> = { _, _ => 0 }
     public var EndTimeInComposition: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.TimeSpan>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var EmbeddedAudioTracks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SelectedEmbeddedAudioTrackIndex: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var SetSelectedEmbeddedAudioTrackIndex: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
@@ -300,9 +303,9 @@ public struct IMediaClipVtbl {
     public var Volume: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => 0 }
     @When[Windows_Media_MediaProperties == "on"]
     public var GetVideoEncodingProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Media_Effects == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on"]
     public var AudioEffectDefinitions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Media_Effects == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on"]
     public var VideoEffectDefinitions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -383,6 +386,7 @@ public class IMediaClip <: InterfaceWrapperBase & ComInterface {
         return __vt.TrimmedDuration(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UserData(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -407,6 +411,7 @@ public class IMediaClip <: InterfaceWrapperBase & ComInterface {
         return __vt.EndTimeInComposition(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func EmbeddedAudioTracks(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -444,14 +449,14 @@ public class IMediaClip <: InterfaceWrapperBase & ComInterface {
         return __vt.GetVideoEncodingProperties(__liveRaw, result__)
     }
 
-    @When[Windows_Media_Effects == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on"]
     public unsafe func AudioEffectDefinitions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AudioEffectDefinitions(__liveRaw, result__)
     }
 
-    @When[Windows_Media_Effects == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Effects == "on"]
     public unsafe func VideoEffectDefinitions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -596,15 +601,18 @@ public class IMediaClipStatics2 <: InterfaceWrapperBase & ComInterface {
 public struct IMediaCompositionVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Duration: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.TimeSpan>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Clips: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var BackgroundAudioTracks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var UserData: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Clone: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Storage == "on"]
     public var SaveAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
-    @When[Windows_Graphics_Imaging == "on"]
+    @When[Windows_Graphics_Imaging == "on" && Windows_Storage_Streams == "on"]
     public var GetThumbnailAsync: CFunc<(CPointer<Unit>, Foundation__impl_l0.TimeSpan, Int32, Int32, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
-    @When[Windows_Graphics_Imaging == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_Imaging == "on" && Windows_Storage_Streams == "on"]
     public var GetThumbnailsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, Int32, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Media_Transcoding == "on" && Windows_Storage == "on"]
     public var RenderToFileAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -669,18 +677,21 @@ public class IMediaComposition <: InterfaceWrapperBase & ComInterface {
         return __vt.Duration(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Clips(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Clips(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func BackgroundAudioTracks(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.BackgroundAudioTracks(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UserData(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -700,14 +711,14 @@ public class IMediaComposition <: InterfaceWrapperBase & ComInterface {
         return __vt.SaveAsync(__liveRaw, file, result__)
     }
 
-    @When[Windows_Graphics_Imaging == "on"]
+    @When[Windows_Graphics_Imaging == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetThumbnailAsync(timeFromStart: Foundation__impl_l0.TimeSpan, scaledWidth: Int32, scaledHeight: Int32, framePrecision: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetThumbnailAsync(__liveRaw, timeFromStart, scaledWidth, scaledHeight, framePrecision, result__)
     }
 
-    @When[Windows_Graphics_Imaging == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_Imaging == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetThumbnailsAsync(timesFromStart: CPointer<Unit>, scaledWidth: Int32, scaledHeight: Int32, framePrecision: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -768,6 +779,7 @@ public class IMediaComposition <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IMediaComposition2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var OverlayLayers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -812,6 +824,7 @@ public class IMediaComposition2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IMediaComposition2Vtbl>(IMediaComposition2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OverlayLayers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -823,7 +836,7 @@ public class IMediaComposition2 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IMediaCompositionStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var LoadAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -868,7 +881,7 @@ public class IMediaCompositionStatics <: InterfaceWrapperBase & ComInterface {
         readVtbl<IMediaCompositionStaticsVtbl>(IMediaCompositionStaticsVtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func LoadAsync(file: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1061,6 +1074,7 @@ public class IMediaOverlayFactory <: InterfaceWrapperBase & ComInterface {
 public struct IMediaOverlayLayerVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Clone: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Overlays: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Media_Effects == "on"]
     public var CustomCompositorDefinition: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -1113,6 +1127,7 @@ public class IMediaOverlayLayer <: InterfaceWrapperBase & ComInterface {
         return __vt.Clone(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Overlays(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

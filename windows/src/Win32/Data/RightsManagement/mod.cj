@@ -6,7 +6,6 @@ package windows.Win32.Data.RightsManagement
 import std.collection.*
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 
@@ -795,86 +794,509 @@ extend DRMBOUNDLICENSEPARAMS <: windows_core.CopyType & windows_core.RuntimeType
 @When[Windows_Win32_Data_RightsManagement == "on"]
 public type DRMCALLBACK = CFunc<(DRM_STATUS_MSGAbi, Int32, CPointer<Unit>, CPointer<Unit>) -> Int32>
 
-@When[MSDRM == "on"]
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMAcquireAdvisories == "on"]
 foreign {
     // param-hint: wszURL optional
     func DRMAcquireAdvisories(hLicenseStorage: UInt32, wszLicense: CPointer<UInt16>, wszURL: CPointer<UInt16>, pvContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMAcquireAdvisories == "on"]
+public unsafe func Windows_DRMAcquireAdvisories(hLicenseStorage: UInt32, wszLicense: CPointer<UInt16>, wszURL: CPointer<UInt16>, pvContext: CPointer<Unit>): Int32 {
+    return DRMAcquireAdvisories(hLicenseStorage, wszLicense, wszURL, pvContext)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMAcquireIssuanceLicenseTemplate == "on"]
+foreign {
     // param-hint: pwszTemplateIds len=param[3] optional
     func DRMAcquireIssuanceLicenseTemplate(hClient: UInt32, uFlags: UInt32, pvReserved: CPointer<Unit>, cTemplates: UInt32, pwszTemplateIds: CPointer<CPointer<UInt16>>, wszUrl: CPointer<UInt16>, pvContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMAcquireIssuanceLicenseTemplate == "on"]
+public unsafe func Windows_DRMAcquireIssuanceLicenseTemplate(hClient: UInt32, uFlags: UInt32, pvReserved: CPointer<Unit>, cTemplates: UInt32, pwszTemplateIds: CPointer<CPointer<UInt16>>, wszUrl: CPointer<UInt16>, pvContext: CPointer<Unit>): Int32 {
+    return DRMAcquireIssuanceLicenseTemplate(hClient, uFlags, pvReserved, cTemplates, pwszTemplateIds, wszUrl, pvContext)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMAcquireLicense == "on"]
+foreign {
     // param-hint: wszGroupIdentityCredential optional
     // param-hint: wszRequestedRights optional
     // param-hint: wszCustomData optional
     // param-hint: wszURL optional
     func DRMAcquireLicense(hSession: UInt32, uFlags: UInt32, wszGroupIdentityCredential: CPointer<UInt16>, wszRequestedRights: CPointer<UInt16>, wszCustomData: CPointer<UInt16>, wszURL: CPointer<UInt16>, pvContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMAcquireLicense == "on"]
+public unsafe func Windows_DRMAcquireLicense(hSession: UInt32, uFlags: UInt32, wszGroupIdentityCredential: CPointer<UInt16>, wszRequestedRights: CPointer<UInt16>, wszCustomData: CPointer<UInt16>, wszURL: CPointer<UInt16>, pvContext: CPointer<Unit>): Int32 {
+    return DRMAcquireLicense(hSession, uFlags, wszGroupIdentityCredential, wszRequestedRights, wszCustomData, wszURL, pvContext)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMActivate == "on"]
+foreign {
     func DRMActivate(hClient: UInt32, uFlags: UInt32, uLangID: UInt32, pActServInfo: CPointer<DRM_ACTSERV_INFOAbi>, pvContext: CPointer<Unit>, hParentWnd: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMActivate == "on"]
+public unsafe func Windows_DRMActivate(hClient: UInt32, uFlags: UInt32, uLangID: UInt32, pActServInfo: CPointer<DRM_ACTSERV_INFOAbi>, pvContext: CPointer<Unit>, hParentWnd: CPointer<Unit>): Int32 {
+    return DRMActivate(hClient, uFlags, uLangID, pActServInfo, pvContext, hParentWnd)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMAddLicense == "on"]
+foreign {
     func DRMAddLicense(hLicenseStorage: UInt32, uFlags: UInt32, wszLicense: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMAddLicense == "on"]
+public unsafe func Windows_DRMAddLicense(hLicenseStorage: UInt32, uFlags: UInt32, wszLicense: CPointer<UInt16>): Int32 {
+    return DRMAddLicense(hLicenseStorage, uFlags, wszLicense)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMAddRightWithUser == "on"]
+foreign {
     func DRMAddRightWithUser(hIssuanceLicense: UInt32, hRight: UInt32, hUser: UInt32): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMAddRightWithUser == "on"]
+public unsafe func Windows_DRMAddRightWithUser(hIssuanceLicense: UInt32, hRight: UInt32, hUser: UInt32): Int32 {
+    return DRMAddRightWithUser(hIssuanceLicense, hRight, hUser)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMAttest == "on"]
+foreign {
     // param-hint: wszAttestedBlob len=param[3]
     func DRMAttest(hEnablingPrincipal: UInt32, wszData: CPointer<UInt16>, eType: DRMATTESTTYPEAbi, pcAttestedBlob: CPointer<UInt32>, wszAttestedBlob: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMAttest == "on"]
+public unsafe func Windows_DRMAttest(hEnablingPrincipal: UInt32, wszData: CPointer<UInt16>, eType: DRMATTESTTYPEAbi, pcAttestedBlob: CPointer<UInt32>, wszAttestedBlob: CPointer<UInt16>): Int32 {
+    return DRMAttest(hEnablingPrincipal, wszData, eType, pcAttestedBlob, wszAttestedBlob)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMCheckSecurity == "on"]
+foreign {
     func DRMCheckSecurity(hEnv: UInt32, cLevel: UInt32): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMCheckSecurity == "on"]
+public unsafe func Windows_DRMCheckSecurity(hEnv: UInt32, cLevel: UInt32): Int32 {
+    return DRMCheckSecurity(hEnv, cLevel)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMClearAllRights == "on"]
+foreign {
     func DRMClearAllRights(hIssuanceLicense: UInt32): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMClearAllRights == "on"]
+public unsafe func Windows_DRMClearAllRights(hIssuanceLicense: UInt32): Int32 {
+    return DRMClearAllRights(hIssuanceLicense)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMCloseEnvironmentHandle == "on"]
+foreign {
     func DRMCloseEnvironmentHandle(hEnv: UInt32): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMCloseEnvironmentHandle == "on"]
+public unsafe func Windows_DRMCloseEnvironmentHandle(hEnv: UInt32): Int32 {
+    return DRMCloseEnvironmentHandle(hEnv)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMCloseHandle == "on"]
+foreign {
     func DRMCloseHandle(handle: UInt32): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMCloseHandle == "on"]
+public unsafe func Windows_DRMCloseHandle(handle: UInt32): Int32 {
+    return DRMCloseHandle(handle)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMClosePubHandle == "on"]
+foreign {
     func DRMClosePubHandle(hPub: UInt32): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMClosePubHandle == "on"]
+public unsafe func Windows_DRMClosePubHandle(hPub: UInt32): Int32 {
+    return DRMClosePubHandle(hPub)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMCloseQueryHandle == "on"]
+foreign {
     func DRMCloseQueryHandle(hQuery: UInt32): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMCloseQueryHandle == "on"]
+public unsafe func Windows_DRMCloseQueryHandle(hQuery: UInt32): Int32 {
+    return DRMCloseQueryHandle(hQuery)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMCloseSession == "on"]
+foreign {
     func DRMCloseSession(hSession: UInt32): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMCloseSession == "on"]
+public unsafe func Windows_DRMCloseSession(hSession: UInt32): Int32 {
+    return DRMCloseSession(hSession)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMConstructCertificateChain == "on"]
+foreign {
     // param-hint: rgwszCertificates len=param[0]
     // param-hint: wszChain len=param[2] optional
     func DRMConstructCertificateChain(cCertificates: UInt32, rgwszCertificates: CPointer<CPointer<UInt16>>, pcChain: CPointer<UInt32>, wszChain: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMConstructCertificateChain == "on"]
+public unsafe func Windows_DRMConstructCertificateChain(cCertificates: UInt32, rgwszCertificates: CPointer<CPointer<UInt16>>, pcChain: CPointer<UInt32>, wszChain: CPointer<UInt16>): Int32 {
+    return DRMConstructCertificateChain(cCertificates, rgwszCertificates, pcChain, wszChain)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMCreateBoundLicense == "on"]
+foreign {
     func DRMCreateBoundLicense(hEnv: UInt32, pParams: CPointer<DRMBOUNDLICENSEPARAMSAbi>, wszLicenseChain: CPointer<UInt16>, phBoundLicense: CPointer<UInt32>, phErrorLog: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMCreateBoundLicense == "on"]
+public unsafe func Windows_DRMCreateBoundLicense(hEnv: UInt32, pParams: CPointer<DRMBOUNDLICENSEPARAMSAbi>, wszLicenseChain: CPointer<UInt16>, phBoundLicense: CPointer<UInt32>, phErrorLog: CPointer<UInt32>): Int32 {
+    return DRMCreateBoundLicense(hEnv, pParams, wszLicenseChain, phBoundLicense, phErrorLog)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMCreateClientSession == "on"]
+foreign {
     // param-hint: wszGroupID optional
     func DRMCreateClientSession(pfnCallback: DRMCALLBACK, uCallbackVersion: UInt32, wszGroupIDProviderType: CPointer<UInt16>, wszGroupID: CPointer<UInt16>, phClient: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMCreateClientSession == "on"]
+public unsafe func Windows_DRMCreateClientSession(pfnCallback: DRMCALLBACK, uCallbackVersion: UInt32, wszGroupIDProviderType: CPointer<UInt16>, wszGroupID: CPointer<UInt16>, phClient: CPointer<UInt32>): Int32 {
+    return DRMCreateClientSession(pfnCallback, uCallbackVersion, wszGroupIDProviderType, wszGroupID, phClient)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMCreateEnablingBitsDecryptor == "on"]
+foreign {
     // param-hint: wszRight optional
     // param-hint: wszAuxPlug optional
     func DRMCreateEnablingBitsDecryptor(hBoundLicense: UInt32, wszRight: CPointer<UInt16>, hAuxLib: UInt32, wszAuxPlug: CPointer<UInt16>, phDecryptor: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMCreateEnablingBitsDecryptor == "on"]
+public unsafe func Windows_DRMCreateEnablingBitsDecryptor(hBoundLicense: UInt32, wszRight: CPointer<UInt16>, hAuxLib: UInt32, wszAuxPlug: CPointer<UInt16>, phDecryptor: CPointer<UInt32>): Int32 {
+    return DRMCreateEnablingBitsDecryptor(hBoundLicense, wszRight, hAuxLib, wszAuxPlug, phDecryptor)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMCreateEnablingBitsEncryptor == "on"]
+foreign {
     // param-hint: wszRight optional
     // param-hint: wszAuxPlug optional
     func DRMCreateEnablingBitsEncryptor(hBoundLicense: UInt32, wszRight: CPointer<UInt16>, hAuxLib: UInt32, wszAuxPlug: CPointer<UInt16>, phEncryptor: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMCreateEnablingBitsEncryptor == "on"]
+public unsafe func Windows_DRMCreateEnablingBitsEncryptor(hBoundLicense: UInt32, wszRight: CPointer<UInt16>, hAuxLib: UInt32, wszAuxPlug: CPointer<UInt16>, phEncryptor: CPointer<UInt32>): Int32 {
+    return DRMCreateEnablingBitsEncryptor(hBoundLicense, wszRight, hAuxLib, wszAuxPlug, phEncryptor)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMCreateEnablingPrincipal == "on"]
+foreign {
     func DRMCreateEnablingPrincipal(hEnv: UInt32, hLibrary: UInt32, wszObject: CPointer<UInt16>, pidPrincipal: CPointer<DRMIDAbi>, wszCredentials: CPointer<UInt16>, phEnablingPrincipal: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMCreateEnablingPrincipal == "on"]
+public unsafe func Windows_DRMCreateEnablingPrincipal(hEnv: UInt32, hLibrary: UInt32, wszObject: CPointer<UInt16>, pidPrincipal: CPointer<DRMIDAbi>, wszCredentials: CPointer<UInt16>, phEnablingPrincipal: CPointer<UInt32>): Int32 {
+    return DRMCreateEnablingPrincipal(hEnv, hLibrary, wszObject, pidPrincipal, wszCredentials, phEnablingPrincipal)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMCreateIssuanceLicense == "on"]
+foreign {
     // param-hint: wszReferralInfoName optional
     // param-hint: wszReferralInfoURL optional
     // param-hint: wszIssuanceLicense optional
     func DRMCreateIssuanceLicense(pstTimeFrom: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, pstTimeUntil: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, wszReferralInfoName: CPointer<UInt16>, wszReferralInfoURL: CPointer<UInt16>, hOwner: UInt32, wszIssuanceLicense: CPointer<UInt16>, hBoundLicense: UInt32, phIssuanceLicense: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMCreateIssuanceLicense == "on"]
+public unsafe func Windows_DRMCreateIssuanceLicense(pstTimeFrom: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, pstTimeUntil: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, wszReferralInfoName: CPointer<UInt16>, wszReferralInfoURL: CPointer<UInt16>, hOwner: UInt32, wszIssuanceLicense: CPointer<UInt16>, hBoundLicense: UInt32, phIssuanceLicense: CPointer<UInt32>): Int32 {
+    return DRMCreateIssuanceLicense(pstTimeFrom, pstTimeUntil, wszReferralInfoName, wszReferralInfoURL, hOwner, wszIssuanceLicense, hBoundLicense, phIssuanceLicense)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMCreateLicenseStorageSession == "on"]
+foreign {
     func DRMCreateLicenseStorageSession(hEnv: UInt32, hDefaultLibrary: UInt32, hClient: UInt32, uFlags: UInt32, wszIssuanceLicense: CPointer<UInt16>, phLicenseStorage: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMCreateLicenseStorageSession == "on"]
+public unsafe func Windows_DRMCreateLicenseStorageSession(hEnv: UInt32, hDefaultLibrary: UInt32, hClient: UInt32, uFlags: UInt32, wszIssuanceLicense: CPointer<UInt16>, phLicenseStorage: CPointer<UInt32>): Int32 {
+    return DRMCreateLicenseStorageSession(hEnv, hDefaultLibrary, hClient, uFlags, wszIssuanceLicense, phLicenseStorage)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMCreateRight == "on"]
+foreign {
     // param-hint: pwszExtendedInfoName len=param[3] optional
     // param-hint: pwszExtendedInfoValue len=param[3] optional
     func DRMCreateRight(wszRightName: CPointer<UInt16>, pstFrom: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, pstUntil: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, cExtendedInfo: UInt32, pwszExtendedInfoName: CPointer<CPointer<UInt16>>, pwszExtendedInfoValue: CPointer<CPointer<UInt16>>, phRight: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMCreateRight == "on"]
+public unsafe func Windows_DRMCreateRight(wszRightName: CPointer<UInt16>, pstFrom: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, pstUntil: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, cExtendedInfo: UInt32, pwszExtendedInfoName: CPointer<CPointer<UInt16>>, pwszExtendedInfoValue: CPointer<CPointer<UInt16>>, phRight: CPointer<UInt32>): Int32 {
+    return DRMCreateRight(wszRightName, pstFrom, pstUntil, cExtendedInfo, pwszExtendedInfoName, pwszExtendedInfoValue, phRight)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMCreateUser == "on"]
+foreign {
     // param-hint: wszUserName optional
     // param-hint: wszUserId optional
     // param-hint: wszUserIdType optional
     func DRMCreateUser(wszUserName: CPointer<UInt16>, wszUserId: CPointer<UInt16>, wszUserIdType: CPointer<UInt16>, phUser: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMCreateUser == "on"]
+public unsafe func Windows_DRMCreateUser(wszUserName: CPointer<UInt16>, wszUserId: CPointer<UInt16>, wszUserIdType: CPointer<UInt16>, phUser: CPointer<UInt32>): Int32 {
+    return DRMCreateUser(wszUserName, wszUserId, wszUserIdType, phUser)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMDecode == "on"]
+foreign {
     func DRMDecode(wszAlgID: CPointer<UInt16>, wszEncodedString: CPointer<UInt16>, puDecodedDataLen: CPointer<UInt32>, pbDecodedData: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMDecode == "on"]
+public unsafe func Windows_DRMDecode(wszAlgID: CPointer<UInt16>, wszEncodedString: CPointer<UInt16>, puDecodedDataLen: CPointer<UInt32>, pbDecodedData: CPointer<UInt8>): Int32 {
+    return DRMDecode(wszAlgID, wszEncodedString, puDecodedDataLen, pbDecodedData)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMDeconstructCertificateChain == "on"]
+foreign {
     // param-hint: wszCert len=param[2] optional
     func DRMDeconstructCertificateChain(wszChain: CPointer<UInt16>, iWhich: UInt32, pcCert: CPointer<UInt32>, wszCert: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMDeconstructCertificateChain == "on"]
+public unsafe func Windows_DRMDeconstructCertificateChain(wszChain: CPointer<UInt16>, iWhich: UInt32, pcCert: CPointer<UInt32>, wszCert: CPointer<UInt16>): Int32 {
+    return DRMDeconstructCertificateChain(wszChain, iWhich, pcCert, wszCert)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMDecrypt == "on"]
+foreign {
     func DRMDecrypt(hCryptoProvider: UInt32, iPosition: UInt32, cNumInBytes: UInt32, pbInData: CPointer<UInt8>, pcNumOutBytes: CPointer<UInt32>, pbOutData: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMDecrypt == "on"]
+public unsafe func Windows_DRMDecrypt(hCryptoProvider: UInt32, iPosition: UInt32, cNumInBytes: UInt32, pbInData: CPointer<UInt8>, pcNumOutBytes: CPointer<UInt32>, pbOutData: CPointer<UInt8>): Int32 {
+    return DRMDecrypt(hCryptoProvider, iPosition, cNumInBytes, pbInData, pcNumOutBytes, pbOutData)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMDeleteLicense == "on"]
+foreign {
     func DRMDeleteLicense(hSession: UInt32, wszLicenseId: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMDeleteLicense == "on"]
+public unsafe func Windows_DRMDeleteLicense(hSession: UInt32, wszLicenseId: CPointer<UInt16>): Int32 {
+    return DRMDeleteLicense(hSession, wszLicenseId)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMDuplicateEnvironmentHandle == "on"]
+foreign {
     func DRMDuplicateEnvironmentHandle(hToCopy: UInt32, phCopy: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMDuplicateEnvironmentHandle == "on"]
+public unsafe func Windows_DRMDuplicateEnvironmentHandle(hToCopy: UInt32, phCopy: CPointer<UInt32>): Int32 {
+    return DRMDuplicateEnvironmentHandle(hToCopy, phCopy)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMDuplicateHandle == "on"]
+foreign {
     func DRMDuplicateHandle(hToCopy: UInt32, phCopy: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMDuplicateHandle == "on"]
+public unsafe func Windows_DRMDuplicateHandle(hToCopy: UInt32, phCopy: CPointer<UInt32>): Int32 {
+    return DRMDuplicateHandle(hToCopy, phCopy)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMDuplicatePubHandle == "on"]
+foreign {
     func DRMDuplicatePubHandle(hPubIn: UInt32, phPubOut: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMDuplicatePubHandle == "on"]
+public unsafe func Windows_DRMDuplicatePubHandle(hPubIn: UInt32, phPubOut: CPointer<UInt32>): Int32 {
+    return DRMDuplicatePubHandle(hPubIn, phPubOut)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMDuplicateSession == "on"]
+foreign {
     func DRMDuplicateSession(hSessionIn: UInt32, phSessionOut: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMDuplicateSession == "on"]
+public unsafe func Windows_DRMDuplicateSession(hSessionIn: UInt32, phSessionOut: CPointer<UInt32>): Int32 {
+    return DRMDuplicateSession(hSessionIn, phSessionOut)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMEncode == "on"]
+foreign {
     // param-hint: wszEncodedString len=param[3] optional
     func DRMEncode(wszAlgID: CPointer<UInt16>, uDataLen: UInt32, pbDecodedData: CPointer<UInt8>, puEncodedStringLen: CPointer<UInt32>, wszEncodedString: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMEncode == "on"]
+public unsafe func Windows_DRMEncode(wszAlgID: CPointer<UInt16>, uDataLen: UInt32, pbDecodedData: CPointer<UInt8>, puEncodedStringLen: CPointer<UInt32>, wszEncodedString: CPointer<UInt16>): Int32 {
+    return DRMEncode(wszAlgID, uDataLen, pbDecodedData, puEncodedStringLen, wszEncodedString)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMEncrypt == "on"]
+foreign {
     func DRMEncrypt(hCryptoProvider: UInt32, iPosition: UInt32, cNumInBytes: UInt32, pbInData: CPointer<UInt8>, pcNumOutBytes: CPointer<UInt32>, pbOutData: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMEncrypt == "on"]
+public unsafe func Windows_DRMEncrypt(hCryptoProvider: UInt32, iPosition: UInt32, cNumInBytes: UInt32, pbInData: CPointer<UInt8>, pcNumOutBytes: CPointer<UInt32>, pbOutData: CPointer<UInt8>): Int32 {
+    return DRMEncrypt(hCryptoProvider, iPosition, cNumInBytes, pbInData, pcNumOutBytes, pbOutData)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMEnumerateLicense == "on"]
+foreign {
     // param-hint: wszCertificateData len=param[4] optional
     func DRMEnumerateLicense(hSession: UInt32, uFlags: UInt32, uIndex: UInt32, pfSharedFlag: CPointer<Int32>, puCertificateDataLen: CPointer<UInt32>, wszCertificateData: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMEnumerateLicense == "on"]
+public unsafe func Windows_DRMEnumerateLicense(hSession: UInt32, uFlags: UInt32, uIndex: UInt32, pfSharedFlag: CPointer<Int32>, puCertificateDataLen: CPointer<UInt32>, wszCertificateData: CPointer<UInt16>): Int32 {
+    return DRMEnumerateLicense(hSession, uFlags, uIndex, pfSharedFlag, puCertificateDataLen, wszCertificateData)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetApplicationSpecificData == "on"]
+foreign {
     // param-hint: wszName len=param[2] optional
     // param-hint: wszValue len=param[4] optional
     func DRMGetApplicationSpecificData(hIssuanceLicense: UInt32, uIndex: UInt32, puNameLength: CPointer<UInt32>, wszName: CPointer<UInt16>, puValueLength: CPointer<UInt32>, wszValue: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetApplicationSpecificData == "on"]
+public unsafe func Windows_DRMGetApplicationSpecificData(hIssuanceLicense: UInt32, uIndex: UInt32, puNameLength: CPointer<UInt32>, wszName: CPointer<UInt16>, puValueLength: CPointer<UInt32>, wszValue: CPointer<UInt16>): Int32 {
+    return DRMGetApplicationSpecificData(hIssuanceLicense, uIndex, puNameLength, wszName, puValueLength, wszValue)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetBoundLicenseAttribute == "on"]
+foreign {
     func DRMGetBoundLicenseAttribute(hQueryRoot: UInt32, wszAttribute: CPointer<UInt16>, iWhich: UInt32, peEncoding: CPointer<DRMENCODINGTYPEAbi>, pcBuffer: CPointer<UInt32>, pbBuffer: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetBoundLicenseAttribute == "on"]
+public unsafe func Windows_DRMGetBoundLicenseAttribute(hQueryRoot: UInt32, wszAttribute: CPointer<UInt16>, iWhich: UInt32, peEncoding: CPointer<DRMENCODINGTYPEAbi>, pcBuffer: CPointer<UInt32>, pbBuffer: CPointer<UInt8>): Int32 {
+    return DRMGetBoundLicenseAttribute(hQueryRoot, wszAttribute, iWhich, peEncoding, pcBuffer, pbBuffer)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetBoundLicenseAttributeCount == "on"]
+foreign {
     func DRMGetBoundLicenseAttributeCount(hQueryRoot: UInt32, wszAttribute: CPointer<UInt16>, pcAttributes: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetBoundLicenseAttributeCount == "on"]
+public unsafe func Windows_DRMGetBoundLicenseAttributeCount(hQueryRoot: UInt32, wszAttribute: CPointer<UInt16>, pcAttributes: CPointer<UInt32>): Int32 {
+    return DRMGetBoundLicenseAttributeCount(hQueryRoot, wszAttribute, pcAttributes)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetBoundLicenseObject == "on"]
+foreign {
     func DRMGetBoundLicenseObject(hQueryRoot: UInt32, wszSubObjectType: CPointer<UInt16>, iWhich: UInt32, phSubObject: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetBoundLicenseObject == "on"]
+public unsafe func Windows_DRMGetBoundLicenseObject(hQueryRoot: UInt32, wszSubObjectType: CPointer<UInt16>, iWhich: UInt32, phSubObject: CPointer<UInt32>): Int32 {
+    return DRMGetBoundLicenseObject(hQueryRoot, wszSubObjectType, iWhich, phSubObject)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetBoundLicenseObjectCount == "on"]
+foreign {
     func DRMGetBoundLicenseObjectCount(hQueryRoot: UInt32, wszSubObjectType: CPointer<UInt16>, pcSubObjects: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetBoundLicenseObjectCount == "on"]
+public unsafe func Windows_DRMGetBoundLicenseObjectCount(hQueryRoot: UInt32, wszSubObjectType: CPointer<UInt16>, pcSubObjects: CPointer<UInt32>): Int32 {
+    return DRMGetBoundLicenseObjectCount(hQueryRoot, wszSubObjectType, pcSubObjects)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetCertificateChainCount == "on"]
+foreign {
     func DRMGetCertificateChainCount(wszChain: CPointer<UInt16>, pcCertCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetCertificateChainCount == "on"]
+public unsafe func Windows_DRMGetCertificateChainCount(wszChain: CPointer<UInt16>, pcCertCount: CPointer<UInt32>): Int32 {
+    return DRMGetCertificateChainCount(wszChain, pcCertCount)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetClientVersion == "on"]
+foreign {
     func DRMGetClientVersion(pDRMClientVersionInfo: CPointer<DRM_CLIENT_VERSION_INFOAbi>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetClientVersion == "on"]
+public unsafe func Windows_DRMGetClientVersion(pDRMClientVersionInfo: CPointer<DRM_CLIENT_VERSION_INFOAbi>): Int32 {
+    return DRMGetClientVersion(pDRMClientVersionInfo)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetEnvironmentInfo == "on"]
+foreign {
     // param-hint: wszAttribute optional
     func DRMGetEnvironmentInfo(handle: UInt32, wszAttribute: CPointer<UInt16>, peEncoding: CPointer<DRMENCODINGTYPEAbi>, pcBuffer: CPointer<UInt32>, pbBuffer: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetEnvironmentInfo == "on"]
+public unsafe func Windows_DRMGetEnvironmentInfo(handle: UInt32, wszAttribute: CPointer<UInt16>, peEncoding: CPointer<DRMENCODINGTYPEAbi>, pcBuffer: CPointer<UInt32>, pbBuffer: CPointer<UInt8>): Int32 {
+    return DRMGetEnvironmentInfo(handle, wszAttribute, peEncoding, pcBuffer, pbBuffer)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetInfo == "on"]
+foreign {
     func DRMGetInfo(handle: UInt32, wszAttribute: CPointer<UInt16>, peEncoding: CPointer<DRMENCODINGTYPEAbi>, pcBuffer: CPointer<UInt32>, pbBuffer: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetInfo == "on"]
+public unsafe func Windows_DRMGetInfo(handle: UInt32, wszAttribute: CPointer<UInt16>, peEncoding: CPointer<DRMENCODINGTYPEAbi>, pcBuffer: CPointer<UInt32>, pbBuffer: CPointer<UInt8>): Int32 {
+    return DRMGetInfo(handle, wszAttribute, peEncoding, pcBuffer, pbBuffer)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetIntervalTime == "on"]
+foreign {
     func DRMGetIntervalTime(hIssuanceLicense: UInt32, pcDays: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetIntervalTime == "on"]
+public unsafe func Windows_DRMGetIntervalTime(hIssuanceLicense: UInt32, pcDays: CPointer<UInt32>): Int32 {
+    return DRMGetIntervalTime(hIssuanceLicense, pcDays)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetIssuanceLicenseInfo == "on"]
+foreign {
     // param-hint: wszDistributionPointName len=param[4] optional
     // param-hint: wszDistributionPointURL len=param[6] optional
     func DRMGetIssuanceLicenseInfo(hIssuanceLicense: UInt32, pstTimeFrom: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, pstTimeUntil: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, uFlags: UInt32, puDistributionPointNameLength: CPointer<UInt32>, wszDistributionPointName: CPointer<UInt16>, puDistributionPointURLLength: CPointer<UInt32>, wszDistributionPointURL: CPointer<UInt16>, phOwner: CPointer<UInt32>, pfOfficial: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetIssuanceLicenseInfo == "on"]
+public unsafe func Windows_DRMGetIssuanceLicenseInfo(hIssuanceLicense: UInt32, pstTimeFrom: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, pstTimeUntil: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, uFlags: UInt32, puDistributionPointNameLength: CPointer<UInt32>, wszDistributionPointName: CPointer<UInt16>, puDistributionPointURLLength: CPointer<UInt32>, wszDistributionPointURL: CPointer<UInt16>, phOwner: CPointer<UInt32>, pfOfficial: CPointer<Int32>): Int32 {
+    return DRMGetIssuanceLicenseInfo(hIssuanceLicense, pstTimeFrom, pstTimeUntil, uFlags, puDistributionPointNameLength, wszDistributionPointName, puDistributionPointURLLength, wszDistributionPointURL, phOwner, pfOfficial)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetIssuanceLicenseTemplate == "on"]
+foreign {
     // param-hint: wszIssuanceLicenseTemplate len=param[1] optional
     func DRMGetIssuanceLicenseTemplate(hIssuanceLicense: UInt32, puIssuanceLicenseTemplateLength: CPointer<UInt32>, wszIssuanceLicenseTemplate: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetIssuanceLicenseTemplate == "on"]
+public unsafe func Windows_DRMGetIssuanceLicenseTemplate(hIssuanceLicense: UInt32, puIssuanceLicenseTemplateLength: CPointer<UInt32>, wszIssuanceLicenseTemplate: CPointer<UInt16>): Int32 {
+    return DRMGetIssuanceLicenseTemplate(hIssuanceLicense, puIssuanceLicenseTemplateLength, wszIssuanceLicenseTemplate)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetMetaData == "on"]
+foreign {
     // param-hint: wszContentId len=param[1] optional
     // param-hint: wszContentIdType len=param[3] optional
     // param-hint: wszSKUId len=param[5] optional
@@ -882,94 +1304,423 @@ foreign {
     // param-hint: wszContentType len=param[9] optional
     // param-hint: wszContentName len=param[11] optional
     func DRMGetMetaData(hIssuanceLicense: UInt32, puContentIdLength: CPointer<UInt32>, wszContentId: CPointer<UInt16>, puContentIdTypeLength: CPointer<UInt32>, wszContentIdType: CPointer<UInt16>, puSKUIdLength: CPointer<UInt32>, wszSKUId: CPointer<UInt16>, puSKUIdTypeLength: CPointer<UInt32>, wszSKUIdType: CPointer<UInt16>, puContentTypeLength: CPointer<UInt32>, wszContentType: CPointer<UInt16>, puContentNameLength: CPointer<UInt32>, wszContentName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetMetaData == "on"]
+public unsafe func Windows_DRMGetMetaData(hIssuanceLicense: UInt32, puContentIdLength: CPointer<UInt32>, wszContentId: CPointer<UInt16>, puContentIdTypeLength: CPointer<UInt32>, wszContentIdType: CPointer<UInt16>, puSKUIdLength: CPointer<UInt32>, wszSKUId: CPointer<UInt16>, puSKUIdTypeLength: CPointer<UInt32>, wszSKUIdType: CPointer<UInt16>, puContentTypeLength: CPointer<UInt32>, wszContentType: CPointer<UInt16>, puContentNameLength: CPointer<UInt32>, wszContentName: CPointer<UInt16>): Int32 {
+    return DRMGetMetaData(hIssuanceLicense, puContentIdLength, wszContentId, puContentIdTypeLength, wszContentIdType, puSKUIdLength, wszSKUId, puSKUIdTypeLength, wszSKUIdType, puContentTypeLength, wszContentType, puContentNameLength, wszContentName)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetNameAndDescription == "on"]
+foreign {
     // param-hint: wszName len=param[3] optional
     // param-hint: wszDescription len=param[5] optional
     func DRMGetNameAndDescription(hIssuanceLicense: UInt32, uIndex: UInt32, pulcid: CPointer<UInt32>, puNameLength: CPointer<UInt32>, wszName: CPointer<UInt16>, puDescriptionLength: CPointer<UInt32>, wszDescription: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetNameAndDescription == "on"]
+public unsafe func Windows_DRMGetNameAndDescription(hIssuanceLicense: UInt32, uIndex: UInt32, pulcid: CPointer<UInt32>, puNameLength: CPointer<UInt32>, wszName: CPointer<UInt16>, puDescriptionLength: CPointer<UInt32>, wszDescription: CPointer<UInt16>): Int32 {
+    return DRMGetNameAndDescription(hIssuanceLicense, uIndex, pulcid, puNameLength, wszName, puDescriptionLength, wszDescription)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetOwnerLicense == "on"]
+foreign {
     // param-hint: wszOwnerLicense len=param[1] optional
     func DRMGetOwnerLicense(hIssuanceLicense: UInt32, puOwnerLicenseLength: CPointer<UInt32>, wszOwnerLicense: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetOwnerLicense == "on"]
+public unsafe func Windows_DRMGetOwnerLicense(hIssuanceLicense: UInt32, puOwnerLicenseLength: CPointer<UInt32>, wszOwnerLicense: CPointer<UInt16>): Int32 {
+    return DRMGetOwnerLicense(hIssuanceLicense, puOwnerLicenseLength, wszOwnerLicense)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetProcAddress == "on"]
+foreign {
     func DRMGetProcAddress(hLibrary: UInt32, wszProcName: CPointer<UInt16>, ppfnProcAddress: CPointer<Win32_Foundation.FARPROC>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetProcAddress == "on"]
+public unsafe func Windows_DRMGetProcAddress(hLibrary: UInt32, wszProcName: CPointer<UInt16>, ppfnProcAddress: CPointer<Win32_Foundation.FARPROC>): Int32 {
+    return DRMGetProcAddress(hLibrary, wszProcName, ppfnProcAddress)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetRevocationPoint == "on"]
+foreign {
     // param-hint: wszId len=param[1] optional
     // param-hint: wszIdType len=param[3] optional
     // param-hint: wszRL len=param[5] optional
     // param-hint: wszName len=param[8] optional
     // param-hint: wszPublicKey len=param[10] optional
     func DRMGetRevocationPoint(hIssuanceLicense: UInt32, puIdLength: CPointer<UInt32>, wszId: CPointer<UInt16>, puIdTypeLength: CPointer<UInt32>, wszIdType: CPointer<UInt16>, puURLLength: CPointer<UInt32>, wszRL: CPointer<UInt16>, pstFrequency: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, puNameLength: CPointer<UInt32>, wszName: CPointer<UInt16>, puPublicKeyLength: CPointer<UInt32>, wszPublicKey: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetRevocationPoint == "on"]
+public unsafe func Windows_DRMGetRevocationPoint(hIssuanceLicense: UInt32, puIdLength: CPointer<UInt32>, wszId: CPointer<UInt16>, puIdTypeLength: CPointer<UInt32>, wszIdType: CPointer<UInt16>, puURLLength: CPointer<UInt32>, wszRL: CPointer<UInt16>, pstFrequency: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, puNameLength: CPointer<UInt32>, wszName: CPointer<UInt16>, puPublicKeyLength: CPointer<UInt32>, wszPublicKey: CPointer<UInt16>): Int32 {
+    return DRMGetRevocationPoint(hIssuanceLicense, puIdLength, wszId, puIdTypeLength, wszIdType, puURLLength, wszRL, pstFrequency, puNameLength, wszName, puPublicKeyLength, wszPublicKey)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetRightExtendedInfo == "on"]
+foreign {
     // param-hint: wszExtendedInfoName len=param[2] optional
     // param-hint: wszExtendedInfoValue len=param[4] optional
     func DRMGetRightExtendedInfo(hRight: UInt32, uIndex: UInt32, puExtendedInfoNameLength: CPointer<UInt32>, wszExtendedInfoName: CPointer<UInt16>, puExtendedInfoValueLength: CPointer<UInt32>, wszExtendedInfoValue: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetRightExtendedInfo == "on"]
+public unsafe func Windows_DRMGetRightExtendedInfo(hRight: UInt32, uIndex: UInt32, puExtendedInfoNameLength: CPointer<UInt32>, wszExtendedInfoName: CPointer<UInt16>, puExtendedInfoValueLength: CPointer<UInt32>, wszExtendedInfoValue: CPointer<UInt16>): Int32 {
+    return DRMGetRightExtendedInfo(hRight, uIndex, puExtendedInfoNameLength, wszExtendedInfoName, puExtendedInfoValueLength, wszExtendedInfoValue)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetRightInfo == "on"]
+foreign {
     // param-hint: wszRightName len=param[1] optional
     func DRMGetRightInfo(hRight: UInt32, puRightNameLength: CPointer<UInt32>, wszRightName: CPointer<UInt16>, pstFrom: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, pstUntil: CPointer<Win32_Foundation.SYSTEMTIMEAbi>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetRightInfo == "on"]
+public unsafe func Windows_DRMGetRightInfo(hRight: UInt32, puRightNameLength: CPointer<UInt32>, wszRightName: CPointer<UInt16>, pstFrom: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, pstUntil: CPointer<Win32_Foundation.SYSTEMTIMEAbi>): Int32 {
+    return DRMGetRightInfo(hRight, puRightNameLength, wszRightName, pstFrom, pstUntil)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetSecurityProvider == "on"]
+foreign {
     // param-hint: wszType len=param[1] optional
     // param-hint: wszPath len=param[3] optional
     func DRMGetSecurityProvider(uFlags: UInt32, puTypeLen: CPointer<UInt32>, wszType: CPointer<UInt16>, puPathLen: CPointer<UInt32>, wszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetSecurityProvider == "on"]
+public unsafe func Windows_DRMGetSecurityProvider(uFlags: UInt32, puTypeLen: CPointer<UInt32>, wszType: CPointer<UInt16>, puPathLen: CPointer<UInt32>, wszPath: CPointer<UInt16>): Int32 {
+    return DRMGetSecurityProvider(uFlags, puTypeLen, wszType, puPathLen, wszPath)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetServiceLocation == "on"]
+foreign {
     // param-hint: wszIssuanceLicense optional
     // param-hint: wszServiceURL len=param[4] optional
     func DRMGetServiceLocation(hClient: UInt32, uServiceType: UInt32, uServiceLocation: UInt32, wszIssuanceLicense: CPointer<UInt16>, puServiceURLLength: CPointer<UInt32>, wszServiceURL: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetServiceLocation == "on"]
+public unsafe func Windows_DRMGetServiceLocation(hClient: UInt32, uServiceType: UInt32, uServiceLocation: UInt32, wszIssuanceLicense: CPointer<UInt16>, puServiceURLLength: CPointer<UInt32>, wszServiceURL: CPointer<UInt16>): Int32 {
+    return DRMGetServiceLocation(hClient, uServiceType, uServiceLocation, wszIssuanceLicense, puServiceURLLength, wszServiceURL)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetSignedIssuanceLicense == "on"]
+foreign {
     // param-hint: wszSymKeyType optional
     // param-hint: wszClientLicensorCertificate optional
     // param-hint: wszURL optional
     func DRMGetSignedIssuanceLicense(hEnv: UInt32, hIssuanceLicense: UInt32, uFlags: UInt32, pbSymKey: CPointer<UInt8>, cbSymKey: UInt32, wszSymKeyType: CPointer<UInt16>, wszClientLicensorCertificate: CPointer<UInt16>, pfnCallback: DRMCALLBACK, wszURL: CPointer<UInt16>, pvContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetSignedIssuanceLicense == "on"]
+public unsafe func Windows_DRMGetSignedIssuanceLicense(hEnv: UInt32, hIssuanceLicense: UInt32, uFlags: UInt32, pbSymKey: CPointer<UInt8>, cbSymKey: UInt32, wszSymKeyType: CPointer<UInt16>, wszClientLicensorCertificate: CPointer<UInt16>, pfnCallback: DRMCALLBACK, wszURL: CPointer<UInt16>, pvContext: CPointer<Unit>): Int32 {
+    return DRMGetSignedIssuanceLicense(hEnv, hIssuanceLicense, uFlags, pbSymKey, cbSymKey, wszSymKeyType, wszClientLicensorCertificate, pfnCallback, wszURL, pvContext)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetSignedIssuanceLicenseEx == "on"]
+foreign {
     // param-hint: pbSymKey bytes=param[4] optional
     // param-hint: wszSymKeyType optional
     // param-hint: pvReserved optional
     func DRMGetSignedIssuanceLicenseEx(hEnv: UInt32, hIssuanceLicense: UInt32, uFlags: UInt32, pbSymKey: CPointer<UInt8>, cbSymKey: UInt32, wszSymKeyType: CPointer<UInt16>, pvReserved: CPointer<Unit>, hEnablingPrincipal: UInt32, hBoundLicenseCLC: UInt32, pfnCallback: DRMCALLBACK, pvContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetSignedIssuanceLicenseEx == "on"]
+public unsafe func Windows_DRMGetSignedIssuanceLicenseEx(hEnv: UInt32, hIssuanceLicense: UInt32, uFlags: UInt32, pbSymKey: CPointer<UInt8>, cbSymKey: UInt32, wszSymKeyType: CPointer<UInt16>, pvReserved: CPointer<Unit>, hEnablingPrincipal: UInt32, hBoundLicenseCLC: UInt32, pfnCallback: DRMCALLBACK, pvContext: CPointer<Unit>): Int32 {
+    return DRMGetSignedIssuanceLicenseEx(hEnv, hIssuanceLicense, uFlags, pbSymKey, cbSymKey, wszSymKeyType, pvReserved, hEnablingPrincipal, hBoundLicenseCLC, pfnCallback, pvContext)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetTime == "on"]
+foreign {
     func DRMGetTime(hEnv: UInt32, eTimerIdType: DRMTIMETYPEAbi, poTimeObject: CPointer<Win32_Foundation.SYSTEMTIMEAbi>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetTime == "on"]
+public unsafe func Windows_DRMGetTime(hEnv: UInt32, eTimerIdType: DRMTIMETYPEAbi, poTimeObject: CPointer<Win32_Foundation.SYSTEMTIMEAbi>): Int32 {
+    return DRMGetTime(hEnv, eTimerIdType, poTimeObject)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetUnboundLicenseAttribute == "on"]
+foreign {
     func DRMGetUnboundLicenseAttribute(hQueryRoot: UInt32, wszAttributeType: CPointer<UInt16>, iWhich: UInt32, peEncoding: CPointer<DRMENCODINGTYPEAbi>, pcBuffer: CPointer<UInt32>, pbBuffer: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetUnboundLicenseAttribute == "on"]
+public unsafe func Windows_DRMGetUnboundLicenseAttribute(hQueryRoot: UInt32, wszAttributeType: CPointer<UInt16>, iWhich: UInt32, peEncoding: CPointer<DRMENCODINGTYPEAbi>, pcBuffer: CPointer<UInt32>, pbBuffer: CPointer<UInt8>): Int32 {
+    return DRMGetUnboundLicenseAttribute(hQueryRoot, wszAttributeType, iWhich, peEncoding, pcBuffer, pbBuffer)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetUnboundLicenseAttributeCount == "on"]
+foreign {
     func DRMGetUnboundLicenseAttributeCount(hQueryRoot: UInt32, wszAttributeType: CPointer<UInt16>, pcAttributes: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetUnboundLicenseAttributeCount == "on"]
+public unsafe func Windows_DRMGetUnboundLicenseAttributeCount(hQueryRoot: UInt32, wszAttributeType: CPointer<UInt16>, pcAttributes: CPointer<UInt32>): Int32 {
+    return DRMGetUnboundLicenseAttributeCount(hQueryRoot, wszAttributeType, pcAttributes)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetUnboundLicenseObject == "on"]
+foreign {
     func DRMGetUnboundLicenseObject(hQueryRoot: UInt32, wszSubObjectType: CPointer<UInt16>, iIndex: UInt32, phSubQuery: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetUnboundLicenseObject == "on"]
+public unsafe func Windows_DRMGetUnboundLicenseObject(hQueryRoot: UInt32, wszSubObjectType: CPointer<UInt16>, iIndex: UInt32, phSubQuery: CPointer<UInt32>): Int32 {
+    return DRMGetUnboundLicenseObject(hQueryRoot, wszSubObjectType, iIndex, phSubQuery)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetUnboundLicenseObjectCount == "on"]
+foreign {
     func DRMGetUnboundLicenseObjectCount(hQueryRoot: UInt32, wszSubObjectType: CPointer<UInt16>, pcSubObjects: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetUnboundLicenseObjectCount == "on"]
+public unsafe func Windows_DRMGetUnboundLicenseObjectCount(hQueryRoot: UInt32, wszSubObjectType: CPointer<UInt16>, pcSubObjects: CPointer<UInt32>): Int32 {
+    return DRMGetUnboundLicenseObjectCount(hQueryRoot, wszSubObjectType, pcSubObjects)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetUsagePolicy == "on"]
+foreign {
     // param-hint: wszName len=param[4] optional
     // param-hint: wszMinVersion len=param[6] optional
     // param-hint: wszMaxVersion len=param[8] optional
     // param-hint: wszPublicKey len=param[10] optional
     // param-hint: wszDigestAlgorithm len=param[12] optional
     func DRMGetUsagePolicy(hIssuanceLicense: UInt32, uIndex: UInt32, peUsagePolicyType: CPointer<DRM_USAGEPOLICY_TYPEAbi>, pfExclusion: CPointer<Int32>, puNameLength: CPointer<UInt32>, wszName: CPointer<UInt16>, puMinVersionLength: CPointer<UInt32>, wszMinVersion: CPointer<UInt16>, puMaxVersionLength: CPointer<UInt32>, wszMaxVersion: CPointer<UInt16>, puPublicKeyLength: CPointer<UInt32>, wszPublicKey: CPointer<UInt16>, puDigestAlgorithmLength: CPointer<UInt32>, wszDigestAlgorithm: CPointer<UInt16>, pcbDigest: CPointer<UInt32>, pbDigest: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetUsagePolicy == "on"]
+public unsafe func Windows_DRMGetUsagePolicy(hIssuanceLicense: UInt32, uIndex: UInt32, peUsagePolicyType: CPointer<DRM_USAGEPOLICY_TYPEAbi>, pfExclusion: CPointer<Int32>, puNameLength: CPointer<UInt32>, wszName: CPointer<UInt16>, puMinVersionLength: CPointer<UInt32>, wszMinVersion: CPointer<UInt16>, puMaxVersionLength: CPointer<UInt32>, wszMaxVersion: CPointer<UInt16>, puPublicKeyLength: CPointer<UInt32>, wszPublicKey: CPointer<UInt16>, puDigestAlgorithmLength: CPointer<UInt32>, wszDigestAlgorithm: CPointer<UInt16>, pcbDigest: CPointer<UInt32>, pbDigest: CPointer<UInt8>): Int32 {
+    return DRMGetUsagePolicy(hIssuanceLicense, uIndex, peUsagePolicyType, pfExclusion, puNameLength, wszName, puMinVersionLength, wszMinVersion, puMaxVersionLength, wszMaxVersion, puPublicKeyLength, wszPublicKey, puDigestAlgorithmLength, wszDigestAlgorithm, pcbDigest, pbDigest)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetUserInfo == "on"]
+foreign {
     // param-hint: wszUserName len=param[1] optional
     // param-hint: wszUserId len=param[3] optional
     // param-hint: wszUserIdType len=param[5] optional
     func DRMGetUserInfo(hUser: UInt32, puUserNameLength: CPointer<UInt32>, wszUserName: CPointer<UInt16>, puUserIdLength: CPointer<UInt32>, wszUserId: CPointer<UInt16>, puUserIdTypeLength: CPointer<UInt32>, wszUserIdType: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetUserInfo == "on"]
+public unsafe func Windows_DRMGetUserInfo(hUser: UInt32, puUserNameLength: CPointer<UInt32>, wszUserName: CPointer<UInt16>, puUserIdLength: CPointer<UInt32>, wszUserId: CPointer<UInt16>, puUserIdTypeLength: CPointer<UInt32>, wszUserIdType: CPointer<UInt16>): Int32 {
+    return DRMGetUserInfo(hUser, puUserNameLength, wszUserName, puUserIdLength, wszUserId, puUserIdTypeLength, wszUserIdType)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetUserRights == "on"]
+foreign {
     func DRMGetUserRights(hIssuanceLicense: UInt32, hUser: UInt32, uIndex: UInt32, phRight: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetUserRights == "on"]
+public unsafe func Windows_DRMGetUserRights(hIssuanceLicense: UInt32, hUser: UInt32, uIndex: UInt32, phRight: CPointer<UInt32>): Int32 {
+    return DRMGetUserRights(hIssuanceLicense, hUser, uIndex, phRight)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetUsers == "on"]
+foreign {
     func DRMGetUsers(hIssuanceLicense: UInt32, uIndex: UInt32, phUser: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMGetUsers == "on"]
+public unsafe func Windows_DRMGetUsers(hIssuanceLicense: UInt32, uIndex: UInt32, phUser: CPointer<UInt32>): Int32 {
+    return DRMGetUsers(hIssuanceLicense, uIndex, phUser)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMInitEnvironment == "on"]
+foreign {
     // param-hint: wszSecurityProvider optional
     // param-hint: wszManifestCredentials optional
     func DRMInitEnvironment(eSecurityProviderType: DRMSECURITYPROVIDERTYPEAbi, eSpecification: DRMSPECTYPEAbi, wszSecurityProvider: CPointer<UInt16>, wszManifestCredentials: CPointer<UInt16>, wszMachineCredentials: CPointer<UInt16>, phEnv: CPointer<UInt32>, phDefaultLibrary: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMInitEnvironment == "on"]
+public unsafe func Windows_DRMInitEnvironment(eSecurityProviderType: DRMSECURITYPROVIDERTYPEAbi, eSpecification: DRMSPECTYPEAbi, wszSecurityProvider: CPointer<UInt16>, wszManifestCredentials: CPointer<UInt16>, wszMachineCredentials: CPointer<UInt16>, phEnv: CPointer<UInt32>, phDefaultLibrary: CPointer<UInt32>): Int32 {
+    return DRMInitEnvironment(eSecurityProviderType, eSpecification, wszSecurityProvider, wszManifestCredentials, wszMachineCredentials, phEnv, phDefaultLibrary)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMIsActivated == "on"]
+foreign {
     func DRMIsActivated(hClient: UInt32, uFlags: UInt32, pActServInfo: CPointer<DRM_ACTSERV_INFOAbi>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMIsActivated == "on"]
+public unsafe func Windows_DRMIsActivated(hClient: UInt32, uFlags: UInt32, pActServInfo: CPointer<DRM_ACTSERV_INFOAbi>): Int32 {
+    return DRMIsActivated(hClient, uFlags, pActServInfo)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMIsWindowProtected == "on"]
+foreign {
     func DRMIsWindowProtected(hwnd: CPointer<Unit>, pfProtected: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMIsWindowProtected == "on"]
+public unsafe func Windows_DRMIsWindowProtected(hwnd: CPointer<Unit>, pfProtected: CPointer<Int32>): Int32 {
+    return DRMIsWindowProtected(hwnd, pfProtected)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMLoadLibrary == "on"]
+foreign {
     // param-hint: wszCredentials optional
     func DRMLoadLibrary(hEnv: UInt32, eSpecification: DRMSPECTYPEAbi, wszLibraryProvider: CPointer<UInt16>, wszCredentials: CPointer<UInt16>, phLibrary: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMLoadLibrary == "on"]
+public unsafe func Windows_DRMLoadLibrary(hEnv: UInt32, eSpecification: DRMSPECTYPEAbi, wszLibraryProvider: CPointer<UInt16>, wszCredentials: CPointer<UInt16>, phLibrary: CPointer<UInt32>): Int32 {
+    return DRMLoadLibrary(hEnv, eSpecification, wszLibraryProvider, wszCredentials, phLibrary)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMParseUnboundLicense == "on"]
+foreign {
     func DRMParseUnboundLicense(wszCertificate: CPointer<UInt16>, phQueryRoot: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMParseUnboundLicense == "on"]
+public unsafe func Windows_DRMParseUnboundLicense(wszCertificate: CPointer<UInt16>, phQueryRoot: CPointer<UInt32>): Int32 {
+    return DRMParseUnboundLicense(wszCertificate, phQueryRoot)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMRegisterContent == "on"]
+foreign {
     func DRMRegisterContent(fRegister: Int32): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMRegisterContent == "on"]
+public unsafe func Windows_DRMRegisterContent(fRegister: Int32): Int32 {
+    return DRMRegisterContent(fRegister)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMRegisterProtectedWindow == "on"]
+foreign {
     func DRMRegisterProtectedWindow(hEnv: UInt32, hwnd: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMRegisterProtectedWindow == "on"]
+public unsafe func Windows_DRMRegisterProtectedWindow(hEnv: UInt32, hwnd: CPointer<Unit>): Int32 {
+    return DRMRegisterProtectedWindow(hEnv, hwnd)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMRegisterRevocationList == "on"]
+foreign {
     // param-hint: wszRevocationList optional
     func DRMRegisterRevocationList(hEnv: UInt32, wszRevocationList: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMRegisterRevocationList == "on"]
+public unsafe func Windows_DRMRegisterRevocationList(hEnv: UInt32, wszRevocationList: CPointer<UInt16>): Int32 {
+    return DRMRegisterRevocationList(hEnv, wszRevocationList)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMRepair == "on"]
+foreign {
     func DRMRepair(): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMRepair == "on"]
+public unsafe func Windows_DRMRepair(): Int32 {
+    return DRMRepair()
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMSetApplicationSpecificData == "on"]
+foreign {
     // param-hint: wszName optional
     // param-hint: wszValue optional
     func DRMSetApplicationSpecificData(hIssuanceLicense: UInt32, fDelete: Int32, wszName: CPointer<UInt16>, wszValue: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMSetApplicationSpecificData == "on"]
+public unsafe func Windows_DRMSetApplicationSpecificData(hIssuanceLicense: UInt32, fDelete: Int32, wszName: CPointer<UInt16>, wszValue: CPointer<UInt16>): Int32 {
+    return DRMSetApplicationSpecificData(hIssuanceLicense, fDelete, wszName, wszValue)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMSetGlobalOptions == "on"]
+foreign {
     func DRMSetGlobalOptions(eGlobalOptions: DRMGLOBALOPTIONSAbi, pvdata: CPointer<Unit>, dwlen: UInt32): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMSetGlobalOptions == "on"]
+public unsafe func Windows_DRMSetGlobalOptions(eGlobalOptions: DRMGLOBALOPTIONSAbi, pvdata: CPointer<Unit>, dwlen: UInt32): Int32 {
+    return DRMSetGlobalOptions(eGlobalOptions, pvdata, dwlen)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMSetIntervalTime == "on"]
+foreign {
     func DRMSetIntervalTime(hIssuanceLicense: UInt32, cDays: UInt32): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMSetIntervalTime == "on"]
+public unsafe func Windows_DRMSetIntervalTime(hIssuanceLicense: UInt32, cDays: UInt32): Int32 {
+    return DRMSetIntervalTime(hIssuanceLicense, cDays)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMSetMetaData == "on"]
+foreign {
     // param-hint: wszSKUId optional
     // param-hint: wszSKUIdType optional
     // param-hint: wszContentType optional
     // param-hint: wszContentName optional
     func DRMSetMetaData(hIssuanceLicense: UInt32, wszContentId: CPointer<UInt16>, wszContentIdType: CPointer<UInt16>, wszSKUId: CPointer<UInt16>, wszSKUIdType: CPointer<UInt16>, wszContentType: CPointer<UInt16>, wszContentName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMSetMetaData == "on"]
+public unsafe func Windows_DRMSetMetaData(hIssuanceLicense: UInt32, wszContentId: CPointer<UInt16>, wszContentIdType: CPointer<UInt16>, wszSKUId: CPointer<UInt16>, wszSKUIdType: CPointer<UInt16>, wszContentType: CPointer<UInt16>, wszContentName: CPointer<UInt16>): Int32 {
+    return DRMSetMetaData(hIssuanceLicense, wszContentId, wszContentIdType, wszSKUId, wszSKUIdType, wszContentType, wszContentName)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMSetNameAndDescription == "on"]
+foreign {
     // param-hint: wszName optional
     // param-hint: wszDescription optional
     func DRMSetNameAndDescription(hIssuanceLicense: UInt32, fDelete: Int32, lcid: UInt32, wszName: CPointer<UInt16>, wszDescription: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMSetNameAndDescription == "on"]
+public unsafe func Windows_DRMSetNameAndDescription(hIssuanceLicense: UInt32, fDelete: Int32, lcid: UInt32, wszName: CPointer<UInt16>, wszDescription: CPointer<UInt16>): Int32 {
+    return DRMSetNameAndDescription(hIssuanceLicense, fDelete, lcid, wszName, wszDescription)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMSetRevocationPoint == "on"]
+foreign {
     // param-hint: wszName optional
     // param-hint: wszPublicKey optional
     func DRMSetRevocationPoint(hIssuanceLicense: UInt32, fDelete: Int32, wszId: CPointer<UInt16>, wszIdType: CPointer<UInt16>, wszURL: CPointer<UInt16>, pstFrequency: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, wszName: CPointer<UInt16>, wszPublicKey: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMSetRevocationPoint == "on"]
+public unsafe func Windows_DRMSetRevocationPoint(hIssuanceLicense: UInt32, fDelete: Int32, wszId: CPointer<UInt16>, wszIdType: CPointer<UInt16>, wszURL: CPointer<UInt16>, pstFrequency: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, wszName: CPointer<UInt16>, wszPublicKey: CPointer<UInt16>): Int32 {
+    return DRMSetRevocationPoint(hIssuanceLicense, fDelete, wszId, wszIdType, wszURL, pstFrequency, wszName, wszPublicKey)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMSetUsagePolicy == "on"]
+foreign {
     // param-hint: wszName optional
     // param-hint: wszMinVersion optional
     // param-hint: wszMaxVersion optional
     // param-hint: wszPublicKey optional
     // param-hint: wszDigestAlgorithm optional
     func DRMSetUsagePolicy(hIssuanceLicense: UInt32, eUsagePolicyType: DRM_USAGEPOLICY_TYPEAbi, fDelete: Int32, fExclusion: Int32, wszName: CPointer<UInt16>, wszMinVersion: CPointer<UInt16>, wszMaxVersion: CPointer<UInt16>, wszPublicKey: CPointer<UInt16>, wszDigestAlgorithm: CPointer<UInt16>, pbDigest: CPointer<UInt8>, cbDigest: UInt32): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMSetUsagePolicy == "on"]
+public unsafe func Windows_DRMSetUsagePolicy(hIssuanceLicense: UInt32, eUsagePolicyType: DRM_USAGEPOLICY_TYPEAbi, fDelete: Int32, fExclusion: Int32, wszName: CPointer<UInt16>, wszMinVersion: CPointer<UInt16>, wszMaxVersion: CPointer<UInt16>, wszPublicKey: CPointer<UInt16>, wszDigestAlgorithm: CPointer<UInt16>, pbDigest: CPointer<UInt8>, cbDigest: UInt32): Int32 {
+    return DRMSetUsagePolicy(hIssuanceLicense, eUsagePolicyType, fDelete, fExclusion, wszName, wszMinVersion, wszMaxVersion, wszPublicKey, wszDigestAlgorithm, pbDigest, cbDigest)
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMVerify == "on"]
+foreign {
     // param-hint: wszData optional
     // param-hint: wszAttestedData len=param[1] optional
     // param-hint: wszPrincipal len=param[4] optional
     // param-hint: wszManifest len=param[6] optional
     func DRMVerify(wszData: CPointer<UInt16>, pcAttestedData: CPointer<UInt32>, wszAttestedData: CPointer<UInt16>, peType: CPointer<DRMATTESTTYPEAbi>, pcPrincipal: CPointer<UInt32>, wszPrincipal: CPointer<UInt16>, pcManifest: CPointer<UInt32>, wszManifest: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Data_RightsManagement == "on" && MSDRM == "on" && Windows_Win32_Data_RightsManagement_DRMVerify == "on"]
+public unsafe func Windows_DRMVerify(wszData: CPointer<UInt16>, pcAttestedData: CPointer<UInt32>, wszAttestedData: CPointer<UInt16>, peType: CPointer<DRMATTESTTYPEAbi>, pcPrincipal: CPointer<UInt32>, wszPrincipal: CPointer<UInt16>, pcManifest: CPointer<UInt32>, wszManifest: CPointer<UInt16>): Int32 {
+    return DRMVerify(wszData, pcAttestedData, wszAttestedData, peType, pcPrincipal, wszPrincipal, pcManifest, wszManifest)
 }
 
 @When[Windows_Win32_Data_RightsManagement == "on"]

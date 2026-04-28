@@ -153,6 +153,7 @@ public let FolderDepth_Deep: FolderDepth = FolderDepth(1)
 @C
 public struct IQueryOptionsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var FileTypeFilter: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var FolderDepth: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetFolderDepth: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -164,6 +165,7 @@ public struct IQueryOptionsVtbl {
     public var SetLanguage: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var IndexerOption: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetIndexerOption: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SortOrder: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GroupPropertyName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var DateStackOption: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -171,7 +173,7 @@ public struct IQueryOptionsVtbl {
     public var LoadFromString: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     @When[Windows_Storage_FileProperties == "on"]
     public var SetThumbnailPrefetch: CFunc<(CPointer<Unit>, Int32, UInt32, UInt32) -> Int32> = { _, _, _, _ => 0 }
-    @When[Windows_Storage_FileProperties == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_FileProperties == "on"]
     public var SetPropertyPrefetch: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -216,6 +218,7 @@ public class IQueryOptions <: InterfaceWrapperBase & ComInterface {
         readVtbl<IQueryOptionsVtbl>(IQueryOptionsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FileTypeFilter(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -282,6 +285,7 @@ public class IQueryOptions <: InterfaceWrapperBase & ComInterface {
         return __vt.SetIndexerOption(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SortOrder(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -319,7 +323,7 @@ public class IQueryOptions <: InterfaceWrapperBase & ComInterface {
         return __vt.SetThumbnailPrefetch(__liveRaw, mode, requestedSize, options)
     }
 
-    @When[Windows_Storage_FileProperties == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_FileProperties == "on"]
     public unsafe func SetPropertyPrefetch(options: UInt32, propertiesToRetrieve: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -331,6 +335,7 @@ public class IQueryOptions <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IQueryOptionsWithProviderFilterVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var StorageProviderIdFilter: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -375,6 +380,7 @@ public class IQueryOptionsWithProviderFilter <: InterfaceWrapperBase & ComInterf
         readVtbl<IQueryOptionsWithProviderFilterVtbl>(IQueryOptionsWithProviderFilterVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StorageProviderIdFilter(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

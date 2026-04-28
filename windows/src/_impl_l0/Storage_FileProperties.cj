@@ -100,10 +100,12 @@ public class BasicProperties <: InterfaceWrapperBase & ComInterface & windows_in
         return defaultInterface().ItemDate()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RetrievePropertiesAsync(propertiesToRetrieve: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<windows_collections.IMap<windows_core.HString, IInspectable>> {
         return asIStorageItemExtraProperties().RetrievePropertiesAsync(propertiesToRetrieve)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SavePropertiesAsync(propertiesToSave: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, IInspectable>>): windows_future.IAsyncAction {
         return asIStorageItemExtraProperties().SavePropertiesAsync(propertiesToSave)
     }
@@ -238,10 +240,16 @@ extend IBasicProperties <: windows_core.Interface<IBasicProperties> {}
 @C
 public struct IDocumentPropertiesVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Author: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Author: UIntNative = UIntNative(0)
     public var Title: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetTitle: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Keywords: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Keywords: UIntNative = UIntNative(0)
     public var Comment: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetComment: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -324,6 +332,7 @@ public class IDocumentProperties <: InterfaceWrapperBase & ComInterface & Runtim
         readVtbl<IDocumentPropertiesVtbl>(IDocumentPropertiesVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Author(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -346,6 +355,7 @@ public class IDocumentProperties <: InterfaceWrapperBase & ComInterface & Runtim
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Keywords(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -378,7 +388,10 @@ public struct IImagePropertiesVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Rating: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetRating: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Keywords: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Keywords: UIntNative = UIntNative(0)
     public var DateTaken: CFunc<(CPointer<Unit>, CPointer<windows_future.DateTimeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetDateTaken: CFunc<(CPointer<Unit>, windows_future.DateTimeAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Width: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -392,7 +405,10 @@ public struct IImagePropertiesVtbl {
     public var CameraModel: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetCameraModel: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Orientation: CFunc<(CPointer<Unit>, CPointer<PhotoOrientationAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var PeopleNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var PeopleNames: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -487,6 +503,7 @@ public class IImageProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Keywords(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -591,6 +608,7 @@ public class IImageProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<PhotoOrientation>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PeopleNames(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -611,7 +629,10 @@ public struct IMusicPropertiesVtbl {
     public var SetAlbum: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Artist: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetArtist: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Genre: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Genre: UIntNative = UIntNative(0)
     public var TrackNumber: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetTrackNumber: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Title: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -622,14 +643,26 @@ public struct IMusicPropertiesVtbl {
     public var Bitrate: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var AlbumArtist: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetAlbumArtist: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Composers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Composers: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Conductors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Conductors: UIntNative = UIntNative(0)
     public var Subtitle: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetSubtitle: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Producers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Producers: UIntNative = UIntNative(0)
     public var Publisher: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetPublisher: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Writers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Writers: UIntNative = UIntNative(0)
     public var Year: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetYear: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -740,6 +773,7 @@ public class IMusicProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Genre(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -820,6 +854,7 @@ public class IMusicProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Composers(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -828,6 +863,7 @@ public class IMusicProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_collections.IVector<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Conductors(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -850,6 +886,7 @@ public class IMusicProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Producers(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -872,6 +909,7 @@ public class IMusicProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Writers(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -902,31 +940,24 @@ extend IMusicProperties <: windows_core.Interface<IMusicProperties> {}
 @C
 public struct IStorageItemExtraPropertiesVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var RetrievePropertiesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RetrievePropertiesAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SavePropertiesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SavePropertiesAsync: UIntNative = UIntNative(0)
     public var SavePropertiesAsyncOverloadDefault: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 
+    @When[Windows_Foundation_Collections == "on"]
     public static func new<Identity>(offset!: Int64 = 0): IStorageItemExtraPropertiesVtbl where Identity <: IStorageItemExtraProperties_Impl {
         let _ = offset
         var vtbl = IStorageItemExtraPropertiesVtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.RetrievePropertiesAsync = { instanceRaw, arg0, result__ =>
-            match (unsafe { asImplFromRaw<IStorageItemExtraProperties_ImplErased>(instanceRaw) }) {
-                case Some(impl) =>
-                    impl.__winrtThunk_RetrievePropertiesAsync(arg0, result__)
-                case None =>
-                    E_NOINTERFACE.value
-            }
-        }
-        vtbl.SavePropertiesAsync = { instanceRaw, arg0, result__ =>
-            match (unsafe { asImplFromRaw<IStorageItemExtraProperties_ImplErased>(instanceRaw) }) {
-                case Some(impl) =>
-                    impl.__winrtThunk_SavePropertiesAsync(arg0, result__)
-                case None =>
-                    E_NOINTERFACE.value
-            }
-        }
+        vtbl = IStorageItemExtraPropertiesVtbl.__assignRetrievePropertiesAsync<Identity>(vtbl)
+        vtbl = IStorageItemExtraPropertiesVtbl.__assignSavePropertiesAsync<Identity>(vtbl)
         vtbl.SavePropertiesAsyncOverloadDefault = { instanceRaw, result__ =>
             match (unsafe { asImplFromRaw<IStorageItemExtraProperties_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
@@ -938,6 +969,44 @@ public struct IStorageItemExtraPropertiesVtbl {
         return vtbl
     }
 
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections == "on"]
+    public static func __assignRetrievePropertiesAsync<Identity>(vtbl: IStorageItemExtraPropertiesVtbl): IStorageItemExtraPropertiesVtbl where Identity <: IStorageItemExtraProperties_Impl {
+        var next = vtbl
+        next.RetrievePropertiesAsync = { instanceRaw, arg0, result__ =>
+            match (unsafe { asImplFromRaw<IStorageItemExtraProperties_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_RetrievePropertiesAsync(arg0, result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        return next
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections != "on"]
+    public static func __assignRetrievePropertiesAsync<Identity>(vtbl: IStorageItemExtraPropertiesVtbl): IStorageItemExtraPropertiesVtbl where Identity <: IStorageItemExtraProperties_Impl {
+        return vtbl
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections == "on"]
+    public static func __assignSavePropertiesAsync<Identity>(vtbl: IStorageItemExtraPropertiesVtbl): IStorageItemExtraPropertiesVtbl where Identity <: IStorageItemExtraProperties_Impl {
+        var next = vtbl
+        next.SavePropertiesAsync = { instanceRaw, arg0, result__ =>
+            match (unsafe { asImplFromRaw<IStorageItemExtraProperties_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_SavePropertiesAsync(arg0, result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        return next
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections != "on"]
+    public static func __assignSavePropertiesAsync<Identity>(vtbl: IStorageItemExtraPropertiesVtbl): IStorageItemExtraPropertiesVtbl where Identity <: IStorageItemExtraProperties_Impl {
+        return vtbl
+    }
+
     public static func matches(iid: GUID): Bool {
         if (iid == IStorageItemExtraProperties.iid()) {
             return true
@@ -946,7 +1015,7 @@ public struct IStorageItemExtraPropertiesVtbl {
     }
 }
 
-@When[Windows_Storage_FileProperties == "on"]
+@When[Windows_Storage_FileProperties == "on" && Windows_Foundation_Collections == "on"]
 public interface IStorageItemExtraProperties_ImplErased {
     public func __winrtThunk_RetrievePropertiesAsync(arg0: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32
 
@@ -955,7 +1024,7 @@ public interface IStorageItemExtraProperties_ImplErased {
     public func __winrtThunk_SavePropertiesAsyncOverloadDefault(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Storage_FileProperties == "on"]
+@When[Windows_Storage_FileProperties == "on" && Windows_Foundation_Collections == "on"]
 public interface IStorageItemExtraProperties_Impl <: IStorageItemExtraProperties_ImplErased {
     public func RetrievePropertiesAsync(propertiesToRetrieve: InParam<windows_collections.IIterable<windows_core.HString>>): windows_core.Result<windows_future.IAsyncOperation<windows_collections.IMap<windows_core.HString, IInspectable>>>
 
@@ -1083,6 +1152,7 @@ public class IStorageItemExtraProperties <: InterfaceWrapperBase & ComInterface 
         readVtbl<IStorageItemExtraPropertiesVtbl>(IStorageItemExtraPropertiesVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RetrievePropertiesAsync(propertiesToRetrieve: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<windows_collections.IMap<windows_core.HString, IInspectable>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1091,6 +1161,7 @@ public class IStorageItemExtraProperties <: InterfaceWrapperBase & ComInterface 
         return windows_future.IAsyncOperation<windows_collections.IMap<windows_core.HString, IInspectable>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SavePropertiesAsync(propertiesToSave: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, IInspectable>>): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1229,7 +1300,10 @@ public struct IVideoPropertiesVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Rating: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetRating: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Keywords: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Keywords: UIntNative = UIntNative(0)
     public var Width: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Height: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Duration: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1239,14 +1313,23 @@ public struct IVideoPropertiesVtbl {
     public var SetTitle: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Subtitle: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetSubtitle: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Producers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Producers: UIntNative = UIntNative(0)
     public var Publisher: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetPublisher: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Writers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Writers: UIntNative = UIntNative(0)
     public var Year: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetYear: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Bitrate: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Directors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Directors: UIntNative = UIntNative(0)
     public var Orientation: CFunc<(CPointer<Unit>, CPointer<VideoOrientationAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -1342,6 +1425,7 @@ public class IVideoProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Keywords(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1418,6 +1502,7 @@ public class IVideoProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Producers(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1440,6 +1525,7 @@ public class IVideoProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Writers(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1470,6 +1556,7 @@ public class IVideoProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Directors(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

@@ -1217,13 +1217,13 @@ extend IDatagramSocketMessageReceivedEventArgs <: windows_core.Interface<IDatagr
 @C
 public struct IDatagramSocketStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public var GetEndpointPairsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Networking != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Networking != "on"]
     public var GetEndpointPairsAsync: UIntNative = UIntNative(0)
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public var GetEndpointPairsWithSortOptionsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, _impl_l0.HostNameSortOptionsAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Networking != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Networking != "on"]
     public var GetEndpointPairsWithSortOptionsAsync: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -1293,7 +1293,7 @@ public class IDatagramSocketStatics <: InterfaceWrapperBase & ComInterface & Run
         readVtbl<IDatagramSocketStaticsVtbl>(IDatagramSocketStaticsVtbl())
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func GetEndpointPairsAsync(remoteHostName: HostName, remoteServiceName: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVectorView<EndpointPair>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1302,7 +1302,7 @@ public class IDatagramSocketStatics <: InterfaceWrapperBase & ComInterface & Run
         return windows_future.IAsyncOperation<windows_collections.IVectorView<EndpointPair>>.fromAbiTake(result__)
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func GetEndpointPairsWithSortOptionsAsync(remoteHostName: HostName, remoteServiceName: windows_core.HString, sortOptions: _impl_l0.HostNameSortOptions): windows_future.IAsyncOperation<windows_collections.IVectorView<EndpointPair>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2880,13 +2880,13 @@ extend IStreamSocketListener3 <: windows_core.Interface<IStreamSocketListener3> 
 @C
 public struct IStreamSocketStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public var GetEndpointPairsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Networking != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Networking != "on"]
     public var GetEndpointPairsAsync: UIntNative = UIntNative(0)
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public var GetEndpointPairsWithSortOptionsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, _impl_l0.HostNameSortOptionsAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Networking != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Networking != "on"]
     public var GetEndpointPairsWithSortOptionsAsync: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -2956,7 +2956,7 @@ public class IStreamSocketStatics <: InterfaceWrapperBase & ComInterface & Runti
         readVtbl<IStreamSocketStaticsVtbl>(IStreamSocketStaticsVtbl())
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func GetEndpointPairsAsync(remoteHostName: HostName, remoteServiceName: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVectorView<EndpointPair>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2965,7 +2965,7 @@ public class IStreamSocketStatics <: InterfaceWrapperBase & ComInterface & Runti
         return windows_future.IAsyncOperation<windows_collections.IVectorView<EndpointPair>>.fromAbiTake(result__)
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func GetEndpointPairsWithSortOptionsAsync(remoteHostName: HostName, remoteServiceName: windows_core.HString, sortOptions: _impl_l0.HostNameSortOptions): windows_future.IAsyncOperation<windows_collections.IVectorView<EndpointPair>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3439,10 +3439,13 @@ public struct IWebSocketControlVtbl {
     public var SetProxyCredential: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Security_Credentials != "on"]
     public var SetProxyCredential: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedProtocols: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedProtocols: UIntNative = UIntNative(0)
     public init() {}
 
-    @When[Windows_Security_Credentials == "on"]
+    @When[(Windows_Security_Credentials == "on") && (Windows_Foundation_Collections == "on")]
     public static func new<Identity>(offset!: Int64 = 0): IWebSocketControlVtbl where Identity <: IWebSocketControl_Impl {
         let _ = offset
         var vtbl = IWebSocketControlVtbl()
@@ -3467,18 +3470,11 @@ public struct IWebSocketControlVtbl {
         vtbl = IWebSocketControlVtbl.__assignSetServerCredential<Identity>(vtbl)
         vtbl = IWebSocketControlVtbl.__assignProxyCredential<Identity>(vtbl)
         vtbl = IWebSocketControlVtbl.__assignSetProxyCredential<Identity>(vtbl)
-        vtbl.SupportedProtocols = { instanceRaw, result__ =>
-            match (unsafe { asImplFromRaw<IWebSocketControl_ImplErased>(instanceRaw) }) {
-                case Some(impl) =>
-                    impl.__winrtThunk_SupportedProtocols(result__)
-                case None =>
-                    E_NOINTERFACE.value
-            }
-        }
+        vtbl = IWebSocketControlVtbl.__assignSupportedProtocols<Identity>(vtbl)
         return vtbl
     }
 
-    @When[Windows_Security_Credentials == "on" && Windows_Security_Credentials == "on"]
+    @When[((Windows_Security_Credentials == "on") && (Windows_Foundation_Collections == "on")) && Windows_Security_Credentials == "on"]
     public static func __assignServerCredential<Identity>(vtbl: IWebSocketControlVtbl): IWebSocketControlVtbl where Identity <: IWebSocketControl_Impl {
         var next = vtbl
         next.ServerCredential = { instanceRaw, result__ =>
@@ -3492,12 +3488,12 @@ public struct IWebSocketControlVtbl {
         return next
     }
 
-    @When[Windows_Security_Credentials == "on" && Windows_Security_Credentials != "on"]
+    @When[((Windows_Security_Credentials == "on") && (Windows_Foundation_Collections == "on")) && Windows_Security_Credentials != "on"]
     public static func __assignServerCredential<Identity>(vtbl: IWebSocketControlVtbl): IWebSocketControlVtbl where Identity <: IWebSocketControl_Impl {
         return vtbl
     }
 
-    @When[Windows_Security_Credentials == "on" && Windows_Security_Credentials == "on"]
+    @When[((Windows_Security_Credentials == "on") && (Windows_Foundation_Collections == "on")) && Windows_Security_Credentials == "on"]
     public static func __assignSetServerCredential<Identity>(vtbl: IWebSocketControlVtbl): IWebSocketControlVtbl where Identity <: IWebSocketControl_Impl {
         var next = vtbl
         next.SetServerCredential = { instanceRaw, arg0 =>
@@ -3511,12 +3507,12 @@ public struct IWebSocketControlVtbl {
         return next
     }
 
-    @When[Windows_Security_Credentials == "on" && Windows_Security_Credentials != "on"]
+    @When[((Windows_Security_Credentials == "on") && (Windows_Foundation_Collections == "on")) && Windows_Security_Credentials != "on"]
     public static func __assignSetServerCredential<Identity>(vtbl: IWebSocketControlVtbl): IWebSocketControlVtbl where Identity <: IWebSocketControl_Impl {
         return vtbl
     }
 
-    @When[Windows_Security_Credentials == "on" && Windows_Security_Credentials == "on"]
+    @When[((Windows_Security_Credentials == "on") && (Windows_Foundation_Collections == "on")) && Windows_Security_Credentials == "on"]
     public static func __assignProxyCredential<Identity>(vtbl: IWebSocketControlVtbl): IWebSocketControlVtbl where Identity <: IWebSocketControl_Impl {
         var next = vtbl
         next.ProxyCredential = { instanceRaw, result__ =>
@@ -3530,12 +3526,12 @@ public struct IWebSocketControlVtbl {
         return next
     }
 
-    @When[Windows_Security_Credentials == "on" && Windows_Security_Credentials != "on"]
+    @When[((Windows_Security_Credentials == "on") && (Windows_Foundation_Collections == "on")) && Windows_Security_Credentials != "on"]
     public static func __assignProxyCredential<Identity>(vtbl: IWebSocketControlVtbl): IWebSocketControlVtbl where Identity <: IWebSocketControl_Impl {
         return vtbl
     }
 
-    @When[Windows_Security_Credentials == "on" && Windows_Security_Credentials == "on"]
+    @When[((Windows_Security_Credentials == "on") && (Windows_Foundation_Collections == "on")) && Windows_Security_Credentials == "on"]
     public static func __assignSetProxyCredential<Identity>(vtbl: IWebSocketControlVtbl): IWebSocketControlVtbl where Identity <: IWebSocketControl_Impl {
         var next = vtbl
         next.SetProxyCredential = { instanceRaw, arg0 =>
@@ -3549,8 +3545,27 @@ public struct IWebSocketControlVtbl {
         return next
     }
 
-    @When[Windows_Security_Credentials == "on" && Windows_Security_Credentials != "on"]
+    @When[((Windows_Security_Credentials == "on") && (Windows_Foundation_Collections == "on")) && Windows_Security_Credentials != "on"]
     public static func __assignSetProxyCredential<Identity>(vtbl: IWebSocketControlVtbl): IWebSocketControlVtbl where Identity <: IWebSocketControl_Impl {
+        return vtbl
+    }
+
+    @When[((Windows_Security_Credentials == "on") && (Windows_Foundation_Collections == "on")) && Windows_Foundation_Collections == "on"]
+    public static func __assignSupportedProtocols<Identity>(vtbl: IWebSocketControlVtbl): IWebSocketControlVtbl where Identity <: IWebSocketControl_Impl {
+        var next = vtbl
+        next.SupportedProtocols = { instanceRaw, result__ =>
+            match (unsafe { asImplFromRaw<IWebSocketControl_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_SupportedProtocols(result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        return next
+    }
+
+    @When[((Windows_Security_Credentials == "on") && (Windows_Foundation_Collections == "on")) && Windows_Foundation_Collections != "on"]
+    public static func __assignSupportedProtocols<Identity>(vtbl: IWebSocketControlVtbl): IWebSocketControlVtbl where Identity <: IWebSocketControl_Impl {
         return vtbl
     }
 
@@ -3562,7 +3577,7 @@ public struct IWebSocketControlVtbl {
     }
 }
 
-@When[Windows_Networking_Sockets == "on" && Windows_Security_Credentials == "on"]
+@When[Windows_Networking_Sockets == "on" && ((Windows_Security_Credentials == "on") && (Windows_Foundation_Collections == "on"))]
 public interface IWebSocketControl_ImplErased {
     public func __winrtThunk_OutboundBufferSizeInBytes(result__: CPointer<UInt32>): Int32
 
@@ -3579,7 +3594,7 @@ public interface IWebSocketControl_ImplErased {
     public func __winrtThunk_SupportedProtocols(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Networking_Sockets == "on" && Windows_Security_Credentials == "on"]
+@When[Windows_Networking_Sockets == "on" && ((Windows_Security_Credentials == "on") && (Windows_Foundation_Collections == "on"))]
 public interface IWebSocketControl_Impl <: IWebSocketControl_ImplErased {
     public func OutboundBufferSizeInBytes(): windows_core.Result<UInt32>
 
@@ -3801,6 +3816,7 @@ public class IWebSocketControl <: InterfaceWrapperBase & ComInterface & RuntimeN
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedProtocols(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3817,13 +3833,13 @@ extend IWebSocketControl <: windows_core.Interface<IWebSocketControl> {}
 @C
 public struct IWebSocketControl2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public var IgnorableServerCertificateErrors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Security_Cryptography_Certificates != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Security_Cryptography_Certificates != "on"]
     public var IgnorableServerCertificateErrors: UIntNative = UIntNative(0)
     public init() {}
 
-    @When[(Windows_Security_Cryptography_Certificates == "on") && (Windows_Security_Credentials == "on")]
+    @When[(Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on") && ((Windows_Security_Credentials == "on") && (Windows_Foundation_Collections == "on"))]
     public static func new<Identity>(offset!: Int64 = 0): IWebSocketControl2Vtbl where Identity <: IWebSocketControl2_Impl {
         let _ = offset
         var vtbl = IWebSocketControl2Vtbl()
@@ -3832,7 +3848,7 @@ public struct IWebSocketControl2Vtbl {
         return vtbl
     }
 
-    @When[((Windows_Security_Cryptography_Certificates == "on") && (Windows_Security_Credentials == "on")) && Windows_Security_Cryptography_Certificates == "on"]
+    @When[((Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on") && ((Windows_Security_Credentials == "on") && (Windows_Foundation_Collections == "on"))) && (Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on")]
     public static func __assignIgnorableServerCertificateErrors<Identity>(vtbl: IWebSocketControl2Vtbl): IWebSocketControl2Vtbl where Identity <: IWebSocketControl2_Impl {
         var next = vtbl
         next.IgnorableServerCertificateErrors = { instanceRaw, result__ =>
@@ -3846,7 +3862,7 @@ public struct IWebSocketControl2Vtbl {
         return next
     }
 
-    @When[((Windows_Security_Cryptography_Certificates == "on") && (Windows_Security_Credentials == "on")) && Windows_Security_Cryptography_Certificates != "on"]
+    @When[((Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on") && ((Windows_Security_Credentials == "on") && (Windows_Foundation_Collections == "on"))) && (Windows_Foundation_Collections != "on" || Windows_Security_Cryptography_Certificates != "on")]
     public static func __assignIgnorableServerCertificateErrors<Identity>(vtbl: IWebSocketControl2Vtbl): IWebSocketControl2Vtbl where Identity <: IWebSocketControl2_Impl {
         return vtbl
     }
@@ -3864,12 +3880,12 @@ public struct IWebSocketControl2Vtbl {
     }
 }
 
-@When[Windows_Networking_Sockets == "on" && ((Windows_Security_Cryptography_Certificates == "on") && (Windows_Security_Credentials == "on"))]
+@When[Windows_Networking_Sockets == "on" && ((Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on") && ((Windows_Security_Credentials == "on") && (Windows_Foundation_Collections == "on")))]
 public interface IWebSocketControl2_ImplErased {
     public func __winrtThunk_IgnorableServerCertificateErrors(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Networking_Sockets == "on" && ((Windows_Security_Cryptography_Certificates == "on") && (Windows_Security_Credentials == "on"))]
+@When[Windows_Networking_Sockets == "on" && ((Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on") && ((Windows_Security_Credentials == "on") && (Windows_Foundation_Collections == "on")))]
 public interface IWebSocketControl2_Impl <: IWebSocketControl2_ImplErased & IWebSocketControl_Impl {
     public func IgnorableServerCertificateErrors(): windows_core.Result<windows_collections.IVector<_impl_l0.ChainValidationResult>>
 
@@ -4063,7 +4079,7 @@ public class IWebSocketControl2 <: InterfaceWrapperBase & ComInterface & Runtime
         readVtbl<IWebSocketControl2Vtbl>(IWebSocketControl2Vtbl())
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func IgnorableServerCertificateErrors(): windows_collections.IVector<_impl_l0.ChainValidationResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5224,7 +5240,7 @@ public class WebSocketError <: windows_interface.RuntimeName & windows_core.Runt
     }
 }
 
-@When[Windows_Networking_Sockets == "on"]
+@When[Windows_Networking_Sockets == "on" && Windows_ApplicationModel_Background == "on"]
 public class WebSocketKeepAlive <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -5309,7 +5325,7 @@ public class WebSocketKeepAlive <: InterfaceWrapperBase & ComInterface & windows
     }
 }
 
-@When[Windows_Networking_Sockets == "on"]
+@When[Windows_Networking_Sockets == "on" && Windows_ApplicationModel_Background == "on"]
 extend WebSocketKeepAlive <: windows_core.HandleWinrtType<WebSocketKeepAlive> {
     public static func intoWinrtHandle(value: WebSocketKeepAlive): CPointer<Unit> {
         value.asRaw()

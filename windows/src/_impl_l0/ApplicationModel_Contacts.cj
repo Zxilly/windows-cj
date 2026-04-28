@@ -5165,9 +5165,9 @@ extend IContactManagerStatics5 <: windows_core.Interface<IContactManagerStatics5
 public struct IContactMatchReasonVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Field: CFunc<(CPointer<Unit>, CPointer<ContactMatchReasonKindAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Data_Text == "on"]
+    @When[Windows_Data_Text == "on" && Windows_Foundation_Collections == "on"]
     public var Segments: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Data_Text != "on"]
+    @When[Windows_Data_Text != "on" || Windows_Foundation_Collections != "on"]
     public var Segments: UIntNative = UIntNative(0)
     public var Text: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -5246,7 +5246,7 @@ public class IContactMatchReason <: InterfaceWrapperBase & ComInterface & Runtim
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<ContactMatchReasonKind>()).unwrap()
     }
 
-    @When[Windows_Data_Text == "on"]
+    @When[Windows_Data_Text == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func Segments(): windows_collections.IVectorView<TextSegment> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6632,7 +6632,10 @@ extend IKnownContactFieldStatics <: windows_core.Interface<IKnownContactFieldSta
 @C
 public struct IPinnedContactIdsQueryResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ContactIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ContactIds: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -6701,6 +6704,7 @@ public class IPinnedContactIdsQueryResult <: InterfaceWrapperBase & ComInterface
         readVtbl<IPinnedContactIdsQueryResultVtbl>(IPinnedContactIdsQueryResultVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ContactIds(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6782,6 +6786,7 @@ public class PinnedContactIdsQueryResult <: InterfaceWrapperBase & ComInterface 
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ContactIds(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().ContactIds()
     }

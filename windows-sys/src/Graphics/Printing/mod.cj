@@ -328,6 +328,7 @@ public class IPrintTask2 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IPrintTaskOptionsCoreUIConfigurationVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var DisplayedOptions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -372,6 +373,7 @@ public class IPrintTaskOptionsCoreUIConfiguration <: InterfaceWrapperBase & ComI
         readVtbl<IPrintTaskOptionsCoreUIConfigurationVtbl>(IPrintTaskOptionsCoreUIConfigurationVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DisplayedOptions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2733,7 +2735,7 @@ public class IPrintPageRangeFactory <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IPrintTaskVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_ApplicationModel_DataTransfer == "on"]
+    @When[Windows_ApplicationModel_DataTransfer == "on" && Windows_ApplicationModel_DataTransfer == "on" && Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Source: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Options: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -2788,7 +2790,7 @@ public class IPrintTask <: InterfaceWrapperBase & ComInterface {
         readVtbl<IPrintTaskVtbl>(IPrintTaskVtbl())
     }
 
-    @When[Windows_ApplicationModel_DataTransfer == "on"]
+    @When[Windows_ApplicationModel_DataTransfer == "on" && Windows_ApplicationModel_DataTransfer == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func Properties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2861,6 +2863,7 @@ public class IPrintTask <: InterfaceWrapperBase & ComInterface {
 public struct IPrintTaskOptions2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var PageRangeOptions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CustomPageRanges: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -2911,6 +2914,7 @@ public class IPrintTaskOptions2 <: InterfaceWrapperBase & ComInterface {
         return __vt.PageRangeOptions(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CustomPageRanges(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

@@ -5,9 +5,7 @@ import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrap
 import windows_interface as windows_interface
 import windows_polyfill.{unionReadFloat32, unionReadFloat64, unionReadInt16, unionReadInt32, unionReadInt64, unionReadInt8, unionReadUInt16, unionReadUInt32, unionReadUInt64, unionReadUInt8, unionWriteFloat32, unionWriteFloat64, unionWriteInt16, unionWriteInt32, unionWriteInt64, unionWriteInt8, unionWriteUInt16, unionWriteUInt32, unionWriteUInt64, unionWriteUInt8}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Direct3D12 == "on"]
 import windows_sys.Win32.Graphics.Direct3D12 as Win32_Graphics_Direct3D12
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 
@@ -4047,12 +4045,26 @@ public class IDMLOperatorInitializer <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[DIRECTML == "on" && Windows_Win32_Graphics_Direct3D12 == "on"]
+@When[Windows_Win32_AI_MachineLearning_DirectML == "on" && DIRECTML == "on" && Windows_Win32_AI_MachineLearning_DirectML_DMLCreateDevice == "on" && Windows_Win32_Graphics_Direct3D12 == "on"]
 foreign {
     // param-hint: ppv optional
     func DMLCreateDevice(d3d12Device: CPointer<Unit>, flags: Int32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_AI_MachineLearning_DirectML == "on" && DIRECTML == "on" && Windows_Win32_AI_MachineLearning_DirectML_DMLCreateDevice == "on" && Windows_Win32_Graphics_Direct3D12 == "on"]
+public unsafe func Windows_DMLCreateDevice(d3d12Device: CPointer<Unit>, flags: Int32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return DMLCreateDevice(d3d12Device, flags, riid, ppv)
+}
+
+@When[Windows_Win32_AI_MachineLearning_DirectML == "on" && DIRECTML == "on" && Windows_Win32_AI_MachineLearning_DirectML_DMLCreateDevice1 == "on" && Windows_Win32_Graphics_Direct3D12 == "on"]
+foreign {
     // param-hint: ppv optional
     func DMLCreateDevice1(d3d12Device: CPointer<Unit>, flags: Int32, minimumFeatureLevel: Int32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_AI_MachineLearning_DirectML == "on" && DIRECTML == "on" && Windows_Win32_AI_MachineLearning_DirectML_DMLCreateDevice1 == "on" && Windows_Win32_Graphics_Direct3D12 == "on"]
+public unsafe func Windows_DMLCreateDevice1(d3d12Device: CPointer<Unit>, flags: Int32, minimumFeatureLevel: Int32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return DMLCreateDevice1(d3d12Device, flags, minimumFeatureLevel, riid, ppv)
 }
 
 @When[Windows_Win32_AI_MachineLearning_DirectML == "on"]

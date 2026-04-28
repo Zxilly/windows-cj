@@ -800,13 +800,22 @@ extend PlatformDiagnosticTraceInfo <: windows_core.HandleWinrtType<PlatformDiagn
 public struct IPlatformDiagnosticActionsStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var IsScenarioEnabled: CFunc<(CPointer<Unit>, GUID, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var TryEscalateScenario: CFunc<(CPointer<Unit>, GUID, PlatformDiagnosticEscalationTypeAbi, CPointer<Unit>, Bool, Bool, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _, _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var TryEscalateScenario: UIntNative = UIntNative(0)
     public var DownloadLatestSettingsForNamespace: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Bool, Bool, Bool, CPointer<PlatformDiagnosticActionStateAbi>) -> Int32> = { _, _, _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetActiveScenarioList: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetActiveScenarioList: UIntNative = UIntNative(0)
     public var ForceUpload: CFunc<(CPointer<Unit>, PlatformDiagnosticEventBufferLatenciesAbi, Bool, Bool, CPointer<PlatformDiagnosticActionStateAbi>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
     public var IsTraceRunning: CFunc<(CPointer<Unit>, PlatformDiagnosticTraceSlotTypeAbi, GUID, UInt64, CPointer<PlatformDiagnosticTraceSlotStateAbi>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
     public var GetActiveTraceRuntime: CFunc<(CPointer<Unit>, PlatformDiagnosticTraceSlotTypeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetKnownTraceList: CFunc<(CPointer<Unit>, PlatformDiagnosticTraceSlotTypeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetKnownTraceList: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -883,6 +892,7 @@ public class IPlatformDiagnosticActionsStatics <: InterfaceWrapperBase & ComInte
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TryEscalateScenario(scenarioId: GuidValue, escalationType: PlatformDiagnosticEscalationType, outputDirectory: windows_core.HString, timestampOutputDirectory: Bool, forceEscalationUpload: Bool, triggers: windows_collections.IMapView<windows_core.HString, windows_core.HString>): Bool {
         let v = vtbl()
         var result__ = false
@@ -899,6 +909,7 @@ public class IPlatformDiagnosticActionsStatics <: InterfaceWrapperBase & ComInte
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<PlatformDiagnosticActionState>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetActiveScenarioList(): windows_collections.IVectorView<GuidValue> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -931,6 +942,7 @@ public class IPlatformDiagnosticActionsStatics <: InterfaceWrapperBase & ComInte
         return PlatformDiagnosticTraceRuntimeInfo.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetKnownTraceList(slotType: PlatformDiagnosticTraceSlotType): windows_collections.IVectorView<PlatformDiagnosticTraceInfo> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -974,6 +986,7 @@ public class PlatformDiagnosticActions <: windows_interface.RuntimeName & window
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func TryEscalateScenario(scenarioId: GuidValue, escalationType: PlatformDiagnosticEscalationType, outputDirectory: windows_core.HString, timestampOutputDirectory: Bool, forceEscalationUpload: Bool, triggers: windows_collections.IMapView<windows_core.HString, windows_core.HString>): Bool {
         var result__: Option<Bool> = Option<Bool>.None
         try (factory__ = windows_core.factory<PlatformDiagnosticActions, IPlatformDiagnosticActionsStatics>().unwrap()) {
@@ -996,6 +1009,7 @@ public class PlatformDiagnosticActions <: windows_interface.RuntimeName & window
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetActiveScenarioList(): windows_collections.IVectorView<GuidValue> {
         var result__: Option<windows_collections.IVectorView<GuidValue>> = Option<windows_collections.IVectorView<GuidValue>>.None
         try (factory__ = windows_core.factory<PlatformDiagnosticActions, IPlatformDiagnosticActionsStatics>().unwrap()) {
@@ -1040,6 +1054,7 @@ public class PlatformDiagnosticActions <: windows_interface.RuntimeName & window
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetKnownTraceList(slotType: PlatformDiagnosticTraceSlotType): windows_collections.IVectorView<PlatformDiagnosticTraceInfo> {
         var result__: Option<windows_collections.IVectorView<PlatformDiagnosticTraceInfo>> = Option<windows_collections.IVectorView<PlatformDiagnosticTraceInfo>>.None
         try (factory__ = windows_core.factory<PlatformDiagnosticActions, IPlatformDiagnosticActionsStatics>().unwrap()) {

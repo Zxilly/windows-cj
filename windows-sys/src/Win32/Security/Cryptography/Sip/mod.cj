@@ -11,4 +11,27 @@ public import windows_sys.Win32._impl_l2.MS_ADDINFO_FLAT
 public import windows_sys.Win32._impl_l2.{SIP_DISPATCH_INFO, SIP_SUBJECTINFO, pCryptSIPCreateIndirectData, pCryptSIPGetCaps, pCryptSIPGetSealedDigest, pCryptSIPGetSignedDataMsg, pCryptSIPPutSignedDataMsg, pCryptSIPRemoveSignedDataMsg, pCryptSIPVerifyIndirectData}
 @When[Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on"]
 public import windows_sys.Win32._impl_l1.SIP_INDIRECT_DATA
-
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPAddProvider == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptSIPAddProvider
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPCreateIndirectData == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptSIPCreateIndirectData
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPGetCaps == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptSIPGetCaps
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPGetSealedDigest == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptSIPGetSealedDigest
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPGetSignedDataMsg == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptSIPGetSignedDataMsg
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPLoad == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptSIPLoad
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPPutSignedDataMsg == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptSIPPutSignedDataMsg
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPRemoveProvider == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptSIPRemoveProvider
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPRemoveSignedDataMsg == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptSIPRemoveSignedDataMsg
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPRetrieveSubjectGuid == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptSIPRetrieveSubjectGuid
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPRetrieveSubjectGuidForCatalogFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptSIPRetrieveSubjectGuidForCatalogFile
+@When[Windows_Win32_Security_Cryptography_Sip == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_Sip_CryptSIPVerifyIndirectData == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptSIPVerifyIndirectData

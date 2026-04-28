@@ -3,7 +3,6 @@ package windows_sys.Devices.Gpio
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Devices_Gpio_Provider == "on"]
 import windows_sys.Devices.Gpio.Provider as Devices_Gpio_Provider
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
 
@@ -366,6 +365,7 @@ public struct IGpioChangeReaderVtbl {
     public var Clear: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var GetNextItem: CFunc<(CPointer<Unit>, CPointer<GpioChangeRecord>) -> Int32> = { _, _ => 0 }
     public var PeekNextItem: CFunc<(CPointer<Unit>, CPointer<GpioChangeRecord>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAllItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var WaitForItemsAsync: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -483,6 +483,7 @@ public class IGpioChangeReader <: InterfaceWrapperBase & ComInterface {
         return __vt.PeekNextItem(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAllItems(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -748,7 +749,7 @@ public class IGpioControllerStatics <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IGpioControllerStatics2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Devices_Gpio_Provider == "on"]
+    @When[Windows_Devices_Gpio_Provider == "on" && Windows_Foundation_Collections == "on"]
     public var GetControllersAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetDefaultAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -794,7 +795,7 @@ public class IGpioControllerStatics2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IGpioControllerStatics2Vtbl>(IGpioControllerStatics2Vtbl())
     }
 
-    @When[Windows_Devices_Gpio_Provider == "on"]
+    @When[Windows_Devices_Gpio_Provider == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func GetControllersAsync(provider: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

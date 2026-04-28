@@ -5,11 +5,8 @@ import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrap
 import windows_interface as windows_interface
 import windows_polyfill.{packedReadInt32, packedReadUInt16, packedReadUInt32, packedReadValue, packedWriteInt32, packedWriteUInt16, packedWriteUInt32, packedWriteValue, unionReadUInt16, unionReadUInt32, unionWriteUInt16, unionWriteUInt32}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows_sys.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-@When[Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
 import windows_sys.Win32.UI.Input.KeyboardAndMouse as Win32_UI_Input_KeyboardAndMouse
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
@@ -5685,126 +5682,852 @@ public class IImePad <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[IMM32 == "on"]
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmAssociateContext == "on"]
 foreign {
     func ImmAssociateContext(param0: CPointer<Unit>, param1: HIMC): HIMC
-    func ImmAssociateContextEx(param0: CPointer<Unit>, param1: HIMC, param2: UInt32): Int32
-    func ImmCreateContext(): HIMC
-    func ImmCreateIMCC(param0: UInt32): HIMCC
-    func ImmCreateSoftKeyboard(param0: UInt32, param1: CPointer<Unit>, param2: Int32, param3: Int32): CPointer<Unit>
-    func ImmDestroyContext(param0: HIMC): Int32
-    func ImmDestroyIMCC(param0: HIMCC): HIMCC
-    func ImmDestroySoftKeyboard(param0: CPointer<Unit>): Int32
-    func ImmDisableIME(param0: UInt32): Int32
-    func ImmDisableLegacyIME(): Int32
-    func ImmDisableTextFrameService(idThread: UInt32): Int32
-    func ImmEnumInputContext(idThread: UInt32, lpfn: IMCENUMPROC, lParam: IntNative): Int32
-    func ImmGenerateMessage(param0: HIMC): Int32
-    // param-hint: lpCandList bytes=param[3] optional
-    func ImmGetCandidateListA(param0: HIMC, deIndex: UInt32, lpCandList: CPointer<CANDIDATELIST>, dwBufLen: UInt32): UInt32
-    func ImmGetCandidateListCountA(param0: HIMC, lpdwListCount: CPointer<UInt32>): UInt32
-    func ImmGetCandidateListCountW(param0: HIMC, lpdwListCount: CPointer<UInt32>): UInt32
-    // param-hint: lpCandList bytes=param[3] optional
-    func ImmGetCandidateListW(param0: HIMC, deIndex: UInt32, lpCandList: CPointer<CANDIDATELIST>, dwBufLen: UInt32): UInt32
-    func ImmGetCandidateWindow(param0: HIMC, param1: UInt32, lpCandidate: CPointer<CANDIDATEFORM>): Int32
-    // param-hint: lpBuf bytes=param[3] optional
-    func ImmGetCompositionStringA(param0: HIMC, param1: UInt32, lpBuf: CPointer<Unit>, dwBufLen: UInt32): Int32
-    // param-hint: lpBuf bytes=param[3] optional
-    func ImmGetCompositionStringW(param0: HIMC, param1: UInt32, lpBuf: CPointer<Unit>, dwBufLen: UInt32): Int32
-    func ImmGetCompositionWindow(param0: HIMC, lpCompForm: CPointer<COMPOSITIONFORM>): Int32
-    func ImmGetContext(param0: CPointer<Unit>): HIMC
-    // param-hint: lpfdwConversion optional
-    // param-hint: lpfdwSentence optional
-    func ImmGetConversionStatus(param0: HIMC, lpfdwConversion: CPointer<UInt32>, lpfdwSentence: CPointer<UInt32>): Int32
-    func ImmGetDefaultIMEWnd(param0: CPointer<Unit>): CPointer<Unit>
-    // param-hint: lpBuf bytes=param[3] optional
-    func ImmGetGuideLineA(param0: HIMC, dwIndex: UInt32, lpBuf: CPointer<UInt8>, dwBufLen: UInt32): UInt32
-    // param-hint: lpBuf bytes=param[3] optional
-    func ImmGetGuideLineW(param0: HIMC, dwIndex: UInt32, lpBuf: CPointer<UInt16>, dwBufLen: UInt32): UInt32
-    func ImmGetIMCCLockCount(param0: HIMCC): UInt32
-    func ImmGetIMCCSize(param0: HIMCC): UInt32
-    func ImmGetIMCLockCount(param0: HIMC): UInt32
-    func ImmGetOpenStatus(param0: HIMC): Int32
-    func ImmGetStatusWindowPos(param0: HIMC, lpptPos: CPointer<Win32_Foundation.POINT>): Int32
-    func ImmGetVirtualKey(param0: CPointer<Unit>): UInt32
-    func ImmIsUIMessageA(param0: CPointer<Unit>, param1: UInt32, param2: UIntNative, param3: IntNative): Int32
-    func ImmIsUIMessageW(param0: CPointer<Unit>, param1: UInt32, param2: UIntNative, param3: IntNative): Int32
-    func ImmLockIMCC(param0: HIMCC): CPointer<Unit>
-    func ImmNotifyIME(param0: HIMC, dwAction: UInt32, dwIndex: UInt32, dwValue: UInt32): Int32
-    func ImmReSizeIMCC(param0: HIMCC, param1: UInt32): HIMCC
-    func ImmReleaseContext(param0: CPointer<Unit>, param1: HIMC): Int32
-    func ImmRequestMessageA(param0: HIMC, param1: UIntNative, param2: IntNative): IntNative
-    func ImmRequestMessageW(param0: HIMC, param1: UIntNative, param2: IntNative): IntNative
-    func ImmSetCandidateWindow(param0: HIMC, lpCandidate: CPointer<CANDIDATEFORM>): Int32
-    // param-hint: lpComp bytes=param[3] optional
-    // param-hint: lpRead bytes=param[5] optional
-    func ImmSetCompositionStringA(param0: HIMC, dwIndex: UInt32, lpComp: CPointer<Unit>, dwCompLen: UInt32, lpRead: CPointer<Unit>, dwReadLen: UInt32): Int32
-    // param-hint: lpComp bytes=param[3] optional
-    // param-hint: lpRead bytes=param[5] optional
-    func ImmSetCompositionStringW(param0: HIMC, dwIndex: UInt32, lpComp: CPointer<Unit>, dwCompLen: UInt32, lpRead: CPointer<Unit>, dwReadLen: UInt32): Int32
-    func ImmSetCompositionWindow(param0: HIMC, lpCompForm: CPointer<COMPOSITIONFORM>): Int32
-    func ImmSetConversionStatus(param0: HIMC, param1: UInt32, param2: UInt32): Int32
-    func ImmSetOpenStatus(param0: HIMC, param1: Int32): Int32
-    func ImmSetStatusWindowPos(param0: HIMC, lpptPos: CPointer<Win32_Foundation.POINT>): Int32
-    func ImmShowSoftKeyboard(param0: CPointer<Unit>, param1: Int32): Int32
-    func ImmSimulateHotKey(param0: CPointer<Unit>, param1: UInt32): Int32
-    func ImmUnlockIMC(param0: HIMC): Int32
-    func ImmUnlockIMCC(param0: HIMCC): Int32
 }
 
-@When[IMM32 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmAssociateContext == "on"]
+public unsafe func Windows_ImmAssociateContext(param0: CPointer<Unit>, param1: HIMC): HIMC {
+    return ImmAssociateContext(param0, param1)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmAssociateContextEx == "on"]
 foreign {
-    func ImmGetCompositionFontA(param0: HIMC, lplf: CPointer<Win32_Graphics_Gdi.LOGFONTA>): Int32
-    func ImmGetCompositionFontW(param0: HIMC, lplf: CPointer<Win32_Graphics_Gdi.LOGFONTW>): Int32
-    // param-hint: lpImeParentMenu optional
-    // param-hint: lpImeMenu bytes=param[5] optional
-    func ImmGetImeMenuItemsA(param0: HIMC, param1: UInt32, param2: UInt32, lpImeParentMenu: CPointer<IMEMENUITEMINFOA>, lpImeMenu: CPointer<IMEMENUITEMINFOA>, dwSize: UInt32): UInt32
-    // param-hint: lpImeParentMenu optional
-    // param-hint: lpImeMenu bytes=param[5] optional
-    func ImmGetImeMenuItemsW(param0: HIMC, param1: UInt32, param2: UInt32, lpImeParentMenu: CPointer<IMEMENUITEMINFOW>, lpImeMenu: CPointer<IMEMENUITEMINFOW>, dwSize: UInt32): UInt32
-    func ImmLockIMC(param0: HIMC): CPointer<INPUTCONTEXT>
-    func ImmSetCompositionFontA(param0: HIMC, lplf: CPointer<Win32_Graphics_Gdi.LOGFONTA>): Int32
-    func ImmSetCompositionFontW(param0: HIMC, lplf: CPointer<Win32_Graphics_Gdi.LOGFONTW>): Int32
+    func ImmAssociateContextEx(param0: CPointer<Unit>, param1: HIMC, param2: UInt32): Int32
 }
 
-@When[IMM32 == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmAssociateContextEx == "on"]
+public unsafe func Windows_ImmAssociateContextEx(param0: CPointer<Unit>, param1: HIMC, param2: UInt32): Int32 {
+    return ImmAssociateContextEx(param0, param1, param2)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmConfigureIMEA == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
 foreign {
     func ImmConfigureIMEA(param0: Win32_UI_Input_KeyboardAndMouse.HKL, param1: CPointer<Unit>, param2: UInt32, param3: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmConfigureIMEA == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+public unsafe func Windows_ImmConfigureIMEA(param0: Win32_UI_Input_KeyboardAndMouse.HKL, param1: CPointer<Unit>, param2: UInt32, param3: CPointer<Unit>): Int32 {
+    return ImmConfigureIMEA(param0, param1, param2, param3)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmConfigureIMEW == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+foreign {
     func ImmConfigureIMEW(param0: Win32_UI_Input_KeyboardAndMouse.HKL, param1: CPointer<Unit>, param2: UInt32, param3: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmConfigureIMEW == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+public unsafe func Windows_ImmConfigureIMEW(param0: Win32_UI_Input_KeyboardAndMouse.HKL, param1: CPointer<Unit>, param2: UInt32, param3: CPointer<Unit>): Int32 {
+    return ImmConfigureIMEW(param0, param1, param2, param3)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmCreateContext == "on"]
+foreign {
+    func ImmCreateContext(): HIMC
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmCreateContext == "on"]
+public unsafe func Windows_ImmCreateContext(): HIMC {
+    return ImmCreateContext()
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmCreateIMCC == "on"]
+foreign {
+    func ImmCreateIMCC(param0: UInt32): HIMCC
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmCreateIMCC == "on"]
+public unsafe func Windows_ImmCreateIMCC(param0: UInt32): HIMCC {
+    return ImmCreateIMCC(param0)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmCreateSoftKeyboard == "on"]
+foreign {
+    func ImmCreateSoftKeyboard(param0: UInt32, param1: CPointer<Unit>, param2: Int32, param3: Int32): CPointer<Unit>
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmCreateSoftKeyboard == "on"]
+public unsafe func Windows_ImmCreateSoftKeyboard(param0: UInt32, param1: CPointer<Unit>, param2: Int32, param3: Int32): CPointer<Unit> {
+    return ImmCreateSoftKeyboard(param0, param1, param2, param3)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmDestroyContext == "on"]
+foreign {
+    func ImmDestroyContext(param0: HIMC): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmDestroyContext == "on"]
+public unsafe func Windows_ImmDestroyContext(param0: HIMC): Int32 {
+    return ImmDestroyContext(param0)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmDestroyIMCC == "on"]
+foreign {
+    func ImmDestroyIMCC(param0: HIMCC): HIMCC
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmDestroyIMCC == "on"]
+public unsafe func Windows_ImmDestroyIMCC(param0: HIMCC): HIMCC {
+    return ImmDestroyIMCC(param0)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmDestroySoftKeyboard == "on"]
+foreign {
+    func ImmDestroySoftKeyboard(param0: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmDestroySoftKeyboard == "on"]
+public unsafe func Windows_ImmDestroySoftKeyboard(param0: CPointer<Unit>): Int32 {
+    return ImmDestroySoftKeyboard(param0)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmDisableIME == "on"]
+foreign {
+    func ImmDisableIME(param0: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmDisableIME == "on"]
+public unsafe func Windows_ImmDisableIME(param0: UInt32): Int32 {
+    return ImmDisableIME(param0)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmDisableLegacyIME == "on"]
+foreign {
+    func ImmDisableLegacyIME(): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmDisableLegacyIME == "on"]
+public unsafe func Windows_ImmDisableLegacyIME(): Int32 {
+    return ImmDisableLegacyIME()
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmDisableTextFrameService == "on"]
+foreign {
+    func ImmDisableTextFrameService(idThread: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmDisableTextFrameService == "on"]
+public unsafe func Windows_ImmDisableTextFrameService(idThread: UInt32): Int32 {
+    return ImmDisableTextFrameService(idThread)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmEnumInputContext == "on"]
+foreign {
+    func ImmEnumInputContext(idThread: UInt32, lpfn: IMCENUMPROC, lParam: IntNative): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmEnumInputContext == "on"]
+public unsafe func Windows_ImmEnumInputContext(idThread: UInt32, lpfn: IMCENUMPROC, lParam: IntNative): Int32 {
+    return ImmEnumInputContext(idThread, lpfn, lParam)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmEnumRegisterWordA == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+foreign {
     // param-hint: lpszReading optional
     // param-hint: lpszRegister optional
     func ImmEnumRegisterWordA(param0: Win32_UI_Input_KeyboardAndMouse.HKL, param1: REGISTERWORDENUMPROCA, lpszReading: CPointer<UInt8>, param3: UInt32, lpszRegister: CPointer<UInt8>, param5: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmEnumRegisterWordA == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+public unsafe func Windows_ImmEnumRegisterWordA(param0: Win32_UI_Input_KeyboardAndMouse.HKL, param1: REGISTERWORDENUMPROCA, lpszReading: CPointer<UInt8>, param3: UInt32, lpszRegister: CPointer<UInt8>, param5: CPointer<Unit>): UInt32 {
+    return ImmEnumRegisterWordA(param0, param1, lpszReading, param3, lpszRegister, param5)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmEnumRegisterWordW == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+foreign {
     // param-hint: lpszReading optional
     // param-hint: lpszRegister optional
     func ImmEnumRegisterWordW(param0: Win32_UI_Input_KeyboardAndMouse.HKL, param1: REGISTERWORDENUMPROCW, lpszReading: CPointer<UInt16>, param3: UInt32, lpszRegister: CPointer<UInt16>, param5: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmEnumRegisterWordW == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+public unsafe func Windows_ImmEnumRegisterWordW(param0: Win32_UI_Input_KeyboardAndMouse.HKL, param1: REGISTERWORDENUMPROCW, lpszReading: CPointer<UInt16>, param3: UInt32, lpszRegister: CPointer<UInt16>, param5: CPointer<Unit>): UInt32 {
+    return ImmEnumRegisterWordW(param0, param1, lpszReading, param3, lpszRegister, param5)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmEscapeA == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+foreign {
     func ImmEscapeA(param0: Win32_UI_Input_KeyboardAndMouse.HKL, param1: HIMC, param2: UInt32, param3: CPointer<Unit>): IntNative
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmEscapeA == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+public unsafe func Windows_ImmEscapeA(param0: Win32_UI_Input_KeyboardAndMouse.HKL, param1: HIMC, param2: UInt32, param3: CPointer<Unit>): IntNative {
+    return ImmEscapeA(param0, param1, param2, param3)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmEscapeW == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+foreign {
     func ImmEscapeW(param0: Win32_UI_Input_KeyboardAndMouse.HKL, param1: HIMC, param2: UInt32, param3: CPointer<Unit>): IntNative
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmEscapeW == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+public unsafe func Windows_ImmEscapeW(param0: Win32_UI_Input_KeyboardAndMouse.HKL, param1: HIMC, param2: UInt32, param3: CPointer<Unit>): IntNative {
+    return ImmEscapeW(param0, param1, param2, param3)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGenerateMessage == "on"]
+foreign {
+    func ImmGenerateMessage(param0: HIMC): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGenerateMessage == "on"]
+public unsafe func Windows_ImmGenerateMessage(param0: HIMC): Int32 {
+    return ImmGenerateMessage(param0)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetCandidateListA == "on"]
+foreign {
+    // param-hint: lpCandList bytes=param[3] optional
+    func ImmGetCandidateListA(param0: HIMC, deIndex: UInt32, lpCandList: CPointer<CANDIDATELIST>, dwBufLen: UInt32): UInt32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetCandidateListA == "on"]
+public unsafe func Windows_ImmGetCandidateListA(param0: HIMC, deIndex: UInt32, lpCandList: CPointer<CANDIDATELIST>, dwBufLen: UInt32): UInt32 {
+    return ImmGetCandidateListA(param0, deIndex, lpCandList, dwBufLen)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetCandidateListCountA == "on"]
+foreign {
+    func ImmGetCandidateListCountA(param0: HIMC, lpdwListCount: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetCandidateListCountA == "on"]
+public unsafe func Windows_ImmGetCandidateListCountA(param0: HIMC, lpdwListCount: CPointer<UInt32>): UInt32 {
+    return ImmGetCandidateListCountA(param0, lpdwListCount)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetCandidateListCountW == "on"]
+foreign {
+    func ImmGetCandidateListCountW(param0: HIMC, lpdwListCount: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetCandidateListCountW == "on"]
+public unsafe func Windows_ImmGetCandidateListCountW(param0: HIMC, lpdwListCount: CPointer<UInt32>): UInt32 {
+    return ImmGetCandidateListCountW(param0, lpdwListCount)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetCandidateListW == "on"]
+foreign {
+    // param-hint: lpCandList bytes=param[3] optional
+    func ImmGetCandidateListW(param0: HIMC, deIndex: UInt32, lpCandList: CPointer<CANDIDATELIST>, dwBufLen: UInt32): UInt32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetCandidateListW == "on"]
+public unsafe func Windows_ImmGetCandidateListW(param0: HIMC, deIndex: UInt32, lpCandList: CPointer<CANDIDATELIST>, dwBufLen: UInt32): UInt32 {
+    return ImmGetCandidateListW(param0, deIndex, lpCandList, dwBufLen)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetCandidateWindow == "on"]
+foreign {
+    func ImmGetCandidateWindow(param0: HIMC, param1: UInt32, lpCandidate: CPointer<CANDIDATEFORM>): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetCandidateWindow == "on"]
+public unsafe func Windows_ImmGetCandidateWindow(param0: HIMC, param1: UInt32, lpCandidate: CPointer<CANDIDATEFORM>): Int32 {
+    return ImmGetCandidateWindow(param0, param1, lpCandidate)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetCompositionFontA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func ImmGetCompositionFontA(param0: HIMC, lplf: CPointer<Win32_Graphics_Gdi.LOGFONTA>): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetCompositionFontA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_ImmGetCompositionFontA(param0: HIMC, lplf: CPointer<Win32_Graphics_Gdi.LOGFONTA>): Int32 {
+    return ImmGetCompositionFontA(param0, lplf)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetCompositionFontW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func ImmGetCompositionFontW(param0: HIMC, lplf: CPointer<Win32_Graphics_Gdi.LOGFONTW>): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetCompositionFontW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_ImmGetCompositionFontW(param0: HIMC, lplf: CPointer<Win32_Graphics_Gdi.LOGFONTW>): Int32 {
+    return ImmGetCompositionFontW(param0, lplf)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetCompositionStringA == "on"]
+foreign {
+    // param-hint: lpBuf bytes=param[3] optional
+    func ImmGetCompositionStringA(param0: HIMC, param1: UInt32, lpBuf: CPointer<Unit>, dwBufLen: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetCompositionStringA == "on"]
+public unsafe func Windows_ImmGetCompositionStringA(param0: HIMC, param1: UInt32, lpBuf: CPointer<Unit>, dwBufLen: UInt32): Int32 {
+    return ImmGetCompositionStringA(param0, param1, lpBuf, dwBufLen)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetCompositionStringW == "on"]
+foreign {
+    // param-hint: lpBuf bytes=param[3] optional
+    func ImmGetCompositionStringW(param0: HIMC, param1: UInt32, lpBuf: CPointer<Unit>, dwBufLen: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetCompositionStringW == "on"]
+public unsafe func Windows_ImmGetCompositionStringW(param0: HIMC, param1: UInt32, lpBuf: CPointer<Unit>, dwBufLen: UInt32): Int32 {
+    return ImmGetCompositionStringW(param0, param1, lpBuf, dwBufLen)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetCompositionWindow == "on"]
+foreign {
+    func ImmGetCompositionWindow(param0: HIMC, lpCompForm: CPointer<COMPOSITIONFORM>): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetCompositionWindow == "on"]
+public unsafe func Windows_ImmGetCompositionWindow(param0: HIMC, lpCompForm: CPointer<COMPOSITIONFORM>): Int32 {
+    return ImmGetCompositionWindow(param0, lpCompForm)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetContext == "on"]
+foreign {
+    func ImmGetContext(param0: CPointer<Unit>): HIMC
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetContext == "on"]
+public unsafe func Windows_ImmGetContext(param0: CPointer<Unit>): HIMC {
+    return ImmGetContext(param0)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetConversionListA == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+foreign {
     // param-hint: lpDst bytes=param[4]
     func ImmGetConversionListA(param0: Win32_UI_Input_KeyboardAndMouse.HKL, param1: HIMC, lpSrc: CPointer<UInt8>, lpDst: CPointer<CANDIDATELIST>, dwBufLen: UInt32, uFlag: UInt32): UInt32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetConversionListA == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+public unsafe func Windows_ImmGetConversionListA(param0: Win32_UI_Input_KeyboardAndMouse.HKL, param1: HIMC, lpSrc: CPointer<UInt8>, lpDst: CPointer<CANDIDATELIST>, dwBufLen: UInt32, uFlag: UInt32): UInt32 {
+    return ImmGetConversionListA(param0, param1, lpSrc, lpDst, dwBufLen, uFlag)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetConversionListW == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+foreign {
     // param-hint: lpDst bytes=param[4]
     func ImmGetConversionListW(param0: Win32_UI_Input_KeyboardAndMouse.HKL, param1: HIMC, lpSrc: CPointer<UInt16>, lpDst: CPointer<CANDIDATELIST>, dwBufLen: UInt32, uFlag: UInt32): UInt32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetConversionListW == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+public unsafe func Windows_ImmGetConversionListW(param0: Win32_UI_Input_KeyboardAndMouse.HKL, param1: HIMC, lpSrc: CPointer<UInt16>, lpDst: CPointer<CANDIDATELIST>, dwBufLen: UInt32, uFlag: UInt32): UInt32 {
+    return ImmGetConversionListW(param0, param1, lpSrc, lpDst, dwBufLen, uFlag)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetConversionStatus == "on"]
+foreign {
+    // param-hint: lpfdwConversion optional
+    // param-hint: lpfdwSentence optional
+    func ImmGetConversionStatus(param0: HIMC, lpfdwConversion: CPointer<UInt32>, lpfdwSentence: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetConversionStatus == "on"]
+public unsafe func Windows_ImmGetConversionStatus(param0: HIMC, lpfdwConversion: CPointer<UInt32>, lpfdwSentence: CPointer<UInt32>): Int32 {
+    return ImmGetConversionStatus(param0, lpfdwConversion, lpfdwSentence)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetDefaultIMEWnd == "on"]
+foreign {
+    func ImmGetDefaultIMEWnd(param0: CPointer<Unit>): CPointer<Unit>
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetDefaultIMEWnd == "on"]
+public unsafe func Windows_ImmGetDefaultIMEWnd(param0: CPointer<Unit>): CPointer<Unit> {
+    return ImmGetDefaultIMEWnd(param0)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetDescriptionA == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+foreign {
     // param-hint: lpszDescription len=param[2] optional
     func ImmGetDescriptionA(param0: Win32_UI_Input_KeyboardAndMouse.HKL, lpszDescription: CPointer<UInt8>, uBufLen: UInt32): UInt32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetDescriptionA == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+public unsafe func Windows_ImmGetDescriptionA(param0: Win32_UI_Input_KeyboardAndMouse.HKL, lpszDescription: CPointer<UInt8>, uBufLen: UInt32): UInt32 {
+    return ImmGetDescriptionA(param0, lpszDescription, uBufLen)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetDescriptionW == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+foreign {
     // param-hint: lpszDescription len=param[2] optional
     func ImmGetDescriptionW(param0: Win32_UI_Input_KeyboardAndMouse.HKL, lpszDescription: CPointer<UInt16>, uBufLen: UInt32): UInt32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetDescriptionW == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+public unsafe func Windows_ImmGetDescriptionW(param0: Win32_UI_Input_KeyboardAndMouse.HKL, lpszDescription: CPointer<UInt16>, uBufLen: UInt32): UInt32 {
+    return ImmGetDescriptionW(param0, lpszDescription, uBufLen)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetGuideLineA == "on"]
+foreign {
+    // param-hint: lpBuf bytes=param[3] optional
+    func ImmGetGuideLineA(param0: HIMC, dwIndex: UInt32, lpBuf: CPointer<UInt8>, dwBufLen: UInt32): UInt32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetGuideLineA == "on"]
+public unsafe func Windows_ImmGetGuideLineA(param0: HIMC, dwIndex: UInt32, lpBuf: CPointer<UInt8>, dwBufLen: UInt32): UInt32 {
+    return ImmGetGuideLineA(param0, dwIndex, lpBuf, dwBufLen)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetGuideLineW == "on"]
+foreign {
+    // param-hint: lpBuf bytes=param[3] optional
+    func ImmGetGuideLineW(param0: HIMC, dwIndex: UInt32, lpBuf: CPointer<UInt16>, dwBufLen: UInt32): UInt32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetGuideLineW == "on"]
+public unsafe func Windows_ImmGetGuideLineW(param0: HIMC, dwIndex: UInt32, lpBuf: CPointer<UInt16>, dwBufLen: UInt32): UInt32 {
+    return ImmGetGuideLineW(param0, dwIndex, lpBuf, dwBufLen)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetHotKey == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+foreign {
     func ImmGetHotKey(param0: UInt32, lpuModifiers: CPointer<UInt32>, lpuVKey: CPointer<UInt32>, phKL: CPointer<Win32_UI_Input_KeyboardAndMouse.HKL>): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetHotKey == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+public unsafe func Windows_ImmGetHotKey(param0: UInt32, lpuModifiers: CPointer<UInt32>, lpuVKey: CPointer<UInt32>, phKL: CPointer<Win32_UI_Input_KeyboardAndMouse.HKL>): Int32 {
+    return ImmGetHotKey(param0, lpuModifiers, lpuVKey, phKL)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetIMCCLockCount == "on"]
+foreign {
+    func ImmGetIMCCLockCount(param0: HIMCC): UInt32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetIMCCLockCount == "on"]
+public unsafe func Windows_ImmGetIMCCLockCount(param0: HIMCC): UInt32 {
+    return ImmGetIMCCLockCount(param0)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetIMCCSize == "on"]
+foreign {
+    func ImmGetIMCCSize(param0: HIMCC): UInt32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetIMCCSize == "on"]
+public unsafe func Windows_ImmGetIMCCSize(param0: HIMCC): UInt32 {
+    return ImmGetIMCCSize(param0)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetIMCLockCount == "on"]
+foreign {
+    func ImmGetIMCLockCount(param0: HIMC): UInt32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetIMCLockCount == "on"]
+public unsafe func Windows_ImmGetIMCLockCount(param0: HIMC): UInt32 {
+    return ImmGetIMCLockCount(param0)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetIMEFileNameA == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+foreign {
     // param-hint: lpszFileName len=param[2] optional
     func ImmGetIMEFileNameA(param0: Win32_UI_Input_KeyboardAndMouse.HKL, lpszFileName: CPointer<UInt8>, uBufLen: UInt32): UInt32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetIMEFileNameA == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+public unsafe func Windows_ImmGetIMEFileNameA(param0: Win32_UI_Input_KeyboardAndMouse.HKL, lpszFileName: CPointer<UInt8>, uBufLen: UInt32): UInt32 {
+    return ImmGetIMEFileNameA(param0, lpszFileName, uBufLen)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetIMEFileNameW == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+foreign {
     // param-hint: lpszFileName len=param[2] optional
     func ImmGetIMEFileNameW(param0: Win32_UI_Input_KeyboardAndMouse.HKL, lpszFileName: CPointer<UInt16>, uBufLen: UInt32): UInt32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetIMEFileNameW == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+public unsafe func Windows_ImmGetIMEFileNameW(param0: Win32_UI_Input_KeyboardAndMouse.HKL, lpszFileName: CPointer<UInt16>, uBufLen: UInt32): UInt32 {
+    return ImmGetIMEFileNameW(param0, lpszFileName, uBufLen)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetImeMenuItemsA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    // param-hint: lpImeParentMenu optional
+    // param-hint: lpImeMenu bytes=param[5] optional
+    func ImmGetImeMenuItemsA(param0: HIMC, param1: UInt32, param2: UInt32, lpImeParentMenu: CPointer<IMEMENUITEMINFOA>, lpImeMenu: CPointer<IMEMENUITEMINFOA>, dwSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetImeMenuItemsA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_ImmGetImeMenuItemsA(param0: HIMC, param1: UInt32, param2: UInt32, lpImeParentMenu: CPointer<IMEMENUITEMINFOA>, lpImeMenu: CPointer<IMEMENUITEMINFOA>, dwSize: UInt32): UInt32 {
+    return ImmGetImeMenuItemsA(param0, param1, param2, lpImeParentMenu, lpImeMenu, dwSize)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetImeMenuItemsW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    // param-hint: lpImeParentMenu optional
+    // param-hint: lpImeMenu bytes=param[5] optional
+    func ImmGetImeMenuItemsW(param0: HIMC, param1: UInt32, param2: UInt32, lpImeParentMenu: CPointer<IMEMENUITEMINFOW>, lpImeMenu: CPointer<IMEMENUITEMINFOW>, dwSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetImeMenuItemsW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_ImmGetImeMenuItemsW(param0: HIMC, param1: UInt32, param2: UInt32, lpImeParentMenu: CPointer<IMEMENUITEMINFOW>, lpImeMenu: CPointer<IMEMENUITEMINFOW>, dwSize: UInt32): UInt32 {
+    return ImmGetImeMenuItemsW(param0, param1, param2, lpImeParentMenu, lpImeMenu, dwSize)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetOpenStatus == "on"]
+foreign {
+    func ImmGetOpenStatus(param0: HIMC): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetOpenStatus == "on"]
+public unsafe func Windows_ImmGetOpenStatus(param0: HIMC): Int32 {
+    return ImmGetOpenStatus(param0)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetProperty == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+foreign {
     func ImmGetProperty(param0: Win32_UI_Input_KeyboardAndMouse.HKL, param1: UInt32): UInt32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetProperty == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+public unsafe func Windows_ImmGetProperty(param0: Win32_UI_Input_KeyboardAndMouse.HKL, param1: UInt32): UInt32 {
+    return ImmGetProperty(param0, param1)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetRegisterWordStyleA == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+foreign {
     // param-hint: lpStyleBuf len=param[1]
     func ImmGetRegisterWordStyleA(param0: Win32_UI_Input_KeyboardAndMouse.HKL, nItem: UInt32, lpStyleBuf: CPointer<STYLEBUFA>): UInt32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetRegisterWordStyleA == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+public unsafe func Windows_ImmGetRegisterWordStyleA(param0: Win32_UI_Input_KeyboardAndMouse.HKL, nItem: UInt32, lpStyleBuf: CPointer<STYLEBUFA>): UInt32 {
+    return ImmGetRegisterWordStyleA(param0, nItem, lpStyleBuf)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetRegisterWordStyleW == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+foreign {
     // param-hint: lpStyleBuf len=param[1]
     func ImmGetRegisterWordStyleW(param0: Win32_UI_Input_KeyboardAndMouse.HKL, nItem: UInt32, lpStyleBuf: CPointer<STYLEBUFW>): UInt32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetRegisterWordStyleW == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+public unsafe func Windows_ImmGetRegisterWordStyleW(param0: Win32_UI_Input_KeyboardAndMouse.HKL, nItem: UInt32, lpStyleBuf: CPointer<STYLEBUFW>): UInt32 {
+    return ImmGetRegisterWordStyleW(param0, nItem, lpStyleBuf)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetStatusWindowPos == "on"]
+foreign {
+    func ImmGetStatusWindowPos(param0: HIMC, lpptPos: CPointer<Win32_Foundation.POINT>): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetStatusWindowPos == "on"]
+public unsafe func Windows_ImmGetStatusWindowPos(param0: HIMC, lpptPos: CPointer<Win32_Foundation.POINT>): Int32 {
+    return ImmGetStatusWindowPos(param0, lpptPos)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetVirtualKey == "on"]
+foreign {
+    func ImmGetVirtualKey(param0: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmGetVirtualKey == "on"]
+public unsafe func Windows_ImmGetVirtualKey(param0: CPointer<Unit>): UInt32 {
+    return ImmGetVirtualKey(param0)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmInstallIMEA == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+foreign {
     func ImmInstallIMEA(lpszIMEFileName: CPointer<UInt8>, lpszLayoutText: CPointer<UInt8>): Win32_UI_Input_KeyboardAndMouse.HKL
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmInstallIMEA == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+public unsafe func Windows_ImmInstallIMEA(lpszIMEFileName: CPointer<UInt8>, lpszLayoutText: CPointer<UInt8>): Win32_UI_Input_KeyboardAndMouse.HKL {
+    return ImmInstallIMEA(lpszIMEFileName, lpszLayoutText)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmInstallIMEW == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+foreign {
     func ImmInstallIMEW(lpszIMEFileName: CPointer<UInt16>, lpszLayoutText: CPointer<UInt16>): Win32_UI_Input_KeyboardAndMouse.HKL
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmInstallIMEW == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+public unsafe func Windows_ImmInstallIMEW(lpszIMEFileName: CPointer<UInt16>, lpszLayoutText: CPointer<UInt16>): Win32_UI_Input_KeyboardAndMouse.HKL {
+    return ImmInstallIMEW(lpszIMEFileName, lpszLayoutText)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmIsIME == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+foreign {
     func ImmIsIME(param0: Win32_UI_Input_KeyboardAndMouse.HKL): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmIsIME == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+public unsafe func Windows_ImmIsIME(param0: Win32_UI_Input_KeyboardAndMouse.HKL): Int32 {
+    return ImmIsIME(param0)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmIsUIMessageA == "on"]
+foreign {
+    func ImmIsUIMessageA(param0: CPointer<Unit>, param1: UInt32, param2: UIntNative, param3: IntNative): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmIsUIMessageA == "on"]
+public unsafe func Windows_ImmIsUIMessageA(param0: CPointer<Unit>, param1: UInt32, param2: UIntNative, param3: IntNative): Int32 {
+    return ImmIsUIMessageA(param0, param1, param2, param3)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmIsUIMessageW == "on"]
+foreign {
+    func ImmIsUIMessageW(param0: CPointer<Unit>, param1: UInt32, param2: UIntNative, param3: IntNative): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmIsUIMessageW == "on"]
+public unsafe func Windows_ImmIsUIMessageW(param0: CPointer<Unit>, param1: UInt32, param2: UIntNative, param3: IntNative): Int32 {
+    return ImmIsUIMessageW(param0, param1, param2, param3)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmLockIMC == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func ImmLockIMC(param0: HIMC): CPointer<INPUTCONTEXT>
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmLockIMC == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_ImmLockIMC(param0: HIMC): CPointer<INPUTCONTEXT> {
+    return ImmLockIMC(param0)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmLockIMCC == "on"]
+foreign {
+    func ImmLockIMCC(param0: HIMCC): CPointer<Unit>
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmLockIMCC == "on"]
+public unsafe func Windows_ImmLockIMCC(param0: HIMCC): CPointer<Unit> {
+    return ImmLockIMCC(param0)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmNotifyIME == "on"]
+foreign {
+    func ImmNotifyIME(param0: HIMC, dwAction: UInt32, dwIndex: UInt32, dwValue: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmNotifyIME == "on"]
+public unsafe func Windows_ImmNotifyIME(param0: HIMC, dwAction: UInt32, dwIndex: UInt32, dwValue: UInt32): Int32 {
+    return ImmNotifyIME(param0, dwAction, dwIndex, dwValue)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmReSizeIMCC == "on"]
+foreign {
+    func ImmReSizeIMCC(param0: HIMCC, param1: UInt32): HIMCC
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmReSizeIMCC == "on"]
+public unsafe func Windows_ImmReSizeIMCC(param0: HIMCC, param1: UInt32): HIMCC {
+    return ImmReSizeIMCC(param0, param1)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmRegisterWordA == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+foreign {
     func ImmRegisterWordA(param0: Win32_UI_Input_KeyboardAndMouse.HKL, lpszReading: CPointer<UInt8>, param2: UInt32, lpszRegister: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmRegisterWordA == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+public unsafe func Windows_ImmRegisterWordA(param0: Win32_UI_Input_KeyboardAndMouse.HKL, lpszReading: CPointer<UInt8>, param2: UInt32, lpszRegister: CPointer<UInt8>): Int32 {
+    return ImmRegisterWordA(param0, lpszReading, param2, lpszRegister)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmRegisterWordW == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+foreign {
     func ImmRegisterWordW(param0: Win32_UI_Input_KeyboardAndMouse.HKL, lpszReading: CPointer<UInt16>, param2: UInt32, lpszRegister: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmRegisterWordW == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+public unsafe func Windows_ImmRegisterWordW(param0: Win32_UI_Input_KeyboardAndMouse.HKL, lpszReading: CPointer<UInt16>, param2: UInt32, lpszRegister: CPointer<UInt16>): Int32 {
+    return ImmRegisterWordW(param0, lpszReading, param2, lpszRegister)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmReleaseContext == "on"]
+foreign {
+    func ImmReleaseContext(param0: CPointer<Unit>, param1: HIMC): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmReleaseContext == "on"]
+public unsafe func Windows_ImmReleaseContext(param0: CPointer<Unit>, param1: HIMC): Int32 {
+    return ImmReleaseContext(param0, param1)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmRequestMessageA == "on"]
+foreign {
+    func ImmRequestMessageA(param0: HIMC, param1: UIntNative, param2: IntNative): IntNative
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmRequestMessageA == "on"]
+public unsafe func Windows_ImmRequestMessageA(param0: HIMC, param1: UIntNative, param2: IntNative): IntNative {
+    return ImmRequestMessageA(param0, param1, param2)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmRequestMessageW == "on"]
+foreign {
+    func ImmRequestMessageW(param0: HIMC, param1: UIntNative, param2: IntNative): IntNative
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmRequestMessageW == "on"]
+public unsafe func Windows_ImmRequestMessageW(param0: HIMC, param1: UIntNative, param2: IntNative): IntNative {
+    return ImmRequestMessageW(param0, param1, param2)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmSetCandidateWindow == "on"]
+foreign {
+    func ImmSetCandidateWindow(param0: HIMC, lpCandidate: CPointer<CANDIDATEFORM>): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmSetCandidateWindow == "on"]
+public unsafe func Windows_ImmSetCandidateWindow(param0: HIMC, lpCandidate: CPointer<CANDIDATEFORM>): Int32 {
+    return ImmSetCandidateWindow(param0, lpCandidate)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmSetCompositionFontA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func ImmSetCompositionFontA(param0: HIMC, lplf: CPointer<Win32_Graphics_Gdi.LOGFONTA>): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmSetCompositionFontA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_ImmSetCompositionFontA(param0: HIMC, lplf: CPointer<Win32_Graphics_Gdi.LOGFONTA>): Int32 {
+    return ImmSetCompositionFontA(param0, lplf)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmSetCompositionFontW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func ImmSetCompositionFontW(param0: HIMC, lplf: CPointer<Win32_Graphics_Gdi.LOGFONTW>): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmSetCompositionFontW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_ImmSetCompositionFontW(param0: HIMC, lplf: CPointer<Win32_Graphics_Gdi.LOGFONTW>): Int32 {
+    return ImmSetCompositionFontW(param0, lplf)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmSetCompositionStringA == "on"]
+foreign {
+    // param-hint: lpComp bytes=param[3] optional
+    // param-hint: lpRead bytes=param[5] optional
+    func ImmSetCompositionStringA(param0: HIMC, dwIndex: UInt32, lpComp: CPointer<Unit>, dwCompLen: UInt32, lpRead: CPointer<Unit>, dwReadLen: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmSetCompositionStringA == "on"]
+public unsafe func Windows_ImmSetCompositionStringA(param0: HIMC, dwIndex: UInt32, lpComp: CPointer<Unit>, dwCompLen: UInt32, lpRead: CPointer<Unit>, dwReadLen: UInt32): Int32 {
+    return ImmSetCompositionStringA(param0, dwIndex, lpComp, dwCompLen, lpRead, dwReadLen)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmSetCompositionStringW == "on"]
+foreign {
+    // param-hint: lpComp bytes=param[3] optional
+    // param-hint: lpRead bytes=param[5] optional
+    func ImmSetCompositionStringW(param0: HIMC, dwIndex: UInt32, lpComp: CPointer<Unit>, dwCompLen: UInt32, lpRead: CPointer<Unit>, dwReadLen: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmSetCompositionStringW == "on"]
+public unsafe func Windows_ImmSetCompositionStringW(param0: HIMC, dwIndex: UInt32, lpComp: CPointer<Unit>, dwCompLen: UInt32, lpRead: CPointer<Unit>, dwReadLen: UInt32): Int32 {
+    return ImmSetCompositionStringW(param0, dwIndex, lpComp, dwCompLen, lpRead, dwReadLen)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmSetCompositionWindow == "on"]
+foreign {
+    func ImmSetCompositionWindow(param0: HIMC, lpCompForm: CPointer<COMPOSITIONFORM>): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmSetCompositionWindow == "on"]
+public unsafe func Windows_ImmSetCompositionWindow(param0: HIMC, lpCompForm: CPointer<COMPOSITIONFORM>): Int32 {
+    return ImmSetCompositionWindow(param0, lpCompForm)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmSetConversionStatus == "on"]
+foreign {
+    func ImmSetConversionStatus(param0: HIMC, param1: UInt32, param2: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmSetConversionStatus == "on"]
+public unsafe func Windows_ImmSetConversionStatus(param0: HIMC, param1: UInt32, param2: UInt32): Int32 {
+    return ImmSetConversionStatus(param0, param1, param2)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmSetHotKey == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+foreign {
     func ImmSetHotKey(param0: UInt32, param1: UInt32, param2: UInt32, param3: Win32_UI_Input_KeyboardAndMouse.HKL): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmSetHotKey == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+public unsafe func Windows_ImmSetHotKey(param0: UInt32, param1: UInt32, param2: UInt32, param3: Win32_UI_Input_KeyboardAndMouse.HKL): Int32 {
+    return ImmSetHotKey(param0, param1, param2, param3)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmSetOpenStatus == "on"]
+foreign {
+    func ImmSetOpenStatus(param0: HIMC, param1: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmSetOpenStatus == "on"]
+public unsafe func Windows_ImmSetOpenStatus(param0: HIMC, param1: Int32): Int32 {
+    return ImmSetOpenStatus(param0, param1)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmSetStatusWindowPos == "on"]
+foreign {
+    func ImmSetStatusWindowPos(param0: HIMC, lpptPos: CPointer<Win32_Foundation.POINT>): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmSetStatusWindowPos == "on"]
+public unsafe func Windows_ImmSetStatusWindowPos(param0: HIMC, lpptPos: CPointer<Win32_Foundation.POINT>): Int32 {
+    return ImmSetStatusWindowPos(param0, lpptPos)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmShowSoftKeyboard == "on"]
+foreign {
+    func ImmShowSoftKeyboard(param0: CPointer<Unit>, param1: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmShowSoftKeyboard == "on"]
+public unsafe func Windows_ImmShowSoftKeyboard(param0: CPointer<Unit>, param1: Int32): Int32 {
+    return ImmShowSoftKeyboard(param0, param1)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmSimulateHotKey == "on"]
+foreign {
+    func ImmSimulateHotKey(param0: CPointer<Unit>, param1: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmSimulateHotKey == "on"]
+public unsafe func Windows_ImmSimulateHotKey(param0: CPointer<Unit>, param1: UInt32): Int32 {
+    return ImmSimulateHotKey(param0, param1)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmUnlockIMC == "on"]
+foreign {
+    func ImmUnlockIMC(param0: HIMC): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmUnlockIMC == "on"]
+public unsafe func Windows_ImmUnlockIMC(param0: HIMC): Int32 {
+    return ImmUnlockIMC(param0)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmUnlockIMCC == "on"]
+foreign {
+    func ImmUnlockIMCC(param0: HIMCC): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmUnlockIMCC == "on"]
+public unsafe func Windows_ImmUnlockIMCC(param0: HIMCC): Int32 {
+    return ImmUnlockIMCC(param0)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmUnregisterWordA == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+foreign {
     func ImmUnregisterWordA(param0: Win32_UI_Input_KeyboardAndMouse.HKL, lpszReading: CPointer<UInt8>, param2: UInt32, lpszUnregister: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmUnregisterWordA == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+public unsafe func Windows_ImmUnregisterWordA(param0: Win32_UI_Input_KeyboardAndMouse.HKL, lpszReading: CPointer<UInt8>, param2: UInt32, lpszUnregister: CPointer<UInt8>): Int32 {
+    return ImmUnregisterWordA(param0, lpszReading, param2, lpszUnregister)
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmUnregisterWordW == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+foreign {
     func ImmUnregisterWordW(param0: Win32_UI_Input_KeyboardAndMouse.HKL, lpszReading: CPointer<UInt16>, param2: UInt32, lpszUnregister: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Input_Ime == "on" && IMM32 == "on" && Windows_Win32_UI_Input_Ime_ImmUnregisterWordW == "on" && Windows_Win32_UI_Input_KeyboardAndMouse == "on"]
+public unsafe func Windows_ImmUnregisterWordW(param0: Win32_UI_Input_KeyboardAndMouse.HKL, lpszReading: CPointer<UInt16>, param2: UInt32, lpszUnregister: CPointer<UInt16>): Int32 {
+    return ImmUnregisterWordW(param0, lpszReading, param2, lpszUnregister)
 }
 
 @When[Windows_Win32_UI_Input_Ime == "on"]

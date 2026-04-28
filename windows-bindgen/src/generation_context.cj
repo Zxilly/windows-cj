@@ -1,5 +1,6 @@
 package windows_bindgen
 
+import std.collection.*
 import windows_metadata.*
 
 public class BindgenContext {
@@ -8,19 +9,22 @@ public class BindgenContext {
     public let references: References
     public let typeMap: TypeMap
     public let warnings: WarningCollector
+    public let importSymbols: HashSet<String>
 
     public init(
         index: TypeIndex,
         config: BindgenConfig,
         references: References,
         typeMap: TypeMap,
-        warnings: WarningCollector
+        warnings: WarningCollector,
+        importSymbols: HashSet<String>
     ) {
         this.index = index
         this.config = config
         this.references = references
         this.typeMap = typeMap
         this.warnings = warnings
+        this.importSymbols = importSymbols
     }
 }
 

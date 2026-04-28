@@ -53,10 +53,603 @@ public import windows_sys.Win32._impl_l1.MINIDUMP_USER_STREAM_INFORMATION
 public import windows_sys.Win32._impl_l1.PGET_RUNTIME_FUNCTION_CALLBACK
 @When[Windows_Win32_System_Diagnostics_Debug == "on" && (arch == "x86_64" && (arch == "aarch64" || arch == "x86_64") || arch == "aarch64" && (arch == "aarch64" || arch == "x86_64"))]
 public import windows_sys.Win32._impl_l1.UNWIND_HISTORY_TABLE
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_AddVectoredContinueHandler == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public import windows_sys.Win32._impl_l2.Windows_AddVectoredContinueHandler
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_AddVectoredExceptionHandler == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public import windows_sys.Win32._impl_l2.Windows_AddVectoredExceptionHandler
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_Beep == "on"]
+public import windows_sys.Win32._impl_l2.Windows_Beep
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_BindImage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BindImage
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_BindImageEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BindImageEx
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_CheckRemoteDebuggerPresent == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CheckRemoteDebuggerPresent
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_CheckSumMappedFile == "on" && (arch == "x86_64" && Windows_Win32_System_SystemInformation == "on" || arch == "aarch64" && Windows_Win32_System_SystemInformation == "on")]
+public import windows_sys.Win32._impl_l2.Windows_CheckSumMappedFile
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Debug_CloseThreadWaitChainSession == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CloseThreadWaitChainSession
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_ContinueDebugEvent == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ContinueDebugEvent
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_CopyContext == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public import windows_sys.Win32._impl_l2.Windows_CopyContext
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_DbgHelpCreateUserDump == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DbgHelpCreateUserDump
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_DbgHelpCreateUserDumpW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DbgHelpCreateUserDumpW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_DebugActiveProcess == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DebugActiveProcess
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_DebugActiveProcessStop == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DebugActiveProcessStop
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_DebugBreak == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DebugBreak
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_DebugBreakProcess == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DebugBreakProcess
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_DebugSetProcessKillOnExit == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DebugSetProcessKillOnExit
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_DecodePointer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DecodePointer
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && API_MS_WIN_CORE_UTIL_L1_1_1 == "on" && Windows_Win32_System_Diagnostics_Debug_DecodeRemotePointer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DecodeRemotePointer
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_DecodeSystemPointer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DecodeSystemPointer
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_EncodePointer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EncodePointer
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && API_MS_WIN_CORE_UTIL_L1_1_1 == "on" && Windows_Win32_System_Diagnostics_Debug_EncodeRemotePointer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EncodeRemotePointer
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_EncodeSystemPointer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EncodeSystemPointer
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_EnumDirTree == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EnumDirTree
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_EnumDirTreeW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EnumDirTreeW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_EnumerateLoadedModules64 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EnumerateLoadedModules64
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_EnumerateLoadedModulesEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EnumerateLoadedModulesEx
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_EnumerateLoadedModulesExW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EnumerateLoadedModulesExW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_EnumerateLoadedModulesW64 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EnumerateLoadedModulesW64
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_FatalAppExitA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FatalAppExitA
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_FatalAppExitW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FatalAppExitW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_FatalExit == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FatalExit
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_FindDebugInfoFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindDebugInfoFile
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_FindDebugInfoFileEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindDebugInfoFileEx
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_FindDebugInfoFileExW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindDebugInfoFileExW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_FindExecutableImage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindExecutableImage
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_FindExecutableImageEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindExecutableImageEx
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_FindExecutableImageExW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindExecutableImageExW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_FindFileInPath == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindFileInPath
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_FindFileInSearchPath == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindFileInSearchPath
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_FlushInstructionCache == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FlushInstructionCache
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_FormatMessageA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FormatMessageA
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_FormatMessageW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FormatMessageW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_GetEnabledXStateFeatures == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetEnabledXStateFeatures
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_GetErrorMode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetErrorMode
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_GetImageConfigInformation == "on" && (arch == "x86_64" && ((arch == "x86_64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Kernel == "on" || arch == "aarch64" && ((arch == "x86_64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Kernel == "on")]
+public import windows_sys.Win32._impl_l2.Windows_GetImageConfigInformation
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_GetImageUnusedHeaderBytes == "on" && (((arch == "x86_64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Kernel == "on")]
+public import windows_sys.Win32._impl_l2.Windows_GetImageUnusedHeaderBytes
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_GetSymLoadError == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetSymLoadError
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_GetThreadContext == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public import windows_sys.Win32._impl_l2.Windows_GetThreadContext
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_GetThreadErrorMode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThreadErrorMode
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_GetThreadSelectorEntry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThreadSelectorEntry
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Debug_GetThreadWaitChain == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetThreadWaitChain
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_GetTimestampForLoadedLibrary == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetTimestampForLoadedLibrary
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_GetXStateFeaturesMask == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public import windows_sys.Win32._impl_l2.Windows_GetXStateFeaturesMask
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageAddCertificate == "on" && Windows_Win32_Security_WinTrust == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageAddCertificate
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageDirectoryEntryToData == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageDirectoryEntryToData
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageDirectoryEntryToDataEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageDirectoryEntryToDataEx
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageEnumerateCertificates == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageEnumerateCertificates
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageGetCertificateData == "on" && Windows_Win32_Security_WinTrust == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageGetCertificateData
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageGetCertificateHeader == "on" && Windows_Win32_Security_WinTrust == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageGetCertificateHeader
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageGetDigestStream == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageGetDigestStream
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageLoad == "on" && (((arch == "x86_64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Kernel == "on")]
+public import windows_sys.Win32._impl_l2.Windows_ImageLoad
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageNtHeader == "on" && (arch == "x86_64" && Windows_Win32_System_SystemInformation == "on" || arch == "aarch64" && Windows_Win32_System_SystemInformation == "on")]
+public import windows_sys.Win32._impl_l2.Windows_ImageNtHeader
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageRemoveCertificate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImageRemoveCertificate
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageRvaToSection == "on" && (arch == "x86_64" && Windows_Win32_System_SystemInformation == "on" || arch == "aarch64" && Windows_Win32_System_SystemInformation == "on")]
+public import windows_sys.Win32._impl_l2.Windows_ImageRvaToSection
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageRvaToVa == "on" && (arch == "x86_64" && Windows_Win32_System_SystemInformation == "on" || arch == "aarch64" && Windows_Win32_System_SystemInformation == "on")]
+public import windows_sys.Win32._impl_l2.Windows_ImageRvaToVa
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_ImageUnload == "on" && (((arch == "x86_64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Kernel == "on")]
+public import windows_sys.Win32._impl_l2.Windows_ImageUnload
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_ImagehlpApiVersion == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImagehlpApiVersion
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_ImagehlpApiVersionEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImagehlpApiVersionEx
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_InitializeContext == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public import windows_sys.Win32._impl_l2.Windows_InitializeContext
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_InitializeContext2 == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public import windows_sys.Win32._impl_l2.Windows_InitializeContext2
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_IsDebuggerPresent == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsDebuggerPresent
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_LocateXStateFeature == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public import windows_sys.Win32._impl_l2.Windows_LocateXStateFeature
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_MakeSureDirectoryPathExists == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MakeSureDirectoryPathExists
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_MapAndLoad == "on" && (((arch == "x86_64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Kernel == "on")]
+public import windows_sys.Win32._impl_l2.Windows_MapAndLoad
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_MapFileAndCheckSumA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MapFileAndCheckSumA
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_MapFileAndCheckSumW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MapFileAndCheckSumW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && USER32 == "on" && Windows_Win32_System_Diagnostics_Debug_MessageBeep == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MessageBeep
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_MiniDumpReadDumpStream == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MiniDumpReadDumpStream
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_MiniDumpWriteDump == "on" && (((arch == "x86_64" && (arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on") || (arch == "aarch64" && (arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")) && ((arch == "x86_64" && (arch == "aarch64" || arch == "x86_64") && Windows_Win32_Storage_FileSystem == "on" && Windows_Win32_System_Memory == "on") || (arch == "aarch64" && (arch == "aarch64" || arch == "x86_64") && Windows_Win32_Storage_FileSystem == "on" && Windows_Win32_System_Memory == "on")) && ((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64")) || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64"))))]
+public import windows_sys.Win32._impl_l2.Windows_MiniDumpWriteDump
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Debug_OpenThreadWaitChainSession == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OpenThreadWaitChainSession
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_OutputDebugStringA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OutputDebugStringA
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_OutputDebugStringW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OutputDebugStringW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RaiseException == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RaiseException
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RaiseFailFastException == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public import windows_sys.Win32._impl_l2.Windows_RaiseFailFastException
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_RangeMapAddPeImageSections == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RangeMapAddPeImageSections
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_RangeMapCreate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RangeMapCreate
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_RangeMapFree == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RangeMapFree
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_RangeMapRead == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RangeMapRead
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_RangeMapRemove == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RangeMapRemove
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_RangeMapWrite == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RangeMapWrite
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_ReBaseImage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReBaseImage
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_ReBaseImage64 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReBaseImage64
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_ReadProcessMemory == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReadProcessMemory
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && ADVAPI32 == "on" && Windows_Win32_System_Diagnostics_Debug_RegisterWaitChainCOMCallback == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RegisterWaitChainCOMCallback
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_RemoveInvalidModuleList == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RemoveInvalidModuleList
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RemoveVectoredContinueHandler == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RemoveVectoredContinueHandler
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RemoveVectoredExceptionHandler == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RemoveVectoredExceptionHandler
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_ReportSymbolLoadSummary == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReportSymbolLoadSummary
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlAddFunctionTable == "on" && arch == "aarch64"]
+public import windows_sys.Win32._impl_l2.Windows_RtlAddFunctionTable
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && NTDLL == "on" && Windows_Win32_System_Diagnostics_Debug_RtlAddGrowableFunctionTable == "on" && arch == "aarch64"]
+public import windows_sys.Win32._impl_l2.Windows_RtlAddGrowableFunctionTable
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlCaptureContext == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public import windows_sys.Win32._impl_l2.Windows_RtlCaptureContext
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlCaptureContext2 == "on" && (arch == "x86_64" && (arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public import windows_sys.Win32._impl_l2.Windows_RtlCaptureContext2
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlCaptureStackBackTrace == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtlCaptureStackBackTrace
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlDeleteFunctionTable == "on" && arch == "aarch64"]
+public import windows_sys.Win32._impl_l2.Windows_RtlDeleteFunctionTable
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && NTDLL == "on" && Windows_Win32_System_Diagnostics_Debug_RtlDeleteGrowableFunctionTable == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_RtlDeleteGrowableFunctionTable
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && NTDLL == "on" && Windows_Win32_System_Diagnostics_Debug_RtlGrowFunctionTable == "on" && (arch == "x86_64" || arch == "aarch64")]
+public import windows_sys.Win32._impl_l2.Windows_RtlGrowFunctionTable
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlInstallFunctionTableCallback == "on" && (arch == "aarch64" && (arch == "aarch64" || arch == "x86_64"))]
+public import windows_sys.Win32._impl_l2.Windows_RtlInstallFunctionTableCallback
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlLookupFunctionEntry == "on" && (arch == "aarch64" && ((arch == "x86_64" && (arch == "aarch64" || arch == "x86_64")) || (arch == "aarch64" && (arch == "aarch64" || arch == "x86_64"))))]
+public import windows_sys.Win32._impl_l2.Windows_RtlLookupFunctionEntry
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlPcToFileHeader == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtlPcToFileHeader
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlRaiseException == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtlRaiseException
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlRestoreContext == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public import windows_sys.Win32._impl_l2.Windows_RtlRestoreContext
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlUnwind == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RtlUnwind
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlUnwindEx == "on" && (arch == "x86_64" && ((arch == "x86_64" && (arch == "aarch64" || arch == "x86_64")) || (arch == "aarch64" && (arch == "aarch64" || arch == "x86_64"))) && (arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on" || arch == "aarch64" && ((arch == "x86_64" && (arch == "aarch64" || arch == "x86_64")) || (arch == "aarch64" && (arch == "aarch64" || arch == "x86_64"))) && (arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public import windows_sys.Win32._impl_l2.Windows_RtlUnwindEx
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_RtlVirtualUnwind == "on" && (arch == "aarch64" && (arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && (arch == "aarch64" || arch == "x86_64") && Windows_Win32_System_Kernel == "on")]
+public import windows_sys.Win32._impl_l2.Windows_RtlVirtualUnwind
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SearchTreeForFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SearchTreeForFile
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SearchTreeForFileW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SearchTreeForFileW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SetCheckUserInterruptShared == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetCheckUserInterruptShared
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_SetErrorMode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetErrorMode
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_SetImageConfigInformation == "on" && (arch == "x86_64" && ((arch == "x86_64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Kernel == "on" || arch == "aarch64" && ((arch == "x86_64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Kernel == "on")]
+public import windows_sys.Win32._impl_l2.Windows_SetImageConfigInformation
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SetSymLoadError == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetSymLoadError
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_SetThreadContext == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public import windows_sys.Win32._impl_l2.Windows_SetThreadContext
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_SetThreadErrorMode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetThreadErrorMode
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_SetUnhandledExceptionFilter == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public import windows_sys.Win32._impl_l2.Windows_SetUnhandledExceptionFilter
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_SetXStateFeaturesMask == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public import windows_sys.Win32._impl_l2.Windows_SetXStateFeaturesMask
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_StackWalk2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StackWalk2
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_StackWalk64 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StackWalk64
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_StackWalkEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StackWalkEx
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymAddSourceStream == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymAddSourceStream
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymAddSourceStreamA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymAddSourceStreamA
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymAddSourceStreamW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymAddSourceStreamW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymAddSymbol == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymAddSymbol
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymAddSymbolW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymAddSymbolW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymAddrIncludeInlineTrace == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymAddrIncludeInlineTrace
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymCleanup == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymCleanup
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymCompareInlineTrace == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymCompareInlineTrace
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymDeleteSymbol == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymDeleteSymbol
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymDeleteSymbolW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymDeleteSymbolW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumLines == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymEnumLines
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumLinesW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymEnumLinesW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumProcesses == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymEnumProcesses
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSourceFileTokens == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymEnumSourceFileTokens
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSourceFiles == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymEnumSourceFiles
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSourceFilesW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymEnumSourceFilesW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSourceLines == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymEnumSourceLines
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSourceLinesW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymEnumSourceLinesW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSym == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymEnumSym
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSymbols == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymEnumSymbols
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSymbolsEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymEnumSymbolsEx
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSymbolsExW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymEnumSymbolsExW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSymbolsForAddr == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymEnumSymbolsForAddr
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSymbolsForAddrW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymEnumSymbolsForAddrW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumSymbolsW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymEnumSymbolsW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumTypes == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymEnumTypes
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumTypesByName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymEnumTypesByName
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumTypesByNameW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymEnumTypesByNameW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumTypesW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymEnumTypesW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumerateModules64 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymEnumerateModules64
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumerateModulesW64 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymEnumerateModulesW64
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumerateSymbols64 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymEnumerateSymbols64
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymEnumerateSymbolsW64 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymEnumerateSymbolsW64
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFindDebugInfoFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymFindDebugInfoFile
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFindDebugInfoFileW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymFindDebugInfoFileW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFindExecutableImage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymFindExecutableImage
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFindExecutableImageW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymFindExecutableImageW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFindFileInPath == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymFindFileInPath
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFindFileInPathW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymFindFileInPathW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFromAddr == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymFromAddr
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFromAddrW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymFromAddrW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFromIndex == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymFromIndex
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFromIndexW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymFromIndexW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFromInlineContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymFromInlineContext
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFromInlineContextW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymFromInlineContextW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFromName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymFromName
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFromNameW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymFromNameW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFromToken == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymFromToken
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFromTokenW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymFromTokenW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFunctionTableAccess == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymFunctionTableAccess
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFunctionTableAccess64 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymFunctionTableAccess64
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymFunctionTableAccess64AccessRoutines == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymFunctionTableAccess64AccessRoutines
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetExtendedOption == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetExtendedOption
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetFileLineOffsets64 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetFileLineOffsets64
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetHomeDirectory == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetHomeDirectory
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetHomeDirectoryW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetHomeDirectoryW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetLineFromAddr64 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetLineFromAddr64
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetLineFromAddrW64 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetLineFromAddrW64
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetLineFromInlineContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetLineFromInlineContext
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetLineFromInlineContextW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetLineFromInlineContextW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetLineFromName64 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetLineFromName64
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetLineFromNameW64 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetLineFromNameW64
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetLineNext64 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetLineNext64
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetLineNextW64 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetLineNextW64
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetLinePrev64 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetLinePrev64
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetLinePrevW64 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetLinePrevW64
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetModuleBase == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetModuleBase
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetModuleBase64 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetModuleBase64
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetModuleInfo64 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetModuleInfo64
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetModuleInfoW64 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetModuleInfoW64
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetOmaps == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetOmaps
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetOptions == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetOptions
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetParentWindow == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetParentWindow
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetScope == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetScope
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetScopeW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetScopeW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSearchPath == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetSearchPath
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSearchPathW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetSearchPathW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetSourceFile
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFileChecksum == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetSourceFileChecksum
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFileChecksumW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetSourceFileChecksumW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFileFromToken == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetSourceFileFromToken
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFileFromTokenByTokenName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetSourceFileFromTokenByTokenName
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFileFromTokenByTokenNameW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetSourceFileFromTokenByTokenNameW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFileFromTokenW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetSourceFileFromTokenW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFileToken == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetSourceFileToken
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFileTokenByTokenName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetSourceFileTokenByTokenName
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFileTokenByTokenNameW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetSourceFileTokenByTokenNameW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFileTokenW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetSourceFileTokenW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceFileW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetSourceFileW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceVarFromToken == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetSourceVarFromToken
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSourceVarFromTokenW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetSourceVarFromTokenW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSymFromAddr64 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetSymFromAddr64
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSymFromName64 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetSymFromName64
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSymNext64 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetSymNext64
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSymPrev64 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetSymPrev64
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSymbolFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetSymbolFile
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetSymbolFileW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetSymbolFileW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetTypeFromName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetTypeFromName
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetTypeFromNameW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetTypeFromNameW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetTypeInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetTypeInfo
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetTypeInfoEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetTypeInfoEx
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymGetUnwindInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymGetUnwindInfo
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymInitialize == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymInitialize
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymInitializeW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymInitializeW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymLoadModule == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymLoadModule
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymLoadModule64 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymLoadModule64
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymLoadModuleEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymLoadModuleEx
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymLoadModuleExW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymLoadModuleExW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymMatchFileName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymMatchFileName
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymMatchFileNameW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymMatchFileNameW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymMatchString == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymMatchString
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymMatchStringA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymMatchStringA
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymMatchStringW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymMatchStringW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymNext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymNext
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymNextW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymNextW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymPrev == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymPrev
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymPrevW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymPrevW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymQueryInlineTrace == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymQueryInlineTrace
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymRefreshModuleList == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymRefreshModuleList
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymRegisterCallback64 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymRegisterCallback64
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymRegisterCallbackW64 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymRegisterCallbackW64
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymRegisterFunctionEntryCallback == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymRegisterFunctionEntryCallback
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymRegisterFunctionEntryCallback64 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymRegisterFunctionEntryCallback64
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSearch == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymSearch
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSearchW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymSearchW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSetContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymSetContext
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSetExtendedOption == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymSetExtendedOption
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSetHomeDirectory == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymSetHomeDirectory
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSetHomeDirectoryW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymSetHomeDirectoryW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSetOptions == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymSetOptions
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSetParentWindow == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymSetParentWindow
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSetScopeFromAddr == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymSetScopeFromAddr
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSetScopeFromIndex == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymSetScopeFromIndex
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSetScopeFromInlineContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymSetScopeFromInlineContext
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSetSearchPath == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymSetSearchPath
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSetSearchPathW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymSetSearchPathW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvDeltaName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymSrvDeltaName
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvDeltaNameW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymSrvDeltaNameW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvGetFileIndexInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymSrvGetFileIndexInfo
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvGetFileIndexInfoW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymSrvGetFileIndexInfoW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvGetFileIndexString == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymSrvGetFileIndexString
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvGetFileIndexStringW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymSrvGetFileIndexStringW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvGetFileIndexes == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymSrvGetFileIndexes
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvGetFileIndexesW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymSrvGetFileIndexesW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvGetSupplement == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymSrvGetSupplement
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvGetSupplementW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymSrvGetSupplementW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvIsStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymSrvIsStore
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvIsStoreW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymSrvIsStoreW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvStoreFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymSrvStoreFile
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvStoreFileW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymSrvStoreFileW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvStoreSupplement == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymSrvStoreSupplement
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymSrvStoreSupplementW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymSrvStoreSupplementW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymUnDName64 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymUnDName64
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymUnloadModule == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymUnloadModule
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_SymUnloadModule64 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SymUnloadModule64
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && API_MS_WIN_CORE_ERRORHANDLING_L1_1_3 == "on" && Windows_Win32_System_Diagnostics_Debug_TerminateProcessOnMemoryExhaustion == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TerminateProcessOnMemoryExhaustion
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_TouchFileTimes == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TouchFileTimes
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_UnDecorateSymbolName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UnDecorateSymbolName
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && DBGHELP == "on" && Windows_Win32_System_Diagnostics_Debug_UnDecorateSymbolNameW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UnDecorateSymbolNameW
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_UnMapAndLoad == "on" && (((arch == "x86_64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Kernel == "on")]
+public import windows_sys.Win32._impl_l2.Windows_UnMapAndLoad
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_UnhandledExceptionFilter == "on" && ((arch == "aarch64" || (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64"))) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Kernel == "on")]
+public import windows_sys.Win32._impl_l2.Windows_UnhandledExceptionFilter
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_UpdateDebugInfoFile == "on" && Windows_Win32_System_SystemInformation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UpdateDebugInfoFile
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && IMAGEHLP == "on" && Windows_Win32_System_Diagnostics_Debug_UpdateDebugInfoFileEx == "on" && Windows_Win32_System_SystemInformation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UpdateDebugInfoFileEx
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_WaitForDebugEvent == "on" && Windows_Win32_System_Threading == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WaitForDebugEvent
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_WaitForDebugEventEx == "on" && Windows_Win32_System_Threading == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WaitForDebugEventEx
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_Wow64GetThreadContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_Wow64GetThreadContext
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_Wow64GetThreadSelectorEntry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_Wow64GetThreadSelectorEntry
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_Wow64SetThreadContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_Wow64SetThreadContext
+@When[Windows_Win32_System_Diagnostics_Debug == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_Debug_WriteProcessMemory == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WriteProcessMemory
 @When[Windows_Win32_System_Diagnostics_Debug == "on" && ((arch == "x86_64" || arch == "aarch64"))]
 public import windows_sys.Win32._impl_l1.XSAVE_AREA
 @When[Windows_Win32_System_Diagnostics_Debug == "on" && (arch == "x86_64" || arch == "aarch64")]
 public import windows_sys.Win32._impl_l1.XSAVE_FORMAT
 @When[Windows_Win32_System_Diagnostics_Debug == "on" && (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64") || arch == "aarch64" && (arch == "x86_64" || arch == "aarch64"))]
 public import windows_sys.Win32._impl_l2.XSTATE_CONTEXT
-

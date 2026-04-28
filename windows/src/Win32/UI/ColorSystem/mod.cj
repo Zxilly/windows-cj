@@ -4,13 +4,12 @@
 package windows.Win32.UI.ColorSystem
 
 import std.collection.*
+import windows_libloading
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
 import windows.Win32._impl_l0 as Win32__impl_l0
 
@@ -2853,244 +2852,1320 @@ public class IGamutMapModelPlugIn <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[GDI32 == "on"]
-foreign {
-    func DeleteColorSpace(hcs: HCOLORSPACE): Int32
-    // param-hint: reserved optional reserved
-    func UpdateICMRegKeyA(reserved: UInt32, lpszCMID: CPointer<UInt8>, lpszFileName: CPointer<UInt8>, command: ICM_COMMANDAbi): Int32
-    // param-hint: reserved optional reserved
-    func UpdateICMRegKeyW(reserved: UInt32, lpszCMID: CPointer<UInt16>, lpszFileName: CPointer<UInt16>, command: ICM_COMMANDAbi): Int32
-}
-
-@When[GDI32 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_CheckColorsInGamut == "on" && Windows_Win32_Graphics_Gdi == "on"]
 foreign {
     // param-hint: lpRGBTriple len=param[3]
     // param-hint: dlpBuffer bytes=param[3]
     func CheckColorsInGamut(hdc: Win32_Graphics_Gdi.HDC, lpRGBTriple: CPointer<Win32_Graphics_Gdi.RGBTRIPLEAbi>, dlpBuffer: CPointer<Unit>, nCount: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_CheckColorsInGamut == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_CheckColorsInGamut(hdc: Win32_Graphics_Gdi.HDC, lpRGBTriple: CPointer<Win32_Graphics_Gdi.RGBTRIPLEAbi>, dlpBuffer: CPointer<Unit>, nCount: UInt32): Int32 {
+    return CheckColorsInGamut(hdc, lpRGBTriple, dlpBuffer, nCount)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_ColorCorrectPalette == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func ColorCorrectPalette(hdc: Win32_Graphics_Gdi.HDC, hPal: Win32_Graphics_Gdi.HPALETTE, deFirst: UInt32, num: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_ColorCorrectPalette == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_ColorCorrectPalette(hdc: Win32_Graphics_Gdi.HDC, hPal: Win32_Graphics_Gdi.HPALETTE, deFirst: UInt32, num: UInt32): Int32 {
+    return ColorCorrectPalette(hdc, hPal, deFirst, num)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_ColorMatchToTarget == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func ColorMatchToTarget(hdc: Win32_Graphics_Gdi.HDC, hdcTarget: Win32_Graphics_Gdi.HDC, action: COLOR_MATCH_TO_TARGET_ACTIONAbi): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_ColorMatchToTarget == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_ColorMatchToTarget(hdc: Win32_Graphics_Gdi.HDC, hdcTarget: Win32_Graphics_Gdi.HDC, action: COLOR_MATCH_TO_TARGET_ACTIONAbi): Int32 {
+    return ColorMatchToTarget(hdc, hdcTarget, action)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_CreateColorSpaceA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func CreateColorSpaceA(lplcs: CPointer<LOGCOLORSPACEAAbi>): HCOLORSPACE
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_CreateColorSpaceA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_CreateColorSpaceA(lplcs: CPointer<LOGCOLORSPACEAAbi>): HCOLORSPACE {
+    return CreateColorSpaceA(lplcs)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_CreateColorSpaceW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func CreateColorSpaceW(lplcs: CPointer<LOGCOLORSPACEWAbi>): HCOLORSPACE
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_CreateColorSpaceW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_CreateColorSpaceW(lplcs: CPointer<LOGCOLORSPACEWAbi>): HCOLORSPACE {
+    return CreateColorSpaceW(lplcs)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_DeleteColorSpace == "on"]
+foreign {
+    func DeleteColorSpace(hcs: HCOLORSPACE): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_DeleteColorSpace == "on"]
+public unsafe func Windows_DeleteColorSpace(hcs: HCOLORSPACE): Int32 {
+    return DeleteColorSpace(hcs)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_EnumICMProfilesA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: param2 optional
     func EnumICMProfilesA(hdc: Win32_Graphics_Gdi.HDC, proc: ICMENUMPROCA, param2: IntNative): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_EnumICMProfilesA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_EnumICMProfilesA(hdc: Win32_Graphics_Gdi.HDC, proc: ICMENUMPROCA, param2: IntNative): Int32 {
+    return EnumICMProfilesA(hdc, proc, param2)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_EnumICMProfilesW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: param2 optional
     func EnumICMProfilesW(hdc: Win32_Graphics_Gdi.HDC, proc: ICMENUMPROCW, param2: IntNative): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_EnumICMProfilesW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_EnumICMProfilesW(hdc: Win32_Graphics_Gdi.HDC, proc: ICMENUMPROCW, param2: IntNative): Int32 {
+    return EnumICMProfilesW(hdc, proc, param2)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_GetColorSpace == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func GetColorSpace(hdc: Win32_Graphics_Gdi.HDC): HCOLORSPACE
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_GetColorSpace == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GetColorSpace(hdc: Win32_Graphics_Gdi.HDC): HCOLORSPACE {
+    return GetColorSpace(hdc)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_GetDeviceGammaRamp == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func GetDeviceGammaRamp(hdc: Win32_Graphics_Gdi.HDC, lpRamp: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_GetDeviceGammaRamp == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GetDeviceGammaRamp(hdc: Win32_Graphics_Gdi.HDC, lpRamp: CPointer<Unit>): Int32 {
+    return GetDeviceGammaRamp(hdc, lpRamp)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_GetICMProfileA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: pszFilename len=param[1] optional
     func GetICMProfileA(hdc: Win32_Graphics_Gdi.HDC, pBufSize: CPointer<UInt32>, pszFilename: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_GetICMProfileA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GetICMProfileA(hdc: Win32_Graphics_Gdi.HDC, pBufSize: CPointer<UInt32>, pszFilename: CPointer<UInt8>): Int32 {
+    return GetICMProfileA(hdc, pBufSize, pszFilename)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_GetICMProfileW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: pszFilename len=param[1] optional
     func GetICMProfileW(hdc: Win32_Graphics_Gdi.HDC, pBufSize: CPointer<UInt32>, pszFilename: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_GetICMProfileW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GetICMProfileW(hdc: Win32_Graphics_Gdi.HDC, pBufSize: CPointer<UInt32>, pszFilename: CPointer<UInt16>): Int32 {
+    return GetICMProfileW(hdc, pBufSize, pszFilename)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_GetLogColorSpaceA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: lpBuffer bytes=param[2]
     func GetLogColorSpaceA(hColorSpace: HCOLORSPACE, lpBuffer: CPointer<LOGCOLORSPACEAAbi>, nSize: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_GetLogColorSpaceA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GetLogColorSpaceA(hColorSpace: HCOLORSPACE, lpBuffer: CPointer<LOGCOLORSPACEAAbi>, nSize: UInt32): Int32 {
+    return GetLogColorSpaceA(hColorSpace, lpBuffer, nSize)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_GetLogColorSpaceW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     // param-hint: lpBuffer bytes=param[2]
     func GetLogColorSpaceW(hColorSpace: HCOLORSPACE, lpBuffer: CPointer<LOGCOLORSPACEWAbi>, nSize: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_GetLogColorSpaceW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GetLogColorSpaceW(hColorSpace: HCOLORSPACE, lpBuffer: CPointer<LOGCOLORSPACEWAbi>, nSize: UInt32): Int32 {
+    return GetLogColorSpaceW(hColorSpace, lpBuffer, nSize)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_SetColorSpace == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func SetColorSpace(hdc: Win32_Graphics_Gdi.HDC, hcs: HCOLORSPACE): HCOLORSPACE
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_SetColorSpace == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_SetColorSpace(hdc: Win32_Graphics_Gdi.HDC, hcs: HCOLORSPACE): HCOLORSPACE {
+    return SetColorSpace(hdc, hcs)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_SetDeviceGammaRamp == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func SetDeviceGammaRamp(hdc: Win32_Graphics_Gdi.HDC, lpRamp: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_SetDeviceGammaRamp == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_SetDeviceGammaRamp(hdc: Win32_Graphics_Gdi.HDC, lpRamp: CPointer<Unit>): Int32 {
+    return SetDeviceGammaRamp(hdc, lpRamp)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_SetICMMode == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func SetICMMode(hdc: Win32_Graphics_Gdi.HDC, mode: ICM_MODEAbi): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_SetICMMode == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_SetICMMode(hdc: Win32_Graphics_Gdi.HDC, mode: ICM_MODEAbi): Int32 {
+    return SetICMMode(hdc, mode)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_SetICMProfileA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func SetICMProfileA(hdc: Win32_Graphics_Gdi.HDC, lpFileName: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_SetICMProfileA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_SetICMProfileA(hdc: Win32_Graphics_Gdi.HDC, lpFileName: CPointer<UInt8>): Int32 {
+    return SetICMProfileA(hdc, lpFileName)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_SetICMProfileW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func SetICMProfileW(hdc: Win32_Graphics_Gdi.HDC, lpFileName: CPointer<UInt16>): Int32
 }
 
-@When[ICM32 == "on"]
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_SetICMProfileW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_SetICMProfileW(hdc: Win32_Graphics_Gdi.HDC, lpFileName: CPointer<UInt16>): Int32 {
+    return SetICMProfileW(hdc, lpFileName)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_UpdateICMRegKeyA == "on"]
+foreign {
+    // param-hint: reserved optional reserved
+    func UpdateICMRegKeyA(reserved: UInt32, lpszCMID: CPointer<UInt8>, lpszFileName: CPointer<UInt8>, command: ICM_COMMANDAbi): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_UpdateICMRegKeyA == "on"]
+public unsafe func Windows_UpdateICMRegKeyA(reserved: UInt32, lpszCMID: CPointer<UInt8>, lpszFileName: CPointer<UInt8>, command: ICM_COMMANDAbi): Int32 {
+    return UpdateICMRegKeyA(reserved, lpszCMID, lpszFileName, command)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_UpdateICMRegKeyW == "on"]
+foreign {
+    // param-hint: reserved optional reserved
+    func UpdateICMRegKeyW(reserved: UInt32, lpszCMID: CPointer<UInt16>, lpszFileName: CPointer<UInt16>, command: ICM_COMMANDAbi): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && GDI32 == "on" && Windows_Win32_UI_ColorSystem_UpdateICMRegKeyW == "on"]
+public unsafe func Windows_UpdateICMRegKeyW(reserved: UInt32, lpszCMID: CPointer<UInt16>, lpszFileName: CPointer<UInt16>, command: ICM_COMMANDAbi): Int32 {
+    return UpdateICMRegKeyW(reserved, lpszCMID, lpszFileName, command)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMCheckColors == "on"]
 foreign {
     // param-hint: lpaInputColors len=param[2]
     // param-hint: lpaResult len=param[2]
     func CMCheckColors(hcmTransform: IntNative, lpaInputColors: CPointer<COLOR>, nColors: UInt32, ctInput: COLORTYPEAbi, lpaResult: CPointer<UInt8>): Int32
-    func CMCheckRGBs(hcmTransform: IntNative, lpSrcBits: CPointer<Unit>, bmInput: BMFORMATAbi, dwWidth: UInt32, dwHeight: UInt32, dwStride: UInt32, lpaResult: CPointer<UInt8>, pfnCallback: LPBMCALLBACKFN, ulCallbackData: IntNative): Int32
-    // param-hint: paColorName len=param[3]
-    // param-hint: paIndex len=param[3]
-    func CMConvertColorNameToIndex(hProfile: IntNative, paColorName: CPointer<CPointer<Int8>>, paIndex: CPointer<UInt32>, dwCount: UInt32): Int32
-    // param-hint: paIndex len=param[3]
-    // param-hint: paColorName len=param[3]
-    func CMConvertIndexToColorName(hProfile: IntNative, paIndex: CPointer<UInt32>, paColorName: CPointer<CPointer<Int8>>, dwCount: UInt32): Int32
-    // param-hint: pahProfiles len=param[1]
-    // param-hint: padwIntents len=param[3]
-    func CMCreateDeviceLinkProfile(pahProfiles: CPointer<IntNative>, nProfiles: UInt32, padwIntents: CPointer<UInt32>, nIntents: UInt32, dwFlags: UInt32, lpProfileData: CPointer<CPointer<UInt8>>): Int32
-    // param-hint: pahProfiles len=param[1]
-    // param-hint: padwIntents len=param[3]
-    func CMCreateMultiProfileTransform(pahProfiles: CPointer<IntNative>, nProfiles: UInt32, padwIntents: CPointer<UInt32>, nIntents: UInt32, dwFlags: UInt32): IntNative
-    func CMDeleteTransform(hcmTransform: IntNative): Int32
-    func CMGetInfo(dwInfo: UInt32): UInt32
-    func CMGetNamedProfileInfo(hProfile: IntNative, pNamedProfileInfo: CPointer<NAMED_PROFILE_INFOAbi>): Int32
-    func CMIsProfileValid(hProfile: IntNative, lpbValid: CPointer<Int32>): Int32
-    // param-hint: lpaInputColors len=param[2]
-    // param-hint: lpaOutputColors len=param[2]
-    func CMTranslateColors(hcmTransform: IntNative, lpaInputColors: CPointer<COLOR>, nColors: UInt32, ctInput: COLORTYPEAbi, lpaOutputColors: CPointer<COLOR>, ctOutput: COLORTYPEAbi): Int32
-    func CMTranslateRGB(hcmTransform: IntNative, ColorRef: UInt32, lpColorRef: CPointer<UInt32>, dwFlags: UInt32): Int32
-    func CMTranslateRGBs(hcmTransform: IntNative, lpSrcBits: CPointer<Unit>, bmInput: BMFORMATAbi, dwWidth: UInt32, dwHeight: UInt32, dwStride: UInt32, lpDestBits: CPointer<Unit>, bmOutput: BMFORMATAbi, dwTranslateDirection: UInt32): Int32
-    func CMTranslateRGBsExt(hcmTransform: IntNative, lpSrcBits: CPointer<Unit>, bmInput: BMFORMATAbi, dwWidth: UInt32, dwHeight: UInt32, dwInputStride: UInt32, lpDestBits: CPointer<Unit>, bmOutput: BMFORMATAbi, dwOutputStride: UInt32, lpfnCallback: LPBMCALLBACKFN, ulCallbackData: IntNative): Int32
 }
 
-@When[ICM32 == "on" && Windows_Win32_Graphics_Gdi == "on"]
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMCheckColors == "on"]
+public unsafe func Windows_CMCheckColors(hcmTransform: IntNative, lpaInputColors: CPointer<COLOR>, nColors: UInt32, ctInput: COLORTYPEAbi, lpaResult: CPointer<UInt8>): Int32 {
+    return CMCheckColors(hcmTransform, lpaInputColors, nColors, ctInput, lpaResult)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMCheckColorsInGamut == "on" && Windows_Win32_Graphics_Gdi == "on"]
 foreign {
     // param-hint: lpaRGBTriple len=param[3]
     // param-hint: lpaResult bytes=param[3]
     func CMCheckColorsInGamut(hcmTransform: IntNative, lpaRGBTriple: CPointer<Win32_Graphics_Gdi.RGBTRIPLEAbi>, lpaResult: CPointer<UInt8>, nCount: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMCheckColorsInGamut == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_CMCheckColorsInGamut(hcmTransform: IntNative, lpaRGBTriple: CPointer<Win32_Graphics_Gdi.RGBTRIPLEAbi>, lpaResult: CPointer<UInt8>, nCount: UInt32): Int32 {
+    return CMCheckColorsInGamut(hcmTransform, lpaRGBTriple, lpaResult, nCount)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMCheckRGBs == "on"]
+foreign {
+    func CMCheckRGBs(hcmTransform: IntNative, lpSrcBits: CPointer<Unit>, bmInput: BMFORMATAbi, dwWidth: UInt32, dwHeight: UInt32, dwStride: UInt32, lpaResult: CPointer<UInt8>, pfnCallback: LPBMCALLBACKFN, ulCallbackData: IntNative): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMCheckRGBs == "on"]
+public unsafe func Windows_CMCheckRGBs(hcmTransform: IntNative, lpSrcBits: CPointer<Unit>, bmInput: BMFORMATAbi, dwWidth: UInt32, dwHeight: UInt32, dwStride: UInt32, lpaResult: CPointer<UInt8>, pfnCallback: LPBMCALLBACKFN, ulCallbackData: IntNative): Int32 {
+    return CMCheckRGBs(hcmTransform, lpSrcBits, bmInput, dwWidth, dwHeight, dwStride, lpaResult, pfnCallback, ulCallbackData)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMConvertColorNameToIndex == "on"]
+foreign {
+    // param-hint: paColorName len=param[3]
+    // param-hint: paIndex len=param[3]
+    func CMConvertColorNameToIndex(hProfile: IntNative, paColorName: CPointer<CPointer<Int8>>, paIndex: CPointer<UInt32>, dwCount: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMConvertColorNameToIndex == "on"]
+public unsafe func Windows_CMConvertColorNameToIndex(hProfile: IntNative, paColorName: CPointer<CPointer<Int8>>, paIndex: CPointer<UInt32>, dwCount: UInt32): Int32 {
+    return CMConvertColorNameToIndex(hProfile, paColorName, paIndex, dwCount)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMConvertIndexToColorName == "on"]
+foreign {
+    // param-hint: paIndex len=param[3]
+    // param-hint: paColorName len=param[3]
+    func CMConvertIndexToColorName(hProfile: IntNative, paIndex: CPointer<UInt32>, paColorName: CPointer<CPointer<Int8>>, dwCount: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMConvertIndexToColorName == "on"]
+public unsafe func Windows_CMConvertIndexToColorName(hProfile: IntNative, paIndex: CPointer<UInt32>, paColorName: CPointer<CPointer<Int8>>, dwCount: UInt32): Int32 {
+    return CMConvertIndexToColorName(hProfile, paIndex, paColorName, dwCount)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMCreateDeviceLinkProfile == "on"]
+foreign {
+    // param-hint: pahProfiles len=param[1]
+    // param-hint: padwIntents len=param[3]
+    func CMCreateDeviceLinkProfile(pahProfiles: CPointer<IntNative>, nProfiles: UInt32, padwIntents: CPointer<UInt32>, nIntents: UInt32, dwFlags: UInt32, lpProfileData: CPointer<CPointer<UInt8>>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMCreateDeviceLinkProfile == "on"]
+public unsafe func Windows_CMCreateDeviceLinkProfile(pahProfiles: CPointer<IntNative>, nProfiles: UInt32, padwIntents: CPointer<UInt32>, nIntents: UInt32, dwFlags: UInt32, lpProfileData: CPointer<CPointer<UInt8>>): Int32 {
+    return CMCreateDeviceLinkProfile(pahProfiles, nProfiles, padwIntents, nIntents, dwFlags, lpProfileData)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMCreateMultiProfileTransform == "on"]
+foreign {
+    // param-hint: pahProfiles len=param[1]
+    // param-hint: padwIntents len=param[3]
+    func CMCreateMultiProfileTransform(pahProfiles: CPointer<IntNative>, nProfiles: UInt32, padwIntents: CPointer<UInt32>, nIntents: UInt32, dwFlags: UInt32): IntNative
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMCreateMultiProfileTransform == "on"]
+public unsafe func Windows_CMCreateMultiProfileTransform(pahProfiles: CPointer<IntNative>, nProfiles: UInt32, padwIntents: CPointer<UInt32>, nIntents: UInt32, dwFlags: UInt32): IntNative {
+    return CMCreateMultiProfileTransform(pahProfiles, nProfiles, padwIntents, nIntents, dwFlags)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMCreateProfile == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func CMCreateProfile(lpColorSpace: CPointer<LOGCOLORSPACEAAbi>, lpProfileData: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMCreateProfile == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_CMCreateProfile(lpColorSpace: CPointer<LOGCOLORSPACEAAbi>, lpProfileData: CPointer<CPointer<Unit>>): Int32 {
+    return CMCreateProfile(lpColorSpace, lpProfileData)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMCreateProfileW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func CMCreateProfileW(lpColorSpace: CPointer<LOGCOLORSPACEWAbi>, lpProfileData: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMCreateProfileW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_CMCreateProfileW(lpColorSpace: CPointer<LOGCOLORSPACEWAbi>, lpProfileData: CPointer<CPointer<Unit>>): Int32 {
+    return CMCreateProfileW(lpColorSpace, lpProfileData)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMCreateTransform == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func CMCreateTransform(lpColorSpace: CPointer<LOGCOLORSPACEAAbi>, lpDevCharacter: CPointer<Unit>, lpTargetDevCharacter: CPointer<Unit>): IntNative
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMCreateTransform == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_CMCreateTransform(lpColorSpace: CPointer<LOGCOLORSPACEAAbi>, lpDevCharacter: CPointer<Unit>, lpTargetDevCharacter: CPointer<Unit>): IntNative {
+    return CMCreateTransform(lpColorSpace, lpDevCharacter, lpTargetDevCharacter)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMCreateTransformExt == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func CMCreateTransformExt(lpColorSpace: CPointer<LOGCOLORSPACEAAbi>, lpDevCharacter: CPointer<Unit>, lpTargetDevCharacter: CPointer<Unit>, dwFlags: UInt32): IntNative
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMCreateTransformExt == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_CMCreateTransformExt(lpColorSpace: CPointer<LOGCOLORSPACEAAbi>, lpDevCharacter: CPointer<Unit>, lpTargetDevCharacter: CPointer<Unit>, dwFlags: UInt32): IntNative {
+    return CMCreateTransformExt(lpColorSpace, lpDevCharacter, lpTargetDevCharacter, dwFlags)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMCreateTransformExtW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func CMCreateTransformExtW(lpColorSpace: CPointer<LOGCOLORSPACEWAbi>, lpDevCharacter: CPointer<Unit>, lpTargetDevCharacter: CPointer<Unit>, dwFlags: UInt32): IntNative
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMCreateTransformExtW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_CMCreateTransformExtW(lpColorSpace: CPointer<LOGCOLORSPACEWAbi>, lpDevCharacter: CPointer<Unit>, lpTargetDevCharacter: CPointer<Unit>, dwFlags: UInt32): IntNative {
+    return CMCreateTransformExtW(lpColorSpace, lpDevCharacter, lpTargetDevCharacter, dwFlags)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMCreateTransformW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
     func CMCreateTransformW(lpColorSpace: CPointer<LOGCOLORSPACEWAbi>, lpDevCharacter: CPointer<Unit>, lpTargetDevCharacter: CPointer<Unit>): IntNative
 }
 
-@When[ICMUI == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMCreateTransformW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_CMCreateTransformW(lpColorSpace: CPointer<LOGCOLORSPACEWAbi>, lpDevCharacter: CPointer<Unit>, lpTargetDevCharacter: CPointer<Unit>): IntNative {
+    return CMCreateTransformW(lpColorSpace, lpDevCharacter, lpTargetDevCharacter)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMDeleteTransform == "on"]
+foreign {
+    func CMDeleteTransform(hcmTransform: IntNative): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMDeleteTransform == "on"]
+public unsafe func Windows_CMDeleteTransform(hcmTransform: IntNative): Int32 {
+    return CMDeleteTransform(hcmTransform)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMGetInfo == "on"]
+foreign {
+    func CMGetInfo(dwInfo: UInt32): UInt32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMGetInfo == "on"]
+public unsafe func Windows_CMGetInfo(dwInfo: UInt32): UInt32 {
+    return CMGetInfo(dwInfo)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMGetNamedProfileInfo == "on"]
+foreign {
+    func CMGetNamedProfileInfo(hProfile: IntNative, pNamedProfileInfo: CPointer<NAMED_PROFILE_INFOAbi>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMGetNamedProfileInfo == "on"]
+public unsafe func Windows_CMGetNamedProfileInfo(hProfile: IntNative, pNamedProfileInfo: CPointer<NAMED_PROFILE_INFOAbi>): Int32 {
+    return CMGetNamedProfileInfo(hProfile, pNamedProfileInfo)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMIsProfileValid == "on"]
+foreign {
+    func CMIsProfileValid(hProfile: IntNative, lpbValid: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMIsProfileValid == "on"]
+public unsafe func Windows_CMIsProfileValid(hProfile: IntNative, lpbValid: CPointer<Int32>): Int32 {
+    return CMIsProfileValid(hProfile, lpbValid)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMTranslateColors == "on"]
+foreign {
+    // param-hint: lpaInputColors len=param[2]
+    // param-hint: lpaOutputColors len=param[2]
+    func CMTranslateColors(hcmTransform: IntNative, lpaInputColors: CPointer<COLOR>, nColors: UInt32, ctInput: COLORTYPEAbi, lpaOutputColors: CPointer<COLOR>, ctOutput: COLORTYPEAbi): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMTranslateColors == "on"]
+public unsafe func Windows_CMTranslateColors(hcmTransform: IntNative, lpaInputColors: CPointer<COLOR>, nColors: UInt32, ctInput: COLORTYPEAbi, lpaOutputColors: CPointer<COLOR>, ctOutput: COLORTYPEAbi): Int32 {
+    return CMTranslateColors(hcmTransform, lpaInputColors, nColors, ctInput, lpaOutputColors, ctOutput)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMTranslateRGB == "on"]
+foreign {
+    func CMTranslateRGB(hcmTransform: IntNative, ColorRef: UInt32, lpColorRef: CPointer<UInt32>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMTranslateRGB == "on"]
+public unsafe func Windows_CMTranslateRGB(hcmTransform: IntNative, ColorRef: UInt32, lpColorRef: CPointer<UInt32>, dwFlags: UInt32): Int32 {
+    return CMTranslateRGB(hcmTransform, ColorRef, lpColorRef, dwFlags)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMTranslateRGBs == "on"]
+foreign {
+    func CMTranslateRGBs(hcmTransform: IntNative, lpSrcBits: CPointer<Unit>, bmInput: BMFORMATAbi, dwWidth: UInt32, dwHeight: UInt32, dwStride: UInt32, lpDestBits: CPointer<Unit>, bmOutput: BMFORMATAbi, dwTranslateDirection: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMTranslateRGBs == "on"]
+public unsafe func Windows_CMTranslateRGBs(hcmTransform: IntNative, lpSrcBits: CPointer<Unit>, bmInput: BMFORMATAbi, dwWidth: UInt32, dwHeight: UInt32, dwStride: UInt32, lpDestBits: CPointer<Unit>, bmOutput: BMFORMATAbi, dwTranslateDirection: UInt32): Int32 {
+    return CMTranslateRGBs(hcmTransform, lpSrcBits, bmInput, dwWidth, dwHeight, dwStride, lpDestBits, bmOutput, dwTranslateDirection)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMTranslateRGBsExt == "on"]
+foreign {
+    func CMTranslateRGBsExt(hcmTransform: IntNative, lpSrcBits: CPointer<Unit>, bmInput: BMFORMATAbi, dwWidth: UInt32, dwHeight: UInt32, dwInputStride: UInt32, lpDestBits: CPointer<Unit>, bmOutput: BMFORMATAbi, dwOutputStride: UInt32, lpfnCallback: LPBMCALLBACKFN, ulCallbackData: IntNative): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICM32 == "on" && Windows_Win32_UI_ColorSystem_CMTranslateRGBsExt == "on"]
+public unsafe func Windows_CMTranslateRGBsExt(hcmTransform: IntNative, lpSrcBits: CPointer<Unit>, bmInput: BMFORMATAbi, dwWidth: UInt32, dwHeight: UInt32, dwInputStride: UInt32, lpDestBits: CPointer<Unit>, bmOutput: BMFORMATAbi, dwOutputStride: UInt32, lpfnCallback: LPBMCALLBACKFN, ulCallbackData: IntNative): Int32 {
+    return CMTranslateRGBsExt(hcmTransform, lpSrcBits, bmInput, dwWidth, dwHeight, dwInputStride, lpDestBits, bmOutput, dwOutputStride, lpfnCallback, ulCallbackData)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICMUI == "on" && Windows_Win32_UI_ColorSystem_SetupColorMatchingA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
     func SetupColorMatchingA(pcms: CPointer<COLORMATCHSETUPAAbi>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICMUI == "on" && Windows_Win32_UI_ColorSystem_SetupColorMatchingA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_SetupColorMatchingA(pcms: CPointer<COLORMATCHSETUPAAbi>): Int32 {
+    return SetupColorMatchingA(pcms)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && ICMUI == "on" && Windows_Win32_UI_ColorSystem_SetupColorMatchingW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
     func SetupColorMatchingW(pcms: CPointer<COLORMATCHSETUPWAbi>): Int32
 }
 
-@When[MSCMS == "on"]
+@When[Windows_Win32_UI_ColorSystem == "on" && ICMUI == "on" && Windows_Win32_UI_ColorSystem_SetupColorMatchingW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_SetupColorMatchingW(pcms: CPointer<COLORMATCHSETUPWAbi>): Int32 {
+    return SetupColorMatchingW(pcms)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_AssociateColorProfileWithDeviceA == "on"]
 foreign {
     // param-hint: pMachineName optional
     func AssociateColorProfileWithDeviceA(pMachineName: CPointer<UInt8>, pProfileName: CPointer<UInt8>, pDeviceName: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_AssociateColorProfileWithDeviceA == "on"]
+public unsafe func Windows_AssociateColorProfileWithDeviceA(pMachineName: CPointer<UInt8>, pProfileName: CPointer<UInt8>, pDeviceName: CPointer<UInt8>): Int32 {
+    return AssociateColorProfileWithDeviceA(pMachineName, pProfileName, pDeviceName)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_AssociateColorProfileWithDeviceW == "on"]
+foreign {
     // param-hint: pMachineName optional
     func AssociateColorProfileWithDeviceW(pMachineName: CPointer<UInt16>, pProfileName: CPointer<UInt16>, pDeviceName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_AssociateColorProfileWithDeviceW == "on"]
+public unsafe func Windows_AssociateColorProfileWithDeviceW(pMachineName: CPointer<UInt16>, pProfileName: CPointer<UInt16>, pDeviceName: CPointer<UInt16>): Int32 {
+    return AssociateColorProfileWithDeviceW(pMachineName, pProfileName, pDeviceName)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_CheckBitmapBits == "on"]
+foreign {
     // param-hint: pfnCallback optional
     // param-hint: lpCallbackData optional
     func CheckBitmapBits(hColorTransform: IntNative, pSrcBits: CPointer<Unit>, bmInput: BMFORMATAbi, dwWidth: UInt32, dwHeight: UInt32, dwStride: UInt32, paResult: CPointer<UInt8>, pfnCallback: LPBMCALLBACKFN, lpCallbackData: IntNative): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_CheckBitmapBits == "on"]
+public unsafe func Windows_CheckBitmapBits(hColorTransform: IntNative, pSrcBits: CPointer<Unit>, bmInput: BMFORMATAbi, dwWidth: UInt32, dwHeight: UInt32, dwStride: UInt32, paResult: CPointer<UInt8>, pfnCallback: LPBMCALLBACKFN, lpCallbackData: IntNative): Int32 {
+    return CheckBitmapBits(hColorTransform, pSrcBits, bmInput, dwWidth, dwHeight, dwStride, paResult, pfnCallback, lpCallbackData)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_CheckColors == "on"]
+foreign {
     // param-hint: paInputColors len=param[2]
     // param-hint: paResult len=param[2]
     func CheckColors(hColorTransform: IntNative, paInputColors: CPointer<COLOR>, nColors: UInt32, ctInput: COLORTYPEAbi, paResult: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_CheckColors == "on"]
+public unsafe func Windows_CheckColors(hColorTransform: IntNative, paInputColors: CPointer<COLOR>, nColors: UInt32, ctInput: COLORTYPEAbi, paResult: CPointer<UInt8>): Int32 {
+    return CheckColors(hColorTransform, paInputColors, nColors, ctInput, paResult)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_CloseColorProfile == "on"]
+foreign {
     // param-hint: hProfile optional
     func CloseColorProfile(hProfile: IntNative): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_CloseColorProfile == "on"]
+public unsafe func Windows_CloseColorProfile(hProfile: IntNative): Int32 {
+    return CloseColorProfile(hProfile)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_ColorProfileAddDisplayAssociation == "on"]
+foreign {
     func ColorProfileAddDisplayAssociation(scope: WCS_PROFILE_MANAGEMENT_SCOPEAbi, profileName: CPointer<UInt16>, targetAdapterID: Win32_Foundation.LUIDAbi, sourceID: UInt32, setAsDefault: Int32, associateAsAdvancedColor: Int32): Int32
-    func ColorProfileGetDeviceCapabilities(scope: WCS_PROFILE_MANAGEMENT_SCOPEAbi, targetAdapterID: Win32_Foundation.LUIDAbi, sourceID: UInt32, capsType: WCS_DEVICE_CAPABILITIES_TYPEAbi, outputCapabilities: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_ColorProfileAddDisplayAssociation == "on"]
+public unsafe func Windows_ColorProfileAddDisplayAssociation(scope: WCS_PROFILE_MANAGEMENT_SCOPEAbi, profileName: CPointer<UInt16>, targetAdapterID: Win32_Foundation.LUIDAbi, sourceID: UInt32, setAsDefault: Int32, associateAsAdvancedColor: Int32): Int32 {
+    return ColorProfileAddDisplayAssociation(scope, profileName, targetAdapterID, sourceID, setAsDefault, associateAsAdvancedColor)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_ColorProfileGetDisplayDefault == "on"]
+foreign {
     func ColorProfileGetDisplayDefault(scope: WCS_PROFILE_MANAGEMENT_SCOPEAbi, targetAdapterID: Win32_Foundation.LUIDAbi, sourceID: UInt32, profileType: COLORPROFILETYPEAbi, profileSubType: COLORPROFILESUBTYPEAbi, profileName: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_ColorProfileGetDisplayDefault == "on"]
+public unsafe func Windows_ColorProfileGetDisplayDefault(scope: WCS_PROFILE_MANAGEMENT_SCOPEAbi, targetAdapterID: Win32_Foundation.LUIDAbi, sourceID: UInt32, profileType: COLORPROFILETYPEAbi, profileSubType: COLORPROFILESUBTYPEAbi, profileName: CPointer<CPointer<UInt16>>): Int32 {
+    return ColorProfileGetDisplayDefault(scope, targetAdapterID, sourceID, profileType, profileSubType, profileName)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_ColorProfileGetDisplayList == "on"]
+foreign {
     func ColorProfileGetDisplayList(scope: WCS_PROFILE_MANAGEMENT_SCOPEAbi, targetAdapterID: Win32_Foundation.LUIDAbi, sourceID: UInt32, profileList: CPointer<CPointer<CPointer<UInt16>>>, profileCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_ColorProfileGetDisplayList == "on"]
+public unsafe func Windows_ColorProfileGetDisplayList(scope: WCS_PROFILE_MANAGEMENT_SCOPEAbi, targetAdapterID: Win32_Foundation.LUIDAbi, sourceID: UInt32, profileList: CPointer<CPointer<CPointer<UInt16>>>, profileCount: CPointer<UInt32>): Int32 {
+    return ColorProfileGetDisplayList(scope, targetAdapterID, sourceID, profileList, profileCount)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_ColorProfileGetDisplayUserScope == "on"]
+foreign {
     func ColorProfileGetDisplayUserScope(targetAdapterID: Win32_Foundation.LUIDAbi, sourceID: UInt32, scope: CPointer<WCS_PROFILE_MANAGEMENT_SCOPEAbi>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_ColorProfileGetDisplayUserScope == "on"]
+public unsafe func Windows_ColorProfileGetDisplayUserScope(targetAdapterID: Win32_Foundation.LUIDAbi, sourceID: UInt32, scope: CPointer<WCS_PROFILE_MANAGEMENT_SCOPEAbi>): Int32 {
+    return ColorProfileGetDisplayUserScope(targetAdapterID, sourceID, scope)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_ColorProfileRemoveDisplayAssociation == "on"]
+foreign {
     func ColorProfileRemoveDisplayAssociation(scope: WCS_PROFILE_MANAGEMENT_SCOPEAbi, profileName: CPointer<UInt16>, targetAdapterID: Win32_Foundation.LUIDAbi, sourceID: UInt32, dissociateAdvancedColor: Int32): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_ColorProfileRemoveDisplayAssociation == "on"]
+public unsafe func Windows_ColorProfileRemoveDisplayAssociation(scope: WCS_PROFILE_MANAGEMENT_SCOPEAbi, profileName: CPointer<UInt16>, targetAdapterID: Win32_Foundation.LUIDAbi, sourceID: UInt32, dissociateAdvancedColor: Int32): Int32 {
+    return ColorProfileRemoveDisplayAssociation(scope, profileName, targetAdapterID, sourceID, dissociateAdvancedColor)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_ColorProfileSetDisplayDefaultAssociation == "on"]
+foreign {
     func ColorProfileSetDisplayDefaultAssociation(scope: WCS_PROFILE_MANAGEMENT_SCOPEAbi, profileName: CPointer<UInt16>, profileType: COLORPROFILETYPEAbi, profileSubType: COLORPROFILESUBTYPEAbi, targetAdapterID: Win32_Foundation.LUIDAbi, sourceID: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_ColorProfileSetDisplayDefaultAssociation == "on"]
+public unsafe func Windows_ColorProfileSetDisplayDefaultAssociation(scope: WCS_PROFILE_MANAGEMENT_SCOPEAbi, profileName: CPointer<UInt16>, profileType: COLORPROFILETYPEAbi, profileSubType: COLORPROFILESUBTYPEAbi, targetAdapterID: Win32_Foundation.LUIDAbi, sourceID: UInt32): Int32 {
+    return ColorProfileSetDisplayDefaultAssociation(scope, profileName, profileType, profileSubType, targetAdapterID, sourceID)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_ConvertColorNameToIndex == "on"]
+foreign {
     // param-hint: paColorName len=param[3]
     // param-hint: paIndex len=param[3]
     func ConvertColorNameToIndex(hProfile: IntNative, paColorName: CPointer<CPointer<Int8>>, paIndex: CPointer<UInt32>, dwCount: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_ConvertColorNameToIndex == "on"]
+public unsafe func Windows_ConvertColorNameToIndex(hProfile: IntNative, paColorName: CPointer<CPointer<Int8>>, paIndex: CPointer<UInt32>, dwCount: UInt32): Int32 {
+    return ConvertColorNameToIndex(hProfile, paColorName, paIndex, dwCount)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_ConvertIndexToColorName == "on"]
+foreign {
     // param-hint: paIndex len=param[3]
     // param-hint: paColorName len=param[3]
     func ConvertIndexToColorName(hProfile: IntNative, paIndex: CPointer<UInt32>, paColorName: CPointer<CPointer<Int8>>, dwCount: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_ConvertIndexToColorName == "on"]
+public unsafe func Windows_ConvertIndexToColorName(hProfile: IntNative, paIndex: CPointer<UInt32>, paColorName: CPointer<CPointer<Int8>>, dwCount: UInt32): Int32 {
+    return ConvertIndexToColorName(hProfile, paIndex, paColorName, dwCount)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_CreateColorTransformA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func CreateColorTransformA(pLogColorSpace: CPointer<LOGCOLORSPACEAAbi>, hDestProfile: IntNative, hTargetProfile: IntNative, dwFlags: UInt32): IntNative
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_CreateColorTransformA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_CreateColorTransformA(pLogColorSpace: CPointer<LOGCOLORSPACEAAbi>, hDestProfile: IntNative, hTargetProfile: IntNative, dwFlags: UInt32): IntNative {
+    return CreateColorTransformA(pLogColorSpace, hDestProfile, hTargetProfile, dwFlags)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_CreateColorTransformW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func CreateColorTransformW(pLogColorSpace: CPointer<LOGCOLORSPACEWAbi>, hDestProfile: IntNative, hTargetProfile: IntNative, dwFlags: UInt32): IntNative
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_CreateColorTransformW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_CreateColorTransformW(pLogColorSpace: CPointer<LOGCOLORSPACEWAbi>, hDestProfile: IntNative, hTargetProfile: IntNative, dwFlags: UInt32): IntNative {
+    return CreateColorTransformW(pLogColorSpace, hDestProfile, hTargetProfile, dwFlags)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_CreateDeviceLinkProfile == "on"]
+foreign {
     // param-hint: hProfile len=param[1]
     // param-hint: padwIntent len=param[3]
     func CreateDeviceLinkProfile(hProfile: CPointer<IntNative>, nProfiles: UInt32, padwIntent: CPointer<UInt32>, nIntents: UInt32, dwFlags: UInt32, pProfileData: CPointer<CPointer<UInt8>>, indexPreferredCMM: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_CreateDeviceLinkProfile == "on"]
+public unsafe func Windows_CreateDeviceLinkProfile(hProfile: CPointer<IntNative>, nProfiles: UInt32, padwIntent: CPointer<UInt32>, nIntents: UInt32, dwFlags: UInt32, pProfileData: CPointer<CPointer<UInt8>>, indexPreferredCMM: UInt32): Int32 {
+    return CreateDeviceLinkProfile(hProfile, nProfiles, padwIntent, nIntents, dwFlags, pProfileData, indexPreferredCMM)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_CreateMultiProfileTransform == "on"]
+foreign {
     // param-hint: pahProfiles len=param[1]
     // param-hint: padwIntent len=param[3]
     func CreateMultiProfileTransform(pahProfiles: CPointer<IntNative>, nProfiles: UInt32, padwIntent: CPointer<UInt32>, nIntents: UInt32, dwFlags: UInt32, indexPreferredCMM: UInt32): IntNative
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_CreateMultiProfileTransform == "on"]
+public unsafe func Windows_CreateMultiProfileTransform(pahProfiles: CPointer<IntNative>, nProfiles: UInt32, padwIntent: CPointer<UInt32>, nIntents: UInt32, dwFlags: UInt32, indexPreferredCMM: UInt32): IntNative {
+    return CreateMultiProfileTransform(pahProfiles, nProfiles, padwIntent, nIntents, dwFlags, indexPreferredCMM)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_CreateProfileFromLogColorSpaceA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func CreateProfileFromLogColorSpaceA(pLogColorSpace: CPointer<LOGCOLORSPACEAAbi>, pProfile: CPointer<CPointer<UInt8>>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_CreateProfileFromLogColorSpaceA == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_CreateProfileFromLogColorSpaceA(pLogColorSpace: CPointer<LOGCOLORSPACEAAbi>, pProfile: CPointer<CPointer<UInt8>>): Int32 {
+    return CreateProfileFromLogColorSpaceA(pLogColorSpace, pProfile)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_CreateProfileFromLogColorSpaceW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func CreateProfileFromLogColorSpaceW(pLogColorSpace: CPointer<LOGCOLORSPACEWAbi>, pProfile: CPointer<CPointer<UInt8>>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_CreateProfileFromLogColorSpaceW == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_CreateProfileFromLogColorSpaceW(pLogColorSpace: CPointer<LOGCOLORSPACEWAbi>, pProfile: CPointer<CPointer<UInt8>>): Int32 {
+    return CreateProfileFromLogColorSpaceW(pLogColorSpace, pProfile)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_DeleteColorTransform == "on"]
+foreign {
     func DeleteColorTransform(hxform: IntNative): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_DeleteColorTransform == "on"]
+public unsafe func Windows_DeleteColorTransform(hxform: IntNative): Int32 {
+    return DeleteColorTransform(hxform)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_DisassociateColorProfileFromDeviceA == "on"]
+foreign {
     // param-hint: pMachineName optional
     func DisassociateColorProfileFromDeviceA(pMachineName: CPointer<UInt8>, pProfileName: CPointer<UInt8>, pDeviceName: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_DisassociateColorProfileFromDeviceA == "on"]
+public unsafe func Windows_DisassociateColorProfileFromDeviceA(pMachineName: CPointer<UInt8>, pProfileName: CPointer<UInt8>, pDeviceName: CPointer<UInt8>): Int32 {
+    return DisassociateColorProfileFromDeviceA(pMachineName, pProfileName, pDeviceName)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_DisassociateColorProfileFromDeviceW == "on"]
+foreign {
     // param-hint: pMachineName optional
     func DisassociateColorProfileFromDeviceW(pMachineName: CPointer<UInt16>, pProfileName: CPointer<UInt16>, pDeviceName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_DisassociateColorProfileFromDeviceW == "on"]
+public unsafe func Windows_DisassociateColorProfileFromDeviceW(pMachineName: CPointer<UInt16>, pProfileName: CPointer<UInt16>, pDeviceName: CPointer<UInt16>): Int32 {
+    return DisassociateColorProfileFromDeviceW(pMachineName, pProfileName, pDeviceName)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_EnumColorProfilesA == "on"]
+foreign {
     // param-hint: pMachineName optional
     // param-hint: pEnumerationBuffer bytes=param[3] optional
     // param-hint: pnProfiles optional
     func EnumColorProfilesA(pMachineName: CPointer<UInt8>, pEnumRecord: CPointer<ENUMTYPEAAbi>, pEnumerationBuffer: CPointer<UInt8>, pdwSizeOfEnumerationBuffer: CPointer<UInt32>, pnProfiles: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_EnumColorProfilesA == "on"]
+public unsafe func Windows_EnumColorProfilesA(pMachineName: CPointer<UInt8>, pEnumRecord: CPointer<ENUMTYPEAAbi>, pEnumerationBuffer: CPointer<UInt8>, pdwSizeOfEnumerationBuffer: CPointer<UInt32>, pnProfiles: CPointer<UInt32>): Int32 {
+    return EnumColorProfilesA(pMachineName, pEnumRecord, pEnumerationBuffer, pdwSizeOfEnumerationBuffer, pnProfiles)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_EnumColorProfilesW == "on"]
+foreign {
     // param-hint: pMachineName optional
     // param-hint: pEnumerationBuffer bytes=param[3] optional
     // param-hint: pnProfiles optional
     func EnumColorProfilesW(pMachineName: CPointer<UInt16>, pEnumRecord: CPointer<ENUMTYPEWAbi>, pEnumerationBuffer: CPointer<UInt8>, pdwSizeOfEnumerationBuffer: CPointer<UInt32>, pnProfiles: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_EnumColorProfilesW == "on"]
+public unsafe func Windows_EnumColorProfilesW(pMachineName: CPointer<UInt16>, pEnumRecord: CPointer<ENUMTYPEWAbi>, pEnumerationBuffer: CPointer<UInt8>, pdwSizeOfEnumerationBuffer: CPointer<UInt32>, pnProfiles: CPointer<UInt32>): Int32 {
+    return EnumColorProfilesW(pMachineName, pEnumRecord, pEnumerationBuffer, pdwSizeOfEnumerationBuffer, pnProfiles)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_GetCMMInfo == "on"]
+foreign {
     func GetCMMInfo(hColorTransform: IntNative, param1: UInt32): UInt32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_GetCMMInfo == "on"]
+public unsafe func Windows_GetCMMInfo(hColorTransform: IntNative, param1: UInt32): UInt32 {
+    return GetCMMInfo(hColorTransform, param1)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_GetColorDirectoryA == "on"]
+foreign {
     // param-hint: pMachineName optional
     // param-hint: pBuffer bytes=param[2] optional
     func GetColorDirectoryA(pMachineName: CPointer<UInt8>, pBuffer: CPointer<UInt8>, pdwSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_GetColorDirectoryA == "on"]
+public unsafe func Windows_GetColorDirectoryA(pMachineName: CPointer<UInt8>, pBuffer: CPointer<UInt8>, pdwSize: CPointer<UInt32>): Int32 {
+    return GetColorDirectoryA(pMachineName, pBuffer, pdwSize)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_GetColorDirectoryW == "on"]
+foreign {
     // param-hint: pMachineName optional
     // param-hint: pBuffer bytes=param[2] optional
     func GetColorDirectoryW(pMachineName: CPointer<UInt16>, pBuffer: CPointer<UInt16>, pdwSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_GetColorDirectoryW == "on"]
+public unsafe func Windows_GetColorDirectoryW(pMachineName: CPointer<UInt16>, pBuffer: CPointer<UInt16>, pdwSize: CPointer<UInt32>): Int32 {
+    return GetColorDirectoryW(pMachineName, pBuffer, pdwSize)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_GetColorProfileElement == "on"]
+foreign {
     // param-hint: pElement bytes=param[3] optional
     func GetColorProfileElement(hProfile: IntNative, tag: UInt32, dwOffset: UInt32, pcbElement: CPointer<UInt32>, pElement: CPointer<Unit>, pbReference: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_GetColorProfileElement == "on"]
+public unsafe func Windows_GetColorProfileElement(hProfile: IntNative, tag: UInt32, dwOffset: UInt32, pcbElement: CPointer<UInt32>, pElement: CPointer<Unit>, pbReference: CPointer<Int32>): Int32 {
+    return GetColorProfileElement(hProfile, tag, dwOffset, pcbElement, pElement, pbReference)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_GetColorProfileElementTag == "on"]
+foreign {
     func GetColorProfileElementTag(hProfile: IntNative, dwIndex: UInt32, pTag: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_GetColorProfileElementTag == "on"]
+public unsafe func Windows_GetColorProfileElementTag(hProfile: IntNative, dwIndex: UInt32, pTag: CPointer<UInt32>): Int32 {
+    return GetColorProfileElementTag(hProfile, dwIndex, pTag)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_GetColorProfileFromHandle == "on"]
+foreign {
     // param-hint: pProfile bytes=param[2] optional
     func GetColorProfileFromHandle(hProfile: IntNative, pProfile: CPointer<UInt8>, pcbProfile: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_GetColorProfileFromHandle == "on"]
+public unsafe func Windows_GetColorProfileFromHandle(hProfile: IntNative, pProfile: CPointer<UInt8>, pcbProfile: CPointer<UInt32>): Int32 {
+    return GetColorProfileFromHandle(hProfile, pProfile, pcbProfile)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_GetColorProfileHeader == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func GetColorProfileHeader(hProfile: IntNative, pHeader: CPointer<PROFILEHEADERAbi>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_GetColorProfileHeader == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GetColorProfileHeader(hProfile: IntNative, pHeader: CPointer<PROFILEHEADERAbi>): Int32 {
+    return GetColorProfileHeader(hProfile, pHeader)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_GetCountColorProfileElements == "on"]
+foreign {
     func GetCountColorProfileElements(hProfile: IntNative, pnElementCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_GetCountColorProfileElements == "on"]
+public unsafe func Windows_GetCountColorProfileElements(hProfile: IntNative, pnElementCount: CPointer<UInt32>): Int32 {
+    return GetCountColorProfileElements(hProfile, pnElementCount)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_GetNamedProfileInfo == "on"]
+foreign {
     func GetNamedProfileInfo(hProfile: IntNative, pNamedProfileInfo: CPointer<NAMED_PROFILE_INFOAbi>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_GetNamedProfileInfo == "on"]
+public unsafe func Windows_GetNamedProfileInfo(hProfile: IntNative, pNamedProfileInfo: CPointer<NAMED_PROFILE_INFOAbi>): Int32 {
+    return GetNamedProfileInfo(hProfile, pNamedProfileInfo)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_GetPS2ColorRenderingDictionary == "on"]
+foreign {
     // param-hint: pPS2ColorRenderingDictionary bytes=param[3] optional
     func GetPS2ColorRenderingDictionary(hProfile: IntNative, dwIntent: UInt32, pPS2ColorRenderingDictionary: CPointer<UInt8>, pcbPS2ColorRenderingDictionary: CPointer<UInt32>, pbBinary: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_GetPS2ColorRenderingDictionary == "on"]
+public unsafe func Windows_GetPS2ColorRenderingDictionary(hProfile: IntNative, dwIntent: UInt32, pPS2ColorRenderingDictionary: CPointer<UInt8>, pcbPS2ColorRenderingDictionary: CPointer<UInt32>, pbBinary: CPointer<Int32>): Int32 {
+    return GetPS2ColorRenderingDictionary(hProfile, dwIntent, pPS2ColorRenderingDictionary, pcbPS2ColorRenderingDictionary, pbBinary)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_GetPS2ColorRenderingIntent == "on"]
+foreign {
     // param-hint: pBuffer bytes=param[3] optional
     func GetPS2ColorRenderingIntent(hProfile: IntNative, dwIntent: UInt32, pBuffer: CPointer<UInt8>, pcbPS2ColorRenderingIntent: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_GetPS2ColorRenderingIntent == "on"]
+public unsafe func Windows_GetPS2ColorRenderingIntent(hProfile: IntNative, dwIntent: UInt32, pBuffer: CPointer<UInt8>, pcbPS2ColorRenderingIntent: CPointer<UInt32>): Int32 {
+    return GetPS2ColorRenderingIntent(hProfile, dwIntent, pBuffer, pcbPS2ColorRenderingIntent)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_GetPS2ColorSpaceArray == "on"]
+foreign {
     // param-hint: pPS2ColorSpaceArray bytes=param[4] optional
     func GetPS2ColorSpaceArray(hProfile: IntNative, dwIntent: UInt32, dwCSAType: UInt32, pPS2ColorSpaceArray: CPointer<UInt8>, pcbPS2ColorSpaceArray: CPointer<UInt32>, pbBinary: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_GetPS2ColorSpaceArray == "on"]
+public unsafe func Windows_GetPS2ColorSpaceArray(hProfile: IntNative, dwIntent: UInt32, dwCSAType: UInt32, pPS2ColorSpaceArray: CPointer<UInt8>, pcbPS2ColorSpaceArray: CPointer<UInt32>, pbBinary: CPointer<Int32>): Int32 {
+    return GetPS2ColorSpaceArray(hProfile, dwIntent, dwCSAType, pPS2ColorSpaceArray, pcbPS2ColorSpaceArray, pbBinary)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_GetStandardColorSpaceProfileA == "on"]
+foreign {
     // param-hint: pMachineName optional
     // param-hint: pBuffer bytes=param[3] optional
     func GetStandardColorSpaceProfileA(pMachineName: CPointer<UInt8>, dwSCS: UInt32, pBuffer: CPointer<UInt8>, pcbSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_GetStandardColorSpaceProfileA == "on"]
+public unsafe func Windows_GetStandardColorSpaceProfileA(pMachineName: CPointer<UInt8>, dwSCS: UInt32, pBuffer: CPointer<UInt8>, pcbSize: CPointer<UInt32>): Int32 {
+    return GetStandardColorSpaceProfileA(pMachineName, dwSCS, pBuffer, pcbSize)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_GetStandardColorSpaceProfileW == "on"]
+foreign {
     // param-hint: pMachineName optional
     // param-hint: pBuffer bytes=param[3] optional
     func GetStandardColorSpaceProfileW(pMachineName: CPointer<UInt16>, dwSCS: UInt32, pBuffer: CPointer<UInt16>, pcbSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_GetStandardColorSpaceProfileW == "on"]
+public unsafe func Windows_GetStandardColorSpaceProfileW(pMachineName: CPointer<UInt16>, dwSCS: UInt32, pBuffer: CPointer<UInt16>, pcbSize: CPointer<UInt32>): Int32 {
+    return GetStandardColorSpaceProfileW(pMachineName, dwSCS, pBuffer, pcbSize)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_InstallColorProfileA == "on"]
+foreign {
     // param-hint: pMachineName optional
     func InstallColorProfileA(pMachineName: CPointer<UInt8>, pProfileName: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_InstallColorProfileA == "on"]
+public unsafe func Windows_InstallColorProfileA(pMachineName: CPointer<UInt8>, pProfileName: CPointer<UInt8>): Int32 {
+    return InstallColorProfileA(pMachineName, pProfileName)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_InstallColorProfileW == "on"]
+foreign {
     // param-hint: pMachineName optional
     func InstallColorProfileW(pMachineName: CPointer<UInt16>, pProfileName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_InstallColorProfileW == "on"]
+public unsafe func Windows_InstallColorProfileW(pMachineName: CPointer<UInt16>, pProfileName: CPointer<UInt16>): Int32 {
+    return InstallColorProfileW(pMachineName, pProfileName)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_IsColorProfileTagPresent == "on"]
+foreign {
     func IsColorProfileTagPresent(hProfile: IntNative, tag: UInt32, pbPresent: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_IsColorProfileTagPresent == "on"]
+public unsafe func Windows_IsColorProfileTagPresent(hProfile: IntNative, tag: UInt32, pbPresent: CPointer<Int32>): Int32 {
+    return IsColorProfileTagPresent(hProfile, tag, pbPresent)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_IsColorProfileValid == "on"]
+foreign {
     func IsColorProfileValid(hProfile: IntNative, pbValid: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_IsColorProfileValid == "on"]
+public unsafe func Windows_IsColorProfileValid(hProfile: IntNative, pbValid: CPointer<Int32>): Int32 {
+    return IsColorProfileValid(hProfile, pbValid)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_OpenColorProfileA == "on"]
+foreign {
     func OpenColorProfileA(pProfile: CPointer<PROFILEAbi>, dwDesiredAccess: UInt32, dwShareMode: UInt32, dwCreationMode: UInt32): IntNative
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_OpenColorProfileA == "on"]
+public unsafe func Windows_OpenColorProfileA(pProfile: CPointer<PROFILEAbi>, dwDesiredAccess: UInt32, dwShareMode: UInt32, dwCreationMode: UInt32): IntNative {
+    return OpenColorProfileA(pProfile, dwDesiredAccess, dwShareMode, dwCreationMode)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_OpenColorProfileW == "on"]
+foreign {
     func OpenColorProfileW(pProfile: CPointer<PROFILEAbi>, dwDesiredAccess: UInt32, dwShareMode: UInt32, dwCreationMode: UInt32): IntNative
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_OpenColorProfileW == "on"]
+public unsafe func Windows_OpenColorProfileW(pProfile: CPointer<PROFILEAbi>, dwDesiredAccess: UInt32, dwShareMode: UInt32, dwCreationMode: UInt32): IntNative {
+    return OpenColorProfileW(pProfile, dwDesiredAccess, dwShareMode, dwCreationMode)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_RegisterCMMA == "on"]
+foreign {
     // param-hint: pMachineName optional
     func RegisterCMMA(pMachineName: CPointer<UInt8>, cmmID: UInt32, pCMMdll: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_RegisterCMMA == "on"]
+public unsafe func Windows_RegisterCMMA(pMachineName: CPointer<UInt8>, cmmID: UInt32, pCMMdll: CPointer<UInt8>): Int32 {
+    return RegisterCMMA(pMachineName, cmmID, pCMMdll)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_RegisterCMMW == "on"]
+foreign {
     // param-hint: pMachineName optional
     func RegisterCMMW(pMachineName: CPointer<UInt16>, cmmID: UInt32, pCMMdll: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_RegisterCMMW == "on"]
+public unsafe func Windows_RegisterCMMW(pMachineName: CPointer<UInt16>, cmmID: UInt32, pCMMdll: CPointer<UInt16>): Int32 {
+    return RegisterCMMW(pMachineName, cmmID, pCMMdll)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_SelectCMM == "on"]
+foreign {
     func SelectCMM(dwCMMType: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_SelectCMM == "on"]
+public unsafe func Windows_SelectCMM(dwCMMType: UInt32): Int32 {
+    return SelectCMM(dwCMMType)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_SetColorProfileElement == "on"]
+foreign {
     // param-hint: pElement len=param[3]
     func SetColorProfileElement(hProfile: IntNative, tag: UInt32, dwOffset: UInt32, pcbElement: CPointer<UInt32>, pElement: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_SetColorProfileElement == "on"]
+public unsafe func Windows_SetColorProfileElement(hProfile: IntNative, tag: UInt32, dwOffset: UInt32, pcbElement: CPointer<UInt32>, pElement: CPointer<Unit>): Int32 {
+    return SetColorProfileElement(hProfile, tag, dwOffset, pcbElement, pElement)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_SetColorProfileElementReference == "on"]
+foreign {
     func SetColorProfileElementReference(hProfile: IntNative, newTag: UInt32, refTag: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_SetColorProfileElementReference == "on"]
+public unsafe func Windows_SetColorProfileElementReference(hProfile: IntNative, newTag: UInt32, refTag: UInt32): Int32 {
+    return SetColorProfileElementReference(hProfile, newTag, refTag)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_SetColorProfileElementSize == "on"]
+foreign {
     func SetColorProfileElementSize(hProfile: IntNative, tagType: UInt32, pcbElement: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_SetColorProfileElementSize == "on"]
+public unsafe func Windows_SetColorProfileElementSize(hProfile: IntNative, tagType: UInt32, pcbElement: UInt32): Int32 {
+    return SetColorProfileElementSize(hProfile, tagType, pcbElement)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_SetColorProfileHeader == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func SetColorProfileHeader(hProfile: IntNative, pHeader: CPointer<PROFILEHEADERAbi>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_SetColorProfileHeader == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_SetColorProfileHeader(hProfile: IntNative, pHeader: CPointer<PROFILEHEADERAbi>): Int32 {
+    return SetColorProfileHeader(hProfile, pHeader)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_SetStandardColorSpaceProfileA == "on"]
+foreign {
     // param-hint: pMachineName optional
     func SetStandardColorSpaceProfileA(pMachineName: CPointer<UInt8>, dwProfileID: UInt32, pProfilename: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_SetStandardColorSpaceProfileA == "on"]
+public unsafe func Windows_SetStandardColorSpaceProfileA(pMachineName: CPointer<UInt8>, dwProfileID: UInt32, pProfilename: CPointer<UInt8>): Int32 {
+    return SetStandardColorSpaceProfileA(pMachineName, dwProfileID, pProfilename)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_SetStandardColorSpaceProfileW == "on"]
+foreign {
     // param-hint: pMachineName optional
     func SetStandardColorSpaceProfileW(pMachineName: CPointer<UInt16>, dwProfileID: UInt32, pProfileName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_SetStandardColorSpaceProfileW == "on"]
+public unsafe func Windows_SetStandardColorSpaceProfileW(pMachineName: CPointer<UInt16>, dwProfileID: UInt32, pProfileName: CPointer<UInt16>): Int32 {
+    return SetStandardColorSpaceProfileW(pMachineName, dwProfileID, pProfileName)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_TranslateBitmapBits == "on"]
+foreign {
     // param-hint: pfnCallBack optional
     // param-hint: ulCallbackData optional
     func TranslateBitmapBits(hColorTransform: IntNative, pSrcBits: CPointer<Unit>, bmInput: BMFORMATAbi, dwWidth: UInt32, dwHeight: UInt32, dwInputStride: UInt32, pDestBits: CPointer<Unit>, bmOutput: BMFORMATAbi, dwOutputStride: UInt32, pfnCallBack: LPBMCALLBACKFN, ulCallbackData: IntNative): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_TranslateBitmapBits == "on"]
+public unsafe func Windows_TranslateBitmapBits(hColorTransform: IntNative, pSrcBits: CPointer<Unit>, bmInput: BMFORMATAbi, dwWidth: UInt32, dwHeight: UInt32, dwInputStride: UInt32, pDestBits: CPointer<Unit>, bmOutput: BMFORMATAbi, dwOutputStride: UInt32, pfnCallBack: LPBMCALLBACKFN, ulCallbackData: IntNative): Int32 {
+    return TranslateBitmapBits(hColorTransform, pSrcBits, bmInput, dwWidth, dwHeight, dwInputStride, pDestBits, bmOutput, dwOutputStride, pfnCallBack, ulCallbackData)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_TranslateColors == "on"]
+foreign {
     // param-hint: paInputColors len=param[2]
     // param-hint: paOutputColors len=param[2]
     func TranslateColors(hColorTransform: IntNative, paInputColors: CPointer<COLOR>, nColors: UInt32, ctInput: COLORTYPEAbi, paOutputColors: CPointer<COLOR>, ctOutput: COLORTYPEAbi): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_TranslateColors == "on"]
+public unsafe func Windows_TranslateColors(hColorTransform: IntNative, paInputColors: CPointer<COLOR>, nColors: UInt32, ctInput: COLORTYPEAbi, paOutputColors: CPointer<COLOR>, ctOutput: COLORTYPEAbi): Int32 {
+    return TranslateColors(hColorTransform, paInputColors, nColors, ctInput, paOutputColors, ctOutput)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_UninstallColorProfileA == "on"]
+foreign {
     // param-hint: pMachineName optional
     func UninstallColorProfileA(pMachineName: CPointer<UInt8>, pProfileName: CPointer<UInt8>, bDelete: Int32): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_UninstallColorProfileA == "on"]
+public unsafe func Windows_UninstallColorProfileA(pMachineName: CPointer<UInt8>, pProfileName: CPointer<UInt8>, bDelete: Int32): Int32 {
+    return UninstallColorProfileA(pMachineName, pProfileName, bDelete)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_UninstallColorProfileW == "on"]
+foreign {
     // param-hint: pMachineName optional
     func UninstallColorProfileW(pMachineName: CPointer<UInt16>, pProfileName: CPointer<UInt16>, bDelete: Int32): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_UninstallColorProfileW == "on"]
+public unsafe func Windows_UninstallColorProfileW(pMachineName: CPointer<UInt16>, pProfileName: CPointer<UInt16>, bDelete: Int32): Int32 {
+    return UninstallColorProfileW(pMachineName, pProfileName, bDelete)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_UnregisterCMMA == "on"]
+foreign {
     // param-hint: pMachineName optional
     func UnregisterCMMA(pMachineName: CPointer<UInt8>, cmmID: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_UnregisterCMMA == "on"]
+public unsafe func Windows_UnregisterCMMA(pMachineName: CPointer<UInt8>, cmmID: UInt32): Int32 {
+    return UnregisterCMMA(pMachineName, cmmID)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_UnregisterCMMW == "on"]
+foreign {
     // param-hint: pMachineName optional
     func UnregisterCMMW(pMachineName: CPointer<UInt16>, cmmID: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_UnregisterCMMW == "on"]
+public unsafe func Windows_UnregisterCMMW(pMachineName: CPointer<UInt16>, cmmID: UInt32): Int32 {
+    return UnregisterCMMW(pMachineName, cmmID)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsAssociateColorProfileWithDevice == "on"]
+foreign {
     func WcsAssociateColorProfileWithDevice(scope: WCS_PROFILE_MANAGEMENT_SCOPEAbi, pProfileName: CPointer<UInt16>, pDeviceName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsAssociateColorProfileWithDevice == "on"]
+public unsafe func Windows_WcsAssociateColorProfileWithDevice(scope: WCS_PROFILE_MANAGEMENT_SCOPEAbi, pProfileName: CPointer<UInt16>, pDeviceName: CPointer<UInt16>): Int32 {
+    return WcsAssociateColorProfileWithDevice(scope, pProfileName, pDeviceName)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsCheckColors == "on"]
+foreign {
     // param-hint: pInputData bytes=param[4]
     // param-hint: paResult len=param[1]
     func WcsCheckColors(hColorTransform: IntNative, nColors: UInt32, nInputChannels: UInt32, cdtInput: COLORDATATYPEAbi, cbInput: UInt32, pInputData: CPointer<Unit>, paResult: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsCheckColors == "on"]
+public unsafe func Windows_WcsCheckColors(hColorTransform: IntNative, nColors: UInt32, nInputChannels: UInt32, cdtInput: COLORDATATYPEAbi, cbInput: UInt32, pInputData: CPointer<Unit>, paResult: CPointer<UInt8>): Int32 {
+    return WcsCheckColors(hColorTransform, nColors, nInputChannels, cdtInput, cbInput, pInputData, paResult)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsCreateIccProfile == "on"]
+foreign {
     func WcsCreateIccProfile(hWcsProfile: IntNative, dwOptions: UInt32): IntNative
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsCreateIccProfile == "on"]
+public unsafe func Windows_WcsCreateIccProfile(hWcsProfile: IntNative, dwOptions: UInt32): IntNative {
+    return WcsCreateIccProfile(hWcsProfile, dwOptions)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsDisassociateColorProfileFromDevice == "on"]
+foreign {
     func WcsDisassociateColorProfileFromDevice(scope: WCS_PROFILE_MANAGEMENT_SCOPEAbi, pProfileName: CPointer<UInt16>, pDeviceName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsDisassociateColorProfileFromDevice == "on"]
+public unsafe func Windows_WcsDisassociateColorProfileFromDevice(scope: WCS_PROFILE_MANAGEMENT_SCOPEAbi, pProfileName: CPointer<UInt16>, pDeviceName: CPointer<UInt16>): Int32 {
+    return WcsDisassociateColorProfileFromDevice(scope, pProfileName, pDeviceName)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsEnumColorProfiles == "on"]
+foreign {
     // param-hint: pBuffer bytes=param[3]
     // param-hint: pnProfiles optional
     func WcsEnumColorProfiles(scope: WCS_PROFILE_MANAGEMENT_SCOPEAbi, pEnumRecord: CPointer<ENUMTYPEWAbi>, pBuffer: CPointer<UInt8>, dwSize: UInt32, pnProfiles: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsEnumColorProfiles == "on"]
+public unsafe func Windows_WcsEnumColorProfiles(scope: WCS_PROFILE_MANAGEMENT_SCOPEAbi, pEnumRecord: CPointer<ENUMTYPEWAbi>, pBuffer: CPointer<UInt8>, dwSize: UInt32, pnProfiles: CPointer<UInt32>): Int32 {
+    return WcsEnumColorProfiles(scope, pEnumRecord, pBuffer, dwSize, pnProfiles)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsEnumColorProfilesSize == "on"]
+foreign {
     func WcsEnumColorProfilesSize(scope: WCS_PROFILE_MANAGEMENT_SCOPEAbi, pEnumRecord: CPointer<ENUMTYPEWAbi>, pdwSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsEnumColorProfilesSize == "on"]
+public unsafe func Windows_WcsEnumColorProfilesSize(scope: WCS_PROFILE_MANAGEMENT_SCOPEAbi, pEnumRecord: CPointer<ENUMTYPEWAbi>, pdwSize: CPointer<UInt32>): Int32 {
+    return WcsEnumColorProfilesSize(scope, pEnumRecord, pdwSize)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsGetCalibrationManagementState == "on"]
+foreign {
     func WcsGetCalibrationManagementState(pbIsEnabled: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsGetCalibrationManagementState == "on"]
+public unsafe func Windows_WcsGetCalibrationManagementState(pbIsEnabled: CPointer<Int32>): Int32 {
+    return WcsGetCalibrationManagementState(pbIsEnabled)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsGetDefaultColorProfile == "on"]
+foreign {
     // param-hint: pDeviceName optional
     // param-hint: pProfileName bytes=param[5]
     func WcsGetDefaultColorProfile(scope: WCS_PROFILE_MANAGEMENT_SCOPEAbi, pDeviceName: CPointer<UInt16>, cptColorProfileType: COLORPROFILETYPEAbi, cpstColorProfileSubType: COLORPROFILESUBTYPEAbi, dwProfileID: UInt32, cbProfileName: UInt32, pProfileName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsGetDefaultColorProfile == "on"]
+public unsafe func Windows_WcsGetDefaultColorProfile(scope: WCS_PROFILE_MANAGEMENT_SCOPEAbi, pDeviceName: CPointer<UInt16>, cptColorProfileType: COLORPROFILETYPEAbi, cpstColorProfileSubType: COLORPROFILESUBTYPEAbi, dwProfileID: UInt32, cbProfileName: UInt32, pProfileName: CPointer<UInt16>): Int32 {
+    return WcsGetDefaultColorProfile(scope, pDeviceName, cptColorProfileType, cpstColorProfileSubType, dwProfileID, cbProfileName, pProfileName)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsGetDefaultColorProfileSize == "on"]
+foreign {
     // param-hint: pDeviceName optional
     func WcsGetDefaultColorProfileSize(scope: WCS_PROFILE_MANAGEMENT_SCOPEAbi, pDeviceName: CPointer<UInt16>, cptColorProfileType: COLORPROFILETYPEAbi, cpstColorProfileSubType: COLORPROFILESUBTYPEAbi, dwProfileID: UInt32, pcbProfileName: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsGetDefaultColorProfileSize == "on"]
+public unsafe func Windows_WcsGetDefaultColorProfileSize(scope: WCS_PROFILE_MANAGEMENT_SCOPEAbi, pDeviceName: CPointer<UInt16>, cptColorProfileType: COLORPROFILETYPEAbi, cpstColorProfileSubType: COLORPROFILESUBTYPEAbi, dwProfileID: UInt32, pcbProfileName: CPointer<UInt32>): Int32 {
+    return WcsGetDefaultColorProfileSize(scope, pDeviceName, cptColorProfileType, cpstColorProfileSubType, dwProfileID, pcbProfileName)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsGetDefaultRenderingIntent == "on"]
+foreign {
     func WcsGetDefaultRenderingIntent(scope: WCS_PROFILE_MANAGEMENT_SCOPEAbi, pdwRenderingIntent: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsGetDefaultRenderingIntent == "on"]
+public unsafe func Windows_WcsGetDefaultRenderingIntent(scope: WCS_PROFILE_MANAGEMENT_SCOPEAbi, pdwRenderingIntent: CPointer<UInt32>): Int32 {
+    return WcsGetDefaultRenderingIntent(scope, pdwRenderingIntent)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsGetUsePerUserProfiles == "on"]
+foreign {
     func WcsGetUsePerUserProfiles(pDeviceName: CPointer<UInt16>, dwDeviceClass: UInt32, pUsePerUserProfiles: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsGetUsePerUserProfiles == "on"]
+public unsafe func Windows_WcsGetUsePerUserProfiles(pDeviceName: CPointer<UInt16>, dwDeviceClass: UInt32, pUsePerUserProfiles: CPointer<Int32>): Int32 {
+    return WcsGetUsePerUserProfiles(pDeviceName, dwDeviceClass, pUsePerUserProfiles)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsOpenColorProfileA == "on"]
+foreign {
     // param-hint: pCAMPProfile optional
     // param-hint: pGMMPProfile optional
     func WcsOpenColorProfileA(pCDMPProfile: CPointer<PROFILEAbi>, pCAMPProfile: CPointer<PROFILEAbi>, pGMMPProfile: CPointer<PROFILEAbi>, dwDesireAccess: UInt32, dwShareMode: UInt32, dwCreationMode: UInt32, dwFlags: UInt32): IntNative
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsOpenColorProfileA == "on"]
+public unsafe func Windows_WcsOpenColorProfileA(pCDMPProfile: CPointer<PROFILEAbi>, pCAMPProfile: CPointer<PROFILEAbi>, pGMMPProfile: CPointer<PROFILEAbi>, dwDesireAccess: UInt32, dwShareMode: UInt32, dwCreationMode: UInt32, dwFlags: UInt32): IntNative {
+    return WcsOpenColorProfileA(pCDMPProfile, pCAMPProfile, pGMMPProfile, dwDesireAccess, dwShareMode, dwCreationMode, dwFlags)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsOpenColorProfileW == "on"]
+foreign {
     // param-hint: pCAMPProfile optional
     // param-hint: pGMMPProfile optional
     func WcsOpenColorProfileW(pCDMPProfile: CPointer<PROFILEAbi>, pCAMPProfile: CPointer<PROFILEAbi>, pGMMPProfile: CPointer<PROFILEAbi>, dwDesireAccess: UInt32, dwShareMode: UInt32, dwCreationMode: UInt32, dwFlags: UInt32): IntNative
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsOpenColorProfileW == "on"]
+public unsafe func Windows_WcsOpenColorProfileW(pCDMPProfile: CPointer<PROFILEAbi>, pCAMPProfile: CPointer<PROFILEAbi>, pGMMPProfile: CPointer<PROFILEAbi>, dwDesireAccess: UInt32, dwShareMode: UInt32, dwCreationMode: UInt32, dwFlags: UInt32): IntNative {
+    return WcsOpenColorProfileW(pCDMPProfile, pCAMPProfile, pGMMPProfile, dwDesireAccess, dwShareMode, dwCreationMode, dwFlags)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsSetCalibrationManagementState == "on"]
+foreign {
     func WcsSetCalibrationManagementState(bIsEnabled: Int32): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsSetCalibrationManagementState == "on"]
+public unsafe func Windows_WcsSetCalibrationManagementState(bIsEnabled: Int32): Int32 {
+    return WcsSetCalibrationManagementState(bIsEnabled)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsSetDefaultColorProfile == "on"]
+foreign {
     // param-hint: pDeviceName optional
     // param-hint: pProfileName optional
     func WcsSetDefaultColorProfile(scope: WCS_PROFILE_MANAGEMENT_SCOPEAbi, pDeviceName: CPointer<UInt16>, cptColorProfileType: COLORPROFILETYPEAbi, cpstColorProfileSubType: COLORPROFILESUBTYPEAbi, dwProfileID: UInt32, pProfileName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsSetDefaultColorProfile == "on"]
+public unsafe func Windows_WcsSetDefaultColorProfile(scope: WCS_PROFILE_MANAGEMENT_SCOPEAbi, pDeviceName: CPointer<UInt16>, cptColorProfileType: COLORPROFILETYPEAbi, cpstColorProfileSubType: COLORPROFILESUBTYPEAbi, dwProfileID: UInt32, pProfileName: CPointer<UInt16>): Int32 {
+    return WcsSetDefaultColorProfile(scope, pDeviceName, cptColorProfileType, cpstColorProfileSubType, dwProfileID, pProfileName)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsSetDefaultRenderingIntent == "on"]
+foreign {
     func WcsSetDefaultRenderingIntent(scope: WCS_PROFILE_MANAGEMENT_SCOPEAbi, dwRenderingIntent: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsSetDefaultRenderingIntent == "on"]
+public unsafe func Windows_WcsSetDefaultRenderingIntent(scope: WCS_PROFILE_MANAGEMENT_SCOPEAbi, dwRenderingIntent: UInt32): Int32 {
+    return WcsSetDefaultRenderingIntent(scope, dwRenderingIntent)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsSetUsePerUserProfiles == "on"]
+foreign {
     func WcsSetUsePerUserProfiles(pDeviceName: CPointer<UInt16>, dwDeviceClass: UInt32, usePerUserProfiles: Int32): Int32
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsSetUsePerUserProfiles == "on"]
+public unsafe func Windows_WcsSetUsePerUserProfiles(pDeviceName: CPointer<UInt16>, dwDeviceClass: UInt32, usePerUserProfiles: Int32): Int32 {
+    return WcsSetUsePerUserProfiles(pDeviceName, dwDeviceClass, usePerUserProfiles)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsTranslateColors == "on"]
+foreign {
     // param-hint: pInputData bytes=param[4]
     // param-hint: pOutputData bytes=param[8]
     func WcsTranslateColors(hColorTransform: IntNative, nColors: UInt32, nInputChannels: UInt32, cdtInput: COLORDATATYPEAbi, cbInput: UInt32, pInputData: CPointer<Unit>, nOutputChannels: UInt32, cdtOutput: COLORDATATYPEAbi, cbOutput: UInt32, pOutputData: CPointer<Unit>): Int32
 }
 
-@When[MSCMS == "on" && Windows_Win32_Graphics_Gdi == "on"]
-foreign {
-    func CreateColorTransformA(pLogColorSpace: CPointer<LOGCOLORSPACEAAbi>, hDestProfile: IntNative, hTargetProfile: IntNative, dwFlags: UInt32): IntNative
-    func CreateColorTransformW(pLogColorSpace: CPointer<LOGCOLORSPACEWAbi>, hDestProfile: IntNative, hTargetProfile: IntNative, dwFlags: UInt32): IntNative
-    func CreateProfileFromLogColorSpaceA(pLogColorSpace: CPointer<LOGCOLORSPACEAAbi>, pProfile: CPointer<CPointer<UInt8>>): Int32
-    func CreateProfileFromLogColorSpaceW(pLogColorSpace: CPointer<LOGCOLORSPACEWAbi>, pProfile: CPointer<CPointer<UInt8>>): Int32
-    func GetColorProfileHeader(hProfile: IntNative, pHeader: CPointer<PROFILEHEADERAbi>): Int32
-    func SetColorProfileHeader(hProfile: IntNative, pHeader: CPointer<PROFILEHEADERAbi>): Int32
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_WcsTranslateColors == "on"]
+public unsafe func Windows_WcsTranslateColors(hColorTransform: IntNative, nColors: UInt32, nInputChannels: UInt32, cdtInput: COLORDATATYPEAbi, cbInput: UInt32, pInputData: CPointer<Unit>, nOutputChannels: UInt32, cdtOutput: COLORDATATYPEAbi, cbOutput: UInt32, pOutputData: CPointer<Unit>): Int32 {
+    return WcsTranslateColors(hColorTransform, nColors, nInputChannels, cdtInput, cbInput, pInputData, nOutputChannels, cdtOutput, cbOutput, pOutputData)
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_ColorProfileGetDeviceCapabilities == "on"]
+func __windowsBindgen_ColorProfileGetDeviceCapabilitiesProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("mscms.dll", "ColorProfileGetDeviceCapabilities")
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_ColorProfileGetDeviceCapabilities == "on"]
+unsafe func ColorProfileGetDeviceCapabilities(scope: WCS_PROFILE_MANAGEMENT_SCOPEAbi, targetAdapterID: Win32_Foundation.LUIDAbi, sourceID: UInt32, capsType: WCS_DEVICE_CAPABILITIES_TYPEAbi, outputCapabilities: CPointer<Unit>): Int32 {
+    let call = CFunc<(WCS_PROFILE_MANAGEMENT_SCOPEAbi, Win32_Foundation.LUIDAbi, UInt32, WCS_DEVICE_CAPABILITIES_TYPEAbi, CPointer<Unit>) -> Int32>(__windowsBindgen_ColorProfileGetDeviceCapabilitiesProc())
+    return unsafe { call(scope, targetAdapterID, sourceID, capsType, outputCapabilities) }
+}
+
+@When[Windows_Win32_UI_ColorSystem == "on" && MSCMS == "on" && Windows_Win32_UI_ColorSystem_ColorProfileGetDeviceCapabilities == "on"]
+public unsafe func Windows_ColorProfileGetDeviceCapabilities(scope: WCS_PROFILE_MANAGEMENT_SCOPEAbi, targetAdapterID: Win32_Foundation.LUIDAbi, sourceID: UInt32, capsType: WCS_DEVICE_CAPABILITIES_TYPEAbi, outputCapabilities: CPointer<Unit>): Int32 {
+    return ColorProfileGetDeviceCapabilities(scope, targetAdapterID, sourceID, capsType, outputCapabilities)
 }
 
 @When[Windows_Win32_UI_ColorSystem == "on"]

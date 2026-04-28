@@ -186,7 +186,7 @@ public class BluetoothLEAdvertisementWatcherTriggerDetails <: InterfaceWrapperBa
         return defaultInterface().Error()
     }
 
-    @When[Windows_Devices_Bluetooth_Advertisement == "on"]
+    @When[Windows_Devices_Bluetooth_Advertisement == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func Advertisements(): windows_collections.IVectorView<BluetoothLEAdvertisementReceivedEventArgs> {
         return defaultInterface().Advertisements()
     }
@@ -321,9 +321,9 @@ public struct IBluetoothLEAdvertisementWatcherTriggerDetailsVtbl {
     public var Error: CFunc<(CPointer<Unit>, CPointer<_impl_l0.BluetoothErrorAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Devices_Bluetooth != "on"]
     public var Error: UIntNative = UIntNative(0)
-    @When[Windows_Devices_Bluetooth_Advertisement == "on"]
+    @When[Windows_Devices_Bluetooth_Advertisement == "on" && Windows_Foundation_Collections == "on"]
     public var Advertisements: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Devices_Bluetooth_Advertisement != "on"]
+    @When[Windows_Devices_Bluetooth_Advertisement != "on" || Windows_Foundation_Collections != "on"]
     public var Advertisements: UIntNative = UIntNative(0)
     @When[Windows_Devices_Bluetooth == "on"]
     public var SignalStrengthFilter: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -406,7 +406,7 @@ public class IBluetoothLEAdvertisementWatcherTriggerDetails <: InterfaceWrapperB
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.BluetoothError>()).unwrap()
     }
 
-    @When[Windows_Devices_Bluetooth_Advertisement == "on"]
+    @When[Windows_Devices_Bluetooth_Advertisement == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func Advertisements(): windows_collections.IVectorView<BluetoothLEAdvertisementReceivedEventArgs> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -539,9 +539,9 @@ public struct IGattCharacteristicNotificationTriggerDetails2Vtbl {
     @When[Windows_Devices_Bluetooth != "on"]
     public var Error: UIntNative = UIntNative(0)
     public var EventTriggeringMode: CFunc<(CPointer<Unit>, CPointer<_impl_l0.BluetoothEventTriggeringModeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Devices_Bluetooth_GenericAttributeProfile == "on"]
+    @When[Windows_Devices_Bluetooth_GenericAttributeProfile == "on" && Windows_Foundation_Collections == "on"]
     public var ValueChangedEvents: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Devices_Bluetooth_GenericAttributeProfile != "on"]
+    @When[Windows_Devices_Bluetooth_GenericAttributeProfile != "on" || Windows_Foundation_Collections != "on"]
     public var ValueChangedEvents: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -628,7 +628,7 @@ public class IGattCharacteristicNotificationTriggerDetails2 <: InterfaceWrapperB
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.BluetoothEventTriggeringMode>()).unwrap()
     }
 
-    @When[Windows_Devices_Bluetooth_GenericAttributeProfile == "on"]
+    @When[Windows_Devices_Bluetooth_GenericAttributeProfile == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func ValueChangedEvents(): windows_collections.IVectorView<GattValueChangedEventArgs> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

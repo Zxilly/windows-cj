@@ -3,9 +3,7 @@ package windows_sys.Win32.System.WinRT.Direct3D11
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_System_WinRT == "on"]
 import windows_sys.Win32.System.WinRT as Win32_System_WinRT
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l2 as Win32__impl_l2
@@ -66,8 +64,22 @@ public class IDirect3DDxgiInterfaceAccess <: InterfaceWrapperBase & ComInterface
     }
 }
 
-@When[D3D11 == "on" && (Windows_Win32_Graphics_Dxgi == "on" && Windows_Win32_System_WinRT == "on")]
+@When[Windows_Win32_System_WinRT_Direct3D11 == "on" && D3D11 == "on" && Windows_Win32_System_WinRT_Direct3D11_CreateDirect3D11DeviceFromDXGIDevice == "on" && Windows_Win32_Graphics_Dxgi == "on" && Windows_Win32_System_WinRT == "on"]
 foreign {
     func CreateDirect3D11DeviceFromDXGIDevice(dxgiDevice: CPointer<Unit>, graphicsDevice: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_WinRT_Direct3D11 == "on" && D3D11 == "on" && Windows_Win32_System_WinRT_Direct3D11_CreateDirect3D11DeviceFromDXGIDevice == "on" && Windows_Win32_Graphics_Dxgi == "on" && Windows_Win32_System_WinRT == "on"]
+public unsafe func Windows_CreateDirect3D11DeviceFromDXGIDevice(dxgiDevice: CPointer<Unit>, graphicsDevice: CPointer<CPointer<Unit>>): Int32 {
+    return CreateDirect3D11DeviceFromDXGIDevice(dxgiDevice, graphicsDevice)
+}
+
+@When[Windows_Win32_System_WinRT_Direct3D11 == "on" && D3D11 == "on" && Windows_Win32_System_WinRT_Direct3D11_CreateDirect3D11SurfaceFromDXGISurface == "on" && Windows_Win32_Graphics_Dxgi == "on" && Windows_Win32_System_WinRT == "on"]
+foreign {
     func CreateDirect3D11SurfaceFromDXGISurface(dgxiSurface: CPointer<Unit>, graphicsSurface: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_WinRT_Direct3D11 == "on" && D3D11 == "on" && Windows_Win32_System_WinRT_Direct3D11_CreateDirect3D11SurfaceFromDXGISurface == "on" && Windows_Win32_Graphics_Dxgi == "on" && Windows_Win32_System_WinRT == "on"]
+public unsafe func Windows_CreateDirect3D11SurfaceFromDXGISurface(dgxiSurface: CPointer<Unit>, graphicsSurface: CPointer<CPointer<Unit>>): Int32 {
+    return CreateDirect3D11SurfaceFromDXGISurface(dgxiSurface, graphicsSurface)
 }

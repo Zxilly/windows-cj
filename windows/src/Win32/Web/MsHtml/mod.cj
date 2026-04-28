@@ -8,15 +8,10 @@ import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Dxgi_Common == "on"]
 import windows.Win32.Graphics.Dxgi.Common as Win32_Graphics_Dxgi_Common
-@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-@When[Windows_Win32_System_Diagnostics_Debug_ActiveScript == "on"]
 import windows.Win32.System.Diagnostics.Debug.ActiveScript as Win32_System_Diagnostics_Debug_ActiveScript
-@When[Windows_Win32_UI_Input_Ime == "on"]
 import windows.Win32.UI.Input.Ime as Win32_UI_Input_Ime
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
@@ -91433,10 +91428,15 @@ extend textpathSpacingtype <: windows_core.CopyType & windows_core.RuntimeType &
     }
 }
 
-@When[SHDOCVW == "on"]
+@When[Windows_Win32_Web_MsHtml == "on" && SHDOCVW == "on" && Windows_Win32_Web_MsHtml_DoPrivacyDlg == "on"]
 foreign {
     // param-hint: hwndOwner optional
     func DoPrivacyDlg(hwndOwner: CPointer<Unit>, pszUrl: CPointer<UInt16>, pPrivacyEnum: CPointer<Unit>, fReportAllSites: Int32): Int32
+}
+
+@When[Windows_Win32_Web_MsHtml == "on" && SHDOCVW == "on" && Windows_Win32_Web_MsHtml_DoPrivacyDlg == "on"]
+public unsafe func Windows_DoPrivacyDlg(hwndOwner: CPointer<Unit>, pszUrl: CPointer<UInt16>, pPrivacyEnum: CPointer<Unit>, fReportAllSites: Int32): Int32 {
+    return DoPrivacyDlg(hwndOwner, pszUrl, pPrivacyEnum, fReportAllSites)
 }
 
 @When[Windows_Win32_Web_MsHtml == "on"]

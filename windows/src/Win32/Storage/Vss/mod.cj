@@ -8,9 +8,7 @@ import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Storage_VirtualDiskService == "on"]
 import windows.Win32.Storage.VirtualDiskService as Win32_Storage_VirtualDiskService
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l2 as Win32__impl_l2
@@ -4068,9 +4066,14 @@ extend VSS_SNAPSHOT_PROP <: windows_core.CopyType & windows_core.RuntimeType & w
     }
 }
 
-@When[VSSAPI == "on"]
+@When[Windows_Win32_Storage_Vss == "on" && VSSAPI == "on" && Windows_Win32_Storage_Vss_CreateVssExpressWriterInternal == "on"]
 foreign {
     func CreateVssExpressWriterInternal(ppWriter: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Storage_Vss == "on" && VSSAPI == "on" && Windows_Win32_Storage_Vss_CreateVssExpressWriterInternal == "on"]
+public unsafe func Windows_CreateVssExpressWriterInternal(ppWriter: CPointer<CPointer<Unit>>): Int32 {
+    return CreateVssExpressWriterInternal(ppWriter)
 }
 
 @When[Windows_Win32_Storage_Vss == "on"]

@@ -339,7 +339,7 @@ public class IWiFiDirectServiceProvisioningInfo <: InterfaceWrapperBase & ComInt
 @C
 public struct IWiFiDirectServiceRemotePortAddedEventArgsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public var EndpointPairs: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Protocol: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -385,7 +385,7 @@ public class IWiFiDirectServiceRemotePortAddedEventArgs <: InterfaceWrapperBase 
         readVtbl<IWiFiDirectServiceRemotePortAddedEventArgsVtbl>(IWiFiDirectServiceRemotePortAddedEventArgsVtbl())
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func EndpointPairs(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -533,6 +533,7 @@ public struct IWiFiDirectServiceVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     @When[Windows_Storage_Streams == "on"]
     public var RemoteServiceInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedConfigurationMethods: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var PreferGroupOwnerMode: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var SetPreferGroupOwnerMode: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
@@ -596,6 +597,7 @@ public class IWiFiDirectService <: InterfaceWrapperBase & ComInterface {
         return __vt.RemoteServiceInfo(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedConfigurationMethods(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -670,6 +672,7 @@ public class IWiFiDirectService <: InterfaceWrapperBase & ComInterface {
 public struct IWiFiDirectServiceAdvertiserVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var ServiceName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ServiceNamePrefixes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Storage_Streams == "on"]
     public var ServiceInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -679,6 +682,7 @@ public struct IWiFiDirectServiceAdvertiserVtbl {
     public var SetAutoAcceptSession: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
     public var PreferGroupOwnerMode: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var SetPreferGroupOwnerMode: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var PreferredConfigurationMethods: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ServiceStatus: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetServiceStatus: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -751,6 +755,7 @@ public class IWiFiDirectServiceAdvertiser <: InterfaceWrapperBase & ComInterface
         return __vt.ServiceName(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ServiceNamePrefixes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -795,6 +800,7 @@ public class IWiFiDirectServiceAdvertiser <: InterfaceWrapperBase & ComInterface
         return __vt.SetPreferGroupOwnerMode(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PreferredConfigurationMethods(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1044,7 +1050,7 @@ public struct IWiFiDirectServiceSessionVtbl {
     public var AdvertisementId: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var ServiceAddress: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SessionAddress: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public var GetConnectionEndpointPairs: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SessionStatusChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveSessionStatusChanged: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
@@ -1139,7 +1145,7 @@ public class IWiFiDirectServiceSession <: InterfaceWrapperBase & ComInterface {
         return __vt.SessionAddress(__liveRaw, result__)
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func GetConnectionEndpointPairs(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

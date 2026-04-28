@@ -6,11 +6,8 @@ import windows_interface as windows_interface
 import windows_polyfill.{packedReadFloat32, packedReadInt32, packedReadUInt16, packedReadUInt32, packedReadUInt64, packedReadUInt8, packedReadValue, packedWriteFloat32, packedWriteInt32, packedWriteUInt16, packedWriteUInt32, packedWriteUInt64, packedWriteUInt8, packedWriteValue, unionReadFloat32, unionReadInt32, unionReadUInt16, unionReadUInt32, unionReadUInt64, unionReadUInt8, unionWriteFloat32, unionWriteInt32, unionWriteUInt16, unionWriteUInt32, unionWriteUInt64, unionWriteUInt8}
 import windows_polyfill as windows_polyfill
 import windows_sys.Wdk._impl_l0 as Wdk__impl_l0
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Direct3D9 == "on"]
 import windows_sys.Win32.Graphics.Direct3D9 as Win32_Graphics_Direct3D9
-@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows_sys.Win32.Graphics.Gdi as Win32_Graphics_Gdi
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
@@ -27719,200 +27716,1755 @@ public type PFND3DKMT_CHECKMULTIPLANEOVERLAYSUPPORT3 = CFunc<(CPointer<D3DKMT_CH
 @When[Windows_Wdk_Graphics_Direct3D == "on"]
 public type PFND3DKMT_QUERYSTATISTICS = CFunc<(CPointer<D3DKMT_QUERYSTATISTICS>) -> Int32>
 
-@When[GDI32 == "on"]
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTAcquireKeyedMutex == "on"]
 foreign {
     func D3DKMTAcquireKeyedMutex(param0: CPointer<D3DKMT_ACQUIREKEYEDMUTEX>): Int32
-    func D3DKMTAcquireKeyedMutex2(param0: CPointer<D3DKMT_ACQUIREKEYEDMUTEX2>): Int32
-    func D3DKMTAdjustFullscreenGamma(param0: CPointer<D3DKMT_ADJUSTFULLSCREENGAMMA>): Int32
-    func D3DKMTCancelPresents(param0: CPointer<D3DKMT_CANCEL_PRESENTS>): Int32
-    func D3DKMTChangeVideoMemoryReservation(param0: CPointer<D3DKMT_CHANGEVIDEOMEMORYRESERVATION>): Int32
-    func D3DKMTCheckExclusiveOwnership(): UInt8
-    func D3DKMTCheckMonitorPowerState(param0: CPointer<D3DKMT_CHECKMONITORPOWERSTATE>): Int32
-    func D3DKMTCheckMultiPlaneOverlaySupport(param0: CPointer<D3DKMT_CHECKMULTIPLANEOVERLAYSUPPORT>): Int32
-    func D3DKMTCheckMultiPlaneOverlaySupport2(param0: CPointer<D3DKMT_CHECKMULTIPLANEOVERLAYSUPPORT2>): Int32
-    func D3DKMTCheckMultiPlaneOverlaySupport3(param0: CPointer<D3DKMT_CHECKMULTIPLANEOVERLAYSUPPORT3>): Int32
-    func D3DKMTCheckOcclusion(param0: CPointer<D3DKMT_CHECKOCCLUSION>): Int32
-    func D3DKMTCheckSharedResourceAccess(param0: CPointer<D3DKMT_CHECKSHAREDRESOURCEACCESS>): Int32
-    func D3DKMTCheckVidPnExclusiveOwnership(param0: CPointer<D3DKMT_CHECKVIDPNEXCLUSIVEOWNERSHIP>): Int32
-    func D3DKMTCloseAdapter(param0: CPointer<D3DKMT_CLOSEADAPTER>): Int32
-    func D3DKMTConfigureSharedResource(param0: CPointer<D3DKMT_CONFIGURESHAREDRESOURCE>): Int32
-    func D3DKMTCreateAllocation(param0: CPointer<D3DKMT_CREATEALLOCATION>): Int32
-    func D3DKMTCreateAllocation2(param0: CPointer<D3DKMT_CREATEALLOCATION>): Int32
-    func D3DKMTCreateContext(param0: CPointer<D3DKMT_CREATECONTEXT>): Int32
-    func D3DKMTCreateContextVirtual(param0: CPointer<D3DKMT_CREATECONTEXTVIRTUAL>): Int32
-    func D3DKMTCreateDevice(param0: CPointer<D3DKMT_CREATEDEVICE>): Int32
-    func D3DKMTCreateHwContext(param0: CPointer<D3DKMT_CREATEHWCONTEXT>): Int32
-    func D3DKMTCreateHwQueue(param0: CPointer<D3DKMT_CREATEHWQUEUE>): Int32
-    func D3DKMTCreateKeyedMutex(param0: CPointer<D3DKMT_CREATEKEYEDMUTEX>): Int32
-    func D3DKMTCreateKeyedMutex2(param0: CPointer<D3DKMT_CREATEKEYEDMUTEX2>): Int32
-    func D3DKMTCreateOutputDupl(param0: CPointer<D3DKMT_CREATE_OUTPUTDUPL>): Int32
-    func D3DKMTCreateOverlay(param0: CPointer<D3DKMT_CREATEOVERLAY>): Int32
-    func D3DKMTCreatePagingQueue(param0: CPointer<D3DKMT_CREATEPAGINGQUEUE>): Int32
-    func D3DKMTCreateProtectedSession(param0: CPointer<D3DKMT_CREATEPROTECTEDSESSION>): Int32
-    func D3DKMTCreateSynchronizationObject(param0: CPointer<D3DKMT_CREATESYNCHRONIZATIONOBJECT>): Int32
-    func D3DKMTCreateSynchronizationObject2(param0: CPointer<D3DKMT_CREATESYNCHRONIZATIONOBJECT2>): Int32
-    func D3DKMTDestroyAllocation(param0: CPointer<D3DKMT_DESTROYALLOCATION>): Int32
-    func D3DKMTDestroyAllocation2(param0: CPointer<D3DKMT_DESTROYALLOCATION2>): Int32
-    func D3DKMTDestroyContext(param0: CPointer<D3DKMT_DESTROYCONTEXT>): Int32
-    func D3DKMTDestroyDevice(param0: CPointer<D3DKMT_DESTROYDEVICE>): Int32
-    func D3DKMTDestroyHwContext(param0: CPointer<D3DKMT_DESTROYHWCONTEXT>): Int32
-    func D3DKMTDestroyHwQueue(param0: CPointer<D3DKMT_DESTROYHWQUEUE>): Int32
-    func D3DKMTDestroyKeyedMutex(param0: CPointer<D3DKMT_DESTROYKEYEDMUTEX>): Int32
-    func D3DKMTDestroyOutputDupl(param0: CPointer<D3DKMT_DESTROY_OUTPUTDUPL>): Int32
-    func D3DKMTDestroyOverlay(param0: CPointer<D3DKMT_DESTROYOVERLAY>): Int32
-    func D3DKMTDestroyPagingQueue(param0: CPointer<D3DDDI_DESTROYPAGINGQUEUE>): Int32
-    func D3DKMTDestroyProtectedSession(param0: CPointer<D3DKMT_DESTROYPROTECTEDSESSION>): Int32
-    func D3DKMTDestroySynchronizationObject(param0: CPointer<D3DKMT_DESTROYSYNCHRONIZATIONOBJECT>): Int32
-    func D3DKMTEnumAdapters(param0: CPointer<D3DKMT_ENUMADAPTERS>): Int32
-    func D3DKMTEnumAdapters2(param0: CPointer<D3DKMT_ENUMADAPTERS2>): Int32
-    func D3DKMTEscape(param0: CPointer<D3DKMT_ESCAPE>): Int32
-    func D3DKMTEvict(param0: CPointer<D3DKMT_EVICT>): Int32
-    func D3DKMTFlipOverlay(param0: CPointer<D3DKMT_FLIPOVERLAY>): Int32
-    func D3DKMTFlushHeapTransitions(param0: CPointer<D3DKMT_FLUSHHEAPTRANSITIONS>): Int32
-    func D3DKMTFreeGpuVirtualAddress(param0: CPointer<D3DKMT_FREEGPUVIRTUALADDRESS>): Int32
-    func D3DKMTGetAllocationPriority(param0: CPointer<D3DKMT_GETALLOCATIONPRIORITY>): Int32
-    func D3DKMTGetContextInProcessSchedulingPriority(param0: CPointer<D3DKMT_GETCONTEXTINPROCESSSCHEDULINGPRIORITY>): Int32
-    func D3DKMTGetContextSchedulingPriority(param0: CPointer<D3DKMT_GETCONTEXTSCHEDULINGPRIORITY>): Int32
-    func D3DKMTGetDWMVerticalBlankEvent(param0: CPointer<D3DKMT_GETVERTICALBLANKEVENT>): Int32
-    func D3DKMTGetDeviceState(param0: CPointer<D3DKMT_GETDEVICESTATE>): Int32
-    func D3DKMTGetDisplayModeList(param0: CPointer<D3DKMT_GETDISPLAYMODELIST>): Int32
-    func D3DKMTGetMultiPlaneOverlayCaps(param0: CPointer<D3DKMT_GET_MULTIPLANE_OVERLAY_CAPS>): Int32
-    func D3DKMTGetMultisampleMethodList(param0: CPointer<D3DKMT_GETMULTISAMPLEMETHODLIST>): Int32
-    func D3DKMTGetOverlayState(param0: CPointer<D3DKMT_GETOVERLAYSTATE>): Int32
-    func D3DKMTGetPostCompositionCaps(param0: CPointer<D3DKMT_GET_POST_COMPOSITION_CAPS>): Int32
-    func D3DKMTGetPresentHistory(param0: CPointer<D3DKMT_GETPRESENTHISTORY>): Int32
-    func D3DKMTGetPresentQueueEvent(hAdapter: UInt32, param1: CPointer<CPointer<Unit>>): Int32
-    func D3DKMTGetProcessDeviceRemovalSupport(param0: CPointer<D3DKMT_GETPROCESSDEVICEREMOVALSUPPORT>): Int32
-    func D3DKMTGetProcessSchedulingPriorityClass(param0: CPointer<Unit>, param1: CPointer<Int32>): Int32
-    func D3DKMTGetResourcePresentPrivateDriverData(param0: CPointer<D3DDDI_GETRESOURCEPRESENTPRIVATEDRIVERDATA>): Int32
-    func D3DKMTGetRuntimeData(param0: CPointer<D3DKMT_GETRUNTIMEDATA>): Int32
-    func D3DKMTGetScanLine(param0: CPointer<D3DKMT_GETSCANLINE>): Int32
-    func D3DKMTGetSharedPrimaryHandle(param0: CPointer<D3DKMT_GETSHAREDPRIMARYHANDLE>): Int32
-    func D3DKMTGetSharedResourceAdapterLuid(param0: CPointer<D3DKMT_GETSHAREDRESOURCEADAPTERLUID>): Int32
-    func D3DKMTInvalidateActiveVidPn(param0: CPointer<D3DKMT_INVALIDATEACTIVEVIDPN>): Int32
-    func D3DKMTInvalidateCache(param0: CPointer<D3DKMT_INVALIDATECACHE>): Int32
-    func D3DKMTLock(param0: CPointer<D3DKMT_LOCK>): Int32
-    func D3DKMTLock2(param0: CPointer<D3DKMT_LOCK2>): Int32
-    func D3DKMTMakeResident(param0: CPointer<D3DDDI_MAKERESIDENT>): Int32
-    func D3DKMTMapGpuVirtualAddress(param0: CPointer<D3DDDI_MAPGPUVIRTUALADDRESS>): Int32
-    func D3DKMTMarkDeviceAsError(param0: CPointer<D3DKMT_MARKDEVICEASERROR>): Int32
-    func D3DKMTOfferAllocations(param0: CPointer<D3DKMT_OFFERALLOCATIONS>): Int32
-    func D3DKMTOpenAdapterFromDeviceName(param0: CPointer<D3DKMT_OPENADAPTERFROMDEVICENAME>): Int32
-    func D3DKMTOpenAdapterFromGdiDisplayName(param0: CPointer<D3DKMT_OPENADAPTERFROMGDIDISPLAYNAME>): Int32
-    func D3DKMTOpenAdapterFromLuid(param0: CPointer<D3DKMT_OPENADAPTERFROMLUID>): Int32
-    func D3DKMTOpenKeyedMutex(param0: CPointer<D3DKMT_OPENKEYEDMUTEX>): Int32
-    func D3DKMTOpenKeyedMutex2(param0: CPointer<D3DKMT_OPENKEYEDMUTEX2>): Int32
-    func D3DKMTOpenKeyedMutexFromNtHandle(param0: CPointer<D3DKMT_OPENKEYEDMUTEXFROMNTHANDLE>): Int32
-    func D3DKMTOpenProtectedSessionFromNtHandle(param0: CPointer<D3DKMT_OPENPROTECTEDSESSIONFROMNTHANDLE>): Int32
-    func D3DKMTOpenResource(param0: CPointer<D3DKMT_OPENRESOURCE>): Int32
-    func D3DKMTOpenResource2(param0: CPointer<D3DKMT_OPENRESOURCE>): Int32
-    func D3DKMTOpenResourceFromNtHandle(param0: CPointer<D3DKMT_OPENRESOURCEFROMNTHANDLE>): Int32
-    func D3DKMTOpenSyncObjectFromNtHandle(param0: CPointer<D3DKMT_OPENSYNCOBJECTFROMNTHANDLE>): Int32
-    func D3DKMTOpenSyncObjectFromNtHandle2(param0: CPointer<D3DKMT_OPENSYNCOBJECTFROMNTHANDLE2>): Int32
-    func D3DKMTOpenSynchronizationObject(param0: CPointer<D3DKMT_OPENSYNCHRONIZATIONOBJECT>): Int32
-    func D3DKMTOutputDuplGetFrameInfo(param0: CPointer<D3DKMT_OUTPUTDUPL_GET_FRAMEINFO>): Int32
-    func D3DKMTOutputDuplGetMetaData(param0: CPointer<D3DKMT_OUTPUTDUPL_METADATA>): Int32
-    func D3DKMTOutputDuplGetPointerShapeData(param0: CPointer<D3DKMT_OUTPUTDUPL_GET_POINTER_SHAPE_DATA>): Int32
-    func D3DKMTOutputDuplPresent(param0: CPointer<D3DKMT_OUTPUTDUPLPRESENT>): Int32
-    func D3DKMTOutputDuplReleaseFrame(param0: CPointer<D3DKMT_OUTPUTDUPL_RELEASE_FRAME>): Int32
-    func D3DKMTPollDisplayChildren(param0: CPointer<D3DKMT_POLLDISPLAYCHILDREN>): Int32
-    func D3DKMTPresent(param0: CPointer<D3DKMT_PRESENT>): Int32
-    func D3DKMTPresentMultiPlaneOverlay(param0: CPointer<D3DKMT_PRESENT_MULTIPLANE_OVERLAY>): Int32
-    func D3DKMTPresentMultiPlaneOverlay2(param0: CPointer<D3DKMT_PRESENT_MULTIPLANE_OVERLAY2>): Int32
-    func D3DKMTPresentMultiPlaneOverlay3(param0: CPointer<D3DKMT_PRESENT_MULTIPLANE_OVERLAY3>): Int32
-    func D3DKMTPresentRedirected(param0: CPointer<D3DKMT_PRESENT_REDIRECTED>): Int32
-    func D3DKMTQueryAdapterInfo(param0: CPointer<D3DKMT_QUERYADAPTERINFO>): Int32
-    func D3DKMTQueryAllocationResidency(param0: CPointer<D3DKMT_QUERYALLOCATIONRESIDENCY>): Int32
-    func D3DKMTQueryClockCalibration(param0: CPointer<D3DKMT_QUERYCLOCKCALIBRATION>): Int32
-    func D3DKMTQueryFSEBlock(param0: CPointer<D3DKMT_QUERYFSEBLOCK>): Int32
-    func D3DKMTQueryProcessOfferInfo(param0: CPointer<D3DKMT_QUERYPROCESSOFFERINFO>): Int32
-    func D3DKMTQueryProtectedSessionInfoFromNtHandle(param0: CPointer<D3DKMT_QUERYPROTECTEDSESSIONINFOFROMNTHANDLE>): Int32
-    func D3DKMTQueryProtectedSessionStatus(param0: CPointer<D3DKMT_QUERYPROTECTEDSESSIONSTATUS>): Int32
-    func D3DKMTQueryRemoteVidPnSourceFromGdiDisplayName(param0: CPointer<D3DKMT_QUERYREMOTEVIDPNSOURCEFROMGDIDISPLAYNAME>): Int32
-    func D3DKMTQueryResourceInfo(param0: CPointer<D3DKMT_QUERYRESOURCEINFO>): Int32
-    func D3DKMTQueryResourceInfoFromNtHandle(param0: CPointer<D3DKMT_QUERYRESOURCEINFOFROMNTHANDLE>): Int32
-    func D3DKMTQueryStatistics(param0: CPointer<D3DKMT_QUERYSTATISTICS>): Int32
-    func D3DKMTQueryVidPnExclusiveOwnership(param0: CPointer<D3DKMT_QUERYVIDPNEXCLUSIVEOWNERSHIP>): Int32
-    func D3DKMTQueryVideoMemoryInfo(param0: CPointer<D3DKMT_QUERYVIDEOMEMORYINFO>): Int32
-    func D3DKMTReclaimAllocations(param0: CPointer<D3DKMT_RECLAIMALLOCATIONS>): Int32
-    func D3DKMTReclaimAllocations2(param0: CPointer<D3DKMT_RECLAIMALLOCATIONS2>): Int32
-    func D3DKMTRegisterTrimNotification(param0: CPointer<D3DKMT_REGISTERTRIMNOTIFICATION>): Int32
-    func D3DKMTRegisterVailProcess(param0: CPointer<GUID>): Int32
-    func D3DKMTReleaseKeyedMutex(param0: CPointer<D3DKMT_RELEASEKEYEDMUTEX>): Int32
-    func D3DKMTReleaseKeyedMutex2(param0: CPointer<D3DKMT_RELEASEKEYEDMUTEX2>): Int32
-    func D3DKMTReleaseProcessVidPnSourceOwners(param0: CPointer<Unit>): Int32
-    func D3DKMTRender(param0: CPointer<D3DKMT_RENDER>): Int32
-    func D3DKMTReserveGpuVirtualAddress(param0: CPointer<D3DDDI_RESERVEGPUVIRTUALADDRESS>): Int32
-    func D3DKMTSetAllocationPriority(param0: CPointer<D3DKMT_SETALLOCATIONPRIORITY>): Int32
-    func D3DKMTSetContextInProcessSchedulingPriority(param0: CPointer<D3DKMT_SETCONTEXTINPROCESSSCHEDULINGPRIORITY>): Int32
-    func D3DKMTSetContextSchedulingPriority(param0: CPointer<D3DKMT_SETCONTEXTSCHEDULINGPRIORITY>): Int32
-    func D3DKMTSetDisplayMode(param0: CPointer<D3DKMT_SETDISPLAYMODE>): Int32
-    func D3DKMTSetDisplayPrivateDriverFormat(param0: CPointer<D3DKMT_SETDISPLAYPRIVATEDRIVERFORMAT>): Int32
-    func D3DKMTSetFSEBlock(param0: CPointer<D3DKMT_SETFSEBLOCK>): Int32
-    func D3DKMTSetGammaRamp(param0: CPointer<D3DKMT_SETGAMMARAMP>): Int32
-    func D3DKMTSetHwProtectionTeardownRecovery(param0: CPointer<D3DKMT_SETHWPROTECTIONTEARDOWNRECOVERY>): Int32
-    func D3DKMTSetMonitorColorSpaceTransform(param0: CPointer<D3DKMT_SET_COLORSPACE_TRANSFORM>): Int32
-    func D3DKMTSetProcessSchedulingPriorityClass(param0: CPointer<Unit>, param1: Int32): Int32
-    func D3DKMTSetQueuedLimit(param0: CPointer<D3DKMT_SETQUEUEDLIMIT>): Int32
-    func D3DKMTSetStablePowerState(param0: CPointer<D3DKMT_SETSTABLEPOWERSTATE>): Int32
-    func D3DKMTSetSyncRefreshCountWaitTarget(param0: CPointer<D3DKMT_SETSYNCREFRESHCOUNTWAITTARGET>): Int32
-    func D3DKMTSetVidPnSourceHwProtection(param0: CPointer<D3DKMT_SETVIDPNSOURCEHWPROTECTION>): Int32
-    func D3DKMTSetVidPnSourceOwner(param0: CPointer<D3DKMT_SETVIDPNSOURCEOWNER>): Int32
-    func D3DKMTSetVidPnSourceOwner1(param0: CPointer<D3DKMT_SETVIDPNSOURCEOWNER1>): Int32
-    func D3DKMTSetVidPnSourceOwner2(param0: CPointer<D3DKMT_SETVIDPNSOURCEOWNER2>): Int32
-    func D3DKMTSharedPrimaryLockNotification(param0: CPointer<D3DKMT_SHAREDPRIMARYLOCKNOTIFICATION>): Int32
-    func D3DKMTSharedPrimaryUnLockNotification(param0: CPointer<D3DKMT_SHAREDPRIMARYUNLOCKNOTIFICATION>): Int32
-    func D3DKMTSignalSynchronizationObject(param0: CPointer<D3DKMT_SIGNALSYNCHRONIZATIONOBJECT>): Int32
-    func D3DKMTSignalSynchronizationObject2(param0: CPointer<D3DKMT_SIGNALSYNCHRONIZATIONOBJECT2>): Int32
-    func D3DKMTSignalSynchronizationObjectFromCpu(param0: CPointer<D3DKMT_SIGNALSYNCHRONIZATIONOBJECTFROMCPU>): Int32
-    func D3DKMTSignalSynchronizationObjectFromGpu(param0: CPointer<D3DKMT_SIGNALSYNCHRONIZATIONOBJECTFROMGPU>): Int32
-    func D3DKMTSignalSynchronizationObjectFromGpu2(param0: CPointer<D3DKMT_SIGNALSYNCHRONIZATIONOBJECTFROMGPU2>): Int32
-    func D3DKMTSubmitCommand(param0: CPointer<D3DKMT_SUBMITCOMMAND>): Int32
-    func D3DKMTSubmitCommandToHwQueue(param0: CPointer<D3DKMT_SUBMITCOMMANDTOHWQUEUE>): Int32
-    func D3DKMTSubmitSignalSyncObjectsToHwQueue(param0: CPointer<D3DKMT_SUBMITSIGNALSYNCOBJECTSTOHWQUEUE>): Int32
-    func D3DKMTSubmitWaitForSyncObjectsToHwQueue(param0: CPointer<D3DKMT_SUBMITWAITFORSYNCOBJECTSTOHWQUEUE>): Int32
-    func D3DKMTTrimProcessCommitment(param0: CPointer<D3DKMT_TRIMPROCESSCOMMITMENT>): Int32
-    func D3DKMTUnlock(param0: CPointer<D3DKMT_UNLOCK>): Int32
-    func D3DKMTUnlock2(param0: CPointer<D3DKMT_UNLOCK2>): Int32
-    func D3DKMTUnregisterTrimNotification(param0: CPointer<D3DKMT_UNREGISTERTRIMNOTIFICATION>): Int32
-    func D3DKMTUpdateAllocationProperty(param0: CPointer<D3DDDI_UPDATEALLOCPROPERTY>): Int32
-    func D3DKMTUpdateGpuVirtualAddress(param0: CPointer<D3DKMT_UPDATEGPUVIRTUALADDRESS>): Int32
-    func D3DKMTUpdateOverlay(param0: CPointer<D3DKMT_UPDATEOVERLAY>): Int32
-    func D3DKMTWaitForIdle(param0: CPointer<D3DKMT_WAITFORIDLE>): Int32
-    func D3DKMTWaitForSynchronizationObject(param0: CPointer<D3DKMT_WAITFORSYNCHRONIZATIONOBJECT>): Int32
-    func D3DKMTWaitForSynchronizationObject2(param0: CPointer<D3DKMT_WAITFORSYNCHRONIZATIONOBJECT2>): Int32
-    func D3DKMTWaitForSynchronizationObjectFromCpu(param0: CPointer<D3DKMT_WAITFORSYNCHRONIZATIONOBJECTFROMCPU>): Int32
-    func D3DKMTWaitForSynchronizationObjectFromGpu(param0: CPointer<D3DKMT_WAITFORSYNCHRONIZATIONOBJECTFROMGPU>): Int32
-    func D3DKMTWaitForVerticalBlankEvent(param0: CPointer<D3DKMT_WAITFORVERTICALBLANKEVENT>): Int32
-    func D3DKMTWaitForVerticalBlankEvent2(param0: CPointer<D3DKMT_WAITFORVERTICALBLANKEVENT2>): Int32
 }
 
-@When[GDI32 == "on" && (Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on")]
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTAcquireKeyedMutex == "on"]
+public unsafe func Windows_D3DKMTAcquireKeyedMutex(param0: CPointer<D3DKMT_ACQUIREKEYEDMUTEX>): Int32 {
+    return D3DKMTAcquireKeyedMutex(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTAcquireKeyedMutex2 == "on"]
+foreign {
+    func D3DKMTAcquireKeyedMutex2(param0: CPointer<D3DKMT_ACQUIREKEYEDMUTEX2>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTAcquireKeyedMutex2 == "on"]
+public unsafe func Windows_D3DKMTAcquireKeyedMutex2(param0: CPointer<D3DKMT_ACQUIREKEYEDMUTEX2>): Int32 {
+    return D3DKMTAcquireKeyedMutex2(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTAdjustFullscreenGamma == "on"]
+foreign {
+    func D3DKMTAdjustFullscreenGamma(param0: CPointer<D3DKMT_ADJUSTFULLSCREENGAMMA>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTAdjustFullscreenGamma == "on"]
+public unsafe func Windows_D3DKMTAdjustFullscreenGamma(param0: CPointer<D3DKMT_ADJUSTFULLSCREENGAMMA>): Int32 {
+    return D3DKMTAdjustFullscreenGamma(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCancelPresents == "on"]
+foreign {
+    func D3DKMTCancelPresents(param0: CPointer<D3DKMT_CANCEL_PRESENTS>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCancelPresents == "on"]
+public unsafe func Windows_D3DKMTCancelPresents(param0: CPointer<D3DKMT_CANCEL_PRESENTS>): Int32 {
+    return D3DKMTCancelPresents(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTChangeSurfacePointer == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func D3DKMTChangeSurfacePointer(param0: CPointer<D3DKMT_CHANGESURFACEPOINTER>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTChangeSurfacePointer == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_D3DKMTChangeSurfacePointer(param0: CPointer<D3DKMT_CHANGESURFACEPOINTER>): Int32 {
+    return D3DKMTChangeSurfacePointer(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTChangeVideoMemoryReservation == "on"]
+foreign {
+    func D3DKMTChangeVideoMemoryReservation(param0: CPointer<D3DKMT_CHANGEVIDEOMEMORYRESERVATION>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTChangeVideoMemoryReservation == "on"]
+public unsafe func Windows_D3DKMTChangeVideoMemoryReservation(param0: CPointer<D3DKMT_CHANGEVIDEOMEMORYRESERVATION>): Int32 {
+    return D3DKMTChangeVideoMemoryReservation(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCheckExclusiveOwnership == "on"]
+foreign {
+    func D3DKMTCheckExclusiveOwnership(): UInt8
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCheckExclusiveOwnership == "on"]
+public unsafe func Windows_D3DKMTCheckExclusiveOwnership(): UInt8 {
+    return D3DKMTCheckExclusiveOwnership()
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCheckMonitorPowerState == "on"]
+foreign {
+    func D3DKMTCheckMonitorPowerState(param0: CPointer<D3DKMT_CHECKMONITORPOWERSTATE>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCheckMonitorPowerState == "on"]
+public unsafe func Windows_D3DKMTCheckMonitorPowerState(param0: CPointer<D3DKMT_CHECKMONITORPOWERSTATE>): Int32 {
+    return D3DKMTCheckMonitorPowerState(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCheckMultiPlaneOverlaySupport == "on"]
+foreign {
+    func D3DKMTCheckMultiPlaneOverlaySupport(param0: CPointer<D3DKMT_CHECKMULTIPLANEOVERLAYSUPPORT>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCheckMultiPlaneOverlaySupport == "on"]
+public unsafe func Windows_D3DKMTCheckMultiPlaneOverlaySupport(param0: CPointer<D3DKMT_CHECKMULTIPLANEOVERLAYSUPPORT>): Int32 {
+    return D3DKMTCheckMultiPlaneOverlaySupport(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCheckMultiPlaneOverlaySupport2 == "on"]
+foreign {
+    func D3DKMTCheckMultiPlaneOverlaySupport2(param0: CPointer<D3DKMT_CHECKMULTIPLANEOVERLAYSUPPORT2>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCheckMultiPlaneOverlaySupport2 == "on"]
+public unsafe func Windows_D3DKMTCheckMultiPlaneOverlaySupport2(param0: CPointer<D3DKMT_CHECKMULTIPLANEOVERLAYSUPPORT2>): Int32 {
+    return D3DKMTCheckMultiPlaneOverlaySupport2(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCheckMultiPlaneOverlaySupport3 == "on"]
+foreign {
+    func D3DKMTCheckMultiPlaneOverlaySupport3(param0: CPointer<D3DKMT_CHECKMULTIPLANEOVERLAYSUPPORT3>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCheckMultiPlaneOverlaySupport3 == "on"]
+public unsafe func Windows_D3DKMTCheckMultiPlaneOverlaySupport3(param0: CPointer<D3DKMT_CHECKMULTIPLANEOVERLAYSUPPORT3>): Int32 {
+    return D3DKMTCheckMultiPlaneOverlaySupport3(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCheckOcclusion == "on"]
+foreign {
+    func D3DKMTCheckOcclusion(param0: CPointer<D3DKMT_CHECKOCCLUSION>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCheckOcclusion == "on"]
+public unsafe func Windows_D3DKMTCheckOcclusion(param0: CPointer<D3DKMT_CHECKOCCLUSION>): Int32 {
+    return D3DKMTCheckOcclusion(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCheckSharedResourceAccess == "on"]
+foreign {
+    func D3DKMTCheckSharedResourceAccess(param0: CPointer<D3DKMT_CHECKSHAREDRESOURCEACCESS>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCheckSharedResourceAccess == "on"]
+public unsafe func Windows_D3DKMTCheckSharedResourceAccess(param0: CPointer<D3DKMT_CHECKSHAREDRESOURCEACCESS>): Int32 {
+    return D3DKMTCheckSharedResourceAccess(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCheckVidPnExclusiveOwnership == "on"]
+foreign {
+    func D3DKMTCheckVidPnExclusiveOwnership(param0: CPointer<D3DKMT_CHECKVIDPNEXCLUSIVEOWNERSHIP>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCheckVidPnExclusiveOwnership == "on"]
+public unsafe func Windows_D3DKMTCheckVidPnExclusiveOwnership(param0: CPointer<D3DKMT_CHECKVIDPNEXCLUSIVEOWNERSHIP>): Int32 {
+    return D3DKMTCheckVidPnExclusiveOwnership(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCloseAdapter == "on"]
+foreign {
+    func D3DKMTCloseAdapter(param0: CPointer<D3DKMT_CLOSEADAPTER>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCloseAdapter == "on"]
+public unsafe func Windows_D3DKMTCloseAdapter(param0: CPointer<D3DKMT_CLOSEADAPTER>): Int32 {
+    return D3DKMTCloseAdapter(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTConfigureSharedResource == "on"]
+foreign {
+    func D3DKMTConfigureSharedResource(param0: CPointer<D3DKMT_CONFIGURESHAREDRESOURCE>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTConfigureSharedResource == "on"]
+public unsafe func Windows_D3DKMTConfigureSharedResource(param0: CPointer<D3DKMT_CONFIGURESHAREDRESOURCE>): Int32 {
+    return D3DKMTConfigureSharedResource(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCreateAllocation == "on"]
+foreign {
+    func D3DKMTCreateAllocation(param0: CPointer<D3DKMT_CREATEALLOCATION>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCreateAllocation == "on"]
+public unsafe func Windows_D3DKMTCreateAllocation(param0: CPointer<D3DKMT_CREATEALLOCATION>): Int32 {
+    return D3DKMTCreateAllocation(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCreateAllocation2 == "on"]
+foreign {
+    func D3DKMTCreateAllocation2(param0: CPointer<D3DKMT_CREATEALLOCATION>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCreateAllocation2 == "on"]
+public unsafe func Windows_D3DKMTCreateAllocation2(param0: CPointer<D3DKMT_CREATEALLOCATION>): Int32 {
+    return D3DKMTCreateAllocation2(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCreateContext == "on"]
+foreign {
+    func D3DKMTCreateContext(param0: CPointer<D3DKMT_CREATECONTEXT>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCreateContext == "on"]
+public unsafe func Windows_D3DKMTCreateContext(param0: CPointer<D3DKMT_CREATECONTEXT>): Int32 {
+    return D3DKMTCreateContext(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCreateContextVirtual == "on"]
+foreign {
+    func D3DKMTCreateContextVirtual(param0: CPointer<D3DKMT_CREATECONTEXTVIRTUAL>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCreateContextVirtual == "on"]
+public unsafe func Windows_D3DKMTCreateContextVirtual(param0: CPointer<D3DKMT_CREATECONTEXTVIRTUAL>): Int32 {
+    return D3DKMTCreateContextVirtual(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCreateDCFromMemory == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func D3DKMTCreateDCFromMemory(param0: CPointer<D3DKMT_CREATEDCFROMMEMORY>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCreateDCFromMemory == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_D3DKMTCreateDCFromMemory(param0: CPointer<D3DKMT_CREATEDCFROMMEMORY>): Int32 {
+    return D3DKMTCreateDCFromMemory(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCreateDevice == "on"]
+foreign {
+    func D3DKMTCreateDevice(param0: CPointer<D3DKMT_CREATEDEVICE>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCreateDevice == "on"]
+public unsafe func Windows_D3DKMTCreateDevice(param0: CPointer<D3DKMT_CREATEDEVICE>): Int32 {
+    return D3DKMTCreateDevice(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCreateHwContext == "on"]
+foreign {
+    func D3DKMTCreateHwContext(param0: CPointer<D3DKMT_CREATEHWCONTEXT>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCreateHwContext == "on"]
+public unsafe func Windows_D3DKMTCreateHwContext(param0: CPointer<D3DKMT_CREATEHWCONTEXT>): Int32 {
+    return D3DKMTCreateHwContext(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCreateHwQueue == "on"]
+foreign {
+    func D3DKMTCreateHwQueue(param0: CPointer<D3DKMT_CREATEHWQUEUE>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCreateHwQueue == "on"]
+public unsafe func Windows_D3DKMTCreateHwQueue(param0: CPointer<D3DKMT_CREATEHWQUEUE>): Int32 {
+    return D3DKMTCreateHwQueue(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCreateKeyedMutex == "on"]
+foreign {
+    func D3DKMTCreateKeyedMutex(param0: CPointer<D3DKMT_CREATEKEYEDMUTEX>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCreateKeyedMutex == "on"]
+public unsafe func Windows_D3DKMTCreateKeyedMutex(param0: CPointer<D3DKMT_CREATEKEYEDMUTEX>): Int32 {
+    return D3DKMTCreateKeyedMutex(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCreateKeyedMutex2 == "on"]
+foreign {
+    func D3DKMTCreateKeyedMutex2(param0: CPointer<D3DKMT_CREATEKEYEDMUTEX2>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCreateKeyedMutex2 == "on"]
+public unsafe func Windows_D3DKMTCreateKeyedMutex2(param0: CPointer<D3DKMT_CREATEKEYEDMUTEX2>): Int32 {
+    return D3DKMTCreateKeyedMutex2(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCreateOutputDupl == "on"]
+foreign {
+    func D3DKMTCreateOutputDupl(param0: CPointer<D3DKMT_CREATE_OUTPUTDUPL>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCreateOutputDupl == "on"]
+public unsafe func Windows_D3DKMTCreateOutputDupl(param0: CPointer<D3DKMT_CREATE_OUTPUTDUPL>): Int32 {
+    return D3DKMTCreateOutputDupl(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCreateOverlay == "on"]
+foreign {
+    func D3DKMTCreateOverlay(param0: CPointer<D3DKMT_CREATEOVERLAY>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCreateOverlay == "on"]
+public unsafe func Windows_D3DKMTCreateOverlay(param0: CPointer<D3DKMT_CREATEOVERLAY>): Int32 {
+    return D3DKMTCreateOverlay(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCreatePagingQueue == "on"]
+foreign {
+    func D3DKMTCreatePagingQueue(param0: CPointer<D3DKMT_CREATEPAGINGQUEUE>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCreatePagingQueue == "on"]
+public unsafe func Windows_D3DKMTCreatePagingQueue(param0: CPointer<D3DKMT_CREATEPAGINGQUEUE>): Int32 {
+    return D3DKMTCreatePagingQueue(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCreateProtectedSession == "on"]
+foreign {
+    func D3DKMTCreateProtectedSession(param0: CPointer<D3DKMT_CREATEPROTECTEDSESSION>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCreateProtectedSession == "on"]
+public unsafe func Windows_D3DKMTCreateProtectedSession(param0: CPointer<D3DKMT_CREATEPROTECTEDSESSION>): Int32 {
+    return D3DKMTCreateProtectedSession(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCreateSynchronizationObject == "on"]
+foreign {
+    func D3DKMTCreateSynchronizationObject(param0: CPointer<D3DKMT_CREATESYNCHRONIZATIONOBJECT>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCreateSynchronizationObject == "on"]
+public unsafe func Windows_D3DKMTCreateSynchronizationObject(param0: CPointer<D3DKMT_CREATESYNCHRONIZATIONOBJECT>): Int32 {
+    return D3DKMTCreateSynchronizationObject(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCreateSynchronizationObject2 == "on"]
+foreign {
+    func D3DKMTCreateSynchronizationObject2(param0: CPointer<D3DKMT_CREATESYNCHRONIZATIONOBJECT2>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTCreateSynchronizationObject2 == "on"]
+public unsafe func Windows_D3DKMTCreateSynchronizationObject2(param0: CPointer<D3DKMT_CREATESYNCHRONIZATIONOBJECT2>): Int32 {
+    return D3DKMTCreateSynchronizationObject2(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTDestroyAllocation == "on"]
+foreign {
+    func D3DKMTDestroyAllocation(param0: CPointer<D3DKMT_DESTROYALLOCATION>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTDestroyAllocation == "on"]
+public unsafe func Windows_D3DKMTDestroyAllocation(param0: CPointer<D3DKMT_DESTROYALLOCATION>): Int32 {
+    return D3DKMTDestroyAllocation(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTDestroyAllocation2 == "on"]
+foreign {
+    func D3DKMTDestroyAllocation2(param0: CPointer<D3DKMT_DESTROYALLOCATION2>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTDestroyAllocation2 == "on"]
+public unsafe func Windows_D3DKMTDestroyAllocation2(param0: CPointer<D3DKMT_DESTROYALLOCATION2>): Int32 {
+    return D3DKMTDestroyAllocation2(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTDestroyContext == "on"]
+foreign {
+    func D3DKMTDestroyContext(param0: CPointer<D3DKMT_DESTROYCONTEXT>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTDestroyContext == "on"]
+public unsafe func Windows_D3DKMTDestroyContext(param0: CPointer<D3DKMT_DESTROYCONTEXT>): Int32 {
+    return D3DKMTDestroyContext(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTDestroyDCFromMemory == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func D3DKMTDestroyDCFromMemory(param0: CPointer<D3DKMT_DESTROYDCFROMMEMORY>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTDestroyDCFromMemory == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_D3DKMTDestroyDCFromMemory(param0: CPointer<D3DKMT_DESTROYDCFROMMEMORY>): Int32 {
+    return D3DKMTDestroyDCFromMemory(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTDestroyDevice == "on"]
+foreign {
+    func D3DKMTDestroyDevice(param0: CPointer<D3DKMT_DESTROYDEVICE>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTDestroyDevice == "on"]
+public unsafe func Windows_D3DKMTDestroyDevice(param0: CPointer<D3DKMT_DESTROYDEVICE>): Int32 {
+    return D3DKMTDestroyDevice(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTDestroyHwContext == "on"]
+foreign {
+    func D3DKMTDestroyHwContext(param0: CPointer<D3DKMT_DESTROYHWCONTEXT>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTDestroyHwContext == "on"]
+public unsafe func Windows_D3DKMTDestroyHwContext(param0: CPointer<D3DKMT_DESTROYHWCONTEXT>): Int32 {
+    return D3DKMTDestroyHwContext(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTDestroyHwQueue == "on"]
+foreign {
+    func D3DKMTDestroyHwQueue(param0: CPointer<D3DKMT_DESTROYHWQUEUE>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTDestroyHwQueue == "on"]
+public unsafe func Windows_D3DKMTDestroyHwQueue(param0: CPointer<D3DKMT_DESTROYHWQUEUE>): Int32 {
+    return D3DKMTDestroyHwQueue(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTDestroyKeyedMutex == "on"]
+foreign {
+    func D3DKMTDestroyKeyedMutex(param0: CPointer<D3DKMT_DESTROYKEYEDMUTEX>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTDestroyKeyedMutex == "on"]
+public unsafe func Windows_D3DKMTDestroyKeyedMutex(param0: CPointer<D3DKMT_DESTROYKEYEDMUTEX>): Int32 {
+    return D3DKMTDestroyKeyedMutex(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTDestroyOutputDupl == "on"]
+foreign {
+    func D3DKMTDestroyOutputDupl(param0: CPointer<D3DKMT_DESTROY_OUTPUTDUPL>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTDestroyOutputDupl == "on"]
+public unsafe func Windows_D3DKMTDestroyOutputDupl(param0: CPointer<D3DKMT_DESTROY_OUTPUTDUPL>): Int32 {
+    return D3DKMTDestroyOutputDupl(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTDestroyOverlay == "on"]
+foreign {
+    func D3DKMTDestroyOverlay(param0: CPointer<D3DKMT_DESTROYOVERLAY>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTDestroyOverlay == "on"]
+public unsafe func Windows_D3DKMTDestroyOverlay(param0: CPointer<D3DKMT_DESTROYOVERLAY>): Int32 {
+    return D3DKMTDestroyOverlay(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTDestroyPagingQueue == "on"]
+foreign {
+    func D3DKMTDestroyPagingQueue(param0: CPointer<D3DDDI_DESTROYPAGINGQUEUE>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTDestroyPagingQueue == "on"]
+public unsafe func Windows_D3DKMTDestroyPagingQueue(param0: CPointer<D3DDDI_DESTROYPAGINGQUEUE>): Int32 {
+    return D3DKMTDestroyPagingQueue(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTDestroyProtectedSession == "on"]
+foreign {
+    func D3DKMTDestroyProtectedSession(param0: CPointer<D3DKMT_DESTROYPROTECTEDSESSION>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTDestroyProtectedSession == "on"]
+public unsafe func Windows_D3DKMTDestroyProtectedSession(param0: CPointer<D3DKMT_DESTROYPROTECTEDSESSION>): Int32 {
+    return D3DKMTDestroyProtectedSession(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTDestroySynchronizationObject == "on"]
+foreign {
+    func D3DKMTDestroySynchronizationObject(param0: CPointer<D3DKMT_DESTROYSYNCHRONIZATIONOBJECT>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTDestroySynchronizationObject == "on"]
+public unsafe func Windows_D3DKMTDestroySynchronizationObject(param0: CPointer<D3DKMT_DESTROYSYNCHRONIZATIONOBJECT>): Int32 {
+    return D3DKMTDestroySynchronizationObject(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTEnumAdapters == "on"]
+foreign {
+    func D3DKMTEnumAdapters(param0: CPointer<D3DKMT_ENUMADAPTERS>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTEnumAdapters == "on"]
+public unsafe func Windows_D3DKMTEnumAdapters(param0: CPointer<D3DKMT_ENUMADAPTERS>): Int32 {
+    return D3DKMTEnumAdapters(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTEnumAdapters2 == "on"]
+foreign {
+    func D3DKMTEnumAdapters2(param0: CPointer<D3DKMT_ENUMADAPTERS2>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTEnumAdapters2 == "on"]
+public unsafe func Windows_D3DKMTEnumAdapters2(param0: CPointer<D3DKMT_ENUMADAPTERS2>): Int32 {
+    return D3DKMTEnumAdapters2(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTEscape == "on"]
+foreign {
+    func D3DKMTEscape(param0: CPointer<D3DKMT_ESCAPE>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTEscape == "on"]
+public unsafe func Windows_D3DKMTEscape(param0: CPointer<D3DKMT_ESCAPE>): Int32 {
+    return D3DKMTEscape(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTEvict == "on"]
+foreign {
+    func D3DKMTEvict(param0: CPointer<D3DKMT_EVICT>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTEvict == "on"]
+public unsafe func Windows_D3DKMTEvict(param0: CPointer<D3DKMT_EVICT>): Int32 {
+    return D3DKMTEvict(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTFlipOverlay == "on"]
+foreign {
+    func D3DKMTFlipOverlay(param0: CPointer<D3DKMT_FLIPOVERLAY>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTFlipOverlay == "on"]
+public unsafe func Windows_D3DKMTFlipOverlay(param0: CPointer<D3DKMT_FLIPOVERLAY>): Int32 {
+    return D3DKMTFlipOverlay(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTFlushHeapTransitions == "on"]
+foreign {
+    func D3DKMTFlushHeapTransitions(param0: CPointer<D3DKMT_FLUSHHEAPTRANSITIONS>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTFlushHeapTransitions == "on"]
+public unsafe func Windows_D3DKMTFlushHeapTransitions(param0: CPointer<D3DKMT_FLUSHHEAPTRANSITIONS>): Int32 {
+    return D3DKMTFlushHeapTransitions(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTFreeGpuVirtualAddress == "on"]
+foreign {
+    func D3DKMTFreeGpuVirtualAddress(param0: CPointer<D3DKMT_FREEGPUVIRTUALADDRESS>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTFreeGpuVirtualAddress == "on"]
+public unsafe func Windows_D3DKMTFreeGpuVirtualAddress(param0: CPointer<D3DKMT_FREEGPUVIRTUALADDRESS>): Int32 {
+    return D3DKMTFreeGpuVirtualAddress(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetAllocationPriority == "on"]
+foreign {
+    func D3DKMTGetAllocationPriority(param0: CPointer<D3DKMT_GETALLOCATIONPRIORITY>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetAllocationPriority == "on"]
+public unsafe func Windows_D3DKMTGetAllocationPriority(param0: CPointer<D3DKMT_GETALLOCATIONPRIORITY>): Int32 {
+    return D3DKMTGetAllocationPriority(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetContextInProcessSchedulingPriority == "on"]
+foreign {
+    func D3DKMTGetContextInProcessSchedulingPriority(param0: CPointer<D3DKMT_GETCONTEXTINPROCESSSCHEDULINGPRIORITY>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetContextInProcessSchedulingPriority == "on"]
+public unsafe func Windows_D3DKMTGetContextInProcessSchedulingPriority(param0: CPointer<D3DKMT_GETCONTEXTINPROCESSSCHEDULINGPRIORITY>): Int32 {
+    return D3DKMTGetContextInProcessSchedulingPriority(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetContextSchedulingPriority == "on"]
+foreign {
+    func D3DKMTGetContextSchedulingPriority(param0: CPointer<D3DKMT_GETCONTEXTSCHEDULINGPRIORITY>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetContextSchedulingPriority == "on"]
+public unsafe func Windows_D3DKMTGetContextSchedulingPriority(param0: CPointer<D3DKMT_GETCONTEXTSCHEDULINGPRIORITY>): Int32 {
+    return D3DKMTGetContextSchedulingPriority(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetDWMVerticalBlankEvent == "on"]
+foreign {
+    func D3DKMTGetDWMVerticalBlankEvent(param0: CPointer<D3DKMT_GETVERTICALBLANKEVENT>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetDWMVerticalBlankEvent == "on"]
+public unsafe func Windows_D3DKMTGetDWMVerticalBlankEvent(param0: CPointer<D3DKMT_GETVERTICALBLANKEVENT>): Int32 {
+    return D3DKMTGetDWMVerticalBlankEvent(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetDeviceState == "on"]
+foreign {
+    func D3DKMTGetDeviceState(param0: CPointer<D3DKMT_GETDEVICESTATE>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetDeviceState == "on"]
+public unsafe func Windows_D3DKMTGetDeviceState(param0: CPointer<D3DKMT_GETDEVICESTATE>): Int32 {
+    return D3DKMTGetDeviceState(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetDisplayModeList == "on"]
+foreign {
+    func D3DKMTGetDisplayModeList(param0: CPointer<D3DKMT_GETDISPLAYMODELIST>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetDisplayModeList == "on"]
+public unsafe func Windows_D3DKMTGetDisplayModeList(param0: CPointer<D3DKMT_GETDISPLAYMODELIST>): Int32 {
+    return D3DKMTGetDisplayModeList(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetMultiPlaneOverlayCaps == "on"]
+foreign {
+    func D3DKMTGetMultiPlaneOverlayCaps(param0: CPointer<D3DKMT_GET_MULTIPLANE_OVERLAY_CAPS>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetMultiPlaneOverlayCaps == "on"]
+public unsafe func Windows_D3DKMTGetMultiPlaneOverlayCaps(param0: CPointer<D3DKMT_GET_MULTIPLANE_OVERLAY_CAPS>): Int32 {
+    return D3DKMTGetMultiPlaneOverlayCaps(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetMultisampleMethodList == "on"]
+foreign {
+    func D3DKMTGetMultisampleMethodList(param0: CPointer<D3DKMT_GETMULTISAMPLEMETHODLIST>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetMultisampleMethodList == "on"]
+public unsafe func Windows_D3DKMTGetMultisampleMethodList(param0: CPointer<D3DKMT_GETMULTISAMPLEMETHODLIST>): Int32 {
+    return D3DKMTGetMultisampleMethodList(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetOverlayState == "on"]
+foreign {
+    func D3DKMTGetOverlayState(param0: CPointer<D3DKMT_GETOVERLAYSTATE>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetOverlayState == "on"]
+public unsafe func Windows_D3DKMTGetOverlayState(param0: CPointer<D3DKMT_GETOVERLAYSTATE>): Int32 {
+    return D3DKMTGetOverlayState(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetPostCompositionCaps == "on"]
+foreign {
+    func D3DKMTGetPostCompositionCaps(param0: CPointer<D3DKMT_GET_POST_COMPOSITION_CAPS>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetPostCompositionCaps == "on"]
+public unsafe func Windows_D3DKMTGetPostCompositionCaps(param0: CPointer<D3DKMT_GET_POST_COMPOSITION_CAPS>): Int32 {
+    return D3DKMTGetPostCompositionCaps(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetPresentHistory == "on"]
+foreign {
+    func D3DKMTGetPresentHistory(param0: CPointer<D3DKMT_GETPRESENTHISTORY>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetPresentHistory == "on"]
+public unsafe func Windows_D3DKMTGetPresentHistory(param0: CPointer<D3DKMT_GETPRESENTHISTORY>): Int32 {
+    return D3DKMTGetPresentHistory(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetPresentQueueEvent == "on"]
+foreign {
+    func D3DKMTGetPresentQueueEvent(hAdapter: UInt32, param1: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetPresentQueueEvent == "on"]
+public unsafe func Windows_D3DKMTGetPresentQueueEvent(hAdapter: UInt32, param1: CPointer<CPointer<Unit>>): Int32 {
+    return D3DKMTGetPresentQueueEvent(hAdapter, param1)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetProcessDeviceRemovalSupport == "on"]
+foreign {
+    func D3DKMTGetProcessDeviceRemovalSupport(param0: CPointer<D3DKMT_GETPROCESSDEVICEREMOVALSUPPORT>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetProcessDeviceRemovalSupport == "on"]
+public unsafe func Windows_D3DKMTGetProcessDeviceRemovalSupport(param0: CPointer<D3DKMT_GETPROCESSDEVICEREMOVALSUPPORT>): Int32 {
+    return D3DKMTGetProcessDeviceRemovalSupport(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetProcessSchedulingPriorityClass == "on"]
+foreign {
+    func D3DKMTGetProcessSchedulingPriorityClass(param0: CPointer<Unit>, param1: CPointer<Int32>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetProcessSchedulingPriorityClass == "on"]
+public unsafe func Windows_D3DKMTGetProcessSchedulingPriorityClass(param0: CPointer<Unit>, param1: CPointer<Int32>): Int32 {
+    return D3DKMTGetProcessSchedulingPriorityClass(param0, param1)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetResourcePresentPrivateDriverData == "on"]
+foreign {
+    func D3DKMTGetResourcePresentPrivateDriverData(param0: CPointer<D3DDDI_GETRESOURCEPRESENTPRIVATEDRIVERDATA>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetResourcePresentPrivateDriverData == "on"]
+public unsafe func Windows_D3DKMTGetResourcePresentPrivateDriverData(param0: CPointer<D3DDDI_GETRESOURCEPRESENTPRIVATEDRIVERDATA>): Int32 {
+    return D3DKMTGetResourcePresentPrivateDriverData(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetRuntimeData == "on"]
+foreign {
+    func D3DKMTGetRuntimeData(param0: CPointer<D3DKMT_GETRUNTIMEDATA>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetRuntimeData == "on"]
+public unsafe func Windows_D3DKMTGetRuntimeData(param0: CPointer<D3DKMT_GETRUNTIMEDATA>): Int32 {
+    return D3DKMTGetRuntimeData(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetScanLine == "on"]
+foreign {
+    func D3DKMTGetScanLine(param0: CPointer<D3DKMT_GETSCANLINE>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetScanLine == "on"]
+public unsafe func Windows_D3DKMTGetScanLine(param0: CPointer<D3DKMT_GETSCANLINE>): Int32 {
+    return D3DKMTGetScanLine(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetSharedPrimaryHandle == "on"]
+foreign {
+    func D3DKMTGetSharedPrimaryHandle(param0: CPointer<D3DKMT_GETSHAREDPRIMARYHANDLE>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetSharedPrimaryHandle == "on"]
+public unsafe func Windows_D3DKMTGetSharedPrimaryHandle(param0: CPointer<D3DKMT_GETSHAREDPRIMARYHANDLE>): Int32 {
+    return D3DKMTGetSharedPrimaryHandle(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetSharedResourceAdapterLuid == "on"]
+foreign {
+    func D3DKMTGetSharedResourceAdapterLuid(param0: CPointer<D3DKMT_GETSHAREDRESOURCEADAPTERLUID>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTGetSharedResourceAdapterLuid == "on"]
+public unsafe func Windows_D3DKMTGetSharedResourceAdapterLuid(param0: CPointer<D3DKMT_GETSHAREDRESOURCEADAPTERLUID>): Int32 {
+    return D3DKMTGetSharedResourceAdapterLuid(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTInvalidateActiveVidPn == "on"]
+foreign {
+    func D3DKMTInvalidateActiveVidPn(param0: CPointer<D3DKMT_INVALIDATEACTIVEVIDPN>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTInvalidateActiveVidPn == "on"]
+public unsafe func Windows_D3DKMTInvalidateActiveVidPn(param0: CPointer<D3DKMT_INVALIDATEACTIVEVIDPN>): Int32 {
+    return D3DKMTInvalidateActiveVidPn(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTInvalidateCache == "on"]
+foreign {
+    func D3DKMTInvalidateCache(param0: CPointer<D3DKMT_INVALIDATECACHE>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTInvalidateCache == "on"]
+public unsafe func Windows_D3DKMTInvalidateCache(param0: CPointer<D3DKMT_INVALIDATECACHE>): Int32 {
+    return D3DKMTInvalidateCache(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTLock == "on"]
+foreign {
+    func D3DKMTLock(param0: CPointer<D3DKMT_LOCK>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTLock == "on"]
+public unsafe func Windows_D3DKMTLock(param0: CPointer<D3DKMT_LOCK>): Int32 {
+    return D3DKMTLock(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTLock2 == "on"]
+foreign {
+    func D3DKMTLock2(param0: CPointer<D3DKMT_LOCK2>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTLock2 == "on"]
+public unsafe func Windows_D3DKMTLock2(param0: CPointer<D3DKMT_LOCK2>): Int32 {
+    return D3DKMTLock2(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTMakeResident == "on"]
+foreign {
+    func D3DKMTMakeResident(param0: CPointer<D3DDDI_MAKERESIDENT>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTMakeResident == "on"]
+public unsafe func Windows_D3DKMTMakeResident(param0: CPointer<D3DDDI_MAKERESIDENT>): Int32 {
+    return D3DKMTMakeResident(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTMapGpuVirtualAddress == "on"]
+foreign {
+    func D3DKMTMapGpuVirtualAddress(param0: CPointer<D3DDDI_MAPGPUVIRTUALADDRESS>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTMapGpuVirtualAddress == "on"]
+public unsafe func Windows_D3DKMTMapGpuVirtualAddress(param0: CPointer<D3DDDI_MAPGPUVIRTUALADDRESS>): Int32 {
+    return D3DKMTMapGpuVirtualAddress(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTMarkDeviceAsError == "on"]
+foreign {
+    func D3DKMTMarkDeviceAsError(param0: CPointer<D3DKMT_MARKDEVICEASERROR>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTMarkDeviceAsError == "on"]
+public unsafe func Windows_D3DKMTMarkDeviceAsError(param0: CPointer<D3DKMT_MARKDEVICEASERROR>): Int32 {
+    return D3DKMTMarkDeviceAsError(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOfferAllocations == "on"]
+foreign {
+    func D3DKMTOfferAllocations(param0: CPointer<D3DKMT_OFFERALLOCATIONS>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOfferAllocations == "on"]
+public unsafe func Windows_D3DKMTOfferAllocations(param0: CPointer<D3DKMT_OFFERALLOCATIONS>): Int32 {
+    return D3DKMTOfferAllocations(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOpenAdapterFromDeviceName == "on"]
+foreign {
+    func D3DKMTOpenAdapterFromDeviceName(param0: CPointer<D3DKMT_OPENADAPTERFROMDEVICENAME>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOpenAdapterFromDeviceName == "on"]
+public unsafe func Windows_D3DKMTOpenAdapterFromDeviceName(param0: CPointer<D3DKMT_OPENADAPTERFROMDEVICENAME>): Int32 {
+    return D3DKMTOpenAdapterFromDeviceName(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOpenAdapterFromGdiDisplayName == "on"]
+foreign {
+    func D3DKMTOpenAdapterFromGdiDisplayName(param0: CPointer<D3DKMT_OPENADAPTERFROMGDIDISPLAYNAME>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOpenAdapterFromGdiDisplayName == "on"]
+public unsafe func Windows_D3DKMTOpenAdapterFromGdiDisplayName(param0: CPointer<D3DKMT_OPENADAPTERFROMGDIDISPLAYNAME>): Int32 {
+    return D3DKMTOpenAdapterFromGdiDisplayName(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOpenAdapterFromHdc == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func D3DKMTOpenAdapterFromHdc(param0: CPointer<D3DKMT_OPENADAPTERFROMHDC>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOpenAdapterFromHdc == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_D3DKMTOpenAdapterFromHdc(param0: CPointer<D3DKMT_OPENADAPTERFROMHDC>): Int32 {
+    return D3DKMTOpenAdapterFromHdc(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOpenAdapterFromLuid == "on"]
+foreign {
+    func D3DKMTOpenAdapterFromLuid(param0: CPointer<D3DKMT_OPENADAPTERFROMLUID>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOpenAdapterFromLuid == "on"]
+public unsafe func Windows_D3DKMTOpenAdapterFromLuid(param0: CPointer<D3DKMT_OPENADAPTERFROMLUID>): Int32 {
+    return D3DKMTOpenAdapterFromLuid(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOpenKeyedMutex == "on"]
+foreign {
+    func D3DKMTOpenKeyedMutex(param0: CPointer<D3DKMT_OPENKEYEDMUTEX>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOpenKeyedMutex == "on"]
+public unsafe func Windows_D3DKMTOpenKeyedMutex(param0: CPointer<D3DKMT_OPENKEYEDMUTEX>): Int32 {
+    return D3DKMTOpenKeyedMutex(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOpenKeyedMutex2 == "on"]
+foreign {
+    func D3DKMTOpenKeyedMutex2(param0: CPointer<D3DKMT_OPENKEYEDMUTEX2>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOpenKeyedMutex2 == "on"]
+public unsafe func Windows_D3DKMTOpenKeyedMutex2(param0: CPointer<D3DKMT_OPENKEYEDMUTEX2>): Int32 {
+    return D3DKMTOpenKeyedMutex2(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOpenKeyedMutexFromNtHandle == "on"]
+foreign {
+    func D3DKMTOpenKeyedMutexFromNtHandle(param0: CPointer<D3DKMT_OPENKEYEDMUTEXFROMNTHANDLE>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOpenKeyedMutexFromNtHandle == "on"]
+public unsafe func Windows_D3DKMTOpenKeyedMutexFromNtHandle(param0: CPointer<D3DKMT_OPENKEYEDMUTEXFROMNTHANDLE>): Int32 {
+    return D3DKMTOpenKeyedMutexFromNtHandle(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOpenNtHandleFromName == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
 foreign {
     func D3DKMTOpenNtHandleFromName(param0: CPointer<D3DKMT_OPENNTHANDLEFROMNAME>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOpenNtHandleFromName == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_D3DKMTOpenNtHandleFromName(param0: CPointer<D3DKMT_OPENNTHANDLEFROMNAME>): Int32 {
+    return D3DKMTOpenNtHandleFromName(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOpenProtectedSessionFromNtHandle == "on"]
+foreign {
+    func D3DKMTOpenProtectedSessionFromNtHandle(param0: CPointer<D3DKMT_OPENPROTECTEDSESSIONFROMNTHANDLE>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOpenProtectedSessionFromNtHandle == "on"]
+public unsafe func Windows_D3DKMTOpenProtectedSessionFromNtHandle(param0: CPointer<D3DKMT_OPENPROTECTEDSESSIONFROMNTHANDLE>): Int32 {
+    return D3DKMTOpenProtectedSessionFromNtHandle(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOpenResource == "on"]
+foreign {
+    func D3DKMTOpenResource(param0: CPointer<D3DKMT_OPENRESOURCE>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOpenResource == "on"]
+public unsafe func Windows_D3DKMTOpenResource(param0: CPointer<D3DKMT_OPENRESOURCE>): Int32 {
+    return D3DKMTOpenResource(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOpenResource2 == "on"]
+foreign {
+    func D3DKMTOpenResource2(param0: CPointer<D3DKMT_OPENRESOURCE>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOpenResource2 == "on"]
+public unsafe func Windows_D3DKMTOpenResource2(param0: CPointer<D3DKMT_OPENRESOURCE>): Int32 {
+    return D3DKMTOpenResource2(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOpenResourceFromNtHandle == "on"]
+foreign {
+    func D3DKMTOpenResourceFromNtHandle(param0: CPointer<D3DKMT_OPENRESOURCEFROMNTHANDLE>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOpenResourceFromNtHandle == "on"]
+public unsafe func Windows_D3DKMTOpenResourceFromNtHandle(param0: CPointer<D3DKMT_OPENRESOURCEFROMNTHANDLE>): Int32 {
+    return D3DKMTOpenResourceFromNtHandle(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOpenSyncObjectFromNtHandle == "on"]
+foreign {
+    func D3DKMTOpenSyncObjectFromNtHandle(param0: CPointer<D3DKMT_OPENSYNCOBJECTFROMNTHANDLE>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOpenSyncObjectFromNtHandle == "on"]
+public unsafe func Windows_D3DKMTOpenSyncObjectFromNtHandle(param0: CPointer<D3DKMT_OPENSYNCOBJECTFROMNTHANDLE>): Int32 {
+    return D3DKMTOpenSyncObjectFromNtHandle(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOpenSyncObjectFromNtHandle2 == "on"]
+foreign {
+    func D3DKMTOpenSyncObjectFromNtHandle2(param0: CPointer<D3DKMT_OPENSYNCOBJECTFROMNTHANDLE2>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOpenSyncObjectFromNtHandle2 == "on"]
+public unsafe func Windows_D3DKMTOpenSyncObjectFromNtHandle2(param0: CPointer<D3DKMT_OPENSYNCOBJECTFROMNTHANDLE2>): Int32 {
+    return D3DKMTOpenSyncObjectFromNtHandle2(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOpenSyncObjectNtHandleFromName == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+foreign {
     func D3DKMTOpenSyncObjectNtHandleFromName(param0: CPointer<D3DKMT_OPENSYNCOBJECTNTHANDLEFROMNAME>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOpenSyncObjectNtHandleFromName == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_D3DKMTOpenSyncObjectNtHandleFromName(param0: CPointer<D3DKMT_OPENSYNCOBJECTNTHANDLEFROMNAME>): Int32 {
+    return D3DKMTOpenSyncObjectNtHandleFromName(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOpenSynchronizationObject == "on"]
+foreign {
+    func D3DKMTOpenSynchronizationObject(param0: CPointer<D3DKMT_OPENSYNCHRONIZATIONOBJECT>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOpenSynchronizationObject == "on"]
+public unsafe func Windows_D3DKMTOpenSynchronizationObject(param0: CPointer<D3DKMT_OPENSYNCHRONIZATIONOBJECT>): Int32 {
+    return D3DKMTOpenSynchronizationObject(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOutputDuplGetFrameInfo == "on"]
+foreign {
+    func D3DKMTOutputDuplGetFrameInfo(param0: CPointer<D3DKMT_OUTPUTDUPL_GET_FRAMEINFO>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOutputDuplGetFrameInfo == "on"]
+public unsafe func Windows_D3DKMTOutputDuplGetFrameInfo(param0: CPointer<D3DKMT_OUTPUTDUPL_GET_FRAMEINFO>): Int32 {
+    return D3DKMTOutputDuplGetFrameInfo(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOutputDuplGetMetaData == "on"]
+foreign {
+    func D3DKMTOutputDuplGetMetaData(param0: CPointer<D3DKMT_OUTPUTDUPL_METADATA>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOutputDuplGetMetaData == "on"]
+public unsafe func Windows_D3DKMTOutputDuplGetMetaData(param0: CPointer<D3DKMT_OUTPUTDUPL_METADATA>): Int32 {
+    return D3DKMTOutputDuplGetMetaData(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOutputDuplGetPointerShapeData == "on"]
+foreign {
+    func D3DKMTOutputDuplGetPointerShapeData(param0: CPointer<D3DKMT_OUTPUTDUPL_GET_POINTER_SHAPE_DATA>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOutputDuplGetPointerShapeData == "on"]
+public unsafe func Windows_D3DKMTOutputDuplGetPointerShapeData(param0: CPointer<D3DKMT_OUTPUTDUPL_GET_POINTER_SHAPE_DATA>): Int32 {
+    return D3DKMTOutputDuplGetPointerShapeData(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOutputDuplPresent == "on"]
+foreign {
+    func D3DKMTOutputDuplPresent(param0: CPointer<D3DKMT_OUTPUTDUPLPRESENT>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOutputDuplPresent == "on"]
+public unsafe func Windows_D3DKMTOutputDuplPresent(param0: CPointer<D3DKMT_OUTPUTDUPLPRESENT>): Int32 {
+    return D3DKMTOutputDuplPresent(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOutputDuplReleaseFrame == "on"]
+foreign {
+    func D3DKMTOutputDuplReleaseFrame(param0: CPointer<D3DKMT_OUTPUTDUPL_RELEASE_FRAME>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOutputDuplReleaseFrame == "on"]
+public unsafe func Windows_D3DKMTOutputDuplReleaseFrame(param0: CPointer<D3DKMT_OUTPUTDUPL_RELEASE_FRAME>): Int32 {
+    return D3DKMTOutputDuplReleaseFrame(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTPollDisplayChildren == "on"]
+foreign {
+    func D3DKMTPollDisplayChildren(param0: CPointer<D3DKMT_POLLDISPLAYCHILDREN>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTPollDisplayChildren == "on"]
+public unsafe func Windows_D3DKMTPollDisplayChildren(param0: CPointer<D3DKMT_POLLDISPLAYCHILDREN>): Int32 {
+    return D3DKMTPollDisplayChildren(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTPresent == "on"]
+foreign {
+    func D3DKMTPresent(param0: CPointer<D3DKMT_PRESENT>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTPresent == "on"]
+public unsafe func Windows_D3DKMTPresent(param0: CPointer<D3DKMT_PRESENT>): Int32 {
+    return D3DKMTPresent(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTPresentMultiPlaneOverlay == "on"]
+foreign {
+    func D3DKMTPresentMultiPlaneOverlay(param0: CPointer<D3DKMT_PRESENT_MULTIPLANE_OVERLAY>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTPresentMultiPlaneOverlay == "on"]
+public unsafe func Windows_D3DKMTPresentMultiPlaneOverlay(param0: CPointer<D3DKMT_PRESENT_MULTIPLANE_OVERLAY>): Int32 {
+    return D3DKMTPresentMultiPlaneOverlay(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTPresentMultiPlaneOverlay2 == "on"]
+foreign {
+    func D3DKMTPresentMultiPlaneOverlay2(param0: CPointer<D3DKMT_PRESENT_MULTIPLANE_OVERLAY2>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTPresentMultiPlaneOverlay2 == "on"]
+public unsafe func Windows_D3DKMTPresentMultiPlaneOverlay2(param0: CPointer<D3DKMT_PRESENT_MULTIPLANE_OVERLAY2>): Int32 {
+    return D3DKMTPresentMultiPlaneOverlay2(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTPresentMultiPlaneOverlay3 == "on"]
+foreign {
+    func D3DKMTPresentMultiPlaneOverlay3(param0: CPointer<D3DKMT_PRESENT_MULTIPLANE_OVERLAY3>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTPresentMultiPlaneOverlay3 == "on"]
+public unsafe func Windows_D3DKMTPresentMultiPlaneOverlay3(param0: CPointer<D3DKMT_PRESENT_MULTIPLANE_OVERLAY3>): Int32 {
+    return D3DKMTPresentMultiPlaneOverlay3(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTPresentRedirected == "on"]
+foreign {
+    func D3DKMTPresentRedirected(param0: CPointer<D3DKMT_PRESENT_REDIRECTED>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTPresentRedirected == "on"]
+public unsafe func Windows_D3DKMTPresentRedirected(param0: CPointer<D3DKMT_PRESENT_REDIRECTED>): Int32 {
+    return D3DKMTPresentRedirected(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTQueryAdapterInfo == "on"]
+foreign {
+    func D3DKMTQueryAdapterInfo(param0: CPointer<D3DKMT_QUERYADAPTERINFO>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTQueryAdapterInfo == "on"]
+public unsafe func Windows_D3DKMTQueryAdapterInfo(param0: CPointer<D3DKMT_QUERYADAPTERINFO>): Int32 {
+    return D3DKMTQueryAdapterInfo(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTQueryAllocationResidency == "on"]
+foreign {
+    func D3DKMTQueryAllocationResidency(param0: CPointer<D3DKMT_QUERYALLOCATIONRESIDENCY>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTQueryAllocationResidency == "on"]
+public unsafe func Windows_D3DKMTQueryAllocationResidency(param0: CPointer<D3DKMT_QUERYALLOCATIONRESIDENCY>): Int32 {
+    return D3DKMTQueryAllocationResidency(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTQueryClockCalibration == "on"]
+foreign {
+    func D3DKMTQueryClockCalibration(param0: CPointer<D3DKMT_QUERYCLOCKCALIBRATION>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTQueryClockCalibration == "on"]
+public unsafe func Windows_D3DKMTQueryClockCalibration(param0: CPointer<D3DKMT_QUERYCLOCKCALIBRATION>): Int32 {
+    return D3DKMTQueryClockCalibration(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTQueryFSEBlock == "on"]
+foreign {
+    func D3DKMTQueryFSEBlock(param0: CPointer<D3DKMT_QUERYFSEBLOCK>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTQueryFSEBlock == "on"]
+public unsafe func Windows_D3DKMTQueryFSEBlock(param0: CPointer<D3DKMT_QUERYFSEBLOCK>): Int32 {
+    return D3DKMTQueryFSEBlock(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTQueryProcessOfferInfo == "on"]
+foreign {
+    func D3DKMTQueryProcessOfferInfo(param0: CPointer<D3DKMT_QUERYPROCESSOFFERINFO>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTQueryProcessOfferInfo == "on"]
+public unsafe func Windows_D3DKMTQueryProcessOfferInfo(param0: CPointer<D3DKMT_QUERYPROCESSOFFERINFO>): Int32 {
+    return D3DKMTQueryProcessOfferInfo(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTQueryProtectedSessionInfoFromNtHandle == "on"]
+foreign {
+    func D3DKMTQueryProtectedSessionInfoFromNtHandle(param0: CPointer<D3DKMT_QUERYPROTECTEDSESSIONINFOFROMNTHANDLE>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTQueryProtectedSessionInfoFromNtHandle == "on"]
+public unsafe func Windows_D3DKMTQueryProtectedSessionInfoFromNtHandle(param0: CPointer<D3DKMT_QUERYPROTECTEDSESSIONINFOFROMNTHANDLE>): Int32 {
+    return D3DKMTQueryProtectedSessionInfoFromNtHandle(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTQueryProtectedSessionStatus == "on"]
+foreign {
+    func D3DKMTQueryProtectedSessionStatus(param0: CPointer<D3DKMT_QUERYPROTECTEDSESSIONSTATUS>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTQueryProtectedSessionStatus == "on"]
+public unsafe func Windows_D3DKMTQueryProtectedSessionStatus(param0: CPointer<D3DKMT_QUERYPROTECTEDSESSIONSTATUS>): Int32 {
+    return D3DKMTQueryProtectedSessionStatus(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTQueryRemoteVidPnSourceFromGdiDisplayName == "on"]
+foreign {
+    func D3DKMTQueryRemoteVidPnSourceFromGdiDisplayName(param0: CPointer<D3DKMT_QUERYREMOTEVIDPNSOURCEFROMGDIDISPLAYNAME>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTQueryRemoteVidPnSourceFromGdiDisplayName == "on"]
+public unsafe func Windows_D3DKMTQueryRemoteVidPnSourceFromGdiDisplayName(param0: CPointer<D3DKMT_QUERYREMOTEVIDPNSOURCEFROMGDIDISPLAYNAME>): Int32 {
+    return D3DKMTQueryRemoteVidPnSourceFromGdiDisplayName(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTQueryResourceInfo == "on"]
+foreign {
+    func D3DKMTQueryResourceInfo(param0: CPointer<D3DKMT_QUERYRESOURCEINFO>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTQueryResourceInfo == "on"]
+public unsafe func Windows_D3DKMTQueryResourceInfo(param0: CPointer<D3DKMT_QUERYRESOURCEINFO>): Int32 {
+    return D3DKMTQueryResourceInfo(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTQueryResourceInfoFromNtHandle == "on"]
+foreign {
+    func D3DKMTQueryResourceInfoFromNtHandle(param0: CPointer<D3DKMT_QUERYRESOURCEINFOFROMNTHANDLE>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTQueryResourceInfoFromNtHandle == "on"]
+public unsafe func Windows_D3DKMTQueryResourceInfoFromNtHandle(param0: CPointer<D3DKMT_QUERYRESOURCEINFOFROMNTHANDLE>): Int32 {
+    return D3DKMTQueryResourceInfoFromNtHandle(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTQueryStatistics == "on"]
+foreign {
+    func D3DKMTQueryStatistics(param0: CPointer<D3DKMT_QUERYSTATISTICS>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTQueryStatistics == "on"]
+public unsafe func Windows_D3DKMTQueryStatistics(param0: CPointer<D3DKMT_QUERYSTATISTICS>): Int32 {
+    return D3DKMTQueryStatistics(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTQueryVidPnExclusiveOwnership == "on"]
+foreign {
+    func D3DKMTQueryVidPnExclusiveOwnership(param0: CPointer<D3DKMT_QUERYVIDPNEXCLUSIVEOWNERSHIP>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTQueryVidPnExclusiveOwnership == "on"]
+public unsafe func Windows_D3DKMTQueryVidPnExclusiveOwnership(param0: CPointer<D3DKMT_QUERYVIDPNEXCLUSIVEOWNERSHIP>): Int32 {
+    return D3DKMTQueryVidPnExclusiveOwnership(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTQueryVideoMemoryInfo == "on"]
+foreign {
+    func D3DKMTQueryVideoMemoryInfo(param0: CPointer<D3DKMT_QUERYVIDEOMEMORYINFO>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTQueryVideoMemoryInfo == "on"]
+public unsafe func Windows_D3DKMTQueryVideoMemoryInfo(param0: CPointer<D3DKMT_QUERYVIDEOMEMORYINFO>): Int32 {
+    return D3DKMTQueryVideoMemoryInfo(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTReclaimAllocations == "on"]
+foreign {
+    func D3DKMTReclaimAllocations(param0: CPointer<D3DKMT_RECLAIMALLOCATIONS>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTReclaimAllocations == "on"]
+public unsafe func Windows_D3DKMTReclaimAllocations(param0: CPointer<D3DKMT_RECLAIMALLOCATIONS>): Int32 {
+    return D3DKMTReclaimAllocations(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTReclaimAllocations2 == "on"]
+foreign {
+    func D3DKMTReclaimAllocations2(param0: CPointer<D3DKMT_RECLAIMALLOCATIONS2>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTReclaimAllocations2 == "on"]
+public unsafe func Windows_D3DKMTReclaimAllocations2(param0: CPointer<D3DKMT_RECLAIMALLOCATIONS2>): Int32 {
+    return D3DKMTReclaimAllocations2(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTRegisterTrimNotification == "on"]
+foreign {
+    func D3DKMTRegisterTrimNotification(param0: CPointer<D3DKMT_REGISTERTRIMNOTIFICATION>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTRegisterTrimNotification == "on"]
+public unsafe func Windows_D3DKMTRegisterTrimNotification(param0: CPointer<D3DKMT_REGISTERTRIMNOTIFICATION>): Int32 {
+    return D3DKMTRegisterTrimNotification(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTRegisterVailProcess == "on"]
+foreign {
+    func D3DKMTRegisterVailProcess(param0: CPointer<GUID>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTRegisterVailProcess == "on"]
+public unsafe func Windows_D3DKMTRegisterVailProcess(param0: CPointer<GUID>): Int32 {
+    return D3DKMTRegisterVailProcess(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTReleaseKeyedMutex == "on"]
+foreign {
+    func D3DKMTReleaseKeyedMutex(param0: CPointer<D3DKMT_RELEASEKEYEDMUTEX>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTReleaseKeyedMutex == "on"]
+public unsafe func Windows_D3DKMTReleaseKeyedMutex(param0: CPointer<D3DKMT_RELEASEKEYEDMUTEX>): Int32 {
+    return D3DKMTReleaseKeyedMutex(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTReleaseKeyedMutex2 == "on"]
+foreign {
+    func D3DKMTReleaseKeyedMutex2(param0: CPointer<D3DKMT_RELEASEKEYEDMUTEX2>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTReleaseKeyedMutex2 == "on"]
+public unsafe func Windows_D3DKMTReleaseKeyedMutex2(param0: CPointer<D3DKMT_RELEASEKEYEDMUTEX2>): Int32 {
+    return D3DKMTReleaseKeyedMutex2(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTReleaseProcessVidPnSourceOwners == "on"]
+foreign {
+    func D3DKMTReleaseProcessVidPnSourceOwners(param0: CPointer<Unit>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTReleaseProcessVidPnSourceOwners == "on"]
+public unsafe func Windows_D3DKMTReleaseProcessVidPnSourceOwners(param0: CPointer<Unit>): Int32 {
+    return D3DKMTReleaseProcessVidPnSourceOwners(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTRender == "on"]
+foreign {
+    func D3DKMTRender(param0: CPointer<D3DKMT_RENDER>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTRender == "on"]
+public unsafe func Windows_D3DKMTRender(param0: CPointer<D3DKMT_RENDER>): Int32 {
+    return D3DKMTRender(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTReserveGpuVirtualAddress == "on"]
+foreign {
+    func D3DKMTReserveGpuVirtualAddress(param0: CPointer<D3DDDI_RESERVEGPUVIRTUALADDRESS>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTReserveGpuVirtualAddress == "on"]
+public unsafe func Windows_D3DKMTReserveGpuVirtualAddress(param0: CPointer<D3DDDI_RESERVEGPUVIRTUALADDRESS>): Int32 {
+    return D3DKMTReserveGpuVirtualAddress(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetAllocationPriority == "on"]
+foreign {
+    func D3DKMTSetAllocationPriority(param0: CPointer<D3DKMT_SETALLOCATIONPRIORITY>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetAllocationPriority == "on"]
+public unsafe func Windows_D3DKMTSetAllocationPriority(param0: CPointer<D3DKMT_SETALLOCATIONPRIORITY>): Int32 {
+    return D3DKMTSetAllocationPriority(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetContextInProcessSchedulingPriority == "on"]
+foreign {
+    func D3DKMTSetContextInProcessSchedulingPriority(param0: CPointer<D3DKMT_SETCONTEXTINPROCESSSCHEDULINGPRIORITY>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetContextInProcessSchedulingPriority == "on"]
+public unsafe func Windows_D3DKMTSetContextInProcessSchedulingPriority(param0: CPointer<D3DKMT_SETCONTEXTINPROCESSSCHEDULINGPRIORITY>): Int32 {
+    return D3DKMTSetContextInProcessSchedulingPriority(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetContextSchedulingPriority == "on"]
+foreign {
+    func D3DKMTSetContextSchedulingPriority(param0: CPointer<D3DKMT_SETCONTEXTSCHEDULINGPRIORITY>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetContextSchedulingPriority == "on"]
+public unsafe func Windows_D3DKMTSetContextSchedulingPriority(param0: CPointer<D3DKMT_SETCONTEXTSCHEDULINGPRIORITY>): Int32 {
+    return D3DKMTSetContextSchedulingPriority(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetDisplayMode == "on"]
+foreign {
+    func D3DKMTSetDisplayMode(param0: CPointer<D3DKMT_SETDISPLAYMODE>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetDisplayMode == "on"]
+public unsafe func Windows_D3DKMTSetDisplayMode(param0: CPointer<D3DKMT_SETDISPLAYMODE>): Int32 {
+    return D3DKMTSetDisplayMode(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetDisplayPrivateDriverFormat == "on"]
+foreign {
+    func D3DKMTSetDisplayPrivateDriverFormat(param0: CPointer<D3DKMT_SETDISPLAYPRIVATEDRIVERFORMAT>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetDisplayPrivateDriverFormat == "on"]
+public unsafe func Windows_D3DKMTSetDisplayPrivateDriverFormat(param0: CPointer<D3DKMT_SETDISPLAYPRIVATEDRIVERFORMAT>): Int32 {
+    return D3DKMTSetDisplayPrivateDriverFormat(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetFSEBlock == "on"]
+foreign {
+    func D3DKMTSetFSEBlock(param0: CPointer<D3DKMT_SETFSEBLOCK>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetFSEBlock == "on"]
+public unsafe func Windows_D3DKMTSetFSEBlock(param0: CPointer<D3DKMT_SETFSEBLOCK>): Int32 {
+    return D3DKMTSetFSEBlock(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetGammaRamp == "on"]
+foreign {
+    func D3DKMTSetGammaRamp(param0: CPointer<D3DKMT_SETGAMMARAMP>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetGammaRamp == "on"]
+public unsafe func Windows_D3DKMTSetGammaRamp(param0: CPointer<D3DKMT_SETGAMMARAMP>): Int32 {
+    return D3DKMTSetGammaRamp(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetHwProtectionTeardownRecovery == "on"]
+foreign {
+    func D3DKMTSetHwProtectionTeardownRecovery(param0: CPointer<D3DKMT_SETHWPROTECTIONTEARDOWNRECOVERY>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetHwProtectionTeardownRecovery == "on"]
+public unsafe func Windows_D3DKMTSetHwProtectionTeardownRecovery(param0: CPointer<D3DKMT_SETHWPROTECTIONTEARDOWNRECOVERY>): Int32 {
+    return D3DKMTSetHwProtectionTeardownRecovery(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetMonitorColorSpaceTransform == "on"]
+foreign {
+    func D3DKMTSetMonitorColorSpaceTransform(param0: CPointer<D3DKMT_SET_COLORSPACE_TRANSFORM>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetMonitorColorSpaceTransform == "on"]
+public unsafe func Windows_D3DKMTSetMonitorColorSpaceTransform(param0: CPointer<D3DKMT_SET_COLORSPACE_TRANSFORM>): Int32 {
+    return D3DKMTSetMonitorColorSpaceTransform(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetProcessSchedulingPriorityClass == "on"]
+foreign {
+    func D3DKMTSetProcessSchedulingPriorityClass(param0: CPointer<Unit>, param1: Int32): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetProcessSchedulingPriorityClass == "on"]
+public unsafe func Windows_D3DKMTSetProcessSchedulingPriorityClass(param0: CPointer<Unit>, param1: Int32): Int32 {
+    return D3DKMTSetProcessSchedulingPriorityClass(param0, param1)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetQueuedLimit == "on"]
+foreign {
+    func D3DKMTSetQueuedLimit(param0: CPointer<D3DKMT_SETQUEUEDLIMIT>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetQueuedLimit == "on"]
+public unsafe func Windows_D3DKMTSetQueuedLimit(param0: CPointer<D3DKMT_SETQUEUEDLIMIT>): Int32 {
+    return D3DKMTSetQueuedLimit(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetStablePowerState == "on"]
+foreign {
+    func D3DKMTSetStablePowerState(param0: CPointer<D3DKMT_SETSTABLEPOWERSTATE>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetStablePowerState == "on"]
+public unsafe func Windows_D3DKMTSetStablePowerState(param0: CPointer<D3DKMT_SETSTABLEPOWERSTATE>): Int32 {
+    return D3DKMTSetStablePowerState(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetSyncRefreshCountWaitTarget == "on"]
+foreign {
+    func D3DKMTSetSyncRefreshCountWaitTarget(param0: CPointer<D3DKMT_SETSYNCREFRESHCOUNTWAITTARGET>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetSyncRefreshCountWaitTarget == "on"]
+public unsafe func Windows_D3DKMTSetSyncRefreshCountWaitTarget(param0: CPointer<D3DKMT_SETSYNCREFRESHCOUNTWAITTARGET>): Int32 {
+    return D3DKMTSetSyncRefreshCountWaitTarget(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetVidPnSourceHwProtection == "on"]
+foreign {
+    func D3DKMTSetVidPnSourceHwProtection(param0: CPointer<D3DKMT_SETVIDPNSOURCEHWPROTECTION>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetVidPnSourceHwProtection == "on"]
+public unsafe func Windows_D3DKMTSetVidPnSourceHwProtection(param0: CPointer<D3DKMT_SETVIDPNSOURCEHWPROTECTION>): Int32 {
+    return D3DKMTSetVidPnSourceHwProtection(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetVidPnSourceOwner == "on"]
+foreign {
+    func D3DKMTSetVidPnSourceOwner(param0: CPointer<D3DKMT_SETVIDPNSOURCEOWNER>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetVidPnSourceOwner == "on"]
+public unsafe func Windows_D3DKMTSetVidPnSourceOwner(param0: CPointer<D3DKMT_SETVIDPNSOURCEOWNER>): Int32 {
+    return D3DKMTSetVidPnSourceOwner(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetVidPnSourceOwner1 == "on"]
+foreign {
+    func D3DKMTSetVidPnSourceOwner1(param0: CPointer<D3DKMT_SETVIDPNSOURCEOWNER1>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetVidPnSourceOwner1 == "on"]
+public unsafe func Windows_D3DKMTSetVidPnSourceOwner1(param0: CPointer<D3DKMT_SETVIDPNSOURCEOWNER1>): Int32 {
+    return D3DKMTSetVidPnSourceOwner1(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetVidPnSourceOwner2 == "on"]
+foreign {
+    func D3DKMTSetVidPnSourceOwner2(param0: CPointer<D3DKMT_SETVIDPNSOURCEOWNER2>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSetVidPnSourceOwner2 == "on"]
+public unsafe func Windows_D3DKMTSetVidPnSourceOwner2(param0: CPointer<D3DKMT_SETVIDPNSOURCEOWNER2>): Int32 {
+    return D3DKMTSetVidPnSourceOwner2(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTShareObjects == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: hObjects len=param[0]
     func D3DKMTShareObjects(cObjects: UInt32, hObjects: CPointer<UInt32>, pObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>, dwDesiredAccess: UInt32, phSharedNtHandle: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[GDI32 == "on" && Windows_Win32_Graphics_Gdi == "on"]
-foreign {
-    func D3DKMTChangeSurfacePointer(param0: CPointer<D3DKMT_CHANGESURFACEPOINTER>): Int32
-    func D3DKMTCreateDCFromMemory(param0: CPointer<D3DKMT_CREATEDCFROMMEMORY>): Int32
-    func D3DKMTDestroyDCFromMemory(param0: CPointer<D3DKMT_DESTROYDCFROMMEMORY>): Int32
-    func D3DKMTOpenAdapterFromHdc(param0: CPointer<D3DKMT_OPENADAPTERFROMHDC>): Int32
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTShareObjects == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_D3DKMTShareObjects(cObjects: UInt32, hObjects: CPointer<UInt32>, pObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>, dwDesiredAccess: UInt32, phSharedNtHandle: CPointer<CPointer<Unit>>): Int32 {
+    return D3DKMTShareObjects(cObjects, hObjects, pObjectAttributes, dwDesiredAccess, phSharedNtHandle)
 }
 
-@When[API_MS_WIN_DX_D3DKMT_L1_1_4 == "on"]
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSharedPrimaryLockNotification == "on"]
+foreign {
+    func D3DKMTSharedPrimaryLockNotification(param0: CPointer<D3DKMT_SHAREDPRIMARYLOCKNOTIFICATION>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSharedPrimaryLockNotification == "on"]
+public unsafe func Windows_D3DKMTSharedPrimaryLockNotification(param0: CPointer<D3DKMT_SHAREDPRIMARYLOCKNOTIFICATION>): Int32 {
+    return D3DKMTSharedPrimaryLockNotification(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSharedPrimaryUnLockNotification == "on"]
+foreign {
+    func D3DKMTSharedPrimaryUnLockNotification(param0: CPointer<D3DKMT_SHAREDPRIMARYUNLOCKNOTIFICATION>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSharedPrimaryUnLockNotification == "on"]
+public unsafe func Windows_D3DKMTSharedPrimaryUnLockNotification(param0: CPointer<D3DKMT_SHAREDPRIMARYUNLOCKNOTIFICATION>): Int32 {
+    return D3DKMTSharedPrimaryUnLockNotification(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSignalSynchronizationObject == "on"]
+foreign {
+    func D3DKMTSignalSynchronizationObject(param0: CPointer<D3DKMT_SIGNALSYNCHRONIZATIONOBJECT>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSignalSynchronizationObject == "on"]
+public unsafe func Windows_D3DKMTSignalSynchronizationObject(param0: CPointer<D3DKMT_SIGNALSYNCHRONIZATIONOBJECT>): Int32 {
+    return D3DKMTSignalSynchronizationObject(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSignalSynchronizationObject2 == "on"]
+foreign {
+    func D3DKMTSignalSynchronizationObject2(param0: CPointer<D3DKMT_SIGNALSYNCHRONIZATIONOBJECT2>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSignalSynchronizationObject2 == "on"]
+public unsafe func Windows_D3DKMTSignalSynchronizationObject2(param0: CPointer<D3DKMT_SIGNALSYNCHRONIZATIONOBJECT2>): Int32 {
+    return D3DKMTSignalSynchronizationObject2(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSignalSynchronizationObjectFromCpu == "on"]
+foreign {
+    func D3DKMTSignalSynchronizationObjectFromCpu(param0: CPointer<D3DKMT_SIGNALSYNCHRONIZATIONOBJECTFROMCPU>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSignalSynchronizationObjectFromCpu == "on"]
+public unsafe func Windows_D3DKMTSignalSynchronizationObjectFromCpu(param0: CPointer<D3DKMT_SIGNALSYNCHRONIZATIONOBJECTFROMCPU>): Int32 {
+    return D3DKMTSignalSynchronizationObjectFromCpu(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSignalSynchronizationObjectFromGpu == "on"]
+foreign {
+    func D3DKMTSignalSynchronizationObjectFromGpu(param0: CPointer<D3DKMT_SIGNALSYNCHRONIZATIONOBJECTFROMGPU>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSignalSynchronizationObjectFromGpu == "on"]
+public unsafe func Windows_D3DKMTSignalSynchronizationObjectFromGpu(param0: CPointer<D3DKMT_SIGNALSYNCHRONIZATIONOBJECTFROMGPU>): Int32 {
+    return D3DKMTSignalSynchronizationObjectFromGpu(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSignalSynchronizationObjectFromGpu2 == "on"]
+foreign {
+    func D3DKMTSignalSynchronizationObjectFromGpu2(param0: CPointer<D3DKMT_SIGNALSYNCHRONIZATIONOBJECTFROMGPU2>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSignalSynchronizationObjectFromGpu2 == "on"]
+public unsafe func Windows_D3DKMTSignalSynchronizationObjectFromGpu2(param0: CPointer<D3DKMT_SIGNALSYNCHRONIZATIONOBJECTFROMGPU2>): Int32 {
+    return D3DKMTSignalSynchronizationObjectFromGpu2(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSubmitCommand == "on"]
+foreign {
+    func D3DKMTSubmitCommand(param0: CPointer<D3DKMT_SUBMITCOMMAND>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSubmitCommand == "on"]
+public unsafe func Windows_D3DKMTSubmitCommand(param0: CPointer<D3DKMT_SUBMITCOMMAND>): Int32 {
+    return D3DKMTSubmitCommand(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSubmitCommandToHwQueue == "on"]
+foreign {
+    func D3DKMTSubmitCommandToHwQueue(param0: CPointer<D3DKMT_SUBMITCOMMANDTOHWQUEUE>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSubmitCommandToHwQueue == "on"]
+public unsafe func Windows_D3DKMTSubmitCommandToHwQueue(param0: CPointer<D3DKMT_SUBMITCOMMANDTOHWQUEUE>): Int32 {
+    return D3DKMTSubmitCommandToHwQueue(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSubmitSignalSyncObjectsToHwQueue == "on"]
+foreign {
+    func D3DKMTSubmitSignalSyncObjectsToHwQueue(param0: CPointer<D3DKMT_SUBMITSIGNALSYNCOBJECTSTOHWQUEUE>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSubmitSignalSyncObjectsToHwQueue == "on"]
+public unsafe func Windows_D3DKMTSubmitSignalSyncObjectsToHwQueue(param0: CPointer<D3DKMT_SUBMITSIGNALSYNCOBJECTSTOHWQUEUE>): Int32 {
+    return D3DKMTSubmitSignalSyncObjectsToHwQueue(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSubmitWaitForSyncObjectsToHwQueue == "on"]
+foreign {
+    func D3DKMTSubmitWaitForSyncObjectsToHwQueue(param0: CPointer<D3DKMT_SUBMITWAITFORSYNCOBJECTSTOHWQUEUE>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSubmitWaitForSyncObjectsToHwQueue == "on"]
+public unsafe func Windows_D3DKMTSubmitWaitForSyncObjectsToHwQueue(param0: CPointer<D3DKMT_SUBMITWAITFORSYNCOBJECTSTOHWQUEUE>): Int32 {
+    return D3DKMTSubmitWaitForSyncObjectsToHwQueue(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTTrimProcessCommitment == "on"]
+foreign {
+    func D3DKMTTrimProcessCommitment(param0: CPointer<D3DKMT_TRIMPROCESSCOMMITMENT>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTTrimProcessCommitment == "on"]
+public unsafe func Windows_D3DKMTTrimProcessCommitment(param0: CPointer<D3DKMT_TRIMPROCESSCOMMITMENT>): Int32 {
+    return D3DKMTTrimProcessCommitment(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTUnlock == "on"]
+foreign {
+    func D3DKMTUnlock(param0: CPointer<D3DKMT_UNLOCK>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTUnlock == "on"]
+public unsafe func Windows_D3DKMTUnlock(param0: CPointer<D3DKMT_UNLOCK>): Int32 {
+    return D3DKMTUnlock(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTUnlock2 == "on"]
+foreign {
+    func D3DKMTUnlock2(param0: CPointer<D3DKMT_UNLOCK2>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTUnlock2 == "on"]
+public unsafe func Windows_D3DKMTUnlock2(param0: CPointer<D3DKMT_UNLOCK2>): Int32 {
+    return D3DKMTUnlock2(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTUnregisterTrimNotification == "on"]
+foreign {
+    func D3DKMTUnregisterTrimNotification(param0: CPointer<D3DKMT_UNREGISTERTRIMNOTIFICATION>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTUnregisterTrimNotification == "on"]
+public unsafe func Windows_D3DKMTUnregisterTrimNotification(param0: CPointer<D3DKMT_UNREGISTERTRIMNOTIFICATION>): Int32 {
+    return D3DKMTUnregisterTrimNotification(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTUpdateAllocationProperty == "on"]
+foreign {
+    func D3DKMTUpdateAllocationProperty(param0: CPointer<D3DDDI_UPDATEALLOCPROPERTY>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTUpdateAllocationProperty == "on"]
+public unsafe func Windows_D3DKMTUpdateAllocationProperty(param0: CPointer<D3DDDI_UPDATEALLOCPROPERTY>): Int32 {
+    return D3DKMTUpdateAllocationProperty(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTUpdateGpuVirtualAddress == "on"]
+foreign {
+    func D3DKMTUpdateGpuVirtualAddress(param0: CPointer<D3DKMT_UPDATEGPUVIRTUALADDRESS>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTUpdateGpuVirtualAddress == "on"]
+public unsafe func Windows_D3DKMTUpdateGpuVirtualAddress(param0: CPointer<D3DKMT_UPDATEGPUVIRTUALADDRESS>): Int32 {
+    return D3DKMTUpdateGpuVirtualAddress(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTUpdateOverlay == "on"]
+foreign {
+    func D3DKMTUpdateOverlay(param0: CPointer<D3DKMT_UPDATEOVERLAY>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTUpdateOverlay == "on"]
+public unsafe func Windows_D3DKMTUpdateOverlay(param0: CPointer<D3DKMT_UPDATEOVERLAY>): Int32 {
+    return D3DKMTUpdateOverlay(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTWaitForIdle == "on"]
+foreign {
+    func D3DKMTWaitForIdle(param0: CPointer<D3DKMT_WAITFORIDLE>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTWaitForIdle == "on"]
+public unsafe func Windows_D3DKMTWaitForIdle(param0: CPointer<D3DKMT_WAITFORIDLE>): Int32 {
+    return D3DKMTWaitForIdle(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTWaitForSynchronizationObject == "on"]
+foreign {
+    func D3DKMTWaitForSynchronizationObject(param0: CPointer<D3DKMT_WAITFORSYNCHRONIZATIONOBJECT>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTWaitForSynchronizationObject == "on"]
+public unsafe func Windows_D3DKMTWaitForSynchronizationObject(param0: CPointer<D3DKMT_WAITFORSYNCHRONIZATIONOBJECT>): Int32 {
+    return D3DKMTWaitForSynchronizationObject(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTWaitForSynchronizationObject2 == "on"]
+foreign {
+    func D3DKMTWaitForSynchronizationObject2(param0: CPointer<D3DKMT_WAITFORSYNCHRONIZATIONOBJECT2>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTWaitForSynchronizationObject2 == "on"]
+public unsafe func Windows_D3DKMTWaitForSynchronizationObject2(param0: CPointer<D3DKMT_WAITFORSYNCHRONIZATIONOBJECT2>): Int32 {
+    return D3DKMTWaitForSynchronizationObject2(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTWaitForSynchronizationObjectFromCpu == "on"]
+foreign {
+    func D3DKMTWaitForSynchronizationObjectFromCpu(param0: CPointer<D3DKMT_WAITFORSYNCHRONIZATIONOBJECTFROMCPU>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTWaitForSynchronizationObjectFromCpu == "on"]
+public unsafe func Windows_D3DKMTWaitForSynchronizationObjectFromCpu(param0: CPointer<D3DKMT_WAITFORSYNCHRONIZATIONOBJECTFROMCPU>): Int32 {
+    return D3DKMTWaitForSynchronizationObjectFromCpu(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTWaitForSynchronizationObjectFromGpu == "on"]
+foreign {
+    func D3DKMTWaitForSynchronizationObjectFromGpu(param0: CPointer<D3DKMT_WAITFORSYNCHRONIZATIONOBJECTFROMGPU>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTWaitForSynchronizationObjectFromGpu == "on"]
+public unsafe func Windows_D3DKMTWaitForSynchronizationObjectFromGpu(param0: CPointer<D3DKMT_WAITFORSYNCHRONIZATIONOBJECTFROMGPU>): Int32 {
+    return D3DKMTWaitForSynchronizationObjectFromGpu(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTWaitForVerticalBlankEvent == "on"]
+foreign {
+    func D3DKMTWaitForVerticalBlankEvent(param0: CPointer<D3DKMT_WAITFORVERTICALBLANKEVENT>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTWaitForVerticalBlankEvent == "on"]
+public unsafe func Windows_D3DKMTWaitForVerticalBlankEvent(param0: CPointer<D3DKMT_WAITFORVERTICALBLANKEVENT>): Int32 {
+    return D3DKMTWaitForVerticalBlankEvent(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTWaitForVerticalBlankEvent2 == "on"]
+foreign {
+    func D3DKMTWaitForVerticalBlankEvent2(param0: CPointer<D3DKMT_WAITFORVERTICALBLANKEVENT2>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && GDI32 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTWaitForVerticalBlankEvent2 == "on"]
+public unsafe func Windows_D3DKMTWaitForVerticalBlankEvent2(param0: CPointer<D3DKMT_WAITFORVERTICALBLANKEVENT2>): Int32 {
+    return D3DKMTWaitForVerticalBlankEvent2(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && API_MS_WIN_DX_D3DKMT_L1_1_4 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOutputDuplPresentToHwQueue == "on"]
 foreign {
     func D3DKMTOutputDuplPresentToHwQueue(param0: CPointer<D3DKMT_OUTPUTDUPLPRESENTTOHWQUEUE>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && API_MS_WIN_DX_D3DKMT_L1_1_4 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTOutputDuplPresentToHwQueue == "on"]
+public unsafe func Windows_D3DKMTOutputDuplPresentToHwQueue(param0: CPointer<D3DKMT_OUTPUTDUPLPRESENTTOHWQUEUE>): Int32 {
+    return D3DKMTOutputDuplPresentToHwQueue(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && API_MS_WIN_DX_D3DKMT_L1_1_4 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSubmitPresentBltToHwQueue == "on"]
+foreign {
     func D3DKMTSubmitPresentBltToHwQueue(param0: CPointer<D3DKMT_SUBMITPRESENTBLTTOHWQUEUE>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && API_MS_WIN_DX_D3DKMT_L1_1_4 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSubmitPresentBltToHwQueue == "on"]
+public unsafe func Windows_D3DKMTSubmitPresentBltToHwQueue(param0: CPointer<D3DKMT_SUBMITPRESENTBLTTOHWQUEUE>): Int32 {
+    return D3DKMTSubmitPresentBltToHwQueue(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && API_MS_WIN_DX_D3DKMT_L1_1_4 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSubmitPresentToHwQueue == "on"]
+foreign {
     func D3DKMTSubmitPresentToHwQueue(param0: CPointer<D3DKMT_SUBMITPRESENTTOHWQUEUE>): Int32
 }
 
-@When[API_MS_WIN_DX_D3DKMT_L1_1_6 == "on"]
+@When[Windows_Wdk_Graphics_Direct3D == "on" && API_MS_WIN_DX_D3DKMT_L1_1_4 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTSubmitPresentToHwQueue == "on"]
+public unsafe func Windows_D3DKMTSubmitPresentToHwQueue(param0: CPointer<D3DKMT_SUBMITPRESENTTOHWQUEUE>): Int32 {
+    return D3DKMTSubmitPresentToHwQueue(param0)
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && API_MS_WIN_DX_D3DKMT_L1_1_6 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTEnumAdapters3 == "on"]
 foreign {
     func D3DKMTEnumAdapters3(param0: CPointer<D3DKMT_ENUMADAPTERS3>): Int32
+}
+
+@When[Windows_Wdk_Graphics_Direct3D == "on" && API_MS_WIN_DX_D3DKMT_L1_1_6 == "on" && Windows_Wdk_Graphics_Direct3D_D3DKMTEnumAdapters3 == "on"]
+public unsafe func Windows_D3DKMTEnumAdapters3(param0: CPointer<D3DKMT_ENUMADAPTERS3>): Int32 {
+    return D3DKMTEnumAdapters3(param0)
 }
 
 @When[Windows_Wdk_Graphics_Direct3D == "on"]

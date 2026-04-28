@@ -8,7 +8,6 @@ import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeTy
 import windows_core as windows_core
 import windows_polyfill.{packedReadUInt16, packedReadUInt32, packedWriteUInt16, packedWriteUInt32, unionReadUInt32, unionWriteUInt32}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 
@@ -16074,687 +16073,4228 @@ extend OUTLINETEXTMETRICW <: windows_core.CopyType & windows_core.RuntimeType & 
     }
 }
 
-@When[FONTSUB == "on"]
+@When[Windows_Win32_Graphics_Gdi == "on" && FONTSUB == "on" && Windows_Win32_Graphics_Gdi_CreateFontPackage == "on"]
 @CallingConv[CDECL]
 foreign {
     // pinvoke-hint: cc=cdecl
     func CreateFontPackage(puchSrcBuffer: CPointer<UInt8>, ulSrcBufferSize: UInt32, ppuchFontPackageBuffer: CPointer<CPointer<UInt8>>, pulFontPackageBufferSize: CPointer<UInt32>, pulBytesWritten: CPointer<UInt32>, usFlag: UInt16, usTTCIndex: UInt16, usSubsetFormat: UInt16, usSubsetLanguage: UInt16, usSubsetPlatform: CREATE_FONT_PACKAGE_SUBSET_PLATFORMAbi, usSubsetEncoding: CREATE_FONT_PACKAGE_SUBSET_ENCODINGAbi, pusSubsetKeepList: CPointer<UInt16>, usSubsetListCount: UInt16, lpfnAllocate: CFP_ALLOCPROC, lpfnReAllocate: CFP_REALLOCPROC, lpfnFree: CFP_FREEPROC, lpvReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && FONTSUB == "on" && Windows_Win32_Graphics_Gdi_CreateFontPackage == "on"]
+public unsafe func Windows_CreateFontPackage(puchSrcBuffer: CPointer<UInt8>, ulSrcBufferSize: UInt32, ppuchFontPackageBuffer: CPointer<CPointer<UInt8>>, pulFontPackageBufferSize: CPointer<UInt32>, pulBytesWritten: CPointer<UInt32>, usFlag: UInt16, usTTCIndex: UInt16, usSubsetFormat: UInt16, usSubsetLanguage: UInt16, usSubsetPlatform: CREATE_FONT_PACKAGE_SUBSET_PLATFORMAbi, usSubsetEncoding: CREATE_FONT_PACKAGE_SUBSET_ENCODINGAbi, pusSubsetKeepList: CPointer<UInt16>, usSubsetListCount: UInt16, lpfnAllocate: CFP_ALLOCPROC, lpfnReAllocate: CFP_REALLOCPROC, lpfnFree: CFP_FREEPROC, lpvReserved: CPointer<Unit>): UInt32 {
+    return CreateFontPackage(puchSrcBuffer, ulSrcBufferSize, ppuchFontPackageBuffer, pulFontPackageBufferSize, pulBytesWritten, usFlag, usTTCIndex, usSubsetFormat, usSubsetLanguage, usSubsetPlatform, usSubsetEncoding, pusSubsetKeepList, usSubsetListCount, lpfnAllocate, lpfnReAllocate, lpfnFree, lpvReserved)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && FONTSUB == "on" && Windows_Win32_Graphics_Gdi_MergeFontPackage == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func MergeFontPackage(puchMergeFontBuffer: CPointer<UInt8>, ulMergeFontBufferSize: UInt32, puchFontPackageBuffer: CPointer<UInt8>, ulFontPackageBufferSize: UInt32, ppuchDestBuffer: CPointer<CPointer<UInt8>>, pulDestBufferSize: CPointer<UInt32>, pulBytesWritten: CPointer<UInt32>, usMode: UInt16, lpfnAllocate: CFP_ALLOCPROC, lpfnReAllocate: CFP_REALLOCPROC, lpfnFree: CFP_FREEPROC, lpvReserved: CPointer<Unit>): UInt32
 }
 
-@When[GDI32 == "on"]
+@When[Windows_Win32_Graphics_Gdi == "on" && FONTSUB == "on" && Windows_Win32_Graphics_Gdi_MergeFontPackage == "on"]
+public unsafe func Windows_MergeFontPackage(puchMergeFontBuffer: CPointer<UInt8>, ulMergeFontBufferSize: UInt32, puchFontPackageBuffer: CPointer<UInt8>, ulFontPackageBufferSize: UInt32, ppuchDestBuffer: CPointer<CPointer<UInt8>>, pulDestBufferSize: CPointer<UInt32>, pulBytesWritten: CPointer<UInt32>, usMode: UInt16, lpfnAllocate: CFP_ALLOCPROC, lpfnReAllocate: CFP_REALLOCPROC, lpfnFree: CFP_FREEPROC, lpvReserved: CPointer<Unit>): UInt32 {
+    return MergeFontPackage(puchMergeFontBuffer, ulMergeFontBufferSize, puchFontPackageBuffer, ulFontPackageBufferSize, ppuchDestBuffer, pulDestBufferSize, pulBytesWritten, usMode, lpfnAllocate, lpfnReAllocate, lpfnFree, lpvReserved)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_AbortPath == "on"]
 foreign {
     func AbortPath(hdc: HDC): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_AbortPath == "on"]
+public unsafe func Windows_AbortPath(hdc: HDC): Int32 {
+    return AbortPath(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_AddFontMemResourceEx == "on"]
+foreign {
     // param-hint: pFileView bytes=param[1]
     // param-hint: pvResrved optional reserved
     func AddFontMemResourceEx(pFileView: CPointer<Unit>, cjSize: UInt32, pvResrved: CPointer<Unit>, pNumFonts: CPointer<UInt32>): CPointer<Unit>
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_AddFontMemResourceEx == "on"]
+public unsafe func Windows_AddFontMemResourceEx(pFileView: CPointer<Unit>, cjSize: UInt32, pvResrved: CPointer<Unit>, pNumFonts: CPointer<UInt32>): CPointer<Unit> {
+    return AddFontMemResourceEx(pFileView, cjSize, pvResrved, pNumFonts)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_AddFontResourceA == "on"]
+foreign {
     func AddFontResourceA(param0: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_AddFontResourceA == "on"]
+public unsafe func Windows_AddFontResourceA(param0: CPointer<UInt8>): Int32 {
+    return AddFontResourceA(param0)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_AddFontResourceExA == "on"]
+foreign {
     // param-hint: res optional reserved
     func AddFontResourceExA(name: CPointer<UInt8>, fl: FONT_RESOURCE_CHARACTERISTICSAbi, res: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_AddFontResourceExA == "on"]
+public unsafe func Windows_AddFontResourceExA(name: CPointer<UInt8>, fl: FONT_RESOURCE_CHARACTERISTICSAbi, res: CPointer<Unit>): Int32 {
+    return AddFontResourceExA(name, fl, res)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_AddFontResourceExW == "on"]
+foreign {
     // param-hint: res optional reserved
     func AddFontResourceExW(name: CPointer<UInt16>, fl: FONT_RESOURCE_CHARACTERISTICSAbi, res: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_AddFontResourceExW == "on"]
+public unsafe func Windows_AddFontResourceExW(name: CPointer<UInt16>, fl: FONT_RESOURCE_CHARACTERISTICSAbi, res: CPointer<Unit>): Int32 {
+    return AddFontResourceExW(name, fl, res)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_AddFontResourceW == "on"]
+foreign {
     func AddFontResourceW(param0: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_AddFontResourceW == "on"]
+public unsafe func Windows_AddFontResourceW(param0: CPointer<UInt16>): Int32 {
+    return AddFontResourceW(param0)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_AngleArc == "on"]
+foreign {
     func AngleArc(hdc: HDC, x: Int32, y: Int32, r: UInt32, StartAngle: Float32, SweepAngle: Float32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_AngleArc == "on"]
+public unsafe func Windows_AngleArc(hdc: HDC, x: Int32, y: Int32, r: UInt32, StartAngle: Float32, SweepAngle: Float32): Int32 {
+    return AngleArc(hdc, x, y, r, StartAngle, SweepAngle)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_AnimatePalette == "on"]
+foreign {
     // param-hint: ppe len=param[2]
     func AnimatePalette(hPal: HPALETTE, iStartIndex: UInt32, cEntries: UInt32, ppe: CPointer<PALETTEENTRYAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_AnimatePalette == "on"]
+public unsafe func Windows_AnimatePalette(hPal: HPALETTE, iStartIndex: UInt32, cEntries: UInt32, ppe: CPointer<PALETTEENTRYAbi>): Int32 {
+    return AnimatePalette(hPal, iStartIndex, cEntries, ppe)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_Arc == "on"]
+foreign {
     func Arc(hdc: HDC, x1: Int32, y1: Int32, x2: Int32, y2: Int32, x3: Int32, y3: Int32, x4: Int32, y4: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_Arc == "on"]
+public unsafe func Windows_Arc(hdc: HDC, x1: Int32, y1: Int32, x2: Int32, y2: Int32, x3: Int32, y3: Int32, x4: Int32, y4: Int32): Int32 {
+    return Arc(hdc, x1, y1, x2, y2, x3, y3, x4, y4)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_ArcTo == "on"]
+foreign {
     func ArcTo(hdc: HDC, left: Int32, top: Int32, right: Int32, bottom: Int32, xr1: Int32, yr1: Int32, xr2: Int32, yr2: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_ArcTo == "on"]
+public unsafe func Windows_ArcTo(hdc: HDC, left: Int32, top: Int32, right: Int32, bottom: Int32, xr1: Int32, yr1: Int32, xr2: Int32, yr2: Int32): Int32 {
+    return ArcTo(hdc, left, top, right, bottom, xr1, yr1, xr2, yr2)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_BeginPath == "on"]
+foreign {
     func BeginPath(hdc: HDC): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_BeginPath == "on"]
+public unsafe func Windows_BeginPath(hdc: HDC): Int32 {
+    return BeginPath(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_BitBlt == "on"]
+foreign {
     // param-hint: hdcSrc optional
     // pinvoke-hint: SetLastError
     func BitBlt(hdc: HDC, x: Int32, y: Int32, cx: Int32, cy: Int32, hdcSrc: HDC, x1: Int32, y1: Int32, rop: ROP_CODEAbi): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_BitBlt == "on"]
+public unsafe func Windows_BitBlt(hdc: HDC, x: Int32, y: Int32, cx: Int32, cy: Int32, hdcSrc: HDC, x1: Int32, y1: Int32, rop: ROP_CODEAbi): Int32 {
+    return BitBlt(hdc, x, y, cx, cy, hdcSrc, x1, y1, rop)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CancelDC == "on"]
+foreign {
     func CancelDC(hdc: HDC): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CancelDC == "on"]
+public unsafe func Windows_CancelDC(hdc: HDC): Int32 {
+    return CancelDC(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_Chord == "on"]
+foreign {
     func Chord(hdc: HDC, x1: Int32, y1: Int32, x2: Int32, y2: Int32, x3: Int32, y3: Int32, x4: Int32, y4: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_Chord == "on"]
+public unsafe func Windows_Chord(hdc: HDC, x1: Int32, y1: Int32, x2: Int32, y2: Int32, x3: Int32, y3: Int32, x4: Int32, y4: Int32): Int32 {
+    return Chord(hdc, x1, y1, x2, y2, x3, y3, x4, y4)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CloseEnhMetaFile == "on"]
+foreign {
     func CloseEnhMetaFile(hdc: HDC): HENHMETAFILE
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CloseEnhMetaFile == "on"]
+public unsafe func Windows_CloseEnhMetaFile(hdc: HDC): HENHMETAFILE {
+    return CloseEnhMetaFile(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CloseFigure == "on"]
+foreign {
     func CloseFigure(hdc: HDC): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CloseFigure == "on"]
+public unsafe func Windows_CloseFigure(hdc: HDC): Int32 {
+    return CloseFigure(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CloseMetaFile == "on"]
+foreign {
     func CloseMetaFile(hdc: HDC): HMETAFILE
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CloseMetaFile == "on"]
+public unsafe func Windows_CloseMetaFile(hdc: HDC): HMETAFILE {
+    return CloseMetaFile(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CombineRgn == "on"]
+foreign {
     // param-hint: hrgnDst optional
     // param-hint: hrgnSrc1 optional
     // param-hint: hrgnSrc2 optional
     func CombineRgn(hrgnDst: HRGN, hrgnSrc1: HRGN, hrgnSrc2: HRGN, iMode: RGN_COMBINE_MODEAbi): GDI_REGION_TYPEAbi
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CombineRgn == "on"]
+public unsafe func Windows_CombineRgn(hrgnDst: HRGN, hrgnSrc1: HRGN, hrgnSrc2: HRGN, iMode: RGN_COMBINE_MODEAbi): GDI_REGION_TYPEAbi {
+    return CombineRgn(hrgnDst, hrgnSrc1, hrgnSrc2, iMode)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CombineTransform == "on"]
+foreign {
     func CombineTransform(lpxfOut: CPointer<XFORMAbi>, lpxf1: CPointer<XFORMAbi>, lpxf2: CPointer<XFORMAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CombineTransform == "on"]
+public unsafe func Windows_CombineTransform(lpxfOut: CPointer<XFORMAbi>, lpxf1: CPointer<XFORMAbi>, lpxf2: CPointer<XFORMAbi>): Int32 {
+    return CombineTransform(lpxfOut, lpxf1, lpxf2)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CopyEnhMetaFileA == "on"]
+foreign {
     // param-hint: lpFileName optional
     func CopyEnhMetaFileA(hEnh: HENHMETAFILE, lpFileName: CPointer<UInt8>): HENHMETAFILE
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CopyEnhMetaFileA == "on"]
+public unsafe func Windows_CopyEnhMetaFileA(hEnh: HENHMETAFILE, lpFileName: CPointer<UInt8>): HENHMETAFILE {
+    return CopyEnhMetaFileA(hEnh, lpFileName)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CopyEnhMetaFileW == "on"]
+foreign {
     // param-hint: lpFileName optional
     func CopyEnhMetaFileW(hEnh: HENHMETAFILE, lpFileName: CPointer<UInt16>): HENHMETAFILE
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CopyEnhMetaFileW == "on"]
+public unsafe func Windows_CopyEnhMetaFileW(hEnh: HENHMETAFILE, lpFileName: CPointer<UInt16>): HENHMETAFILE {
+    return CopyEnhMetaFileW(hEnh, lpFileName)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CopyMetaFileA == "on"]
+foreign {
     // param-hint: param1 optional
     func CopyMetaFileA(param0: HMETAFILE, param1: CPointer<UInt8>): HMETAFILE
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CopyMetaFileA == "on"]
+public unsafe func Windows_CopyMetaFileA(param0: HMETAFILE, param1: CPointer<UInt8>): HMETAFILE {
+    return CopyMetaFileA(param0, param1)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CopyMetaFileW == "on"]
+foreign {
     // param-hint: param1 optional
     func CopyMetaFileW(param0: HMETAFILE, param1: CPointer<UInt16>): HMETAFILE
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CopyMetaFileW == "on"]
+public unsafe func Windows_CopyMetaFileW(param0: HMETAFILE, param1: CPointer<UInt16>): HMETAFILE {
+    return CopyMetaFileW(param0, param1)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateBitmap == "on"]
+foreign {
     // param-hint: lpBits optional
     func CreateBitmap(nWidth: Int32, nHeight: Int32, nPlanes: UInt32, nBitCount: UInt32, lpBits: CPointer<Unit>): HBITMAP
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateBitmap == "on"]
+public unsafe func Windows_CreateBitmap(nWidth: Int32, nHeight: Int32, nPlanes: UInt32, nBitCount: UInt32, lpBits: CPointer<Unit>): HBITMAP {
+    return CreateBitmap(nWidth, nHeight, nPlanes, nBitCount, lpBits)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateBitmapIndirect == "on"]
+foreign {
     func CreateBitmapIndirect(pbm: CPointer<BITMAPAbi>): HBITMAP
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateBitmapIndirect == "on"]
+public unsafe func Windows_CreateBitmapIndirect(pbm: CPointer<BITMAPAbi>): HBITMAP {
+    return CreateBitmapIndirect(pbm)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateBrushIndirect == "on"]
+foreign {
     func CreateBrushIndirect(plbrush: CPointer<LOGBRUSHAbi>): HBRUSH
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateBrushIndirect == "on"]
+public unsafe func Windows_CreateBrushIndirect(plbrush: CPointer<LOGBRUSHAbi>): HBRUSH {
+    return CreateBrushIndirect(plbrush)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateCompatibleBitmap == "on"]
+foreign {
     func CreateCompatibleBitmap(hdc: HDC, cx: Int32, cy: Int32): HBITMAP
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateCompatibleBitmap == "on"]
+public unsafe func Windows_CreateCompatibleBitmap(hdc: HDC, cx: Int32, cy: Int32): HBITMAP {
+    return CreateCompatibleBitmap(hdc, cx, cy)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateCompatibleDC == "on"]
+foreign {
     // param-hint: hdc optional
     func CreateCompatibleDC(hdc: HDC): HDC
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateCompatibleDC == "on"]
+public unsafe func Windows_CreateCompatibleDC(hdc: HDC): HDC {
+    return CreateCompatibleDC(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateDCA == "on"]
+foreign {
     // param-hint: pwszDriver optional
     // param-hint: pwszDevice optional
     // param-hint: pszPort optional
     // param-hint: pdm optional
     func CreateDCA(pwszDriver: CPointer<UInt8>, pwszDevice: CPointer<UInt8>, pszPort: CPointer<UInt8>, pdm: CPointer<DEVMODEAAbi>): HDC
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateDCA == "on"]
+public unsafe func Windows_CreateDCA(pwszDriver: CPointer<UInt8>, pwszDevice: CPointer<UInt8>, pszPort: CPointer<UInt8>, pdm: CPointer<DEVMODEAAbi>): HDC {
+    return CreateDCA(pwszDriver, pwszDevice, pszPort, pdm)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateDCW == "on"]
+foreign {
     // param-hint: pwszDriver optional
     // param-hint: pwszDevice optional
     // param-hint: pszPort optional
     // param-hint: pdm optional
     func CreateDCW(pwszDriver: CPointer<UInt16>, pwszDevice: CPointer<UInt16>, pszPort: CPointer<UInt16>, pdm: CPointer<DEVMODEWAbi>): HDC
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateDCW == "on"]
+public unsafe func Windows_CreateDCW(pwszDriver: CPointer<UInt16>, pwszDevice: CPointer<UInt16>, pszPort: CPointer<UInt16>, pdm: CPointer<DEVMODEWAbi>): HDC {
+    return CreateDCW(pwszDriver, pwszDevice, pszPort, pdm)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateDIBPatternBrush == "on"]
+foreign {
     func CreateDIBPatternBrush(h: CPointer<Unit>, iUsage: DIB_USAGEAbi): HBRUSH
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateDIBPatternBrush == "on"]
+public unsafe func Windows_CreateDIBPatternBrush(h: CPointer<Unit>, iUsage: DIB_USAGEAbi): HBRUSH {
+    return CreateDIBPatternBrush(h, iUsage)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateDIBPatternBrushPt == "on"]
+foreign {
     func CreateDIBPatternBrushPt(lpPackedDIB: CPointer<Unit>, iUsage: DIB_USAGEAbi): HBRUSH
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateDIBPatternBrushPt == "on"]
+public unsafe func Windows_CreateDIBPatternBrushPt(lpPackedDIB: CPointer<Unit>, iUsage: DIB_USAGEAbi): HBRUSH {
+    return CreateDIBPatternBrushPt(lpPackedDIB, iUsage)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateDIBSection == "on"]
+foreign {
     // param-hint: hdc optional
     // param-hint: hSection optional
     // pinvoke-hint: SetLastError
     func CreateDIBSection(hdc: HDC, pbmi: CPointer<BITMAPINFOAbi>, usage: DIB_USAGEAbi, ppvBits: CPointer<CPointer<Unit>>, hSection: CPointer<Unit>, offset: UInt32): HBITMAP
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateDIBSection == "on"]
+public unsafe func Windows_CreateDIBSection(hdc: HDC, pbmi: CPointer<BITMAPINFOAbi>, usage: DIB_USAGEAbi, ppvBits: CPointer<CPointer<Unit>>, hSection: CPointer<Unit>, offset: UInt32): HBITMAP {
+    return CreateDIBSection(hdc, pbmi, usage, ppvBits, hSection, offset)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateDIBitmap == "on"]
+foreign {
     // param-hint: pbmih optional
     // param-hint: pjBits optional
     // param-hint: pbmi optional
     func CreateDIBitmap(hdc: HDC, pbmih: CPointer<BITMAPINFOHEADERAbi>, flInit: UInt32, pjBits: CPointer<Unit>, pbmi: CPointer<BITMAPINFOAbi>, iUsage: DIB_USAGEAbi): HBITMAP
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateDIBitmap == "on"]
+public unsafe func Windows_CreateDIBitmap(hdc: HDC, pbmih: CPointer<BITMAPINFOHEADERAbi>, flInit: UInt32, pjBits: CPointer<Unit>, pbmi: CPointer<BITMAPINFOAbi>, iUsage: DIB_USAGEAbi): HBITMAP {
+    return CreateDIBitmap(hdc, pbmih, flInit, pjBits, pbmi, iUsage)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateDiscardableBitmap == "on"]
+foreign {
     func CreateDiscardableBitmap(hdc: HDC, cx: Int32, cy: Int32): HBITMAP
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateDiscardableBitmap == "on"]
+public unsafe func Windows_CreateDiscardableBitmap(hdc: HDC, cx: Int32, cy: Int32): HBITMAP {
+    return CreateDiscardableBitmap(hdc, cx, cy)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateEllipticRgn == "on"]
+foreign {
     func CreateEllipticRgn(x1: Int32, y1: Int32, x2: Int32, y2: Int32): HRGN
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateEllipticRgn == "on"]
+public unsafe func Windows_CreateEllipticRgn(x1: Int32, y1: Int32, x2: Int32, y2: Int32): HRGN {
+    return CreateEllipticRgn(x1, y1, x2, y2)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateEllipticRgnIndirect == "on"]
+foreign {
     func CreateEllipticRgnIndirect(lprect: CPointer<Win32_Foundation.RECTAbi>): HRGN
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateEllipticRgnIndirect == "on"]
+public unsafe func Windows_CreateEllipticRgnIndirect(lprect: CPointer<Win32_Foundation.RECTAbi>): HRGN {
+    return CreateEllipticRgnIndirect(lprect)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateEnhMetaFileA == "on"]
+foreign {
     // param-hint: hdc optional
     // param-hint: lpFilename optional
     // param-hint: lprc optional
     // param-hint: lpDesc optional
     func CreateEnhMetaFileA(hdc: HDC, lpFilename: CPointer<UInt8>, lprc: CPointer<Win32_Foundation.RECTAbi>, lpDesc: CPointer<UInt8>): HDC
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateEnhMetaFileA == "on"]
+public unsafe func Windows_CreateEnhMetaFileA(hdc: HDC, lpFilename: CPointer<UInt8>, lprc: CPointer<Win32_Foundation.RECTAbi>, lpDesc: CPointer<UInt8>): HDC {
+    return CreateEnhMetaFileA(hdc, lpFilename, lprc, lpDesc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateEnhMetaFileW == "on"]
+foreign {
     // param-hint: hdc optional
     // param-hint: lpFilename optional
     // param-hint: lprc optional
     // param-hint: lpDesc optional
     func CreateEnhMetaFileW(hdc: HDC, lpFilename: CPointer<UInt16>, lprc: CPointer<Win32_Foundation.RECTAbi>, lpDesc: CPointer<UInt16>): HDC
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateEnhMetaFileW == "on"]
+public unsafe func Windows_CreateEnhMetaFileW(hdc: HDC, lpFilename: CPointer<UInt16>, lprc: CPointer<Win32_Foundation.RECTAbi>, lpDesc: CPointer<UInt16>): HDC {
+    return CreateEnhMetaFileW(hdc, lpFilename, lprc, lpDesc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateFontA == "on"]
+foreign {
     // param-hint: pszFaceName optional
     func CreateFontA(cHeight: Int32, cWidth: Int32, cEscapement: Int32, cOrientation: Int32, cWeight: Int32, bItalic: UInt32, bUnderline: UInt32, bStrikeOut: UInt32, iCharSet: UInt32, iOutPrecision: UInt32, iClipPrecision: UInt32, iQuality: UInt32, iPitchAndFamily: UInt32, pszFaceName: CPointer<UInt8>): HFONT
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateFontA == "on"]
+public unsafe func Windows_CreateFontA(cHeight: Int32, cWidth: Int32, cEscapement: Int32, cOrientation: Int32, cWeight: Int32, bItalic: UInt32, bUnderline: UInt32, bStrikeOut: UInt32, iCharSet: UInt32, iOutPrecision: UInt32, iClipPrecision: UInt32, iQuality: UInt32, iPitchAndFamily: UInt32, pszFaceName: CPointer<UInt8>): HFONT {
+    return CreateFontA(cHeight, cWidth, cEscapement, cOrientation, cWeight, bItalic, bUnderline, bStrikeOut, iCharSet, iOutPrecision, iClipPrecision, iQuality, iPitchAndFamily, pszFaceName)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateFontIndirectA == "on"]
+foreign {
     func CreateFontIndirectA(lplf: CPointer<LOGFONTAAbi>): HFONT
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateFontIndirectA == "on"]
+public unsafe func Windows_CreateFontIndirectA(lplf: CPointer<LOGFONTAAbi>): HFONT {
+    return CreateFontIndirectA(lplf)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateFontIndirectExA == "on"]
+foreign {
     func CreateFontIndirectExA(param0: CPointer<ENUMLOGFONTEXDVAAbi>): HFONT
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateFontIndirectExA == "on"]
+public unsafe func Windows_CreateFontIndirectExA(param0: CPointer<ENUMLOGFONTEXDVAAbi>): HFONT {
+    return CreateFontIndirectExA(param0)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateFontIndirectExW == "on"]
+foreign {
     func CreateFontIndirectExW(param0: CPointer<ENUMLOGFONTEXDVWAbi>): HFONT
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateFontIndirectExW == "on"]
+public unsafe func Windows_CreateFontIndirectExW(param0: CPointer<ENUMLOGFONTEXDVWAbi>): HFONT {
+    return CreateFontIndirectExW(param0)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateFontIndirectW == "on"]
+foreign {
     func CreateFontIndirectW(lplf: CPointer<LOGFONTWAbi>): HFONT
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateFontIndirectW == "on"]
+public unsafe func Windows_CreateFontIndirectW(lplf: CPointer<LOGFONTWAbi>): HFONT {
+    return CreateFontIndirectW(lplf)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateFontW == "on"]
+foreign {
     // param-hint: pszFaceName optional
     func CreateFontW(cHeight: Int32, cWidth: Int32, cEscapement: Int32, cOrientation: Int32, cWeight: Int32, bItalic: UInt32, bUnderline: UInt32, bStrikeOut: UInt32, iCharSet: UInt32, iOutPrecision: UInt32, iClipPrecision: UInt32, iQuality: UInt32, iPitchAndFamily: UInt32, pszFaceName: CPointer<UInt16>): HFONT
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateFontW == "on"]
+public unsafe func Windows_CreateFontW(cHeight: Int32, cWidth: Int32, cEscapement: Int32, cOrientation: Int32, cWeight: Int32, bItalic: UInt32, bUnderline: UInt32, bStrikeOut: UInt32, iCharSet: UInt32, iOutPrecision: UInt32, iClipPrecision: UInt32, iQuality: UInt32, iPitchAndFamily: UInt32, pszFaceName: CPointer<UInt16>): HFONT {
+    return CreateFontW(cHeight, cWidth, cEscapement, cOrientation, cWeight, bItalic, bUnderline, bStrikeOut, iCharSet, iOutPrecision, iClipPrecision, iQuality, iPitchAndFamily, pszFaceName)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateHalftonePalette == "on"]
+foreign {
     // param-hint: hdc optional
     func CreateHalftonePalette(hdc: HDC): HPALETTE
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateHalftonePalette == "on"]
+public unsafe func Windows_CreateHalftonePalette(hdc: HDC): HPALETTE {
+    return CreateHalftonePalette(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateHatchBrush == "on"]
+foreign {
     func CreateHatchBrush(iHatch: HATCH_BRUSH_STYLEAbi, color: UInt32): HBRUSH
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateHatchBrush == "on"]
+public unsafe func Windows_CreateHatchBrush(iHatch: HATCH_BRUSH_STYLEAbi, color: UInt32): HBRUSH {
+    return CreateHatchBrush(iHatch, color)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateICA == "on"]
+foreign {
     // param-hint: pszDriver optional
     // param-hint: pszDevice optional
     // param-hint: pszPort optional
     // param-hint: pdm optional
     func CreateICA(pszDriver: CPointer<UInt8>, pszDevice: CPointer<UInt8>, pszPort: CPointer<UInt8>, pdm: CPointer<DEVMODEAAbi>): HDC
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateICA == "on"]
+public unsafe func Windows_CreateICA(pszDriver: CPointer<UInt8>, pszDevice: CPointer<UInt8>, pszPort: CPointer<UInt8>, pdm: CPointer<DEVMODEAAbi>): HDC {
+    return CreateICA(pszDriver, pszDevice, pszPort, pdm)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateICW == "on"]
+foreign {
     // param-hint: pszDriver optional
     // param-hint: pszDevice optional
     // param-hint: pszPort optional
     // param-hint: pdm optional
     func CreateICW(pszDriver: CPointer<UInt16>, pszDevice: CPointer<UInt16>, pszPort: CPointer<UInt16>, pdm: CPointer<DEVMODEWAbi>): HDC
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateICW == "on"]
+public unsafe func Windows_CreateICW(pszDriver: CPointer<UInt16>, pszDevice: CPointer<UInt16>, pszPort: CPointer<UInt16>, pdm: CPointer<DEVMODEWAbi>): HDC {
+    return CreateICW(pszDriver, pszDevice, pszPort, pdm)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateMetaFileA == "on"]
+foreign {
     // param-hint: pszFile optional
     func CreateMetaFileA(pszFile: CPointer<UInt8>): HDC
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateMetaFileA == "on"]
+public unsafe func Windows_CreateMetaFileA(pszFile: CPointer<UInt8>): HDC {
+    return CreateMetaFileA(pszFile)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateMetaFileW == "on"]
+foreign {
     // param-hint: pszFile optional
     func CreateMetaFileW(pszFile: CPointer<UInt16>): HDC
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateMetaFileW == "on"]
+public unsafe func Windows_CreateMetaFileW(pszFile: CPointer<UInt16>): HDC {
+    return CreateMetaFileW(pszFile)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreatePalette == "on"]
+foreign {
     func CreatePalette(plpal: CPointer<LOGPALETTEAbi>): HPALETTE
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreatePalette == "on"]
+public unsafe func Windows_CreatePalette(plpal: CPointer<LOGPALETTEAbi>): HPALETTE {
+    return CreatePalette(plpal)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreatePatternBrush == "on"]
+foreign {
     func CreatePatternBrush(hbm: HBITMAP): HBRUSH
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreatePatternBrush == "on"]
+public unsafe func Windows_CreatePatternBrush(hbm: HBITMAP): HBRUSH {
+    return CreatePatternBrush(hbm)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreatePen == "on"]
+foreign {
     func CreatePen(iStyle: PEN_STYLEAbi, cWidth: Int32, color: UInt32): HPEN
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreatePen == "on"]
+public unsafe func Windows_CreatePen(iStyle: PEN_STYLEAbi, cWidth: Int32, color: UInt32): HPEN {
+    return CreatePen(iStyle, cWidth, color)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreatePenIndirect == "on"]
+foreign {
     func CreatePenIndirect(plpen: CPointer<LOGPENAbi>): HPEN
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreatePenIndirect == "on"]
+public unsafe func Windows_CreatePenIndirect(plpen: CPointer<LOGPENAbi>): HPEN {
+    return CreatePenIndirect(plpen)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreatePolyPolygonRgn == "on"]
+foreign {
     // param-hint: pc len=param[2]
     func CreatePolyPolygonRgn(pptl: CPointer<Win32_Foundation.POINTAbi>, pc: CPointer<Int32>, cPoly: Int32, iMode: CREATE_POLYGON_RGN_MODEAbi): HRGN
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreatePolyPolygonRgn == "on"]
+public unsafe func Windows_CreatePolyPolygonRgn(pptl: CPointer<Win32_Foundation.POINTAbi>, pc: CPointer<Int32>, cPoly: Int32, iMode: CREATE_POLYGON_RGN_MODEAbi): HRGN {
+    return CreatePolyPolygonRgn(pptl, pc, cPoly, iMode)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreatePolygonRgn == "on"]
+foreign {
     // param-hint: pptl len=param[1]
     func CreatePolygonRgn(pptl: CPointer<Win32_Foundation.POINTAbi>, cPoint: Int32, iMode: CREATE_POLYGON_RGN_MODEAbi): HRGN
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreatePolygonRgn == "on"]
+public unsafe func Windows_CreatePolygonRgn(pptl: CPointer<Win32_Foundation.POINTAbi>, cPoint: Int32, iMode: CREATE_POLYGON_RGN_MODEAbi): HRGN {
+    return CreatePolygonRgn(pptl, cPoint, iMode)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateRectRgn == "on"]
+foreign {
     func CreateRectRgn(x1: Int32, y1: Int32, x2: Int32, y2: Int32): HRGN
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateRectRgn == "on"]
+public unsafe func Windows_CreateRectRgn(x1: Int32, y1: Int32, x2: Int32, y2: Int32): HRGN {
+    return CreateRectRgn(x1, y1, x2, y2)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateRectRgnIndirect == "on"]
+foreign {
     func CreateRectRgnIndirect(lprect: CPointer<Win32_Foundation.RECTAbi>): HRGN
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateRectRgnIndirect == "on"]
+public unsafe func Windows_CreateRectRgnIndirect(lprect: CPointer<Win32_Foundation.RECTAbi>): HRGN {
+    return CreateRectRgnIndirect(lprect)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateRoundRectRgn == "on"]
+foreign {
     func CreateRoundRectRgn(x1: Int32, y1: Int32, x2: Int32, y2: Int32, w: Int32, h: Int32): HRGN
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateRoundRectRgn == "on"]
+public unsafe func Windows_CreateRoundRectRgn(x1: Int32, y1: Int32, x2: Int32, y2: Int32, w: Int32, h: Int32): HRGN {
+    return CreateRoundRectRgn(x1, y1, x2, y2, w, h)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateScalableFontResourceA == "on"]
+foreign {
     // param-hint: lpszPath optional
     // pinvoke-hint: SetLastError
     func CreateScalableFontResourceA(fdwHidden: UInt32, lpszFont: CPointer<UInt8>, lpszFile: CPointer<UInt8>, lpszPath: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateScalableFontResourceA == "on"]
+public unsafe func Windows_CreateScalableFontResourceA(fdwHidden: UInt32, lpszFont: CPointer<UInt8>, lpszFile: CPointer<UInt8>, lpszPath: CPointer<UInt8>): Int32 {
+    return CreateScalableFontResourceA(fdwHidden, lpszFont, lpszFile, lpszPath)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateScalableFontResourceW == "on"]
+foreign {
     // param-hint: lpszPath optional
     // pinvoke-hint: SetLastError
     func CreateScalableFontResourceW(fdwHidden: UInt32, lpszFont: CPointer<UInt16>, lpszFile: CPointer<UInt16>, lpszPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateScalableFontResourceW == "on"]
+public unsafe func Windows_CreateScalableFontResourceW(fdwHidden: UInt32, lpszFont: CPointer<UInt16>, lpszFile: CPointer<UInt16>, lpszPath: CPointer<UInt16>): Int32 {
+    return CreateScalableFontResourceW(fdwHidden, lpszFont, lpszFile, lpszPath)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateSolidBrush == "on"]
+foreign {
     func CreateSolidBrush(color: UInt32): HBRUSH
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_CreateSolidBrush == "on"]
+public unsafe func Windows_CreateSolidBrush(color: UInt32): HBRUSH {
+    return CreateSolidBrush(color)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_DPtoLP == "on"]
+foreign {
     // param-hint: lppt len=param[2]
     func DPtoLP(hdc: HDC, lppt: CPointer<Win32_Foundation.POINTAbi>, c: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_DPtoLP == "on"]
+public unsafe func Windows_DPtoLP(hdc: HDC, lppt: CPointer<Win32_Foundation.POINTAbi>, c: Int32): Int32 {
+    return DPtoLP(hdc, lppt, c)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_DeleteDC == "on"]
+foreign {
     func DeleteDC(hdc: HDC): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_DeleteDC == "on"]
+public unsafe func Windows_DeleteDC(hdc: HDC): Int32 {
+    return DeleteDC(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_DeleteEnhMetaFile == "on"]
+foreign {
     // param-hint: hmf optional
     func DeleteEnhMetaFile(hmf: HENHMETAFILE): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_DeleteEnhMetaFile == "on"]
+public unsafe func Windows_DeleteEnhMetaFile(hmf: HENHMETAFILE): Int32 {
+    return DeleteEnhMetaFile(hmf)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_DeleteMetaFile == "on"]
+foreign {
     func DeleteMetaFile(hmf: HMETAFILE): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_DeleteMetaFile == "on"]
+public unsafe func Windows_DeleteMetaFile(hmf: HMETAFILE): Int32 {
+    return DeleteMetaFile(hmf)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_DeleteObject == "on"]
+foreign {
     func DeleteObject(ho: HGDIOBJ): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_DeleteObject == "on"]
+public unsafe func Windows_DeleteObject(ho: HGDIOBJ): Int32 {
+    return DeleteObject(ho)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_DrawEscape == "on"]
+foreign {
     // param-hint: lpIn bytes=param[2] optional
     func DrawEscape(hdc: HDC, iEscape: Int32, cjIn: Int32, lpIn: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_DrawEscape == "on"]
+public unsafe func Windows_DrawEscape(hdc: HDC, iEscape: Int32, cjIn: Int32, lpIn: CPointer<UInt8>): Int32 {
+    return DrawEscape(hdc, iEscape, cjIn, lpIn)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_Ellipse == "on"]
+foreign {
     func Ellipse(hdc: HDC, left: Int32, top: Int32, right: Int32, bottom: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_Ellipse == "on"]
+public unsafe func Windows_Ellipse(hdc: HDC, left: Int32, top: Int32, right: Int32, bottom: Int32): Int32 {
+    return Ellipse(hdc, left, top, right, bottom)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_EndPath == "on"]
+foreign {
     func EndPath(hdc: HDC): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_EndPath == "on"]
+public unsafe func Windows_EndPath(hdc: HDC): Int32 {
+    return EndPath(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_EnumEnhMetaFile == "on"]
+foreign {
     // param-hint: hdc optional
     // param-hint: param3 optional
     // param-hint: lpRect optional
     func EnumEnhMetaFile(hdc: HDC, hmf: HENHMETAFILE, proc: ENHMFENUMPROC, param3: CPointer<Unit>, lpRect: CPointer<Win32_Foundation.RECTAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_EnumEnhMetaFile == "on"]
+public unsafe func Windows_EnumEnhMetaFile(hdc: HDC, hmf: HENHMETAFILE, proc: ENHMFENUMPROC, param3: CPointer<Unit>, lpRect: CPointer<Win32_Foundation.RECTAbi>): Int32 {
+    return EnumEnhMetaFile(hdc, hmf, proc, param3, lpRect)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_EnumFontFamiliesA == "on"]
+foreign {
     // param-hint: lpLogfont optional
     func EnumFontFamiliesA(hdc: HDC, lpLogfont: CPointer<UInt8>, lpProc: FONTENUMPROCA, lParam: IntNative): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_EnumFontFamiliesA == "on"]
+public unsafe func Windows_EnumFontFamiliesA(hdc: HDC, lpLogfont: CPointer<UInt8>, lpProc: FONTENUMPROCA, lParam: IntNative): Int32 {
+    return EnumFontFamiliesA(hdc, lpLogfont, lpProc, lParam)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_EnumFontFamiliesExA == "on"]
+foreign {
     func EnumFontFamiliesExA(hdc: HDC, lpLogfont: CPointer<LOGFONTAAbi>, lpProc: FONTENUMPROCA, lParam: IntNative, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_EnumFontFamiliesExA == "on"]
+public unsafe func Windows_EnumFontFamiliesExA(hdc: HDC, lpLogfont: CPointer<LOGFONTAAbi>, lpProc: FONTENUMPROCA, lParam: IntNative, dwFlags: UInt32): Int32 {
+    return EnumFontFamiliesExA(hdc, lpLogfont, lpProc, lParam, dwFlags)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_EnumFontFamiliesExW == "on"]
+foreign {
     func EnumFontFamiliesExW(hdc: HDC, lpLogfont: CPointer<LOGFONTWAbi>, lpProc: FONTENUMPROCW, lParam: IntNative, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_EnumFontFamiliesExW == "on"]
+public unsafe func Windows_EnumFontFamiliesExW(hdc: HDC, lpLogfont: CPointer<LOGFONTWAbi>, lpProc: FONTENUMPROCW, lParam: IntNative, dwFlags: UInt32): Int32 {
+    return EnumFontFamiliesExW(hdc, lpLogfont, lpProc, lParam, dwFlags)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_EnumFontFamiliesW == "on"]
+foreign {
     // param-hint: lpLogfont optional
     func EnumFontFamiliesW(hdc: HDC, lpLogfont: CPointer<UInt16>, lpProc: FONTENUMPROCW, lParam: IntNative): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_EnumFontFamiliesW == "on"]
+public unsafe func Windows_EnumFontFamiliesW(hdc: HDC, lpLogfont: CPointer<UInt16>, lpProc: FONTENUMPROCW, lParam: IntNative): Int32 {
+    return EnumFontFamiliesW(hdc, lpLogfont, lpProc, lParam)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_EnumFontsA == "on"]
+foreign {
     // param-hint: lpLogfont optional
     func EnumFontsA(hdc: HDC, lpLogfont: CPointer<UInt8>, lpProc: FONTENUMPROCA, lParam: IntNative): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_EnumFontsA == "on"]
+public unsafe func Windows_EnumFontsA(hdc: HDC, lpLogfont: CPointer<UInt8>, lpProc: FONTENUMPROCA, lParam: IntNative): Int32 {
+    return EnumFontsA(hdc, lpLogfont, lpProc, lParam)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_EnumFontsW == "on"]
+foreign {
     // param-hint: lpLogfont optional
     func EnumFontsW(hdc: HDC, lpLogfont: CPointer<UInt16>, lpProc: FONTENUMPROCW, lParam: IntNative): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_EnumFontsW == "on"]
+public unsafe func Windows_EnumFontsW(hdc: HDC, lpLogfont: CPointer<UInt16>, lpProc: FONTENUMPROCW, lParam: IntNative): Int32 {
+    return EnumFontsW(hdc, lpLogfont, lpProc, lParam)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_EnumMetaFile == "on"]
+foreign {
     // param-hint: param3 optional
     func EnumMetaFile(hdc: HDC, hmf: HMETAFILE, proc: MFENUMPROC, param3: IntNative): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_EnumMetaFile == "on"]
+public unsafe func Windows_EnumMetaFile(hdc: HDC, hmf: HMETAFILE, proc: MFENUMPROC, param3: IntNative): Int32 {
+    return EnumMetaFile(hdc, hmf, proc, param3)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_EnumObjects == "on"]
+foreign {
     func EnumObjects(hdc: HDC, nType: OBJ_TYPEAbi, lpFunc: GOBJENUMPROC, lParam: IntNative): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_EnumObjects == "on"]
+public unsafe func Windows_EnumObjects(hdc: HDC, nType: OBJ_TYPEAbi, lpFunc: GOBJENUMPROC, lParam: IntNative): Int32 {
+    return EnumObjects(hdc, nType, lpFunc, lParam)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_EqualRgn == "on"]
+foreign {
     func EqualRgn(hrgn1: HRGN, hrgn2: HRGN): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_EqualRgn == "on"]
+public unsafe func Windows_EqualRgn(hrgn1: HRGN, hrgn2: HRGN): Int32 {
+    return EqualRgn(hrgn1, hrgn2)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_ExcludeClipRect == "on"]
+foreign {
     func ExcludeClipRect(hdc: HDC, left: Int32, top: Int32, right: Int32, bottom: Int32): GDI_REGION_TYPEAbi
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_ExcludeClipRect == "on"]
+public unsafe func Windows_ExcludeClipRect(hdc: HDC, left: Int32, top: Int32, right: Int32, bottom: Int32): GDI_REGION_TYPEAbi {
+    return ExcludeClipRect(hdc, left, top, right, bottom)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_ExtCreatePen == "on"]
+foreign {
     // param-hint: pstyle len=param[3] optional
     func ExtCreatePen(iPenStyle: UInt32, cWidth: UInt32, plbrush: CPointer<LOGBRUSHAbi>, cStyle: UInt32, pstyle: CPointer<UInt32>): HPEN
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_ExtCreatePen == "on"]
+public unsafe func Windows_ExtCreatePen(iPenStyle: UInt32, cWidth: UInt32, plbrush: CPointer<LOGBRUSHAbi>, cStyle: UInt32, pstyle: CPointer<UInt32>): HPEN {
+    return ExtCreatePen(iPenStyle, cWidth, plbrush, cStyle, pstyle)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_ExtCreateRegion == "on"]
+foreign {
     // param-hint: lpx optional
     // param-hint: lpData bytes=param[1]
     func ExtCreateRegion(lpx: CPointer<XFORMAbi>, nCount: UInt32, lpData: CPointer<RGNDATAAbi>): HRGN
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_ExtCreateRegion == "on"]
+public unsafe func Windows_ExtCreateRegion(lpx: CPointer<XFORMAbi>, nCount: UInt32, lpData: CPointer<RGNDATAAbi>): HRGN {
+    return ExtCreateRegion(lpx, nCount, lpData)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_ExtFloodFill == "on"]
+foreign {
     func ExtFloodFill(hdc: HDC, x: Int32, y: Int32, color: UInt32, type_: EXT_FLOOD_FILL_TYPEAbi): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_ExtFloodFill == "on"]
+public unsafe func Windows_ExtFloodFill(hdc: HDC, x: Int32, y: Int32, color: UInt32, type_: EXT_FLOOD_FILL_TYPEAbi): Int32 {
+    return ExtFloodFill(hdc, x, y, color, type_)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_ExtSelectClipRgn == "on"]
+foreign {
     // param-hint: hrgn optional
     func ExtSelectClipRgn(hdc: HDC, hrgn: HRGN, mode: RGN_COMBINE_MODEAbi): GDI_REGION_TYPEAbi
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_ExtSelectClipRgn == "on"]
+public unsafe func Windows_ExtSelectClipRgn(hdc: HDC, hrgn: HRGN, mode: RGN_COMBINE_MODEAbi): GDI_REGION_TYPEAbi {
+    return ExtSelectClipRgn(hdc, hrgn, mode)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_ExtTextOutA == "on"]
+foreign {
     // param-hint: lprect optional
     // param-hint: lpString len=param[6] optional
     // param-hint: lpDx len=param[6] optional
     func ExtTextOutA(hdc: HDC, x: Int32, y: Int32, options: ETO_OPTIONSAbi, lprect: CPointer<Win32_Foundation.RECTAbi>, lpString: CPointer<UInt8>, c: UInt32, lpDx: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_ExtTextOutA == "on"]
+public unsafe func Windows_ExtTextOutA(hdc: HDC, x: Int32, y: Int32, options: ETO_OPTIONSAbi, lprect: CPointer<Win32_Foundation.RECTAbi>, lpString: CPointer<UInt8>, c: UInt32, lpDx: CPointer<Int32>): Int32 {
+    return ExtTextOutA(hdc, x, y, options, lprect, lpString, c, lpDx)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_ExtTextOutW == "on"]
+foreign {
     // param-hint: lprect optional
     // param-hint: lpString len=param[6] optional
     // param-hint: lpDx len=param[6] optional
     func ExtTextOutW(hdc: HDC, x: Int32, y: Int32, options: ETO_OPTIONSAbi, lprect: CPointer<Win32_Foundation.RECTAbi>, lpString: CPointer<UInt16>, c: UInt32, lpDx: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_ExtTextOutW == "on"]
+public unsafe func Windows_ExtTextOutW(hdc: HDC, x: Int32, y: Int32, options: ETO_OPTIONSAbi, lprect: CPointer<Win32_Foundation.RECTAbi>, lpString: CPointer<UInt16>, c: UInt32, lpDx: CPointer<Int32>): Int32 {
+    return ExtTextOutW(hdc, x, y, options, lprect, lpString, c, lpDx)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_FillPath == "on"]
+foreign {
     func FillPath(hdc: HDC): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_FillPath == "on"]
+public unsafe func Windows_FillPath(hdc: HDC): Int32 {
+    return FillPath(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_FillRgn == "on"]
+foreign {
     func FillRgn(hdc: HDC, hrgn: HRGN, hbr: HBRUSH): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_FillRgn == "on"]
+public unsafe func Windows_FillRgn(hdc: HDC, hrgn: HRGN, hbr: HBRUSH): Int32 {
+    return FillRgn(hdc, hrgn, hbr)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_FixBrushOrgEx == "on"]
+foreign {
     // param-hint: ptl optional
     func FixBrushOrgEx(hdc: HDC, x: Int32, y: Int32, ptl: CPointer<Win32_Foundation.POINTAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_FixBrushOrgEx == "on"]
+public unsafe func Windows_FixBrushOrgEx(hdc: HDC, x: Int32, y: Int32, ptl: CPointer<Win32_Foundation.POINTAbi>): Int32 {
+    return FixBrushOrgEx(hdc, x, y, ptl)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_FlattenPath == "on"]
+foreign {
     func FlattenPath(hdc: HDC): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_FlattenPath == "on"]
+public unsafe func Windows_FlattenPath(hdc: HDC): Int32 {
+    return FlattenPath(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_FloodFill == "on"]
+foreign {
     func FloodFill(hdc: HDC, x: Int32, y: Int32, color: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_FloodFill == "on"]
+public unsafe func Windows_FloodFill(hdc: HDC, x: Int32, y: Int32, color: UInt32): Int32 {
+    return FloodFill(hdc, x, y, color)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_FrameRgn == "on"]
+foreign {
     func FrameRgn(hdc: HDC, hrgn: HRGN, hbr: HBRUSH, w: Int32, h: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_FrameRgn == "on"]
+public unsafe func Windows_FrameRgn(hdc: HDC, hrgn: HRGN, hbr: HBRUSH, w: Int32, h: Int32): Int32 {
+    return FrameRgn(hdc, hrgn, hbr, w, h)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GdiAlphaBlend == "on"]
+foreign {
     func GdiAlphaBlend(hdcDest: HDC, xoriginDest: Int32, yoriginDest: Int32, wDest: Int32, hDest: Int32, hdcSrc: HDC, xoriginSrc: Int32, yoriginSrc: Int32, wSrc: Int32, hSrc: Int32, ftn: BLENDFUNCTIONAbi): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GdiAlphaBlend == "on"]
+public unsafe func Windows_GdiAlphaBlend(hdcDest: HDC, xoriginDest: Int32, yoriginDest: Int32, wDest: Int32, hDest: Int32, hdcSrc: HDC, xoriginSrc: Int32, yoriginSrc: Int32, wSrc: Int32, hSrc: Int32, ftn: BLENDFUNCTIONAbi): Int32 {
+    return GdiAlphaBlend(hdcDest, xoriginDest, yoriginDest, wDest, hDest, hdcSrc, xoriginSrc, yoriginSrc, wSrc, hSrc, ftn)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GdiComment == "on"]
+foreign {
     // param-hint: lpData bytes=param[1]
     func GdiComment(hdc: HDC, nSize: UInt32, lpData: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GdiComment == "on"]
+public unsafe func Windows_GdiComment(hdc: HDC, nSize: UInt32, lpData: CPointer<UInt8>): Int32 {
+    return GdiComment(hdc, nSize, lpData)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GdiFlush == "on"]
+foreign {
     func GdiFlush(): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GdiFlush == "on"]
+public unsafe func Windows_GdiFlush(): Int32 {
+    return GdiFlush()
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GdiGetBatchLimit == "on"]
+foreign {
     func GdiGetBatchLimit(): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GdiGetBatchLimit == "on"]
+public unsafe func Windows_GdiGetBatchLimit(): UInt32 {
+    return GdiGetBatchLimit()
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GdiGradientFill == "on"]
+foreign {
     // param-hint: pVertex len=param[2]
     func GdiGradientFill(hdc: HDC, pVertex: CPointer<TRIVERTEXAbi>, nVertex: UInt32, pMesh: CPointer<Unit>, nCount: UInt32, ulMode: GRADIENT_FILLAbi): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GdiGradientFill == "on"]
+public unsafe func Windows_GdiGradientFill(hdc: HDC, pVertex: CPointer<TRIVERTEXAbi>, nVertex: UInt32, pMesh: CPointer<Unit>, nCount: UInt32, ulMode: GRADIENT_FILLAbi): Int32 {
+    return GdiGradientFill(hdc, pVertex, nVertex, pMesh, nCount, ulMode)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GdiSetBatchLimit == "on"]
+foreign {
     func GdiSetBatchLimit(dw: UInt32): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GdiSetBatchLimit == "on"]
+public unsafe func Windows_GdiSetBatchLimit(dw: UInt32): UInt32 {
+    return GdiSetBatchLimit(dw)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GdiTransparentBlt == "on"]
+foreign {
     func GdiTransparentBlt(hdcDest: HDC, xoriginDest: Int32, yoriginDest: Int32, wDest: Int32, hDest: Int32, hdcSrc: HDC, xoriginSrc: Int32, yoriginSrc: Int32, wSrc: Int32, hSrc: Int32, crTransparent: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GdiTransparentBlt == "on"]
+public unsafe func Windows_GdiTransparentBlt(hdcDest: HDC, xoriginDest: Int32, yoriginDest: Int32, wDest: Int32, hDest: Int32, hdcSrc: HDC, xoriginSrc: Int32, yoriginSrc: Int32, wSrc: Int32, hSrc: Int32, crTransparent: UInt32): Int32 {
+    return GdiTransparentBlt(hdcDest, xoriginDest, yoriginDest, wDest, hDest, hdcSrc, xoriginSrc, yoriginSrc, wSrc, hSrc, crTransparent)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetArcDirection == "on"]
+foreign {
     func GetArcDirection(hdc: HDC): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetArcDirection == "on"]
+public unsafe func Windows_GetArcDirection(hdc: HDC): Int32 {
+    return GetArcDirection(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetAspectRatioFilterEx == "on"]
+foreign {
     func GetAspectRatioFilterEx(hdc: HDC, lpsize: CPointer<Win32_Foundation.SIZEAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetAspectRatioFilterEx == "on"]
+public unsafe func Windows_GetAspectRatioFilterEx(hdc: HDC, lpsize: CPointer<Win32_Foundation.SIZEAbi>): Int32 {
+    return GetAspectRatioFilterEx(hdc, lpsize)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetBitmapBits == "on"]
+foreign {
     // param-hint: lpvBits bytes=param[1]
     func GetBitmapBits(hbit: HBITMAP, cb: Int32, lpvBits: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetBitmapBits == "on"]
+public unsafe func Windows_GetBitmapBits(hbit: HBITMAP, cb: Int32, lpvBits: CPointer<Unit>): Int32 {
+    return GetBitmapBits(hbit, cb, lpvBits)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetBitmapDimensionEx == "on"]
+foreign {
     func GetBitmapDimensionEx(hbit: HBITMAP, lpsize: CPointer<Win32_Foundation.SIZEAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetBitmapDimensionEx == "on"]
+public unsafe func Windows_GetBitmapDimensionEx(hbit: HBITMAP, lpsize: CPointer<Win32_Foundation.SIZEAbi>): Int32 {
+    return GetBitmapDimensionEx(hbit, lpsize)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetBkColor == "on"]
+foreign {
     func GetBkColor(hdc: HDC): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetBkColor == "on"]
+public unsafe func Windows_GetBkColor(hdc: HDC): UInt32 {
+    return GetBkColor(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetBkMode == "on"]
+foreign {
     func GetBkMode(hdc: HDC): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetBkMode == "on"]
+public unsafe func Windows_GetBkMode(hdc: HDC): Int32 {
+    return GetBkMode(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetBoundsRect == "on"]
+foreign {
     func GetBoundsRect(hdc: HDC, lprect: CPointer<Win32_Foundation.RECTAbi>, flags: UInt32): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetBoundsRect == "on"]
+public unsafe func Windows_GetBoundsRect(hdc: HDC, lprect: CPointer<Win32_Foundation.RECTAbi>, flags: UInt32): UInt32 {
+    return GetBoundsRect(hdc, lprect, flags)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetBrushOrgEx == "on"]
+foreign {
     func GetBrushOrgEx(hdc: HDC, lppt: CPointer<Win32_Foundation.POINTAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetBrushOrgEx == "on"]
+public unsafe func Windows_GetBrushOrgEx(hdc: HDC, lppt: CPointer<Win32_Foundation.POINTAbi>): Int32 {
+    return GetBrushOrgEx(hdc, lppt)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetCharABCWidthsA == "on"]
+foreign {
     func GetCharABCWidthsA(hdc: HDC, wFirst: UInt32, wLast: UInt32, lpABC: CPointer<ABCAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetCharABCWidthsA == "on"]
+public unsafe func Windows_GetCharABCWidthsA(hdc: HDC, wFirst: UInt32, wLast: UInt32, lpABC: CPointer<ABCAbi>): Int32 {
+    return GetCharABCWidthsA(hdc, wFirst, wLast, lpABC)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetCharABCWidthsFloatA == "on"]
+foreign {
     func GetCharABCWidthsFloatA(hdc: HDC, iFirst: UInt32, iLast: UInt32, lpABC: CPointer<ABCFLOATAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetCharABCWidthsFloatA == "on"]
+public unsafe func Windows_GetCharABCWidthsFloatA(hdc: HDC, iFirst: UInt32, iLast: UInt32, lpABC: CPointer<ABCFLOATAbi>): Int32 {
+    return GetCharABCWidthsFloatA(hdc, iFirst, iLast, lpABC)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetCharABCWidthsFloatW == "on"]
+foreign {
     func GetCharABCWidthsFloatW(hdc: HDC, iFirst: UInt32, iLast: UInt32, lpABC: CPointer<ABCFLOATAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetCharABCWidthsFloatW == "on"]
+public unsafe func Windows_GetCharABCWidthsFloatW(hdc: HDC, iFirst: UInt32, iLast: UInt32, lpABC: CPointer<ABCFLOATAbi>): Int32 {
+    return GetCharABCWidthsFloatW(hdc, iFirst, iLast, lpABC)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetCharABCWidthsI == "on"]
+foreign {
     // param-hint: pgi len=param[2] optional
     // param-hint: pabc len=param[2]
     func GetCharABCWidthsI(hdc: HDC, giFirst: UInt32, cgi: UInt32, pgi: CPointer<UInt16>, pabc: CPointer<ABCAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetCharABCWidthsI == "on"]
+public unsafe func Windows_GetCharABCWidthsI(hdc: HDC, giFirst: UInt32, cgi: UInt32, pgi: CPointer<UInt16>, pabc: CPointer<ABCAbi>): Int32 {
+    return GetCharABCWidthsI(hdc, giFirst, cgi, pgi, pabc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetCharABCWidthsW == "on"]
+foreign {
     func GetCharABCWidthsW(hdc: HDC, wFirst: UInt32, wLast: UInt32, lpABC: CPointer<ABCAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetCharABCWidthsW == "on"]
+public unsafe func Windows_GetCharABCWidthsW(hdc: HDC, wFirst: UInt32, wLast: UInt32, lpABC: CPointer<ABCAbi>): Int32 {
+    return GetCharABCWidthsW(hdc, wFirst, wLast, lpABC)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetCharWidth32A == "on"]
+foreign {
     func GetCharWidth32A(hdc: HDC, iFirst: UInt32, iLast: UInt32, lpBuffer: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetCharWidth32A == "on"]
+public unsafe func Windows_GetCharWidth32A(hdc: HDC, iFirst: UInt32, iLast: UInt32, lpBuffer: CPointer<Int32>): Int32 {
+    return GetCharWidth32A(hdc, iFirst, iLast, lpBuffer)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetCharWidth32W == "on"]
+foreign {
     func GetCharWidth32W(hdc: HDC, iFirst: UInt32, iLast: UInt32, lpBuffer: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetCharWidth32W == "on"]
+public unsafe func Windows_GetCharWidth32W(hdc: HDC, iFirst: UInt32, iLast: UInt32, lpBuffer: CPointer<Int32>): Int32 {
+    return GetCharWidth32W(hdc, iFirst, iLast, lpBuffer)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetCharWidthA == "on"]
+foreign {
     func GetCharWidthA(hdc: HDC, iFirst: UInt32, iLast: UInt32, lpBuffer: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetCharWidthA == "on"]
+public unsafe func Windows_GetCharWidthA(hdc: HDC, iFirst: UInt32, iLast: UInt32, lpBuffer: CPointer<Int32>): Int32 {
+    return GetCharWidthA(hdc, iFirst, iLast, lpBuffer)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetCharWidthFloatA == "on"]
+foreign {
     func GetCharWidthFloatA(hdc: HDC, iFirst: UInt32, iLast: UInt32, lpBuffer: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetCharWidthFloatA == "on"]
+public unsafe func Windows_GetCharWidthFloatA(hdc: HDC, iFirst: UInt32, iLast: UInt32, lpBuffer: CPointer<Float32>): Int32 {
+    return GetCharWidthFloatA(hdc, iFirst, iLast, lpBuffer)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetCharWidthFloatW == "on"]
+foreign {
     func GetCharWidthFloatW(hdc: HDC, iFirst: UInt32, iLast: UInt32, lpBuffer: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetCharWidthFloatW == "on"]
+public unsafe func Windows_GetCharWidthFloatW(hdc: HDC, iFirst: UInt32, iLast: UInt32, lpBuffer: CPointer<Float32>): Int32 {
+    return GetCharWidthFloatW(hdc, iFirst, iLast, lpBuffer)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetCharWidthI == "on"]
+foreign {
     // param-hint: pgi len=param[2] optional
     // param-hint: piWidths len=param[2]
     func GetCharWidthI(hdc: HDC, giFirst: UInt32, cgi: UInt32, pgi: CPointer<UInt16>, piWidths: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetCharWidthI == "on"]
+public unsafe func Windows_GetCharWidthI(hdc: HDC, giFirst: UInt32, cgi: UInt32, pgi: CPointer<UInt16>, piWidths: CPointer<Int32>): Int32 {
+    return GetCharWidthI(hdc, giFirst, cgi, pgi, piWidths)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetCharWidthW == "on"]
+foreign {
     func GetCharWidthW(hdc: HDC, iFirst: UInt32, iLast: UInt32, lpBuffer: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetCharWidthW == "on"]
+public unsafe func Windows_GetCharWidthW(hdc: HDC, iFirst: UInt32, iLast: UInt32, lpBuffer: CPointer<Int32>): Int32 {
+    return GetCharWidthW(hdc, iFirst, iLast, lpBuffer)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetCharacterPlacementA == "on"]
+foreign {
     // param-hint: lpString len=param[2]
     func GetCharacterPlacementA(hdc: HDC, lpString: CPointer<UInt8>, nCount: Int32, nMexExtent: Int32, lpResults: CPointer<GCP_RESULTSAAbi>, dwFlags: GET_CHARACTER_PLACEMENT_FLAGSAbi): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetCharacterPlacementA == "on"]
+public unsafe func Windows_GetCharacterPlacementA(hdc: HDC, lpString: CPointer<UInt8>, nCount: Int32, nMexExtent: Int32, lpResults: CPointer<GCP_RESULTSAAbi>, dwFlags: GET_CHARACTER_PLACEMENT_FLAGSAbi): UInt32 {
+    return GetCharacterPlacementA(hdc, lpString, nCount, nMexExtent, lpResults, dwFlags)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetCharacterPlacementW == "on"]
+foreign {
     // param-hint: lpString len=param[2]
     func GetCharacterPlacementW(hdc: HDC, lpString: CPointer<UInt16>, nCount: Int32, nMexExtent: Int32, lpResults: CPointer<GCP_RESULTSWAbi>, dwFlags: GET_CHARACTER_PLACEMENT_FLAGSAbi): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetCharacterPlacementW == "on"]
+public unsafe func Windows_GetCharacterPlacementW(hdc: HDC, lpString: CPointer<UInt16>, nCount: Int32, nMexExtent: Int32, lpResults: CPointer<GCP_RESULTSWAbi>, dwFlags: GET_CHARACTER_PLACEMENT_FLAGSAbi): UInt32 {
+    return GetCharacterPlacementW(hdc, lpString, nCount, nMexExtent, lpResults, dwFlags)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetClipBox == "on"]
+foreign {
     func GetClipBox(hdc: HDC, lprect: CPointer<Win32_Foundation.RECTAbi>): GDI_REGION_TYPEAbi
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetClipBox == "on"]
+public unsafe func Windows_GetClipBox(hdc: HDC, lprect: CPointer<Win32_Foundation.RECTAbi>): GDI_REGION_TYPEAbi {
+    return GetClipBox(hdc, lprect)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetClipRgn == "on"]
+foreign {
     func GetClipRgn(hdc: HDC, hrgn: HRGN): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetClipRgn == "on"]
+public unsafe func Windows_GetClipRgn(hdc: HDC, hrgn: HRGN): Int32 {
+    return GetClipRgn(hdc, hrgn)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetColorAdjustment == "on"]
+foreign {
     func GetColorAdjustment(hdc: HDC, lpca: CPointer<COLORADJUSTMENTAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetColorAdjustment == "on"]
+public unsafe func Windows_GetColorAdjustment(hdc: HDC, lpca: CPointer<COLORADJUSTMENTAbi>): Int32 {
+    return GetColorAdjustment(hdc, lpca)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetCurrentObject == "on"]
+foreign {
     func GetCurrentObject(hdc: HDC, type_: UInt32): HGDIOBJ
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetCurrentObject == "on"]
+public unsafe func Windows_GetCurrentObject(hdc: HDC, type_: UInt32): HGDIOBJ {
+    return GetCurrentObject(hdc, type_)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetCurrentPositionEx == "on"]
+foreign {
     func GetCurrentPositionEx(hdc: HDC, lppt: CPointer<Win32_Foundation.POINTAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetCurrentPositionEx == "on"]
+public unsafe func Windows_GetCurrentPositionEx(hdc: HDC, lppt: CPointer<Win32_Foundation.POINTAbi>): Int32 {
+    return GetCurrentPositionEx(hdc, lppt)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetDCBrushColor == "on"]
+foreign {
     func GetDCBrushColor(hdc: HDC): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetDCBrushColor == "on"]
+public unsafe func Windows_GetDCBrushColor(hdc: HDC): UInt32 {
+    return GetDCBrushColor(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetDCOrgEx == "on"]
+foreign {
     func GetDCOrgEx(hdc: HDC, lppt: CPointer<Win32_Foundation.POINTAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetDCOrgEx == "on"]
+public unsafe func Windows_GetDCOrgEx(hdc: HDC, lppt: CPointer<Win32_Foundation.POINTAbi>): Int32 {
+    return GetDCOrgEx(hdc, lppt)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetDCPenColor == "on"]
+foreign {
     func GetDCPenColor(hdc: HDC): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetDCPenColor == "on"]
+public unsafe func Windows_GetDCPenColor(hdc: HDC): UInt32 {
+    return GetDCPenColor(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetDIBColorTable == "on"]
+foreign {
     // param-hint: prgbq len=param[2]
     func GetDIBColorTable(hdc: HDC, iStart: UInt32, cEntries: UInt32, prgbq: CPointer<RGBQUADAbi>): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetDIBColorTable == "on"]
+public unsafe func Windows_GetDIBColorTable(hdc: HDC, iStart: UInt32, cEntries: UInt32, prgbq: CPointer<RGBQUADAbi>): UInt32 {
+    return GetDIBColorTable(hdc, iStart, cEntries, prgbq)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetDIBits == "on"]
+foreign {
     // param-hint: lpvBits optional
     func GetDIBits(hdc: HDC, hbm: HBITMAP, start: UInt32, cLines: UInt32, lpvBits: CPointer<Unit>, lpbmi: CPointer<BITMAPINFOAbi>, usage: DIB_USAGEAbi): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetDIBits == "on"]
+public unsafe func Windows_GetDIBits(hdc: HDC, hbm: HBITMAP, start: UInt32, cLines: UInt32, lpvBits: CPointer<Unit>, lpbmi: CPointer<BITMAPINFOAbi>, usage: DIB_USAGEAbi): Int32 {
+    return GetDIBits(hdc, hbm, start, cLines, lpvBits, lpbmi, usage)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetDeviceCaps == "on"]
+foreign {
     // param-hint: hdc optional
     func GetDeviceCaps(hdc: HDC, index: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetDeviceCaps == "on"]
+public unsafe func Windows_GetDeviceCaps(hdc: HDC, index: Int32): Int32 {
+    return GetDeviceCaps(hdc, index)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetEnhMetaFileA == "on"]
+foreign {
     func GetEnhMetaFileA(lpName: CPointer<UInt8>): HENHMETAFILE
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetEnhMetaFileA == "on"]
+public unsafe func Windows_GetEnhMetaFileA(lpName: CPointer<UInt8>): HENHMETAFILE {
+    return GetEnhMetaFileA(lpName)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetEnhMetaFileBits == "on"]
+foreign {
     // param-hint: lpData bytes=param[1] optional
     func GetEnhMetaFileBits(hEMF: HENHMETAFILE, nSize: UInt32, lpData: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetEnhMetaFileBits == "on"]
+public unsafe func Windows_GetEnhMetaFileBits(hEMF: HENHMETAFILE, nSize: UInt32, lpData: CPointer<UInt8>): UInt32 {
+    return GetEnhMetaFileBits(hEMF, nSize, lpData)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetEnhMetaFileDescriptionA == "on"]
+foreign {
     // param-hint: lpDescription len=param[1] optional
     func GetEnhMetaFileDescriptionA(hemf: HENHMETAFILE, cchBuffer: UInt32, lpDescription: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetEnhMetaFileDescriptionA == "on"]
+public unsafe func Windows_GetEnhMetaFileDescriptionA(hemf: HENHMETAFILE, cchBuffer: UInt32, lpDescription: CPointer<UInt8>): UInt32 {
+    return GetEnhMetaFileDescriptionA(hemf, cchBuffer, lpDescription)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetEnhMetaFileDescriptionW == "on"]
+foreign {
     // param-hint: lpDescription len=param[1] optional
     func GetEnhMetaFileDescriptionW(hemf: HENHMETAFILE, cchBuffer: UInt32, lpDescription: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetEnhMetaFileDescriptionW == "on"]
+public unsafe func Windows_GetEnhMetaFileDescriptionW(hemf: HENHMETAFILE, cchBuffer: UInt32, lpDescription: CPointer<UInt16>): UInt32 {
+    return GetEnhMetaFileDescriptionW(hemf, cchBuffer, lpDescription)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetEnhMetaFileHeader == "on"]
+foreign {
     // param-hint: lpEnhMetaHeader bytes=param[1] optional
     func GetEnhMetaFileHeader(hemf: HENHMETAFILE, nSize: UInt32, lpEnhMetaHeader: CPointer<ENHMETAHEADERAbi>): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetEnhMetaFileHeader == "on"]
+public unsafe func Windows_GetEnhMetaFileHeader(hemf: HENHMETAFILE, nSize: UInt32, lpEnhMetaHeader: CPointer<ENHMETAHEADERAbi>): UInt32 {
+    return GetEnhMetaFileHeader(hemf, nSize, lpEnhMetaHeader)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetEnhMetaFilePaletteEntries == "on"]
+foreign {
     // param-hint: lpPaletteEntries len=param[1] optional
     func GetEnhMetaFilePaletteEntries(hemf: HENHMETAFILE, nNumEntries: UInt32, lpPaletteEntries: CPointer<PALETTEENTRYAbi>): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetEnhMetaFilePaletteEntries == "on"]
+public unsafe func Windows_GetEnhMetaFilePaletteEntries(hemf: HENHMETAFILE, nNumEntries: UInt32, lpPaletteEntries: CPointer<PALETTEENTRYAbi>): UInt32 {
+    return GetEnhMetaFilePaletteEntries(hemf, nNumEntries, lpPaletteEntries)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetEnhMetaFileW == "on"]
+foreign {
     func GetEnhMetaFileW(lpName: CPointer<UInt16>): HENHMETAFILE
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetEnhMetaFileW == "on"]
+public unsafe func Windows_GetEnhMetaFileW(lpName: CPointer<UInt16>): HENHMETAFILE {
+    return GetEnhMetaFileW(lpName)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetFontData == "on"]
+foreign {
     // param-hint: pvBuffer bytes=param[4] optional
     func GetFontData(hdc: HDC, dwTable: UInt32, dwOffset: UInt32, pvBuffer: CPointer<Unit>, cjBuffer: UInt32): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetFontData == "on"]
+public unsafe func Windows_GetFontData(hdc: HDC, dwTable: UInt32, dwOffset: UInt32, pvBuffer: CPointer<Unit>, cjBuffer: UInt32): UInt32 {
+    return GetFontData(hdc, dwTable, dwOffset, pvBuffer, cjBuffer)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetFontLanguageInfo == "on"]
+foreign {
     func GetFontLanguageInfo(hdc: HDC): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetFontLanguageInfo == "on"]
+public unsafe func Windows_GetFontLanguageInfo(hdc: HDC): UInt32 {
+    return GetFontLanguageInfo(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetFontUnicodeRanges == "on"]
+foreign {
     // param-hint: lpgs optional
     func GetFontUnicodeRanges(hdc: HDC, lpgs: CPointer<GLYPHSETAbi>): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetFontUnicodeRanges == "on"]
+public unsafe func Windows_GetFontUnicodeRanges(hdc: HDC, lpgs: CPointer<GLYPHSETAbi>): UInt32 {
+    return GetFontUnicodeRanges(hdc, lpgs)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetGlyphIndicesA == "on"]
+foreign {
     // param-hint: lpstr len=param[2]
     // param-hint: pgi len=param[2]
     func GetGlyphIndicesA(hdc: HDC, lpstr: CPointer<UInt8>, c: Int32, pgi: CPointer<UInt16>, fl: UInt32): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetGlyphIndicesA == "on"]
+public unsafe func Windows_GetGlyphIndicesA(hdc: HDC, lpstr: CPointer<UInt8>, c: Int32, pgi: CPointer<UInt16>, fl: UInt32): UInt32 {
+    return GetGlyphIndicesA(hdc, lpstr, c, pgi, fl)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetGlyphIndicesW == "on"]
+foreign {
     // param-hint: lpstr len=param[2]
     // param-hint: pgi len=param[2]
     func GetGlyphIndicesW(hdc: HDC, lpstr: CPointer<UInt16>, c: Int32, pgi: CPointer<UInt16>, fl: UInt32): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetGlyphIndicesW == "on"]
+public unsafe func Windows_GetGlyphIndicesW(hdc: HDC, lpstr: CPointer<UInt16>, c: Int32, pgi: CPointer<UInt16>, fl: UInt32): UInt32 {
+    return GetGlyphIndicesW(hdc, lpstr, c, pgi, fl)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetGlyphOutlineA == "on"]
+foreign {
     // param-hint: pvBuffer bytes=param[4] optional
     func GetGlyphOutlineA(hdc: HDC, uChar: UInt32, fuFormat: GET_GLYPH_OUTLINE_FORMATAbi, lpgm: CPointer<GLYPHMETRICSAbi>, cjBuffer: UInt32, pvBuffer: CPointer<Unit>, lpmat2: CPointer<MAT2Abi>): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetGlyphOutlineA == "on"]
+public unsafe func Windows_GetGlyphOutlineA(hdc: HDC, uChar: UInt32, fuFormat: GET_GLYPH_OUTLINE_FORMATAbi, lpgm: CPointer<GLYPHMETRICSAbi>, cjBuffer: UInt32, pvBuffer: CPointer<Unit>, lpmat2: CPointer<MAT2Abi>): UInt32 {
+    return GetGlyphOutlineA(hdc, uChar, fuFormat, lpgm, cjBuffer, pvBuffer, lpmat2)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetGlyphOutlineW == "on"]
+foreign {
     // param-hint: pvBuffer bytes=param[4] optional
     func GetGlyphOutlineW(hdc: HDC, uChar: UInt32, fuFormat: GET_GLYPH_OUTLINE_FORMATAbi, lpgm: CPointer<GLYPHMETRICSAbi>, cjBuffer: UInt32, pvBuffer: CPointer<Unit>, lpmat2: CPointer<MAT2Abi>): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetGlyphOutlineW == "on"]
+public unsafe func Windows_GetGlyphOutlineW(hdc: HDC, uChar: UInt32, fuFormat: GET_GLYPH_OUTLINE_FORMATAbi, lpgm: CPointer<GLYPHMETRICSAbi>, cjBuffer: UInt32, pvBuffer: CPointer<Unit>, lpmat2: CPointer<MAT2Abi>): UInt32 {
+    return GetGlyphOutlineW(hdc, uChar, fuFormat, lpgm, cjBuffer, pvBuffer, lpmat2)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetGraphicsMode == "on"]
+foreign {
     func GetGraphicsMode(hdc: HDC): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetGraphicsMode == "on"]
+public unsafe func Windows_GetGraphicsMode(hdc: HDC): Int32 {
+    return GetGraphicsMode(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetKerningPairsA == "on"]
+foreign {
     // param-hint: lpKernPair len=param[1] optional
     func GetKerningPairsA(hdc: HDC, nPairs: UInt32, lpKernPair: CPointer<KERNINGPAIRAbi>): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetKerningPairsA == "on"]
+public unsafe func Windows_GetKerningPairsA(hdc: HDC, nPairs: UInt32, lpKernPair: CPointer<KERNINGPAIRAbi>): UInt32 {
+    return GetKerningPairsA(hdc, nPairs, lpKernPair)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetKerningPairsW == "on"]
+foreign {
     // param-hint: lpKernPair len=param[1] optional
     func GetKerningPairsW(hdc: HDC, nPairs: UInt32, lpKernPair: CPointer<KERNINGPAIRAbi>): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetKerningPairsW == "on"]
+public unsafe func Windows_GetKerningPairsW(hdc: HDC, nPairs: UInt32, lpKernPair: CPointer<KERNINGPAIRAbi>): UInt32 {
+    return GetKerningPairsW(hdc, nPairs, lpKernPair)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetLayout == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetLayout(hdc: HDC): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetLayout == "on"]
+public unsafe func Windows_GetLayout(hdc: HDC): UInt32 {
+    return GetLayout(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetMapMode == "on"]
+foreign {
     func GetMapMode(hdc: HDC): HDC_MAP_MODEAbi
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetMapMode == "on"]
+public unsafe func Windows_GetMapMode(hdc: HDC): HDC_MAP_MODEAbi {
+    return GetMapMode(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetMetaFileA == "on"]
+foreign {
     func GetMetaFileA(lpName: CPointer<UInt8>): HMETAFILE
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetMetaFileA == "on"]
+public unsafe func Windows_GetMetaFileA(lpName: CPointer<UInt8>): HMETAFILE {
+    return GetMetaFileA(lpName)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetMetaFileBitsEx == "on"]
+foreign {
     // param-hint: lpData bytes=param[1] optional
     func GetMetaFileBitsEx(hMF: HMETAFILE, cbBuffer: UInt32, lpData: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetMetaFileBitsEx == "on"]
+public unsafe func Windows_GetMetaFileBitsEx(hMF: HMETAFILE, cbBuffer: UInt32, lpData: CPointer<Unit>): UInt32 {
+    return GetMetaFileBitsEx(hMF, cbBuffer, lpData)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetMetaFileW == "on"]
+foreign {
     func GetMetaFileW(lpName: CPointer<UInt16>): HMETAFILE
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetMetaFileW == "on"]
+public unsafe func Windows_GetMetaFileW(lpName: CPointer<UInt16>): HMETAFILE {
+    return GetMetaFileW(lpName)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetMetaRgn == "on"]
+foreign {
     func GetMetaRgn(hdc: HDC, hrgn: HRGN): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetMetaRgn == "on"]
+public unsafe func Windows_GetMetaRgn(hdc: HDC, hrgn: HRGN): Int32 {
+    return GetMetaRgn(hdc, hrgn)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetMiterLimit == "on"]
+foreign {
     func GetMiterLimit(hdc: HDC, plimit: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetMiterLimit == "on"]
+public unsafe func Windows_GetMiterLimit(hdc: HDC, plimit: CPointer<Float32>): Int32 {
+    return GetMiterLimit(hdc, plimit)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetNearestColor == "on"]
+foreign {
     func GetNearestColor(hdc: HDC, color: UInt32): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetNearestColor == "on"]
+public unsafe func Windows_GetNearestColor(hdc: HDC, color: UInt32): UInt32 {
+    return GetNearestColor(hdc, color)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetNearestPaletteIndex == "on"]
+foreign {
     func GetNearestPaletteIndex(h: HPALETTE, color: UInt32): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetNearestPaletteIndex == "on"]
+public unsafe func Windows_GetNearestPaletteIndex(h: HPALETTE, color: UInt32): UInt32 {
+    return GetNearestPaletteIndex(h, color)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetObjectA == "on"]
+foreign {
     // param-hint: pv bytes=param[1] optional
     func GetObjectA(h: HGDIOBJ, c: Int32, pv: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetObjectA == "on"]
+public unsafe func Windows_GetObjectA(h: HGDIOBJ, c: Int32, pv: CPointer<Unit>): Int32 {
+    return GetObjectA(h, c, pv)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetObjectType == "on"]
+foreign {
     func GetObjectType(h: HGDIOBJ): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetObjectType == "on"]
+public unsafe func Windows_GetObjectType(h: HGDIOBJ): UInt32 {
+    return GetObjectType(h)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetObjectW == "on"]
+foreign {
     // param-hint: pv bytes=param[1] optional
     func GetObjectW(h: HGDIOBJ, c: Int32, pv: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetObjectW == "on"]
+public unsafe func Windows_GetObjectW(h: HGDIOBJ, c: Int32, pv: CPointer<Unit>): Int32 {
+    return GetObjectW(h, c, pv)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetOutlineTextMetricsA == "on"]
+foreign {
     // param-hint: potm bytes=param[1] optional
     func GetOutlineTextMetricsA(hdc: HDC, cjCopy: UInt32, potm: CPointer<OUTLINETEXTMETRICAAbi>): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetOutlineTextMetricsA == "on"]
+public unsafe func Windows_GetOutlineTextMetricsA(hdc: HDC, cjCopy: UInt32, potm: CPointer<OUTLINETEXTMETRICAAbi>): UInt32 {
+    return GetOutlineTextMetricsA(hdc, cjCopy, potm)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetOutlineTextMetricsW == "on"]
+foreign {
     // param-hint: potm bytes=param[1] optional
     func GetOutlineTextMetricsW(hdc: HDC, cjCopy: UInt32, potm: CPointer<OUTLINETEXTMETRICWAbi>): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetOutlineTextMetricsW == "on"]
+public unsafe func Windows_GetOutlineTextMetricsW(hdc: HDC, cjCopy: UInt32, potm: CPointer<OUTLINETEXTMETRICWAbi>): UInt32 {
+    return GetOutlineTextMetricsW(hdc, cjCopy, potm)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetPaletteEntries == "on"]
+foreign {
     // param-hint: pPalEntries len=param[2] optional
     func GetPaletteEntries(hpal: HPALETTE, iStart: UInt32, cEntries: UInt32, pPalEntries: CPointer<PALETTEENTRYAbi>): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetPaletteEntries == "on"]
+public unsafe func Windows_GetPaletteEntries(hpal: HPALETTE, iStart: UInt32, cEntries: UInt32, pPalEntries: CPointer<PALETTEENTRYAbi>): UInt32 {
+    return GetPaletteEntries(hpal, iStart, cEntries, pPalEntries)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetPath == "on"]
+foreign {
     // param-hint: apt len=param[3] optional
     // param-hint: aj len=param[3] optional
     func GetPath(hdc: HDC, apt: CPointer<Win32_Foundation.POINTAbi>, aj: CPointer<UInt8>, cpt: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetPath == "on"]
+public unsafe func Windows_GetPath(hdc: HDC, apt: CPointer<Win32_Foundation.POINTAbi>, aj: CPointer<UInt8>, cpt: Int32): Int32 {
+    return GetPath(hdc, apt, aj, cpt)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetPixel == "on"]
+foreign {
     func GetPixel(hdc: HDC, x: Int32, y: Int32): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetPixel == "on"]
+public unsafe func Windows_GetPixel(hdc: HDC, x: Int32, y: Int32): UInt32 {
+    return GetPixel(hdc, x, y)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetPolyFillMode == "on"]
+foreign {
     func GetPolyFillMode(hdc: HDC): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetPolyFillMode == "on"]
+public unsafe func Windows_GetPolyFillMode(hdc: HDC): Int32 {
+    return GetPolyFillMode(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetROP2 == "on"]
+foreign {
     func GetROP2(hdc: HDC): R2_MODEAbi
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetROP2 == "on"]
+public unsafe func Windows_GetROP2(hdc: HDC): R2_MODEAbi {
+    return GetROP2(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetRandomRgn == "on"]
+foreign {
     func GetRandomRgn(hdc: HDC, hrgn: HRGN, i: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetRandomRgn == "on"]
+public unsafe func Windows_GetRandomRgn(hdc: HDC, hrgn: HRGN, i: Int32): Int32 {
+    return GetRandomRgn(hdc, hrgn, i)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetRasterizerCaps == "on"]
+foreign {
     // param-hint: lpraststat bytes=param[1]
     func GetRasterizerCaps(lpraststat: CPointer<RASTERIZER_STATUSAbi>, cjBytes: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetRasterizerCaps == "on"]
+public unsafe func Windows_GetRasterizerCaps(lpraststat: CPointer<RASTERIZER_STATUSAbi>, cjBytes: UInt32): Int32 {
+    return GetRasterizerCaps(lpraststat, cjBytes)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetRegionData == "on"]
+foreign {
     // param-hint: lpRgnData bytes=param[1] optional
     func GetRegionData(hrgn: HRGN, nCount: UInt32, lpRgnData: CPointer<RGNDATAAbi>): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetRegionData == "on"]
+public unsafe func Windows_GetRegionData(hrgn: HRGN, nCount: UInt32, lpRgnData: CPointer<RGNDATAAbi>): UInt32 {
+    return GetRegionData(hrgn, nCount, lpRgnData)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetRgnBox == "on"]
+foreign {
     func GetRgnBox(hrgn: HRGN, lprc: CPointer<Win32_Foundation.RECTAbi>): GDI_REGION_TYPEAbi
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetRgnBox == "on"]
+public unsafe func Windows_GetRgnBox(hrgn: HRGN, lprc: CPointer<Win32_Foundation.RECTAbi>): GDI_REGION_TYPEAbi {
+    return GetRgnBox(hrgn, lprc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetStockObject == "on"]
+foreign {
     func GetStockObject(i: GET_STOCK_OBJECT_FLAGSAbi): HGDIOBJ
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetStockObject == "on"]
+public unsafe func Windows_GetStockObject(i: GET_STOCK_OBJECT_FLAGSAbi): HGDIOBJ {
+    return GetStockObject(i)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetStretchBltMode == "on"]
+foreign {
     func GetStretchBltMode(hdc: HDC): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetStretchBltMode == "on"]
+public unsafe func Windows_GetStretchBltMode(hdc: HDC): Int32 {
+    return GetStretchBltMode(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetSystemPaletteEntries == "on"]
+foreign {
     // param-hint: pPalEntries len=param[2] optional
     func GetSystemPaletteEntries(hdc: HDC, iStart: UInt32, cEntries: UInt32, pPalEntries: CPointer<PALETTEENTRYAbi>): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetSystemPaletteEntries == "on"]
+public unsafe func Windows_GetSystemPaletteEntries(hdc: HDC, iStart: UInt32, cEntries: UInt32, pPalEntries: CPointer<PALETTEENTRYAbi>): UInt32 {
+    return GetSystemPaletteEntries(hdc, iStart, cEntries, pPalEntries)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetSystemPaletteUse == "on"]
+foreign {
     func GetSystemPaletteUse(hdc: HDC): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetSystemPaletteUse == "on"]
+public unsafe func Windows_GetSystemPaletteUse(hdc: HDC): UInt32 {
+    return GetSystemPaletteUse(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetTextAlign == "on"]
+foreign {
     func GetTextAlign(hdc: HDC): TEXT_ALIGN_OPTIONSAbi
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetTextAlign == "on"]
+public unsafe func Windows_GetTextAlign(hdc: HDC): TEXT_ALIGN_OPTIONSAbi {
+    return GetTextAlign(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetTextCharacterExtra == "on"]
+foreign {
     func GetTextCharacterExtra(hdc: HDC): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetTextCharacterExtra == "on"]
+public unsafe func Windows_GetTextCharacterExtra(hdc: HDC): Int32 {
+    return GetTextCharacterExtra(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetTextColor == "on"]
+foreign {
     func GetTextColor(hdc: HDC): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetTextColor == "on"]
+public unsafe func Windows_GetTextColor(hdc: HDC): UInt32 {
+    return GetTextColor(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetTextExtentExPointA == "on"]
+foreign {
     // param-hint: lpszString len=param[2]
     // param-hint: lpnFit optional
     // param-hint: lpnDx len=param[2] optional
     func GetTextExtentExPointA(hdc: HDC, lpszString: CPointer<UInt8>, cchString: Int32, nMaxExtent: Int32, lpnFit: CPointer<Int32>, lpnDx: CPointer<Int32>, lpSize: CPointer<Win32_Foundation.SIZEAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetTextExtentExPointA == "on"]
+public unsafe func Windows_GetTextExtentExPointA(hdc: HDC, lpszString: CPointer<UInt8>, cchString: Int32, nMaxExtent: Int32, lpnFit: CPointer<Int32>, lpnDx: CPointer<Int32>, lpSize: CPointer<Win32_Foundation.SIZEAbi>): Int32 {
+    return GetTextExtentExPointA(hdc, lpszString, cchString, nMaxExtent, lpnFit, lpnDx, lpSize)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetTextExtentExPointI == "on"]
+foreign {
     // param-hint: lpwszString len=param[2]
     // param-hint: lpnFit optional
     // param-hint: lpnDx len=param[2] optional
     func GetTextExtentExPointI(hdc: HDC, lpwszString: CPointer<UInt16>, cwchString: Int32, nMaxExtent: Int32, lpnFit: CPointer<Int32>, lpnDx: CPointer<Int32>, lpSize: CPointer<Win32_Foundation.SIZEAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetTextExtentExPointI == "on"]
+public unsafe func Windows_GetTextExtentExPointI(hdc: HDC, lpwszString: CPointer<UInt16>, cwchString: Int32, nMaxExtent: Int32, lpnFit: CPointer<Int32>, lpnDx: CPointer<Int32>, lpSize: CPointer<Win32_Foundation.SIZEAbi>): Int32 {
+    return GetTextExtentExPointI(hdc, lpwszString, cwchString, nMaxExtent, lpnFit, lpnDx, lpSize)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetTextExtentExPointW == "on"]
+foreign {
     // param-hint: lpszString len=param[2]
     // param-hint: lpnFit optional
     // param-hint: lpnDx len=param[2] optional
     func GetTextExtentExPointW(hdc: HDC, lpszString: CPointer<UInt16>, cchString: Int32, nMaxExtent: Int32, lpnFit: CPointer<Int32>, lpnDx: CPointer<Int32>, lpSize: CPointer<Win32_Foundation.SIZEAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetTextExtentExPointW == "on"]
+public unsafe func Windows_GetTextExtentExPointW(hdc: HDC, lpszString: CPointer<UInt16>, cchString: Int32, nMaxExtent: Int32, lpnFit: CPointer<Int32>, lpnDx: CPointer<Int32>, lpSize: CPointer<Win32_Foundation.SIZEAbi>): Int32 {
+    return GetTextExtentExPointW(hdc, lpszString, cchString, nMaxExtent, lpnFit, lpnDx, lpSize)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetTextExtentPoint32A == "on"]
+foreign {
     // param-hint: lpString len=param[2]
     func GetTextExtentPoint32A(hdc: HDC, lpString: CPointer<UInt8>, c: Int32, psizl: CPointer<Win32_Foundation.SIZEAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetTextExtentPoint32A == "on"]
+public unsafe func Windows_GetTextExtentPoint32A(hdc: HDC, lpString: CPointer<UInt8>, c: Int32, psizl: CPointer<Win32_Foundation.SIZEAbi>): Int32 {
+    return GetTextExtentPoint32A(hdc, lpString, c, psizl)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetTextExtentPoint32W == "on"]
+foreign {
     // param-hint: lpString len=param[2]
     func GetTextExtentPoint32W(hdc: HDC, lpString: CPointer<UInt16>, c: Int32, psizl: CPointer<Win32_Foundation.SIZEAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetTextExtentPoint32W == "on"]
+public unsafe func Windows_GetTextExtentPoint32W(hdc: HDC, lpString: CPointer<UInt16>, c: Int32, psizl: CPointer<Win32_Foundation.SIZEAbi>): Int32 {
+    return GetTextExtentPoint32W(hdc, lpString, c, psizl)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetTextExtentPointA == "on"]
+foreign {
     // param-hint: lpString len=param[2]
     func GetTextExtentPointA(hdc: HDC, lpString: CPointer<UInt8>, c: Int32, lpsz: CPointer<Win32_Foundation.SIZEAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetTextExtentPointA == "on"]
+public unsafe func Windows_GetTextExtentPointA(hdc: HDC, lpString: CPointer<UInt8>, c: Int32, lpsz: CPointer<Win32_Foundation.SIZEAbi>): Int32 {
+    return GetTextExtentPointA(hdc, lpString, c, lpsz)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetTextExtentPointI == "on"]
+foreign {
     // param-hint: pgiIn len=param[2]
     func GetTextExtentPointI(hdc: HDC, pgiIn: CPointer<UInt16>, cgi: Int32, psize: CPointer<Win32_Foundation.SIZEAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetTextExtentPointI == "on"]
+public unsafe func Windows_GetTextExtentPointI(hdc: HDC, pgiIn: CPointer<UInt16>, cgi: Int32, psize: CPointer<Win32_Foundation.SIZEAbi>): Int32 {
+    return GetTextExtentPointI(hdc, pgiIn, cgi, psize)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetTextExtentPointW == "on"]
+foreign {
     // param-hint: lpString len=param[2]
     func GetTextExtentPointW(hdc: HDC, lpString: CPointer<UInt16>, c: Int32, lpsz: CPointer<Win32_Foundation.SIZEAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetTextExtentPointW == "on"]
+public unsafe func Windows_GetTextExtentPointW(hdc: HDC, lpString: CPointer<UInt16>, c: Int32, lpsz: CPointer<Win32_Foundation.SIZEAbi>): Int32 {
+    return GetTextExtentPointW(hdc, lpString, c, lpsz)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetTextFaceA == "on"]
+foreign {
     // param-hint: lpName len=param[1] optional
     func GetTextFaceA(hdc: HDC, c: Int32, lpName: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetTextFaceA == "on"]
+public unsafe func Windows_GetTextFaceA(hdc: HDC, c: Int32, lpName: CPointer<UInt8>): Int32 {
+    return GetTextFaceA(hdc, c, lpName)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetTextFaceW == "on"]
+foreign {
     // param-hint: lpName len=param[1] optional
     func GetTextFaceW(hdc: HDC, c: Int32, lpName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetTextFaceW == "on"]
+public unsafe func Windows_GetTextFaceW(hdc: HDC, c: Int32, lpName: CPointer<UInt16>): Int32 {
+    return GetTextFaceW(hdc, c, lpName)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetTextMetricsA == "on"]
+foreign {
     func GetTextMetricsA(hdc: HDC, lptm: CPointer<TEXTMETRICAAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetTextMetricsA == "on"]
+public unsafe func Windows_GetTextMetricsA(hdc: HDC, lptm: CPointer<TEXTMETRICAAbi>): Int32 {
+    return GetTextMetricsA(hdc, lptm)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetTextMetricsW == "on"]
+foreign {
     func GetTextMetricsW(hdc: HDC, lptm: CPointer<TEXTMETRICWAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetTextMetricsW == "on"]
+public unsafe func Windows_GetTextMetricsW(hdc: HDC, lptm: CPointer<TEXTMETRICWAbi>): Int32 {
+    return GetTextMetricsW(hdc, lptm)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetViewportExtEx == "on"]
+foreign {
     func GetViewportExtEx(hdc: HDC, lpsize: CPointer<Win32_Foundation.SIZEAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetViewportExtEx == "on"]
+public unsafe func Windows_GetViewportExtEx(hdc: HDC, lpsize: CPointer<Win32_Foundation.SIZEAbi>): Int32 {
+    return GetViewportExtEx(hdc, lpsize)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetViewportOrgEx == "on"]
+foreign {
     func GetViewportOrgEx(hdc: HDC, lppoint: CPointer<Win32_Foundation.POINTAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetViewportOrgEx == "on"]
+public unsafe func Windows_GetViewportOrgEx(hdc: HDC, lppoint: CPointer<Win32_Foundation.POINTAbi>): Int32 {
+    return GetViewportOrgEx(hdc, lppoint)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetWinMetaFileBits == "on"]
+foreign {
     // param-hint: pData16 bytes=param[1] optional
     func GetWinMetaFileBits(hemf: HENHMETAFILE, cbData16: UInt32, pData16: CPointer<UInt8>, iMapMode: Int32, hdcRef: HDC): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetWinMetaFileBits == "on"]
+public unsafe func Windows_GetWinMetaFileBits(hemf: HENHMETAFILE, cbData16: UInt32, pData16: CPointer<UInt8>, iMapMode: Int32, hdcRef: HDC): UInt32 {
+    return GetWinMetaFileBits(hemf, cbData16, pData16, iMapMode, hdcRef)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetWindowExtEx == "on"]
+foreign {
     func GetWindowExtEx(hdc: HDC, lpsize: CPointer<Win32_Foundation.SIZEAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetWindowExtEx == "on"]
+public unsafe func Windows_GetWindowExtEx(hdc: HDC, lpsize: CPointer<Win32_Foundation.SIZEAbi>): Int32 {
+    return GetWindowExtEx(hdc, lpsize)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetWindowOrgEx == "on"]
+foreign {
     func GetWindowOrgEx(hdc: HDC, lppoint: CPointer<Win32_Foundation.POINTAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetWindowOrgEx == "on"]
+public unsafe func Windows_GetWindowOrgEx(hdc: HDC, lppoint: CPointer<Win32_Foundation.POINTAbi>): Int32 {
+    return GetWindowOrgEx(hdc, lppoint)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetWorldTransform == "on"]
+foreign {
     func GetWorldTransform(hdc: HDC, lpxf: CPointer<XFORMAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_GetWorldTransform == "on"]
+public unsafe func Windows_GetWorldTransform(hdc: HDC, lpxf: CPointer<XFORMAbi>): Int32 {
+    return GetWorldTransform(hdc, lpxf)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_IntersectClipRect == "on"]
+foreign {
     func IntersectClipRect(hdc: HDC, left: Int32, top: Int32, right: Int32, bottom: Int32): GDI_REGION_TYPEAbi
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_IntersectClipRect == "on"]
+public unsafe func Windows_IntersectClipRect(hdc: HDC, left: Int32, top: Int32, right: Int32, bottom: Int32): GDI_REGION_TYPEAbi {
+    return IntersectClipRect(hdc, left, top, right, bottom)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_InvertRgn == "on"]
+foreign {
     func InvertRgn(hdc: HDC, hrgn: HRGN): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_InvertRgn == "on"]
+public unsafe func Windows_InvertRgn(hdc: HDC, hrgn: HRGN): Int32 {
+    return InvertRgn(hdc, hrgn)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_LPtoDP == "on"]
+foreign {
     // param-hint: lppt len=param[2]
     func LPtoDP(hdc: HDC, lppt: CPointer<Win32_Foundation.POINTAbi>, c: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_LPtoDP == "on"]
+public unsafe func Windows_LPtoDP(hdc: HDC, lppt: CPointer<Win32_Foundation.POINTAbi>, c: Int32): Int32 {
+    return LPtoDP(hdc, lppt, c)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_LineDDA == "on"]
+foreign {
     // param-hint: data optional
     func LineDDA(xStart: Int32, yStart: Int32, xEnd: Int32, yEnd: Int32, lpProc: LINEDDAPROC, data: IntNative): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_LineDDA == "on"]
+public unsafe func Windows_LineDDA(xStart: Int32, yStart: Int32, xEnd: Int32, yEnd: Int32, lpProc: LINEDDAPROC, data: IntNative): Int32 {
+    return LineDDA(xStart, yStart, xEnd, yEnd, lpProc, data)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_LineTo == "on"]
+foreign {
     func LineTo(hdc: HDC, x: Int32, y: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_LineTo == "on"]
+public unsafe func Windows_LineTo(hdc: HDC, x: Int32, y: Int32): Int32 {
+    return LineTo(hdc, x, y)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_MaskBlt == "on"]
+foreign {
     func MaskBlt(hdcDest: HDC, xDest: Int32, yDest: Int32, width: Int32, height: Int32, hdcSrc: HDC, xSrc: Int32, ySrc: Int32, hbmMask: HBITMAP, xMask: Int32, yMask: Int32, rop: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_MaskBlt == "on"]
+public unsafe func Windows_MaskBlt(hdcDest: HDC, xDest: Int32, yDest: Int32, width: Int32, height: Int32, hdcSrc: HDC, xSrc: Int32, ySrc: Int32, hbmMask: HBITMAP, xMask: Int32, yMask: Int32, rop: UInt32): Int32 {
+    return MaskBlt(hdcDest, xDest, yDest, width, height, hdcSrc, xSrc, ySrc, hbmMask, xMask, yMask, rop)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_ModifyWorldTransform == "on"]
+foreign {
     // param-hint: lpxf optional
     func ModifyWorldTransform(hdc: HDC, lpxf: CPointer<XFORMAbi>, mode: MODIFY_WORLD_TRANSFORM_MODEAbi): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_ModifyWorldTransform == "on"]
+public unsafe func Windows_ModifyWorldTransform(hdc: HDC, lpxf: CPointer<XFORMAbi>, mode: MODIFY_WORLD_TRANSFORM_MODEAbi): Int32 {
+    return ModifyWorldTransform(hdc, lpxf, mode)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_MoveToEx == "on"]
+foreign {
     // param-hint: lppt optional
     func MoveToEx(hdc: HDC, x: Int32, y: Int32, lppt: CPointer<Win32_Foundation.POINTAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_MoveToEx == "on"]
+public unsafe func Windows_MoveToEx(hdc: HDC, x: Int32, y: Int32, lppt: CPointer<Win32_Foundation.POINTAbi>): Int32 {
+    return MoveToEx(hdc, x, y, lppt)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_OffsetClipRgn == "on"]
+foreign {
     func OffsetClipRgn(hdc: HDC, x: Int32, y: Int32): GDI_REGION_TYPEAbi
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_OffsetClipRgn == "on"]
+public unsafe func Windows_OffsetClipRgn(hdc: HDC, x: Int32, y: Int32): GDI_REGION_TYPEAbi {
+    return OffsetClipRgn(hdc, x, y)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_OffsetRgn == "on"]
+foreign {
     func OffsetRgn(hrgn: HRGN, x: Int32, y: Int32): GDI_REGION_TYPEAbi
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_OffsetRgn == "on"]
+public unsafe func Windows_OffsetRgn(hrgn: HRGN, x: Int32, y: Int32): GDI_REGION_TYPEAbi {
+    return OffsetRgn(hrgn, x, y)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_OffsetViewportOrgEx == "on"]
+foreign {
     // param-hint: lppt optional
     func OffsetViewportOrgEx(hdc: HDC, x: Int32, y: Int32, lppt: CPointer<Win32_Foundation.POINTAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_OffsetViewportOrgEx == "on"]
+public unsafe func Windows_OffsetViewportOrgEx(hdc: HDC, x: Int32, y: Int32, lppt: CPointer<Win32_Foundation.POINTAbi>): Int32 {
+    return OffsetViewportOrgEx(hdc, x, y, lppt)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_OffsetWindowOrgEx == "on"]
+foreign {
     // param-hint: lppt optional
     func OffsetWindowOrgEx(hdc: HDC, x: Int32, y: Int32, lppt: CPointer<Win32_Foundation.POINTAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_OffsetWindowOrgEx == "on"]
+public unsafe func Windows_OffsetWindowOrgEx(hdc: HDC, x: Int32, y: Int32, lppt: CPointer<Win32_Foundation.POINTAbi>): Int32 {
+    return OffsetWindowOrgEx(hdc, x, y, lppt)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PaintRgn == "on"]
+foreign {
     func PaintRgn(hdc: HDC, hrgn: HRGN): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PaintRgn == "on"]
+public unsafe func Windows_PaintRgn(hdc: HDC, hrgn: HRGN): Int32 {
+    return PaintRgn(hdc, hrgn)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PatBlt == "on"]
+foreign {
     func PatBlt(hdc: HDC, x: Int32, y: Int32, w: Int32, h: Int32, rop: ROP_CODEAbi): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PatBlt == "on"]
+public unsafe func Windows_PatBlt(hdc: HDC, x: Int32, y: Int32, w: Int32, h: Int32, rop: ROP_CODEAbi): Int32 {
+    return PatBlt(hdc, x, y, w, h, rop)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PathToRegion == "on"]
+foreign {
     func PathToRegion(hdc: HDC): HRGN
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PathToRegion == "on"]
+public unsafe func Windows_PathToRegion(hdc: HDC): HRGN {
+    return PathToRegion(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_Pie == "on"]
+foreign {
     func Pie(hdc: HDC, left: Int32, top: Int32, right: Int32, bottom: Int32, xr1: Int32, yr1: Int32, xr2: Int32, yr2: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_Pie == "on"]
+public unsafe func Windows_Pie(hdc: HDC, left: Int32, top: Int32, right: Int32, bottom: Int32, xr1: Int32, yr1: Int32, xr2: Int32, yr2: Int32): Int32 {
+    return Pie(hdc, left, top, right, bottom, xr1, yr1, xr2, yr2)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PlayEnhMetaFile == "on"]
+foreign {
     func PlayEnhMetaFile(hdc: HDC, hmf: HENHMETAFILE, lprect: CPointer<Win32_Foundation.RECTAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PlayEnhMetaFile == "on"]
+public unsafe func Windows_PlayEnhMetaFile(hdc: HDC, hmf: HENHMETAFILE, lprect: CPointer<Win32_Foundation.RECTAbi>): Int32 {
+    return PlayEnhMetaFile(hdc, hmf, lprect)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PlayEnhMetaFileRecord == "on"]
+foreign {
     // param-hint: pht len=param[3]
     func PlayEnhMetaFileRecord(hdc: HDC, pht: CPointer<HANDLETABLEAbi>, pmr: CPointer<ENHMETARECORDAbi>, cht: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PlayEnhMetaFileRecord == "on"]
+public unsafe func Windows_PlayEnhMetaFileRecord(hdc: HDC, pht: CPointer<HANDLETABLEAbi>, pmr: CPointer<ENHMETARECORDAbi>, cht: UInt32): Int32 {
+    return PlayEnhMetaFileRecord(hdc, pht, pmr, cht)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PlayMetaFile == "on"]
+foreign {
     func PlayMetaFile(hdc: HDC, hmf: HMETAFILE): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PlayMetaFile == "on"]
+public unsafe func Windows_PlayMetaFile(hdc: HDC, hmf: HMETAFILE): Int32 {
+    return PlayMetaFile(hdc, hmf)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PlayMetaFileRecord == "on"]
+foreign {
     // param-hint: lpHandleTable len=param[3]
     func PlayMetaFileRecord(hdc: HDC, lpHandleTable: CPointer<HANDLETABLEAbi>, lpMR: CPointer<METARECORDAbi>, noObjs: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PlayMetaFileRecord == "on"]
+public unsafe func Windows_PlayMetaFileRecord(hdc: HDC, lpHandleTable: CPointer<HANDLETABLEAbi>, lpMR: CPointer<METARECORDAbi>, noObjs: UInt32): Int32 {
+    return PlayMetaFileRecord(hdc, lpHandleTable, lpMR, noObjs)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PlgBlt == "on"]
+foreign {
     // param-hint: lpPoint fixed=3
     // param-hint: hbmMask optional
     func PlgBlt(hdcDest: HDC, lpPoint: CPointer<Win32_Foundation.POINTAbi>, hdcSrc: HDC, xSrc: Int32, ySrc: Int32, width: Int32, height: Int32, hbmMask: HBITMAP, xMask: Int32, yMask: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PlgBlt == "on"]
+public unsafe func Windows_PlgBlt(hdcDest: HDC, lpPoint: CPointer<Win32_Foundation.POINTAbi>, hdcSrc: HDC, xSrc: Int32, ySrc: Int32, width: Int32, height: Int32, hbmMask: HBITMAP, xMask: Int32, yMask: Int32): Int32 {
+    return PlgBlt(hdcDest, lpPoint, hdcSrc, xSrc, ySrc, width, height, hbmMask, xMask, yMask)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PolyBezier == "on"]
+foreign {
     // param-hint: apt len=param[2]
     func PolyBezier(hdc: HDC, apt: CPointer<Win32_Foundation.POINTAbi>, cpt: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PolyBezier == "on"]
+public unsafe func Windows_PolyBezier(hdc: HDC, apt: CPointer<Win32_Foundation.POINTAbi>, cpt: UInt32): Int32 {
+    return PolyBezier(hdc, apt, cpt)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PolyBezierTo == "on"]
+foreign {
     // param-hint: apt len=param[2]
     func PolyBezierTo(hdc: HDC, apt: CPointer<Win32_Foundation.POINTAbi>, cpt: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PolyBezierTo == "on"]
+public unsafe func Windows_PolyBezierTo(hdc: HDC, apt: CPointer<Win32_Foundation.POINTAbi>, cpt: UInt32): Int32 {
+    return PolyBezierTo(hdc, apt, cpt)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PolyDraw == "on"]
+foreign {
     // param-hint: apt len=param[3]
     // param-hint: aj len=param[3]
     func PolyDraw(hdc: HDC, apt: CPointer<Win32_Foundation.POINTAbi>, aj: CPointer<UInt8>, cpt: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PolyDraw == "on"]
+public unsafe func Windows_PolyDraw(hdc: HDC, apt: CPointer<Win32_Foundation.POINTAbi>, aj: CPointer<UInt8>, cpt: Int32): Int32 {
+    return PolyDraw(hdc, apt, aj, cpt)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PolyPolygon == "on"]
+foreign {
     // param-hint: asz len=param[3]
     func PolyPolygon(hdc: HDC, apt: CPointer<Win32_Foundation.POINTAbi>, asz: CPointer<Int32>, csz: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PolyPolygon == "on"]
+public unsafe func Windows_PolyPolygon(hdc: HDC, apt: CPointer<Win32_Foundation.POINTAbi>, asz: CPointer<Int32>, csz: Int32): Int32 {
+    return PolyPolygon(hdc, apt, asz, csz)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PolyPolyline == "on"]
+foreign {
     // param-hint: asz len=param[3]
     func PolyPolyline(hdc: HDC, apt: CPointer<Win32_Foundation.POINTAbi>, asz: CPointer<UInt32>, csz: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PolyPolyline == "on"]
+public unsafe func Windows_PolyPolyline(hdc: HDC, apt: CPointer<Win32_Foundation.POINTAbi>, asz: CPointer<UInt32>, csz: UInt32): Int32 {
+    return PolyPolyline(hdc, apt, asz, csz)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PolyTextOutA == "on"]
+foreign {
     // param-hint: ppt len=param[2]
     func PolyTextOutA(hdc: HDC, ppt: CPointer<POLYTEXTAAbi>, nstrings: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PolyTextOutA == "on"]
+public unsafe func Windows_PolyTextOutA(hdc: HDC, ppt: CPointer<POLYTEXTAAbi>, nstrings: Int32): Int32 {
+    return PolyTextOutA(hdc, ppt, nstrings)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PolyTextOutW == "on"]
+foreign {
     // param-hint: ppt len=param[2]
     func PolyTextOutW(hdc: HDC, ppt: CPointer<POLYTEXTWAbi>, nstrings: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PolyTextOutW == "on"]
+public unsafe func Windows_PolyTextOutW(hdc: HDC, ppt: CPointer<POLYTEXTWAbi>, nstrings: Int32): Int32 {
+    return PolyTextOutW(hdc, ppt, nstrings)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_Polygon == "on"]
+foreign {
     // param-hint: apt len=param[2]
     func Polygon(hdc: HDC, apt: CPointer<Win32_Foundation.POINTAbi>, cpt: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_Polygon == "on"]
+public unsafe func Windows_Polygon(hdc: HDC, apt: CPointer<Win32_Foundation.POINTAbi>, cpt: Int32): Int32 {
+    return Polygon(hdc, apt, cpt)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_Polyline == "on"]
+foreign {
     // param-hint: apt len=param[2]
     func Polyline(hdc: HDC, apt: CPointer<Win32_Foundation.POINTAbi>, cpt: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_Polyline == "on"]
+public unsafe func Windows_Polyline(hdc: HDC, apt: CPointer<Win32_Foundation.POINTAbi>, cpt: Int32): Int32 {
+    return Polyline(hdc, apt, cpt)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PolylineTo == "on"]
+foreign {
     // param-hint: apt len=param[2]
     func PolylineTo(hdc: HDC, apt: CPointer<Win32_Foundation.POINTAbi>, cpt: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PolylineTo == "on"]
+public unsafe func Windows_PolylineTo(hdc: HDC, apt: CPointer<Win32_Foundation.POINTAbi>, cpt: UInt32): Int32 {
+    return PolylineTo(hdc, apt, cpt)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PtInRegion == "on"]
+foreign {
     func PtInRegion(hrgn: HRGN, x: Int32, y: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PtInRegion == "on"]
+public unsafe func Windows_PtInRegion(hrgn: HRGN, x: Int32, y: Int32): Int32 {
+    return PtInRegion(hrgn, x, y)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PtVisible == "on"]
+foreign {
     func PtVisible(hdc: HDC, x: Int32, y: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_PtVisible == "on"]
+public unsafe func Windows_PtVisible(hdc: HDC, x: Int32, y: Int32): Int32 {
+    return PtVisible(hdc, x, y)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_RealizePalette == "on"]
+foreign {
     func RealizePalette(hdc: HDC): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_RealizePalette == "on"]
+public unsafe func Windows_RealizePalette(hdc: HDC): UInt32 {
+    return RealizePalette(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_RectInRegion == "on"]
+foreign {
     func RectInRegion(hrgn: HRGN, lprect: CPointer<Win32_Foundation.RECTAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_RectInRegion == "on"]
+public unsafe func Windows_RectInRegion(hrgn: HRGN, lprect: CPointer<Win32_Foundation.RECTAbi>): Int32 {
+    return RectInRegion(hrgn, lprect)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_RectVisible == "on"]
+foreign {
     func RectVisible(hdc: HDC, lprect: CPointer<Win32_Foundation.RECTAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_RectVisible == "on"]
+public unsafe func Windows_RectVisible(hdc: HDC, lprect: CPointer<Win32_Foundation.RECTAbi>): Int32 {
+    return RectVisible(hdc, lprect)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_Rectangle == "on"]
+foreign {
     func Rectangle(hdc: HDC, left: Int32, top: Int32, right: Int32, bottom: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_Rectangle == "on"]
+public unsafe func Windows_Rectangle(hdc: HDC, left: Int32, top: Int32, right: Int32, bottom: Int32): Int32 {
+    return Rectangle(hdc, left, top, right, bottom)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_RemoveFontMemResourceEx == "on"]
+foreign {
     func RemoveFontMemResourceEx(h: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_RemoveFontMemResourceEx == "on"]
+public unsafe func Windows_RemoveFontMemResourceEx(h: CPointer<Unit>): Int32 {
+    return RemoveFontMemResourceEx(h)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_RemoveFontResourceA == "on"]
+foreign {
     func RemoveFontResourceA(lpFileName: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_RemoveFontResourceA == "on"]
+public unsafe func Windows_RemoveFontResourceA(lpFileName: CPointer<UInt8>): Int32 {
+    return RemoveFontResourceA(lpFileName)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_RemoveFontResourceExA == "on"]
+foreign {
     // param-hint: pdv optional reserved
     func RemoveFontResourceExA(name: CPointer<UInt8>, fl: UInt32, pdv: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_RemoveFontResourceExA == "on"]
+public unsafe func Windows_RemoveFontResourceExA(name: CPointer<UInt8>, fl: UInt32, pdv: CPointer<Unit>): Int32 {
+    return RemoveFontResourceExA(name, fl, pdv)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_RemoveFontResourceExW == "on"]
+foreign {
     // param-hint: pdv optional reserved
     func RemoveFontResourceExW(name: CPointer<UInt16>, fl: UInt32, pdv: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_RemoveFontResourceExW == "on"]
+public unsafe func Windows_RemoveFontResourceExW(name: CPointer<UInt16>, fl: UInt32, pdv: CPointer<Unit>): Int32 {
+    return RemoveFontResourceExW(name, fl, pdv)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_RemoveFontResourceW == "on"]
+foreign {
     func RemoveFontResourceW(lpFileName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_RemoveFontResourceW == "on"]
+public unsafe func Windows_RemoveFontResourceW(lpFileName: CPointer<UInt16>): Int32 {
+    return RemoveFontResourceW(lpFileName)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_ResetDCA == "on"]
+foreign {
     func ResetDCA(hdc: HDC, lpdm: CPointer<DEVMODEAAbi>): HDC
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_ResetDCA == "on"]
+public unsafe func Windows_ResetDCA(hdc: HDC, lpdm: CPointer<DEVMODEAAbi>): HDC {
+    return ResetDCA(hdc, lpdm)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_ResetDCW == "on"]
+foreign {
     func ResetDCW(hdc: HDC, lpdm: CPointer<DEVMODEWAbi>): HDC
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_ResetDCW == "on"]
+public unsafe func Windows_ResetDCW(hdc: HDC, lpdm: CPointer<DEVMODEWAbi>): HDC {
+    return ResetDCW(hdc, lpdm)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_ResizePalette == "on"]
+foreign {
     func ResizePalette(hpal: HPALETTE, n: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_ResizePalette == "on"]
+public unsafe func Windows_ResizePalette(hpal: HPALETTE, n: UInt32): Int32 {
+    return ResizePalette(hpal, n)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_RestoreDC == "on"]
+foreign {
     func RestoreDC(hdc: HDC, nSavedDC: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_RestoreDC == "on"]
+public unsafe func Windows_RestoreDC(hdc: HDC, nSavedDC: Int32): Int32 {
+    return RestoreDC(hdc, nSavedDC)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_RoundRect == "on"]
+foreign {
     func RoundRect(hdc: HDC, left: Int32, top: Int32, right: Int32, bottom: Int32, width: Int32, height: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_RoundRect == "on"]
+public unsafe func Windows_RoundRect(hdc: HDC, left: Int32, top: Int32, right: Int32, bottom: Int32, width: Int32, height: Int32): Int32 {
+    return RoundRect(hdc, left, top, right, bottom, width, height)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SaveDC == "on"]
+foreign {
     func SaveDC(hdc: HDC): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SaveDC == "on"]
+public unsafe func Windows_SaveDC(hdc: HDC): Int32 {
+    return SaveDC(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_ScaleViewportExtEx == "on"]
+foreign {
     // param-hint: lpsz optional
     func ScaleViewportExtEx(hdc: HDC, xn: Int32, dx: Int32, yn: Int32, yd: Int32, lpsz: CPointer<Win32_Foundation.SIZEAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_ScaleViewportExtEx == "on"]
+public unsafe func Windows_ScaleViewportExtEx(hdc: HDC, xn: Int32, dx: Int32, yn: Int32, yd: Int32, lpsz: CPointer<Win32_Foundation.SIZEAbi>): Int32 {
+    return ScaleViewportExtEx(hdc, xn, dx, yn, yd, lpsz)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_ScaleWindowExtEx == "on"]
+foreign {
     // param-hint: lpsz optional
     func ScaleWindowExtEx(hdc: HDC, xn: Int32, xd: Int32, yn: Int32, yd: Int32, lpsz: CPointer<Win32_Foundation.SIZEAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_ScaleWindowExtEx == "on"]
+public unsafe func Windows_ScaleWindowExtEx(hdc: HDC, xn: Int32, xd: Int32, yn: Int32, yd: Int32, lpsz: CPointer<Win32_Foundation.SIZEAbi>): Int32 {
+    return ScaleWindowExtEx(hdc, xn, xd, yn, yd, lpsz)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SelectClipPath == "on"]
+foreign {
     func SelectClipPath(hdc: HDC, mode: RGN_COMBINE_MODEAbi): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SelectClipPath == "on"]
+public unsafe func Windows_SelectClipPath(hdc: HDC, mode: RGN_COMBINE_MODEAbi): Int32 {
+    return SelectClipPath(hdc, mode)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SelectClipRgn == "on"]
+foreign {
     // param-hint: hrgn optional
     func SelectClipRgn(hdc: HDC, hrgn: HRGN): GDI_REGION_TYPEAbi
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SelectClipRgn == "on"]
+public unsafe func Windows_SelectClipRgn(hdc: HDC, hrgn: HRGN): GDI_REGION_TYPEAbi {
+    return SelectClipRgn(hdc, hrgn)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SelectObject == "on"]
+foreign {
     func SelectObject(hdc: HDC, h: HGDIOBJ): HGDIOBJ
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SelectObject == "on"]
+public unsafe func Windows_SelectObject(hdc: HDC, h: HGDIOBJ): HGDIOBJ {
+    return SelectObject(hdc, h)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SelectPalette == "on"]
+foreign {
     func SelectPalette(hdc: HDC, hPal: HPALETTE, bForceBkgd: Int32): HPALETTE
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SelectPalette == "on"]
+public unsafe func Windows_SelectPalette(hdc: HDC, hPal: HPALETTE, bForceBkgd: Int32): HPALETTE {
+    return SelectPalette(hdc, hPal, bForceBkgd)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetArcDirection == "on"]
+foreign {
     func SetArcDirection(hdc: HDC, dir: ARC_DIRECTIONAbi): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetArcDirection == "on"]
+public unsafe func Windows_SetArcDirection(hdc: HDC, dir: ARC_DIRECTIONAbi): Int32 {
+    return SetArcDirection(hdc, dir)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetBitmapBits == "on"]
+foreign {
     // param-hint: pvBits bytes=param[1]
     func SetBitmapBits(hbm: HBITMAP, cb: UInt32, pvBits: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetBitmapBits == "on"]
+public unsafe func Windows_SetBitmapBits(hbm: HBITMAP, cb: UInt32, pvBits: CPointer<Unit>): Int32 {
+    return SetBitmapBits(hbm, cb, pvBits)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetBitmapDimensionEx == "on"]
+foreign {
     // param-hint: lpsz optional
     func SetBitmapDimensionEx(hbm: HBITMAP, w: Int32, h: Int32, lpsz: CPointer<Win32_Foundation.SIZEAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetBitmapDimensionEx == "on"]
+public unsafe func Windows_SetBitmapDimensionEx(hbm: HBITMAP, w: Int32, h: Int32, lpsz: CPointer<Win32_Foundation.SIZEAbi>): Int32 {
+    return SetBitmapDimensionEx(hbm, w, h, lpsz)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetBkColor == "on"]
+foreign {
     func SetBkColor(hdc: HDC, color: UInt32): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetBkColor == "on"]
+public unsafe func Windows_SetBkColor(hdc: HDC, color: UInt32): UInt32 {
+    return SetBkColor(hdc, color)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetBkMode == "on"]
+foreign {
     func SetBkMode(hdc: HDC, mode: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetBkMode == "on"]
+public unsafe func Windows_SetBkMode(hdc: HDC, mode: Int32): Int32 {
+    return SetBkMode(hdc, mode)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetBoundsRect == "on"]
+foreign {
     // param-hint: lprect optional
     func SetBoundsRect(hdc: HDC, lprect: CPointer<Win32_Foundation.RECTAbi>, flags: SET_BOUNDS_RECT_FLAGSAbi): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetBoundsRect == "on"]
+public unsafe func Windows_SetBoundsRect(hdc: HDC, lprect: CPointer<Win32_Foundation.RECTAbi>, flags: SET_BOUNDS_RECT_FLAGSAbi): UInt32 {
+    return SetBoundsRect(hdc, lprect, flags)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetBrushOrgEx == "on"]
+foreign {
     // param-hint: lppt optional
     func SetBrushOrgEx(hdc: HDC, x: Int32, y: Int32, lppt: CPointer<Win32_Foundation.POINTAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetBrushOrgEx == "on"]
+public unsafe func Windows_SetBrushOrgEx(hdc: HDC, x: Int32, y: Int32, lppt: CPointer<Win32_Foundation.POINTAbi>): Int32 {
+    return SetBrushOrgEx(hdc, x, y, lppt)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetColorAdjustment == "on"]
+foreign {
     func SetColorAdjustment(hdc: HDC, lpca: CPointer<COLORADJUSTMENTAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetColorAdjustment == "on"]
+public unsafe func Windows_SetColorAdjustment(hdc: HDC, lpca: CPointer<COLORADJUSTMENTAbi>): Int32 {
+    return SetColorAdjustment(hdc, lpca)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetDCBrushColor == "on"]
+foreign {
     func SetDCBrushColor(hdc: HDC, color: UInt32): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetDCBrushColor == "on"]
+public unsafe func Windows_SetDCBrushColor(hdc: HDC, color: UInt32): UInt32 {
+    return SetDCBrushColor(hdc, color)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetDCPenColor == "on"]
+foreign {
     func SetDCPenColor(hdc: HDC, color: UInt32): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetDCPenColor == "on"]
+public unsafe func Windows_SetDCPenColor(hdc: HDC, color: UInt32): UInt32 {
+    return SetDCPenColor(hdc, color)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetDIBColorTable == "on"]
+foreign {
     // param-hint: prgbq len=param[2]
     func SetDIBColorTable(hdc: HDC, iStart: UInt32, cEntries: UInt32, prgbq: CPointer<RGBQUADAbi>): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetDIBColorTable == "on"]
+public unsafe func Windows_SetDIBColorTable(hdc: HDC, iStart: UInt32, cEntries: UInt32, prgbq: CPointer<RGBQUADAbi>): UInt32 {
+    return SetDIBColorTable(hdc, iStart, cEntries, prgbq)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetDIBits == "on"]
+foreign {
     // param-hint: hdc optional
     func SetDIBits(hdc: HDC, hbm: HBITMAP, start: UInt32, cLines: UInt32, lpBits: CPointer<Unit>, lpbmi: CPointer<BITMAPINFOAbi>, ColorUse: DIB_USAGEAbi): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetDIBits == "on"]
+public unsafe func Windows_SetDIBits(hdc: HDC, hbm: HBITMAP, start: UInt32, cLines: UInt32, lpBits: CPointer<Unit>, lpbmi: CPointer<BITMAPINFOAbi>, ColorUse: DIB_USAGEAbi): Int32 {
+    return SetDIBits(hdc, hbm, start, cLines, lpBits, lpbmi, ColorUse)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetDIBitsToDevice == "on"]
+foreign {
     func SetDIBitsToDevice(hdc: HDC, xDest: Int32, yDest: Int32, w: UInt32, h: UInt32, xSrc: Int32, ySrc: Int32, StartScan: UInt32, cLines: UInt32, lpvBits: CPointer<Unit>, lpbmi: CPointer<BITMAPINFOAbi>, ColorUse: DIB_USAGEAbi): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetDIBitsToDevice == "on"]
+public unsafe func Windows_SetDIBitsToDevice(hdc: HDC, xDest: Int32, yDest: Int32, w: UInt32, h: UInt32, xSrc: Int32, ySrc: Int32, StartScan: UInt32, cLines: UInt32, lpvBits: CPointer<Unit>, lpbmi: CPointer<BITMAPINFOAbi>, ColorUse: DIB_USAGEAbi): Int32 {
+    return SetDIBitsToDevice(hdc, xDest, yDest, w, h, xSrc, ySrc, StartScan, cLines, lpvBits, lpbmi, ColorUse)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetEnhMetaFileBits == "on"]
+foreign {
     // param-hint: pb bytes=param[0]
     func SetEnhMetaFileBits(nSize: UInt32, pb: CPointer<UInt8>): HENHMETAFILE
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetEnhMetaFileBits == "on"]
+public unsafe func Windows_SetEnhMetaFileBits(nSize: UInt32, pb: CPointer<UInt8>): HENHMETAFILE {
+    return SetEnhMetaFileBits(nSize, pb)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetGraphicsMode == "on"]
+foreign {
     func SetGraphicsMode(hdc: HDC, iMode: GRAPHICS_MODEAbi): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetGraphicsMode == "on"]
+public unsafe func Windows_SetGraphicsMode(hdc: HDC, iMode: GRAPHICS_MODEAbi): Int32 {
+    return SetGraphicsMode(hdc, iMode)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetLayout == "on"]
+foreign {
     func SetLayout(hdc: HDC, l: DC_LAYOUTAbi): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetLayout == "on"]
+public unsafe func Windows_SetLayout(hdc: HDC, l: DC_LAYOUTAbi): UInt32 {
+    return SetLayout(hdc, l)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetMapMode == "on"]
+foreign {
     func SetMapMode(hdc: HDC, iMode: HDC_MAP_MODEAbi): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetMapMode == "on"]
+public unsafe func Windows_SetMapMode(hdc: HDC, iMode: HDC_MAP_MODEAbi): Int32 {
+    return SetMapMode(hdc, iMode)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetMapperFlags == "on"]
+foreign {
     func SetMapperFlags(hdc: HDC, flags: UInt32): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetMapperFlags == "on"]
+public unsafe func Windows_SetMapperFlags(hdc: HDC, flags: UInt32): UInt32 {
+    return SetMapperFlags(hdc, flags)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetMetaFileBitsEx == "on"]
+foreign {
     // param-hint: lpData bytes=param[0]
     func SetMetaFileBitsEx(cbBuffer: UInt32, lpData: CPointer<UInt8>): HMETAFILE
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetMetaFileBitsEx == "on"]
+public unsafe func Windows_SetMetaFileBitsEx(cbBuffer: UInt32, lpData: CPointer<UInt8>): HMETAFILE {
+    return SetMetaFileBitsEx(cbBuffer, lpData)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetMetaRgn == "on"]
+foreign {
     func SetMetaRgn(hdc: HDC): GDI_REGION_TYPEAbi
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetMetaRgn == "on"]
+public unsafe func Windows_SetMetaRgn(hdc: HDC): GDI_REGION_TYPEAbi {
+    return SetMetaRgn(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetMiterLimit == "on"]
+foreign {
     // param-hint: old optional
     func SetMiterLimit(hdc: HDC, limit: Float32, old: CPointer<Float32>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetMiterLimit == "on"]
+public unsafe func Windows_SetMiterLimit(hdc: HDC, limit: Float32, old: CPointer<Float32>): Int32 {
+    return SetMiterLimit(hdc, limit, old)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetPaletteEntries == "on"]
+foreign {
     // param-hint: pPalEntries len=param[2]
     func SetPaletteEntries(hpal: HPALETTE, iStart: UInt32, cEntries: UInt32, pPalEntries: CPointer<PALETTEENTRYAbi>): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetPaletteEntries == "on"]
+public unsafe func Windows_SetPaletteEntries(hpal: HPALETTE, iStart: UInt32, cEntries: UInt32, pPalEntries: CPointer<PALETTEENTRYAbi>): UInt32 {
+    return SetPaletteEntries(hpal, iStart, cEntries, pPalEntries)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetPixel == "on"]
+foreign {
     func SetPixel(hdc: HDC, x: Int32, y: Int32, color: UInt32): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetPixel == "on"]
+public unsafe func Windows_SetPixel(hdc: HDC, x: Int32, y: Int32, color: UInt32): UInt32 {
+    return SetPixel(hdc, x, y, color)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetPixelV == "on"]
+foreign {
     func SetPixelV(hdc: HDC, x: Int32, y: Int32, color: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetPixelV == "on"]
+public unsafe func Windows_SetPixelV(hdc: HDC, x: Int32, y: Int32, color: UInt32): Int32 {
+    return SetPixelV(hdc, x, y, color)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetPolyFillMode == "on"]
+foreign {
     func SetPolyFillMode(hdc: HDC, mode: CREATE_POLYGON_RGN_MODEAbi): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetPolyFillMode == "on"]
+public unsafe func Windows_SetPolyFillMode(hdc: HDC, mode: CREATE_POLYGON_RGN_MODEAbi): Int32 {
+    return SetPolyFillMode(hdc, mode)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetROP2 == "on"]
+foreign {
     func SetROP2(hdc: HDC, rop2: R2_MODEAbi): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetROP2 == "on"]
+public unsafe func Windows_SetROP2(hdc: HDC, rop2: R2_MODEAbi): Int32 {
+    return SetROP2(hdc, rop2)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetRectRgn == "on"]
+foreign {
     func SetRectRgn(hrgn: HRGN, left: Int32, top: Int32, right: Int32, bottom: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetRectRgn == "on"]
+public unsafe func Windows_SetRectRgn(hrgn: HRGN, left: Int32, top: Int32, right: Int32, bottom: Int32): Int32 {
+    return SetRectRgn(hrgn, left, top, right, bottom)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetStretchBltMode == "on"]
+foreign {
     func SetStretchBltMode(hdc: HDC, mode: STRETCH_BLT_MODEAbi): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetStretchBltMode == "on"]
+public unsafe func Windows_SetStretchBltMode(hdc: HDC, mode: STRETCH_BLT_MODEAbi): Int32 {
+    return SetStretchBltMode(hdc, mode)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetSystemPaletteUse == "on"]
+foreign {
     func SetSystemPaletteUse(hdc: HDC, use: SYSTEM_PALETTE_USEAbi): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetSystemPaletteUse == "on"]
+public unsafe func Windows_SetSystemPaletteUse(hdc: HDC, use: SYSTEM_PALETTE_USEAbi): UInt32 {
+    return SetSystemPaletteUse(hdc, use)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetTextAlign == "on"]
+foreign {
     func SetTextAlign(hdc: HDC, align: TEXT_ALIGN_OPTIONSAbi): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetTextAlign == "on"]
+public unsafe func Windows_SetTextAlign(hdc: HDC, align: TEXT_ALIGN_OPTIONSAbi): UInt32 {
+    return SetTextAlign(hdc, align)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetTextCharacterExtra == "on"]
+foreign {
     func SetTextCharacterExtra(hdc: HDC, extra: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetTextCharacterExtra == "on"]
+public unsafe func Windows_SetTextCharacterExtra(hdc: HDC, extra: Int32): Int32 {
+    return SetTextCharacterExtra(hdc, extra)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetTextColor == "on"]
+foreign {
     func SetTextColor(hdc: HDC, color: UInt32): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetTextColor == "on"]
+public unsafe func Windows_SetTextColor(hdc: HDC, color: UInt32): UInt32 {
+    return SetTextColor(hdc, color)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetTextJustification == "on"]
+foreign {
     func SetTextJustification(hdc: HDC, extra: Int32, count: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetTextJustification == "on"]
+public unsafe func Windows_SetTextJustification(hdc: HDC, extra: Int32, count: Int32): Int32 {
+    return SetTextJustification(hdc, extra, count)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetViewportExtEx == "on"]
+foreign {
     // param-hint: lpsz optional
     func SetViewportExtEx(hdc: HDC, x: Int32, y: Int32, lpsz: CPointer<Win32_Foundation.SIZEAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetViewportExtEx == "on"]
+public unsafe func Windows_SetViewportExtEx(hdc: HDC, x: Int32, y: Int32, lpsz: CPointer<Win32_Foundation.SIZEAbi>): Int32 {
+    return SetViewportExtEx(hdc, x, y, lpsz)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetViewportOrgEx == "on"]
+foreign {
     // param-hint: lppt optional
     func SetViewportOrgEx(hdc: HDC, x: Int32, y: Int32, lppt: CPointer<Win32_Foundation.POINTAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetViewportOrgEx == "on"]
+public unsafe func Windows_SetViewportOrgEx(hdc: HDC, x: Int32, y: Int32, lppt: CPointer<Win32_Foundation.POINTAbi>): Int32 {
+    return SetViewportOrgEx(hdc, x, y, lppt)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetWindowExtEx == "on"]
+foreign {
     // param-hint: lpsz optional
     func SetWindowExtEx(hdc: HDC, x: Int32, y: Int32, lpsz: CPointer<Win32_Foundation.SIZEAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetWindowExtEx == "on"]
+public unsafe func Windows_SetWindowExtEx(hdc: HDC, x: Int32, y: Int32, lpsz: CPointer<Win32_Foundation.SIZEAbi>): Int32 {
+    return SetWindowExtEx(hdc, x, y, lpsz)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetWindowOrgEx == "on"]
+foreign {
     // param-hint: lppt optional
     func SetWindowOrgEx(hdc: HDC, x: Int32, y: Int32, lppt: CPointer<Win32_Foundation.POINTAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetWindowOrgEx == "on"]
+public unsafe func Windows_SetWindowOrgEx(hdc: HDC, x: Int32, y: Int32, lppt: CPointer<Win32_Foundation.POINTAbi>): Int32 {
+    return SetWindowOrgEx(hdc, x, y, lppt)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetWorldTransform == "on"]
+foreign {
     func SetWorldTransform(hdc: HDC, lpxf: CPointer<XFORMAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_SetWorldTransform == "on"]
+public unsafe func Windows_SetWorldTransform(hdc: HDC, lpxf: CPointer<XFORMAbi>): Int32 {
+    return SetWorldTransform(hdc, lpxf)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_StretchBlt == "on"]
+foreign {
     // param-hint: hdcSrc optional
     func StretchBlt(hdcDest: HDC, xDest: Int32, yDest: Int32, wDest: Int32, hDest: Int32, hdcSrc: HDC, xSrc: Int32, ySrc: Int32, wSrc: Int32, hSrc: Int32, rop: ROP_CODEAbi): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_StretchBlt == "on"]
+public unsafe func Windows_StretchBlt(hdcDest: HDC, xDest: Int32, yDest: Int32, wDest: Int32, hDest: Int32, hdcSrc: HDC, xSrc: Int32, ySrc: Int32, wSrc: Int32, hSrc: Int32, rop: ROP_CODEAbi): Int32 {
+    return StretchBlt(hdcDest, xDest, yDest, wDest, hDest, hdcSrc, xSrc, ySrc, wSrc, hSrc, rop)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_StretchDIBits == "on"]
+foreign {
     // param-hint: lpBits optional
     func StretchDIBits(hdc: HDC, xDest: Int32, yDest: Int32, DestWidth: Int32, DestHeight: Int32, xSrc: Int32, ySrc: Int32, SrcWidth: Int32, SrcHeight: Int32, lpBits: CPointer<Unit>, lpbmi: CPointer<BITMAPINFOAbi>, iUsage: DIB_USAGEAbi, rop: ROP_CODEAbi): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_StretchDIBits == "on"]
+public unsafe func Windows_StretchDIBits(hdc: HDC, xDest: Int32, yDest: Int32, DestWidth: Int32, DestHeight: Int32, xSrc: Int32, ySrc: Int32, SrcWidth: Int32, SrcHeight: Int32, lpBits: CPointer<Unit>, lpbmi: CPointer<BITMAPINFOAbi>, iUsage: DIB_USAGEAbi, rop: ROP_CODEAbi): Int32 {
+    return StretchDIBits(hdc, xDest, yDest, DestWidth, DestHeight, xSrc, ySrc, SrcWidth, SrcHeight, lpBits, lpbmi, iUsage, rop)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_StrokeAndFillPath == "on"]
+foreign {
     func StrokeAndFillPath(hdc: HDC): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_StrokeAndFillPath == "on"]
+public unsafe func Windows_StrokeAndFillPath(hdc: HDC): Int32 {
+    return StrokeAndFillPath(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_StrokePath == "on"]
+foreign {
     func StrokePath(hdc: HDC): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_StrokePath == "on"]
+public unsafe func Windows_StrokePath(hdc: HDC): Int32 {
+    return StrokePath(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_TextOutA == "on"]
+foreign {
     // param-hint: lpString len=param[4]
     func TextOutA(hdc: HDC, x: Int32, y: Int32, lpString: CPointer<UInt8>, c: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_TextOutA == "on"]
+public unsafe func Windows_TextOutA(hdc: HDC, x: Int32, y: Int32, lpString: CPointer<UInt8>, c: Int32): Int32 {
+    return TextOutA(hdc, x, y, lpString, c)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_TextOutW == "on"]
+foreign {
     // param-hint: lpString len=param[4]
     func TextOutW(hdc: HDC, x: Int32, y: Int32, lpString: CPointer<UInt16>, c: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_TextOutW == "on"]
+public unsafe func Windows_TextOutW(hdc: HDC, x: Int32, y: Int32, lpString: CPointer<UInt16>, c: Int32): Int32 {
+    return TextOutW(hdc, x, y, lpString, c)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_UnrealizeObject == "on"]
+foreign {
     func UnrealizeObject(h: HGDIOBJ): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_UnrealizeObject == "on"]
+public unsafe func Windows_UnrealizeObject(h: HGDIOBJ): Int32 {
+    return UnrealizeObject(h)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_UpdateColors == "on"]
+foreign {
     func UpdateColors(hdc: HDC): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_UpdateColors == "on"]
+public unsafe func Windows_UpdateColors(hdc: HDC): Int32 {
+    return UpdateColors(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_WidenPath == "on"]
+foreign {
     func WidenPath(hdc: HDC): Int32
 }
 
-@When[MSIMG32 == "on"]
+@When[Windows_Win32_Graphics_Gdi == "on" && GDI32 == "on" && Windows_Win32_Graphics_Gdi_WidenPath == "on"]
+public unsafe func Windows_WidenPath(hdc: HDC): Int32 {
+    return WidenPath(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && MSIMG32 == "on" && Windows_Win32_Graphics_Gdi_AlphaBlend == "on"]
 foreign {
     func AlphaBlend(hdcDest: HDC, xoriginDest: Int32, yoriginDest: Int32, wDest: Int32, hDest: Int32, hdcSrc: HDC, xoriginSrc: Int32, yoriginSrc: Int32, wSrc: Int32, hSrc: Int32, ftn: BLENDFUNCTIONAbi): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && MSIMG32 == "on" && Windows_Win32_Graphics_Gdi_AlphaBlend == "on"]
+public unsafe func Windows_AlphaBlend(hdcDest: HDC, xoriginDest: Int32, yoriginDest: Int32, wDest: Int32, hDest: Int32, hdcSrc: HDC, xoriginSrc: Int32, yoriginSrc: Int32, wSrc: Int32, hSrc: Int32, ftn: BLENDFUNCTIONAbi): Int32 {
+    return AlphaBlend(hdcDest, xoriginDest, yoriginDest, wDest, hDest, hdcSrc, xoriginSrc, yoriginSrc, wSrc, hSrc, ftn)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && MSIMG32 == "on" && Windows_Win32_Graphics_Gdi_GradientFill == "on"]
+foreign {
     // param-hint: pVertex len=param[2]
     func GradientFill(hdc: HDC, pVertex: CPointer<TRIVERTEXAbi>, nVertex: UInt32, pMesh: CPointer<Unit>, nMesh: UInt32, ulMode: GRADIENT_FILLAbi): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && MSIMG32 == "on" && Windows_Win32_Graphics_Gdi_GradientFill == "on"]
+public unsafe func Windows_GradientFill(hdc: HDC, pVertex: CPointer<TRIVERTEXAbi>, nVertex: UInt32, pMesh: CPointer<Unit>, nMesh: UInt32, ulMode: GRADIENT_FILLAbi): Int32 {
+    return GradientFill(hdc, pVertex, nVertex, pMesh, nMesh, ulMode)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && MSIMG32 == "on" && Windows_Win32_Graphics_Gdi_TransparentBlt == "on"]
+foreign {
     func TransparentBlt(hdcDest: HDC, xoriginDest: Int32, yoriginDest: Int32, wDest: Int32, hDest: Int32, hdcSrc: HDC, xoriginSrc: Int32, yoriginSrc: Int32, wSrc: Int32, hSrc: Int32, crTransparent: UInt32): Int32
 }
 
-@When[OPENGL32 == "on"]
+@When[Windows_Win32_Graphics_Gdi == "on" && MSIMG32 == "on" && Windows_Win32_Graphics_Gdi_TransparentBlt == "on"]
+public unsafe func Windows_TransparentBlt(hdcDest: HDC, xoriginDest: Int32, yoriginDest: Int32, wDest: Int32, hDest: Int32, hdcSrc: HDC, xoriginSrc: Int32, yoriginSrc: Int32, wSrc: Int32, hSrc: Int32, crTransparent: UInt32): Int32 {
+    return TransparentBlt(hdcDest, xoriginDest, yoriginDest, wDest, hDest, hdcSrc, xoriginSrc, yoriginSrc, wSrc, hSrc, crTransparent)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && OPENGL32 == "on" && Windows_Win32_Graphics_Gdi_wglSwapMultipleBuffers == "on"]
 foreign {
     func wglSwapMultipleBuffers(param0: UInt32, param1: CPointer<WGLSWAPAbi>): UInt32
 }
 
-@When[USER32 == "on"]
+@When[Windows_Win32_Graphics_Gdi == "on" && OPENGL32 == "on" && Windows_Win32_Graphics_Gdi_wglSwapMultipleBuffers == "on"]
+public unsafe func Windows_wglSwapMultipleBuffers(param0: UInt32, param1: CPointer<WGLSWAPAbi>): UInt32 {
+    return wglSwapMultipleBuffers(param0, param1)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_BeginPaint == "on"]
 foreign {
     func BeginPaint(hWnd: CPointer<Unit>, lpPaint: CPointer<PAINTSTRUCTAbi>): HDC
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_BeginPaint == "on"]
+public unsafe func Windows_BeginPaint(hWnd: CPointer<Unit>, lpPaint: CPointer<PAINTSTRUCTAbi>): HDC {
+    return BeginPaint(hWnd, lpPaint)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_ChangeDisplaySettingsA == "on"]
+foreign {
     // param-hint: lpDevMode optional
     func ChangeDisplaySettingsA(lpDevMode: CPointer<DEVMODEAAbi>, dwFlags: CDS_TYPEAbi): DISP_CHANGEAbi
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_ChangeDisplaySettingsA == "on"]
+public unsafe func Windows_ChangeDisplaySettingsA(lpDevMode: CPointer<DEVMODEAAbi>, dwFlags: CDS_TYPEAbi): DISP_CHANGEAbi {
+    return ChangeDisplaySettingsA(lpDevMode, dwFlags)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_ChangeDisplaySettingsExA == "on"]
+foreign {
     // param-hint: lpszDeviceName optional
     // param-hint: lpDevMode optional
     // param-hint: hwnd optional reserved
     // param-hint: lParam optional
     func ChangeDisplaySettingsExA(lpszDeviceName: CPointer<UInt8>, lpDevMode: CPointer<DEVMODEAAbi>, hwnd: CPointer<Unit>, dwflags: CDS_TYPEAbi, lParam: CPointer<Unit>): DISP_CHANGEAbi
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_ChangeDisplaySettingsExA == "on"]
+public unsafe func Windows_ChangeDisplaySettingsExA(lpszDeviceName: CPointer<UInt8>, lpDevMode: CPointer<DEVMODEAAbi>, hwnd: CPointer<Unit>, dwflags: CDS_TYPEAbi, lParam: CPointer<Unit>): DISP_CHANGEAbi {
+    return ChangeDisplaySettingsExA(lpszDeviceName, lpDevMode, hwnd, dwflags, lParam)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_ChangeDisplaySettingsExW == "on"]
+foreign {
     // param-hint: lpszDeviceName optional
     // param-hint: lpDevMode optional
     // param-hint: hwnd optional reserved
     // param-hint: lParam optional
     func ChangeDisplaySettingsExW(lpszDeviceName: CPointer<UInt16>, lpDevMode: CPointer<DEVMODEWAbi>, hwnd: CPointer<Unit>, dwflags: CDS_TYPEAbi, lParam: CPointer<Unit>): DISP_CHANGEAbi
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_ChangeDisplaySettingsExW == "on"]
+public unsafe func Windows_ChangeDisplaySettingsExW(lpszDeviceName: CPointer<UInt16>, lpDevMode: CPointer<DEVMODEWAbi>, hwnd: CPointer<Unit>, dwflags: CDS_TYPEAbi, lParam: CPointer<Unit>): DISP_CHANGEAbi {
+    return ChangeDisplaySettingsExW(lpszDeviceName, lpDevMode, hwnd, dwflags, lParam)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_ChangeDisplaySettingsW == "on"]
+foreign {
     // param-hint: lpDevMode optional
     func ChangeDisplaySettingsW(lpDevMode: CPointer<DEVMODEWAbi>, dwFlags: CDS_TYPEAbi): DISP_CHANGEAbi
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_ChangeDisplaySettingsW == "on"]
+public unsafe func Windows_ChangeDisplaySettingsW(lpDevMode: CPointer<DEVMODEWAbi>, dwFlags: CDS_TYPEAbi): DISP_CHANGEAbi {
+    return ChangeDisplaySettingsW(lpDevMode, dwFlags)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_ClientToScreen == "on"]
+foreign {
     func ClientToScreen(hWnd: CPointer<Unit>, lpPoint: CPointer<Win32_Foundation.POINTAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_ClientToScreen == "on"]
+public unsafe func Windows_ClientToScreen(hWnd: CPointer<Unit>, lpPoint: CPointer<Win32_Foundation.POINTAbi>): Int32 {
+    return ClientToScreen(hWnd, lpPoint)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_CopyRect == "on"]
+foreign {
     func CopyRect(lprcDst: CPointer<Win32_Foundation.RECTAbi>, lprcSrc: CPointer<Win32_Foundation.RECTAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_CopyRect == "on"]
+public unsafe func Windows_CopyRect(lprcDst: CPointer<Win32_Foundation.RECTAbi>, lprcSrc: CPointer<Win32_Foundation.RECTAbi>): Int32 {
+    return CopyRect(lprcDst, lprcSrc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_DrawAnimatedRects == "on"]
+foreign {
     // param-hint: hwnd optional
     func DrawAnimatedRects(hwnd: CPointer<Unit>, idAni: Int32, lprcFrom: CPointer<Win32_Foundation.RECTAbi>, lprcTo: CPointer<Win32_Foundation.RECTAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_DrawAnimatedRects == "on"]
+public unsafe func Windows_DrawAnimatedRects(hwnd: CPointer<Unit>, idAni: Int32, lprcFrom: CPointer<Win32_Foundation.RECTAbi>, lprcTo: CPointer<Win32_Foundation.RECTAbi>): Int32 {
+    return DrawAnimatedRects(hwnd, idAni, lprcFrom, lprcTo)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_DrawCaption == "on"]
+foreign {
     func DrawCaption(hwnd: CPointer<Unit>, hdc: HDC, lprect: CPointer<Win32_Foundation.RECTAbi>, flags: DRAW_CAPTION_FLAGSAbi): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_DrawCaption == "on"]
+public unsafe func Windows_DrawCaption(hwnd: CPointer<Unit>, hdc: HDC, lprect: CPointer<Win32_Foundation.RECTAbi>, flags: DRAW_CAPTION_FLAGSAbi): Int32 {
+    return DrawCaption(hwnd, hdc, lprect, flags)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_DrawEdge == "on"]
+foreign {
     func DrawEdge(hdc: HDC, qrc: CPointer<Win32_Foundation.RECTAbi>, edge: DRAWEDGE_FLAGSAbi, grfFlags: DRAW_EDGE_FLAGSAbi): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_DrawEdge == "on"]
+public unsafe func Windows_DrawEdge(hdc: HDC, qrc: CPointer<Win32_Foundation.RECTAbi>, edge: DRAWEDGE_FLAGSAbi, grfFlags: DRAW_EDGE_FLAGSAbi): Int32 {
+    return DrawEdge(hdc, qrc, edge, grfFlags)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_DrawFocusRect == "on"]
+foreign {
     func DrawFocusRect(hDC: HDC, lprc: CPointer<Win32_Foundation.RECTAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_DrawFocusRect == "on"]
+public unsafe func Windows_DrawFocusRect(hDC: HDC, lprc: CPointer<Win32_Foundation.RECTAbi>): Int32 {
+    return DrawFocusRect(hDC, lprc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_DrawFrameControl == "on"]
+foreign {
     func DrawFrameControl(hdc: HDC, lprc: CPointer<Win32_Foundation.RECTAbi>, uType: UInt32, uState: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_DrawFrameControl == "on"]
+public unsafe func Windows_DrawFrameControl(hdc: HDC, lprc: CPointer<Win32_Foundation.RECTAbi>, uType: UInt32, uState: UInt32): Int32 {
+    return DrawFrameControl(hdc, lprc, uType, uState)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_DrawStateA == "on"]
+foreign {
     // param-hint: hbrFore optional
     // param-hint: qfnCallBack optional
     func DrawStateA(hdc: HDC, hbrFore: HBRUSH, qfnCallBack: DRAWSTATEPROC, lData: IntNative, wData: UIntNative, x: Int32, y: Int32, cx: Int32, cy: Int32, uFlags: DRAWSTATE_FLAGSAbi): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_DrawStateA == "on"]
+public unsafe func Windows_DrawStateA(hdc: HDC, hbrFore: HBRUSH, qfnCallBack: DRAWSTATEPROC, lData: IntNative, wData: UIntNative, x: Int32, y: Int32, cx: Int32, cy: Int32, uFlags: DRAWSTATE_FLAGSAbi): Int32 {
+    return DrawStateA(hdc, hbrFore, qfnCallBack, lData, wData, x, y, cx, cy, uFlags)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_DrawStateW == "on"]
+foreign {
     // param-hint: hbrFore optional
     // param-hint: qfnCallBack optional
     func DrawStateW(hdc: HDC, hbrFore: HBRUSH, qfnCallBack: DRAWSTATEPROC, lData: IntNative, wData: UIntNative, x: Int32, y: Int32, cx: Int32, cy: Int32, uFlags: DRAWSTATE_FLAGSAbi): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_DrawStateW == "on"]
+public unsafe func Windows_DrawStateW(hdc: HDC, hbrFore: HBRUSH, qfnCallBack: DRAWSTATEPROC, lData: IntNative, wData: UIntNative, x: Int32, y: Int32, cx: Int32, cy: Int32, uFlags: DRAWSTATE_FLAGSAbi): Int32 {
+    return DrawStateW(hdc, hbrFore, qfnCallBack, lData, wData, x, y, cx, cy, uFlags)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_DrawTextA == "on"]
+foreign {
     // param-hint: lpchText len=param[2]
     func DrawTextA(hdc: HDC, lpchText: CPointer<UInt8>, cchText: Int32, lprc: CPointer<Win32_Foundation.RECTAbi>, format: DRAW_TEXT_FORMATAbi): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_DrawTextA == "on"]
+public unsafe func Windows_DrawTextA(hdc: HDC, lpchText: CPointer<UInt8>, cchText: Int32, lprc: CPointer<Win32_Foundation.RECTAbi>, format: DRAW_TEXT_FORMATAbi): Int32 {
+    return DrawTextA(hdc, lpchText, cchText, lprc, format)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_DrawTextExA == "on"]
+foreign {
     // param-hint: lpchText len=param[2]
     // param-hint: lpdtp optional
     func DrawTextExA(hdc: HDC, lpchText: CPointer<UInt8>, cchText: Int32, lprc: CPointer<Win32_Foundation.RECTAbi>, format: DRAW_TEXT_FORMATAbi, lpdtp: CPointer<DRAWTEXTPARAMSAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_DrawTextExA == "on"]
+public unsafe func Windows_DrawTextExA(hdc: HDC, lpchText: CPointer<UInt8>, cchText: Int32, lprc: CPointer<Win32_Foundation.RECTAbi>, format: DRAW_TEXT_FORMATAbi, lpdtp: CPointer<DRAWTEXTPARAMSAbi>): Int32 {
+    return DrawTextExA(hdc, lpchText, cchText, lprc, format, lpdtp)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_DrawTextExW == "on"]
+foreign {
     // param-hint: lpchText len=param[2]
     // param-hint: lpdtp optional
     func DrawTextExW(hdc: HDC, lpchText: CPointer<UInt16>, cchText: Int32, lprc: CPointer<Win32_Foundation.RECTAbi>, format: DRAW_TEXT_FORMATAbi, lpdtp: CPointer<DRAWTEXTPARAMSAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_DrawTextExW == "on"]
+public unsafe func Windows_DrawTextExW(hdc: HDC, lpchText: CPointer<UInt16>, cchText: Int32, lprc: CPointer<Win32_Foundation.RECTAbi>, format: DRAW_TEXT_FORMATAbi, lpdtp: CPointer<DRAWTEXTPARAMSAbi>): Int32 {
+    return DrawTextExW(hdc, lpchText, cchText, lprc, format, lpdtp)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_DrawTextW == "on"]
+foreign {
     // param-hint: lpchText len=param[2]
     func DrawTextW(hdc: HDC, lpchText: CPointer<UInt16>, cchText: Int32, lprc: CPointer<Win32_Foundation.RECTAbi>, format: DRAW_TEXT_FORMATAbi): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_DrawTextW == "on"]
+public unsafe func Windows_DrawTextW(hdc: HDC, lpchText: CPointer<UInt16>, cchText: Int32, lprc: CPointer<Win32_Foundation.RECTAbi>, format: DRAW_TEXT_FORMATAbi): Int32 {
+    return DrawTextW(hdc, lpchText, cchText, lprc, format)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_EndPaint == "on"]
+foreign {
     func EndPaint(hWnd: CPointer<Unit>, lpPaint: CPointer<PAINTSTRUCTAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_EndPaint == "on"]
+public unsafe func Windows_EndPaint(hWnd: CPointer<Unit>, lpPaint: CPointer<PAINTSTRUCTAbi>): Int32 {
+    return EndPaint(hWnd, lpPaint)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_EnumDisplayDevicesA == "on"]
+foreign {
     // param-hint: lpDevice optional
     func EnumDisplayDevicesA(lpDevice: CPointer<UInt8>, iDevNum: UInt32, lpDisplayDevice: CPointer<DISPLAY_DEVICEAAbi>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_EnumDisplayDevicesA == "on"]
+public unsafe func Windows_EnumDisplayDevicesA(lpDevice: CPointer<UInt8>, iDevNum: UInt32, lpDisplayDevice: CPointer<DISPLAY_DEVICEAAbi>, dwFlags: UInt32): Int32 {
+    return EnumDisplayDevicesA(lpDevice, iDevNum, lpDisplayDevice, dwFlags)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_EnumDisplayDevicesW == "on"]
+foreign {
     // param-hint: lpDevice optional
     func EnumDisplayDevicesW(lpDevice: CPointer<UInt16>, iDevNum: UInt32, lpDisplayDevice: CPointer<DISPLAY_DEVICEWAbi>, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_EnumDisplayDevicesW == "on"]
+public unsafe func Windows_EnumDisplayDevicesW(lpDevice: CPointer<UInt16>, iDevNum: UInt32, lpDisplayDevice: CPointer<DISPLAY_DEVICEWAbi>, dwFlags: UInt32): Int32 {
+    return EnumDisplayDevicesW(lpDevice, iDevNum, lpDisplayDevice, dwFlags)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_EnumDisplayMonitors == "on"]
+foreign {
     // param-hint: hdc optional
     // param-hint: lprcClip optional
     func EnumDisplayMonitors(hdc: HDC, lprcClip: CPointer<Win32_Foundation.RECTAbi>, lpfnEnum: MONITORENUMPROC, dwData: IntNative): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_EnumDisplayMonitors == "on"]
+public unsafe func Windows_EnumDisplayMonitors(hdc: HDC, lprcClip: CPointer<Win32_Foundation.RECTAbi>, lpfnEnum: MONITORENUMPROC, dwData: IntNative): Int32 {
+    return EnumDisplayMonitors(hdc, lprcClip, lpfnEnum, dwData)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_EnumDisplaySettingsA == "on"]
+foreign {
     // param-hint: lpszDeviceName optional
     func EnumDisplaySettingsA(lpszDeviceName: CPointer<UInt8>, iModeNum: ENUM_DISPLAY_SETTINGS_MODEAbi, lpDevMode: CPointer<DEVMODEAAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_EnumDisplaySettingsA == "on"]
+public unsafe func Windows_EnumDisplaySettingsA(lpszDeviceName: CPointer<UInt8>, iModeNum: ENUM_DISPLAY_SETTINGS_MODEAbi, lpDevMode: CPointer<DEVMODEAAbi>): Int32 {
+    return EnumDisplaySettingsA(lpszDeviceName, iModeNum, lpDevMode)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_EnumDisplaySettingsExA == "on"]
+foreign {
     // param-hint: lpszDeviceName optional
     func EnumDisplaySettingsExA(lpszDeviceName: CPointer<UInt8>, iModeNum: ENUM_DISPLAY_SETTINGS_MODEAbi, lpDevMode: CPointer<DEVMODEAAbi>, dwFlags: ENUM_DISPLAY_SETTINGS_FLAGSAbi): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_EnumDisplaySettingsExA == "on"]
+public unsafe func Windows_EnumDisplaySettingsExA(lpszDeviceName: CPointer<UInt8>, iModeNum: ENUM_DISPLAY_SETTINGS_MODEAbi, lpDevMode: CPointer<DEVMODEAAbi>, dwFlags: ENUM_DISPLAY_SETTINGS_FLAGSAbi): Int32 {
+    return EnumDisplaySettingsExA(lpszDeviceName, iModeNum, lpDevMode, dwFlags)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_EnumDisplaySettingsExW == "on"]
+foreign {
     // param-hint: lpszDeviceName optional
     func EnumDisplaySettingsExW(lpszDeviceName: CPointer<UInt16>, iModeNum: ENUM_DISPLAY_SETTINGS_MODEAbi, lpDevMode: CPointer<DEVMODEWAbi>, dwFlags: ENUM_DISPLAY_SETTINGS_FLAGSAbi): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_EnumDisplaySettingsExW == "on"]
+public unsafe func Windows_EnumDisplaySettingsExW(lpszDeviceName: CPointer<UInt16>, iModeNum: ENUM_DISPLAY_SETTINGS_MODEAbi, lpDevMode: CPointer<DEVMODEWAbi>, dwFlags: ENUM_DISPLAY_SETTINGS_FLAGSAbi): Int32 {
+    return EnumDisplaySettingsExW(lpszDeviceName, iModeNum, lpDevMode, dwFlags)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_EnumDisplaySettingsW == "on"]
+foreign {
     // param-hint: lpszDeviceName optional
     func EnumDisplaySettingsW(lpszDeviceName: CPointer<UInt16>, iModeNum: ENUM_DISPLAY_SETTINGS_MODEAbi, lpDevMode: CPointer<DEVMODEWAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_EnumDisplaySettingsW == "on"]
+public unsafe func Windows_EnumDisplaySettingsW(lpszDeviceName: CPointer<UInt16>, iModeNum: ENUM_DISPLAY_SETTINGS_MODEAbi, lpDevMode: CPointer<DEVMODEWAbi>): Int32 {
+    return EnumDisplaySettingsW(lpszDeviceName, iModeNum, lpDevMode)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_EqualRect == "on"]
+foreign {
     func EqualRect(lprc1: CPointer<Win32_Foundation.RECTAbi>, lprc2: CPointer<Win32_Foundation.RECTAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_EqualRect == "on"]
+public unsafe func Windows_EqualRect(lprc1: CPointer<Win32_Foundation.RECTAbi>, lprc2: CPointer<Win32_Foundation.RECTAbi>): Int32 {
+    return EqualRect(lprc1, lprc2)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_ExcludeUpdateRgn == "on"]
+foreign {
     func ExcludeUpdateRgn(hDC: HDC, hWnd: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_ExcludeUpdateRgn == "on"]
+public unsafe func Windows_ExcludeUpdateRgn(hDC: HDC, hWnd: CPointer<Unit>): Int32 {
+    return ExcludeUpdateRgn(hDC, hWnd)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_FillRect == "on"]
+foreign {
     func FillRect(hDC: HDC, lprc: CPointer<Win32_Foundation.RECTAbi>, hbr: HBRUSH): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_FillRect == "on"]
+public unsafe func Windows_FillRect(hDC: HDC, lprc: CPointer<Win32_Foundation.RECTAbi>, hbr: HBRUSH): Int32 {
+    return FillRect(hDC, lprc, hbr)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_FrameRect == "on"]
+foreign {
     func FrameRect(hDC: HDC, lprc: CPointer<Win32_Foundation.RECTAbi>, hbr: HBRUSH): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_FrameRect == "on"]
+public unsafe func Windows_FrameRect(hDC: HDC, lprc: CPointer<Win32_Foundation.RECTAbi>, hbr: HBRUSH): Int32 {
+    return FrameRect(hDC, lprc, hbr)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_GetDC == "on"]
+foreign {
     // param-hint: hWnd optional
     func GetDC(hWnd: CPointer<Unit>): HDC
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_GetDC == "on"]
+public unsafe func Windows_GetDC(hWnd: CPointer<Unit>): HDC {
+    return GetDC(hWnd)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_GetDCEx == "on"]
+foreign {
     // param-hint: hWnd optional
     // param-hint: hrgnClip optional
     func GetDCEx(hWnd: CPointer<Unit>, hrgnClip: HRGN, flags: GET_DCX_FLAGSAbi): HDC
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_GetDCEx == "on"]
+public unsafe func Windows_GetDCEx(hWnd: CPointer<Unit>, hrgnClip: HRGN, flags: GET_DCX_FLAGSAbi): HDC {
+    return GetDCEx(hWnd, hrgnClip, flags)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_GetMonitorInfoA == "on"]
+foreign {
     func GetMonitorInfoA(hMonitor: HMONITOR, lpmi: CPointer<MONITORINFOAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_GetMonitorInfoA == "on"]
+public unsafe func Windows_GetMonitorInfoA(hMonitor: HMONITOR, lpmi: CPointer<MONITORINFOAbi>): Int32 {
+    return GetMonitorInfoA(hMonitor, lpmi)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_GetMonitorInfoW == "on"]
+foreign {
     func GetMonitorInfoW(hMonitor: HMONITOR, lpmi: CPointer<MONITORINFOAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_GetMonitorInfoW == "on"]
+public unsafe func Windows_GetMonitorInfoW(hMonitor: HMONITOR, lpmi: CPointer<MONITORINFOAbi>): Int32 {
+    return GetMonitorInfoW(hMonitor, lpmi)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_GetSysColor == "on"]
+foreign {
     func GetSysColor(nIndex: SYS_COLOR_INDEXAbi): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_GetSysColor == "on"]
+public unsafe func Windows_GetSysColor(nIndex: SYS_COLOR_INDEXAbi): UInt32 {
+    return GetSysColor(nIndex)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_GetSysColorBrush == "on"]
+foreign {
     func GetSysColorBrush(nIndex: SYS_COLOR_INDEXAbi): HBRUSH
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_GetSysColorBrush == "on"]
+public unsafe func Windows_GetSysColorBrush(nIndex: SYS_COLOR_INDEXAbi): HBRUSH {
+    return GetSysColorBrush(nIndex)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_GetTabbedTextExtentA == "on"]
+foreign {
     // param-hint: lpString len=param[2]
     // param-hint: lpnTabStopPositions len=param[3] optional
     func GetTabbedTextExtentA(hdc: HDC, lpString: CPointer<UInt8>, chCount: Int32, nTabPositions: Int32, lpnTabStopPositions: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_GetTabbedTextExtentA == "on"]
+public unsafe func Windows_GetTabbedTextExtentA(hdc: HDC, lpString: CPointer<UInt8>, chCount: Int32, nTabPositions: Int32, lpnTabStopPositions: CPointer<Int32>): UInt32 {
+    return GetTabbedTextExtentA(hdc, lpString, chCount, nTabPositions, lpnTabStopPositions)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_GetTabbedTextExtentW == "on"]
+foreign {
     // param-hint: lpString len=param[2]
     // param-hint: lpnTabStopPositions len=param[3] optional
     func GetTabbedTextExtentW(hdc: HDC, lpString: CPointer<UInt16>, chCount: Int32, nTabPositions: Int32, lpnTabStopPositions: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_GetTabbedTextExtentW == "on"]
+public unsafe func Windows_GetTabbedTextExtentW(hdc: HDC, lpString: CPointer<UInt16>, chCount: Int32, nTabPositions: Int32, lpnTabStopPositions: CPointer<Int32>): UInt32 {
+    return GetTabbedTextExtentW(hdc, lpString, chCount, nTabPositions, lpnTabStopPositions)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_GetUpdateRect == "on"]
+foreign {
     // param-hint: lpRect optional
     func GetUpdateRect(hWnd: CPointer<Unit>, lpRect: CPointer<Win32_Foundation.RECTAbi>, bErase: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_GetUpdateRect == "on"]
+public unsafe func Windows_GetUpdateRect(hWnd: CPointer<Unit>, lpRect: CPointer<Win32_Foundation.RECTAbi>, bErase: Int32): Int32 {
+    return GetUpdateRect(hWnd, lpRect, bErase)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_GetUpdateRgn == "on"]
+foreign {
     func GetUpdateRgn(hWnd: CPointer<Unit>, hRgn: HRGN, bErase: Int32): GDI_REGION_TYPEAbi
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_GetUpdateRgn == "on"]
+public unsafe func Windows_GetUpdateRgn(hWnd: CPointer<Unit>, hRgn: HRGN, bErase: Int32): GDI_REGION_TYPEAbi {
+    return GetUpdateRgn(hWnd, hRgn, bErase)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_GetWindowDC == "on"]
+foreign {
     // param-hint: hWnd optional
     func GetWindowDC(hWnd: CPointer<Unit>): HDC
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_GetWindowDC == "on"]
+public unsafe func Windows_GetWindowDC(hWnd: CPointer<Unit>): HDC {
+    return GetWindowDC(hWnd)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_GetWindowRgn == "on"]
+foreign {
     func GetWindowRgn(hWnd: CPointer<Unit>, hRgn: HRGN): GDI_REGION_TYPEAbi
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_GetWindowRgn == "on"]
+public unsafe func Windows_GetWindowRgn(hWnd: CPointer<Unit>, hRgn: HRGN): GDI_REGION_TYPEAbi {
+    return GetWindowRgn(hWnd, hRgn)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_GetWindowRgnBox == "on"]
+foreign {
     func GetWindowRgnBox(hWnd: CPointer<Unit>, lprc: CPointer<Win32_Foundation.RECTAbi>): GDI_REGION_TYPEAbi
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_GetWindowRgnBox == "on"]
+public unsafe func Windows_GetWindowRgnBox(hWnd: CPointer<Unit>, lprc: CPointer<Win32_Foundation.RECTAbi>): GDI_REGION_TYPEAbi {
+    return GetWindowRgnBox(hWnd, lprc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_GrayStringA == "on"]
+foreign {
     // param-hint: hBrush optional
     // param-hint: lpOutputFunc optional
     func GrayStringA(hDC: HDC, hBrush: HBRUSH, lpOutputFunc: GRAYSTRINGPROC, lpData: IntNative, nCount: Int32, X: Int32, Y: Int32, nWidth: Int32, nHeight: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_GrayStringA == "on"]
+public unsafe func Windows_GrayStringA(hDC: HDC, hBrush: HBRUSH, lpOutputFunc: GRAYSTRINGPROC, lpData: IntNative, nCount: Int32, X: Int32, Y: Int32, nWidth: Int32, nHeight: Int32): Int32 {
+    return GrayStringA(hDC, hBrush, lpOutputFunc, lpData, nCount, X, Y, nWidth, nHeight)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_GrayStringW == "on"]
+foreign {
     // param-hint: hBrush optional
     // param-hint: lpOutputFunc optional
     func GrayStringW(hDC: HDC, hBrush: HBRUSH, lpOutputFunc: GRAYSTRINGPROC, lpData: IntNative, nCount: Int32, X: Int32, Y: Int32, nWidth: Int32, nHeight: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_GrayStringW == "on"]
+public unsafe func Windows_GrayStringW(hDC: HDC, hBrush: HBRUSH, lpOutputFunc: GRAYSTRINGPROC, lpData: IntNative, nCount: Int32, X: Int32, Y: Int32, nWidth: Int32, nHeight: Int32): Int32 {
+    return GrayStringW(hDC, hBrush, lpOutputFunc, lpData, nCount, X, Y, nWidth, nHeight)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_InflateRect == "on"]
+foreign {
     func InflateRect(lprc: CPointer<Win32_Foundation.RECTAbi>, dx: Int32, dy: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_InflateRect == "on"]
+public unsafe func Windows_InflateRect(lprc: CPointer<Win32_Foundation.RECTAbi>, dx: Int32, dy: Int32): Int32 {
+    return InflateRect(lprc, dx, dy)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_IntersectRect == "on"]
+foreign {
     func IntersectRect(lprcDst: CPointer<Win32_Foundation.RECTAbi>, lprcSrc1: CPointer<Win32_Foundation.RECTAbi>, lprcSrc2: CPointer<Win32_Foundation.RECTAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_IntersectRect == "on"]
+public unsafe func Windows_IntersectRect(lprcDst: CPointer<Win32_Foundation.RECTAbi>, lprcSrc1: CPointer<Win32_Foundation.RECTAbi>, lprcSrc2: CPointer<Win32_Foundation.RECTAbi>): Int32 {
+    return IntersectRect(lprcDst, lprcSrc1, lprcSrc2)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_InvalidateRect == "on"]
+foreign {
     // param-hint: hWnd optional
     // param-hint: lpRect optional
     func InvalidateRect(hWnd: CPointer<Unit>, lpRect: CPointer<Win32_Foundation.RECTAbi>, bErase: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_InvalidateRect == "on"]
+public unsafe func Windows_InvalidateRect(hWnd: CPointer<Unit>, lpRect: CPointer<Win32_Foundation.RECTAbi>, bErase: Int32): Int32 {
+    return InvalidateRect(hWnd, lpRect, bErase)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_InvalidateRgn == "on"]
+foreign {
     // param-hint: hRgn optional
     func InvalidateRgn(hWnd: CPointer<Unit>, hRgn: HRGN, bErase: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_InvalidateRgn == "on"]
+public unsafe func Windows_InvalidateRgn(hWnd: CPointer<Unit>, hRgn: HRGN, bErase: Int32): Int32 {
+    return InvalidateRgn(hWnd, hRgn, bErase)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_InvertRect == "on"]
+foreign {
     func InvertRect(hDC: HDC, lprc: CPointer<Win32_Foundation.RECTAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_InvertRect == "on"]
+public unsafe func Windows_InvertRect(hDC: HDC, lprc: CPointer<Win32_Foundation.RECTAbi>): Int32 {
+    return InvertRect(hDC, lprc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_IsRectEmpty == "on"]
+foreign {
     func IsRectEmpty(lprc: CPointer<Win32_Foundation.RECTAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_IsRectEmpty == "on"]
+public unsafe func Windows_IsRectEmpty(lprc: CPointer<Win32_Foundation.RECTAbi>): Int32 {
+    return IsRectEmpty(lprc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_LoadBitmapA == "on"]
+foreign {
     // param-hint: hInstance optional
     func LoadBitmapA(hInstance: CPointer<Unit>, lpBitmapName: CPointer<UInt8>): HBITMAP
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_LoadBitmapA == "on"]
+public unsafe func Windows_LoadBitmapA(hInstance: CPointer<Unit>, lpBitmapName: CPointer<UInt8>): HBITMAP {
+    return LoadBitmapA(hInstance, lpBitmapName)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_LoadBitmapW == "on"]
+foreign {
     // param-hint: hInstance optional
     func LoadBitmapW(hInstance: CPointer<Unit>, lpBitmapName: CPointer<UInt16>): HBITMAP
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_LoadBitmapW == "on"]
+public unsafe func Windows_LoadBitmapW(hInstance: CPointer<Unit>, lpBitmapName: CPointer<UInt16>): HBITMAP {
+    return LoadBitmapW(hInstance, lpBitmapName)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_LockWindowUpdate == "on"]
+foreign {
     // param-hint: hWndLock optional
     func LockWindowUpdate(hWndLock: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_LockWindowUpdate == "on"]
+public unsafe func Windows_LockWindowUpdate(hWndLock: CPointer<Unit>): Int32 {
+    return LockWindowUpdate(hWndLock)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_MapWindowPoints == "on"]
+foreign {
     // param-hint: hWndFrom optional
     // param-hint: hWndTo optional
     // param-hint: lpPoints len=param[3]
     func MapWindowPoints(hWndFrom: CPointer<Unit>, hWndTo: CPointer<Unit>, lpPoints: CPointer<Win32_Foundation.POINTAbi>, cPoints: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_MapWindowPoints == "on"]
+public unsafe func Windows_MapWindowPoints(hWndFrom: CPointer<Unit>, hWndTo: CPointer<Unit>, lpPoints: CPointer<Win32_Foundation.POINTAbi>, cPoints: UInt32): Int32 {
+    return MapWindowPoints(hWndFrom, hWndTo, lpPoints, cPoints)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_MonitorFromPoint == "on"]
+foreign {
     func MonitorFromPoint(pt: Win32_Foundation.POINTAbi, dwFlags: MONITOR_FROM_FLAGSAbi): HMONITOR
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_MonitorFromPoint == "on"]
+public unsafe func Windows_MonitorFromPoint(pt: Win32_Foundation.POINTAbi, dwFlags: MONITOR_FROM_FLAGSAbi): HMONITOR {
+    return MonitorFromPoint(pt, dwFlags)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_MonitorFromRect == "on"]
+foreign {
     func MonitorFromRect(lprc: CPointer<Win32_Foundation.RECTAbi>, dwFlags: MONITOR_FROM_FLAGSAbi): HMONITOR
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_MonitorFromRect == "on"]
+public unsafe func Windows_MonitorFromRect(lprc: CPointer<Win32_Foundation.RECTAbi>, dwFlags: MONITOR_FROM_FLAGSAbi): HMONITOR {
+    return MonitorFromRect(lprc, dwFlags)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_MonitorFromWindow == "on"]
+foreign {
     func MonitorFromWindow(hwnd: CPointer<Unit>, dwFlags: MONITOR_FROM_FLAGSAbi): HMONITOR
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_MonitorFromWindow == "on"]
+public unsafe func Windows_MonitorFromWindow(hwnd: CPointer<Unit>, dwFlags: MONITOR_FROM_FLAGSAbi): HMONITOR {
+    return MonitorFromWindow(hwnd, dwFlags)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_OffsetRect == "on"]
+foreign {
     func OffsetRect(lprc: CPointer<Win32_Foundation.RECTAbi>, dx: Int32, dy: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_OffsetRect == "on"]
+public unsafe func Windows_OffsetRect(lprc: CPointer<Win32_Foundation.RECTAbi>, dx: Int32, dy: Int32): Int32 {
+    return OffsetRect(lprc, dx, dy)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_PaintDesktop == "on"]
+foreign {
     func PaintDesktop(hdc: HDC): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_PaintDesktop == "on"]
+public unsafe func Windows_PaintDesktop(hdc: HDC): Int32 {
+    return PaintDesktop(hdc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_PtInRect == "on"]
+foreign {
     func PtInRect(lprc: CPointer<Win32_Foundation.RECTAbi>, pt: Win32_Foundation.POINTAbi): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_PtInRect == "on"]
+public unsafe func Windows_PtInRect(lprc: CPointer<Win32_Foundation.RECTAbi>, pt: Win32_Foundation.POINTAbi): Int32 {
+    return PtInRect(lprc, pt)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_RedrawWindow == "on"]
+foreign {
     // param-hint: hWnd optional
     // param-hint: lprcUpdate optional
     // param-hint: hrgnUpdate optional
     func RedrawWindow(hWnd: CPointer<Unit>, lprcUpdate: CPointer<Win32_Foundation.RECTAbi>, hrgnUpdate: HRGN, flags: REDRAW_WINDOW_FLAGSAbi): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_RedrawWindow == "on"]
+public unsafe func Windows_RedrawWindow(hWnd: CPointer<Unit>, lprcUpdate: CPointer<Win32_Foundation.RECTAbi>, hrgnUpdate: HRGN, flags: REDRAW_WINDOW_FLAGSAbi): Int32 {
+    return RedrawWindow(hWnd, lprcUpdate, hrgnUpdate, flags)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_ReleaseDC == "on"]
+foreign {
     // param-hint: hWnd optional
     func ReleaseDC(hWnd: CPointer<Unit>, hDC: HDC): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_ReleaseDC == "on"]
+public unsafe func Windows_ReleaseDC(hWnd: CPointer<Unit>, hDC: HDC): Int32 {
+    return ReleaseDC(hWnd, hDC)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_ScreenToClient == "on"]
+foreign {
     func ScreenToClient(hWnd: CPointer<Unit>, lpPoint: CPointer<Win32_Foundation.POINTAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_ScreenToClient == "on"]
+public unsafe func Windows_ScreenToClient(hWnd: CPointer<Unit>, lpPoint: CPointer<Win32_Foundation.POINTAbi>): Int32 {
+    return ScreenToClient(hWnd, lpPoint)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_SetRect == "on"]
+foreign {
     func SetRect(lprc: CPointer<Win32_Foundation.RECTAbi>, xLeft: Int32, yTop: Int32, xRight: Int32, yBottom: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_SetRect == "on"]
+public unsafe func Windows_SetRect(lprc: CPointer<Win32_Foundation.RECTAbi>, xLeft: Int32, yTop: Int32, xRight: Int32, yBottom: Int32): Int32 {
+    return SetRect(lprc, xLeft, yTop, xRight, yBottom)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_SetRectEmpty == "on"]
+foreign {
     func SetRectEmpty(lprc: CPointer<Win32_Foundation.RECTAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_SetRectEmpty == "on"]
+public unsafe func Windows_SetRectEmpty(lprc: CPointer<Win32_Foundation.RECTAbi>): Int32 {
+    return SetRectEmpty(lprc)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_SetSysColors == "on"]
+foreign {
     // param-hint: lpaElements len=param[0]
     // param-hint: lpaRgbValues len=param[0]
     // pinvoke-hint: SetLastError
     func SetSysColors(cElements: Int32, lpaElements: CPointer<Int32>, lpaRgbValues: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_SetSysColors == "on"]
+public unsafe func Windows_SetSysColors(cElements: Int32, lpaElements: CPointer<Int32>, lpaRgbValues: CPointer<UInt32>): Int32 {
+    return SetSysColors(cElements, lpaElements, lpaRgbValues)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_SetWindowRgn == "on"]
+foreign {
     // param-hint: hRgn optional
     func SetWindowRgn(hWnd: CPointer<Unit>, hRgn: HRGN, bRedraw: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_SetWindowRgn == "on"]
+public unsafe func Windows_SetWindowRgn(hWnd: CPointer<Unit>, hRgn: HRGN, bRedraw: Int32): Int32 {
+    return SetWindowRgn(hWnd, hRgn, bRedraw)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_SubtractRect == "on"]
+foreign {
     func SubtractRect(lprcDst: CPointer<Win32_Foundation.RECTAbi>, lprcSrc1: CPointer<Win32_Foundation.RECTAbi>, lprcSrc2: CPointer<Win32_Foundation.RECTAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_SubtractRect == "on"]
+public unsafe func Windows_SubtractRect(lprcDst: CPointer<Win32_Foundation.RECTAbi>, lprcSrc1: CPointer<Win32_Foundation.RECTAbi>, lprcSrc2: CPointer<Win32_Foundation.RECTAbi>): Int32 {
+    return SubtractRect(lprcDst, lprcSrc1, lprcSrc2)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_TabbedTextOutA == "on"]
+foreign {
     // param-hint: lpString len=param[4]
     // param-hint: lpnTabStopPositions len=param[5] optional
     func TabbedTextOutA(hdc: HDC, x: Int32, y: Int32, lpString: CPointer<UInt8>, chCount: Int32, nTabPositions: Int32, lpnTabStopPositions: CPointer<Int32>, nTabOrigin: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_TabbedTextOutA == "on"]
+public unsafe func Windows_TabbedTextOutA(hdc: HDC, x: Int32, y: Int32, lpString: CPointer<UInt8>, chCount: Int32, nTabPositions: Int32, lpnTabStopPositions: CPointer<Int32>, nTabOrigin: Int32): Int32 {
+    return TabbedTextOutA(hdc, x, y, lpString, chCount, nTabPositions, lpnTabStopPositions, nTabOrigin)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_TabbedTextOutW == "on"]
+foreign {
     // param-hint: lpString len=param[4]
     // param-hint: lpnTabStopPositions len=param[5] optional
     func TabbedTextOutW(hdc: HDC, x: Int32, y: Int32, lpString: CPointer<UInt16>, chCount: Int32, nTabPositions: Int32, lpnTabStopPositions: CPointer<Int32>, nTabOrigin: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_TabbedTextOutW == "on"]
+public unsafe func Windows_TabbedTextOutW(hdc: HDC, x: Int32, y: Int32, lpString: CPointer<UInt16>, chCount: Int32, nTabPositions: Int32, lpnTabStopPositions: CPointer<Int32>, nTabOrigin: Int32): Int32 {
+    return TabbedTextOutW(hdc, x, y, lpString, chCount, nTabPositions, lpnTabStopPositions, nTabOrigin)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_UnionRect == "on"]
+foreign {
     func UnionRect(lprcDst: CPointer<Win32_Foundation.RECTAbi>, lprcSrc1: CPointer<Win32_Foundation.RECTAbi>, lprcSrc2: CPointer<Win32_Foundation.RECTAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_UnionRect == "on"]
+public unsafe func Windows_UnionRect(lprcDst: CPointer<Win32_Foundation.RECTAbi>, lprcSrc1: CPointer<Win32_Foundation.RECTAbi>, lprcSrc2: CPointer<Win32_Foundation.RECTAbi>): Int32 {
+    return UnionRect(lprcDst, lprcSrc1, lprcSrc2)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_UpdateWindow == "on"]
+foreign {
     func UpdateWindow(hWnd: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_UpdateWindow == "on"]
+public unsafe func Windows_UpdateWindow(hWnd: CPointer<Unit>): Int32 {
+    return UpdateWindow(hWnd)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_ValidateRect == "on"]
+foreign {
     // param-hint: hWnd optional
     // param-hint: lpRect optional
     func ValidateRect(hWnd: CPointer<Unit>, lpRect: CPointer<Win32_Foundation.RECTAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_ValidateRect == "on"]
+public unsafe func Windows_ValidateRect(hWnd: CPointer<Unit>, lpRect: CPointer<Win32_Foundation.RECTAbi>): Int32 {
+    return ValidateRect(hWnd, lpRect)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_ValidateRgn == "on"]
+foreign {
     // param-hint: hRgn optional
     func ValidateRgn(hWnd: CPointer<Unit>, hRgn: HRGN): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_ValidateRgn == "on"]
+public unsafe func Windows_ValidateRgn(hWnd: CPointer<Unit>, hRgn: HRGN): Int32 {
+    return ValidateRgn(hWnd, hRgn)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_WindowFromDC == "on"]
+foreign {
     func WindowFromDC(hDC: HDC): CPointer<Unit>
 }
 
-@When[T2EMBED == "on"]
+@When[Windows_Win32_Graphics_Gdi == "on" && USER32 == "on" && Windows_Win32_Graphics_Gdi_WindowFromDC == "on"]
+public unsafe func Windows_WindowFromDC(hDC: HDC): CPointer<Unit> {
+    return WindowFromDC(hDC)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && T2EMBED == "on" && Windows_Win32_Graphics_Gdi_TTCharToUnicode == "on"]
 foreign {
     // param-hint: pucCharCodes len=param[2]
     // param-hint: pusShortCodes len=param[4]
     func TTCharToUnicode(hDC: HDC, pucCharCodes: CPointer<UInt8>, ulCharCodeSize: UInt32, pusShortCodes: CPointer<UInt16>, ulShortCodeSize: UInt32, ulFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && T2EMBED == "on" && Windows_Win32_Graphics_Gdi_TTCharToUnicode == "on"]
+public unsafe func Windows_TTCharToUnicode(hDC: HDC, pucCharCodes: CPointer<UInt8>, ulCharCodeSize: UInt32, pusShortCodes: CPointer<UInt16>, ulShortCodeSize: UInt32, ulFlags: UInt32): Int32 {
+    return TTCharToUnicode(hDC, pucCharCodes, ulCharCodeSize, pusShortCodes, ulShortCodeSize, ulFlags)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && T2EMBED == "on" && Windows_Win32_Graphics_Gdi_TTDeleteEmbeddedFont == "on"]
+foreign {
     func TTDeleteEmbeddedFont(hFontReference: CPointer<Unit>, ulFlags: UInt32, pulStatus: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && T2EMBED == "on" && Windows_Win32_Graphics_Gdi_TTDeleteEmbeddedFont == "on"]
+public unsafe func Windows_TTDeleteEmbeddedFont(hFontReference: CPointer<Unit>, ulFlags: UInt32, pulStatus: CPointer<UInt32>): Int32 {
+    return TTDeleteEmbeddedFont(hFontReference, ulFlags, pulStatus)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && T2EMBED == "on" && Windows_Win32_Graphics_Gdi_TTEmbedFont == "on"]
+foreign {
     // param-hint: pusCharCodeSet len=param[8]
     // param-hint: pTTEmbedInfo optional
     func TTEmbedFont(hDC: HDC, ulFlags: TTEMBED_FLAGSAbi, ulCharSet: EMBED_FONT_CHARSETAbi, pulPrivStatus: CPointer<EMBEDDED_FONT_PRIV_STATUSAbi>, pulStatus: CPointer<UInt32>, lpfnWriteToStream: WRITEEMBEDPROC, lpvWriteStream: CPointer<Unit>, pusCharCodeSet: CPointer<UInt16>, usCharCodeCount: UInt16, usLanguage: UInt16, pTTEmbedInfo: CPointer<TTEMBEDINFOAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && T2EMBED == "on" && Windows_Win32_Graphics_Gdi_TTEmbedFont == "on"]
+public unsafe func Windows_TTEmbedFont(hDC: HDC, ulFlags: TTEMBED_FLAGSAbi, ulCharSet: EMBED_FONT_CHARSETAbi, pulPrivStatus: CPointer<EMBEDDED_FONT_PRIV_STATUSAbi>, pulStatus: CPointer<UInt32>, lpfnWriteToStream: WRITEEMBEDPROC, lpvWriteStream: CPointer<Unit>, pusCharCodeSet: CPointer<UInt16>, usCharCodeCount: UInt16, usLanguage: UInt16, pTTEmbedInfo: CPointer<TTEMBEDINFOAbi>): Int32 {
+    return TTEmbedFont(hDC, ulFlags, ulCharSet, pulPrivStatus, pulStatus, lpfnWriteToStream, lpvWriteStream, pusCharCodeSet, usCharCodeCount, usLanguage, pTTEmbedInfo)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && T2EMBED == "on" && Windows_Win32_Graphics_Gdi_TTEmbedFontEx == "on"]
+foreign {
     // param-hint: pulCharCodeSet len=param[8]
     // param-hint: pTTEmbedInfo optional
     func TTEmbedFontEx(hDC: HDC, ulFlags: TTEMBED_FLAGSAbi, ulCharSet: EMBED_FONT_CHARSETAbi, pulPrivStatus: CPointer<EMBEDDED_FONT_PRIV_STATUSAbi>, pulStatus: CPointer<UInt32>, lpfnWriteToStream: WRITEEMBEDPROC, lpvWriteStream: CPointer<Unit>, pulCharCodeSet: CPointer<UInt32>, usCharCodeCount: UInt16, usLanguage: UInt16, pTTEmbedInfo: CPointer<TTEMBEDINFOAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && T2EMBED == "on" && Windows_Win32_Graphics_Gdi_TTEmbedFontEx == "on"]
+public unsafe func Windows_TTEmbedFontEx(hDC: HDC, ulFlags: TTEMBED_FLAGSAbi, ulCharSet: EMBED_FONT_CHARSETAbi, pulPrivStatus: CPointer<EMBEDDED_FONT_PRIV_STATUSAbi>, pulStatus: CPointer<UInt32>, lpfnWriteToStream: WRITEEMBEDPROC, lpvWriteStream: CPointer<Unit>, pulCharCodeSet: CPointer<UInt32>, usCharCodeCount: UInt16, usLanguage: UInt16, pTTEmbedInfo: CPointer<TTEMBEDINFOAbi>): Int32 {
+    return TTEmbedFontEx(hDC, ulFlags, ulCharSet, pulPrivStatus, pulStatus, lpfnWriteToStream, lpvWriteStream, pulCharCodeSet, usCharCodeCount, usLanguage, pTTEmbedInfo)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && T2EMBED == "on" && Windows_Win32_Graphics_Gdi_TTEmbedFontFromFileA == "on"]
+foreign {
     // param-hint: pusCharCodeSet len=param[10]
     // param-hint: pTTEmbedInfo optional
     func TTEmbedFontFromFileA(hDC: HDC, szFontFileName: CPointer<UInt8>, usTTCIndex: UInt16, ulFlags: TTEMBED_FLAGSAbi, ulCharSet: EMBED_FONT_CHARSETAbi, pulPrivStatus: CPointer<EMBEDDED_FONT_PRIV_STATUSAbi>, pulStatus: CPointer<UInt32>, lpfnWriteToStream: WRITEEMBEDPROC, lpvWriteStream: CPointer<Unit>, pusCharCodeSet: CPointer<UInt16>, usCharCodeCount: UInt16, usLanguage: UInt16, pTTEmbedInfo: CPointer<TTEMBEDINFOAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && T2EMBED == "on" && Windows_Win32_Graphics_Gdi_TTEmbedFontFromFileA == "on"]
+public unsafe func Windows_TTEmbedFontFromFileA(hDC: HDC, szFontFileName: CPointer<UInt8>, usTTCIndex: UInt16, ulFlags: TTEMBED_FLAGSAbi, ulCharSet: EMBED_FONT_CHARSETAbi, pulPrivStatus: CPointer<EMBEDDED_FONT_PRIV_STATUSAbi>, pulStatus: CPointer<UInt32>, lpfnWriteToStream: WRITEEMBEDPROC, lpvWriteStream: CPointer<Unit>, pusCharCodeSet: CPointer<UInt16>, usCharCodeCount: UInt16, usLanguage: UInt16, pTTEmbedInfo: CPointer<TTEMBEDINFOAbi>): Int32 {
+    return TTEmbedFontFromFileA(hDC, szFontFileName, usTTCIndex, ulFlags, ulCharSet, pulPrivStatus, pulStatus, lpfnWriteToStream, lpvWriteStream, pusCharCodeSet, usCharCodeCount, usLanguage, pTTEmbedInfo)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && T2EMBED == "on" && Windows_Win32_Graphics_Gdi_TTEnableEmbeddingForFacename == "on"]
+foreign {
     func TTEnableEmbeddingForFacename(lpszFacename: CPointer<UInt8>, bEnable: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && T2EMBED == "on" && Windows_Win32_Graphics_Gdi_TTEnableEmbeddingForFacename == "on"]
+public unsafe func Windows_TTEnableEmbeddingForFacename(lpszFacename: CPointer<UInt8>, bEnable: Int32): Int32 {
+    return TTEnableEmbeddingForFacename(lpszFacename, bEnable)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && T2EMBED == "on" && Windows_Win32_Graphics_Gdi_TTGetEmbeddedFontInfo == "on"]
+foreign {
     // param-hint: pTTLoadInfo optional
     func TTGetEmbeddedFontInfo(ulFlags: TTEMBED_FLAGSAbi, pulPrivStatus: CPointer<UInt32>, ulPrivs: FONT_LICENSE_PRIVSAbi, pulStatus: CPointer<UInt32>, lpfnReadFromStream: READEMBEDPROC, lpvReadStream: CPointer<Unit>, pTTLoadInfo: CPointer<TTLOADINFOAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && T2EMBED == "on" && Windows_Win32_Graphics_Gdi_TTGetEmbeddedFontInfo == "on"]
+public unsafe func Windows_TTGetEmbeddedFontInfo(ulFlags: TTEMBED_FLAGSAbi, pulPrivStatus: CPointer<UInt32>, ulPrivs: FONT_LICENSE_PRIVSAbi, pulStatus: CPointer<UInt32>, lpfnReadFromStream: READEMBEDPROC, lpvReadStream: CPointer<Unit>, pTTLoadInfo: CPointer<TTLOADINFOAbi>): Int32 {
+    return TTGetEmbeddedFontInfo(ulFlags, pulPrivStatus, ulPrivs, pulStatus, lpfnReadFromStream, lpvReadStream, pTTLoadInfo)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && T2EMBED == "on" && Windows_Win32_Graphics_Gdi_TTGetEmbeddingType == "on"]
+foreign {
     func TTGetEmbeddingType(hDC: HDC, pulEmbedType: CPointer<EMBEDDED_FONT_PRIV_STATUSAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && T2EMBED == "on" && Windows_Win32_Graphics_Gdi_TTGetEmbeddingType == "on"]
+public unsafe func Windows_TTGetEmbeddingType(hDC: HDC, pulEmbedType: CPointer<EMBEDDED_FONT_PRIV_STATUSAbi>): Int32 {
+    return TTGetEmbeddingType(hDC, pulEmbedType)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && T2EMBED == "on" && Windows_Win32_Graphics_Gdi_TTGetNewFontName == "on"]
+foreign {
     // param-hint: wzWinFamilyName len=param[2]
     // param-hint: szMacFamilyName len=param[4]
     func TTGetNewFontName(phFontReference: CPointer<CPointer<Unit>>, wzWinFamilyName: CPointer<UInt16>, cchMaxWinName: Int32, szMacFamilyName: CPointer<UInt8>, cchMaxMacName: Int32): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && T2EMBED == "on" && Windows_Win32_Graphics_Gdi_TTGetNewFontName == "on"]
+public unsafe func Windows_TTGetNewFontName(phFontReference: CPointer<CPointer<Unit>>, wzWinFamilyName: CPointer<UInt16>, cchMaxWinName: Int32, szMacFamilyName: CPointer<UInt8>, cchMaxMacName: Int32): Int32 {
+    return TTGetNewFontName(phFontReference, wzWinFamilyName, cchMaxWinName, szMacFamilyName, cchMaxMacName)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && T2EMBED == "on" && Windows_Win32_Graphics_Gdi_TTIsEmbeddingEnabled == "on"]
+foreign {
     func TTIsEmbeddingEnabled(hDC: HDC, pbEnabled: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && T2EMBED == "on" && Windows_Win32_Graphics_Gdi_TTIsEmbeddingEnabled == "on"]
+public unsafe func Windows_TTIsEmbeddingEnabled(hDC: HDC, pbEnabled: CPointer<Int32>): Int32 {
+    return TTIsEmbeddingEnabled(hDC, pbEnabled)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && T2EMBED == "on" && Windows_Win32_Graphics_Gdi_TTIsEmbeddingEnabledForFacename == "on"]
+foreign {
     func TTIsEmbeddingEnabledForFacename(lpszFacename: CPointer<UInt8>, pbEnabled: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && T2EMBED == "on" && Windows_Win32_Graphics_Gdi_TTIsEmbeddingEnabledForFacename == "on"]
+public unsafe func Windows_TTIsEmbeddingEnabledForFacename(lpszFacename: CPointer<UInt8>, pbEnabled: CPointer<Int32>): Int32 {
+    return TTIsEmbeddingEnabledForFacename(lpszFacename, pbEnabled)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && T2EMBED == "on" && Windows_Win32_Graphics_Gdi_TTLoadEmbeddedFont == "on"]
+foreign {
     // param-hint: szWinFamilyName optional
     // param-hint: szMacFamilyName optional
     // param-hint: pTTLoadInfo optional
     func TTLoadEmbeddedFont(phFontReference: CPointer<CPointer<Unit>>, ulFlags: UInt32, pulPrivStatus: CPointer<EMBEDDED_FONT_PRIV_STATUSAbi>, ulPrivs: FONT_LICENSE_PRIVSAbi, pulStatus: CPointer<TTLOAD_EMBEDDED_FONT_STATUSAbi>, lpfnReadFromStream: READEMBEDPROC, lpvReadStream: CPointer<Unit>, szWinFamilyName: CPointer<UInt16>, szMacFamilyName: CPointer<UInt8>, pTTLoadInfo: CPointer<TTLOADINFOAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && T2EMBED == "on" && Windows_Win32_Graphics_Gdi_TTLoadEmbeddedFont == "on"]
+public unsafe func Windows_TTLoadEmbeddedFont(phFontReference: CPointer<CPointer<Unit>>, ulFlags: UInt32, pulPrivStatus: CPointer<EMBEDDED_FONT_PRIV_STATUSAbi>, ulPrivs: FONT_LICENSE_PRIVSAbi, pulStatus: CPointer<TTLOAD_EMBEDDED_FONT_STATUSAbi>, lpfnReadFromStream: READEMBEDPROC, lpvReadStream: CPointer<Unit>, szWinFamilyName: CPointer<UInt16>, szMacFamilyName: CPointer<UInt8>, pTTLoadInfo: CPointer<TTLOADINFOAbi>): Int32 {
+    return TTLoadEmbeddedFont(phFontReference, ulFlags, pulPrivStatus, ulPrivs, pulStatus, lpfnReadFromStream, lpvReadStream, szWinFamilyName, szMacFamilyName, pTTLoadInfo)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && T2EMBED == "on" && Windows_Win32_Graphics_Gdi_TTRunValidationTests == "on"]
+foreign {
     func TTRunValidationTests(hDC: HDC, pTestParam: CPointer<TTVALIDATIONTESTSPARAMSAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && T2EMBED == "on" && Windows_Win32_Graphics_Gdi_TTRunValidationTests == "on"]
+public unsafe func Windows_TTRunValidationTests(hDC: HDC, pTestParam: CPointer<TTVALIDATIONTESTSPARAMSAbi>): Int32 {
+    return TTRunValidationTests(hDC, pTestParam)
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && T2EMBED == "on" && Windows_Win32_Graphics_Gdi_TTRunValidationTestsEx == "on"]
+foreign {
     func TTRunValidationTestsEx(hDC: HDC, pTestParam: CPointer<TTVALIDATIONTESTSPARAMSEXAbi>): Int32
+}
+
+@When[Windows_Win32_Graphics_Gdi == "on" && T2EMBED == "on" && Windows_Win32_Graphics_Gdi_TTRunValidationTestsEx == "on"]
+public unsafe func Windows_TTRunValidationTestsEx(hDC: HDC, pTestParam: CPointer<TTVALIDATIONTESTSPARAMSEXAbi>): Int32 {
+    return TTRunValidationTestsEx(hDC, pTestParam)
 }
 
 @When[Windows_Win32_Graphics_Gdi == "on"]

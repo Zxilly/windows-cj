@@ -23,4 +23,3 @@ public import windows_sys.Win32._impl_l1.SYSTEM_POWER_SOURCE_STATE
 public import windows_sys.Win32._impl_l2.userHMETAFILEPICT
 @When[Windows_Win32_System_SystemServices == "on" && Windows_Win32_Graphics_Gdi == "on"]
 public import windows_sys.Win32._impl_l0.userHPALETTE
-

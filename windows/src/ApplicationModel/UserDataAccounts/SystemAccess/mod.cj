@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l0 as _impl_l0
 import windows_collections as windows_collections
@@ -1434,7 +1433,10 @@ extend DeviceAccountConfiguration <: windows_core.HandleWinrtType<DeviceAccountC
 @C
 public struct IUserDataAccountSystemAccessManagerStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AddAndShowDeviceAccountsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AddAndShowDeviceAccountsAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1503,6 +1505,7 @@ public class IUserDataAccountSystemAccessManagerStatics <: InterfaceWrapperBase 
         readVtbl<IUserDataAccountSystemAccessManagerStaticsVtbl>(IUserDataAccountSystemAccessManagerStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AddAndShowDeviceAccountsAsync(accounts: windows_collections.IIterable<DeviceAccountConfiguration>): windows_future.IAsyncOperation<windows_collections.IVectorView<windows_core.HString>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1647,6 +1650,7 @@ public class UserDataAccountSystemAccessManager <: windows_interface.RuntimeName
         windows_core.activationFactory<UserDataAccountSystemAccessManager>().ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func AddAndShowDeviceAccountsAsync(accounts: windows_collections.IIterable<DeviceAccountConfiguration>): windows_future.IAsyncOperation<windows_collections.IVectorView<windows_core.HString>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<windows_core.HString>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<windows_core.HString>>>.None
         try (factory__ = windows_core.factory<UserDataAccountSystemAccessManager, IUserDataAccountSystemAccessManagerStatics>().unwrap()) {

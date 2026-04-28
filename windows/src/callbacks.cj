@@ -4,7 +4,9 @@ import std.collection.ArrayList
 import std.collection.HashMap
 import std.sync.Mutex
 import windows_result.Win32Exception
-import windows_sys.Win32.UI.WindowsAndMessaging.{WM_NCCREATE, WM_NCDESTROY}
+
+let WM_NCCREATE: UInt32 = 129u32
+let WM_NCDESTROY: UInt32 = 130u32
 
 // =============================================================================
 // Generic callback registry

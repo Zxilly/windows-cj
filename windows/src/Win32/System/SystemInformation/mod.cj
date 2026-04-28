@@ -4,11 +4,11 @@
 package windows.Win32.System.SystemInformation
 
 import std.collection.*
+import windows_libloading
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
 import windows_polyfill.{unionReadUInt32, unionReadUInt8, unionWriteUInt32, unionWriteUInt8}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 
@@ -3777,165 +3777,713 @@ public struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX__Anonymous_e__Union {
     public init() {}
 }
 
-@When[KERNEL32 == "on"]
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_DnsHostnameToComputerNameExW == "on"]
 foreign {
     // param-hint: ComputerName len=param[2] optional
     func DnsHostnameToComputerNameExW(Hostname: CPointer<UInt16>, ComputerName: CPointer<UInt16>, nSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_DnsHostnameToComputerNameExW == "on"]
+public unsafe func Windows_DnsHostnameToComputerNameExW(Hostname: CPointer<UInt16>, ComputerName: CPointer<UInt16>, nSize: CPointer<UInt32>): Int32 {
+    return DnsHostnameToComputerNameExW(Hostname, ComputerName, nSize)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_EnumSystemFirmwareTables == "on"]
+foreign {
     // param-hint: pFirmwareTableEnumBuffer bytes=param[2] optional
     // pinvoke-hint: SetLastError
     func EnumSystemFirmwareTables(FirmwareTableProviderSignature: FIRMWARE_TABLE_PROVIDERAbi, pFirmwareTableEnumBuffer: CPointer<UInt8>, BufferSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_EnumSystemFirmwareTables == "on"]
+public unsafe func Windows_EnumSystemFirmwareTables(FirmwareTableProviderSignature: FIRMWARE_TABLE_PROVIDERAbi, pFirmwareTableEnumBuffer: CPointer<UInt8>, BufferSize: UInt32): UInt32 {
+    return EnumSystemFirmwareTables(FirmwareTableProviderSignature, pFirmwareTableEnumBuffer, BufferSize)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetComputerNameExA == "on"]
+foreign {
     // param-hint: lpBuffer len=param[2] optional
     // pinvoke-hint: SetLastError
     func GetComputerNameExA(NameType: COMPUTER_NAME_FORMATAbi, lpBuffer: CPointer<UInt8>, nSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetComputerNameExA == "on"]
+public unsafe func Windows_GetComputerNameExA(NameType: COMPUTER_NAME_FORMATAbi, lpBuffer: CPointer<UInt8>, nSize: CPointer<UInt32>): Int32 {
+    return GetComputerNameExA(NameType, lpBuffer, nSize)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetComputerNameExW == "on"]
+foreign {
     // param-hint: lpBuffer len=param[2] optional
     // pinvoke-hint: SetLastError
     func GetComputerNameExW(NameType: COMPUTER_NAME_FORMATAbi, lpBuffer: CPointer<UInt16>, nSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetComputerNameExW == "on"]
+public unsafe func Windows_GetComputerNameExW(NameType: COMPUTER_NAME_FORMATAbi, lpBuffer: CPointer<UInt16>, nSize: CPointer<UInt32>): Int32 {
+    return GetComputerNameExW(NameType, lpBuffer, nSize)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetFirmwareType == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetFirmwareType(FirmwareType: CPointer<FIRMWARE_TYPEAbi>): Int32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetFirmwareType == "on"]
+public unsafe func Windows_GetFirmwareType(FirmwareType: CPointer<FIRMWARE_TYPEAbi>): Int32 {
+    return GetFirmwareType(FirmwareType)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetLocalTime == "on"]
+foreign {
     func GetLocalTime(lpSystemTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>): Unit
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetLocalTime == "on"]
+public unsafe func Windows_GetLocalTime(lpSystemTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>): Unit {
+    GetLocalTime(lpSystemTime)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetLogicalProcessorInformation == "on"]
+foreign {
     // param-hint: Buffer bytes=param[1] optional
     // pinvoke-hint: SetLastError
     func GetLogicalProcessorInformation(Buffer: CPointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATIONAbi>, ReturnedLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetLogicalProcessorInformation == "on"]
+public unsafe func Windows_GetLogicalProcessorInformation(Buffer: CPointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATIONAbi>, ReturnedLength: CPointer<UInt32>): Int32 {
+    return GetLogicalProcessorInformation(Buffer, ReturnedLength)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetLogicalProcessorInformationEx == "on"]
+foreign {
     // param-hint: Buffer bytes=param[2] optional
     // pinvoke-hint: SetLastError
     func GetLogicalProcessorInformationEx(RelationshipType: LOGICAL_PROCESSOR_RELATIONSHIPAbi, Buffer: CPointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EXAbi>, ReturnedLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetLogicalProcessorInformationEx == "on"]
+public unsafe func Windows_GetLogicalProcessorInformationEx(RelationshipType: LOGICAL_PROCESSOR_RELATIONSHIPAbi, Buffer: CPointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EXAbi>, ReturnedLength: CPointer<UInt32>): Int32 {
+    return GetLogicalProcessorInformationEx(RelationshipType, Buffer, ReturnedLength)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetNativeSystemInfo == "on"]
+foreign {
     func GetNativeSystemInfo(lpSystemInfo: CPointer<SYSTEM_INFOAbi>): Unit
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetNativeSystemInfo == "on"]
+public unsafe func Windows_GetNativeSystemInfo(lpSystemInfo: CPointer<SYSTEM_INFOAbi>): Unit {
+    GetNativeSystemInfo(lpSystemInfo)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetPhysicallyInstalledSystemMemory == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetPhysicallyInstalledSystemMemory(TotalMemoryInKilobytes: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetPhysicallyInstalledSystemMemory == "on"]
+public unsafe func Windows_GetPhysicallyInstalledSystemMemory(TotalMemoryInKilobytes: CPointer<UInt64>): Int32 {
+    return GetPhysicallyInstalledSystemMemory(TotalMemoryInKilobytes)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetProcessorSystemCycleTime == "on"]
+foreign {
     // param-hint: Buffer bytes=param[2] optional
     // pinvoke-hint: SetLastError
     func GetProcessorSystemCycleTime(Group: UInt16, Buffer: CPointer<SYSTEM_PROCESSOR_CYCLE_TIME_INFORMATIONAbi>, ReturnedLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetProcessorSystemCycleTime == "on"]
+public unsafe func Windows_GetProcessorSystemCycleTime(Group: UInt16, Buffer: CPointer<SYSTEM_PROCESSOR_CYCLE_TIME_INFORMATIONAbi>, ReturnedLength: CPointer<UInt32>): Int32 {
+    return GetProcessorSystemCycleTime(Group, Buffer, ReturnedLength)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetProductInfo == "on"]
+foreign {
     func GetProductInfo(dwOSMajorVersion: UInt32, dwOSMinorVersion: UInt32, dwSpMajorVersion: UInt32, dwSpMinorVersion: UInt32, pdwReturnedProductType: CPointer<OS_PRODUCT_TYPEAbi>): Int32
-    // param-hint: Nonce fixed=32 optional
-    // param-hint: ReportBuffer bytes=param[4] optional
-    func GetRuntimeAttestationReport(Nonce: CPointer<UInt8>, PackageVersion: UInt16, ReportTypesBitmap: UInt64, ReportBuffer: CPointer<Unit>, ReportBufferSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetProductInfo == "on"]
+public unsafe func Windows_GetProductInfo(dwOSMajorVersion: UInt32, dwOSMinorVersion: UInt32, dwSpMajorVersion: UInt32, dwSpMinorVersion: UInt32, pdwReturnedProductType: CPointer<OS_PRODUCT_TYPEAbi>): Int32 {
+    return GetProductInfo(dwOSMajorVersion, dwOSMinorVersion, dwSpMajorVersion, dwSpMinorVersion, pdwReturnedProductType)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetSystemCpuSetInformation == "on"]
+foreign {
     // param-hint: Information bytes=param[1] optional
     // param-hint: Process optional
     // param-hint: Flags optional reserved
     func GetSystemCpuSetInformation(Information: CPointer<SYSTEM_CPU_SET_INFORMATIONAbi>, BufferLength: UInt32, ReturnedLength: CPointer<UInt32>, Process: CPointer<Unit>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetSystemCpuSetInformation == "on"]
+public unsafe func Windows_GetSystemCpuSetInformation(Information: CPointer<SYSTEM_CPU_SET_INFORMATIONAbi>, BufferLength: UInt32, ReturnedLength: CPointer<UInt32>, Process: CPointer<Unit>, Flags: UInt32): Int32 {
+    return GetSystemCpuSetInformation(Information, BufferLength, ReturnedLength, Process, Flags)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetSystemDEPPolicy == "on"]
+foreign {
     func GetSystemDEPPolicy(): DEP_SYSTEM_POLICY_TYPEAbi
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetSystemDEPPolicy == "on"]
+public unsafe func Windows_GetSystemDEPPolicy(): DEP_SYSTEM_POLICY_TYPEAbi {
+    return GetSystemDEPPolicy()
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetSystemDirectoryA == "on"]
+foreign {
     // param-hint: lpBuffer len=param[1] optional
     // pinvoke-hint: SetLastError
     func GetSystemDirectoryA(lpBuffer: CPointer<UInt8>, uSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetSystemDirectoryA == "on"]
+public unsafe func Windows_GetSystemDirectoryA(lpBuffer: CPointer<UInt8>, uSize: UInt32): UInt32 {
+    return GetSystemDirectoryA(lpBuffer, uSize)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetSystemDirectoryW == "on"]
+foreign {
     // param-hint: lpBuffer len=param[1] optional
     // pinvoke-hint: SetLastError
     func GetSystemDirectoryW(lpBuffer: CPointer<UInt16>, uSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetSystemDirectoryW == "on"]
+public unsafe func Windows_GetSystemDirectoryW(lpBuffer: CPointer<UInt16>, uSize: UInt32): UInt32 {
+    return GetSystemDirectoryW(lpBuffer, uSize)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetSystemFirmwareTable == "on"]
+foreign {
     // param-hint: pFirmwareTableBuffer bytes=param[3] optional
     // pinvoke-hint: SetLastError
     func GetSystemFirmwareTable(FirmwareTableProviderSignature: FIRMWARE_TABLE_PROVIDERAbi, FirmwareTableID: UInt32, pFirmwareTableBuffer: CPointer<UInt8>, BufferSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetSystemFirmwareTable == "on"]
+public unsafe func Windows_GetSystemFirmwareTable(FirmwareTableProviderSignature: FIRMWARE_TABLE_PROVIDERAbi, FirmwareTableID: UInt32, pFirmwareTableBuffer: CPointer<UInt8>, BufferSize: UInt32): UInt32 {
+    return GetSystemFirmwareTable(FirmwareTableProviderSignature, FirmwareTableID, pFirmwareTableBuffer, BufferSize)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetSystemInfo == "on"]
+foreign {
     func GetSystemInfo(lpSystemInfo: CPointer<SYSTEM_INFOAbi>): Unit
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetSystemInfo == "on"]
+public unsafe func Windows_GetSystemInfo(lpSystemInfo: CPointer<SYSTEM_INFOAbi>): Unit {
+    GetSystemInfo(lpSystemInfo)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetSystemLeapSecondInformation == "on"]
+foreign {
     func GetSystemLeapSecondInformation(Enabled: CPointer<Int32>, Flags: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetSystemLeapSecondInformation == "on"]
+public unsafe func Windows_GetSystemLeapSecondInformation(Enabled: CPointer<Int32>, Flags: CPointer<UInt32>): Int32 {
+    return GetSystemLeapSecondInformation(Enabled, Flags)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetSystemTime == "on"]
+foreign {
     func GetSystemTime(lpSystemTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>): Unit
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetSystemTime == "on"]
+public unsafe func Windows_GetSystemTime(lpSystemTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>): Unit {
+    GetSystemTime(lpSystemTime)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetSystemTimeAdjustment == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetSystemTimeAdjustment(lpTimeAdjustment: CPointer<UInt32>, lpTimeIncrement: CPointer<UInt32>, lpTimeAdjustmentDisabled: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetSystemTimeAdjustment == "on"]
+public unsafe func Windows_GetSystemTimeAdjustment(lpTimeAdjustment: CPointer<UInt32>, lpTimeIncrement: CPointer<UInt32>, lpTimeAdjustmentDisabled: CPointer<Int32>): Int32 {
+    return GetSystemTimeAdjustment(lpTimeAdjustment, lpTimeIncrement, lpTimeAdjustmentDisabled)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetSystemTimeAsFileTime == "on"]
+foreign {
     func GetSystemTimeAsFileTime(lpSystemTimeAsFileTime: CPointer<Win32_Foundation.FILETIMEAbi>): Unit
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetSystemTimeAsFileTime == "on"]
+public unsafe func Windows_GetSystemTimeAsFileTime(lpSystemTimeAsFileTime: CPointer<Win32_Foundation.FILETIMEAbi>): Unit {
+    GetSystemTimeAsFileTime(lpSystemTimeAsFileTime)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetSystemTimePreciseAsFileTime == "on"]
+foreign {
     func GetSystemTimePreciseAsFileTime(lpSystemTimeAsFileTime: CPointer<Win32_Foundation.FILETIMEAbi>): Unit
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetSystemTimePreciseAsFileTime == "on"]
+public unsafe func Windows_GetSystemTimePreciseAsFileTime(lpSystemTimeAsFileTime: CPointer<Win32_Foundation.FILETIMEAbi>): Unit {
+    GetSystemTimePreciseAsFileTime(lpSystemTimeAsFileTime)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetSystemWindowsDirectoryA == "on"]
+foreign {
     // param-hint: lpBuffer len=param[1] optional
     // pinvoke-hint: SetLastError
     func GetSystemWindowsDirectoryA(lpBuffer: CPointer<UInt8>, uSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetSystemWindowsDirectoryA == "on"]
+public unsafe func Windows_GetSystemWindowsDirectoryA(lpBuffer: CPointer<UInt8>, uSize: UInt32): UInt32 {
+    return GetSystemWindowsDirectoryA(lpBuffer, uSize)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetSystemWindowsDirectoryW == "on"]
+foreign {
     // param-hint: lpBuffer len=param[1] optional
     // pinvoke-hint: SetLastError
     func GetSystemWindowsDirectoryW(lpBuffer: CPointer<UInt16>, uSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetSystemWindowsDirectoryW == "on"]
+public unsafe func Windows_GetSystemWindowsDirectoryW(lpBuffer: CPointer<UInt16>, uSize: UInt32): UInt32 {
+    return GetSystemWindowsDirectoryW(lpBuffer, uSize)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetSystemWow64DirectoryA == "on"]
+foreign {
     // param-hint: lpBuffer len=param[1] optional
     // pinvoke-hint: SetLastError
     func GetSystemWow64DirectoryA(lpBuffer: CPointer<UInt8>, uSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetSystemWow64DirectoryA == "on"]
+public unsafe func Windows_GetSystemWow64DirectoryA(lpBuffer: CPointer<UInt8>, uSize: UInt32): UInt32 {
+    return GetSystemWow64DirectoryA(lpBuffer, uSize)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetSystemWow64DirectoryW == "on"]
+foreign {
     // param-hint: lpBuffer len=param[1] optional
     // pinvoke-hint: SetLastError
     func GetSystemWow64DirectoryW(lpBuffer: CPointer<UInt16>, uSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetSystemWow64DirectoryW == "on"]
+public unsafe func Windows_GetSystemWow64DirectoryW(lpBuffer: CPointer<UInt16>, uSize: UInt32): UInt32 {
+    return GetSystemWow64DirectoryW(lpBuffer, uSize)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetTickCount == "on"]
+foreign {
     @FastNative
     func GetTickCount(): UInt32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetTickCount == "on"]
+public unsafe func Windows_GetTickCount(): UInt32 {
+    return GetTickCount()
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetTickCount64 == "on"]
+foreign {
     @FastNative
     func GetTickCount64(): UInt64
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetTickCount64 == "on"]
+public unsafe func Windows_GetTickCount64(): UInt64 {
+    return GetTickCount64()
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetVersion == "on"]
+foreign {
     func GetVersion(): UInt32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetVersion == "on"]
+public unsafe func Windows_GetVersion(): UInt32 {
+    return GetVersion()
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetVersionExA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetVersionExA(lpVersionInformation: CPointer<OSVERSIONINFOAAbi>): Int32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetVersionExA == "on"]
+public unsafe func Windows_GetVersionExA(lpVersionInformation: CPointer<OSVERSIONINFOAAbi>): Int32 {
+    return GetVersionExA(lpVersionInformation)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetVersionExW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetVersionExW(lpVersionInformation: CPointer<OSVERSIONINFOWAbi>): Int32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetVersionExW == "on"]
+public unsafe func Windows_GetVersionExW(lpVersionInformation: CPointer<OSVERSIONINFOWAbi>): Int32 {
+    return GetVersionExW(lpVersionInformation)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetWindowsDirectoryA == "on"]
+foreign {
     // param-hint: lpBuffer len=param[1] optional
     // pinvoke-hint: SetLastError
     func GetWindowsDirectoryA(lpBuffer: CPointer<UInt8>, uSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetWindowsDirectoryA == "on"]
+public unsafe func Windows_GetWindowsDirectoryA(lpBuffer: CPointer<UInt8>, uSize: UInt32): UInt32 {
+    return GetWindowsDirectoryA(lpBuffer, uSize)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetWindowsDirectoryW == "on"]
+foreign {
     // param-hint: lpBuffer len=param[1] optional
     // pinvoke-hint: SetLastError
     func GetWindowsDirectoryW(lpBuffer: CPointer<UInt16>, uSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetWindowsDirectoryW == "on"]
+public unsafe func Windows_GetWindowsDirectoryW(lpBuffer: CPointer<UInt16>, uSize: UInt32): UInt32 {
+    return GetWindowsDirectoryW(lpBuffer, uSize)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GlobalMemoryStatus == "on"]
+foreign {
     func GlobalMemoryStatus(lpBuffer: CPointer<MEMORYSTATUSAbi>): Unit
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GlobalMemoryStatus == "on"]
+public unsafe func Windows_GlobalMemoryStatus(lpBuffer: CPointer<MEMORYSTATUSAbi>): Unit {
+    GlobalMemoryStatus(lpBuffer)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GlobalMemoryStatusEx == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GlobalMemoryStatusEx(lpBuffer: CPointer<MEMORYSTATUSEXAbi>): Int32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GlobalMemoryStatusEx == "on"]
+public unsafe func Windows_GlobalMemoryStatusEx(lpBuffer: CPointer<MEMORYSTATUSEXAbi>): Int32 {
+    return GlobalMemoryStatusEx(lpBuffer)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_IsUserCetAvailableInEnvironment == "on"]
+foreign {
     func IsUserCetAvailableInEnvironment(UserCetEnvironment: USER_CET_ENVIRONMENTAbi): Int32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_IsUserCetAvailableInEnvironment == "on"]
+public unsafe func Windows_IsUserCetAvailableInEnvironment(UserCetEnvironment: USER_CET_ENVIRONMENTAbi): Int32 {
+    return IsUserCetAvailableInEnvironment(UserCetEnvironment)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_IsWow64GuestMachineSupported == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func IsWow64GuestMachineSupported(WowGuestMachine: IMAGE_FILE_MACHINEAbi, MachineIsSupported: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_IsWow64GuestMachineSupported == "on"]
+public unsafe func Windows_IsWow64GuestMachineSupported(WowGuestMachine: IMAGE_FILE_MACHINEAbi, MachineIsSupported: CPointer<Int32>): Int32 {
+    return IsWow64GuestMachineSupported(WowGuestMachine, MachineIsSupported)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_SetComputerNameA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetComputerNameA(lpComputerName: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_SetComputerNameA == "on"]
+public unsafe func Windows_SetComputerNameA(lpComputerName: CPointer<UInt8>): Int32 {
+    return SetComputerNameA(lpComputerName)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_SetComputerNameEx2W == "on"]
+foreign {
     func SetComputerNameEx2W(NameType: COMPUTER_NAME_FORMATAbi, Flags: UInt32, lpBuffer: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_SetComputerNameEx2W == "on"]
+public unsafe func Windows_SetComputerNameEx2W(NameType: COMPUTER_NAME_FORMATAbi, Flags: UInt32, lpBuffer: CPointer<UInt16>): Int32 {
+    return SetComputerNameEx2W(NameType, Flags, lpBuffer)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_SetComputerNameExA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetComputerNameExA(NameType: COMPUTER_NAME_FORMATAbi, lpBuffer: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_SetComputerNameExA == "on"]
+public unsafe func Windows_SetComputerNameExA(NameType: COMPUTER_NAME_FORMATAbi, lpBuffer: CPointer<UInt8>): Int32 {
+    return SetComputerNameExA(NameType, lpBuffer)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_SetComputerNameExW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetComputerNameExW(NameType: COMPUTER_NAME_FORMATAbi, lpBuffer: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_SetComputerNameExW == "on"]
+public unsafe func Windows_SetComputerNameExW(NameType: COMPUTER_NAME_FORMATAbi, lpBuffer: CPointer<UInt16>): Int32 {
+    return SetComputerNameExW(NameType, lpBuffer)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_SetComputerNameW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetComputerNameW(lpComputerName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_SetComputerNameW == "on"]
+public unsafe func Windows_SetComputerNameW(lpComputerName: CPointer<UInt16>): Int32 {
+    return SetComputerNameW(lpComputerName)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_SetLocalTime == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetLocalTime(lpSystemTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>): Int32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_SetLocalTime == "on"]
+public unsafe func Windows_SetLocalTime(lpSystemTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>): Int32 {
+    return SetLocalTime(lpSystemTime)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_SetSystemTime == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetSystemTime(lpSystemTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>): Int32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_SetSystemTime == "on"]
+public unsafe func Windows_SetSystemTime(lpSystemTime: CPointer<Win32_Foundation.SYSTEMTIMEAbi>): Int32 {
+    return SetSystemTime(lpSystemTime)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_SetSystemTimeAdjustment == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetSystemTimeAdjustment(dwTimeAdjustment: UInt32, bTimeAdjustmentDisabled: Int32): Int32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_SetSystemTimeAdjustment == "on"]
+public unsafe func Windows_SetSystemTimeAdjustment(dwTimeAdjustment: UInt32, bTimeAdjustmentDisabled: Int32): Int32 {
+    return SetSystemTimeAdjustment(dwTimeAdjustment, bTimeAdjustmentDisabled)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_VerSetConditionMask == "on"]
+foreign {
     func VerSetConditionMask(ConditionMask: UInt64, TypeMask: VER_FLAGSAbi, Condition: UInt8): UInt64
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_VerSetConditionMask == "on"]
+public unsafe func Windows_VerSetConditionMask(ConditionMask: UInt64, TypeMask: VER_FLAGSAbi, Condition: UInt8): UInt64 {
+    return VerSetConditionMask(ConditionMask, TypeMask, Condition)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_VerifyVersionInfoA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func VerifyVersionInfoA(lpVersionInformation: CPointer<OSVERSIONINFOEXAAbi>, dwTypeMask: VER_FLAGSAbi, dwlConditionMask: UInt64): Int32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_VerifyVersionInfoA == "on"]
+public unsafe func Windows_VerifyVersionInfoA(lpVersionInformation: CPointer<OSVERSIONINFOEXAAbi>, dwTypeMask: VER_FLAGSAbi, dwlConditionMask: UInt64): Int32 {
+    return VerifyVersionInfoA(lpVersionInformation, dwTypeMask, dwlConditionMask)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_VerifyVersionInfoW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func VerifyVersionInfoW(lpVersionInformation: CPointer<OSVERSIONINFOEXWAbi>, dwTypeMask: VER_FLAGSAbi, dwlConditionMask: UInt64): Int32
 }
 
-@When[API_MS_WIN_CORE_SYSINFO_L1_2_0 == "on"]
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_VerifyVersionInfoW == "on"]
+public unsafe func Windows_VerifyVersionInfoW(lpVersionInformation: CPointer<OSVERSIONINFOEXWAbi>, dwTypeMask: VER_FLAGSAbi, dwlConditionMask: UInt64): Int32 {
+    return VerifyVersionInfoW(lpVersionInformation, dwTypeMask, dwlConditionMask)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && API_MS_WIN_CORE_SYSINFO_L1_2_0 == "on" && Windows_Win32_System_SystemInformation_GetOsSafeBootMode == "on"]
 foreign {
     func GetOsSafeBootMode(Flags: CPointer<UInt32>): Int32
 }
 
-@When[API_MS_WIN_CORE_SYSINFO_L1_2_3 == "on"]
+@When[Windows_Win32_System_SystemInformation == "on" && API_MS_WIN_CORE_SYSINFO_L1_2_0 == "on" && Windows_Win32_System_SystemInformation_GetOsSafeBootMode == "on"]
+public unsafe func Windows_GetOsSafeBootMode(Flags: CPointer<UInt32>): Int32 {
+    return GetOsSafeBootMode(Flags)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && API_MS_WIN_CORE_SYSINFO_L1_2_3 == "on" && Windows_Win32_System_SystemInformation_GetIntegratedDisplaySize == "on"]
 foreign {
     func GetIntegratedDisplaySize(sizeInInches: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && API_MS_WIN_CORE_SYSINFO_L1_2_3 == "on" && Windows_Win32_System_SystemInformation_GetIntegratedDisplaySize == "on"]
+public unsafe func Windows_GetIntegratedDisplaySize(sizeInInches: CPointer<Float64>): Int32 {
+    return GetIntegratedDisplaySize(sizeInInches)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && API_MS_WIN_CORE_SYSINFO_L1_2_3 == "on" && Windows_Win32_System_SystemInformation_GetOsManufacturingMode == "on"]
+foreign {
     func GetOsManufacturingMode(pbEnabled: CPointer<Int32>): Int32
 }
 
-@When[API_MS_WIN_CORE_SYSINFO_L1_2_4 == "on"]
+@When[Windows_Win32_System_SystemInformation == "on" && API_MS_WIN_CORE_SYSINFO_L1_2_3 == "on" && Windows_Win32_System_SystemInformation_GetOsManufacturingMode == "on"]
+public unsafe func Windows_GetOsManufacturingMode(pbEnabled: CPointer<Int32>): Int32 {
+    return GetOsManufacturingMode(pbEnabled)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && API_MS_WIN_CORE_SYSINFO_L1_2_4 == "on" && Windows_Win32_System_SystemInformation_GetSystemTimeAdjustmentPrecise == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func GetSystemTimeAdjustmentPrecise(lpTimeAdjustment: CPointer<UInt64>, lpTimeIncrement: CPointer<UInt64>, lpTimeAdjustmentDisabled: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && API_MS_WIN_CORE_SYSINFO_L1_2_4 == "on" && Windows_Win32_System_SystemInformation_GetSystemTimeAdjustmentPrecise == "on"]
+public unsafe func Windows_GetSystemTimeAdjustmentPrecise(lpTimeAdjustment: CPointer<UInt64>, lpTimeIncrement: CPointer<UInt64>, lpTimeAdjustmentDisabled: CPointer<Int32>): Int32 {
+    return GetSystemTimeAdjustmentPrecise(lpTimeAdjustment, lpTimeIncrement, lpTimeAdjustmentDisabled)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && API_MS_WIN_CORE_SYSINFO_L1_2_4 == "on" && Windows_Win32_System_SystemInformation_SetSystemTimeAdjustmentPrecise == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetSystemTimeAdjustmentPrecise(dwTimeAdjustment: UInt64, bTimeAdjustmentDisabled: Int32): Int32
 }
 
-@When[API_MS_WIN_CORE_SYSINFO_L1_2_6 == "on"]
+@When[Windows_Win32_System_SystemInformation == "on" && API_MS_WIN_CORE_SYSINFO_L1_2_4 == "on" && Windows_Win32_System_SystemInformation_SetSystemTimeAdjustmentPrecise == "on"]
+public unsafe func Windows_SetSystemTimeAdjustmentPrecise(dwTimeAdjustment: UInt64, bTimeAdjustmentDisabled: Int32): Int32 {
+    return SetSystemTimeAdjustmentPrecise(dwTimeAdjustment, bTimeAdjustmentDisabled)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && API_MS_WIN_CORE_SYSINFO_L1_2_6 == "on" && Windows_Win32_System_SystemInformation_GetDeveloperDriveEnablementState == "on"]
 foreign {
     func GetDeveloperDriveEnablementState(): DEVELOPER_DRIVE_ENABLEMENT_STATEAbi
 }
 
-@When[API_MS_WIN_CORE_WOW64_L1_1_1 == "on"]
+@When[Windows_Win32_System_SystemInformation == "on" && API_MS_WIN_CORE_SYSINFO_L1_2_6 == "on" && Windows_Win32_System_SystemInformation_GetDeveloperDriveEnablementState == "on"]
+public unsafe func Windows_GetDeveloperDriveEnablementState(): DEVELOPER_DRIVE_ENABLEMENT_STATEAbi {
+    return GetDeveloperDriveEnablementState()
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && API_MS_WIN_CORE_WOW64_L1_1_1 == "on" && Windows_Win32_System_SystemInformation_GetSystemWow64Directory2A == "on"]
 foreign {
     // param-hint: lpBuffer len=param[1] optional
     // pinvoke-hint: SetLastError
     func GetSystemWow64Directory2A(lpBuffer: CPointer<UInt8>, uSize: UInt32, ImageFileMachineType: IMAGE_FILE_MACHINEAbi): UInt32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && API_MS_WIN_CORE_WOW64_L1_1_1 == "on" && Windows_Win32_System_SystemInformation_GetSystemWow64Directory2A == "on"]
+public unsafe func Windows_GetSystemWow64Directory2A(lpBuffer: CPointer<UInt8>, uSize: UInt32, ImageFileMachineType: IMAGE_FILE_MACHINEAbi): UInt32 {
+    return GetSystemWow64Directory2A(lpBuffer, uSize, ImageFileMachineType)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && API_MS_WIN_CORE_WOW64_L1_1_1 == "on" && Windows_Win32_System_SystemInformation_GetSystemWow64Directory2W == "on"]
+foreign {
     // param-hint: lpBuffer len=param[1] optional
     // pinvoke-hint: SetLastError
     func GetSystemWow64Directory2W(lpBuffer: CPointer<UInt16>, uSize: UInt32, ImageFileMachineType: IMAGE_FILE_MACHINEAbi): UInt32
 }
 
-@When[NTDLL == "on"]
+@When[Windows_Win32_System_SystemInformation == "on" && API_MS_WIN_CORE_WOW64_L1_1_1 == "on" && Windows_Win32_System_SystemInformation_GetSystemWow64Directory2W == "on"]
+public unsafe func Windows_GetSystemWow64Directory2W(lpBuffer: CPointer<UInt16>, uSize: UInt32, ImageFileMachineType: IMAGE_FILE_MACHINEAbi): UInt32 {
+    return GetSystemWow64Directory2W(lpBuffer, uSize, ImageFileMachineType)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && NTDLL == "on" && Windows_Win32_System_SystemInformation_RtlConvertDeviceFamilyInfoToString == "on"]
 foreign {
     // param-hint: DeviceFamily bytes=param[0]
     // param-hint: DeviceForm bytes=param[1]
     func RtlConvertDeviceFamilyInfoToString(pulDeviceFamilyBufferSize: CPointer<UInt32>, pulDeviceFormBufferSize: CPointer<UInt32>, DeviceFamily: CPointer<UInt16>, DeviceForm: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && NTDLL == "on" && Windows_Win32_System_SystemInformation_RtlConvertDeviceFamilyInfoToString == "on"]
+public unsafe func Windows_RtlConvertDeviceFamilyInfoToString(pulDeviceFamilyBufferSize: CPointer<UInt32>, pulDeviceFormBufferSize: CPointer<UInt32>, DeviceFamily: CPointer<UInt16>, DeviceForm: CPointer<UInt16>): UInt32 {
+    return RtlConvertDeviceFamilyInfoToString(pulDeviceFamilyBufferSize, pulDeviceFormBufferSize, DeviceFamily, DeviceForm)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && NTDLL == "on" && Windows_Win32_System_SystemInformation_RtlGetDeviceFamilyInfoEnum == "on"]
+foreign {
     // param-hint: pullUAPInfo optional
     // param-hint: pulDeviceFamily optional
     // param-hint: pulDeviceForm optional
     func RtlGetDeviceFamilyInfoEnum(pullUAPInfo: CPointer<UInt64>, pulDeviceFamily: CPointer<DEVICEFAMILYINFOENUMAbi>, pulDeviceForm: CPointer<DEVICEFAMILYDEVICEFORMAbi>): Unit
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && NTDLL == "on" && Windows_Win32_System_SystemInformation_RtlGetDeviceFamilyInfoEnum == "on"]
+public unsafe func Windows_RtlGetDeviceFamilyInfoEnum(pullUAPInfo: CPointer<UInt64>, pulDeviceFamily: CPointer<DEVICEFAMILYINFOENUMAbi>, pulDeviceForm: CPointer<DEVICEFAMILYDEVICEFORMAbi>): Unit {
+    RtlGetDeviceFamilyInfoEnum(pullUAPInfo, pulDeviceFamily, pulDeviceForm)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && NTDLL == "on" && Windows_Win32_System_SystemInformation_RtlGetProductInfo == "on"]
+foreign {
     func RtlGetProductInfo(OSMajorVersion: UInt32, OSMinorVersion: UInt32, SpMajorVersion: UInt32, SpMinorVersion: UInt32, ReturnedProductType: CPointer<UInt32>): UInt8
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && NTDLL == "on" && Windows_Win32_System_SystemInformation_RtlGetProductInfo == "on"]
+public unsafe func Windows_RtlGetProductInfo(OSMajorVersion: UInt32, OSMinorVersion: UInt32, SpMajorVersion: UInt32, SpMinorVersion: UInt32, ReturnedProductType: CPointer<UInt32>): UInt8 {
+    return RtlGetProductInfo(OSMajorVersion, OSMinorVersion, SpMajorVersion, SpMinorVersion, ReturnedProductType)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && NTDLL == "on" && Windows_Win32_System_SystemInformation_RtlOsDeploymentState == "on"]
+foreign {
     func RtlOsDeploymentState(Flags: UInt32): OS_DEPLOYEMENT_STATE_VALUESAbi
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && NTDLL == "on" && Windows_Win32_System_SystemInformation_RtlOsDeploymentState == "on"]
+public unsafe func Windows_RtlOsDeploymentState(Flags: UInt32): OS_DEPLOYEMENT_STATE_VALUESAbi {
+    return RtlOsDeploymentState(Flags)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && NTDLL == "on" && Windows_Win32_System_SystemInformation_RtlSwitchedVVI == "on"]
+foreign {
     func RtlSwitchedVVI(VersionInfo: CPointer<OSVERSIONINFOEXWAbi>, TypeMask: UInt32, ConditionMask: UInt64): UInt32
 }
 
-@When[NTDLLK == "on"]
+@When[Windows_Win32_System_SystemInformation == "on" && NTDLL == "on" && Windows_Win32_System_SystemInformation_RtlSwitchedVVI == "on"]
+public unsafe func Windows_RtlSwitchedVVI(VersionInfo: CPointer<OSVERSIONINFOEXWAbi>, TypeMask: UInt32, ConditionMask: UInt64): UInt32 {
+    return RtlSwitchedVVI(VersionInfo, TypeMask, ConditionMask)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && NTDLLK == "on" && Windows_Win32_System_SystemInformation_RtlGetSystemGlobalData == "on"]
 foreign {
     func RtlGetSystemGlobalData(DataId: RTL_SYSTEM_GLOBAL_DATA_IDAbi, Buffer: CPointer<Unit>, Size: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && NTDLLK == "on" && Windows_Win32_System_SystemInformation_RtlGetSystemGlobalData == "on"]
+public unsafe func Windows_RtlGetSystemGlobalData(DataId: RTL_SYSTEM_GLOBAL_DATA_IDAbi, Buffer: CPointer<Unit>, Size: UInt32): UInt32 {
+    return RtlGetSystemGlobalData(DataId, Buffer, Size)
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetRuntimeAttestationReport == "on"]
+func __windowsBindgen_GetRuntimeAttestationReportProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("KERNEL32.dll", "GetRuntimeAttestationReport")
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetRuntimeAttestationReport == "on"]
+unsafe func GetRuntimeAttestationReport(Nonce: CPointer<UInt8>, PackageVersion: UInt16, ReportTypesBitmap: UInt64, ReportBuffer: CPointer<Unit>, ReportBufferSize: CPointer<UInt32>): Int32 {
+    let call = CFunc<(CPointer<UInt8>, UInt16, UInt64, CPointer<Unit>, CPointer<UInt32>) -> Int32>(__windowsBindgen_GetRuntimeAttestationReportProc())
+    return unsafe { call(Nonce, PackageVersion, ReportTypesBitmap, ReportBuffer, ReportBufferSize) }
+}
+
+@When[Windows_Win32_System_SystemInformation == "on" && KERNEL32 == "on" && Windows_Win32_System_SystemInformation_GetRuntimeAttestationReport == "on"]
+public unsafe func Windows_GetRuntimeAttestationReport(Nonce: CPointer<UInt8>, PackageVersion: UInt16, ReportTypesBitmap: UInt64, ReportBuffer: CPointer<Unit>, ReportBufferSize: CPointer<UInt32>): Int32 {
+    return GetRuntimeAttestationReport(Nonce, PackageVersion, ReportTypesBitmap, ReportBuffer, ReportBufferSize)
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]

@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Devices_Pwm_Provider == "on"]
 import windows.Devices.Pwm.Provider as Devices_Pwm_Provider
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -206,9 +204,9 @@ extend IPwmController <: windows_core.Interface<IPwmController> {}
 @C
 public struct IPwmControllerStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Devices_Pwm_Provider == "on"]
+    @When[Windows_Devices_Pwm_Provider == "on" && Windows_Foundation_Collections == "on"]
     public var GetControllersAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Devices_Pwm_Provider != "on"]
+    @When[Windows_Devices_Pwm_Provider != "on" || Windows_Foundation_Collections != "on"]
     public var GetControllersAsync: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -278,7 +276,7 @@ public class IPwmControllerStatics <: InterfaceWrapperBase & ComInterface & Runt
         readVtbl<IPwmControllerStaticsVtbl>(IPwmControllerStaticsVtbl())
     }
 
-    @When[Windows_Devices_Pwm_Provider == "on"]
+    @When[Windows_Devices_Pwm_Provider == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func GetControllersAsync(provider: Devices_Pwm_Provider.IPwmProvider): windows_future.IAsyncOperation<windows_collections.IVectorView<PwmController>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -768,7 +766,7 @@ public class PwmController <: InterfaceWrapperBase & ComInterface & windows_inte
         }
     }
 
-    @When[Windows_Devices_Pwm_Provider == "on"]
+    @When[Windows_Devices_Pwm_Provider == "on" && Windows_Foundation_Collections == "on"]
     public static unsafe func GetControllersAsync(provider: Devices_Pwm_Provider.IPwmProvider): windows_future.IAsyncOperation<windows_collections.IVectorView<PwmController>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<PwmController>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<PwmController>>>.None
         try (factory__ = windows_core.factory<PwmController, IPwmControllerStatics>().unwrap()) {

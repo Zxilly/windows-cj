@@ -437,6 +437,7 @@ public class IAppExtensionPackageUpdatingEventArgs <: InterfaceWrapperBase & Com
 @C
 public struct IAppExtensionCatalog2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAll: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -481,6 +482,7 @@ public class IAppExtensionCatalog2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IAppExtensionCatalog2Vtbl>(IAppExtensionCatalog2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAll(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -495,6 +497,7 @@ public struct IAppExtensionPackageInstalledEventArgsVtbl {
     public var AppExtensionName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_ApplicationModel == "on"]
     public var Package: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Extensions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -552,6 +555,7 @@ public class IAppExtensionPackageInstalledEventArgs <: InterfaceWrapperBase & Co
         return __vt.Package(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Extensions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -566,6 +570,7 @@ public struct IAppExtensionPackageUpdatedEventArgsVtbl {
     public var AppExtensionName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_ApplicationModel == "on"]
     public var Package: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Extensions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -623,6 +628,7 @@ public class IAppExtensionPackageUpdatedEventArgs <: InterfaceWrapperBase & ComI
         return __vt.Package(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Extensions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -634,6 +640,7 @@ public class IAppExtensionPackageUpdatedEventArgs <: InterfaceWrapperBase & ComI
 @C
 public struct IAppExtensionCatalogVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var RequestRemovePackageAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var PackageInstalled: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
@@ -689,6 +696,7 @@ public class IAppExtensionCatalog <: InterfaceWrapperBase & ComInterface {
         readVtbl<IAppExtensionCatalogVtbl>(IAppExtensionCatalogVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

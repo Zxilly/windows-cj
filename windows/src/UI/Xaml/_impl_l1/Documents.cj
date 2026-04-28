@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows.UI.Xaml._impl_l0 as UI_Xaml__impl_l0
 import windows._impl_l0 as _impl_l0
@@ -231,7 +230,7 @@ extend Block <: windows_core.HandleWinrtType<Block> {
     }
 }
 
-@When[Windows_UI_Xaml_Documents == "on"]
+@When[Windows_UI_Xaml_Documents == "on" && Windows_Foundation_Collections == "on"]
 public class BlockCollection <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -368,7 +367,7 @@ public class BlockCollection <: InterfaceWrapperBase & ComInterface & windows_in
     }
 }
 
-@When[Windows_UI_Xaml_Documents == "on"]
+@When[Windows_UI_Xaml_Documents == "on" && Windows_Foundation_Collections == "on"]
 extend BlockCollection <: windows_core.HandleWinrtType<BlockCollection> {
     public static func intoWinrtHandle(value: BlockCollection): CPointer<Unit> {
         value.asRaw()
@@ -2690,7 +2689,10 @@ extend IInlineUIContainer <: windows_core.Interface<IInlineUIContainer> {}
 @C
 public struct IParagraphVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Inlines: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Inlines: UIntNative = UIntNative(0)
     public var TextIndent: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetTextIndent: CFunc<(CPointer<Unit>, Float64) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -2761,6 +2763,7 @@ public class IParagraph <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         readVtbl<IParagraphVtbl>(IParagraphVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Inlines(): InlineCollection {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2791,8 +2794,14 @@ extend IParagraph <: windows_core.Interface<IParagraph> {}
 @C
 public struct ISpanVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Inlines: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Inlines: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SetInlines: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SetInlines: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2861,6 +2870,7 @@ public class ISpan <: InterfaceWrapperBase & ComInterface & RuntimeName & window
         readVtbl<ISpanVtbl>(ISpanVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Inlines(): InlineCollection {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2869,6 +2879,7 @@ public class ISpan <: InterfaceWrapperBase & ComInterface & RuntimeName & window
         return InlineCollection.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetInlines(value: InlineCollection): Unit {
         let v = vtbl()
         let hr = v.SetInlines(asRaw(), value.asRaw())
@@ -3622,7 +3633,10 @@ extend ITextElement5 <: windows_core.Interface<ITextElement5> {}
 @C
 public struct ITextHighlighterVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Ranges: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Ranges: UIntNative = UIntNative(0)
     @When[Windows_UI_Xaml_Media == "on"]
     public var Foreground: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Xaml_Media != "on"]
@@ -3707,6 +3721,7 @@ public class ITextHighlighter <: InterfaceWrapperBase & ComInterface & RuntimeNa
         readVtbl<ITextHighlighterVtbl>(ITextHighlighterVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Ranges(): windows_collections.IVector<UI_Xaml__impl_l0.TextRange> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4088,7 +4103,7 @@ extend Inline <: windows_core.HandleWinrtType<Inline> {
     }
 }
 
-@When[Windows_UI_Xaml_Documents == "on"]
+@When[Windows_UI_Xaml_Documents == "on" && Windows_Foundation_Collections == "on"]
 public class InlineCollection <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -4225,7 +4240,7 @@ public class InlineCollection <: InterfaceWrapperBase & ComInterface & windows_i
     }
 }
 
-@When[Windows_UI_Xaml_Documents == "on"]
+@When[Windows_UI_Xaml_Documents == "on" && Windows_Foundation_Collections == "on"]
 extend InlineCollection <: windows_core.HandleWinrtType<InlineCollection> {
     public static func intoWinrtHandle(value: InlineCollection): CPointer<Unit> {
         value.asRaw()
@@ -4721,6 +4736,7 @@ public class Paragraph <: InterfaceWrapperBase & ComInterface & windows_interfac
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Inlines(): InlineCollection {
         return defaultInterface().Inlines()
     }
@@ -5004,10 +5020,12 @@ public class Span <: InterfaceWrapperBase & ComInterface & windows_interface.Run
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Inlines(): InlineCollection {
         return defaultInterface().Inlines()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetInlines(value: InlineCollection): Unit {
         defaultInterface().SetInlines(value)
     }
@@ -5521,6 +5539,7 @@ public class TextHighlighter <: InterfaceWrapperBase & ComInterface & windows_in
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Ranges(): windows_collections.IVector<UI_Xaml__impl_l0.TextRange> {
         return defaultInterface().Ranges()
     }

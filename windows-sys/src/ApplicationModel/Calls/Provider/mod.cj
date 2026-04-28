@@ -163,9 +163,9 @@ public class IPhoneCallOrigin2 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IPhoneCallOrigin3Vtbl {
     public var base_: IPhoneCallOrigin2Vtbl = IPhoneCallOrigin2Vtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var DisplayPicture: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var SetDisplayPicture: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -210,14 +210,14 @@ public class IPhoneCallOrigin3 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IPhoneCallOrigin3Vtbl>(IPhoneCallOrigin3Vtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func DisplayPicture(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DisplayPicture(__liveRaw, result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func SetDisplayPicture(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

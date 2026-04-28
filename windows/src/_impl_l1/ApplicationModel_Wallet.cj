@@ -340,12 +340,24 @@ public struct IWalletItemVtbl {
     public var SetRelevantDate: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var RelevantDateDisplayMessage: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetRelevantDateDisplayMessage: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var TransactionHistory: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var TransactionHistory: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var RelevantLocations: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RelevantLocations: UIntNative = UIntNative(0)
     public var IsMoreTransactionHistoryLaunchable: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetIsMoreTransactionHistoryLaunchable: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var DisplayProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var DisplayProperties: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Verbs: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Verbs: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -760,6 +772,7 @@ public class IWalletItem <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TransactionHistory(): windows_collections.IMap<windows_core.HString, _impl_l0.WalletTransaction> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -768,6 +781,7 @@ public class IWalletItem <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         return windows_collections.IMap<windows_core.HString, _impl_l0.WalletTransaction>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RelevantLocations(): windows_collections.IMap<windows_core.HString, _impl_l0.WalletRelevantLocation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -790,6 +804,7 @@ public class IWalletItem <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DisplayProperties(): windows_collections.IMap<windows_core.HString, WalletItemCustomProperty> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -798,6 +813,7 @@ public class IWalletItem <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         return windows_collections.IMap<windows_core.HString, WalletItemCustomProperty>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Verbs(): windows_collections.IMap<windows_core.HString, _impl_l0.WalletVerb> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -987,8 +1003,14 @@ public struct IWalletItemStoreVtbl {
     public var AddAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var ClearAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetWalletItemAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetItemsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetItemsAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetItemsWithKindAsync: CFunc<(CPointer<Unit>, _impl_l0.WalletItemKindAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetItemsWithKindAsync: UIntNative = UIntNative(0)
     @When[Windows_Storage_Streams == "on"]
     public var ImportItemAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams != "on"]
@@ -1089,6 +1111,7 @@ public class IWalletItemStore <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_future.IAsyncOperation<WalletItem>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetItemsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<WalletItem>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1097,6 +1120,7 @@ public class IWalletItemStore <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_future.IAsyncOperation<windows_collections.IVectorView<WalletItem>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetItemsWithKindAsync(kind: _impl_l0.WalletItemKind): windows_future.IAsyncOperation<windows_collections.IVectorView<WalletItem>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1726,10 +1750,12 @@ public class WalletItem <: InterfaceWrapperBase & ComInterface & windows_interfa
         defaultInterface().SetRelevantDateDisplayMessage(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TransactionHistory(): windows_collections.IMap<windows_core.HString, _impl_l0.WalletTransaction> {
         return defaultInterface().TransactionHistory()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RelevantLocations(): windows_collections.IMap<windows_core.HString, _impl_l0.WalletRelevantLocation> {
         return defaultInterface().RelevantLocations()
     }
@@ -1742,10 +1768,12 @@ public class WalletItem <: InterfaceWrapperBase & ComInterface & windows_interfa
         defaultInterface().SetIsMoreTransactionHistoryLaunchable(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DisplayProperties(): windows_collections.IMap<windows_core.HString, WalletItemCustomProperty> {
         return defaultInterface().DisplayProperties()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Verbs(): windows_collections.IMap<windows_core.HString, _impl_l0.WalletVerb> {
         return defaultInterface().Verbs()
     }
@@ -2000,10 +2028,12 @@ public class WalletItemStore <: InterfaceWrapperBase & ComInterface & windows_in
         return defaultInterface().GetWalletItemAsync(id)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetItemsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<WalletItem>> {
         return defaultInterface().GetItemsAsync()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetItemsWithKindAsync(kind: _impl_l0.WalletItemKind): windows_future.IAsyncOperation<windows_collections.IVectorView<WalletItem>> {
         return defaultInterface().GetItemsWithKindAsync(kind)
     }

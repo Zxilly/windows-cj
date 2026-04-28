@@ -10,7 +10,6 @@ import windows_interface.{GUID}
 import windows_interface as windows_interface
 import windows_polyfill.{packedReadInt32, packedReadUInt32, packedReadUIntNative, packedReadValue, packedWriteInt32, packedWriteUInt32, packedWriteUIntNative, packedWriteValue, unionReadUInt64, unionWriteUInt64}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
@@ -12734,492 +12733,2937 @@ extend RAS_CONNECTION_3 <: windows_core.CopyType & windows_core.RuntimeType & wi
     }
 }
 
-@When[MPRAPI == "on"]
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminBufferFree == "on"]
 foreign {
     func MprAdminBufferFree(pBuffer: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminBufferFree == "on"]
+public unsafe func Windows_MprAdminBufferFree(pBuffer: CPointer<Unit>): UInt32 {
+    return MprAdminBufferFree(pBuffer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminConnectionClearStats == "on"]
+foreign {
     func MprAdminConnectionClearStats(hRasServer: IntNative, hRasConnection: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminConnectionClearStats == "on"]
+public unsafe func Windows_MprAdminConnectionClearStats(hRasServer: IntNative, hRasConnection: CPointer<Unit>): UInt32 {
+    return MprAdminConnectionClearStats(hRasServer, hRasConnection)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminConnectionEnum == "on"]
+foreign {
     // param-hint: lpdwResumeHandle optional
     func MprAdminConnectionEnum(hRasServer: IntNative, dwLevel: UInt32, lplpbBuffer: CPointer<CPointer<UInt8>>, dwPrefMaxLen: UInt32, lpdwEntriesRead: CPointer<UInt32>, lpdwTotalEntries: CPointer<UInt32>, lpdwResumeHandle: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminConnectionEnum == "on"]
+public unsafe func Windows_MprAdminConnectionEnum(hRasServer: IntNative, dwLevel: UInt32, lplpbBuffer: CPointer<CPointer<UInt8>>, dwPrefMaxLen: UInt32, lpdwEntriesRead: CPointer<UInt32>, lpdwTotalEntries: CPointer<UInt32>, lpdwResumeHandle: CPointer<UInt32>): UInt32 {
+    return MprAdminConnectionEnum(hRasServer, dwLevel, lplpbBuffer, dwPrefMaxLen, lpdwEntriesRead, lpdwTotalEntries, lpdwResumeHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminConnectionEnumEx == "on"]
+foreign {
     func MprAdminConnectionEnumEx(hRasServer: IntNative, pObjectHeader: CPointer<MPRAPI_OBJECT_HEADERAbi>, dwPreferedMaxLen: UInt32, lpdwEntriesRead: CPointer<UInt32>, lpdwTotalEntries: CPointer<UInt32>, ppRasConn: CPointer<CPointer<RAS_CONNECTION_EXAbi>>, lpdwResumeHandle: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminConnectionEnumEx == "on"]
+public unsafe func Windows_MprAdminConnectionEnumEx(hRasServer: IntNative, pObjectHeader: CPointer<MPRAPI_OBJECT_HEADERAbi>, dwPreferedMaxLen: UInt32, lpdwEntriesRead: CPointer<UInt32>, lpdwTotalEntries: CPointer<UInt32>, ppRasConn: CPointer<CPointer<RAS_CONNECTION_EXAbi>>, lpdwResumeHandle: CPointer<UInt32>): UInt32 {
+    return MprAdminConnectionEnumEx(hRasServer, pObjectHeader, dwPreferedMaxLen, lpdwEntriesRead, lpdwTotalEntries, ppRasConn, lpdwResumeHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminConnectionGetInfo == "on"]
+foreign {
     func MprAdminConnectionGetInfo(hRasServer: IntNative, dwLevel: UInt32, hRasConnection: CPointer<Unit>, lplpbBuffer: CPointer<CPointer<UInt8>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminConnectionGetInfo == "on"]
+public unsafe func Windows_MprAdminConnectionGetInfo(hRasServer: IntNative, dwLevel: UInt32, hRasConnection: CPointer<Unit>, lplpbBuffer: CPointer<CPointer<UInt8>>): UInt32 {
+    return MprAdminConnectionGetInfo(hRasServer, dwLevel, hRasConnection, lplpbBuffer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminConnectionGetInfoEx == "on"]
+foreign {
     func MprAdminConnectionGetInfoEx(hRasServer: IntNative, hRasConnection: CPointer<Unit>, pRasConnection: CPointer<RAS_CONNECTION_EXAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminConnectionGetInfoEx == "on"]
+public unsafe func Windows_MprAdminConnectionGetInfoEx(hRasServer: IntNative, hRasConnection: CPointer<Unit>, pRasConnection: CPointer<RAS_CONNECTION_EXAbi>): UInt32 {
+    return MprAdminConnectionGetInfoEx(hRasServer, hRasConnection, pRasConnection)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminConnectionRemoveQuarantine == "on"]
+foreign {
     func MprAdminConnectionRemoveQuarantine(hRasServer: CPointer<Unit>, hRasConnection: CPointer<Unit>, fIsIpAddress: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminConnectionRemoveQuarantine == "on"]
+public unsafe func Windows_MprAdminConnectionRemoveQuarantine(hRasServer: CPointer<Unit>, hRasConnection: CPointer<Unit>, fIsIpAddress: Int32): UInt32 {
+    return MprAdminConnectionRemoveQuarantine(hRasServer, hRasConnection, fIsIpAddress)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminDeregisterConnectionNotification == "on"]
+foreign {
     func MprAdminDeregisterConnectionNotification(hMprServer: IntNative, hEventNotification: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminDeregisterConnectionNotification == "on"]
+public unsafe func Windows_MprAdminDeregisterConnectionNotification(hMprServer: IntNative, hEventNotification: CPointer<Unit>): UInt32 {
+    return MprAdminDeregisterConnectionNotification(hMprServer, hEventNotification)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminDeviceEnum == "on"]
+foreign {
     func MprAdminDeviceEnum(hMprServer: IntNative, dwLevel: UInt32, lplpbBuffer: CPointer<CPointer<UInt8>>, lpdwTotalEntries: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminDeviceEnum == "on"]
+public unsafe func Windows_MprAdminDeviceEnum(hMprServer: IntNative, dwLevel: UInt32, lplpbBuffer: CPointer<CPointer<UInt8>>, lpdwTotalEntries: CPointer<UInt32>): UInt32 {
+    return MprAdminDeviceEnum(hMprServer, dwLevel, lplpbBuffer, lpdwTotalEntries)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminEstablishDomainRasServer == "on"]
+foreign {
     func MprAdminEstablishDomainRasServer(pszDomain: CPointer<UInt16>, pszMachine: CPointer<UInt16>, bEnable: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminEstablishDomainRasServer == "on"]
+public unsafe func Windows_MprAdminEstablishDomainRasServer(pszDomain: CPointer<UInt16>, pszMachine: CPointer<UInt16>, bEnable: Int32): UInt32 {
+    return MprAdminEstablishDomainRasServer(pszDomain, pszMachine, bEnable)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminGetErrorString == "on"]
+foreign {
     func MprAdminGetErrorString(dwError: UInt32, lplpwsErrorString: CPointer<CPointer<UInt16>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminGetErrorString == "on"]
+public unsafe func Windows_MprAdminGetErrorString(dwError: UInt32, lplpwsErrorString: CPointer<CPointer<UInt16>>): UInt32 {
+    return MprAdminGetErrorString(dwError, lplpwsErrorString)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminGetPDCServer == "on"]
+foreign {
     func MprAdminGetPDCServer(lpszDomain: CPointer<UInt16>, lpszServer: CPointer<UInt16>, lpszPDCServer: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminGetPDCServer == "on"]
+public unsafe func Windows_MprAdminGetPDCServer(lpszDomain: CPointer<UInt16>, lpszServer: CPointer<UInt16>, lpszPDCServer: CPointer<UInt16>): UInt32 {
+    return MprAdminGetPDCServer(lpszDomain, lpszServer, lpszPDCServer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceConnect == "on"]
+foreign {
     func MprAdminInterfaceConnect(hMprServer: IntNative, hInterface: CPointer<Unit>, hEvent: CPointer<Unit>, fSynchronous: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceConnect == "on"]
+public unsafe func Windows_MprAdminInterfaceConnect(hMprServer: IntNative, hInterface: CPointer<Unit>, hEvent: CPointer<Unit>, fSynchronous: Int32): UInt32 {
+    return MprAdminInterfaceConnect(hMprServer, hInterface, hEvent, fSynchronous)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceCreate == "on"]
+foreign {
     func MprAdminInterfaceCreate(hMprServer: IntNative, dwLevel: UInt32, lpbBuffer: CPointer<UInt8>, phInterface: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceCreate == "on"]
+public unsafe func Windows_MprAdminInterfaceCreate(hMprServer: IntNative, dwLevel: UInt32, lpbBuffer: CPointer<UInt8>, phInterface: CPointer<CPointer<Unit>>): UInt32 {
+    return MprAdminInterfaceCreate(hMprServer, dwLevel, lpbBuffer, phInterface)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceDelete == "on"]
+foreign {
     func MprAdminInterfaceDelete(hMprServer: IntNative, hInterface: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceDelete == "on"]
+public unsafe func Windows_MprAdminInterfaceDelete(hMprServer: IntNative, hInterface: CPointer<Unit>): UInt32 {
+    return MprAdminInterfaceDelete(hMprServer, hInterface)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceDeviceGetInfo == "on"]
+foreign {
     func MprAdminInterfaceDeviceGetInfo(hMprServer: IntNative, hInterface: CPointer<Unit>, dwIndex: UInt32, dwLevel: UInt32, lplpBuffer: CPointer<CPointer<UInt8>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceDeviceGetInfo == "on"]
+public unsafe func Windows_MprAdminInterfaceDeviceGetInfo(hMprServer: IntNative, hInterface: CPointer<Unit>, dwIndex: UInt32, dwLevel: UInt32, lplpBuffer: CPointer<CPointer<UInt8>>): UInt32 {
+    return MprAdminInterfaceDeviceGetInfo(hMprServer, hInterface, dwIndex, dwLevel, lplpBuffer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceDeviceSetInfo == "on"]
+foreign {
     func MprAdminInterfaceDeviceSetInfo(hMprServer: IntNative, hInterface: CPointer<Unit>, dwIndex: UInt32, dwLevel: UInt32, lpbBuffer: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceDeviceSetInfo == "on"]
+public unsafe func Windows_MprAdminInterfaceDeviceSetInfo(hMprServer: IntNative, hInterface: CPointer<Unit>, dwIndex: UInt32, dwLevel: UInt32, lpbBuffer: CPointer<UInt8>): UInt32 {
+    return MprAdminInterfaceDeviceSetInfo(hMprServer, hInterface, dwIndex, dwLevel, lpbBuffer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceDisconnect == "on"]
+foreign {
     func MprAdminInterfaceDisconnect(hMprServer: IntNative, hInterface: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceDisconnect == "on"]
+public unsafe func Windows_MprAdminInterfaceDisconnect(hMprServer: IntNative, hInterface: CPointer<Unit>): UInt32 {
+    return MprAdminInterfaceDisconnect(hMprServer, hInterface)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceEnum == "on"]
+foreign {
     // param-hint: lpdwResumeHandle optional
     func MprAdminInterfaceEnum(hMprServer: IntNative, dwLevel: UInt32, lplpbBuffer: CPointer<CPointer<UInt8>>, dwPrefMaxLen: UInt32, lpdwEntriesRead: CPointer<UInt32>, lpdwTotalEntries: CPointer<UInt32>, lpdwResumeHandle: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceEnum == "on"]
+public unsafe func Windows_MprAdminInterfaceEnum(hMprServer: IntNative, dwLevel: UInt32, lplpbBuffer: CPointer<CPointer<UInt8>>, dwPrefMaxLen: UInt32, lpdwEntriesRead: CPointer<UInt32>, lpdwTotalEntries: CPointer<UInt32>, lpdwResumeHandle: CPointer<UInt32>): UInt32 {
+    return MprAdminInterfaceEnum(hMprServer, dwLevel, lplpbBuffer, dwPrefMaxLen, lpdwEntriesRead, lpdwTotalEntries, lpdwResumeHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceGetCredentials == "on"]
+foreign {
     // param-hint: lpwsServer optional
     // param-hint: lpwsUserName optional
     // param-hint: lpwsPassword optional
     // param-hint: lpwsDomainName optional
     func MprAdminInterfaceGetCredentials(lpwsServer: CPointer<UInt16>, lpwsInterfaceName: CPointer<UInt16>, lpwsUserName: CPointer<UInt16>, lpwsPassword: CPointer<UInt16>, lpwsDomainName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceGetCredentials == "on"]
+public unsafe func Windows_MprAdminInterfaceGetCredentials(lpwsServer: CPointer<UInt16>, lpwsInterfaceName: CPointer<UInt16>, lpwsUserName: CPointer<UInt16>, lpwsPassword: CPointer<UInt16>, lpwsDomainName: CPointer<UInt16>): UInt32 {
+    return MprAdminInterfaceGetCredentials(lpwsServer, lpwsInterfaceName, lpwsUserName, lpwsPassword, lpwsDomainName)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceGetCredentialsEx == "on"]
+foreign {
     func MprAdminInterfaceGetCredentialsEx(hMprServer: IntNative, hInterface: CPointer<Unit>, dwLevel: UInt32, lplpbBuffer: CPointer<CPointer<UInt8>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceGetCredentialsEx == "on"]
+public unsafe func Windows_MprAdminInterfaceGetCredentialsEx(hMprServer: IntNative, hInterface: CPointer<Unit>, dwLevel: UInt32, lplpbBuffer: CPointer<CPointer<UInt8>>): UInt32 {
+    return MprAdminInterfaceGetCredentialsEx(hMprServer, hInterface, dwLevel, lplpbBuffer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceGetCustomInfoEx == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
+    func MprAdminInterfaceGetCustomInfoEx(hMprServer: IntNative, hInterface: CPointer<Unit>, pCustomInfo: CPointer<MPR_IF_CUSTOMINFOEX2Abi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceGetCustomInfoEx == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_MprAdminInterfaceGetCustomInfoEx(hMprServer: IntNative, hInterface: CPointer<Unit>, pCustomInfo: CPointer<MPR_IF_CUSTOMINFOEX2Abi>): UInt32 {
+    return MprAdminInterfaceGetCustomInfoEx(hMprServer, hInterface, pCustomInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceGetHandle == "on"]
+foreign {
     func MprAdminInterfaceGetHandle(hMprServer: IntNative, lpwsInterfaceName: CPointer<UInt16>, phInterface: CPointer<CPointer<Unit>>, fIncludeClientInterfaces: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceGetHandle == "on"]
+public unsafe func Windows_MprAdminInterfaceGetHandle(hMprServer: IntNative, lpwsInterfaceName: CPointer<UInt16>, phInterface: CPointer<CPointer<Unit>>, fIncludeClientInterfaces: Int32): UInt32 {
+    return MprAdminInterfaceGetHandle(hMprServer, lpwsInterfaceName, phInterface, fIncludeClientInterfaces)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceGetInfo == "on"]
+foreign {
     func MprAdminInterfaceGetInfo(hMprServer: IntNative, hInterface: CPointer<Unit>, dwLevel: UInt32, lplpbBuffer: CPointer<CPointer<UInt8>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceGetInfo == "on"]
+public unsafe func Windows_MprAdminInterfaceGetInfo(hMprServer: IntNative, hInterface: CPointer<Unit>, dwLevel: UInt32, lplpbBuffer: CPointer<CPointer<UInt8>>): UInt32 {
+    return MprAdminInterfaceGetInfo(hMprServer, hInterface, dwLevel, lplpbBuffer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceQueryUpdateResult == "on"]
+foreign {
     func MprAdminInterfaceQueryUpdateResult(hMprServer: IntNative, hInterface: CPointer<Unit>, dwProtocolId: UInt32, lpdwUpdateResult: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceQueryUpdateResult == "on"]
+public unsafe func Windows_MprAdminInterfaceQueryUpdateResult(hMprServer: IntNative, hInterface: CPointer<Unit>, dwProtocolId: UInt32, lpdwUpdateResult: CPointer<UInt32>): UInt32 {
+    return MprAdminInterfaceQueryUpdateResult(hMprServer, hInterface, dwProtocolId, lpdwUpdateResult)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceSetCredentials == "on"]
+foreign {
     // param-hint: lpwsServer optional
     // param-hint: lpwsUserName optional
     // param-hint: lpwsDomainName optional
     // param-hint: lpwsPassword optional
     func MprAdminInterfaceSetCredentials(lpwsServer: CPointer<UInt16>, lpwsInterfaceName: CPointer<UInt16>, lpwsUserName: CPointer<UInt16>, lpwsDomainName: CPointer<UInt16>, lpwsPassword: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceSetCredentials == "on"]
+public unsafe func Windows_MprAdminInterfaceSetCredentials(lpwsServer: CPointer<UInt16>, lpwsInterfaceName: CPointer<UInt16>, lpwsUserName: CPointer<UInt16>, lpwsDomainName: CPointer<UInt16>, lpwsPassword: CPointer<UInt16>): UInt32 {
+    return MprAdminInterfaceSetCredentials(lpwsServer, lpwsInterfaceName, lpwsUserName, lpwsDomainName, lpwsPassword)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceSetCredentialsEx == "on"]
+foreign {
     func MprAdminInterfaceSetCredentialsEx(hMprServer: IntNative, hInterface: CPointer<Unit>, dwLevel: UInt32, lpbBuffer: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceSetCredentialsEx == "on"]
+public unsafe func Windows_MprAdminInterfaceSetCredentialsEx(hMprServer: IntNative, hInterface: CPointer<Unit>, dwLevel: UInt32, lpbBuffer: CPointer<UInt8>): UInt32 {
+    return MprAdminInterfaceSetCredentialsEx(hMprServer, hInterface, dwLevel, lpbBuffer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceSetCustomInfoEx == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
+    func MprAdminInterfaceSetCustomInfoEx(hMprServer: IntNative, hInterface: CPointer<Unit>, pCustomInfo: CPointer<MPR_IF_CUSTOMINFOEX2Abi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceSetCustomInfoEx == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_MprAdminInterfaceSetCustomInfoEx(hMprServer: IntNative, hInterface: CPointer<Unit>, pCustomInfo: CPointer<MPR_IF_CUSTOMINFOEX2Abi>): UInt32 {
+    return MprAdminInterfaceSetCustomInfoEx(hMprServer, hInterface, pCustomInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceSetInfo == "on"]
+foreign {
     func MprAdminInterfaceSetInfo(hMprServer: IntNative, hInterface: CPointer<Unit>, dwLevel: UInt32, lpbBuffer: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceSetInfo == "on"]
+public unsafe func Windows_MprAdminInterfaceSetInfo(hMprServer: IntNative, hInterface: CPointer<Unit>, dwLevel: UInt32, lpbBuffer: CPointer<UInt8>): UInt32 {
+    return MprAdminInterfaceSetInfo(hMprServer, hInterface, dwLevel, lpbBuffer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceTransportAdd == "on"]
+foreign {
     func MprAdminInterfaceTransportAdd(hMprServer: IntNative, hInterface: CPointer<Unit>, dwTransportId: UInt32, pInterfaceInfo: CPointer<UInt8>, dwInterfaceInfoSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceTransportAdd == "on"]
+public unsafe func Windows_MprAdminInterfaceTransportAdd(hMprServer: IntNative, hInterface: CPointer<Unit>, dwTransportId: UInt32, pInterfaceInfo: CPointer<UInt8>, dwInterfaceInfoSize: UInt32): UInt32 {
+    return MprAdminInterfaceTransportAdd(hMprServer, hInterface, dwTransportId, pInterfaceInfo, dwInterfaceInfoSize)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceTransportGetInfo == "on"]
+foreign {
     // param-hint: lpdwInterfaceInfoSize optional
     func MprAdminInterfaceTransportGetInfo(hMprServer: IntNative, hInterface: CPointer<Unit>, dwTransportId: UInt32, ppInterfaceInfo: CPointer<CPointer<UInt8>>, lpdwInterfaceInfoSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceTransportGetInfo == "on"]
+public unsafe func Windows_MprAdminInterfaceTransportGetInfo(hMprServer: IntNative, hInterface: CPointer<Unit>, dwTransportId: UInt32, ppInterfaceInfo: CPointer<CPointer<UInt8>>, lpdwInterfaceInfoSize: CPointer<UInt32>): UInt32 {
+    return MprAdminInterfaceTransportGetInfo(hMprServer, hInterface, dwTransportId, ppInterfaceInfo, lpdwInterfaceInfoSize)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceTransportRemove == "on"]
+foreign {
     func MprAdminInterfaceTransportRemove(hMprServer: IntNative, hInterface: CPointer<Unit>, dwTransportId: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceTransportRemove == "on"]
+public unsafe func Windows_MprAdminInterfaceTransportRemove(hMprServer: IntNative, hInterface: CPointer<Unit>, dwTransportId: UInt32): UInt32 {
+    return MprAdminInterfaceTransportRemove(hMprServer, hInterface, dwTransportId)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceTransportSetInfo == "on"]
+foreign {
     func MprAdminInterfaceTransportSetInfo(hMprServer: IntNative, hInterface: CPointer<Unit>, dwTransportId: UInt32, pInterfaceInfo: CPointer<UInt8>, dwInterfaceInfoSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceTransportSetInfo == "on"]
+public unsafe func Windows_MprAdminInterfaceTransportSetInfo(hMprServer: IntNative, hInterface: CPointer<Unit>, dwTransportId: UInt32, pInterfaceInfo: CPointer<UInt8>, dwInterfaceInfoSize: UInt32): UInt32 {
+    return MprAdminInterfaceTransportSetInfo(hMprServer, hInterface, dwTransportId, pInterfaceInfo, dwInterfaceInfoSize)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceUpdatePhonebookInfo == "on"]
+foreign {
     func MprAdminInterfaceUpdatePhonebookInfo(hMprServer: IntNative, hInterface: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceUpdatePhonebookInfo == "on"]
+public unsafe func Windows_MprAdminInterfaceUpdatePhonebookInfo(hMprServer: IntNative, hInterface: CPointer<Unit>): UInt32 {
+    return MprAdminInterfaceUpdatePhonebookInfo(hMprServer, hInterface)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceUpdateRoutes == "on"]
+foreign {
     func MprAdminInterfaceUpdateRoutes(hMprServer: IntNative, hInterface: CPointer<Unit>, dwProtocolId: UInt32, hEvent: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminInterfaceUpdateRoutes == "on"]
+public unsafe func Windows_MprAdminInterfaceUpdateRoutes(hMprServer: IntNative, hInterface: CPointer<Unit>, dwProtocolId: UInt32, hEvent: CPointer<Unit>): UInt32 {
+    return MprAdminInterfaceUpdateRoutes(hMprServer, hInterface, dwProtocolId, hEvent)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminIsDomainRasServer == "on"]
+foreign {
     func MprAdminIsDomainRasServer(pszDomain: CPointer<UInt16>, pszMachine: CPointer<UInt16>, pbIsRasServer: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminIsDomainRasServer == "on"]
+public unsafe func Windows_MprAdminIsDomainRasServer(pszDomain: CPointer<UInt16>, pszMachine: CPointer<UInt16>, pbIsRasServer: CPointer<Int32>): UInt32 {
+    return MprAdminIsDomainRasServer(pszDomain, pszMachine, pbIsRasServer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminIsServiceInitialized == "on"]
+foreign {
     func MprAdminIsServiceInitialized(lpwsServerName: CPointer<UInt16>, fIsServiceInitialized: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminIsServiceInitialized == "on"]
+public unsafe func Windows_MprAdminIsServiceInitialized(lpwsServerName: CPointer<UInt16>, fIsServiceInitialized: CPointer<Int32>): UInt32 {
+    return MprAdminIsServiceInitialized(lpwsServerName, fIsServiceInitialized)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminIsServiceRunning == "on"]
+foreign {
     func MprAdminIsServiceRunning(lpwsServerName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminIsServiceRunning == "on"]
+public unsafe func Windows_MprAdminIsServiceRunning(lpwsServerName: CPointer<UInt16>): Int32 {
+    return MprAdminIsServiceRunning(lpwsServerName)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminMIBBufferFree == "on"]
+foreign {
     func MprAdminMIBBufferFree(pBuffer: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminMIBBufferFree == "on"]
+public unsafe func Windows_MprAdminMIBBufferFree(pBuffer: CPointer<Unit>): UInt32 {
+    return MprAdminMIBBufferFree(pBuffer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminMIBEntryCreate == "on"]
+foreign {
     func MprAdminMIBEntryCreate(hMibServer: IntNative, dwPid: UInt32, dwRoutingPid: UInt32, lpEntry: CPointer<Unit>, dwEntrySize: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminMIBEntryCreate == "on"]
+public unsafe func Windows_MprAdminMIBEntryCreate(hMibServer: IntNative, dwPid: UInt32, dwRoutingPid: UInt32, lpEntry: CPointer<Unit>, dwEntrySize: UInt32): UInt32 {
+    return MprAdminMIBEntryCreate(hMibServer, dwPid, dwRoutingPid, lpEntry, dwEntrySize)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminMIBEntryDelete == "on"]
+foreign {
     func MprAdminMIBEntryDelete(hMibServer: IntNative, dwProtocolId: UInt32, dwRoutingPid: UInt32, lpEntry: CPointer<Unit>, dwEntrySize: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminMIBEntryDelete == "on"]
+public unsafe func Windows_MprAdminMIBEntryDelete(hMibServer: IntNative, dwProtocolId: UInt32, dwRoutingPid: UInt32, lpEntry: CPointer<Unit>, dwEntrySize: UInt32): UInt32 {
+    return MprAdminMIBEntryDelete(hMibServer, dwProtocolId, dwRoutingPid, lpEntry, dwEntrySize)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminMIBEntryGet == "on"]
+foreign {
     func MprAdminMIBEntryGet(hMibServer: IntNative, dwProtocolId: UInt32, dwRoutingPid: UInt32, lpInEntry: CPointer<Unit>, dwInEntrySize: UInt32, lplpOutEntry: CPointer<CPointer<Unit>>, lpOutEntrySize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminMIBEntryGet == "on"]
+public unsafe func Windows_MprAdminMIBEntryGet(hMibServer: IntNative, dwProtocolId: UInt32, dwRoutingPid: UInt32, lpInEntry: CPointer<Unit>, dwInEntrySize: UInt32, lplpOutEntry: CPointer<CPointer<Unit>>, lpOutEntrySize: CPointer<UInt32>): UInt32 {
+    return MprAdminMIBEntryGet(hMibServer, dwProtocolId, dwRoutingPid, lpInEntry, dwInEntrySize, lplpOutEntry, lpOutEntrySize)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminMIBEntryGetFirst == "on"]
+foreign {
     func MprAdminMIBEntryGetFirst(hMibServer: IntNative, dwProtocolId: UInt32, dwRoutingPid: UInt32, lpInEntry: CPointer<Unit>, dwInEntrySize: UInt32, lplpOutEntry: CPointer<CPointer<Unit>>, lpOutEntrySize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminMIBEntryGetFirst == "on"]
+public unsafe func Windows_MprAdminMIBEntryGetFirst(hMibServer: IntNative, dwProtocolId: UInt32, dwRoutingPid: UInt32, lpInEntry: CPointer<Unit>, dwInEntrySize: UInt32, lplpOutEntry: CPointer<CPointer<Unit>>, lpOutEntrySize: CPointer<UInt32>): UInt32 {
+    return MprAdminMIBEntryGetFirst(hMibServer, dwProtocolId, dwRoutingPid, lpInEntry, dwInEntrySize, lplpOutEntry, lpOutEntrySize)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminMIBEntryGetNext == "on"]
+foreign {
     func MprAdminMIBEntryGetNext(hMibServer: IntNative, dwProtocolId: UInt32, dwRoutingPid: UInt32, lpInEntry: CPointer<Unit>, dwInEntrySize: UInt32, lplpOutEntry: CPointer<CPointer<Unit>>, lpOutEntrySize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminMIBEntryGetNext == "on"]
+public unsafe func Windows_MprAdminMIBEntryGetNext(hMibServer: IntNative, dwProtocolId: UInt32, dwRoutingPid: UInt32, lpInEntry: CPointer<Unit>, dwInEntrySize: UInt32, lplpOutEntry: CPointer<CPointer<Unit>>, lpOutEntrySize: CPointer<UInt32>): UInt32 {
+    return MprAdminMIBEntryGetNext(hMibServer, dwProtocolId, dwRoutingPid, lpInEntry, dwInEntrySize, lplpOutEntry, lpOutEntrySize)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminMIBEntrySet == "on"]
+foreign {
     func MprAdminMIBEntrySet(hMibServer: IntNative, dwProtocolId: UInt32, dwRoutingPid: UInt32, lpEntry: CPointer<Unit>, dwEntrySize: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminMIBEntrySet == "on"]
+public unsafe func Windows_MprAdminMIBEntrySet(hMibServer: IntNative, dwProtocolId: UInt32, dwRoutingPid: UInt32, lpEntry: CPointer<Unit>, dwEntrySize: UInt32): UInt32 {
+    return MprAdminMIBEntrySet(hMibServer, dwProtocolId, dwRoutingPid, lpEntry, dwEntrySize)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminMIBServerConnect == "on"]
+foreign {
     // param-hint: lpwsServerName optional
     func MprAdminMIBServerConnect(lpwsServerName: CPointer<UInt16>, phMibServer: CPointer<IntNative>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminMIBServerConnect == "on"]
+public unsafe func Windows_MprAdminMIBServerConnect(lpwsServerName: CPointer<UInt16>, phMibServer: CPointer<IntNative>): UInt32 {
+    return MprAdminMIBServerConnect(lpwsServerName, phMibServer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminMIBServerDisconnect == "on"]
+foreign {
     func MprAdminMIBServerDisconnect(hMibServer: IntNative): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminMIBServerDisconnect == "on"]
+public unsafe func Windows_MprAdminMIBServerDisconnect(hMibServer: IntNative): Unit {
+    MprAdminMIBServerDisconnect(hMibServer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminPortClearStats == "on"]
+foreign {
     func MprAdminPortClearStats(hRasServer: IntNative, hPort: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminPortClearStats == "on"]
+public unsafe func Windows_MprAdminPortClearStats(hRasServer: IntNative, hPort: CPointer<Unit>): UInt32 {
+    return MprAdminPortClearStats(hRasServer, hPort)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminPortDisconnect == "on"]
+foreign {
     func MprAdminPortDisconnect(hRasServer: IntNative, hPort: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminPortDisconnect == "on"]
+public unsafe func Windows_MprAdminPortDisconnect(hRasServer: IntNative, hPort: CPointer<Unit>): UInt32 {
+    return MprAdminPortDisconnect(hRasServer, hPort)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminPortEnum == "on"]
+foreign {
     // param-hint: lpdwResumeHandle optional
     func MprAdminPortEnum(hRasServer: IntNative, dwLevel: UInt32, hRasConnection: CPointer<Unit>, lplpbBuffer: CPointer<CPointer<UInt8>>, dwPrefMaxLen: UInt32, lpdwEntriesRead: CPointer<UInt32>, lpdwTotalEntries: CPointer<UInt32>, lpdwResumeHandle: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminPortEnum == "on"]
+public unsafe func Windows_MprAdminPortEnum(hRasServer: IntNative, dwLevel: UInt32, hRasConnection: CPointer<Unit>, lplpbBuffer: CPointer<CPointer<UInt8>>, dwPrefMaxLen: UInt32, lpdwEntriesRead: CPointer<UInt32>, lpdwTotalEntries: CPointer<UInt32>, lpdwResumeHandle: CPointer<UInt32>): UInt32 {
+    return MprAdminPortEnum(hRasServer, dwLevel, hRasConnection, lplpbBuffer, dwPrefMaxLen, lpdwEntriesRead, lpdwTotalEntries, lpdwResumeHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminPortGetInfo == "on"]
+foreign {
     func MprAdminPortGetInfo(hRasServer: IntNative, dwLevel: UInt32, hPort: CPointer<Unit>, lplpbBuffer: CPointer<CPointer<UInt8>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminPortGetInfo == "on"]
+public unsafe func Windows_MprAdminPortGetInfo(hRasServer: IntNative, dwLevel: UInt32, hPort: CPointer<Unit>, lplpbBuffer: CPointer<CPointer<UInt8>>): UInt32 {
+    return MprAdminPortGetInfo(hRasServer, dwLevel, hPort, lplpbBuffer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminPortReset == "on"]
+foreign {
     func MprAdminPortReset(hRasServer: IntNative, hPort: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminPortReset == "on"]
+public unsafe func Windows_MprAdminPortReset(hRasServer: IntNative, hPort: CPointer<Unit>): UInt32 {
+    return MprAdminPortReset(hRasServer, hPort)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminRegisterConnectionNotification == "on"]
+foreign {
     func MprAdminRegisterConnectionNotification(hMprServer: IntNative, hEventNotification: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminRegisterConnectionNotification == "on"]
+public unsafe func Windows_MprAdminRegisterConnectionNotification(hMprServer: IntNative, hEventNotification: CPointer<Unit>): UInt32 {
+    return MprAdminRegisterConnectionNotification(hMprServer, hEventNotification)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminSendUserMessage == "on"]
+foreign {
     func MprAdminSendUserMessage(hMprServer: IntNative, hConnection: CPointer<Unit>, lpwszMessage: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminSendUserMessage == "on"]
+public unsafe func Windows_MprAdminSendUserMessage(hMprServer: IntNative, hConnection: CPointer<Unit>, lpwszMessage: CPointer<UInt16>): UInt32 {
+    return MprAdminSendUserMessage(hMprServer, hConnection, lpwszMessage)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminServerConnect == "on"]
+foreign {
     // param-hint: lpwsServerName optional
     func MprAdminServerConnect(lpwsServerName: CPointer<UInt16>, phMprServer: CPointer<IntNative>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminServerConnect == "on"]
+public unsafe func Windows_MprAdminServerConnect(lpwsServerName: CPointer<UInt16>, phMprServer: CPointer<IntNative>): UInt32 {
+    return MprAdminServerConnect(lpwsServerName, phMprServer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminServerDisconnect == "on"]
+foreign {
     func MprAdminServerDisconnect(hMprServer: IntNative): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminServerDisconnect == "on"]
+public unsafe func Windows_MprAdminServerDisconnect(hMprServer: IntNative): Unit {
+    MprAdminServerDisconnect(hMprServer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminServerGetCredentials == "on"]
+foreign {
     func MprAdminServerGetCredentials(hMprServer: IntNative, dwLevel: UInt32, lplpbBuffer: CPointer<CPointer<UInt8>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminServerGetCredentials == "on"]
+public unsafe func Windows_MprAdminServerGetCredentials(hMprServer: IntNative, dwLevel: UInt32, lplpbBuffer: CPointer<CPointer<UInt8>>): UInt32 {
+    return MprAdminServerGetCredentials(hMprServer, dwLevel, lplpbBuffer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminServerGetInfo == "on"]
+foreign {
     func MprAdminServerGetInfo(hMprServer: IntNative, dwLevel: UInt32, lplpbBuffer: CPointer<CPointer<UInt8>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminServerGetInfo == "on"]
+public unsafe func Windows_MprAdminServerGetInfo(hMprServer: IntNative, dwLevel: UInt32, lplpbBuffer: CPointer<CPointer<UInt8>>): UInt32 {
+    return MprAdminServerGetInfo(hMprServer, dwLevel, lplpbBuffer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminServerGetInfoEx == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
+    func MprAdminServerGetInfoEx(hMprServer: IntNative, pServerInfo: CPointer<MPR_SERVER_EX1Abi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminServerGetInfoEx == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_MprAdminServerGetInfoEx(hMprServer: IntNative, pServerInfo: CPointer<MPR_SERVER_EX1Abi>): UInt32 {
+    return MprAdminServerGetInfoEx(hMprServer, pServerInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminServerSetCredentials == "on"]
+foreign {
     func MprAdminServerSetCredentials(hMprServer: IntNative, dwLevel: UInt32, lpbBuffer: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminServerSetCredentials == "on"]
+public unsafe func Windows_MprAdminServerSetCredentials(hMprServer: IntNative, dwLevel: UInt32, lpbBuffer: CPointer<UInt8>): UInt32 {
+    return MprAdminServerSetCredentials(hMprServer, dwLevel, lpbBuffer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminServerSetInfo == "on"]
+foreign {
     func MprAdminServerSetInfo(hMprServer: IntNative, dwLevel: UInt32, lpbBuffer: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminServerSetInfo == "on"]
+public unsafe func Windows_MprAdminServerSetInfo(hMprServer: IntNative, dwLevel: UInt32, lpbBuffer: CPointer<UInt8>): UInt32 {
+    return MprAdminServerSetInfo(hMprServer, dwLevel, lpbBuffer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminServerSetInfoEx == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
+    func MprAdminServerSetInfoEx(hMprServer: IntNative, pServerInfo: CPointer<MPR_SERVER_SET_CONFIG_EX1Abi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminServerSetInfoEx == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_MprAdminServerSetInfoEx(hMprServer: IntNative, pServerInfo: CPointer<MPR_SERVER_SET_CONFIG_EX1Abi>): UInt32 {
+    return MprAdminServerSetInfoEx(hMprServer, pServerInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminTransportCreate == "on"]
+foreign {
     // param-hint: lpwsTransportName optional
     // param-hint: pClientInterfaceInfo optional
     // param-hint: dwClientInterfaceInfoSize optional
     func MprAdminTransportCreate(hMprServer: IntNative, dwTransportId: UInt32, lpwsTransportName: CPointer<UInt16>, pGlobalInfo: CPointer<UInt8>, dwGlobalInfoSize: UInt32, pClientInterfaceInfo: CPointer<UInt8>, dwClientInterfaceInfoSize: UInt32, lpwsDLLPath: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminTransportCreate == "on"]
+public unsafe func Windows_MprAdminTransportCreate(hMprServer: IntNative, dwTransportId: UInt32, lpwsTransportName: CPointer<UInt16>, pGlobalInfo: CPointer<UInt8>, dwGlobalInfoSize: UInt32, pClientInterfaceInfo: CPointer<UInt8>, dwClientInterfaceInfoSize: UInt32, lpwsDLLPath: CPointer<UInt16>): UInt32 {
+    return MprAdminTransportCreate(hMprServer, dwTransportId, lpwsTransportName, pGlobalInfo, dwGlobalInfoSize, pClientInterfaceInfo, dwClientInterfaceInfoSize, lpwsDLLPath)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminTransportGetInfo == "on"]
+foreign {
     // param-hint: ppGlobalInfo optional
     // param-hint: lpdwGlobalInfoSize optional
     // param-hint: ppClientInterfaceInfo optional
     // param-hint: lpdwClientInterfaceInfoSize optional
     func MprAdminTransportGetInfo(hMprServer: IntNative, dwTransportId: UInt32, ppGlobalInfo: CPointer<CPointer<UInt8>>, lpdwGlobalInfoSize: CPointer<UInt32>, ppClientInterfaceInfo: CPointer<CPointer<UInt8>>, lpdwClientInterfaceInfoSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminTransportGetInfo == "on"]
+public unsafe func Windows_MprAdminTransportGetInfo(hMprServer: IntNative, dwTransportId: UInt32, ppGlobalInfo: CPointer<CPointer<UInt8>>, lpdwGlobalInfoSize: CPointer<UInt32>, ppClientInterfaceInfo: CPointer<CPointer<UInt8>>, lpdwClientInterfaceInfoSize: CPointer<UInt32>): UInt32 {
+    return MprAdminTransportGetInfo(hMprServer, dwTransportId, ppGlobalInfo, lpdwGlobalInfoSize, ppClientInterfaceInfo, lpdwClientInterfaceInfoSize)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminTransportSetInfo == "on"]
+foreign {
     // param-hint: pGlobalInfo optional
     // param-hint: pClientInterfaceInfo optional
     func MprAdminTransportSetInfo(hMprServer: IntNative, dwTransportId: UInt32, pGlobalInfo: CPointer<UInt8>, dwGlobalInfoSize: UInt32, pClientInterfaceInfo: CPointer<UInt8>, dwClientInterfaceInfoSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminTransportSetInfo == "on"]
+public unsafe func Windows_MprAdminTransportSetInfo(hMprServer: IntNative, dwTransportId: UInt32, pGlobalInfo: CPointer<UInt8>, dwGlobalInfoSize: UInt32, pClientInterfaceInfo: CPointer<UInt8>, dwClientInterfaceInfoSize: UInt32): UInt32 {
+    return MprAdminTransportSetInfo(hMprServer, dwTransportId, pGlobalInfo, dwGlobalInfoSize, pClientInterfaceInfo, dwClientInterfaceInfoSize)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminUpdateConnection == "on"]
+foreign {
     func MprAdminUpdateConnection(hRasServer: IntNative, hRasConnection: CPointer<Unit>, pRasUpdateConnection: CPointer<RAS_UPDATE_CONNECTIONAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminUpdateConnection == "on"]
+public unsafe func Windows_MprAdminUpdateConnection(hRasServer: IntNative, hRasConnection: CPointer<Unit>, pRasUpdateConnection: CPointer<RAS_UPDATE_CONNECTIONAbi>): UInt32 {
+    return MprAdminUpdateConnection(hRasServer, hRasConnection, pRasUpdateConnection)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminUserGetInfo == "on"]
+foreign {
     func MprAdminUserGetInfo(lpszServer: CPointer<UInt16>, lpszUser: CPointer<UInt16>, dwLevel: UInt32, lpbBuffer: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminUserGetInfo == "on"]
+public unsafe func Windows_MprAdminUserGetInfo(lpszServer: CPointer<UInt16>, lpszUser: CPointer<UInt16>, dwLevel: UInt32, lpbBuffer: CPointer<UInt8>): UInt32 {
+    return MprAdminUserGetInfo(lpszServer, lpszUser, dwLevel, lpbBuffer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminUserSetInfo == "on"]
+foreign {
     func MprAdminUserSetInfo(lpszServer: CPointer<UInt16>, lpszUser: CPointer<UInt16>, dwLevel: UInt32, lpbBuffer: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprAdminUserSetInfo == "on"]
+public unsafe func Windows_MprAdminUserSetInfo(lpszServer: CPointer<UInt16>, lpszUser: CPointer<UInt16>, dwLevel: UInt32, lpbBuffer: CPointer<UInt8>): UInt32 {
+    return MprAdminUserSetInfo(lpszServer, lpszUser, dwLevel, lpbBuffer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigBufferFree == "on"]
+foreign {
     func MprConfigBufferFree(pBuffer: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigBufferFree == "on"]
+public unsafe func Windows_MprConfigBufferFree(pBuffer: CPointer<Unit>): UInt32 {
+    return MprConfigBufferFree(pBuffer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigFilterGetInfo == "on"]
+foreign {
     func MprConfigFilterGetInfo(hMprConfig: CPointer<Unit>, dwLevel: UInt32, dwTransportId: UInt32, lpBuffer: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigFilterGetInfo == "on"]
+public unsafe func Windows_MprConfigFilterGetInfo(hMprConfig: CPointer<Unit>, dwLevel: UInt32, dwTransportId: UInt32, lpBuffer: CPointer<UInt8>): UInt32 {
+    return MprConfigFilterGetInfo(hMprConfig, dwLevel, dwTransportId, lpBuffer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigFilterSetInfo == "on"]
+foreign {
     func MprConfigFilterSetInfo(hMprConfig: CPointer<Unit>, dwLevel: UInt32, dwTransportId: UInt32, lpBuffer: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigFilterSetInfo == "on"]
+public unsafe func Windows_MprConfigFilterSetInfo(hMprConfig: CPointer<Unit>, dwLevel: UInt32, dwTransportId: UInt32, lpBuffer: CPointer<UInt8>): UInt32 {
+    return MprConfigFilterSetInfo(hMprConfig, dwLevel, dwTransportId, lpBuffer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigGetFriendlyName == "on"]
+foreign {
     // param-hint: pszBuffer bytes=param[3]
     func MprConfigGetFriendlyName(hMprConfig: CPointer<Unit>, pszGuidName: CPointer<UInt16>, pszBuffer: CPointer<UInt16>, dwBufferSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigGetFriendlyName == "on"]
+public unsafe func Windows_MprConfigGetFriendlyName(hMprConfig: CPointer<Unit>, pszGuidName: CPointer<UInt16>, pszBuffer: CPointer<UInt16>, dwBufferSize: UInt32): UInt32 {
+    return MprConfigGetFriendlyName(hMprConfig, pszGuidName, pszBuffer, dwBufferSize)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigGetGuidName == "on"]
+foreign {
     // param-hint: pszBuffer bytes=param[3]
     func MprConfigGetGuidName(hMprConfig: CPointer<Unit>, pszFriendlyName: CPointer<UInt16>, pszBuffer: CPointer<UInt16>, dwBufferSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigGetGuidName == "on"]
+public unsafe func Windows_MprConfigGetGuidName(hMprConfig: CPointer<Unit>, pszFriendlyName: CPointer<UInt16>, pszBuffer: CPointer<UInt16>, dwBufferSize: UInt32): UInt32 {
+    return MprConfigGetGuidName(hMprConfig, pszFriendlyName, pszBuffer, dwBufferSize)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigInterfaceCreate == "on"]
+foreign {
     func MprConfigInterfaceCreate(hMprConfig: CPointer<Unit>, dwLevel: UInt32, lpbBuffer: CPointer<UInt8>, phRouterInterface: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigInterfaceCreate == "on"]
+public unsafe func Windows_MprConfigInterfaceCreate(hMprConfig: CPointer<Unit>, dwLevel: UInt32, lpbBuffer: CPointer<UInt8>, phRouterInterface: CPointer<CPointer<Unit>>): UInt32 {
+    return MprConfigInterfaceCreate(hMprConfig, dwLevel, lpbBuffer, phRouterInterface)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigInterfaceDelete == "on"]
+foreign {
     func MprConfigInterfaceDelete(hMprConfig: CPointer<Unit>, hRouterInterface: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigInterfaceDelete == "on"]
+public unsafe func Windows_MprConfigInterfaceDelete(hMprConfig: CPointer<Unit>, hRouterInterface: CPointer<Unit>): UInt32 {
+    return MprConfigInterfaceDelete(hMprConfig, hRouterInterface)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigInterfaceEnum == "on"]
+foreign {
     // param-hint: lpdwResumeHandle optional
     func MprConfigInterfaceEnum(hMprConfig: CPointer<Unit>, dwLevel: UInt32, lplpBuffer: CPointer<CPointer<UInt8>>, dwPrefMaxLen: UInt32, lpdwEntriesRead: CPointer<UInt32>, lpdwTotalEntries: CPointer<UInt32>, lpdwResumeHandle: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigInterfaceEnum == "on"]
+public unsafe func Windows_MprConfigInterfaceEnum(hMprConfig: CPointer<Unit>, dwLevel: UInt32, lplpBuffer: CPointer<CPointer<UInt8>>, dwPrefMaxLen: UInt32, lpdwEntriesRead: CPointer<UInt32>, lpdwTotalEntries: CPointer<UInt32>, lpdwResumeHandle: CPointer<UInt32>): UInt32 {
+    return MprConfigInterfaceEnum(hMprConfig, dwLevel, lplpBuffer, dwPrefMaxLen, lpdwEntriesRead, lpdwTotalEntries, lpdwResumeHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigInterfaceGetCustomInfoEx == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
+    func MprConfigInterfaceGetCustomInfoEx(hMprConfig: CPointer<Unit>, hRouterInterface: CPointer<Unit>, pCustomInfo: CPointer<MPR_IF_CUSTOMINFOEX2Abi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigInterfaceGetCustomInfoEx == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_MprConfigInterfaceGetCustomInfoEx(hMprConfig: CPointer<Unit>, hRouterInterface: CPointer<Unit>, pCustomInfo: CPointer<MPR_IF_CUSTOMINFOEX2Abi>): UInt32 {
+    return MprConfigInterfaceGetCustomInfoEx(hMprConfig, hRouterInterface, pCustomInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigInterfaceGetHandle == "on"]
+foreign {
     func MprConfigInterfaceGetHandle(hMprConfig: CPointer<Unit>, lpwsInterfaceName: CPointer<UInt16>, phRouterInterface: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigInterfaceGetHandle == "on"]
+public unsafe func Windows_MprConfigInterfaceGetHandle(hMprConfig: CPointer<Unit>, lpwsInterfaceName: CPointer<UInt16>, phRouterInterface: CPointer<CPointer<Unit>>): UInt32 {
+    return MprConfigInterfaceGetHandle(hMprConfig, lpwsInterfaceName, phRouterInterface)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigInterfaceGetInfo == "on"]
+foreign {
     func MprConfigInterfaceGetInfo(hMprConfig: CPointer<Unit>, hRouterInterface: CPointer<Unit>, dwLevel: UInt32, lplpBuffer: CPointer<CPointer<UInt8>>, lpdwBufferSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigInterfaceGetInfo == "on"]
+public unsafe func Windows_MprConfigInterfaceGetInfo(hMprConfig: CPointer<Unit>, hRouterInterface: CPointer<Unit>, dwLevel: UInt32, lplpBuffer: CPointer<CPointer<UInt8>>, lpdwBufferSize: CPointer<UInt32>): UInt32 {
+    return MprConfigInterfaceGetInfo(hMprConfig, hRouterInterface, dwLevel, lplpBuffer, lpdwBufferSize)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigInterfaceSetCustomInfoEx == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
+    func MprConfigInterfaceSetCustomInfoEx(hMprConfig: CPointer<Unit>, hRouterInterface: CPointer<Unit>, pCustomInfo: CPointer<MPR_IF_CUSTOMINFOEX2Abi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigInterfaceSetCustomInfoEx == "on" && Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_MprConfigInterfaceSetCustomInfoEx(hMprConfig: CPointer<Unit>, hRouterInterface: CPointer<Unit>, pCustomInfo: CPointer<MPR_IF_CUSTOMINFOEX2Abi>): UInt32 {
+    return MprConfigInterfaceSetCustomInfoEx(hMprConfig, hRouterInterface, pCustomInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigInterfaceSetInfo == "on"]
+foreign {
     func MprConfigInterfaceSetInfo(hMprConfig: CPointer<Unit>, hRouterInterface: CPointer<Unit>, dwLevel: UInt32, lpbBuffer: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigInterfaceSetInfo == "on"]
+public unsafe func Windows_MprConfigInterfaceSetInfo(hMprConfig: CPointer<Unit>, hRouterInterface: CPointer<Unit>, dwLevel: UInt32, lpbBuffer: CPointer<UInt8>): UInt32 {
+    return MprConfigInterfaceSetInfo(hMprConfig, hRouterInterface, dwLevel, lpbBuffer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigInterfaceTransportAdd == "on"]
+foreign {
     // param-hint: lpwsTransportName optional
     // param-hint: pInterfaceInfo bytes=param[5]
     func MprConfigInterfaceTransportAdd(hMprConfig: CPointer<Unit>, hRouterInterface: CPointer<Unit>, dwTransportId: UInt32, lpwsTransportName: CPointer<UInt16>, pInterfaceInfo: CPointer<UInt8>, dwInterfaceInfoSize: UInt32, phRouterIfTransport: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigInterfaceTransportAdd == "on"]
+public unsafe func Windows_MprConfigInterfaceTransportAdd(hMprConfig: CPointer<Unit>, hRouterInterface: CPointer<Unit>, dwTransportId: UInt32, lpwsTransportName: CPointer<UInt16>, pInterfaceInfo: CPointer<UInt8>, dwInterfaceInfoSize: UInt32, phRouterIfTransport: CPointer<CPointer<Unit>>): UInt32 {
+    return MprConfigInterfaceTransportAdd(hMprConfig, hRouterInterface, dwTransportId, lpwsTransportName, pInterfaceInfo, dwInterfaceInfoSize, phRouterIfTransport)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigInterfaceTransportEnum == "on"]
+foreign {
     // param-hint: lpdwResumeHandle optional
     func MprConfigInterfaceTransportEnum(hMprConfig: CPointer<Unit>, hRouterInterface: CPointer<Unit>, dwLevel: UInt32, lplpBuffer: CPointer<CPointer<UInt8>>, dwPrefMaxLen: UInt32, lpdwEntriesRead: CPointer<UInt32>, lpdwTotalEntries: CPointer<UInt32>, lpdwResumeHandle: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigInterfaceTransportEnum == "on"]
+public unsafe func Windows_MprConfigInterfaceTransportEnum(hMprConfig: CPointer<Unit>, hRouterInterface: CPointer<Unit>, dwLevel: UInt32, lplpBuffer: CPointer<CPointer<UInt8>>, dwPrefMaxLen: UInt32, lpdwEntriesRead: CPointer<UInt32>, lpdwTotalEntries: CPointer<UInt32>, lpdwResumeHandle: CPointer<UInt32>): UInt32 {
+    return MprConfigInterfaceTransportEnum(hMprConfig, hRouterInterface, dwLevel, lplpBuffer, dwPrefMaxLen, lpdwEntriesRead, lpdwTotalEntries, lpdwResumeHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigInterfaceTransportGetHandle == "on"]
+foreign {
     func MprConfigInterfaceTransportGetHandle(hMprConfig: CPointer<Unit>, hRouterInterface: CPointer<Unit>, dwTransportId: UInt32, phRouterIfTransport: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigInterfaceTransportGetHandle == "on"]
+public unsafe func Windows_MprConfigInterfaceTransportGetHandle(hMprConfig: CPointer<Unit>, hRouterInterface: CPointer<Unit>, dwTransportId: UInt32, phRouterIfTransport: CPointer<CPointer<Unit>>): UInt32 {
+    return MprConfigInterfaceTransportGetHandle(hMprConfig, hRouterInterface, dwTransportId, phRouterIfTransport)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigInterfaceTransportGetInfo == "on"]
+foreign {
     // param-hint: ppInterfaceInfo optional
     // param-hint: lpdwInterfaceInfoSize optional
     func MprConfigInterfaceTransportGetInfo(hMprConfig: CPointer<Unit>, hRouterInterface: CPointer<Unit>, hRouterIfTransport: CPointer<Unit>, ppInterfaceInfo: CPointer<CPointer<UInt8>>, lpdwInterfaceInfoSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigInterfaceTransportGetInfo == "on"]
+public unsafe func Windows_MprConfigInterfaceTransportGetInfo(hMprConfig: CPointer<Unit>, hRouterInterface: CPointer<Unit>, hRouterIfTransport: CPointer<Unit>, ppInterfaceInfo: CPointer<CPointer<UInt8>>, lpdwInterfaceInfoSize: CPointer<UInt32>): UInt32 {
+    return MprConfigInterfaceTransportGetInfo(hMprConfig, hRouterInterface, hRouterIfTransport, ppInterfaceInfo, lpdwInterfaceInfoSize)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigInterfaceTransportRemove == "on"]
+foreign {
     func MprConfigInterfaceTransportRemove(hMprConfig: CPointer<Unit>, hRouterInterface: CPointer<Unit>, hRouterIfTransport: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigInterfaceTransportRemove == "on"]
+public unsafe func Windows_MprConfigInterfaceTransportRemove(hMprConfig: CPointer<Unit>, hRouterInterface: CPointer<Unit>, hRouterIfTransport: CPointer<Unit>): UInt32 {
+    return MprConfigInterfaceTransportRemove(hMprConfig, hRouterInterface, hRouterIfTransport)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigInterfaceTransportSetInfo == "on"]
+foreign {
     // param-hint: pInterfaceInfo bytes=param[4] optional
     func MprConfigInterfaceTransportSetInfo(hMprConfig: CPointer<Unit>, hRouterInterface: CPointer<Unit>, hRouterIfTransport: CPointer<Unit>, pInterfaceInfo: CPointer<UInt8>, dwInterfaceInfoSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigInterfaceTransportSetInfo == "on"]
+public unsafe func Windows_MprConfigInterfaceTransportSetInfo(hMprConfig: CPointer<Unit>, hRouterInterface: CPointer<Unit>, hRouterIfTransport: CPointer<Unit>, pInterfaceInfo: CPointer<UInt8>, dwInterfaceInfoSize: UInt32): UInt32 {
+    return MprConfigInterfaceTransportSetInfo(hMprConfig, hRouterInterface, hRouterIfTransport, pInterfaceInfo, dwInterfaceInfoSize)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigServerBackup == "on"]
+foreign {
     func MprConfigServerBackup(hMprConfig: CPointer<Unit>, lpwsPath: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigServerBackup == "on"]
+public unsafe func Windows_MprConfigServerBackup(hMprConfig: CPointer<Unit>, lpwsPath: CPointer<UInt16>): UInt32 {
+    return MprConfigServerBackup(hMprConfig, lpwsPath)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigServerConnect == "on"]
+foreign {
     // param-hint: lpwsServerName optional
     func MprConfigServerConnect(lpwsServerName: CPointer<UInt16>, phMprConfig: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigServerConnect == "on"]
+public unsafe func Windows_MprConfigServerConnect(lpwsServerName: CPointer<UInt16>, phMprConfig: CPointer<CPointer<Unit>>): UInt32 {
+    return MprConfigServerConnect(lpwsServerName, phMprConfig)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigServerDisconnect == "on"]
+foreign {
     func MprConfigServerDisconnect(hMprConfig: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigServerDisconnect == "on"]
+public unsafe func Windows_MprConfigServerDisconnect(hMprConfig: CPointer<Unit>): Unit {
+    MprConfigServerDisconnect(hMprConfig)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigServerGetInfo == "on"]
+foreign {
     func MprConfigServerGetInfo(hMprConfig: CPointer<Unit>, dwLevel: UInt32, lplpbBuffer: CPointer<CPointer<UInt8>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigServerGetInfo == "on"]
+public unsafe func Windows_MprConfigServerGetInfo(hMprConfig: CPointer<Unit>, dwLevel: UInt32, lplpbBuffer: CPointer<CPointer<UInt8>>): UInt32 {
+    return MprConfigServerGetInfo(hMprConfig, dwLevel, lplpbBuffer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigServerGetInfoEx == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
+    func MprConfigServerGetInfoEx(hMprConfig: CPointer<Unit>, pServerInfo: CPointer<MPR_SERVER_EX1Abi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigServerGetInfoEx == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_MprConfigServerGetInfoEx(hMprConfig: CPointer<Unit>, pServerInfo: CPointer<MPR_SERVER_EX1Abi>): UInt32 {
+    return MprConfigServerGetInfoEx(hMprConfig, pServerInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigServerInstall == "on"]
+foreign {
     func MprConfigServerInstall(dwLevel: UInt32, pBuffer: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigServerInstall == "on"]
+public unsafe func Windows_MprConfigServerInstall(dwLevel: UInt32, pBuffer: CPointer<Unit>): UInt32 {
+    return MprConfigServerInstall(dwLevel, pBuffer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigServerRefresh == "on"]
+foreign {
     func MprConfigServerRefresh(hMprConfig: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigServerRefresh == "on"]
+public unsafe func Windows_MprConfigServerRefresh(hMprConfig: CPointer<Unit>): UInt32 {
+    return MprConfigServerRefresh(hMprConfig)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigServerRestore == "on"]
+foreign {
     func MprConfigServerRestore(hMprConfig: CPointer<Unit>, lpwsPath: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigServerRestore == "on"]
+public unsafe func Windows_MprConfigServerRestore(hMprConfig: CPointer<Unit>, lpwsPath: CPointer<UInt16>): UInt32 {
+    return MprConfigServerRestore(hMprConfig, lpwsPath)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigServerSetInfo == "on"]
+foreign {
     func MprConfigServerSetInfo(hMprServer: IntNative, dwLevel: UInt32, lpbBuffer: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigServerSetInfo == "on"]
+public unsafe func Windows_MprConfigServerSetInfo(hMprServer: IntNative, dwLevel: UInt32, lpbBuffer: CPointer<UInt8>): UInt32 {
+    return MprConfigServerSetInfo(hMprServer, dwLevel, lpbBuffer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigServerSetInfoEx == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
+    func MprConfigServerSetInfoEx(hMprConfig: CPointer<Unit>, pSetServerConfig: CPointer<MPR_SERVER_SET_CONFIG_EX1Abi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigServerSetInfoEx == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_MprConfigServerSetInfoEx(hMprConfig: CPointer<Unit>, pSetServerConfig: CPointer<MPR_SERVER_SET_CONFIG_EX1Abi>): UInt32 {
+    return MprConfigServerSetInfoEx(hMprConfig, pSetServerConfig)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigTransportCreate == "on"]
+foreign {
     // param-hint: lpwsTransportName optional
     // param-hint: pGlobalInfo bytes=param[4]
     // param-hint: pClientInterfaceInfo bytes=param[6] optional
     // param-hint: dwClientInterfaceInfoSize optional
     // param-hint: lpwsDLLPath optional
     func MprConfigTransportCreate(hMprConfig: CPointer<Unit>, dwTransportId: UInt32, lpwsTransportName: CPointer<UInt16>, pGlobalInfo: CPointer<UInt8>, dwGlobalInfoSize: UInt32, pClientInterfaceInfo: CPointer<UInt8>, dwClientInterfaceInfoSize: UInt32, lpwsDLLPath: CPointer<UInt16>, phRouterTransport: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigTransportCreate == "on"]
+public unsafe func Windows_MprConfigTransportCreate(hMprConfig: CPointer<Unit>, dwTransportId: UInt32, lpwsTransportName: CPointer<UInt16>, pGlobalInfo: CPointer<UInt8>, dwGlobalInfoSize: UInt32, pClientInterfaceInfo: CPointer<UInt8>, dwClientInterfaceInfoSize: UInt32, lpwsDLLPath: CPointer<UInt16>, phRouterTransport: CPointer<CPointer<Unit>>): UInt32 {
+    return MprConfigTransportCreate(hMprConfig, dwTransportId, lpwsTransportName, pGlobalInfo, dwGlobalInfoSize, pClientInterfaceInfo, dwClientInterfaceInfoSize, lpwsDLLPath, phRouterTransport)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigTransportDelete == "on"]
+foreign {
     func MprConfigTransportDelete(hMprConfig: CPointer<Unit>, hRouterTransport: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigTransportDelete == "on"]
+public unsafe func Windows_MprConfigTransportDelete(hMprConfig: CPointer<Unit>, hRouterTransport: CPointer<Unit>): UInt32 {
+    return MprConfigTransportDelete(hMprConfig, hRouterTransport)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigTransportEnum == "on"]
+foreign {
     // param-hint: lpdwResumeHandle optional
     func MprConfigTransportEnum(hMprConfig: CPointer<Unit>, dwLevel: UInt32, lplpBuffer: CPointer<CPointer<UInt8>>, dwPrefMaxLen: UInt32, lpdwEntriesRead: CPointer<UInt32>, lpdwTotalEntries: CPointer<UInt32>, lpdwResumeHandle: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigTransportEnum == "on"]
+public unsafe func Windows_MprConfigTransportEnum(hMprConfig: CPointer<Unit>, dwLevel: UInt32, lplpBuffer: CPointer<CPointer<UInt8>>, dwPrefMaxLen: UInt32, lpdwEntriesRead: CPointer<UInt32>, lpdwTotalEntries: CPointer<UInt32>, lpdwResumeHandle: CPointer<UInt32>): UInt32 {
+    return MprConfigTransportEnum(hMprConfig, dwLevel, lplpBuffer, dwPrefMaxLen, lpdwEntriesRead, lpdwTotalEntries, lpdwResumeHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigTransportGetHandle == "on"]
+foreign {
     func MprConfigTransportGetHandle(hMprConfig: CPointer<Unit>, dwTransportId: UInt32, phRouterTransport: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigTransportGetHandle == "on"]
+public unsafe func Windows_MprConfigTransportGetHandle(hMprConfig: CPointer<Unit>, dwTransportId: UInt32, phRouterTransport: CPointer<CPointer<Unit>>): UInt32 {
+    return MprConfigTransportGetHandle(hMprConfig, dwTransportId, phRouterTransport)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigTransportGetInfo == "on"]
+foreign {
     // param-hint: ppGlobalInfo optional
     // param-hint: lpdwGlobalInfoSize optional
     // param-hint: ppClientInterfaceInfo optional
     // param-hint: lpdwClientInterfaceInfoSize optional
     // param-hint: lplpwsDLLPath optional
     func MprConfigTransportGetInfo(hMprConfig: CPointer<Unit>, hRouterTransport: CPointer<Unit>, ppGlobalInfo: CPointer<CPointer<UInt8>>, lpdwGlobalInfoSize: CPointer<UInt32>, ppClientInterfaceInfo: CPointer<CPointer<UInt8>>, lpdwClientInterfaceInfoSize: CPointer<UInt32>, lplpwsDLLPath: CPointer<CPointer<UInt16>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigTransportGetInfo == "on"]
+public unsafe func Windows_MprConfigTransportGetInfo(hMprConfig: CPointer<Unit>, hRouterTransport: CPointer<Unit>, ppGlobalInfo: CPointer<CPointer<UInt8>>, lpdwGlobalInfoSize: CPointer<UInt32>, ppClientInterfaceInfo: CPointer<CPointer<UInt8>>, lpdwClientInterfaceInfoSize: CPointer<UInt32>, lplpwsDLLPath: CPointer<CPointer<UInt16>>): UInt32 {
+    return MprConfigTransportGetInfo(hMprConfig, hRouterTransport, ppGlobalInfo, lpdwGlobalInfoSize, ppClientInterfaceInfo, lpdwClientInterfaceInfoSize, lplpwsDLLPath)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigTransportSetInfo == "on"]
+foreign {
     // param-hint: pGlobalInfo bytes=param[3] optional
     // param-hint: dwGlobalInfoSize optional
     // param-hint: pClientInterfaceInfo bytes=param[5] optional
     // param-hint: dwClientInterfaceInfoSize optional
     // param-hint: lpwsDLLPath optional
     func MprConfigTransportSetInfo(hMprConfig: CPointer<Unit>, hRouterTransport: CPointer<Unit>, pGlobalInfo: CPointer<UInt8>, dwGlobalInfoSize: UInt32, pClientInterfaceInfo: CPointer<UInt8>, dwClientInterfaceInfoSize: UInt32, lpwsDLLPath: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprConfigTransportSetInfo == "on"]
+public unsafe func Windows_MprConfigTransportSetInfo(hMprConfig: CPointer<Unit>, hRouterTransport: CPointer<Unit>, pGlobalInfo: CPointer<UInt8>, dwGlobalInfoSize: UInt32, pClientInterfaceInfo: CPointer<UInt8>, dwClientInterfaceInfoSize: UInt32, lpwsDLLPath: CPointer<UInt16>): UInt32 {
+    return MprConfigTransportSetInfo(hMprConfig, hRouterTransport, pGlobalInfo, dwGlobalInfoSize, pClientInterfaceInfo, dwClientInterfaceInfoSize, lpwsDLLPath)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprInfoBlockAdd == "on"]
+foreign {
     func MprInfoBlockAdd(lpHeader: CPointer<Unit>, dwInfoType: UInt32, dwItemSize: UInt32, dwItemCount: UInt32, lpItemData: CPointer<UInt8>, lplpNewHeader: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprInfoBlockAdd == "on"]
+public unsafe func Windows_MprInfoBlockAdd(lpHeader: CPointer<Unit>, dwInfoType: UInt32, dwItemSize: UInt32, dwItemCount: UInt32, lpItemData: CPointer<UInt8>, lplpNewHeader: CPointer<CPointer<Unit>>): UInt32 {
+    return MprInfoBlockAdd(lpHeader, dwInfoType, dwItemSize, dwItemCount, lpItemData, lplpNewHeader)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprInfoBlockFind == "on"]
+foreign {
     func MprInfoBlockFind(lpHeader: CPointer<Unit>, dwInfoType: UInt32, lpdwItemSize: CPointer<UInt32>, lpdwItemCount: CPointer<UInt32>, lplpItemData: CPointer<CPointer<UInt8>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprInfoBlockFind == "on"]
+public unsafe func Windows_MprInfoBlockFind(lpHeader: CPointer<Unit>, dwInfoType: UInt32, lpdwItemSize: CPointer<UInt32>, lpdwItemCount: CPointer<UInt32>, lplpItemData: CPointer<CPointer<UInt8>>): UInt32 {
+    return MprInfoBlockFind(lpHeader, dwInfoType, lpdwItemSize, lpdwItemCount, lplpItemData)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprInfoBlockQuerySize == "on"]
+foreign {
     func MprInfoBlockQuerySize(lpHeader: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprInfoBlockQuerySize == "on"]
+public unsafe func Windows_MprInfoBlockQuerySize(lpHeader: CPointer<Unit>): UInt32 {
+    return MprInfoBlockQuerySize(lpHeader)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprInfoBlockRemove == "on"]
+foreign {
     func MprInfoBlockRemove(lpHeader: CPointer<Unit>, dwInfoType: UInt32, lplpNewHeader: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprInfoBlockRemove == "on"]
+public unsafe func Windows_MprInfoBlockRemove(lpHeader: CPointer<Unit>, dwInfoType: UInt32, lplpNewHeader: CPointer<CPointer<Unit>>): UInt32 {
+    return MprInfoBlockRemove(lpHeader, dwInfoType, lplpNewHeader)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprInfoBlockSet == "on"]
+foreign {
     func MprInfoBlockSet(lpHeader: CPointer<Unit>, dwInfoType: UInt32, dwItemSize: UInt32, dwItemCount: UInt32, lpItemData: CPointer<UInt8>, lplpNewHeader: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprInfoBlockSet == "on"]
+public unsafe func Windows_MprInfoBlockSet(lpHeader: CPointer<Unit>, dwInfoType: UInt32, dwItemSize: UInt32, dwItemCount: UInt32, lpItemData: CPointer<UInt8>, lplpNewHeader: CPointer<CPointer<Unit>>): UInt32 {
+    return MprInfoBlockSet(lpHeader, dwInfoType, dwItemSize, dwItemCount, lpItemData, lplpNewHeader)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprInfoCreate == "on"]
+foreign {
     func MprInfoCreate(dwVersion: UInt32, lplpNewHeader: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprInfoCreate == "on"]
+public unsafe func Windows_MprInfoCreate(dwVersion: UInt32, lplpNewHeader: CPointer<CPointer<Unit>>): UInt32 {
+    return MprInfoCreate(dwVersion, lplpNewHeader)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprInfoDelete == "on"]
+foreign {
     func MprInfoDelete(lpHeader: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprInfoDelete == "on"]
+public unsafe func Windows_MprInfoDelete(lpHeader: CPointer<Unit>): UInt32 {
+    return MprInfoDelete(lpHeader)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprInfoDuplicate == "on"]
+foreign {
     func MprInfoDuplicate(lpHeader: CPointer<Unit>, lplpNewHeader: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprInfoDuplicate == "on"]
+public unsafe func Windows_MprInfoDuplicate(lpHeader: CPointer<Unit>, lplpNewHeader: CPointer<CPointer<Unit>>): UInt32 {
+    return MprInfoDuplicate(lpHeader, lplpNewHeader)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprInfoRemoveAll == "on"]
+foreign {
     func MprInfoRemoveAll(lpHeader: CPointer<Unit>, lplpNewHeader: CPointer<CPointer<Unit>>): UInt32
 }
 
-@When[MPRAPI == "on" && (Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Security_Cryptography == "on")]
-foreign {
-    func MprAdminInterfaceGetCustomInfoEx(hMprServer: IntNative, hInterface: CPointer<Unit>, pCustomInfo: CPointer<MPR_IF_CUSTOMINFOEX2Abi>): UInt32
-    func MprAdminInterfaceSetCustomInfoEx(hMprServer: IntNative, hInterface: CPointer<Unit>, pCustomInfo: CPointer<MPR_IF_CUSTOMINFOEX2Abi>): UInt32
-    func MprConfigInterfaceGetCustomInfoEx(hMprConfig: CPointer<Unit>, hRouterInterface: CPointer<Unit>, pCustomInfo: CPointer<MPR_IF_CUSTOMINFOEX2Abi>): UInt32
-    func MprConfigInterfaceSetCustomInfoEx(hMprConfig: CPointer<Unit>, hRouterInterface: CPointer<Unit>, pCustomInfo: CPointer<MPR_IF_CUSTOMINFOEX2Abi>): UInt32
+@When[Windows_Win32_NetworkManagement_Rras == "on" && MPRAPI == "on" && Windows_Win32_NetworkManagement_Rras_MprInfoRemoveAll == "on"]
+public unsafe func Windows_MprInfoRemoveAll(lpHeader: CPointer<Unit>, lplpNewHeader: CPointer<CPointer<Unit>>): UInt32 {
+    return MprInfoRemoveAll(lpHeader, lplpNewHeader)
 }
 
-@When[MPRAPI == "on" && Windows_Win32_Security_Cryptography == "on"]
-foreign {
-    func MprAdminServerGetInfoEx(hMprServer: IntNative, pServerInfo: CPointer<MPR_SERVER_EX1Abi>): UInt32
-    func MprAdminServerSetInfoEx(hMprServer: IntNative, pServerInfo: CPointer<MPR_SERVER_SET_CONFIG_EX1Abi>): UInt32
-    func MprConfigServerGetInfoEx(hMprConfig: CPointer<Unit>, pServerInfo: CPointer<MPR_SERVER_EX1Abi>): UInt32
-    func MprConfigServerSetInfoEx(hMprConfig: CPointer<Unit>, pSetServerConfig: CPointer<MPR_SERVER_SET_CONFIG_EX1Abi>): UInt32
-}
-
-@When[RASAPI32 == "on"]
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasClearConnectionStatistics == "on"]
 foreign {
     func RasClearConnectionStatistics(hRasConn: HRASCONN): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasClearConnectionStatistics == "on"]
+public unsafe func Windows_RasClearConnectionStatistics(hRasConn: HRASCONN): UInt32 {
+    return RasClearConnectionStatistics(hRasConn)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasClearLinkStatistics == "on"]
+foreign {
     func RasClearLinkStatistics(hRasConn: HRASCONN, dwSubEntry: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasClearLinkStatistics == "on"]
+public unsafe func Windows_RasClearLinkStatistics(hRasConn: HRASCONN, dwSubEntry: UInt32): UInt32 {
+    return RasClearLinkStatistics(hRasConn, dwSubEntry)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasConnectionNotificationA == "on"]
+foreign {
     func RasConnectionNotificationA(param0: HRASCONN, param1: CPointer<Unit>, param2: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasConnectionNotificationA == "on"]
+public unsafe func Windows_RasConnectionNotificationA(param0: HRASCONN, param1: CPointer<Unit>, param2: UInt32): UInt32 {
+    return RasConnectionNotificationA(param0, param1, param2)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasConnectionNotificationW == "on"]
+foreign {
     func RasConnectionNotificationW(param0: HRASCONN, param1: CPointer<Unit>, param2: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasConnectionNotificationW == "on"]
+public unsafe func Windows_RasConnectionNotificationW(param0: HRASCONN, param1: CPointer<Unit>, param2: UInt32): UInt32 {
+    return RasConnectionNotificationW(param0, param1, param2)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasCreatePhonebookEntryA == "on"]
+foreign {
     // param-hint: param1 optional
     func RasCreatePhonebookEntryA(param0: CPointer<Unit>, param1: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasCreatePhonebookEntryA == "on"]
+public unsafe func Windows_RasCreatePhonebookEntryA(param0: CPointer<Unit>, param1: CPointer<UInt8>): UInt32 {
+    return RasCreatePhonebookEntryA(param0, param1)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasCreatePhonebookEntryW == "on"]
+foreign {
     // param-hint: param1 optional
     func RasCreatePhonebookEntryW(param0: CPointer<Unit>, param1: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasCreatePhonebookEntryW == "on"]
+public unsafe func Windows_RasCreatePhonebookEntryW(param0: CPointer<Unit>, param1: CPointer<UInt16>): UInt32 {
+    return RasCreatePhonebookEntryW(param0, param1)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasDeleteEntryA == "on"]
+foreign {
     // param-hint: param0 optional
     func RasDeleteEntryA(param0: CPointer<UInt8>, param1: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasDeleteEntryA == "on"]
+public unsafe func Windows_RasDeleteEntryA(param0: CPointer<UInt8>, param1: CPointer<UInt8>): UInt32 {
+    return RasDeleteEntryA(param0, param1)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasDeleteEntryW == "on"]
+foreign {
     // param-hint: param0 optional
     func RasDeleteEntryW(param0: CPointer<UInt16>, param1: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasDeleteEntryW == "on"]
+public unsafe func Windows_RasDeleteEntryW(param0: CPointer<UInt16>, param1: CPointer<UInt16>): UInt32 {
+    return RasDeleteEntryW(param0, param1)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasDeleteSubEntryA == "on"]
+foreign {
     // param-hint: pszPhonebook optional
     func RasDeleteSubEntryA(pszPhonebook: CPointer<UInt8>, pszEntry: CPointer<UInt8>, dwSubentryId: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasDeleteSubEntryA == "on"]
+public unsafe func Windows_RasDeleteSubEntryA(pszPhonebook: CPointer<UInt8>, pszEntry: CPointer<UInt8>, dwSubentryId: UInt32): UInt32 {
+    return RasDeleteSubEntryA(pszPhonebook, pszEntry, dwSubentryId)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasDeleteSubEntryW == "on"]
+foreign {
     // param-hint: pszPhonebook optional
     func RasDeleteSubEntryW(pszPhonebook: CPointer<UInt16>, pszEntry: CPointer<UInt16>, dwSubEntryId: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasDeleteSubEntryW == "on"]
+public unsafe func Windows_RasDeleteSubEntryW(pszPhonebook: CPointer<UInt16>, pszEntry: CPointer<UInt16>, dwSubEntryId: UInt32): UInt32 {
+    return RasDeleteSubEntryW(pszPhonebook, pszEntry, dwSubEntryId)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasDialA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: param0 optional
+    // param-hint: param1 optional
+    // param-hint: param4 optional
+    func RasDialA(param0: CPointer<RASDIALEXTENSIONS>, param1: CPointer<UInt8>, param2: CPointer<RASDIALPARAMSA>, param3: UInt32, param4: CPointer<Unit>, param5: CPointer<HRASCONN>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasDialA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_RasDialA(param0: CPointer<RASDIALEXTENSIONS>, param1: CPointer<UInt8>, param2: CPointer<RASDIALPARAMSA>, param3: UInt32, param4: CPointer<Unit>, param5: CPointer<HRASCONN>): UInt32 {
+    return RasDialA(param0, param1, param2, param3, param4, param5)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasDialW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: param0 optional
+    // param-hint: param1 optional
+    // param-hint: param4 optional
+    func RasDialW(param0: CPointer<RASDIALEXTENSIONS>, param1: CPointer<UInt16>, param2: CPointer<RASDIALPARAMSW>, param3: UInt32, param4: CPointer<Unit>, param5: CPointer<HRASCONN>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasDialW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_RasDialW(param0: CPointer<RASDIALEXTENSIONS>, param1: CPointer<UInt16>, param2: CPointer<RASDIALPARAMSW>, param3: UInt32, param4: CPointer<Unit>, param5: CPointer<HRASCONN>): UInt32 {
+    return RasDialW(param0, param1, param2, param3, param4, param5)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasEditPhonebookEntryA == "on"]
+foreign {
     // param-hint: param1 optional
     func RasEditPhonebookEntryA(param0: CPointer<Unit>, param1: CPointer<UInt8>, param2: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasEditPhonebookEntryA == "on"]
+public unsafe func Windows_RasEditPhonebookEntryA(param0: CPointer<Unit>, param1: CPointer<UInt8>, param2: CPointer<UInt8>): UInt32 {
+    return RasEditPhonebookEntryA(param0, param1, param2)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasEditPhonebookEntryW == "on"]
+foreign {
     // param-hint: param1 optional
     func RasEditPhonebookEntryW(param0: CPointer<Unit>, param1: CPointer<UInt16>, param2: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasEditPhonebookEntryW == "on"]
+public unsafe func Windows_RasEditPhonebookEntryW(param0: CPointer<Unit>, param1: CPointer<UInt16>, param2: CPointer<UInt16>): UInt32 {
+    return RasEditPhonebookEntryW(param0, param1, param2)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasEnumAutodialAddressesA == "on"]
+foreign {
     // param-hint: lppRasAutodialAddresses bytes=param[1] optional
     func RasEnumAutodialAddressesA(lppRasAutodialAddresses: CPointer<CPointer<UInt8>>, lpdwcbRasAutodialAddresses: CPointer<UInt32>, lpdwcRasAutodialAddresses: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasEnumAutodialAddressesA == "on"]
+public unsafe func Windows_RasEnumAutodialAddressesA(lppRasAutodialAddresses: CPointer<CPointer<UInt8>>, lpdwcbRasAutodialAddresses: CPointer<UInt32>, lpdwcRasAutodialAddresses: CPointer<UInt32>): UInt32 {
+    return RasEnumAutodialAddressesA(lppRasAutodialAddresses, lpdwcbRasAutodialAddresses, lpdwcRasAutodialAddresses)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasEnumAutodialAddressesW == "on"]
+foreign {
     // param-hint: lppRasAutodialAddresses bytes=param[1] optional
     func RasEnumAutodialAddressesW(lppRasAutodialAddresses: CPointer<CPointer<UInt16>>, lpdwcbRasAutodialAddresses: CPointer<UInt32>, lpdwcRasAutodialAddresses: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasEnumAutodialAddressesW == "on"]
+public unsafe func Windows_RasEnumAutodialAddressesW(lppRasAutodialAddresses: CPointer<CPointer<UInt16>>, lpdwcbRasAutodialAddresses: CPointer<UInt32>, lpdwcRasAutodialAddresses: CPointer<UInt32>): UInt32 {
+    return RasEnumAutodialAddressesW(lppRasAutodialAddresses, lpdwcbRasAutodialAddresses, lpdwcRasAutodialAddresses)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasEnumConnectionsA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: param0 len=param[2] optional
+    func RasEnumConnectionsA(param0: CPointer<RASCONNA>, param1: CPointer<UInt32>, param2: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasEnumConnectionsA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_RasEnumConnectionsA(param0: CPointer<RASCONNA>, param1: CPointer<UInt32>, param2: CPointer<UInt32>): UInt32 {
+    return RasEnumConnectionsA(param0, param1, param2)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasEnumConnectionsW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: param0 len=param[2] optional
+    func RasEnumConnectionsW(param0: CPointer<RASCONNW>, param1: CPointer<UInt32>, param2: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasEnumConnectionsW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_RasEnumConnectionsW(param0: CPointer<RASCONNW>, param1: CPointer<UInt32>, param2: CPointer<UInt32>): UInt32 {
+    return RasEnumConnectionsW(param0, param1, param2)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasEnumDevicesA == "on"]
+foreign {
     // param-hint: param0 optional
     func RasEnumDevicesA(param0: CPointer<RASDEVINFOAAbi>, param1: CPointer<UInt32>, param2: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasEnumDevicesA == "on"]
+public unsafe func Windows_RasEnumDevicesA(param0: CPointer<RASDEVINFOAAbi>, param1: CPointer<UInt32>, param2: CPointer<UInt32>): UInt32 {
+    return RasEnumDevicesA(param0, param1, param2)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasEnumDevicesW == "on"]
+foreign {
     // param-hint: param0 optional
     func RasEnumDevicesW(param0: CPointer<RASDEVINFOWAbi>, param1: CPointer<UInt32>, param2: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasEnumDevicesW == "on"]
+public unsafe func Windows_RasEnumDevicesW(param0: CPointer<RASDEVINFOWAbi>, param1: CPointer<UInt32>, param2: CPointer<UInt32>): UInt32 {
+    return RasEnumDevicesW(param0, param1, param2)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasEnumEntriesA == "on"]
+foreign {
     // param-hint: param0 optional
     // param-hint: param1 optional
     // param-hint: param2 optional
     func RasEnumEntriesA(param0: CPointer<UInt8>, param1: CPointer<UInt8>, param2: CPointer<RASENTRYNAMEAAbi>, param3: CPointer<UInt32>, param4: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasEnumEntriesA == "on"]
+public unsafe func Windows_RasEnumEntriesA(param0: CPointer<UInt8>, param1: CPointer<UInt8>, param2: CPointer<RASENTRYNAMEAAbi>, param3: CPointer<UInt32>, param4: CPointer<UInt32>): UInt32 {
+    return RasEnumEntriesA(param0, param1, param2, param3, param4)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasEnumEntriesW == "on"]
+foreign {
     // param-hint: param0 optional
     // param-hint: param1 optional
     // param-hint: param2 optional
     func RasEnumEntriesW(param0: CPointer<UInt16>, param1: CPointer<UInt16>, param2: CPointer<RASENTRYNAMEWAbi>, param3: CPointer<UInt32>, param4: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasEnumEntriesW == "on"]
+public unsafe func Windows_RasEnumEntriesW(param0: CPointer<UInt16>, param1: CPointer<UInt16>, param2: CPointer<RASENTRYNAMEWAbi>, param3: CPointer<UInt32>, param4: CPointer<UInt32>): UInt32 {
+    return RasEnumEntriesW(param0, param1, param2, param3, param4)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasFreeEapUserIdentityA == "on"]
+foreign {
     func RasFreeEapUserIdentityA(pRasEapUserIdentity: CPointer<RASEAPUSERIDENTITYAAbi>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasFreeEapUserIdentityA == "on"]
+public unsafe func Windows_RasFreeEapUserIdentityA(pRasEapUserIdentity: CPointer<RASEAPUSERIDENTITYAAbi>): Unit {
+    RasFreeEapUserIdentityA(pRasEapUserIdentity)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasFreeEapUserIdentityW == "on"]
+foreign {
     func RasFreeEapUserIdentityW(pRasEapUserIdentity: CPointer<RASEAPUSERIDENTITYWAbi>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasFreeEapUserIdentityW == "on"]
+public unsafe func Windows_RasFreeEapUserIdentityW(pRasEapUserIdentity: CPointer<RASEAPUSERIDENTITYWAbi>): Unit {
+    RasFreeEapUserIdentityW(pRasEapUserIdentity)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetAutodialAddressA == "on"]
+foreign {
     // param-hint: param0 optional
     // param-hint: param1 optional
     // param-hint: param2 optional
     func RasGetAutodialAddressA(param0: CPointer<UInt8>, param1: CPointer<UInt32>, param2: CPointer<RASAUTODIALENTRYAAbi>, param3: CPointer<UInt32>, param4: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetAutodialAddressA == "on"]
+public unsafe func Windows_RasGetAutodialAddressA(param0: CPointer<UInt8>, param1: CPointer<UInt32>, param2: CPointer<RASAUTODIALENTRYAAbi>, param3: CPointer<UInt32>, param4: CPointer<UInt32>): UInt32 {
+    return RasGetAutodialAddressA(param0, param1, param2, param3, param4)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetAutodialAddressW == "on"]
+foreign {
     // param-hint: param0 optional
     // param-hint: param1 optional
     // param-hint: param2 optional
     func RasGetAutodialAddressW(param0: CPointer<UInt16>, param1: CPointer<UInt32>, param2: CPointer<RASAUTODIALENTRYWAbi>, param3: CPointer<UInt32>, param4: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetAutodialAddressW == "on"]
+public unsafe func Windows_RasGetAutodialAddressW(param0: CPointer<UInt16>, param1: CPointer<UInt32>, param2: CPointer<RASAUTODIALENTRYWAbi>, param3: CPointer<UInt32>, param4: CPointer<UInt32>): UInt32 {
+    return RasGetAutodialAddressW(param0, param1, param2, param3, param4)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetAutodialEnableA == "on"]
+foreign {
     func RasGetAutodialEnableA(param0: UInt32, param1: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetAutodialEnableA == "on"]
+public unsafe func Windows_RasGetAutodialEnableA(param0: UInt32, param1: CPointer<Int32>): UInt32 {
+    return RasGetAutodialEnableA(param0, param1)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetAutodialEnableW == "on"]
+foreign {
     func RasGetAutodialEnableW(param0: UInt32, param1: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetAutodialEnableW == "on"]
+public unsafe func Windows_RasGetAutodialEnableW(param0: UInt32, param1: CPointer<Int32>): UInt32 {
+    return RasGetAutodialEnableW(param0, param1)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetAutodialParamA == "on"]
+foreign {
     func RasGetAutodialParamA(param0: UInt32, param1: CPointer<Unit>, param2: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetAutodialParamA == "on"]
+public unsafe func Windows_RasGetAutodialParamA(param0: UInt32, param1: CPointer<Unit>, param2: CPointer<UInt32>): UInt32 {
+    return RasGetAutodialParamA(param0, param1, param2)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetAutodialParamW == "on"]
+foreign {
     func RasGetAutodialParamW(param0: UInt32, param1: CPointer<Unit>, param2: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetAutodialParamW == "on"]
+public unsafe func Windows_RasGetAutodialParamW(param0: UInt32, param1: CPointer<Unit>, param2: CPointer<UInt32>): UInt32 {
+    return RasGetAutodialParamW(param0, param1, param2)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetConnectStatusA == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func RasGetConnectStatusA(param0: HRASCONN, param1: CPointer<RASCONNSTATUSAAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetConnectStatusA == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_RasGetConnectStatusA(param0: HRASCONN, param1: CPointer<RASCONNSTATUSAAbi>): UInt32 {
+    return RasGetConnectStatusA(param0, param1)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetConnectStatusW == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func RasGetConnectStatusW(param0: HRASCONN, param1: CPointer<RASCONNSTATUSWAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetConnectStatusW == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_RasGetConnectStatusW(param0: HRASCONN, param1: CPointer<RASCONNSTATUSWAbi>): UInt32 {
+    return RasGetConnectStatusW(param0, param1)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetConnectionStatistics == "on"]
+foreign {
     func RasGetConnectionStatistics(hRasConn: HRASCONN, lpStatistics: CPointer<RAS_STATSAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetConnectionStatistics == "on"]
+public unsafe func Windows_RasGetConnectionStatistics(hRasConn: HRASCONN, lpStatistics: CPointer<RAS_STATSAbi>): UInt32 {
+    return RasGetConnectionStatistics(hRasConn, lpStatistics)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetCountryInfoA == "on"]
+foreign {
     // param-hint: param0 optional
     func RasGetCountryInfoA(param0: CPointer<RASCTRYINFOAbi>, param1: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetCountryInfoA == "on"]
+public unsafe func Windows_RasGetCountryInfoA(param0: CPointer<RASCTRYINFOAbi>, param1: CPointer<UInt32>): UInt32 {
+    return RasGetCountryInfoA(param0, param1)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetCountryInfoW == "on"]
+foreign {
     // param-hint: param0 optional
     func RasGetCountryInfoW(param0: CPointer<RASCTRYINFOAbi>, param1: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetCountryInfoW == "on"]
+public unsafe func Windows_RasGetCountryInfoW(param0: CPointer<RASCTRYINFOAbi>, param1: CPointer<UInt32>): UInt32 {
+    return RasGetCountryInfoW(param0, param1)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetCredentialsA == "on"]
+foreign {
     // param-hint: param0 optional
     func RasGetCredentialsA(param0: CPointer<UInt8>, param1: CPointer<UInt8>, param2: CPointer<RASCREDENTIALSAAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetCredentialsA == "on"]
+public unsafe func Windows_RasGetCredentialsA(param0: CPointer<UInt8>, param1: CPointer<UInt8>, param2: CPointer<RASCREDENTIALSAAbi>): UInt32 {
+    return RasGetCredentialsA(param0, param1, param2)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetCredentialsW == "on"]
+foreign {
     // param-hint: param0 optional
     func RasGetCredentialsW(param0: CPointer<UInt16>, param1: CPointer<UInt16>, param2: CPointer<RASCREDENTIALSWAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetCredentialsW == "on"]
+public unsafe func Windows_RasGetCredentialsW(param0: CPointer<UInt16>, param1: CPointer<UInt16>, param2: CPointer<RASCREDENTIALSWAbi>): UInt32 {
+    return RasGetCredentialsW(param0, param1, param2)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetCustomAuthDataA == "on"]
+foreign {
     // param-hint: pszPhonebook optional
     // param-hint: pbCustomAuthData bytes=param[3] optional
     func RasGetCustomAuthDataA(pszPhonebook: CPointer<UInt8>, pszEntry: CPointer<UInt8>, pbCustomAuthData: CPointer<UInt8>, pdwSizeofCustomAuthData: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetCustomAuthDataA == "on"]
+public unsafe func Windows_RasGetCustomAuthDataA(pszPhonebook: CPointer<UInt8>, pszEntry: CPointer<UInt8>, pbCustomAuthData: CPointer<UInt8>, pdwSizeofCustomAuthData: CPointer<UInt32>): UInt32 {
+    return RasGetCustomAuthDataA(pszPhonebook, pszEntry, pbCustomAuthData, pdwSizeofCustomAuthData)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetCustomAuthDataW == "on"]
+foreign {
     // param-hint: pszPhonebook optional
     // param-hint: pbCustomAuthData bytes=param[3] optional
     func RasGetCustomAuthDataW(pszPhonebook: CPointer<UInt16>, pszEntry: CPointer<UInt16>, pbCustomAuthData: CPointer<UInt8>, pdwSizeofCustomAuthData: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetCustomAuthDataW == "on"]
+public unsafe func Windows_RasGetCustomAuthDataW(pszPhonebook: CPointer<UInt16>, pszEntry: CPointer<UInt16>, pbCustomAuthData: CPointer<UInt8>, pdwSizeofCustomAuthData: CPointer<UInt32>): UInt32 {
+    return RasGetCustomAuthDataW(pszPhonebook, pszEntry, pbCustomAuthData, pdwSizeofCustomAuthData)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetEapUserDataA == "on"]
+foreign {
     // param-hint: hToken optional
     // param-hint: pszPhonebook optional
     // param-hint: pbEapData optional
     func RasGetEapUserDataA(hToken: CPointer<Unit>, pszPhonebook: CPointer<UInt8>, pszEntry: CPointer<UInt8>, pbEapData: CPointer<UInt8>, pdwSizeofEapData: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetEapUserDataA == "on"]
+public unsafe func Windows_RasGetEapUserDataA(hToken: CPointer<Unit>, pszPhonebook: CPointer<UInt8>, pszEntry: CPointer<UInt8>, pbEapData: CPointer<UInt8>, pdwSizeofEapData: CPointer<UInt32>): UInt32 {
+    return RasGetEapUserDataA(hToken, pszPhonebook, pszEntry, pbEapData, pdwSizeofEapData)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetEapUserDataW == "on"]
+foreign {
     // param-hint: hToken optional
     // param-hint: pszPhonebook optional
     // param-hint: pbEapData optional
     func RasGetEapUserDataW(hToken: CPointer<Unit>, pszPhonebook: CPointer<UInt16>, pszEntry: CPointer<UInt16>, pbEapData: CPointer<UInt8>, pdwSizeofEapData: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetEapUserDataW == "on"]
+public unsafe func Windows_RasGetEapUserDataW(hToken: CPointer<Unit>, pszPhonebook: CPointer<UInt16>, pszEntry: CPointer<UInt16>, pbEapData: CPointer<UInt8>, pdwSizeofEapData: CPointer<UInt32>): UInt32 {
+    return RasGetEapUserDataW(hToken, pszPhonebook, pszEntry, pbEapData, pdwSizeofEapData)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetEapUserIdentityA == "on"]
+foreign {
     // param-hint: pszPhonebook optional
     func RasGetEapUserIdentityA(pszPhonebook: CPointer<UInt8>, pszEntry: CPointer<UInt8>, dwFlags: UInt32, hwnd: CPointer<Unit>, ppRasEapUserIdentity: CPointer<CPointer<RASEAPUSERIDENTITYAAbi>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetEapUserIdentityA == "on"]
+public unsafe func Windows_RasGetEapUserIdentityA(pszPhonebook: CPointer<UInt8>, pszEntry: CPointer<UInt8>, dwFlags: UInt32, hwnd: CPointer<Unit>, ppRasEapUserIdentity: CPointer<CPointer<RASEAPUSERIDENTITYAAbi>>): UInt32 {
+    return RasGetEapUserIdentityA(pszPhonebook, pszEntry, dwFlags, hwnd, ppRasEapUserIdentity)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetEapUserIdentityW == "on"]
+foreign {
     // param-hint: pszPhonebook optional
     func RasGetEapUserIdentityW(pszPhonebook: CPointer<UInt16>, pszEntry: CPointer<UInt16>, dwFlags: UInt32, hwnd: CPointer<Unit>, ppRasEapUserIdentity: CPointer<CPointer<RASEAPUSERIDENTITYWAbi>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetEapUserIdentityW == "on"]
+public unsafe func Windows_RasGetEapUserIdentityW(pszPhonebook: CPointer<UInt16>, pszEntry: CPointer<UInt16>, dwFlags: UInt32, hwnd: CPointer<Unit>, ppRasEapUserIdentity: CPointer<CPointer<RASEAPUSERIDENTITYWAbi>>): UInt32 {
+    return RasGetEapUserIdentityW(pszPhonebook, pszEntry, dwFlags, hwnd, ppRasEapUserIdentity)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetEntryDialParamsA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: param0 optional
+    func RasGetEntryDialParamsA(param0: CPointer<UInt8>, param1: CPointer<RASDIALPARAMSA>, param2: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetEntryDialParamsA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_RasGetEntryDialParamsA(param0: CPointer<UInt8>, param1: CPointer<RASDIALPARAMSA>, param2: CPointer<Int32>): UInt32 {
+    return RasGetEntryDialParamsA(param0, param1, param2)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetEntryDialParamsW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: param0 optional
+    func RasGetEntryDialParamsW(param0: CPointer<UInt16>, param1: CPointer<RASDIALPARAMSW>, param2: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetEntryDialParamsW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_RasGetEntryDialParamsW(param0: CPointer<UInt16>, param1: CPointer<RASDIALPARAMSW>, param2: CPointer<Int32>): UInt32 {
+    return RasGetEntryDialParamsW(param0, param1, param2)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetEntryPropertiesA == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: param0 optional
+    // param-hint: param2 optional
+    // param-hint: param4 optional
+    // param-hint: param5 optional
+    func RasGetEntryPropertiesA(param0: CPointer<UInt8>, param1: CPointer<UInt8>, param2: CPointer<RASENTRYAAbi>, param3: CPointer<UInt32>, param4: CPointer<UInt8>, param5: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetEntryPropertiesA == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_RasGetEntryPropertiesA(param0: CPointer<UInt8>, param1: CPointer<UInt8>, param2: CPointer<RASENTRYAAbi>, param3: CPointer<UInt32>, param4: CPointer<UInt8>, param5: CPointer<UInt32>): UInt32 {
+    return RasGetEntryPropertiesA(param0, param1, param2, param3, param4, param5)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetEntryPropertiesW == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: param0 optional
+    // param-hint: param2 optional
+    // param-hint: param4 optional
+    // param-hint: param5 optional
+    func RasGetEntryPropertiesW(param0: CPointer<UInt16>, param1: CPointer<UInt16>, param2: CPointer<RASENTRYWAbi>, param3: CPointer<UInt32>, param4: CPointer<UInt8>, param5: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetEntryPropertiesW == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_RasGetEntryPropertiesW(param0: CPointer<UInt16>, param1: CPointer<UInt16>, param2: CPointer<RASENTRYWAbi>, param3: CPointer<UInt32>, param4: CPointer<UInt8>, param5: CPointer<UInt32>): UInt32 {
+    return RasGetEntryPropertiesW(param0, param1, param2, param3, param4, param5)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetErrorStringA == "on"]
+foreign {
     // param-hint: lpszString len=param[2]
     func RasGetErrorStringA(ResourceId: UInt32, lpszString: CPointer<UInt8>, InBufSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetErrorStringA == "on"]
+public unsafe func Windows_RasGetErrorStringA(ResourceId: UInt32, lpszString: CPointer<UInt8>, InBufSize: UInt32): UInt32 {
+    return RasGetErrorStringA(ResourceId, lpszString, InBufSize)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetErrorStringW == "on"]
+foreign {
     // param-hint: lpszString len=param[2]
     func RasGetErrorStringW(ResourceId: UInt32, lpszString: CPointer<UInt16>, InBufSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetErrorStringW == "on"]
+public unsafe func Windows_RasGetErrorStringW(ResourceId: UInt32, lpszString: CPointer<UInt16>, InBufSize: UInt32): UInt32 {
+    return RasGetErrorStringW(ResourceId, lpszString, InBufSize)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetLinkStatistics == "on"]
+foreign {
     func RasGetLinkStatistics(hRasConn: HRASCONN, dwSubEntry: UInt32, lpStatistics: CPointer<RAS_STATSAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetLinkStatistics == "on"]
+public unsafe func Windows_RasGetLinkStatistics(hRasConn: HRASCONN, dwSubEntry: UInt32, lpStatistics: CPointer<RAS_STATSAbi>): UInt32 {
+    return RasGetLinkStatistics(hRasConn, dwSubEntry, lpStatistics)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetPCscf == "on"]
+foreign {
     func RasGetPCscf(lpszPCscf: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetPCscf == "on"]
+public unsafe func Windows_RasGetPCscf(lpszPCscf: CPointer<UInt16>): UInt32 {
+    return RasGetPCscf(lpszPCscf)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetProjectionInfoA == "on"]
+foreign {
     func RasGetProjectionInfoA(param0: HRASCONN, param1: RASPROJECTIONAbi, param2: CPointer<Unit>, param3: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetProjectionInfoA == "on"]
+public unsafe func Windows_RasGetProjectionInfoA(param0: HRASCONN, param1: RASPROJECTIONAbi, param2: CPointer<Unit>, param3: CPointer<UInt32>): UInt32 {
+    return RasGetProjectionInfoA(param0, param1, param2, param3)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetProjectionInfoEx == "on" && (((arch == "x86_64" && Windows_Win32_Networking_WinSock == "on") || (arch == "aarch64" && Windows_Win32_Networking_WinSock == "on")) && Windows_Win32_Networking_WinSock == "on")]
+foreign {
+    // param-hint: pRasProjection optional
+    func RasGetProjectionInfoEx(hrasconn: HRASCONN, pRasProjection: CPointer<RAS_PROJECTION_INFOAbi>, lpdwSize: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetProjectionInfoEx == "on" && (((arch == "x86_64" && Windows_Win32_Networking_WinSock == "on") || (arch == "aarch64" && Windows_Win32_Networking_WinSock == "on")) && Windows_Win32_Networking_WinSock == "on")]
+public unsafe func Windows_RasGetProjectionInfoEx(hrasconn: HRASCONN, pRasProjection: CPointer<RAS_PROJECTION_INFOAbi>, lpdwSize: CPointer<UInt32>): UInt32 {
+    return RasGetProjectionInfoEx(hrasconn, pRasProjection, lpdwSize)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetProjectionInfoW == "on"]
+foreign {
     func RasGetProjectionInfoW(param0: HRASCONN, param1: RASPROJECTIONAbi, param2: CPointer<Unit>, param3: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetProjectionInfoW == "on"]
+public unsafe func Windows_RasGetProjectionInfoW(param0: HRASCONN, param1: RASPROJECTIONAbi, param2: CPointer<Unit>, param3: CPointer<UInt32>): UInt32 {
+    return RasGetProjectionInfoW(param0, param1, param2, param3)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetSubEntryHandleA == "on"]
+foreign {
     func RasGetSubEntryHandleA(param0: HRASCONN, param1: UInt32, param2: CPointer<HRASCONN>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetSubEntryHandleA == "on"]
+public unsafe func Windows_RasGetSubEntryHandleA(param0: HRASCONN, param1: UInt32, param2: CPointer<HRASCONN>): UInt32 {
+    return RasGetSubEntryHandleA(param0, param1, param2)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetSubEntryHandleW == "on"]
+foreign {
     func RasGetSubEntryHandleW(param0: HRASCONN, param1: UInt32, param2: CPointer<HRASCONN>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetSubEntryHandleW == "on"]
+public unsafe func Windows_RasGetSubEntryHandleW(param0: HRASCONN, param1: UInt32, param2: CPointer<HRASCONN>): UInt32 {
+    return RasGetSubEntryHandleW(param0, param1, param2)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetSubEntryPropertiesA == "on"]
+foreign {
     // param-hint: param0 optional
     // param-hint: param3 optional
     // param-hint: param4 optional
     // param-hint: param5 optional
     // param-hint: param6 optional
     func RasGetSubEntryPropertiesA(param0: CPointer<UInt8>, param1: CPointer<UInt8>, param2: UInt32, param3: CPointer<RASSUBENTRYAAbi>, param4: CPointer<UInt32>, param5: CPointer<UInt8>, param6: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetSubEntryPropertiesA == "on"]
+public unsafe func Windows_RasGetSubEntryPropertiesA(param0: CPointer<UInt8>, param1: CPointer<UInt8>, param2: UInt32, param3: CPointer<RASSUBENTRYAAbi>, param4: CPointer<UInt32>, param5: CPointer<UInt8>, param6: CPointer<UInt32>): UInt32 {
+    return RasGetSubEntryPropertiesA(param0, param1, param2, param3, param4, param5, param6)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetSubEntryPropertiesW == "on"]
+foreign {
     // param-hint: param0 optional
     // param-hint: param3 optional
     // param-hint: param4 optional
     // param-hint: param5 optional
     // param-hint: param6 optional
     func RasGetSubEntryPropertiesW(param0: CPointer<UInt16>, param1: CPointer<UInt16>, param2: UInt32, param3: CPointer<RASSUBENTRYWAbi>, param4: CPointer<UInt32>, param5: CPointer<UInt8>, param6: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasGetSubEntryPropertiesW == "on"]
+public unsafe func Windows_RasGetSubEntryPropertiesW(param0: CPointer<UInt16>, param1: CPointer<UInt16>, param2: UInt32, param3: CPointer<RASSUBENTRYWAbi>, param4: CPointer<UInt32>, param5: CPointer<UInt8>, param6: CPointer<UInt32>): UInt32 {
+    return RasGetSubEntryPropertiesW(param0, param1, param2, param3, param4, param5, param6)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasHangUpA == "on"]
+foreign {
     func RasHangUpA(param0: HRASCONN): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasHangUpA == "on"]
+public unsafe func Windows_RasHangUpA(param0: HRASCONN): UInt32 {
+    return RasHangUpA(param0)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasHangUpW == "on"]
+foreign {
     func RasHangUpW(param0: HRASCONN): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasHangUpW == "on"]
+public unsafe func Windows_RasHangUpW(param0: HRASCONN): UInt32 {
+    return RasHangUpW(param0)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasInvokeEapUI == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func RasInvokeEapUI(param0: HRASCONN, param1: UInt32, param2: CPointer<RASDIALEXTENSIONS>, param3: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasInvokeEapUI == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_RasInvokeEapUI(param0: HRASCONN, param1: UInt32, param2: CPointer<RASDIALEXTENSIONS>, param3: CPointer<Unit>): UInt32 {
+    return RasInvokeEapUI(param0, param1, param2, param3)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasRenameEntryA == "on"]
+foreign {
     // param-hint: param0 optional
     func RasRenameEntryA(param0: CPointer<UInt8>, param1: CPointer<UInt8>, param2: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasRenameEntryA == "on"]
+public unsafe func Windows_RasRenameEntryA(param0: CPointer<UInt8>, param1: CPointer<UInt8>, param2: CPointer<UInt8>): UInt32 {
+    return RasRenameEntryA(param0, param1, param2)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasRenameEntryW == "on"]
+foreign {
     // param-hint: param0 optional
     func RasRenameEntryW(param0: CPointer<UInt16>, param1: CPointer<UInt16>, param2: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasRenameEntryW == "on"]
+public unsafe func Windows_RasRenameEntryW(param0: CPointer<UInt16>, param1: CPointer<UInt16>, param2: CPointer<UInt16>): UInt32 {
+    return RasRenameEntryW(param0, param1, param2)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetAutodialAddressA == "on"]
+foreign {
     // param-hint: param0 optional
     // param-hint: param2 optional
     func RasSetAutodialAddressA(param0: CPointer<UInt8>, param1: UInt32, param2: CPointer<RASAUTODIALENTRYAAbi>, param3: UInt32, param4: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetAutodialAddressA == "on"]
+public unsafe func Windows_RasSetAutodialAddressA(param0: CPointer<UInt8>, param1: UInt32, param2: CPointer<RASAUTODIALENTRYAAbi>, param3: UInt32, param4: UInt32): UInt32 {
+    return RasSetAutodialAddressA(param0, param1, param2, param3, param4)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetAutodialAddressW == "on"]
+foreign {
     // param-hint: param0 optional
     // param-hint: param2 optional
     func RasSetAutodialAddressW(param0: CPointer<UInt16>, param1: UInt32, param2: CPointer<RASAUTODIALENTRYWAbi>, param3: UInt32, param4: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetAutodialAddressW == "on"]
+public unsafe func Windows_RasSetAutodialAddressW(param0: CPointer<UInt16>, param1: UInt32, param2: CPointer<RASAUTODIALENTRYWAbi>, param3: UInt32, param4: UInt32): UInt32 {
+    return RasSetAutodialAddressW(param0, param1, param2, param3, param4)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetAutodialEnableA == "on"]
+foreign {
     func RasSetAutodialEnableA(param0: UInt32, param1: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetAutodialEnableA == "on"]
+public unsafe func Windows_RasSetAutodialEnableA(param0: UInt32, param1: Int32): UInt32 {
+    return RasSetAutodialEnableA(param0, param1)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetAutodialEnableW == "on"]
+foreign {
     func RasSetAutodialEnableW(param0: UInt32, param1: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetAutodialEnableW == "on"]
+public unsafe func Windows_RasSetAutodialEnableW(param0: UInt32, param1: Int32): UInt32 {
+    return RasSetAutodialEnableW(param0, param1)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetAutodialParamA == "on"]
+foreign {
     func RasSetAutodialParamA(param0: UInt32, param1: CPointer<Unit>, param2: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetAutodialParamA == "on"]
+public unsafe func Windows_RasSetAutodialParamA(param0: UInt32, param1: CPointer<Unit>, param2: UInt32): UInt32 {
+    return RasSetAutodialParamA(param0, param1, param2)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetAutodialParamW == "on"]
+foreign {
     func RasSetAutodialParamW(param0: UInt32, param1: CPointer<Unit>, param2: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetAutodialParamW == "on"]
+public unsafe func Windows_RasSetAutodialParamW(param0: UInt32, param1: CPointer<Unit>, param2: UInt32): UInt32 {
+    return RasSetAutodialParamW(param0, param1, param2)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetCredentialsA == "on"]
+foreign {
     // param-hint: param0 optional
     func RasSetCredentialsA(param0: CPointer<UInt8>, param1: CPointer<UInt8>, param2: CPointer<RASCREDENTIALSAAbi>, param3: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetCredentialsA == "on"]
+public unsafe func Windows_RasSetCredentialsA(param0: CPointer<UInt8>, param1: CPointer<UInt8>, param2: CPointer<RASCREDENTIALSAAbi>, param3: Int32): UInt32 {
+    return RasSetCredentialsA(param0, param1, param2, param3)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetCredentialsW == "on"]
+foreign {
     // param-hint: param0 optional
     func RasSetCredentialsW(param0: CPointer<UInt16>, param1: CPointer<UInt16>, param2: CPointer<RASCREDENTIALSWAbi>, param3: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetCredentialsW == "on"]
+public unsafe func Windows_RasSetCredentialsW(param0: CPointer<UInt16>, param1: CPointer<UInt16>, param2: CPointer<RASCREDENTIALSWAbi>, param3: Int32): UInt32 {
+    return RasSetCredentialsW(param0, param1, param2, param3)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetCustomAuthDataA == "on"]
+foreign {
     // param-hint: pszPhonebook optional
     // param-hint: pbCustomAuthData bytes=param[3]
     func RasSetCustomAuthDataA(pszPhonebook: CPointer<UInt8>, pszEntry: CPointer<UInt8>, pbCustomAuthData: CPointer<UInt8>, dwSizeofCustomAuthData: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetCustomAuthDataA == "on"]
+public unsafe func Windows_RasSetCustomAuthDataA(pszPhonebook: CPointer<UInt8>, pszEntry: CPointer<UInt8>, pbCustomAuthData: CPointer<UInt8>, dwSizeofCustomAuthData: UInt32): UInt32 {
+    return RasSetCustomAuthDataA(pszPhonebook, pszEntry, pbCustomAuthData, dwSizeofCustomAuthData)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetCustomAuthDataW == "on"]
+foreign {
     // param-hint: pszPhonebook optional
     // param-hint: pbCustomAuthData bytes=param[3]
     func RasSetCustomAuthDataW(pszPhonebook: CPointer<UInt16>, pszEntry: CPointer<UInt16>, pbCustomAuthData: CPointer<UInt8>, dwSizeofCustomAuthData: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetCustomAuthDataW == "on"]
+public unsafe func Windows_RasSetCustomAuthDataW(pszPhonebook: CPointer<UInt16>, pszEntry: CPointer<UInt16>, pbCustomAuthData: CPointer<UInt8>, dwSizeofCustomAuthData: UInt32): UInt32 {
+    return RasSetCustomAuthDataW(pszPhonebook, pszEntry, pbCustomAuthData, dwSizeofCustomAuthData)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetEapUserDataA == "on"]
+foreign {
     // param-hint: hToken optional
     // param-hint: pszPhonebook optional
     func RasSetEapUserDataA(hToken: CPointer<Unit>, pszPhonebook: CPointer<UInt8>, pszEntry: CPointer<UInt8>, pbEapData: CPointer<UInt8>, dwSizeofEapData: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetEapUserDataA == "on"]
+public unsafe func Windows_RasSetEapUserDataA(hToken: CPointer<Unit>, pszPhonebook: CPointer<UInt8>, pszEntry: CPointer<UInt8>, pbEapData: CPointer<UInt8>, dwSizeofEapData: UInt32): UInt32 {
+    return RasSetEapUserDataA(hToken, pszPhonebook, pszEntry, pbEapData, dwSizeofEapData)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetEapUserDataW == "on"]
+foreign {
     // param-hint: hToken optional
     // param-hint: pszPhonebook optional
     func RasSetEapUserDataW(hToken: CPointer<Unit>, pszPhonebook: CPointer<UInt16>, pszEntry: CPointer<UInt16>, pbEapData: CPointer<UInt8>, dwSizeofEapData: UInt32): UInt32
-    // param-hint: param0 optional
-    // param-hint: param5 optional
-    func RasSetSubEntryPropertiesA(param0: CPointer<UInt8>, param1: CPointer<UInt8>, param2: UInt32, param3: CPointer<RASSUBENTRYAAbi>, param4: UInt32, param5: CPointer<UInt8>, param6: UInt32): UInt32
-    // param-hint: param0 optional
-    // param-hint: param5 optional
-    func RasSetSubEntryPropertiesW(param0: CPointer<UInt16>, param1: CPointer<UInt16>, param2: UInt32, param3: CPointer<RASSUBENTRYWAbi>, param4: UInt32, param5: CPointer<UInt8>, param6: UInt32): UInt32
-    // param-hint: param0 optional
-    func RasValidateEntryNameA(param0: CPointer<UInt8>, param1: CPointer<UInt8>): UInt32
-    // param-hint: param0 optional
-    func RasValidateEntryNameW(param0: CPointer<UInt16>, param1: CPointer<UInt16>): UInt32
 }
 
-@When[RASAPI32 == "on" && (((arch == "x86_64" && Windows_Win32_Networking_WinSock == "on") || (arch == "aarch64" && Windows_Win32_Networking_WinSock == "on")) && Windows_Win32_Networking_WinSock == "on")]
-foreign {
-    // param-hint: pRasProjection optional
-    func RasGetProjectionInfoEx(hrasconn: HRASCONN, pRasProjection: CPointer<RAS_PROJECTION_INFOAbi>, lpdwSize: CPointer<UInt32>): UInt32
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetEapUserDataW == "on"]
+public unsafe func Windows_RasSetEapUserDataW(hToken: CPointer<Unit>, pszPhonebook: CPointer<UInt16>, pszEntry: CPointer<UInt16>, pbEapData: CPointer<UInt8>, dwSizeofEapData: UInt32): UInt32 {
+    return RasSetEapUserDataW(hToken, pszPhonebook, pszEntry, pbEapData, dwSizeofEapData)
 }
 
-@When[RASAPI32 == "on" && ((arch == "x86_64" || arch == "aarch64"))]
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetEntryDialParamsA == "on" && (arch == "x86_64" || arch == "aarch64")]
 foreign {
-    // param-hint: param0 optional
-    // param-hint: param1 optional
-    // param-hint: param4 optional
-    func RasDialA(param0: CPointer<RASDIALEXTENSIONS>, param1: CPointer<UInt8>, param2: CPointer<RASDIALPARAMSA>, param3: UInt32, param4: CPointer<Unit>, param5: CPointer<HRASCONN>): UInt32
-    // param-hint: param0 optional
-    // param-hint: param1 optional
-    // param-hint: param4 optional
-    func RasDialW(param0: CPointer<RASDIALEXTENSIONS>, param1: CPointer<UInt16>, param2: CPointer<RASDIALPARAMSW>, param3: UInt32, param4: CPointer<Unit>, param5: CPointer<HRASCONN>): UInt32
-    // param-hint: param0 len=param[2] optional
-    func RasEnumConnectionsA(param0: CPointer<RASCONNA>, param1: CPointer<UInt32>, param2: CPointer<UInt32>): UInt32
-    // param-hint: param0 len=param[2] optional
-    func RasEnumConnectionsW(param0: CPointer<RASCONNW>, param1: CPointer<UInt32>, param2: CPointer<UInt32>): UInt32
-    // param-hint: param0 optional
-    func RasGetEntryDialParamsA(param0: CPointer<UInt8>, param1: CPointer<RASDIALPARAMSA>, param2: CPointer<Int32>): UInt32
-    // param-hint: param0 optional
-    func RasGetEntryDialParamsW(param0: CPointer<UInt16>, param1: CPointer<RASDIALPARAMSW>, param2: CPointer<Int32>): UInt32
-    func RasInvokeEapUI(param0: HRASCONN, param1: UInt32, param2: CPointer<RASDIALEXTENSIONS>, param3: CPointer<Unit>): UInt32
     // param-hint: param0 optional
     func RasSetEntryDialParamsA(param0: CPointer<UInt8>, param1: CPointer<RASDIALPARAMSA>, param2: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetEntryDialParamsA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_RasSetEntryDialParamsA(param0: CPointer<UInt8>, param1: CPointer<RASDIALPARAMSA>, param2: Int32): UInt32 {
+    return RasSetEntryDialParamsA(param0, param1, param2)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetEntryDialParamsW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: param0 optional
     func RasSetEntryDialParamsW(param0: CPointer<UInt16>, param1: CPointer<RASDIALPARAMSW>, param2: Int32): UInt32
 }
 
-@When[RASAPI32 == "on" && Windows_Win32_Networking_WinSock == "on"]
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetEntryDialParamsW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_RasSetEntryDialParamsW(param0: CPointer<UInt16>, param1: CPointer<RASDIALPARAMSW>, param2: Int32): UInt32 {
+    return RasSetEntryDialParamsW(param0, param1, param2)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetEntryPropertiesA == "on" && Windows_Win32_Networking_WinSock == "on"]
 foreign {
-    func RasGetConnectStatusA(param0: HRASCONN, param1: CPointer<RASCONNSTATUSAAbi>): UInt32
-    func RasGetConnectStatusW(param0: HRASCONN, param1: CPointer<RASCONNSTATUSWAbi>): UInt32
-    // param-hint: param0 optional
-    // param-hint: param2 optional
-    // param-hint: param4 optional
-    // param-hint: param5 optional
-    func RasGetEntryPropertiesA(param0: CPointer<UInt8>, param1: CPointer<UInt8>, param2: CPointer<RASENTRYAAbi>, param3: CPointer<UInt32>, param4: CPointer<UInt8>, param5: CPointer<UInt32>): UInt32
-    // param-hint: param0 optional
-    // param-hint: param2 optional
-    // param-hint: param4 optional
-    // param-hint: param5 optional
-    func RasGetEntryPropertiesW(param0: CPointer<UInt16>, param1: CPointer<UInt16>, param2: CPointer<RASENTRYWAbi>, param3: CPointer<UInt32>, param4: CPointer<UInt8>, param5: CPointer<UInt32>): UInt32
     // param-hint: param0 optional
     // param-hint: param4 optional
     func RasSetEntryPropertiesA(param0: CPointer<UInt8>, param1: CPointer<UInt8>, param2: CPointer<RASENTRYAAbi>, param3: UInt32, param4: CPointer<UInt8>, param5: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetEntryPropertiesA == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_RasSetEntryPropertiesA(param0: CPointer<UInt8>, param1: CPointer<UInt8>, param2: CPointer<RASENTRYAAbi>, param3: UInt32, param4: CPointer<UInt8>, param5: UInt32): UInt32 {
+    return RasSetEntryPropertiesA(param0, param1, param2, param3, param4, param5)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetEntryPropertiesW == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
     // param-hint: param0 optional
     // param-hint: param4 optional
     func RasSetEntryPropertiesW(param0: CPointer<UInt16>, param1: CPointer<UInt16>, param2: CPointer<RASENTRYWAbi>, param3: UInt32, param4: CPointer<UInt8>, param5: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetEntryPropertiesW == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_RasSetEntryPropertiesW(param0: CPointer<UInt16>, param1: CPointer<UInt16>, param2: CPointer<RASENTRYWAbi>, param3: UInt32, param4: CPointer<UInt8>, param5: UInt32): UInt32 {
+    return RasSetEntryPropertiesW(param0, param1, param2, param3, param4, param5)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetSubEntryPropertiesA == "on"]
+foreign {
+    // param-hint: param0 optional
+    // param-hint: param5 optional
+    func RasSetSubEntryPropertiesA(param0: CPointer<UInt8>, param1: CPointer<UInt8>, param2: UInt32, param3: CPointer<RASSUBENTRYAAbi>, param4: UInt32, param5: CPointer<UInt8>, param6: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetSubEntryPropertiesA == "on"]
+public unsafe func Windows_RasSetSubEntryPropertiesA(param0: CPointer<UInt8>, param1: CPointer<UInt8>, param2: UInt32, param3: CPointer<RASSUBENTRYAAbi>, param4: UInt32, param5: CPointer<UInt8>, param6: UInt32): UInt32 {
+    return RasSetSubEntryPropertiesA(param0, param1, param2, param3, param4, param5, param6)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetSubEntryPropertiesW == "on"]
+foreign {
+    // param-hint: param0 optional
+    // param-hint: param5 optional
+    func RasSetSubEntryPropertiesW(param0: CPointer<UInt16>, param1: CPointer<UInt16>, param2: UInt32, param3: CPointer<RASSUBENTRYWAbi>, param4: UInt32, param5: CPointer<UInt8>, param6: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasSetSubEntryPropertiesW == "on"]
+public unsafe func Windows_RasSetSubEntryPropertiesW(param0: CPointer<UInt16>, param1: CPointer<UInt16>, param2: UInt32, param3: CPointer<RASSUBENTRYWAbi>, param4: UInt32, param5: CPointer<UInt8>, param6: UInt32): UInt32 {
+    return RasSetSubEntryPropertiesW(param0, param1, param2, param3, param4, param5, param6)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasUpdateConnection == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
     func RasUpdateConnection(hrasconn: HRASCONN, lprasupdateconn: CPointer<RASUPDATECONNAbi>): UInt32
 }
 
-@When[RASDLG == "on"]
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasUpdateConnection == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_RasUpdateConnection(hrasconn: HRASCONN, lprasupdateconn: CPointer<RASUPDATECONNAbi>): UInt32 {
+    return RasUpdateConnection(hrasconn, lprasupdateconn)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasValidateEntryNameA == "on"]
+foreign {
+    // param-hint: param0 optional
+    func RasValidateEntryNameA(param0: CPointer<UInt8>, param1: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasValidateEntryNameA == "on"]
+public unsafe func Windows_RasValidateEntryNameA(param0: CPointer<UInt8>, param1: CPointer<UInt8>): UInt32 {
+    return RasValidateEntryNameA(param0, param1)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasValidateEntryNameW == "on"]
+foreign {
+    // param-hint: param0 optional
+    func RasValidateEntryNameW(param0: CPointer<UInt16>, param1: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASAPI32 == "on" && Windows_Win32_NetworkManagement_Rras_RasValidateEntryNameW == "on"]
+public unsafe func Windows_RasValidateEntryNameW(param0: CPointer<UInt16>, param1: CPointer<UInt16>): UInt32 {
+    return RasValidateEntryNameW(param0, param1)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASDLG == "on" && Windows_Win32_NetworkManagement_Rras_RasDialDlgA == "on"]
 foreign {
     // param-hint: lpszPhonebook optional
     // param-hint: lpszEntry optional
     // param-hint: lpszPhoneNumber optional
     func RasDialDlgA(lpszPhonebook: CPointer<UInt8>, lpszEntry: CPointer<UInt8>, lpszPhoneNumber: CPointer<UInt8>, lpInfo: CPointer<RASDIALDLG>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASDLG == "on" && Windows_Win32_NetworkManagement_Rras_RasDialDlgA == "on"]
+public unsafe func Windows_RasDialDlgA(lpszPhonebook: CPointer<UInt8>, lpszEntry: CPointer<UInt8>, lpszPhoneNumber: CPointer<UInt8>, lpInfo: CPointer<RASDIALDLG>): Int32 {
+    return RasDialDlgA(lpszPhonebook, lpszEntry, lpszPhoneNumber, lpInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASDLG == "on" && Windows_Win32_NetworkManagement_Rras_RasDialDlgW == "on"]
+foreign {
     // param-hint: lpszPhonebook optional
     // param-hint: lpszEntry optional
     // param-hint: lpszPhoneNumber optional
     func RasDialDlgW(lpszPhonebook: CPointer<UInt16>, lpszEntry: CPointer<UInt16>, lpszPhoneNumber: CPointer<UInt16>, lpInfo: CPointer<RASDIALDLG>): Int32
 }
 
-@When[RASDLG == "on" && ((arch == "x86_64" || arch == "aarch64"))]
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASDLG == "on" && Windows_Win32_NetworkManagement_Rras_RasDialDlgW == "on"]
+public unsafe func Windows_RasDialDlgW(lpszPhonebook: CPointer<UInt16>, lpszEntry: CPointer<UInt16>, lpszPhoneNumber: CPointer<UInt16>, lpInfo: CPointer<RASDIALDLG>): Int32 {
+    return RasDialDlgW(lpszPhonebook, lpszEntry, lpszPhoneNumber, lpInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASDLG == "on" && Windows_Win32_NetworkManagement_Rras_RasEntryDlgA == "on" && (arch == "x86_64" || arch == "aarch64")]
 foreign {
     // param-hint: lpszPhonebook optional
     // param-hint: lpszEntry optional
     func RasEntryDlgA(lpszPhonebook: CPointer<UInt8>, lpszEntry: CPointer<UInt8>, lpInfo: CPointer<RASENTRYDLGA>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASDLG == "on" && Windows_Win32_NetworkManagement_Rras_RasEntryDlgA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_RasEntryDlgA(lpszPhonebook: CPointer<UInt8>, lpszEntry: CPointer<UInt8>, lpInfo: CPointer<RASENTRYDLGA>): Int32 {
+    return RasEntryDlgA(lpszPhonebook, lpszEntry, lpInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASDLG == "on" && Windows_Win32_NetworkManagement_Rras_RasEntryDlgW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: lpszPhonebook optional
     // param-hint: lpszEntry optional
     func RasEntryDlgW(lpszPhonebook: CPointer<UInt16>, lpszEntry: CPointer<UInt16>, lpInfo: CPointer<RASENTRYDLGW>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASDLG == "on" && Windows_Win32_NetworkManagement_Rras_RasEntryDlgW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_RasEntryDlgW(lpszPhonebook: CPointer<UInt16>, lpszEntry: CPointer<UInt16>, lpInfo: CPointer<RASENTRYDLGW>): Int32 {
+    return RasEntryDlgW(lpszPhonebook, lpszEntry, lpInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASDLG == "on" && Windows_Win32_NetworkManagement_Rras_RasPhonebookDlgA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: lpszPhonebook optional
     // param-hint: lpszEntry optional
     func RasPhonebookDlgA(lpszPhonebook: CPointer<UInt8>, lpszEntry: CPointer<UInt8>, lpInfo: CPointer<RASPBDLGA>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASDLG == "on" && Windows_Win32_NetworkManagement_Rras_RasPhonebookDlgA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_RasPhonebookDlgA(lpszPhonebook: CPointer<UInt8>, lpszEntry: CPointer<UInt8>, lpInfo: CPointer<RASPBDLGA>): Int32 {
+    return RasPhonebookDlgA(lpszPhonebook, lpszEntry, lpInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASDLG == "on" && Windows_Win32_NetworkManagement_Rras_RasPhonebookDlgW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: lpszPhonebook optional
     // param-hint: lpszEntry optional
     func RasPhonebookDlgW(lpszPhonebook: CPointer<UInt16>, lpszEntry: CPointer<UInt16>, lpInfo: CPointer<RASPBDLGW>): Int32
 }
 
-@When[RTM == "on"]
-foreign {
-    func MgmAddGroupMembershipEntry(hProtocol: CPointer<Unit>, dwSourceAddr: UInt32, dwSourceMask: UInt32, dwGroupAddr: UInt32, dwGroupMask: UInt32, dwIfIndex: UInt32, dwIfNextHopIPAddr: UInt32, dwFlags: UInt32): UInt32
-    func MgmDeRegisterMProtocol(hProtocol: CPointer<Unit>): UInt32
-    func MgmDeleteGroupMembershipEntry(hProtocol: CPointer<Unit>, dwSourceAddr: UInt32, dwSourceMask: UInt32, dwGroupAddr: UInt32, dwGroupMask: UInt32, dwIfIndex: UInt32, dwIfNextHopIPAddr: UInt32, dwFlags: UInt32): UInt32
-    func MgmGetFirstMfe(pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, pdwNumEntries: CPointer<UInt32>): UInt32
-    func MgmGetFirstMfeStats(pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, pdwNumEntries: CPointer<UInt32>, dwFlags: UInt32): UInt32
-    func MgmGetProtocolOnInterface(dwIfIndex: UInt32, dwIfNextHopAddr: UInt32, pdwIfProtocolId: CPointer<UInt32>, pdwIfComponentId: CPointer<UInt32>): UInt32
-    func MgmGroupEnumerationEnd(hEnum: CPointer<Unit>): UInt32
-    func MgmGroupEnumerationGetNext(hEnum: CPointer<Unit>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, pdwNumEntries: CPointer<UInt32>): UInt32
-    func MgmGroupEnumerationStart(hProtocol: CPointer<Unit>, metEnumType: MGM_ENUM_TYPESAbi, phEnumHandle: CPointer<CPointer<Unit>>): UInt32
-    func MgmRegisterMProtocol(prpiInfo: CPointer<ROUTING_PROTOCOL_CONFIGAbi>, dwProtocolId: UInt32, dwComponentId: UInt32, phProtocol: CPointer<CPointer<Unit>>): UInt32
-    func MgmReleaseInterfaceOwnership(hProtocol: CPointer<Unit>, dwIfIndex: UInt32, dwIfNextHopAddr: UInt32): UInt32
-    func MgmTakeInterfaceOwnership(hProtocol: CPointer<Unit>, dwIfIndex: UInt32, dwIfNextHopAddr: UInt32): UInt32
-    func RtmAddNextHop(RtmRegHandle: IntNative, NextHopInfo: CPointer<RTM_NEXTHOP_INFOAbi>, NextHopHandle: CPointer<IntNative>, ChangeFlags: CPointer<UInt32>): UInt32
-    func RtmAddRouteToDest(RtmRegHandle: IntNative, RouteHandle: CPointer<IntNative>, DestAddress: CPointer<RTM_NET_ADDRESSAbi>, RouteInfo: CPointer<RTM_ROUTE_INFOAbi>, TimeToLive: UInt32, RouteListHandle: IntNative, NotifyType: UInt32, NotifyHandle: IntNative, ChangeFlags: CPointer<UInt32>): UInt32
-    func RtmBlockMethods(RtmRegHandle: IntNative, TargetHandle: CPointer<Unit>, TargetType: UInt8, BlockingFlag: UInt32): UInt32
-    func RtmCreateDestEnum(RtmRegHandle: IntNative, TargetViews: UInt32, EnumFlags: UInt32, NetAddress: CPointer<RTM_NET_ADDRESSAbi>, ProtocolId: UInt32, RtmEnumHandle: CPointer<IntNative>): UInt32
-    func RtmCreateNextHopEnum(RtmRegHandle: IntNative, EnumFlags: UInt32, NetAddress: CPointer<RTM_NET_ADDRESSAbi>, RtmEnumHandle: CPointer<IntNative>): UInt32
-    func RtmCreateRouteEnum(RtmRegHandle: IntNative, DestHandle: IntNative, TargetViews: UInt32, EnumFlags: UInt32, StartDest: CPointer<RTM_NET_ADDRESSAbi>, MatchingFlags: UInt32, CriteriaRoute: CPointer<RTM_ROUTE_INFOAbi>, CriteriaInterface: UInt32, RtmEnumHandle: CPointer<IntNative>): UInt32
-    func RtmCreateRouteList(RtmRegHandle: IntNative, RouteListHandle: CPointer<IntNative>): UInt32
-    func RtmCreateRouteListEnum(RtmRegHandle: IntNative, RouteListHandle: IntNative, RtmEnumHandle: CPointer<IntNative>): UInt32
-    func RtmDeleteEnumHandle(RtmRegHandle: IntNative, EnumHandle: IntNative): UInt32
-    func RtmDeleteNextHop(RtmRegHandle: IntNative, NextHopHandle: IntNative, NextHopInfo: CPointer<RTM_NEXTHOP_INFOAbi>): UInt32
-    func RtmDeleteRouteList(RtmRegHandle: IntNative, RouteListHandle: IntNative): UInt32
-    func RtmDeleteRouteToDest(RtmRegHandle: IntNative, RouteHandle: IntNative, ChangeFlags: CPointer<UInt32>): UInt32
-    func RtmDeregisterEntity(RtmRegHandle: IntNative): UInt32
-    func RtmDeregisterFromChangeNotification(RtmRegHandle: IntNative, NotifyHandle: IntNative): UInt32
-    func RtmFindNextHop(RtmRegHandle: IntNative, NextHopInfo: CPointer<RTM_NEXTHOP_INFOAbi>, NextHopHandle: CPointer<IntNative>, NextHopPointer: CPointer<CPointer<RTM_NEXTHOP_INFOAbi>>): UInt32
-    func RtmGetChangeStatus(RtmRegHandle: IntNative, NotifyHandle: IntNative, DestHandle: IntNative, ChangeStatus: CPointer<Int32>): UInt32
-    func RtmGetChangedDests(RtmRegHandle: IntNative, NotifyHandle: IntNative, NumDests: CPointer<UInt32>, ChangedDests: CPointer<RTM_DEST_INFOAbi>): UInt32
-    func RtmGetDestInfo(RtmRegHandle: IntNative, DestHandle: IntNative, ProtocolId: UInt32, TargetViews: UInt32, DestInfo: CPointer<RTM_DEST_INFOAbi>): UInt32
-    func RtmGetEntityInfo(RtmRegHandle: IntNative, EntityHandle: IntNative, EntityInfo: CPointer<RTM_ENTITY_INFOAbi>): UInt32
-    func RtmGetEntityMethods(RtmRegHandle: IntNative, EntityHandle: IntNative, NumMethods: CPointer<UInt32>, ExptMethods: CPointer<RTM_ENTITY_EXPORT_METHOD>): UInt32
-    func RtmGetEnumDests(RtmRegHandle: IntNative, EnumHandle: IntNative, NumDests: CPointer<UInt32>, DestInfos: CPointer<RTM_DEST_INFOAbi>): UInt32
-    func RtmGetEnumNextHops(RtmRegHandle: IntNative, EnumHandle: IntNative, NumNextHops: CPointer<UInt32>, NextHopHandles: CPointer<IntNative>): UInt32
-    func RtmGetEnumRoutes(RtmRegHandle: IntNative, EnumHandle: IntNative, NumRoutes: CPointer<UInt32>, RouteHandles: CPointer<IntNative>): UInt32
-    func RtmGetExactMatchDestination(RtmRegHandle: IntNative, DestAddress: CPointer<RTM_NET_ADDRESSAbi>, ProtocolId: UInt32, TargetViews: UInt32, DestInfo: CPointer<RTM_DEST_INFOAbi>): UInt32
-    func RtmGetExactMatchRoute(RtmRegHandle: IntNative, DestAddress: CPointer<RTM_NET_ADDRESSAbi>, MatchingFlags: UInt32, RouteInfo: CPointer<RTM_ROUTE_INFOAbi>, InterfaceIndex: UInt32, TargetViews: UInt32, RouteHandle: CPointer<IntNative>): UInt32
-    func RtmGetLessSpecificDestination(RtmRegHandle: IntNative, DestHandle: IntNative, ProtocolId: UInt32, TargetViews: UInt32, DestInfo: CPointer<RTM_DEST_INFOAbi>): UInt32
-    // param-hint: RouteHandles len=param[2]
-    func RtmGetListEnumRoutes(RtmRegHandle: IntNative, EnumHandle: IntNative, NumRoutes: CPointer<UInt32>, RouteHandles: CPointer<IntNative>): UInt32
-    func RtmGetMostSpecificDestination(RtmRegHandle: IntNative, DestAddress: CPointer<RTM_NET_ADDRESSAbi>, ProtocolId: UInt32, TargetViews: UInt32, DestInfo: CPointer<RTM_DEST_INFOAbi>): UInt32
-    func RtmGetNextHopInfo(RtmRegHandle: IntNative, NextHopHandle: IntNative, NextHopInfo: CPointer<RTM_NEXTHOP_INFOAbi>): UInt32
-    func RtmGetNextHopPointer(RtmRegHandle: IntNative, NextHopHandle: IntNative, NextHopPointer: CPointer<CPointer<RTM_NEXTHOP_INFOAbi>>): UInt32
-    func RtmGetOpaqueInformationPointer(RtmRegHandle: IntNative, DestHandle: IntNative, OpaqueInfoPointer: CPointer<CPointer<Unit>>): UInt32
-    func RtmGetRegisteredEntities(RtmRegHandle: IntNative, NumEntities: CPointer<UInt32>, EntityHandles: CPointer<IntNative>, EntityInfos: CPointer<RTM_ENTITY_INFOAbi>): UInt32
-    func RtmGetRouteInfo(RtmRegHandle: IntNative, RouteHandle: IntNative, RouteInfo: CPointer<RTM_ROUTE_INFOAbi>, DestAddress: CPointer<RTM_NET_ADDRESSAbi>): UInt32
-    func RtmGetRoutePointer(RtmRegHandle: IntNative, RouteHandle: IntNative, RoutePointer: CPointer<CPointer<RTM_ROUTE_INFOAbi>>): UInt32
-    func RtmHoldDestination(RtmRegHandle: IntNative, DestHandle: IntNative, TargetViews: UInt32, HoldTime: UInt32): UInt32
-    func RtmIgnoreChangedDests(RtmRegHandle: IntNative, NotifyHandle: IntNative, NumDests: UInt32, ChangedDests: CPointer<IntNative>): UInt32
-    func RtmInsertInRouteList(RtmRegHandle: IntNative, RouteListHandle: IntNative, NumRoutes: UInt32, RouteHandles: CPointer<IntNative>): UInt32
-    func RtmInvokeMethod(RtmRegHandle: IntNative, EntityHandle: IntNative, Input: CPointer<RTM_ENTITY_METHOD_INPUTAbi>, OutputSize: CPointer<UInt32>, Output: CPointer<RTM_ENTITY_METHOD_OUTPUTAbi>): UInt32
-    func RtmIsBestRoute(RtmRegHandle: IntNative, RouteHandle: IntNative, BestInViews: CPointer<UInt32>): UInt32
-    func RtmIsMarkedForChangeNotification(RtmRegHandle: IntNative, NotifyHandle: IntNative, DestHandle: IntNative, DestMarked: CPointer<Int32>): UInt32
-    func RtmLockDestination(RtmRegHandle: IntNative, DestHandle: IntNative, Exclusive: Int32, LockDest: Int32): UInt32
-    func RtmLockNextHop(RtmRegHandle: IntNative, NextHopHandle: IntNative, Exclusive: Int32, LockNextHop: Int32, NextHopPointer: CPointer<CPointer<RTM_NEXTHOP_INFOAbi>>): UInt32
-    func RtmLockRoute(RtmRegHandle: IntNative, RouteHandle: IntNative, Exclusive: Int32, LockRoute: Int32, RoutePointer: CPointer<CPointer<RTM_ROUTE_INFOAbi>>): UInt32
-    func RtmMarkDestForChangeNotification(RtmRegHandle: IntNative, NotifyHandle: IntNative, DestHandle: IntNative, MarkDest: Int32): UInt32
-    func RtmReferenceHandles(RtmRegHandle: IntNative, NumHandles: UInt32, RtmHandles: CPointer<CPointer<Unit>>): UInt32
-    func RtmRegisterEntity(RtmEntityInfo: CPointer<RTM_ENTITY_INFOAbi>, ExportMethods: CPointer<RTM_ENTITY_EXPORT_METHODSAbi>, EventCallback: RTM_EVENT_CALLBACK, ReserveOpaquePointer: Int32, RtmRegProfile: CPointer<RTM_REGN_PROFILEAbi>, RtmRegHandle: CPointer<IntNative>): UInt32
-    func RtmRegisterForChangeNotification(RtmRegHandle: IntNative, TargetViews: UInt32, NotifyFlags: UInt32, NotifyContext: CPointer<Unit>, NotifyHandle: CPointer<IntNative>): UInt32
-    func RtmReleaseChangedDests(RtmRegHandle: IntNative, NotifyHandle: IntNative, NumDests: UInt32, ChangedDests: CPointer<RTM_DEST_INFOAbi>): UInt32
-    func RtmReleaseDestInfo(RtmRegHandle: IntNative, DestInfo: CPointer<RTM_DEST_INFOAbi>): UInt32
-    func RtmReleaseDests(RtmRegHandle: IntNative, NumDests: UInt32, DestInfos: CPointer<RTM_DEST_INFOAbi>): UInt32
-    func RtmReleaseEntities(RtmRegHandle: IntNative, NumEntities: UInt32, EntityHandles: CPointer<IntNative>): UInt32
-    func RtmReleaseEntityInfo(RtmRegHandle: IntNative, EntityInfo: CPointer<RTM_ENTITY_INFOAbi>): UInt32
-    func RtmReleaseNextHopInfo(RtmRegHandle: IntNative, NextHopInfo: CPointer<RTM_NEXTHOP_INFOAbi>): UInt32
-    func RtmReleaseNextHops(RtmRegHandle: IntNative, NumNextHops: UInt32, NextHopHandles: CPointer<IntNative>): UInt32
-    func RtmReleaseRouteInfo(RtmRegHandle: IntNative, RouteInfo: CPointer<RTM_ROUTE_INFOAbi>): UInt32
-    func RtmReleaseRoutes(RtmRegHandle: IntNative, NumRoutes: UInt32, RouteHandles: CPointer<IntNative>): UInt32
-    func RtmUpdateAndUnlockRoute(RtmRegHandle: IntNative, RouteHandle: IntNative, TimeToLive: UInt32, RouteListHandle: IntNative, NotifyType: UInt32, NotifyHandle: IntNative, ChangeFlags: CPointer<UInt32>): UInt32
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RASDLG == "on" && Windows_Win32_NetworkManagement_Rras_RasPhonebookDlgW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_RasPhonebookDlgW(lpszPhonebook: CPointer<UInt16>, lpszEntry: CPointer<UInt16>, lpInfo: CPointer<RASPBDLGW>): Int32 {
+    return RasPhonebookDlgW(lpszPhonebook, lpszEntry, lpInfo)
 }
 
-@When[RTM == "on" && Windows_Win32_NetworkManagement_IpHelper == "on"]
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmAddGroupMembershipEntry == "on"]
+foreign {
+    func MgmAddGroupMembershipEntry(hProtocol: CPointer<Unit>, dwSourceAddr: UInt32, dwSourceMask: UInt32, dwGroupAddr: UInt32, dwGroupMask: UInt32, dwIfIndex: UInt32, dwIfNextHopIPAddr: UInt32, dwFlags: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmAddGroupMembershipEntry == "on"]
+public unsafe func Windows_MgmAddGroupMembershipEntry(hProtocol: CPointer<Unit>, dwSourceAddr: UInt32, dwSourceMask: UInt32, dwGroupAddr: UInt32, dwGroupMask: UInt32, dwIfIndex: UInt32, dwIfNextHopIPAddr: UInt32, dwFlags: UInt32): UInt32 {
+    return MgmAddGroupMembershipEntry(hProtocol, dwSourceAddr, dwSourceMask, dwGroupAddr, dwGroupMask, dwIfIndex, dwIfNextHopIPAddr, dwFlags)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmDeRegisterMProtocol == "on"]
+foreign {
+    func MgmDeRegisterMProtocol(hProtocol: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmDeRegisterMProtocol == "on"]
+public unsafe func Windows_MgmDeRegisterMProtocol(hProtocol: CPointer<Unit>): UInt32 {
+    return MgmDeRegisterMProtocol(hProtocol)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmDeleteGroupMembershipEntry == "on"]
+foreign {
+    func MgmDeleteGroupMembershipEntry(hProtocol: CPointer<Unit>, dwSourceAddr: UInt32, dwSourceMask: UInt32, dwGroupAddr: UInt32, dwGroupMask: UInt32, dwIfIndex: UInt32, dwIfNextHopIPAddr: UInt32, dwFlags: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmDeleteGroupMembershipEntry == "on"]
+public unsafe func Windows_MgmDeleteGroupMembershipEntry(hProtocol: CPointer<Unit>, dwSourceAddr: UInt32, dwSourceMask: UInt32, dwGroupAddr: UInt32, dwGroupMask: UInt32, dwIfIndex: UInt32, dwIfNextHopIPAddr: UInt32, dwFlags: UInt32): UInt32 {
+    return MgmDeleteGroupMembershipEntry(hProtocol, dwSourceAddr, dwSourceMask, dwGroupAddr, dwGroupMask, dwIfIndex, dwIfNextHopIPAddr, dwFlags)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmGetFirstMfe == "on"]
+foreign {
+    func MgmGetFirstMfe(pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, pdwNumEntries: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmGetFirstMfe == "on"]
+public unsafe func Windows_MgmGetFirstMfe(pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, pdwNumEntries: CPointer<UInt32>): UInt32 {
+    return MgmGetFirstMfe(pdwBufferSize, pbBuffer, pdwNumEntries)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmGetFirstMfeStats == "on"]
+foreign {
+    func MgmGetFirstMfeStats(pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, pdwNumEntries: CPointer<UInt32>, dwFlags: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmGetFirstMfeStats == "on"]
+public unsafe func Windows_MgmGetFirstMfeStats(pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, pdwNumEntries: CPointer<UInt32>, dwFlags: UInt32): UInt32 {
+    return MgmGetFirstMfeStats(pdwBufferSize, pbBuffer, pdwNumEntries, dwFlags)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmGetMfe == "on" && Windows_Win32_NetworkManagement_IpHelper == "on"]
 foreign {
     func MgmGetMfe(pimm: CPointer<Win32__impl_l1.MIB_IPMCAST_MFEAbi>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmGetMfe == "on" && Windows_Win32_NetworkManagement_IpHelper == "on"]
+public unsafe func Windows_MgmGetMfe(pimm: CPointer<Win32__impl_l1.MIB_IPMCAST_MFEAbi>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>): UInt32 {
+    return MgmGetMfe(pimm, pdwBufferSize, pbBuffer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmGetMfeStats == "on" && Windows_Win32_NetworkManagement_IpHelper == "on"]
+foreign {
     func MgmGetMfeStats(pimm: CPointer<Win32__impl_l1.MIB_IPMCAST_MFEAbi>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, dwFlags: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmGetMfeStats == "on" && Windows_Win32_NetworkManagement_IpHelper == "on"]
+public unsafe func Windows_MgmGetMfeStats(pimm: CPointer<Win32__impl_l1.MIB_IPMCAST_MFEAbi>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, dwFlags: UInt32): UInt32 {
+    return MgmGetMfeStats(pimm, pdwBufferSize, pbBuffer, dwFlags)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmGetNextMfe == "on" && Windows_Win32_NetworkManagement_IpHelper == "on"]
+foreign {
     func MgmGetNextMfe(pimmStart: CPointer<Win32__impl_l1.MIB_IPMCAST_MFEAbi>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, pdwNumEntries: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmGetNextMfe == "on" && Windows_Win32_NetworkManagement_IpHelper == "on"]
+public unsafe func Windows_MgmGetNextMfe(pimmStart: CPointer<Win32__impl_l1.MIB_IPMCAST_MFEAbi>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, pdwNumEntries: CPointer<UInt32>): UInt32 {
+    return MgmGetNextMfe(pimmStart, pdwBufferSize, pbBuffer, pdwNumEntries)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmGetNextMfeStats == "on" && Windows_Win32_NetworkManagement_IpHelper == "on"]
+foreign {
     func MgmGetNextMfeStats(pimmStart: CPointer<Win32__impl_l1.MIB_IPMCAST_MFEAbi>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, pdwNumEntries: CPointer<UInt32>, dwFlags: UInt32): UInt32
 }
 
-@When[RTM == "on" && Windows_Win32_Networking_WinSock == "on"]
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmGetNextMfeStats == "on" && Windows_Win32_NetworkManagement_IpHelper == "on"]
+public unsafe func Windows_MgmGetNextMfeStats(pimmStart: CPointer<Win32__impl_l1.MIB_IPMCAST_MFEAbi>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, pdwNumEntries: CPointer<UInt32>, dwFlags: UInt32): UInt32 {
+    return MgmGetNextMfeStats(pimmStart, pdwBufferSize, pbBuffer, pdwNumEntries, dwFlags)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmGetProtocolOnInterface == "on"]
+foreign {
+    func MgmGetProtocolOnInterface(dwIfIndex: UInt32, dwIfNextHopAddr: UInt32, pdwIfProtocolId: CPointer<UInt32>, pdwIfComponentId: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmGetProtocolOnInterface == "on"]
+public unsafe func Windows_MgmGetProtocolOnInterface(dwIfIndex: UInt32, dwIfNextHopAddr: UInt32, pdwIfProtocolId: CPointer<UInt32>, pdwIfComponentId: CPointer<UInt32>): UInt32 {
+    return MgmGetProtocolOnInterface(dwIfIndex, dwIfNextHopAddr, pdwIfProtocolId, pdwIfComponentId)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmGroupEnumerationEnd == "on"]
+foreign {
+    func MgmGroupEnumerationEnd(hEnum: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmGroupEnumerationEnd == "on"]
+public unsafe func Windows_MgmGroupEnumerationEnd(hEnum: CPointer<Unit>): UInt32 {
+    return MgmGroupEnumerationEnd(hEnum)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmGroupEnumerationGetNext == "on"]
+foreign {
+    func MgmGroupEnumerationGetNext(hEnum: CPointer<Unit>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, pdwNumEntries: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmGroupEnumerationGetNext == "on"]
+public unsafe func Windows_MgmGroupEnumerationGetNext(hEnum: CPointer<Unit>, pdwBufferSize: CPointer<UInt32>, pbBuffer: CPointer<UInt8>, pdwNumEntries: CPointer<UInt32>): UInt32 {
+    return MgmGroupEnumerationGetNext(hEnum, pdwBufferSize, pbBuffer, pdwNumEntries)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmGroupEnumerationStart == "on"]
+foreign {
+    func MgmGroupEnumerationStart(hProtocol: CPointer<Unit>, metEnumType: MGM_ENUM_TYPESAbi, phEnumHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmGroupEnumerationStart == "on"]
+public unsafe func Windows_MgmGroupEnumerationStart(hProtocol: CPointer<Unit>, metEnumType: MGM_ENUM_TYPESAbi, phEnumHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return MgmGroupEnumerationStart(hProtocol, metEnumType, phEnumHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmRegisterMProtocol == "on"]
+foreign {
+    func MgmRegisterMProtocol(prpiInfo: CPointer<ROUTING_PROTOCOL_CONFIGAbi>, dwProtocolId: UInt32, dwComponentId: UInt32, phProtocol: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmRegisterMProtocol == "on"]
+public unsafe func Windows_MgmRegisterMProtocol(prpiInfo: CPointer<ROUTING_PROTOCOL_CONFIGAbi>, dwProtocolId: UInt32, dwComponentId: UInt32, phProtocol: CPointer<CPointer<Unit>>): UInt32 {
+    return MgmRegisterMProtocol(prpiInfo, dwProtocolId, dwComponentId, phProtocol)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmReleaseInterfaceOwnership == "on"]
+foreign {
+    func MgmReleaseInterfaceOwnership(hProtocol: CPointer<Unit>, dwIfIndex: UInt32, dwIfNextHopAddr: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmReleaseInterfaceOwnership == "on"]
+public unsafe func Windows_MgmReleaseInterfaceOwnership(hProtocol: CPointer<Unit>, dwIfIndex: UInt32, dwIfNextHopAddr: UInt32): UInt32 {
+    return MgmReleaseInterfaceOwnership(hProtocol, dwIfIndex, dwIfNextHopAddr)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmTakeInterfaceOwnership == "on"]
+foreign {
+    func MgmTakeInterfaceOwnership(hProtocol: CPointer<Unit>, dwIfIndex: UInt32, dwIfNextHopAddr: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_MgmTakeInterfaceOwnership == "on"]
+public unsafe func Windows_MgmTakeInterfaceOwnership(hProtocol: CPointer<Unit>, dwIfIndex: UInt32, dwIfNextHopAddr: UInt32): UInt32 {
+    return MgmTakeInterfaceOwnership(hProtocol, dwIfIndex, dwIfNextHopAddr)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmAddNextHop == "on"]
+foreign {
+    func RtmAddNextHop(RtmRegHandle: IntNative, NextHopInfo: CPointer<RTM_NEXTHOP_INFOAbi>, NextHopHandle: CPointer<IntNative>, ChangeFlags: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmAddNextHop == "on"]
+public unsafe func Windows_RtmAddNextHop(RtmRegHandle: IntNative, NextHopInfo: CPointer<RTM_NEXTHOP_INFOAbi>, NextHopHandle: CPointer<IntNative>, ChangeFlags: CPointer<UInt32>): UInt32 {
+    return RtmAddNextHop(RtmRegHandle, NextHopInfo, NextHopHandle, ChangeFlags)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmAddRouteToDest == "on"]
+foreign {
+    func RtmAddRouteToDest(RtmRegHandle: IntNative, RouteHandle: CPointer<IntNative>, DestAddress: CPointer<RTM_NET_ADDRESSAbi>, RouteInfo: CPointer<RTM_ROUTE_INFOAbi>, TimeToLive: UInt32, RouteListHandle: IntNative, NotifyType: UInt32, NotifyHandle: IntNative, ChangeFlags: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmAddRouteToDest == "on"]
+public unsafe func Windows_RtmAddRouteToDest(RtmRegHandle: IntNative, RouteHandle: CPointer<IntNative>, DestAddress: CPointer<RTM_NET_ADDRESSAbi>, RouteInfo: CPointer<RTM_ROUTE_INFOAbi>, TimeToLive: UInt32, RouteListHandle: IntNative, NotifyType: UInt32, NotifyHandle: IntNative, ChangeFlags: CPointer<UInt32>): UInt32 {
+    return RtmAddRouteToDest(RtmRegHandle, RouteHandle, DestAddress, RouteInfo, TimeToLive, RouteListHandle, NotifyType, NotifyHandle, ChangeFlags)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmBlockMethods == "on"]
+foreign {
+    func RtmBlockMethods(RtmRegHandle: IntNative, TargetHandle: CPointer<Unit>, TargetType: UInt8, BlockingFlag: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmBlockMethods == "on"]
+public unsafe func Windows_RtmBlockMethods(RtmRegHandle: IntNative, TargetHandle: CPointer<Unit>, TargetType: UInt8, BlockingFlag: UInt32): UInt32 {
+    return RtmBlockMethods(RtmRegHandle, TargetHandle, TargetType, BlockingFlag)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmConvertIpv6AddressAndLengthToNetAddress == "on" && Windows_Win32_Networking_WinSock == "on"]
 foreign {
     func RtmConvertIpv6AddressAndLengthToNetAddress(pNetAddress: CPointer<RTM_NET_ADDRESSAbi>, Address: Win32__impl_l0.IN6_ADDRAbi, dwLength: UInt32, dwAddressSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmConvertIpv6AddressAndLengthToNetAddress == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_RtmConvertIpv6AddressAndLengthToNetAddress(pNetAddress: CPointer<RTM_NET_ADDRESSAbi>, Address: Win32__impl_l0.IN6_ADDRAbi, dwLength: UInt32, dwAddressSize: UInt32): UInt32 {
+    return RtmConvertIpv6AddressAndLengthToNetAddress(pNetAddress, Address, dwLength, dwAddressSize)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmConvertNetAddressToIpv6AddressAndLength == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
     func RtmConvertNetAddressToIpv6AddressAndLength(pNetAddress: CPointer<RTM_NET_ADDRESSAbi>, pAddress: CPointer<Win32__impl_l0.IN6_ADDRAbi>, pLength: CPointer<UInt32>, dwAddressSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmConvertNetAddressToIpv6AddressAndLength == "on" && Windows_Win32_Networking_WinSock == "on"]
+public unsafe func Windows_RtmConvertNetAddressToIpv6AddressAndLength(pNetAddress: CPointer<RTM_NET_ADDRESSAbi>, pAddress: CPointer<Win32__impl_l0.IN6_ADDRAbi>, pLength: CPointer<UInt32>, dwAddressSize: UInt32): UInt32 {
+    return RtmConvertNetAddressToIpv6AddressAndLength(pNetAddress, pAddress, pLength, dwAddressSize)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmCreateDestEnum == "on"]
+foreign {
+    func RtmCreateDestEnum(RtmRegHandle: IntNative, TargetViews: UInt32, EnumFlags: UInt32, NetAddress: CPointer<RTM_NET_ADDRESSAbi>, ProtocolId: UInt32, RtmEnumHandle: CPointer<IntNative>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmCreateDestEnum == "on"]
+public unsafe func Windows_RtmCreateDestEnum(RtmRegHandle: IntNative, TargetViews: UInt32, EnumFlags: UInt32, NetAddress: CPointer<RTM_NET_ADDRESSAbi>, ProtocolId: UInt32, RtmEnumHandle: CPointer<IntNative>): UInt32 {
+    return RtmCreateDestEnum(RtmRegHandle, TargetViews, EnumFlags, NetAddress, ProtocolId, RtmEnumHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmCreateNextHopEnum == "on"]
+foreign {
+    func RtmCreateNextHopEnum(RtmRegHandle: IntNative, EnumFlags: UInt32, NetAddress: CPointer<RTM_NET_ADDRESSAbi>, RtmEnumHandle: CPointer<IntNative>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmCreateNextHopEnum == "on"]
+public unsafe func Windows_RtmCreateNextHopEnum(RtmRegHandle: IntNative, EnumFlags: UInt32, NetAddress: CPointer<RTM_NET_ADDRESSAbi>, RtmEnumHandle: CPointer<IntNative>): UInt32 {
+    return RtmCreateNextHopEnum(RtmRegHandle, EnumFlags, NetAddress, RtmEnumHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmCreateRouteEnum == "on"]
+foreign {
+    func RtmCreateRouteEnum(RtmRegHandle: IntNative, DestHandle: IntNative, TargetViews: UInt32, EnumFlags: UInt32, StartDest: CPointer<RTM_NET_ADDRESSAbi>, MatchingFlags: UInt32, CriteriaRoute: CPointer<RTM_ROUTE_INFOAbi>, CriteriaInterface: UInt32, RtmEnumHandle: CPointer<IntNative>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmCreateRouteEnum == "on"]
+public unsafe func Windows_RtmCreateRouteEnum(RtmRegHandle: IntNative, DestHandle: IntNative, TargetViews: UInt32, EnumFlags: UInt32, StartDest: CPointer<RTM_NET_ADDRESSAbi>, MatchingFlags: UInt32, CriteriaRoute: CPointer<RTM_ROUTE_INFOAbi>, CriteriaInterface: UInt32, RtmEnumHandle: CPointer<IntNative>): UInt32 {
+    return RtmCreateRouteEnum(RtmRegHandle, DestHandle, TargetViews, EnumFlags, StartDest, MatchingFlags, CriteriaRoute, CriteriaInterface, RtmEnumHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmCreateRouteList == "on"]
+foreign {
+    func RtmCreateRouteList(RtmRegHandle: IntNative, RouteListHandle: CPointer<IntNative>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmCreateRouteList == "on"]
+public unsafe func Windows_RtmCreateRouteList(RtmRegHandle: IntNative, RouteListHandle: CPointer<IntNative>): UInt32 {
+    return RtmCreateRouteList(RtmRegHandle, RouteListHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmCreateRouteListEnum == "on"]
+foreign {
+    func RtmCreateRouteListEnum(RtmRegHandle: IntNative, RouteListHandle: IntNative, RtmEnumHandle: CPointer<IntNative>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmCreateRouteListEnum == "on"]
+public unsafe func Windows_RtmCreateRouteListEnum(RtmRegHandle: IntNative, RouteListHandle: IntNative, RtmEnumHandle: CPointer<IntNative>): UInt32 {
+    return RtmCreateRouteListEnum(RtmRegHandle, RouteListHandle, RtmEnumHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmDeleteEnumHandle == "on"]
+foreign {
+    func RtmDeleteEnumHandle(RtmRegHandle: IntNative, EnumHandle: IntNative): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmDeleteEnumHandle == "on"]
+public unsafe func Windows_RtmDeleteEnumHandle(RtmRegHandle: IntNative, EnumHandle: IntNative): UInt32 {
+    return RtmDeleteEnumHandle(RtmRegHandle, EnumHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmDeleteNextHop == "on"]
+foreign {
+    func RtmDeleteNextHop(RtmRegHandle: IntNative, NextHopHandle: IntNative, NextHopInfo: CPointer<RTM_NEXTHOP_INFOAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmDeleteNextHop == "on"]
+public unsafe func Windows_RtmDeleteNextHop(RtmRegHandle: IntNative, NextHopHandle: IntNative, NextHopInfo: CPointer<RTM_NEXTHOP_INFOAbi>): UInt32 {
+    return RtmDeleteNextHop(RtmRegHandle, NextHopHandle, NextHopInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmDeleteRouteList == "on"]
+foreign {
+    func RtmDeleteRouteList(RtmRegHandle: IntNative, RouteListHandle: IntNative): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmDeleteRouteList == "on"]
+public unsafe func Windows_RtmDeleteRouteList(RtmRegHandle: IntNative, RouteListHandle: IntNative): UInt32 {
+    return RtmDeleteRouteList(RtmRegHandle, RouteListHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmDeleteRouteToDest == "on"]
+foreign {
+    func RtmDeleteRouteToDest(RtmRegHandle: IntNative, RouteHandle: IntNative, ChangeFlags: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmDeleteRouteToDest == "on"]
+public unsafe func Windows_RtmDeleteRouteToDest(RtmRegHandle: IntNative, RouteHandle: IntNative, ChangeFlags: CPointer<UInt32>): UInt32 {
+    return RtmDeleteRouteToDest(RtmRegHandle, RouteHandle, ChangeFlags)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmDeregisterEntity == "on"]
+foreign {
+    func RtmDeregisterEntity(RtmRegHandle: IntNative): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmDeregisterEntity == "on"]
+public unsafe func Windows_RtmDeregisterEntity(RtmRegHandle: IntNative): UInt32 {
+    return RtmDeregisterEntity(RtmRegHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmDeregisterFromChangeNotification == "on"]
+foreign {
+    func RtmDeregisterFromChangeNotification(RtmRegHandle: IntNative, NotifyHandle: IntNative): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmDeregisterFromChangeNotification == "on"]
+public unsafe func Windows_RtmDeregisterFromChangeNotification(RtmRegHandle: IntNative, NotifyHandle: IntNative): UInt32 {
+    return RtmDeregisterFromChangeNotification(RtmRegHandle, NotifyHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmFindNextHop == "on"]
+foreign {
+    func RtmFindNextHop(RtmRegHandle: IntNative, NextHopInfo: CPointer<RTM_NEXTHOP_INFOAbi>, NextHopHandle: CPointer<IntNative>, NextHopPointer: CPointer<CPointer<RTM_NEXTHOP_INFOAbi>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmFindNextHop == "on"]
+public unsafe func Windows_RtmFindNextHop(RtmRegHandle: IntNative, NextHopInfo: CPointer<RTM_NEXTHOP_INFOAbi>, NextHopHandle: CPointer<IntNative>, NextHopPointer: CPointer<CPointer<RTM_NEXTHOP_INFOAbi>>): UInt32 {
+    return RtmFindNextHop(RtmRegHandle, NextHopInfo, NextHopHandle, NextHopPointer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetChangeStatus == "on"]
+foreign {
+    func RtmGetChangeStatus(RtmRegHandle: IntNative, NotifyHandle: IntNative, DestHandle: IntNative, ChangeStatus: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetChangeStatus == "on"]
+public unsafe func Windows_RtmGetChangeStatus(RtmRegHandle: IntNative, NotifyHandle: IntNative, DestHandle: IntNative, ChangeStatus: CPointer<Int32>): UInt32 {
+    return RtmGetChangeStatus(RtmRegHandle, NotifyHandle, DestHandle, ChangeStatus)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetChangedDests == "on"]
+foreign {
+    func RtmGetChangedDests(RtmRegHandle: IntNative, NotifyHandle: IntNative, NumDests: CPointer<UInt32>, ChangedDests: CPointer<RTM_DEST_INFOAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetChangedDests == "on"]
+public unsafe func Windows_RtmGetChangedDests(RtmRegHandle: IntNative, NotifyHandle: IntNative, NumDests: CPointer<UInt32>, ChangedDests: CPointer<RTM_DEST_INFOAbi>): UInt32 {
+    return RtmGetChangedDests(RtmRegHandle, NotifyHandle, NumDests, ChangedDests)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetDestInfo == "on"]
+foreign {
+    func RtmGetDestInfo(RtmRegHandle: IntNative, DestHandle: IntNative, ProtocolId: UInt32, TargetViews: UInt32, DestInfo: CPointer<RTM_DEST_INFOAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetDestInfo == "on"]
+public unsafe func Windows_RtmGetDestInfo(RtmRegHandle: IntNative, DestHandle: IntNative, ProtocolId: UInt32, TargetViews: UInt32, DestInfo: CPointer<RTM_DEST_INFOAbi>): UInt32 {
+    return RtmGetDestInfo(RtmRegHandle, DestHandle, ProtocolId, TargetViews, DestInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetEntityInfo == "on"]
+foreign {
+    func RtmGetEntityInfo(RtmRegHandle: IntNative, EntityHandle: IntNative, EntityInfo: CPointer<RTM_ENTITY_INFOAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetEntityInfo == "on"]
+public unsafe func Windows_RtmGetEntityInfo(RtmRegHandle: IntNative, EntityHandle: IntNative, EntityInfo: CPointer<RTM_ENTITY_INFOAbi>): UInt32 {
+    return RtmGetEntityInfo(RtmRegHandle, EntityHandle, EntityInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetEntityMethods == "on"]
+foreign {
+    func RtmGetEntityMethods(RtmRegHandle: IntNative, EntityHandle: IntNative, NumMethods: CPointer<UInt32>, ExptMethods: CPointer<RTM_ENTITY_EXPORT_METHOD>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetEntityMethods == "on"]
+public unsafe func Windows_RtmGetEntityMethods(RtmRegHandle: IntNative, EntityHandle: IntNative, NumMethods: CPointer<UInt32>, ExptMethods: CPointer<RTM_ENTITY_EXPORT_METHOD>): UInt32 {
+    return RtmGetEntityMethods(RtmRegHandle, EntityHandle, NumMethods, ExptMethods)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetEnumDests == "on"]
+foreign {
+    func RtmGetEnumDests(RtmRegHandle: IntNative, EnumHandle: IntNative, NumDests: CPointer<UInt32>, DestInfos: CPointer<RTM_DEST_INFOAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetEnumDests == "on"]
+public unsafe func Windows_RtmGetEnumDests(RtmRegHandle: IntNative, EnumHandle: IntNative, NumDests: CPointer<UInt32>, DestInfos: CPointer<RTM_DEST_INFOAbi>): UInt32 {
+    return RtmGetEnumDests(RtmRegHandle, EnumHandle, NumDests, DestInfos)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetEnumNextHops == "on"]
+foreign {
+    func RtmGetEnumNextHops(RtmRegHandle: IntNative, EnumHandle: IntNative, NumNextHops: CPointer<UInt32>, NextHopHandles: CPointer<IntNative>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetEnumNextHops == "on"]
+public unsafe func Windows_RtmGetEnumNextHops(RtmRegHandle: IntNative, EnumHandle: IntNative, NumNextHops: CPointer<UInt32>, NextHopHandles: CPointer<IntNative>): UInt32 {
+    return RtmGetEnumNextHops(RtmRegHandle, EnumHandle, NumNextHops, NextHopHandles)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetEnumRoutes == "on"]
+foreign {
+    func RtmGetEnumRoutes(RtmRegHandle: IntNative, EnumHandle: IntNative, NumRoutes: CPointer<UInt32>, RouteHandles: CPointer<IntNative>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetEnumRoutes == "on"]
+public unsafe func Windows_RtmGetEnumRoutes(RtmRegHandle: IntNative, EnumHandle: IntNative, NumRoutes: CPointer<UInt32>, RouteHandles: CPointer<IntNative>): UInt32 {
+    return RtmGetEnumRoutes(RtmRegHandle, EnumHandle, NumRoutes, RouteHandles)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetExactMatchDestination == "on"]
+foreign {
+    func RtmGetExactMatchDestination(RtmRegHandle: IntNative, DestAddress: CPointer<RTM_NET_ADDRESSAbi>, ProtocolId: UInt32, TargetViews: UInt32, DestInfo: CPointer<RTM_DEST_INFOAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetExactMatchDestination == "on"]
+public unsafe func Windows_RtmGetExactMatchDestination(RtmRegHandle: IntNative, DestAddress: CPointer<RTM_NET_ADDRESSAbi>, ProtocolId: UInt32, TargetViews: UInt32, DestInfo: CPointer<RTM_DEST_INFOAbi>): UInt32 {
+    return RtmGetExactMatchDestination(RtmRegHandle, DestAddress, ProtocolId, TargetViews, DestInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetExactMatchRoute == "on"]
+foreign {
+    func RtmGetExactMatchRoute(RtmRegHandle: IntNative, DestAddress: CPointer<RTM_NET_ADDRESSAbi>, MatchingFlags: UInt32, RouteInfo: CPointer<RTM_ROUTE_INFOAbi>, InterfaceIndex: UInt32, TargetViews: UInt32, RouteHandle: CPointer<IntNative>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetExactMatchRoute == "on"]
+public unsafe func Windows_RtmGetExactMatchRoute(RtmRegHandle: IntNative, DestAddress: CPointer<RTM_NET_ADDRESSAbi>, MatchingFlags: UInt32, RouteInfo: CPointer<RTM_ROUTE_INFOAbi>, InterfaceIndex: UInt32, TargetViews: UInt32, RouteHandle: CPointer<IntNative>): UInt32 {
+    return RtmGetExactMatchRoute(RtmRegHandle, DestAddress, MatchingFlags, RouteInfo, InterfaceIndex, TargetViews, RouteHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetLessSpecificDestination == "on"]
+foreign {
+    func RtmGetLessSpecificDestination(RtmRegHandle: IntNative, DestHandle: IntNative, ProtocolId: UInt32, TargetViews: UInt32, DestInfo: CPointer<RTM_DEST_INFOAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetLessSpecificDestination == "on"]
+public unsafe func Windows_RtmGetLessSpecificDestination(RtmRegHandle: IntNative, DestHandle: IntNative, ProtocolId: UInt32, TargetViews: UInt32, DestInfo: CPointer<RTM_DEST_INFOAbi>): UInt32 {
+    return RtmGetLessSpecificDestination(RtmRegHandle, DestHandle, ProtocolId, TargetViews, DestInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetListEnumRoutes == "on"]
+foreign {
+    // param-hint: RouteHandles len=param[2]
+    func RtmGetListEnumRoutes(RtmRegHandle: IntNative, EnumHandle: IntNative, NumRoutes: CPointer<UInt32>, RouteHandles: CPointer<IntNative>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetListEnumRoutes == "on"]
+public unsafe func Windows_RtmGetListEnumRoutes(RtmRegHandle: IntNative, EnumHandle: IntNative, NumRoutes: CPointer<UInt32>, RouteHandles: CPointer<IntNative>): UInt32 {
+    return RtmGetListEnumRoutes(RtmRegHandle, EnumHandle, NumRoutes, RouteHandles)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetMostSpecificDestination == "on"]
+foreign {
+    func RtmGetMostSpecificDestination(RtmRegHandle: IntNative, DestAddress: CPointer<RTM_NET_ADDRESSAbi>, ProtocolId: UInt32, TargetViews: UInt32, DestInfo: CPointer<RTM_DEST_INFOAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetMostSpecificDestination == "on"]
+public unsafe func Windows_RtmGetMostSpecificDestination(RtmRegHandle: IntNative, DestAddress: CPointer<RTM_NET_ADDRESSAbi>, ProtocolId: UInt32, TargetViews: UInt32, DestInfo: CPointer<RTM_DEST_INFOAbi>): UInt32 {
+    return RtmGetMostSpecificDestination(RtmRegHandle, DestAddress, ProtocolId, TargetViews, DestInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetNextHopInfo == "on"]
+foreign {
+    func RtmGetNextHopInfo(RtmRegHandle: IntNative, NextHopHandle: IntNative, NextHopInfo: CPointer<RTM_NEXTHOP_INFOAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetNextHopInfo == "on"]
+public unsafe func Windows_RtmGetNextHopInfo(RtmRegHandle: IntNative, NextHopHandle: IntNative, NextHopInfo: CPointer<RTM_NEXTHOP_INFOAbi>): UInt32 {
+    return RtmGetNextHopInfo(RtmRegHandle, NextHopHandle, NextHopInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetNextHopPointer == "on"]
+foreign {
+    func RtmGetNextHopPointer(RtmRegHandle: IntNative, NextHopHandle: IntNative, NextHopPointer: CPointer<CPointer<RTM_NEXTHOP_INFOAbi>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetNextHopPointer == "on"]
+public unsafe func Windows_RtmGetNextHopPointer(RtmRegHandle: IntNative, NextHopHandle: IntNative, NextHopPointer: CPointer<CPointer<RTM_NEXTHOP_INFOAbi>>): UInt32 {
+    return RtmGetNextHopPointer(RtmRegHandle, NextHopHandle, NextHopPointer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetOpaqueInformationPointer == "on"]
+foreign {
+    func RtmGetOpaqueInformationPointer(RtmRegHandle: IntNative, DestHandle: IntNative, OpaqueInfoPointer: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetOpaqueInformationPointer == "on"]
+public unsafe func Windows_RtmGetOpaqueInformationPointer(RtmRegHandle: IntNative, DestHandle: IntNative, OpaqueInfoPointer: CPointer<CPointer<Unit>>): UInt32 {
+    return RtmGetOpaqueInformationPointer(RtmRegHandle, DestHandle, OpaqueInfoPointer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetRegisteredEntities == "on"]
+foreign {
+    func RtmGetRegisteredEntities(RtmRegHandle: IntNative, NumEntities: CPointer<UInt32>, EntityHandles: CPointer<IntNative>, EntityInfos: CPointer<RTM_ENTITY_INFOAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetRegisteredEntities == "on"]
+public unsafe func Windows_RtmGetRegisteredEntities(RtmRegHandle: IntNative, NumEntities: CPointer<UInt32>, EntityHandles: CPointer<IntNative>, EntityInfos: CPointer<RTM_ENTITY_INFOAbi>): UInt32 {
+    return RtmGetRegisteredEntities(RtmRegHandle, NumEntities, EntityHandles, EntityInfos)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetRouteInfo == "on"]
+foreign {
+    func RtmGetRouteInfo(RtmRegHandle: IntNative, RouteHandle: IntNative, RouteInfo: CPointer<RTM_ROUTE_INFOAbi>, DestAddress: CPointer<RTM_NET_ADDRESSAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetRouteInfo == "on"]
+public unsafe func Windows_RtmGetRouteInfo(RtmRegHandle: IntNative, RouteHandle: IntNative, RouteInfo: CPointer<RTM_ROUTE_INFOAbi>, DestAddress: CPointer<RTM_NET_ADDRESSAbi>): UInt32 {
+    return RtmGetRouteInfo(RtmRegHandle, RouteHandle, RouteInfo, DestAddress)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetRoutePointer == "on"]
+foreign {
+    func RtmGetRoutePointer(RtmRegHandle: IntNative, RouteHandle: IntNative, RoutePointer: CPointer<CPointer<RTM_ROUTE_INFOAbi>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmGetRoutePointer == "on"]
+public unsafe func Windows_RtmGetRoutePointer(RtmRegHandle: IntNative, RouteHandle: IntNative, RoutePointer: CPointer<CPointer<RTM_ROUTE_INFOAbi>>): UInt32 {
+    return RtmGetRoutePointer(RtmRegHandle, RouteHandle, RoutePointer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmHoldDestination == "on"]
+foreign {
+    func RtmHoldDestination(RtmRegHandle: IntNative, DestHandle: IntNative, TargetViews: UInt32, HoldTime: UInt32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmHoldDestination == "on"]
+public unsafe func Windows_RtmHoldDestination(RtmRegHandle: IntNative, DestHandle: IntNative, TargetViews: UInt32, HoldTime: UInt32): UInt32 {
+    return RtmHoldDestination(RtmRegHandle, DestHandle, TargetViews, HoldTime)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmIgnoreChangedDests == "on"]
+foreign {
+    func RtmIgnoreChangedDests(RtmRegHandle: IntNative, NotifyHandle: IntNative, NumDests: UInt32, ChangedDests: CPointer<IntNative>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmIgnoreChangedDests == "on"]
+public unsafe func Windows_RtmIgnoreChangedDests(RtmRegHandle: IntNative, NotifyHandle: IntNative, NumDests: UInt32, ChangedDests: CPointer<IntNative>): UInt32 {
+    return RtmIgnoreChangedDests(RtmRegHandle, NotifyHandle, NumDests, ChangedDests)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmInsertInRouteList == "on"]
+foreign {
+    func RtmInsertInRouteList(RtmRegHandle: IntNative, RouteListHandle: IntNative, NumRoutes: UInt32, RouteHandles: CPointer<IntNative>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmInsertInRouteList == "on"]
+public unsafe func Windows_RtmInsertInRouteList(RtmRegHandle: IntNative, RouteListHandle: IntNative, NumRoutes: UInt32, RouteHandles: CPointer<IntNative>): UInt32 {
+    return RtmInsertInRouteList(RtmRegHandle, RouteListHandle, NumRoutes, RouteHandles)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmInvokeMethod == "on"]
+foreign {
+    func RtmInvokeMethod(RtmRegHandle: IntNative, EntityHandle: IntNative, Input: CPointer<RTM_ENTITY_METHOD_INPUTAbi>, OutputSize: CPointer<UInt32>, Output: CPointer<RTM_ENTITY_METHOD_OUTPUTAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmInvokeMethod == "on"]
+public unsafe func Windows_RtmInvokeMethod(RtmRegHandle: IntNative, EntityHandle: IntNative, Input: CPointer<RTM_ENTITY_METHOD_INPUTAbi>, OutputSize: CPointer<UInt32>, Output: CPointer<RTM_ENTITY_METHOD_OUTPUTAbi>): UInt32 {
+    return RtmInvokeMethod(RtmRegHandle, EntityHandle, Input, OutputSize, Output)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmIsBestRoute == "on"]
+foreign {
+    func RtmIsBestRoute(RtmRegHandle: IntNative, RouteHandle: IntNative, BestInViews: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmIsBestRoute == "on"]
+public unsafe func Windows_RtmIsBestRoute(RtmRegHandle: IntNative, RouteHandle: IntNative, BestInViews: CPointer<UInt32>): UInt32 {
+    return RtmIsBestRoute(RtmRegHandle, RouteHandle, BestInViews)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmIsMarkedForChangeNotification == "on"]
+foreign {
+    func RtmIsMarkedForChangeNotification(RtmRegHandle: IntNative, NotifyHandle: IntNative, DestHandle: IntNative, DestMarked: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmIsMarkedForChangeNotification == "on"]
+public unsafe func Windows_RtmIsMarkedForChangeNotification(RtmRegHandle: IntNative, NotifyHandle: IntNative, DestHandle: IntNative, DestMarked: CPointer<Int32>): UInt32 {
+    return RtmIsMarkedForChangeNotification(RtmRegHandle, NotifyHandle, DestHandle, DestMarked)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmLockDestination == "on"]
+foreign {
+    func RtmLockDestination(RtmRegHandle: IntNative, DestHandle: IntNative, Exclusive: Int32, LockDest: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmLockDestination == "on"]
+public unsafe func Windows_RtmLockDestination(RtmRegHandle: IntNative, DestHandle: IntNative, Exclusive: Int32, LockDest: Int32): UInt32 {
+    return RtmLockDestination(RtmRegHandle, DestHandle, Exclusive, LockDest)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmLockNextHop == "on"]
+foreign {
+    func RtmLockNextHop(RtmRegHandle: IntNative, NextHopHandle: IntNative, Exclusive: Int32, LockNextHop: Int32, NextHopPointer: CPointer<CPointer<RTM_NEXTHOP_INFOAbi>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmLockNextHop == "on"]
+public unsafe func Windows_RtmLockNextHop(RtmRegHandle: IntNative, NextHopHandle: IntNative, Exclusive: Int32, LockNextHop: Int32, NextHopPointer: CPointer<CPointer<RTM_NEXTHOP_INFOAbi>>): UInt32 {
+    return RtmLockNextHop(RtmRegHandle, NextHopHandle, Exclusive, LockNextHop, NextHopPointer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmLockRoute == "on"]
+foreign {
+    func RtmLockRoute(RtmRegHandle: IntNative, RouteHandle: IntNative, Exclusive: Int32, LockRoute: Int32, RoutePointer: CPointer<CPointer<RTM_ROUTE_INFOAbi>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmLockRoute == "on"]
+public unsafe func Windows_RtmLockRoute(RtmRegHandle: IntNative, RouteHandle: IntNative, Exclusive: Int32, LockRoute: Int32, RoutePointer: CPointer<CPointer<RTM_ROUTE_INFOAbi>>): UInt32 {
+    return RtmLockRoute(RtmRegHandle, RouteHandle, Exclusive, LockRoute, RoutePointer)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmMarkDestForChangeNotification == "on"]
+foreign {
+    func RtmMarkDestForChangeNotification(RtmRegHandle: IntNative, NotifyHandle: IntNative, DestHandle: IntNative, MarkDest: Int32): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmMarkDestForChangeNotification == "on"]
+public unsafe func Windows_RtmMarkDestForChangeNotification(RtmRegHandle: IntNative, NotifyHandle: IntNative, DestHandle: IntNative, MarkDest: Int32): UInt32 {
+    return RtmMarkDestForChangeNotification(RtmRegHandle, NotifyHandle, DestHandle, MarkDest)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmReferenceHandles == "on"]
+foreign {
+    func RtmReferenceHandles(RtmRegHandle: IntNative, NumHandles: UInt32, RtmHandles: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmReferenceHandles == "on"]
+public unsafe func Windows_RtmReferenceHandles(RtmRegHandle: IntNative, NumHandles: UInt32, RtmHandles: CPointer<CPointer<Unit>>): UInt32 {
+    return RtmReferenceHandles(RtmRegHandle, NumHandles, RtmHandles)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmRegisterEntity == "on"]
+foreign {
+    func RtmRegisterEntity(RtmEntityInfo: CPointer<RTM_ENTITY_INFOAbi>, ExportMethods: CPointer<RTM_ENTITY_EXPORT_METHODSAbi>, EventCallback: RTM_EVENT_CALLBACK, ReserveOpaquePointer: Int32, RtmRegProfile: CPointer<RTM_REGN_PROFILEAbi>, RtmRegHandle: CPointer<IntNative>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmRegisterEntity == "on"]
+public unsafe func Windows_RtmRegisterEntity(RtmEntityInfo: CPointer<RTM_ENTITY_INFOAbi>, ExportMethods: CPointer<RTM_ENTITY_EXPORT_METHODSAbi>, EventCallback: RTM_EVENT_CALLBACK, ReserveOpaquePointer: Int32, RtmRegProfile: CPointer<RTM_REGN_PROFILEAbi>, RtmRegHandle: CPointer<IntNative>): UInt32 {
+    return RtmRegisterEntity(RtmEntityInfo, ExportMethods, EventCallback, ReserveOpaquePointer, RtmRegProfile, RtmRegHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmRegisterForChangeNotification == "on"]
+foreign {
+    func RtmRegisterForChangeNotification(RtmRegHandle: IntNative, TargetViews: UInt32, NotifyFlags: UInt32, NotifyContext: CPointer<Unit>, NotifyHandle: CPointer<IntNative>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmRegisterForChangeNotification == "on"]
+public unsafe func Windows_RtmRegisterForChangeNotification(RtmRegHandle: IntNative, TargetViews: UInt32, NotifyFlags: UInt32, NotifyContext: CPointer<Unit>, NotifyHandle: CPointer<IntNative>): UInt32 {
+    return RtmRegisterForChangeNotification(RtmRegHandle, TargetViews, NotifyFlags, NotifyContext, NotifyHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmReleaseChangedDests == "on"]
+foreign {
+    func RtmReleaseChangedDests(RtmRegHandle: IntNative, NotifyHandle: IntNative, NumDests: UInt32, ChangedDests: CPointer<RTM_DEST_INFOAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmReleaseChangedDests == "on"]
+public unsafe func Windows_RtmReleaseChangedDests(RtmRegHandle: IntNative, NotifyHandle: IntNative, NumDests: UInt32, ChangedDests: CPointer<RTM_DEST_INFOAbi>): UInt32 {
+    return RtmReleaseChangedDests(RtmRegHandle, NotifyHandle, NumDests, ChangedDests)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmReleaseDestInfo == "on"]
+foreign {
+    func RtmReleaseDestInfo(RtmRegHandle: IntNative, DestInfo: CPointer<RTM_DEST_INFOAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmReleaseDestInfo == "on"]
+public unsafe func Windows_RtmReleaseDestInfo(RtmRegHandle: IntNative, DestInfo: CPointer<RTM_DEST_INFOAbi>): UInt32 {
+    return RtmReleaseDestInfo(RtmRegHandle, DestInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmReleaseDests == "on"]
+foreign {
+    func RtmReleaseDests(RtmRegHandle: IntNative, NumDests: UInt32, DestInfos: CPointer<RTM_DEST_INFOAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmReleaseDests == "on"]
+public unsafe func Windows_RtmReleaseDests(RtmRegHandle: IntNative, NumDests: UInt32, DestInfos: CPointer<RTM_DEST_INFOAbi>): UInt32 {
+    return RtmReleaseDests(RtmRegHandle, NumDests, DestInfos)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmReleaseEntities == "on"]
+foreign {
+    func RtmReleaseEntities(RtmRegHandle: IntNative, NumEntities: UInt32, EntityHandles: CPointer<IntNative>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmReleaseEntities == "on"]
+public unsafe func Windows_RtmReleaseEntities(RtmRegHandle: IntNative, NumEntities: UInt32, EntityHandles: CPointer<IntNative>): UInt32 {
+    return RtmReleaseEntities(RtmRegHandle, NumEntities, EntityHandles)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmReleaseEntityInfo == "on"]
+foreign {
+    func RtmReleaseEntityInfo(RtmRegHandle: IntNative, EntityInfo: CPointer<RTM_ENTITY_INFOAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmReleaseEntityInfo == "on"]
+public unsafe func Windows_RtmReleaseEntityInfo(RtmRegHandle: IntNative, EntityInfo: CPointer<RTM_ENTITY_INFOAbi>): UInt32 {
+    return RtmReleaseEntityInfo(RtmRegHandle, EntityInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmReleaseNextHopInfo == "on"]
+foreign {
+    func RtmReleaseNextHopInfo(RtmRegHandle: IntNative, NextHopInfo: CPointer<RTM_NEXTHOP_INFOAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmReleaseNextHopInfo == "on"]
+public unsafe func Windows_RtmReleaseNextHopInfo(RtmRegHandle: IntNative, NextHopInfo: CPointer<RTM_NEXTHOP_INFOAbi>): UInt32 {
+    return RtmReleaseNextHopInfo(RtmRegHandle, NextHopInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmReleaseNextHops == "on"]
+foreign {
+    func RtmReleaseNextHops(RtmRegHandle: IntNative, NumNextHops: UInt32, NextHopHandles: CPointer<IntNative>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmReleaseNextHops == "on"]
+public unsafe func Windows_RtmReleaseNextHops(RtmRegHandle: IntNative, NumNextHops: UInt32, NextHopHandles: CPointer<IntNative>): UInt32 {
+    return RtmReleaseNextHops(RtmRegHandle, NumNextHops, NextHopHandles)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmReleaseRouteInfo == "on"]
+foreign {
+    func RtmReleaseRouteInfo(RtmRegHandle: IntNative, RouteInfo: CPointer<RTM_ROUTE_INFOAbi>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmReleaseRouteInfo == "on"]
+public unsafe func Windows_RtmReleaseRouteInfo(RtmRegHandle: IntNative, RouteInfo: CPointer<RTM_ROUTE_INFOAbi>): UInt32 {
+    return RtmReleaseRouteInfo(RtmRegHandle, RouteInfo)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmReleaseRoutes == "on"]
+foreign {
+    func RtmReleaseRoutes(RtmRegHandle: IntNative, NumRoutes: UInt32, RouteHandles: CPointer<IntNative>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmReleaseRoutes == "on"]
+public unsafe func Windows_RtmReleaseRoutes(RtmRegHandle: IntNative, NumRoutes: UInt32, RouteHandles: CPointer<IntNative>): UInt32 {
+    return RtmReleaseRoutes(RtmRegHandle, NumRoutes, RouteHandles)
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmUpdateAndUnlockRoute == "on"]
+foreign {
+    func RtmUpdateAndUnlockRoute(RtmRegHandle: IntNative, RouteHandle: IntNative, TimeToLive: UInt32, RouteListHandle: IntNative, NotifyType: UInt32, NotifyHandle: IntNative, ChangeFlags: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_Rras == "on" && RTM == "on" && Windows_Win32_NetworkManagement_Rras_RtmUpdateAndUnlockRoute == "on"]
+public unsafe func Windows_RtmUpdateAndUnlockRoute(RtmRegHandle: IntNative, RouteHandle: IntNative, TimeToLive: UInt32, RouteListHandle: IntNative, NotifyType: UInt32, NotifyHandle: IntNative, ChangeFlags: CPointer<UInt32>): UInt32 {
+    return RtmUpdateAndUnlockRoute(RtmRegHandle, RouteHandle, TimeToLive, RouteListHandle, NotifyType, NotifyHandle, ChangeFlags)
 }
 
 @When[Windows_Win32_NetworkManagement_Rras == "on"]

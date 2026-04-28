@@ -90,6 +90,7 @@ public class FileSavePickerUI <: InterfaceWrapperBase & ComInterface & windows_i
         defaultInterface().SetTitle(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AllowedFileTypes(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().AllowedFileTypes()
     }
@@ -147,7 +148,10 @@ public struct IFileSavePickerUIVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Title: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetTitle: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var AllowedFileTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AllowedFileTypes: UIntNative = UIntNative(0)
     public var SettingsIdentifier: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var FileName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var TrySetFileName: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<_impl_l0.SetFileNameResultAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -237,6 +241,7 @@ public class IFileSavePickerUI <: InterfaceWrapperBase & ComInterface & RuntimeN
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AllowedFileTypes(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

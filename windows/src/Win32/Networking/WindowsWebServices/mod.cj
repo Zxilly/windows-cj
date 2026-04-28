@@ -8,11 +8,8 @@ import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase, RuntimeType, RuntimeTypeContract}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Security_Authentication_Identity == "on"]
 import windows.Win32.Security.Authentication.Identity as Win32_Security_Authentication_Identity
-@When[Windows_Win32_System_WinRT == "on"]
 import windows.Win32.System.WinRT as Win32_System_WinRT
 import windows.Win32._impl_l1 as Win32__impl_l1
 import windows.Win32._impl_l2 as Win32__impl_l2
@@ -16879,349 +16876,1492 @@ extend WS_HTTP_SSL_USERNAME_SECURITY_CONTEXT_POLICY_DESCRIPTION <: windows_core.
     }
 }
 
-@When[WEBSERVICES == "on"]
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsAbandonCall == "on"]
 foreign {
     // param-hint: error optional
     func WsAbandonCall(serviceProxy: CPointer<WS_SERVICE_PROXY>, callId: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsAbandonCall == "on"]
+public unsafe func Windows_WsAbandonCall(serviceProxy: CPointer<WS_SERVICE_PROXY>, callId: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsAbandonCall(serviceProxy, callId, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsAbandonMessage == "on"]
+foreign {
     // param-hint: error optional
     func WsAbandonMessage(channel: CPointer<WS_CHANNEL>, message: CPointer<WS_MESSAGE>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsAbandonMessage == "on"]
+public unsafe func Windows_WsAbandonMessage(channel: CPointer<WS_CHANNEL>, message: CPointer<WS_MESSAGE>, error: CPointer<WS_ERROR>): Int32 {
+    return WsAbandonMessage(channel, message, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsAbortChannel == "on"]
+foreign {
     // param-hint: error optional
     func WsAbortChannel(channel: CPointer<WS_CHANNEL>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsAbortChannel == "on"]
+public unsafe func Windows_WsAbortChannel(channel: CPointer<WS_CHANNEL>, error: CPointer<WS_ERROR>): Int32 {
+    return WsAbortChannel(channel, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsAbortListener == "on"]
+foreign {
     // param-hint: error optional
     func WsAbortListener(listener: CPointer<WS_LISTENER>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsAbortListener == "on"]
+public unsafe func Windows_WsAbortListener(listener: CPointer<WS_LISTENER>, error: CPointer<WS_ERROR>): Int32 {
+    return WsAbortListener(listener, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsAbortServiceHost == "on"]
+foreign {
     // param-hint: error optional
     func WsAbortServiceHost(serviceHost: CPointer<WS_SERVICE_HOST>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsAbortServiceHost == "on"]
+public unsafe func Windows_WsAbortServiceHost(serviceHost: CPointer<WS_SERVICE_HOST>, error: CPointer<WS_ERROR>): Int32 {
+    return WsAbortServiceHost(serviceHost, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsAbortServiceProxy == "on"]
+foreign {
     // param-hint: error optional
     func WsAbortServiceProxy(serviceProxy: CPointer<WS_SERVICE_PROXY>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsAbortServiceProxy == "on"]
+public unsafe func Windows_WsAbortServiceProxy(serviceProxy: CPointer<WS_SERVICE_PROXY>, error: CPointer<WS_ERROR>): Int32 {
+    return WsAbortServiceProxy(serviceProxy, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsAcceptChannel == "on"]
+foreign {
     // param-hint: asyncContext optional
     // param-hint: error optional
     func WsAcceptChannel(listener: CPointer<WS_LISTENER>, channel: CPointer<WS_CHANNEL>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsAcceptChannel == "on"]
+public unsafe func Windows_WsAcceptChannel(listener: CPointer<WS_LISTENER>, channel: CPointer<WS_CHANNEL>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsAcceptChannel(listener, channel, asyncContext, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsAddCustomHeader == "on"]
+foreign {
     // param-hint: value bytes=param[4]
     // param-hint: error optional
     func WsAddCustomHeader(message: CPointer<WS_MESSAGE>, headerDescription: CPointer<WS_ELEMENT_DESCRIPTIONAbi>, writeOption: WS_WRITE_OPTIONAbi, value: CPointer<Unit>, valueSize: UInt32, headerAttributes: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsAddCustomHeader == "on"]
+public unsafe func Windows_WsAddCustomHeader(message: CPointer<WS_MESSAGE>, headerDescription: CPointer<WS_ELEMENT_DESCRIPTIONAbi>, writeOption: WS_WRITE_OPTIONAbi, value: CPointer<Unit>, valueSize: UInt32, headerAttributes: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsAddCustomHeader(message, headerDescription, writeOption, value, valueSize, headerAttributes, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsAddErrorString == "on"]
+foreign {
     func WsAddErrorString(error: CPointer<WS_ERROR>, string: CPointer<WS_STRINGAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsAddErrorString == "on"]
+public unsafe func Windows_WsAddErrorString(error: CPointer<WS_ERROR>, string: CPointer<WS_STRINGAbi>): Int32 {
+    return WsAddErrorString(error, string)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsAddMappedHeader == "on"]
+foreign {
     // param-hint: value bytes=param[5]
     // param-hint: error optional
     func WsAddMappedHeader(message: CPointer<WS_MESSAGE>, headerName: CPointer<WS_XML_STRINGAbi>, valueType: WS_TYPEAbi, writeOption: WS_WRITE_OPTIONAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsAddMappedHeader == "on"]
+public unsafe func Windows_WsAddMappedHeader(message: CPointer<WS_MESSAGE>, headerName: CPointer<WS_XML_STRINGAbi>, valueType: WS_TYPEAbi, writeOption: WS_WRITE_OPTIONAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsAddMappedHeader(message, headerName, valueType, writeOption, value, valueSize, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsAddressMessage == "on"]
+foreign {
     // param-hint: address optional
     // param-hint: error optional
     func WsAddressMessage(message: CPointer<WS_MESSAGE>, address: CPointer<WS_ENDPOINT_ADDRESSAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsAddressMessage == "on"]
+public unsafe func Windows_WsAddressMessage(message: CPointer<WS_MESSAGE>, address: CPointer<WS_ENDPOINT_ADDRESSAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsAddressMessage(message, address, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsAlloc == "on"]
+foreign {
     // param-hint: error optional
     func WsAlloc(heap: CPointer<WS_HEAP>, size: UIntNative, ptr: CPointer<CPointer<Unit>>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsAlloc == "on"]
+public unsafe func Windows_WsAlloc(heap: CPointer<WS_HEAP>, size: UIntNative, ptr: CPointer<CPointer<Unit>>, error: CPointer<WS_ERROR>): Int32 {
+    return WsAlloc(heap, size, ptr, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsAsyncExecute == "on"]
+foreign {
     // param-hint: callbackState optional
     // param-hint: asyncContext optional
     // param-hint: error optional
     func WsAsyncExecute(asyncState: CPointer<WS_ASYNC_STATEAbi>, operation: WS_ASYNC_FUNCTION, callbackModel: WS_CALLBACK_MODELAbi, callbackState: CPointer<Unit>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsAsyncExecute == "on"]
+public unsafe func Windows_WsAsyncExecute(asyncState: CPointer<WS_ASYNC_STATEAbi>, operation: WS_ASYNC_FUNCTION, callbackModel: WS_CALLBACK_MODELAbi, callbackState: CPointer<Unit>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsAsyncExecute(asyncState, operation, callbackModel, callbackState, asyncContext, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCall == "on"]
+foreign {
     // param-hint: arguments optional
     // param-hint: callProperties len=param[5] optional
     // param-hint: asyncContext optional
     // param-hint: error optional
     func WsCall(serviceProxy: CPointer<WS_SERVICE_PROXY>, operation: CPointer<WS_OPERATION_DESCRIPTIONAbi>, arguments: CPointer<CPointer<Unit>>, heap: CPointer<WS_HEAP>, callProperties: CPointer<WS_CALL_PROPERTYAbi>, callPropertyCount: UInt32, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCall == "on"]
+public unsafe func Windows_WsCall(serviceProxy: CPointer<WS_SERVICE_PROXY>, operation: CPointer<WS_OPERATION_DESCRIPTIONAbi>, arguments: CPointer<CPointer<Unit>>, heap: CPointer<WS_HEAP>, callProperties: CPointer<WS_CALL_PROPERTYAbi>, callPropertyCount: UInt32, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsCall(serviceProxy, operation, arguments, heap, callProperties, callPropertyCount, asyncContext, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCheckMustUnderstandHeaders == "on"]
+foreign {
     // param-hint: error optional
     func WsCheckMustUnderstandHeaders(message: CPointer<WS_MESSAGE>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCheckMustUnderstandHeaders == "on"]
+public unsafe func Windows_WsCheckMustUnderstandHeaders(message: CPointer<WS_MESSAGE>, error: CPointer<WS_ERROR>): Int32 {
+    return WsCheckMustUnderstandHeaders(message, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCloseChannel == "on"]
+foreign {
     // param-hint: asyncContext optional
     // param-hint: error optional
     func WsCloseChannel(channel: CPointer<WS_CHANNEL>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCloseChannel == "on"]
+public unsafe func Windows_WsCloseChannel(channel: CPointer<WS_CHANNEL>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsCloseChannel(channel, asyncContext, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCloseListener == "on"]
+foreign {
     // param-hint: asyncContext optional
     // param-hint: error optional
     func WsCloseListener(listener: CPointer<WS_LISTENER>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCloseListener == "on"]
+public unsafe func Windows_WsCloseListener(listener: CPointer<WS_LISTENER>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsCloseListener(listener, asyncContext, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCloseServiceHost == "on"]
+foreign {
     // param-hint: asyncContext optional
     // param-hint: error optional
     func WsCloseServiceHost(serviceHost: CPointer<WS_SERVICE_HOST>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCloseServiceHost == "on"]
+public unsafe func Windows_WsCloseServiceHost(serviceHost: CPointer<WS_SERVICE_HOST>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsCloseServiceHost(serviceHost, asyncContext, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCloseServiceProxy == "on"]
+foreign {
     // param-hint: asyncContext optional
     // param-hint: error optional
     func WsCloseServiceProxy(serviceProxy: CPointer<WS_SERVICE_PROXY>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCloseServiceProxy == "on"]
+public unsafe func Windows_WsCloseServiceProxy(serviceProxy: CPointer<WS_SERVICE_PROXY>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsCloseServiceProxy(serviceProxy, asyncContext, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCombineUrl == "on"]
+foreign {
     // param-hint: error optional
     func WsCombineUrl(baseUrl: CPointer<WS_STRINGAbi>, referenceUrl: CPointer<WS_STRINGAbi>, flags: UInt32, heap: CPointer<WS_HEAP>, resultUrl: CPointer<WS_STRINGAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCombineUrl == "on"]
+public unsafe func Windows_WsCombineUrl(baseUrl: CPointer<WS_STRINGAbi>, referenceUrl: CPointer<WS_STRINGAbi>, flags: UInt32, heap: CPointer<WS_HEAP>, resultUrl: CPointer<WS_STRINGAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsCombineUrl(baseUrl, referenceUrl, flags, heap, resultUrl, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCopyError == "on"]
+foreign {
     func WsCopyError(source: CPointer<WS_ERROR>, destination: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCopyError == "on"]
+public unsafe func Windows_WsCopyError(source: CPointer<WS_ERROR>, destination: CPointer<WS_ERROR>): Int32 {
+    return WsCopyError(source, destination)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCopyNode == "on"]
+foreign {
     // param-hint: error optional
     func WsCopyNode(writer: CPointer<WS_XML_WRITER>, reader: CPointer<WS_XML_READER>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCopyNode == "on"]
+public unsafe func Windows_WsCopyNode(writer: CPointer<WS_XML_WRITER>, reader: CPointer<WS_XML_READER>, error: CPointer<WS_ERROR>): Int32 {
+    return WsCopyNode(writer, reader, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateChannel == "on"]
+foreign {
     // param-hint: properties len=param[3] optional
     // param-hint: securityDescription optional
     // param-hint: error optional
     func WsCreateChannel(channelType: WS_CHANNEL_TYPEAbi, channelBinding: WS_CHANNEL_BINDINGAbi, properties: CPointer<WS_CHANNEL_PROPERTYAbi>, propertyCount: UInt32, securityDescription: CPointer<WS_SECURITY_DESCRIPTIONAbi>, channel: CPointer<CPointer<WS_CHANNEL>>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateChannel == "on"]
+public unsafe func Windows_WsCreateChannel(channelType: WS_CHANNEL_TYPEAbi, channelBinding: WS_CHANNEL_BINDINGAbi, properties: CPointer<WS_CHANNEL_PROPERTYAbi>, propertyCount: UInt32, securityDescription: CPointer<WS_SECURITY_DESCRIPTIONAbi>, channel: CPointer<CPointer<WS_CHANNEL>>, error: CPointer<WS_ERROR>): Int32 {
+    return WsCreateChannel(channelType, channelBinding, properties, propertyCount, securityDescription, channel, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateChannelForListener == "on"]
+foreign {
     // param-hint: properties len=param[2] optional
     // param-hint: error optional
     func WsCreateChannelForListener(listener: CPointer<WS_LISTENER>, properties: CPointer<WS_CHANNEL_PROPERTYAbi>, propertyCount: UInt32, channel: CPointer<CPointer<WS_CHANNEL>>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateChannelForListener == "on"]
+public unsafe func Windows_WsCreateChannelForListener(listener: CPointer<WS_LISTENER>, properties: CPointer<WS_CHANNEL_PROPERTYAbi>, propertyCount: UInt32, channel: CPointer<CPointer<WS_CHANNEL>>, error: CPointer<WS_ERROR>): Int32 {
+    return WsCreateChannelForListener(listener, properties, propertyCount, channel, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateError == "on"]
+foreign {
     // param-hint: properties len=param[1] optional
     func WsCreateError(properties: CPointer<WS_ERROR_PROPERTYAbi>, propertyCount: UInt32, error: CPointer<CPointer<WS_ERROR>>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateError == "on"]
+public unsafe func Windows_WsCreateError(properties: CPointer<WS_ERROR_PROPERTYAbi>, propertyCount: UInt32, error: CPointer<CPointer<WS_ERROR>>): Int32 {
+    return WsCreateError(properties, propertyCount, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateFaultFromError == "on"]
+foreign {
     func WsCreateFaultFromError(error: CPointer<WS_ERROR>, faultErrorCode: Int32, faultDisclosure: WS_FAULT_DISCLOSUREAbi, heap: CPointer<WS_HEAP>, fault: CPointer<WS_FAULTAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateFaultFromError == "on"]
+public unsafe func Windows_WsCreateFaultFromError(error: CPointer<WS_ERROR>, faultErrorCode: Int32, faultDisclosure: WS_FAULT_DISCLOSUREAbi, heap: CPointer<WS_HEAP>, fault: CPointer<WS_FAULTAbi>): Int32 {
+    return WsCreateFaultFromError(error, faultErrorCode, faultDisclosure, heap, fault)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateHeap == "on"]
+foreign {
     // param-hint: properties optional
     // param-hint: error optional
     func WsCreateHeap(maxSize: UIntNative, trimSize: UIntNative, properties: CPointer<WS_HEAP_PROPERTYAbi>, propertyCount: UInt32, heap: CPointer<CPointer<WS_HEAP>>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateHeap == "on"]
+public unsafe func Windows_WsCreateHeap(maxSize: UIntNative, trimSize: UIntNative, properties: CPointer<WS_HEAP_PROPERTYAbi>, propertyCount: UInt32, heap: CPointer<CPointer<WS_HEAP>>, error: CPointer<WS_ERROR>): Int32 {
+    return WsCreateHeap(maxSize, trimSize, properties, propertyCount, heap, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateListener == "on"]
+foreign {
     // param-hint: properties len=param[3] optional
     // param-hint: securityDescription optional
     // param-hint: error optional
     func WsCreateListener(channelType: WS_CHANNEL_TYPEAbi, channelBinding: WS_CHANNEL_BINDINGAbi, properties: CPointer<WS_LISTENER_PROPERTYAbi>, propertyCount: UInt32, securityDescription: CPointer<WS_SECURITY_DESCRIPTIONAbi>, listener: CPointer<CPointer<WS_LISTENER>>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateListener == "on"]
+public unsafe func Windows_WsCreateListener(channelType: WS_CHANNEL_TYPEAbi, channelBinding: WS_CHANNEL_BINDINGAbi, properties: CPointer<WS_LISTENER_PROPERTYAbi>, propertyCount: UInt32, securityDescription: CPointer<WS_SECURITY_DESCRIPTIONAbi>, listener: CPointer<CPointer<WS_LISTENER>>, error: CPointer<WS_ERROR>): Int32 {
+    return WsCreateListener(channelType, channelBinding, properties, propertyCount, securityDescription, listener, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateMessage == "on"]
+foreign {
     // param-hint: properties len=param[3] optional
     // param-hint: error optional
     func WsCreateMessage(envelopeVersion: WS_ENVELOPE_VERSIONAbi, addressingVersion: WS_ADDRESSING_VERSIONAbi, properties: CPointer<WS_MESSAGE_PROPERTYAbi>, propertyCount: UInt32, message: CPointer<CPointer<WS_MESSAGE>>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateMessage == "on"]
+public unsafe func Windows_WsCreateMessage(envelopeVersion: WS_ENVELOPE_VERSIONAbi, addressingVersion: WS_ADDRESSING_VERSIONAbi, properties: CPointer<WS_MESSAGE_PROPERTYAbi>, propertyCount: UInt32, message: CPointer<CPointer<WS_MESSAGE>>, error: CPointer<WS_ERROR>): Int32 {
+    return WsCreateMessage(envelopeVersion, addressingVersion, properties, propertyCount, message, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateMessageForChannel == "on"]
+foreign {
     // param-hint: properties len=param[2] optional
     // param-hint: error optional
     func WsCreateMessageForChannel(channel: CPointer<WS_CHANNEL>, properties: CPointer<WS_MESSAGE_PROPERTYAbi>, propertyCount: UInt32, message: CPointer<CPointer<WS_MESSAGE>>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateMessageForChannel == "on"]
+public unsafe func Windows_WsCreateMessageForChannel(channel: CPointer<WS_CHANNEL>, properties: CPointer<WS_MESSAGE_PROPERTYAbi>, propertyCount: UInt32, message: CPointer<CPointer<WS_MESSAGE>>, error: CPointer<WS_ERROR>): Int32 {
+    return WsCreateMessageForChannel(channel, properties, propertyCount, message, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateMetadata == "on"]
+foreign {
     // param-hint: properties len=param[1] optional
     // param-hint: error optional
     func WsCreateMetadata(properties: CPointer<WS_METADATA_PROPERTYAbi>, propertyCount: UInt32, metadata: CPointer<CPointer<WS_METADATA>>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateMetadata == "on"]
+public unsafe func Windows_WsCreateMetadata(properties: CPointer<WS_METADATA_PROPERTYAbi>, propertyCount: UInt32, metadata: CPointer<CPointer<WS_METADATA>>, error: CPointer<WS_ERROR>): Int32 {
+    return WsCreateMetadata(properties, propertyCount, metadata, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateReader == "on"]
+foreign {
     // param-hint: properties len=param[1] optional
     // param-hint: error optional
     func WsCreateReader(properties: CPointer<WS_XML_READER_PROPERTYAbi>, propertyCount: UInt32, reader: CPointer<CPointer<WS_XML_READER>>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateReader == "on"]
+public unsafe func Windows_WsCreateReader(properties: CPointer<WS_XML_READER_PROPERTYAbi>, propertyCount: UInt32, reader: CPointer<CPointer<WS_XML_READER>>, error: CPointer<WS_ERROR>): Int32 {
+    return WsCreateReader(properties, propertyCount, reader, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateServiceEndpointFromTemplate == "on"]
+foreign {
     // param-hint: properties len=param[2] optional
     // param-hint: addressUrl optional
     // param-hint: authorizationCallback optional
     // param-hint: templateValue bytes=param[9] optional
     // param-hint: error optional
     func WsCreateServiceEndpointFromTemplate(channelType: WS_CHANNEL_TYPEAbi, properties: CPointer<WS_SERVICE_ENDPOINT_PROPERTYAbi>, propertyCount: UInt32, addressUrl: CPointer<WS_STRINGAbi>, contract: CPointer<WS_SERVICE_CONTRACTAbi>, authorizationCallback: WS_SERVICE_SECURITY_CALLBACK, heap: CPointer<WS_HEAP>, templateType: WS_BINDING_TEMPLATE_TYPEAbi, templateValue: CPointer<Unit>, templateSize: UInt32, templateDescription: CPointer<Unit>, templateDescriptionSize: UInt32, serviceEndpoint: CPointer<CPointer<WS_SERVICE_ENDPOINTAbi>>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateServiceEndpointFromTemplate == "on"]
+public unsafe func Windows_WsCreateServiceEndpointFromTemplate(channelType: WS_CHANNEL_TYPEAbi, properties: CPointer<WS_SERVICE_ENDPOINT_PROPERTYAbi>, propertyCount: UInt32, addressUrl: CPointer<WS_STRINGAbi>, contract: CPointer<WS_SERVICE_CONTRACTAbi>, authorizationCallback: WS_SERVICE_SECURITY_CALLBACK, heap: CPointer<WS_HEAP>, templateType: WS_BINDING_TEMPLATE_TYPEAbi, templateValue: CPointer<Unit>, templateSize: UInt32, templateDescription: CPointer<Unit>, templateDescriptionSize: UInt32, serviceEndpoint: CPointer<CPointer<WS_SERVICE_ENDPOINTAbi>>, error: CPointer<WS_ERROR>): Int32 {
+    return WsCreateServiceEndpointFromTemplate(channelType, properties, propertyCount, addressUrl, contract, authorizationCallback, heap, templateType, templateValue, templateSize, templateDescription, templateDescriptionSize, serviceEndpoint, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateServiceHost == "on"]
+foreign {
     // param-hint: endpoints len=param[1] optional
     // param-hint: serviceProperties len=param[3] optional
     // param-hint: error optional
     func WsCreateServiceHost(endpoints: CPointer<CPointer<WS_SERVICE_ENDPOINTAbi>>, endpointCount: UInt16, serviceProperties: CPointer<WS_SERVICE_PROPERTYAbi>, servicePropertyCount: UInt32, serviceHost: CPointer<CPointer<WS_SERVICE_HOST>>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateServiceHost == "on"]
+public unsafe func Windows_WsCreateServiceHost(endpoints: CPointer<CPointer<WS_SERVICE_ENDPOINTAbi>>, endpointCount: UInt16, serviceProperties: CPointer<WS_SERVICE_PROPERTYAbi>, servicePropertyCount: UInt32, serviceHost: CPointer<CPointer<WS_SERVICE_HOST>>, error: CPointer<WS_ERROR>): Int32 {
+    return WsCreateServiceHost(endpoints, endpointCount, serviceProperties, servicePropertyCount, serviceHost, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateServiceProxy == "on"]
+foreign {
     // param-hint: securityDescription optional
     // param-hint: properties len=param[4] optional
     // param-hint: channelProperties len=param[6] optional
     // param-hint: error optional
     func WsCreateServiceProxy(channelType: WS_CHANNEL_TYPEAbi, channelBinding: WS_CHANNEL_BINDINGAbi, securityDescription: CPointer<WS_SECURITY_DESCRIPTIONAbi>, properties: CPointer<WS_PROXY_PROPERTYAbi>, propertyCount: UInt32, channelProperties: CPointer<WS_CHANNEL_PROPERTYAbi>, channelPropertyCount: UInt32, serviceProxy: CPointer<CPointer<WS_SERVICE_PROXY>>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateServiceProxy == "on"]
+public unsafe func Windows_WsCreateServiceProxy(channelType: WS_CHANNEL_TYPEAbi, channelBinding: WS_CHANNEL_BINDINGAbi, securityDescription: CPointer<WS_SECURITY_DESCRIPTIONAbi>, properties: CPointer<WS_PROXY_PROPERTYAbi>, propertyCount: UInt32, channelProperties: CPointer<WS_CHANNEL_PROPERTYAbi>, channelPropertyCount: UInt32, serviceProxy: CPointer<CPointer<WS_SERVICE_PROXY>>, error: CPointer<WS_ERROR>): Int32 {
+    return WsCreateServiceProxy(channelType, channelBinding, securityDescription, properties, propertyCount, channelProperties, channelPropertyCount, serviceProxy, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateServiceProxyFromTemplate == "on"]
+foreign {
     // param-hint: properties len=param[2] optional
     // param-hint: templateValue bytes=param[5] optional
     // param-hint: error optional
     func WsCreateServiceProxyFromTemplate(channelType: WS_CHANNEL_TYPEAbi, properties: CPointer<WS_PROXY_PROPERTYAbi>, propertyCount: UInt32, templateType: WS_BINDING_TEMPLATE_TYPEAbi, templateValue: CPointer<Unit>, templateSize: UInt32, templateDescription: CPointer<Unit>, templateDescriptionSize: UInt32, serviceProxy: CPointer<CPointer<WS_SERVICE_PROXY>>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateServiceProxyFromTemplate == "on"]
+public unsafe func Windows_WsCreateServiceProxyFromTemplate(channelType: WS_CHANNEL_TYPEAbi, properties: CPointer<WS_PROXY_PROPERTYAbi>, propertyCount: UInt32, templateType: WS_BINDING_TEMPLATE_TYPEAbi, templateValue: CPointer<Unit>, templateSize: UInt32, templateDescription: CPointer<Unit>, templateDescriptionSize: UInt32, serviceProxy: CPointer<CPointer<WS_SERVICE_PROXY>>, error: CPointer<WS_ERROR>): Int32 {
+    return WsCreateServiceProxyFromTemplate(channelType, properties, propertyCount, templateType, templateValue, templateSize, templateDescription, templateDescriptionSize, serviceProxy, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateWriter == "on"]
+foreign {
     // param-hint: properties len=param[1] optional
     // param-hint: error optional
     func WsCreateWriter(properties: CPointer<WS_XML_WRITER_PROPERTYAbi>, propertyCount: UInt32, writer: CPointer<CPointer<WS_XML_WRITER>>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateWriter == "on"]
+public unsafe func Windows_WsCreateWriter(properties: CPointer<WS_XML_WRITER_PROPERTYAbi>, propertyCount: UInt32, writer: CPointer<CPointer<WS_XML_WRITER>>, error: CPointer<WS_ERROR>): Int32 {
+    return WsCreateWriter(properties, propertyCount, writer, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateXmlBuffer == "on"]
+foreign {
     // param-hint: properties len=param[2] optional
     // param-hint: error optional
     func WsCreateXmlBuffer(heap: CPointer<WS_HEAP>, properties: CPointer<WS_XML_BUFFER_PROPERTYAbi>, propertyCount: UInt32, buffer: CPointer<CPointer<WS_XML_BUFFER>>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateXmlBuffer == "on"]
+public unsafe func Windows_WsCreateXmlBuffer(heap: CPointer<WS_HEAP>, properties: CPointer<WS_XML_BUFFER_PROPERTYAbi>, propertyCount: UInt32, buffer: CPointer<CPointer<WS_XML_BUFFER>>, error: CPointer<WS_ERROR>): Int32 {
+    return WsCreateXmlBuffer(heap, properties, propertyCount, buffer, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateXmlSecurityToken == "on"]
+foreign {
     // param-hint: tokenXml optional
     // param-hint: tokenKey optional
     // param-hint: properties len=param[3] optional
     // param-hint: error optional
     func WsCreateXmlSecurityToken(tokenXml: CPointer<WS_XML_BUFFER>, tokenKey: CPointer<WS_SECURITY_KEY_HANDLEAbi>, properties: CPointer<WS_XML_SECURITY_TOKEN_PROPERTYAbi>, propertyCount: UInt32, token: CPointer<CPointer<WS_SECURITY_TOKEN>>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsCreateXmlSecurityToken == "on"]
+public unsafe func Windows_WsCreateXmlSecurityToken(tokenXml: CPointer<WS_XML_BUFFER>, tokenKey: CPointer<WS_SECURITY_KEY_HANDLEAbi>, properties: CPointer<WS_XML_SECURITY_TOKEN_PROPERTYAbi>, propertyCount: UInt32, token: CPointer<CPointer<WS_SECURITY_TOKEN>>, error: CPointer<WS_ERROR>): Int32 {
+    return WsCreateXmlSecurityToken(tokenXml, tokenKey, properties, propertyCount, token, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsDateTimeToFileTime == "on"]
+foreign {
     // param-hint: error optional
     func WsDateTimeToFileTime(dateTime: CPointer<WS_DATETIMEAbi>, fileTime: CPointer<Win32_Foundation.FILETIMEAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsDateTimeToFileTime == "on"]
+public unsafe func Windows_WsDateTimeToFileTime(dateTime: CPointer<WS_DATETIMEAbi>, fileTime: CPointer<Win32_Foundation.FILETIMEAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsDateTimeToFileTime(dateTime, fileTime, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsDecodeUrl == "on"]
+foreign {
     // param-hint: error optional
     func WsDecodeUrl(url: CPointer<WS_STRINGAbi>, flags: UInt32, heap: CPointer<WS_HEAP>, outUrl: CPointer<CPointer<WS_URLAbi>>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsDecodeUrl == "on"]
+public unsafe func Windows_WsDecodeUrl(url: CPointer<WS_STRINGAbi>, flags: UInt32, heap: CPointer<WS_HEAP>, outUrl: CPointer<CPointer<WS_URLAbi>>, error: CPointer<WS_ERROR>): Int32 {
+    return WsDecodeUrl(url, flags, heap, outUrl, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsEncodeUrl == "on"]
+foreign {
     // param-hint: error optional
     func WsEncodeUrl(url: CPointer<WS_URLAbi>, flags: UInt32, heap: CPointer<WS_HEAP>, outUrl: CPointer<WS_STRINGAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsEncodeUrl == "on"]
+public unsafe func Windows_WsEncodeUrl(url: CPointer<WS_URLAbi>, flags: UInt32, heap: CPointer<WS_HEAP>, outUrl: CPointer<WS_STRINGAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsEncodeUrl(url, flags, heap, outUrl, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsEndReaderCanonicalization == "on"]
+foreign {
     // param-hint: error optional
     func WsEndReaderCanonicalization(reader: CPointer<WS_XML_READER>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsEndReaderCanonicalization == "on"]
+public unsafe func Windows_WsEndReaderCanonicalization(reader: CPointer<WS_XML_READER>, error: CPointer<WS_ERROR>): Int32 {
+    return WsEndReaderCanonicalization(reader, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsEndWriterCanonicalization == "on"]
+foreign {
     // param-hint: error optional
     func WsEndWriterCanonicalization(writer: CPointer<WS_XML_WRITER>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsEndWriterCanonicalization == "on"]
+public unsafe func Windows_WsEndWriterCanonicalization(writer: CPointer<WS_XML_WRITER>, error: CPointer<WS_ERROR>): Int32 {
+    return WsEndWriterCanonicalization(writer, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFileTimeToDateTime == "on"]
+foreign {
     // param-hint: error optional
     func WsFileTimeToDateTime(fileTime: CPointer<Win32_Foundation.FILETIMEAbi>, dateTime: CPointer<WS_DATETIMEAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFileTimeToDateTime == "on"]
+public unsafe func Windows_WsFileTimeToDateTime(fileTime: CPointer<Win32_Foundation.FILETIMEAbi>, dateTime: CPointer<WS_DATETIMEAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsFileTimeToDateTime(fileTime, dateTime, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFillBody == "on"]
+foreign {
     // param-hint: asyncContext optional
     // param-hint: error optional
     func WsFillBody(message: CPointer<WS_MESSAGE>, minSize: UInt32, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFillBody == "on"]
+public unsafe func Windows_WsFillBody(message: CPointer<WS_MESSAGE>, minSize: UInt32, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsFillBody(message, minSize, asyncContext, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFillReader == "on"]
+foreign {
     // param-hint: asyncContext optional
     // param-hint: error optional
     func WsFillReader(reader: CPointer<WS_XML_READER>, minSize: UInt32, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFillReader == "on"]
+public unsafe func Windows_WsFillReader(reader: CPointer<WS_XML_READER>, minSize: UInt32, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsFillReader(reader, minSize, asyncContext, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFindAttribute == "on"]
+foreign {
     // param-hint: error optional
     func WsFindAttribute(reader: CPointer<WS_XML_READER>, localName: CPointer<WS_XML_STRINGAbi>, ns: CPointer<WS_XML_STRINGAbi>, required: Int32, attributeIndex: CPointer<UInt32>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFindAttribute == "on"]
+public unsafe func Windows_WsFindAttribute(reader: CPointer<WS_XML_READER>, localName: CPointer<WS_XML_STRINGAbi>, ns: CPointer<WS_XML_STRINGAbi>, required: Int32, attributeIndex: CPointer<UInt32>, error: CPointer<WS_ERROR>): Int32 {
+    return WsFindAttribute(reader, localName, ns, required, attributeIndex, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFlushBody == "on"]
+foreign {
     // param-hint: asyncContext optional
     // param-hint: error optional
     func WsFlushBody(message: CPointer<WS_MESSAGE>, minSize: UInt32, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFlushBody == "on"]
+public unsafe func Windows_WsFlushBody(message: CPointer<WS_MESSAGE>, minSize: UInt32, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsFlushBody(message, minSize, asyncContext, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFlushWriter == "on"]
+foreign {
     // param-hint: asyncContext optional
     // param-hint: error optional
     func WsFlushWriter(writer: CPointer<WS_XML_WRITER>, minSize: UInt32, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFlushWriter == "on"]
+public unsafe func Windows_WsFlushWriter(writer: CPointer<WS_XML_WRITER>, minSize: UInt32, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsFlushWriter(writer, minSize, asyncContext, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFreeChannel == "on"]
+foreign {
     func WsFreeChannel(channel: CPointer<WS_CHANNEL>): Unit
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFreeChannel == "on"]
+public unsafe func Windows_WsFreeChannel(channel: CPointer<WS_CHANNEL>): Unit {
+    WsFreeChannel(channel)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFreeError == "on"]
+foreign {
     func WsFreeError(error: CPointer<WS_ERROR>): Unit
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFreeError == "on"]
+public unsafe func Windows_WsFreeError(error: CPointer<WS_ERROR>): Unit {
+    WsFreeError(error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFreeHeap == "on"]
+foreign {
     func WsFreeHeap(heap: CPointer<WS_HEAP>): Unit
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFreeHeap == "on"]
+public unsafe func Windows_WsFreeHeap(heap: CPointer<WS_HEAP>): Unit {
+    WsFreeHeap(heap)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFreeListener == "on"]
+foreign {
     func WsFreeListener(listener: CPointer<WS_LISTENER>): Unit
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFreeListener == "on"]
+public unsafe func Windows_WsFreeListener(listener: CPointer<WS_LISTENER>): Unit {
+    WsFreeListener(listener)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFreeMessage == "on"]
+foreign {
     func WsFreeMessage(message: CPointer<WS_MESSAGE>): Unit
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFreeMessage == "on"]
+public unsafe func Windows_WsFreeMessage(message: CPointer<WS_MESSAGE>): Unit {
+    WsFreeMessage(message)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFreeMetadata == "on"]
+foreign {
     func WsFreeMetadata(metadata: CPointer<WS_METADATA>): Unit
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFreeMetadata == "on"]
+public unsafe func Windows_WsFreeMetadata(metadata: CPointer<WS_METADATA>): Unit {
+    WsFreeMetadata(metadata)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFreeReader == "on"]
+foreign {
     func WsFreeReader(reader: CPointer<WS_XML_READER>): Unit
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFreeReader == "on"]
+public unsafe func Windows_WsFreeReader(reader: CPointer<WS_XML_READER>): Unit {
+    WsFreeReader(reader)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFreeSecurityToken == "on"]
+foreign {
     func WsFreeSecurityToken(token: CPointer<WS_SECURITY_TOKEN>): Unit
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFreeSecurityToken == "on"]
+public unsafe func Windows_WsFreeSecurityToken(token: CPointer<WS_SECURITY_TOKEN>): Unit {
+    WsFreeSecurityToken(token)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFreeServiceHost == "on"]
+foreign {
     func WsFreeServiceHost(serviceHost: CPointer<WS_SERVICE_HOST>): Unit
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFreeServiceHost == "on"]
+public unsafe func Windows_WsFreeServiceHost(serviceHost: CPointer<WS_SERVICE_HOST>): Unit {
+    WsFreeServiceHost(serviceHost)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFreeServiceProxy == "on"]
+foreign {
     func WsFreeServiceProxy(serviceProxy: CPointer<WS_SERVICE_PROXY>): Unit
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFreeServiceProxy == "on"]
+public unsafe func Windows_WsFreeServiceProxy(serviceProxy: CPointer<WS_SERVICE_PROXY>): Unit {
+    WsFreeServiceProxy(serviceProxy)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFreeWriter == "on"]
+foreign {
     func WsFreeWriter(writer: CPointer<WS_XML_WRITER>): Unit
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsFreeWriter == "on"]
+public unsafe func Windows_WsFreeWriter(writer: CPointer<WS_XML_WRITER>): Unit {
+    WsFreeWriter(writer)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetChannelProperty == "on"]
+foreign {
     // param-hint: value bytes=param[3]
     // param-hint: error optional
     func WsGetChannelProperty(channel: CPointer<WS_CHANNEL>, id: WS_CHANNEL_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetChannelProperty == "on"]
+public unsafe func Windows_WsGetChannelProperty(channel: CPointer<WS_CHANNEL>, id: WS_CHANNEL_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsGetChannelProperty(channel, id, value, valueSize, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetCustomHeader == "on"]
+foreign {
     // param-hint: heap optional
     // param-hint: value bytes=param[7]
     // param-hint: headerAttributes optional
     // param-hint: error optional
     func WsGetCustomHeader(message: CPointer<WS_MESSAGE>, customHeaderDescription: CPointer<WS_ELEMENT_DESCRIPTIONAbi>, repeatingOption: WS_REPEATING_HEADER_OPTIONAbi, headerIndex: UInt32, readOption: WS_READ_OPTIONAbi, heap: CPointer<WS_HEAP>, value: CPointer<Unit>, valueSize: UInt32, headerAttributes: CPointer<UInt32>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetCustomHeader == "on"]
+public unsafe func Windows_WsGetCustomHeader(message: CPointer<WS_MESSAGE>, customHeaderDescription: CPointer<WS_ELEMENT_DESCRIPTIONAbi>, repeatingOption: WS_REPEATING_HEADER_OPTIONAbi, headerIndex: UInt32, readOption: WS_READ_OPTIONAbi, heap: CPointer<WS_HEAP>, value: CPointer<Unit>, valueSize: UInt32, headerAttributes: CPointer<UInt32>, error: CPointer<WS_ERROR>): Int32 {
+    return WsGetCustomHeader(message, customHeaderDescription, repeatingOption, headerIndex, readOption, heap, value, valueSize, headerAttributes, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetDictionary == "on"]
+foreign {
     // param-hint: error optional
     func WsGetDictionary(encoding: WS_ENCODINGAbi, dictionary: CPointer<CPointer<WS_XML_DICTIONARYAbi>>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetDictionary == "on"]
+public unsafe func Windows_WsGetDictionary(encoding: WS_ENCODINGAbi, dictionary: CPointer<CPointer<WS_XML_DICTIONARYAbi>>, error: CPointer<WS_ERROR>): Int32 {
+    return WsGetDictionary(encoding, dictionary, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetErrorProperty == "on"]
+foreign {
     // param-hint: buffer bytes=param[3]
     func WsGetErrorProperty(error: CPointer<WS_ERROR>, id: WS_ERROR_PROPERTY_IDAbi, buffer: CPointer<Unit>, bufferSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetErrorProperty == "on"]
+public unsafe func Windows_WsGetErrorProperty(error: CPointer<WS_ERROR>, id: WS_ERROR_PROPERTY_IDAbi, buffer: CPointer<Unit>, bufferSize: UInt32): Int32 {
+    return WsGetErrorProperty(error, id, buffer, bufferSize)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetErrorString == "on"]
+foreign {
     func WsGetErrorString(error: CPointer<WS_ERROR>, index: UInt32, string: CPointer<WS_STRINGAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetErrorString == "on"]
+public unsafe func Windows_WsGetErrorString(error: CPointer<WS_ERROR>, index: UInt32, string: CPointer<WS_STRINGAbi>): Int32 {
+    return WsGetErrorString(error, index, string)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetFaultErrorDetail == "on"]
+foreign {
     // param-hint: heap optional
     // param-hint: value bytes=param[5]
     func WsGetFaultErrorDetail(error: CPointer<WS_ERROR>, faultDetailDescription: CPointer<WS_FAULT_DETAIL_DESCRIPTIONAbi>, readOption: WS_READ_OPTIONAbi, heap: CPointer<WS_HEAP>, value: CPointer<Unit>, valueSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetFaultErrorDetail == "on"]
+public unsafe func Windows_WsGetFaultErrorDetail(error: CPointer<WS_ERROR>, faultDetailDescription: CPointer<WS_FAULT_DETAIL_DESCRIPTIONAbi>, readOption: WS_READ_OPTIONAbi, heap: CPointer<WS_HEAP>, value: CPointer<Unit>, valueSize: UInt32): Int32 {
+    return WsGetFaultErrorDetail(error, faultDetailDescription, readOption, heap, value, valueSize)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetFaultErrorProperty == "on"]
+foreign {
     // param-hint: buffer bytes=param[3]
     func WsGetFaultErrorProperty(error: CPointer<WS_ERROR>, id: WS_FAULT_ERROR_PROPERTY_IDAbi, buffer: CPointer<Unit>, bufferSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetFaultErrorProperty == "on"]
+public unsafe func Windows_WsGetFaultErrorProperty(error: CPointer<WS_ERROR>, id: WS_FAULT_ERROR_PROPERTY_IDAbi, buffer: CPointer<Unit>, bufferSize: UInt32): Int32 {
+    return WsGetFaultErrorProperty(error, id, buffer, bufferSize)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetHeader == "on"]
+foreign {
     // param-hint: heap optional
     // param-hint: value bytes=param[6]
     // param-hint: error optional
     func WsGetHeader(message: CPointer<WS_MESSAGE>, headerType: WS_HEADER_TYPEAbi, valueType: WS_TYPEAbi, readOption: WS_READ_OPTIONAbi, heap: CPointer<WS_HEAP>, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetHeader == "on"]
+public unsafe func Windows_WsGetHeader(message: CPointer<WS_MESSAGE>, headerType: WS_HEADER_TYPEAbi, valueType: WS_TYPEAbi, readOption: WS_READ_OPTIONAbi, heap: CPointer<WS_HEAP>, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsGetHeader(message, headerType, valueType, readOption, heap, value, valueSize, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetHeaderAttributes == "on"]
+foreign {
     // param-hint: error optional
     func WsGetHeaderAttributes(message: CPointer<WS_MESSAGE>, reader: CPointer<WS_XML_READER>, headerAttributes: CPointer<UInt32>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetHeaderAttributes == "on"]
+public unsafe func Windows_WsGetHeaderAttributes(message: CPointer<WS_MESSAGE>, reader: CPointer<WS_XML_READER>, headerAttributes: CPointer<UInt32>, error: CPointer<WS_ERROR>): Int32 {
+    return WsGetHeaderAttributes(message, reader, headerAttributes, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetHeapProperty == "on"]
+foreign {
     // param-hint: value bytes=param[3]
     // param-hint: error optional
     func WsGetHeapProperty(heap: CPointer<WS_HEAP>, id: WS_HEAP_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetHeapProperty == "on"]
+public unsafe func Windows_WsGetHeapProperty(heap: CPointer<WS_HEAP>, id: WS_HEAP_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsGetHeapProperty(heap, id, value, valueSize, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetListenerProperty == "on"]
+foreign {
     // param-hint: value bytes=param[3]
     // param-hint: error optional
     func WsGetListenerProperty(listener: CPointer<WS_LISTENER>, id: WS_LISTENER_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetListenerProperty == "on"]
+public unsafe func Windows_WsGetListenerProperty(listener: CPointer<WS_LISTENER>, id: WS_LISTENER_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsGetListenerProperty(listener, id, value, valueSize, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetMappedHeader == "on"]
+foreign {
     // param-hint: heap optional
     // param-hint: value bytes=param[8]
     // param-hint: error optional
     func WsGetMappedHeader(message: CPointer<WS_MESSAGE>, headerName: CPointer<WS_XML_STRINGAbi>, repeatingOption: WS_REPEATING_HEADER_OPTIONAbi, headerIndex: UInt32, valueType: WS_TYPEAbi, readOption: WS_READ_OPTIONAbi, heap: CPointer<WS_HEAP>, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetMappedHeader == "on"]
+public unsafe func Windows_WsGetMappedHeader(message: CPointer<WS_MESSAGE>, headerName: CPointer<WS_XML_STRINGAbi>, repeatingOption: WS_REPEATING_HEADER_OPTIONAbi, headerIndex: UInt32, valueType: WS_TYPEAbi, readOption: WS_READ_OPTIONAbi, heap: CPointer<WS_HEAP>, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsGetMappedHeader(message, headerName, repeatingOption, headerIndex, valueType, readOption, heap, value, valueSize, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetMessageProperty == "on"]
+foreign {
     // param-hint: value bytes=param[3]
     // param-hint: error optional
     func WsGetMessageProperty(message: CPointer<WS_MESSAGE>, id: WS_MESSAGE_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetMessageProperty == "on"]
+public unsafe func Windows_WsGetMessageProperty(message: CPointer<WS_MESSAGE>, id: WS_MESSAGE_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsGetMessageProperty(message, id, value, valueSize, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetMetadataEndpoints == "on"]
+foreign {
     // param-hint: error optional
     func WsGetMetadataEndpoints(metadata: CPointer<WS_METADATA>, endpoints: CPointer<WS_METADATA_ENDPOINTSAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetMetadataEndpoints == "on"]
+public unsafe func Windows_WsGetMetadataEndpoints(metadata: CPointer<WS_METADATA>, endpoints: CPointer<WS_METADATA_ENDPOINTSAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsGetMetadataEndpoints(metadata, endpoints, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetMetadataProperty == "on"]
+foreign {
     // param-hint: value bytes=param[3]
     // param-hint: error optional
     func WsGetMetadataProperty(metadata: CPointer<WS_METADATA>, id: WS_METADATA_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetMetadataProperty == "on"]
+public unsafe func Windows_WsGetMetadataProperty(metadata: CPointer<WS_METADATA>, id: WS_METADATA_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsGetMetadataProperty(metadata, id, value, valueSize, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetMissingMetadataDocumentAddress == "on"]
+foreign {
     // param-hint: error optional
     func WsGetMissingMetadataDocumentAddress(metadata: CPointer<WS_METADATA>, address: CPointer<CPointer<WS_ENDPOINT_ADDRESSAbi>>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetMissingMetadataDocumentAddress == "on"]
+public unsafe func Windows_WsGetMissingMetadataDocumentAddress(metadata: CPointer<WS_METADATA>, address: CPointer<CPointer<WS_ENDPOINT_ADDRESSAbi>>, error: CPointer<WS_ERROR>): Int32 {
+    return WsGetMissingMetadataDocumentAddress(metadata, address, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetNamespaceFromPrefix == "on"]
+foreign {
     // param-hint: error optional
     func WsGetNamespaceFromPrefix(reader: CPointer<WS_XML_READER>, prefix: CPointer<WS_XML_STRINGAbi>, required: Int32, ns: CPointer<CPointer<WS_XML_STRINGAbi>>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetNamespaceFromPrefix == "on"]
+public unsafe func Windows_WsGetNamespaceFromPrefix(reader: CPointer<WS_XML_READER>, prefix: CPointer<WS_XML_STRINGAbi>, required: Int32, ns: CPointer<CPointer<WS_XML_STRINGAbi>>, error: CPointer<WS_ERROR>): Int32 {
+    return WsGetNamespaceFromPrefix(reader, prefix, required, ns, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetOperationContextProperty == "on"]
+foreign {
     // param-hint: value bytes=param[3]
     // param-hint: error optional
     func WsGetOperationContextProperty(context: CPointer<WS_OPERATION_CONTEXT>, id: WS_OPERATION_CONTEXT_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetOperationContextProperty == "on"]
+public unsafe func Windows_WsGetOperationContextProperty(context: CPointer<WS_OPERATION_CONTEXT>, id: WS_OPERATION_CONTEXT_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsGetOperationContextProperty(context, id, value, valueSize, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetPolicyAlternativeCount == "on"]
+foreign {
     // param-hint: error optional
     func WsGetPolicyAlternativeCount(policy: CPointer<WS_POLICY>, count: CPointer<UInt32>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetPolicyAlternativeCount == "on"]
+public unsafe func Windows_WsGetPolicyAlternativeCount(policy: CPointer<WS_POLICY>, count: CPointer<UInt32>, error: CPointer<WS_ERROR>): Int32 {
+    return WsGetPolicyAlternativeCount(policy, count, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetPolicyProperty == "on"]
+foreign {
     // param-hint: value bytes=param[3]
     // param-hint: error optional
     func WsGetPolicyProperty(policy: CPointer<WS_POLICY>, id: WS_POLICY_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetPolicyProperty == "on"]
+public unsafe func Windows_WsGetPolicyProperty(policy: CPointer<WS_POLICY>, id: WS_POLICY_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsGetPolicyProperty(policy, id, value, valueSize, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetPrefixFromNamespace == "on"]
+foreign {
     // param-hint: error optional
     func WsGetPrefixFromNamespace(writer: CPointer<WS_XML_WRITER>, ns: CPointer<WS_XML_STRINGAbi>, required: Int32, prefix: CPointer<CPointer<WS_XML_STRINGAbi>>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetPrefixFromNamespace == "on"]
+public unsafe func Windows_WsGetPrefixFromNamespace(writer: CPointer<WS_XML_WRITER>, ns: CPointer<WS_XML_STRINGAbi>, required: Int32, prefix: CPointer<CPointer<WS_XML_STRINGAbi>>, error: CPointer<WS_ERROR>): Int32 {
+    return WsGetPrefixFromNamespace(writer, ns, required, prefix, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetReaderNode == "on"]
+foreign {
     // param-hint: error optional
     func WsGetReaderNode(xmlReader: CPointer<WS_XML_READER>, node: CPointer<CPointer<WS_XML_NODEAbi>>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetReaderNode == "on"]
+public unsafe func Windows_WsGetReaderNode(xmlReader: CPointer<WS_XML_READER>, node: CPointer<CPointer<WS_XML_NODEAbi>>, error: CPointer<WS_ERROR>): Int32 {
+    return WsGetReaderNode(xmlReader, node, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetReaderPosition == "on"]
+foreign {
     // param-hint: error optional
     func WsGetReaderPosition(reader: CPointer<WS_XML_READER>, nodePosition: CPointer<WS_XML_NODE_POSITIONAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetReaderPosition == "on"]
+public unsafe func Windows_WsGetReaderPosition(reader: CPointer<WS_XML_READER>, nodePosition: CPointer<WS_XML_NODE_POSITIONAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsGetReaderPosition(reader, nodePosition, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetReaderProperty == "on"]
+foreign {
     // param-hint: value bytes=param[3]
     // param-hint: error optional
     func WsGetReaderProperty(reader: CPointer<WS_XML_READER>, id: WS_XML_READER_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetReaderProperty == "on"]
+public unsafe func Windows_WsGetReaderProperty(reader: CPointer<WS_XML_READER>, id: WS_XML_READER_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsGetReaderProperty(reader, id, value, valueSize, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetSecurityContextProperty == "on"]
+foreign {
     // param-hint: value bytes=param[3]
     // param-hint: error optional
     func WsGetSecurityContextProperty(securityContext: CPointer<WS_SECURITY_CONTEXT>, id: WS_SECURITY_CONTEXT_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetSecurityContextProperty == "on"]
+public unsafe func Windows_WsGetSecurityContextProperty(securityContext: CPointer<WS_SECURITY_CONTEXT>, id: WS_SECURITY_CONTEXT_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsGetSecurityContextProperty(securityContext, id, value, valueSize, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetSecurityTokenProperty == "on"]
+foreign {
     // param-hint: value bytes=param[3]
     // param-hint: heap optional
     // param-hint: error optional
     func WsGetSecurityTokenProperty(securityToken: CPointer<WS_SECURITY_TOKEN>, id: WS_SECURITY_TOKEN_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32, heap: CPointer<WS_HEAP>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetSecurityTokenProperty == "on"]
+public unsafe func Windows_WsGetSecurityTokenProperty(securityToken: CPointer<WS_SECURITY_TOKEN>, id: WS_SECURITY_TOKEN_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32, heap: CPointer<WS_HEAP>, error: CPointer<WS_ERROR>): Int32 {
+    return WsGetSecurityTokenProperty(securityToken, id, value, valueSize, heap, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetServiceHostProperty == "on"]
+foreign {
     // param-hint: value bytes=param[3]
     // param-hint: error optional
     func WsGetServiceHostProperty(serviceHost: CPointer<WS_SERVICE_HOST>, id: WS_SERVICE_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetServiceHostProperty == "on"]
+public unsafe func Windows_WsGetServiceHostProperty(serviceHost: CPointer<WS_SERVICE_HOST>, id: WS_SERVICE_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsGetServiceHostProperty(serviceHost, id, value, valueSize, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetServiceProxyProperty == "on"]
+foreign {
     // param-hint: value bytes=param[3]
     // param-hint: error optional
     func WsGetServiceProxyProperty(serviceProxy: CPointer<WS_SERVICE_PROXY>, id: WS_PROXY_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetServiceProxyProperty == "on"]
+public unsafe func Windows_WsGetServiceProxyProperty(serviceProxy: CPointer<WS_SERVICE_PROXY>, id: WS_PROXY_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsGetServiceProxyProperty(serviceProxy, id, value, valueSize, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetWriterPosition == "on"]
+foreign {
     // param-hint: error optional
     func WsGetWriterPosition(writer: CPointer<WS_XML_WRITER>, nodePosition: CPointer<WS_XML_NODE_POSITIONAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetWriterPosition == "on"]
+public unsafe func Windows_WsGetWriterPosition(writer: CPointer<WS_XML_WRITER>, nodePosition: CPointer<WS_XML_NODE_POSITIONAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsGetWriterPosition(writer, nodePosition, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetWriterProperty == "on"]
+foreign {
     // param-hint: value bytes=param[3]
     // param-hint: error optional
     func WsGetWriterProperty(writer: CPointer<WS_XML_WRITER>, id: WS_XML_WRITER_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetWriterProperty == "on"]
+public unsafe func Windows_WsGetWriterProperty(writer: CPointer<WS_XML_WRITER>, id: WS_XML_WRITER_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsGetWriterProperty(writer, id, value, valueSize, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetXmlAttribute == "on"]
+foreign {
     // param-hint: valueChars optional
     // param-hint: error optional
     func WsGetXmlAttribute(reader: CPointer<WS_XML_READER>, localName: CPointer<WS_XML_STRINGAbi>, heap: CPointer<WS_HEAP>, valueChars: CPointer<CPointer<UInt16>>, valueCharCount: CPointer<UInt32>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsGetXmlAttribute == "on"]
+public unsafe func Windows_WsGetXmlAttribute(reader: CPointer<WS_XML_READER>, localName: CPointer<WS_XML_STRINGAbi>, heap: CPointer<WS_HEAP>, valueChars: CPointer<CPointer<UInt16>>, valueCharCount: CPointer<UInt32>, error: CPointer<WS_ERROR>): Int32 {
+    return WsGetXmlAttribute(reader, localName, heap, valueChars, valueCharCount, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsInitializeMessage == "on"]
+foreign {
     // param-hint: sourceMessage optional
     // param-hint: error optional
     func WsInitializeMessage(message: CPointer<WS_MESSAGE>, initialization: WS_MESSAGE_INITIALIZATIONAbi, sourceMessage: CPointer<WS_MESSAGE>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsInitializeMessage == "on"]
+public unsafe func Windows_WsInitializeMessage(message: CPointer<WS_MESSAGE>, initialization: WS_MESSAGE_INITIALIZATIONAbi, sourceMessage: CPointer<WS_MESSAGE>, error: CPointer<WS_ERROR>): Int32 {
+    return WsInitializeMessage(message, initialization, sourceMessage, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsMarkHeaderAsUnderstood == "on"]
+foreign {
     // param-hint: error optional
     func WsMarkHeaderAsUnderstood(message: CPointer<WS_MESSAGE>, headerPosition: CPointer<WS_XML_NODE_POSITIONAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsMarkHeaderAsUnderstood == "on"]
+public unsafe func Windows_WsMarkHeaderAsUnderstood(message: CPointer<WS_MESSAGE>, headerPosition: CPointer<WS_XML_NODE_POSITIONAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsMarkHeaderAsUnderstood(message, headerPosition, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsMatchPolicyAlternative == "on"]
+foreign {
     // param-hint: error optional
     func WsMatchPolicyAlternative(policy: CPointer<WS_POLICY>, alternativeIndex: UInt32, policyConstraints: CPointer<WS_POLICY_CONSTRAINTSAbi>, matchRequired: Int32, heap: CPointer<WS_HEAP>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsMatchPolicyAlternative == "on"]
+public unsafe func Windows_WsMatchPolicyAlternative(policy: CPointer<WS_POLICY>, alternativeIndex: UInt32, policyConstraints: CPointer<WS_POLICY_CONSTRAINTSAbi>, matchRequired: Int32, heap: CPointer<WS_HEAP>, error: CPointer<WS_ERROR>): Int32 {
+    return WsMatchPolicyAlternative(policy, alternativeIndex, policyConstraints, matchRequired, heap, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsMoveReader == "on"]
+foreign {
     // param-hint: found optional
     // param-hint: error optional
     func WsMoveReader(reader: CPointer<WS_XML_READER>, moveTo: WS_MOVE_TOAbi, found: CPointer<Int32>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsMoveReader == "on"]
+public unsafe func Windows_WsMoveReader(reader: CPointer<WS_XML_READER>, moveTo: WS_MOVE_TOAbi, found: CPointer<Int32>, error: CPointer<WS_ERROR>): Int32 {
+    return WsMoveReader(reader, moveTo, found, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsMoveWriter == "on"]
+foreign {
     // param-hint: found optional
     // param-hint: error optional
     func WsMoveWriter(writer: CPointer<WS_XML_WRITER>, moveTo: WS_MOVE_TOAbi, found: CPointer<Int32>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsMoveWriter == "on"]
+public unsafe func Windows_WsMoveWriter(writer: CPointer<WS_XML_WRITER>, moveTo: WS_MOVE_TOAbi, found: CPointer<Int32>, error: CPointer<WS_ERROR>): Int32 {
+    return WsMoveWriter(writer, moveTo, found, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsOpenChannel == "on"]
+foreign {
     // param-hint: asyncContext optional
     // param-hint: error optional
     func WsOpenChannel(channel: CPointer<WS_CHANNEL>, endpointAddress: CPointer<WS_ENDPOINT_ADDRESSAbi>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsOpenChannel == "on"]
+public unsafe func Windows_WsOpenChannel(channel: CPointer<WS_CHANNEL>, endpointAddress: CPointer<WS_ENDPOINT_ADDRESSAbi>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsOpenChannel(channel, endpointAddress, asyncContext, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsOpenListener == "on"]
+foreign {
     // param-hint: asyncContext optional
     // param-hint: error optional
     func WsOpenListener(listener: CPointer<WS_LISTENER>, url: CPointer<WS_STRINGAbi>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsOpenListener == "on"]
+public unsafe func Windows_WsOpenListener(listener: CPointer<WS_LISTENER>, url: CPointer<WS_STRINGAbi>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsOpenListener(listener, url, asyncContext, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsOpenServiceHost == "on"]
+foreign {
     // param-hint: asyncContext optional
     // param-hint: error optional
     func WsOpenServiceHost(serviceHost: CPointer<WS_SERVICE_HOST>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsOpenServiceHost == "on"]
+public unsafe func Windows_WsOpenServiceHost(serviceHost: CPointer<WS_SERVICE_HOST>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsOpenServiceHost(serviceHost, asyncContext, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsOpenServiceProxy == "on"]
+foreign {
     // param-hint: asyncContext optional
     // param-hint: error optional
     func WsOpenServiceProxy(serviceProxy: CPointer<WS_SERVICE_PROXY>, address: CPointer<WS_ENDPOINT_ADDRESSAbi>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsOpenServiceProxy == "on"]
+public unsafe func Windows_WsOpenServiceProxy(serviceProxy: CPointer<WS_SERVICE_PROXY>, address: CPointer<WS_ENDPOINT_ADDRESSAbi>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsOpenServiceProxy(serviceProxy, address, asyncContext, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsPullBytes == "on"]
+foreign {
     // param-hint: callbackState optional
     // param-hint: error optional
     func WsPullBytes(writer: CPointer<WS_XML_WRITER>, callback: WS_PULL_BYTES_CALLBACK, callbackState: CPointer<Unit>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsPullBytes == "on"]
+public unsafe func Windows_WsPullBytes(writer: CPointer<WS_XML_WRITER>, callback: WS_PULL_BYTES_CALLBACK, callbackState: CPointer<Unit>, error: CPointer<WS_ERROR>): Int32 {
+    return WsPullBytes(writer, callback, callbackState, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsPushBytes == "on"]
+foreign {
     // param-hint: callbackState optional
     // param-hint: error optional
     func WsPushBytes(writer: CPointer<WS_XML_WRITER>, callback: WS_PUSH_BYTES_CALLBACK, callbackState: CPointer<Unit>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsPushBytes == "on"]
+public unsafe func Windows_WsPushBytes(writer: CPointer<WS_XML_WRITER>, callback: WS_PUSH_BYTES_CALLBACK, callbackState: CPointer<Unit>, error: CPointer<WS_ERROR>): Int32 {
+    return WsPushBytes(writer, callback, callbackState, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadArray == "on"]
+foreign {
     // param-hint: array bytes=param[5] optional
     // param-hint: error optional
     func WsReadArray(reader: CPointer<WS_XML_READER>, localName: CPointer<WS_XML_STRINGAbi>, ns: CPointer<WS_XML_STRINGAbi>, valueType: WS_VALUE_TYPEAbi, array: CPointer<Unit>, arraySize: UInt32, itemOffset: UInt32, itemCount: UInt32, actualItemCount: CPointer<UInt32>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadArray == "on"]
+public unsafe func Windows_WsReadArray(reader: CPointer<WS_XML_READER>, localName: CPointer<WS_XML_STRINGAbi>, ns: CPointer<WS_XML_STRINGAbi>, valueType: WS_VALUE_TYPEAbi, array: CPointer<Unit>, arraySize: UInt32, itemOffset: UInt32, itemCount: UInt32, actualItemCount: CPointer<UInt32>, error: CPointer<WS_ERROR>): Int32 {
+    return WsReadArray(reader, localName, ns, valueType, array, arraySize, itemOffset, itemCount, actualItemCount, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadAttribute == "on"]
+foreign {
     // param-hint: heap optional
     // param-hint: value bytes=param[5]
     // param-hint: error optional
     func WsReadAttribute(reader: CPointer<WS_XML_READER>, attributeDescription: CPointer<WS_ATTRIBUTE_DESCRIPTIONAbi>, readOption: WS_READ_OPTIONAbi, heap: CPointer<WS_HEAP>, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadAttribute == "on"]
+public unsafe func Windows_WsReadAttribute(reader: CPointer<WS_XML_READER>, attributeDescription: CPointer<WS_ATTRIBUTE_DESCRIPTIONAbi>, readOption: WS_READ_OPTIONAbi, heap: CPointer<WS_HEAP>, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsReadAttribute(reader, attributeDescription, readOption, heap, value, valueSize, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadBody == "on"]
+foreign {
     // param-hint: heap optional
     // param-hint: value bytes=param[5]
     // param-hint: error optional
     func WsReadBody(message: CPointer<WS_MESSAGE>, bodyDescription: CPointer<WS_ELEMENT_DESCRIPTIONAbi>, readOption: WS_READ_OPTIONAbi, heap: CPointer<WS_HEAP>, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadBody == "on"]
+public unsafe func Windows_WsReadBody(message: CPointer<WS_MESSAGE>, bodyDescription: CPointer<WS_ELEMENT_DESCRIPTIONAbi>, readOption: WS_READ_OPTIONAbi, heap: CPointer<WS_HEAP>, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsReadBody(message, bodyDescription, readOption, heap, value, valueSize, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadBytes == "on"]
+foreign {
     // param-hint: bytes bytes=param[2]
     // param-hint: error optional
     func WsReadBytes(reader: CPointer<WS_XML_READER>, bytes: CPointer<Unit>, maxByteCount: UInt32, actualByteCount: CPointer<UInt32>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadBytes == "on"]
+public unsafe func Windows_WsReadBytes(reader: CPointer<WS_XML_READER>, bytes: CPointer<Unit>, maxByteCount: UInt32, actualByteCount: CPointer<UInt32>, error: CPointer<WS_ERROR>): Int32 {
+    return WsReadBytes(reader, bytes, maxByteCount, actualByteCount, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadChars == "on"]
+foreign {
     // param-hint: chars len=param[2]
     // param-hint: error optional
     func WsReadChars(reader: CPointer<WS_XML_READER>, chars: CPointer<UInt16>, maxCharCount: UInt32, actualCharCount: CPointer<UInt32>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadChars == "on"]
+public unsafe func Windows_WsReadChars(reader: CPointer<WS_XML_READER>, chars: CPointer<UInt16>, maxCharCount: UInt32, actualCharCount: CPointer<UInt32>, error: CPointer<WS_ERROR>): Int32 {
+    return WsReadChars(reader, chars, maxCharCount, actualCharCount, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadCharsUtf8 == "on"]
+foreign {
     // param-hint: bytes len=param[2]
     // param-hint: error optional
     func WsReadCharsUtf8(reader: CPointer<WS_XML_READER>, bytes: CPointer<UInt8>, maxByteCount: UInt32, actualByteCount: CPointer<UInt32>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadCharsUtf8 == "on"]
+public unsafe func Windows_WsReadCharsUtf8(reader: CPointer<WS_XML_READER>, bytes: CPointer<UInt8>, maxByteCount: UInt32, actualByteCount: CPointer<UInt32>, error: CPointer<WS_ERROR>): Int32 {
+    return WsReadCharsUtf8(reader, bytes, maxByteCount, actualByteCount, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadElement == "on"]
+foreign {
     // param-hint: heap optional
     // param-hint: value bytes=param[5]
     // param-hint: error optional
     func WsReadElement(reader: CPointer<WS_XML_READER>, elementDescription: CPointer<WS_ELEMENT_DESCRIPTIONAbi>, readOption: WS_READ_OPTIONAbi, heap: CPointer<WS_HEAP>, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadElement == "on"]
+public unsafe func Windows_WsReadElement(reader: CPointer<WS_XML_READER>, elementDescription: CPointer<WS_ELEMENT_DESCRIPTIONAbi>, readOption: WS_READ_OPTIONAbi, heap: CPointer<WS_HEAP>, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsReadElement(reader, elementDescription, readOption, heap, value, valueSize, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadEndAttribute == "on"]
+foreign {
     // param-hint: error optional
     func WsReadEndAttribute(reader: CPointer<WS_XML_READER>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadEndAttribute == "on"]
+public unsafe func Windows_WsReadEndAttribute(reader: CPointer<WS_XML_READER>, error: CPointer<WS_ERROR>): Int32 {
+    return WsReadEndAttribute(reader, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadEndElement == "on"]
+foreign {
     // param-hint: error optional
     func WsReadEndElement(reader: CPointer<WS_XML_READER>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadEndElement == "on"]
+public unsafe func Windows_WsReadEndElement(reader: CPointer<WS_XML_READER>, error: CPointer<WS_ERROR>): Int32 {
+    return WsReadEndElement(reader, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadEndpointAddressExtension == "on"]
+foreign {
     // param-hint: value bytes=param[6]
     // param-hint: error optional
     func WsReadEndpointAddressExtension(reader: CPointer<WS_XML_READER>, endpointAddress: CPointer<WS_ENDPOINT_ADDRESSAbi>, extensionType: WS_ENDPOINT_ADDRESS_EXTENSION_TYPEAbi, readOption: WS_READ_OPTIONAbi, heap: CPointer<WS_HEAP>, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadEndpointAddressExtension == "on"]
+public unsafe func Windows_WsReadEndpointAddressExtension(reader: CPointer<WS_XML_READER>, endpointAddress: CPointer<WS_ENDPOINT_ADDRESSAbi>, extensionType: WS_ENDPOINT_ADDRESS_EXTENSION_TYPEAbi, readOption: WS_READ_OPTIONAbi, heap: CPointer<WS_HEAP>, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsReadEndpointAddressExtension(reader, endpointAddress, extensionType, readOption, heap, value, valueSize, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadEnvelopeEnd == "on"]
+foreign {
     // param-hint: error optional
     func WsReadEnvelopeEnd(message: CPointer<WS_MESSAGE>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadEnvelopeEnd == "on"]
+public unsafe func Windows_WsReadEnvelopeEnd(message: CPointer<WS_MESSAGE>, error: CPointer<WS_ERROR>): Int32 {
+    return WsReadEnvelopeEnd(message, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadEnvelopeStart == "on"]
+foreign {
     // param-hint: doneCallback optional
     // param-hint: doneCallbackState optional
     // param-hint: error optional
     func WsReadEnvelopeStart(message: CPointer<WS_MESSAGE>, reader: CPointer<WS_XML_READER>, doneCallback: WS_MESSAGE_DONE_CALLBACK, doneCallbackState: CPointer<Unit>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadEnvelopeStart == "on"]
+public unsafe func Windows_WsReadEnvelopeStart(message: CPointer<WS_MESSAGE>, reader: CPointer<WS_XML_READER>, doneCallback: WS_MESSAGE_DONE_CALLBACK, doneCallbackState: CPointer<Unit>, error: CPointer<WS_ERROR>): Int32 {
+    return WsReadEnvelopeStart(message, reader, doneCallback, doneCallbackState, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadMessageEnd == "on"]
+foreign {
     // param-hint: asyncContext optional
     // param-hint: error optional
     func WsReadMessageEnd(channel: CPointer<WS_CHANNEL>, message: CPointer<WS_MESSAGE>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadMessageEnd == "on"]
+public unsafe func Windows_WsReadMessageEnd(channel: CPointer<WS_CHANNEL>, message: CPointer<WS_MESSAGE>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsReadMessageEnd(channel, message, asyncContext, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadMessageStart == "on"]
+foreign {
     // param-hint: asyncContext optional
     // param-hint: error optional
     func WsReadMessageStart(channel: CPointer<WS_CHANNEL>, message: CPointer<WS_MESSAGE>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadMessageStart == "on"]
+public unsafe func Windows_WsReadMessageStart(channel: CPointer<WS_CHANNEL>, message: CPointer<WS_MESSAGE>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsReadMessageStart(channel, message, asyncContext, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadMetadata == "on"]
+foreign {
     // param-hint: error optional
     func WsReadMetadata(metadata: CPointer<WS_METADATA>, reader: CPointer<WS_XML_READER>, url: CPointer<WS_STRINGAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadMetadata == "on"]
+public unsafe func Windows_WsReadMetadata(metadata: CPointer<WS_METADATA>, reader: CPointer<WS_XML_READER>, url: CPointer<WS_STRINGAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsReadMetadata(metadata, reader, url, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadNode == "on"]
+foreign {
     // param-hint: error optional
     func WsReadNode(reader: CPointer<WS_XML_READER>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadNode == "on"]
+public unsafe func Windows_WsReadNode(reader: CPointer<WS_XML_READER>, error: CPointer<WS_ERROR>): Int32 {
+    return WsReadNode(reader, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadQualifiedName == "on"]
+foreign {
     // param-hint: prefix optional
     // param-hint: ns optional
     // param-hint: error optional
     func WsReadQualifiedName(reader: CPointer<WS_XML_READER>, heap: CPointer<WS_HEAP>, prefix: CPointer<WS_XML_STRINGAbi>, localName: CPointer<WS_XML_STRINGAbi>, ns: CPointer<WS_XML_STRINGAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadQualifiedName == "on"]
+public unsafe func Windows_WsReadQualifiedName(reader: CPointer<WS_XML_READER>, heap: CPointer<WS_HEAP>, prefix: CPointer<WS_XML_STRINGAbi>, localName: CPointer<WS_XML_STRINGAbi>, ns: CPointer<WS_XML_STRINGAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsReadQualifiedName(reader, heap, prefix, localName, ns, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadStartAttribute == "on"]
+foreign {
     // param-hint: error optional
     func WsReadStartAttribute(reader: CPointer<WS_XML_READER>, attributeIndex: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadStartAttribute == "on"]
+public unsafe func Windows_WsReadStartAttribute(reader: CPointer<WS_XML_READER>, attributeIndex: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsReadStartAttribute(reader, attributeIndex, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadStartElement == "on"]
+foreign {
     // param-hint: error optional
     func WsReadStartElement(reader: CPointer<WS_XML_READER>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadStartElement == "on"]
+public unsafe func Windows_WsReadStartElement(reader: CPointer<WS_XML_READER>, error: CPointer<WS_ERROR>): Int32 {
+    return WsReadStartElement(reader, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadToStartElement == "on"]
+foreign {
     // param-hint: localName optional
     // param-hint: ns optional
     // param-hint: found optional
     // param-hint: error optional
     func WsReadToStartElement(reader: CPointer<WS_XML_READER>, localName: CPointer<WS_XML_STRINGAbi>, ns: CPointer<WS_XML_STRINGAbi>, found: CPointer<Int32>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadToStartElement == "on"]
+public unsafe func Windows_WsReadToStartElement(reader: CPointer<WS_XML_READER>, localName: CPointer<WS_XML_STRINGAbi>, ns: CPointer<WS_XML_STRINGAbi>, found: CPointer<Int32>, error: CPointer<WS_ERROR>): Int32 {
+    return WsReadToStartElement(reader, localName, ns, found, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadType == "on"]
+foreign {
     // param-hint: typeDescription optional
     // param-hint: heap optional
     // param-hint: value bytes=param[7]
     // param-hint: error optional
     func WsReadType(reader: CPointer<WS_XML_READER>, typeMapping: WS_TYPE_MAPPINGAbi, type_: WS_TYPEAbi, typeDescription: CPointer<Unit>, readOption: WS_READ_OPTIONAbi, heap: CPointer<WS_HEAP>, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadType == "on"]
+public unsafe func Windows_WsReadType(reader: CPointer<WS_XML_READER>, typeMapping: WS_TYPE_MAPPINGAbi, type_: WS_TYPEAbi, typeDescription: CPointer<Unit>, readOption: WS_READ_OPTIONAbi, heap: CPointer<WS_HEAP>, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsReadType(reader, typeMapping, type_, typeDescription, readOption, heap, value, valueSize, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadValue == "on"]
+foreign {
     // param-hint: value bytes=param[3]
     // param-hint: error optional
     func WsReadValue(reader: CPointer<WS_XML_READER>, valueType: WS_VALUE_TYPEAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadValue == "on"]
+public unsafe func Windows_WsReadValue(reader: CPointer<WS_XML_READER>, valueType: WS_VALUE_TYPEAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsReadValue(reader, valueType, value, valueSize, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadXmlBuffer == "on"]
+foreign {
     // param-hint: error optional
     func WsReadXmlBuffer(reader: CPointer<WS_XML_READER>, heap: CPointer<WS_HEAP>, xmlBuffer: CPointer<CPointer<WS_XML_BUFFER>>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadXmlBuffer == "on"]
+public unsafe func Windows_WsReadXmlBuffer(reader: CPointer<WS_XML_READER>, heap: CPointer<WS_HEAP>, xmlBuffer: CPointer<CPointer<WS_XML_BUFFER>>, error: CPointer<WS_ERROR>): Int32 {
+    return WsReadXmlBuffer(reader, heap, xmlBuffer, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadXmlBufferFromBytes == "on"]
+foreign {
     // param-hint: encoding optional
     // param-hint: properties len=param[3] optional
     // param-hint: bytes bytes=param[5]
     // param-hint: error optional
     func WsReadXmlBufferFromBytes(reader: CPointer<WS_XML_READER>, encoding: CPointer<WS_XML_READER_ENCODINGAbi>, properties: CPointer<WS_XML_READER_PROPERTYAbi>, propertyCount: UInt32, bytes: CPointer<Unit>, byteCount: UInt32, heap: CPointer<WS_HEAP>, xmlBuffer: CPointer<CPointer<WS_XML_BUFFER>>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReadXmlBufferFromBytes == "on"]
+public unsafe func Windows_WsReadXmlBufferFromBytes(reader: CPointer<WS_XML_READER>, encoding: CPointer<WS_XML_READER_ENCODINGAbi>, properties: CPointer<WS_XML_READER_PROPERTYAbi>, propertyCount: UInt32, bytes: CPointer<Unit>, byteCount: UInt32, heap: CPointer<WS_HEAP>, xmlBuffer: CPointer<CPointer<WS_XML_BUFFER>>, error: CPointer<WS_ERROR>): Int32 {
+    return WsReadXmlBufferFromBytes(reader, encoding, properties, propertyCount, bytes, byteCount, heap, xmlBuffer, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReceiveMessage == "on"]
+foreign {
     // param-hint: messageDescriptions len=param[3]
     // param-hint: heap optional
     // param-hint: value bytes=param[8]
@@ -17229,188 +18369,778 @@ foreign {
     // param-hint: asyncContext optional
     // param-hint: error optional
     func WsReceiveMessage(channel: CPointer<WS_CHANNEL>, message: CPointer<WS_MESSAGE>, messageDescriptions: CPointer<CPointer<WS_MESSAGE_DESCRIPTIONAbi>>, messageDescriptionCount: UInt32, receiveOption: WS_RECEIVE_OPTIONAbi, readBodyOption: WS_READ_OPTIONAbi, heap: CPointer<WS_HEAP>, value: CPointer<Unit>, valueSize: UInt32, index: CPointer<UInt32>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsReceiveMessage == "on"]
+public unsafe func Windows_WsReceiveMessage(channel: CPointer<WS_CHANNEL>, message: CPointer<WS_MESSAGE>, messageDescriptions: CPointer<CPointer<WS_MESSAGE_DESCRIPTIONAbi>>, messageDescriptionCount: UInt32, receiveOption: WS_RECEIVE_OPTIONAbi, readBodyOption: WS_READ_OPTIONAbi, heap: CPointer<WS_HEAP>, value: CPointer<Unit>, valueSize: UInt32, index: CPointer<UInt32>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsReceiveMessage(channel, message, messageDescriptions, messageDescriptionCount, receiveOption, readBodyOption, heap, value, valueSize, index, asyncContext, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsRegisterOperationForCancel == "on"]
+foreign {
     // param-hint: freestateCallback optional
     // param-hint: userState optional
     // param-hint: error optional
     func WsRegisterOperationForCancel(context: CPointer<WS_OPERATION_CONTEXT>, cancelCallback: WS_OPERATION_CANCEL_CALLBACK, freestateCallback: WS_OPERATION_FREE_STATE_CALLBACK, userState: CPointer<Unit>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsRegisterOperationForCancel == "on"]
+public unsafe func Windows_WsRegisterOperationForCancel(context: CPointer<WS_OPERATION_CONTEXT>, cancelCallback: WS_OPERATION_CANCEL_CALLBACK, freestateCallback: WS_OPERATION_FREE_STATE_CALLBACK, userState: CPointer<Unit>, error: CPointer<WS_ERROR>): Int32 {
+    return WsRegisterOperationForCancel(context, cancelCallback, freestateCallback, userState, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsRemoveCustomHeader == "on"]
+foreign {
     // param-hint: error optional
     func WsRemoveCustomHeader(message: CPointer<WS_MESSAGE>, headerName: CPointer<WS_XML_STRINGAbi>, headerNs: CPointer<WS_XML_STRINGAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsRemoveCustomHeader == "on"]
+public unsafe func Windows_WsRemoveCustomHeader(message: CPointer<WS_MESSAGE>, headerName: CPointer<WS_XML_STRINGAbi>, headerNs: CPointer<WS_XML_STRINGAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsRemoveCustomHeader(message, headerName, headerNs, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsRemoveHeader == "on"]
+foreign {
     // param-hint: error optional
     func WsRemoveHeader(message: CPointer<WS_MESSAGE>, headerType: WS_HEADER_TYPEAbi, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsRemoveHeader == "on"]
+public unsafe func Windows_WsRemoveHeader(message: CPointer<WS_MESSAGE>, headerType: WS_HEADER_TYPEAbi, error: CPointer<WS_ERROR>): Int32 {
+    return WsRemoveHeader(message, headerType, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsRemoveMappedHeader == "on"]
+foreign {
     // param-hint: error optional
     func WsRemoveMappedHeader(message: CPointer<WS_MESSAGE>, headerName: CPointer<WS_XML_STRINGAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsRemoveMappedHeader == "on"]
+public unsafe func Windows_WsRemoveMappedHeader(message: CPointer<WS_MESSAGE>, headerName: CPointer<WS_XML_STRINGAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsRemoveMappedHeader(message, headerName, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsRemoveNode == "on"]
+foreign {
     // param-hint: error optional
     func WsRemoveNode(nodePosition: CPointer<WS_XML_NODE_POSITIONAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsRemoveNode == "on"]
+public unsafe func Windows_WsRemoveNode(nodePosition: CPointer<WS_XML_NODE_POSITIONAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsRemoveNode(nodePosition, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsRequestReply == "on"]
+foreign {
     // param-hint: requestBodyValue bytes=param[5] optional
     // param-hint: heap optional
     // param-hint: value bytes=param[11] optional
     // param-hint: asyncContext optional
     // param-hint: error optional
     func WsRequestReply(channel: CPointer<WS_CHANNEL>, requestMessage: CPointer<WS_MESSAGE>, requestMessageDescription: CPointer<WS_MESSAGE_DESCRIPTIONAbi>, writeOption: WS_WRITE_OPTIONAbi, requestBodyValue: CPointer<Unit>, requestBodyValueSize: UInt32, replyMessage: CPointer<WS_MESSAGE>, replyMessageDescription: CPointer<WS_MESSAGE_DESCRIPTIONAbi>, readOption: WS_READ_OPTIONAbi, heap: CPointer<WS_HEAP>, value: CPointer<Unit>, valueSize: UInt32, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsRequestReply == "on"]
+public unsafe func Windows_WsRequestReply(channel: CPointer<WS_CHANNEL>, requestMessage: CPointer<WS_MESSAGE>, requestMessageDescription: CPointer<WS_MESSAGE_DESCRIPTIONAbi>, writeOption: WS_WRITE_OPTIONAbi, requestBodyValue: CPointer<Unit>, requestBodyValueSize: UInt32, replyMessage: CPointer<WS_MESSAGE>, replyMessageDescription: CPointer<WS_MESSAGE_DESCRIPTIONAbi>, readOption: WS_READ_OPTIONAbi, heap: CPointer<WS_HEAP>, value: CPointer<Unit>, valueSize: UInt32, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsRequestReply(channel, requestMessage, requestMessageDescription, writeOption, requestBodyValue, requestBodyValueSize, replyMessage, replyMessageDescription, readOption, heap, value, valueSize, asyncContext, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsRequestSecurityToken == "on"]
+foreign {
     // param-hint: properties len=param[2] optional
     // param-hint: asyncContext optional
     // param-hint: error optional
     func WsRequestSecurityToken(channel: CPointer<WS_CHANNEL>, properties: CPointer<WS_REQUEST_SECURITY_TOKEN_PROPERTYAbi>, propertyCount: UInt32, token: CPointer<CPointer<WS_SECURITY_TOKEN>>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsRequestSecurityToken == "on"]
+public unsafe func Windows_WsRequestSecurityToken(channel: CPointer<WS_CHANNEL>, properties: CPointer<WS_REQUEST_SECURITY_TOKEN_PROPERTYAbi>, propertyCount: UInt32, token: CPointer<CPointer<WS_SECURITY_TOKEN>>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsRequestSecurityToken(channel, properties, propertyCount, token, asyncContext, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsResetChannel == "on"]
+foreign {
     // param-hint: error optional
     func WsResetChannel(channel: CPointer<WS_CHANNEL>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsResetChannel == "on"]
+public unsafe func Windows_WsResetChannel(channel: CPointer<WS_CHANNEL>, error: CPointer<WS_ERROR>): Int32 {
+    return WsResetChannel(channel, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsResetError == "on"]
+foreign {
     func WsResetError(error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsResetError == "on"]
+public unsafe func Windows_WsResetError(error: CPointer<WS_ERROR>): Int32 {
+    return WsResetError(error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsResetHeap == "on"]
+foreign {
     // param-hint: error optional
     func WsResetHeap(heap: CPointer<WS_HEAP>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsResetHeap == "on"]
+public unsafe func Windows_WsResetHeap(heap: CPointer<WS_HEAP>, error: CPointer<WS_ERROR>): Int32 {
+    return WsResetHeap(heap, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsResetListener == "on"]
+foreign {
     // param-hint: error optional
     func WsResetListener(listener: CPointer<WS_LISTENER>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsResetListener == "on"]
+public unsafe func Windows_WsResetListener(listener: CPointer<WS_LISTENER>, error: CPointer<WS_ERROR>): Int32 {
+    return WsResetListener(listener, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsResetMessage == "on"]
+foreign {
     // param-hint: error optional
     func WsResetMessage(message: CPointer<WS_MESSAGE>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsResetMessage == "on"]
+public unsafe func Windows_WsResetMessage(message: CPointer<WS_MESSAGE>, error: CPointer<WS_ERROR>): Int32 {
+    return WsResetMessage(message, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsResetMetadata == "on"]
+foreign {
     // param-hint: error optional
     func WsResetMetadata(metadata: CPointer<WS_METADATA>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsResetMetadata == "on"]
+public unsafe func Windows_WsResetMetadata(metadata: CPointer<WS_METADATA>, error: CPointer<WS_ERROR>): Int32 {
+    return WsResetMetadata(metadata, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsResetServiceHost == "on"]
+foreign {
     // param-hint: error optional
     func WsResetServiceHost(serviceHost: CPointer<WS_SERVICE_HOST>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsResetServiceHost == "on"]
+public unsafe func Windows_WsResetServiceHost(serviceHost: CPointer<WS_SERVICE_HOST>, error: CPointer<WS_ERROR>): Int32 {
+    return WsResetServiceHost(serviceHost, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsResetServiceProxy == "on"]
+foreign {
     // param-hint: error optional
     func WsResetServiceProxy(serviceProxy: CPointer<WS_SERVICE_PROXY>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsResetServiceProxy == "on"]
+public unsafe func Windows_WsResetServiceProxy(serviceProxy: CPointer<WS_SERVICE_PROXY>, error: CPointer<WS_ERROR>): Int32 {
+    return WsResetServiceProxy(serviceProxy, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsRevokeSecurityContext == "on"]
+foreign {
     // param-hint: error optional
     func WsRevokeSecurityContext(securityContext: CPointer<WS_SECURITY_CONTEXT>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsRevokeSecurityContext == "on"]
+public unsafe func Windows_WsRevokeSecurityContext(securityContext: CPointer<WS_SECURITY_CONTEXT>, error: CPointer<WS_ERROR>): Int32 {
+    return WsRevokeSecurityContext(securityContext, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSendFaultMessageForError == "on"]
+foreign {
     // param-hint: asyncContext optional
     // param-hint: error optional
     func WsSendFaultMessageForError(channel: CPointer<WS_CHANNEL>, replyMessage: CPointer<WS_MESSAGE>, faultError: CPointer<WS_ERROR>, faultErrorCode: Int32, faultDisclosure: WS_FAULT_DISCLOSUREAbi, requestMessage: CPointer<WS_MESSAGE>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSendFaultMessageForError == "on"]
+public unsafe func Windows_WsSendFaultMessageForError(channel: CPointer<WS_CHANNEL>, replyMessage: CPointer<WS_MESSAGE>, faultError: CPointer<WS_ERROR>, faultErrorCode: Int32, faultDisclosure: WS_FAULT_DISCLOSUREAbi, requestMessage: CPointer<WS_MESSAGE>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsSendFaultMessageForError(channel, replyMessage, faultError, faultErrorCode, faultDisclosure, requestMessage, asyncContext, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSendMessage == "on"]
+foreign {
     // param-hint: bodyValue bytes=param[5] optional
     // param-hint: asyncContext optional
     // param-hint: error optional
     func WsSendMessage(channel: CPointer<WS_CHANNEL>, message: CPointer<WS_MESSAGE>, messageDescription: CPointer<WS_MESSAGE_DESCRIPTIONAbi>, writeOption: WS_WRITE_OPTIONAbi, bodyValue: CPointer<Unit>, bodyValueSize: UInt32, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSendMessage == "on"]
+public unsafe func Windows_WsSendMessage(channel: CPointer<WS_CHANNEL>, message: CPointer<WS_MESSAGE>, messageDescription: CPointer<WS_MESSAGE_DESCRIPTIONAbi>, writeOption: WS_WRITE_OPTIONAbi, bodyValue: CPointer<Unit>, bodyValueSize: UInt32, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsSendMessage(channel, message, messageDescription, writeOption, bodyValue, bodyValueSize, asyncContext, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSendReplyMessage == "on"]
+foreign {
     // param-hint: replyBodyValue bytes=param[5] optional
     // param-hint: asyncContext optional
     // param-hint: error optional
     func WsSendReplyMessage(channel: CPointer<WS_CHANNEL>, replyMessage: CPointer<WS_MESSAGE>, replyMessageDescription: CPointer<WS_MESSAGE_DESCRIPTIONAbi>, writeOption: WS_WRITE_OPTIONAbi, replyBodyValue: CPointer<Unit>, replyBodyValueSize: UInt32, requestMessage: CPointer<WS_MESSAGE>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSendReplyMessage == "on"]
+public unsafe func Windows_WsSendReplyMessage(channel: CPointer<WS_CHANNEL>, replyMessage: CPointer<WS_MESSAGE>, replyMessageDescription: CPointer<WS_MESSAGE_DESCRIPTIONAbi>, writeOption: WS_WRITE_OPTIONAbi, replyBodyValue: CPointer<Unit>, replyBodyValueSize: UInt32, requestMessage: CPointer<WS_MESSAGE>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsSendReplyMessage(channel, replyMessage, replyMessageDescription, writeOption, replyBodyValue, replyBodyValueSize, requestMessage, asyncContext, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSetChannelProperty == "on"]
+foreign {
     // param-hint: value bytes=param[3]
     // param-hint: error optional
     func WsSetChannelProperty(channel: CPointer<WS_CHANNEL>, id: WS_CHANNEL_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSetChannelProperty == "on"]
+public unsafe func Windows_WsSetChannelProperty(channel: CPointer<WS_CHANNEL>, id: WS_CHANNEL_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsSetChannelProperty(channel, id, value, valueSize, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSetErrorProperty == "on"]
+foreign {
     // param-hint: value bytes=param[3]
     func WsSetErrorProperty(error: CPointer<WS_ERROR>, id: WS_ERROR_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSetErrorProperty == "on"]
+public unsafe func Windows_WsSetErrorProperty(error: CPointer<WS_ERROR>, id: WS_ERROR_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32): Int32 {
+    return WsSetErrorProperty(error, id, value, valueSize)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSetFaultErrorDetail == "on"]
+foreign {
     // param-hint: value bytes=param[4] optional
     func WsSetFaultErrorDetail(error: CPointer<WS_ERROR>, faultDetailDescription: CPointer<WS_FAULT_DETAIL_DESCRIPTIONAbi>, writeOption: WS_WRITE_OPTIONAbi, value: CPointer<Unit>, valueSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSetFaultErrorDetail == "on"]
+public unsafe func Windows_WsSetFaultErrorDetail(error: CPointer<WS_ERROR>, faultDetailDescription: CPointer<WS_FAULT_DETAIL_DESCRIPTIONAbi>, writeOption: WS_WRITE_OPTIONAbi, value: CPointer<Unit>, valueSize: UInt32): Int32 {
+    return WsSetFaultErrorDetail(error, faultDetailDescription, writeOption, value, valueSize)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSetFaultErrorProperty == "on"]
+foreign {
     // param-hint: value bytes=param[3]
     func WsSetFaultErrorProperty(error: CPointer<WS_ERROR>, id: WS_FAULT_ERROR_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSetFaultErrorProperty == "on"]
+public unsafe func Windows_WsSetFaultErrorProperty(error: CPointer<WS_ERROR>, id: WS_FAULT_ERROR_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32): Int32 {
+    return WsSetFaultErrorProperty(error, id, value, valueSize)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSetHeader == "on"]
+foreign {
     // param-hint: value bytes=param[5]
     // param-hint: error optional
     func WsSetHeader(message: CPointer<WS_MESSAGE>, headerType: WS_HEADER_TYPEAbi, valueType: WS_TYPEAbi, writeOption: WS_WRITE_OPTIONAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSetHeader == "on"]
+public unsafe func Windows_WsSetHeader(message: CPointer<WS_MESSAGE>, headerType: WS_HEADER_TYPEAbi, valueType: WS_TYPEAbi, writeOption: WS_WRITE_OPTIONAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsSetHeader(message, headerType, valueType, writeOption, value, valueSize, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSetInput == "on"]
+foreign {
     // param-hint: encoding optional
     // param-hint: input optional
     // param-hint: properties len=param[4] optional
     // param-hint: error optional
     func WsSetInput(reader: CPointer<WS_XML_READER>, encoding: CPointer<WS_XML_READER_ENCODINGAbi>, input: CPointer<WS_XML_READER_INPUTAbi>, properties: CPointer<WS_XML_READER_PROPERTYAbi>, propertyCount: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSetInput == "on"]
+public unsafe func Windows_WsSetInput(reader: CPointer<WS_XML_READER>, encoding: CPointer<WS_XML_READER_ENCODINGAbi>, input: CPointer<WS_XML_READER_INPUTAbi>, properties: CPointer<WS_XML_READER_PROPERTYAbi>, propertyCount: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsSetInput(reader, encoding, input, properties, propertyCount, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSetInputToBuffer == "on"]
+foreign {
     // param-hint: properties len=param[3] optional
     // param-hint: error optional
     func WsSetInputToBuffer(reader: CPointer<WS_XML_READER>, buffer: CPointer<WS_XML_BUFFER>, properties: CPointer<WS_XML_READER_PROPERTYAbi>, propertyCount: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSetInputToBuffer == "on"]
+public unsafe func Windows_WsSetInputToBuffer(reader: CPointer<WS_XML_READER>, buffer: CPointer<WS_XML_BUFFER>, properties: CPointer<WS_XML_READER_PROPERTYAbi>, propertyCount: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsSetInputToBuffer(reader, buffer, properties, propertyCount, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSetListenerProperty == "on"]
+foreign {
     // param-hint: value bytes=param[3]
     // param-hint: error optional
     func WsSetListenerProperty(listener: CPointer<WS_LISTENER>, id: WS_LISTENER_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSetListenerProperty == "on"]
+public unsafe func Windows_WsSetListenerProperty(listener: CPointer<WS_LISTENER>, id: WS_LISTENER_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsSetListenerProperty(listener, id, value, valueSize, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSetMessageProperty == "on"]
+foreign {
     // param-hint: value bytes=param[3]
     // param-hint: error optional
     func WsSetMessageProperty(message: CPointer<WS_MESSAGE>, id: WS_MESSAGE_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSetMessageProperty == "on"]
+public unsafe func Windows_WsSetMessageProperty(message: CPointer<WS_MESSAGE>, id: WS_MESSAGE_PROPERTY_IDAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsSetMessageProperty(message, id, value, valueSize, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSetOutput == "on"]
+foreign {
     // param-hint: encoding optional
     // param-hint: output optional
     // param-hint: properties len=param[4] optional
     // param-hint: error optional
     func WsSetOutput(writer: CPointer<WS_XML_WRITER>, encoding: CPointer<WS_XML_WRITER_ENCODINGAbi>, output: CPointer<WS_XML_WRITER_OUTPUTAbi>, properties: CPointer<WS_XML_WRITER_PROPERTYAbi>, propertyCount: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSetOutput == "on"]
+public unsafe func Windows_WsSetOutput(writer: CPointer<WS_XML_WRITER>, encoding: CPointer<WS_XML_WRITER_ENCODINGAbi>, output: CPointer<WS_XML_WRITER_OUTPUTAbi>, properties: CPointer<WS_XML_WRITER_PROPERTYAbi>, propertyCount: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsSetOutput(writer, encoding, output, properties, propertyCount, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSetOutputToBuffer == "on"]
+foreign {
     // param-hint: properties len=param[3] optional
     // param-hint: error optional
     func WsSetOutputToBuffer(writer: CPointer<WS_XML_WRITER>, buffer: CPointer<WS_XML_BUFFER>, properties: CPointer<WS_XML_WRITER_PROPERTYAbi>, propertyCount: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSetOutputToBuffer == "on"]
+public unsafe func Windows_WsSetOutputToBuffer(writer: CPointer<WS_XML_WRITER>, buffer: CPointer<WS_XML_BUFFER>, properties: CPointer<WS_XML_WRITER_PROPERTYAbi>, propertyCount: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsSetOutputToBuffer(writer, buffer, properties, propertyCount, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSetReaderPosition == "on"]
+foreign {
     // param-hint: error optional
     func WsSetReaderPosition(reader: CPointer<WS_XML_READER>, nodePosition: CPointer<WS_XML_NODE_POSITIONAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSetReaderPosition == "on"]
+public unsafe func Windows_WsSetReaderPosition(reader: CPointer<WS_XML_READER>, nodePosition: CPointer<WS_XML_NODE_POSITIONAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsSetReaderPosition(reader, nodePosition, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSetWriterPosition == "on"]
+foreign {
     // param-hint: error optional
     func WsSetWriterPosition(writer: CPointer<WS_XML_WRITER>, nodePosition: CPointer<WS_XML_NODE_POSITIONAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSetWriterPosition == "on"]
+public unsafe func Windows_WsSetWriterPosition(writer: CPointer<WS_XML_WRITER>, nodePosition: CPointer<WS_XML_NODE_POSITIONAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsSetWriterPosition(writer, nodePosition, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsShutdownSessionChannel == "on"]
+foreign {
     // param-hint: asyncContext optional
     // param-hint: error optional
     func WsShutdownSessionChannel(channel: CPointer<WS_CHANNEL>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsShutdownSessionChannel == "on"]
+public unsafe func Windows_WsShutdownSessionChannel(channel: CPointer<WS_CHANNEL>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsShutdownSessionChannel(channel, asyncContext, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSkipNode == "on"]
+foreign {
     // param-hint: error optional
     func WsSkipNode(reader: CPointer<WS_XML_READER>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsSkipNode == "on"]
+public unsafe func Windows_WsSkipNode(reader: CPointer<WS_XML_READER>, error: CPointer<WS_ERROR>): Int32 {
+    return WsSkipNode(reader, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsStartReaderCanonicalization == "on"]
+foreign {
     // param-hint: writeCallbackState optional
     // param-hint: properties len=param[4] optional
     // param-hint: error optional
     func WsStartReaderCanonicalization(reader: CPointer<WS_XML_READER>, writeCallback: WS_WRITE_CALLBACK, writeCallbackState: CPointer<Unit>, properties: CPointer<WS_XML_CANONICALIZATION_PROPERTYAbi>, propertyCount: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsStartReaderCanonicalization == "on"]
+public unsafe func Windows_WsStartReaderCanonicalization(reader: CPointer<WS_XML_READER>, writeCallback: WS_WRITE_CALLBACK, writeCallbackState: CPointer<Unit>, properties: CPointer<WS_XML_CANONICALIZATION_PROPERTYAbi>, propertyCount: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsStartReaderCanonicalization(reader, writeCallback, writeCallbackState, properties, propertyCount, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsStartWriterCanonicalization == "on"]
+foreign {
     // param-hint: writeCallbackState optional
     // param-hint: properties len=param[4] optional
     // param-hint: error optional
     func WsStartWriterCanonicalization(writer: CPointer<WS_XML_WRITER>, writeCallback: WS_WRITE_CALLBACK, writeCallbackState: CPointer<Unit>, properties: CPointer<WS_XML_CANONICALIZATION_PROPERTYAbi>, propertyCount: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsStartWriterCanonicalization == "on"]
+public unsafe func Windows_WsStartWriterCanonicalization(writer: CPointer<WS_XML_WRITER>, writeCallback: WS_WRITE_CALLBACK, writeCallbackState: CPointer<Unit>, properties: CPointer<WS_XML_CANONICALIZATION_PROPERTYAbi>, propertyCount: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsStartWriterCanonicalization(writer, writeCallback, writeCallbackState, properties, propertyCount, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsTrimXmlWhitespace == "on"]
+foreign {
     // param-hint: chars len=param[1]
     // param-hint: error optional
     func WsTrimXmlWhitespace(chars: CPointer<UInt16>, charCount: UInt32, trimmedChars: CPointer<CPointer<UInt16>>, trimmedCount: CPointer<UInt32>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsTrimXmlWhitespace == "on"]
+public unsafe func Windows_WsTrimXmlWhitespace(chars: CPointer<UInt16>, charCount: UInt32, trimmedChars: CPointer<CPointer<UInt16>>, trimmedCount: CPointer<UInt32>, error: CPointer<WS_ERROR>): Int32 {
+    return WsTrimXmlWhitespace(chars, charCount, trimmedChars, trimmedCount, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsVerifyXmlNCName == "on"]
+foreign {
     // param-hint: ncNameChars len=param[1]
     // param-hint: error optional
     func WsVerifyXmlNCName(ncNameChars: CPointer<UInt16>, ncNameCharCount: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsVerifyXmlNCName == "on"]
+public unsafe func Windows_WsVerifyXmlNCName(ncNameChars: CPointer<UInt16>, ncNameCharCount: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsVerifyXmlNCName(ncNameChars, ncNameCharCount, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteArray == "on"]
+foreign {
     // param-hint: array bytes=param[5] optional
     // param-hint: error optional
     func WsWriteArray(writer: CPointer<WS_XML_WRITER>, localName: CPointer<WS_XML_STRINGAbi>, ns: CPointer<WS_XML_STRINGAbi>, valueType: WS_VALUE_TYPEAbi, array: CPointer<Unit>, arraySize: UInt32, itemOffset: UInt32, itemCount: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteArray == "on"]
+public unsafe func Windows_WsWriteArray(writer: CPointer<WS_XML_WRITER>, localName: CPointer<WS_XML_STRINGAbi>, ns: CPointer<WS_XML_STRINGAbi>, valueType: WS_VALUE_TYPEAbi, array: CPointer<Unit>, arraySize: UInt32, itemOffset: UInt32, itemCount: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsWriteArray(writer, localName, ns, valueType, array, arraySize, itemOffset, itemCount, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteAttribute == "on"]
+foreign {
     // param-hint: value bytes=param[4] optional
     // param-hint: error optional
     func WsWriteAttribute(writer: CPointer<WS_XML_WRITER>, attributeDescription: CPointer<WS_ATTRIBUTE_DESCRIPTIONAbi>, writeOption: WS_WRITE_OPTIONAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteAttribute == "on"]
+public unsafe func Windows_WsWriteAttribute(writer: CPointer<WS_XML_WRITER>, attributeDescription: CPointer<WS_ATTRIBUTE_DESCRIPTIONAbi>, writeOption: WS_WRITE_OPTIONAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsWriteAttribute(writer, attributeDescription, writeOption, value, valueSize, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteBody == "on"]
+foreign {
     // param-hint: value bytes=param[4]
     // param-hint: error optional
     func WsWriteBody(message: CPointer<WS_MESSAGE>, bodyDescription: CPointer<WS_ELEMENT_DESCRIPTIONAbi>, writeOption: WS_WRITE_OPTIONAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteBody == "on"]
+public unsafe func Windows_WsWriteBody(message: CPointer<WS_MESSAGE>, bodyDescription: CPointer<WS_ELEMENT_DESCRIPTIONAbi>, writeOption: WS_WRITE_OPTIONAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsWriteBody(message, bodyDescription, writeOption, value, valueSize, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteBytes == "on"]
+foreign {
     // param-hint: bytes bytes=param[2]
     // param-hint: error optional
     func WsWriteBytes(writer: CPointer<WS_XML_WRITER>, bytes: CPointer<Unit>, byteCount: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteBytes == "on"]
+public unsafe func Windows_WsWriteBytes(writer: CPointer<WS_XML_WRITER>, bytes: CPointer<Unit>, byteCount: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsWriteBytes(writer, bytes, byteCount, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteChars == "on"]
+foreign {
     // param-hint: chars len=param[2]
     // param-hint: error optional
     func WsWriteChars(writer: CPointer<WS_XML_WRITER>, chars: CPointer<UInt16>, charCount: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteChars == "on"]
+public unsafe func Windows_WsWriteChars(writer: CPointer<WS_XML_WRITER>, chars: CPointer<UInt16>, charCount: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsWriteChars(writer, chars, charCount, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteCharsUtf8 == "on"]
+foreign {
     // param-hint: bytes len=param[2]
     // param-hint: error optional
     func WsWriteCharsUtf8(writer: CPointer<WS_XML_WRITER>, bytes: CPointer<UInt8>, byteCount: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteCharsUtf8 == "on"]
+public unsafe func Windows_WsWriteCharsUtf8(writer: CPointer<WS_XML_WRITER>, bytes: CPointer<UInt8>, byteCount: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsWriteCharsUtf8(writer, bytes, byteCount, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteElement == "on"]
+foreign {
     // param-hint: value bytes=param[4] optional
     // param-hint: error optional
     func WsWriteElement(writer: CPointer<WS_XML_WRITER>, elementDescription: CPointer<WS_ELEMENT_DESCRIPTIONAbi>, writeOption: WS_WRITE_OPTIONAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteElement == "on"]
+public unsafe func Windows_WsWriteElement(writer: CPointer<WS_XML_WRITER>, elementDescription: CPointer<WS_ELEMENT_DESCRIPTIONAbi>, writeOption: WS_WRITE_OPTIONAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsWriteElement(writer, elementDescription, writeOption, value, valueSize, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteEndAttribute == "on"]
+foreign {
     // param-hint: error optional
     func WsWriteEndAttribute(writer: CPointer<WS_XML_WRITER>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteEndAttribute == "on"]
+public unsafe func Windows_WsWriteEndAttribute(writer: CPointer<WS_XML_WRITER>, error: CPointer<WS_ERROR>): Int32 {
+    return WsWriteEndAttribute(writer, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteEndCData == "on"]
+foreign {
     // param-hint: error optional
     func WsWriteEndCData(writer: CPointer<WS_XML_WRITER>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteEndCData == "on"]
+public unsafe func Windows_WsWriteEndCData(writer: CPointer<WS_XML_WRITER>, error: CPointer<WS_ERROR>): Int32 {
+    return WsWriteEndCData(writer, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteEndElement == "on"]
+foreign {
     // param-hint: error optional
     func WsWriteEndElement(writer: CPointer<WS_XML_WRITER>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteEndElement == "on"]
+public unsafe func Windows_WsWriteEndElement(writer: CPointer<WS_XML_WRITER>, error: CPointer<WS_ERROR>): Int32 {
+    return WsWriteEndElement(writer, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteEndStartElement == "on"]
+foreign {
     // param-hint: error optional
     func WsWriteEndStartElement(writer: CPointer<WS_XML_WRITER>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteEndStartElement == "on"]
+public unsafe func Windows_WsWriteEndStartElement(writer: CPointer<WS_XML_WRITER>, error: CPointer<WS_ERROR>): Int32 {
+    return WsWriteEndStartElement(writer, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteEnvelopeEnd == "on"]
+foreign {
     // param-hint: error optional
     func WsWriteEnvelopeEnd(message: CPointer<WS_MESSAGE>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteEnvelopeEnd == "on"]
+public unsafe func Windows_WsWriteEnvelopeEnd(message: CPointer<WS_MESSAGE>, error: CPointer<WS_ERROR>): Int32 {
+    return WsWriteEnvelopeEnd(message, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteEnvelopeStart == "on"]
+foreign {
     // param-hint: doneCallback optional
     // param-hint: doneCallbackState optional
     // param-hint: error optional
     func WsWriteEnvelopeStart(message: CPointer<WS_MESSAGE>, writer: CPointer<WS_XML_WRITER>, doneCallback: WS_MESSAGE_DONE_CALLBACK, doneCallbackState: CPointer<Unit>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteEnvelopeStart == "on"]
+public unsafe func Windows_WsWriteEnvelopeStart(message: CPointer<WS_MESSAGE>, writer: CPointer<WS_XML_WRITER>, doneCallback: WS_MESSAGE_DONE_CALLBACK, doneCallbackState: CPointer<Unit>, error: CPointer<WS_ERROR>): Int32 {
+    return WsWriteEnvelopeStart(message, writer, doneCallback, doneCallbackState, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteMessageEnd == "on"]
+foreign {
     // param-hint: asyncContext optional
     // param-hint: error optional
     func WsWriteMessageEnd(channel: CPointer<WS_CHANNEL>, message: CPointer<WS_MESSAGE>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteMessageEnd == "on"]
+public unsafe func Windows_WsWriteMessageEnd(channel: CPointer<WS_CHANNEL>, message: CPointer<WS_MESSAGE>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsWriteMessageEnd(channel, message, asyncContext, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteMessageStart == "on"]
+foreign {
     // param-hint: asyncContext optional
     // param-hint: error optional
     func WsWriteMessageStart(channel: CPointer<WS_CHANNEL>, message: CPointer<WS_MESSAGE>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteMessageStart == "on"]
+public unsafe func Windows_WsWriteMessageStart(channel: CPointer<WS_CHANNEL>, message: CPointer<WS_MESSAGE>, asyncContext: CPointer<WS_ASYNC_CONTEXTAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsWriteMessageStart(channel, message, asyncContext, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteNode == "on"]
+foreign {
     // param-hint: error optional
     func WsWriteNode(writer: CPointer<WS_XML_WRITER>, node: CPointer<WS_XML_NODEAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteNode == "on"]
+public unsafe func Windows_WsWriteNode(writer: CPointer<WS_XML_WRITER>, node: CPointer<WS_XML_NODEAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsWriteNode(writer, node, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteQualifiedName == "on"]
+foreign {
     // param-hint: prefix optional
     // param-hint: ns optional
     // param-hint: error optional
     func WsWriteQualifiedName(writer: CPointer<WS_XML_WRITER>, prefix: CPointer<WS_XML_STRINGAbi>, localName: CPointer<WS_XML_STRINGAbi>, ns: CPointer<WS_XML_STRINGAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteQualifiedName == "on"]
+public unsafe func Windows_WsWriteQualifiedName(writer: CPointer<WS_XML_WRITER>, prefix: CPointer<WS_XML_STRINGAbi>, localName: CPointer<WS_XML_STRINGAbi>, ns: CPointer<WS_XML_STRINGAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsWriteQualifiedName(writer, prefix, localName, ns, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteStartAttribute == "on"]
+foreign {
     // param-hint: prefix optional
     // param-hint: error optional
     func WsWriteStartAttribute(writer: CPointer<WS_XML_WRITER>, prefix: CPointer<WS_XML_STRINGAbi>, localName: CPointer<WS_XML_STRINGAbi>, ns: CPointer<WS_XML_STRINGAbi>, singleQuote: Int32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteStartAttribute == "on"]
+public unsafe func Windows_WsWriteStartAttribute(writer: CPointer<WS_XML_WRITER>, prefix: CPointer<WS_XML_STRINGAbi>, localName: CPointer<WS_XML_STRINGAbi>, ns: CPointer<WS_XML_STRINGAbi>, singleQuote: Int32, error: CPointer<WS_ERROR>): Int32 {
+    return WsWriteStartAttribute(writer, prefix, localName, ns, singleQuote, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteStartCData == "on"]
+foreign {
     // param-hint: error optional
     func WsWriteStartCData(writer: CPointer<WS_XML_WRITER>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteStartCData == "on"]
+public unsafe func Windows_WsWriteStartCData(writer: CPointer<WS_XML_WRITER>, error: CPointer<WS_ERROR>): Int32 {
+    return WsWriteStartCData(writer, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteStartElement == "on"]
+foreign {
     // param-hint: prefix optional
     // param-hint: error optional
     func WsWriteStartElement(writer: CPointer<WS_XML_WRITER>, prefix: CPointer<WS_XML_STRINGAbi>, localName: CPointer<WS_XML_STRINGAbi>, ns: CPointer<WS_XML_STRINGAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteStartElement == "on"]
+public unsafe func Windows_WsWriteStartElement(writer: CPointer<WS_XML_WRITER>, prefix: CPointer<WS_XML_STRINGAbi>, localName: CPointer<WS_XML_STRINGAbi>, ns: CPointer<WS_XML_STRINGAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsWriteStartElement(writer, prefix, localName, ns, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteText == "on"]
+foreign {
     // param-hint: error optional
     func WsWriteText(writer: CPointer<WS_XML_WRITER>, text: CPointer<WS_XML_TEXTAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteText == "on"]
+public unsafe func Windows_WsWriteText(writer: CPointer<WS_XML_WRITER>, text: CPointer<WS_XML_TEXTAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsWriteText(writer, text, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteType == "on"]
+foreign {
     // param-hint: typeDescription optional
     // param-hint: value bytes=param[6] optional
     // param-hint: error optional
     func WsWriteType(writer: CPointer<WS_XML_WRITER>, typeMapping: WS_TYPE_MAPPINGAbi, type_: WS_TYPEAbi, typeDescription: CPointer<Unit>, writeOption: WS_WRITE_OPTIONAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteType == "on"]
+public unsafe func Windows_WsWriteType(writer: CPointer<WS_XML_WRITER>, typeMapping: WS_TYPE_MAPPINGAbi, type_: WS_TYPEAbi, typeDescription: CPointer<Unit>, writeOption: WS_WRITE_OPTIONAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsWriteType(writer, typeMapping, type_, typeDescription, writeOption, value, valueSize, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteValue == "on"]
+foreign {
     // param-hint: value bytes=param[3]
     // param-hint: error optional
     func WsWriteValue(writer: CPointer<WS_XML_WRITER>, valueType: WS_VALUE_TYPEAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteValue == "on"]
+public unsafe func Windows_WsWriteValue(writer: CPointer<WS_XML_WRITER>, valueType: WS_VALUE_TYPEAbi, value: CPointer<Unit>, valueSize: UInt32, error: CPointer<WS_ERROR>): Int32 {
+    return WsWriteValue(writer, valueType, value, valueSize, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteXmlBuffer == "on"]
+foreign {
     // param-hint: error optional
     func WsWriteXmlBuffer(writer: CPointer<WS_XML_WRITER>, xmlBuffer: CPointer<WS_XML_BUFFER>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteXmlBuffer == "on"]
+public unsafe func Windows_WsWriteXmlBuffer(writer: CPointer<WS_XML_WRITER>, xmlBuffer: CPointer<WS_XML_BUFFER>, error: CPointer<WS_ERROR>): Int32 {
+    return WsWriteXmlBuffer(writer, xmlBuffer, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteXmlBufferToBytes == "on"]
+foreign {
     // param-hint: encoding optional
     // param-hint: properties len=param[4] optional
     // param-hint: error optional
     func WsWriteXmlBufferToBytes(writer: CPointer<WS_XML_WRITER>, xmlBuffer: CPointer<WS_XML_BUFFER>, encoding: CPointer<WS_XML_WRITER_ENCODINGAbi>, properties: CPointer<WS_XML_WRITER_PROPERTYAbi>, propertyCount: UInt32, heap: CPointer<WS_HEAP>, bytes: CPointer<CPointer<Unit>>, byteCount: CPointer<UInt32>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteXmlBufferToBytes == "on"]
+public unsafe func Windows_WsWriteXmlBufferToBytes(writer: CPointer<WS_XML_WRITER>, xmlBuffer: CPointer<WS_XML_BUFFER>, encoding: CPointer<WS_XML_WRITER_ENCODINGAbi>, properties: CPointer<WS_XML_WRITER_PROPERTYAbi>, propertyCount: UInt32, heap: CPointer<WS_HEAP>, bytes: CPointer<CPointer<Unit>>, byteCount: CPointer<UInt32>, error: CPointer<WS_ERROR>): Int32 {
+    return WsWriteXmlBufferToBytes(writer, xmlBuffer, encoding, properties, propertyCount, heap, bytes, byteCount, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteXmlnsAttribute == "on"]
+foreign {
     // param-hint: prefix optional
     // param-hint: error optional
     func WsWriteXmlnsAttribute(writer: CPointer<WS_XML_WRITER>, prefix: CPointer<WS_XML_STRINGAbi>, ns: CPointer<WS_XML_STRINGAbi>, singleQuote: Int32, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsWriteXmlnsAttribute == "on"]
+public unsafe func Windows_WsWriteXmlnsAttribute(writer: CPointer<WS_XML_WRITER>, prefix: CPointer<WS_XML_STRINGAbi>, ns: CPointer<WS_XML_STRINGAbi>, singleQuote: Int32, error: CPointer<WS_ERROR>): Int32 {
+    return WsWriteXmlnsAttribute(writer, prefix, ns, singleQuote, error)
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsXmlStringEquals == "on"]
+foreign {
     // param-hint: error optional
     func WsXmlStringEquals(string1: CPointer<WS_XML_STRINGAbi>, string2: CPointer<WS_XML_STRINGAbi>, error: CPointer<WS_ERROR>): Int32
+}
+
+@When[Windows_Win32_Networking_WindowsWebServices == "on" && WEBSERVICES == "on" && Windows_Win32_Networking_WindowsWebServices_WsXmlStringEquals == "on"]
+public unsafe func Windows_WsXmlStringEquals(string1: CPointer<WS_XML_STRINGAbi>, string2: CPointer<WS_XML_STRINGAbi>, error: CPointer<WS_ERROR>): Int32 {
+    return WsXmlStringEquals(string1, string2, error)
 }
 
 @When[Windows_Win32_Networking_WindowsWebServices == "on"]

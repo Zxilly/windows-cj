@@ -10,9 +10,7 @@ import windows_interface.{GUID}
 import windows_interface as windows_interface
 import windows_polyfill.{unionReadUInt64, unionReadUInt8, unionWriteUInt64, unionWriteUInt8}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_System_Ioctl == "on"]
 import windows.Win32.System.Ioctl as Win32_System_Ioctl
 
 
@@ -5838,131 +5836,834 @@ extend STORAGE_FIRMWARE_INFO_V2 <: windows_core.CopyType & windows_core.RuntimeT
     }
 }
 
-@When[ISCSIDSC == "on"]
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_AddISNSServerA == "on"]
 foreign {
     func AddISNSServerA(Address: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_AddISNSServerA == "on"]
+public unsafe func Windows_AddISNSServerA(Address: CPointer<UInt8>): UInt32 {
+    return AddISNSServerA(Address)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_AddISNSServerW == "on"]
+foreign {
     func AddISNSServerW(Address: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_AddISNSServerW == "on"]
+public unsafe func Windows_AddISNSServerW(Address: CPointer<UInt16>): UInt32 {
+    return AddISNSServerW(Address)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_AddIScsiConnectionA == "on"]
+foreign {
     // param-hint: Key len=param[6] optional
     func AddIScsiConnectionA(UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>, Reserved: CPointer<Unit>, InitiatorPortNumber: UInt32, TargetPortal: CPointer<ISCSI_TARGET_PORTALAAbi>, SecurityFlags: UInt64, LoginOptions: CPointer<ISCSI_LOGIN_OPTIONSAbi>, KeySize: UInt32, Key: CPointer<UInt8>, ConnectionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_AddIScsiConnectionA == "on"]
+public unsafe func Windows_AddIScsiConnectionA(UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>, Reserved: CPointer<Unit>, InitiatorPortNumber: UInt32, TargetPortal: CPointer<ISCSI_TARGET_PORTALAAbi>, SecurityFlags: UInt64, LoginOptions: CPointer<ISCSI_LOGIN_OPTIONSAbi>, KeySize: UInt32, Key: CPointer<UInt8>, ConnectionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>): UInt32 {
+    return AddIScsiConnectionA(UniqueSessionId, Reserved, InitiatorPortNumber, TargetPortal, SecurityFlags, LoginOptions, KeySize, Key, ConnectionId)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_AddIScsiConnectionW == "on"]
+foreign {
     // param-hint: Key len=param[6] optional
     func AddIScsiConnectionW(UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>, Reserved: CPointer<Unit>, InitiatorPortNumber: UInt32, TargetPortal: CPointer<ISCSI_TARGET_PORTALWAbi>, SecurityFlags: UInt64, LoginOptions: CPointer<ISCSI_LOGIN_OPTIONSAbi>, KeySize: UInt32, Key: CPointer<UInt8>, ConnectionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_AddIScsiConnectionW == "on"]
+public unsafe func Windows_AddIScsiConnectionW(UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>, Reserved: CPointer<Unit>, InitiatorPortNumber: UInt32, TargetPortal: CPointer<ISCSI_TARGET_PORTALWAbi>, SecurityFlags: UInt64, LoginOptions: CPointer<ISCSI_LOGIN_OPTIONSAbi>, KeySize: UInt32, Key: CPointer<UInt8>, ConnectionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>): UInt32 {
+    return AddIScsiConnectionW(UniqueSessionId, Reserved, InitiatorPortNumber, TargetPortal, SecurityFlags, LoginOptions, KeySize, Key, ConnectionId)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_AddIScsiSendTargetPortalA == "on"]
+foreign {
     // param-hint: InitiatorInstance optional
     func AddIScsiSendTargetPortalA(InitiatorInstance: CPointer<UInt8>, InitiatorPortNumber: UInt32, LoginOptions: CPointer<ISCSI_LOGIN_OPTIONSAbi>, SecurityFlags: UInt64, Portal: CPointer<ISCSI_TARGET_PORTALAAbi>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_AddIScsiSendTargetPortalA == "on"]
+public unsafe func Windows_AddIScsiSendTargetPortalA(InitiatorInstance: CPointer<UInt8>, InitiatorPortNumber: UInt32, LoginOptions: CPointer<ISCSI_LOGIN_OPTIONSAbi>, SecurityFlags: UInt64, Portal: CPointer<ISCSI_TARGET_PORTALAAbi>): UInt32 {
+    return AddIScsiSendTargetPortalA(InitiatorInstance, InitiatorPortNumber, LoginOptions, SecurityFlags, Portal)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_AddIScsiSendTargetPortalW == "on"]
+foreign {
     // param-hint: InitiatorInstance optional
     func AddIScsiSendTargetPortalW(InitiatorInstance: CPointer<UInt16>, InitiatorPortNumber: UInt32, LoginOptions: CPointer<ISCSI_LOGIN_OPTIONSAbi>, SecurityFlags: UInt64, Portal: CPointer<ISCSI_TARGET_PORTALWAbi>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_AddIScsiSendTargetPortalW == "on"]
+public unsafe func Windows_AddIScsiSendTargetPortalW(InitiatorInstance: CPointer<UInt16>, InitiatorPortNumber: UInt32, LoginOptions: CPointer<ISCSI_LOGIN_OPTIONSAbi>, SecurityFlags: UInt64, Portal: CPointer<ISCSI_TARGET_PORTALWAbi>): UInt32 {
+    return AddIScsiSendTargetPortalW(InitiatorInstance, InitiatorPortNumber, LoginOptions, SecurityFlags, Portal)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_AddIScsiStaticTargetA == "on"]
+foreign {
     // param-hint: TargetAlias optional
     func AddIScsiStaticTargetA(TargetName: CPointer<UInt8>, TargetAlias: CPointer<UInt8>, TargetFlags: UInt32, Persist: UInt8, Mappings: CPointer<ISCSI_TARGET_MAPPINGAAbi>, LoginOptions: CPointer<ISCSI_LOGIN_OPTIONSAbi>, PortalGroup: CPointer<ISCSI_TARGET_PORTAL_GROUPAAbi>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_AddIScsiStaticTargetA == "on"]
+public unsafe func Windows_AddIScsiStaticTargetA(TargetName: CPointer<UInt8>, TargetAlias: CPointer<UInt8>, TargetFlags: UInt32, Persist: UInt8, Mappings: CPointer<ISCSI_TARGET_MAPPINGAAbi>, LoginOptions: CPointer<ISCSI_LOGIN_OPTIONSAbi>, PortalGroup: CPointer<ISCSI_TARGET_PORTAL_GROUPAAbi>): UInt32 {
+    return AddIScsiStaticTargetA(TargetName, TargetAlias, TargetFlags, Persist, Mappings, LoginOptions, PortalGroup)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_AddIScsiStaticTargetW == "on"]
+foreign {
     // param-hint: TargetAlias optional
     func AddIScsiStaticTargetW(TargetName: CPointer<UInt16>, TargetAlias: CPointer<UInt16>, TargetFlags: UInt32, Persist: UInt8, Mappings: CPointer<ISCSI_TARGET_MAPPINGWAbi>, LoginOptions: CPointer<ISCSI_LOGIN_OPTIONSAbi>, PortalGroup: CPointer<ISCSI_TARGET_PORTAL_GROUPWAbi>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_AddIScsiStaticTargetW == "on"]
+public unsafe func Windows_AddIScsiStaticTargetW(TargetName: CPointer<UInt16>, TargetAlias: CPointer<UInt16>, TargetFlags: UInt32, Persist: UInt8, Mappings: CPointer<ISCSI_TARGET_MAPPINGWAbi>, LoginOptions: CPointer<ISCSI_LOGIN_OPTIONSAbi>, PortalGroup: CPointer<ISCSI_TARGET_PORTAL_GROUPWAbi>): UInt32 {
+    return AddIScsiStaticTargetW(TargetName, TargetAlias, TargetFlags, Persist, Mappings, LoginOptions, PortalGroup)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_AddPersistentIScsiDeviceA == "on"]
+foreign {
     func AddPersistentIScsiDeviceA(DevicePath: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_AddPersistentIScsiDeviceA == "on"]
+public unsafe func Windows_AddPersistentIScsiDeviceA(DevicePath: CPointer<UInt8>): UInt32 {
+    return AddPersistentIScsiDeviceA(DevicePath)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_AddPersistentIScsiDeviceW == "on"]
+foreign {
     func AddPersistentIScsiDeviceW(DevicePath: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_AddPersistentIScsiDeviceW == "on"]
+public unsafe func Windows_AddPersistentIScsiDeviceW(DevicePath: CPointer<UInt16>): UInt32 {
+    return AddPersistentIScsiDeviceW(DevicePath)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_AddRadiusServerA == "on"]
+foreign {
     func AddRadiusServerA(Address: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_AddRadiusServerA == "on"]
+public unsafe func Windows_AddRadiusServerA(Address: CPointer<UInt8>): UInt32 {
+    return AddRadiusServerA(Address)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_AddRadiusServerW == "on"]
+foreign {
     func AddRadiusServerW(Address: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_AddRadiusServerW == "on"]
+public unsafe func Windows_AddRadiusServerW(Address: CPointer<UInt16>): UInt32 {
+    return AddRadiusServerW(Address)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ClearPersistentIScsiDevices == "on"]
+foreign {
     func ClearPersistentIScsiDevices(): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ClearPersistentIScsiDevices == "on"]
+public unsafe func Windows_ClearPersistentIScsiDevices(): UInt32 {
+    return ClearPersistentIScsiDevices()
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_GetDevicesForIScsiSessionA == "on" && Windows_Win32_System_Ioctl == "on"]
+foreign {
+    func GetDevicesForIScsiSessionA(UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>, DeviceCount: CPointer<UInt32>, Devices: CPointer<ISCSI_DEVICE_ON_SESSIONAAbi>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_GetDevicesForIScsiSessionA == "on" && Windows_Win32_System_Ioctl == "on"]
+public unsafe func Windows_GetDevicesForIScsiSessionA(UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>, DeviceCount: CPointer<UInt32>, Devices: CPointer<ISCSI_DEVICE_ON_SESSIONAAbi>): UInt32 {
+    return GetDevicesForIScsiSessionA(UniqueSessionId, DeviceCount, Devices)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_GetDevicesForIScsiSessionW == "on" && Windows_Win32_System_Ioctl == "on"]
+foreign {
+    func GetDevicesForIScsiSessionW(UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>, DeviceCount: CPointer<UInt32>, Devices: CPointer<ISCSI_DEVICE_ON_SESSIONWAbi>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_GetDevicesForIScsiSessionW == "on" && Windows_Win32_System_Ioctl == "on"]
+public unsafe func Windows_GetDevicesForIScsiSessionW(UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>, DeviceCount: CPointer<UInt32>, Devices: CPointer<ISCSI_DEVICE_ON_SESSIONWAbi>): UInt32 {
+    return GetDevicesForIScsiSessionW(UniqueSessionId, DeviceCount, Devices)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_GetIScsiIKEInfoA == "on"]
+foreign {
     // param-hint: InitiatorName optional
     func GetIScsiIKEInfoA(InitiatorName: CPointer<UInt8>, InitiatorPortNumber: UInt32, Reserved: CPointer<UInt32>, AuthInfo: CPointer<IKE_AUTHENTICATION_INFORMATIONAbi>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_GetIScsiIKEInfoA == "on"]
+public unsafe func Windows_GetIScsiIKEInfoA(InitiatorName: CPointer<UInt8>, InitiatorPortNumber: UInt32, Reserved: CPointer<UInt32>, AuthInfo: CPointer<IKE_AUTHENTICATION_INFORMATIONAbi>): UInt32 {
+    return GetIScsiIKEInfoA(InitiatorName, InitiatorPortNumber, Reserved, AuthInfo)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_GetIScsiIKEInfoW == "on"]
+foreign {
     // param-hint: InitiatorName optional
     func GetIScsiIKEInfoW(InitiatorName: CPointer<UInt16>, InitiatorPortNumber: UInt32, Reserved: CPointer<UInt32>, AuthInfo: CPointer<IKE_AUTHENTICATION_INFORMATIONAbi>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_GetIScsiIKEInfoW == "on"]
+public unsafe func Windows_GetIScsiIKEInfoW(InitiatorName: CPointer<UInt16>, InitiatorPortNumber: UInt32, Reserved: CPointer<UInt32>, AuthInfo: CPointer<IKE_AUTHENTICATION_INFORMATIONAbi>): UInt32 {
+    return GetIScsiIKEInfoW(InitiatorName, InitiatorPortNumber, Reserved, AuthInfo)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_GetIScsiInitiatorNodeNameA == "on"]
+foreign {
     func GetIScsiInitiatorNodeNameA(InitiatorNodeName: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_GetIScsiInitiatorNodeNameA == "on"]
+public unsafe func Windows_GetIScsiInitiatorNodeNameA(InitiatorNodeName: CPointer<UInt8>): UInt32 {
+    return GetIScsiInitiatorNodeNameA(InitiatorNodeName)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_GetIScsiInitiatorNodeNameW == "on"]
+foreign {
     func GetIScsiInitiatorNodeNameW(InitiatorNodeName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_GetIScsiInitiatorNodeNameW == "on"]
+public unsafe func Windows_GetIScsiInitiatorNodeNameW(InitiatorNodeName: CPointer<UInt16>): UInt32 {
+    return GetIScsiInitiatorNodeNameW(InitiatorNodeName)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_GetIScsiSessionListA == "on"]
+foreign {
     func GetIScsiSessionListA(BufferSize: CPointer<UInt32>, SessionCount: CPointer<UInt32>, SessionInfo: CPointer<ISCSI_SESSION_INFOAAbi>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_GetIScsiSessionListA == "on"]
+public unsafe func Windows_GetIScsiSessionListA(BufferSize: CPointer<UInt32>, SessionCount: CPointer<UInt32>, SessionInfo: CPointer<ISCSI_SESSION_INFOAAbi>): UInt32 {
+    return GetIScsiSessionListA(BufferSize, SessionCount, SessionInfo)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_GetIScsiSessionListEx == "on"]
+foreign {
     func GetIScsiSessionListEx(BufferSize: CPointer<UInt32>, SessionCountPtr: CPointer<UInt32>, SessionInfo: CPointer<ISCSI_SESSION_INFO_EXAbi>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_GetIScsiSessionListEx == "on"]
+public unsafe func Windows_GetIScsiSessionListEx(BufferSize: CPointer<UInt32>, SessionCountPtr: CPointer<UInt32>, SessionInfo: CPointer<ISCSI_SESSION_INFO_EXAbi>): UInt32 {
+    return GetIScsiSessionListEx(BufferSize, SessionCountPtr, SessionInfo)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_GetIScsiSessionListW == "on"]
+foreign {
     func GetIScsiSessionListW(BufferSize: CPointer<UInt32>, SessionCount: CPointer<UInt32>, SessionInfo: CPointer<ISCSI_SESSION_INFOWAbi>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_GetIScsiSessionListW == "on"]
+public unsafe func Windows_GetIScsiSessionListW(BufferSize: CPointer<UInt32>, SessionCount: CPointer<UInt32>, SessionInfo: CPointer<ISCSI_SESSION_INFOWAbi>): UInt32 {
+    return GetIScsiSessionListW(BufferSize, SessionCount, SessionInfo)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_GetIScsiTargetInformationA == "on"]
+foreign {
     // param-hint: DiscoveryMechanism optional
     func GetIScsiTargetInformationA(TargetName: CPointer<UInt8>, DiscoveryMechanism: CPointer<UInt8>, InfoClass: TARGET_INFORMATION_CLASSAbi, BufferSize: CPointer<UInt32>, Buffer: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_GetIScsiTargetInformationA == "on"]
+public unsafe func Windows_GetIScsiTargetInformationA(TargetName: CPointer<UInt8>, DiscoveryMechanism: CPointer<UInt8>, InfoClass: TARGET_INFORMATION_CLASSAbi, BufferSize: CPointer<UInt32>, Buffer: CPointer<Unit>): UInt32 {
+    return GetIScsiTargetInformationA(TargetName, DiscoveryMechanism, InfoClass, BufferSize, Buffer)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_GetIScsiTargetInformationW == "on"]
+foreign {
     // param-hint: DiscoveryMechanism optional
     func GetIScsiTargetInformationW(TargetName: CPointer<UInt16>, DiscoveryMechanism: CPointer<UInt16>, InfoClass: TARGET_INFORMATION_CLASSAbi, BufferSize: CPointer<UInt32>, Buffer: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_GetIScsiTargetInformationW == "on"]
+public unsafe func Windows_GetIScsiTargetInformationW(TargetName: CPointer<UInt16>, DiscoveryMechanism: CPointer<UInt16>, InfoClass: TARGET_INFORMATION_CLASSAbi, BufferSize: CPointer<UInt32>, Buffer: CPointer<Unit>): UInt32 {
+    return GetIScsiTargetInformationW(TargetName, DiscoveryMechanism, InfoClass, BufferSize, Buffer)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_GetIScsiVersionInformation == "on"]
+foreign {
     func GetIScsiVersionInformation(VersionInfo: CPointer<ISCSI_VERSION_INFOAbi>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_GetIScsiVersionInformation == "on"]
+public unsafe func Windows_GetIScsiVersionInformation(VersionInfo: CPointer<ISCSI_VERSION_INFOAbi>): UInt32 {
+    return GetIScsiVersionInformation(VersionInfo)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_LoginIScsiTargetA == "on"]
+foreign {
     // param-hint: InitiatorInstance optional
     // param-hint: Key len=param[8] optional
     func LoginIScsiTargetA(TargetName: CPointer<UInt8>, IsInformationalSession: UInt8, InitiatorInstance: CPointer<UInt8>, InitiatorPortNumber: UInt32, TargetPortal: CPointer<ISCSI_TARGET_PORTALAAbi>, SecurityFlags: UInt64, Mappings: CPointer<ISCSI_TARGET_MAPPINGAAbi>, LoginOptions: CPointer<ISCSI_LOGIN_OPTIONSAbi>, KeySize: UInt32, Key: CPointer<UInt8>, IsPersistent: UInt8, UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>, UniqueConnectionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_LoginIScsiTargetA == "on"]
+public unsafe func Windows_LoginIScsiTargetA(TargetName: CPointer<UInt8>, IsInformationalSession: UInt8, InitiatorInstance: CPointer<UInt8>, InitiatorPortNumber: UInt32, TargetPortal: CPointer<ISCSI_TARGET_PORTALAAbi>, SecurityFlags: UInt64, Mappings: CPointer<ISCSI_TARGET_MAPPINGAAbi>, LoginOptions: CPointer<ISCSI_LOGIN_OPTIONSAbi>, KeySize: UInt32, Key: CPointer<UInt8>, IsPersistent: UInt8, UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>, UniqueConnectionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>): UInt32 {
+    return LoginIScsiTargetA(TargetName, IsInformationalSession, InitiatorInstance, InitiatorPortNumber, TargetPortal, SecurityFlags, Mappings, LoginOptions, KeySize, Key, IsPersistent, UniqueSessionId, UniqueConnectionId)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_LoginIScsiTargetW == "on"]
+foreign {
     // param-hint: InitiatorInstance optional
     // param-hint: Key len=param[8] optional
     func LoginIScsiTargetW(TargetName: CPointer<UInt16>, IsInformationalSession: UInt8, InitiatorInstance: CPointer<UInt16>, InitiatorPortNumber: UInt32, TargetPortal: CPointer<ISCSI_TARGET_PORTALWAbi>, SecurityFlags: UInt64, Mappings: CPointer<ISCSI_TARGET_MAPPINGWAbi>, LoginOptions: CPointer<ISCSI_LOGIN_OPTIONSAbi>, KeySize: UInt32, Key: CPointer<UInt8>, IsPersistent: UInt8, UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>, UniqueConnectionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_LoginIScsiTargetW == "on"]
+public unsafe func Windows_LoginIScsiTargetW(TargetName: CPointer<UInt16>, IsInformationalSession: UInt8, InitiatorInstance: CPointer<UInt16>, InitiatorPortNumber: UInt32, TargetPortal: CPointer<ISCSI_TARGET_PORTALWAbi>, SecurityFlags: UInt64, Mappings: CPointer<ISCSI_TARGET_MAPPINGWAbi>, LoginOptions: CPointer<ISCSI_LOGIN_OPTIONSAbi>, KeySize: UInt32, Key: CPointer<UInt8>, IsPersistent: UInt8, UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>, UniqueConnectionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>): UInt32 {
+    return LoginIScsiTargetW(TargetName, IsInformationalSession, InitiatorInstance, InitiatorPortNumber, TargetPortal, SecurityFlags, Mappings, LoginOptions, KeySize, Key, IsPersistent, UniqueSessionId, UniqueConnectionId)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_LogoutIScsiTarget == "on"]
+foreign {
     func LogoutIScsiTarget(UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_LogoutIScsiTarget == "on"]
+public unsafe func Windows_LogoutIScsiTarget(UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>): UInt32 {
+    return LogoutIScsiTarget(UniqueSessionId)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RefreshISNSServerA == "on"]
+foreign {
     func RefreshISNSServerA(Address: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RefreshISNSServerA == "on"]
+public unsafe func Windows_RefreshISNSServerA(Address: CPointer<UInt8>): UInt32 {
+    return RefreshISNSServerA(Address)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RefreshISNSServerW == "on"]
+foreign {
     func RefreshISNSServerW(Address: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RefreshISNSServerW == "on"]
+public unsafe func Windows_RefreshISNSServerW(Address: CPointer<UInt16>): UInt32 {
+    return RefreshISNSServerW(Address)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RefreshIScsiSendTargetPortalA == "on"]
+foreign {
     // param-hint: InitiatorInstance optional
     func RefreshIScsiSendTargetPortalA(InitiatorInstance: CPointer<UInt8>, InitiatorPortNumber: UInt32, Portal: CPointer<ISCSI_TARGET_PORTALAAbi>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RefreshIScsiSendTargetPortalA == "on"]
+public unsafe func Windows_RefreshIScsiSendTargetPortalA(InitiatorInstance: CPointer<UInt8>, InitiatorPortNumber: UInt32, Portal: CPointer<ISCSI_TARGET_PORTALAAbi>): UInt32 {
+    return RefreshIScsiSendTargetPortalA(InitiatorInstance, InitiatorPortNumber, Portal)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RefreshIScsiSendTargetPortalW == "on"]
+foreign {
     // param-hint: InitiatorInstance optional
     func RefreshIScsiSendTargetPortalW(InitiatorInstance: CPointer<UInt16>, InitiatorPortNumber: UInt32, Portal: CPointer<ISCSI_TARGET_PORTALWAbi>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RefreshIScsiSendTargetPortalW == "on"]
+public unsafe func Windows_RefreshIScsiSendTargetPortalW(InitiatorInstance: CPointer<UInt16>, InitiatorPortNumber: UInt32, Portal: CPointer<ISCSI_TARGET_PORTALWAbi>): UInt32 {
+    return RefreshIScsiSendTargetPortalW(InitiatorInstance, InitiatorPortNumber, Portal)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RemoveISNSServerA == "on"]
+foreign {
     func RemoveISNSServerA(Address: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RemoveISNSServerA == "on"]
+public unsafe func Windows_RemoveISNSServerA(Address: CPointer<UInt8>): UInt32 {
+    return RemoveISNSServerA(Address)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RemoveISNSServerW == "on"]
+foreign {
     func RemoveISNSServerW(Address: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RemoveISNSServerW == "on"]
+public unsafe func Windows_RemoveISNSServerW(Address: CPointer<UInt16>): UInt32 {
+    return RemoveISNSServerW(Address)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RemoveIScsiConnection == "on"]
+foreign {
     func RemoveIScsiConnection(UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>, ConnectionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RemoveIScsiConnection == "on"]
+public unsafe func Windows_RemoveIScsiConnection(UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>, ConnectionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>): UInt32 {
+    return RemoveIScsiConnection(UniqueSessionId, ConnectionId)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RemoveIScsiPersistentTargetA == "on"]
+foreign {
     func RemoveIScsiPersistentTargetA(InitiatorInstance: CPointer<UInt8>, InitiatorPortNumber: UInt32, TargetName: CPointer<UInt8>, Portal: CPointer<ISCSI_TARGET_PORTALAAbi>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RemoveIScsiPersistentTargetA == "on"]
+public unsafe func Windows_RemoveIScsiPersistentTargetA(InitiatorInstance: CPointer<UInt8>, InitiatorPortNumber: UInt32, TargetName: CPointer<UInt8>, Portal: CPointer<ISCSI_TARGET_PORTALAAbi>): UInt32 {
+    return RemoveIScsiPersistentTargetA(InitiatorInstance, InitiatorPortNumber, TargetName, Portal)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RemoveIScsiPersistentTargetW == "on"]
+foreign {
     func RemoveIScsiPersistentTargetW(InitiatorInstance: CPointer<UInt16>, InitiatorPortNumber: UInt32, TargetName: CPointer<UInt16>, Portal: CPointer<ISCSI_TARGET_PORTALWAbi>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RemoveIScsiPersistentTargetW == "on"]
+public unsafe func Windows_RemoveIScsiPersistentTargetW(InitiatorInstance: CPointer<UInt16>, InitiatorPortNumber: UInt32, TargetName: CPointer<UInt16>, Portal: CPointer<ISCSI_TARGET_PORTALWAbi>): UInt32 {
+    return RemoveIScsiPersistentTargetW(InitiatorInstance, InitiatorPortNumber, TargetName, Portal)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RemoveIScsiSendTargetPortalA == "on"]
+foreign {
     // param-hint: InitiatorInstance optional
     func RemoveIScsiSendTargetPortalA(InitiatorInstance: CPointer<UInt8>, InitiatorPortNumber: UInt32, Portal: CPointer<ISCSI_TARGET_PORTALAAbi>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RemoveIScsiSendTargetPortalA == "on"]
+public unsafe func Windows_RemoveIScsiSendTargetPortalA(InitiatorInstance: CPointer<UInt8>, InitiatorPortNumber: UInt32, Portal: CPointer<ISCSI_TARGET_PORTALAAbi>): UInt32 {
+    return RemoveIScsiSendTargetPortalA(InitiatorInstance, InitiatorPortNumber, Portal)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RemoveIScsiSendTargetPortalW == "on"]
+foreign {
     // param-hint: InitiatorInstance optional
     func RemoveIScsiSendTargetPortalW(InitiatorInstance: CPointer<UInt16>, InitiatorPortNumber: UInt32, Portal: CPointer<ISCSI_TARGET_PORTALWAbi>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RemoveIScsiSendTargetPortalW == "on"]
+public unsafe func Windows_RemoveIScsiSendTargetPortalW(InitiatorInstance: CPointer<UInt16>, InitiatorPortNumber: UInt32, Portal: CPointer<ISCSI_TARGET_PORTALWAbi>): UInt32 {
+    return RemoveIScsiSendTargetPortalW(InitiatorInstance, InitiatorPortNumber, Portal)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RemoveIScsiStaticTargetA == "on"]
+foreign {
     func RemoveIScsiStaticTargetA(TargetName: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RemoveIScsiStaticTargetA == "on"]
+public unsafe func Windows_RemoveIScsiStaticTargetA(TargetName: CPointer<UInt8>): UInt32 {
+    return RemoveIScsiStaticTargetA(TargetName)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RemoveIScsiStaticTargetW == "on"]
+foreign {
     func RemoveIScsiStaticTargetW(TargetName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RemoveIScsiStaticTargetW == "on"]
+public unsafe func Windows_RemoveIScsiStaticTargetW(TargetName: CPointer<UInt16>): UInt32 {
+    return RemoveIScsiStaticTargetW(TargetName)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RemovePersistentIScsiDeviceA == "on"]
+foreign {
     func RemovePersistentIScsiDeviceA(DevicePath: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RemovePersistentIScsiDeviceA == "on"]
+public unsafe func Windows_RemovePersistentIScsiDeviceA(DevicePath: CPointer<UInt8>): UInt32 {
+    return RemovePersistentIScsiDeviceA(DevicePath)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RemovePersistentIScsiDeviceW == "on"]
+foreign {
     func RemovePersistentIScsiDeviceW(DevicePath: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RemovePersistentIScsiDeviceW == "on"]
+public unsafe func Windows_RemovePersistentIScsiDeviceW(DevicePath: CPointer<UInt16>): UInt32 {
+    return RemovePersistentIScsiDeviceW(DevicePath)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RemoveRadiusServerA == "on"]
+foreign {
     func RemoveRadiusServerA(Address: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RemoveRadiusServerA == "on"]
+public unsafe func Windows_RemoveRadiusServerA(Address: CPointer<UInt8>): UInt32 {
+    return RemoveRadiusServerA(Address)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RemoveRadiusServerW == "on"]
+foreign {
     func RemoveRadiusServerW(Address: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_RemoveRadiusServerW == "on"]
+public unsafe func Windows_RemoveRadiusServerW(Address: CPointer<UInt16>): UInt32 {
+    return RemoveRadiusServerW(Address)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportActiveIScsiTargetMappingsA == "on"]
+foreign {
     func ReportActiveIScsiTargetMappingsA(BufferSize: CPointer<UInt32>, MappingCount: CPointer<UInt32>, Mappings: CPointer<ISCSI_TARGET_MAPPINGAAbi>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportActiveIScsiTargetMappingsA == "on"]
+public unsafe func Windows_ReportActiveIScsiTargetMappingsA(BufferSize: CPointer<UInt32>, MappingCount: CPointer<UInt32>, Mappings: CPointer<ISCSI_TARGET_MAPPINGAAbi>): UInt32 {
+    return ReportActiveIScsiTargetMappingsA(BufferSize, MappingCount, Mappings)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportActiveIScsiTargetMappingsW == "on"]
+foreign {
     func ReportActiveIScsiTargetMappingsW(BufferSize: CPointer<UInt32>, MappingCount: CPointer<UInt32>, Mappings: CPointer<ISCSI_TARGET_MAPPINGWAbi>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportActiveIScsiTargetMappingsW == "on"]
+public unsafe func Windows_ReportActiveIScsiTargetMappingsW(BufferSize: CPointer<UInt32>, MappingCount: CPointer<UInt32>, Mappings: CPointer<ISCSI_TARGET_MAPPINGWAbi>): UInt32 {
+    return ReportActiveIScsiTargetMappingsW(BufferSize, MappingCount, Mappings)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportISNSServerListA == "on"]
+foreign {
     // param-hint: Buffer len=param[0] optional
     func ReportISNSServerListA(BufferSizeInChar: CPointer<UInt32>, Buffer: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportISNSServerListA == "on"]
+public unsafe func Windows_ReportISNSServerListA(BufferSizeInChar: CPointer<UInt32>, Buffer: CPointer<UInt8>): UInt32 {
+    return ReportISNSServerListA(BufferSizeInChar, Buffer)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportISNSServerListW == "on"]
+foreign {
     // param-hint: Buffer len=param[0] optional
     func ReportISNSServerListW(BufferSizeInChar: CPointer<UInt32>, Buffer: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportISNSServerListW == "on"]
+public unsafe func Windows_ReportISNSServerListW(BufferSizeInChar: CPointer<UInt32>, Buffer: CPointer<UInt16>): UInt32 {
+    return ReportISNSServerListW(BufferSizeInChar, Buffer)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportIScsiInitiatorListA == "on"]
+foreign {
     // param-hint: Buffer len=param[0] optional
     func ReportIScsiInitiatorListA(BufferSize: CPointer<UInt32>, Buffer: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportIScsiInitiatorListA == "on"]
+public unsafe func Windows_ReportIScsiInitiatorListA(BufferSize: CPointer<UInt32>, Buffer: CPointer<UInt8>): UInt32 {
+    return ReportIScsiInitiatorListA(BufferSize, Buffer)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportIScsiInitiatorListW == "on"]
+foreign {
     // param-hint: Buffer len=param[0] optional
     func ReportIScsiInitiatorListW(BufferSize: CPointer<UInt32>, Buffer: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportIScsiInitiatorListW == "on"]
+public unsafe func Windows_ReportIScsiInitiatorListW(BufferSize: CPointer<UInt32>, Buffer: CPointer<UInt16>): UInt32 {
+    return ReportIScsiInitiatorListW(BufferSize, Buffer)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportIScsiPersistentLoginsA == "on"]
+foreign {
     func ReportIScsiPersistentLoginsA(Count: CPointer<UInt32>, PersistentLoginInfo: CPointer<PERSISTENT_ISCSI_LOGIN_INFOAAbi>, BufferSizeInBytes: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportIScsiPersistentLoginsA == "on"]
+public unsafe func Windows_ReportIScsiPersistentLoginsA(Count: CPointer<UInt32>, PersistentLoginInfo: CPointer<PERSISTENT_ISCSI_LOGIN_INFOAAbi>, BufferSizeInBytes: CPointer<UInt32>): UInt32 {
+    return ReportIScsiPersistentLoginsA(Count, PersistentLoginInfo, BufferSizeInBytes)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportIScsiPersistentLoginsW == "on"]
+foreign {
     func ReportIScsiPersistentLoginsW(Count: CPointer<UInt32>, PersistentLoginInfo: CPointer<PERSISTENT_ISCSI_LOGIN_INFOWAbi>, BufferSizeInBytes: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportIScsiPersistentLoginsW == "on"]
+public unsafe func Windows_ReportIScsiPersistentLoginsW(Count: CPointer<UInt32>, PersistentLoginInfo: CPointer<PERSISTENT_ISCSI_LOGIN_INFOWAbi>, BufferSizeInBytes: CPointer<UInt32>): UInt32 {
+    return ReportIScsiPersistentLoginsW(Count, PersistentLoginInfo, BufferSizeInBytes)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportIScsiSendTargetPortalsA == "on"]
+foreign {
     func ReportIScsiSendTargetPortalsA(PortalCount: CPointer<UInt32>, PortalInfo: CPointer<ISCSI_TARGET_PORTAL_INFOAAbi>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportIScsiSendTargetPortalsA == "on"]
+public unsafe func Windows_ReportIScsiSendTargetPortalsA(PortalCount: CPointer<UInt32>, PortalInfo: CPointer<ISCSI_TARGET_PORTAL_INFOAAbi>): UInt32 {
+    return ReportIScsiSendTargetPortalsA(PortalCount, PortalInfo)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportIScsiSendTargetPortalsExA == "on"]
+foreign {
     func ReportIScsiSendTargetPortalsExA(PortalCount: CPointer<UInt32>, PortalInfoSize: CPointer<UInt32>, PortalInfo: CPointer<ISCSI_TARGET_PORTAL_INFO_EXAAbi>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportIScsiSendTargetPortalsExA == "on"]
+public unsafe func Windows_ReportIScsiSendTargetPortalsExA(PortalCount: CPointer<UInt32>, PortalInfoSize: CPointer<UInt32>, PortalInfo: CPointer<ISCSI_TARGET_PORTAL_INFO_EXAAbi>): UInt32 {
+    return ReportIScsiSendTargetPortalsExA(PortalCount, PortalInfoSize, PortalInfo)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportIScsiSendTargetPortalsExW == "on"]
+foreign {
     func ReportIScsiSendTargetPortalsExW(PortalCount: CPointer<UInt32>, PortalInfoSize: CPointer<UInt32>, PortalInfo: CPointer<ISCSI_TARGET_PORTAL_INFO_EXWAbi>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportIScsiSendTargetPortalsExW == "on"]
+public unsafe func Windows_ReportIScsiSendTargetPortalsExW(PortalCount: CPointer<UInt32>, PortalInfoSize: CPointer<UInt32>, PortalInfo: CPointer<ISCSI_TARGET_PORTAL_INFO_EXWAbi>): UInt32 {
+    return ReportIScsiSendTargetPortalsExW(PortalCount, PortalInfoSize, PortalInfo)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportIScsiSendTargetPortalsW == "on"]
+foreign {
     func ReportIScsiSendTargetPortalsW(PortalCount: CPointer<UInt32>, PortalInfo: CPointer<ISCSI_TARGET_PORTAL_INFOWAbi>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportIScsiSendTargetPortalsW == "on"]
+public unsafe func Windows_ReportIScsiSendTargetPortalsW(PortalCount: CPointer<UInt32>, PortalInfo: CPointer<ISCSI_TARGET_PORTAL_INFOWAbi>): UInt32 {
+    return ReportIScsiSendTargetPortalsW(PortalCount, PortalInfo)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportIScsiTargetPortalsA == "on"]
+foreign {
     // param-hint: InitiatorName optional
     func ReportIScsiTargetPortalsA(InitiatorName: CPointer<UInt8>, TargetName: CPointer<UInt8>, TargetPortalTag: CPointer<UInt16>, ElementCount: CPointer<UInt32>, Portals: CPointer<ISCSI_TARGET_PORTALAAbi>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportIScsiTargetPortalsA == "on"]
+public unsafe func Windows_ReportIScsiTargetPortalsA(InitiatorName: CPointer<UInt8>, TargetName: CPointer<UInt8>, TargetPortalTag: CPointer<UInt16>, ElementCount: CPointer<UInt32>, Portals: CPointer<ISCSI_TARGET_PORTALAAbi>): UInt32 {
+    return ReportIScsiTargetPortalsA(InitiatorName, TargetName, TargetPortalTag, ElementCount, Portals)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportIScsiTargetPortalsW == "on"]
+foreign {
     // param-hint: InitiatorName optional
     func ReportIScsiTargetPortalsW(InitiatorName: CPointer<UInt16>, TargetName: CPointer<UInt16>, TargetPortalTag: CPointer<UInt16>, ElementCount: CPointer<UInt32>, Portals: CPointer<ISCSI_TARGET_PORTALWAbi>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportIScsiTargetPortalsW == "on"]
+public unsafe func Windows_ReportIScsiTargetPortalsW(InitiatorName: CPointer<UInt16>, TargetName: CPointer<UInt16>, TargetPortalTag: CPointer<UInt16>, ElementCount: CPointer<UInt32>, Portals: CPointer<ISCSI_TARGET_PORTALWAbi>): UInt32 {
+    return ReportIScsiTargetPortalsW(InitiatorName, TargetName, TargetPortalTag, ElementCount, Portals)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportIScsiTargetsA == "on"]
+foreign {
     // param-hint: Buffer len=param[1] optional
     func ReportIScsiTargetsA(ForceUpdate: UInt8, BufferSize: CPointer<UInt32>, Buffer: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportIScsiTargetsA == "on"]
+public unsafe func Windows_ReportIScsiTargetsA(ForceUpdate: UInt8, BufferSize: CPointer<UInt32>, Buffer: CPointer<UInt8>): UInt32 {
+    return ReportIScsiTargetsA(ForceUpdate, BufferSize, Buffer)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportIScsiTargetsW == "on"]
+foreign {
     // param-hint: Buffer len=param[1] optional
     func ReportIScsiTargetsW(ForceUpdate: UInt8, BufferSize: CPointer<UInt32>, Buffer: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportIScsiTargetsW == "on"]
+public unsafe func Windows_ReportIScsiTargetsW(ForceUpdate: UInt8, BufferSize: CPointer<UInt32>, Buffer: CPointer<UInt16>): UInt32 {
+    return ReportIScsiTargetsW(ForceUpdate, BufferSize, Buffer)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportPersistentIScsiDevicesA == "on"]
+foreign {
     // param-hint: Buffer len=param[0] optional
     func ReportPersistentIScsiDevicesA(BufferSizeInChar: CPointer<UInt32>, Buffer: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportPersistentIScsiDevicesA == "on"]
+public unsafe func Windows_ReportPersistentIScsiDevicesA(BufferSizeInChar: CPointer<UInt32>, Buffer: CPointer<UInt8>): UInt32 {
+    return ReportPersistentIScsiDevicesA(BufferSizeInChar, Buffer)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportPersistentIScsiDevicesW == "on"]
+foreign {
     // param-hint: Buffer len=param[0] optional
     func ReportPersistentIScsiDevicesW(BufferSizeInChar: CPointer<UInt32>, Buffer: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportPersistentIScsiDevicesW == "on"]
+public unsafe func Windows_ReportPersistentIScsiDevicesW(BufferSizeInChar: CPointer<UInt32>, Buffer: CPointer<UInt16>): UInt32 {
+    return ReportPersistentIScsiDevicesW(BufferSizeInChar, Buffer)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportRadiusServerListA == "on"]
+foreign {
     // param-hint: Buffer len=param[0] optional
     func ReportRadiusServerListA(BufferSizeInChar: CPointer<UInt32>, Buffer: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportRadiusServerListA == "on"]
+public unsafe func Windows_ReportRadiusServerListA(BufferSizeInChar: CPointer<UInt32>, Buffer: CPointer<UInt8>): UInt32 {
+    return ReportRadiusServerListA(BufferSizeInChar, Buffer)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportRadiusServerListW == "on"]
+foreign {
     // param-hint: Buffer len=param[0] optional
     func ReportRadiusServerListW(BufferSizeInChar: CPointer<UInt32>, Buffer: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_ReportRadiusServerListW == "on"]
+public unsafe func Windows_ReportRadiusServerListW(BufferSizeInChar: CPointer<UInt32>, Buffer: CPointer<UInt16>): UInt32 {
+    return ReportRadiusServerListW(BufferSizeInChar, Buffer)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_SendScsiInquiry == "on"]
+foreign {
     func SendScsiInquiry(UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>, Lun: UInt64, EvpdCmddt: UInt8, PageCode: UInt8, ScsiStatus: CPointer<UInt8>, ResponseSize: CPointer<UInt32>, ResponseBuffer: CPointer<UInt8>, SenseSize: CPointer<UInt32>, SenseBuffer: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_SendScsiInquiry == "on"]
+public unsafe func Windows_SendScsiInquiry(UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>, Lun: UInt64, EvpdCmddt: UInt8, PageCode: UInt8, ScsiStatus: CPointer<UInt8>, ResponseSize: CPointer<UInt32>, ResponseBuffer: CPointer<UInt8>, SenseSize: CPointer<UInt32>, SenseBuffer: CPointer<UInt8>): UInt32 {
+    return SendScsiInquiry(UniqueSessionId, Lun, EvpdCmddt, PageCode, ScsiStatus, ResponseSize, ResponseBuffer, SenseSize, SenseBuffer)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_SendScsiReadCapacity == "on"]
+foreign {
     func SendScsiReadCapacity(UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>, Lun: UInt64, ScsiStatus: CPointer<UInt8>, ResponseSize: CPointer<UInt32>, ResponseBuffer: CPointer<UInt8>, SenseSize: CPointer<UInt32>, SenseBuffer: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_SendScsiReadCapacity == "on"]
+public unsafe func Windows_SendScsiReadCapacity(UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>, Lun: UInt64, ScsiStatus: CPointer<UInt8>, ResponseSize: CPointer<UInt32>, ResponseBuffer: CPointer<UInt8>, SenseSize: CPointer<UInt32>, SenseBuffer: CPointer<UInt8>): UInt32 {
+    return SendScsiReadCapacity(UniqueSessionId, Lun, ScsiStatus, ResponseSize, ResponseBuffer, SenseSize, SenseBuffer)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_SendScsiReportLuns == "on"]
+foreign {
     func SendScsiReportLuns(UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>, ScsiStatus: CPointer<UInt8>, ResponseSize: CPointer<UInt32>, ResponseBuffer: CPointer<UInt8>, SenseSize: CPointer<UInt32>, SenseBuffer: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_SendScsiReportLuns == "on"]
+public unsafe func Windows_SendScsiReportLuns(UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>, ScsiStatus: CPointer<UInt8>, ResponseSize: CPointer<UInt32>, ResponseBuffer: CPointer<UInt8>, SenseSize: CPointer<UInt32>, SenseBuffer: CPointer<UInt8>): UInt32 {
+    return SendScsiReportLuns(UniqueSessionId, ScsiStatus, ResponseSize, ResponseBuffer, SenseSize, SenseBuffer)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_SetIScsiGroupPresharedKey == "on"]
+foreign {
     func SetIScsiGroupPresharedKey(KeyLength: UInt32, Key: CPointer<UInt8>, Persist: UInt8): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_SetIScsiGroupPresharedKey == "on"]
+public unsafe func Windows_SetIScsiGroupPresharedKey(KeyLength: UInt32, Key: CPointer<UInt8>, Persist: UInt8): UInt32 {
+    return SetIScsiGroupPresharedKey(KeyLength, Key, Persist)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_SetIScsiIKEInfoA == "on"]
+foreign {
     // param-hint: InitiatorName optional
     func SetIScsiIKEInfoA(InitiatorName: CPointer<UInt8>, InitiatorPortNumber: UInt32, AuthInfo: CPointer<IKE_AUTHENTICATION_INFORMATIONAbi>, Persist: UInt8): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_SetIScsiIKEInfoA == "on"]
+public unsafe func Windows_SetIScsiIKEInfoA(InitiatorName: CPointer<UInt8>, InitiatorPortNumber: UInt32, AuthInfo: CPointer<IKE_AUTHENTICATION_INFORMATIONAbi>, Persist: UInt8): UInt32 {
+    return SetIScsiIKEInfoA(InitiatorName, InitiatorPortNumber, AuthInfo, Persist)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_SetIScsiIKEInfoW == "on"]
+foreign {
     // param-hint: InitiatorName optional
     func SetIScsiIKEInfoW(InitiatorName: CPointer<UInt16>, InitiatorPortNumber: UInt32, AuthInfo: CPointer<IKE_AUTHENTICATION_INFORMATIONAbi>, Persist: UInt8): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_SetIScsiIKEInfoW == "on"]
+public unsafe func Windows_SetIScsiIKEInfoW(InitiatorName: CPointer<UInt16>, InitiatorPortNumber: UInt32, AuthInfo: CPointer<IKE_AUTHENTICATION_INFORMATIONAbi>, Persist: UInt8): UInt32 {
+    return SetIScsiIKEInfoW(InitiatorName, InitiatorPortNumber, AuthInfo, Persist)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_SetIScsiInitiatorCHAPSharedSecret == "on"]
+foreign {
     func SetIScsiInitiatorCHAPSharedSecret(SharedSecretLength: UInt32, SharedSecret: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_SetIScsiInitiatorCHAPSharedSecret == "on"]
+public unsafe func Windows_SetIScsiInitiatorCHAPSharedSecret(SharedSecretLength: UInt32, SharedSecret: CPointer<UInt8>): UInt32 {
+    return SetIScsiInitiatorCHAPSharedSecret(SharedSecretLength, SharedSecret)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_SetIScsiInitiatorNodeNameA == "on"]
+foreign {
     // param-hint: InitiatorNodeName optional
     func SetIScsiInitiatorNodeNameA(InitiatorNodeName: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_SetIScsiInitiatorNodeNameA == "on"]
+public unsafe func Windows_SetIScsiInitiatorNodeNameA(InitiatorNodeName: CPointer<UInt8>): UInt32 {
+    return SetIScsiInitiatorNodeNameA(InitiatorNodeName)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_SetIScsiInitiatorNodeNameW == "on"]
+foreign {
     // param-hint: InitiatorNodeName optional
     func SetIScsiInitiatorNodeNameW(InitiatorNodeName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_SetIScsiInitiatorNodeNameW == "on"]
+public unsafe func Windows_SetIScsiInitiatorNodeNameW(InitiatorNodeName: CPointer<UInt16>): UInt32 {
+    return SetIScsiInitiatorNodeNameW(InitiatorNodeName)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_SetIScsiInitiatorRADIUSSharedSecret == "on"]
+foreign {
     func SetIScsiInitiatorRADIUSSharedSecret(SharedSecretLength: UInt32, SharedSecret: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_SetIScsiInitiatorRADIUSSharedSecret == "on"]
+public unsafe func Windows_SetIScsiInitiatorRADIUSSharedSecret(SharedSecretLength: UInt32, SharedSecret: CPointer<UInt8>): UInt32 {
+    return SetIScsiInitiatorRADIUSSharedSecret(SharedSecretLength, SharedSecret)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_SetIScsiTunnelModeOuterAddressA == "on"]
+foreign {
     // param-hint: InitiatorName optional
     // param-hint: DestinationAddress optional
     // param-hint: OuterModeAddress optional
     func SetIScsiTunnelModeOuterAddressA(InitiatorName: CPointer<UInt8>, InitiatorPortNumber: UInt32, DestinationAddress: CPointer<UInt8>, OuterModeAddress: CPointer<UInt8>, Persist: UInt8): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_SetIScsiTunnelModeOuterAddressA == "on"]
+public unsafe func Windows_SetIScsiTunnelModeOuterAddressA(InitiatorName: CPointer<UInt8>, InitiatorPortNumber: UInt32, DestinationAddress: CPointer<UInt8>, OuterModeAddress: CPointer<UInt8>, Persist: UInt8): UInt32 {
+    return SetIScsiTunnelModeOuterAddressA(InitiatorName, InitiatorPortNumber, DestinationAddress, OuterModeAddress, Persist)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_SetIScsiTunnelModeOuterAddressW == "on"]
+foreign {
     // param-hint: InitiatorName optional
     // param-hint: DestinationAddress optional
     // param-hint: OuterModeAddress optional
     func SetIScsiTunnelModeOuterAddressW(InitiatorName: CPointer<UInt16>, InitiatorPortNumber: UInt32, DestinationAddress: CPointer<UInt16>, OuterModeAddress: CPointer<UInt16>, Persist: UInt8): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_SetIScsiTunnelModeOuterAddressW == "on"]
+public unsafe func Windows_SetIScsiTunnelModeOuterAddressW(InitiatorName: CPointer<UInt16>, InitiatorPortNumber: UInt32, DestinationAddress: CPointer<UInt16>, OuterModeAddress: CPointer<UInt16>, Persist: UInt8): UInt32 {
+    return SetIScsiTunnelModeOuterAddressW(InitiatorName, InitiatorPortNumber, DestinationAddress, OuterModeAddress, Persist)
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_SetupPersistentIScsiDevices == "on"]
+foreign {
     func SetupPersistentIScsiDevices(): UInt32
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_SetupPersistentIScsiDevices == "on"]
+public unsafe func Windows_SetupPersistentIScsiDevices(): UInt32 {
+    return SetupPersistentIScsiDevices()
+}
+
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_SetupPersistentIScsiVolumes == "on"]
+foreign {
     func SetupPersistentIScsiVolumes(): UInt32
 }
 
-@When[ISCSIDSC == "on" && Windows_Win32_System_Ioctl == "on"]
-foreign {
-    func GetDevicesForIScsiSessionA(UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>, DeviceCount: CPointer<UInt32>, Devices: CPointer<ISCSI_DEVICE_ON_SESSIONAAbi>): UInt32
-    func GetDevicesForIScsiSessionW(UniqueSessionId: CPointer<ISCSI_UNIQUE_SESSION_IDAbi>, DeviceCount: CPointer<UInt32>, Devices: CPointer<ISCSI_DEVICE_ON_SESSIONWAbi>): UInt32
+@When[Windows_Win32_Storage_IscsiDisc == "on" && ISCSIDSC == "on" && Windows_Win32_Storage_IscsiDisc_SetupPersistentIScsiVolumes == "on"]
+public unsafe func Windows_SetupPersistentIScsiVolumes(): UInt32 {
+    return SetupPersistentIScsiVolumes()
 }
 
 @When[Windows_Win32_Storage_IscsiDisc == "on"]

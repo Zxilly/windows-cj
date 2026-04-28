@@ -4,13 +4,9 @@ package windows_sys.AI.MachineLearning
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_Graphics == "on"]
 import windows_sys.Graphics as Graphics
-@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
 import windows_sys.Graphics.DirectX.Direct3D11 as Graphics_DirectX_Direct3D11
-@When[Windows_Graphics_Imaging == "on"]
 import windows_sys.Graphics.Imaging as Graphics_Imaging
-@When[Windows_Media == "on"]
 import windows_sys.Media as Media
 import windows_sys._impl_l0 as _impl_l0
 import windows_sys._impl_l1 as _impl_l1
@@ -297,6 +293,7 @@ public struct ILearningModelEvaluationResultVtbl {
     public var CorrelationId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ErrorStatus: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Succeeded: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Outputs: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -359,6 +356,7 @@ public class ILearningModelEvaluationResult <: InterfaceWrapperBase & ComInterfa
         return __vt.Succeeded(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Outputs(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -597,6 +595,7 @@ public class ILearningModelSessionOptions3 <: InterfaceWrapperBase & ComInterfac
 @C
 public struct ITensorBooleanVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAsVectorView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -641,6 +640,7 @@ public class ITensorBoolean <: InterfaceWrapperBase & ComInterface {
         readVtbl<ITensorBooleanVtbl>(ITensorBooleanVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -652,6 +652,7 @@ public class ITensorBoolean <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ITensorDoubleVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAsVectorView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -696,6 +697,7 @@ public class ITensorDouble <: InterfaceWrapperBase & ComInterface {
         readVtbl<ITensorDoubleVtbl>(ITensorDoubleVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -707,6 +709,7 @@ public class ITensorDouble <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ITensorFloatVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAsVectorView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -751,6 +754,7 @@ public class ITensorFloat <: InterfaceWrapperBase & ComInterface {
         readVtbl<ITensorFloatVtbl>(ITensorFloatVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -762,6 +766,7 @@ public class ITensorFloat <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ITensorFloat16BitVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAsVectorView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -806,6 +811,7 @@ public class ITensorFloat16Bit <: InterfaceWrapperBase & ComInterface {
         readVtbl<ITensorFloat16BitVtbl>(ITensorFloat16BitVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -817,6 +823,7 @@ public class ITensorFloat16Bit <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ITensorInt16BitVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAsVectorView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -861,6 +868,7 @@ public class ITensorInt16Bit <: InterfaceWrapperBase & ComInterface {
         readVtbl<ITensorInt16BitVtbl>(ITensorInt16BitVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -872,6 +880,7 @@ public class ITensorInt16Bit <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ITensorInt32BitVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAsVectorView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -916,6 +925,7 @@ public class ITensorInt32Bit <: InterfaceWrapperBase & ComInterface {
         readVtbl<ITensorInt32BitVtbl>(ITensorInt32BitVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -927,6 +937,7 @@ public class ITensorInt32Bit <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ITensorInt64BitVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAsVectorView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -971,6 +982,7 @@ public class ITensorInt64Bit <: InterfaceWrapperBase & ComInterface {
         readVtbl<ITensorInt64BitVtbl>(ITensorInt64BitVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -982,6 +994,7 @@ public class ITensorInt64Bit <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ITensorInt8BitVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAsVectorView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1026,6 +1039,7 @@ public class ITensorInt8Bit <: InterfaceWrapperBase & ComInterface {
         readVtbl<ITensorInt8BitVtbl>(ITensorInt8BitVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1037,6 +1051,7 @@ public class ITensorInt8Bit <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ITensorStringVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAsVectorView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1081,6 +1096,7 @@ public class ITensorString <: InterfaceWrapperBase & ComInterface {
         readVtbl<ITensorStringVtbl>(ITensorStringVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1092,6 +1108,7 @@ public class ITensorString <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ITensorUInt16BitVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAsVectorView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1136,6 +1153,7 @@ public class ITensorUInt16Bit <: InterfaceWrapperBase & ComInterface {
         readVtbl<ITensorUInt16BitVtbl>(ITensorUInt16BitVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1147,6 +1165,7 @@ public class ITensorUInt16Bit <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ITensorUInt32BitVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAsVectorView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1191,6 +1210,7 @@ public class ITensorUInt32Bit <: InterfaceWrapperBase & ComInterface {
         readVtbl<ITensorUInt32BitVtbl>(ITensorUInt32BitVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1202,6 +1222,7 @@ public class ITensorUInt32Bit <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ITensorUInt64BitVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAsVectorView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1246,6 +1267,7 @@ public class ITensorUInt64Bit <: InterfaceWrapperBase & ComInterface {
         readVtbl<ITensorUInt64BitVtbl>(ITensorUInt64BitVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1257,6 +1279,7 @@ public class ITensorUInt64Bit <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ITensorUInt8BitVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAsVectorView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1301,6 +1324,7 @@ public class ITensorUInt8Bit <: InterfaceWrapperBase & ComInterface {
         readVtbl<ITensorUInt8BitVtbl>(ITensorUInt8BitVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAsVectorView(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1778,6 +1802,7 @@ public class ISequenceFeatureDescriptor <: InterfaceWrapperBase & ComInterface {
 public struct ITensorVtbl {
     public var base_: ILearningModelFeatureValueVtbl = ILearningModelFeatureValueVtbl()
     public var TensorKind: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Shape: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1828,6 +1853,7 @@ public class ITensor <: InterfaceWrapperBase & ComInterface {
         return __vt.TensorKind(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Shape(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1840,6 +1866,7 @@ public class ITensor <: InterfaceWrapperBase & ComInterface {
 public struct ITensorFeatureDescriptorVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var TensorKind: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Shape: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1890,6 +1917,7 @@ public class ITensorFeatureDescriptor <: InterfaceWrapperBase & ComInterface {
         return __vt.TensorKind(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Shape(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1906,8 +1934,11 @@ public struct ILearningModelVtbl {
     public var Domain: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Description: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Version: CFunc<(CPointer<Unit>, CPointer<Int64>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Metadata: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var InputFeatures: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var OutputFeatures: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1982,18 +2013,21 @@ public class ILearningModel <: InterfaceWrapperBase & ComInterface {
         return __vt.Version(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Metadata(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Metadata(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InputFeatures(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.InputFeatures(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OutputFeatures(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2234,8 +2268,10 @@ public struct ILearningModelSessionVtbl {
     @When[Windows_Foundation_Collections == "on"]
     public var EvaluationProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var EvaluateAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var EvaluateFeaturesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var Evaluate: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var EvaluateFeatures: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -2305,6 +2341,7 @@ public class ILearningModelSession <: InterfaceWrapperBase & ComInterface {
         return __vt.EvaluateAsync(__liveRaw, bindings, correlationId, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func EvaluateFeaturesAsync(features: CPointer<Unit>, correlationId: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2317,6 +2354,7 @@ public class ILearningModelSession <: InterfaceWrapperBase & ComInterface {
         return __vt.Evaluate(__liveRaw, bindings, correlationId, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func EvaluateFeatures(features: CPointer<Unit>, correlationId: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2562,8 +2600,11 @@ public class ILearningModelStatics <: InterfaceWrapperBase & ComInterface {
 public struct ITensorBooleanStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Create: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Create2: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromArray: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Bool>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromIterable: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -2614,18 +2655,21 @@ public class ITensorBooleanStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.Create(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create2(shape: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Create2(__liveRaw, shape, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromArray(shape: CPointer<Unit>, dataSize: UInt32, data: CPointer<Bool>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateFromArray(__liveRaw, shape, dataSize, data, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromIterable(shape: CPointer<Unit>, data: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2702,8 +2746,11 @@ public class ITensorBooleanStatics2 <: InterfaceWrapperBase & ComInterface {
 public struct ITensorDoubleStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Create: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Create2: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromArray: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Float64>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromIterable: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -2754,18 +2801,21 @@ public class ITensorDoubleStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.Create(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create2(shape: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Create2(__liveRaw, shape, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromArray(shape: CPointer<Unit>, dataSize: UInt32, data: CPointer<Float64>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateFromArray(__liveRaw, shape, dataSize, data, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromIterable(shape: CPointer<Unit>, data: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2842,8 +2892,11 @@ public class ITensorDoubleStatics2 <: InterfaceWrapperBase & ComInterface {
 public struct ITensorFloat16BitStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Create: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Create2: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromArray: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Float32>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromIterable: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -2894,18 +2947,21 @@ public class ITensorFloat16BitStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.Create(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create2(shape: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Create2(__liveRaw, shape, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromArray(shape: CPointer<Unit>, dataSize: UInt32, data: CPointer<Float32>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateFromArray(__liveRaw, shape, dataSize, data, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromIterable(shape: CPointer<Unit>, data: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2982,8 +3038,11 @@ public class ITensorFloat16BitStatics2 <: InterfaceWrapperBase & ComInterface {
 public struct ITensorFloatStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Create: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Create2: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromArray: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Float32>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromIterable: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -3034,18 +3093,21 @@ public class ITensorFloatStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.Create(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create2(shape: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Create2(__liveRaw, shape, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromArray(shape: CPointer<Unit>, dataSize: UInt32, data: CPointer<Float32>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateFromArray(__liveRaw, shape, dataSize, data, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromIterable(shape: CPointer<Unit>, data: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3122,8 +3184,11 @@ public class ITensorFloatStatics2 <: InterfaceWrapperBase & ComInterface {
 public struct ITensorInt16BitStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Create: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Create2: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromArray: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Int16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromIterable: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -3174,18 +3239,21 @@ public class ITensorInt16BitStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.Create(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create2(shape: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Create2(__liveRaw, shape, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromArray(shape: CPointer<Unit>, dataSize: UInt32, data: CPointer<Int16>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateFromArray(__liveRaw, shape, dataSize, data, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromIterable(shape: CPointer<Unit>, data: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3262,8 +3330,11 @@ public class ITensorInt16BitStatics2 <: InterfaceWrapperBase & ComInterface {
 public struct ITensorInt32BitStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Create: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Create2: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromArray: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Int32>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromIterable: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -3314,18 +3385,21 @@ public class ITensorInt32BitStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.Create(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create2(shape: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Create2(__liveRaw, shape, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromArray(shape: CPointer<Unit>, dataSize: UInt32, data: CPointer<Int32>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateFromArray(__liveRaw, shape, dataSize, data, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromIterable(shape: CPointer<Unit>, data: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3402,8 +3476,11 @@ public class ITensorInt32BitStatics2 <: InterfaceWrapperBase & ComInterface {
 public struct ITensorInt64BitStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Create: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Create2: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromArray: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Int64>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromIterable: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -3454,18 +3531,21 @@ public class ITensorInt64BitStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.Create(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create2(shape: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Create2(__liveRaw, shape, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromArray(shape: CPointer<Unit>, dataSize: UInt32, data: CPointer<Int64>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateFromArray(__liveRaw, shape, dataSize, data, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromIterable(shape: CPointer<Unit>, data: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3542,8 +3622,11 @@ public class ITensorInt64BitStatics2 <: InterfaceWrapperBase & ComInterface {
 public struct ITensorInt8BitStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Create: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Create2: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromArray: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<UInt8>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromIterable: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -3594,18 +3677,21 @@ public class ITensorInt8BitStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.Create(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create2(shape: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Create2(__liveRaw, shape, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromArray(shape: CPointer<Unit>, dataSize: UInt32, data: CPointer<UInt8>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateFromArray(__liveRaw, shape, dataSize, data, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromIterable(shape: CPointer<Unit>, data: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3682,8 +3768,11 @@ public class ITensorInt8BitStatics2 <: InterfaceWrapperBase & ComInterface {
 public struct ITensorStringStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Create: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Create2: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromArray: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromIterable: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -3734,18 +3823,21 @@ public class ITensorStringStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.Create(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create2(shape: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Create2(__liveRaw, shape, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromArray(shape: CPointer<Unit>, dataSize: UInt32, data: CPointer<CPointer<Unit>>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateFromArray(__liveRaw, shape, dataSize, data, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromIterable(shape: CPointer<Unit>, data: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3813,8 +3905,11 @@ public class ITensorStringStatics2 <: InterfaceWrapperBase & ComInterface {
 public struct ITensorUInt16BitStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Create: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Create2: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromArray: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromIterable: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -3865,18 +3960,21 @@ public class ITensorUInt16BitStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.Create(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create2(shape: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Create2(__liveRaw, shape, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromArray(shape: CPointer<Unit>, dataSize: UInt32, data: CPointer<UInt16>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateFromArray(__liveRaw, shape, dataSize, data, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromIterable(shape: CPointer<Unit>, data: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3953,8 +4051,11 @@ public class ITensorUInt16BitStatics2 <: InterfaceWrapperBase & ComInterface {
 public struct ITensorUInt32BitStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Create: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Create2: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromArray: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<UInt32>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromIterable: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -4005,18 +4106,21 @@ public class ITensorUInt32BitStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.Create(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create2(shape: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Create2(__liveRaw, shape, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromArray(shape: CPointer<Unit>, dataSize: UInt32, data: CPointer<UInt32>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateFromArray(__liveRaw, shape, dataSize, data, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromIterable(shape: CPointer<Unit>, data: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4093,8 +4197,11 @@ public class ITensorUInt32BitStatics2 <: InterfaceWrapperBase & ComInterface {
 public struct ITensorUInt64BitStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Create: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Create2: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromArray: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<UInt64>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromIterable: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -4145,18 +4252,21 @@ public class ITensorUInt64BitStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.Create(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create2(shape: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Create2(__liveRaw, shape, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromArray(shape: CPointer<Unit>, dataSize: UInt32, data: CPointer<UInt64>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateFromArray(__liveRaw, shape, dataSize, data, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromIterable(shape: CPointer<Unit>, data: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4233,8 +4343,11 @@ public class ITensorUInt64BitStatics2 <: InterfaceWrapperBase & ComInterface {
 public struct ITensorUInt8BitStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Create: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Create2: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromArray: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<UInt8>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromIterable: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -4285,18 +4398,21 @@ public class ITensorUInt8BitStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.Create(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create2(shape: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Create2(__liveRaw, shape, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromArray(shape: CPointer<Unit>, dataSize: UInt32, data: CPointer<UInt8>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateFromArray(__liveRaw, shape, dataSize, data, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromIterable(shape: CPointer<Unit>, data: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

@@ -8,9 +8,7 @@ import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result
 import windows_core as windows_core
 import windows_interface.{GUID}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
 
 
@@ -1221,54 +1219,244 @@ extend DFS_TARGET_PRIORITY_CLASS <: windows_core.CopyType & windows_core.Runtime
     }
 }
 
-@When[NETAPI32 == "on"]
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsAdd == "on"]
 foreign {
     // param-hint: Comment optional
     func NetDfsAdd(DfsEntryPath: CPointer<UInt16>, ServerName: CPointer<UInt16>, ShareName: CPointer<UInt16>, Comment: CPointer<UInt16>, Flags: UInt32): UInt32
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsAdd == "on"]
+public unsafe func Windows_NetDfsAdd(DfsEntryPath: CPointer<UInt16>, ServerName: CPointer<UInt16>, ShareName: CPointer<UInt16>, Comment: CPointer<UInt16>, Flags: UInt32): UInt32 {
+    return NetDfsAdd(DfsEntryPath, ServerName, ShareName, Comment, Flags)
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsAddFtRoot == "on"]
+foreign {
     // param-hint: Comment optional
     func NetDfsAddFtRoot(ServerName: CPointer<UInt16>, RootShare: CPointer<UInt16>, FtDfsName: CPointer<UInt16>, Comment: CPointer<UInt16>, Flags: UInt32): UInt32
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsAddFtRoot == "on"]
+public unsafe func Windows_NetDfsAddFtRoot(ServerName: CPointer<UInt16>, RootShare: CPointer<UInt16>, FtDfsName: CPointer<UInt16>, Comment: CPointer<UInt16>, Flags: UInt32): UInt32 {
+    return NetDfsAddFtRoot(ServerName, RootShare, FtDfsName, Comment, Flags)
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsAddRootTarget == "on"]
+foreign {
     // param-hint: pTargetPath optional
     // param-hint: pComment optional
     func NetDfsAddRootTarget(pDfsPath: CPointer<UInt16>, pTargetPath: CPointer<UInt16>, MajorVersion: UInt32, pComment: CPointer<UInt16>, Flags: UInt32): UInt32
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsAddRootTarget == "on"]
+public unsafe func Windows_NetDfsAddRootTarget(pDfsPath: CPointer<UInt16>, pTargetPath: CPointer<UInt16>, MajorVersion: UInt32, pComment: CPointer<UInt16>, Flags: UInt32): UInt32 {
+    return NetDfsAddRootTarget(pDfsPath, pTargetPath, MajorVersion, pComment, Flags)
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsAddStdRoot == "on"]
+foreign {
     // param-hint: Comment optional
     func NetDfsAddStdRoot(ServerName: CPointer<UInt16>, RootShare: CPointer<UInt16>, Comment: CPointer<UInt16>, Flags: UInt32): UInt32
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsAddStdRoot == "on"]
+public unsafe func Windows_NetDfsAddStdRoot(ServerName: CPointer<UInt16>, RootShare: CPointer<UInt16>, Comment: CPointer<UInt16>, Flags: UInt32): UInt32 {
+    return NetDfsAddStdRoot(ServerName, RootShare, Comment, Flags)
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsEnum == "on"]
+foreign {
     func NetDfsEnum(DfsName: CPointer<UInt16>, Level: UInt32, PrefMaxLen: UInt32, Buffer: CPointer<CPointer<UInt8>>, EntriesRead: CPointer<UInt32>, ResumeHandle: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsEnum == "on"]
+public unsafe func Windows_NetDfsEnum(DfsName: CPointer<UInt16>, Level: UInt32, PrefMaxLen: UInt32, Buffer: CPointer<CPointer<UInt8>>, EntriesRead: CPointer<UInt32>, ResumeHandle: CPointer<UInt32>): UInt32 {
+    return NetDfsEnum(DfsName, Level, PrefMaxLen, Buffer, EntriesRead, ResumeHandle)
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsGetClientInfo == "on"]
+foreign {
     // param-hint: ServerName optional
     // param-hint: ShareName optional
     func NetDfsGetClientInfo(DfsEntryPath: CPointer<UInt16>, ServerName: CPointer<UInt16>, ShareName: CPointer<UInt16>, Level: UInt32, Buffer: CPointer<CPointer<UInt8>>): UInt32
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsGetClientInfo == "on"]
+public unsafe func Windows_NetDfsGetClientInfo(DfsEntryPath: CPointer<UInt16>, ServerName: CPointer<UInt16>, ShareName: CPointer<UInt16>, Level: UInt32, Buffer: CPointer<CPointer<UInt8>>): UInt32 {
+    return NetDfsGetClientInfo(DfsEntryPath, ServerName, ShareName, Level, Buffer)
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsGetFtContainerSecurity == "on" && Windows_Win32_Security == "on"]
+foreign {
+    func NetDfsGetFtContainerSecurity(DomainName: CPointer<UInt16>, SecurityInformation: UInt32, ppSecurityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>, lpcbSecurityDescriptor: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsGetFtContainerSecurity == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_NetDfsGetFtContainerSecurity(DomainName: CPointer<UInt16>, SecurityInformation: UInt32, ppSecurityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>, lpcbSecurityDescriptor: CPointer<UInt32>): UInt32 {
+    return NetDfsGetFtContainerSecurity(DomainName, SecurityInformation, ppSecurityDescriptor, lpcbSecurityDescriptor)
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsGetInfo == "on"]
+foreign {
     // param-hint: ServerName optional
     // param-hint: ShareName optional
     func NetDfsGetInfo(DfsEntryPath: CPointer<UInt16>, ServerName: CPointer<UInt16>, ShareName: CPointer<UInt16>, Level: UInt32, Buffer: CPointer<CPointer<UInt8>>): UInt32
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsGetInfo == "on"]
+public unsafe func Windows_NetDfsGetInfo(DfsEntryPath: CPointer<UInt16>, ServerName: CPointer<UInt16>, ShareName: CPointer<UInt16>, Level: UInt32, Buffer: CPointer<CPointer<UInt8>>): UInt32 {
+    return NetDfsGetInfo(DfsEntryPath, ServerName, ShareName, Level, Buffer)
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsGetSecurity == "on" && Windows_Win32_Security == "on"]
+foreign {
+    func NetDfsGetSecurity(DfsEntryPath: CPointer<UInt16>, SecurityInformation: UInt32, ppSecurityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>, lpcbSecurityDescriptor: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsGetSecurity == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_NetDfsGetSecurity(DfsEntryPath: CPointer<UInt16>, SecurityInformation: UInt32, ppSecurityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>, lpcbSecurityDescriptor: CPointer<UInt32>): UInt32 {
+    return NetDfsGetSecurity(DfsEntryPath, SecurityInformation, ppSecurityDescriptor, lpcbSecurityDescriptor)
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsGetStdContainerSecurity == "on" && Windows_Win32_Security == "on"]
+foreign {
+    func NetDfsGetStdContainerSecurity(MachineName: CPointer<UInt16>, SecurityInformation: UInt32, ppSecurityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>, lpcbSecurityDescriptor: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsGetStdContainerSecurity == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_NetDfsGetStdContainerSecurity(MachineName: CPointer<UInt16>, SecurityInformation: UInt32, ppSecurityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>, lpcbSecurityDescriptor: CPointer<UInt32>): UInt32 {
+    return NetDfsGetStdContainerSecurity(MachineName, SecurityInformation, ppSecurityDescriptor, lpcbSecurityDescriptor)
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsGetSupportedNamespaceVersion == "on"]
+foreign {
     // param-hint: pName optional
     func NetDfsGetSupportedNamespaceVersion(Origin: DFS_NAMESPACE_VERSION_ORIGINAbi, pName: CPointer<UInt16>, ppVersionInfo: CPointer<CPointer<DFS_SUPPORTED_NAMESPACE_VERSION_INFOAbi>>): UInt32
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsGetSupportedNamespaceVersion == "on"]
+public unsafe func Windows_NetDfsGetSupportedNamespaceVersion(Origin: DFS_NAMESPACE_VERSION_ORIGINAbi, pName: CPointer<UInt16>, ppVersionInfo: CPointer<CPointer<DFS_SUPPORTED_NAMESPACE_VERSION_INFOAbi>>): UInt32 {
+    return NetDfsGetSupportedNamespaceVersion(Origin, pName, ppVersionInfo)
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsMove == "on"]
+foreign {
     func NetDfsMove(OldDfsEntryPath: CPointer<UInt16>, NewDfsEntryPath: CPointer<UInt16>, Flags: UInt32): UInt32
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsMove == "on"]
+public unsafe func Windows_NetDfsMove(OldDfsEntryPath: CPointer<UInt16>, NewDfsEntryPath: CPointer<UInt16>, Flags: UInt32): UInt32 {
+    return NetDfsMove(OldDfsEntryPath, NewDfsEntryPath, Flags)
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsRemove == "on"]
+foreign {
     // param-hint: ServerName optional
     // param-hint: ShareName optional
     func NetDfsRemove(DfsEntryPath: CPointer<UInt16>, ServerName: CPointer<UInt16>, ShareName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsRemove == "on"]
+public unsafe func Windows_NetDfsRemove(DfsEntryPath: CPointer<UInt16>, ServerName: CPointer<UInt16>, ShareName: CPointer<UInt16>): UInt32 {
+    return NetDfsRemove(DfsEntryPath, ServerName, ShareName)
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsRemoveFtRoot == "on"]
+foreign {
     // param-hint: Flags optional reserved
     func NetDfsRemoveFtRoot(ServerName: CPointer<UInt16>, RootShare: CPointer<UInt16>, FtDfsName: CPointer<UInt16>, Flags: UInt32): UInt32
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsRemoveFtRoot == "on"]
+public unsafe func Windows_NetDfsRemoveFtRoot(ServerName: CPointer<UInt16>, RootShare: CPointer<UInt16>, FtDfsName: CPointer<UInt16>, Flags: UInt32): UInt32 {
+    return NetDfsRemoveFtRoot(ServerName, RootShare, FtDfsName, Flags)
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsRemoveFtRootForced == "on"]
+foreign {
     // param-hint: Flags optional reserved
     func NetDfsRemoveFtRootForced(DomainName: CPointer<UInt16>, ServerName: CPointer<UInt16>, RootShare: CPointer<UInt16>, FtDfsName: CPointer<UInt16>, Flags: UInt32): UInt32
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsRemoveFtRootForced == "on"]
+public unsafe func Windows_NetDfsRemoveFtRootForced(DomainName: CPointer<UInt16>, ServerName: CPointer<UInt16>, RootShare: CPointer<UInt16>, FtDfsName: CPointer<UInt16>, Flags: UInt32): UInt32 {
+    return NetDfsRemoveFtRootForced(DomainName, ServerName, RootShare, FtDfsName, Flags)
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsRemoveRootTarget == "on"]
+foreign {
     // param-hint: pTargetPath optional
     func NetDfsRemoveRootTarget(pDfsPath: CPointer<UInt16>, pTargetPath: CPointer<UInt16>, Flags: UInt32): UInt32
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsRemoveRootTarget == "on"]
+public unsafe func Windows_NetDfsRemoveRootTarget(pDfsPath: CPointer<UInt16>, pTargetPath: CPointer<UInt16>, Flags: UInt32): UInt32 {
+    return NetDfsRemoveRootTarget(pDfsPath, pTargetPath, Flags)
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsRemoveStdRoot == "on"]
+foreign {
     // param-hint: Flags optional reserved
     func NetDfsRemoveStdRoot(ServerName: CPointer<UInt16>, RootShare: CPointer<UInt16>, Flags: UInt32): UInt32
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsRemoveStdRoot == "on"]
+public unsafe func Windows_NetDfsRemoveStdRoot(ServerName: CPointer<UInt16>, RootShare: CPointer<UInt16>, Flags: UInt32): UInt32 {
+    return NetDfsRemoveStdRoot(ServerName, RootShare, Flags)
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsSetClientInfo == "on"]
+foreign {
     // param-hint: ServerName optional
     // param-hint: ShareName optional
     func NetDfsSetClientInfo(DfsEntryPath: CPointer<UInt16>, ServerName: CPointer<UInt16>, ShareName: CPointer<UInt16>, Level: UInt32, Buffer: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsSetClientInfo == "on"]
+public unsafe func Windows_NetDfsSetClientInfo(DfsEntryPath: CPointer<UInt16>, ServerName: CPointer<UInt16>, ShareName: CPointer<UInt16>, Level: UInt32, Buffer: CPointer<UInt8>): UInt32 {
+    return NetDfsSetClientInfo(DfsEntryPath, ServerName, ShareName, Level, Buffer)
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsSetFtContainerSecurity == "on" && Windows_Win32_Security == "on"]
+foreign {
+    func NetDfsSetFtContainerSecurity(DomainName: CPointer<UInt16>, SecurityInformation: UInt32, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): UInt32
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsSetFtContainerSecurity == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_NetDfsSetFtContainerSecurity(DomainName: CPointer<UInt16>, SecurityInformation: UInt32, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): UInt32 {
+    return NetDfsSetFtContainerSecurity(DomainName, SecurityInformation, pSecurityDescriptor)
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsSetInfo == "on"]
+foreign {
     // param-hint: ServerName optional
     // param-hint: ShareName optional
     func NetDfsSetInfo(DfsEntryPath: CPointer<UInt16>, ServerName: CPointer<UInt16>, ShareName: CPointer<UInt16>, Level: UInt32, Buffer: CPointer<UInt8>): UInt32
 }
 
-@When[NETAPI32 == "on" && Windows_Win32_Security == "on"]
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsSetInfo == "on"]
+public unsafe func Windows_NetDfsSetInfo(DfsEntryPath: CPointer<UInt16>, ServerName: CPointer<UInt16>, ShareName: CPointer<UInt16>, Level: UInt32, Buffer: CPointer<UInt8>): UInt32 {
+    return NetDfsSetInfo(DfsEntryPath, ServerName, ShareName, Level, Buffer)
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsSetSecurity == "on" && Windows_Win32_Security == "on"]
 foreign {
-    func NetDfsGetFtContainerSecurity(DomainName: CPointer<UInt16>, SecurityInformation: UInt32, ppSecurityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>, lpcbSecurityDescriptor: CPointer<UInt32>): UInt32
-    func NetDfsGetSecurity(DfsEntryPath: CPointer<UInt16>, SecurityInformation: UInt32, ppSecurityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>, lpcbSecurityDescriptor: CPointer<UInt32>): UInt32
-    func NetDfsGetStdContainerSecurity(MachineName: CPointer<UInt16>, SecurityInformation: UInt32, ppSecurityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>, lpcbSecurityDescriptor: CPointer<UInt32>): UInt32
-    func NetDfsSetFtContainerSecurity(DomainName: CPointer<UInt16>, SecurityInformation: UInt32, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): UInt32
     func NetDfsSetSecurity(DfsEntryPath: CPointer<UInt16>, SecurityInformation: UInt32, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): UInt32
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsSetSecurity == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_NetDfsSetSecurity(DfsEntryPath: CPointer<UInt16>, SecurityInformation: UInt32, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): UInt32 {
+    return NetDfsSetSecurity(DfsEntryPath, SecurityInformation, pSecurityDescriptor)
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsSetStdContainerSecurity == "on" && Windows_Win32_Security == "on"]
+foreign {
     func NetDfsSetStdContainerSecurity(MachineName: CPointer<UInt16>, SecurityInformation: UInt32, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): UInt32
+}
+
+@When[Windows_Win32_Storage_DistributedFileSystem == "on" && NETAPI32 == "on" && Windows_Win32_Storage_DistributedFileSystem_NetDfsSetStdContainerSecurity == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_NetDfsSetStdContainerSecurity(MachineName: CPointer<UInt16>, SecurityInformation: UInt32, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): UInt32 {
+    return NetDfsSetStdContainerSecurity(MachineName, SecurityInformation, pSecurityDescriptor)
 }
 
 @When[Windows_Win32_Storage_DistributedFileSystem == "on"]

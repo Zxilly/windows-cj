@@ -10,15 +10,10 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
 import windows.Graphics.DirectX.Direct3D11 as Graphics_DirectX_Direct3D11
-@When[Windows_Graphics_Imaging == "on"]
 import windows.Graphics.Imaging as Graphics_Imaging
-@When[Windows_Media == "on"]
 import windows.Media as Media
-@When[Windows_Security_Authentication_Web == "on"]
 import windows.Security.Authentication.Web as Security_Authentication_Web
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -95,6 +90,7 @@ public class AdvancedCapturedPhoto <: InterfaceWrapperBase & ComInterface & wind
         }
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func Frame(): CapturedFrame {
         return defaultInterface().Frame()
     }
@@ -1738,6 +1734,7 @@ public class AppBroadcastPlugInManager <: InterfaceWrapperBase & ComInterface & 
         return defaultInterface().IsBroadcastProviderAvailable()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PlugInList(): windows_collections.IVectorView<AppBroadcastPlugIn> {
         return defaultInterface().PlugInList()
     }
@@ -4827,7 +4824,7 @@ public class AppCaptureFileGeneratedEventArgs <: InterfaceWrapperBase & ComInter
         }
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func File(): _impl_l1.StorageFile {
         return defaultInterface().File()
     }
@@ -5421,7 +5418,7 @@ public class AppCaptureRecordOperation <: InterfaceWrapperBase & ComInterface & 
         return defaultInterface().Duration()
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func File(): _impl_l1.StorageFile {
         return defaultInterface().File()
     }
@@ -6346,7 +6343,7 @@ public class CameraCaptureUI <: InterfaceWrapperBase & ComInterface & windows_in
         return defaultInterface().VideoSettings()
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func CaptureFileAsync(mode: CameraCaptureUIMode): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
         return defaultInterface().CaptureFileAsync(mode)
     }
@@ -6971,7 +6968,7 @@ public class CameraOptionsUI <: windows_interface.RuntimeName & windows_core.Run
     }
 }
 
-@When[Windows_Media_Capture == "on"]
+@When[Windows_Media_Capture == "on" && Windows_Storage_Streams == "on"]
 public class CapturedFrame <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -7149,7 +7146,7 @@ public class CapturedFrame <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 }
 
-@When[Windows_Media_Capture == "on"]
+@When[Windows_Media_Capture == "on" && Windows_Storage_Streams == "on"]
 extend CapturedFrame <: windows_core.HandleWinrtType<CapturedFrame> {
     public static func intoWinrtHandle(value: CapturedFrame): CPointer<Unit> {
         value.asRaw()
@@ -7361,10 +7358,12 @@ public class CapturedPhoto <: InterfaceWrapperBase & ComInterface & windows_inte
         }
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func Frame(): CapturedFrame {
         return defaultInterface().Frame()
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func Thumbnail(): CapturedFrame {
         return defaultInterface().Thumbnail()
     }
@@ -8264,7 +8263,10 @@ extend GameBarTargetCapturePolicy <: windows_core.CopyType & windows_core.Runtim
 @C
 public struct IAdvancedCapturedPhotoVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Storage_Streams == "on"]
     public var Frame: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Storage_Streams != "on"]
+    public var Frame: UIntNative = UIntNative(0)
     @When[Windows_Media_Devices == "on"]
     public var Mode: CFunc<(CPointer<Unit>, CPointer<AdvancedPhotoModeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Media_Devices != "on"]
@@ -8338,6 +8340,7 @@ public class IAdvancedCapturedPhoto <: InterfaceWrapperBase & ComInterface & Run
         readVtbl<IAdvancedCapturedPhotoVtbl>(IAdvancedCapturedPhotoVtbl())
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func Frame(): CapturedFrame {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -10248,7 +10251,10 @@ extend IAppBroadcastPlugIn <: windows_core.Interface<IAppBroadcastPlugIn> {}
 public struct IAppBroadcastPlugInManagerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var IsBroadcastProviderAvailable: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var PlugInList: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var PlugInList: UIntNative = UIntNative(0)
     public var DefaultPlugIn: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetDefaultPlugIn: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -10327,6 +10333,7 @@ public class IAppBroadcastPlugInManager <: InterfaceWrapperBase & ComInterface &
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PlugInList(): windows_collections.IVectorView<AppBroadcastPlugIn> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -13680,9 +13687,9 @@ extend IAppCaptureDurationGeneratedEventArgs <: windows_core.Interface<IAppCaptu
 @C
 public struct IAppCaptureFileGeneratedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var File: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var File: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -13752,7 +13759,7 @@ public class IAppCaptureFileGeneratedEventArgs <: InterfaceWrapperBase & ComInte
         readVtbl<IAppCaptureFileGeneratedEventArgsVtbl>(IAppCaptureFileGeneratedEventArgsVtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func File(): _impl_l1.StorageFile {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -14116,9 +14123,9 @@ public struct IAppCaptureRecordOperationVtbl {
     public var State: CFunc<(CPointer<Unit>, CPointer<AppCaptureRecordingStateAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ErrorCode: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Duration: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var File: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var File: UIntNative = UIntNative(0)
     public var IsFileTruncated: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var StateChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -14225,7 +14232,7 @@ public class IAppCaptureRecordOperation <: InterfaceWrapperBase & ComInterface &
         return Foundation.IReference<windows_future.TimeSpan>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func File(): _impl_l1.StorageFile {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -15655,9 +15662,9 @@ public struct ICameraCaptureUIVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var PhotoSettings: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var VideoSettings: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var CaptureFileAsync: CFunc<(CPointer<Unit>, CameraCaptureUIModeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var CaptureFileAsync: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -15743,7 +15750,7 @@ public class ICameraCaptureUI <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return CameraCaptureUIVideoCaptureSettings.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func CaptureFileAsync(mode: CameraCaptureUIMode): windows_future.IAsyncOperation<_impl_l1.StorageFile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -16281,9 +16288,9 @@ extend ICapturedFrame <: windows_core.Interface<ICapturedFrame> {}
 public struct ICapturedFrame2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var ControlValues: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Graphics_Imaging == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_Imaging == "on"]
     public var BitmapProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Graphics_Imaging != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Graphics_Imaging != "on"]
     public var BitmapProperties: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -16361,7 +16368,7 @@ public class ICapturedFrame2 <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return CapturedFrameControlValues.fromAbiTake(result__)
     }
 
-    @When[Windows_Graphics_Imaging == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_Imaging == "on"]
     public unsafe func BitmapProperties(): Graphics_Imaging.BitmapPropertySet {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -16757,8 +16764,14 @@ extend ICapturedFrameWithSoftwareBitmap <: windows_core.Interface<ICapturedFrame
 @C
 public struct ICapturedPhotoVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Storage_Streams == "on"]
     public var Frame: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Storage_Streams != "on"]
+    public var Frame: UIntNative = UIntNative(0)
+    @When[Windows_Storage_Streams == "on"]
     public var Thumbnail: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Storage_Streams != "on"]
+    public var Thumbnail: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -16827,6 +16840,7 @@ public class ICapturedPhoto <: InterfaceWrapperBase & ComInterface & RuntimeName
         readVtbl<ICapturedPhotoVtbl>(ICapturedPhotoVtbl())
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func Frame(): CapturedFrame {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -16835,6 +16849,7 @@ public class ICapturedPhoto <: InterfaceWrapperBase & ComInterface & RuntimeName
         return CapturedFrame.fromAbiTake(result__)
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func Thumbnail(): CapturedFrame {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -18340,9 +18355,9 @@ public struct IMediaCapture2Vtbl {
     public var PrepareLowLagPhotoSequenceCaptureAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_Media_MediaProperties != "on"]
     public var PrepareLowLagPhotoSequenceCaptureAsync: UIntNative = UIntNative(0)
-    @When[Windows_Media_MediaProperties == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_MediaProperties == "on"]
     public var SetEncodingPropertiesAsync: CFunc<(CPointer<Unit>, MediaStreamTypeAbi, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Media_MediaProperties != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Media_MediaProperties != "on"]
     public var SetEncodingPropertiesAsync: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -18466,7 +18481,7 @@ public class IMediaCapture2 <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_future.IAsyncOperation<LowLagPhotoSequenceCapture>.fromAbiTake(result__)
     }
 
-    @When[Windows_Media_MediaProperties == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_MediaProperties == "on"]
     public unsafe func SetEncodingPropertiesAsync(mediaStreamType: MediaStreamType, mediaEncodingProperties: IMediaEncodingProperties, encoderProperties: MediaPropertySet): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -18830,9 +18845,9 @@ public struct IMediaCapture5Vtbl {
     @When[Windows_Media_Devices != "on"]
     public var PauseRecordWithResultAsync: UIntNative = UIntNative(0)
     public var StopRecordWithResultAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Media_Capture_Frames == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Capture_Frames == "on"]
     public var FrameSources: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Media_Capture_Frames != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Media_Capture_Frames != "on"]
     public var FrameSources: UIntNative = UIntNative(0)
     @When[Windows_Media_Capture_Frames == "on"]
     public var CreateFrameReaderAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -18940,7 +18955,7 @@ public class IMediaCapture5 <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_future.IAsyncOperation<MediaCaptureStopResult>.fromAbiTake(result__)
     }
 
-    @When[Windows_Media_Capture_Frames == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Capture_Frames == "on"]
     public unsafe func FrameSources(): windows_collections.IMapView<windows_core.HString, MediaFrameSource> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -18986,9 +19001,9 @@ public struct IMediaCapture6Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var CaptureDeviceExclusiveControlStatusChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveCaptureDeviceExclusiveControlStatusChanged: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Media_Capture_Frames == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Capture_Frames == "on"]
     public var CreateMultiSourceFrameReaderAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Media_Capture_Frames != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Media_Capture_Frames != "on"]
     public var CreateMultiSourceFrameReaderAsync: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -19072,7 +19087,7 @@ public class IMediaCapture6 <: InterfaceWrapperBase & ComInterface & RuntimeName
         HRESULT(hr).ok()
     }
 
-    @When[Windows_Media_Capture_Frames == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Capture_Frames == "on"]
     public unsafe func CreateMultiSourceFrameReaderAsync(inputSources: windows_collections.IIterable<MediaFrameSource>): windows_future.IAsyncOperation<MultiSourceMediaFrameReader> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -20895,9 +20910,18 @@ extend IMediaCaptureSettings3 <: windows_core.Interface<IMediaCaptureSettings3> 
 public struct IMediaCaptureStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var IsVideoProfileSupported: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllVideoProfiles: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllVideoProfiles: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var FindConcurrentProfiles: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindConcurrentProfiles: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var FindKnownVideoProfiles: CFunc<(CPointer<Unit>, CPointer<Unit>, KnownVideoProfileAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindKnownVideoProfiles: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -20974,6 +20998,7 @@ public class IMediaCaptureStatics <: InterfaceWrapperBase & ComInterface & Runti
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllVideoProfiles(videoDeviceId: windows_core.HString): windows_collections.IVectorView<MediaCaptureVideoProfile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -20982,6 +21007,7 @@ public class IMediaCaptureStatics <: InterfaceWrapperBase & ComInterface & Runti
         return windows_collections.IVectorView<MediaCaptureVideoProfile>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindConcurrentProfiles(videoDeviceId: windows_core.HString): windows_collections.IVectorView<MediaCaptureVideoProfile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -20990,6 +21016,7 @@ public class IMediaCaptureStatics <: InterfaceWrapperBase & ComInterface & Runti
         return windows_collections.IVectorView<MediaCaptureVideoProfile>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindKnownVideoProfiles(videoDeviceId: windows_core.HString, name: KnownVideoProfile): windows_collections.IVectorView<MediaCaptureVideoProfile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -21226,10 +21253,22 @@ public struct IMediaCaptureVideoProfileVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Id: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var VideoDeviceId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedPreviewMediaDescription: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedPreviewMediaDescription: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedRecordMediaDescription: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedRecordMediaDescription: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedPhotoMediaDescription: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedPhotoMediaDescription: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetConcurrency: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetConcurrency: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -21314,6 +21353,7 @@ public class IMediaCaptureVideoProfile <: InterfaceWrapperBase & ComInterface & 
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedPreviewMediaDescription(): windows_collections.IVectorView<MediaCaptureVideoProfileMediaDescription> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -21322,6 +21362,7 @@ public class IMediaCaptureVideoProfile <: InterfaceWrapperBase & ComInterface & 
         return windows_collections.IVectorView<MediaCaptureVideoProfileMediaDescription>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedRecordMediaDescription(): windows_collections.IVectorView<MediaCaptureVideoProfileMediaDescription> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -21330,6 +21371,7 @@ public class IMediaCaptureVideoProfile <: InterfaceWrapperBase & ComInterface & 
         return windows_collections.IVectorView<MediaCaptureVideoProfileMediaDescription>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedPhotoMediaDescription(): windows_collections.IVectorView<MediaCaptureVideoProfileMediaDescription> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -21338,6 +21380,7 @@ public class IMediaCaptureVideoProfile <: InterfaceWrapperBase & ComInterface & 
         return windows_collections.IVectorView<MediaCaptureVideoProfileMediaDescription>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetConcurrency(): windows_collections.IVectorView<MediaCaptureVideoProfile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -21354,11 +21397,14 @@ extend IMediaCaptureVideoProfile <: windows_core.Interface<IMediaCaptureVideoPro
 @C
 public struct IMediaCaptureVideoProfile2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Media_Capture_Frames == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Capture_Frames == "on"]
     public var FrameSourceInfos: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Media_Capture_Frames != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Media_Capture_Frames != "on"]
     public var FrameSourceInfos: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -21427,7 +21473,7 @@ public class IMediaCaptureVideoProfile2 <: InterfaceWrapperBase & ComInterface &
         readVtbl<IMediaCaptureVideoProfile2Vtbl>(IMediaCaptureVideoProfile2Vtbl())
     }
 
-    @When[Windows_Media_Capture_Frames == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Capture_Frames == "on"]
     public unsafe func FrameSourceInfos(): windows_collections.IVectorView<MediaFrameSourceInfo> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -21436,6 +21482,7 @@ public class IMediaCaptureVideoProfile2 <: InterfaceWrapperBase & ComInterface &
         return windows_collections.IVectorView<MediaFrameSourceInfo>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<GuidValue, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -21574,7 +21621,10 @@ extend IMediaCaptureVideoProfileMediaDescription <: windows_core.Interface<IMedi
 public struct IMediaCaptureVideoProfileMediaDescription2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Subtype: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -21651,6 +21701,7 @@ public class IMediaCaptureVideoProfileMediaDescription2 <: InterfaceWrapperBase 
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<GuidValue, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -21667,7 +21718,10 @@ extend IMediaCaptureVideoProfileMediaDescription2 <: windows_core.Interface<IMed
 @C
 public struct IOptionalReferencePhotoCapturedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Storage_Streams == "on"]
     public var Frame: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Storage_Streams != "on"]
+    public var Frame: UIntNative = UIntNative(0)
     public var Context: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -21737,6 +21791,7 @@ public class IOptionalReferencePhotoCapturedEventArgs <: InterfaceWrapperBase & 
         readVtbl<IOptionalReferencePhotoCapturedEventArgsVtbl>(IOptionalReferencePhotoCapturedEventArgsVtbl())
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func Frame(): CapturedFrame {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -21761,8 +21816,14 @@ extend IOptionalReferencePhotoCapturedEventArgs <: windows_core.Interface<IOptio
 @C
 public struct IPhotoCapturedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Storage_Streams == "on"]
     public var Frame: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Storage_Streams != "on"]
+    public var Frame: UIntNative = UIntNative(0)
+    @When[Windows_Storage_Streams == "on"]
     public var Thumbnail: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Storage_Streams != "on"]
+    public var Thumbnail: UIntNative = UIntNative(0)
     public var CaptureTimeOffset: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -21832,6 +21893,7 @@ public class IPhotoCapturedEventArgs <: InterfaceWrapperBase & ComInterface & Ru
         readVtbl<IPhotoCapturedEventArgsVtbl>(IPhotoCapturedEventArgsVtbl())
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func Frame(): CapturedFrame {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -21840,6 +21902,7 @@ public class IPhotoCapturedEventArgs <: InterfaceWrapperBase & ComInterface & Ru
         return CapturedFrame.fromAbiTake(result__)
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func Thumbnail(): CapturedFrame {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -21864,7 +21927,10 @@ extend IPhotoCapturedEventArgs <: windows_core.Interface<IPhotoCapturedEventArgs
 @C
 public struct IPhotoConfirmationCapturedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Storage_Streams == "on"]
     public var Frame: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Storage_Streams != "on"]
+    public var Frame: UIntNative = UIntNative(0)
     public var CaptureTimeOffset: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -21934,6 +22000,7 @@ public class IPhotoConfirmationCapturedEventArgs <: InterfaceWrapperBase & ComIn
         readVtbl<IPhotoConfirmationCapturedEventArgsVtbl>(IPhotoConfirmationCapturedEventArgsVtbl())
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func Frame(): CapturedFrame {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -22640,6 +22707,7 @@ public class MediaCapture <: InterfaceWrapperBase & ComInterface & windows_inter
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindAllVideoProfiles(videoDeviceId: windows_core.HString): windows_collections.IVectorView<MediaCaptureVideoProfile> {
         var result__: Option<windows_collections.IVectorView<MediaCaptureVideoProfile>> = Option<windows_collections.IVectorView<MediaCaptureVideoProfile>>.None
         try (factory__ = windows_core.factory<MediaCapture, IMediaCaptureStatics>().unwrap()) {
@@ -22651,6 +22719,7 @@ public class MediaCapture <: InterfaceWrapperBase & ComInterface & windows_inter
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindConcurrentProfiles(videoDeviceId: windows_core.HString): windows_collections.IVectorView<MediaCaptureVideoProfile> {
         var result__: Option<windows_collections.IVectorView<MediaCaptureVideoProfile>> = Option<windows_collections.IVectorView<MediaCaptureVideoProfile>>.None
         try (factory__ = windows_core.factory<MediaCapture, IMediaCaptureStatics>().unwrap()) {
@@ -22662,6 +22731,7 @@ public class MediaCapture <: InterfaceWrapperBase & ComInterface & windows_inter
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindKnownVideoProfiles(videoDeviceId: windows_core.HString, name: KnownVideoProfile): windows_collections.IVectorView<MediaCaptureVideoProfile> {
         var result__: Option<windows_collections.IVectorView<MediaCaptureVideoProfile>> = Option<windows_collections.IVectorView<MediaCaptureVideoProfile>>.None
         try (factory__ = windows_core.factory<MediaCapture, IMediaCaptureStatics>().unwrap()) {
@@ -23064,12 +23134,14 @@ public class MediaCaptureFailedEventHandler <: InterfaceWrapperBase & ComInterfa
 @When[Windows_Media_Capture == "on"]
 extend MediaCaptureFailedEventHandler <: windows_core.Interface<MediaCaptureFailedEventHandler> {}
 
+@When[Windows_Media_Capture == "on"]
 private open class MediaCaptureFailedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_Media_Capture == "on"]
 private open class MediaCaptureFailedEventHandlerInvoker <: MediaCaptureFailedEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<MediaCapture>, errorEventArgs: InParam<MediaCaptureFailedEventArgs>): Unit {
         ()
@@ -23081,6 +23153,7 @@ private open class MediaCaptureFailedEventHandlerInvoker <: MediaCaptureFailedEv
     }
 }
 
+@When[Windows_Media_Capture == "on"]
 private class MediaCaptureFailedEventHandlerBox <: MediaCaptureFailedEventHandlerInvoker {
     public let invoke_: (InParam<MediaCapture>, InParam<MediaCaptureFailedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<MediaCaptureFailedEventHandlerVtbl>
@@ -23099,6 +23172,7 @@ private class MediaCaptureFailedEventHandlerBox <: MediaCaptureFailedEventHandle
     }
 }
 
+@When[Windows_Media_Capture == "on"]
 func buildMediaCaptureFailedEventHandlerBoxVtbl(): MediaCaptureFailedEventHandlerVtbl {
     var vtbl = MediaCaptureFailedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -24008,18 +24082,22 @@ public class MediaCaptureVideoProfile <: InterfaceWrapperBase & ComInterface & w
         return defaultInterface().VideoDeviceId()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedPreviewMediaDescription(): windows_collections.IVectorView<MediaCaptureVideoProfileMediaDescription> {
         return defaultInterface().SupportedPreviewMediaDescription()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedRecordMediaDescription(): windows_collections.IVectorView<MediaCaptureVideoProfileMediaDescription> {
         return defaultInterface().SupportedRecordMediaDescription()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedPhotoMediaDescription(): windows_collections.IVectorView<MediaCaptureVideoProfileMediaDescription> {
         return defaultInterface().SupportedPhotoMediaDescription()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetConcurrency(): windows_collections.IVectorView<MediaCaptureVideoProfile> {
         return defaultInterface().GetConcurrency()
     }
@@ -24355,6 +24433,7 @@ public class OptionalReferencePhotoCapturedEventArgs <: InterfaceWrapperBase & C
         }
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func Frame(): CapturedFrame {
         return defaultInterface().Frame()
     }
@@ -24508,10 +24587,12 @@ public class PhotoCapturedEventArgs <: InterfaceWrapperBase & ComInterface & win
         }
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func Frame(): CapturedFrame {
         return defaultInterface().Frame()
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func Thumbnail(): CapturedFrame {
         return defaultInterface().Thumbnail()
     }
@@ -24608,6 +24689,7 @@ public class PhotoConfirmationCapturedEventArgs <: InterfaceWrapperBase & ComInt
         }
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func Frame(): CapturedFrame {
         return defaultInterface().Frame()
     }
@@ -24771,12 +24853,14 @@ public class RecordLimitationExceededEventHandler <: InterfaceWrapperBase & ComI
 @When[Windows_Media_Capture == "on"]
 extend RecordLimitationExceededEventHandler <: windows_core.Interface<RecordLimitationExceededEventHandler> {}
 
+@When[Windows_Media_Capture == "on"]
 private open class RecordLimitationExceededEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_Media_Capture == "on"]
 private open class RecordLimitationExceededEventHandlerInvoker <: RecordLimitationExceededEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<MediaCapture>): Unit {
         ()
@@ -24788,6 +24872,7 @@ private open class RecordLimitationExceededEventHandlerInvoker <: RecordLimitati
     }
 }
 
+@When[Windows_Media_Capture == "on"]
 private class RecordLimitationExceededEventHandlerBox <: RecordLimitationExceededEventHandlerInvoker {
     public let invoke_: (InParam<MediaCapture>) -> Unit
     private let vtblHandle: CPointerHandle<RecordLimitationExceededEventHandlerVtbl>
@@ -24806,6 +24891,7 @@ private class RecordLimitationExceededEventHandlerBox <: RecordLimitationExceede
     }
 }
 
+@When[Windows_Media_Capture == "on"]
 func buildRecordLimitationExceededEventHandlerBoxVtbl(): RecordLimitationExceededEventHandlerVtbl {
     var vtbl = RecordLimitationExceededEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()

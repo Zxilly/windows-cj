@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Perception_Spatial == "on"]
 import windows.Perception.Spatial as Perception_Spatial
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -3633,7 +3631,10 @@ public struct IVariablePhotoSequenceControllerVtbl {
     @When[Windows_Media_MediaProperties != "on"]
     public var GetCurrentFrameRate: UIntNative = UIntNative(0)
     public var FrameCapabilities: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var DesiredFrameControllers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var DesiredFrameControllers: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3758,6 +3759,7 @@ public class IVariablePhotoSequenceController <: InterfaceWrapperBase & ComInter
         return FrameControlCapabilities.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DesiredFrameControllers(): windows_collections.IVector<FrameController> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3865,6 +3867,7 @@ public class VariablePhotoSequenceController <: InterfaceWrapperBase & ComInterf
         return defaultInterface().FrameCapabilities()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DesiredFrameControllers(): windows_collections.IVector<FrameController> {
         return defaultInterface().DesiredFrameControllers()
     }

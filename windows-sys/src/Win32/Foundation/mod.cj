@@ -10947,68 +10947,246 @@ public type HINSTANCE = CPointer<Unit>
 @When[Windows_Win32_Foundation == "on"]
 public type HMODULE = CPointer<Unit>
 
-@When[KERNEL32 == "on"]
+@When[Windows_Win32_Foundation == "on" && KERNEL32 == "on" && Windows_Win32_Foundation_CloseHandle == "on"]
 foreign {
     @FastNative
     // pinvoke-hint: SetLastError
     func CloseHandle(hObject: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Foundation == "on" && KERNEL32 == "on" && Windows_Win32_Foundation_CloseHandle == "on"]
+public unsafe func Windows_CloseHandle(hObject: CPointer<Unit>): Int32 {
+    return CloseHandle(hObject)
+}
+
+@When[Windows_Win32_Foundation == "on" && KERNEL32 == "on" && Windows_Win32_Foundation_DuplicateHandle == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func DuplicateHandle(hSourceProcessHandle: CPointer<Unit>, hSourceHandle: CPointer<Unit>, hTargetProcessHandle: CPointer<Unit>, lpTargetHandle: CPointer<CPointer<Unit>>, dwDesiredAccess: UInt32, bInheritHandle: Int32, dwOptions: UInt32): Int32
+}
+
+@When[Windows_Win32_Foundation == "on" && KERNEL32 == "on" && Windows_Win32_Foundation_DuplicateHandle == "on"]
+public unsafe func Windows_DuplicateHandle(hSourceProcessHandle: CPointer<Unit>, hSourceHandle: CPointer<Unit>, hTargetProcessHandle: CPointer<Unit>, lpTargetHandle: CPointer<CPointer<Unit>>, dwDesiredAccess: UInt32, bInheritHandle: Int32, dwOptions: UInt32): Int32 {
+    return DuplicateHandle(hSourceProcessHandle, hSourceHandle, hTargetProcessHandle, lpTargetHandle, dwDesiredAccess, bInheritHandle, dwOptions)
+}
+
+@When[Windows_Win32_Foundation == "on" && KERNEL32 == "on" && Windows_Win32_Foundation_FreeLibrary == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func FreeLibrary(hLibModule: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Foundation == "on" && KERNEL32 == "on" && Windows_Win32_Foundation_FreeLibrary == "on"]
+public unsafe func Windows_FreeLibrary(hLibModule: CPointer<Unit>): Int32 {
+    return FreeLibrary(hLibModule)
+}
+
+@When[Windows_Win32_Foundation == "on" && KERNEL32 == "on" && Windows_Win32_Foundation_GetHandleInformation == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetHandleInformation(hObject: CPointer<Unit>, lpdwFlags: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Foundation == "on" && KERNEL32 == "on" && Windows_Win32_Foundation_GetHandleInformation == "on"]
+public unsafe func Windows_GetHandleInformation(hObject: CPointer<Unit>, lpdwFlags: CPointer<UInt32>): Int32 {
+    return GetHandleInformation(hObject, lpdwFlags)
+}
+
+@When[Windows_Win32_Foundation == "on" && KERNEL32 == "on" && Windows_Win32_Foundation_GetLastError == "on"]
+foreign {
     @FastNative
     func GetLastError(): UInt32
+}
+
+@When[Windows_Win32_Foundation == "on" && KERNEL32 == "on" && Windows_Win32_Foundation_GetLastError == "on"]
+public unsafe func Windows_GetLastError(): UInt32 {
+    return GetLastError()
+}
+
+@When[Windows_Win32_Foundation == "on" && KERNEL32 == "on" && Windows_Win32_Foundation_GlobalFree == "on"]
+foreign {
     // param-hint: hMem optional
     // pinvoke-hint: SetLastError
     func GlobalFree(hMem: CPointer<Unit>): CPointer<Unit>
+}
+
+@When[Windows_Win32_Foundation == "on" && KERNEL32 == "on" && Windows_Win32_Foundation_GlobalFree == "on"]
+public unsafe func Windows_GlobalFree(hMem: CPointer<Unit>): CPointer<Unit> {
+    return GlobalFree(hMem)
+}
+
+@When[Windows_Win32_Foundation == "on" && KERNEL32 == "on" && Windows_Win32_Foundation_LocalFree == "on"]
+foreign {
     // param-hint: hMem optional
     // pinvoke-hint: SetLastError
     func LocalFree(hMem: CPointer<Unit>): CPointer<Unit>
+}
+
+@When[Windows_Win32_Foundation == "on" && KERNEL32 == "on" && Windows_Win32_Foundation_LocalFree == "on"]
+public unsafe func Windows_LocalFree(hMem: CPointer<Unit>): CPointer<Unit> {
+    return LocalFree(hMem)
+}
+
+@When[Windows_Win32_Foundation == "on" && KERNEL32 == "on" && Windows_Win32_Foundation_SetHandleInformation == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetHandleInformation(hObject: CPointer<Unit>, dwMask: UInt32, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Foundation == "on" && KERNEL32 == "on" && Windows_Win32_Foundation_SetHandleInformation == "on"]
+public unsafe func Windows_SetHandleInformation(hObject: CPointer<Unit>, dwMask: UInt32, dwFlags: UInt32): Int32 {
+    return SetHandleInformation(hObject, dwMask, dwFlags)
+}
+
+@When[Windows_Win32_Foundation == "on" && KERNEL32 == "on" && Windows_Win32_Foundation_SetLastError == "on"]
+foreign {
     @FastNative
     // pinvoke-hint: SetLastError
     func SetLastError(dwErrCode: UInt32): Unit
 }
 
-@When[OLEAUT32 == "on"]
+@When[Windows_Win32_Foundation == "on" && KERNEL32 == "on" && Windows_Win32_Foundation_SetLastError == "on"]
+public unsafe func Windows_SetLastError(dwErrCode: UInt32): Unit {
+    SetLastError(dwErrCode)
+}
+
+@When[Windows_Win32_Foundation == "on" && OLEAUT32 == "on" && Windows_Win32_Foundation_SysAddRefString == "on"]
 foreign {
     func SysAddRefString(bstrString: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Foundation == "on" && OLEAUT32 == "on" && Windows_Win32_Foundation_SysAddRefString == "on"]
+public unsafe func Windows_SysAddRefString(bstrString: CPointer<UInt16>): Int32 {
+    return SysAddRefString(bstrString)
+}
+
+@When[Windows_Win32_Foundation == "on" && OLEAUT32 == "on" && Windows_Win32_Foundation_SysAllocString == "on"]
+foreign {
     // param-hint: psz optional
     func SysAllocString(psz: CPointer<UInt16>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_Foundation == "on" && OLEAUT32 == "on" && Windows_Win32_Foundation_SysAllocString == "on"]
+public unsafe func Windows_SysAllocString(psz: CPointer<UInt16>): CPointer<UInt16> {
+    return SysAllocString(psz)
+}
+
+@When[Windows_Win32_Foundation == "on" && OLEAUT32 == "on" && Windows_Win32_Foundation_SysAllocStringByteLen == "on"]
+foreign {
     // param-hint: psz len=param[1] optional
     func SysAllocStringByteLen(psz: CPointer<UInt8>, len: UInt32): CPointer<UInt16>
+}
+
+@When[Windows_Win32_Foundation == "on" && OLEAUT32 == "on" && Windows_Win32_Foundation_SysAllocStringByteLen == "on"]
+public unsafe func Windows_SysAllocStringByteLen(psz: CPointer<UInt8>, len: UInt32): CPointer<UInt16> {
+    return SysAllocStringByteLen(psz, len)
+}
+
+@When[Windows_Win32_Foundation == "on" && OLEAUT32 == "on" && Windows_Win32_Foundation_SysAllocStringLen == "on"]
+foreign {
     // param-hint: strIn len=param[1] optional
     func SysAllocStringLen(strIn: CPointer<UInt16>, ui: UInt32): CPointer<UInt16>
+}
+
+@When[Windows_Win32_Foundation == "on" && OLEAUT32 == "on" && Windows_Win32_Foundation_SysAllocStringLen == "on"]
+public unsafe func Windows_SysAllocStringLen(strIn: CPointer<UInt16>, ui: UInt32): CPointer<UInt16> {
+    return SysAllocStringLen(strIn, ui)
+}
+
+@When[Windows_Win32_Foundation == "on" && OLEAUT32 == "on" && Windows_Win32_Foundation_SysFreeString == "on"]
+foreign {
     // param-hint: bstrString optional
     func SysFreeString(bstrString: CPointer<UInt16>): Unit
+}
+
+@When[Windows_Win32_Foundation == "on" && OLEAUT32 == "on" && Windows_Win32_Foundation_SysFreeString == "on"]
+public unsafe func Windows_SysFreeString(bstrString: CPointer<UInt16>): Unit {
+    SysFreeString(bstrString)
+}
+
+@When[Windows_Win32_Foundation == "on" && OLEAUT32 == "on" && Windows_Win32_Foundation_SysReAllocString == "on"]
+foreign {
     // param-hint: psz optional
     func SysReAllocString(pbstr: CPointer<CPointer<UInt16>>, psz: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Foundation == "on" && OLEAUT32 == "on" && Windows_Win32_Foundation_SysReAllocString == "on"]
+public unsafe func Windows_SysReAllocString(pbstr: CPointer<CPointer<UInt16>>, psz: CPointer<UInt16>): Int32 {
+    return SysReAllocString(pbstr, psz)
+}
+
+@When[Windows_Win32_Foundation == "on" && OLEAUT32 == "on" && Windows_Win32_Foundation_SysReAllocStringLen == "on"]
+foreign {
     // param-hint: psz optional
     func SysReAllocStringLen(pbstr: CPointer<CPointer<UInt16>>, psz: CPointer<UInt16>, len: UInt32): Int32
+}
+
+@When[Windows_Win32_Foundation == "on" && OLEAUT32 == "on" && Windows_Win32_Foundation_SysReAllocStringLen == "on"]
+public unsafe func Windows_SysReAllocStringLen(pbstr: CPointer<CPointer<UInt16>>, psz: CPointer<UInt16>, len: UInt32): Int32 {
+    return SysReAllocStringLen(pbstr, psz, len)
+}
+
+@When[Windows_Win32_Foundation == "on" && OLEAUT32 == "on" && Windows_Win32_Foundation_SysReleaseString == "on"]
+foreign {
     func SysReleaseString(bstrString: CPointer<UInt16>): Unit
+}
+
+@When[Windows_Win32_Foundation == "on" && OLEAUT32 == "on" && Windows_Win32_Foundation_SysReleaseString == "on"]
+public unsafe func Windows_SysReleaseString(bstrString: CPointer<UInt16>): Unit {
+    SysReleaseString(bstrString)
+}
+
+@When[Windows_Win32_Foundation == "on" && OLEAUT32 == "on" && Windows_Win32_Foundation_SysStringByteLen == "on"]
+foreign {
     // param-hint: bstr optional
     func SysStringByteLen(bstr: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Foundation == "on" && OLEAUT32 == "on" && Windows_Win32_Foundation_SysStringByteLen == "on"]
+public unsafe func Windows_SysStringByteLen(bstr: CPointer<UInt16>): UInt32 {
+    return SysStringByteLen(bstr)
+}
+
+@When[Windows_Win32_Foundation == "on" && OLEAUT32 == "on" && Windows_Win32_Foundation_SysStringLen == "on"]
+foreign {
     // param-hint: pbstr optional
     func SysStringLen(pbstr: CPointer<UInt16>): UInt32
 }
 
-@When[USER32 == "on"]
+@When[Windows_Win32_Foundation == "on" && OLEAUT32 == "on" && Windows_Win32_Foundation_SysStringLen == "on"]
+public unsafe func Windows_SysStringLen(pbstr: CPointer<UInt16>): UInt32 {
+    return SysStringLen(pbstr)
+}
+
+@When[Windows_Win32_Foundation == "on" && USER32 == "on" && Windows_Win32_Foundation_SetLastErrorEx == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func SetLastErrorEx(dwErrCode: UInt32, dwType: UInt32): Unit
 }
 
-@When[API_MS_WIN_CORE_HANDLE_L1_1_0 == "on"]
+@When[Windows_Win32_Foundation == "on" && USER32 == "on" && Windows_Win32_Foundation_SetLastErrorEx == "on"]
+public unsafe func Windows_SetLastErrorEx(dwErrCode: UInt32, dwType: UInt32): Unit {
+    SetLastErrorEx(dwErrCode, dwType)
+}
+
+@When[Windows_Win32_Foundation == "on" && API_MS_WIN_CORE_HANDLE_L1_1_0 == "on" && Windows_Win32_Foundation_CompareObjectHandles == "on"]
 foreign {
     func CompareObjectHandles(hFirstObjectHandle: CPointer<Unit>, hSecondObjectHandle: CPointer<Unit>): Int32
 }
 
-@When[NTDLL == "on"]
+@When[Windows_Win32_Foundation == "on" && API_MS_WIN_CORE_HANDLE_L1_1_0 == "on" && Windows_Win32_Foundation_CompareObjectHandles == "on"]
+public unsafe func Windows_CompareObjectHandles(hFirstObjectHandle: CPointer<Unit>, hSecondObjectHandle: CPointer<Unit>): Int32 {
+    return CompareObjectHandles(hFirstObjectHandle, hSecondObjectHandle)
+}
+
+@When[Windows_Win32_Foundation == "on" && NTDLL == "on" && Windows_Win32_Foundation_RtlNtStatusToDosError == "on"]
 foreign {
     func RtlNtStatusToDosError(Status: Int32): UInt32
+}
+
+@When[Windows_Win32_Foundation == "on" && NTDLL == "on" && Windows_Win32_Foundation_RtlNtStatusToDosError == "on"]
+public unsafe func Windows_RtlNtStatusToDosError(Status: Int32): UInt32 {
+    return RtlNtStatusToDosError(Status)
 }
 
 @When[Windows_Win32_Foundation == "on"]

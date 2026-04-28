@@ -4,15 +4,37 @@
 package windows.Win32.System.DeveloperLicensing
 
 import std.collection.*
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 
-@When[WSCLIENT == "on"]
+@When[Windows_Win32_System_DeveloperLicensing == "on" && WSCLIENT == "on" && Windows_Win32_System_DeveloperLicensing_AcquireDeveloperLicense == "on"]
 foreign {
     // param-hint: hwndParent optional
     func AcquireDeveloperLicense(hwndParent: CPointer<Unit>, pExpiration: CPointer<Win32_Foundation.FILETIMEAbi>): Int32
+}
+
+@When[Windows_Win32_System_DeveloperLicensing == "on" && WSCLIENT == "on" && Windows_Win32_System_DeveloperLicensing_AcquireDeveloperLicense == "on"]
+public unsafe func Windows_AcquireDeveloperLicense(hwndParent: CPointer<Unit>, pExpiration: CPointer<Win32_Foundation.FILETIMEAbi>): Int32 {
+    return AcquireDeveloperLicense(hwndParent, pExpiration)
+}
+
+@When[Windows_Win32_System_DeveloperLicensing == "on" && WSCLIENT == "on" && Windows_Win32_System_DeveloperLicensing_CheckDeveloperLicense == "on"]
+foreign {
     func CheckDeveloperLicense(pExpiration: CPointer<Win32_Foundation.FILETIMEAbi>): Int32
+}
+
+@When[Windows_Win32_System_DeveloperLicensing == "on" && WSCLIENT == "on" && Windows_Win32_System_DeveloperLicensing_CheckDeveloperLicense == "on"]
+public unsafe func Windows_CheckDeveloperLicense(pExpiration: CPointer<Win32_Foundation.FILETIMEAbi>): Int32 {
+    return CheckDeveloperLicense(pExpiration)
+}
+
+@When[Windows_Win32_System_DeveloperLicensing == "on" && WSCLIENT == "on" && Windows_Win32_System_DeveloperLicensing_RemoveDeveloperLicense == "on"]
+foreign {
     // param-hint: hwndParent optional
     func RemoveDeveloperLicense(hwndParent: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_DeveloperLicensing == "on" && WSCLIENT == "on" && Windows_Win32_System_DeveloperLicensing_RemoveDeveloperLicense == "on"]
+public unsafe func Windows_RemoveDeveloperLicense(hwndParent: CPointer<Unit>): Int32 {
+    return RemoveDeveloperLicense(hwndParent)
 }

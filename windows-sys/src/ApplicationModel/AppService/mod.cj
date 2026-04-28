@@ -7,4 +7,3 @@ public import windows_sys._impl_l0.{AppServiceClosedStatus, AppServiceClosedStat
 public import windows_sys._impl_l2.{IAppServiceCatalogStatics, IAppServiceCatalogStaticsVtbl, IAppServiceConnection, IAppServiceConnection2, IAppServiceConnection2Vtbl, IAppServiceConnectionStatics, IAppServiceConnectionStaticsVtbl, IAppServiceConnectionVtbl, IAppServiceTriggerDetails, IAppServiceTriggerDetailsVtbl}
 @When[Windows_ApplicationModel_AppService == "on"]
 public import windows_sys._impl_l1.{IAppServiceRequestReceivedEventArgs, IAppServiceRequestReceivedEventArgsVtbl}
-

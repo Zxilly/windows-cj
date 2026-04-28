@@ -279,10 +279,12 @@ public class EmailConversation <: InterfaceWrapperBase & ComInterface & windows_
         return defaultInterface().UnreadMessageCount()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindMessagesAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<EmailMessage>> {
         return defaultInterface().FindMessagesAsync()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindMessagesWithCountAsync(count: UInt32): windows_future.IAsyncOperation<windows_collections.IVectorView<EmailMessage>> {
         return defaultInterface().FindMessagesWithCountAsync(count)
     }
@@ -375,6 +377,7 @@ public class EmailConversationBatch <: InterfaceWrapperBase & ComInterface & win
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Conversations(): windows_collections.IVectorView<EmailConversation> {
         return defaultInterface().Conversations()
     }
@@ -1548,18 +1551,22 @@ public class EmailMessage <: InterfaceWrapperBase & ComInterface & windows_inter
         defaultInterface().SetBody(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func To(): windows_collections.IVector<_impl_l0.EmailRecipient> {
         return defaultInterface().To()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CC(): windows_collections.IVector<_impl_l0.EmailRecipient> {
         return defaultInterface().CC()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Bcc(): windows_collections.IVector<_impl_l0.EmailRecipient> {
         return defaultInterface().Bcc()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Attachments(): windows_collections.IVector<EmailAttachment> {
         return defaultInterface().Attachments()
     }
@@ -1652,6 +1659,7 @@ public class EmailMessageBatch <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Messages(): windows_collections.IVectorView<EmailMessage> {
         return defaultInterface().Messages()
     }
@@ -1879,6 +1887,7 @@ public class EmailQueryOptions <: InterfaceWrapperBase & ComInterface & windows_
         defaultInterface().SetKind(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FolderIds(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().FolderIds()
     }
@@ -2347,8 +2356,14 @@ public struct IEmailConversationVtbl {
     public var LatestSender: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Subject: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var UnreadMessageCount: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindMessagesAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindMessagesAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var FindMessagesWithCountAsync: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindMessagesWithCountAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2521,6 +2536,7 @@ public class IEmailConversation <: InterfaceWrapperBase & ComInterface & Runtime
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindMessagesAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<EmailMessage>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2529,6 +2545,7 @@ public class IEmailConversation <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_future.IAsyncOperation<windows_collections.IVectorView<EmailMessage>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindMessagesWithCountAsync(count: UInt32): windows_future.IAsyncOperation<windows_collections.IVectorView<EmailMessage>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2545,7 +2562,10 @@ extend IEmailConversation <: windows_core.Interface<IEmailConversation> {}
 @C
 public struct IEmailConversationBatchVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Conversations: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Conversations: UIntNative = UIntNative(0)
     public var Status: CFunc<(CPointer<Unit>, CPointer<_impl_l0.EmailBatchStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -2615,6 +2635,7 @@ public class IEmailConversationBatch <: InterfaceWrapperBase & ComInterface & Ru
         readVtbl<IEmailConversationBatchVtbl>(IEmailConversationBatchVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Conversations(): windows_collections.IVectorView<EmailConversation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3838,10 +3859,22 @@ public struct IEmailMessageVtbl {
     public var SetSubject: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Body: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetBody: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var To: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var To: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CC: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CC: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Bcc: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Bcc: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Attachments: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Attachments: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3938,6 +3971,7 @@ public class IEmailMessage <: InterfaceWrapperBase & ComInterface & RuntimeName 
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func To(): windows_collections.IVector<_impl_l0.EmailRecipient> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3946,6 +3980,7 @@ public class IEmailMessage <: InterfaceWrapperBase & ComInterface & RuntimeName 
         return windows_collections.IVector<_impl_l0.EmailRecipient>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CC(): windows_collections.IVector<_impl_l0.EmailRecipient> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3954,6 +3989,7 @@ public class IEmailMessage <: InterfaceWrapperBase & ComInterface & RuntimeName 
         return windows_collections.IVector<_impl_l0.EmailRecipient>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Bcc(): windows_collections.IVector<_impl_l0.EmailRecipient> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3962,6 +3998,7 @@ public class IEmailMessage <: InterfaceWrapperBase & ComInterface & RuntimeName 
         return windows_collections.IVector<_impl_l0.EmailRecipient>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Attachments(): windows_collections.IVector<EmailAttachment> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4549,7 +4586,10 @@ extend IEmailMessage3 <: windows_core.Interface<IEmailMessage3> {}
 @C
 public struct IEmailMessage4Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ReplyTo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ReplyTo: UIntNative = UIntNative(0)
     public var SentRepresenting: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetSentRepresenting: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -4620,6 +4660,7 @@ public class IEmailMessage4 <: InterfaceWrapperBase & ComInterface & RuntimeName
         readVtbl<IEmailMessage4Vtbl>(IEmailMessage4Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReplyTo(): windows_collections.IVector<_impl_l0.EmailRecipient> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4650,7 +4691,10 @@ extend IEmailMessage4 <: windows_core.Interface<IEmailMessage4> {}
 @C
 public struct IEmailMessageBatchVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Messages: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Messages: UIntNative = UIntNative(0)
     public var Status: CFunc<(CPointer<Unit>, CPointer<_impl_l0.EmailBatchStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -4720,6 +4764,7 @@ public class IEmailMessageBatch <: InterfaceWrapperBase & ComInterface & Runtime
         readVtbl<IEmailMessageBatchVtbl>(IEmailMessageBatchVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Messages(): windows_collections.IVectorView<EmailMessage> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4836,7 +4881,10 @@ public struct IEmailQueryOptionsVtbl {
     public var SetSortProperty: CFunc<(CPointer<Unit>, _impl_l0.EmailQuerySortPropertyAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Kind: CFunc<(CPointer<Unit>, CPointer<_impl_l0.EmailQueryKindAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetKind: CFunc<(CPointer<Unit>, _impl_l0.EmailQueryKindAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var FolderIds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FolderIds: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4955,6 +5003,7 @@ public class IEmailQueryOptions <: InterfaceWrapperBase & ComInterface & Runtime
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FolderIds(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

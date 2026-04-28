@@ -8,7 +8,6 @@ import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result
 import windows_core as windows_core
 import windows_interface.{GUID}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 
@@ -711,48 +710,359 @@ extend DIAGNOSTIC_REPORT_DATA <: windows_core.CopyType & windows_core.RuntimeTyp
     }
 }
 
-@When[DIAGNOSTICDATAQUERY == "on"]
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqCancelDiagnosticRecordOperation == "on"]
 foreign {
     func DdqCancelDiagnosticRecordOperation(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqCancelDiagnosticRecordOperation == "on"]
+public unsafe func Windows_DdqCancelDiagnosticRecordOperation(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION): Int32 {
+    return DdqCancelDiagnosticRecordOperation(hSession)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqCloseSession == "on"]
+foreign {
     func DdqCloseSession(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqCloseSession == "on"]
+public unsafe func Windows_DdqCloseSession(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION): Int32 {
+    return DdqCloseSession(hSession)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqCreateSession == "on"]
+foreign {
     func DdqCreateSession(accessLevel: DdqAccessLevelAbi, hSession: CPointer<HDIAGNOSTIC_DATA_QUERY_SESSION>): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqCreateSession == "on"]
+public unsafe func Windows_DdqCreateSession(accessLevel: DdqAccessLevelAbi, hSession: CPointer<HDIAGNOSTIC_DATA_QUERY_SESSION>): Int32 {
+    return DdqCreateSession(accessLevel, hSession)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqExtractDiagnosticReport == "on"]
+foreign {
     func DdqExtractDiagnosticReport(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, reportStoreType: UInt32, reportKey: CPointer<UInt16>, destinationPath: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqExtractDiagnosticReport == "on"]
+public unsafe func Windows_DdqExtractDiagnosticReport(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, reportStoreType: UInt32, reportKey: CPointer<UInt16>, destinationPath: CPointer<UInt16>): Int32 {
+    return DdqExtractDiagnosticReport(hSession, reportStoreType, reportKey, destinationPath)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqFreeDiagnosticRecordLocaleTags == "on"]
+foreign {
     func DdqFreeDiagnosticRecordLocaleTags(hTagDescription: HDIAGNOSTIC_EVENT_TAG_DESCRIPTION): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqFreeDiagnosticRecordLocaleTags == "on"]
+public unsafe func Windows_DdqFreeDiagnosticRecordLocaleTags(hTagDescription: HDIAGNOSTIC_EVENT_TAG_DESCRIPTION): Int32 {
+    return DdqFreeDiagnosticRecordLocaleTags(hTagDescription)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqFreeDiagnosticRecordPage == "on"]
+foreign {
     func DdqFreeDiagnosticRecordPage(hRecord: HDIAGNOSTIC_RECORD): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqFreeDiagnosticRecordPage == "on"]
+public unsafe func Windows_DdqFreeDiagnosticRecordPage(hRecord: HDIAGNOSTIC_RECORD): Int32 {
+    return DdqFreeDiagnosticRecordPage(hRecord)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqFreeDiagnosticRecordProducerCategories == "on"]
+foreign {
     func DdqFreeDiagnosticRecordProducerCategories(hCategoryDescription: HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqFreeDiagnosticRecordProducerCategories == "on"]
+public unsafe func Windows_DdqFreeDiagnosticRecordProducerCategories(hCategoryDescription: HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION): Int32 {
+    return DdqFreeDiagnosticRecordProducerCategories(hCategoryDescription)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqFreeDiagnosticRecordProducers == "on"]
+foreign {
     func DdqFreeDiagnosticRecordProducers(hProducerDescription: HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqFreeDiagnosticRecordProducers == "on"]
+public unsafe func Windows_DdqFreeDiagnosticRecordProducers(hProducerDescription: HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION): Int32 {
+    return DdqFreeDiagnosticRecordProducers(hProducerDescription)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqFreeDiagnosticReport == "on"]
+foreign {
     func DdqFreeDiagnosticReport(hReport: HDIAGNOSTIC_REPORT): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqFreeDiagnosticReport == "on"]
+public unsafe func Windows_DdqFreeDiagnosticReport(hReport: HDIAGNOSTIC_REPORT): Int32 {
+    return DdqFreeDiagnosticReport(hReport)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticDataAccessLevelAllowed == "on"]
+foreign {
     func DdqGetDiagnosticDataAccessLevelAllowed(accessLevel: CPointer<DdqAccessLevelAbi>): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticDataAccessLevelAllowed == "on"]
+public unsafe func Windows_DdqGetDiagnosticDataAccessLevelAllowed(accessLevel: CPointer<DdqAccessLevelAbi>): Int32 {
+    return DdqGetDiagnosticDataAccessLevelAllowed(accessLevel)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordAtIndex == "on"]
+foreign {
     func DdqGetDiagnosticRecordAtIndex(hRecord: HDIAGNOSTIC_RECORD, index: UInt32, record: CPointer<DIAGNOSTIC_DATA_RECORDAbi>): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordAtIndex == "on"]
+public unsafe func Windows_DdqGetDiagnosticRecordAtIndex(hRecord: HDIAGNOSTIC_RECORD, index: UInt32, record: CPointer<DIAGNOSTIC_DATA_RECORDAbi>): Int32 {
+    return DdqGetDiagnosticRecordAtIndex(hRecord, index, record)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordBinaryDistribution == "on"]
+foreign {
     // param-hint: producerNames len=param[2]
     func DdqGetDiagnosticRecordBinaryDistribution(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, producerNames: CPointer<CPointer<UInt16>>, producerNameCount: UInt32, topNBinaries: UInt32, binaryStats: CPointer<CPointer<DIAGNOSTIC_DATA_EVENT_BINARY_STATSAbi>>, statCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordBinaryDistribution == "on"]
+public unsafe func Windows_DdqGetDiagnosticRecordBinaryDistribution(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, producerNames: CPointer<CPointer<UInt16>>, producerNameCount: UInt32, topNBinaries: UInt32, binaryStats: CPointer<CPointer<DIAGNOSTIC_DATA_EVENT_BINARY_STATSAbi>>, statCount: CPointer<UInt32>): Int32 {
+    return DdqGetDiagnosticRecordBinaryDistribution(hSession, producerNames, producerNameCount, topNBinaries, binaryStats, statCount)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordCategoryAtIndex == "on"]
+foreign {
     func DdqGetDiagnosticRecordCategoryAtIndex(hCategoryDescription: HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION, index: UInt32, categoryDescription: CPointer<DIAGNOSTIC_DATA_EVENT_CATEGORY_DESCRIPTIONAbi>): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordCategoryAtIndex == "on"]
+public unsafe func Windows_DdqGetDiagnosticRecordCategoryAtIndex(hCategoryDescription: HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION, index: UInt32, categoryDescription: CPointer<DIAGNOSTIC_DATA_EVENT_CATEGORY_DESCRIPTIONAbi>): Int32 {
+    return DdqGetDiagnosticRecordCategoryAtIndex(hCategoryDescription, index, categoryDescription)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordCategoryCount == "on"]
+foreign {
     func DdqGetDiagnosticRecordCategoryCount(hCategoryDescription: HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION, categoryDescriptionCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordCategoryCount == "on"]
+public unsafe func Windows_DdqGetDiagnosticRecordCategoryCount(hCategoryDescription: HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION, categoryDescriptionCount: CPointer<UInt32>): Int32 {
+    return DdqGetDiagnosticRecordCategoryCount(hCategoryDescription, categoryDescriptionCount)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordCount == "on"]
+foreign {
     func DdqGetDiagnosticRecordCount(hRecord: HDIAGNOSTIC_RECORD, recordCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordCount == "on"]
+public unsafe func Windows_DdqGetDiagnosticRecordCount(hRecord: HDIAGNOSTIC_RECORD, recordCount: CPointer<UInt32>): Int32 {
+    return DdqGetDiagnosticRecordCount(hRecord, recordCount)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordLocaleTagAtIndex == "on"]
+foreign {
     func DdqGetDiagnosticRecordLocaleTagAtIndex(hTagDescription: HDIAGNOSTIC_EVENT_TAG_DESCRIPTION, index: UInt32, tagDescription: CPointer<DIAGNOSTIC_DATA_EVENT_TAG_DESCRIPTIONAbi>): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordLocaleTagAtIndex == "on"]
+public unsafe func Windows_DdqGetDiagnosticRecordLocaleTagAtIndex(hTagDescription: HDIAGNOSTIC_EVENT_TAG_DESCRIPTION, index: UInt32, tagDescription: CPointer<DIAGNOSTIC_DATA_EVENT_TAG_DESCRIPTIONAbi>): Int32 {
+    return DdqGetDiagnosticRecordLocaleTagAtIndex(hTagDescription, index, tagDescription)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordLocaleTagCount == "on"]
+foreign {
     func DdqGetDiagnosticRecordLocaleTagCount(hTagDescription: HDIAGNOSTIC_EVENT_TAG_DESCRIPTION, tagDescriptionCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordLocaleTagCount == "on"]
+public unsafe func Windows_DdqGetDiagnosticRecordLocaleTagCount(hTagDescription: HDIAGNOSTIC_EVENT_TAG_DESCRIPTION, tagDescriptionCount: CPointer<UInt32>): Int32 {
+    return DdqGetDiagnosticRecordLocaleTagCount(hTagDescription, tagDescriptionCount)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordLocaleTags == "on"]
+foreign {
     func DdqGetDiagnosticRecordLocaleTags(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, locale: CPointer<UInt16>, hTagDescription: CPointer<HDIAGNOSTIC_EVENT_TAG_DESCRIPTION>): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordLocaleTags == "on"]
+public unsafe func Windows_DdqGetDiagnosticRecordLocaleTags(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, locale: CPointer<UInt16>, hTagDescription: CPointer<HDIAGNOSTIC_EVENT_TAG_DESCRIPTION>): Int32 {
+    return DdqGetDiagnosticRecordLocaleTags(hSession, locale, hTagDescription)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordPage == "on"]
+foreign {
     func DdqGetDiagnosticRecordPage(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, searchCriteria: CPointer<DIAGNOSTIC_DATA_SEARCH_CRITERIAAbi>, offset: UInt32, pageRecordCount: UInt32, baseRowId: Int64, hRecord: CPointer<HDIAGNOSTIC_RECORD>): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordPage == "on"]
+public unsafe func Windows_DdqGetDiagnosticRecordPage(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, searchCriteria: CPointer<DIAGNOSTIC_DATA_SEARCH_CRITERIAAbi>, offset: UInt32, pageRecordCount: UInt32, baseRowId: Int64, hRecord: CPointer<HDIAGNOSTIC_RECORD>): Int32 {
+    return DdqGetDiagnosticRecordPage(hSession, searchCriteria, offset, pageRecordCount, baseRowId, hRecord)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordPayload == "on"]
+foreign {
     func DdqGetDiagnosticRecordPayload(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, rowId: Int64, payload: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordPayload == "on"]
+public unsafe func Windows_DdqGetDiagnosticRecordPayload(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, rowId: Int64, payload: CPointer<CPointer<UInt16>>): Int32 {
+    return DdqGetDiagnosticRecordPayload(hSession, rowId, payload)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordProducerAtIndex == "on"]
+foreign {
     func DdqGetDiagnosticRecordProducerAtIndex(hProducerDescription: HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION, index: UInt32, producerDescription: CPointer<DIAGNOSTIC_DATA_EVENT_PRODUCER_DESCRIPTIONAbi>): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordProducerAtIndex == "on"]
+public unsafe func Windows_DdqGetDiagnosticRecordProducerAtIndex(hProducerDescription: HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION, index: UInt32, producerDescription: CPointer<DIAGNOSTIC_DATA_EVENT_PRODUCER_DESCRIPTIONAbi>): Int32 {
+    return DdqGetDiagnosticRecordProducerAtIndex(hProducerDescription, index, producerDescription)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordProducerCategories == "on"]
+foreign {
     func DdqGetDiagnosticRecordProducerCategories(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, producerName: CPointer<UInt16>, hCategoryDescription: CPointer<HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION>): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordProducerCategories == "on"]
+public unsafe func Windows_DdqGetDiagnosticRecordProducerCategories(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, producerName: CPointer<UInt16>, hCategoryDescription: CPointer<HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION>): Int32 {
+    return DdqGetDiagnosticRecordProducerCategories(hSession, producerName, hCategoryDescription)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordProducerCount == "on"]
+foreign {
     func DdqGetDiagnosticRecordProducerCount(hProducerDescription: HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION, producerDescriptionCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordProducerCount == "on"]
+public unsafe func Windows_DdqGetDiagnosticRecordProducerCount(hProducerDescription: HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION, producerDescriptionCount: CPointer<UInt32>): Int32 {
+    return DdqGetDiagnosticRecordProducerCount(hProducerDescription, producerDescriptionCount)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordProducers == "on"]
+foreign {
     func DdqGetDiagnosticRecordProducers(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, hProducerDescription: CPointer<HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION>): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordProducers == "on"]
+public unsafe func Windows_DdqGetDiagnosticRecordProducers(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, hProducerDescription: CPointer<HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION>): Int32 {
+    return DdqGetDiagnosticRecordProducers(hSession, hProducerDescription)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordStats == "on"]
+foreign {
     func DdqGetDiagnosticRecordStats(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, searchCriteria: CPointer<DIAGNOSTIC_DATA_SEARCH_CRITERIAAbi>, recordCount: CPointer<UInt32>, minRowId: CPointer<Int64>, maxRowId: CPointer<Int64>): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordStats == "on"]
+public unsafe func Windows_DdqGetDiagnosticRecordStats(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, searchCriteria: CPointer<DIAGNOSTIC_DATA_SEARCH_CRITERIAAbi>, recordCount: CPointer<UInt32>, minRowId: CPointer<Int64>, maxRowId: CPointer<Int64>): Int32 {
+    return DdqGetDiagnosticRecordStats(hSession, searchCriteria, recordCount, minRowId, maxRowId)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordSummary == "on"]
+foreign {
     // param-hint: producerNames len=param[2]
     func DdqGetDiagnosticRecordSummary(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, producerNames: CPointer<CPointer<UInt16>>, producerNameCount: UInt32, generalStats: CPointer<DIAGNOSTIC_DATA_GENERAL_STATSAbi>): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordSummary == "on"]
+public unsafe func Windows_DdqGetDiagnosticRecordSummary(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, producerNames: CPointer<CPointer<UInt16>>, producerNameCount: UInt32, generalStats: CPointer<DIAGNOSTIC_DATA_GENERAL_STATSAbi>): Int32 {
+    return DdqGetDiagnosticRecordSummary(hSession, producerNames, producerNameCount, generalStats)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordTagDistribution == "on"]
+foreign {
     // param-hint: producerNames len=param[2]
     func DdqGetDiagnosticRecordTagDistribution(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, producerNames: CPointer<CPointer<UInt16>>, producerNameCount: UInt32, tagStats: CPointer<CPointer<DIAGNOSTIC_DATA_EVENT_TAG_STATSAbi>>, statCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticRecordTagDistribution == "on"]
+public unsafe func Windows_DdqGetDiagnosticRecordTagDistribution(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, producerNames: CPointer<CPointer<UInt16>>, producerNameCount: UInt32, tagStats: CPointer<CPointer<DIAGNOSTIC_DATA_EVENT_TAG_STATSAbi>>, statCount: CPointer<UInt32>): Int32 {
+    return DdqGetDiagnosticRecordTagDistribution(hSession, producerNames, producerNameCount, tagStats, statCount)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticReport == "on"]
+foreign {
     func DdqGetDiagnosticReport(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, reportStoreType: UInt32, hReport: CPointer<HDIAGNOSTIC_REPORT>): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticReport == "on"]
+public unsafe func Windows_DdqGetDiagnosticReport(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, reportStoreType: UInt32, hReport: CPointer<HDIAGNOSTIC_REPORT>): Int32 {
+    return DdqGetDiagnosticReport(hSession, reportStoreType, hReport)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticReportAtIndex == "on"]
+foreign {
     func DdqGetDiagnosticReportAtIndex(hReport: HDIAGNOSTIC_REPORT, index: UInt32, report: CPointer<DIAGNOSTIC_REPORT_DATAAbi>): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticReportAtIndex == "on"]
+public unsafe func Windows_DdqGetDiagnosticReportAtIndex(hReport: HDIAGNOSTIC_REPORT, index: UInt32, report: CPointer<DIAGNOSTIC_REPORT_DATAAbi>): Int32 {
+    return DdqGetDiagnosticReportAtIndex(hReport, index, report)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticReportCount == "on"]
+foreign {
     func DdqGetDiagnosticReportCount(hReport: HDIAGNOSTIC_REPORT, reportCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticReportCount == "on"]
+public unsafe func Windows_DdqGetDiagnosticReportCount(hReport: HDIAGNOSTIC_REPORT, reportCount: CPointer<UInt32>): Int32 {
+    return DdqGetDiagnosticReportCount(hReport, reportCount)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticReportStoreReportCount == "on"]
+foreign {
     func DdqGetDiagnosticReportStoreReportCount(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, reportStoreType: UInt32, reportCount: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetDiagnosticReportStoreReportCount == "on"]
+public unsafe func Windows_DdqGetDiagnosticReportStoreReportCount(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, reportStoreType: UInt32, reportCount: CPointer<UInt32>): Int32 {
+    return DdqGetDiagnosticReportStoreReportCount(hSession, reportStoreType, reportCount)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetSessionAccessLevel == "on"]
+foreign {
     func DdqGetSessionAccessLevel(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, accessLevel: CPointer<DdqAccessLevelAbi>): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetSessionAccessLevel == "on"]
+public unsafe func Windows_DdqGetSessionAccessLevel(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, accessLevel: CPointer<DdqAccessLevelAbi>): Int32 {
+    return DdqGetSessionAccessLevel(hSession, accessLevel)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetTranscriptConfiguration == "on"]
+foreign {
     func DdqGetTranscriptConfiguration(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, currentConfig: CPointer<DIAGNOSTIC_DATA_EVENT_TRANSCRIPT_CONFIGURATIONAbi>): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqGetTranscriptConfiguration == "on"]
+public unsafe func Windows_DdqGetTranscriptConfiguration(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, currentConfig: CPointer<DIAGNOSTIC_DATA_EVENT_TRANSCRIPT_CONFIGURATIONAbi>): Int32 {
+    return DdqGetTranscriptConfiguration(hSession, currentConfig)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqIsDiagnosticRecordSampledIn == "on"]
+foreign {
     // param-hint: providerId optional
     // param-hint: eventId optional
     // param-hint: eventVersion optional
     // param-hint: eventKeywords optional
     func DdqIsDiagnosticRecordSampledIn(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, providerGroup: CPointer<GUID>, providerId: CPointer<GUID>, providerName: CPointer<UInt16>, eventId: CPointer<UInt32>, eventName: CPointer<UInt16>, eventVersion: CPointer<UInt32>, eventKeywords: CPointer<UInt64>, isSampledIn: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqIsDiagnosticRecordSampledIn == "on"]
+public unsafe func Windows_DdqIsDiagnosticRecordSampledIn(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, providerGroup: CPointer<GUID>, providerId: CPointer<GUID>, providerName: CPointer<UInt16>, eventId: CPointer<UInt32>, eventName: CPointer<UInt16>, eventVersion: CPointer<UInt32>, eventKeywords: CPointer<UInt64>, isSampledIn: CPointer<Int32>): Int32 {
+    return DdqIsDiagnosticRecordSampledIn(hSession, providerGroup, providerId, providerName, eventId, eventName, eventVersion, eventKeywords, isSampledIn)
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqSetTranscriptConfiguration == "on"]
+foreign {
     func DdqSetTranscriptConfiguration(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, desiredConfig: CPointer<DIAGNOSTIC_DATA_EVENT_TRANSCRIPT_CONFIGURATIONAbi>): Int32
+}
+
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on" && DIAGNOSTICDATAQUERY == "on" && Windows_Win32_Security_DiagnosticDataQuery_DdqSetTranscriptConfiguration == "on"]
+public unsafe func Windows_DdqSetTranscriptConfiguration(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, desiredConfig: CPointer<DIAGNOSTIC_DATA_EVENT_TRANSCRIPT_CONFIGURATIONAbi>): Int32 {
+    return DdqSetTranscriptConfiguration(hSession, desiredConfig)
 }

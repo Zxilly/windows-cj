@@ -5,9 +5,7 @@ import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrap
 import windows_interface as windows_interface
 import windows_polyfill.{unionReadUInt32, unionReadUInt64, unionWriteUInt32, unionWriteUInt64}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Direct3D12 == "on"]
 import windows_sys.Win32.Graphics.Direct3D12 as Win32_Graphics_Direct3D12
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 
@@ -2525,14 +2523,24 @@ public class IWinMLRuntimeFactory <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[WINDOWS_AI_MACHINELEARNING == "on"]
+@When[Windows_Win32_AI_MachineLearning_WinML == "on" && WINDOWS_AI_MACHINELEARNING == "on" && Windows_Win32_AI_MachineLearning_WinML_MLCreateOperatorRegistry == "on"]
 foreign {
     func MLCreateOperatorRegistry(registry: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[WINML == "on"]
+@When[Windows_Win32_AI_MachineLearning_WinML == "on" && WINDOWS_AI_MACHINELEARNING == "on" && Windows_Win32_AI_MachineLearning_WinML_MLCreateOperatorRegistry == "on"]
+public unsafe func Windows_MLCreateOperatorRegistry(registry: CPointer<CPointer<Unit>>): Int32 {
+    return MLCreateOperatorRegistry(registry)
+}
+
+@When[Windows_Win32_AI_MachineLearning_WinML == "on" && WINML == "on" && Windows_Win32_AI_MachineLearning_WinML_WinMLCreateRuntime == "on"]
 foreign {
     func WinMLCreateRuntime(runtime: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_AI_MachineLearning_WinML == "on" && WINML == "on" && Windows_Win32_AI_MachineLearning_WinML_WinMLCreateRuntime == "on"]
+public unsafe func Windows_WinMLCreateRuntime(runtime: CPointer<CPointer<Unit>>): Int32 {
+    return WinMLCreateRuntime(runtime)
 }
 
 @When[Windows_Win32_AI_MachineLearning_WinML == "on"]

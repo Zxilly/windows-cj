@@ -10,43 +10,216 @@ import windows_sys.Win32.Graphics.Gdi as Win32_Graphics_Gdi
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 
 
-@When[COMDLG32 == "on"]
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_ChooseColorA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func ChooseColorA(param0: CPointer<CHOOSECOLORA>): Int32
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_ChooseColorA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_ChooseColorA(param0: CPointer<CHOOSECOLORA>): Int32 {
+    return ChooseColorA(param0)
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_ChooseColorW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func ChooseColorW(param0: CPointer<CHOOSECOLORW>): Int32
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_ChooseColorW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_ChooseColorW(param0: CPointer<CHOOSECOLORW>): Int32 {
+    return ChooseColorW(param0)
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_ChooseFontA == "on" && (((arch == "x86_64" && Windows_Win32_Graphics_Gdi == "on") || (arch == "aarch64" && Windows_Win32_Graphics_Gdi == "on")) && Windows_Win32_Graphics_Gdi == "on")]
+foreign {
+    func ChooseFontA(param0: CPointer<CHOOSEFONTA>): Int32
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_ChooseFontA == "on" && (((arch == "x86_64" && Windows_Win32_Graphics_Gdi == "on") || (arch == "aarch64" && Windows_Win32_Graphics_Gdi == "on")) && Windows_Win32_Graphics_Gdi == "on")]
+public unsafe func Windows_ChooseFontA(param0: CPointer<CHOOSEFONTA>): Int32 {
+    return ChooseFontA(param0)
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_ChooseFontW == "on" && (((arch == "x86_64" && Windows_Win32_Graphics_Gdi == "on") || (arch == "aarch64" && Windows_Win32_Graphics_Gdi == "on")) && Windows_Win32_Graphics_Gdi == "on")]
+foreign {
+    func ChooseFontW(param0: CPointer<CHOOSEFONTW>): Int32
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_ChooseFontW == "on" && (((arch == "x86_64" && Windows_Win32_Graphics_Gdi == "on") || (arch == "aarch64" && Windows_Win32_Graphics_Gdi == "on")) && Windows_Win32_Graphics_Gdi == "on")]
+public unsafe func Windows_ChooseFontW(param0: CPointer<CHOOSEFONTW>): Int32 {
+    return ChooseFontW(param0)
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_CommDlgExtendedError == "on"]
 foreign {
     func CommDlgExtendedError(): UInt32
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_CommDlgExtendedError == "on"]
+public unsafe func Windows_CommDlgExtendedError(): UInt32 {
+    return CommDlgExtendedError()
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_FindTextA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func FindTextA(param0: CPointer<FINDREPLACEA>): CPointer<Unit>
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_FindTextA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_FindTextA(param0: CPointer<FINDREPLACEA>): CPointer<Unit> {
+    return FindTextA(param0)
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_FindTextW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func FindTextW(param0: CPointer<FINDREPLACEW>): CPointer<Unit>
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_FindTextW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_FindTextW(param0: CPointer<FINDREPLACEW>): CPointer<Unit> {
+    return FindTextW(param0)
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_GetFileTitleA == "on"]
+foreign {
     // param-hint: Buf len=param[2]
     func GetFileTitleA(param0: CPointer<UInt8>, Buf: CPointer<UInt8>, cchSize: UInt16): Int16
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_GetFileTitleA == "on"]
+public unsafe func Windows_GetFileTitleA(param0: CPointer<UInt8>, Buf: CPointer<UInt8>, cchSize: UInt16): Int16 {
+    return GetFileTitleA(param0, Buf, cchSize)
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_GetFileTitleW == "on"]
+foreign {
     // param-hint: Buf len=param[2]
     func GetFileTitleW(param0: CPointer<UInt16>, Buf: CPointer<UInt16>, cchSize: UInt16): Int16
 }
 
-@When[COMDLG32 == "on" && (((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Controls == "on") || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Controls == "on")) && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Controls == "on")]
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_GetFileTitleW == "on"]
+public unsafe func Windows_GetFileTitleW(param0: CPointer<UInt16>, Buf: CPointer<UInt16>, cchSize: UInt16): Int16 {
+    return GetFileTitleW(param0, Buf, cchSize)
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_GetOpenFileNameA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func GetOpenFileNameA(param0: CPointer<OPENFILENAMEA>): Int32
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_GetOpenFileNameA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_GetOpenFileNameA(param0: CPointer<OPENFILENAMEA>): Int32 {
+    return GetOpenFileNameA(param0)
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_GetOpenFileNameW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func GetOpenFileNameW(param0: CPointer<OPENFILENAMEW>): Int32
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_GetOpenFileNameW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_GetOpenFileNameW(param0: CPointer<OPENFILENAMEW>): Int32 {
+    return GetOpenFileNameW(param0)
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_GetSaveFileNameA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func GetSaveFileNameA(param0: CPointer<OPENFILENAMEA>): Int32
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_GetSaveFileNameA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_GetSaveFileNameA(param0: CPointer<OPENFILENAMEA>): Int32 {
+    return GetSaveFileNameA(param0)
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_GetSaveFileNameW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func GetSaveFileNameW(param0: CPointer<OPENFILENAMEW>): Int32
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_GetSaveFileNameW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_GetSaveFileNameW(param0: CPointer<OPENFILENAMEW>): Int32 {
+    return GetSaveFileNameW(param0)
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_PageSetupDlgA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func PageSetupDlgA(param0: CPointer<PAGESETUPDLGA>): Int32
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_PageSetupDlgA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_PageSetupDlgA(param0: CPointer<PAGESETUPDLGA>): Int32 {
+    return PageSetupDlgA(param0)
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_PageSetupDlgW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func PageSetupDlgW(param0: CPointer<PAGESETUPDLGW>): Int32
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_PageSetupDlgW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_PageSetupDlgW(param0: CPointer<PAGESETUPDLGW>): Int32 {
+    return PageSetupDlgW(param0)
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_PrintDlgA == "on" && (((arch == "x86_64" && Windows_Win32_Graphics_Gdi == "on") || (arch == "aarch64" && Windows_Win32_Graphics_Gdi == "on")) && Windows_Win32_Graphics_Gdi == "on")]
+foreign {
+    func PrintDlgA(pPD: CPointer<PRINTDLGA>): Int32
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_PrintDlgA == "on" && (((arch == "x86_64" && Windows_Win32_Graphics_Gdi == "on") || (arch == "aarch64" && Windows_Win32_Graphics_Gdi == "on")) && Windows_Win32_Graphics_Gdi == "on")]
+public unsafe func Windows_PrintDlgA(pPD: CPointer<PRINTDLGA>): Int32 {
+    return PrintDlgA(pPD)
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_PrintDlgExA == "on" && (((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Controls == "on") || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Controls == "on")) && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Controls == "on")]
 foreign {
     func PrintDlgExA(pPD: CPointer<PRINTDLGEXA>): Int32
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_PrintDlgExA == "on" && (((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Controls == "on") || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Controls == "on")) && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Controls == "on")]
+public unsafe func Windows_PrintDlgExA(pPD: CPointer<PRINTDLGEXA>): Int32 {
+    return PrintDlgExA(pPD)
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_PrintDlgExW == "on" && (((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Controls == "on") || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Controls == "on")) && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Controls == "on")]
+foreign {
     func PrintDlgExW(pPD: CPointer<PRINTDLGEXW>): Int32
 }
 
-@When[COMDLG32 == "on" && (((arch == "x86_64" && Windows_Win32_Graphics_Gdi == "on") || (arch == "aarch64" && Windows_Win32_Graphics_Gdi == "on")) && Windows_Win32_Graphics_Gdi == "on")]
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_PrintDlgExW == "on" && (((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Controls == "on") || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Controls == "on")) && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_UI_Controls == "on")]
+public unsafe func Windows_PrintDlgExW(pPD: CPointer<PRINTDLGEXW>): Int32 {
+    return PrintDlgExW(pPD)
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_PrintDlgW == "on" && (((arch == "x86_64" && Windows_Win32_Graphics_Gdi == "on") || (arch == "aarch64" && Windows_Win32_Graphics_Gdi == "on")) && Windows_Win32_Graphics_Gdi == "on")]
 foreign {
-    func ChooseFontA(param0: CPointer<CHOOSEFONTA>): Int32
-    func ChooseFontW(param0: CPointer<CHOOSEFONTW>): Int32
-    func PrintDlgA(pPD: CPointer<PRINTDLGA>): Int32
     func PrintDlgW(pPD: CPointer<PRINTDLGW>): Int32
 }
 
-@When[COMDLG32 == "on" && ((arch == "x86_64" || arch == "aarch64"))]
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_PrintDlgW == "on" && (((arch == "x86_64" && Windows_Win32_Graphics_Gdi == "on") || (arch == "aarch64" && Windows_Win32_Graphics_Gdi == "on")) && Windows_Win32_Graphics_Gdi == "on")]
+public unsafe func Windows_PrintDlgW(pPD: CPointer<PRINTDLGW>): Int32 {
+    return PrintDlgW(pPD)
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_ReplaceTextA == "on" && (arch == "x86_64" || arch == "aarch64")]
 foreign {
-    func ChooseColorA(param0: CPointer<CHOOSECOLORA>): Int32
-    func ChooseColorW(param0: CPointer<CHOOSECOLORW>): Int32
-    func FindTextA(param0: CPointer<FINDREPLACEA>): CPointer<Unit>
-    func FindTextW(param0: CPointer<FINDREPLACEW>): CPointer<Unit>
-    func GetOpenFileNameA(param0: CPointer<OPENFILENAMEA>): Int32
-    func GetOpenFileNameW(param0: CPointer<OPENFILENAMEW>): Int32
-    func GetSaveFileNameA(param0: CPointer<OPENFILENAMEA>): Int32
-    func GetSaveFileNameW(param0: CPointer<OPENFILENAMEW>): Int32
-    func PageSetupDlgA(param0: CPointer<PAGESETUPDLGA>): Int32
-    func PageSetupDlgW(param0: CPointer<PAGESETUPDLGW>): Int32
     func ReplaceTextA(param0: CPointer<FINDREPLACEA>): CPointer<Unit>
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_ReplaceTextA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_ReplaceTextA(param0: CPointer<FINDREPLACEA>): CPointer<Unit> {
+    return ReplaceTextA(param0)
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_ReplaceTextW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func ReplaceTextW(param0: CPointer<FINDREPLACEW>): CPointer<Unit>
+}
+
+@When[Windows_Win32_UI_Controls_Dialogs == "on" && COMDLG32 == "on" && Windows_Win32_UI_Controls_Dialogs_ReplaceTextW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_ReplaceTextW(param0: CPointer<FINDREPLACEW>): CPointer<Unit> {
+    return ReplaceTextW(param0)
 }
 
 @When[Windows_Win32_UI_Controls_Dialogs == "on"]

@@ -10,15 +10,10 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Devices_Adc_Provider == "on"]
 import windows.Devices.Adc.Provider as Devices_Adc_Provider
-@When[Windows_Devices_Gpio_Provider == "on"]
 import windows.Devices.Gpio.Provider as Devices_Gpio_Provider
-@When[Windows_Devices_I2c_Provider == "on"]
 import windows.Devices.I2c.Provider as Devices_I2c_Provider
-@When[Windows_Devices_Pwm_Provider == "on"]
 import windows.Devices.Pwm.Provider as Devices_Pwm_Provider
-@When[Windows_Devices_Spi_Provider == "on"]
 import windows.Devices.Spi.Provider as Devices_Spi_Provider
 
 

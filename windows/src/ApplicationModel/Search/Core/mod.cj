@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -756,7 +755,10 @@ public struct ISearchSuggestionManagerVtbl {
     public var SetQueryWithSearchQueryLinguisticDetails: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_ApplicationModel_Search != "on"]
     public var SetQueryWithSearchQueryLinguisticDetails: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Suggestions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Suggestions: UIntNative = UIntNative(0)
     public var AddToHistory: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var AddToHistoryWithLanguage: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var ClearHistory: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
@@ -886,6 +888,7 @@ public class ISearchSuggestionManager <: InterfaceWrapperBase & ComInterface & R
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Suggestions(): windows_collections.IObservableVector<SearchSuggestion> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1054,6 +1057,7 @@ public class SearchSuggestionManager <: InterfaceWrapperBase & ComInterface & wi
         defaultInterface().SetQueryWithSearchQueryLinguisticDetails(queryText, language, linguisticDetails)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Suggestions(): windows_collections.IObservableVector<SearchSuggestion> {
         return defaultInterface().Suggestions()
     }

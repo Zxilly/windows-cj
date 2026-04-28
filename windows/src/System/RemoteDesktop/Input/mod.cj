@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 
 
@@ -282,12 +281,14 @@ public class RemoteTextConnectionDataHandler <: InterfaceWrapperBase & ComInterf
 @When[Windows_System_RemoteDesktop_Input == "on"]
 extend RemoteTextConnectionDataHandler <: windows_core.Interface<RemoteTextConnectionDataHandler> {}
 
+@When[Windows_System_RemoteDesktop_Input == "on"]
 private open class RemoteTextConnectionDataHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0Size: UInt32, arg0: CPointer<UInt8>, result: CPointer<Bool>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_System_RemoteDesktop_Input == "on"]
 private open class RemoteTextConnectionDataHandlerInvoker <: RemoteTextConnectionDataHandlerInvokerErased {
     public open func Invoke(pduDataSize: UInt32, pduData: CPointer<UInt8>): Bool {
         false
@@ -300,6 +301,7 @@ private open class RemoteTextConnectionDataHandlerInvoker <: RemoteTextConnectio
     }
 }
 
+@When[Windows_System_RemoteDesktop_Input == "on"]
 private class RemoteTextConnectionDataHandlerBox <: RemoteTextConnectionDataHandlerInvoker {
     public let invoke_: (UInt32, CPointer<UInt8>) -> Bool
     private let vtblHandle: CPointerHandle<RemoteTextConnectionDataHandlerVtbl>
@@ -318,6 +320,7 @@ private class RemoteTextConnectionDataHandlerBox <: RemoteTextConnectionDataHand
     }
 }
 
+@When[Windows_System_RemoteDesktop_Input == "on"]
 func buildRemoteTextConnectionDataHandlerBoxVtbl(): RemoteTextConnectionDataHandlerVtbl {
     var vtbl = RemoteTextConnectionDataHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()

@@ -8,9 +8,7 @@ import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeTy
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase, RuntimeType, RuntimeTypeContract}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_System_Com_Marshal == "on"]
 import windows.Win32.System.Com.Marshal as Win32_System_Com_Marshal
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
@@ -3459,170 +3457,704 @@ public class IInputPaneInterop <: InterfaceWrapperBase & ComInterface & windows_
 @When[Windows_Win32_System_WinRT == "on"]
 public type PFNGETACTIVATIONFACTORY = CFunc<(HSTRING, CPointer<CPointer<Unit>>) -> Int32>
 
-@When[COREMESSAGING == "on" && Windows_System == "on"]
+@When[Windows_Win32_System_WinRT == "on" && COREMESSAGING == "on" && Windows_Win32_System_WinRT_CreateDispatcherQueueController == "on" && Windows_System == "on"]
 foreign {
     func CreateDispatcherQueueController(options: DispatcherQueueOptionsAbi, dispatcherQueueController: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[OLE32 == "on"]
+@When[Windows_Win32_System_WinRT == "on" && COREMESSAGING == "on" && Windows_Win32_System_WinRT_CreateDispatcherQueueController == "on" && Windows_System == "on"]
+public unsafe func Windows_CreateDispatcherQueueController(options: DispatcherQueueOptionsAbi, dispatcherQueueController: CPointer<CPointer<Unit>>): Int32 {
+    return CreateDispatcherQueueController(options, dispatcherQueueController)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && OLE32 == "on" && Windows_Win32_System_WinRT_CoDecodeProxy == "on"]
 foreign {
     func CoDecodeProxy(dwClientPid: UInt32, ui64ProxyAddress: UInt64, pServerInformation: CPointer<ServerInformationAbi>): Int32
 }
 
-@When[OLE32 == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_System_WinRT == "on" && OLE32 == "on" && Windows_Win32_System_WinRT_CoDecodeProxy == "on"]
+public unsafe func Windows_CoDecodeProxy(dwClientPid: UInt32, ui64ProxyAddress: UInt64, pServerInformation: CPointer<ServerInformationAbi>): Int32 {
+    return CoDecodeProxy(dwClientPid, ui64ProxyAddress, pServerInformation)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && OLE32 == "on" && Windows_Win32_System_WinRT_RoGetAgileReference == "on" && Windows_Win32_System_Com == "on"]
 foreign {
     func RoGetAgileReference(options: AgileReferenceOptionsAbi, riid: CPointer<GUID>, pUnk: CPointer<Unit>, ppAgileReference: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[WINDOWS_UI == "on"]
+@When[Windows_Win32_System_WinRT == "on" && OLE32 == "on" && Windows_Win32_System_WinRT_RoGetAgileReference == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_RoGetAgileReference(options: AgileReferenceOptionsAbi, riid: CPointer<GUID>, pUnk: CPointer<Unit>, ppAgileReference: CPointer<CPointer<Unit>>): Int32 {
+    return RoGetAgileReference(options, riid, pUnk, ppAgileReference)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && WINDOWS_UI == "on" && Windows_Win32_System_WinRT_CreateControlInput == "on"]
 @CallingConv[CDECL]
 foreign {
     // pinvoke-hint: cc=cdecl
     func CreateControlInput(riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[WINDOWS_UI == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_System_WinRT == "on" && WINDOWS_UI == "on" && Windows_Win32_System_WinRT_CreateControlInput == "on"]
+public unsafe func Windows_CreateControlInput(riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return CreateControlInput(riid, ppv)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && WINDOWS_UI == "on" && Windows_Win32_System_WinRT_CreateControlInputEx == "on" && Windows_Win32_System_Com == "on"]
 @CallingConv[CDECL]
 foreign {
     // pinvoke-hint: cc=cdecl
     func CreateControlInputEx(pCoreWindow: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[API_MS_WIN_CORE_WINRT_ERROR_L1_1_0 == "on"]
+@When[Windows_Win32_System_WinRT == "on" && WINDOWS_UI == "on" && Windows_Win32_System_WinRT_CreateControlInputEx == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CreateControlInputEx(pCoreWindow: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return CreateControlInputEx(pCoreWindow, riid, ppv)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_0 == "on" && Windows_Win32_System_WinRT_GetRestrictedErrorInfo == "on"]
 foreign {
     func GetRestrictedErrorInfo(ppRestrictedErrorInfo: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_0 == "on" && Windows_Win32_System_WinRT_GetRestrictedErrorInfo == "on"]
+public unsafe func Windows_GetRestrictedErrorInfo(ppRestrictedErrorInfo: CPointer<CPointer<Unit>>): Int32 {
+    return GetRestrictedErrorInfo(ppRestrictedErrorInfo)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoCaptureErrorContext == "on"]
+foreign {
     func RoCaptureErrorContext(hr: Int32): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoCaptureErrorContext == "on"]
+public unsafe func Windows_RoCaptureErrorContext(hr: Int32): Int32 {
+    return RoCaptureErrorContext(hr)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoFailFastWithErrorContext == "on"]
+foreign {
     func RoFailFastWithErrorContext(hrError: Int32): Unit
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoFailFastWithErrorContext == "on"]
+public unsafe func Windows_RoFailFastWithErrorContext(hrError: Int32): Unit {
+    RoFailFastWithErrorContext(hrError)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoGetErrorReportingFlags == "on"]
+foreign {
     func RoGetErrorReportingFlags(pflags: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoGetErrorReportingFlags == "on"]
+public unsafe func Windows_RoGetErrorReportingFlags(pflags: CPointer<UInt32>): Int32 {
+    return RoGetErrorReportingFlags(pflags)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoOriginateError == "on"]
+foreign {
     // param-hint: message optional
     func RoOriginateError(error: Int32, message: HSTRING): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoOriginateError == "on"]
+public unsafe func Windows_RoOriginateError(error: Int32, message: HSTRING): Int32 {
+    return RoOriginateError(error, message)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoOriginateErrorW == "on"]
+foreign {
     // param-hint: message fixed=512 optional
     func RoOriginateErrorW(error: Int32, cchMax: UInt32, message: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoOriginateErrorW == "on"]
+public unsafe func Windows_RoOriginateErrorW(error: Int32, cchMax: UInt32, message: CPointer<UInt16>): Int32 {
+    return RoOriginateErrorW(error, cchMax, message)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoResolveRestrictedErrorInfoReference == "on"]
+foreign {
     func RoResolveRestrictedErrorInfoReference(reference: CPointer<UInt16>, ppRestrictedErrorInfo: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoResolveRestrictedErrorInfoReference == "on"]
+public unsafe func Windows_RoResolveRestrictedErrorInfoReference(reference: CPointer<UInt16>, ppRestrictedErrorInfo: CPointer<CPointer<Unit>>): Int32 {
+    return RoResolveRestrictedErrorInfoReference(reference, ppRestrictedErrorInfo)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoSetErrorReportingFlags == "on"]
+foreign {
     func RoSetErrorReportingFlags(flags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoSetErrorReportingFlags == "on"]
+public unsafe func Windows_RoSetErrorReportingFlags(flags: UInt32): Int32 {
+    return RoSetErrorReportingFlags(flags)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoTransformError == "on"]
+foreign {
     // param-hint: message optional
     func RoTransformError(oldError: Int32, newError: Int32, message: HSTRING): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoTransformError == "on"]
+public unsafe func Windows_RoTransformError(oldError: Int32, newError: Int32, message: HSTRING): Int32 {
+    return RoTransformError(oldError, newError, message)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoTransformErrorW == "on"]
+foreign {
     // param-hint: message fixed=512 optional
     func RoTransformErrorW(oldError: Int32, newError: Int32, cchMax: UInt32, message: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoTransformErrorW == "on"]
+public unsafe func Windows_RoTransformErrorW(oldError: Int32, newError: Int32, cchMax: UInt32, message: CPointer<UInt16>): Int32 {
+    return RoTransformErrorW(oldError, newError, cchMax, message)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_0 == "on" && Windows_Win32_System_WinRT_SetRestrictedErrorInfo == "on"]
+foreign {
     // param-hint: pRestrictedErrorInfo optional
     func SetRestrictedErrorInfo(pRestrictedErrorInfo: CPointer<Unit>): Int32
 }
 
-@When[API_MS_WIN_CORE_WINRT_ERROR_L1_1_1 == "on"]
-foreign {
-    func IsErrorPropagationEnabled(): Int32
-    func RoClearError(): Unit
-    func RoGetMatchingRestrictedErrorInfo(hrIn: Int32, ppRestrictedErrorInfo: CPointer<CPointer<Unit>>): Int32
-    // param-hint: context optional
-    func RoInspectCapturedStackBackTrace(targetErrorInfoAddress: UIntNative, machine: UInt16, readMemoryCallback: PINSPECT_MEMORY_CALLBACK, context: CPointer<Unit>, frameCount: CPointer<UInt32>, targetBackTraceAddress: CPointer<UIntNative>): Int32
-    // param-hint: context optional
-    func RoInspectThreadErrorInfo(targetTebAddress: UIntNative, machine: UInt16, readMemoryCallback: PINSPECT_MEMORY_CALLBACK, context: CPointer<Unit>, targetErrorInfoAddress: CPointer<UIntNative>): Int32
-    func RoReportUnhandledError(pRestrictedErrorInfo: CPointer<Unit>): Int32
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_0 == "on" && Windows_Win32_System_WinRT_SetRestrictedErrorInfo == "on"]
+public unsafe func Windows_SetRestrictedErrorInfo(pRestrictedErrorInfo: CPointer<Unit>): Int32 {
+    return SetRestrictedErrorInfo(pRestrictedErrorInfo)
 }
 
-@When[API_MS_WIN_CORE_WINRT_ERROR_L1_1_1 == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_1 == "on" && Windows_Win32_System_WinRT_IsErrorPropagationEnabled == "on"]
+foreign {
+    func IsErrorPropagationEnabled(): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_1 == "on" && Windows_Win32_System_WinRT_IsErrorPropagationEnabled == "on"]
+public unsafe func Windows_IsErrorPropagationEnabled(): Int32 {
+    return IsErrorPropagationEnabled()
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_1 == "on" && Windows_Win32_System_WinRT_RoClearError == "on"]
+foreign {
+    func RoClearError(): Unit
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_1 == "on" && Windows_Win32_System_WinRT_RoClearError == "on"]
+public unsafe func Windows_RoClearError(): Unit {
+    RoClearError()
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_1 == "on" && Windows_Win32_System_WinRT_RoGetMatchingRestrictedErrorInfo == "on"]
+foreign {
+    func RoGetMatchingRestrictedErrorInfo(hrIn: Int32, ppRestrictedErrorInfo: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_1 == "on" && Windows_Win32_System_WinRT_RoGetMatchingRestrictedErrorInfo == "on"]
+public unsafe func Windows_RoGetMatchingRestrictedErrorInfo(hrIn: Int32, ppRestrictedErrorInfo: CPointer<CPointer<Unit>>): Int32 {
+    return RoGetMatchingRestrictedErrorInfo(hrIn, ppRestrictedErrorInfo)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_1 == "on" && Windows_Win32_System_WinRT_RoInspectCapturedStackBackTrace == "on"]
+foreign {
+    // param-hint: context optional
+    func RoInspectCapturedStackBackTrace(targetErrorInfoAddress: UIntNative, machine: UInt16, readMemoryCallback: PINSPECT_MEMORY_CALLBACK, context: CPointer<Unit>, frameCount: CPointer<UInt32>, targetBackTraceAddress: CPointer<UIntNative>): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_1 == "on" && Windows_Win32_System_WinRT_RoInspectCapturedStackBackTrace == "on"]
+public unsafe func Windows_RoInspectCapturedStackBackTrace(targetErrorInfoAddress: UIntNative, machine: UInt16, readMemoryCallback: PINSPECT_MEMORY_CALLBACK, context: CPointer<Unit>, frameCount: CPointer<UInt32>, targetBackTraceAddress: CPointer<UIntNative>): Int32 {
+    return RoInspectCapturedStackBackTrace(targetErrorInfoAddress, machine, readMemoryCallback, context, frameCount, targetBackTraceAddress)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_1 == "on" && Windows_Win32_System_WinRT_RoInspectThreadErrorInfo == "on"]
+foreign {
+    // param-hint: context optional
+    func RoInspectThreadErrorInfo(targetTebAddress: UIntNative, machine: UInt16, readMemoryCallback: PINSPECT_MEMORY_CALLBACK, context: CPointer<Unit>, targetErrorInfoAddress: CPointer<UIntNative>): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_1 == "on" && Windows_Win32_System_WinRT_RoInspectThreadErrorInfo == "on"]
+public unsafe func Windows_RoInspectThreadErrorInfo(targetTebAddress: UIntNative, machine: UInt16, readMemoryCallback: PINSPECT_MEMORY_CALLBACK, context: CPointer<Unit>, targetErrorInfoAddress: CPointer<UIntNative>): Int32 {
+    return RoInspectThreadErrorInfo(targetTebAddress, machine, readMemoryCallback, context, targetErrorInfoAddress)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_1 == "on" && Windows_Win32_System_WinRT_RoOriginateLanguageException == "on" && Windows_Win32_System_Com == "on"]
 foreign {
     // param-hint: message optional
     // param-hint: languageException optional
     func RoOriginateLanguageException(error: Int32, message: HSTRING, languageException: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_1 == "on" && Windows_Win32_System_WinRT_RoOriginateLanguageException == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_RoOriginateLanguageException(error: Int32, message: HSTRING, languageException: CPointer<Unit>): Int32 {
+    return RoOriginateLanguageException(error, message, languageException)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_1 == "on" && Windows_Win32_System_WinRT_RoReportFailedDelegate == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func RoReportFailedDelegate(punkDelegate: CPointer<Unit>, pRestrictedErrorInfo: CPointer<Unit>): Int32
 }
 
-@When[API_MS_WIN_CORE_WINRT_L1_1_0 == "on"]
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_1 == "on" && Windows_Win32_System_WinRT_RoReportFailedDelegate == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_RoReportFailedDelegate(punkDelegate: CPointer<Unit>, pRestrictedErrorInfo: CPointer<Unit>): Int32 {
+    return RoReportFailedDelegate(punkDelegate, pRestrictedErrorInfo)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_1 == "on" && Windows_Win32_System_WinRT_RoReportUnhandledError == "on"]
+foreign {
+    func RoReportUnhandledError(pRestrictedErrorInfo: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ERROR_L1_1_1 == "on" && Windows_Win32_System_WinRT_RoReportUnhandledError == "on"]
+public unsafe func Windows_RoReportUnhandledError(pRestrictedErrorInfo: CPointer<Unit>): Int32 {
+    return RoReportUnhandledError(pRestrictedErrorInfo)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoActivateInstance == "on"]
 foreign {
     func RoActivateInstance(activatableClassId: HSTRING, instance: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoActivateInstance == "on"]
+public unsafe func Windows_RoActivateInstance(activatableClassId: HSTRING, instance: CPointer<CPointer<Unit>>): Int32 {
+    return RoActivateInstance(activatableClassId, instance)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoGetActivationFactory == "on"]
+foreign {
     func RoGetActivationFactory(activatableClassId: HSTRING, iid: CPointer<GUID>, factory: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoGetActivationFactory == "on"]
+public unsafe func Windows_RoGetActivationFactory(activatableClassId: HSTRING, iid: CPointer<GUID>, factory: CPointer<CPointer<Unit>>): Int32 {
+    return RoGetActivationFactory(activatableClassId, iid, factory)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoGetApartmentIdentifier == "on"]
+foreign {
     func RoGetApartmentIdentifier(apartmentIdentifier: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoGetApartmentIdentifier == "on"]
+public unsafe func Windows_RoGetApartmentIdentifier(apartmentIdentifier: CPointer<UInt64>): Int32 {
+    return RoGetApartmentIdentifier(apartmentIdentifier)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoInitialize == "on"]
+foreign {
     func RoInitialize(initType: RO_INIT_TYPEAbi): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoInitialize == "on"]
+public unsafe func Windows_RoInitialize(initType: RO_INIT_TYPEAbi): Int32 {
+    return RoInitialize(initType)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoRegisterActivationFactories == "on"]
+foreign {
     // param-hint: activatableClassIds len=param[2]
     // param-hint: activationFactoryCallbacks len=param[2]
     func RoRegisterActivationFactories(activatableClassIds: CPointer<HSTRING>, activationFactoryCallbacks: CPointer<PFNGETACTIVATIONFACTORY>, count: UInt32, cookie: CPointer<RO_REGISTRATION_COOKIE>): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoRegisterActivationFactories == "on"]
+public unsafe func Windows_RoRegisterActivationFactories(activatableClassIds: CPointer<HSTRING>, activationFactoryCallbacks: CPointer<PFNGETACTIVATIONFACTORY>, count: UInt32, cookie: CPointer<RO_REGISTRATION_COOKIE>): Int32 {
+    return RoRegisterActivationFactories(activatableClassIds, activationFactoryCallbacks, count, cookie)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoRegisterForApartmentShutdown == "on"]
+foreign {
     func RoRegisterForApartmentShutdown(callbackObject: CPointer<Unit>, apartmentIdentifier: CPointer<UInt64>, regCookie: CPointer<APARTMENT_SHUTDOWN_REGISTRATION_COOKIE>): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoRegisterForApartmentShutdown == "on"]
+public unsafe func Windows_RoRegisterForApartmentShutdown(callbackObject: CPointer<Unit>, apartmentIdentifier: CPointer<UInt64>, regCookie: CPointer<APARTMENT_SHUTDOWN_REGISTRATION_COOKIE>): Int32 {
+    return RoRegisterForApartmentShutdown(callbackObject, apartmentIdentifier, regCookie)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoRevokeActivationFactories == "on"]
+foreign {
     func RoRevokeActivationFactories(cookie: RO_REGISTRATION_COOKIE): Unit
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoRevokeActivationFactories == "on"]
+public unsafe func Windows_RoRevokeActivationFactories(cookie: RO_REGISTRATION_COOKIE): Unit {
+    RoRevokeActivationFactories(cookie)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoUninitialize == "on"]
+foreign {
     func RoUninitialize(): Unit
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoUninitialize == "on"]
+public unsafe func Windows_RoUninitialize(): Unit {
+    RoUninitialize()
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoUnregisterForApartmentShutdown == "on"]
+foreign {
     func RoUnregisterForApartmentShutdown(regCookie: APARTMENT_SHUTDOWN_REGISTRATION_COOKIE): Int32
 }
 
-@When[API_MS_WIN_CORE_WINRT_REGISTRATION_L1_1_0 == "on"]
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoUnregisterForApartmentShutdown == "on"]
+public unsafe func Windows_RoUnregisterForApartmentShutdown(regCookie: APARTMENT_SHUTDOWN_REGISTRATION_COOKIE): Int32 {
+    return RoUnregisterForApartmentShutdown(regCookie)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_REGISTRATION_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoGetServerActivatableClasses == "on"]
 foreign {
     func RoGetServerActivatableClasses(serverName: HSTRING, activatableClassIds: CPointer<CPointer<HSTRING>>, count: CPointer<UInt32>): Int32
 }
 
-@When[API_MS_WIN_CORE_WINRT_ROBUFFER_L1_1_0 == "on" && Windows_Win32_System_Com_Marshal == "on"]
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_REGISTRATION_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoGetServerActivatableClasses == "on"]
+public unsafe func Windows_RoGetServerActivatableClasses(serverName: HSTRING, activatableClassIds: CPointer<CPointer<HSTRING>>, count: CPointer<UInt32>): Int32 {
+    return RoGetServerActivatableClasses(serverName, activatableClassIds, count)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ROBUFFER_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoGetBufferMarshaler == "on" && Windows_Win32_System_Com_Marshal == "on"]
 foreign {
     func RoGetBufferMarshaler(bufferMarshaler: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on"]
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_ROBUFFER_L1_1_0 == "on" && Windows_Win32_System_WinRT_RoGetBufferMarshaler == "on" && Windows_Win32_System_Com_Marshal == "on"]
+public unsafe func Windows_RoGetBufferMarshaler(bufferMarshaler: CPointer<CPointer<Unit>>): Int32 {
+    return RoGetBufferMarshaler(bufferMarshaler)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_HSTRING_UserFree == "on"]
 foreign {
     func HSTRING_UserFree(param0: CPointer<UInt32>, param1: CPointer<HSTRING>): Unit
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_HSTRING_UserFree == "on"]
+public unsafe func Windows_HSTRING_UserFree(param0: CPointer<UInt32>, param1: CPointer<HSTRING>): Unit {
+    HSTRING_UserFree(param0, param1)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_HSTRING_UserFree64 == "on"]
+foreign {
     func HSTRING_UserFree64(param0: CPointer<UInt32>, param1: CPointer<HSTRING>): Unit
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_HSTRING_UserFree64 == "on"]
+public unsafe func Windows_HSTRING_UserFree64(param0: CPointer<UInt32>, param1: CPointer<HSTRING>): Unit {
+    HSTRING_UserFree64(param0, param1)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_HSTRING_UserMarshal == "on"]
+foreign {
     func HSTRING_UserMarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<HSTRING>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_HSTRING_UserMarshal == "on"]
+public unsafe func Windows_HSTRING_UserMarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<HSTRING>): CPointer<UInt8> {
+    return HSTRING_UserMarshal(param0, param1, param2)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_HSTRING_UserMarshal64 == "on"]
+foreign {
     func HSTRING_UserMarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<HSTRING>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_HSTRING_UserMarshal64 == "on"]
+public unsafe func Windows_HSTRING_UserMarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<HSTRING>): CPointer<UInt8> {
+    return HSTRING_UserMarshal64(param0, param1, param2)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_HSTRING_UserSize == "on"]
+foreign {
     func HSTRING_UserSize(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<HSTRING>): UInt32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_HSTRING_UserSize == "on"]
+public unsafe func Windows_HSTRING_UserSize(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<HSTRING>): UInt32 {
+    return HSTRING_UserSize(param0, param1, param2)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_HSTRING_UserSize64 == "on"]
+foreign {
     func HSTRING_UserSize64(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<HSTRING>): UInt32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_HSTRING_UserSize64 == "on"]
+public unsafe func Windows_HSTRING_UserSize64(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<HSTRING>): UInt32 {
+    return HSTRING_UserSize64(param0, param1, param2)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_HSTRING_UserUnmarshal == "on"]
+foreign {
     func HSTRING_UserUnmarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<HSTRING>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_HSTRING_UserUnmarshal == "on"]
+public unsafe func Windows_HSTRING_UserUnmarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<HSTRING>): CPointer<UInt8> {
+    return HSTRING_UserUnmarshal(param0, param1, param2)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_HSTRING_UserUnmarshal64 == "on"]
+foreign {
     func HSTRING_UserUnmarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<HSTRING>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_HSTRING_UserUnmarshal64 == "on"]
+public unsafe func Windows_HSTRING_UserUnmarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<HSTRING>): CPointer<UInt8> {
+    return HSTRING_UserUnmarshal64(param0, param1, param2)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsCompareStringOrdinal == "on"]
+foreign {
     // param-hint: string1 optional
     // param-hint: string2 optional
     func WindowsCompareStringOrdinal(string1: HSTRING, string2: HSTRING, result: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsCompareStringOrdinal == "on"]
+public unsafe func Windows_WindowsCompareStringOrdinal(string1: HSTRING, string2: HSTRING, result: CPointer<Int32>): Int32 {
+    return WindowsCompareStringOrdinal(string1, string2, result)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsConcatString == "on"]
+foreign {
     // param-hint: string1 optional
     // param-hint: string2 optional
     func WindowsConcatString(string1: HSTRING, string2: HSTRING, newString: CPointer<HSTRING>): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsConcatString == "on"]
+public unsafe func Windows_WindowsConcatString(string1: HSTRING, string2: HSTRING, newString: CPointer<HSTRING>): Int32 {
+    return WindowsConcatString(string1, string2, newString)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsCreateString == "on"]
+foreign {
     // param-hint: sourceString len=param[1] optional
     func WindowsCreateString(sourceString: CPointer<UInt16>, length: UInt32, string: CPointer<HSTRING>): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsCreateString == "on"]
+public unsafe func Windows_WindowsCreateString(sourceString: CPointer<UInt16>, length: UInt32, string: CPointer<HSTRING>): Int32 {
+    return WindowsCreateString(sourceString, length, string)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsCreateStringReference == "on"]
+foreign {
     // param-hint: sourceString optional
     func WindowsCreateStringReference(sourceString: CPointer<UInt16>, length: UInt32, hstringHeader: CPointer<HSTRING_HEADERAbi>, string: CPointer<HSTRING>): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsCreateStringReference == "on"]
+public unsafe func Windows_WindowsCreateStringReference(sourceString: CPointer<UInt16>, length: UInt32, hstringHeader: CPointer<HSTRING_HEADERAbi>, string: CPointer<HSTRING>): Int32 {
+    return WindowsCreateStringReference(sourceString, length, hstringHeader, string)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsDeleteString == "on"]
+foreign {
     // param-hint: string optional
     func WindowsDeleteString(string: HSTRING): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsDeleteString == "on"]
+public unsafe func Windows_WindowsDeleteString(string: HSTRING): Int32 {
+    return WindowsDeleteString(string)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsDeleteStringBuffer == "on"]
+foreign {
     // param-hint: bufferHandle optional
     func WindowsDeleteStringBuffer(bufferHandle: HSTRING_BUFFER): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsDeleteStringBuffer == "on"]
+public unsafe func Windows_WindowsDeleteStringBuffer(bufferHandle: HSTRING_BUFFER): Int32 {
+    return WindowsDeleteStringBuffer(bufferHandle)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsDuplicateString == "on"]
+foreign {
     // param-hint: string optional
     func WindowsDuplicateString(string: HSTRING, newString: CPointer<HSTRING>): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsDuplicateString == "on"]
+public unsafe func Windows_WindowsDuplicateString(string: HSTRING, newString: CPointer<HSTRING>): Int32 {
+    return WindowsDuplicateString(string, newString)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsGetStringLen == "on"]
+foreign {
     // param-hint: string optional
     func WindowsGetStringLen(string: HSTRING): UInt32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsGetStringLen == "on"]
+public unsafe func Windows_WindowsGetStringLen(string: HSTRING): UInt32 {
+    return WindowsGetStringLen(string)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsGetStringRawBuffer == "on"]
+foreign {
     // param-hint: string optional
     // param-hint: length optional
     func WindowsGetStringRawBuffer(string: HSTRING, length: CPointer<UInt32>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsGetStringRawBuffer == "on"]
+public unsafe func Windows_WindowsGetStringRawBuffer(string: HSTRING, length: CPointer<UInt32>): CPointer<UInt16> {
+    return WindowsGetStringRawBuffer(string, length)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsInspectString == "on"]
+foreign {
     // param-hint: context optional
     func WindowsInspectString(targetHString: UIntNative, machine: UInt16, callback: PINSPECT_HSTRING_CALLBACK, context: CPointer<Unit>, length: CPointer<UInt32>, targetStringAddress: CPointer<UIntNative>): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsInspectString == "on"]
+public unsafe func Windows_WindowsInspectString(targetHString: UIntNative, machine: UInt16, callback: PINSPECT_HSTRING_CALLBACK, context: CPointer<Unit>, length: CPointer<UInt32>, targetStringAddress: CPointer<UIntNative>): Int32 {
+    return WindowsInspectString(targetHString, machine, callback, context, length, targetStringAddress)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsIsStringEmpty == "on"]
+foreign {
     // param-hint: string optional
     func WindowsIsStringEmpty(string: HSTRING): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsIsStringEmpty == "on"]
+public unsafe func Windows_WindowsIsStringEmpty(string: HSTRING): Int32 {
+    return WindowsIsStringEmpty(string)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsPreallocateStringBuffer == "on"]
+foreign {
     func WindowsPreallocateStringBuffer(length: UInt32, charBuffer: CPointer<CPointer<UInt16>>, bufferHandle: CPointer<HSTRING_BUFFER>): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsPreallocateStringBuffer == "on"]
+public unsafe func Windows_WindowsPreallocateStringBuffer(length: UInt32, charBuffer: CPointer<CPointer<UInt16>>, bufferHandle: CPointer<HSTRING_BUFFER>): Int32 {
+    return WindowsPreallocateStringBuffer(length, charBuffer, bufferHandle)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsPromoteStringBuffer == "on"]
+foreign {
     func WindowsPromoteStringBuffer(bufferHandle: HSTRING_BUFFER, string: CPointer<HSTRING>): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsPromoteStringBuffer == "on"]
+public unsafe func Windows_WindowsPromoteStringBuffer(bufferHandle: HSTRING_BUFFER, string: CPointer<HSTRING>): Int32 {
+    return WindowsPromoteStringBuffer(bufferHandle, string)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsReplaceString == "on"]
+foreign {
     // param-hint: string optional
     // param-hint: stringReplaced optional
     // param-hint: stringReplaceWith optional
     func WindowsReplaceString(string: HSTRING, stringReplaced: HSTRING, stringReplaceWith: HSTRING, newString: CPointer<HSTRING>): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsReplaceString == "on"]
+public unsafe func Windows_WindowsReplaceString(string: HSTRING, stringReplaced: HSTRING, stringReplaceWith: HSTRING, newString: CPointer<HSTRING>): Int32 {
+    return WindowsReplaceString(string, stringReplaced, stringReplaceWith, newString)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsStringHasEmbeddedNull == "on"]
+foreign {
     // param-hint: string optional
     func WindowsStringHasEmbeddedNull(string: HSTRING, hasEmbedNull: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsStringHasEmbeddedNull == "on"]
+public unsafe func Windows_WindowsStringHasEmbeddedNull(string: HSTRING, hasEmbedNull: CPointer<Int32>): Int32 {
+    return WindowsStringHasEmbeddedNull(string, hasEmbedNull)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsSubstring == "on"]
+foreign {
     // param-hint: string optional
     func WindowsSubstring(string: HSTRING, startIndex: UInt32, newString: CPointer<HSTRING>): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsSubstring == "on"]
+public unsafe func Windows_WindowsSubstring(string: HSTRING, startIndex: UInt32, newString: CPointer<HSTRING>): Int32 {
+    return WindowsSubstring(string, startIndex, newString)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsSubstringWithSpecifiedLength == "on"]
+foreign {
     // param-hint: string optional
     func WindowsSubstringWithSpecifiedLength(string: HSTRING, startIndex: UInt32, length: UInt32, newString: CPointer<HSTRING>): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsSubstringWithSpecifiedLength == "on"]
+public unsafe func Windows_WindowsSubstringWithSpecifiedLength(string: HSTRING, startIndex: UInt32, length: UInt32, newString: CPointer<HSTRING>): Int32 {
+    return WindowsSubstringWithSpecifiedLength(string, startIndex, length, newString)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsTrimStringEnd == "on"]
+foreign {
     // param-hint: string optional
     // param-hint: trimString optional
     func WindowsTrimStringEnd(string: HSTRING, trimString: HSTRING, newString: CPointer<HSTRING>): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsTrimStringEnd == "on"]
+public unsafe func Windows_WindowsTrimStringEnd(string: HSTRING, trimString: HSTRING, newString: CPointer<HSTRING>): Int32 {
+    return WindowsTrimStringEnd(string, trimString, newString)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsTrimStringStart == "on"]
+foreign {
     // param-hint: string optional
     // param-hint: trimString optional
     func WindowsTrimStringStart(string: HSTRING, trimString: HSTRING, newString: CPointer<HSTRING>): Int32
 }
 
-@When[API_MS_WIN_CORE_WINRT_STRING_L1_1_1 == "on"]
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_0 == "on" && Windows_Win32_System_WinRT_WindowsTrimStringStart == "on"]
+public unsafe func Windows_WindowsTrimStringStart(string: HSTRING, trimString: HSTRING, newString: CPointer<HSTRING>): Int32 {
+    return WindowsTrimStringStart(string, trimString, newString)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_1 == "on" && Windows_Win32_System_WinRT_WindowsInspectString2 == "on"]
 foreign {
     // param-hint: context optional
     func WindowsInspectString2(targetHString: UInt64, machine: UInt16, callback: PINSPECT_HSTRING_CALLBACK2, context: CPointer<Unit>, length: CPointer<UInt32>, targetStringAddress: CPointer<UInt64>): Int32
 }
 
-@When[API_MS_WIN_SHCORE_STREAM_WINRT_L1_1_0 == "on"]
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_CORE_WINRT_STRING_L1_1_1 == "on" && Windows_Win32_System_WinRT_WindowsInspectString2 == "on"]
+public unsafe func Windows_WindowsInspectString2(targetHString: UInt64, machine: UInt16, callback: PINSPECT_HSTRING_CALLBACK2, context: CPointer<Unit>, length: CPointer<UInt32>, targetStringAddress: CPointer<UInt64>): Int32 {
+    return WindowsInspectString2(targetHString, machine, callback, context, length, targetStringAddress)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_SHCORE_STREAM_WINRT_L1_1_0 == "on" && Windows_Win32_System_WinRT_CreateRandomAccessStreamOnFile == "on"]
 foreign {
     func CreateRandomAccessStreamOnFile(filePath: CPointer<UInt16>, accessMode: UInt32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[API_MS_WIN_SHCORE_STREAM_WINRT_L1_1_0 == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_SHCORE_STREAM_WINRT_L1_1_0 == "on" && Windows_Win32_System_WinRT_CreateRandomAccessStreamOnFile == "on"]
+public unsafe func Windows_CreateRandomAccessStreamOnFile(filePath: CPointer<UInt16>, accessMode: UInt32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return CreateRandomAccessStreamOnFile(filePath, accessMode, riid, ppv)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_SHCORE_STREAM_WINRT_L1_1_0 == "on" && Windows_Win32_System_WinRT_CreateRandomAccessStreamOverStream == "on" && Windows_Win32_System_Com == "on"]
 foreign {
     func CreateRandomAccessStreamOverStream(stream: CPointer<Unit>, options: BSOS_OPTIONSAbi, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_SHCORE_STREAM_WINRT_L1_1_0 == "on" && Windows_Win32_System_WinRT_CreateRandomAccessStreamOverStream == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CreateRandomAccessStreamOverStream(stream: CPointer<Unit>, options: BSOS_OPTIONSAbi, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return CreateRandomAccessStreamOverStream(stream, options, riid, ppv)
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_SHCORE_STREAM_WINRT_L1_1_0 == "on" && Windows_Win32_System_WinRT_CreateStreamOverRandomAccessStream == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func CreateStreamOverRandomAccessStream(randomAccessStream: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_WinRT == "on" && API_MS_WIN_SHCORE_STREAM_WINRT_L1_1_0 == "on" && Windows_Win32_System_WinRT_CreateStreamOverRandomAccessStream == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CreateStreamOverRandomAccessStream(randomAccessStream: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return CreateStreamOverRandomAccessStream(randomAccessStream, riid, ppv)
 }
 
 @When[Windows_Win32_System_WinRT == "on"]

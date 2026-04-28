@@ -4,15 +4,14 @@
 package windows.Win32.Devices.BiometricFramework
 
 import std.collection.*
+import windows_libloading
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
 import windows_interface.{GUID}
 import windows_interface as windows_interface
 import windows_polyfill.{unionReadUInt32, unionWriteUInt32}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_System_IO == "on"]
 import windows.Win32.System.IO as Win32_System_IO
 
 
@@ -6279,19 +6278,73 @@ extend WINBIO_ASYNC_RESULT__Parameters_e__Union__NotifyUnitStatusChange_e__Struc
 @When[Windows_Win32_Devices_BiometricFramework == "on"]
 public type PWINBIO_ASYNC_COMPLETION_CALLBACK = CFunc<(CPointer<WINBIO_ASYNC_RESULTAbi>) -> Unit>
 
-@When[WINBIO == "on"]
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioAcquireFocus == "on"]
 foreign {
     func WinBioAcquireFocus(): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioAcquireFocus == "on"]
+public unsafe func Windows_WinBioAcquireFocus(): Int32 {
+    return WinBioAcquireFocus()
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioAsyncEnumBiometricUnits == "on"]
+foreign {
     func WinBioAsyncEnumBiometricUnits(FrameworkHandle: UInt32, Factor: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioAsyncEnumBiometricUnits == "on"]
+public unsafe func Windows_WinBioAsyncEnumBiometricUnits(FrameworkHandle: UInt32, Factor: UInt32): Int32 {
+    return WinBioAsyncEnumBiometricUnits(FrameworkHandle, Factor)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioAsyncEnumDatabases == "on"]
+foreign {
     func WinBioAsyncEnumDatabases(FrameworkHandle: UInt32, Factor: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioAsyncEnumDatabases == "on"]
+public unsafe func Windows_WinBioAsyncEnumDatabases(FrameworkHandle: UInt32, Factor: UInt32): Int32 {
+    return WinBioAsyncEnumDatabases(FrameworkHandle, Factor)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioAsyncEnumServiceProviders == "on"]
+foreign {
     func WinBioAsyncEnumServiceProviders(FrameworkHandle: UInt32, Factor: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioAsyncEnumServiceProviders == "on"]
+public unsafe func Windows_WinBioAsyncEnumServiceProviders(FrameworkHandle: UInt32, Factor: UInt32): Int32 {
+    return WinBioAsyncEnumServiceProviders(FrameworkHandle, Factor)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioAsyncMonitorFrameworkChanges == "on"]
+foreign {
     func WinBioAsyncMonitorFrameworkChanges(FrameworkHandle: UInt32, ChangeTypes: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioAsyncMonitorFrameworkChanges == "on"]
+public unsafe func Windows_WinBioAsyncMonitorFrameworkChanges(FrameworkHandle: UInt32, ChangeTypes: UInt32): Int32 {
+    return WinBioAsyncMonitorFrameworkChanges(FrameworkHandle, ChangeTypes)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioAsyncOpenFramework == "on"]
+foreign {
     // param-hint: TargetWindow optional
     // param-hint: MessageCode optional
     // param-hint: CallbackRoutine optional
     // param-hint: UserData optional
     // param-hint: FrameworkHandle optional
     func WinBioAsyncOpenFramework(NotificationMethod: WINBIO_ASYNC_NOTIFICATION_METHODAbi, TargetWindow: CPointer<Unit>, MessageCode: UInt32, CallbackRoutine: PWINBIO_ASYNC_COMPLETION_CALLBACK, UserData: CPointer<Unit>, AsynchronousOpen: Int32, FrameworkHandle: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioAsyncOpenFramework == "on"]
+public unsafe func Windows_WinBioAsyncOpenFramework(NotificationMethod: WINBIO_ASYNC_NOTIFICATION_METHODAbi, TargetWindow: CPointer<Unit>, MessageCode: UInt32, CallbackRoutine: PWINBIO_ASYNC_COMPLETION_CALLBACK, UserData: CPointer<Unit>, AsynchronousOpen: Int32, FrameworkHandle: CPointer<UInt32>): Int32 {
+    return WinBioAsyncOpenFramework(NotificationMethod, TargetWindow, MessageCode, CallbackRoutine, UserData, AsynchronousOpen, FrameworkHandle)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioAsyncOpenSession == "on"]
+foreign {
     // param-hint: UnitArray len=param[4] optional
     // param-hint: UnitCount optional
     // param-hint: DatabaseId optional
@@ -6301,93 +6354,536 @@ foreign {
     // param-hint: UserData optional
     // param-hint: SessionHandle optional
     func WinBioAsyncOpenSession(Factor: UInt32, PoolType: WINBIO_POOLAbi, Flags: UInt32, UnitArray: CPointer<UInt32>, UnitCount: UIntNative, DatabaseId: CPointer<GUID>, NotificationMethod: WINBIO_ASYNC_NOTIFICATION_METHODAbi, TargetWindow: CPointer<Unit>, MessageCode: UInt32, CallbackRoutine: PWINBIO_ASYNC_COMPLETION_CALLBACK, UserData: CPointer<Unit>, AsynchronousOpen: Int32, SessionHandle: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioAsyncOpenSession == "on"]
+public unsafe func Windows_WinBioAsyncOpenSession(Factor: UInt32, PoolType: WINBIO_POOLAbi, Flags: UInt32, UnitArray: CPointer<UInt32>, UnitCount: UIntNative, DatabaseId: CPointer<GUID>, NotificationMethod: WINBIO_ASYNC_NOTIFICATION_METHODAbi, TargetWindow: CPointer<Unit>, MessageCode: UInt32, CallbackRoutine: PWINBIO_ASYNC_COMPLETION_CALLBACK, UserData: CPointer<Unit>, AsynchronousOpen: Int32, SessionHandle: CPointer<UInt32>): Int32 {
+    return WinBioAsyncOpenSession(Factor, PoolType, Flags, UnitArray, UnitCount, DatabaseId, NotificationMethod, TargetWindow, MessageCode, CallbackRoutine, UserData, AsynchronousOpen, SessionHandle)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioCancel == "on"]
+foreign {
     func WinBioCancel(SessionHandle: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioCancel == "on"]
+public unsafe func Windows_WinBioCancel(SessionHandle: UInt32): Int32 {
+    return WinBioCancel(SessionHandle)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioCaptureSample == "on"]
+foreign {
     // param-hint: UnitId optional
     // param-hint: SampleSize optional
     // param-hint: RejectDetail optional
     func WinBioCaptureSample(SessionHandle: UInt32, Purpose: UInt8, Flags: UInt8, UnitId: CPointer<UInt32>, Sample: CPointer<CPointer<WINBIO_BIRAbi>>, SampleSize: CPointer<UIntNative>, RejectDetail: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioCaptureSample == "on"]
+public unsafe func Windows_WinBioCaptureSample(SessionHandle: UInt32, Purpose: UInt8, Flags: UInt8, UnitId: CPointer<UInt32>, Sample: CPointer<CPointer<WINBIO_BIRAbi>>, SampleSize: CPointer<UIntNative>, RejectDetail: CPointer<UInt32>): Int32 {
+    return WinBioCaptureSample(SessionHandle, Purpose, Flags, UnitId, Sample, SampleSize, RejectDetail)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioCaptureSampleWithCallback == "on"]
+foreign {
     // param-hint: CaptureCallbackContext optional
     func WinBioCaptureSampleWithCallback(SessionHandle: UInt32, Purpose: UInt8, Flags: UInt8, CaptureCallback: PWINBIO_CAPTURE_CALLBACK, CaptureCallbackContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioCaptureSampleWithCallback == "on"]
+public unsafe func Windows_WinBioCaptureSampleWithCallback(SessionHandle: UInt32, Purpose: UInt8, Flags: UInt8, CaptureCallback: PWINBIO_CAPTURE_CALLBACK, CaptureCallbackContext: CPointer<Unit>): Int32 {
+    return WinBioCaptureSampleWithCallback(SessionHandle, Purpose, Flags, CaptureCallback, CaptureCallbackContext)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioCloseFramework == "on"]
+foreign {
     func WinBioCloseFramework(FrameworkHandle: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioCloseFramework == "on"]
+public unsafe func Windows_WinBioCloseFramework(FrameworkHandle: UInt32): Int32 {
+    return WinBioCloseFramework(FrameworkHandle)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioCloseSession == "on"]
+foreign {
     func WinBioCloseSession(SessionHandle: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioCloseSession == "on"]
+public unsafe func Windows_WinBioCloseSession(SessionHandle: UInt32): Int32 {
+    return WinBioCloseSession(SessionHandle)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioControlUnit == "on"]
+foreign {
     // param-hint: SendBuffer bytes=param[5]
     // param-hint: ReceiveBuffer bytes=param[7]
     // param-hint: OperationStatus optional
     func WinBioControlUnit(SessionHandle: UInt32, UnitId: UInt32, Component: WINBIO_COMPONENTAbi, ControlCode: UInt32, SendBuffer: CPointer<UInt8>, SendBufferSize: UIntNative, ReceiveBuffer: CPointer<UInt8>, ReceiveBufferSize: UIntNative, ReceiveDataSize: CPointer<UIntNative>, OperationStatus: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioControlUnit == "on"]
+public unsafe func Windows_WinBioControlUnit(SessionHandle: UInt32, UnitId: UInt32, Component: WINBIO_COMPONENTAbi, ControlCode: UInt32, SendBuffer: CPointer<UInt8>, SendBufferSize: UIntNative, ReceiveBuffer: CPointer<UInt8>, ReceiveBufferSize: UIntNative, ReceiveDataSize: CPointer<UIntNative>, OperationStatus: CPointer<UInt32>): Int32 {
+    return WinBioControlUnit(SessionHandle, UnitId, Component, ControlCode, SendBuffer, SendBufferSize, ReceiveBuffer, ReceiveBufferSize, ReceiveDataSize, OperationStatus)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioControlUnitPrivileged == "on"]
+foreign {
     // param-hint: SendBuffer bytes=param[5]
     // param-hint: ReceiveBuffer bytes=param[7]
     // param-hint: OperationStatus optional
     func WinBioControlUnitPrivileged(SessionHandle: UInt32, UnitId: UInt32, Component: WINBIO_COMPONENTAbi, ControlCode: UInt32, SendBuffer: CPointer<UInt8>, SendBufferSize: UIntNative, ReceiveBuffer: CPointer<UInt8>, ReceiveBufferSize: UIntNative, ReceiveDataSize: CPointer<UIntNative>, OperationStatus: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioControlUnitPrivileged == "on"]
+public unsafe func Windows_WinBioControlUnitPrivileged(SessionHandle: UInt32, UnitId: UInt32, Component: WINBIO_COMPONENTAbi, ControlCode: UInt32, SendBuffer: CPointer<UInt8>, SendBufferSize: UIntNative, ReceiveBuffer: CPointer<UInt8>, ReceiveBufferSize: UIntNative, ReceiveDataSize: CPointer<UIntNative>, OperationStatus: CPointer<UInt32>): Int32 {
+    return WinBioControlUnitPrivileged(SessionHandle, UnitId, Component, ControlCode, SendBuffer, SendBufferSize, ReceiveBuffer, ReceiveBufferSize, ReceiveDataSize, OperationStatus)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioDeleteTemplate == "on"]
+foreign {
     func WinBioDeleteTemplate(SessionHandle: UInt32, UnitId: UInt32, Identity: CPointer<WINBIO_IDENTITYAbi>, SubFactor: UInt8): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioDeleteTemplate == "on"]
+public unsafe func Windows_WinBioDeleteTemplate(SessionHandle: UInt32, UnitId: UInt32, Identity: CPointer<WINBIO_IDENTITYAbi>, SubFactor: UInt8): Int32 {
+    return WinBioDeleteTemplate(SessionHandle, UnitId, Identity, SubFactor)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioEnrollBegin == "on"]
+foreign {
     func WinBioEnrollBegin(SessionHandle: UInt32, SubFactor: UInt8, UnitId: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioEnrollBegin == "on"]
+public unsafe func Windows_WinBioEnrollBegin(SessionHandle: UInt32, SubFactor: UInt8, UnitId: UInt32): Int32 {
+    return WinBioEnrollBegin(SessionHandle, SubFactor, UnitId)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioEnrollCapture == "on"]
+foreign {
     // param-hint: RejectDetail optional
     func WinBioEnrollCapture(SessionHandle: UInt32, RejectDetail: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioEnrollCapture == "on"]
+public unsafe func Windows_WinBioEnrollCapture(SessionHandle: UInt32, RejectDetail: CPointer<UInt32>): Int32 {
+    return WinBioEnrollCapture(SessionHandle, RejectDetail)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioEnrollCaptureWithCallback == "on"]
+foreign {
     // param-hint: EnrollCallbackContext optional
     func WinBioEnrollCaptureWithCallback(SessionHandle: UInt32, EnrollCallback: PWINBIO_ENROLL_CAPTURE_CALLBACK, EnrollCallbackContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioEnrollCaptureWithCallback == "on"]
+public unsafe func Windows_WinBioEnrollCaptureWithCallback(SessionHandle: UInt32, EnrollCallback: PWINBIO_ENROLL_CAPTURE_CALLBACK, EnrollCallbackContext: CPointer<Unit>): Int32 {
+    return WinBioEnrollCaptureWithCallback(SessionHandle, EnrollCallback, EnrollCallbackContext)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioEnrollCommit == "on"]
+foreign {
     // param-hint: Identity optional
     // param-hint: IsNewTemplate optional
     func WinBioEnrollCommit(SessionHandle: UInt32, Identity: CPointer<WINBIO_IDENTITYAbi>, IsNewTemplate: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioEnrollCommit == "on"]
+public unsafe func Windows_WinBioEnrollCommit(SessionHandle: UInt32, Identity: CPointer<WINBIO_IDENTITYAbi>, IsNewTemplate: CPointer<UInt8>): Int32 {
+    return WinBioEnrollCommit(SessionHandle, Identity, IsNewTemplate)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioEnrollDiscard == "on"]
+foreign {
     func WinBioEnrollDiscard(SessionHandle: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioEnrollDiscard == "on"]
+public unsafe func Windows_WinBioEnrollDiscard(SessionHandle: UInt32): Int32 {
+    return WinBioEnrollDiscard(SessionHandle)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioEnrollSelect == "on"]
+foreign {
     func WinBioEnrollSelect(SessionHandle: UInt32, SelectorValue: UInt64): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioEnrollSelect == "on"]
+public unsafe func Windows_WinBioEnrollSelect(SessionHandle: UInt32, SelectorValue: UInt64): Int32 {
+    return WinBioEnrollSelect(SessionHandle, SelectorValue)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioEnumBiometricUnits == "on"]
+foreign {
     func WinBioEnumBiometricUnits(Factor: UInt32, UnitSchemaArray: CPointer<CPointer<WINBIO_UNIT_SCHEMAAbi>>, UnitCount: CPointer<UIntNative>): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioEnumBiometricUnits == "on"]
+public unsafe func Windows_WinBioEnumBiometricUnits(Factor: UInt32, UnitSchemaArray: CPointer<CPointer<WINBIO_UNIT_SCHEMAAbi>>, UnitCount: CPointer<UIntNative>): Int32 {
+    return WinBioEnumBiometricUnits(Factor, UnitSchemaArray, UnitCount)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioEnumDatabases == "on"]
+foreign {
     func WinBioEnumDatabases(Factor: UInt32, StorageSchemaArray: CPointer<CPointer<WINBIO_STORAGE_SCHEMAAbi>>, StorageCount: CPointer<UIntNative>): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioEnumDatabases == "on"]
+public unsafe func Windows_WinBioEnumDatabases(Factor: UInt32, StorageSchemaArray: CPointer<CPointer<WINBIO_STORAGE_SCHEMAAbi>>, StorageCount: CPointer<UIntNative>): Int32 {
+    return WinBioEnumDatabases(Factor, StorageSchemaArray, StorageCount)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioEnumEnrollments == "on"]
+foreign {
     // param-hint: SubFactorCount optional
     func WinBioEnumEnrollments(SessionHandle: UInt32, UnitId: UInt32, Identity: CPointer<WINBIO_IDENTITYAbi>, SubFactorArray: CPointer<CPointer<UInt8>>, SubFactorCount: CPointer<UIntNative>): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioEnumEnrollments == "on"]
+public unsafe func Windows_WinBioEnumEnrollments(SessionHandle: UInt32, UnitId: UInt32, Identity: CPointer<WINBIO_IDENTITYAbi>, SubFactorArray: CPointer<CPointer<UInt8>>, SubFactorCount: CPointer<UIntNative>): Int32 {
+    return WinBioEnumEnrollments(SessionHandle, UnitId, Identity, SubFactorArray, SubFactorCount)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioEnumServiceProviders == "on"]
+foreign {
     func WinBioEnumServiceProviders(Factor: UInt32, BspSchemaArray: CPointer<CPointer<WINBIO_BSP_SCHEMAAbi>>, BspCount: CPointer<UIntNative>): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioEnumServiceProviders == "on"]
+public unsafe func Windows_WinBioEnumServiceProviders(Factor: UInt32, BspSchemaArray: CPointer<CPointer<WINBIO_BSP_SCHEMAAbi>>, BspCount: CPointer<UIntNative>): Int32 {
+    return WinBioEnumServiceProviders(Factor, BspSchemaArray, BspCount)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioFree == "on"]
+foreign {
     func WinBioFree(Address: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioFree == "on"]
+public unsafe func Windows_WinBioFree(Address: CPointer<Unit>): Int32 {
+    return WinBioFree(Address)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioGetCredentialState == "on"]
+foreign {
     func WinBioGetCredentialState(Identity: WINBIO_IDENTITYAbi, Type: WINBIO_CREDENTIAL_TYPEAbi, CredentialState: CPointer<WINBIO_CREDENTIAL_STATEAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioGetCredentialState == "on"]
+public unsafe func Windows_WinBioGetCredentialState(Identity: WINBIO_IDENTITYAbi, Type: WINBIO_CREDENTIAL_TYPEAbi, CredentialState: CPointer<WINBIO_CREDENTIAL_STATEAbi>): Int32 {
+    return WinBioGetCredentialState(Identity, Type, CredentialState)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioGetDomainLogonSetting == "on"]
+foreign {
     func WinBioGetDomainLogonSetting(Value: CPointer<UInt8>, Source: CPointer<WINBIO_SETTING_SOURCEAbi>): Unit
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioGetDomainLogonSetting == "on"]
+public unsafe func Windows_WinBioGetDomainLogonSetting(Value: CPointer<UInt8>, Source: CPointer<WINBIO_SETTING_SOURCEAbi>): Unit {
+    WinBioGetDomainLogonSetting(Value, Source)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioGetEnabledSetting == "on"]
+foreign {
     func WinBioGetEnabledSetting(Value: CPointer<UInt8>, Source: CPointer<WINBIO_SETTING_SOURCEAbi>): Unit
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioGetEnabledSetting == "on"]
+public unsafe func Windows_WinBioGetEnabledSetting(Value: CPointer<UInt8>, Source: CPointer<WINBIO_SETTING_SOURCEAbi>): Unit {
+    WinBioGetEnabledSetting(Value, Source)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioGetEnrolledFactors == "on"]
+foreign {
     func WinBioGetEnrolledFactors(AccountOwner: CPointer<WINBIO_IDENTITYAbi>, EnrolledFactors: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioGetEnrolledFactors == "on"]
+public unsafe func Windows_WinBioGetEnrolledFactors(AccountOwner: CPointer<WINBIO_IDENTITYAbi>, EnrolledFactors: CPointer<UInt32>): Int32 {
+    return WinBioGetEnrolledFactors(AccountOwner, EnrolledFactors)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioGetLogonSetting == "on"]
+foreign {
     func WinBioGetLogonSetting(Value: CPointer<UInt8>, Source: CPointer<WINBIO_SETTING_SOURCEAbi>): Unit
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioGetLogonSetting == "on"]
+public unsafe func Windows_WinBioGetLogonSetting(Value: CPointer<UInt8>, Source: CPointer<WINBIO_SETTING_SOURCEAbi>): Unit {
+    WinBioGetLogonSetting(Value, Source)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioGetProperty == "on"]
+foreign {
     // param-hint: UnitId optional
     // param-hint: Identity optional
     // param-hint: SubFactor optional
     // param-hint: PropertyBufferSize optional
     func WinBioGetProperty(SessionHandle: UInt32, PropertyType: UInt32, PropertyId: UInt32, UnitId: UInt32, Identity: CPointer<WINBIO_IDENTITYAbi>, SubFactor: UInt8, PropertyBuffer: CPointer<CPointer<Unit>>, PropertyBufferSize: CPointer<UIntNative>): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioGetProperty == "on"]
+public unsafe func Windows_WinBioGetProperty(SessionHandle: UInt32, PropertyType: UInt32, PropertyId: UInt32, UnitId: UInt32, Identity: CPointer<WINBIO_IDENTITYAbi>, SubFactor: UInt8, PropertyBuffer: CPointer<CPointer<Unit>>, PropertyBufferSize: CPointer<UIntNative>): Int32 {
+    return WinBioGetProperty(SessionHandle, PropertyType, PropertyId, UnitId, Identity, SubFactor, PropertyBuffer, PropertyBufferSize)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioIdentify == "on"]
+foreign {
     // param-hint: UnitId optional
     // param-hint: Identity optional
     // param-hint: SubFactor optional
     // param-hint: RejectDetail optional
     func WinBioIdentify(SessionHandle: UInt32, UnitId: CPointer<UInt32>, Identity: CPointer<WINBIO_IDENTITYAbi>, SubFactor: CPointer<UInt8>, RejectDetail: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioIdentify == "on"]
+public unsafe func Windows_WinBioIdentify(SessionHandle: UInt32, UnitId: CPointer<UInt32>, Identity: CPointer<WINBIO_IDENTITYAbi>, SubFactor: CPointer<UInt8>, RejectDetail: CPointer<UInt32>): Int32 {
+    return WinBioIdentify(SessionHandle, UnitId, Identity, SubFactor, RejectDetail)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioIdentifyWithCallback == "on"]
+foreign {
     // param-hint: IdentifyCallbackContext optional
     func WinBioIdentifyWithCallback(SessionHandle: UInt32, IdentifyCallback: PWINBIO_IDENTIFY_CALLBACK, IdentifyCallbackContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioIdentifyWithCallback == "on"]
+public unsafe func Windows_WinBioIdentifyWithCallback(SessionHandle: UInt32, IdentifyCallback: PWINBIO_IDENTIFY_CALLBACK, IdentifyCallbackContext: CPointer<Unit>): Int32 {
+    return WinBioIdentifyWithCallback(SessionHandle, IdentifyCallback, IdentifyCallbackContext)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioImproveBegin == "on"]
+foreign {
     func WinBioImproveBegin(SessionHandle: UInt32, UnitId: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioImproveBegin == "on"]
+public unsafe func Windows_WinBioImproveBegin(SessionHandle: UInt32, UnitId: UInt32): Int32 {
+    return WinBioImproveBegin(SessionHandle, UnitId)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioImproveEnd == "on"]
+foreign {
     func WinBioImproveEnd(SessionHandle: UInt32): Int32
-    func WinBioIsESSCapable(Value: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioImproveEnd == "on"]
+public unsafe func Windows_WinBioImproveEnd(SessionHandle: UInt32): Int32 {
+    return WinBioImproveEnd(SessionHandle)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioLocateSensor == "on"]
+foreign {
     // param-hint: UnitId optional
     func WinBioLocateSensor(SessionHandle: UInt32, UnitId: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioLocateSensor == "on"]
+public unsafe func Windows_WinBioLocateSensor(SessionHandle: UInt32, UnitId: CPointer<UInt32>): Int32 {
+    return WinBioLocateSensor(SessionHandle, UnitId)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioLocateSensorWithCallback == "on"]
+foreign {
     // param-hint: LocateCallbackContext optional
     func WinBioLocateSensorWithCallback(SessionHandle: UInt32, LocateCallback: PWINBIO_LOCATE_SENSOR_CALLBACK, LocateCallbackContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioLocateSensorWithCallback == "on"]
+public unsafe func Windows_WinBioLocateSensorWithCallback(SessionHandle: UInt32, LocateCallback: PWINBIO_LOCATE_SENSOR_CALLBACK, LocateCallbackContext: CPointer<Unit>): Int32 {
+    return WinBioLocateSensorWithCallback(SessionHandle, LocateCallback, LocateCallbackContext)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioLockUnit == "on"]
+foreign {
     func WinBioLockUnit(SessionHandle: UInt32, UnitId: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioLockUnit == "on"]
+public unsafe func Windows_WinBioLockUnit(SessionHandle: UInt32, UnitId: UInt32): Int32 {
+    return WinBioLockUnit(SessionHandle, UnitId)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioLogonIdentifiedUser == "on"]
+foreign {
     func WinBioLogonIdentifiedUser(SessionHandle: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioLogonIdentifiedUser == "on"]
+public unsafe func Windows_WinBioLogonIdentifiedUser(SessionHandle: UInt32): Int32 {
+    return WinBioLogonIdentifiedUser(SessionHandle)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioMonitorPresence == "on"]
+foreign {
     func WinBioMonitorPresence(SessionHandle: UInt32, UnitId: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioMonitorPresence == "on"]
+public unsafe func Windows_WinBioMonitorPresence(SessionHandle: UInt32, UnitId: UInt32): Int32 {
+    return WinBioMonitorPresence(SessionHandle, UnitId)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioOpenSession == "on"]
+foreign {
     // param-hint: UnitArray len=param[4] optional
     // param-hint: UnitCount optional
     // param-hint: DatabaseId optional
     func WinBioOpenSession(Factor: UInt32, PoolType: WINBIO_POOLAbi, Flags: UInt32, UnitArray: CPointer<UInt32>, UnitCount: UIntNative, DatabaseId: CPointer<GUID>, SessionHandle: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioOpenSession == "on"]
+public unsafe func Windows_WinBioOpenSession(Factor: UInt32, PoolType: WINBIO_POOLAbi, Flags: UInt32, UnitArray: CPointer<UInt32>, UnitCount: UIntNative, DatabaseId: CPointer<GUID>, SessionHandle: CPointer<UInt32>): Int32 {
+    return WinBioOpenSession(Factor, PoolType, Flags, UnitArray, UnitCount, DatabaseId, SessionHandle)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioRegisterEventMonitor == "on"]
+foreign {
     // param-hint: EventCallbackContext optional
     func WinBioRegisterEventMonitor(SessionHandle: UInt32, EventMask: UInt32, EventCallback: PWINBIO_EVENT_CALLBACK, EventCallbackContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioRegisterEventMonitor == "on"]
+public unsafe func Windows_WinBioRegisterEventMonitor(SessionHandle: UInt32, EventMask: UInt32, EventCallback: PWINBIO_EVENT_CALLBACK, EventCallbackContext: CPointer<Unit>): Int32 {
+    return WinBioRegisterEventMonitor(SessionHandle, EventMask, EventCallback, EventCallbackContext)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioReleaseFocus == "on"]
+foreign {
     func WinBioReleaseFocus(): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioReleaseFocus == "on"]
+public unsafe func Windows_WinBioReleaseFocus(): Int32 {
+    return WinBioReleaseFocus()
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioRemoveAllCredentials == "on"]
+foreign {
     func WinBioRemoveAllCredentials(): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioRemoveAllCredentials == "on"]
+public unsafe func Windows_WinBioRemoveAllCredentials(): Int32 {
+    return WinBioRemoveAllCredentials()
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioRemoveAllDomainCredentials == "on"]
+foreign {
     func WinBioRemoveAllDomainCredentials(): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioRemoveAllDomainCredentials == "on"]
+public unsafe func Windows_WinBioRemoveAllDomainCredentials(): Int32 {
+    return WinBioRemoveAllDomainCredentials()
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioRemoveCredential == "on"]
+foreign {
     func WinBioRemoveCredential(Identity: WINBIO_IDENTITYAbi, Type: WINBIO_CREDENTIAL_TYPEAbi): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioRemoveCredential == "on"]
+public unsafe func Windows_WinBioRemoveCredential(Identity: WINBIO_IDENTITYAbi, Type: WINBIO_CREDENTIAL_TYPEAbi): Int32 {
+    return WinBioRemoveCredential(Identity, Type)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioSetCredential == "on"]
+foreign {
     // param-hint: Credential bytes=param[2]
     func WinBioSetCredential(Type: WINBIO_CREDENTIAL_TYPEAbi, Credential: CPointer<UInt8>, CredentialSize: UIntNative, Format: WINBIO_CREDENTIAL_FORMATAbi): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioSetCredential == "on"]
+public unsafe func Windows_WinBioSetCredential(Type: WINBIO_CREDENTIAL_TYPEAbi, Credential: CPointer<UInt8>, CredentialSize: UIntNative, Format: WINBIO_CREDENTIAL_FORMATAbi): Int32 {
+    return WinBioSetCredential(Type, Credential, CredentialSize, Format)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioSetProperty == "on"]
+foreign {
     // param-hint: UnitId optional
     // param-hint: Identity optional
     // param-hint: SubFactor optional
     // param-hint: PropertyBuffer bytes=param[7]
     func WinBioSetProperty(SessionHandle: UInt32, PropertyType: UInt32, PropertyId: UInt32, UnitId: UInt32, Identity: CPointer<WINBIO_IDENTITYAbi>, SubFactor: UInt8, PropertyBuffer: CPointer<Unit>, PropertyBufferSize: UIntNative): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioSetProperty == "on"]
+public unsafe func Windows_WinBioSetProperty(SessionHandle: UInt32, PropertyType: UInt32, PropertyId: UInt32, UnitId: UInt32, Identity: CPointer<WINBIO_IDENTITYAbi>, SubFactor: UInt8, PropertyBuffer: CPointer<Unit>, PropertyBufferSize: UIntNative): Int32 {
+    return WinBioSetProperty(SessionHandle, PropertyType, PropertyId, UnitId, Identity, SubFactor, PropertyBuffer, PropertyBufferSize)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioUnlockUnit == "on"]
+foreign {
     func WinBioUnlockUnit(SessionHandle: UInt32, UnitId: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioUnlockUnit == "on"]
+public unsafe func Windows_WinBioUnlockUnit(SessionHandle: UInt32, UnitId: UInt32): Int32 {
+    return WinBioUnlockUnit(SessionHandle, UnitId)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioUnregisterEventMonitor == "on"]
+foreign {
     func WinBioUnregisterEventMonitor(SessionHandle: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioUnregisterEventMonitor == "on"]
+public unsafe func Windows_WinBioUnregisterEventMonitor(SessionHandle: UInt32): Int32 {
+    return WinBioUnregisterEventMonitor(SessionHandle)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioVerify == "on"]
+foreign {
     // param-hint: UnitId optional
     // param-hint: Match optional
     // param-hint: RejectDetail optional
     func WinBioVerify(SessionHandle: UInt32, Identity: CPointer<WINBIO_IDENTITYAbi>, SubFactor: UInt8, UnitId: CPointer<UInt32>, Match: CPointer<UInt8>, RejectDetail: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioVerify == "on"]
+public unsafe func Windows_WinBioVerify(SessionHandle: UInt32, Identity: CPointer<WINBIO_IDENTITYAbi>, SubFactor: UInt8, UnitId: CPointer<UInt32>, Match: CPointer<UInt8>, RejectDetail: CPointer<UInt32>): Int32 {
+    return WinBioVerify(SessionHandle, Identity, SubFactor, UnitId, Match, RejectDetail)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioVerifyWithCallback == "on"]
+foreign {
     // param-hint: VerifyCallbackContext optional
     func WinBioVerifyWithCallback(SessionHandle: UInt32, Identity: CPointer<WINBIO_IDENTITYAbi>, SubFactor: UInt8, VerifyCallback: PWINBIO_VERIFY_CALLBACK, VerifyCallbackContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioVerifyWithCallback == "on"]
+public unsafe func Windows_WinBioVerifyWithCallback(SessionHandle: UInt32, Identity: CPointer<WINBIO_IDENTITYAbi>, SubFactor: UInt8, VerifyCallback: PWINBIO_VERIFY_CALLBACK, VerifyCallbackContext: CPointer<Unit>): Int32 {
+    return WinBioVerifyWithCallback(SessionHandle, Identity, SubFactor, VerifyCallback, VerifyCallbackContext)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioWait == "on"]
+foreign {
     func WinBioWait(SessionHandle: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioWait == "on"]
+public unsafe func Windows_WinBioWait(SessionHandle: UInt32): Int32 {
+    return WinBioWait(SessionHandle)
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioIsESSCapable == "on"]
+func __windowsBindgen_WinBioIsESSCapableProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("winbio.dll", "WinBioIsESSCapable")
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioIsESSCapable == "on"]
+unsafe func WinBioIsESSCapable(Value: CPointer<UInt8>): Int32 {
+    let call = CFunc<(CPointer<UInt8>) -> Int32>(__windowsBindgen_WinBioIsESSCapableProc())
+    return unsafe { call(Value) }
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && WINBIO == "on" && Windows_Win32_Devices_BiometricFramework_WinBioIsESSCapable == "on"]
+public unsafe func Windows_WinBioIsESSCapable(Value: CPointer<UInt8>): Int32 {
+    return WinBioIsESSCapable(Value)
 }
 
 @When[Windows_Win32_Devices_BiometricFramework == "on"]

@@ -15,4 +15,339 @@ public import windows_sys.Win32.Media._impl_l0.LPFNEXTDEVIO
 public import windows_sys.Win32.Media._impl_l0.TIMEREVENT
 @When[Windows_Win32_Media_Multimedia == "on" && Windows_Win32_UI_Controls == "on"]
 public import windows_sys.Win32.Media._impl_l0.VFWWDMExtensionProc
-
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIBuildFilterA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIBuildFilterA
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIBuildFilterW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIBuildFilterW
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIClearClipboard == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIClearClipboard
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileAddRef == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIFileAddRef
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileCreateStreamA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIFileCreateStreamA
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileCreateStreamW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIFileCreateStreamW
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileEndRecord == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIFileEndRecord
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileExit == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIFileExit
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileGetStream == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIFileGetStream
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileInfoA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIFileInfoA
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileInfoW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIFileInfoW
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileInit == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIFileInit
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileOpenA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIFileOpenA
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileOpenW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIFileOpenW
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileReadData == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIFileReadData
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileRelease == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIFileRelease
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIFileWriteData == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIFileWriteData
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIGetFromClipboard == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIGetFromClipboard
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIMakeCompressedStream == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIMakeCompressedStream
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIMakeFileFromStreams == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIMakeFileFromStreams
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIMakeStreamFromClipboard == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIMakeStreamFromClipboard
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIPutFileOnClipboard == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIPutFileOnClipboard
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVISaveOptions == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVISaveOptions
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVISaveOptionsFree == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVISaveOptionsFree
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVISaveVA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVISaveVA
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVISaveVW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVISaveVW
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamAddRef == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIStreamAddRef
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamBeginStreaming == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIStreamBeginStreaming
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamCreate == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIStreamCreate
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamEndStreaming == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIStreamEndStreaming
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamFindSample == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIStreamFindSample
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamGetFrame == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIStreamGetFrame
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamGetFrameClose == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIStreamGetFrameClose
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamGetFrameOpen == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIStreamGetFrameOpen
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamInfoA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIStreamInfoA
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamInfoW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIStreamInfoW
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamLength == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIStreamLength
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamOpenFromFileA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIStreamOpenFromFileA
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamOpenFromFileW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIStreamOpenFromFileW
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamRead == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIStreamRead
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamReadData == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIStreamReadData
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamReadFormat == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIStreamReadFormat
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamRelease == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIStreamRelease
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamSampleToTime == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIStreamSampleToTime
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamSetFormat == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIStreamSetFormat
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamStart == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIStreamStart
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamTimeToSample == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIStreamTimeToSample
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamWrite == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIStreamWrite
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_AVIStreamWriteData == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_AVIStreamWriteData
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_CloseDriver == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_CloseDriver
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_CreateEditableStream == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_CreateEditableStream
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_DefDriverProc == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_DefDriverProc
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibBegin == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_DrawDibBegin
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibChangePalette == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_DrawDibChangePalette
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibClose == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_DrawDibClose
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibDraw == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_DrawDibDraw
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibEnd == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_DrawDibEnd
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibGetBuffer == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_DrawDibGetBuffer
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibGetPalette == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_DrawDibGetPalette
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibOpen == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_DrawDibOpen
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibProfileDisplay == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_DrawDibProfileDisplay
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibRealize == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_DrawDibRealize
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibSetPalette == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_DrawDibSetPalette
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibStart == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_DrawDibStart
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibStop == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_DrawDibStop
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_DrawDibTime == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_DrawDibTime
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_DriverCallback == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_DriverCallback
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_DrvGetModuleHandle == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_DrvGetModuleHandle
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_EditStreamClone == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_EditStreamClone
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_EditStreamCopy == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_EditStreamCopy
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_EditStreamCut == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_EditStreamCut
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_EditStreamPaste == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_EditStreamPaste
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_EditStreamSetInfoA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_EditStreamSetInfoA
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_EditStreamSetInfoW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_EditStreamSetInfoW
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_EditStreamSetNameA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_EditStreamSetNameA
+@When[Windows_Win32_Media_Multimedia == "on" && AVIFIL32 == "on" && Windows_Win32_Media_Multimedia_EditStreamSetNameW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_EditStreamSetNameW
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_GetDriverModuleHandle == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_GetDriverModuleHandle
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_GetOpenFileNamePreviewA == "on" && (((arch == "x86_64" && Windows_Win32_UI_Controls_Dialogs == "on") || (arch == "aarch64" && Windows_Win32_UI_Controls_Dialogs == "on")) && Windows_Win32_UI_Controls_Dialogs == "on")]
+public import windows_sys.Win32.Media._impl_l0.Windows_GetOpenFileNamePreviewA
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_GetOpenFileNamePreviewW == "on" && (((arch == "x86_64" && Windows_Win32_UI_Controls_Dialogs == "on") || (arch == "aarch64" && Windows_Win32_UI_Controls_Dialogs == "on")) && Windows_Win32_UI_Controls_Dialogs == "on")]
+public import windows_sys.Win32.Media._impl_l0.Windows_GetOpenFileNamePreviewW
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_GetSaveFileNamePreviewA == "on" && (((arch == "x86_64" && Windows_Win32_UI_Controls_Dialogs == "on") || (arch == "aarch64" && Windows_Win32_UI_Controls_Dialogs == "on")) && Windows_Win32_UI_Controls_Dialogs == "on")]
+public import windows_sys.Win32.Media._impl_l0.Windows_GetSaveFileNamePreviewA
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_GetSaveFileNamePreviewW == "on" && (((arch == "x86_64" && Windows_Win32_UI_Controls_Dialogs == "on") || (arch == "aarch64" && Windows_Win32_UI_Controls_Dialogs == "on")) && Windows_Win32_UI_Controls_Dialogs == "on")]
+public import windows_sys.Win32.Media._impl_l0.Windows_GetSaveFileNamePreviewW
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICClose == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_ICClose
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICCompress == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_ICCompress
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICCompressorChoose == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_ICCompressorChoose
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICCompressorFree == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_ICCompressorFree
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICDecompress == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_ICDecompress
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICDraw == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_ICDraw
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICDrawBegin == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_ICDrawBegin
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICGetDisplayFormat == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_ICGetDisplayFormat
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICGetInfo == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_ICGetInfo
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICImageCompress == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_ICImageCompress
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICImageDecompress == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_ICImageDecompress
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICInfo == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_ICInfo
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICInstall == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_ICInstall
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICLocate == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_ICLocate
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICOpen == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_ICOpen
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICOpenFunction == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_ICOpenFunction
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICRemove == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_ICRemove
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICSendMessage == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_ICSendMessage
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICSeqCompressFrame == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_ICSeqCompressFrame
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICSeqCompressFrameEnd == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_ICSeqCompressFrameEnd
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_ICSeqCompressFrameStart == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_ICSeqCompressFrameStart
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_MCIWndCreateA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_MCIWndCreateA
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_MCIWndCreateW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_MCIWndCreateW
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_MCIWndRegisterClass == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_MCIWndRegisterClass
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_OpenDriver == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_OpenDriver
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_SendDriverMessage == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_SendDriverMessage
+@When[Windows_Win32_Media_Multimedia == "on" && MSVFW32 == "on" && Windows_Win32_Media_Multimedia_VideoForWindowsVersion == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_VideoForWindowsVersion
+@When[Windows_Win32_Media_Multimedia == "on" && AVICAP32 == "on" && Windows_Win32_Media_Multimedia_capCreateCaptureWindowA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_capCreateCaptureWindowA
+@When[Windows_Win32_Media_Multimedia == "on" && AVICAP32 == "on" && Windows_Win32_Media_Multimedia_capCreateCaptureWindowW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_capCreateCaptureWindowW
+@When[Windows_Win32_Media_Multimedia == "on" && AVICAP32 == "on" && Windows_Win32_Media_Multimedia_capGetDriverDescriptionA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_capGetDriverDescriptionA
+@When[Windows_Win32_Media_Multimedia == "on" && AVICAP32 == "on" && Windows_Win32_Media_Multimedia_capGetDriverDescriptionW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_capGetDriverDescriptionW
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_joyGetDevCapsA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_joyGetDevCapsA
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_joyGetDevCapsW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_joyGetDevCapsW
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_joyGetNumDevs == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_joyGetNumDevs
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_joyGetPos == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_joyGetPos
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_joyGetPosEx == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_joyGetPosEx
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_joyGetThreshold == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_joyGetThreshold
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_joyReleaseCapture == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_joyReleaseCapture
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_joySetCapture == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_joySetCapture
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_joySetThreshold == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_joySetThreshold
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciDriverNotify == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mciDriverNotify
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciDriverYield == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mciDriverYield
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciFreeCommandResource == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mciFreeCommandResource
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciGetCreatorTask == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mciGetCreatorTask
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciGetDeviceIDA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mciGetDeviceIDA
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciGetDeviceIDFromElementIDA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mciGetDeviceIDFromElementIDA
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciGetDeviceIDFromElementIDW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mciGetDeviceIDFromElementIDW
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciGetDeviceIDW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mciGetDeviceIDW
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciGetDriverData == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mciGetDriverData
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciGetErrorStringA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mciGetErrorStringA
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciGetErrorStringW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mciGetErrorStringW
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciGetYieldProc == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mciGetYieldProc
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciLoadCommandResource == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mciLoadCommandResource
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciSendCommandA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mciSendCommandA
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciSendCommandW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mciSendCommandW
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciSendStringA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mciSendStringA
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciSendStringW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mciSendStringW
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciSetDriverData == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mciSetDriverData
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mciSetYieldProc == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mciSetYieldProc
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmDrvInstall == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mmDrvInstall
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmGetCurrentTask == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mmGetCurrentTask
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmTaskBlock == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mmTaskBlock
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmTaskCreate == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mmTaskCreate
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmTaskSignal == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mmTaskSignal
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmTaskYield == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mmTaskYield
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioAdvance == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mmioAdvance
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioAscend == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mmioAscend
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioClose == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mmioClose
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioCreateChunk == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mmioCreateChunk
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioDescend == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mmioDescend
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioFlush == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mmioFlush
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioGetInfo == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mmioGetInfo
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioInstallIOProcA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mmioInstallIOProcA
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioInstallIOProcW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mmioInstallIOProcW
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioOpenA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mmioOpenA
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioOpenW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mmioOpenW
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioRead == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mmioRead
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioRenameA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mmioRenameA
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioRenameW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mmioRenameW
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioSeek == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mmioSeek
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioSendMessage == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mmioSendMessage
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioSetBuffer == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mmioSetBuffer
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioSetInfo == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mmioSetInfo
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioStringToFOURCCA == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mmioStringToFOURCCA
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioStringToFOURCCW == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mmioStringToFOURCCW
+@When[Windows_Win32_Media_Multimedia == "on" && WINMM == "on" && Windows_Win32_Media_Multimedia_mmioWrite == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_mmioWrite
+@When[Windows_Win32_Media_Multimedia == "on" && API_MS_WIN_MM_MISC_L1_1_1 == "on" && Windows_Win32_Media_Multimedia_sndOpenSound == "on"]
+public import windows_sys.Win32.Media._impl_l0.Windows_sndOpenSound

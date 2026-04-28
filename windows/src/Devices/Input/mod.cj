@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Devices_Haptics == "on"]
 import windows.Devices.Haptics as Devices_Haptics
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -1982,7 +1980,10 @@ public struct IPointerDeviceVtbl {
     public var MaxContacts: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var PhysicalDeviceRect: CFunc<(CPointer<Unit>, CPointer<windows_future.RectAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ScreenRect: CFunc<(CPointer<Unit>, CPointer<windows_future.RectAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedUsages: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedUsages: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2091,6 +2092,7 @@ public class IPointerDevice <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<windows_future.Rect>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedUsages(): windows_collections.IVectorView<PointerDeviceUsage> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2910,7 +2912,10 @@ extend IPenDockListenerStatics <: windows_core.Interface<IPenDockListenerStatics
 public struct IPointerDeviceStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var GetPointerDevice: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetPointerDevices: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetPointerDevices: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2987,6 +2992,7 @@ public class IPointerDeviceStatics <: InterfaceWrapperBase & ComInterface & Runt
         return PointerDevice.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetPointerDevices(): windows_collections.IVectorView<PointerDevice> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3552,6 +3558,7 @@ public class PointerDevice <: InterfaceWrapperBase & ComInterface & windows_inte
         return defaultInterface().ScreenRect()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedUsages(): windows_collections.IVectorView<PointerDeviceUsage> {
         return defaultInterface().SupportedUsages()
     }
@@ -3567,6 +3574,7 @@ public class PointerDevice <: InterfaceWrapperBase & ComInterface & windows_inte
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetPointerDevices(): windows_collections.IVectorView<PointerDevice> {
         var result__: Option<windows_collections.IVectorView<PointerDevice>> = Option<windows_collections.IVectorView<PointerDevice>>.None
         try (factory__ = windows_core.factory<PointerDevice, IPointerDeviceStatics>().unwrap()) {

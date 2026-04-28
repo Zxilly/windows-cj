@@ -446,9 +446,9 @@ public class IDatagramSocketMessageReceivedEventArgs <: InterfaceWrapperBase & C
 @C
 public struct IDatagramSocketStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public var GetEndpointPairsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public var GetEndpointPairsWithSortOptionsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -493,14 +493,14 @@ public class IDatagramSocketStatics <: InterfaceWrapperBase & ComInterface {
         readVtbl<IDatagramSocketStaticsVtbl>(IDatagramSocketStaticsVtbl())
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func GetEndpointPairsAsync(remoteHostName: CPointer<Unit>, remoteServiceName: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetEndpointPairsAsync(__liveRaw, remoteHostName, remoteServiceName, result__)
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func GetEndpointPairsWithSortOptionsAsync(remoteHostName: CPointer<Unit>, remoteServiceName: CPointer<Unit>, sortOptions: UInt32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1535,9 +1535,9 @@ public class IStreamSocketListener3 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IStreamSocketStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public var GetEndpointPairsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public var GetEndpointPairsWithSortOptionsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -1582,14 +1582,14 @@ public class IStreamSocketStatics <: InterfaceWrapperBase & ComInterface {
         readVtbl<IStreamSocketStaticsVtbl>(IStreamSocketStaticsVtbl())
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func GetEndpointPairsAsync(remoteHostName: CPointer<Unit>, remoteServiceName: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetEndpointPairsAsync(__liveRaw, remoteHostName, remoteServiceName, result__)
     }
 
-    @When[Windows_Networking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Networking == "on"]
     public unsafe func GetEndpointPairsWithSortOptionsAsync(remoteHostName: CPointer<Unit>, remoteServiceName: CPointer<Unit>, sortOptions: UInt32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1765,6 +1765,7 @@ public struct IWebSocketControlVtbl {
     public var ProxyCredential: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Security_Credentials == "on"]
     public var SetProxyCredential: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedProtocols: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1849,6 +1850,7 @@ public class IWebSocketControl <: InterfaceWrapperBase & ComInterface {
         return __vt.SetProxyCredential(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedProtocols(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1860,7 +1862,7 @@ public class IWebSocketControl <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IWebSocketControl2Vtbl {
     public var base_: IWebSocketControlVtbl = IWebSocketControlVtbl()
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public var IgnorableServerCertificateErrors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1905,7 +1907,7 @@ public class IWebSocketControl2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IWebSocketControl2Vtbl>(IWebSocketControl2Vtbl())
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func IgnorableServerCertificateErrors(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

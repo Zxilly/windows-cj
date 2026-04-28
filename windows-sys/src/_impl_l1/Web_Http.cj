@@ -185,6 +185,7 @@ public struct IHttpCookieManagerVtbl {
     public var SetCookie: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => 0 }
     public var SetCookieWithThirdParty: CFunc<(CPointer<Unit>, CPointer<Unit>, Bool, CPointer<Bool>) -> Int32> = { _, _, _, _ => 0 }
     public var DeleteCookie: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetCookies: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -247,6 +248,7 @@ public class IHttpCookieManager <: InterfaceWrapperBase & ComInterface {
         return __vt.DeleteCookie(__liveRaw, cookie)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetCookies(uri: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -258,6 +260,7 @@ public class IHttpCookieManager <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IHttpFormUrlEncodedContentFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -302,6 +305,7 @@ public class IHttpFormUrlEncodedContentFactory <: InterfaceWrapperBase & ComInte
         readVtbl<IHttpFormUrlEncodedContentFactoryVtbl>(IHttpFormUrlEncodedContentFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Create(content: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

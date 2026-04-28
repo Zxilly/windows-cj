@@ -447,7 +447,7 @@ public class FileProtectionManager <: windows_interface.RuntimeName & windows_co
         }
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public static unsafe func SaveFileAsContainerWithSharingAsync(protectedFile: IStorageFile, sharedWithIdentities: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<ProtectedContainerExportResult> {
         var result__: Option<windows_future.IAsyncOperation<ProtectedContainerExportResult>> = Option<windows_future.IAsyncOperation<ProtectedContainerExportResult>>.None
         try (factory__ = windows_core.factory<FileProtectionManager, IFileProtectionManagerStatics2>().unwrap()) {
@@ -1063,9 +1063,9 @@ public struct IFileProtectionManagerStatics2Vtbl {
     public var LoadFileFromContainerWithTargetAndNameCollisionOptionAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, _impl_l0.NameCollisionOptionAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_Storage != "on"]
     public var LoadFileFromContainerWithTargetAndNameCollisionOptionAsync: UIntNative = UIntNative(0)
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var SaveFileAsContainerWithSharingAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage != "on"]
     public var SaveFileAsContainerWithSharingAsync: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -1153,7 +1153,7 @@ public class IFileProtectionManagerStatics2 <: InterfaceWrapperBase & ComInterfa
         return windows_future.IAsyncOperation<ProtectedContainerImportResult>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func SaveFileAsContainerWithSharingAsync(protectedFile: IStorageFile, sharedWithIdentities: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<ProtectedContainerExportResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1395,9 +1395,9 @@ extend IFileRevocationManagerStatics <: windows_core.Interface<IFileRevocationMa
 public struct IProtectedContainerExportResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Status: CFunc<(CPointer<Unit>, CPointer<_impl_l0.ProtectedImportExportStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var File: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var File: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -1475,7 +1475,7 @@ public class IProtectedContainerExportResult <: InterfaceWrapperBase & ComInterf
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.ProtectedImportExportStatus>()).unwrap()
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func File(): StorageFile {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1493,9 +1493,9 @@ extend IProtectedContainerExportResult <: windows_core.Interface<IProtectedConta
 public struct IProtectedContainerImportResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Status: CFunc<(CPointer<Unit>, CPointer<_impl_l0.ProtectedImportExportStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var File: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var File: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -1573,7 +1573,7 @@ public class IProtectedContainerImportResult <: InterfaceWrapperBase & ComInterf
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.ProtectedImportExportStatus>()).unwrap()
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func File(): StorageFile {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1590,9 +1590,9 @@ extend IProtectedContainerImportResult <: windows_core.Interface<IProtectedConta
 @C
 public struct IProtectedFileCreateResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var File: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var File: UIntNative = UIntNative(0)
     @When[Windows_Storage_Streams == "on"]
     public var Stream: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1667,7 +1667,7 @@ public class IProtectedFileCreateResult <: InterfaceWrapperBase & ComInterface &
         readVtbl<IProtectedFileCreateResultVtbl>(IProtectedFileCreateResultVtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func File(): StorageFile {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2122,21 +2122,21 @@ public struct IProtectionPolicyManagerStatics4Vtbl {
     public var IsRoamableProtectionEnabled: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RequestAccessWithBehaviorAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, _impl_l0.ProtectionPolicyRequestAccessBehaviorAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => E_NOTIMPL.value }
     public var RequestAccessForAppWithBehaviorAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, _impl_l0.ProtectionPolicyRequestAccessBehaviorAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var RequestAccessToFilesForAppAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage != "on"]
     public var RequestAccessToFilesForAppAsync: UIntNative = UIntNative(0)
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var RequestAccessToFilesForAppWithMessageAndBehaviorAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, _impl_l0.ProtectionPolicyRequestAccessBehaviorAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage != "on"]
     public var RequestAccessToFilesForAppWithMessageAndBehaviorAsync: UIntNative = UIntNative(0)
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var RequestAccessToFilesForProcessAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage != "on"]
     public var RequestAccessToFilesForProcessAsync: UIntNative = UIntNative(0)
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var RequestAccessToFilesForProcessWithMessageAndBehaviorAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>, _impl_l0.ProtectionPolicyRequestAccessBehaviorAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage != "on"]
     public var RequestAccessToFilesForProcessWithMessageAndBehaviorAsync: UIntNative = UIntNative(0)
     @When[Windows_Storage == "on"]
     public var IsFileProtectionRequiredAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
@@ -2240,7 +2240,7 @@ public class IProtectionPolicyManagerStatics4 <: InterfaceWrapperBase & ComInter
         return windows_future.IAsyncOperation<_impl_l0.ProtectionPolicyEvaluationResult>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func RequestAccessToFilesForAppAsync(sourceItemList: windows_collections.IIterable<IStorageItem>, appPackageFamilyName: windows_core.HString, auditInfo: ProtectionPolicyAuditInfo): windows_future.IAsyncOperation<_impl_l0.ProtectionPolicyEvaluationResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2249,7 +2249,7 @@ public class IProtectionPolicyManagerStatics4 <: InterfaceWrapperBase & ComInter
         return windows_future.IAsyncOperation<_impl_l0.ProtectionPolicyEvaluationResult>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func RequestAccessToFilesForAppWithMessageAndBehaviorAsync(sourceItemList: windows_collections.IIterable<IStorageItem>, appPackageFamilyName: windows_core.HString, auditInfo: ProtectionPolicyAuditInfo, messageFromApp: windows_core.HString, behavior: _impl_l0.ProtectionPolicyRequestAccessBehavior): windows_future.IAsyncOperation<_impl_l0.ProtectionPolicyEvaluationResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2258,7 +2258,7 @@ public class IProtectionPolicyManagerStatics4 <: InterfaceWrapperBase & ComInter
         return windows_future.IAsyncOperation<_impl_l0.ProtectionPolicyEvaluationResult>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func RequestAccessToFilesForProcessAsync(sourceItemList: windows_collections.IIterable<IStorageItem>, processId: UInt32, auditInfo: ProtectionPolicyAuditInfo): windows_future.IAsyncOperation<_impl_l0.ProtectionPolicyEvaluationResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2267,7 +2267,7 @@ public class IProtectionPolicyManagerStatics4 <: InterfaceWrapperBase & ComInter
         return windows_future.IAsyncOperation<_impl_l0.ProtectionPolicyEvaluationResult>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func RequestAccessToFilesForProcessWithMessageAndBehaviorAsync(sourceItemList: windows_collections.IIterable<IStorageItem>, processId: UInt32, auditInfo: ProtectionPolicyAuditInfo, messageFromApp: windows_core.HString, behavior: _impl_l0.ProtectionPolicyRequestAccessBehavior): windows_future.IAsyncOperation<_impl_l0.ProtectionPolicyEvaluationResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2387,7 +2387,7 @@ public class ProtectedContainerExportResult <: InterfaceWrapperBase & ComInterfa
         return defaultInterface().Status()
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func File(): StorageFile {
         return defaultInterface().File()
     }
@@ -2484,7 +2484,7 @@ public class ProtectedContainerImportResult <: InterfaceWrapperBase & ComInterfa
         return defaultInterface().Status()
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func File(): StorageFile {
         return defaultInterface().File()
     }
@@ -2577,7 +2577,7 @@ public class ProtectedFileCreateResult <: InterfaceWrapperBase & ComInterface & 
         }
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func File(): StorageFile {
         return defaultInterface().File()
     }
@@ -3103,7 +3103,7 @@ public class ProtectionPolicyManager <: InterfaceWrapperBase & ComInterface & wi
         }
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public static unsafe func RequestAccessToFilesForAppAsync(sourceItemList: windows_collections.IIterable<IStorageItem>, appPackageFamilyName: windows_core.HString, auditInfo: ProtectionPolicyAuditInfo): windows_future.IAsyncOperation<_impl_l0.ProtectionPolicyEvaluationResult> {
         var result__: Option<windows_future.IAsyncOperation<_impl_l0.ProtectionPolicyEvaluationResult>> = Option<windows_future.IAsyncOperation<_impl_l0.ProtectionPolicyEvaluationResult>>.None
         try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics4>().unwrap()) {
@@ -3115,7 +3115,7 @@ public class ProtectionPolicyManager <: InterfaceWrapperBase & ComInterface & wi
         }
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public static unsafe func RequestAccessToFilesForAppWithMessageAndBehaviorAsync(sourceItemList: windows_collections.IIterable<IStorageItem>, appPackageFamilyName: windows_core.HString, auditInfo: ProtectionPolicyAuditInfo, messageFromApp: windows_core.HString, behavior: _impl_l0.ProtectionPolicyRequestAccessBehavior): windows_future.IAsyncOperation<_impl_l0.ProtectionPolicyEvaluationResult> {
         var result__: Option<windows_future.IAsyncOperation<_impl_l0.ProtectionPolicyEvaluationResult>> = Option<windows_future.IAsyncOperation<_impl_l0.ProtectionPolicyEvaluationResult>>.None
         try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics4>().unwrap()) {
@@ -3127,7 +3127,7 @@ public class ProtectionPolicyManager <: InterfaceWrapperBase & ComInterface & wi
         }
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public static unsafe func RequestAccessToFilesForProcessAsync(sourceItemList: windows_collections.IIterable<IStorageItem>, processId: UInt32, auditInfo: ProtectionPolicyAuditInfo): windows_future.IAsyncOperation<_impl_l0.ProtectionPolicyEvaluationResult> {
         var result__: Option<windows_future.IAsyncOperation<_impl_l0.ProtectionPolicyEvaluationResult>> = Option<windows_future.IAsyncOperation<_impl_l0.ProtectionPolicyEvaluationResult>>.None
         try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics4>().unwrap()) {
@@ -3139,7 +3139,7 @@ public class ProtectionPolicyManager <: InterfaceWrapperBase & ComInterface & wi
         }
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public static unsafe func RequestAccessToFilesForProcessWithMessageAndBehaviorAsync(sourceItemList: windows_collections.IIterable<IStorageItem>, processId: UInt32, auditInfo: ProtectionPolicyAuditInfo, messageFromApp: windows_core.HString, behavior: _impl_l0.ProtectionPolicyRequestAccessBehavior): windows_future.IAsyncOperation<_impl_l0.ProtectionPolicyEvaluationResult> {
         var result__: Option<windows_future.IAsyncOperation<_impl_l0.ProtectionPolicyEvaluationResult>> = Option<windows_future.IAsyncOperation<_impl_l0.ProtectionPolicyEvaluationResult>>.None
         try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics4>().unwrap()) {

@@ -51,8 +51,14 @@ public struct ICommunicationBlockingAccessManagerStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var IsBlockingActive: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsBlockedNumberAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var ShowBlockNumbersUI: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ShowBlockNumbersUI: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var ShowUnblockNumbersUI: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ShowUnblockNumbersUI: UIntNative = UIntNative(0)
     public var ShowBlockedCallsUI: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
     public var ShowBlockedMessagesUI: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
     public init() {}
@@ -139,6 +145,7 @@ public class ICommunicationBlockingAccessManagerStatics <: InterfaceWrapperBase 
         return windows_future.IAsyncOperation<Bool>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ShowBlockNumbersUI(phoneNumbers: windows_collections.IIterable<windows_core.HString>): Bool {
         let v = vtbl()
         var result__ = false
@@ -147,6 +154,7 @@ public class ICommunicationBlockingAccessManagerStatics <: InterfaceWrapperBase 
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ShowUnblockNumbersUI(phoneNumbers: windows_collections.IIterable<windows_core.HString>): Bool {
         let v = vtbl()
         var result__ = false
@@ -402,6 +410,7 @@ public class CommunicationBlockingAccessManager <: windows_interface.RuntimeName
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func ShowBlockNumbersUI(phoneNumbers: windows_collections.IIterable<windows_core.HString>): Bool {
         var result__: Option<Bool> = Option<Bool>.None
         try (factory__ = windows_core.factory<CommunicationBlockingAccessManager, ICommunicationBlockingAccessManagerStatics>().unwrap()) {
@@ -413,6 +422,7 @@ public class CommunicationBlockingAccessManager <: windows_interface.RuntimeName
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func ShowUnblockNumbersUI(phoneNumbers: windows_collections.IIterable<windows_core.HString>): Bool {
         var result__: Option<Bool> = Option<Bool>.None
         try (factory__ = windows_core.factory<CommunicationBlockingAccessManager, ICommunicationBlockingAccessManagerStatics>().unwrap()) {

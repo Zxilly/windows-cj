@@ -3,4 +3,3 @@ package windows_sys.Foundation.Collections
 
 @When[Windows_Foundation_Collections == "on"]
 public import windows_sys.Foundation._impl_l0.{CollectionChange, CollectionChange_ItemChanged, CollectionChange_ItemInserted, CollectionChange_ItemRemoved, CollectionChange_Reset, IPropertySet, IPropertySetVtbl, IVectorChangedEventArgs, IVectorChangedEventArgsVtbl}
-

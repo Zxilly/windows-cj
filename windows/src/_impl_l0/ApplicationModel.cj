@@ -694,10 +694,22 @@ public struct IAppInstallerInfo2Vtbl {
     public var Version: CFunc<(CPointer<Unit>, CPointer<PackageVersionAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var LastChecked: CFunc<(CPointer<Unit>, CPointer<windows_future.DateTimeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var PausedUntil: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var UpdateUris: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var UpdateUris: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var RepairUris: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RepairUris: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var DependencyPackageUris: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var DependencyPackageUris: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var OptionalPackageUris: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var OptionalPackageUris: UIntNative = UIntNative(0)
     public var PolicySource: CFunc<(CPointer<Unit>, CPointer<AppInstallerPolicySourceAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -847,6 +859,7 @@ public class IAppInstallerInfo2 <: InterfaceWrapperBase & ComInterface & Runtime
         return Foundation.IReference<windows_future.DateTime>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UpdateUris(): windows_collections.IVectorView<Foundation.Uri> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -855,6 +868,7 @@ public class IAppInstallerInfo2 <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_collections.IVectorView<Foundation.Uri>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RepairUris(): windows_collections.IVectorView<Foundation.Uri> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -863,6 +877,7 @@ public class IAppInstallerInfo2 <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_collections.IVectorView<Foundation.Uri>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DependencyPackageUris(): windows_collections.IVectorView<Foundation.Uri> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -871,6 +886,7 @@ public class IAppInstallerInfo2 <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_collections.IVectorView<Foundation.Uri>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OptionalPackageUris(): windows_collections.IVectorView<Foundation.Uri> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

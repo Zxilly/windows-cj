@@ -3,7 +3,6 @@ package windows_sys.Win32.System.EventCollector
 
 import windows_polyfill.{unionReadInt32, unionReadUInt32, unionReadUInt64, unionWriteInt32, unionWriteUInt32, unionWriteUInt64}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 
 
@@ -571,26 +570,157 @@ public let EC_VARIANT_TYPE_EcVarTypeString: EC_VARIANT_TYPE = EC_VARIANT_TYPE(4)
 @When[Windows_Win32_System_EventCollector == "on"]
 public let EC_VARIANT_TYPE_EcVarObjectArrayPropertyHandle: EC_VARIANT_TYPE = EC_VARIANT_TYPE(5)
 
-@When[WECAPI == "on"]
+@When[Windows_Win32_System_EventCollector == "on" && WECAPI == "on" && Windows_Win32_System_EventCollector_EcClose == "on"]
 foreign {
     func EcClose(Object: IntNative): Int32
+}
+
+@When[Windows_Win32_System_EventCollector == "on" && WECAPI == "on" && Windows_Win32_System_EventCollector_EcClose == "on"]
+public unsafe func Windows_EcClose(Object: IntNative): Int32 {
+    return EcClose(Object)
+}
+
+@When[Windows_Win32_System_EventCollector == "on" && WECAPI == "on" && Windows_Win32_System_EventCollector_EcDeleteSubscription == "on"]
+foreign {
     func EcDeleteSubscription(SubscriptionName: CPointer<UInt16>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_EventCollector == "on" && WECAPI == "on" && Windows_Win32_System_EventCollector_EcDeleteSubscription == "on"]
+public unsafe func Windows_EcDeleteSubscription(SubscriptionName: CPointer<UInt16>, Flags: UInt32): Int32 {
+    return EcDeleteSubscription(SubscriptionName, Flags)
+}
+
+@When[Windows_Win32_System_EventCollector == "on" && WECAPI == "on" && Windows_Win32_System_EventCollector_EcEnumNextSubscription == "on"]
+foreign {
     // param-hint: SubscriptionNameBuffer len=param[1] optional
     func EcEnumNextSubscription(SubscriptionEnum: IntNative, SubscriptionNameBufferSize: UInt32, SubscriptionNameBuffer: CPointer<UInt16>, SubscriptionNameBufferUsed: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_EventCollector == "on" && WECAPI == "on" && Windows_Win32_System_EventCollector_EcEnumNextSubscription == "on"]
+public unsafe func Windows_EcEnumNextSubscription(SubscriptionEnum: IntNative, SubscriptionNameBufferSize: UInt32, SubscriptionNameBuffer: CPointer<UInt16>, SubscriptionNameBufferUsed: CPointer<UInt32>): Int32 {
+    return EcEnumNextSubscription(SubscriptionEnum, SubscriptionNameBufferSize, SubscriptionNameBuffer, SubscriptionNameBufferUsed)
+}
+
+@When[Windows_Win32_System_EventCollector == "on" && WECAPI == "on" && Windows_Win32_System_EventCollector_EcGetObjectArrayProperty == "on"]
+foreign {
     func EcGetObjectArrayProperty(ObjectArray: IntNative, PropertyId: Int32, ArrayIndex: UInt32, Flags: UInt32, PropertyValueBufferSize: UInt32, PropertyValueBuffer: CPointer<EC_VARIANT>, PropertyValueBufferUsed: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_EventCollector == "on" && WECAPI == "on" && Windows_Win32_System_EventCollector_EcGetObjectArrayProperty == "on"]
+public unsafe func Windows_EcGetObjectArrayProperty(ObjectArray: IntNative, PropertyId: Int32, ArrayIndex: UInt32, Flags: UInt32, PropertyValueBufferSize: UInt32, PropertyValueBuffer: CPointer<EC_VARIANT>, PropertyValueBufferUsed: CPointer<UInt32>): Int32 {
+    return EcGetObjectArrayProperty(ObjectArray, PropertyId, ArrayIndex, Flags, PropertyValueBufferSize, PropertyValueBuffer, PropertyValueBufferUsed)
+}
+
+@When[Windows_Win32_System_EventCollector == "on" && WECAPI == "on" && Windows_Win32_System_EventCollector_EcGetObjectArraySize == "on"]
+foreign {
     func EcGetObjectArraySize(ObjectArray: IntNative, ObjectArraySize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_EventCollector == "on" && WECAPI == "on" && Windows_Win32_System_EventCollector_EcGetObjectArraySize == "on"]
+public unsafe func Windows_EcGetObjectArraySize(ObjectArray: IntNative, ObjectArraySize: CPointer<UInt32>): Int32 {
+    return EcGetObjectArraySize(ObjectArray, ObjectArraySize)
+}
+
+@When[Windows_Win32_System_EventCollector == "on" && WECAPI == "on" && Windows_Win32_System_EventCollector_EcGetSubscriptionProperty == "on"]
+foreign {
     func EcGetSubscriptionProperty(Subscription: IntNative, PropertyId: Int32, Flags: UInt32, PropertyValueBufferSize: UInt32, PropertyValueBuffer: CPointer<EC_VARIANT>, PropertyValueBufferUsed: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_EventCollector == "on" && WECAPI == "on" && Windows_Win32_System_EventCollector_EcGetSubscriptionProperty == "on"]
+public unsafe func Windows_EcGetSubscriptionProperty(Subscription: IntNative, PropertyId: Int32, Flags: UInt32, PropertyValueBufferSize: UInt32, PropertyValueBuffer: CPointer<EC_VARIANT>, PropertyValueBufferUsed: CPointer<UInt32>): Int32 {
+    return EcGetSubscriptionProperty(Subscription, PropertyId, Flags, PropertyValueBufferSize, PropertyValueBuffer, PropertyValueBufferUsed)
+}
+
+@When[Windows_Win32_System_EventCollector == "on" && WECAPI == "on" && Windows_Win32_System_EventCollector_EcGetSubscriptionRunTimeStatus == "on"]
+foreign {
     func EcGetSubscriptionRunTimeStatus(SubscriptionName: CPointer<UInt16>, StatusInfoId: Int32, EventSourceName: CPointer<UInt16>, Flags: UInt32, StatusValueBufferSize: UInt32, StatusValueBuffer: CPointer<EC_VARIANT>, StatusValueBufferUsed: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_EventCollector == "on" && WECAPI == "on" && Windows_Win32_System_EventCollector_EcGetSubscriptionRunTimeStatus == "on"]
+public unsafe func Windows_EcGetSubscriptionRunTimeStatus(SubscriptionName: CPointer<UInt16>, StatusInfoId: Int32, EventSourceName: CPointer<UInt16>, Flags: UInt32, StatusValueBufferSize: UInt32, StatusValueBuffer: CPointer<EC_VARIANT>, StatusValueBufferUsed: CPointer<UInt32>): Int32 {
+    return EcGetSubscriptionRunTimeStatus(SubscriptionName, StatusInfoId, EventSourceName, Flags, StatusValueBufferSize, StatusValueBuffer, StatusValueBufferUsed)
+}
+
+@When[Windows_Win32_System_EventCollector == "on" && WECAPI == "on" && Windows_Win32_System_EventCollector_EcInsertObjectArrayElement == "on"]
+foreign {
     func EcInsertObjectArrayElement(ObjectArray: IntNative, ArrayIndex: UInt32): Int32
+}
+
+@When[Windows_Win32_System_EventCollector == "on" && WECAPI == "on" && Windows_Win32_System_EventCollector_EcInsertObjectArrayElement == "on"]
+public unsafe func Windows_EcInsertObjectArrayElement(ObjectArray: IntNative, ArrayIndex: UInt32): Int32 {
+    return EcInsertObjectArrayElement(ObjectArray, ArrayIndex)
+}
+
+@When[Windows_Win32_System_EventCollector == "on" && WECAPI == "on" && Windows_Win32_System_EventCollector_EcOpenSubscription == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func EcOpenSubscription(SubscriptionName: CPointer<UInt16>, AccessMask: UInt32, Flags: UInt32): IntNative
+}
+
+@When[Windows_Win32_System_EventCollector == "on" && WECAPI == "on" && Windows_Win32_System_EventCollector_EcOpenSubscription == "on"]
+public unsafe func Windows_EcOpenSubscription(SubscriptionName: CPointer<UInt16>, AccessMask: UInt32, Flags: UInt32): IntNative {
+    return EcOpenSubscription(SubscriptionName, AccessMask, Flags)
+}
+
+@When[Windows_Win32_System_EventCollector == "on" && WECAPI == "on" && Windows_Win32_System_EventCollector_EcOpenSubscriptionEnum == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func EcOpenSubscriptionEnum(Flags: UInt32): IntNative
+}
+
+@When[Windows_Win32_System_EventCollector == "on" && WECAPI == "on" && Windows_Win32_System_EventCollector_EcOpenSubscriptionEnum == "on"]
+public unsafe func Windows_EcOpenSubscriptionEnum(Flags: UInt32): IntNative {
+    return EcOpenSubscriptionEnum(Flags)
+}
+
+@When[Windows_Win32_System_EventCollector == "on" && WECAPI == "on" && Windows_Win32_System_EventCollector_EcRemoveObjectArrayElement == "on"]
+foreign {
     func EcRemoveObjectArrayElement(ObjectArray: IntNative, ArrayIndex: UInt32): Int32
+}
+
+@When[Windows_Win32_System_EventCollector == "on" && WECAPI == "on" && Windows_Win32_System_EventCollector_EcRemoveObjectArrayElement == "on"]
+public unsafe func Windows_EcRemoveObjectArrayElement(ObjectArray: IntNative, ArrayIndex: UInt32): Int32 {
+    return EcRemoveObjectArrayElement(ObjectArray, ArrayIndex)
+}
+
+@When[Windows_Win32_System_EventCollector == "on" && WECAPI == "on" && Windows_Win32_System_EventCollector_EcRetrySubscription == "on"]
+foreign {
     func EcRetrySubscription(SubscriptionName: CPointer<UInt16>, EventSourceName: CPointer<UInt16>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_EventCollector == "on" && WECAPI == "on" && Windows_Win32_System_EventCollector_EcRetrySubscription == "on"]
+public unsafe func Windows_EcRetrySubscription(SubscriptionName: CPointer<UInt16>, EventSourceName: CPointer<UInt16>, Flags: UInt32): Int32 {
+    return EcRetrySubscription(SubscriptionName, EventSourceName, Flags)
+}
+
+@When[Windows_Win32_System_EventCollector == "on" && WECAPI == "on" && Windows_Win32_System_EventCollector_EcSaveSubscription == "on"]
+foreign {
     func EcSaveSubscription(Subscription: IntNative, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_EventCollector == "on" && WECAPI == "on" && Windows_Win32_System_EventCollector_EcSaveSubscription == "on"]
+public unsafe func Windows_EcSaveSubscription(Subscription: IntNative, Flags: UInt32): Int32 {
+    return EcSaveSubscription(Subscription, Flags)
+}
+
+@When[Windows_Win32_System_EventCollector == "on" && WECAPI == "on" && Windows_Win32_System_EventCollector_EcSetObjectArrayProperty == "on"]
+foreign {
     func EcSetObjectArrayProperty(ObjectArray: IntNative, PropertyId: Int32, ArrayIndex: UInt32, Flags: UInt32, PropertyValue: CPointer<EC_VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_EventCollector == "on" && WECAPI == "on" && Windows_Win32_System_EventCollector_EcSetObjectArrayProperty == "on"]
+public unsafe func Windows_EcSetObjectArrayProperty(ObjectArray: IntNative, PropertyId: Int32, ArrayIndex: UInt32, Flags: UInt32, PropertyValue: CPointer<EC_VARIANT>): Int32 {
+    return EcSetObjectArrayProperty(ObjectArray, PropertyId, ArrayIndex, Flags, PropertyValue)
+}
+
+@When[Windows_Win32_System_EventCollector == "on" && WECAPI == "on" && Windows_Win32_System_EventCollector_EcSetSubscriptionProperty == "on"]
+foreign {
     func EcSetSubscriptionProperty(Subscription: IntNative, PropertyId: Int32, Flags: UInt32, PropertyValue: CPointer<EC_VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_EventCollector == "on" && WECAPI == "on" && Windows_Win32_System_EventCollector_EcSetSubscriptionProperty == "on"]
+public unsafe func Windows_EcSetSubscriptionProperty(Subscription: IntNative, PropertyId: Int32, Flags: UInt32, PropertyValue: CPointer<EC_VARIANT>): Int32 {
+    return EcSetSubscriptionProperty(Subscription, PropertyId, Flags, PropertyValue)
 }
 
 @When[Windows_Win32_System_EventCollector == "on"]

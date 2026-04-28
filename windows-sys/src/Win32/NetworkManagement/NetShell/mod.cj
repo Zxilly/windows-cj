@@ -5,7 +5,6 @@ import windows_interface.{GUID}
 import windows_interface as windows_interface
 import windows_polyfill.{unionReadUInt64, unionWriteUInt64}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 
 
@@ -359,28 +358,79 @@ public struct NS_HELPER_ATTRIBUTES__Anonymous_e__Union__Anonymous_e__Struct {
     public init() {}
 }
 
-@When[NETSH == "on"]
+@When[Windows_Win32_NetworkManagement_NetShell == "on" && NETSH == "on" && Windows_Win32_NetworkManagement_NetShell_PrintError == "on"]
 @CallingConv[CDECL]
 foreign {
     // pinvoke-hint: cc=cdecl
     func PrintError(hModule: CPointer<Unit>, dwErrId: UInt32, ...): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_NetShell == "on" && NETSH == "on" && Windows_Win32_NetworkManagement_NetShell_PrintMessage == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func PrintMessage(pwszFormat: CPointer<UInt16>, ...): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_NetShell == "on" && NETSH == "on" && Windows_Win32_NetworkManagement_NetShell_PrintMessageFromModule == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func PrintMessageFromModule(hModule: CPointer<Unit>, dwMsgId: UInt32, ...): UInt32
 }
 
-@When[NETSH == "on"]
+@When[Windows_Win32_NetworkManagement_NetShell == "on" && NETSH == "on" && Windows_Win32_NetworkManagement_NetShell_MatchEnumTag == "on"]
 foreign {
     func MatchEnumTag(hModule: CPointer<Unit>, pwcArg: CPointer<UInt16>, dwNumArg: UInt32, pEnumTable: CPointer<TOKEN_VALUE>, pdwValue: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_NetShell == "on" && NETSH == "on" && Windows_Win32_NetworkManagement_NetShell_MatchEnumTag == "on"]
+public unsafe func Windows_MatchEnumTag(hModule: CPointer<Unit>, pwcArg: CPointer<UInt16>, dwNumArg: UInt32, pEnumTable: CPointer<TOKEN_VALUE>, pdwValue: CPointer<UInt32>): UInt32 {
+    return MatchEnumTag(hModule, pwcArg, dwNumArg, pEnumTable, pdwValue)
+}
+
+@When[Windows_Win32_NetworkManagement_NetShell == "on" && NETSH == "on" && Windows_Win32_NetworkManagement_NetShell_MatchToken == "on"]
+foreign {
     func MatchToken(pwszUserToken: CPointer<UInt16>, pwszCmdToken: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_NetShell == "on" && NETSH == "on" && Windows_Win32_NetworkManagement_NetShell_MatchToken == "on"]
+public unsafe func Windows_MatchToken(pwszUserToken: CPointer<UInt16>, pwszCmdToken: CPointer<UInt16>): Int32 {
+    return MatchToken(pwszUserToken, pwszCmdToken)
+}
+
+@When[Windows_Win32_NetworkManagement_NetShell == "on" && NETSH == "on" && Windows_Win32_NetworkManagement_NetShell_PreprocessCommand == "on"]
+foreign {
     // param-hint: hModule optional
     // param-hint: ppwcArguments len=param[3]
     // param-hint: pttTags len=param[5] optional
     // param-hint: pdwTagType optional
     func PreprocessCommand(hModule: CPointer<Unit>, ppwcArguments: CPointer<CPointer<UInt16>>, dwCurrentIndex: UInt32, dwArgCount: UInt32, pttTags: CPointer<TAG_TYPE>, dwTagCount: UInt32, dwMinArgs: UInt32, dwMaxArgs: UInt32, pdwTagType: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_NetShell == "on" && NETSH == "on" && Windows_Win32_NetworkManagement_NetShell_PreprocessCommand == "on"]
+public unsafe func Windows_PreprocessCommand(hModule: CPointer<Unit>, ppwcArguments: CPointer<CPointer<UInt16>>, dwCurrentIndex: UInt32, dwArgCount: UInt32, pttTags: CPointer<TAG_TYPE>, dwTagCount: UInt32, dwMinArgs: UInt32, dwMaxArgs: UInt32, pdwTagType: CPointer<UInt32>): UInt32 {
+    return PreprocessCommand(hModule, ppwcArguments, dwCurrentIndex, dwArgCount, pttTags, dwTagCount, dwMinArgs, dwMaxArgs, pdwTagType)
+}
+
+@When[Windows_Win32_NetworkManagement_NetShell == "on" && NETSH == "on" && Windows_Win32_NetworkManagement_NetShell_RegisterContext == "on"]
+foreign {
     func RegisterContext(pChildContext: CPointer<NS_CONTEXT_ATTRIBUTES>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_NetShell == "on" && NETSH == "on" && Windows_Win32_NetworkManagement_NetShell_RegisterContext == "on"]
+public unsafe func Windows_RegisterContext(pChildContext: CPointer<NS_CONTEXT_ATTRIBUTES>): UInt32 {
+    return RegisterContext(pChildContext)
+}
+
+@When[Windows_Win32_NetworkManagement_NetShell == "on" && NETSH == "on" && Windows_Win32_NetworkManagement_NetShell_RegisterHelper == "on"]
+foreign {
     func RegisterHelper(pguidParentContext: CPointer<GUID>, pfnRegisterSubContext: CPointer<NS_HELPER_ATTRIBUTES>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_NetShell == "on" && NETSH == "on" && Windows_Win32_NetworkManagement_NetShell_RegisterHelper == "on"]
+public unsafe func Windows_RegisterHelper(pguidParentContext: CPointer<GUID>, pfnRegisterSubContext: CPointer<NS_HELPER_ATTRIBUTES>): UInt32 {
+    return RegisterHelper(pguidParentContext, pfnRegisterSubContext)
 }
 
 @When[Windows_Win32_NetworkManagement_NetShell == "on"]

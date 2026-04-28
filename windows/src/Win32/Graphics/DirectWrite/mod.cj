@@ -10,11 +10,8 @@ import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrap
 import windows_interface as windows_interface
 import windows_polyfill.{unionReadUInt8, unionWriteUInt8}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Globalization == "on"]
 import windows.Win32.Globalization as Win32_Globalization
-@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
@@ -8176,9 +8173,14 @@ public class IDWriteTextAnalysisSource1 <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[DWRITE == "on"]
+@When[Windows_Win32_Graphics_DirectWrite == "on" && DWRITE == "on" && Windows_Win32_Graphics_DirectWrite_DWriteCreateFactory == "on"]
 foreign {
     func DWriteCreateFactory(factoryType: DWRITE_FACTORY_TYPEAbi, iid: CPointer<GUID>, factory: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_DirectWrite == "on" && DWRITE == "on" && Windows_Win32_Graphics_DirectWrite_DWriteCreateFactory == "on"]
+public unsafe func Windows_DWriteCreateFactory(factoryType: DWRITE_FACTORY_TYPEAbi, iid: CPointer<GUID>, factory: CPointer<CPointer<Unit>>): Int32 {
+    return DWriteCreateFactory(factoryType, iid, factory)
 }
 
 @When[Windows_Win32_Graphics_DirectWrite == "on"]

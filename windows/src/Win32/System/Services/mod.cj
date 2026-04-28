@@ -8,11 +8,8 @@ import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeTy
 import windows_core as windows_core
 import windows_interface.{GUID}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
-@When[Windows_Win32_System_Registry == "on"]
 import windows.Win32.System.Registry as Win32_System_Registry
 
 
@@ -2962,14 +2959,32 @@ extend SERVICE_TRIGGER_INFO <: windows_core.CopyType & windows_core.RuntimeType 
     }
 }
 
-@When[ADVAPI32 == "on"]
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_ChangeServiceConfig2A == "on"]
 foreign {
     // param-hint: lpInfo optional
     // pinvoke-hint: SetLastError
     func ChangeServiceConfig2A(hService: SC_HANDLE, dwInfoLevel: SERVICE_CONFIGAbi, lpInfo: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_ChangeServiceConfig2A == "on"]
+public unsafe func Windows_ChangeServiceConfig2A(hService: SC_HANDLE, dwInfoLevel: SERVICE_CONFIGAbi, lpInfo: CPointer<Unit>): Int32 {
+    return ChangeServiceConfig2A(hService, dwInfoLevel, lpInfo)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_ChangeServiceConfig2W == "on"]
+foreign {
     // param-hint: lpInfo optional
     // pinvoke-hint: SetLastError
     func ChangeServiceConfig2W(hService: SC_HANDLE, dwInfoLevel: SERVICE_CONFIGAbi, lpInfo: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_ChangeServiceConfig2W == "on"]
+public unsafe func Windows_ChangeServiceConfig2W(hService: SC_HANDLE, dwInfoLevel: SERVICE_CONFIGAbi, lpInfo: CPointer<Unit>): Int32 {
+    return ChangeServiceConfig2W(hService, dwInfoLevel, lpInfo)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_ChangeServiceConfigA == "on"]
+foreign {
     // param-hint: lpBinaryPathName optional
     // param-hint: lpLoadOrderGroup optional
     // param-hint: lpdwTagId optional
@@ -2979,6 +2994,15 @@ foreign {
     // param-hint: lpDisplayName optional
     // pinvoke-hint: SetLastError
     func ChangeServiceConfigA(hService: SC_HANDLE, dwServiceType: ENUM_SERVICE_TYPEAbi, dwStartType: SERVICE_START_TYPEAbi, dwErrorControl: SERVICE_ERRORAbi, lpBinaryPathName: CPointer<UInt8>, lpLoadOrderGroup: CPointer<UInt8>, lpdwTagId: CPointer<UInt32>, lpDependencies: CPointer<UInt8>, lpServiceStartName: CPointer<UInt8>, lpPassword: CPointer<UInt8>, lpDisplayName: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_ChangeServiceConfigA == "on"]
+public unsafe func Windows_ChangeServiceConfigA(hService: SC_HANDLE, dwServiceType: ENUM_SERVICE_TYPEAbi, dwStartType: SERVICE_START_TYPEAbi, dwErrorControl: SERVICE_ERRORAbi, lpBinaryPathName: CPointer<UInt8>, lpLoadOrderGroup: CPointer<UInt8>, lpdwTagId: CPointer<UInt32>, lpDependencies: CPointer<UInt8>, lpServiceStartName: CPointer<UInt8>, lpPassword: CPointer<UInt8>, lpDisplayName: CPointer<UInt8>): Int32 {
+    return ChangeServiceConfigA(hService, dwServiceType, dwStartType, dwErrorControl, lpBinaryPathName, lpLoadOrderGroup, lpdwTagId, lpDependencies, lpServiceStartName, lpPassword, lpDisplayName)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_ChangeServiceConfigW == "on"]
+foreign {
     // param-hint: lpBinaryPathName optional
     // param-hint: lpLoadOrderGroup optional
     // param-hint: lpdwTagId optional
@@ -2988,14 +3012,59 @@ foreign {
     // param-hint: lpDisplayName optional
     // pinvoke-hint: SetLastError
     func ChangeServiceConfigW(hService: SC_HANDLE, dwServiceType: ENUM_SERVICE_TYPEAbi, dwStartType: SERVICE_START_TYPEAbi, dwErrorControl: SERVICE_ERRORAbi, lpBinaryPathName: CPointer<UInt16>, lpLoadOrderGroup: CPointer<UInt16>, lpdwTagId: CPointer<UInt32>, lpDependencies: CPointer<UInt16>, lpServiceStartName: CPointer<UInt16>, lpPassword: CPointer<UInt16>, lpDisplayName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_ChangeServiceConfigW == "on"]
+public unsafe func Windows_ChangeServiceConfigW(hService: SC_HANDLE, dwServiceType: ENUM_SERVICE_TYPEAbi, dwStartType: SERVICE_START_TYPEAbi, dwErrorControl: SERVICE_ERRORAbi, lpBinaryPathName: CPointer<UInt16>, lpLoadOrderGroup: CPointer<UInt16>, lpdwTagId: CPointer<UInt32>, lpDependencies: CPointer<UInt16>, lpServiceStartName: CPointer<UInt16>, lpPassword: CPointer<UInt16>, lpDisplayName: CPointer<UInt16>): Int32 {
+    return ChangeServiceConfigW(hService, dwServiceType, dwStartType, dwErrorControl, lpBinaryPathName, lpLoadOrderGroup, lpdwTagId, lpDependencies, lpServiceStartName, lpPassword, lpDisplayName)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_CloseServiceHandle == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CloseServiceHandle(hSCObject: SC_HANDLE): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_CloseServiceHandle == "on"]
+public unsafe func Windows_CloseServiceHandle(hSCObject: SC_HANDLE): Int32 {
+    return CloseServiceHandle(hSCObject)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_ControlService == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ControlService(hService: SC_HANDLE, dwControl: UInt32, lpServiceStatus: CPointer<SERVICE_STATUSAbi>): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_ControlService == "on"]
+public unsafe func Windows_ControlService(hService: SC_HANDLE, dwControl: UInt32, lpServiceStatus: CPointer<SERVICE_STATUSAbi>): Int32 {
+    return ControlService(hService, dwControl, lpServiceStatus)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_ControlServiceExA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ControlServiceExA(hService: SC_HANDLE, dwControl: UInt32, dwInfoLevel: UInt32, pControlParams: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_ControlServiceExA == "on"]
+public unsafe func Windows_ControlServiceExA(hService: SC_HANDLE, dwControl: UInt32, dwInfoLevel: UInt32, pControlParams: CPointer<Unit>): Int32 {
+    return ControlServiceExA(hService, dwControl, dwInfoLevel, pControlParams)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_ControlServiceExW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func ControlServiceExW(hService: SC_HANDLE, dwControl: UInt32, dwInfoLevel: UInt32, pControlParams: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_ControlServiceExW == "on"]
+public unsafe func Windows_ControlServiceExW(hService: SC_HANDLE, dwControl: UInt32, dwInfoLevel: UInt32, pControlParams: CPointer<Unit>): Int32 {
+    return ControlServiceExW(hService, dwControl, dwInfoLevel, pControlParams)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_CreateServiceA == "on"]
+foreign {
     // param-hint: lpDisplayName optional
     // param-hint: lpBinaryPathName optional
     // param-hint: lpLoadOrderGroup optional
@@ -3005,6 +3074,15 @@ foreign {
     // param-hint: lpPassword optional
     // pinvoke-hint: SetLastError
     func CreateServiceA(hSCManager: SC_HANDLE, lpServiceName: CPointer<UInt8>, lpDisplayName: CPointer<UInt8>, dwDesiredAccess: UInt32, dwServiceType: ENUM_SERVICE_TYPEAbi, dwStartType: SERVICE_START_TYPEAbi, dwErrorControl: SERVICE_ERRORAbi, lpBinaryPathName: CPointer<UInt8>, lpLoadOrderGroup: CPointer<UInt8>, lpdwTagId: CPointer<UInt32>, lpDependencies: CPointer<UInt8>, lpServiceStartName: CPointer<UInt8>, lpPassword: CPointer<UInt8>): SC_HANDLE
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_CreateServiceA == "on"]
+public unsafe func Windows_CreateServiceA(hSCManager: SC_HANDLE, lpServiceName: CPointer<UInt8>, lpDisplayName: CPointer<UInt8>, dwDesiredAccess: UInt32, dwServiceType: ENUM_SERVICE_TYPEAbi, dwStartType: SERVICE_START_TYPEAbi, dwErrorControl: SERVICE_ERRORAbi, lpBinaryPathName: CPointer<UInt8>, lpLoadOrderGroup: CPointer<UInt8>, lpdwTagId: CPointer<UInt32>, lpDependencies: CPointer<UInt8>, lpServiceStartName: CPointer<UInt8>, lpPassword: CPointer<UInt8>): SC_HANDLE {
+    return CreateServiceA(hSCManager, lpServiceName, lpDisplayName, dwDesiredAccess, dwServiceType, dwStartType, dwErrorControl, lpBinaryPathName, lpLoadOrderGroup, lpdwTagId, lpDependencies, lpServiceStartName, lpPassword)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_CreateServiceW == "on"]
+foreign {
     // param-hint: lpDisplayName optional
     // param-hint: lpBinaryPathName optional
     // param-hint: lpLoadOrderGroup optional
@@ -3014,154 +3092,567 @@ foreign {
     // param-hint: lpPassword optional
     // pinvoke-hint: SetLastError
     func CreateServiceW(hSCManager: SC_HANDLE, lpServiceName: CPointer<UInt16>, lpDisplayName: CPointer<UInt16>, dwDesiredAccess: UInt32, dwServiceType: ENUM_SERVICE_TYPEAbi, dwStartType: SERVICE_START_TYPEAbi, dwErrorControl: SERVICE_ERRORAbi, lpBinaryPathName: CPointer<UInt16>, lpLoadOrderGroup: CPointer<UInt16>, lpdwTagId: CPointer<UInt32>, lpDependencies: CPointer<UInt16>, lpServiceStartName: CPointer<UInt16>, lpPassword: CPointer<UInt16>): SC_HANDLE
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_CreateServiceW == "on"]
+public unsafe func Windows_CreateServiceW(hSCManager: SC_HANDLE, lpServiceName: CPointer<UInt16>, lpDisplayName: CPointer<UInt16>, dwDesiredAccess: UInt32, dwServiceType: ENUM_SERVICE_TYPEAbi, dwStartType: SERVICE_START_TYPEAbi, dwErrorControl: SERVICE_ERRORAbi, lpBinaryPathName: CPointer<UInt16>, lpLoadOrderGroup: CPointer<UInt16>, lpdwTagId: CPointer<UInt32>, lpDependencies: CPointer<UInt16>, lpServiceStartName: CPointer<UInt16>, lpPassword: CPointer<UInt16>): SC_HANDLE {
+    return CreateServiceW(hSCManager, lpServiceName, lpDisplayName, dwDesiredAccess, dwServiceType, dwStartType, dwErrorControl, lpBinaryPathName, lpLoadOrderGroup, lpdwTagId, lpDependencies, lpServiceStartName, lpPassword)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_DeleteService == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func DeleteService(hService: SC_HANDLE): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_DeleteService == "on"]
+public unsafe func Windows_DeleteService(hService: SC_HANDLE): Int32 {
+    return DeleteService(hService)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_EnumDependentServicesA == "on"]
+foreign {
     // param-hint: lpServices bytes=param[3] optional
     // pinvoke-hint: SetLastError
     func EnumDependentServicesA(hService: SC_HANDLE, dwServiceState: ENUM_SERVICE_STATEAbi, lpServices: CPointer<ENUM_SERVICE_STATUSAAbi>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>, lpServicesReturned: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_EnumDependentServicesA == "on"]
+public unsafe func Windows_EnumDependentServicesA(hService: SC_HANDLE, dwServiceState: ENUM_SERVICE_STATEAbi, lpServices: CPointer<ENUM_SERVICE_STATUSAAbi>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>, lpServicesReturned: CPointer<UInt32>): Int32 {
+    return EnumDependentServicesA(hService, dwServiceState, lpServices, cbBufSize, pcbBytesNeeded, lpServicesReturned)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_EnumDependentServicesW == "on"]
+foreign {
     // param-hint: lpServices bytes=param[3] optional
     // pinvoke-hint: SetLastError
     func EnumDependentServicesW(hService: SC_HANDLE, dwServiceState: ENUM_SERVICE_STATEAbi, lpServices: CPointer<ENUM_SERVICE_STATUSWAbi>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>, lpServicesReturned: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_EnumDependentServicesW == "on"]
+public unsafe func Windows_EnumDependentServicesW(hService: SC_HANDLE, dwServiceState: ENUM_SERVICE_STATEAbi, lpServices: CPointer<ENUM_SERVICE_STATUSWAbi>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>, lpServicesReturned: CPointer<UInt32>): Int32 {
+    return EnumDependentServicesW(hService, dwServiceState, lpServices, cbBufSize, pcbBytesNeeded, lpServicesReturned)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_EnumServicesStatusA == "on"]
+foreign {
     // param-hint: lpServices bytes=param[4] optional
     // param-hint: lpResumeHandle optional
     // pinvoke-hint: SetLastError
     func EnumServicesStatusA(hSCManager: SC_HANDLE, dwServiceType: ENUM_SERVICE_TYPEAbi, dwServiceState: ENUM_SERVICE_STATEAbi, lpServices: CPointer<ENUM_SERVICE_STATUSAAbi>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>, lpServicesReturned: CPointer<UInt32>, lpResumeHandle: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_EnumServicesStatusA == "on"]
+public unsafe func Windows_EnumServicesStatusA(hSCManager: SC_HANDLE, dwServiceType: ENUM_SERVICE_TYPEAbi, dwServiceState: ENUM_SERVICE_STATEAbi, lpServices: CPointer<ENUM_SERVICE_STATUSAAbi>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>, lpServicesReturned: CPointer<UInt32>, lpResumeHandle: CPointer<UInt32>): Int32 {
+    return EnumServicesStatusA(hSCManager, dwServiceType, dwServiceState, lpServices, cbBufSize, pcbBytesNeeded, lpServicesReturned, lpResumeHandle)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_EnumServicesStatusExA == "on"]
+foreign {
     // param-hint: lpServices bytes=param[5] optional
     // param-hint: lpResumeHandle optional
     // param-hint: pszGroupName optional
     // pinvoke-hint: SetLastError
     func EnumServicesStatusExA(hSCManager: SC_HANDLE, InfoLevel: SC_ENUM_TYPEAbi, dwServiceType: ENUM_SERVICE_TYPEAbi, dwServiceState: ENUM_SERVICE_STATEAbi, lpServices: CPointer<UInt8>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>, lpServicesReturned: CPointer<UInt32>, lpResumeHandle: CPointer<UInt32>, pszGroupName: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_EnumServicesStatusExA == "on"]
+public unsafe func Windows_EnumServicesStatusExA(hSCManager: SC_HANDLE, InfoLevel: SC_ENUM_TYPEAbi, dwServiceType: ENUM_SERVICE_TYPEAbi, dwServiceState: ENUM_SERVICE_STATEAbi, lpServices: CPointer<UInt8>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>, lpServicesReturned: CPointer<UInt32>, lpResumeHandle: CPointer<UInt32>, pszGroupName: CPointer<UInt8>): Int32 {
+    return EnumServicesStatusExA(hSCManager, InfoLevel, dwServiceType, dwServiceState, lpServices, cbBufSize, pcbBytesNeeded, lpServicesReturned, lpResumeHandle, pszGroupName)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_EnumServicesStatusExW == "on"]
+foreign {
     // param-hint: lpServices bytes=param[5] optional
     // param-hint: lpResumeHandle optional
     // param-hint: pszGroupName optional
     // pinvoke-hint: SetLastError
     func EnumServicesStatusExW(hSCManager: SC_HANDLE, InfoLevel: SC_ENUM_TYPEAbi, dwServiceType: ENUM_SERVICE_TYPEAbi, dwServiceState: ENUM_SERVICE_STATEAbi, lpServices: CPointer<UInt8>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>, lpServicesReturned: CPointer<UInt32>, lpResumeHandle: CPointer<UInt32>, pszGroupName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_EnumServicesStatusExW == "on"]
+public unsafe func Windows_EnumServicesStatusExW(hSCManager: SC_HANDLE, InfoLevel: SC_ENUM_TYPEAbi, dwServiceType: ENUM_SERVICE_TYPEAbi, dwServiceState: ENUM_SERVICE_STATEAbi, lpServices: CPointer<UInt8>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>, lpServicesReturned: CPointer<UInt32>, lpResumeHandle: CPointer<UInt32>, pszGroupName: CPointer<UInt16>): Int32 {
+    return EnumServicesStatusExW(hSCManager, InfoLevel, dwServiceType, dwServiceState, lpServices, cbBufSize, pcbBytesNeeded, lpServicesReturned, lpResumeHandle, pszGroupName)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_EnumServicesStatusW == "on"]
+foreign {
     // param-hint: lpServices bytes=param[4] optional
     // param-hint: lpResumeHandle optional
     // pinvoke-hint: SetLastError
     func EnumServicesStatusW(hSCManager: SC_HANDLE, dwServiceType: ENUM_SERVICE_TYPEAbi, dwServiceState: ENUM_SERVICE_STATEAbi, lpServices: CPointer<ENUM_SERVICE_STATUSWAbi>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>, lpServicesReturned: CPointer<UInt32>, lpResumeHandle: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_EnumServicesStatusW == "on"]
+public unsafe func Windows_EnumServicesStatusW(hSCManager: SC_HANDLE, dwServiceType: ENUM_SERVICE_TYPEAbi, dwServiceState: ENUM_SERVICE_STATEAbi, lpServices: CPointer<ENUM_SERVICE_STATUSWAbi>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>, lpServicesReturned: CPointer<UInt32>, lpResumeHandle: CPointer<UInt32>): Int32 {
+    return EnumServicesStatusW(hSCManager, dwServiceType, dwServiceState, lpServices, cbBufSize, pcbBytesNeeded, lpServicesReturned, lpResumeHandle)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_GetServiceDisplayNameA == "on"]
+foreign {
     // param-hint: lpDisplayName len=param[3] optional
     // pinvoke-hint: SetLastError
     func GetServiceDisplayNameA(hSCManager: SC_HANDLE, lpServiceName: CPointer<UInt8>, lpDisplayName: CPointer<UInt8>, lpcchBuffer: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_GetServiceDisplayNameA == "on"]
+public unsafe func Windows_GetServiceDisplayNameA(hSCManager: SC_HANDLE, lpServiceName: CPointer<UInt8>, lpDisplayName: CPointer<UInt8>, lpcchBuffer: CPointer<UInt32>): Int32 {
+    return GetServiceDisplayNameA(hSCManager, lpServiceName, lpDisplayName, lpcchBuffer)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_GetServiceDisplayNameW == "on"]
+foreign {
     // param-hint: lpDisplayName len=param[3] optional
     // pinvoke-hint: SetLastError
     func GetServiceDisplayNameW(hSCManager: SC_HANDLE, lpServiceName: CPointer<UInt16>, lpDisplayName: CPointer<UInt16>, lpcchBuffer: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_GetServiceDisplayNameW == "on"]
+public unsafe func Windows_GetServiceDisplayNameW(hSCManager: SC_HANDLE, lpServiceName: CPointer<UInt16>, lpDisplayName: CPointer<UInt16>, lpcchBuffer: CPointer<UInt32>): Int32 {
+    return GetServiceDisplayNameW(hSCManager, lpServiceName, lpDisplayName, lpcchBuffer)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_GetServiceKeyNameA == "on"]
+foreign {
     // param-hint: lpServiceName len=param[3] optional
     // pinvoke-hint: SetLastError
     func GetServiceKeyNameA(hSCManager: SC_HANDLE, lpDisplayName: CPointer<UInt8>, lpServiceName: CPointer<UInt8>, lpcchBuffer: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_GetServiceKeyNameA == "on"]
+public unsafe func Windows_GetServiceKeyNameA(hSCManager: SC_HANDLE, lpDisplayName: CPointer<UInt8>, lpServiceName: CPointer<UInt8>, lpcchBuffer: CPointer<UInt32>): Int32 {
+    return GetServiceKeyNameA(hSCManager, lpDisplayName, lpServiceName, lpcchBuffer)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_GetServiceKeyNameW == "on"]
+foreign {
     // param-hint: lpServiceName len=param[3] optional
     // pinvoke-hint: SetLastError
     func GetServiceKeyNameW(hSCManager: SC_HANDLE, lpDisplayName: CPointer<UInt16>, lpServiceName: CPointer<UInt16>, lpcchBuffer: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_GetServiceKeyNameW == "on"]
+public unsafe func Windows_GetServiceKeyNameW(hSCManager: SC_HANDLE, lpDisplayName: CPointer<UInt16>, lpServiceName: CPointer<UInt16>, lpcchBuffer: CPointer<UInt32>): Int32 {
+    return GetServiceKeyNameW(hSCManager, lpDisplayName, lpServiceName, lpcchBuffer)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_LockServiceDatabase == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func LockServiceDatabase(hSCManager: SC_HANDLE): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_LockServiceDatabase == "on"]
+public unsafe func Windows_LockServiceDatabase(hSCManager: SC_HANDLE): CPointer<Unit> {
+    return LockServiceDatabase(hSCManager)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_NotifyBootConfigStatus == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func NotifyBootConfigStatus(BootAcceptable: Int32): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_NotifyBootConfigStatus == "on"]
+public unsafe func Windows_NotifyBootConfigStatus(BootAcceptable: Int32): Int32 {
+    return NotifyBootConfigStatus(BootAcceptable)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_NotifyServiceStatusChangeA == "on"]
+foreign {
     func NotifyServiceStatusChangeA(hService: SC_HANDLE, dwNotifyMask: SERVICE_NOTIFYAbi, pNotifyBuffer: CPointer<SERVICE_NOTIFY_2AAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_NotifyServiceStatusChangeA == "on"]
+public unsafe func Windows_NotifyServiceStatusChangeA(hService: SC_HANDLE, dwNotifyMask: SERVICE_NOTIFYAbi, pNotifyBuffer: CPointer<SERVICE_NOTIFY_2AAbi>): UInt32 {
+    return NotifyServiceStatusChangeA(hService, dwNotifyMask, pNotifyBuffer)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_NotifyServiceStatusChangeW == "on"]
+foreign {
     func NotifyServiceStatusChangeW(hService: SC_HANDLE, dwNotifyMask: SERVICE_NOTIFYAbi, pNotifyBuffer: CPointer<SERVICE_NOTIFY_2WAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_NotifyServiceStatusChangeW == "on"]
+public unsafe func Windows_NotifyServiceStatusChangeW(hService: SC_HANDLE, dwNotifyMask: SERVICE_NOTIFYAbi, pNotifyBuffer: CPointer<SERVICE_NOTIFY_2WAbi>): UInt32 {
+    return NotifyServiceStatusChangeW(hService, dwNotifyMask, pNotifyBuffer)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_OpenSCManagerA == "on"]
+foreign {
     // param-hint: lpMachineName optional
     // param-hint: lpDatabaseName optional
     // pinvoke-hint: SetLastError
     func OpenSCManagerA(lpMachineName: CPointer<UInt8>, lpDatabaseName: CPointer<UInt8>, dwDesiredAccess: UInt32): SC_HANDLE
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_OpenSCManagerA == "on"]
+public unsafe func Windows_OpenSCManagerA(lpMachineName: CPointer<UInt8>, lpDatabaseName: CPointer<UInt8>, dwDesiredAccess: UInt32): SC_HANDLE {
+    return OpenSCManagerA(lpMachineName, lpDatabaseName, dwDesiredAccess)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_OpenSCManagerW == "on"]
+foreign {
     // param-hint: lpMachineName optional
     // param-hint: lpDatabaseName optional
     // pinvoke-hint: SetLastError
     func OpenSCManagerW(lpMachineName: CPointer<UInt16>, lpDatabaseName: CPointer<UInt16>, dwDesiredAccess: UInt32): SC_HANDLE
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_OpenSCManagerW == "on"]
+public unsafe func Windows_OpenSCManagerW(lpMachineName: CPointer<UInt16>, lpDatabaseName: CPointer<UInt16>, dwDesiredAccess: UInt32): SC_HANDLE {
+    return OpenSCManagerW(lpMachineName, lpDatabaseName, dwDesiredAccess)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_OpenServiceA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func OpenServiceA(hSCManager: SC_HANDLE, lpServiceName: CPointer<UInt8>, dwDesiredAccess: UInt32): SC_HANDLE
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_OpenServiceA == "on"]
+public unsafe func Windows_OpenServiceA(hSCManager: SC_HANDLE, lpServiceName: CPointer<UInt8>, dwDesiredAccess: UInt32): SC_HANDLE {
+    return OpenServiceA(hSCManager, lpServiceName, dwDesiredAccess)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_OpenServiceW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func OpenServiceW(hSCManager: SC_HANDLE, lpServiceName: CPointer<UInt16>, dwDesiredAccess: UInt32): SC_HANDLE
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_OpenServiceW == "on"]
+public unsafe func Windows_OpenServiceW(hSCManager: SC_HANDLE, lpServiceName: CPointer<UInt16>, dwDesiredAccess: UInt32): SC_HANDLE {
+    return OpenServiceW(hSCManager, lpServiceName, dwDesiredAccess)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_QueryServiceConfig2A == "on"]
+foreign {
     // param-hint: lpBuffer bytes=param[3] optional
     // pinvoke-hint: SetLastError
     func QueryServiceConfig2A(hService: SC_HANDLE, dwInfoLevel: SERVICE_CONFIGAbi, lpBuffer: CPointer<UInt8>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_QueryServiceConfig2A == "on"]
+public unsafe func Windows_QueryServiceConfig2A(hService: SC_HANDLE, dwInfoLevel: SERVICE_CONFIGAbi, lpBuffer: CPointer<UInt8>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Int32 {
+    return QueryServiceConfig2A(hService, dwInfoLevel, lpBuffer, cbBufSize, pcbBytesNeeded)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_QueryServiceConfig2W == "on"]
+foreign {
     // param-hint: lpBuffer bytes=param[3] optional
     // pinvoke-hint: SetLastError
     func QueryServiceConfig2W(hService: SC_HANDLE, dwInfoLevel: SERVICE_CONFIGAbi, lpBuffer: CPointer<UInt8>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_QueryServiceConfig2W == "on"]
+public unsafe func Windows_QueryServiceConfig2W(hService: SC_HANDLE, dwInfoLevel: SERVICE_CONFIGAbi, lpBuffer: CPointer<UInt8>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Int32 {
+    return QueryServiceConfig2W(hService, dwInfoLevel, lpBuffer, cbBufSize, pcbBytesNeeded)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_QueryServiceConfigA == "on"]
+foreign {
     // param-hint: lpServiceConfig bytes=param[2] optional
     // pinvoke-hint: SetLastError
     func QueryServiceConfigA(hService: SC_HANDLE, lpServiceConfig: CPointer<QUERY_SERVICE_CONFIGAAbi>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_QueryServiceConfigA == "on"]
+public unsafe func Windows_QueryServiceConfigA(hService: SC_HANDLE, lpServiceConfig: CPointer<QUERY_SERVICE_CONFIGAAbi>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Int32 {
+    return QueryServiceConfigA(hService, lpServiceConfig, cbBufSize, pcbBytesNeeded)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_QueryServiceConfigW == "on"]
+foreign {
     // param-hint: lpServiceConfig bytes=param[2] optional
     // pinvoke-hint: SetLastError
     func QueryServiceConfigW(hService: SC_HANDLE, lpServiceConfig: CPointer<QUERY_SERVICE_CONFIGWAbi>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_QueryServiceConfigW == "on"]
+public unsafe func Windows_QueryServiceConfigW(hService: SC_HANDLE, lpServiceConfig: CPointer<QUERY_SERVICE_CONFIGWAbi>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Int32 {
+    return QueryServiceConfigW(hService, lpServiceConfig, cbBufSize, pcbBytesNeeded)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_QueryServiceDynamicInformation == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func QueryServiceDynamicInformation(hServiceStatus: SERVICE_STATUS_HANDLE, dwInfoLevel: UInt32, ppDynamicInfo: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_QueryServiceDynamicInformation == "on"]
+public unsafe func Windows_QueryServiceDynamicInformation(hServiceStatus: SERVICE_STATUS_HANDLE, dwInfoLevel: UInt32, ppDynamicInfo: CPointer<CPointer<Unit>>): Int32 {
+    return QueryServiceDynamicInformation(hServiceStatus, dwInfoLevel, ppDynamicInfo)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_QueryServiceLockStatusA == "on"]
+foreign {
     // param-hint: lpLockStatus bytes=param[2] optional
     // pinvoke-hint: SetLastError
     func QueryServiceLockStatusA(hSCManager: SC_HANDLE, lpLockStatus: CPointer<QUERY_SERVICE_LOCK_STATUSAAbi>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_QueryServiceLockStatusA == "on"]
+public unsafe func Windows_QueryServiceLockStatusA(hSCManager: SC_HANDLE, lpLockStatus: CPointer<QUERY_SERVICE_LOCK_STATUSAAbi>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Int32 {
+    return QueryServiceLockStatusA(hSCManager, lpLockStatus, cbBufSize, pcbBytesNeeded)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_QueryServiceLockStatusW == "on"]
+foreign {
     // param-hint: lpLockStatus bytes=param[2] optional
     // pinvoke-hint: SetLastError
     func QueryServiceLockStatusW(hSCManager: SC_HANDLE, lpLockStatus: CPointer<QUERY_SERVICE_LOCK_STATUSWAbi>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_QueryServiceLockStatusW == "on"]
+public unsafe func Windows_QueryServiceLockStatusW(hSCManager: SC_HANDLE, lpLockStatus: CPointer<QUERY_SERVICE_LOCK_STATUSWAbi>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Int32 {
+    return QueryServiceLockStatusW(hSCManager, lpLockStatus, cbBufSize, pcbBytesNeeded)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_QueryServiceObjectSecurity == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: lpSecurityDescriptor bytes=param[3] optional
+    // pinvoke-hint: SetLastError
+    func QueryServiceObjectSecurity(hService: SC_HANDLE, dwSecurityInformation: UInt32, lpSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_QueryServiceObjectSecurity == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_QueryServiceObjectSecurity(hService: SC_HANDLE, dwSecurityInformation: UInt32, lpSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Int32 {
+    return QueryServiceObjectSecurity(hService, dwSecurityInformation, lpSecurityDescriptor, cbBufSize, pcbBytesNeeded)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_QueryServiceStatus == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func QueryServiceStatus(hService: SC_HANDLE, lpServiceStatus: CPointer<SERVICE_STATUSAbi>): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_QueryServiceStatus == "on"]
+public unsafe func Windows_QueryServiceStatus(hService: SC_HANDLE, lpServiceStatus: CPointer<SERVICE_STATUSAbi>): Int32 {
+    return QueryServiceStatus(hService, lpServiceStatus)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_QueryServiceStatusEx == "on"]
+foreign {
     // param-hint: lpBuffer bytes=param[3] optional
     // pinvoke-hint: SetLastError
     func QueryServiceStatusEx(hService: SC_HANDLE, InfoLevel: SC_STATUS_TYPEAbi, lpBuffer: CPointer<UInt8>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_QueryServiceStatusEx == "on"]
+public unsafe func Windows_QueryServiceStatusEx(hService: SC_HANDLE, InfoLevel: SC_STATUS_TYPEAbi, lpBuffer: CPointer<UInt8>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Int32 {
+    return QueryServiceStatusEx(hService, InfoLevel, lpBuffer, cbBufSize, pcbBytesNeeded)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_RegisterServiceCtrlHandlerA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func RegisterServiceCtrlHandlerA(lpServiceName: CPointer<UInt8>, lpHandlerProc: LPHANDLER_FUNCTION): SERVICE_STATUS_HANDLE
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_RegisterServiceCtrlHandlerA == "on"]
+public unsafe func Windows_RegisterServiceCtrlHandlerA(lpServiceName: CPointer<UInt8>, lpHandlerProc: LPHANDLER_FUNCTION): SERVICE_STATUS_HANDLE {
+    return RegisterServiceCtrlHandlerA(lpServiceName, lpHandlerProc)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_RegisterServiceCtrlHandlerExA == "on"]
+foreign {
     // param-hint: lpContext optional
     // pinvoke-hint: SetLastError
     func RegisterServiceCtrlHandlerExA(lpServiceName: CPointer<UInt8>, lpHandlerProc: LPHANDLER_FUNCTION_EX, lpContext: CPointer<Unit>): SERVICE_STATUS_HANDLE
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_RegisterServiceCtrlHandlerExA == "on"]
+public unsafe func Windows_RegisterServiceCtrlHandlerExA(lpServiceName: CPointer<UInt8>, lpHandlerProc: LPHANDLER_FUNCTION_EX, lpContext: CPointer<Unit>): SERVICE_STATUS_HANDLE {
+    return RegisterServiceCtrlHandlerExA(lpServiceName, lpHandlerProc, lpContext)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_RegisterServiceCtrlHandlerExW == "on"]
+foreign {
     // param-hint: lpContext optional
     // pinvoke-hint: SetLastError
     func RegisterServiceCtrlHandlerExW(lpServiceName: CPointer<UInt16>, lpHandlerProc: LPHANDLER_FUNCTION_EX, lpContext: CPointer<Unit>): SERVICE_STATUS_HANDLE
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_RegisterServiceCtrlHandlerExW == "on"]
+public unsafe func Windows_RegisterServiceCtrlHandlerExW(lpServiceName: CPointer<UInt16>, lpHandlerProc: LPHANDLER_FUNCTION_EX, lpContext: CPointer<Unit>): SERVICE_STATUS_HANDLE {
+    return RegisterServiceCtrlHandlerExW(lpServiceName, lpHandlerProc, lpContext)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_RegisterServiceCtrlHandlerW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func RegisterServiceCtrlHandlerW(lpServiceName: CPointer<UInt16>, lpHandlerProc: LPHANDLER_FUNCTION): SERVICE_STATUS_HANDLE
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_RegisterServiceCtrlHandlerW == "on"]
+public unsafe func Windows_RegisterServiceCtrlHandlerW(lpServiceName: CPointer<UInt16>, lpHandlerProc: LPHANDLER_FUNCTION): SERVICE_STATUS_HANDLE {
+    return RegisterServiceCtrlHandlerW(lpServiceName, lpHandlerProc)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_SetServiceBits == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetServiceBits(hServiceStatus: SERVICE_STATUS_HANDLE, dwServiceBits: UInt32, bSetBitsOn: Int32, bUpdateImmediately: Int32): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_SetServiceBits == "on"]
+public unsafe func Windows_SetServiceBits(hServiceStatus: SERVICE_STATUS_HANDLE, dwServiceBits: UInt32, bSetBitsOn: Int32, bUpdateImmediately: Int32): Int32 {
+    return SetServiceBits(hServiceStatus, dwServiceBits, bSetBitsOn, bUpdateImmediately)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_SetServiceObjectSecurity == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetServiceObjectSecurity(hService: SC_HANDLE, dwSecurityInformation: Win32_Security.OBJECT_SECURITY_INFORMATIONAbi, lpSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_SetServiceObjectSecurity == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_SetServiceObjectSecurity(hService: SC_HANDLE, dwSecurityInformation: Win32_Security.OBJECT_SECURITY_INFORMATIONAbi, lpSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): Int32 {
+    return SetServiceObjectSecurity(hService, dwSecurityInformation, lpSecurityDescriptor)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_SetServiceStatus == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetServiceStatus(hServiceStatus: SERVICE_STATUS_HANDLE, lpServiceStatus: CPointer<SERVICE_STATUSAbi>): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_SetServiceStatus == "on"]
+public unsafe func Windows_SetServiceStatus(hServiceStatus: SERVICE_STATUS_HANDLE, lpServiceStatus: CPointer<SERVICE_STATUSAbi>): Int32 {
+    return SetServiceStatus(hServiceStatus, lpServiceStatus)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_StartServiceA == "on"]
+foreign {
     // param-hint: lpServiceArgVectors len=param[1] optional
     // pinvoke-hint: SetLastError
     func StartServiceA(hService: SC_HANDLE, dwNumServiceArgs: UInt32, lpServiceArgVectors: CPointer<CPointer<UInt8>>): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_StartServiceA == "on"]
+public unsafe func Windows_StartServiceA(hService: SC_HANDLE, dwNumServiceArgs: UInt32, lpServiceArgVectors: CPointer<CPointer<UInt8>>): Int32 {
+    return StartServiceA(hService, dwNumServiceArgs, lpServiceArgVectors)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_StartServiceCtrlDispatcherA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func StartServiceCtrlDispatcherA(lpServiceStartTable: CPointer<SERVICE_TABLE_ENTRYAAbi>): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_StartServiceCtrlDispatcherA == "on"]
+public unsafe func Windows_StartServiceCtrlDispatcherA(lpServiceStartTable: CPointer<SERVICE_TABLE_ENTRYAAbi>): Int32 {
+    return StartServiceCtrlDispatcherA(lpServiceStartTable)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_StartServiceCtrlDispatcherW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func StartServiceCtrlDispatcherW(lpServiceStartTable: CPointer<SERVICE_TABLE_ENTRYWAbi>): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_StartServiceCtrlDispatcherW == "on"]
+public unsafe func Windows_StartServiceCtrlDispatcherW(lpServiceStartTable: CPointer<SERVICE_TABLE_ENTRYWAbi>): Int32 {
+    return StartServiceCtrlDispatcherW(lpServiceStartTable)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_StartServiceW == "on"]
+foreign {
     // param-hint: lpServiceArgVectors len=param[1] optional
     // pinvoke-hint: SetLastError
     func StartServiceW(hService: SC_HANDLE, dwNumServiceArgs: UInt32, lpServiceArgVectors: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_StartServiceW == "on"]
+public unsafe func Windows_StartServiceW(hService: SC_HANDLE, dwNumServiceArgs: UInt32, lpServiceArgVectors: CPointer<CPointer<UInt16>>): Int32 {
+    return StartServiceW(hService, dwNumServiceArgs, lpServiceArgVectors)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_UnlockServiceDatabase == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func UnlockServiceDatabase(ScLock: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_UnlockServiceDatabase == "on"]
+public unsafe func Windows_UnlockServiceDatabase(ScLock: CPointer<Unit>): Int32 {
+    return UnlockServiceDatabase(ScLock)
+}
+
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_WaitServiceState == "on"]
+foreign {
     // param-hint: dwTimeout optional
     // param-hint: hCancelEvent optional
     func WaitServiceState(hService: SC_HANDLE, dwNotify: UInt32, dwTimeout: UInt32, hCancelEvent: CPointer<Unit>): UInt32
 }
 
-@When[ADVAPI32 == "on" && Windows_Win32_Security == "on"]
-foreign {
-    // param-hint: lpSecurityDescriptor bytes=param[3] optional
-    // pinvoke-hint: SetLastError
-    func QueryServiceObjectSecurity(hService: SC_HANDLE, dwSecurityInformation: UInt32, lpSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func SetServiceObjectSecurity(hService: SC_HANDLE, dwSecurityInformation: Win32_Security.OBJECT_SECURITY_INFORMATIONAbi, lpSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): Int32
+@When[Windows_Win32_System_Services == "on" && ADVAPI32 == "on" && Windows_Win32_System_Services_WaitServiceState == "on"]
+public unsafe func Windows_WaitServiceState(hService: SC_HANDLE, dwNotify: UInt32, dwTimeout: UInt32, hCancelEvent: CPointer<Unit>): UInt32 {
+    return WaitServiceState(hService, dwNotify, dwTimeout, hCancelEvent)
 }
 
-@When[SECHOST == "on"]
+@When[Windows_Win32_System_Services == "on" && SECHOST == "on" && Windows_Win32_System_Services_SubscribeServiceChangeNotifications == "on"]
 foreign {
     // param-hint: pCallbackContext optional
     func SubscribeServiceChangeNotifications(hService: SC_HANDLE, eEventType: SC_EVENT_TYPEAbi, pCallback: PSC_NOTIFICATION_CALLBACK, pCallbackContext: CPointer<Unit>, pSubscription: CPointer<PSC_NOTIFICATION_REGISTRATION>): UInt32
+}
+
+@When[Windows_Win32_System_Services == "on" && SECHOST == "on" && Windows_Win32_System_Services_SubscribeServiceChangeNotifications == "on"]
+public unsafe func Windows_SubscribeServiceChangeNotifications(hService: SC_HANDLE, eEventType: SC_EVENT_TYPEAbi, pCallback: PSC_NOTIFICATION_CALLBACK, pCallbackContext: CPointer<Unit>, pSubscription: CPointer<PSC_NOTIFICATION_REGISTRATION>): UInt32 {
+    return SubscribeServiceChangeNotifications(hService, eEventType, pCallback, pCallbackContext, pSubscription)
+}
+
+@When[Windows_Win32_System_Services == "on" && SECHOST == "on" && Windows_Win32_System_Services_UnsubscribeServiceChangeNotifications == "on"]
+foreign {
     func UnsubscribeServiceChangeNotifications(pSubscription: PSC_NOTIFICATION_REGISTRATION): Unit
 }
 
-@When[API_MS_WIN_SERVICE_CORE_L1_1_3 == "on" && Windows_Win32_System_Registry == "on"]
+@When[Windows_Win32_System_Services == "on" && SECHOST == "on" && Windows_Win32_System_Services_UnsubscribeServiceChangeNotifications == "on"]
+public unsafe func Windows_UnsubscribeServiceChangeNotifications(pSubscription: PSC_NOTIFICATION_REGISTRATION): Unit {
+    UnsubscribeServiceChangeNotifications(pSubscription)
+}
+
+@When[Windows_Win32_System_Services == "on" && API_MS_WIN_SERVICE_CORE_L1_1_3 == "on" && Windows_Win32_System_Services_GetServiceRegistryStateKey == "on" && Windows_Win32_System_Registry == "on"]
 foreign {
     func GetServiceRegistryStateKey(ServiceStatusHandle: SERVICE_STATUS_HANDLE, StateType: SERVICE_REGISTRY_STATE_TYPEAbi, AccessMask: UInt32, ServiceStateKey: CPointer<Win32_System_Registry.HKEY>): UInt32
 }
 
-@When[API_MS_WIN_SERVICE_CORE_L1_1_4 == "on"]
+@When[Windows_Win32_System_Services == "on" && API_MS_WIN_SERVICE_CORE_L1_1_3 == "on" && Windows_Win32_System_Services_GetServiceRegistryStateKey == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_GetServiceRegistryStateKey(ServiceStatusHandle: SERVICE_STATUS_HANDLE, StateType: SERVICE_REGISTRY_STATE_TYPEAbi, AccessMask: UInt32, ServiceStateKey: CPointer<Win32_System_Registry.HKEY>): UInt32 {
+    return GetServiceRegistryStateKey(ServiceStatusHandle, StateType, AccessMask, ServiceStateKey)
+}
+
+@When[Windows_Win32_System_Services == "on" && API_MS_WIN_SERVICE_CORE_L1_1_4 == "on" && Windows_Win32_System_Services_GetServiceDirectory == "on"]
 foreign {
     // param-hint: lpPathBuffer len=param[3] optional
     func GetServiceDirectory(hServiceStatus: SERVICE_STATUS_HANDLE, eDirectoryType: SERVICE_DIRECTORY_TYPEAbi, lpPathBuffer: CPointer<UInt16>, cchPathBufferLength: UInt32, lpcchRequiredBufferLength: CPointer<UInt32>): UInt32
 }
 
-@When[API_MS_WIN_SERVICE_CORE_L1_1_5 == "on"]
+@When[Windows_Win32_System_Services == "on" && API_MS_WIN_SERVICE_CORE_L1_1_4 == "on" && Windows_Win32_System_Services_GetServiceDirectory == "on"]
+public unsafe func Windows_GetServiceDirectory(hServiceStatus: SERVICE_STATUS_HANDLE, eDirectoryType: SERVICE_DIRECTORY_TYPEAbi, lpPathBuffer: CPointer<UInt16>, cchPathBufferLength: UInt32, lpcchRequiredBufferLength: CPointer<UInt32>): UInt32 {
+    return GetServiceDirectory(hServiceStatus, eDirectoryType, lpPathBuffer, cchPathBufferLength, lpcchRequiredBufferLength)
+}
+
+@When[Windows_Win32_System_Services == "on" && API_MS_WIN_SERVICE_CORE_L1_1_5 == "on" && Windows_Win32_System_Services_GetSharedServiceDirectory == "on"]
 foreign {
     // param-hint: PathBuffer len=param[3] optional
     func GetSharedServiceDirectory(ServiceHandle: SC_HANDLE, DirectoryType: SERVICE_SHARED_DIRECTORY_TYPEAbi, PathBuffer: CPointer<UInt16>, PathBufferLength: UInt32, RequiredBufferLength: CPointer<UInt32>): UInt32
 }
 
-@When[API_MS_WIN_SERVICE_CORE_L1_1_5 == "on" && Windows_Win32_System_Registry == "on"]
+@When[Windows_Win32_System_Services == "on" && API_MS_WIN_SERVICE_CORE_L1_1_5 == "on" && Windows_Win32_System_Services_GetSharedServiceDirectory == "on"]
+public unsafe func Windows_GetSharedServiceDirectory(ServiceHandle: SC_HANDLE, DirectoryType: SERVICE_SHARED_DIRECTORY_TYPEAbi, PathBuffer: CPointer<UInt16>, PathBufferLength: UInt32, RequiredBufferLength: CPointer<UInt32>): UInt32 {
+    return GetSharedServiceDirectory(ServiceHandle, DirectoryType, PathBuffer, PathBufferLength, RequiredBufferLength)
+}
+
+@When[Windows_Win32_System_Services == "on" && API_MS_WIN_SERVICE_CORE_L1_1_5 == "on" && Windows_Win32_System_Services_GetSharedServiceRegistryStateKey == "on" && Windows_Win32_System_Registry == "on"]
 foreign {
     func GetSharedServiceRegistryStateKey(ServiceHandle: SC_HANDLE, StateType: SERVICE_SHARED_REGISTRY_STATE_TYPEAbi, AccessMask: UInt32, ServiceStateKey: CPointer<Win32_System_Registry.HKEY>): UInt32
+}
+
+@When[Windows_Win32_System_Services == "on" && API_MS_WIN_SERVICE_CORE_L1_1_5 == "on" && Windows_Win32_System_Services_GetSharedServiceRegistryStateKey == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_GetSharedServiceRegistryStateKey(ServiceHandle: SC_HANDLE, StateType: SERVICE_SHARED_REGISTRY_STATE_TYPEAbi, AccessMask: UInt32, ServiceStateKey: CPointer<Win32_System_Registry.HKEY>): UInt32 {
+    return GetSharedServiceRegistryStateKey(ServiceHandle, StateType, AccessMask, ServiceStateKey)
 }
 
 @When[Windows_Win32_System_Services == "on"]

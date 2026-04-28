@@ -3,9 +3,7 @@ package windows_sys.Win32.Storage.Vss
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Storage_VirtualDiskService == "on"]
 import windows_sys.Win32.Storage.VirtualDiskService as Win32_Storage_VirtualDiskService
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l2 as Win32__impl_l2
@@ -3764,9 +3762,14 @@ public class IVssAdminEx <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[VSSAPI == "on"]
+@When[Windows_Win32_Storage_Vss == "on" && VSSAPI == "on" && Windows_Win32_Storage_Vss_CreateVssExpressWriterInternal == "on"]
 foreign {
     func CreateVssExpressWriterInternal(ppWriter: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Storage_Vss == "on" && VSSAPI == "on" && Windows_Win32_Storage_Vss_CreateVssExpressWriterInternal == "on"]
+public unsafe func Windows_CreateVssExpressWriterInternal(ppWriter: CPointer<CPointer<Unit>>): Int32 {
+    return CreateVssExpressWriterInternal(ppWriter)
 }
 
 @When[Windows_Win32_Storage_Vss == "on"]

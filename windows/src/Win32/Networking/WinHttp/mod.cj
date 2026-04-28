@@ -4,11 +4,11 @@
 package windows.Win32.Networking.WinHttp
 
 import std.collection.*
+import windows_libloading
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
@@ -3298,137 +3298,675 @@ extend WINHTTP_WEB_SOCKET_ASYNC_RESULT <: windows_core.CopyType & windows_core.R
     }
 }
 
-@When[WINHTTP == "on"]
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpAddRequestHeaders == "on"]
 foreign {
     // param-hint: lpszHeaders len=param[2]
     // pinvoke-hint: SetLastError
     func WinHttpAddRequestHeaders(hRequest: CPointer<Unit>, lpszHeaders: CPointer<UInt16>, dwHeadersLength: UInt32, dwModifiers: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpAddRequestHeaders == "on"]
+public unsafe func Windows_WinHttpAddRequestHeaders(hRequest: CPointer<Unit>, lpszHeaders: CPointer<UInt16>, dwHeadersLength: UInt32, dwModifiers: UInt32): Int32 {
+    return WinHttpAddRequestHeaders(hRequest, lpszHeaders, dwHeadersLength, dwModifiers)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpAddRequestHeadersEx == "on"]
+foreign {
     // param-hint: pHeaders len=param[4]
     func WinHttpAddRequestHeadersEx(hRequest: CPointer<Unit>, dwModifiers: UInt32, ullFlags: UInt64, ullExtra: UInt64, cHeaders: UInt32, pHeaders: CPointer<WINHTTP_EXTENDED_HEADERAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpAddRequestHeadersEx == "on"]
+public unsafe func Windows_WinHttpAddRequestHeadersEx(hRequest: CPointer<Unit>, dwModifiers: UInt32, ullFlags: UInt64, ullExtra: UInt64, cHeaders: UInt32, pHeaders: CPointer<WINHTTP_EXTENDED_HEADERAbi>): UInt32 {
+    return WinHttpAddRequestHeadersEx(hRequest, dwModifiers, ullFlags, ullExtra, cHeaders, pHeaders)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpCheckPlatform == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func WinHttpCheckPlatform(): Int32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpCheckPlatform == "on"]
+public unsafe func Windows_WinHttpCheckPlatform(): Int32 {
+    return WinHttpCheckPlatform()
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpCloseHandle == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func WinHttpCloseHandle(hInternet: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpCloseHandle == "on"]
+public unsafe func Windows_WinHttpCloseHandle(hInternet: CPointer<Unit>): Int32 {
+    return WinHttpCloseHandle(hInternet)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpConnect == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func WinHttpConnect(hSession: CPointer<Unit>, pswzServerName: CPointer<UInt16>, nServerPort: UInt16, dwReserved: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpConnect == "on"]
+public unsafe func Windows_WinHttpConnect(hSession: CPointer<Unit>, pswzServerName: CPointer<UInt16>, nServerPort: UInt16, dwReserved: UInt32): CPointer<Unit> {
+    return WinHttpConnect(hSession, pswzServerName, nServerPort, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpCrackUrl == "on"]
+foreign {
     // param-hint: pwszUrl len=param[1]
     // pinvoke-hint: SetLastError
     func WinHttpCrackUrl(pwszUrl: CPointer<UInt16>, dwUrlLength: UInt32, dwFlags: UInt32, lpUrlComponents: CPointer<URL_COMPONENTSAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpCrackUrl == "on"]
+public unsafe func Windows_WinHttpCrackUrl(pwszUrl: CPointer<UInt16>, dwUrlLength: UInt32, dwFlags: UInt32, lpUrlComponents: CPointer<URL_COMPONENTSAbi>): Int32 {
+    return WinHttpCrackUrl(pwszUrl, dwUrlLength, dwFlags, lpUrlComponents)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpCreateProxyResolver == "on"]
+foreign {
     func WinHttpCreateProxyResolver(hSession: CPointer<Unit>, phResolver: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpCreateProxyResolver == "on"]
+public unsafe func Windows_WinHttpCreateProxyResolver(hSession: CPointer<Unit>, phResolver: CPointer<CPointer<Unit>>): UInt32 {
+    return WinHttpCreateProxyResolver(hSession, phResolver)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpCreateUrl == "on"]
+foreign {
     // param-hint: pwszUrl len=param[3] optional
     // pinvoke-hint: SetLastError
     func WinHttpCreateUrl(lpUrlComponents: CPointer<URL_COMPONENTSAbi>, dwFlags: WIN_HTTP_CREATE_URL_FLAGSAbi, pwszUrl: CPointer<UInt16>, pdwUrlLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpCreateUrl == "on"]
+public unsafe func Windows_WinHttpCreateUrl(lpUrlComponents: CPointer<URL_COMPONENTSAbi>, dwFlags: WIN_HTTP_CREATE_URL_FLAGSAbi, pwszUrl: CPointer<UInt16>, pdwUrlLength: CPointer<UInt32>): Int32 {
+    return WinHttpCreateUrl(lpUrlComponents, dwFlags, pwszUrl, pdwUrlLength)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpDetectAutoProxyConfigUrl == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func WinHttpDetectAutoProxyConfigUrl(dwAutoDetectFlags: UInt32, ppwstrAutoConfigUrl: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpDetectAutoProxyConfigUrl == "on"]
+public unsafe func Windows_WinHttpDetectAutoProxyConfigUrl(dwAutoDetectFlags: UInt32, ppwstrAutoConfigUrl: CPointer<CPointer<UInt16>>): Int32 {
+    return WinHttpDetectAutoProxyConfigUrl(dwAutoDetectFlags, ppwstrAutoConfigUrl)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpFreeProxyResult == "on"]
+foreign {
     func WinHttpFreeProxyResult(pProxyResult: CPointer<WINHTTP_PROXY_RESULTAbi>): Unit
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpFreeProxyResult == "on"]
+public unsafe func Windows_WinHttpFreeProxyResult(pProxyResult: CPointer<WINHTTP_PROXY_RESULTAbi>): Unit {
+    WinHttpFreeProxyResult(pProxyResult)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpFreeProxyResultEx == "on"]
+foreign {
     func WinHttpFreeProxyResultEx(pProxyResultEx: CPointer<WINHTTP_PROXY_RESULT_EXAbi>): Unit
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpFreeProxyResultEx == "on"]
+public unsafe func Windows_WinHttpFreeProxyResultEx(pProxyResultEx: CPointer<WINHTTP_PROXY_RESULT_EXAbi>): Unit {
+    WinHttpFreeProxyResultEx(pProxyResultEx)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpFreeProxySettings == "on"]
+foreign {
     func WinHttpFreeProxySettings(pWinHttpProxySettings: CPointer<WINHTTP_PROXY_SETTINGSAbi>): Unit
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpFreeProxySettings == "on"]
+public unsafe func Windows_WinHttpFreeProxySettings(pWinHttpProxySettings: CPointer<WINHTTP_PROXY_SETTINGSAbi>): Unit {
+    WinHttpFreeProxySettings(pWinHttpProxySettings)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpFreeProxySettingsEx == "on"]
+foreign {
     func WinHttpFreeProxySettingsEx(ProxySettingsType: WINHTTP_PROXY_SETTINGS_TYPEAbi, pProxySettingsEx: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpFreeProxySettingsEx == "on"]
+public unsafe func Windows_WinHttpFreeProxySettingsEx(ProxySettingsType: WINHTTP_PROXY_SETTINGS_TYPEAbi, pProxySettingsEx: CPointer<Unit>): UInt32 {
+    return WinHttpFreeProxySettingsEx(ProxySettingsType, pProxySettingsEx)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpFreeQueryConnectionGroupResult == "on"]
+foreign {
     func WinHttpFreeQueryConnectionGroupResult(pResult: CPointer<WINHTTP_QUERY_CONNECTION_GROUP_RESULTAbi>): Unit
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpFreeQueryConnectionGroupResult == "on"]
+public unsafe func Windows_WinHttpFreeQueryConnectionGroupResult(pResult: CPointer<WINHTTP_QUERY_CONNECTION_GROUP_RESULTAbi>): Unit {
+    WinHttpFreeQueryConnectionGroupResult(pResult)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpGetDefaultProxyConfiguration == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func WinHttpGetDefaultProxyConfiguration(pProxyInfo: CPointer<WINHTTP_PROXY_INFOAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpGetDefaultProxyConfiguration == "on"]
+public unsafe func Windows_WinHttpGetDefaultProxyConfiguration(pProxyInfo: CPointer<WINHTTP_PROXY_INFOAbi>): Int32 {
+    return WinHttpGetDefaultProxyConfiguration(pProxyInfo)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpGetIEProxyConfigForCurrentUser == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func WinHttpGetIEProxyConfigForCurrentUser(pProxyConfig: CPointer<WINHTTP_CURRENT_USER_IE_PROXY_CONFIGAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpGetIEProxyConfigForCurrentUser == "on"]
+public unsafe func Windows_WinHttpGetIEProxyConfigForCurrentUser(pProxyConfig: CPointer<WINHTTP_CURRENT_USER_IE_PROXY_CONFIGAbi>): Int32 {
+    return WinHttpGetIEProxyConfigForCurrentUser(pProxyConfig)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpGetProxyForUrl == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func WinHttpGetProxyForUrl(hSession: CPointer<Unit>, lpcwszUrl: CPointer<UInt16>, pAutoProxyOptions: CPointer<WINHTTP_AUTOPROXY_OPTIONSAbi>, pProxyInfo: CPointer<WINHTTP_PROXY_INFOAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpGetProxyForUrl == "on"]
+public unsafe func Windows_WinHttpGetProxyForUrl(hSession: CPointer<Unit>, lpcwszUrl: CPointer<UInt16>, pAutoProxyOptions: CPointer<WINHTTP_AUTOPROXY_OPTIONSAbi>, pProxyInfo: CPointer<WINHTTP_PROXY_INFOAbi>): Int32 {
+    return WinHttpGetProxyForUrl(hSession, lpcwszUrl, pAutoProxyOptions, pProxyInfo)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpGetProxyForUrlEx == "on"]
+foreign {
     // param-hint: pContext optional
     func WinHttpGetProxyForUrlEx(hResolver: CPointer<Unit>, pcwszUrl: CPointer<UInt16>, pAutoProxyOptions: CPointer<WINHTTP_AUTOPROXY_OPTIONSAbi>, pContext: UIntNative): UInt32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpGetProxyForUrlEx == "on"]
+public unsafe func Windows_WinHttpGetProxyForUrlEx(hResolver: CPointer<Unit>, pcwszUrl: CPointer<UInt16>, pAutoProxyOptions: CPointer<WINHTTP_AUTOPROXY_OPTIONSAbi>, pContext: UIntNative): UInt32 {
+    return WinHttpGetProxyForUrlEx(hResolver, pcwszUrl, pAutoProxyOptions, pContext)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpGetProxyForUrlEx2 == "on"]
+foreign {
     // param-hint: pInterfaceSelectionContext bytes=param[3] optional
     // param-hint: pContext optional
     func WinHttpGetProxyForUrlEx2(hResolver: CPointer<Unit>, pcwszUrl: CPointer<UInt16>, pAutoProxyOptions: CPointer<WINHTTP_AUTOPROXY_OPTIONSAbi>, cbInterfaceSelectionContext: UInt32, pInterfaceSelectionContext: CPointer<UInt8>, pContext: UIntNative): UInt32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpGetProxyForUrlEx2 == "on"]
+public unsafe func Windows_WinHttpGetProxyForUrlEx2(hResolver: CPointer<Unit>, pcwszUrl: CPointer<UInt16>, pAutoProxyOptions: CPointer<WINHTTP_AUTOPROXY_OPTIONSAbi>, cbInterfaceSelectionContext: UInt32, pInterfaceSelectionContext: CPointer<UInt8>, pContext: UIntNative): UInt32 {
+    return WinHttpGetProxyForUrlEx2(hResolver, pcwszUrl, pAutoProxyOptions, cbInterfaceSelectionContext, pInterfaceSelectionContext, pContext)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpGetProxyResult == "on"]
+foreign {
     func WinHttpGetProxyResult(hResolver: CPointer<Unit>, pProxyResult: CPointer<WINHTTP_PROXY_RESULTAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpGetProxyResult == "on"]
+public unsafe func Windows_WinHttpGetProxyResult(hResolver: CPointer<Unit>, pProxyResult: CPointer<WINHTTP_PROXY_RESULTAbi>): UInt32 {
+    return WinHttpGetProxyResult(hResolver, pProxyResult)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpGetProxyResultEx == "on"]
+foreign {
     func WinHttpGetProxyResultEx(hResolver: CPointer<Unit>, pProxyResultEx: CPointer<WINHTTP_PROXY_RESULT_EXAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpGetProxyResultEx == "on"]
+public unsafe func Windows_WinHttpGetProxyResultEx(hResolver: CPointer<Unit>, pProxyResultEx: CPointer<WINHTTP_PROXY_RESULT_EXAbi>): UInt32 {
+    return WinHttpGetProxyResultEx(hResolver, pProxyResultEx)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpGetProxySettingsEx == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: pProxySettingsParam optional
+    // param-hint: pContext optional
+    func WinHttpGetProxySettingsEx(hResolver: CPointer<Unit>, ProxySettingsType: WINHTTP_PROXY_SETTINGS_TYPEAbi, pProxySettingsParam: CPointer<WINHTTP_PROXY_SETTINGS_PARAMAbi>, pContext: UIntNative): UInt32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpGetProxySettingsEx == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_WinHttpGetProxySettingsEx(hResolver: CPointer<Unit>, ProxySettingsType: WINHTTP_PROXY_SETTINGS_TYPEAbi, pProxySettingsParam: CPointer<WINHTTP_PROXY_SETTINGS_PARAMAbi>, pContext: UIntNative): UInt32 {
+    return WinHttpGetProxySettingsEx(hResolver, ProxySettingsType, pProxySettingsParam, pContext)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpGetProxySettingsResultEx == "on"]
+foreign {
     func WinHttpGetProxySettingsResultEx(hResolver: CPointer<Unit>, pProxySettingsEx: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpGetProxySettingsResultEx == "on"]
+public unsafe func Windows_WinHttpGetProxySettingsResultEx(hResolver: CPointer<Unit>, pProxySettingsEx: CPointer<Unit>): UInt32 {
+    return WinHttpGetProxySettingsResultEx(hResolver, pProxySettingsEx)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpGetProxySettingsVersion == "on"]
+foreign {
     func WinHttpGetProxySettingsVersion(hSession: CPointer<Unit>, pdwProxySettingsVersion: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpGetProxySettingsVersion == "on"]
+public unsafe func Windows_WinHttpGetProxySettingsVersion(hSession: CPointer<Unit>, pdwProxySettingsVersion: CPointer<UInt32>): UInt32 {
+    return WinHttpGetProxySettingsVersion(hSession, pdwProxySettingsVersion)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpOpen == "on"]
+foreign {
     // param-hint: pszAgentW optional
     // param-hint: pszProxyW optional
     // param-hint: pszProxyBypassW optional
     // pinvoke-hint: SetLastError
     func WinHttpOpen(pszAgentW: CPointer<UInt16>, dwAccessType: WINHTTP_ACCESS_TYPEAbi, pszProxyW: CPointer<UInt16>, pszProxyBypassW: CPointer<UInt16>, dwFlags: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpOpen == "on"]
+public unsafe func Windows_WinHttpOpen(pszAgentW: CPointer<UInt16>, dwAccessType: WINHTTP_ACCESS_TYPEAbi, pszProxyW: CPointer<UInt16>, pszProxyBypassW: CPointer<UInt16>, dwFlags: UInt32): CPointer<Unit> {
+    return WinHttpOpen(pszAgentW, dwAccessType, pszProxyW, pszProxyBypassW, dwFlags)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpOpenRequest == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func WinHttpOpenRequest(hConnect: CPointer<Unit>, pwszVerb: CPointer<UInt16>, pwszObjectName: CPointer<UInt16>, pwszVersion: CPointer<UInt16>, pwszReferrer: CPointer<UInt16>, ppwszAcceptTypes: CPointer<CPointer<UInt16>>, dwFlags: WINHTTP_OPEN_REQUEST_FLAGSAbi): CPointer<Unit>
-    // param-hint: dwContext optional
-    func WinHttpProtocolCompleteUpgrade(hRequest: CPointer<Unit>, dwContext: UIntNative): CPointer<Unit>
-    // param-hint: pvBuffer bytes=param[3]
-    func WinHttpProtocolReceive(ProtocolHandle: CPointer<Unit>, Flags: UInt64, pvBuffer: CPointer<Unit>, dwBufferLength: UInt32, pdwBytesRead: CPointer<UInt32>): UInt32
-    // param-hint: pvBuffer len=param[3] optional
-    func WinHttpProtocolSend(ProtocolHandle: CPointer<Unit>, Flags: UInt64, pvBuffer: CPointer<Unit>, dwBufferLength: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpOpenRequest == "on"]
+public unsafe func Windows_WinHttpOpenRequest(hConnect: CPointer<Unit>, pwszVerb: CPointer<UInt16>, pwszObjectName: CPointer<UInt16>, pwszVersion: CPointer<UInt16>, pwszReferrer: CPointer<UInt16>, ppwszAcceptTypes: CPointer<CPointer<UInt16>>, dwFlags: WINHTTP_OPEN_REQUEST_FLAGSAbi): CPointer<Unit> {
+    return WinHttpOpenRequest(hConnect, pwszVerb, pwszObjectName, pwszVersion, pwszReferrer, ppwszAcceptTypes, dwFlags)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpQueryAuthSchemes == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func WinHttpQueryAuthSchemes(hRequest: CPointer<Unit>, lpdwSupportedSchemes: CPointer<UInt32>, lpdwFirstScheme: CPointer<UInt32>, pdwAuthTarget: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpQueryAuthSchemes == "on"]
+public unsafe func Windows_WinHttpQueryAuthSchemes(hRequest: CPointer<Unit>, lpdwSupportedSchemes: CPointer<UInt32>, lpdwFirstScheme: CPointer<UInt32>, pdwAuthTarget: CPointer<UInt32>): Int32 {
+    return WinHttpQueryAuthSchemes(hRequest, lpdwSupportedSchemes, lpdwFirstScheme, pdwAuthTarget)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpQueryConnectionGroup == "on"]
+foreign {
     // param-hint: pGuidConnection optional
     func WinHttpQueryConnectionGroup(hInternet: CPointer<Unit>, pGuidConnection: CPointer<GUID>, ullFlags: UInt64, ppResult: CPointer<CPointer<WINHTTP_QUERY_CONNECTION_GROUP_RESULTAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpQueryConnectionGroup == "on"]
+public unsafe func Windows_WinHttpQueryConnectionGroup(hInternet: CPointer<Unit>, pGuidConnection: CPointer<GUID>, ullFlags: UInt64, ppResult: CPointer<CPointer<WINHTTP_QUERY_CONNECTION_GROUP_RESULTAbi>>): UInt32 {
+    return WinHttpQueryConnectionGroup(hInternet, pGuidConnection, ullFlags, ppResult)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpQueryDataAvailable == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func WinHttpQueryDataAvailable(hRequest: CPointer<Unit>, lpdwNumberOfBytesAvailable: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpQueryDataAvailable == "on"]
+public unsafe func Windows_WinHttpQueryDataAvailable(hRequest: CPointer<Unit>, lpdwNumberOfBytesAvailable: CPointer<UInt32>): Int32 {
+    return WinHttpQueryDataAvailable(hRequest, lpdwNumberOfBytesAvailable)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpQueryHeaders == "on"]
+foreign {
     // param-hint: lpBuffer bytes=param[4] optional
     // pinvoke-hint: SetLastError
     func WinHttpQueryHeaders(hRequest: CPointer<Unit>, dwInfoLevel: UInt32, pwszName: CPointer<UInt16>, lpBuffer: CPointer<Unit>, lpdwBufferLength: CPointer<UInt32>, lpdwIndex: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpQueryHeaders == "on"]
+public unsafe func Windows_WinHttpQueryHeaders(hRequest: CPointer<Unit>, dwInfoLevel: UInt32, pwszName: CPointer<UInt16>, lpBuffer: CPointer<Unit>, lpdwBufferLength: CPointer<UInt32>, lpdwIndex: CPointer<UInt32>): Int32 {
+    return WinHttpQueryHeaders(hRequest, dwInfoLevel, pwszName, lpBuffer, lpdwBufferLength, lpdwIndex)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpQueryHeadersEx == "on"]
+foreign {
     // param-hint: pdwIndex optional
     // param-hint: pHeaderName optional
     // param-hint: pBuffer bytes=param[7] optional
     // param-hint: ppHeaders len=param[9] optional
     func WinHttpQueryHeadersEx(hRequest: CPointer<Unit>, dwInfoLevel: UInt32, ullFlags: UInt64, uiCodePage: UInt32, pdwIndex: CPointer<UInt32>, pHeaderName: CPointer<WINHTTP_HEADER_NAME>, pBuffer: CPointer<Unit>, pdwBufferLength: CPointer<UInt32>, ppHeaders: CPointer<CPointer<WINHTTP_EXTENDED_HEADERAbi>>, pdwHeadersCount: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpQueryHeadersEx == "on"]
+public unsafe func Windows_WinHttpQueryHeadersEx(hRequest: CPointer<Unit>, dwInfoLevel: UInt32, ullFlags: UInt64, uiCodePage: UInt32, pdwIndex: CPointer<UInt32>, pHeaderName: CPointer<WINHTTP_HEADER_NAME>, pBuffer: CPointer<Unit>, pdwBufferLength: CPointer<UInt32>, ppHeaders: CPointer<CPointer<WINHTTP_EXTENDED_HEADERAbi>>, pdwHeadersCount: CPointer<UInt32>): UInt32 {
+    return WinHttpQueryHeadersEx(hRequest, dwInfoLevel, ullFlags, uiCodePage, pdwIndex, pHeaderName, pBuffer, pdwBufferLength, ppHeaders, pdwHeadersCount)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpQueryOption == "on"]
+foreign {
     // param-hint: lpBuffer bytes=param[3] optional
     // pinvoke-hint: SetLastError
     func WinHttpQueryOption(hInternet: CPointer<Unit>, dwOption: UInt32, lpBuffer: CPointer<Unit>, lpdwBufferLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpQueryOption == "on"]
+public unsafe func Windows_WinHttpQueryOption(hInternet: CPointer<Unit>, dwOption: UInt32, lpBuffer: CPointer<Unit>, lpdwBufferLength: CPointer<UInt32>): Int32 {
+    return WinHttpQueryOption(hInternet, dwOption, lpBuffer, lpdwBufferLength)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpReadData == "on"]
+foreign {
     // param-hint: lpBuffer bytes=param[2]
     // pinvoke-hint: SetLastError
     func WinHttpReadData(hRequest: CPointer<Unit>, lpBuffer: CPointer<Unit>, dwNumberOfBytesToRead: UInt32, lpdwNumberOfBytesRead: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpReadData == "on"]
+public unsafe func Windows_WinHttpReadData(hRequest: CPointer<Unit>, lpBuffer: CPointer<Unit>, dwNumberOfBytesToRead: UInt32, lpdwNumberOfBytesRead: CPointer<UInt32>): Int32 {
+    return WinHttpReadData(hRequest, lpBuffer, dwNumberOfBytesToRead, lpdwNumberOfBytesRead)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpReadDataEx == "on"]
+foreign {
     // param-hint: lpBuffer bytes=param[2]
     // param-hint: pvProperty bytes=param[5] optional
     func WinHttpReadDataEx(hRequest: CPointer<Unit>, lpBuffer: CPointer<Unit>, dwNumberOfBytesToRead: UInt32, lpdwNumberOfBytesRead: CPointer<UInt32>, ullFlags: UInt64, cbProperty: UInt32, pvProperty: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpReadDataEx == "on"]
+public unsafe func Windows_WinHttpReadDataEx(hRequest: CPointer<Unit>, lpBuffer: CPointer<Unit>, dwNumberOfBytesToRead: UInt32, lpdwNumberOfBytesRead: CPointer<UInt32>, ullFlags: UInt64, cbProperty: UInt32, pvProperty: CPointer<Unit>): UInt32 {
+    return WinHttpReadDataEx(hRequest, lpBuffer, dwNumberOfBytesToRead, lpdwNumberOfBytesRead, ullFlags, cbProperty, pvProperty)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpReadProxySettings == "on"]
+foreign {
     // param-hint: pcwszConnectionName optional
     func WinHttpReadProxySettings(hSession: CPointer<Unit>, pcwszConnectionName: CPointer<UInt16>, fFallBackToDefaultSettings: Int32, fSetAutoDiscoverForDefaultSettings: Int32, pdwSettingsVersion: CPointer<UInt32>, pfDefaultSettingsAreReturned: CPointer<Int32>, pWinHttpProxySettings: CPointer<WINHTTP_PROXY_SETTINGSAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpReadProxySettings == "on"]
+public unsafe func Windows_WinHttpReadProxySettings(hSession: CPointer<Unit>, pcwszConnectionName: CPointer<UInt16>, fFallBackToDefaultSettings: Int32, fSetAutoDiscoverForDefaultSettings: Int32, pdwSettingsVersion: CPointer<UInt32>, pfDefaultSettingsAreReturned: CPointer<Int32>, pWinHttpProxySettings: CPointer<WINHTTP_PROXY_SETTINGSAbi>): UInt32 {
+    return WinHttpReadProxySettings(hSession, pcwszConnectionName, fFallBackToDefaultSettings, fSetAutoDiscoverForDefaultSettings, pdwSettingsVersion, pfDefaultSettingsAreReturned, pWinHttpProxySettings)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpReceiveResponse == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func WinHttpReceiveResponse(hRequest: CPointer<Unit>, lpReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpReceiveResponse == "on"]
+public unsafe func Windows_WinHttpReceiveResponse(hRequest: CPointer<Unit>, lpReserved: CPointer<Unit>): Int32 {
+    return WinHttpReceiveResponse(hRequest, lpReserved)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpRegisterProxyChangeNotification == "on"]
+foreign {
     func WinHttpRegisterProxyChangeNotification(ullFlags: UInt64, pfnCallback: WINHTTP_PROXY_CHANGE_CALLBACK, pvContext: CPointer<Unit>, hRegistration: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpRegisterProxyChangeNotification == "on"]
+public unsafe func Windows_WinHttpRegisterProxyChangeNotification(ullFlags: UInt64, pfnCallback: WINHTTP_PROXY_CHANGE_CALLBACK, pvContext: CPointer<Unit>, hRegistration: CPointer<CPointer<Unit>>): UInt32 {
+    return WinHttpRegisterProxyChangeNotification(ullFlags, pfnCallback, pvContext, hRegistration)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpResetAutoProxy == "on"]
+foreign {
     func WinHttpResetAutoProxy(hSession: CPointer<Unit>, dwFlags: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpResetAutoProxy == "on"]
+public unsafe func Windows_WinHttpResetAutoProxy(hSession: CPointer<Unit>, dwFlags: UInt32): UInt32 {
+    return WinHttpResetAutoProxy(hSession, dwFlags)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpSendRequest == "on"]
+foreign {
     // param-hint: lpszHeaders len=param[2] optional
     // param-hint: lpOptional bytes=param[4] optional
     // pinvoke-hint: SetLastError
     func WinHttpSendRequest(hRequest: CPointer<Unit>, lpszHeaders: CPointer<UInt16>, dwHeadersLength: UInt32, lpOptional: CPointer<Unit>, dwOptionalLength: UInt32, dwTotalLength: UInt32, dwContext: UIntNative): Int32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpSendRequest == "on"]
+public unsafe func Windows_WinHttpSendRequest(hRequest: CPointer<Unit>, lpszHeaders: CPointer<UInt16>, dwHeadersLength: UInt32, lpOptional: CPointer<Unit>, dwOptionalLength: UInt32, dwTotalLength: UInt32, dwContext: UIntNative): Int32 {
+    return WinHttpSendRequest(hRequest, lpszHeaders, dwHeadersLength, lpOptional, dwOptionalLength, dwTotalLength, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpSetCredentials == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func WinHttpSetCredentials(hRequest: CPointer<Unit>, AuthTargets: UInt32, AuthScheme: UInt32, pwszUserName: CPointer<UInt16>, pwszPassword: CPointer<UInt16>, pAuthParams: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpSetCredentials == "on"]
+public unsafe func Windows_WinHttpSetCredentials(hRequest: CPointer<Unit>, AuthTargets: UInt32, AuthScheme: UInt32, pwszUserName: CPointer<UInt16>, pwszPassword: CPointer<UInt16>, pAuthParams: CPointer<Unit>): Int32 {
+    return WinHttpSetCredentials(hRequest, AuthTargets, AuthScheme, pwszUserName, pwszPassword, pAuthParams)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpSetDefaultProxyConfiguration == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func WinHttpSetDefaultProxyConfiguration(pProxyInfo: CPointer<WINHTTP_PROXY_INFOAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpSetDefaultProxyConfiguration == "on"]
+public unsafe func Windows_WinHttpSetDefaultProxyConfiguration(pProxyInfo: CPointer<WINHTTP_PROXY_INFOAbi>): Int32 {
+    return WinHttpSetDefaultProxyConfiguration(pProxyInfo)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpSetOption == "on"]
+foreign {
     // param-hint: hInternet optional
     // param-hint: lpBuffer len=param[3] optional
     // pinvoke-hint: SetLastError
     func WinHttpSetOption(hInternet: CPointer<Unit>, dwOption: UInt32, lpBuffer: CPointer<Unit>, dwBufferLength: UInt32): Int32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpSetOption == "on"]
+public unsafe func Windows_WinHttpSetOption(hInternet: CPointer<Unit>, dwOption: UInt32, lpBuffer: CPointer<Unit>, dwBufferLength: UInt32): Int32 {
+    return WinHttpSetOption(hInternet, dwOption, lpBuffer, dwBufferLength)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpSetProxySettingsPerUser == "on"]
+foreign {
     func WinHttpSetProxySettingsPerUser(fProxySettingsPerUser: Int32): UInt32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpSetProxySettingsPerUser == "on"]
+public unsafe func Windows_WinHttpSetProxySettingsPerUser(fProxySettingsPerUser: Int32): UInt32 {
+    return WinHttpSetProxySettingsPerUser(fProxySettingsPerUser)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpSetStatusCallback == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func WinHttpSetStatusCallback(hInternet: CPointer<Unit>, lpfnInternetCallback: WINHTTP_STATUS_CALLBACK, dwNotificationFlags: UInt32, dwReserved: UIntNative): WINHTTP_STATUS_CALLBACK
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpSetStatusCallback == "on"]
+public unsafe func Windows_WinHttpSetStatusCallback(hInternet: CPointer<Unit>, lpfnInternetCallback: WINHTTP_STATUS_CALLBACK, dwNotificationFlags: UInt32, dwReserved: UIntNative): WINHTTP_STATUS_CALLBACK {
+    return WinHttpSetStatusCallback(hInternet, lpfnInternetCallback, dwNotificationFlags, dwReserved)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpSetTimeouts == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func WinHttpSetTimeouts(hInternet: CPointer<Unit>, nResolveTimeout: Int32, nConnectTimeout: Int32, nSendTimeout: Int32, nReceiveTimeout: Int32): Int32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpSetTimeouts == "on"]
+public unsafe func Windows_WinHttpSetTimeouts(hInternet: CPointer<Unit>, nResolveTimeout: Int32, nConnectTimeout: Int32, nSendTimeout: Int32, nReceiveTimeout: Int32): Int32 {
+    return WinHttpSetTimeouts(hInternet, nResolveTimeout, nConnectTimeout, nSendTimeout, nReceiveTimeout)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpTimeFromSystemTime == "on"]
+foreign {
     // param-hint: pwszTime fixed=62
     // pinvoke-hint: SetLastError
     func WinHttpTimeFromSystemTime(pst: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, pwszTime: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpTimeFromSystemTime == "on"]
+public unsafe func Windows_WinHttpTimeFromSystemTime(pst: CPointer<Win32_Foundation.SYSTEMTIMEAbi>, pwszTime: CPointer<UInt16>): Int32 {
+    return WinHttpTimeFromSystemTime(pst, pwszTime)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpTimeToSystemTime == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func WinHttpTimeToSystemTime(pwszTime: CPointer<UInt16>, pst: CPointer<Win32_Foundation.SYSTEMTIMEAbi>): Int32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpTimeToSystemTime == "on"]
+public unsafe func Windows_WinHttpTimeToSystemTime(pwszTime: CPointer<UInt16>, pst: CPointer<Win32_Foundation.SYSTEMTIMEAbi>): Int32 {
+    return WinHttpTimeToSystemTime(pwszTime, pst)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpUnregisterProxyChangeNotification == "on"]
+foreign {
     func WinHttpUnregisterProxyChangeNotification(hRegistration: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpUnregisterProxyChangeNotification == "on"]
+public unsafe func Windows_WinHttpUnregisterProxyChangeNotification(hRegistration: CPointer<Unit>): UInt32 {
+    return WinHttpUnregisterProxyChangeNotification(hRegistration)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpWebSocketClose == "on"]
+foreign {
     // param-hint: pvReason bytes=param[3] optional
     func WinHttpWebSocketClose(hWebSocket: CPointer<Unit>, usStatus: UInt16, pvReason: CPointer<Unit>, dwReasonLength: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpWebSocketClose == "on"]
+public unsafe func Windows_WinHttpWebSocketClose(hWebSocket: CPointer<Unit>, usStatus: UInt16, pvReason: CPointer<Unit>, dwReasonLength: UInt32): UInt32 {
+    return WinHttpWebSocketClose(hWebSocket, usStatus, pvReason, dwReasonLength)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpWebSocketCompleteUpgrade == "on"]
+foreign {
     // param-hint: pContext optional
     // pinvoke-hint: SetLastError
     func WinHttpWebSocketCompleteUpgrade(hRequest: CPointer<Unit>, pContext: UIntNative): CPointer<Unit>
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpWebSocketCompleteUpgrade == "on"]
+public unsafe func Windows_WinHttpWebSocketCompleteUpgrade(hRequest: CPointer<Unit>, pContext: UIntNative): CPointer<Unit> {
+    return WinHttpWebSocketCompleteUpgrade(hRequest, pContext)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpWebSocketQueryCloseStatus == "on"]
+foreign {
     // param-hint: pvReason bytes=param[3] optional
     func WinHttpWebSocketQueryCloseStatus(hWebSocket: CPointer<Unit>, pusStatus: CPointer<UInt16>, pvReason: CPointer<Unit>, dwReasonLength: UInt32, pdwReasonLengthConsumed: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpWebSocketQueryCloseStatus == "on"]
+public unsafe func Windows_WinHttpWebSocketQueryCloseStatus(hWebSocket: CPointer<Unit>, pusStatus: CPointer<UInt16>, pvReason: CPointer<Unit>, dwReasonLength: UInt32, pdwReasonLengthConsumed: CPointer<UInt32>): UInt32 {
+    return WinHttpWebSocketQueryCloseStatus(hWebSocket, pusStatus, pvReason, dwReasonLength, pdwReasonLengthConsumed)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpWebSocketReceive == "on"]
+foreign {
     // param-hint: pvBuffer bytes=param[2]
     func WinHttpWebSocketReceive(hWebSocket: CPointer<Unit>, pvBuffer: CPointer<Unit>, dwBufferLength: UInt32, pdwBytesRead: CPointer<UInt32>, peBufferType: CPointer<WINHTTP_WEB_SOCKET_BUFFER_TYPEAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpWebSocketReceive == "on"]
+public unsafe func Windows_WinHttpWebSocketReceive(hWebSocket: CPointer<Unit>, pvBuffer: CPointer<Unit>, dwBufferLength: UInt32, pdwBytesRead: CPointer<UInt32>, peBufferType: CPointer<WINHTTP_WEB_SOCKET_BUFFER_TYPEAbi>): UInt32 {
+    return WinHttpWebSocketReceive(hWebSocket, pvBuffer, dwBufferLength, pdwBytesRead, peBufferType)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpWebSocketSend == "on"]
+foreign {
     // param-hint: pvBuffer len=param[3] optional
     func WinHttpWebSocketSend(hWebSocket: CPointer<Unit>, eBufferType: WINHTTP_WEB_SOCKET_BUFFER_TYPEAbi, pvBuffer: CPointer<Unit>, dwBufferLength: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpWebSocketSend == "on"]
+public unsafe func Windows_WinHttpWebSocketSend(hWebSocket: CPointer<Unit>, eBufferType: WINHTTP_WEB_SOCKET_BUFFER_TYPEAbi, pvBuffer: CPointer<Unit>, dwBufferLength: UInt32): UInt32 {
+    return WinHttpWebSocketSend(hWebSocket, eBufferType, pvBuffer, dwBufferLength)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpWebSocketShutdown == "on"]
+foreign {
     // param-hint: pvReason bytes=param[3] optional
     func WinHttpWebSocketShutdown(hWebSocket: CPointer<Unit>, usStatus: UInt16, pvReason: CPointer<Unit>, dwReasonLength: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpWebSocketShutdown == "on"]
+public unsafe func Windows_WinHttpWebSocketShutdown(hWebSocket: CPointer<Unit>, usStatus: UInt16, pvReason: CPointer<Unit>, dwReasonLength: UInt32): UInt32 {
+    return WinHttpWebSocketShutdown(hWebSocket, usStatus, pvReason, dwReasonLength)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpWriteData == "on"]
+foreign {
     // param-hint: lpBuffer bytes=param[2] optional
     // pinvoke-hint: SetLastError
     func WinHttpWriteData(hRequest: CPointer<Unit>, lpBuffer: CPointer<Unit>, dwNumberOfBytesToWrite: UInt32, lpdwNumberOfBytesWritten: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpWriteData == "on"]
+public unsafe func Windows_WinHttpWriteData(hRequest: CPointer<Unit>, lpBuffer: CPointer<Unit>, dwNumberOfBytesToWrite: UInt32, lpdwNumberOfBytesWritten: CPointer<UInt32>): Int32 {
+    return WinHttpWriteData(hRequest, lpBuffer, dwNumberOfBytesToWrite, lpdwNumberOfBytesWritten)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpWriteProxySettings == "on"]
+foreign {
     func WinHttpWriteProxySettings(hSession: CPointer<Unit>, fForceUpdate: Int32, pWinHttpProxySettings: CPointer<WINHTTP_PROXY_SETTINGSAbi>): UInt32
 }
 
-@When[WINHTTP == "on" && ((arch == "x86_64" || arch == "aarch64"))]
-foreign {
-    // param-hint: pProxySettingsParam optional
-    // param-hint: pContext optional
-    func WinHttpGetProxySettingsEx(hResolver: CPointer<Unit>, ProxySettingsType: WINHTTP_PROXY_SETTINGS_TYPEAbi, pProxySettingsParam: CPointer<WINHTTP_PROXY_SETTINGS_PARAMAbi>, pContext: UIntNative): UInt32
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpWriteProxySettings == "on"]
+public unsafe func Windows_WinHttpWriteProxySettings(hSession: CPointer<Unit>, fForceUpdate: Int32, pWinHttpProxySettings: CPointer<WINHTTP_PROXY_SETTINGSAbi>): UInt32 {
+    return WinHttpWriteProxySettings(hSession, fForceUpdate, pWinHttpProxySettings)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpProtocolCompleteUpgrade == "on"]
+func __windowsBindgen_WinHttpProtocolCompleteUpgradeProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("WINHTTP.dll", "WinHttpProtocolCompleteUpgrade")
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpProtocolCompleteUpgrade == "on"]
+unsafe func WinHttpProtocolCompleteUpgrade(hRequest: CPointer<Unit>, dwContext: UIntNative): CPointer<Unit> {
+    let call = CFunc<(CPointer<Unit>, UIntNative) -> CPointer<Unit>>(__windowsBindgen_WinHttpProtocolCompleteUpgradeProc())
+    return unsafe { call(hRequest, dwContext) }
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpProtocolCompleteUpgrade == "on"]
+public unsafe func Windows_WinHttpProtocolCompleteUpgrade(hRequest: CPointer<Unit>, dwContext: UIntNative): CPointer<Unit> {
+    return WinHttpProtocolCompleteUpgrade(hRequest, dwContext)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpProtocolReceive == "on"]
+func __windowsBindgen_WinHttpProtocolReceiveProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("WINHTTP.dll", "WinHttpProtocolReceive")
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpProtocolReceive == "on"]
+unsafe func WinHttpProtocolReceive(ProtocolHandle: CPointer<Unit>, Flags: UInt64, pvBuffer: CPointer<Unit>, dwBufferLength: UInt32, pdwBytesRead: CPointer<UInt32>): UInt32 {
+    let call = CFunc<(CPointer<Unit>, UInt64, CPointer<Unit>, UInt32, CPointer<UInt32>) -> UInt32>(__windowsBindgen_WinHttpProtocolReceiveProc())
+    return unsafe { call(ProtocolHandle, Flags, pvBuffer, dwBufferLength, pdwBytesRead) }
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpProtocolReceive == "on"]
+public unsafe func Windows_WinHttpProtocolReceive(ProtocolHandle: CPointer<Unit>, Flags: UInt64, pvBuffer: CPointer<Unit>, dwBufferLength: UInt32, pdwBytesRead: CPointer<UInt32>): UInt32 {
+    return WinHttpProtocolReceive(ProtocolHandle, Flags, pvBuffer, dwBufferLength, pdwBytesRead)
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpProtocolSend == "on"]
+func __windowsBindgen_WinHttpProtocolSendProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("WINHTTP.dll", "WinHttpProtocolSend")
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpProtocolSend == "on"]
+unsafe func WinHttpProtocolSend(ProtocolHandle: CPointer<Unit>, Flags: UInt64, pvBuffer: CPointer<Unit>, dwBufferLength: UInt32): UInt32 {
+    let call = CFunc<(CPointer<Unit>, UInt64, CPointer<Unit>, UInt32) -> UInt32>(__windowsBindgen_WinHttpProtocolSendProc())
+    return unsafe { call(ProtocolHandle, Flags, pvBuffer, dwBufferLength) }
+}
+
+@When[Windows_Win32_Networking_WinHttp == "on" && WINHTTP == "on" && Windows_Win32_Networking_WinHttp_WinHttpProtocolSend == "on"]
+public unsafe func Windows_WinHttpProtocolSend(ProtocolHandle: CPointer<Unit>, Flags: UInt64, pvBuffer: CPointer<Unit>, dwBufferLength: UInt32): UInt32 {
+    return WinHttpProtocolSend(ProtocolHandle, Flags, pvBuffer, dwBufferLength)
 }
 
 @When[Windows_Win32_Networking_WinHttp == "on"]

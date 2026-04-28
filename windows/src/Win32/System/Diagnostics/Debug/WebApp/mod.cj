@@ -6,11 +6,8 @@ package windows.Win32.System.Diagnostics.Debug.WebApp
 import std.collection.*
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_System_Diagnostics_Debug_ActiveScript == "on"]
 import windows.Win32.System.Diagnostics.Debug.ActiveScript as Win32_System_Diagnostics_Debug_ActiveScript
-@When[Windows_Win32_Web_MsHtml == "on"]
 import windows.Win32.Web.MsHtml as Win32_Web_MsHtml
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1

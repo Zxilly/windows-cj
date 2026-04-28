@@ -187,6 +187,7 @@ public class ILicenseManagerStatics2 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ILicenseSatisfactionResultVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var LicenseSatisfactionInfos: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ExtendedError: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.HResult>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -232,6 +233,7 @@ public class ILicenseSatisfactionResult <: InterfaceWrapperBase & ComInterface {
         readVtbl<ILicenseSatisfactionResultVtbl>(ILicenseSatisfactionResultVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func LicenseSatisfactionInfos(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -251,6 +253,7 @@ public struct ILicenseManagerStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     @When[Windows_Storage_Streams == "on"]
     public var AddLicenseAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSatisfactionInfosAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -302,6 +305,7 @@ public class ILicenseManagerStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.AddLicenseAsync(__liveRaw, license, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSatisfactionInfosAsync(contentIds: CPointer<Unit>, keyIds: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

@@ -132,6 +132,7 @@ public class IStartupAppInfoPreview <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IStartupAppsManagerPreviewVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetStartupAppInfos: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -176,6 +177,7 @@ public class IStartupAppsManagerPreview <: InterfaceWrapperBase & ComInterface {
         readVtbl<IStartupAppsManagerPreviewVtbl>(IStartupAppsManagerPreviewVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetStartupAppInfos(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

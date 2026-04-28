@@ -3,7 +3,6 @@ package windows_sys.Win32.NetworkManagement.WindowsConnectionManager
 
 import windows_interface.{GUID}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 
 
@@ -250,35 +249,117 @@ public struct WCM_DATAPLAN_STATUS {
     public init() {}
 }
 
-@When[ONDEMANDCONNROUTEHELPER == "on"]
+@When[Windows_Win32_NetworkManagement_WindowsConnectionManager == "on" && ONDEMANDCONNROUTEHELPER == "on" && Windows_Win32_NetworkManagement_WindowsConnectionManager_FreeInterfaceContextTable == "on"]
 foreign {
     func FreeInterfaceContextTable(InterfaceContextTable: CPointer<NET_INTERFACE_CONTEXT_TABLE>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsConnectionManager == "on" && ONDEMANDCONNROUTEHELPER == "on" && Windows_Win32_NetworkManagement_WindowsConnectionManager_FreeInterfaceContextTable == "on"]
+public unsafe func Windows_FreeInterfaceContextTable(InterfaceContextTable: CPointer<NET_INTERFACE_CONTEXT_TABLE>): Unit {
+    FreeInterfaceContextTable(InterfaceContextTable)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsConnectionManager == "on" && ONDEMANDCONNROUTEHELPER == "on" && Windows_Win32_NetworkManagement_WindowsConnectionManager_GetInterfaceContextTableForHostName == "on"]
+foreign {
     // param-hint: HostName optional
     // param-hint: ProxyName optional
     // param-hint: ConnectionProfileFilterRawData bytes=param[4] optional
     func GetInterfaceContextTableForHostName(HostName: CPointer<UInt16>, ProxyName: CPointer<UInt16>, Flags: UInt32, ConnectionProfileFilterRawData: CPointer<UInt8>, ConnectionProfileFilterRawDataSize: UInt32, InterfaceContextTable: CPointer<CPointer<NET_INTERFACE_CONTEXT_TABLE>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsConnectionManager == "on" && ONDEMANDCONNROUTEHELPER == "on" && Windows_Win32_NetworkManagement_WindowsConnectionManager_GetInterfaceContextTableForHostName == "on"]
+public unsafe func Windows_GetInterfaceContextTableForHostName(HostName: CPointer<UInt16>, ProxyName: CPointer<UInt16>, Flags: UInt32, ConnectionProfileFilterRawData: CPointer<UInt8>, ConnectionProfileFilterRawDataSize: UInt32, InterfaceContextTable: CPointer<CPointer<NET_INTERFACE_CONTEXT_TABLE>>): Int32 {
+    return GetInterfaceContextTableForHostName(HostName, ProxyName, Flags, ConnectionProfileFilterRawData, ConnectionProfileFilterRawDataSize, InterfaceContextTable)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsConnectionManager == "on" && ONDEMANDCONNROUTEHELPER == "on" && Windows_Win32_NetworkManagement_WindowsConnectionManager_OnDemandGetRoutingHint == "on"]
+foreign {
     func OnDemandGetRoutingHint(destinationHostName: CPointer<UInt16>, interfaceIndex: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsConnectionManager == "on" && ONDEMANDCONNROUTEHELPER == "on" && Windows_Win32_NetworkManagement_WindowsConnectionManager_OnDemandGetRoutingHint == "on"]
+public unsafe func Windows_OnDemandGetRoutingHint(destinationHostName: CPointer<UInt16>, interfaceIndex: CPointer<UInt32>): Int32 {
+    return OnDemandGetRoutingHint(destinationHostName, interfaceIndex)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsConnectionManager == "on" && ONDEMANDCONNROUTEHELPER == "on" && Windows_Win32_NetworkManagement_WindowsConnectionManager_OnDemandRegisterNotification == "on"]
+foreign {
     // param-hint: callbackContext optional
     func OnDemandRegisterNotification(callback: ONDEMAND_NOTIFICATION_CALLBACK, callbackContext: CPointer<Unit>, registrationHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsConnectionManager == "on" && ONDEMANDCONNROUTEHELPER == "on" && Windows_Win32_NetworkManagement_WindowsConnectionManager_OnDemandRegisterNotification == "on"]
+public unsafe func Windows_OnDemandRegisterNotification(callback: ONDEMAND_NOTIFICATION_CALLBACK, callbackContext: CPointer<Unit>, registrationHandle: CPointer<CPointer<Unit>>): Int32 {
+    return OnDemandRegisterNotification(callback, callbackContext, registrationHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsConnectionManager == "on" && ONDEMANDCONNROUTEHELPER == "on" && Windows_Win32_NetworkManagement_WindowsConnectionManager_OnDemandUnRegisterNotification == "on"]
+foreign {
     func OnDemandUnRegisterNotification(registrationHandle: CPointer<Unit>): Int32
 }
 
-@When[WCMAPI == "on"]
+@When[Windows_Win32_NetworkManagement_WindowsConnectionManager == "on" && ONDEMANDCONNROUTEHELPER == "on" && Windows_Win32_NetworkManagement_WindowsConnectionManager_OnDemandUnRegisterNotification == "on"]
+public unsafe func Windows_OnDemandUnRegisterNotification(registrationHandle: CPointer<Unit>): Int32 {
+    return OnDemandUnRegisterNotification(registrationHandle)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsConnectionManager == "on" && WCMAPI == "on" && Windows_Win32_NetworkManagement_WindowsConnectionManager_WcmFreeMemory == "on"]
 foreign {
     func WcmFreeMemory(pMemory: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsConnectionManager == "on" && WCMAPI == "on" && Windows_Win32_NetworkManagement_WindowsConnectionManager_WcmFreeMemory == "on"]
+public unsafe func Windows_WcmFreeMemory(pMemory: CPointer<Unit>): Unit {
+    WcmFreeMemory(pMemory)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsConnectionManager == "on" && WCMAPI == "on" && Windows_Win32_NetworkManagement_WindowsConnectionManager_WcmGetProfileList == "on"]
+foreign {
     // param-hint: pReserved optional reserved
     func WcmGetProfileList(pReserved: CPointer<Unit>, ppProfileList: CPointer<CPointer<WCM_PROFILE_INFO_LIST>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsConnectionManager == "on" && WCMAPI == "on" && Windows_Win32_NetworkManagement_WindowsConnectionManager_WcmGetProfileList == "on"]
+public unsafe func Windows_WcmGetProfileList(pReserved: CPointer<Unit>, ppProfileList: CPointer<CPointer<WCM_PROFILE_INFO_LIST>>): UInt32 {
+    return WcmGetProfileList(pReserved, ppProfileList)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsConnectionManager == "on" && WCMAPI == "on" && Windows_Win32_NetworkManagement_WindowsConnectionManager_WcmQueryProperty == "on"]
+foreign {
     // param-hint: pInterface optional
     // param-hint: strProfileName optional
     // param-hint: pReserved optional reserved
     func WcmQueryProperty(pInterface: CPointer<GUID>, strProfileName: CPointer<UInt16>, Property: Int32, pReserved: CPointer<Unit>, pdwDataSize: CPointer<UInt32>, ppData: CPointer<CPointer<UInt8>>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsConnectionManager == "on" && WCMAPI == "on" && Windows_Win32_NetworkManagement_WindowsConnectionManager_WcmQueryProperty == "on"]
+public unsafe func Windows_WcmQueryProperty(pInterface: CPointer<GUID>, strProfileName: CPointer<UInt16>, Property: Int32, pReserved: CPointer<Unit>, pdwDataSize: CPointer<UInt32>, ppData: CPointer<CPointer<UInt8>>): UInt32 {
+    return WcmQueryProperty(pInterface, strProfileName, Property, pReserved, pdwDataSize, ppData)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsConnectionManager == "on" && WCMAPI == "on" && Windows_Win32_NetworkManagement_WindowsConnectionManager_WcmSetProfileList == "on"]
+foreign {
     // param-hint: pReserved optional reserved
     func WcmSetProfileList(pProfileList: CPointer<WCM_PROFILE_INFO_LIST>, dwPosition: UInt32, fIgnoreUnknownProfiles: Int32, pReserved: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsConnectionManager == "on" && WCMAPI == "on" && Windows_Win32_NetworkManagement_WindowsConnectionManager_WcmSetProfileList == "on"]
+public unsafe func Windows_WcmSetProfileList(pProfileList: CPointer<WCM_PROFILE_INFO_LIST>, dwPosition: UInt32, fIgnoreUnknownProfiles: Int32, pReserved: CPointer<Unit>): UInt32 {
+    return WcmSetProfileList(pProfileList, dwPosition, fIgnoreUnknownProfiles, pReserved)
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsConnectionManager == "on" && WCMAPI == "on" && Windows_Win32_NetworkManagement_WindowsConnectionManager_WcmSetProperty == "on"]
+foreign {
     // param-hint: pInterface optional
     // param-hint: strProfileName optional
     // param-hint: pReserved optional reserved
     // param-hint: pbData len=param[4] optional
     func WcmSetProperty(pInterface: CPointer<GUID>, strProfileName: CPointer<UInt16>, Property: Int32, pReserved: CPointer<Unit>, dwDataSize: UInt32, pbData: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsConnectionManager == "on" && WCMAPI == "on" && Windows_Win32_NetworkManagement_WindowsConnectionManager_WcmSetProperty == "on"]
+public unsafe func Windows_WcmSetProperty(pInterface: CPointer<GUID>, strProfileName: CPointer<UInt16>, Property: Int32, pReserved: CPointer<Unit>, dwDataSize: UInt32, pbData: CPointer<UInt8>): UInt32 {
+    return WcmSetProperty(pInterface, strProfileName, Property, pReserved, dwDataSize, pbData)
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsConnectionManager == "on"]

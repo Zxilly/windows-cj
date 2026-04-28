@@ -155,7 +155,7 @@ public class HttpBaseProtocolFilter <: InterfaceWrapperBase & ComInterface & win
         defaultInterface().SetClientCertificate(value)
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func IgnorableServerCertificateErrors(): windows_collections.IVector<_impl_l0.ChainValidationResult> {
         return defaultInterface().IgnorableServerCertificateErrors()
     }
@@ -320,12 +320,12 @@ public class HttpServerCustomValidationRequestedEventArgs <: InterfaceWrapperBas
         return defaultInterface().ServerCertificateErrorSeverity()
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func ServerCertificateErrors(): windows_collections.IVectorView<_impl_l0.ChainValidationResult> {
         return defaultInterface().ServerCertificateErrors()
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func ServerIntermediateCertificates(): windows_collections.IVectorView<_impl_l1.Certificate> {
         return defaultInterface().ServerIntermediateCertificates()
     }
@@ -380,9 +380,9 @@ public struct IHttpBaseProtocolFilterVtbl {
     public var SetClientCertificate: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Security_Cryptography_Certificates != "on"]
     public var SetClientCertificate: UIntNative = UIntNative(0)
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public var IgnorableServerCertificateErrors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Security_Cryptography_Certificates != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Security_Cryptography_Certificates != "on"]
     public var IgnorableServerCertificateErrors: UIntNative = UIntNative(0)
     public var MaxConnectionsPerServer: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetMaxConnectionsPerServer: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -547,7 +547,7 @@ public class IHttpBaseProtocolFilter <: InterfaceWrapperBase & ComInterface & Ru
         HRESULT(hr).ok()
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func IgnorableServerCertificateErrors(): windows_collections.IVector<_impl_l0.ChainValidationResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1002,13 +1002,13 @@ public struct IHttpServerCustomValidationRequestedEventArgsVtbl {
     public var ServerCertificateErrorSeverity: CFunc<(CPointer<Unit>, CPointer<_impl_l0.SocketSslErrorSeverityAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Networking_Sockets != "on"]
     public var ServerCertificateErrorSeverity: UIntNative = UIntNative(0)
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public var ServerCertificateErrors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Security_Cryptography_Certificates != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Security_Cryptography_Certificates != "on"]
     public var ServerCertificateErrors: UIntNative = UIntNative(0)
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public var ServerIntermediateCertificates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Security_Cryptography_Certificates != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Security_Cryptography_Certificates != "on"]
     public var ServerIntermediateCertificates: UIntNative = UIntNative(0)
     public var Reject: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
     public var GetDeferral: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1107,7 +1107,7 @@ public class IHttpServerCustomValidationRequestedEventArgs <: InterfaceWrapperBa
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.SocketSslErrorSeverity>()).unwrap()
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func ServerCertificateErrors(): windows_collections.IVectorView<_impl_l0.ChainValidationResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1116,7 +1116,7 @@ public class IHttpServerCustomValidationRequestedEventArgs <: InterfaceWrapperBa
         return windows_collections.IVectorView<_impl_l0.ChainValidationResult>.fromAbiTake(result__)
     }
 
-    @When[Windows_Security_Cryptography_Certificates == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Cryptography_Certificates == "on"]
     public unsafe func ServerIntermediateCertificates(): windows_collections.IVectorView<_impl_l1.Certificate> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

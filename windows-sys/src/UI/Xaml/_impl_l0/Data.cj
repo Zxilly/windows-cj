@@ -652,6 +652,7 @@ public struct ICollectionViewVtbl {
     public var CurrentPosition: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var IsCurrentAfterLast: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var IsCurrentBeforeFirst: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CollectionGroups: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var HasMoreItems: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var CurrentChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
@@ -732,6 +733,7 @@ public class ICollectionView <: InterfaceWrapperBase & ComInterface {
         return __vt.IsCurrentBeforeFirst(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CollectionGroups(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -871,6 +873,7 @@ public class ICollectionViewFactory <: InterfaceWrapperBase & ComInterface {
 public struct ICollectionViewGroupVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Group: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GroupItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -921,6 +924,7 @@ public class ICollectionViewGroup <: InterfaceWrapperBase & ComInterface {
         return __vt.Group(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GroupItems(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1558,6 +1562,7 @@ public class IItemIndexRangeFactory <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IItemsRangeInfoVtbl {
     public var base_: Foundation__impl_l0.IClosableVtbl = Foundation__impl_l0.IClosableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var RangesChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -1602,6 +1607,7 @@ public class IItemsRangeInfo <: InterfaceWrapperBase & ComInterface {
         readVtbl<IItemsRangeInfoVtbl>(IItemsRangeInfoVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RangesChanged(visibleRange: CPointer<Unit>, trackedItems: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1905,6 +1911,7 @@ public struct ISelectionInfoVtbl {
     public var SelectRange: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var DeselectRange: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var IsSelected: CFunc<(CPointer<Unit>, Int32, CPointer<Bool>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSelectedRanges: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1967,6 +1974,7 @@ public class ISelectionInfo <: InterfaceWrapperBase & ComInterface {
         return __vt.IsSelected(__liveRaw, index, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSelectedRanges(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

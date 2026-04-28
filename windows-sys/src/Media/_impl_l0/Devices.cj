@@ -467,6 +467,7 @@ public class IAdvancedPhotoCaptureSettings <: InterfaceWrapperBase & ComInterfac
 public struct IAdvancedPhotoControlVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Supported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedModes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Mode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Configure: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -519,6 +520,7 @@ public class IAdvancedPhotoControl <: InterfaceWrapperBase & ComInterface {
         return __vt.Supported(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedModes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1610,7 +1612,9 @@ public struct IAudioDeviceModulesManagerVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var ModuleNotificationReceived: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveModuleNotificationReceived: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllById: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAll: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1667,12 +1671,14 @@ public class IAudioDeviceModulesManager <: InterfaceWrapperBase & ComInterface {
         return __vt.RemoveModuleNotificationReceived(__liveRaw, token)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllById(moduleId: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindAllById(__liveRaw, moduleId, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAll(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2471,6 +2477,7 @@ public struct IDigitalWindowControlVtbl {
     public var GetBounds: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Configure: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
     public var ConfigureWithBounds: CFunc<(CPointer<Unit>, Int32, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedCapabilities: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetCapabilityForSize: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
@@ -2552,6 +2559,7 @@ public class IDigitalWindowControl <: InterfaceWrapperBase & ComInterface {
         return __vt.ConfigureWithBounds(__liveRaw, digitalWindowMode, digitalWindowBounds)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedCapabilities(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3027,6 +3035,7 @@ public class IFlashControl2 <: InterfaceWrapperBase & ComInterface {
 public struct IFocusControlVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Supported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedPresets: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Preset: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetPresetAsync: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -3086,6 +3095,7 @@ public class IFocusControl <: InterfaceWrapperBase & ComInterface {
         return __vt.Supported(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedPresets(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3153,8 +3163,11 @@ public struct IFocusControl2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var FocusChangedSupported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var WaitForFocusSupported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedFocusModes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedFocusDistances: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedFocusRanges: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Mode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var FocusState: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -3216,18 +3229,21 @@ public class IFocusControl2 <: InterfaceWrapperBase & ComInterface {
         return __vt.WaitForFocusSupported(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedFocusModes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SupportedFocusModes(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedFocusDistances(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SupportedFocusDistances(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedFocusRanges(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3402,6 +3418,7 @@ public class IFocusSettings <: InterfaceWrapperBase & ComInterface {
 public struct IHdrVideoControlVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Supported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedModes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Mode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetMode: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -3454,6 +3471,7 @@ public class IHdrVideoControl <: InterfaceWrapperBase & ComInterface {
         return __vt.Supported(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedModes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3478,6 +3496,7 @@ public class IHdrVideoControl <: InterfaceWrapperBase & ComInterface {
 public struct IInfraredTorchControlVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var IsSupported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedModes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var CurrentMode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetCurrentMode: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -3535,6 +3554,7 @@ public class IInfraredTorchControl <: InterfaceWrapperBase & ComInterface {
         return __vt.IsSupported(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedModes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3589,6 +3609,7 @@ public class IInfraredTorchControl <: InterfaceWrapperBase & ComInterface {
 public struct IIsoSpeedControlVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Supported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedPresets: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Preset: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetPresetAsync: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -3641,6 +3662,7 @@ public class IIsoSpeedControl <: InterfaceWrapperBase & ComInterface {
         return __vt.Supported(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedPresets(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4276,7 +4298,7 @@ public class IMediaDeviceControlCapabilities <: InterfaceWrapperBase & ComInterf
 @C
 public struct IMediaDeviceControllerVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on"]
     public var GetAvailableMediaStreamProperties: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on"]
     public var GetMediaStreamProperties: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -4325,7 +4347,7 @@ public class IMediaDeviceController <: InterfaceWrapperBase & ComInterface {
         readVtbl<IMediaDeviceControllerVtbl>(IMediaDeviceControllerVtbl())
     }
 
-    @When[Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Capture == "on" && Windows_Media_MediaProperties == "on"]
     public unsafe func GetAvailableMediaStreamProperties(mediaStreamType: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -4527,6 +4549,7 @@ public class IModuleCommandResult <: InterfaceWrapperBase & ComInterface {
 public struct IOpticalImageStabilizationControlVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Supported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedModes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Mode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetMode: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -4579,6 +4602,7 @@ public class IOpticalImageStabilizationControl <: InterfaceWrapperBase & ComInte
         return __vt.Supported(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedModes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -5012,7 +5036,9 @@ public class IRegionOfInterest2 <: InterfaceWrapperBase & ComInterface {
 public struct IRegionsOfInterestControlVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var MaxRegions: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetRegionsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SetRegionsWithLockAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, Bool, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var ClearRegionsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var AutoFocusSupported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
@@ -5067,12 +5093,14 @@ public class IRegionsOfInterestControl <: InterfaceWrapperBase & ComInterface {
         return __vt.MaxRegions(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetRegionsAsync(regions: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetRegionsAsync(__liveRaw, regions, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetRegionsWithLockAsync(regions: CPointer<Unit>, lockValues: Bool, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -5108,6 +5136,7 @@ public class IRegionsOfInterestControl <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ISceneModeControlVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedModes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Value: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetValueAsync: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -5154,6 +5183,7 @@ public class ISceneModeControl <: InterfaceWrapperBase & ComInterface {
         readVtbl<ISceneModeControlVtbl>(ISceneModeControlVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedModes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -5473,6 +5503,7 @@ public class IVideoDeviceControllerGetDevicePropertyResult <: InterfaceWrapperBa
 public struct IVideoTemporalDenoisingControlVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Supported: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedModes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Mode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetMode: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
@@ -5525,6 +5556,7 @@ public class IVideoTemporalDenoisingControl <: InterfaceWrapperBase & ComInterfa
         return __vt.Supported(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedModes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -5742,6 +5774,7 @@ public class IZoomControl <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IZoomControl2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedModes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Mode: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var Configure: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -5788,6 +5821,7 @@ public class IZoomControl2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IZoomControl2Vtbl>(IZoomControl2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedModes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

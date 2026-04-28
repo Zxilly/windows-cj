@@ -11,48 +11,190 @@ import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
 
 
-@When[WINTRUST == "on"]
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_OpenPersonalTrustDBDialog == "on"]
 foreign {
     // param-hint: hwndParent optional
     func OpenPersonalTrustDBDialog(hwndParent: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_OpenPersonalTrustDBDialog == "on"]
+public unsafe func Windows_OpenPersonalTrustDBDialog(hwndParent: CPointer<Unit>): Int32 {
+    return OpenPersonalTrustDBDialog(hwndParent)
+}
+
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_OpenPersonalTrustDBDialogEx == "on"]
+foreign {
     // param-hint: hwndParent optional
     // param-hint: pvReserved optional
     func OpenPersonalTrustDBDialogEx(hwndParent: CPointer<Unit>, dwFlags: UInt32, pvReserved: CPointer<CPointer<Unit>>): Int32
-    func WinVerifyTrust(hwnd: CPointer<Unit>, pgActionID: CPointer<GUID>, pWVTData: CPointer<Unit>): Int32
-    // pinvoke-hint: SetLastError
-    func WintrustAddActionID(pgActionID: CPointer<GUID>, fdwFlags: UInt32, psProvInfo: CPointer<Win32__impl_l1.CRYPT_REGISTER_ACTIONID>): Int32
-    // pinvoke-hint: SetLastError
-    func WintrustAddDefaultForUsage(pszUsageOID: CPointer<UInt8>, psDefUsage: CPointer<Win32__impl_l0.CRYPT_PROVIDER_REGDEFUSAGE>): Int32
-    // pinvoke-hint: SetLastError
-    func WintrustGetDefaultForUsage(dwAction: UInt32, pszUsageOID: CPointer<UInt8>, psUsage: CPointer<Win32__impl_l0.CRYPT_PROVIDER_DEFUSAGE>): Int32
-    func WintrustGetRegPolicyFlags(pdwPolicyFlags: CPointer<UInt32>): Unit
-    func WintrustRemoveActionID(pgActionID: CPointer<GUID>): Int32
-    func WintrustSetDefaultIncludePEPageHashes(fIncludePEPageHashes: Int32): Unit
-    func WintrustSetRegPolicyFlags(dwPolicyFlags: UInt32): Int32
 }
 
-@When[WINTRUST == "on" && (Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on")]
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_OpenPersonalTrustDBDialogEx == "on"]
+public unsafe func Windows_OpenPersonalTrustDBDialogEx(hwndParent: CPointer<Unit>, dwFlags: UInt32, pvReserved: CPointer<CPointer<Unit>>): Int32 {
+    return OpenPersonalTrustDBDialogEx(hwndParent, dwFlags, pvReserved)
+}
+
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WTHelperCertCheckValidSignature == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
 foreign {
-    func WintrustLoadFunctionPointers(pgActionID: CPointer<GUID>, pPfns: CPointer<CRYPT_PROVIDER_FUNCTIONS>): Int32
+    func WTHelperCertCheckValidSignature(pProvData: CPointer<CRYPT_PROVIDER_DATA>): Int32
 }
 
-@When[WINTRUST == "on" && (Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on")]
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WTHelperCertCheckValidSignature == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public unsafe func Windows_WTHelperCertCheckValidSignature(pProvData: CPointer<CRYPT_PROVIDER_DATA>): Int32 {
+    return WTHelperCertCheckValidSignature(pProvData)
+}
+
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WTHelperCertIsSelfSigned == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
+    func WTHelperCertIsSelfSigned(dwEncoding: UInt32, pCert: CPointer<CERT_INFO>): Int32
+}
+
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WTHelperCertIsSelfSigned == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_WTHelperCertIsSelfSigned(dwEncoding: UInt32, pCert: CPointer<CERT_INFO>): Int32 {
+    return WTHelperCertIsSelfSigned(dwEncoding, pCert)
+}
+
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WTHelperGetProvCertFromChain == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
+    func WTHelperGetProvCertFromChain(pSgnr: CPointer<CRYPT_PROVIDER_SGNR>, idxCert: UInt32): CPointer<CRYPT_PROVIDER_CERT>
+}
+
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WTHelperGetProvCertFromChain == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_WTHelperGetProvCertFromChain(pSgnr: CPointer<CRYPT_PROVIDER_SGNR>, idxCert: UInt32): CPointer<CRYPT_PROVIDER_CERT> {
+    return WTHelperGetProvCertFromChain(pSgnr, idxCert)
+}
+
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WTHelperGetProvPrivateDataFromChain == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+foreign {
+    func WTHelperGetProvPrivateDataFromChain(pProvData: CPointer<CRYPT_PROVIDER_DATA>, pgProviderID: CPointer<GUID>): CPointer<Win32__impl_l0.CRYPT_PROVIDER_PRIVDATA>
+}
+
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WTHelperGetProvPrivateDataFromChain == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public unsafe func Windows_WTHelperGetProvPrivateDataFromChain(pProvData: CPointer<CRYPT_PROVIDER_DATA>, pgProviderID: CPointer<GUID>): CPointer<Win32__impl_l0.CRYPT_PROVIDER_PRIVDATA> {
+    return WTHelperGetProvPrivateDataFromChain(pProvData, pgProviderID)
+}
+
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WTHelperGetProvSignerFromChain == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
 foreign {
     func WTHelperGetProvSignerFromChain(pProvData: CPointer<CRYPT_PROVIDER_DATA>, idxSigner: UInt32, fCounterSigner: Int32, idxCounterSigner: UInt32): CPointer<CRYPT_PROVIDER_SGNR>
 }
 
-@When[WINTRUST == "on" && (Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on")]
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WTHelperGetProvSignerFromChain == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public unsafe func Windows_WTHelperGetProvSignerFromChain(pProvData: CPointer<CRYPT_PROVIDER_DATA>, idxSigner: UInt32, fCounterSigner: Int32, idxCounterSigner: UInt32): CPointer<CRYPT_PROVIDER_SGNR> {
+    return WTHelperGetProvSignerFromChain(pProvData, idxSigner, fCounterSigner, idxCounterSigner)
+}
+
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WTHelperProvDataFromStateData == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
 foreign {
-    func WTHelperCertCheckValidSignature(pProvData: CPointer<CRYPT_PROVIDER_DATA>): Int32
-    func WTHelperGetProvPrivateDataFromChain(pProvData: CPointer<CRYPT_PROVIDER_DATA>, pgProviderID: CPointer<GUID>): CPointer<Win32__impl_l0.CRYPT_PROVIDER_PRIVDATA>
     func WTHelperProvDataFromStateData(hStateData: CPointer<Unit>): CPointer<CRYPT_PROVIDER_DATA>
 }
 
-@When[WINTRUST == "on" && Windows_Win32_Security_Cryptography == "on"]
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WTHelperProvDataFromStateData == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public unsafe func Windows_WTHelperProvDataFromStateData(hStateData: CPointer<Unit>): CPointer<CRYPT_PROVIDER_DATA> {
+    return WTHelperProvDataFromStateData(hStateData)
+}
+
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WinVerifyTrust == "on"]
 foreign {
-    func WTHelperCertIsSelfSigned(dwEncoding: UInt32, pCert: CPointer<CERT_INFO>): Int32
-    func WTHelperGetProvCertFromChain(pSgnr: CPointer<CRYPT_PROVIDER_SGNR>, idxCert: UInt32): CPointer<CRYPT_PROVIDER_CERT>
+    func WinVerifyTrust(hwnd: CPointer<Unit>, pgActionID: CPointer<GUID>, pWVTData: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WinVerifyTrust == "on"]
+public unsafe func Windows_WinVerifyTrust(hwnd: CPointer<Unit>, pgActionID: CPointer<GUID>, pWVTData: CPointer<Unit>): Int32 {
+    return WinVerifyTrust(hwnd, pgActionID, pWVTData)
+}
+
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WinVerifyTrustEx == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
     func WinVerifyTrustEx(hwnd: CPointer<Unit>, pgActionID: CPointer<GUID>, pWinTrustData: CPointer<WINTRUST_DATA>): Int32
+}
+
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WinVerifyTrustEx == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_WinVerifyTrustEx(hwnd: CPointer<Unit>, pgActionID: CPointer<GUID>, pWinTrustData: CPointer<WINTRUST_DATA>): Int32 {
+    return WinVerifyTrustEx(hwnd, pgActionID, pWinTrustData)
+}
+
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WintrustAddActionID == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WintrustAddActionID(pgActionID: CPointer<GUID>, fdwFlags: UInt32, psProvInfo: CPointer<Win32__impl_l1.CRYPT_REGISTER_ACTIONID>): Int32
+}
+
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WintrustAddActionID == "on"]
+public unsafe func Windows_WintrustAddActionID(pgActionID: CPointer<GUID>, fdwFlags: UInt32, psProvInfo: CPointer<Win32__impl_l1.CRYPT_REGISTER_ACTIONID>): Int32 {
+    return WintrustAddActionID(pgActionID, fdwFlags, psProvInfo)
+}
+
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WintrustAddDefaultForUsage == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WintrustAddDefaultForUsage(pszUsageOID: CPointer<UInt8>, psDefUsage: CPointer<Win32__impl_l0.CRYPT_PROVIDER_REGDEFUSAGE>): Int32
+}
+
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WintrustAddDefaultForUsage == "on"]
+public unsafe func Windows_WintrustAddDefaultForUsage(pszUsageOID: CPointer<UInt8>, psDefUsage: CPointer<Win32__impl_l0.CRYPT_PROVIDER_REGDEFUSAGE>): Int32 {
+    return WintrustAddDefaultForUsage(pszUsageOID, psDefUsage)
+}
+
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WintrustGetDefaultForUsage == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WintrustGetDefaultForUsage(dwAction: UInt32, pszUsageOID: CPointer<UInt8>, psUsage: CPointer<Win32__impl_l0.CRYPT_PROVIDER_DEFUSAGE>): Int32
+}
+
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WintrustGetDefaultForUsage == "on"]
+public unsafe func Windows_WintrustGetDefaultForUsage(dwAction: UInt32, pszUsageOID: CPointer<UInt8>, psUsage: CPointer<Win32__impl_l0.CRYPT_PROVIDER_DEFUSAGE>): Int32 {
+    return WintrustGetDefaultForUsage(dwAction, pszUsageOID, psUsage)
+}
+
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WintrustGetRegPolicyFlags == "on"]
+foreign {
+    func WintrustGetRegPolicyFlags(pdwPolicyFlags: CPointer<UInt32>): Unit
+}
+
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WintrustGetRegPolicyFlags == "on"]
+public unsafe func Windows_WintrustGetRegPolicyFlags(pdwPolicyFlags: CPointer<UInt32>): Unit {
+    WintrustGetRegPolicyFlags(pdwPolicyFlags)
+}
+
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WintrustLoadFunctionPointers == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+foreign {
+    func WintrustLoadFunctionPointers(pgActionID: CPointer<GUID>, pPfns: CPointer<CRYPT_PROVIDER_FUNCTIONS>): Int32
+}
+
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WintrustLoadFunctionPointers == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public unsafe func Windows_WintrustLoadFunctionPointers(pgActionID: CPointer<GUID>, pPfns: CPointer<CRYPT_PROVIDER_FUNCTIONS>): Int32 {
+    return WintrustLoadFunctionPointers(pgActionID, pPfns)
+}
+
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WintrustRemoveActionID == "on"]
+foreign {
+    func WintrustRemoveActionID(pgActionID: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WintrustRemoveActionID == "on"]
+public unsafe func Windows_WintrustRemoveActionID(pgActionID: CPointer<GUID>): Int32 {
+    return WintrustRemoveActionID(pgActionID)
+}
+
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WintrustSetDefaultIncludePEPageHashes == "on"]
+foreign {
+    func WintrustSetDefaultIncludePEPageHashes(fIncludePEPageHashes: Int32): Unit
+}
+
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WintrustSetDefaultIncludePEPageHashes == "on"]
+public unsafe func Windows_WintrustSetDefaultIncludePEPageHashes(fIncludePEPageHashes: Int32): Unit {
+    WintrustSetDefaultIncludePEPageHashes(fIncludePEPageHashes)
+}
+
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WintrustSetRegPolicyFlags == "on"]
+foreign {
+    func WintrustSetRegPolicyFlags(dwPolicyFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WintrustSetRegPolicyFlags == "on"]
+public unsafe func Windows_WintrustSetRegPolicyFlags(dwPolicyFlags: UInt32): Int32 {
+    return WintrustSetRegPolicyFlags(dwPolicyFlags)
 }
 
 @When[Windows_Win32_Security_WinTrust == "on"]

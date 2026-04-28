@@ -139,10 +139,12 @@ public class AcceptedVoipPhoneCallOptions <: InterfaceWrapperBase & ComInterface
         defaultInterface().SetMedia(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AssociatedDeviceIds(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().AssociatedDeviceIds()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateInstance(associatedDeviceIds: windows_collections.IIterable<windows_core.HString>): AcceptedVoipPhoneCallOptions {
         var result__: Option<AcceptedVoipPhoneCallOptions> = Option<AcceptedVoipPhoneCallOptions>.None
         try (factory__ = windows_core.factory<AcceptedVoipPhoneCallOptions, IAcceptedVoipPhoneCallOptionsFactory>().unwrap()) {
@@ -293,10 +295,12 @@ public class AppInitiatedVoipPhoneCallOptions <: InterfaceWrapperBase & ComInter
         defaultInterface().SetMedia(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AssociatedDeviceIds(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().AssociatedDeviceIds()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateInstance(associatedDeviceIds: windows_collections.IIterable<windows_core.HString>): AppInitiatedVoipPhoneCallOptions {
         var result__: Option<AppInitiatedVoipPhoneCallOptions> = Option<AppInitiatedVoipPhoneCallOptions>.None
         try (factory__ = windows_core.factory<AppInitiatedVoipPhoneCallOptions, IAppInitiatedVoipPhoneCallOptionsFactory>().unwrap()) {
@@ -607,7 +611,10 @@ extend CallStateChangeEventArgs <: windows_core.HandleWinrtType<CallStateChangeE
 @C
 public struct IAcceptedVoipPhoneCallOptionsFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateInstance: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateInstance: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -676,6 +683,7 @@ public class IAcceptedVoipPhoneCallOptionsFactory <: InterfaceWrapperBase & ComI
         readVtbl<IAcceptedVoipPhoneCallOptionsFactoryVtbl>(IAcceptedVoipPhoneCallOptionsFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateInstance(associatedDeviceIds: windows_collections.IIterable<windows_core.HString>): AcceptedVoipPhoneCallOptions {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -692,7 +700,10 @@ extend IAcceptedVoipPhoneCallOptionsFactory <: windows_core.Interface<IAcceptedV
 @C
 public struct IAppInitiatedVoipPhoneCallOptionsFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateInstance: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateInstance: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -761,6 +772,7 @@ public class IAppInitiatedVoipPhoneCallOptionsFactory <: InterfaceWrapperBase & 
         readVtbl<IAppInitiatedVoipPhoneCallOptionsFactoryVtbl>(IAppInitiatedVoipPhoneCallOptionsFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateInstance(associatedDeviceIds: windows_collections.IIterable<windows_core.HString>): AppInitiatedVoipPhoneCallOptions {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -777,7 +789,10 @@ extend IAppInitiatedVoipPhoneCallOptionsFactory <: windows_core.Interface<IAppIn
 @C
 public struct IIncomingVoipPhoneCallOptionsFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateInstance: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateInstance: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -846,6 +861,7 @@ public class IIncomingVoipPhoneCallOptionsFactory <: InterfaceWrapperBase & ComI
         readVtbl<IIncomingVoipPhoneCallOptionsFactoryVtbl>(IIncomingVoipPhoneCallOptionsFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateInstance(associatedDeviceIds: windows_collections.IIterable<windows_core.HString>): IncomingVoipPhoneCallOptions {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1087,7 +1103,10 @@ extend ILockScreenCallUI <: windows_core.Interface<ILockScreenCallUI> {}
 @C
 public struct IOutgoingVoipPhoneCallOptionsFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateInstance: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateInstance: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1156,6 +1175,7 @@ public class IOutgoingVoipPhoneCallOptionsFactory <: InterfaceWrapperBase & ComI
         readVtbl<IOutgoingVoipPhoneCallOptionsFactoryVtbl>(IOutgoingVoipPhoneCallOptionsFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateInstance(associatedDeviceIds: windows_collections.IIterable<windows_core.HString>): OutgoingVoipPhoneCallOptions {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1947,7 +1967,10 @@ extend IPhoneCallHistoryEntryAddressFactory <: windows_core.Interface<IPhoneCall
 @C
 public struct IPhoneCallHistoryEntryReaderVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ReadBatchAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ReadBatchAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2016,6 +2039,7 @@ public class IPhoneCallHistoryEntryReader <: InterfaceWrapperBase & ComInterface
         readVtbl<IPhoneCallHistoryEntryReaderVtbl>(IPhoneCallHistoryEntryReaderVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReadBatchAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<PhoneCallHistoryEntry>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2309,13 +2333,25 @@ public struct IPhoneCallHistoryStoreVtbl {
     public var GetEntryReaderWithOptions: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var SaveEntryAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var DeleteEntryAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var DeleteEntriesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var DeleteEntriesAsync: UIntNative = UIntNative(0)
     public var MarkEntryAsSeenAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var MarkEntriesAsSeenAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var MarkEntriesAsSeenAsync: UIntNative = UIntNative(0)
     public var GetUnseenCountAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var MarkAllAsSeenAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSourcesUnseenCountAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetSourcesUnseenCountAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var MarkSourcesAsSeenAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var MarkSourcesAsSeenAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2424,6 +2460,7 @@ public class IPhoneCallHistoryStore <: InterfaceWrapperBase & ComInterface & Run
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DeleteEntriesAsync(callHistoryEntries: windows_collections.IIterable<PhoneCallHistoryEntry>): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2440,6 +2477,7 @@ public class IPhoneCallHistoryStore <: InterfaceWrapperBase & ComInterface & Run
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MarkEntriesAsSeenAsync(callHistoryEntries: windows_collections.IIterable<PhoneCallHistoryEntry>): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2464,6 +2502,7 @@ public class IPhoneCallHistoryStore <: InterfaceWrapperBase & ComInterface & Run
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSourcesUnseenCountAsync(sourceIds: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<UInt32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2472,6 +2511,7 @@ public class IPhoneCallHistoryStore <: InterfaceWrapperBase & ComInterface & Run
         return windows_future.IAsyncOperation<UInt32>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MarkSourcesAsSeenAsync(sourceIds: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncAction {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2888,7 +2928,10 @@ extend IPhoneCallVideoCapabilitiesManagerStatics <: windows_core.Interface<IPhon
 public struct IPhoneCallsResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var OperationStatus: CFunc<(CPointer<Unit>, CPointer<_impl_l0.PhoneLineOperationStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var AllActivePhoneCalls: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AllActivePhoneCalls: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2965,6 +3008,7 @@ public class IPhoneCallsResult <: InterfaceWrapperBase & ComInterface & RuntimeN
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.PhoneLineOperationStatus>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AllActivePhoneCalls(): windows_collections.IVectorView<PhoneCall> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5520,10 +5564,12 @@ public class IncomingVoipPhoneCallOptions <: InterfaceWrapperBase & ComInterface
         defaultInterface().SetContactRemoteId(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AssociatedDeviceIds(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().AssociatedDeviceIds()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateInstance(associatedDeviceIds: windows_collections.IIterable<windows_core.HString>): IncomingVoipPhoneCallOptions {
         var result__: Option<IncomingVoipPhoneCallOptions> = Option<IncomingVoipPhoneCallOptions>.None
         try (factory__ = windows_core.factory<IncomingVoipPhoneCallOptions, IIncomingVoipPhoneCallOptionsFactory>().unwrap()) {
@@ -5878,10 +5924,12 @@ public class OutgoingVoipPhoneCallOptions <: InterfaceWrapperBase & ComInterface
         defaultInterface().SetMedia(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AssociatedDeviceIds(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().AssociatedDeviceIds()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateInstance(associatedDeviceIds: windows_collections.IIterable<windows_core.HString>): OutgoingVoipPhoneCallOptions {
         var result__: Option<OutgoingVoipPhoneCallOptions> = Option<OutgoingVoipPhoneCallOptions>.None
         try (factory__ = windows_core.factory<OutgoingVoipPhoneCallOptions, IOutgoingVoipPhoneCallOptionsFactory>().unwrap()) {
@@ -6596,6 +6644,7 @@ public class PhoneCallHistoryEntryQueryOptions <: InterfaceWrapperBase & ComInte
         defaultInterface().SetDesiredMedia(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SourceIds(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().SourceIds()
     }
@@ -6688,6 +6737,7 @@ public class PhoneCallHistoryEntryReader <: InterfaceWrapperBase & ComInterface 
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReadBatchAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<PhoneCallHistoryEntry>> {
         return defaultInterface().ReadBatchAsync()
     }
@@ -6941,6 +6991,7 @@ public class PhoneCallHistoryStore <: InterfaceWrapperBase & ComInterface & wind
         return defaultInterface().DeleteEntryAsync(callHistoryEntry)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DeleteEntriesAsync(callHistoryEntries: windows_collections.IIterable<PhoneCallHistoryEntry>): windows_future.IAsyncAction {
         return defaultInterface().DeleteEntriesAsync(callHistoryEntries)
     }
@@ -6949,6 +7000,7 @@ public class PhoneCallHistoryStore <: InterfaceWrapperBase & ComInterface & wind
         return defaultInterface().MarkEntryAsSeenAsync(callHistoryEntry)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MarkEntriesAsSeenAsync(callHistoryEntries: windows_collections.IIterable<PhoneCallHistoryEntry>): windows_future.IAsyncAction {
         return defaultInterface().MarkEntriesAsSeenAsync(callHistoryEntries)
     }
@@ -6961,10 +7013,12 @@ public class PhoneCallHistoryStore <: InterfaceWrapperBase & ComInterface & wind
         return defaultInterface().MarkAllAsSeenAsync()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSourcesUnseenCountAsync(sourceIds: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncOperation<UInt32> {
         return defaultInterface().GetSourcesUnseenCountAsync(sourceIds)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MarkSourcesAsSeenAsync(sourceIds: windows_collections.IIterable<windows_core.HString>): windows_future.IAsyncAction {
         return defaultInterface().MarkSourcesAsSeenAsync(sourceIds)
     }
@@ -7391,6 +7445,7 @@ public class PhoneCallsResult <: InterfaceWrapperBase & ComInterface & windows_i
         return defaultInterface().OperationStatus()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AllActivePhoneCalls(): windows_collections.IVectorView<PhoneCall> {
         return defaultInterface().AllActivePhoneCalls()
     }

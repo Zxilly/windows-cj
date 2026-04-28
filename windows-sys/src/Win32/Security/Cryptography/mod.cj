@@ -15,4 +15,945 @@ public import windows_sys.Win32._impl_l2.{ICertSrvSetup, ICertSrvSetupKeyInforma
 public import windows_sys.Win32._impl_l1.NCRYPT_PROTECT_STREAM_INFO_EX
 @When[Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security == "on"]
 public import windows_sys.Win32._impl_l0.PFNCryptStreamOutputCallbackEx
-
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptAddContextFunction == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptAddContextFunction
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptAddContextFunctionProvider == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptAddContextFunctionProvider
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptCloseAlgorithmProvider == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptCloseAlgorithmProvider
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptConfigureContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptConfigureContext
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptConfigureContextFunction == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptConfigureContextFunction
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptCreateContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptCreateContext
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptCreateHash == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptCreateHash
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptCreateMultiHash == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptCreateMultiHash
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptDecapsulate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptDecapsulate
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptDecrypt == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptDecrypt
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptDeleteContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptDeleteContext
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptDeriveKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptDeriveKey
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptDeriveKeyCapi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptDeriveKeyCapi
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptDeriveKeyPBKDF2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptDeriveKeyPBKDF2
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptDestroyHash == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptDestroyHash
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptDestroyKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptDestroyKey
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptDestroySecret == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptDestroySecret
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptDuplicateHash == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptDuplicateHash
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptDuplicateKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptDuplicateKey
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptEncapsulate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptEncapsulate
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptEncrypt == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptEncrypt
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptEnumAlgorithms == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptEnumAlgorithms
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptEnumContextFunctionProviders == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptEnumContextFunctionProviders
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptEnumContextFunctions == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptEnumContextFunctions
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptEnumContexts == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptEnumContexts
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptEnumProviders == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptEnumProviders
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptEnumRegisteredProviders == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptEnumRegisteredProviders
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptExportKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptExportKey
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptFinalizeKeyPair == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptFinalizeKeyPair
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptFinishHash == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptFinishHash
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptFreeBuffer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptFreeBuffer
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptGenRandom == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptGenRandom
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptGenerateKeyPair == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptGenerateKeyPair
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptGenerateSymmetricKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptGenerateSymmetricKey
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptGetFipsAlgorithmMode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptGetFipsAlgorithmMode
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptGetProperty == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptGetProperty
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptHash == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptHash
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptHashData == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptHashData
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptImportKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptImportKey
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptImportKeyPair == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptImportKeyPair
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptKeyDerivation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptKeyDerivation
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptOpenAlgorithmProvider == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptOpenAlgorithmProvider
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptProcessMultiOperations == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptProcessMultiOperations
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptQueryContextConfiguration == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptQueryContextConfiguration
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptQueryContextFunctionConfiguration == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptQueryContextFunctionConfiguration
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptQueryContextFunctionProperty == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptQueryContextFunctionProperty
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptQueryProviderRegistration == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptQueryProviderRegistration
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptRegisterConfigChangeNotify == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptRegisterConfigChangeNotify
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptRegisterProvider == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptRegisterProvider
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptRemoveContextFunction == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptRemoveContextFunction
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptRemoveContextFunctionProvider == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptRemoveContextFunctionProvider
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptResolveProviders == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptResolveProviders
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptSecretAgreement == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptSecretAgreement
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptSetContextFunctionProperty == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptSetContextFunctionProperty
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptSetProperty == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptSetProperty
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptSignHash == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptSignHash
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptUnregisterConfigChangeNotify == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptUnregisterConfigChangeNotify
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptUnregisterProvider == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptUnregisterProvider
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPT == "on" && Windows_Win32_Security_Cryptography_BCryptVerifySignature == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BCryptVerifySignature
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertAddCRLContextToStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertAddCRLContextToStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertAddCRLLinkToStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertAddCRLLinkToStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertAddCTLContextToStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertAddCTLContextToStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertAddCTLLinkToStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertAddCTLLinkToStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertAddCertificateContextToStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertAddCertificateContextToStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertAddCertificateLinkToStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertAddCertificateLinkToStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertAddEncodedCRLToStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertAddEncodedCRLToStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertAddEncodedCTLToStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertAddEncodedCTLToStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertAddEncodedCertificateToStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertAddEncodedCertificateToStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertAddEncodedCertificateToSystemStoreA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertAddEncodedCertificateToSystemStoreA
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertAddEncodedCertificateToSystemStoreW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertAddEncodedCertificateToSystemStoreW
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertAddEnhancedKeyUsageIdentifier == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertAddEnhancedKeyUsageIdentifier
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertAddRefServerOcspResponse == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertAddRefServerOcspResponse
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertAddRefServerOcspResponseContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertAddRefServerOcspResponseContext
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertAddSerializedElementToStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertAddSerializedElementToStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertAddStoreToCollection == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertAddStoreToCollection
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertAlgIdToOID == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertAlgIdToOID
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertCloseServerOcspResponse == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertCloseServerOcspResponse
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertCloseStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertCloseStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertCompareCertificate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertCompareCertificate
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertCompareCertificateName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertCompareCertificateName
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertCompareIntegerBlob == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertCompareIntegerBlob
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertComparePublicKeyInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertComparePublicKeyInfo
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertControlStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertControlStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertCreateCRLContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertCreateCRLContext
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertCreateCTLContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertCreateCTLContext
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertCreateCTLEntryFromCertificateContextProperties == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertCreateCTLEntryFromCertificateContextProperties
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertCreateCertificateChainEngine == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertCreateCertificateChainEngine
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertCreateCertificateContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertCreateCertificateContext
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertCreateContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertCreateContext
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertCreateSelfSignCertificate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertCreateSelfSignCertificate
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertDeleteCRLFromStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertDeleteCRLFromStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertDeleteCTLFromStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertDeleteCTLFromStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertDeleteCertificateFromStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertDeleteCertificateFromStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertDuplicateCRLContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertDuplicateCRLContext
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertDuplicateCTLContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertDuplicateCTLContext
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertDuplicateCertificateChain == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertDuplicateCertificateChain
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertDuplicateCertificateContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertDuplicateCertificateContext
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertDuplicateStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertDuplicateStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertEnumCRLContextProperties == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertEnumCRLContextProperties
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertEnumCRLsInStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertEnumCRLsInStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertEnumCTLContextProperties == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertEnumCTLContextProperties
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertEnumCTLsInStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertEnumCTLsInStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertEnumCertificateContextProperties == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertEnumCertificateContextProperties
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertEnumCertificatesInStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertEnumCertificatesInStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertEnumPhysicalStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertEnumPhysicalStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertEnumSubjectInSortedCTL == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertEnumSubjectInSortedCTL
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertEnumSystemStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertEnumSystemStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertEnumSystemStoreLocation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertEnumSystemStoreLocation
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertFindAttribute == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertFindAttribute
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertFindCRLInStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertFindCRLInStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertFindCTLInStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertFindCTLInStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertFindCertificateInCRL == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertFindCertificateInCRL
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertFindCertificateInStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertFindCertificateInStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertFindChainInStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertFindChainInStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertFindExtension == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertFindExtension
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertFindRDNAttr == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertFindRDNAttr
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertFindSubjectInCTL == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertFindSubjectInCTL
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertFindSubjectInSortedCTL == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertFindSubjectInSortedCTL
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertFreeCRLContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertFreeCRLContext
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertFreeCTLContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertFreeCTLContext
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertFreeCertificateChain == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertFreeCertificateChain
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertFreeCertificateChainEngine == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertFreeCertificateChainEngine
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertFreeCertificateChainList == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertFreeCertificateChainList
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertFreeCertificateContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertFreeCertificateContext
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertFreeServerOcspResponseContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertFreeServerOcspResponseContext
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertGetCRLContextProperty == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertGetCRLContextProperty
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertGetCRLFromStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertGetCRLFromStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertGetCTLContextProperty == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertGetCTLContextProperty
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertGetCertificateChain == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertGetCertificateChain
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertGetCertificateContextProperty == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertGetCertificateContextProperty
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertGetEnhancedKeyUsage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertGetEnhancedKeyUsage
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertGetIntendedKeyUsage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertGetIntendedKeyUsage
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertGetIssuerCertificateFromStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertGetIssuerCertificateFromStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertGetNameStringA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertGetNameStringA
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertGetNameStringW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertGetNameStringW
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertGetPublicKeyLength == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertGetPublicKeyLength
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertGetServerOcspResponseContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertGetServerOcspResponseContext
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertGetStoreProperty == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertGetStoreProperty
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertGetSubjectCertificateFromStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertGetSubjectCertificateFromStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertGetValidUsages == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertGetValidUsages
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertIsRDNAttrsInCertificateName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertIsRDNAttrsInCertificateName
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertIsStrongHashToSign == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertIsStrongHashToSign
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertIsValidCRLForCertificate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertIsValidCRLForCertificate
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertIsWeakHash == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertIsWeakHash
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertNameToStrA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertNameToStrA
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertNameToStrW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertNameToStrW
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertOIDToAlgId == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertOIDToAlgId
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertOpenServerOcspResponse == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertOpenServerOcspResponse
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertOpenStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertOpenStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertOpenSystemStoreA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertOpenSystemStoreA
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertOpenSystemStoreW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertOpenSystemStoreW
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertRDNValueToStrA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertRDNValueToStrA
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertRDNValueToStrW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertRDNValueToStrW
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertRegisterPhysicalStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertRegisterPhysicalStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertRegisterSystemStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertRegisterSystemStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertRemoveEnhancedKeyUsageIdentifier == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertRemoveEnhancedKeyUsageIdentifier
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertRemoveStoreFromCollection == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertRemoveStoreFromCollection
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertResyncCertificateChainEngine == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertResyncCertificateChainEngine
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertRetrieveLogoOrBiometricInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertRetrieveLogoOrBiometricInfo
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertSaveStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertSaveStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertSelectCertificateChains == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertSelectCertificateChains
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertSerializeCRLStoreElement == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertSerializeCRLStoreElement
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertSerializeCTLStoreElement == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertSerializeCTLStoreElement
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertSerializeCertificateStoreElement == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertSerializeCertificateStoreElement
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertSetCRLContextProperty == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertSetCRLContextProperty
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertSetCTLContextProperty == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertSetCTLContextProperty
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertSetCertificateContextPropertiesFromCTLEntry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertSetCertificateContextPropertiesFromCTLEntry
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertSetCertificateContextProperty == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertSetCertificateContextProperty
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertSetEnhancedKeyUsage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertSetEnhancedKeyUsage
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertSetStoreProperty == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertSetStoreProperty
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertStrToNameA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertStrToNameA
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertStrToNameW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertStrToNameW
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertUnregisterPhysicalStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertUnregisterPhysicalStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertUnregisterSystemStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertUnregisterSystemStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertVerifyCRLRevocation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertVerifyCRLRevocation
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertVerifyCRLTimeValidity == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertVerifyCRLTimeValidity
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertVerifyCTLUsage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertVerifyCTLUsage
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertVerifyCertificateChainPolicy == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertVerifyCertificateChainPolicy
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertVerifyRevocation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertVerifyRevocation
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertVerifySubjectCertificateContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertVerifySubjectCertificateContext
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertVerifyTimeValidity == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertVerifyTimeValidity
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CertVerifyValidityNesting == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CertVerifyValidityNesting
+@When[Windows_Win32_Security_Cryptography == "on" && INFOCARDAPI == "on" && Windows_Win32_Security_Cryptography_CloseCryptoHandle == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CloseCryptoHandle
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptAcquireCertificatePrivateKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptAcquireCertificatePrivateKey
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptAcquireContextA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptAcquireContextA
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptAcquireContextW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptAcquireContextW
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptBinaryToStringA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptBinaryToStringA
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptBinaryToStringW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptBinaryToStringW
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptCloseAsyncHandle == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptCloseAsyncHandle
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptContextAddRef == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptContextAddRef
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptCreateAsyncHandle == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptCreateAsyncHandle
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptCreateHash == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptCreateHash
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptCreateKeyIdentifierFromCSP == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptCreateKeyIdentifierFromCSP
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptDecodeMessage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptDecodeMessage
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptDecodeObject == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptDecodeObject
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptDecodeObjectEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptDecodeObjectEx
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptDecrypt == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptDecrypt
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptDecryptAndVerifyMessageSignature == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptDecryptAndVerifyMessageSignature
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptDecryptMessage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptDecryptMessage
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptDeriveKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptDeriveKey
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptDestroyHash == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptDestroyHash
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptDestroyKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptDestroyKey
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptDuplicateHash == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptDuplicateHash
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptDuplicateKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptDuplicateKey
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptEncodeObject == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptEncodeObject
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptEncodeObjectEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptEncodeObjectEx
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptEncrypt == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptEncrypt
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptEncryptMessage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptEncryptMessage
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptEnumKeyIdentifierProperties == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptEnumKeyIdentifierProperties
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptEnumOIDFunction == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptEnumOIDFunction
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptEnumOIDInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptEnumOIDInfo
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptEnumProviderTypesA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptEnumProviderTypesA
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptEnumProviderTypesW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptEnumProviderTypesW
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptEnumProvidersA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptEnumProvidersA
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptEnumProvidersW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptEnumProvidersW
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptExportKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptExportKey
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptExportPKCS8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptExportPKCS8
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptExportPublicKeyInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptExportPublicKeyInfo
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptExportPublicKeyInfoEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptExportPublicKeyInfoEx
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptExportPublicKeyInfoFromBCryptKeyHandle == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptExportPublicKeyInfoFromBCryptKeyHandle
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptFindCertificateKeyProvInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptFindCertificateKeyProvInfo
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptFindLocalizedName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptFindLocalizedName
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptFindOIDInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptFindOIDInfo
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptFormatObject == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptFormatObject
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptFreeOIDFunctionAddress == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptFreeOIDFunctionAddress
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptGenKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptGenKey
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptGenRandom == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptGenRandom
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptGetAsyncParam == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptGetAsyncParam
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptGetDefaultOIDDllList == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptGetDefaultOIDDllList
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptGetDefaultOIDFunctionAddress == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptGetDefaultOIDFunctionAddress
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptGetDefaultProviderA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptGetDefaultProviderA
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptGetDefaultProviderW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptGetDefaultProviderW
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptGetHashParam == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptGetHashParam
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptGetKeyIdentifierProperty == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptGetKeyIdentifierProperty
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptGetKeyParam == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptGetKeyParam
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptGetMessageCertificates == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptGetMessageCertificates
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptGetMessageSignerCount == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptGetMessageSignerCount
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptGetOIDFunctionAddress == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptGetOIDFunctionAddress
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptGetOIDFunctionValue == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptGetOIDFunctionValue
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPTNET == "on" && Windows_Win32_Security_Cryptography_CryptGetObjectUrl == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptGetObjectUrl
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptGetProvParam == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptGetProvParam
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptGetUserKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptGetUserKey
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptHashCertificate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptHashCertificate
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptHashCertificate2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptHashCertificate2
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptHashData == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptHashData
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptHashMessage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptHashMessage
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptHashPublicKeyInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptHashPublicKeyInfo
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptHashSessionKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptHashSessionKey
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptHashToBeSigned == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptHashToBeSigned
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptImportKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptImportKey
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptImportPKCS8 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptImportPKCS8
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptImportPublicKeyInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptImportPublicKeyInfo
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptImportPublicKeyInfoEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptImportPublicKeyInfoEx
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptImportPublicKeyInfoEx2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptImportPublicKeyInfoEx2
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptInitOIDFunctionSet == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptInitOIDFunctionSet
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPTNET == "on" && Windows_Win32_Security_Cryptography_CryptInstallCancelRetrieval == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptInstallCancelRetrieval
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptInstallDefaultContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptInstallDefaultContext
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptInstallOIDFunctionAddress == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptInstallOIDFunctionAddress
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptMemAlloc == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptMemAlloc
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptMemFree == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptMemFree
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptMemRealloc == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptMemRealloc
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptMsgCalculateEncodedLength == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptMsgCalculateEncodedLength
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptMsgClose == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptMsgClose
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptMsgControl == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptMsgControl
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptMsgCountersign == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptMsgCountersign
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptMsgCountersignEncoded == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptMsgCountersignEncoded
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptMsgDuplicate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptMsgDuplicate
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptMsgEncodeAndSignCTL == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptMsgEncodeAndSignCTL
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptMsgGetAndVerifySigner == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptMsgGetAndVerifySigner
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptMsgGetParam == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptMsgGetParam
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptMsgOpenToDecode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptMsgOpenToDecode
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptMsgOpenToEncode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptMsgOpenToEncode
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptMsgSignCTL == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptMsgSignCTL
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptMsgUpdate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptMsgUpdate
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptMsgVerifyCountersignatureEncoded == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptMsgVerifyCountersignatureEncoded
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptMsgVerifyCountersignatureEncodedEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptMsgVerifyCountersignatureEncodedEx
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptProtectData == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptProtectData
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptProtectMemory == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptProtectMemory
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptQueryObject == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptQueryObject
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptRegisterDefaultOIDFunction == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptRegisterDefaultOIDFunction
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptRegisterOIDFunction == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptRegisterOIDFunction
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptRegisterOIDInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptRegisterOIDInfo
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptReleaseContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptReleaseContext
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPTNET == "on" && Windows_Win32_Security_Cryptography_CryptRetrieveObjectByUrlA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptRetrieveObjectByUrlA
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPTNET == "on" && Windows_Win32_Security_Cryptography_CryptRetrieveObjectByUrlW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptRetrieveObjectByUrlW
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptRetrieveTimeStamp == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptRetrieveTimeStamp
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptSetAsyncParam == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptSetAsyncParam
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptSetHashParam == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptSetHashParam
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptSetKeyIdentifierProperty == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptSetKeyIdentifierProperty
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptSetKeyParam == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptSetKeyParam
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptSetOIDFunctionValue == "on" && Windows_Win32_System_Registry == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptSetOIDFunctionValue
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptSetProvParam == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptSetProvParam
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptSetProviderA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptSetProviderA
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptSetProviderExA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptSetProviderExA
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptSetProviderExW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptSetProviderExW
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptSetProviderW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptSetProviderW
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptSignAndEncodeCertificate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptSignAndEncodeCertificate
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptSignAndEncryptMessage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptSignAndEncryptMessage
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptSignCertificate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptSignCertificate
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptSignHashA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptSignHashA
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptSignHashW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptSignHashW
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptSignMessage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptSignMessage
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptSignMessageWithKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptSignMessageWithKey
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptStringToBinaryA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptStringToBinaryA
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptStringToBinaryW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptStringToBinaryW
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPTNET == "on" && Windows_Win32_Security_Cryptography_CryptUninstallCancelRetrieval == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptUninstallCancelRetrieval
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptUninstallDefaultContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptUninstallDefaultContext
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptUnprotectData == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptUnprotectData
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptUnprotectMemory == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptUnprotectMemory
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptUnregisterDefaultOIDFunction == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptUnregisterDefaultOIDFunction
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptUnregisterOIDFunction == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptUnregisterOIDFunction
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptUnregisterOIDInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptUnregisterOIDInfo
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptUpdateProtectedState == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptUpdateProtectedState
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptVerifyCertificateSignature == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptVerifyCertificateSignature
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptVerifyCertificateSignatureEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptVerifyCertificateSignatureEx
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptVerifyDetachedMessageHash == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptVerifyDetachedMessageHash
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptVerifyDetachedMessageSignature == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptVerifyDetachedMessageSignature
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptVerifyMessageHash == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptVerifyMessageHash
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptVerifyMessageSignature == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptVerifyMessageSignature
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptVerifyMessageSignatureWithKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptVerifyMessageSignatureWithKey
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptVerifySignatureA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptVerifySignatureA
+@When[Windows_Win32_Security_Cryptography == "on" && ADVAPI32 == "on" && Windows_Win32_Security_Cryptography_CryptVerifySignatureW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptVerifySignatureW
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_CryptVerifyTimeStampSignature == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptVerifyTimeStampSignature
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPTXML == "on" && Windows_Win32_Security_Cryptography_CryptXmlAddObject == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptXmlAddObject
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPTXML == "on" && Windows_Win32_Security_Cryptography_CryptXmlClose == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptXmlClose
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPTXML == "on" && Windows_Win32_Security_Cryptography_CryptXmlCreateReference == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptXmlCreateReference
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPTXML == "on" && Windows_Win32_Security_Cryptography_CryptXmlDigestReference == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptXmlDigestReference
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPTXML == "on" && Windows_Win32_Security_Cryptography_CryptXmlEncode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptXmlEncode
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPTXML == "on" && Windows_Win32_Security_Cryptography_CryptXmlEnumAlgorithmInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptXmlEnumAlgorithmInfo
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPTXML == "on" && Windows_Win32_Security_Cryptography_CryptXmlFindAlgorithmInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptXmlFindAlgorithmInfo
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPTXML == "on" && Windows_Win32_Security_Cryptography_CryptXmlGetAlgorithmInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptXmlGetAlgorithmInfo
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPTXML == "on" && Windows_Win32_Security_Cryptography_CryptXmlGetDocContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptXmlGetDocContext
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPTXML == "on" && Windows_Win32_Security_Cryptography_CryptXmlGetReference == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptXmlGetReference
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPTXML == "on" && Windows_Win32_Security_Cryptography_CryptXmlGetSignature == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptXmlGetSignature
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPTXML == "on" && Windows_Win32_Security_Cryptography_CryptXmlGetStatus == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptXmlGetStatus
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPTXML == "on" && Windows_Win32_Security_Cryptography_CryptXmlGetTransforms == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptXmlGetTransforms
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPTXML == "on" && Windows_Win32_Security_Cryptography_CryptXmlImportPublicKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptXmlImportPublicKey
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPTXML == "on" && Windows_Win32_Security_Cryptography_CryptXmlOpenToDecode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptXmlOpenToDecode
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPTXML == "on" && Windows_Win32_Security_Cryptography_CryptXmlOpenToEncode == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptXmlOpenToEncode
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPTXML == "on" && Windows_Win32_Security_Cryptography_CryptXmlSetHMACSecret == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptXmlSetHMACSecret
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPTXML == "on" && Windows_Win32_Security_Cryptography_CryptXmlSign == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptXmlSign
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPTXML == "on" && Windows_Win32_Security_Cryptography_CryptXmlVerifySignature == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CryptXmlVerifySignature
+@When[Windows_Win32_Security_Cryptography == "on" && INFOCARDAPI == "on" && Windows_Win32_Security_Cryptography_Decrypt == "on"]
+public import windows_sys.Win32._impl_l2.Windows_Decrypt
+@When[Windows_Win32_Security_Cryptography == "on" && INFOCARDAPI == "on" && Windows_Win32_Security_Cryptography_Encrypt == "on"]
+public import windows_sys.Win32._impl_l2.Windows_Encrypt
+@When[Windows_Win32_Security_Cryptography == "on" && WINTRUST == "on" && Windows_Win32_Security_Cryptography_FindCertsByIssuer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindCertsByIssuer
+@When[Windows_Win32_Security_Cryptography == "on" && INFOCARDAPI == "on" && Windows_Win32_Security_Cryptography_FreeToken == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FreeToken
+@When[Windows_Win32_Security_Cryptography == "on" && INFOCARDAPI == "on" && Windows_Win32_Security_Cryptography_GenerateDerivedKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GenerateDerivedKey
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPTPRIMITIVES == "on" && Windows_Win32_Security_Cryptography_GetAsymmetricEncryptionInterface == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetAsymmetricEncryptionInterface
+@When[Windows_Win32_Security_Cryptography == "on" && INFOCARDAPI == "on" && Windows_Win32_Security_Cryptography_GetBrowserToken == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetBrowserToken
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPTPRIMITIVES == "on" && Windows_Win32_Security_Cryptography_GetCipherInterface == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetCipherInterface
+@When[Windows_Win32_Security_Cryptography == "on" && INFOCARDAPI == "on" && Windows_Win32_Security_Cryptography_GetCryptoTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetCryptoTransform
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPTPRIMITIVES == "on" && Windows_Win32_Security_Cryptography_GetHashInterface == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetHashInterface
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPTPRIMITIVES == "on" && Windows_Win32_Security_Cryptography_GetKeyDerivationInterface == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetKeyDerivationInterface
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_GetKeyStorageInterface == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetKeyStorageInterface
+@When[Windows_Win32_Security_Cryptography == "on" && INFOCARDAPI == "on" && Windows_Win32_Security_Cryptography_GetKeyedHash == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetKeyedHash
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPTPRIMITIVES == "on" && Windows_Win32_Security_Cryptography_GetRngInterface == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetRngInterface
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_GetSChannelInterface == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetSChannelInterface
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPTPRIMITIVES == "on" && Windows_Win32_Security_Cryptography_GetSecretAgreementInterface == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetSecretAgreementInterface
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPTPRIMITIVES == "on" && Windows_Win32_Security_Cryptography_GetSignatureInterface == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetSignatureInterface
+@When[Windows_Win32_Security_Cryptography == "on" && INFOCARDAPI == "on" && Windows_Win32_Security_Cryptography_GetToken == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetToken
+@When[Windows_Win32_Security_Cryptography == "on" && INFOCARDAPI == "on" && Windows_Win32_Security_Cryptography_HashCore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HashCore
+@When[Windows_Win32_Security_Cryptography == "on" && INFOCARDAPI == "on" && Windows_Win32_Security_Cryptography_HashFinal == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HashFinal
+@When[Windows_Win32_Security_Cryptography == "on" && INFOCARDAPI == "on" && Windows_Win32_Security_Cryptography_ImportInformationCard == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ImportInformationCard
+@When[Windows_Win32_Security_Cryptography == "on" && INFOCARDAPI == "on" && Windows_Win32_Security_Cryptography_ManageCardSpace == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ManageCardSpace
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptCloseProtectionDescriptor == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptCloseProtectionDescriptor
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptCreateClaim == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptCreateClaim
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptCreatePersistedKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptCreatePersistedKey
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptCreateProtectionDescriptor == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptCreateProtectionDescriptor
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptDecapsulate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptDecapsulate
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptDecrypt == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptDecrypt
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptDeleteKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptDeleteKey
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptDeriveKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptDeriveKey
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptEncapsulate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptEncapsulate
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptEncrypt == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptEncrypt
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptEnumAlgorithms == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptEnumAlgorithms
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptEnumKeys == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptEnumKeys
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptEnumStorageProviders == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptEnumStorageProviders
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptExportKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptExportKey
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptFinalizeKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptFinalizeKey
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptFreeBuffer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptFreeBuffer
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptFreeObject == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptFreeObject
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptGetProperty == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptGetProperty
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptGetProtectionDescriptorInfo == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptGetProtectionDescriptorInfo
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptImportKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptImportKey
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptIsAlgSupported == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptIsAlgSupported
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptIsKeyHandle == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptIsKeyHandle
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptKeyDerivation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptKeyDerivation
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptNotifyChangeKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptNotifyChangeKey
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptOpenKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptOpenKey
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptOpenStorageProvider == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptOpenStorageProvider
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptProtectSecret == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptProtectSecret
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptQueryProtectionDescriptorName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptQueryProtectionDescriptorName
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptRegisterProtectionDescriptorName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptRegisterProtectionDescriptorName
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptSecretAgreement == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptSecretAgreement
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptSetProperty == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptSetProperty
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptSignHash == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptSignHash
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptStreamClose == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptStreamClose
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptStreamOpenToProtect == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptStreamOpenToProtect
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptStreamOpenToUnprotect == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptStreamOpenToUnprotect
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptStreamOpenToUnprotectEx == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptStreamOpenToUnprotectEx
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptStreamUpdate == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptStreamUpdate
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptTranslateHandle == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptTranslateHandle
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptUnprotectSecret == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptUnprotectSecret
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptVerifyClaim == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptVerifyClaim
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_NCryptVerifySignature == "on"]
+public import windows_sys.Win32._impl_l2.Windows_NCryptVerifySignature
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_PFXExportCertStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PFXExportCertStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_PFXExportCertStoreEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PFXExportCertStoreEx
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_PFXImportCertStore == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PFXImportCertStore
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_PFXIsPFXBlob == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PFXIsPFXBlob
+@When[Windows_Win32_Security_Cryptography == "on" && CRYPT32 == "on" && Windows_Win32_Security_Cryptography_PFXVerifyPassword == "on"]
+public import windows_sys.Win32._impl_l2.Windows_PFXVerifyPassword
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPTPRIMITIVES == "on" && Windows_Win32_Security_Cryptography_ProcessPrng == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ProcessPrng
+@When[Windows_Win32_Security_Cryptography == "on" && MSSIGN32 == "on" && Windows_Win32_Security_Cryptography_SignError == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SignError
+@When[Windows_Win32_Security_Cryptography == "on" && INFOCARDAPI == "on" && Windows_Win32_Security_Cryptography_SignHash == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SignHash
+@When[Windows_Win32_Security_Cryptography == "on" && MSSIGN32 == "on" && Windows_Win32_Security_Cryptography_SignerFreeSignerContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SignerFreeSignerContext
+@When[Windows_Win32_Security_Cryptography == "on" && MSSIGN32 == "on" && Windows_Win32_Security_Cryptography_SignerSign == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SignerSign
+@When[Windows_Win32_Security_Cryptography == "on" && MSSIGN32 == "on" && Windows_Win32_Security_Cryptography_SignerSignEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SignerSignEx
+@When[Windows_Win32_Security_Cryptography == "on" && MSSIGN32 == "on" && Windows_Win32_Security_Cryptography_SignerSignEx2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SignerSignEx2
+@When[Windows_Win32_Security_Cryptography == "on" && MSSIGN32 == "on" && Windows_Win32_Security_Cryptography_SignerSignEx3 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SignerSignEx3
+@When[Windows_Win32_Security_Cryptography == "on" && MSSIGN32 == "on" && Windows_Win32_Security_Cryptography_SignerTimeStamp == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SignerTimeStamp
+@When[Windows_Win32_Security_Cryptography == "on" && MSSIGN32 == "on" && Windows_Win32_Security_Cryptography_SignerTimeStampEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SignerTimeStampEx
+@When[Windows_Win32_Security_Cryptography == "on" && MSSIGN32 == "on" && Windows_Win32_Security_Cryptography_SignerTimeStampEx2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SignerTimeStampEx2
+@When[Windows_Win32_Security_Cryptography == "on" && MSSIGN32 == "on" && Windows_Win32_Security_Cryptography_SignerTimeStampEx3 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SignerTimeStampEx3
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslChangeNotify == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslChangeNotify
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslComputeClientAuthHash == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslComputeClientAuthHash
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslComputeEapKeyBlock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslComputeEapKeyBlock
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslComputeFinishedHash == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslComputeFinishedHash
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslComputeSessionHash == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslComputeSessionHash
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslCreateClientAuthHash == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslCreateClientAuthHash
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslCreateEphemeralKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslCreateEphemeralKey
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslCreateHandshakeHash == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslCreateHandshakeHash
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslDecrementProviderReferenceCount == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslDecrementProviderReferenceCount
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslDecryptPacket == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslDecryptPacket
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslDuplicateTranscriptHash == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslDuplicateTranscriptHash
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslEncryptPacket == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslEncryptPacket
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslEnumCipherSuites == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslEnumCipherSuites
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslEnumCipherSuitesEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslEnumCipherSuitesEx
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslEnumEccCurves == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslEnumEccCurves
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslEnumProtocolProviders == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslEnumProtocolProviders
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslExpandBinderKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslExpandBinderKey
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslExpandExporterMasterKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslExpandExporterMasterKey
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslExpandPreSharedKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslExpandPreSharedKey
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslExpandResumptionMasterKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslExpandResumptionMasterKey
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslExpandTrafficKeys == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslExpandTrafficKeys
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslExpandWriteKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslExpandWriteKey
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslExportKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslExportKey
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslExportKeyingMaterial == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslExportKeyingMaterial
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslExtractEarlyKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslExtractEarlyKey
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslExtractHandshakeKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslExtractHandshakeKey
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslExtractMasterKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslExtractMasterKey
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslFreeBuffer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslFreeBuffer
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslFreeObject == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslFreeObject
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslGenerateMasterKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslGenerateMasterKey
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslGeneratePreMasterKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslGeneratePreMasterKey
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslGenerateSessionKeys == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslGenerateSessionKeys
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslGetCipherSuitePRFHashAlgorithm == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslGetCipherSuitePRFHashAlgorithm
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslGetKeyProperty == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslGetKeyProperty
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslGetProviderProperty == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslGetProviderProperty
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslHashHandshake == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslHashHandshake
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslImportKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslImportKey
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslImportMasterKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslImportMasterKey
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslIncrementProviderReferenceCount == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslIncrementProviderReferenceCount
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslLookupCipherLengths == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslLookupCipherLengths
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslLookupCipherSuiteInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslLookupCipherSuiteInfo
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslOpenPrivateKey == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslOpenPrivateKey
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslOpenProvider == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslOpenProvider
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslSignHash == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslSignHash
+@When[Windows_Win32_Security_Cryptography == "on" && NCRYPT == "on" && Windows_Win32_Security_Cryptography_SslVerifySignature == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SslVerifySignature
+@When[Windows_Win32_Security_Cryptography == "on" && BCRYPTPRIMITIVES == "on" && Windows_Win32_Security_Cryptography_SystemPrng == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SystemPrng
+@When[Windows_Win32_Security_Cryptography == "on" && INFOCARDAPI == "on" && Windows_Win32_Security_Cryptography_TransformBlock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TransformBlock
+@When[Windows_Win32_Security_Cryptography == "on" && INFOCARDAPI == "on" && Windows_Win32_Security_Cryptography_TransformFinalBlock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_TransformFinalBlock
+@When[Windows_Win32_Security_Cryptography == "on" && INFOCARDAPI == "on" && Windows_Win32_Security_Cryptography_VerifyHash == "on"]
+public import windows_sys.Win32._impl_l2.Windows_VerifyHash

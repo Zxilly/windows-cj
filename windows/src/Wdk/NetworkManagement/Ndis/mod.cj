@@ -11,9 +11,7 @@ import windows_interface as windows_interface
 import windows_polyfill.{unionReadInt32, unionReadUInt32, unionWriteInt32, unionWriteUInt32}
 import windows_polyfill as windows_polyfill
 import windows.Wdk._impl_l0 as Wdk__impl_l0
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_NetworkManagement_Ndis == "on"]
 import windows.Win32.NetworkManagement.Ndis as Win32_NetworkManagement_Ndis
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows_core as windows_core
@@ -11108,128 +11106,732 @@ extend OFFLOAD_IPSEC_UDPESP_ENCAPTYPE_ENTRY <: windows_core.CopyType & windows_c
     }
 }
 
-@When[NDIS_SYS == "on"]
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisWriteErrorLogEntry == "on"]
 @CallingConv[CDECL]
 foreign {
     // pinvoke-hint: cc=cdecl
     func NdisWriteErrorLogEntry(NdisAdapterHandle: CPointer<Unit>, ErrorCode: UInt32, NumberOfErrorValues: UInt32, ...): Unit
 }
 
-@When[NDIS_SYS == "on"]
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisAcquireReadWriteLock == "on"]
 foreign {
     func NdisAcquireReadWriteLock(Lock: CPointer<NDIS_RW_LOCKAbi>, fWrite: UInt8, LockState: CPointer<LOCK_STATEAbi>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisAcquireReadWriteLock == "on"]
+public unsafe func Windows_NdisAcquireReadWriteLock(Lock: CPointer<NDIS_RW_LOCKAbi>, fWrite: UInt8, LockState: CPointer<LOCK_STATEAbi>): Unit {
+    NdisAcquireReadWriteLock(Lock, fWrite, LockState)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisAllocateMemoryWithTag == "on"]
+foreign {
     func NdisAllocateMemoryWithTag(VirtualAddress: CPointer<CPointer<Unit>>, Length: UInt32, Tag: UInt32): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisAllocateMemoryWithTag == "on"]
+public unsafe func Windows_NdisAllocateMemoryWithTag(VirtualAddress: CPointer<CPointer<Unit>>, Length: UInt32, Tag: UInt32): Int32 {
+    return NdisAllocateMemoryWithTag(VirtualAddress, Length, Tag)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCancelTimer == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on"]
+foreign {
+    func NdisCancelTimer(Timer: CPointer<NDIS_TIMERAbi>, TimerCancelled: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCancelTimer == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on"]
+public unsafe func Windows_NdisCancelTimer(Timer: CPointer<NDIS_TIMERAbi>, TimerCancelled: CPointer<UInt8>): Unit {
+    NdisCancelTimer(Timer, TimerCancelled)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisClAddParty == "on"]
+foreign {
     func NdisClAddParty(NdisVcHandle: CPointer<Unit>, ProtocolPartyContext: CPointer<Unit>, CallParameters: CPointer<CO_CALL_PARAMETERSAbi>, NdisPartyHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisClAddParty == "on"]
+public unsafe func Windows_NdisClAddParty(NdisVcHandle: CPointer<Unit>, ProtocolPartyContext: CPointer<Unit>, CallParameters: CPointer<CO_CALL_PARAMETERSAbi>, NdisPartyHandle: CPointer<CPointer<Unit>>): Int32 {
+    return NdisClAddParty(NdisVcHandle, ProtocolPartyContext, CallParameters, NdisPartyHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisClCloseAddressFamily == "on"]
+foreign {
     func NdisClCloseAddressFamily(NdisAfHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisClCloseAddressFamily == "on"]
+public unsafe func Windows_NdisClCloseAddressFamily(NdisAfHandle: CPointer<Unit>): Int32 {
+    return NdisClCloseAddressFamily(NdisAfHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisClCloseCall == "on"]
+foreign {
     // param-hint: NdisPartyHandle optional
     // param-hint: Buffer bytes=param[3] optional
     func NdisClCloseCall(NdisVcHandle: CPointer<Unit>, NdisPartyHandle: CPointer<Unit>, Buffer: CPointer<Unit>, Size: UInt32): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisClCloseCall == "on"]
+public unsafe func Windows_NdisClCloseCall(NdisVcHandle: CPointer<Unit>, NdisPartyHandle: CPointer<Unit>, Buffer: CPointer<Unit>, Size: UInt32): Int32 {
+    return NdisClCloseCall(NdisVcHandle, NdisPartyHandle, Buffer, Size)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisClDeregisterSap == "on"]
+foreign {
     func NdisClDeregisterSap(NdisSapHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisClDeregisterSap == "on"]
+public unsafe func Windows_NdisClDeregisterSap(NdisSapHandle: CPointer<Unit>): Int32 {
+    return NdisClDeregisterSap(NdisSapHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisClDropParty == "on"]
+foreign {
     // param-hint: Buffer bytes=param[2] optional
     // param-hint: Size optional
     func NdisClDropParty(NdisPartyHandle: CPointer<Unit>, Buffer: CPointer<Unit>, Size: UInt32): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisClDropParty == "on"]
+public unsafe func Windows_NdisClDropParty(NdisPartyHandle: CPointer<Unit>, Buffer: CPointer<Unit>, Size: UInt32): Int32 {
+    return NdisClDropParty(NdisPartyHandle, Buffer, Size)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisClGetProtocolVcContextFromTapiCallId == "on"]
+foreign {
     func NdisClGetProtocolVcContextFromTapiCallId(TapiCallId: Win32_Foundation.UNICODE_STRINGAbi, ProtocolVcContext: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisClGetProtocolVcContextFromTapiCallId == "on"]
+public unsafe func Windows_NdisClGetProtocolVcContextFromTapiCallId(TapiCallId: Win32_Foundation.UNICODE_STRINGAbi, ProtocolVcContext: CPointer<CPointer<Unit>>): Int32 {
+    return NdisClGetProtocolVcContextFromTapiCallId(TapiCallId, ProtocolVcContext)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisClIncomingCallComplete == "on"]
+foreign {
     func NdisClIncomingCallComplete(Status: Int32, NdisVcHandle: CPointer<Unit>, CallParameters: CPointer<CO_CALL_PARAMETERSAbi>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisClIncomingCallComplete == "on"]
+public unsafe func Windows_NdisClIncomingCallComplete(Status: Int32, NdisVcHandle: CPointer<Unit>, CallParameters: CPointer<CO_CALL_PARAMETERSAbi>): Unit {
+    NdisClIncomingCallComplete(Status, NdisVcHandle, CallParameters)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisClMakeCall == "on"]
+foreign {
     // param-hint: ProtocolPartyContext optional
     // param-hint: NdisPartyHandle optional
     func NdisClMakeCall(NdisVcHandle: CPointer<Unit>, CallParameters: CPointer<CO_CALL_PARAMETERSAbi>, ProtocolPartyContext: CPointer<Unit>, NdisPartyHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisClMakeCall == "on"]
+public unsafe func Windows_NdisClMakeCall(NdisVcHandle: CPointer<Unit>, CallParameters: CPointer<CO_CALL_PARAMETERSAbi>, ProtocolPartyContext: CPointer<Unit>, NdisPartyHandle: CPointer<CPointer<Unit>>): Int32 {
+    return NdisClMakeCall(NdisVcHandle, CallParameters, ProtocolPartyContext, NdisPartyHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisClModifyCallQoS == "on"]
+foreign {
     func NdisClModifyCallQoS(NdisVcHandle: CPointer<Unit>, CallParameters: CPointer<CO_CALL_PARAMETERSAbi>): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisClModifyCallQoS == "on"]
+public unsafe func Windows_NdisClModifyCallQoS(NdisVcHandle: CPointer<Unit>, CallParameters: CPointer<CO_CALL_PARAMETERSAbi>): Int32 {
+    return NdisClModifyCallQoS(NdisVcHandle, CallParameters)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisClRegisterSap == "on"]
+foreign {
     func NdisClRegisterSap(NdisAfHandle: CPointer<Unit>, ProtocolSapContext: CPointer<Unit>, Sap: CPointer<CO_SAPAbi>, NdisSapHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisClRegisterSap == "on"]
+public unsafe func Windows_NdisClRegisterSap(NdisAfHandle: CPointer<Unit>, ProtocolSapContext: CPointer<Unit>, Sap: CPointer<CO_SAPAbi>, NdisSapHandle: CPointer<CPointer<Unit>>): Int32 {
+    return NdisClRegisterSap(NdisAfHandle, ProtocolSapContext, Sap, NdisSapHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCloseConfiguration == "on"]
+foreign {
     func NdisCloseConfiguration(ConfigurationHandle: CPointer<Unit>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCloseConfiguration == "on"]
+public unsafe func Windows_NdisCloseConfiguration(ConfigurationHandle: CPointer<Unit>): Unit {
+    NdisCloseConfiguration(ConfigurationHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCloseFile == "on"]
+foreign {
     func NdisCloseFile(FileHandle: CPointer<Unit>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCloseFile == "on"]
+public unsafe func Windows_NdisCloseFile(FileHandle: CPointer<Unit>): Unit {
+    NdisCloseFile(FileHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCmActivateVc == "on"]
+foreign {
     func NdisCmActivateVc(NdisVcHandle: CPointer<Unit>, CallParameters: CPointer<CO_CALL_PARAMETERSAbi>): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCmActivateVc == "on"]
+public unsafe func Windows_NdisCmActivateVc(NdisVcHandle: CPointer<Unit>, CallParameters: CPointer<CO_CALL_PARAMETERSAbi>): Int32 {
+    return NdisCmActivateVc(NdisVcHandle, CallParameters)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCmAddPartyComplete == "on"]
+foreign {
     // param-hint: CallMgrPartyContext optional
     func NdisCmAddPartyComplete(Status: Int32, NdisPartyHandle: CPointer<Unit>, CallMgrPartyContext: CPointer<Unit>, CallParameters: CPointer<CO_CALL_PARAMETERSAbi>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCmAddPartyComplete == "on"]
+public unsafe func Windows_NdisCmAddPartyComplete(Status: Int32, NdisPartyHandle: CPointer<Unit>, CallMgrPartyContext: CPointer<Unit>, CallParameters: CPointer<CO_CALL_PARAMETERSAbi>): Unit {
+    NdisCmAddPartyComplete(Status, NdisPartyHandle, CallMgrPartyContext, CallParameters)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCmCloseAddressFamilyComplete == "on"]
+foreign {
     func NdisCmCloseAddressFamilyComplete(Status: Int32, NdisAfHandle: CPointer<Unit>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCmCloseAddressFamilyComplete == "on"]
+public unsafe func Windows_NdisCmCloseAddressFamilyComplete(Status: Int32, NdisAfHandle: CPointer<Unit>): Unit {
+    NdisCmCloseAddressFamilyComplete(Status, NdisAfHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCmCloseCallComplete == "on"]
+foreign {
     // param-hint: NdisPartyHandle optional
     func NdisCmCloseCallComplete(Status: Int32, NdisVcHandle: CPointer<Unit>, NdisPartyHandle: CPointer<Unit>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCmCloseCallComplete == "on"]
+public unsafe func Windows_NdisCmCloseCallComplete(Status: Int32, NdisVcHandle: CPointer<Unit>, NdisPartyHandle: CPointer<Unit>): Unit {
+    NdisCmCloseCallComplete(Status, NdisVcHandle, NdisPartyHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCmDeactivateVc == "on"]
+foreign {
     func NdisCmDeactivateVc(NdisVcHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCmDeactivateVc == "on"]
+public unsafe func Windows_NdisCmDeactivateVc(NdisVcHandle: CPointer<Unit>): Int32 {
+    return NdisCmDeactivateVc(NdisVcHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCmDeregisterSapComplete == "on"]
+foreign {
     func NdisCmDeregisterSapComplete(Status: Int32, NdisSapHandle: CPointer<Unit>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCmDeregisterSapComplete == "on"]
+public unsafe func Windows_NdisCmDeregisterSapComplete(Status: Int32, NdisSapHandle: CPointer<Unit>): Unit {
+    NdisCmDeregisterSapComplete(Status, NdisSapHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCmDispatchCallConnected == "on"]
+foreign {
     func NdisCmDispatchCallConnected(NdisVcHandle: CPointer<Unit>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCmDispatchCallConnected == "on"]
+public unsafe func Windows_NdisCmDispatchCallConnected(NdisVcHandle: CPointer<Unit>): Unit {
+    NdisCmDispatchCallConnected(NdisVcHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCmDispatchIncomingCall == "on"]
+foreign {
     func NdisCmDispatchIncomingCall(NdisSapHandle: CPointer<Unit>, NdisVcHandle: CPointer<Unit>, CallParameters: CPointer<CO_CALL_PARAMETERSAbi>): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCmDispatchIncomingCall == "on"]
+public unsafe func Windows_NdisCmDispatchIncomingCall(NdisSapHandle: CPointer<Unit>, NdisVcHandle: CPointer<Unit>, CallParameters: CPointer<CO_CALL_PARAMETERSAbi>): Int32 {
+    return NdisCmDispatchIncomingCall(NdisSapHandle, NdisVcHandle, CallParameters)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCmDispatchIncomingCallQoSChange == "on"]
+foreign {
     func NdisCmDispatchIncomingCallQoSChange(NdisVcHandle: CPointer<Unit>, CallParameters: CPointer<CO_CALL_PARAMETERSAbi>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCmDispatchIncomingCallQoSChange == "on"]
+public unsafe func Windows_NdisCmDispatchIncomingCallQoSChange(NdisVcHandle: CPointer<Unit>, CallParameters: CPointer<CO_CALL_PARAMETERSAbi>): Unit {
+    NdisCmDispatchIncomingCallQoSChange(NdisVcHandle, CallParameters)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCmDispatchIncomingCloseCall == "on"]
+foreign {
     // param-hint: Buffer bytes=param[3] optional
     func NdisCmDispatchIncomingCloseCall(CloseStatus: Int32, NdisVcHandle: CPointer<Unit>, Buffer: CPointer<Unit>, Size: UInt32): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCmDispatchIncomingCloseCall == "on"]
+public unsafe func Windows_NdisCmDispatchIncomingCloseCall(CloseStatus: Int32, NdisVcHandle: CPointer<Unit>, Buffer: CPointer<Unit>, Size: UInt32): Unit {
+    NdisCmDispatchIncomingCloseCall(CloseStatus, NdisVcHandle, Buffer, Size)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCmDispatchIncomingDropParty == "on"]
+foreign {
     // param-hint: Buffer bytes=param[3] optional
     func NdisCmDispatchIncomingDropParty(DropStatus: Int32, NdisPartyHandle: CPointer<Unit>, Buffer: CPointer<Unit>, Size: UInt32): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCmDispatchIncomingDropParty == "on"]
+public unsafe func Windows_NdisCmDispatchIncomingDropParty(DropStatus: Int32, NdisPartyHandle: CPointer<Unit>, Buffer: CPointer<Unit>, Size: UInt32): Unit {
+    NdisCmDispatchIncomingDropParty(DropStatus, NdisPartyHandle, Buffer, Size)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCmDropPartyComplete == "on"]
+foreign {
     func NdisCmDropPartyComplete(Status: Int32, NdisPartyHandle: CPointer<Unit>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCmDropPartyComplete == "on"]
+public unsafe func Windows_NdisCmDropPartyComplete(Status: Int32, NdisPartyHandle: CPointer<Unit>): Unit {
+    NdisCmDropPartyComplete(Status, NdisPartyHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCmMakeCallComplete == "on"]
+foreign {
     // param-hint: NdisPartyHandle optional
     // param-hint: CallMgrPartyContext optional
     func NdisCmMakeCallComplete(Status: Int32, NdisVcHandle: CPointer<Unit>, NdisPartyHandle: CPointer<Unit>, CallMgrPartyContext: CPointer<Unit>, CallParameters: CPointer<CO_CALL_PARAMETERSAbi>): Unit
-    func NdisCmModifyCallQoSComplete(Status: Int32, NdisVcHandle: CPointer<Unit>, CallParameters: CPointer<CO_CALL_PARAMETERSAbi>): Unit
-    func NdisCmOpenAddressFamilyComplete(Status: Int32, NdisAfHandle: CPointer<Unit>, CallMgrAfContext: CPointer<Unit>): Unit
-    func NdisCmRegisterSapComplete(Status: Int32, NdisSapHandle: CPointer<Unit>, CallMgrSapContext: CPointer<Unit>): Unit
-    // param-hint: VcInstanceName optional
-    func NdisCoAssignInstanceName(NdisVcHandle: CPointer<Unit>, BaseInstanceName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, VcInstanceName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>): Int32
-    // param-hint: NdisAfHandle optional
-    func NdisCoCreateVc(NdisBindingHandle: CPointer<Unit>, NdisAfHandle: CPointer<Unit>, ProtocolVcContext: CPointer<Unit>, NdisVcHandle: CPointer<CPointer<Unit>>): Int32
-    func NdisCoDeleteVc(NdisVcHandle: CPointer<Unit>): Int32
-    func NdisCoGetTapiCallId(NdisVcHandle: CPointer<Unit>, TapiCallId: CPointer<VAR_STRINGAbi>): Int32
-    func NdisDeregisterTdiCallBack(): Unit
-    // param-hint: VirtualAddress bytes=param[1]
-    func NdisFreeMemory(VirtualAddress: CPointer<Unit>, Length: UInt32, MemoryFlags: UInt32): Unit
-    func NdisGeneratePartialCancelId(): UInt8
-    func NdisGetCurrentProcessorCounts(pIdleCount: CPointer<UInt32>, pKernelAndUser: CPointer<UInt32>, pIndex: CPointer<UInt32>): Unit
-    func NdisGetCurrentProcessorCpuUsage(pCpuUsage: CPointer<UInt32>): Unit
-    func NdisGetRoutineAddress(NdisRoutineName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>): CPointer<Unit>
-    func NdisGetSharedDataAlignment(): UInt32
-    func NdisGetVersion(): UInt32
-    func NdisIMAssociateMiniport(DriverHandle: CPointer<Unit>, ProtocolHandle: CPointer<Unit>): Unit
-    func NdisIMCancelInitializeDeviceInstance(DriverHandle: CPointer<Unit>, DeviceInstance: CPointer<Win32_Foundation.UNICODE_STRINGAbi>): Int32
-    func NdisIMDeInitializeDeviceInstance(NdisMiniportHandle: CPointer<Unit>): Int32
-    func NdisIMGetBindingContext(NdisBindingHandle: CPointer<Unit>): CPointer<Unit>
-    // param-hint: DeviceContext optional
-    func NdisIMInitializeDeviceInstanceEx(DriverHandle: CPointer<Unit>, DriverInstance: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, DeviceContext: CPointer<Unit>): Int32
-    func NdisInitializeReadWriteLock(Lock: CPointer<NDIS_RW_LOCKAbi>): Unit
-    func NdisInitializeString(Destination: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, Source: CPointer<UInt8>): Unit
-    func NdisMAllocateSharedMemory(MiniportAdapterHandle: CPointer<Unit>, Length: UInt32, Cached: UInt8, VirtualAddress: CPointer<CPointer<Unit>>, PhysicalAddress: CPointer<Int64>): Unit
-    func NdisMAllocateSharedMemoryAsync(MiniportAdapterHandle: CPointer<Unit>, Length: UInt32, Cached: UInt8, Context: CPointer<Unit>): Int32
-    func NdisMCloseLog(LogHandle: CPointer<Unit>): Unit
-    func NdisMCmActivateVc(NdisVcHandle: CPointer<Unit>, CallParameters: CPointer<CO_CALL_PARAMETERSAbi>): Int32
-    func NdisMCmCreateVc(MiniportAdapterHandle: CPointer<Unit>, NdisAfHandle: CPointer<Unit>, MiniportVcContext: CPointer<Unit>, NdisVcHandle: CPointer<CPointer<Unit>>): Int32
-    func NdisMCmDeactivateVc(NdisVcHandle: CPointer<Unit>): Int32
-    func NdisMCmDeleteVc(NdisVcHandle: CPointer<Unit>): Int32
-    func NdisMCmRegisterAddressFamily(MiniportAdapterHandle: CPointer<Unit>, AddressFamily: CPointer<CO_ADDRESS_FAMILYAbi>, CmCharacteristics: CPointer<NDIS_CALL_MANAGER_CHARACTERISTICSAbi>, SizeOfCmCharacteristics: UInt32): Int32
-    func NdisMCoActivateVcComplete(Status: Int32, NdisVcHandle: CPointer<Unit>, CallParameters: CPointer<CO_CALL_PARAMETERSAbi>): Unit
-    func NdisMCoDeactivateVcComplete(Status: Int32, NdisVcHandle: CPointer<Unit>): Unit
-    func NdisMCreateLog(MiniportAdapterHandle: CPointer<Unit>, Size: UInt32, LogHandle: CPointer<CPointer<Unit>>): Int32
-    func NdisMDeregisterDmaChannel(MiniportDmaHandle: CPointer<Unit>): Unit
-    func NdisMDeregisterIoPortRange(MiniportAdapterHandle: CPointer<Unit>, InitialPort: UInt32, NumberOfPorts: UInt32, PortOffset: CPointer<Unit>): Unit
-    func NdisMFlushLog(LogHandle: CPointer<Unit>): Unit
-    // param-hint: VirtualAddress bytes=param[1]
-    func NdisMFreeSharedMemory(MiniportAdapterHandle: CPointer<Unit>, Length: UInt32, Cached: UInt8, VirtualAddress: CPointer<Unit>, PhysicalAddress: Int64): Unit
-    func NdisMGetDmaAlignment(MiniportAdapterHandle: CPointer<Unit>): UInt32
-    func NdisMMapIoSpace(VirtualAddress: CPointer<CPointer<Unit>>, MiniportAdapterHandle: CPointer<Unit>, PhysicalAddress: Int64, Length: UInt32): Int32
-    func NdisMQueryAdapterInstanceName(pAdapterInstanceName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, MiniportHandle: CPointer<Unit>): Int32
-    func NdisMReadDmaCounter(MiniportDmaHandle: CPointer<Unit>): UInt32
-    func NdisMRegisterIoPortRange(PortOffset: CPointer<CPointer<Unit>>, MiniportAdapterHandle: CPointer<Unit>, InitialPort: UInt32, NumberOfPorts: UInt32): Int32
-    func NdisMRemoveMiniport(MiniportHandle: CPointer<Unit>): Int32
-    func NdisMSleep(MicrosecondsToSleep: UInt32): Unit
-    // param-hint: VirtualAddress bytes=param[2]
-    func NdisMUnmapIoSpace(MiniportAdapterHandle: CPointer<Unit>, VirtualAddress: CPointer<Unit>, Length: UInt32): Unit
-    // param-hint: LogBuffer bytes=param[2]
-    func NdisMWriteLogData(LogHandle: CPointer<Unit>, LogBuffer: CPointer<Unit>, LogBufferSize: UInt32): Int32
-    func NdisMapFile(Status: CPointer<Int32>, MappedBuffer: CPointer<CPointer<Unit>>, FileHandle: CPointer<Unit>): Unit
-    func NdisOpenConfigurationKeyByIndex(Status: CPointer<Int32>, ConfigurationHandle: CPointer<Unit>, Index: UInt32, KeyName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, KeyHandle: CPointer<CPointer<Unit>>): Unit
-    func NdisOpenConfigurationKeyByName(Status: CPointer<Int32>, ConfigurationHandle: CPointer<Unit>, SubKeyName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, SubKeyHandle: CPointer<CPointer<Unit>>): Unit
-    func NdisOpenFile(Status: CPointer<Int32>, FileHandle: CPointer<CPointer<Unit>>, FileLength: CPointer<UInt32>, FileName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, HighestAcceptableAddress: Int64): Unit
-    func NdisQueryAdapterInstanceName(pAdapterInstanceName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, NdisBindingHandle: CPointer<Unit>): Int32
-    func NdisQueryBindInstanceName(pAdapterInstanceName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, BindingContext: CPointer<Unit>): Int32
-    func NdisReEnumerateProtocolBindings(NdisProtocolHandle: CPointer<Unit>): Unit
-    func NdisReadConfiguration(Status: CPointer<Int32>, ParameterValue: CPointer<CPointer<NDIS_CONFIGURATION_PARAMETERAbi>>, ConfigurationHandle: CPointer<Unit>, Keyword: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, ParameterType: NDIS_PARAMETER_TYPEAbi): Unit
-    func NdisReadNetworkAddress(Status: CPointer<Int32>, NetworkAddress: CPointer<CPointer<Unit>>, NetworkAddressLength: CPointer<UInt32>, ConfigurationHandle: CPointer<Unit>): Unit
-    func NdisRegisterTdiCallBack(RegisterCallback: TDI_REGISTER_CALLBACK, PnPHandler: TDI_PNP_HANDLER): Unit
-    func NdisReleaseReadWriteLock(Lock: CPointer<NDIS_RW_LOCKAbi>, LockState: CPointer<LOCK_STATEAbi>): Unit
-    func NdisSystemProcessorCount(): Int8
-    func NdisUnmapFile(FileHandle: CPointer<Unit>): Unit
-    func NdisUpdateSharedMemory(NdisAdapterHandle: CPointer<Unit>, Length: UInt32, VirtualAddress: CPointer<Unit>, PhysicalAddress: Int64): Unit
-    func NdisWriteConfiguration(Status: CPointer<Int32>, ConfigurationHandle: CPointer<Unit>, Keyword: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, ParameterValue: CPointer<NDIS_CONFIGURATION_PARAMETERAbi>): Unit
-    // param-hint: StringsList optional
-    // param-hint: Data bytes=param[5] optional
-    func NdisWriteEventLogEntry(LogHandle: CPointer<Unit>, EventCode: Int32, UniqueEventValue: UInt32, NumStrings: UInt16, StringsList: CPointer<Unit>, DataSize: UInt32, Data: CPointer<Unit>): Int32
 }
 
-@When[NDIS_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on")]
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCmMakeCallComplete == "on"]
+public unsafe func Windows_NdisCmMakeCallComplete(Status: Int32, NdisVcHandle: CPointer<Unit>, NdisPartyHandle: CPointer<Unit>, CallMgrPartyContext: CPointer<Unit>, CallParameters: CPointer<CO_CALL_PARAMETERSAbi>): Unit {
+    NdisCmMakeCallComplete(Status, NdisVcHandle, NdisPartyHandle, CallMgrPartyContext, CallParameters)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCmModifyCallQoSComplete == "on"]
+foreign {
+    func NdisCmModifyCallQoSComplete(Status: Int32, NdisVcHandle: CPointer<Unit>, CallParameters: CPointer<CO_CALL_PARAMETERSAbi>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCmModifyCallQoSComplete == "on"]
+public unsafe func Windows_NdisCmModifyCallQoSComplete(Status: Int32, NdisVcHandle: CPointer<Unit>, CallParameters: CPointer<CO_CALL_PARAMETERSAbi>): Unit {
+    NdisCmModifyCallQoSComplete(Status, NdisVcHandle, CallParameters)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCmOpenAddressFamilyComplete == "on"]
+foreign {
+    func NdisCmOpenAddressFamilyComplete(Status: Int32, NdisAfHandle: CPointer<Unit>, CallMgrAfContext: CPointer<Unit>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCmOpenAddressFamilyComplete == "on"]
+public unsafe func Windows_NdisCmOpenAddressFamilyComplete(Status: Int32, NdisAfHandle: CPointer<Unit>, CallMgrAfContext: CPointer<Unit>): Unit {
+    NdisCmOpenAddressFamilyComplete(Status, NdisAfHandle, CallMgrAfContext)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCmRegisterSapComplete == "on"]
+foreign {
+    func NdisCmRegisterSapComplete(Status: Int32, NdisSapHandle: CPointer<Unit>, CallMgrSapContext: CPointer<Unit>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCmRegisterSapComplete == "on"]
+public unsafe func Windows_NdisCmRegisterSapComplete(Status: Int32, NdisSapHandle: CPointer<Unit>, CallMgrSapContext: CPointer<Unit>): Unit {
+    NdisCmRegisterSapComplete(Status, NdisSapHandle, CallMgrSapContext)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCoAssignInstanceName == "on"]
+foreign {
+    // param-hint: VcInstanceName optional
+    func NdisCoAssignInstanceName(NdisVcHandle: CPointer<Unit>, BaseInstanceName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, VcInstanceName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCoAssignInstanceName == "on"]
+public unsafe func Windows_NdisCoAssignInstanceName(NdisVcHandle: CPointer<Unit>, BaseInstanceName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, VcInstanceName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>): Int32 {
+    return NdisCoAssignInstanceName(NdisVcHandle, BaseInstanceName, VcInstanceName)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCoCreateVc == "on"]
+foreign {
+    // param-hint: NdisAfHandle optional
+    func NdisCoCreateVc(NdisBindingHandle: CPointer<Unit>, NdisAfHandle: CPointer<Unit>, ProtocolVcContext: CPointer<Unit>, NdisVcHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCoCreateVc == "on"]
+public unsafe func Windows_NdisCoCreateVc(NdisBindingHandle: CPointer<Unit>, NdisAfHandle: CPointer<Unit>, ProtocolVcContext: CPointer<Unit>, NdisVcHandle: CPointer<CPointer<Unit>>): Int32 {
+    return NdisCoCreateVc(NdisBindingHandle, NdisAfHandle, ProtocolVcContext, NdisVcHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCoDeleteVc == "on"]
+foreign {
+    func NdisCoDeleteVc(NdisVcHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCoDeleteVc == "on"]
+public unsafe func Windows_NdisCoDeleteVc(NdisVcHandle: CPointer<Unit>): Int32 {
+    return NdisCoDeleteVc(NdisVcHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCoGetTapiCallId == "on"]
+foreign {
+    func NdisCoGetTapiCallId(NdisVcHandle: CPointer<Unit>, TapiCallId: CPointer<VAR_STRINGAbi>): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCoGetTapiCallId == "on"]
+public unsafe func Windows_NdisCoGetTapiCallId(NdisVcHandle: CPointer<Unit>, TapiCallId: CPointer<VAR_STRINGAbi>): Int32 {
+    return NdisCoGetTapiCallId(NdisVcHandle, TapiCallId)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCompleteDmaTransfer == "on" && Windows_Wdk_Foundation == "on"]
+foreign {
+    func NdisCompleteDmaTransfer(Status: CPointer<Int32>, NdisDmaHandle: CPointer<Unit>, Buffer: CPointer<Wdk__impl_l0.MDLAbi>, Offset: UInt32, Length: UInt32, WriteToDevice: UInt8): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCompleteDmaTransfer == "on" && Windows_Wdk_Foundation == "on"]
+public unsafe func Windows_NdisCompleteDmaTransfer(Status: CPointer<Int32>, NdisDmaHandle: CPointer<Unit>, Buffer: CPointer<Wdk__impl_l0.MDLAbi>, Offset: UInt32, Length: UInt32, WriteToDevice: UInt8): Unit {
+    NdisCompleteDmaTransfer(Status, NdisDmaHandle, Buffer, Offset, Length, WriteToDevice)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCopyBuffer == "on" && Windows_Wdk_Foundation == "on"]
+foreign {
+    func NdisCopyBuffer(Status: CPointer<Int32>, Buffer: CPointer<CPointer<Wdk__impl_l0.MDLAbi>>, PoolHandle: CPointer<Unit>, MemoryDescriptor: CPointer<Unit>, Offset: UInt32, Length: UInt32): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisCopyBuffer == "on" && Windows_Wdk_Foundation == "on"]
+public unsafe func Windows_NdisCopyBuffer(Status: CPointer<Int32>, Buffer: CPointer<CPointer<Wdk__impl_l0.MDLAbi>>, PoolHandle: CPointer<Unit>, MemoryDescriptor: CPointer<Unit>, Offset: UInt32, Length: UInt32): Unit {
+    NdisCopyBuffer(Status, Buffer, PoolHandle, MemoryDescriptor, Offset, Length)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisDeregisterTdiCallBack == "on"]
+foreign {
+    func NdisDeregisterTdiCallBack(): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisDeregisterTdiCallBack == "on"]
+public unsafe func Windows_NdisDeregisterTdiCallBack(): Unit {
+    NdisDeregisterTdiCallBack()
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisFreeMemory == "on"]
+foreign {
+    // param-hint: VirtualAddress bytes=param[1]
+    func NdisFreeMemory(VirtualAddress: CPointer<Unit>, Length: UInt32, MemoryFlags: UInt32): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisFreeMemory == "on"]
+public unsafe func Windows_NdisFreeMemory(VirtualAddress: CPointer<Unit>, Length: UInt32, MemoryFlags: UInt32): Unit {
+    NdisFreeMemory(VirtualAddress, Length, MemoryFlags)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisGeneratePartialCancelId == "on"]
+foreign {
+    func NdisGeneratePartialCancelId(): UInt8
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisGeneratePartialCancelId == "on"]
+public unsafe func Windows_NdisGeneratePartialCancelId(): UInt8 {
+    return NdisGeneratePartialCancelId()
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisGetCurrentProcessorCounts == "on"]
+foreign {
+    func NdisGetCurrentProcessorCounts(pIdleCount: CPointer<UInt32>, pKernelAndUser: CPointer<UInt32>, pIndex: CPointer<UInt32>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisGetCurrentProcessorCounts == "on"]
+public unsafe func Windows_NdisGetCurrentProcessorCounts(pIdleCount: CPointer<UInt32>, pKernelAndUser: CPointer<UInt32>, pIndex: CPointer<UInt32>): Unit {
+    NdisGetCurrentProcessorCounts(pIdleCount, pKernelAndUser, pIndex)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisGetCurrentProcessorCpuUsage == "on"]
+foreign {
+    func NdisGetCurrentProcessorCpuUsage(pCpuUsage: CPointer<UInt32>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisGetCurrentProcessorCpuUsage == "on"]
+public unsafe func Windows_NdisGetCurrentProcessorCpuUsage(pCpuUsage: CPointer<UInt32>): Unit {
+    NdisGetCurrentProcessorCpuUsage(pCpuUsage)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisGetRoutineAddress == "on"]
+foreign {
+    func NdisGetRoutineAddress(NdisRoutineName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>): CPointer<Unit>
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisGetRoutineAddress == "on"]
+public unsafe func Windows_NdisGetRoutineAddress(NdisRoutineName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>): CPointer<Unit> {
+    return NdisGetRoutineAddress(NdisRoutineName)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisGetSharedDataAlignment == "on"]
+foreign {
+    func NdisGetSharedDataAlignment(): UInt32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisGetSharedDataAlignment == "on"]
+public unsafe func Windows_NdisGetSharedDataAlignment(): UInt32 {
+    return NdisGetSharedDataAlignment()
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisGetVersion == "on"]
+foreign {
+    func NdisGetVersion(): UInt32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisGetVersion == "on"]
+public unsafe func Windows_NdisGetVersion(): UInt32 {
+    return NdisGetVersion()
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisIMAssociateMiniport == "on"]
+foreign {
+    func NdisIMAssociateMiniport(DriverHandle: CPointer<Unit>, ProtocolHandle: CPointer<Unit>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisIMAssociateMiniport == "on"]
+public unsafe func Windows_NdisIMAssociateMiniport(DriverHandle: CPointer<Unit>, ProtocolHandle: CPointer<Unit>): Unit {
+    NdisIMAssociateMiniport(DriverHandle, ProtocolHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisIMCancelInitializeDeviceInstance == "on"]
+foreign {
+    func NdisIMCancelInitializeDeviceInstance(DriverHandle: CPointer<Unit>, DeviceInstance: CPointer<Win32_Foundation.UNICODE_STRINGAbi>): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisIMCancelInitializeDeviceInstance == "on"]
+public unsafe func Windows_NdisIMCancelInitializeDeviceInstance(DriverHandle: CPointer<Unit>, DeviceInstance: CPointer<Win32_Foundation.UNICODE_STRINGAbi>): Int32 {
+    return NdisIMCancelInitializeDeviceInstance(DriverHandle, DeviceInstance)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisIMDeInitializeDeviceInstance == "on"]
+foreign {
+    func NdisIMDeInitializeDeviceInstance(NdisMiniportHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisIMDeInitializeDeviceInstance == "on"]
+public unsafe func Windows_NdisIMDeInitializeDeviceInstance(NdisMiniportHandle: CPointer<Unit>): Int32 {
+    return NdisIMDeInitializeDeviceInstance(NdisMiniportHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisIMGetBindingContext == "on"]
+foreign {
+    func NdisIMGetBindingContext(NdisBindingHandle: CPointer<Unit>): CPointer<Unit>
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisIMGetBindingContext == "on"]
+public unsafe func Windows_NdisIMGetBindingContext(NdisBindingHandle: CPointer<Unit>): CPointer<Unit> {
+    return NdisIMGetBindingContext(NdisBindingHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisIMInitializeDeviceInstanceEx == "on"]
+foreign {
+    // param-hint: DeviceContext optional
+    func NdisIMInitializeDeviceInstanceEx(DriverHandle: CPointer<Unit>, DriverInstance: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, DeviceContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisIMInitializeDeviceInstanceEx == "on"]
+public unsafe func Windows_NdisIMInitializeDeviceInstanceEx(DriverHandle: CPointer<Unit>, DriverInstance: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, DeviceContext: CPointer<Unit>): Int32 {
+    return NdisIMInitializeDeviceInstanceEx(DriverHandle, DriverInstance, DeviceContext)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisInitializeEvent == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on"]
+foreign {
+    func NdisInitializeEvent(Event: CPointer<NDIS_EVENTAbi>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisInitializeEvent == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on"]
+public unsafe func Windows_NdisInitializeEvent(Event: CPointer<NDIS_EVENTAbi>): Unit {
+    NdisInitializeEvent(Event)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisInitializeReadWriteLock == "on"]
+foreign {
+    func NdisInitializeReadWriteLock(Lock: CPointer<NDIS_RW_LOCKAbi>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisInitializeReadWriteLock == "on"]
+public unsafe func Windows_NdisInitializeReadWriteLock(Lock: CPointer<NDIS_RW_LOCKAbi>): Unit {
+    NdisInitializeReadWriteLock(Lock)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisInitializeString == "on"]
+foreign {
+    func NdisInitializeString(Destination: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, Source: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisInitializeString == "on"]
+public unsafe func Windows_NdisInitializeString(Destination: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, Source: CPointer<UInt8>): Unit {
+    NdisInitializeString(Destination, Source)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisInitializeTimer == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on"]
+foreign {
+    // param-hint: FunctionContext optional
+    func NdisInitializeTimer(Timer: CPointer<NDIS_TIMERAbi>, TimerFunction: PNDIS_TIMER_FUNCTION, FunctionContext: CPointer<Unit>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisInitializeTimer == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on"]
+public unsafe func Windows_NdisInitializeTimer(Timer: CPointer<NDIS_TIMERAbi>, TimerFunction: PNDIS_TIMER_FUNCTION, FunctionContext: CPointer<Unit>): Unit {
+    NdisInitializeTimer(Timer, TimerFunction, FunctionContext)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMAllocateSharedMemory == "on"]
+foreign {
+    func NdisMAllocateSharedMemory(MiniportAdapterHandle: CPointer<Unit>, Length: UInt32, Cached: UInt8, VirtualAddress: CPointer<CPointer<Unit>>, PhysicalAddress: CPointer<Int64>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMAllocateSharedMemory == "on"]
+public unsafe func Windows_NdisMAllocateSharedMemory(MiniportAdapterHandle: CPointer<Unit>, Length: UInt32, Cached: UInt8, VirtualAddress: CPointer<CPointer<Unit>>, PhysicalAddress: CPointer<Int64>): Unit {
+    NdisMAllocateSharedMemory(MiniportAdapterHandle, Length, Cached, VirtualAddress, PhysicalAddress)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMAllocateSharedMemoryAsync == "on"]
+foreign {
+    func NdisMAllocateSharedMemoryAsync(MiniportAdapterHandle: CPointer<Unit>, Length: UInt32, Cached: UInt8, Context: CPointer<Unit>): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMAllocateSharedMemoryAsync == "on"]
+public unsafe func Windows_NdisMAllocateSharedMemoryAsync(MiniportAdapterHandle: CPointer<Unit>, Length: UInt32, Cached: UInt8, Context: CPointer<Unit>): Int32 {
+    return NdisMAllocateSharedMemoryAsync(MiniportAdapterHandle, Length, Cached, Context)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMCancelTimer == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on"]
+foreign {
+    func NdisMCancelTimer(Timer: CPointer<NDIS_MINIPORT_TIMERAbi>, TimerCancelled: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMCancelTimer == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on"]
+public unsafe func Windows_NdisMCancelTimer(Timer: CPointer<NDIS_MINIPORT_TIMERAbi>, TimerCancelled: CPointer<UInt8>): Unit {
+    NdisMCancelTimer(Timer, TimerCancelled)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMCloseLog == "on"]
+foreign {
+    func NdisMCloseLog(LogHandle: CPointer<Unit>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMCloseLog == "on"]
+public unsafe func Windows_NdisMCloseLog(LogHandle: CPointer<Unit>): Unit {
+    NdisMCloseLog(LogHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMCmActivateVc == "on"]
+foreign {
+    func NdisMCmActivateVc(NdisVcHandle: CPointer<Unit>, CallParameters: CPointer<CO_CALL_PARAMETERSAbi>): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMCmActivateVc == "on"]
+public unsafe func Windows_NdisMCmActivateVc(NdisVcHandle: CPointer<Unit>, CallParameters: CPointer<CO_CALL_PARAMETERSAbi>): Int32 {
+    return NdisMCmActivateVc(NdisVcHandle, CallParameters)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMCmCreateVc == "on"]
+foreign {
+    func NdisMCmCreateVc(MiniportAdapterHandle: CPointer<Unit>, NdisAfHandle: CPointer<Unit>, MiniportVcContext: CPointer<Unit>, NdisVcHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMCmCreateVc == "on"]
+public unsafe func Windows_NdisMCmCreateVc(MiniportAdapterHandle: CPointer<Unit>, NdisAfHandle: CPointer<Unit>, MiniportVcContext: CPointer<Unit>, NdisVcHandle: CPointer<CPointer<Unit>>): Int32 {
+    return NdisMCmCreateVc(MiniportAdapterHandle, NdisAfHandle, MiniportVcContext, NdisVcHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMCmDeactivateVc == "on"]
+foreign {
+    func NdisMCmDeactivateVc(NdisVcHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMCmDeactivateVc == "on"]
+public unsafe func Windows_NdisMCmDeactivateVc(NdisVcHandle: CPointer<Unit>): Int32 {
+    return NdisMCmDeactivateVc(NdisVcHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMCmDeleteVc == "on"]
+foreign {
+    func NdisMCmDeleteVc(NdisVcHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMCmDeleteVc == "on"]
+public unsafe func Windows_NdisMCmDeleteVc(NdisVcHandle: CPointer<Unit>): Int32 {
+    return NdisMCmDeleteVc(NdisVcHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMCmRegisterAddressFamily == "on"]
+foreign {
+    func NdisMCmRegisterAddressFamily(MiniportAdapterHandle: CPointer<Unit>, AddressFamily: CPointer<CO_ADDRESS_FAMILYAbi>, CmCharacteristics: CPointer<NDIS_CALL_MANAGER_CHARACTERISTICSAbi>, SizeOfCmCharacteristics: UInt32): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMCmRegisterAddressFamily == "on"]
+public unsafe func Windows_NdisMCmRegisterAddressFamily(MiniportAdapterHandle: CPointer<Unit>, AddressFamily: CPointer<CO_ADDRESS_FAMILYAbi>, CmCharacteristics: CPointer<NDIS_CALL_MANAGER_CHARACTERISTICSAbi>, SizeOfCmCharacteristics: UInt32): Int32 {
+    return NdisMCmRegisterAddressFamily(MiniportAdapterHandle, AddressFamily, CmCharacteristics, SizeOfCmCharacteristics)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMCoActivateVcComplete == "on"]
+foreign {
+    func NdisMCoActivateVcComplete(Status: Int32, NdisVcHandle: CPointer<Unit>, CallParameters: CPointer<CO_CALL_PARAMETERSAbi>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMCoActivateVcComplete == "on"]
+public unsafe func Windows_NdisMCoActivateVcComplete(Status: Int32, NdisVcHandle: CPointer<Unit>, CallParameters: CPointer<CO_CALL_PARAMETERSAbi>): Unit {
+    NdisMCoActivateVcComplete(Status, NdisVcHandle, CallParameters)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMCoDeactivateVcComplete == "on"]
+foreign {
+    func NdisMCoDeactivateVcComplete(Status: Int32, NdisVcHandle: CPointer<Unit>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMCoDeactivateVcComplete == "on"]
+public unsafe func Windows_NdisMCoDeactivateVcComplete(Status: Int32, NdisVcHandle: CPointer<Unit>): Unit {
+    NdisMCoDeactivateVcComplete(Status, NdisVcHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMCreateLog == "on"]
+foreign {
+    func NdisMCreateLog(MiniportAdapterHandle: CPointer<Unit>, Size: UInt32, LogHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMCreateLog == "on"]
+public unsafe func Windows_NdisMCreateLog(MiniportAdapterHandle: CPointer<Unit>, Size: UInt32, LogHandle: CPointer<CPointer<Unit>>): Int32 {
+    return NdisMCreateLog(MiniportAdapterHandle, Size, LogHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMDeregisterDmaChannel == "on"]
+foreign {
+    func NdisMDeregisterDmaChannel(MiniportDmaHandle: CPointer<Unit>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMDeregisterDmaChannel == "on"]
+public unsafe func Windows_NdisMDeregisterDmaChannel(MiniportDmaHandle: CPointer<Unit>): Unit {
+    NdisMDeregisterDmaChannel(MiniportDmaHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMDeregisterIoPortRange == "on"]
+foreign {
+    func NdisMDeregisterIoPortRange(MiniportAdapterHandle: CPointer<Unit>, InitialPort: UInt32, NumberOfPorts: UInt32, PortOffset: CPointer<Unit>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMDeregisterIoPortRange == "on"]
+public unsafe func Windows_NdisMDeregisterIoPortRange(MiniportAdapterHandle: CPointer<Unit>, InitialPort: UInt32, NumberOfPorts: UInt32, PortOffset: CPointer<Unit>): Unit {
+    NdisMDeregisterIoPortRange(MiniportAdapterHandle, InitialPort, NumberOfPorts, PortOffset)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMFlushLog == "on"]
+foreign {
+    func NdisMFlushLog(LogHandle: CPointer<Unit>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMFlushLog == "on"]
+public unsafe func Windows_NdisMFlushLog(LogHandle: CPointer<Unit>): Unit {
+    NdisMFlushLog(LogHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMFreeSharedMemory == "on"]
+foreign {
+    // param-hint: VirtualAddress bytes=param[1]
+    func NdisMFreeSharedMemory(MiniportAdapterHandle: CPointer<Unit>, Length: UInt32, Cached: UInt8, VirtualAddress: CPointer<Unit>, PhysicalAddress: Int64): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMFreeSharedMemory == "on"]
+public unsafe func Windows_NdisMFreeSharedMemory(MiniportAdapterHandle: CPointer<Unit>, Length: UInt32, Cached: UInt8, VirtualAddress: CPointer<Unit>, PhysicalAddress: Int64): Unit {
+    NdisMFreeSharedMemory(MiniportAdapterHandle, Length, Cached, VirtualAddress, PhysicalAddress)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMGetDeviceProperty == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on"]
 foreign {
     // param-hint: PhysicalDeviceObject optional
     // param-hint: FunctionalDeviceObject optional
@@ -11239,37 +11841,363 @@ foreign {
     func NdisMGetDeviceProperty(MiniportAdapterHandle: CPointer<Unit>, PhysicalDeviceObject: CPointer<CPointer<Wdk__impl_l0.DEVICE_OBJECTAbi>>, FunctionalDeviceObject: CPointer<CPointer<Wdk__impl_l0.DEVICE_OBJECTAbi>>, NextDeviceObject: CPointer<CPointer<Wdk__impl_l0.DEVICE_OBJECTAbi>>, AllocatedResources: CPointer<CPointer<Wdk__impl_l0.CM_RESOURCE_LISTAbi>>, AllocatedResourcesTranslated: CPointer<CPointer<Wdk__impl_l0.CM_RESOURCE_LISTAbi>>): Unit
 }
 
-@When[NDIS_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on")]
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMGetDeviceProperty == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_Security == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Power == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_IO == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Storage_FileSystem == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_IO == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on"]
+public unsafe func Windows_NdisMGetDeviceProperty(MiniportAdapterHandle: CPointer<Unit>, PhysicalDeviceObject: CPointer<CPointer<Wdk__impl_l0.DEVICE_OBJECTAbi>>, FunctionalDeviceObject: CPointer<CPointer<Wdk__impl_l0.DEVICE_OBJECTAbi>>, NextDeviceObject: CPointer<CPointer<Wdk__impl_l0.DEVICE_OBJECTAbi>>, AllocatedResources: CPointer<CPointer<Wdk__impl_l0.CM_RESOURCE_LISTAbi>>, AllocatedResourcesTranslated: CPointer<CPointer<Wdk__impl_l0.CM_RESOURCE_LISTAbi>>): Unit {
+    NdisMGetDeviceProperty(MiniportAdapterHandle, PhysicalDeviceObject, FunctionalDeviceObject, NextDeviceObject, AllocatedResources, AllocatedResourcesTranslated)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMGetDmaAlignment == "on"]
 foreign {
-    func NdisCancelTimer(Timer: CPointer<NDIS_TIMERAbi>, TimerCancelled: CPointer<UInt8>): Unit
-    // param-hint: FunctionContext optional
-    func NdisInitializeTimer(Timer: CPointer<NDIS_TIMERAbi>, TimerFunction: PNDIS_TIMER_FUNCTION, FunctionContext: CPointer<Unit>): Unit
-    func NdisMCancelTimer(Timer: CPointer<NDIS_MINIPORT_TIMERAbi>, TimerCancelled: CPointer<UInt8>): Unit
+    func NdisMGetDmaAlignment(MiniportAdapterHandle: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMGetDmaAlignment == "on"]
+public unsafe func Windows_NdisMGetDmaAlignment(MiniportAdapterHandle: CPointer<Unit>): UInt32 {
+    return NdisMGetDmaAlignment(MiniportAdapterHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMInitializeTimer == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on"]
+foreign {
     func NdisMInitializeTimer(Timer: CPointer<NDIS_MINIPORT_TIMERAbi>, MiniportAdapterHandle: CPointer<Unit>, TimerFunction: PNDIS_TIMER_FUNCTION, FunctionContext: CPointer<Unit>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMInitializeTimer == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on"]
+public unsafe func Windows_NdisMInitializeTimer(Timer: CPointer<NDIS_MINIPORT_TIMERAbi>, MiniportAdapterHandle: CPointer<Unit>, TimerFunction: PNDIS_TIMER_FUNCTION, FunctionContext: CPointer<Unit>): Unit {
+    NdisMInitializeTimer(Timer, MiniportAdapterHandle, TimerFunction, FunctionContext)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMMapIoSpace == "on"]
+foreign {
+    func NdisMMapIoSpace(VirtualAddress: CPointer<CPointer<Unit>>, MiniportAdapterHandle: CPointer<Unit>, PhysicalAddress: Int64, Length: UInt32): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMMapIoSpace == "on"]
+public unsafe func Windows_NdisMMapIoSpace(VirtualAddress: CPointer<CPointer<Unit>>, MiniportAdapterHandle: CPointer<Unit>, PhysicalAddress: Int64, Length: UInt32): Int32 {
+    return NdisMMapIoSpace(VirtualAddress, MiniportAdapterHandle, PhysicalAddress, Length)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMQueryAdapterInstanceName == "on"]
+foreign {
+    func NdisMQueryAdapterInstanceName(pAdapterInstanceName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, MiniportHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMQueryAdapterInstanceName == "on"]
+public unsafe func Windows_NdisMQueryAdapterInstanceName(pAdapterInstanceName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, MiniportHandle: CPointer<Unit>): Int32 {
+    return NdisMQueryAdapterInstanceName(pAdapterInstanceName, MiniportHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMReadDmaCounter == "on"]
+foreign {
+    func NdisMReadDmaCounter(MiniportDmaHandle: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMReadDmaCounter == "on"]
+public unsafe func Windows_NdisMReadDmaCounter(MiniportDmaHandle: CPointer<Unit>): UInt32 {
+    return NdisMReadDmaCounter(MiniportDmaHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMRegisterDmaChannel == "on" && Windows_Wdk_System_SystemServices == "on"]
+foreign {
+    func NdisMRegisterDmaChannel(MiniportDmaHandle: CPointer<CPointer<Unit>>, MiniportAdapterHandle: CPointer<Unit>, DmaChannel: UInt32, Dma32BitAddresses: UInt8, DmaDescription: CPointer<NDIS_DMA_DESCRIPTIONAbi>, MaximumLength: UInt32): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMRegisterDmaChannel == "on" && Windows_Wdk_System_SystemServices == "on"]
+public unsafe func Windows_NdisMRegisterDmaChannel(MiniportDmaHandle: CPointer<CPointer<Unit>>, MiniportAdapterHandle: CPointer<Unit>, DmaChannel: UInt32, Dma32BitAddresses: UInt8, DmaDescription: CPointer<NDIS_DMA_DESCRIPTIONAbi>, MaximumLength: UInt32): Int32 {
+    return NdisMRegisterDmaChannel(MiniportDmaHandle, MiniportAdapterHandle, DmaChannel, Dma32BitAddresses, DmaDescription, MaximumLength)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMRegisterIoPortRange == "on"]
+foreign {
+    func NdisMRegisterIoPortRange(PortOffset: CPointer<CPointer<Unit>>, MiniportAdapterHandle: CPointer<Unit>, InitialPort: UInt32, NumberOfPorts: UInt32): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMRegisterIoPortRange == "on"]
+public unsafe func Windows_NdisMRegisterIoPortRange(PortOffset: CPointer<CPointer<Unit>>, MiniportAdapterHandle: CPointer<Unit>, InitialPort: UInt32, NumberOfPorts: UInt32): Int32 {
+    return NdisMRegisterIoPortRange(PortOffset, MiniportAdapterHandle, InitialPort, NumberOfPorts)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMRemoveMiniport == "on"]
+foreign {
+    func NdisMRemoveMiniport(MiniportHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMRemoveMiniport == "on"]
+public unsafe func Windows_NdisMRemoveMiniport(MiniportHandle: CPointer<Unit>): Int32 {
+    return NdisMRemoveMiniport(MiniportHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMSetPeriodicTimer == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on"]
+foreign {
     func NdisMSetPeriodicTimer(Timer: CPointer<NDIS_MINIPORT_TIMERAbi>, MillisecondPeriod: UInt32): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMSetPeriodicTimer == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on"]
+public unsafe func Windows_NdisMSetPeriodicTimer(Timer: CPointer<NDIS_MINIPORT_TIMERAbi>, MillisecondPeriod: UInt32): Unit {
+    NdisMSetPeriodicTimer(Timer, MillisecondPeriod)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMSleep == "on"]
+foreign {
+    func NdisMSleep(MicrosecondsToSleep: UInt32): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMSleep == "on"]
+public unsafe func Windows_NdisMSleep(MicrosecondsToSleep: UInt32): Unit {
+    NdisMSleep(MicrosecondsToSleep)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMUnmapIoSpace == "on"]
+foreign {
+    // param-hint: VirtualAddress bytes=param[2]
+    func NdisMUnmapIoSpace(MiniportAdapterHandle: CPointer<Unit>, VirtualAddress: CPointer<Unit>, Length: UInt32): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMUnmapIoSpace == "on"]
+public unsafe func Windows_NdisMUnmapIoSpace(MiniportAdapterHandle: CPointer<Unit>, VirtualAddress: CPointer<Unit>, Length: UInt32): Unit {
+    NdisMUnmapIoSpace(MiniportAdapterHandle, VirtualAddress, Length)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMWriteLogData == "on"]
+foreign {
+    // param-hint: LogBuffer bytes=param[2]
+    func NdisMWriteLogData(LogHandle: CPointer<Unit>, LogBuffer: CPointer<Unit>, LogBufferSize: UInt32): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMWriteLogData == "on"]
+public unsafe func Windows_NdisMWriteLogData(LogHandle: CPointer<Unit>, LogBuffer: CPointer<Unit>, LogBufferSize: UInt32): Int32 {
+    return NdisMWriteLogData(LogHandle, LogBuffer, LogBufferSize)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMapFile == "on"]
+foreign {
+    func NdisMapFile(Status: CPointer<Int32>, MappedBuffer: CPointer<CPointer<Unit>>, FileHandle: CPointer<Unit>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisMapFile == "on"]
+public unsafe func Windows_NdisMapFile(Status: CPointer<Int32>, MappedBuffer: CPointer<CPointer<Unit>>, FileHandle: CPointer<Unit>): Unit {
+    NdisMapFile(Status, MappedBuffer, FileHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisOpenConfigurationKeyByIndex == "on"]
+foreign {
+    func NdisOpenConfigurationKeyByIndex(Status: CPointer<Int32>, ConfigurationHandle: CPointer<Unit>, Index: UInt32, KeyName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, KeyHandle: CPointer<CPointer<Unit>>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisOpenConfigurationKeyByIndex == "on"]
+public unsafe func Windows_NdisOpenConfigurationKeyByIndex(Status: CPointer<Int32>, ConfigurationHandle: CPointer<Unit>, Index: UInt32, KeyName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, KeyHandle: CPointer<CPointer<Unit>>): Unit {
+    NdisOpenConfigurationKeyByIndex(Status, ConfigurationHandle, Index, KeyName, KeyHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisOpenConfigurationKeyByName == "on"]
+foreign {
+    func NdisOpenConfigurationKeyByName(Status: CPointer<Int32>, ConfigurationHandle: CPointer<Unit>, SubKeyName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, SubKeyHandle: CPointer<CPointer<Unit>>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisOpenConfigurationKeyByName == "on"]
+public unsafe func Windows_NdisOpenConfigurationKeyByName(Status: CPointer<Int32>, ConfigurationHandle: CPointer<Unit>, SubKeyName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, SubKeyHandle: CPointer<CPointer<Unit>>): Unit {
+    NdisOpenConfigurationKeyByName(Status, ConfigurationHandle, SubKeyName, SubKeyHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisOpenFile == "on"]
+foreign {
+    func NdisOpenFile(Status: CPointer<Int32>, FileHandle: CPointer<CPointer<Unit>>, FileLength: CPointer<UInt32>, FileName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, HighestAcceptableAddress: Int64): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisOpenFile == "on"]
+public unsafe func Windows_NdisOpenFile(Status: CPointer<Int32>, FileHandle: CPointer<CPointer<Unit>>, FileLength: CPointer<UInt32>, FileName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, HighestAcceptableAddress: Int64): Unit {
+    NdisOpenFile(Status, FileHandle, FileLength, FileName, HighestAcceptableAddress)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisQueryAdapterInstanceName == "on"]
+foreign {
+    func NdisQueryAdapterInstanceName(pAdapterInstanceName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, NdisBindingHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisQueryAdapterInstanceName == "on"]
+public unsafe func Windows_NdisQueryAdapterInstanceName(pAdapterInstanceName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, NdisBindingHandle: CPointer<Unit>): Int32 {
+    return NdisQueryAdapterInstanceName(pAdapterInstanceName, NdisBindingHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisQueryBindInstanceName == "on"]
+foreign {
+    func NdisQueryBindInstanceName(pAdapterInstanceName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, BindingContext: CPointer<Unit>): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisQueryBindInstanceName == "on"]
+public unsafe func Windows_NdisQueryBindInstanceName(pAdapterInstanceName: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, BindingContext: CPointer<Unit>): Int32 {
+    return NdisQueryBindInstanceName(pAdapterInstanceName, BindingContext)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisReEnumerateProtocolBindings == "on"]
+foreign {
+    func NdisReEnumerateProtocolBindings(NdisProtocolHandle: CPointer<Unit>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisReEnumerateProtocolBindings == "on"]
+public unsafe func Windows_NdisReEnumerateProtocolBindings(NdisProtocolHandle: CPointer<Unit>): Unit {
+    NdisReEnumerateProtocolBindings(NdisProtocolHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisReadConfiguration == "on"]
+foreign {
+    func NdisReadConfiguration(Status: CPointer<Int32>, ParameterValue: CPointer<CPointer<NDIS_CONFIGURATION_PARAMETERAbi>>, ConfigurationHandle: CPointer<Unit>, Keyword: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, ParameterType: NDIS_PARAMETER_TYPEAbi): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisReadConfiguration == "on"]
+public unsafe func Windows_NdisReadConfiguration(Status: CPointer<Int32>, ParameterValue: CPointer<CPointer<NDIS_CONFIGURATION_PARAMETERAbi>>, ConfigurationHandle: CPointer<Unit>, Keyword: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, ParameterType: NDIS_PARAMETER_TYPEAbi): Unit {
+    NdisReadConfiguration(Status, ParameterValue, ConfigurationHandle, Keyword, ParameterType)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisReadNetworkAddress == "on"]
+foreign {
+    func NdisReadNetworkAddress(Status: CPointer<Int32>, NetworkAddress: CPointer<CPointer<Unit>>, NetworkAddressLength: CPointer<UInt32>, ConfigurationHandle: CPointer<Unit>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisReadNetworkAddress == "on"]
+public unsafe func Windows_NdisReadNetworkAddress(Status: CPointer<Int32>, NetworkAddress: CPointer<CPointer<Unit>>, NetworkAddressLength: CPointer<UInt32>, ConfigurationHandle: CPointer<Unit>): Unit {
+    NdisReadNetworkAddress(Status, NetworkAddress, NetworkAddressLength, ConfigurationHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisRegisterTdiCallBack == "on"]
+foreign {
+    func NdisRegisterTdiCallBack(RegisterCallback: TDI_REGISTER_CALLBACK, PnPHandler: TDI_PNP_HANDLER): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisRegisterTdiCallBack == "on"]
+public unsafe func Windows_NdisRegisterTdiCallBack(RegisterCallback: TDI_REGISTER_CALLBACK, PnPHandler: TDI_PNP_HANDLER): Unit {
+    NdisRegisterTdiCallBack(RegisterCallback, PnPHandler)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisReleaseReadWriteLock == "on"]
+foreign {
+    func NdisReleaseReadWriteLock(Lock: CPointer<NDIS_RW_LOCKAbi>, LockState: CPointer<LOCK_STATEAbi>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisReleaseReadWriteLock == "on"]
+public unsafe func Windows_NdisReleaseReadWriteLock(Lock: CPointer<NDIS_RW_LOCKAbi>, LockState: CPointer<LOCK_STATEAbi>): Unit {
+    NdisReleaseReadWriteLock(Lock, LockState)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisResetEvent == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on"]
+foreign {
+    func NdisResetEvent(Event: CPointer<NDIS_EVENTAbi>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisResetEvent == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on"]
+public unsafe func Windows_NdisResetEvent(Event: CPointer<NDIS_EVENTAbi>): Unit {
+    NdisResetEvent(Event)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisSetEvent == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on"]
+foreign {
+    func NdisSetEvent(Event: CPointer<NDIS_EVENTAbi>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisSetEvent == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on"]
+public unsafe func Windows_NdisSetEvent(Event: CPointer<NDIS_EVENTAbi>): Unit {
+    NdisSetEvent(Event)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisSetPeriodicTimer == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on"]
+foreign {
     func NdisSetPeriodicTimer(NdisTimer: CPointer<NDIS_TIMERAbi>, MillisecondsPeriod: UInt32): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisSetPeriodicTimer == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on"]
+public unsafe func Windows_NdisSetPeriodicTimer(NdisTimer: CPointer<NDIS_TIMERAbi>, MillisecondsPeriod: UInt32): Unit {
+    NdisSetPeriodicTimer(NdisTimer, MillisecondsPeriod)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisSetTimer == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on"]
+foreign {
     func NdisSetTimer(Timer: CPointer<NDIS_TIMERAbi>, MillisecondsToDelay: UInt32): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisSetTimer == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on"]
+public unsafe func Windows_NdisSetTimer(Timer: CPointer<NDIS_TIMERAbi>, MillisecondsToDelay: UInt32): Unit {
+    NdisSetTimer(Timer, MillisecondsToDelay)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisSetTimerEx == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on"]
+foreign {
     func NdisSetTimerEx(NdisTimer: CPointer<NDIS_TIMERAbi>, MillisecondsToDelay: UInt32, FunctionContext: CPointer<Unit>): Unit
 }
 
-@When[NDIS_SYS == "on" && (Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on")]
-foreign {
-    func NdisInitializeEvent(Event: CPointer<NDIS_EVENTAbi>): Unit
-    func NdisResetEvent(Event: CPointer<NDIS_EVENTAbi>): Unit
-    func NdisSetEvent(Event: CPointer<NDIS_EVENTAbi>): Unit
-    func NdisWaitEvent(Event: CPointer<NDIS_EVENTAbi>, MsToWait: UInt32): UInt8
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisSetTimerEx == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on" && Windows_Win32_System_Kernel == "on" && Windows_Wdk_System_SystemServices == "on"]
+public unsafe func Windows_NdisSetTimerEx(NdisTimer: CPointer<NDIS_TIMERAbi>, MillisecondsToDelay: UInt32, FunctionContext: CPointer<Unit>): Unit {
+    NdisSetTimerEx(NdisTimer, MillisecondsToDelay, FunctionContext)
 }
 
-@When[NDIS_SYS == "on" && Windows_Wdk_Foundation == "on"]
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisSetupDmaTransfer == "on" && Windows_Wdk_Foundation == "on"]
 foreign {
-    func NdisCompleteDmaTransfer(Status: CPointer<Int32>, NdisDmaHandle: CPointer<Unit>, Buffer: CPointer<Wdk__impl_l0.MDLAbi>, Offset: UInt32, Length: UInt32, WriteToDevice: UInt8): Unit
-    func NdisCopyBuffer(Status: CPointer<Int32>, Buffer: CPointer<CPointer<Wdk__impl_l0.MDLAbi>>, PoolHandle: CPointer<Unit>, MemoryDescriptor: CPointer<Unit>, Offset: UInt32, Length: UInt32): Unit
     func NdisSetupDmaTransfer(Status: CPointer<Int32>, NdisDmaHandle: CPointer<Unit>, Buffer: CPointer<Wdk__impl_l0.MDLAbi>, Offset: UInt32, Length: UInt32, WriteToDevice: UInt8): Unit
 }
 
-@When[NDIS_SYS == "on" && Windows_Wdk_System_SystemServices == "on"]
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisSetupDmaTransfer == "on" && Windows_Wdk_Foundation == "on"]
+public unsafe func Windows_NdisSetupDmaTransfer(Status: CPointer<Int32>, NdisDmaHandle: CPointer<Unit>, Buffer: CPointer<Wdk__impl_l0.MDLAbi>, Offset: UInt32, Length: UInt32, WriteToDevice: UInt8): Unit {
+    NdisSetupDmaTransfer(Status, NdisDmaHandle, Buffer, Offset, Length, WriteToDevice)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisSystemProcessorCount == "on"]
 foreign {
-    func NdisMRegisterDmaChannel(MiniportDmaHandle: CPointer<CPointer<Unit>>, MiniportAdapterHandle: CPointer<Unit>, DmaChannel: UInt32, Dma32BitAddresses: UInt8, DmaDescription: CPointer<NDIS_DMA_DESCRIPTIONAbi>, MaximumLength: UInt32): Int32
+    func NdisSystemProcessorCount(): Int8
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisSystemProcessorCount == "on"]
+public unsafe func Windows_NdisSystemProcessorCount(): Int8 {
+    return NdisSystemProcessorCount()
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisUnmapFile == "on"]
+foreign {
+    func NdisUnmapFile(FileHandle: CPointer<Unit>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisUnmapFile == "on"]
+public unsafe func Windows_NdisUnmapFile(FileHandle: CPointer<Unit>): Unit {
+    NdisUnmapFile(FileHandle)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisUpdateSharedMemory == "on"]
+foreign {
+    func NdisUpdateSharedMemory(NdisAdapterHandle: CPointer<Unit>, Length: UInt32, VirtualAddress: CPointer<Unit>, PhysicalAddress: Int64): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisUpdateSharedMemory == "on"]
+public unsafe func Windows_NdisUpdateSharedMemory(NdisAdapterHandle: CPointer<Unit>, Length: UInt32, VirtualAddress: CPointer<Unit>, PhysicalAddress: Int64): Unit {
+    NdisUpdateSharedMemory(NdisAdapterHandle, Length, VirtualAddress, PhysicalAddress)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisWaitEvent == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on"]
+foreign {
+    func NdisWaitEvent(Event: CPointer<NDIS_EVENTAbi>, MsToWait: UInt32): UInt8
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisWaitEvent == "on" && Windows_Wdk_Foundation == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_System_Kernel == "on"]
+public unsafe func Windows_NdisWaitEvent(Event: CPointer<NDIS_EVENTAbi>, MsToWait: UInt32): UInt8 {
+    return NdisWaitEvent(Event, MsToWait)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisWriteConfiguration == "on"]
+foreign {
+    func NdisWriteConfiguration(Status: CPointer<Int32>, ConfigurationHandle: CPointer<Unit>, Keyword: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, ParameterValue: CPointer<NDIS_CONFIGURATION_PARAMETERAbi>): Unit
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisWriteConfiguration == "on"]
+public unsafe func Windows_NdisWriteConfiguration(Status: CPointer<Int32>, ConfigurationHandle: CPointer<Unit>, Keyword: CPointer<Win32_Foundation.UNICODE_STRINGAbi>, ParameterValue: CPointer<NDIS_CONFIGURATION_PARAMETERAbi>): Unit {
+    NdisWriteConfiguration(Status, ConfigurationHandle, Keyword, ParameterValue)
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisWriteEventLogEntry == "on"]
+foreign {
+    // param-hint: StringsList optional
+    // param-hint: Data bytes=param[5] optional
+    func NdisWriteEventLogEntry(LogHandle: CPointer<Unit>, EventCode: Int32, UniqueEventValue: UInt32, NumStrings: UInt16, StringsList: CPointer<Unit>, DataSize: UInt32, Data: CPointer<Unit>): Int32
+}
+
+@When[Windows_Wdk_NetworkManagement_Ndis == "on" && NDIS_SYS == "on" && Windows_Wdk_NetworkManagement_Ndis_NdisWriteEventLogEntry == "on"]
+public unsafe func Windows_NdisWriteEventLogEntry(LogHandle: CPointer<Unit>, EventCode: Int32, UniqueEventValue: UInt32, NumStrings: UInt16, StringsList: CPointer<Unit>, DataSize: UInt32, Data: CPointer<Unit>): Int32 {
+    return NdisWriteEventLogEntry(LogHandle, EventCode, UniqueEventValue, NumStrings, StringsList, DataSize, Data)
 }
 
 @When[Windows_Wdk_NetworkManagement_Ndis == "on"]

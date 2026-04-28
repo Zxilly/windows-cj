@@ -3,7 +3,6 @@ package windows_sys.Devices.I2c
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Devices_I2c_Provider == "on"]
 import windows_sys.Devices.I2c.Provider as Devices_I2c_Provider
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
 
@@ -301,7 +300,7 @@ public class II2cController <: InterfaceWrapperBase & ComInterface {
 @C
 public struct II2cControllerStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Devices_I2c_Provider == "on"]
+    @When[Windows_Devices_I2c_Provider == "on" && Windows_Foundation_Collections == "on"]
     public var GetControllersAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetDefaultAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -347,7 +346,7 @@ public class II2cControllerStatics <: InterfaceWrapperBase & ComInterface {
         readVtbl<II2cControllerStaticsVtbl>(II2cControllerStaticsVtbl())
     }
 
-    @When[Windows_Devices_I2c_Provider == "on"]
+    @When[Windows_Devices_I2c_Provider == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func GetControllersAsync(provider: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

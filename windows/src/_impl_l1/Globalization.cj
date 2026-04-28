@@ -52,6 +52,7 @@ public class ApplicationLanguages <: windows_interface.RuntimeName & windows_cor
         return ()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Languages(): windows_collections.IVectorView<windows_core.HString> {
         var result__: Option<windows_collections.IVectorView<windows_core.HString>> = Option<windows_collections.IVectorView<windows_core.HString>>.None
         try (factory__ = windows_core.factory<ApplicationLanguages, _impl_l0.IApplicationLanguagesStatics>().unwrap()) {
@@ -63,6 +64,7 @@ public class ApplicationLanguages <: windows_interface.RuntimeName & windows_cor
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func ManifestLanguages(): windows_collections.IVectorView<windows_core.HString> {
         var result__: Option<windows_collections.IVectorView<windows_core.HString>> = Option<windows_collections.IVectorView<windows_core.HString>>.None
         try (factory__ = windows_core.factory<ApplicationLanguages, _impl_l0.IApplicationLanguagesStatics>().unwrap()) {
@@ -74,7 +76,7 @@ public class ApplicationLanguages <: windows_interface.RuntimeName & windows_cor
         }
     }
 
-    @When[Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
     public static unsafe func GetLanguagesForUser(user: User): windows_collections.IVectorView<windows_core.HString> {
         var result__: Option<windows_collections.IVectorView<windows_core.HString>> = Option<windows_collections.IVectorView<windows_core.HString>>.None
         try (factory__ = windows_core.factory<ApplicationLanguages, IApplicationLanguagesStatics2>().unwrap()) {
@@ -91,9 +93,9 @@ public class ApplicationLanguages <: windows_interface.RuntimeName & windows_cor
 @C
 public struct IApplicationLanguagesStatics2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
     public var GetLanguagesForUser: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_System != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_System != "on"]
     public var GetLanguagesForUser: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -163,7 +165,7 @@ public class IApplicationLanguagesStatics2 <: InterfaceWrapperBase & ComInterfac
         readVtbl<IApplicationLanguagesStatics2Vtbl>(IApplicationLanguagesStatics2Vtbl())
     }
 
-    @When[Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System == "on"]
     public unsafe func GetLanguagesForUser(user: User): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -180,8 +182,14 @@ extend IApplicationLanguagesStatics2 <: windows_core.Interface<IApplicationLangu
 @C
 public struct IJapanesePhoneticAnalyzerStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetWords: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetWords: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetWordsWithMonoRubyOption: CFunc<(CPointer<Unit>, CPointer<Unit>, Bool, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetWordsWithMonoRubyOption: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -250,6 +258,7 @@ public class IJapanesePhoneticAnalyzerStatics <: InterfaceWrapperBase & ComInter
         readVtbl<IJapanesePhoneticAnalyzerStaticsVtbl>(IJapanesePhoneticAnalyzerStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetWords(input: windows_core.HString): windows_collections.IVectorView<_impl_l0.JapanesePhoneme> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -258,6 +267,7 @@ public class IJapanesePhoneticAnalyzerStatics <: InterfaceWrapperBase & ComInter
         return windows_collections.IVectorView<_impl_l0.JapanesePhoneme>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetWordsWithMonoRubyOption(input: windows_core.HString, monoRuby: Bool): windows_collections.IVectorView<_impl_l0.JapanesePhoneme> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -375,6 +385,7 @@ public class JapanesePhoneticAnalyzer <: windows_interface.RuntimeName & windows
         windows_core.activationFactory<JapanesePhoneticAnalyzer>().ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetWords(input: windows_core.HString): windows_collections.IVectorView<_impl_l0.JapanesePhoneme> {
         var result__: Option<windows_collections.IVectorView<_impl_l0.JapanesePhoneme>> = Option<windows_collections.IVectorView<_impl_l0.JapanesePhoneme>>.None
         try (factory__ = windows_core.factory<JapanesePhoneticAnalyzer, IJapanesePhoneticAnalyzerStatics>().unwrap()) {
@@ -386,6 +397,7 @@ public class JapanesePhoneticAnalyzer <: windows_interface.RuntimeName & windows
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetWordsWithMonoRubyOption(input: windows_core.HString, monoRuby: Bool): windows_collections.IVectorView<_impl_l0.JapanesePhoneme> {
         var result__: Option<windows_collections.IVectorView<_impl_l0.JapanesePhoneme>> = Option<windows_collections.IVectorView<_impl_l0.JapanesePhoneme>>.None
         try (factory__ = windows_core.factory<JapanesePhoneticAnalyzer, IJapanesePhoneticAnalyzerStatics>().unwrap()) {
@@ -483,6 +495,7 @@ public class Language <: InterfaceWrapperBase & ComInterface & windows_interface
         return defaultInterface().Script()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetMuiCompatibleLanguageListFromLanguageTags(languageTags: windows_collections.IIterable<windows_core.HString>): windows_collections.IVector<windows_core.HString> {
         var result__: Option<windows_collections.IVector<windows_core.HString>> = Option<windows_collections.IVector<windows_core.HString>>.None
         try (factory__ = windows_core.factory<Language, _impl_l0.ILanguageStatics3>().unwrap()) {

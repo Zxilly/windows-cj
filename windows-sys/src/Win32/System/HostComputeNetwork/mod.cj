@@ -3,7 +3,6 @@ package windows_sys.Win32.System.HostComputeNetwork
 
 import windows_interface.{GUID}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 
 
@@ -147,80 +146,463 @@ public struct HCN_PORT_RANGE_RESERVATION {
     public init() {}
 }
 
-@When[COMPUTENETWORK == "on"]
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnCloseEndpoint == "on"]
 foreign {
     func HcnCloseEndpoint(Endpoint: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnCloseEndpoint == "on"]
+public unsafe func Windows_HcnCloseEndpoint(Endpoint: CPointer<Unit>): Int32 {
+    return HcnCloseEndpoint(Endpoint)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnCloseGuestNetworkService == "on"]
+foreign {
     func HcnCloseGuestNetworkService(GuestNetworkService: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnCloseGuestNetworkService == "on"]
+public unsafe func Windows_HcnCloseGuestNetworkService(GuestNetworkService: CPointer<Unit>): Int32 {
+    return HcnCloseGuestNetworkService(GuestNetworkService)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnCloseLoadBalancer == "on"]
+foreign {
     func HcnCloseLoadBalancer(LoadBalancer: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnCloseLoadBalancer == "on"]
+public unsafe func Windows_HcnCloseLoadBalancer(LoadBalancer: CPointer<Unit>): Int32 {
+    return HcnCloseLoadBalancer(LoadBalancer)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnCloseNamespace == "on"]
+foreign {
     func HcnCloseNamespace(Namespace: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnCloseNamespace == "on"]
+public unsafe func Windows_HcnCloseNamespace(Namespace: CPointer<Unit>): Int32 {
+    return HcnCloseNamespace(Namespace)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnCloseNetwork == "on"]
+foreign {
     func HcnCloseNetwork(Network: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnCloseNetwork == "on"]
+public unsafe func Windows_HcnCloseNetwork(Network: CPointer<Unit>): Int32 {
+    return HcnCloseNetwork(Network)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnCreateEndpoint == "on"]
+foreign {
     // param-hint: ErrorRecord optional
     func HcnCreateEndpoint(Network: CPointer<Unit>, Id: CPointer<GUID>, Settings: CPointer<UInt16>, Endpoint: CPointer<CPointer<Unit>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnCreateEndpoint == "on"]
+public unsafe func Windows_HcnCreateEndpoint(Network: CPointer<Unit>, Id: CPointer<GUID>, Settings: CPointer<UInt16>, Endpoint: CPointer<CPointer<Unit>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32 {
+    return HcnCreateEndpoint(Network, Id, Settings, Endpoint, ErrorRecord)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnCreateGuestNetworkService == "on"]
+foreign {
     // param-hint: ErrorRecord optional
     func HcnCreateGuestNetworkService(Id: CPointer<GUID>, Settings: CPointer<UInt16>, GuestNetworkService: CPointer<CPointer<Unit>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnCreateGuestNetworkService == "on"]
+public unsafe func Windows_HcnCreateGuestNetworkService(Id: CPointer<GUID>, Settings: CPointer<UInt16>, GuestNetworkService: CPointer<CPointer<Unit>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32 {
+    return HcnCreateGuestNetworkService(Id, Settings, GuestNetworkService, ErrorRecord)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnCreateLoadBalancer == "on"]
+foreign {
     // param-hint: ErrorRecord optional
     func HcnCreateLoadBalancer(Id: CPointer<GUID>, Settings: CPointer<UInt16>, LoadBalancer: CPointer<CPointer<Unit>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnCreateLoadBalancer == "on"]
+public unsafe func Windows_HcnCreateLoadBalancer(Id: CPointer<GUID>, Settings: CPointer<UInt16>, LoadBalancer: CPointer<CPointer<Unit>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32 {
+    return HcnCreateLoadBalancer(Id, Settings, LoadBalancer, ErrorRecord)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnCreateNamespace == "on"]
+foreign {
     // param-hint: ErrorRecord optional
     func HcnCreateNamespace(Id: CPointer<GUID>, Settings: CPointer<UInt16>, Namespace: CPointer<CPointer<Unit>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnCreateNamespace == "on"]
+public unsafe func Windows_HcnCreateNamespace(Id: CPointer<GUID>, Settings: CPointer<UInt16>, Namespace: CPointer<CPointer<Unit>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32 {
+    return HcnCreateNamespace(Id, Settings, Namespace, ErrorRecord)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnCreateNetwork == "on"]
+foreign {
     // param-hint: ErrorRecord optional
     func HcnCreateNetwork(Id: CPointer<GUID>, Settings: CPointer<UInt16>, Network: CPointer<CPointer<Unit>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnCreateNetwork == "on"]
+public unsafe func Windows_HcnCreateNetwork(Id: CPointer<GUID>, Settings: CPointer<UInt16>, Network: CPointer<CPointer<Unit>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32 {
+    return HcnCreateNetwork(Id, Settings, Network, ErrorRecord)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnDeleteEndpoint == "on"]
+foreign {
     // param-hint: ErrorRecord optional
     func HcnDeleteEndpoint(Id: CPointer<GUID>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnDeleteEndpoint == "on"]
+public unsafe func Windows_HcnDeleteEndpoint(Id: CPointer<GUID>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32 {
+    return HcnDeleteEndpoint(Id, ErrorRecord)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnDeleteGuestNetworkService == "on"]
+foreign {
     // param-hint: ErrorRecord optional
     func HcnDeleteGuestNetworkService(Id: CPointer<GUID>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnDeleteGuestNetworkService == "on"]
+public unsafe func Windows_HcnDeleteGuestNetworkService(Id: CPointer<GUID>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32 {
+    return HcnDeleteGuestNetworkService(Id, ErrorRecord)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnDeleteLoadBalancer == "on"]
+foreign {
     // param-hint: ErrorRecord optional
     func HcnDeleteLoadBalancer(Id: CPointer<GUID>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnDeleteLoadBalancer == "on"]
+public unsafe func Windows_HcnDeleteLoadBalancer(Id: CPointer<GUID>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32 {
+    return HcnDeleteLoadBalancer(Id, ErrorRecord)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnDeleteNamespace == "on"]
+foreign {
     // param-hint: ErrorRecord optional
     func HcnDeleteNamespace(Id: CPointer<GUID>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnDeleteNamespace == "on"]
+public unsafe func Windows_HcnDeleteNamespace(Id: CPointer<GUID>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32 {
+    return HcnDeleteNamespace(Id, ErrorRecord)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnDeleteNetwork == "on"]
+foreign {
     // param-hint: ErrorRecord optional
     func HcnDeleteNetwork(Id: CPointer<GUID>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnDeleteNetwork == "on"]
+public unsafe func Windows_HcnDeleteNetwork(Id: CPointer<GUID>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32 {
+    return HcnDeleteNetwork(Id, ErrorRecord)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnEnumerateEndpoints == "on"]
+foreign {
     // param-hint: ErrorRecord optional
     func HcnEnumerateEndpoints(Query: CPointer<UInt16>, Endpoints: CPointer<CPointer<UInt16>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnEnumerateEndpoints == "on"]
+public unsafe func Windows_HcnEnumerateEndpoints(Query: CPointer<UInt16>, Endpoints: CPointer<CPointer<UInt16>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32 {
+    return HcnEnumerateEndpoints(Query, Endpoints, ErrorRecord)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnEnumerateGuestNetworkPortReservations == "on"]
+foreign {
     // param-hint: PortEntries bytes=param[0]
     func HcnEnumerateGuestNetworkPortReservations(ReturnCount: CPointer<UInt32>, PortEntries: CPointer<CPointer<HCN_PORT_RANGE_ENTRY>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnEnumerateGuestNetworkPortReservations == "on"]
+public unsafe func Windows_HcnEnumerateGuestNetworkPortReservations(ReturnCount: CPointer<UInt32>, PortEntries: CPointer<CPointer<HCN_PORT_RANGE_ENTRY>>): Int32 {
+    return HcnEnumerateGuestNetworkPortReservations(ReturnCount, PortEntries)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnEnumerateLoadBalancers == "on"]
+foreign {
     // param-hint: ErrorRecord optional
     func HcnEnumerateLoadBalancers(Query: CPointer<UInt16>, LoadBalancer: CPointer<CPointer<UInt16>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnEnumerateLoadBalancers == "on"]
+public unsafe func Windows_HcnEnumerateLoadBalancers(Query: CPointer<UInt16>, LoadBalancer: CPointer<CPointer<UInt16>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32 {
+    return HcnEnumerateLoadBalancers(Query, LoadBalancer, ErrorRecord)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnEnumerateNamespaces == "on"]
+foreign {
     // param-hint: ErrorRecord optional
     func HcnEnumerateNamespaces(Query: CPointer<UInt16>, Namespaces: CPointer<CPointer<UInt16>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnEnumerateNamespaces == "on"]
+public unsafe func Windows_HcnEnumerateNamespaces(Query: CPointer<UInt16>, Namespaces: CPointer<CPointer<UInt16>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32 {
+    return HcnEnumerateNamespaces(Query, Namespaces, ErrorRecord)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnEnumerateNetworks == "on"]
+foreign {
     // param-hint: ErrorRecord optional
     func HcnEnumerateNetworks(Query: CPointer<UInt16>, Networks: CPointer<CPointer<UInt16>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnEnumerateNetworks == "on"]
+public unsafe func Windows_HcnEnumerateNetworks(Query: CPointer<UInt16>, Networks: CPointer<CPointer<UInt16>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32 {
+    return HcnEnumerateNetworks(Query, Networks, ErrorRecord)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnFreeGuestNetworkPortReservations == "on"]
+foreign {
     // param-hint: PortEntries optional
     func HcnFreeGuestNetworkPortReservations(PortEntries: CPointer<HCN_PORT_RANGE_ENTRY>): Unit
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnFreeGuestNetworkPortReservations == "on"]
+public unsafe func Windows_HcnFreeGuestNetworkPortReservations(PortEntries: CPointer<HCN_PORT_RANGE_ENTRY>): Unit {
+    HcnFreeGuestNetworkPortReservations(PortEntries)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnModifyEndpoint == "on"]
+foreign {
     // param-hint: ErrorRecord optional
     func HcnModifyEndpoint(Endpoint: CPointer<Unit>, Settings: CPointer<UInt16>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnModifyEndpoint == "on"]
+public unsafe func Windows_HcnModifyEndpoint(Endpoint: CPointer<Unit>, Settings: CPointer<UInt16>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32 {
+    return HcnModifyEndpoint(Endpoint, Settings, ErrorRecord)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnModifyGuestNetworkService == "on"]
+foreign {
     // param-hint: ErrorRecord optional
     func HcnModifyGuestNetworkService(GuestNetworkService: CPointer<Unit>, Settings: CPointer<UInt16>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnModifyGuestNetworkService == "on"]
+public unsafe func Windows_HcnModifyGuestNetworkService(GuestNetworkService: CPointer<Unit>, Settings: CPointer<UInt16>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32 {
+    return HcnModifyGuestNetworkService(GuestNetworkService, Settings, ErrorRecord)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnModifyLoadBalancer == "on"]
+foreign {
     // param-hint: ErrorRecord optional
     func HcnModifyLoadBalancer(LoadBalancer: CPointer<Unit>, Settings: CPointer<UInt16>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnModifyLoadBalancer == "on"]
+public unsafe func Windows_HcnModifyLoadBalancer(LoadBalancer: CPointer<Unit>, Settings: CPointer<UInt16>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32 {
+    return HcnModifyLoadBalancer(LoadBalancer, Settings, ErrorRecord)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnModifyNamespace == "on"]
+foreign {
     // param-hint: ErrorRecord optional
     func HcnModifyNamespace(Namespace: CPointer<Unit>, Settings: CPointer<UInt16>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnModifyNamespace == "on"]
+public unsafe func Windows_HcnModifyNamespace(Namespace: CPointer<Unit>, Settings: CPointer<UInt16>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32 {
+    return HcnModifyNamespace(Namespace, Settings, ErrorRecord)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnModifyNetwork == "on"]
+foreign {
     // param-hint: ErrorRecord optional
     func HcnModifyNetwork(Network: CPointer<Unit>, Settings: CPointer<UInt16>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnModifyNetwork == "on"]
+public unsafe func Windows_HcnModifyNetwork(Network: CPointer<Unit>, Settings: CPointer<UInt16>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32 {
+    return HcnModifyNetwork(Network, Settings, ErrorRecord)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnOpenEndpoint == "on"]
+foreign {
     // param-hint: ErrorRecord optional
     func HcnOpenEndpoint(Id: CPointer<GUID>, Endpoint: CPointer<CPointer<Unit>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnOpenEndpoint == "on"]
+public unsafe func Windows_HcnOpenEndpoint(Id: CPointer<GUID>, Endpoint: CPointer<CPointer<Unit>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32 {
+    return HcnOpenEndpoint(Id, Endpoint, ErrorRecord)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnOpenLoadBalancer == "on"]
+foreign {
     // param-hint: ErrorRecord optional
     func HcnOpenLoadBalancer(Id: CPointer<GUID>, LoadBalancer: CPointer<CPointer<Unit>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnOpenLoadBalancer == "on"]
+public unsafe func Windows_HcnOpenLoadBalancer(Id: CPointer<GUID>, LoadBalancer: CPointer<CPointer<Unit>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32 {
+    return HcnOpenLoadBalancer(Id, LoadBalancer, ErrorRecord)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnOpenNamespace == "on"]
+foreign {
     // param-hint: ErrorRecord optional
     func HcnOpenNamespace(Id: CPointer<GUID>, Namespace: CPointer<CPointer<Unit>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnOpenNamespace == "on"]
+public unsafe func Windows_HcnOpenNamespace(Id: CPointer<GUID>, Namespace: CPointer<CPointer<Unit>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32 {
+    return HcnOpenNamespace(Id, Namespace, ErrorRecord)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnOpenNetwork == "on"]
+foreign {
     // param-hint: ErrorRecord optional
     func HcnOpenNetwork(Id: CPointer<GUID>, Network: CPointer<CPointer<Unit>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnOpenNetwork == "on"]
+public unsafe func Windows_HcnOpenNetwork(Id: CPointer<GUID>, Network: CPointer<CPointer<Unit>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32 {
+    return HcnOpenNetwork(Id, Network, ErrorRecord)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnQueryEndpointAddresses == "on"]
+foreign {
     // param-hint: ErrorRecord optional
     func HcnQueryEndpointAddresses(Endpoint: CPointer<Unit>, Query: CPointer<UInt16>, Addresses: CPointer<CPointer<UInt16>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnQueryEndpointAddresses == "on"]
+public unsafe func Windows_HcnQueryEndpointAddresses(Endpoint: CPointer<Unit>, Query: CPointer<UInt16>, Addresses: CPointer<CPointer<UInt16>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32 {
+    return HcnQueryEndpointAddresses(Endpoint, Query, Addresses, ErrorRecord)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnQueryEndpointProperties == "on"]
+foreign {
     // param-hint: ErrorRecord optional
     func HcnQueryEndpointProperties(Endpoint: CPointer<Unit>, Query: CPointer<UInt16>, Properties: CPointer<CPointer<UInt16>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnQueryEndpointProperties == "on"]
+public unsafe func Windows_HcnQueryEndpointProperties(Endpoint: CPointer<Unit>, Query: CPointer<UInt16>, Properties: CPointer<CPointer<UInt16>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32 {
+    return HcnQueryEndpointProperties(Endpoint, Query, Properties, ErrorRecord)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnQueryEndpointStats == "on"]
+foreign {
     // param-hint: ErrorRecord optional
     func HcnQueryEndpointStats(Endpoint: CPointer<Unit>, Query: CPointer<UInt16>, Stats: CPointer<CPointer<UInt16>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnQueryEndpointStats == "on"]
+public unsafe func Windows_HcnQueryEndpointStats(Endpoint: CPointer<Unit>, Query: CPointer<UInt16>, Stats: CPointer<CPointer<UInt16>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32 {
+    return HcnQueryEndpointStats(Endpoint, Query, Stats, ErrorRecord)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnQueryLoadBalancerProperties == "on"]
+foreign {
     // param-hint: ErrorRecord optional
     func HcnQueryLoadBalancerProperties(LoadBalancer: CPointer<Unit>, Query: CPointer<UInt16>, Properties: CPointer<CPointer<UInt16>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnQueryLoadBalancerProperties == "on"]
+public unsafe func Windows_HcnQueryLoadBalancerProperties(LoadBalancer: CPointer<Unit>, Query: CPointer<UInt16>, Properties: CPointer<CPointer<UInt16>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32 {
+    return HcnQueryLoadBalancerProperties(LoadBalancer, Query, Properties, ErrorRecord)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnQueryNamespaceProperties == "on"]
+foreign {
     // param-hint: ErrorRecord optional
     func HcnQueryNamespaceProperties(Namespace: CPointer<Unit>, Query: CPointer<UInt16>, Properties: CPointer<CPointer<UInt16>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnQueryNamespaceProperties == "on"]
+public unsafe func Windows_HcnQueryNamespaceProperties(Namespace: CPointer<Unit>, Query: CPointer<UInt16>, Properties: CPointer<CPointer<UInt16>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32 {
+    return HcnQueryNamespaceProperties(Namespace, Query, Properties, ErrorRecord)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnQueryNetworkProperties == "on"]
+foreign {
     // param-hint: ErrorRecord optional
     func HcnQueryNetworkProperties(Network: CPointer<Unit>, Query: CPointer<UInt16>, Properties: CPointer<CPointer<UInt16>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnQueryNetworkProperties == "on"]
+public unsafe func Windows_HcnQueryNetworkProperties(Network: CPointer<Unit>, Query: CPointer<UInt16>, Properties: CPointer<CPointer<UInt16>>, ErrorRecord: CPointer<CPointer<UInt16>>): Int32 {
+    return HcnQueryNetworkProperties(Network, Query, Properties, ErrorRecord)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnRegisterGuestNetworkServiceCallback == "on"]
+foreign {
     func HcnRegisterGuestNetworkServiceCallback(GuestNetworkService: CPointer<Unit>, Callback: HCN_NOTIFICATION_CALLBACK, Context: CPointer<Unit>, CallbackHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnRegisterGuestNetworkServiceCallback == "on"]
+public unsafe func Windows_HcnRegisterGuestNetworkServiceCallback(GuestNetworkService: CPointer<Unit>, Callback: HCN_NOTIFICATION_CALLBACK, Context: CPointer<Unit>, CallbackHandle: CPointer<CPointer<Unit>>): Int32 {
+    return HcnRegisterGuestNetworkServiceCallback(GuestNetworkService, Callback, Context, CallbackHandle)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnRegisterServiceCallback == "on"]
+foreign {
     func HcnRegisterServiceCallback(Callback: HCN_NOTIFICATION_CALLBACK, Context: CPointer<Unit>, CallbackHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnRegisterServiceCallback == "on"]
+public unsafe func Windows_HcnRegisterServiceCallback(Callback: HCN_NOTIFICATION_CALLBACK, Context: CPointer<Unit>, CallbackHandle: CPointer<CPointer<Unit>>): Int32 {
+    return HcnRegisterServiceCallback(Callback, Context, CallbackHandle)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnReleaseGuestNetworkServicePortReservationHandle == "on"]
+foreign {
     func HcnReleaseGuestNetworkServicePortReservationHandle(PortReservationHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnReleaseGuestNetworkServicePortReservationHandle == "on"]
+public unsafe func Windows_HcnReleaseGuestNetworkServicePortReservationHandle(PortReservationHandle: CPointer<Unit>): Int32 {
+    return HcnReleaseGuestNetworkServicePortReservationHandle(PortReservationHandle)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnReserveGuestNetworkServicePort == "on"]
+foreign {
     func HcnReserveGuestNetworkServicePort(GuestNetworkService: CPointer<Unit>, Protocol: Int32, Access: Int32, Port: UInt16, PortReservationHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnReserveGuestNetworkServicePort == "on"]
+public unsafe func Windows_HcnReserveGuestNetworkServicePort(GuestNetworkService: CPointer<Unit>, Protocol: Int32, Access: Int32, Port: UInt16, PortReservationHandle: CPointer<CPointer<Unit>>): Int32 {
+    return HcnReserveGuestNetworkServicePort(GuestNetworkService, Protocol, Access, Port, PortReservationHandle)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnReserveGuestNetworkServicePortRange == "on"]
+foreign {
     func HcnReserveGuestNetworkServicePortRange(GuestNetworkService: CPointer<Unit>, PortCount: UInt16, PortRangeReservation: CPointer<HCN_PORT_RANGE_RESERVATION>, PortReservationHandle: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnReserveGuestNetworkServicePortRange == "on"]
+public unsafe func Windows_HcnReserveGuestNetworkServicePortRange(GuestNetworkService: CPointer<Unit>, PortCount: UInt16, PortRangeReservation: CPointer<HCN_PORT_RANGE_RESERVATION>, PortReservationHandle: CPointer<CPointer<Unit>>): Int32 {
+    return HcnReserveGuestNetworkServicePortRange(GuestNetworkService, PortCount, PortRangeReservation, PortReservationHandle)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnUnregisterGuestNetworkServiceCallback == "on"]
+foreign {
     func HcnUnregisterGuestNetworkServiceCallback(CallbackHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnUnregisterGuestNetworkServiceCallback == "on"]
+public unsafe func Windows_HcnUnregisterGuestNetworkServiceCallback(CallbackHandle: CPointer<Unit>): Int32 {
+    return HcnUnregisterGuestNetworkServiceCallback(CallbackHandle)
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnUnregisterServiceCallback == "on"]
+foreign {
     func HcnUnregisterServiceCallback(CallbackHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_HostComputeNetwork == "on" && COMPUTENETWORK == "on" && Windows_Win32_System_HostComputeNetwork_HcnUnregisterServiceCallback == "on"]
+public unsafe func Windows_HcnUnregisterServiceCallback(CallbackHandle: CPointer<Unit>): Int32 {
+    return HcnUnregisterServiceCallback(CallbackHandle)
 }

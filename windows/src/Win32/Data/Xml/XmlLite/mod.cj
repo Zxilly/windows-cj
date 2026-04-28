@@ -8,28 +8,77 @@ import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeTy
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
 
 
-@When[XMLLITE == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_Data_Xml_XmlLite == "on" && XMLLITE == "on" && Windows_Win32_Data_Xml_XmlLite_CreateXmlReader == "on" && Windows_Win32_System_Com == "on"]
 foreign {
     // param-hint: pMalloc optional
     func CreateXmlReader(riid: CPointer<GUID>, ppvObject: CPointer<CPointer<Unit>>, pMalloc: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Data_Xml_XmlLite == "on" && XMLLITE == "on" && Windows_Win32_Data_Xml_XmlLite_CreateXmlReader == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CreateXmlReader(riid: CPointer<GUID>, ppvObject: CPointer<CPointer<Unit>>, pMalloc: CPointer<Unit>): Int32 {
+    return CreateXmlReader(riid, ppvObject, pMalloc)
+}
+
+@When[Windows_Win32_Data_Xml_XmlLite == "on" && XMLLITE == "on" && Windows_Win32_Data_Xml_XmlLite_CreateXmlReaderInputWithEncodingCodePage == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pMalloc optional
     // param-hint: pwszBaseUri optional
     func CreateXmlReaderInputWithEncodingCodePage(pInputStream: CPointer<Unit>, pMalloc: CPointer<Unit>, nEncodingCodePage: UInt32, fEncodingHint: Int32, pwszBaseUri: CPointer<UInt16>, ppInput: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Data_Xml_XmlLite == "on" && XMLLITE == "on" && Windows_Win32_Data_Xml_XmlLite_CreateXmlReaderInputWithEncodingCodePage == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CreateXmlReaderInputWithEncodingCodePage(pInputStream: CPointer<Unit>, pMalloc: CPointer<Unit>, nEncodingCodePage: UInt32, fEncodingHint: Int32, pwszBaseUri: CPointer<UInt16>, ppInput: CPointer<CPointer<Unit>>): Int32 {
+    return CreateXmlReaderInputWithEncodingCodePage(pInputStream, pMalloc, nEncodingCodePage, fEncodingHint, pwszBaseUri, ppInput)
+}
+
+@When[Windows_Win32_Data_Xml_XmlLite == "on" && XMLLITE == "on" && Windows_Win32_Data_Xml_XmlLite_CreateXmlReaderInputWithEncodingName == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pMalloc optional
     // param-hint: pwszBaseUri optional
     func CreateXmlReaderInputWithEncodingName(pInputStream: CPointer<Unit>, pMalloc: CPointer<Unit>, pwszEncodingName: CPointer<UInt16>, fEncodingHint: Int32, pwszBaseUri: CPointer<UInt16>, ppInput: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Data_Xml_XmlLite == "on" && XMLLITE == "on" && Windows_Win32_Data_Xml_XmlLite_CreateXmlReaderInputWithEncodingName == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CreateXmlReaderInputWithEncodingName(pInputStream: CPointer<Unit>, pMalloc: CPointer<Unit>, pwszEncodingName: CPointer<UInt16>, fEncodingHint: Int32, pwszBaseUri: CPointer<UInt16>, ppInput: CPointer<CPointer<Unit>>): Int32 {
+    return CreateXmlReaderInputWithEncodingName(pInputStream, pMalloc, pwszEncodingName, fEncodingHint, pwszBaseUri, ppInput)
+}
+
+@When[Windows_Win32_Data_Xml_XmlLite == "on" && XMLLITE == "on" && Windows_Win32_Data_Xml_XmlLite_CreateXmlWriter == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pMalloc optional
     func CreateXmlWriter(riid: CPointer<GUID>, ppvObject: CPointer<CPointer<Unit>>, pMalloc: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Data_Xml_XmlLite == "on" && XMLLITE == "on" && Windows_Win32_Data_Xml_XmlLite_CreateXmlWriter == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CreateXmlWriter(riid: CPointer<GUID>, ppvObject: CPointer<CPointer<Unit>>, pMalloc: CPointer<Unit>): Int32 {
+    return CreateXmlWriter(riid, ppvObject, pMalloc)
+}
+
+@When[Windows_Win32_Data_Xml_XmlLite == "on" && XMLLITE == "on" && Windows_Win32_Data_Xml_XmlLite_CreateXmlWriterOutputWithEncodingCodePage == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pMalloc optional
     func CreateXmlWriterOutputWithEncodingCodePage(pOutputStream: CPointer<Unit>, pMalloc: CPointer<Unit>, nEncodingCodePage: UInt32, ppOutput: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Data_Xml_XmlLite == "on" && XMLLITE == "on" && Windows_Win32_Data_Xml_XmlLite_CreateXmlWriterOutputWithEncodingCodePage == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CreateXmlWriterOutputWithEncodingCodePage(pOutputStream: CPointer<Unit>, pMalloc: CPointer<Unit>, nEncodingCodePage: UInt32, ppOutput: CPointer<CPointer<Unit>>): Int32 {
+    return CreateXmlWriterOutputWithEncodingCodePage(pOutputStream, pMalloc, nEncodingCodePage, ppOutput)
+}
+
+@When[Windows_Win32_Data_Xml_XmlLite == "on" && XMLLITE == "on" && Windows_Win32_Data_Xml_XmlLite_CreateXmlWriterOutputWithEncodingName == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     // param-hint: pMalloc optional
     func CreateXmlWriterOutputWithEncodingName(pOutputStream: CPointer<Unit>, pMalloc: CPointer<Unit>, pwszEncodingName: CPointer<UInt16>, ppOutput: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Data_Xml_XmlLite == "on" && XMLLITE == "on" && Windows_Win32_Data_Xml_XmlLite_CreateXmlWriterOutputWithEncodingName == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CreateXmlWriterOutputWithEncodingName(pOutputStream: CPointer<Unit>, pMalloc: CPointer<Unit>, pwszEncodingName: CPointer<UInt16>, ppOutput: CPointer<CPointer<Unit>>): Int32 {
+    return CreateXmlWriterOutputWithEncodingName(pOutputStream, pMalloc, pwszEncodingName, ppOutput)
 }
 
 @When[Windows_Win32_Data_Xml_XmlLite == "on"]

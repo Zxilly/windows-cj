@@ -6,9 +6,7 @@ package windows.Win32.System.Diagnostics.ProcessSnapshotting
 import std.collection.*
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_System_Memory == "on"]
 import windows.Win32.System.Memory as Win32_System_Memory
 import windows.Win32._impl_l1 as Win32__impl_l1
 
@@ -1292,23 +1290,109 @@ extend PSS_WALK_INFORMATION_CLASS <: windows_core.CopyType & windows_core.Runtim
     }
 }
 
-@When[KERNEL32 == "on"]
+@When[Windows_Win32_System_Diagnostics_ProcessSnapshotting == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ProcessSnapshotting_PssCaptureSnapshot == "on"]
 foreign {
     // param-hint: ThreadContextFlags optional
     func PssCaptureSnapshot(ProcessHandle: CPointer<Unit>, CaptureFlags: PSS_CAPTURE_FLAGSAbi, ThreadContextFlags: UInt32, SnapshotHandle: CPointer<HPSS>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_ProcessSnapshotting == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ProcessSnapshotting_PssCaptureSnapshot == "on"]
+public unsafe func Windows_PssCaptureSnapshot(ProcessHandle: CPointer<Unit>, CaptureFlags: PSS_CAPTURE_FLAGSAbi, ThreadContextFlags: UInt32, SnapshotHandle: CPointer<HPSS>): UInt32 {
+    return PssCaptureSnapshot(ProcessHandle, CaptureFlags, ThreadContextFlags, SnapshotHandle)
+}
+
+@When[Windows_Win32_System_Diagnostics_ProcessSnapshotting == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ProcessSnapshotting_PssDuplicateSnapshot == "on"]
+foreign {
     // param-hint: Flags optional
     func PssDuplicateSnapshot(SourceProcessHandle: CPointer<Unit>, SnapshotHandle: HPSS, TargetProcessHandle: CPointer<Unit>, TargetSnapshotHandle: CPointer<HPSS>, Flags: PSS_DUPLICATE_FLAGSAbi): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_ProcessSnapshotting == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ProcessSnapshotting_PssDuplicateSnapshot == "on"]
+public unsafe func Windows_PssDuplicateSnapshot(SourceProcessHandle: CPointer<Unit>, SnapshotHandle: HPSS, TargetProcessHandle: CPointer<Unit>, TargetSnapshotHandle: CPointer<HPSS>, Flags: PSS_DUPLICATE_FLAGSAbi): UInt32 {
+    return PssDuplicateSnapshot(SourceProcessHandle, SnapshotHandle, TargetProcessHandle, TargetSnapshotHandle, Flags)
+}
+
+@When[Windows_Win32_System_Diagnostics_ProcessSnapshotting == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ProcessSnapshotting_PssFreeSnapshot == "on"]
+foreign {
     func PssFreeSnapshot(ProcessHandle: CPointer<Unit>, SnapshotHandle: HPSS): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_ProcessSnapshotting == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ProcessSnapshotting_PssFreeSnapshot == "on"]
+public unsafe func Windows_PssFreeSnapshot(ProcessHandle: CPointer<Unit>, SnapshotHandle: HPSS): UInt32 {
+    return PssFreeSnapshot(ProcessHandle, SnapshotHandle)
+}
+
+@When[Windows_Win32_System_Diagnostics_ProcessSnapshotting == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ProcessSnapshotting_PssQuerySnapshot == "on"]
+foreign {
     // param-hint: Buffer bytes=param[3]
     func PssQuerySnapshot(SnapshotHandle: HPSS, InformationClass: PSS_QUERY_INFORMATION_CLASSAbi, Buffer: CPointer<Unit>, BufferLength: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_ProcessSnapshotting == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ProcessSnapshotting_PssQuerySnapshot == "on"]
+public unsafe func Windows_PssQuerySnapshot(SnapshotHandle: HPSS, InformationClass: PSS_QUERY_INFORMATION_CLASSAbi, Buffer: CPointer<Unit>, BufferLength: UInt32): UInt32 {
+    return PssQuerySnapshot(SnapshotHandle, InformationClass, Buffer, BufferLength)
+}
+
+@When[Windows_Win32_System_Diagnostics_ProcessSnapshotting == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ProcessSnapshotting_PssWalkMarkerCreate == "on"]
+foreign {
     // param-hint: Allocator optional
     func PssWalkMarkerCreate(Allocator: CPointer<PSS_ALLOCATORAbi>, WalkMarkerHandle: CPointer<HPSSWALK>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_ProcessSnapshotting == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ProcessSnapshotting_PssWalkMarkerCreate == "on"]
+public unsafe func Windows_PssWalkMarkerCreate(Allocator: CPointer<PSS_ALLOCATORAbi>, WalkMarkerHandle: CPointer<HPSSWALK>): UInt32 {
+    return PssWalkMarkerCreate(Allocator, WalkMarkerHandle)
+}
+
+@When[Windows_Win32_System_Diagnostics_ProcessSnapshotting == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ProcessSnapshotting_PssWalkMarkerFree == "on"]
+foreign {
     func PssWalkMarkerFree(WalkMarkerHandle: HPSSWALK): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_ProcessSnapshotting == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ProcessSnapshotting_PssWalkMarkerFree == "on"]
+public unsafe func Windows_PssWalkMarkerFree(WalkMarkerHandle: HPSSWALK): UInt32 {
+    return PssWalkMarkerFree(WalkMarkerHandle)
+}
+
+@When[Windows_Win32_System_Diagnostics_ProcessSnapshotting == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ProcessSnapshotting_PssWalkMarkerGetPosition == "on"]
+foreign {
     func PssWalkMarkerGetPosition(WalkMarkerHandle: HPSSWALK, Position: CPointer<UIntNative>): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_ProcessSnapshotting == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ProcessSnapshotting_PssWalkMarkerGetPosition == "on"]
+public unsafe func Windows_PssWalkMarkerGetPosition(WalkMarkerHandle: HPSSWALK, Position: CPointer<UIntNative>): UInt32 {
+    return PssWalkMarkerGetPosition(WalkMarkerHandle, Position)
+}
+
+@When[Windows_Win32_System_Diagnostics_ProcessSnapshotting == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ProcessSnapshotting_PssWalkMarkerSeekToBeginning == "on"]
+foreign {
     func PssWalkMarkerSeekToBeginning(WalkMarkerHandle: HPSSWALK): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_ProcessSnapshotting == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ProcessSnapshotting_PssWalkMarkerSeekToBeginning == "on"]
+public unsafe func Windows_PssWalkMarkerSeekToBeginning(WalkMarkerHandle: HPSSWALK): UInt32 {
+    return PssWalkMarkerSeekToBeginning(WalkMarkerHandle)
+}
+
+@When[Windows_Win32_System_Diagnostics_ProcessSnapshotting == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ProcessSnapshotting_PssWalkMarkerSetPosition == "on"]
+foreign {
     func PssWalkMarkerSetPosition(WalkMarkerHandle: HPSSWALK, Position: UIntNative): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_ProcessSnapshotting == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ProcessSnapshotting_PssWalkMarkerSetPosition == "on"]
+public unsafe func Windows_PssWalkMarkerSetPosition(WalkMarkerHandle: HPSSWALK, Position: UIntNative): UInt32 {
+    return PssWalkMarkerSetPosition(WalkMarkerHandle, Position)
+}
+
+@When[Windows_Win32_System_Diagnostics_ProcessSnapshotting == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ProcessSnapshotting_PssWalkSnapshot == "on"]
+foreign {
     // param-hint: Buffer len=param[4] optional
     func PssWalkSnapshot(SnapshotHandle: HPSS, InformationClass: PSS_WALK_INFORMATION_CLASSAbi, WalkMarkerHandle: HPSSWALK, Buffer: CPointer<Unit>, BufferLength: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Diagnostics_ProcessSnapshotting == "on" && KERNEL32 == "on" && Windows_Win32_System_Diagnostics_ProcessSnapshotting_PssWalkSnapshot == "on"]
+public unsafe func Windows_PssWalkSnapshot(SnapshotHandle: HPSS, InformationClass: PSS_WALK_INFORMATION_CLASSAbi, WalkMarkerHandle: HPSSWALK, Buffer: CPointer<Unit>, BufferLength: UInt32): UInt32 {
+    return PssWalkSnapshot(SnapshotHandle, InformationClass, WalkMarkerHandle, Buffer, BufferLength)
 }
 
 @When[Windows_Win32_System_Diagnostics_ProcessSnapshotting == "on"]

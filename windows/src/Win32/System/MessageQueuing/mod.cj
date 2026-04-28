@@ -8,11 +8,8 @@ import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeTy
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
-@When[Windows_Win32_System_IO == "on"]
 import windows.Win32.System.IO as Win32_System_IO
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
@@ -4954,43 +4951,304 @@ public class _DMSMQEventEvents <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[MQRT == "on"]
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQADsPathToFormatName == "on"]
 foreign {
     // param-hint: lpwcsFormatName len=param[2]
     func MQADsPathToFormatName(lpwcsADsPath: CPointer<UInt16>, lpwcsFormatName: CPointer<UInt16>, lpdwFormatNameLength: CPointer<UInt32>): Int32
-    func MQCloseCursor(hCursor: CPointer<Unit>): Int32
-    func MQCloseQueue(hQueue: IntNative): Int32
-    func MQCreateCursor(hQueue: IntNative, phCursor: CPointer<CPointer<Unit>>): Int32
-    func MQDeleteQueue(lpwcsFormatName: CPointer<UInt16>): Int32
-    func MQFreeMemory(pvMemory: CPointer<Unit>): Unit
-    func MQFreeSecurityContext(hSecurityContext: CPointer<Unit>): Unit
-    // param-hint: lpCertBuffer bytes=param[1] optional
-    func MQGetSecurityContext(lpCertBuffer: CPointer<Unit>, dwCertBufferLength: UInt32, phSecurityContext: CPointer<CPointer<Unit>>): Int32
-    // param-hint: lpCertBuffer bytes=param[1] optional
-    func MQGetSecurityContextEx(lpCertBuffer: CPointer<Unit>, dwCertBufferLength: UInt32, phSecurityContext: CPointer<CPointer<Unit>>): Int32
-    // param-hint: lpwcsFormatName len=param[2]
-    func MQHandleToFormatName(hQueue: IntNative, lpwcsFormatName: CPointer<UInt16>, lpdwFormatNameLength: CPointer<UInt32>): Int32
-    // param-hint: lpwcsFormatName len=param[2]
-    func MQInstanceToFormatName(pGuid: CPointer<GUID>, lpwcsFormatName: CPointer<UInt16>, lpdwFormatNameLength: CPointer<UInt32>): Int32
-    func MQLocateEnd(hEnum: CPointer<Unit>): Int32
-    func MQMarkMessageRejected(hQueue: CPointer<Unit>, ullLookupId: UInt64): Int32
-    // param-hint: pComputerName optional
-    func MQMgmtAction(pComputerName: CPointer<UInt16>, pObjectName: CPointer<UInt16>, pAction: CPointer<UInt16>): Int32
-    func MQOpenQueue(lpwcsFormatName: CPointer<UInt16>, dwAccess: UInt32, dwShareMode: UInt32, phQueue: CPointer<IntNative>): Int32
-    // param-hint: lpwcsFormatName len=param[2]
-    func MQPathNameToFormatName(lpwcsPathName: CPointer<UInt16>, lpwcsFormatName: CPointer<UInt16>, lpdwFormatNameLength: CPointer<UInt32>): Int32
-    func MQPurgeQueue(hQueue: IntNative): Int32
-    func MQRegisterCertificate(dwFlags: UInt32, lpCertBuffer: CPointer<Unit>, dwCertBufferLength: UInt32): Int32
 }
 
-@When[MQRT == "on" && (Windows_Win32_Security == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on")]
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQADsPathToFormatName == "on"]
+public unsafe func Windows_MQADsPathToFormatName(lpwcsADsPath: CPointer<UInt16>, lpwcsFormatName: CPointer<UInt16>, lpdwFormatNameLength: CPointer<UInt32>): Int32 {
+    return MQADsPathToFormatName(lpwcsADsPath, lpwcsFormatName, lpdwFormatNameLength)
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQBeginTransaction == "on" && Windows_Win32_System_DistributedTransactionCoordinator == "on"]
+foreign {
+    func MQBeginTransaction(ppTransaction: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQBeginTransaction == "on" && Windows_Win32_System_DistributedTransactionCoordinator == "on"]
+public unsafe func Windows_MQBeginTransaction(ppTransaction: CPointer<CPointer<Unit>>): Int32 {
+    return MQBeginTransaction(ppTransaction)
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQCloseCursor == "on"]
+foreign {
+    func MQCloseCursor(hCursor: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQCloseCursor == "on"]
+public unsafe func Windows_MQCloseCursor(hCursor: CPointer<Unit>): Int32 {
+    return MQCloseCursor(hCursor)
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQCloseQueue == "on"]
+foreign {
+    func MQCloseQueue(hQueue: IntNative): Int32
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQCloseQueue == "on"]
+public unsafe func Windows_MQCloseQueue(hQueue: IntNative): Int32 {
+    return MQCloseQueue(hQueue)
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQCreateCursor == "on"]
+foreign {
+    func MQCreateCursor(hQueue: IntNative, phCursor: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQCreateCursor == "on"]
+public unsafe func Windows_MQCreateCursor(hQueue: IntNative, phCursor: CPointer<CPointer<Unit>>): Int32 {
+    return MQCreateCursor(hQueue, phCursor)
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQCreateQueue == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
 foreign {
     // param-hint: pSecurityDescriptor optional
     // param-hint: lpwcsFormatName len=param[3] optional
     func MQCreateQueue(pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, pQueueProps: CPointer<MQQUEUEPROPSAbi>, lpwcsFormatName: CPointer<UInt16>, lpdwFormatNameLength: CPointer<UInt32>): Int32
 }
 
-@When[MQRT == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_DistributedTransactionCoordinator == "on" && Windows_Win32_System_IO == "on")]
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQCreateQueue == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_MQCreateQueue(pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, pQueueProps: CPointer<MQQUEUEPROPSAbi>, lpwcsFormatName: CPointer<UInt16>, lpdwFormatNameLength: CPointer<UInt32>): Int32 {
+    return MQCreateQueue(pSecurityDescriptor, pQueueProps, lpwcsFormatName, lpdwFormatNameLength)
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQDeleteQueue == "on"]
+foreign {
+    func MQDeleteQueue(lpwcsFormatName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQDeleteQueue == "on"]
+public unsafe func Windows_MQDeleteQueue(lpwcsFormatName: CPointer<UInt16>): Int32 {
+    return MQDeleteQueue(lpwcsFormatName)
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQFreeMemory == "on"]
+foreign {
+    func MQFreeMemory(pvMemory: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQFreeMemory == "on"]
+public unsafe func Windows_MQFreeMemory(pvMemory: CPointer<Unit>): Unit {
+    MQFreeMemory(pvMemory)
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQFreeSecurityContext == "on"]
+foreign {
+    func MQFreeSecurityContext(hSecurityContext: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQFreeSecurityContext == "on"]
+public unsafe func Windows_MQFreeSecurityContext(hSecurityContext: CPointer<Unit>): Unit {
+    MQFreeSecurityContext(hSecurityContext)
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQGetMachineProperties == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    // param-hint: lpwcsMachineName optional
+    // param-hint: pguidMachineId optional
+    func MQGetMachineProperties(lpwcsMachineName: CPointer<UInt16>, pguidMachineId: CPointer<GUID>, pQMProps: CPointer<MQQMPROPSAbi>): Int32
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQGetMachineProperties == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_MQGetMachineProperties(lpwcsMachineName: CPointer<UInt16>, pguidMachineId: CPointer<GUID>, pQMProps: CPointer<MQQMPROPSAbi>): Int32 {
+    return MQGetMachineProperties(lpwcsMachineName, pguidMachineId, pQMProps)
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQGetOverlappedResult == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    func MQGetOverlappedResult(lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): Int32
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQGetOverlappedResult == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_MQGetOverlappedResult(lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): Int32 {
+    return MQGetOverlappedResult(lpOverlapped)
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQGetPrivateComputerInformation == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    // param-hint: lpwcsComputerName optional
+    func MQGetPrivateComputerInformation(lpwcsComputerName: CPointer<UInt16>, pPrivateProps: CPointer<MQPRIVATEPROPSAbi>): Int32
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQGetPrivateComputerInformation == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_MQGetPrivateComputerInformation(lpwcsComputerName: CPointer<UInt16>, pPrivateProps: CPointer<MQPRIVATEPROPSAbi>): Int32 {
+    return MQGetPrivateComputerInformation(lpwcsComputerName, pPrivateProps)
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQGetQueueProperties == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func MQGetQueueProperties(lpwcsFormatName: CPointer<UInt16>, pQueueProps: CPointer<MQQUEUEPROPSAbi>): Int32
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQGetQueueProperties == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_MQGetQueueProperties(lpwcsFormatName: CPointer<UInt16>, pQueueProps: CPointer<MQQUEUEPROPSAbi>): Int32 {
+    return MQGetQueueProperties(lpwcsFormatName, pQueueProps)
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQGetQueueSecurity == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: pSecurityDescriptor bytes=param[3]
+    func MQGetQueueSecurity(lpwcsFormatName: CPointer<UInt16>, RequestedInformation: UInt32, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, nLength: UInt32, lpnLengthNeeded: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQGetQueueSecurity == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_MQGetQueueSecurity(lpwcsFormatName: CPointer<UInt16>, RequestedInformation: UInt32, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, nLength: UInt32, lpnLengthNeeded: CPointer<UInt32>): Int32 {
+    return MQGetQueueSecurity(lpwcsFormatName, RequestedInformation, pSecurityDescriptor, nLength, lpnLengthNeeded)
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQGetSecurityContext == "on"]
+foreign {
+    // param-hint: lpCertBuffer bytes=param[1] optional
+    func MQGetSecurityContext(lpCertBuffer: CPointer<Unit>, dwCertBufferLength: UInt32, phSecurityContext: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQGetSecurityContext == "on"]
+public unsafe func Windows_MQGetSecurityContext(lpCertBuffer: CPointer<Unit>, dwCertBufferLength: UInt32, phSecurityContext: CPointer<CPointer<Unit>>): Int32 {
+    return MQGetSecurityContext(lpCertBuffer, dwCertBufferLength, phSecurityContext)
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQGetSecurityContextEx == "on"]
+foreign {
+    // param-hint: lpCertBuffer bytes=param[1] optional
+    func MQGetSecurityContextEx(lpCertBuffer: CPointer<Unit>, dwCertBufferLength: UInt32, phSecurityContext: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQGetSecurityContextEx == "on"]
+public unsafe func Windows_MQGetSecurityContextEx(lpCertBuffer: CPointer<Unit>, dwCertBufferLength: UInt32, phSecurityContext: CPointer<CPointer<Unit>>): Int32 {
+    return MQGetSecurityContextEx(lpCertBuffer, dwCertBufferLength, phSecurityContext)
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQHandleToFormatName == "on"]
+foreign {
+    // param-hint: lpwcsFormatName len=param[2]
+    func MQHandleToFormatName(hQueue: IntNative, lpwcsFormatName: CPointer<UInt16>, lpdwFormatNameLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQHandleToFormatName == "on"]
+public unsafe func Windows_MQHandleToFormatName(hQueue: IntNative, lpwcsFormatName: CPointer<UInt16>, lpdwFormatNameLength: CPointer<UInt32>): Int32 {
+    return MQHandleToFormatName(hQueue, lpwcsFormatName, lpdwFormatNameLength)
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQInstanceToFormatName == "on"]
+foreign {
+    // param-hint: lpwcsFormatName len=param[2]
+    func MQInstanceToFormatName(pGuid: CPointer<GUID>, lpwcsFormatName: CPointer<UInt16>, lpdwFormatNameLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQInstanceToFormatName == "on"]
+public unsafe func Windows_MQInstanceToFormatName(pGuid: CPointer<GUID>, lpwcsFormatName: CPointer<UInt16>, lpdwFormatNameLength: CPointer<UInt32>): Int32 {
+    return MQInstanceToFormatName(pGuid, lpwcsFormatName, lpdwFormatNameLength)
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQLocateBegin == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    // param-hint: lpwcsContext optional
+    // param-hint: pRestriction optional
+    func MQLocateBegin(lpwcsContext: CPointer<UInt16>, pRestriction: CPointer<MQRESTRICTIONAbi>, pColumns: CPointer<MQCOLUMNSETAbi>, pSort: CPointer<MQSORTSETAbi>, phEnum: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQLocateBegin == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_MQLocateBegin(lpwcsContext: CPointer<UInt16>, pRestriction: CPointer<MQRESTRICTIONAbi>, pColumns: CPointer<MQCOLUMNSETAbi>, pSort: CPointer<MQSORTSETAbi>, phEnum: CPointer<CPointer<Unit>>): Int32 {
+    return MQLocateBegin(lpwcsContext, pRestriction, pColumns, pSort, phEnum)
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQLocateEnd == "on"]
+foreign {
+    func MQLocateEnd(hEnum: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQLocateEnd == "on"]
+public unsafe func Windows_MQLocateEnd(hEnum: CPointer<Unit>): Int32 {
+    return MQLocateEnd(hEnum)
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQLocateNext == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func MQLocateNext(hEnum: CPointer<Unit>, pcProps: CPointer<UInt32>, aPropVar: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQLocateNext == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_MQLocateNext(hEnum: CPointer<Unit>, pcProps: CPointer<UInt32>, aPropVar: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32 {
+    return MQLocateNext(hEnum, pcProps, aPropVar)
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQMarkMessageRejected == "on"]
+foreign {
+    func MQMarkMessageRejected(hQueue: CPointer<Unit>, ullLookupId: UInt64): Int32
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQMarkMessageRejected == "on"]
+public unsafe func Windows_MQMarkMessageRejected(hQueue: CPointer<Unit>, ullLookupId: UInt64): Int32 {
+    return MQMarkMessageRejected(hQueue, ullLookupId)
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQMgmtAction == "on"]
+foreign {
+    // param-hint: pComputerName optional
+    func MQMgmtAction(pComputerName: CPointer<UInt16>, pObjectName: CPointer<UInt16>, pAction: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQMgmtAction == "on"]
+public unsafe func Windows_MQMgmtAction(pComputerName: CPointer<UInt16>, pObjectName: CPointer<UInt16>, pAction: CPointer<UInt16>): Int32 {
+    return MQMgmtAction(pComputerName, pObjectName, pAction)
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQMgmtGetInfo == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    // param-hint: pComputerName optional
+    func MQMgmtGetInfo(pComputerName: CPointer<UInt16>, pObjectName: CPointer<UInt16>, pMgmtProps: CPointer<MQMGMTPROPSAbi>): Int32
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQMgmtGetInfo == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_MQMgmtGetInfo(pComputerName: CPointer<UInt16>, pObjectName: CPointer<UInt16>, pMgmtProps: CPointer<MQMGMTPROPSAbi>): Int32 {
+    return MQMgmtGetInfo(pComputerName, pObjectName, pMgmtProps)
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQMoveMessage == "on" && Windows_Win32_System_DistributedTransactionCoordinator == "on"]
+foreign {
+    // param-hint: pTransaction optional
+    func MQMoveMessage(hSourceQueue: IntNative, hDestinationQueue: IntNative, ullLookupId: UInt64, pTransaction: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQMoveMessage == "on" && Windows_Win32_System_DistributedTransactionCoordinator == "on"]
+public unsafe func Windows_MQMoveMessage(hSourceQueue: IntNative, hDestinationQueue: IntNative, ullLookupId: UInt64, pTransaction: CPointer<Unit>): Int32 {
+    return MQMoveMessage(hSourceQueue, hDestinationQueue, ullLookupId, pTransaction)
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQOpenQueue == "on"]
+foreign {
+    func MQOpenQueue(lpwcsFormatName: CPointer<UInt16>, dwAccess: UInt32, dwShareMode: UInt32, phQueue: CPointer<IntNative>): Int32
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQOpenQueue == "on"]
+public unsafe func Windows_MQOpenQueue(lpwcsFormatName: CPointer<UInt16>, dwAccess: UInt32, dwShareMode: UInt32, phQueue: CPointer<IntNative>): Int32 {
+    return MQOpenQueue(lpwcsFormatName, dwAccess, dwShareMode, phQueue)
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQPathNameToFormatName == "on"]
+foreign {
+    // param-hint: lpwcsFormatName len=param[2]
+    func MQPathNameToFormatName(lpwcsPathName: CPointer<UInt16>, lpwcsFormatName: CPointer<UInt16>, lpdwFormatNameLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQPathNameToFormatName == "on"]
+public unsafe func Windows_MQPathNameToFormatName(lpwcsPathName: CPointer<UInt16>, lpwcsFormatName: CPointer<UInt16>, lpdwFormatNameLength: CPointer<UInt32>): Int32 {
+    return MQPathNameToFormatName(lpwcsPathName, lpwcsFormatName, lpdwFormatNameLength)
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQPurgeQueue == "on"]
+foreign {
+    func MQPurgeQueue(hQueue: IntNative): Int32
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQPurgeQueue == "on"]
+public unsafe func Windows_MQPurgeQueue(hQueue: IntNative): Int32 {
+    return MQPurgeQueue(hQueue)
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQReceiveMessage == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_DistributedTransactionCoordinator == "on" && Windows_Win32_System_IO == "on"]
 foreign {
     // param-hint: pMessageProps optional
     // param-hint: lpOverlapped optional
@@ -4998,6 +5256,15 @@ foreign {
     // param-hint: hCursor optional
     // param-hint: pTransaction optional
     func MQReceiveMessage(hSource: IntNative, dwTimeout: UInt32, dwAction: UInt32, pMessageProps: CPointer<MQMSGPROPSAbi>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, fnReceiveCallback: PMQRECEIVECALLBACK, hCursor: CPointer<Unit>, pTransaction: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQReceiveMessage == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_DistributedTransactionCoordinator == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_MQReceiveMessage(hSource: IntNative, dwTimeout: UInt32, dwAction: UInt32, pMessageProps: CPointer<MQMSGPROPSAbi>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, fnReceiveCallback: PMQRECEIVECALLBACK, hCursor: CPointer<Unit>, pTransaction: CPointer<Unit>): Int32 {
+    return MQReceiveMessage(hSource, dwTimeout, dwAction, pMessageProps, lpOverlapped, fnReceiveCallback, hCursor, pTransaction)
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQReceiveMessageByLookupId == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_DistributedTransactionCoordinator == "on" && Windows_Win32_System_IO == "on"]
+foreign {
     // param-hint: pMessageProps optional
     // param-hint: lpOverlapped optional
     // param-hint: fnReceiveCallback optional
@@ -5005,47 +5272,51 @@ foreign {
     func MQReceiveMessageByLookupId(hSource: IntNative, ullLookupId: UInt64, dwLookupAction: UInt32, pMessageProps: CPointer<MQMSGPROPSAbi>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, fnReceiveCallback: PMQRECEIVECALLBACK, pTransaction: CPointer<Unit>): Int32
 }
 
-@When[MQRT == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_DistributedTransactionCoordinator == "on")]
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQReceiveMessageByLookupId == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_DistributedTransactionCoordinator == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_MQReceiveMessageByLookupId(hSource: IntNative, ullLookupId: UInt64, dwLookupAction: UInt32, pMessageProps: CPointer<MQMSGPROPSAbi>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>, fnReceiveCallback: PMQRECEIVECALLBACK, pTransaction: CPointer<Unit>): Int32 {
+    return MQReceiveMessageByLookupId(hSource, ullLookupId, dwLookupAction, pMessageProps, lpOverlapped, fnReceiveCallback, pTransaction)
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQRegisterCertificate == "on"]
+foreign {
+    func MQRegisterCertificate(dwFlags: UInt32, lpCertBuffer: CPointer<Unit>, dwCertBufferLength: UInt32): Int32
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQRegisterCertificate == "on"]
+public unsafe func Windows_MQRegisterCertificate(dwFlags: UInt32, lpCertBuffer: CPointer<Unit>, dwCertBufferLength: UInt32): Int32 {
+    return MQRegisterCertificate(dwFlags, lpCertBuffer, dwCertBufferLength)
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQSendMessage == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_DistributedTransactionCoordinator == "on"]
 foreign {
     // param-hint: pTransaction optional
     func MQSendMessage(hDestinationQueue: IntNative, pMessageProps: CPointer<MQMSGPROPSAbi>, pTransaction: CPointer<Unit>): Int32
 }
 
-@When[MQRT == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on")]
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQSendMessage == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_DistributedTransactionCoordinator == "on"]
+public unsafe func Windows_MQSendMessage(hDestinationQueue: IntNative, pMessageProps: CPointer<MQMSGPROPSAbi>, pTransaction: CPointer<Unit>): Int32 {
+    return MQSendMessage(hDestinationQueue, pMessageProps, pTransaction)
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQSetQueueProperties == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
 foreign {
-    // param-hint: lpwcsMachineName optional
-    // param-hint: pguidMachineId optional
-    func MQGetMachineProperties(lpwcsMachineName: CPointer<UInt16>, pguidMachineId: CPointer<GUID>, pQMProps: CPointer<MQQMPROPSAbi>): Int32
-    // param-hint: lpwcsComputerName optional
-    func MQGetPrivateComputerInformation(lpwcsComputerName: CPointer<UInt16>, pPrivateProps: CPointer<MQPRIVATEPROPSAbi>): Int32
-    func MQGetQueueProperties(lpwcsFormatName: CPointer<UInt16>, pQueueProps: CPointer<MQQUEUEPROPSAbi>): Int32
-    // param-hint: lpwcsContext optional
-    // param-hint: pRestriction optional
-    func MQLocateBegin(lpwcsContext: CPointer<UInt16>, pRestriction: CPointer<MQRESTRICTIONAbi>, pColumns: CPointer<MQCOLUMNSETAbi>, pSort: CPointer<MQSORTSETAbi>, phEnum: CPointer<CPointer<Unit>>): Int32
-    func MQLocateNext(hEnum: CPointer<Unit>, pcProps: CPointer<UInt32>, aPropVar: CPointer<Win32__impl_l2.PROPVARIANTAbi>): Int32
-    // param-hint: pComputerName optional
-    func MQMgmtGetInfo(pComputerName: CPointer<UInt16>, pObjectName: CPointer<UInt16>, pMgmtProps: CPointer<MQMGMTPROPSAbi>): Int32
     func MQSetQueueProperties(lpwcsFormatName: CPointer<UInt16>, pQueueProps: CPointer<MQQUEUEPROPSAbi>): Int32
 }
 
-@When[MQRT == "on" && Windows_Win32_Security == "on"]
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQSetQueueProperties == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_MQSetQueueProperties(lpwcsFormatName: CPointer<UInt16>, pQueueProps: CPointer<MQQUEUEPROPSAbi>): Int32 {
+    return MQSetQueueProperties(lpwcsFormatName, pQueueProps)
+}
+
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQSetQueueSecurity == "on" && Windows_Win32_Security == "on"]
 foreign {
-    // param-hint: pSecurityDescriptor bytes=param[3]
-    func MQGetQueueSecurity(lpwcsFormatName: CPointer<UInt16>, RequestedInformation: UInt32, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, nLength: UInt32, lpnLengthNeeded: CPointer<UInt32>): Int32
     // param-hint: pSecurityDescriptor optional
     func MQSetQueueSecurity(lpwcsFormatName: CPointer<UInt16>, SecurityInformation: Win32_Security.OBJECT_SECURITY_INFORMATIONAbi, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): Int32
 }
 
-@When[MQRT == "on" && Windows_Win32_System_DistributedTransactionCoordinator == "on"]
-foreign {
-    func MQBeginTransaction(ppTransaction: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pTransaction optional
-    func MQMoveMessage(hSourceQueue: IntNative, hDestinationQueue: IntNative, ullLookupId: UInt64, pTransaction: CPointer<Unit>): Int32
-}
-
-@When[MQRT == "on" && Windows_Win32_System_IO == "on"]
-foreign {
-    func MQGetOverlappedResult(lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): Int32
+@When[Windows_Win32_System_MessageQueuing == "on" && MQRT == "on" && Windows_Win32_System_MessageQueuing_MQSetQueueSecurity == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_MQSetQueueSecurity(lpwcsFormatName: CPointer<UInt16>, SecurityInformation: Win32_Security.OBJECT_SECURITY_INFORMATIONAbi, pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): Int32 {
+    return MQSetQueueSecurity(lpwcsFormatName, SecurityInformation, pSecurityDescriptor)
 }
 
 @When[Windows_Win32_System_MessageQueuing == "on"]

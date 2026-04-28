@@ -11,4 +11,61 @@ public import windows_sys.Win32._impl_l1.POINTER_DEVICE_INFO
 public import windows_sys.Win32._impl_l1.{POINTER_INFO, POINTER_PEN_INFO, POINTER_TOUCH_INFO}
 @When[Windows_Win32_UI_Input_Pointer == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 public import windows_sys.Win32._impl_l2.POINTER_TYPE_INFO
-
+@When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_DestroySyntheticPointerDevice == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DestroySyntheticPointerDevice
+@When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_EnableMouseInPointer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_EnableMouseInPointer
+@When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerCursorId == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetPointerCursorId
+@When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerDevice == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetPointerDevice
+@When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerDeviceCursors == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetPointerDeviceCursors
+@When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerDeviceProperties == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetPointerDeviceProperties
+@When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerDeviceRects == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetPointerDeviceRects
+@When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerDevices == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetPointerDevices
+@When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerFrameInfo == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetPointerFrameInfo
+@When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerFrameInfoHistory == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetPointerFrameInfoHistory
+@When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerFramePenInfo == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetPointerFramePenInfo
+@When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerFramePenInfoHistory == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetPointerFramePenInfoHistory
+@When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerFrameTouchInfo == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetPointerFrameTouchInfo
+@When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerFrameTouchInfoHistory == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetPointerFrameTouchInfoHistory
+@When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerInfo == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetPointerInfo
+@When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerInfoHistory == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetPointerInfoHistory
+@When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerInputTransform == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetPointerInputTransform
+@When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerPenInfo == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetPointerPenInfo
+@When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerPenInfoHistory == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetPointerPenInfoHistory
+@When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerTouchInfo == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetPointerTouchInfo
+@When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerTouchInfoHistory == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetPointerTouchInfoHistory
+@When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetPointerType == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetPointerType
+@When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetRawPointerDeviceData == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetRawPointerDeviceData
+@When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_GetUnpredictedMessagePos == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetUnpredictedMessagePos
+@When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_InitializeTouchInjection == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InitializeTouchInjection
+@When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_InjectSyntheticPointerInput == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InjectSyntheticPointerInput
+@When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_InjectTouchInput == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_InjectTouchInput
+@When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_IsMouseInPointerEnabled == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsMouseInPointerEnabled
+@When[Windows_Win32_UI_Input_Pointer == "on" && USER32 == "on" && Windows_Win32_UI_Input_Pointer_SkipPointerFrameMessages == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SkipPointerFrameMessages

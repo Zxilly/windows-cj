@@ -17,7 +17,10 @@ import windows_collections as windows_collections
 @C
 public struct ISearchPaneQueryLinguisticDetailsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var QueryTextAlternatives: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var QueryTextAlternatives: UIntNative = UIntNative(0)
     public var QueryTextCompositionStart: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var QueryTextCompositionLength: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -88,6 +91,7 @@ public class ISearchPaneQueryLinguisticDetails <: InterfaceWrapperBase & ComInte
         readVtbl<ISearchPaneQueryLinguisticDetailsVtbl>(ISearchPaneQueryLinguisticDetailsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func QueryTextAlternatives(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -550,7 +554,10 @@ extend ISearchPaneVisibilityChangedEventArgs <: windows_core.Interface<ISearchPa
 @C
 public struct ISearchQueryLinguisticDetailsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var QueryTextAlternatives: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var QueryTextAlternatives: UIntNative = UIntNative(0)
     public var QueryTextCompositionStart: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var QueryTextCompositionLength: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -621,6 +628,7 @@ public class ISearchQueryLinguisticDetails <: InterfaceWrapperBase & ComInterfac
         readVtbl<ISearchQueryLinguisticDetailsVtbl>(ISearchQueryLinguisticDetailsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func QueryTextAlternatives(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -653,7 +661,10 @@ extend ISearchQueryLinguisticDetails <: windows_core.Interface<ISearchQueryLingu
 @C
 public struct ISearchQueryLinguisticDetailsFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateInstance: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateInstance: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -722,6 +733,7 @@ public class ISearchQueryLinguisticDetailsFactory <: InterfaceWrapperBase & ComI
         readVtbl<ISearchQueryLinguisticDetailsFactoryVtbl>(ISearchQueryLinguisticDetailsFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateInstance(queryTextAlternatives: windows_collections.IIterable<windows_core.HString>, queryTextCompositionStart: UInt32, queryTextCompositionLength: UInt32): SearchQueryLinguisticDetails {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -917,6 +929,7 @@ public class SearchPaneQueryLinguisticDetails <: InterfaceWrapperBase & ComInter
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func QueryTextAlternatives(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().QueryTextAlternatives()
     }
@@ -1293,6 +1306,7 @@ public class SearchQueryLinguisticDetails <: InterfaceWrapperBase & ComInterface
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func QueryTextAlternatives(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().QueryTextAlternatives()
     }
@@ -1305,6 +1319,7 @@ public class SearchQueryLinguisticDetails <: InterfaceWrapperBase & ComInterface
         return defaultInterface().QueryTextCompositionLength()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateInstance(queryTextAlternatives: windows_collections.IIterable<windows_core.HString>, queryTextCompositionStart: UInt32, queryTextCompositionLength: UInt32): SearchQueryLinguisticDetails {
         var result__: Option<SearchQueryLinguisticDetails> = Option<SearchQueryLinguisticDetails>.None
         try (factory__ = windows_core.factory<SearchQueryLinguisticDetails, ISearchQueryLinguisticDetailsFactory>().unwrap()) {

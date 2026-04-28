@@ -4,9 +4,7 @@ package windows_sys.ApplicationModel.UserActivities
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_UI == "on"]
 import windows_sys.UI as UI
-@When[Windows_UI_Shell == "on"]
 import windows_sys.UI.Shell as UI_Shell
 import windows_sys._impl_l1 as _impl_l1
 
@@ -695,7 +693,9 @@ public class IUserActivityChannel <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IUserActivityChannel2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetRecentUserActivitiesAsync: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSessionHistoryItemsForUserActivityAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, Foundation__impl_l0.DateTime, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -740,12 +740,14 @@ public class IUserActivityChannel2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IUserActivityChannel2Vtbl>(IUserActivityChannel2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetRecentUserActivitiesAsync(maxUniqueActivities: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetRecentUserActivitiesAsync(__liveRaw, maxUniqueActivities, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSessionHistoryItemsForUserActivityAsync(activityId: CPointer<Unit>, startTime: Foundation__impl_l0.DateTime, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1347,7 +1349,9 @@ public class IUserActivitySessionHistoryItem <: InterfaceWrapperBase & ComInterf
 public struct IUserActivityStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var TryParseFromJson: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var TryParseFromJsonArray: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ToJsonArray: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -1398,12 +1402,14 @@ public class IUserActivityStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.TryParseFromJson(__liveRaw, json, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TryParseFromJsonArray(json: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.TryParseFromJsonArray(__liveRaw, json, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ToJsonArray(activities: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

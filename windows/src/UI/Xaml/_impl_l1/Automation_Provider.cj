@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_UI == "on"]
 import windows.UI as UI
 @When[Windows_UI_Xaml_Automation_Text == "on"]
 import windows.UI.Xaml.Automation.Text as UI_Xaml_Automation_Text

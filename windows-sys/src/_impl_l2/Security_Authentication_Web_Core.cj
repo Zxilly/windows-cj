@@ -173,7 +173,7 @@ public class IWebAuthenticationCoreManagerStatics2 <: InterfaceWrapperBase & Com
 @C
 public struct IWebAuthenticationCoreManagerStatics3Vtbl {
     public var base_: IWebAuthenticationCoreManagerStaticsVtbl = IWebAuthenticationCoreManagerStaticsVtbl()
-    @When[Windows_Security_Credentials == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Credentials == "on"]
     public var CreateWebAccountMonitor: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -218,7 +218,7 @@ public class IWebAuthenticationCoreManagerStatics3 <: InterfaceWrapperBase & Com
         readVtbl<IWebAuthenticationCoreManagerStatics3Vtbl>(IWebAuthenticationCoreManagerStatics3Vtbl())
     }
 
-    @When[Windows_Security_Credentials == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Credentials == "on"]
     public unsafe func CreateWebAccountMonitor(webAccounts: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

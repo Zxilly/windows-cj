@@ -8,22 +8,33 @@ import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
-@When[Windows_Win32_System_Registry == "on"]
 import windows.Win32.System.Registry as Win32_System_Registry
 import windows.Win32._impl_l0 as Win32__impl_l0
 
 
-@When[ISOLATEDWINDOWSENVIRONMENTUTILS == "on"]
+@When[Windows_Win32_Security_Isolation == "on" && ISOLATEDWINDOWSENVIRONMENTUTILS == "on" && Windows_Win32_Security_Isolation_IsCrossIsolatedEnvironmentClipboardContent == "on"]
 foreign {
     func IsCrossIsolatedEnvironmentClipboardContent(isCrossIsolatedEnvironmentClipboardContent: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Security_Isolation == "on" && ISOLATEDWINDOWSENVIRONMENTUTILS == "on" && Windows_Win32_Security_Isolation_IsCrossIsolatedEnvironmentClipboardContent == "on"]
+public unsafe func Windows_IsCrossIsolatedEnvironmentClipboardContent(isCrossIsolatedEnvironmentClipboardContent: CPointer<Int32>): Int32 {
+    return IsCrossIsolatedEnvironmentClipboardContent(isCrossIsolatedEnvironmentClipboardContent)
+}
+
+@When[Windows_Win32_Security_Isolation == "on" && ISOLATEDWINDOWSENVIRONMENTUTILS == "on" && Windows_Win32_Security_Isolation_IsProcessInIsolatedWindowsEnvironment == "on"]
+foreign {
     func IsProcessInIsolatedWindowsEnvironment(isProcessInIsolatedWindowsEnvironment: CPointer<Int32>): Int32
 }
 
-@When[KERNEL32 == "on" && Windows_Win32_Security == "on"]
+@When[Windows_Win32_Security_Isolation == "on" && ISOLATEDWINDOWSENVIRONMENTUTILS == "on" && Windows_Win32_Security_Isolation_IsProcessInIsolatedWindowsEnvironment == "on"]
+public unsafe func Windows_IsProcessInIsolatedWindowsEnvironment(isProcessInIsolatedWindowsEnvironment: CPointer<Int32>): Int32 {
+    return IsProcessInIsolatedWindowsEnvironment(isProcessInIsolatedWindowsEnvironment)
+}
+
+@When[Windows_Win32_Security_Isolation == "on" && KERNEL32 == "on" && Windows_Win32_Security_Isolation_GetAppContainerNamedObjectPath == "on" && Windows_Win32_Security == "on"]
 foreign {
     // param-hint: Token optional
     // param-hint: AppContainerSid optional
@@ -32,33 +43,90 @@ foreign {
     func GetAppContainerNamedObjectPath(Token: CPointer<Unit>, AppContainerSid: Win32_Security.PSID, ObjectPathLength: UInt32, ObjectPath: CPointer<UInt16>, ReturnLength: CPointer<UInt32>): Int32
 }
 
-@When[USERENV == "on"]
-foreign {
-    func DeleteAppContainerProfile(pszAppContainerName: CPointer<UInt16>): Int32
-    func GetAppContainerFolderPath(pszAppContainerSid: CPointer<UInt16>, ppszPath: CPointer<CPointer<UInt16>>): Int32
+@When[Windows_Win32_Security_Isolation == "on" && KERNEL32 == "on" && Windows_Win32_Security_Isolation_GetAppContainerNamedObjectPath == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_GetAppContainerNamedObjectPath(Token: CPointer<Unit>, AppContainerSid: Win32_Security.PSID, ObjectPathLength: UInt32, ObjectPath: CPointer<UInt16>, ReturnLength: CPointer<UInt32>): Int32 {
+    return GetAppContainerNamedObjectPath(Token, AppContainerSid, ObjectPathLength, ObjectPath, ReturnLength)
 }
 
-@When[USERENV == "on" && Windows_Win32_Security == "on"]
+@When[Windows_Win32_Security_Isolation == "on" && USERENV == "on" && Windows_Win32_Security_Isolation_CreateAppContainerProfile == "on" && Windows_Win32_Security == "on"]
 foreign {
     // param-hint: pCapabilities len=param[4] optional
     func CreateAppContainerProfile(pszAppContainerName: CPointer<UInt16>, pszDisplayName: CPointer<UInt16>, pszDescription: CPointer<UInt16>, pCapabilities: CPointer<Win32_Security.SID_AND_ATTRIBUTESAbi>, dwCapabilityCount: UInt32, ppSidAppContainerSid: CPointer<Win32_Security.PSID>): Int32
+}
+
+@When[Windows_Win32_Security_Isolation == "on" && USERENV == "on" && Windows_Win32_Security_Isolation_CreateAppContainerProfile == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_CreateAppContainerProfile(pszAppContainerName: CPointer<UInt16>, pszDisplayName: CPointer<UInt16>, pszDescription: CPointer<UInt16>, pCapabilities: CPointer<Win32_Security.SID_AND_ATTRIBUTESAbi>, dwCapabilityCount: UInt32, ppSidAppContainerSid: CPointer<Win32_Security.PSID>): Int32 {
+    return CreateAppContainerProfile(pszAppContainerName, pszDisplayName, pszDescription, pCapabilities, dwCapabilityCount, ppSidAppContainerSid)
+}
+
+@When[Windows_Win32_Security_Isolation == "on" && USERENV == "on" && Windows_Win32_Security_Isolation_DeleteAppContainerProfile == "on"]
+foreign {
+    func DeleteAppContainerProfile(pszAppContainerName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Security_Isolation == "on" && USERENV == "on" && Windows_Win32_Security_Isolation_DeleteAppContainerProfile == "on"]
+public unsafe func Windows_DeleteAppContainerProfile(pszAppContainerName: CPointer<UInt16>): Int32 {
+    return DeleteAppContainerProfile(pszAppContainerName)
+}
+
+@When[Windows_Win32_Security_Isolation == "on" && USERENV == "on" && Windows_Win32_Security_Isolation_DeriveAppContainerSidFromAppContainerName == "on" && Windows_Win32_Security == "on"]
+foreign {
     func DeriveAppContainerSidFromAppContainerName(pszAppContainerName: CPointer<UInt16>, ppsidAppContainerSid: CPointer<Win32_Security.PSID>): Int32
+}
+
+@When[Windows_Win32_Security_Isolation == "on" && USERENV == "on" && Windows_Win32_Security_Isolation_DeriveAppContainerSidFromAppContainerName == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_DeriveAppContainerSidFromAppContainerName(pszAppContainerName: CPointer<UInt16>, ppsidAppContainerSid: CPointer<Win32_Security.PSID>): Int32 {
+    return DeriveAppContainerSidFromAppContainerName(pszAppContainerName, ppsidAppContainerSid)
+}
+
+@When[Windows_Win32_Security_Isolation == "on" && USERENV == "on" && Windows_Win32_Security_Isolation_DeriveRestrictedAppContainerSidFromAppContainerSidAndRestrictedName == "on" && Windows_Win32_Security == "on"]
+foreign {
     func DeriveRestrictedAppContainerSidFromAppContainerSidAndRestrictedName(psidAppContainerSid: Win32_Security.PSID, pszRestrictedAppContainerName: CPointer<UInt16>, ppsidRestrictedAppContainerSid: CPointer<Win32_Security.PSID>): Int32
 }
 
-@When[USERENV == "on" && Windows_Win32_System_Registry == "on"]
+@When[Windows_Win32_Security_Isolation == "on" && USERENV == "on" && Windows_Win32_Security_Isolation_DeriveRestrictedAppContainerSidFromAppContainerSidAndRestrictedName == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_DeriveRestrictedAppContainerSidFromAppContainerSidAndRestrictedName(psidAppContainerSid: Win32_Security.PSID, pszRestrictedAppContainerName: CPointer<UInt16>, ppsidRestrictedAppContainerSid: CPointer<Win32_Security.PSID>): Int32 {
+    return DeriveRestrictedAppContainerSidFromAppContainerSidAndRestrictedName(psidAppContainerSid, pszRestrictedAppContainerName, ppsidRestrictedAppContainerSid)
+}
+
+@When[Windows_Win32_Security_Isolation == "on" && USERENV == "on" && Windows_Win32_Security_Isolation_GetAppContainerFolderPath == "on"]
+foreign {
+    func GetAppContainerFolderPath(pszAppContainerSid: CPointer<UInt16>, ppszPath: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_Security_Isolation == "on" && USERENV == "on" && Windows_Win32_Security_Isolation_GetAppContainerFolderPath == "on"]
+public unsafe func Windows_GetAppContainerFolderPath(pszAppContainerSid: CPointer<UInt16>, ppszPath: CPointer<CPointer<UInt16>>): Int32 {
+    return GetAppContainerFolderPath(pszAppContainerSid, ppszPath)
+}
+
+@When[Windows_Win32_Security_Isolation == "on" && USERENV == "on" && Windows_Win32_Security_Isolation_GetAppContainerRegistryLocation == "on" && Windows_Win32_System_Registry == "on"]
 foreign {
     func GetAppContainerRegistryLocation(desiredAccess: UInt32, phAppContainerKey: CPointer<Win32_System_Registry.HKEY>): Int32
 }
 
-@When[API_MS_WIN_SECURITY_ISOLATEDCONTAINER_L1_1_0 == "on"]
+@When[Windows_Win32_Security_Isolation == "on" && USERENV == "on" && Windows_Win32_Security_Isolation_GetAppContainerRegistryLocation == "on" && Windows_Win32_System_Registry == "on"]
+public unsafe func Windows_GetAppContainerRegistryLocation(desiredAccess: UInt32, phAppContainerKey: CPointer<Win32_System_Registry.HKEY>): Int32 {
+    return GetAppContainerRegistryLocation(desiredAccess, phAppContainerKey)
+}
+
+@When[Windows_Win32_Security_Isolation == "on" && API_MS_WIN_SECURITY_ISOLATEDCONTAINER_L1_1_0 == "on" && Windows_Win32_Security_Isolation_IsProcessInIsolatedContainer == "on"]
 foreign {
     func IsProcessInIsolatedContainer(isProcessInIsolatedContainer: CPointer<Int32>): Int32
 }
 
-@When[API_MS_WIN_SECURITY_ISOLATEDCONTAINER_L1_1_1 == "on"]
+@When[Windows_Win32_Security_Isolation == "on" && API_MS_WIN_SECURITY_ISOLATEDCONTAINER_L1_1_0 == "on" && Windows_Win32_Security_Isolation_IsProcessInIsolatedContainer == "on"]
+public unsafe func Windows_IsProcessInIsolatedContainer(isProcessInIsolatedContainer: CPointer<Int32>): Int32 {
+    return IsProcessInIsolatedContainer(isProcessInIsolatedContainer)
+}
+
+@When[Windows_Win32_Security_Isolation == "on" && API_MS_WIN_SECURITY_ISOLATEDCONTAINER_L1_1_1 == "on" && Windows_Win32_Security_Isolation_IsProcessInWDAGContainer == "on"]
 foreign {
     func IsProcessInWDAGContainer(Reserved: CPointer<Unit>, isProcessInWDAGContainer: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Security_Isolation == "on" && API_MS_WIN_SECURITY_ISOLATEDCONTAINER_L1_1_1 == "on" && Windows_Win32_Security_Isolation_IsProcessInWDAGContainer == "on"]
+public unsafe func Windows_IsProcessInWDAGContainer(Reserved: CPointer<Unit>, isProcessInWDAGContainer: CPointer<Int32>): Int32 {
+    return IsProcessInWDAGContainer(Reserved, isProcessInWDAGContainer)
 }
 
 @When[Windows_Win32_Security_Isolation == "on"]

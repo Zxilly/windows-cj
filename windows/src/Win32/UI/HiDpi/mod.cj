@@ -6,9 +6,7 @@ package windows.Win32.UI.HiDpi
 import std.collection.*
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge}
 import windows_core as windows_core
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
 import windows.Win32._impl_l0 as Win32__impl_l0
 
@@ -395,67 +393,308 @@ extend PROCESS_DPI_AWARENESS <: windows_core.CopyType & windows_core.RuntimeType
     }
 }
 
-@When[USER32 == "on"]
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_AdjustWindowRectExForDpi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func AdjustWindowRectExForDpi(lpRect: CPointer<Win32_Foundation.RECTAbi>, dwStyle: Win32__impl_l0.WINDOW_STYLEAbi, bMenu: Int32, dwExStyle: Win32__impl_l0.WINDOW_EX_STYLEAbi, dpi: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_AdjustWindowRectExForDpi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_AdjustWindowRectExForDpi(lpRect: CPointer<Win32_Foundation.RECTAbi>, dwStyle: Win32__impl_l0.WINDOW_STYLEAbi, bMenu: Int32, dwExStyle: Win32__impl_l0.WINDOW_EX_STYLEAbi, dpi: UInt32): Int32 {
+    return AdjustWindowRectExForDpi(lpRect, dwStyle, bMenu, dwExStyle, dpi)
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_AreDpiAwarenessContextsEqual == "on"]
 foreign {
     func AreDpiAwarenessContextsEqual(dpiContextA: DPI_AWARENESS_CONTEXT, dpiContextB: DPI_AWARENESS_CONTEXT): Int32
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_AreDpiAwarenessContextsEqual == "on"]
+public unsafe func Windows_AreDpiAwarenessContextsEqual(dpiContextA: DPI_AWARENESS_CONTEXT, dpiContextB: DPI_AWARENESS_CONTEXT): Int32 {
+    return AreDpiAwarenessContextsEqual(dpiContextA, dpiContextB)
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_EnableNonClientDpiScaling == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func EnableNonClientDpiScaling(hwnd: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_EnableNonClientDpiScaling == "on"]
+public unsafe func Windows_EnableNonClientDpiScaling(hwnd: CPointer<Unit>): Int32 {
+    return EnableNonClientDpiScaling(hwnd)
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_GetAwarenessFromDpiAwarenessContext == "on"]
+foreign {
     func GetAwarenessFromDpiAwarenessContext(value: DPI_AWARENESS_CONTEXT): DPI_AWARENESSAbi
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_GetAwarenessFromDpiAwarenessContext == "on"]
+public unsafe func Windows_GetAwarenessFromDpiAwarenessContext(value: DPI_AWARENESS_CONTEXT): DPI_AWARENESSAbi {
+    return GetAwarenessFromDpiAwarenessContext(value)
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_GetDialogControlDpiChangeBehavior == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetDialogControlDpiChangeBehavior(hWnd: CPointer<Unit>): DIALOG_CONTROL_DPI_CHANGE_BEHAVIORSAbi
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_GetDialogControlDpiChangeBehavior == "on"]
+public unsafe func Windows_GetDialogControlDpiChangeBehavior(hWnd: CPointer<Unit>): DIALOG_CONTROL_DPI_CHANGE_BEHAVIORSAbi {
+    return GetDialogControlDpiChangeBehavior(hWnd)
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_GetDialogDpiChangeBehavior == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetDialogDpiChangeBehavior(hDlg: CPointer<Unit>): DIALOG_DPI_CHANGE_BEHAVIORSAbi
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_GetDialogDpiChangeBehavior == "on"]
+public unsafe func Windows_GetDialogDpiChangeBehavior(hDlg: CPointer<Unit>): DIALOG_DPI_CHANGE_BEHAVIORSAbi {
+    return GetDialogDpiChangeBehavior(hDlg)
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_GetDpiAwarenessContextForProcess == "on"]
+foreign {
     func GetDpiAwarenessContextForProcess(hProcess: CPointer<Unit>): DPI_AWARENESS_CONTEXT
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_GetDpiAwarenessContextForProcess == "on"]
+public unsafe func Windows_GetDpiAwarenessContextForProcess(hProcess: CPointer<Unit>): DPI_AWARENESS_CONTEXT {
+    return GetDpiAwarenessContextForProcess(hProcess)
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_GetDpiForSystem == "on"]
+foreign {
     func GetDpiForSystem(): UInt32
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_GetDpiForSystem == "on"]
+public unsafe func Windows_GetDpiForSystem(): UInt32 {
+    return GetDpiForSystem()
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_GetDpiForWindow == "on"]
+foreign {
     func GetDpiForWindow(hwnd: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_GetDpiForWindow == "on"]
+public unsafe func Windows_GetDpiForWindow(hwnd: CPointer<Unit>): UInt32 {
+    return GetDpiForWindow(hwnd)
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_GetDpiFromDpiAwarenessContext == "on"]
+foreign {
     func GetDpiFromDpiAwarenessContext(value: DPI_AWARENESS_CONTEXT): UInt32
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_GetDpiFromDpiAwarenessContext == "on"]
+public unsafe func Windows_GetDpiFromDpiAwarenessContext(value: DPI_AWARENESS_CONTEXT): UInt32 {
+    return GetDpiFromDpiAwarenessContext(value)
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_GetSystemDpiForProcess == "on"]
+foreign {
     func GetSystemDpiForProcess(hProcess: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_GetSystemDpiForProcess == "on"]
+public unsafe func Windows_GetSystemDpiForProcess(hProcess: CPointer<Unit>): UInt32 {
+    return GetSystemDpiForProcess(hProcess)
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_GetSystemMetricsForDpi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func GetSystemMetricsForDpi(nIndex: Win32__impl_l0.SYSTEM_METRICS_INDEXAbi, dpi: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_GetSystemMetricsForDpi == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_GetSystemMetricsForDpi(nIndex: Win32__impl_l0.SYSTEM_METRICS_INDEXAbi, dpi: UInt32): Int32 {
+    return GetSystemMetricsForDpi(nIndex, dpi)
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_GetThreadDpiAwarenessContext == "on"]
+foreign {
     func GetThreadDpiAwarenessContext(): DPI_AWARENESS_CONTEXT
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_GetThreadDpiAwarenessContext == "on"]
+public unsafe func Windows_GetThreadDpiAwarenessContext(): DPI_AWARENESS_CONTEXT {
+    return GetThreadDpiAwarenessContext()
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_GetThreadDpiHostingBehavior == "on"]
+foreign {
     func GetThreadDpiHostingBehavior(): DPI_HOSTING_BEHAVIORAbi
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_GetThreadDpiHostingBehavior == "on"]
+public unsafe func Windows_GetThreadDpiHostingBehavior(): DPI_HOSTING_BEHAVIORAbi {
+    return GetThreadDpiHostingBehavior()
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_GetWindowDpiAwarenessContext == "on"]
+foreign {
     func GetWindowDpiAwarenessContext(hwnd: CPointer<Unit>): DPI_AWARENESS_CONTEXT
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_GetWindowDpiAwarenessContext == "on"]
+public unsafe func Windows_GetWindowDpiAwarenessContext(hwnd: CPointer<Unit>): DPI_AWARENESS_CONTEXT {
+    return GetWindowDpiAwarenessContext(hwnd)
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_GetWindowDpiHostingBehavior == "on"]
+foreign {
     func GetWindowDpiHostingBehavior(hwnd: CPointer<Unit>): DPI_HOSTING_BEHAVIORAbi
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_GetWindowDpiHostingBehavior == "on"]
+public unsafe func Windows_GetWindowDpiHostingBehavior(hwnd: CPointer<Unit>): DPI_HOSTING_BEHAVIORAbi {
+    return GetWindowDpiHostingBehavior(hwnd)
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_IsValidDpiAwarenessContext == "on"]
+foreign {
     func IsValidDpiAwarenessContext(value: DPI_AWARENESS_CONTEXT): Int32
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_IsValidDpiAwarenessContext == "on"]
+public unsafe func Windows_IsValidDpiAwarenessContext(value: DPI_AWARENESS_CONTEXT): Int32 {
+    return IsValidDpiAwarenessContext(value)
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_LogicalToPhysicalPointForPerMonitorDPI == "on"]
+foreign {
     // param-hint: hWnd optional
     func LogicalToPhysicalPointForPerMonitorDPI(hWnd: CPointer<Unit>, lpPoint: CPointer<Win32_Foundation.POINTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_LogicalToPhysicalPointForPerMonitorDPI == "on"]
+public unsafe func Windows_LogicalToPhysicalPointForPerMonitorDPI(hWnd: CPointer<Unit>, lpPoint: CPointer<Win32_Foundation.POINTAbi>): Int32 {
+    return LogicalToPhysicalPointForPerMonitorDPI(hWnd, lpPoint)
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_PhysicalToLogicalPointForPerMonitorDPI == "on"]
+foreign {
     // param-hint: hWnd optional
     func PhysicalToLogicalPointForPerMonitorDPI(hWnd: CPointer<Unit>, lpPoint: CPointer<Win32_Foundation.POINTAbi>): Int32
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_PhysicalToLogicalPointForPerMonitorDPI == "on"]
+public unsafe func Windows_PhysicalToLogicalPointForPerMonitorDPI(hWnd: CPointer<Unit>, lpPoint: CPointer<Win32_Foundation.POINTAbi>): Int32 {
+    return PhysicalToLogicalPointForPerMonitorDPI(hWnd, lpPoint)
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_SetDialogControlDpiChangeBehavior == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetDialogControlDpiChangeBehavior(hWnd: CPointer<Unit>, mask: DIALOG_CONTROL_DPI_CHANGE_BEHAVIORSAbi, values: DIALOG_CONTROL_DPI_CHANGE_BEHAVIORSAbi): Int32
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_SetDialogControlDpiChangeBehavior == "on"]
+public unsafe func Windows_SetDialogControlDpiChangeBehavior(hWnd: CPointer<Unit>, mask: DIALOG_CONTROL_DPI_CHANGE_BEHAVIORSAbi, values: DIALOG_CONTROL_DPI_CHANGE_BEHAVIORSAbi): Int32 {
+    return SetDialogControlDpiChangeBehavior(hWnd, mask, values)
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_SetDialogDpiChangeBehavior == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetDialogDpiChangeBehavior(hDlg: CPointer<Unit>, mask: DIALOG_DPI_CHANGE_BEHAVIORSAbi, values: DIALOG_DPI_CHANGE_BEHAVIORSAbi): Int32
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_SetDialogDpiChangeBehavior == "on"]
+public unsafe func Windows_SetDialogDpiChangeBehavior(hDlg: CPointer<Unit>, mask: DIALOG_DPI_CHANGE_BEHAVIORSAbi, values: DIALOG_DPI_CHANGE_BEHAVIORSAbi): Int32 {
+    return SetDialogDpiChangeBehavior(hDlg, mask, values)
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_SetProcessDpiAwarenessContext == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetProcessDpiAwarenessContext(value: DPI_AWARENESS_CONTEXT): Int32
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_SetProcessDpiAwarenessContext == "on"]
+public unsafe func Windows_SetProcessDpiAwarenessContext(value: DPI_AWARENESS_CONTEXT): Int32 {
+    return SetProcessDpiAwarenessContext(value)
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_SetThreadDpiAwarenessContext == "on"]
+foreign {
     func SetThreadDpiAwarenessContext(dpiContext: DPI_AWARENESS_CONTEXT): DPI_AWARENESS_CONTEXT
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_SetThreadDpiAwarenessContext == "on"]
+public unsafe func Windows_SetThreadDpiAwarenessContext(dpiContext: DPI_AWARENESS_CONTEXT): DPI_AWARENESS_CONTEXT {
+    return SetThreadDpiAwarenessContext(dpiContext)
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_SetThreadDpiHostingBehavior == "on"]
+foreign {
     func SetThreadDpiHostingBehavior(value: DPI_HOSTING_BEHAVIORAbi): DPI_HOSTING_BEHAVIORAbi
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_SetThreadDpiHostingBehavior == "on"]
+public unsafe func Windows_SetThreadDpiHostingBehavior(value: DPI_HOSTING_BEHAVIORAbi): DPI_HOSTING_BEHAVIORAbi {
+    return SetThreadDpiHostingBehavior(value)
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_SystemParametersInfoForDpi == "on"]
+foreign {
     // param-hint: pvParam optional
     // pinvoke-hint: SetLastError
     func SystemParametersInfoForDpi(uiAction: UInt32, uiParam: UInt32, pvParam: CPointer<Unit>, fWinIni: UInt32, dpi: UInt32): Int32
 }
 
-@When[USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
-foreign {
-    // pinvoke-hint: SetLastError
-    func AdjustWindowRectExForDpi(lpRect: CPointer<Win32_Foundation.RECTAbi>, dwStyle: Win32__impl_l0.WINDOW_STYLEAbi, bMenu: Int32, dwExStyle: Win32__impl_l0.WINDOW_EX_STYLEAbi, dpi: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func GetSystemMetricsForDpi(nIndex: Win32__impl_l0.SYSTEM_METRICS_INDEXAbi, dpi: UInt32): Int32
+@When[Windows_Win32_UI_HiDpi == "on" && USER32 == "on" && Windows_Win32_UI_HiDpi_SystemParametersInfoForDpi == "on"]
+public unsafe func Windows_SystemParametersInfoForDpi(uiAction: UInt32, uiParam: UInt32, pvParam: CPointer<Unit>, fWinIni: UInt32, dpi: UInt32): Int32 {
+    return SystemParametersInfoForDpi(uiAction, uiParam, pvParam, fWinIni, dpi)
 }
 
-@When[UXTHEME == "on" && Windows_Win32_UI_Controls == "on"]
+@When[Windows_Win32_UI_HiDpi == "on" && UXTHEME == "on" && Windows_Win32_UI_HiDpi_OpenThemeDataForDpi == "on" && Windows_Win32_UI_Controls == "on"]
 foreign {
     // param-hint: hwnd optional
     func OpenThemeDataForDpi(hwnd: CPointer<Unit>, pszClassList: CPointer<UInt16>, dpi: UInt32): Win32__impl_l0.HTHEME
 }
 
-@When[API_MS_WIN_SHCORE_SCALING_L1_1_1 == "on"]
+@When[Windows_Win32_UI_HiDpi == "on" && UXTHEME == "on" && Windows_Win32_UI_HiDpi_OpenThemeDataForDpi == "on" && Windows_Win32_UI_Controls == "on"]
+public unsafe func Windows_OpenThemeDataForDpi(hwnd: CPointer<Unit>, pszClassList: CPointer<UInt16>, dpi: UInt32): Win32__impl_l0.HTHEME {
+    return OpenThemeDataForDpi(hwnd, pszClassList, dpi)
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && API_MS_WIN_SHCORE_SCALING_L1_1_1 == "on" && Windows_Win32_UI_HiDpi_GetDpiForMonitor == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func GetDpiForMonitor(hmonitor: Win32_Graphics_Gdi.HMONITOR, dpiType: MONITOR_DPI_TYPEAbi, dpiX: CPointer<UInt32>, dpiY: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && API_MS_WIN_SHCORE_SCALING_L1_1_1 == "on" && Windows_Win32_UI_HiDpi_GetDpiForMonitor == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_GetDpiForMonitor(hmonitor: Win32_Graphics_Gdi.HMONITOR, dpiType: MONITOR_DPI_TYPEAbi, dpiX: CPointer<UInt32>, dpiY: CPointer<UInt32>): Int32 {
+    return GetDpiForMonitor(hmonitor, dpiType, dpiX, dpiY)
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && API_MS_WIN_SHCORE_SCALING_L1_1_1 == "on" && Windows_Win32_UI_HiDpi_GetProcessDpiAwareness == "on"]
 foreign {
     // param-hint: hprocess optional
     func GetProcessDpiAwareness(hprocess: CPointer<Unit>, value: CPointer<PROCESS_DPI_AWARENESSAbi>): Int32
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && API_MS_WIN_SHCORE_SCALING_L1_1_1 == "on" && Windows_Win32_UI_HiDpi_GetProcessDpiAwareness == "on"]
+public unsafe func Windows_GetProcessDpiAwareness(hprocess: CPointer<Unit>, value: CPointer<PROCESS_DPI_AWARENESSAbi>): Int32 {
+    return GetProcessDpiAwareness(hprocess, value)
+}
+
+@When[Windows_Win32_UI_HiDpi == "on" && API_MS_WIN_SHCORE_SCALING_L1_1_1 == "on" && Windows_Win32_UI_HiDpi_SetProcessDpiAwareness == "on"]
+foreign {
     func SetProcessDpiAwareness(value: PROCESS_DPI_AWARENESSAbi): Int32
 }
 
-@When[API_MS_WIN_SHCORE_SCALING_L1_1_1 == "on" && Windows_Win32_Graphics_Gdi == "on"]
-foreign {
-    func GetDpiForMonitor(hmonitor: Win32_Graphics_Gdi.HMONITOR, dpiType: MONITOR_DPI_TYPEAbi, dpiX: CPointer<UInt32>, dpiY: CPointer<UInt32>): Int32
+@When[Windows_Win32_UI_HiDpi == "on" && API_MS_WIN_SHCORE_SCALING_L1_1_1 == "on" && Windows_Win32_UI_HiDpi_SetProcessDpiAwareness == "on"]
+public unsafe func Windows_SetProcessDpiAwareness(value: PROCESS_DPI_AWARENESSAbi): Int32 {
+    return SetProcessDpiAwareness(value)
 }
 
 @When[Windows_Win32_UI_HiDpi == "on"]

@@ -4,9 +4,7 @@ package windows_sys.Media.FaceAnalysis
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_Graphics_Imaging == "on"]
 import windows_sys.Graphics.Imaging as Graphics_Imaging
-@When[Windows_Media == "on"]
 import windows_sys.Media as Media
 
 
@@ -71,9 +69,9 @@ public class IDetectedFace <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IFaceDetectorVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Graphics_Imaging == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_Imaging == "on"]
     public var DetectFacesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
-    @When[Windows_Graphics_Imaging == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_Imaging == "on"]
     public var DetectFacesWithSearchAreaAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, Graphics_Imaging.BitmapBounds, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Graphics_Imaging == "on"]
     public var MinDetectableFaceSize: CFunc<(CPointer<Unit>, CPointer<Graphics_Imaging.BitmapSize>) -> Int32> = { _, _ => 0 }
@@ -126,14 +124,14 @@ public class IFaceDetector <: InterfaceWrapperBase & ComInterface {
         readVtbl<IFaceDetectorVtbl>(IFaceDetectorVtbl())
     }
 
-    @When[Windows_Graphics_Imaging == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_Imaging == "on"]
     public unsafe func DetectFacesAsync(image: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.DetectFacesAsync(__liveRaw, image, result__)
     }
 
-    @When[Windows_Graphics_Imaging == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_Imaging == "on"]
     public unsafe func DetectFacesWithSearchAreaAsync(image: CPointer<Unit>, searchArea: Graphics_Imaging.BitmapBounds, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -173,7 +171,7 @@ public class IFaceDetector <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IFaceTrackerVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media == "on"]
     public var ProcessNextFrameAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Graphics_Imaging == "on"]
     public var MinDetectableFaceSize: CFunc<(CPointer<Unit>, CPointer<Graphics_Imaging.BitmapSize>) -> Int32> = { _, _ => 0 }
@@ -226,7 +224,7 @@ public class IFaceTracker <: InterfaceWrapperBase & ComInterface {
         readVtbl<IFaceTrackerVtbl>(IFaceTrackerVtbl())
     }
 
-    @When[Windows_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media == "on"]
     public unsafe func ProcessNextFrameAsync(videoFrame: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -267,7 +265,7 @@ public class IFaceTracker <: InterfaceWrapperBase & ComInterface {
 public struct IFaceDetectorStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var CreateAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Graphics_Imaging == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_Imaging == "on"]
     public var GetSupportedBitmapPixelFormats: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Graphics_Imaging == "on"]
     public var IsBitmapPixelFormatSupported: CFunc<(CPointer<Unit>, Int32, CPointer<Bool>) -> Int32> = { _, _, _ => 0 }
@@ -321,7 +319,7 @@ public class IFaceDetectorStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.CreateAsync(__liveRaw, result__)
     }
 
-    @When[Windows_Graphics_Imaging == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_Imaging == "on"]
     public unsafe func GetSupportedBitmapPixelFormats(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -347,7 +345,7 @@ public class IFaceDetectorStatics <: InterfaceWrapperBase & ComInterface {
 public struct IFaceTrackerStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var CreateAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Graphics_Imaging == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_Imaging == "on"]
     public var GetSupportedBitmapPixelFormats: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Graphics_Imaging == "on"]
     public var IsBitmapPixelFormatSupported: CFunc<(CPointer<Unit>, Int32, CPointer<Bool>) -> Int32> = { _, _, _ => 0 }
@@ -401,7 +399,7 @@ public class IFaceTrackerStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.CreateAsync(__liveRaw, result__)
     }
 
-    @When[Windows_Graphics_Imaging == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_Imaging == "on"]
     public unsafe func GetSupportedBitmapPixelFormats(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

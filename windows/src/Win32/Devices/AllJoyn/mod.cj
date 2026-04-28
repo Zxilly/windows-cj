@@ -6,9 +6,7 @@ package windows.Win32.Devices.AllJoyn
 import std.collection.*
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
 
 
@@ -2923,586 +2921,5460 @@ extend alljoyn_sessionlistener_callbacks <: windows_core.CopyType & windows_core
     }
 }
 
-@When[MSAJAPI == "on"]
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_parseargs == "on"]
 @CallingConv[CDECL]
 foreign {
     // pinvoke-hint: cc=cdecl
     func alljoyn_message_parseargs(msg: alljoyn_message, signature: CPointer<UInt8>, ...): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_array_get == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func alljoyn_msgarg_array_get(args: alljoyn_msgarg, numArgs: UIntNative, signature: CPointer<UInt8>, ...): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_array_set == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func alljoyn_msgarg_array_set(args: alljoyn_msgarg, numArgs: CPointer<UIntNative>, signature: CPointer<UInt8>, ...): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_array_set_offset == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func alljoyn_msgarg_array_set_offset(args: alljoyn_msgarg, argOffset: UIntNative, numArgs: CPointer<UIntNative>, signature: CPointer<UInt8>, ...): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_create_and_set == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func alljoyn_msgarg_create_and_set(signature: CPointer<UInt8>, ...): alljoyn_msgarg
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func alljoyn_msgarg_get(arg: alljoyn_msgarg, signature: CPointer<UInt8>, ...): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_getdictelement == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func alljoyn_msgarg_getdictelement(arg: alljoyn_msgarg, elemSig: CPointer<UInt8>, ...): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func alljoyn_msgarg_set(arg: alljoyn_msgarg, signature: CPointer<UInt8>, ...): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_and_stabilize == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func alljoyn_msgarg_set_and_stabilize(arg: alljoyn_msgarg, signature: CPointer<UInt8>, ...): QStatusAbi
 }
 
-@When[MSAJAPI == "on"]
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_AllJoynAcceptBusConnection == "on"]
 foreign {
     func AllJoynAcceptBusConnection(serverBusHandle: CPointer<Unit>, abortEvent: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_AllJoynAcceptBusConnection == "on"]
+public unsafe func Windows_AllJoynAcceptBusConnection(serverBusHandle: CPointer<Unit>, abortEvent: CPointer<Unit>): UInt32 {
+    return AllJoynAcceptBusConnection(serverBusHandle, abortEvent)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_AllJoynCloseBusHandle == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func AllJoynCloseBusHandle(busHandle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_AllJoynCloseBusHandle == "on"]
+public unsafe func Windows_AllJoynCloseBusHandle(busHandle: CPointer<Unit>): Int32 {
+    return AllJoynCloseBusHandle(busHandle)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_AllJoynConnectToBus == "on"]
+foreign {
     // param-hint: connectionSpec optional
     // pinvoke-hint: SetLastError
     func AllJoynConnectToBus(connectionSpec: CPointer<UInt16>): CPointer<Unit>
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_AllJoynConnectToBus == "on"]
+public unsafe func Windows_AllJoynConnectToBus(connectionSpec: CPointer<UInt16>): CPointer<Unit> {
+    return AllJoynConnectToBus(connectionSpec)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_AllJoynCreateBus == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: lpSecurityAttributes optional
+    func AllJoynCreateBus(outBufferSize: UInt32, inBufferSize: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): CPointer<Unit>
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_AllJoynCreateBus == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_AllJoynCreateBus(outBufferSize: UInt32, inBufferSize: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): CPointer<Unit> {
+    return AllJoynCreateBus(outBufferSize, inBufferSize, lpSecurityAttributes)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_AllJoynEnumEvents == "on"]
+foreign {
     // param-hint: eventToReset optional
     // pinvoke-hint: SetLastError
     func AllJoynEnumEvents(connectedBusHandle: CPointer<Unit>, eventToReset: CPointer<Unit>, eventTypes: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_AllJoynEnumEvents == "on"]
+public unsafe func Windows_AllJoynEnumEvents(connectedBusHandle: CPointer<Unit>, eventToReset: CPointer<Unit>, eventTypes: CPointer<UInt32>): Int32 {
+    return AllJoynEnumEvents(connectedBusHandle, eventToReset, eventTypes)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_AllJoynEventSelect == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func AllJoynEventSelect(connectedBusHandle: CPointer<Unit>, eventHandle: CPointer<Unit>, eventTypes: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_AllJoynEventSelect == "on"]
+public unsafe func Windows_AllJoynEventSelect(connectedBusHandle: CPointer<Unit>, eventHandle: CPointer<Unit>, eventTypes: UInt32): Int32 {
+    return AllJoynEventSelect(connectedBusHandle, eventHandle, eventTypes)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_AllJoynReceiveFromBus == "on"]
+foreign {
     // param-hint: buffer bytes=param[2] optional
     // param-hint: bytesTransferred optional
     // pinvoke-hint: SetLastError
     func AllJoynReceiveFromBus(connectedBusHandle: CPointer<Unit>, buffer: CPointer<Unit>, bytesToRead: UInt32, bytesTransferred: CPointer<UInt32>, reserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_AllJoynReceiveFromBus == "on"]
+public unsafe func Windows_AllJoynReceiveFromBus(connectedBusHandle: CPointer<Unit>, buffer: CPointer<Unit>, bytesToRead: UInt32, bytesTransferred: CPointer<UInt32>, reserved: CPointer<Unit>): Int32 {
+    return AllJoynReceiveFromBus(connectedBusHandle, buffer, bytesToRead, bytesTransferred, reserved)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_AllJoynSendToBus == "on"]
+foreign {
     // param-hint: buffer bytes=param[2] optional
     // param-hint: bytesTransferred optional
     // pinvoke-hint: SetLastError
     func AllJoynSendToBus(connectedBusHandle: CPointer<Unit>, buffer: CPointer<Unit>, bytesToWrite: UInt32, bytesTransferred: CPointer<UInt32>, reserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_AllJoynSendToBus == "on"]
+public unsafe func Windows_AllJoynSendToBus(connectedBusHandle: CPointer<Unit>, buffer: CPointer<Unit>, bytesToWrite: UInt32, bytesTransferred: CPointer<UInt32>, reserved: CPointer<Unit>): Int32 {
+    return AllJoynSendToBus(connectedBusHandle, buffer, bytesToWrite, bytesTransferred, reserved)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_QCC_StatusText == "on"]
+foreign {
     func QCC_StatusText(status: QStatusAbi): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_QCC_StatusText == "on"]
+public unsafe func Windows_QCC_StatusText(status: QStatusAbi): CPointer<UInt8> {
+    return QCC_StatusText(status)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_create == "on"]
+foreign {
     func alljoyn_aboutdata_create(defaultLanguage: CPointer<UInt8>): alljoyn_aboutdata
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_create == "on"]
+public unsafe func Windows_alljoyn_aboutdata_create(defaultLanguage: CPointer<UInt8>): alljoyn_aboutdata {
+    return alljoyn_aboutdata_create(defaultLanguage)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_create_empty == "on"]
+foreign {
     func alljoyn_aboutdata_create_empty(): alljoyn_aboutdata
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_create_empty == "on"]
+public unsafe func Windows_alljoyn_aboutdata_create_empty(): alljoyn_aboutdata {
+    return alljoyn_aboutdata_create_empty()
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_create_full == "on"]
+foreign {
     func alljoyn_aboutdata_create_full(arg: alljoyn_msgarg, language: CPointer<UInt8>): alljoyn_aboutdata
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_create_full == "on"]
+public unsafe func Windows_alljoyn_aboutdata_create_full(arg: alljoyn_msgarg, language: CPointer<UInt8>): alljoyn_aboutdata {
+    return alljoyn_aboutdata_create_full(arg, language)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_createfrommsgarg == "on"]
+foreign {
     func alljoyn_aboutdata_createfrommsgarg(data: alljoyn_aboutdata, arg: alljoyn_msgarg, language: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_createfrommsgarg == "on"]
+public unsafe func Windows_alljoyn_aboutdata_createfrommsgarg(data: alljoyn_aboutdata, arg: alljoyn_msgarg, language: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_aboutdata_createfrommsgarg(data, arg, language)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_createfromxml == "on"]
+foreign {
     func alljoyn_aboutdata_createfromxml(data: alljoyn_aboutdata, aboutDataXml: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_createfromxml == "on"]
+public unsafe func Windows_alljoyn_aboutdata_createfromxml(data: alljoyn_aboutdata, aboutDataXml: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_aboutdata_createfromxml(data, aboutDataXml)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_destroy == "on"]
+foreign {
     func alljoyn_aboutdata_destroy(data: alljoyn_aboutdata): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_destroy == "on"]
+public unsafe func Windows_alljoyn_aboutdata_destroy(data: alljoyn_aboutdata): Unit {
+    alljoyn_aboutdata_destroy(data)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getaboutdata == "on"]
+foreign {
     func alljoyn_aboutdata_getaboutdata(data: alljoyn_aboutdata, msgArg: alljoyn_msgarg, language: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getaboutdata == "on"]
+public unsafe func Windows_alljoyn_aboutdata_getaboutdata(data: alljoyn_aboutdata, msgArg: alljoyn_msgarg, language: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_aboutdata_getaboutdata(data, msgArg, language)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getajsoftwareversion == "on"]
+foreign {
     func alljoyn_aboutdata_getajsoftwareversion(data: alljoyn_aboutdata, ajSoftwareVersion: CPointer<CPointer<Int8>>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getajsoftwareversion == "on"]
+public unsafe func Windows_alljoyn_aboutdata_getajsoftwareversion(data: alljoyn_aboutdata, ajSoftwareVersion: CPointer<CPointer<Int8>>): QStatusAbi {
+    return alljoyn_aboutdata_getajsoftwareversion(data, ajSoftwareVersion)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getannouncedaboutdata == "on"]
+foreign {
     func alljoyn_aboutdata_getannouncedaboutdata(data: alljoyn_aboutdata, msgArg: alljoyn_msgarg): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getannouncedaboutdata == "on"]
+public unsafe func Windows_alljoyn_aboutdata_getannouncedaboutdata(data: alljoyn_aboutdata, msgArg: alljoyn_msgarg): QStatusAbi {
+    return alljoyn_aboutdata_getannouncedaboutdata(data, msgArg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getappid == "on"]
+foreign {
     func alljoyn_aboutdata_getappid(data: alljoyn_aboutdata, appId: CPointer<CPointer<UInt8>>, num: CPointer<UIntNative>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getappid == "on"]
+public unsafe func Windows_alljoyn_aboutdata_getappid(data: alljoyn_aboutdata, appId: CPointer<CPointer<UInt8>>, num: CPointer<UIntNative>): QStatusAbi {
+    return alljoyn_aboutdata_getappid(data, appId, num)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getappname == "on"]
+foreign {
     func alljoyn_aboutdata_getappname(data: alljoyn_aboutdata, appName: CPointer<CPointer<Int8>>, language: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getappname == "on"]
+public unsafe func Windows_alljoyn_aboutdata_getappname(data: alljoyn_aboutdata, appName: CPointer<CPointer<Int8>>, language: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_aboutdata_getappname(data, appName, language)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getdateofmanufacture == "on"]
+foreign {
     func alljoyn_aboutdata_getdateofmanufacture(data: alljoyn_aboutdata, dateOfManufacture: CPointer<CPointer<Int8>>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getdateofmanufacture == "on"]
+public unsafe func Windows_alljoyn_aboutdata_getdateofmanufacture(data: alljoyn_aboutdata, dateOfManufacture: CPointer<CPointer<Int8>>): QStatusAbi {
+    return alljoyn_aboutdata_getdateofmanufacture(data, dateOfManufacture)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getdefaultlanguage == "on"]
+foreign {
     func alljoyn_aboutdata_getdefaultlanguage(data: alljoyn_aboutdata, defaultLanguage: CPointer<CPointer<Int8>>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getdefaultlanguage == "on"]
+public unsafe func Windows_alljoyn_aboutdata_getdefaultlanguage(data: alljoyn_aboutdata, defaultLanguage: CPointer<CPointer<Int8>>): QStatusAbi {
+    return alljoyn_aboutdata_getdefaultlanguage(data, defaultLanguage)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getdescription == "on"]
+foreign {
     func alljoyn_aboutdata_getdescription(data: alljoyn_aboutdata, description: CPointer<CPointer<Int8>>, language: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getdescription == "on"]
+public unsafe func Windows_alljoyn_aboutdata_getdescription(data: alljoyn_aboutdata, description: CPointer<CPointer<Int8>>, language: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_aboutdata_getdescription(data, description, language)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getdeviceid == "on"]
+foreign {
     func alljoyn_aboutdata_getdeviceid(data: alljoyn_aboutdata, deviceId: CPointer<CPointer<Int8>>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getdeviceid == "on"]
+public unsafe func Windows_alljoyn_aboutdata_getdeviceid(data: alljoyn_aboutdata, deviceId: CPointer<CPointer<Int8>>): QStatusAbi {
+    return alljoyn_aboutdata_getdeviceid(data, deviceId)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getdevicename == "on"]
+foreign {
     func alljoyn_aboutdata_getdevicename(data: alljoyn_aboutdata, deviceName: CPointer<CPointer<Int8>>, language: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getdevicename == "on"]
+public unsafe func Windows_alljoyn_aboutdata_getdevicename(data: alljoyn_aboutdata, deviceName: CPointer<CPointer<Int8>>, language: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_aboutdata_getdevicename(data, deviceName, language)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getfield == "on"]
+foreign {
     func alljoyn_aboutdata_getfield(data: alljoyn_aboutdata, name: CPointer<UInt8>, value: CPointer<alljoyn_msgarg>, language: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getfield == "on"]
+public unsafe func Windows_alljoyn_aboutdata_getfield(data: alljoyn_aboutdata, name: CPointer<UInt8>, value: CPointer<alljoyn_msgarg>, language: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_aboutdata_getfield(data, name, value, language)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getfields == "on"]
+foreign {
     func alljoyn_aboutdata_getfields(data: alljoyn_aboutdata, fields: CPointer<CPointer<Int8>>, num_fields: UIntNative): UIntNative
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getfields == "on"]
+public unsafe func Windows_alljoyn_aboutdata_getfields(data: alljoyn_aboutdata, fields: CPointer<CPointer<Int8>>, num_fields: UIntNative): UIntNative {
+    return alljoyn_aboutdata_getfields(data, fields, num_fields)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getfieldsignature == "on"]
+foreign {
     func alljoyn_aboutdata_getfieldsignature(data: alljoyn_aboutdata, fieldName: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getfieldsignature == "on"]
+public unsafe func Windows_alljoyn_aboutdata_getfieldsignature(data: alljoyn_aboutdata, fieldName: CPointer<UInt8>): CPointer<UInt8> {
+    return alljoyn_aboutdata_getfieldsignature(data, fieldName)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_gethardwareversion == "on"]
+foreign {
     func alljoyn_aboutdata_gethardwareversion(data: alljoyn_aboutdata, hardwareVersion: CPointer<CPointer<Int8>>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_gethardwareversion == "on"]
+public unsafe func Windows_alljoyn_aboutdata_gethardwareversion(data: alljoyn_aboutdata, hardwareVersion: CPointer<CPointer<Int8>>): QStatusAbi {
+    return alljoyn_aboutdata_gethardwareversion(data, hardwareVersion)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getmanufacturer == "on"]
+foreign {
     func alljoyn_aboutdata_getmanufacturer(data: alljoyn_aboutdata, manufacturer: CPointer<CPointer<Int8>>, language: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getmanufacturer == "on"]
+public unsafe func Windows_alljoyn_aboutdata_getmanufacturer(data: alljoyn_aboutdata, manufacturer: CPointer<CPointer<Int8>>, language: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_aboutdata_getmanufacturer(data, manufacturer, language)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getmodelnumber == "on"]
+foreign {
     func alljoyn_aboutdata_getmodelnumber(data: alljoyn_aboutdata, modelNumber: CPointer<CPointer<Int8>>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getmodelnumber == "on"]
+public unsafe func Windows_alljoyn_aboutdata_getmodelnumber(data: alljoyn_aboutdata, modelNumber: CPointer<CPointer<Int8>>): QStatusAbi {
+    return alljoyn_aboutdata_getmodelnumber(data, modelNumber)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getsoftwareversion == "on"]
+foreign {
     func alljoyn_aboutdata_getsoftwareversion(data: alljoyn_aboutdata, softwareVersion: CPointer<CPointer<Int8>>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getsoftwareversion == "on"]
+public unsafe func Windows_alljoyn_aboutdata_getsoftwareversion(data: alljoyn_aboutdata, softwareVersion: CPointer<CPointer<Int8>>): QStatusAbi {
+    return alljoyn_aboutdata_getsoftwareversion(data, softwareVersion)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getsupportedlanguages == "on"]
+foreign {
     func alljoyn_aboutdata_getsupportedlanguages(data: alljoyn_aboutdata, languageTags: CPointer<CPointer<Int8>>, num: UIntNative): UIntNative
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getsupportedlanguages == "on"]
+public unsafe func Windows_alljoyn_aboutdata_getsupportedlanguages(data: alljoyn_aboutdata, languageTags: CPointer<CPointer<Int8>>, num: UIntNative): UIntNative {
+    return alljoyn_aboutdata_getsupportedlanguages(data, languageTags, num)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getsupporturl == "on"]
+foreign {
     func alljoyn_aboutdata_getsupporturl(data: alljoyn_aboutdata, supportUrl: CPointer<CPointer<Int8>>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_getsupporturl == "on"]
+public unsafe func Windows_alljoyn_aboutdata_getsupporturl(data: alljoyn_aboutdata, supportUrl: CPointer<CPointer<Int8>>): QStatusAbi {
+    return alljoyn_aboutdata_getsupporturl(data, supportUrl)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_isfieldannounced == "on"]
+foreign {
     func alljoyn_aboutdata_isfieldannounced(data: alljoyn_aboutdata, fieldName: CPointer<UInt8>): UInt8
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_isfieldannounced == "on"]
+public unsafe func Windows_alljoyn_aboutdata_isfieldannounced(data: alljoyn_aboutdata, fieldName: CPointer<UInt8>): UInt8 {
+    return alljoyn_aboutdata_isfieldannounced(data, fieldName)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_isfieldlocalized == "on"]
+foreign {
     func alljoyn_aboutdata_isfieldlocalized(data: alljoyn_aboutdata, fieldName: CPointer<UInt8>): UInt8
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_isfieldlocalized == "on"]
+public unsafe func Windows_alljoyn_aboutdata_isfieldlocalized(data: alljoyn_aboutdata, fieldName: CPointer<UInt8>): UInt8 {
+    return alljoyn_aboutdata_isfieldlocalized(data, fieldName)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_isfieldrequired == "on"]
+foreign {
     func alljoyn_aboutdata_isfieldrequired(data: alljoyn_aboutdata, fieldName: CPointer<UInt8>): UInt8
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_isfieldrequired == "on"]
+public unsafe func Windows_alljoyn_aboutdata_isfieldrequired(data: alljoyn_aboutdata, fieldName: CPointer<UInt8>): UInt8 {
+    return alljoyn_aboutdata_isfieldrequired(data, fieldName)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_isvalid == "on"]
+foreign {
     func alljoyn_aboutdata_isvalid(data: alljoyn_aboutdata, language: CPointer<UInt8>): UInt8
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_isvalid == "on"]
+public unsafe func Windows_alljoyn_aboutdata_isvalid(data: alljoyn_aboutdata, language: CPointer<UInt8>): UInt8 {
+    return alljoyn_aboutdata_isvalid(data, language)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_setappid == "on"]
+foreign {
     func alljoyn_aboutdata_setappid(data: alljoyn_aboutdata, appId: CPointer<UInt8>, num: UIntNative): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_setappid == "on"]
+public unsafe func Windows_alljoyn_aboutdata_setappid(data: alljoyn_aboutdata, appId: CPointer<UInt8>, num: UIntNative): QStatusAbi {
+    return alljoyn_aboutdata_setappid(data, appId, num)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_setappid_fromstring == "on"]
+foreign {
     func alljoyn_aboutdata_setappid_fromstring(data: alljoyn_aboutdata, appId: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_setappid_fromstring == "on"]
+public unsafe func Windows_alljoyn_aboutdata_setappid_fromstring(data: alljoyn_aboutdata, appId: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_aboutdata_setappid_fromstring(data, appId)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_setappname == "on"]
+foreign {
     func alljoyn_aboutdata_setappname(data: alljoyn_aboutdata, appName: CPointer<UInt8>, language: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_setappname == "on"]
+public unsafe func Windows_alljoyn_aboutdata_setappname(data: alljoyn_aboutdata, appName: CPointer<UInt8>, language: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_aboutdata_setappname(data, appName, language)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_setdateofmanufacture == "on"]
+foreign {
     func alljoyn_aboutdata_setdateofmanufacture(data: alljoyn_aboutdata, dateOfManufacture: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_setdateofmanufacture == "on"]
+public unsafe func Windows_alljoyn_aboutdata_setdateofmanufacture(data: alljoyn_aboutdata, dateOfManufacture: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_aboutdata_setdateofmanufacture(data, dateOfManufacture)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_setdefaultlanguage == "on"]
+foreign {
     func alljoyn_aboutdata_setdefaultlanguage(data: alljoyn_aboutdata, defaultLanguage: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_setdefaultlanguage == "on"]
+public unsafe func Windows_alljoyn_aboutdata_setdefaultlanguage(data: alljoyn_aboutdata, defaultLanguage: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_aboutdata_setdefaultlanguage(data, defaultLanguage)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_setdescription == "on"]
+foreign {
     func alljoyn_aboutdata_setdescription(data: alljoyn_aboutdata, description: CPointer<UInt8>, language: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_setdescription == "on"]
+public unsafe func Windows_alljoyn_aboutdata_setdescription(data: alljoyn_aboutdata, description: CPointer<UInt8>, language: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_aboutdata_setdescription(data, description, language)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_setdeviceid == "on"]
+foreign {
     func alljoyn_aboutdata_setdeviceid(data: alljoyn_aboutdata, deviceId: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_setdeviceid == "on"]
+public unsafe func Windows_alljoyn_aboutdata_setdeviceid(data: alljoyn_aboutdata, deviceId: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_aboutdata_setdeviceid(data, deviceId)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_setdevicename == "on"]
+foreign {
     func alljoyn_aboutdata_setdevicename(data: alljoyn_aboutdata, deviceName: CPointer<UInt8>, language: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_setdevicename == "on"]
+public unsafe func Windows_alljoyn_aboutdata_setdevicename(data: alljoyn_aboutdata, deviceName: CPointer<UInt8>, language: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_aboutdata_setdevicename(data, deviceName, language)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_setfield == "on"]
+foreign {
     func alljoyn_aboutdata_setfield(data: alljoyn_aboutdata, name: CPointer<UInt8>, value: alljoyn_msgarg, language: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_setfield == "on"]
+public unsafe func Windows_alljoyn_aboutdata_setfield(data: alljoyn_aboutdata, name: CPointer<UInt8>, value: alljoyn_msgarg, language: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_aboutdata_setfield(data, name, value, language)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_sethardwareversion == "on"]
+foreign {
     func alljoyn_aboutdata_sethardwareversion(data: alljoyn_aboutdata, hardwareVersion: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_sethardwareversion == "on"]
+public unsafe func Windows_alljoyn_aboutdata_sethardwareversion(data: alljoyn_aboutdata, hardwareVersion: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_aboutdata_sethardwareversion(data, hardwareVersion)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_setmanufacturer == "on"]
+foreign {
     func alljoyn_aboutdata_setmanufacturer(data: alljoyn_aboutdata, manufacturer: CPointer<UInt8>, language: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_setmanufacturer == "on"]
+public unsafe func Windows_alljoyn_aboutdata_setmanufacturer(data: alljoyn_aboutdata, manufacturer: CPointer<UInt8>, language: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_aboutdata_setmanufacturer(data, manufacturer, language)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_setmodelnumber == "on"]
+foreign {
     func alljoyn_aboutdata_setmodelnumber(data: alljoyn_aboutdata, modelNumber: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_setmodelnumber == "on"]
+public unsafe func Windows_alljoyn_aboutdata_setmodelnumber(data: alljoyn_aboutdata, modelNumber: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_aboutdata_setmodelnumber(data, modelNumber)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_setsoftwareversion == "on"]
+foreign {
     func alljoyn_aboutdata_setsoftwareversion(data: alljoyn_aboutdata, softwareVersion: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_setsoftwareversion == "on"]
+public unsafe func Windows_alljoyn_aboutdata_setsoftwareversion(data: alljoyn_aboutdata, softwareVersion: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_aboutdata_setsoftwareversion(data, softwareVersion)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_setsupportedlanguage == "on"]
+foreign {
     func alljoyn_aboutdata_setsupportedlanguage(data: alljoyn_aboutdata, language: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_setsupportedlanguage == "on"]
+public unsafe func Windows_alljoyn_aboutdata_setsupportedlanguage(data: alljoyn_aboutdata, language: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_aboutdata_setsupportedlanguage(data, language)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_setsupporturl == "on"]
+foreign {
     func alljoyn_aboutdata_setsupporturl(data: alljoyn_aboutdata, supportUrl: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdata_setsupporturl == "on"]
+public unsafe func Windows_alljoyn_aboutdata_setsupporturl(data: alljoyn_aboutdata, supportUrl: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_aboutdata_setsupporturl(data, supportUrl)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdatalistener_create == "on"]
+foreign {
     func alljoyn_aboutdatalistener_create(callbacks: CPointer<alljoyn_aboutdatalistener_callbacksAbi>, context: CPointer<Unit>): alljoyn_aboutdatalistener
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdatalistener_create == "on"]
+public unsafe func Windows_alljoyn_aboutdatalistener_create(callbacks: CPointer<alljoyn_aboutdatalistener_callbacksAbi>, context: CPointer<Unit>): alljoyn_aboutdatalistener {
+    return alljoyn_aboutdatalistener_create(callbacks, context)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdatalistener_destroy == "on"]
+foreign {
     func alljoyn_aboutdatalistener_destroy(listener: alljoyn_aboutdatalistener): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutdatalistener_destroy == "on"]
+public unsafe func Windows_alljoyn_aboutdatalistener_destroy(listener: alljoyn_aboutdatalistener): Unit {
+    alljoyn_aboutdatalistener_destroy(listener)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_abouticon_clear == "on"]
+foreign {
     func alljoyn_abouticon_clear(icon: alljoyn_abouticon): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_abouticon_clear == "on"]
+public unsafe func Windows_alljoyn_abouticon_clear(icon: alljoyn_abouticon): Unit {
+    alljoyn_abouticon_clear(icon)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_abouticon_create == "on"]
+foreign {
     func alljoyn_abouticon_create(): alljoyn_abouticon
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_abouticon_create == "on"]
+public unsafe func Windows_alljoyn_abouticon_create(): alljoyn_abouticon {
+    return alljoyn_abouticon_create()
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_abouticon_destroy == "on"]
+foreign {
     func alljoyn_abouticon_destroy(icon: alljoyn_abouticon): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_abouticon_destroy == "on"]
+public unsafe func Windows_alljoyn_abouticon_destroy(icon: alljoyn_abouticon): Unit {
+    alljoyn_abouticon_destroy(icon)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_abouticon_getcontent == "on"]
+foreign {
     func alljoyn_abouticon_getcontent(icon: alljoyn_abouticon, data: CPointer<CPointer<UInt8>>, size: CPointer<UIntNative>): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_abouticon_getcontent == "on"]
+public unsafe func Windows_alljoyn_abouticon_getcontent(icon: alljoyn_abouticon, data: CPointer<CPointer<UInt8>>, size: CPointer<UIntNative>): Unit {
+    alljoyn_abouticon_getcontent(icon, data, size)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_abouticon_geturl == "on"]
+foreign {
     func alljoyn_abouticon_geturl(icon: alljoyn_abouticon, type_: CPointer<CPointer<Int8>>, url: CPointer<CPointer<Int8>>): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_abouticon_geturl == "on"]
+public unsafe func Windows_alljoyn_abouticon_geturl(icon: alljoyn_abouticon, type_: CPointer<CPointer<Int8>>, url: CPointer<CPointer<Int8>>): Unit {
+    alljoyn_abouticon_geturl(icon, type_, url)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_abouticon_setcontent == "on"]
+foreign {
     func alljoyn_abouticon_setcontent(icon: alljoyn_abouticon, type_: CPointer<UInt8>, data: CPointer<UInt8>, csize: UIntNative, ownsData: UInt8): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_abouticon_setcontent == "on"]
+public unsafe func Windows_alljoyn_abouticon_setcontent(icon: alljoyn_abouticon, type_: CPointer<UInt8>, data: CPointer<UInt8>, csize: UIntNative, ownsData: UInt8): QStatusAbi {
+    return alljoyn_abouticon_setcontent(icon, type_, data, csize, ownsData)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_abouticon_setcontent_frommsgarg == "on"]
+foreign {
     func alljoyn_abouticon_setcontent_frommsgarg(icon: alljoyn_abouticon, arg: alljoyn_msgarg): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_abouticon_setcontent_frommsgarg == "on"]
+public unsafe func Windows_alljoyn_abouticon_setcontent_frommsgarg(icon: alljoyn_abouticon, arg: alljoyn_msgarg): QStatusAbi {
+    return alljoyn_abouticon_setcontent_frommsgarg(icon, arg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_abouticon_seturl == "on"]
+foreign {
     func alljoyn_abouticon_seturl(icon: alljoyn_abouticon, type_: CPointer<UInt8>, url: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_abouticon_seturl == "on"]
+public unsafe func Windows_alljoyn_abouticon_seturl(icon: alljoyn_abouticon, type_: CPointer<UInt8>, url: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_abouticon_seturl(icon, type_, url)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_abouticonobj_create == "on"]
+foreign {
     func alljoyn_abouticonobj_create(bus: alljoyn_busattachment, icon: alljoyn_abouticon): alljoyn_abouticonobj
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_abouticonobj_create == "on"]
+public unsafe func Windows_alljoyn_abouticonobj_create(bus: alljoyn_busattachment, icon: alljoyn_abouticon): alljoyn_abouticonobj {
+    return alljoyn_abouticonobj_create(bus, icon)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_abouticonobj_destroy == "on"]
+foreign {
     func alljoyn_abouticonobj_destroy(icon: alljoyn_abouticonobj): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_abouticonobj_destroy == "on"]
+public unsafe func Windows_alljoyn_abouticonobj_destroy(icon: alljoyn_abouticonobj): Unit {
+    alljoyn_abouticonobj_destroy(icon)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_abouticonproxy_create == "on"]
+foreign {
     func alljoyn_abouticonproxy_create(bus: alljoyn_busattachment, busName: CPointer<UInt8>, sessionId: UInt32): alljoyn_abouticonproxy
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_abouticonproxy_create == "on"]
+public unsafe func Windows_alljoyn_abouticonproxy_create(bus: alljoyn_busattachment, busName: CPointer<UInt8>, sessionId: UInt32): alljoyn_abouticonproxy {
+    return alljoyn_abouticonproxy_create(bus, busName, sessionId)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_abouticonproxy_destroy == "on"]
+foreign {
     func alljoyn_abouticonproxy_destroy(proxy: alljoyn_abouticonproxy): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_abouticonproxy_destroy == "on"]
+public unsafe func Windows_alljoyn_abouticonproxy_destroy(proxy: alljoyn_abouticonproxy): Unit {
+    alljoyn_abouticonproxy_destroy(proxy)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_abouticonproxy_geticon == "on"]
+foreign {
     func alljoyn_abouticonproxy_geticon(proxy: alljoyn_abouticonproxy, icon: alljoyn_abouticon): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_abouticonproxy_geticon == "on"]
+public unsafe func Windows_alljoyn_abouticonproxy_geticon(proxy: alljoyn_abouticonproxy, icon: alljoyn_abouticon): QStatusAbi {
+    return alljoyn_abouticonproxy_geticon(proxy, icon)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_abouticonproxy_getversion == "on"]
+foreign {
     func alljoyn_abouticonproxy_getversion(proxy: alljoyn_abouticonproxy, version: CPointer<UInt16>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_abouticonproxy_getversion == "on"]
+public unsafe func Windows_alljoyn_abouticonproxy_getversion(proxy: alljoyn_abouticonproxy, version: CPointer<UInt16>): QStatusAbi {
+    return alljoyn_abouticonproxy_getversion(proxy, version)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutlistener_create == "on"]
+foreign {
     func alljoyn_aboutlistener_create(callback: CPointer<alljoyn_aboutlistener_callbackAbi>, context: CPointer<Unit>): alljoyn_aboutlistener
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutlistener_create == "on"]
+public unsafe func Windows_alljoyn_aboutlistener_create(callback: CPointer<alljoyn_aboutlistener_callbackAbi>, context: CPointer<Unit>): alljoyn_aboutlistener {
+    return alljoyn_aboutlistener_create(callback, context)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutlistener_destroy == "on"]
+foreign {
     func alljoyn_aboutlistener_destroy(listener: alljoyn_aboutlistener): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutlistener_destroy == "on"]
+public unsafe func Windows_alljoyn_aboutlistener_destroy(listener: alljoyn_aboutlistener): Unit {
+    alljoyn_aboutlistener_destroy(listener)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobj_announce == "on"]
+foreign {
     func alljoyn_aboutobj_announce(obj: alljoyn_aboutobj, sessionPort: UInt16, aboutData: alljoyn_aboutdata): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobj_announce == "on"]
+public unsafe func Windows_alljoyn_aboutobj_announce(obj: alljoyn_aboutobj, sessionPort: UInt16, aboutData: alljoyn_aboutdata): QStatusAbi {
+    return alljoyn_aboutobj_announce(obj, sessionPort, aboutData)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobj_announce_using_datalistener == "on"]
+foreign {
     func alljoyn_aboutobj_announce_using_datalistener(obj: alljoyn_aboutobj, sessionPort: UInt16, aboutListener: alljoyn_aboutdatalistener): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobj_announce_using_datalistener == "on"]
+public unsafe func Windows_alljoyn_aboutobj_announce_using_datalistener(obj: alljoyn_aboutobj, sessionPort: UInt16, aboutListener: alljoyn_aboutdatalistener): QStatusAbi {
+    return alljoyn_aboutobj_announce_using_datalistener(obj, sessionPort, aboutListener)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobj_create == "on"]
+foreign {
     func alljoyn_aboutobj_create(bus: alljoyn_busattachment, isAnnounced: alljoyn_about_announceflagAbi): alljoyn_aboutobj
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobj_create == "on"]
+public unsafe func Windows_alljoyn_aboutobj_create(bus: alljoyn_busattachment, isAnnounced: alljoyn_about_announceflagAbi): alljoyn_aboutobj {
+    return alljoyn_aboutobj_create(bus, isAnnounced)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobj_destroy == "on"]
+foreign {
     func alljoyn_aboutobj_destroy(obj: alljoyn_aboutobj): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobj_destroy == "on"]
+public unsafe func Windows_alljoyn_aboutobj_destroy(obj: alljoyn_aboutobj): Unit {
+    alljoyn_aboutobj_destroy(obj)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobj_unannounce == "on"]
+foreign {
     func alljoyn_aboutobj_unannounce(obj: alljoyn_aboutobj): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobj_unannounce == "on"]
+public unsafe func Windows_alljoyn_aboutobj_unannounce(obj: alljoyn_aboutobj): QStatusAbi {
+    return alljoyn_aboutobj_unannounce(obj)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobjectdescription_clear == "on"]
+foreign {
     func alljoyn_aboutobjectdescription_clear(description: alljoyn_aboutobjectdescription): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobjectdescription_clear == "on"]
+public unsafe func Windows_alljoyn_aboutobjectdescription_clear(description: alljoyn_aboutobjectdescription): Unit {
+    alljoyn_aboutobjectdescription_clear(description)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobjectdescription_create == "on"]
+foreign {
     func alljoyn_aboutobjectdescription_create(): alljoyn_aboutobjectdescription
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobjectdescription_create == "on"]
+public unsafe func Windows_alljoyn_aboutobjectdescription_create(): alljoyn_aboutobjectdescription {
+    return alljoyn_aboutobjectdescription_create()
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobjectdescription_create_full == "on"]
+foreign {
     func alljoyn_aboutobjectdescription_create_full(arg: alljoyn_msgarg): alljoyn_aboutobjectdescription
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobjectdescription_create_full == "on"]
+public unsafe func Windows_alljoyn_aboutobjectdescription_create_full(arg: alljoyn_msgarg): alljoyn_aboutobjectdescription {
+    return alljoyn_aboutobjectdescription_create_full(arg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobjectdescription_createfrommsgarg == "on"]
+foreign {
     func alljoyn_aboutobjectdescription_createfrommsgarg(description: alljoyn_aboutobjectdescription, arg: alljoyn_msgarg): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobjectdescription_createfrommsgarg == "on"]
+public unsafe func Windows_alljoyn_aboutobjectdescription_createfrommsgarg(description: alljoyn_aboutobjectdescription, arg: alljoyn_msgarg): QStatusAbi {
+    return alljoyn_aboutobjectdescription_createfrommsgarg(description, arg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobjectdescription_destroy == "on"]
+foreign {
     func alljoyn_aboutobjectdescription_destroy(description: alljoyn_aboutobjectdescription): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobjectdescription_destroy == "on"]
+public unsafe func Windows_alljoyn_aboutobjectdescription_destroy(description: alljoyn_aboutobjectdescription): Unit {
+    alljoyn_aboutobjectdescription_destroy(description)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobjectdescription_getinterfacepaths == "on"]
+foreign {
     func alljoyn_aboutobjectdescription_getinterfacepaths(description: alljoyn_aboutobjectdescription, interfaceName: CPointer<UInt8>, paths: CPointer<CPointer<Int8>>, numPaths: UIntNative): UIntNative
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobjectdescription_getinterfacepaths == "on"]
+public unsafe func Windows_alljoyn_aboutobjectdescription_getinterfacepaths(description: alljoyn_aboutobjectdescription, interfaceName: CPointer<UInt8>, paths: CPointer<CPointer<Int8>>, numPaths: UIntNative): UIntNative {
+    return alljoyn_aboutobjectdescription_getinterfacepaths(description, interfaceName, paths, numPaths)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobjectdescription_getinterfaces == "on"]
+foreign {
     func alljoyn_aboutobjectdescription_getinterfaces(description: alljoyn_aboutobjectdescription, path: CPointer<UInt8>, interfaces: CPointer<CPointer<Int8>>, numInterfaces: UIntNative): UIntNative
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobjectdescription_getinterfaces == "on"]
+public unsafe func Windows_alljoyn_aboutobjectdescription_getinterfaces(description: alljoyn_aboutobjectdescription, path: CPointer<UInt8>, interfaces: CPointer<CPointer<Int8>>, numInterfaces: UIntNative): UIntNative {
+    return alljoyn_aboutobjectdescription_getinterfaces(description, path, interfaces, numInterfaces)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobjectdescription_getmsgarg == "on"]
+foreign {
     func alljoyn_aboutobjectdescription_getmsgarg(description: alljoyn_aboutobjectdescription, msgArg: alljoyn_msgarg): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobjectdescription_getmsgarg == "on"]
+public unsafe func Windows_alljoyn_aboutobjectdescription_getmsgarg(description: alljoyn_aboutobjectdescription, msgArg: alljoyn_msgarg): QStatusAbi {
+    return alljoyn_aboutobjectdescription_getmsgarg(description, msgArg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobjectdescription_getpaths == "on"]
+foreign {
     func alljoyn_aboutobjectdescription_getpaths(description: alljoyn_aboutobjectdescription, paths: CPointer<CPointer<Int8>>, numPaths: UIntNative): UIntNative
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobjectdescription_getpaths == "on"]
+public unsafe func Windows_alljoyn_aboutobjectdescription_getpaths(description: alljoyn_aboutobjectdescription, paths: CPointer<CPointer<Int8>>, numPaths: UIntNative): UIntNative {
+    return alljoyn_aboutobjectdescription_getpaths(description, paths, numPaths)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobjectdescription_hasinterface == "on"]
+foreign {
     func alljoyn_aboutobjectdescription_hasinterface(description: alljoyn_aboutobjectdescription, interfaceName: CPointer<UInt8>): UInt8
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobjectdescription_hasinterface == "on"]
+public unsafe func Windows_alljoyn_aboutobjectdescription_hasinterface(description: alljoyn_aboutobjectdescription, interfaceName: CPointer<UInt8>): UInt8 {
+    return alljoyn_aboutobjectdescription_hasinterface(description, interfaceName)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobjectdescription_hasinterfaceatpath == "on"]
+foreign {
     func alljoyn_aboutobjectdescription_hasinterfaceatpath(description: alljoyn_aboutobjectdescription, path: CPointer<UInt8>, interfaceName: CPointer<UInt8>): UInt8
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobjectdescription_hasinterfaceatpath == "on"]
+public unsafe func Windows_alljoyn_aboutobjectdescription_hasinterfaceatpath(description: alljoyn_aboutobjectdescription, path: CPointer<UInt8>, interfaceName: CPointer<UInt8>): UInt8 {
+    return alljoyn_aboutobjectdescription_hasinterfaceatpath(description, path, interfaceName)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobjectdescription_haspath == "on"]
+foreign {
     func alljoyn_aboutobjectdescription_haspath(description: alljoyn_aboutobjectdescription, path: CPointer<UInt8>): UInt8
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutobjectdescription_haspath == "on"]
+public unsafe func Windows_alljoyn_aboutobjectdescription_haspath(description: alljoyn_aboutobjectdescription, path: CPointer<UInt8>): UInt8 {
+    return alljoyn_aboutobjectdescription_haspath(description, path)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutproxy_create == "on"]
+foreign {
     func alljoyn_aboutproxy_create(bus: alljoyn_busattachment, busName: CPointer<UInt8>, sessionId: UInt32): alljoyn_aboutproxy
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutproxy_create == "on"]
+public unsafe func Windows_alljoyn_aboutproxy_create(bus: alljoyn_busattachment, busName: CPointer<UInt8>, sessionId: UInt32): alljoyn_aboutproxy {
+    return alljoyn_aboutproxy_create(bus, busName, sessionId)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutproxy_destroy == "on"]
+foreign {
     func alljoyn_aboutproxy_destroy(proxy: alljoyn_aboutproxy): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutproxy_destroy == "on"]
+public unsafe func Windows_alljoyn_aboutproxy_destroy(proxy: alljoyn_aboutproxy): Unit {
+    alljoyn_aboutproxy_destroy(proxy)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutproxy_getaboutdata == "on"]
+foreign {
     func alljoyn_aboutproxy_getaboutdata(proxy: alljoyn_aboutproxy, language: CPointer<UInt8>, data: alljoyn_msgarg): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutproxy_getaboutdata == "on"]
+public unsafe func Windows_alljoyn_aboutproxy_getaboutdata(proxy: alljoyn_aboutproxy, language: CPointer<UInt8>, data: alljoyn_msgarg): QStatusAbi {
+    return alljoyn_aboutproxy_getaboutdata(proxy, language, data)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutproxy_getobjectdescription == "on"]
+foreign {
     func alljoyn_aboutproxy_getobjectdescription(proxy: alljoyn_aboutproxy, objectDesc: alljoyn_msgarg): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutproxy_getobjectdescription == "on"]
+public unsafe func Windows_alljoyn_aboutproxy_getobjectdescription(proxy: alljoyn_aboutproxy, objectDesc: alljoyn_msgarg): QStatusAbi {
+    return alljoyn_aboutproxy_getobjectdescription(proxy, objectDesc)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutproxy_getversion == "on"]
+foreign {
     func alljoyn_aboutproxy_getversion(proxy: alljoyn_aboutproxy, version: CPointer<UInt16>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_aboutproxy_getversion == "on"]
+public unsafe func Windows_alljoyn_aboutproxy_getversion(proxy: alljoyn_aboutproxy, version: CPointer<UInt16>): QStatusAbi {
+    return alljoyn_aboutproxy_getversion(proxy, version)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_applicationstatelistener_create == "on"]
+foreign {
     func alljoyn_applicationstatelistener_create(callbacks: CPointer<alljoyn_applicationstatelistener_callbacksAbi>, context: CPointer<Unit>): alljoyn_applicationstatelistener
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_applicationstatelistener_create == "on"]
+public unsafe func Windows_alljoyn_applicationstatelistener_create(callbacks: CPointer<alljoyn_applicationstatelistener_callbacksAbi>, context: CPointer<Unit>): alljoyn_applicationstatelistener {
+    return alljoyn_applicationstatelistener_create(callbacks, context)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_applicationstatelistener_destroy == "on"]
+foreign {
     func alljoyn_applicationstatelistener_destroy(listener: alljoyn_applicationstatelistener): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_applicationstatelistener_destroy == "on"]
+public unsafe func Windows_alljoyn_applicationstatelistener_destroy(listener: alljoyn_applicationstatelistener): Unit {
+    alljoyn_applicationstatelistener_destroy(listener)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_authlistener_create == "on"]
+foreign {
     func alljoyn_authlistener_create(callbacks: CPointer<alljoyn_authlistener_callbacksAbi>, context: CPointer<Unit>): alljoyn_authlistener
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_authlistener_create == "on"]
+public unsafe func Windows_alljoyn_authlistener_create(callbacks: CPointer<alljoyn_authlistener_callbacksAbi>, context: CPointer<Unit>): alljoyn_authlistener {
+    return alljoyn_authlistener_create(callbacks, context)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_authlistener_destroy == "on"]
+foreign {
     func alljoyn_authlistener_destroy(listener: alljoyn_authlistener): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_authlistener_destroy == "on"]
+public unsafe func Windows_alljoyn_authlistener_destroy(listener: alljoyn_authlistener): Unit {
+    alljoyn_authlistener_destroy(listener)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_authlistener_requestcredentialsresponse == "on"]
+foreign {
     func alljoyn_authlistener_requestcredentialsresponse(listener: alljoyn_authlistener, authContext: CPointer<Unit>, accept: Int32, credentials: alljoyn_credentials): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_authlistener_requestcredentialsresponse == "on"]
+public unsafe func Windows_alljoyn_authlistener_requestcredentialsresponse(listener: alljoyn_authlistener, authContext: CPointer<Unit>, accept: Int32, credentials: alljoyn_credentials): QStatusAbi {
+    return alljoyn_authlistener_requestcredentialsresponse(listener, authContext, accept, credentials)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_authlistener_setsharedsecret == "on"]
+foreign {
     func alljoyn_authlistener_setsharedsecret(listener: alljoyn_authlistener, sharedSecret: CPointer<UInt8>, sharedSecretSize: UIntNative): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_authlistener_setsharedsecret == "on"]
+public unsafe func Windows_alljoyn_authlistener_setsharedsecret(listener: alljoyn_authlistener, sharedSecret: CPointer<UInt8>, sharedSecretSize: UIntNative): QStatusAbi {
+    return alljoyn_authlistener_setsharedsecret(listener, sharedSecret, sharedSecretSize)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_authlistener_verifycredentialsresponse == "on"]
+foreign {
     func alljoyn_authlistener_verifycredentialsresponse(listener: alljoyn_authlistener, authContext: CPointer<Unit>, accept: Int32): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_authlistener_verifycredentialsresponse == "on"]
+public unsafe func Windows_alljoyn_authlistener_verifycredentialsresponse(listener: alljoyn_authlistener, authContext: CPointer<Unit>, accept: Int32): QStatusAbi {
+    return alljoyn_authlistener_verifycredentialsresponse(listener, authContext, accept)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_authlistenerasync_create == "on"]
+foreign {
     func alljoyn_authlistenerasync_create(callbacks: CPointer<alljoyn_authlistenerasync_callbacksAbi>, context: CPointer<Unit>): alljoyn_authlistener
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_authlistenerasync_create == "on"]
+public unsafe func Windows_alljoyn_authlistenerasync_create(callbacks: CPointer<alljoyn_authlistenerasync_callbacksAbi>, context: CPointer<Unit>): alljoyn_authlistener {
+    return alljoyn_authlistenerasync_create(callbacks, context)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_authlistenerasync_destroy == "on"]
+foreign {
     func alljoyn_authlistenerasync_destroy(listener: alljoyn_authlistener): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_authlistenerasync_destroy == "on"]
+public unsafe func Windows_alljoyn_authlistenerasync_destroy(listener: alljoyn_authlistener): Unit {
+    alljoyn_authlistenerasync_destroy(listener)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_autopinger_adddestination == "on"]
+foreign {
     func alljoyn_autopinger_adddestination(autopinger: alljoyn_autopinger, group: CPointer<UInt8>, destination: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_autopinger_adddestination == "on"]
+public unsafe func Windows_alljoyn_autopinger_adddestination(autopinger: alljoyn_autopinger, group: CPointer<UInt8>, destination: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_autopinger_adddestination(autopinger, group, destination)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_autopinger_addpinggroup == "on"]
+foreign {
     func alljoyn_autopinger_addpinggroup(autopinger: alljoyn_autopinger, group: CPointer<UInt8>, listener: alljoyn_pinglistener, pinginterval: UInt32): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_autopinger_addpinggroup == "on"]
+public unsafe func Windows_alljoyn_autopinger_addpinggroup(autopinger: alljoyn_autopinger, group: CPointer<UInt8>, listener: alljoyn_pinglistener, pinginterval: UInt32): Unit {
+    alljoyn_autopinger_addpinggroup(autopinger, group, listener, pinginterval)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_autopinger_create == "on"]
+foreign {
     func alljoyn_autopinger_create(bus: alljoyn_busattachment): alljoyn_autopinger
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_autopinger_create == "on"]
+public unsafe func Windows_alljoyn_autopinger_create(bus: alljoyn_busattachment): alljoyn_autopinger {
+    return alljoyn_autopinger_create(bus)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_autopinger_destroy == "on"]
+foreign {
     func alljoyn_autopinger_destroy(autopinger: alljoyn_autopinger): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_autopinger_destroy == "on"]
+public unsafe func Windows_alljoyn_autopinger_destroy(autopinger: alljoyn_autopinger): Unit {
+    alljoyn_autopinger_destroy(autopinger)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_autopinger_pause == "on"]
+foreign {
     func alljoyn_autopinger_pause(autopinger: alljoyn_autopinger): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_autopinger_pause == "on"]
+public unsafe func Windows_alljoyn_autopinger_pause(autopinger: alljoyn_autopinger): Unit {
+    alljoyn_autopinger_pause(autopinger)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_autopinger_removedestination == "on"]
+foreign {
     func alljoyn_autopinger_removedestination(autopinger: alljoyn_autopinger, group: CPointer<UInt8>, destination: CPointer<UInt8>, removeall: Int32): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_autopinger_removedestination == "on"]
+public unsafe func Windows_alljoyn_autopinger_removedestination(autopinger: alljoyn_autopinger, group: CPointer<UInt8>, destination: CPointer<UInt8>, removeall: Int32): QStatusAbi {
+    return alljoyn_autopinger_removedestination(autopinger, group, destination, removeall)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_autopinger_removepinggroup == "on"]
+foreign {
     func alljoyn_autopinger_removepinggroup(autopinger: alljoyn_autopinger, group: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_autopinger_removepinggroup == "on"]
+public unsafe func Windows_alljoyn_autopinger_removepinggroup(autopinger: alljoyn_autopinger, group: CPointer<UInt8>): Unit {
+    alljoyn_autopinger_removepinggroup(autopinger, group)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_autopinger_resume == "on"]
+foreign {
     func alljoyn_autopinger_resume(autopinger: alljoyn_autopinger): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_autopinger_resume == "on"]
+public unsafe func Windows_alljoyn_autopinger_resume(autopinger: alljoyn_autopinger): Unit {
+    alljoyn_autopinger_resume(autopinger)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_autopinger_setpinginterval == "on"]
+foreign {
     func alljoyn_autopinger_setpinginterval(autopinger: alljoyn_autopinger, group: CPointer<UInt8>, pinginterval: UInt32): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_autopinger_setpinginterval == "on"]
+public unsafe func Windows_alljoyn_autopinger_setpinginterval(autopinger: alljoyn_autopinger, group: CPointer<UInt8>, pinginterval: UInt32): QStatusAbi {
+    return alljoyn_autopinger_setpinginterval(autopinger, group, pinginterval)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_addlogonentry == "on"]
+foreign {
     func alljoyn_busattachment_addlogonentry(bus: alljoyn_busattachment, authMechanism: CPointer<UInt8>, userName: CPointer<UInt8>, password: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_addlogonentry == "on"]
+public unsafe func Windows_alljoyn_busattachment_addlogonentry(bus: alljoyn_busattachment, authMechanism: CPointer<UInt8>, userName: CPointer<UInt8>, password: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_busattachment_addlogonentry(bus, authMechanism, userName, password)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_addmatch == "on"]
+foreign {
     func alljoyn_busattachment_addmatch(bus: alljoyn_busattachment, rule: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_addmatch == "on"]
+public unsafe func Windows_alljoyn_busattachment_addmatch(bus: alljoyn_busattachment, rule: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_busattachment_addmatch(bus, rule)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_advertisename == "on"]
+foreign {
     func alljoyn_busattachment_advertisename(bus: alljoyn_busattachment, name: CPointer<UInt8>, transports: UInt16): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_advertisename == "on"]
+public unsafe func Windows_alljoyn_busattachment_advertisename(bus: alljoyn_busattachment, name: CPointer<UInt8>, transports: UInt16): QStatusAbi {
+    return alljoyn_busattachment_advertisename(bus, name, transports)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_bindsessionport == "on"]
+foreign {
     func alljoyn_busattachment_bindsessionport(bus: alljoyn_busattachment, sessionPort: CPointer<UInt16>, opts: alljoyn_sessionopts, listener: alljoyn_sessionportlistener): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_bindsessionport == "on"]
+public unsafe func Windows_alljoyn_busattachment_bindsessionport(bus: alljoyn_busattachment, sessionPort: CPointer<UInt16>, opts: alljoyn_sessionopts, listener: alljoyn_sessionportlistener): QStatusAbi {
+    return alljoyn_busattachment_bindsessionport(bus, sessionPort, opts, listener)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_canceladvertisename == "on"]
+foreign {
     func alljoyn_busattachment_canceladvertisename(bus: alljoyn_busattachment, name: CPointer<UInt8>, transports: UInt16): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_canceladvertisename == "on"]
+public unsafe func Windows_alljoyn_busattachment_canceladvertisename(bus: alljoyn_busattachment, name: CPointer<UInt8>, transports: UInt16): QStatusAbi {
+    return alljoyn_busattachment_canceladvertisename(bus, name, transports)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_cancelfindadvertisedname == "on"]
+foreign {
     func alljoyn_busattachment_cancelfindadvertisedname(bus: alljoyn_busattachment, namePrefix: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_cancelfindadvertisedname == "on"]
+public unsafe func Windows_alljoyn_busattachment_cancelfindadvertisedname(bus: alljoyn_busattachment, namePrefix: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_busattachment_cancelfindadvertisedname(bus, namePrefix)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_cancelfindadvertisednamebytransport == "on"]
+foreign {
     func alljoyn_busattachment_cancelfindadvertisednamebytransport(bus: alljoyn_busattachment, namePrefix: CPointer<UInt8>, transports: UInt16): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_cancelfindadvertisednamebytransport == "on"]
+public unsafe func Windows_alljoyn_busattachment_cancelfindadvertisednamebytransport(bus: alljoyn_busattachment, namePrefix: CPointer<UInt8>, transports: UInt16): QStatusAbi {
+    return alljoyn_busattachment_cancelfindadvertisednamebytransport(bus, namePrefix, transports)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_cancelwhoimplements_interface == "on"]
+foreign {
     func alljoyn_busattachment_cancelwhoimplements_interface(bus: alljoyn_busattachment, implementsInterface: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_cancelwhoimplements_interface == "on"]
+public unsafe func Windows_alljoyn_busattachment_cancelwhoimplements_interface(bus: alljoyn_busattachment, implementsInterface: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_busattachment_cancelwhoimplements_interface(bus, implementsInterface)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_cancelwhoimplements_interfaces == "on"]
+foreign {
     func alljoyn_busattachment_cancelwhoimplements_interfaces(bus: alljoyn_busattachment, implementsInterfaces: CPointer<CPointer<Int8>>, numberInterfaces: UIntNative): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_cancelwhoimplements_interfaces == "on"]
+public unsafe func Windows_alljoyn_busattachment_cancelwhoimplements_interfaces(bus: alljoyn_busattachment, implementsInterfaces: CPointer<CPointer<Int8>>, numberInterfaces: UIntNative): QStatusAbi {
+    return alljoyn_busattachment_cancelwhoimplements_interfaces(bus, implementsInterfaces, numberInterfaces)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_clearkeys == "on"]
+foreign {
     func alljoyn_busattachment_clearkeys(bus: alljoyn_busattachment, guid: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_clearkeys == "on"]
+public unsafe func Windows_alljoyn_busattachment_clearkeys(bus: alljoyn_busattachment, guid: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_busattachment_clearkeys(bus, guid)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_clearkeystore == "on"]
+foreign {
     func alljoyn_busattachment_clearkeystore(bus: alljoyn_busattachment): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_clearkeystore == "on"]
+public unsafe func Windows_alljoyn_busattachment_clearkeystore(bus: alljoyn_busattachment): Unit {
+    alljoyn_busattachment_clearkeystore(bus)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_connect == "on"]
+foreign {
     func alljoyn_busattachment_connect(bus: alljoyn_busattachment, connectSpec: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_connect == "on"]
+public unsafe func Windows_alljoyn_busattachment_connect(bus: alljoyn_busattachment, connectSpec: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_busattachment_connect(bus, connectSpec)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_create == "on"]
+foreign {
     func alljoyn_busattachment_create(applicationName: CPointer<UInt8>, allowRemoteMessages: Int32): alljoyn_busattachment
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_create == "on"]
+public unsafe func Windows_alljoyn_busattachment_create(applicationName: CPointer<UInt8>, allowRemoteMessages: Int32): alljoyn_busattachment {
+    return alljoyn_busattachment_create(applicationName, allowRemoteMessages)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_create_concurrency == "on"]
+foreign {
     func alljoyn_busattachment_create_concurrency(applicationName: CPointer<UInt8>, allowRemoteMessages: Int32, concurrency: UInt32): alljoyn_busattachment
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_create_concurrency == "on"]
+public unsafe func Windows_alljoyn_busattachment_create_concurrency(applicationName: CPointer<UInt8>, allowRemoteMessages: Int32, concurrency: UInt32): alljoyn_busattachment {
+    return alljoyn_busattachment_create_concurrency(applicationName, allowRemoteMessages, concurrency)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_createinterface == "on"]
+foreign {
     func alljoyn_busattachment_createinterface(bus: alljoyn_busattachment, name: CPointer<UInt8>, iface: CPointer<alljoyn_interfacedescription>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_createinterface == "on"]
+public unsafe func Windows_alljoyn_busattachment_createinterface(bus: alljoyn_busattachment, name: CPointer<UInt8>, iface: CPointer<alljoyn_interfacedescription>): QStatusAbi {
+    return alljoyn_busattachment_createinterface(bus, name, iface)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_createinterface_secure == "on"]
+foreign {
     func alljoyn_busattachment_createinterface_secure(bus: alljoyn_busattachment, name: CPointer<UInt8>, iface: CPointer<alljoyn_interfacedescription>, secPolicy: alljoyn_interfacedescription_securitypolicyAbi): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_createinterface_secure == "on"]
+public unsafe func Windows_alljoyn_busattachment_createinterface_secure(bus: alljoyn_busattachment, name: CPointer<UInt8>, iface: CPointer<alljoyn_interfacedescription>, secPolicy: alljoyn_interfacedescription_securitypolicyAbi): QStatusAbi {
+    return alljoyn_busattachment_createinterface_secure(bus, name, iface, secPolicy)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_createinterfacesfromxml == "on"]
+foreign {
     func alljoyn_busattachment_createinterfacesfromxml(bus: alljoyn_busattachment, xml: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_createinterfacesfromxml == "on"]
+public unsafe func Windows_alljoyn_busattachment_createinterfacesfromxml(bus: alljoyn_busattachment, xml: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_busattachment_createinterfacesfromxml(bus, xml)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_deletedefaultkeystore == "on"]
+foreign {
     func alljoyn_busattachment_deletedefaultkeystore(applicationName: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_deletedefaultkeystore == "on"]
+public unsafe func Windows_alljoyn_busattachment_deletedefaultkeystore(applicationName: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_busattachment_deletedefaultkeystore(applicationName)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_deleteinterface == "on"]
+foreign {
     func alljoyn_busattachment_deleteinterface(bus: alljoyn_busattachment, iface: alljoyn_interfacedescription): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_deleteinterface == "on"]
+public unsafe func Windows_alljoyn_busattachment_deleteinterface(bus: alljoyn_busattachment, iface: alljoyn_interfacedescription): QStatusAbi {
+    return alljoyn_busattachment_deleteinterface(bus, iface)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_destroy == "on"]
+foreign {
     func alljoyn_busattachment_destroy(bus: alljoyn_busattachment): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_destroy == "on"]
+public unsafe func Windows_alljoyn_busattachment_destroy(bus: alljoyn_busattachment): Unit {
+    alljoyn_busattachment_destroy(bus)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_disconnect == "on"]
+foreign {
     func alljoyn_busattachment_disconnect(bus: alljoyn_busattachment, unused: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_disconnect == "on"]
+public unsafe func Windows_alljoyn_busattachment_disconnect(bus: alljoyn_busattachment, unused: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_busattachment_disconnect(bus, unused)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_enableconcurrentcallbacks == "on"]
+foreign {
     func alljoyn_busattachment_enableconcurrentcallbacks(bus: alljoyn_busattachment): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_enableconcurrentcallbacks == "on"]
+public unsafe func Windows_alljoyn_busattachment_enableconcurrentcallbacks(bus: alljoyn_busattachment): Unit {
+    alljoyn_busattachment_enableconcurrentcallbacks(bus)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_enablepeersecurity == "on"]
+foreign {
     func alljoyn_busattachment_enablepeersecurity(bus: alljoyn_busattachment, authMechanisms: CPointer<UInt8>, listener: alljoyn_authlistener, keyStoreFileName: CPointer<UInt8>, isShared: Int32): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_enablepeersecurity == "on"]
+public unsafe func Windows_alljoyn_busattachment_enablepeersecurity(bus: alljoyn_busattachment, authMechanisms: CPointer<UInt8>, listener: alljoyn_authlistener, keyStoreFileName: CPointer<UInt8>, isShared: Int32): QStatusAbi {
+    return alljoyn_busattachment_enablepeersecurity(bus, authMechanisms, listener, keyStoreFileName, isShared)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_enablepeersecuritywithpermissionconfigurationlistener == "on"]
+foreign {
     func alljoyn_busattachment_enablepeersecuritywithpermissionconfigurationlistener(bus: alljoyn_busattachment, authMechanisms: CPointer<UInt8>, authListener: alljoyn_authlistener, keyStoreFileName: CPointer<UInt8>, isShared: Int32, permissionConfigurationListener: alljoyn_permissionconfigurationlistener): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_enablepeersecuritywithpermissionconfigurationlistener == "on"]
+public unsafe func Windows_alljoyn_busattachment_enablepeersecuritywithpermissionconfigurationlistener(bus: alljoyn_busattachment, authMechanisms: CPointer<UInt8>, authListener: alljoyn_authlistener, keyStoreFileName: CPointer<UInt8>, isShared: Int32, permissionConfigurationListener: alljoyn_permissionconfigurationlistener): QStatusAbi {
+    return alljoyn_busattachment_enablepeersecuritywithpermissionconfigurationlistener(bus, authMechanisms, authListener, keyStoreFileName, isShared, permissionConfigurationListener)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_findadvertisedname == "on"]
+foreign {
     func alljoyn_busattachment_findadvertisedname(bus: alljoyn_busattachment, namePrefix: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_findadvertisedname == "on"]
+public unsafe func Windows_alljoyn_busattachment_findadvertisedname(bus: alljoyn_busattachment, namePrefix: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_busattachment_findadvertisedname(bus, namePrefix)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_findadvertisednamebytransport == "on"]
+foreign {
     func alljoyn_busattachment_findadvertisednamebytransport(bus: alljoyn_busattachment, namePrefix: CPointer<UInt8>, transports: UInt16): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_findadvertisednamebytransport == "on"]
+public unsafe func Windows_alljoyn_busattachment_findadvertisednamebytransport(bus: alljoyn_busattachment, namePrefix: CPointer<UInt8>, transports: UInt16): QStatusAbi {
+    return alljoyn_busattachment_findadvertisednamebytransport(bus, namePrefix, transports)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_getalljoyndebugobj == "on"]
+foreign {
     func alljoyn_busattachment_getalljoyndebugobj(bus: alljoyn_busattachment): alljoyn_proxybusobject
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_getalljoyndebugobj == "on"]
+public unsafe func Windows_alljoyn_busattachment_getalljoyndebugobj(bus: alljoyn_busattachment): alljoyn_proxybusobject {
+    return alljoyn_busattachment_getalljoyndebugobj(bus)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_getalljoynproxyobj == "on"]
+foreign {
     func alljoyn_busattachment_getalljoynproxyobj(bus: alljoyn_busattachment): alljoyn_proxybusobject
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_getalljoynproxyobj == "on"]
+public unsafe func Windows_alljoyn_busattachment_getalljoynproxyobj(bus: alljoyn_busattachment): alljoyn_proxybusobject {
+    return alljoyn_busattachment_getalljoynproxyobj(bus)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_getconcurrency == "on"]
+foreign {
     func alljoyn_busattachment_getconcurrency(bus: alljoyn_busattachment): UInt32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_getconcurrency == "on"]
+public unsafe func Windows_alljoyn_busattachment_getconcurrency(bus: alljoyn_busattachment): UInt32 {
+    return alljoyn_busattachment_getconcurrency(bus)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_getconnectspec == "on"]
+foreign {
     func alljoyn_busattachment_getconnectspec(bus: alljoyn_busattachment): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_getconnectspec == "on"]
+public unsafe func Windows_alljoyn_busattachment_getconnectspec(bus: alljoyn_busattachment): CPointer<UInt8> {
+    return alljoyn_busattachment_getconnectspec(bus)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_getdbusproxyobj == "on"]
+foreign {
     func alljoyn_busattachment_getdbusproxyobj(bus: alljoyn_busattachment): alljoyn_proxybusobject
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_getdbusproxyobj == "on"]
+public unsafe func Windows_alljoyn_busattachment_getdbusproxyobj(bus: alljoyn_busattachment): alljoyn_proxybusobject {
+    return alljoyn_busattachment_getdbusproxyobj(bus)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_getglobalguidstring == "on"]
+foreign {
     func alljoyn_busattachment_getglobalguidstring(bus: alljoyn_busattachment): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_getglobalguidstring == "on"]
+public unsafe func Windows_alljoyn_busattachment_getglobalguidstring(bus: alljoyn_busattachment): CPointer<UInt8> {
+    return alljoyn_busattachment_getglobalguidstring(bus)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_getinterface == "on"]
+foreign {
     func alljoyn_busattachment_getinterface(bus: alljoyn_busattachment, name: CPointer<UInt8>): alljoyn_interfacedescription
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_getinterface == "on"]
+public unsafe func Windows_alljoyn_busattachment_getinterface(bus: alljoyn_busattachment, name: CPointer<UInt8>): alljoyn_interfacedescription {
+    return alljoyn_busattachment_getinterface(bus, name)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_getinterfaces == "on"]
+foreign {
     func alljoyn_busattachment_getinterfaces(bus: alljoyn_busattachment, ifaces: CPointer<alljoyn_interfacedescription>, numIfaces: UIntNative): UIntNative
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_getinterfaces == "on"]
+public unsafe func Windows_alljoyn_busattachment_getinterfaces(bus: alljoyn_busattachment, ifaces: CPointer<alljoyn_interfacedescription>, numIfaces: UIntNative): UIntNative {
+    return alljoyn_busattachment_getinterfaces(bus, ifaces, numIfaces)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_getkeyexpiration == "on"]
+foreign {
     func alljoyn_busattachment_getkeyexpiration(bus: alljoyn_busattachment, guid: CPointer<UInt8>, timeout: CPointer<UInt32>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_getkeyexpiration == "on"]
+public unsafe func Windows_alljoyn_busattachment_getkeyexpiration(bus: alljoyn_busattachment, guid: CPointer<UInt8>, timeout: CPointer<UInt32>): QStatusAbi {
+    return alljoyn_busattachment_getkeyexpiration(bus, guid, timeout)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_getpeerguid == "on"]
+foreign {
     func alljoyn_busattachment_getpeerguid(bus: alljoyn_busattachment, name: CPointer<UInt8>, guid: CPointer<UInt8>, guidSz: CPointer<UIntNative>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_getpeerguid == "on"]
+public unsafe func Windows_alljoyn_busattachment_getpeerguid(bus: alljoyn_busattachment, name: CPointer<UInt8>, guid: CPointer<UInt8>, guidSz: CPointer<UIntNative>): QStatusAbi {
+    return alljoyn_busattachment_getpeerguid(bus, name, guid, guidSz)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_getpermissionconfigurator == "on"]
+foreign {
     func alljoyn_busattachment_getpermissionconfigurator(bus: alljoyn_busattachment): alljoyn_permissionconfigurator
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_getpermissionconfigurator == "on"]
+public unsafe func Windows_alljoyn_busattachment_getpermissionconfigurator(bus: alljoyn_busattachment): alljoyn_permissionconfigurator {
+    return alljoyn_busattachment_getpermissionconfigurator(bus)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_gettimestamp == "on"]
+foreign {
     func alljoyn_busattachment_gettimestamp(): UInt32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_gettimestamp == "on"]
+public unsafe func Windows_alljoyn_busattachment_gettimestamp(): UInt32 {
+    return alljoyn_busattachment_gettimestamp()
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_getuniquename == "on"]
+foreign {
     func alljoyn_busattachment_getuniquename(bus: alljoyn_busattachment): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_getuniquename == "on"]
+public unsafe func Windows_alljoyn_busattachment_getuniquename(bus: alljoyn_busattachment): CPointer<UInt8> {
+    return alljoyn_busattachment_getuniquename(bus)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_isconnected == "on"]
+foreign {
     func alljoyn_busattachment_isconnected(bus: alljoyn_busattachment): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_isconnected == "on"]
+public unsafe func Windows_alljoyn_busattachment_isconnected(bus: alljoyn_busattachment): Int32 {
+    return alljoyn_busattachment_isconnected(bus)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_ispeersecurityenabled == "on"]
+foreign {
     func alljoyn_busattachment_ispeersecurityenabled(bus: alljoyn_busattachment): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_ispeersecurityenabled == "on"]
+public unsafe func Windows_alljoyn_busattachment_ispeersecurityenabled(bus: alljoyn_busattachment): Int32 {
+    return alljoyn_busattachment_ispeersecurityenabled(bus)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_isstarted == "on"]
+foreign {
     func alljoyn_busattachment_isstarted(bus: alljoyn_busattachment): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_isstarted == "on"]
+public unsafe func Windows_alljoyn_busattachment_isstarted(bus: alljoyn_busattachment): Int32 {
+    return alljoyn_busattachment_isstarted(bus)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_isstopping == "on"]
+foreign {
     func alljoyn_busattachment_isstopping(bus: alljoyn_busattachment): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_isstopping == "on"]
+public unsafe func Windows_alljoyn_busattachment_isstopping(bus: alljoyn_busattachment): Int32 {
+    return alljoyn_busattachment_isstopping(bus)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_join == "on"]
+foreign {
     func alljoyn_busattachment_join(bus: alljoyn_busattachment): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_join == "on"]
+public unsafe func Windows_alljoyn_busattachment_join(bus: alljoyn_busattachment): QStatusAbi {
+    return alljoyn_busattachment_join(bus)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_joinsession == "on"]
+foreign {
     func alljoyn_busattachment_joinsession(bus: alljoyn_busattachment, sessionHost: CPointer<UInt8>, sessionPort: UInt16, listener: alljoyn_sessionlistener, sessionId: CPointer<UInt32>, opts: alljoyn_sessionopts): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_joinsession == "on"]
+public unsafe func Windows_alljoyn_busattachment_joinsession(bus: alljoyn_busattachment, sessionHost: CPointer<UInt8>, sessionPort: UInt16, listener: alljoyn_sessionlistener, sessionId: CPointer<UInt32>, opts: alljoyn_sessionopts): QStatusAbi {
+    return alljoyn_busattachment_joinsession(bus, sessionHost, sessionPort, listener, sessionId, opts)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_joinsessionasync == "on"]
+foreign {
     func alljoyn_busattachment_joinsessionasync(bus: alljoyn_busattachment, sessionHost: CPointer<UInt8>, sessionPort: UInt16, listener: alljoyn_sessionlistener, opts: alljoyn_sessionopts, callback: alljoyn_busattachment_joinsessioncb_ptr, context: CPointer<Unit>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_joinsessionasync == "on"]
+public unsafe func Windows_alljoyn_busattachment_joinsessionasync(bus: alljoyn_busattachment, sessionHost: CPointer<UInt8>, sessionPort: UInt16, listener: alljoyn_sessionlistener, opts: alljoyn_sessionopts, callback: alljoyn_busattachment_joinsessioncb_ptr, context: CPointer<Unit>): QStatusAbi {
+    return alljoyn_busattachment_joinsessionasync(bus, sessionHost, sessionPort, listener, opts, callback, context)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_leavesession == "on"]
+foreign {
     func alljoyn_busattachment_leavesession(bus: alljoyn_busattachment, sessionId: UInt32): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_leavesession == "on"]
+public unsafe func Windows_alljoyn_busattachment_leavesession(bus: alljoyn_busattachment, sessionId: UInt32): QStatusAbi {
+    return alljoyn_busattachment_leavesession(bus, sessionId)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_namehasowner == "on"]
+foreign {
     func alljoyn_busattachment_namehasowner(bus: alljoyn_busattachment, name: CPointer<UInt8>, hasOwner: CPointer<Int32>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_namehasowner == "on"]
+public unsafe func Windows_alljoyn_busattachment_namehasowner(bus: alljoyn_busattachment, name: CPointer<UInt8>, hasOwner: CPointer<Int32>): QStatusAbi {
+    return alljoyn_busattachment_namehasowner(bus, name, hasOwner)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_ping == "on"]
+foreign {
     func alljoyn_busattachment_ping(bus: alljoyn_busattachment, name: CPointer<UInt8>, timeout: UInt32): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_ping == "on"]
+public unsafe func Windows_alljoyn_busattachment_ping(bus: alljoyn_busattachment, name: CPointer<UInt8>, timeout: UInt32): QStatusAbi {
+    return alljoyn_busattachment_ping(bus, name, timeout)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_registeraboutlistener == "on"]
+foreign {
     func alljoyn_busattachment_registeraboutlistener(bus: alljoyn_busattachment, aboutListener: alljoyn_aboutlistener): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_registeraboutlistener == "on"]
+public unsafe func Windows_alljoyn_busattachment_registeraboutlistener(bus: alljoyn_busattachment, aboutListener: alljoyn_aboutlistener): Unit {
+    alljoyn_busattachment_registeraboutlistener(bus, aboutListener)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_registerapplicationstatelistener == "on"]
+foreign {
     func alljoyn_busattachment_registerapplicationstatelistener(bus: alljoyn_busattachment, listener: alljoyn_applicationstatelistener): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_registerapplicationstatelistener == "on"]
+public unsafe func Windows_alljoyn_busattachment_registerapplicationstatelistener(bus: alljoyn_busattachment, listener: alljoyn_applicationstatelistener): QStatusAbi {
+    return alljoyn_busattachment_registerapplicationstatelistener(bus, listener)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_registerbuslistener == "on"]
+foreign {
     func alljoyn_busattachment_registerbuslistener(bus: alljoyn_busattachment, listener: alljoyn_buslistener): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_registerbuslistener == "on"]
+public unsafe func Windows_alljoyn_busattachment_registerbuslistener(bus: alljoyn_busattachment, listener: alljoyn_buslistener): Unit {
+    alljoyn_busattachment_registerbuslistener(bus, listener)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_registerbusobject == "on"]
+foreign {
     func alljoyn_busattachment_registerbusobject(bus: alljoyn_busattachment, obj: alljoyn_busobject): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_registerbusobject == "on"]
+public unsafe func Windows_alljoyn_busattachment_registerbusobject(bus: alljoyn_busattachment, obj: alljoyn_busobject): QStatusAbi {
+    return alljoyn_busattachment_registerbusobject(bus, obj)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_registerbusobject_secure == "on"]
+foreign {
     func alljoyn_busattachment_registerbusobject_secure(bus: alljoyn_busattachment, obj: alljoyn_busobject): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_registerbusobject_secure == "on"]
+public unsafe func Windows_alljoyn_busattachment_registerbusobject_secure(bus: alljoyn_busattachment, obj: alljoyn_busobject): QStatusAbi {
+    return alljoyn_busattachment_registerbusobject_secure(bus, obj)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_registerkeystorelistener == "on"]
+foreign {
     func alljoyn_busattachment_registerkeystorelistener(bus: alljoyn_busattachment, listener: alljoyn_keystorelistener): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_registerkeystorelistener == "on"]
+public unsafe func Windows_alljoyn_busattachment_registerkeystorelistener(bus: alljoyn_busattachment, listener: alljoyn_keystorelistener): QStatusAbi {
+    return alljoyn_busattachment_registerkeystorelistener(bus, listener)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_registersignalhandler == "on"]
+foreign {
     func alljoyn_busattachment_registersignalhandler(bus: alljoyn_busattachment, signal_handler: alljoyn_messagereceiver_signalhandler_ptr, member: alljoyn_interfacedescription_memberAbi, srcPath: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_registersignalhandler == "on"]
+public unsafe func Windows_alljoyn_busattachment_registersignalhandler(bus: alljoyn_busattachment, signal_handler: alljoyn_messagereceiver_signalhandler_ptr, member: alljoyn_interfacedescription_memberAbi, srcPath: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_busattachment_registersignalhandler(bus, signal_handler, member, srcPath)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_registersignalhandlerwithrule == "on"]
+foreign {
     func alljoyn_busattachment_registersignalhandlerwithrule(bus: alljoyn_busattachment, signal_handler: alljoyn_messagereceiver_signalhandler_ptr, member: alljoyn_interfacedescription_memberAbi, matchRule: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_registersignalhandlerwithrule == "on"]
+public unsafe func Windows_alljoyn_busattachment_registersignalhandlerwithrule(bus: alljoyn_busattachment, signal_handler: alljoyn_messagereceiver_signalhandler_ptr, member: alljoyn_interfacedescription_memberAbi, matchRule: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_busattachment_registersignalhandlerwithrule(bus, signal_handler, member, matchRule)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_releasename == "on"]
+foreign {
     func alljoyn_busattachment_releasename(bus: alljoyn_busattachment, name: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_releasename == "on"]
+public unsafe func Windows_alljoyn_busattachment_releasename(bus: alljoyn_busattachment, name: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_busattachment_releasename(bus, name)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_reloadkeystore == "on"]
+foreign {
     func alljoyn_busattachment_reloadkeystore(bus: alljoyn_busattachment): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_reloadkeystore == "on"]
+public unsafe func Windows_alljoyn_busattachment_reloadkeystore(bus: alljoyn_busattachment): QStatusAbi {
+    return alljoyn_busattachment_reloadkeystore(bus)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_removematch == "on"]
+foreign {
     func alljoyn_busattachment_removematch(bus: alljoyn_busattachment, rule: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_removematch == "on"]
+public unsafe func Windows_alljoyn_busattachment_removematch(bus: alljoyn_busattachment, rule: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_busattachment_removematch(bus, rule)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_removesessionmember == "on"]
+foreign {
     func alljoyn_busattachment_removesessionmember(bus: alljoyn_busattachment, sessionId: UInt32, memberName: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_removesessionmember == "on"]
+public unsafe func Windows_alljoyn_busattachment_removesessionmember(bus: alljoyn_busattachment, sessionId: UInt32, memberName: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_busattachment_removesessionmember(bus, sessionId, memberName)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_requestname == "on"]
+foreign {
     func alljoyn_busattachment_requestname(bus: alljoyn_busattachment, requestedName: CPointer<UInt8>, flags: UInt32): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_requestname == "on"]
+public unsafe func Windows_alljoyn_busattachment_requestname(bus: alljoyn_busattachment, requestedName: CPointer<UInt8>, flags: UInt32): QStatusAbi {
+    return alljoyn_busattachment_requestname(bus, requestedName, flags)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_secureconnection == "on"]
+foreign {
     func alljoyn_busattachment_secureconnection(bus: alljoyn_busattachment, name: CPointer<UInt8>, forceAuth: Int32): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_secureconnection == "on"]
+public unsafe func Windows_alljoyn_busattachment_secureconnection(bus: alljoyn_busattachment, name: CPointer<UInt8>, forceAuth: Int32): QStatusAbi {
+    return alljoyn_busattachment_secureconnection(bus, name, forceAuth)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_secureconnectionasync == "on"]
+foreign {
     func alljoyn_busattachment_secureconnectionasync(bus: alljoyn_busattachment, name: CPointer<UInt8>, forceAuth: Int32): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_secureconnectionasync == "on"]
+public unsafe func Windows_alljoyn_busattachment_secureconnectionasync(bus: alljoyn_busattachment, name: CPointer<UInt8>, forceAuth: Int32): QStatusAbi {
+    return alljoyn_busattachment_secureconnectionasync(bus, name, forceAuth)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_setdaemondebug == "on"]
+foreign {
     func alljoyn_busattachment_setdaemondebug(bus: alljoyn_busattachment, module: CPointer<UInt8>, level: UInt32): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_setdaemondebug == "on"]
+public unsafe func Windows_alljoyn_busattachment_setdaemondebug(bus: alljoyn_busattachment, module: CPointer<UInt8>, level: UInt32): QStatusAbi {
+    return alljoyn_busattachment_setdaemondebug(bus, module, level)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_setkeyexpiration == "on"]
+foreign {
     func alljoyn_busattachment_setkeyexpiration(bus: alljoyn_busattachment, guid: CPointer<UInt8>, timeout: UInt32): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_setkeyexpiration == "on"]
+public unsafe func Windows_alljoyn_busattachment_setkeyexpiration(bus: alljoyn_busattachment, guid: CPointer<UInt8>, timeout: UInt32): QStatusAbi {
+    return alljoyn_busattachment_setkeyexpiration(bus, guid, timeout)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_setlinktimeout == "on"]
+foreign {
     func alljoyn_busattachment_setlinktimeout(bus: alljoyn_busattachment, sessionid: UInt32, linkTimeout: CPointer<UInt32>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_setlinktimeout == "on"]
+public unsafe func Windows_alljoyn_busattachment_setlinktimeout(bus: alljoyn_busattachment, sessionid: UInt32, linkTimeout: CPointer<UInt32>): QStatusAbi {
+    return alljoyn_busattachment_setlinktimeout(bus, sessionid, linkTimeout)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_setlinktimeoutasync == "on"]
+foreign {
     func alljoyn_busattachment_setlinktimeoutasync(bus: alljoyn_busattachment, sessionid: UInt32, linkTimeout: UInt32, callback: alljoyn_busattachment_setlinktimeoutcb_ptr, context: CPointer<Unit>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_setlinktimeoutasync == "on"]
+public unsafe func Windows_alljoyn_busattachment_setlinktimeoutasync(bus: alljoyn_busattachment, sessionid: UInt32, linkTimeout: UInt32, callback: alljoyn_busattachment_setlinktimeoutcb_ptr, context: CPointer<Unit>): QStatusAbi {
+    return alljoyn_busattachment_setlinktimeoutasync(bus, sessionid, linkTimeout, callback, context)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_setsessionlistener == "on"]
+foreign {
     func alljoyn_busattachment_setsessionlistener(bus: alljoyn_busattachment, sessionId: UInt32, listener: alljoyn_sessionlistener): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_setsessionlistener == "on"]
+public unsafe func Windows_alljoyn_busattachment_setsessionlistener(bus: alljoyn_busattachment, sessionId: UInt32, listener: alljoyn_sessionlistener): QStatusAbi {
+    return alljoyn_busattachment_setsessionlistener(bus, sessionId, listener)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_start == "on"]
+foreign {
     func alljoyn_busattachment_start(bus: alljoyn_busattachment): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_start == "on"]
+public unsafe func Windows_alljoyn_busattachment_start(bus: alljoyn_busattachment): QStatusAbi {
+    return alljoyn_busattachment_start(bus)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_stop == "on"]
+foreign {
     func alljoyn_busattachment_stop(bus: alljoyn_busattachment): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_stop == "on"]
+public unsafe func Windows_alljoyn_busattachment_stop(bus: alljoyn_busattachment): QStatusAbi {
+    return alljoyn_busattachment_stop(bus)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_unbindsessionport == "on"]
+foreign {
     func alljoyn_busattachment_unbindsessionport(bus: alljoyn_busattachment, sessionPort: UInt16): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_unbindsessionport == "on"]
+public unsafe func Windows_alljoyn_busattachment_unbindsessionport(bus: alljoyn_busattachment, sessionPort: UInt16): QStatusAbi {
+    return alljoyn_busattachment_unbindsessionport(bus, sessionPort)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_unregisteraboutlistener == "on"]
+foreign {
     func alljoyn_busattachment_unregisteraboutlistener(bus: alljoyn_busattachment, aboutListener: alljoyn_aboutlistener): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_unregisteraboutlistener == "on"]
+public unsafe func Windows_alljoyn_busattachment_unregisteraboutlistener(bus: alljoyn_busattachment, aboutListener: alljoyn_aboutlistener): Unit {
+    alljoyn_busattachment_unregisteraboutlistener(bus, aboutListener)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_unregisterallaboutlisteners == "on"]
+foreign {
     func alljoyn_busattachment_unregisterallaboutlisteners(bus: alljoyn_busattachment): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_unregisterallaboutlisteners == "on"]
+public unsafe func Windows_alljoyn_busattachment_unregisterallaboutlisteners(bus: alljoyn_busattachment): Unit {
+    alljoyn_busattachment_unregisterallaboutlisteners(bus)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_unregisterallhandlers == "on"]
+foreign {
     func alljoyn_busattachment_unregisterallhandlers(bus: alljoyn_busattachment): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_unregisterallhandlers == "on"]
+public unsafe func Windows_alljoyn_busattachment_unregisterallhandlers(bus: alljoyn_busattachment): QStatusAbi {
+    return alljoyn_busattachment_unregisterallhandlers(bus)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_unregisterapplicationstatelistener == "on"]
+foreign {
     func alljoyn_busattachment_unregisterapplicationstatelistener(bus: alljoyn_busattachment, listener: alljoyn_applicationstatelistener): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_unregisterapplicationstatelistener == "on"]
+public unsafe func Windows_alljoyn_busattachment_unregisterapplicationstatelistener(bus: alljoyn_busattachment, listener: alljoyn_applicationstatelistener): QStatusAbi {
+    return alljoyn_busattachment_unregisterapplicationstatelistener(bus, listener)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_unregisterbuslistener == "on"]
+foreign {
     func alljoyn_busattachment_unregisterbuslistener(bus: alljoyn_busattachment, listener: alljoyn_buslistener): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_unregisterbuslistener == "on"]
+public unsafe func Windows_alljoyn_busattachment_unregisterbuslistener(bus: alljoyn_busattachment, listener: alljoyn_buslistener): Unit {
+    alljoyn_busattachment_unregisterbuslistener(bus, listener)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_unregisterbusobject == "on"]
+foreign {
     func alljoyn_busattachment_unregisterbusobject(bus: alljoyn_busattachment, object: alljoyn_busobject): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_unregisterbusobject == "on"]
+public unsafe func Windows_alljoyn_busattachment_unregisterbusobject(bus: alljoyn_busattachment, object: alljoyn_busobject): Unit {
+    alljoyn_busattachment_unregisterbusobject(bus, object)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_unregistersignalhandler == "on"]
+foreign {
     func alljoyn_busattachment_unregistersignalhandler(bus: alljoyn_busattachment, signal_handler: alljoyn_messagereceiver_signalhandler_ptr, member: alljoyn_interfacedescription_memberAbi, srcPath: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_unregistersignalhandler == "on"]
+public unsafe func Windows_alljoyn_busattachment_unregistersignalhandler(bus: alljoyn_busattachment, signal_handler: alljoyn_messagereceiver_signalhandler_ptr, member: alljoyn_interfacedescription_memberAbi, srcPath: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_busattachment_unregistersignalhandler(bus, signal_handler, member, srcPath)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_unregistersignalhandlerwithrule == "on"]
+foreign {
     func alljoyn_busattachment_unregistersignalhandlerwithrule(bus: alljoyn_busattachment, signal_handler: alljoyn_messagereceiver_signalhandler_ptr, member: alljoyn_interfacedescription_memberAbi, matchRule: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_unregistersignalhandlerwithrule == "on"]
+public unsafe func Windows_alljoyn_busattachment_unregistersignalhandlerwithrule(bus: alljoyn_busattachment, signal_handler: alljoyn_messagereceiver_signalhandler_ptr, member: alljoyn_interfacedescription_memberAbi, matchRule: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_busattachment_unregistersignalhandlerwithrule(bus, signal_handler, member, matchRule)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_whoimplements_interface == "on"]
+foreign {
     func alljoyn_busattachment_whoimplements_interface(bus: alljoyn_busattachment, implementsInterface: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_whoimplements_interface == "on"]
+public unsafe func Windows_alljoyn_busattachment_whoimplements_interface(bus: alljoyn_busattachment, implementsInterface: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_busattachment_whoimplements_interface(bus, implementsInterface)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_whoimplements_interfaces == "on"]
+foreign {
     func alljoyn_busattachment_whoimplements_interfaces(bus: alljoyn_busattachment, implementsInterfaces: CPointer<CPointer<Int8>>, numberInterfaces: UIntNative): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busattachment_whoimplements_interfaces == "on"]
+public unsafe func Windows_alljoyn_busattachment_whoimplements_interfaces(bus: alljoyn_busattachment, implementsInterfaces: CPointer<CPointer<Int8>>, numberInterfaces: UIntNative): QStatusAbi {
+    return alljoyn_busattachment_whoimplements_interfaces(bus, implementsInterfaces, numberInterfaces)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_buslistener_create == "on"]
+foreign {
     func alljoyn_buslistener_create(callbacks: CPointer<alljoyn_buslistener_callbacksAbi>, context: CPointer<Unit>): alljoyn_buslistener
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_buslistener_create == "on"]
+public unsafe func Windows_alljoyn_buslistener_create(callbacks: CPointer<alljoyn_buslistener_callbacksAbi>, context: CPointer<Unit>): alljoyn_buslistener {
+    return alljoyn_buslistener_create(callbacks, context)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_buslistener_destroy == "on"]
+foreign {
     func alljoyn_buslistener_destroy(listener: alljoyn_buslistener): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_buslistener_destroy == "on"]
+public unsafe func Windows_alljoyn_buslistener_destroy(listener: alljoyn_buslistener): Unit {
+    alljoyn_buslistener_destroy(listener)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_addinterface == "on"]
+foreign {
     func alljoyn_busobject_addinterface(bus: alljoyn_busobject, iface: alljoyn_interfacedescription): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_addinterface == "on"]
+public unsafe func Windows_alljoyn_busobject_addinterface(bus: alljoyn_busobject, iface: alljoyn_interfacedescription): QStatusAbi {
+    return alljoyn_busobject_addinterface(bus, iface)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_addinterface_announced == "on"]
+foreign {
     func alljoyn_busobject_addinterface_announced(bus: alljoyn_busobject, iface: alljoyn_interfacedescription): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_addinterface_announced == "on"]
+public unsafe func Windows_alljoyn_busobject_addinterface_announced(bus: alljoyn_busobject, iface: alljoyn_interfacedescription): QStatusAbi {
+    return alljoyn_busobject_addinterface_announced(bus, iface)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_addmethodhandler == "on"]
+foreign {
     func alljoyn_busobject_addmethodhandler(bus: alljoyn_busobject, member: alljoyn_interfacedescription_memberAbi, handler: alljoyn_messagereceiver_methodhandler_ptr, context: CPointer<Unit>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_addmethodhandler == "on"]
+public unsafe func Windows_alljoyn_busobject_addmethodhandler(bus: alljoyn_busobject, member: alljoyn_interfacedescription_memberAbi, handler: alljoyn_messagereceiver_methodhandler_ptr, context: CPointer<Unit>): QStatusAbi {
+    return alljoyn_busobject_addmethodhandler(bus, member, handler, context)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_addmethodhandlers == "on"]
+foreign {
     func alljoyn_busobject_addmethodhandlers(bus: alljoyn_busobject, entries: CPointer<alljoyn_busobject_methodentryAbi>, numEntries: UIntNative): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_addmethodhandlers == "on"]
+public unsafe func Windows_alljoyn_busobject_addmethodhandlers(bus: alljoyn_busobject, entries: CPointer<alljoyn_busobject_methodentryAbi>, numEntries: UIntNative): QStatusAbi {
+    return alljoyn_busobject_addmethodhandlers(bus, entries, numEntries)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_cancelsessionlessmessage == "on"]
+foreign {
     func alljoyn_busobject_cancelsessionlessmessage(bus: alljoyn_busobject, msg: alljoyn_message): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_cancelsessionlessmessage == "on"]
+public unsafe func Windows_alljoyn_busobject_cancelsessionlessmessage(bus: alljoyn_busobject, msg: alljoyn_message): QStatusAbi {
+    return alljoyn_busobject_cancelsessionlessmessage(bus, msg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_cancelsessionlessmessage_serial == "on"]
+foreign {
     func alljoyn_busobject_cancelsessionlessmessage_serial(bus: alljoyn_busobject, serialNumber: UInt32): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_cancelsessionlessmessage_serial == "on"]
+public unsafe func Windows_alljoyn_busobject_cancelsessionlessmessage_serial(bus: alljoyn_busobject, serialNumber: UInt32): QStatusAbi {
+    return alljoyn_busobject_cancelsessionlessmessage_serial(bus, serialNumber)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_create == "on"]
+foreign {
     func alljoyn_busobject_create(path: CPointer<UInt8>, isPlaceholder: Int32, callbacks_in: CPointer<alljoyn_busobject_callbacksAbi>, context_in: CPointer<Unit>): alljoyn_busobject
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_create == "on"]
+public unsafe func Windows_alljoyn_busobject_create(path: CPointer<UInt8>, isPlaceholder: Int32, callbacks_in: CPointer<alljoyn_busobject_callbacksAbi>, context_in: CPointer<Unit>): alljoyn_busobject {
+    return alljoyn_busobject_create(path, isPlaceholder, callbacks_in, context_in)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_destroy == "on"]
+foreign {
     func alljoyn_busobject_destroy(bus: alljoyn_busobject): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_destroy == "on"]
+public unsafe func Windows_alljoyn_busobject_destroy(bus: alljoyn_busobject): Unit {
+    alljoyn_busobject_destroy(bus)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_emitpropertieschanged == "on"]
+foreign {
     func alljoyn_busobject_emitpropertieschanged(bus: alljoyn_busobject, ifcName: CPointer<UInt8>, propNames: CPointer<CPointer<Int8>>, numProps: UIntNative, id: UInt32): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_emitpropertieschanged == "on"]
+public unsafe func Windows_alljoyn_busobject_emitpropertieschanged(bus: alljoyn_busobject, ifcName: CPointer<UInt8>, propNames: CPointer<CPointer<Int8>>, numProps: UIntNative, id: UInt32): Unit {
+    alljoyn_busobject_emitpropertieschanged(bus, ifcName, propNames, numProps, id)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_emitpropertychanged == "on"]
+foreign {
     func alljoyn_busobject_emitpropertychanged(bus: alljoyn_busobject, ifcName: CPointer<UInt8>, propName: CPointer<UInt8>, val: alljoyn_msgarg, id: UInt32): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_emitpropertychanged == "on"]
+public unsafe func Windows_alljoyn_busobject_emitpropertychanged(bus: alljoyn_busobject, ifcName: CPointer<UInt8>, propName: CPointer<UInt8>, val: alljoyn_msgarg, id: UInt32): Unit {
+    alljoyn_busobject_emitpropertychanged(bus, ifcName, propName, val, id)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_getannouncedinterfacenames == "on"]
+foreign {
     func alljoyn_busobject_getannouncedinterfacenames(bus: alljoyn_busobject, interfaces: CPointer<CPointer<Int8>>, numInterfaces: UIntNative): UIntNative
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_getannouncedinterfacenames == "on"]
+public unsafe func Windows_alljoyn_busobject_getannouncedinterfacenames(bus: alljoyn_busobject, interfaces: CPointer<CPointer<Int8>>, numInterfaces: UIntNative): UIntNative {
+    return alljoyn_busobject_getannouncedinterfacenames(bus, interfaces, numInterfaces)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_getbusattachment == "on"]
+foreign {
     func alljoyn_busobject_getbusattachment(bus: alljoyn_busobject): alljoyn_busattachment
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_getbusattachment == "on"]
+public unsafe func Windows_alljoyn_busobject_getbusattachment(bus: alljoyn_busobject): alljoyn_busattachment {
+    return alljoyn_busobject_getbusattachment(bus)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_getname == "on"]
+foreign {
     func alljoyn_busobject_getname(bus: alljoyn_busobject, buffer: CPointer<UInt8>, bufferSz: UIntNative): UIntNative
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_getname == "on"]
+public unsafe func Windows_alljoyn_busobject_getname(bus: alljoyn_busobject, buffer: CPointer<UInt8>, bufferSz: UIntNative): UIntNative {
+    return alljoyn_busobject_getname(bus, buffer, bufferSz)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_getpath == "on"]
+foreign {
     func alljoyn_busobject_getpath(bus: alljoyn_busobject): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_getpath == "on"]
+public unsafe func Windows_alljoyn_busobject_getpath(bus: alljoyn_busobject): CPointer<UInt8> {
+    return alljoyn_busobject_getpath(bus)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_issecure == "on"]
+foreign {
     func alljoyn_busobject_issecure(bus: alljoyn_busobject): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_issecure == "on"]
+public unsafe func Windows_alljoyn_busobject_issecure(bus: alljoyn_busobject): Int32 {
+    return alljoyn_busobject_issecure(bus)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_methodreply_args == "on"]
+foreign {
     func alljoyn_busobject_methodreply_args(bus: alljoyn_busobject, msg: alljoyn_message, args: alljoyn_msgarg, numArgs: UIntNative): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_methodreply_args == "on"]
+public unsafe func Windows_alljoyn_busobject_methodreply_args(bus: alljoyn_busobject, msg: alljoyn_message, args: alljoyn_msgarg, numArgs: UIntNative): QStatusAbi {
+    return alljoyn_busobject_methodreply_args(bus, msg, args, numArgs)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_methodreply_err == "on"]
+foreign {
     func alljoyn_busobject_methodreply_err(bus: alljoyn_busobject, msg: alljoyn_message, error: CPointer<UInt8>, errorMessage: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_methodreply_err == "on"]
+public unsafe func Windows_alljoyn_busobject_methodreply_err(bus: alljoyn_busobject, msg: alljoyn_message, error: CPointer<UInt8>, errorMessage: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_busobject_methodreply_err(bus, msg, error, errorMessage)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_methodreply_status == "on"]
+foreign {
     func alljoyn_busobject_methodreply_status(bus: alljoyn_busobject, msg: alljoyn_message, status: QStatusAbi): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_methodreply_status == "on"]
+public unsafe func Windows_alljoyn_busobject_methodreply_status(bus: alljoyn_busobject, msg: alljoyn_message, status: QStatusAbi): QStatusAbi {
+    return alljoyn_busobject_methodreply_status(bus, msg, status)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_setannounceflag == "on"]
+foreign {
     func alljoyn_busobject_setannounceflag(bus: alljoyn_busobject, iface: alljoyn_interfacedescription, isAnnounced: alljoyn_about_announceflagAbi): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_setannounceflag == "on"]
+public unsafe func Windows_alljoyn_busobject_setannounceflag(bus: alljoyn_busobject, iface: alljoyn_interfacedescription, isAnnounced: alljoyn_about_announceflagAbi): QStatusAbi {
+    return alljoyn_busobject_setannounceflag(bus, iface, isAnnounced)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_signal == "on"]
+foreign {
     func alljoyn_busobject_signal(bus: alljoyn_busobject, destination: CPointer<UInt8>, sessionId: UInt32, signal: alljoyn_interfacedescription_memberAbi, args: alljoyn_msgarg, numArgs: UIntNative, timeToLive: UInt16, flags: UInt8, msg: alljoyn_message): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_busobject_signal == "on"]
+public unsafe func Windows_alljoyn_busobject_signal(bus: alljoyn_busobject, destination: CPointer<UInt8>, sessionId: UInt32, signal: alljoyn_interfacedescription_memberAbi, args: alljoyn_msgarg, numArgs: UIntNative, timeToLive: UInt16, flags: UInt8, msg: alljoyn_message): QStatusAbi {
+    return alljoyn_busobject_signal(bus, destination, sessionId, signal, args, numArgs, timeToLive, flags, msg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_credentials_clear == "on"]
+foreign {
     func alljoyn_credentials_clear(cred: alljoyn_credentials): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_credentials_clear == "on"]
+public unsafe func Windows_alljoyn_credentials_clear(cred: alljoyn_credentials): Unit {
+    alljoyn_credentials_clear(cred)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_credentials_create == "on"]
+foreign {
     func alljoyn_credentials_create(): alljoyn_credentials
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_credentials_create == "on"]
+public unsafe func Windows_alljoyn_credentials_create(): alljoyn_credentials {
+    return alljoyn_credentials_create()
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_credentials_destroy == "on"]
+foreign {
     func alljoyn_credentials_destroy(cred: alljoyn_credentials): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_credentials_destroy == "on"]
+public unsafe func Windows_alljoyn_credentials_destroy(cred: alljoyn_credentials): Unit {
+    alljoyn_credentials_destroy(cred)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_credentials_getcertchain == "on"]
+foreign {
     func alljoyn_credentials_getcertchain(cred: alljoyn_credentials): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_credentials_getcertchain == "on"]
+public unsafe func Windows_alljoyn_credentials_getcertchain(cred: alljoyn_credentials): CPointer<UInt8> {
+    return alljoyn_credentials_getcertchain(cred)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_credentials_getexpiration == "on"]
+foreign {
     func alljoyn_credentials_getexpiration(cred: alljoyn_credentials): UInt32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_credentials_getexpiration == "on"]
+public unsafe func Windows_alljoyn_credentials_getexpiration(cred: alljoyn_credentials): UInt32 {
+    return alljoyn_credentials_getexpiration(cred)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_credentials_getlogonentry == "on"]
+foreign {
     func alljoyn_credentials_getlogonentry(cred: alljoyn_credentials): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_credentials_getlogonentry == "on"]
+public unsafe func Windows_alljoyn_credentials_getlogonentry(cred: alljoyn_credentials): CPointer<UInt8> {
+    return alljoyn_credentials_getlogonentry(cred)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_credentials_getpassword == "on"]
+foreign {
     func alljoyn_credentials_getpassword(cred: alljoyn_credentials): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_credentials_getpassword == "on"]
+public unsafe func Windows_alljoyn_credentials_getpassword(cred: alljoyn_credentials): CPointer<UInt8> {
+    return alljoyn_credentials_getpassword(cred)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_credentials_getprivateKey == "on"]
+foreign {
     func alljoyn_credentials_getprivateKey(cred: alljoyn_credentials): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_credentials_getprivateKey == "on"]
+public unsafe func Windows_alljoyn_credentials_getprivateKey(cred: alljoyn_credentials): CPointer<UInt8> {
+    return alljoyn_credentials_getprivateKey(cred)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_credentials_getusername == "on"]
+foreign {
     func alljoyn_credentials_getusername(cred: alljoyn_credentials): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_credentials_getusername == "on"]
+public unsafe func Windows_alljoyn_credentials_getusername(cred: alljoyn_credentials): CPointer<UInt8> {
+    return alljoyn_credentials_getusername(cred)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_credentials_isset == "on"]
+foreign {
     func alljoyn_credentials_isset(cred: alljoyn_credentials, creds: UInt16): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_credentials_isset == "on"]
+public unsafe func Windows_alljoyn_credentials_isset(cred: alljoyn_credentials, creds: UInt16): Int32 {
+    return alljoyn_credentials_isset(cred, creds)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_credentials_setcertchain == "on"]
+foreign {
     func alljoyn_credentials_setcertchain(cred: alljoyn_credentials, certChain: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_credentials_setcertchain == "on"]
+public unsafe func Windows_alljoyn_credentials_setcertchain(cred: alljoyn_credentials, certChain: CPointer<UInt8>): Unit {
+    alljoyn_credentials_setcertchain(cred, certChain)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_credentials_setexpiration == "on"]
+foreign {
     func alljoyn_credentials_setexpiration(cred: alljoyn_credentials, expiration: UInt32): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_credentials_setexpiration == "on"]
+public unsafe func Windows_alljoyn_credentials_setexpiration(cred: alljoyn_credentials, expiration: UInt32): Unit {
+    alljoyn_credentials_setexpiration(cred, expiration)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_credentials_setlogonentry == "on"]
+foreign {
     func alljoyn_credentials_setlogonentry(cred: alljoyn_credentials, logonEntry: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_credentials_setlogonentry == "on"]
+public unsafe func Windows_alljoyn_credentials_setlogonentry(cred: alljoyn_credentials, logonEntry: CPointer<UInt8>): Unit {
+    alljoyn_credentials_setlogonentry(cred, logonEntry)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_credentials_setpassword == "on"]
+foreign {
     func alljoyn_credentials_setpassword(cred: alljoyn_credentials, pwd: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_credentials_setpassword == "on"]
+public unsafe func Windows_alljoyn_credentials_setpassword(cred: alljoyn_credentials, pwd: CPointer<UInt8>): Unit {
+    alljoyn_credentials_setpassword(cred, pwd)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_credentials_setprivatekey == "on"]
+foreign {
     func alljoyn_credentials_setprivatekey(cred: alljoyn_credentials, pk: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_credentials_setprivatekey == "on"]
+public unsafe func Windows_alljoyn_credentials_setprivatekey(cred: alljoyn_credentials, pk: CPointer<UInt8>): Unit {
+    alljoyn_credentials_setprivatekey(cred, pk)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_credentials_setusername == "on"]
+foreign {
     func alljoyn_credentials_setusername(cred: alljoyn_credentials, userName: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_credentials_setusername == "on"]
+public unsafe func Windows_alljoyn_credentials_setusername(cred: alljoyn_credentials, userName: CPointer<UInt8>): Unit {
+    alljoyn_credentials_setusername(cred, userName)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_getbuildinfo == "on"]
+foreign {
     func alljoyn_getbuildinfo(): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_getbuildinfo == "on"]
+public unsafe func Windows_alljoyn_getbuildinfo(): CPointer<UInt8> {
+    return alljoyn_getbuildinfo()
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_getnumericversion == "on"]
+foreign {
     func alljoyn_getnumericversion(): UInt32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_getnumericversion == "on"]
+public unsafe func Windows_alljoyn_getnumericversion(): UInt32 {
+    return alljoyn_getnumericversion()
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_getversion == "on"]
+foreign {
     func alljoyn_getversion(): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_getversion == "on"]
+public unsafe func Windows_alljoyn_getversion(): CPointer<UInt8> {
+    return alljoyn_getversion()
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_init == "on"]
+foreign {
     func alljoyn_init(): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_init == "on"]
+public unsafe func Windows_alljoyn_init(): QStatusAbi {
+    return alljoyn_init()
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_activate == "on"]
+foreign {
     func alljoyn_interfacedescription_activate(iface: alljoyn_interfacedescription): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_activate == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_activate(iface: alljoyn_interfacedescription): Unit {
+    alljoyn_interfacedescription_activate(iface)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_addannotation == "on"]
+foreign {
     func alljoyn_interfacedescription_addannotation(iface: alljoyn_interfacedescription, name: CPointer<UInt8>, value: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_addannotation == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_addannotation(iface: alljoyn_interfacedescription, name: CPointer<UInt8>, value: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_interfacedescription_addannotation(iface, name, value)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_addargannotation == "on"]
+foreign {
     func alljoyn_interfacedescription_addargannotation(iface: alljoyn_interfacedescription, member: CPointer<UInt8>, argName: CPointer<UInt8>, name: CPointer<UInt8>, value: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_addargannotation == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_addargannotation(iface: alljoyn_interfacedescription, member: CPointer<UInt8>, argName: CPointer<UInt8>, name: CPointer<UInt8>, value: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_interfacedescription_addargannotation(iface, member, argName, name, value)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_addmember == "on"]
+foreign {
     func alljoyn_interfacedescription_addmember(iface: alljoyn_interfacedescription, type_: alljoyn_messagetypeAbi, name: CPointer<UInt8>, inputSig: CPointer<UInt8>, outSig: CPointer<UInt8>, argNames: CPointer<UInt8>, annotation: UInt8): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_addmember == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_addmember(iface: alljoyn_interfacedescription, type_: alljoyn_messagetypeAbi, name: CPointer<UInt8>, inputSig: CPointer<UInt8>, outSig: CPointer<UInt8>, argNames: CPointer<UInt8>, annotation: UInt8): QStatusAbi {
+    return alljoyn_interfacedescription_addmember(iface, type_, name, inputSig, outSig, argNames, annotation)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_addmemberannotation == "on"]
+foreign {
     func alljoyn_interfacedescription_addmemberannotation(iface: alljoyn_interfacedescription, member: CPointer<UInt8>, name: CPointer<UInt8>, value: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_addmemberannotation == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_addmemberannotation(iface: alljoyn_interfacedescription, member: CPointer<UInt8>, name: CPointer<UInt8>, value: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_interfacedescription_addmemberannotation(iface, member, name, value)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_addmethod == "on"]
+foreign {
     func alljoyn_interfacedescription_addmethod(iface: alljoyn_interfacedescription, name: CPointer<UInt8>, inputSig: CPointer<UInt8>, outSig: CPointer<UInt8>, argNames: CPointer<UInt8>, annotation: UInt8, accessPerms: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_addmethod == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_addmethod(iface: alljoyn_interfacedescription, name: CPointer<UInt8>, inputSig: CPointer<UInt8>, outSig: CPointer<UInt8>, argNames: CPointer<UInt8>, annotation: UInt8, accessPerms: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_interfacedescription_addmethod(iface, name, inputSig, outSig, argNames, annotation, accessPerms)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_addproperty == "on"]
+foreign {
     func alljoyn_interfacedescription_addproperty(iface: alljoyn_interfacedescription, name: CPointer<UInt8>, signature: CPointer<UInt8>, access: UInt8): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_addproperty == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_addproperty(iface: alljoyn_interfacedescription, name: CPointer<UInt8>, signature: CPointer<UInt8>, access: UInt8): QStatusAbi {
+    return alljoyn_interfacedescription_addproperty(iface, name, signature, access)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_addpropertyannotation == "on"]
+foreign {
     func alljoyn_interfacedescription_addpropertyannotation(iface: alljoyn_interfacedescription, property: CPointer<UInt8>, name: CPointer<UInt8>, value: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_addpropertyannotation == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_addpropertyannotation(iface: alljoyn_interfacedescription, property: CPointer<UInt8>, name: CPointer<UInt8>, value: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_interfacedescription_addpropertyannotation(iface, property, name, value)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_addsignal == "on"]
+foreign {
     func alljoyn_interfacedescription_addsignal(iface: alljoyn_interfacedescription, name: CPointer<UInt8>, sig: CPointer<UInt8>, argNames: CPointer<UInt8>, annotation: UInt8, accessPerms: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_addsignal == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_addsignal(iface: alljoyn_interfacedescription, name: CPointer<UInt8>, sig: CPointer<UInt8>, argNames: CPointer<UInt8>, annotation: UInt8, accessPerms: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_interfacedescription_addsignal(iface, name, sig, argNames, annotation, accessPerms)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_eql == "on"]
+foreign {
     func alljoyn_interfacedescription_eql(one: alljoyn_interfacedescription, other: alljoyn_interfacedescription): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_eql == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_eql(one: alljoyn_interfacedescription, other: alljoyn_interfacedescription): Int32 {
+    return alljoyn_interfacedescription_eql(one, other)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getannotation == "on"]
+foreign {
     func alljoyn_interfacedescription_getannotation(iface: alljoyn_interfacedescription, name: CPointer<UInt8>, value: CPointer<UInt8>, value_size: CPointer<UIntNative>): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getannotation == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_getannotation(iface: alljoyn_interfacedescription, name: CPointer<UInt8>, value: CPointer<UInt8>, value_size: CPointer<UIntNative>): Int32 {
+    return alljoyn_interfacedescription_getannotation(iface, name, value, value_size)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getannotationatindex == "on"]
+foreign {
     func alljoyn_interfacedescription_getannotationatindex(iface: alljoyn_interfacedescription, index: UIntNative, name: CPointer<UInt8>, name_size: CPointer<UIntNative>, value: CPointer<UInt8>, value_size: CPointer<UIntNative>): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getannotationatindex == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_getannotationatindex(iface: alljoyn_interfacedescription, index: UIntNative, name: CPointer<UInt8>, name_size: CPointer<UIntNative>, value: CPointer<UInt8>, value_size: CPointer<UIntNative>): Unit {
+    alljoyn_interfacedescription_getannotationatindex(iface, index, name, name_size, value, value_size)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getannotationscount == "on"]
+foreign {
     func alljoyn_interfacedescription_getannotationscount(iface: alljoyn_interfacedescription): UIntNative
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getannotationscount == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_getannotationscount(iface: alljoyn_interfacedescription): UIntNative {
+    return alljoyn_interfacedescription_getannotationscount(iface)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getargdescriptionforlanguage == "on"]
+foreign {
     func alljoyn_interfacedescription_getargdescriptionforlanguage(iface: alljoyn_interfacedescription, member: CPointer<UInt8>, arg: CPointer<UInt8>, description: CPointer<UInt8>, maxLanguageLength: UIntNative, languageTag: CPointer<UInt8>): UIntNative
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getargdescriptionforlanguage == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_getargdescriptionforlanguage(iface: alljoyn_interfacedescription, member: CPointer<UInt8>, arg: CPointer<UInt8>, description: CPointer<UInt8>, maxLanguageLength: UIntNative, languageTag: CPointer<UInt8>): UIntNative {
+    return alljoyn_interfacedescription_getargdescriptionforlanguage(iface, member, arg, description, maxLanguageLength, languageTag)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getdescriptionforlanguage == "on"]
+foreign {
     func alljoyn_interfacedescription_getdescriptionforlanguage(iface: alljoyn_interfacedescription, description: CPointer<UInt8>, maxLanguageLength: UIntNative, languageTag: CPointer<UInt8>): UIntNative
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getdescriptionforlanguage == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_getdescriptionforlanguage(iface: alljoyn_interfacedescription, description: CPointer<UInt8>, maxLanguageLength: UIntNative, languageTag: CPointer<UInt8>): UIntNative {
+    return alljoyn_interfacedescription_getdescriptionforlanguage(iface, description, maxLanguageLength, languageTag)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getdescriptionlanguages == "on"]
+foreign {
     func alljoyn_interfacedescription_getdescriptionlanguages(iface: alljoyn_interfacedescription, languages: CPointer<CPointer<Int8>>, size: UIntNative): UIntNative
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getdescriptionlanguages == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_getdescriptionlanguages(iface: alljoyn_interfacedescription, languages: CPointer<CPointer<Int8>>, size: UIntNative): UIntNative {
+    return alljoyn_interfacedescription_getdescriptionlanguages(iface, languages, size)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getdescriptionlanguages2 == "on"]
+foreign {
     func alljoyn_interfacedescription_getdescriptionlanguages2(iface: alljoyn_interfacedescription, languages: CPointer<UInt8>, languagesSize: UIntNative): UIntNative
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getdescriptionlanguages2 == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_getdescriptionlanguages2(iface: alljoyn_interfacedescription, languages: CPointer<UInt8>, languagesSize: UIntNative): UIntNative {
+    return alljoyn_interfacedescription_getdescriptionlanguages2(iface, languages, languagesSize)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getdescriptiontranslationcallback == "on"]
+foreign {
     func alljoyn_interfacedescription_getdescriptiontranslationcallback(iface: alljoyn_interfacedescription): alljoyn_interfacedescription_translation_callback_ptr
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getdescriptiontranslationcallback == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_getdescriptiontranslationcallback(iface: alljoyn_interfacedescription): alljoyn_interfacedescription_translation_callback_ptr {
+    return alljoyn_interfacedescription_getdescriptiontranslationcallback(iface)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getmember == "on"]
+foreign {
     func alljoyn_interfacedescription_getmember(iface: alljoyn_interfacedescription, name: CPointer<UInt8>, member: CPointer<alljoyn_interfacedescription_memberAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getmember == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_getmember(iface: alljoyn_interfacedescription, name: CPointer<UInt8>, member: CPointer<alljoyn_interfacedescription_memberAbi>): Int32 {
+    return alljoyn_interfacedescription_getmember(iface, name, member)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getmemberannotation == "on"]
+foreign {
     func alljoyn_interfacedescription_getmemberannotation(iface: alljoyn_interfacedescription, member: CPointer<UInt8>, name: CPointer<UInt8>, value: CPointer<UInt8>, value_size: CPointer<UIntNative>): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getmemberannotation == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_getmemberannotation(iface: alljoyn_interfacedescription, member: CPointer<UInt8>, name: CPointer<UInt8>, value: CPointer<UInt8>, value_size: CPointer<UIntNative>): Int32 {
+    return alljoyn_interfacedescription_getmemberannotation(iface, member, name, value, value_size)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getmemberargannotation == "on"]
+foreign {
     func alljoyn_interfacedescription_getmemberargannotation(iface: alljoyn_interfacedescription, member: CPointer<UInt8>, argName: CPointer<UInt8>, name: CPointer<UInt8>, value: CPointer<UInt8>, value_size: CPointer<UIntNative>): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getmemberargannotation == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_getmemberargannotation(iface: alljoyn_interfacedescription, member: CPointer<UInt8>, argName: CPointer<UInt8>, name: CPointer<UInt8>, value: CPointer<UInt8>, value_size: CPointer<UIntNative>): Int32 {
+    return alljoyn_interfacedescription_getmemberargannotation(iface, member, argName, name, value, value_size)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getmemberdescriptionforlanguage == "on"]
+foreign {
     func alljoyn_interfacedescription_getmemberdescriptionforlanguage(iface: alljoyn_interfacedescription, member: CPointer<UInt8>, description: CPointer<UInt8>, maxLanguageLength: UIntNative, languageTag: CPointer<UInt8>): UIntNative
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getmemberdescriptionforlanguage == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_getmemberdescriptionforlanguage(iface: alljoyn_interfacedescription, member: CPointer<UInt8>, description: CPointer<UInt8>, maxLanguageLength: UIntNative, languageTag: CPointer<UInt8>): UIntNative {
+    return alljoyn_interfacedescription_getmemberdescriptionforlanguage(iface, member, description, maxLanguageLength, languageTag)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getmembers == "on"]
+foreign {
     func alljoyn_interfacedescription_getmembers(iface: alljoyn_interfacedescription, members: CPointer<alljoyn_interfacedescription_memberAbi>, numMembers: UIntNative): UIntNative
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getmembers == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_getmembers(iface: alljoyn_interfacedescription, members: CPointer<alljoyn_interfacedescription_memberAbi>, numMembers: UIntNative): UIntNative {
+    return alljoyn_interfacedescription_getmembers(iface, members, numMembers)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getmethod == "on"]
+foreign {
     func alljoyn_interfacedescription_getmethod(iface: alljoyn_interfacedescription, name: CPointer<UInt8>, member: CPointer<alljoyn_interfacedescription_memberAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getmethod == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_getmethod(iface: alljoyn_interfacedescription, name: CPointer<UInt8>, member: CPointer<alljoyn_interfacedescription_memberAbi>): Int32 {
+    return alljoyn_interfacedescription_getmethod(iface, name, member)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getname == "on"]
+foreign {
     func alljoyn_interfacedescription_getname(iface: alljoyn_interfacedescription): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getname == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_getname(iface: alljoyn_interfacedescription): CPointer<UInt8> {
+    return alljoyn_interfacedescription_getname(iface)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getproperties == "on"]
+foreign {
     func alljoyn_interfacedescription_getproperties(iface: alljoyn_interfacedescription, props: CPointer<alljoyn_interfacedescription_propertyAbi>, numProps: UIntNative): UIntNative
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getproperties == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_getproperties(iface: alljoyn_interfacedescription, props: CPointer<alljoyn_interfacedescription_propertyAbi>, numProps: UIntNative): UIntNative {
+    return alljoyn_interfacedescription_getproperties(iface, props, numProps)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getproperty == "on"]
+foreign {
     func alljoyn_interfacedescription_getproperty(iface: alljoyn_interfacedescription, name: CPointer<UInt8>, property: CPointer<alljoyn_interfacedescription_propertyAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getproperty == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_getproperty(iface: alljoyn_interfacedescription, name: CPointer<UInt8>, property: CPointer<alljoyn_interfacedescription_propertyAbi>): Int32 {
+    return alljoyn_interfacedescription_getproperty(iface, name, property)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getpropertyannotation == "on"]
+foreign {
     func alljoyn_interfacedescription_getpropertyannotation(iface: alljoyn_interfacedescription, property: CPointer<UInt8>, name: CPointer<UInt8>, value: CPointer<UInt8>, str_size: CPointer<UIntNative>): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getpropertyannotation == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_getpropertyannotation(iface: alljoyn_interfacedescription, property: CPointer<UInt8>, name: CPointer<UInt8>, value: CPointer<UInt8>, str_size: CPointer<UIntNative>): Int32 {
+    return alljoyn_interfacedescription_getpropertyannotation(iface, property, name, value, str_size)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getpropertydescriptionforlanguage == "on"]
+foreign {
     func alljoyn_interfacedescription_getpropertydescriptionforlanguage(iface: alljoyn_interfacedescription, property: CPointer<UInt8>, description: CPointer<UInt8>, maxLanguageLength: UIntNative, languageTag: CPointer<UInt8>): UIntNative
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getpropertydescriptionforlanguage == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_getpropertydescriptionforlanguage(iface: alljoyn_interfacedescription, property: CPointer<UInt8>, description: CPointer<UInt8>, maxLanguageLength: UIntNative, languageTag: CPointer<UInt8>): UIntNative {
+    return alljoyn_interfacedescription_getpropertydescriptionforlanguage(iface, property, description, maxLanguageLength, languageTag)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getsecuritypolicy == "on"]
+foreign {
     func alljoyn_interfacedescription_getsecuritypolicy(iface: alljoyn_interfacedescription): alljoyn_interfacedescription_securitypolicyAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getsecuritypolicy == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_getsecuritypolicy(iface: alljoyn_interfacedescription): alljoyn_interfacedescription_securitypolicyAbi {
+    return alljoyn_interfacedescription_getsecuritypolicy(iface)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getsignal == "on"]
+foreign {
     func alljoyn_interfacedescription_getsignal(iface: alljoyn_interfacedescription, name: CPointer<UInt8>, member: CPointer<alljoyn_interfacedescription_memberAbi>): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_getsignal == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_getsignal(iface: alljoyn_interfacedescription, name: CPointer<UInt8>, member: CPointer<alljoyn_interfacedescription_memberAbi>): Int32 {
+    return alljoyn_interfacedescription_getsignal(iface, name, member)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_hasdescription == "on"]
+foreign {
     func alljoyn_interfacedescription_hasdescription(iface: alljoyn_interfacedescription): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_hasdescription == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_hasdescription(iface: alljoyn_interfacedescription): Int32 {
+    return alljoyn_interfacedescription_hasdescription(iface)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_hasmember == "on"]
+foreign {
     func alljoyn_interfacedescription_hasmember(iface: alljoyn_interfacedescription, name: CPointer<UInt8>, inSig: CPointer<UInt8>, outSig: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_hasmember == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_hasmember(iface: alljoyn_interfacedescription, name: CPointer<UInt8>, inSig: CPointer<UInt8>, outSig: CPointer<UInt8>): Int32 {
+    return alljoyn_interfacedescription_hasmember(iface, name, inSig, outSig)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_hasproperties == "on"]
+foreign {
     func alljoyn_interfacedescription_hasproperties(iface: alljoyn_interfacedescription): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_hasproperties == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_hasproperties(iface: alljoyn_interfacedescription): Int32 {
+    return alljoyn_interfacedescription_hasproperties(iface)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_hasproperty == "on"]
+foreign {
     func alljoyn_interfacedescription_hasproperty(iface: alljoyn_interfacedescription, name: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_hasproperty == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_hasproperty(iface: alljoyn_interfacedescription, name: CPointer<UInt8>): Int32 {
+    return alljoyn_interfacedescription_hasproperty(iface, name)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_introspect == "on"]
+foreign {
     func alljoyn_interfacedescription_introspect(iface: alljoyn_interfacedescription, str: CPointer<UInt8>, buf: UIntNative, indent: UIntNative): UIntNative
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_introspect == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_introspect(iface: alljoyn_interfacedescription, str: CPointer<UInt8>, buf: UIntNative, indent: UIntNative): UIntNative {
+    return alljoyn_interfacedescription_introspect(iface, str, buf, indent)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_issecure == "on"]
+foreign {
     func alljoyn_interfacedescription_issecure(iface: alljoyn_interfacedescription): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_issecure == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_issecure(iface: alljoyn_interfacedescription): Int32 {
+    return alljoyn_interfacedescription_issecure(iface)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_member_eql == "on"]
+foreign {
     func alljoyn_interfacedescription_member_eql(one: alljoyn_interfacedescription_memberAbi, other: alljoyn_interfacedescription_memberAbi): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_member_eql == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_member_eql(one: alljoyn_interfacedescription_memberAbi, other: alljoyn_interfacedescription_memberAbi): Int32 {
+    return alljoyn_interfacedescription_member_eql(one, other)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_member_getannotation == "on"]
+foreign {
     func alljoyn_interfacedescription_member_getannotation(member: alljoyn_interfacedescription_memberAbi, name: CPointer<UInt8>, value: CPointer<UInt8>, value_size: CPointer<UIntNative>): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_member_getannotation == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_member_getannotation(member: alljoyn_interfacedescription_memberAbi, name: CPointer<UInt8>, value: CPointer<UInt8>, value_size: CPointer<UIntNative>): Int32 {
+    return alljoyn_interfacedescription_member_getannotation(member, name, value, value_size)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_member_getannotationatindex == "on"]
+foreign {
     func alljoyn_interfacedescription_member_getannotationatindex(member: alljoyn_interfacedescription_memberAbi, index: UIntNative, name: CPointer<UInt8>, name_size: CPointer<UIntNative>, value: CPointer<UInt8>, value_size: CPointer<UIntNative>): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_member_getannotationatindex == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_member_getannotationatindex(member: alljoyn_interfacedescription_memberAbi, index: UIntNative, name: CPointer<UInt8>, name_size: CPointer<UIntNative>, value: CPointer<UInt8>, value_size: CPointer<UIntNative>): Unit {
+    alljoyn_interfacedescription_member_getannotationatindex(member, index, name, name_size, value, value_size)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_member_getannotationscount == "on"]
+foreign {
     func alljoyn_interfacedescription_member_getannotationscount(member: alljoyn_interfacedescription_memberAbi): UIntNative
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_member_getannotationscount == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_member_getannotationscount(member: alljoyn_interfacedescription_memberAbi): UIntNative {
+    return alljoyn_interfacedescription_member_getannotationscount(member)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_member_getargannotation == "on"]
+foreign {
     func alljoyn_interfacedescription_member_getargannotation(member: alljoyn_interfacedescription_memberAbi, argName: CPointer<UInt8>, name: CPointer<UInt8>, value: CPointer<UInt8>, value_size: CPointer<UIntNative>): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_member_getargannotation == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_member_getargannotation(member: alljoyn_interfacedescription_memberAbi, argName: CPointer<UInt8>, name: CPointer<UInt8>, value: CPointer<UInt8>, value_size: CPointer<UIntNative>): Int32 {
+    return alljoyn_interfacedescription_member_getargannotation(member, argName, name, value, value_size)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_member_getargannotationatindex == "on"]
+foreign {
     func alljoyn_interfacedescription_member_getargannotationatindex(member: alljoyn_interfacedescription_memberAbi, argName: CPointer<UInt8>, index: UIntNative, name: CPointer<UInt8>, name_size: CPointer<UIntNative>, value: CPointer<UInt8>, value_size: CPointer<UIntNative>): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_member_getargannotationatindex == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_member_getargannotationatindex(member: alljoyn_interfacedescription_memberAbi, argName: CPointer<UInt8>, index: UIntNative, name: CPointer<UInt8>, name_size: CPointer<UIntNative>, value: CPointer<UInt8>, value_size: CPointer<UIntNative>): Unit {
+    alljoyn_interfacedescription_member_getargannotationatindex(member, argName, index, name, name_size, value, value_size)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_member_getargannotationscount == "on"]
+foreign {
     func alljoyn_interfacedescription_member_getargannotationscount(member: alljoyn_interfacedescription_memberAbi, argName: CPointer<UInt8>): UIntNative
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_member_getargannotationscount == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_member_getargannotationscount(member: alljoyn_interfacedescription_memberAbi, argName: CPointer<UInt8>): UIntNative {
+    return alljoyn_interfacedescription_member_getargannotationscount(member, argName)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_property_eql == "on"]
+foreign {
     func alljoyn_interfacedescription_property_eql(one: alljoyn_interfacedescription_propertyAbi, other: alljoyn_interfacedescription_propertyAbi): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_property_eql == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_property_eql(one: alljoyn_interfacedescription_propertyAbi, other: alljoyn_interfacedescription_propertyAbi): Int32 {
+    return alljoyn_interfacedescription_property_eql(one, other)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_property_getannotation == "on"]
+foreign {
     func alljoyn_interfacedescription_property_getannotation(property: alljoyn_interfacedescription_propertyAbi, name: CPointer<UInt8>, value: CPointer<UInt8>, value_size: CPointer<UIntNative>): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_property_getannotation == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_property_getannotation(property: alljoyn_interfacedescription_propertyAbi, name: CPointer<UInt8>, value: CPointer<UInt8>, value_size: CPointer<UIntNative>): Int32 {
+    return alljoyn_interfacedescription_property_getannotation(property, name, value, value_size)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_property_getannotationatindex == "on"]
+foreign {
     func alljoyn_interfacedescription_property_getannotationatindex(property: alljoyn_interfacedescription_propertyAbi, index: UIntNative, name: CPointer<UInt8>, name_size: CPointer<UIntNative>, value: CPointer<UInt8>, value_size: CPointer<UIntNative>): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_property_getannotationatindex == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_property_getannotationatindex(property: alljoyn_interfacedescription_propertyAbi, index: UIntNative, name: CPointer<UInt8>, name_size: CPointer<UIntNative>, value: CPointer<UInt8>, value_size: CPointer<UIntNative>): Unit {
+    alljoyn_interfacedescription_property_getannotationatindex(property, index, name, name_size, value, value_size)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_property_getannotationscount == "on"]
+foreign {
     func alljoyn_interfacedescription_property_getannotationscount(property: alljoyn_interfacedescription_propertyAbi): UIntNative
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_property_getannotationscount == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_property_getannotationscount(property: alljoyn_interfacedescription_propertyAbi): UIntNative {
+    return alljoyn_interfacedescription_property_getannotationscount(property)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_setargdescription == "on"]
+foreign {
     func alljoyn_interfacedescription_setargdescription(iface: alljoyn_interfacedescription, member: CPointer<UInt8>, argName: CPointer<UInt8>, description: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_setargdescription == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_setargdescription(iface: alljoyn_interfacedescription, member: CPointer<UInt8>, argName: CPointer<UInt8>, description: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_interfacedescription_setargdescription(iface, member, argName, description)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_setargdescriptionforlanguage == "on"]
+foreign {
     func alljoyn_interfacedescription_setargdescriptionforlanguage(iface: alljoyn_interfacedescription, member: CPointer<UInt8>, arg: CPointer<UInt8>, description: CPointer<UInt8>, languageTag: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_setargdescriptionforlanguage == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_setargdescriptionforlanguage(iface: alljoyn_interfacedescription, member: CPointer<UInt8>, arg: CPointer<UInt8>, description: CPointer<UInt8>, languageTag: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_interfacedescription_setargdescriptionforlanguage(iface, member, arg, description, languageTag)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_setdescription == "on"]
+foreign {
     func alljoyn_interfacedescription_setdescription(iface: alljoyn_interfacedescription, description: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_setdescription == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_setdescription(iface: alljoyn_interfacedescription, description: CPointer<UInt8>): Unit {
+    alljoyn_interfacedescription_setdescription(iface, description)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_setdescriptionforlanguage == "on"]
+foreign {
     func alljoyn_interfacedescription_setdescriptionforlanguage(iface: alljoyn_interfacedescription, description: CPointer<UInt8>, languageTag: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_setdescriptionforlanguage == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_setdescriptionforlanguage(iface: alljoyn_interfacedescription, description: CPointer<UInt8>, languageTag: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_interfacedescription_setdescriptionforlanguage(iface, description, languageTag)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_setdescriptionlanguage == "on"]
+foreign {
     func alljoyn_interfacedescription_setdescriptionlanguage(iface: alljoyn_interfacedescription, language: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_setdescriptionlanguage == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_setdescriptionlanguage(iface: alljoyn_interfacedescription, language: CPointer<UInt8>): Unit {
+    alljoyn_interfacedescription_setdescriptionlanguage(iface, language)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_setdescriptiontranslationcallback == "on"]
+foreign {
     func alljoyn_interfacedescription_setdescriptiontranslationcallback(iface: alljoyn_interfacedescription, translationCallback: alljoyn_interfacedescription_translation_callback_ptr): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_setdescriptiontranslationcallback == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_setdescriptiontranslationcallback(iface: alljoyn_interfacedescription, translationCallback: alljoyn_interfacedescription_translation_callback_ptr): Unit {
+    alljoyn_interfacedescription_setdescriptiontranslationcallback(iface, translationCallback)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_setmemberdescription == "on"]
+foreign {
     func alljoyn_interfacedescription_setmemberdescription(iface: alljoyn_interfacedescription, member: CPointer<UInt8>, description: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_setmemberdescription == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_setmemberdescription(iface: alljoyn_interfacedescription, member: CPointer<UInt8>, description: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_interfacedescription_setmemberdescription(iface, member, description)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_setmemberdescriptionforlanguage == "on"]
+foreign {
     func alljoyn_interfacedescription_setmemberdescriptionforlanguage(iface: alljoyn_interfacedescription, member: CPointer<UInt8>, description: CPointer<UInt8>, languageTag: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_setmemberdescriptionforlanguage == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_setmemberdescriptionforlanguage(iface: alljoyn_interfacedescription, member: CPointer<UInt8>, description: CPointer<UInt8>, languageTag: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_interfacedescription_setmemberdescriptionforlanguage(iface, member, description, languageTag)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_setpropertydescription == "on"]
+foreign {
     func alljoyn_interfacedescription_setpropertydescription(iface: alljoyn_interfacedescription, name: CPointer<UInt8>, description: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_setpropertydescription == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_setpropertydescription(iface: alljoyn_interfacedescription, name: CPointer<UInt8>, description: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_interfacedescription_setpropertydescription(iface, name, description)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_setpropertydescriptionforlanguage == "on"]
+foreign {
     func alljoyn_interfacedescription_setpropertydescriptionforlanguage(iface: alljoyn_interfacedescription, name: CPointer<UInt8>, description: CPointer<UInt8>, languageTag: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_interfacedescription_setpropertydescriptionforlanguage == "on"]
+public unsafe func Windows_alljoyn_interfacedescription_setpropertydescriptionforlanguage(iface: alljoyn_interfacedescription, name: CPointer<UInt8>, description: CPointer<UInt8>, languageTag: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_interfacedescription_setpropertydescriptionforlanguage(iface, name, description, languageTag)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_keystorelistener_create == "on"]
+foreign {
     func alljoyn_keystorelistener_create(callbacks: CPointer<alljoyn_keystorelistener_callbacksAbi>, context: CPointer<Unit>): alljoyn_keystorelistener
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_keystorelistener_create == "on"]
+public unsafe func Windows_alljoyn_keystorelistener_create(callbacks: CPointer<alljoyn_keystorelistener_callbacksAbi>, context: CPointer<Unit>): alljoyn_keystorelistener {
+    return alljoyn_keystorelistener_create(callbacks, context)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_keystorelistener_destroy == "on"]
+foreign {
     func alljoyn_keystorelistener_destroy(listener: alljoyn_keystorelistener): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_keystorelistener_destroy == "on"]
+public unsafe func Windows_alljoyn_keystorelistener_destroy(listener: alljoyn_keystorelistener): Unit {
+    alljoyn_keystorelistener_destroy(listener)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_keystorelistener_getkeys == "on"]
+foreign {
     func alljoyn_keystorelistener_getkeys(listener: alljoyn_keystorelistener, keyStore: alljoyn_keystore, sink: CPointer<UInt8>, sink_sz: CPointer<UIntNative>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_keystorelistener_getkeys == "on"]
+public unsafe func Windows_alljoyn_keystorelistener_getkeys(listener: alljoyn_keystorelistener, keyStore: alljoyn_keystore, sink: CPointer<UInt8>, sink_sz: CPointer<UIntNative>): QStatusAbi {
+    return alljoyn_keystorelistener_getkeys(listener, keyStore, sink, sink_sz)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_keystorelistener_putkeys == "on"]
+foreign {
     func alljoyn_keystorelistener_putkeys(listener: alljoyn_keystorelistener, keyStore: alljoyn_keystore, source: CPointer<UInt8>, password: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_keystorelistener_putkeys == "on"]
+public unsafe func Windows_alljoyn_keystorelistener_putkeys(listener: alljoyn_keystorelistener, keyStore: alljoyn_keystore, source: CPointer<UInt8>, password: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_keystorelistener_putkeys(listener, keyStore, source, password)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_keystorelistener_with_synchronization_create == "on"]
+foreign {
     func alljoyn_keystorelistener_with_synchronization_create(callbacks: CPointer<alljoyn_keystorelistener_with_synchronization_callbacksAbi>, context: CPointer<Unit>): alljoyn_keystorelistener
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_keystorelistener_with_synchronization_create == "on"]
+public unsafe func Windows_alljoyn_keystorelistener_with_synchronization_create(callbacks: CPointer<alljoyn_keystorelistener_with_synchronization_callbacksAbi>, context: CPointer<Unit>): alljoyn_keystorelistener {
+    return alljoyn_keystorelistener_with_synchronization_create(callbacks, context)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_create == "on"]
+foreign {
     func alljoyn_message_create(bus: alljoyn_busattachment): alljoyn_message
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_create == "on"]
+public unsafe func Windows_alljoyn_message_create(bus: alljoyn_busattachment): alljoyn_message {
+    return alljoyn_message_create(bus)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_description == "on"]
+foreign {
     func alljoyn_message_description(msg: alljoyn_message, str: CPointer<UInt8>, buf: UIntNative): UIntNative
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_description == "on"]
+public unsafe func Windows_alljoyn_message_description(msg: alljoyn_message, str: CPointer<UInt8>, buf: UIntNative): UIntNative {
+    return alljoyn_message_description(msg, str, buf)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_destroy == "on"]
+foreign {
     func alljoyn_message_destroy(msg: alljoyn_message): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_destroy == "on"]
+public unsafe func Windows_alljoyn_message_destroy(msg: alljoyn_message): Unit {
+    alljoyn_message_destroy(msg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_eql == "on"]
+foreign {
     func alljoyn_message_eql(one: alljoyn_message, other: alljoyn_message): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_eql == "on"]
+public unsafe func Windows_alljoyn_message_eql(one: alljoyn_message, other: alljoyn_message): Int32 {
+    return alljoyn_message_eql(one, other)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_getarg == "on"]
+foreign {
     func alljoyn_message_getarg(msg: alljoyn_message, argN: UIntNative): alljoyn_msgarg
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_getarg == "on"]
+public unsafe func Windows_alljoyn_message_getarg(msg: alljoyn_message, argN: UIntNative): alljoyn_msgarg {
+    return alljoyn_message_getarg(msg, argN)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_getargs == "on"]
+foreign {
     func alljoyn_message_getargs(msg: alljoyn_message, numArgs: CPointer<UIntNative>, args: CPointer<alljoyn_msgarg>): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_getargs == "on"]
+public unsafe func Windows_alljoyn_message_getargs(msg: alljoyn_message, numArgs: CPointer<UIntNative>, args: CPointer<alljoyn_msgarg>): Unit {
+    alljoyn_message_getargs(msg, numArgs, args)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_getauthmechanism == "on"]
+foreign {
     func alljoyn_message_getauthmechanism(msg: alljoyn_message): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_getauthmechanism == "on"]
+public unsafe func Windows_alljoyn_message_getauthmechanism(msg: alljoyn_message): CPointer<UInt8> {
+    return alljoyn_message_getauthmechanism(msg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_getcallserial == "on"]
+foreign {
     func alljoyn_message_getcallserial(msg: alljoyn_message): UInt32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_getcallserial == "on"]
+public unsafe func Windows_alljoyn_message_getcallserial(msg: alljoyn_message): UInt32 {
+    return alljoyn_message_getcallserial(msg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_getcompressiontoken == "on"]
+foreign {
     func alljoyn_message_getcompressiontoken(msg: alljoyn_message): UInt32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_getcompressiontoken == "on"]
+public unsafe func Windows_alljoyn_message_getcompressiontoken(msg: alljoyn_message): UInt32 {
+    return alljoyn_message_getcompressiontoken(msg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_getdestination == "on"]
+foreign {
     func alljoyn_message_getdestination(msg: alljoyn_message): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_getdestination == "on"]
+public unsafe func Windows_alljoyn_message_getdestination(msg: alljoyn_message): CPointer<UInt8> {
+    return alljoyn_message_getdestination(msg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_geterrorname == "on"]
+foreign {
     func alljoyn_message_geterrorname(msg: alljoyn_message, errorMessage: CPointer<UInt8>, errorMessage_size: CPointer<UIntNative>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_geterrorname == "on"]
+public unsafe func Windows_alljoyn_message_geterrorname(msg: alljoyn_message, errorMessage: CPointer<UInt8>, errorMessage_size: CPointer<UIntNative>): CPointer<UInt8> {
+    return alljoyn_message_geterrorname(msg, errorMessage, errorMessage_size)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_getflags == "on"]
+foreign {
     func alljoyn_message_getflags(msg: alljoyn_message): UInt8
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_getflags == "on"]
+public unsafe func Windows_alljoyn_message_getflags(msg: alljoyn_message): UInt8 {
+    return alljoyn_message_getflags(msg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_getinterface == "on"]
+foreign {
     func alljoyn_message_getinterface(msg: alljoyn_message): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_getinterface == "on"]
+public unsafe func Windows_alljoyn_message_getinterface(msg: alljoyn_message): CPointer<UInt8> {
+    return alljoyn_message_getinterface(msg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_getmembername == "on"]
+foreign {
     func alljoyn_message_getmembername(msg: alljoyn_message): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_getmembername == "on"]
+public unsafe func Windows_alljoyn_message_getmembername(msg: alljoyn_message): CPointer<UInt8> {
+    return alljoyn_message_getmembername(msg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_getobjectpath == "on"]
+foreign {
     func alljoyn_message_getobjectpath(msg: alljoyn_message): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_getobjectpath == "on"]
+public unsafe func Windows_alljoyn_message_getobjectpath(msg: alljoyn_message): CPointer<UInt8> {
+    return alljoyn_message_getobjectpath(msg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_getreceiveendpointname == "on"]
+foreign {
     func alljoyn_message_getreceiveendpointname(msg: alljoyn_message): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_getreceiveendpointname == "on"]
+public unsafe func Windows_alljoyn_message_getreceiveendpointname(msg: alljoyn_message): CPointer<UInt8> {
+    return alljoyn_message_getreceiveendpointname(msg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_getreplyserial == "on"]
+foreign {
     func alljoyn_message_getreplyserial(msg: alljoyn_message): UInt32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_getreplyserial == "on"]
+public unsafe func Windows_alljoyn_message_getreplyserial(msg: alljoyn_message): UInt32 {
+    return alljoyn_message_getreplyserial(msg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_getsender == "on"]
+foreign {
     func alljoyn_message_getsender(msg: alljoyn_message): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_getsender == "on"]
+public unsafe func Windows_alljoyn_message_getsender(msg: alljoyn_message): CPointer<UInt8> {
+    return alljoyn_message_getsender(msg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_getsessionid == "on"]
+foreign {
     func alljoyn_message_getsessionid(msg: alljoyn_message): UInt32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_getsessionid == "on"]
+public unsafe func Windows_alljoyn_message_getsessionid(msg: alljoyn_message): UInt32 {
+    return alljoyn_message_getsessionid(msg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_getsignature == "on"]
+foreign {
     func alljoyn_message_getsignature(msg: alljoyn_message): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_getsignature == "on"]
+public unsafe func Windows_alljoyn_message_getsignature(msg: alljoyn_message): CPointer<UInt8> {
+    return alljoyn_message_getsignature(msg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_gettimestamp == "on"]
+foreign {
     func alljoyn_message_gettimestamp(msg: alljoyn_message): UInt32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_gettimestamp == "on"]
+public unsafe func Windows_alljoyn_message_gettimestamp(msg: alljoyn_message): UInt32 {
+    return alljoyn_message_gettimestamp(msg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_gettype == "on"]
+foreign {
     func alljoyn_message_gettype(msg: alljoyn_message): alljoyn_messagetypeAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_gettype == "on"]
+public unsafe func Windows_alljoyn_message_gettype(msg: alljoyn_message): alljoyn_messagetypeAbi {
+    return alljoyn_message_gettype(msg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_isbroadcastsignal == "on"]
+foreign {
     func alljoyn_message_isbroadcastsignal(msg: alljoyn_message): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_isbroadcastsignal == "on"]
+public unsafe func Windows_alljoyn_message_isbroadcastsignal(msg: alljoyn_message): Int32 {
+    return alljoyn_message_isbroadcastsignal(msg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_isencrypted == "on"]
+foreign {
     func alljoyn_message_isencrypted(msg: alljoyn_message): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_isencrypted == "on"]
+public unsafe func Windows_alljoyn_message_isencrypted(msg: alljoyn_message): Int32 {
+    return alljoyn_message_isencrypted(msg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_isexpired == "on"]
+foreign {
     func alljoyn_message_isexpired(msg: alljoyn_message, tillExpireMS: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_isexpired == "on"]
+public unsafe func Windows_alljoyn_message_isexpired(msg: alljoyn_message, tillExpireMS: CPointer<UInt32>): Int32 {
+    return alljoyn_message_isexpired(msg, tillExpireMS)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_isglobalbroadcast == "on"]
+foreign {
     func alljoyn_message_isglobalbroadcast(msg: alljoyn_message): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_isglobalbroadcast == "on"]
+public unsafe func Windows_alljoyn_message_isglobalbroadcast(msg: alljoyn_message): Int32 {
+    return alljoyn_message_isglobalbroadcast(msg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_issessionless == "on"]
+foreign {
     func alljoyn_message_issessionless(msg: alljoyn_message): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_issessionless == "on"]
+public unsafe func Windows_alljoyn_message_issessionless(msg: alljoyn_message): Int32 {
+    return alljoyn_message_issessionless(msg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_isunreliable == "on"]
+foreign {
     func alljoyn_message_isunreliable(msg: alljoyn_message): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_isunreliable == "on"]
+public unsafe func Windows_alljoyn_message_isunreliable(msg: alljoyn_message): Int32 {
+    return alljoyn_message_isunreliable(msg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_setendianess == "on"]
+foreign {
     func alljoyn_message_setendianess(endian: Int8): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_setendianess == "on"]
+public unsafe func Windows_alljoyn_message_setendianess(endian: Int8): Unit {
+    alljoyn_message_setendianess(endian)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_tostring == "on"]
+foreign {
     func alljoyn_message_tostring(msg: alljoyn_message, str: CPointer<UInt8>, buf: UIntNative): UIntNative
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_message_tostring == "on"]
+public unsafe func Windows_alljoyn_message_tostring(msg: alljoyn_message, str: CPointer<UInt8>, buf: UIntNative): UIntNative {
+    return alljoyn_message_tostring(msg, str, buf)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_array_create == "on"]
+foreign {
     func alljoyn_msgarg_array_create(size: UIntNative): alljoyn_msgarg
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_array_create == "on"]
+public unsafe func Windows_alljoyn_msgarg_array_create(size: UIntNative): alljoyn_msgarg {
+    return alljoyn_msgarg_array_create(size)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_array_element == "on"]
+foreign {
     func alljoyn_msgarg_array_element(arg: alljoyn_msgarg, index: UIntNative): alljoyn_msgarg
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_array_element == "on"]
+public unsafe func Windows_alljoyn_msgarg_array_element(arg: alljoyn_msgarg, index: UIntNative): alljoyn_msgarg {
+    return alljoyn_msgarg_array_element(arg, index)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_array_signature == "on"]
+foreign {
     func alljoyn_msgarg_array_signature(values: alljoyn_msgarg, numValues: UIntNative, str: CPointer<UInt8>, buf: UIntNative): UIntNative
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_array_signature == "on"]
+public unsafe func Windows_alljoyn_msgarg_array_signature(values: alljoyn_msgarg, numValues: UIntNative, str: CPointer<UInt8>, buf: UIntNative): UIntNative {
+    return alljoyn_msgarg_array_signature(values, numValues, str, buf)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_array_tostring == "on"]
+foreign {
     func alljoyn_msgarg_array_tostring(args: alljoyn_msgarg, numArgs: UIntNative, str: CPointer<UInt8>, buf: UIntNative, indent: UIntNative): UIntNative
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_array_tostring == "on"]
+public unsafe func Windows_alljoyn_msgarg_array_tostring(args: alljoyn_msgarg, numArgs: UIntNative, str: CPointer<UInt8>, buf: UIntNative, indent: UIntNative): UIntNative {
+    return alljoyn_msgarg_array_tostring(args, numArgs, str, buf, indent)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_clear == "on"]
+foreign {
     func alljoyn_msgarg_clear(arg: alljoyn_msgarg): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_clear == "on"]
+public unsafe func Windows_alljoyn_msgarg_clear(arg: alljoyn_msgarg): Unit {
+    alljoyn_msgarg_clear(arg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_clone == "on"]
+foreign {
     func alljoyn_msgarg_clone(destination: alljoyn_msgarg, source: alljoyn_msgarg): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_clone == "on"]
+public unsafe func Windows_alljoyn_msgarg_clone(destination: alljoyn_msgarg, source: alljoyn_msgarg): Unit {
+    alljoyn_msgarg_clone(destination, source)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_copy == "on"]
+foreign {
     func alljoyn_msgarg_copy(source: alljoyn_msgarg): alljoyn_msgarg
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_copy == "on"]
+public unsafe func Windows_alljoyn_msgarg_copy(source: alljoyn_msgarg): alljoyn_msgarg {
+    return alljoyn_msgarg_copy(source)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_create == "on"]
+foreign {
     func alljoyn_msgarg_create(): alljoyn_msgarg
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_create == "on"]
+public unsafe func Windows_alljoyn_msgarg_create(): alljoyn_msgarg {
+    return alljoyn_msgarg_create()
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_destroy == "on"]
+foreign {
     func alljoyn_msgarg_destroy(arg: alljoyn_msgarg): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_destroy == "on"]
+public unsafe func Windows_alljoyn_msgarg_destroy(arg: alljoyn_msgarg): Unit {
+    alljoyn_msgarg_destroy(arg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_equal == "on"]
+foreign {
     func alljoyn_msgarg_equal(lhv: alljoyn_msgarg, rhv: alljoyn_msgarg): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_equal == "on"]
+public unsafe func Windows_alljoyn_msgarg_equal(lhv: alljoyn_msgarg, rhv: alljoyn_msgarg): Int32 {
+    return alljoyn_msgarg_equal(lhv, rhv)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_array_element == "on"]
+foreign {
     func alljoyn_msgarg_get_array_element(arg: alljoyn_msgarg, index: UIntNative, element: CPointer<alljoyn_msgarg>): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_array_element == "on"]
+public unsafe func Windows_alljoyn_msgarg_get_array_element(arg: alljoyn_msgarg, index: UIntNative, element: CPointer<alljoyn_msgarg>): Unit {
+    alljoyn_msgarg_get_array_element(arg, index, element)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_array_elementsignature == "on"]
+foreign {
     func alljoyn_msgarg_get_array_elementsignature(arg: alljoyn_msgarg, index: UIntNative): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_array_elementsignature == "on"]
+public unsafe func Windows_alljoyn_msgarg_get_array_elementsignature(arg: alljoyn_msgarg, index: UIntNative): CPointer<UInt8> {
+    return alljoyn_msgarg_get_array_elementsignature(arg, index)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_array_numberofelements == "on"]
+foreign {
     func alljoyn_msgarg_get_array_numberofelements(arg: alljoyn_msgarg): UIntNative
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_array_numberofelements == "on"]
+public unsafe func Windows_alljoyn_msgarg_get_array_numberofelements(arg: alljoyn_msgarg): UIntNative {
+    return alljoyn_msgarg_get_array_numberofelements(arg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_bool == "on"]
+foreign {
     func alljoyn_msgarg_get_bool(arg: alljoyn_msgarg, b: CPointer<Int32>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_bool == "on"]
+public unsafe func Windows_alljoyn_msgarg_get_bool(arg: alljoyn_msgarg, b: CPointer<Int32>): QStatusAbi {
+    return alljoyn_msgarg_get_bool(arg, b)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_bool_array == "on"]
+foreign {
     func alljoyn_msgarg_get_bool_array(arg: alljoyn_msgarg, length: CPointer<UIntNative>, ab: CPointer<Int32>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_bool_array == "on"]
+public unsafe func Windows_alljoyn_msgarg_get_bool_array(arg: alljoyn_msgarg, length: CPointer<UIntNative>, ab: CPointer<Int32>): QStatusAbi {
+    return alljoyn_msgarg_get_bool_array(arg, length, ab)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_double == "on"]
+foreign {
     func alljoyn_msgarg_get_double(arg: alljoyn_msgarg, d: CPointer<Float64>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_double == "on"]
+public unsafe func Windows_alljoyn_msgarg_get_double(arg: alljoyn_msgarg, d: CPointer<Float64>): QStatusAbi {
+    return alljoyn_msgarg_get_double(arg, d)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_double_array == "on"]
+foreign {
     func alljoyn_msgarg_get_double_array(arg: alljoyn_msgarg, length: CPointer<UIntNative>, ad: CPointer<Float64>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_double_array == "on"]
+public unsafe func Windows_alljoyn_msgarg_get_double_array(arg: alljoyn_msgarg, length: CPointer<UIntNative>, ad: CPointer<Float64>): QStatusAbi {
+    return alljoyn_msgarg_get_double_array(arg, length, ad)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_int16 == "on"]
+foreign {
     func alljoyn_msgarg_get_int16(arg: alljoyn_msgarg, n: CPointer<Int16>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_int16 == "on"]
+public unsafe func Windows_alljoyn_msgarg_get_int16(arg: alljoyn_msgarg, n: CPointer<Int16>): QStatusAbi {
+    return alljoyn_msgarg_get_int16(arg, n)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_int16_array == "on"]
+foreign {
     func alljoyn_msgarg_get_int16_array(arg: alljoyn_msgarg, length: CPointer<UIntNative>, an: CPointer<Int16>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_int16_array == "on"]
+public unsafe func Windows_alljoyn_msgarg_get_int16_array(arg: alljoyn_msgarg, length: CPointer<UIntNative>, an: CPointer<Int16>): QStatusAbi {
+    return alljoyn_msgarg_get_int16_array(arg, length, an)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_int32 == "on"]
+foreign {
     func alljoyn_msgarg_get_int32(arg: alljoyn_msgarg, i: CPointer<Int32>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_int32 == "on"]
+public unsafe func Windows_alljoyn_msgarg_get_int32(arg: alljoyn_msgarg, i: CPointer<Int32>): QStatusAbi {
+    return alljoyn_msgarg_get_int32(arg, i)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_int32_array == "on"]
+foreign {
     func alljoyn_msgarg_get_int32_array(arg: alljoyn_msgarg, length: CPointer<UIntNative>, ai: CPointer<Int32>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_int32_array == "on"]
+public unsafe func Windows_alljoyn_msgarg_get_int32_array(arg: alljoyn_msgarg, length: CPointer<UIntNative>, ai: CPointer<Int32>): QStatusAbi {
+    return alljoyn_msgarg_get_int32_array(arg, length, ai)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_int64 == "on"]
+foreign {
     func alljoyn_msgarg_get_int64(arg: alljoyn_msgarg, x: CPointer<Int64>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_int64 == "on"]
+public unsafe func Windows_alljoyn_msgarg_get_int64(arg: alljoyn_msgarg, x: CPointer<Int64>): QStatusAbi {
+    return alljoyn_msgarg_get_int64(arg, x)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_int64_array == "on"]
+foreign {
     func alljoyn_msgarg_get_int64_array(arg: alljoyn_msgarg, length: CPointer<UIntNative>, ax: CPointer<Int64>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_int64_array == "on"]
+public unsafe func Windows_alljoyn_msgarg_get_int64_array(arg: alljoyn_msgarg, length: CPointer<UIntNative>, ax: CPointer<Int64>): QStatusAbi {
+    return alljoyn_msgarg_get_int64_array(arg, length, ax)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_objectpath == "on"]
+foreign {
     func alljoyn_msgarg_get_objectpath(arg: alljoyn_msgarg, o: CPointer<CPointer<Int8>>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_objectpath == "on"]
+public unsafe func Windows_alljoyn_msgarg_get_objectpath(arg: alljoyn_msgarg, o: CPointer<CPointer<Int8>>): QStatusAbi {
+    return alljoyn_msgarg_get_objectpath(arg, o)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_signature == "on"]
+foreign {
     func alljoyn_msgarg_get_signature(arg: alljoyn_msgarg, g: CPointer<CPointer<Int8>>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_signature == "on"]
+public unsafe func Windows_alljoyn_msgarg_get_signature(arg: alljoyn_msgarg, g: CPointer<CPointer<Int8>>): QStatusAbi {
+    return alljoyn_msgarg_get_signature(arg, g)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_string == "on"]
+foreign {
     func alljoyn_msgarg_get_string(arg: alljoyn_msgarg, s: CPointer<CPointer<Int8>>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_string == "on"]
+public unsafe func Windows_alljoyn_msgarg_get_string(arg: alljoyn_msgarg, s: CPointer<CPointer<Int8>>): QStatusAbi {
+    return alljoyn_msgarg_get_string(arg, s)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_uint16 == "on"]
+foreign {
     func alljoyn_msgarg_get_uint16(arg: alljoyn_msgarg, q: CPointer<UInt16>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_uint16 == "on"]
+public unsafe func Windows_alljoyn_msgarg_get_uint16(arg: alljoyn_msgarg, q: CPointer<UInt16>): QStatusAbi {
+    return alljoyn_msgarg_get_uint16(arg, q)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_uint16_array == "on"]
+foreign {
     func alljoyn_msgarg_get_uint16_array(arg: alljoyn_msgarg, length: CPointer<UIntNative>, aq: CPointer<UInt16>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_uint16_array == "on"]
+public unsafe func Windows_alljoyn_msgarg_get_uint16_array(arg: alljoyn_msgarg, length: CPointer<UIntNative>, aq: CPointer<UInt16>): QStatusAbi {
+    return alljoyn_msgarg_get_uint16_array(arg, length, aq)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_uint32 == "on"]
+foreign {
     func alljoyn_msgarg_get_uint32(arg: alljoyn_msgarg, u: CPointer<UInt32>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_uint32 == "on"]
+public unsafe func Windows_alljoyn_msgarg_get_uint32(arg: alljoyn_msgarg, u: CPointer<UInt32>): QStatusAbi {
+    return alljoyn_msgarg_get_uint32(arg, u)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_uint32_array == "on"]
+foreign {
     func alljoyn_msgarg_get_uint32_array(arg: alljoyn_msgarg, length: CPointer<UIntNative>, au: CPointer<UInt32>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_uint32_array == "on"]
+public unsafe func Windows_alljoyn_msgarg_get_uint32_array(arg: alljoyn_msgarg, length: CPointer<UIntNative>, au: CPointer<UInt32>): QStatusAbi {
+    return alljoyn_msgarg_get_uint32_array(arg, length, au)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_uint64 == "on"]
+foreign {
     func alljoyn_msgarg_get_uint64(arg: alljoyn_msgarg, t: CPointer<UInt64>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_uint64 == "on"]
+public unsafe func Windows_alljoyn_msgarg_get_uint64(arg: alljoyn_msgarg, t: CPointer<UInt64>): QStatusAbi {
+    return alljoyn_msgarg_get_uint64(arg, t)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_uint64_array == "on"]
+foreign {
     func alljoyn_msgarg_get_uint64_array(arg: alljoyn_msgarg, length: CPointer<UIntNative>, at: CPointer<UInt64>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_uint64_array == "on"]
+public unsafe func Windows_alljoyn_msgarg_get_uint64_array(arg: alljoyn_msgarg, length: CPointer<UIntNative>, at: CPointer<UInt64>): QStatusAbi {
+    return alljoyn_msgarg_get_uint64_array(arg, length, at)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_uint8 == "on"]
+foreign {
     func alljoyn_msgarg_get_uint8(arg: alljoyn_msgarg, y: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_uint8 == "on"]
+public unsafe func Windows_alljoyn_msgarg_get_uint8(arg: alljoyn_msgarg, y: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_msgarg_get_uint8(arg, y)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_uint8_array == "on"]
+foreign {
     func alljoyn_msgarg_get_uint8_array(arg: alljoyn_msgarg, length: CPointer<UIntNative>, ay: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_uint8_array == "on"]
+public unsafe func Windows_alljoyn_msgarg_get_uint8_array(arg: alljoyn_msgarg, length: CPointer<UIntNative>, ay: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_msgarg_get_uint8_array(arg, length, ay)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_variant == "on"]
+foreign {
     func alljoyn_msgarg_get_variant(arg: alljoyn_msgarg, v: alljoyn_msgarg): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_variant == "on"]
+public unsafe func Windows_alljoyn_msgarg_get_variant(arg: alljoyn_msgarg, v: alljoyn_msgarg): QStatusAbi {
+    return alljoyn_msgarg_get_variant(arg, v)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_variant_array == "on"]
+foreign {
     func alljoyn_msgarg_get_variant_array(arg: alljoyn_msgarg, signature: CPointer<UInt8>, length: CPointer<UIntNative>, av: CPointer<alljoyn_msgarg>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_get_variant_array == "on"]
+public unsafe func Windows_alljoyn_msgarg_get_variant_array(arg: alljoyn_msgarg, signature: CPointer<UInt8>, length: CPointer<UIntNative>, av: CPointer<alljoyn_msgarg>): QStatusAbi {
+    return alljoyn_msgarg_get_variant_array(arg, signature, length, av)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_getkey == "on"]
+foreign {
     func alljoyn_msgarg_getkey(arg: alljoyn_msgarg): alljoyn_msgarg
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_getkey == "on"]
+public unsafe func Windows_alljoyn_msgarg_getkey(arg: alljoyn_msgarg): alljoyn_msgarg {
+    return alljoyn_msgarg_getkey(arg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_getmember == "on"]
+foreign {
     func alljoyn_msgarg_getmember(arg: alljoyn_msgarg, index: UIntNative): alljoyn_msgarg
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_getmember == "on"]
+public unsafe func Windows_alljoyn_msgarg_getmember(arg: alljoyn_msgarg, index: UIntNative): alljoyn_msgarg {
+    return alljoyn_msgarg_getmember(arg, index)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_getnummembers == "on"]
+foreign {
     func alljoyn_msgarg_getnummembers(arg: alljoyn_msgarg): UIntNative
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_getnummembers == "on"]
+public unsafe func Windows_alljoyn_msgarg_getnummembers(arg: alljoyn_msgarg): UIntNative {
+    return alljoyn_msgarg_getnummembers(arg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_gettype == "on"]
+foreign {
     func alljoyn_msgarg_gettype(arg: alljoyn_msgarg): alljoyn_typeidAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_gettype == "on"]
+public unsafe func Windows_alljoyn_msgarg_gettype(arg: alljoyn_msgarg): alljoyn_typeidAbi {
+    return alljoyn_msgarg_gettype(arg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_getvalue == "on"]
+foreign {
     func alljoyn_msgarg_getvalue(arg: alljoyn_msgarg): alljoyn_msgarg
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_getvalue == "on"]
+public unsafe func Windows_alljoyn_msgarg_getvalue(arg: alljoyn_msgarg): alljoyn_msgarg {
+    return alljoyn_msgarg_getvalue(arg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_hassignature == "on"]
+foreign {
     func alljoyn_msgarg_hassignature(arg: alljoyn_msgarg, signature: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_hassignature == "on"]
+public unsafe func Windows_alljoyn_msgarg_hassignature(arg: alljoyn_msgarg, signature: CPointer<UInt8>): Int32 {
+    return alljoyn_msgarg_hassignature(arg, signature)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_bool == "on"]
+foreign {
     func alljoyn_msgarg_set_bool(arg: alljoyn_msgarg, b: Int32): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_bool == "on"]
+public unsafe func Windows_alljoyn_msgarg_set_bool(arg: alljoyn_msgarg, b: Int32): QStatusAbi {
+    return alljoyn_msgarg_set_bool(arg, b)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_bool_array == "on"]
+foreign {
     func alljoyn_msgarg_set_bool_array(arg: alljoyn_msgarg, length: UIntNative, ab: CPointer<Int32>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_bool_array == "on"]
+public unsafe func Windows_alljoyn_msgarg_set_bool_array(arg: alljoyn_msgarg, length: UIntNative, ab: CPointer<Int32>): QStatusAbi {
+    return alljoyn_msgarg_set_bool_array(arg, length, ab)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_double == "on"]
+foreign {
     func alljoyn_msgarg_set_double(arg: alljoyn_msgarg, d: Float64): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_double == "on"]
+public unsafe func Windows_alljoyn_msgarg_set_double(arg: alljoyn_msgarg, d: Float64): QStatusAbi {
+    return alljoyn_msgarg_set_double(arg, d)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_double_array == "on"]
+foreign {
     func alljoyn_msgarg_set_double_array(arg: alljoyn_msgarg, length: UIntNative, ad: CPointer<Float64>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_double_array == "on"]
+public unsafe func Windows_alljoyn_msgarg_set_double_array(arg: alljoyn_msgarg, length: UIntNative, ad: CPointer<Float64>): QStatusAbi {
+    return alljoyn_msgarg_set_double_array(arg, length, ad)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_int16 == "on"]
+foreign {
     func alljoyn_msgarg_set_int16(arg: alljoyn_msgarg, n: Int16): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_int16 == "on"]
+public unsafe func Windows_alljoyn_msgarg_set_int16(arg: alljoyn_msgarg, n: Int16): QStatusAbi {
+    return alljoyn_msgarg_set_int16(arg, n)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_int16_array == "on"]
+foreign {
     func alljoyn_msgarg_set_int16_array(arg: alljoyn_msgarg, length: UIntNative, an: CPointer<Int16>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_int16_array == "on"]
+public unsafe func Windows_alljoyn_msgarg_set_int16_array(arg: alljoyn_msgarg, length: UIntNative, an: CPointer<Int16>): QStatusAbi {
+    return alljoyn_msgarg_set_int16_array(arg, length, an)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_int32 == "on"]
+foreign {
     func alljoyn_msgarg_set_int32(arg: alljoyn_msgarg, i: Int32): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_int32 == "on"]
+public unsafe func Windows_alljoyn_msgarg_set_int32(arg: alljoyn_msgarg, i: Int32): QStatusAbi {
+    return alljoyn_msgarg_set_int32(arg, i)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_int32_array == "on"]
+foreign {
     func alljoyn_msgarg_set_int32_array(arg: alljoyn_msgarg, length: UIntNative, ai: CPointer<Int32>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_int32_array == "on"]
+public unsafe func Windows_alljoyn_msgarg_set_int32_array(arg: alljoyn_msgarg, length: UIntNative, ai: CPointer<Int32>): QStatusAbi {
+    return alljoyn_msgarg_set_int32_array(arg, length, ai)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_int64 == "on"]
+foreign {
     func alljoyn_msgarg_set_int64(arg: alljoyn_msgarg, x: Int64): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_int64 == "on"]
+public unsafe func Windows_alljoyn_msgarg_set_int64(arg: alljoyn_msgarg, x: Int64): QStatusAbi {
+    return alljoyn_msgarg_set_int64(arg, x)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_int64_array == "on"]
+foreign {
     func alljoyn_msgarg_set_int64_array(arg: alljoyn_msgarg, length: UIntNative, ax: CPointer<Int64>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_int64_array == "on"]
+public unsafe func Windows_alljoyn_msgarg_set_int64_array(arg: alljoyn_msgarg, length: UIntNative, ax: CPointer<Int64>): QStatusAbi {
+    return alljoyn_msgarg_set_int64_array(arg, length, ax)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_objectpath == "on"]
+foreign {
     func alljoyn_msgarg_set_objectpath(arg: alljoyn_msgarg, o: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_objectpath == "on"]
+public unsafe func Windows_alljoyn_msgarg_set_objectpath(arg: alljoyn_msgarg, o: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_msgarg_set_objectpath(arg, o)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_objectpath_array == "on"]
+foreign {
     func alljoyn_msgarg_set_objectpath_array(arg: alljoyn_msgarg, length: UIntNative, ao: CPointer<CPointer<Int8>>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_objectpath_array == "on"]
+public unsafe func Windows_alljoyn_msgarg_set_objectpath_array(arg: alljoyn_msgarg, length: UIntNative, ao: CPointer<CPointer<Int8>>): QStatusAbi {
+    return alljoyn_msgarg_set_objectpath_array(arg, length, ao)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_signature == "on"]
+foreign {
     func alljoyn_msgarg_set_signature(arg: alljoyn_msgarg, g: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_signature == "on"]
+public unsafe func Windows_alljoyn_msgarg_set_signature(arg: alljoyn_msgarg, g: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_msgarg_set_signature(arg, g)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_signature_array == "on"]
+foreign {
     func alljoyn_msgarg_set_signature_array(arg: alljoyn_msgarg, length: UIntNative, ag: CPointer<CPointer<Int8>>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_signature_array == "on"]
+public unsafe func Windows_alljoyn_msgarg_set_signature_array(arg: alljoyn_msgarg, length: UIntNative, ag: CPointer<CPointer<Int8>>): QStatusAbi {
+    return alljoyn_msgarg_set_signature_array(arg, length, ag)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_string == "on"]
+foreign {
     func alljoyn_msgarg_set_string(arg: alljoyn_msgarg, s: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_string == "on"]
+public unsafe func Windows_alljoyn_msgarg_set_string(arg: alljoyn_msgarg, s: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_msgarg_set_string(arg, s)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_string_array == "on"]
+foreign {
     func alljoyn_msgarg_set_string_array(arg: alljoyn_msgarg, length: UIntNative, as_: CPointer<CPointer<Int8>>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_string_array == "on"]
+public unsafe func Windows_alljoyn_msgarg_set_string_array(arg: alljoyn_msgarg, length: UIntNative, as_: CPointer<CPointer<Int8>>): QStatusAbi {
+    return alljoyn_msgarg_set_string_array(arg, length, as_)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_uint16 == "on"]
+foreign {
     func alljoyn_msgarg_set_uint16(arg: alljoyn_msgarg, q: UInt16): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_uint16 == "on"]
+public unsafe func Windows_alljoyn_msgarg_set_uint16(arg: alljoyn_msgarg, q: UInt16): QStatusAbi {
+    return alljoyn_msgarg_set_uint16(arg, q)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_uint16_array == "on"]
+foreign {
     func alljoyn_msgarg_set_uint16_array(arg: alljoyn_msgarg, length: UIntNative, aq: CPointer<UInt16>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_uint16_array == "on"]
+public unsafe func Windows_alljoyn_msgarg_set_uint16_array(arg: alljoyn_msgarg, length: UIntNative, aq: CPointer<UInt16>): QStatusAbi {
+    return alljoyn_msgarg_set_uint16_array(arg, length, aq)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_uint32 == "on"]
+foreign {
     func alljoyn_msgarg_set_uint32(arg: alljoyn_msgarg, u: UInt32): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_uint32 == "on"]
+public unsafe func Windows_alljoyn_msgarg_set_uint32(arg: alljoyn_msgarg, u: UInt32): QStatusAbi {
+    return alljoyn_msgarg_set_uint32(arg, u)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_uint32_array == "on"]
+foreign {
     func alljoyn_msgarg_set_uint32_array(arg: alljoyn_msgarg, length: UIntNative, au: CPointer<UInt32>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_uint32_array == "on"]
+public unsafe func Windows_alljoyn_msgarg_set_uint32_array(arg: alljoyn_msgarg, length: UIntNative, au: CPointer<UInt32>): QStatusAbi {
+    return alljoyn_msgarg_set_uint32_array(arg, length, au)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_uint64 == "on"]
+foreign {
     func alljoyn_msgarg_set_uint64(arg: alljoyn_msgarg, t: UInt64): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_uint64 == "on"]
+public unsafe func Windows_alljoyn_msgarg_set_uint64(arg: alljoyn_msgarg, t: UInt64): QStatusAbi {
+    return alljoyn_msgarg_set_uint64(arg, t)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_uint64_array == "on"]
+foreign {
     func alljoyn_msgarg_set_uint64_array(arg: alljoyn_msgarg, length: UIntNative, at: CPointer<UInt64>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_uint64_array == "on"]
+public unsafe func Windows_alljoyn_msgarg_set_uint64_array(arg: alljoyn_msgarg, length: UIntNative, at: CPointer<UInt64>): QStatusAbi {
+    return alljoyn_msgarg_set_uint64_array(arg, length, at)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_uint8 == "on"]
+foreign {
     func alljoyn_msgarg_set_uint8(arg: alljoyn_msgarg, y: UInt8): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_uint8 == "on"]
+public unsafe func Windows_alljoyn_msgarg_set_uint8(arg: alljoyn_msgarg, y: UInt8): QStatusAbi {
+    return alljoyn_msgarg_set_uint8(arg, y)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_uint8_array == "on"]
+foreign {
     func alljoyn_msgarg_set_uint8_array(arg: alljoyn_msgarg, length: UIntNative, ay: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_set_uint8_array == "on"]
+public unsafe func Windows_alljoyn_msgarg_set_uint8_array(arg: alljoyn_msgarg, length: UIntNative, ay: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_msgarg_set_uint8_array(arg, length, ay)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_setdictentry == "on"]
+foreign {
     func alljoyn_msgarg_setdictentry(arg: alljoyn_msgarg, key: alljoyn_msgarg, value: alljoyn_msgarg): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_setdictentry == "on"]
+public unsafe func Windows_alljoyn_msgarg_setdictentry(arg: alljoyn_msgarg, key: alljoyn_msgarg, value: alljoyn_msgarg): QStatusAbi {
+    return alljoyn_msgarg_setdictentry(arg, key, value)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_setstruct == "on"]
+foreign {
     func alljoyn_msgarg_setstruct(arg: alljoyn_msgarg, struct_members: alljoyn_msgarg, num_members: UIntNative): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_setstruct == "on"]
+public unsafe func Windows_alljoyn_msgarg_setstruct(arg: alljoyn_msgarg, struct_members: alljoyn_msgarg, num_members: UIntNative): QStatusAbi {
+    return alljoyn_msgarg_setstruct(arg, struct_members, num_members)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_signature == "on"]
+foreign {
     func alljoyn_msgarg_signature(arg: alljoyn_msgarg, str: CPointer<UInt8>, buf: UIntNative): UIntNative
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_signature == "on"]
+public unsafe func Windows_alljoyn_msgarg_signature(arg: alljoyn_msgarg, str: CPointer<UInt8>, buf: UIntNative): UIntNative {
+    return alljoyn_msgarg_signature(arg, str, buf)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_stabilize == "on"]
+foreign {
     func alljoyn_msgarg_stabilize(arg: alljoyn_msgarg): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_stabilize == "on"]
+public unsafe func Windows_alljoyn_msgarg_stabilize(arg: alljoyn_msgarg): Unit {
+    alljoyn_msgarg_stabilize(arg)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_tostring == "on"]
+foreign {
     func alljoyn_msgarg_tostring(arg: alljoyn_msgarg, str: CPointer<UInt8>, buf: UIntNative, indent: UIntNative): UIntNative
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_msgarg_tostring == "on"]
+public unsafe func Windows_alljoyn_msgarg_tostring(arg: alljoyn_msgarg, str: CPointer<UInt8>, buf: UIntNative, indent: UIntNative): UIntNative {
+    return alljoyn_msgarg_tostring(arg, str, buf, indent)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_observer_create == "on"]
+foreign {
     func alljoyn_observer_create(bus: alljoyn_busattachment, mandatoryInterfaces: CPointer<CPointer<Int8>>, numMandatoryInterfaces: UIntNative): alljoyn_observer
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_observer_create == "on"]
+public unsafe func Windows_alljoyn_observer_create(bus: alljoyn_busattachment, mandatoryInterfaces: CPointer<CPointer<Int8>>, numMandatoryInterfaces: UIntNative): alljoyn_observer {
+    return alljoyn_observer_create(bus, mandatoryInterfaces, numMandatoryInterfaces)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_observer_destroy == "on"]
+foreign {
     func alljoyn_observer_destroy(observer: alljoyn_observer): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_observer_destroy == "on"]
+public unsafe func Windows_alljoyn_observer_destroy(observer: alljoyn_observer): Unit {
+    alljoyn_observer_destroy(observer)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_observer_get == "on"]
+foreign {
     func alljoyn_observer_get(observer: alljoyn_observer, uniqueBusName: CPointer<UInt8>, objectPath: CPointer<UInt8>): alljoyn_proxybusobject_ref
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_observer_get == "on"]
+public unsafe func Windows_alljoyn_observer_get(observer: alljoyn_observer, uniqueBusName: CPointer<UInt8>, objectPath: CPointer<UInt8>): alljoyn_proxybusobject_ref {
+    return alljoyn_observer_get(observer, uniqueBusName, objectPath)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_observer_getfirst == "on"]
+foreign {
     func alljoyn_observer_getfirst(observer: alljoyn_observer): alljoyn_proxybusobject_ref
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_observer_getfirst == "on"]
+public unsafe func Windows_alljoyn_observer_getfirst(observer: alljoyn_observer): alljoyn_proxybusobject_ref {
+    return alljoyn_observer_getfirst(observer)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_observer_getnext == "on"]
+foreign {
     func alljoyn_observer_getnext(observer: alljoyn_observer, proxyref: alljoyn_proxybusobject_ref): alljoyn_proxybusobject_ref
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_observer_getnext == "on"]
+public unsafe func Windows_alljoyn_observer_getnext(observer: alljoyn_observer, proxyref: alljoyn_proxybusobject_ref): alljoyn_proxybusobject_ref {
+    return alljoyn_observer_getnext(observer, proxyref)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_observer_registerlistener == "on"]
+foreign {
     func alljoyn_observer_registerlistener(observer: alljoyn_observer, listener: alljoyn_observerlistener, triggerOnExisting: Int32): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_observer_registerlistener == "on"]
+public unsafe func Windows_alljoyn_observer_registerlistener(observer: alljoyn_observer, listener: alljoyn_observerlistener, triggerOnExisting: Int32): Unit {
+    alljoyn_observer_registerlistener(observer, listener, triggerOnExisting)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_observer_unregisteralllisteners == "on"]
+foreign {
     func alljoyn_observer_unregisteralllisteners(observer: alljoyn_observer): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_observer_unregisteralllisteners == "on"]
+public unsafe func Windows_alljoyn_observer_unregisteralllisteners(observer: alljoyn_observer): Unit {
+    alljoyn_observer_unregisteralllisteners(observer)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_observer_unregisterlistener == "on"]
+foreign {
     func alljoyn_observer_unregisterlistener(observer: alljoyn_observer, listener: alljoyn_observerlistener): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_observer_unregisterlistener == "on"]
+public unsafe func Windows_alljoyn_observer_unregisterlistener(observer: alljoyn_observer, listener: alljoyn_observerlistener): Unit {
+    alljoyn_observer_unregisterlistener(observer, listener)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_observerlistener_create == "on"]
+foreign {
     func alljoyn_observerlistener_create(callback: CPointer<alljoyn_observerlistener_callbackAbi>, context: CPointer<Unit>): alljoyn_observerlistener
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_observerlistener_create == "on"]
+public unsafe func Windows_alljoyn_observerlistener_create(callback: CPointer<alljoyn_observerlistener_callbackAbi>, context: CPointer<Unit>): alljoyn_observerlistener {
+    return alljoyn_observerlistener_create(callback, context)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_observerlistener_destroy == "on"]
+foreign {
     func alljoyn_observerlistener_destroy(listener: alljoyn_observerlistener): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_observerlistener_destroy == "on"]
+public unsafe func Windows_alljoyn_observerlistener_destroy(listener: alljoyn_observerlistener): Unit {
+    alljoyn_observerlistener_destroy(listener)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_passwordmanager_setcredentials == "on"]
+foreign {
     func alljoyn_passwordmanager_setcredentials(authMechanism: CPointer<UInt8>, password: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_passwordmanager_setcredentials == "on"]
+public unsafe func Windows_alljoyn_passwordmanager_setcredentials(authMechanism: CPointer<UInt8>, password: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_passwordmanager_setcredentials(authMechanism, password)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurationlistener_create == "on"]
+foreign {
     func alljoyn_permissionconfigurationlistener_create(callbacks: CPointer<alljoyn_permissionconfigurationlistener_callbacksAbi>, context: CPointer<Unit>): alljoyn_permissionconfigurationlistener
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurationlistener_create == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurationlistener_create(callbacks: CPointer<alljoyn_permissionconfigurationlistener_callbacksAbi>, context: CPointer<Unit>): alljoyn_permissionconfigurationlistener {
+    return alljoyn_permissionconfigurationlistener_create(callbacks, context)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurationlistener_destroy == "on"]
+foreign {
     func alljoyn_permissionconfigurationlistener_destroy(listener: alljoyn_permissionconfigurationlistener): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurationlistener_destroy == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurationlistener_destroy(listener: alljoyn_permissionconfigurationlistener): Unit {
+    alljoyn_permissionconfigurationlistener_destroy(listener)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_certificatechain_destroy == "on"]
+foreign {
     func alljoyn_permissionconfigurator_certificatechain_destroy(certificateChain: CPointer<Int8>): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_certificatechain_destroy == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurator_certificatechain_destroy(certificateChain: CPointer<Int8>): Unit {
+    alljoyn_permissionconfigurator_certificatechain_destroy(certificateChain)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_certificateid_cleanup == "on"]
+foreign {
     func alljoyn_permissionconfigurator_certificateid_cleanup(certificateId: CPointer<alljoyn_certificateidAbi>): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_certificateid_cleanup == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurator_certificateid_cleanup(certificateId: CPointer<alljoyn_certificateidAbi>): Unit {
+    alljoyn_permissionconfigurator_certificateid_cleanup(certificateId)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_certificateidarray_cleanup == "on"]
+foreign {
     func alljoyn_permissionconfigurator_certificateidarray_cleanup(certificateIdArray: CPointer<alljoyn_certificateidarrayAbi>): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_certificateidarray_cleanup == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurator_certificateidarray_cleanup(certificateIdArray: CPointer<alljoyn_certificateidarrayAbi>): Unit {
+    alljoyn_permissionconfigurator_certificateidarray_cleanup(certificateIdArray)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_claim == "on"]
+foreign {
     func alljoyn_permissionconfigurator_claim(configurator: alljoyn_permissionconfigurator, caKey: CPointer<Int8>, identityCertificateChain: CPointer<Int8>, groupId: CPointer<UInt8>, groupSize: UIntNative, groupAuthority: CPointer<Int8>, manifestsXmls: CPointer<CPointer<Int8>>, manifestsCount: UIntNative): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_claim == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurator_claim(configurator: alljoyn_permissionconfigurator, caKey: CPointer<Int8>, identityCertificateChain: CPointer<Int8>, groupId: CPointer<UInt8>, groupSize: UIntNative, groupAuthority: CPointer<Int8>, manifestsXmls: CPointer<CPointer<Int8>>, manifestsCount: UIntNative): QStatusAbi {
+    return alljoyn_permissionconfigurator_claim(configurator, caKey, identityCertificateChain, groupId, groupSize, groupAuthority, manifestsXmls, manifestsCount)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_endmanagement == "on"]
+foreign {
     func alljoyn_permissionconfigurator_endmanagement(configurator: alljoyn_permissionconfigurator): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_endmanagement == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurator_endmanagement(configurator: alljoyn_permissionconfigurator): QStatusAbi {
+    return alljoyn_permissionconfigurator_endmanagement(configurator)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_getapplicationstate == "on"]
+foreign {
     func alljoyn_permissionconfigurator_getapplicationstate(configurator: alljoyn_permissionconfigurator, state: CPointer<alljoyn_applicationstateAbi>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_getapplicationstate == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurator_getapplicationstate(configurator: alljoyn_permissionconfigurator, state: CPointer<alljoyn_applicationstateAbi>): QStatusAbi {
+    return alljoyn_permissionconfigurator_getapplicationstate(configurator, state)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_getclaimcapabilities == "on"]
+foreign {
     func alljoyn_permissionconfigurator_getclaimcapabilities(configurator: alljoyn_permissionconfigurator, claimCapabilities: CPointer<UInt16>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_getclaimcapabilities == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurator_getclaimcapabilities(configurator: alljoyn_permissionconfigurator, claimCapabilities: CPointer<UInt16>): QStatusAbi {
+    return alljoyn_permissionconfigurator_getclaimcapabilities(configurator, claimCapabilities)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_getclaimcapabilitiesadditionalinfo == "on"]
+foreign {
     func alljoyn_permissionconfigurator_getclaimcapabilitiesadditionalinfo(configurator: alljoyn_permissionconfigurator, additionalInfo: CPointer<UInt16>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_getclaimcapabilitiesadditionalinfo == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurator_getclaimcapabilitiesadditionalinfo(configurator: alljoyn_permissionconfigurator, additionalInfo: CPointer<UInt16>): QStatusAbi {
+    return alljoyn_permissionconfigurator_getclaimcapabilitiesadditionalinfo(configurator, additionalInfo)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_getdefaultclaimcapabilities == "on"]
+foreign {
     func alljoyn_permissionconfigurator_getdefaultclaimcapabilities(): UInt16
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_getdefaultclaimcapabilities == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurator_getdefaultclaimcapabilities(): UInt16 {
+    return alljoyn_permissionconfigurator_getdefaultclaimcapabilities()
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_getdefaultpolicy == "on"]
+foreign {
     func alljoyn_permissionconfigurator_getdefaultpolicy(configurator: alljoyn_permissionconfigurator, policyXml: CPointer<CPointer<Int8>>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_getdefaultpolicy == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurator_getdefaultpolicy(configurator: alljoyn_permissionconfigurator, policyXml: CPointer<CPointer<Int8>>): QStatusAbi {
+    return alljoyn_permissionconfigurator_getdefaultpolicy(configurator, policyXml)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_getidentity == "on"]
+foreign {
     func alljoyn_permissionconfigurator_getidentity(configurator: alljoyn_permissionconfigurator, identityCertificateChain: CPointer<CPointer<Int8>>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_getidentity == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurator_getidentity(configurator: alljoyn_permissionconfigurator, identityCertificateChain: CPointer<CPointer<Int8>>): QStatusAbi {
+    return alljoyn_permissionconfigurator_getidentity(configurator, identityCertificateChain)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_getidentitycertificateid == "on"]
+foreign {
     func alljoyn_permissionconfigurator_getidentitycertificateid(configurator: alljoyn_permissionconfigurator, certificateId: CPointer<alljoyn_certificateidAbi>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_getidentitycertificateid == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurator_getidentitycertificateid(configurator: alljoyn_permissionconfigurator, certificateId: CPointer<alljoyn_certificateidAbi>): QStatusAbi {
+    return alljoyn_permissionconfigurator_getidentitycertificateid(configurator, certificateId)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_getmanifests == "on"]
+foreign {
     func alljoyn_permissionconfigurator_getmanifests(configurator: alljoyn_permissionconfigurator, manifestArray: CPointer<alljoyn_manifestarrayAbi>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_getmanifests == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurator_getmanifests(configurator: alljoyn_permissionconfigurator, manifestArray: CPointer<alljoyn_manifestarrayAbi>): QStatusAbi {
+    return alljoyn_permissionconfigurator_getmanifests(configurator, manifestArray)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_getmanifesttemplate == "on"]
+foreign {
     func alljoyn_permissionconfigurator_getmanifesttemplate(configurator: alljoyn_permissionconfigurator, manifestTemplateXml: CPointer<CPointer<Int8>>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_getmanifesttemplate == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurator_getmanifesttemplate(configurator: alljoyn_permissionconfigurator, manifestTemplateXml: CPointer<CPointer<Int8>>): QStatusAbi {
+    return alljoyn_permissionconfigurator_getmanifesttemplate(configurator, manifestTemplateXml)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_getmembershipsummaries == "on"]
+foreign {
     func alljoyn_permissionconfigurator_getmembershipsummaries(configurator: alljoyn_permissionconfigurator, certificateIds: CPointer<alljoyn_certificateidarrayAbi>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_getmembershipsummaries == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurator_getmembershipsummaries(configurator: alljoyn_permissionconfigurator, certificateIds: CPointer<alljoyn_certificateidarrayAbi>): QStatusAbi {
+    return alljoyn_permissionconfigurator_getmembershipsummaries(configurator, certificateIds)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_getpolicy == "on"]
+foreign {
     func alljoyn_permissionconfigurator_getpolicy(configurator: alljoyn_permissionconfigurator, policyXml: CPointer<CPointer<Int8>>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_getpolicy == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurator_getpolicy(configurator: alljoyn_permissionconfigurator, policyXml: CPointer<CPointer<Int8>>): QStatusAbi {
+    return alljoyn_permissionconfigurator_getpolicy(configurator, policyXml)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_getpublickey == "on"]
+foreign {
     func alljoyn_permissionconfigurator_getpublickey(configurator: alljoyn_permissionconfigurator, publicKey: CPointer<CPointer<Int8>>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_getpublickey == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurator_getpublickey(configurator: alljoyn_permissionconfigurator, publicKey: CPointer<CPointer<Int8>>): QStatusAbi {
+    return alljoyn_permissionconfigurator_getpublickey(configurator, publicKey)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_installmanifests == "on"]
+foreign {
     func alljoyn_permissionconfigurator_installmanifests(configurator: alljoyn_permissionconfigurator, manifestsXmls: CPointer<CPointer<Int8>>, manifestsCount: UIntNative, append: Int32): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_installmanifests == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurator_installmanifests(configurator: alljoyn_permissionconfigurator, manifestsXmls: CPointer<CPointer<Int8>>, manifestsCount: UIntNative, append: Int32): QStatusAbi {
+    return alljoyn_permissionconfigurator_installmanifests(configurator, manifestsXmls, manifestsCount, append)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_installmembership == "on"]
+foreign {
     func alljoyn_permissionconfigurator_installmembership(configurator: alljoyn_permissionconfigurator, membershipCertificateChain: CPointer<Int8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_installmembership == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurator_installmembership(configurator: alljoyn_permissionconfigurator, membershipCertificateChain: CPointer<Int8>): QStatusAbi {
+    return alljoyn_permissionconfigurator_installmembership(configurator, membershipCertificateChain)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_manifestarray_cleanup == "on"]
+foreign {
     func alljoyn_permissionconfigurator_manifestarray_cleanup(manifestArray: CPointer<alljoyn_manifestarrayAbi>): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_manifestarray_cleanup == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurator_manifestarray_cleanup(manifestArray: CPointer<alljoyn_manifestarrayAbi>): Unit {
+    alljoyn_permissionconfigurator_manifestarray_cleanup(manifestArray)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_manifesttemplate_destroy == "on"]
+foreign {
     func alljoyn_permissionconfigurator_manifesttemplate_destroy(manifestTemplateXml: CPointer<Int8>): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_manifesttemplate_destroy == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurator_manifesttemplate_destroy(manifestTemplateXml: CPointer<Int8>): Unit {
+    alljoyn_permissionconfigurator_manifesttemplate_destroy(manifestTemplateXml)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_policy_destroy == "on"]
+foreign {
     func alljoyn_permissionconfigurator_policy_destroy(policyXml: CPointer<Int8>): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_policy_destroy == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurator_policy_destroy(policyXml: CPointer<Int8>): Unit {
+    alljoyn_permissionconfigurator_policy_destroy(policyXml)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_publickey_destroy == "on"]
+foreign {
     func alljoyn_permissionconfigurator_publickey_destroy(publicKey: CPointer<Int8>): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_publickey_destroy == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurator_publickey_destroy(publicKey: CPointer<Int8>): Unit {
+    alljoyn_permissionconfigurator_publickey_destroy(publicKey)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_removemembership == "on"]
+foreign {
     func alljoyn_permissionconfigurator_removemembership(configurator: alljoyn_permissionconfigurator, serial: CPointer<UInt8>, serialLen: UIntNative, issuerPublicKey: CPointer<Int8>, issuerAki: CPointer<UInt8>, issuerAkiLen: UIntNative): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_removemembership == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurator_removemembership(configurator: alljoyn_permissionconfigurator, serial: CPointer<UInt8>, serialLen: UIntNative, issuerPublicKey: CPointer<Int8>, issuerAki: CPointer<UInt8>, issuerAkiLen: UIntNative): QStatusAbi {
+    return alljoyn_permissionconfigurator_removemembership(configurator, serial, serialLen, issuerPublicKey, issuerAki, issuerAkiLen)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_reset == "on"]
+foreign {
     func alljoyn_permissionconfigurator_reset(configurator: alljoyn_permissionconfigurator): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_reset == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurator_reset(configurator: alljoyn_permissionconfigurator): QStatusAbi {
+    return alljoyn_permissionconfigurator_reset(configurator)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_resetpolicy == "on"]
+foreign {
     func alljoyn_permissionconfigurator_resetpolicy(configurator: alljoyn_permissionconfigurator): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_resetpolicy == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurator_resetpolicy(configurator: alljoyn_permissionconfigurator): QStatusAbi {
+    return alljoyn_permissionconfigurator_resetpolicy(configurator)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_setapplicationstate == "on"]
+foreign {
     func alljoyn_permissionconfigurator_setapplicationstate(configurator: alljoyn_permissionconfigurator, state: alljoyn_applicationstateAbi): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_setapplicationstate == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurator_setapplicationstate(configurator: alljoyn_permissionconfigurator, state: alljoyn_applicationstateAbi): QStatusAbi {
+    return alljoyn_permissionconfigurator_setapplicationstate(configurator, state)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_setclaimcapabilities == "on"]
+foreign {
     func alljoyn_permissionconfigurator_setclaimcapabilities(configurator: alljoyn_permissionconfigurator, claimCapabilities: UInt16): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_setclaimcapabilities == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurator_setclaimcapabilities(configurator: alljoyn_permissionconfigurator, claimCapabilities: UInt16): QStatusAbi {
+    return alljoyn_permissionconfigurator_setclaimcapabilities(configurator, claimCapabilities)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_setclaimcapabilitiesadditionalinfo == "on"]
+foreign {
     func alljoyn_permissionconfigurator_setclaimcapabilitiesadditionalinfo(configurator: alljoyn_permissionconfigurator, additionalInfo: UInt16): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_setclaimcapabilitiesadditionalinfo == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurator_setclaimcapabilitiesadditionalinfo(configurator: alljoyn_permissionconfigurator, additionalInfo: UInt16): QStatusAbi {
+    return alljoyn_permissionconfigurator_setclaimcapabilitiesadditionalinfo(configurator, additionalInfo)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_setmanifesttemplatefromxml == "on"]
+foreign {
     func alljoyn_permissionconfigurator_setmanifesttemplatefromxml(configurator: alljoyn_permissionconfigurator, manifestTemplateXml: CPointer<Int8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_setmanifesttemplatefromxml == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurator_setmanifesttemplatefromxml(configurator: alljoyn_permissionconfigurator, manifestTemplateXml: CPointer<Int8>): QStatusAbi {
+    return alljoyn_permissionconfigurator_setmanifesttemplatefromxml(configurator, manifestTemplateXml)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_startmanagement == "on"]
+foreign {
     func alljoyn_permissionconfigurator_startmanagement(configurator: alljoyn_permissionconfigurator): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_startmanagement == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurator_startmanagement(configurator: alljoyn_permissionconfigurator): QStatusAbi {
+    return alljoyn_permissionconfigurator_startmanagement(configurator)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_updateidentity == "on"]
+foreign {
     func alljoyn_permissionconfigurator_updateidentity(configurator: alljoyn_permissionconfigurator, identityCertificateChain: CPointer<Int8>, manifestsXmls: CPointer<CPointer<Int8>>, manifestsCount: UIntNative): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_updateidentity == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurator_updateidentity(configurator: alljoyn_permissionconfigurator, identityCertificateChain: CPointer<Int8>, manifestsXmls: CPointer<CPointer<Int8>>, manifestsCount: UIntNative): QStatusAbi {
+    return alljoyn_permissionconfigurator_updateidentity(configurator, identityCertificateChain, manifestsXmls, manifestsCount)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_updatepolicy == "on"]
+foreign {
     func alljoyn_permissionconfigurator_updatepolicy(configurator: alljoyn_permissionconfigurator, policyXml: CPointer<Int8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_permissionconfigurator_updatepolicy == "on"]
+public unsafe func Windows_alljoyn_permissionconfigurator_updatepolicy(configurator: alljoyn_permissionconfigurator, policyXml: CPointer<Int8>): QStatusAbi {
+    return alljoyn_permissionconfigurator_updatepolicy(configurator, policyXml)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_pinglistener_create == "on"]
+foreign {
     func alljoyn_pinglistener_create(callback: CPointer<alljoyn_pinglistener_callbackAbi>, context: CPointer<Unit>): alljoyn_pinglistener
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_pinglistener_create == "on"]
+public unsafe func Windows_alljoyn_pinglistener_create(callback: CPointer<alljoyn_pinglistener_callbackAbi>, context: CPointer<Unit>): alljoyn_pinglistener {
+    return alljoyn_pinglistener_create(callback, context)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_pinglistener_destroy == "on"]
+foreign {
     func alljoyn_pinglistener_destroy(listener: alljoyn_pinglistener): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_pinglistener_destroy == "on"]
+public unsafe func Windows_alljoyn_pinglistener_destroy(listener: alljoyn_pinglistener): Unit {
+    alljoyn_pinglistener_destroy(listener)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_addchild == "on"]
+foreign {
     func alljoyn_proxybusobject_addchild(proxyObj: alljoyn_proxybusobject, child: alljoyn_proxybusobject): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_addchild == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_addchild(proxyObj: alljoyn_proxybusobject, child: alljoyn_proxybusobject): QStatusAbi {
+    return alljoyn_proxybusobject_addchild(proxyObj, child)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_addinterface == "on"]
+foreign {
     func alljoyn_proxybusobject_addinterface(proxyObj: alljoyn_proxybusobject, iface: alljoyn_interfacedescription): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_addinterface == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_addinterface(proxyObj: alljoyn_proxybusobject, iface: alljoyn_interfacedescription): QStatusAbi {
+    return alljoyn_proxybusobject_addinterface(proxyObj, iface)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_addinterface_by_name == "on"]
+foreign {
     func alljoyn_proxybusobject_addinterface_by_name(proxyObj: alljoyn_proxybusobject, name: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_addinterface_by_name == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_addinterface_by_name(proxyObj: alljoyn_proxybusobject, name: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_proxybusobject_addinterface_by_name(proxyObj, name)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_copy == "on"]
+foreign {
     func alljoyn_proxybusobject_copy(source: alljoyn_proxybusobject): alljoyn_proxybusobject
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_copy == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_copy(source: alljoyn_proxybusobject): alljoyn_proxybusobject {
+    return alljoyn_proxybusobject_copy(source)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_create == "on"]
+foreign {
     func alljoyn_proxybusobject_create(bus: alljoyn_busattachment, service: CPointer<UInt8>, path: CPointer<UInt8>, sessionId: UInt32): alljoyn_proxybusobject
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_create == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_create(bus: alljoyn_busattachment, service: CPointer<UInt8>, path: CPointer<UInt8>, sessionId: UInt32): alljoyn_proxybusobject {
+    return alljoyn_proxybusobject_create(bus, service, path, sessionId)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_create_secure == "on"]
+foreign {
     func alljoyn_proxybusobject_create_secure(bus: alljoyn_busattachment, service: CPointer<UInt8>, path: CPointer<UInt8>, sessionId: UInt32): alljoyn_proxybusobject
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_create_secure == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_create_secure(bus: alljoyn_busattachment, service: CPointer<UInt8>, path: CPointer<UInt8>, sessionId: UInt32): alljoyn_proxybusobject {
+    return alljoyn_proxybusobject_create_secure(bus, service, path, sessionId)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_destroy == "on"]
+foreign {
     func alljoyn_proxybusobject_destroy(proxyObj: alljoyn_proxybusobject): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_destroy == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_destroy(proxyObj: alljoyn_proxybusobject): Unit {
+    alljoyn_proxybusobject_destroy(proxyObj)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_enablepropertycaching == "on"]
+foreign {
     func alljoyn_proxybusobject_enablepropertycaching(proxyObj: alljoyn_proxybusobject): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_enablepropertycaching == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_enablepropertycaching(proxyObj: alljoyn_proxybusobject): Unit {
+    alljoyn_proxybusobject_enablepropertycaching(proxyObj)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_getallproperties == "on"]
+foreign {
     func alljoyn_proxybusobject_getallproperties(proxyObj: alljoyn_proxybusobject, iface: CPointer<UInt8>, values: alljoyn_msgarg): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_getallproperties == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_getallproperties(proxyObj: alljoyn_proxybusobject, iface: CPointer<UInt8>, values: alljoyn_msgarg): QStatusAbi {
+    return alljoyn_proxybusobject_getallproperties(proxyObj, iface, values)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_getallpropertiesasync == "on"]
+foreign {
     func alljoyn_proxybusobject_getallpropertiesasync(proxyObj: alljoyn_proxybusobject, iface: CPointer<UInt8>, callback: alljoyn_proxybusobject_listener_getallpropertiescb_ptr, timeout: UInt32, context: CPointer<Unit>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_getallpropertiesasync == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_getallpropertiesasync(proxyObj: alljoyn_proxybusobject, iface: CPointer<UInt8>, callback: alljoyn_proxybusobject_listener_getallpropertiescb_ptr, timeout: UInt32, context: CPointer<Unit>): QStatusAbi {
+    return alljoyn_proxybusobject_getallpropertiesasync(proxyObj, iface, callback, timeout, context)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_getchild == "on"]
+foreign {
     func alljoyn_proxybusobject_getchild(proxyObj: alljoyn_proxybusobject, path: CPointer<UInt8>): alljoyn_proxybusobject
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_getchild == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_getchild(proxyObj: alljoyn_proxybusobject, path: CPointer<UInt8>): alljoyn_proxybusobject {
+    return alljoyn_proxybusobject_getchild(proxyObj, path)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_getchildren == "on"]
+foreign {
     func alljoyn_proxybusobject_getchildren(proxyObj: alljoyn_proxybusobject, children: CPointer<alljoyn_proxybusobject>, numChildren: UIntNative): UIntNative
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_getchildren == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_getchildren(proxyObj: alljoyn_proxybusobject, children: CPointer<alljoyn_proxybusobject>, numChildren: UIntNative): UIntNative {
+    return alljoyn_proxybusobject_getchildren(proxyObj, children, numChildren)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_getinterface == "on"]
+foreign {
     func alljoyn_proxybusobject_getinterface(proxyObj: alljoyn_proxybusobject, iface: CPointer<UInt8>): alljoyn_interfacedescription
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_getinterface == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_getinterface(proxyObj: alljoyn_proxybusobject, iface: CPointer<UInt8>): alljoyn_interfacedescription {
+    return alljoyn_proxybusobject_getinterface(proxyObj, iface)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_getinterfaces == "on"]
+foreign {
     func alljoyn_proxybusobject_getinterfaces(proxyObj: alljoyn_proxybusobject, ifaces: CPointer<alljoyn_interfacedescription>, numIfaces: UIntNative): UIntNative
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_getinterfaces == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_getinterfaces(proxyObj: alljoyn_proxybusobject, ifaces: CPointer<alljoyn_interfacedescription>, numIfaces: UIntNative): UIntNative {
+    return alljoyn_proxybusobject_getinterfaces(proxyObj, ifaces, numIfaces)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_getpath == "on"]
+foreign {
     func alljoyn_proxybusobject_getpath(proxyObj: alljoyn_proxybusobject): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_getpath == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_getpath(proxyObj: alljoyn_proxybusobject): CPointer<UInt8> {
+    return alljoyn_proxybusobject_getpath(proxyObj)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_getproperty == "on"]
+foreign {
     func alljoyn_proxybusobject_getproperty(proxyObj: alljoyn_proxybusobject, iface: CPointer<UInt8>, property: CPointer<UInt8>, value: alljoyn_msgarg): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_getproperty == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_getproperty(proxyObj: alljoyn_proxybusobject, iface: CPointer<UInt8>, property: CPointer<UInt8>, value: alljoyn_msgarg): QStatusAbi {
+    return alljoyn_proxybusobject_getproperty(proxyObj, iface, property, value)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_getpropertyasync == "on"]
+foreign {
     func alljoyn_proxybusobject_getpropertyasync(proxyObj: alljoyn_proxybusobject, iface: CPointer<UInt8>, property: CPointer<UInt8>, callback: alljoyn_proxybusobject_listener_getpropertycb_ptr, timeout: UInt32, context: CPointer<Unit>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_getpropertyasync == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_getpropertyasync(proxyObj: alljoyn_proxybusobject, iface: CPointer<UInt8>, property: CPointer<UInt8>, callback: alljoyn_proxybusobject_listener_getpropertycb_ptr, timeout: UInt32, context: CPointer<Unit>): QStatusAbi {
+    return alljoyn_proxybusobject_getpropertyasync(proxyObj, iface, property, callback, timeout, context)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_getservicename == "on"]
+foreign {
     func alljoyn_proxybusobject_getservicename(proxyObj: alljoyn_proxybusobject): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_getservicename == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_getservicename(proxyObj: alljoyn_proxybusobject): CPointer<UInt8> {
+    return alljoyn_proxybusobject_getservicename(proxyObj)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_getsessionid == "on"]
+foreign {
     func alljoyn_proxybusobject_getsessionid(proxyObj: alljoyn_proxybusobject): UInt32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_getsessionid == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_getsessionid(proxyObj: alljoyn_proxybusobject): UInt32 {
+    return alljoyn_proxybusobject_getsessionid(proxyObj)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_getuniquename == "on"]
+foreign {
     func alljoyn_proxybusobject_getuniquename(proxyObj: alljoyn_proxybusobject): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_getuniquename == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_getuniquename(proxyObj: alljoyn_proxybusobject): CPointer<UInt8> {
+    return alljoyn_proxybusobject_getuniquename(proxyObj)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_implementsinterface == "on"]
+foreign {
     func alljoyn_proxybusobject_implementsinterface(proxyObj: alljoyn_proxybusobject, iface: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_implementsinterface == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_implementsinterface(proxyObj: alljoyn_proxybusobject, iface: CPointer<UInt8>): Int32 {
+    return alljoyn_proxybusobject_implementsinterface(proxyObj, iface)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_introspectremoteobject == "on"]
+foreign {
     func alljoyn_proxybusobject_introspectremoteobject(proxyObj: alljoyn_proxybusobject): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_introspectremoteobject == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_introspectremoteobject(proxyObj: alljoyn_proxybusobject): QStatusAbi {
+    return alljoyn_proxybusobject_introspectremoteobject(proxyObj)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_introspectremoteobjectasync == "on"]
+foreign {
     func alljoyn_proxybusobject_introspectremoteobjectasync(proxyObj: alljoyn_proxybusobject, callback: alljoyn_proxybusobject_listener_introspectcb_ptr, context: CPointer<Unit>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_introspectremoteobjectasync == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_introspectremoteobjectasync(proxyObj: alljoyn_proxybusobject, callback: alljoyn_proxybusobject_listener_introspectcb_ptr, context: CPointer<Unit>): QStatusAbi {
+    return alljoyn_proxybusobject_introspectremoteobjectasync(proxyObj, callback, context)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_issecure == "on"]
+foreign {
     func alljoyn_proxybusobject_issecure(proxyObj: alljoyn_proxybusobject): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_issecure == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_issecure(proxyObj: alljoyn_proxybusobject): Int32 {
+    return alljoyn_proxybusobject_issecure(proxyObj)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_isvalid == "on"]
+foreign {
     func alljoyn_proxybusobject_isvalid(proxyObj: alljoyn_proxybusobject): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_isvalid == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_isvalid(proxyObj: alljoyn_proxybusobject): Int32 {
+    return alljoyn_proxybusobject_isvalid(proxyObj)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_methodcall == "on"]
+foreign {
     func alljoyn_proxybusobject_methodcall(proxyObj: alljoyn_proxybusobject, ifaceName: CPointer<UInt8>, methodName: CPointer<UInt8>, args: alljoyn_msgarg, numArgs: UIntNative, replyMsg: alljoyn_message, timeout: UInt32, flags: UInt8): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_methodcall == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_methodcall(proxyObj: alljoyn_proxybusobject, ifaceName: CPointer<UInt8>, methodName: CPointer<UInt8>, args: alljoyn_msgarg, numArgs: UIntNative, replyMsg: alljoyn_message, timeout: UInt32, flags: UInt8): QStatusAbi {
+    return alljoyn_proxybusobject_methodcall(proxyObj, ifaceName, methodName, args, numArgs, replyMsg, timeout, flags)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_methodcall_member == "on"]
+foreign {
     func alljoyn_proxybusobject_methodcall_member(proxyObj: alljoyn_proxybusobject, method: alljoyn_interfacedescription_memberAbi, args: alljoyn_msgarg, numArgs: UIntNative, replyMsg: alljoyn_message, timeout: UInt32, flags: UInt8): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_methodcall_member == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_methodcall_member(proxyObj: alljoyn_proxybusobject, method: alljoyn_interfacedescription_memberAbi, args: alljoyn_msgarg, numArgs: UIntNative, replyMsg: alljoyn_message, timeout: UInt32, flags: UInt8): QStatusAbi {
+    return alljoyn_proxybusobject_methodcall_member(proxyObj, method, args, numArgs, replyMsg, timeout, flags)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_methodcall_member_noreply == "on"]
+foreign {
     func alljoyn_proxybusobject_methodcall_member_noreply(proxyObj: alljoyn_proxybusobject, method: alljoyn_interfacedescription_memberAbi, args: alljoyn_msgarg, numArgs: UIntNative, flags: UInt8): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_methodcall_member_noreply == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_methodcall_member_noreply(proxyObj: alljoyn_proxybusobject, method: alljoyn_interfacedescription_memberAbi, args: alljoyn_msgarg, numArgs: UIntNative, flags: UInt8): QStatusAbi {
+    return alljoyn_proxybusobject_methodcall_member_noreply(proxyObj, method, args, numArgs, flags)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_methodcall_noreply == "on"]
+foreign {
     func alljoyn_proxybusobject_methodcall_noreply(proxyObj: alljoyn_proxybusobject, ifaceName: CPointer<UInt8>, methodName: CPointer<UInt8>, args: alljoyn_msgarg, numArgs: UIntNative, flags: UInt8): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_methodcall_noreply == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_methodcall_noreply(proxyObj: alljoyn_proxybusobject, ifaceName: CPointer<UInt8>, methodName: CPointer<UInt8>, args: alljoyn_msgarg, numArgs: UIntNative, flags: UInt8): QStatusAbi {
+    return alljoyn_proxybusobject_methodcall_noreply(proxyObj, ifaceName, methodName, args, numArgs, flags)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_methodcallasync == "on"]
+foreign {
     func alljoyn_proxybusobject_methodcallasync(proxyObj: alljoyn_proxybusobject, ifaceName: CPointer<UInt8>, methodName: CPointer<UInt8>, replyFunc: alljoyn_messagereceiver_replyhandler_ptr, args: alljoyn_msgarg, numArgs: UIntNative, context: CPointer<Unit>, timeout: UInt32, flags: UInt8): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_methodcallasync == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_methodcallasync(proxyObj: alljoyn_proxybusobject, ifaceName: CPointer<UInt8>, methodName: CPointer<UInt8>, replyFunc: alljoyn_messagereceiver_replyhandler_ptr, args: alljoyn_msgarg, numArgs: UIntNative, context: CPointer<Unit>, timeout: UInt32, flags: UInt8): QStatusAbi {
+    return alljoyn_proxybusobject_methodcallasync(proxyObj, ifaceName, methodName, replyFunc, args, numArgs, context, timeout, flags)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_methodcallasync_member == "on"]
+foreign {
     func alljoyn_proxybusobject_methodcallasync_member(proxyObj: alljoyn_proxybusobject, method: alljoyn_interfacedescription_memberAbi, replyFunc: alljoyn_messagereceiver_replyhandler_ptr, args: alljoyn_msgarg, numArgs: UIntNative, context: CPointer<Unit>, timeout: UInt32, flags: UInt8): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_methodcallasync_member == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_methodcallasync_member(proxyObj: alljoyn_proxybusobject, method: alljoyn_interfacedescription_memberAbi, replyFunc: alljoyn_messagereceiver_replyhandler_ptr, args: alljoyn_msgarg, numArgs: UIntNative, context: CPointer<Unit>, timeout: UInt32, flags: UInt8): QStatusAbi {
+    return alljoyn_proxybusobject_methodcallasync_member(proxyObj, method, replyFunc, args, numArgs, context, timeout, flags)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_parsexml == "on"]
+foreign {
     func alljoyn_proxybusobject_parsexml(proxyObj: alljoyn_proxybusobject, xml: CPointer<UInt8>, identifier: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_parsexml == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_parsexml(proxyObj: alljoyn_proxybusobject, xml: CPointer<UInt8>, identifier: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_proxybusobject_parsexml(proxyObj, xml, identifier)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_ref_create == "on"]
+foreign {
     func alljoyn_proxybusobject_ref_create(proxy: alljoyn_proxybusobject): alljoyn_proxybusobject_ref
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_ref_create == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_ref_create(proxy: alljoyn_proxybusobject): alljoyn_proxybusobject_ref {
+    return alljoyn_proxybusobject_ref_create(proxy)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_ref_decref == "on"]
+foreign {
     func alljoyn_proxybusobject_ref_decref(ref: alljoyn_proxybusobject_ref): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_ref_decref == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_ref_decref(ref: alljoyn_proxybusobject_ref): Unit {
+    alljoyn_proxybusobject_ref_decref(ref)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_ref_get == "on"]
+foreign {
     func alljoyn_proxybusobject_ref_get(ref: alljoyn_proxybusobject_ref): alljoyn_proxybusobject
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_ref_get == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_ref_get(ref: alljoyn_proxybusobject_ref): alljoyn_proxybusobject {
+    return alljoyn_proxybusobject_ref_get(ref)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_ref_incref == "on"]
+foreign {
     func alljoyn_proxybusobject_ref_incref(ref: alljoyn_proxybusobject_ref): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_ref_incref == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_ref_incref(ref: alljoyn_proxybusobject_ref): Unit {
+    alljoyn_proxybusobject_ref_incref(ref)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_registerpropertieschangedlistener == "on"]
+foreign {
     func alljoyn_proxybusobject_registerpropertieschangedlistener(proxyObj: alljoyn_proxybusobject, iface: CPointer<UInt8>, properties: CPointer<CPointer<Int8>>, numProperties: UIntNative, callback: alljoyn_proxybusobject_listener_propertieschanged_ptr, context: CPointer<Unit>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_registerpropertieschangedlistener == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_registerpropertieschangedlistener(proxyObj: alljoyn_proxybusobject, iface: CPointer<UInt8>, properties: CPointer<CPointer<Int8>>, numProperties: UIntNative, callback: alljoyn_proxybusobject_listener_propertieschanged_ptr, context: CPointer<Unit>): QStatusAbi {
+    return alljoyn_proxybusobject_registerpropertieschangedlistener(proxyObj, iface, properties, numProperties, callback, context)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_removechild == "on"]
+foreign {
     func alljoyn_proxybusobject_removechild(proxyObj: alljoyn_proxybusobject, path: CPointer<UInt8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_removechild == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_removechild(proxyObj: alljoyn_proxybusobject, path: CPointer<UInt8>): QStatusAbi {
+    return alljoyn_proxybusobject_removechild(proxyObj, path)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_secureconnection == "on"]
+foreign {
     func alljoyn_proxybusobject_secureconnection(proxyObj: alljoyn_proxybusobject, forceAuth: Int32): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_secureconnection == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_secureconnection(proxyObj: alljoyn_proxybusobject, forceAuth: Int32): QStatusAbi {
+    return alljoyn_proxybusobject_secureconnection(proxyObj, forceAuth)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_secureconnectionasync == "on"]
+foreign {
     func alljoyn_proxybusobject_secureconnectionasync(proxyObj: alljoyn_proxybusobject, forceAuth: Int32): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_secureconnectionasync == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_secureconnectionasync(proxyObj: alljoyn_proxybusobject, forceAuth: Int32): QStatusAbi {
+    return alljoyn_proxybusobject_secureconnectionasync(proxyObj, forceAuth)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_setproperty == "on"]
+foreign {
     func alljoyn_proxybusobject_setproperty(proxyObj: alljoyn_proxybusobject, iface: CPointer<UInt8>, property: CPointer<UInt8>, value: alljoyn_msgarg): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_setproperty == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_setproperty(proxyObj: alljoyn_proxybusobject, iface: CPointer<UInt8>, property: CPointer<UInt8>, value: alljoyn_msgarg): QStatusAbi {
+    return alljoyn_proxybusobject_setproperty(proxyObj, iface, property, value)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_setpropertyasync == "on"]
+foreign {
     func alljoyn_proxybusobject_setpropertyasync(proxyObj: alljoyn_proxybusobject, iface: CPointer<UInt8>, property: CPointer<UInt8>, value: alljoyn_msgarg, callback: alljoyn_proxybusobject_listener_setpropertycb_ptr, timeout: UInt32, context: CPointer<Unit>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_setpropertyasync == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_setpropertyasync(proxyObj: alljoyn_proxybusobject, iface: CPointer<UInt8>, property: CPointer<UInt8>, value: alljoyn_msgarg, callback: alljoyn_proxybusobject_listener_setpropertycb_ptr, timeout: UInt32, context: CPointer<Unit>): QStatusAbi {
+    return alljoyn_proxybusobject_setpropertyasync(proxyObj, iface, property, value, callback, timeout, context)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_unregisterpropertieschangedlistener == "on"]
+foreign {
     func alljoyn_proxybusobject_unregisterpropertieschangedlistener(proxyObj: alljoyn_proxybusobject, iface: CPointer<UInt8>, callback: alljoyn_proxybusobject_listener_propertieschanged_ptr): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_proxybusobject_unregisterpropertieschangedlistener == "on"]
+public unsafe func Windows_alljoyn_proxybusobject_unregisterpropertieschangedlistener(proxyObj: alljoyn_proxybusobject, iface: CPointer<UInt8>, callback: alljoyn_proxybusobject_listener_propertieschanged_ptr): QStatusAbi {
+    return alljoyn_proxybusobject_unregisterpropertieschangedlistener(proxyObj, iface, callback)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_routerinit == "on"]
+foreign {
     func alljoyn_routerinit(): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_routerinit == "on"]
+public unsafe func Windows_alljoyn_routerinit(): QStatusAbi {
+    return alljoyn_routerinit()
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_routerinitwithconfig == "on"]
+foreign {
     func alljoyn_routerinitwithconfig(configXml: CPointer<Int8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_routerinitwithconfig == "on"]
+public unsafe func Windows_alljoyn_routerinitwithconfig(configXml: CPointer<Int8>): QStatusAbi {
+    return alljoyn_routerinitwithconfig(configXml)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_routershutdown == "on"]
+foreign {
     func alljoyn_routershutdown(): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_routershutdown == "on"]
+public unsafe func Windows_alljoyn_routershutdown(): QStatusAbi {
+    return alljoyn_routershutdown()
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_claim == "on"]
+foreign {
     func alljoyn_securityapplicationproxy_claim(proxy: alljoyn_securityapplicationproxy, caKey: CPointer<Int8>, identityCertificateChain: CPointer<Int8>, groupId: CPointer<UInt8>, groupSize: UIntNative, groupAuthority: CPointer<Int8>, manifestsXmls: CPointer<CPointer<Int8>>, manifestsCount: UIntNative): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_claim == "on"]
+public unsafe func Windows_alljoyn_securityapplicationproxy_claim(proxy: alljoyn_securityapplicationproxy, caKey: CPointer<Int8>, identityCertificateChain: CPointer<Int8>, groupId: CPointer<UInt8>, groupSize: UIntNative, groupAuthority: CPointer<Int8>, manifestsXmls: CPointer<CPointer<Int8>>, manifestsCount: UIntNative): QStatusAbi {
+    return alljoyn_securityapplicationproxy_claim(proxy, caKey, identityCertificateChain, groupId, groupSize, groupAuthority, manifestsXmls, manifestsCount)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_computemanifestdigest == "on"]
+foreign {
     func alljoyn_securityapplicationproxy_computemanifestdigest(unsignedManifestXml: CPointer<Int8>, identityCertificatePem: CPointer<Int8>, digest: CPointer<CPointer<UInt8>>, digestSize: CPointer<UIntNative>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_computemanifestdigest == "on"]
+public unsafe func Windows_alljoyn_securityapplicationproxy_computemanifestdigest(unsignedManifestXml: CPointer<Int8>, identityCertificatePem: CPointer<Int8>, digest: CPointer<CPointer<UInt8>>, digestSize: CPointer<UIntNative>): QStatusAbi {
+    return alljoyn_securityapplicationproxy_computemanifestdigest(unsignedManifestXml, identityCertificatePem, digest, digestSize)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_create == "on"]
+foreign {
     func alljoyn_securityapplicationproxy_create(bus: alljoyn_busattachment, appBusName: CPointer<Int8>, sessionId: UInt32): alljoyn_securityapplicationproxy
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_create == "on"]
+public unsafe func Windows_alljoyn_securityapplicationproxy_create(bus: alljoyn_busattachment, appBusName: CPointer<Int8>, sessionId: UInt32): alljoyn_securityapplicationproxy {
+    return alljoyn_securityapplicationproxy_create(bus, appBusName, sessionId)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_destroy == "on"]
+foreign {
     func alljoyn_securityapplicationproxy_destroy(proxy: alljoyn_securityapplicationproxy): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_destroy == "on"]
+public unsafe func Windows_alljoyn_securityapplicationproxy_destroy(proxy: alljoyn_securityapplicationproxy): Unit {
+    alljoyn_securityapplicationproxy_destroy(proxy)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_digest_destroy == "on"]
+foreign {
     func alljoyn_securityapplicationproxy_digest_destroy(digest: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_digest_destroy == "on"]
+public unsafe func Windows_alljoyn_securityapplicationproxy_digest_destroy(digest: CPointer<UInt8>): Unit {
+    alljoyn_securityapplicationproxy_digest_destroy(digest)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_eccpublickey_destroy == "on"]
+foreign {
     func alljoyn_securityapplicationproxy_eccpublickey_destroy(eccPublicKey: CPointer<Int8>): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_eccpublickey_destroy == "on"]
+public unsafe func Windows_alljoyn_securityapplicationproxy_eccpublickey_destroy(eccPublicKey: CPointer<Int8>): Unit {
+    alljoyn_securityapplicationproxy_eccpublickey_destroy(eccPublicKey)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_endmanagement == "on"]
+foreign {
     func alljoyn_securityapplicationproxy_endmanagement(proxy: alljoyn_securityapplicationproxy): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_endmanagement == "on"]
+public unsafe func Windows_alljoyn_securityapplicationproxy_endmanagement(proxy: alljoyn_securityapplicationproxy): QStatusAbi {
+    return alljoyn_securityapplicationproxy_endmanagement(proxy)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_getapplicationstate == "on"]
+foreign {
     func alljoyn_securityapplicationproxy_getapplicationstate(proxy: alljoyn_securityapplicationproxy, applicationState: CPointer<alljoyn_applicationstateAbi>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_getapplicationstate == "on"]
+public unsafe func Windows_alljoyn_securityapplicationproxy_getapplicationstate(proxy: alljoyn_securityapplicationproxy, applicationState: CPointer<alljoyn_applicationstateAbi>): QStatusAbi {
+    return alljoyn_securityapplicationproxy_getapplicationstate(proxy, applicationState)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_getclaimcapabilities == "on"]
+foreign {
     func alljoyn_securityapplicationproxy_getclaimcapabilities(proxy: alljoyn_securityapplicationproxy, capabilities: CPointer<UInt16>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_getclaimcapabilities == "on"]
+public unsafe func Windows_alljoyn_securityapplicationproxy_getclaimcapabilities(proxy: alljoyn_securityapplicationproxy, capabilities: CPointer<UInt16>): QStatusAbi {
+    return alljoyn_securityapplicationproxy_getclaimcapabilities(proxy, capabilities)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_getclaimcapabilitiesadditionalinfo == "on"]
+foreign {
     func alljoyn_securityapplicationproxy_getclaimcapabilitiesadditionalinfo(proxy: alljoyn_securityapplicationproxy, additionalInfo: CPointer<UInt16>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_getclaimcapabilitiesadditionalinfo == "on"]
+public unsafe func Windows_alljoyn_securityapplicationproxy_getclaimcapabilitiesadditionalinfo(proxy: alljoyn_securityapplicationproxy, additionalInfo: CPointer<UInt16>): QStatusAbi {
+    return alljoyn_securityapplicationproxy_getclaimcapabilitiesadditionalinfo(proxy, additionalInfo)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_getdefaultpolicy == "on"]
+foreign {
     func alljoyn_securityapplicationproxy_getdefaultpolicy(proxy: alljoyn_securityapplicationproxy, policyXml: CPointer<CPointer<Int8>>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_getdefaultpolicy == "on"]
+public unsafe func Windows_alljoyn_securityapplicationproxy_getdefaultpolicy(proxy: alljoyn_securityapplicationproxy, policyXml: CPointer<CPointer<Int8>>): QStatusAbi {
+    return alljoyn_securityapplicationproxy_getdefaultpolicy(proxy, policyXml)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_geteccpublickey == "on"]
+foreign {
     func alljoyn_securityapplicationproxy_geteccpublickey(proxy: alljoyn_securityapplicationproxy, eccPublicKey: CPointer<CPointer<Int8>>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_geteccpublickey == "on"]
+public unsafe func Windows_alljoyn_securityapplicationproxy_geteccpublickey(proxy: alljoyn_securityapplicationproxy, eccPublicKey: CPointer<CPointer<Int8>>): QStatusAbi {
+    return alljoyn_securityapplicationproxy_geteccpublickey(proxy, eccPublicKey)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_getmanifesttemplate == "on"]
+foreign {
     func alljoyn_securityapplicationproxy_getmanifesttemplate(proxy: alljoyn_securityapplicationproxy, manifestTemplateXml: CPointer<CPointer<Int8>>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_getmanifesttemplate == "on"]
+public unsafe func Windows_alljoyn_securityapplicationproxy_getmanifesttemplate(proxy: alljoyn_securityapplicationproxy, manifestTemplateXml: CPointer<CPointer<Int8>>): QStatusAbi {
+    return alljoyn_securityapplicationproxy_getmanifesttemplate(proxy, manifestTemplateXml)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_getpermissionmanagementsessionport == "on"]
+foreign {
     func alljoyn_securityapplicationproxy_getpermissionmanagementsessionport(): UInt16
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_getpermissionmanagementsessionport == "on"]
+public unsafe func Windows_alljoyn_securityapplicationproxy_getpermissionmanagementsessionport(): UInt16 {
+    return alljoyn_securityapplicationproxy_getpermissionmanagementsessionport()
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_getpolicy == "on"]
+foreign {
     func alljoyn_securityapplicationproxy_getpolicy(proxy: alljoyn_securityapplicationproxy, policyXml: CPointer<CPointer<Int8>>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_getpolicy == "on"]
+public unsafe func Windows_alljoyn_securityapplicationproxy_getpolicy(proxy: alljoyn_securityapplicationproxy, policyXml: CPointer<CPointer<Int8>>): QStatusAbi {
+    return alljoyn_securityapplicationproxy_getpolicy(proxy, policyXml)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_installmembership == "on"]
+foreign {
     func alljoyn_securityapplicationproxy_installmembership(proxy: alljoyn_securityapplicationproxy, membershipCertificateChain: CPointer<Int8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_installmembership == "on"]
+public unsafe func Windows_alljoyn_securityapplicationproxy_installmembership(proxy: alljoyn_securityapplicationproxy, membershipCertificateChain: CPointer<Int8>): QStatusAbi {
+    return alljoyn_securityapplicationproxy_installmembership(proxy, membershipCertificateChain)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_manifest_destroy == "on"]
+foreign {
     func alljoyn_securityapplicationproxy_manifest_destroy(signedManifestXml: CPointer<Int8>): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_manifest_destroy == "on"]
+public unsafe func Windows_alljoyn_securityapplicationproxy_manifest_destroy(signedManifestXml: CPointer<Int8>): Unit {
+    alljoyn_securityapplicationproxy_manifest_destroy(signedManifestXml)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_manifesttemplate_destroy == "on"]
+foreign {
     func alljoyn_securityapplicationproxy_manifesttemplate_destroy(manifestTemplateXml: CPointer<Int8>): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_manifesttemplate_destroy == "on"]
+public unsafe func Windows_alljoyn_securityapplicationproxy_manifesttemplate_destroy(manifestTemplateXml: CPointer<Int8>): Unit {
+    alljoyn_securityapplicationproxy_manifesttemplate_destroy(manifestTemplateXml)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_policy_destroy == "on"]
+foreign {
     func alljoyn_securityapplicationproxy_policy_destroy(policyXml: CPointer<Int8>): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_policy_destroy == "on"]
+public unsafe func Windows_alljoyn_securityapplicationproxy_policy_destroy(policyXml: CPointer<Int8>): Unit {
+    alljoyn_securityapplicationproxy_policy_destroy(policyXml)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_reset == "on"]
+foreign {
     func alljoyn_securityapplicationproxy_reset(proxy: alljoyn_securityapplicationproxy): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_reset == "on"]
+public unsafe func Windows_alljoyn_securityapplicationproxy_reset(proxy: alljoyn_securityapplicationproxy): QStatusAbi {
+    return alljoyn_securityapplicationproxy_reset(proxy)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_resetpolicy == "on"]
+foreign {
     func alljoyn_securityapplicationproxy_resetpolicy(proxy: alljoyn_securityapplicationproxy): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_resetpolicy == "on"]
+public unsafe func Windows_alljoyn_securityapplicationproxy_resetpolicy(proxy: alljoyn_securityapplicationproxy): QStatusAbi {
+    return alljoyn_securityapplicationproxy_resetpolicy(proxy)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_setmanifestsignature == "on"]
+foreign {
     func alljoyn_securityapplicationproxy_setmanifestsignature(unsignedManifestXml: CPointer<Int8>, identityCertificatePem: CPointer<Int8>, signature: CPointer<UInt8>, signatureSize: UIntNative, signedManifestXml: CPointer<CPointer<Int8>>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_setmanifestsignature == "on"]
+public unsafe func Windows_alljoyn_securityapplicationproxy_setmanifestsignature(unsignedManifestXml: CPointer<Int8>, identityCertificatePem: CPointer<Int8>, signature: CPointer<UInt8>, signatureSize: UIntNative, signedManifestXml: CPointer<CPointer<Int8>>): QStatusAbi {
+    return alljoyn_securityapplicationproxy_setmanifestsignature(unsignedManifestXml, identityCertificatePem, signature, signatureSize, signedManifestXml)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_signmanifest == "on"]
+foreign {
     func alljoyn_securityapplicationproxy_signmanifest(unsignedManifestXml: CPointer<Int8>, identityCertificatePem: CPointer<Int8>, signingPrivateKeyPem: CPointer<Int8>, signedManifestXml: CPointer<CPointer<Int8>>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_signmanifest == "on"]
+public unsafe func Windows_alljoyn_securityapplicationproxy_signmanifest(unsignedManifestXml: CPointer<Int8>, identityCertificatePem: CPointer<Int8>, signingPrivateKeyPem: CPointer<Int8>, signedManifestXml: CPointer<CPointer<Int8>>): QStatusAbi {
+    return alljoyn_securityapplicationproxy_signmanifest(unsignedManifestXml, identityCertificatePem, signingPrivateKeyPem, signedManifestXml)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_startmanagement == "on"]
+foreign {
     func alljoyn_securityapplicationproxy_startmanagement(proxy: alljoyn_securityapplicationproxy): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_startmanagement == "on"]
+public unsafe func Windows_alljoyn_securityapplicationproxy_startmanagement(proxy: alljoyn_securityapplicationproxy): QStatusAbi {
+    return alljoyn_securityapplicationproxy_startmanagement(proxy)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_updateidentity == "on"]
+foreign {
     func alljoyn_securityapplicationproxy_updateidentity(proxy: alljoyn_securityapplicationproxy, identityCertificateChain: CPointer<Int8>, manifestsXmls: CPointer<CPointer<Int8>>, manifestsCount: UIntNative): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_updateidentity == "on"]
+public unsafe func Windows_alljoyn_securityapplicationproxy_updateidentity(proxy: alljoyn_securityapplicationproxy, identityCertificateChain: CPointer<Int8>, manifestsXmls: CPointer<CPointer<Int8>>, manifestsCount: UIntNative): QStatusAbi {
+    return alljoyn_securityapplicationproxy_updateidentity(proxy, identityCertificateChain, manifestsXmls, manifestsCount)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_updatepolicy == "on"]
+foreign {
     func alljoyn_securityapplicationproxy_updatepolicy(proxy: alljoyn_securityapplicationproxy, policyXml: CPointer<Int8>): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_securityapplicationproxy_updatepolicy == "on"]
+public unsafe func Windows_alljoyn_securityapplicationproxy_updatepolicy(proxy: alljoyn_securityapplicationproxy, policyXml: CPointer<Int8>): QStatusAbi {
+    return alljoyn_securityapplicationproxy_updatepolicy(proxy, policyXml)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_sessionlistener_create == "on"]
+foreign {
     func alljoyn_sessionlistener_create(callbacks: CPointer<alljoyn_sessionlistener_callbacksAbi>, context: CPointer<Unit>): alljoyn_sessionlistener
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_sessionlistener_create == "on"]
+public unsafe func Windows_alljoyn_sessionlistener_create(callbacks: CPointer<alljoyn_sessionlistener_callbacksAbi>, context: CPointer<Unit>): alljoyn_sessionlistener {
+    return alljoyn_sessionlistener_create(callbacks, context)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_sessionlistener_destroy == "on"]
+foreign {
     func alljoyn_sessionlistener_destroy(listener: alljoyn_sessionlistener): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_sessionlistener_destroy == "on"]
+public unsafe func Windows_alljoyn_sessionlistener_destroy(listener: alljoyn_sessionlistener): Unit {
+    alljoyn_sessionlistener_destroy(listener)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_sessionopts_cmp == "on"]
+foreign {
     func alljoyn_sessionopts_cmp(one: alljoyn_sessionopts, other: alljoyn_sessionopts): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_sessionopts_cmp == "on"]
+public unsafe func Windows_alljoyn_sessionopts_cmp(one: alljoyn_sessionopts, other: alljoyn_sessionopts): Int32 {
+    return alljoyn_sessionopts_cmp(one, other)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_sessionopts_create == "on"]
+foreign {
     func alljoyn_sessionopts_create(traffic: UInt8, isMultipoint: Int32, proximity: UInt8, transports: UInt16): alljoyn_sessionopts
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_sessionopts_create == "on"]
+public unsafe func Windows_alljoyn_sessionopts_create(traffic: UInt8, isMultipoint: Int32, proximity: UInt8, transports: UInt16): alljoyn_sessionopts {
+    return alljoyn_sessionopts_create(traffic, isMultipoint, proximity, transports)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_sessionopts_destroy == "on"]
+foreign {
     func alljoyn_sessionopts_destroy(opts: alljoyn_sessionopts): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_sessionopts_destroy == "on"]
+public unsafe func Windows_alljoyn_sessionopts_destroy(opts: alljoyn_sessionopts): Unit {
+    alljoyn_sessionopts_destroy(opts)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_sessionopts_get_multipoint == "on"]
+foreign {
     func alljoyn_sessionopts_get_multipoint(opts: alljoyn_sessionopts): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_sessionopts_get_multipoint == "on"]
+public unsafe func Windows_alljoyn_sessionopts_get_multipoint(opts: alljoyn_sessionopts): Int32 {
+    return alljoyn_sessionopts_get_multipoint(opts)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_sessionopts_get_proximity == "on"]
+foreign {
     func alljoyn_sessionopts_get_proximity(opts: alljoyn_sessionopts): UInt8
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_sessionopts_get_proximity == "on"]
+public unsafe func Windows_alljoyn_sessionopts_get_proximity(opts: alljoyn_sessionopts): UInt8 {
+    return alljoyn_sessionopts_get_proximity(opts)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_sessionopts_get_traffic == "on"]
+foreign {
     func alljoyn_sessionopts_get_traffic(opts: alljoyn_sessionopts): UInt8
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_sessionopts_get_traffic == "on"]
+public unsafe func Windows_alljoyn_sessionopts_get_traffic(opts: alljoyn_sessionopts): UInt8 {
+    return alljoyn_sessionopts_get_traffic(opts)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_sessionopts_get_transports == "on"]
+foreign {
     func alljoyn_sessionopts_get_transports(opts: alljoyn_sessionopts): UInt16
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_sessionopts_get_transports == "on"]
+public unsafe func Windows_alljoyn_sessionopts_get_transports(opts: alljoyn_sessionopts): UInt16 {
+    return alljoyn_sessionopts_get_transports(opts)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_sessionopts_iscompatible == "on"]
+foreign {
     func alljoyn_sessionopts_iscompatible(one: alljoyn_sessionopts, other: alljoyn_sessionopts): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_sessionopts_iscompatible == "on"]
+public unsafe func Windows_alljoyn_sessionopts_iscompatible(one: alljoyn_sessionopts, other: alljoyn_sessionopts): Int32 {
+    return alljoyn_sessionopts_iscompatible(one, other)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_sessionopts_set_multipoint == "on"]
+foreign {
     func alljoyn_sessionopts_set_multipoint(opts: alljoyn_sessionopts, isMultipoint: Int32): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_sessionopts_set_multipoint == "on"]
+public unsafe func Windows_alljoyn_sessionopts_set_multipoint(opts: alljoyn_sessionopts, isMultipoint: Int32): Unit {
+    alljoyn_sessionopts_set_multipoint(opts, isMultipoint)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_sessionopts_set_proximity == "on"]
+foreign {
     func alljoyn_sessionopts_set_proximity(opts: alljoyn_sessionopts, proximity: UInt8): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_sessionopts_set_proximity == "on"]
+public unsafe func Windows_alljoyn_sessionopts_set_proximity(opts: alljoyn_sessionopts, proximity: UInt8): Unit {
+    alljoyn_sessionopts_set_proximity(opts, proximity)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_sessionopts_set_traffic == "on"]
+foreign {
     func alljoyn_sessionopts_set_traffic(opts: alljoyn_sessionopts, traffic: UInt8): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_sessionopts_set_traffic == "on"]
+public unsafe func Windows_alljoyn_sessionopts_set_traffic(opts: alljoyn_sessionopts, traffic: UInt8): Unit {
+    alljoyn_sessionopts_set_traffic(opts, traffic)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_sessionopts_set_transports == "on"]
+foreign {
     func alljoyn_sessionopts_set_transports(opts: alljoyn_sessionopts, transports: UInt16): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_sessionopts_set_transports == "on"]
+public unsafe func Windows_alljoyn_sessionopts_set_transports(opts: alljoyn_sessionopts, transports: UInt16): Unit {
+    alljoyn_sessionopts_set_transports(opts, transports)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_sessionportlistener_create == "on"]
+foreign {
     func alljoyn_sessionportlistener_create(callbacks: CPointer<alljoyn_sessionportlistener_callbacksAbi>, context: CPointer<Unit>): alljoyn_sessionportlistener
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_sessionportlistener_create == "on"]
+public unsafe func Windows_alljoyn_sessionportlistener_create(callbacks: CPointer<alljoyn_sessionportlistener_callbacksAbi>, context: CPointer<Unit>): alljoyn_sessionportlistener {
+    return alljoyn_sessionportlistener_create(callbacks, context)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_sessionportlistener_destroy == "on"]
+foreign {
     func alljoyn_sessionportlistener_destroy(listener: alljoyn_sessionportlistener): Unit
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_sessionportlistener_destroy == "on"]
+public unsafe func Windows_alljoyn_sessionportlistener_destroy(listener: alljoyn_sessionportlistener): Unit {
+    alljoyn_sessionportlistener_destroy(listener)
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_shutdown == "on"]
+foreign {
     func alljoyn_shutdown(): QStatusAbi
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_shutdown == "on"]
+public unsafe func Windows_alljoyn_shutdown(): QStatusAbi {
+    return alljoyn_shutdown()
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_unity_deferred_callbacks_process == "on"]
+foreign {
     func alljoyn_unity_deferred_callbacks_process(): Int32
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_unity_deferred_callbacks_process == "on"]
+public unsafe func Windows_alljoyn_unity_deferred_callbacks_process(): Int32 {
+    return alljoyn_unity_deferred_callbacks_process()
+}
+
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_unity_set_deferred_callback_mainthread_only == "on"]
+foreign {
     func alljoyn_unity_set_deferred_callback_mainthread_only(mainthread_only: Int32): Unit
 }
 
-@When[MSAJAPI == "on" && Windows_Win32_Security == "on"]
-foreign {
-    // param-hint: lpSecurityAttributes optional
-    func AllJoynCreateBus(outBufferSize: UInt32, inBufferSize: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): CPointer<Unit>
+@When[Windows_Win32_Devices_AllJoyn == "on" && MSAJAPI == "on" && Windows_Win32_Devices_AllJoyn_alljoyn_unity_set_deferred_callback_mainthread_only == "on"]
+public unsafe func Windows_alljoyn_unity_set_deferred_callback_mainthread_only(mainthread_only: Int32): Unit {
+    alljoyn_unity_set_deferred_callback_mainthread_only(mainthread_only)
 }
 
 @When[Windows_Win32_Devices_AllJoyn == "on"]

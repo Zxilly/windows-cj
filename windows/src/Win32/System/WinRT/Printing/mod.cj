@@ -8,15 +8,10 @@ import windows_core.{RuntimeType}
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase, RuntimeType, RuntimeTypeContract}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Printing == "on"]
 import windows.Win32.Graphics.Printing as Win32_Graphics_Printing
-@When[Windows_Win32_Storage_Xps == "on"]
 import windows.Win32.Storage.Xps as Win32_Storage_Xps
-@When[Windows_Win32_Storage_Xps_Printing == "on"]
 import windows.Win32.Storage.Xps.Printing as Win32_Storage_Xps_Printing
-@When[Windows_Win32_System_WinRT == "on"]
 import windows.Win32.System.WinRT as Win32_System_WinRT
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1

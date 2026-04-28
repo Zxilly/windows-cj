@@ -6,7 +6,6 @@ package windows.Win32.NetworkManagement.NetBios
 import std.collection.*
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 
@@ -565,9 +564,14 @@ extend SESSION_HEADER <: windows_core.CopyType & windows_core.RuntimeType & wind
     }
 }
 
-@When[NETAPI32 == "on" && ((arch == "x86_64" || arch == "aarch64"))]
+@When[Windows_Win32_NetworkManagement_NetBios == "on" && NETAPI32 == "on" && Windows_Win32_NetworkManagement_NetBios_Netbios == "on" && (arch == "x86_64" || arch == "aarch64")]
 foreign {
     func Netbios(pncb: CPointer<NCBAbi>): UInt8
+}
+
+@When[Windows_Win32_NetworkManagement_NetBios == "on" && NETAPI32 == "on" && Windows_Win32_NetworkManagement_NetBios_Netbios == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_Netbios(pncb: CPointer<NCBAbi>): UInt8 {
+    return Netbios(pncb)
 }
 
 @When[Windows_Win32_NetworkManagement_NetBios == "on"]

@@ -10,11 +10,8 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Graphics_Imaging == "on"]
 import windows.Graphics.Imaging as Graphics_Imaging
-@When[Windows_Media == "on"]
 import windows.Media as Media
 import windows.Media._impl_l0 as Media__impl_l0
 import windows._impl_l0 as _impl_l0
@@ -3975,9 +3972,18 @@ public struct IPerceptionColorFrameSourceVtbl {
     public var Available: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Active: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsControlled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedVideoProfiles: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedVideoProfiles: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var AvailableVideoProfiles: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AvailableVideoProfiles: UIntNative = UIntNative(0)
     public var VideoProfile: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Media_Devices_Core == "on"]
     public var get_CameraIntrinsics: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -4180,6 +4186,7 @@ public class IPerceptionColorFrameSource <: InterfaceWrapperBase & ComInterface 
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4188,6 +4195,7 @@ public class IPerceptionColorFrameSource <: InterfaceWrapperBase & ComInterface 
         return windows_collections.IMapView<windows_core.HString, IInspectable>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedVideoProfiles(): windows_collections.IVectorView<PerceptionVideoProfile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4196,6 +4204,7 @@ public class IPerceptionColorFrameSource <: InterfaceWrapperBase & ComInterface 
         return windows_collections.IVectorView<PerceptionVideoProfile>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AvailableVideoProfiles(): windows_collections.IVectorView<PerceptionVideoProfile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4465,7 +4474,10 @@ extend IPerceptionColorFrameSourceRemovedEventArgs <: windows_core.Interface<IPe
 public struct IPerceptionColorFrameSourceStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var CreateWatcher: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllAsync: UIntNative = UIntNative(0)
     public var FromIdAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RequestAccessAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -4544,6 +4556,7 @@ public class IPerceptionColorFrameSourceStatics <: InterfaceWrapperBase & ComInt
         return PerceptionColorFrameSourceWatcher.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<PerceptionColorFrameSource>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5010,9 +5023,18 @@ public struct IPerceptionDepthFrameSourceVtbl {
     public var Available: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Active: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsControlled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedVideoProfiles: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedVideoProfiles: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var AvailableVideoProfiles: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AvailableVideoProfiles: UIntNative = UIntNative(0)
     public var VideoProfile: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Media_Devices_Core == "on"]
     public var get_CameraIntrinsics: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -5215,6 +5237,7 @@ public class IPerceptionDepthFrameSource <: InterfaceWrapperBase & ComInterface 
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5223,6 +5246,7 @@ public class IPerceptionDepthFrameSource <: InterfaceWrapperBase & ComInterface 
         return windows_collections.IMapView<windows_core.HString, IInspectable>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedVideoProfiles(): windows_collections.IVectorView<PerceptionVideoProfile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5231,6 +5255,7 @@ public class IPerceptionDepthFrameSource <: InterfaceWrapperBase & ComInterface 
         return windows_collections.IVectorView<PerceptionVideoProfile>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AvailableVideoProfiles(): windows_collections.IVectorView<PerceptionVideoProfile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5500,7 +5525,10 @@ extend IPerceptionDepthFrameSourceRemovedEventArgs <: windows_core.Interface<IPe
 public struct IPerceptionDepthFrameSourceStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var CreateWatcher: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllAsync: UIntNative = UIntNative(0)
     public var FromIdAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RequestAccessAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -5579,6 +5607,7 @@ public class IPerceptionDepthFrameSourceStatics <: InterfaceWrapperBase & ComInt
         return PerceptionDepthFrameSourceWatcher.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<PerceptionDepthFrameSource>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5932,9 +5961,18 @@ public struct IPerceptionInfraredFrameSourceVtbl {
     public var Available: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Active: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsControlled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedVideoProfiles: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedVideoProfiles: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var AvailableVideoProfiles: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AvailableVideoProfiles: UIntNative = UIntNative(0)
     public var VideoProfile: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Media_Devices_Core == "on"]
     public var get_CameraIntrinsics: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -6137,6 +6175,7 @@ public class IPerceptionInfraredFrameSource <: InterfaceWrapperBase & ComInterfa
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6145,6 +6184,7 @@ public class IPerceptionInfraredFrameSource <: InterfaceWrapperBase & ComInterfa
         return windows_collections.IMapView<windows_core.HString, IInspectable>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedVideoProfiles(): windows_collections.IVectorView<PerceptionVideoProfile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6153,6 +6193,7 @@ public class IPerceptionInfraredFrameSource <: InterfaceWrapperBase & ComInterfa
         return windows_collections.IVectorView<PerceptionVideoProfile>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AvailableVideoProfiles(): windows_collections.IVectorView<PerceptionVideoProfile> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6422,7 +6463,10 @@ extend IPerceptionInfraredFrameSourceRemovedEventArgs <: windows_core.Interface<
 public struct IPerceptionInfraredFrameSourceStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var CreateWatcher: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllAsync: UIntNative = UIntNative(0)
     public var FromIdAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RequestAccessAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -6501,6 +6545,7 @@ public class IPerceptionInfraredFrameSourceStatics <: InterfaceWrapperBase & Com
         return PerceptionInfraredFrameSourceWatcher.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<PerceptionInfraredFrameSource>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7090,14 +7135,17 @@ public class PerceptionColorFrameSource <: InterfaceWrapperBase & ComInterface &
         return defaultInterface().IsControlled()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         return defaultInterface().Properties()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedVideoProfiles(): windows_collections.IVectorView<PerceptionVideoProfile> {
         return defaultInterface().SupportedVideoProfiles()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AvailableVideoProfiles(): windows_collections.IVectorView<PerceptionVideoProfile> {
         return defaultInterface().AvailableVideoProfiles()
     }
@@ -7155,6 +7203,7 @@ public class PerceptionColorFrameSource <: InterfaceWrapperBase & ComInterface &
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindAllAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<PerceptionColorFrameSource>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<PerceptionColorFrameSource>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<PerceptionColorFrameSource>>>.None
         try (factory__ = windows_core.factory<PerceptionColorFrameSource, IPerceptionColorFrameSourceStatics>().unwrap()) {
@@ -7891,14 +7940,17 @@ public class PerceptionDepthFrameSource <: InterfaceWrapperBase & ComInterface &
         return defaultInterface().IsControlled()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         return defaultInterface().Properties()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedVideoProfiles(): windows_collections.IVectorView<PerceptionVideoProfile> {
         return defaultInterface().SupportedVideoProfiles()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AvailableVideoProfiles(): windows_collections.IVectorView<PerceptionVideoProfile> {
         return defaultInterface().AvailableVideoProfiles()
     }
@@ -7956,6 +8008,7 @@ public class PerceptionDepthFrameSource <: InterfaceWrapperBase & ComInterface &
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindAllAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<PerceptionDepthFrameSource>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<PerceptionDepthFrameSource>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<PerceptionDepthFrameSource>>>.None
         try (factory__ = windows_core.factory<PerceptionDepthFrameSource, IPerceptionDepthFrameSourceStatics>().unwrap()) {
@@ -8581,14 +8634,17 @@ public class PerceptionInfraredFrameSource <: InterfaceWrapperBase & ComInterfac
         return defaultInterface().IsControlled()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         return defaultInterface().Properties()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedVideoProfiles(): windows_collections.IVectorView<PerceptionVideoProfile> {
         return defaultInterface().SupportedVideoProfiles()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AvailableVideoProfiles(): windows_collections.IVectorView<PerceptionVideoProfile> {
         return defaultInterface().AvailableVideoProfiles()
     }
@@ -8646,6 +8702,7 @@ public class PerceptionInfraredFrameSource <: InterfaceWrapperBase & ComInterfac
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindAllAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<PerceptionInfraredFrameSource>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<PerceptionInfraredFrameSource>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<PerceptionInfraredFrameSource>>>.None
         try (factory__ = windows_core.factory<PerceptionInfraredFrameSource, IPerceptionInfraredFrameSourceStatics>().unwrap()) {

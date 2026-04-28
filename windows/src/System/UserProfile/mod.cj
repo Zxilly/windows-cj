@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -574,10 +573,22 @@ public struct IGlobalizationPreferencesForUserVtbl {
     public var get_User: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_System != "on"]
     public var get_User: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Calendars: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Calendars: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Clocks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Clocks: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Currencies: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Currencies: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Languages: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Languages: UIntNative = UIntNative(0)
     public var HomeGeographicRegion: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Globalization == "on"]
     public var WeekStartsOn: CFunc<(CPointer<Unit>, CPointer<_impl_l0.DayOfWeekAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -660,6 +671,7 @@ public class IGlobalizationPreferencesForUser <: InterfaceWrapperBase & ComInter
         return _impl_l1.User.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Calendars(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -668,6 +680,7 @@ public class IGlobalizationPreferencesForUser <: InterfaceWrapperBase & ComInter
         return windows_collections.IVectorView<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Clocks(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -676,6 +689,7 @@ public class IGlobalizationPreferencesForUser <: InterfaceWrapperBase & ComInter
         return windows_collections.IVectorView<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Currencies(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -684,6 +698,7 @@ public class IGlobalizationPreferencesForUser <: InterfaceWrapperBase & ComInter
         return windows_collections.IVectorView<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Languages(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -717,10 +732,22 @@ extend IGlobalizationPreferencesForUser <: windows_core.Interface<IGlobalization
 @C
 public struct IGlobalizationPreferencesStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Calendars: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Calendars: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Clocks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Clocks: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Currencies: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Currencies: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Languages: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Languages: UIntNative = UIntNative(0)
     public var HomeGeographicRegion: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Globalization == "on"]
     public var WeekStartsOn: CFunc<(CPointer<Unit>, CPointer<_impl_l0.DayOfWeekAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -794,6 +821,7 @@ public class IGlobalizationPreferencesStatics <: InterfaceWrapperBase & ComInter
         readVtbl<IGlobalizationPreferencesStaticsVtbl>(IGlobalizationPreferencesStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Calendars(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -802,6 +830,7 @@ public class IGlobalizationPreferencesStatics <: InterfaceWrapperBase & ComInter
         return windows_collections.IVectorView<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Clocks(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -810,6 +839,7 @@ public class IGlobalizationPreferencesStatics <: InterfaceWrapperBase & ComInter
         return windows_collections.IVectorView<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Currencies(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -818,6 +848,7 @@ public class IGlobalizationPreferencesStatics <: InterfaceWrapperBase & ComInter
         return windows_collections.IVectorView<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Languages(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -852,7 +883,10 @@ extend IGlobalizationPreferencesStatics <: windows_core.Interface<IGlobalization
 public struct IGlobalizationPreferencesStatics2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var TrySetHomeGeographicRegion: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var TrySetLanguages: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var TrySetLanguages: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -929,6 +963,7 @@ public class IGlobalizationPreferencesStatics2 <: InterfaceWrapperBase & ComInte
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func TrySetLanguages(languageTags: windows_collections.IIterable<windows_core.HString>): Bool {
         let v = vtbl()
         var result__ = false
@@ -1069,13 +1104,13 @@ extend ILockScreenStatics <: windows_core.Interface<ILockScreenStatics> {}
 @C
 public struct IUserProfilePersonalizationSettingsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var TrySetLockScreenImageAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var TrySetLockScreenImageAsync: UIntNative = UIntNative(0)
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var TrySetWallpaperImageAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var TrySetWallpaperImageAsync: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -1145,7 +1180,7 @@ public class IUserProfilePersonalizationSettings <: InterfaceWrapperBase & ComIn
         readVtbl<IUserProfilePersonalizationSettingsVtbl>(IUserProfilePersonalizationSettingsVtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func TrySetLockScreenImageAsync(imageFile: _impl_l1.StorageFile): windows_future.IAsyncOperation<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1154,7 +1189,7 @@ public class IUserProfilePersonalizationSettings <: InterfaceWrapperBase & ComIn
         return windows_future.IAsyncOperation<Bool>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func TrySetWallpaperImageAsync(imageFile: _impl_l1.StorageFile): windows_future.IAsyncOperation<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1523,18 +1558,22 @@ public class GlobalizationPreferencesForUser <: InterfaceWrapperBase & ComInterf
         return defaultInterface().get_User()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Calendars(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().Calendars()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Clocks(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().Clocks()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Currencies(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().Currencies()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Languages(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().Languages()
     }
@@ -2420,6 +2459,7 @@ public class GlobalizationPreferences <: windows_interface.RuntimeName & windows
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func TrySetLanguages(languageTags: windows_collections.IIterable<windows_core.HString>): Bool {
         var result__: Option<Bool> = Option<Bool>.None
         try (factory__ = windows_core.factory<GlobalizationPreferences, IGlobalizationPreferencesStatics2>().unwrap()) {
@@ -2431,6 +2471,7 @@ public class GlobalizationPreferences <: windows_interface.RuntimeName & windows
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Calendars(): windows_collections.IVectorView<windows_core.HString> {
         var result__: Option<windows_collections.IVectorView<windows_core.HString>> = Option<windows_collections.IVectorView<windows_core.HString>>.None
         try (factory__ = windows_core.factory<GlobalizationPreferences, IGlobalizationPreferencesStatics>().unwrap()) {
@@ -2442,6 +2483,7 @@ public class GlobalizationPreferences <: windows_interface.RuntimeName & windows
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Clocks(): windows_collections.IVectorView<windows_core.HString> {
         var result__: Option<windows_collections.IVectorView<windows_core.HString>> = Option<windows_collections.IVectorView<windows_core.HString>>.None
         try (factory__ = windows_core.factory<GlobalizationPreferences, IGlobalizationPreferencesStatics>().unwrap()) {
@@ -2453,6 +2495,7 @@ public class GlobalizationPreferences <: windows_interface.RuntimeName & windows
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Currencies(): windows_collections.IVectorView<windows_core.HString> {
         var result__: Option<windows_collections.IVectorView<windows_core.HString>> = Option<windows_collections.IVectorView<windows_core.HString>>.None
         try (factory__ = windows_core.factory<GlobalizationPreferences, IGlobalizationPreferencesStatics>().unwrap()) {
@@ -2464,6 +2507,7 @@ public class GlobalizationPreferences <: windows_interface.RuntimeName & windows
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func Languages(): windows_collections.IVectorView<windows_core.HString> {
         var result__: Option<windows_collections.IVectorView<windows_core.HString>> = Option<windows_collections.IVectorView<windows_core.HString>>.None
         try (factory__ = windows_core.factory<GlobalizationPreferences, IGlobalizationPreferencesStatics>().unwrap()) {
@@ -2755,7 +2799,7 @@ extend DiagnosticsSettings <: windows_core.HandleWinrtType<DiagnosticsSettings> 
     }
 }
 
-@When[Windows_System_UserProfile == "on"]
+@When[Windows_System_UserProfile == "on" && Windows_Foundation_Collections == "on"]
 public class FirstSignInSettings <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -2866,6 +2910,7 @@ public class FirstSignInSettings <: InterfaceWrapperBase & ComInterface & window
         return asIIterable().First()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetDefault(): FirstSignInSettings {
         var result__: Option<FirstSignInSettings> = Option<FirstSignInSettings>.None
         try (factory__ = windows_core.factory<FirstSignInSettings, IFirstSignInSettingsStatics>().unwrap()) {
@@ -2878,7 +2923,7 @@ public class FirstSignInSettings <: InterfaceWrapperBase & ComInterface & window
     }
 }
 
-@When[Windows_System_UserProfile == "on"]
+@When[Windows_System_UserProfile == "on" && Windows_Foundation_Collections == "on"]
 extend FirstSignInSettings <: windows_core.HandleWinrtType<FirstSignInSettings> {
     public static func intoWinrtHandle(value: FirstSignInSettings): CPointer<Unit> {
         value.asRaw()
@@ -3096,7 +3141,10 @@ extend IDiagnosticsSettingsStatics <: windows_core.Interface<IDiagnosticsSetting
 @C
 public struct IFirstSignInSettingsStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetDefault: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetDefault: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3165,6 +3213,7 @@ public class IFirstSignInSettingsStatics <: InterfaceWrapperBase & ComInterface 
         readVtbl<IFirstSignInSettingsStaticsVtbl>(IFirstSignInSettingsStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetDefault(): FirstSignInSettings {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3340,12 +3389,12 @@ public class UserProfilePersonalizationSettings <: InterfaceWrapperBase & ComInt
         }
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func TrySetLockScreenImageAsync(imageFile: _impl_l1.StorageFile): windows_future.IAsyncOperation<Bool> {
         return defaultInterface().TrySetLockScreenImageAsync(imageFile)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func TrySetWallpaperImageAsync(imageFile: _impl_l1.StorageFile): windows_future.IAsyncOperation<Bool> {
         return defaultInterface().TrySetWallpaperImageAsync(imageFile)
     }

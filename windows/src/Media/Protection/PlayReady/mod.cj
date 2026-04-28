@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows.Media._impl_l0 as Media__impl_l0
 import windows._impl_l1 as _impl_l1
@@ -877,13 +876,13 @@ extend INDStartResult <: windows_core.Interface<INDStartResult> {}
 @C
 public struct INDStorageFileHelperVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var GetFileURLs: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage != "on"]
     public var GetFileURLs: UIntNative = UIntNative(0)
     public init() {}
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public static func new<Identity>(offset!: Int64 = 0): INDStorageFileHelperVtbl where Identity <: INDStorageFileHelper_Impl {
         let _ = offset
         var vtbl = INDStorageFileHelperVtbl()
@@ -892,7 +891,7 @@ public struct INDStorageFileHelperVtbl {
         return vtbl
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage == "on"]
+    @When[(Windows_Foundation_Collections == "on" && Windows_Storage == "on") && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")]
     public static func __assignGetFileURLs<Identity>(vtbl: INDStorageFileHelperVtbl): INDStorageFileHelperVtbl where Identity <: INDStorageFileHelper_Impl {
         var next = vtbl
         next.GetFileURLs = { instanceRaw, arg0, result__ =>
@@ -906,7 +905,7 @@ public struct INDStorageFileHelperVtbl {
         return next
     }
 
-    @When[Windows_Storage == "on" && Windows_Storage != "on"]
+    @When[(Windows_Foundation_Collections == "on" && Windows_Storage == "on") && (Windows_Foundation_Collections != "on" || Windows_Storage != "on")]
     public static func __assignGetFileURLs<Identity>(vtbl: INDStorageFileHelperVtbl): INDStorageFileHelperVtbl where Identity <: INDStorageFileHelper_Impl {
         return vtbl
     }
@@ -919,12 +918,12 @@ public struct INDStorageFileHelperVtbl {
     }
 }
 
-@When[Windows_Media_Protection_PlayReady == "on" && Windows_Storage == "on"]
+@When[Windows_Media_Protection_PlayReady == "on" && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")]
 public interface INDStorageFileHelper_ImplErased {
     public func __winrtThunk_GetFileURLs(arg0: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Media_Protection_PlayReady == "on" && Windows_Storage == "on"]
+@When[Windows_Media_Protection_PlayReady == "on" && (Windows_Foundation_Collections == "on" && Windows_Storage == "on")]
 public interface INDStorageFileHelper_Impl <: INDStorageFileHelper_ImplErased {
     public func GetFileURLs(file: InParam<_impl_l1.IStorageFile>): windows_core.Result<windows_collections.IVector<windows_core.HString>>
 
@@ -1012,7 +1011,7 @@ public class INDStorageFileHelper <: InterfaceWrapperBase & ComInterface & Runti
         readVtbl<INDStorageFileHelperVtbl>(INDStorageFileHelperVtbl())
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func GetFileURLs(file: _impl_l1.IStorageFile): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2712,7 +2711,7 @@ public class NDStorageFileHelper <: InterfaceWrapperBase & ComInterface & window
         }
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func GetFileURLs(file: _impl_l1.IStorageFile): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().GetFileURLs(file)
     }
@@ -2894,7 +2893,7 @@ extend PlayReadyDomain <: windows_core.HandleWinrtType<PlayReadyDomain> {
     }
 }
 
-@When[Windows_Media_Protection_PlayReady == "on"]
+@When[Windows_Media_Protection_PlayReady == "on" && Windows_Foundation_Collections == "on"]
 public class PlayReadyDomainIterator <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -2976,7 +2975,7 @@ public class PlayReadyDomainIterator <: InterfaceWrapperBase & ComInterface & wi
     }
 }
 
-@When[Windows_Media_Protection_PlayReady == "on"]
+@When[Windows_Media_Protection_PlayReady == "on" && Windows_Foundation_Collections == "on"]
 extend PlayReadyDomainIterator <: windows_core.HandleWinrtType<PlayReadyDomainIterator> {
     public static func intoWinrtHandle(value: PlayReadyDomainIterator): CPointer<Unit> {
         value.asRaw()
@@ -3283,7 +3282,7 @@ extend PlayReadyLicense <: windows_core.HandleWinrtType<PlayReadyLicense> {
     }
 }
 
-@When[Windows_Media_Protection_PlayReady == "on"]
+@When[Windows_Media_Protection_PlayReady == "on" && Windows_Foundation_Collections == "on"]
 public class PlayReadyLicenseIterator <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -3365,7 +3364,7 @@ public class PlayReadyLicenseIterator <: InterfaceWrapperBase & ComInterface & w
     }
 }
 
-@When[Windows_Media_Protection_PlayReady == "on"]
+@When[Windows_Media_Protection_PlayReady == "on" && Windows_Foundation_Collections == "on"]
 extend PlayReadyLicenseIterator <: windows_core.HandleWinrtType<PlayReadyLicenseIterator> {
     public static func intoWinrtHandle(value: PlayReadyLicenseIterator): CPointer<Unit> {
         value.asRaw()
@@ -4172,9 +4171,9 @@ extend INDMessenger <: windows_core.Interface<INDMessenger> {}
 public struct INDStreamParserNotifierVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var OnContentIDReceived: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Core == "on"]
     public var OnMediaStreamDescriptorCreated: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Media_Core != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Media_Core != "on"]
     public var OnMediaStreamDescriptorCreated: UIntNative = UIntNative(0)
     @When[Windows_Media_Core == "on"]
     public var OnSampleParsed: CFunc<(CPointer<Unit>, UInt32, NDMediaStreamTypeAbi, CPointer<Unit>, Int64, NDClosedCaptionFormatAbi, UInt32, CPointer<UInt8>) -> Int32> = { _, _, _, _, _, _, _, _ => E_NOTIMPL.value }
@@ -4186,7 +4185,7 @@ public struct INDStreamParserNotifierVtbl {
     public var OnBeginSetupDecryptor: UIntNative = UIntNative(0)
     public init() {}
 
-    @When[Windows_Media_Core == "on"]
+    @When[((Windows_Foundation_Collections == "on" && Windows_Media_Core == "on") && (Windows_Media_Core == "on")) && (Windows_Media_Core == "on")]
     public static func new<Identity>(offset!: Int64 = 0): INDStreamParserNotifierVtbl where Identity <: INDStreamParserNotifier_Impl {
         let _ = offset
         var vtbl = INDStreamParserNotifierVtbl()
@@ -4205,7 +4204,7 @@ public struct INDStreamParserNotifierVtbl {
         return vtbl
     }
 
-    @When[Windows_Media_Core == "on" && Windows_Media_Core == "on"]
+    @When[(((Windows_Foundation_Collections == "on" && Windows_Media_Core == "on") && (Windows_Media_Core == "on")) && (Windows_Media_Core == "on")) && (Windows_Foundation_Collections == "on" && Windows_Media_Core == "on")]
     public static func __assignOnMediaStreamDescriptorCreated<Identity>(vtbl: INDStreamParserNotifierVtbl): INDStreamParserNotifierVtbl where Identity <: INDStreamParserNotifier_Impl {
         var next = vtbl
         next.OnMediaStreamDescriptorCreated = { instanceRaw, arg0, arg1 =>
@@ -4219,12 +4218,12 @@ public struct INDStreamParserNotifierVtbl {
         return next
     }
 
-    @When[Windows_Media_Core == "on" && Windows_Media_Core != "on"]
+    @When[(((Windows_Foundation_Collections == "on" && Windows_Media_Core == "on") && (Windows_Media_Core == "on")) && (Windows_Media_Core == "on")) && (Windows_Foundation_Collections != "on" || Windows_Media_Core != "on")]
     public static func __assignOnMediaStreamDescriptorCreated<Identity>(vtbl: INDStreamParserNotifierVtbl): INDStreamParserNotifierVtbl where Identity <: INDStreamParserNotifier_Impl {
         return vtbl
     }
 
-    @When[Windows_Media_Core == "on" && Windows_Media_Core == "on"]
+    @When[(((Windows_Foundation_Collections == "on" && Windows_Media_Core == "on") && (Windows_Media_Core == "on")) && (Windows_Media_Core == "on")) && Windows_Media_Core == "on"]
     public static func __assignOnSampleParsed<Identity>(vtbl: INDStreamParserNotifierVtbl): INDStreamParserNotifierVtbl where Identity <: INDStreamParserNotifier_Impl {
         var next = vtbl
         next.OnSampleParsed = { instanceRaw, arg0, arg1, arg2, arg3, arg4, arg5Size, arg5 =>
@@ -4238,12 +4237,12 @@ public struct INDStreamParserNotifierVtbl {
         return next
     }
 
-    @When[Windows_Media_Core == "on" && Windows_Media_Core != "on"]
+    @When[(((Windows_Foundation_Collections == "on" && Windows_Media_Core == "on") && (Windows_Media_Core == "on")) && (Windows_Media_Core == "on")) && Windows_Media_Core != "on"]
     public static func __assignOnSampleParsed<Identity>(vtbl: INDStreamParserNotifierVtbl): INDStreamParserNotifierVtbl where Identity <: INDStreamParserNotifier_Impl {
         return vtbl
     }
 
-    @When[Windows_Media_Core == "on" && Windows_Media_Core == "on"]
+    @When[(((Windows_Foundation_Collections == "on" && Windows_Media_Core == "on") && (Windows_Media_Core == "on")) && (Windows_Media_Core == "on")) && Windows_Media_Core == "on"]
     public static func __assignOnBeginSetupDecryptor<Identity>(vtbl: INDStreamParserNotifierVtbl): INDStreamParserNotifierVtbl where Identity <: INDStreamParserNotifier_Impl {
         var next = vtbl
         next.OnBeginSetupDecryptor = { instanceRaw, arg0, arg1, arg2Size, arg2 =>
@@ -4257,7 +4256,7 @@ public struct INDStreamParserNotifierVtbl {
         return next
     }
 
-    @When[Windows_Media_Core == "on" && Windows_Media_Core != "on"]
+    @When[(((Windows_Foundation_Collections == "on" && Windows_Media_Core == "on") && (Windows_Media_Core == "on")) && (Windows_Media_Core == "on")) && Windows_Media_Core != "on"]
     public static func __assignOnBeginSetupDecryptor<Identity>(vtbl: INDStreamParserNotifierVtbl): INDStreamParserNotifierVtbl where Identity <: INDStreamParserNotifier_Impl {
         return vtbl
     }
@@ -4270,7 +4269,7 @@ public struct INDStreamParserNotifierVtbl {
     }
 }
 
-@When[Windows_Media_Protection_PlayReady == "on" && Windows_Media_Core == "on"]
+@When[Windows_Media_Protection_PlayReady == "on" && (((Windows_Foundation_Collections == "on" && Windows_Media_Core == "on") && (Windows_Media_Core == "on")) && (Windows_Media_Core == "on"))]
 public interface INDStreamParserNotifier_ImplErased {
     public func __winrtThunk_OnContentIDReceived(arg0: CPointer<Unit>): Int32
 
@@ -4281,7 +4280,7 @@ public interface INDStreamParserNotifier_ImplErased {
     public func __winrtThunk_OnBeginSetupDecryptor(arg0: CPointer<Unit>, arg1: GUID, arg2Size: UInt32, arg2: CPointer<UInt8>): Int32
 }
 
-@When[Windows_Media_Protection_PlayReady == "on" && Windows_Media_Core == "on"]
+@When[Windows_Media_Protection_PlayReady == "on" && (((Windows_Foundation_Collections == "on" && Windows_Media_Core == "on") && (Windows_Media_Core == "on")) && (Windows_Media_Core == "on"))]
 public interface INDStreamParserNotifier_Impl <: INDStreamParserNotifier_ImplErased {
     public func OnContentIDReceived(licenseFetchDescriptor: InParam<INDLicenseFetchDescriptor>): windows_core.Result<Unit>
 
@@ -4399,7 +4398,7 @@ public class INDStreamParserNotifier <: InterfaceWrapperBase & ComInterface & Ru
         HRESULT(hr).ok()
     }
 
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Core == "on"]
     public unsafe func OnMediaStreamDescriptorCreated(audioStreamDescriptors: windows_collections.IVector<Media__impl_l0.AudioStreamDescriptor>, videoStreamDescriptors: windows_collections.IVector<Media__impl_l0.VideoStreamDescriptor>): Unit {
         let v = vtbl()
         let hr = v.OnMediaStreamDescriptorCreated(asRaw(), audioStreamDescriptors.asRaw(), videoStreamDescriptors.asRaw())
@@ -5919,7 +5918,7 @@ public class NDStreamParserNotifier <: InterfaceWrapperBase & ComInterface & win
         defaultInterface().OnContentIDReceived(licenseFetchDescriptor)
     }
 
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Core == "on"]
     public unsafe func OnMediaStreamDescriptorCreated(audioStreamDescriptors: windows_collections.IVector<Media__impl_l0.AudioStreamDescriptor>, videoStreamDescriptors: windows_collections.IVector<Media__impl_l0.VideoStreamDescriptor>): Unit {
         defaultInterface().OnMediaStreamDescriptorCreated(audioStreamDescriptors, videoStreamDescriptors)
     }
@@ -8166,7 +8165,7 @@ extend NDDownloadEngineNotifier <: windows_core.HandleWinrtType<NDDownloadEngine
     }
 }
 
-@When[Windows_Media_Protection_PlayReady == "on"]
+@When[Windows_Media_Protection_PlayReady == "on" && Windows_Media_Protection == "on"]
 public class PlayReadyDomainJoinServiceRequest <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8334,7 +8333,7 @@ public class PlayReadyDomainJoinServiceRequest <: InterfaceWrapperBase & ComInte
     }
 }
 
-@When[Windows_Media_Protection_PlayReady == "on"]
+@When[Windows_Media_Protection_PlayReady == "on" && Windows_Media_Protection == "on"]
 extend PlayReadyDomainJoinServiceRequest <: windows_core.HandleWinrtType<PlayReadyDomainJoinServiceRequest> {
     public static func intoWinrtHandle(value: PlayReadyDomainJoinServiceRequest): CPointer<Unit> {
         value.asRaw()
@@ -8352,7 +8351,7 @@ extend PlayReadyDomainJoinServiceRequest <: windows_core.HandleWinrtType<PlayRea
     }
 }
 
-@When[Windows_Media_Protection_PlayReady == "on"]
+@When[Windows_Media_Protection_PlayReady == "on" && Windows_Media_Protection == "on"]
 public class PlayReadyDomainLeaveServiceRequest <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8512,7 +8511,7 @@ public class PlayReadyDomainLeaveServiceRequest <: InterfaceWrapperBase & ComInt
     }
 }
 
-@When[Windows_Media_Protection_PlayReady == "on"]
+@When[Windows_Media_Protection_PlayReady == "on" && Windows_Media_Protection == "on"]
 extend PlayReadyDomainLeaveServiceRequest <: windows_core.HandleWinrtType<PlayReadyDomainLeaveServiceRequest> {
     public static func intoWinrtHandle(value: PlayReadyDomainLeaveServiceRequest): CPointer<Unit> {
         value.asRaw()
@@ -8530,7 +8529,7 @@ extend PlayReadyDomainLeaveServiceRequest <: windows_core.HandleWinrtType<PlayRe
     }
 }
 
-@When[Windows_Media_Protection_PlayReady == "on"]
+@When[Windows_Media_Protection_PlayReady == "on" && Windows_Media_Protection == "on"]
 public class PlayReadyIndividualizationServiceRequest <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8674,7 +8673,7 @@ public class PlayReadyIndividualizationServiceRequest <: InterfaceWrapperBase & 
     }
 }
 
-@When[Windows_Media_Protection_PlayReady == "on"]
+@When[Windows_Media_Protection_PlayReady == "on" && Windows_Media_Protection == "on"]
 extend PlayReadyIndividualizationServiceRequest <: windows_core.HandleWinrtType<PlayReadyIndividualizationServiceRequest> {
     public static func intoWinrtHandle(value: PlayReadyIndividualizationServiceRequest): CPointer<Unit> {
         value.asRaw()
@@ -8692,7 +8691,7 @@ extend PlayReadyIndividualizationServiceRequest <: windows_core.HandleWinrtType<
     }
 }
 
-@When[Windows_Media_Protection_PlayReady == "on"]
+@When[Windows_Media_Protection_PlayReady == "on" && Windows_Media_Protection == "on"]
 public class PlayReadyMeteringReportServiceRequest <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8844,7 +8843,7 @@ public class PlayReadyMeteringReportServiceRequest <: InterfaceWrapperBase & Com
     }
 }
 
-@When[Windows_Media_Protection_PlayReady == "on"]
+@When[Windows_Media_Protection_PlayReady == "on" && Windows_Media_Protection == "on"]
 extend PlayReadyMeteringReportServiceRequest <: windows_core.HandleWinrtType<PlayReadyMeteringReportServiceRequest> {
     public static func intoWinrtHandle(value: PlayReadyMeteringReportServiceRequest): CPointer<Unit> {
         value.asRaw()
@@ -8862,7 +8861,7 @@ extend PlayReadyMeteringReportServiceRequest <: windows_core.HandleWinrtType<Pla
     }
 }
 
-@When[Windows_Media_Protection_PlayReady == "on"]
+@When[Windows_Media_Protection_PlayReady == "on" && Windows_Media_Protection == "on"]
 public class PlayReadyRevocationServiceRequest <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -9006,7 +9005,7 @@ public class PlayReadyRevocationServiceRequest <: InterfaceWrapperBase & ComInte
     }
 }
 
-@When[Windows_Media_Protection_PlayReady == "on"]
+@When[Windows_Media_Protection_PlayReady == "on" && Windows_Media_Protection == "on"]
 extend PlayReadyRevocationServiceRequest <: windows_core.HandleWinrtType<PlayReadyRevocationServiceRequest> {
     public static func intoWinrtHandle(value: PlayReadyRevocationServiceRequest): CPointer<Unit> {
         value.asRaw()
@@ -9024,7 +9023,7 @@ extend PlayReadyRevocationServiceRequest <: windows_core.HandleWinrtType<PlayRea
     }
 }
 
-@When[Windows_Media_Protection_PlayReady == "on"]
+@When[Windows_Media_Protection_PlayReady == "on" && Windows_Foundation_Collections == "on"]
 public class PlayReadySecureStopIterator <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -9106,7 +9105,7 @@ public class PlayReadySecureStopIterator <: InterfaceWrapperBase & ComInterface 
     }
 }
 
-@When[Windows_Media_Protection_PlayReady == "on"]
+@When[Windows_Media_Protection_PlayReady == "on" && Windows_Foundation_Collections == "on"]
 extend PlayReadySecureStopIterator <: windows_core.HandleWinrtType<PlayReadySecureStopIterator> {
     public static func intoWinrtHandle(value: PlayReadySecureStopIterator): CPointer<Unit> {
         value.asRaw()
@@ -10583,7 +10582,10 @@ extend IPlayReadyContentResolver <: windows_core.Interface<IPlayReadyContentReso
 @C
 public struct IPlayReadyDomainIterableFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateInstance: CFunc<(CPointer<Unit>, GUID, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateInstance: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -10652,6 +10654,7 @@ public class IPlayReadyDomainIterableFactory <: InterfaceWrapperBase & ComInterf
         readVtbl<IPlayReadyDomainIterableFactoryVtbl>(IPlayReadyDomainIterableFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateInstance(domainAccountId: GuidValue): PlayReadyDomainIterable {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -11194,7 +11197,10 @@ extend IPlayReadyLicenseAcquisitionServiceRequest2 <: windows_core.Interface<IPl
 @C
 public struct IPlayReadyLicenseAcquisitionServiceRequest3Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateLicenseIterable: CFunc<(CPointer<Unit>, CPointer<Unit>, Bool, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateLicenseIterable: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -11296,6 +11302,7 @@ public class IPlayReadyLicenseAcquisitionServiceRequest3 <: InterfaceWrapperBase
         readVtbl<IPlayReadyLicenseAcquisitionServiceRequest3Vtbl>(IPlayReadyLicenseAcquisitionServiceRequest3Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateLicenseIterable(contentHeader: PlayReadyContentHeader, fullyEvaluated: Bool): PlayReadyLicenseIterable {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -11312,7 +11319,10 @@ extend IPlayReadyLicenseAcquisitionServiceRequest3 <: windows_core.Interface<IPl
 @C
 public struct IPlayReadyLicenseIterableFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateInstance: CFunc<(CPointer<Unit>, CPointer<Unit>, Bool, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateInstance: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -11381,6 +11391,7 @@ public class IPlayReadyLicenseIterableFactory <: InterfaceWrapperBase & ComInter
         readVtbl<IPlayReadyLicenseIterableFactoryVtbl>(IPlayReadyLicenseIterableFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateInstance(contentHeader: PlayReadyContentHeader, fullyEvaluated: Bool): PlayReadyLicenseIterable {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -11662,15 +11673,25 @@ extend IPlayReadyLicenseSession <: windows_core.Interface<IPlayReadyLicenseSessi
 @C
 public struct IPlayReadyLicenseSession2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateLicenseIterable: CFunc<(CPointer<Unit>, CPointer<Unit>, Bool, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateLicenseIterable: UIntNative = UIntNative(0)
     public init() {}
 
-    @When[Windows_Media_Protection == "on"]
+    @When[(Windows_Foundation_Collections == "on") && (Windows_Media_Protection == "on")]
     public static func new<Identity>(offset!: Int64 = 0): IPlayReadyLicenseSession2Vtbl where Identity <: IPlayReadyLicenseSession2_Impl {
         let _ = offset
         var vtbl = IPlayReadyLicenseSession2Vtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.CreateLicenseIterable = { instanceRaw, arg0, arg1, result__ =>
+        vtbl = IPlayReadyLicenseSession2Vtbl.__assignCreateLicenseIterable<Identity>(vtbl)
+        return vtbl
+    }
+
+    @When[((Windows_Foundation_Collections == "on") && (Windows_Media_Protection == "on")) && Windows_Foundation_Collections == "on"]
+    public static func __assignCreateLicenseIterable<Identity>(vtbl: IPlayReadyLicenseSession2Vtbl): IPlayReadyLicenseSession2Vtbl where Identity <: IPlayReadyLicenseSession2_Impl {
+        var next = vtbl
+        next.CreateLicenseIterable = { instanceRaw, arg0, arg1, result__ =>
             match (unsafe { asImplFromRaw<IPlayReadyLicenseSession2_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
                     impl.__winrtThunk_CreateLicenseIterable(arg0, arg1, result__)
@@ -11678,6 +11699,11 @@ public struct IPlayReadyLicenseSession2Vtbl {
                     E_NOINTERFACE.value
             }
         }
+        return next
+    }
+
+    @When[((Windows_Foundation_Collections == "on") && (Windows_Media_Protection == "on")) && Windows_Foundation_Collections != "on"]
+    public static func __assignCreateLicenseIterable<Identity>(vtbl: IPlayReadyLicenseSession2Vtbl): IPlayReadyLicenseSession2Vtbl where Identity <: IPlayReadyLicenseSession2_Impl {
         return vtbl
     }
 
@@ -11694,12 +11720,12 @@ public struct IPlayReadyLicenseSession2Vtbl {
     }
 }
 
-@When[Windows_Media_Protection_PlayReady == "on" && Windows_Media_Protection == "on"]
+@When[Windows_Media_Protection_PlayReady == "on" && ((Windows_Foundation_Collections == "on") && (Windows_Media_Protection == "on"))]
 public interface IPlayReadyLicenseSession2_ImplErased {
     public func __winrtThunk_CreateLicenseIterable(arg0: CPointer<Unit>, arg1: Bool, result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Media_Protection_PlayReady == "on" && Windows_Media_Protection == "on"]
+@When[Windows_Media_Protection_PlayReady == "on" && ((Windows_Foundation_Collections == "on") && (Windows_Media_Protection == "on"))]
 public interface IPlayReadyLicenseSession2_Impl <: IPlayReadyLicenseSession2_ImplErased & IPlayReadyLicenseSession_Impl {
     public func CreateLicenseIterable(contentHeader: InParam<PlayReadyContentHeader>, fullyEvaluated: Bool): windows_core.Result<PlayReadyLicenseIterable>
 
@@ -11826,6 +11852,7 @@ public class IPlayReadyLicenseSession2 <: InterfaceWrapperBase & ComInterface & 
         readVtbl<IPlayReadyLicenseSession2Vtbl>(IPlayReadyLicenseSession2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateLicenseIterable(contentHeader: PlayReadyContentHeader, fullyEvaluated: Bool): PlayReadyLicenseIterable {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -11931,7 +11958,10 @@ extend IPlayReadyLicenseSessionFactory <: windows_core.Interface<IPlayReadyLicen
 @C
 public struct IPlayReadySecureStopIterableFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateInstance: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt8>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateInstance: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -12000,6 +12030,7 @@ public class IPlayReadySecureStopIterableFactory <: InterfaceWrapperBase & ComIn
         readVtbl<IPlayReadySecureStopIterableFactoryVtbl>(IPlayReadySecureStopIterableFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateInstance(publisherCertBytesSize: UInt32, publisherCertBytes: CPointer<UInt8>): PlayReadySecureStopIterable {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -12016,8 +12047,14 @@ extend IPlayReadySecureStopIterableFactory <: windows_core.Interface<IPlayReadyS
 @C
 public struct IPlayReadySecureStopServiceRequestFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Media_Protection == "on"]
     public var CreateInstance: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt8>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Media_Protection != "on"]
+    public var CreateInstance: UIntNative = UIntNative(0)
+    @When[Windows_Media_Protection == "on"]
     public var CreateInstanceFromSessionID: CFunc<(CPointer<Unit>, GUID, UInt32, CPointer<UInt8>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Media_Protection != "on"]
+    public var CreateInstanceFromSessionID: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -12086,6 +12123,7 @@ public class IPlayReadySecureStopServiceRequestFactory <: InterfaceWrapperBase &
         readVtbl<IPlayReadySecureStopServiceRequestFactoryVtbl>(IPlayReadySecureStopServiceRequestFactoryVtbl())
     }
 
+    @When[Windows_Media_Protection == "on"]
     public unsafe func CreateInstance(publisherCertBytesSize: UInt32, publisherCertBytes: CPointer<UInt8>): PlayReadySecureStopServiceRequest {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -12094,6 +12132,7 @@ public class IPlayReadySecureStopServiceRequestFactory <: InterfaceWrapperBase &
         return PlayReadySecureStopServiceRequest.fromAbiTake(result__)
     }
 
+    @When[Windows_Media_Protection == "on"]
     public unsafe func CreateInstanceFromSessionID(sessionID: GuidValue, publisherCertBytesSize: UInt32, publisherCertBytes: CPointer<UInt8>): PlayReadySecureStopServiceRequest {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -12782,7 +12821,7 @@ public class PlayReadyContentResolver <: windows_interface.RuntimeName & windows
     }
 }
 
-@When[Windows_Media_Protection_PlayReady == "on"]
+@When[Windows_Media_Protection_PlayReady == "on" && Windows_Foundation_Collections == "on"]
 public class PlayReadyDomainIterable <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -12859,6 +12898,7 @@ public class PlayReadyDomainIterable <: InterfaceWrapperBase & ComInterface & wi
         return defaultInterface().First()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateInstance(domainAccountId: GuidValue): PlayReadyDomainIterable {
         var result__: Option<PlayReadyDomainIterable> = Option<PlayReadyDomainIterable>.None
         try (factory__ = windows_core.factory<PlayReadyDomainIterable, IPlayReadyDomainIterableFactory>().unwrap()) {
@@ -12871,7 +12911,7 @@ public class PlayReadyDomainIterable <: InterfaceWrapperBase & ComInterface & wi
     }
 }
 
-@When[Windows_Media_Protection_PlayReady == "on"]
+@When[Windows_Media_Protection_PlayReady == "on" && Windows_Foundation_Collections == "on"]
 extend PlayReadyDomainIterable <: windows_core.HandleWinrtType<PlayReadyDomainIterable> {
     public static func intoWinrtHandle(value: PlayReadyDomainIterable): CPointer<Unit> {
         value.asRaw()
@@ -12889,7 +12929,7 @@ extend PlayReadyDomainIterable <: windows_core.HandleWinrtType<PlayReadyDomainIt
     }
 }
 
-@When[Windows_Media_Protection_PlayReady == "on"]
+@When[Windows_Media_Protection_PlayReady == "on" && Windows_Media_Protection == "on"]
 public class PlayReadyLicenseAcquisitionServiceRequest <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -13049,7 +13089,7 @@ public class PlayReadyLicenseAcquisitionServiceRequest <: InterfaceWrapperBase &
     }
 }
 
-@When[Windows_Media_Protection_PlayReady == "on"]
+@When[Windows_Media_Protection_PlayReady == "on" && Windows_Media_Protection == "on"]
 extend PlayReadyLicenseAcquisitionServiceRequest <: windows_core.HandleWinrtType<PlayReadyLicenseAcquisitionServiceRequest> {
     public static func intoWinrtHandle(value: PlayReadyLicenseAcquisitionServiceRequest): CPointer<Unit> {
         value.asRaw()
@@ -13067,7 +13107,7 @@ extend PlayReadyLicenseAcquisitionServiceRequest <: windows_core.HandleWinrtType
     }
 }
 
-@When[Windows_Media_Protection_PlayReady == "on"]
+@When[Windows_Media_Protection_PlayReady == "on" && Windows_Foundation_Collections == "on"]
 public class PlayReadyLicenseIterable <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -13155,6 +13195,7 @@ public class PlayReadyLicenseIterable <: InterfaceWrapperBase & ComInterface & w
         return defaultInterface().First()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateInstance(contentHeader: PlayReadyContentHeader, fullyEvaluated: Bool): PlayReadyLicenseIterable {
         var result__: Option<PlayReadyLicenseIterable> = Option<PlayReadyLicenseIterable>.None
         try (factory__ = windows_core.factory<PlayReadyLicenseIterable, IPlayReadyLicenseIterableFactory>().unwrap()) {
@@ -13167,7 +13208,7 @@ public class PlayReadyLicenseIterable <: InterfaceWrapperBase & ComInterface & w
     }
 }
 
-@When[Windows_Media_Protection_PlayReady == "on"]
+@When[Windows_Media_Protection_PlayReady == "on" && Windows_Foundation_Collections == "on"]
 extend PlayReadyLicenseIterable <: windows_core.HandleWinrtType<PlayReadyLicenseIterable> {
     public static func intoWinrtHandle(value: PlayReadyLicenseIterable): CPointer<Unit> {
         value.asRaw()
@@ -13298,6 +13339,7 @@ public class PlayReadyLicenseSession <: InterfaceWrapperBase & ComInterface & wi
         defaultInterface().ConfigureMediaProtectionManager(mpm)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateLicenseIterable(contentHeader: PlayReadyContentHeader, fullyEvaluated: Bool): PlayReadyLicenseIterable {
         return asIPlayReadyLicenseSession2().CreateLicenseIterable(contentHeader, fullyEvaluated)
     }
@@ -13333,7 +13375,7 @@ extend PlayReadyLicenseSession <: windows_core.HandleWinrtType<PlayReadyLicenseS
     }
 }
 
-@When[Windows_Media_Protection_PlayReady == "on"]
+@When[Windows_Media_Protection_PlayReady == "on" && Windows_Foundation_Collections == "on"]
 public class PlayReadySecureStopIterable <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -13410,6 +13452,7 @@ public class PlayReadySecureStopIterable <: InterfaceWrapperBase & ComInterface 
         return defaultInterface().First()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateInstance(publisherCertBytesSize: UInt32, publisherCertBytes: CPointer<UInt8>): PlayReadySecureStopIterable {
         var result__: Option<PlayReadySecureStopIterable> = Option<PlayReadySecureStopIterable>.None
         try (factory__ = windows_core.factory<PlayReadySecureStopIterable, IPlayReadySecureStopIterableFactory>().unwrap()) {
@@ -13422,7 +13465,7 @@ public class PlayReadySecureStopIterable <: InterfaceWrapperBase & ComInterface 
     }
 }
 
-@When[Windows_Media_Protection_PlayReady == "on"]
+@When[Windows_Media_Protection_PlayReady == "on" && Windows_Foundation_Collections == "on"]
 extend PlayReadySecureStopIterable <: windows_core.HandleWinrtType<PlayReadySecureStopIterable> {
     public static func intoWinrtHandle(value: PlayReadySecureStopIterable): CPointer<Unit> {
         value.asRaw()
@@ -13440,7 +13483,7 @@ extend PlayReadySecureStopIterable <: windows_core.HandleWinrtType<PlayReadySecu
     }
 }
 
-@When[Windows_Media_Protection_PlayReady == "on"]
+@When[Windows_Media_Protection_PlayReady == "on" && Windows_Media_Protection == "on"]
 public class PlayReadySecureStopServiceRequest <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -13592,6 +13635,7 @@ public class PlayReadySecureStopServiceRequest <: InterfaceWrapperBase & ComInte
         return asIMediaProtectionServiceRequest().Type()
     }
 
+    @When[Windows_Media_Protection == "on"]
     public static unsafe func CreateInstance(publisherCertBytesSize: UInt32, publisherCertBytes: CPointer<UInt8>): PlayReadySecureStopServiceRequest {
         var result__: Option<PlayReadySecureStopServiceRequest> = Option<PlayReadySecureStopServiceRequest>.None
         try (factory__ = windows_core.factory<PlayReadySecureStopServiceRequest, IPlayReadySecureStopServiceRequestFactory>().unwrap()) {
@@ -13603,6 +13647,7 @@ public class PlayReadySecureStopServiceRequest <: InterfaceWrapperBase & ComInte
         }
     }
 
+    @When[Windows_Media_Protection == "on"]
     public static unsafe func CreateInstanceFromSessionID(sessionID: GuidValue, publisherCertBytesSize: UInt32, publisherCertBytes: CPointer<UInt8>): PlayReadySecureStopServiceRequest {
         var result__: Option<PlayReadySecureStopServiceRequest> = Option<PlayReadySecureStopServiceRequest>.None
         try (factory__ = windows_core.factory<PlayReadySecureStopServiceRequest, IPlayReadySecureStopServiceRequestFactory>().unwrap()) {
@@ -13615,7 +13660,7 @@ public class PlayReadySecureStopServiceRequest <: InterfaceWrapperBase & ComInte
     }
 }
 
-@When[Windows_Media_Protection_PlayReady == "on"]
+@When[Windows_Media_Protection_PlayReady == "on" && Windows_Media_Protection == "on"]
 extend PlayReadySecureStopServiceRequest <: windows_core.HandleWinrtType<PlayReadySecureStopServiceRequest> {
     public static func intoWinrtHandle(value: PlayReadySecureStopServiceRequest): CPointer<Unit> {
         value.asRaw()

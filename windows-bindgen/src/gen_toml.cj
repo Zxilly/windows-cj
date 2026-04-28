@@ -36,11 +36,43 @@ public class FeatureCollector {
         registerNamespace(this, namespace)
         ensureFeature(this, namespaceFeature)
         ensureFeature(this, moduleFeature)
-        ensureDeps(this, namespaceFeature)
         if (!featureToLinks.contains(moduleFeature)) {
             featureToLinks[moduleFeature] = ArrayList<String>()
         }
-        addUnique(featureToDeps[namespaceFeature], moduleFeature)
+        addUnique(featureToLinks[moduleFeature], moduleLinkName(moduleName))
+        mutex_.unlock()
+    }
+
+    public func addFunctionBinding(
+        namespace: String,
+        moduleName: String,
+        functionName: String,
+        tags: ArrayList<String>,
+        runtimeResolver!: Bool = false
+    ): Unit {
+        let namespaceFeature = namespaceToFeature(namespace)
+        let moduleFeature = moduleToFeature(moduleName)
+        let functionFeature = functionToFeature(namespace, functionName)
+
+        mutex_.lock()
+        registerNamespace(this, namespace)
+        ensureFeature(this, namespaceFeature)
+        ensureFeature(this, moduleFeature)
+        ensureFeature(this, functionFeature)
+        ensureDeps(this, functionFeature)
+        if (!namespaceFeature.isEmpty() && namespaceFeature != functionFeature) {
+            addUnique(featureToDeps[functionFeature], namespaceFeature)
+        }
+        if (!moduleFeature.isEmpty() && moduleFeature != namespaceFeature && moduleFeature != functionFeature) {
+            addUnique(featureToDeps[functionFeature], moduleFeature)
+        }
+        if (runtimeResolver) {
+            addFunctionModuleDependency(this, functionFeature, "kernel32.dll")
+        }
+        addConditionFeatureDependencies(this, functionFeature, tags)
+        if (!featureToLinks.contains(moduleFeature)) {
+            featureToLinks[moduleFeature] = ArrayList<String>()
+        }
         addUnique(featureToLinks[moduleFeature], moduleLinkName(moduleName))
         mutex_.unlock()
     }
@@ -98,12 +130,26 @@ public class FeatureCollector {
 
         let features = cfgToggleKeys(this, universe)
         for (feature in features) {
-            let value = if (containsStr(featureOrder, feature)) { "on" } else { "off" }
-            sb.append("${feature} = \"${value}\"\n")
+            sb.append("${feature} = \"off\"\n")
         }
 
         return sb.toString()
     }
+}
+
+func addFunctionModuleDependency(
+    collector: FeatureCollector,
+    functionFeature: String,
+    moduleName: String
+): Unit {
+    let moduleFeature = moduleToFeature(moduleName)
+    ensureFeature(collector, moduleFeature)
+    ensureDeps(collector, functionFeature)
+    addUnique(collector.featureToDeps[functionFeature], moduleFeature)
+    if (!collector.featureToLinks.contains(moduleFeature)) {
+        collector.featureToLinks[moduleFeature] = ArrayList<String>()
+    }
+    addUnique(collector.featureToLinks[moduleFeature], moduleLinkName(moduleName))
 }
 
 func ensureFeature(collector: FeatureCollector, feature: String): Unit {
@@ -181,6 +227,62 @@ func addNamespaceDependencyLocked(
     ensureNamespaceFeatureChain(collector, dependencyNamespace)
     ensureDeps(collector, namespaceFeature)
     addUnique(collector.featureToDeps[namespaceFeature], dependencyFeature)
+}
+
+func addConditionFeatureDependencies(
+    collector: FeatureCollector,
+    feature: String,
+    tags: ArrayList<String>
+): Unit {
+    for (tag in tags) {
+        let dependencies = cfgFeatureNamesInCondition(tag)
+        for (dependency in dependencies) {
+            if (dependency == feature || dependency == "arch") {
+                continue
+            }
+            ensureFeature(collector, dependency)
+            ensureDeps(collector, feature)
+            addUnique(collector.featureToDeps[feature], dependency)
+        }
+    }
+}
+
+func cfgFeatureNamesInCondition(condition: String): ArrayList<String> {
+    let result = ArrayList<String>()
+    var token = ""
+    let bytes = condition.toArray()
+    var i: Int64 = 0
+    while (i < Int64(bytes.size)) {
+        let ch = bytes[i]
+        if (isCfgTokenByte(ch)) {
+            token += String.fromUtf8(Array<Byte>(1, {_ => ch}))
+        } else {
+            addCfgFeatureToken(result, token)
+            token = ""
+        }
+        i += 1
+    }
+    addCfgFeatureToken(result, token)
+    return result
+}
+
+func addCfgFeatureToken(result: ArrayList<String>, token: String): Unit {
+    if (token.isEmpty() || token == "on" || token == "off" || token == "arch" ||
+        token == "x86_64" || token == "aarch64") {
+        return
+    }
+    let first = token[0]
+    if (!((first >= b'A' && first <= b'Z') || first == b'_')) {
+        return
+    }
+    addUnique(result, token)
+}
+
+func isCfgTokenByte(ch: Byte): Bool {
+    return (ch >= b'a' && ch <= b'z') ||
+        (ch >= b'A' && ch <= b'Z') ||
+        (ch >= b'0' && ch <= b'9') ||
+        ch == b'_'
 }
 
 func addUnique(list: ArrayList<String>, value: String): Unit {

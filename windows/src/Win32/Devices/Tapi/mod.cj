@@ -10,13 +10,9 @@ import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrap
 import windows_interface as windows_interface
 import windows_polyfill.{packedReadFloat64, packedReadUInt16, packedReadUInt32, packedReadUIntNative, packedReadValue, packedWriteFloat64, packedWriteUInt16, packedWriteUInt32, packedWriteUIntNative, packedWriteValue}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Media_DirectShow == "on"]
 import windows.Win32.Media.DirectShow as Win32_Media_DirectShow
-@When[Windows_Win32_Media_MediaFoundation == "on"]
 import windows.Win32.Media.MediaFoundation as Win32_Media_MediaFoundation
-@When[Windows_Win32_System_AddressBook == "on"]
 import windows.Win32.System.AddressBook as Win32_System_AddressBook
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
@@ -24621,291 +24617,2539 @@ public type LPOPENTNEFSTREAM = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<I
 @When[Windows_Win32_Devices_Tapi == "on" && (Windows_Win32_System_AddressBook == "on" && Windows_Win32_System_Com == "on")]
 public type LPOPENTNEFSTREAMEX = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Int8>, UInt32, CPointer<Unit>, UInt16, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>
 
-@When[MAPI32 == "on" && (Windows_Win32_System_AddressBook == "on" && Windows_Win32_System_Com == "on")]
-foreign {
-    func OpenTnefStream(lpvSupport: CPointer<Unit>, lpStream: CPointer<Unit>, lpszStreamName: CPointer<Int8>, ulFlags: UInt32, lpMessage: CPointer<Unit>, wKeyVal: UInt16, lppTNEF: CPointer<CPointer<Unit>>): Int32
-    func OpenTnefStreamEx(lpvSupport: CPointer<Unit>, lpStream: CPointer<Unit>, lpszStreamName: CPointer<Int8>, ulFlags: UInt32, lpMessage: CPointer<Unit>, wKeyVal: UInt16, lpAdressBook: CPointer<Unit>, lppTNEF: CPointer<CPointer<Unit>>): Int32
-}
-
-@When[MAPI32 == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_Devices_Tapi == "on" && MAPI32 == "on" && Windows_Win32_Devices_Tapi_GetTnefStreamCodepage == "on" && Windows_Win32_System_Com == "on"]
 foreign {
     func GetTnefStreamCodepage(lpStream: CPointer<Unit>, lpulCodepage: CPointer<UInt32>, lpulSubCodepage: CPointer<UInt32>): Int32
 }
 
-@When[TAPI32 == "on"]
+@When[Windows_Win32_Devices_Tapi == "on" && MAPI32 == "on" && Windows_Win32_Devices_Tapi_GetTnefStreamCodepage == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_GetTnefStreamCodepage(lpStream: CPointer<Unit>, lpulCodepage: CPointer<UInt32>, lpulSubCodepage: CPointer<UInt32>): Int32 {
+    return GetTnefStreamCodepage(lpStream, lpulCodepage, lpulSubCodepage)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && MAPI32 == "on" && Windows_Win32_Devices_Tapi_OpenTnefStream == "on" && Windows_Win32_System_AddressBook == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func OpenTnefStream(lpvSupport: CPointer<Unit>, lpStream: CPointer<Unit>, lpszStreamName: CPointer<Int8>, ulFlags: UInt32, lpMessage: CPointer<Unit>, wKeyVal: UInt16, lppTNEF: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && MAPI32 == "on" && Windows_Win32_Devices_Tapi_OpenTnefStream == "on" && Windows_Win32_System_AddressBook == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_OpenTnefStream(lpvSupport: CPointer<Unit>, lpStream: CPointer<Unit>, lpszStreamName: CPointer<Int8>, ulFlags: UInt32, lpMessage: CPointer<Unit>, wKeyVal: UInt16, lppTNEF: CPointer<CPointer<Unit>>): Int32 {
+    return OpenTnefStream(lpvSupport, lpStream, lpszStreamName, ulFlags, lpMessage, wKeyVal, lppTNEF)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && MAPI32 == "on" && Windows_Win32_Devices_Tapi_OpenTnefStreamEx == "on" && Windows_Win32_System_AddressBook == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func OpenTnefStreamEx(lpvSupport: CPointer<Unit>, lpStream: CPointer<Unit>, lpszStreamName: CPointer<Int8>, ulFlags: UInt32, lpMessage: CPointer<Unit>, wKeyVal: UInt16, lpAdressBook: CPointer<Unit>, lppTNEF: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && MAPI32 == "on" && Windows_Win32_Devices_Tapi_OpenTnefStreamEx == "on" && Windows_Win32_System_AddressBook == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_OpenTnefStreamEx(lpvSupport: CPointer<Unit>, lpStream: CPointer<Unit>, lpszStreamName: CPointer<Int8>, ulFlags: UInt32, lpMessage: CPointer<Unit>, wKeyVal: UInt16, lpAdressBook: CPointer<Unit>, lppTNEF: CPointer<CPointer<Unit>>): Int32 {
+    return OpenTnefStreamEx(lpvSupport, lpStream, lpszStreamName, ulFlags, lpMessage, wKeyVal, lpAdressBook, lppTNEF)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineAccept == "on"]
 foreign {
     func lineAccept(hCall: UInt32, lpsUserUserInfo: CPointer<UInt8>, dwSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineAccept == "on"]
+public unsafe func Windows_lineAccept(hCall: UInt32, lpsUserUserInfo: CPointer<UInt8>, dwSize: UInt32): Int32 {
+    return lineAccept(hCall, lpsUserUserInfo, dwSize)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineAddProvider == "on"]
+foreign {
     func lineAddProvider(lpszProviderFilename: CPointer<UInt8>, hwndOwner: CPointer<Unit>, lpdwPermanentProviderID: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineAddProvider == "on"]
+public unsafe func Windows_lineAddProvider(lpszProviderFilename: CPointer<UInt8>, hwndOwner: CPointer<Unit>, lpdwPermanentProviderID: CPointer<UInt32>): Int32 {
+    return lineAddProvider(lpszProviderFilename, hwndOwner, lpdwPermanentProviderID)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineAddProviderA == "on"]
+foreign {
     func lineAddProviderA(lpszProviderFilename: CPointer<UInt8>, hwndOwner: CPointer<Unit>, lpdwPermanentProviderID: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineAddProviderA == "on"]
+public unsafe func Windows_lineAddProviderA(lpszProviderFilename: CPointer<UInt8>, hwndOwner: CPointer<Unit>, lpdwPermanentProviderID: CPointer<UInt32>): Int32 {
+    return lineAddProviderA(lpszProviderFilename, hwndOwner, lpdwPermanentProviderID)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineAddProviderW == "on"]
+foreign {
     func lineAddProviderW(lpszProviderFilename: CPointer<UInt16>, hwndOwner: CPointer<Unit>, lpdwPermanentProviderID: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineAddProviderW == "on"]
+public unsafe func Windows_lineAddProviderW(lpszProviderFilename: CPointer<UInt16>, hwndOwner: CPointer<Unit>, lpdwPermanentProviderID: CPointer<UInt32>): Int32 {
+    return lineAddProviderW(lpszProviderFilename, hwndOwner, lpdwPermanentProviderID)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineAddToConference == "on"]
+foreign {
     func lineAddToConference(hConfCall: UInt32, hConsultCall: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineAddToConference == "on"]
+public unsafe func Windows_lineAddToConference(hConfCall: UInt32, hConsultCall: UInt32): Int32 {
+    return lineAddToConference(hConfCall, hConsultCall)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineAgentSpecific == "on"]
+foreign {
     func lineAgentSpecific(hLine: UInt32, dwAddressID: UInt32, dwAgentExtensionIDIndex: UInt32, lpParams: CPointer<Unit>, dwSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineAgentSpecific == "on"]
+public unsafe func Windows_lineAgentSpecific(hLine: UInt32, dwAddressID: UInt32, dwAgentExtensionIDIndex: UInt32, lpParams: CPointer<Unit>, dwSize: UInt32): Int32 {
+    return lineAgentSpecific(hLine, dwAddressID, dwAgentExtensionIDIndex, lpParams, dwSize)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineAnswer == "on"]
+foreign {
     func lineAnswer(hCall: UInt32, lpsUserUserInfo: CPointer<UInt8>, dwSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineAnswer == "on"]
+public unsafe func Windows_lineAnswer(hCall: UInt32, lpsUserUserInfo: CPointer<UInt8>, dwSize: UInt32): Int32 {
+    return lineAnswer(hCall, lpsUserUserInfo, dwSize)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineBlindTransfer == "on"]
+foreign {
     func lineBlindTransfer(hCall: UInt32, lpszDestAddress: CPointer<UInt8>, dwCountryCode: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineBlindTransfer == "on"]
+public unsafe func Windows_lineBlindTransfer(hCall: UInt32, lpszDestAddress: CPointer<UInt8>, dwCountryCode: UInt32): Int32 {
+    return lineBlindTransfer(hCall, lpszDestAddress, dwCountryCode)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineBlindTransferA == "on"]
+foreign {
     func lineBlindTransferA(hCall: UInt32, lpszDestAddress: CPointer<UInt8>, dwCountryCode: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineBlindTransferA == "on"]
+public unsafe func Windows_lineBlindTransferA(hCall: UInt32, lpszDestAddress: CPointer<UInt8>, dwCountryCode: UInt32): Int32 {
+    return lineBlindTransferA(hCall, lpszDestAddress, dwCountryCode)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineBlindTransferW == "on"]
+foreign {
     func lineBlindTransferW(hCall: UInt32, lpszDestAddressW: CPointer<UInt16>, dwCountryCode: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineBlindTransferW == "on"]
+public unsafe func Windows_lineBlindTransferW(hCall: UInt32, lpszDestAddressW: CPointer<UInt16>, dwCountryCode: UInt32): Int32 {
+    return lineBlindTransferW(hCall, lpszDestAddressW, dwCountryCode)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineClose == "on"]
+foreign {
     func lineClose(hLine: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineClose == "on"]
+public unsafe func Windows_lineClose(hLine: UInt32): Int32 {
+    return lineClose(hLine)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineCompleteCall == "on"]
+foreign {
     func lineCompleteCall(hCall: UInt32, lpdwCompletionID: CPointer<UInt32>, dwCompletionMode: UInt32, dwMessageID: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineCompleteCall == "on"]
+public unsafe func Windows_lineCompleteCall(hCall: UInt32, lpdwCompletionID: CPointer<UInt32>, dwCompletionMode: UInt32, dwMessageID: UInt32): Int32 {
+    return lineCompleteCall(hCall, lpdwCompletionID, dwCompletionMode, dwMessageID)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineCompleteTransfer == "on"]
+foreign {
     func lineCompleteTransfer(hCall: UInt32, hConsultCall: UInt32, lphConfCall: CPointer<UInt32>, dwTransferMode: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineCompleteTransfer == "on"]
+public unsafe func Windows_lineCompleteTransfer(hCall: UInt32, hConsultCall: UInt32, lphConfCall: CPointer<UInt32>, dwTransferMode: UInt32): Int32 {
+    return lineCompleteTransfer(hCall, hConsultCall, lphConfCall, dwTransferMode)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineConfigDialog == "on"]
+foreign {
     func lineConfigDialog(dwDeviceID: UInt32, hwndOwner: CPointer<Unit>, lpszDeviceClass: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineConfigDialog == "on"]
+public unsafe func Windows_lineConfigDialog(dwDeviceID: UInt32, hwndOwner: CPointer<Unit>, lpszDeviceClass: CPointer<UInt8>): Int32 {
+    return lineConfigDialog(dwDeviceID, hwndOwner, lpszDeviceClass)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineConfigDialogA == "on"]
+foreign {
     func lineConfigDialogA(dwDeviceID: UInt32, hwndOwner: CPointer<Unit>, lpszDeviceClass: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineConfigDialogA == "on"]
+public unsafe func Windows_lineConfigDialogA(dwDeviceID: UInt32, hwndOwner: CPointer<Unit>, lpszDeviceClass: CPointer<UInt8>): Int32 {
+    return lineConfigDialogA(dwDeviceID, hwndOwner, lpszDeviceClass)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineConfigDialogEdit == "on"]
+foreign {
     func lineConfigDialogEdit(dwDeviceID: UInt32, hwndOwner: CPointer<Unit>, lpszDeviceClass: CPointer<UInt8>, lpDeviceConfigIn: CPointer<Unit>, dwSize: UInt32, lpDeviceConfigOut: CPointer<VARSTRING>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineConfigDialogEdit == "on"]
+public unsafe func Windows_lineConfigDialogEdit(dwDeviceID: UInt32, hwndOwner: CPointer<Unit>, lpszDeviceClass: CPointer<UInt8>, lpDeviceConfigIn: CPointer<Unit>, dwSize: UInt32, lpDeviceConfigOut: CPointer<VARSTRING>): Int32 {
+    return lineConfigDialogEdit(dwDeviceID, hwndOwner, lpszDeviceClass, lpDeviceConfigIn, dwSize, lpDeviceConfigOut)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineConfigDialogEditA == "on"]
+foreign {
     func lineConfigDialogEditA(dwDeviceID: UInt32, hwndOwner: CPointer<Unit>, lpszDeviceClass: CPointer<UInt8>, lpDeviceConfigIn: CPointer<Unit>, dwSize: UInt32, lpDeviceConfigOut: CPointer<VARSTRING>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineConfigDialogEditA == "on"]
+public unsafe func Windows_lineConfigDialogEditA(dwDeviceID: UInt32, hwndOwner: CPointer<Unit>, lpszDeviceClass: CPointer<UInt8>, lpDeviceConfigIn: CPointer<Unit>, dwSize: UInt32, lpDeviceConfigOut: CPointer<VARSTRING>): Int32 {
+    return lineConfigDialogEditA(dwDeviceID, hwndOwner, lpszDeviceClass, lpDeviceConfigIn, dwSize, lpDeviceConfigOut)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineConfigDialogEditW == "on"]
+foreign {
     func lineConfigDialogEditW(dwDeviceID: UInt32, hwndOwner: CPointer<Unit>, lpszDeviceClass: CPointer<UInt16>, lpDeviceConfigIn: CPointer<Unit>, dwSize: UInt32, lpDeviceConfigOut: CPointer<VARSTRING>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineConfigDialogEditW == "on"]
+public unsafe func Windows_lineConfigDialogEditW(dwDeviceID: UInt32, hwndOwner: CPointer<Unit>, lpszDeviceClass: CPointer<UInt16>, lpDeviceConfigIn: CPointer<Unit>, dwSize: UInt32, lpDeviceConfigOut: CPointer<VARSTRING>): Int32 {
+    return lineConfigDialogEditW(dwDeviceID, hwndOwner, lpszDeviceClass, lpDeviceConfigIn, dwSize, lpDeviceConfigOut)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineConfigDialogW == "on"]
+foreign {
     func lineConfigDialogW(dwDeviceID: UInt32, hwndOwner: CPointer<Unit>, lpszDeviceClass: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineConfigDialogW == "on"]
+public unsafe func Windows_lineConfigDialogW(dwDeviceID: UInt32, hwndOwner: CPointer<Unit>, lpszDeviceClass: CPointer<UInt16>): Int32 {
+    return lineConfigDialogW(dwDeviceID, hwndOwner, lpszDeviceClass)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineConfigProvider == "on"]
+foreign {
     func lineConfigProvider(hwndOwner: CPointer<Unit>, dwPermanentProviderID: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineConfigProvider == "on"]
+public unsafe func Windows_lineConfigProvider(hwndOwner: CPointer<Unit>, dwPermanentProviderID: UInt32): Int32 {
+    return lineConfigProvider(hwndOwner, dwPermanentProviderID)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineCreateAgentA == "on"]
+foreign {
     // param-hint: lpszAgentID optional
     // param-hint: lpszAgentPIN optional
     func lineCreateAgentA(hLine: UInt32, lpszAgentID: CPointer<UInt8>, lpszAgentPIN: CPointer<UInt8>, lphAgent: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineCreateAgentA == "on"]
+public unsafe func Windows_lineCreateAgentA(hLine: UInt32, lpszAgentID: CPointer<UInt8>, lpszAgentPIN: CPointer<UInt8>, lphAgent: CPointer<UInt32>): Int32 {
+    return lineCreateAgentA(hLine, lpszAgentID, lpszAgentPIN, lphAgent)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineCreateAgentSessionA == "on"]
+foreign {
     // param-hint: lpszAgentPIN optional
     func lineCreateAgentSessionA(hLine: UInt32, hAgent: UInt32, lpszAgentPIN: CPointer<UInt8>, dwWorkingAddressID: UInt32, lpGroupID: CPointer<GUID>, lphAgentSession: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineCreateAgentSessionA == "on"]
+public unsafe func Windows_lineCreateAgentSessionA(hLine: UInt32, hAgent: UInt32, lpszAgentPIN: CPointer<UInt8>, dwWorkingAddressID: UInt32, lpGroupID: CPointer<GUID>, lphAgentSession: CPointer<UInt32>): Int32 {
+    return lineCreateAgentSessionA(hLine, hAgent, lpszAgentPIN, dwWorkingAddressID, lpGroupID, lphAgentSession)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineCreateAgentSessionW == "on"]
+foreign {
     // param-hint: lpszAgentPIN optional
     func lineCreateAgentSessionW(hLine: UInt32, hAgent: UInt32, lpszAgentPIN: CPointer<UInt16>, dwWorkingAddressID: UInt32, lpGroupID: CPointer<GUID>, lphAgentSession: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineCreateAgentSessionW == "on"]
+public unsafe func Windows_lineCreateAgentSessionW(hLine: UInt32, hAgent: UInt32, lpszAgentPIN: CPointer<UInt16>, dwWorkingAddressID: UInt32, lpGroupID: CPointer<GUID>, lphAgentSession: CPointer<UInt32>): Int32 {
+    return lineCreateAgentSessionW(hLine, hAgent, lpszAgentPIN, dwWorkingAddressID, lpGroupID, lphAgentSession)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineCreateAgentW == "on"]
+foreign {
     // param-hint: lpszAgentID optional
     // param-hint: lpszAgentPIN optional
     func lineCreateAgentW(hLine: UInt32, lpszAgentID: CPointer<UInt16>, lpszAgentPIN: CPointer<UInt16>, lphAgent: CPointer<UInt32>): Int32
-    func lineDeallocateCall(hCall: UInt32): Int32
-    func lineDevSpecific(hLine: UInt32, dwAddressID: UInt32, hCall: UInt32, lpParams: CPointer<Unit>, dwSize: UInt32): Int32
-    func lineDevSpecificFeature(hLine: UInt32, dwFeature: UInt32, lpParams: CPointer<Unit>, dwSize: UInt32): Int32
-    func lineDial(hCall: UInt32, lpszDestAddress: CPointer<UInt8>, dwCountryCode: UInt32): Int32
-    func lineDialA(hCall: UInt32, lpszDestAddress: CPointer<UInt8>, dwCountryCode: UInt32): Int32
-    func lineDialW(hCall: UInt32, lpszDestAddress: CPointer<UInt16>, dwCountryCode: UInt32): Int32
-    func lineDrop(hCall: UInt32, lpsUserUserInfo: CPointer<UInt8>, dwSize: UInt32): Int32
-    func lineForward(hLine: UInt32, bAllAddresses: UInt32, dwAddressID: UInt32, lpForwardList: CPointer<LINEFORWARDLIST>, dwNumRingsNoAnswer: UInt32, lphConsultCall: CPointer<UInt32>, lpCallParams: CPointer<LINECALLPARAMS>): Int32
-    func lineForwardA(hLine: UInt32, bAllAddresses: UInt32, dwAddressID: UInt32, lpForwardList: CPointer<LINEFORWARDLIST>, dwNumRingsNoAnswer: UInt32, lphConsultCall: CPointer<UInt32>, lpCallParams: CPointer<LINECALLPARAMS>): Int32
-    func lineForwardW(hLine: UInt32, bAllAddresses: UInt32, dwAddressID: UInt32, lpForwardList: CPointer<LINEFORWARDLIST>, dwNumRingsNoAnswer: UInt32, lphConsultCall: CPointer<UInt32>, lpCallParams: CPointer<LINECALLPARAMS>): Int32
-    // param-hint: lpsDigits len=param[3] optional
-    func lineGatherDigits(hCall: UInt32, dwDigitModes: UInt32, lpsDigits: CPointer<UInt8>, dwNumDigits: UInt32, lpszTerminationDigits: CPointer<UInt8>, dwFirstDigitTimeout: UInt32, dwInterDigitTimeout: UInt32): Int32
-    // param-hint: lpsDigits len=param[3] optional
-    func lineGatherDigitsA(hCall: UInt32, dwDigitModes: UInt32, lpsDigits: CPointer<UInt8>, dwNumDigits: UInt32, lpszTerminationDigits: CPointer<UInt8>, dwFirstDigitTimeout: UInt32, dwInterDigitTimeout: UInt32): Int32
-    // param-hint: lpsDigits len=param[3] optional
-    func lineGatherDigitsW(hCall: UInt32, dwDigitModes: UInt32, lpsDigits: CPointer<UInt16>, dwNumDigits: UInt32, lpszTerminationDigits: CPointer<UInt16>, dwFirstDigitTimeout: UInt32, dwInterDigitTimeout: UInt32): Int32
-    func lineGenerateDigits(hCall: UInt32, dwDigitMode: UInt32, lpszDigits: CPointer<UInt8>, dwDuration: UInt32): Int32
-    func lineGenerateDigitsA(hCall: UInt32, dwDigitMode: UInt32, lpszDigits: CPointer<UInt8>, dwDuration: UInt32): Int32
-    func lineGenerateDigitsW(hCall: UInt32, dwDigitMode: UInt32, lpszDigits: CPointer<UInt16>, dwDuration: UInt32): Int32
-    func lineGenerateTone(hCall: UInt32, dwToneMode: UInt32, dwDuration: UInt32, dwNumTones: UInt32, lpTones: CPointer<LINEGENERATETONE>): Int32
-    func lineGetAddressCaps(hLineApp: UInt32, dwDeviceID: UInt32, dwAddressID: UInt32, dwAPIVersion: UInt32, dwExtVersion: UInt32, lpAddressCaps: CPointer<LINEADDRESSCAPS>): Int32
-    func lineGetAddressCapsA(hLineApp: UInt32, dwDeviceID: UInt32, dwAddressID: UInt32, dwAPIVersion: UInt32, dwExtVersion: UInt32, lpAddressCaps: CPointer<LINEADDRESSCAPS>): Int32
-    func lineGetAddressCapsW(hLineApp: UInt32, dwDeviceID: UInt32, dwAddressID: UInt32, dwAPIVersion: UInt32, dwExtVersion: UInt32, lpAddressCaps: CPointer<LINEADDRESSCAPS>): Int32
-    func lineGetAddressID(hLine: UInt32, lpdwAddressID: CPointer<UInt32>, dwAddressMode: UInt32, lpsAddress: CPointer<UInt8>, dwSize: UInt32): Int32
-    func lineGetAddressIDA(hLine: UInt32, lpdwAddressID: CPointer<UInt32>, dwAddressMode: UInt32, lpsAddress: CPointer<UInt8>, dwSize: UInt32): Int32
-    func lineGetAddressIDW(hLine: UInt32, lpdwAddressID: CPointer<UInt32>, dwAddressMode: UInt32, lpsAddress: CPointer<UInt16>, dwSize: UInt32): Int32
-    func lineGetAddressStatus(hLine: UInt32, dwAddressID: UInt32, lpAddressStatus: CPointer<LINEADDRESSSTATUS>): Int32
-    func lineGetAddressStatusA(hLine: UInt32, dwAddressID: UInt32, lpAddressStatus: CPointer<LINEADDRESSSTATUS>): Int32
-    func lineGetAddressStatusW(hLine: UInt32, dwAddressID: UInt32, lpAddressStatus: CPointer<LINEADDRESSSTATUS>): Int32
-    func lineGetAgentActivityListA(hLine: UInt32, dwAddressID: UInt32, lpAgentActivityList: CPointer<LINEAGENTACTIVITYLIST>): Int32
-    func lineGetAgentActivityListW(hLine: UInt32, dwAddressID: UInt32, lpAgentActivityList: CPointer<LINEAGENTACTIVITYLIST>): Int32
-    func lineGetAgentCapsA(hLineApp: UInt32, dwDeviceID: UInt32, dwAddressID: UInt32, dwAppAPIVersion: UInt32, lpAgentCaps: CPointer<LINEAGENTCAPS>): Int32
-    func lineGetAgentCapsW(hLineApp: UInt32, dwDeviceID: UInt32, dwAddressID: UInt32, dwAppAPIVersion: UInt32, lpAgentCaps: CPointer<LINEAGENTCAPS>): Int32
-    func lineGetAgentGroupListA(hLine: UInt32, dwAddressID: UInt32, lpAgentGroupList: CPointer<LINEAGENTGROUPLIST>): Int32
-    func lineGetAgentGroupListW(hLine: UInt32, dwAddressID: UInt32, lpAgentGroupList: CPointer<LINEAGENTGROUPLIST>): Int32
-    func lineGetAgentSessionList(hLine: UInt32, hAgent: UInt32, lpAgentSessionList: CPointer<LINEAGENTSESSIONLIST>): Int32
-    func lineGetAgentStatusA(hLine: UInt32, dwAddressID: UInt32, lpAgentStatus: CPointer<LINEAGENTSTATUS>): Int32
-    func lineGetAgentStatusW(hLine: UInt32, dwAddressID: UInt32, lpAgentStatus: CPointer<LINEAGENTSTATUS>): Int32
-    func lineGetAppPriority(lpszAppFilename: CPointer<UInt8>, dwMediaMode: UInt32, lpExtensionID: CPointer<LINEEXTENSIONID>, dwRequestMode: UInt32, lpExtensionName: CPointer<VARSTRING>, lpdwPriority: CPointer<UInt32>): Int32
-    func lineGetAppPriorityA(lpszAppFilename: CPointer<UInt8>, dwMediaMode: UInt32, lpExtensionID: CPointer<LINEEXTENSIONID>, dwRequestMode: UInt32, lpExtensionName: CPointer<VARSTRING>, lpdwPriority: CPointer<UInt32>): Int32
-    func lineGetAppPriorityW(lpszAppFilename: CPointer<UInt16>, dwMediaMode: UInt32, lpExtensionID: CPointer<LINEEXTENSIONID>, dwRequestMode: UInt32, lpExtensionName: CPointer<VARSTRING>, lpdwPriority: CPointer<UInt32>): Int32
-    func lineGetCallInfo(hCall: UInt32, lpCallInfo: CPointer<LINECALLINFO>): Int32
-    func lineGetCallInfoA(hCall: UInt32, lpCallInfo: CPointer<LINECALLINFO>): Int32
-    func lineGetCallInfoW(hCall: UInt32, lpCallInfo: CPointer<LINECALLINFO>): Int32
-    func lineGetCallStatus(hCall: UInt32, lpCallStatus: CPointer<LINECALLSTATUS>): Int32
-    func lineGetConfRelatedCalls(hCall: UInt32, lpCallList: CPointer<LINECALLLIST>): Int32
-    func lineGetCountry(dwCountryID: UInt32, dwAPIVersion: UInt32, lpLineCountryList: CPointer<LINECOUNTRYLIST>): Int32
-    func lineGetCountryA(dwCountryID: UInt32, dwAPIVersion: UInt32, lpLineCountryList: CPointer<LINECOUNTRYLIST>): Int32
-    func lineGetCountryW(dwCountryID: UInt32, dwAPIVersion: UInt32, lpLineCountryList: CPointer<LINECOUNTRYLIST>): Int32
-    func lineGetDevCaps(hLineApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, dwExtVersion: UInt32, lpLineDevCaps: CPointer<LINEDEVCAPS>): Int32
-    func lineGetDevCapsA(hLineApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, dwExtVersion: UInt32, lpLineDevCaps: CPointer<LINEDEVCAPS>): Int32
-    func lineGetDevCapsW(hLineApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, dwExtVersion: UInt32, lpLineDevCaps: CPointer<LINEDEVCAPS>): Int32
-    func lineGetDevConfig(dwDeviceID: UInt32, lpDeviceConfig: CPointer<VARSTRING>, lpszDeviceClass: CPointer<UInt8>): Int32
-    func lineGetDevConfigA(dwDeviceID: UInt32, lpDeviceConfig: CPointer<VARSTRING>, lpszDeviceClass: CPointer<UInt8>): Int32
-    func lineGetDevConfigW(dwDeviceID: UInt32, lpDeviceConfig: CPointer<VARSTRING>, lpszDeviceClass: CPointer<UInt16>): Int32
-    func lineGetGroupListA(hLine: UInt32, lpGroupList: CPointer<LINEAGENTGROUPLIST>): Int32
-    func lineGetGroupListW(hLine: UInt32, lpGroupList: CPointer<LINEAGENTGROUPLIST>): Int32
-    func lineGetID(hLine: UInt32, dwAddressID: UInt32, hCall: UInt32, dwSelect: UInt32, lpDeviceID: CPointer<VARSTRING>, lpszDeviceClass: CPointer<UInt8>): Int32
-    func lineGetIDA(hLine: UInt32, dwAddressID: UInt32, hCall: UInt32, dwSelect: UInt32, lpDeviceID: CPointer<VARSTRING>, lpszDeviceClass: CPointer<UInt8>): Int32
-    func lineGetIDW(hLine: UInt32, dwAddressID: UInt32, hCall: UInt32, dwSelect: UInt32, lpDeviceID: CPointer<VARSTRING>, lpszDeviceClass: CPointer<UInt16>): Int32
-    func lineGetLineDevStatus(hLine: UInt32, lpLineDevStatus: CPointer<LINEDEVSTATUS>): Int32
-    func lineGetLineDevStatusA(hLine: UInt32, lpLineDevStatus: CPointer<LINEDEVSTATUS>): Int32
-    func lineGetLineDevStatusW(hLine: UInt32, lpLineDevStatus: CPointer<LINEDEVSTATUS>): Int32
-    func lineGetMessage(hLineApp: UInt32, lpMessage: CPointer<LINEMESSAGE>, dwTimeout: UInt32): Int32
-    func lineGetNewCalls(hLine: UInt32, dwAddressID: UInt32, dwSelect: UInt32, lpCallList: CPointer<LINECALLLIST>): Int32
-    func lineGetNumRings(hLine: UInt32, dwAddressID: UInt32, lpdwNumRings: CPointer<UInt32>): Int32
-    func lineGetProviderList(dwAPIVersion: UInt32, lpProviderList: CPointer<LINEPROVIDERLIST>): Int32
-    func lineGetProviderListA(dwAPIVersion: UInt32, lpProviderList: CPointer<LINEPROVIDERLIST>): Int32
-    func lineGetProviderListW(dwAPIVersion: UInt32, lpProviderList: CPointer<LINEPROVIDERLIST>): Int32
-    func lineGetProxyStatus(hLineApp: UInt32, dwDeviceID: UInt32, dwAppAPIVersion: UInt32, lpLineProxyReqestList: CPointer<LINEPROXYREQUESTLIST>): Int32
-    func lineGetQueueInfo(hLine: UInt32, dwQueueID: UInt32, lpLineQueueInfo: CPointer<LINEQUEUEINFO>): Int32
-    func lineGetQueueListA(hLine: UInt32, lpGroupID: CPointer<GUID>, lpQueueList: CPointer<LINEQUEUELIST>): Int32
-    func lineGetQueueListW(hLine: UInt32, lpGroupID: CPointer<GUID>, lpQueueList: CPointer<LINEQUEUELIST>): Int32
-    func lineGetRequest(hLineApp: UInt32, dwRequestMode: UInt32, lpRequestBuffer: CPointer<Unit>): Int32
-    func lineGetRequestA(hLineApp: UInt32, dwRequestMode: UInt32, lpRequestBuffer: CPointer<Unit>): Int32
-    func lineGetRequestW(hLineApp: UInt32, dwRequestMode: UInt32, lpRequestBuffer: CPointer<Unit>): Int32
-    func lineGetStatusMessages(hLine: UInt32, lpdwLineStates: CPointer<UInt32>, lpdwAddressStates: CPointer<UInt32>): Int32
-    func lineGetTranslateCaps(hLineApp: UInt32, dwAPIVersion: UInt32, lpTranslateCaps: CPointer<LINETRANSLATECAPS>): Int32
-    func lineGetTranslateCapsA(hLineApp: UInt32, dwAPIVersion: UInt32, lpTranslateCaps: CPointer<LINETRANSLATECAPS>): Int32
-    func lineGetTranslateCapsW(hLineApp: UInt32, dwAPIVersion: UInt32, lpTranslateCaps: CPointer<LINETRANSLATECAPS>): Int32
-    func lineHandoff(hCall: UInt32, lpszFileName: CPointer<UInt8>, dwMediaMode: UInt32): Int32
-    func lineHandoffA(hCall: UInt32, lpszFileName: CPointer<UInt8>, dwMediaMode: UInt32): Int32
-    func lineHandoffW(hCall: UInt32, lpszFileName: CPointer<UInt16>, dwMediaMode: UInt32): Int32
-    func lineHold(hCall: UInt32): Int32
-    func lineInitialize(lphLineApp: CPointer<UInt32>, hInstance: CPointer<Unit>, lpfnCallback: LINECALLBACK, lpszAppName: CPointer<UInt8>, lpdwNumDevs: CPointer<UInt32>): Int32
-    func lineInitializeExA(lphLineApp: CPointer<UInt32>, hInstance: CPointer<Unit>, lpfnCallback: LINECALLBACK, lpszFriendlyAppName: CPointer<UInt8>, lpdwNumDevs: CPointer<UInt32>, lpdwAPIVersion: CPointer<UInt32>, lpLineInitializeExParams: CPointer<LINEINITIALIZEEXPARAMS>): Int32
-    func lineInitializeExW(lphLineApp: CPointer<UInt32>, hInstance: CPointer<Unit>, lpfnCallback: LINECALLBACK, lpszFriendlyAppName: CPointer<UInt16>, lpdwNumDevs: CPointer<UInt32>, lpdwAPIVersion: CPointer<UInt32>, lpLineInitializeExParams: CPointer<LINEINITIALIZEEXPARAMS>): Int32
-    func lineMakeCall(hLine: UInt32, lphCall: CPointer<UInt32>, lpszDestAddress: CPointer<UInt8>, dwCountryCode: UInt32, lpCallParams: CPointer<LINECALLPARAMS>): Int32
-    func lineMakeCallA(hLine: UInt32, lphCall: CPointer<UInt32>, lpszDestAddress: CPointer<UInt8>, dwCountryCode: UInt32, lpCallParams: CPointer<LINECALLPARAMS>): Int32
-    func lineMakeCallW(hLine: UInt32, lphCall: CPointer<UInt32>, lpszDestAddress: CPointer<UInt16>, dwCountryCode: UInt32, lpCallParams: CPointer<LINECALLPARAMS>): Int32
-    func lineMonitorDigits(hCall: UInt32, dwDigitModes: UInt32): Int32
-    func lineMonitorMedia(hCall: UInt32, dwMediaModes: UInt32): Int32
-    func lineMonitorTones(hCall: UInt32, lpToneList: CPointer<LINEMONITORTONE>, dwNumEntries: UInt32): Int32
-    func lineNegotiateAPIVersion(hLineApp: UInt32, dwDeviceID: UInt32, dwAPILowVersion: UInt32, dwAPIHighVersion: UInt32, lpdwAPIVersion: CPointer<UInt32>, lpExtensionID: CPointer<LINEEXTENSIONID>): Int32
-    func lineNegotiateExtVersion(hLineApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, dwExtLowVersion: UInt32, dwExtHighVersion: UInt32, lpdwExtVersion: CPointer<UInt32>): Int32
-    func lineOpen(hLineApp: UInt32, dwDeviceID: UInt32, lphLine: CPointer<UInt32>, dwAPIVersion: UInt32, dwExtVersion: UInt32, dwCallbackInstance: UIntNative, dwPrivileges: UInt32, dwMediaModes: UInt32, lpCallParams: CPointer<LINECALLPARAMS>): Int32
-    func lineOpenA(hLineApp: UInt32, dwDeviceID: UInt32, lphLine: CPointer<UInt32>, dwAPIVersion: UInt32, dwExtVersion: UInt32, dwCallbackInstance: UIntNative, dwPrivileges: UInt32, dwMediaModes: UInt32, lpCallParams: CPointer<LINECALLPARAMS>): Int32
-    func lineOpenW(hLineApp: UInt32, dwDeviceID: UInt32, lphLine: CPointer<UInt32>, dwAPIVersion: UInt32, dwExtVersion: UInt32, dwCallbackInstance: UIntNative, dwPrivileges: UInt32, dwMediaModes: UInt32, lpCallParams: CPointer<LINECALLPARAMS>): Int32
-    func linePark(hCall: UInt32, dwParkMode: UInt32, lpszDirAddress: CPointer<UInt8>, lpNonDirAddress: CPointer<VARSTRING>): Int32
-    func lineParkA(hCall: UInt32, dwParkMode: UInt32, lpszDirAddress: CPointer<UInt8>, lpNonDirAddress: CPointer<VARSTRING>): Int32
-    func lineParkW(hCall: UInt32, dwParkMode: UInt32, lpszDirAddress: CPointer<UInt16>, lpNonDirAddress: CPointer<VARSTRING>): Int32
-    func linePickup(hLine: UInt32, dwAddressID: UInt32, lphCall: CPointer<UInt32>, lpszDestAddress: CPointer<UInt8>, lpszGroupID: CPointer<UInt8>): Int32
-    func linePickupA(hLine: UInt32, dwAddressID: UInt32, lphCall: CPointer<UInt32>, lpszDestAddress: CPointer<UInt8>, lpszGroupID: CPointer<UInt8>): Int32
-    func linePickupW(hLine: UInt32, dwAddressID: UInt32, lphCall: CPointer<UInt32>, lpszDestAddress: CPointer<UInt16>, lpszGroupID: CPointer<UInt16>): Int32
-    func linePrepareAddToConference(hConfCall: UInt32, lphConsultCall: CPointer<UInt32>, lpCallParams: CPointer<LINECALLPARAMS>): Int32
-    func linePrepareAddToConferenceA(hConfCall: UInt32, lphConsultCall: CPointer<UInt32>, lpCallParams: CPointer<LINECALLPARAMS>): Int32
-    func linePrepareAddToConferenceW(hConfCall: UInt32, lphConsultCall: CPointer<UInt32>, lpCallParams: CPointer<LINECALLPARAMS>): Int32
-    func lineProxyMessage(hLine: UInt32, hCall: UInt32, dwMsg: UInt32, dwParam1: UInt32, dwParam2: UInt32, dwParam3: UInt32): Int32
-    func lineRedirect(hCall: UInt32, lpszDestAddress: CPointer<UInt8>, dwCountryCode: UInt32): Int32
-    func lineRedirectA(hCall: UInt32, lpszDestAddress: CPointer<UInt8>, dwCountryCode: UInt32): Int32
-    func lineRedirectW(hCall: UInt32, lpszDestAddress: CPointer<UInt16>, dwCountryCode: UInt32): Int32
-    func lineRegisterRequestRecipient(hLineApp: UInt32, dwRegistrationInstance: UInt32, dwRequestMode: UInt32, bEnable: UInt32): Int32
-    func lineReleaseUserUserInfo(hCall: UInt32): Int32
-    func lineRemoveFromConference(hCall: UInt32): Int32
-    func lineRemoveProvider(dwPermanentProviderID: UInt32, hwndOwner: CPointer<Unit>): Int32
-    func lineSecureCall(hCall: UInt32): Int32
-    func lineSendUserUserInfo(hCall: UInt32, lpsUserUserInfo: CPointer<UInt8>, dwSize: UInt32): Int32
-    func lineSetAgentActivity(hLine: UInt32, dwAddressID: UInt32, dwActivityID: UInt32): Int32
-    func lineSetAgentGroup(hLine: UInt32, dwAddressID: UInt32, lpAgentGroupList: CPointer<LINEAGENTGROUPLIST>): Int32
-    func lineSetAgentMeasurementPeriod(hLine: UInt32, hAgent: UInt32, dwMeasurementPeriod: UInt32): Int32
-    func lineSetAgentSessionState(hLine: UInt32, hAgentSession: UInt32, dwAgentSessionState: UInt32, dwNextAgentSessionState: UInt32): Int32
-    func lineSetAgentState(hLine: UInt32, dwAddressID: UInt32, dwAgentState: UInt32, dwNextAgentState: UInt32): Int32
-    func lineSetAgentStateEx(hLine: UInt32, hAgent: UInt32, dwAgentState: UInt32, dwNextAgentState: UInt32): Int32
-    func lineSetAppPriority(lpszAppFilename: CPointer<UInt8>, dwMediaMode: UInt32, lpExtensionID: CPointer<LINEEXTENSIONID>, dwRequestMode: UInt32, lpszExtensionName: CPointer<UInt8>, dwPriority: UInt32): Int32
-    func lineSetAppPriorityA(lpszAppFilename: CPointer<UInt8>, dwMediaMode: UInt32, lpExtensionID: CPointer<LINEEXTENSIONID>, dwRequestMode: UInt32, lpszExtensionName: CPointer<UInt8>, dwPriority: UInt32): Int32
-    func lineSetAppPriorityW(lpszAppFilename: CPointer<UInt16>, dwMediaMode: UInt32, lpExtensionID: CPointer<LINEEXTENSIONID>, dwRequestMode: UInt32, lpszExtensionName: CPointer<UInt16>, dwPriority: UInt32): Int32
-    func lineSetAppSpecific(hCall: UInt32, dwAppSpecific: UInt32): Int32
-    func lineSetCallData(hCall: UInt32, lpCallData: CPointer<Unit>, dwSize: UInt32): Int32
-    func lineSetCallParams(hCall: UInt32, dwBearerMode: UInt32, dwMinRate: UInt32, dwMaxRate: UInt32, lpDialParams: CPointer<LINEDIALPARAMS>): Int32
-    func lineSetCallPrivilege(hCall: UInt32, dwCallPrivilege: UInt32): Int32
-    func lineSetCallQualityOfService(hCall: UInt32, lpSendingFlowspec: CPointer<Unit>, dwSendingFlowspecSize: UInt32, lpReceivingFlowspec: CPointer<Unit>, dwReceivingFlowspecSize: UInt32): Int32
-    func lineSetCallTreatment(hCall: UInt32, dwTreatment: UInt32): Int32
-    func lineSetCurrentLocation(hLineApp: UInt32, dwLocation: UInt32): Int32
-    func lineSetDevConfig(dwDeviceID: UInt32, lpDeviceConfig: CPointer<Unit>, dwSize: UInt32, lpszDeviceClass: CPointer<UInt8>): Int32
-    func lineSetDevConfigA(dwDeviceID: UInt32, lpDeviceConfig: CPointer<Unit>, dwSize: UInt32, lpszDeviceClass: CPointer<UInt8>): Int32
-    func lineSetDevConfigW(dwDeviceID: UInt32, lpDeviceConfig: CPointer<Unit>, dwSize: UInt32, lpszDeviceClass: CPointer<UInt16>): Int32
-    func lineSetLineDevStatus(hLine: UInt32, dwStatusToChange: UInt32, fStatus: UInt32): Int32
-    func lineSetMediaControl(hLine: UInt32, dwAddressID: UInt32, hCall: UInt32, dwSelect: UInt32, lpDigitList: CPointer<LINEMEDIACONTROLDIGIT>, dwDigitNumEntries: UInt32, lpMediaList: CPointer<LINEMEDIACONTROLMEDIA>, dwMediaNumEntries: UInt32, lpToneList: CPointer<LINEMEDIACONTROLTONE>, dwToneNumEntries: UInt32, lpCallStateList: CPointer<LINEMEDIACONTROLCALLSTATE>, dwCallStateNumEntries: UInt32): Int32
-    func lineSetMediaMode(hCall: UInt32, dwMediaModes: UInt32): Int32
-    func lineSetNumRings(hLine: UInt32, dwAddressID: UInt32, dwNumRings: UInt32): Int32
-    func lineSetQueueMeasurementPeriod(hLine: UInt32, dwQueueID: UInt32, dwMeasurementPeriod: UInt32): Int32
-    func lineSetStatusMessages(hLine: UInt32, dwLineStates: UInt32, dwAddressStates: UInt32): Int32
-    func lineSetTerminal(hLine: UInt32, dwAddressID: UInt32, hCall: UInt32, dwSelect: UInt32, dwTerminalModes: UInt32, dwTerminalID: UInt32, bEnable: UInt32): Int32
-    func lineSetTollList(hLineApp: UInt32, dwDeviceID: UInt32, lpszAddressIn: CPointer<UInt8>, dwTollListOption: UInt32): Int32
-    func lineSetTollListA(hLineApp: UInt32, dwDeviceID: UInt32, lpszAddressIn: CPointer<UInt8>, dwTollListOption: UInt32): Int32
-    func lineSetTollListW(hLineApp: UInt32, dwDeviceID: UInt32, lpszAddressInW: CPointer<UInt16>, dwTollListOption: UInt32): Int32
-    func lineSetupConference(hCall: UInt32, hLine: UInt32, lphConfCall: CPointer<UInt32>, lphConsultCall: CPointer<UInt32>, dwNumParties: UInt32, lpCallParams: CPointer<LINECALLPARAMS>): Int32
-    func lineSetupConferenceA(hCall: UInt32, hLine: UInt32, lphConfCall: CPointer<UInt32>, lphConsultCall: CPointer<UInt32>, dwNumParties: UInt32, lpCallParams: CPointer<LINECALLPARAMS>): Int32
-    func lineSetupConferenceW(hCall: UInt32, hLine: UInt32, lphConfCall: CPointer<UInt32>, lphConsultCall: CPointer<UInt32>, dwNumParties: UInt32, lpCallParams: CPointer<LINECALLPARAMS>): Int32
-    func lineSetupTransfer(hCall: UInt32, lphConsultCall: CPointer<UInt32>, lpCallParams: CPointer<LINECALLPARAMS>): Int32
-    func lineSetupTransferA(hCall: UInt32, lphConsultCall: CPointer<UInt32>, lpCallParams: CPointer<LINECALLPARAMS>): Int32
-    func lineSetupTransferW(hCall: UInt32, lphConsultCall: CPointer<UInt32>, lpCallParams: CPointer<LINECALLPARAMS>): Int32
-    func lineShutdown(hLineApp: UInt32): Int32
-    func lineSwapHold(hActiveCall: UInt32, hHeldCall: UInt32): Int32
-    func lineTranslateAddress(hLineApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, lpszAddressIn: CPointer<UInt8>, dwCard: UInt32, dwTranslateOptions: UInt32, lpTranslateOutput: CPointer<LINETRANSLATEOUTPUT>): Int32
-    func lineTranslateAddressA(hLineApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, lpszAddressIn: CPointer<UInt8>, dwCard: UInt32, dwTranslateOptions: UInt32, lpTranslateOutput: CPointer<LINETRANSLATEOUTPUT>): Int32
-    func lineTranslateAddressW(hLineApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, lpszAddressIn: CPointer<UInt16>, dwCard: UInt32, dwTranslateOptions: UInt32, lpTranslateOutput: CPointer<LINETRANSLATEOUTPUT>): Int32
-    func lineTranslateDialog(hLineApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, hwndOwner: CPointer<Unit>, lpszAddressIn: CPointer<UInt8>): Int32
-    func lineTranslateDialogA(hLineApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, hwndOwner: CPointer<Unit>, lpszAddressIn: CPointer<UInt8>): Int32
-    func lineTranslateDialogW(hLineApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, hwndOwner: CPointer<Unit>, lpszAddressIn: CPointer<UInt16>): Int32
-    func lineUncompleteCall(hLine: UInt32, dwCompletionID: UInt32): Int32
-    func lineUnhold(hCall: UInt32): Int32
-    func lineUnpark(hLine: UInt32, dwAddressID: UInt32, lphCall: CPointer<UInt32>, lpszDestAddress: CPointer<UInt8>): Int32
-    func lineUnparkA(hLine: UInt32, dwAddressID: UInt32, lphCall: CPointer<UInt32>, lpszDestAddress: CPointer<UInt8>): Int32
-    func lineUnparkW(hLine: UInt32, dwAddressID: UInt32, lphCall: CPointer<UInt32>, lpszDestAddress: CPointer<UInt16>): Int32
-    func phoneClose(hPhone: UInt32): Int32
-    func phoneConfigDialog(dwDeviceID: UInt32, hwndOwner: CPointer<Unit>, lpszDeviceClass: CPointer<UInt8>): Int32
-    func phoneConfigDialogA(dwDeviceID: UInt32, hwndOwner: CPointer<Unit>, lpszDeviceClass: CPointer<UInt8>): Int32
-    func phoneConfigDialogW(dwDeviceID: UInt32, hwndOwner: CPointer<Unit>, lpszDeviceClass: CPointer<UInt16>): Int32
-    func phoneDevSpecific(hPhone: UInt32, lpParams: CPointer<Unit>, dwSize: UInt32): Int32
-    func phoneGetButtonInfo(hPhone: UInt32, dwButtonLampID: UInt32, lpButtonInfo: CPointer<PHONEBUTTONINFO>): Int32
-    func phoneGetButtonInfoA(hPhone: UInt32, dwButtonLampID: UInt32, lpButtonInfo: CPointer<PHONEBUTTONINFO>): Int32
-    func phoneGetButtonInfoW(hPhone: UInt32, dwButtonLampID: UInt32, lpButtonInfo: CPointer<PHONEBUTTONINFO>): Int32
-    func phoneGetData(hPhone: UInt32, dwDataID: UInt32, lpData: CPointer<Unit>, dwSize: UInt32): Int32
-    func phoneGetDevCaps(hPhoneApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, dwExtVersion: UInt32, lpPhoneCaps: CPointer<PHONECAPS>): Int32
-    func phoneGetDevCapsA(hPhoneApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, dwExtVersion: UInt32, lpPhoneCaps: CPointer<PHONECAPS>): Int32
-    func phoneGetDevCapsW(hPhoneApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, dwExtVersion: UInt32, lpPhoneCaps: CPointer<PHONECAPS>): Int32
-    func phoneGetDisplay(hPhone: UInt32, lpDisplay: CPointer<VARSTRING>): Int32
-    func phoneGetGain(hPhone: UInt32, dwHookSwitchDev: UInt32, lpdwGain: CPointer<UInt32>): Int32
-    func phoneGetHookSwitch(hPhone: UInt32, lpdwHookSwitchDevs: CPointer<UInt32>): Int32
-    func phoneGetID(hPhone: UInt32, lpDeviceID: CPointer<VARSTRING>, lpszDeviceClass: CPointer<UInt8>): Int32
-    func phoneGetIDA(hPhone: UInt32, lpDeviceID: CPointer<VARSTRING>, lpszDeviceClass: CPointer<UInt8>): Int32
-    func phoneGetIDW(hPhone: UInt32, lpDeviceID: CPointer<VARSTRING>, lpszDeviceClass: CPointer<UInt16>): Int32
-    func phoneGetLamp(hPhone: UInt32, dwButtonLampID: UInt32, lpdwLampMode: CPointer<UInt32>): Int32
-    func phoneGetMessage(hPhoneApp: UInt32, lpMessage: CPointer<PHONEMESSAGE>, dwTimeout: UInt32): Int32
-    func phoneGetRing(hPhone: UInt32, lpdwRingMode: CPointer<UInt32>, lpdwVolume: CPointer<UInt32>): Int32
-    func phoneGetStatus(hPhone: UInt32, lpPhoneStatus: CPointer<PHONESTATUS>): Int32
-    func phoneGetStatusA(hPhone: UInt32, lpPhoneStatus: CPointer<PHONESTATUS>): Int32
-    func phoneGetStatusMessages(hPhone: UInt32, lpdwPhoneStates: CPointer<UInt32>, lpdwButtonModes: CPointer<UInt32>, lpdwButtonStates: CPointer<UInt32>): Int32
-    func phoneGetStatusW(hPhone: UInt32, lpPhoneStatus: CPointer<PHONESTATUS>): Int32
-    func phoneGetVolume(hPhone: UInt32, dwHookSwitchDev: UInt32, lpdwVolume: CPointer<UInt32>): Int32
-    func phoneInitialize(lphPhoneApp: CPointer<UInt32>, hInstance: CPointer<Unit>, lpfnCallback: PHONECALLBACK, lpszAppName: CPointer<UInt8>, lpdwNumDevs: CPointer<UInt32>): Int32
-    func phoneInitializeExA(lphPhoneApp: CPointer<UInt32>, hInstance: CPointer<Unit>, lpfnCallback: PHONECALLBACK, lpszFriendlyAppName: CPointer<UInt8>, lpdwNumDevs: CPointer<UInt32>, lpdwAPIVersion: CPointer<UInt32>, lpPhoneInitializeExParams: CPointer<PHONEINITIALIZEEXPARAMS>): Int32
-    func phoneInitializeExW(lphPhoneApp: CPointer<UInt32>, hInstance: CPointer<Unit>, lpfnCallback: PHONECALLBACK, lpszFriendlyAppName: CPointer<UInt16>, lpdwNumDevs: CPointer<UInt32>, lpdwAPIVersion: CPointer<UInt32>, lpPhoneInitializeExParams: CPointer<PHONEINITIALIZEEXPARAMS>): Int32
-    func phoneNegotiateAPIVersion(hPhoneApp: UInt32, dwDeviceID: UInt32, dwAPILowVersion: UInt32, dwAPIHighVersion: UInt32, lpdwAPIVersion: CPointer<UInt32>, lpExtensionID: CPointer<PHONEEXTENSIONID>): Int32
-    func phoneNegotiateExtVersion(hPhoneApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, dwExtLowVersion: UInt32, dwExtHighVersion: UInt32, lpdwExtVersion: CPointer<UInt32>): Int32
-    func phoneOpen(hPhoneApp: UInt32, dwDeviceID: UInt32, lphPhone: CPointer<UInt32>, dwAPIVersion: UInt32, dwExtVersion: UInt32, dwCallbackInstance: UIntNative, dwPrivilege: UInt32): Int32
-    func phoneSetButtonInfo(hPhone: UInt32, dwButtonLampID: UInt32, lpButtonInfo: CPointer<PHONEBUTTONINFO>): Int32
-    func phoneSetButtonInfoA(hPhone: UInt32, dwButtonLampID: UInt32, lpButtonInfo: CPointer<PHONEBUTTONINFO>): Int32
-    func phoneSetButtonInfoW(hPhone: UInt32, dwButtonLampID: UInt32, lpButtonInfo: CPointer<PHONEBUTTONINFO>): Int32
-    func phoneSetData(hPhone: UInt32, dwDataID: UInt32, lpData: CPointer<Unit>, dwSize: UInt32): Int32
-    func phoneSetDisplay(hPhone: UInt32, dwRow: UInt32, dwColumn: UInt32, lpsDisplay: CPointer<UInt8>, dwSize: UInt32): Int32
-    func phoneSetGain(hPhone: UInt32, dwHookSwitchDev: UInt32, dwGain: UInt32): Int32
-    func phoneSetHookSwitch(hPhone: UInt32, dwHookSwitchDevs: UInt32, dwHookSwitchMode: UInt32): Int32
-    func phoneSetLamp(hPhone: UInt32, dwButtonLampID: UInt32, dwLampMode: UInt32): Int32
-    func phoneSetRing(hPhone: UInt32, dwRingMode: UInt32, dwVolume: UInt32): Int32
-    func phoneSetStatusMessages(hPhone: UInt32, dwPhoneStates: UInt32, dwButtonModes: UInt32, dwButtonStates: UInt32): Int32
-    func phoneSetVolume(hPhone: UInt32, dwHookSwitchDev: UInt32, dwVolume: UInt32): Int32
-    func phoneShutdown(hPhoneApp: UInt32): Int32
-    // param-hint: lpszCountryCode fixed=8
-    // param-hint: lpszCityCode fixed=8
-    func tapiGetLocationInfo(lpszCountryCode: CPointer<UInt8>, lpszCityCode: CPointer<UInt8>): Int32
-    // param-hint: lpszCountryCode fixed=8
-    // param-hint: lpszCityCode fixed=8
-    func tapiGetLocationInfoA(lpszCountryCode: CPointer<UInt8>, lpszCityCode: CPointer<UInt8>): Int32
-    // param-hint: lpszCountryCodeW fixed=8
-    // param-hint: lpszCityCodeW fixed=8
-    func tapiGetLocationInfoW(lpszCountryCodeW: CPointer<UInt16>, lpszCityCodeW: CPointer<UInt16>): Int32
-    func tapiRequestDrop(hwnd: CPointer<Unit>, wRequestID: UIntNative): Int32
-    func tapiRequestMakeCall(lpszDestAddress: CPointer<UInt8>, lpszAppName: CPointer<UInt8>, lpszCalledParty: CPointer<UInt8>, lpszComment: CPointer<UInt8>): Int32
-    func tapiRequestMakeCallA(lpszDestAddress: CPointer<UInt8>, lpszAppName: CPointer<UInt8>, lpszCalledParty: CPointer<UInt8>, lpszComment: CPointer<UInt8>): Int32
-    func tapiRequestMakeCallW(lpszDestAddress: CPointer<UInt16>, lpszAppName: CPointer<UInt16>, lpszCalledParty: CPointer<UInt16>, lpszComment: CPointer<UInt16>): Int32
-    func tapiRequestMediaCall(hwnd: CPointer<Unit>, wRequestID: UIntNative, lpszDeviceClass: CPointer<UInt8>, lpDeviceID: CPointer<UInt8>, dwSize: UInt32, dwSecure: UInt32, lpszDestAddress: CPointer<UInt8>, lpszAppName: CPointer<UInt8>, lpszCalledParty: CPointer<UInt8>, lpszComment: CPointer<UInt8>): Int32
-    func tapiRequestMediaCallA(hwnd: CPointer<Unit>, wRequestID: UIntNative, lpszDeviceClass: CPointer<UInt8>, lpDeviceID: CPointer<UInt8>, dwSize: UInt32, dwSecure: UInt32, lpszDestAddress: CPointer<UInt8>, lpszAppName: CPointer<UInt8>, lpszCalledParty: CPointer<UInt8>, lpszComment: CPointer<UInt8>): Int32
-    func tapiRequestMediaCallW(hwnd: CPointer<Unit>, wRequestID: UIntNative, lpszDeviceClass: CPointer<UInt16>, lpDeviceID: CPointer<UInt16>, dwSize: UInt32, dwSecure: UInt32, lpszDestAddress: CPointer<UInt16>, lpszAppName: CPointer<UInt16>, lpszCalledParty: CPointer<UInt16>, lpszComment: CPointer<UInt16>): Int32
 }
 
-@When[TAPI32 == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineCreateAgentW == "on"]
+public unsafe func Windows_lineCreateAgentW(hLine: UInt32, lpszAgentID: CPointer<UInt16>, lpszAgentPIN: CPointer<UInt16>, lphAgent: CPointer<UInt32>): Int32 {
+    return lineCreateAgentW(hLine, lpszAgentID, lpszAgentPIN, lphAgent)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineDeallocateCall == "on"]
+foreign {
+    func lineDeallocateCall(hCall: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineDeallocateCall == "on"]
+public unsafe func Windows_lineDeallocateCall(hCall: UInt32): Int32 {
+    return lineDeallocateCall(hCall)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineDevSpecific == "on"]
+foreign {
+    func lineDevSpecific(hLine: UInt32, dwAddressID: UInt32, hCall: UInt32, lpParams: CPointer<Unit>, dwSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineDevSpecific == "on"]
+public unsafe func Windows_lineDevSpecific(hLine: UInt32, dwAddressID: UInt32, hCall: UInt32, lpParams: CPointer<Unit>, dwSize: UInt32): Int32 {
+    return lineDevSpecific(hLine, dwAddressID, hCall, lpParams, dwSize)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineDevSpecificFeature == "on"]
+foreign {
+    func lineDevSpecificFeature(hLine: UInt32, dwFeature: UInt32, lpParams: CPointer<Unit>, dwSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineDevSpecificFeature == "on"]
+public unsafe func Windows_lineDevSpecificFeature(hLine: UInt32, dwFeature: UInt32, lpParams: CPointer<Unit>, dwSize: UInt32): Int32 {
+    return lineDevSpecificFeature(hLine, dwFeature, lpParams, dwSize)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineDial == "on"]
+foreign {
+    func lineDial(hCall: UInt32, lpszDestAddress: CPointer<UInt8>, dwCountryCode: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineDial == "on"]
+public unsafe func Windows_lineDial(hCall: UInt32, lpszDestAddress: CPointer<UInt8>, dwCountryCode: UInt32): Int32 {
+    return lineDial(hCall, lpszDestAddress, dwCountryCode)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineDialA == "on"]
+foreign {
+    func lineDialA(hCall: UInt32, lpszDestAddress: CPointer<UInt8>, dwCountryCode: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineDialA == "on"]
+public unsafe func Windows_lineDialA(hCall: UInt32, lpszDestAddress: CPointer<UInt8>, dwCountryCode: UInt32): Int32 {
+    return lineDialA(hCall, lpszDestAddress, dwCountryCode)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineDialW == "on"]
+foreign {
+    func lineDialW(hCall: UInt32, lpszDestAddress: CPointer<UInt16>, dwCountryCode: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineDialW == "on"]
+public unsafe func Windows_lineDialW(hCall: UInt32, lpszDestAddress: CPointer<UInt16>, dwCountryCode: UInt32): Int32 {
+    return lineDialW(hCall, lpszDestAddress, dwCountryCode)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineDrop == "on"]
+foreign {
+    func lineDrop(hCall: UInt32, lpsUserUserInfo: CPointer<UInt8>, dwSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineDrop == "on"]
+public unsafe func Windows_lineDrop(hCall: UInt32, lpsUserUserInfo: CPointer<UInt8>, dwSize: UInt32): Int32 {
+    return lineDrop(hCall, lpsUserUserInfo, dwSize)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineForward == "on"]
+foreign {
+    func lineForward(hLine: UInt32, bAllAddresses: UInt32, dwAddressID: UInt32, lpForwardList: CPointer<LINEFORWARDLIST>, dwNumRingsNoAnswer: UInt32, lphConsultCall: CPointer<UInt32>, lpCallParams: CPointer<LINECALLPARAMS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineForward == "on"]
+public unsafe func Windows_lineForward(hLine: UInt32, bAllAddresses: UInt32, dwAddressID: UInt32, lpForwardList: CPointer<LINEFORWARDLIST>, dwNumRingsNoAnswer: UInt32, lphConsultCall: CPointer<UInt32>, lpCallParams: CPointer<LINECALLPARAMS>): Int32 {
+    return lineForward(hLine, bAllAddresses, dwAddressID, lpForwardList, dwNumRingsNoAnswer, lphConsultCall, lpCallParams)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineForwardA == "on"]
+foreign {
+    func lineForwardA(hLine: UInt32, bAllAddresses: UInt32, dwAddressID: UInt32, lpForwardList: CPointer<LINEFORWARDLIST>, dwNumRingsNoAnswer: UInt32, lphConsultCall: CPointer<UInt32>, lpCallParams: CPointer<LINECALLPARAMS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineForwardA == "on"]
+public unsafe func Windows_lineForwardA(hLine: UInt32, bAllAddresses: UInt32, dwAddressID: UInt32, lpForwardList: CPointer<LINEFORWARDLIST>, dwNumRingsNoAnswer: UInt32, lphConsultCall: CPointer<UInt32>, lpCallParams: CPointer<LINECALLPARAMS>): Int32 {
+    return lineForwardA(hLine, bAllAddresses, dwAddressID, lpForwardList, dwNumRingsNoAnswer, lphConsultCall, lpCallParams)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineForwardW == "on"]
+foreign {
+    func lineForwardW(hLine: UInt32, bAllAddresses: UInt32, dwAddressID: UInt32, lpForwardList: CPointer<LINEFORWARDLIST>, dwNumRingsNoAnswer: UInt32, lphConsultCall: CPointer<UInt32>, lpCallParams: CPointer<LINECALLPARAMS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineForwardW == "on"]
+public unsafe func Windows_lineForwardW(hLine: UInt32, bAllAddresses: UInt32, dwAddressID: UInt32, lpForwardList: CPointer<LINEFORWARDLIST>, dwNumRingsNoAnswer: UInt32, lphConsultCall: CPointer<UInt32>, lpCallParams: CPointer<LINECALLPARAMS>): Int32 {
+    return lineForwardW(hLine, bAllAddresses, dwAddressID, lpForwardList, dwNumRingsNoAnswer, lphConsultCall, lpCallParams)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGatherDigits == "on"]
+foreign {
+    // param-hint: lpsDigits len=param[3] optional
+    func lineGatherDigits(hCall: UInt32, dwDigitModes: UInt32, lpsDigits: CPointer<UInt8>, dwNumDigits: UInt32, lpszTerminationDigits: CPointer<UInt8>, dwFirstDigitTimeout: UInt32, dwInterDigitTimeout: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGatherDigits == "on"]
+public unsafe func Windows_lineGatherDigits(hCall: UInt32, dwDigitModes: UInt32, lpsDigits: CPointer<UInt8>, dwNumDigits: UInt32, lpszTerminationDigits: CPointer<UInt8>, dwFirstDigitTimeout: UInt32, dwInterDigitTimeout: UInt32): Int32 {
+    return lineGatherDigits(hCall, dwDigitModes, lpsDigits, dwNumDigits, lpszTerminationDigits, dwFirstDigitTimeout, dwInterDigitTimeout)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGatherDigitsA == "on"]
+foreign {
+    // param-hint: lpsDigits len=param[3] optional
+    func lineGatherDigitsA(hCall: UInt32, dwDigitModes: UInt32, lpsDigits: CPointer<UInt8>, dwNumDigits: UInt32, lpszTerminationDigits: CPointer<UInt8>, dwFirstDigitTimeout: UInt32, dwInterDigitTimeout: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGatherDigitsA == "on"]
+public unsafe func Windows_lineGatherDigitsA(hCall: UInt32, dwDigitModes: UInt32, lpsDigits: CPointer<UInt8>, dwNumDigits: UInt32, lpszTerminationDigits: CPointer<UInt8>, dwFirstDigitTimeout: UInt32, dwInterDigitTimeout: UInt32): Int32 {
+    return lineGatherDigitsA(hCall, dwDigitModes, lpsDigits, dwNumDigits, lpszTerminationDigits, dwFirstDigitTimeout, dwInterDigitTimeout)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGatherDigitsW == "on"]
+foreign {
+    // param-hint: lpsDigits len=param[3] optional
+    func lineGatherDigitsW(hCall: UInt32, dwDigitModes: UInt32, lpsDigits: CPointer<UInt16>, dwNumDigits: UInt32, lpszTerminationDigits: CPointer<UInt16>, dwFirstDigitTimeout: UInt32, dwInterDigitTimeout: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGatherDigitsW == "on"]
+public unsafe func Windows_lineGatherDigitsW(hCall: UInt32, dwDigitModes: UInt32, lpsDigits: CPointer<UInt16>, dwNumDigits: UInt32, lpszTerminationDigits: CPointer<UInt16>, dwFirstDigitTimeout: UInt32, dwInterDigitTimeout: UInt32): Int32 {
+    return lineGatherDigitsW(hCall, dwDigitModes, lpsDigits, dwNumDigits, lpszTerminationDigits, dwFirstDigitTimeout, dwInterDigitTimeout)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGenerateDigits == "on"]
+foreign {
+    func lineGenerateDigits(hCall: UInt32, dwDigitMode: UInt32, lpszDigits: CPointer<UInt8>, dwDuration: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGenerateDigits == "on"]
+public unsafe func Windows_lineGenerateDigits(hCall: UInt32, dwDigitMode: UInt32, lpszDigits: CPointer<UInt8>, dwDuration: UInt32): Int32 {
+    return lineGenerateDigits(hCall, dwDigitMode, lpszDigits, dwDuration)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGenerateDigitsA == "on"]
+foreign {
+    func lineGenerateDigitsA(hCall: UInt32, dwDigitMode: UInt32, lpszDigits: CPointer<UInt8>, dwDuration: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGenerateDigitsA == "on"]
+public unsafe func Windows_lineGenerateDigitsA(hCall: UInt32, dwDigitMode: UInt32, lpszDigits: CPointer<UInt8>, dwDuration: UInt32): Int32 {
+    return lineGenerateDigitsA(hCall, dwDigitMode, lpszDigits, dwDuration)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGenerateDigitsW == "on"]
+foreign {
+    func lineGenerateDigitsW(hCall: UInt32, dwDigitMode: UInt32, lpszDigits: CPointer<UInt16>, dwDuration: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGenerateDigitsW == "on"]
+public unsafe func Windows_lineGenerateDigitsW(hCall: UInt32, dwDigitMode: UInt32, lpszDigits: CPointer<UInt16>, dwDuration: UInt32): Int32 {
+    return lineGenerateDigitsW(hCall, dwDigitMode, lpszDigits, dwDuration)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGenerateTone == "on"]
+foreign {
+    func lineGenerateTone(hCall: UInt32, dwToneMode: UInt32, dwDuration: UInt32, dwNumTones: UInt32, lpTones: CPointer<LINEGENERATETONE>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGenerateTone == "on"]
+public unsafe func Windows_lineGenerateTone(hCall: UInt32, dwToneMode: UInt32, dwDuration: UInt32, dwNumTones: UInt32, lpTones: CPointer<LINEGENERATETONE>): Int32 {
+    return lineGenerateTone(hCall, dwToneMode, dwDuration, dwNumTones, lpTones)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAddressCaps == "on"]
+foreign {
+    func lineGetAddressCaps(hLineApp: UInt32, dwDeviceID: UInt32, dwAddressID: UInt32, dwAPIVersion: UInt32, dwExtVersion: UInt32, lpAddressCaps: CPointer<LINEADDRESSCAPS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAddressCaps == "on"]
+public unsafe func Windows_lineGetAddressCaps(hLineApp: UInt32, dwDeviceID: UInt32, dwAddressID: UInt32, dwAPIVersion: UInt32, dwExtVersion: UInt32, lpAddressCaps: CPointer<LINEADDRESSCAPS>): Int32 {
+    return lineGetAddressCaps(hLineApp, dwDeviceID, dwAddressID, dwAPIVersion, dwExtVersion, lpAddressCaps)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAddressCapsA == "on"]
+foreign {
+    func lineGetAddressCapsA(hLineApp: UInt32, dwDeviceID: UInt32, dwAddressID: UInt32, dwAPIVersion: UInt32, dwExtVersion: UInt32, lpAddressCaps: CPointer<LINEADDRESSCAPS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAddressCapsA == "on"]
+public unsafe func Windows_lineGetAddressCapsA(hLineApp: UInt32, dwDeviceID: UInt32, dwAddressID: UInt32, dwAPIVersion: UInt32, dwExtVersion: UInt32, lpAddressCaps: CPointer<LINEADDRESSCAPS>): Int32 {
+    return lineGetAddressCapsA(hLineApp, dwDeviceID, dwAddressID, dwAPIVersion, dwExtVersion, lpAddressCaps)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAddressCapsW == "on"]
+foreign {
+    func lineGetAddressCapsW(hLineApp: UInt32, dwDeviceID: UInt32, dwAddressID: UInt32, dwAPIVersion: UInt32, dwExtVersion: UInt32, lpAddressCaps: CPointer<LINEADDRESSCAPS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAddressCapsW == "on"]
+public unsafe func Windows_lineGetAddressCapsW(hLineApp: UInt32, dwDeviceID: UInt32, dwAddressID: UInt32, dwAPIVersion: UInt32, dwExtVersion: UInt32, lpAddressCaps: CPointer<LINEADDRESSCAPS>): Int32 {
+    return lineGetAddressCapsW(hLineApp, dwDeviceID, dwAddressID, dwAPIVersion, dwExtVersion, lpAddressCaps)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAddressID == "on"]
+foreign {
+    func lineGetAddressID(hLine: UInt32, lpdwAddressID: CPointer<UInt32>, dwAddressMode: UInt32, lpsAddress: CPointer<UInt8>, dwSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAddressID == "on"]
+public unsafe func Windows_lineGetAddressID(hLine: UInt32, lpdwAddressID: CPointer<UInt32>, dwAddressMode: UInt32, lpsAddress: CPointer<UInt8>, dwSize: UInt32): Int32 {
+    return lineGetAddressID(hLine, lpdwAddressID, dwAddressMode, lpsAddress, dwSize)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAddressIDA == "on"]
+foreign {
+    func lineGetAddressIDA(hLine: UInt32, lpdwAddressID: CPointer<UInt32>, dwAddressMode: UInt32, lpsAddress: CPointer<UInt8>, dwSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAddressIDA == "on"]
+public unsafe func Windows_lineGetAddressIDA(hLine: UInt32, lpdwAddressID: CPointer<UInt32>, dwAddressMode: UInt32, lpsAddress: CPointer<UInt8>, dwSize: UInt32): Int32 {
+    return lineGetAddressIDA(hLine, lpdwAddressID, dwAddressMode, lpsAddress, dwSize)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAddressIDW == "on"]
+foreign {
+    func lineGetAddressIDW(hLine: UInt32, lpdwAddressID: CPointer<UInt32>, dwAddressMode: UInt32, lpsAddress: CPointer<UInt16>, dwSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAddressIDW == "on"]
+public unsafe func Windows_lineGetAddressIDW(hLine: UInt32, lpdwAddressID: CPointer<UInt32>, dwAddressMode: UInt32, lpsAddress: CPointer<UInt16>, dwSize: UInt32): Int32 {
+    return lineGetAddressIDW(hLine, lpdwAddressID, dwAddressMode, lpsAddress, dwSize)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAddressStatus == "on"]
+foreign {
+    func lineGetAddressStatus(hLine: UInt32, dwAddressID: UInt32, lpAddressStatus: CPointer<LINEADDRESSSTATUS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAddressStatus == "on"]
+public unsafe func Windows_lineGetAddressStatus(hLine: UInt32, dwAddressID: UInt32, lpAddressStatus: CPointer<LINEADDRESSSTATUS>): Int32 {
+    return lineGetAddressStatus(hLine, dwAddressID, lpAddressStatus)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAddressStatusA == "on"]
+foreign {
+    func lineGetAddressStatusA(hLine: UInt32, dwAddressID: UInt32, lpAddressStatus: CPointer<LINEADDRESSSTATUS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAddressStatusA == "on"]
+public unsafe func Windows_lineGetAddressStatusA(hLine: UInt32, dwAddressID: UInt32, lpAddressStatus: CPointer<LINEADDRESSSTATUS>): Int32 {
+    return lineGetAddressStatusA(hLine, dwAddressID, lpAddressStatus)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAddressStatusW == "on"]
+foreign {
+    func lineGetAddressStatusW(hLine: UInt32, dwAddressID: UInt32, lpAddressStatus: CPointer<LINEADDRESSSTATUS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAddressStatusW == "on"]
+public unsafe func Windows_lineGetAddressStatusW(hLine: UInt32, dwAddressID: UInt32, lpAddressStatus: CPointer<LINEADDRESSSTATUS>): Int32 {
+    return lineGetAddressStatusW(hLine, dwAddressID, lpAddressStatus)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAgentActivityListA == "on"]
+foreign {
+    func lineGetAgentActivityListA(hLine: UInt32, dwAddressID: UInt32, lpAgentActivityList: CPointer<LINEAGENTACTIVITYLIST>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAgentActivityListA == "on"]
+public unsafe func Windows_lineGetAgentActivityListA(hLine: UInt32, dwAddressID: UInt32, lpAgentActivityList: CPointer<LINEAGENTACTIVITYLIST>): Int32 {
+    return lineGetAgentActivityListA(hLine, dwAddressID, lpAgentActivityList)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAgentActivityListW == "on"]
+foreign {
+    func lineGetAgentActivityListW(hLine: UInt32, dwAddressID: UInt32, lpAgentActivityList: CPointer<LINEAGENTACTIVITYLIST>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAgentActivityListW == "on"]
+public unsafe func Windows_lineGetAgentActivityListW(hLine: UInt32, dwAddressID: UInt32, lpAgentActivityList: CPointer<LINEAGENTACTIVITYLIST>): Int32 {
+    return lineGetAgentActivityListW(hLine, dwAddressID, lpAgentActivityList)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAgentCapsA == "on"]
+foreign {
+    func lineGetAgentCapsA(hLineApp: UInt32, dwDeviceID: UInt32, dwAddressID: UInt32, dwAppAPIVersion: UInt32, lpAgentCaps: CPointer<LINEAGENTCAPS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAgentCapsA == "on"]
+public unsafe func Windows_lineGetAgentCapsA(hLineApp: UInt32, dwDeviceID: UInt32, dwAddressID: UInt32, dwAppAPIVersion: UInt32, lpAgentCaps: CPointer<LINEAGENTCAPS>): Int32 {
+    return lineGetAgentCapsA(hLineApp, dwDeviceID, dwAddressID, dwAppAPIVersion, lpAgentCaps)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAgentCapsW == "on"]
+foreign {
+    func lineGetAgentCapsW(hLineApp: UInt32, dwDeviceID: UInt32, dwAddressID: UInt32, dwAppAPIVersion: UInt32, lpAgentCaps: CPointer<LINEAGENTCAPS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAgentCapsW == "on"]
+public unsafe func Windows_lineGetAgentCapsW(hLineApp: UInt32, dwDeviceID: UInt32, dwAddressID: UInt32, dwAppAPIVersion: UInt32, lpAgentCaps: CPointer<LINEAGENTCAPS>): Int32 {
+    return lineGetAgentCapsW(hLineApp, dwDeviceID, dwAddressID, dwAppAPIVersion, lpAgentCaps)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAgentGroupListA == "on"]
+foreign {
+    func lineGetAgentGroupListA(hLine: UInt32, dwAddressID: UInt32, lpAgentGroupList: CPointer<LINEAGENTGROUPLIST>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAgentGroupListA == "on"]
+public unsafe func Windows_lineGetAgentGroupListA(hLine: UInt32, dwAddressID: UInt32, lpAgentGroupList: CPointer<LINEAGENTGROUPLIST>): Int32 {
+    return lineGetAgentGroupListA(hLine, dwAddressID, lpAgentGroupList)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAgentGroupListW == "on"]
+foreign {
+    func lineGetAgentGroupListW(hLine: UInt32, dwAddressID: UInt32, lpAgentGroupList: CPointer<LINEAGENTGROUPLIST>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAgentGroupListW == "on"]
+public unsafe func Windows_lineGetAgentGroupListW(hLine: UInt32, dwAddressID: UInt32, lpAgentGroupList: CPointer<LINEAGENTGROUPLIST>): Int32 {
+    return lineGetAgentGroupListW(hLine, dwAddressID, lpAgentGroupList)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAgentInfo == "on" && Windows_Win32_System_Com == "on"]
 foreign {
     func lineGetAgentInfo(hLine: UInt32, hAgent: UInt32, lpAgentInfo: CPointer<LINEAGENTINFO>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAgentInfo == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_lineGetAgentInfo(hLine: UInt32, hAgent: UInt32, lpAgentInfo: CPointer<LINEAGENTINFO>): Int32 {
+    return lineGetAgentInfo(hLine, hAgent, lpAgentInfo)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAgentSessionInfo == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func lineGetAgentSessionInfo(hLine: UInt32, hAgentSession: UInt32, lpAgentSessionInfo: CPointer<LINEAGENTSESSIONINFO>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAgentSessionInfo == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_lineGetAgentSessionInfo(hLine: UInt32, hAgentSession: UInt32, lpAgentSessionInfo: CPointer<LINEAGENTSESSIONINFO>): Int32 {
+    return lineGetAgentSessionInfo(hLine, hAgentSession, lpAgentSessionInfo)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAgentSessionList == "on"]
+foreign {
+    func lineGetAgentSessionList(hLine: UInt32, hAgent: UInt32, lpAgentSessionList: CPointer<LINEAGENTSESSIONLIST>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAgentSessionList == "on"]
+public unsafe func Windows_lineGetAgentSessionList(hLine: UInt32, hAgent: UInt32, lpAgentSessionList: CPointer<LINEAGENTSESSIONLIST>): Int32 {
+    return lineGetAgentSessionList(hLine, hAgent, lpAgentSessionList)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAgentStatusA == "on"]
+foreign {
+    func lineGetAgentStatusA(hLine: UInt32, dwAddressID: UInt32, lpAgentStatus: CPointer<LINEAGENTSTATUS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAgentStatusA == "on"]
+public unsafe func Windows_lineGetAgentStatusA(hLine: UInt32, dwAddressID: UInt32, lpAgentStatus: CPointer<LINEAGENTSTATUS>): Int32 {
+    return lineGetAgentStatusA(hLine, dwAddressID, lpAgentStatus)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAgentStatusW == "on"]
+foreign {
+    func lineGetAgentStatusW(hLine: UInt32, dwAddressID: UInt32, lpAgentStatus: CPointer<LINEAGENTSTATUS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAgentStatusW == "on"]
+public unsafe func Windows_lineGetAgentStatusW(hLine: UInt32, dwAddressID: UInt32, lpAgentStatus: CPointer<LINEAGENTSTATUS>): Int32 {
+    return lineGetAgentStatusW(hLine, dwAddressID, lpAgentStatus)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAppPriority == "on"]
+foreign {
+    func lineGetAppPriority(lpszAppFilename: CPointer<UInt8>, dwMediaMode: UInt32, lpExtensionID: CPointer<LINEEXTENSIONID>, dwRequestMode: UInt32, lpExtensionName: CPointer<VARSTRING>, lpdwPriority: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAppPriority == "on"]
+public unsafe func Windows_lineGetAppPriority(lpszAppFilename: CPointer<UInt8>, dwMediaMode: UInt32, lpExtensionID: CPointer<LINEEXTENSIONID>, dwRequestMode: UInt32, lpExtensionName: CPointer<VARSTRING>, lpdwPriority: CPointer<UInt32>): Int32 {
+    return lineGetAppPriority(lpszAppFilename, dwMediaMode, lpExtensionID, dwRequestMode, lpExtensionName, lpdwPriority)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAppPriorityA == "on"]
+foreign {
+    func lineGetAppPriorityA(lpszAppFilename: CPointer<UInt8>, dwMediaMode: UInt32, lpExtensionID: CPointer<LINEEXTENSIONID>, dwRequestMode: UInt32, lpExtensionName: CPointer<VARSTRING>, lpdwPriority: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAppPriorityA == "on"]
+public unsafe func Windows_lineGetAppPriorityA(lpszAppFilename: CPointer<UInt8>, dwMediaMode: UInt32, lpExtensionID: CPointer<LINEEXTENSIONID>, dwRequestMode: UInt32, lpExtensionName: CPointer<VARSTRING>, lpdwPriority: CPointer<UInt32>): Int32 {
+    return lineGetAppPriorityA(lpszAppFilename, dwMediaMode, lpExtensionID, dwRequestMode, lpExtensionName, lpdwPriority)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAppPriorityW == "on"]
+foreign {
+    func lineGetAppPriorityW(lpszAppFilename: CPointer<UInt16>, dwMediaMode: UInt32, lpExtensionID: CPointer<LINEEXTENSIONID>, dwRequestMode: UInt32, lpExtensionName: CPointer<VARSTRING>, lpdwPriority: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetAppPriorityW == "on"]
+public unsafe func Windows_lineGetAppPriorityW(lpszAppFilename: CPointer<UInt16>, dwMediaMode: UInt32, lpExtensionID: CPointer<LINEEXTENSIONID>, dwRequestMode: UInt32, lpExtensionName: CPointer<VARSTRING>, lpdwPriority: CPointer<UInt32>): Int32 {
+    return lineGetAppPriorityW(lpszAppFilename, dwMediaMode, lpExtensionID, dwRequestMode, lpExtensionName, lpdwPriority)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetCallInfo == "on"]
+foreign {
+    func lineGetCallInfo(hCall: UInt32, lpCallInfo: CPointer<LINECALLINFO>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetCallInfo == "on"]
+public unsafe func Windows_lineGetCallInfo(hCall: UInt32, lpCallInfo: CPointer<LINECALLINFO>): Int32 {
+    return lineGetCallInfo(hCall, lpCallInfo)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetCallInfoA == "on"]
+foreign {
+    func lineGetCallInfoA(hCall: UInt32, lpCallInfo: CPointer<LINECALLINFO>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetCallInfoA == "on"]
+public unsafe func Windows_lineGetCallInfoA(hCall: UInt32, lpCallInfo: CPointer<LINECALLINFO>): Int32 {
+    return lineGetCallInfoA(hCall, lpCallInfo)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetCallInfoW == "on"]
+foreign {
+    func lineGetCallInfoW(hCall: UInt32, lpCallInfo: CPointer<LINECALLINFO>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetCallInfoW == "on"]
+public unsafe func Windows_lineGetCallInfoW(hCall: UInt32, lpCallInfo: CPointer<LINECALLINFO>): Int32 {
+    return lineGetCallInfoW(hCall, lpCallInfo)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetCallStatus == "on"]
+foreign {
+    func lineGetCallStatus(hCall: UInt32, lpCallStatus: CPointer<LINECALLSTATUS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetCallStatus == "on"]
+public unsafe func Windows_lineGetCallStatus(hCall: UInt32, lpCallStatus: CPointer<LINECALLSTATUS>): Int32 {
+    return lineGetCallStatus(hCall, lpCallStatus)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetConfRelatedCalls == "on"]
+foreign {
+    func lineGetConfRelatedCalls(hCall: UInt32, lpCallList: CPointer<LINECALLLIST>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetConfRelatedCalls == "on"]
+public unsafe func Windows_lineGetConfRelatedCalls(hCall: UInt32, lpCallList: CPointer<LINECALLLIST>): Int32 {
+    return lineGetConfRelatedCalls(hCall, lpCallList)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetCountry == "on"]
+foreign {
+    func lineGetCountry(dwCountryID: UInt32, dwAPIVersion: UInt32, lpLineCountryList: CPointer<LINECOUNTRYLIST>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetCountry == "on"]
+public unsafe func Windows_lineGetCountry(dwCountryID: UInt32, dwAPIVersion: UInt32, lpLineCountryList: CPointer<LINECOUNTRYLIST>): Int32 {
+    return lineGetCountry(dwCountryID, dwAPIVersion, lpLineCountryList)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetCountryA == "on"]
+foreign {
+    func lineGetCountryA(dwCountryID: UInt32, dwAPIVersion: UInt32, lpLineCountryList: CPointer<LINECOUNTRYLIST>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetCountryA == "on"]
+public unsafe func Windows_lineGetCountryA(dwCountryID: UInt32, dwAPIVersion: UInt32, lpLineCountryList: CPointer<LINECOUNTRYLIST>): Int32 {
+    return lineGetCountryA(dwCountryID, dwAPIVersion, lpLineCountryList)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetCountryW == "on"]
+foreign {
+    func lineGetCountryW(dwCountryID: UInt32, dwAPIVersion: UInt32, lpLineCountryList: CPointer<LINECOUNTRYLIST>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetCountryW == "on"]
+public unsafe func Windows_lineGetCountryW(dwCountryID: UInt32, dwAPIVersion: UInt32, lpLineCountryList: CPointer<LINECOUNTRYLIST>): Int32 {
+    return lineGetCountryW(dwCountryID, dwAPIVersion, lpLineCountryList)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetDevCaps == "on"]
+foreign {
+    func lineGetDevCaps(hLineApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, dwExtVersion: UInt32, lpLineDevCaps: CPointer<LINEDEVCAPS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetDevCaps == "on"]
+public unsafe func Windows_lineGetDevCaps(hLineApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, dwExtVersion: UInt32, lpLineDevCaps: CPointer<LINEDEVCAPS>): Int32 {
+    return lineGetDevCaps(hLineApp, dwDeviceID, dwAPIVersion, dwExtVersion, lpLineDevCaps)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetDevCapsA == "on"]
+foreign {
+    func lineGetDevCapsA(hLineApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, dwExtVersion: UInt32, lpLineDevCaps: CPointer<LINEDEVCAPS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetDevCapsA == "on"]
+public unsafe func Windows_lineGetDevCapsA(hLineApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, dwExtVersion: UInt32, lpLineDevCaps: CPointer<LINEDEVCAPS>): Int32 {
+    return lineGetDevCapsA(hLineApp, dwDeviceID, dwAPIVersion, dwExtVersion, lpLineDevCaps)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetDevCapsW == "on"]
+foreign {
+    func lineGetDevCapsW(hLineApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, dwExtVersion: UInt32, lpLineDevCaps: CPointer<LINEDEVCAPS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetDevCapsW == "on"]
+public unsafe func Windows_lineGetDevCapsW(hLineApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, dwExtVersion: UInt32, lpLineDevCaps: CPointer<LINEDEVCAPS>): Int32 {
+    return lineGetDevCapsW(hLineApp, dwDeviceID, dwAPIVersion, dwExtVersion, lpLineDevCaps)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetDevConfig == "on"]
+foreign {
+    func lineGetDevConfig(dwDeviceID: UInt32, lpDeviceConfig: CPointer<VARSTRING>, lpszDeviceClass: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetDevConfig == "on"]
+public unsafe func Windows_lineGetDevConfig(dwDeviceID: UInt32, lpDeviceConfig: CPointer<VARSTRING>, lpszDeviceClass: CPointer<UInt8>): Int32 {
+    return lineGetDevConfig(dwDeviceID, lpDeviceConfig, lpszDeviceClass)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetDevConfigA == "on"]
+foreign {
+    func lineGetDevConfigA(dwDeviceID: UInt32, lpDeviceConfig: CPointer<VARSTRING>, lpszDeviceClass: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetDevConfigA == "on"]
+public unsafe func Windows_lineGetDevConfigA(dwDeviceID: UInt32, lpDeviceConfig: CPointer<VARSTRING>, lpszDeviceClass: CPointer<UInt8>): Int32 {
+    return lineGetDevConfigA(dwDeviceID, lpDeviceConfig, lpszDeviceClass)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetDevConfigW == "on"]
+foreign {
+    func lineGetDevConfigW(dwDeviceID: UInt32, lpDeviceConfig: CPointer<VARSTRING>, lpszDeviceClass: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetDevConfigW == "on"]
+public unsafe func Windows_lineGetDevConfigW(dwDeviceID: UInt32, lpDeviceConfig: CPointer<VARSTRING>, lpszDeviceClass: CPointer<UInt16>): Int32 {
+    return lineGetDevConfigW(dwDeviceID, lpDeviceConfig, lpszDeviceClass)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetGroupListA == "on"]
+foreign {
+    func lineGetGroupListA(hLine: UInt32, lpGroupList: CPointer<LINEAGENTGROUPLIST>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetGroupListA == "on"]
+public unsafe func Windows_lineGetGroupListA(hLine: UInt32, lpGroupList: CPointer<LINEAGENTGROUPLIST>): Int32 {
+    return lineGetGroupListA(hLine, lpGroupList)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetGroupListW == "on"]
+foreign {
+    func lineGetGroupListW(hLine: UInt32, lpGroupList: CPointer<LINEAGENTGROUPLIST>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetGroupListW == "on"]
+public unsafe func Windows_lineGetGroupListW(hLine: UInt32, lpGroupList: CPointer<LINEAGENTGROUPLIST>): Int32 {
+    return lineGetGroupListW(hLine, lpGroupList)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetID == "on"]
+foreign {
+    func lineGetID(hLine: UInt32, dwAddressID: UInt32, hCall: UInt32, dwSelect: UInt32, lpDeviceID: CPointer<VARSTRING>, lpszDeviceClass: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetID == "on"]
+public unsafe func Windows_lineGetID(hLine: UInt32, dwAddressID: UInt32, hCall: UInt32, dwSelect: UInt32, lpDeviceID: CPointer<VARSTRING>, lpszDeviceClass: CPointer<UInt8>): Int32 {
+    return lineGetID(hLine, dwAddressID, hCall, dwSelect, lpDeviceID, lpszDeviceClass)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetIDA == "on"]
+foreign {
+    func lineGetIDA(hLine: UInt32, dwAddressID: UInt32, hCall: UInt32, dwSelect: UInt32, lpDeviceID: CPointer<VARSTRING>, lpszDeviceClass: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetIDA == "on"]
+public unsafe func Windows_lineGetIDA(hLine: UInt32, dwAddressID: UInt32, hCall: UInt32, dwSelect: UInt32, lpDeviceID: CPointer<VARSTRING>, lpszDeviceClass: CPointer<UInt8>): Int32 {
+    return lineGetIDA(hLine, dwAddressID, hCall, dwSelect, lpDeviceID, lpszDeviceClass)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetIDW == "on"]
+foreign {
+    func lineGetIDW(hLine: UInt32, dwAddressID: UInt32, hCall: UInt32, dwSelect: UInt32, lpDeviceID: CPointer<VARSTRING>, lpszDeviceClass: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetIDW == "on"]
+public unsafe func Windows_lineGetIDW(hLine: UInt32, dwAddressID: UInt32, hCall: UInt32, dwSelect: UInt32, lpDeviceID: CPointer<VARSTRING>, lpszDeviceClass: CPointer<UInt16>): Int32 {
+    return lineGetIDW(hLine, dwAddressID, hCall, dwSelect, lpDeviceID, lpszDeviceClass)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetIcon == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    func lineGetIcon(dwDeviceID: UInt32, lpszDeviceClass: CPointer<UInt8>, lphIcon: CPointer<Win32__impl_l0.HICON>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetIcon == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_lineGetIcon(dwDeviceID: UInt32, lpszDeviceClass: CPointer<UInt8>, lphIcon: CPointer<Win32__impl_l0.HICON>): Int32 {
+    return lineGetIcon(dwDeviceID, lpszDeviceClass, lphIcon)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetIconA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    func lineGetIconA(dwDeviceID: UInt32, lpszDeviceClass: CPointer<UInt8>, lphIcon: CPointer<Win32__impl_l0.HICON>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetIconA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_lineGetIconA(dwDeviceID: UInt32, lpszDeviceClass: CPointer<UInt8>, lphIcon: CPointer<Win32__impl_l0.HICON>): Int32 {
+    return lineGetIconA(dwDeviceID, lpszDeviceClass, lphIcon)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetIconW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    func lineGetIconW(dwDeviceID: UInt32, lpszDeviceClass: CPointer<UInt16>, lphIcon: CPointer<Win32__impl_l0.HICON>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetIconW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_lineGetIconW(dwDeviceID: UInt32, lpszDeviceClass: CPointer<UInt16>, lphIcon: CPointer<Win32__impl_l0.HICON>): Int32 {
+    return lineGetIconW(dwDeviceID, lpszDeviceClass, lphIcon)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetLineDevStatus == "on"]
+foreign {
+    func lineGetLineDevStatus(hLine: UInt32, lpLineDevStatus: CPointer<LINEDEVSTATUS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetLineDevStatus == "on"]
+public unsafe func Windows_lineGetLineDevStatus(hLine: UInt32, lpLineDevStatus: CPointer<LINEDEVSTATUS>): Int32 {
+    return lineGetLineDevStatus(hLine, lpLineDevStatus)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetLineDevStatusA == "on"]
+foreign {
+    func lineGetLineDevStatusA(hLine: UInt32, lpLineDevStatus: CPointer<LINEDEVSTATUS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetLineDevStatusA == "on"]
+public unsafe func Windows_lineGetLineDevStatusA(hLine: UInt32, lpLineDevStatus: CPointer<LINEDEVSTATUS>): Int32 {
+    return lineGetLineDevStatusA(hLine, lpLineDevStatus)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetLineDevStatusW == "on"]
+foreign {
+    func lineGetLineDevStatusW(hLine: UInt32, lpLineDevStatus: CPointer<LINEDEVSTATUS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetLineDevStatusW == "on"]
+public unsafe func Windows_lineGetLineDevStatusW(hLine: UInt32, lpLineDevStatus: CPointer<LINEDEVSTATUS>): Int32 {
+    return lineGetLineDevStatusW(hLine, lpLineDevStatus)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetMessage == "on"]
+foreign {
+    func lineGetMessage(hLineApp: UInt32, lpMessage: CPointer<LINEMESSAGE>, dwTimeout: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetMessage == "on"]
+public unsafe func Windows_lineGetMessage(hLineApp: UInt32, lpMessage: CPointer<LINEMESSAGE>, dwTimeout: UInt32): Int32 {
+    return lineGetMessage(hLineApp, lpMessage, dwTimeout)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetNewCalls == "on"]
+foreign {
+    func lineGetNewCalls(hLine: UInt32, dwAddressID: UInt32, dwSelect: UInt32, lpCallList: CPointer<LINECALLLIST>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetNewCalls == "on"]
+public unsafe func Windows_lineGetNewCalls(hLine: UInt32, dwAddressID: UInt32, dwSelect: UInt32, lpCallList: CPointer<LINECALLLIST>): Int32 {
+    return lineGetNewCalls(hLine, dwAddressID, dwSelect, lpCallList)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetNumRings == "on"]
+foreign {
+    func lineGetNumRings(hLine: UInt32, dwAddressID: UInt32, lpdwNumRings: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetNumRings == "on"]
+public unsafe func Windows_lineGetNumRings(hLine: UInt32, dwAddressID: UInt32, lpdwNumRings: CPointer<UInt32>): Int32 {
+    return lineGetNumRings(hLine, dwAddressID, lpdwNumRings)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetProviderList == "on"]
+foreign {
+    func lineGetProviderList(dwAPIVersion: UInt32, lpProviderList: CPointer<LINEPROVIDERLIST>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetProviderList == "on"]
+public unsafe func Windows_lineGetProviderList(dwAPIVersion: UInt32, lpProviderList: CPointer<LINEPROVIDERLIST>): Int32 {
+    return lineGetProviderList(dwAPIVersion, lpProviderList)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetProviderListA == "on"]
+foreign {
+    func lineGetProviderListA(dwAPIVersion: UInt32, lpProviderList: CPointer<LINEPROVIDERLIST>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetProviderListA == "on"]
+public unsafe func Windows_lineGetProviderListA(dwAPIVersion: UInt32, lpProviderList: CPointer<LINEPROVIDERLIST>): Int32 {
+    return lineGetProviderListA(dwAPIVersion, lpProviderList)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetProviderListW == "on"]
+foreign {
+    func lineGetProviderListW(dwAPIVersion: UInt32, lpProviderList: CPointer<LINEPROVIDERLIST>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetProviderListW == "on"]
+public unsafe func Windows_lineGetProviderListW(dwAPIVersion: UInt32, lpProviderList: CPointer<LINEPROVIDERLIST>): Int32 {
+    return lineGetProviderListW(dwAPIVersion, lpProviderList)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetProxyStatus == "on"]
+foreign {
+    func lineGetProxyStatus(hLineApp: UInt32, dwDeviceID: UInt32, dwAppAPIVersion: UInt32, lpLineProxyReqestList: CPointer<LINEPROXYREQUESTLIST>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetProxyStatus == "on"]
+public unsafe func Windows_lineGetProxyStatus(hLineApp: UInt32, dwDeviceID: UInt32, dwAppAPIVersion: UInt32, lpLineProxyReqestList: CPointer<LINEPROXYREQUESTLIST>): Int32 {
+    return lineGetProxyStatus(hLineApp, dwDeviceID, dwAppAPIVersion, lpLineProxyReqestList)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetQueueInfo == "on"]
+foreign {
+    func lineGetQueueInfo(hLine: UInt32, dwQueueID: UInt32, lpLineQueueInfo: CPointer<LINEQUEUEINFO>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetQueueInfo == "on"]
+public unsafe func Windows_lineGetQueueInfo(hLine: UInt32, dwQueueID: UInt32, lpLineQueueInfo: CPointer<LINEQUEUEINFO>): Int32 {
+    return lineGetQueueInfo(hLine, dwQueueID, lpLineQueueInfo)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetQueueListA == "on"]
+foreign {
+    func lineGetQueueListA(hLine: UInt32, lpGroupID: CPointer<GUID>, lpQueueList: CPointer<LINEQUEUELIST>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetQueueListA == "on"]
+public unsafe func Windows_lineGetQueueListA(hLine: UInt32, lpGroupID: CPointer<GUID>, lpQueueList: CPointer<LINEQUEUELIST>): Int32 {
+    return lineGetQueueListA(hLine, lpGroupID, lpQueueList)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetQueueListW == "on"]
+foreign {
+    func lineGetQueueListW(hLine: UInt32, lpGroupID: CPointer<GUID>, lpQueueList: CPointer<LINEQUEUELIST>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetQueueListW == "on"]
+public unsafe func Windows_lineGetQueueListW(hLine: UInt32, lpGroupID: CPointer<GUID>, lpQueueList: CPointer<LINEQUEUELIST>): Int32 {
+    return lineGetQueueListW(hLine, lpGroupID, lpQueueList)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetRequest == "on"]
+foreign {
+    func lineGetRequest(hLineApp: UInt32, dwRequestMode: UInt32, lpRequestBuffer: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetRequest == "on"]
+public unsafe func Windows_lineGetRequest(hLineApp: UInt32, dwRequestMode: UInt32, lpRequestBuffer: CPointer<Unit>): Int32 {
+    return lineGetRequest(hLineApp, dwRequestMode, lpRequestBuffer)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetRequestA == "on"]
+foreign {
+    func lineGetRequestA(hLineApp: UInt32, dwRequestMode: UInt32, lpRequestBuffer: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetRequestA == "on"]
+public unsafe func Windows_lineGetRequestA(hLineApp: UInt32, dwRequestMode: UInt32, lpRequestBuffer: CPointer<Unit>): Int32 {
+    return lineGetRequestA(hLineApp, dwRequestMode, lpRequestBuffer)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetRequestW == "on"]
+foreign {
+    func lineGetRequestW(hLineApp: UInt32, dwRequestMode: UInt32, lpRequestBuffer: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetRequestW == "on"]
+public unsafe func Windows_lineGetRequestW(hLineApp: UInt32, dwRequestMode: UInt32, lpRequestBuffer: CPointer<Unit>): Int32 {
+    return lineGetRequestW(hLineApp, dwRequestMode, lpRequestBuffer)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetStatusMessages == "on"]
+foreign {
+    func lineGetStatusMessages(hLine: UInt32, lpdwLineStates: CPointer<UInt32>, lpdwAddressStates: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetStatusMessages == "on"]
+public unsafe func Windows_lineGetStatusMessages(hLine: UInt32, lpdwLineStates: CPointer<UInt32>, lpdwAddressStates: CPointer<UInt32>): Int32 {
+    return lineGetStatusMessages(hLine, lpdwLineStates, lpdwAddressStates)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetTranslateCaps == "on"]
+foreign {
+    func lineGetTranslateCaps(hLineApp: UInt32, dwAPIVersion: UInt32, lpTranslateCaps: CPointer<LINETRANSLATECAPS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetTranslateCaps == "on"]
+public unsafe func Windows_lineGetTranslateCaps(hLineApp: UInt32, dwAPIVersion: UInt32, lpTranslateCaps: CPointer<LINETRANSLATECAPS>): Int32 {
+    return lineGetTranslateCaps(hLineApp, dwAPIVersion, lpTranslateCaps)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetTranslateCapsA == "on"]
+foreign {
+    func lineGetTranslateCapsA(hLineApp: UInt32, dwAPIVersion: UInt32, lpTranslateCaps: CPointer<LINETRANSLATECAPS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetTranslateCapsA == "on"]
+public unsafe func Windows_lineGetTranslateCapsA(hLineApp: UInt32, dwAPIVersion: UInt32, lpTranslateCaps: CPointer<LINETRANSLATECAPS>): Int32 {
+    return lineGetTranslateCapsA(hLineApp, dwAPIVersion, lpTranslateCaps)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetTranslateCapsW == "on"]
+foreign {
+    func lineGetTranslateCapsW(hLineApp: UInt32, dwAPIVersion: UInt32, lpTranslateCaps: CPointer<LINETRANSLATECAPS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineGetTranslateCapsW == "on"]
+public unsafe func Windows_lineGetTranslateCapsW(hLineApp: UInt32, dwAPIVersion: UInt32, lpTranslateCaps: CPointer<LINETRANSLATECAPS>): Int32 {
+    return lineGetTranslateCapsW(hLineApp, dwAPIVersion, lpTranslateCaps)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineHandoff == "on"]
+foreign {
+    func lineHandoff(hCall: UInt32, lpszFileName: CPointer<UInt8>, dwMediaMode: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineHandoff == "on"]
+public unsafe func Windows_lineHandoff(hCall: UInt32, lpszFileName: CPointer<UInt8>, dwMediaMode: UInt32): Int32 {
+    return lineHandoff(hCall, lpszFileName, dwMediaMode)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineHandoffA == "on"]
+foreign {
+    func lineHandoffA(hCall: UInt32, lpszFileName: CPointer<UInt8>, dwMediaMode: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineHandoffA == "on"]
+public unsafe func Windows_lineHandoffA(hCall: UInt32, lpszFileName: CPointer<UInt8>, dwMediaMode: UInt32): Int32 {
+    return lineHandoffA(hCall, lpszFileName, dwMediaMode)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineHandoffW == "on"]
+foreign {
+    func lineHandoffW(hCall: UInt32, lpszFileName: CPointer<UInt16>, dwMediaMode: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineHandoffW == "on"]
+public unsafe func Windows_lineHandoffW(hCall: UInt32, lpszFileName: CPointer<UInt16>, dwMediaMode: UInt32): Int32 {
+    return lineHandoffW(hCall, lpszFileName, dwMediaMode)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineHold == "on"]
+foreign {
+    func lineHold(hCall: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineHold == "on"]
+public unsafe func Windows_lineHold(hCall: UInt32): Int32 {
+    return lineHold(hCall)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineInitialize == "on"]
+foreign {
+    func lineInitialize(lphLineApp: CPointer<UInt32>, hInstance: CPointer<Unit>, lpfnCallback: LINECALLBACK, lpszAppName: CPointer<UInt8>, lpdwNumDevs: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineInitialize == "on"]
+public unsafe func Windows_lineInitialize(lphLineApp: CPointer<UInt32>, hInstance: CPointer<Unit>, lpfnCallback: LINECALLBACK, lpszAppName: CPointer<UInt8>, lpdwNumDevs: CPointer<UInt32>): Int32 {
+    return lineInitialize(lphLineApp, hInstance, lpfnCallback, lpszAppName, lpdwNumDevs)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineInitializeExA == "on"]
+foreign {
+    func lineInitializeExA(lphLineApp: CPointer<UInt32>, hInstance: CPointer<Unit>, lpfnCallback: LINECALLBACK, lpszFriendlyAppName: CPointer<UInt8>, lpdwNumDevs: CPointer<UInt32>, lpdwAPIVersion: CPointer<UInt32>, lpLineInitializeExParams: CPointer<LINEINITIALIZEEXPARAMS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineInitializeExA == "on"]
+public unsafe func Windows_lineInitializeExA(lphLineApp: CPointer<UInt32>, hInstance: CPointer<Unit>, lpfnCallback: LINECALLBACK, lpszFriendlyAppName: CPointer<UInt8>, lpdwNumDevs: CPointer<UInt32>, lpdwAPIVersion: CPointer<UInt32>, lpLineInitializeExParams: CPointer<LINEINITIALIZEEXPARAMS>): Int32 {
+    return lineInitializeExA(lphLineApp, hInstance, lpfnCallback, lpszFriendlyAppName, lpdwNumDevs, lpdwAPIVersion, lpLineInitializeExParams)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineInitializeExW == "on"]
+foreign {
+    func lineInitializeExW(lphLineApp: CPointer<UInt32>, hInstance: CPointer<Unit>, lpfnCallback: LINECALLBACK, lpszFriendlyAppName: CPointer<UInt16>, lpdwNumDevs: CPointer<UInt32>, lpdwAPIVersion: CPointer<UInt32>, lpLineInitializeExParams: CPointer<LINEINITIALIZEEXPARAMS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineInitializeExW == "on"]
+public unsafe func Windows_lineInitializeExW(lphLineApp: CPointer<UInt32>, hInstance: CPointer<Unit>, lpfnCallback: LINECALLBACK, lpszFriendlyAppName: CPointer<UInt16>, lpdwNumDevs: CPointer<UInt32>, lpdwAPIVersion: CPointer<UInt32>, lpLineInitializeExParams: CPointer<LINEINITIALIZEEXPARAMS>): Int32 {
+    return lineInitializeExW(lphLineApp, hInstance, lpfnCallback, lpszFriendlyAppName, lpdwNumDevs, lpdwAPIVersion, lpLineInitializeExParams)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineMakeCall == "on"]
+foreign {
+    func lineMakeCall(hLine: UInt32, lphCall: CPointer<UInt32>, lpszDestAddress: CPointer<UInt8>, dwCountryCode: UInt32, lpCallParams: CPointer<LINECALLPARAMS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineMakeCall == "on"]
+public unsafe func Windows_lineMakeCall(hLine: UInt32, lphCall: CPointer<UInt32>, lpszDestAddress: CPointer<UInt8>, dwCountryCode: UInt32, lpCallParams: CPointer<LINECALLPARAMS>): Int32 {
+    return lineMakeCall(hLine, lphCall, lpszDestAddress, dwCountryCode, lpCallParams)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineMakeCallA == "on"]
+foreign {
+    func lineMakeCallA(hLine: UInt32, lphCall: CPointer<UInt32>, lpszDestAddress: CPointer<UInt8>, dwCountryCode: UInt32, lpCallParams: CPointer<LINECALLPARAMS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineMakeCallA == "on"]
+public unsafe func Windows_lineMakeCallA(hLine: UInt32, lphCall: CPointer<UInt32>, lpszDestAddress: CPointer<UInt8>, dwCountryCode: UInt32, lpCallParams: CPointer<LINECALLPARAMS>): Int32 {
+    return lineMakeCallA(hLine, lphCall, lpszDestAddress, dwCountryCode, lpCallParams)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineMakeCallW == "on"]
+foreign {
+    func lineMakeCallW(hLine: UInt32, lphCall: CPointer<UInt32>, lpszDestAddress: CPointer<UInt16>, dwCountryCode: UInt32, lpCallParams: CPointer<LINECALLPARAMS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineMakeCallW == "on"]
+public unsafe func Windows_lineMakeCallW(hLine: UInt32, lphCall: CPointer<UInt32>, lpszDestAddress: CPointer<UInt16>, dwCountryCode: UInt32, lpCallParams: CPointer<LINECALLPARAMS>): Int32 {
+    return lineMakeCallW(hLine, lphCall, lpszDestAddress, dwCountryCode, lpCallParams)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineMonitorDigits == "on"]
+foreign {
+    func lineMonitorDigits(hCall: UInt32, dwDigitModes: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineMonitorDigits == "on"]
+public unsafe func Windows_lineMonitorDigits(hCall: UInt32, dwDigitModes: UInt32): Int32 {
+    return lineMonitorDigits(hCall, dwDigitModes)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineMonitorMedia == "on"]
+foreign {
+    func lineMonitorMedia(hCall: UInt32, dwMediaModes: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineMonitorMedia == "on"]
+public unsafe func Windows_lineMonitorMedia(hCall: UInt32, dwMediaModes: UInt32): Int32 {
+    return lineMonitorMedia(hCall, dwMediaModes)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineMonitorTones == "on"]
+foreign {
+    func lineMonitorTones(hCall: UInt32, lpToneList: CPointer<LINEMONITORTONE>, dwNumEntries: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineMonitorTones == "on"]
+public unsafe func Windows_lineMonitorTones(hCall: UInt32, lpToneList: CPointer<LINEMONITORTONE>, dwNumEntries: UInt32): Int32 {
+    return lineMonitorTones(hCall, lpToneList, dwNumEntries)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineNegotiateAPIVersion == "on"]
+foreign {
+    func lineNegotiateAPIVersion(hLineApp: UInt32, dwDeviceID: UInt32, dwAPILowVersion: UInt32, dwAPIHighVersion: UInt32, lpdwAPIVersion: CPointer<UInt32>, lpExtensionID: CPointer<LINEEXTENSIONID>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineNegotiateAPIVersion == "on"]
+public unsafe func Windows_lineNegotiateAPIVersion(hLineApp: UInt32, dwDeviceID: UInt32, dwAPILowVersion: UInt32, dwAPIHighVersion: UInt32, lpdwAPIVersion: CPointer<UInt32>, lpExtensionID: CPointer<LINEEXTENSIONID>): Int32 {
+    return lineNegotiateAPIVersion(hLineApp, dwDeviceID, dwAPILowVersion, dwAPIHighVersion, lpdwAPIVersion, lpExtensionID)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineNegotiateExtVersion == "on"]
+foreign {
+    func lineNegotiateExtVersion(hLineApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, dwExtLowVersion: UInt32, dwExtHighVersion: UInt32, lpdwExtVersion: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineNegotiateExtVersion == "on"]
+public unsafe func Windows_lineNegotiateExtVersion(hLineApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, dwExtLowVersion: UInt32, dwExtHighVersion: UInt32, lpdwExtVersion: CPointer<UInt32>): Int32 {
+    return lineNegotiateExtVersion(hLineApp, dwDeviceID, dwAPIVersion, dwExtLowVersion, dwExtHighVersion, lpdwExtVersion)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineOpen == "on"]
+foreign {
+    func lineOpen(hLineApp: UInt32, dwDeviceID: UInt32, lphLine: CPointer<UInt32>, dwAPIVersion: UInt32, dwExtVersion: UInt32, dwCallbackInstance: UIntNative, dwPrivileges: UInt32, dwMediaModes: UInt32, lpCallParams: CPointer<LINECALLPARAMS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineOpen == "on"]
+public unsafe func Windows_lineOpen(hLineApp: UInt32, dwDeviceID: UInt32, lphLine: CPointer<UInt32>, dwAPIVersion: UInt32, dwExtVersion: UInt32, dwCallbackInstance: UIntNative, dwPrivileges: UInt32, dwMediaModes: UInt32, lpCallParams: CPointer<LINECALLPARAMS>): Int32 {
+    return lineOpen(hLineApp, dwDeviceID, lphLine, dwAPIVersion, dwExtVersion, dwCallbackInstance, dwPrivileges, dwMediaModes, lpCallParams)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineOpenA == "on"]
+foreign {
+    func lineOpenA(hLineApp: UInt32, dwDeviceID: UInt32, lphLine: CPointer<UInt32>, dwAPIVersion: UInt32, dwExtVersion: UInt32, dwCallbackInstance: UIntNative, dwPrivileges: UInt32, dwMediaModes: UInt32, lpCallParams: CPointer<LINECALLPARAMS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineOpenA == "on"]
+public unsafe func Windows_lineOpenA(hLineApp: UInt32, dwDeviceID: UInt32, lphLine: CPointer<UInt32>, dwAPIVersion: UInt32, dwExtVersion: UInt32, dwCallbackInstance: UIntNative, dwPrivileges: UInt32, dwMediaModes: UInt32, lpCallParams: CPointer<LINECALLPARAMS>): Int32 {
+    return lineOpenA(hLineApp, dwDeviceID, lphLine, dwAPIVersion, dwExtVersion, dwCallbackInstance, dwPrivileges, dwMediaModes, lpCallParams)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineOpenW == "on"]
+foreign {
+    func lineOpenW(hLineApp: UInt32, dwDeviceID: UInt32, lphLine: CPointer<UInt32>, dwAPIVersion: UInt32, dwExtVersion: UInt32, dwCallbackInstance: UIntNative, dwPrivileges: UInt32, dwMediaModes: UInt32, lpCallParams: CPointer<LINECALLPARAMS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineOpenW == "on"]
+public unsafe func Windows_lineOpenW(hLineApp: UInt32, dwDeviceID: UInt32, lphLine: CPointer<UInt32>, dwAPIVersion: UInt32, dwExtVersion: UInt32, dwCallbackInstance: UIntNative, dwPrivileges: UInt32, dwMediaModes: UInt32, lpCallParams: CPointer<LINECALLPARAMS>): Int32 {
+    return lineOpenW(hLineApp, dwDeviceID, lphLine, dwAPIVersion, dwExtVersion, dwCallbackInstance, dwPrivileges, dwMediaModes, lpCallParams)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_linePark == "on"]
+foreign {
+    func linePark(hCall: UInt32, dwParkMode: UInt32, lpszDirAddress: CPointer<UInt8>, lpNonDirAddress: CPointer<VARSTRING>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_linePark == "on"]
+public unsafe func Windows_linePark(hCall: UInt32, dwParkMode: UInt32, lpszDirAddress: CPointer<UInt8>, lpNonDirAddress: CPointer<VARSTRING>): Int32 {
+    return linePark(hCall, dwParkMode, lpszDirAddress, lpNonDirAddress)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineParkA == "on"]
+foreign {
+    func lineParkA(hCall: UInt32, dwParkMode: UInt32, lpszDirAddress: CPointer<UInt8>, lpNonDirAddress: CPointer<VARSTRING>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineParkA == "on"]
+public unsafe func Windows_lineParkA(hCall: UInt32, dwParkMode: UInt32, lpszDirAddress: CPointer<UInt8>, lpNonDirAddress: CPointer<VARSTRING>): Int32 {
+    return lineParkA(hCall, dwParkMode, lpszDirAddress, lpNonDirAddress)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineParkW == "on"]
+foreign {
+    func lineParkW(hCall: UInt32, dwParkMode: UInt32, lpszDirAddress: CPointer<UInt16>, lpNonDirAddress: CPointer<VARSTRING>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineParkW == "on"]
+public unsafe func Windows_lineParkW(hCall: UInt32, dwParkMode: UInt32, lpszDirAddress: CPointer<UInt16>, lpNonDirAddress: CPointer<VARSTRING>): Int32 {
+    return lineParkW(hCall, dwParkMode, lpszDirAddress, lpNonDirAddress)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_linePickup == "on"]
+foreign {
+    func linePickup(hLine: UInt32, dwAddressID: UInt32, lphCall: CPointer<UInt32>, lpszDestAddress: CPointer<UInt8>, lpszGroupID: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_linePickup == "on"]
+public unsafe func Windows_linePickup(hLine: UInt32, dwAddressID: UInt32, lphCall: CPointer<UInt32>, lpszDestAddress: CPointer<UInt8>, lpszGroupID: CPointer<UInt8>): Int32 {
+    return linePickup(hLine, dwAddressID, lphCall, lpszDestAddress, lpszGroupID)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_linePickupA == "on"]
+foreign {
+    func linePickupA(hLine: UInt32, dwAddressID: UInt32, lphCall: CPointer<UInt32>, lpszDestAddress: CPointer<UInt8>, lpszGroupID: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_linePickupA == "on"]
+public unsafe func Windows_linePickupA(hLine: UInt32, dwAddressID: UInt32, lphCall: CPointer<UInt32>, lpszDestAddress: CPointer<UInt8>, lpszGroupID: CPointer<UInt8>): Int32 {
+    return linePickupA(hLine, dwAddressID, lphCall, lpszDestAddress, lpszGroupID)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_linePickupW == "on"]
+foreign {
+    func linePickupW(hLine: UInt32, dwAddressID: UInt32, lphCall: CPointer<UInt32>, lpszDestAddress: CPointer<UInt16>, lpszGroupID: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_linePickupW == "on"]
+public unsafe func Windows_linePickupW(hLine: UInt32, dwAddressID: UInt32, lphCall: CPointer<UInt32>, lpszDestAddress: CPointer<UInt16>, lpszGroupID: CPointer<UInt16>): Int32 {
+    return linePickupW(hLine, dwAddressID, lphCall, lpszDestAddress, lpszGroupID)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_linePrepareAddToConference == "on"]
+foreign {
+    func linePrepareAddToConference(hConfCall: UInt32, lphConsultCall: CPointer<UInt32>, lpCallParams: CPointer<LINECALLPARAMS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_linePrepareAddToConference == "on"]
+public unsafe func Windows_linePrepareAddToConference(hConfCall: UInt32, lphConsultCall: CPointer<UInt32>, lpCallParams: CPointer<LINECALLPARAMS>): Int32 {
+    return linePrepareAddToConference(hConfCall, lphConsultCall, lpCallParams)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_linePrepareAddToConferenceA == "on"]
+foreign {
+    func linePrepareAddToConferenceA(hConfCall: UInt32, lphConsultCall: CPointer<UInt32>, lpCallParams: CPointer<LINECALLPARAMS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_linePrepareAddToConferenceA == "on"]
+public unsafe func Windows_linePrepareAddToConferenceA(hConfCall: UInt32, lphConsultCall: CPointer<UInt32>, lpCallParams: CPointer<LINECALLPARAMS>): Int32 {
+    return linePrepareAddToConferenceA(hConfCall, lphConsultCall, lpCallParams)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_linePrepareAddToConferenceW == "on"]
+foreign {
+    func linePrepareAddToConferenceW(hConfCall: UInt32, lphConsultCall: CPointer<UInt32>, lpCallParams: CPointer<LINECALLPARAMS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_linePrepareAddToConferenceW == "on"]
+public unsafe func Windows_linePrepareAddToConferenceW(hConfCall: UInt32, lphConsultCall: CPointer<UInt32>, lpCallParams: CPointer<LINECALLPARAMS>): Int32 {
+    return linePrepareAddToConferenceW(hConfCall, lphConsultCall, lpCallParams)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineProxyMessage == "on"]
+foreign {
+    func lineProxyMessage(hLine: UInt32, hCall: UInt32, dwMsg: UInt32, dwParam1: UInt32, dwParam2: UInt32, dwParam3: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineProxyMessage == "on"]
+public unsafe func Windows_lineProxyMessage(hLine: UInt32, hCall: UInt32, dwMsg: UInt32, dwParam1: UInt32, dwParam2: UInt32, dwParam3: UInt32): Int32 {
+    return lineProxyMessage(hLine, hCall, dwMsg, dwParam1, dwParam2, dwParam3)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineProxyResponse == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func lineProxyResponse(hLine: UInt32, lpProxyRequest: CPointer<LINEPROXYREQUEST>, dwResult: UInt32): Int32
 }
 
-@When[TAPI32 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineProxyResponse == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_lineProxyResponse(hLine: UInt32, lpProxyRequest: CPointer<LINEPROXYREQUEST>, dwResult: UInt32): Int32 {
+    return lineProxyResponse(hLine, lpProxyRequest, dwResult)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineRedirect == "on"]
 foreign {
-    func lineGetIcon(dwDeviceID: UInt32, lpszDeviceClass: CPointer<UInt8>, lphIcon: CPointer<Win32__impl_l0.HICON>): Int32
-    func lineGetIconA(dwDeviceID: UInt32, lpszDeviceClass: CPointer<UInt8>, lphIcon: CPointer<Win32__impl_l0.HICON>): Int32
-    func lineGetIconW(dwDeviceID: UInt32, lpszDeviceClass: CPointer<UInt16>, lphIcon: CPointer<Win32__impl_l0.HICON>): Int32
+    func lineRedirect(hCall: UInt32, lpszDestAddress: CPointer<UInt8>, dwCountryCode: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineRedirect == "on"]
+public unsafe func Windows_lineRedirect(hCall: UInt32, lpszDestAddress: CPointer<UInt8>, dwCountryCode: UInt32): Int32 {
+    return lineRedirect(hCall, lpszDestAddress, dwCountryCode)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineRedirectA == "on"]
+foreign {
+    func lineRedirectA(hCall: UInt32, lpszDestAddress: CPointer<UInt8>, dwCountryCode: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineRedirectA == "on"]
+public unsafe func Windows_lineRedirectA(hCall: UInt32, lpszDestAddress: CPointer<UInt8>, dwCountryCode: UInt32): Int32 {
+    return lineRedirectA(hCall, lpszDestAddress, dwCountryCode)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineRedirectW == "on"]
+foreign {
+    func lineRedirectW(hCall: UInt32, lpszDestAddress: CPointer<UInt16>, dwCountryCode: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineRedirectW == "on"]
+public unsafe func Windows_lineRedirectW(hCall: UInt32, lpszDestAddress: CPointer<UInt16>, dwCountryCode: UInt32): Int32 {
+    return lineRedirectW(hCall, lpszDestAddress, dwCountryCode)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineRegisterRequestRecipient == "on"]
+foreign {
+    func lineRegisterRequestRecipient(hLineApp: UInt32, dwRegistrationInstance: UInt32, dwRequestMode: UInt32, bEnable: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineRegisterRequestRecipient == "on"]
+public unsafe func Windows_lineRegisterRequestRecipient(hLineApp: UInt32, dwRegistrationInstance: UInt32, dwRequestMode: UInt32, bEnable: UInt32): Int32 {
+    return lineRegisterRequestRecipient(hLineApp, dwRegistrationInstance, dwRequestMode, bEnable)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineReleaseUserUserInfo == "on"]
+foreign {
+    func lineReleaseUserUserInfo(hCall: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineReleaseUserUserInfo == "on"]
+public unsafe func Windows_lineReleaseUserUserInfo(hCall: UInt32): Int32 {
+    return lineReleaseUserUserInfo(hCall)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineRemoveFromConference == "on"]
+foreign {
+    func lineRemoveFromConference(hCall: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineRemoveFromConference == "on"]
+public unsafe func Windows_lineRemoveFromConference(hCall: UInt32): Int32 {
+    return lineRemoveFromConference(hCall)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineRemoveProvider == "on"]
+foreign {
+    func lineRemoveProvider(dwPermanentProviderID: UInt32, hwndOwner: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineRemoveProvider == "on"]
+public unsafe func Windows_lineRemoveProvider(dwPermanentProviderID: UInt32, hwndOwner: CPointer<Unit>): Int32 {
+    return lineRemoveProvider(dwPermanentProviderID, hwndOwner)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSecureCall == "on"]
+foreign {
+    func lineSecureCall(hCall: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSecureCall == "on"]
+public unsafe func Windows_lineSecureCall(hCall: UInt32): Int32 {
+    return lineSecureCall(hCall)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSendUserUserInfo == "on"]
+foreign {
+    func lineSendUserUserInfo(hCall: UInt32, lpsUserUserInfo: CPointer<UInt8>, dwSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSendUserUserInfo == "on"]
+public unsafe func Windows_lineSendUserUserInfo(hCall: UInt32, lpsUserUserInfo: CPointer<UInt8>, dwSize: UInt32): Int32 {
+    return lineSendUserUserInfo(hCall, lpsUserUserInfo, dwSize)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetAgentActivity == "on"]
+foreign {
+    func lineSetAgentActivity(hLine: UInt32, dwAddressID: UInt32, dwActivityID: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetAgentActivity == "on"]
+public unsafe func Windows_lineSetAgentActivity(hLine: UInt32, dwAddressID: UInt32, dwActivityID: UInt32): Int32 {
+    return lineSetAgentActivity(hLine, dwAddressID, dwActivityID)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetAgentGroup == "on"]
+foreign {
+    func lineSetAgentGroup(hLine: UInt32, dwAddressID: UInt32, lpAgentGroupList: CPointer<LINEAGENTGROUPLIST>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetAgentGroup == "on"]
+public unsafe func Windows_lineSetAgentGroup(hLine: UInt32, dwAddressID: UInt32, lpAgentGroupList: CPointer<LINEAGENTGROUPLIST>): Int32 {
+    return lineSetAgentGroup(hLine, dwAddressID, lpAgentGroupList)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetAgentMeasurementPeriod == "on"]
+foreign {
+    func lineSetAgentMeasurementPeriod(hLine: UInt32, hAgent: UInt32, dwMeasurementPeriod: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetAgentMeasurementPeriod == "on"]
+public unsafe func Windows_lineSetAgentMeasurementPeriod(hLine: UInt32, hAgent: UInt32, dwMeasurementPeriod: UInt32): Int32 {
+    return lineSetAgentMeasurementPeriod(hLine, hAgent, dwMeasurementPeriod)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetAgentSessionState == "on"]
+foreign {
+    func lineSetAgentSessionState(hLine: UInt32, hAgentSession: UInt32, dwAgentSessionState: UInt32, dwNextAgentSessionState: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetAgentSessionState == "on"]
+public unsafe func Windows_lineSetAgentSessionState(hLine: UInt32, hAgentSession: UInt32, dwAgentSessionState: UInt32, dwNextAgentSessionState: UInt32): Int32 {
+    return lineSetAgentSessionState(hLine, hAgentSession, dwAgentSessionState, dwNextAgentSessionState)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetAgentState == "on"]
+foreign {
+    func lineSetAgentState(hLine: UInt32, dwAddressID: UInt32, dwAgentState: UInt32, dwNextAgentState: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetAgentState == "on"]
+public unsafe func Windows_lineSetAgentState(hLine: UInt32, dwAddressID: UInt32, dwAgentState: UInt32, dwNextAgentState: UInt32): Int32 {
+    return lineSetAgentState(hLine, dwAddressID, dwAgentState, dwNextAgentState)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetAgentStateEx == "on"]
+foreign {
+    func lineSetAgentStateEx(hLine: UInt32, hAgent: UInt32, dwAgentState: UInt32, dwNextAgentState: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetAgentStateEx == "on"]
+public unsafe func Windows_lineSetAgentStateEx(hLine: UInt32, hAgent: UInt32, dwAgentState: UInt32, dwNextAgentState: UInt32): Int32 {
+    return lineSetAgentStateEx(hLine, hAgent, dwAgentState, dwNextAgentState)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetAppPriority == "on"]
+foreign {
+    func lineSetAppPriority(lpszAppFilename: CPointer<UInt8>, dwMediaMode: UInt32, lpExtensionID: CPointer<LINEEXTENSIONID>, dwRequestMode: UInt32, lpszExtensionName: CPointer<UInt8>, dwPriority: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetAppPriority == "on"]
+public unsafe func Windows_lineSetAppPriority(lpszAppFilename: CPointer<UInt8>, dwMediaMode: UInt32, lpExtensionID: CPointer<LINEEXTENSIONID>, dwRequestMode: UInt32, lpszExtensionName: CPointer<UInt8>, dwPriority: UInt32): Int32 {
+    return lineSetAppPriority(lpszAppFilename, dwMediaMode, lpExtensionID, dwRequestMode, lpszExtensionName, dwPriority)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetAppPriorityA == "on"]
+foreign {
+    func lineSetAppPriorityA(lpszAppFilename: CPointer<UInt8>, dwMediaMode: UInt32, lpExtensionID: CPointer<LINEEXTENSIONID>, dwRequestMode: UInt32, lpszExtensionName: CPointer<UInt8>, dwPriority: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetAppPriorityA == "on"]
+public unsafe func Windows_lineSetAppPriorityA(lpszAppFilename: CPointer<UInt8>, dwMediaMode: UInt32, lpExtensionID: CPointer<LINEEXTENSIONID>, dwRequestMode: UInt32, lpszExtensionName: CPointer<UInt8>, dwPriority: UInt32): Int32 {
+    return lineSetAppPriorityA(lpszAppFilename, dwMediaMode, lpExtensionID, dwRequestMode, lpszExtensionName, dwPriority)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetAppPriorityW == "on"]
+foreign {
+    func lineSetAppPriorityW(lpszAppFilename: CPointer<UInt16>, dwMediaMode: UInt32, lpExtensionID: CPointer<LINEEXTENSIONID>, dwRequestMode: UInt32, lpszExtensionName: CPointer<UInt16>, dwPriority: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetAppPriorityW == "on"]
+public unsafe func Windows_lineSetAppPriorityW(lpszAppFilename: CPointer<UInt16>, dwMediaMode: UInt32, lpExtensionID: CPointer<LINEEXTENSIONID>, dwRequestMode: UInt32, lpszExtensionName: CPointer<UInt16>, dwPriority: UInt32): Int32 {
+    return lineSetAppPriorityW(lpszAppFilename, dwMediaMode, lpExtensionID, dwRequestMode, lpszExtensionName, dwPriority)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetAppSpecific == "on"]
+foreign {
+    func lineSetAppSpecific(hCall: UInt32, dwAppSpecific: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetAppSpecific == "on"]
+public unsafe func Windows_lineSetAppSpecific(hCall: UInt32, dwAppSpecific: UInt32): Int32 {
+    return lineSetAppSpecific(hCall, dwAppSpecific)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetCallData == "on"]
+foreign {
+    func lineSetCallData(hCall: UInt32, lpCallData: CPointer<Unit>, dwSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetCallData == "on"]
+public unsafe func Windows_lineSetCallData(hCall: UInt32, lpCallData: CPointer<Unit>, dwSize: UInt32): Int32 {
+    return lineSetCallData(hCall, lpCallData, dwSize)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetCallParams == "on"]
+foreign {
+    func lineSetCallParams(hCall: UInt32, dwBearerMode: UInt32, dwMinRate: UInt32, dwMaxRate: UInt32, lpDialParams: CPointer<LINEDIALPARAMS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetCallParams == "on"]
+public unsafe func Windows_lineSetCallParams(hCall: UInt32, dwBearerMode: UInt32, dwMinRate: UInt32, dwMaxRate: UInt32, lpDialParams: CPointer<LINEDIALPARAMS>): Int32 {
+    return lineSetCallParams(hCall, dwBearerMode, dwMinRate, dwMaxRate, lpDialParams)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetCallPrivilege == "on"]
+foreign {
+    func lineSetCallPrivilege(hCall: UInt32, dwCallPrivilege: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetCallPrivilege == "on"]
+public unsafe func Windows_lineSetCallPrivilege(hCall: UInt32, dwCallPrivilege: UInt32): Int32 {
+    return lineSetCallPrivilege(hCall, dwCallPrivilege)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetCallQualityOfService == "on"]
+foreign {
+    func lineSetCallQualityOfService(hCall: UInt32, lpSendingFlowspec: CPointer<Unit>, dwSendingFlowspecSize: UInt32, lpReceivingFlowspec: CPointer<Unit>, dwReceivingFlowspecSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetCallQualityOfService == "on"]
+public unsafe func Windows_lineSetCallQualityOfService(hCall: UInt32, lpSendingFlowspec: CPointer<Unit>, dwSendingFlowspecSize: UInt32, lpReceivingFlowspec: CPointer<Unit>, dwReceivingFlowspecSize: UInt32): Int32 {
+    return lineSetCallQualityOfService(hCall, lpSendingFlowspec, dwSendingFlowspecSize, lpReceivingFlowspec, dwReceivingFlowspecSize)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetCallTreatment == "on"]
+foreign {
+    func lineSetCallTreatment(hCall: UInt32, dwTreatment: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetCallTreatment == "on"]
+public unsafe func Windows_lineSetCallTreatment(hCall: UInt32, dwTreatment: UInt32): Int32 {
+    return lineSetCallTreatment(hCall, dwTreatment)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetCurrentLocation == "on"]
+foreign {
+    func lineSetCurrentLocation(hLineApp: UInt32, dwLocation: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetCurrentLocation == "on"]
+public unsafe func Windows_lineSetCurrentLocation(hLineApp: UInt32, dwLocation: UInt32): Int32 {
+    return lineSetCurrentLocation(hLineApp, dwLocation)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetDevConfig == "on"]
+foreign {
+    func lineSetDevConfig(dwDeviceID: UInt32, lpDeviceConfig: CPointer<Unit>, dwSize: UInt32, lpszDeviceClass: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetDevConfig == "on"]
+public unsafe func Windows_lineSetDevConfig(dwDeviceID: UInt32, lpDeviceConfig: CPointer<Unit>, dwSize: UInt32, lpszDeviceClass: CPointer<UInt8>): Int32 {
+    return lineSetDevConfig(dwDeviceID, lpDeviceConfig, dwSize, lpszDeviceClass)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetDevConfigA == "on"]
+foreign {
+    func lineSetDevConfigA(dwDeviceID: UInt32, lpDeviceConfig: CPointer<Unit>, dwSize: UInt32, lpszDeviceClass: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetDevConfigA == "on"]
+public unsafe func Windows_lineSetDevConfigA(dwDeviceID: UInt32, lpDeviceConfig: CPointer<Unit>, dwSize: UInt32, lpszDeviceClass: CPointer<UInt8>): Int32 {
+    return lineSetDevConfigA(dwDeviceID, lpDeviceConfig, dwSize, lpszDeviceClass)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetDevConfigW == "on"]
+foreign {
+    func lineSetDevConfigW(dwDeviceID: UInt32, lpDeviceConfig: CPointer<Unit>, dwSize: UInt32, lpszDeviceClass: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetDevConfigW == "on"]
+public unsafe func Windows_lineSetDevConfigW(dwDeviceID: UInt32, lpDeviceConfig: CPointer<Unit>, dwSize: UInt32, lpszDeviceClass: CPointer<UInt16>): Int32 {
+    return lineSetDevConfigW(dwDeviceID, lpDeviceConfig, dwSize, lpszDeviceClass)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetLineDevStatus == "on"]
+foreign {
+    func lineSetLineDevStatus(hLine: UInt32, dwStatusToChange: UInt32, fStatus: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetLineDevStatus == "on"]
+public unsafe func Windows_lineSetLineDevStatus(hLine: UInt32, dwStatusToChange: UInt32, fStatus: UInt32): Int32 {
+    return lineSetLineDevStatus(hLine, dwStatusToChange, fStatus)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetMediaControl == "on"]
+foreign {
+    func lineSetMediaControl(hLine: UInt32, dwAddressID: UInt32, hCall: UInt32, dwSelect: UInt32, lpDigitList: CPointer<LINEMEDIACONTROLDIGIT>, dwDigitNumEntries: UInt32, lpMediaList: CPointer<LINEMEDIACONTROLMEDIA>, dwMediaNumEntries: UInt32, lpToneList: CPointer<LINEMEDIACONTROLTONE>, dwToneNumEntries: UInt32, lpCallStateList: CPointer<LINEMEDIACONTROLCALLSTATE>, dwCallStateNumEntries: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetMediaControl == "on"]
+public unsafe func Windows_lineSetMediaControl(hLine: UInt32, dwAddressID: UInt32, hCall: UInt32, dwSelect: UInt32, lpDigitList: CPointer<LINEMEDIACONTROLDIGIT>, dwDigitNumEntries: UInt32, lpMediaList: CPointer<LINEMEDIACONTROLMEDIA>, dwMediaNumEntries: UInt32, lpToneList: CPointer<LINEMEDIACONTROLTONE>, dwToneNumEntries: UInt32, lpCallStateList: CPointer<LINEMEDIACONTROLCALLSTATE>, dwCallStateNumEntries: UInt32): Int32 {
+    return lineSetMediaControl(hLine, dwAddressID, hCall, dwSelect, lpDigitList, dwDigitNumEntries, lpMediaList, dwMediaNumEntries, lpToneList, dwToneNumEntries, lpCallStateList, dwCallStateNumEntries)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetMediaMode == "on"]
+foreign {
+    func lineSetMediaMode(hCall: UInt32, dwMediaModes: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetMediaMode == "on"]
+public unsafe func Windows_lineSetMediaMode(hCall: UInt32, dwMediaModes: UInt32): Int32 {
+    return lineSetMediaMode(hCall, dwMediaModes)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetNumRings == "on"]
+foreign {
+    func lineSetNumRings(hLine: UInt32, dwAddressID: UInt32, dwNumRings: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetNumRings == "on"]
+public unsafe func Windows_lineSetNumRings(hLine: UInt32, dwAddressID: UInt32, dwNumRings: UInt32): Int32 {
+    return lineSetNumRings(hLine, dwAddressID, dwNumRings)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetQueueMeasurementPeriod == "on"]
+foreign {
+    func lineSetQueueMeasurementPeriod(hLine: UInt32, dwQueueID: UInt32, dwMeasurementPeriod: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetQueueMeasurementPeriod == "on"]
+public unsafe func Windows_lineSetQueueMeasurementPeriod(hLine: UInt32, dwQueueID: UInt32, dwMeasurementPeriod: UInt32): Int32 {
+    return lineSetQueueMeasurementPeriod(hLine, dwQueueID, dwMeasurementPeriod)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetStatusMessages == "on"]
+foreign {
+    func lineSetStatusMessages(hLine: UInt32, dwLineStates: UInt32, dwAddressStates: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetStatusMessages == "on"]
+public unsafe func Windows_lineSetStatusMessages(hLine: UInt32, dwLineStates: UInt32, dwAddressStates: UInt32): Int32 {
+    return lineSetStatusMessages(hLine, dwLineStates, dwAddressStates)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetTerminal == "on"]
+foreign {
+    func lineSetTerminal(hLine: UInt32, dwAddressID: UInt32, hCall: UInt32, dwSelect: UInt32, dwTerminalModes: UInt32, dwTerminalID: UInt32, bEnable: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetTerminal == "on"]
+public unsafe func Windows_lineSetTerminal(hLine: UInt32, dwAddressID: UInt32, hCall: UInt32, dwSelect: UInt32, dwTerminalModes: UInt32, dwTerminalID: UInt32, bEnable: UInt32): Int32 {
+    return lineSetTerminal(hLine, dwAddressID, hCall, dwSelect, dwTerminalModes, dwTerminalID, bEnable)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetTollList == "on"]
+foreign {
+    func lineSetTollList(hLineApp: UInt32, dwDeviceID: UInt32, lpszAddressIn: CPointer<UInt8>, dwTollListOption: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetTollList == "on"]
+public unsafe func Windows_lineSetTollList(hLineApp: UInt32, dwDeviceID: UInt32, lpszAddressIn: CPointer<UInt8>, dwTollListOption: UInt32): Int32 {
+    return lineSetTollList(hLineApp, dwDeviceID, lpszAddressIn, dwTollListOption)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetTollListA == "on"]
+foreign {
+    func lineSetTollListA(hLineApp: UInt32, dwDeviceID: UInt32, lpszAddressIn: CPointer<UInt8>, dwTollListOption: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetTollListA == "on"]
+public unsafe func Windows_lineSetTollListA(hLineApp: UInt32, dwDeviceID: UInt32, lpszAddressIn: CPointer<UInt8>, dwTollListOption: UInt32): Int32 {
+    return lineSetTollListA(hLineApp, dwDeviceID, lpszAddressIn, dwTollListOption)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetTollListW == "on"]
+foreign {
+    func lineSetTollListW(hLineApp: UInt32, dwDeviceID: UInt32, lpszAddressInW: CPointer<UInt16>, dwTollListOption: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetTollListW == "on"]
+public unsafe func Windows_lineSetTollListW(hLineApp: UInt32, dwDeviceID: UInt32, lpszAddressInW: CPointer<UInt16>, dwTollListOption: UInt32): Int32 {
+    return lineSetTollListW(hLineApp, dwDeviceID, lpszAddressInW, dwTollListOption)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetupConference == "on"]
+foreign {
+    func lineSetupConference(hCall: UInt32, hLine: UInt32, lphConfCall: CPointer<UInt32>, lphConsultCall: CPointer<UInt32>, dwNumParties: UInt32, lpCallParams: CPointer<LINECALLPARAMS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetupConference == "on"]
+public unsafe func Windows_lineSetupConference(hCall: UInt32, hLine: UInt32, lphConfCall: CPointer<UInt32>, lphConsultCall: CPointer<UInt32>, dwNumParties: UInt32, lpCallParams: CPointer<LINECALLPARAMS>): Int32 {
+    return lineSetupConference(hCall, hLine, lphConfCall, lphConsultCall, dwNumParties, lpCallParams)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetupConferenceA == "on"]
+foreign {
+    func lineSetupConferenceA(hCall: UInt32, hLine: UInt32, lphConfCall: CPointer<UInt32>, lphConsultCall: CPointer<UInt32>, dwNumParties: UInt32, lpCallParams: CPointer<LINECALLPARAMS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetupConferenceA == "on"]
+public unsafe func Windows_lineSetupConferenceA(hCall: UInt32, hLine: UInt32, lphConfCall: CPointer<UInt32>, lphConsultCall: CPointer<UInt32>, dwNumParties: UInt32, lpCallParams: CPointer<LINECALLPARAMS>): Int32 {
+    return lineSetupConferenceA(hCall, hLine, lphConfCall, lphConsultCall, dwNumParties, lpCallParams)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetupConferenceW == "on"]
+foreign {
+    func lineSetupConferenceW(hCall: UInt32, hLine: UInt32, lphConfCall: CPointer<UInt32>, lphConsultCall: CPointer<UInt32>, dwNumParties: UInt32, lpCallParams: CPointer<LINECALLPARAMS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetupConferenceW == "on"]
+public unsafe func Windows_lineSetupConferenceW(hCall: UInt32, hLine: UInt32, lphConfCall: CPointer<UInt32>, lphConsultCall: CPointer<UInt32>, dwNumParties: UInt32, lpCallParams: CPointer<LINECALLPARAMS>): Int32 {
+    return lineSetupConferenceW(hCall, hLine, lphConfCall, lphConsultCall, dwNumParties, lpCallParams)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetupTransfer == "on"]
+foreign {
+    func lineSetupTransfer(hCall: UInt32, lphConsultCall: CPointer<UInt32>, lpCallParams: CPointer<LINECALLPARAMS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetupTransfer == "on"]
+public unsafe func Windows_lineSetupTransfer(hCall: UInt32, lphConsultCall: CPointer<UInt32>, lpCallParams: CPointer<LINECALLPARAMS>): Int32 {
+    return lineSetupTransfer(hCall, lphConsultCall, lpCallParams)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetupTransferA == "on"]
+foreign {
+    func lineSetupTransferA(hCall: UInt32, lphConsultCall: CPointer<UInt32>, lpCallParams: CPointer<LINECALLPARAMS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetupTransferA == "on"]
+public unsafe func Windows_lineSetupTransferA(hCall: UInt32, lphConsultCall: CPointer<UInt32>, lpCallParams: CPointer<LINECALLPARAMS>): Int32 {
+    return lineSetupTransferA(hCall, lphConsultCall, lpCallParams)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetupTransferW == "on"]
+foreign {
+    func lineSetupTransferW(hCall: UInt32, lphConsultCall: CPointer<UInt32>, lpCallParams: CPointer<LINECALLPARAMS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSetupTransferW == "on"]
+public unsafe func Windows_lineSetupTransferW(hCall: UInt32, lphConsultCall: CPointer<UInt32>, lpCallParams: CPointer<LINECALLPARAMS>): Int32 {
+    return lineSetupTransferW(hCall, lphConsultCall, lpCallParams)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineShutdown == "on"]
+foreign {
+    func lineShutdown(hLineApp: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineShutdown == "on"]
+public unsafe func Windows_lineShutdown(hLineApp: UInt32): Int32 {
+    return lineShutdown(hLineApp)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSwapHold == "on"]
+foreign {
+    func lineSwapHold(hActiveCall: UInt32, hHeldCall: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineSwapHold == "on"]
+public unsafe func Windows_lineSwapHold(hActiveCall: UInt32, hHeldCall: UInt32): Int32 {
+    return lineSwapHold(hActiveCall, hHeldCall)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineTranslateAddress == "on"]
+foreign {
+    func lineTranslateAddress(hLineApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, lpszAddressIn: CPointer<UInt8>, dwCard: UInt32, dwTranslateOptions: UInt32, lpTranslateOutput: CPointer<LINETRANSLATEOUTPUT>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineTranslateAddress == "on"]
+public unsafe func Windows_lineTranslateAddress(hLineApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, lpszAddressIn: CPointer<UInt8>, dwCard: UInt32, dwTranslateOptions: UInt32, lpTranslateOutput: CPointer<LINETRANSLATEOUTPUT>): Int32 {
+    return lineTranslateAddress(hLineApp, dwDeviceID, dwAPIVersion, lpszAddressIn, dwCard, dwTranslateOptions, lpTranslateOutput)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineTranslateAddressA == "on"]
+foreign {
+    func lineTranslateAddressA(hLineApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, lpszAddressIn: CPointer<UInt8>, dwCard: UInt32, dwTranslateOptions: UInt32, lpTranslateOutput: CPointer<LINETRANSLATEOUTPUT>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineTranslateAddressA == "on"]
+public unsafe func Windows_lineTranslateAddressA(hLineApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, lpszAddressIn: CPointer<UInt8>, dwCard: UInt32, dwTranslateOptions: UInt32, lpTranslateOutput: CPointer<LINETRANSLATEOUTPUT>): Int32 {
+    return lineTranslateAddressA(hLineApp, dwDeviceID, dwAPIVersion, lpszAddressIn, dwCard, dwTranslateOptions, lpTranslateOutput)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineTranslateAddressW == "on"]
+foreign {
+    func lineTranslateAddressW(hLineApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, lpszAddressIn: CPointer<UInt16>, dwCard: UInt32, dwTranslateOptions: UInt32, lpTranslateOutput: CPointer<LINETRANSLATEOUTPUT>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineTranslateAddressW == "on"]
+public unsafe func Windows_lineTranslateAddressW(hLineApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, lpszAddressIn: CPointer<UInt16>, dwCard: UInt32, dwTranslateOptions: UInt32, lpTranslateOutput: CPointer<LINETRANSLATEOUTPUT>): Int32 {
+    return lineTranslateAddressW(hLineApp, dwDeviceID, dwAPIVersion, lpszAddressIn, dwCard, dwTranslateOptions, lpTranslateOutput)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineTranslateDialog == "on"]
+foreign {
+    func lineTranslateDialog(hLineApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, hwndOwner: CPointer<Unit>, lpszAddressIn: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineTranslateDialog == "on"]
+public unsafe func Windows_lineTranslateDialog(hLineApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, hwndOwner: CPointer<Unit>, lpszAddressIn: CPointer<UInt8>): Int32 {
+    return lineTranslateDialog(hLineApp, dwDeviceID, dwAPIVersion, hwndOwner, lpszAddressIn)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineTranslateDialogA == "on"]
+foreign {
+    func lineTranslateDialogA(hLineApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, hwndOwner: CPointer<Unit>, lpszAddressIn: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineTranslateDialogA == "on"]
+public unsafe func Windows_lineTranslateDialogA(hLineApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, hwndOwner: CPointer<Unit>, lpszAddressIn: CPointer<UInt8>): Int32 {
+    return lineTranslateDialogA(hLineApp, dwDeviceID, dwAPIVersion, hwndOwner, lpszAddressIn)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineTranslateDialogW == "on"]
+foreign {
+    func lineTranslateDialogW(hLineApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, hwndOwner: CPointer<Unit>, lpszAddressIn: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineTranslateDialogW == "on"]
+public unsafe func Windows_lineTranslateDialogW(hLineApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, hwndOwner: CPointer<Unit>, lpszAddressIn: CPointer<UInt16>): Int32 {
+    return lineTranslateDialogW(hLineApp, dwDeviceID, dwAPIVersion, hwndOwner, lpszAddressIn)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineUncompleteCall == "on"]
+foreign {
+    func lineUncompleteCall(hLine: UInt32, dwCompletionID: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineUncompleteCall == "on"]
+public unsafe func Windows_lineUncompleteCall(hLine: UInt32, dwCompletionID: UInt32): Int32 {
+    return lineUncompleteCall(hLine, dwCompletionID)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineUnhold == "on"]
+foreign {
+    func lineUnhold(hCall: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineUnhold == "on"]
+public unsafe func Windows_lineUnhold(hCall: UInt32): Int32 {
+    return lineUnhold(hCall)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineUnpark == "on"]
+foreign {
+    func lineUnpark(hLine: UInt32, dwAddressID: UInt32, lphCall: CPointer<UInt32>, lpszDestAddress: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineUnpark == "on"]
+public unsafe func Windows_lineUnpark(hLine: UInt32, dwAddressID: UInt32, lphCall: CPointer<UInt32>, lpszDestAddress: CPointer<UInt8>): Int32 {
+    return lineUnpark(hLine, dwAddressID, lphCall, lpszDestAddress)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineUnparkA == "on"]
+foreign {
+    func lineUnparkA(hLine: UInt32, dwAddressID: UInt32, lphCall: CPointer<UInt32>, lpszDestAddress: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineUnparkA == "on"]
+public unsafe func Windows_lineUnparkA(hLine: UInt32, dwAddressID: UInt32, lphCall: CPointer<UInt32>, lpszDestAddress: CPointer<UInt8>): Int32 {
+    return lineUnparkA(hLine, dwAddressID, lphCall, lpszDestAddress)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineUnparkW == "on"]
+foreign {
+    func lineUnparkW(hLine: UInt32, dwAddressID: UInt32, lphCall: CPointer<UInt32>, lpszDestAddress: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_lineUnparkW == "on"]
+public unsafe func Windows_lineUnparkW(hLine: UInt32, dwAddressID: UInt32, lphCall: CPointer<UInt32>, lpszDestAddress: CPointer<UInt16>): Int32 {
+    return lineUnparkW(hLine, dwAddressID, lphCall, lpszDestAddress)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneClose == "on"]
+foreign {
+    func phoneClose(hPhone: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneClose == "on"]
+public unsafe func Windows_phoneClose(hPhone: UInt32): Int32 {
+    return phoneClose(hPhone)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneConfigDialog == "on"]
+foreign {
+    func phoneConfigDialog(dwDeviceID: UInt32, hwndOwner: CPointer<Unit>, lpszDeviceClass: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneConfigDialog == "on"]
+public unsafe func Windows_phoneConfigDialog(dwDeviceID: UInt32, hwndOwner: CPointer<Unit>, lpszDeviceClass: CPointer<UInt8>): Int32 {
+    return phoneConfigDialog(dwDeviceID, hwndOwner, lpszDeviceClass)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneConfigDialogA == "on"]
+foreign {
+    func phoneConfigDialogA(dwDeviceID: UInt32, hwndOwner: CPointer<Unit>, lpszDeviceClass: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneConfigDialogA == "on"]
+public unsafe func Windows_phoneConfigDialogA(dwDeviceID: UInt32, hwndOwner: CPointer<Unit>, lpszDeviceClass: CPointer<UInt8>): Int32 {
+    return phoneConfigDialogA(dwDeviceID, hwndOwner, lpszDeviceClass)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneConfigDialogW == "on"]
+foreign {
+    func phoneConfigDialogW(dwDeviceID: UInt32, hwndOwner: CPointer<Unit>, lpszDeviceClass: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneConfigDialogW == "on"]
+public unsafe func Windows_phoneConfigDialogW(dwDeviceID: UInt32, hwndOwner: CPointer<Unit>, lpszDeviceClass: CPointer<UInt16>): Int32 {
+    return phoneConfigDialogW(dwDeviceID, hwndOwner, lpszDeviceClass)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneDevSpecific == "on"]
+foreign {
+    func phoneDevSpecific(hPhone: UInt32, lpParams: CPointer<Unit>, dwSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneDevSpecific == "on"]
+public unsafe func Windows_phoneDevSpecific(hPhone: UInt32, lpParams: CPointer<Unit>, dwSize: UInt32): Int32 {
+    return phoneDevSpecific(hPhone, lpParams, dwSize)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetButtonInfo == "on"]
+foreign {
+    func phoneGetButtonInfo(hPhone: UInt32, dwButtonLampID: UInt32, lpButtonInfo: CPointer<PHONEBUTTONINFO>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetButtonInfo == "on"]
+public unsafe func Windows_phoneGetButtonInfo(hPhone: UInt32, dwButtonLampID: UInt32, lpButtonInfo: CPointer<PHONEBUTTONINFO>): Int32 {
+    return phoneGetButtonInfo(hPhone, dwButtonLampID, lpButtonInfo)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetButtonInfoA == "on"]
+foreign {
+    func phoneGetButtonInfoA(hPhone: UInt32, dwButtonLampID: UInt32, lpButtonInfo: CPointer<PHONEBUTTONINFO>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetButtonInfoA == "on"]
+public unsafe func Windows_phoneGetButtonInfoA(hPhone: UInt32, dwButtonLampID: UInt32, lpButtonInfo: CPointer<PHONEBUTTONINFO>): Int32 {
+    return phoneGetButtonInfoA(hPhone, dwButtonLampID, lpButtonInfo)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetButtonInfoW == "on"]
+foreign {
+    func phoneGetButtonInfoW(hPhone: UInt32, dwButtonLampID: UInt32, lpButtonInfo: CPointer<PHONEBUTTONINFO>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetButtonInfoW == "on"]
+public unsafe func Windows_phoneGetButtonInfoW(hPhone: UInt32, dwButtonLampID: UInt32, lpButtonInfo: CPointer<PHONEBUTTONINFO>): Int32 {
+    return phoneGetButtonInfoW(hPhone, dwButtonLampID, lpButtonInfo)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetData == "on"]
+foreign {
+    func phoneGetData(hPhone: UInt32, dwDataID: UInt32, lpData: CPointer<Unit>, dwSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetData == "on"]
+public unsafe func Windows_phoneGetData(hPhone: UInt32, dwDataID: UInt32, lpData: CPointer<Unit>, dwSize: UInt32): Int32 {
+    return phoneGetData(hPhone, dwDataID, lpData, dwSize)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetDevCaps == "on"]
+foreign {
+    func phoneGetDevCaps(hPhoneApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, dwExtVersion: UInt32, lpPhoneCaps: CPointer<PHONECAPS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetDevCaps == "on"]
+public unsafe func Windows_phoneGetDevCaps(hPhoneApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, dwExtVersion: UInt32, lpPhoneCaps: CPointer<PHONECAPS>): Int32 {
+    return phoneGetDevCaps(hPhoneApp, dwDeviceID, dwAPIVersion, dwExtVersion, lpPhoneCaps)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetDevCapsA == "on"]
+foreign {
+    func phoneGetDevCapsA(hPhoneApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, dwExtVersion: UInt32, lpPhoneCaps: CPointer<PHONECAPS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetDevCapsA == "on"]
+public unsafe func Windows_phoneGetDevCapsA(hPhoneApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, dwExtVersion: UInt32, lpPhoneCaps: CPointer<PHONECAPS>): Int32 {
+    return phoneGetDevCapsA(hPhoneApp, dwDeviceID, dwAPIVersion, dwExtVersion, lpPhoneCaps)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetDevCapsW == "on"]
+foreign {
+    func phoneGetDevCapsW(hPhoneApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, dwExtVersion: UInt32, lpPhoneCaps: CPointer<PHONECAPS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetDevCapsW == "on"]
+public unsafe func Windows_phoneGetDevCapsW(hPhoneApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, dwExtVersion: UInt32, lpPhoneCaps: CPointer<PHONECAPS>): Int32 {
+    return phoneGetDevCapsW(hPhoneApp, dwDeviceID, dwAPIVersion, dwExtVersion, lpPhoneCaps)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetDisplay == "on"]
+foreign {
+    func phoneGetDisplay(hPhone: UInt32, lpDisplay: CPointer<VARSTRING>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetDisplay == "on"]
+public unsafe func Windows_phoneGetDisplay(hPhone: UInt32, lpDisplay: CPointer<VARSTRING>): Int32 {
+    return phoneGetDisplay(hPhone, lpDisplay)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetGain == "on"]
+foreign {
+    func phoneGetGain(hPhone: UInt32, dwHookSwitchDev: UInt32, lpdwGain: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetGain == "on"]
+public unsafe func Windows_phoneGetGain(hPhone: UInt32, dwHookSwitchDev: UInt32, lpdwGain: CPointer<UInt32>): Int32 {
+    return phoneGetGain(hPhone, dwHookSwitchDev, lpdwGain)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetHookSwitch == "on"]
+foreign {
+    func phoneGetHookSwitch(hPhone: UInt32, lpdwHookSwitchDevs: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetHookSwitch == "on"]
+public unsafe func Windows_phoneGetHookSwitch(hPhone: UInt32, lpdwHookSwitchDevs: CPointer<UInt32>): Int32 {
+    return phoneGetHookSwitch(hPhone, lpdwHookSwitchDevs)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetID == "on"]
+foreign {
+    func phoneGetID(hPhone: UInt32, lpDeviceID: CPointer<VARSTRING>, lpszDeviceClass: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetID == "on"]
+public unsafe func Windows_phoneGetID(hPhone: UInt32, lpDeviceID: CPointer<VARSTRING>, lpszDeviceClass: CPointer<UInt8>): Int32 {
+    return phoneGetID(hPhone, lpDeviceID, lpszDeviceClass)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetIDA == "on"]
+foreign {
+    func phoneGetIDA(hPhone: UInt32, lpDeviceID: CPointer<VARSTRING>, lpszDeviceClass: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetIDA == "on"]
+public unsafe func Windows_phoneGetIDA(hPhone: UInt32, lpDeviceID: CPointer<VARSTRING>, lpszDeviceClass: CPointer<UInt8>): Int32 {
+    return phoneGetIDA(hPhone, lpDeviceID, lpszDeviceClass)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetIDW == "on"]
+foreign {
+    func phoneGetIDW(hPhone: UInt32, lpDeviceID: CPointer<VARSTRING>, lpszDeviceClass: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetIDW == "on"]
+public unsafe func Windows_phoneGetIDW(hPhone: UInt32, lpDeviceID: CPointer<VARSTRING>, lpszDeviceClass: CPointer<UInt16>): Int32 {
+    return phoneGetIDW(hPhone, lpDeviceID, lpszDeviceClass)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetIcon == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
     func phoneGetIcon(dwDeviceID: UInt32, lpszDeviceClass: CPointer<UInt8>, lphIcon: CPointer<Win32__impl_l0.HICON>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetIcon == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_phoneGetIcon(dwDeviceID: UInt32, lpszDeviceClass: CPointer<UInt8>, lphIcon: CPointer<Win32__impl_l0.HICON>): Int32 {
+    return phoneGetIcon(dwDeviceID, lpszDeviceClass, lphIcon)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetIconA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
     func phoneGetIconA(dwDeviceID: UInt32, lpszDeviceClass: CPointer<UInt8>, lphIcon: CPointer<Win32__impl_l0.HICON>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetIconA == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_phoneGetIconA(dwDeviceID: UInt32, lpszDeviceClass: CPointer<UInt8>, lphIcon: CPointer<Win32__impl_l0.HICON>): Int32 {
+    return phoneGetIconA(dwDeviceID, lpszDeviceClass, lphIcon)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetIconW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
     func phoneGetIconW(dwDeviceID: UInt32, lpszDeviceClass: CPointer<UInt16>, lphIcon: CPointer<Win32__impl_l0.HICON>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetIconW == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_phoneGetIconW(dwDeviceID: UInt32, lpszDeviceClass: CPointer<UInt16>, lphIcon: CPointer<Win32__impl_l0.HICON>): Int32 {
+    return phoneGetIconW(dwDeviceID, lpszDeviceClass, lphIcon)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetLamp == "on"]
+foreign {
+    func phoneGetLamp(hPhone: UInt32, dwButtonLampID: UInt32, lpdwLampMode: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetLamp == "on"]
+public unsafe func Windows_phoneGetLamp(hPhone: UInt32, dwButtonLampID: UInt32, lpdwLampMode: CPointer<UInt32>): Int32 {
+    return phoneGetLamp(hPhone, dwButtonLampID, lpdwLampMode)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetMessage == "on"]
+foreign {
+    func phoneGetMessage(hPhoneApp: UInt32, lpMessage: CPointer<PHONEMESSAGE>, dwTimeout: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetMessage == "on"]
+public unsafe func Windows_phoneGetMessage(hPhoneApp: UInt32, lpMessage: CPointer<PHONEMESSAGE>, dwTimeout: UInt32): Int32 {
+    return phoneGetMessage(hPhoneApp, lpMessage, dwTimeout)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetRing == "on"]
+foreign {
+    func phoneGetRing(hPhone: UInt32, lpdwRingMode: CPointer<UInt32>, lpdwVolume: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetRing == "on"]
+public unsafe func Windows_phoneGetRing(hPhone: UInt32, lpdwRingMode: CPointer<UInt32>, lpdwVolume: CPointer<UInt32>): Int32 {
+    return phoneGetRing(hPhone, lpdwRingMode, lpdwVolume)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetStatus == "on"]
+foreign {
+    func phoneGetStatus(hPhone: UInt32, lpPhoneStatus: CPointer<PHONESTATUS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetStatus == "on"]
+public unsafe func Windows_phoneGetStatus(hPhone: UInt32, lpPhoneStatus: CPointer<PHONESTATUS>): Int32 {
+    return phoneGetStatus(hPhone, lpPhoneStatus)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetStatusA == "on"]
+foreign {
+    func phoneGetStatusA(hPhone: UInt32, lpPhoneStatus: CPointer<PHONESTATUS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetStatusA == "on"]
+public unsafe func Windows_phoneGetStatusA(hPhone: UInt32, lpPhoneStatus: CPointer<PHONESTATUS>): Int32 {
+    return phoneGetStatusA(hPhone, lpPhoneStatus)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetStatusMessages == "on"]
+foreign {
+    func phoneGetStatusMessages(hPhone: UInt32, lpdwPhoneStates: CPointer<UInt32>, lpdwButtonModes: CPointer<UInt32>, lpdwButtonStates: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetStatusMessages == "on"]
+public unsafe func Windows_phoneGetStatusMessages(hPhone: UInt32, lpdwPhoneStates: CPointer<UInt32>, lpdwButtonModes: CPointer<UInt32>, lpdwButtonStates: CPointer<UInt32>): Int32 {
+    return phoneGetStatusMessages(hPhone, lpdwPhoneStates, lpdwButtonModes, lpdwButtonStates)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetStatusW == "on"]
+foreign {
+    func phoneGetStatusW(hPhone: UInt32, lpPhoneStatus: CPointer<PHONESTATUS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetStatusW == "on"]
+public unsafe func Windows_phoneGetStatusW(hPhone: UInt32, lpPhoneStatus: CPointer<PHONESTATUS>): Int32 {
+    return phoneGetStatusW(hPhone, lpPhoneStatus)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetVolume == "on"]
+foreign {
+    func phoneGetVolume(hPhone: UInt32, dwHookSwitchDev: UInt32, lpdwVolume: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneGetVolume == "on"]
+public unsafe func Windows_phoneGetVolume(hPhone: UInt32, dwHookSwitchDev: UInt32, lpdwVolume: CPointer<UInt32>): Int32 {
+    return phoneGetVolume(hPhone, dwHookSwitchDev, lpdwVolume)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneInitialize == "on"]
+foreign {
+    func phoneInitialize(lphPhoneApp: CPointer<UInt32>, hInstance: CPointer<Unit>, lpfnCallback: PHONECALLBACK, lpszAppName: CPointer<UInt8>, lpdwNumDevs: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneInitialize == "on"]
+public unsafe func Windows_phoneInitialize(lphPhoneApp: CPointer<UInt32>, hInstance: CPointer<Unit>, lpfnCallback: PHONECALLBACK, lpszAppName: CPointer<UInt8>, lpdwNumDevs: CPointer<UInt32>): Int32 {
+    return phoneInitialize(lphPhoneApp, hInstance, lpfnCallback, lpszAppName, lpdwNumDevs)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneInitializeExA == "on"]
+foreign {
+    func phoneInitializeExA(lphPhoneApp: CPointer<UInt32>, hInstance: CPointer<Unit>, lpfnCallback: PHONECALLBACK, lpszFriendlyAppName: CPointer<UInt8>, lpdwNumDevs: CPointer<UInt32>, lpdwAPIVersion: CPointer<UInt32>, lpPhoneInitializeExParams: CPointer<PHONEINITIALIZEEXPARAMS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneInitializeExA == "on"]
+public unsafe func Windows_phoneInitializeExA(lphPhoneApp: CPointer<UInt32>, hInstance: CPointer<Unit>, lpfnCallback: PHONECALLBACK, lpszFriendlyAppName: CPointer<UInt8>, lpdwNumDevs: CPointer<UInt32>, lpdwAPIVersion: CPointer<UInt32>, lpPhoneInitializeExParams: CPointer<PHONEINITIALIZEEXPARAMS>): Int32 {
+    return phoneInitializeExA(lphPhoneApp, hInstance, lpfnCallback, lpszFriendlyAppName, lpdwNumDevs, lpdwAPIVersion, lpPhoneInitializeExParams)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneInitializeExW == "on"]
+foreign {
+    func phoneInitializeExW(lphPhoneApp: CPointer<UInt32>, hInstance: CPointer<Unit>, lpfnCallback: PHONECALLBACK, lpszFriendlyAppName: CPointer<UInt16>, lpdwNumDevs: CPointer<UInt32>, lpdwAPIVersion: CPointer<UInt32>, lpPhoneInitializeExParams: CPointer<PHONEINITIALIZEEXPARAMS>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneInitializeExW == "on"]
+public unsafe func Windows_phoneInitializeExW(lphPhoneApp: CPointer<UInt32>, hInstance: CPointer<Unit>, lpfnCallback: PHONECALLBACK, lpszFriendlyAppName: CPointer<UInt16>, lpdwNumDevs: CPointer<UInt32>, lpdwAPIVersion: CPointer<UInt32>, lpPhoneInitializeExParams: CPointer<PHONEINITIALIZEEXPARAMS>): Int32 {
+    return phoneInitializeExW(lphPhoneApp, hInstance, lpfnCallback, lpszFriendlyAppName, lpdwNumDevs, lpdwAPIVersion, lpPhoneInitializeExParams)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneNegotiateAPIVersion == "on"]
+foreign {
+    func phoneNegotiateAPIVersion(hPhoneApp: UInt32, dwDeviceID: UInt32, dwAPILowVersion: UInt32, dwAPIHighVersion: UInt32, lpdwAPIVersion: CPointer<UInt32>, lpExtensionID: CPointer<PHONEEXTENSIONID>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneNegotiateAPIVersion == "on"]
+public unsafe func Windows_phoneNegotiateAPIVersion(hPhoneApp: UInt32, dwDeviceID: UInt32, dwAPILowVersion: UInt32, dwAPIHighVersion: UInt32, lpdwAPIVersion: CPointer<UInt32>, lpExtensionID: CPointer<PHONEEXTENSIONID>): Int32 {
+    return phoneNegotiateAPIVersion(hPhoneApp, dwDeviceID, dwAPILowVersion, dwAPIHighVersion, lpdwAPIVersion, lpExtensionID)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneNegotiateExtVersion == "on"]
+foreign {
+    func phoneNegotiateExtVersion(hPhoneApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, dwExtLowVersion: UInt32, dwExtHighVersion: UInt32, lpdwExtVersion: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneNegotiateExtVersion == "on"]
+public unsafe func Windows_phoneNegotiateExtVersion(hPhoneApp: UInt32, dwDeviceID: UInt32, dwAPIVersion: UInt32, dwExtLowVersion: UInt32, dwExtHighVersion: UInt32, lpdwExtVersion: CPointer<UInt32>): Int32 {
+    return phoneNegotiateExtVersion(hPhoneApp, dwDeviceID, dwAPIVersion, dwExtLowVersion, dwExtHighVersion, lpdwExtVersion)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneOpen == "on"]
+foreign {
+    func phoneOpen(hPhoneApp: UInt32, dwDeviceID: UInt32, lphPhone: CPointer<UInt32>, dwAPIVersion: UInt32, dwExtVersion: UInt32, dwCallbackInstance: UIntNative, dwPrivilege: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneOpen == "on"]
+public unsafe func Windows_phoneOpen(hPhoneApp: UInt32, dwDeviceID: UInt32, lphPhone: CPointer<UInt32>, dwAPIVersion: UInt32, dwExtVersion: UInt32, dwCallbackInstance: UIntNative, dwPrivilege: UInt32): Int32 {
+    return phoneOpen(hPhoneApp, dwDeviceID, lphPhone, dwAPIVersion, dwExtVersion, dwCallbackInstance, dwPrivilege)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneSetButtonInfo == "on"]
+foreign {
+    func phoneSetButtonInfo(hPhone: UInt32, dwButtonLampID: UInt32, lpButtonInfo: CPointer<PHONEBUTTONINFO>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneSetButtonInfo == "on"]
+public unsafe func Windows_phoneSetButtonInfo(hPhone: UInt32, dwButtonLampID: UInt32, lpButtonInfo: CPointer<PHONEBUTTONINFO>): Int32 {
+    return phoneSetButtonInfo(hPhone, dwButtonLampID, lpButtonInfo)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneSetButtonInfoA == "on"]
+foreign {
+    func phoneSetButtonInfoA(hPhone: UInt32, dwButtonLampID: UInt32, lpButtonInfo: CPointer<PHONEBUTTONINFO>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneSetButtonInfoA == "on"]
+public unsafe func Windows_phoneSetButtonInfoA(hPhone: UInt32, dwButtonLampID: UInt32, lpButtonInfo: CPointer<PHONEBUTTONINFO>): Int32 {
+    return phoneSetButtonInfoA(hPhone, dwButtonLampID, lpButtonInfo)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneSetButtonInfoW == "on"]
+foreign {
+    func phoneSetButtonInfoW(hPhone: UInt32, dwButtonLampID: UInt32, lpButtonInfo: CPointer<PHONEBUTTONINFO>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneSetButtonInfoW == "on"]
+public unsafe func Windows_phoneSetButtonInfoW(hPhone: UInt32, dwButtonLampID: UInt32, lpButtonInfo: CPointer<PHONEBUTTONINFO>): Int32 {
+    return phoneSetButtonInfoW(hPhone, dwButtonLampID, lpButtonInfo)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneSetData == "on"]
+foreign {
+    func phoneSetData(hPhone: UInt32, dwDataID: UInt32, lpData: CPointer<Unit>, dwSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneSetData == "on"]
+public unsafe func Windows_phoneSetData(hPhone: UInt32, dwDataID: UInt32, lpData: CPointer<Unit>, dwSize: UInt32): Int32 {
+    return phoneSetData(hPhone, dwDataID, lpData, dwSize)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneSetDisplay == "on"]
+foreign {
+    func phoneSetDisplay(hPhone: UInt32, dwRow: UInt32, dwColumn: UInt32, lpsDisplay: CPointer<UInt8>, dwSize: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneSetDisplay == "on"]
+public unsafe func Windows_phoneSetDisplay(hPhone: UInt32, dwRow: UInt32, dwColumn: UInt32, lpsDisplay: CPointer<UInt8>, dwSize: UInt32): Int32 {
+    return phoneSetDisplay(hPhone, dwRow, dwColumn, lpsDisplay, dwSize)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneSetGain == "on"]
+foreign {
+    func phoneSetGain(hPhone: UInt32, dwHookSwitchDev: UInt32, dwGain: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneSetGain == "on"]
+public unsafe func Windows_phoneSetGain(hPhone: UInt32, dwHookSwitchDev: UInt32, dwGain: UInt32): Int32 {
+    return phoneSetGain(hPhone, dwHookSwitchDev, dwGain)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneSetHookSwitch == "on"]
+foreign {
+    func phoneSetHookSwitch(hPhone: UInt32, dwHookSwitchDevs: UInt32, dwHookSwitchMode: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneSetHookSwitch == "on"]
+public unsafe func Windows_phoneSetHookSwitch(hPhone: UInt32, dwHookSwitchDevs: UInt32, dwHookSwitchMode: UInt32): Int32 {
+    return phoneSetHookSwitch(hPhone, dwHookSwitchDevs, dwHookSwitchMode)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneSetLamp == "on"]
+foreign {
+    func phoneSetLamp(hPhone: UInt32, dwButtonLampID: UInt32, dwLampMode: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneSetLamp == "on"]
+public unsafe func Windows_phoneSetLamp(hPhone: UInt32, dwButtonLampID: UInt32, dwLampMode: UInt32): Int32 {
+    return phoneSetLamp(hPhone, dwButtonLampID, dwLampMode)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneSetRing == "on"]
+foreign {
+    func phoneSetRing(hPhone: UInt32, dwRingMode: UInt32, dwVolume: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneSetRing == "on"]
+public unsafe func Windows_phoneSetRing(hPhone: UInt32, dwRingMode: UInt32, dwVolume: UInt32): Int32 {
+    return phoneSetRing(hPhone, dwRingMode, dwVolume)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneSetStatusMessages == "on"]
+foreign {
+    func phoneSetStatusMessages(hPhone: UInt32, dwPhoneStates: UInt32, dwButtonModes: UInt32, dwButtonStates: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneSetStatusMessages == "on"]
+public unsafe func Windows_phoneSetStatusMessages(hPhone: UInt32, dwPhoneStates: UInt32, dwButtonModes: UInt32, dwButtonStates: UInt32): Int32 {
+    return phoneSetStatusMessages(hPhone, dwPhoneStates, dwButtonModes, dwButtonStates)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneSetVolume == "on"]
+foreign {
+    func phoneSetVolume(hPhone: UInt32, dwHookSwitchDev: UInt32, dwVolume: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneSetVolume == "on"]
+public unsafe func Windows_phoneSetVolume(hPhone: UInt32, dwHookSwitchDev: UInt32, dwVolume: UInt32): Int32 {
+    return phoneSetVolume(hPhone, dwHookSwitchDev, dwVolume)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneShutdown == "on"]
+foreign {
+    func phoneShutdown(hPhoneApp: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_phoneShutdown == "on"]
+public unsafe func Windows_phoneShutdown(hPhoneApp: UInt32): Int32 {
+    return phoneShutdown(hPhoneApp)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_tapiGetLocationInfo == "on"]
+foreign {
+    // param-hint: lpszCountryCode fixed=8
+    // param-hint: lpszCityCode fixed=8
+    func tapiGetLocationInfo(lpszCountryCode: CPointer<UInt8>, lpszCityCode: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_tapiGetLocationInfo == "on"]
+public unsafe func Windows_tapiGetLocationInfo(lpszCountryCode: CPointer<UInt8>, lpszCityCode: CPointer<UInt8>): Int32 {
+    return tapiGetLocationInfo(lpszCountryCode, lpszCityCode)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_tapiGetLocationInfoA == "on"]
+foreign {
+    // param-hint: lpszCountryCode fixed=8
+    // param-hint: lpszCityCode fixed=8
+    func tapiGetLocationInfoA(lpszCountryCode: CPointer<UInt8>, lpszCityCode: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_tapiGetLocationInfoA == "on"]
+public unsafe func Windows_tapiGetLocationInfoA(lpszCountryCode: CPointer<UInt8>, lpszCityCode: CPointer<UInt8>): Int32 {
+    return tapiGetLocationInfoA(lpszCountryCode, lpszCityCode)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_tapiGetLocationInfoW == "on"]
+foreign {
+    // param-hint: lpszCountryCodeW fixed=8
+    // param-hint: lpszCityCodeW fixed=8
+    func tapiGetLocationInfoW(lpszCountryCodeW: CPointer<UInt16>, lpszCityCodeW: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_tapiGetLocationInfoW == "on"]
+public unsafe func Windows_tapiGetLocationInfoW(lpszCountryCodeW: CPointer<UInt16>, lpszCityCodeW: CPointer<UInt16>): Int32 {
+    return tapiGetLocationInfoW(lpszCountryCodeW, lpszCityCodeW)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_tapiRequestDrop == "on"]
+foreign {
+    func tapiRequestDrop(hwnd: CPointer<Unit>, wRequestID: UIntNative): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_tapiRequestDrop == "on"]
+public unsafe func Windows_tapiRequestDrop(hwnd: CPointer<Unit>, wRequestID: UIntNative): Int32 {
+    return tapiRequestDrop(hwnd, wRequestID)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_tapiRequestMakeCall == "on"]
+foreign {
+    func tapiRequestMakeCall(lpszDestAddress: CPointer<UInt8>, lpszAppName: CPointer<UInt8>, lpszCalledParty: CPointer<UInt8>, lpszComment: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_tapiRequestMakeCall == "on"]
+public unsafe func Windows_tapiRequestMakeCall(lpszDestAddress: CPointer<UInt8>, lpszAppName: CPointer<UInt8>, lpszCalledParty: CPointer<UInt8>, lpszComment: CPointer<UInt8>): Int32 {
+    return tapiRequestMakeCall(lpszDestAddress, lpszAppName, lpszCalledParty, lpszComment)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_tapiRequestMakeCallA == "on"]
+foreign {
+    func tapiRequestMakeCallA(lpszDestAddress: CPointer<UInt8>, lpszAppName: CPointer<UInt8>, lpszCalledParty: CPointer<UInt8>, lpszComment: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_tapiRequestMakeCallA == "on"]
+public unsafe func Windows_tapiRequestMakeCallA(lpszDestAddress: CPointer<UInt8>, lpszAppName: CPointer<UInt8>, lpszCalledParty: CPointer<UInt8>, lpszComment: CPointer<UInt8>): Int32 {
+    return tapiRequestMakeCallA(lpszDestAddress, lpszAppName, lpszCalledParty, lpszComment)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_tapiRequestMakeCallW == "on"]
+foreign {
+    func tapiRequestMakeCallW(lpszDestAddress: CPointer<UInt16>, lpszAppName: CPointer<UInt16>, lpszCalledParty: CPointer<UInt16>, lpszComment: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_tapiRequestMakeCallW == "on"]
+public unsafe func Windows_tapiRequestMakeCallW(lpszDestAddress: CPointer<UInt16>, lpszAppName: CPointer<UInt16>, lpszCalledParty: CPointer<UInt16>, lpszComment: CPointer<UInt16>): Int32 {
+    return tapiRequestMakeCallW(lpszDestAddress, lpszAppName, lpszCalledParty, lpszComment)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_tapiRequestMediaCall == "on"]
+foreign {
+    func tapiRequestMediaCall(hwnd: CPointer<Unit>, wRequestID: UIntNative, lpszDeviceClass: CPointer<UInt8>, lpDeviceID: CPointer<UInt8>, dwSize: UInt32, dwSecure: UInt32, lpszDestAddress: CPointer<UInt8>, lpszAppName: CPointer<UInt8>, lpszCalledParty: CPointer<UInt8>, lpszComment: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_tapiRequestMediaCall == "on"]
+public unsafe func Windows_tapiRequestMediaCall(hwnd: CPointer<Unit>, wRequestID: UIntNative, lpszDeviceClass: CPointer<UInt8>, lpDeviceID: CPointer<UInt8>, dwSize: UInt32, dwSecure: UInt32, lpszDestAddress: CPointer<UInt8>, lpszAppName: CPointer<UInt8>, lpszCalledParty: CPointer<UInt8>, lpszComment: CPointer<UInt8>): Int32 {
+    return tapiRequestMediaCall(hwnd, wRequestID, lpszDeviceClass, lpDeviceID, dwSize, dwSecure, lpszDestAddress, lpszAppName, lpszCalledParty, lpszComment)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_tapiRequestMediaCallA == "on"]
+foreign {
+    func tapiRequestMediaCallA(hwnd: CPointer<Unit>, wRequestID: UIntNative, lpszDeviceClass: CPointer<UInt8>, lpDeviceID: CPointer<UInt8>, dwSize: UInt32, dwSecure: UInt32, lpszDestAddress: CPointer<UInt8>, lpszAppName: CPointer<UInt8>, lpszCalledParty: CPointer<UInt8>, lpszComment: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_tapiRequestMediaCallA == "on"]
+public unsafe func Windows_tapiRequestMediaCallA(hwnd: CPointer<Unit>, wRequestID: UIntNative, lpszDeviceClass: CPointer<UInt8>, lpDeviceID: CPointer<UInt8>, dwSize: UInt32, dwSecure: UInt32, lpszDestAddress: CPointer<UInt8>, lpszAppName: CPointer<UInt8>, lpszCalledParty: CPointer<UInt8>, lpszComment: CPointer<UInt8>): Int32 {
+    return tapiRequestMediaCallA(hwnd, wRequestID, lpszDeviceClass, lpDeviceID, dwSize, dwSecure, lpszDestAddress, lpszAppName, lpszCalledParty, lpszComment)
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_tapiRequestMediaCallW == "on"]
+foreign {
+    func tapiRequestMediaCallW(hwnd: CPointer<Unit>, wRequestID: UIntNative, lpszDeviceClass: CPointer<UInt16>, lpDeviceID: CPointer<UInt16>, dwSize: UInt32, dwSecure: UInt32, lpszDestAddress: CPointer<UInt16>, lpszAppName: CPointer<UInt16>, lpszCalledParty: CPointer<UInt16>, lpszComment: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Devices_Tapi == "on" && TAPI32 == "on" && Windows_Win32_Devices_Tapi_tapiRequestMediaCallW == "on"]
+public unsafe func Windows_tapiRequestMediaCallW(hwnd: CPointer<Unit>, wRequestID: UIntNative, lpszDeviceClass: CPointer<UInt16>, lpDeviceID: CPointer<UInt16>, dwSize: UInt32, dwSecure: UInt32, lpszDestAddress: CPointer<UInt16>, lpszAppName: CPointer<UInt16>, lpszCalledParty: CPointer<UInt16>, lpszComment: CPointer<UInt16>): Int32 {
+    return tapiRequestMediaCallW(hwnd, wRequestID, lpszDeviceClass, lpDeviceID, dwSize, dwSecure, lpszDestAddress, lpszAppName, lpszCalledParty, lpszComment)
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]

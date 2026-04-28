@@ -4,7 +4,6 @@ package windows_sys.AI.MachineLearning.Preview
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_Graphics_Imaging == "on"]
 import windows_sys.Graphics.Imaging as Graphics_Imaging
 import windows_sys._impl_l1 as _impl_l1
 
@@ -151,6 +150,7 @@ public class ILearningModelBindingPreview <: InterfaceWrapperBase & ComInterface
 public struct ILearningModelEvaluationResultPreviewVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var CorrelationId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Outputs: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -201,6 +201,7 @@ public class ILearningModelEvaluationResultPreview <: InterfaceWrapperBase & Com
         return __vt.CorrelationId(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Outputs(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -482,7 +483,9 @@ public class ILearningModelVariableDescriptorPreview <: InterfaceWrapperBase & C
 public struct IMapVariableDescriptorPreviewVtbl {
     public var base_: ILearningModelVariableDescriptorPreviewVtbl = ILearningModelVariableDescriptorPreviewVtbl()
     public var KeyKind: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ValidStringKeys: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ValidIntegerKeys: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Fields: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -534,12 +537,14 @@ public class IMapVariableDescriptorPreview <: InterfaceWrapperBase & ComInterfac
         return __vt.KeyKind(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ValidStringKeys(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ValidStringKeys(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ValidIntegerKeys(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -613,6 +618,7 @@ public class ISequenceVariableDescriptorPreview <: InterfaceWrapperBase & ComInt
 public struct ITensorVariableDescriptorPreviewVtbl {
     public var base_: ILearningModelVariableDescriptorPreviewVtbl = ILearningModelVariableDescriptorPreviewVtbl()
     public var DataType: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Shape: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -663,6 +669,7 @@ public class ITensorVariableDescriptorPreview <: InterfaceWrapperBase & ComInter
         return __vt.DataType(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Shape(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -750,8 +757,11 @@ public struct ILearningModelDescriptionPreviewVtbl {
     public var Domain: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Description: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Version: CFunc<(CPointer<Unit>, CPointer<Int64>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Metadata: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var InputFeatures: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var OutputFeatures: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -826,18 +836,21 @@ public class ILearningModelDescriptionPreview <: InterfaceWrapperBase & ComInter
         return __vt.Version(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Metadata(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Metadata(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InputFeatures(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.InputFeatures(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OutputFeatures(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -849,6 +862,7 @@ public class ILearningModelDescriptionPreview <: InterfaceWrapperBase & ComInter
 @C
 public struct ILearningModelBindingPreviewFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateFromModel: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -893,6 +907,7 @@ public class ILearningModelBindingPreviewFactory <: InterfaceWrapperBase & ComIn
         readVtbl<ILearningModelBindingPreviewFactoryVtbl>(ILearningModelBindingPreviewFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateFromModel(model: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -904,7 +919,9 @@ public class ILearningModelBindingPreviewFactory <: InterfaceWrapperBase & ComIn
 @C
 public struct ILearningModelPreviewVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var EvaluateAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var EvaluateFeaturesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var Description: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var InferencingOptions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -952,12 +969,14 @@ public class ILearningModelPreview <: InterfaceWrapperBase & ComInterface {
         readVtbl<ILearningModelPreviewVtbl>(ILearningModelPreviewVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func EvaluateAsync(binding: CPointer<Unit>, correlationId: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.EvaluateAsync(__liveRaw, binding, correlationId, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func EvaluateFeaturesAsync(features: CPointer<Unit>, correlationId: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

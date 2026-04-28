@@ -3,7 +3,6 @@ package windows_sys.Win32.Security.Cryptography.UI
 
 import windows_interface.{GUID}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
@@ -1405,45 +1404,123 @@ public struct CRYPTUI_WIZ_DIGITAL_SIGN_INFO__Anonymous2_e__Union {
     public init() {}
 }
 
-@When[CRYPTUI == "on"]
-foreign {
-    func CryptUIDlgCertMgr(pCryptUICertMgr: CPointer<CRYPTUI_CERT_MGR_STRUCT>): Int32
-    // param-hint: hwnd optional
-    // param-hint: pwszTitle optional
-    func CryptUIDlgViewContext(dwContextType: UInt32, pvContext: CPointer<Unit>, hwnd: CPointer<Unit>, pwszTitle: CPointer<UInt16>, dwFlags: UInt32, pvReserved: CPointer<Unit>): Int32
-    func CryptUIWizFreeDigitalSignContext(pSignContext: CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_CONTEXT>): Int32
-}
-
-@When[CRYPTUI == "on" && (Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_UI_Controls == "on")]
-foreign {
-    // pinvoke-hint: SetLastError
-    func CryptUIDlgViewCertificateA(pCertViewInfo: CPointer<CRYPTUI_VIEWCERTIFICATE_STRUCTA>, pfPropertiesChanged: CPointer<Int32>): Int32
-    // pinvoke-hint: SetLastError
-    func CryptUIDlgViewCertificateW(pCertViewInfo: CPointer<CRYPTUI_VIEWCERTIFICATE_STRUCTW>, pfPropertiesChanged: CPointer<Int32>): Int32
-}
-
-@When[CRYPTUI == "on" && Windows_Win32_Security_Cryptography == "on"]
+@When[Windows_Win32_Security_Cryptography_UI == "on" && CRYPTUI == "on" && Windows_Win32_Security_Cryptography_UI_CertSelectionGetSerializedBlob == "on" && Windows_Win32_Security_Cryptography == "on"]
 foreign {
     func CertSelectionGetSerializedBlob(pcsi: CPointer<CERT_SELECTUI_INPUT>, ppOutBuffer: CPointer<CPointer<Unit>>, pulOutBufferSize: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && CRYPTUI == "on" && Windows_Win32_Security_Cryptography_UI_CertSelectionGetSerializedBlob == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_CertSelectionGetSerializedBlob(pcsi: CPointer<CERT_SELECTUI_INPUT>, ppOutBuffer: CPointer<CPointer<Unit>>, pulOutBufferSize: CPointer<UInt32>): Int32 {
+    return CertSelectionGetSerializedBlob(pcsi, ppOutBuffer, pulOutBufferSize)
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && CRYPTUI == "on" && Windows_Win32_Security_Cryptography_UI_CryptUIDlgCertMgr == "on"]
+foreign {
+    func CryptUIDlgCertMgr(pCryptUICertMgr: CPointer<CRYPTUI_CERT_MGR_STRUCT>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && CRYPTUI == "on" && Windows_Win32_Security_Cryptography_UI_CryptUIDlgCertMgr == "on"]
+public unsafe func Windows_CryptUIDlgCertMgr(pCryptUICertMgr: CPointer<CRYPTUI_CERT_MGR_STRUCT>): Int32 {
+    return CryptUIDlgCertMgr(pCryptUICertMgr)
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && CRYPTUI == "on" && Windows_Win32_Security_Cryptography_UI_CryptUIDlgSelectCertificateFromStore == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
     // param-hint: hwnd optional
     // param-hint: pwszTitle optional
     // param-hint: pwszDisplayString optional
     func CryptUIDlgSelectCertificateFromStore(hCertStore: Win32__impl_l0.HCERTSTORE, hwnd: CPointer<Unit>, pwszTitle: CPointer<UInt16>, pwszDisplayString: CPointer<UInt16>, dwDontUseColumn: UInt32, dwFlags: UInt32, pvReserved: CPointer<Unit>): CPointer<Win32__impl_l2.CERT_CONTEXT>
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && CRYPTUI == "on" && Windows_Win32_Security_Cryptography_UI_CryptUIDlgSelectCertificateFromStore == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_CryptUIDlgSelectCertificateFromStore(hCertStore: Win32__impl_l0.HCERTSTORE, hwnd: CPointer<Unit>, pwszTitle: CPointer<UInt16>, pwszDisplayString: CPointer<UInt16>, dwDontUseColumn: UInt32, dwFlags: UInt32, pvReserved: CPointer<Unit>): CPointer<Win32__impl_l2.CERT_CONTEXT> {
+    return CryptUIDlgSelectCertificateFromStore(hCertStore, hwnd, pwszTitle, pwszDisplayString, dwDontUseColumn, dwFlags, pvReserved)
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && CRYPTUI == "on" && Windows_Win32_Security_Cryptography_UI_CryptUIDlgViewCertificateA == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_UI_Controls == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func CryptUIDlgViewCertificateA(pCertViewInfo: CPointer<CRYPTUI_VIEWCERTIFICATE_STRUCTA>, pfPropertiesChanged: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && CRYPTUI == "on" && Windows_Win32_Security_Cryptography_UI_CryptUIDlgViewCertificateA == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_UI_Controls == "on"]
+public unsafe func Windows_CryptUIDlgViewCertificateA(pCertViewInfo: CPointer<CRYPTUI_VIEWCERTIFICATE_STRUCTA>, pfPropertiesChanged: CPointer<Int32>): Int32 {
+    return CryptUIDlgViewCertificateA(pCertViewInfo, pfPropertiesChanged)
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && CRYPTUI == "on" && Windows_Win32_Security_Cryptography_UI_CryptUIDlgViewCertificateW == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_UI_Controls == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func CryptUIDlgViewCertificateW(pCertViewInfo: CPointer<CRYPTUI_VIEWCERTIFICATE_STRUCTW>, pfPropertiesChanged: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && CRYPTUI == "on" && Windows_Win32_Security_Cryptography_UI_CryptUIDlgViewCertificateW == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_Security_WinTrust == "on" && Windows_Win32_UI_Controls == "on"]
+public unsafe func Windows_CryptUIDlgViewCertificateW(pCertViewInfo: CPointer<CRYPTUI_VIEWCERTIFICATE_STRUCTW>, pfPropertiesChanged: CPointer<Int32>): Int32 {
+    return CryptUIDlgViewCertificateW(pCertViewInfo, pfPropertiesChanged)
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && CRYPTUI == "on" && Windows_Win32_Security_Cryptography_UI_CryptUIDlgViewContext == "on"]
+foreign {
+    // param-hint: hwnd optional
+    // param-hint: pwszTitle optional
+    func CryptUIDlgViewContext(dwContextType: UInt32, pvContext: CPointer<Unit>, hwnd: CPointer<Unit>, pwszTitle: CPointer<UInt16>, dwFlags: UInt32, pvReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && CRYPTUI == "on" && Windows_Win32_Security_Cryptography_UI_CryptUIDlgViewContext == "on"]
+public unsafe func Windows_CryptUIDlgViewContext(dwContextType: UInt32, pvContext: CPointer<Unit>, hwnd: CPointer<Unit>, pwszTitle: CPointer<UInt16>, dwFlags: UInt32, pvReserved: CPointer<Unit>): Int32 {
+    return CryptUIDlgViewContext(dwContextType, pvContext, hwnd, pwszTitle, dwFlags, pvReserved)
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && CRYPTUI == "on" && Windows_Win32_Security_Cryptography_UI_CryptUIWizDigitalSign == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
     // param-hint: hwndParent optional
     // param-hint: pwszWizardTitle optional
     // param-hint: ppSignContext optional
     func CryptUIWizDigitalSign(dwFlags: UInt32, hwndParent: CPointer<Unit>, pwszWizardTitle: CPointer<UInt16>, pDigitalSignInfo: CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_INFO>, ppSignContext: CPointer<CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_CONTEXT>>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && CRYPTUI == "on" && Windows_Win32_Security_Cryptography_UI_CryptUIWizDigitalSign == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_CryptUIWizDigitalSign(dwFlags: UInt32, hwndParent: CPointer<Unit>, pwszWizardTitle: CPointer<UInt16>, pDigitalSignInfo: CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_INFO>, ppSignContext: CPointer<CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_CONTEXT>>): Int32 {
+    return CryptUIWizDigitalSign(dwFlags, hwndParent, pwszWizardTitle, pDigitalSignInfo, ppSignContext)
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && CRYPTUI == "on" && Windows_Win32_Security_Cryptography_UI_CryptUIWizExport == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
     // param-hint: hwndParent optional
     // param-hint: pwszWizardTitle optional
     // param-hint: pvoid optional
     // pinvoke-hint: SetLastError
     func CryptUIWizExport(dwFlags: UInt32, hwndParent: CPointer<Unit>, pwszWizardTitle: CPointer<UInt16>, pExportInfo: CPointer<CRYPTUI_WIZ_EXPORT_INFO>, pvoid: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && CRYPTUI == "on" && Windows_Win32_Security_Cryptography_UI_CryptUIWizExport == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_CryptUIWizExport(dwFlags: UInt32, hwndParent: CPointer<Unit>, pwszWizardTitle: CPointer<UInt16>, pExportInfo: CPointer<CRYPTUI_WIZ_EXPORT_INFO>, pvoid: CPointer<Unit>): Int32 {
+    return CryptUIWizExport(dwFlags, hwndParent, pwszWizardTitle, pExportInfo, pvoid)
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && CRYPTUI == "on" && Windows_Win32_Security_Cryptography_UI_CryptUIWizFreeDigitalSignContext == "on"]
+foreign {
+    func CryptUIWizFreeDigitalSignContext(pSignContext: CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_CONTEXT>): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && CRYPTUI == "on" && Windows_Win32_Security_Cryptography_UI_CryptUIWizFreeDigitalSignContext == "on"]
+public unsafe func Windows_CryptUIWizFreeDigitalSignContext(pSignContext: CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_CONTEXT>): Int32 {
+    return CryptUIWizFreeDigitalSignContext(pSignContext)
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && CRYPTUI == "on" && Windows_Win32_Security_Cryptography_UI_CryptUIWizImport == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
     // param-hint: hwndParent optional
     // param-hint: pwszWizardTitle optional
     // param-hint: pImportSrc optional
     // param-hint: hDestCertStore optional
     // pinvoke-hint: SetLastError
     func CryptUIWizImport(dwFlags: UInt32, hwndParent: CPointer<Unit>, pwszWizardTitle: CPointer<UInt16>, pImportSrc: CPointer<CRYPTUI_WIZ_IMPORT_SRC_INFO>, hDestCertStore: Win32__impl_l0.HCERTSTORE): Int32
+}
+
+@When[Windows_Win32_Security_Cryptography_UI == "on" && CRYPTUI == "on" && Windows_Win32_Security_Cryptography_UI_CryptUIWizImport == "on" && Windows_Win32_Security_Cryptography == "on"]
+public unsafe func Windows_CryptUIWizImport(dwFlags: UInt32, hwndParent: CPointer<Unit>, pwszWizardTitle: CPointer<UInt16>, pImportSrc: CPointer<CRYPTUI_WIZ_IMPORT_SRC_INFO>, hDestCertStore: Win32__impl_l0.HCERTSTORE): Int32 {
+    return CryptUIWizImport(dwFlags, hwndParent, pwszWizardTitle, pImportSrc, hDestCertStore)
 }
 
 @When[Windows_Win32_Security_Cryptography_UI == "on"]

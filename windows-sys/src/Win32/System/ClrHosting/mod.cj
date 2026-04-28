@@ -3,11 +3,8 @@ package windows_sys.Win32.System.ClrHosting
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Security == "on"]
 import windows_sys.Win32.Security as Win32_Security
-@When[Windows_Win32_System_IO == "on"]
 import windows_sys.Win32.System.IO as Win32_System_IO
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
@@ -6613,57 +6610,288 @@ public class IHostAssemblyManager <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[MSCOREE == "on"]
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_CLRCreateInstance == "on"]
 foreign {
     func CLRCreateInstance(clsid: CPointer<GUID>, riid: CPointer<GUID>, ppInterface: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_CLRCreateInstance == "on"]
+public unsafe func Windows_CLRCreateInstance(clsid: CPointer<GUID>, riid: CPointer<GUID>, ppInterface: CPointer<CPointer<Unit>>): Int32 {
+    return CLRCreateInstance(clsid, riid, ppInterface)
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_CallFunctionShim == "on"]
+foreign {
     func CallFunctionShim(szDllName: CPointer<UInt16>, szFunctionName: CPointer<UInt8>, lpvArgument1: CPointer<Unit>, lpvArgument2: CPointer<Unit>, szVersion: CPointer<UInt16>, pvReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_CallFunctionShim == "on"]
+public unsafe func Windows_CallFunctionShim(szDllName: CPointer<UInt16>, szFunctionName: CPointer<UInt8>, lpvArgument1: CPointer<Unit>, lpvArgument2: CPointer<Unit>, szVersion: CPointer<UInt16>, pvReserved: CPointer<Unit>): Int32 {
+    return CallFunctionShim(szDllName, szFunctionName, lpvArgument1, lpvArgument2, szVersion, pvReserved)
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_ClrCreateManagedInstance == "on"]
+foreign {
     func ClrCreateManagedInstance(pTypeName: CPointer<UInt16>, riid: CPointer<GUID>, ppObject: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_ClrCreateManagedInstance == "on"]
+public unsafe func Windows_ClrCreateManagedInstance(pTypeName: CPointer<UInt16>, riid: CPointer<GUID>, ppObject: CPointer<CPointer<Unit>>): Int32 {
+    return ClrCreateManagedInstance(pTypeName, riid, ppObject)
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_CorBindToCurrentRuntime == "on"]
+foreign {
     func CorBindToCurrentRuntime(pwszFileName: CPointer<UInt16>, rclsid: CPointer<GUID>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_CorBindToCurrentRuntime == "on"]
+public unsafe func Windows_CorBindToCurrentRuntime(pwszFileName: CPointer<UInt16>, rclsid: CPointer<GUID>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return CorBindToCurrentRuntime(pwszFileName, rclsid, riid, ppv)
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_CorBindToRuntime == "on"]
+foreign {
     func CorBindToRuntime(pwszVersion: CPointer<UInt16>, pwszBuildFlavor: CPointer<UInt16>, rclsid: CPointer<GUID>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_CorBindToRuntime == "on"]
+public unsafe func Windows_CorBindToRuntime(pwszVersion: CPointer<UInt16>, pwszBuildFlavor: CPointer<UInt16>, rclsid: CPointer<GUID>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return CorBindToRuntime(pwszVersion, pwszBuildFlavor, rclsid, riid, ppv)
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_CorBindToRuntimeByCfg == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func CorBindToRuntimeByCfg(pCfgStream: CPointer<Unit>, reserved: UInt32, startupFlags: UInt32, rclsid: CPointer<GUID>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_CorBindToRuntimeByCfg == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CorBindToRuntimeByCfg(pCfgStream: CPointer<Unit>, reserved: UInt32, startupFlags: UInt32, rclsid: CPointer<GUID>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return CorBindToRuntimeByCfg(pCfgStream, reserved, startupFlags, rclsid, riid, ppv)
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_CorBindToRuntimeEx == "on"]
+foreign {
     func CorBindToRuntimeEx(pwszVersion: CPointer<UInt16>, pwszBuildFlavor: CPointer<UInt16>, startupFlags: UInt32, rclsid: CPointer<GUID>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_CorBindToRuntimeEx == "on"]
+public unsafe func Windows_CorBindToRuntimeEx(pwszVersion: CPointer<UInt16>, pwszBuildFlavor: CPointer<UInt16>, startupFlags: UInt32, rclsid: CPointer<GUID>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return CorBindToRuntimeEx(pwszVersion, pwszBuildFlavor, startupFlags, rclsid, riid, ppv)
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_CorBindToRuntimeHost == "on"]
+foreign {
     func CorBindToRuntimeHost(pwszVersion: CPointer<UInt16>, pwszBuildFlavor: CPointer<UInt16>, pwszHostConfigFile: CPointer<UInt16>, pReserved: CPointer<Unit>, startupFlags: UInt32, rclsid: CPointer<GUID>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_CorBindToRuntimeHost == "on"]
+public unsafe func Windows_CorBindToRuntimeHost(pwszVersion: CPointer<UInt16>, pwszBuildFlavor: CPointer<UInt16>, pwszHostConfigFile: CPointer<UInt16>, pReserved: CPointer<Unit>, startupFlags: UInt32, rclsid: CPointer<GUID>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return CorBindToRuntimeHost(pwszVersion, pwszBuildFlavor, pwszHostConfigFile, pReserved, startupFlags, rclsid, riid, ppv)
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_CorExitProcess == "on"]
+foreign {
     func CorExitProcess(exitCode: Int32): Unit
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_CorExitProcess == "on"]
+public unsafe func Windows_CorExitProcess(exitCode: Int32): Unit {
+    CorExitProcess(exitCode)
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_CorLaunchApplication == "on" && Windows_Win32_System_Threading == "on"]
+foreign {
+    func CorLaunchApplication(dwClickOnceHost: Int32, pwzAppFullName: CPointer<UInt16>, dwManifestPaths: UInt32, ppwzManifestPaths: CPointer<CPointer<UInt16>>, dwActivationData: UInt32, ppwzActivationData: CPointer<CPointer<UInt16>>, lpProcessInformation: CPointer<Win32__impl_l0.PROCESS_INFORMATION>): Int32
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_CorLaunchApplication == "on" && Windows_Win32_System_Threading == "on"]
+public unsafe func Windows_CorLaunchApplication(dwClickOnceHost: Int32, pwzAppFullName: CPointer<UInt16>, dwManifestPaths: UInt32, ppwzManifestPaths: CPointer<CPointer<UInt16>>, dwActivationData: UInt32, ppwzActivationData: CPointer<CPointer<UInt16>>, lpProcessInformation: CPointer<Win32__impl_l0.PROCESS_INFORMATION>): Int32 {
+    return CorLaunchApplication(dwClickOnceHost, pwzAppFullName, dwManifestPaths, ppwzManifestPaths, dwActivationData, ppwzActivationData, lpProcessInformation)
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_CorMarkThreadInThreadPool == "on"]
+foreign {
     func CorMarkThreadInThreadPool(): Unit
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_CorMarkThreadInThreadPool == "on"]
+public unsafe func Windows_CorMarkThreadInThreadPool(): Unit {
+    CorMarkThreadInThreadPool()
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_CreateDebuggingInterfaceFromVersion == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func CreateDebuggingInterfaceFromVersion(iDebuggerVersion: Int32, szDebuggeeVersion: CPointer<UInt16>, ppCordb: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_CreateDebuggingInterfaceFromVersion == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CreateDebuggingInterfaceFromVersion(iDebuggerVersion: Int32, szDebuggeeVersion: CPointer<UInt16>, ppCordb: CPointer<CPointer<Unit>>): Int32 {
+    return CreateDebuggingInterfaceFromVersion(iDebuggerVersion, szDebuggeeVersion, ppCordb)
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_GetCLRIdentityManager == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func GetCLRIdentityManager(riid: CPointer<GUID>, ppManager: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_GetCLRIdentityManager == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_GetCLRIdentityManager(riid: CPointer<GUID>, ppManager: CPointer<CPointer<Unit>>): Int32 {
+    return GetCLRIdentityManager(riid, ppManager)
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_GetCORRequiredVersion == "on"]
+foreign {
     // param-hint: pbuffer len=param[1]
     func GetCORRequiredVersion(pbuffer: CPointer<UInt16>, cchBuffer: UInt32, dwLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_GetCORRequiredVersion == "on"]
+public unsafe func Windows_GetCORRequiredVersion(pbuffer: CPointer<UInt16>, cchBuffer: UInt32, dwLength: CPointer<UInt32>): Int32 {
+    return GetCORRequiredVersion(pbuffer, cchBuffer, dwLength)
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_GetCORSystemDirectory == "on"]
+foreign {
     // param-hint: pbuffer len=param[1]
     func GetCORSystemDirectory(pbuffer: CPointer<UInt16>, cchBuffer: UInt32, dwLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_GetCORSystemDirectory == "on"]
+public unsafe func Windows_GetCORSystemDirectory(pbuffer: CPointer<UInt16>, cchBuffer: UInt32, dwLength: CPointer<UInt32>): Int32 {
+    return GetCORSystemDirectory(pbuffer, cchBuffer, dwLength)
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_GetCORVersion == "on"]
+foreign {
     // param-hint: pbBuffer len=param[1]
     func GetCORVersion(pbBuffer: CPointer<UInt16>, cchBuffer: UInt32, dwLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_GetCORVersion == "on"]
+public unsafe func Windows_GetCORVersion(pbBuffer: CPointer<UInt16>, cchBuffer: UInt32, dwLength: CPointer<UInt32>): Int32 {
+    return GetCORVersion(pbBuffer, cchBuffer, dwLength)
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_GetFileVersion == "on"]
+foreign {
     // param-hint: szBuffer len=param[2] optional
     func GetFileVersion(szFilename: CPointer<UInt16>, szBuffer: CPointer<UInt16>, cchBuffer: UInt32, dwLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_GetFileVersion == "on"]
+public unsafe func Windows_GetFileVersion(szFilename: CPointer<UInt16>, szBuffer: CPointer<UInt16>, cchBuffer: UInt32, dwLength: CPointer<UInt32>): Int32 {
+    return GetFileVersion(szFilename, szBuffer, cchBuffer, dwLength)
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_GetRealProcAddress == "on"]
+foreign {
     func GetRealProcAddress(pwszProcName: CPointer<UInt8>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_GetRealProcAddress == "on"]
+public unsafe func Windows_GetRealProcAddress(pwszProcName: CPointer<UInt8>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return GetRealProcAddress(pwszProcName, ppv)
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_GetRequestedRuntimeInfo == "on"]
+foreign {
     // param-hint: pDirectory len=param[6] optional
     // param-hint: dwDirectoryLength optional
     // param-hint: pVersion len=param[9] optional
     // param-hint: dwlength optional
     func GetRequestedRuntimeInfo(pExe: CPointer<UInt16>, pwszVersion: CPointer<UInt16>, pConfigurationFile: CPointer<UInt16>, startupFlags: UInt32, runtimeInfoFlags: UInt32, pDirectory: CPointer<UInt16>, dwDirectory: UInt32, dwDirectoryLength: CPointer<UInt32>, pVersion: CPointer<UInt16>, cchBuffer: UInt32, dwlength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_GetRequestedRuntimeInfo == "on"]
+public unsafe func Windows_GetRequestedRuntimeInfo(pExe: CPointer<UInt16>, pwszVersion: CPointer<UInt16>, pConfigurationFile: CPointer<UInt16>, startupFlags: UInt32, runtimeInfoFlags: UInt32, pDirectory: CPointer<UInt16>, dwDirectory: UInt32, dwDirectoryLength: CPointer<UInt32>, pVersion: CPointer<UInt16>, cchBuffer: UInt32, dwlength: CPointer<UInt32>): Int32 {
+    return GetRequestedRuntimeInfo(pExe, pwszVersion, pConfigurationFile, startupFlags, runtimeInfoFlags, pDirectory, dwDirectory, dwDirectoryLength, pVersion, cchBuffer, dwlength)
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_GetRequestedRuntimeVersion == "on"]
+foreign {
     // param-hint: pVersion len=param[2]
     func GetRequestedRuntimeVersion(pExe: CPointer<UInt16>, pVersion: CPointer<UInt16>, cchBuffer: UInt32, dwLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_GetRequestedRuntimeVersion == "on"]
+public unsafe func Windows_GetRequestedRuntimeVersion(pExe: CPointer<UInt16>, pVersion: CPointer<UInt16>, cchBuffer: UInt32, dwLength: CPointer<UInt32>): Int32 {
+    return GetRequestedRuntimeVersion(pExe, pVersion, cchBuffer, dwLength)
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_GetRequestedRuntimeVersionForCLSID == "on"]
+foreign {
     // param-hint: pVersion len=param[2] optional
     // param-hint: dwLength optional
     func GetRequestedRuntimeVersionForCLSID(rclsid: CPointer<GUID>, pVersion: CPointer<UInt16>, cchBuffer: UInt32, dwLength: CPointer<UInt32>, dwResolutionFlags: Int32): Int32
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_GetRequestedRuntimeVersionForCLSID == "on"]
+public unsafe func Windows_GetRequestedRuntimeVersionForCLSID(rclsid: CPointer<GUID>, pVersion: CPointer<UInt16>, cchBuffer: UInt32, dwLength: CPointer<UInt32>, dwResolutionFlags: Int32): Int32 {
+    return GetRequestedRuntimeVersionForCLSID(rclsid, pVersion, cchBuffer, dwLength, dwResolutionFlags)
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_GetVersionFromProcess == "on"]
+foreign {
     // param-hint: pVersion len=param[2]
     func GetVersionFromProcess(hProcess: CPointer<Unit>, pVersion: CPointer<UInt16>, cchBuffer: UInt32, dwLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_GetVersionFromProcess == "on"]
+public unsafe func Windows_GetVersionFromProcess(hProcess: CPointer<Unit>, pVersion: CPointer<UInt16>, cchBuffer: UInt32, dwLength: CPointer<UInt32>): Int32 {
+    return GetVersionFromProcess(hProcess, pVersion, cchBuffer, dwLength)
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_LoadLibraryShim == "on"]
+foreign {
     func LoadLibraryShim(szDllName: CPointer<UInt16>, szVersion: CPointer<UInt16>, pvReserved: CPointer<Unit>, phModDll: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_LoadLibraryShim == "on"]
+public unsafe func Windows_LoadLibraryShim(szDllName: CPointer<UInt16>, szVersion: CPointer<UInt16>, pvReserved: CPointer<Unit>, phModDll: CPointer<CPointer<Unit>>): Int32 {
+    return LoadLibraryShim(szDllName, szVersion, pvReserved, phModDll)
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_LoadStringRC == "on"]
+foreign {
     // param-hint: szBuffer len=param[2]
     func LoadStringRC(iResouceID: UInt32, szBuffer: CPointer<UInt16>, iMax: Int32, bQuiet: Int32): Int32
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_LoadStringRC == "on"]
+public unsafe func Windows_LoadStringRC(iResouceID: UInt32, szBuffer: CPointer<UInt16>, iMax: Int32, bQuiet: Int32): Int32 {
+    return LoadStringRC(iResouceID, szBuffer, iMax, bQuiet)
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_LoadStringRCEx == "on"]
+foreign {
     // param-hint: szBuffer len=param[3]
     func LoadStringRCEx(lcid: UInt32, iResouceID: UInt32, szBuffer: CPointer<UInt16>, iMax: Int32, bQuiet: Int32, pcwchUsed: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_LoadStringRCEx == "on"]
+public unsafe func Windows_LoadStringRCEx(lcid: UInt32, iResouceID: UInt32, szBuffer: CPointer<UInt16>, iMax: Int32, bQuiet: Int32, pcwchUsed: CPointer<Int32>): Int32 {
+    return LoadStringRCEx(lcid, iResouceID, szBuffer, iMax, bQuiet, pcwchUsed)
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_LockClrVersion == "on"]
+foreign {
     func LockClrVersion(hostCallback: FLockClrVersionCallback, pBeginHostSetup: CPointer<FLockClrVersionCallback>, pEndHostSetup: CPointer<FLockClrVersionCallback>): Int32
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_LockClrVersion == "on"]
+public unsafe func Windows_LockClrVersion(hostCallback: FLockClrVersionCallback, pBeginHostSetup: CPointer<FLockClrVersionCallback>, pEndHostSetup: CPointer<FLockClrVersionCallback>): Int32 {
+    return LockClrVersion(hostCallback, pBeginHostSetup, pEndHostSetup)
+}
+
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_RunDll32ShimW == "on"]
+foreign {
     func RunDll32ShimW(hwnd: CPointer<Unit>, hinst: CPointer<Unit>, lpszCmdLine: CPointer<UInt16>, nCmdShow: Int32): Int32
 }
 
-@When[MSCOREE == "on" && Windows_Win32_System_Com == "on"]
-foreign {
-    func CorBindToRuntimeByCfg(pCfgStream: CPointer<Unit>, reserved: UInt32, startupFlags: UInt32, rclsid: CPointer<GUID>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
-    func CreateDebuggingInterfaceFromVersion(iDebuggerVersion: Int32, szDebuggeeVersion: CPointer<UInt16>, ppCordb: CPointer<CPointer<Unit>>): Int32
-    func GetCLRIdentityManager(riid: CPointer<GUID>, ppManager: CPointer<CPointer<Unit>>): Int32
-}
-
-@When[MSCOREE == "on" && Windows_Win32_System_Threading == "on"]
-foreign {
-    func CorLaunchApplication(dwClickOnceHost: Int32, pwzAppFullName: CPointer<UInt16>, dwManifestPaths: UInt32, ppwzManifestPaths: CPointer<CPointer<UInt16>>, dwActivationData: UInt32, ppwzActivationData: CPointer<CPointer<UInt16>>, lpProcessInformation: CPointer<Win32__impl_l0.PROCESS_INFORMATION>): Int32
+@When[Windows_Win32_System_ClrHosting == "on" && MSCOREE == "on" && Windows_Win32_System_ClrHosting_RunDll32ShimW == "on"]
+public unsafe func Windows_RunDll32ShimW(hwnd: CPointer<Unit>, hinst: CPointer<Unit>, lpszCmdLine: CPointer<UInt16>, nCmdShow: Int32): Int32 {
+    return RunDll32ShimW(hwnd, hinst, lpszCmdLine, nCmdShow)
 }
 
 @When[Windows_Win32_System_ClrHosting == "on"]

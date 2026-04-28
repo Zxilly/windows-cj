@@ -141,6 +141,7 @@ public struct IPackageVtbl {
     @When[Windows_Storage == "on"]
     public var InstalledLocation: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IsFramework: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Dependencies: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -204,6 +205,7 @@ public class IPackage <: InterfaceWrapperBase & ComInterface {
         return __vt.IsFramework(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Dependencies(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -217,7 +219,7 @@ public struct IPackage3Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Status: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var InstalledDate: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.DateTime>) -> Int32> = { _, _ => 0 }
-    @When[Windows_ApplicationModel_Core == "on"]
+    @When[Windows_ApplicationModel_Core == "on" && Windows_Foundation_Collections == "on"]
     public var GetAppListEntriesAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -274,7 +276,7 @@ public class IPackage3 <: InterfaceWrapperBase & ComInterface {
         return __vt.InstalledDate(__liveRaw, result__)
     }
 
-    @When[Windows_ApplicationModel_Core == "on"]
+    @When[Windows_ApplicationModel_Core == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func GetAppListEntriesAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -286,9 +288,12 @@ public class IPackage3 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IPackage5Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetContentGroupsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetContentGroupAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var StageContentGroupsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var StageContentGroupsWithPriorityAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, Bool, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var SetInUseAsync: CFunc<(CPointer<Unit>, Bool, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -334,6 +339,7 @@ public class IPackage5 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IPackage5Vtbl>(IPackage5Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetContentGroupsAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -346,12 +352,14 @@ public class IPackage5 <: InterfaceWrapperBase & ComInterface {
         return __vt.GetContentGroupAsync(__liveRaw, name, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StageContentGroupsAsync(names: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.StageContentGroupsAsync(__liveRaw, names, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StageContentGroupsWithPriorityAsync(names: CPointer<Unit>, moveToHeadOfQueue: Bool, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -383,7 +391,7 @@ public struct IPackage8Vtbl {
     public var UserExternalPath: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Storage_Streams == "on"]
     public var GetLogoAsRandomAccessStreamReference: CFunc<(CPointer<Unit>, Foundation__impl_l0.Size, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
-    @When[Windows_ApplicationModel_Core == "on"]
+    @When[Windows_ApplicationModel_Core == "on" && Windows_Foundation_Collections == "on"]
     public var GetAppListEntries: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var IsStub: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -493,7 +501,7 @@ public class IPackage8 <: InterfaceWrapperBase & ComInterface {
         return __vt.GetLogoAsRandomAccessStreamReference(__liveRaw, size, result__)
     }
 
-    @When[Windows_ApplicationModel_Core == "on"]
+    @When[Windows_ApplicationModel_Core == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func GetAppListEntries(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -511,6 +519,7 @@ public class IPackage8 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IPackage9Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var FindRelatedPackages: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var SourceUriSchemeName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -556,6 +565,7 @@ public class IPackage9 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IPackage9Vtbl>(IPackage9Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindRelatedPackages(options: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -760,6 +770,7 @@ public class IPackageCatalog2 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IPackageCatalog3Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var RemoveOptionalPackagesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -804,6 +815,7 @@ public class IPackageCatalog3 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IPackageCatalog3Vtbl>(IPackageCatalog3Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RemoveOptionalPackagesAsync(optionalPackageFamilyNames: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -816,6 +828,7 @@ public class IPackageCatalog3 <: InterfaceWrapperBase & ComInterface {
 public struct IPackageCatalog4Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var AddResourcePackageAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var RemoveResourcePackagesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -866,6 +879,7 @@ public class IPackageCatalog4 <: InterfaceWrapperBase & ComInterface {
         return __vt.AddResourcePackageAsync(__liveRaw, resourcePackageFamilyName, resourceID, options, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RemoveResourcePackagesAsync(resourcePackages: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1008,6 +1022,7 @@ public class IPackageCatalogAddResourcePackageResult <: InterfaceWrapperBase & C
 @C
 public struct IPackageCatalogRemoveOptionalPackagesResultVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var PackagesRemoved: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ExtendedError: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.HResult>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -1053,6 +1068,7 @@ public class IPackageCatalogRemoveOptionalPackagesResult <: InterfaceWrapperBase
         readVtbl<IPackageCatalogRemoveOptionalPackagesResultVtbl>(IPackageCatalogRemoveOptionalPackagesResultVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PackagesRemoved(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1070,6 +1086,7 @@ public class IPackageCatalogRemoveOptionalPackagesResult <: InterfaceWrapperBase
 @C
 public struct IPackageCatalogRemoveResourcePackagesResultVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var PackagesRemoved: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ExtendedError: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.HResult>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -1115,6 +1132,7 @@ public class IPackageCatalogRemoveResourcePackagesResult <: InterfaceWrapperBase
         readVtbl<IPackageCatalogRemoveResourcePackagesResultVtbl>(IPackageCatalogRemoveResourcePackagesResultVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PackagesRemoved(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

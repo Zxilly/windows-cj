@@ -560,8 +560,11 @@ public struct IPasswordVaultVtbl {
     public var Add: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Remove: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Retrieve: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllByResource: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllByUserName: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var RetrieveAll: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -624,18 +627,21 @@ public class IPasswordVault <: InterfaceWrapperBase & ComInterface {
         return __vt.Retrieve(__liveRaw, resource, userName, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllByResource(resource: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindAllByResource(__liveRaw, resource, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllByUserName(userName: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindAllByUserName(__liveRaw, userName, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RetrieveAll(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -717,6 +723,7 @@ public class IWebAccount <: InterfaceWrapperBase & ComInterface {
 public struct IWebAccount2Vtbl {
     public var base_: IWebAccountVtbl = IWebAccountVtbl()
     public var Id: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Storage_Streams == "on"]
     public var GetPictureAsync: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -771,6 +778,7 @@ public class IWebAccount2 <: InterfaceWrapperBase & ComInterface {
         return __vt.Id(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

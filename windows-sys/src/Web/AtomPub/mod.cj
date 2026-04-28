@@ -4,7 +4,6 @@ package windows_sys.Web.AtomPub
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_Web_Syndication == "on"]
 import windows_sys.Web.Syndication as Web_Syndication
 import windows_sys._impl_l0 as _impl_l0
 import windows_sys._impl_l1 as _impl_l1
@@ -17,8 +16,9 @@ public struct IResourceCollectionVtbl {
     @When[Windows_Web_Syndication == "on"]
     public var Title: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Uri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Web_Syndication == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Web_Syndication == "on"]
     public var Categories: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Accepts: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -76,13 +76,14 @@ public class IResourceCollection <: InterfaceWrapperBase & ComInterface {
         return __vt.Uri(__liveRaw, result__)
     }
 
-    @When[Windows_Web_Syndication == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Web_Syndication == "on"]
     public unsafe func Categories(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Categories(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Accepts(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -96,6 +97,7 @@ public struct IWorkspaceVtbl {
     public var base_: Web_Syndication.ISyndicationNodeVtbl = Web_Syndication.ISyndicationNodeVtbl()
     @When[Windows_Web_Syndication == "on"]
     public var Title: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on" && Windows_Web_Syndication == "on"]
     public var Collections: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -147,6 +149,7 @@ public class IWorkspace <: InterfaceWrapperBase & ComInterface {
         return __vt.Title(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on" && Windows_Web_Syndication == "on"]
     public unsafe func Collections(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -158,6 +161,7 @@ public class IWorkspace <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IServiceDocumentVtbl {
     public var base_: Web_Syndication.ISyndicationNodeVtbl = Web_Syndication.ISyndicationNodeVtbl()
+    @When[Windows_Foundation_Collections == "on" && Windows_Web_Syndication == "on"]
     public var Workspaces: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -202,6 +206,7 @@ public class IServiceDocument <: InterfaceWrapperBase & ComInterface {
         readVtbl<IServiceDocumentVtbl>(IServiceDocumentVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on" && Windows_Web_Syndication == "on"]
     public unsafe func Workspaces(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -358,7 +363,7 @@ public class IAtomPubClient <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IAtomPubClientFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Security_Credentials == "on"]
+    @When[Windows_Security_Credentials == "on" && Windows_Web_Syndication == "on"]
     public var CreateAtomPubClientWithCredentials: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -403,7 +408,7 @@ public class IAtomPubClientFactory <: InterfaceWrapperBase & ComInterface {
         readVtbl<IAtomPubClientFactoryVtbl>(IAtomPubClientFactoryVtbl())
     }
 
-    @When[Windows_Security_Credentials == "on"]
+    @When[Windows_Security_Credentials == "on" && Windows_Web_Syndication == "on"]
     public unsafe func CreateAtomPubClientWithCredentials(serverCredential: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

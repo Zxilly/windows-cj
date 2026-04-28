@@ -3,10 +3,8 @@ package windows_sys.Graphics.Printing3D
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Foundation_Numerics == "on"]
 import windows_sys.Foundation.Numerics as Foundation_Numerics
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_UI == "on"]
 import windows_sys.UI as UI
 import windows_sys._impl_l0 as _impl_l0
 import windows_sys._impl_l1 as _impl_l1
@@ -206,6 +204,7 @@ public class IPrinting3DColorMaterial2 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IPrinting3DCompositeMaterialVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Values: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -250,6 +249,7 @@ public class IPrinting3DCompositeMaterial <: InterfaceWrapperBase & ComInterface
         readVtbl<IPrinting3DCompositeMaterialVtbl>(IPrinting3DCompositeMaterialVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Values(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -352,7 +352,9 @@ public class IPrinting3DFaceReductionOptions <: InterfaceWrapperBase & ComInterf
 public struct IPrinting3DMeshVerificationResultVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var IsValid: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var NonmanifoldTriangles: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ReversedNormalTriangles: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -403,12 +405,14 @@ public class IPrinting3DMeshVerificationResult <: InterfaceWrapperBase & ComInte
         return __vt.IsValid(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func NonmanifoldTriangles(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.NonmanifoldTriangles(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReversedNormalTriangles(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -420,6 +424,7 @@ public class IPrinting3DMeshVerificationResult <: InterfaceWrapperBase & ComInte
 @C
 public struct IPrinting3DMultiplePropertyMaterialVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var MaterialIndices: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -464,6 +469,7 @@ public class IPrinting3DMultiplePropertyMaterial <: InterfaceWrapperBase & ComIn
         readVtbl<IPrinting3DMultiplePropertyMaterialVtbl>(IPrinting3DMultiplePropertyMaterialVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MaterialIndices(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1016,6 +1022,7 @@ public class IPrinting3DBaseMaterial <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IPrinting3DColorMaterialGroupVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Colors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var MaterialGroupId: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -1061,6 +1068,7 @@ public class IPrinting3DColorMaterialGroup <: InterfaceWrapperBase & ComInterfac
         readVtbl<IPrinting3DColorMaterialGroupVtbl>(IPrinting3DColorMaterialGroupVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Colors(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1078,8 +1086,10 @@ public class IPrinting3DColorMaterialGroup <: InterfaceWrapperBase & ComInterfac
 @C
 public struct IPrinting3DCompositeMaterialGroupVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Composites: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var MaterialGroupId: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var MaterialIndices: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1124,6 +1134,7 @@ public class IPrinting3DCompositeMaterialGroup <: InterfaceWrapperBase & ComInte
         readVtbl<IPrinting3DCompositeMaterialGroupVtbl>(IPrinting3DCompositeMaterialGroupVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Composites(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1136,6 +1147,7 @@ public class IPrinting3DCompositeMaterialGroup <: InterfaceWrapperBase & ComInte
         return __vt.MaterialGroupId(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MaterialIndices(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1327,7 +1339,9 @@ public class IPrinting3DModelTexture <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IPrinting3DMultiplePropertyMaterialGroupVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var MultipleProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var MaterialGroupIndices: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var MaterialGroupId: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -1373,12 +1387,14 @@ public class IPrinting3DMultiplePropertyMaterialGroup <: InterfaceWrapperBase & 
         readVtbl<IPrinting3DMultiplePropertyMaterialGroupVtbl>(IPrinting3DMultiplePropertyMaterialGroupVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MultipleProperties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.MultipleProperties(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MaterialGroupIndices(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1404,6 +1420,7 @@ public struct Printing3DBufferDescription {
 @C
 public struct IPrinting3DBaseMaterialGroupVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Bases: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var MaterialGroupId: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -1449,6 +1466,7 @@ public class IPrinting3DBaseMaterialGroup <: InterfaceWrapperBase & ComInterface
         readVtbl<IPrinting3DBaseMaterialGroupVtbl>(IPrinting3DBaseMaterialGroupVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Bases(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1839,6 +1857,7 @@ public class IPrinting3DTexture2CoordMaterialGroup2 <: InterfaceWrapperBase & Co
 @C
 public struct IPrinting3DTexture2CoordMaterialGroupVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Texture2Coords: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var MaterialGroupId: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -1884,6 +1903,7 @@ public class IPrinting3DTexture2CoordMaterialGroup <: InterfaceWrapperBase & Com
         readVtbl<IPrinting3DTexture2CoordMaterialGroupVtbl>(IPrinting3DTexture2CoordMaterialGroupVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Texture2Coords(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2354,6 +2374,7 @@ public struct IPrinting3D3MFPackageVtbl {
     public var SetModelPart: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Thumbnail: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetThumbnail: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Textures: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Storage_Streams == "on"]
     public var LoadModelFromPackageAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -2448,6 +2469,7 @@ public class IPrinting3D3MFPackage <: InterfaceWrapperBase & ComInterface {
         return __vt.SetThumbnail(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Textures(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2641,6 +2663,7 @@ public struct IPrinting3DComponentVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Mesh: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetMesh: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Components: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Thumbnail: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetThumbnail: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -2705,6 +2728,7 @@ public class IPrinting3DComponent <: InterfaceWrapperBase & ComInterface {
         return __vt.SetMesh(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Components(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2961,10 +2985,15 @@ public class IPrinting3DCompositeMaterialGroupFactory <: InterfaceWrapperBase & 
 @C
 public struct IPrinting3DMaterialVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var BaseGroups: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ColorGroups: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Texture2CoordGroups: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CompositeGroups: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var MultiplePropertyGroups: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -3009,30 +3038,35 @@ public class IPrinting3DMaterial <: InterfaceWrapperBase & ComInterface {
         readVtbl<IPrinting3DMaterialVtbl>(IPrinting3DMaterialVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func BaseGroups(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.BaseGroups(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ColorGroups(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.ColorGroups(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Texture2CoordGroups(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Texture2CoordGroups(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CompositeGroups(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CompositeGroups(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MultiplePropertyGroups(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3046,8 +3080,11 @@ public struct IPrinting3DModelVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Unit_: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var SetUnit: CFunc<(CPointer<Unit>, Int32) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Textures: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Meshes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Components: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Material: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetMaterial: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -3055,7 +3092,9 @@ public struct IPrinting3DModelVtbl {
     public var SetBuild: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Version: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetVersion: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var RequiredExtensions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Metadata: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var RepairAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Clone: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -3114,18 +3153,21 @@ public class IPrinting3DModel <: InterfaceWrapperBase & ComInterface {
         return __vt.SetUnit(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Textures(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Textures(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Meshes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.Meshes(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Components(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3168,12 +3210,14 @@ public class IPrinting3DModel <: InterfaceWrapperBase & ComInterface {
         return __vt.SetVersion(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RequiredExtensions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RequiredExtensions(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Metadata(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

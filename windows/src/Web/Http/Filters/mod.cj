@@ -6,6 +6,6 @@ public import windows._impl_l2.{HttpBaseProtocolFilter, HttpServerCustomValidati
 @When[Windows_Web_Http_Filters == "on"]
 public import windows._impl_l1.{HttpCacheControl, IHttpBaseProtocolFilter5, IHttpBaseProtocolFilter5Vtbl}
 @When[Windows_Web_Http_Filters == "on"]
-public import windows._impl_l0.{HttpCacheReadBehavior, HttpCacheReadBehavior_Default, HttpCacheReadBehavior_MostRecent, HttpCacheReadBehavior_NoCache, HttpCacheReadBehavior_OnlyFromCache, HttpCacheWriteBehavior, HttpCacheWriteBehavior_Default, HttpCacheWriteBehavior_NoCache, HttpCookieUsageBehavior, HttpCookieUsageBehavior_Default, HttpCookieUsageBehavior_NoCookies, IHttpBaseProtocolFilter2, IHttpBaseProtocolFilter2Vtbl, IHttpBaseProtocolFilter3, IHttpBaseProtocolFilter3Vtbl, IHttpCacheControl, IHttpCacheControlVtbl}
+public import windows._impl_l0.{HttpCacheReadBehavior, HttpCacheReadBehaviorAbi, HttpCacheReadBehavior_Default, HttpCacheReadBehavior_MostRecent, HttpCacheReadBehavior_NoCache, HttpCacheReadBehavior_OnlyFromCache, HttpCacheWriteBehavior, HttpCacheWriteBehaviorAbi, HttpCacheWriteBehavior_Default, HttpCacheWriteBehavior_NoCache, HttpCookieUsageBehavior, HttpCookieUsageBehaviorAbi, HttpCookieUsageBehavior_Default, HttpCookieUsageBehavior_NoCookies, IHttpBaseProtocolFilter2, IHttpBaseProtocolFilter2Vtbl, IHttpBaseProtocolFilter3, IHttpBaseProtocolFilter3Vtbl, IHttpCacheControl, IHttpCacheControlVtbl}
 @When[Windows_Web_Http_Filters == "on" && Windows_Web_Http == "on"]
 public import windows._impl_l2.{IHttpFilter_Impl, IHttpFilter_ImplErased}

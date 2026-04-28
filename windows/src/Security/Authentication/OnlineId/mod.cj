@@ -231,7 +231,10 @@ public type SignOutUserOperation = windows_future.IAsyncAction
 public struct IOnlineIdAuthenticatorVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var AuthenticateUserAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var AuthenticateUserAsyncAdvanced: CFunc<(CPointer<Unit>, CPointer<Unit>, CredentialPromptTypeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AuthenticateUserAsyncAdvanced: UIntNative = UIntNative(0)
     public var SignOutUserAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetApplicationId: CFunc<(CPointer<Unit>, GUID) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ApplicationId: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -313,6 +316,7 @@ public class IOnlineIdAuthenticator <: InterfaceWrapperBase & ComInterface & Run
         return UserAuthenticationOperation.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AuthenticateUserAsyncAdvanced(requests: windows_collections.IIterable<OnlineIdServiceTicketRequest>, credentialPromptType: CredentialPromptType): UserAuthenticationOperation {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -973,7 +977,10 @@ extend IOnlineIdSystemTicketResult <: windows_core.Interface<IOnlineIdSystemTick
 @C
 public struct IUserIdentityVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Tickets: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Tickets: UIntNative = UIntNative(0)
     public var Id: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SafeCustomerId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SignInName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1049,6 +1056,7 @@ public class IUserIdentity <: InterfaceWrapperBase & ComInterface & RuntimeName 
         readVtbl<IUserIdentityVtbl>(IUserIdentityVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Tickets(): windows_collections.IVectorView<OnlineIdServiceTicket> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1201,6 +1209,7 @@ public class OnlineIdAuthenticator <: InterfaceWrapperBase & ComInterface & wind
         return defaultInterface().AuthenticateUserAsync(request)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AuthenticateUserAsyncAdvanced(requests: windows_collections.IIterable<OnlineIdServiceTicketRequest>, credentialPromptType: CredentialPromptType): UserAuthenticationOperation {
         return defaultInterface().AuthenticateUserAsyncAdvanced(requests, credentialPromptType)
     }
@@ -1879,6 +1888,7 @@ public class UserIdentity <: InterfaceWrapperBase & ComInterface & windows_inter
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Tickets(): windows_collections.IVectorView<OnlineIdServiceTicket> {
         return defaultInterface().Tickets()
     }

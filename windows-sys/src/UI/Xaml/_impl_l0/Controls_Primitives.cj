@@ -6546,7 +6546,7 @@ public struct IScrollSnapPointsInfoVtbl {
     public var RemoveHorizontalSnapPointsChanged: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
     public var VerticalSnapPointsChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveVerticalSnapPointsChanged: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Controls == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Controls == "on"]
     public var GetIrregularSnapPoints: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_UI_Xaml_Controls == "on"]
     public var GetRegularSnapPoints: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<Float32>, CPointer<Float32>) -> Int32> = { _, _, _, _, _ => 0 }
@@ -6629,7 +6629,7 @@ public class IScrollSnapPointsInfo <: InterfaceWrapperBase & ComInterface {
         return __vt.RemoveVerticalSnapPointsChanged(__liveRaw, token)
     }
 
-    @When[Windows_UI_Xaml_Controls == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Controls == "on"]
     public unsafe func GetIrregularSnapPoints(orientation: Int32, alignment: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

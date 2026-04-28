@@ -916,9 +916,18 @@ public struct IPasswordVaultVtbl {
     public var Add: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Remove: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Retrieve: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllByResource: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllByResource: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllByUserName: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllByUserName: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var RetrieveAll: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RetrieveAll: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1007,6 +1016,7 @@ public class IPasswordVault <: InterfaceWrapperBase & ComInterface & RuntimeName
         return _impl_l0.PasswordCredential.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllByResource(resource: windows_core.HString): windows_collections.IVectorView<_impl_l0.PasswordCredential> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1015,6 +1025,7 @@ public class IPasswordVault <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_collections.IVectorView<_impl_l0.PasswordCredential>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllByUserName(userName: windows_core.HString): windows_collections.IVectorView<_impl_l0.PasswordCredential> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1023,6 +1034,7 @@ public class IPasswordVault <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_collections.IVectorView<_impl_l0.PasswordCredential>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RetrieveAll(): windows_collections.IVectorView<_impl_l0.PasswordCredential> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1248,7 +1260,10 @@ extend IWebAccount <: windows_core.Interface<IWebAccount> {}
 public struct IWebAccount2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Id: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     @When[Windows_Storage_Streams == "on"]
     public var GetPictureAsync: CFunc<(CPointer<Unit>, _impl_l0.WebAccountPictureSizeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams != "on"]
@@ -1343,6 +1358,7 @@ public class IWebAccount2 <: InterfaceWrapperBase & ComInterface & RuntimeName &
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2391,14 +2407,17 @@ public class PasswordVault <: InterfaceWrapperBase & ComInterface & windows_inte
         return defaultInterface().Retrieve(resource, userName)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllByResource(resource: windows_core.HString): windows_collections.IVectorView<_impl_l0.PasswordCredential> {
         return defaultInterface().FindAllByResource(resource)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllByUserName(userName: windows_core.HString): windows_collections.IVectorView<_impl_l0.PasswordCredential> {
         return defaultInterface().FindAllByUserName(userName)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RetrieveAll(): windows_collections.IVectorView<_impl_l0.PasswordCredential> {
         return defaultInterface().RetrieveAll()
     }

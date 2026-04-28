@@ -15,6 +15,7 @@ public class FeatureSpec {
     public var cfg: String = ""
     public var deps: ArrayList<String> = ArrayList<String>()
     public var links: ArrayList<String> = ArrayList<String>()
+    public var linkRoots: ArrayList<String> = ArrayList<String>()
 
     public init(name: String) {
         this.name = name
@@ -87,7 +88,7 @@ public func readWorkspaceManifest(path: String): WorkspaceManifest {
 
 public func readFeatureCatalog(featuresPath: String, linkOptionsPath: String): HashMap<String, FeatureSpec> {
     let catalog = parseFeatureManifest(featuresPath)
-    let linkCatalog = parseLinkManifest(linkOptionsPath)
+    let linkCatalog = parseLinkManifest(linkOptionsPath, manifestDir(linkOptionsPath))
 
     for (entry in linkCatalog) {
         let (name, linkSpec) = entry
@@ -96,13 +97,96 @@ public func readFeatureCatalog(featuresPath: String, linkOptionsPath: String): H
             continue
         }
         let spec = catalog.get(name).getOrThrow()
-        for (link in linkSpec.links) {
-            spec.links.add(link)
+        var i: Int64 = 0
+        while (i < Int64(linkSpec.links.size)) {
+            spec.links.add(linkSpec.links[i])
+            spec.linkRoots.add(linkSpec.linkRoots[i])
+            i += 1
         }
     }
 
     validateFeatureCatalog(catalog)
     return catalog
+}
+
+public func mergeFeatureCatalogs(catalogs: ArrayList<HashMap<String, FeatureSpec>>): HashMap<String, FeatureSpec> {
+    let merged = HashMap<String, FeatureSpec>()
+    for (catalog in catalogs) {
+        for (entry in catalog) {
+            let (name, spec) = entry
+            if (!merged.contains(name)) {
+                merged.add(name, cloneFeatureSpec(spec))
+                continue
+            }
+
+            let existing = merged.get(name).getOrThrow()
+            if (existing.cfg != spec.cfg) {
+                throw Exception("feature ${name} has conflicting cfg values: ${existing.cfg} and ${spec.cfg}")
+            }
+            addUniqueStrings(existing.deps, spec.deps)
+            addUniqueLinks(existing, spec)
+        }
+    }
+    validateFeatureCatalog(merged)
+    return merged
+}
+
+func cloneFeatureSpec(spec: FeatureSpec): FeatureSpec {
+    let clone = FeatureSpec(spec.name)
+    clone.cfg = spec.cfg
+    clone.deps = cloneStringList(spec.deps)
+    clone.links = cloneStringList(spec.links)
+    clone.linkRoots = cloneStringList(spec.linkRoots)
+    return clone
+}
+
+func cloneStringList(values: ArrayList<String>): ArrayList<String> {
+    let result = ArrayList<String>()
+    for (value in values) {
+        result.add(value)
+    }
+    return result
+}
+
+func addUniqueStrings(target: ArrayList<String>, values: ArrayList<String>): Unit {
+    for (value in values) {
+        if (!containsString(target, value)) {
+            target.add(value)
+        }
+    }
+}
+
+func addUniqueLinks(target: FeatureSpec, source: FeatureSpec): Unit {
+    var i: Int64 = 0
+    while (i < Int64(source.links.size)) {
+        let link = source.links[i]
+        let root = source.linkRoots[i]
+        if (!containsLink(target, link, root)) {
+            target.links.add(link)
+            target.linkRoots.add(root)
+        }
+        i += 1
+    }
+}
+
+func containsString(values: ArrayList<String>, target: String): Bool {
+    for (value in values) {
+        if (value == target) {
+            return true
+        }
+    }
+    return false
+}
+
+func containsLink(spec: FeatureSpec, link: String, root: String): Bool {
+    var i: Int64 = 0
+    while (i < Int64(spec.links.size)) {
+        if (spec.links[i] == link && spec.linkRoots[i] == root) {
+            return true
+        }
+        i += 1
+    }
+    return false
 }
 
 func validateFeatureCatalog(catalog: HashMap<String, FeatureSpec>): Unit {
@@ -154,7 +238,7 @@ func parseFeatureManifest(path: String): HashMap<String, FeatureSpec> {
     return catalog
 }
 
-func parseLinkManifest(path: String): HashMap<String, FeatureSpec> {
+func parseLinkManifest(path: String, catalogRoot: String): HashMap<String, FeatureSpec> {
     let catalog = HashMap<String, FeatureSpec>()
     let text = readText(path)
     let lines = splitLines(text)
@@ -183,6 +267,10 @@ func parseLinkManifest(path: String): HashMap<String, FeatureSpec> {
         if (startsWith(line, "link =")) {
             let (links, endIndex) = parseStringArrayWithContinuation(lines, i)
             current.links = links
+            current.linkRoots = ArrayList<String>()
+            for (link in links) {
+                current.linkRoots.add(catalogRoot)
+            }
             i = endIndex + 1
             continue
         }
@@ -398,12 +486,76 @@ func addUniquePath(values: ArrayList<String>, path: String): Unit {
     if (path.isEmpty()) {
         return
     }
+    var normalized = Path(path).normalize().toString()
+    try {
+        normalized = canonicalize(path).toString()
+    } catch (e: Exception) {
+        let _ = e
+    }
     for (value in values) {
-        if (value == path) {
+        if (value == normalized) {
             return
         }
     }
-    values.add(path)
+    values.add(normalized)
+}
+
+public func collectLocalPackageRoots(workspaceRoot: String, workspace: WorkspaceManifest): ArrayList<String> {
+    let roots = ArrayList<String>()
+    addUniquePath(roots, workspaceRoot)
+    for (root in workspace.localPackageRoots) {
+        addUniquePath(roots, root)
+    }
+
+    var i: Int64 = 0
+    while (i < Int64(roots.size)) {
+        let manifestPath = joinPath(roots[i], "cjpm.toml")
+        if (exists(manifestPath)) {
+            let dependencyRoots = parseDependencyRootsFromManifest(manifestPath)
+            for (dependencyRoot in dependencyRoots) {
+                addUniquePath(roots, dependencyRoot)
+            }
+        }
+        i += 1
+    }
+
+    return roots
+}
+
+func parseDependencyRootsFromManifest(path: String): ArrayList<String> {
+    let roots = ArrayList<String>()
+    let text = readText(path)
+    let lines = splitLines(text)
+    let root = manifestDir(path)
+    var activeTable = ""
+    var i: Int64 = 0
+
+    while (i < Int64(lines.size)) {
+        let line = trimAscii(lines[i])
+        if (line.isEmpty() || startsWith(line, "#")) {
+            i += 1
+            continue
+        }
+        if (line == "[dependencies]" || line == "[dev-dependencies]" || line == "[build-dependencies]") {
+            activeTable = "dependencies"
+            i += 1
+            continue
+        }
+        if (startsWith(line, "[")) {
+            activeTable = ""
+            i += 1
+            continue
+        }
+        if (activeTable == "dependencies") {
+            let dependencyRoot = parsePathDependencyRoot(line, root)
+            if (!dependencyRoot.isEmpty()) {
+                addUniquePath(roots, dependencyRoot)
+            }
+        }
+        i += 1
+    }
+
+    return roots
 }
 
 func manifestDir(path: String): String {
@@ -420,177 +572,4 @@ func manifestDir(path: String): String {
         return "."
     }
     return String.fromUtf8(bytes[0..lastSep])
-}
-
-
-public func collectCfgRoots(workspaceRoot: String, workspaceManifestPath: String): ArrayList<String> {
-    let roots = ArrayList<String>()
-    let seen = HashMap<String, Bool>()
-
-    appendCfgRoot(workspaceRoot, roots, seen)
-    let workspaceMembers = parseWorkspaceMemberRoots(workspaceRoot, workspaceManifestPath)
-    for (memberRoot in workspaceMembers) {
-        appendCfgRoot(memberRoot, roots, seen)
-    }
-
-    var i: Int64 = 0
-    while (i < Int64(roots.size)) {
-        let root = roots[i]
-        let manifestPath = joinPath(root, "cjpm.toml")
-        if (exists(manifestPath)) {
-            let dependencyRoots = parseLocalDependencyRoots(root, manifestPath)
-            for (dependencyRoot in dependencyRoots) {
-                appendCfgRoot(dependencyRoot, roots, seen)
-            }
-        }
-        i += 1
-    }
-
-    return roots
-}
-
-func parseWorkspaceMemberRoots(workspaceRoot: String, manifestPath: String): ArrayList<String> {
-    let roots = ArrayList<String>()
-    let text = readText(manifestPath)
-    let lines = splitLines(text)
-    var inWorkspace = false
-    var i: Int64 = 0
-
-    while (i < Int64(lines.size)) {
-        let line = trimAscii(lines[i])
-        if (line.isEmpty() || startsWith(line, "#")) {
-            i += 1
-            continue
-        }
-        if (line == "[workspace]") {
-            inWorkspace = true
-            i += 1
-            continue
-        }
-        if (startsWith(line, "[")) {
-            if (inWorkspace) {
-                break
-            }
-            i += 1
-            continue
-        }
-        if (inWorkspace && startsWith(line, "members =")) {
-            let (members, endIndex) = parseStringArrayWithContinuation(lines, i)
-            for (member in members) {
-                roots.add(joinPath(workspaceRoot, member))
-            }
-            i = endIndex + 1
-            continue
-        }
-        i += 1
-    }
-
-    return roots
-}
-
-func parseLocalDependencyRoots(packageRoot: String, manifestPath: String): ArrayList<String> {
-    let roots = ArrayList<String>()
-    let text = readText(manifestPath)
-    let lines = splitLines(text)
-    var inDependencySection = false
-    var i: Int64 = 0
-
-    while (i < Int64(lines.size)) {
-        let line = trimAscii(lines[i])
-        if (line.isEmpty() || startsWith(line, "#")) {
-            i += 1
-            continue
-        }
-        if (startsWith(line, "[")) {
-            inDependencySection = isDependencySection(line)
-            i += 1
-            continue
-        }
-        if (inDependencySection) {
-            let dependencyPath = extractDependencyPath(line)
-            if (!dependencyPath.isEmpty()) {
-                roots.add(resolveRelativePath(packageRoot, dependencyPath))
-            }
-        }
-        i += 1
-    }
-
-    return roots
-}
-
-func isDependencySection(line: String): Bool {
-    if (!startsWith(line, "[") || !endsWith(line, "]")) {
-        return false
-    }
-    let section = line[1..Int64(line.size) - 1]
-    return section == "dependencies" || section == "dev-dependencies" || section == "build-dependencies"
-}
-
-func extractDependencyPath(line: String): String {
-    let bytes = line.toArray()
-    var i: Int64 = 0
-    while ((i + 3) < Int64(bytes.size)) {
-        if (bytes[i] == b'p' && bytes[i + 1] == b'a' && bytes[i + 2] == b't' && bytes[i + 3] == b'h') {
-            var j = i + 4
-            while (j < Int64(bytes.size) && isAsciiSpace(bytes[j])) {
-                j += 1
-            }
-            if (j < Int64(bytes.size) && bytes[j] == b'=') {
-                j += 1
-                while (j < Int64(bytes.size) && isAsciiSpace(bytes[j])) {
-                    j += 1
-                }
-                if (j < Int64(bytes.size) && bytes[j] == b'"') {
-                    let start = j + 1
-                    j += 1
-                    while (j < Int64(bytes.size) && bytes[j] != b'"') {
-                        j += 1
-                    }
-                    if (j < Int64(bytes.size)) {
-                        return String.fromUtf8(bytes[start..j])
-                    }
-                }
-            }
-        }
-        i += 1
-    }
-    return ""
-}
-
-func resolveRelativePath(base: String, child: String): String {
-    if (isAbsolutePath(child)) {
-        return child
-    }
-    return joinPath(base, child)
-}
-
-func appendCfgRoot(root: String, roots: ArrayList<String>, seen: HashMap<String, Bool>): Unit {
-    let manifestPath = joinPath(root, "cjpm.toml")
-    if (!exists(manifestPath)) {
-        return
-    }
-    let normalizedRoot = normalizeRootPath(root)
-    if (seen.contains(normalizedRoot)) {
-        return
-    }
-    seen.add(normalizedRoot, true)
-    roots.add(normalizedRoot)
-}
-
-func normalizeRootPath(path: String): String {
-    return canonicalize(path).toString()
-}
-
-func isAbsolutePath(path: String): Bool {
-    if (path.isEmpty()) {
-        return false
-    }
-    let bytes = path.toArray()
-    if (bytes[0] == b'/' || bytes[0] == b'\\') {
-        return true
-    }
-    if (Int64(bytes.size) >= 2 && bytes[1] == b':') {
-        return true
-    }
-    return false
 }

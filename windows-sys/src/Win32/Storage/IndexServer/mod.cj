@@ -13,4 +13,11 @@ public import windows_sys.Win32._impl_l1.FULLPROPSPEC
 public import windows_sys.Win32._impl_l1.{IMAGE_INFO, IPhraseSink, IPhraseSinkVtbl}
 @When[Windows_Win32_Storage_IndexServer == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
 public import windows_sys.Win32._impl_l2.STAT_CHUNK
-
+@When[Windows_Win32_Storage_IndexServer == "on" && QUERY == "on" && Windows_Win32_Storage_IndexServer_BindIFilterFromStorage == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BindIFilterFromStorage
+@When[Windows_Win32_Storage_IndexServer == "on" && QUERY == "on" && Windows_Win32_Storage_IndexServer_BindIFilterFromStream == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BindIFilterFromStream
+@When[Windows_Win32_Storage_IndexServer == "on" && QUERY == "on" && Windows_Win32_Storage_IndexServer_LoadIFilter == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LoadIFilter
+@When[Windows_Win32_Storage_IndexServer == "on" && QUERY == "on" && Windows_Win32_Storage_IndexServer_LoadIFilterEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_LoadIFilterEx

@@ -7,4 +7,3 @@ public import windows_sys.Win32._impl_l0.{D2D1_2DAFFINETRANSFORM_INTERPOLATION_M
 public import windows_sys.Win32._impl_l1.{D2D1_BEZIER_SEGMENT, D2D1_GRADIENT_STOP, ID2D1SimplifiedGeometrySink, ID2D1SimplifiedGeometrySinkVtbl}
 @When[Windows_Win32_Graphics_Direct2D_Common == "on" && Windows_Win32_Graphics_Dxgi_Common == "on"]
 public import windows_sys.Win32._impl_l1.D2D1_PIXEL_FORMAT
-

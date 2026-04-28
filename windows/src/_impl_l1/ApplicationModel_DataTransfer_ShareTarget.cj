@@ -29,8 +29,14 @@ public struct IQuickLinkVtbl {
     public var SetThumbnail: UIntNative = UIntNative(0)
     public var Id: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetId: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedDataFormats: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedDataFormats: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedFileTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedFileTypes: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -143,6 +149,7 @@ public class IQuickLink <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedDataFormats(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -151,6 +158,7 @@ public class IQuickLink <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         return windows_collections.IVector<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedFileTypes(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -167,9 +175,9 @@ extend IQuickLink <: windows_core.Interface<IQuickLink> {}
 @C
 public struct IShareOperation3Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_ApplicationModel_Contacts == "on"]
+    @When[Windows_ApplicationModel_Contacts == "on" && Windows_Foundation_Collections == "on"]
     public var Contacts: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel_Contacts != "on"]
+    @When[Windows_ApplicationModel_Contacts != "on" || Windows_Foundation_Collections != "on"]
     public var Contacts: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -239,7 +247,7 @@ public class IShareOperation3 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         readVtbl<IShareOperation3Vtbl>(IShareOperation3Vtbl())
     }
 
-    @When[Windows_ApplicationModel_Contacts == "on"]
+    @When[Windows_ApplicationModel_Contacts == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func Contacts(): windows_collections.IVectorView<Contact> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -354,10 +362,12 @@ public class QuickLink <: InterfaceWrapperBase & ComInterface & windows_interfac
         defaultInterface().SetId(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedDataFormats(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().SupportedDataFormats()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedFileTypes(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().SupportedFileTypes()
     }

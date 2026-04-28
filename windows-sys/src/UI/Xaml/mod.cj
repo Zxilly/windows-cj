@@ -9,4 +9,3 @@ public import windows_sys.UI.Xaml._impl_l1.{DragEventHandler, IApplication, IApp
 public import windows_sys.UI.Xaml._impl_l0.{EnteredBackgroundEventHandler, LeavingBackgroundEventHandler, SuspendingEventHandler}
 @When[Windows_UI_Xaml == "on" && Windows_UI_Core == "on"]
 public import windows_sys.UI.Xaml._impl_l0.{WindowActivatedEventHandler, WindowClosedEventHandler, WindowSizeChangedEventHandler, WindowVisibilityChangedEventHandler}
-

@@ -762,6 +762,7 @@ public struct IAutomationPeerVtbl {
     public var GetAutomationControlType: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var GetAutomationId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetBoundingRectangle: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.Rect>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetChildren: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetClassName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetClickablePoint: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.Point>) -> Int32> = { _, _ => 0 }
@@ -889,6 +890,7 @@ public class IAutomationPeer <: InterfaceWrapperBase & ComInterface {
         return __vt.GetBoundingRectangle(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetChildren(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1084,10 +1086,12 @@ public struct IAutomationPeer3Vtbl {
     public var GetElementFromPoint: CFunc<(CPointer<Unit>, Foundation__impl_l0.Point, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetFocusedElement: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var ShowContextMenu: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetControlledPeers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAnnotations: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetParent: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
-    @When[Windows_UI_Xaml_Automation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Automation == "on"]
     public var RaiseTextEditTextChangedEvent: CFunc<(CPointer<Unit>, Int32, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     public var GetPositionInSet: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var GetSizeOfSet: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -1160,12 +1164,14 @@ public class IAutomationPeer3 <: InterfaceWrapperBase & ComInterface {
         return __vt.ShowContextMenu(__liveRaw)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetControlledPeers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetControlledPeers(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAnnotations(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1178,7 +1184,7 @@ public class IAutomationPeer3 <: InterfaceWrapperBase & ComInterface {
         return __vt.SetParent(__liveRaw, peer)
     }
 
-    @When[Windows_UI_Xaml_Automation == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml_Automation == "on"]
     public unsafe func RaiseTextEditTextChangedEvent(automationTextEditChangeType: Int32, changedData: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1838,6 +1844,7 @@ public struct IAutomationPeerOverridesVtbl {
     public var GetAutomationControlTypeCore: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var GetAutomationIdCore: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetBoundingRectangleCore: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.Rect>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetChildrenCore: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetClassNameCore: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetClickablePointCore: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.Point>) -> Int32> = { _, _ => 0 }
@@ -1938,6 +1945,7 @@ public class IAutomationPeerOverrides <: InterfaceWrapperBase & ComInterface {
         return __vt.GetBoundingRectangleCore(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetChildrenCore(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2070,6 +2078,7 @@ public class IAutomationPeerOverrides <: InterfaceWrapperBase & ComInterface {
 public struct IAutomationPeerOverrides2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var ShowContextMenuCore: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetControlledPeersCore: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -2120,6 +2129,7 @@ public class IAutomationPeerOverrides2 <: InterfaceWrapperBase & ComInterface {
         return __vt.ShowContextMenuCore(__liveRaw)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetControlledPeersCore(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2134,6 +2144,7 @@ public struct IAutomationPeerOverrides3Vtbl {
     public var NavigateCore: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetElementFromPointCore: CFunc<(CPointer<Unit>, Foundation__impl_l0.Point, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetFocusedElementCore: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAnnotationsCore: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetPositionInSetCore: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var GetSizeOfSetCore: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -2199,6 +2210,7 @@ public class IAutomationPeerOverrides3 <: InterfaceWrapperBase & ComInterface {
         return __vt.GetFocusedElementCore(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAnnotationsCore(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2293,8 +2305,11 @@ public struct IAutomationPeerOverrides5Vtbl {
     public var IsPeripheralCore: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var IsDataValidForFormCore: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var GetFullDescriptionCore: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetDescribedByCore: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetFlowsToCore: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetFlowsFromCore: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -2357,18 +2372,21 @@ public class IAutomationPeerOverrides5 <: InterfaceWrapperBase & ComInterface {
         return __vt.GetFullDescriptionCore(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetDescribedByCore(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetDescribedByCore(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetFlowsToCore(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetFlowsToCore(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetFlowsFromCore(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

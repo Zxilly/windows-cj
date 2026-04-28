@@ -4,7 +4,6 @@ package windows_sys.Media.SpeechSynthesis
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_Media == "on"]
 import windows_sys.Media as Media
 import windows_sys.Media._impl_l0 as Media__impl_l0
 import windows_sys._impl_l0 as _impl_l0
@@ -15,7 +14,7 @@ import windows_sys._impl_l1 as _impl_l1
 @C
 public struct ISpeechSynthesisStreamVtbl {
     public var base_: _impl_l1.IRandomAccessStreamWithContentTypeVtbl = _impl_l1.IRandomAccessStreamWithContentTypeVtbl()
-    @When[Windows_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media == "on"]
     public var Markers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -60,7 +59,7 @@ public class ISpeechSynthesisStream <: InterfaceWrapperBase & ComInterface {
         readVtbl<ISpeechSynthesisStreamVtbl>(ISpeechSynthesisStreamVtbl())
     }
 
-    @When[Windows_Media == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media == "on"]
     public unsafe func Markers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -469,6 +468,7 @@ public class IVoiceInformation <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IInstalledVoicesStaticVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AllVoices: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var DefaultVoice: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -514,6 +514,7 @@ public class IInstalledVoicesStatic <: InterfaceWrapperBase & ComInterface {
         readVtbl<IInstalledVoicesStaticVtbl>(IInstalledVoicesStaticVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AllVoices(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -586,7 +587,9 @@ public class IInstalledVoicesStatic2 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ISpeechSynthesizerVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Storage_Streams == "on"]
     public var SynthesizeTextToStreamAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Storage_Streams == "on"]
     public var SynthesizeSsmlToStreamAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var SetVoice: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Voice: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -633,12 +636,14 @@ public class ISpeechSynthesizer <: InterfaceWrapperBase & ComInterface {
         readVtbl<ISpeechSynthesizerVtbl>(ISpeechSynthesizerVtbl())
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func SynthesizeTextToStreamAsync(text: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SynthesizeTextToStreamAsync(__liveRaw, text, result__)
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func SynthesizeSsmlToStreamAsync(Ssml: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

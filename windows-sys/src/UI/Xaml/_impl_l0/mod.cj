@@ -3,7 +3,6 @@ package windows_sys.UI.Xaml._impl_l0
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Foundation_Numerics == "on"]
 import windows_sys.Foundation.Numerics as Foundation_Numerics
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
 @When[Windows_UI_Xaml_Interop == "on"]
@@ -3090,6 +3089,7 @@ public class IDependencyObject2 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IDependencyObjectCollectionFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateInstance: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -3134,6 +3134,7 @@ public class IDependencyObjectCollectionFactory <: InterfaceWrapperBase & ComInt
         readVtbl<IDependencyObjectCollectionFactoryVtbl>(IDependencyObjectCollectionFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -5926,7 +5927,9 @@ public struct IResourceDictionaryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Source: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetSource: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var MergedDictionaries: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ThemeDictionaries: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -5983,12 +5986,14 @@ public class IResourceDictionary <: InterfaceWrapperBase & ComInterface {
         return __vt.SetSource(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MergedDictionaries(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.MergedDictionaries(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ThemeDictionaries(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -7764,6 +7769,7 @@ public class IUIElementFactory <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IUIElementOverrides7Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetChildrenInTabFocusOrder: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_UI_Xaml_Input == "on"]
     public var OnProcessKeyboardAccelerators: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -7810,6 +7816,7 @@ public class IUIElementOverrides7 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IUIElementOverrides7Vtbl>(IUIElementOverrides7Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetChildrenInTabFocusOrder(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

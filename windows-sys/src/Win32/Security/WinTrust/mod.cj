@@ -21,4 +21,39 @@ public import windows_sys.Win32._impl_l1.{CRYPT_REGISTER_ACTIONID, PFN_ALLOCANDF
 public import windows_sys.Win32._impl_l2.PROVDATA_SIP
 @When[Windows_Win32_Security_WinTrust == "on" && (Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on")]
 public import windows_sys.Win32._impl_l2.WTD_GENERIC_CHAIN_POLICY_DATA
-
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_OpenPersonalTrustDBDialog == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OpenPersonalTrustDBDialog
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_OpenPersonalTrustDBDialogEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_OpenPersonalTrustDBDialogEx
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WTHelperCertCheckValidSignature == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WTHelperCertCheckValidSignature
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WTHelperCertIsSelfSigned == "on" && Windows_Win32_Security_Cryptography == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WTHelperCertIsSelfSigned
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WTHelperGetProvCertFromChain == "on" && Windows_Win32_Security_Cryptography == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WTHelperGetProvCertFromChain
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WTHelperGetProvPrivateDataFromChain == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WTHelperGetProvPrivateDataFromChain
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WTHelperGetProvSignerFromChain == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WTHelperGetProvSignerFromChain
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WTHelperProvDataFromStateData == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WTHelperProvDataFromStateData
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WinVerifyTrust == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WinVerifyTrust
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WinVerifyTrustEx == "on" && Windows_Win32_Security_Cryptography == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WinVerifyTrustEx
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WintrustAddActionID == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WintrustAddActionID
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WintrustAddDefaultForUsage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WintrustAddDefaultForUsage
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WintrustGetDefaultForUsage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WintrustGetDefaultForUsage
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WintrustGetRegPolicyFlags == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WintrustGetRegPolicyFlags
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WintrustLoadFunctionPointers == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Catalog == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on" && Windows_Win32_Security_Cryptography_Sip == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WintrustLoadFunctionPointers
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WintrustRemoveActionID == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WintrustRemoveActionID
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WintrustSetDefaultIncludePEPageHashes == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WintrustSetDefaultIncludePEPageHashes
+@When[Windows_Win32_Security_WinTrust == "on" && WINTRUST == "on" && Windows_Win32_Security_WinTrust_WintrustSetRegPolicyFlags == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WintrustSetRegPolicyFlags

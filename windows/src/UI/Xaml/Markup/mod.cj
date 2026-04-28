@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_UI_Xaml_Interop == "on"]
 import windows.UI.Xaml.Interop as UI_Xaml_Interop
 import windows.UI.Xaml._impl_l0 as UI_Xaml__impl_l0
 import windows.UI.Xaml._impl_l1 as UI_Xaml__impl_l1
@@ -2198,9 +2196,9 @@ extend IMarkupExtensionFactory <: windows_core.Interface<IMarkupExtensionFactory
 @C
 public struct IXamlBinaryWriterStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var Write: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<XamlBinaryWriterErrorInformationAbi>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
     public var Write: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -2270,7 +2268,7 @@ public class IXamlBinaryWriterStatics <: InterfaceWrapperBase & ComInterface & R
         readVtbl<IXamlBinaryWriterStaticsVtbl>(IXamlBinaryWriterStaticsVtbl())
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func Write(inputStreams: windows_collections.IVector<_impl_l1.IRandomAccessStream>, outputStreams: windows_collections.IVector<_impl_l1.IRandomAccessStream>, xamlMetadataProvider: IXamlMetadataProvider): XamlBinaryWriterErrorInformation {
         let v = vtbl()
         var result__ = XamlBinaryWriterErrorInformationAbi()
@@ -4224,7 +4222,7 @@ public class XamlBinaryWriter <: InterfaceWrapperBase & ComInterface & windows_i
         }
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public static unsafe func Write(inputStreams: windows_collections.IVector<_impl_l1.IRandomAccessStream>, outputStreams: windows_collections.IVector<_impl_l1.IRandomAccessStream>, xamlMetadataProvider: IXamlMetadataProvider): XamlBinaryWriterErrorInformation {
         var result__: Option<XamlBinaryWriterErrorInformation> = Option<XamlBinaryWriterErrorInformation>.None
         try (factory__ = windows_core.factory<XamlBinaryWriter, IXamlBinaryWriterStatics>().unwrap()) {

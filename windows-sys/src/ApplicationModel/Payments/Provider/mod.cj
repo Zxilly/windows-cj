@@ -3,7 +3,6 @@ package windows_sys.ApplicationModel.Payments.Provider
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_ApplicationModel_Payments == "on"]
 import windows_sys.ApplicationModel.Payments as ApplicationModel_Payments
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
 
@@ -78,6 +77,7 @@ public class IPaymentAppCanMakePaymentTriggerDetails <: InterfaceWrapperBase & C
 @C
 public struct IPaymentAppManagerVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var RegisterAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var UnregisterAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -123,6 +123,7 @@ public class IPaymentAppManager <: InterfaceWrapperBase & ComInterface {
         readVtbl<IPaymentAppManagerVtbl>(IPaymentAppManagerVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RegisterAsync(supportedPaymentMethodIds: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

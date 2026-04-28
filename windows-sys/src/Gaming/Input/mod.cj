@@ -3,12 +3,9 @@ package windows_sys.Gaming.Input
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Devices_Haptics == "on"]
 import windows_sys.Devices.Haptics as Devices_Haptics
-@When[Windows_Devices_Power == "on"]
 import windows_sys.Devices.Power as Devices_Power
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_Gaming_Input_ForceFeedback == "on"]
 import windows_sys.Gaming.Input.ForceFeedback as Gaming_Input_ForceFeedback
 import windows_sys._impl_l1 as _impl_l1
 
@@ -1286,7 +1283,7 @@ public struct IRawGameControllerVtbl {
     public var base_: IGameControllerVtbl = IGameControllerVtbl()
     public var AxisCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var ButtonCount: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Gaming_Input_ForceFeedback == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Gaming_Input_ForceFeedback == "on"]
     public var ForceFeedbackMotors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var HardwareProductId: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
     public var HardwareVendorId: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => 0 }
@@ -1349,7 +1346,7 @@ public class IRawGameController <: InterfaceWrapperBase & ComInterface {
         return __vt.ButtonCount(__liveRaw, result__)
     }
 
-    @When[Windows_Gaming_Input_ForceFeedback == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Gaming_Input_ForceFeedback == "on"]
     public unsafe func ForceFeedbackMotors(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1397,7 +1394,7 @@ public class IRawGameController <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IRawGameController2Vtbl {
     public var base_: IRawGameControllerVtbl = IRawGameControllerVtbl()
-    @When[Windows_Devices_Haptics == "on"]
+    @When[Windows_Devices_Haptics == "on" && Windows_Foundation_Collections == "on"]
     public var SimpleHapticsControllers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var NonRoamableId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var DisplayName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -1444,7 +1441,7 @@ public class IRawGameController2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IRawGameController2Vtbl>(IRawGameController2Vtbl())
     }
 
-    @When[Windows_Devices_Haptics == "on"]
+    @When[Windows_Devices_Haptics == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func SimpleHapticsControllers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1672,6 +1669,7 @@ public struct IArcadeStickStaticsVtbl {
     public var RemoveArcadeStickAdded: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
     public var ArcadeStickRemoved: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveArcadeStickRemoved: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var ArcadeSticks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1740,6 +1738,7 @@ public class IArcadeStickStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.RemoveArcadeStickRemoved(__liveRaw, token)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ArcadeSticks(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1810,6 +1809,7 @@ public struct IFlightStickStaticsVtbl {
     public var RemoveFlightStickAdded: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
     public var FlightStickRemoved: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveFlightStickRemoved: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FlightSticks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var FromGameController: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -1879,6 +1879,7 @@ public class IFlightStickStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.RemoveFlightStickRemoved(__liveRaw, token)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FlightSticks(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1900,6 +1901,7 @@ public struct IGamepadStaticsVtbl {
     public var RemoveGamepadAdded: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
     public var GamepadRemoved: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveGamepadRemoved: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Gamepads: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1968,6 +1970,7 @@ public class IGamepadStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.RemoveGamepadRemoved(__liveRaw, token)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Gamepads(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2038,6 +2041,7 @@ public struct IRacingWheelStaticsVtbl {
     public var RemoveRacingWheelAdded: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
     public var RacingWheelRemoved: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveRacingWheelRemoved: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var RacingWheels: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -2106,6 +2110,7 @@ public class IRacingWheelStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.RemoveRacingWheelRemoved(__liveRaw, token)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RacingWheels(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2176,6 +2181,7 @@ public struct IRawGameControllerStaticsVtbl {
     public var RemoveRawGameControllerAdded: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
     public var RawGameControllerRemoved: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveRawGameControllerRemoved: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var RawGameControllers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var FromGameController: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -2245,6 +2251,7 @@ public class IRawGameControllerStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.RemoveRawGameControllerRemoved(__liveRaw, token)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RawGameControllers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2266,6 +2273,7 @@ public struct IUINavigationControllerStaticsVtbl {
     public var RemoveUINavigationControllerAdded: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
     public var UINavigationControllerRemoved: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveUINavigationControllerRemoved: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var UINavigationControllers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -2334,6 +2342,7 @@ public class IUINavigationControllerStatics <: InterfaceWrapperBase & ComInterfa
         return __vt.RemoveUINavigationControllerRemoved(__liveRaw, token)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UINavigationControllers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

@@ -3,7 +3,6 @@ package windows_sys.Win32.UI.Accessibility
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
@@ -16055,174 +16054,1249 @@ public class IUIAutomationTreeWalker <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[OLEACC == "on"]
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_AccNotifyTouchInteraction == "on"]
 foreign {
     func AccNotifyTouchInteraction(hwndApp: CPointer<Unit>, hwndTarget: CPointer<Unit>, ptTarget: Win32_Foundation.POINT): Int32
-    func AccSetRunningUtilityState(hwndApp: CPointer<Unit>, dwUtilityStateMask: UInt32, dwUtilityState: UInt32): Int32
-    func AccessibleObjectFromWindow(hwnd: CPointer<Unit>, dwId: UInt32, riid: CPointer<GUID>, ppvObject: CPointer<CPointer<Unit>>): Int32
-    func CreateStdAccessibleObject(hwnd: CPointer<Unit>, idObject: Int32, riid: CPointer<GUID>, ppvObject: CPointer<CPointer<Unit>>): Int32
-    func CreateStdAccessibleProxyA(hwnd: CPointer<Unit>, pClassName: CPointer<UInt8>, idObject: Int32, riid: CPointer<GUID>, ppvObject: CPointer<CPointer<Unit>>): Int32
-    func CreateStdAccessibleProxyW(hwnd: CPointer<Unit>, pClassName: CPointer<UInt16>, idObject: Int32, riid: CPointer<GUID>, ppvObject: CPointer<CPointer<Unit>>): Int32
-    func GetOleaccVersionInfo(pVer: CPointer<UInt32>, pBuild: CPointer<UInt32>): Unit
-    // param-hint: lpszRole len=param[2] optional
-    // pinvoke-hint: SetLastError
-    func GetRoleTextA(lRole: UInt32, lpszRole: CPointer<UInt8>, cchRoleMax: UInt32): UInt32
-    // param-hint: lpszRole len=param[2] optional
-    // pinvoke-hint: SetLastError
-    func GetRoleTextW(lRole: UInt32, lpszRole: CPointer<UInt16>, cchRoleMax: UInt32): UInt32
-    // param-hint: lpszState len=param[2] optional
-    // pinvoke-hint: SetLastError
-    func GetStateTextA(lStateBit: UInt32, lpszState: CPointer<UInt8>, cchState: UInt32): UInt32
-    // param-hint: lpszState len=param[2] optional
-    // pinvoke-hint: SetLastError
-    func GetStateTextW(lStateBit: UInt32, lpszState: CPointer<UInt16>, cchState: UInt32): UInt32
-    func ObjectFromLresult(lResult: IntNative, riid: CPointer<GUID>, wParam: UIntNative, ppvObject: CPointer<CPointer<Unit>>): Int32
-    // param-hint: phwnd optional
-    func WindowFromAccessibleObject(param0: CPointer<Unit>, phwnd: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[OLEACC == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on")]
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_AccNotifyTouchInteraction == "on"]
+public unsafe func Windows_AccNotifyTouchInteraction(hwndApp: CPointer<Unit>, hwndTarget: CPointer<Unit>, ptTarget: Win32_Foundation.POINT): Int32 {
+    return AccNotifyTouchInteraction(hwndApp, hwndTarget, ptTarget)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_AccSetRunningUtilityState == "on"]
+foreign {
+    func AccSetRunningUtilityState(hwndApp: CPointer<Unit>, dwUtilityStateMask: UInt32, dwUtilityState: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_AccSetRunningUtilityState == "on"]
+public unsafe func Windows_AccSetRunningUtilityState(hwndApp: CPointer<Unit>, dwUtilityStateMask: UInt32, dwUtilityState: UInt32): Int32 {
+    return AccSetRunningUtilityState(hwndApp, dwUtilityStateMask, dwUtilityState)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_AccessibleChildren == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
 foreign {
     // param-hint: rgvarChildren len=param[2]
     func AccessibleChildren(paccContainer: CPointer<Unit>, iChildStart: Int32, cChildren: Int32, rgvarChildren: CPointer<Win32__impl_l2.VARIANT>, pcObtained: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_AccessibleChildren == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_AccessibleChildren(paccContainer: CPointer<Unit>, iChildStart: Int32, cChildren: Int32, rgvarChildren: CPointer<Win32__impl_l2.VARIANT>, pcObtained: CPointer<Int32>): Int32 {
+    return AccessibleChildren(paccContainer, iChildStart, cChildren, rgvarChildren, pcObtained)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_AccessibleObjectFromEvent == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
     func AccessibleObjectFromEvent(hwnd: CPointer<Unit>, dwId: UInt32, dwChildId: UInt32, ppacc: CPointer<CPointer<Unit>>, pvarChild: CPointer<Win32__impl_l2.VARIANT>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_AccessibleObjectFromEvent == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_AccessibleObjectFromEvent(hwnd: CPointer<Unit>, dwId: UInt32, dwChildId: UInt32, ppacc: CPointer<CPointer<Unit>>, pvarChild: CPointer<Win32__impl_l2.VARIANT>): Int32 {
+    return AccessibleObjectFromEvent(hwnd, dwId, dwChildId, ppacc, pvarChild)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_AccessibleObjectFromPoint == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
     func AccessibleObjectFromPoint(ptScreen: Win32_Foundation.POINT, ppacc: CPointer<CPointer<Unit>>, pvarChild: CPointer<Win32__impl_l2.VARIANT>): Int32
 }
 
-@When[OLEACC == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_AccessibleObjectFromPoint == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_AccessibleObjectFromPoint(ptScreen: Win32_Foundation.POINT, ppacc: CPointer<CPointer<Unit>>, pvarChild: CPointer<Win32__impl_l2.VARIANT>): Int32 {
+    return AccessibleObjectFromPoint(ptScreen, ppacc, pvarChild)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_AccessibleObjectFromWindow == "on"]
+foreign {
+    func AccessibleObjectFromWindow(hwnd: CPointer<Unit>, dwId: UInt32, riid: CPointer<GUID>, ppvObject: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_AccessibleObjectFromWindow == "on"]
+public unsafe func Windows_AccessibleObjectFromWindow(hwnd: CPointer<Unit>, dwId: UInt32, riid: CPointer<GUID>, ppvObject: CPointer<CPointer<Unit>>): Int32 {
+    return AccessibleObjectFromWindow(hwnd, dwId, riid, ppvObject)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_CreateStdAccessibleObject == "on"]
+foreign {
+    func CreateStdAccessibleObject(hwnd: CPointer<Unit>, idObject: Int32, riid: CPointer<GUID>, ppvObject: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_CreateStdAccessibleObject == "on"]
+public unsafe func Windows_CreateStdAccessibleObject(hwnd: CPointer<Unit>, idObject: Int32, riid: CPointer<GUID>, ppvObject: CPointer<CPointer<Unit>>): Int32 {
+    return CreateStdAccessibleObject(hwnd, idObject, riid, ppvObject)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_CreateStdAccessibleProxyA == "on"]
+foreign {
+    func CreateStdAccessibleProxyA(hwnd: CPointer<Unit>, pClassName: CPointer<UInt8>, idObject: Int32, riid: CPointer<GUID>, ppvObject: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_CreateStdAccessibleProxyA == "on"]
+public unsafe func Windows_CreateStdAccessibleProxyA(hwnd: CPointer<Unit>, pClassName: CPointer<UInt8>, idObject: Int32, riid: CPointer<GUID>, ppvObject: CPointer<CPointer<Unit>>): Int32 {
+    return CreateStdAccessibleProxyA(hwnd, pClassName, idObject, riid, ppvObject)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_CreateStdAccessibleProxyW == "on"]
+foreign {
+    func CreateStdAccessibleProxyW(hwnd: CPointer<Unit>, pClassName: CPointer<UInt16>, idObject: Int32, riid: CPointer<GUID>, ppvObject: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_CreateStdAccessibleProxyW == "on"]
+public unsafe func Windows_CreateStdAccessibleProxyW(hwnd: CPointer<Unit>, pClassName: CPointer<UInt16>, idObject: Int32, riid: CPointer<GUID>, ppvObject: CPointer<CPointer<Unit>>): Int32 {
+    return CreateStdAccessibleProxyW(hwnd, pClassName, idObject, riid, ppvObject)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_GetOleaccVersionInfo == "on"]
+foreign {
+    func GetOleaccVersionInfo(pVer: CPointer<UInt32>, pBuild: CPointer<UInt32>): Unit
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_GetOleaccVersionInfo == "on"]
+public unsafe func Windows_GetOleaccVersionInfo(pVer: CPointer<UInt32>, pBuild: CPointer<UInt32>): Unit {
+    GetOleaccVersionInfo(pVer, pBuild)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_GetRoleTextA == "on"]
+foreign {
+    // param-hint: lpszRole len=param[2] optional
+    // pinvoke-hint: SetLastError
+    func GetRoleTextA(lRole: UInt32, lpszRole: CPointer<UInt8>, cchRoleMax: UInt32): UInt32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_GetRoleTextA == "on"]
+public unsafe func Windows_GetRoleTextA(lRole: UInt32, lpszRole: CPointer<UInt8>, cchRoleMax: UInt32): UInt32 {
+    return GetRoleTextA(lRole, lpszRole, cchRoleMax)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_GetRoleTextW == "on"]
+foreign {
+    // param-hint: lpszRole len=param[2] optional
+    // pinvoke-hint: SetLastError
+    func GetRoleTextW(lRole: UInt32, lpszRole: CPointer<UInt16>, cchRoleMax: UInt32): UInt32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_GetRoleTextW == "on"]
+public unsafe func Windows_GetRoleTextW(lRole: UInt32, lpszRole: CPointer<UInt16>, cchRoleMax: UInt32): UInt32 {
+    return GetRoleTextW(lRole, lpszRole, cchRoleMax)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_GetStateTextA == "on"]
+foreign {
+    // param-hint: lpszState len=param[2] optional
+    // pinvoke-hint: SetLastError
+    func GetStateTextA(lStateBit: UInt32, lpszState: CPointer<UInt8>, cchState: UInt32): UInt32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_GetStateTextA == "on"]
+public unsafe func Windows_GetStateTextA(lStateBit: UInt32, lpszState: CPointer<UInt8>, cchState: UInt32): UInt32 {
+    return GetStateTextA(lStateBit, lpszState, cchState)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_GetStateTextW == "on"]
+foreign {
+    // param-hint: lpszState len=param[2] optional
+    // pinvoke-hint: SetLastError
+    func GetStateTextW(lStateBit: UInt32, lpszState: CPointer<UInt16>, cchState: UInt32): UInt32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_GetStateTextW == "on"]
+public unsafe func Windows_GetStateTextW(lStateBit: UInt32, lpszState: CPointer<UInt16>, cchState: UInt32): UInt32 {
+    return GetStateTextW(lStateBit, lpszState, cchState)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_LresultFromObject == "on" && Windows_Win32_System_Com == "on"]
 foreign {
     func LresultFromObject(riid: CPointer<GUID>, wParam: UIntNative, punk: CPointer<Unit>): IntNative
 }
 
-@When[UIAUTOMATIONCORE == "on"]
-foreign {
-    func DockPattern_SetDockPosition(hobj: HUIAPATTERNOBJECT, dockPosition: Int32): Int32
-    func ExpandCollapsePattern_Collapse(hobj: HUIAPATTERNOBJECT): Int32
-    func ExpandCollapsePattern_Expand(hobj: HUIAPATTERNOBJECT): Int32
-    func GridPattern_GetItem(hobj: HUIAPATTERNOBJECT, row: Int32, column: Int32, pResult: CPointer<HUIANODE>): Int32
-    func InvokePattern_Invoke(hobj: HUIAPATTERNOBJECT): Int32
-    func LegacyIAccessiblePattern_DoDefaultAction(hobj: HUIAPATTERNOBJECT): Int32
-    func LegacyIAccessiblePattern_GetIAccessible(hobj: HUIAPATTERNOBJECT, pAccessible: CPointer<CPointer<Unit>>): Int32
-    func LegacyIAccessiblePattern_Select(hobj: HUIAPATTERNOBJECT, flagsSelect: Int32): Int32
-    func LegacyIAccessiblePattern_SetValue(hobj: HUIAPATTERNOBJECT, szValue: CPointer<UInt16>): Int32
-    func MultipleViewPattern_GetViewName(hobj: HUIAPATTERNOBJECT, viewId: Int32, ppStr: CPointer<CPointer<UInt16>>): Int32
-    func MultipleViewPattern_SetCurrentView(hobj: HUIAPATTERNOBJECT, viewId: Int32): Int32
-    func RangeValuePattern_SetValue(hobj: HUIAPATTERNOBJECT, val: Float64): Int32
-    func ScrollItemPattern_ScrollIntoView(hobj: HUIAPATTERNOBJECT): Int32
-    func ScrollPattern_Scroll(hobj: HUIAPATTERNOBJECT, horizontalAmount: Int32, verticalAmount: Int32): Int32
-    func ScrollPattern_SetScrollPercent(hobj: HUIAPATTERNOBJECT, horizontalPercent: Float64, verticalPercent: Float64): Int32
-    func SelectionItemPattern_AddToSelection(hobj: HUIAPATTERNOBJECT): Int32
-    func SelectionItemPattern_RemoveFromSelection(hobj: HUIAPATTERNOBJECT): Int32
-    func SelectionItemPattern_Select(hobj: HUIAPATTERNOBJECT): Int32
-    func SynchronizedInputPattern_Cancel(hobj: HUIAPATTERNOBJECT): Int32
-    func SynchronizedInputPattern_StartListening(hobj: HUIAPATTERNOBJECT, inputType: Int32): Int32
-    func TextPattern_RangeFromChild(hobj: HUIAPATTERNOBJECT, hnodeChild: HUIANODE, pRetVal: CPointer<HUIATEXTRANGE>): Int32
-    func TextPattern_RangeFromPoint(hobj: HUIAPATTERNOBJECT, point: UiaPoint, pRetVal: CPointer<HUIATEXTRANGE>): Int32
-    func TextPattern_get_DocumentRange(hobj: HUIAPATTERNOBJECT, pRetVal: CPointer<HUIATEXTRANGE>): Int32
-    func TextPattern_get_SupportedTextSelection(hobj: HUIAPATTERNOBJECT, pRetVal: CPointer<Int32>): Int32
-    func TextRange_AddToSelection(hobj: HUIATEXTRANGE): Int32
-    func TextRange_Clone(hobj: HUIATEXTRANGE, pRetVal: CPointer<HUIATEXTRANGE>): Int32
-    func TextRange_Compare(hobj: HUIATEXTRANGE, range: HUIATEXTRANGE, pRetVal: CPointer<Int32>): Int32
-    func TextRange_CompareEndpoints(hobj: HUIATEXTRANGE, endpoint: Int32, targetRange: HUIATEXTRANGE, targetEndpoint: Int32, pRetVal: CPointer<Int32>): Int32
-    func TextRange_ExpandToEnclosingUnit(hobj: HUIATEXTRANGE, unit: Int32): Int32
-    func TextRange_FindText(hobj: HUIATEXTRANGE, text: CPointer<UInt16>, backward: Int32, ignoreCase: Int32, pRetVal: CPointer<HUIATEXTRANGE>): Int32
-    func TextRange_GetEnclosingElement(hobj: HUIATEXTRANGE, pRetVal: CPointer<HUIANODE>): Int32
-    func TextRange_GetText(hobj: HUIATEXTRANGE, maxLength: Int32, pRetVal: CPointer<CPointer<UInt16>>): Int32
-    func TextRange_Move(hobj: HUIATEXTRANGE, unit: Int32, count: Int32, pRetVal: CPointer<Int32>): Int32
-    func TextRange_MoveEndpointByRange(hobj: HUIATEXTRANGE, endpoint: Int32, targetRange: HUIATEXTRANGE, targetEndpoint: Int32): Int32
-    func TextRange_MoveEndpointByUnit(hobj: HUIATEXTRANGE, endpoint: Int32, unit: Int32, count: Int32, pRetVal: CPointer<Int32>): Int32
-    func TextRange_RemoveFromSelection(hobj: HUIATEXTRANGE): Int32
-    func TextRange_ScrollIntoView(hobj: HUIATEXTRANGE, alignToTop: Int32): Int32
-    func TextRange_Select(hobj: HUIATEXTRANGE): Int32
-    func TogglePattern_Toggle(hobj: HUIAPATTERNOBJECT): Int32
-    func TransformPattern_Move(hobj: HUIAPATTERNOBJECT, x: Float64, y: Float64): Int32
-    func TransformPattern_Resize(hobj: HUIAPATTERNOBJECT, width: Float64, height: Float64): Int32
-    func TransformPattern_Rotate(hobj: HUIAPATTERNOBJECT, degrees: Float64): Int32
-    func UiaClientsAreListening(): Int32
-    func UiaDisconnectAllProviders(): Int32
-    func UiaDisconnectProvider(pProvider: CPointer<Unit>): Int32
-    func UiaEventAddWindow(hEvent: HUIAEVENT, hwnd: CPointer<Unit>): Int32
-    func UiaEventRemoveWindow(hEvent: HUIAEVENT, hwnd: CPointer<Unit>): Int32
-    func UiaGetErrorDescription(pDescription: CPointer<CPointer<UInt16>>): Int32
-    func UiaGetPatternProvider(hnode: HUIANODE, patternId: Int32, phobj: CPointer<HUIAPATTERNOBJECT>): Int32
-    func UiaGetRootNode(phnode: CPointer<HUIANODE>): Int32
-    func UiaHasServerSideProvider(hwnd: CPointer<Unit>): Int32
-    func UiaHostProviderFromHwnd(hwnd: CPointer<Unit>, ppProvider: CPointer<CPointer<Unit>>): Int32
-    func UiaLookupId(type_: Int32, pGuid: CPointer<GUID>): Int32
-    func UiaNodeFromHandle(hwnd: CPointer<Unit>, phnode: CPointer<HUIANODE>): Int32
-    func UiaNodeFromProvider(pProvider: CPointer<Unit>, phnode: CPointer<HUIANODE>): Int32
-    func UiaNodeRelease(hnode: HUIANODE): Int32
-    func UiaPatternRelease(hobj: HUIAPATTERNOBJECT): Int32
-    func UiaProviderForNonClient(hwnd: CPointer<Unit>, idObject: Int32, idChild: Int32, ppProvider: CPointer<CPointer<Unit>>): Int32
-    func UiaProviderFromIAccessible(pAccessible: CPointer<Unit>, idChild: Int32, dwFlags: UInt32, ppProvider: CPointer<CPointer<Unit>>): Int32
-    // param-hint: textRange optional
-    func UiaRaiseActiveTextPositionChangedEvent(provider: CPointer<Unit>, textRange: CPointer<Unit>): Int32
-    func UiaRaiseAsyncContentLoadedEvent(pProvider: CPointer<Unit>, asyncContentLoadedState: Int32, percentComplete: Float64): Int32
-    func UiaRaiseAutomationEvent(pProvider: CPointer<Unit>, id: Int32): Int32
-    // param-hint: displayString optional
-    func UiaRaiseNotificationEvent(provider: CPointer<Unit>, notificationKind: Int32, notificationProcessing: Int32, displayString: CPointer<UInt16>, activityId: CPointer<UInt16>): Int32
-    func UiaRaiseStructureChangedEvent(pProvider: CPointer<Unit>, structureChangeType: Int32, pRuntimeId: CPointer<Int32>, cRuntimeIdLen: Int32): Int32
-    func UiaRemoveEvent(hEvent: HUIAEVENT): Int32
-    func UiaReturnRawElementProvider(hwnd: CPointer<Unit>, wParam: UIntNative, lParam: IntNative, el: CPointer<Unit>): IntNative
-    func UiaSetFocus(hnode: HUIANODE): Int32
-    func UiaTextRangeRelease(hobj: HUIATEXTRANGE): Int32
-    func ValuePattern_SetValue(hobj: HUIAPATTERNOBJECT, pVal: CPointer<UInt16>): Int32
-    func VirtualizedItemPattern_Realize(hobj: HUIAPATTERNOBJECT): Int32
-    func WindowPattern_Close(hobj: HUIAPATTERNOBJECT): Int32
-    func WindowPattern_SetWindowVisualState(hobj: HUIAPATTERNOBJECT, state: Int32): Int32
-    func WindowPattern_WaitForInputIdle(hobj: HUIAPATTERNOBJECT, milliseconds: Int32, pResult: CPointer<Int32>): Int32
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_LresultFromObject == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_LresultFromObject(riid: CPointer<GUID>, wParam: UIntNative, punk: CPointer<Unit>): IntNative {
+    return LresultFromObject(riid, wParam, punk)
 }
 
-@When[UIAUTOMATIONCORE == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on")]
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_ObjectFromLresult == "on"]
+foreign {
+    func ObjectFromLresult(lResult: IntNative, riid: CPointer<GUID>, wParam: UIntNative, ppvObject: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_ObjectFromLresult == "on"]
+public unsafe func Windows_ObjectFromLresult(lResult: IntNative, riid: CPointer<GUID>, wParam: UIntNative, ppvObject: CPointer<CPointer<Unit>>): Int32 {
+    return ObjectFromLresult(lResult, riid, wParam, ppvObject)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_WindowFromAccessibleObject == "on"]
+foreign {
+    // param-hint: phwnd optional
+    func WindowFromAccessibleObject(param0: CPointer<Unit>, phwnd: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && OLEACC == "on" && Windows_Win32_UI_Accessibility_WindowFromAccessibleObject == "on"]
+public unsafe func Windows_WindowFromAccessibleObject(param0: CPointer<Unit>, phwnd: CPointer<CPointer<Unit>>): Int32 {
+    return WindowFromAccessibleObject(param0, phwnd)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_DockPattern_SetDockPosition == "on"]
+foreign {
+    func DockPattern_SetDockPosition(hobj: HUIAPATTERNOBJECT, dockPosition: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_DockPattern_SetDockPosition == "on"]
+public unsafe func Windows_DockPattern_SetDockPosition(hobj: HUIAPATTERNOBJECT, dockPosition: Int32): Int32 {
+    return DockPattern_SetDockPosition(hobj, dockPosition)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_ExpandCollapsePattern_Collapse == "on"]
+foreign {
+    func ExpandCollapsePattern_Collapse(hobj: HUIAPATTERNOBJECT): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_ExpandCollapsePattern_Collapse == "on"]
+public unsafe func Windows_ExpandCollapsePattern_Collapse(hobj: HUIAPATTERNOBJECT): Int32 {
+    return ExpandCollapsePattern_Collapse(hobj)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_ExpandCollapsePattern_Expand == "on"]
+foreign {
+    func ExpandCollapsePattern_Expand(hobj: HUIAPATTERNOBJECT): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_ExpandCollapsePattern_Expand == "on"]
+public unsafe func Windows_ExpandCollapsePattern_Expand(hobj: HUIAPATTERNOBJECT): Int32 {
+    return ExpandCollapsePattern_Expand(hobj)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_GridPattern_GetItem == "on"]
+foreign {
+    func GridPattern_GetItem(hobj: HUIAPATTERNOBJECT, row: Int32, column: Int32, pResult: CPointer<HUIANODE>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_GridPattern_GetItem == "on"]
+public unsafe func Windows_GridPattern_GetItem(hobj: HUIAPATTERNOBJECT, row: Int32, column: Int32, pResult: CPointer<HUIANODE>): Int32 {
+    return GridPattern_GetItem(hobj, row, column, pResult)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_InvokePattern_Invoke == "on"]
+foreign {
+    func InvokePattern_Invoke(hobj: HUIAPATTERNOBJECT): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_InvokePattern_Invoke == "on"]
+public unsafe func Windows_InvokePattern_Invoke(hobj: HUIAPATTERNOBJECT): Int32 {
+    return InvokePattern_Invoke(hobj)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_ItemContainerPattern_FindItemByProperty == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
 foreign {
     func ItemContainerPattern_FindItemByProperty(hobj: HUIAPATTERNOBJECT, hnodeStartAfter: HUIANODE, propertyId: Int32, value: Win32__impl_l2.VARIANT, pFound: CPointer<HUIANODE>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_ItemContainerPattern_FindItemByProperty == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_ItemContainerPattern_FindItemByProperty(hobj: HUIAPATTERNOBJECT, hnodeStartAfter: HUIANODE, propertyId: Int32, value: Win32__impl_l2.VARIANT, pFound: CPointer<HUIANODE>): Int32 {
+    return ItemContainerPattern_FindItemByProperty(hobj, hnodeStartAfter, propertyId, value, pFound)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_LegacyIAccessiblePattern_DoDefaultAction == "on"]
+foreign {
+    func LegacyIAccessiblePattern_DoDefaultAction(hobj: HUIAPATTERNOBJECT): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_LegacyIAccessiblePattern_DoDefaultAction == "on"]
+public unsafe func Windows_LegacyIAccessiblePattern_DoDefaultAction(hobj: HUIAPATTERNOBJECT): Int32 {
+    return LegacyIAccessiblePattern_DoDefaultAction(hobj)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_LegacyIAccessiblePattern_GetIAccessible == "on"]
+foreign {
+    func LegacyIAccessiblePattern_GetIAccessible(hobj: HUIAPATTERNOBJECT, pAccessible: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_LegacyIAccessiblePattern_GetIAccessible == "on"]
+public unsafe func Windows_LegacyIAccessiblePattern_GetIAccessible(hobj: HUIAPATTERNOBJECT, pAccessible: CPointer<CPointer<Unit>>): Int32 {
+    return LegacyIAccessiblePattern_GetIAccessible(hobj, pAccessible)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_LegacyIAccessiblePattern_Select == "on"]
+foreign {
+    func LegacyIAccessiblePattern_Select(hobj: HUIAPATTERNOBJECT, flagsSelect: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_LegacyIAccessiblePattern_Select == "on"]
+public unsafe func Windows_LegacyIAccessiblePattern_Select(hobj: HUIAPATTERNOBJECT, flagsSelect: Int32): Int32 {
+    return LegacyIAccessiblePattern_Select(hobj, flagsSelect)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_LegacyIAccessiblePattern_SetValue == "on"]
+foreign {
+    func LegacyIAccessiblePattern_SetValue(hobj: HUIAPATTERNOBJECT, szValue: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_LegacyIAccessiblePattern_SetValue == "on"]
+public unsafe func Windows_LegacyIAccessiblePattern_SetValue(hobj: HUIAPATTERNOBJECT, szValue: CPointer<UInt16>): Int32 {
+    return LegacyIAccessiblePattern_SetValue(hobj, szValue)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_MultipleViewPattern_GetViewName == "on"]
+foreign {
+    func MultipleViewPattern_GetViewName(hobj: HUIAPATTERNOBJECT, viewId: Int32, ppStr: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_MultipleViewPattern_GetViewName == "on"]
+public unsafe func Windows_MultipleViewPattern_GetViewName(hobj: HUIAPATTERNOBJECT, viewId: Int32, ppStr: CPointer<CPointer<UInt16>>): Int32 {
+    return MultipleViewPattern_GetViewName(hobj, viewId, ppStr)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_MultipleViewPattern_SetCurrentView == "on"]
+foreign {
+    func MultipleViewPattern_SetCurrentView(hobj: HUIAPATTERNOBJECT, viewId: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_MultipleViewPattern_SetCurrentView == "on"]
+public unsafe func Windows_MultipleViewPattern_SetCurrentView(hobj: HUIAPATTERNOBJECT, viewId: Int32): Int32 {
+    return MultipleViewPattern_SetCurrentView(hobj, viewId)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_RangeValuePattern_SetValue == "on"]
+foreign {
+    func RangeValuePattern_SetValue(hobj: HUIAPATTERNOBJECT, val: Float64): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_RangeValuePattern_SetValue == "on"]
+public unsafe func Windows_RangeValuePattern_SetValue(hobj: HUIAPATTERNOBJECT, val: Float64): Int32 {
+    return RangeValuePattern_SetValue(hobj, val)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_ScrollItemPattern_ScrollIntoView == "on"]
+foreign {
+    func ScrollItemPattern_ScrollIntoView(hobj: HUIAPATTERNOBJECT): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_ScrollItemPattern_ScrollIntoView == "on"]
+public unsafe func Windows_ScrollItemPattern_ScrollIntoView(hobj: HUIAPATTERNOBJECT): Int32 {
+    return ScrollItemPattern_ScrollIntoView(hobj)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_ScrollPattern_Scroll == "on"]
+foreign {
+    func ScrollPattern_Scroll(hobj: HUIAPATTERNOBJECT, horizontalAmount: Int32, verticalAmount: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_ScrollPattern_Scroll == "on"]
+public unsafe func Windows_ScrollPattern_Scroll(hobj: HUIAPATTERNOBJECT, horizontalAmount: Int32, verticalAmount: Int32): Int32 {
+    return ScrollPattern_Scroll(hobj, horizontalAmount, verticalAmount)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_ScrollPattern_SetScrollPercent == "on"]
+foreign {
+    func ScrollPattern_SetScrollPercent(hobj: HUIAPATTERNOBJECT, horizontalPercent: Float64, verticalPercent: Float64): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_ScrollPattern_SetScrollPercent == "on"]
+public unsafe func Windows_ScrollPattern_SetScrollPercent(hobj: HUIAPATTERNOBJECT, horizontalPercent: Float64, verticalPercent: Float64): Int32 {
+    return ScrollPattern_SetScrollPercent(hobj, horizontalPercent, verticalPercent)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_SelectionItemPattern_AddToSelection == "on"]
+foreign {
+    func SelectionItemPattern_AddToSelection(hobj: HUIAPATTERNOBJECT): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_SelectionItemPattern_AddToSelection == "on"]
+public unsafe func Windows_SelectionItemPattern_AddToSelection(hobj: HUIAPATTERNOBJECT): Int32 {
+    return SelectionItemPattern_AddToSelection(hobj)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_SelectionItemPattern_RemoveFromSelection == "on"]
+foreign {
+    func SelectionItemPattern_RemoveFromSelection(hobj: HUIAPATTERNOBJECT): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_SelectionItemPattern_RemoveFromSelection == "on"]
+public unsafe func Windows_SelectionItemPattern_RemoveFromSelection(hobj: HUIAPATTERNOBJECT): Int32 {
+    return SelectionItemPattern_RemoveFromSelection(hobj)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_SelectionItemPattern_Select == "on"]
+foreign {
+    func SelectionItemPattern_Select(hobj: HUIAPATTERNOBJECT): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_SelectionItemPattern_Select == "on"]
+public unsafe func Windows_SelectionItemPattern_Select(hobj: HUIAPATTERNOBJECT): Int32 {
+    return SelectionItemPattern_Select(hobj)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_SynchronizedInputPattern_Cancel == "on"]
+foreign {
+    func SynchronizedInputPattern_Cancel(hobj: HUIAPATTERNOBJECT): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_SynchronizedInputPattern_Cancel == "on"]
+public unsafe func Windows_SynchronizedInputPattern_Cancel(hobj: HUIAPATTERNOBJECT): Int32 {
+    return SynchronizedInputPattern_Cancel(hobj)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_SynchronizedInputPattern_StartListening == "on"]
+foreign {
+    func SynchronizedInputPattern_StartListening(hobj: HUIAPATTERNOBJECT, inputType: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_SynchronizedInputPattern_StartListening == "on"]
+public unsafe func Windows_SynchronizedInputPattern_StartListening(hobj: HUIAPATTERNOBJECT, inputType: Int32): Int32 {
+    return SynchronizedInputPattern_StartListening(hobj, inputType)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextPattern_GetSelection == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func TextPattern_GetSelection(hobj: HUIAPATTERNOBJECT, pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextPattern_GetSelection == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_TextPattern_GetSelection(hobj: HUIAPATTERNOBJECT, pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>): Int32 {
+    return TextPattern_GetSelection(hobj, pRetVal)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextPattern_GetVisibleRanges == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func TextPattern_GetVisibleRanges(hobj: HUIAPATTERNOBJECT, pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextPattern_GetVisibleRanges == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_TextPattern_GetVisibleRanges(hobj: HUIAPATTERNOBJECT, pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>): Int32 {
+    return TextPattern_GetVisibleRanges(hobj, pRetVal)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextPattern_RangeFromChild == "on"]
+foreign {
+    func TextPattern_RangeFromChild(hobj: HUIAPATTERNOBJECT, hnodeChild: HUIANODE, pRetVal: CPointer<HUIATEXTRANGE>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextPattern_RangeFromChild == "on"]
+public unsafe func Windows_TextPattern_RangeFromChild(hobj: HUIAPATTERNOBJECT, hnodeChild: HUIANODE, pRetVal: CPointer<HUIATEXTRANGE>): Int32 {
+    return TextPattern_RangeFromChild(hobj, hnodeChild, pRetVal)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextPattern_RangeFromPoint == "on"]
+foreign {
+    func TextPattern_RangeFromPoint(hobj: HUIAPATTERNOBJECT, point: UiaPoint, pRetVal: CPointer<HUIATEXTRANGE>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextPattern_RangeFromPoint == "on"]
+public unsafe func Windows_TextPattern_RangeFromPoint(hobj: HUIAPATTERNOBJECT, point: UiaPoint, pRetVal: CPointer<HUIATEXTRANGE>): Int32 {
+    return TextPattern_RangeFromPoint(hobj, point, pRetVal)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextPattern_get_DocumentRange == "on"]
+foreign {
+    func TextPattern_get_DocumentRange(hobj: HUIAPATTERNOBJECT, pRetVal: CPointer<HUIATEXTRANGE>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextPattern_get_DocumentRange == "on"]
+public unsafe func Windows_TextPattern_get_DocumentRange(hobj: HUIAPATTERNOBJECT, pRetVal: CPointer<HUIATEXTRANGE>): Int32 {
+    return TextPattern_get_DocumentRange(hobj, pRetVal)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextPattern_get_SupportedTextSelection == "on"]
+foreign {
+    func TextPattern_get_SupportedTextSelection(hobj: HUIAPATTERNOBJECT, pRetVal: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextPattern_get_SupportedTextSelection == "on"]
+public unsafe func Windows_TextPattern_get_SupportedTextSelection(hobj: HUIAPATTERNOBJECT, pRetVal: CPointer<Int32>): Int32 {
+    return TextPattern_get_SupportedTextSelection(hobj, pRetVal)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_AddToSelection == "on"]
+foreign {
+    func TextRange_AddToSelection(hobj: HUIATEXTRANGE): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_AddToSelection == "on"]
+public unsafe func Windows_TextRange_AddToSelection(hobj: HUIATEXTRANGE): Int32 {
+    return TextRange_AddToSelection(hobj)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_Clone == "on"]
+foreign {
+    func TextRange_Clone(hobj: HUIATEXTRANGE, pRetVal: CPointer<HUIATEXTRANGE>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_Clone == "on"]
+public unsafe func Windows_TextRange_Clone(hobj: HUIATEXTRANGE, pRetVal: CPointer<HUIATEXTRANGE>): Int32 {
+    return TextRange_Clone(hobj, pRetVal)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_Compare == "on"]
+foreign {
+    func TextRange_Compare(hobj: HUIATEXTRANGE, range: HUIATEXTRANGE, pRetVal: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_Compare == "on"]
+public unsafe func Windows_TextRange_Compare(hobj: HUIATEXTRANGE, range: HUIATEXTRANGE, pRetVal: CPointer<Int32>): Int32 {
+    return TextRange_Compare(hobj, range, pRetVal)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_CompareEndpoints == "on"]
+foreign {
+    func TextRange_CompareEndpoints(hobj: HUIATEXTRANGE, endpoint: Int32, targetRange: HUIATEXTRANGE, targetEndpoint: Int32, pRetVal: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_CompareEndpoints == "on"]
+public unsafe func Windows_TextRange_CompareEndpoints(hobj: HUIATEXTRANGE, endpoint: Int32, targetRange: HUIATEXTRANGE, targetEndpoint: Int32, pRetVal: CPointer<Int32>): Int32 {
+    return TextRange_CompareEndpoints(hobj, endpoint, targetRange, targetEndpoint, pRetVal)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_ExpandToEnclosingUnit == "on"]
+foreign {
+    func TextRange_ExpandToEnclosingUnit(hobj: HUIATEXTRANGE, unit: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_ExpandToEnclosingUnit == "on"]
+public unsafe func Windows_TextRange_ExpandToEnclosingUnit(hobj: HUIATEXTRANGE, unit: Int32): Int32 {
+    return TextRange_ExpandToEnclosingUnit(hobj, unit)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_FindAttribute == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
     func TextRange_FindAttribute(hobj: HUIATEXTRANGE, attributeId: Int32, val: Win32__impl_l2.VARIANT, backward: Int32, pRetVal: CPointer<HUIATEXTRANGE>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_FindAttribute == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_TextRange_FindAttribute(hobj: HUIATEXTRANGE, attributeId: Int32, val: Win32__impl_l2.VARIANT, backward: Int32, pRetVal: CPointer<HUIATEXTRANGE>): Int32 {
+    return TextRange_FindAttribute(hobj, attributeId, val, backward, pRetVal)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_FindText == "on"]
+foreign {
+    func TextRange_FindText(hobj: HUIATEXTRANGE, text: CPointer<UInt16>, backward: Int32, ignoreCase: Int32, pRetVal: CPointer<HUIATEXTRANGE>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_FindText == "on"]
+public unsafe func Windows_TextRange_FindText(hobj: HUIATEXTRANGE, text: CPointer<UInt16>, backward: Int32, ignoreCase: Int32, pRetVal: CPointer<HUIATEXTRANGE>): Int32 {
+    return TextRange_FindText(hobj, text, backward, ignoreCase, pRetVal)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_GetAttributeValue == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
     func TextRange_GetAttributeValue(hobj: HUIATEXTRANGE, attributeId: Int32, pRetVal: CPointer<Win32__impl_l2.VARIANT>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_GetAttributeValue == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_TextRange_GetAttributeValue(hobj: HUIATEXTRANGE, attributeId: Int32, pRetVal: CPointer<Win32__impl_l2.VARIANT>): Int32 {
+    return TextRange_GetAttributeValue(hobj, attributeId, pRetVal)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_GetBoundingRectangles == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func TextRange_GetBoundingRectangles(hobj: HUIATEXTRANGE, pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_GetBoundingRectangles == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_TextRange_GetBoundingRectangles(hobj: HUIATEXTRANGE, pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>): Int32 {
+    return TextRange_GetBoundingRectangles(hobj, pRetVal)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_GetChildren == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func TextRange_GetChildren(hobj: HUIATEXTRANGE, pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_GetChildren == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_TextRange_GetChildren(hobj: HUIATEXTRANGE, pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>): Int32 {
+    return TextRange_GetChildren(hobj, pRetVal)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_GetEnclosingElement == "on"]
+foreign {
+    func TextRange_GetEnclosingElement(hobj: HUIATEXTRANGE, pRetVal: CPointer<HUIANODE>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_GetEnclosingElement == "on"]
+public unsafe func Windows_TextRange_GetEnclosingElement(hobj: HUIATEXTRANGE, pRetVal: CPointer<HUIANODE>): Int32 {
+    return TextRange_GetEnclosingElement(hobj, pRetVal)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_GetText == "on"]
+foreign {
+    func TextRange_GetText(hobj: HUIATEXTRANGE, maxLength: Int32, pRetVal: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_GetText == "on"]
+public unsafe func Windows_TextRange_GetText(hobj: HUIATEXTRANGE, maxLength: Int32, pRetVal: CPointer<CPointer<UInt16>>): Int32 {
+    return TextRange_GetText(hobj, maxLength, pRetVal)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_Move == "on"]
+foreign {
+    func TextRange_Move(hobj: HUIATEXTRANGE, unit: Int32, count: Int32, pRetVal: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_Move == "on"]
+public unsafe func Windows_TextRange_Move(hobj: HUIATEXTRANGE, unit: Int32, count: Int32, pRetVal: CPointer<Int32>): Int32 {
+    return TextRange_Move(hobj, unit, count, pRetVal)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_MoveEndpointByRange == "on"]
+foreign {
+    func TextRange_MoveEndpointByRange(hobj: HUIATEXTRANGE, endpoint: Int32, targetRange: HUIATEXTRANGE, targetEndpoint: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_MoveEndpointByRange == "on"]
+public unsafe func Windows_TextRange_MoveEndpointByRange(hobj: HUIATEXTRANGE, endpoint: Int32, targetRange: HUIATEXTRANGE, targetEndpoint: Int32): Int32 {
+    return TextRange_MoveEndpointByRange(hobj, endpoint, targetRange, targetEndpoint)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_MoveEndpointByUnit == "on"]
+foreign {
+    func TextRange_MoveEndpointByUnit(hobj: HUIATEXTRANGE, endpoint: Int32, unit: Int32, count: Int32, pRetVal: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_MoveEndpointByUnit == "on"]
+public unsafe func Windows_TextRange_MoveEndpointByUnit(hobj: HUIATEXTRANGE, endpoint: Int32, unit: Int32, count: Int32, pRetVal: CPointer<Int32>): Int32 {
+    return TextRange_MoveEndpointByUnit(hobj, endpoint, unit, count, pRetVal)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_RemoveFromSelection == "on"]
+foreign {
+    func TextRange_RemoveFromSelection(hobj: HUIATEXTRANGE): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_RemoveFromSelection == "on"]
+public unsafe func Windows_TextRange_RemoveFromSelection(hobj: HUIATEXTRANGE): Int32 {
+    return TextRange_RemoveFromSelection(hobj)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_ScrollIntoView == "on"]
+foreign {
+    func TextRange_ScrollIntoView(hobj: HUIATEXTRANGE, alignToTop: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_ScrollIntoView == "on"]
+public unsafe func Windows_TextRange_ScrollIntoView(hobj: HUIATEXTRANGE, alignToTop: Int32): Int32 {
+    return TextRange_ScrollIntoView(hobj, alignToTop)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_Select == "on"]
+foreign {
+    func TextRange_Select(hobj: HUIATEXTRANGE): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TextRange_Select == "on"]
+public unsafe func Windows_TextRange_Select(hobj: HUIATEXTRANGE): Int32 {
+    return TextRange_Select(hobj)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TogglePattern_Toggle == "on"]
+foreign {
+    func TogglePattern_Toggle(hobj: HUIAPATTERNOBJECT): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TogglePattern_Toggle == "on"]
+public unsafe func Windows_TogglePattern_Toggle(hobj: HUIAPATTERNOBJECT): Int32 {
+    return TogglePattern_Toggle(hobj)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TransformPattern_Move == "on"]
+foreign {
+    func TransformPattern_Move(hobj: HUIAPATTERNOBJECT, x: Float64, y: Float64): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TransformPattern_Move == "on"]
+public unsafe func Windows_TransformPattern_Move(hobj: HUIAPATTERNOBJECT, x: Float64, y: Float64): Int32 {
+    return TransformPattern_Move(hobj, x, y)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TransformPattern_Resize == "on"]
+foreign {
+    func TransformPattern_Resize(hobj: HUIAPATTERNOBJECT, width: Float64, height: Float64): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TransformPattern_Resize == "on"]
+public unsafe func Windows_TransformPattern_Resize(hobj: HUIAPATTERNOBJECT, width: Float64, height: Float64): Int32 {
+    return TransformPattern_Resize(hobj, width, height)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TransformPattern_Rotate == "on"]
+foreign {
+    func TransformPattern_Rotate(hobj: HUIAPATTERNOBJECT, degrees: Float64): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_TransformPattern_Rotate == "on"]
+public unsafe func Windows_TransformPattern_Rotate(hobj: HUIAPATTERNOBJECT, degrees: Float64): Int32 {
+    return TransformPattern_Rotate(hobj, degrees)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaAddEvent == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func UiaAddEvent(hnode: HUIANODE, eventId: Int32, pCallback: CPointer<UiaEventCallback>, scope: Int32, pProperties: CPointer<Int32>, cProperties: Int32, pRequest: CPointer<UiaCacheRequest>, phEvent: CPointer<HUIAEVENT>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaAddEvent == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_UiaAddEvent(hnode: HUIANODE, eventId: Int32, pCallback: CPointer<UiaEventCallback>, scope: Int32, pProperties: CPointer<Int32>, cProperties: Int32, pRequest: CPointer<UiaCacheRequest>, phEvent: CPointer<HUIAEVENT>): Int32 {
+    return UiaAddEvent(hnode, eventId, pCallback, scope, pProperties, cProperties, pRequest, phEvent)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaClientsAreListening == "on"]
+foreign {
+    func UiaClientsAreListening(): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaClientsAreListening == "on"]
+public unsafe func Windows_UiaClientsAreListening(): Int32 {
+    return UiaClientsAreListening()
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaDisconnectAllProviders == "on"]
+foreign {
+    func UiaDisconnectAllProviders(): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaDisconnectAllProviders == "on"]
+public unsafe func Windows_UiaDisconnectAllProviders(): Int32 {
+    return UiaDisconnectAllProviders()
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaDisconnectProvider == "on"]
+foreign {
+    func UiaDisconnectProvider(pProvider: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaDisconnectProvider == "on"]
+public unsafe func Windows_UiaDisconnectProvider(pProvider: CPointer<Unit>): Int32 {
+    return UiaDisconnectProvider(pProvider)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaEventAddWindow == "on"]
+foreign {
+    func UiaEventAddWindow(hEvent: HUIAEVENT, hwnd: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaEventAddWindow == "on"]
+public unsafe func Windows_UiaEventAddWindow(hEvent: HUIAEVENT, hwnd: CPointer<Unit>): Int32 {
+    return UiaEventAddWindow(hEvent, hwnd)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaEventRemoveWindow == "on"]
+foreign {
+    func UiaEventRemoveWindow(hEvent: HUIAEVENT, hwnd: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaEventRemoveWindow == "on"]
+public unsafe func Windows_UiaEventRemoveWindow(hEvent: HUIAEVENT, hwnd: CPointer<Unit>): Int32 {
+    return UiaEventRemoveWindow(hEvent, hwnd)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaFind == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func UiaFind(hnode: HUIANODE, pParams: CPointer<UiaFindParams>, pRequest: CPointer<UiaCacheRequest>, ppRequestedData: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>, ppOffsets: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>, ppTreeStructures: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaFind == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_UiaFind(hnode: HUIANODE, pParams: CPointer<UiaFindParams>, pRequest: CPointer<UiaCacheRequest>, ppRequestedData: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>, ppOffsets: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>, ppTreeStructures: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>): Int32 {
+    return UiaFind(hnode, pParams, pRequest, ppRequestedData, ppOffsets, ppTreeStructures)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaGetErrorDescription == "on"]
+foreign {
+    func UiaGetErrorDescription(pDescription: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaGetErrorDescription == "on"]
+public unsafe func Windows_UiaGetErrorDescription(pDescription: CPointer<CPointer<UInt16>>): Int32 {
+    return UiaGetErrorDescription(pDescription)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaGetPatternProvider == "on"]
+foreign {
+    func UiaGetPatternProvider(hnode: HUIANODE, patternId: Int32, phobj: CPointer<HUIAPATTERNOBJECT>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaGetPatternProvider == "on"]
+public unsafe func Windows_UiaGetPatternProvider(hnode: HUIANODE, patternId: Int32, phobj: CPointer<HUIAPATTERNOBJECT>): Int32 {
+    return UiaGetPatternProvider(hnode, patternId, phobj)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaGetPropertyValue == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
     func UiaGetPropertyValue(hnode: HUIANODE, propertyId: Int32, pValue: CPointer<Win32__impl_l2.VARIANT>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaGetPropertyValue == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_UiaGetPropertyValue(hnode: HUIANODE, propertyId: Int32, pValue: CPointer<Win32__impl_l2.VARIANT>): Int32 {
+    return UiaGetPropertyValue(hnode, propertyId, pValue)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaGetReservedMixedAttributeValue == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func UiaGetReservedMixedAttributeValue(punkMixedAttributeValue: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaGetReservedMixedAttributeValue == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_UiaGetReservedMixedAttributeValue(punkMixedAttributeValue: CPointer<CPointer<Unit>>): Int32 {
+    return UiaGetReservedMixedAttributeValue(punkMixedAttributeValue)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaGetReservedNotSupportedValue == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func UiaGetReservedNotSupportedValue(punkNotSupportedValue: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaGetReservedNotSupportedValue == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_UiaGetReservedNotSupportedValue(punkNotSupportedValue: CPointer<CPointer<Unit>>): Int32 {
+    return UiaGetReservedNotSupportedValue(punkNotSupportedValue)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaGetRootNode == "on"]
+foreign {
+    func UiaGetRootNode(phnode: CPointer<HUIANODE>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaGetRootNode == "on"]
+public unsafe func Windows_UiaGetRootNode(phnode: CPointer<HUIANODE>): Int32 {
+    return UiaGetRootNode(phnode)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaGetRuntimeId == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func UiaGetRuntimeId(hnode: HUIANODE, pruntimeId: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaGetRuntimeId == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_UiaGetRuntimeId(hnode: HUIANODE, pruntimeId: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>): Int32 {
+    return UiaGetRuntimeId(hnode, pruntimeId)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaGetUpdatedCache == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func UiaGetUpdatedCache(hnode: HUIANODE, pRequest: CPointer<UiaCacheRequest>, normalizeState: Int32, pNormalizeCondition: CPointer<UiaCondition>, ppRequestedData: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>, ppTreeStructure: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaGetUpdatedCache == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_UiaGetUpdatedCache(hnode: HUIANODE, pRequest: CPointer<UiaCacheRequest>, normalizeState: Int32, pNormalizeCondition: CPointer<UiaCondition>, ppRequestedData: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>, ppTreeStructure: CPointer<CPointer<UInt16>>): Int32 {
+    return UiaGetUpdatedCache(hnode, pRequest, normalizeState, pNormalizeCondition, ppRequestedData, ppTreeStructure)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaHPatternObjectFromVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
     func UiaHPatternObjectFromVariant(pvar: CPointer<Win32__impl_l2.VARIANT>, phobj: CPointer<HUIAPATTERNOBJECT>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaHPatternObjectFromVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_UiaHPatternObjectFromVariant(pvar: CPointer<Win32__impl_l2.VARIANT>, phobj: CPointer<HUIAPATTERNOBJECT>): Int32 {
+    return UiaHPatternObjectFromVariant(pvar, phobj)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaHTextRangeFromVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
     func UiaHTextRangeFromVariant(pvar: CPointer<Win32__impl_l2.VARIANT>, phtextrange: CPointer<HUIATEXTRANGE>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaHTextRangeFromVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_UiaHTextRangeFromVariant(pvar: CPointer<Win32__impl_l2.VARIANT>, phtextrange: CPointer<HUIATEXTRANGE>): Int32 {
+    return UiaHTextRangeFromVariant(pvar, phtextrange)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaHUiaNodeFromVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
     func UiaHUiaNodeFromVariant(pvar: CPointer<Win32__impl_l2.VARIANT>, phnode: CPointer<HUIANODE>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaHUiaNodeFromVariant == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_UiaHUiaNodeFromVariant(pvar: CPointer<Win32__impl_l2.VARIANT>, phnode: CPointer<HUIANODE>): Int32 {
+    return UiaHUiaNodeFromVariant(pvar, phnode)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaHasServerSideProvider == "on"]
+foreign {
+    func UiaHasServerSideProvider(hwnd: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaHasServerSideProvider == "on"]
+public unsafe func Windows_UiaHasServerSideProvider(hwnd: CPointer<Unit>): Int32 {
+    return UiaHasServerSideProvider(hwnd)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaHostProviderFromHwnd == "on"]
+foreign {
+    func UiaHostProviderFromHwnd(hwnd: CPointer<Unit>, ppProvider: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaHostProviderFromHwnd == "on"]
+public unsafe func Windows_UiaHostProviderFromHwnd(hwnd: CPointer<Unit>, ppProvider: CPointer<CPointer<Unit>>): Int32 {
+    return UiaHostProviderFromHwnd(hwnd, ppProvider)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaIAccessibleFromProvider == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
     func UiaIAccessibleFromProvider(pProvider: CPointer<Unit>, dwFlags: UInt32, ppAccessible: CPointer<CPointer<Unit>>, pvarChild: CPointer<Win32__impl_l2.VARIANT>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaIAccessibleFromProvider == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_UiaIAccessibleFromProvider(pProvider: CPointer<Unit>, dwFlags: UInt32, ppAccessible: CPointer<CPointer<Unit>>, pvarChild: CPointer<Win32__impl_l2.VARIANT>): Int32 {
+    return UiaIAccessibleFromProvider(pProvider, dwFlags, ppAccessible, pvarChild)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaLookupId == "on"]
+foreign {
+    func UiaLookupId(type_: Int32, pGuid: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaLookupId == "on"]
+public unsafe func Windows_UiaLookupId(type_: Int32, pGuid: CPointer<GUID>): Int32 {
+    return UiaLookupId(type_, pGuid)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaNavigate == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func UiaNavigate(hnode: HUIANODE, direction: Int32, pCondition: CPointer<UiaCondition>, pRequest: CPointer<UiaCacheRequest>, ppRequestedData: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>, ppTreeStructure: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaNavigate == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_UiaNavigate(hnode: HUIANODE, direction: Int32, pCondition: CPointer<UiaCondition>, pRequest: CPointer<UiaCacheRequest>, ppRequestedData: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>, ppTreeStructure: CPointer<CPointer<UInt16>>): Int32 {
+    return UiaNavigate(hnode, direction, pCondition, pRequest, ppRequestedData, ppTreeStructure)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaNodeFromFocus == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func UiaNodeFromFocus(pRequest: CPointer<UiaCacheRequest>, ppRequestedData: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>, ppTreeStructure: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaNodeFromFocus == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_UiaNodeFromFocus(pRequest: CPointer<UiaCacheRequest>, ppRequestedData: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>, ppTreeStructure: CPointer<CPointer<UInt16>>): Int32 {
+    return UiaNodeFromFocus(pRequest, ppRequestedData, ppTreeStructure)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaNodeFromHandle == "on"]
+foreign {
+    func UiaNodeFromHandle(hwnd: CPointer<Unit>, phnode: CPointer<HUIANODE>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaNodeFromHandle == "on"]
+public unsafe func Windows_UiaNodeFromHandle(hwnd: CPointer<Unit>, phnode: CPointer<HUIANODE>): Int32 {
+    return UiaNodeFromHandle(hwnd, phnode)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaNodeFromPoint == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func UiaNodeFromPoint(x: Float64, y: Float64, pRequest: CPointer<UiaCacheRequest>, ppRequestedData: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>, ppTreeStructure: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaNodeFromPoint == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_UiaNodeFromPoint(x: Float64, y: Float64, pRequest: CPointer<UiaCacheRequest>, ppRequestedData: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>, ppTreeStructure: CPointer<CPointer<UInt16>>): Int32 {
+    return UiaNodeFromPoint(x, y, pRequest, ppRequestedData, ppTreeStructure)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaNodeFromProvider == "on"]
+foreign {
+    func UiaNodeFromProvider(pProvider: CPointer<Unit>, phnode: CPointer<HUIANODE>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaNodeFromProvider == "on"]
+public unsafe func Windows_UiaNodeFromProvider(pProvider: CPointer<Unit>, phnode: CPointer<HUIANODE>): Int32 {
+    return UiaNodeFromProvider(pProvider, phnode)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaNodeRelease == "on"]
+foreign {
+    func UiaNodeRelease(hnode: HUIANODE): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaNodeRelease == "on"]
+public unsafe func Windows_UiaNodeRelease(hnode: HUIANODE): Int32 {
+    return UiaNodeRelease(hnode)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaPatternRelease == "on"]
+foreign {
+    func UiaPatternRelease(hobj: HUIAPATTERNOBJECT): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaPatternRelease == "on"]
+public unsafe func Windows_UiaPatternRelease(hobj: HUIAPATTERNOBJECT): Int32 {
+    return UiaPatternRelease(hobj)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaProviderForNonClient == "on"]
+foreign {
+    func UiaProviderForNonClient(hwnd: CPointer<Unit>, idObject: Int32, idChild: Int32, ppProvider: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaProviderForNonClient == "on"]
+public unsafe func Windows_UiaProviderForNonClient(hwnd: CPointer<Unit>, idObject: Int32, idChild: Int32, ppProvider: CPointer<CPointer<Unit>>): Int32 {
+    return UiaProviderForNonClient(hwnd, idObject, idChild, ppProvider)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaProviderFromIAccessible == "on"]
+foreign {
+    func UiaProviderFromIAccessible(pAccessible: CPointer<Unit>, idChild: Int32, dwFlags: UInt32, ppProvider: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaProviderFromIAccessible == "on"]
+public unsafe func Windows_UiaProviderFromIAccessible(pAccessible: CPointer<Unit>, idChild: Int32, dwFlags: UInt32, ppProvider: CPointer<CPointer<Unit>>): Int32 {
+    return UiaProviderFromIAccessible(pAccessible, idChild, dwFlags, ppProvider)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaRaiseActiveTextPositionChangedEvent == "on"]
+foreign {
+    // param-hint: textRange optional
+    func UiaRaiseActiveTextPositionChangedEvent(provider: CPointer<Unit>, textRange: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaRaiseActiveTextPositionChangedEvent == "on"]
+public unsafe func Windows_UiaRaiseActiveTextPositionChangedEvent(provider: CPointer<Unit>, textRange: CPointer<Unit>): Int32 {
+    return UiaRaiseActiveTextPositionChangedEvent(provider, textRange)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaRaiseAsyncContentLoadedEvent == "on"]
+foreign {
+    func UiaRaiseAsyncContentLoadedEvent(pProvider: CPointer<Unit>, asyncContentLoadedState: Int32, percentComplete: Float64): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaRaiseAsyncContentLoadedEvent == "on"]
+public unsafe func Windows_UiaRaiseAsyncContentLoadedEvent(pProvider: CPointer<Unit>, asyncContentLoadedState: Int32, percentComplete: Float64): Int32 {
+    return UiaRaiseAsyncContentLoadedEvent(pProvider, asyncContentLoadedState, percentComplete)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaRaiseAutomationEvent == "on"]
+foreign {
+    func UiaRaiseAutomationEvent(pProvider: CPointer<Unit>, id: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaRaiseAutomationEvent == "on"]
+public unsafe func Windows_UiaRaiseAutomationEvent(pProvider: CPointer<Unit>, id: Int32): Int32 {
+    return UiaRaiseAutomationEvent(pProvider, id)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaRaiseAutomationPropertyChangedEvent == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
     func UiaRaiseAutomationPropertyChangedEvent(pProvider: CPointer<Unit>, id: Int32, oldValue: Win32__impl_l2.VARIANT, newValue: Win32__impl_l2.VARIANT): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaRaiseAutomationPropertyChangedEvent == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_UiaRaiseAutomationPropertyChangedEvent(pProvider: CPointer<Unit>, id: Int32, oldValue: Win32__impl_l2.VARIANT, newValue: Win32__impl_l2.VARIANT): Int32 {
+    return UiaRaiseAutomationPropertyChangedEvent(pProvider, id, oldValue, newValue)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaRaiseChangesEvent == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+foreign {
     func UiaRaiseChangesEvent(pProvider: CPointer<Unit>, eventIdCount: Int32, pUiaChanges: CPointer<UiaChangeInfo>): Int32
 }
 
-@When[UIAUTOMATIONCORE == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaRaiseChangesEvent == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on"]
+public unsafe func Windows_UiaRaiseChangesEvent(pProvider: CPointer<Unit>, eventIdCount: Int32, pUiaChanges: CPointer<UiaChangeInfo>): Int32 {
+    return UiaRaiseChangesEvent(pProvider, eventIdCount, pUiaChanges)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaRaiseNotificationEvent == "on"]
 foreign {
-    func TextPattern_GetSelection(hobj: HUIAPATTERNOBJECT, pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>): Int32
-    func TextPattern_GetVisibleRanges(hobj: HUIAPATTERNOBJECT, pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>): Int32
-    func TextRange_GetBoundingRectangles(hobj: HUIATEXTRANGE, pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>): Int32
-    func TextRange_GetChildren(hobj: HUIATEXTRANGE, pRetVal: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>): Int32
-    func UiaAddEvent(hnode: HUIANODE, eventId: Int32, pCallback: CPointer<UiaEventCallback>, scope: Int32, pProperties: CPointer<Int32>, cProperties: Int32, pRequest: CPointer<UiaCacheRequest>, phEvent: CPointer<HUIAEVENT>): Int32
-    func UiaFind(hnode: HUIANODE, pParams: CPointer<UiaFindParams>, pRequest: CPointer<UiaCacheRequest>, ppRequestedData: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>, ppOffsets: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>, ppTreeStructures: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>): Int32
-    func UiaGetReservedMixedAttributeValue(punkMixedAttributeValue: CPointer<CPointer<Unit>>): Int32
-    func UiaGetReservedNotSupportedValue(punkNotSupportedValue: CPointer<CPointer<Unit>>): Int32
-    func UiaGetRuntimeId(hnode: HUIANODE, pruntimeId: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>): Int32
-    func UiaGetUpdatedCache(hnode: HUIANODE, pRequest: CPointer<UiaCacheRequest>, normalizeState: Int32, pNormalizeCondition: CPointer<UiaCondition>, ppRequestedData: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>, ppTreeStructure: CPointer<CPointer<UInt16>>): Int32
-    func UiaNavigate(hnode: HUIANODE, direction: Int32, pCondition: CPointer<UiaCondition>, pRequest: CPointer<UiaCacheRequest>, ppRequestedData: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>, ppTreeStructure: CPointer<CPointer<UInt16>>): Int32
-    func UiaNodeFromFocus(pRequest: CPointer<UiaCacheRequest>, ppRequestedData: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>, ppTreeStructure: CPointer<CPointer<UInt16>>): Int32
-    func UiaNodeFromPoint(x: Float64, y: Float64, pRequest: CPointer<UiaCacheRequest>, ppRequestedData: CPointer<CPointer<Win32__impl_l1.SAFEARRAY>>, ppTreeStructure: CPointer<CPointer<UInt16>>): Int32
+    // param-hint: displayString optional
+    func UiaRaiseNotificationEvent(provider: CPointer<Unit>, notificationKind: Int32, notificationProcessing: Int32, displayString: CPointer<UInt16>, activityId: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaRaiseNotificationEvent == "on"]
+public unsafe func Windows_UiaRaiseNotificationEvent(provider: CPointer<Unit>, notificationKind: Int32, notificationProcessing: Int32, displayString: CPointer<UInt16>, activityId: CPointer<UInt16>): Int32 {
+    return UiaRaiseNotificationEvent(provider, notificationKind, notificationProcessing, displayString, activityId)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaRaiseStructureChangedEvent == "on"]
+foreign {
+    func UiaRaiseStructureChangedEvent(pProvider: CPointer<Unit>, structureChangeType: Int32, pRuntimeId: CPointer<Int32>, cRuntimeIdLen: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaRaiseStructureChangedEvent == "on"]
+public unsafe func Windows_UiaRaiseStructureChangedEvent(pProvider: CPointer<Unit>, structureChangeType: Int32, pRuntimeId: CPointer<Int32>, cRuntimeIdLen: Int32): Int32 {
+    return UiaRaiseStructureChangedEvent(pProvider, structureChangeType, pRuntimeId, cRuntimeIdLen)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaRaiseTextEditTextChangedEvent == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func UiaRaiseTextEditTextChangedEvent(pProvider: CPointer<Unit>, textEditChangeType: Int32, pChangedData: CPointer<Win32__impl_l1.SAFEARRAY>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaRaiseTextEditTextChangedEvent == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_UiaRaiseTextEditTextChangedEvent(pProvider: CPointer<Unit>, textEditChangeType: Int32, pChangedData: CPointer<Win32__impl_l1.SAFEARRAY>): Int32 {
+    return UiaRaiseTextEditTextChangedEvent(pProvider, textEditChangeType, pChangedData)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaRegisterProviderCallback == "on" && Windows_Win32_System_Com == "on"]
+foreign {
     func UiaRegisterProviderCallback(pCallback: CPointer<UiaProviderCallback>): Unit
 }
 
-@When[USER32 == "on"]
-foreign {
-    func IsWinEventHookInstalled(event: UInt32): Int32
-    func NotifyWinEvent(event: UInt32, hwnd: CPointer<Unit>, idObject: Int32, idChild: Int32): Unit
-    // param-hint: hmodWinEventProc optional
-    func SetWinEventHook(eventMin: UInt32, eventMax: UInt32, hmodWinEventProc: CPointer<Unit>, pfnWinEventProc: WINEVENTPROC, idProcess: UInt32, idThread: UInt32, dwFlags: UInt32): HWINEVENTHOOK
-    func UnhookWinEvent(hWinEventHook: HWINEVENTHOOK): Int32
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaRegisterProviderCallback == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_UiaRegisterProviderCallback(pCallback: CPointer<UiaProviderCallback>): Unit {
+    UiaRegisterProviderCallback(pCallback)
 }
 
-@When[USER32 == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaRemoveEvent == "on"]
+foreign {
+    func UiaRemoveEvent(hEvent: HUIAEVENT): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaRemoveEvent == "on"]
+public unsafe func Windows_UiaRemoveEvent(hEvent: HUIAEVENT): Int32 {
+    return UiaRemoveEvent(hEvent)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaReturnRawElementProvider == "on"]
+foreign {
+    func UiaReturnRawElementProvider(hwnd: CPointer<Unit>, wParam: UIntNative, lParam: IntNative, el: CPointer<Unit>): IntNative
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaReturnRawElementProvider == "on"]
+public unsafe func Windows_UiaReturnRawElementProvider(hwnd: CPointer<Unit>, wParam: UIntNative, lParam: IntNative, el: CPointer<Unit>): IntNative {
+    return UiaReturnRawElementProvider(hwnd, wParam, lParam, el)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaSetFocus == "on"]
+foreign {
+    func UiaSetFocus(hnode: HUIANODE): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaSetFocus == "on"]
+public unsafe func Windows_UiaSetFocus(hnode: HUIANODE): Int32 {
+    return UiaSetFocus(hnode)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaTextRangeRelease == "on"]
+foreign {
+    func UiaTextRangeRelease(hobj: HUIATEXTRANGE): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_UiaTextRangeRelease == "on"]
+public unsafe func Windows_UiaTextRangeRelease(hobj: HUIATEXTRANGE): Int32 {
+    return UiaTextRangeRelease(hobj)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_ValuePattern_SetValue == "on"]
+foreign {
+    func ValuePattern_SetValue(hobj: HUIAPATTERNOBJECT, pVal: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_ValuePattern_SetValue == "on"]
+public unsafe func Windows_ValuePattern_SetValue(hobj: HUIAPATTERNOBJECT, pVal: CPointer<UInt16>): Int32 {
+    return ValuePattern_SetValue(hobj, pVal)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_VirtualizedItemPattern_Realize == "on"]
+foreign {
+    func VirtualizedItemPattern_Realize(hobj: HUIAPATTERNOBJECT): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_VirtualizedItemPattern_Realize == "on"]
+public unsafe func Windows_VirtualizedItemPattern_Realize(hobj: HUIAPATTERNOBJECT): Int32 {
+    return VirtualizedItemPattern_Realize(hobj)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_WindowPattern_Close == "on"]
+foreign {
+    func WindowPattern_Close(hobj: HUIAPATTERNOBJECT): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_WindowPattern_Close == "on"]
+public unsafe func Windows_WindowPattern_Close(hobj: HUIAPATTERNOBJECT): Int32 {
+    return WindowPattern_Close(hobj)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_WindowPattern_SetWindowVisualState == "on"]
+foreign {
+    func WindowPattern_SetWindowVisualState(hobj: HUIAPATTERNOBJECT, state: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_WindowPattern_SetWindowVisualState == "on"]
+public unsafe func Windows_WindowPattern_SetWindowVisualState(hobj: HUIAPATTERNOBJECT, state: Int32): Int32 {
+    return WindowPattern_SetWindowVisualState(hobj, state)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_WindowPattern_WaitForInputIdle == "on"]
+foreign {
+    func WindowPattern_WaitForInputIdle(hobj: HUIAPATTERNOBJECT, milliseconds: Int32, pResult: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && UIAUTOMATIONCORE == "on" && Windows_Win32_UI_Accessibility_WindowPattern_WaitForInputIdle == "on"]
+public unsafe func Windows_WindowPattern_WaitForInputIdle(hobj: HUIAPATTERNOBJECT, milliseconds: Int32, pResult: CPointer<Int32>): Int32 {
+    return WindowPattern_WaitForInputIdle(hobj, milliseconds, pResult)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && USER32 == "on" && Windows_Win32_UI_Accessibility_IsWinEventHookInstalled == "on"]
+foreign {
+    func IsWinEventHookInstalled(event: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && USER32 == "on" && Windows_Win32_UI_Accessibility_IsWinEventHookInstalled == "on"]
+public unsafe func Windows_IsWinEventHookInstalled(event: UInt32): Int32 {
+    return IsWinEventHookInstalled(event)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && USER32 == "on" && Windows_Win32_UI_Accessibility_NotifyWinEvent == "on"]
+foreign {
+    func NotifyWinEvent(event: UInt32, hwnd: CPointer<Unit>, idObject: Int32, idChild: Int32): Unit
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && USER32 == "on" && Windows_Win32_UI_Accessibility_NotifyWinEvent == "on"]
+public unsafe func Windows_NotifyWinEvent(event: UInt32, hwnd: CPointer<Unit>, idObject: Int32, idChild: Int32): Unit {
+    NotifyWinEvent(event, hwnd, idObject, idChild)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && USER32 == "on" && Windows_Win32_UI_Accessibility_RegisterPointerInputTarget == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func RegisterPointerInputTarget(hwnd: CPointer<Unit>, pointerType: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && USER32 == "on" && Windows_Win32_UI_Accessibility_RegisterPointerInputTarget == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_RegisterPointerInputTarget(hwnd: CPointer<Unit>, pointerType: Int32): Int32 {
+    return RegisterPointerInputTarget(hwnd, pointerType)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && USER32 == "on" && Windows_Win32_UI_Accessibility_RegisterPointerInputTargetEx == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
     func RegisterPointerInputTargetEx(hwnd: CPointer<Unit>, pointerType: Int32, fObserve: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && USER32 == "on" && Windows_Win32_UI_Accessibility_RegisterPointerInputTargetEx == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_RegisterPointerInputTargetEx(hwnd: CPointer<Unit>, pointerType: Int32, fObserve: Int32): Int32 {
+    return RegisterPointerInputTargetEx(hwnd, pointerType, fObserve)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && USER32 == "on" && Windows_Win32_UI_Accessibility_SetWinEventHook == "on"]
+foreign {
+    // param-hint: hmodWinEventProc optional
+    func SetWinEventHook(eventMin: UInt32, eventMax: UInt32, hmodWinEventProc: CPointer<Unit>, pfnWinEventProc: WINEVENTPROC, idProcess: UInt32, idThread: UInt32, dwFlags: UInt32): HWINEVENTHOOK
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && USER32 == "on" && Windows_Win32_UI_Accessibility_SetWinEventHook == "on"]
+public unsafe func Windows_SetWinEventHook(eventMin: UInt32, eventMax: UInt32, hmodWinEventProc: CPointer<Unit>, pfnWinEventProc: WINEVENTPROC, idProcess: UInt32, idThread: UInt32, dwFlags: UInt32): HWINEVENTHOOK {
+    return SetWinEventHook(eventMin, eventMax, hmodWinEventProc, pfnWinEventProc, idProcess, idThread, dwFlags)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && USER32 == "on" && Windows_Win32_UI_Accessibility_UnhookWinEvent == "on"]
+foreign {
+    func UnhookWinEvent(hWinEventHook: HWINEVENTHOOK): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && USER32 == "on" && Windows_Win32_UI_Accessibility_UnhookWinEvent == "on"]
+public unsafe func Windows_UnhookWinEvent(hWinEventHook: HWINEVENTHOOK): Int32 {
+    return UnhookWinEvent(hWinEventHook)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && USER32 == "on" && Windows_Win32_UI_Accessibility_UnregisterPointerInputTarget == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func UnregisterPointerInputTarget(hwnd: CPointer<Unit>, pointerType: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && USER32 == "on" && Windows_Win32_UI_Accessibility_UnregisterPointerInputTarget == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_UnregisterPointerInputTarget(hwnd: CPointer<Unit>, pointerType: Int32): Int32 {
+    return UnregisterPointerInputTarget(hwnd, pointerType)
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && USER32 == "on" && Windows_Win32_UI_Accessibility_UnregisterPointerInputTargetEx == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
     func UnregisterPointerInputTargetEx(hwnd: CPointer<Unit>, pointerType: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Accessibility == "on" && USER32 == "on" && Windows_Win32_UI_Accessibility_UnregisterPointerInputTargetEx == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+public unsafe func Windows_UnregisterPointerInputTargetEx(hwnd: CPointer<Unit>, pointerType: Int32): Int32 {
+    return UnregisterPointerInputTargetEx(hwnd, pointerType)
 }
 
 @When[Windows_Win32_UI_Accessibility == "on"]

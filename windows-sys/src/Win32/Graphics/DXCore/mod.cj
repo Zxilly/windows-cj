@@ -3,7 +3,6 @@ package windows_sys.Win32.Graphics.DXCore
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 
@@ -897,9 +896,14 @@ public class IDXCoreAdapterFactory1 <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[DXCORE == "on"]
+@When[Windows_Win32_Graphics_DXCore == "on" && DXCORE == "on" && Windows_Win32_Graphics_DXCore_DXCoreCreateAdapterFactory == "on"]
 foreign {
     func DXCoreCreateAdapterFactory(riid: CPointer<GUID>, ppvFactory: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_DXCore == "on" && DXCORE == "on" && Windows_Win32_Graphics_DXCore_DXCoreCreateAdapterFactory == "on"]
+public unsafe func Windows_DXCoreCreateAdapterFactory(riid: CPointer<GUID>, ppvFactory: CPointer<CPointer<Unit>>): Int32 {
+    return DXCoreCreateAdapterFactory(riid, ppvFactory)
 }
 
 @When[Windows_Win32_Graphics_DXCore == "on"]

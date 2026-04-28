@@ -3,10 +3,8 @@ package windows_sys.UI.Input.Inking.Core
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Foundation_Numerics == "on"]
 import windows_sys.Foundation.Numerics as Foundation_Numerics
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_UI_Input_Inking == "on"]
 import windows_sys.UI.Input.Inking as UI_Input_Inking
 import windows_sys._impl_l1 as _impl_l1
 
@@ -42,7 +40,7 @@ public let CoreWetStrokeDisposition_Canceled: CoreWetStrokeDisposition = CoreWet
 @C
 public struct ICoreIncrementalInkStrokeVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_UI_Input_Inking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Input_Inking == "on"]
     public var AppendInkPoints: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.Rect>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_UI_Input_Inking == "on"]
     public var CreateInkStroke: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -94,7 +92,7 @@ public class ICoreIncrementalInkStroke <: InterfaceWrapperBase & ComInterface {
         readVtbl<ICoreIncrementalInkStrokeVtbl>(ICoreIncrementalInkStrokeVtbl())
     }
 
-    @When[Windows_UI_Input_Inking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Input_Inking == "on"]
     public unsafe func AppendInkPoints(inkPoints: CPointer<Unit>, result__: CPointer<Foundation__impl_l0.Rect>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -274,7 +272,7 @@ public class ICoreInkPresenterHost <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ICoreWetStrokeUpdateEventArgsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_UI_Input_Inking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Input_Inking == "on"]
     public var NewInkPoints: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var PointerId: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var Disposition: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -322,7 +320,7 @@ public class ICoreWetStrokeUpdateEventArgs <: InterfaceWrapperBase & ComInterfac
         readVtbl<ICoreWetStrokeUpdateEventArgsVtbl>(ICoreWetStrokeUpdateEventArgsVtbl())
     }
 
-    @When[Windows_UI_Input_Inking == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Input_Inking == "on"]
     public unsafe func NewInkPoints(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

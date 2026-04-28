@@ -25,6 +25,225 @@ public import windows_sys.Win32._impl_l1.TYPEATTR
 public import windows_sys.Win32._impl_l1.TYPEDESC
 @When[Windows_Win32_System_Com == "on" && (Windows_Win32_System_Ole == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Variant == "on" && Windows_Win32_System_Variant == "on")]
 public import windows_sys.Win32._impl_l2.VARDESC
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_BindMoniker == "on"]
+public import windows_sys.Win32._impl_l2.Windows_BindMoniker
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CLSIDFromProgID == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CLSIDFromProgID
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CLSIDFromProgIDEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CLSIDFromProgIDEx
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CLSIDFromString == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CLSIDFromString
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoAddRefServerProcess == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoAddRefServerProcess
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoAllowSetForegroundWindow == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoAllowSetForegroundWindow
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoAllowUnmarshalerCLSID == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoAllowUnmarshalerCLSID
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoBuildVersion == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoBuildVersion
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoCancelCall == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoCancelCall
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoCopyProxy == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoCopyProxy
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoCreateFreeThreadedMarshaler == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoCreateFreeThreadedMarshaler
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoCreateGuid == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoCreateGuid
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoCreateInstance == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoCreateInstance
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoCreateInstanceEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoCreateInstanceEx
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoCreateInstanceFromApp == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoCreateInstanceFromApp
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoDecrementMTAUsage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoDecrementMTAUsage
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoDisableCallCancellation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoDisableCallCancellation
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoDisconnectContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoDisconnectContext
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoDisconnectObject == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoDisconnectObject
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoDosDateTimeToFileTime == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoDosDateTimeToFileTime
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoEnableCallCancellation == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoEnableCallCancellation
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoFileTimeNow == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoFileTimeNow
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoFileTimeToDosDateTime == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoFileTimeToDosDateTime
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoFreeAllLibraries == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoFreeAllLibraries
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoFreeLibrary == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoFreeLibrary
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoFreeUnusedLibraries == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoFreeUnusedLibraries
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoFreeUnusedLibrariesEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoFreeUnusedLibrariesEx
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetApartmentType == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoGetApartmentType
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetCallContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoGetCallContext
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetCallerTID == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoGetCallerTID
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetCancelObject == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoGetCancelObject
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetClassObject == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoGetClassObject
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetContextToken == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoGetContextToken
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetCurrentLogicalThreadId == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoGetCurrentLogicalThreadId
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetCurrentProcess == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoGetCurrentProcess
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetMalloc == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoGetMalloc
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetObject == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoGetObject
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetObjectContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoGetObjectContext
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetPSClsid == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoGetPSClsid
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetSystemSecurityPermissions == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoGetSystemSecurityPermissions
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetTreatAsClass == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoGetTreatAsClass
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoImpersonateClient == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoImpersonateClient
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoIncrementMTAUsage == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoIncrementMTAUsage
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoInitialize == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoInitialize
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoInitializeEx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoInitializeEx
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoInitializeSecurity == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoInitializeSecurity
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoInstall == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoInstall
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoInvalidateRemoteMachineBindings == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoInvalidateRemoteMachineBindings
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoIsHandlerConnected == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoIsHandlerConnected
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoIsOle1Class == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoIsOle1Class
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoLoadLibrary == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoLoadLibrary
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoLockObjectExternal == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoLockObjectExternal
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoQueryAuthenticationServices == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoQueryAuthenticationServices
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoQueryClientBlanket == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoQueryClientBlanket
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoQueryProxyBlanket == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoQueryProxyBlanket
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRegisterActivationFilter == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoRegisterActivationFilter
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRegisterChannelHook == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoRegisterChannelHook
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRegisterClassObject == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoRegisterClassObject
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRegisterDeviceCatalog == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoRegisterDeviceCatalog
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRegisterInitializeSpy == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoRegisterInitializeSpy
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRegisterMallocSpy == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoRegisterMallocSpy
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRegisterPSClsid == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoRegisterPSClsid
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRegisterSurrogate == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoRegisterSurrogate
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoReleaseServerProcess == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoReleaseServerProcess
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoResumeClassObjects == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoResumeClassObjects
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRevertToSelf == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoRevertToSelf
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRevokeClassObject == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoRevokeClassObject
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRevokeDeviceCatalog == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoRevokeDeviceCatalog
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRevokeInitializeSpy == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoRevokeInitializeSpy
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRevokeMallocSpy == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoRevokeMallocSpy
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoSetCancelObject == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoSetCancelObject
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoSetProxyBlanket == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoSetProxyBlanket
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoSuspendClassObjects == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoSuspendClassObjects
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoSwitchCallContext == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoSwitchCallContext
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoTaskMemAlloc == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoTaskMemAlloc
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoTaskMemFree == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoTaskMemFree
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoTaskMemRealloc == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoTaskMemRealloc
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoTestCancel == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoTestCancel
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoTreatAsClass == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoTreatAsClass
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoUninitialize == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoUninitialize
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoWaitForMultipleHandles == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoWaitForMultipleHandles
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoWaitForMultipleObjects == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoWaitForMultipleObjects
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CreateAntiMoniker == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateAntiMoniker
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CreateBindCtx == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateBindCtx
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CreateClassMoniker == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateClassMoniker
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CreateDataAdviseHolder == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateDataAdviseHolder
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CreateDataCache == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateDataCache
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CreateFileMoniker == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateFileMoniker
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CreateGenericComposite == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateGenericComposite
+@When[Windows_Win32_System_Com == "on" && URLMON == "on" && Windows_Win32_System_Com_CreateIUriBuilder == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateIUriBuilder
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CreateItemMoniker == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateItemMoniker
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CreateObjrefMoniker == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateObjrefMoniker
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CreatePointerMoniker == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreatePointerMoniker
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CreateStdProgressIndicator == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateStdProgressIndicator
+@When[Windows_Win32_System_Com == "on" && URLMON == "on" && Windows_Win32_System_Com_CreateUri == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateUri
+@When[Windows_Win32_System_Com == "on" && URLMON == "on" && Windows_Win32_System_Com_CreateUriFromMultiByteString == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateUriFromMultiByteString
+@When[Windows_Win32_System_Com == "on" && URLMON == "on" && Windows_Win32_System_Com_CreateUriWithFragment == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateUriWithFragment
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_DcomChannelSetHResult == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DcomChannelSetHResult
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_GetClassFile == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetClassFile
+@When[Windows_Win32_System_Com == "on" && OLEAUT32 == "on" && Windows_Win32_System_Com_GetErrorInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetErrorInfo
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_GetRunningObjectTable == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetRunningObjectTable
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_IIDFromString == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IIDFromString
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_MkParseDisplayName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MkParseDisplayName
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_MonikerCommonPrefixWith == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MonikerCommonPrefixWith
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_MonikerRelativePathTo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MonikerRelativePathTo
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_ProgIDFromCLSID == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ProgIDFromCLSID
+@When[Windows_Win32_System_Com == "on" && OLEAUT32 == "on" && Windows_Win32_System_Com_SetErrorInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetErrorInfo
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_StringFromCLSID == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StringFromCLSID
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_StringFromGUID2 == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StringFromGUID2
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_StringFromIID == "on"]
+public import windows_sys.Win32._impl_l2.Windows_StringFromIID
 @When[Windows_Win32_System_Com == "on" && (Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_SystemServices == "on" && Windows_Win32_System_SystemServices == "on")]
 public import windows_sys.Win32._impl_l2.{userFLAG_STGMEDIUM, userSTGMEDIUM}
-

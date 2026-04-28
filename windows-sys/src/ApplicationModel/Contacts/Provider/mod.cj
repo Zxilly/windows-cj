@@ -5,4 +5,3 @@ package windows_sys.ApplicationModel.Contacts.Provider
 public import windows_sys._impl_l0.{AddContactResult, AddContactResult_Added, AddContactResult_AlreadyAdded, AddContactResult_Unavailable, IContactRemovedEventArgs, IContactRemovedEventArgsVtbl}
 @When[Windows_ApplicationModel_Contacts_Provider == "on"]
 public import windows_sys._impl_l1.{IContactPickerUI, IContactPickerUI2, IContactPickerUI2Vtbl, IContactPickerUIVtbl}
-

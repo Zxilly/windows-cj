@@ -9,6 +9,7 @@ import windows_interface as windows_interface
 @C
 public struct ISearchPaneQueryLinguisticDetailsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var QueryTextAlternatives: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var QueryTextCompositionStart: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var QueryTextCompositionLength: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
@@ -55,6 +56,7 @@ public class ISearchPaneQueryLinguisticDetails <: InterfaceWrapperBase & ComInte
         readVtbl<ISearchPaneQueryLinguisticDetailsVtbl>(ISearchPaneQueryLinguisticDetailsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func QueryTextAlternatives(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -360,6 +362,7 @@ public class ISearchPaneVisibilityChangedEventArgs <: InterfaceWrapperBase & Com
 @C
 public struct ISearchQueryLinguisticDetailsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var QueryTextAlternatives: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var QueryTextCompositionStart: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var QueryTextCompositionLength: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
@@ -406,6 +409,7 @@ public class ISearchQueryLinguisticDetails <: InterfaceWrapperBase & ComInterfac
         readVtbl<ISearchQueryLinguisticDetailsVtbl>(ISearchQueryLinguisticDetailsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func QueryTextAlternatives(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -429,6 +433,7 @@ public class ISearchQueryLinguisticDetails <: InterfaceWrapperBase & ComInterfac
 @C
 public struct ISearchQueryLinguisticDetailsFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateInstance: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -473,6 +478,7 @@ public class ISearchQueryLinguisticDetailsFactory <: InterfaceWrapperBase & ComI
         readVtbl<ISearchQueryLinguisticDetailsFactoryVtbl>(ISearchQueryLinguisticDetailsFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateInstance(queryTextAlternatives: CPointer<Unit>, queryTextCompositionStart: UInt32, queryTextCompositionLength: UInt32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

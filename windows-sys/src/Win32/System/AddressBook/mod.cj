@@ -5,7 +5,6 @@ import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrap
 import windows_interface as windows_interface
 import windows_polyfill.{unionReadFloat32, unionReadFloat64, unionReadInt16, unionReadInt32, unionReadInt64, unionReadUInt16, unionReadUInt32, unionWriteFloat32, unionWriteFloat64, unionWriteInt16, unionWriteInt32, unionWriteInt64, unionWriteUInt16, unionWriteUInt32}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
@@ -4184,82 +4183,579 @@ public struct WABIMPORTPARAM {
     public init() {}
 }
 
-@When[MAPI32 == "on"]
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_BuildDisplayTable == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func BuildDisplayTable(lpAllocateBuffer: LPALLOCATEBUFFER, lpAllocateMore: LPALLOCATEMORE, lpFreeBuffer: LPFREEBUFFER, lpMalloc: CPointer<Unit>, hInstance: CPointer<Unit>, cPages: UInt32, lpPage: CPointer<DTPAGE>, ulFlags: UInt32, lppTable: CPointer<CPointer<Unit>>, lppTblData: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_BuildDisplayTable == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_BuildDisplayTable(lpAllocateBuffer: LPALLOCATEBUFFER, lpAllocateMore: LPALLOCATEMORE, lpFreeBuffer: LPFREEBUFFER, lpMalloc: CPointer<Unit>, hInstance: CPointer<Unit>, cPages: UInt32, lpPage: CPointer<DTPAGE>, ulFlags: UInt32, lppTable: CPointer<CPointer<Unit>>, lppTblData: CPointer<CPointer<Unit>>): Int32 {
+    return BuildDisplayTable(lpAllocateBuffer, lpAllocateMore, lpFreeBuffer, lpMalloc, hInstance, cPages, lpPage, ulFlags, lppTable, lppTblData)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_ChangeIdleRoutine == "on"]
 foreign {
     func ChangeIdleRoutine(ftg: CPointer<Unit>, lpfnIdle: PFNIDLE, lpvIdleParam: CPointer<Unit>, priIdle: Int16, csecIdle: UInt32, iroIdle: UInt16, ircIdle: UInt16): Unit
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_ChangeIdleRoutine == "on"]
+public unsafe func Windows_ChangeIdleRoutine(ftg: CPointer<Unit>, lpfnIdle: PFNIDLE, lpvIdleParam: CPointer<Unit>, priIdle: Int16, csecIdle: UInt32, iroIdle: UInt16, ircIdle: UInt16): Unit {
+    ChangeIdleRoutine(ftg, lpfnIdle, lpvIdleParam, priIdle, csecIdle, iroIdle, ircIdle)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_CreateIProp == "on"]
+foreign {
     func CreateIProp(lpInterface: CPointer<GUID>, lpAllocateBuffer: LPALLOCATEBUFFER, lpAllocateMore: LPALLOCATEMORE, lpFreeBuffer: LPFREEBUFFER, lpvReserved: CPointer<Unit>, lppPropData: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_CreateIProp == "on"]
+public unsafe func Windows_CreateIProp(lpInterface: CPointer<GUID>, lpAllocateBuffer: LPALLOCATEBUFFER, lpAllocateMore: LPALLOCATEMORE, lpFreeBuffer: LPFREEBUFFER, lpvReserved: CPointer<Unit>, lppPropData: CPointer<CPointer<Unit>>): Int32 {
+    return CreateIProp(lpInterface, lpAllocateBuffer, lpAllocateMore, lpFreeBuffer, lpvReserved, lppPropData)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_DeinitMapiUtil == "on"]
+foreign {
     func DeinitMapiUtil(): Unit
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_DeinitMapiUtil == "on"]
+public unsafe func Windows_DeinitMapiUtil(): Unit {
+    DeinitMapiUtil()
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_DeregisterIdleRoutine == "on"]
+foreign {
     func DeregisterIdleRoutine(ftg: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_DeregisterIdleRoutine == "on"]
+public unsafe func Windows_DeregisterIdleRoutine(ftg: CPointer<Unit>): Unit {
+    DeregisterIdleRoutine(ftg)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_EnableIdleRoutine == "on"]
+foreign {
     func EnableIdleRoutine(ftg: CPointer<Unit>, fEnable: Int32): Unit
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_EnableIdleRoutine == "on"]
+public unsafe func Windows_EnableIdleRoutine(ftg: CPointer<Unit>, fEnable: Int32): Unit {
+    EnableIdleRoutine(ftg, fEnable)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_FEqualNames == "on"]
+foreign {
     func FEqualNames(lpName1: CPointer<MAPINAMEID>, lpName2: CPointer<MAPINAMEID>): Int32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_FEqualNames == "on"]
+public unsafe func Windows_FEqualNames(lpName1: CPointer<MAPINAMEID>, lpName2: CPointer<MAPINAMEID>): Int32 {
+    return FEqualNames(lpName1, lpName2)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_FPropCompareProp == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func FPropCompareProp(lpSPropValue1: CPointer<SPropValue>, ulRelOp: UInt32, lpSPropValue2: CPointer<SPropValue>): Int32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_FPropCompareProp == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_FPropCompareProp(lpSPropValue1: CPointer<SPropValue>, ulRelOp: UInt32, lpSPropValue2: CPointer<SPropValue>): Int32 {
+    return FPropCompareProp(lpSPropValue1, ulRelOp, lpSPropValue2)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_FPropContainsProp == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func FPropContainsProp(lpSPropValueDst: CPointer<SPropValue>, lpSPropValueSrc: CPointer<SPropValue>, ulFuzzyLevel: UInt32): Int32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_FPropContainsProp == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_FPropContainsProp(lpSPropValueDst: CPointer<SPropValue>, lpSPropValueSrc: CPointer<SPropValue>, ulFuzzyLevel: UInt32): Int32 {
+    return FPropContainsProp(lpSPropValueDst, lpSPropValueSrc, ulFuzzyLevel)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_FPropExists == "on"]
+foreign {
     func FPropExists(lpMapiProp: CPointer<Unit>, ulPropTag: UInt32): Int32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_FPropExists == "on"]
+public unsafe func Windows_FPropExists(lpMapiProp: CPointer<Unit>, ulPropTag: UInt32): Int32 {
+    return FPropExists(lpMapiProp, ulPropTag)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_FreePadrlist == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func FreePadrlist(lpAdrlist: CPointer<ADRLIST>): Unit
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_FreePadrlist == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_FreePadrlist(lpAdrlist: CPointer<ADRLIST>): Unit {
+    FreePadrlist(lpAdrlist)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_FreeProws == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func FreeProws(lpRows: CPointer<SRowSet>): Unit
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_FreeProws == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_FreeProws(lpRows: CPointer<SRowSet>): Unit {
+    FreeProws(lpRows)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_FtAddFt == "on"]
+foreign {
     func FtAddFt(ftAddend1: Win32_Foundation.FILETIME, ftAddend2: Win32_Foundation.FILETIME): Win32_Foundation.FILETIME
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_FtAddFt == "on"]
+public unsafe func Windows_FtAddFt(ftAddend1: Win32_Foundation.FILETIME, ftAddend2: Win32_Foundation.FILETIME): Win32_Foundation.FILETIME {
+    return FtAddFt(ftAddend1, ftAddend2)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_FtMulDw == "on"]
+foreign {
     func FtMulDw(ftMultiplier: UInt32, ftMultiplicand: Win32_Foundation.FILETIME): Win32_Foundation.FILETIME
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_FtMulDw == "on"]
+public unsafe func Windows_FtMulDw(ftMultiplier: UInt32, ftMultiplicand: Win32_Foundation.FILETIME): Win32_Foundation.FILETIME {
+    return FtMulDw(ftMultiplier, ftMultiplicand)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_FtMulDwDw == "on"]
+foreign {
     func FtMulDwDw(ftMultiplicand: UInt32, ftMultiplier: UInt32): Win32_Foundation.FILETIME
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_FtMulDwDw == "on"]
+public unsafe func Windows_FtMulDwDw(ftMultiplicand: UInt32, ftMultiplier: UInt32): Win32_Foundation.FILETIME {
+    return FtMulDwDw(ftMultiplicand, ftMultiplier)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_FtNegFt == "on"]
+foreign {
     func FtNegFt(ft: Win32_Foundation.FILETIME): Win32_Foundation.FILETIME
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_FtNegFt == "on"]
+public unsafe func Windows_FtNegFt(ft: Win32_Foundation.FILETIME): Win32_Foundation.FILETIME {
+    return FtNegFt(ft)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_FtSubFt == "on"]
+foreign {
     func FtSubFt(ftMinuend: Win32_Foundation.FILETIME, ftSubtrahend: Win32_Foundation.FILETIME): Win32_Foundation.FILETIME
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_FtSubFt == "on"]
+public unsafe func Windows_FtSubFt(ftMinuend: Win32_Foundation.FILETIME, ftSubtrahend: Win32_Foundation.FILETIME): Win32_Foundation.FILETIME {
+    return FtSubFt(ftMinuend, ftSubtrahend)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_FtgRegisterIdleRoutine == "on"]
+foreign {
     func FtgRegisterIdleRoutine(lpfnIdle: PFNIDLE, lpvIdleParam: CPointer<Unit>, priIdle: Int16, csecIdle: UInt32, iroIdle: UInt16): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_FtgRegisterIdleRoutine == "on"]
+public unsafe func Windows_FtgRegisterIdleRoutine(lpfnIdle: PFNIDLE, lpvIdleParam: CPointer<Unit>, priIdle: Int16, csecIdle: UInt32, iroIdle: UInt16): CPointer<Unit> {
+    return FtgRegisterIdleRoutine(lpfnIdle, lpvIdleParam, priIdle, csecIdle, iroIdle)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_HrAddColumns == "on"]
+foreign {
     func HrAddColumns(lptbl: CPointer<Unit>, lpproptagColumnsNew: CPointer<SPropTagArray>, lpAllocateBuffer: LPALLOCATEBUFFER, lpFreeBuffer: LPFREEBUFFER): Int32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_HrAddColumns == "on"]
+public unsafe func Windows_HrAddColumns(lptbl: CPointer<Unit>, lpproptagColumnsNew: CPointer<SPropTagArray>, lpAllocateBuffer: LPALLOCATEBUFFER, lpFreeBuffer: LPFREEBUFFER): Int32 {
+    return HrAddColumns(lptbl, lpproptagColumnsNew, lpAllocateBuffer, lpFreeBuffer)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_HrAddColumnsEx == "on"]
+foreign {
     func HrAddColumnsEx(lptbl: CPointer<Unit>, lpproptagColumnsNew: CPointer<SPropTagArray>, lpAllocateBuffer: LPALLOCATEBUFFER, lpFreeBuffer: LPFREEBUFFER, lpfnFilterColumns: IntNative): Int32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_HrAddColumnsEx == "on"]
+public unsafe func Windows_HrAddColumnsEx(lptbl: CPointer<Unit>, lpproptagColumnsNew: CPointer<SPropTagArray>, lpAllocateBuffer: LPALLOCATEBUFFER, lpFreeBuffer: LPFREEBUFFER, lpfnFilterColumns: IntNative): Int32 {
+    return HrAddColumnsEx(lptbl, lpproptagColumnsNew, lpAllocateBuffer, lpFreeBuffer, lpfnFilterColumns)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_HrAllocAdviseSink == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func HrAllocAdviseSink(lpfnCallback: LPNOTIFCALLBACK, lpvContext: CPointer<Unit>, lppAdviseSink: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_HrAllocAdviseSink == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_HrAllocAdviseSink(lpfnCallback: LPNOTIFCALLBACK, lpvContext: CPointer<Unit>, lppAdviseSink: CPointer<CPointer<Unit>>): Int32 {
+    return HrAllocAdviseSink(lpfnCallback, lpvContext, lppAdviseSink)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_HrDispatchNotifications == "on"]
+foreign {
     func HrDispatchNotifications(ulFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_HrDispatchNotifications == "on"]
+public unsafe func Windows_HrDispatchNotifications(ulFlags: UInt32): Int32 {
+    return HrDispatchNotifications(ulFlags)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_HrGetOneProp == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func HrGetOneProp(lpMapiProp: CPointer<Unit>, ulPropTag: UInt32, lppProp: CPointer<CPointer<SPropValue>>): Int32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_HrGetOneProp == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_HrGetOneProp(lpMapiProp: CPointer<Unit>, ulPropTag: UInt32, lppProp: CPointer<CPointer<SPropValue>>): Int32 {
+    return HrGetOneProp(lpMapiProp, ulPropTag, lppProp)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_HrIStorageFromStream == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+foreign {
+    func HrIStorageFromStream(lpUnkIn: CPointer<Unit>, lpInterface: CPointer<GUID>, ulFlags: UInt32, lppStorageOut: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_HrIStorageFromStream == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on"]
+public unsafe func Windows_HrIStorageFromStream(lpUnkIn: CPointer<Unit>, lpInterface: CPointer<GUID>, ulFlags: UInt32, lppStorageOut: CPointer<CPointer<Unit>>): Int32 {
+    return HrIStorageFromStream(lpUnkIn, lpInterface, ulFlags, lppStorageOut)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_HrQueryAllRows == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func HrQueryAllRows(lpTable: CPointer<Unit>, lpPropTags: CPointer<SPropTagArray>, lpRestriction: CPointer<SRestriction>, lpSortOrderSet: CPointer<SSortOrderSet>, crowsMax: Int32, lppRows: CPointer<CPointer<SRowSet>>): Int32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_HrQueryAllRows == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_HrQueryAllRows(lpTable: CPointer<Unit>, lpPropTags: CPointer<SPropTagArray>, lpRestriction: CPointer<SRestriction>, lpSortOrderSet: CPointer<SSortOrderSet>, crowsMax: Int32, lppRows: CPointer<CPointer<SRowSet>>): Int32 {
+    return HrQueryAllRows(lpTable, lpPropTags, lpRestriction, lpSortOrderSet, crowsMax, lppRows)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_HrSetOneProp == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func HrSetOneProp(lpMapiProp: CPointer<Unit>, lpProp: CPointer<SPropValue>): Int32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_HrSetOneProp == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_HrSetOneProp(lpMapiProp: CPointer<Unit>, lpProp: CPointer<SPropValue>): Int32 {
+    return HrSetOneProp(lpMapiProp, lpProp)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_HrThisThreadAdviseSink == "on"]
+foreign {
     func HrThisThreadAdviseSink(lpAdviseSink: CPointer<Unit>, lppAdviseSink: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_HrThisThreadAdviseSink == "on"]
+public unsafe func Windows_HrThisThreadAdviseSink(lpAdviseSink: CPointer<Unit>, lppAdviseSink: CPointer<CPointer<Unit>>): Int32 {
+    return HrThisThreadAdviseSink(lpAdviseSink, lppAdviseSink)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_LPropCompareProp == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func LPropCompareProp(lpSPropValueA: CPointer<SPropValue>, lpSPropValueB: CPointer<SPropValue>): Int32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_LPropCompareProp == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_LPropCompareProp(lpSPropValueA: CPointer<SPropValue>, lpSPropValueB: CPointer<SPropValue>): Int32 {
+    return LPropCompareProp(lpSPropValueA, lpSPropValueB)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_LpValFindProp == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func LpValFindProp(ulPropTag: UInt32, cValues: UInt32, lpPropArray: CPointer<SPropValue>): CPointer<SPropValue>
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_LpValFindProp == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_LpValFindProp(ulPropTag: UInt32, cValues: UInt32, lpPropArray: CPointer<SPropValue>): CPointer<SPropValue> {
+    return LpValFindProp(ulPropTag, cValues, lpPropArray)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_MAPIDeinitIdle == "on"]
+foreign {
     func MAPIDeinitIdle(): Unit
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_MAPIDeinitIdle == "on"]
+public unsafe func Windows_MAPIDeinitIdle(): Unit {
+    MAPIDeinitIdle()
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_MAPIGetDefaultMalloc == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func MAPIGetDefaultMalloc(): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_MAPIGetDefaultMalloc == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_MAPIGetDefaultMalloc(): CPointer<Unit> {
+    return MAPIGetDefaultMalloc()
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_MAPIInitIdle == "on"]
+foreign {
     func MAPIInitIdle(lpvReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_MAPIInitIdle == "on"]
+public unsafe func Windows_MAPIInitIdle(lpvReserved: CPointer<Unit>): Int32 {
+    return MAPIInitIdle(lpvReserved)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_OpenStreamOnFile == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    // param-hint: lpszPrefix optional
+    func OpenStreamOnFile(lpAllocateBuffer: LPALLOCATEBUFFER, lpFreeBuffer: LPFREEBUFFER, ulFlags: UInt32, lpszFileName: CPointer<Int8>, lpszPrefix: CPointer<Int8>, lppStream: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_OpenStreamOnFile == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_OpenStreamOnFile(lpAllocateBuffer: LPALLOCATEBUFFER, lpFreeBuffer: LPFREEBUFFER, ulFlags: UInt32, lpszFileName: CPointer<Int8>, lpszPrefix: CPointer<Int8>, lppStream: CPointer<CPointer<Unit>>): Int32 {
+    return OpenStreamOnFile(lpAllocateBuffer, lpFreeBuffer, ulFlags, lpszFileName, lpszPrefix, lppStream)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_PpropFindProp == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func PpropFindProp(lpPropArray: CPointer<SPropValue>, cValues: UInt32, ulPropTag: UInt32): CPointer<SPropValue>
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_PpropFindProp == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_PpropFindProp(lpPropArray: CPointer<SPropValue>, cValues: UInt32, ulPropTag: UInt32): CPointer<SPropValue> {
+    return PpropFindProp(lpPropArray, cValues, ulPropTag)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_PropCopyMore == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func PropCopyMore(lpSPropValueDest: CPointer<SPropValue>, lpSPropValueSrc: CPointer<SPropValue>, lpfAllocMore: LPALLOCATEMORE, lpvObject: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_PropCopyMore == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_PropCopyMore(lpSPropValueDest: CPointer<SPropValue>, lpSPropValueSrc: CPointer<SPropValue>, lpfAllocMore: LPALLOCATEMORE, lpvObject: CPointer<Unit>): Int32 {
+    return PropCopyMore(lpSPropValueDest, lpSPropValueSrc, lpfAllocMore, lpvObject)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_RTFSync == "on"]
+foreign {
     func RTFSync(lpMessage: CPointer<Unit>, ulFlags: UInt32, lpfMessageUpdated: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_RTFSync == "on"]
+public unsafe func Windows_RTFSync(lpMessage: CPointer<Unit>, ulFlags: UInt32, lpfMessageUpdated: CPointer<Int32>): Int32 {
+    return RTFSync(lpMessage, ulFlags, lpfMessageUpdated)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_ScCopyNotifications == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func ScCopyNotifications(cNotification: Int32, lpNotifications: CPointer<NOTIFICATION>, lpvDst: CPointer<Unit>, lpcb: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_ScCopyNotifications == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_ScCopyNotifications(cNotification: Int32, lpNotifications: CPointer<NOTIFICATION>, lpvDst: CPointer<Unit>, lpcb: CPointer<UInt32>): Int32 {
+    return ScCopyNotifications(cNotification, lpNotifications, lpvDst, lpcb)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_ScCopyProps == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func ScCopyProps(cValues: Int32, lpPropArray: CPointer<SPropValue>, lpvDst: CPointer<Unit>, lpcb: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_ScCopyProps == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_ScCopyProps(cValues: Int32, lpPropArray: CPointer<SPropValue>, lpvDst: CPointer<Unit>, lpcb: CPointer<UInt32>): Int32 {
+    return ScCopyProps(cValues, lpPropArray, lpvDst, lpcb)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_ScCountNotifications == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func ScCountNotifications(cNotifications: Int32, lpNotifications: CPointer<NOTIFICATION>, lpcb: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_ScCountNotifications == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_ScCountNotifications(cNotifications: Int32, lpNotifications: CPointer<NOTIFICATION>, lpcb: CPointer<UInt32>): Int32 {
+    return ScCountNotifications(cNotifications, lpNotifications, lpcb)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_ScCountProps == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func ScCountProps(cValues: Int32, lpPropArray: CPointer<SPropValue>, lpcb: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_ScCountProps == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_ScCountProps(cValues: Int32, lpPropArray: CPointer<SPropValue>, lpcb: CPointer<UInt32>): Int32 {
+    return ScCountProps(cValues, lpPropArray, lpcb)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_ScCreateConversationIndex == "on"]
+foreign {
     func ScCreateConversationIndex(cbParent: UInt32, lpbParent: CPointer<UInt8>, lpcbConvIndex: CPointer<UInt32>, lppbConvIndex: CPointer<CPointer<UInt8>>): Int32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_ScCreateConversationIndex == "on"]
+public unsafe func Windows_ScCreateConversationIndex(cbParent: UInt32, lpbParent: CPointer<UInt8>, lpcbConvIndex: CPointer<UInt32>, lppbConvIndex: CPointer<CPointer<UInt8>>): Int32 {
+    return ScCreateConversationIndex(cbParent, lpbParent, lpcbConvIndex, lppbConvIndex)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_ScDupPropset == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func ScDupPropset(cValues: Int32, lpPropArray: CPointer<SPropValue>, lpAllocateBuffer: LPALLOCATEBUFFER, lppPropArray: CPointer<CPointer<SPropValue>>): Int32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_ScDupPropset == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_ScDupPropset(cValues: Int32, lpPropArray: CPointer<SPropValue>, lpAllocateBuffer: LPALLOCATEBUFFER, lppPropArray: CPointer<CPointer<SPropValue>>): Int32 {
+    return ScDupPropset(cValues, lpPropArray, lpAllocateBuffer, lppPropArray)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_ScInitMapiUtil == "on"]
+foreign {
     func ScInitMapiUtil(ulFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_ScInitMapiUtil == "on"]
+public unsafe func Windows_ScInitMapiUtil(ulFlags: UInt32): Int32 {
+    return ScInitMapiUtil(ulFlags)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_ScLocalPathFromUNC == "on"]
+foreign {
     // param-hint: lpszLocal len=param[2]
     func ScLocalPathFromUNC(lpszUNC: CPointer<UInt8>, lpszLocal: CPointer<UInt8>, cchLocal: UInt32): Int32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_ScLocalPathFromUNC == "on"]
+public unsafe func Windows_ScLocalPathFromUNC(lpszUNC: CPointer<UInt8>, lpszLocal: CPointer<UInt8>, cchLocal: UInt32): Int32 {
+    return ScLocalPathFromUNC(lpszUNC, lpszLocal, cchLocal)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_ScRelocNotifications == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func ScRelocNotifications(cNotification: Int32, lpNotifications: CPointer<NOTIFICATION>, lpvBaseOld: CPointer<Unit>, lpvBaseNew: CPointer<Unit>, lpcb: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_ScRelocNotifications == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_ScRelocNotifications(cNotification: Int32, lpNotifications: CPointer<NOTIFICATION>, lpvBaseOld: CPointer<Unit>, lpvBaseNew: CPointer<Unit>, lpcb: CPointer<UInt32>): Int32 {
+    return ScRelocNotifications(cNotification, lpNotifications, lpvBaseOld, lpvBaseNew, lpcb)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_ScRelocProps == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func ScRelocProps(cValues: Int32, lpPropArray: CPointer<SPropValue>, lpvBaseOld: CPointer<Unit>, lpvBaseNew: CPointer<Unit>, lpcb: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_ScRelocProps == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_ScRelocProps(cValues: Int32, lpPropArray: CPointer<SPropValue>, lpvBaseOld: CPointer<Unit>, lpvBaseNew: CPointer<Unit>, lpcb: CPointer<UInt32>): Int32 {
+    return ScRelocProps(cValues, lpPropArray, lpvBaseOld, lpvBaseNew, lpcb)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_ScUNCFromLocalPath == "on"]
+foreign {
     // param-hint: lpszUNC len=param[2]
     func ScUNCFromLocalPath(lpszLocal: CPointer<UInt8>, lpszUNC: CPointer<UInt8>, cchUNC: UInt32): Int32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_ScUNCFromLocalPath == "on"]
+public unsafe func Windows_ScUNCFromLocalPath(lpszLocal: CPointer<UInt8>, lpszUNC: CPointer<UInt8>, cchUNC: UInt32): Int32 {
+    return ScUNCFromLocalPath(lpszLocal, lpszUNC, cchUNC)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_SzFindCh == "on"]
+foreign {
     func SzFindCh(lpsz: CPointer<Int8>, ch: UInt16): CPointer<Int8>
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_SzFindCh == "on"]
+public unsafe func Windows_SzFindCh(lpsz: CPointer<Int8>, ch: UInt16): CPointer<Int8> {
+    return SzFindCh(lpsz, ch)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_SzFindLastCh == "on"]
+foreign {
     func SzFindLastCh(lpsz: CPointer<Int8>, ch: UInt16): CPointer<Int8>
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_SzFindLastCh == "on"]
+public unsafe func Windows_SzFindLastCh(lpsz: CPointer<Int8>, ch: UInt16): CPointer<Int8> {
+    return SzFindLastCh(lpsz, ch)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_SzFindSz == "on"]
+foreign {
     func SzFindSz(lpsz: CPointer<Int8>, lpszKey: CPointer<Int8>): CPointer<Int8>
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_SzFindSz == "on"]
+public unsafe func Windows_SzFindSz(lpsz: CPointer<Int8>, lpszKey: CPointer<Int8>): CPointer<Int8> {
+    return SzFindSz(lpsz, lpszKey)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_UFromSz == "on"]
+foreign {
     func UFromSz(lpsz: CPointer<Int8>): UInt32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_UFromSz == "on"]
+public unsafe func Windows_UFromSz(lpsz: CPointer<Int8>): UInt32 {
+    return UFromSz(lpsz)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_UlAddRef == "on"]
+foreign {
     func UlAddRef(lpunk: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_UlAddRef == "on"]
+public unsafe func Windows_UlAddRef(lpunk: CPointer<Unit>): UInt32 {
+    return UlAddRef(lpunk)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_UlPropSize == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func UlPropSize(lpSPropValue: CPointer<SPropValue>): UInt32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_UlPropSize == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_UlPropSize(lpSPropValue: CPointer<SPropValue>): UInt32 {
+    return UlPropSize(lpSPropValue)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_UlRelease == "on"]
+foreign {
     func UlRelease(lpunk: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_UlRelease == "on"]
+public unsafe func Windows_UlRelease(lpunk: CPointer<Unit>): UInt32 {
+    return UlRelease(lpunk)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_WrapCompressedRTFStream == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func WrapCompressedRTFStream(lpCompressedRTFStream: CPointer<Unit>, ulFlags: UInt32, lpUncompressedRTFStream: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_WrapCompressedRTFStream == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_WrapCompressedRTFStream(lpCompressedRTFStream: CPointer<Unit>, ulFlags: UInt32, lpUncompressedRTFStream: CPointer<CPointer<Unit>>): Int32 {
+    return WrapCompressedRTFStream(lpCompressedRTFStream, ulFlags, lpUncompressedRTFStream)
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_WrapStoreEntryID == "on"]
+foreign {
     // param-hint: lpOrigEntry bytes=param[2]
     // param-hint: lppWrappedEntry bytes=param[4]
     func WrapStoreEntryID(ulFlags: UInt32, lpszDLLName: CPointer<Int8>, cbOrigEntry: UInt32, lpOrigEntry: CPointer<ENTRYID>, lpcbWrappedEntry: CPointer<UInt32>, lppWrappedEntry: CPointer<CPointer<ENTRYID>>): Int32
 }
 
-@When[MAPI32 == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on")]
-foreign {
-    func HrIStorageFromStream(lpUnkIn: CPointer<Unit>, lpInterface: CPointer<GUID>, ulFlags: UInt32, lppStorageOut: CPointer<CPointer<Unit>>): Int32
+@When[Windows_Win32_System_AddressBook == "on" && MAPI32 == "on" && Windows_Win32_System_AddressBook_WrapStoreEntryID == "on"]
+public unsafe func Windows_WrapStoreEntryID(ulFlags: UInt32, lpszDLLName: CPointer<Int8>, cbOrigEntry: UInt32, lpOrigEntry: CPointer<ENTRYID>, lpcbWrappedEntry: CPointer<UInt32>, lppWrappedEntry: CPointer<CPointer<ENTRYID>>): Int32 {
+    return WrapStoreEntryID(ulFlags, lpszDLLName, cbOrigEntry, lpOrigEntry, lpcbWrappedEntry, lppWrappedEntry)
 }
 
-@When[MAPI32 == "on" && Windows_Win32_System_Com == "on"]
-foreign {
-    func BuildDisplayTable(lpAllocateBuffer: LPALLOCATEBUFFER, lpAllocateMore: LPALLOCATEMORE, lpFreeBuffer: LPFREEBUFFER, lpMalloc: CPointer<Unit>, hInstance: CPointer<Unit>, cPages: UInt32, lpPage: CPointer<DTPAGE>, ulFlags: UInt32, lppTable: CPointer<CPointer<Unit>>, lppTblData: CPointer<CPointer<Unit>>): Int32
-    func FPropCompareProp(lpSPropValue1: CPointer<SPropValue>, ulRelOp: UInt32, lpSPropValue2: CPointer<SPropValue>): Int32
-    func FPropContainsProp(lpSPropValueDst: CPointer<SPropValue>, lpSPropValueSrc: CPointer<SPropValue>, ulFuzzyLevel: UInt32): Int32
-    func FreePadrlist(lpAdrlist: CPointer<ADRLIST>): Unit
-    func FreeProws(lpRows: CPointer<SRowSet>): Unit
-    func HrAllocAdviseSink(lpfnCallback: LPNOTIFCALLBACK, lpvContext: CPointer<Unit>, lppAdviseSink: CPointer<CPointer<Unit>>): Int32
-    func HrGetOneProp(lpMapiProp: CPointer<Unit>, ulPropTag: UInt32, lppProp: CPointer<CPointer<SPropValue>>): Int32
-    func HrQueryAllRows(lpTable: CPointer<Unit>, lpPropTags: CPointer<SPropTagArray>, lpRestriction: CPointer<SRestriction>, lpSortOrderSet: CPointer<SSortOrderSet>, crowsMax: Int32, lppRows: CPointer<CPointer<SRowSet>>): Int32
-    func HrSetOneProp(lpMapiProp: CPointer<Unit>, lpProp: CPointer<SPropValue>): Int32
-    func LPropCompareProp(lpSPropValueA: CPointer<SPropValue>, lpSPropValueB: CPointer<SPropValue>): Int32
-    func LpValFindProp(ulPropTag: UInt32, cValues: UInt32, lpPropArray: CPointer<SPropValue>): CPointer<SPropValue>
-    func MAPIGetDefaultMalloc(): CPointer<Unit>
-    // param-hint: lpszPrefix optional
-    func OpenStreamOnFile(lpAllocateBuffer: LPALLOCATEBUFFER, lpFreeBuffer: LPFREEBUFFER, ulFlags: UInt32, lpszFileName: CPointer<Int8>, lpszPrefix: CPointer<Int8>, lppStream: CPointer<CPointer<Unit>>): Int32
-    func PpropFindProp(lpPropArray: CPointer<SPropValue>, cValues: UInt32, ulPropTag: UInt32): CPointer<SPropValue>
-    func PropCopyMore(lpSPropValueDest: CPointer<SPropValue>, lpSPropValueSrc: CPointer<SPropValue>, lpfAllocMore: LPALLOCATEMORE, lpvObject: CPointer<Unit>): Int32
-    func ScCopyNotifications(cNotification: Int32, lpNotifications: CPointer<NOTIFICATION>, lpvDst: CPointer<Unit>, lpcb: CPointer<UInt32>): Int32
-    func ScCopyProps(cValues: Int32, lpPropArray: CPointer<SPropValue>, lpvDst: CPointer<Unit>, lpcb: CPointer<UInt32>): Int32
-    func ScCountNotifications(cNotifications: Int32, lpNotifications: CPointer<NOTIFICATION>, lpcb: CPointer<UInt32>): Int32
-    func ScCountProps(cValues: Int32, lpPropArray: CPointer<SPropValue>, lpcb: CPointer<UInt32>): Int32
-    func ScDupPropset(cValues: Int32, lpPropArray: CPointer<SPropValue>, lpAllocateBuffer: LPALLOCATEBUFFER, lppPropArray: CPointer<CPointer<SPropValue>>): Int32
-    func ScRelocNotifications(cNotification: Int32, lpNotifications: CPointer<NOTIFICATION>, lpvBaseOld: CPointer<Unit>, lpvBaseNew: CPointer<Unit>, lpcb: CPointer<UInt32>): Int32
-    func ScRelocProps(cValues: Int32, lpPropArray: CPointer<SPropValue>, lpvBaseOld: CPointer<Unit>, lpvBaseNew: CPointer<Unit>, lpcb: CPointer<UInt32>): Int32
-    func UlPropSize(lpSPropValue: CPointer<SPropValue>): UInt32
-    func WrapCompressedRTFStream(lpCompressedRTFStream: CPointer<Unit>, ulFlags: UInt32, lpUncompressedRTFStream: CPointer<CPointer<Unit>>): Int32
-}
-
-@When[RTM == "on"]
+@When[Windows_Win32_System_AddressBook == "on" && RTM == "on" && Windows_Win32_System_AddressBook_CreateTable == "on"]
 foreign {
     func CreateTable(lpInterface: CPointer<GUID>, lpAllocateBuffer: LPALLOCATEBUFFER, lpAllocateMore: LPALLOCATEMORE, lpFreeBuffer: LPFREEBUFFER, lpvReserved: CPointer<Unit>, ulTableType: UInt32, ulPropTagIndexColumn: UInt32, lpSPropTagArrayColumns: CPointer<SPropTagArray>, lppTableData: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_AddressBook == "on" && RTM == "on" && Windows_Win32_System_AddressBook_CreateTable == "on"]
+public unsafe func Windows_CreateTable(lpInterface: CPointer<GUID>, lpAllocateBuffer: LPALLOCATEBUFFER, lpAllocateMore: LPALLOCATEMORE, lpFreeBuffer: LPFREEBUFFER, lpvReserved: CPointer<Unit>, ulTableType: UInt32, ulPropTagIndexColumn: UInt32, lpSPropTagArrayColumns: CPointer<SPropTagArray>, lppTableData: CPointer<CPointer<Unit>>): Int32 {
+    return CreateTable(lpInterface, lpAllocateBuffer, lpAllocateMore, lpFreeBuffer, lpvReserved, ulTableType, ulPropTagIndexColumn, lpSPropTagArrayColumns, lppTableData)
 }
 
 @When[Windows_Win32_System_AddressBook == "on"]

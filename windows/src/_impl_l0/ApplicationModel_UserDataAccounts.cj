@@ -19,7 +19,10 @@ import windows_collections as windows_collections
 @C
 public struct IUserDataAccount3Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ExplictReadAccessPackageFamilyNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ExplictReadAccessPackageFamilyNames: UIntNative = UIntNative(0)
     public var DisplayName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetDisplayName: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -90,6 +93,7 @@ public class IUserDataAccount3 <: InterfaceWrapperBase & ComInterface & RuntimeN
         readVtbl<IUserDataAccount3Vtbl>(IUserDataAccount3Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ExplictReadAccessPackageFamilyNames(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

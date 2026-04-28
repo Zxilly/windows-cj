@@ -917,6 +917,7 @@ public struct IBackgroundTaskRegistrationGroupVtbl {
     @When[Windows_ApplicationModel_Activation == "on"]
     public var BackgroundActivated: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveBackgroundActivated: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var AllTasks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -986,6 +987,7 @@ public class IBackgroundTaskRegistrationGroup <: InterfaceWrapperBase & ComInter
         return __vt.RemoveBackgroundActivated(__liveRaw, token)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AllTasks(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1059,6 +1061,7 @@ public class IBackgroundTaskRegistrationGroupFactory <: InterfaceWrapperBase & C
 @C
 public struct IBackgroundTaskRegistrationStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AllTasks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1103,6 +1106,7 @@ public class IBackgroundTaskRegistrationStatics <: InterfaceWrapperBase & ComInt
         readVtbl<IBackgroundTaskRegistrationStaticsVtbl>(IBackgroundTaskRegistrationStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AllTasks(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1114,6 +1118,7 @@ public class IBackgroundTaskRegistrationStatics <: InterfaceWrapperBase & ComInt
 @C
 public struct IBackgroundTaskRegistrationStatics2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AllTaskGroups: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetTaskGroup: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -1159,6 +1164,7 @@ public class IBackgroundTaskRegistrationStatics2 <: InterfaceWrapperBase & ComIn
         readVtbl<IBackgroundTaskRegistrationStatics2Vtbl>(IBackgroundTaskRegistrationStatics2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AllTaskGroups(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2553,7 +2559,7 @@ public struct IStorageLibraryContentChangedTriggerStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     @When[Windows_Storage == "on"]
     public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var CreateFromLibraries: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -2605,7 +2611,7 @@ public class IStorageLibraryContentChangedTriggerStatics <: InterfaceWrapperBase
         return __vt.Create(__liveRaw, storageLibrary, result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func CreateFromLibraries(storageLibraries: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

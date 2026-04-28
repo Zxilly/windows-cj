@@ -3,7 +3,6 @@ package windows_sys.Win32.UI.Input.Touch
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 
@@ -959,30 +958,116 @@ public struct TOUCHINPUT {
     public init() {}
 }
 
-@When[USER32 == "on"]
+@When[Windows_Win32_UI_Input_Touch == "on" && USER32 == "on" && Windows_Win32_UI_Input_Touch_CloseGestureInfoHandle == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func CloseGestureInfoHandle(hGestureInfo: HGESTUREINFO): Int32
+}
+
+@When[Windows_Win32_UI_Input_Touch == "on" && USER32 == "on" && Windows_Win32_UI_Input_Touch_CloseGestureInfoHandle == "on"]
+public unsafe func Windows_CloseGestureInfoHandle(hGestureInfo: HGESTUREINFO): Int32 {
+    return CloseGestureInfoHandle(hGestureInfo)
+}
+
+@When[Windows_Win32_UI_Input_Touch == "on" && USER32 == "on" && Windows_Win32_UI_Input_Touch_CloseTouchInputHandle == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func CloseTouchInputHandle(hTouchInput: HTOUCHINPUT): Int32
+}
+
+@When[Windows_Win32_UI_Input_Touch == "on" && USER32 == "on" && Windows_Win32_UI_Input_Touch_CloseTouchInputHandle == "on"]
+public unsafe func Windows_CloseTouchInputHandle(hTouchInput: HTOUCHINPUT): Int32 {
+    return CloseTouchInputHandle(hTouchInput)
+}
+
+@When[Windows_Win32_UI_Input_Touch == "on" && USER32 == "on" && Windows_Win32_UI_Input_Touch_GetGestureConfig == "on"]
+foreign {
     // param-hint: pGestureConfig len=param[3]
     // pinvoke-hint: SetLastError
     func GetGestureConfig(hwnd: CPointer<Unit>, dwReserved: UInt32, dwFlags: UInt32, pcIDs: CPointer<UInt32>, pGestureConfig: CPointer<GESTURECONFIG>, cbSize: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Input_Touch == "on" && USER32 == "on" && Windows_Win32_UI_Input_Touch_GetGestureConfig == "on"]
+public unsafe func Windows_GetGestureConfig(hwnd: CPointer<Unit>, dwReserved: UInt32, dwFlags: UInt32, pcIDs: CPointer<UInt32>, pGestureConfig: CPointer<GESTURECONFIG>, cbSize: UInt32): Int32 {
+    return GetGestureConfig(hwnd, dwReserved, dwFlags, pcIDs, pGestureConfig, cbSize)
+}
+
+@When[Windows_Win32_UI_Input_Touch == "on" && USER32 == "on" && Windows_Win32_UI_Input_Touch_GetGestureExtraArgs == "on"]
+foreign {
     // param-hint: pExtraArgs bytes=param[1]
     // pinvoke-hint: SetLastError
     func GetGestureExtraArgs(hGestureInfo: HGESTUREINFO, cbExtraArgs: UInt32, pExtraArgs: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_Input_Touch == "on" && USER32 == "on" && Windows_Win32_UI_Input_Touch_GetGestureExtraArgs == "on"]
+public unsafe func Windows_GetGestureExtraArgs(hGestureInfo: HGESTUREINFO, cbExtraArgs: UInt32, pExtraArgs: CPointer<UInt8>): Int32 {
+    return GetGestureExtraArgs(hGestureInfo, cbExtraArgs, pExtraArgs)
+}
+
+@When[Windows_Win32_UI_Input_Touch == "on" && USER32 == "on" && Windows_Win32_UI_Input_Touch_GetGestureInfo == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetGestureInfo(hGestureInfo: HGESTUREINFO, pGestureInfo: CPointer<GESTUREINFO>): Int32
+}
+
+@When[Windows_Win32_UI_Input_Touch == "on" && USER32 == "on" && Windows_Win32_UI_Input_Touch_GetGestureInfo == "on"]
+public unsafe func Windows_GetGestureInfo(hGestureInfo: HGESTUREINFO, pGestureInfo: CPointer<GESTUREINFO>): Int32 {
+    return GetGestureInfo(hGestureInfo, pGestureInfo)
+}
+
+@When[Windows_Win32_UI_Input_Touch == "on" && USER32 == "on" && Windows_Win32_UI_Input_Touch_GetTouchInputInfo == "on"]
+foreign {
     // param-hint: pInputs len=param[1]
     // pinvoke-hint: SetLastError
     func GetTouchInputInfo(hTouchInput: HTOUCHINPUT, cInputs: UInt32, pInputs: CPointer<TOUCHINPUT>, cbSize: Int32): Int32
+}
+
+@When[Windows_Win32_UI_Input_Touch == "on" && USER32 == "on" && Windows_Win32_UI_Input_Touch_GetTouchInputInfo == "on"]
+public unsafe func Windows_GetTouchInputInfo(hTouchInput: HTOUCHINPUT, cInputs: UInt32, pInputs: CPointer<TOUCHINPUT>, cbSize: Int32): Int32 {
+    return GetTouchInputInfo(hTouchInput, cInputs, pInputs, cbSize)
+}
+
+@When[Windows_Win32_UI_Input_Touch == "on" && USER32 == "on" && Windows_Win32_UI_Input_Touch_IsTouchWindow == "on"]
+foreign {
     // param-hint: pulFlags optional
     func IsTouchWindow(hwnd: CPointer<Unit>, pulFlags: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_Input_Touch == "on" && USER32 == "on" && Windows_Win32_UI_Input_Touch_IsTouchWindow == "on"]
+public unsafe func Windows_IsTouchWindow(hwnd: CPointer<Unit>, pulFlags: CPointer<UInt32>): Int32 {
+    return IsTouchWindow(hwnd, pulFlags)
+}
+
+@When[Windows_Win32_UI_Input_Touch == "on" && USER32 == "on" && Windows_Win32_UI_Input_Touch_RegisterTouchWindow == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func RegisterTouchWindow(hwnd: CPointer<Unit>, ulFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Input_Touch == "on" && USER32 == "on" && Windows_Win32_UI_Input_Touch_RegisterTouchWindow == "on"]
+public unsafe func Windows_RegisterTouchWindow(hwnd: CPointer<Unit>, ulFlags: UInt32): Int32 {
+    return RegisterTouchWindow(hwnd, ulFlags)
+}
+
+@When[Windows_Win32_UI_Input_Touch == "on" && USER32 == "on" && Windows_Win32_UI_Input_Touch_SetGestureConfig == "on"]
+foreign {
     // param-hint: pGestureConfig len=param[2]
     // pinvoke-hint: SetLastError
     func SetGestureConfig(hwnd: CPointer<Unit>, dwReserved: UInt32, cIDs: UInt32, pGestureConfig: CPointer<GESTURECONFIG>, cbSize: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_Input_Touch == "on" && USER32 == "on" && Windows_Win32_UI_Input_Touch_SetGestureConfig == "on"]
+public unsafe func Windows_SetGestureConfig(hwnd: CPointer<Unit>, dwReserved: UInt32, cIDs: UInt32, pGestureConfig: CPointer<GESTURECONFIG>, cbSize: UInt32): Int32 {
+    return SetGestureConfig(hwnd, dwReserved, cIDs, pGestureConfig, cbSize)
+}
+
+@When[Windows_Win32_UI_Input_Touch == "on" && USER32 == "on" && Windows_Win32_UI_Input_Touch_UnregisterTouchWindow == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func UnregisterTouchWindow(hwnd: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_UI_Input_Touch == "on" && USER32 == "on" && Windows_Win32_UI_Input_Touch_UnregisterTouchWindow == "on"]
+public unsafe func Windows_UnregisterTouchWindow(hwnd: CPointer<Unit>): Int32 {
+    return UnregisterTouchWindow(hwnd)
 }

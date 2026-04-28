@@ -7,4 +7,3 @@ public import windows_sys.Win32._impl_l0.{D3DMATRIX, D3DVECTOR, D3D_CBUFFER_TYPE
 public import windows_sys.Win32._impl_l1.{D3D_SHADER_CACHE_APPLICATION_DESC, D3D_SHADER_CACHE_COMPILER_PROPERTIES, ID3DBlob, ID3DBlobVtbl, ID3DDestructionNotifier, ID3DDestructionNotifierVtbl, ID3DInclude, ID3DIncludeVtbl, ID3DShaderCacheApplication, ID3DShaderCacheApplicationVtbl, ID3DShaderCacheComponent, ID3DShaderCacheComponentVtbl, ID3DShaderCacheExplorer, ID3DShaderCacheExplorerVtbl}
 @When[Windows_Win32_Graphics_Direct3D == "on"]
 public import windows_sys.Win32._impl_l2.{ID3DShaderCacheInstaller, ID3DShaderCacheInstallerClient, ID3DShaderCacheInstallerClientVtbl, ID3DShaderCacheInstallerFactory, ID3DShaderCacheInstallerFactoryVtbl, ID3DShaderCacheInstallerVtbl}
-

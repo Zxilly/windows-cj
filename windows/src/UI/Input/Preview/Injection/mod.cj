@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Gaming_Input == "on"]
 import windows.Gaming.Input as Gaming_Input
 import windows_collections as windows_collections
 
@@ -2221,10 +2220,19 @@ extend InjectedInputTouchInfo <: windows_core.HandleWinrtType<InjectedInputTouch
 @C
 public struct IInputInjectorVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var InjectKeyboardInput: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var InjectKeyboardInput: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var InjectMouseInput: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var InjectMouseInput: UIntNative = UIntNative(0)
     public var InitializeTouchInjection: CFunc<(CPointer<Unit>, InjectedInputVisualizationModeAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var InjectTouchInput: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var InjectTouchInput: UIntNative = UIntNative(0)
     public var UninitializeTouchInjection: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
     public var InitializePenInjection: CFunc<(CPointer<Unit>, InjectedInputVisualizationModeAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var InjectPenInput: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -2298,12 +2306,14 @@ public class IInputInjector <: InterfaceWrapperBase & ComInterface & RuntimeName
         readVtbl<IInputInjectorVtbl>(IInputInjectorVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InjectKeyboardInput(input: windows_collections.IIterable<InjectedInputKeyboardInfo>): Unit {
         let v = vtbl()
         let hr = v.InjectKeyboardInput(asRaw(), input.asRaw())
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InjectMouseInput(input: windows_collections.IIterable<InjectedInputMouseInfo>): Unit {
         let v = vtbl()
         let hr = v.InjectMouseInput(asRaw(), input.asRaw())
@@ -2316,6 +2326,7 @@ public class IInputInjector <: InterfaceWrapperBase & ComInterface & RuntimeName
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InjectTouchInput(input: windows_collections.IIterable<InjectedInputTouchInfo>): Unit {
         let v = vtbl()
         let hr = v.InjectTouchInput(asRaw(), input.asRaw())
@@ -2966,10 +2977,12 @@ public class InputInjector <: InterfaceWrapperBase & ComInterface & windows_inte
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InjectKeyboardInput(input: windows_collections.IIterable<InjectedInputKeyboardInfo>): Unit {
         defaultInterface().InjectKeyboardInput(input)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InjectMouseInput(input: windows_collections.IIterable<InjectedInputMouseInfo>): Unit {
         defaultInterface().InjectMouseInput(input)
     }
@@ -2978,6 +2991,7 @@ public class InputInjector <: InterfaceWrapperBase & ComInterface & windows_inte
         defaultInterface().InitializeTouchInjection(visualMode)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InjectTouchInput(input: windows_collections.IIterable<InjectedInputTouchInfo>): Unit {
         defaultInterface().InjectTouchInput(input)
     }

@@ -4,13 +4,35 @@
 package windows.Win32.System.Mailslots
 
 import std.collection.*
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
 
 
-@When[KERNEL32 == "on"]
+@When[Windows_Win32_System_Mailslots == "on" && KERNEL32 == "on" && Windows_Win32_System_Mailslots_CreateMailslotA == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: lpSecurityAttributes optional
+    // pinvoke-hint: SetLastError
+    func CreateMailslotA(lpName: CPointer<UInt8>, nMaxMessageSize: UInt32, lReadTimeout: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Mailslots == "on" && KERNEL32 == "on" && Windows_Win32_System_Mailslots_CreateMailslotA == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_CreateMailslotA(lpName: CPointer<UInt8>, nMaxMessageSize: UInt32, lReadTimeout: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): CPointer<Unit> {
+    return CreateMailslotA(lpName, nMaxMessageSize, lReadTimeout, lpSecurityAttributes)
+}
+
+@When[Windows_Win32_System_Mailslots == "on" && KERNEL32 == "on" && Windows_Win32_System_Mailslots_CreateMailslotW == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: lpSecurityAttributes optional
+    // pinvoke-hint: SetLastError
+    func CreateMailslotW(lpName: CPointer<UInt16>, nMaxMessageSize: UInt32, lReadTimeout: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Mailslots == "on" && KERNEL32 == "on" && Windows_Win32_System_Mailslots_CreateMailslotW == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_CreateMailslotW(lpName: CPointer<UInt16>, nMaxMessageSize: UInt32, lReadTimeout: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): CPointer<Unit> {
+    return CreateMailslotW(lpName, nMaxMessageSize, lReadTimeout, lpSecurityAttributes)
+}
+
+@When[Windows_Win32_System_Mailslots == "on" && KERNEL32 == "on" && Windows_Win32_System_Mailslots_GetMailslotInfo == "on"]
 foreign {
     // param-hint: lpMaxMessageSize optional
     // param-hint: lpNextSize optional
@@ -18,16 +40,20 @@ foreign {
     // param-hint: lpReadTimeout optional
     // pinvoke-hint: SetLastError
     func GetMailslotInfo(hMailslot: CPointer<Unit>, lpMaxMessageSize: CPointer<UInt32>, lpNextSize: CPointer<UInt32>, lpMessageCount: CPointer<UInt32>, lpReadTimeout: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Mailslots == "on" && KERNEL32 == "on" && Windows_Win32_System_Mailslots_GetMailslotInfo == "on"]
+public unsafe func Windows_GetMailslotInfo(hMailslot: CPointer<Unit>, lpMaxMessageSize: CPointer<UInt32>, lpNextSize: CPointer<UInt32>, lpMessageCount: CPointer<UInt32>, lpReadTimeout: CPointer<UInt32>): Int32 {
+    return GetMailslotInfo(hMailslot, lpMaxMessageSize, lpNextSize, lpMessageCount, lpReadTimeout)
+}
+
+@When[Windows_Win32_System_Mailslots == "on" && KERNEL32 == "on" && Windows_Win32_System_Mailslots_SetMailslotInfo == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetMailslotInfo(hMailslot: CPointer<Unit>, lReadTimeout: UInt32): Int32
 }
 
-@When[KERNEL32 == "on" && Windows_Win32_Security == "on"]
-foreign {
-    // param-hint: lpSecurityAttributes optional
-    // pinvoke-hint: SetLastError
-    func CreateMailslotA(lpName: CPointer<UInt8>, nMaxMessageSize: UInt32, lReadTimeout: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): CPointer<Unit>
-    // param-hint: lpSecurityAttributes optional
-    // pinvoke-hint: SetLastError
-    func CreateMailslotW(lpName: CPointer<UInt16>, nMaxMessageSize: UInt32, lReadTimeout: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): CPointer<Unit>
+@When[Windows_Win32_System_Mailslots == "on" && KERNEL32 == "on" && Windows_Win32_System_Mailslots_SetMailslotInfo == "on"]
+public unsafe func Windows_SetMailslotInfo(hMailslot: CPointer<Unit>, lReadTimeout: UInt32): Int32 {
+    return SetMailslotInfo(hMailslot, lReadTimeout)
 }

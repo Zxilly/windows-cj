@@ -3,7 +3,6 @@ package windows_sys.Win32.Security.ExtensibleAuthenticationProtocol
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
@@ -2367,42 +2366,160 @@ public struct EAP_METHOD_INFO_EX {
     public init() {}
 }
 
-@When[EAPPCFG == "on"]
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPCFG == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerConfigBlob2Xml == "on" && Windows_Win32_Data_Xml_MsXml == "on"]
+foreign {
+    // param-hint: pConfigIn len=param[2]
+    func EapHostPeerConfigBlob2Xml(dwFlags: UInt32, eapMethodType: EAP_METHOD_TYPE, dwSizeOfConfigIn: UInt32, pConfigIn: CPointer<UInt8>, ppConfigDoc: CPointer<CPointer<Unit>>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPCFG == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerConfigBlob2Xml == "on" && Windows_Win32_Data_Xml_MsXml == "on"]
+public unsafe func Windows_EapHostPeerConfigBlob2Xml(dwFlags: UInt32, eapMethodType: EAP_METHOD_TYPE, dwSizeOfConfigIn: UInt32, pConfigIn: CPointer<UInt8>, ppConfigDoc: CPointer<CPointer<Unit>>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32 {
+    return EapHostPeerConfigBlob2Xml(dwFlags, eapMethodType, dwSizeOfConfigIn, pConfigIn, ppConfigDoc, ppEapError)
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPCFG == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerConfigXml2Blob == "on" && Windows_Win32_Data_Xml_MsXml == "on"]
+foreign {
+    func EapHostPeerConfigXml2Blob(dwFlags: UInt32, pConfigDoc: CPointer<Unit>, pdwSizeOfConfigOut: CPointer<UInt32>, ppConfigOut: CPointer<CPointer<UInt8>>, pEapMethodType: CPointer<EAP_METHOD_TYPE>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPCFG == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerConfigXml2Blob == "on" && Windows_Win32_Data_Xml_MsXml == "on"]
+public unsafe func Windows_EapHostPeerConfigXml2Blob(dwFlags: UInt32, pConfigDoc: CPointer<Unit>, pdwSizeOfConfigOut: CPointer<UInt32>, ppConfigOut: CPointer<CPointer<UInt8>>, pEapMethodType: CPointer<EAP_METHOD_TYPE>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32 {
+    return EapHostPeerConfigXml2Blob(dwFlags, pConfigDoc, pdwSizeOfConfigOut, ppConfigOut, pEapMethodType, ppEapError)
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPCFG == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerCredentialsXml2Blob == "on" && Windows_Win32_Data_Xml_MsXml == "on"]
+foreign {
+    // param-hint: pConfigIn len=param[2]
+    func EapHostPeerCredentialsXml2Blob(dwFlags: UInt32, pCredentialsDoc: CPointer<Unit>, dwSizeOfConfigIn: UInt32, pConfigIn: CPointer<UInt8>, pdwSizeOfCredentialsOut: CPointer<UInt32>, ppCredentialsOut: CPointer<CPointer<UInt8>>, pEapMethodType: CPointer<EAP_METHOD_TYPE>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPCFG == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerCredentialsXml2Blob == "on" && Windows_Win32_Data_Xml_MsXml == "on"]
+public unsafe func Windows_EapHostPeerCredentialsXml2Blob(dwFlags: UInt32, pCredentialsDoc: CPointer<Unit>, dwSizeOfConfigIn: UInt32, pConfigIn: CPointer<UInt8>, pdwSizeOfCredentialsOut: CPointer<UInt32>, ppCredentialsOut: CPointer<CPointer<UInt8>>, pEapMethodType: CPointer<EAP_METHOD_TYPE>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32 {
+    return EapHostPeerCredentialsXml2Blob(dwFlags, pCredentialsDoc, dwSizeOfConfigIn, pConfigIn, pdwSizeOfCredentialsOut, ppCredentialsOut, pEapMethodType, ppEapError)
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPCFG == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerFreeErrorMemory == "on"]
 foreign {
     func EapHostPeerFreeErrorMemory(pEapError: CPointer<EAP_ERROR>): Unit
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPCFG == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerFreeErrorMemory == "on"]
+public unsafe func Windows_EapHostPeerFreeErrorMemory(pEapError: CPointer<EAP_ERROR>): Unit {
+    EapHostPeerFreeErrorMemory(pEapError)
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPCFG == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerFreeMemory == "on"]
+foreign {
     func EapHostPeerFreeMemory(pData: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPCFG == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerFreeMemory == "on"]
+public unsafe func Windows_EapHostPeerFreeMemory(pData: CPointer<UInt8>): Unit {
+    EapHostPeerFreeMemory(pData)
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPCFG == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerGetMethodProperties == "on"]
+foreign {
     // param-hint: pbEapConnData len=param[4]
     // param-hint: pbUserData len=param[6]
     func EapHostPeerGetMethodProperties(dwVersion: UInt32, dwFlags: UInt32, eapMethodType: EAP_METHOD_TYPE, hUserImpersonationToken: CPointer<Unit>, dwEapConnDataSize: UInt32, pbEapConnData: CPointer<UInt8>, dwUserDataSize: UInt32, pbUserData: CPointer<UInt8>, pMethodPropertyArray: CPointer<EAP_METHOD_PROPERTY_ARRAY>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPCFG == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerGetMethodProperties == "on"]
+public unsafe func Windows_EapHostPeerGetMethodProperties(dwVersion: UInt32, dwFlags: UInt32, eapMethodType: EAP_METHOD_TYPE, hUserImpersonationToken: CPointer<Unit>, dwEapConnDataSize: UInt32, pbEapConnData: CPointer<UInt8>, dwUserDataSize: UInt32, pbUserData: CPointer<UInt8>, pMethodPropertyArray: CPointer<EAP_METHOD_PROPERTY_ARRAY>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32 {
+    return EapHostPeerGetMethodProperties(dwVersion, dwFlags, eapMethodType, hUserImpersonationToken, dwEapConnDataSize, pbEapConnData, dwUserDataSize, pbUserData, pMethodPropertyArray, ppEapError)
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPCFG == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerGetMethods == "on"]
+foreign {
     func EapHostPeerGetMethods(pEapMethodInfoArray: CPointer<EAP_METHOD_INFO_ARRAY>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPCFG == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerGetMethods == "on"]
+public unsafe func Windows_EapHostPeerGetMethods(pEapMethodInfoArray: CPointer<EAP_METHOD_INFO_ARRAY>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32 {
+    return EapHostPeerGetMethods(pEapMethodInfoArray, ppEapError)
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPCFG == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerInvokeConfigUI == "on"]
+foreign {
     // param-hint: pConfigIn len=param[3] optional
     func EapHostPeerInvokeConfigUI(hwndParent: CPointer<Unit>, dwFlags: UInt32, eapMethodType: EAP_METHOD_TYPE, dwSizeOfConfigIn: UInt32, pConfigIn: CPointer<UInt8>, pdwSizeOfConfigOut: CPointer<UInt32>, ppConfigOut: CPointer<CPointer<UInt8>>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPCFG == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerInvokeConfigUI == "on"]
+public unsafe func Windows_EapHostPeerInvokeConfigUI(hwndParent: CPointer<Unit>, dwFlags: UInt32, eapMethodType: EAP_METHOD_TYPE, dwSizeOfConfigIn: UInt32, pConfigIn: CPointer<UInt8>, pdwSizeOfConfigOut: CPointer<UInt32>, ppConfigOut: CPointer<CPointer<UInt8>>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32 {
+    return EapHostPeerInvokeConfigUI(hwndParent, dwFlags, eapMethodType, dwSizeOfConfigIn, pConfigIn, pdwSizeOfConfigOut, ppConfigOut, ppEapError)
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPCFG == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerInvokeIdentityUI == "on"]
+foreign {
     // param-hint: pConnectionData len=param[4]
     // param-hint: pUserData len=param[6] optional
     func EapHostPeerInvokeIdentityUI(dwVersion: UInt32, eapMethodType: EAP_METHOD_TYPE, dwFlags: UInt32, hwndParent: CPointer<Unit>, dwSizeofConnectionData: UInt32, pConnectionData: CPointer<UInt8>, dwSizeofUserData: UInt32, pUserData: CPointer<UInt8>, pdwSizeOfUserDataOut: CPointer<UInt32>, ppUserDataOut: CPointer<CPointer<UInt8>>, ppwszIdentity: CPointer<CPointer<UInt16>>, ppEapError: CPointer<CPointer<EAP_ERROR>>, ppvReserved: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPCFG == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerInvokeIdentityUI == "on"]
+public unsafe func Windows_EapHostPeerInvokeIdentityUI(dwVersion: UInt32, eapMethodType: EAP_METHOD_TYPE, dwFlags: UInt32, hwndParent: CPointer<Unit>, dwSizeofConnectionData: UInt32, pConnectionData: CPointer<UInt8>, dwSizeofUserData: UInt32, pUserData: CPointer<UInt8>, pdwSizeOfUserDataOut: CPointer<UInt32>, ppUserDataOut: CPointer<CPointer<UInt8>>, ppwszIdentity: CPointer<CPointer<UInt16>>, ppEapError: CPointer<CPointer<EAP_ERROR>>, ppvReserved: CPointer<CPointer<Unit>>): UInt32 {
+    return EapHostPeerInvokeIdentityUI(dwVersion, eapMethodType, dwFlags, hwndParent, dwSizeofConnectionData, pConnectionData, dwSizeofUserData, pUserData, pdwSizeOfUserDataOut, ppUserDataOut, ppwszIdentity, ppEapError, ppvReserved)
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPCFG == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerInvokeInteractiveUI == "on"]
+foreign {
     // param-hint: pUIContextData len=param[1] optional
     func EapHostPeerInvokeInteractiveUI(hwndParent: CPointer<Unit>, dwSizeofUIContextData: UInt32, pUIContextData: CPointer<UInt8>, pdwSizeOfDataFromInteractiveUI: CPointer<UInt32>, ppDataFromInteractiveUI: CPointer<CPointer<UInt8>>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPCFG == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerInvokeInteractiveUI == "on"]
+public unsafe func Windows_EapHostPeerInvokeInteractiveUI(hwndParent: CPointer<Unit>, dwSizeofUIContextData: UInt32, pUIContextData: CPointer<UInt8>, pdwSizeOfDataFromInteractiveUI: CPointer<UInt32>, ppDataFromInteractiveUI: CPointer<CPointer<UInt8>>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32 {
+    return EapHostPeerInvokeInteractiveUI(hwndParent, dwSizeofUIContextData, pUIContextData, pdwSizeOfDataFromInteractiveUI, ppDataFromInteractiveUI, ppEapError)
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPCFG == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerQueryCredentialInputFields == "on"]
+foreign {
     // param-hint: pbEapConnData len=param[3]
     func EapHostPeerQueryCredentialInputFields(hUserImpersonationToken: CPointer<Unit>, eapMethodType: EAP_METHOD_TYPE, dwFlags: UInt32, dwEapConnDataSize: UInt32, pbEapConnData: CPointer<UInt8>, pEapConfigInputFieldArray: CPointer<EAP_CONFIG_INPUT_FIELD_ARRAY>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPCFG == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerQueryCredentialInputFields == "on"]
+public unsafe func Windows_EapHostPeerQueryCredentialInputFields(hUserImpersonationToken: CPointer<Unit>, eapMethodType: EAP_METHOD_TYPE, dwFlags: UInt32, dwEapConnDataSize: UInt32, pbEapConnData: CPointer<UInt8>, pEapConfigInputFieldArray: CPointer<EAP_CONFIG_INPUT_FIELD_ARRAY>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32 {
+    return EapHostPeerQueryCredentialInputFields(hUserImpersonationToken, eapMethodType, dwFlags, dwEapConnDataSize, pbEapConnData, pEapConfigInputFieldArray, ppEapError)
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPCFG == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerQueryInteractiveUIInputFields == "on"]
+foreign {
     // param-hint: pUIContextData len=param[2]
     func EapHostPeerQueryInteractiveUIInputFields(dwVersion: UInt32, dwFlags: UInt32, dwSizeofUIContextData: UInt32, pUIContextData: CPointer<UInt8>, pEapInteractiveUIData: CPointer<EAP_INTERACTIVE_UI_DATA>, ppEapError: CPointer<CPointer<EAP_ERROR>>, ppvReserved: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPCFG == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerQueryInteractiveUIInputFields == "on"]
+public unsafe func Windows_EapHostPeerQueryInteractiveUIInputFields(dwVersion: UInt32, dwFlags: UInt32, dwSizeofUIContextData: UInt32, pUIContextData: CPointer<UInt8>, pEapInteractiveUIData: CPointer<EAP_INTERACTIVE_UI_DATA>, ppEapError: CPointer<CPointer<EAP_ERROR>>, ppvReserved: CPointer<CPointer<Unit>>): UInt32 {
+    return EapHostPeerQueryInteractiveUIInputFields(dwVersion, dwFlags, dwSizeofUIContextData, pUIContextData, pEapInteractiveUIData, ppEapError, ppvReserved)
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPCFG == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerQueryUIBlobFromInteractiveUIInputFields == "on"]
+foreign {
     // param-hint: pUIContextData len=param[2]
     func EapHostPeerQueryUIBlobFromInteractiveUIInputFields(dwVersion: UInt32, dwFlags: UInt32, dwSizeofUIContextData: UInt32, pUIContextData: CPointer<UInt8>, pEapInteractiveUIData: CPointer<EAP_INTERACTIVE_UI_DATA>, pdwSizeOfDataFromInteractiveUI: CPointer<UInt32>, ppDataFromInteractiveUI: CPointer<CPointer<UInt8>>, ppEapError: CPointer<CPointer<EAP_ERROR>>, ppvReserved: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPCFG == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerQueryUIBlobFromInteractiveUIInputFields == "on"]
+public unsafe func Windows_EapHostPeerQueryUIBlobFromInteractiveUIInputFields(dwVersion: UInt32, dwFlags: UInt32, dwSizeofUIContextData: UInt32, pUIContextData: CPointer<UInt8>, pEapInteractiveUIData: CPointer<EAP_INTERACTIVE_UI_DATA>, pdwSizeOfDataFromInteractiveUI: CPointer<UInt32>, ppDataFromInteractiveUI: CPointer<CPointer<UInt8>>, ppEapError: CPointer<CPointer<EAP_ERROR>>, ppvReserved: CPointer<CPointer<Unit>>): UInt32 {
+    return EapHostPeerQueryUIBlobFromInteractiveUIInputFields(dwVersion, dwFlags, dwSizeofUIContextData, pUIContextData, pEapInteractiveUIData, pdwSizeOfDataFromInteractiveUI, ppDataFromInteractiveUI, ppEapError, ppvReserved)
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPCFG == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerQueryUserBlobFromCredentialInputFields == "on"]
+foreign {
     // param-hint: pbEapConnData len=param[3]
     // param-hint: ppbUserBlob len=param[6]
     func EapHostPeerQueryUserBlobFromCredentialInputFields(hUserImpersonationToken: CPointer<Unit>, eapMethodType: EAP_METHOD_TYPE, dwFlags: UInt32, dwEapConnDataSize: UInt32, pbEapConnData: CPointer<UInt8>, pEapConfigInputFieldArray: CPointer<EAP_CONFIG_INPUT_FIELD_ARRAY>, pdwUserBlobSize: CPointer<UInt32>, ppbUserBlob: CPointer<CPointer<UInt8>>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32
 }
 
-@When[EAPPCFG == "on" && Windows_Win32_Data_Xml_MsXml == "on"]
-foreign {
-    // param-hint: pConfigIn len=param[2]
-    func EapHostPeerConfigBlob2Xml(dwFlags: UInt32, eapMethodType: EAP_METHOD_TYPE, dwSizeOfConfigIn: UInt32, pConfigIn: CPointer<UInt8>, ppConfigDoc: CPointer<CPointer<Unit>>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32
-    func EapHostPeerConfigXml2Blob(dwFlags: UInt32, pConfigDoc: CPointer<Unit>, pdwSizeOfConfigOut: CPointer<UInt32>, ppConfigOut: CPointer<CPointer<UInt8>>, pEapMethodType: CPointer<EAP_METHOD_TYPE>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32
-    // param-hint: pConfigIn len=param[2]
-    func EapHostPeerCredentialsXml2Blob(dwFlags: UInt32, pCredentialsDoc: CPointer<Unit>, dwSizeOfConfigIn: UInt32, pConfigIn: CPointer<UInt8>, pdwSizeOfCredentialsOut: CPointer<UInt32>, ppCredentialsOut: CPointer<CPointer<UInt8>>, pEapMethodType: CPointer<EAP_METHOD_TYPE>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPCFG == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerQueryUserBlobFromCredentialInputFields == "on"]
+public unsafe func Windows_EapHostPeerQueryUserBlobFromCredentialInputFields(hUserImpersonationToken: CPointer<Unit>, eapMethodType: EAP_METHOD_TYPE, dwFlags: UInt32, dwEapConnDataSize: UInt32, pbEapConnData: CPointer<UInt8>, pEapConfigInputFieldArray: CPointer<EAP_CONFIG_INPUT_FIELD_ARRAY>, pdwUserBlobSize: CPointer<UInt32>, ppbUserBlob: CPointer<CPointer<UInt8>>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32 {
+    return EapHostPeerQueryUserBlobFromCredentialInputFields(hUserImpersonationToken, eapMethodType, dwFlags, dwEapConnDataSize, pbEapConnData, pEapConfigInputFieldArray, pdwUserBlobSize, ppbUserBlob, ppEapError)
 }
 
-@When[EAPPPRXY == "on"]
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerBeginSession == "on"]
 foreign {
     // param-hint: pConnectionData len=param[4]
     // param-hint: pUserData len=param[6]
@@ -2410,28 +2527,186 @@ foreign {
     // param-hint: func optional
     // param-hint: pContextData optional
     func EapHostPeerBeginSession(dwFlags: UInt32, eapType: EAP_METHOD_TYPE, pAttributeArray: CPointer<EAP_ATTRIBUTES>, hTokenImpersonateUser: CPointer<Unit>, dwSizeofConnectionData: UInt32, pConnectionData: CPointer<UInt8>, dwSizeofUserData: UInt32, pUserData: CPointer<UInt8>, dwMaxSendPacketSize: UInt32, pConnectionId: CPointer<GUID>, func_: NotificationHandler, pContextData: CPointer<Unit>, pSessionId: CPointer<UInt32>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerBeginSession == "on"]
+public unsafe func Windows_EapHostPeerBeginSession(dwFlags: UInt32, eapType: EAP_METHOD_TYPE, pAttributeArray: CPointer<EAP_ATTRIBUTES>, hTokenImpersonateUser: CPointer<Unit>, dwSizeofConnectionData: UInt32, pConnectionData: CPointer<UInt8>, dwSizeofUserData: UInt32, pUserData: CPointer<UInt8>, dwMaxSendPacketSize: UInt32, pConnectionId: CPointer<GUID>, func_: NotificationHandler, pContextData: CPointer<Unit>, pSessionId: CPointer<UInt32>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32 {
+    return EapHostPeerBeginSession(dwFlags, eapType, pAttributeArray, hTokenImpersonateUser, dwSizeofConnectionData, pConnectionData, dwSizeofUserData, pUserData, dwMaxSendPacketSize, pConnectionId, func_, pContextData, pSessionId, ppEapError)
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerClearConnection == "on"]
+foreign {
     func EapHostPeerClearConnection(pConnectionId: CPointer<GUID>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerClearConnection == "on"]
+public unsafe func Windows_EapHostPeerClearConnection(pConnectionId: CPointer<GUID>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32 {
+    return EapHostPeerClearConnection(pConnectionId, ppEapError)
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerEndSession == "on"]
+foreign {
     func EapHostPeerEndSession(sessionHandle: UInt32, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerEndSession == "on"]
+public unsafe func Windows_EapHostPeerEndSession(sessionHandle: UInt32, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32 {
+    return EapHostPeerEndSession(sessionHandle, ppEapError)
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerFreeEapError == "on"]
+foreign {
     func EapHostPeerFreeEapError(pEapError: CPointer<EAP_ERROR>): Unit
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerFreeEapError == "on"]
+public unsafe func Windows_EapHostPeerFreeEapError(pEapError: CPointer<EAP_ERROR>): Unit {
+    EapHostPeerFreeEapError(pEapError)
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerFreeRuntimeMemory == "on"]
+foreign {
     func EapHostPeerFreeRuntimeMemory(pData: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerFreeRuntimeMemory == "on"]
+public unsafe func Windows_EapHostPeerFreeRuntimeMemory(pData: CPointer<UInt8>): Unit {
+    EapHostPeerFreeRuntimeMemory(pData)
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerGetAuthStatus == "on"]
+foreign {
     func EapHostPeerGetAuthStatus(sessionHandle: UInt32, authParam: Int32, pcbAuthData: CPointer<UInt32>, ppAuthData: CPointer<CPointer<UInt8>>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerGetAuthStatus == "on"]
+public unsafe func Windows_EapHostPeerGetAuthStatus(sessionHandle: UInt32, authParam: Int32, pcbAuthData: CPointer<UInt32>, ppAuthData: CPointer<CPointer<UInt8>>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32 {
+    return EapHostPeerGetAuthStatus(sessionHandle, authParam, pcbAuthData, ppAuthData, ppEapError)
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerGetDataToUnplumbCredentials == "on"]
+foreign {
     func EapHostPeerGetDataToUnplumbCredentials(pConnectionIdThatLastSavedCreds: CPointer<GUID>, phCredentialImpersonationToken: CPointer<IntNative>, sessionHandle: UInt32, ppEapError: CPointer<CPointer<EAP_ERROR>>, fSaveToCredMan: CPointer<Int32>): UInt32
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerGetDataToUnplumbCredentials == "on"]
+public unsafe func Windows_EapHostPeerGetDataToUnplumbCredentials(pConnectionIdThatLastSavedCreds: CPointer<GUID>, phCredentialImpersonationToken: CPointer<IntNative>, sessionHandle: UInt32, ppEapError: CPointer<CPointer<EAP_ERROR>>, fSaveToCredMan: CPointer<Int32>): UInt32 {
+    return EapHostPeerGetDataToUnplumbCredentials(pConnectionIdThatLastSavedCreds, phCredentialImpersonationToken, sessionHandle, ppEapError, fSaveToCredMan)
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerGetEncryptedPassword == "on"]
+foreign {
     // param-hint: szPassword bytes=param[0]
     func EapHostPeerGetEncryptedPassword(dwSizeofPassword: UInt32, szPassword: CPointer<UInt16>, ppszEncPassword: CPointer<CPointer<UInt16>>): UInt32
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerGetEncryptedPassword == "on"]
+public unsafe func Windows_EapHostPeerGetEncryptedPassword(dwSizeofPassword: UInt32, szPassword: CPointer<UInt16>, ppszEncPassword: CPointer<CPointer<UInt16>>): UInt32 {
+    return EapHostPeerGetEncryptedPassword(dwSizeofPassword, szPassword, ppszEncPassword)
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerGetIdentity == "on"]
+foreign {
     // param-hint: pConnectionData len=param[3]
     // param-hint: pUserData len=param[5] optional
     func EapHostPeerGetIdentity(dwVersion: UInt32, dwFlags: UInt32, eapMethodType: EAP_METHOD_TYPE, dwSizeofConnectionData: UInt32, pConnectionData: CPointer<UInt8>, dwSizeofUserData: UInt32, pUserData: CPointer<UInt8>, hTokenImpersonateUser: CPointer<Unit>, pfInvokeUI: CPointer<Int32>, pdwSizeOfUserDataOut: CPointer<UInt32>, ppUserDataOut: CPointer<CPointer<UInt8>>, ppwszIdentity: CPointer<CPointer<UInt16>>, ppEapError: CPointer<CPointer<EAP_ERROR>>, ppvReserved: CPointer<CPointer<UInt8>>): UInt32
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerGetIdentity == "on"]
+public unsafe func Windows_EapHostPeerGetIdentity(dwVersion: UInt32, dwFlags: UInt32, eapMethodType: EAP_METHOD_TYPE, dwSizeofConnectionData: UInt32, pConnectionData: CPointer<UInt8>, dwSizeofUserData: UInt32, pUserData: CPointer<UInt8>, hTokenImpersonateUser: CPointer<Unit>, pfInvokeUI: CPointer<Int32>, pdwSizeOfUserDataOut: CPointer<UInt32>, ppUserDataOut: CPointer<CPointer<UInt8>>, ppwszIdentity: CPointer<CPointer<UInt16>>, ppEapError: CPointer<CPointer<EAP_ERROR>>, ppvReserved: CPointer<CPointer<UInt8>>): UInt32 {
+    return EapHostPeerGetIdentity(dwVersion, dwFlags, eapMethodType, dwSizeofConnectionData, pConnectionData, dwSizeofUserData, pUserData, hTokenImpersonateUser, pfInvokeUI, pdwSizeOfUserDataOut, ppUserDataOut, ppwszIdentity, ppEapError, ppvReserved)
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerGetResponseAttributes == "on"]
+foreign {
     func EapHostPeerGetResponseAttributes(sessionHandle: UInt32, pAttribs: CPointer<EAP_ATTRIBUTES>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerGetResponseAttributes == "on"]
+public unsafe func Windows_EapHostPeerGetResponseAttributes(sessionHandle: UInt32, pAttribs: CPointer<EAP_ATTRIBUTES>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32 {
+    return EapHostPeerGetResponseAttributes(sessionHandle, pAttribs, ppEapError)
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerGetResult == "on"]
+foreign {
     func EapHostPeerGetResult(sessionHandle: UInt32, reason: Int32, ppResult: CPointer<EapHostPeerMethodResult>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerGetResult == "on"]
+public unsafe func Windows_EapHostPeerGetResult(sessionHandle: UInt32, reason: Int32, ppResult: CPointer<EapHostPeerMethodResult>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32 {
+    return EapHostPeerGetResult(sessionHandle, reason, ppResult, ppEapError)
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerGetSendPacket == "on"]
+foreign {
     func EapHostPeerGetSendPacket(sessionHandle: UInt32, pcbSendPacket: CPointer<UInt32>, ppSendPacket: CPointer<CPointer<UInt8>>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerGetSendPacket == "on"]
+public unsafe func Windows_EapHostPeerGetSendPacket(sessionHandle: UInt32, pcbSendPacket: CPointer<UInt32>, ppSendPacket: CPointer<CPointer<UInt8>>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32 {
+    return EapHostPeerGetSendPacket(sessionHandle, pcbSendPacket, ppSendPacket, ppEapError)
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerGetUIContext == "on"]
+foreign {
     func EapHostPeerGetUIContext(sessionHandle: UInt32, pdwSizeOfUIContextData: CPointer<UInt32>, ppUIContextData: CPointer<CPointer<UInt8>>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerGetUIContext == "on"]
+public unsafe func Windows_EapHostPeerGetUIContext(sessionHandle: UInt32, pdwSizeOfUIContextData: CPointer<UInt32>, ppUIContextData: CPointer<CPointer<UInt8>>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32 {
+    return EapHostPeerGetUIContext(sessionHandle, pdwSizeOfUIContextData, ppUIContextData, ppEapError)
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerInitialize == "on"]
+foreign {
     func EapHostPeerInitialize(): UInt32
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerInitialize == "on"]
+public unsafe func Windows_EapHostPeerInitialize(): UInt32 {
+    return EapHostPeerInitialize()
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerProcessReceivedPacket == "on"]
+foreign {
     // param-hint: pReceivePacket len=param[1]
     func EapHostPeerProcessReceivedPacket(sessionHandle: UInt32, cbReceivePacket: UInt32, pReceivePacket: CPointer<UInt8>, pEapOutput: CPointer<Int32>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerProcessReceivedPacket == "on"]
+public unsafe func Windows_EapHostPeerProcessReceivedPacket(sessionHandle: UInt32, cbReceivePacket: UInt32, pReceivePacket: CPointer<UInt8>, pEapOutput: CPointer<Int32>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32 {
+    return EapHostPeerProcessReceivedPacket(sessionHandle, cbReceivePacket, pReceivePacket, pEapOutput, ppEapError)
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerSetResponseAttributes == "on"]
+foreign {
     func EapHostPeerSetResponseAttributes(sessionHandle: UInt32, pAttribs: CPointer<EAP_ATTRIBUTES>, pEapOutput: CPointer<Int32>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerSetResponseAttributes == "on"]
+public unsafe func Windows_EapHostPeerSetResponseAttributes(sessionHandle: UInt32, pAttribs: CPointer<EAP_ATTRIBUTES>, pEapOutput: CPointer<Int32>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32 {
+    return EapHostPeerSetResponseAttributes(sessionHandle, pAttribs, pEapOutput, ppEapError)
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerSetUIContext == "on"]
+foreign {
     // param-hint: pUIContextData len=param[1]
     func EapHostPeerSetUIContext(sessionHandle: UInt32, dwSizeOfUIContextData: UInt32, pUIContextData: CPointer<UInt8>, pEapOutput: CPointer<Int32>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerSetUIContext == "on"]
+public unsafe func Windows_EapHostPeerSetUIContext(sessionHandle: UInt32, dwSizeOfUIContextData: UInt32, pUIContextData: CPointer<UInt8>, pEapOutput: CPointer<Int32>, ppEapError: CPointer<CPointer<EAP_ERROR>>): UInt32 {
+    return EapHostPeerSetUIContext(sessionHandle, dwSizeOfUIContextData, pUIContextData, pEapOutput, ppEapError)
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerUninitialize == "on"]
+foreign {
     func EapHostPeerUninitialize(): Unit
+}
+
+@When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on" && EAPPPRXY == "on" && Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapHostPeerUninitialize == "on"]
+public unsafe func Windows_EapHostPeerUninitialize(): Unit {
+    EapHostPeerUninitialize()
 }
 
 @When[Windows_Win32_Security_ExtensibleAuthenticationProtocol == "on"]

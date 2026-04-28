@@ -15,152 +15,465 @@ import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
 
 
-@When[OLE32 == "on"]
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_BindMoniker == "on"]
 foreign {
     func BindMoniker(pmk: CPointer<Unit>, grfOpt: UInt32, iidResult: CPointer<GUID>, ppvResult: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_BindMoniker == "on"]
+public unsafe func Windows_BindMoniker(pmk: CPointer<Unit>, grfOpt: UInt32, iidResult: CPointer<GUID>, ppvResult: CPointer<CPointer<Unit>>): Int32 {
+    return BindMoniker(pmk, grfOpt, iidResult, ppvResult)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CLSIDFromProgID == "on"]
+foreign {
     func CLSIDFromProgID(lpszProgID: CPointer<UInt16>, lpclsid: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CLSIDFromProgID == "on"]
+public unsafe func Windows_CLSIDFromProgID(lpszProgID: CPointer<UInt16>, lpclsid: CPointer<GUID>): Int32 {
+    return CLSIDFromProgID(lpszProgID, lpclsid)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CLSIDFromProgIDEx == "on"]
+foreign {
     func CLSIDFromProgIDEx(lpszProgID: CPointer<UInt16>, lpclsid: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CLSIDFromProgIDEx == "on"]
+public unsafe func Windows_CLSIDFromProgIDEx(lpszProgID: CPointer<UInt16>, lpclsid: CPointer<GUID>): Int32 {
+    return CLSIDFromProgIDEx(lpszProgID, lpclsid)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CLSIDFromString == "on"]
+foreign {
     func CLSIDFromString(lpsz: CPointer<UInt16>, pclsid: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CLSIDFromString == "on"]
+public unsafe func Windows_CLSIDFromString(lpsz: CPointer<UInt16>, pclsid: CPointer<GUID>): Int32 {
+    return CLSIDFromString(lpsz, pclsid)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoAddRefServerProcess == "on"]
+foreign {
     func CoAddRefServerProcess(): UInt32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoAddRefServerProcess == "on"]
+public unsafe func Windows_CoAddRefServerProcess(): UInt32 {
+    return CoAddRefServerProcess()
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoAllowSetForegroundWindow == "on"]
+foreign {
     // param-hint: lpvReserved optional reserved
     func CoAllowSetForegroundWindow(pUnk: CPointer<Unit>, lpvReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoAllowSetForegroundWindow == "on"]
+public unsafe func Windows_CoAllowSetForegroundWindow(pUnk: CPointer<Unit>, lpvReserved: CPointer<Unit>): Int32 {
+    return CoAllowSetForegroundWindow(pUnk, lpvReserved)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoAllowUnmarshalerCLSID == "on"]
+foreign {
     func CoAllowUnmarshalerCLSID(clsid: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoAllowUnmarshalerCLSID == "on"]
+public unsafe func Windows_CoAllowUnmarshalerCLSID(clsid: CPointer<GUID>): Int32 {
+    return CoAllowUnmarshalerCLSID(clsid)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoCancelCall == "on"]
+foreign {
     func CoCancelCall(dwThreadId: UInt32, ulTimeout: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoCancelCall == "on"]
+public unsafe func Windows_CoCancelCall(dwThreadId: UInt32, ulTimeout: UInt32): Int32 {
+    return CoCancelCall(dwThreadId, ulTimeout)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoCopyProxy == "on"]
+foreign {
     func CoCopyProxy(pProxy: CPointer<Unit>, ppCopy: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoCopyProxy == "on"]
+public unsafe func Windows_CoCopyProxy(pProxy: CPointer<Unit>, ppCopy: CPointer<CPointer<Unit>>): Int32 {
+    return CoCopyProxy(pProxy, ppCopy)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoCreateFreeThreadedMarshaler == "on"]
+foreign {
     // param-hint: punkOuter optional
     func CoCreateFreeThreadedMarshaler(punkOuter: CPointer<Unit>, ppunkMarshal: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoCreateFreeThreadedMarshaler == "on"]
+public unsafe func Windows_CoCreateFreeThreadedMarshaler(punkOuter: CPointer<Unit>, ppunkMarshal: CPointer<CPointer<Unit>>): Int32 {
+    return CoCreateFreeThreadedMarshaler(punkOuter, ppunkMarshal)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoCreateGuid == "on"]
+foreign {
     func CoCreateGuid(pguid: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoCreateGuid == "on"]
+public unsafe func Windows_CoCreateGuid(pguid: CPointer<GUID>): Int32 {
+    return CoCreateGuid(pguid)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoCreateInstance == "on"]
+foreign {
     // param-hint: pUnkOuter optional
     func CoCreateInstance(rclsid: CPointer<GUID>, pUnkOuter: CPointer<Unit>, dwClsContext: UInt32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoCreateInstance == "on"]
+public unsafe func Windows_CoCreateInstance(rclsid: CPointer<GUID>, pUnkOuter: CPointer<Unit>, dwClsContext: UInt32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return CoCreateInstance(rclsid, pUnkOuter, dwClsContext, riid, ppv)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoCreateInstanceEx == "on"]
+foreign {
     // param-hint: punkOuter optional
     // param-hint: pServerInfo optional
     // param-hint: pResults len=param[4]
     func CoCreateInstanceEx(Clsid: CPointer<GUID>, punkOuter: CPointer<Unit>, dwClsCtx: UInt32, pServerInfo: CPointer<Win32__impl_l1.COSERVERINFO>, dwCount: UInt32, pResults: CPointer<Win32__impl_l1.MULTI_QI>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoCreateInstanceEx == "on"]
+public unsafe func Windows_CoCreateInstanceEx(Clsid: CPointer<GUID>, punkOuter: CPointer<Unit>, dwClsCtx: UInt32, pServerInfo: CPointer<Win32__impl_l1.COSERVERINFO>, dwCount: UInt32, pResults: CPointer<Win32__impl_l1.MULTI_QI>): Int32 {
+    return CoCreateInstanceEx(Clsid, punkOuter, dwClsCtx, pServerInfo, dwCount, pResults)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoCreateInstanceFromApp == "on"]
+foreign {
     // param-hint: punkOuter optional
     // param-hint: reserved optional
     // param-hint: pResults len=param[4]
     func CoCreateInstanceFromApp(Clsid: CPointer<GUID>, punkOuter: CPointer<Unit>, dwClsCtx: UInt32, reserved: CPointer<Unit>, dwCount: UInt32, pResults: CPointer<Win32__impl_l1.MULTI_QI>): Int32
-    func CoDecrementMTAUsage(Cookie: Win32__impl_l0.CO_MTA_USAGE_COOKIE): Int32
-    // param-hint: pReserved optional reserved
-    func CoDisableCallCancellation(pReserved: CPointer<Unit>): Int32
-    func CoDisconnectContext(dwTimeout: UInt32): Int32
-    // param-hint: dwReserved reserved
-    func CoDisconnectObject(pUnk: CPointer<Unit>, dwReserved: UInt32): Int32
-    func CoDosDateTimeToFileTime(nDosDate: UInt16, nDosTime: UInt16, lpFileTime: CPointer<Win32_Foundation.FILETIME>): Int32
-    // param-hint: pReserved optional reserved
-    func CoEnableCallCancellation(pReserved: CPointer<Unit>): Int32
-    func CoFileTimeNow(lpFileTime: CPointer<Win32_Foundation.FILETIME>): Int32
-    func CoFileTimeToDosDateTime(lpFileTime: CPointer<Win32_Foundation.FILETIME>, lpDosDate: CPointer<UInt16>, lpDosTime: CPointer<UInt16>): Int32
-    func CoFreeAllLibraries(): Unit
-    func CoFreeLibrary(hInst: CPointer<Unit>): Unit
-    func CoFreeUnusedLibraries(): Unit
-    // param-hint: dwReserved reserved
-    func CoFreeUnusedLibrariesEx(dwUnloadDelay: UInt32, dwReserved: UInt32): Unit
-    func CoGetApartmentType(pAptType: CPointer<Int32>, pAptQualifier: CPointer<Int32>): Int32
-    func CoGetCallContext(riid: CPointer<GUID>, ppInterface: CPointer<CPointer<Unit>>): Int32
-    func CoGetCallerTID(lpdwTID: CPointer<UInt32>): Int32
-    func CoGetCancelObject(dwThreadId: UInt32, iid: CPointer<GUID>, ppUnk: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pvReserved optional
-    func CoGetClassObject(rclsid: CPointer<GUID>, dwClsContext: UInt32, pvReserved: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
-    func CoGetContextToken(pToken: CPointer<UIntNative>): Int32
-    func CoGetCurrentLogicalThreadId(pguid: CPointer<GUID>): Int32
-    func CoGetCurrentProcess(): UInt32
-    func CoGetMalloc(dwMemContext: UInt32, ppMalloc: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pBindOptions optional
-    func CoGetObject(pszName: CPointer<UInt16>, pBindOptions: CPointer<Win32__impl_l0.BIND_OPTS>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
-    func CoGetObjectContext(riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
-    func CoGetPSClsid(riid: CPointer<GUID>, pClsid: CPointer<GUID>): Int32
-    func CoGetTreatAsClass(clsidOld: CPointer<GUID>, pClsidNew: CPointer<GUID>): Int32
-    func CoImpersonateClient(): Int32
-    func CoIncrementMTAUsage(pCookie: CPointer<Win32__impl_l0.CO_MTA_USAGE_COOKIE>): Int32
-    // param-hint: pvReserved optional reserved
-    func CoInitialize(pvReserved: CPointer<Unit>): Int32
-    // param-hint: pvReserved optional reserved
-    func CoInitializeEx(pvReserved: CPointer<Unit>, dwCoInit: UInt32): Int32
-    func CoInvalidateRemoteMachineBindings(pszMachineName: CPointer<UInt16>): Int32
-    func CoIsHandlerConnected(pUnk: CPointer<Unit>): Int32
-    func CoLoadLibrary(lpszLibName: CPointer<UInt16>, bAutoFree: Int32): CPointer<Unit>
-    func CoLockObjectExternal(pUnk: CPointer<Unit>, fLock: Int32, fLastUnlockReleases: Int32): Int32
-    func CoQueryAuthenticationServices(pcAuthSvc: CPointer<UInt32>, asAuthSvc: CPointer<CPointer<Win32__impl_l0.SOLE_AUTHENTICATION_SERVICE>>): Int32
-    // param-hint: pAuthnSvc optional
-    // param-hint: pAuthzSvc optional
-    // param-hint: pServerPrincName optional
-    // param-hint: pAuthnLevel optional
-    // param-hint: pImpLevel optional
-    // param-hint: pPrivs optional
-    // param-hint: pCapabilities optional
-    func CoQueryClientBlanket(pAuthnSvc: CPointer<UInt32>, pAuthzSvc: CPointer<UInt32>, pServerPrincName: CPointer<CPointer<UInt16>>, pAuthnLevel: CPointer<UInt32>, pImpLevel: CPointer<UInt32>, pPrivs: CPointer<CPointer<Unit>>, pCapabilities: CPointer<UInt32>): Int32
-    // param-hint: pwAuthnSvc optional
-    // param-hint: pAuthzSvc optional
-    // param-hint: pServerPrincName optional
-    // param-hint: pAuthnLevel optional
-    // param-hint: pImpLevel optional
-    // param-hint: pAuthInfo optional
-    // param-hint: pCapabilites optional
-    func CoQueryProxyBlanket(pProxy: CPointer<Unit>, pwAuthnSvc: CPointer<UInt32>, pAuthzSvc: CPointer<UInt32>, pServerPrincName: CPointer<CPointer<UInt16>>, pAuthnLevel: CPointer<UInt32>, pImpLevel: CPointer<UInt32>, pAuthInfo: CPointer<CPointer<Unit>>, pCapabilites: CPointer<UInt32>): Int32
-    func CoRegisterActivationFilter(pActivationFilter: CPointer<Unit>): Int32
-    func CoRegisterClassObject(rclsid: CPointer<GUID>, pUnk: CPointer<Unit>, dwClsContext: UInt32, flags: UInt32, lpdwRegister: CPointer<UInt32>): Int32
-    func CoRegisterDeviceCatalog(deviceInstanceId: CPointer<UInt16>, cookie: CPointer<Win32__impl_l0.CO_DEVICE_CATALOG_COOKIE>): Int32
-    func CoRegisterInitializeSpy(pSpy: CPointer<Unit>, puliCookie: CPointer<UInt64>): Int32
-    func CoRegisterMallocSpy(pMallocSpy: CPointer<Unit>): Int32
-    func CoRegisterPSClsid(riid: CPointer<GUID>, rclsid: CPointer<GUID>): Int32
-    func CoRegisterSurrogate(pSurrogate: CPointer<Unit>): Int32
-    func CoReleaseServerProcess(): UInt32
-    func CoResumeClassObjects(): Int32
-    func CoRevertToSelf(): Int32
-    func CoRevokeClassObject(dwRegister: UInt32): Int32
-    func CoRevokeDeviceCatalog(cookie: Win32__impl_l0.CO_DEVICE_CATALOG_COOKIE): Int32
-    func CoRevokeInitializeSpy(uliCookie: UInt64): Int32
-    func CoRevokeMallocSpy(): Int32
-    // param-hint: pUnk optional
-    func CoSetCancelObject(pUnk: CPointer<Unit>): Int32
-    // param-hint: pServerPrincName optional
-    // param-hint: pAuthInfo optional
-    func CoSetProxyBlanket(pProxy: CPointer<Unit>, dwAuthnSvc: UInt32, dwAuthzSvc: UInt32, pServerPrincName: CPointer<UInt16>, dwAuthnLevel: UInt32, dwImpLevel: UInt32, pAuthInfo: CPointer<Unit>, dwCapabilities: UInt32): Int32
-    func CoSuspendClassObjects(): Int32
-    // param-hint: pNewObject optional
-    func CoSwitchCallContext(pNewObject: CPointer<Unit>, ppOldObject: CPointer<CPointer<Unit>>): Int32
-    func CoTaskMemAlloc(cb: UIntNative): CPointer<Unit>
-    // param-hint: pv optional
-    func CoTaskMemFree(pv: CPointer<Unit>): Unit
-    // param-hint: pv optional
-    func CoTaskMemRealloc(pv: CPointer<Unit>, cb: UIntNative): CPointer<Unit>
-    func CoTestCancel(): Int32
-    func CoTreatAsClass(clsidOld: CPointer<GUID>, clsidNew: CPointer<GUID>): Int32
-    func CoUninitialize(): Unit
-    // param-hint: pHandles len=param[2]
-    func CoWaitForMultipleHandles(dwFlags: UInt32, dwTimeout: UInt32, cHandles: UInt32, pHandles: CPointer<CPointer<Unit>>, lpdwindex: CPointer<UInt32>): Int32
-    // param-hint: pHandles len=param[2]
-    func CoWaitForMultipleObjects(dwFlags: UInt32, dwTimeout: UInt32, cHandles: UInt32, pHandles: CPointer<CPointer<Unit>>, lpdwindex: CPointer<UInt32>): Int32
-    func CreateAntiMoniker(ppmk: CPointer<CPointer<Unit>>): Int32
-    func CreateBindCtx(reserved: UInt32, ppbc: CPointer<CPointer<Unit>>): Int32
-    func CreateClassMoniker(rclsid: CPointer<GUID>, ppmk: CPointer<CPointer<Unit>>): Int32
-    func CreateDataAdviseHolder(ppDAHolder: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pUnkOuter optional
-    func CreateDataCache(pUnkOuter: CPointer<Unit>, rclsid: CPointer<GUID>, iid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
-    func CreateFileMoniker(lpszPathName: CPointer<UInt16>, ppmk: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pmkFirst optional
-    // param-hint: pmkRest optional
-    func CreateGenericComposite(pmkFirst: CPointer<Unit>, pmkRest: CPointer<Unit>, ppmkComposite: CPointer<CPointer<Unit>>): Int32
-    func CreateItemMoniker(lpszDelim: CPointer<UInt16>, lpszItem: CPointer<UInt16>, ppmk: CPointer<CPointer<Unit>>): Int32
-    // param-hint: punk optional
-    func CreateObjrefMoniker(punk: CPointer<Unit>, ppmk: CPointer<CPointer<Unit>>): Int32
-    // param-hint: punk optional
-    func CreatePointerMoniker(punk: CPointer<Unit>, ppmk: CPointer<CPointer<Unit>>): Int32
-    func GetClassFile(szFilename: CPointer<UInt16>, pclsid: CPointer<GUID>): Int32
-    func GetRunningObjectTable(reserved: UInt32, pprot: CPointer<CPointer<Unit>>): Int32
-    func IIDFromString(lpsz: CPointer<UInt16>, lpiid: CPointer<GUID>): Int32
-    func MkParseDisplayName(pbc: CPointer<Unit>, szUserName: CPointer<UInt16>, pchEaten: CPointer<UInt32>, ppmk: CPointer<CPointer<Unit>>): Int32
-    func ProgIDFromCLSID(clsid: CPointer<GUID>, lplpszProgID: CPointer<CPointer<UInt16>>): Int32
-    func StringFromCLSID(rclsid: CPointer<GUID>, lplpsz: CPointer<CPointer<UInt16>>): Int32
-    // param-hint: lpsz len=param[2]
-    func StringFromGUID2(rguid: CPointer<GUID>, lpsz: CPointer<UInt16>, cchMax: Int32): Int32
-    func StringFromIID(rclsid: CPointer<GUID>, lplpsz: CPointer<CPointer<UInt16>>): Int32
 }
 
-@When[OLE32 == "on" && Windows_Win32_Security == "on"]
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoCreateInstanceFromApp == "on"]
+public unsafe func Windows_CoCreateInstanceFromApp(Clsid: CPointer<GUID>, punkOuter: CPointer<Unit>, dwClsCtx: UInt32, reserved: CPointer<Unit>, dwCount: UInt32, pResults: CPointer<Win32__impl_l1.MULTI_QI>): Int32 {
+    return CoCreateInstanceFromApp(Clsid, punkOuter, dwClsCtx, reserved, dwCount, pResults)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoDecrementMTAUsage == "on"]
+foreign {
+    func CoDecrementMTAUsage(Cookie: Win32__impl_l0.CO_MTA_USAGE_COOKIE): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoDecrementMTAUsage == "on"]
+public unsafe func Windows_CoDecrementMTAUsage(Cookie: Win32__impl_l0.CO_MTA_USAGE_COOKIE): Int32 {
+    return CoDecrementMTAUsage(Cookie)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoDisableCallCancellation == "on"]
+foreign {
+    // param-hint: pReserved optional reserved
+    func CoDisableCallCancellation(pReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoDisableCallCancellation == "on"]
+public unsafe func Windows_CoDisableCallCancellation(pReserved: CPointer<Unit>): Int32 {
+    return CoDisableCallCancellation(pReserved)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoDisconnectContext == "on"]
+foreign {
+    func CoDisconnectContext(dwTimeout: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoDisconnectContext == "on"]
+public unsafe func Windows_CoDisconnectContext(dwTimeout: UInt32): Int32 {
+    return CoDisconnectContext(dwTimeout)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoDisconnectObject == "on"]
+foreign {
+    // param-hint: dwReserved reserved
+    func CoDisconnectObject(pUnk: CPointer<Unit>, dwReserved: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoDisconnectObject == "on"]
+public unsafe func Windows_CoDisconnectObject(pUnk: CPointer<Unit>, dwReserved: UInt32): Int32 {
+    return CoDisconnectObject(pUnk, dwReserved)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoDosDateTimeToFileTime == "on"]
+foreign {
+    func CoDosDateTimeToFileTime(nDosDate: UInt16, nDosTime: UInt16, lpFileTime: CPointer<Win32_Foundation.FILETIME>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoDosDateTimeToFileTime == "on"]
+public unsafe func Windows_CoDosDateTimeToFileTime(nDosDate: UInt16, nDosTime: UInt16, lpFileTime: CPointer<Win32_Foundation.FILETIME>): Int32 {
+    return CoDosDateTimeToFileTime(nDosDate, nDosTime, lpFileTime)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoEnableCallCancellation == "on"]
+foreign {
+    // param-hint: pReserved optional reserved
+    func CoEnableCallCancellation(pReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoEnableCallCancellation == "on"]
+public unsafe func Windows_CoEnableCallCancellation(pReserved: CPointer<Unit>): Int32 {
+    return CoEnableCallCancellation(pReserved)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoFileTimeNow == "on"]
+foreign {
+    func CoFileTimeNow(lpFileTime: CPointer<Win32_Foundation.FILETIME>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoFileTimeNow == "on"]
+public unsafe func Windows_CoFileTimeNow(lpFileTime: CPointer<Win32_Foundation.FILETIME>): Int32 {
+    return CoFileTimeNow(lpFileTime)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoFileTimeToDosDateTime == "on"]
+foreign {
+    func CoFileTimeToDosDateTime(lpFileTime: CPointer<Win32_Foundation.FILETIME>, lpDosDate: CPointer<UInt16>, lpDosTime: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoFileTimeToDosDateTime == "on"]
+public unsafe func Windows_CoFileTimeToDosDateTime(lpFileTime: CPointer<Win32_Foundation.FILETIME>, lpDosDate: CPointer<UInt16>, lpDosTime: CPointer<UInt16>): Int32 {
+    return CoFileTimeToDosDateTime(lpFileTime, lpDosDate, lpDosTime)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoFreeAllLibraries == "on"]
+foreign {
+    func CoFreeAllLibraries(): Unit
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoFreeAllLibraries == "on"]
+public unsafe func Windows_CoFreeAllLibraries(): Unit {
+    CoFreeAllLibraries()
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoFreeLibrary == "on"]
+foreign {
+    func CoFreeLibrary(hInst: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoFreeLibrary == "on"]
+public unsafe func Windows_CoFreeLibrary(hInst: CPointer<Unit>): Unit {
+    CoFreeLibrary(hInst)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoFreeUnusedLibraries == "on"]
+foreign {
+    func CoFreeUnusedLibraries(): Unit
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoFreeUnusedLibraries == "on"]
+public unsafe func Windows_CoFreeUnusedLibraries(): Unit {
+    CoFreeUnusedLibraries()
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoFreeUnusedLibrariesEx == "on"]
+foreign {
+    // param-hint: dwReserved reserved
+    func CoFreeUnusedLibrariesEx(dwUnloadDelay: UInt32, dwReserved: UInt32): Unit
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoFreeUnusedLibrariesEx == "on"]
+public unsafe func Windows_CoFreeUnusedLibrariesEx(dwUnloadDelay: UInt32, dwReserved: UInt32): Unit {
+    CoFreeUnusedLibrariesEx(dwUnloadDelay, dwReserved)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetApartmentType == "on"]
+foreign {
+    func CoGetApartmentType(pAptType: CPointer<Int32>, pAptQualifier: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetApartmentType == "on"]
+public unsafe func Windows_CoGetApartmentType(pAptType: CPointer<Int32>, pAptQualifier: CPointer<Int32>): Int32 {
+    return CoGetApartmentType(pAptType, pAptQualifier)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetCallContext == "on"]
+foreign {
+    func CoGetCallContext(riid: CPointer<GUID>, ppInterface: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetCallContext == "on"]
+public unsafe func Windows_CoGetCallContext(riid: CPointer<GUID>, ppInterface: CPointer<CPointer<Unit>>): Int32 {
+    return CoGetCallContext(riid, ppInterface)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetCallerTID == "on"]
+foreign {
+    func CoGetCallerTID(lpdwTID: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetCallerTID == "on"]
+public unsafe func Windows_CoGetCallerTID(lpdwTID: CPointer<UInt32>): Int32 {
+    return CoGetCallerTID(lpdwTID)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetCancelObject == "on"]
+foreign {
+    func CoGetCancelObject(dwThreadId: UInt32, iid: CPointer<GUID>, ppUnk: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetCancelObject == "on"]
+public unsafe func Windows_CoGetCancelObject(dwThreadId: UInt32, iid: CPointer<GUID>, ppUnk: CPointer<CPointer<Unit>>): Int32 {
+    return CoGetCancelObject(dwThreadId, iid, ppUnk)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetClassObject == "on"]
+foreign {
+    // param-hint: pvReserved optional
+    func CoGetClassObject(rclsid: CPointer<GUID>, dwClsContext: UInt32, pvReserved: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetClassObject == "on"]
+public unsafe func Windows_CoGetClassObject(rclsid: CPointer<GUID>, dwClsContext: UInt32, pvReserved: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return CoGetClassObject(rclsid, dwClsContext, pvReserved, riid, ppv)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetContextToken == "on"]
+foreign {
+    func CoGetContextToken(pToken: CPointer<UIntNative>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetContextToken == "on"]
+public unsafe func Windows_CoGetContextToken(pToken: CPointer<UIntNative>): Int32 {
+    return CoGetContextToken(pToken)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetCurrentLogicalThreadId == "on"]
+foreign {
+    func CoGetCurrentLogicalThreadId(pguid: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetCurrentLogicalThreadId == "on"]
+public unsafe func Windows_CoGetCurrentLogicalThreadId(pguid: CPointer<GUID>): Int32 {
+    return CoGetCurrentLogicalThreadId(pguid)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetCurrentProcess == "on"]
+foreign {
+    func CoGetCurrentProcess(): UInt32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetCurrentProcess == "on"]
+public unsafe func Windows_CoGetCurrentProcess(): UInt32 {
+    return CoGetCurrentProcess()
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetMalloc == "on"]
+foreign {
+    func CoGetMalloc(dwMemContext: UInt32, ppMalloc: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetMalloc == "on"]
+public unsafe func Windows_CoGetMalloc(dwMemContext: UInt32, ppMalloc: CPointer<CPointer<Unit>>): Int32 {
+    return CoGetMalloc(dwMemContext, ppMalloc)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetObject == "on"]
+foreign {
+    // param-hint: pBindOptions optional
+    func CoGetObject(pszName: CPointer<UInt16>, pBindOptions: CPointer<Win32__impl_l0.BIND_OPTS>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetObject == "on"]
+public unsafe func Windows_CoGetObject(pszName: CPointer<UInt16>, pBindOptions: CPointer<Win32__impl_l0.BIND_OPTS>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return CoGetObject(pszName, pBindOptions, riid, ppv)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetObjectContext == "on"]
+foreign {
+    func CoGetObjectContext(riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetObjectContext == "on"]
+public unsafe func Windows_CoGetObjectContext(riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return CoGetObjectContext(riid, ppv)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetPSClsid == "on"]
+foreign {
+    func CoGetPSClsid(riid: CPointer<GUID>, pClsid: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetPSClsid == "on"]
+public unsafe func Windows_CoGetPSClsid(riid: CPointer<GUID>, pClsid: CPointer<GUID>): Int32 {
+    return CoGetPSClsid(riid, pClsid)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetSystemSecurityPermissions == "on" && Windows_Win32_Security == "on"]
 foreign {
     func CoGetSystemSecurityPermissions(comSDType: Int32, ppSD: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetSystemSecurityPermissions == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_CoGetSystemSecurityPermissions(comSDType: Int32, ppSD: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): Int32 {
+    return CoGetSystemSecurityPermissions(comSDType, ppSD)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetTreatAsClass == "on"]
+foreign {
+    func CoGetTreatAsClass(clsidOld: CPointer<GUID>, pClsidNew: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoGetTreatAsClass == "on"]
+public unsafe func Windows_CoGetTreatAsClass(clsidOld: CPointer<GUID>, pClsidNew: CPointer<GUID>): Int32 {
+    return CoGetTreatAsClass(clsidOld, pClsidNew)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoImpersonateClient == "on"]
+foreign {
+    func CoImpersonateClient(): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoImpersonateClient == "on"]
+public unsafe func Windows_CoImpersonateClient(): Int32 {
+    return CoImpersonateClient()
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoIncrementMTAUsage == "on"]
+foreign {
+    func CoIncrementMTAUsage(pCookie: CPointer<Win32__impl_l0.CO_MTA_USAGE_COOKIE>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoIncrementMTAUsage == "on"]
+public unsafe func Windows_CoIncrementMTAUsage(pCookie: CPointer<Win32__impl_l0.CO_MTA_USAGE_COOKIE>): Int32 {
+    return CoIncrementMTAUsage(pCookie)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoInitialize == "on"]
+foreign {
+    // param-hint: pvReserved optional reserved
+    func CoInitialize(pvReserved: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoInitialize == "on"]
+public unsafe func Windows_CoInitialize(pvReserved: CPointer<Unit>): Int32 {
+    return CoInitialize(pvReserved)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoInitializeEx == "on"]
+foreign {
+    // param-hint: pvReserved optional reserved
+    func CoInitializeEx(pvReserved: CPointer<Unit>, dwCoInit: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoInitializeEx == "on"]
+public unsafe func Windows_CoInitializeEx(pvReserved: CPointer<Unit>, dwCoInit: UInt32): Int32 {
+    return CoInitializeEx(pvReserved, dwCoInit)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoInitializeSecurity == "on" && Windows_Win32_Security == "on"]
+foreign {
     // param-hint: pSecDesc optional
     // param-hint: asAuthSvc optional
     // param-hint: pReserved1 optional reserved
@@ -169,42 +482,695 @@ foreign {
     func CoInitializeSecurity(pSecDesc: Win32_Security.PSECURITY_DESCRIPTOR, cAuthSvc: Int32, asAuthSvc: CPointer<Win32__impl_l0.SOLE_AUTHENTICATION_SERVICE>, pReserved1: CPointer<Unit>, dwAuthnLevel: UInt32, dwImpLevel: UInt32, pAuthList: CPointer<Unit>, dwCapabilities: UInt32, pReserved3: CPointer<Unit>): Int32
 }
 
-@When[OLEAUT32 == "on"]
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoInitializeSecurity == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_CoInitializeSecurity(pSecDesc: Win32_Security.PSECURITY_DESCRIPTOR, cAuthSvc: Int32, asAuthSvc: CPointer<Win32__impl_l0.SOLE_AUTHENTICATION_SERVICE>, pReserved1: CPointer<Unit>, dwAuthnLevel: UInt32, dwImpLevel: UInt32, pAuthList: CPointer<Unit>, dwCapabilities: UInt32, pReserved3: CPointer<Unit>): Int32 {
+    return CoInitializeSecurity(pSecDesc, cAuthSvc, asAuthSvc, pReserved1, dwAuthnLevel, dwImpLevel, pAuthList, dwCapabilities, pReserved3)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoInvalidateRemoteMachineBindings == "on"]
+foreign {
+    func CoInvalidateRemoteMachineBindings(pszMachineName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoInvalidateRemoteMachineBindings == "on"]
+public unsafe func Windows_CoInvalidateRemoteMachineBindings(pszMachineName: CPointer<UInt16>): Int32 {
+    return CoInvalidateRemoteMachineBindings(pszMachineName)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoIsHandlerConnected == "on"]
+foreign {
+    func CoIsHandlerConnected(pUnk: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoIsHandlerConnected == "on"]
+public unsafe func Windows_CoIsHandlerConnected(pUnk: CPointer<Unit>): Int32 {
+    return CoIsHandlerConnected(pUnk)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoLoadLibrary == "on"]
+foreign {
+    func CoLoadLibrary(lpszLibName: CPointer<UInt16>, bAutoFree: Int32): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoLoadLibrary == "on"]
+public unsafe func Windows_CoLoadLibrary(lpszLibName: CPointer<UInt16>, bAutoFree: Int32): CPointer<Unit> {
+    return CoLoadLibrary(lpszLibName, bAutoFree)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoLockObjectExternal == "on"]
+foreign {
+    func CoLockObjectExternal(pUnk: CPointer<Unit>, fLock: Int32, fLastUnlockReleases: Int32): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoLockObjectExternal == "on"]
+public unsafe func Windows_CoLockObjectExternal(pUnk: CPointer<Unit>, fLock: Int32, fLastUnlockReleases: Int32): Int32 {
+    return CoLockObjectExternal(pUnk, fLock, fLastUnlockReleases)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoQueryAuthenticationServices == "on"]
+foreign {
+    func CoQueryAuthenticationServices(pcAuthSvc: CPointer<UInt32>, asAuthSvc: CPointer<CPointer<Win32__impl_l0.SOLE_AUTHENTICATION_SERVICE>>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoQueryAuthenticationServices == "on"]
+public unsafe func Windows_CoQueryAuthenticationServices(pcAuthSvc: CPointer<UInt32>, asAuthSvc: CPointer<CPointer<Win32__impl_l0.SOLE_AUTHENTICATION_SERVICE>>): Int32 {
+    return CoQueryAuthenticationServices(pcAuthSvc, asAuthSvc)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoQueryClientBlanket == "on"]
+foreign {
+    // param-hint: pAuthnSvc optional
+    // param-hint: pAuthzSvc optional
+    // param-hint: pServerPrincName optional
+    // param-hint: pAuthnLevel optional
+    // param-hint: pImpLevel optional
+    // param-hint: pPrivs optional
+    // param-hint: pCapabilities optional
+    func CoQueryClientBlanket(pAuthnSvc: CPointer<UInt32>, pAuthzSvc: CPointer<UInt32>, pServerPrincName: CPointer<CPointer<UInt16>>, pAuthnLevel: CPointer<UInt32>, pImpLevel: CPointer<UInt32>, pPrivs: CPointer<CPointer<Unit>>, pCapabilities: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoQueryClientBlanket == "on"]
+public unsafe func Windows_CoQueryClientBlanket(pAuthnSvc: CPointer<UInt32>, pAuthzSvc: CPointer<UInt32>, pServerPrincName: CPointer<CPointer<UInt16>>, pAuthnLevel: CPointer<UInt32>, pImpLevel: CPointer<UInt32>, pPrivs: CPointer<CPointer<Unit>>, pCapabilities: CPointer<UInt32>): Int32 {
+    return CoQueryClientBlanket(pAuthnSvc, pAuthzSvc, pServerPrincName, pAuthnLevel, pImpLevel, pPrivs, pCapabilities)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoQueryProxyBlanket == "on"]
+foreign {
+    // param-hint: pwAuthnSvc optional
+    // param-hint: pAuthzSvc optional
+    // param-hint: pServerPrincName optional
+    // param-hint: pAuthnLevel optional
+    // param-hint: pImpLevel optional
+    // param-hint: pAuthInfo optional
+    // param-hint: pCapabilites optional
+    func CoQueryProxyBlanket(pProxy: CPointer<Unit>, pwAuthnSvc: CPointer<UInt32>, pAuthzSvc: CPointer<UInt32>, pServerPrincName: CPointer<CPointer<UInt16>>, pAuthnLevel: CPointer<UInt32>, pImpLevel: CPointer<UInt32>, pAuthInfo: CPointer<CPointer<Unit>>, pCapabilites: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoQueryProxyBlanket == "on"]
+public unsafe func Windows_CoQueryProxyBlanket(pProxy: CPointer<Unit>, pwAuthnSvc: CPointer<UInt32>, pAuthzSvc: CPointer<UInt32>, pServerPrincName: CPointer<CPointer<UInt16>>, pAuthnLevel: CPointer<UInt32>, pImpLevel: CPointer<UInt32>, pAuthInfo: CPointer<CPointer<Unit>>, pCapabilites: CPointer<UInt32>): Int32 {
+    return CoQueryProxyBlanket(pProxy, pwAuthnSvc, pAuthzSvc, pServerPrincName, pAuthnLevel, pImpLevel, pAuthInfo, pCapabilites)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRegisterActivationFilter == "on"]
+foreign {
+    func CoRegisterActivationFilter(pActivationFilter: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRegisterActivationFilter == "on"]
+public unsafe func Windows_CoRegisterActivationFilter(pActivationFilter: CPointer<Unit>): Int32 {
+    return CoRegisterActivationFilter(pActivationFilter)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRegisterClassObject == "on"]
+foreign {
+    func CoRegisterClassObject(rclsid: CPointer<GUID>, pUnk: CPointer<Unit>, dwClsContext: UInt32, flags: UInt32, lpdwRegister: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRegisterClassObject == "on"]
+public unsafe func Windows_CoRegisterClassObject(rclsid: CPointer<GUID>, pUnk: CPointer<Unit>, dwClsContext: UInt32, flags: UInt32, lpdwRegister: CPointer<UInt32>): Int32 {
+    return CoRegisterClassObject(rclsid, pUnk, dwClsContext, flags, lpdwRegister)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRegisterDeviceCatalog == "on"]
+foreign {
+    func CoRegisterDeviceCatalog(deviceInstanceId: CPointer<UInt16>, cookie: CPointer<Win32__impl_l0.CO_DEVICE_CATALOG_COOKIE>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRegisterDeviceCatalog == "on"]
+public unsafe func Windows_CoRegisterDeviceCatalog(deviceInstanceId: CPointer<UInt16>, cookie: CPointer<Win32__impl_l0.CO_DEVICE_CATALOG_COOKIE>): Int32 {
+    return CoRegisterDeviceCatalog(deviceInstanceId, cookie)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRegisterInitializeSpy == "on"]
+foreign {
+    func CoRegisterInitializeSpy(pSpy: CPointer<Unit>, puliCookie: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRegisterInitializeSpy == "on"]
+public unsafe func Windows_CoRegisterInitializeSpy(pSpy: CPointer<Unit>, puliCookie: CPointer<UInt64>): Int32 {
+    return CoRegisterInitializeSpy(pSpy, puliCookie)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRegisterMallocSpy == "on"]
+foreign {
+    func CoRegisterMallocSpy(pMallocSpy: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRegisterMallocSpy == "on"]
+public unsafe func Windows_CoRegisterMallocSpy(pMallocSpy: CPointer<Unit>): Int32 {
+    return CoRegisterMallocSpy(pMallocSpy)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRegisterPSClsid == "on"]
+foreign {
+    func CoRegisterPSClsid(riid: CPointer<GUID>, rclsid: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRegisterPSClsid == "on"]
+public unsafe func Windows_CoRegisterPSClsid(riid: CPointer<GUID>, rclsid: CPointer<GUID>): Int32 {
+    return CoRegisterPSClsid(riid, rclsid)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRegisterSurrogate == "on"]
+foreign {
+    func CoRegisterSurrogate(pSurrogate: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRegisterSurrogate == "on"]
+public unsafe func Windows_CoRegisterSurrogate(pSurrogate: CPointer<Unit>): Int32 {
+    return CoRegisterSurrogate(pSurrogate)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoReleaseServerProcess == "on"]
+foreign {
+    func CoReleaseServerProcess(): UInt32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoReleaseServerProcess == "on"]
+public unsafe func Windows_CoReleaseServerProcess(): UInt32 {
+    return CoReleaseServerProcess()
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoResumeClassObjects == "on"]
+foreign {
+    func CoResumeClassObjects(): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoResumeClassObjects == "on"]
+public unsafe func Windows_CoResumeClassObjects(): Int32 {
+    return CoResumeClassObjects()
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRevertToSelf == "on"]
+foreign {
+    func CoRevertToSelf(): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRevertToSelf == "on"]
+public unsafe func Windows_CoRevertToSelf(): Int32 {
+    return CoRevertToSelf()
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRevokeClassObject == "on"]
+foreign {
+    func CoRevokeClassObject(dwRegister: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRevokeClassObject == "on"]
+public unsafe func Windows_CoRevokeClassObject(dwRegister: UInt32): Int32 {
+    return CoRevokeClassObject(dwRegister)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRevokeDeviceCatalog == "on"]
+foreign {
+    func CoRevokeDeviceCatalog(cookie: Win32__impl_l0.CO_DEVICE_CATALOG_COOKIE): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRevokeDeviceCatalog == "on"]
+public unsafe func Windows_CoRevokeDeviceCatalog(cookie: Win32__impl_l0.CO_DEVICE_CATALOG_COOKIE): Int32 {
+    return CoRevokeDeviceCatalog(cookie)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRevokeInitializeSpy == "on"]
+foreign {
+    func CoRevokeInitializeSpy(uliCookie: UInt64): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRevokeInitializeSpy == "on"]
+public unsafe func Windows_CoRevokeInitializeSpy(uliCookie: UInt64): Int32 {
+    return CoRevokeInitializeSpy(uliCookie)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRevokeMallocSpy == "on"]
+foreign {
+    func CoRevokeMallocSpy(): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRevokeMallocSpy == "on"]
+public unsafe func Windows_CoRevokeMallocSpy(): Int32 {
+    return CoRevokeMallocSpy()
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoSetCancelObject == "on"]
+foreign {
+    // param-hint: pUnk optional
+    func CoSetCancelObject(pUnk: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoSetCancelObject == "on"]
+public unsafe func Windows_CoSetCancelObject(pUnk: CPointer<Unit>): Int32 {
+    return CoSetCancelObject(pUnk)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoSetProxyBlanket == "on"]
+foreign {
+    // param-hint: pServerPrincName optional
+    // param-hint: pAuthInfo optional
+    func CoSetProxyBlanket(pProxy: CPointer<Unit>, dwAuthnSvc: UInt32, dwAuthzSvc: UInt32, pServerPrincName: CPointer<UInt16>, dwAuthnLevel: UInt32, dwImpLevel: UInt32, pAuthInfo: CPointer<Unit>, dwCapabilities: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoSetProxyBlanket == "on"]
+public unsafe func Windows_CoSetProxyBlanket(pProxy: CPointer<Unit>, dwAuthnSvc: UInt32, dwAuthzSvc: UInt32, pServerPrincName: CPointer<UInt16>, dwAuthnLevel: UInt32, dwImpLevel: UInt32, pAuthInfo: CPointer<Unit>, dwCapabilities: UInt32): Int32 {
+    return CoSetProxyBlanket(pProxy, dwAuthnSvc, dwAuthzSvc, pServerPrincName, dwAuthnLevel, dwImpLevel, pAuthInfo, dwCapabilities)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoSuspendClassObjects == "on"]
+foreign {
+    func CoSuspendClassObjects(): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoSuspendClassObjects == "on"]
+public unsafe func Windows_CoSuspendClassObjects(): Int32 {
+    return CoSuspendClassObjects()
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoSwitchCallContext == "on"]
+foreign {
+    // param-hint: pNewObject optional
+    func CoSwitchCallContext(pNewObject: CPointer<Unit>, ppOldObject: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoSwitchCallContext == "on"]
+public unsafe func Windows_CoSwitchCallContext(pNewObject: CPointer<Unit>, ppOldObject: CPointer<CPointer<Unit>>): Int32 {
+    return CoSwitchCallContext(pNewObject, ppOldObject)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoTaskMemAlloc == "on"]
+foreign {
+    func CoTaskMemAlloc(cb: UIntNative): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoTaskMemAlloc == "on"]
+public unsafe func Windows_CoTaskMemAlloc(cb: UIntNative): CPointer<Unit> {
+    return CoTaskMemAlloc(cb)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoTaskMemFree == "on"]
+foreign {
+    // param-hint: pv optional
+    func CoTaskMemFree(pv: CPointer<Unit>): Unit
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoTaskMemFree == "on"]
+public unsafe func Windows_CoTaskMemFree(pv: CPointer<Unit>): Unit {
+    CoTaskMemFree(pv)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoTaskMemRealloc == "on"]
+foreign {
+    // param-hint: pv optional
+    func CoTaskMemRealloc(pv: CPointer<Unit>, cb: UIntNative): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoTaskMemRealloc == "on"]
+public unsafe func Windows_CoTaskMemRealloc(pv: CPointer<Unit>, cb: UIntNative): CPointer<Unit> {
+    return CoTaskMemRealloc(pv, cb)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoTestCancel == "on"]
+foreign {
+    func CoTestCancel(): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoTestCancel == "on"]
+public unsafe func Windows_CoTestCancel(): Int32 {
+    return CoTestCancel()
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoTreatAsClass == "on"]
+foreign {
+    func CoTreatAsClass(clsidOld: CPointer<GUID>, clsidNew: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoTreatAsClass == "on"]
+public unsafe func Windows_CoTreatAsClass(clsidOld: CPointer<GUID>, clsidNew: CPointer<GUID>): Int32 {
+    return CoTreatAsClass(clsidOld, clsidNew)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoUninitialize == "on"]
+foreign {
+    func CoUninitialize(): Unit
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoUninitialize == "on"]
+public unsafe func Windows_CoUninitialize(): Unit {
+    CoUninitialize()
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoWaitForMultipleHandles == "on"]
+foreign {
+    // param-hint: pHandles len=param[2]
+    func CoWaitForMultipleHandles(dwFlags: UInt32, dwTimeout: UInt32, cHandles: UInt32, pHandles: CPointer<CPointer<Unit>>, lpdwindex: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoWaitForMultipleHandles == "on"]
+public unsafe func Windows_CoWaitForMultipleHandles(dwFlags: UInt32, dwTimeout: UInt32, cHandles: UInt32, pHandles: CPointer<CPointer<Unit>>, lpdwindex: CPointer<UInt32>): Int32 {
+    return CoWaitForMultipleHandles(dwFlags, dwTimeout, cHandles, pHandles, lpdwindex)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoWaitForMultipleObjects == "on"]
+foreign {
+    // param-hint: pHandles len=param[2]
+    func CoWaitForMultipleObjects(dwFlags: UInt32, dwTimeout: UInt32, cHandles: UInt32, pHandles: CPointer<CPointer<Unit>>, lpdwindex: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoWaitForMultipleObjects == "on"]
+public unsafe func Windows_CoWaitForMultipleObjects(dwFlags: UInt32, dwTimeout: UInt32, cHandles: UInt32, pHandles: CPointer<CPointer<Unit>>, lpdwindex: CPointer<UInt32>): Int32 {
+    return CoWaitForMultipleObjects(dwFlags, dwTimeout, cHandles, pHandles, lpdwindex)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CreateAntiMoniker == "on"]
+foreign {
+    func CreateAntiMoniker(ppmk: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CreateAntiMoniker == "on"]
+public unsafe func Windows_CreateAntiMoniker(ppmk: CPointer<CPointer<Unit>>): Int32 {
+    return CreateAntiMoniker(ppmk)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CreateBindCtx == "on"]
+foreign {
+    func CreateBindCtx(reserved: UInt32, ppbc: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CreateBindCtx == "on"]
+public unsafe func Windows_CreateBindCtx(reserved: UInt32, ppbc: CPointer<CPointer<Unit>>): Int32 {
+    return CreateBindCtx(reserved, ppbc)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CreateClassMoniker == "on"]
+foreign {
+    func CreateClassMoniker(rclsid: CPointer<GUID>, ppmk: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CreateClassMoniker == "on"]
+public unsafe func Windows_CreateClassMoniker(rclsid: CPointer<GUID>, ppmk: CPointer<CPointer<Unit>>): Int32 {
+    return CreateClassMoniker(rclsid, ppmk)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CreateDataAdviseHolder == "on"]
+foreign {
+    func CreateDataAdviseHolder(ppDAHolder: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CreateDataAdviseHolder == "on"]
+public unsafe func Windows_CreateDataAdviseHolder(ppDAHolder: CPointer<CPointer<Unit>>): Int32 {
+    return CreateDataAdviseHolder(ppDAHolder)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CreateDataCache == "on"]
+foreign {
+    // param-hint: pUnkOuter optional
+    func CreateDataCache(pUnkOuter: CPointer<Unit>, rclsid: CPointer<GUID>, iid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CreateDataCache == "on"]
+public unsafe func Windows_CreateDataCache(pUnkOuter: CPointer<Unit>, rclsid: CPointer<GUID>, iid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return CreateDataCache(pUnkOuter, rclsid, iid, ppv)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CreateFileMoniker == "on"]
+foreign {
+    func CreateFileMoniker(lpszPathName: CPointer<UInt16>, ppmk: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CreateFileMoniker == "on"]
+public unsafe func Windows_CreateFileMoniker(lpszPathName: CPointer<UInt16>, ppmk: CPointer<CPointer<Unit>>): Int32 {
+    return CreateFileMoniker(lpszPathName, ppmk)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CreateGenericComposite == "on"]
+foreign {
+    // param-hint: pmkFirst optional
+    // param-hint: pmkRest optional
+    func CreateGenericComposite(pmkFirst: CPointer<Unit>, pmkRest: CPointer<Unit>, ppmkComposite: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CreateGenericComposite == "on"]
+public unsafe func Windows_CreateGenericComposite(pmkFirst: CPointer<Unit>, pmkRest: CPointer<Unit>, ppmkComposite: CPointer<CPointer<Unit>>): Int32 {
+    return CreateGenericComposite(pmkFirst, pmkRest, ppmkComposite)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CreateItemMoniker == "on"]
+foreign {
+    func CreateItemMoniker(lpszDelim: CPointer<UInt16>, lpszItem: CPointer<UInt16>, ppmk: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CreateItemMoniker == "on"]
+public unsafe func Windows_CreateItemMoniker(lpszDelim: CPointer<UInt16>, lpszItem: CPointer<UInt16>, ppmk: CPointer<CPointer<Unit>>): Int32 {
+    return CreateItemMoniker(lpszDelim, lpszItem, ppmk)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CreateObjrefMoniker == "on"]
+foreign {
+    // param-hint: punk optional
+    func CreateObjrefMoniker(punk: CPointer<Unit>, ppmk: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CreateObjrefMoniker == "on"]
+public unsafe func Windows_CreateObjrefMoniker(punk: CPointer<Unit>, ppmk: CPointer<CPointer<Unit>>): Int32 {
+    return CreateObjrefMoniker(punk, ppmk)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CreatePointerMoniker == "on"]
+foreign {
+    // param-hint: punk optional
+    func CreatePointerMoniker(punk: CPointer<Unit>, ppmk: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CreatePointerMoniker == "on"]
+public unsafe func Windows_CreatePointerMoniker(punk: CPointer<Unit>, ppmk: CPointer<CPointer<Unit>>): Int32 {
+    return CreatePointerMoniker(punk, ppmk)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_GetClassFile == "on"]
+foreign {
+    func GetClassFile(szFilename: CPointer<UInt16>, pclsid: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_GetClassFile == "on"]
+public unsafe func Windows_GetClassFile(szFilename: CPointer<UInt16>, pclsid: CPointer<GUID>): Int32 {
+    return GetClassFile(szFilename, pclsid)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_GetRunningObjectTable == "on"]
+foreign {
+    func GetRunningObjectTable(reserved: UInt32, pprot: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_GetRunningObjectTable == "on"]
+public unsafe func Windows_GetRunningObjectTable(reserved: UInt32, pprot: CPointer<CPointer<Unit>>): Int32 {
+    return GetRunningObjectTable(reserved, pprot)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_IIDFromString == "on"]
+foreign {
+    func IIDFromString(lpsz: CPointer<UInt16>, lpiid: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_IIDFromString == "on"]
+public unsafe func Windows_IIDFromString(lpsz: CPointer<UInt16>, lpiid: CPointer<GUID>): Int32 {
+    return IIDFromString(lpsz, lpiid)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_MkParseDisplayName == "on"]
+foreign {
+    func MkParseDisplayName(pbc: CPointer<Unit>, szUserName: CPointer<UInt16>, pchEaten: CPointer<UInt32>, ppmk: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_MkParseDisplayName == "on"]
+public unsafe func Windows_MkParseDisplayName(pbc: CPointer<Unit>, szUserName: CPointer<UInt16>, pchEaten: CPointer<UInt32>, ppmk: CPointer<CPointer<Unit>>): Int32 {
+    return MkParseDisplayName(pbc, szUserName, pchEaten, ppmk)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_ProgIDFromCLSID == "on"]
+foreign {
+    func ProgIDFromCLSID(clsid: CPointer<GUID>, lplpszProgID: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_ProgIDFromCLSID == "on"]
+public unsafe func Windows_ProgIDFromCLSID(clsid: CPointer<GUID>, lplpszProgID: CPointer<CPointer<UInt16>>): Int32 {
+    return ProgIDFromCLSID(clsid, lplpszProgID)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_StringFromCLSID == "on"]
+foreign {
+    func StringFromCLSID(rclsid: CPointer<GUID>, lplpsz: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_StringFromCLSID == "on"]
+public unsafe func Windows_StringFromCLSID(rclsid: CPointer<GUID>, lplpsz: CPointer<CPointer<UInt16>>): Int32 {
+    return StringFromCLSID(rclsid, lplpsz)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_StringFromGUID2 == "on"]
+foreign {
+    // param-hint: lpsz len=param[2]
+    func StringFromGUID2(rguid: CPointer<GUID>, lpsz: CPointer<UInt16>, cchMax: Int32): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_StringFromGUID2 == "on"]
+public unsafe func Windows_StringFromGUID2(rguid: CPointer<GUID>, lpsz: CPointer<UInt16>, cchMax: Int32): Int32 {
+    return StringFromGUID2(rguid, lpsz, cchMax)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_StringFromIID == "on"]
+foreign {
+    func StringFromIID(rclsid: CPointer<GUID>, lplpsz: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_StringFromIID == "on"]
+public unsafe func Windows_StringFromIID(rclsid: CPointer<GUID>, lplpsz: CPointer<CPointer<UInt16>>): Int32 {
+    return StringFromIID(rclsid, lplpsz)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLEAUT32 == "on" && Windows_Win32_System_Com_GetErrorInfo == "on"]
 foreign {
     func GetErrorInfo(dwReserved: UInt32, pperrinfo: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLEAUT32 == "on" && Windows_Win32_System_Com_GetErrorInfo == "on"]
+public unsafe func Windows_GetErrorInfo(dwReserved: UInt32, pperrinfo: CPointer<CPointer<Unit>>): Int32 {
+    return GetErrorInfo(dwReserved, pperrinfo)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLEAUT32 == "on" && Windows_Win32_System_Com_SetErrorInfo == "on"]
+foreign {
     // param-hint: perrinfo optional
     func SetErrorInfo(dwReserved: UInt32, perrinfo: CPointer<Unit>): Int32
 }
 
-@When[URLMON == "on"]
+@When[Windows_Win32_System_Com == "on" && OLEAUT32 == "on" && Windows_Win32_System_Com_SetErrorInfo == "on"]
+public unsafe func Windows_SetErrorInfo(dwReserved: UInt32, perrinfo: CPointer<Unit>): Int32 {
+    return SetErrorInfo(dwReserved, perrinfo)
+}
+
+@When[Windows_Win32_System_Com == "on" && URLMON == "on" && Windows_Win32_System_Com_CreateIUriBuilder == "on"]
 foreign {
     // param-hint: pIUri optional
     func CreateIUriBuilder(pIUri: CPointer<Unit>, dwFlags: UInt32, dwReserved: UIntNative, ppIUriBuilder: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && URLMON == "on" && Windows_Win32_System_Com_CreateIUriBuilder == "on"]
+public unsafe func Windows_CreateIUriBuilder(pIUri: CPointer<Unit>, dwFlags: UInt32, dwReserved: UIntNative, ppIUriBuilder: CPointer<CPointer<Unit>>): Int32 {
+    return CreateIUriBuilder(pIUri, dwFlags, dwReserved, ppIUriBuilder)
+}
+
+@When[Windows_Win32_System_Com == "on" && URLMON == "on" && Windows_Win32_System_Com_CreateUri == "on"]
+foreign {
     // param-hint: dwReserved optional reserved
     func CreateUri(pwzURI: CPointer<UInt16>, dwFlags: UInt32, dwReserved: UIntNative, ppURI: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && URLMON == "on" && Windows_Win32_System_Com_CreateUri == "on"]
+public unsafe func Windows_CreateUri(pwzURI: CPointer<UInt16>, dwFlags: UInt32, dwReserved: UIntNative, ppURI: CPointer<CPointer<Unit>>): Int32 {
+    return CreateUri(pwzURI, dwFlags, dwReserved, ppURI)
+}
+
+@When[Windows_Win32_System_Com == "on" && URLMON == "on" && Windows_Win32_System_Com_CreateUriWithFragment == "on"]
+foreign {
     // param-hint: pwzFragment optional
     // param-hint: dwReserved optional reserved
     func CreateUriWithFragment(pwzURI: CPointer<UInt16>, pwzFragment: CPointer<UInt16>, dwFlags: UInt32, dwReserved: UIntNative, ppURI: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[OLE32 == "on"]
+@When[Windows_Win32_System_Com == "on" && URLMON == "on" && Windows_Win32_System_Com_CreateUriWithFragment == "on"]
+public unsafe func Windows_CreateUriWithFragment(pwzURI: CPointer<UInt16>, pwzFragment: CPointer<UInt16>, dwFlags: UInt32, dwReserved: UIntNative, ppURI: CPointer<CPointer<Unit>>): Int32 {
+    return CreateUriWithFragment(pwzURI, pwzFragment, dwFlags, dwReserved, ppURI)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoBuildVersion == "on"]
 foreign {
     func CoBuildVersion(): UInt32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoBuildVersion == "on"]
+public unsafe func Windows_CoBuildVersion(): UInt32 {
+    return CoBuildVersion()
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoInstall == "on"]
+foreign {
     func CoInstall(pbc: CPointer<Unit>, dwFlags: UInt32, pClassSpec: CPointer<Win32__impl_l0.uCLSSPEC>, pQuery: CPointer<Win32__impl_l1.QUERYCONTEXT>, pszCodeBase: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoInstall == "on"]
+public unsafe func Windows_CoInstall(pbc: CPointer<Unit>, dwFlags: UInt32, pClassSpec: CPointer<Win32__impl_l0.uCLSSPEC>, pQuery: CPointer<Win32__impl_l1.QUERYCONTEXT>, pszCodeBase: CPointer<UInt16>): Int32 {
+    return CoInstall(pbc, dwFlags, pClassSpec, pQuery, pszCodeBase)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoIsOle1Class == "on"]
+foreign {
     func CoIsOle1Class(rclsid: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoIsOle1Class == "on"]
+public unsafe func Windows_CoIsOle1Class(rclsid: CPointer<GUID>): Int32 {
+    return CoIsOle1Class(rclsid)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRegisterChannelHook == "on"]
+foreign {
     func CoRegisterChannelHook(ExtensionUuid: CPointer<GUID>, pChannelHook: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CoRegisterChannelHook == "on"]
+public unsafe func Windows_CoRegisterChannelHook(ExtensionUuid: CPointer<GUID>, pChannelHook: CPointer<Unit>): Int32 {
+    return CoRegisterChannelHook(ExtensionUuid, pChannelHook)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CreateStdProgressIndicator == "on"]
+foreign {
     func CreateStdProgressIndicator(hwndParent: CPointer<Unit>, pszTitle: CPointer<UInt16>, pIbscCaller: CPointer<Unit>, ppIbsc: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_CreateStdProgressIndicator == "on"]
+public unsafe func Windows_CreateStdProgressIndicator(hwndParent: CPointer<Unit>, pszTitle: CPointer<UInt16>, pIbscCaller: CPointer<Unit>, ppIbsc: CPointer<CPointer<Unit>>): Int32 {
+    return CreateStdProgressIndicator(hwndParent, pszTitle, pIbscCaller, ppIbsc)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_DcomChannelSetHResult == "on"]
+foreign {
     // param-hint: pvReserved optional
     // param-hint: pulReserved optional
     func DcomChannelSetHResult(pvReserved: CPointer<Unit>, pulReserved: CPointer<UInt32>, appsHR: Int32): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_DcomChannelSetHResult == "on"]
+public unsafe func Windows_DcomChannelSetHResult(pvReserved: CPointer<Unit>, pulReserved: CPointer<UInt32>, appsHR: Int32): Int32 {
+    return DcomChannelSetHResult(pvReserved, pulReserved, appsHR)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_MonikerCommonPrefixWith == "on"]
+foreign {
     func MonikerCommonPrefixWith(pmkThis: CPointer<Unit>, pmkOther: CPointer<Unit>, ppmkCommon: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_MonikerCommonPrefixWith == "on"]
+public unsafe func Windows_MonikerCommonPrefixWith(pmkThis: CPointer<Unit>, pmkOther: CPointer<Unit>, ppmkCommon: CPointer<CPointer<Unit>>): Int32 {
+    return MonikerCommonPrefixWith(pmkThis, pmkOther, ppmkCommon)
+}
+
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_MonikerRelativePathTo == "on"]
+foreign {
     func MonikerRelativePathTo(pmkSrc: CPointer<Unit>, pmkDest: CPointer<Unit>, ppmkRelPath: CPointer<CPointer<Unit>>, dwReserved: Int32): Int32
 }
 
-@When[URLMON == "on"]
+@When[Windows_Win32_System_Com == "on" && OLE32 == "on" && Windows_Win32_System_Com_MonikerRelativePathTo == "on"]
+public unsafe func Windows_MonikerRelativePathTo(pmkSrc: CPointer<Unit>, pmkDest: CPointer<Unit>, ppmkRelPath: CPointer<CPointer<Unit>>, dwReserved: Int32): Int32 {
+    return MonikerRelativePathTo(pmkSrc, pmkDest, ppmkRelPath, dwReserved)
+}
+
+@When[Windows_Win32_System_Com == "on" && URLMON == "on" && Windows_Win32_System_Com_CreateUriFromMultiByteString == "on"]
 foreign {
     // param-hint: dwReserved optional reserved
     func CreateUriFromMultiByteString(pszANSIInputUri: CPointer<UInt8>, dwEncodingFlags: UInt32, dwCodePage: UInt32, dwCreateFlags: UInt32, dwReserved: UIntNative, ppUri: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_Com == "on" && URLMON == "on" && Windows_Win32_System_Com_CreateUriFromMultiByteString == "on"]
+public unsafe func Windows_CreateUriFromMultiByteString(pszANSIInputUri: CPointer<UInt8>, dwEncodingFlags: UInt32, dwCodePage: UInt32, dwCreateFlags: UInt32, dwReserved: UIntNative, ppUri: CPointer<CPointer<Unit>>): Int32 {
+    return CreateUriFromMultiByteString(pszANSIInputUri, dwEncodingFlags, dwCodePage, dwCreateFlags, dwReserved, ppUri)
 }
 
 @When[Windows_Win32_System_Com == "on"]

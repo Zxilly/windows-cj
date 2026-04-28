@@ -444,6 +444,7 @@ public class CertificateQuery <: InterfaceWrapperBase & ComInterface & windows_i
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func EnhancedKeyUsages(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().EnhancedKeyUsages()
     }
@@ -1163,7 +1164,10 @@ extend ICertificateKeyUsages <: windows_core.Interface<ICertificateKeyUsages> {}
 @C
 public struct ICertificateQueryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var EnhancedKeyUsages: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var EnhancedKeyUsages: UIntNative = UIntNative(0)
     public var IssuerName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetIssuerName: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var FriendlyName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1240,6 +1244,7 @@ public class ICertificateQuery <: InterfaceWrapperBase & ComInterface & RuntimeN
         readVtbl<ICertificateQueryVtbl>(ICertificateQueryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func EnhancedKeyUsages(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2799,12 +2804,30 @@ extend IStandardCertificateStoreNamesStatics <: windows_core.Interface<IStandard
 @C
 public struct ISubjectAlternativeNameInfoVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var EmailName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var EmailName: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var IPAddress: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var IPAddress: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var Url: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Url: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var DnsName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var DnsName: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var DistinguishedName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var DistinguishedName: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var PrincipalName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var PrincipalName: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2873,6 +2896,7 @@ public class ISubjectAlternativeNameInfo <: InterfaceWrapperBase & ComInterface 
         readVtbl<ISubjectAlternativeNameInfoVtbl>(ISubjectAlternativeNameInfoVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func EmailName(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2881,6 +2905,7 @@ public class ISubjectAlternativeNameInfo <: InterfaceWrapperBase & ComInterface 
         return windows_collections.IVectorView<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func IPAddress(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2889,6 +2914,7 @@ public class ISubjectAlternativeNameInfo <: InterfaceWrapperBase & ComInterface 
         return windows_collections.IVectorView<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Url(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2897,6 +2923,7 @@ public class ISubjectAlternativeNameInfo <: InterfaceWrapperBase & ComInterface 
         return windows_collections.IVectorView<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DnsName(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2905,6 +2932,7 @@ public class ISubjectAlternativeNameInfo <: InterfaceWrapperBase & ComInterface 
         return windows_collections.IVectorView<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DistinguishedName(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2913,6 +2941,7 @@ public class ISubjectAlternativeNameInfo <: InterfaceWrapperBase & ComInterface 
         return windows_collections.IVectorView<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PrincipalName(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

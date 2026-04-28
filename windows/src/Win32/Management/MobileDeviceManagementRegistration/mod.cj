@@ -6,7 +6,6 @@ package windows.Win32.Management.MobileDeviceManagementRegistration
 import std.collection.*
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 
@@ -150,37 +149,191 @@ extend REGISTRATION_INFORMATION_CLASS <: windows_core.CopyType & windows_core.Ru
     }
 }
 
-@When[MDMLOCALMANAGEMENT == "on"]
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMLOCALMANAGEMENT == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_ApplyLocalManagementSyncML == "on"]
 foreign {
     // param-hint: syncMLResult optional
     func ApplyLocalManagementSyncML(syncMLRequest: CPointer<UInt16>, syncMLResult: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMLOCALMANAGEMENT == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_ApplyLocalManagementSyncML == "on"]
+public unsafe func Windows_ApplyLocalManagementSyncML(syncMLRequest: CPointer<UInt16>, syncMLResult: CPointer<CPointer<UInt16>>): Int32 {
+    return ApplyLocalManagementSyncML(syncMLRequest, syncMLResult)
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMLOCALMANAGEMENT == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_RegisterDeviceWithLocalManagement == "on"]
+foreign {
     // param-hint: alreadyRegistered optional
     func RegisterDeviceWithLocalManagement(alreadyRegistered: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMLOCALMANAGEMENT == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_RegisterDeviceWithLocalManagement == "on"]
+public unsafe func Windows_RegisterDeviceWithLocalManagement(alreadyRegistered: CPointer<Int32>): Int32 {
+    return RegisterDeviceWithLocalManagement(alreadyRegistered)
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMLOCALMANAGEMENT == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_UnregisterDeviceWithLocalManagement == "on"]
+foreign {
     func UnregisterDeviceWithLocalManagement(): Int32
 }
 
-@When[MDMREGISTRATION == "on"]
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMLOCALMANAGEMENT == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_UnregisterDeviceWithLocalManagement == "on"]
+public unsafe func Windows_UnregisterDeviceWithLocalManagement(): Int32 {
+    return UnregisterDeviceWithLocalManagement()
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMREGISTRATION == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_DiscoverManagementService == "on"]
 foreign {
     func DiscoverManagementService(pszUPN: CPointer<UInt16>, ppMgmtInfo: CPointer<CPointer<MANAGEMENT_SERVICE_INFOAbi>>): Int32
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMREGISTRATION == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_DiscoverManagementService == "on"]
+public unsafe func Windows_DiscoverManagementService(pszUPN: CPointer<UInt16>, ppMgmtInfo: CPointer<CPointer<MANAGEMENT_SERVICE_INFOAbi>>): Int32 {
+    return DiscoverManagementService(pszUPN, ppMgmtInfo)
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMREGISTRATION == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_DiscoverManagementServiceEx == "on"]
+foreign {
     func DiscoverManagementServiceEx(pszUPN: CPointer<UInt16>, pszDiscoveryServiceCandidate: CPointer<UInt16>, ppMgmtInfo: CPointer<CPointer<MANAGEMENT_SERVICE_INFOAbi>>): Int32
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMREGISTRATION == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_DiscoverManagementServiceEx == "on"]
+public unsafe func Windows_DiscoverManagementServiceEx(pszUPN: CPointer<UInt16>, pszDiscoveryServiceCandidate: CPointer<UInt16>, ppMgmtInfo: CPointer<CPointer<MANAGEMENT_SERVICE_INFOAbi>>): Int32 {
+    return DiscoverManagementServiceEx(pszUPN, pszDiscoveryServiceCandidate, ppMgmtInfo)
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMREGISTRATION == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_GetDeviceManagementConfigInfo == "on"]
+foreign {
     // param-hint: configString len=param[1] optional
     func GetDeviceManagementConfigInfo(providerID: CPointer<UInt16>, configStringBufferLength: CPointer<UInt32>, configString: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMREGISTRATION == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_GetDeviceManagementConfigInfo == "on"]
+public unsafe func Windows_GetDeviceManagementConfigInfo(providerID: CPointer<UInt16>, configStringBufferLength: CPointer<UInt32>, configString: CPointer<UInt16>): Int32 {
+    return GetDeviceManagementConfigInfo(providerID, configStringBufferLength, configString)
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMREGISTRATION == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_GetDeviceRegistrationInfo == "on"]
+foreign {
     func GetDeviceRegistrationInfo(DeviceInformationClass: REGISTRATION_INFORMATION_CLASSAbi, ppDeviceRegistrationInfo: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMREGISTRATION == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_GetDeviceRegistrationInfo == "on"]
+public unsafe func Windows_GetDeviceRegistrationInfo(DeviceInformationClass: REGISTRATION_INFORMATION_CLASSAbi, ppDeviceRegistrationInfo: CPointer<CPointer<Unit>>): Int32 {
+    return GetDeviceRegistrationInfo(DeviceInformationClass, ppDeviceRegistrationInfo)
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMREGISTRATION == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_GetManagementAppHyperlink == "on"]
+foreign {
     // param-hint: pszHyperlink len=param[0]
     func GetManagementAppHyperlink(cchHyperlink: UInt32, pszHyperlink: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMREGISTRATION == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_GetManagementAppHyperlink == "on"]
+public unsafe func Windows_GetManagementAppHyperlink(cchHyperlink: UInt32, pszHyperlink: CPointer<UInt16>): Int32 {
+    return GetManagementAppHyperlink(cchHyperlink, pszHyperlink)
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMREGISTRATION == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_IsDeviceRegisteredWithManagement == "on"]
+foreign {
     // param-hint: pszUPN len=param[1] optional
     func IsDeviceRegisteredWithManagement(pfIsDeviceRegisteredWithManagement: CPointer<Int32>, cchUPN: UInt32, pszUPN: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMREGISTRATION == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_IsDeviceRegisteredWithManagement == "on"]
+public unsafe func Windows_IsDeviceRegisteredWithManagement(pfIsDeviceRegisteredWithManagement: CPointer<Int32>, cchUPN: UInt32, pszUPN: CPointer<UInt16>): Int32 {
+    return IsDeviceRegisteredWithManagement(pfIsDeviceRegisteredWithManagement, cchUPN, pszUPN)
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMREGISTRATION == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_IsManagementRegistrationAllowed == "on"]
+foreign {
     func IsManagementRegistrationAllowed(pfIsManagementRegistrationAllowed: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMREGISTRATION == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_IsManagementRegistrationAllowed == "on"]
+public unsafe func Windows_IsManagementRegistrationAllowed(pfIsManagementRegistrationAllowed: CPointer<Int32>): Int32 {
+    return IsManagementRegistrationAllowed(pfIsManagementRegistrationAllowed)
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMREGISTRATION == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_IsMdmUxWithoutAadAllowed == "on"]
+foreign {
     func IsMdmUxWithoutAadAllowed(isEnrollmentAllowed: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMREGISTRATION == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_IsMdmUxWithoutAadAllowed == "on"]
+public unsafe func Windows_IsMdmUxWithoutAadAllowed(isEnrollmentAllowed: CPointer<Int32>): Int32 {
+    return IsMdmUxWithoutAadAllowed(isEnrollmentAllowed)
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMREGISTRATION == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_RegisterDeviceWithManagement == "on"]
+foreign {
     func RegisterDeviceWithManagement(pszUPN: CPointer<UInt16>, ppszMDMServiceUri: CPointer<UInt16>, ppzsAccessToken: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMREGISTRATION == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_RegisterDeviceWithManagement == "on"]
+public unsafe func Windows_RegisterDeviceWithManagement(pszUPN: CPointer<UInt16>, ppszMDMServiceUri: CPointer<UInt16>, ppzsAccessToken: CPointer<UInt16>): Int32 {
+    return RegisterDeviceWithManagement(pszUPN, ppszMDMServiceUri, ppzsAccessToken)
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMREGISTRATION == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_RegisterDeviceWithManagementUsingAADCredentials == "on"]
+foreign {
     func RegisterDeviceWithManagementUsingAADCredentials(UserToken: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMREGISTRATION == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_RegisterDeviceWithManagementUsingAADCredentials == "on"]
+public unsafe func Windows_RegisterDeviceWithManagementUsingAADCredentials(UserToken: CPointer<Unit>): Int32 {
+    return RegisterDeviceWithManagementUsingAADCredentials(UserToken)
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMREGISTRATION == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_RegisterDeviceWithManagementUsingAADDeviceCredentials == "on"]
+foreign {
     func RegisterDeviceWithManagementUsingAADDeviceCredentials(): Int32
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMREGISTRATION == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_RegisterDeviceWithManagementUsingAADDeviceCredentials == "on"]
+public unsafe func Windows_RegisterDeviceWithManagementUsingAADDeviceCredentials(): Int32 {
+    return RegisterDeviceWithManagementUsingAADDeviceCredentials()
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMREGISTRATION == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_RegisterDeviceWithManagementUsingAADDeviceCredentials2 == "on"]
+foreign {
     // param-hint: MDMApplicationID optional
     func RegisterDeviceWithManagementUsingAADDeviceCredentials2(MDMApplicationID: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMREGISTRATION == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_RegisterDeviceWithManagementUsingAADDeviceCredentials2 == "on"]
+public unsafe func Windows_RegisterDeviceWithManagementUsingAADDeviceCredentials2(MDMApplicationID: CPointer<UInt16>): Int32 {
+    return RegisterDeviceWithManagementUsingAADDeviceCredentials2(MDMApplicationID)
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMREGISTRATION == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_SetDeviceManagementConfigInfo == "on"]
+foreign {
     func SetDeviceManagementConfigInfo(providerID: CPointer<UInt16>, configString: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMREGISTRATION == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_SetDeviceManagementConfigInfo == "on"]
+public unsafe func Windows_SetDeviceManagementConfigInfo(providerID: CPointer<UInt16>, configString: CPointer<UInt16>): Int32 {
+    return SetDeviceManagementConfigInfo(providerID, configString)
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMREGISTRATION == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_SetManagedExternally == "on"]
+foreign {
     func SetManagedExternally(IsManagedExternally: Int32): Int32
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMREGISTRATION == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_SetManagedExternally == "on"]
+public unsafe func Windows_SetManagedExternally(IsManagedExternally: Int32): Int32 {
+    return SetManagedExternally(IsManagedExternally)
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMREGISTRATION == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_UnregisterDeviceWithManagement == "on"]
+foreign {
     // param-hint: enrollmentID optional
     func UnregisterDeviceWithManagement(enrollmentID: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on" && MDMREGISTRATION == "on" && Windows_Win32_Management_MobileDeviceManagementRegistration_UnregisterDeviceWithManagement == "on"]
+public unsafe func Windows_UnregisterDeviceWithManagement(enrollmentID: CPointer<UInt16>): Int32 {
+    return UnregisterDeviceWithManagement(enrollmentID)
 }
 
 @When[Windows_Win32_Management_MobileDeviceManagementRegistration == "on"]

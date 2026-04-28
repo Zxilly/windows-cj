@@ -6,7 +6,6 @@ package windows.Win32.System.LibraryLoader
 import std.collection.*
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 
@@ -224,141 +223,574 @@ extend REDIRECTION_FUNCTION_DESCRIPTOR <: windows_core.CopyType & windows_core.R
     }
 }
 
-@When[KERNEL32 == "on"]
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_AddDllDirectory == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func AddDllDirectory(NewDirectory: CPointer<UInt16>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_AddDllDirectory == "on"]
+public unsafe func Windows_AddDllDirectory(NewDirectory: CPointer<UInt16>): CPointer<Unit> {
+    return AddDllDirectory(NewDirectory)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_BeginUpdateResourceA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func BeginUpdateResourceA(pFileName: CPointer<UInt8>, bDeleteExistingResources: Int32): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_BeginUpdateResourceA == "on"]
+public unsafe func Windows_BeginUpdateResourceA(pFileName: CPointer<UInt8>, bDeleteExistingResources: Int32): CPointer<Unit> {
+    return BeginUpdateResourceA(pFileName, bDeleteExistingResources)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_BeginUpdateResourceW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func BeginUpdateResourceW(pFileName: CPointer<UInt16>, bDeleteExistingResources: Int32): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_BeginUpdateResourceW == "on"]
+public unsafe func Windows_BeginUpdateResourceW(pFileName: CPointer<UInt16>, bDeleteExistingResources: Int32): CPointer<Unit> {
+    return BeginUpdateResourceW(pFileName, bDeleteExistingResources)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_DisableThreadLibraryCalls == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func DisableThreadLibraryCalls(hLibModule: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_DisableThreadLibraryCalls == "on"]
+public unsafe func Windows_DisableThreadLibraryCalls(hLibModule: CPointer<Unit>): Int32 {
+    return DisableThreadLibraryCalls(hLibModule)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_EndUpdateResourceA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func EndUpdateResourceA(hUpdate: CPointer<Unit>, fDiscard: Int32): Int32
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_EndUpdateResourceA == "on"]
+public unsafe func Windows_EndUpdateResourceA(hUpdate: CPointer<Unit>, fDiscard: Int32): Int32 {
+    return EndUpdateResourceA(hUpdate, fDiscard)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_EndUpdateResourceW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func EndUpdateResourceW(hUpdate: CPointer<Unit>, fDiscard: Int32): Int32
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_EndUpdateResourceW == "on"]
+public unsafe func Windows_EndUpdateResourceW(hUpdate: CPointer<Unit>, fDiscard: Int32): Int32 {
+    return EndUpdateResourceW(hUpdate, fDiscard)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_EnumResourceLanguagesA == "on"]
+foreign {
     // param-hint: hModule optional
     // pinvoke-hint: SetLastError
     func EnumResourceLanguagesA(hModule: CPointer<Unit>, lpType: CPointer<UInt8>, lpName: CPointer<UInt8>, lpEnumFunc: ENUMRESLANGPROCA, lParam: IntNative): Int32
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_EnumResourceLanguagesA == "on"]
+public unsafe func Windows_EnumResourceLanguagesA(hModule: CPointer<Unit>, lpType: CPointer<UInt8>, lpName: CPointer<UInt8>, lpEnumFunc: ENUMRESLANGPROCA, lParam: IntNative): Int32 {
+    return EnumResourceLanguagesA(hModule, lpType, lpName, lpEnumFunc, lParam)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_EnumResourceLanguagesExA == "on"]
+foreign {
     // param-hint: hModule optional
     // param-hint: lParam optional
     // pinvoke-hint: SetLastError
     func EnumResourceLanguagesExA(hModule: CPointer<Unit>, lpType: CPointer<UInt8>, lpName: CPointer<UInt8>, lpEnumFunc: ENUMRESLANGPROCA, lParam: IntNative, dwFlags: UInt32, LangId: UInt16): Int32
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_EnumResourceLanguagesExA == "on"]
+public unsafe func Windows_EnumResourceLanguagesExA(hModule: CPointer<Unit>, lpType: CPointer<UInt8>, lpName: CPointer<UInt8>, lpEnumFunc: ENUMRESLANGPROCA, lParam: IntNative, dwFlags: UInt32, LangId: UInt16): Int32 {
+    return EnumResourceLanguagesExA(hModule, lpType, lpName, lpEnumFunc, lParam, dwFlags, LangId)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_EnumResourceLanguagesExW == "on"]
+foreign {
     // param-hint: hModule optional
     // param-hint: lParam optional
     // pinvoke-hint: SetLastError
     func EnumResourceLanguagesExW(hModule: CPointer<Unit>, lpType: CPointer<UInt16>, lpName: CPointer<UInt16>, lpEnumFunc: ENUMRESLANGPROCW, lParam: IntNative, dwFlags: UInt32, LangId: UInt16): Int32
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_EnumResourceLanguagesExW == "on"]
+public unsafe func Windows_EnumResourceLanguagesExW(hModule: CPointer<Unit>, lpType: CPointer<UInt16>, lpName: CPointer<UInt16>, lpEnumFunc: ENUMRESLANGPROCW, lParam: IntNative, dwFlags: UInt32, LangId: UInt16): Int32 {
+    return EnumResourceLanguagesExW(hModule, lpType, lpName, lpEnumFunc, lParam, dwFlags, LangId)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_EnumResourceLanguagesW == "on"]
+foreign {
     // param-hint: hModule optional
     // pinvoke-hint: SetLastError
     func EnumResourceLanguagesW(hModule: CPointer<Unit>, lpType: CPointer<UInt16>, lpName: CPointer<UInt16>, lpEnumFunc: ENUMRESLANGPROCW, lParam: IntNative): Int32
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_EnumResourceLanguagesW == "on"]
+public unsafe func Windows_EnumResourceLanguagesW(hModule: CPointer<Unit>, lpType: CPointer<UInt16>, lpName: CPointer<UInt16>, lpEnumFunc: ENUMRESLANGPROCW, lParam: IntNative): Int32 {
+    return EnumResourceLanguagesW(hModule, lpType, lpName, lpEnumFunc, lParam)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_EnumResourceNamesA == "on"]
+foreign {
     // param-hint: hModule optional
     // pinvoke-hint: SetLastError
     func EnumResourceNamesA(hModule: CPointer<Unit>, lpType: CPointer<UInt8>, lpEnumFunc: ENUMRESNAMEPROCA, lParam: IntNative): Int32
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_EnumResourceNamesA == "on"]
+public unsafe func Windows_EnumResourceNamesA(hModule: CPointer<Unit>, lpType: CPointer<UInt8>, lpEnumFunc: ENUMRESNAMEPROCA, lParam: IntNative): Int32 {
+    return EnumResourceNamesA(hModule, lpType, lpEnumFunc, lParam)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_EnumResourceNamesExA == "on"]
+foreign {
     // param-hint: hModule optional
     // pinvoke-hint: SetLastError
     func EnumResourceNamesExA(hModule: CPointer<Unit>, lpType: CPointer<UInt8>, lpEnumFunc: ENUMRESNAMEPROCA, lParam: IntNative, dwFlags: UInt32, LangId: UInt16): Int32
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_EnumResourceNamesExA == "on"]
+public unsafe func Windows_EnumResourceNamesExA(hModule: CPointer<Unit>, lpType: CPointer<UInt8>, lpEnumFunc: ENUMRESNAMEPROCA, lParam: IntNative, dwFlags: UInt32, LangId: UInt16): Int32 {
+    return EnumResourceNamesExA(hModule, lpType, lpEnumFunc, lParam, dwFlags, LangId)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_EnumResourceNamesExW == "on"]
+foreign {
     // param-hint: hModule optional
     // pinvoke-hint: SetLastError
     func EnumResourceNamesExW(hModule: CPointer<Unit>, lpType: CPointer<UInt16>, lpEnumFunc: ENUMRESNAMEPROCW, lParam: IntNative, dwFlags: UInt32, LangId: UInt16): Int32
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_EnumResourceNamesExW == "on"]
+public unsafe func Windows_EnumResourceNamesExW(hModule: CPointer<Unit>, lpType: CPointer<UInt16>, lpEnumFunc: ENUMRESNAMEPROCW, lParam: IntNative, dwFlags: UInt32, LangId: UInt16): Int32 {
+    return EnumResourceNamesExW(hModule, lpType, lpEnumFunc, lParam, dwFlags, LangId)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_EnumResourceNamesW == "on"]
+foreign {
     // param-hint: hModule optional
     func EnumResourceNamesW(hModule: CPointer<Unit>, lpType: CPointer<UInt16>, lpEnumFunc: ENUMRESNAMEPROCW, lParam: IntNative): Int32
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_EnumResourceNamesW == "on"]
+public unsafe func Windows_EnumResourceNamesW(hModule: CPointer<Unit>, lpType: CPointer<UInt16>, lpEnumFunc: ENUMRESNAMEPROCW, lParam: IntNative): Int32 {
+    return EnumResourceNamesW(hModule, lpType, lpEnumFunc, lParam)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_EnumResourceTypesA == "on"]
+foreign {
     // param-hint: hModule optional
     // pinvoke-hint: SetLastError
     func EnumResourceTypesA(hModule: CPointer<Unit>, lpEnumFunc: ENUMRESTYPEPROCA, lParam: IntNative): Int32
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_EnumResourceTypesA == "on"]
+public unsafe func Windows_EnumResourceTypesA(hModule: CPointer<Unit>, lpEnumFunc: ENUMRESTYPEPROCA, lParam: IntNative): Int32 {
+    return EnumResourceTypesA(hModule, lpEnumFunc, lParam)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_EnumResourceTypesExA == "on"]
+foreign {
     // param-hint: hModule optional
     // pinvoke-hint: SetLastError
     func EnumResourceTypesExA(hModule: CPointer<Unit>, lpEnumFunc: ENUMRESTYPEPROCA, lParam: IntNative, dwFlags: UInt32, LangId: UInt16): Int32
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_EnumResourceTypesExA == "on"]
+public unsafe func Windows_EnumResourceTypesExA(hModule: CPointer<Unit>, lpEnumFunc: ENUMRESTYPEPROCA, lParam: IntNative, dwFlags: UInt32, LangId: UInt16): Int32 {
+    return EnumResourceTypesExA(hModule, lpEnumFunc, lParam, dwFlags, LangId)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_EnumResourceTypesExW == "on"]
+foreign {
     // param-hint: hModule optional
     // pinvoke-hint: SetLastError
     func EnumResourceTypesExW(hModule: CPointer<Unit>, lpEnumFunc: ENUMRESTYPEPROCW, lParam: IntNative, dwFlags: UInt32, LangId: UInt16): Int32
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_EnumResourceTypesExW == "on"]
+public unsafe func Windows_EnumResourceTypesExW(hModule: CPointer<Unit>, lpEnumFunc: ENUMRESTYPEPROCW, lParam: IntNative, dwFlags: UInt32, LangId: UInt16): Int32 {
+    return EnumResourceTypesExW(hModule, lpEnumFunc, lParam, dwFlags, LangId)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_EnumResourceTypesW == "on"]
+foreign {
     // param-hint: hModule optional
     // pinvoke-hint: SetLastError
     func EnumResourceTypesW(hModule: CPointer<Unit>, lpEnumFunc: ENUMRESTYPEPROCW, lParam: IntNative): Int32
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_EnumResourceTypesW == "on"]
+public unsafe func Windows_EnumResourceTypesW(hModule: CPointer<Unit>, lpEnumFunc: ENUMRESTYPEPROCW, lParam: IntNative): Int32 {
+    return EnumResourceTypesW(hModule, lpEnumFunc, lParam)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_FindResourceA == "on"]
+foreign {
     // param-hint: hModule optional
     // pinvoke-hint: SetLastError
     func FindResourceA(hModule: CPointer<Unit>, lpName: CPointer<UInt8>, lpType: CPointer<UInt8>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_FindResourceA == "on"]
+public unsafe func Windows_FindResourceA(hModule: CPointer<Unit>, lpName: CPointer<UInt8>, lpType: CPointer<UInt8>): CPointer<Unit> {
+    return FindResourceA(hModule, lpName, lpType)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_FindResourceExA == "on"]
+foreign {
     // param-hint: hModule optional
     // pinvoke-hint: SetLastError
     func FindResourceExA(hModule: CPointer<Unit>, lpType: CPointer<UInt8>, lpName: CPointer<UInt8>, wLanguage: UInt16): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_FindResourceExA == "on"]
+public unsafe func Windows_FindResourceExA(hModule: CPointer<Unit>, lpType: CPointer<UInt8>, lpName: CPointer<UInt8>, wLanguage: UInt16): CPointer<Unit> {
+    return FindResourceExA(hModule, lpType, lpName, wLanguage)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_FindResourceExW == "on"]
+foreign {
     // param-hint: hModule optional
     func FindResourceExW(hModule: CPointer<Unit>, lpType: CPointer<UInt16>, lpName: CPointer<UInt16>, wLanguage: UInt16): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_FindResourceExW == "on"]
+public unsafe func Windows_FindResourceExW(hModule: CPointer<Unit>, lpType: CPointer<UInt16>, lpName: CPointer<UInt16>, wLanguage: UInt16): CPointer<Unit> {
+    return FindResourceExW(hModule, lpType, lpName, wLanguage)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_FindResourceW == "on"]
+foreign {
     // param-hint: hModule optional
     func FindResourceW(hModule: CPointer<Unit>, lpName: CPointer<UInt16>, lpType: CPointer<UInt16>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_FindResourceW == "on"]
+public unsafe func Windows_FindResourceW(hModule: CPointer<Unit>, lpName: CPointer<UInt16>, lpType: CPointer<UInt16>): CPointer<Unit> {
+    return FindResourceW(hModule, lpName, lpType)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_FreeLibraryAndExitThread == "on"]
+foreign {
     func FreeLibraryAndExitThread(hLibModule: CPointer<Unit>, dwExitCode: UInt32): Unit
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_FreeLibraryAndExitThread == "on"]
+public unsafe func Windows_FreeLibraryAndExitThread(hLibModule: CPointer<Unit>, dwExitCode: UInt32): Unit {
+    FreeLibraryAndExitThread(hLibModule, dwExitCode)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_FreeResource == "on"]
+foreign {
     func FreeResource(hResData: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_FreeResource == "on"]
+public unsafe func Windows_FreeResource(hResData: CPointer<Unit>): Int32 {
+    return FreeResource(hResData)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_GetDllDirectoryA == "on"]
+foreign {
     // param-hint: lpBuffer len=param[0] optional
     // pinvoke-hint: SetLastError
     func GetDllDirectoryA(nBufferLength: UInt32, lpBuffer: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_GetDllDirectoryA == "on"]
+public unsafe func Windows_GetDllDirectoryA(nBufferLength: UInt32, lpBuffer: CPointer<UInt8>): UInt32 {
+    return GetDllDirectoryA(nBufferLength, lpBuffer)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_GetDllDirectoryW == "on"]
+foreign {
     // param-hint: lpBuffer len=param[0] optional
     // pinvoke-hint: SetLastError
     func GetDllDirectoryW(nBufferLength: UInt32, lpBuffer: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_GetDllDirectoryW == "on"]
+public unsafe func Windows_GetDllDirectoryW(nBufferLength: UInt32, lpBuffer: CPointer<UInt16>): UInt32 {
+    return GetDllDirectoryW(nBufferLength, lpBuffer)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_GetModuleFileNameA == "on"]
+foreign {
     // param-hint: hModule optional
     // param-hint: lpFilename len=param[2]
     // pinvoke-hint: SetLastError
     func GetModuleFileNameA(hModule: CPointer<Unit>, lpFilename: CPointer<UInt8>, nSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_GetModuleFileNameA == "on"]
+public unsafe func Windows_GetModuleFileNameA(hModule: CPointer<Unit>, lpFilename: CPointer<UInt8>, nSize: UInt32): UInt32 {
+    return GetModuleFileNameA(hModule, lpFilename, nSize)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_GetModuleFileNameW == "on"]
+foreign {
     // param-hint: hModule optional
     // param-hint: lpFilename len=param[2]
     // pinvoke-hint: SetLastError
     func GetModuleFileNameW(hModule: CPointer<Unit>, lpFilename: CPointer<UInt16>, nSize: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_GetModuleFileNameW == "on"]
+public unsafe func Windows_GetModuleFileNameW(hModule: CPointer<Unit>, lpFilename: CPointer<UInt16>, nSize: UInt32): UInt32 {
+    return GetModuleFileNameW(hModule, lpFilename, nSize)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_GetModuleHandleA == "on"]
+foreign {
     // param-hint: lpModuleName optional
     // pinvoke-hint: SetLastError
     func GetModuleHandleA(lpModuleName: CPointer<UInt8>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_GetModuleHandleA == "on"]
+public unsafe func Windows_GetModuleHandleA(lpModuleName: CPointer<UInt8>): CPointer<Unit> {
+    return GetModuleHandleA(lpModuleName)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_GetModuleHandleExA == "on"]
+foreign {
     // param-hint: lpModuleName optional
     // pinvoke-hint: SetLastError
     func GetModuleHandleExA(dwFlags: UInt32, lpModuleName: CPointer<UInt8>, phModule: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_GetModuleHandleExA == "on"]
+public unsafe func Windows_GetModuleHandleExA(dwFlags: UInt32, lpModuleName: CPointer<UInt8>, phModule: CPointer<CPointer<Unit>>): Int32 {
+    return GetModuleHandleExA(dwFlags, lpModuleName, phModule)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_GetModuleHandleExW == "on"]
+foreign {
     // param-hint: lpModuleName optional
     // pinvoke-hint: SetLastError
     func GetModuleHandleExW(dwFlags: UInt32, lpModuleName: CPointer<UInt16>, phModule: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_GetModuleHandleExW == "on"]
+public unsafe func Windows_GetModuleHandleExW(dwFlags: UInt32, lpModuleName: CPointer<UInt16>, phModule: CPointer<CPointer<Unit>>): Int32 {
+    return GetModuleHandleExW(dwFlags, lpModuleName, phModule)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_GetModuleHandleW == "on"]
+foreign {
     // param-hint: lpModuleName optional
     // pinvoke-hint: SetLastError
     func GetModuleHandleW(lpModuleName: CPointer<UInt16>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_GetModuleHandleW == "on"]
+public unsafe func Windows_GetModuleHandleW(lpModuleName: CPointer<UInt16>): CPointer<Unit> {
+    return GetModuleHandleW(lpModuleName)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_GetProcAddress == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetProcAddress(hModule: CPointer<Unit>, lpProcName: CPointer<UInt8>): Win32_Foundation.FARPROC
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_GetProcAddress == "on"]
+public unsafe func Windows_GetProcAddress(hModule: CPointer<Unit>, lpProcName: CPointer<UInt8>): Win32_Foundation.FARPROC {
+    return GetProcAddress(hModule, lpProcName)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_LoadLibraryA == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func LoadLibraryA(lpLibFileName: CPointer<UInt8>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_LoadLibraryA == "on"]
+public unsafe func Windows_LoadLibraryA(lpLibFileName: CPointer<UInt8>): CPointer<Unit> {
+    return LoadLibraryA(lpLibFileName)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_LoadLibraryExA == "on"]
+foreign {
     // param-hint: hFile optional reserved
     // pinvoke-hint: SetLastError
     func LoadLibraryExA(lpLibFileName: CPointer<UInt8>, hFile: CPointer<Unit>, dwFlags: LOAD_LIBRARY_FLAGSAbi): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_LoadLibraryExA == "on"]
+public unsafe func Windows_LoadLibraryExA(lpLibFileName: CPointer<UInt8>, hFile: CPointer<Unit>, dwFlags: LOAD_LIBRARY_FLAGSAbi): CPointer<Unit> {
+    return LoadLibraryExA(lpLibFileName, hFile, dwFlags)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_LoadLibraryExW == "on"]
+foreign {
     // param-hint: hFile optional reserved
     // pinvoke-hint: SetLastError
     func LoadLibraryExW(lpLibFileName: CPointer<UInt16>, hFile: CPointer<Unit>, dwFlags: LOAD_LIBRARY_FLAGSAbi): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_LoadLibraryExW == "on"]
+public unsafe func Windows_LoadLibraryExW(lpLibFileName: CPointer<UInt16>, hFile: CPointer<Unit>, dwFlags: LOAD_LIBRARY_FLAGSAbi): CPointer<Unit> {
+    return LoadLibraryExW(lpLibFileName, hFile, dwFlags)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_LoadLibraryW == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func LoadLibraryW(lpLibFileName: CPointer<UInt16>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_LoadLibraryW == "on"]
+public unsafe func Windows_LoadLibraryW(lpLibFileName: CPointer<UInt16>): CPointer<Unit> {
+    return LoadLibraryW(lpLibFileName)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_LoadModule == "on"]
+foreign {
     func LoadModule(lpModuleName: CPointer<UInt8>, lpParameterBlock: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_LoadModule == "on"]
+public unsafe func Windows_LoadModule(lpModuleName: CPointer<UInt8>, lpParameterBlock: CPointer<Unit>): UInt32 {
+    return LoadModule(lpModuleName, lpParameterBlock)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_LoadPackagedLibrary == "on"]
+foreign {
     // param-hint: Reserved optional reserved
     // pinvoke-hint: SetLastError
     func LoadPackagedLibrary(lpwLibFileName: CPointer<UInt16>, Reserved: UInt32): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_LoadPackagedLibrary == "on"]
+public unsafe func Windows_LoadPackagedLibrary(lpwLibFileName: CPointer<UInt16>, Reserved: UInt32): CPointer<Unit> {
+    return LoadPackagedLibrary(lpwLibFileName, Reserved)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_LoadResource == "on"]
+foreign {
     // param-hint: hModule optional
     // pinvoke-hint: SetLastError
     func LoadResource(hModule: CPointer<Unit>, hResInfo: CPointer<Unit>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_LoadResource == "on"]
+public unsafe func Windows_LoadResource(hModule: CPointer<Unit>, hResInfo: CPointer<Unit>): CPointer<Unit> {
+    return LoadResource(hModule, hResInfo)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_LockResource == "on"]
+foreign {
     func LockResource(hResData: CPointer<Unit>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_LockResource == "on"]
+public unsafe func Windows_LockResource(hResData: CPointer<Unit>): CPointer<Unit> {
+    return LockResource(hResData)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_RemoveDllDirectory == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func RemoveDllDirectory(Cookie: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_RemoveDllDirectory == "on"]
+public unsafe func Windows_RemoveDllDirectory(Cookie: CPointer<Unit>): Int32 {
+    return RemoveDllDirectory(Cookie)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_SetDefaultDllDirectories == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func SetDefaultDllDirectories(DirectoryFlags: LOAD_LIBRARY_FLAGSAbi): Int32
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_SetDefaultDllDirectories == "on"]
+public unsafe func Windows_SetDefaultDllDirectories(DirectoryFlags: LOAD_LIBRARY_FLAGSAbi): Int32 {
+    return SetDefaultDllDirectories(DirectoryFlags)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_SetDllDirectoryA == "on"]
+foreign {
     // param-hint: lpPathName optional
     // pinvoke-hint: SetLastError
     func SetDllDirectoryA(lpPathName: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_SetDllDirectoryA == "on"]
+public unsafe func Windows_SetDllDirectoryA(lpPathName: CPointer<UInt8>): Int32 {
+    return SetDllDirectoryA(lpPathName)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_SetDllDirectoryW == "on"]
+foreign {
     // param-hint: lpPathName optional
     // pinvoke-hint: SetLastError
     func SetDllDirectoryW(lpPathName: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_SetDllDirectoryW == "on"]
+public unsafe func Windows_SetDllDirectoryW(lpPathName: CPointer<UInt16>): Int32 {
+    return SetDllDirectoryW(lpPathName)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_SizeofResource == "on"]
+foreign {
     // param-hint: hModule optional
     // pinvoke-hint: SetLastError
     func SizeofResource(hModule: CPointer<Unit>, hResInfo: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_SizeofResource == "on"]
+public unsafe func Windows_SizeofResource(hModule: CPointer<Unit>, hResInfo: CPointer<Unit>): UInt32 {
+    return SizeofResource(hModule, hResInfo)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_UpdateResourceA == "on"]
+foreign {
     // param-hint: lpData bytes=param[5] optional
     // pinvoke-hint: SetLastError
     func UpdateResourceA(hUpdate: CPointer<Unit>, lpType: CPointer<UInt8>, lpName: CPointer<UInt8>, wLanguage: UInt16, lpData: CPointer<Unit>, cb: UInt32): Int32
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_UpdateResourceA == "on"]
+public unsafe func Windows_UpdateResourceA(hUpdate: CPointer<Unit>, lpType: CPointer<UInt8>, lpName: CPointer<UInt8>, wLanguage: UInt16, lpData: CPointer<Unit>, cb: UInt32): Int32 {
+    return UpdateResourceA(hUpdate, lpType, lpName, wLanguage, lpData, cb)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_UpdateResourceW == "on"]
+foreign {
     // param-hint: lpData bytes=param[5] optional
     // pinvoke-hint: SetLastError
     func UpdateResourceW(hUpdate: CPointer<Unit>, lpType: CPointer<UInt16>, lpName: CPointer<UInt16>, wLanguage: UInt16, lpData: CPointer<Unit>, cb: UInt32): Int32
 }
 
-@When[API_MS_WIN_CORE_LIBRARYLOADER_L2_1_0 == "on"]
+@When[Windows_Win32_System_LibraryLoader == "on" && KERNEL32 == "on" && Windows_Win32_System_LibraryLoader_UpdateResourceW == "on"]
+public unsafe func Windows_UpdateResourceW(hUpdate: CPointer<Unit>, lpType: CPointer<UInt16>, lpName: CPointer<UInt16>, wLanguage: UInt16, lpData: CPointer<Unit>, cb: UInt32): Int32 {
+    return UpdateResourceW(hUpdate, lpType, lpName, wLanguage, lpData, cb)
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && API_MS_WIN_CORE_LIBRARYLOADER_L2_1_0 == "on" && Windows_Win32_System_LibraryLoader_QueryOptionalDelayLoadedAPI == "on"]
 foreign {
     // param-hint: Reserved optional reserved
     // pinvoke-hint: SetLastError
     func QueryOptionalDelayLoadedAPI(hParentModule: CPointer<Unit>, lpDllName: CPointer<UInt8>, lpProcName: CPointer<UInt8>, Reserved: UInt32): Int32
+}
+
+@When[Windows_Win32_System_LibraryLoader == "on" && API_MS_WIN_CORE_LIBRARYLOADER_L2_1_0 == "on" && Windows_Win32_System_LibraryLoader_QueryOptionalDelayLoadedAPI == "on"]
+public unsafe func Windows_QueryOptionalDelayLoadedAPI(hParentModule: CPointer<Unit>, lpDllName: CPointer<UInt8>, lpProcName: CPointer<UInt8>, Reserved: UInt32): Int32 {
+    return QueryOptionalDelayLoadedAPI(hParentModule, lpDllName, lpProcName, Reserved)
 }
 
 @When[Windows_Win32_System_LibraryLoader == "on"]

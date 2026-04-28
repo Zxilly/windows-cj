@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Devices_HumanInterfaceDevice == "on"]
 import windows.Devices.HumanInterfaceDevice as Devices_HumanInterfaceDevice
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -90,13 +88,13 @@ public struct IGazeDevicePreviewVtbl {
     public var CanTrackHead: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ConfigurationState: CFunc<(CPointer<Unit>, CPointer<GazeDeviceConfigurationStatePreviewAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var RequestCalibrationAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Devices_HumanInterfaceDevice == "on"]
+    @When[Windows_Devices_HumanInterfaceDevice == "on" && Windows_Foundation_Collections == "on"]
     public var GetNumericControlDescriptions: CFunc<(CPointer<Unit>, UInt16, UInt16, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Devices_HumanInterfaceDevice != "on"]
+    @When[Windows_Devices_HumanInterfaceDevice != "on" || Windows_Foundation_Collections != "on"]
     public var GetNumericControlDescriptions: UIntNative = UIntNative(0)
-    @When[Windows_Devices_HumanInterfaceDevice == "on"]
+    @When[Windows_Devices_HumanInterfaceDevice == "on" && Windows_Foundation_Collections == "on"]
     public var GetBooleanControlDescriptions: CFunc<(CPointer<Unit>, UInt16, UInt16, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Devices_HumanInterfaceDevice != "on"]
+    @When[Windows_Devices_HumanInterfaceDevice != "on" || Windows_Foundation_Collections != "on"]
     public var GetBooleanControlDescriptions: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -206,7 +204,7 @@ public class IGazeDevicePreview <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_future.IAsyncOperation<Bool>.fromAbiTake(result__)
     }
 
-    @When[Windows_Devices_HumanInterfaceDevice == "on"]
+    @When[Windows_Devices_HumanInterfaceDevice == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func GetNumericControlDescriptions(usagePage: UInt16, usageId: UInt16): windows_collections.IVectorView<Devices_HumanInterfaceDevice.HidNumericControlDescription> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -215,7 +213,7 @@ public class IGazeDevicePreview <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_collections.IVectorView<Devices_HumanInterfaceDevice.HidNumericControlDescription>.fromAbiTake(result__)
     }
 
-    @When[Windows_Devices_HumanInterfaceDevice == "on"]
+    @When[Windows_Devices_HumanInterfaceDevice == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func GetBooleanControlDescriptions(usagePage: UInt16, usageId: UInt16): windows_collections.IVectorView<Devices_HumanInterfaceDevice.HidBooleanControlDescription> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -317,12 +315,12 @@ public class GazeDevicePreview <: InterfaceWrapperBase & ComInterface & windows_
         return defaultInterface().RequestCalibrationAsync()
     }
 
-    @When[Windows_Devices_HumanInterfaceDevice == "on"]
+    @When[Windows_Devices_HumanInterfaceDevice == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func GetNumericControlDescriptions(usagePage: UInt16, usageId: UInt16): windows_collections.IVectorView<Devices_HumanInterfaceDevice.HidNumericControlDescription> {
         return defaultInterface().GetNumericControlDescriptions(usagePage, usageId)
     }
 
-    @When[Windows_Devices_HumanInterfaceDevice == "on"]
+    @When[Windows_Devices_HumanInterfaceDevice == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func GetBooleanControlDescriptions(usagePage: UInt16, usageId: UInt16): windows_collections.IVectorView<Devices_HumanInterfaceDevice.HidBooleanControlDescription> {
         return defaultInterface().GetBooleanControlDescriptions(usagePage, usageId)
     }
@@ -1320,7 +1318,10 @@ public struct IGazeMovedPreviewEventArgsVtbl {
     public var Handled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetHandled: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CurrentPoint: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetIntermediatePoints: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetIntermediatePoints: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1411,6 +1412,7 @@ public class IGazeMovedPreviewEventArgs <: InterfaceWrapperBase & ComInterface &
         return GazePointPreview.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetIntermediatePoints(): windows_collections.IVector<GazePointPreview> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1704,6 +1706,7 @@ public class GazeMovedPreviewEventArgs <: InterfaceWrapperBase & ComInterface & 
         return defaultInterface().CurrentPoint()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetIntermediatePoints(): windows_collections.IVector<GazePointPreview> {
         return defaultInterface().GetIntermediatePoints()
     }

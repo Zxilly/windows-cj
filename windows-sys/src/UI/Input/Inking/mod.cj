@@ -3,10 +3,8 @@ package windows_sys.UI.Input.Inking
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Foundation_Numerics == "on"]
 import windows_sys.Foundation.Numerics as Foundation_Numerics
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_UI == "on"]
 import windows_sys.UI as UI
 import windows_sys._impl_l0 as _impl_l0
 import windows_sys._impl_l1 as _impl_l1
@@ -2227,6 +2225,7 @@ public struct IInkManagerVtbl {
     @When[Windows_UI_Input == "on"]
     public var ProcessPointerUp: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.Rect>) -> Int32> = { _, _, _ => 0 }
     public var SetDefaultDrawingAttributes: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var RecognizeAsync: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -2310,6 +2309,7 @@ public class IInkManager <: InterfaceWrapperBase & ComInterface {
         return __vt.SetDefaultDrawingAttributes(__liveRaw, drawingAttributes)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RecognizeAsync(recognitionTarget: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2775,7 +2775,9 @@ public class IInkPresenterRulerFactory <: InterfaceWrapperBase & ComInterface {
 public struct IInkRecognitionResultVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var BoundingRect: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.Rect>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetTextCandidates: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetStrokes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -2826,12 +2828,14 @@ public class IInkRecognitionResult <: InterfaceWrapperBase & ComInterface {
         return __vt.BoundingRect(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetTextCandidates(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetTextCandidates(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetStrokes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2844,7 +2848,9 @@ public class IInkRecognitionResult <: InterfaceWrapperBase & ComInterface {
 public struct IInkRecognizerContainerVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var SetDefaultRecognizer: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var RecognizeAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetRecognizers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -2895,12 +2901,14 @@ public class IInkRecognizerContainer <: InterfaceWrapperBase & ComInterface {
         return __vt.SetDefaultRecognizer(__liveRaw, recognizer)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RecognizeAsync(strokeCollection: CPointer<Unit>, recognitionTarget: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.RecognizeAsync(__liveRaw, strokeCollection, recognitionTarget, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetRecognizers(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -2918,6 +2926,7 @@ public struct IInkStrokeVtbl {
     public var Selected: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var SetSelected: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => 0 }
     public var Recognized: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetRenderingSegments: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Clone: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -2999,6 +3008,7 @@ public class IInkStroke <: InterfaceWrapperBase & ComInterface {
         return __vt.Recognized(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetRenderingSegments(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3020,6 +3030,7 @@ public struct IInkStroke2Vtbl {
     public var PointTransform: CFunc<(CPointer<Unit>, CPointer<Foundation_Numerics.Matrix3x2>) -> Int32> = { _, _ => 0 }
     @When[Windows_Foundation_Numerics == "on"]
     public var SetPointTransform: CFunc<(CPointer<Unit>, Foundation_Numerics.Matrix3x2) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetInkPoints: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -3078,6 +3089,7 @@ public class IInkStroke2 <: InterfaceWrapperBase & ComInterface {
         return __vt.SetPointTransform(__liveRaw, value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetInkPoints(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3095,6 +3107,7 @@ public struct IInkStrokeBuilderVtbl {
     public var AppendToStroke: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_UI_Input == "on"]
     public var EndStroke: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateStroke: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var SetDefaultDrawingAttributes: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -3161,6 +3174,7 @@ public class IInkStrokeBuilder <: InterfaceWrapperBase & ComInterface {
         return __vt.EndStroke(__liveRaw, pointerPoint, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateStroke(points: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3178,7 +3192,7 @@ public class IInkStrokeBuilder <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IInkStrokeBuilder2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Foundation_Numerics == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Numerics == "on"]
     public var CreateStrokeFromInkPoints: CFunc<(CPointer<Unit>, CPointer<Unit>, Foundation_Numerics.Matrix3x2, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public init() {}
 }
@@ -3223,7 +3237,7 @@ public class IInkStrokeBuilder2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IInkStrokeBuilder2Vtbl>(IInkStrokeBuilder2Vtbl())
     }
 
-    @When[Windows_Foundation_Numerics == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Numerics == "on"]
     public unsafe func CreateStrokeFromInkPoints(inkPoints: CPointer<Unit>, transform: Foundation_Numerics.Matrix3x2, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3235,7 +3249,7 @@ public class IInkStrokeBuilder2 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IInkStrokeBuilder3Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Foundation_Numerics == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Numerics == "on"]
     public var CreateStrokeFromInkPoints: CFunc<(CPointer<Unit>, CPointer<Unit>, Foundation_Numerics.Matrix3x2, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -3280,7 +3294,7 @@ public class IInkStrokeBuilder3 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IInkStrokeBuilder3Vtbl>(IInkStrokeBuilder3Vtbl())
     }
 
-    @When[Windows_Foundation_Numerics == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Numerics == "on"]
     public unsafe func CreateStrokeFromInkPoints(inkPoints: CPointer<Unit>, transform: Foundation_Numerics.Matrix3x2, strokeStartedTime: CPointer<Unit>, strokeDuration: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3296,6 +3310,7 @@ public struct IInkStrokeContainerVtbl {
     public var AddStroke: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var DeleteSelected: CFunc<(CPointer<Unit>, CPointer<Foundation__impl_l0.Rect>) -> Int32> = { _, _ => 0 }
     public var MoveSelected: CFunc<(CPointer<Unit>, Foundation__impl_l0.Point, CPointer<Foundation__impl_l0.Rect>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var SelectWithPolyLine: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.Rect>) -> Int32> = { _, _, _ => 0 }
     public var SelectWithLine: CFunc<(CPointer<Unit>, Foundation__impl_l0.Point, Foundation__impl_l0.Point, CPointer<Foundation__impl_l0.Rect>) -> Int32> = { _, _, _, _ => 0 }
     public var CopySelectedToClipboard: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -3305,8 +3320,11 @@ public struct IInkStrokeContainerVtbl {
     public var LoadAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Storage_Streams == "on"]
     public var SaveAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var UpdateRecognitionResults: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetStrokes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetRecognitionResults: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -3375,6 +3393,7 @@ public class IInkStrokeContainer <: InterfaceWrapperBase & ComInterface {
         return __vt.MoveSelected(__liveRaw, translation, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SelectWithPolyLine(polyline: CPointer<Unit>, result__: CPointer<Foundation__impl_l0.Rect>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3419,18 +3438,21 @@ public class IInkStrokeContainer <: InterfaceWrapperBase & ComInterface {
         return __vt.SaveAsync(__liveRaw, outputStream, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UpdateRecognitionResults(recognitionResults: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.UpdateRecognitionResults(__liveRaw, recognitionResults)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetStrokes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetStrokes(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetRecognitionResults(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3442,6 +3464,7 @@ public class IInkStrokeContainer <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IInkStrokeContainer2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AddStrokes: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Clear: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public init() {}
@@ -3487,6 +3510,7 @@ public class IInkStrokeContainer2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IInkStrokeContainer2Vtbl>(IInkStrokeContainer2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AddStrokes(strokes: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3687,6 +3711,7 @@ public class IInkStrokeInput <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IInkStrokesCollectedEventArgsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Strokes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -3731,6 +3756,7 @@ public class IInkStrokesCollectedEventArgs <: InterfaceWrapperBase & ComInterfac
         readVtbl<IInkStrokesCollectedEventArgsVtbl>(IInkStrokesCollectedEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Strokes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3742,6 +3768,7 @@ public class IInkStrokesCollectedEventArgs <: InterfaceWrapperBase & ComInterfac
 @C
 public struct IInkStrokesErasedEventArgsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Strokes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -3786,6 +3813,7 @@ public class IInkStrokesErasedEventArgs <: InterfaceWrapperBase & ComInterface {
         readVtbl<IInkStrokesErasedEventArgsVtbl>(IInkStrokesErasedEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Strokes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -3797,6 +3825,7 @@ public class IInkStrokesErasedEventArgs <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IInkSynchronizerVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var BeginDry: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var EndDry: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public init() {}
@@ -3842,6 +3871,7 @@ public class IInkSynchronizer <: InterfaceWrapperBase & ComInterface {
         readVtbl<IInkSynchronizerVtbl>(IInkSynchronizerVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func BeginDry(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

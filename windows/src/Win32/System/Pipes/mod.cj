@@ -6,11 +6,8 @@ package windows.Win32.System.Pipes
 import std.collection.*
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge}
 import windows_core as windows_core
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
-@When[Windows_Win32_System_IO == "on"]
 import windows.Win32.System.IO as Win32_System_IO
 import windows.Win32._impl_l0 as Win32__impl_l0
 
@@ -107,32 +104,147 @@ extend NAMED_PIPE_MODE <: windows_core.CopyType & windows_core.RuntimeType & win
     }
 }
 
-@When[ADVAPI32 == "on"]
+@When[Windows_Win32_System_Pipes == "on" && ADVAPI32 == "on" && Windows_Win32_System_Pipes_ImpersonateNamedPipeClient == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func ImpersonateNamedPipeClient(hNamedPipe: CPointer<Unit>): Int32
 }
 
-@When[KERNEL32 == "on"]
+@When[Windows_Win32_System_Pipes == "on" && ADVAPI32 == "on" && Windows_Win32_System_Pipes_ImpersonateNamedPipeClient == "on"]
+public unsafe func Windows_ImpersonateNamedPipeClient(hNamedPipe: CPointer<Unit>): Int32 {
+    return ImpersonateNamedPipeClient(hNamedPipe)
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_CallNamedPipeA == "on"]
 foreign {
     // param-hint: lpInBuffer bytes=param[2] optional
     // param-hint: lpOutBuffer bytes=param[4] optional
     // pinvoke-hint: SetLastError
     func CallNamedPipeA(lpNamedPipeName: CPointer<UInt8>, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesRead: CPointer<UInt32>, nTimeOut: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_CallNamedPipeA == "on"]
+public unsafe func Windows_CallNamedPipeA(lpNamedPipeName: CPointer<UInt8>, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesRead: CPointer<UInt32>, nTimeOut: UInt32): Int32 {
+    return CallNamedPipeA(lpNamedPipeName, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesRead, nTimeOut)
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_CallNamedPipeW == "on"]
+foreign {
     // param-hint: lpInBuffer bytes=param[2] optional
     // param-hint: lpOutBuffer bytes=param[4] optional
     func CallNamedPipeW(lpNamedPipeName: CPointer<UInt16>, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesRead: CPointer<UInt32>, nTimeOut: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_CallNamedPipeW == "on"]
+public unsafe func Windows_CallNamedPipeW(lpNamedPipeName: CPointer<UInt16>, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesRead: CPointer<UInt32>, nTimeOut: UInt32): Int32 {
+    return CallNamedPipeW(lpNamedPipeName, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesRead, nTimeOut)
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_ConnectNamedPipe == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    // param-hint: lpOverlapped optional
+    // pinvoke-hint: SetLastError
+    func ConnectNamedPipe(hNamedPipe: CPointer<Unit>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): Int32
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_ConnectNamedPipe == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_ConnectNamedPipe(hNamedPipe: CPointer<Unit>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): Int32 {
+    return ConnectNamedPipe(hNamedPipe, lpOverlapped)
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_CreateNamedPipeA == "on" && Windows_Win32_Security == "on" && Windows_Win32_Storage_FileSystem == "on"]
+foreign {
+    // param-hint: lpSecurityAttributes optional
+    // pinvoke-hint: SetLastError
+    func CreateNamedPipeA(lpName: CPointer<UInt8>, dwOpenMode: Win32__impl_l0.FILE_FLAGS_AND_ATTRIBUTESAbi, dwPipeMode: NAMED_PIPE_MODEAbi, nMaxInstances: UInt32, nOutBufferSize: UInt32, nInBufferSize: UInt32, nDefaultTimeOut: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_CreateNamedPipeA == "on" && Windows_Win32_Security == "on" && Windows_Win32_Storage_FileSystem == "on"]
+public unsafe func Windows_CreateNamedPipeA(lpName: CPointer<UInt8>, dwOpenMode: Win32__impl_l0.FILE_FLAGS_AND_ATTRIBUTESAbi, dwPipeMode: NAMED_PIPE_MODEAbi, nMaxInstances: UInt32, nOutBufferSize: UInt32, nInBufferSize: UInt32, nDefaultTimeOut: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): CPointer<Unit> {
+    return CreateNamedPipeA(lpName, dwOpenMode, dwPipeMode, nMaxInstances, nOutBufferSize, nInBufferSize, nDefaultTimeOut, lpSecurityAttributes)
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_CreateNamedPipeW == "on" && Windows_Win32_Security == "on" && Windows_Win32_Storage_FileSystem == "on"]
+foreign {
+    // param-hint: lpSecurityAttributes optional
+    func CreateNamedPipeW(lpName: CPointer<UInt16>, dwOpenMode: Win32__impl_l0.FILE_FLAGS_AND_ATTRIBUTESAbi, dwPipeMode: NAMED_PIPE_MODEAbi, nMaxInstances: UInt32, nOutBufferSize: UInt32, nInBufferSize: UInt32, nDefaultTimeOut: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_CreateNamedPipeW == "on" && Windows_Win32_Security == "on" && Windows_Win32_Storage_FileSystem == "on"]
+public unsafe func Windows_CreateNamedPipeW(lpName: CPointer<UInt16>, dwOpenMode: Win32__impl_l0.FILE_FLAGS_AND_ATTRIBUTESAbi, dwPipeMode: NAMED_PIPE_MODEAbi, nMaxInstances: UInt32, nOutBufferSize: UInt32, nInBufferSize: UInt32, nDefaultTimeOut: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): CPointer<Unit> {
+    return CreateNamedPipeW(lpName, dwOpenMode, dwPipeMode, nMaxInstances, nOutBufferSize, nInBufferSize, nDefaultTimeOut, lpSecurityAttributes)
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_CreatePipe == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: lpPipeAttributes optional
+    // pinvoke-hint: SetLastError
+    func CreatePipe(hReadPipe: CPointer<CPointer<Unit>>, hWritePipe: CPointer<CPointer<Unit>>, lpPipeAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, nSize: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_CreatePipe == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_CreatePipe(hReadPipe: CPointer<CPointer<Unit>>, hWritePipe: CPointer<CPointer<Unit>>, lpPipeAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, nSize: UInt32): Int32 {
+    return CreatePipe(hReadPipe, hWritePipe, lpPipeAttributes, nSize)
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_DisconnectNamedPipe == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func DisconnectNamedPipe(hNamedPipe: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_DisconnectNamedPipe == "on"]
+public unsafe func Windows_DisconnectNamedPipe(hNamedPipe: CPointer<Unit>): Int32 {
+    return DisconnectNamedPipe(hNamedPipe)
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_GetNamedPipeClientComputerNameA == "on"]
+foreign {
     // param-hint: ClientComputerName bytes=param[2]
     // pinvoke-hint: SetLastError
     func GetNamedPipeClientComputerNameA(Pipe: CPointer<Unit>, ClientComputerName: CPointer<UInt8>, ClientComputerNameLength: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_GetNamedPipeClientComputerNameA == "on"]
+public unsafe func Windows_GetNamedPipeClientComputerNameA(Pipe: CPointer<Unit>, ClientComputerName: CPointer<UInt8>, ClientComputerNameLength: UInt32): Int32 {
+    return GetNamedPipeClientComputerNameA(Pipe, ClientComputerName, ClientComputerNameLength)
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_GetNamedPipeClientComputerNameW == "on"]
+foreign {
     // param-hint: ClientComputerName bytes=param[2]
     func GetNamedPipeClientComputerNameW(Pipe: CPointer<Unit>, ClientComputerName: CPointer<UInt16>, ClientComputerNameLength: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_GetNamedPipeClientComputerNameW == "on"]
+public unsafe func Windows_GetNamedPipeClientComputerNameW(Pipe: CPointer<Unit>, ClientComputerName: CPointer<UInt16>, ClientComputerNameLength: UInt32): Int32 {
+    return GetNamedPipeClientComputerNameW(Pipe, ClientComputerName, ClientComputerNameLength)
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_GetNamedPipeClientProcessId == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetNamedPipeClientProcessId(Pipe: CPointer<Unit>, ClientProcessId: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_GetNamedPipeClientProcessId == "on"]
+public unsafe func Windows_GetNamedPipeClientProcessId(Pipe: CPointer<Unit>, ClientProcessId: CPointer<UInt32>): Int32 {
+    return GetNamedPipeClientProcessId(Pipe, ClientProcessId)
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_GetNamedPipeClientSessionId == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetNamedPipeClientSessionId(Pipe: CPointer<Unit>, ClientSessionId: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_GetNamedPipeClientSessionId == "on"]
+public unsafe func Windows_GetNamedPipeClientSessionId(Pipe: CPointer<Unit>, ClientSessionId: CPointer<UInt32>): Int32 {
+    return GetNamedPipeClientSessionId(Pipe, ClientSessionId)
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_GetNamedPipeHandleStateA == "on"]
+foreign {
     // param-hint: lpState optional
     // param-hint: lpCurInstances optional
     // param-hint: lpMaxCollectionCount optional
@@ -140,64 +252,127 @@ foreign {
     // param-hint: lpUserName len=param[6] optional
     // pinvoke-hint: SetLastError
     func GetNamedPipeHandleStateA(hNamedPipe: CPointer<Unit>, lpState: CPointer<NAMED_PIPE_MODEAbi>, lpCurInstances: CPointer<UInt32>, lpMaxCollectionCount: CPointer<UInt32>, lpCollectDataTimeout: CPointer<UInt32>, lpUserName: CPointer<UInt8>, nMaxUserNameSize: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_GetNamedPipeHandleStateA == "on"]
+public unsafe func Windows_GetNamedPipeHandleStateA(hNamedPipe: CPointer<Unit>, lpState: CPointer<NAMED_PIPE_MODEAbi>, lpCurInstances: CPointer<UInt32>, lpMaxCollectionCount: CPointer<UInt32>, lpCollectDataTimeout: CPointer<UInt32>, lpUserName: CPointer<UInt8>, nMaxUserNameSize: UInt32): Int32 {
+    return GetNamedPipeHandleStateA(hNamedPipe, lpState, lpCurInstances, lpMaxCollectionCount, lpCollectDataTimeout, lpUserName, nMaxUserNameSize)
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_GetNamedPipeHandleStateW == "on"]
+foreign {
     // param-hint: lpState optional
     // param-hint: lpCurInstances optional
     // param-hint: lpMaxCollectionCount optional
     // param-hint: lpCollectDataTimeout optional
     // param-hint: lpUserName len=param[6] optional
     func GetNamedPipeHandleStateW(hNamedPipe: CPointer<Unit>, lpState: CPointer<NAMED_PIPE_MODEAbi>, lpCurInstances: CPointer<UInt32>, lpMaxCollectionCount: CPointer<UInt32>, lpCollectDataTimeout: CPointer<UInt32>, lpUserName: CPointer<UInt16>, nMaxUserNameSize: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_GetNamedPipeHandleStateW == "on"]
+public unsafe func Windows_GetNamedPipeHandleStateW(hNamedPipe: CPointer<Unit>, lpState: CPointer<NAMED_PIPE_MODEAbi>, lpCurInstances: CPointer<UInt32>, lpMaxCollectionCount: CPointer<UInt32>, lpCollectDataTimeout: CPointer<UInt32>, lpUserName: CPointer<UInt16>, nMaxUserNameSize: UInt32): Int32 {
+    return GetNamedPipeHandleStateW(hNamedPipe, lpState, lpCurInstances, lpMaxCollectionCount, lpCollectDataTimeout, lpUserName, nMaxUserNameSize)
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_GetNamedPipeInfo == "on"]
+foreign {
     // param-hint: lpFlags optional
     // param-hint: lpOutBufferSize optional
     // param-hint: lpInBufferSize optional
     // param-hint: lpMaxInstances optional
     // pinvoke-hint: SetLastError
     func GetNamedPipeInfo(hNamedPipe: CPointer<Unit>, lpFlags: CPointer<NAMED_PIPE_MODEAbi>, lpOutBufferSize: CPointer<UInt32>, lpInBufferSize: CPointer<UInt32>, lpMaxInstances: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_GetNamedPipeInfo == "on"]
+public unsafe func Windows_GetNamedPipeInfo(hNamedPipe: CPointer<Unit>, lpFlags: CPointer<NAMED_PIPE_MODEAbi>, lpOutBufferSize: CPointer<UInt32>, lpInBufferSize: CPointer<UInt32>, lpMaxInstances: CPointer<UInt32>): Int32 {
+    return GetNamedPipeInfo(hNamedPipe, lpFlags, lpOutBufferSize, lpInBufferSize, lpMaxInstances)
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_GetNamedPipeServerProcessId == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetNamedPipeServerProcessId(Pipe: CPointer<Unit>, ServerProcessId: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_GetNamedPipeServerProcessId == "on"]
+public unsafe func Windows_GetNamedPipeServerProcessId(Pipe: CPointer<Unit>, ServerProcessId: CPointer<UInt32>): Int32 {
+    return GetNamedPipeServerProcessId(Pipe, ServerProcessId)
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_GetNamedPipeServerSessionId == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func GetNamedPipeServerSessionId(Pipe: CPointer<Unit>, ServerSessionId: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_GetNamedPipeServerSessionId == "on"]
+public unsafe func Windows_GetNamedPipeServerSessionId(Pipe: CPointer<Unit>, ServerSessionId: CPointer<UInt32>): Int32 {
+    return GetNamedPipeServerSessionId(Pipe, ServerSessionId)
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_PeekNamedPipe == "on"]
+foreign {
     // param-hint: lpBuffer bytes=param[2] optional
     // param-hint: lpBytesRead optional
     // param-hint: lpTotalBytesAvail optional
     // param-hint: lpBytesLeftThisMessage optional
     // pinvoke-hint: SetLastError
     func PeekNamedPipe(hNamedPipe: CPointer<Unit>, lpBuffer: CPointer<Unit>, nBufferSize: UInt32, lpBytesRead: CPointer<UInt32>, lpTotalBytesAvail: CPointer<UInt32>, lpBytesLeftThisMessage: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_PeekNamedPipe == "on"]
+public unsafe func Windows_PeekNamedPipe(hNamedPipe: CPointer<Unit>, lpBuffer: CPointer<Unit>, nBufferSize: UInt32, lpBytesRead: CPointer<UInt32>, lpTotalBytesAvail: CPointer<UInt32>, lpBytesLeftThisMessage: CPointer<UInt32>): Int32 {
+    return PeekNamedPipe(hNamedPipe, lpBuffer, nBufferSize, lpBytesRead, lpTotalBytesAvail, lpBytesLeftThisMessage)
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_SetNamedPipeHandleState == "on"]
+foreign {
     // param-hint: lpMode optional
     // param-hint: lpMaxCollectionCount optional
     // param-hint: lpCollectDataTimeout optional
     // pinvoke-hint: SetLastError
     func SetNamedPipeHandleState(hNamedPipe: CPointer<Unit>, lpMode: CPointer<NAMED_PIPE_MODEAbi>, lpMaxCollectionCount: CPointer<UInt32>, lpCollectDataTimeout: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func WaitNamedPipeA(lpNamedPipeName: CPointer<UInt8>, nTimeOut: UInt32): Int32
-    func WaitNamedPipeW(lpNamedPipeName: CPointer<UInt16>, nTimeOut: UInt32): Int32
 }
 
-@When[KERNEL32 == "on" && (Windows_Win32_Security == "on" && Windows_Win32_Storage_FileSystem == "on")]
-foreign {
-    // param-hint: lpSecurityAttributes optional
-    // pinvoke-hint: SetLastError
-    func CreateNamedPipeA(lpName: CPointer<UInt8>, dwOpenMode: Win32__impl_l0.FILE_FLAGS_AND_ATTRIBUTESAbi, dwPipeMode: NAMED_PIPE_MODEAbi, nMaxInstances: UInt32, nOutBufferSize: UInt32, nInBufferSize: UInt32, nDefaultTimeOut: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): CPointer<Unit>
-    // param-hint: lpSecurityAttributes optional
-    func CreateNamedPipeW(lpName: CPointer<UInt16>, dwOpenMode: Win32__impl_l0.FILE_FLAGS_AND_ATTRIBUTESAbi, dwPipeMode: NAMED_PIPE_MODEAbi, nMaxInstances: UInt32, nOutBufferSize: UInt32, nInBufferSize: UInt32, nDefaultTimeOut: UInt32, lpSecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>): CPointer<Unit>
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_SetNamedPipeHandleState == "on"]
+public unsafe func Windows_SetNamedPipeHandleState(hNamedPipe: CPointer<Unit>, lpMode: CPointer<NAMED_PIPE_MODEAbi>, lpMaxCollectionCount: CPointer<UInt32>, lpCollectDataTimeout: CPointer<UInt32>): Int32 {
+    return SetNamedPipeHandleState(hNamedPipe, lpMode, lpMaxCollectionCount, lpCollectDataTimeout)
 }
 
-@When[KERNEL32 == "on" && Windows_Win32_Security == "on"]
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_TransactNamedPipe == "on" && Windows_Win32_System_IO == "on"]
 foreign {
-    // param-hint: lpPipeAttributes optional
-    // pinvoke-hint: SetLastError
-    func CreatePipe(hReadPipe: CPointer<CPointer<Unit>>, hWritePipe: CPointer<CPointer<Unit>>, lpPipeAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTESAbi>, nSize: UInt32): Int32
-}
-
-@When[KERNEL32 == "on" && Windows_Win32_System_IO == "on"]
-foreign {
-    // param-hint: lpOverlapped optional
-    // pinvoke-hint: SetLastError
-    func ConnectNamedPipe(hNamedPipe: CPointer<Unit>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): Int32
     // param-hint: lpInBuffer bytes=param[2] optional
     // param-hint: lpOutBuffer bytes=param[4] optional
     // param-hint: lpOverlapped optional
     // pinvoke-hint: SetLastError
     func TransactNamedPipe(hNamedPipe: CPointer<Unit>, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesRead: CPointer<UInt32>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): Int32
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_TransactNamedPipe == "on" && Windows_Win32_System_IO == "on"]
+public unsafe func Windows_TransactNamedPipe(hNamedPipe: CPointer<Unit>, lpInBuffer: CPointer<Unit>, nInBufferSize: UInt32, lpOutBuffer: CPointer<Unit>, nOutBufferSize: UInt32, lpBytesRead: CPointer<UInt32>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPEDAbi>): Int32 {
+    return TransactNamedPipe(hNamedPipe, lpInBuffer, nInBufferSize, lpOutBuffer, nOutBufferSize, lpBytesRead, lpOverlapped)
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_WaitNamedPipeA == "on"]
+foreign {
+    // pinvoke-hint: SetLastError
+    func WaitNamedPipeA(lpNamedPipeName: CPointer<UInt8>, nTimeOut: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_WaitNamedPipeA == "on"]
+public unsafe func Windows_WaitNamedPipeA(lpNamedPipeName: CPointer<UInt8>, nTimeOut: UInt32): Int32 {
+    return WaitNamedPipeA(lpNamedPipeName, nTimeOut)
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_WaitNamedPipeW == "on"]
+foreign {
+    func WaitNamedPipeW(lpNamedPipeName: CPointer<UInt16>, nTimeOut: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Pipes == "on" && KERNEL32 == "on" && Windows_Win32_System_Pipes_WaitNamedPipeW == "on"]
+public unsafe func Windows_WaitNamedPipeW(lpNamedPipeName: CPointer<UInt16>, nTimeOut: UInt32): Int32 {
+    return WaitNamedPipeW(lpNamedPipeName, nTimeOut)
 }
 
 @When[Windows_Win32_System_Pipes == "on"]

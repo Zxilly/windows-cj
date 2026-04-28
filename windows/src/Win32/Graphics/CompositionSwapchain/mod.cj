@@ -8,16 +8,19 @@ import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeTy
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Dxgi_Common == "on"]
 import windows.Win32.Graphics.Dxgi.Common as Win32_Graphics_Dxgi_Common
 import windows.Win32._impl_l0 as Win32__impl_l0
 
 
-@When[DCOMP == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_Graphics_CompositionSwapchain == "on" && DCOMP == "on" && Windows_Win32_Graphics_CompositionSwapchain_CreatePresentationFactory == "on" && Windows_Win32_System_Com == "on"]
 foreign {
     func CreatePresentationFactory(d3dDevice: CPointer<Unit>, riid: CPointer<GUID>, presentationFactory: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_CompositionSwapchain == "on" && DCOMP == "on" && Windows_Win32_Graphics_CompositionSwapchain_CreatePresentationFactory == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_CreatePresentationFactory(d3dDevice: CPointer<Unit>, riid: CPointer<GUID>, presentationFactory: CPointer<CPointer<Unit>>): Int32 {
+    return CreatePresentationFactory(d3dDevice, riid, presentationFactory)
 }
 
 @When[Windows_Win32_Graphics_CompositionSwapchain == "on"]

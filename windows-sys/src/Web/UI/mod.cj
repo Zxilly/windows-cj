@@ -4,7 +4,6 @@ package windows_sys.Web.UI
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_UI == "on"]
 import windows_sys.UI as UI
 import windows_sys._impl_l0 as _impl_l0
 import windows_sys._impl_l1 as _impl_l1
@@ -1152,6 +1151,7 @@ public struct IWebViewControlVtbl {
     public var DefaultBackgroundColor: CFunc<(CPointer<Unit>, CPointer<UI.Color>) -> Int32> = { _, _ => 0 }
     public var ContainsFullScreenElement: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var Settings: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var DeferredPermissionRequests: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GoForward: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var GoBack: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
@@ -1163,6 +1163,7 @@ public struct IWebViewControlVtbl {
     public var NavigateToLocalStreamUri: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Web_Http == "on"]
     public var NavigateWithHttpRequestMessage: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var InvokeScriptAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Storage_Streams == "on"]
     public var CapturePreviewToStreamAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -1303,6 +1304,7 @@ public class IWebViewControl <: InterfaceWrapperBase & ComInterface {
         return __vt.Settings(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DeferredPermissionRequests(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1359,6 +1361,7 @@ public class IWebViewControl <: InterfaceWrapperBase & ComInterface {
         return __vt.NavigateWithHttpRequestMessage(__liveRaw, requestMessage)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func InvokeScriptAsync(scriptName: CPointer<Unit>, arguments: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

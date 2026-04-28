@@ -188,6 +188,7 @@ public class AppDiagnosticInfo <: InterfaceWrapperBase & ComInterface & windows_
         return defaultInterface().get_AppInfo()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func RequestInfoAsync(): windows_future.IAsyncOperation<windows_collections.IVector<AppDiagnosticInfo>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVector<AppDiagnosticInfo>>> = Option<windows_future.IAsyncOperation<windows_collections.IVector<AppDiagnosticInfo>>>.None
         try (factory__ = windows_core.factory<AppDiagnosticInfo, IAppDiagnosticInfoStatics>().unwrap()) {
@@ -221,6 +222,7 @@ public class AppDiagnosticInfo <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func RequestInfoForPackageAsync(packageFamilyName: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVector<AppDiagnosticInfo>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVector<AppDiagnosticInfo>>> = Option<windows_future.IAsyncOperation<windows_collections.IVector<AppDiagnosticInfo>>>.None
         try (factory__ = windows_core.factory<AppDiagnosticInfo, IAppDiagnosticInfoStatics2>().unwrap()) {
@@ -232,6 +234,7 @@ public class AppDiagnosticInfo <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func RequestInfoForAppAsync(): windows_future.IAsyncOperation<windows_collections.IVector<AppDiagnosticInfo>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVector<AppDiagnosticInfo>>> = Option<windows_future.IAsyncOperation<windows_collections.IVector<AppDiagnosticInfo>>>.None
         try (factory__ = windows_core.factory<AppDiagnosticInfo, IAppDiagnosticInfoStatics2>().unwrap()) {
@@ -243,6 +246,7 @@ public class AppDiagnosticInfo <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func RequestInfoForAppUserModelId(appUserModelId: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVector<AppDiagnosticInfo>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVector<AppDiagnosticInfo>>> = Option<windows_future.IAsyncOperation<windows_collections.IVector<AppDiagnosticInfo>>>.None
         try (factory__ = windows_core.factory<AppDiagnosticInfo, IAppDiagnosticInfoStatics2>().unwrap()) {
@@ -574,6 +578,7 @@ public class AppResourceGroupInfo <: InterfaceWrapperBase & ComInterface & windo
         return defaultInterface().IsShared()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetBackgroundTaskReports(): windows_collections.IVector<_impl_l0.AppResourceGroupBackgroundTaskReport> {
         return defaultInterface().GetBackgroundTaskReports()
     }
@@ -582,7 +587,7 @@ public class AppResourceGroupInfo <: InterfaceWrapperBase & ComInterface & windo
         return defaultInterface().GetMemoryReport()
     }
 
-    @When[Windows_System_Diagnostics == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System_Diagnostics == "on"]
     public unsafe func GetProcessDiagnosticInfos(): windows_collections.IVector<ProcessDiagnosticInfo> {
         return defaultInterface().GetProcessDiagnosticInfos()
     }
@@ -819,6 +824,7 @@ public class AppResourceGroupInfoWatcherEventArgs <: InterfaceWrapperBase & ComI
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AppDiagnosticInfos(): windows_collections.IVectorView<AppDiagnosticInfo> {
         return defaultInterface().AppDiagnosticInfos()
     }
@@ -915,6 +921,7 @@ public class AppResourceGroupInfoWatcherExecutionStateChangedEventArgs <: Interf
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AppDiagnosticInfos(): windows_collections.IVectorView<AppDiagnosticInfo> {
         return defaultInterface().AppDiagnosticInfos()
     }
@@ -1129,7 +1136,10 @@ extend IAppDiagnosticInfo <: windows_core.Interface<IAppDiagnosticInfo> {}
 @C
 public struct IAppDiagnosticInfo2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetResourceGroups: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetResourceGroups: UIntNative = UIntNative(0)
     public var CreateResourceGroupWatcher: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -1199,6 +1209,7 @@ public class IAppDiagnosticInfo2 <: InterfaceWrapperBase & ComInterface & Runtim
         readVtbl<IAppDiagnosticInfo2Vtbl>(IAppDiagnosticInfo2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetResourceGroups(): windows_collections.IVector<AppResourceGroupInfo> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1308,7 +1319,10 @@ extend IAppDiagnosticInfo3 <: windows_core.Interface<IAppDiagnosticInfo3> {}
 @C
 public struct IAppDiagnosticInfoStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var RequestInfoAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RequestInfoAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1377,6 +1391,7 @@ public class IAppDiagnosticInfoStatics <: InterfaceWrapperBase & ComInterface & 
         readVtbl<IAppDiagnosticInfoStaticsVtbl>(IAppDiagnosticInfoStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RequestInfoAsync(): windows_future.IAsyncOperation<windows_collections.IVector<AppDiagnosticInfo>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1395,9 +1410,18 @@ public struct IAppDiagnosticInfoStatics2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var CreateWatcher: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var RequestAccessAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var RequestInfoForPackageAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RequestInfoForPackageAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var RequestInfoForAppAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RequestInfoForAppAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var RequestInfoForAppUserModelId: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RequestInfoForAppUserModelId: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1482,6 +1506,7 @@ public class IAppDiagnosticInfoStatics2 <: InterfaceWrapperBase & ComInterface &
         return windows_future.IAsyncOperation<_impl_l0.DiagnosticAccessStatus>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RequestInfoForPackageAsync(packageFamilyName: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVector<AppDiagnosticInfo>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1490,6 +1515,7 @@ public class IAppDiagnosticInfoStatics2 <: InterfaceWrapperBase & ComInterface &
         return windows_future.IAsyncOperation<windows_collections.IVector<AppDiagnosticInfo>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RequestInfoForAppAsync(): windows_future.IAsyncOperation<windows_collections.IVector<AppDiagnosticInfo>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1498,6 +1524,7 @@ public class IAppDiagnosticInfoStatics2 <: InterfaceWrapperBase & ComInterface &
         return windows_future.IAsyncOperation<windows_collections.IVector<AppDiagnosticInfo>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RequestInfoForAppUserModelId(appUserModelId: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVector<AppDiagnosticInfo>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1764,11 +1791,14 @@ public struct IAppResourceGroupInfoVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var InstanceId: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsShared: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetBackgroundTaskReports: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetBackgroundTaskReports: UIntNative = UIntNative(0)
     public var GetMemoryReport: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_System_Diagnostics == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System_Diagnostics == "on"]
     public var GetProcessDiagnosticInfos: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_System_Diagnostics != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_System_Diagnostics != "on"]
     public var GetProcessDiagnosticInfos: UIntNative = UIntNative(0)
     public var GetStateReport: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -1855,6 +1885,7 @@ public class IAppResourceGroupInfo <: InterfaceWrapperBase & ComInterface & Runt
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetBackgroundTaskReports(): windows_collections.IVector<_impl_l0.AppResourceGroupBackgroundTaskReport> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1871,7 +1902,7 @@ public class IAppResourceGroupInfo <: InterfaceWrapperBase & ComInterface & Runt
         return _impl_l1.AppResourceGroupMemoryReport.fromAbiTake(result__)
     }
 
-    @When[Windows_System_Diagnostics == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_System_Diagnostics == "on"]
     public unsafe func GetProcessDiagnosticInfos(): windows_collections.IVector<ProcessDiagnosticInfo> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2075,7 +2106,10 @@ extend IAppResourceGroupInfoWatcher <: windows_core.Interface<IAppResourceGroupI
 @C
 public struct IAppResourceGroupInfoWatcherEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AppDiagnosticInfos: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AppDiagnosticInfos: UIntNative = UIntNative(0)
     public var get_AppResourceGroupInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -2145,6 +2179,7 @@ public class IAppResourceGroupInfoWatcherEventArgs <: InterfaceWrapperBase & Com
         readVtbl<IAppResourceGroupInfoWatcherEventArgsVtbl>(IAppResourceGroupInfoWatcherEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AppDiagnosticInfos(): windows_collections.IVectorView<AppDiagnosticInfo> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2169,7 +2204,10 @@ extend IAppResourceGroupInfoWatcherEventArgs <: windows_core.Interface<IAppResou
 @C
 public struct IAppResourceGroupInfoWatcherExecutionStateChangedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AppDiagnosticInfos: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AppDiagnosticInfos: UIntNative = UIntNative(0)
     public var get_AppResourceGroupInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -2239,6 +2277,7 @@ public class IAppResourceGroupInfoWatcherExecutionStateChangedEventArgs <: Inter
         readVtbl<IAppResourceGroupInfoWatcherExecutionStateChangedEventArgsVtbl>(IAppResourceGroupInfoWatcherExecutionStateChangedEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AppDiagnosticInfos(): windows_collections.IVectorView<AppDiagnosticInfo> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2274,25 +2313,25 @@ public struct ILauncherStatics2Vtbl {
     public var LaunchUriWithDataAsync: UIntNative = UIntNative(0)
     public var QueryUriSupportAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, _impl_l0.LaunchQuerySupportTypeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var QueryUriSupportWithPackageFamilyNameAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, _impl_l0.LaunchQuerySupportTypeAbi, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var QueryFileSupportAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var QueryFileSupportAsync: UIntNative = UIntNative(0)
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public var QueryFileSupportWithPackageFamilyNameAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Storage != "on" || Windows_Storage != "on" || Windows_Storage_Streams != "on"]
     public var QueryFileSupportWithPackageFamilyNameAsync: UIntNative = UIntNative(0)
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindUriSchemeHandlersAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel != "on"]
+    @When[Windows_ApplicationModel != "on" || Windows_Foundation_Collections != "on"]
     public var FindUriSchemeHandlersAsync: UIntNative = UIntNative(0)
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindUriSchemeHandlersWithLaunchUriTypeAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, _impl_l0.LaunchQuerySupportTypeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel != "on"]
+    @When[Windows_ApplicationModel != "on" || Windows_Foundation_Collections != "on"]
     public var FindUriSchemeHandlersWithLaunchUriTypeAsync: UIntNative = UIntNative(0)
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindFileHandlersAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel != "on"]
+    @When[Windows_ApplicationModel != "on" || Windows_Foundation_Collections != "on"]
     public var FindFileHandlersAsync: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -2404,7 +2443,7 @@ public class ILauncherStatics2 <: InterfaceWrapperBase & ComInterface & RuntimeN
         return windows_future.IAsyncOperation<_impl_l0.LaunchQuerySupportStatus>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func QueryFileSupportAsync(file: _impl_l1.StorageFile): windows_future.IAsyncOperation<_impl_l0.LaunchQuerySupportStatus> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2413,7 +2452,7 @@ public class ILauncherStatics2 <: InterfaceWrapperBase & ComInterface & RuntimeN
         return windows_future.IAsyncOperation<_impl_l0.LaunchQuerySupportStatus>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public unsafe func QueryFileSupportWithPackageFamilyNameAsync(file: _impl_l1.StorageFile, packageFamilyName: windows_core.HString): windows_future.IAsyncOperation<_impl_l0.LaunchQuerySupportStatus> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2422,7 +2461,7 @@ public class ILauncherStatics2 <: InterfaceWrapperBase & ComInterface & RuntimeN
         return windows_future.IAsyncOperation<_impl_l0.LaunchQuerySupportStatus>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindUriSchemeHandlersAsync(scheme: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVectorView<AppInfo>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2431,7 +2470,7 @@ public class ILauncherStatics2 <: InterfaceWrapperBase & ComInterface & RuntimeN
         return windows_future.IAsyncOperation<windows_collections.IVectorView<AppInfo>>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindUriSchemeHandlersWithLaunchUriTypeAsync(scheme: windows_core.HString, launchQuerySupportType: _impl_l0.LaunchQuerySupportType): windows_future.IAsyncOperation<windows_collections.IVectorView<AppInfo>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2440,7 +2479,7 @@ public class ILauncherStatics2 <: InterfaceWrapperBase & ComInterface & RuntimeN
         return windows_future.IAsyncOperation<windows_collections.IVectorView<AppInfo>>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindFileHandlersAsync(extension: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVectorView<AppInfo>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2459,9 +2498,9 @@ public struct ILauncherStatics4Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var QueryAppUriSupportAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var QueryAppUriSupportWithPackageFamilyNameAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public var FindAppUriHandlersAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_ApplicationModel != "on"]
+    @When[Windows_ApplicationModel != "on" || Windows_Foundation_Collections != "on"]
     public var FindAppUriHandlersAsync: UIntNative = UIntNative(0)
     public var LaunchUriForUserAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var LaunchUriWithOptionsForUserAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
@@ -2558,7 +2597,7 @@ public class ILauncherStatics4 <: InterfaceWrapperBase & ComInterface & RuntimeN
         return windows_future.IAsyncOperation<_impl_l0.LaunchQuerySupportStatus>.fromAbiTake(result__)
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public unsafe func FindAppUriHandlersAsync(uri: Foundation.Uri): windows_future.IAsyncOperation<windows_collections.IVectorView<AppInfo>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2840,7 +2879,7 @@ public class Launcher <: windows_interface.RuntimeName & windows_core.RuntimeNam
         }
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public static unsafe func FindAppUriHandlersAsync(uri: Foundation.Uri): windows_future.IAsyncOperation<windows_collections.IVectorView<AppInfo>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<AppInfo>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<AppInfo>>>.None
         try (factory__ = windows_core.factory<Launcher, ILauncherStatics4>().unwrap()) {
@@ -3010,7 +3049,7 @@ public class Launcher <: windows_interface.RuntimeName & windows_core.RuntimeNam
         }
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public static unsafe func QueryFileSupportAsync(file: _impl_l1.StorageFile): windows_future.IAsyncOperation<_impl_l0.LaunchQuerySupportStatus> {
         var result__: Option<windows_future.IAsyncOperation<_impl_l0.LaunchQuerySupportStatus>> = Option<windows_future.IAsyncOperation<_impl_l0.LaunchQuerySupportStatus>>.None
         try (factory__ = windows_core.factory<Launcher, ILauncherStatics2>().unwrap()) {
@@ -3022,7 +3061,7 @@ public class Launcher <: windows_interface.RuntimeName & windows_core.RuntimeNam
         }
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Storage == "on" && Windows_Storage == "on" && Windows_Storage_Streams == "on"]
     public static unsafe func QueryFileSupportWithPackageFamilyNameAsync(file: _impl_l1.StorageFile, packageFamilyName: windows_core.HString): windows_future.IAsyncOperation<_impl_l0.LaunchQuerySupportStatus> {
         var result__: Option<windows_future.IAsyncOperation<_impl_l0.LaunchQuerySupportStatus>> = Option<windows_future.IAsyncOperation<_impl_l0.LaunchQuerySupportStatus>>.None
         try (factory__ = windows_core.factory<Launcher, ILauncherStatics2>().unwrap()) {
@@ -3034,7 +3073,7 @@ public class Launcher <: windows_interface.RuntimeName & windows_core.RuntimeNam
         }
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public static unsafe func FindUriSchemeHandlersAsync(scheme: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVectorView<AppInfo>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<AppInfo>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<AppInfo>>>.None
         try (factory__ = windows_core.factory<Launcher, ILauncherStatics2>().unwrap()) {
@@ -3046,7 +3085,7 @@ public class Launcher <: windows_interface.RuntimeName & windows_core.RuntimeNam
         }
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public static unsafe func FindUriSchemeHandlersWithLaunchUriTypeAsync(scheme: windows_core.HString, launchQuerySupportType: _impl_l0.LaunchQuerySupportType): windows_future.IAsyncOperation<windows_collections.IVectorView<AppInfo>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<AppInfo>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<AppInfo>>>.None
         try (factory__ = windows_core.factory<Launcher, ILauncherStatics2>().unwrap()) {
@@ -3058,7 +3097,7 @@ public class Launcher <: windows_interface.RuntimeName & windows_core.RuntimeNam
         }
     }
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[Windows_ApplicationModel == "on" && Windows_Foundation_Collections == "on"]
     public static unsafe func FindFileHandlersAsync(extension: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVectorView<AppInfo>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<AppInfo>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<AppInfo>>>.None
         try (factory__ = windows_core.factory<Launcher, ILauncherStatics2>().unwrap()) {

@@ -105,395 +105,447 @@ public let AUTH_TYPE_eAUTH_TYPE_NTLM: AUTH_TYPE = AUTH_TYPE(1)
 @When[Windows_Win32_System_Search == "on"]
 public let AUTH_TYPE_eAUTH_TYPE_BASIC: AUTH_TYPE = AUTH_TYPE(2)
 
-@When[ODBC32 == "on"]
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_ODBCGetTryWaitValue == "on"]
 foreign {
     func ODBCGetTryWaitValue(): UInt32
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_ODBCGetTryWaitValue == "on"]
+public unsafe func Windows_ODBCGetTryWaitValue(): UInt32 {
+    return ODBCGetTryWaitValue()
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_ODBCSetTryWaitValue == "on"]
+foreign {
     func ODBCSetTryWaitValue(dwValue: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_ODBCSetTryWaitValue == "on"]
+public unsafe func Windows_ODBCSetTryWaitValue(dwValue: UInt32): Int32 {
+    return ODBCSetTryWaitValue(dwValue)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLAllocConnect == "on"]
+foreign {
     func SQLAllocConnect(EnvironmentHandle: CPointer<Unit>, ConnectionHandle: CPointer<CPointer<Unit>>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLAllocConnect == "on"]
+public unsafe func Windows_SQLAllocConnect(EnvironmentHandle: CPointer<Unit>, ConnectionHandle: CPointer<CPointer<Unit>>): Int16 {
+    return SQLAllocConnect(EnvironmentHandle, ConnectionHandle)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLAllocEnv == "on"]
+foreign {
     func SQLAllocEnv(EnvironmentHandle: CPointer<CPointer<Unit>>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLAllocEnv == "on"]
+public unsafe func Windows_SQLAllocEnv(EnvironmentHandle: CPointer<CPointer<Unit>>): Int16 {
+    return SQLAllocEnv(EnvironmentHandle)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLAllocHandle == "on"]
+foreign {
     func SQLAllocHandle(HandleType: Int16, InputHandle: CPointer<Unit>, OutputHandle: CPointer<CPointer<Unit>>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLAllocHandle == "on"]
+public unsafe func Windows_SQLAllocHandle(HandleType: Int16, InputHandle: CPointer<Unit>, OutputHandle: CPointer<CPointer<Unit>>): Int16 {
+    return SQLAllocHandle(HandleType, InputHandle, OutputHandle)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLAllocHandleStd == "on"]
+foreign {
     func SQLAllocHandleStd(fHandleType: Int16, hInput: CPointer<Unit>, phOutput: CPointer<CPointer<Unit>>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLAllocHandleStd == "on"]
+public unsafe func Windows_SQLAllocHandleStd(fHandleType: Int16, hInput: CPointer<Unit>, phOutput: CPointer<CPointer<Unit>>): Int16 {
+    return SQLAllocHandleStd(fHandleType, hInput, phOutput)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLAllocStmt == "on"]
+foreign {
     func SQLAllocStmt(ConnectionHandle: CPointer<Unit>, StatementHandle: CPointer<CPointer<Unit>>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLAllocStmt == "on"]
+public unsafe func Windows_SQLAllocStmt(ConnectionHandle: CPointer<Unit>, StatementHandle: CPointer<CPointer<Unit>>): Int16 {
+    return SQLAllocStmt(ConnectionHandle, StatementHandle)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLBindCol == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: TargetValue optional
+    // param-hint: StrLen_or_Ind optional
+    func SQLBindCol(StatementHandle: CPointer<Unit>, ColumnNumber: UInt16, TargetType: Int16, TargetValue: CPointer<Unit>, BufferLength: Int64, StrLen_or_Ind: CPointer<Int64>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLBindCol == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SQLBindCol(StatementHandle: CPointer<Unit>, ColumnNumber: UInt16, TargetType: Int16, TargetValue: CPointer<Unit>, BufferLength: Int64, StrLen_or_Ind: CPointer<Int64>): Int16 {
+    return SQLBindCol(StatementHandle, ColumnNumber, TargetType, TargetValue, BufferLength, StrLen_or_Ind)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLBindParam == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func SQLBindParam(StatementHandle: CPointer<Unit>, ParameterNumber: UInt16, ValueType: Int16, ParameterType: Int16, LengthPrecision: UInt64, ParameterScale: Int16, ParameterValue: CPointer<Unit>, StrLen_or_Ind: CPointer<Int64>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLBindParam == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SQLBindParam(StatementHandle: CPointer<Unit>, ParameterNumber: UInt16, ValueType: Int16, ParameterType: Int16, LengthPrecision: UInt64, ParameterScale: Int16, ParameterValue: CPointer<Unit>, StrLen_or_Ind: CPointer<Int64>): Int16 {
+    return SQLBindParam(StatementHandle, ParameterNumber, ValueType, ParameterType, LengthPrecision, ParameterScale, ParameterValue, StrLen_or_Ind)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLBindParameter == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func SQLBindParameter(hstmt: CPointer<Unit>, ipar: UInt16, fParamType: Int16, fCType: Int16, fSqlType: Int16, cbColDef: UInt64, ibScale: Int16, rgbValue: CPointer<Unit>, cbValueMax: Int64, pcbValue: CPointer<Int64>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLBindParameter == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SQLBindParameter(hstmt: CPointer<Unit>, ipar: UInt16, fParamType: Int16, fCType: Int16, fSqlType: Int16, cbColDef: UInt64, ibScale: Int16, rgbValue: CPointer<Unit>, cbValueMax: Int64, pcbValue: CPointer<Int64>): Int16 {
+    return SQLBindParameter(hstmt, ipar, fParamType, fCType, fSqlType, cbColDef, ibScale, rgbValue, cbValueMax, pcbValue)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLBrowseConnect == "on"]
+foreign {
     // param-hint: szConnStrIn len=param[2]
     // param-hint: szConnStrOut len=param[4] optional
     // param-hint: pcchConnStrOut optional
     func SQLBrowseConnect(hdbc: CPointer<Unit>, szConnStrIn: CPointer<UInt8>, cchConnStrIn: Int16, szConnStrOut: CPointer<UInt8>, cchConnStrOutMax: Int16, pcchConnStrOut: CPointer<Int16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLBrowseConnect == "on"]
+public unsafe func Windows_SQLBrowseConnect(hdbc: CPointer<Unit>, szConnStrIn: CPointer<UInt8>, cchConnStrIn: Int16, szConnStrOut: CPointer<UInt8>, cchConnStrOutMax: Int16, pcchConnStrOut: CPointer<Int16>): Int16 {
+    return SQLBrowseConnect(hdbc, szConnStrIn, cchConnStrIn, szConnStrOut, cchConnStrOutMax, pcchConnStrOut)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLBrowseConnectA == "on"]
+foreign {
     // param-hint: szConnStrIn len=param[2]
     // param-hint: szConnStrOut len=param[4] optional
     // param-hint: pcbConnStrOut optional
     func SQLBrowseConnectA(hdbc: CPointer<Unit>, szConnStrIn: CPointer<UInt8>, cbConnStrIn: Int16, szConnStrOut: CPointer<UInt8>, cbConnStrOutMax: Int16, pcbConnStrOut: CPointer<Int16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLBrowseConnectA == "on"]
+public unsafe func Windows_SQLBrowseConnectA(hdbc: CPointer<Unit>, szConnStrIn: CPointer<UInt8>, cbConnStrIn: Int16, szConnStrOut: CPointer<UInt8>, cbConnStrOutMax: Int16, pcbConnStrOut: CPointer<Int16>): Int16 {
+    return SQLBrowseConnectA(hdbc, szConnStrIn, cbConnStrIn, szConnStrOut, cbConnStrOutMax, pcbConnStrOut)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLBrowseConnectW == "on"]
+foreign {
     // param-hint: szConnStrIn len=param[2]
     // param-hint: szConnStrOut len=param[4] optional
     // param-hint: pcchConnStrOut optional
     func SQLBrowseConnectW(hdbc: CPointer<Unit>, szConnStrIn: CPointer<UInt16>, cchConnStrIn: Int16, szConnStrOut: CPointer<UInt16>, cchConnStrOutMax: Int16, pcchConnStrOut: CPointer<Int16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLBrowseConnectW == "on"]
+public unsafe func Windows_SQLBrowseConnectW(hdbc: CPointer<Unit>, szConnStrIn: CPointer<UInt16>, cchConnStrIn: Int16, szConnStrOut: CPointer<UInt16>, cchConnStrOutMax: Int16, pcchConnStrOut: CPointer<Int16>): Int16 {
+    return SQLBrowseConnectW(hdbc, szConnStrIn, cchConnStrIn, szConnStrOut, cchConnStrOutMax, pcchConnStrOut)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLBulkOperations == "on"]
+foreign {
     func SQLBulkOperations(StatementHandle: CPointer<Unit>, Operation: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLBulkOperations == "on"]
+public unsafe func Windows_SQLBulkOperations(StatementHandle: CPointer<Unit>, Operation: Int16): Int16 {
+    return SQLBulkOperations(StatementHandle, Operation)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLCancel == "on"]
+foreign {
     func SQLCancel(StatementHandle: CPointer<Unit>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLCancel == "on"]
+public unsafe func Windows_SQLCancel(StatementHandle: CPointer<Unit>): Int16 {
+    return SQLCancel(StatementHandle)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLCancelHandle == "on"]
+foreign {
     func SQLCancelHandle(HandleType: Int16, InputHandle: CPointer<Unit>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLCancelHandle == "on"]
+public unsafe func Windows_SQLCancelHandle(HandleType: Int16, InputHandle: CPointer<Unit>): Int16 {
+    return SQLCancelHandle(HandleType, InputHandle)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLCloseCursor == "on"]
+foreign {
     func SQLCloseCursor(StatementHandle: CPointer<Unit>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLCloseCursor == "on"]
+public unsafe func Windows_SQLCloseCursor(StatementHandle: CPointer<Unit>): Int16 {
+    return SQLCloseCursor(StatementHandle)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColAttribute == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: CharacterAttribute bytes=param[4] optional
+    // param-hint: StringLength optional
+    // param-hint: NumericAttribute optional
+    func SQLColAttribute(StatementHandle: CPointer<Unit>, ColumnNumber: UInt16, FieldIdentifier: UInt16, CharacterAttribute: CPointer<Unit>, BufferLength: Int16, StringLength: CPointer<Int16>, NumericAttribute: CPointer<Int64>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColAttribute == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SQLColAttribute(StatementHandle: CPointer<Unit>, ColumnNumber: UInt16, FieldIdentifier: UInt16, CharacterAttribute: CPointer<Unit>, BufferLength: Int16, StringLength: CPointer<Int16>, NumericAttribute: CPointer<Int64>): Int16 {
+    return SQLColAttribute(StatementHandle, ColumnNumber, FieldIdentifier, CharacterAttribute, BufferLength, StringLength, NumericAttribute)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColAttributeA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: pCharAttr bytes=param[4] optional
+    // param-hint: pcbCharAttr optional
+    // param-hint: pNumAttr optional
+    func SQLColAttributeA(hstmt: CPointer<Unit>, iCol: Int16, iField: Int16, pCharAttr: CPointer<Unit>, cbCharAttrMax: Int16, pcbCharAttr: CPointer<Int16>, pNumAttr: CPointer<Int64>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColAttributeA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SQLColAttributeA(hstmt: CPointer<Unit>, iCol: Int16, iField: Int16, pCharAttr: CPointer<Unit>, cbCharAttrMax: Int16, pcbCharAttr: CPointer<Int16>, pNumAttr: CPointer<Int64>): Int16 {
+    return SQLColAttributeA(hstmt, iCol, iField, pCharAttr, cbCharAttrMax, pcbCharAttr, pNumAttr)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColAttributeW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: pCharAttr bytes=param[4] optional
+    // param-hint: pcbCharAttr optional
+    // param-hint: pNumAttr optional
+    func SQLColAttributeW(hstmt: CPointer<Unit>, iCol: UInt16, iField: UInt16, pCharAttr: CPointer<Unit>, cbDescMax: Int16, pcbCharAttr: CPointer<Int16>, pNumAttr: CPointer<Int64>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColAttributeW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SQLColAttributeW(hstmt: CPointer<Unit>, iCol: UInt16, iField: UInt16, pCharAttr: CPointer<Unit>, cbDescMax: Int16, pcbCharAttr: CPointer<Int16>, pNumAttr: CPointer<Int64>): Int16 {
+    return SQLColAttributeW(hstmt, iCol, iField, pCharAttr, cbDescMax, pcbCharAttr, pNumAttr)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColAttributes == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    func SQLColAttributes(hstmt: CPointer<Unit>, icol: UInt16, fDescType: UInt16, rgbDesc: CPointer<Unit>, cbDescMax: Int16, pcbDesc: CPointer<Int16>, pfDesc: CPointer<Int64>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColAttributes == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SQLColAttributes(hstmt: CPointer<Unit>, icol: UInt16, fDescType: UInt16, rgbDesc: CPointer<Unit>, cbDescMax: Int16, pcbDesc: CPointer<Int16>, pfDesc: CPointer<Int64>): Int16 {
+    return SQLColAttributes(hstmt, icol, fDescType, rgbDesc, cbDescMax, pcbDesc, pfDesc)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColAttributesA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: rgbDesc bytes=param[4] optional
+    // param-hint: pcbDesc optional
+    // param-hint: pfDesc optional
+    func SQLColAttributesA(hstmt: CPointer<Unit>, icol: UInt16, fDescType: UInt16, rgbDesc: CPointer<Unit>, cbDescMax: Int16, pcbDesc: CPointer<Int16>, pfDesc: CPointer<Int64>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColAttributesA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SQLColAttributesA(hstmt: CPointer<Unit>, icol: UInt16, fDescType: UInt16, rgbDesc: CPointer<Unit>, cbDescMax: Int16, pcbDesc: CPointer<Int16>, pfDesc: CPointer<Int64>): Int16 {
+    return SQLColAttributesA(hstmt, icol, fDescType, rgbDesc, cbDescMax, pcbDesc, pfDesc)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColAttributesW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
+    // param-hint: rgbDesc bytes=param[4] optional
+    // param-hint: pcbDesc optional
+    // param-hint: pfDesc optional
+    func SQLColAttributesW(hstmt: CPointer<Unit>, icol: UInt16, fDescType: UInt16, rgbDesc: CPointer<Unit>, cbDescMax: Int16, pcbDesc: CPointer<Int16>, pfDesc: CPointer<Int64>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColAttributesW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SQLColAttributesW(hstmt: CPointer<Unit>, icol: UInt16, fDescType: UInt16, rgbDesc: CPointer<Unit>, cbDescMax: Int16, pcbDesc: CPointer<Int16>, pfDesc: CPointer<Int64>): Int16 {
+    return SQLColAttributesW(hstmt, icol, fDescType, rgbDesc, cbDescMax, pcbDesc, pfDesc)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColumnPrivileges == "on"]
+foreign {
     // param-hint: szCatalogName len=param[2] optional
     // param-hint: szSchemaName len=param[4] optional
     // param-hint: szTableName len=param[6] optional
     // param-hint: szColumnName len=param[8] optional
     func SQLColumnPrivileges(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cchCatalogName: Int16, szSchemaName: CPointer<UInt8>, cchSchemaName: Int16, szTableName: CPointer<UInt8>, cchTableName: Int16, szColumnName: CPointer<UInt8>, cchColumnName: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColumnPrivileges == "on"]
+public unsafe func Windows_SQLColumnPrivileges(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cchCatalogName: Int16, szSchemaName: CPointer<UInt8>, cchSchemaName: Int16, szTableName: CPointer<UInt8>, cchTableName: Int16, szColumnName: CPointer<UInt8>, cchColumnName: Int16): Int16 {
+    return SQLColumnPrivileges(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName, szColumnName, cchColumnName)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColumnPrivilegesA == "on"]
+foreign {
     // param-hint: szCatalogName len=param[2] optional
     // param-hint: szSchemaName len=param[4] optional
     // param-hint: szTableName len=param[6] optional
     // param-hint: szColumnName len=param[8] optional
     func SQLColumnPrivilegesA(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cbCatalogName: Int16, szSchemaName: CPointer<UInt8>, cbSchemaName: Int16, szTableName: CPointer<UInt8>, cbTableName: Int16, szColumnName: CPointer<UInt8>, cbColumnName: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColumnPrivilegesA == "on"]
+public unsafe func Windows_SQLColumnPrivilegesA(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cbCatalogName: Int16, szSchemaName: CPointer<UInt8>, cbSchemaName: Int16, szTableName: CPointer<UInt8>, cbTableName: Int16, szColumnName: CPointer<UInt8>, cbColumnName: Int16): Int16 {
+    return SQLColumnPrivilegesA(hstmt, szCatalogName, cbCatalogName, szSchemaName, cbSchemaName, szTableName, cbTableName, szColumnName, cbColumnName)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColumnPrivilegesW == "on"]
+foreign {
     // param-hint: szCatalogName len=param[2] optional
     // param-hint: szSchemaName len=param[4] optional
     // param-hint: szTableName len=param[6] optional
     // param-hint: szColumnName len=param[8] optional
     func SQLColumnPrivilegesW(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt16>, cchCatalogName: Int16, szSchemaName: CPointer<UInt16>, cchSchemaName: Int16, szTableName: CPointer<UInt16>, cchTableName: Int16, szColumnName: CPointer<UInt16>, cchColumnName: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColumnPrivilegesW == "on"]
+public unsafe func Windows_SQLColumnPrivilegesW(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt16>, cchCatalogName: Int16, szSchemaName: CPointer<UInt16>, cchSchemaName: Int16, szTableName: CPointer<UInt16>, cchTableName: Int16, szColumnName: CPointer<UInt16>, cchColumnName: Int16): Int16 {
+    return SQLColumnPrivilegesW(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName, szColumnName, cchColumnName)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColumns == "on"]
+foreign {
     // param-hint: CatalogName len=param[2] optional
     // param-hint: SchemaName len=param[4] optional
     // param-hint: TableName len=param[6] optional
     // param-hint: ColumnName len=param[8] optional
     func SQLColumns(StatementHandle: CPointer<Unit>, CatalogName: CPointer<UInt8>, NameLength1: Int16, SchemaName: CPointer<UInt8>, NameLength2: Int16, TableName: CPointer<UInt8>, NameLength3: Int16, ColumnName: CPointer<UInt8>, NameLength4: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColumns == "on"]
+public unsafe func Windows_SQLColumns(StatementHandle: CPointer<Unit>, CatalogName: CPointer<UInt8>, NameLength1: Int16, SchemaName: CPointer<UInt8>, NameLength2: Int16, TableName: CPointer<UInt8>, NameLength3: Int16, ColumnName: CPointer<UInt8>, NameLength4: Int16): Int16 {
+    return SQLColumns(StatementHandle, CatalogName, NameLength1, SchemaName, NameLength2, TableName, NameLength3, ColumnName, NameLength4)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColumnsA == "on"]
+foreign {
     // param-hint: szCatalogName len=param[2] optional
     // param-hint: szSchemaName len=param[4] optional
     // param-hint: szTableName len=param[6] optional
     // param-hint: szColumnName len=param[8] optional
     func SQLColumnsA(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cbCatalogName: Int16, szSchemaName: CPointer<UInt8>, cbSchemaName: Int16, szTableName: CPointer<UInt8>, cbTableName: Int16, szColumnName: CPointer<UInt8>, cbColumnName: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColumnsA == "on"]
+public unsafe func Windows_SQLColumnsA(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cbCatalogName: Int16, szSchemaName: CPointer<UInt8>, cbSchemaName: Int16, szTableName: CPointer<UInt8>, cbTableName: Int16, szColumnName: CPointer<UInt8>, cbColumnName: Int16): Int16 {
+    return SQLColumnsA(hstmt, szCatalogName, cbCatalogName, szSchemaName, cbSchemaName, szTableName, cbTableName, szColumnName, cbColumnName)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColumnsW == "on"]
+foreign {
     // param-hint: szCatalogName len=param[2] optional
     // param-hint: szSchemaName len=param[4] optional
     // param-hint: szTableName len=param[6] optional
     // param-hint: szColumnName len=param[8] optional
     func SQLColumnsW(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt16>, cchCatalogName: Int16, szSchemaName: CPointer<UInt16>, cchSchemaName: Int16, szTableName: CPointer<UInt16>, cchTableName: Int16, szColumnName: CPointer<UInt16>, cchColumnName: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLColumnsW == "on"]
+public unsafe func Windows_SQLColumnsW(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt16>, cchCatalogName: Int16, szSchemaName: CPointer<UInt16>, cchSchemaName: Int16, szTableName: CPointer<UInt16>, cchTableName: Int16, szColumnName: CPointer<UInt16>, cchColumnName: Int16): Int16 {
+    return SQLColumnsW(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName, szColumnName, cchColumnName)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLCompleteAsync == "on"]
+foreign {
     func SQLCompleteAsync(HandleType: Int16, Handle: CPointer<Unit>, AsyncRetCodePtr: CPointer<Int16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLCompleteAsync == "on"]
+public unsafe func Windows_SQLCompleteAsync(HandleType: Int16, Handle: CPointer<Unit>, AsyncRetCodePtr: CPointer<Int16>): Int16 {
+    return SQLCompleteAsync(HandleType, Handle, AsyncRetCodePtr)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLConnect == "on"]
+foreign {
     // param-hint: ServerName len=param[2]
     // param-hint: UserName len=param[4]
     // param-hint: Authentication len=param[6]
     func SQLConnect(ConnectionHandle: CPointer<Unit>, ServerName: CPointer<UInt8>, NameLength1: Int16, UserName: CPointer<UInt8>, NameLength2: Int16, Authentication: CPointer<UInt8>, NameLength3: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLConnect == "on"]
+public unsafe func Windows_SQLConnect(ConnectionHandle: CPointer<Unit>, ServerName: CPointer<UInt8>, NameLength1: Int16, UserName: CPointer<UInt8>, NameLength2: Int16, Authentication: CPointer<UInt8>, NameLength3: Int16): Int16 {
+    return SQLConnect(ConnectionHandle, ServerName, NameLength1, UserName, NameLength2, Authentication, NameLength3)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLConnectA == "on"]
+foreign {
     // param-hint: szDSN len=param[2]
     // param-hint: szUID len=param[4]
     // param-hint: szAuthStr len=param[6]
     func SQLConnectA(hdbc: CPointer<Unit>, szDSN: CPointer<UInt8>, cbDSN: Int16, szUID: CPointer<UInt8>, cbUID: Int16, szAuthStr: CPointer<UInt8>, cbAuthStr: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLConnectA == "on"]
+public unsafe func Windows_SQLConnectA(hdbc: CPointer<Unit>, szDSN: CPointer<UInt8>, cbDSN: Int16, szUID: CPointer<UInt8>, cbUID: Int16, szAuthStr: CPointer<UInt8>, cbAuthStr: Int16): Int16 {
+    return SQLConnectA(hdbc, szDSN, cbDSN, szUID, cbUID, szAuthStr, cbAuthStr)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLConnectW == "on"]
+foreign {
     // param-hint: szDSN len=param[2]
     // param-hint: szUID len=param[4]
     // param-hint: szAuthStr len=param[6]
     func SQLConnectW(hdbc: CPointer<Unit>, szDSN: CPointer<UInt16>, cchDSN: Int16, szUID: CPointer<UInt16>, cchUID: Int16, szAuthStr: CPointer<UInt16>, cchAuthStr: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLConnectW == "on"]
+public unsafe func Windows_SQLConnectW(hdbc: CPointer<Unit>, szDSN: CPointer<UInt16>, cchDSN: Int16, szUID: CPointer<UInt16>, cchUID: Int16, szAuthStr: CPointer<UInt16>, cchAuthStr: Int16): Int16 {
+    return SQLConnectW(hdbc, szDSN, cchDSN, szUID, cchUID, szAuthStr, cchAuthStr)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLCopyDesc == "on"]
+foreign {
     func SQLCopyDesc(SourceDescHandle: CPointer<Unit>, TargetDescHandle: CPointer<Unit>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLCopyDesc == "on"]
+public unsafe func Windows_SQLCopyDesc(SourceDescHandle: CPointer<Unit>, TargetDescHandle: CPointer<Unit>): Int16 {
+    return SQLCopyDesc(SourceDescHandle, TargetDescHandle)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDataSources == "on"]
+foreign {
     // param-hint: ServerName len=param[3] optional
     // param-hint: NameLength1Ptr optional
     // param-hint: Description len=param[6] optional
     // param-hint: NameLength2Ptr optional
     func SQLDataSources(EnvironmentHandle: CPointer<Unit>, Direction: UInt16, ServerName: CPointer<UInt8>, BufferLength1: Int16, NameLength1Ptr: CPointer<Int16>, Description: CPointer<UInt8>, BufferLength2: Int16, NameLength2Ptr: CPointer<Int16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDataSources == "on"]
+public unsafe func Windows_SQLDataSources(EnvironmentHandle: CPointer<Unit>, Direction: UInt16, ServerName: CPointer<UInt8>, BufferLength1: Int16, NameLength1Ptr: CPointer<Int16>, Description: CPointer<UInt8>, BufferLength2: Int16, NameLength2Ptr: CPointer<Int16>): Int16 {
+    return SQLDataSources(EnvironmentHandle, Direction, ServerName, BufferLength1, NameLength1Ptr, Description, BufferLength2, NameLength2Ptr)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDataSourcesA == "on"]
+foreign {
     // param-hint: szDSN len=param[3] optional
     // param-hint: szDescription len=param[6] optional
     func SQLDataSourcesA(henv: CPointer<Unit>, fDirection: UInt16, szDSN: CPointer<UInt8>, cbDSNMax: Int16, pcbDSN: CPointer<Int16>, szDescription: CPointer<UInt8>, cbDescriptionMax: Int16, pcbDescription: CPointer<Int16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDataSourcesA == "on"]
+public unsafe func Windows_SQLDataSourcesA(henv: CPointer<Unit>, fDirection: UInt16, szDSN: CPointer<UInt8>, cbDSNMax: Int16, pcbDSN: CPointer<Int16>, szDescription: CPointer<UInt8>, cbDescriptionMax: Int16, pcbDescription: CPointer<Int16>): Int16 {
+    return SQLDataSourcesA(henv, fDirection, szDSN, cbDSNMax, pcbDSN, szDescription, cbDescriptionMax, pcbDescription)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDataSourcesW == "on"]
+foreign {
     // param-hint: szDSN len=param[3] optional
     // param-hint: pcchDSN optional
     // param-hint: wszDescription len=param[6] optional
     // param-hint: pcchDescription optional
     func SQLDataSourcesW(henv: CPointer<Unit>, fDirection: UInt16, szDSN: CPointer<UInt16>, cchDSNMax: Int16, pcchDSN: CPointer<Int16>, wszDescription: CPointer<UInt16>, cchDescriptionMax: Int16, pcchDescription: CPointer<Int16>): Int16
-    func SQLDisconnect(ConnectionHandle: CPointer<Unit>): Int16
-    // param-hint: szConnStrIn len=param[3]
-    // param-hint: szConnStrOut len=param[5] optional
-    // param-hint: pcchConnStrOut optional
-    func SQLDriverConnect(hdbc: CPointer<Unit>, hwnd: IntNative, szConnStrIn: CPointer<UInt8>, cchConnStrIn: Int16, szConnStrOut: CPointer<UInt8>, cchConnStrOutMax: Int16, pcchConnStrOut: CPointer<Int16>, fDriverCompletion: UInt16): Int16
-    // param-hint: szConnStrIn len=param[3]
-    // param-hint: szConnStrOut len=param[5] optional
-    // param-hint: pcbConnStrOut optional
-    func SQLDriverConnectA(hdbc: CPointer<Unit>, hwnd: IntNative, szConnStrIn: CPointer<UInt8>, cbConnStrIn: Int16, szConnStrOut: CPointer<UInt8>, cbConnStrOutMax: Int16, pcbConnStrOut: CPointer<Int16>, fDriverCompletion: UInt16): Int16
-    // param-hint: szConnStrIn len=param[3]
-    // param-hint: szConnStrOut len=param[5] optional
-    // param-hint: pcchConnStrOut optional
-    func SQLDriverConnectW(hdbc: CPointer<Unit>, hwnd: IntNative, szConnStrIn: CPointer<UInt16>, cchConnStrIn: Int16, szConnStrOut: CPointer<UInt16>, cchConnStrOutMax: Int16, pcchConnStrOut: CPointer<Int16>, fDriverCompletion: UInt16): Int16
-    // param-hint: szDriverDesc len=param[3] optional
-    // param-hint: pcchDriverDesc optional
-    // param-hint: szDriverAttributes len=param[6] optional
-    // param-hint: pcchDrvrAttr optional
-    func SQLDrivers(henv: CPointer<Unit>, fDirection: UInt16, szDriverDesc: CPointer<UInt8>, cchDriverDescMax: Int16, pcchDriverDesc: CPointer<Int16>, szDriverAttributes: CPointer<UInt8>, cchDrvrAttrMax: Int16, pcchDrvrAttr: CPointer<Int16>): Int16
-    // param-hint: szDriverDesc len=param[3] optional
-    // param-hint: pcbDriverDesc optional
-    // param-hint: szDriverAttributes len=param[6] optional
-    // param-hint: pcbDrvrAttr optional
-    func SQLDriversA(henv: CPointer<Unit>, fDirection: UInt16, szDriverDesc: CPointer<UInt8>, cbDriverDescMax: Int16, pcbDriverDesc: CPointer<Int16>, szDriverAttributes: CPointer<UInt8>, cbDrvrAttrMax: Int16, pcbDrvrAttr: CPointer<Int16>): Int16
-    // param-hint: szDriverDesc len=param[3] optional
-    // param-hint: pcchDriverDesc optional
-    // param-hint: szDriverAttributes len=param[6] optional
-    // param-hint: pcchDrvrAttr optional
-    func SQLDriversW(henv: CPointer<Unit>, fDirection: UInt16, szDriverDesc: CPointer<UInt16>, cchDriverDescMax: Int16, pcchDriverDesc: CPointer<Int16>, szDriverAttributes: CPointer<UInt16>, cchDrvrAttrMax: Int16, pcchDrvrAttr: CPointer<Int16>): Int16
-    func SQLEndTran(HandleType: Int16, Handle: CPointer<Unit>, CompletionType: Int16): Int16
-    // param-hint: Sqlstate fixed=6
-    // param-hint: NativeError optional
-    // param-hint: MessageText len=param[6] optional
-    // param-hint: TextLength optional
-    func SQLError(EnvironmentHandle: CPointer<Unit>, ConnectionHandle: CPointer<Unit>, StatementHandle: CPointer<Unit>, Sqlstate: CPointer<UInt8>, NativeError: CPointer<Int32>, MessageText: CPointer<UInt8>, BufferLength: Int16, TextLength: CPointer<Int16>): Int16
-    // param-hint: pfNativeError optional
-    // param-hint: szErrorMsg len=param[6] optional
-    // param-hint: pcbErrorMsg optional
-    func SQLErrorA(henv: CPointer<Unit>, hdbc: CPointer<Unit>, hstmt: CPointer<Unit>, szSqlState: CPointer<UInt8>, pfNativeError: CPointer<Int32>, szErrorMsg: CPointer<UInt8>, cbErrorMsgMax: Int16, pcbErrorMsg: CPointer<Int16>): Int16
-    // param-hint: wszSqlState fixed=6
-    // param-hint: pfNativeError optional
-    // param-hint: wszErrorMsg len=param[6] optional
-    // param-hint: pcchErrorMsg optional
-    func SQLErrorW(henv: CPointer<Unit>, hdbc: CPointer<Unit>, hstmt: CPointer<Unit>, wszSqlState: CPointer<UInt16>, pfNativeError: CPointer<Int32>, wszErrorMsg: CPointer<UInt16>, cchErrorMsgMax: Int16, pcchErrorMsg: CPointer<Int16>): Int16
-    // param-hint: StatementText len=param[2] optional
-    func SQLExecDirect(StatementHandle: CPointer<Unit>, StatementText: CPointer<UInt8>, TextLength: Int32): Int16
-    // param-hint: szSqlStr len=param[2] optional
-    func SQLExecDirectA(hstmt: CPointer<Unit>, szSqlStr: CPointer<UInt8>, cbSqlStr: Int32): Int16
-    // param-hint: szSqlStr len=param[2] optional
-    func SQLExecDirectW(hstmt: CPointer<Unit>, szSqlStr: CPointer<UInt16>, TextLength: Int32): Int16
-    func SQLExecute(StatementHandle: CPointer<Unit>): Int16
-    func SQLFetch(StatementHandle: CPointer<Unit>): Int16
-    // param-hint: szPkCatalogName len=param[2] optional
-    // param-hint: szPkSchemaName len=param[4] optional
-    // param-hint: szPkTableName len=param[6] optional
-    // param-hint: szFkCatalogName len=param[8] optional
-    // param-hint: szFkSchemaName len=param[10] optional
-    // param-hint: szFkTableName len=param[12] optional
-    func SQLForeignKeys(hstmt: CPointer<Unit>, szPkCatalogName: CPointer<UInt8>, cchPkCatalogName: Int16, szPkSchemaName: CPointer<UInt8>, cchPkSchemaName: Int16, szPkTableName: CPointer<UInt8>, cchPkTableName: Int16, szFkCatalogName: CPointer<UInt8>, cchFkCatalogName: Int16, szFkSchemaName: CPointer<UInt8>, cchFkSchemaName: Int16, szFkTableName: CPointer<UInt8>, cchFkTableName: Int16): Int16
-    // param-hint: szPkCatalogName len=param[2] optional
-    // param-hint: szPkSchemaName len=param[4] optional
-    // param-hint: szPkTableName len=param[6] optional
-    // param-hint: szFkCatalogName len=param[8] optional
-    // param-hint: szFkSchemaName len=param[10] optional
-    // param-hint: szFkTableName len=param[12] optional
-    func SQLForeignKeysA(hstmt: CPointer<Unit>, szPkCatalogName: CPointer<UInt8>, cbPkCatalogName: Int16, szPkSchemaName: CPointer<UInt8>, cbPkSchemaName: Int16, szPkTableName: CPointer<UInt8>, cbPkTableName: Int16, szFkCatalogName: CPointer<UInt8>, cbFkCatalogName: Int16, szFkSchemaName: CPointer<UInt8>, cbFkSchemaName: Int16, szFkTableName: CPointer<UInt8>, cbFkTableName: Int16): Int16
-    // param-hint: szPkCatalogName len=param[2] optional
-    // param-hint: szPkSchemaName len=param[4] optional
-    // param-hint: szPkTableName len=param[6] optional
-    // param-hint: szFkCatalogName len=param[8] optional
-    // param-hint: szFkSchemaName len=param[10] optional
-    // param-hint: szFkTableName len=param[12] optional
-    func SQLForeignKeysW(hstmt: CPointer<Unit>, szPkCatalogName: CPointer<UInt16>, cchPkCatalogName: Int16, szPkSchemaName: CPointer<UInt16>, cchPkSchemaName: Int16, szPkTableName: CPointer<UInt16>, cchPkTableName: Int16, szFkCatalogName: CPointer<UInt16>, cchFkCatalogName: Int16, szFkSchemaName: CPointer<UInt16>, cchFkSchemaName: Int16, szFkTableName: CPointer<UInt16>, cchFkTableName: Int16): Int16
-    func SQLFreeConnect(ConnectionHandle: CPointer<Unit>): Int16
-    func SQLFreeEnv(EnvironmentHandle: CPointer<Unit>): Int16
-    func SQLFreeHandle(HandleType: Int16, Handle: CPointer<Unit>): Int16
-    func SQLFreeStmt(StatementHandle: CPointer<Unit>, Option: UInt16): Int16
-    // param-hint: Value optional
-    // param-hint: StringLengthPtr optional
-    func SQLGetConnectAttr(ConnectionHandle: CPointer<Unit>, Attribute: Int32, Value: CPointer<Unit>, BufferLength: Int32, StringLengthPtr: CPointer<Int32>): Int16
-    // param-hint: rgbValue optional
-    // param-hint: pcbValue optional
-    func SQLGetConnectAttrA(hdbc: CPointer<Unit>, fAttribute: Int32, rgbValue: CPointer<Unit>, cbValueMax: Int32, pcbValue: CPointer<Int32>): Int16
-    // param-hint: rgbValue optional
-    // param-hint: pcbValue optional
-    func SQLGetConnectAttrW(hdbc: CPointer<Unit>, fAttribute: Int32, rgbValue: CPointer<Unit>, cbValueMax: Int32, pcbValue: CPointer<Int32>): Int16
-    func SQLGetConnectOption(ConnectionHandle: CPointer<Unit>, Option: UInt16, Value: CPointer<Unit>): Int16
-    func SQLGetConnectOptionA(hdbc: CPointer<Unit>, fOption: UInt16, pvParam: CPointer<Unit>): Int16
-    func SQLGetConnectOptionW(hdbc: CPointer<Unit>, fOption: UInt16, pvParam: CPointer<Unit>): Int16
-    // param-hint: CursorName len=param[2] optional
-    // param-hint: NameLengthPtr optional
-    func SQLGetCursorName(StatementHandle: CPointer<Unit>, CursorName: CPointer<UInt8>, BufferLength: Int16, NameLengthPtr: CPointer<Int16>): Int16
-    // param-hint: szCursor len=param[2] optional
-    // param-hint: pcbCursor optional
-    func SQLGetCursorNameA(hstmt: CPointer<Unit>, szCursor: CPointer<UInt8>, cbCursorMax: Int16, pcbCursor: CPointer<Int16>): Int16
-    // param-hint: szCursor len=param[2] optional
-    // param-hint: pcchCursor optional
-    func SQLGetCursorNameW(hstmt: CPointer<Unit>, szCursor: CPointer<UInt16>, cchCursorMax: Int16, pcchCursor: CPointer<Int16>): Int16
-    // param-hint: Value optional
-    // param-hint: StringLength optional
-    func SQLGetDescField(DescriptorHandle: CPointer<Unit>, RecNumber: Int16, FieldIdentifier: Int16, Value: CPointer<Unit>, BufferLength: Int32, StringLength: CPointer<Int32>): Int16
-    // param-hint: rgbValue optional
-    // param-hint: StringLength optional
-    func SQLGetDescFieldA(hdesc: CPointer<Unit>, iRecord: Int16, iField: Int16, rgbValue: CPointer<Unit>, cbBufferLength: Int32, StringLength: CPointer<Int32>): Int16
-    // param-hint: rgbValue optional
-    // param-hint: StringLength optional
-    func SQLGetDescFieldW(hdesc: CPointer<Unit>, iRecord: Int16, iField: Int16, rgbValue: CPointer<Unit>, cbBufferLength: Int32, StringLength: CPointer<Int32>): Int16
-    // param-hint: DiagInfo optional
-    // param-hint: StringLength optional
-    func SQLGetDiagField(HandleType: Int16, Handle: CPointer<Unit>, RecNumber: Int16, DiagIdentifier: Int16, DiagInfo: CPointer<Unit>, BufferLength: Int16, StringLength: CPointer<Int16>): Int16
-    // param-hint: rgbDiagInfo optional
-    // param-hint: pcbDiagInfo optional
-    func SQLGetDiagFieldA(fHandleType: Int16, handle: CPointer<Unit>, iRecord: Int16, fDiagField: Int16, rgbDiagInfo: CPointer<Unit>, cbDiagInfoMax: Int16, pcbDiagInfo: CPointer<Int16>): Int16
-    // param-hint: rgbDiagInfo optional
-    // param-hint: pcbStringLength optional
-    func SQLGetDiagFieldW(fHandleType: Int16, handle: CPointer<Unit>, iRecord: Int16, fDiagField: Int16, rgbDiagInfo: CPointer<Unit>, cbBufferLength: Int16, pcbStringLength: CPointer<Int16>): Int16
-    // param-hint: Sqlstate fixed=6 optional
-    // param-hint: MessageText len=param[6] optional
-    // param-hint: TextLength optional
-    func SQLGetDiagRec(HandleType: Int16, Handle: CPointer<Unit>, RecNumber: Int16, Sqlstate: CPointer<UInt8>, NativeError: CPointer<Int32>, MessageText: CPointer<UInt8>, BufferLength: Int16, TextLength: CPointer<Int16>): Int16
-    // param-hint: szSqlState fixed=6 optional
-    // param-hint: szErrorMsg len=param[6] optional
-    func SQLGetDiagRecA(fHandleType: Int16, handle: CPointer<Unit>, iRecord: Int16, szSqlState: CPointer<UInt8>, pfNativeError: CPointer<Int32>, szErrorMsg: CPointer<UInt8>, cbErrorMsgMax: Int16, pcbErrorMsg: CPointer<Int16>): Int16
-    // param-hint: szSqlState fixed=6 optional
-    // param-hint: szErrorMsg len=param[6] optional
-    func SQLGetDiagRecW(fHandleType: Int16, handle: CPointer<Unit>, iRecord: Int16, szSqlState: CPointer<UInt16>, pfNativeError: CPointer<Int32>, szErrorMsg: CPointer<UInt16>, cchErrorMsgMax: Int16, pcchErrorMsg: CPointer<Int16>): Int16
-    // param-hint: StringLength optional
-    func SQLGetEnvAttr(EnvironmentHandle: CPointer<Unit>, Attribute: Int32, Value: CPointer<Unit>, BufferLength: Int32, StringLength: CPointer<Int32>): Int16
-    // param-hint: Supported optional
-    func SQLGetFunctions(ConnectionHandle: CPointer<Unit>, FunctionId: UInt16, Supported: CPointer<UInt16>): Int16
-    // param-hint: InfoValue bytes=param[3] optional
-    // param-hint: StringLengthPtr optional
-    func SQLGetInfo(ConnectionHandle: CPointer<Unit>, InfoType: UInt16, InfoValue: CPointer<Unit>, BufferLength: Int16, StringLengthPtr: CPointer<Int16>): Int16
-    // param-hint: rgbInfoValue bytes=param[3] optional
-    // param-hint: pcbInfoValue optional
-    func SQLGetInfoA(hdbc: CPointer<Unit>, fInfoType: UInt16, rgbInfoValue: CPointer<Unit>, cbInfoValueMax: Int16, pcbInfoValue: CPointer<Int16>): Int16
-    // param-hint: rgbInfoValue bytes=param[3] optional
-    // param-hint: pcbInfoValue optional
-    func SQLGetInfoW(hdbc: CPointer<Unit>, fInfoType: UInt16, rgbInfoValue: CPointer<Unit>, cbInfoValueMax: Int16, pcbInfoValue: CPointer<Int16>): Int16
-    // param-hint: Value optional
-    // param-hint: StringLength optional
-    func SQLGetStmtAttr(StatementHandle: CPointer<Unit>, Attribute: Int32, Value: CPointer<Unit>, BufferLength: Int32, StringLength: CPointer<Int32>): Int16
-    func SQLGetStmtAttrA(hstmt: CPointer<Unit>, fAttribute: Int32, rgbValue: CPointer<Unit>, cbValueMax: Int32, pcbValue: CPointer<Int32>): Int16
-    func SQLGetStmtAttrW(hstmt: CPointer<Unit>, fAttribute: Int32, rgbValue: CPointer<Unit>, cbValueMax: Int32, pcbValue: CPointer<Int32>): Int16
-    func SQLGetStmtOption(StatementHandle: CPointer<Unit>, Option: UInt16, Value: CPointer<Unit>): Int16
-    func SQLGetTypeInfo(StatementHandle: CPointer<Unit>, DataType: Int16): Int16
-    func SQLGetTypeInfoA(StatementHandle: CPointer<Unit>, DataType: Int16): Int16
-    func SQLGetTypeInfoW(StatementHandle: CPointer<Unit>, DataType: Int16): Int16
-    func SQLMoreResults(hstmt: CPointer<Unit>): Int16
-    // param-hint: szSqlStrIn len=param[2]
-    // param-hint: szSqlStr len=param[4] optional
-    func SQLNativeSql(hdbc: CPointer<Unit>, szSqlStrIn: CPointer<UInt8>, cchSqlStrIn: Int32, szSqlStr: CPointer<UInt8>, cchSqlStrMax: Int32, pcbSqlStr: CPointer<Int32>): Int16
-    // param-hint: szSqlStrIn len=param[2]
-    // param-hint: szSqlStr len=param[4] optional
-    func SQLNativeSqlA(hdbc: CPointer<Unit>, szSqlStrIn: CPointer<UInt8>, cbSqlStrIn: Int32, szSqlStr: CPointer<UInt8>, cbSqlStrMax: Int32, pcbSqlStr: CPointer<Int32>): Int16
-    // param-hint: szSqlStrIn len=param[2]
-    // param-hint: szSqlStr len=param[4] optional
-    func SQLNativeSqlW(hdbc: CPointer<Unit>, szSqlStrIn: CPointer<UInt16>, cchSqlStrIn: Int32, szSqlStr: CPointer<UInt16>, cchSqlStrMax: Int32, pcchSqlStr: CPointer<Int32>): Int16
-    // param-hint: pcpar optional
-    func SQLNumParams(hstmt: CPointer<Unit>, pcpar: CPointer<Int16>): Int16
-    func SQLNumResultCols(StatementHandle: CPointer<Unit>, ColumnCount: CPointer<Int16>): Int16
-    // param-hint: Value optional
-    func SQLParamData(StatementHandle: CPointer<Unit>, Value: CPointer<CPointer<Unit>>): Int16
-    // param-hint: StatementText len=param[2]
-    func SQLPrepare(StatementHandle: CPointer<Unit>, StatementText: CPointer<UInt8>, TextLength: Int32): Int16
-    // param-hint: szSqlStr len=param[2]
-    func SQLPrepareA(hstmt: CPointer<Unit>, szSqlStr: CPointer<UInt8>, cbSqlStr: Int32): Int16
-    // param-hint: szSqlStr len=param[2]
-    func SQLPrepareW(hstmt: CPointer<Unit>, szSqlStr: CPointer<UInt16>, cchSqlStr: Int32): Int16
-    // param-hint: szCatalogName len=param[2] optional
-    // param-hint: szSchemaName len=param[4] optional
-    // param-hint: szTableName len=param[6] optional
-    func SQLPrimaryKeys(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cchCatalogName: Int16, szSchemaName: CPointer<UInt8>, cchSchemaName: Int16, szTableName: CPointer<UInt8>, cchTableName: Int16): Int16
-    // param-hint: szCatalogName len=param[2] optional
-    // param-hint: szSchemaName len=param[4] optional
-    // param-hint: szTableName len=param[6] optional
-    func SQLPrimaryKeysA(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cbCatalogName: Int16, szSchemaName: CPointer<UInt8>, cbSchemaName: Int16, szTableName: CPointer<UInt8>, cbTableName: Int16): Int16
-    // param-hint: szCatalogName len=param[2] optional
-    // param-hint: szSchemaName len=param[4] optional
-    // param-hint: szTableName len=param[6] optional
-    func SQLPrimaryKeysW(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt16>, cchCatalogName: Int16, szSchemaName: CPointer<UInt16>, cchSchemaName: Int16, szTableName: CPointer<UInt16>, cchTableName: Int16): Int16
-    // param-hint: szCatalogName len=param[2] optional
-    // param-hint: szSchemaName len=param[4] optional
-    // param-hint: szProcName len=param[6] optional
-    // param-hint: szColumnName len=param[8] optional
-    func SQLProcedureColumns(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cchCatalogName: Int16, szSchemaName: CPointer<UInt8>, cchSchemaName: Int16, szProcName: CPointer<UInt8>, cchProcName: Int16, szColumnName: CPointer<UInt8>, cchColumnName: Int16): Int16
-    // param-hint: szCatalogName len=param[2] optional
-    // param-hint: szSchemaName len=param[4] optional
-    // param-hint: szProcName len=param[6] optional
-    // param-hint: szColumnName len=param[8] optional
-    func SQLProcedureColumnsA(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cbCatalogName: Int16, szSchemaName: CPointer<UInt8>, cbSchemaName: Int16, szProcName: CPointer<UInt8>, cbProcName: Int16, szColumnName: CPointer<UInt8>, cbColumnName: Int16): Int16
-    // param-hint: szCatalogName len=param[2] optional
-    // param-hint: szSchemaName len=param[4] optional
-    // param-hint: szProcName len=param[6] optional
-    // param-hint: szColumnName len=param[8] optional
-    func SQLProcedureColumnsW(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt16>, cchCatalogName: Int16, szSchemaName: CPointer<UInt16>, cchSchemaName: Int16, szProcName: CPointer<UInt16>, cchProcName: Int16, szColumnName: CPointer<UInt16>, cchColumnName: Int16): Int16
-    // param-hint: szCatalogName len=param[2] optional
-    // param-hint: szSchemaName len=param[4] optional
-    // param-hint: szProcName len=param[6] optional
-    func SQLProcedures(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cchCatalogName: Int16, szSchemaName: CPointer<UInt8>, cchSchemaName: Int16, szProcName: CPointer<UInt8>, cchProcName: Int16): Int16
-    // param-hint: szCatalogName len=param[2] optional
-    // param-hint: szSchemaName len=param[4] optional
-    // param-hint: szProcName len=param[6] optional
-    func SQLProceduresA(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cbCatalogName: Int16, szSchemaName: CPointer<UInt8>, cbSchemaName: Int16, szProcName: CPointer<UInt8>, cbProcName: Int16): Int16
-    // param-hint: szCatalogName len=param[2] optional
-    // param-hint: szSchemaName len=param[4] optional
-    // param-hint: szProcName len=param[6] optional
-    func SQLProceduresW(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt16>, cchCatalogName: Int16, szSchemaName: CPointer<UInt16>, cchSchemaName: Int16, szProcName: CPointer<UInt16>, cchProcName: Int16): Int16
-    // param-hint: Value bytes=param[3] optional
-    func SQLSetConnectAttr(ConnectionHandle: CPointer<Unit>, Attribute: Int32, Value: CPointer<Unit>, StringLength: Int32): Int16
-    // param-hint: rgbValue bytes=param[3] optional
-    func SQLSetConnectAttrA(hdbc: CPointer<Unit>, fAttribute: Int32, rgbValue: CPointer<Unit>, cbValue: Int32): Int16
-    // param-hint: rgbValue bytes=param[3] optional
-    func SQLSetConnectAttrW(hdbc: CPointer<Unit>, fAttribute: Int32, rgbValue: CPointer<Unit>, cbValue: Int32): Int16
-    // param-hint: CursorName len=param[2]
-    func SQLSetCursorName(StatementHandle: CPointer<Unit>, CursorName: CPointer<UInt8>, NameLength: Int16): Int16
-    // param-hint: szCursor len=param[2]
-    func SQLSetCursorNameA(hstmt: CPointer<Unit>, szCursor: CPointer<UInt8>, cbCursor: Int16): Int16
-    // param-hint: szCursor len=param[2]
-    func SQLSetCursorNameW(hstmt: CPointer<Unit>, szCursor: CPointer<UInt16>, cchCursor: Int16): Int16
-    func SQLSetDescField(DescriptorHandle: CPointer<Unit>, RecNumber: Int16, FieldIdentifier: Int16, Value: CPointer<Unit>, BufferLength: Int32): Int16
-    func SQLSetDescFieldW(DescriptorHandle: CPointer<Unit>, RecNumber: Int16, FieldIdentifier: Int16, Value: CPointer<Unit>, BufferLength: Int32): Int16
-    // param-hint: Value bytes=param[3] optional
-    func SQLSetEnvAttr(EnvironmentHandle: CPointer<Unit>, Attribute: Int32, Value: CPointer<Unit>, StringLength: Int32): Int16
-    func SQLSetStmtAttr(StatementHandle: CPointer<Unit>, Attribute: Int32, Value: CPointer<Unit>, StringLength: Int32): Int16
-    func SQLSetStmtAttrW(hstmt: CPointer<Unit>, fAttribute: Int32, rgbValue: CPointer<Unit>, cbValueMax: Int32): Int16
-    // param-hint: CatalogName len=param[3] optional
-    // param-hint: SchemaName len=param[5] optional
-    // param-hint: TableName len=param[7] optional
-    func SQLSpecialColumns(StatementHandle: CPointer<Unit>, IdentifierType: UInt16, CatalogName: CPointer<UInt8>, NameLength1: Int16, SchemaName: CPointer<UInt8>, NameLength2: Int16, TableName: CPointer<UInt8>, NameLength3: Int16, Scope: UInt16, Nullable: UInt16): Int16
-    // param-hint: szCatalogName len=param[3] optional
-    // param-hint: szSchemaName len=param[5] optional
-    // param-hint: szTableName len=param[7] optional
-    func SQLSpecialColumnsA(hstmt: CPointer<Unit>, fColType: UInt16, szCatalogName: CPointer<UInt8>, cbCatalogName: Int16, szSchemaName: CPointer<UInt8>, cbSchemaName: Int16, szTableName: CPointer<UInt8>, cbTableName: Int16, fScope: UInt16, fNullable: UInt16): Int16
-    // param-hint: szCatalogName len=param[3] optional
-    // param-hint: szSchemaName len=param[5] optional
-    // param-hint: szTableName len=param[7] optional
-    func SQLSpecialColumnsW(hstmt: CPointer<Unit>, fColType: UInt16, szCatalogName: CPointer<UInt16>, cchCatalogName: Int16, szSchemaName: CPointer<UInt16>, cchSchemaName: Int16, szTableName: CPointer<UInt16>, cchTableName: Int16, fScope: UInt16, fNullable: UInt16): Int16
-    // param-hint: CatalogName len=param[2] optional
-    // param-hint: SchemaName len=param[4] optional
-    // param-hint: TableName len=param[6] optional
-    func SQLStatistics(StatementHandle: CPointer<Unit>, CatalogName: CPointer<UInt8>, NameLength1: Int16, SchemaName: CPointer<UInt8>, NameLength2: Int16, TableName: CPointer<UInt8>, NameLength3: Int16, Unique: UInt16, Reserved: UInt16): Int16
-    // param-hint: szCatalogName len=param[2] optional
-    // param-hint: szSchemaName len=param[4] optional
-    // param-hint: szTableName len=param[6] optional
-    func SQLStatisticsA(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cbCatalogName: Int16, szSchemaName: CPointer<UInt8>, cbSchemaName: Int16, szTableName: CPointer<UInt8>, cbTableName: Int16, fUnique: UInt16, fAccuracy: UInt16): Int16
-    // param-hint: szCatalogName len=param[2] optional
-    // param-hint: szSchemaName len=param[4] optional
-    // param-hint: szTableName len=param[6] optional
-    func SQLStatisticsW(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt16>, cchCatalogName: Int16, szSchemaName: CPointer<UInt16>, cchSchemaName: Int16, szTableName: CPointer<UInt16>, cchTableName: Int16, fUnique: UInt16, fAccuracy: UInt16): Int16
-    // param-hint: szCatalogName len=param[2] optional
-    // param-hint: szSchemaName len=param[4] optional
-    // param-hint: szTableName len=param[6] optional
-    func SQLTablePrivileges(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cchCatalogName: Int16, szSchemaName: CPointer<UInt8>, cchSchemaName: Int16, szTableName: CPointer<UInt8>, cchTableName: Int16): Int16
-    // param-hint: szCatalogName len=param[2] optional
-    // param-hint: szSchemaName len=param[4] optional
-    // param-hint: szTableName len=param[6] optional
-    func SQLTablePrivilegesA(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cbCatalogName: Int16, szSchemaName: CPointer<UInt8>, cbSchemaName: Int16, szTableName: CPointer<UInt8>, cbTableName: Int16): Int16
-    // param-hint: szCatalogName len=param[2] optional
-    // param-hint: szSchemaName len=param[4] optional
-    // param-hint: szTableName len=param[6] optional
-    func SQLTablePrivilegesW(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt16>, cchCatalogName: Int16, szSchemaName: CPointer<UInt16>, cchSchemaName: Int16, szTableName: CPointer<UInt16>, cchTableName: Int16): Int16
-    // param-hint: CatalogName len=param[2] optional
-    // param-hint: SchemaName len=param[4] optional
-    // param-hint: TableName len=param[6] optional
-    // param-hint: TableType len=param[8] optional
-    func SQLTables(StatementHandle: CPointer<Unit>, CatalogName: CPointer<UInt8>, NameLength1: Int16, SchemaName: CPointer<UInt8>, NameLength2: Int16, TableName: CPointer<UInt8>, NameLength3: Int16, TableType: CPointer<UInt8>, NameLength4: Int16): Int16
-    // param-hint: szCatalogName len=param[2] optional
-    // param-hint: szSchemaName len=param[4] optional
-    // param-hint: szTableName len=param[6] optional
-    // param-hint: szTableType len=param[8] optional
-    func SQLTablesA(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cbCatalogName: Int16, szSchemaName: CPointer<UInt8>, cbSchemaName: Int16, szTableName: CPointer<UInt8>, cbTableName: Int16, szTableType: CPointer<UInt8>, cbTableType: Int16): Int16
-    // param-hint: szCatalogName len=param[2] optional
-    // param-hint: szSchemaName len=param[4] optional
-    // param-hint: szTableName len=param[6] optional
-    // param-hint: szTableType len=param[8] optional
-    func SQLTablesW(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt16>, cchCatalogName: Int16, szSchemaName: CPointer<UInt16>, cchSchemaName: Int16, szTableName: CPointer<UInt16>, cchTableName: Int16, szTableType: CPointer<UInt16>, cchTableType: Int16): Int16
-    func SQLTransact(EnvironmentHandle: CPointer<Unit>, ConnectionHandle: CPointer<Unit>, CompletionType: UInt16): Int16
 }
 
-@When[ODBC32 == "on" && (arch == "x86_64" || arch == "aarch64")]
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDataSourcesW == "on"]
+public unsafe func Windows_SQLDataSourcesW(henv: CPointer<Unit>, fDirection: UInt16, szDSN: CPointer<UInt16>, cchDSNMax: Int16, pcchDSN: CPointer<Int16>, wszDescription: CPointer<UInt16>, cchDescriptionMax: Int16, pcchDescription: CPointer<Int16>): Int16 {
+    return SQLDataSourcesW(henv, fDirection, szDSN, cchDSNMax, pcchDSN, wszDescription, cchDescriptionMax, pcchDescription)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDescribeCol == "on" && (arch == "x86_64" || arch == "aarch64")]
 foreign {
-    // param-hint: TargetValue optional
-    // param-hint: StrLen_or_Ind optional
-    func SQLBindCol(StatementHandle: CPointer<Unit>, ColumnNumber: UInt16, TargetType: Int16, TargetValue: CPointer<Unit>, BufferLength: Int64, StrLen_or_Ind: CPointer<Int64>): Int16
-    func SQLBindParam(StatementHandle: CPointer<Unit>, ParameterNumber: UInt16, ValueType: Int16, ParameterType: Int16, LengthPrecision: UInt64, ParameterScale: Int16, ParameterValue: CPointer<Unit>, StrLen_or_Ind: CPointer<Int64>): Int16
-    func SQLBindParameter(hstmt: CPointer<Unit>, ipar: UInt16, fParamType: Int16, fCType: Int16, fSqlType: Int16, cbColDef: UInt64, ibScale: Int16, rgbValue: CPointer<Unit>, cbValueMax: Int64, pcbValue: CPointer<Int64>): Int16
-    // param-hint: CharacterAttribute bytes=param[4] optional
-    // param-hint: StringLength optional
-    // param-hint: NumericAttribute optional
-    func SQLColAttribute(StatementHandle: CPointer<Unit>, ColumnNumber: UInt16, FieldIdentifier: UInt16, CharacterAttribute: CPointer<Unit>, BufferLength: Int16, StringLength: CPointer<Int16>, NumericAttribute: CPointer<Int64>): Int16
-    // param-hint: pCharAttr bytes=param[4] optional
-    // param-hint: pcbCharAttr optional
-    // param-hint: pNumAttr optional
-    func SQLColAttributeA(hstmt: CPointer<Unit>, iCol: Int16, iField: Int16, pCharAttr: CPointer<Unit>, cbCharAttrMax: Int16, pcbCharAttr: CPointer<Int16>, pNumAttr: CPointer<Int64>): Int16
-    // param-hint: pCharAttr bytes=param[4] optional
-    // param-hint: pcbCharAttr optional
-    // param-hint: pNumAttr optional
-    func SQLColAttributeW(hstmt: CPointer<Unit>, iCol: UInt16, iField: UInt16, pCharAttr: CPointer<Unit>, cbDescMax: Int16, pcbCharAttr: CPointer<Int16>, pNumAttr: CPointer<Int64>): Int16
-    func SQLColAttributes(hstmt: CPointer<Unit>, icol: UInt16, fDescType: UInt16, rgbDesc: CPointer<Unit>, cbDescMax: Int16, pcbDesc: CPointer<Int16>, pfDesc: CPointer<Int64>): Int16
-    // param-hint: rgbDesc bytes=param[4] optional
-    // param-hint: pcbDesc optional
-    // param-hint: pfDesc optional
-    func SQLColAttributesA(hstmt: CPointer<Unit>, icol: UInt16, fDescType: UInt16, rgbDesc: CPointer<Unit>, cbDescMax: Int16, pcbDesc: CPointer<Int16>, pfDesc: CPointer<Int64>): Int16
-    // param-hint: rgbDesc bytes=param[4] optional
-    // param-hint: pcbDesc optional
-    // param-hint: pfDesc optional
-    func SQLColAttributesW(hstmt: CPointer<Unit>, icol: UInt16, fDescType: UInt16, rgbDesc: CPointer<Unit>, cbDescMax: Int16, pcbDesc: CPointer<Int16>, pfDesc: CPointer<Int64>): Int16
     // param-hint: ColumnName len=param[3] optional
     // param-hint: NameLength optional
     // param-hint: DataType optional
@@ -501,6 +553,15 @@ foreign {
     // param-hint: DecimalDigits optional
     // param-hint: Nullable optional
     func SQLDescribeCol(StatementHandle: CPointer<Unit>, ColumnNumber: UInt16, ColumnName: CPointer<UInt8>, BufferLength: Int16, NameLength: CPointer<Int16>, DataType: CPointer<Int16>, ColumnSize: CPointer<UInt64>, DecimalDigits: CPointer<Int16>, Nullable: CPointer<Int16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDescribeCol == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SQLDescribeCol(StatementHandle: CPointer<Unit>, ColumnNumber: UInt16, ColumnName: CPointer<UInt8>, BufferLength: Int16, NameLength: CPointer<Int16>, DataType: CPointer<Int16>, ColumnSize: CPointer<UInt64>, DecimalDigits: CPointer<Int16>, Nullable: CPointer<Int16>): Int16 {
+    return SQLDescribeCol(StatementHandle, ColumnNumber, ColumnName, BufferLength, NameLength, DataType, ColumnSize, DecimalDigits, Nullable)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDescribeColA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: szColName len=param[3] optional
     // param-hint: pcbColName optional
     // param-hint: pfSqlType optional
@@ -508,6 +569,15 @@ foreign {
     // param-hint: pibScale optional
     // param-hint: pfNullable optional
     func SQLDescribeColA(hstmt: CPointer<Unit>, icol: UInt16, szColName: CPointer<UInt8>, cbColNameMax: Int16, pcbColName: CPointer<Int16>, pfSqlType: CPointer<Int16>, pcbColDef: CPointer<UInt64>, pibScale: CPointer<Int16>, pfNullable: CPointer<Int16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDescribeColA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SQLDescribeColA(hstmt: CPointer<Unit>, icol: UInt16, szColName: CPointer<UInt8>, cbColNameMax: Int16, pcbColName: CPointer<Int16>, pfSqlType: CPointer<Int16>, pcbColDef: CPointer<UInt64>, pibScale: CPointer<Int16>, pfNullable: CPointer<Int16>): Int16 {
+    return SQLDescribeColA(hstmt, icol, szColName, cbColNameMax, pcbColName, pfSqlType, pcbColDef, pibScale, pfNullable)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDescribeColW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: szColName len=param[3] optional
     // param-hint: pcchColName optional
     // param-hint: pfSqlType optional
@@ -515,18 +585,484 @@ foreign {
     // param-hint: pibScale optional
     // param-hint: pfNullable optional
     func SQLDescribeColW(hstmt: CPointer<Unit>, icol: UInt16, szColName: CPointer<UInt16>, cchColNameMax: Int16, pcchColName: CPointer<Int16>, pfSqlType: CPointer<Int16>, pcbColDef: CPointer<UInt64>, pibScale: CPointer<Int16>, pfNullable: CPointer<Int16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDescribeColW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SQLDescribeColW(hstmt: CPointer<Unit>, icol: UInt16, szColName: CPointer<UInt16>, cchColNameMax: Int16, pcchColName: CPointer<Int16>, pfSqlType: CPointer<Int16>, pcbColDef: CPointer<UInt64>, pibScale: CPointer<Int16>, pfNullable: CPointer<Int16>): Int16 {
+    return SQLDescribeColW(hstmt, icol, szColName, cchColNameMax, pcchColName, pfSqlType, pcbColDef, pibScale, pfNullable)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDescribeParam == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: pfSqlType optional
     // param-hint: pcbParamDef optional
     // param-hint: pibScale optional
     // param-hint: pfNullable optional
     func SQLDescribeParam(hstmt: CPointer<Unit>, ipar: UInt16, pfSqlType: CPointer<Int16>, pcbParamDef: CPointer<UInt64>, pibScale: CPointer<Int16>, pfNullable: CPointer<Int16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDescribeParam == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SQLDescribeParam(hstmt: CPointer<Unit>, ipar: UInt16, pfSqlType: CPointer<Int16>, pcbParamDef: CPointer<UInt64>, pibScale: CPointer<Int16>, pfNullable: CPointer<Int16>): Int16 {
+    return SQLDescribeParam(hstmt, ipar, pfSqlType, pcbParamDef, pibScale, pfNullable)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDisconnect == "on"]
+foreign {
+    func SQLDisconnect(ConnectionHandle: CPointer<Unit>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDisconnect == "on"]
+public unsafe func Windows_SQLDisconnect(ConnectionHandle: CPointer<Unit>): Int16 {
+    return SQLDisconnect(ConnectionHandle)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDriverConnect == "on"]
+foreign {
+    // param-hint: szConnStrIn len=param[3]
+    // param-hint: szConnStrOut len=param[5] optional
+    // param-hint: pcchConnStrOut optional
+    func SQLDriverConnect(hdbc: CPointer<Unit>, hwnd: IntNative, szConnStrIn: CPointer<UInt8>, cchConnStrIn: Int16, szConnStrOut: CPointer<UInt8>, cchConnStrOutMax: Int16, pcchConnStrOut: CPointer<Int16>, fDriverCompletion: UInt16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDriverConnect == "on"]
+public unsafe func Windows_SQLDriverConnect(hdbc: CPointer<Unit>, hwnd: IntNative, szConnStrIn: CPointer<UInt8>, cchConnStrIn: Int16, szConnStrOut: CPointer<UInt8>, cchConnStrOutMax: Int16, pcchConnStrOut: CPointer<Int16>, fDriverCompletion: UInt16): Int16 {
+    return SQLDriverConnect(hdbc, hwnd, szConnStrIn, cchConnStrIn, szConnStrOut, cchConnStrOutMax, pcchConnStrOut, fDriverCompletion)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDriverConnectA == "on"]
+foreign {
+    // param-hint: szConnStrIn len=param[3]
+    // param-hint: szConnStrOut len=param[5] optional
+    // param-hint: pcbConnStrOut optional
+    func SQLDriverConnectA(hdbc: CPointer<Unit>, hwnd: IntNative, szConnStrIn: CPointer<UInt8>, cbConnStrIn: Int16, szConnStrOut: CPointer<UInt8>, cbConnStrOutMax: Int16, pcbConnStrOut: CPointer<Int16>, fDriverCompletion: UInt16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDriverConnectA == "on"]
+public unsafe func Windows_SQLDriverConnectA(hdbc: CPointer<Unit>, hwnd: IntNative, szConnStrIn: CPointer<UInt8>, cbConnStrIn: Int16, szConnStrOut: CPointer<UInt8>, cbConnStrOutMax: Int16, pcbConnStrOut: CPointer<Int16>, fDriverCompletion: UInt16): Int16 {
+    return SQLDriverConnectA(hdbc, hwnd, szConnStrIn, cbConnStrIn, szConnStrOut, cbConnStrOutMax, pcbConnStrOut, fDriverCompletion)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDriverConnectW == "on"]
+foreign {
+    // param-hint: szConnStrIn len=param[3]
+    // param-hint: szConnStrOut len=param[5] optional
+    // param-hint: pcchConnStrOut optional
+    func SQLDriverConnectW(hdbc: CPointer<Unit>, hwnd: IntNative, szConnStrIn: CPointer<UInt16>, cchConnStrIn: Int16, szConnStrOut: CPointer<UInt16>, cchConnStrOutMax: Int16, pcchConnStrOut: CPointer<Int16>, fDriverCompletion: UInt16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDriverConnectW == "on"]
+public unsafe func Windows_SQLDriverConnectW(hdbc: CPointer<Unit>, hwnd: IntNative, szConnStrIn: CPointer<UInt16>, cchConnStrIn: Int16, szConnStrOut: CPointer<UInt16>, cchConnStrOutMax: Int16, pcchConnStrOut: CPointer<Int16>, fDriverCompletion: UInt16): Int16 {
+    return SQLDriverConnectW(hdbc, hwnd, szConnStrIn, cchConnStrIn, szConnStrOut, cchConnStrOutMax, pcchConnStrOut, fDriverCompletion)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDrivers == "on"]
+foreign {
+    // param-hint: szDriverDesc len=param[3] optional
+    // param-hint: pcchDriverDesc optional
+    // param-hint: szDriverAttributes len=param[6] optional
+    // param-hint: pcchDrvrAttr optional
+    func SQLDrivers(henv: CPointer<Unit>, fDirection: UInt16, szDriverDesc: CPointer<UInt8>, cchDriverDescMax: Int16, pcchDriverDesc: CPointer<Int16>, szDriverAttributes: CPointer<UInt8>, cchDrvrAttrMax: Int16, pcchDrvrAttr: CPointer<Int16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDrivers == "on"]
+public unsafe func Windows_SQLDrivers(henv: CPointer<Unit>, fDirection: UInt16, szDriverDesc: CPointer<UInt8>, cchDriverDescMax: Int16, pcchDriverDesc: CPointer<Int16>, szDriverAttributes: CPointer<UInt8>, cchDrvrAttrMax: Int16, pcchDrvrAttr: CPointer<Int16>): Int16 {
+    return SQLDrivers(henv, fDirection, szDriverDesc, cchDriverDescMax, pcchDriverDesc, szDriverAttributes, cchDrvrAttrMax, pcchDrvrAttr)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDriversA == "on"]
+foreign {
+    // param-hint: szDriverDesc len=param[3] optional
+    // param-hint: pcbDriverDesc optional
+    // param-hint: szDriverAttributes len=param[6] optional
+    // param-hint: pcbDrvrAttr optional
+    func SQLDriversA(henv: CPointer<Unit>, fDirection: UInt16, szDriverDesc: CPointer<UInt8>, cbDriverDescMax: Int16, pcbDriverDesc: CPointer<Int16>, szDriverAttributes: CPointer<UInt8>, cbDrvrAttrMax: Int16, pcbDrvrAttr: CPointer<Int16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDriversA == "on"]
+public unsafe func Windows_SQLDriversA(henv: CPointer<Unit>, fDirection: UInt16, szDriverDesc: CPointer<UInt8>, cbDriverDescMax: Int16, pcbDriverDesc: CPointer<Int16>, szDriverAttributes: CPointer<UInt8>, cbDrvrAttrMax: Int16, pcbDrvrAttr: CPointer<Int16>): Int16 {
+    return SQLDriversA(henv, fDirection, szDriverDesc, cbDriverDescMax, pcbDriverDesc, szDriverAttributes, cbDrvrAttrMax, pcbDrvrAttr)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDriversW == "on"]
+foreign {
+    // param-hint: szDriverDesc len=param[3] optional
+    // param-hint: pcchDriverDesc optional
+    // param-hint: szDriverAttributes len=param[6] optional
+    // param-hint: pcchDrvrAttr optional
+    func SQLDriversW(henv: CPointer<Unit>, fDirection: UInt16, szDriverDesc: CPointer<UInt16>, cchDriverDescMax: Int16, pcchDriverDesc: CPointer<Int16>, szDriverAttributes: CPointer<UInt16>, cchDrvrAttrMax: Int16, pcchDrvrAttr: CPointer<Int16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLDriversW == "on"]
+public unsafe func Windows_SQLDriversW(henv: CPointer<Unit>, fDirection: UInt16, szDriverDesc: CPointer<UInt16>, cchDriverDescMax: Int16, pcchDriverDesc: CPointer<Int16>, szDriverAttributes: CPointer<UInt16>, cchDrvrAttrMax: Int16, pcchDrvrAttr: CPointer<Int16>): Int16 {
+    return SQLDriversW(henv, fDirection, szDriverDesc, cchDriverDescMax, pcchDriverDesc, szDriverAttributes, cchDrvrAttrMax, pcchDrvrAttr)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLEndTran == "on"]
+foreign {
+    func SQLEndTran(HandleType: Int16, Handle: CPointer<Unit>, CompletionType: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLEndTran == "on"]
+public unsafe func Windows_SQLEndTran(HandleType: Int16, Handle: CPointer<Unit>, CompletionType: Int16): Int16 {
+    return SQLEndTran(HandleType, Handle, CompletionType)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLError == "on"]
+foreign {
+    // param-hint: Sqlstate fixed=6
+    // param-hint: NativeError optional
+    // param-hint: MessageText len=param[6] optional
+    // param-hint: TextLength optional
+    func SQLError(EnvironmentHandle: CPointer<Unit>, ConnectionHandle: CPointer<Unit>, StatementHandle: CPointer<Unit>, Sqlstate: CPointer<UInt8>, NativeError: CPointer<Int32>, MessageText: CPointer<UInt8>, BufferLength: Int16, TextLength: CPointer<Int16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLError == "on"]
+public unsafe func Windows_SQLError(EnvironmentHandle: CPointer<Unit>, ConnectionHandle: CPointer<Unit>, StatementHandle: CPointer<Unit>, Sqlstate: CPointer<UInt8>, NativeError: CPointer<Int32>, MessageText: CPointer<UInt8>, BufferLength: Int16, TextLength: CPointer<Int16>): Int16 {
+    return SQLError(EnvironmentHandle, ConnectionHandle, StatementHandle, Sqlstate, NativeError, MessageText, BufferLength, TextLength)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLErrorA == "on"]
+foreign {
+    // param-hint: pfNativeError optional
+    // param-hint: szErrorMsg len=param[6] optional
+    // param-hint: pcbErrorMsg optional
+    func SQLErrorA(henv: CPointer<Unit>, hdbc: CPointer<Unit>, hstmt: CPointer<Unit>, szSqlState: CPointer<UInt8>, pfNativeError: CPointer<Int32>, szErrorMsg: CPointer<UInt8>, cbErrorMsgMax: Int16, pcbErrorMsg: CPointer<Int16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLErrorA == "on"]
+public unsafe func Windows_SQLErrorA(henv: CPointer<Unit>, hdbc: CPointer<Unit>, hstmt: CPointer<Unit>, szSqlState: CPointer<UInt8>, pfNativeError: CPointer<Int32>, szErrorMsg: CPointer<UInt8>, cbErrorMsgMax: Int16, pcbErrorMsg: CPointer<Int16>): Int16 {
+    return SQLErrorA(henv, hdbc, hstmt, szSqlState, pfNativeError, szErrorMsg, cbErrorMsgMax, pcbErrorMsg)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLErrorW == "on"]
+foreign {
+    // param-hint: wszSqlState fixed=6
+    // param-hint: pfNativeError optional
+    // param-hint: wszErrorMsg len=param[6] optional
+    // param-hint: pcchErrorMsg optional
+    func SQLErrorW(henv: CPointer<Unit>, hdbc: CPointer<Unit>, hstmt: CPointer<Unit>, wszSqlState: CPointer<UInt16>, pfNativeError: CPointer<Int32>, wszErrorMsg: CPointer<UInt16>, cchErrorMsgMax: Int16, pcchErrorMsg: CPointer<Int16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLErrorW == "on"]
+public unsafe func Windows_SQLErrorW(henv: CPointer<Unit>, hdbc: CPointer<Unit>, hstmt: CPointer<Unit>, wszSqlState: CPointer<UInt16>, pfNativeError: CPointer<Int32>, wszErrorMsg: CPointer<UInt16>, cchErrorMsgMax: Int16, pcchErrorMsg: CPointer<Int16>): Int16 {
+    return SQLErrorW(henv, hdbc, hstmt, wszSqlState, pfNativeError, wszErrorMsg, cchErrorMsgMax, pcchErrorMsg)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLExecDirect == "on"]
+foreign {
+    // param-hint: StatementText len=param[2] optional
+    func SQLExecDirect(StatementHandle: CPointer<Unit>, StatementText: CPointer<UInt8>, TextLength: Int32): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLExecDirect == "on"]
+public unsafe func Windows_SQLExecDirect(StatementHandle: CPointer<Unit>, StatementText: CPointer<UInt8>, TextLength: Int32): Int16 {
+    return SQLExecDirect(StatementHandle, StatementText, TextLength)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLExecDirectA == "on"]
+foreign {
+    // param-hint: szSqlStr len=param[2] optional
+    func SQLExecDirectA(hstmt: CPointer<Unit>, szSqlStr: CPointer<UInt8>, cbSqlStr: Int32): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLExecDirectA == "on"]
+public unsafe func Windows_SQLExecDirectA(hstmt: CPointer<Unit>, szSqlStr: CPointer<UInt8>, cbSqlStr: Int32): Int16 {
+    return SQLExecDirectA(hstmt, szSqlStr, cbSqlStr)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLExecDirectW == "on"]
+foreign {
+    // param-hint: szSqlStr len=param[2] optional
+    func SQLExecDirectW(hstmt: CPointer<Unit>, szSqlStr: CPointer<UInt16>, TextLength: Int32): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLExecDirectW == "on"]
+public unsafe func Windows_SQLExecDirectW(hstmt: CPointer<Unit>, szSqlStr: CPointer<UInt16>, TextLength: Int32): Int16 {
+    return SQLExecDirectW(hstmt, szSqlStr, TextLength)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLExecute == "on"]
+foreign {
+    func SQLExecute(StatementHandle: CPointer<Unit>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLExecute == "on"]
+public unsafe func Windows_SQLExecute(StatementHandle: CPointer<Unit>): Int16 {
+    return SQLExecute(StatementHandle)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLExtendedFetch == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: pcrow optional
     // param-hint: rgfRowStatus optional
     func SQLExtendedFetch(hstmt: CPointer<Unit>, fFetchType: UInt16, irow: Int64, pcrow: CPointer<UInt64>, rgfRowStatus: CPointer<UInt16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLExtendedFetch == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SQLExtendedFetch(hstmt: CPointer<Unit>, fFetchType: UInt16, irow: Int64, pcrow: CPointer<UInt64>, rgfRowStatus: CPointer<UInt16>): Int16 {
+    return SQLExtendedFetch(hstmt, fFetchType, irow, pcrow, rgfRowStatus)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLFetch == "on"]
+foreign {
+    func SQLFetch(StatementHandle: CPointer<Unit>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLFetch == "on"]
+public unsafe func Windows_SQLFetch(StatementHandle: CPointer<Unit>): Int16 {
+    return SQLFetch(StatementHandle)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLFetchScroll == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func SQLFetchScroll(StatementHandle: CPointer<Unit>, FetchOrientation: Int16, FetchOffset: Int64): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLFetchScroll == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SQLFetchScroll(StatementHandle: CPointer<Unit>, FetchOrientation: Int16, FetchOffset: Int64): Int16 {
+    return SQLFetchScroll(StatementHandle, FetchOrientation, FetchOffset)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLForeignKeys == "on"]
+foreign {
+    // param-hint: szPkCatalogName len=param[2] optional
+    // param-hint: szPkSchemaName len=param[4] optional
+    // param-hint: szPkTableName len=param[6] optional
+    // param-hint: szFkCatalogName len=param[8] optional
+    // param-hint: szFkSchemaName len=param[10] optional
+    // param-hint: szFkTableName len=param[12] optional
+    func SQLForeignKeys(hstmt: CPointer<Unit>, szPkCatalogName: CPointer<UInt8>, cchPkCatalogName: Int16, szPkSchemaName: CPointer<UInt8>, cchPkSchemaName: Int16, szPkTableName: CPointer<UInt8>, cchPkTableName: Int16, szFkCatalogName: CPointer<UInt8>, cchFkCatalogName: Int16, szFkSchemaName: CPointer<UInt8>, cchFkSchemaName: Int16, szFkTableName: CPointer<UInt8>, cchFkTableName: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLForeignKeys == "on"]
+public unsafe func Windows_SQLForeignKeys(hstmt: CPointer<Unit>, szPkCatalogName: CPointer<UInt8>, cchPkCatalogName: Int16, szPkSchemaName: CPointer<UInt8>, cchPkSchemaName: Int16, szPkTableName: CPointer<UInt8>, cchPkTableName: Int16, szFkCatalogName: CPointer<UInt8>, cchFkCatalogName: Int16, szFkSchemaName: CPointer<UInt8>, cchFkSchemaName: Int16, szFkTableName: CPointer<UInt8>, cchFkTableName: Int16): Int16 {
+    return SQLForeignKeys(hstmt, szPkCatalogName, cchPkCatalogName, szPkSchemaName, cchPkSchemaName, szPkTableName, cchPkTableName, szFkCatalogName, cchFkCatalogName, szFkSchemaName, cchFkSchemaName, szFkTableName, cchFkTableName)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLForeignKeysA == "on"]
+foreign {
+    // param-hint: szPkCatalogName len=param[2] optional
+    // param-hint: szPkSchemaName len=param[4] optional
+    // param-hint: szPkTableName len=param[6] optional
+    // param-hint: szFkCatalogName len=param[8] optional
+    // param-hint: szFkSchemaName len=param[10] optional
+    // param-hint: szFkTableName len=param[12] optional
+    func SQLForeignKeysA(hstmt: CPointer<Unit>, szPkCatalogName: CPointer<UInt8>, cbPkCatalogName: Int16, szPkSchemaName: CPointer<UInt8>, cbPkSchemaName: Int16, szPkTableName: CPointer<UInt8>, cbPkTableName: Int16, szFkCatalogName: CPointer<UInt8>, cbFkCatalogName: Int16, szFkSchemaName: CPointer<UInt8>, cbFkSchemaName: Int16, szFkTableName: CPointer<UInt8>, cbFkTableName: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLForeignKeysA == "on"]
+public unsafe func Windows_SQLForeignKeysA(hstmt: CPointer<Unit>, szPkCatalogName: CPointer<UInt8>, cbPkCatalogName: Int16, szPkSchemaName: CPointer<UInt8>, cbPkSchemaName: Int16, szPkTableName: CPointer<UInt8>, cbPkTableName: Int16, szFkCatalogName: CPointer<UInt8>, cbFkCatalogName: Int16, szFkSchemaName: CPointer<UInt8>, cbFkSchemaName: Int16, szFkTableName: CPointer<UInt8>, cbFkTableName: Int16): Int16 {
+    return SQLForeignKeysA(hstmt, szPkCatalogName, cbPkCatalogName, szPkSchemaName, cbPkSchemaName, szPkTableName, cbPkTableName, szFkCatalogName, cbFkCatalogName, szFkSchemaName, cbFkSchemaName, szFkTableName, cbFkTableName)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLForeignKeysW == "on"]
+foreign {
+    // param-hint: szPkCatalogName len=param[2] optional
+    // param-hint: szPkSchemaName len=param[4] optional
+    // param-hint: szPkTableName len=param[6] optional
+    // param-hint: szFkCatalogName len=param[8] optional
+    // param-hint: szFkSchemaName len=param[10] optional
+    // param-hint: szFkTableName len=param[12] optional
+    func SQLForeignKeysW(hstmt: CPointer<Unit>, szPkCatalogName: CPointer<UInt16>, cchPkCatalogName: Int16, szPkSchemaName: CPointer<UInt16>, cchPkSchemaName: Int16, szPkTableName: CPointer<UInt16>, cchPkTableName: Int16, szFkCatalogName: CPointer<UInt16>, cchFkCatalogName: Int16, szFkSchemaName: CPointer<UInt16>, cchFkSchemaName: Int16, szFkTableName: CPointer<UInt16>, cchFkTableName: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLForeignKeysW == "on"]
+public unsafe func Windows_SQLForeignKeysW(hstmt: CPointer<Unit>, szPkCatalogName: CPointer<UInt16>, cchPkCatalogName: Int16, szPkSchemaName: CPointer<UInt16>, cchPkSchemaName: Int16, szPkTableName: CPointer<UInt16>, cchPkTableName: Int16, szFkCatalogName: CPointer<UInt16>, cchFkCatalogName: Int16, szFkSchemaName: CPointer<UInt16>, cchFkSchemaName: Int16, szFkTableName: CPointer<UInt16>, cchFkTableName: Int16): Int16 {
+    return SQLForeignKeysW(hstmt, szPkCatalogName, cchPkCatalogName, szPkSchemaName, cchPkSchemaName, szPkTableName, cchPkTableName, szFkCatalogName, cchFkCatalogName, szFkSchemaName, cchFkSchemaName, szFkTableName, cchFkTableName)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLFreeConnect == "on"]
+foreign {
+    func SQLFreeConnect(ConnectionHandle: CPointer<Unit>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLFreeConnect == "on"]
+public unsafe func Windows_SQLFreeConnect(ConnectionHandle: CPointer<Unit>): Int16 {
+    return SQLFreeConnect(ConnectionHandle)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLFreeEnv == "on"]
+foreign {
+    func SQLFreeEnv(EnvironmentHandle: CPointer<Unit>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLFreeEnv == "on"]
+public unsafe func Windows_SQLFreeEnv(EnvironmentHandle: CPointer<Unit>): Int16 {
+    return SQLFreeEnv(EnvironmentHandle)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLFreeHandle == "on"]
+foreign {
+    func SQLFreeHandle(HandleType: Int16, Handle: CPointer<Unit>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLFreeHandle == "on"]
+public unsafe func Windows_SQLFreeHandle(HandleType: Int16, Handle: CPointer<Unit>): Int16 {
+    return SQLFreeHandle(HandleType, Handle)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLFreeStmt == "on"]
+foreign {
+    func SQLFreeStmt(StatementHandle: CPointer<Unit>, Option: UInt16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLFreeStmt == "on"]
+public unsafe func Windows_SQLFreeStmt(StatementHandle: CPointer<Unit>, Option: UInt16): Int16 {
+    return SQLFreeStmt(StatementHandle, Option)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetConnectAttr == "on"]
+foreign {
+    // param-hint: Value optional
+    // param-hint: StringLengthPtr optional
+    func SQLGetConnectAttr(ConnectionHandle: CPointer<Unit>, Attribute: Int32, Value: CPointer<Unit>, BufferLength: Int32, StringLengthPtr: CPointer<Int32>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetConnectAttr == "on"]
+public unsafe func Windows_SQLGetConnectAttr(ConnectionHandle: CPointer<Unit>, Attribute: Int32, Value: CPointer<Unit>, BufferLength: Int32, StringLengthPtr: CPointer<Int32>): Int16 {
+    return SQLGetConnectAttr(ConnectionHandle, Attribute, Value, BufferLength, StringLengthPtr)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetConnectAttrA == "on"]
+foreign {
+    // param-hint: rgbValue optional
+    // param-hint: pcbValue optional
+    func SQLGetConnectAttrA(hdbc: CPointer<Unit>, fAttribute: Int32, rgbValue: CPointer<Unit>, cbValueMax: Int32, pcbValue: CPointer<Int32>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetConnectAttrA == "on"]
+public unsafe func Windows_SQLGetConnectAttrA(hdbc: CPointer<Unit>, fAttribute: Int32, rgbValue: CPointer<Unit>, cbValueMax: Int32, pcbValue: CPointer<Int32>): Int16 {
+    return SQLGetConnectAttrA(hdbc, fAttribute, rgbValue, cbValueMax, pcbValue)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetConnectAttrW == "on"]
+foreign {
+    // param-hint: rgbValue optional
+    // param-hint: pcbValue optional
+    func SQLGetConnectAttrW(hdbc: CPointer<Unit>, fAttribute: Int32, rgbValue: CPointer<Unit>, cbValueMax: Int32, pcbValue: CPointer<Int32>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetConnectAttrW == "on"]
+public unsafe func Windows_SQLGetConnectAttrW(hdbc: CPointer<Unit>, fAttribute: Int32, rgbValue: CPointer<Unit>, cbValueMax: Int32, pcbValue: CPointer<Int32>): Int16 {
+    return SQLGetConnectAttrW(hdbc, fAttribute, rgbValue, cbValueMax, pcbValue)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetConnectOption == "on"]
+foreign {
+    func SQLGetConnectOption(ConnectionHandle: CPointer<Unit>, Option: UInt16, Value: CPointer<Unit>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetConnectOption == "on"]
+public unsafe func Windows_SQLGetConnectOption(ConnectionHandle: CPointer<Unit>, Option: UInt16, Value: CPointer<Unit>): Int16 {
+    return SQLGetConnectOption(ConnectionHandle, Option, Value)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetConnectOptionA == "on"]
+foreign {
+    func SQLGetConnectOptionA(hdbc: CPointer<Unit>, fOption: UInt16, pvParam: CPointer<Unit>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetConnectOptionA == "on"]
+public unsafe func Windows_SQLGetConnectOptionA(hdbc: CPointer<Unit>, fOption: UInt16, pvParam: CPointer<Unit>): Int16 {
+    return SQLGetConnectOptionA(hdbc, fOption, pvParam)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetConnectOptionW == "on"]
+foreign {
+    func SQLGetConnectOptionW(hdbc: CPointer<Unit>, fOption: UInt16, pvParam: CPointer<Unit>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetConnectOptionW == "on"]
+public unsafe func Windows_SQLGetConnectOptionW(hdbc: CPointer<Unit>, fOption: UInt16, pvParam: CPointer<Unit>): Int16 {
+    return SQLGetConnectOptionW(hdbc, fOption, pvParam)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetCursorName == "on"]
+foreign {
+    // param-hint: CursorName len=param[2] optional
+    // param-hint: NameLengthPtr optional
+    func SQLGetCursorName(StatementHandle: CPointer<Unit>, CursorName: CPointer<UInt8>, BufferLength: Int16, NameLengthPtr: CPointer<Int16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetCursorName == "on"]
+public unsafe func Windows_SQLGetCursorName(StatementHandle: CPointer<Unit>, CursorName: CPointer<UInt8>, BufferLength: Int16, NameLengthPtr: CPointer<Int16>): Int16 {
+    return SQLGetCursorName(StatementHandle, CursorName, BufferLength, NameLengthPtr)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetCursorNameA == "on"]
+foreign {
+    // param-hint: szCursor len=param[2] optional
+    // param-hint: pcbCursor optional
+    func SQLGetCursorNameA(hstmt: CPointer<Unit>, szCursor: CPointer<UInt8>, cbCursorMax: Int16, pcbCursor: CPointer<Int16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetCursorNameA == "on"]
+public unsafe func Windows_SQLGetCursorNameA(hstmt: CPointer<Unit>, szCursor: CPointer<UInt8>, cbCursorMax: Int16, pcbCursor: CPointer<Int16>): Int16 {
+    return SQLGetCursorNameA(hstmt, szCursor, cbCursorMax, pcbCursor)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetCursorNameW == "on"]
+foreign {
+    // param-hint: szCursor len=param[2] optional
+    // param-hint: pcchCursor optional
+    func SQLGetCursorNameW(hstmt: CPointer<Unit>, szCursor: CPointer<UInt16>, cchCursorMax: Int16, pcchCursor: CPointer<Int16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetCursorNameW == "on"]
+public unsafe func Windows_SQLGetCursorNameW(hstmt: CPointer<Unit>, szCursor: CPointer<UInt16>, cchCursorMax: Int16, pcchCursor: CPointer<Int16>): Int16 {
+    return SQLGetCursorNameW(hstmt, szCursor, cchCursorMax, pcchCursor)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetData == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: TargetValue optional
     // param-hint: StrLen_or_IndPtr optional
     func SQLGetData(StatementHandle: CPointer<Unit>, ColumnNumber: UInt16, TargetType: Int16, TargetValue: CPointer<Unit>, BufferLength: Int64, StrLen_or_IndPtr: CPointer<Int64>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetData == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SQLGetData(StatementHandle: CPointer<Unit>, ColumnNumber: UInt16, TargetType: Int16, TargetValue: CPointer<Unit>, BufferLength: Int64, StrLen_or_IndPtr: CPointer<Int64>): Int16 {
+    return SQLGetData(StatementHandle, ColumnNumber, TargetType, TargetValue, BufferLength, StrLen_or_IndPtr)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDescField == "on"]
+foreign {
+    // param-hint: Value optional
+    // param-hint: StringLength optional
+    func SQLGetDescField(DescriptorHandle: CPointer<Unit>, RecNumber: Int16, FieldIdentifier: Int16, Value: CPointer<Unit>, BufferLength: Int32, StringLength: CPointer<Int32>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDescField == "on"]
+public unsafe func Windows_SQLGetDescField(DescriptorHandle: CPointer<Unit>, RecNumber: Int16, FieldIdentifier: Int16, Value: CPointer<Unit>, BufferLength: Int32, StringLength: CPointer<Int32>): Int16 {
+    return SQLGetDescField(DescriptorHandle, RecNumber, FieldIdentifier, Value, BufferLength, StringLength)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDescFieldA == "on"]
+foreign {
+    // param-hint: rgbValue optional
+    // param-hint: StringLength optional
+    func SQLGetDescFieldA(hdesc: CPointer<Unit>, iRecord: Int16, iField: Int16, rgbValue: CPointer<Unit>, cbBufferLength: Int32, StringLength: CPointer<Int32>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDescFieldA == "on"]
+public unsafe func Windows_SQLGetDescFieldA(hdesc: CPointer<Unit>, iRecord: Int16, iField: Int16, rgbValue: CPointer<Unit>, cbBufferLength: Int32, StringLength: CPointer<Int32>): Int16 {
+    return SQLGetDescFieldA(hdesc, iRecord, iField, rgbValue, cbBufferLength, StringLength)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDescFieldW == "on"]
+foreign {
+    // param-hint: rgbValue optional
+    // param-hint: StringLength optional
+    func SQLGetDescFieldW(hdesc: CPointer<Unit>, iRecord: Int16, iField: Int16, rgbValue: CPointer<Unit>, cbBufferLength: Int32, StringLength: CPointer<Int32>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDescFieldW == "on"]
+public unsafe func Windows_SQLGetDescFieldW(hdesc: CPointer<Unit>, iRecord: Int16, iField: Int16, rgbValue: CPointer<Unit>, cbBufferLength: Int32, StringLength: CPointer<Int32>): Int16 {
+    return SQLGetDescFieldW(hdesc, iRecord, iField, rgbValue, cbBufferLength, StringLength)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDescRec == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: Name len=param[3] optional
     // param-hint: StringLengthPtr optional
     // param-hint: TypePtr optional
@@ -536,6 +1072,15 @@ foreign {
     // param-hint: ScalePtr optional
     // param-hint: NullablePtr optional
     func SQLGetDescRec(DescriptorHandle: CPointer<Unit>, RecNumber: Int16, Name: CPointer<UInt8>, BufferLength: Int16, StringLengthPtr: CPointer<Int16>, TypePtr: CPointer<Int16>, SubTypePtr: CPointer<Int16>, LengthPtr: CPointer<Int64>, PrecisionPtr: CPointer<Int16>, ScalePtr: CPointer<Int16>, NullablePtr: CPointer<Int16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDescRec == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SQLGetDescRec(DescriptorHandle: CPointer<Unit>, RecNumber: Int16, Name: CPointer<UInt8>, BufferLength: Int16, StringLengthPtr: CPointer<Int16>, TypePtr: CPointer<Int16>, SubTypePtr: CPointer<Int16>, LengthPtr: CPointer<Int64>, PrecisionPtr: CPointer<Int16>, ScalePtr: CPointer<Int16>, NullablePtr: CPointer<Int16>): Int16 {
+    return SQLGetDescRec(DescriptorHandle, RecNumber, Name, BufferLength, StringLengthPtr, TypePtr, SubTypePtr, LengthPtr, PrecisionPtr, ScalePtr, NullablePtr)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDescRecA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: szName len=param[3] optional
     // param-hint: pcbName optional
     // param-hint: pfType optional
@@ -545,6 +1090,15 @@ foreign {
     // param-hint: pScale optional
     // param-hint: pNullable optional
     func SQLGetDescRecA(hdesc: CPointer<Unit>, iRecord: Int16, szName: CPointer<UInt8>, cbNameMax: Int16, pcbName: CPointer<Int16>, pfType: CPointer<Int16>, pfSubType: CPointer<Int16>, pLength: CPointer<Int64>, pPrecision: CPointer<Int16>, pScale: CPointer<Int16>, pNullable: CPointer<Int16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDescRecA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SQLGetDescRecA(hdesc: CPointer<Unit>, iRecord: Int16, szName: CPointer<UInt8>, cbNameMax: Int16, pcbName: CPointer<Int16>, pfType: CPointer<Int16>, pfSubType: CPointer<Int16>, pLength: CPointer<Int64>, pPrecision: CPointer<Int16>, pScale: CPointer<Int16>, pNullable: CPointer<Int16>): Int16 {
+    return SQLGetDescRecA(hdesc, iRecord, szName, cbNameMax, pcbName, pfType, pfSubType, pLength, pPrecision, pScale, pNullable)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDescRecW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: szName len=param[3] optional
     // param-hint: pcchName optional
     // param-hint: pfType optional
@@ -554,51 +1108,1114 @@ foreign {
     // param-hint: pScale optional
     // param-hint: pNullable optional
     func SQLGetDescRecW(hdesc: CPointer<Unit>, iRecord: Int16, szName: CPointer<UInt16>, cchNameMax: Int16, pcchName: CPointer<Int16>, pfType: CPointer<Int16>, pfSubType: CPointer<Int16>, pLength: CPointer<Int64>, pPrecision: CPointer<Int16>, pScale: CPointer<Int16>, pNullable: CPointer<Int16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDescRecW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SQLGetDescRecW(hdesc: CPointer<Unit>, iRecord: Int16, szName: CPointer<UInt16>, cchNameMax: Int16, pcchName: CPointer<Int16>, pfType: CPointer<Int16>, pfSubType: CPointer<Int16>, pLength: CPointer<Int64>, pPrecision: CPointer<Int16>, pScale: CPointer<Int16>, pNullable: CPointer<Int16>): Int16 {
+    return SQLGetDescRecW(hdesc, iRecord, szName, cchNameMax, pcchName, pfType, pfSubType, pLength, pPrecision, pScale, pNullable)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDiagField == "on"]
+foreign {
+    // param-hint: DiagInfo optional
+    // param-hint: StringLength optional
+    func SQLGetDiagField(HandleType: Int16, Handle: CPointer<Unit>, RecNumber: Int16, DiagIdentifier: Int16, DiagInfo: CPointer<Unit>, BufferLength: Int16, StringLength: CPointer<Int16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDiagField == "on"]
+public unsafe func Windows_SQLGetDiagField(HandleType: Int16, Handle: CPointer<Unit>, RecNumber: Int16, DiagIdentifier: Int16, DiagInfo: CPointer<Unit>, BufferLength: Int16, StringLength: CPointer<Int16>): Int16 {
+    return SQLGetDiagField(HandleType, Handle, RecNumber, DiagIdentifier, DiagInfo, BufferLength, StringLength)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDiagFieldA == "on"]
+foreign {
+    // param-hint: rgbDiagInfo optional
+    // param-hint: pcbDiagInfo optional
+    func SQLGetDiagFieldA(fHandleType: Int16, handle: CPointer<Unit>, iRecord: Int16, fDiagField: Int16, rgbDiagInfo: CPointer<Unit>, cbDiagInfoMax: Int16, pcbDiagInfo: CPointer<Int16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDiagFieldA == "on"]
+public unsafe func Windows_SQLGetDiagFieldA(fHandleType: Int16, handle: CPointer<Unit>, iRecord: Int16, fDiagField: Int16, rgbDiagInfo: CPointer<Unit>, cbDiagInfoMax: Int16, pcbDiagInfo: CPointer<Int16>): Int16 {
+    return SQLGetDiagFieldA(fHandleType, handle, iRecord, fDiagField, rgbDiagInfo, cbDiagInfoMax, pcbDiagInfo)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDiagFieldW == "on"]
+foreign {
+    // param-hint: rgbDiagInfo optional
+    // param-hint: pcbStringLength optional
+    func SQLGetDiagFieldW(fHandleType: Int16, handle: CPointer<Unit>, iRecord: Int16, fDiagField: Int16, rgbDiagInfo: CPointer<Unit>, cbBufferLength: Int16, pcbStringLength: CPointer<Int16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDiagFieldW == "on"]
+public unsafe func Windows_SQLGetDiagFieldW(fHandleType: Int16, handle: CPointer<Unit>, iRecord: Int16, fDiagField: Int16, rgbDiagInfo: CPointer<Unit>, cbBufferLength: Int16, pcbStringLength: CPointer<Int16>): Int16 {
+    return SQLGetDiagFieldW(fHandleType, handle, iRecord, fDiagField, rgbDiagInfo, cbBufferLength, pcbStringLength)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDiagRec == "on"]
+foreign {
+    // param-hint: Sqlstate fixed=6 optional
+    // param-hint: MessageText len=param[6] optional
+    // param-hint: TextLength optional
+    func SQLGetDiagRec(HandleType: Int16, Handle: CPointer<Unit>, RecNumber: Int16, Sqlstate: CPointer<UInt8>, NativeError: CPointer<Int32>, MessageText: CPointer<UInt8>, BufferLength: Int16, TextLength: CPointer<Int16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDiagRec == "on"]
+public unsafe func Windows_SQLGetDiagRec(HandleType: Int16, Handle: CPointer<Unit>, RecNumber: Int16, Sqlstate: CPointer<UInt8>, NativeError: CPointer<Int32>, MessageText: CPointer<UInt8>, BufferLength: Int16, TextLength: CPointer<Int16>): Int16 {
+    return SQLGetDiagRec(HandleType, Handle, RecNumber, Sqlstate, NativeError, MessageText, BufferLength, TextLength)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDiagRecA == "on"]
+foreign {
+    // param-hint: szSqlState fixed=6 optional
+    // param-hint: szErrorMsg len=param[6] optional
+    func SQLGetDiagRecA(fHandleType: Int16, handle: CPointer<Unit>, iRecord: Int16, szSqlState: CPointer<UInt8>, pfNativeError: CPointer<Int32>, szErrorMsg: CPointer<UInt8>, cbErrorMsgMax: Int16, pcbErrorMsg: CPointer<Int16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDiagRecA == "on"]
+public unsafe func Windows_SQLGetDiagRecA(fHandleType: Int16, handle: CPointer<Unit>, iRecord: Int16, szSqlState: CPointer<UInt8>, pfNativeError: CPointer<Int32>, szErrorMsg: CPointer<UInt8>, cbErrorMsgMax: Int16, pcbErrorMsg: CPointer<Int16>): Int16 {
+    return SQLGetDiagRecA(fHandleType, handle, iRecord, szSqlState, pfNativeError, szErrorMsg, cbErrorMsgMax, pcbErrorMsg)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDiagRecW == "on"]
+foreign {
+    // param-hint: szSqlState fixed=6 optional
+    // param-hint: szErrorMsg len=param[6] optional
+    func SQLGetDiagRecW(fHandleType: Int16, handle: CPointer<Unit>, iRecord: Int16, szSqlState: CPointer<UInt16>, pfNativeError: CPointer<Int32>, szErrorMsg: CPointer<UInt16>, cchErrorMsgMax: Int16, pcchErrorMsg: CPointer<Int16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetDiagRecW == "on"]
+public unsafe func Windows_SQLGetDiagRecW(fHandleType: Int16, handle: CPointer<Unit>, iRecord: Int16, szSqlState: CPointer<UInt16>, pfNativeError: CPointer<Int32>, szErrorMsg: CPointer<UInt16>, cchErrorMsgMax: Int16, pcchErrorMsg: CPointer<Int16>): Int16 {
+    return SQLGetDiagRecW(fHandleType, handle, iRecord, szSqlState, pfNativeError, szErrorMsg, cchErrorMsgMax, pcchErrorMsg)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetEnvAttr == "on"]
+foreign {
+    // param-hint: StringLength optional
+    func SQLGetEnvAttr(EnvironmentHandle: CPointer<Unit>, Attribute: Int32, Value: CPointer<Unit>, BufferLength: Int32, StringLength: CPointer<Int32>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetEnvAttr == "on"]
+public unsafe func Windows_SQLGetEnvAttr(EnvironmentHandle: CPointer<Unit>, Attribute: Int32, Value: CPointer<Unit>, BufferLength: Int32, StringLength: CPointer<Int32>): Int16 {
+    return SQLGetEnvAttr(EnvironmentHandle, Attribute, Value, BufferLength, StringLength)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetFunctions == "on"]
+foreign {
+    // param-hint: Supported optional
+    func SQLGetFunctions(ConnectionHandle: CPointer<Unit>, FunctionId: UInt16, Supported: CPointer<UInt16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetFunctions == "on"]
+public unsafe func Windows_SQLGetFunctions(ConnectionHandle: CPointer<Unit>, FunctionId: UInt16, Supported: CPointer<UInt16>): Int16 {
+    return SQLGetFunctions(ConnectionHandle, FunctionId, Supported)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetInfo == "on"]
+foreign {
+    // param-hint: InfoValue bytes=param[3] optional
+    // param-hint: StringLengthPtr optional
+    func SQLGetInfo(ConnectionHandle: CPointer<Unit>, InfoType: UInt16, InfoValue: CPointer<Unit>, BufferLength: Int16, StringLengthPtr: CPointer<Int16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetInfo == "on"]
+public unsafe func Windows_SQLGetInfo(ConnectionHandle: CPointer<Unit>, InfoType: UInt16, InfoValue: CPointer<Unit>, BufferLength: Int16, StringLengthPtr: CPointer<Int16>): Int16 {
+    return SQLGetInfo(ConnectionHandle, InfoType, InfoValue, BufferLength, StringLengthPtr)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetInfoA == "on"]
+foreign {
+    // param-hint: rgbInfoValue bytes=param[3] optional
+    // param-hint: pcbInfoValue optional
+    func SQLGetInfoA(hdbc: CPointer<Unit>, fInfoType: UInt16, rgbInfoValue: CPointer<Unit>, cbInfoValueMax: Int16, pcbInfoValue: CPointer<Int16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetInfoA == "on"]
+public unsafe func Windows_SQLGetInfoA(hdbc: CPointer<Unit>, fInfoType: UInt16, rgbInfoValue: CPointer<Unit>, cbInfoValueMax: Int16, pcbInfoValue: CPointer<Int16>): Int16 {
+    return SQLGetInfoA(hdbc, fInfoType, rgbInfoValue, cbInfoValueMax, pcbInfoValue)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetInfoW == "on"]
+foreign {
+    // param-hint: rgbInfoValue bytes=param[3] optional
+    // param-hint: pcbInfoValue optional
+    func SQLGetInfoW(hdbc: CPointer<Unit>, fInfoType: UInt16, rgbInfoValue: CPointer<Unit>, cbInfoValueMax: Int16, pcbInfoValue: CPointer<Int16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetInfoW == "on"]
+public unsafe func Windows_SQLGetInfoW(hdbc: CPointer<Unit>, fInfoType: UInt16, rgbInfoValue: CPointer<Unit>, cbInfoValueMax: Int16, pcbInfoValue: CPointer<Int16>): Int16 {
+    return SQLGetInfoW(hdbc, fInfoType, rgbInfoValue, cbInfoValueMax, pcbInfoValue)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetStmtAttr == "on"]
+foreign {
+    // param-hint: Value optional
+    // param-hint: StringLength optional
+    func SQLGetStmtAttr(StatementHandle: CPointer<Unit>, Attribute: Int32, Value: CPointer<Unit>, BufferLength: Int32, StringLength: CPointer<Int32>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetStmtAttr == "on"]
+public unsafe func Windows_SQLGetStmtAttr(StatementHandle: CPointer<Unit>, Attribute: Int32, Value: CPointer<Unit>, BufferLength: Int32, StringLength: CPointer<Int32>): Int16 {
+    return SQLGetStmtAttr(StatementHandle, Attribute, Value, BufferLength, StringLength)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetStmtAttrA == "on"]
+foreign {
+    func SQLGetStmtAttrA(hstmt: CPointer<Unit>, fAttribute: Int32, rgbValue: CPointer<Unit>, cbValueMax: Int32, pcbValue: CPointer<Int32>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetStmtAttrA == "on"]
+public unsafe func Windows_SQLGetStmtAttrA(hstmt: CPointer<Unit>, fAttribute: Int32, rgbValue: CPointer<Unit>, cbValueMax: Int32, pcbValue: CPointer<Int32>): Int16 {
+    return SQLGetStmtAttrA(hstmt, fAttribute, rgbValue, cbValueMax, pcbValue)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetStmtAttrW == "on"]
+foreign {
+    func SQLGetStmtAttrW(hstmt: CPointer<Unit>, fAttribute: Int32, rgbValue: CPointer<Unit>, cbValueMax: Int32, pcbValue: CPointer<Int32>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetStmtAttrW == "on"]
+public unsafe func Windows_SQLGetStmtAttrW(hstmt: CPointer<Unit>, fAttribute: Int32, rgbValue: CPointer<Unit>, cbValueMax: Int32, pcbValue: CPointer<Int32>): Int16 {
+    return SQLGetStmtAttrW(hstmt, fAttribute, rgbValue, cbValueMax, pcbValue)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetStmtOption == "on"]
+foreign {
+    func SQLGetStmtOption(StatementHandle: CPointer<Unit>, Option: UInt16, Value: CPointer<Unit>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetStmtOption == "on"]
+public unsafe func Windows_SQLGetStmtOption(StatementHandle: CPointer<Unit>, Option: UInt16, Value: CPointer<Unit>): Int16 {
+    return SQLGetStmtOption(StatementHandle, Option, Value)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetTypeInfo == "on"]
+foreign {
+    func SQLGetTypeInfo(StatementHandle: CPointer<Unit>, DataType: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetTypeInfo == "on"]
+public unsafe func Windows_SQLGetTypeInfo(StatementHandle: CPointer<Unit>, DataType: Int16): Int16 {
+    return SQLGetTypeInfo(StatementHandle, DataType)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetTypeInfoA == "on"]
+foreign {
+    func SQLGetTypeInfoA(StatementHandle: CPointer<Unit>, DataType: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetTypeInfoA == "on"]
+public unsafe func Windows_SQLGetTypeInfoA(StatementHandle: CPointer<Unit>, DataType: Int16): Int16 {
+    return SQLGetTypeInfoA(StatementHandle, DataType)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetTypeInfoW == "on"]
+foreign {
+    func SQLGetTypeInfoW(StatementHandle: CPointer<Unit>, DataType: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLGetTypeInfoW == "on"]
+public unsafe func Windows_SQLGetTypeInfoW(StatementHandle: CPointer<Unit>, DataType: Int16): Int16 {
+    return SQLGetTypeInfoW(StatementHandle, DataType)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLMoreResults == "on"]
+foreign {
+    func SQLMoreResults(hstmt: CPointer<Unit>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLMoreResults == "on"]
+public unsafe func Windows_SQLMoreResults(hstmt: CPointer<Unit>): Int16 {
+    return SQLMoreResults(hstmt)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLNativeSql == "on"]
+foreign {
+    // param-hint: szSqlStrIn len=param[2]
+    // param-hint: szSqlStr len=param[4] optional
+    func SQLNativeSql(hdbc: CPointer<Unit>, szSqlStrIn: CPointer<UInt8>, cchSqlStrIn: Int32, szSqlStr: CPointer<UInt8>, cchSqlStrMax: Int32, pcbSqlStr: CPointer<Int32>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLNativeSql == "on"]
+public unsafe func Windows_SQLNativeSql(hdbc: CPointer<Unit>, szSqlStrIn: CPointer<UInt8>, cchSqlStrIn: Int32, szSqlStr: CPointer<UInt8>, cchSqlStrMax: Int32, pcbSqlStr: CPointer<Int32>): Int16 {
+    return SQLNativeSql(hdbc, szSqlStrIn, cchSqlStrIn, szSqlStr, cchSqlStrMax, pcbSqlStr)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLNativeSqlA == "on"]
+foreign {
+    // param-hint: szSqlStrIn len=param[2]
+    // param-hint: szSqlStr len=param[4] optional
+    func SQLNativeSqlA(hdbc: CPointer<Unit>, szSqlStrIn: CPointer<UInt8>, cbSqlStrIn: Int32, szSqlStr: CPointer<UInt8>, cbSqlStrMax: Int32, pcbSqlStr: CPointer<Int32>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLNativeSqlA == "on"]
+public unsafe func Windows_SQLNativeSqlA(hdbc: CPointer<Unit>, szSqlStrIn: CPointer<UInt8>, cbSqlStrIn: Int32, szSqlStr: CPointer<UInt8>, cbSqlStrMax: Int32, pcbSqlStr: CPointer<Int32>): Int16 {
+    return SQLNativeSqlA(hdbc, szSqlStrIn, cbSqlStrIn, szSqlStr, cbSqlStrMax, pcbSqlStr)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLNativeSqlW == "on"]
+foreign {
+    // param-hint: szSqlStrIn len=param[2]
+    // param-hint: szSqlStr len=param[4] optional
+    func SQLNativeSqlW(hdbc: CPointer<Unit>, szSqlStrIn: CPointer<UInt16>, cchSqlStrIn: Int32, szSqlStr: CPointer<UInt16>, cchSqlStrMax: Int32, pcchSqlStr: CPointer<Int32>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLNativeSqlW == "on"]
+public unsafe func Windows_SQLNativeSqlW(hdbc: CPointer<Unit>, szSqlStrIn: CPointer<UInt16>, cchSqlStrIn: Int32, szSqlStr: CPointer<UInt16>, cchSqlStrMax: Int32, pcchSqlStr: CPointer<Int32>): Int16 {
+    return SQLNativeSqlW(hdbc, szSqlStrIn, cchSqlStrIn, szSqlStr, cchSqlStrMax, pcchSqlStr)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLNumParams == "on"]
+foreign {
+    // param-hint: pcpar optional
+    func SQLNumParams(hstmt: CPointer<Unit>, pcpar: CPointer<Int16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLNumParams == "on"]
+public unsafe func Windows_SQLNumParams(hstmt: CPointer<Unit>, pcpar: CPointer<Int16>): Int16 {
+    return SQLNumParams(hstmt, pcpar)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLNumResultCols == "on"]
+foreign {
+    func SQLNumResultCols(StatementHandle: CPointer<Unit>, ColumnCount: CPointer<Int16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLNumResultCols == "on"]
+public unsafe func Windows_SQLNumResultCols(StatementHandle: CPointer<Unit>, ColumnCount: CPointer<Int16>): Int16 {
+    return SQLNumResultCols(StatementHandle, ColumnCount)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLParamData == "on"]
+foreign {
+    // param-hint: Value optional
+    func SQLParamData(StatementHandle: CPointer<Unit>, Value: CPointer<CPointer<Unit>>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLParamData == "on"]
+public unsafe func Windows_SQLParamData(StatementHandle: CPointer<Unit>, Value: CPointer<CPointer<Unit>>): Int16 {
+    return SQLParamData(StatementHandle, Value)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLParamOptions == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func SQLParamOptions(hstmt: CPointer<Unit>, crow: UInt64, pirow: CPointer<UInt64>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLParamOptions == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SQLParamOptions(hstmt: CPointer<Unit>, crow: UInt64, pirow: CPointer<UInt64>): Int16 {
+    return SQLParamOptions(hstmt, crow, pirow)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLPrepare == "on"]
+foreign {
+    // param-hint: StatementText len=param[2]
+    func SQLPrepare(StatementHandle: CPointer<Unit>, StatementText: CPointer<UInt8>, TextLength: Int32): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLPrepare == "on"]
+public unsafe func Windows_SQLPrepare(StatementHandle: CPointer<Unit>, StatementText: CPointer<UInt8>, TextLength: Int32): Int16 {
+    return SQLPrepare(StatementHandle, StatementText, TextLength)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLPrepareA == "on"]
+foreign {
+    // param-hint: szSqlStr len=param[2]
+    func SQLPrepareA(hstmt: CPointer<Unit>, szSqlStr: CPointer<UInt8>, cbSqlStr: Int32): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLPrepareA == "on"]
+public unsafe func Windows_SQLPrepareA(hstmt: CPointer<Unit>, szSqlStr: CPointer<UInt8>, cbSqlStr: Int32): Int16 {
+    return SQLPrepareA(hstmt, szSqlStr, cbSqlStr)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLPrepareW == "on"]
+foreign {
+    // param-hint: szSqlStr len=param[2]
+    func SQLPrepareW(hstmt: CPointer<Unit>, szSqlStr: CPointer<UInt16>, cchSqlStr: Int32): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLPrepareW == "on"]
+public unsafe func Windows_SQLPrepareW(hstmt: CPointer<Unit>, szSqlStr: CPointer<UInt16>, cchSqlStr: Int32): Int16 {
+    return SQLPrepareW(hstmt, szSqlStr, cchSqlStr)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLPrimaryKeys == "on"]
+foreign {
+    // param-hint: szCatalogName len=param[2] optional
+    // param-hint: szSchemaName len=param[4] optional
+    // param-hint: szTableName len=param[6] optional
+    func SQLPrimaryKeys(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cchCatalogName: Int16, szSchemaName: CPointer<UInt8>, cchSchemaName: Int16, szTableName: CPointer<UInt8>, cchTableName: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLPrimaryKeys == "on"]
+public unsafe func Windows_SQLPrimaryKeys(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cchCatalogName: Int16, szSchemaName: CPointer<UInt8>, cchSchemaName: Int16, szTableName: CPointer<UInt8>, cchTableName: Int16): Int16 {
+    return SQLPrimaryKeys(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLPrimaryKeysA == "on"]
+foreign {
+    // param-hint: szCatalogName len=param[2] optional
+    // param-hint: szSchemaName len=param[4] optional
+    // param-hint: szTableName len=param[6] optional
+    func SQLPrimaryKeysA(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cbCatalogName: Int16, szSchemaName: CPointer<UInt8>, cbSchemaName: Int16, szTableName: CPointer<UInt8>, cbTableName: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLPrimaryKeysA == "on"]
+public unsafe func Windows_SQLPrimaryKeysA(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cbCatalogName: Int16, szSchemaName: CPointer<UInt8>, cbSchemaName: Int16, szTableName: CPointer<UInt8>, cbTableName: Int16): Int16 {
+    return SQLPrimaryKeysA(hstmt, szCatalogName, cbCatalogName, szSchemaName, cbSchemaName, szTableName, cbTableName)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLPrimaryKeysW == "on"]
+foreign {
+    // param-hint: szCatalogName len=param[2] optional
+    // param-hint: szSchemaName len=param[4] optional
+    // param-hint: szTableName len=param[6] optional
+    func SQLPrimaryKeysW(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt16>, cchCatalogName: Int16, szSchemaName: CPointer<UInt16>, cchSchemaName: Int16, szTableName: CPointer<UInt16>, cchTableName: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLPrimaryKeysW == "on"]
+public unsafe func Windows_SQLPrimaryKeysW(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt16>, cchCatalogName: Int16, szSchemaName: CPointer<UInt16>, cchSchemaName: Int16, szTableName: CPointer<UInt16>, cchTableName: Int16): Int16 {
+    return SQLPrimaryKeysW(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLProcedureColumns == "on"]
+foreign {
+    // param-hint: szCatalogName len=param[2] optional
+    // param-hint: szSchemaName len=param[4] optional
+    // param-hint: szProcName len=param[6] optional
+    // param-hint: szColumnName len=param[8] optional
+    func SQLProcedureColumns(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cchCatalogName: Int16, szSchemaName: CPointer<UInt8>, cchSchemaName: Int16, szProcName: CPointer<UInt8>, cchProcName: Int16, szColumnName: CPointer<UInt8>, cchColumnName: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLProcedureColumns == "on"]
+public unsafe func Windows_SQLProcedureColumns(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cchCatalogName: Int16, szSchemaName: CPointer<UInt8>, cchSchemaName: Int16, szProcName: CPointer<UInt8>, cchProcName: Int16, szColumnName: CPointer<UInt8>, cchColumnName: Int16): Int16 {
+    return SQLProcedureColumns(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szProcName, cchProcName, szColumnName, cchColumnName)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLProcedureColumnsA == "on"]
+foreign {
+    // param-hint: szCatalogName len=param[2] optional
+    // param-hint: szSchemaName len=param[4] optional
+    // param-hint: szProcName len=param[6] optional
+    // param-hint: szColumnName len=param[8] optional
+    func SQLProcedureColumnsA(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cbCatalogName: Int16, szSchemaName: CPointer<UInt8>, cbSchemaName: Int16, szProcName: CPointer<UInt8>, cbProcName: Int16, szColumnName: CPointer<UInt8>, cbColumnName: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLProcedureColumnsA == "on"]
+public unsafe func Windows_SQLProcedureColumnsA(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cbCatalogName: Int16, szSchemaName: CPointer<UInt8>, cbSchemaName: Int16, szProcName: CPointer<UInt8>, cbProcName: Int16, szColumnName: CPointer<UInt8>, cbColumnName: Int16): Int16 {
+    return SQLProcedureColumnsA(hstmt, szCatalogName, cbCatalogName, szSchemaName, cbSchemaName, szProcName, cbProcName, szColumnName, cbColumnName)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLProcedureColumnsW == "on"]
+foreign {
+    // param-hint: szCatalogName len=param[2] optional
+    // param-hint: szSchemaName len=param[4] optional
+    // param-hint: szProcName len=param[6] optional
+    // param-hint: szColumnName len=param[8] optional
+    func SQLProcedureColumnsW(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt16>, cchCatalogName: Int16, szSchemaName: CPointer<UInt16>, cchSchemaName: Int16, szProcName: CPointer<UInt16>, cchProcName: Int16, szColumnName: CPointer<UInt16>, cchColumnName: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLProcedureColumnsW == "on"]
+public unsafe func Windows_SQLProcedureColumnsW(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt16>, cchCatalogName: Int16, szSchemaName: CPointer<UInt16>, cchSchemaName: Int16, szProcName: CPointer<UInt16>, cchProcName: Int16, szColumnName: CPointer<UInt16>, cchColumnName: Int16): Int16 {
+    return SQLProcedureColumnsW(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szProcName, cchProcName, szColumnName, cchColumnName)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLProcedures == "on"]
+foreign {
+    // param-hint: szCatalogName len=param[2] optional
+    // param-hint: szSchemaName len=param[4] optional
+    // param-hint: szProcName len=param[6] optional
+    func SQLProcedures(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cchCatalogName: Int16, szSchemaName: CPointer<UInt8>, cchSchemaName: Int16, szProcName: CPointer<UInt8>, cchProcName: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLProcedures == "on"]
+public unsafe func Windows_SQLProcedures(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cchCatalogName: Int16, szSchemaName: CPointer<UInt8>, cchSchemaName: Int16, szProcName: CPointer<UInt8>, cchProcName: Int16): Int16 {
+    return SQLProcedures(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szProcName, cchProcName)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLProceduresA == "on"]
+foreign {
+    // param-hint: szCatalogName len=param[2] optional
+    // param-hint: szSchemaName len=param[4] optional
+    // param-hint: szProcName len=param[6] optional
+    func SQLProceduresA(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cbCatalogName: Int16, szSchemaName: CPointer<UInt8>, cbSchemaName: Int16, szProcName: CPointer<UInt8>, cbProcName: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLProceduresA == "on"]
+public unsafe func Windows_SQLProceduresA(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cbCatalogName: Int16, szSchemaName: CPointer<UInt8>, cbSchemaName: Int16, szProcName: CPointer<UInt8>, cbProcName: Int16): Int16 {
+    return SQLProceduresA(hstmt, szCatalogName, cbCatalogName, szSchemaName, cbSchemaName, szProcName, cbProcName)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLProceduresW == "on"]
+foreign {
+    // param-hint: szCatalogName len=param[2] optional
+    // param-hint: szSchemaName len=param[4] optional
+    // param-hint: szProcName len=param[6] optional
+    func SQLProceduresW(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt16>, cchCatalogName: Int16, szSchemaName: CPointer<UInt16>, cchSchemaName: Int16, szProcName: CPointer<UInt16>, cchProcName: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLProceduresW == "on"]
+public unsafe func Windows_SQLProceduresW(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt16>, cchCatalogName: Int16, szSchemaName: CPointer<UInt16>, cchSchemaName: Int16, szProcName: CPointer<UInt16>, cchProcName: Int16): Int16 {
+    return SQLProceduresW(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szProcName, cchProcName)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLPutData == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func SQLPutData(StatementHandle: CPointer<Unit>, Data: CPointer<Unit>, StrLen_or_Ind: Int64): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLPutData == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SQLPutData(StatementHandle: CPointer<Unit>, Data: CPointer<Unit>, StrLen_or_Ind: Int64): Int16 {
+    return SQLPutData(StatementHandle, Data, StrLen_or_Ind)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLRowCount == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func SQLRowCount(StatementHandle: CPointer<Unit>, RowCount: CPointer<Int64>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLRowCount == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SQLRowCount(StatementHandle: CPointer<Unit>, RowCount: CPointer<Int64>): Int16 {
+    return SQLRowCount(StatementHandle, RowCount)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetConnectAttr == "on"]
+foreign {
+    // param-hint: Value bytes=param[3] optional
+    func SQLSetConnectAttr(ConnectionHandle: CPointer<Unit>, Attribute: Int32, Value: CPointer<Unit>, StringLength: Int32): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetConnectAttr == "on"]
+public unsafe func Windows_SQLSetConnectAttr(ConnectionHandle: CPointer<Unit>, Attribute: Int32, Value: CPointer<Unit>, StringLength: Int32): Int16 {
+    return SQLSetConnectAttr(ConnectionHandle, Attribute, Value, StringLength)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetConnectAttrA == "on"]
+foreign {
+    // param-hint: rgbValue bytes=param[3] optional
+    func SQLSetConnectAttrA(hdbc: CPointer<Unit>, fAttribute: Int32, rgbValue: CPointer<Unit>, cbValue: Int32): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetConnectAttrA == "on"]
+public unsafe func Windows_SQLSetConnectAttrA(hdbc: CPointer<Unit>, fAttribute: Int32, rgbValue: CPointer<Unit>, cbValue: Int32): Int16 {
+    return SQLSetConnectAttrA(hdbc, fAttribute, rgbValue, cbValue)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetConnectAttrW == "on"]
+foreign {
+    // param-hint: rgbValue bytes=param[3] optional
+    func SQLSetConnectAttrW(hdbc: CPointer<Unit>, fAttribute: Int32, rgbValue: CPointer<Unit>, cbValue: Int32): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetConnectAttrW == "on"]
+public unsafe func Windows_SQLSetConnectAttrW(hdbc: CPointer<Unit>, fAttribute: Int32, rgbValue: CPointer<Unit>, cbValue: Int32): Int16 {
+    return SQLSetConnectAttrW(hdbc, fAttribute, rgbValue, cbValue)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetConnectOption == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func SQLSetConnectOption(ConnectionHandle: CPointer<Unit>, Option: UInt16, Value: UInt64): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetConnectOption == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SQLSetConnectOption(ConnectionHandle: CPointer<Unit>, Option: UInt16, Value: UInt64): Int16 {
+    return SQLSetConnectOption(ConnectionHandle, Option, Value)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetConnectOptionA == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func SQLSetConnectOptionA(hdbc: CPointer<Unit>, fOption: UInt16, vParam: UInt64): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetConnectOptionA == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SQLSetConnectOptionA(hdbc: CPointer<Unit>, fOption: UInt16, vParam: UInt64): Int16 {
+    return SQLSetConnectOptionA(hdbc, fOption, vParam)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetConnectOptionW == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func SQLSetConnectOptionW(hdbc: CPointer<Unit>, fOption: UInt16, vParam: UInt64): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetConnectOptionW == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SQLSetConnectOptionW(hdbc: CPointer<Unit>, fOption: UInt16, vParam: UInt64): Int16 {
+    return SQLSetConnectOptionW(hdbc, fOption, vParam)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetCursorName == "on"]
+foreign {
+    // param-hint: CursorName len=param[2]
+    func SQLSetCursorName(StatementHandle: CPointer<Unit>, CursorName: CPointer<UInt8>, NameLength: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetCursorName == "on"]
+public unsafe func Windows_SQLSetCursorName(StatementHandle: CPointer<Unit>, CursorName: CPointer<UInt8>, NameLength: Int16): Int16 {
+    return SQLSetCursorName(StatementHandle, CursorName, NameLength)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetCursorNameA == "on"]
+foreign {
+    // param-hint: szCursor len=param[2]
+    func SQLSetCursorNameA(hstmt: CPointer<Unit>, szCursor: CPointer<UInt8>, cbCursor: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetCursorNameA == "on"]
+public unsafe func Windows_SQLSetCursorNameA(hstmt: CPointer<Unit>, szCursor: CPointer<UInt8>, cbCursor: Int16): Int16 {
+    return SQLSetCursorNameA(hstmt, szCursor, cbCursor)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetCursorNameW == "on"]
+foreign {
+    // param-hint: szCursor len=param[2]
+    func SQLSetCursorNameW(hstmt: CPointer<Unit>, szCursor: CPointer<UInt16>, cchCursor: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetCursorNameW == "on"]
+public unsafe func Windows_SQLSetCursorNameW(hstmt: CPointer<Unit>, szCursor: CPointer<UInt16>, cchCursor: Int16): Int16 {
+    return SQLSetCursorNameW(hstmt, szCursor, cchCursor)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetDescField == "on"]
+foreign {
+    func SQLSetDescField(DescriptorHandle: CPointer<Unit>, RecNumber: Int16, FieldIdentifier: Int16, Value: CPointer<Unit>, BufferLength: Int32): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetDescField == "on"]
+public unsafe func Windows_SQLSetDescField(DescriptorHandle: CPointer<Unit>, RecNumber: Int16, FieldIdentifier: Int16, Value: CPointer<Unit>, BufferLength: Int32): Int16 {
+    return SQLSetDescField(DescriptorHandle, RecNumber, FieldIdentifier, Value, BufferLength)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetDescFieldW == "on"]
+foreign {
+    func SQLSetDescFieldW(DescriptorHandle: CPointer<Unit>, RecNumber: Int16, FieldIdentifier: Int16, Value: CPointer<Unit>, BufferLength: Int32): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetDescFieldW == "on"]
+public unsafe func Windows_SQLSetDescFieldW(DescriptorHandle: CPointer<Unit>, RecNumber: Int16, FieldIdentifier: Int16, Value: CPointer<Unit>, BufferLength: Int32): Int16 {
+    return SQLSetDescFieldW(DescriptorHandle, RecNumber, FieldIdentifier, Value, BufferLength)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetDescRec == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     // param-hint: Data bytes=param[4] optional
     // param-hint: StringLength optional
     // param-hint: Indicator optional
     func SQLSetDescRec(DescriptorHandle: CPointer<Unit>, RecNumber: Int16, Type: Int16, SubType: Int16, Length: Int64, Precision: Int16, Scale: Int16, Data: CPointer<Unit>, StringLength: CPointer<Int64>, Indicator: CPointer<Int64>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetDescRec == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SQLSetDescRec(DescriptorHandle: CPointer<Unit>, RecNumber: Int16, Type: Int16, SubType: Int16, Length: Int64, Precision: Int16, Scale: Int16, Data: CPointer<Unit>, StringLength: CPointer<Int64>, Indicator: CPointer<Int64>): Int16 {
+    return SQLSetDescRec(DescriptorHandle, RecNumber, Type, SubType, Length, Precision, Scale, Data, StringLength, Indicator)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetEnvAttr == "on"]
+foreign {
+    // param-hint: Value bytes=param[3] optional
+    func SQLSetEnvAttr(EnvironmentHandle: CPointer<Unit>, Attribute: Int32, Value: CPointer<Unit>, StringLength: Int32): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetEnvAttr == "on"]
+public unsafe func Windows_SQLSetEnvAttr(EnvironmentHandle: CPointer<Unit>, Attribute: Int32, Value: CPointer<Unit>, StringLength: Int32): Int16 {
+    return SQLSetEnvAttr(EnvironmentHandle, Attribute, Value, StringLength)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetParam == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func SQLSetParam(StatementHandle: CPointer<Unit>, ParameterNumber: UInt16, ValueType: Int16, ParameterType: Int16, LengthPrecision: UInt64, ParameterScale: Int16, ParameterValue: CPointer<Unit>, StrLen_or_Ind: CPointer<Int64>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetParam == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SQLSetParam(StatementHandle: CPointer<Unit>, ParameterNumber: UInt16, ValueType: Int16, ParameterType: Int16, LengthPrecision: UInt64, ParameterScale: Int16, ParameterValue: CPointer<Unit>, StrLen_or_Ind: CPointer<Int64>): Int16 {
+    return SQLSetParam(StatementHandle, ParameterNumber, ValueType, ParameterType, LengthPrecision, ParameterScale, ParameterValue, StrLen_or_Ind)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetPos == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func SQLSetPos(hstmt: CPointer<Unit>, irow: UInt64, fOption: UInt16, fLock: UInt16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetPos == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SQLSetPos(hstmt: CPointer<Unit>, irow: UInt64, fOption: UInt16, fLock: UInt16): Int16 {
+    return SQLSetPos(hstmt, irow, fOption, fLock)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetScrollOptions == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func SQLSetScrollOptions(hstmt: CPointer<Unit>, fConcurrency: UInt16, crowKeyset: Int64, crowRowset: UInt16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetScrollOptions == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SQLSetScrollOptions(hstmt: CPointer<Unit>, fConcurrency: UInt16, crowKeyset: Int64, crowRowset: UInt16): Int16 {
+    return SQLSetScrollOptions(hstmt, fConcurrency, crowKeyset, crowRowset)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetStmtAttr == "on"]
+foreign {
+    func SQLSetStmtAttr(StatementHandle: CPointer<Unit>, Attribute: Int32, Value: CPointer<Unit>, StringLength: Int32): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetStmtAttr == "on"]
+public unsafe func Windows_SQLSetStmtAttr(StatementHandle: CPointer<Unit>, Attribute: Int32, Value: CPointer<Unit>, StringLength: Int32): Int16 {
+    return SQLSetStmtAttr(StatementHandle, Attribute, Value, StringLength)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetStmtAttrW == "on"]
+foreign {
+    func SQLSetStmtAttrW(hstmt: CPointer<Unit>, fAttribute: Int32, rgbValue: CPointer<Unit>, cbValueMax: Int32): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetStmtAttrW == "on"]
+public unsafe func Windows_SQLSetStmtAttrW(hstmt: CPointer<Unit>, fAttribute: Int32, rgbValue: CPointer<Unit>, cbValueMax: Int32): Int16 {
+    return SQLSetStmtAttrW(hstmt, fAttribute, rgbValue, cbValueMax)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetStmtOption == "on" && (arch == "x86_64" || arch == "aarch64")]
+foreign {
     func SQLSetStmtOption(StatementHandle: CPointer<Unit>, Option: UInt16, Value: UInt64): Int16
 }
 
-@When[ODBCBCP == "on"]
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSetStmtOption == "on" && (arch == "x86_64" || arch == "aarch64")]
+public unsafe func Windows_SQLSetStmtOption(StatementHandle: CPointer<Unit>, Option: UInt16, Value: UInt64): Int16 {
+    return SQLSetStmtOption(StatementHandle, Option, Value)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSpecialColumns == "on"]
+foreign {
+    // param-hint: CatalogName len=param[3] optional
+    // param-hint: SchemaName len=param[5] optional
+    // param-hint: TableName len=param[7] optional
+    func SQLSpecialColumns(StatementHandle: CPointer<Unit>, IdentifierType: UInt16, CatalogName: CPointer<UInt8>, NameLength1: Int16, SchemaName: CPointer<UInt8>, NameLength2: Int16, TableName: CPointer<UInt8>, NameLength3: Int16, Scope: UInt16, Nullable: UInt16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSpecialColumns == "on"]
+public unsafe func Windows_SQLSpecialColumns(StatementHandle: CPointer<Unit>, IdentifierType: UInt16, CatalogName: CPointer<UInt8>, NameLength1: Int16, SchemaName: CPointer<UInt8>, NameLength2: Int16, TableName: CPointer<UInt8>, NameLength3: Int16, Scope: UInt16, Nullable: UInt16): Int16 {
+    return SQLSpecialColumns(StatementHandle, IdentifierType, CatalogName, NameLength1, SchemaName, NameLength2, TableName, NameLength3, Scope, Nullable)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSpecialColumnsA == "on"]
+foreign {
+    // param-hint: szCatalogName len=param[3] optional
+    // param-hint: szSchemaName len=param[5] optional
+    // param-hint: szTableName len=param[7] optional
+    func SQLSpecialColumnsA(hstmt: CPointer<Unit>, fColType: UInt16, szCatalogName: CPointer<UInt8>, cbCatalogName: Int16, szSchemaName: CPointer<UInt8>, cbSchemaName: Int16, szTableName: CPointer<UInt8>, cbTableName: Int16, fScope: UInt16, fNullable: UInt16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSpecialColumnsA == "on"]
+public unsafe func Windows_SQLSpecialColumnsA(hstmt: CPointer<Unit>, fColType: UInt16, szCatalogName: CPointer<UInt8>, cbCatalogName: Int16, szSchemaName: CPointer<UInt8>, cbSchemaName: Int16, szTableName: CPointer<UInt8>, cbTableName: Int16, fScope: UInt16, fNullable: UInt16): Int16 {
+    return SQLSpecialColumnsA(hstmt, fColType, szCatalogName, cbCatalogName, szSchemaName, cbSchemaName, szTableName, cbTableName, fScope, fNullable)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSpecialColumnsW == "on"]
+foreign {
+    // param-hint: szCatalogName len=param[3] optional
+    // param-hint: szSchemaName len=param[5] optional
+    // param-hint: szTableName len=param[7] optional
+    func SQLSpecialColumnsW(hstmt: CPointer<Unit>, fColType: UInt16, szCatalogName: CPointer<UInt16>, cchCatalogName: Int16, szSchemaName: CPointer<UInt16>, cchSchemaName: Int16, szTableName: CPointer<UInt16>, cchTableName: Int16, fScope: UInt16, fNullable: UInt16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLSpecialColumnsW == "on"]
+public unsafe func Windows_SQLSpecialColumnsW(hstmt: CPointer<Unit>, fColType: UInt16, szCatalogName: CPointer<UInt16>, cchCatalogName: Int16, szSchemaName: CPointer<UInt16>, cchSchemaName: Int16, szTableName: CPointer<UInt16>, cchTableName: Int16, fScope: UInt16, fNullable: UInt16): Int16 {
+    return SQLSpecialColumnsW(hstmt, fColType, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName, fScope, fNullable)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLStatistics == "on"]
+foreign {
+    // param-hint: CatalogName len=param[2] optional
+    // param-hint: SchemaName len=param[4] optional
+    // param-hint: TableName len=param[6] optional
+    func SQLStatistics(StatementHandle: CPointer<Unit>, CatalogName: CPointer<UInt8>, NameLength1: Int16, SchemaName: CPointer<UInt8>, NameLength2: Int16, TableName: CPointer<UInt8>, NameLength3: Int16, Unique: UInt16, Reserved: UInt16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLStatistics == "on"]
+public unsafe func Windows_SQLStatistics(StatementHandle: CPointer<Unit>, CatalogName: CPointer<UInt8>, NameLength1: Int16, SchemaName: CPointer<UInt8>, NameLength2: Int16, TableName: CPointer<UInt8>, NameLength3: Int16, Unique: UInt16, Reserved: UInt16): Int16 {
+    return SQLStatistics(StatementHandle, CatalogName, NameLength1, SchemaName, NameLength2, TableName, NameLength3, Unique, Reserved)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLStatisticsA == "on"]
+foreign {
+    // param-hint: szCatalogName len=param[2] optional
+    // param-hint: szSchemaName len=param[4] optional
+    // param-hint: szTableName len=param[6] optional
+    func SQLStatisticsA(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cbCatalogName: Int16, szSchemaName: CPointer<UInt8>, cbSchemaName: Int16, szTableName: CPointer<UInt8>, cbTableName: Int16, fUnique: UInt16, fAccuracy: UInt16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLStatisticsA == "on"]
+public unsafe func Windows_SQLStatisticsA(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cbCatalogName: Int16, szSchemaName: CPointer<UInt8>, cbSchemaName: Int16, szTableName: CPointer<UInt8>, cbTableName: Int16, fUnique: UInt16, fAccuracy: UInt16): Int16 {
+    return SQLStatisticsA(hstmt, szCatalogName, cbCatalogName, szSchemaName, cbSchemaName, szTableName, cbTableName, fUnique, fAccuracy)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLStatisticsW == "on"]
+foreign {
+    // param-hint: szCatalogName len=param[2] optional
+    // param-hint: szSchemaName len=param[4] optional
+    // param-hint: szTableName len=param[6] optional
+    func SQLStatisticsW(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt16>, cchCatalogName: Int16, szSchemaName: CPointer<UInt16>, cchSchemaName: Int16, szTableName: CPointer<UInt16>, cchTableName: Int16, fUnique: UInt16, fAccuracy: UInt16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLStatisticsW == "on"]
+public unsafe func Windows_SQLStatisticsW(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt16>, cchCatalogName: Int16, szSchemaName: CPointer<UInt16>, cchSchemaName: Int16, szTableName: CPointer<UInt16>, cchTableName: Int16, fUnique: UInt16, fAccuracy: UInt16): Int16 {
+    return SQLStatisticsW(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName, fUnique, fAccuracy)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLTablePrivileges == "on"]
+foreign {
+    // param-hint: szCatalogName len=param[2] optional
+    // param-hint: szSchemaName len=param[4] optional
+    // param-hint: szTableName len=param[6] optional
+    func SQLTablePrivileges(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cchCatalogName: Int16, szSchemaName: CPointer<UInt8>, cchSchemaName: Int16, szTableName: CPointer<UInt8>, cchTableName: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLTablePrivileges == "on"]
+public unsafe func Windows_SQLTablePrivileges(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cchCatalogName: Int16, szSchemaName: CPointer<UInt8>, cchSchemaName: Int16, szTableName: CPointer<UInt8>, cchTableName: Int16): Int16 {
+    return SQLTablePrivileges(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLTablePrivilegesA == "on"]
+foreign {
+    // param-hint: szCatalogName len=param[2] optional
+    // param-hint: szSchemaName len=param[4] optional
+    // param-hint: szTableName len=param[6] optional
+    func SQLTablePrivilegesA(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cbCatalogName: Int16, szSchemaName: CPointer<UInt8>, cbSchemaName: Int16, szTableName: CPointer<UInt8>, cbTableName: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLTablePrivilegesA == "on"]
+public unsafe func Windows_SQLTablePrivilegesA(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cbCatalogName: Int16, szSchemaName: CPointer<UInt8>, cbSchemaName: Int16, szTableName: CPointer<UInt8>, cbTableName: Int16): Int16 {
+    return SQLTablePrivilegesA(hstmt, szCatalogName, cbCatalogName, szSchemaName, cbSchemaName, szTableName, cbTableName)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLTablePrivilegesW == "on"]
+foreign {
+    // param-hint: szCatalogName len=param[2] optional
+    // param-hint: szSchemaName len=param[4] optional
+    // param-hint: szTableName len=param[6] optional
+    func SQLTablePrivilegesW(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt16>, cchCatalogName: Int16, szSchemaName: CPointer<UInt16>, cchSchemaName: Int16, szTableName: CPointer<UInt16>, cchTableName: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLTablePrivilegesW == "on"]
+public unsafe func Windows_SQLTablePrivilegesW(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt16>, cchCatalogName: Int16, szSchemaName: CPointer<UInt16>, cchSchemaName: Int16, szTableName: CPointer<UInt16>, cchTableName: Int16): Int16 {
+    return SQLTablePrivilegesW(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLTables == "on"]
+foreign {
+    // param-hint: CatalogName len=param[2] optional
+    // param-hint: SchemaName len=param[4] optional
+    // param-hint: TableName len=param[6] optional
+    // param-hint: TableType len=param[8] optional
+    func SQLTables(StatementHandle: CPointer<Unit>, CatalogName: CPointer<UInt8>, NameLength1: Int16, SchemaName: CPointer<UInt8>, NameLength2: Int16, TableName: CPointer<UInt8>, NameLength3: Int16, TableType: CPointer<UInt8>, NameLength4: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLTables == "on"]
+public unsafe func Windows_SQLTables(StatementHandle: CPointer<Unit>, CatalogName: CPointer<UInt8>, NameLength1: Int16, SchemaName: CPointer<UInt8>, NameLength2: Int16, TableName: CPointer<UInt8>, NameLength3: Int16, TableType: CPointer<UInt8>, NameLength4: Int16): Int16 {
+    return SQLTables(StatementHandle, CatalogName, NameLength1, SchemaName, NameLength2, TableName, NameLength3, TableType, NameLength4)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLTablesA == "on"]
+foreign {
+    // param-hint: szCatalogName len=param[2] optional
+    // param-hint: szSchemaName len=param[4] optional
+    // param-hint: szTableName len=param[6] optional
+    // param-hint: szTableType len=param[8] optional
+    func SQLTablesA(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cbCatalogName: Int16, szSchemaName: CPointer<UInt8>, cbSchemaName: Int16, szTableName: CPointer<UInt8>, cbTableName: Int16, szTableType: CPointer<UInt8>, cbTableType: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLTablesA == "on"]
+public unsafe func Windows_SQLTablesA(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt8>, cbCatalogName: Int16, szSchemaName: CPointer<UInt8>, cbSchemaName: Int16, szTableName: CPointer<UInt8>, cbTableName: Int16, szTableType: CPointer<UInt8>, cbTableType: Int16): Int16 {
+    return SQLTablesA(hstmt, szCatalogName, cbCatalogName, szSchemaName, cbSchemaName, szTableName, cbTableName, szTableType, cbTableType)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLTablesW == "on"]
+foreign {
+    // param-hint: szCatalogName len=param[2] optional
+    // param-hint: szSchemaName len=param[4] optional
+    // param-hint: szTableName len=param[6] optional
+    // param-hint: szTableType len=param[8] optional
+    func SQLTablesW(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt16>, cchCatalogName: Int16, szSchemaName: CPointer<UInt16>, cchSchemaName: Int16, szTableName: CPointer<UInt16>, cchTableName: Int16, szTableType: CPointer<UInt16>, cchTableType: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLTablesW == "on"]
+public unsafe func Windows_SQLTablesW(hstmt: CPointer<Unit>, szCatalogName: CPointer<UInt16>, cchCatalogName: Int16, szSchemaName: CPointer<UInt16>, cchSchemaName: Int16, szTableName: CPointer<UInt16>, cchTableName: Int16, szTableType: CPointer<UInt16>, cchTableType: Int16): Int16 {
+    return SQLTablesW(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName, szTableType, cchTableType)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLTransact == "on"]
+foreign {
+    func SQLTransact(EnvironmentHandle: CPointer<Unit>, ConnectionHandle: CPointer<Unit>, CompletionType: UInt16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBC32 == "on" && Windows_Win32_System_Search_SQLTransact == "on"]
+public unsafe func Windows_SQLTransact(EnvironmentHandle: CPointer<Unit>, ConnectionHandle: CPointer<Unit>, CompletionType: UInt16): Int16 {
+    return SQLTransact(EnvironmentHandle, ConnectionHandle, CompletionType)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_SQLCloseEnumServers == "on"]
 foreign {
     func SQLCloseEnumServers(hEnumHandle: CPointer<Unit>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_SQLCloseEnumServers == "on"]
+public unsafe func Windows_SQLCloseEnumServers(hEnumHandle: CPointer<Unit>): Int16 {
+    return SQLCloseEnumServers(hEnumHandle)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_SQLGetNextEnumeration == "on"]
+foreign {
     func SQLGetNextEnumeration(hEnumHandle: CPointer<Unit>, prgEnumData: CPointer<UInt8>, piEnumLength: CPointer<Int32>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_SQLGetNextEnumeration == "on"]
+public unsafe func Windows_SQLGetNextEnumeration(hEnumHandle: CPointer<Unit>, prgEnumData: CPointer<UInt8>, piEnumLength: CPointer<Int32>): Int16 {
+    return SQLGetNextEnumeration(hEnumHandle, prgEnumData, piEnumLength)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_SQLInitEnumServers == "on"]
+foreign {
     func SQLInitEnumServers(pwchServerName: CPointer<UInt16>, pwchInstanceName: CPointer<UInt16>): CPointer<Unit>
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_SQLInitEnumServers == "on"]
+public unsafe func Windows_SQLInitEnumServers(pwchServerName: CPointer<UInt16>, pwchInstanceName: CPointer<UInt16>): CPointer<Unit> {
+    return SQLInitEnumServers(pwchServerName, pwchInstanceName)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_SQLLinkedCatalogsA == "on"]
+foreign {
     func SQLLinkedCatalogsA(param0: CPointer<Unit>, param1: CPointer<UInt8>, param2: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_SQLLinkedCatalogsA == "on"]
+public unsafe func Windows_SQLLinkedCatalogsA(param0: CPointer<Unit>, param1: CPointer<UInt8>, param2: Int16): Int16 {
+    return SQLLinkedCatalogsA(param0, param1, param2)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_SQLLinkedCatalogsW == "on"]
+foreign {
     func SQLLinkedCatalogsW(param0: CPointer<Unit>, param1: CPointer<UInt16>, param2: Int16): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_SQLLinkedCatalogsW == "on"]
+public unsafe func Windows_SQLLinkedCatalogsW(param0: CPointer<Unit>, param1: CPointer<UInt16>, param2: Int16): Int16 {
+    return SQLLinkedCatalogsW(param0, param1, param2)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_SQLLinkedServers == "on"]
+foreign {
     func SQLLinkedServers(param0: CPointer<Unit>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_SQLLinkedServers == "on"]
+public unsafe func Windows_SQLLinkedServers(param0: CPointer<Unit>): Int16 {
+    return SQLLinkedServers(param0)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_batch == "on"]
+foreign {
     func bcp_batch(param0: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_batch == "on"]
+public unsafe func Windows_bcp_batch(param0: CPointer<Unit>): Int32 {
+    return bcp_batch(param0)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_bind == "on"]
+foreign {
     func bcp_bind(param0: CPointer<Unit>, param1: CPointer<UInt8>, param2: Int32, param3: Int32, param4: CPointer<UInt8>, param5: Int32, param6: Int32, param7: Int32): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_bind == "on"]
+public unsafe func Windows_bcp_bind(param0: CPointer<Unit>, param1: CPointer<UInt8>, param2: Int32, param3: Int32, param4: CPointer<UInt8>, param5: Int32, param6: Int32, param7: Int32): Int16 {
+    return bcp_bind(param0, param1, param2, param3, param4, param5, param6, param7)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_colfmt == "on"]
+foreign {
     func bcp_colfmt(param0: CPointer<Unit>, param1: Int32, param2: UInt8, param3: Int32, param4: Int32, param5: CPointer<UInt8>, param6: Int32, param7: Int32): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_colfmt == "on"]
+public unsafe func Windows_bcp_colfmt(param0: CPointer<Unit>, param1: Int32, param2: UInt8, param3: Int32, param4: Int32, param5: CPointer<UInt8>, param6: Int32, param7: Int32): Int16 {
+    return bcp_colfmt(param0, param1, param2, param3, param4, param5, param6, param7)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_collen == "on"]
+foreign {
     func bcp_collen(param0: CPointer<Unit>, param1: Int32, param2: Int32): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_collen == "on"]
+public unsafe func Windows_bcp_collen(param0: CPointer<Unit>, param1: Int32, param2: Int32): Int16 {
+    return bcp_collen(param0, param1, param2)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_colptr == "on"]
+foreign {
     func bcp_colptr(param0: CPointer<Unit>, param1: CPointer<UInt8>, param2: Int32): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_colptr == "on"]
+public unsafe func Windows_bcp_colptr(param0: CPointer<Unit>, param1: CPointer<UInt8>, param2: Int32): Int16 {
+    return bcp_colptr(param0, param1, param2)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_columns == "on"]
+foreign {
     func bcp_columns(param0: CPointer<Unit>, param1: Int32): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_columns == "on"]
+public unsafe func Windows_bcp_columns(param0: CPointer<Unit>, param1: Int32): Int16 {
+    return bcp_columns(param0, param1)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_control == "on"]
+foreign {
     func bcp_control(param0: CPointer<Unit>, param1: Int32, param2: CPointer<Unit>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_control == "on"]
+public unsafe func Windows_bcp_control(param0: CPointer<Unit>, param1: Int32, param2: CPointer<Unit>): Int16 {
+    return bcp_control(param0, param1, param2)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_done == "on"]
+foreign {
     func bcp_done(param0: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_done == "on"]
+public unsafe func Windows_bcp_done(param0: CPointer<Unit>): Int32 {
+    return bcp_done(param0)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_exec == "on"]
+foreign {
     func bcp_exec(param0: CPointer<Unit>, param1: CPointer<Int32>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_exec == "on"]
+public unsafe func Windows_bcp_exec(param0: CPointer<Unit>, param1: CPointer<Int32>): Int16 {
+    return bcp_exec(param0, param1)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_getcolfmt == "on"]
+foreign {
     func bcp_getcolfmt(param0: CPointer<Unit>, param1: Int32, param2: Int32, param3: CPointer<Unit>, param4: Int32, param5: CPointer<Int32>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_getcolfmt == "on"]
+public unsafe func Windows_bcp_getcolfmt(param0: CPointer<Unit>, param1: Int32, param2: Int32, param3: CPointer<Unit>, param4: Int32, param5: CPointer<Int32>): Int16 {
+    return bcp_getcolfmt(param0, param1, param2, param3, param4, param5)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_initA == "on"]
+foreign {
     func bcp_initA(param0: CPointer<Unit>, param1: CPointer<UInt8>, param2: CPointer<UInt8>, param3: CPointer<UInt8>, param4: Int32): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_initA == "on"]
+public unsafe func Windows_bcp_initA(param0: CPointer<Unit>, param1: CPointer<UInt8>, param2: CPointer<UInt8>, param3: CPointer<UInt8>, param4: Int32): Int16 {
+    return bcp_initA(param0, param1, param2, param3, param4)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_initW == "on"]
+foreign {
     func bcp_initW(param0: CPointer<Unit>, param1: CPointer<UInt16>, param2: CPointer<UInt16>, param3: CPointer<UInt16>, param4: Int32): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_initW == "on"]
+public unsafe func Windows_bcp_initW(param0: CPointer<Unit>, param1: CPointer<UInt16>, param2: CPointer<UInt16>, param3: CPointer<UInt16>, param4: Int32): Int16 {
+    return bcp_initW(param0, param1, param2, param3, param4)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_moretext == "on"]
+foreign {
     func bcp_moretext(param0: CPointer<Unit>, param1: Int32, param2: CPointer<UInt8>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_moretext == "on"]
+public unsafe func Windows_bcp_moretext(param0: CPointer<Unit>, param1: Int32, param2: CPointer<UInt8>): Int16 {
+    return bcp_moretext(param0, param1, param2)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_readfmtA == "on"]
+foreign {
     func bcp_readfmtA(param0: CPointer<Unit>, param1: CPointer<UInt8>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_readfmtA == "on"]
+public unsafe func Windows_bcp_readfmtA(param0: CPointer<Unit>, param1: CPointer<UInt8>): Int16 {
+    return bcp_readfmtA(param0, param1)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_readfmtW == "on"]
+foreign {
     func bcp_readfmtW(param0: CPointer<Unit>, param1: CPointer<UInt16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_readfmtW == "on"]
+public unsafe func Windows_bcp_readfmtW(param0: CPointer<Unit>, param1: CPointer<UInt16>): Int16 {
+    return bcp_readfmtW(param0, param1)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_sendrow == "on"]
+foreign {
     func bcp_sendrow(param0: CPointer<Unit>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_sendrow == "on"]
+public unsafe func Windows_bcp_sendrow(param0: CPointer<Unit>): Int16 {
+    return bcp_sendrow(param0)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_setcolfmt == "on"]
+foreign {
     func bcp_setcolfmt(param0: CPointer<Unit>, param1: Int32, param2: Int32, param3: CPointer<Unit>, param4: Int32): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_setcolfmt == "on"]
+public unsafe func Windows_bcp_setcolfmt(param0: CPointer<Unit>, param1: Int32, param2: Int32, param3: CPointer<Unit>, param4: Int32): Int16 {
+    return bcp_setcolfmt(param0, param1, param2, param3, param4)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_writefmtA == "on"]
+foreign {
     func bcp_writefmtA(param0: CPointer<Unit>, param1: CPointer<UInt8>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_writefmtA == "on"]
+public unsafe func Windows_bcp_writefmtA(param0: CPointer<Unit>, param1: CPointer<UInt8>): Int16 {
+    return bcp_writefmtA(param0, param1)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_writefmtW == "on"]
+foreign {
     func bcp_writefmtW(param0: CPointer<Unit>, param1: CPointer<UInt16>): Int16
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_bcp_writefmtW == "on"]
+public unsafe func Windows_bcp_writefmtW(param0: CPointer<Unit>, param1: CPointer<UInt16>): Int16 {
+    return bcp_writefmtW(param0, param1)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_dbprtypeA == "on"]
+foreign {
     func dbprtypeA(param0: Int32): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_dbprtypeA == "on"]
+public unsafe func Windows_dbprtypeA(param0: Int32): CPointer<UInt8> {
+    return dbprtypeA(param0)
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_dbprtypeW == "on"]
+foreign {
     func dbprtypeW(param0: Int32): CPointer<UInt16>
+}
+
+@When[Windows_Win32_System_Search == "on" && ODBCBCP == "on" && Windows_Win32_System_Search_dbprtypeW == "on"]
+public unsafe func Windows_dbprtypeW(param0: Int32): CPointer<UInt16> {
+    return dbprtypeW(param0)
 }
 
 @When[Windows_Win32_System_Search == "on"]

@@ -39,6 +39,10 @@ public func generateFunctions(
                     }
                     match (index.methodDefImplMap(fileIdx, mi)) {
                         case Some((pinvoke, importName, moduleName)) =>
+                            if (shouldSkipImportModule(moduleName)) {
+                                mi += 1
+                                continue
+                            }
                             let missing = missingMethodDependencies(index, fileIdx, mi, Array<MetadataType>(0, {_ => MetadataType.Void}))
                             if (!missing.isEmpty()) {
                                 warnMissingMethodDependencies(index, fileIdx, mi, missing)
@@ -47,7 +51,8 @@ public func generateFunctions(
                             }
                             let cc = callingConventionAnnotation(pinvoke)
                             let methodTags = functionAvailabilityTags(index, fileIdx, mi)
-                            let condition = availabilityCondition(moduleToFeature(moduleName), methodTags)
+                            let condition = functionAvailabilityCondition(namespace, moduleName,
+                                index.methodDefName(fileIdx, mi), methodTags)
                             let key = functionGroupKey(moduleName, cc, condition)
                             if (functionRequiresRuntimeEntryPointResolver(index, fileIdx, mi)) {
                                 if (!runtimeGroups.contains(key)) {
@@ -90,6 +95,9 @@ public func generateFunctions(
                 for (methodRow in methods) {
                     writeForeignFuncWrapper(w, index, fileIdx, methodRow, condition, namespace)
                 }
+                for (methodRow in methods) {
+                    writePublicForeignFuncWrapper(w, index, fileIdx, methodRow, condition, namespace)
+                }
                 if (shouldEmitSysFnPtrAliases()) {
                     for (methodRow in methods) {
                         writeForeignFuncAlias(w, index, fileIdx, methodRow, condition, namespace)
@@ -106,6 +114,9 @@ public func generateFunctions(
                 sortMethodRows(index, fileIdx, methods)
                 for (methodRow in methods) {
                     writeRuntimeEntryPointFunc(w, index, fileIdx, methodRow, moduleName, condition, namespace)
+                }
+                for (methodRow in methods) {
+                    writePublicRuntimeEntryPointWrapper(w, index, fileIdx, methodRow, condition, namespace)
                 }
                 if (shouldEmitSysFnPtrAliases()) {
                     for (methodRow in methods) {
@@ -127,6 +138,40 @@ func parseFunctionGroupKey(key: String): (String, String, String) {
     let callingConv = if (parts.size > 1) { decodeFunctionGroupField(parts[1]) } else { "" }
     let condition = if (parts.size > 2) { decodeFunctionGroupField(parts[2]) } else { "" }
     return (moduleName, callingConv, condition)
+}
+
+func functionAvailabilityCondition(
+    namespace: String,
+    moduleName: String,
+    functionName: String,
+    tags: ArrayList<String>
+): String {
+    let conditions = ArrayList<String>()
+    let namespaceFeature = namespaceToFeature(namespace)
+    if (!namespaceFeature.isEmpty()) {
+        conditions.add("${namespaceFeature} == \"on\"")
+    }
+
+    let moduleFeature = moduleToFeature(moduleName)
+    if (!moduleFeature.isEmpty() && moduleFeature != namespaceFeature) {
+        conditions.add("${moduleFeature} == \"on\"")
+    }
+
+    let functionFeature = functionToFeature(namespace, functionName)
+    if (!functionFeature.isEmpty()) {
+        conditions.add("${functionFeature} == \"on\"")
+    }
+
+    let tagCondition = availabilityCondition("", tags)
+    if (!tagCondition.isEmpty()) {
+        if (tagCondition.indexOf(" || ", 0).isSome()) {
+            conditions.add("(${tagCondition})")
+        } else {
+            conditions.add(tagCondition)
+        }
+    }
+
+    return joinStrings(conditions, " && ")
 }
 
 func encodeFunctionGroupField(value: String): String {
@@ -316,6 +361,79 @@ func writeForeignFuncWrapper(
     w.writeLine("}")
 }
 
+func writePublicForeignFuncWrapper(
+    w: CodeWriter,
+    index: TypeIndex,
+    fileIdx: Int64,
+    methodRow: Int64,
+    condition: String,
+    namespace: String
+): Unit {
+    let name = sanitizeIdentifier(index.methodDefName(fileIdx, methodRow))
+    let sig = index.methodDefSignature(fileIdx, methodRow, Array<MetadataType>(0, {_ => MetadataType.Void}))
+    if (methodHasVarArgs(sig)) {
+        eprintln("warning: skipping public wrapper for variadic import `${name}`")
+        return
+    }
+
+    let foreignName = foreignMethodName(index, fileIdx, methodRow)
+    let paramNames = methodParamNames(index, fileIdx, methodRow, sig)
+    let params = methodParamDecls(paramNames, sig, false, namespace)
+    let paramStr = joinStrings(params, ", ")
+    let callArgs = joinStrings(paramNames, ", ")
+    let returnType = functionAbiType(index, sig.returnType, namespace)
+
+    w.writeBlankLine()
+    if (!condition.isEmpty()) {
+        w.writeLine("@When[${condition}]")
+    }
+    w.writeLine("public unsafe func ${publicFunctionWrapperName(index, fileIdx, methodRow)}(${paramStr}): ${returnType} {")
+    if (returnType == "Unit") {
+        w.writeLine("    ${foreignName}(${callArgs})")
+    } else {
+        w.writeLine("    return ${foreignName}(${callArgs})")
+    }
+    w.writeLine("}")
+}
+
+func writePublicRuntimeEntryPointWrapper(
+    w: CodeWriter,
+    index: TypeIndex,
+    fileIdx: Int64,
+    methodRow: Int64,
+    condition: String,
+    namespace: String
+): Unit {
+    let name = sanitizeIdentifier(index.methodDefName(fileIdx, methodRow))
+    let sig = index.methodDefSignature(fileIdx, methodRow, Array<MetadataType>(0, {_ => MetadataType.Void}))
+    if (methodHasVarArgs(sig)) {
+        eprintln("warning: skipping public wrapper for variadic import `${name}`")
+        return
+    }
+
+    let paramNames = methodParamNames(index, fileIdx, methodRow, sig)
+    let params = methodParamDecls(paramNames, sig, false, namespace)
+    let paramStr = joinStrings(params, ", ")
+    let callArgs = joinStrings(paramNames, ", ")
+    let returnType = functionAbiType(index, sig.returnType, namespace)
+
+    w.writeBlankLine()
+    if (!condition.isEmpty()) {
+        w.writeLine("@When[${condition}]")
+    }
+    w.writeLine("public unsafe func ${publicFunctionWrapperName(index, fileIdx, methodRow)}(${paramStr}): ${returnType} {")
+    if (returnType == "Unit") {
+        w.writeLine("    ${name}(${callArgs})")
+    } else {
+        w.writeLine("    return ${name}(${callArgs})")
+    }
+    w.writeLine("}")
+}
+
+func publicFunctionWrapperName(index: TypeIndex, fileIdx: Int64, methodRow: Int64): String {
+    return "Windows_${sanitizeIdentifier(index.methodDefName(fileIdx, methodRow))}"
+}
+
 func writeForeignFuncAlias(
     w: CodeWriter,
     index: TypeIndex,
@@ -349,11 +467,7 @@ func shouldEmitSysFnPtrAliases(): Bool {
 }
 
 func writeRuntimeEntryPointImports(w: CodeWriter): Unit {
-    w.writeBlankLine()
-    w.writeBlock("foreign", {=>
-        w.writeLine("func GetProcAddress(hModule: CPointer<Unit>, lpProcName: CPointer<UInt8>): CPointer<Unit>")
-        w.writeLine("func LoadLibraryA(lpLibFileName: CPointer<UInt8>): CPointer<Unit>")
-    })
+    let _ = w
 }
 
 func writeRuntimeEntryPointFunc(
@@ -373,8 +487,12 @@ func writeRuntimeEntryPointFunc(
     }
 
     let importName = runtimeImportEntryPointName(index, fileIdx, methodRow)
-    let isOrdinal = isOrdinalImportEntryPoint(importName)
-    let cacheName = "__windowsBindgen_${name}ProcCache"
+    let entryPointName = if (importName.isEmpty()) {
+        index.methodDefName(fileIdx, methodRow)
+    } else {
+        importName
+    }
+    let isOrdinal = isOrdinalImportEntryPoint(entryPointName)
     let resolverName = "__windowsBindgen_${name}Proc"
     let params = methodParamDecls(methodParamNames(index, fileIdx, methodRow, sig), sig, false, namespace)
     let paramNames = methodParamNames(index, fileIdx, methodRow, sig)
@@ -382,70 +500,19 @@ func writeRuntimeEntryPointFunc(
     let callArgs = joinStrings(paramNames, ", ")
     let returnType = functionAbiType(index, sig.returnType, namespace)
     let functionPointerType = foreignFuncPointerType(sig, namespace)
-    let moduleBytes = byteArrayLiteral(moduleName)
+    let moduleLiteral = "\"${escapeString(moduleName)}\""
 
     w.writeBlankLine()
     if (!condition.isEmpty()) {
         w.writeLine("@When[${condition}]")
     }
-    w.writeLine("var ${cacheName}: CPointer<Unit> = CPointer<Unit>()")
-    w.writeBlankLine()
-    if (!condition.isEmpty()) {
-        w.writeLine("@When[${condition}]")
-    }
     w.writeLine("func ${resolverName}(): CPointer<Unit> {")
-    w.writeLine("    if (${cacheName}.isNotNull()) {")
-    w.writeLine("        return ${cacheName}")
-    w.writeLine("    }")
-    w.writeLine("    let moduleName = ${moduleBytes}")
     if (isOrdinal) {
-        let ordinal = ordinalImportValue(importName)
-        w.writeLine("    let ordinal = unsafe { CPointer<UInt8>() + ${ordinal} }")
-        w.writeLine("    unsafe {")
-        w.writeLine("        let moduleHandle = acquireArrayRawData(moduleName)")
-        w.writeLine("        try {")
-        w.writeLine("            let module = LoadLibraryA(moduleHandle.pointer)")
-        w.writeLine("            if (module.isNull()) {")
-        w.writeLine("                throw Exception(\"failed to load ${moduleName}\")")
-        w.writeLine("            }")
-        w.writeLine("            let proc = GetProcAddress(module, ordinal)")
-        w.writeLine("            if (proc.isNull()) {")
-        w.writeLine("                throw Exception(\"failed to resolve ${name} entry point ${importName}\")")
-        w.writeLine("            }")
-        w.writeLine("            ${cacheName} = proc")
-        w.writeLine("            return proc")
-        w.writeLine("        } finally {")
-        w.writeLine("            releaseArrayRawData(moduleHandle)")
-        w.writeLine("        }")
-        w.writeLine("    }")
+        let ordinal = ordinalImportValue(entryPointName)
+        w.writeLine("    return windows_libloading.resolveProcByOrdinal(${moduleLiteral}, ${ordinal})")
     } else {
-        // Non-identifier symbol name (decorated, mangled, etc.) -- cannot appear in a `foreign`
-        // block where the function name IS the linker symbol. Resolve at runtime with
-        // GetProcAddress, passing the symbol bytes as the lookup name.
-        let symbolBytes = byteArrayLiteral(importName)
-        w.writeLine("    let procName = ${symbolBytes}")
-        w.writeLine("    unsafe {")
-        w.writeLine("        let moduleHandle = acquireArrayRawData(moduleName)")
-        w.writeLine("        try {")
-        w.writeLine("            let module = LoadLibraryA(moduleHandle.pointer)")
-        w.writeLine("            if (module.isNull()) {")
-        w.writeLine("                throw Exception(\"failed to load ${moduleName}\")")
-        w.writeLine("            }")
-        w.writeLine("            let nameHandle = acquireArrayRawData(procName)")
-        w.writeLine("            try {")
-        w.writeLine("                let proc = GetProcAddress(module, nameHandle.pointer)")
-        w.writeLine("                if (proc.isNull()) {")
-        w.writeLine("                    throw Exception(\"failed to resolve ${name} entry point ${importName}\")")
-        w.writeLine("                }")
-        w.writeLine("                ${cacheName} = proc")
-        w.writeLine("                return proc")
-        w.writeLine("            } finally {")
-        w.writeLine("                releaseArrayRawData(nameHandle)")
-        w.writeLine("            }")
-        w.writeLine("        } finally {")
-        w.writeLine("            releaseArrayRawData(moduleHandle)")
-        w.writeLine("        }")
-        w.writeLine("    }")
+        let entryPointLiteral = "\"${escapeString(entryPointName)}\""
+        w.writeLine("    return windows_libloading.resolveProc(${moduleLiteral}, ${entryPointLiteral})")
     }
     w.writeLine("}")
 
@@ -465,9 +532,12 @@ func writeRuntimeEntryPointFunc(
 
 public func functionRequiresRuntimeEntryPointResolver(index: TypeIndex, fileIdx: Int64, methodRow: Int64): Bool {
     match (index.methodDefImplMap(fileIdx, methodRow)) {
-        case Some((_, importName, _)) =>
-            if (importName.isEmpty()) {
+        case Some((_, importName, moduleName)) =>
+            if (shouldSkipImportModule(moduleName)) {
                 return false
+            }
+            if (importName.isEmpty()) {
+                return importLibrarySymbolIsMissing(sanitizeIdentifier(index.methodDefName(fileIdx, methodRow)))
             }
             if (isOrdinalImportEntryPoint(importName)) {
                 return true
@@ -476,7 +546,22 @@ public func functionRequiresRuntimeEntryPointResolver(index: TypeIndex, fileIdx:
             // inside a Cangjie `foreign` block -- the function name there IS the linker symbol.
             // Route them through the runtime resolver so the imported DLL is loaded and the symbol
             // is fetched via GetProcAddress at first call.
-            return !isLegalForeignSymbolIdentifier(importName)
+            if (!isLegalForeignSymbolIdentifier(importName)) {
+                return true
+            }
+            return importLibrarySymbolIsMissing(importName)
+        case None => return false
+    }
+}
+
+public func shouldSkipImportModule(moduleName: String): Bool {
+    return moduleName == "FORCEINLINE"
+}
+
+func importLibrarySymbolIsMissing(symbol: String): Bool {
+    match (bindgenContext()) {
+        case Some(context) =>
+            return context.importSymbols.size > 0 && !context.importSymbols.contains(symbol)
         case None => return false
     }
 }

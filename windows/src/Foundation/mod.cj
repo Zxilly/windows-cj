@@ -90,12 +90,14 @@ public class DeferralCompletedHandler <: InterfaceWrapperBase & ComInterface & w
 @When[Windows_Foundation == "on"]
 extend DeferralCompletedHandler <: windows_core.Interface<DeferralCompletedHandler> {}
 
+@When[Windows_Foundation == "on"]
 private open class DeferralCompletedHandlerInvokerErased {
     public open func __winrtThunk_Invoke(): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_Foundation == "on"]
 private open class DeferralCompletedHandlerInvoker <: DeferralCompletedHandlerInvokerErased {
     public open func Invoke(): Unit {
         ()
@@ -107,6 +109,7 @@ private open class DeferralCompletedHandlerInvoker <: DeferralCompletedHandlerIn
     }
 }
 
+@When[Windows_Foundation == "on"]
 private class DeferralCompletedHandlerBox <: DeferralCompletedHandlerInvoker {
     public let invoke_: () -> Unit
     private let vtblHandle: CPointerHandle<DeferralCompletedHandlerVtbl>
@@ -125,6 +128,7 @@ private class DeferralCompletedHandlerBox <: DeferralCompletedHandlerInvoker {
     }
 }
 
+@When[Windows_Foundation == "on"]
 func buildDeferralCompletedHandlerBoxVtbl(): DeferralCompletedHandlerVtbl {
     var vtbl = DeferralCompletedHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -227,12 +231,14 @@ public class EventHandler<T> <: InterfaceWrapperBase & ComInterface & windows_in
 @When[Windows_Foundation == "on"]
 extend<T> EventHandler<T> <: windows_core.Interface<EventHandler<T>> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {}
 
+@When[Windows_Foundation == "on"]
 private open class EventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_Foundation == "on"]
 private open class EventHandlerInvoker<T> <: EventHandlerInvokerErased where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public open func Invoke(sender: InParam<IInspectable>, args: T): Unit {
         ()
@@ -244,6 +250,7 @@ private open class EventHandlerInvoker<T> <: EventHandlerInvokerErased where T <
     }
 }
 
+@When[Windows_Foundation == "on"]
 private class EventHandlerBox<T> <: EventHandlerInvoker<T> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public let invoke_: (InParam<IInspectable>, T) -> Unit
     private let vtblHandle: CPointerHandle<EventHandlerVtbl>
@@ -262,6 +269,7 @@ private class EventHandlerBox<T> <: EventHandlerInvoker<T> where T <: windows_co
     }
 }
 
+@When[Windows_Foundation == "on"]
 func buildEventHandlerBoxVtbl<T>(): EventHandlerVtbl where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     var vtbl = EventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -4799,12 +4807,14 @@ public class TypedEventHandler<TSender, TResult> <: InterfaceWrapperBase & ComIn
 @When[Windows_Foundation == "on"]
 extend<TSender, TResult> TypedEventHandler<TSender, TResult> <: windows_core.Interface<TypedEventHandler<TSender, TResult>> where TSender <: windows_core.RuntimeType & windows_core.WinrtGenericType<TSender>, TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {}
 
+@When[Windows_Foundation == "on"]
 private open class TypedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_Foundation == "on"]
 private open class TypedEventHandlerInvoker<TSender, TResult> <: TypedEventHandlerInvokerErased where TSender <: windows_core.RuntimeType & windows_core.WinrtGenericType<TSender>, TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
     public open func Invoke(sender: TSender, args: TResult): Unit {
         ()
@@ -4816,6 +4826,7 @@ private open class TypedEventHandlerInvoker<TSender, TResult> <: TypedEventHandl
     }
 }
 
+@When[Windows_Foundation == "on"]
 private class TypedEventHandlerBox<TSender, TResult> <: TypedEventHandlerInvoker<TSender, TResult> where TSender <: windows_core.RuntimeType & windows_core.WinrtGenericType<TSender>, TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
     public let invoke_: (TSender, TResult) -> Unit
     private let vtblHandle: CPointerHandle<TypedEventHandlerVtbl>
@@ -4834,6 +4845,7 @@ private class TypedEventHandlerBox<TSender, TResult> <: TypedEventHandlerInvoker
     }
 }
 
+@When[Windows_Foundation == "on"]
 func buildTypedEventHandlerBoxVtbl<TSender, TResult>(): TypedEventHandlerVtbl where TSender <: windows_core.RuntimeType & windows_core.WinrtGenericType<TSender>, TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
     var vtbl = TypedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -5674,7 +5686,10 @@ public struct IUriRuntimeClassVtbl {
     public var Password: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Path: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Query: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var QueryParsed: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var QueryParsed: UIntNative = UIntNative(0)
     public var RawUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SchemeName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var UserName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -5822,6 +5837,7 @@ public class IUriRuntimeClass <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func QueryParsed(): WwwFormUrlDecoder {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5988,7 +6004,10 @@ extend IUriRuntimeClassFactory <: windows_core.Interface<IUriRuntimeClassFactory
 @C
 public struct IWwwFormUrlDecoderRuntimeClassFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateWwwFormUrlDecoder: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateWwwFormUrlDecoder: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -6057,6 +6076,7 @@ public class IWwwFormUrlDecoderRuntimeClassFactory <: InterfaceWrapperBase & Com
         readVtbl<IWwwFormUrlDecoderRuntimeClassFactoryVtbl>(IWwwFormUrlDecoderRuntimeClassFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateWwwFormUrlDecoder(query: windows_core.HString): WwwFormUrlDecoder {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6295,6 +6315,7 @@ public class Uri <: InterfaceWrapperBase & ComInterface & windows_interface.Runt
         return defaultInterface().Query()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func QueryParsed(): WwwFormUrlDecoder {
         return defaultInterface().QueryParsed()
     }
@@ -6394,7 +6415,7 @@ extend Uri <: windows_core.HandleWinrtType<Uri> {
     }
 }
 
-@When[Windows_Foundation == "on"]
+@When[Windows_Foundation == "on" && Windows_Foundation_Collections == "on"]
 public class WwwFormUrlDecoder <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -6510,6 +6531,7 @@ public class WwwFormUrlDecoder <: InterfaceWrapperBase & ComInterface & windows_
         return asIVectorView().GetMany(startIndex, itemsSize, CPointer<Unit>(items))
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateWwwFormUrlDecoder(query: windows_core.HString): WwwFormUrlDecoder {
         var result__: Option<WwwFormUrlDecoder> = Option<WwwFormUrlDecoder>.None
         try (factory__ = windows_core.factory<WwwFormUrlDecoder, IWwwFormUrlDecoderRuntimeClassFactory>().unwrap()) {
@@ -6522,7 +6544,7 @@ public class WwwFormUrlDecoder <: InterfaceWrapperBase & ComInterface & windows_
     }
 }
 
-@When[Windows_Foundation == "on"]
+@When[Windows_Foundation == "on" && Windows_Foundation_Collections == "on"]
 extend WwwFormUrlDecoder <: windows_core.HandleWinrtType<WwwFormUrlDecoder> {
     public static func intoWinrtHandle(value: WwwFormUrlDecoder): CPointer<Unit> {
         value.asRaw()

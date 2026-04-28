@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l1 as _impl_l1
 import windows_collections as windows_collections
@@ -210,12 +209,14 @@ public class GameListRemovedEventHandler <: InterfaceWrapperBase & ComInterface 
 @When[Windows_Gaming_Preview_GamesEnumeration == "on"]
 extend GameListRemovedEventHandler <: windows_core.Interface<GameListRemovedEventHandler> {}
 
+@When[Windows_Gaming_Preview_GamesEnumeration == "on"]
 private open class GameListRemovedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_Gaming_Preview_GamesEnumeration == "on"]
 private open class GameListRemovedEventHandlerInvoker <: GameListRemovedEventHandlerInvokerErased {
     public open func Invoke(identifier: windows_core.HString): Unit {
         ()
@@ -227,6 +228,7 @@ private open class GameListRemovedEventHandlerInvoker <: GameListRemovedEventHan
     }
 }
 
+@When[Windows_Gaming_Preview_GamesEnumeration == "on"]
 private class GameListRemovedEventHandlerBox <: GameListRemovedEventHandlerInvoker {
     public let invoke_: (windows_core.HString) -> Unit
     private let vtblHandle: CPointerHandle<GameListRemovedEventHandlerVtbl>
@@ -245,6 +247,7 @@ private class GameListRemovedEventHandlerBox <: GameListRemovedEventHandlerInvok
     }
 }
 
+@When[Windows_Gaming_Preview_GamesEnumeration == "on"]
 func buildGameListRemovedEventHandlerBoxVtbl(): GameListRemovedEventHandlerVtbl {
     var vtbl = GameListRemovedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -269,11 +272,14 @@ public struct IGameListEntryVtbl {
     public var DisplayInfo: UIntNative = UIntNative(0)
     public var LaunchAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Category: CFunc<(CPointer<Unit>, CPointer<GameListCategoryAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     public var SetCategoryAsync: CFunc<(CPointer<Unit>, GameListCategoryAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 
-    @When[Windows_ApplicationModel == "on"]
+    @When[(Windows_ApplicationModel == "on") && (Windows_Foundation_Collections == "on")]
     public static func new<Identity>(offset!: Int64 = 0): IGameListEntryVtbl where Identity <: IGameListEntry_Impl {
         let _ = offset
         var vtbl = IGameListEntryVtbl()
@@ -295,14 +301,7 @@ public struct IGameListEntryVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.Properties = { instanceRaw, result__ =>
-            match (unsafe { asImplFromRaw<IGameListEntry_ImplErased>(instanceRaw) }) {
-                case Some(impl) =>
-                    impl.__winrtThunk_Properties(result__)
-                case None =>
-                    E_NOINTERFACE.value
-            }
-        }
+        vtbl = IGameListEntryVtbl.__assignProperties<Identity>(vtbl)
         vtbl.SetCategoryAsync = { instanceRaw, arg0, result__ =>
             match (unsafe { asImplFromRaw<IGameListEntry_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
@@ -314,7 +313,7 @@ public struct IGameListEntryVtbl {
         return vtbl
     }
 
-    @When[Windows_ApplicationModel == "on" && Windows_ApplicationModel == "on"]
+    @When[((Windows_ApplicationModel == "on") && (Windows_Foundation_Collections == "on")) && Windows_ApplicationModel == "on"]
     public static func __assignDisplayInfo<Identity>(vtbl: IGameListEntryVtbl): IGameListEntryVtbl where Identity <: IGameListEntry_Impl {
         var next = vtbl
         next.DisplayInfo = { instanceRaw, result__ =>
@@ -328,8 +327,27 @@ public struct IGameListEntryVtbl {
         return next
     }
 
-    @When[Windows_ApplicationModel == "on" && Windows_ApplicationModel != "on"]
+    @When[((Windows_ApplicationModel == "on") && (Windows_Foundation_Collections == "on")) && Windows_ApplicationModel != "on"]
     public static func __assignDisplayInfo<Identity>(vtbl: IGameListEntryVtbl): IGameListEntryVtbl where Identity <: IGameListEntry_Impl {
+        return vtbl
+    }
+
+    @When[((Windows_ApplicationModel == "on") && (Windows_Foundation_Collections == "on")) && Windows_Foundation_Collections == "on"]
+    public static func __assignProperties<Identity>(vtbl: IGameListEntryVtbl): IGameListEntryVtbl where Identity <: IGameListEntry_Impl {
+        var next = vtbl
+        next.Properties = { instanceRaw, result__ =>
+            match (unsafe { asImplFromRaw<IGameListEntry_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    impl.__winrtThunk_Properties(result__)
+                case None =>
+                    E_NOINTERFACE.value
+            }
+        }
+        return next
+    }
+
+    @When[((Windows_ApplicationModel == "on") && (Windows_Foundation_Collections == "on")) && Windows_Foundation_Collections != "on"]
+    public static func __assignProperties<Identity>(vtbl: IGameListEntryVtbl): IGameListEntryVtbl where Identity <: IGameListEntry_Impl {
         return vtbl
     }
 
@@ -341,7 +359,7 @@ public struct IGameListEntryVtbl {
     }
 }
 
-@When[Windows_Gaming_Preview_GamesEnumeration == "on" && Windows_ApplicationModel == "on"]
+@When[Windows_Gaming_Preview_GamesEnumeration == "on" && ((Windows_ApplicationModel == "on") && (Windows_Foundation_Collections == "on"))]
 public interface IGameListEntry_ImplErased {
     public func __winrtThunk_DisplayInfo(result__: CPointer<CPointer<Unit>>): Int32
 
@@ -354,7 +372,7 @@ public interface IGameListEntry_ImplErased {
     public func __winrtThunk_SetCategoryAsync(arg0: GameListCategoryAbi, result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Gaming_Preview_GamesEnumeration == "on" && Windows_ApplicationModel == "on"]
+@When[Windows_Gaming_Preview_GamesEnumeration == "on" && ((Windows_ApplicationModel == "on") && (Windows_Foundation_Collections == "on"))]
 public interface IGameListEntry_Impl <: IGameListEntry_ImplErased {
     public func DisplayInfo(): windows_core.Result<_impl_l1.AppDisplayInfo>
 
@@ -542,6 +560,7 @@ public class IGameListEntry <: InterfaceWrapperBase & ComInterface & RuntimeName
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<GameListCategory>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -568,7 +587,10 @@ public struct IGameModeConfigurationVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var IsEnabled: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetIsEnabled: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var RelatedProcessNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RelatedProcessNames: UIntNative = UIntNative(0)
     public var PercentGpuTimeAllocatedToGame: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetPercentGpuTimeAllocatedToGame: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var PercentGpuMemoryAllocatedToGame: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -666,6 +688,7 @@ public class IGameModeConfiguration <: InterfaceWrapperBase & ComInterface & Run
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RelatedProcessNames(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -788,7 +811,10 @@ extend IGameModeConfiguration <: windows_core.Interface<IGameModeConfiguration> 
 @C
 public struct IGameModeUserConfigurationVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GamingRelatedProcessNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GamingRelatedProcessNames: UIntNative = UIntNative(0)
     public var SaveAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -858,6 +884,7 @@ public class IGameModeUserConfiguration <: InterfaceWrapperBase & ComInterface &
         readVtbl<IGameModeUserConfigurationVtbl>(IGameModeUserConfigurationVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GamingRelatedProcessNames(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -955,6 +982,7 @@ public class GameModeConfiguration <: InterfaceWrapperBase & ComInterface & wind
         defaultInterface().SetIsEnabled(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RelatedProcessNames(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().RelatedProcessNames()
     }
@@ -1292,6 +1320,7 @@ public class GameListEntry <: InterfaceWrapperBase & ComInterface & windows_inte
         return defaultInterface().Category()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         return defaultInterface().Properties()
     }
@@ -1324,7 +1353,10 @@ extend GameListEntry <: windows_core.HandleWinrtType<GameListEntry> {
 public struct IGameListStatics2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var MergeEntriesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var UnmergeEntryAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var UnmergeEntryAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1401,6 +1433,7 @@ public class IGameListStatics2 <: InterfaceWrapperBase & ComInterface & RuntimeN
         return windows_future.IAsyncOperation<GameListEntry>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func UnmergeEntryAsync(mergedEntry: GameListEntry): windows_future.IAsyncOperation<windows_collections.IVectorView<GameListEntry>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1489,12 +1522,14 @@ public class GameListChangedEventHandler <: InterfaceWrapperBase & ComInterface 
 @When[Windows_Gaming_Preview_GamesEnumeration == "on"]
 extend GameListChangedEventHandler <: windows_core.Interface<GameListChangedEventHandler> {}
 
+@When[Windows_Gaming_Preview_GamesEnumeration == "on"]
 private open class GameListChangedEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_Gaming_Preview_GamesEnumeration == "on"]
 private open class GameListChangedEventHandlerInvoker <: GameListChangedEventHandlerInvokerErased {
     public open func Invoke(game: InParam<GameListEntry>): Unit {
         ()
@@ -1506,6 +1541,7 @@ private open class GameListChangedEventHandlerInvoker <: GameListChangedEventHan
     }
 }
 
+@When[Windows_Gaming_Preview_GamesEnumeration == "on"]
 private class GameListChangedEventHandlerBox <: GameListChangedEventHandlerInvoker {
     public let invoke_: (InParam<GameListEntry>) -> Unit
     private let vtblHandle: CPointerHandle<GameListChangedEventHandlerVtbl>
@@ -1524,6 +1560,7 @@ private class GameListChangedEventHandlerBox <: GameListChangedEventHandlerInvok
     }
 }
 
+@When[Windows_Gaming_Preview_GamesEnumeration == "on"]
 func buildGameListChangedEventHandlerBoxVtbl(): GameListChangedEventHandlerVtbl {
     var vtbl = GameListChangedEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -1542,8 +1579,14 @@ func buildGameListChangedEventHandlerBoxVtbl(): GameListChangedEventHandlerVtbl 
 @C
 public struct IGameListStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllAsyncPackageFamilyName: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllAsyncPackageFamilyName: UIntNative = UIntNative(0)
     public var GameAdded: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveGameAdded: CFunc<(CPointer<Unit>, windows_collections.EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GameRemoved: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -1618,6 +1661,7 @@ public class IGameListStatics <: InterfaceWrapperBase & ComInterface & RuntimeNa
         readVtbl<IGameListStaticsVtbl>(IGameListStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<GameListEntry>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1626,6 +1670,7 @@ public class IGameListStatics <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_future.IAsyncOperation<windows_collections.IVectorView<GameListEntry>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllAsyncPackageFamilyName(packageFamilyName: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVectorView<GameListEntry>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1711,6 +1756,7 @@ public class GameList <: windows_interface.RuntimeName & windows_core.RuntimeNam
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func UnmergeEntryAsync(mergedEntry: GameListEntry): windows_future.IAsyncOperation<windows_collections.IVectorView<GameListEntry>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<GameListEntry>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<GameListEntry>>>.None
         try (factory__ = windows_core.factory<GameList, IGameListStatics2>().unwrap()) {
@@ -1722,6 +1768,7 @@ public class GameList <: windows_interface.RuntimeName & windows_core.RuntimeNam
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindAllAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<GameListEntry>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<GameListEntry>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<GameListEntry>>>.None
         try (factory__ = windows_core.factory<GameList, IGameListStatics>().unwrap()) {
@@ -1733,6 +1780,7 @@ public class GameList <: windows_interface.RuntimeName & windows_core.RuntimeNam
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindAllAsyncPackageFamilyName(packageFamilyName: windows_core.HString): windows_future.IAsyncOperation<windows_collections.IVectorView<GameListEntry>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<GameListEntry>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<GameListEntry>>>.None
         try (factory__ = windows_core.factory<GameList, IGameListStatics>().unwrap()) {
@@ -1868,6 +1916,7 @@ public class GameModeUserConfiguration <: InterfaceWrapperBase & ComInterface & 
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GamingRelatedProcessNames(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().GamingRelatedProcessNames()
     }

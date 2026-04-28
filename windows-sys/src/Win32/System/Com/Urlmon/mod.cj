@@ -11,4 +11,149 @@ public import windows_sys.Win32._impl_l1.{CONFIRMSAFETY, RemBINDINFO}
 public import windows_sys.Win32._impl_l1.{IBindCallbackRedirect, IBindCallbackRedirectVtbl, IBindHttpSecurity, IBindHttpSecurityVtbl, ICatalogFileInfo, ICatalogFileInfoVtbl, ICodeInstall, ICodeInstallVtbl, IDataFilter, IDataFilterVtbl, IEncodingFilterFactory, IEncodingFilterFactoryVtbl, IGetBindHandle, IGetBindHandleVtbl, IHttpNegotiate, IHttpNegotiate2, IHttpNegotiate2Vtbl, IHttpNegotiateVtbl, IHttpSecurity, IHttpSecurityVtbl, IInternet, IInternetHostSecurityManager, IInternetHostSecurityManagerVtbl, IInternetPriority, IInternetPriorityVtbl, IInternetProtocolInfo, IInternetProtocolInfoVtbl, IInternetProtocolSink, IInternetProtocolSinkStackable, IInternetProtocolSinkStackableVtbl, IInternetProtocolSinkVtbl, IInternetSecurityManager, IInternetSecurityManagerVtbl, IInternetSecurityMgrSite, IInternetSecurityMgrSiteVtbl, IInternetThreadSwitch, IInternetThreadSwitchVtbl, IInternetVtbl, IInternetZoneManager, IInternetZoneManagerEx, IInternetZoneManagerExVtbl, IInternetZoneManagerVtbl, IMonikerProp, IMonikerPropVtbl, IUriContainer, IUriContainerVtbl, IWinInetCacheHints, IWinInetCacheHints2, IWinInetCacheHints2Vtbl, IWinInetCacheHintsVtbl, IWinInetFileStream, IWinInetFileStreamVtbl, IWinInetHttpInfo, IWinInetHttpInfoVtbl, IWinInetHttpTimeouts, IWinInetHttpTimeoutsVtbl, IWinInetInfo, IWinInetInfoVtbl, IWindowForBindingUI, IWindowForBindingUIVtbl, IWrappedProtocol, IWrappedProtocolVtbl, IZoneIdentifier, IZoneIdentifier2, IZoneIdentifier2Vtbl, IZoneIdentifierVtbl}
 @When[Windows_Win32_System_Com_Urlmon == "on" && Windows_Win32_System_Com == "on"]
 public import windows_sys.Win32._impl_l2.{PROTOCOLFILTERDATA, StartParam}
-
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoGetClassObjectFromURL == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoGetClassObjectFromURL
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetCombineIUri == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoInternetCombineIUri
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetCombineUrl == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoInternetCombineUrl
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetCombineUrlEx == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoInternetCombineUrlEx
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetCompareUrl == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoInternetCompareUrl
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetCreateSecurityManager == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoInternetCreateSecurityManager
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetCreateZoneManager == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoInternetCreateZoneManager
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetGetProtocolFlags == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoInternetGetProtocolFlags
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetGetSecurityUrl == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoInternetGetSecurityUrl
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetGetSecurityUrlEx == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoInternetGetSecurityUrlEx
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetGetSession == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoInternetGetSession
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetIsFeatureEnabled == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoInternetIsFeatureEnabled
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetIsFeatureEnabledForIUri == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoInternetIsFeatureEnabledForIUri
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetIsFeatureEnabledForUrl == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoInternetIsFeatureEnabledForUrl
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetIsFeatureZoneElevationEnabled == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoInternetIsFeatureZoneElevationEnabled
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetParseIUri == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoInternetParseIUri
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetParseUrl == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoInternetParseUrl
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetQueryInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoInternetQueryInfo
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CoInternetSetFeatureEnabled == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CoInternetSetFeatureEnabled
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CompareSecurityIds == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CompareSecurityIds
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CompatFlagsFromClsid == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CompatFlagsFromClsid
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CopyBindInfo == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CopyBindInfo
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CopyStgMedium == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CopyStgMedium
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CreateAsyncBindCtx == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateAsyncBindCtx
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CreateAsyncBindCtxEx == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateAsyncBindCtxEx
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CreateFormatEnumerator == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateFormatEnumerator
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CreateURLMoniker == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateURLMoniker
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CreateURLMonikerEx == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateURLMonikerEx
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_CreateURLMonikerEx2 == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_CreateURLMonikerEx2
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_FaultInIEFeature == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FaultInIEFeature
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_FindMediaType == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindMediaType
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_FindMediaTypeClass == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindMediaTypeClass
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_FindMimeFromData == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_FindMimeFromData
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_GetClassFileOrMime == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetClassFileOrMime
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_GetClassURL == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetClassURL
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_GetComponentIDFromCLSSPEC == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetComponentIDFromCLSSPEC
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_GetSoftwareUpdateInfo == "on"]
+public import windows_sys.Win32._impl_l2.Windows_GetSoftwareUpdateInfo
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_HlinkGoBack == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HlinkGoBack
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_HlinkGoForward == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HlinkGoForward
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_HlinkNavigateMoniker == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HlinkNavigateMoniker
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_HlinkNavigateString == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HlinkNavigateString
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_HlinkSimpleNavigateToMoniker == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HlinkSimpleNavigateToMoniker
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_HlinkSimpleNavigateToString == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_HlinkSimpleNavigateToString
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_IEGetUserPrivateNamespaceName == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IEGetUserPrivateNamespaceName
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_IEInstallScope == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IEInstallScope
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_IsAsyncMoniker == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsAsyncMoniker
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_IsLoggingEnabledA == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsLoggingEnabledA
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_IsLoggingEnabledW == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsLoggingEnabledW
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_IsValidURL == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_IsValidURL
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_MkParseDisplayNameEx == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_MkParseDisplayNameEx
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_ObtainUserAgentString == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ObtainUserAgentString
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_RegisterBindStatusCallback == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RegisterBindStatusCallback
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_RegisterFormatEnumerator == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RegisterFormatEnumerator
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_RegisterMediaTypeClass == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RegisterMediaTypeClass
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_RegisterMediaTypes == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RegisterMediaTypes
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_ReleaseBindInfo == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com_StructuredStorage == "on" && Windows_Win32_Security == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_ReleaseBindInfo
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_RevokeBindStatusCallback == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RevokeBindStatusCallback
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_RevokeFormatEnumerator == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_RevokeFormatEnumerator
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_SetAccessForIEAppContainer == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetAccessForIEAppContainer
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_SetSoftwareUpdateAdvertisementState == "on"]
+public import windows_sys.Win32._impl_l2.Windows_SetSoftwareUpdateAdvertisementState
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_URLDownloadToCacheFileA == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_URLDownloadToCacheFileA
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_URLDownloadToCacheFileW == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_URLDownloadToCacheFileW
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_URLDownloadToFileA == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_URLDownloadToFileA
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_URLDownloadToFileW == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_URLDownloadToFileW
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_URLOpenBlockingStreamA == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_URLOpenBlockingStreamA
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_URLOpenBlockingStreamW == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_URLOpenBlockingStreamW
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_URLOpenPullStreamA == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_URLOpenPullStreamA
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_URLOpenPullStreamW == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_URLOpenPullStreamW
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_URLOpenStreamA == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_URLOpenStreamA
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_URLOpenStreamW == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_URLOpenStreamW
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_UrlMkGetSessionOption == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UrlMkGetSessionOption
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_UrlMkSetSessionOption == "on"]
+public import windows_sys.Win32._impl_l2.Windows_UrlMkSetSessionOption
+@When[Windows_Win32_System_Com_Urlmon == "on" && URLMON == "on" && Windows_Win32_System_Com_Urlmon_WriteHitLogging == "on"]
+public import windows_sys.Win32._impl_l2.Windows_WriteHitLogging

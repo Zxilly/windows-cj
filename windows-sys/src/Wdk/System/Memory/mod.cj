@@ -2,7 +2,6 @@
 package windows_sys.Wdk.System.Memory
 
 import windows_sys.Wdk._impl_l0 as Wdk__impl_l0
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 
 
@@ -30,20 +29,66 @@ public let SECTION_INHERIT_ViewShare: SECTION_INHERIT = SECTION_INHERIT(1)
 @When[Windows_Wdk_System_Memory == "on"]
 public let SECTION_INHERIT_ViewUnmap: SECTION_INHERIT = SECTION_INHERIT(2)
 
-@When[NTDLL == "on"]
+@When[Windows_Wdk_System_Memory == "on" && NTDLL == "on" && Windows_Wdk_System_Memory_NtMapViewOfSection == "on"]
 foreign {
     // param-hint: SectionOffset optional
     func NtMapViewOfSection(SectionHandle: CPointer<Unit>, ProcessHandle: CPointer<Unit>, BaseAddress: CPointer<CPointer<Unit>>, ZeroBits: UIntNative, CommitSize: UIntNative, SectionOffset: CPointer<Int64>, ViewSize: CPointer<UIntNative>, InheritDisposition: Int32, AllocationType: UInt32, Win32Protect: UInt32): Int32
+}
+
+@When[Windows_Wdk_System_Memory == "on" && NTDLL == "on" && Windows_Wdk_System_Memory_NtMapViewOfSection == "on"]
+public unsafe func Windows_NtMapViewOfSection(SectionHandle: CPointer<Unit>, ProcessHandle: CPointer<Unit>, BaseAddress: CPointer<CPointer<Unit>>, ZeroBits: UIntNative, CommitSize: UIntNative, SectionOffset: CPointer<Int64>, ViewSize: CPointer<UIntNative>, InheritDisposition: Int32, AllocationType: UInt32, Win32Protect: UInt32): Int32 {
+    return NtMapViewOfSection(SectionHandle, ProcessHandle, BaseAddress, ZeroBits, CommitSize, SectionOffset, ViewSize, InheritDisposition, AllocationType, Win32Protect)
+}
+
+@When[Windows_Wdk_System_Memory == "on" && NTDLL == "on" && Windows_Wdk_System_Memory_NtOpenSection == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+foreign {
+    func NtOpenSection(SectionHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>): Int32
+}
+
+@When[Windows_Wdk_System_Memory == "on" && NTDLL == "on" && Windows_Wdk_System_Memory_NtOpenSection == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_NtOpenSection(SectionHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>): Int32 {
+    return NtOpenSection(SectionHandle, DesiredAccess, ObjectAttributes)
+}
+
+@When[Windows_Wdk_System_Memory == "on" && NTDLL == "on" && Windows_Wdk_System_Memory_NtUnmapViewOfSection == "on"]
+foreign {
     // param-hint: BaseAddress optional
     func NtUnmapViewOfSection(ProcessHandle: CPointer<Unit>, BaseAddress: CPointer<Unit>): Int32
+}
+
+@When[Windows_Wdk_System_Memory == "on" && NTDLL == "on" && Windows_Wdk_System_Memory_NtUnmapViewOfSection == "on"]
+public unsafe func Windows_NtUnmapViewOfSection(ProcessHandle: CPointer<Unit>, BaseAddress: CPointer<Unit>): Int32 {
+    return NtUnmapViewOfSection(ProcessHandle, BaseAddress)
+}
+
+@When[Windows_Wdk_System_Memory == "on" && NTDLL == "on" && Windows_Wdk_System_Memory_ZwMapViewOfSection == "on"]
+foreign {
     // param-hint: SectionOffset optional
     func ZwMapViewOfSection(SectionHandle: CPointer<Unit>, ProcessHandle: CPointer<Unit>, BaseAddress: CPointer<CPointer<Unit>>, ZeroBits: UIntNative, CommitSize: UIntNative, SectionOffset: CPointer<Int64>, ViewSize: CPointer<UIntNative>, InheritDisposition: Int32, AllocationType: UInt32, Win32Protect: UInt32): Int32
+}
+
+@When[Windows_Wdk_System_Memory == "on" && NTDLL == "on" && Windows_Wdk_System_Memory_ZwMapViewOfSection == "on"]
+public unsafe func Windows_ZwMapViewOfSection(SectionHandle: CPointer<Unit>, ProcessHandle: CPointer<Unit>, BaseAddress: CPointer<CPointer<Unit>>, ZeroBits: UIntNative, CommitSize: UIntNative, SectionOffset: CPointer<Int64>, ViewSize: CPointer<UIntNative>, InheritDisposition: Int32, AllocationType: UInt32, Win32Protect: UInt32): Int32 {
+    return ZwMapViewOfSection(SectionHandle, ProcessHandle, BaseAddress, ZeroBits, CommitSize, SectionOffset, ViewSize, InheritDisposition, AllocationType, Win32Protect)
+}
+
+@When[Windows_Wdk_System_Memory == "on" && NTDLL == "on" && Windows_Wdk_System_Memory_ZwOpenSection == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+foreign {
+    func ZwOpenSection(SectionHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>): Int32
+}
+
+@When[Windows_Wdk_System_Memory == "on" && NTDLL == "on" && Windows_Wdk_System_Memory_ZwOpenSection == "on" && Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on"]
+public unsafe func Windows_ZwOpenSection(SectionHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>): Int32 {
+    return ZwOpenSection(SectionHandle, DesiredAccess, ObjectAttributes)
+}
+
+@When[Windows_Wdk_System_Memory == "on" && NTDLL == "on" && Windows_Wdk_System_Memory_ZwUnmapViewOfSection == "on"]
+foreign {
     // param-hint: BaseAddress optional
     func ZwUnmapViewOfSection(ProcessHandle: CPointer<Unit>, BaseAddress: CPointer<Unit>): Int32
 }
 
-@When[NTDLL == "on" && (Windows_Wdk_Foundation == "on" && Windows_Win32_Security == "on")]
-foreign {
-    func NtOpenSection(SectionHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>): Int32
-    func ZwOpenSection(SectionHandle: CPointer<CPointer<Unit>>, DesiredAccess: UInt32, ObjectAttributes: CPointer<Wdk__impl_l0.OBJECT_ATTRIBUTES>): Int32
+@When[Windows_Wdk_System_Memory == "on" && NTDLL == "on" && Windows_Wdk_System_Memory_ZwUnmapViewOfSection == "on"]
+public unsafe func Windows_ZwUnmapViewOfSection(ProcessHandle: CPointer<Unit>, BaseAddress: CPointer<Unit>): Int32 {
+    return ZwUnmapViewOfSection(ProcessHandle, BaseAddress)
 }

@@ -6,9 +6,7 @@ package windows.Win32.Networking.Ldap
 import std.collection.*
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Security_Authentication_Identity == "on"]
 import windows.Win32.Security.Authentication.Identity as Win32_Security_Authentication_Identity
 import windows.Win32._impl_l2 as Win32__impl_l2
 import windows_core as windows_core
@@ -1327,588 +1325,3003 @@ extend LDAP_REFERRAL_CALLBACK <: windows_core.CopyType & windows_core.RuntimeTyp
     }
 }
 
-@When[WLDAP32 == "on"]
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_LdapGetLastError == "on"]
 @CallingConv[CDECL]
 foreign {
     // pinvoke-hint: cc=cdecl
     func LdapGetLastError(): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_LdapGetLastError == "on"]
+public unsafe func Windows_LdapGetLastError(): UInt32 {
+    return LdapGetLastError()
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_LdapMapErrorToWin32 == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func LdapMapErrorToWin32(LdapError: UInt32): windows_core.WIN32_ERROR
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_LdapMapErrorToWin32 == "on"]
+public unsafe func Windows_LdapMapErrorToWin32(LdapError: UInt32): windows_core.WIN32_ERROR {
+    return LdapMapErrorToWin32(LdapError)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_LdapUTF8ToUnicode == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: lpSrcStr len=param[1]
     // param-hint: lpDestStr len=param[3]
     // pinvoke-hint: SetLastError cc=cdecl
     func LdapUTF8ToUnicode(lpSrcStr: CPointer<UInt8>, cchSrc: Int32, lpDestStr: CPointer<UInt16>, cchDest: Int32): Int32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_LdapUTF8ToUnicode == "on"]
+public unsafe func Windows_LdapUTF8ToUnicode(lpSrcStr: CPointer<UInt8>, cchSrc: Int32, lpDestStr: CPointer<UInt16>, cchDest: Int32): Int32 {
+    return LdapUTF8ToUnicode(lpSrcStr, cchSrc, lpDestStr, cchDest)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_LdapUnicodeToUTF8 == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: lpSrcStr len=param[1]
     // param-hint: lpDestStr len=param[3]
     // pinvoke-hint: SetLastError cc=cdecl
     func LdapUnicodeToUTF8(lpSrcStr: CPointer<UInt16>, cchSrc: Int32, lpDestStr: CPointer<UInt8>, cchDest: Int32): Int32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_LdapUnicodeToUTF8 == "on"]
+public unsafe func Windows_LdapUnicodeToUTF8(lpSrcStr: CPointer<UInt16>, cchSrc: Int32, lpDestStr: CPointer<UInt8>, cchDest: Int32): Int32 {
+    return LdapUnicodeToUTF8(lpSrcStr, cchSrc, lpDestStr, cchDest)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ber_alloc_t == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ber_alloc_t(options: Int32): CPointer<BerElementAbi>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ber_alloc_t == "on"]
+public unsafe func Windows_ber_alloc_t(options: Int32): CPointer<BerElementAbi> {
+    return ber_alloc_t(options)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ber_bvdup == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ber_bvdup(pBerVal: CPointer<LDAP_BERVALAbi>): CPointer<LDAP_BERVALAbi>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ber_bvdup == "on"]
+public unsafe func Windows_ber_bvdup(pBerVal: CPointer<LDAP_BERVALAbi>): CPointer<LDAP_BERVALAbi> {
+    return ber_bvdup(pBerVal)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ber_bvecfree == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ber_bvecfree(pBerVal: CPointer<CPointer<LDAP_BERVALAbi>>): Unit
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ber_bvecfree == "on"]
+public unsafe func Windows_ber_bvecfree(pBerVal: CPointer<CPointer<LDAP_BERVALAbi>>): Unit {
+    ber_bvecfree(pBerVal)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ber_bvfree == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ber_bvfree(bv: CPointer<LDAP_BERVALAbi>): Unit
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ber_bvfree == "on"]
+public unsafe func Windows_ber_bvfree(bv: CPointer<LDAP_BERVALAbi>): Unit {
+    ber_bvfree(bv)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ber_first_element == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ber_first_element(pBerElement: CPointer<BerElementAbi>, pLen: CPointer<UInt32>, ppOpaque: CPointer<CPointer<Int8>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ber_first_element == "on"]
+public unsafe func Windows_ber_first_element(pBerElement: CPointer<BerElementAbi>, pLen: CPointer<UInt32>, ppOpaque: CPointer<CPointer<Int8>>): UInt32 {
+    return ber_first_element(pBerElement, pLen, ppOpaque)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ber_flatten == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ber_flatten(pBerElement: CPointer<BerElementAbi>, pBerVal: CPointer<CPointer<LDAP_BERVALAbi>>): Int32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ber_flatten == "on"]
+public unsafe func Windows_ber_flatten(pBerElement: CPointer<BerElementAbi>, pBerVal: CPointer<CPointer<LDAP_BERVALAbi>>): Int32 {
+    return ber_flatten(pBerElement, pBerVal)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ber_free == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ber_free(pBerElement: CPointer<BerElementAbi>, fbuf: Int32): Unit
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ber_free == "on"]
+public unsafe func Windows_ber_free(pBerElement: CPointer<BerElementAbi>, fbuf: Int32): Unit {
+    ber_free(pBerElement, fbuf)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ber_init == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ber_init(pBerVal: CPointer<LDAP_BERVALAbi>): CPointer<BerElementAbi>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ber_init == "on"]
+public unsafe func Windows_ber_init(pBerVal: CPointer<LDAP_BERVALAbi>): CPointer<BerElementAbi> {
+    return ber_init(pBerVal)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ber_next_element == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ber_next_element(pBerElement: CPointer<BerElementAbi>, pLen: CPointer<UInt32>, opaque: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ber_next_element == "on"]
+public unsafe func Windows_ber_next_element(pBerElement: CPointer<BerElementAbi>, pLen: CPointer<UInt32>, opaque: CPointer<UInt8>): UInt32 {
+    return ber_next_element(pBerElement, pLen, opaque)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ber_peek_tag == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ber_peek_tag(pBerElement: CPointer<BerElementAbi>, pLen: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ber_peek_tag == "on"]
+public unsafe func Windows_ber_peek_tag(pBerElement: CPointer<BerElementAbi>, pLen: CPointer<UInt32>): UInt32 {
+    return ber_peek_tag(pBerElement, pLen)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ber_printf == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ber_printf(pBerElement: CPointer<BerElementAbi>, fmt: CPointer<UInt8>, ...): Int32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ber_scanf == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ber_scanf(pBerElement: CPointer<BerElementAbi>, fmt: CPointer<UInt8>, ...): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ber_skip_tag == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ber_skip_tag(pBerElement: CPointer<BerElementAbi>, pLen: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ber_skip_tag == "on"]
+public unsafe func Windows_ber_skip_tag(pBerElement: CPointer<BerElementAbi>, pLen: CPointer<UInt32>): UInt32 {
+    return ber_skip_tag(pBerElement, pLen)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_cldap_open == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: SetLastError cc=cdecl
     func cldap_open(HostName: CPointer<UInt8>, PortNumber: UInt32): CPointer<LDAPAbi>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_cldap_open == "on"]
+public unsafe func Windows_cldap_open(HostName: CPointer<UInt8>, PortNumber: UInt32): CPointer<LDAPAbi> {
+    return cldap_open(HostName, PortNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_cldap_openA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: SetLastError cc=cdecl
     func cldap_openA(HostName: CPointer<UInt8>, PortNumber: UInt32): CPointer<LDAPAbi>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_cldap_openA == "on"]
+public unsafe func Windows_cldap_openA(HostName: CPointer<UInt8>, PortNumber: UInt32): CPointer<LDAPAbi> {
+    return cldap_openA(HostName, PortNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_cldap_openW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: SetLastError cc=cdecl
     func cldap_openW(HostName: CPointer<UInt16>, PortNumber: UInt32): CPointer<LDAPAbi>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_cldap_openW == "on"]
+public unsafe func Windows_cldap_openW(HostName: CPointer<UInt16>, PortNumber: UInt32): CPointer<LDAPAbi> {
+    return cldap_openW(HostName, PortNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_abandon == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_abandon(ld: CPointer<LDAPAbi>, msgid: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_abandon == "on"]
+public unsafe func Windows_ldap_abandon(ld: CPointer<LDAPAbi>, msgid: UInt32): UInt32 {
+    return ldap_abandon(ld, msgid)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_add == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_add(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, attrs: CPointer<CPointer<LDAPModAAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_add == "on"]
+public unsafe func Windows_ldap_add(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, attrs: CPointer<CPointer<LDAPModAAbi>>): UInt32 {
+    return ldap_add(ld, dn, attrs)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_addA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_addA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, attrs: CPointer<CPointer<LDAPModAAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_addA == "on"]
+public unsafe func Windows_ldap_addA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, attrs: CPointer<CPointer<LDAPModAAbi>>): UInt32 {
+    return ldap_addA(ld, dn, attrs)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_addW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_addW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, attrs: CPointer<CPointer<LDAPModWAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_addW == "on"]
+public unsafe func Windows_ldap_addW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, attrs: CPointer<CPointer<LDAPModWAbi>>): UInt32 {
+    return ldap_addW(ld, dn, attrs)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_add_ext == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_add_ext(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, attrs: CPointer<CPointer<LDAPModAAbi>>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, MessageNumber: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_add_ext == "on"]
+public unsafe func Windows_ldap_add_ext(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, attrs: CPointer<CPointer<LDAPModAAbi>>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, MessageNumber: CPointer<UInt32>): UInt32 {
+    return ldap_add_ext(ld, dn, attrs, ServerControls, ClientControls, MessageNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_add_extA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_add_extA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, attrs: CPointer<CPointer<LDAPModAAbi>>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, MessageNumber: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_add_extA == "on"]
+public unsafe func Windows_ldap_add_extA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, attrs: CPointer<CPointer<LDAPModAAbi>>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, MessageNumber: CPointer<UInt32>): UInt32 {
+    return ldap_add_extA(ld, dn, attrs, ServerControls, ClientControls, MessageNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_add_extW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_add_extW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, attrs: CPointer<CPointer<LDAPModWAbi>>, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, ClientControls: CPointer<CPointer<LDAPControlWAbi>>, MessageNumber: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_add_extW == "on"]
+public unsafe func Windows_ldap_add_extW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, attrs: CPointer<CPointer<LDAPModWAbi>>, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, ClientControls: CPointer<CPointer<LDAPControlWAbi>>, MessageNumber: CPointer<UInt32>): UInt32 {
+    return ldap_add_extW(ld, dn, attrs, ServerControls, ClientControls, MessageNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_add_ext_s == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_add_ext_s(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, attrs: CPointer<CPointer<LDAPModAAbi>>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_add_ext_s == "on"]
+public unsafe func Windows_ldap_add_ext_s(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, attrs: CPointer<CPointer<LDAPModAAbi>>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>): UInt32 {
+    return ldap_add_ext_s(ld, dn, attrs, ServerControls, ClientControls)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_add_ext_sA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_add_ext_sA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, attrs: CPointer<CPointer<LDAPModAAbi>>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_add_ext_sA == "on"]
+public unsafe func Windows_ldap_add_ext_sA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, attrs: CPointer<CPointer<LDAPModAAbi>>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>): UInt32 {
+    return ldap_add_ext_sA(ld, dn, attrs, ServerControls, ClientControls)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_add_ext_sW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_add_ext_sW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, attrs: CPointer<CPointer<LDAPModWAbi>>, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, ClientControls: CPointer<CPointer<LDAPControlWAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_add_ext_sW == "on"]
+public unsafe func Windows_ldap_add_ext_sW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, attrs: CPointer<CPointer<LDAPModWAbi>>, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, ClientControls: CPointer<CPointer<LDAPControlWAbi>>): UInt32 {
+    return ldap_add_ext_sW(ld, dn, attrs, ServerControls, ClientControls)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_add_s == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_add_s(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, attrs: CPointer<CPointer<LDAPModAAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_add_s == "on"]
+public unsafe func Windows_ldap_add_s(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, attrs: CPointer<CPointer<LDAPModAAbi>>): UInt32 {
+    return ldap_add_s(ld, dn, attrs)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_add_sA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_add_sA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, attrs: CPointer<CPointer<LDAPModAAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_add_sA == "on"]
+public unsafe func Windows_ldap_add_sA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, attrs: CPointer<CPointer<LDAPModAAbi>>): UInt32 {
+    return ldap_add_sA(ld, dn, attrs)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_add_sW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_add_sW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, attrs: CPointer<CPointer<LDAPModWAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_add_sW == "on"]
+public unsafe func Windows_ldap_add_sW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, attrs: CPointer<CPointer<LDAPModWAbi>>): UInt32 {
+    return ldap_add_sW(ld, dn, attrs)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_bind == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: dn optional
     // param-hint: cred optional
     // pinvoke-hint: cc=cdecl
     func ldap_bind(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, cred: CPointer<UInt8>, method: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_bind == "on"]
+public unsafe func Windows_ldap_bind(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, cred: CPointer<UInt8>, method: UInt32): UInt32 {
+    return ldap_bind(ld, dn, cred, method)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_bindA == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: dn optional
     // param-hint: cred optional
     // pinvoke-hint: cc=cdecl
     func ldap_bindA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, cred: CPointer<UInt8>, method: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_bindA == "on"]
+public unsafe func Windows_ldap_bindA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, cred: CPointer<UInt8>, method: UInt32): UInt32 {
+    return ldap_bindA(ld, dn, cred, method)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_bindW == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: dn optional
     // param-hint: cred optional
     // pinvoke-hint: cc=cdecl
     func ldap_bindW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, cred: CPointer<UInt16>, method: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_bindW == "on"]
+public unsafe func Windows_ldap_bindW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, cred: CPointer<UInt16>, method: UInt32): UInt32 {
+    return ldap_bindW(ld, dn, cred, method)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_bind_s == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: dn optional
     // param-hint: cred optional
     // pinvoke-hint: cc=cdecl
     func ldap_bind_s(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, cred: CPointer<UInt8>, method: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_bind_s == "on"]
+public unsafe func Windows_ldap_bind_s(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, cred: CPointer<UInt8>, method: UInt32): UInt32 {
+    return ldap_bind_s(ld, dn, cred, method)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_bind_sA == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: dn optional
     // param-hint: cred optional
     // pinvoke-hint: cc=cdecl
     func ldap_bind_sA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, cred: CPointer<UInt8>, method: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_bind_sA == "on"]
+public unsafe func Windows_ldap_bind_sA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, cred: CPointer<UInt8>, method: UInt32): UInt32 {
+    return ldap_bind_sA(ld, dn, cred, method)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_bind_sW == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: dn optional
     // param-hint: cred optional
     // pinvoke-hint: cc=cdecl
     func ldap_bind_sW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, cred: CPointer<UInt16>, method: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_bind_sW == "on"]
+public unsafe func Windows_ldap_bind_sW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, cred: CPointer<UInt16>, method: UInt32): UInt32 {
+    return ldap_bind_sW(ld, dn, cred, method)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_check_filterA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_check_filterA(ld: CPointer<LDAPAbi>, SearchFilter: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_check_filterA == "on"]
+public unsafe func Windows_ldap_check_filterA(ld: CPointer<LDAPAbi>, SearchFilter: CPointer<UInt8>): UInt32 {
+    return ldap_check_filterA(ld, SearchFilter)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_check_filterW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_check_filterW(ld: CPointer<LDAPAbi>, SearchFilter: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_check_filterW == "on"]
+public unsafe func Windows_ldap_check_filterW(ld: CPointer<LDAPAbi>, SearchFilter: CPointer<UInt16>): UInt32 {
+    return ldap_check_filterW(ld, SearchFilter)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_cleanup == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_cleanup(hInstance: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_cleanup == "on"]
+public unsafe func Windows_ldap_cleanup(hInstance: CPointer<Unit>): UInt32 {
+    return ldap_cleanup(hInstance)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_close_extended_op == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_close_extended_op(ld: CPointer<LDAPAbi>, MessageNumber: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_close_extended_op == "on"]
+public unsafe func Windows_ldap_close_extended_op(ld: CPointer<LDAPAbi>, MessageNumber: UInt32): UInt32 {
+    return ldap_close_extended_op(ld, MessageNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_compare == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_compare(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, attr: CPointer<UInt8>, value: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_compare == "on"]
+public unsafe func Windows_ldap_compare(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, attr: CPointer<UInt8>, value: CPointer<UInt8>): UInt32 {
+    return ldap_compare(ld, dn, attr, value)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_compareA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_compareA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, attr: CPointer<UInt8>, value: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_compareA == "on"]
+public unsafe func Windows_ldap_compareA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, attr: CPointer<UInt8>, value: CPointer<UInt8>): UInt32 {
+    return ldap_compareA(ld, dn, attr, value)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_compareW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_compareW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, attr: CPointer<UInt16>, value: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_compareW == "on"]
+public unsafe func Windows_ldap_compareW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, attr: CPointer<UInt16>, value: CPointer<UInt16>): UInt32 {
+    return ldap_compareW(ld, dn, attr, value)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_compare_ext == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_compare_ext(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, Attr: CPointer<UInt8>, Value: CPointer<UInt8>, Data: CPointer<LDAP_BERVALAbi>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, MessageNumber: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_compare_ext == "on"]
+public unsafe func Windows_ldap_compare_ext(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, Attr: CPointer<UInt8>, Value: CPointer<UInt8>, Data: CPointer<LDAP_BERVALAbi>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, MessageNumber: CPointer<UInt32>): UInt32 {
+    return ldap_compare_ext(ld, dn, Attr, Value, Data, ServerControls, ClientControls, MessageNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_compare_extA == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: Value optional
     // param-hint: Data optional
     // pinvoke-hint: cc=cdecl
     func ldap_compare_extA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, Attr: CPointer<UInt8>, Value: CPointer<UInt8>, Data: CPointer<LDAP_BERVALAbi>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, MessageNumber: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_compare_extA == "on"]
+public unsafe func Windows_ldap_compare_extA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, Attr: CPointer<UInt8>, Value: CPointer<UInt8>, Data: CPointer<LDAP_BERVALAbi>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, MessageNumber: CPointer<UInt32>): UInt32 {
+    return ldap_compare_extA(ld, dn, Attr, Value, Data, ServerControls, ClientControls, MessageNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_compare_extW == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: Value optional
     // param-hint: Data optional
     // pinvoke-hint: cc=cdecl
     func ldap_compare_extW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, Attr: CPointer<UInt16>, Value: CPointer<UInt16>, Data: CPointer<LDAP_BERVALAbi>, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, ClientControls: CPointer<CPointer<LDAPControlWAbi>>, MessageNumber: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_compare_extW == "on"]
+public unsafe func Windows_ldap_compare_extW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, Attr: CPointer<UInt16>, Value: CPointer<UInt16>, Data: CPointer<LDAP_BERVALAbi>, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, ClientControls: CPointer<CPointer<LDAPControlWAbi>>, MessageNumber: CPointer<UInt32>): UInt32 {
+    return ldap_compare_extW(ld, dn, Attr, Value, Data, ServerControls, ClientControls, MessageNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_compare_ext_s == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_compare_ext_s(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, Attr: CPointer<UInt8>, Value: CPointer<UInt8>, Data: CPointer<LDAP_BERVALAbi>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_compare_ext_s == "on"]
+public unsafe func Windows_ldap_compare_ext_s(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, Attr: CPointer<UInt8>, Value: CPointer<UInt8>, Data: CPointer<LDAP_BERVALAbi>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>): UInt32 {
+    return ldap_compare_ext_s(ld, dn, Attr, Value, Data, ServerControls, ClientControls)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_compare_ext_sA == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: Value optional
     // param-hint: Data optional
     // pinvoke-hint: cc=cdecl
     func ldap_compare_ext_sA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, Attr: CPointer<UInt8>, Value: CPointer<UInt8>, Data: CPointer<LDAP_BERVALAbi>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_compare_ext_sA == "on"]
+public unsafe func Windows_ldap_compare_ext_sA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, Attr: CPointer<UInt8>, Value: CPointer<UInt8>, Data: CPointer<LDAP_BERVALAbi>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>): UInt32 {
+    return ldap_compare_ext_sA(ld, dn, Attr, Value, Data, ServerControls, ClientControls)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_compare_ext_sW == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: Value optional
     // param-hint: Data optional
     // pinvoke-hint: cc=cdecl
     func ldap_compare_ext_sW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, Attr: CPointer<UInt16>, Value: CPointer<UInt16>, Data: CPointer<LDAP_BERVALAbi>, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, ClientControls: CPointer<CPointer<LDAPControlWAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_compare_ext_sW == "on"]
+public unsafe func Windows_ldap_compare_ext_sW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, Attr: CPointer<UInt16>, Value: CPointer<UInt16>, Data: CPointer<LDAP_BERVALAbi>, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, ClientControls: CPointer<CPointer<LDAPControlWAbi>>): UInt32 {
+    return ldap_compare_ext_sW(ld, dn, Attr, Value, Data, ServerControls, ClientControls)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_compare_s == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_compare_s(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, attr: CPointer<UInt8>, value: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_compare_s == "on"]
+public unsafe func Windows_ldap_compare_s(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, attr: CPointer<UInt8>, value: CPointer<UInt8>): UInt32 {
+    return ldap_compare_s(ld, dn, attr, value)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_compare_sA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_compare_sA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, attr: CPointer<UInt8>, value: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_compare_sA == "on"]
+public unsafe func Windows_ldap_compare_sA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, attr: CPointer<UInt8>, value: CPointer<UInt8>): UInt32 {
+    return ldap_compare_sA(ld, dn, attr, value)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_compare_sW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_compare_sW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, attr: CPointer<UInt16>, value: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_compare_sW == "on"]
+public unsafe func Windows_ldap_compare_sW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, attr: CPointer<UInt16>, value: CPointer<UInt16>): UInt32 {
+    return ldap_compare_sW(ld, dn, attr, value)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_conn_from_msg == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_conn_from_msg(PrimaryConn: CPointer<LDAPAbi>, res: CPointer<LDAPMessageAbi>): CPointer<LDAPAbi>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_conn_from_msg == "on"]
+public unsafe func Windows_ldap_conn_from_msg(PrimaryConn: CPointer<LDAPAbi>, res: CPointer<LDAPMessageAbi>): CPointer<LDAPAbi> {
+    return ldap_conn_from_msg(PrimaryConn, res)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_connect == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_connect(ld: CPointer<LDAPAbi>, timeout: CPointer<LDAP_TIMEVALAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_connect == "on"]
+public unsafe func Windows_ldap_connect(ld: CPointer<LDAPAbi>, timeout: CPointer<LDAP_TIMEVALAbi>): UInt32 {
+    return ldap_connect(ld, timeout)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_control_free == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_control_free(Control: CPointer<LDAPControlAAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_control_free == "on"]
+public unsafe func Windows_ldap_control_free(Control: CPointer<LDAPControlAAbi>): UInt32 {
+    return ldap_control_free(Control)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_control_freeA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_control_freeA(Controls: CPointer<LDAPControlAAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_control_freeA == "on"]
+public unsafe func Windows_ldap_control_freeA(Controls: CPointer<LDAPControlAAbi>): UInt32 {
+    return ldap_control_freeA(Controls)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_control_freeW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_control_freeW(Control: CPointer<LDAPControlWAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_control_freeW == "on"]
+public unsafe func Windows_ldap_control_freeW(Control: CPointer<LDAPControlWAbi>): UInt32 {
+    return ldap_control_freeW(Control)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_controls_free == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_controls_free(Controls: CPointer<CPointer<LDAPControlAAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_controls_free == "on"]
+public unsafe func Windows_ldap_controls_free(Controls: CPointer<CPointer<LDAPControlAAbi>>): UInt32 {
+    return ldap_controls_free(Controls)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_controls_freeA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_controls_freeA(Controls: CPointer<CPointer<LDAPControlAAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_controls_freeA == "on"]
+public unsafe func Windows_ldap_controls_freeA(Controls: CPointer<CPointer<LDAPControlAAbi>>): UInt32 {
+    return ldap_controls_freeA(Controls)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_controls_freeW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_controls_freeW(Control: CPointer<CPointer<LDAPControlWAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_controls_freeW == "on"]
+public unsafe func Windows_ldap_controls_freeW(Control: CPointer<CPointer<LDAPControlWAbi>>): UInt32 {
+    return ldap_controls_freeW(Control)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_count_entries == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_count_entries(ld: CPointer<LDAPAbi>, res: CPointer<LDAPMessageAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_count_entries == "on"]
+public unsafe func Windows_ldap_count_entries(ld: CPointer<LDAPAbi>, res: CPointer<LDAPMessageAbi>): UInt32 {
+    return ldap_count_entries(ld, res)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_count_references == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_count_references(ld: CPointer<LDAPAbi>, res: CPointer<LDAPMessageAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_count_references == "on"]
+public unsafe func Windows_ldap_count_references(ld: CPointer<LDAPAbi>, res: CPointer<LDAPMessageAbi>): UInt32 {
+    return ldap_count_references(ld, res)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_count_values == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: vals optional
     // pinvoke-hint: cc=cdecl
     func ldap_count_values(vals: CPointer<CPointer<UInt8>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_count_values == "on"]
+public unsafe func Windows_ldap_count_values(vals: CPointer<CPointer<UInt8>>): UInt32 {
+    return ldap_count_values(vals)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_count_valuesA == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: vals optional
     // pinvoke-hint: cc=cdecl
     func ldap_count_valuesA(vals: CPointer<CPointer<UInt8>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_count_valuesA == "on"]
+public unsafe func Windows_ldap_count_valuesA(vals: CPointer<CPointer<UInt8>>): UInt32 {
+    return ldap_count_valuesA(vals)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_count_valuesW == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: vals optional
     // pinvoke-hint: cc=cdecl
     func ldap_count_valuesW(vals: CPointer<CPointer<UInt16>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_count_valuesW == "on"]
+public unsafe func Windows_ldap_count_valuesW(vals: CPointer<CPointer<UInt16>>): UInt32 {
+    return ldap_count_valuesW(vals)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_count_values_len == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_count_values_len(vals: CPointer<CPointer<LDAP_BERVALAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_count_values_len == "on"]
+public unsafe func Windows_ldap_count_values_len(vals: CPointer<CPointer<LDAP_BERVALAbi>>): UInt32 {
+    return ldap_count_values_len(vals)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_create_page_control == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_create_page_control(ExternalHandle: CPointer<LDAPAbi>, PageSize: UInt32, Cookie: CPointer<LDAP_BERVALAbi>, IsCritical: UInt8, Control: CPointer<CPointer<LDAPControlAAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_create_page_control == "on"]
+public unsafe func Windows_ldap_create_page_control(ExternalHandle: CPointer<LDAPAbi>, PageSize: UInt32, Cookie: CPointer<LDAP_BERVALAbi>, IsCritical: UInt8, Control: CPointer<CPointer<LDAPControlAAbi>>): UInt32 {
+    return ldap_create_page_control(ExternalHandle, PageSize, Cookie, IsCritical, Control)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_create_page_controlA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_create_page_controlA(ExternalHandle: CPointer<LDAPAbi>, PageSize: UInt32, Cookie: CPointer<LDAP_BERVALAbi>, IsCritical: UInt8, Control: CPointer<CPointer<LDAPControlAAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_create_page_controlA == "on"]
+public unsafe func Windows_ldap_create_page_controlA(ExternalHandle: CPointer<LDAPAbi>, PageSize: UInt32, Cookie: CPointer<LDAP_BERVALAbi>, IsCritical: UInt8, Control: CPointer<CPointer<LDAPControlAAbi>>): UInt32 {
+    return ldap_create_page_controlA(ExternalHandle, PageSize, Cookie, IsCritical, Control)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_create_page_controlW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_create_page_controlW(ExternalHandle: CPointer<LDAPAbi>, PageSize: UInt32, Cookie: CPointer<LDAP_BERVALAbi>, IsCritical: UInt8, Control: CPointer<CPointer<LDAPControlWAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_create_page_controlW == "on"]
+public unsafe func Windows_ldap_create_page_controlW(ExternalHandle: CPointer<LDAPAbi>, PageSize: UInt32, Cookie: CPointer<LDAP_BERVALAbi>, IsCritical: UInt8, Control: CPointer<CPointer<LDAPControlWAbi>>): UInt32 {
+    return ldap_create_page_controlW(ExternalHandle, PageSize, Cookie, IsCritical, Control)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_create_sort_control == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_create_sort_control(ExternalHandle: CPointer<LDAPAbi>, SortKeys: CPointer<CPointer<LDAPSortKeyAAbi>>, IsCritical: UInt8, Control: CPointer<CPointer<LDAPControlAAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_create_sort_control == "on"]
+public unsafe func Windows_ldap_create_sort_control(ExternalHandle: CPointer<LDAPAbi>, SortKeys: CPointer<CPointer<LDAPSortKeyAAbi>>, IsCritical: UInt8, Control: CPointer<CPointer<LDAPControlAAbi>>): UInt32 {
+    return ldap_create_sort_control(ExternalHandle, SortKeys, IsCritical, Control)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_create_sort_controlA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_create_sort_controlA(ExternalHandle: CPointer<LDAPAbi>, SortKeys: CPointer<CPointer<LDAPSortKeyAAbi>>, IsCritical: UInt8, Control: CPointer<CPointer<LDAPControlAAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_create_sort_controlA == "on"]
+public unsafe func Windows_ldap_create_sort_controlA(ExternalHandle: CPointer<LDAPAbi>, SortKeys: CPointer<CPointer<LDAPSortKeyAAbi>>, IsCritical: UInt8, Control: CPointer<CPointer<LDAPControlAAbi>>): UInt32 {
+    return ldap_create_sort_controlA(ExternalHandle, SortKeys, IsCritical, Control)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_create_sort_controlW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_create_sort_controlW(ExternalHandle: CPointer<LDAPAbi>, SortKeys: CPointer<CPointer<LDAPSortKeyWAbi>>, IsCritical: UInt8, Control: CPointer<CPointer<LDAPControlWAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_create_sort_controlW == "on"]
+public unsafe func Windows_ldap_create_sort_controlW(ExternalHandle: CPointer<LDAPAbi>, SortKeys: CPointer<CPointer<LDAPSortKeyWAbi>>, IsCritical: UInt8, Control: CPointer<CPointer<LDAPControlWAbi>>): UInt32 {
+    return ldap_create_sort_controlW(ExternalHandle, SortKeys, IsCritical, Control)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_create_vlv_controlA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_create_vlv_controlA(ExternalHandle: CPointer<LDAPAbi>, VlvInfo: CPointer<LDAPVLVInfoAbi>, IsCritical: UInt8, Control: CPointer<CPointer<LDAPControlAAbi>>): Int32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_create_vlv_controlA == "on"]
+public unsafe func Windows_ldap_create_vlv_controlA(ExternalHandle: CPointer<LDAPAbi>, VlvInfo: CPointer<LDAPVLVInfoAbi>, IsCritical: UInt8, Control: CPointer<CPointer<LDAPControlAAbi>>): Int32 {
+    return ldap_create_vlv_controlA(ExternalHandle, VlvInfo, IsCritical, Control)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_create_vlv_controlW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_create_vlv_controlW(ExternalHandle: CPointer<LDAPAbi>, VlvInfo: CPointer<LDAPVLVInfoAbi>, IsCritical: UInt8, Control: CPointer<CPointer<LDAPControlWAbi>>): Int32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_create_vlv_controlW == "on"]
+public unsafe func Windows_ldap_create_vlv_controlW(ExternalHandle: CPointer<LDAPAbi>, VlvInfo: CPointer<LDAPVLVInfoAbi>, IsCritical: UInt8, Control: CPointer<CPointer<LDAPControlWAbi>>): Int32 {
+    return ldap_create_vlv_controlW(ExternalHandle, VlvInfo, IsCritical, Control)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_delete == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_delete(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_delete == "on"]
+public unsafe func Windows_ldap_delete(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>): UInt32 {
+    return ldap_delete(ld, dn)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_deleteA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_deleteA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_deleteA == "on"]
+public unsafe func Windows_ldap_deleteA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>): UInt32 {
+    return ldap_deleteA(ld, dn)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_deleteW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_deleteW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_deleteW == "on"]
+public unsafe func Windows_ldap_deleteW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>): UInt32 {
+    return ldap_deleteW(ld, dn)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_delete_ext == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_delete_ext(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, MessageNumber: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_delete_ext == "on"]
+public unsafe func Windows_ldap_delete_ext(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, MessageNumber: CPointer<UInt32>): UInt32 {
+    return ldap_delete_ext(ld, dn, ServerControls, ClientControls, MessageNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_delete_extA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_delete_extA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, MessageNumber: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_delete_extA == "on"]
+public unsafe func Windows_ldap_delete_extA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, MessageNumber: CPointer<UInt32>): UInt32 {
+    return ldap_delete_extA(ld, dn, ServerControls, ClientControls, MessageNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_delete_extW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_delete_extW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, ClientControls: CPointer<CPointer<LDAPControlWAbi>>, MessageNumber: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_delete_extW == "on"]
+public unsafe func Windows_ldap_delete_extW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, ClientControls: CPointer<CPointer<LDAPControlWAbi>>, MessageNumber: CPointer<UInt32>): UInt32 {
+    return ldap_delete_extW(ld, dn, ServerControls, ClientControls, MessageNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_delete_ext_s == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_delete_ext_s(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_delete_ext_s == "on"]
+public unsafe func Windows_ldap_delete_ext_s(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>): UInt32 {
+    return ldap_delete_ext_s(ld, dn, ServerControls, ClientControls)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_delete_ext_sA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_delete_ext_sA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_delete_ext_sA == "on"]
+public unsafe func Windows_ldap_delete_ext_sA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>): UInt32 {
+    return ldap_delete_ext_sA(ld, dn, ServerControls, ClientControls)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_delete_ext_sW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_delete_ext_sW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, ClientControls: CPointer<CPointer<LDAPControlWAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_delete_ext_sW == "on"]
+public unsafe func Windows_ldap_delete_ext_sW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, ClientControls: CPointer<CPointer<LDAPControlWAbi>>): UInt32 {
+    return ldap_delete_ext_sW(ld, dn, ServerControls, ClientControls)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_delete_s == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_delete_s(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_delete_s == "on"]
+public unsafe func Windows_ldap_delete_s(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>): UInt32 {
+    return ldap_delete_s(ld, dn)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_delete_sA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_delete_sA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_delete_sA == "on"]
+public unsafe func Windows_ldap_delete_sA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>): UInt32 {
+    return ldap_delete_sA(ld, dn)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_delete_sW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_delete_sW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_delete_sW == "on"]
+public unsafe func Windows_ldap_delete_sW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>): UInt32 {
+    return ldap_delete_sW(ld, dn)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_dn2ufn == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_dn2ufn(dn: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_dn2ufn == "on"]
+public unsafe func Windows_ldap_dn2ufn(dn: CPointer<UInt8>): CPointer<UInt8> {
+    return ldap_dn2ufn(dn)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_dn2ufnA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_dn2ufnA(dn: CPointer<UInt8>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_dn2ufnA == "on"]
+public unsafe func Windows_ldap_dn2ufnA(dn: CPointer<UInt8>): CPointer<UInt8> {
+    return ldap_dn2ufnA(dn)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_dn2ufnW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_dn2ufnW(dn: CPointer<UInt16>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_dn2ufnW == "on"]
+public unsafe func Windows_ldap_dn2ufnW(dn: CPointer<UInt16>): CPointer<UInt16> {
+    return ldap_dn2ufnW(dn)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_encode_sort_controlA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_encode_sort_controlA(ExternalHandle: CPointer<LDAPAbi>, SortKeys: CPointer<CPointer<LDAPSortKeyAAbi>>, Control: CPointer<LDAPControlAAbi>, Criticality: UInt8): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_encode_sort_controlA == "on"]
+public unsafe func Windows_ldap_encode_sort_controlA(ExternalHandle: CPointer<LDAPAbi>, SortKeys: CPointer<CPointer<LDAPSortKeyAAbi>>, Control: CPointer<LDAPControlAAbi>, Criticality: UInt8): UInt32 {
+    return ldap_encode_sort_controlA(ExternalHandle, SortKeys, Control, Criticality)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_encode_sort_controlW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_encode_sort_controlW(ExternalHandle: CPointer<LDAPAbi>, SortKeys: CPointer<CPointer<LDAPSortKeyWAbi>>, Control: CPointer<LDAPControlWAbi>, Criticality: UInt8): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_encode_sort_controlW == "on"]
+public unsafe func Windows_ldap_encode_sort_controlW(ExternalHandle: CPointer<LDAPAbi>, SortKeys: CPointer<CPointer<LDAPSortKeyWAbi>>, Control: CPointer<LDAPControlWAbi>, Criticality: UInt8): UInt32 {
+    return ldap_encode_sort_controlW(ExternalHandle, SortKeys, Control, Criticality)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_err2string == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_err2string(err: UInt32): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_err2string == "on"]
+public unsafe func Windows_ldap_err2string(err: UInt32): CPointer<UInt8> {
+    return ldap_err2string(err)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_err2stringA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_err2stringA(err: UInt32): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_err2stringA == "on"]
+public unsafe func Windows_ldap_err2stringA(err: UInt32): CPointer<UInt8> {
+    return ldap_err2stringA(err)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_err2stringW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_err2stringW(err: UInt32): CPointer<UInt16>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_err2stringW == "on"]
+public unsafe func Windows_ldap_err2stringW(err: UInt32): CPointer<UInt16> {
+    return ldap_err2stringW(err)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_escape_filter_element == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: sourceFilterElement bytes=param[1]
     // param-hint: destFilterElement bytes=param[3] optional
     // pinvoke-hint: cc=cdecl
     func ldap_escape_filter_element(sourceFilterElement: CPointer<UInt8>, sourceLength: UInt32, destFilterElement: CPointer<UInt8>, destLength: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_escape_filter_element == "on"]
+public unsafe func Windows_ldap_escape_filter_element(sourceFilterElement: CPointer<UInt8>, sourceLength: UInt32, destFilterElement: CPointer<UInt8>, destLength: UInt32): UInt32 {
+    return ldap_escape_filter_element(sourceFilterElement, sourceLength, destFilterElement, destLength)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_escape_filter_elementA == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: sourceFilterElement bytes=param[1]
     // param-hint: destFilterElement bytes=param[3] optional
     // pinvoke-hint: cc=cdecl
     func ldap_escape_filter_elementA(sourceFilterElement: CPointer<UInt8>, sourceLength: UInt32, destFilterElement: CPointer<UInt8>, destLength: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_escape_filter_elementA == "on"]
+public unsafe func Windows_ldap_escape_filter_elementA(sourceFilterElement: CPointer<UInt8>, sourceLength: UInt32, destFilterElement: CPointer<UInt8>, destLength: UInt32): UInt32 {
+    return ldap_escape_filter_elementA(sourceFilterElement, sourceLength, destFilterElement, destLength)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_escape_filter_elementW == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: sourceFilterElement bytes=param[1]
     // param-hint: destFilterElement bytes=param[3] optional
     // pinvoke-hint: cc=cdecl
     func ldap_escape_filter_elementW(sourceFilterElement: CPointer<UInt8>, sourceLength: UInt32, destFilterElement: CPointer<UInt16>, destLength: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_escape_filter_elementW == "on"]
+public unsafe func Windows_ldap_escape_filter_elementW(sourceFilterElement: CPointer<UInt8>, sourceLength: UInt32, destFilterElement: CPointer<UInt16>, destLength: UInt32): UInt32 {
+    return ldap_escape_filter_elementW(sourceFilterElement, sourceLength, destFilterElement, destLength)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_explode_dn == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_explode_dn(dn: CPointer<UInt8>, notypes: UInt32): CPointer<CPointer<UInt8>>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_explode_dn == "on"]
+public unsafe func Windows_ldap_explode_dn(dn: CPointer<UInt8>, notypes: UInt32): CPointer<CPointer<UInt8>> {
+    return ldap_explode_dn(dn, notypes)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_explode_dnA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_explode_dnA(dn: CPointer<UInt8>, notypes: UInt32): CPointer<CPointer<UInt8>>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_explode_dnA == "on"]
+public unsafe func Windows_ldap_explode_dnA(dn: CPointer<UInt8>, notypes: UInt32): CPointer<CPointer<UInt8>> {
+    return ldap_explode_dnA(dn, notypes)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_explode_dnW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_explode_dnW(dn: CPointer<UInt16>, notypes: UInt32): CPointer<CPointer<UInt16>>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_explode_dnW == "on"]
+public unsafe func Windows_ldap_explode_dnW(dn: CPointer<UInt16>, notypes: UInt32): CPointer<CPointer<UInt16>> {
+    return ldap_explode_dnW(dn, notypes)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_extended_operation == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_extended_operation(ld: CPointer<LDAPAbi>, Oid: CPointer<UInt8>, Data: CPointer<LDAP_BERVALAbi>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, MessageNumber: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_extended_operation == "on"]
+public unsafe func Windows_ldap_extended_operation(ld: CPointer<LDAPAbi>, Oid: CPointer<UInt8>, Data: CPointer<LDAP_BERVALAbi>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, MessageNumber: CPointer<UInt32>): UInt32 {
+    return ldap_extended_operation(ld, Oid, Data, ServerControls, ClientControls, MessageNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_extended_operationA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_extended_operationA(ld: CPointer<LDAPAbi>, Oid: CPointer<UInt8>, Data: CPointer<LDAP_BERVALAbi>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, MessageNumber: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_extended_operationA == "on"]
+public unsafe func Windows_ldap_extended_operationA(ld: CPointer<LDAPAbi>, Oid: CPointer<UInt8>, Data: CPointer<LDAP_BERVALAbi>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, MessageNumber: CPointer<UInt32>): UInt32 {
+    return ldap_extended_operationA(ld, Oid, Data, ServerControls, ClientControls, MessageNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_extended_operationW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_extended_operationW(ld: CPointer<LDAPAbi>, Oid: CPointer<UInt16>, Data: CPointer<LDAP_BERVALAbi>, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, ClientControls: CPointer<CPointer<LDAPControlWAbi>>, MessageNumber: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_extended_operationW == "on"]
+public unsafe func Windows_ldap_extended_operationW(ld: CPointer<LDAPAbi>, Oid: CPointer<UInt16>, Data: CPointer<LDAP_BERVALAbi>, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, ClientControls: CPointer<CPointer<LDAPControlWAbi>>, MessageNumber: CPointer<UInt32>): UInt32 {
+    return ldap_extended_operationW(ld, Oid, Data, ServerControls, ClientControls, MessageNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_extended_operation_sA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_extended_operation_sA(ExternalHandle: CPointer<LDAPAbi>, Oid: CPointer<UInt8>, Data: CPointer<LDAP_BERVALAbi>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, ReturnedOid: CPointer<CPointer<UInt8>>, ReturnedData: CPointer<CPointer<LDAP_BERVALAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_extended_operation_sA == "on"]
+public unsafe func Windows_ldap_extended_operation_sA(ExternalHandle: CPointer<LDAPAbi>, Oid: CPointer<UInt8>, Data: CPointer<LDAP_BERVALAbi>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, ReturnedOid: CPointer<CPointer<UInt8>>, ReturnedData: CPointer<CPointer<LDAP_BERVALAbi>>): UInt32 {
+    return ldap_extended_operation_sA(ExternalHandle, Oid, Data, ServerControls, ClientControls, ReturnedOid, ReturnedData)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_extended_operation_sW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_extended_operation_sW(ExternalHandle: CPointer<LDAPAbi>, Oid: CPointer<UInt16>, Data: CPointer<LDAP_BERVALAbi>, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, ClientControls: CPointer<CPointer<LDAPControlWAbi>>, ReturnedOid: CPointer<CPointer<UInt16>>, ReturnedData: CPointer<CPointer<LDAP_BERVALAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_extended_operation_sW == "on"]
+public unsafe func Windows_ldap_extended_operation_sW(ExternalHandle: CPointer<LDAPAbi>, Oid: CPointer<UInt16>, Data: CPointer<LDAP_BERVALAbi>, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, ClientControls: CPointer<CPointer<LDAPControlWAbi>>, ReturnedOid: CPointer<CPointer<UInt16>>, ReturnedData: CPointer<CPointer<LDAP_BERVALAbi>>): UInt32 {
+    return ldap_extended_operation_sW(ExternalHandle, Oid, Data, ServerControls, ClientControls, ReturnedOid, ReturnedData)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_first_attribute == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_first_attribute(ld: CPointer<LDAPAbi>, entry: CPointer<LDAPMessageAbi>, ptr: CPointer<CPointer<BerElementAbi>>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_first_attribute == "on"]
+public unsafe func Windows_ldap_first_attribute(ld: CPointer<LDAPAbi>, entry: CPointer<LDAPMessageAbi>, ptr: CPointer<CPointer<BerElementAbi>>): CPointer<UInt8> {
+    return ldap_first_attribute(ld, entry, ptr)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_first_attributeA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_first_attributeA(ld: CPointer<LDAPAbi>, entry: CPointer<LDAPMessageAbi>, ptr: CPointer<CPointer<BerElementAbi>>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_first_attributeA == "on"]
+public unsafe func Windows_ldap_first_attributeA(ld: CPointer<LDAPAbi>, entry: CPointer<LDAPMessageAbi>, ptr: CPointer<CPointer<BerElementAbi>>): CPointer<UInt8> {
+    return ldap_first_attributeA(ld, entry, ptr)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_first_attributeW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_first_attributeW(ld: CPointer<LDAPAbi>, entry: CPointer<LDAPMessageAbi>, ptr: CPointer<CPointer<BerElementAbi>>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_first_attributeW == "on"]
+public unsafe func Windows_ldap_first_attributeW(ld: CPointer<LDAPAbi>, entry: CPointer<LDAPMessageAbi>, ptr: CPointer<CPointer<BerElementAbi>>): CPointer<UInt16> {
+    return ldap_first_attributeW(ld, entry, ptr)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_first_entry == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_first_entry(ld: CPointer<LDAPAbi>, res: CPointer<LDAPMessageAbi>): CPointer<LDAPMessageAbi>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_first_entry == "on"]
+public unsafe func Windows_ldap_first_entry(ld: CPointer<LDAPAbi>, res: CPointer<LDAPMessageAbi>): CPointer<LDAPMessageAbi> {
+    return ldap_first_entry(ld, res)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_first_reference == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_first_reference(ld: CPointer<LDAPAbi>, res: CPointer<LDAPMessageAbi>): CPointer<LDAPMessageAbi>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_first_reference == "on"]
+public unsafe func Windows_ldap_first_reference(ld: CPointer<LDAPAbi>, res: CPointer<LDAPMessageAbi>): CPointer<LDAPMessageAbi> {
+    return ldap_first_reference(ld, res)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_free_controls == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_free_controls(Controls: CPointer<CPointer<LDAPControlAAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_free_controls == "on"]
+public unsafe func Windows_ldap_free_controls(Controls: CPointer<CPointer<LDAPControlAAbi>>): UInt32 {
+    return ldap_free_controls(Controls)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_free_controlsA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_free_controlsA(Controls: CPointer<CPointer<LDAPControlAAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_free_controlsA == "on"]
+public unsafe func Windows_ldap_free_controlsA(Controls: CPointer<CPointer<LDAPControlAAbi>>): UInt32 {
+    return ldap_free_controlsA(Controls)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_free_controlsW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_free_controlsW(Controls: CPointer<CPointer<LDAPControlWAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_free_controlsW == "on"]
+public unsafe func Windows_ldap_free_controlsW(Controls: CPointer<CPointer<LDAPControlWAbi>>): UInt32 {
+    return ldap_free_controlsW(Controls)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_get_dn == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_get_dn(ld: CPointer<LDAPAbi>, entry: CPointer<LDAPMessageAbi>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_get_dn == "on"]
+public unsafe func Windows_ldap_get_dn(ld: CPointer<LDAPAbi>, entry: CPointer<LDAPMessageAbi>): CPointer<UInt8> {
+    return ldap_get_dn(ld, entry)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_get_dnA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_get_dnA(ld: CPointer<LDAPAbi>, entry: CPointer<LDAPMessageAbi>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_get_dnA == "on"]
+public unsafe func Windows_ldap_get_dnA(ld: CPointer<LDAPAbi>, entry: CPointer<LDAPMessageAbi>): CPointer<UInt8> {
+    return ldap_get_dnA(ld, entry)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_get_dnW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_get_dnW(ld: CPointer<LDAPAbi>, entry: CPointer<LDAPMessageAbi>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_get_dnW == "on"]
+public unsafe func Windows_ldap_get_dnW(ld: CPointer<LDAPAbi>, entry: CPointer<LDAPMessageAbi>): CPointer<UInt16> {
+    return ldap_get_dnW(ld, entry)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_get_next_page == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_get_next_page(ExternalHandle: CPointer<LDAPAbi>, SearchHandle: PLDAPSearch, PageSize: UInt32, MessageNumber: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_get_next_page == "on"]
+public unsafe func Windows_ldap_get_next_page(ExternalHandle: CPointer<LDAPAbi>, SearchHandle: PLDAPSearch, PageSize: UInt32, MessageNumber: CPointer<UInt32>): UInt32 {
+    return ldap_get_next_page(ExternalHandle, SearchHandle, PageSize, MessageNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_get_next_page_s == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_get_next_page_s(ExternalHandle: CPointer<LDAPAbi>, SearchHandle: PLDAPSearch, timeout: CPointer<LDAP_TIMEVALAbi>, PageSize: UInt32, TotalCount: CPointer<UInt32>, Results: CPointer<CPointer<LDAPMessageAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_get_next_page_s == "on"]
+public unsafe func Windows_ldap_get_next_page_s(ExternalHandle: CPointer<LDAPAbi>, SearchHandle: PLDAPSearch, timeout: CPointer<LDAP_TIMEVALAbi>, PageSize: UInt32, TotalCount: CPointer<UInt32>, Results: CPointer<CPointer<LDAPMessageAbi>>): UInt32 {
+    return ldap_get_next_page_s(ExternalHandle, SearchHandle, timeout, PageSize, TotalCount, Results)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_get_option == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_get_option(ld: CPointer<LDAPAbi>, option: Int32, outvalue: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_get_option == "on"]
+public unsafe func Windows_ldap_get_option(ld: CPointer<LDAPAbi>, option: Int32, outvalue: CPointer<Unit>): UInt32 {
+    return ldap_get_option(ld, option, outvalue)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_get_optionW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_get_optionW(ld: CPointer<LDAPAbi>, option: Int32, outvalue: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_get_optionW == "on"]
+public unsafe func Windows_ldap_get_optionW(ld: CPointer<LDAPAbi>, option: Int32, outvalue: CPointer<Unit>): UInt32 {
+    return ldap_get_optionW(ld, option, outvalue)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_get_paged_count == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_get_paged_count(ExternalHandle: CPointer<LDAPAbi>, SearchBlock: PLDAPSearch, TotalCount: CPointer<UInt32>, Results: CPointer<LDAPMessageAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_get_paged_count == "on"]
+public unsafe func Windows_ldap_get_paged_count(ExternalHandle: CPointer<LDAPAbi>, SearchBlock: PLDAPSearch, TotalCount: CPointer<UInt32>, Results: CPointer<LDAPMessageAbi>): UInt32 {
+    return ldap_get_paged_count(ExternalHandle, SearchBlock, TotalCount, Results)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_get_values == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_get_values(ld: CPointer<LDAPAbi>, entry: CPointer<LDAPMessageAbi>, attr: CPointer<UInt8>): CPointer<CPointer<UInt8>>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_get_values == "on"]
+public unsafe func Windows_ldap_get_values(ld: CPointer<LDAPAbi>, entry: CPointer<LDAPMessageAbi>, attr: CPointer<UInt8>): CPointer<CPointer<UInt8>> {
+    return ldap_get_values(ld, entry, attr)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_get_valuesA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_get_valuesA(ld: CPointer<LDAPAbi>, entry: CPointer<LDAPMessageAbi>, attr: CPointer<UInt8>): CPointer<CPointer<UInt8>>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_get_valuesA == "on"]
+public unsafe func Windows_ldap_get_valuesA(ld: CPointer<LDAPAbi>, entry: CPointer<LDAPMessageAbi>, attr: CPointer<UInt8>): CPointer<CPointer<UInt8>> {
+    return ldap_get_valuesA(ld, entry, attr)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_get_valuesW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_get_valuesW(ld: CPointer<LDAPAbi>, entry: CPointer<LDAPMessageAbi>, attr: CPointer<UInt16>): CPointer<CPointer<UInt16>>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_get_valuesW == "on"]
+public unsafe func Windows_ldap_get_valuesW(ld: CPointer<LDAPAbi>, entry: CPointer<LDAPMessageAbi>, attr: CPointer<UInt16>): CPointer<CPointer<UInt16>> {
+    return ldap_get_valuesW(ld, entry, attr)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_get_values_len == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_get_values_len(ExternalHandle: CPointer<LDAPAbi>, Message: CPointer<LDAPMessageAbi>, attr: CPointer<UInt8>): CPointer<CPointer<LDAP_BERVALAbi>>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_get_values_len == "on"]
+public unsafe func Windows_ldap_get_values_len(ExternalHandle: CPointer<LDAPAbi>, Message: CPointer<LDAPMessageAbi>, attr: CPointer<UInt8>): CPointer<CPointer<LDAP_BERVALAbi>> {
+    return ldap_get_values_len(ExternalHandle, Message, attr)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_get_values_lenA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_get_values_lenA(ExternalHandle: CPointer<LDAPAbi>, Message: CPointer<LDAPMessageAbi>, attr: CPointer<UInt8>): CPointer<CPointer<LDAP_BERVALAbi>>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_get_values_lenA == "on"]
+public unsafe func Windows_ldap_get_values_lenA(ExternalHandle: CPointer<LDAPAbi>, Message: CPointer<LDAPMessageAbi>, attr: CPointer<UInt8>): CPointer<CPointer<LDAP_BERVALAbi>> {
+    return ldap_get_values_lenA(ExternalHandle, Message, attr)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_get_values_lenW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_get_values_lenW(ExternalHandle: CPointer<LDAPAbi>, Message: CPointer<LDAPMessageAbi>, attr: CPointer<UInt16>): CPointer<CPointer<LDAP_BERVALAbi>>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_get_values_lenW == "on"]
+public unsafe func Windows_ldap_get_values_lenW(ExternalHandle: CPointer<LDAPAbi>, Message: CPointer<LDAPMessageAbi>, attr: CPointer<UInt16>): CPointer<CPointer<LDAP_BERVALAbi>> {
+    return ldap_get_values_lenW(ExternalHandle, Message, attr)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_init == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_init(HostName: CPointer<UInt8>, PortNumber: UInt32): CPointer<LDAPAbi>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_init == "on"]
+public unsafe func Windows_ldap_init(HostName: CPointer<UInt8>, PortNumber: UInt32): CPointer<LDAPAbi> {
+    return ldap_init(HostName, PortNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_initA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_initA(HostName: CPointer<UInt8>, PortNumber: UInt32): CPointer<LDAPAbi>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_initA == "on"]
+public unsafe func Windows_ldap_initA(HostName: CPointer<UInt8>, PortNumber: UInt32): CPointer<LDAPAbi> {
+    return ldap_initA(HostName, PortNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_initW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_initW(HostName: CPointer<UInt16>, PortNumber: UInt32): CPointer<LDAPAbi>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_initW == "on"]
+public unsafe func Windows_ldap_initW(HostName: CPointer<UInt16>, PortNumber: UInt32): CPointer<LDAPAbi> {
+    return ldap_initW(HostName, PortNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_memfree == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_memfree(Block: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_memfree == "on"]
+public unsafe func Windows_ldap_memfree(Block: CPointer<UInt8>): Unit {
+    ldap_memfree(Block)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_memfreeA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_memfreeA(Block: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_memfreeA == "on"]
+public unsafe func Windows_ldap_memfreeA(Block: CPointer<UInt8>): Unit {
+    ldap_memfreeA(Block)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_memfreeW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_memfreeW(Block: CPointer<UInt16>): Unit
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_memfreeW == "on"]
+public unsafe func Windows_ldap_memfreeW(Block: CPointer<UInt16>): Unit {
+    ldap_memfreeW(Block)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modify == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_modify(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, mods: CPointer<CPointer<LDAPModAAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modify == "on"]
+public unsafe func Windows_ldap_modify(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, mods: CPointer<CPointer<LDAPModAAbi>>): UInt32 {
+    return ldap_modify(ld, dn, mods)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modifyA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_modifyA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, mods: CPointer<CPointer<LDAPModAAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modifyA == "on"]
+public unsafe func Windows_ldap_modifyA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, mods: CPointer<CPointer<LDAPModAAbi>>): UInt32 {
+    return ldap_modifyA(ld, dn, mods)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modifyW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_modifyW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, mods: CPointer<CPointer<LDAPModWAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modifyW == "on"]
+public unsafe func Windows_ldap_modifyW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, mods: CPointer<CPointer<LDAPModWAbi>>): UInt32 {
+    return ldap_modifyW(ld, dn, mods)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modify_ext == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_modify_ext(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, mods: CPointer<CPointer<LDAPModAAbi>>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, MessageNumber: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modify_ext == "on"]
+public unsafe func Windows_ldap_modify_ext(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, mods: CPointer<CPointer<LDAPModAAbi>>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, MessageNumber: CPointer<UInt32>): UInt32 {
+    return ldap_modify_ext(ld, dn, mods, ServerControls, ClientControls, MessageNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modify_extA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_modify_extA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, mods: CPointer<CPointer<LDAPModAAbi>>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, MessageNumber: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modify_extA == "on"]
+public unsafe func Windows_ldap_modify_extA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, mods: CPointer<CPointer<LDAPModAAbi>>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, MessageNumber: CPointer<UInt32>): UInt32 {
+    return ldap_modify_extA(ld, dn, mods, ServerControls, ClientControls, MessageNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modify_extW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_modify_extW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, mods: CPointer<CPointer<LDAPModWAbi>>, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, ClientControls: CPointer<CPointer<LDAPControlWAbi>>, MessageNumber: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modify_extW == "on"]
+public unsafe func Windows_ldap_modify_extW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, mods: CPointer<CPointer<LDAPModWAbi>>, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, ClientControls: CPointer<CPointer<LDAPControlWAbi>>, MessageNumber: CPointer<UInt32>): UInt32 {
+    return ldap_modify_extW(ld, dn, mods, ServerControls, ClientControls, MessageNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modify_ext_s == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_modify_ext_s(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, mods: CPointer<CPointer<LDAPModAAbi>>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modify_ext_s == "on"]
+public unsafe func Windows_ldap_modify_ext_s(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, mods: CPointer<CPointer<LDAPModAAbi>>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>): UInt32 {
+    return ldap_modify_ext_s(ld, dn, mods, ServerControls, ClientControls)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modify_ext_sA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_modify_ext_sA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, mods: CPointer<CPointer<LDAPModAAbi>>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modify_ext_sA == "on"]
+public unsafe func Windows_ldap_modify_ext_sA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, mods: CPointer<CPointer<LDAPModAAbi>>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>): UInt32 {
+    return ldap_modify_ext_sA(ld, dn, mods, ServerControls, ClientControls)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modify_ext_sW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_modify_ext_sW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, mods: CPointer<CPointer<LDAPModWAbi>>, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, ClientControls: CPointer<CPointer<LDAPControlWAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modify_ext_sW == "on"]
+public unsafe func Windows_ldap_modify_ext_sW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, mods: CPointer<CPointer<LDAPModWAbi>>, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, ClientControls: CPointer<CPointer<LDAPControlWAbi>>): UInt32 {
+    return ldap_modify_ext_sW(ld, dn, mods, ServerControls, ClientControls)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modify_s == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_modify_s(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, mods: CPointer<CPointer<LDAPModAAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modify_s == "on"]
+public unsafe func Windows_ldap_modify_s(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, mods: CPointer<CPointer<LDAPModAAbi>>): UInt32 {
+    return ldap_modify_s(ld, dn, mods)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modify_sA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_modify_sA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, mods: CPointer<CPointer<LDAPModAAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modify_sA == "on"]
+public unsafe func Windows_ldap_modify_sA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, mods: CPointer<CPointer<LDAPModAAbi>>): UInt32 {
+    return ldap_modify_sA(ld, dn, mods)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modify_sW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_modify_sW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, mods: CPointer<CPointer<LDAPModWAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modify_sW == "on"]
+public unsafe func Windows_ldap_modify_sW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, mods: CPointer<CPointer<LDAPModWAbi>>): UInt32 {
+    return ldap_modify_sW(ld, dn, mods)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modrdn == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_modrdn(ExternalHandle: CPointer<LDAPAbi>, DistinguishedName: CPointer<UInt8>, NewDistinguishedName: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modrdn == "on"]
+public unsafe func Windows_ldap_modrdn(ExternalHandle: CPointer<LDAPAbi>, DistinguishedName: CPointer<UInt8>, NewDistinguishedName: CPointer<UInt8>): UInt32 {
+    return ldap_modrdn(ExternalHandle, DistinguishedName, NewDistinguishedName)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modrdn2 == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_modrdn2(ExternalHandle: CPointer<LDAPAbi>, DistinguishedName: CPointer<UInt8>, NewDistinguishedName: CPointer<UInt8>, DeleteOldRdn: Int32): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modrdn2 == "on"]
+public unsafe func Windows_ldap_modrdn2(ExternalHandle: CPointer<LDAPAbi>, DistinguishedName: CPointer<UInt8>, NewDistinguishedName: CPointer<UInt8>, DeleteOldRdn: Int32): UInt32 {
+    return ldap_modrdn2(ExternalHandle, DistinguishedName, NewDistinguishedName, DeleteOldRdn)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modrdn2A == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_modrdn2A(ExternalHandle: CPointer<LDAPAbi>, DistinguishedName: CPointer<UInt8>, NewDistinguishedName: CPointer<UInt8>, DeleteOldRdn: Int32): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modrdn2A == "on"]
+public unsafe func Windows_ldap_modrdn2A(ExternalHandle: CPointer<LDAPAbi>, DistinguishedName: CPointer<UInt8>, NewDistinguishedName: CPointer<UInt8>, DeleteOldRdn: Int32): UInt32 {
+    return ldap_modrdn2A(ExternalHandle, DistinguishedName, NewDistinguishedName, DeleteOldRdn)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modrdn2W == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_modrdn2W(ExternalHandle: CPointer<LDAPAbi>, DistinguishedName: CPointer<UInt16>, NewDistinguishedName: CPointer<UInt16>, DeleteOldRdn: Int32): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modrdn2W == "on"]
+public unsafe func Windows_ldap_modrdn2W(ExternalHandle: CPointer<LDAPAbi>, DistinguishedName: CPointer<UInt16>, NewDistinguishedName: CPointer<UInt16>, DeleteOldRdn: Int32): UInt32 {
+    return ldap_modrdn2W(ExternalHandle, DistinguishedName, NewDistinguishedName, DeleteOldRdn)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modrdn2_s == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_modrdn2_s(ExternalHandle: CPointer<LDAPAbi>, DistinguishedName: CPointer<UInt8>, NewDistinguishedName: CPointer<UInt8>, DeleteOldRdn: Int32): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modrdn2_s == "on"]
+public unsafe func Windows_ldap_modrdn2_s(ExternalHandle: CPointer<LDAPAbi>, DistinguishedName: CPointer<UInt8>, NewDistinguishedName: CPointer<UInt8>, DeleteOldRdn: Int32): UInt32 {
+    return ldap_modrdn2_s(ExternalHandle, DistinguishedName, NewDistinguishedName, DeleteOldRdn)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modrdn2_sA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_modrdn2_sA(ExternalHandle: CPointer<LDAPAbi>, DistinguishedName: CPointer<UInt8>, NewDistinguishedName: CPointer<UInt8>, DeleteOldRdn: Int32): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modrdn2_sA == "on"]
+public unsafe func Windows_ldap_modrdn2_sA(ExternalHandle: CPointer<LDAPAbi>, DistinguishedName: CPointer<UInt8>, NewDistinguishedName: CPointer<UInt8>, DeleteOldRdn: Int32): UInt32 {
+    return ldap_modrdn2_sA(ExternalHandle, DistinguishedName, NewDistinguishedName, DeleteOldRdn)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modrdn2_sW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_modrdn2_sW(ExternalHandle: CPointer<LDAPAbi>, DistinguishedName: CPointer<UInt16>, NewDistinguishedName: CPointer<UInt16>, DeleteOldRdn: Int32): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modrdn2_sW == "on"]
+public unsafe func Windows_ldap_modrdn2_sW(ExternalHandle: CPointer<LDAPAbi>, DistinguishedName: CPointer<UInt16>, NewDistinguishedName: CPointer<UInt16>, DeleteOldRdn: Int32): UInt32 {
+    return ldap_modrdn2_sW(ExternalHandle, DistinguishedName, NewDistinguishedName, DeleteOldRdn)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modrdnA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_modrdnA(ExternalHandle: CPointer<LDAPAbi>, DistinguishedName: CPointer<UInt8>, NewDistinguishedName: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modrdnA == "on"]
+public unsafe func Windows_ldap_modrdnA(ExternalHandle: CPointer<LDAPAbi>, DistinguishedName: CPointer<UInt8>, NewDistinguishedName: CPointer<UInt8>): UInt32 {
+    return ldap_modrdnA(ExternalHandle, DistinguishedName, NewDistinguishedName)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modrdnW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_modrdnW(ExternalHandle: CPointer<LDAPAbi>, DistinguishedName: CPointer<UInt16>, NewDistinguishedName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modrdnW == "on"]
+public unsafe func Windows_ldap_modrdnW(ExternalHandle: CPointer<LDAPAbi>, DistinguishedName: CPointer<UInt16>, NewDistinguishedName: CPointer<UInt16>): UInt32 {
+    return ldap_modrdnW(ExternalHandle, DistinguishedName, NewDistinguishedName)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modrdn_s == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_modrdn_s(ExternalHandle: CPointer<LDAPAbi>, DistinguishedName: CPointer<UInt8>, NewDistinguishedName: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modrdn_s == "on"]
+public unsafe func Windows_ldap_modrdn_s(ExternalHandle: CPointer<LDAPAbi>, DistinguishedName: CPointer<UInt8>, NewDistinguishedName: CPointer<UInt8>): UInt32 {
+    return ldap_modrdn_s(ExternalHandle, DistinguishedName, NewDistinguishedName)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modrdn_sA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_modrdn_sA(ExternalHandle: CPointer<LDAPAbi>, DistinguishedName: CPointer<UInt8>, NewDistinguishedName: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modrdn_sA == "on"]
+public unsafe func Windows_ldap_modrdn_sA(ExternalHandle: CPointer<LDAPAbi>, DistinguishedName: CPointer<UInt8>, NewDistinguishedName: CPointer<UInt8>): UInt32 {
+    return ldap_modrdn_sA(ExternalHandle, DistinguishedName, NewDistinguishedName)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modrdn_sW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_modrdn_sW(ExternalHandle: CPointer<LDAPAbi>, DistinguishedName: CPointer<UInt16>, NewDistinguishedName: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_modrdn_sW == "on"]
+public unsafe func Windows_ldap_modrdn_sW(ExternalHandle: CPointer<LDAPAbi>, DistinguishedName: CPointer<UInt16>, NewDistinguishedName: CPointer<UInt16>): UInt32 {
+    return ldap_modrdn_sW(ExternalHandle, DistinguishedName, NewDistinguishedName)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_msgfree == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_msgfree(res: CPointer<LDAPMessageAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_msgfree == "on"]
+public unsafe func Windows_ldap_msgfree(res: CPointer<LDAPMessageAbi>): UInt32 {
+    return ldap_msgfree(res)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_next_attribute == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_next_attribute(ld: CPointer<LDAPAbi>, entry: CPointer<LDAPMessageAbi>, ptr: CPointer<BerElementAbi>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_next_attribute == "on"]
+public unsafe func Windows_ldap_next_attribute(ld: CPointer<LDAPAbi>, entry: CPointer<LDAPMessageAbi>, ptr: CPointer<BerElementAbi>): CPointer<UInt8> {
+    return ldap_next_attribute(ld, entry, ptr)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_next_attributeA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_next_attributeA(ld: CPointer<LDAPAbi>, entry: CPointer<LDAPMessageAbi>, ptr: CPointer<BerElementAbi>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_next_attributeA == "on"]
+public unsafe func Windows_ldap_next_attributeA(ld: CPointer<LDAPAbi>, entry: CPointer<LDAPMessageAbi>, ptr: CPointer<BerElementAbi>): CPointer<UInt8> {
+    return ldap_next_attributeA(ld, entry, ptr)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_next_attributeW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_next_attributeW(ld: CPointer<LDAPAbi>, entry: CPointer<LDAPMessageAbi>, ptr: CPointer<BerElementAbi>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_next_attributeW == "on"]
+public unsafe func Windows_ldap_next_attributeW(ld: CPointer<LDAPAbi>, entry: CPointer<LDAPMessageAbi>, ptr: CPointer<BerElementAbi>): CPointer<UInt16> {
+    return ldap_next_attributeW(ld, entry, ptr)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_next_entry == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_next_entry(ld: CPointer<LDAPAbi>, entry: CPointer<LDAPMessageAbi>): CPointer<LDAPMessageAbi>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_next_entry == "on"]
+public unsafe func Windows_ldap_next_entry(ld: CPointer<LDAPAbi>, entry: CPointer<LDAPMessageAbi>): CPointer<LDAPMessageAbi> {
+    return ldap_next_entry(ld, entry)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_next_reference == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_next_reference(ld: CPointer<LDAPAbi>, entry: CPointer<LDAPMessageAbi>): CPointer<LDAPMessageAbi>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_next_reference == "on"]
+public unsafe func Windows_ldap_next_reference(ld: CPointer<LDAPAbi>, entry: CPointer<LDAPMessageAbi>): CPointer<LDAPMessageAbi> {
+    return ldap_next_reference(ld, entry)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_open == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_open(HostName: CPointer<UInt8>, PortNumber: UInt32): CPointer<LDAPAbi>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_open == "on"]
+public unsafe func Windows_ldap_open(HostName: CPointer<UInt8>, PortNumber: UInt32): CPointer<LDAPAbi> {
+    return ldap_open(HostName, PortNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_openA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_openA(HostName: CPointer<UInt8>, PortNumber: UInt32): CPointer<LDAPAbi>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_openA == "on"]
+public unsafe func Windows_ldap_openA(HostName: CPointer<UInt8>, PortNumber: UInt32): CPointer<LDAPAbi> {
+    return ldap_openA(HostName, PortNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_openW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_openW(HostName: CPointer<UInt16>, PortNumber: UInt32): CPointer<LDAPAbi>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_openW == "on"]
+public unsafe func Windows_ldap_openW(HostName: CPointer<UInt16>, PortNumber: UInt32): CPointer<LDAPAbi> {
+    return ldap_openW(HostName, PortNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_parse_extended_resultA == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: ResultOID optional
     // pinvoke-hint: cc=cdecl
     func ldap_parse_extended_resultA(Connection: CPointer<LDAPAbi>, ResultMessage: CPointer<LDAPMessageAbi>, ResultOID: CPointer<CPointer<UInt8>>, ResultData: CPointer<CPointer<LDAP_BERVALAbi>>, Freeit: UInt8): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_parse_extended_resultA == "on"]
+public unsafe func Windows_ldap_parse_extended_resultA(Connection: CPointer<LDAPAbi>, ResultMessage: CPointer<LDAPMessageAbi>, ResultOID: CPointer<CPointer<UInt8>>, ResultData: CPointer<CPointer<LDAP_BERVALAbi>>, Freeit: UInt8): UInt32 {
+    return ldap_parse_extended_resultA(Connection, ResultMessage, ResultOID, ResultData, Freeit)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_parse_extended_resultW == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: ResultOID optional
     // pinvoke-hint: cc=cdecl
     func ldap_parse_extended_resultW(Connection: CPointer<LDAPAbi>, ResultMessage: CPointer<LDAPMessageAbi>, ResultOID: CPointer<CPointer<UInt16>>, ResultData: CPointer<CPointer<LDAP_BERVALAbi>>, Freeit: UInt8): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_parse_extended_resultW == "on"]
+public unsafe func Windows_ldap_parse_extended_resultW(Connection: CPointer<LDAPAbi>, ResultMessage: CPointer<LDAPMessageAbi>, ResultOID: CPointer<CPointer<UInt16>>, ResultData: CPointer<CPointer<LDAP_BERVALAbi>>, Freeit: UInt8): UInt32 {
+    return ldap_parse_extended_resultW(Connection, ResultMessage, ResultOID, ResultData, Freeit)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_parse_page_control == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_parse_page_control(ExternalHandle: CPointer<LDAPAbi>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, TotalCount: CPointer<UInt32>, Cookie: CPointer<CPointer<LDAP_BERVALAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_parse_page_control == "on"]
+public unsafe func Windows_ldap_parse_page_control(ExternalHandle: CPointer<LDAPAbi>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, TotalCount: CPointer<UInt32>, Cookie: CPointer<CPointer<LDAP_BERVALAbi>>): UInt32 {
+    return ldap_parse_page_control(ExternalHandle, ServerControls, TotalCount, Cookie)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_parse_page_controlA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_parse_page_controlA(ExternalHandle: CPointer<LDAPAbi>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, TotalCount: CPointer<UInt32>, Cookie: CPointer<CPointer<LDAP_BERVALAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_parse_page_controlA == "on"]
+public unsafe func Windows_ldap_parse_page_controlA(ExternalHandle: CPointer<LDAPAbi>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, TotalCount: CPointer<UInt32>, Cookie: CPointer<CPointer<LDAP_BERVALAbi>>): UInt32 {
+    return ldap_parse_page_controlA(ExternalHandle, ServerControls, TotalCount, Cookie)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_parse_page_controlW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_parse_page_controlW(ExternalHandle: CPointer<LDAPAbi>, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, TotalCount: CPointer<UInt32>, Cookie: CPointer<CPointer<LDAP_BERVALAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_parse_page_controlW == "on"]
+public unsafe func Windows_ldap_parse_page_controlW(ExternalHandle: CPointer<LDAPAbi>, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, TotalCount: CPointer<UInt32>, Cookie: CPointer<CPointer<LDAP_BERVALAbi>>): UInt32 {
+    return ldap_parse_page_controlW(ExternalHandle, ServerControls, TotalCount, Cookie)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_parse_reference == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_parse_reference(Connection: CPointer<LDAPAbi>, ResultMessage: CPointer<LDAPMessageAbi>, Referrals: CPointer<CPointer<CPointer<UInt8>>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_parse_reference == "on"]
+public unsafe func Windows_ldap_parse_reference(Connection: CPointer<LDAPAbi>, ResultMessage: CPointer<LDAPMessageAbi>, Referrals: CPointer<CPointer<CPointer<UInt8>>>): UInt32 {
+    return ldap_parse_reference(Connection, ResultMessage, Referrals)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_parse_referenceA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_parse_referenceA(Connection: CPointer<LDAPAbi>, ResultMessage: CPointer<LDAPMessageAbi>, Referrals: CPointer<CPointer<CPointer<UInt8>>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_parse_referenceA == "on"]
+public unsafe func Windows_ldap_parse_referenceA(Connection: CPointer<LDAPAbi>, ResultMessage: CPointer<LDAPMessageAbi>, Referrals: CPointer<CPointer<CPointer<UInt8>>>): UInt32 {
+    return ldap_parse_referenceA(Connection, ResultMessage, Referrals)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_parse_referenceW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_parse_referenceW(Connection: CPointer<LDAPAbi>, ResultMessage: CPointer<LDAPMessageAbi>, Referrals: CPointer<CPointer<CPointer<UInt16>>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_parse_referenceW == "on"]
+public unsafe func Windows_ldap_parse_referenceW(Connection: CPointer<LDAPAbi>, ResultMessage: CPointer<LDAPMessageAbi>, Referrals: CPointer<CPointer<CPointer<UInt16>>>): UInt32 {
+    return ldap_parse_referenceW(Connection, ResultMessage, Referrals)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_parse_result == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: MatchedDNs optional
     // param-hint: ErrorMessage optional
     // param-hint: Referrals optional
     // pinvoke-hint: cc=cdecl
     func ldap_parse_result(Connection: CPointer<LDAPAbi>, ResultMessage: CPointer<LDAPMessageAbi>, ReturnCode: CPointer<UInt32>, MatchedDNs: CPointer<CPointer<UInt8>>, ErrorMessage: CPointer<CPointer<UInt8>>, Referrals: CPointer<CPointer<CPointer<UInt8>>>, ServerControls: CPointer<CPointer<CPointer<LDAPControlAAbi>>>, Freeit: UInt8): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_parse_result == "on"]
+public unsafe func Windows_ldap_parse_result(Connection: CPointer<LDAPAbi>, ResultMessage: CPointer<LDAPMessageAbi>, ReturnCode: CPointer<UInt32>, MatchedDNs: CPointer<CPointer<UInt8>>, ErrorMessage: CPointer<CPointer<UInt8>>, Referrals: CPointer<CPointer<CPointer<UInt8>>>, ServerControls: CPointer<CPointer<CPointer<LDAPControlAAbi>>>, Freeit: UInt8): UInt32 {
+    return ldap_parse_result(Connection, ResultMessage, ReturnCode, MatchedDNs, ErrorMessage, Referrals, ServerControls, Freeit)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_parse_resultA == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: MatchedDNs optional
     // param-hint: ErrorMessage optional
     // param-hint: Referrals optional
     // pinvoke-hint: cc=cdecl
     func ldap_parse_resultA(Connection: CPointer<LDAPAbi>, ResultMessage: CPointer<LDAPMessageAbi>, ReturnCode: CPointer<UInt32>, MatchedDNs: CPointer<CPointer<UInt8>>, ErrorMessage: CPointer<CPointer<UInt8>>, Referrals: CPointer<CPointer<CPointer<Int8>>>, ServerControls: CPointer<CPointer<CPointer<LDAPControlAAbi>>>, Freeit: UInt8): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_parse_resultA == "on"]
+public unsafe func Windows_ldap_parse_resultA(Connection: CPointer<LDAPAbi>, ResultMessage: CPointer<LDAPMessageAbi>, ReturnCode: CPointer<UInt32>, MatchedDNs: CPointer<CPointer<UInt8>>, ErrorMessage: CPointer<CPointer<UInt8>>, Referrals: CPointer<CPointer<CPointer<Int8>>>, ServerControls: CPointer<CPointer<CPointer<LDAPControlAAbi>>>, Freeit: UInt8): UInt32 {
+    return ldap_parse_resultA(Connection, ResultMessage, ReturnCode, MatchedDNs, ErrorMessage, Referrals, ServerControls, Freeit)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_parse_resultW == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: MatchedDNs optional
     // param-hint: ErrorMessage optional
     // param-hint: Referrals optional
     // pinvoke-hint: cc=cdecl
     func ldap_parse_resultW(Connection: CPointer<LDAPAbi>, ResultMessage: CPointer<LDAPMessageAbi>, ReturnCode: CPointer<UInt32>, MatchedDNs: CPointer<CPointer<UInt16>>, ErrorMessage: CPointer<CPointer<UInt16>>, Referrals: CPointer<CPointer<CPointer<UInt16>>>, ServerControls: CPointer<CPointer<CPointer<LDAPControlWAbi>>>, Freeit: UInt8): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_parse_resultW == "on"]
+public unsafe func Windows_ldap_parse_resultW(Connection: CPointer<LDAPAbi>, ResultMessage: CPointer<LDAPMessageAbi>, ReturnCode: CPointer<UInt32>, MatchedDNs: CPointer<CPointer<UInt16>>, ErrorMessage: CPointer<CPointer<UInt16>>, Referrals: CPointer<CPointer<CPointer<UInt16>>>, ServerControls: CPointer<CPointer<CPointer<LDAPControlWAbi>>>, Freeit: UInt8): UInt32 {
+    return ldap_parse_resultW(Connection, ResultMessage, ReturnCode, MatchedDNs, ErrorMessage, Referrals, ServerControls, Freeit)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_parse_sort_control == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_parse_sort_control(ExternalHandle: CPointer<LDAPAbi>, Control: CPointer<CPointer<LDAPControlAAbi>>, Result: CPointer<UInt32>, Attribute: CPointer<CPointer<UInt8>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_parse_sort_control == "on"]
+public unsafe func Windows_ldap_parse_sort_control(ExternalHandle: CPointer<LDAPAbi>, Control: CPointer<CPointer<LDAPControlAAbi>>, Result: CPointer<UInt32>, Attribute: CPointer<CPointer<UInt8>>): UInt32 {
+    return ldap_parse_sort_control(ExternalHandle, Control, Result, Attribute)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_parse_sort_controlA == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: Attribute optional
     // pinvoke-hint: cc=cdecl
     func ldap_parse_sort_controlA(ExternalHandle: CPointer<LDAPAbi>, Control: CPointer<CPointer<LDAPControlAAbi>>, Result: CPointer<UInt32>, Attribute: CPointer<CPointer<UInt8>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_parse_sort_controlA == "on"]
+public unsafe func Windows_ldap_parse_sort_controlA(ExternalHandle: CPointer<LDAPAbi>, Control: CPointer<CPointer<LDAPControlAAbi>>, Result: CPointer<UInt32>, Attribute: CPointer<CPointer<UInt8>>): UInt32 {
+    return ldap_parse_sort_controlA(ExternalHandle, Control, Result, Attribute)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_parse_sort_controlW == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: Attribute optional
     // pinvoke-hint: cc=cdecl
     func ldap_parse_sort_controlW(ExternalHandle: CPointer<LDAPAbi>, Control: CPointer<CPointer<LDAPControlWAbi>>, Result: CPointer<UInt32>, Attribute: CPointer<CPointer<UInt16>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_parse_sort_controlW == "on"]
+public unsafe func Windows_ldap_parse_sort_controlW(ExternalHandle: CPointer<LDAPAbi>, Control: CPointer<CPointer<LDAPControlWAbi>>, Result: CPointer<UInt32>, Attribute: CPointer<CPointer<UInt16>>): UInt32 {
+    return ldap_parse_sort_controlW(ExternalHandle, Control, Result, Attribute)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_parse_vlv_controlA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_parse_vlv_controlA(ExternalHandle: CPointer<LDAPAbi>, Control: CPointer<CPointer<LDAPControlAAbi>>, TargetPos: CPointer<UInt32>, ListCount: CPointer<UInt32>, Context: CPointer<CPointer<LDAP_BERVALAbi>>, ErrCode: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_parse_vlv_controlA == "on"]
+public unsafe func Windows_ldap_parse_vlv_controlA(ExternalHandle: CPointer<LDAPAbi>, Control: CPointer<CPointer<LDAPControlAAbi>>, TargetPos: CPointer<UInt32>, ListCount: CPointer<UInt32>, Context: CPointer<CPointer<LDAP_BERVALAbi>>, ErrCode: CPointer<Int32>): Int32 {
+    return ldap_parse_vlv_controlA(ExternalHandle, Control, TargetPos, ListCount, Context, ErrCode)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_parse_vlv_controlW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_parse_vlv_controlW(ExternalHandle: CPointer<LDAPAbi>, Control: CPointer<CPointer<LDAPControlWAbi>>, TargetPos: CPointer<UInt32>, ListCount: CPointer<UInt32>, Context: CPointer<CPointer<LDAP_BERVALAbi>>, ErrCode: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_parse_vlv_controlW == "on"]
+public unsafe func Windows_ldap_parse_vlv_controlW(ExternalHandle: CPointer<LDAPAbi>, Control: CPointer<CPointer<LDAPControlWAbi>>, TargetPos: CPointer<UInt32>, ListCount: CPointer<UInt32>, Context: CPointer<CPointer<LDAP_BERVALAbi>>, ErrCode: CPointer<Int32>): Int32 {
+    return ldap_parse_vlv_controlW(ExternalHandle, Control, TargetPos, ListCount, Context, ErrCode)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_perror == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_perror(ld: CPointer<LDAPAbi>, msg: CPointer<UInt8>): Unit
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_perror == "on"]
+public unsafe func Windows_ldap_perror(ld: CPointer<LDAPAbi>, msg: CPointer<UInt8>): Unit {
+    ldap_perror(ld, msg)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_rename_ext == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_rename_ext(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, NewRDN: CPointer<UInt8>, NewParent: CPointer<UInt8>, DeleteOldRdn: Int32, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, MessageNumber: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_rename_ext == "on"]
+public unsafe func Windows_ldap_rename_ext(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, NewRDN: CPointer<UInt8>, NewParent: CPointer<UInt8>, DeleteOldRdn: Int32, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, MessageNumber: CPointer<UInt32>): UInt32 {
+    return ldap_rename_ext(ld, dn, NewRDN, NewParent, DeleteOldRdn, ServerControls, ClientControls, MessageNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_rename_extA == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: NewParent optional
     // pinvoke-hint: cc=cdecl
     func ldap_rename_extA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, NewRDN: CPointer<UInt8>, NewParent: CPointer<UInt8>, DeleteOldRdn: Int32, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, MessageNumber: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_rename_extA == "on"]
+public unsafe func Windows_ldap_rename_extA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, NewRDN: CPointer<UInt8>, NewParent: CPointer<UInt8>, DeleteOldRdn: Int32, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, MessageNumber: CPointer<UInt32>): UInt32 {
+    return ldap_rename_extA(ld, dn, NewRDN, NewParent, DeleteOldRdn, ServerControls, ClientControls, MessageNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_rename_extW == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: NewParent optional
     // pinvoke-hint: cc=cdecl
     func ldap_rename_extW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, NewRDN: CPointer<UInt16>, NewParent: CPointer<UInt16>, DeleteOldRdn: Int32, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, ClientControls: CPointer<CPointer<LDAPControlWAbi>>, MessageNumber: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_rename_extW == "on"]
+public unsafe func Windows_ldap_rename_extW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, NewRDN: CPointer<UInt16>, NewParent: CPointer<UInt16>, DeleteOldRdn: Int32, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, ClientControls: CPointer<CPointer<LDAPControlWAbi>>, MessageNumber: CPointer<UInt32>): UInt32 {
+    return ldap_rename_extW(ld, dn, NewRDN, NewParent, DeleteOldRdn, ServerControls, ClientControls, MessageNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_rename_ext_s == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_rename_ext_s(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, NewRDN: CPointer<UInt8>, NewParent: CPointer<UInt8>, DeleteOldRdn: Int32, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_rename_ext_s == "on"]
+public unsafe func Windows_ldap_rename_ext_s(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, NewRDN: CPointer<UInt8>, NewParent: CPointer<UInt8>, DeleteOldRdn: Int32, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>): UInt32 {
+    return ldap_rename_ext_s(ld, dn, NewRDN, NewParent, DeleteOldRdn, ServerControls, ClientControls)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_rename_ext_sA == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: NewParent optional
     // pinvoke-hint: cc=cdecl
     func ldap_rename_ext_sA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, NewRDN: CPointer<UInt8>, NewParent: CPointer<UInt8>, DeleteOldRdn: Int32, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_rename_ext_sA == "on"]
+public unsafe func Windows_ldap_rename_ext_sA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, NewRDN: CPointer<UInt8>, NewParent: CPointer<UInt8>, DeleteOldRdn: Int32, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>): UInt32 {
+    return ldap_rename_ext_sA(ld, dn, NewRDN, NewParent, DeleteOldRdn, ServerControls, ClientControls)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_rename_ext_sW == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: NewParent optional
     // pinvoke-hint: cc=cdecl
     func ldap_rename_ext_sW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, NewRDN: CPointer<UInt16>, NewParent: CPointer<UInt16>, DeleteOldRdn: Int32, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, ClientControls: CPointer<CPointer<LDAPControlWAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_rename_ext_sW == "on"]
+public unsafe func Windows_ldap_rename_ext_sW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, NewRDN: CPointer<UInt16>, NewParent: CPointer<UInt16>, DeleteOldRdn: Int32, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, ClientControls: CPointer<CPointer<LDAPControlWAbi>>): UInt32 {
+    return ldap_rename_ext_sW(ld, dn, NewRDN, NewParent, DeleteOldRdn, ServerControls, ClientControls)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_result == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: timeout optional
     // pinvoke-hint: cc=cdecl
     func ldap_result(ld: CPointer<LDAPAbi>, msgid: UInt32, all: UInt32, timeout: CPointer<LDAP_TIMEVALAbi>, res: CPointer<CPointer<LDAPMessageAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_result == "on"]
+public unsafe func Windows_ldap_result(ld: CPointer<LDAPAbi>, msgid: UInt32, all: UInt32, timeout: CPointer<LDAP_TIMEVALAbi>, res: CPointer<CPointer<LDAPMessageAbi>>): UInt32 {
+    return ldap_result(ld, msgid, all, timeout, res)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_result2error == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_result2error(ld: CPointer<LDAPAbi>, res: CPointer<LDAPMessageAbi>, freeit: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_result2error == "on"]
+public unsafe func Windows_ldap_result2error(ld: CPointer<LDAPAbi>, res: CPointer<LDAPMessageAbi>, freeit: UInt32): UInt32 {
+    return ldap_result2error(ld, res, freeit)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_sasl_bindA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_sasl_bindA(ExternalHandle: CPointer<LDAPAbi>, DistName: CPointer<UInt8>, AuthMechanism: CPointer<UInt8>, cred: CPointer<LDAP_BERVALAbi>, ServerCtrls: CPointer<CPointer<LDAPControlAAbi>>, ClientCtrls: CPointer<CPointer<LDAPControlAAbi>>, MessageNumber: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_sasl_bindA == "on"]
+public unsafe func Windows_ldap_sasl_bindA(ExternalHandle: CPointer<LDAPAbi>, DistName: CPointer<UInt8>, AuthMechanism: CPointer<UInt8>, cred: CPointer<LDAP_BERVALAbi>, ServerCtrls: CPointer<CPointer<LDAPControlAAbi>>, ClientCtrls: CPointer<CPointer<LDAPControlAAbi>>, MessageNumber: CPointer<Int32>): Int32 {
+    return ldap_sasl_bindA(ExternalHandle, DistName, AuthMechanism, cred, ServerCtrls, ClientCtrls, MessageNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_sasl_bindW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_sasl_bindW(ExternalHandle: CPointer<LDAPAbi>, DistName: CPointer<UInt16>, AuthMechanism: CPointer<UInt16>, cred: CPointer<LDAP_BERVALAbi>, ServerCtrls: CPointer<CPointer<LDAPControlWAbi>>, ClientCtrls: CPointer<CPointer<LDAPControlWAbi>>, MessageNumber: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_sasl_bindW == "on"]
+public unsafe func Windows_ldap_sasl_bindW(ExternalHandle: CPointer<LDAPAbi>, DistName: CPointer<UInt16>, AuthMechanism: CPointer<UInt16>, cred: CPointer<LDAP_BERVALAbi>, ServerCtrls: CPointer<CPointer<LDAPControlWAbi>>, ClientCtrls: CPointer<CPointer<LDAPControlWAbi>>, MessageNumber: CPointer<Int32>): Int32 {
+    return ldap_sasl_bindW(ExternalHandle, DistName, AuthMechanism, cred, ServerCtrls, ClientCtrls, MessageNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_sasl_bind_sA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_sasl_bind_sA(ExternalHandle: CPointer<LDAPAbi>, DistName: CPointer<UInt8>, AuthMechanism: CPointer<UInt8>, cred: CPointer<LDAP_BERVALAbi>, ServerCtrls: CPointer<CPointer<LDAPControlAAbi>>, ClientCtrls: CPointer<CPointer<LDAPControlAAbi>>, ServerData: CPointer<CPointer<LDAP_BERVALAbi>>): Int32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_sasl_bind_sA == "on"]
+public unsafe func Windows_ldap_sasl_bind_sA(ExternalHandle: CPointer<LDAPAbi>, DistName: CPointer<UInt8>, AuthMechanism: CPointer<UInt8>, cred: CPointer<LDAP_BERVALAbi>, ServerCtrls: CPointer<CPointer<LDAPControlAAbi>>, ClientCtrls: CPointer<CPointer<LDAPControlAAbi>>, ServerData: CPointer<CPointer<LDAP_BERVALAbi>>): Int32 {
+    return ldap_sasl_bind_sA(ExternalHandle, DistName, AuthMechanism, cred, ServerCtrls, ClientCtrls, ServerData)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_sasl_bind_sW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_sasl_bind_sW(ExternalHandle: CPointer<LDAPAbi>, DistName: CPointer<UInt16>, AuthMechanism: CPointer<UInt16>, cred: CPointer<LDAP_BERVALAbi>, ServerCtrls: CPointer<CPointer<LDAPControlWAbi>>, ClientCtrls: CPointer<CPointer<LDAPControlWAbi>>, ServerData: CPointer<CPointer<LDAP_BERVALAbi>>): Int32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_sasl_bind_sW == "on"]
+public unsafe func Windows_ldap_sasl_bind_sW(ExternalHandle: CPointer<LDAPAbi>, DistName: CPointer<UInt16>, AuthMechanism: CPointer<UInt16>, cred: CPointer<LDAP_BERVALAbi>, ServerCtrls: CPointer<CPointer<LDAPControlWAbi>>, ClientCtrls: CPointer<CPointer<LDAPControlWAbi>>, ServerData: CPointer<CPointer<LDAP_BERVALAbi>>): Int32 {
+    return ldap_sasl_bind_sW(ExternalHandle, DistName, AuthMechanism, cred, ServerCtrls, ClientCtrls, ServerData)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: base optional
     // pinvoke-hint: cc=cdecl
     func ldap_search(ld: CPointer<LDAPAbi>, base: CPointer<UInt8>, scope: UInt32, filter: CPointer<UInt8>, attrs: CPointer<CPointer<Int8>>, attrsonly: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search == "on"]
+public unsafe func Windows_ldap_search(ld: CPointer<LDAPAbi>, base: CPointer<UInt8>, scope: UInt32, filter: CPointer<UInt8>, attrs: CPointer<CPointer<Int8>>, attrsonly: UInt32): UInt32 {
+    return ldap_search(ld, base, scope, filter, attrs, attrsonly)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_searchA == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: base optional
     // pinvoke-hint: cc=cdecl
     func ldap_searchA(ld: CPointer<LDAPAbi>, base: CPointer<UInt8>, scope: UInt32, filter: CPointer<UInt8>, attrs: CPointer<CPointer<Int8>>, attrsonly: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_searchA == "on"]
+public unsafe func Windows_ldap_searchA(ld: CPointer<LDAPAbi>, base: CPointer<UInt8>, scope: UInt32, filter: CPointer<UInt8>, attrs: CPointer<CPointer<Int8>>, attrsonly: UInt32): UInt32 {
+    return ldap_searchA(ld, base, scope, filter, attrs, attrsonly)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_searchW == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: base optional
     // pinvoke-hint: cc=cdecl
     func ldap_searchW(ld: CPointer<LDAPAbi>, base: CPointer<UInt16>, scope: UInt32, filter: CPointer<UInt16>, attrs: CPointer<CPointer<UInt16>>, attrsonly: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_searchW == "on"]
+public unsafe func Windows_ldap_searchW(ld: CPointer<LDAPAbi>, base: CPointer<UInt16>, scope: UInt32, filter: CPointer<UInt16>, attrs: CPointer<CPointer<UInt16>>, attrsonly: UInt32): UInt32 {
+    return ldap_searchW(ld, base, scope, filter, attrs, attrsonly)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search_abandon_page == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_search_abandon_page(ExternalHandle: CPointer<LDAPAbi>, SearchBlock: PLDAPSearch): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search_abandon_page == "on"]
+public unsafe func Windows_ldap_search_abandon_page(ExternalHandle: CPointer<LDAPAbi>, SearchBlock: PLDAPSearch): UInt32 {
+    return ldap_search_abandon_page(ExternalHandle, SearchBlock)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search_ext == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: base optional
     // param-hint: ServerControls optional
     // param-hint: ClientControls optional
     // pinvoke-hint: cc=cdecl
     func ldap_search_ext(ld: CPointer<LDAPAbi>, base: CPointer<UInt8>, scope: UInt32, filter: CPointer<UInt8>, attrs: CPointer<CPointer<Int8>>, attrsonly: UInt32, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, TimeLimit: UInt32, SizeLimit: UInt32, MessageNumber: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search_ext == "on"]
+public unsafe func Windows_ldap_search_ext(ld: CPointer<LDAPAbi>, base: CPointer<UInt8>, scope: UInt32, filter: CPointer<UInt8>, attrs: CPointer<CPointer<Int8>>, attrsonly: UInt32, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, TimeLimit: UInt32, SizeLimit: UInt32, MessageNumber: CPointer<UInt32>): UInt32 {
+    return ldap_search_ext(ld, base, scope, filter, attrs, attrsonly, ServerControls, ClientControls, TimeLimit, SizeLimit, MessageNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search_extA == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: base optional
     // param-hint: ServerControls optional
     // param-hint: ClientControls optional
     // pinvoke-hint: cc=cdecl
     func ldap_search_extA(ld: CPointer<LDAPAbi>, base: CPointer<UInt8>, scope: UInt32, filter: CPointer<UInt8>, attrs: CPointer<CPointer<Int8>>, attrsonly: UInt32, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, TimeLimit: UInt32, SizeLimit: UInt32, MessageNumber: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search_extA == "on"]
+public unsafe func Windows_ldap_search_extA(ld: CPointer<LDAPAbi>, base: CPointer<UInt8>, scope: UInt32, filter: CPointer<UInt8>, attrs: CPointer<CPointer<Int8>>, attrsonly: UInt32, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, TimeLimit: UInt32, SizeLimit: UInt32, MessageNumber: CPointer<UInt32>): UInt32 {
+    return ldap_search_extA(ld, base, scope, filter, attrs, attrsonly, ServerControls, ClientControls, TimeLimit, SizeLimit, MessageNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search_extW == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: base optional
     // param-hint: ServerControls optional
     // param-hint: ClientControls optional
     // pinvoke-hint: cc=cdecl
     func ldap_search_extW(ld: CPointer<LDAPAbi>, base: CPointer<UInt16>, scope: UInt32, filter: CPointer<UInt16>, attrs: CPointer<CPointer<UInt16>>, attrsonly: UInt32, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, ClientControls: CPointer<CPointer<LDAPControlWAbi>>, TimeLimit: UInt32, SizeLimit: UInt32, MessageNumber: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search_extW == "on"]
+public unsafe func Windows_ldap_search_extW(ld: CPointer<LDAPAbi>, base: CPointer<UInt16>, scope: UInt32, filter: CPointer<UInt16>, attrs: CPointer<CPointer<UInt16>>, attrsonly: UInt32, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, ClientControls: CPointer<CPointer<LDAPControlWAbi>>, TimeLimit: UInt32, SizeLimit: UInt32, MessageNumber: CPointer<UInt32>): UInt32 {
+    return ldap_search_extW(ld, base, scope, filter, attrs, attrsonly, ServerControls, ClientControls, TimeLimit, SizeLimit, MessageNumber)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search_ext_s == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: base optional
     // param-hint: ServerControls optional
     // param-hint: ClientControls optional
     // pinvoke-hint: cc=cdecl
     func ldap_search_ext_s(ld: CPointer<LDAPAbi>, base: CPointer<UInt8>, scope: UInt32, filter: CPointer<UInt8>, attrs: CPointer<CPointer<Int8>>, attrsonly: UInt32, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, timeout: CPointer<LDAP_TIMEVALAbi>, SizeLimit: UInt32, res: CPointer<CPointer<LDAPMessageAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search_ext_s == "on"]
+public unsafe func Windows_ldap_search_ext_s(ld: CPointer<LDAPAbi>, base: CPointer<UInt8>, scope: UInt32, filter: CPointer<UInt8>, attrs: CPointer<CPointer<Int8>>, attrsonly: UInt32, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, timeout: CPointer<LDAP_TIMEVALAbi>, SizeLimit: UInt32, res: CPointer<CPointer<LDAPMessageAbi>>): UInt32 {
+    return ldap_search_ext_s(ld, base, scope, filter, attrs, attrsonly, ServerControls, ClientControls, timeout, SizeLimit, res)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search_ext_sA == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: base optional
     // param-hint: ServerControls optional
     // param-hint: ClientControls optional
     // pinvoke-hint: cc=cdecl
     func ldap_search_ext_sA(ld: CPointer<LDAPAbi>, base: CPointer<UInt8>, scope: UInt32, filter: CPointer<UInt8>, attrs: CPointer<CPointer<Int8>>, attrsonly: UInt32, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, timeout: CPointer<LDAP_TIMEVALAbi>, SizeLimit: UInt32, res: CPointer<CPointer<LDAPMessageAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search_ext_sA == "on"]
+public unsafe func Windows_ldap_search_ext_sA(ld: CPointer<LDAPAbi>, base: CPointer<UInt8>, scope: UInt32, filter: CPointer<UInt8>, attrs: CPointer<CPointer<Int8>>, attrsonly: UInt32, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, timeout: CPointer<LDAP_TIMEVALAbi>, SizeLimit: UInt32, res: CPointer<CPointer<LDAPMessageAbi>>): UInt32 {
+    return ldap_search_ext_sA(ld, base, scope, filter, attrs, attrsonly, ServerControls, ClientControls, timeout, SizeLimit, res)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search_ext_sW == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: base optional
     // param-hint: ServerControls optional
     // param-hint: ClientControls optional
     // pinvoke-hint: cc=cdecl
     func ldap_search_ext_sW(ld: CPointer<LDAPAbi>, base: CPointer<UInt16>, scope: UInt32, filter: CPointer<UInt16>, attrs: CPointer<CPointer<UInt16>>, attrsonly: UInt32, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, ClientControls: CPointer<CPointer<LDAPControlWAbi>>, timeout: CPointer<LDAP_TIMEVALAbi>, SizeLimit: UInt32, res: CPointer<CPointer<LDAPMessageAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search_ext_sW == "on"]
+public unsafe func Windows_ldap_search_ext_sW(ld: CPointer<LDAPAbi>, base: CPointer<UInt16>, scope: UInt32, filter: CPointer<UInt16>, attrs: CPointer<CPointer<UInt16>>, attrsonly: UInt32, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, ClientControls: CPointer<CPointer<LDAPControlWAbi>>, timeout: CPointer<LDAP_TIMEVALAbi>, SizeLimit: UInt32, res: CPointer<CPointer<LDAPMessageAbi>>): UInt32 {
+    return ldap_search_ext_sW(ld, base, scope, filter, attrs, attrsonly, ServerControls, ClientControls, timeout, SizeLimit, res)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search_init_page == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: SetLastError cc=cdecl
     func ldap_search_init_page(ExternalHandle: CPointer<LDAPAbi>, DistinguishedName: CPointer<UInt8>, ScopeOfSearch: UInt32, SearchFilter: CPointer<UInt8>, AttributeList: CPointer<CPointer<Int8>>, AttributesOnly: UInt32, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, PageTimeLimit: UInt32, TotalSizeLimit: UInt32, SortKeys: CPointer<CPointer<LDAPSortKeyAAbi>>): PLDAPSearch
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search_init_page == "on"]
+public unsafe func Windows_ldap_search_init_page(ExternalHandle: CPointer<LDAPAbi>, DistinguishedName: CPointer<UInt8>, ScopeOfSearch: UInt32, SearchFilter: CPointer<UInt8>, AttributeList: CPointer<CPointer<Int8>>, AttributesOnly: UInt32, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, PageTimeLimit: UInt32, TotalSizeLimit: UInt32, SortKeys: CPointer<CPointer<LDAPSortKeyAAbi>>): PLDAPSearch {
+    return ldap_search_init_page(ExternalHandle, DistinguishedName, ScopeOfSearch, SearchFilter, AttributeList, AttributesOnly, ServerControls, ClientControls, PageTimeLimit, TotalSizeLimit, SortKeys)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search_init_pageA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: SetLastError cc=cdecl
     func ldap_search_init_pageA(ExternalHandle: CPointer<LDAPAbi>, DistinguishedName: CPointer<UInt8>, ScopeOfSearch: UInt32, SearchFilter: CPointer<UInt8>, AttributeList: CPointer<CPointer<Int8>>, AttributesOnly: UInt32, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, PageTimeLimit: UInt32, TotalSizeLimit: UInt32, SortKeys: CPointer<CPointer<LDAPSortKeyAAbi>>): PLDAPSearch
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search_init_pageA == "on"]
+public unsafe func Windows_ldap_search_init_pageA(ExternalHandle: CPointer<LDAPAbi>, DistinguishedName: CPointer<UInt8>, ScopeOfSearch: UInt32, SearchFilter: CPointer<UInt8>, AttributeList: CPointer<CPointer<Int8>>, AttributesOnly: UInt32, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>, PageTimeLimit: UInt32, TotalSizeLimit: UInt32, SortKeys: CPointer<CPointer<LDAPSortKeyAAbi>>): PLDAPSearch {
+    return ldap_search_init_pageA(ExternalHandle, DistinguishedName, ScopeOfSearch, SearchFilter, AttributeList, AttributesOnly, ServerControls, ClientControls, PageTimeLimit, TotalSizeLimit, SortKeys)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search_init_pageW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: SetLastError cc=cdecl
     func ldap_search_init_pageW(ExternalHandle: CPointer<LDAPAbi>, DistinguishedName: CPointer<UInt16>, ScopeOfSearch: UInt32, SearchFilter: CPointer<UInt16>, AttributeList: CPointer<CPointer<UInt16>>, AttributesOnly: UInt32, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, ClientControls: CPointer<CPointer<LDAPControlWAbi>>, PageTimeLimit: UInt32, TotalSizeLimit: UInt32, SortKeys: CPointer<CPointer<LDAPSortKeyWAbi>>): PLDAPSearch
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search_init_pageW == "on"]
+public unsafe func Windows_ldap_search_init_pageW(ExternalHandle: CPointer<LDAPAbi>, DistinguishedName: CPointer<UInt16>, ScopeOfSearch: UInt32, SearchFilter: CPointer<UInt16>, AttributeList: CPointer<CPointer<UInt16>>, AttributesOnly: UInt32, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, ClientControls: CPointer<CPointer<LDAPControlWAbi>>, PageTimeLimit: UInt32, TotalSizeLimit: UInt32, SortKeys: CPointer<CPointer<LDAPSortKeyWAbi>>): PLDAPSearch {
+    return ldap_search_init_pageW(ExternalHandle, DistinguishedName, ScopeOfSearch, SearchFilter, AttributeList, AttributesOnly, ServerControls, ClientControls, PageTimeLimit, TotalSizeLimit, SortKeys)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search_s == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: base optional
     // pinvoke-hint: cc=cdecl
     func ldap_search_s(ld: CPointer<LDAPAbi>, base: CPointer<UInt8>, scope: UInt32, filter: CPointer<UInt8>, attrs: CPointer<CPointer<Int8>>, attrsonly: UInt32, res: CPointer<CPointer<LDAPMessageAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search_s == "on"]
+public unsafe func Windows_ldap_search_s(ld: CPointer<LDAPAbi>, base: CPointer<UInt8>, scope: UInt32, filter: CPointer<UInt8>, attrs: CPointer<CPointer<Int8>>, attrsonly: UInt32, res: CPointer<CPointer<LDAPMessageAbi>>): UInt32 {
+    return ldap_search_s(ld, base, scope, filter, attrs, attrsonly, res)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search_sA == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: base optional
     // pinvoke-hint: cc=cdecl
     func ldap_search_sA(ld: CPointer<LDAPAbi>, base: CPointer<UInt8>, scope: UInt32, filter: CPointer<UInt8>, attrs: CPointer<CPointer<Int8>>, attrsonly: UInt32, res: CPointer<CPointer<LDAPMessageAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search_sA == "on"]
+public unsafe func Windows_ldap_search_sA(ld: CPointer<LDAPAbi>, base: CPointer<UInt8>, scope: UInt32, filter: CPointer<UInt8>, attrs: CPointer<CPointer<Int8>>, attrsonly: UInt32, res: CPointer<CPointer<LDAPMessageAbi>>): UInt32 {
+    return ldap_search_sA(ld, base, scope, filter, attrs, attrsonly, res)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search_sW == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: base optional
     // pinvoke-hint: cc=cdecl
     func ldap_search_sW(ld: CPointer<LDAPAbi>, base: CPointer<UInt16>, scope: UInt32, filter: CPointer<UInt16>, attrs: CPointer<CPointer<UInt16>>, attrsonly: UInt32, res: CPointer<CPointer<LDAPMessageAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search_sW == "on"]
+public unsafe func Windows_ldap_search_sW(ld: CPointer<LDAPAbi>, base: CPointer<UInt16>, scope: UInt32, filter: CPointer<UInt16>, attrs: CPointer<CPointer<UInt16>>, attrsonly: UInt32, res: CPointer<CPointer<LDAPMessageAbi>>): UInt32 {
+    return ldap_search_sW(ld, base, scope, filter, attrs, attrsonly, res)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search_st == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: base optional
     // pinvoke-hint: cc=cdecl
     func ldap_search_st(ld: CPointer<LDAPAbi>, base: CPointer<UInt8>, scope: UInt32, filter: CPointer<UInt8>, attrs: CPointer<CPointer<Int8>>, attrsonly: UInt32, timeout: CPointer<LDAP_TIMEVALAbi>, res: CPointer<CPointer<LDAPMessageAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search_st == "on"]
+public unsafe func Windows_ldap_search_st(ld: CPointer<LDAPAbi>, base: CPointer<UInt8>, scope: UInt32, filter: CPointer<UInt8>, attrs: CPointer<CPointer<Int8>>, attrsonly: UInt32, timeout: CPointer<LDAP_TIMEVALAbi>, res: CPointer<CPointer<LDAPMessageAbi>>): UInt32 {
+    return ldap_search_st(ld, base, scope, filter, attrs, attrsonly, timeout, res)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search_stA == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: base optional
     // pinvoke-hint: cc=cdecl
     func ldap_search_stA(ld: CPointer<LDAPAbi>, base: CPointer<UInt8>, scope: UInt32, filter: CPointer<UInt8>, attrs: CPointer<CPointer<Int8>>, attrsonly: UInt32, timeout: CPointer<LDAP_TIMEVALAbi>, res: CPointer<CPointer<LDAPMessageAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search_stA == "on"]
+public unsafe func Windows_ldap_search_stA(ld: CPointer<LDAPAbi>, base: CPointer<UInt8>, scope: UInt32, filter: CPointer<UInt8>, attrs: CPointer<CPointer<Int8>>, attrsonly: UInt32, timeout: CPointer<LDAP_TIMEVALAbi>, res: CPointer<CPointer<LDAPMessageAbi>>): UInt32 {
+    return ldap_search_stA(ld, base, scope, filter, attrs, attrsonly, timeout, res)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search_stW == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: base optional
     // pinvoke-hint: cc=cdecl
     func ldap_search_stW(ld: CPointer<LDAPAbi>, base: CPointer<UInt16>, scope: UInt32, filter: CPointer<UInt16>, attrs: CPointer<CPointer<UInt16>>, attrsonly: UInt32, timeout: CPointer<LDAP_TIMEVALAbi>, res: CPointer<CPointer<LDAPMessageAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_search_stW == "on"]
+public unsafe func Windows_ldap_search_stW(ld: CPointer<LDAPAbi>, base: CPointer<UInt16>, scope: UInt32, filter: CPointer<UInt16>, attrs: CPointer<CPointer<UInt16>>, attrsonly: UInt32, timeout: CPointer<LDAP_TIMEVALAbi>, res: CPointer<CPointer<LDAPMessageAbi>>): UInt32 {
+    return ldap_search_stW(ld, base, scope, filter, attrs, attrsonly, timeout, res)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_set_dbg_flags == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_set_dbg_flags(NewFlags: UInt32): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_set_dbg_flags == "on"]
+public unsafe func Windows_ldap_set_dbg_flags(NewFlags: UInt32): UInt32 {
+    return ldap_set_dbg_flags(NewFlags)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_set_dbg_routine == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_set_dbg_routine(DebugPrintRoutine: DBGPRINT): Unit
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_set_dbg_routine == "on"]
+public unsafe func Windows_ldap_set_dbg_routine(DebugPrintRoutine: DBGPRINT): Unit {
+    ldap_set_dbg_routine(DebugPrintRoutine)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_set_option == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_set_option(ld: CPointer<LDAPAbi>, option: Int32, invalue: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_set_option == "on"]
+public unsafe func Windows_ldap_set_option(ld: CPointer<LDAPAbi>, option: Int32, invalue: CPointer<Unit>): UInt32 {
+    return ldap_set_option(ld, option, invalue)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_set_optionW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_set_optionW(ld: CPointer<LDAPAbi>, option: Int32, invalue: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_set_optionW == "on"]
+public unsafe func Windows_ldap_set_optionW(ld: CPointer<LDAPAbi>, option: Int32, invalue: CPointer<Unit>): UInt32 {
+    return ldap_set_optionW(ld, option, invalue)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_simple_bind == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: dn optional
     // param-hint: passwd optional
     // pinvoke-hint: cc=cdecl
     func ldap_simple_bind(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, passwd: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_simple_bind == "on"]
+public unsafe func Windows_ldap_simple_bind(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, passwd: CPointer<UInt8>): UInt32 {
+    return ldap_simple_bind(ld, dn, passwd)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_simple_bindA == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: dn optional
     // param-hint: passwd optional
     // pinvoke-hint: cc=cdecl
     func ldap_simple_bindA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, passwd: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_simple_bindA == "on"]
+public unsafe func Windows_ldap_simple_bindA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, passwd: CPointer<UInt8>): UInt32 {
+    return ldap_simple_bindA(ld, dn, passwd)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_simple_bindW == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: dn optional
     // param-hint: passwd optional
     // pinvoke-hint: cc=cdecl
     func ldap_simple_bindW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, passwd: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_simple_bindW == "on"]
+public unsafe func Windows_ldap_simple_bindW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, passwd: CPointer<UInt16>): UInt32 {
+    return ldap_simple_bindW(ld, dn, passwd)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_simple_bind_s == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: dn optional
     // param-hint: passwd optional
     // pinvoke-hint: cc=cdecl
     func ldap_simple_bind_s(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, passwd: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_simple_bind_s == "on"]
+public unsafe func Windows_ldap_simple_bind_s(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, passwd: CPointer<UInt8>): UInt32 {
+    return ldap_simple_bind_s(ld, dn, passwd)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_simple_bind_sA == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: dn optional
     // param-hint: passwd optional
     // pinvoke-hint: cc=cdecl
     func ldap_simple_bind_sA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, passwd: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_simple_bind_sA == "on"]
+public unsafe func Windows_ldap_simple_bind_sA(ld: CPointer<LDAPAbi>, dn: CPointer<UInt8>, passwd: CPointer<UInt8>): UInt32 {
+    return ldap_simple_bind_sA(ld, dn, passwd)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_simple_bind_sW == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: dn optional
     // param-hint: passwd optional
     // pinvoke-hint: cc=cdecl
     func ldap_simple_bind_sW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, passwd: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_simple_bind_sW == "on"]
+public unsafe func Windows_ldap_simple_bind_sW(ld: CPointer<LDAPAbi>, dn: CPointer<UInt16>, passwd: CPointer<UInt16>): UInt32 {
+    return ldap_simple_bind_sW(ld, dn, passwd)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_sslinit == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_sslinit(HostName: CPointer<UInt8>, PortNumber: UInt32, secure: Int32): CPointer<LDAPAbi>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_sslinit == "on"]
+public unsafe func Windows_ldap_sslinit(HostName: CPointer<UInt8>, PortNumber: UInt32, secure: Int32): CPointer<LDAPAbi> {
+    return ldap_sslinit(HostName, PortNumber, secure)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_sslinitA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_sslinitA(HostName: CPointer<UInt8>, PortNumber: UInt32, secure: Int32): CPointer<LDAPAbi>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_sslinitA == "on"]
+public unsafe func Windows_ldap_sslinitA(HostName: CPointer<UInt8>, PortNumber: UInt32, secure: Int32): CPointer<LDAPAbi> {
+    return ldap_sslinitA(HostName, PortNumber, secure)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_sslinitW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_sslinitW(HostName: CPointer<UInt16>, PortNumber: UInt32, secure: Int32): CPointer<LDAPAbi>
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_sslinitW == "on"]
+public unsafe func Windows_ldap_sslinitW(HostName: CPointer<UInt16>, PortNumber: UInt32, secure: Int32): CPointer<LDAPAbi> {
+    return ldap_sslinitW(HostName, PortNumber, secure)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_start_tls_sA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_start_tls_sA(ExternalHandle: CPointer<LDAPAbi>, ServerReturnValue: CPointer<UInt32>, result: CPointer<CPointer<LDAPMessageAbi>>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_start_tls_sA == "on"]
+public unsafe func Windows_ldap_start_tls_sA(ExternalHandle: CPointer<LDAPAbi>, ServerReturnValue: CPointer<UInt32>, result: CPointer<CPointer<LDAPMessageAbi>>, ServerControls: CPointer<CPointer<LDAPControlAAbi>>, ClientControls: CPointer<CPointer<LDAPControlAAbi>>): UInt32 {
+    return ldap_start_tls_sA(ExternalHandle, ServerReturnValue, result, ServerControls, ClientControls)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_start_tls_sW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_start_tls_sW(ExternalHandle: CPointer<LDAPAbi>, ServerReturnValue: CPointer<UInt32>, result: CPointer<CPointer<LDAPMessageAbi>>, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, ClientControls: CPointer<CPointer<LDAPControlWAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_start_tls_sW == "on"]
+public unsafe func Windows_ldap_start_tls_sW(ExternalHandle: CPointer<LDAPAbi>, ServerReturnValue: CPointer<UInt32>, result: CPointer<CPointer<LDAPMessageAbi>>, ServerControls: CPointer<CPointer<LDAPControlWAbi>>, ClientControls: CPointer<CPointer<LDAPControlWAbi>>): UInt32 {
+    return ldap_start_tls_sW(ExternalHandle, ServerReturnValue, result, ServerControls, ClientControls)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_startup == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_startup(version: CPointer<LDAP_VERSION_INFOAbi>, Instance: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_startup == "on"]
+public unsafe func Windows_ldap_startup(version: CPointer<LDAP_VERSION_INFOAbi>, Instance: CPointer<CPointer<Unit>>): UInt32 {
+    return ldap_startup(version, Instance)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_stop_tls_s == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_stop_tls_s(ExternalHandle: CPointer<LDAPAbi>): UInt8
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_stop_tls_s == "on"]
+public unsafe func Windows_ldap_stop_tls_s(ExternalHandle: CPointer<LDAPAbi>): UInt8 {
+    return ldap_stop_tls_s(ExternalHandle)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_ufn2dn == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_ufn2dn(ufn: CPointer<UInt8>, pDn: CPointer<CPointer<UInt8>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_ufn2dn == "on"]
+public unsafe func Windows_ldap_ufn2dn(ufn: CPointer<UInt8>, pDn: CPointer<CPointer<UInt8>>): UInt32 {
+    return ldap_ufn2dn(ufn, pDn)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_ufn2dnA == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_ufn2dnA(ufn: CPointer<UInt8>, pDn: CPointer<CPointer<UInt8>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_ufn2dnA == "on"]
+public unsafe func Windows_ldap_ufn2dnA(ufn: CPointer<UInt8>, pDn: CPointer<CPointer<UInt8>>): UInt32 {
+    return ldap_ufn2dnA(ufn, pDn)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_ufn2dnW == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_ufn2dnW(ufn: CPointer<UInt16>, pDn: CPointer<CPointer<UInt16>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_ufn2dnW == "on"]
+public unsafe func Windows_ldap_ufn2dnW(ufn: CPointer<UInt16>, pDn: CPointer<CPointer<UInt16>>): UInt32 {
+    return ldap_ufn2dnW(ufn, pDn)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_unbind == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_unbind(ld: CPointer<LDAPAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_unbind == "on"]
+public unsafe func Windows_ldap_unbind(ld: CPointer<LDAPAbi>): UInt32 {
+    return ldap_unbind(ld)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_unbind_s == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_unbind_s(ld: CPointer<LDAPAbi>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_unbind_s == "on"]
+public unsafe func Windows_ldap_unbind_s(ld: CPointer<LDAPAbi>): UInt32 {
+    return ldap_unbind_s(ld)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_value_free == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: vals optional
     // pinvoke-hint: cc=cdecl
     func ldap_value_free(vals: CPointer<CPointer<UInt8>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_value_free == "on"]
+public unsafe func Windows_ldap_value_free(vals: CPointer<CPointer<UInt8>>): UInt32 {
+    return ldap_value_free(vals)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_value_freeA == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: vals optional
     // pinvoke-hint: cc=cdecl
     func ldap_value_freeA(vals: CPointer<CPointer<UInt8>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_value_freeA == "on"]
+public unsafe func Windows_ldap_value_freeA(vals: CPointer<CPointer<UInt8>>): UInt32 {
+    return ldap_value_freeA(vals)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_value_freeW == "on"]
+@CallingConv[CDECL]
+foreign {
     // param-hint: vals optional
     // pinvoke-hint: cc=cdecl
     func ldap_value_freeW(vals: CPointer<CPointer<UInt16>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_value_freeW == "on"]
+public unsafe func Windows_ldap_value_freeW(vals: CPointer<CPointer<UInt16>>): UInt32 {
+    return ldap_value_freeW(vals)
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_value_free_len == "on"]
+@CallingConv[CDECL]
+foreign {
     // pinvoke-hint: cc=cdecl
     func ldap_value_free_len(vals: CPointer<CPointer<LDAP_BERVALAbi>>): UInt32
+}
+
+@When[Windows_Win32_Networking_Ldap == "on" && WLDAP32 == "on" && Windows_Win32_Networking_Ldap_ldap_value_free_len == "on"]
+public unsafe func Windows_ldap_value_free_len(vals: CPointer<CPointer<LDAP_BERVALAbi>>): UInt32 {
+    return ldap_value_free_len(vals)
 }
 
 @When[Windows_Win32_Networking_Ldap == "on"]

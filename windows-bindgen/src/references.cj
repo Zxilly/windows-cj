@@ -82,9 +82,9 @@ public class References {
 
     public func rewriteQualified(namespace: String, name: String): String {
         match (importPathForType(namespace, name)) {
-            case Some(path) => "${path}.${name}"
+            case Some(path) => qualifiedReferencePath(path, name)
             case None => match (importPath(namespace)) {
-                case Some(path) => "${path}.${name}"
+                case Some(path) => qualifiedReferencePath(path, name)
                 case None => "${namespace}.${name}"
             }
         }
@@ -97,7 +97,7 @@ public class References {
         }
         match (findType(typeName.namespace, name)) {
             case Some(entry) =>
-                return "${buildImportPath(entry, typeName.namespace)}.${name}"
+                return qualifiedReferencePath(buildImportPath(entry, typeName.namespace), name)
             case None =>
                 return rewriteQualified(typeName.namespace, name)
         }
@@ -222,6 +222,10 @@ func qualifiedReferenceType(namespace: String, name: String): String {
         return name
     }
     return "${namespace}.${name}"
+}
+
+func qualifiedReferencePath(path: String, name: String): String {
+    return "${importedPackageQualifier(path)}.${name}"
 }
 
 func sliceStringParts(parts: ArrayList<String>, start: Int64): ArrayList<String> {

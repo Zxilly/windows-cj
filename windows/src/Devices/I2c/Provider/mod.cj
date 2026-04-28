@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -942,14 +941,25 @@ extend II2cControllerProvider <: windows_core.Interface<II2cControllerProvider> 
 @C
 public struct II2cProviderVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetControllersAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetControllersAsync: UIntNative = UIntNative(0)
     public init() {}
 
+    @When[Windows_Foundation_Collections == "on"]
     public static func new<Identity>(offset!: Int64 = 0): II2cProviderVtbl where Identity <: II2cProvider_Impl {
         let _ = offset
         var vtbl = II2cProviderVtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.GetControllersAsync = { instanceRaw, result__ =>
+        vtbl = II2cProviderVtbl.__assignGetControllersAsync<Identity>(vtbl)
+        return vtbl
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections == "on"]
+    public static func __assignGetControllersAsync<Identity>(vtbl: II2cProviderVtbl): II2cProviderVtbl where Identity <: II2cProvider_Impl {
+        var next = vtbl
+        next.GetControllersAsync = { instanceRaw, result__ =>
             match (unsafe { asImplFromRaw<II2cProvider_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
                     impl.__winrtThunk_GetControllersAsync(result__)
@@ -957,6 +967,11 @@ public struct II2cProviderVtbl {
                     E_NOINTERFACE.value
             }
         }
+        return next
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections != "on"]
+    public static func __assignGetControllersAsync<Identity>(vtbl: II2cProviderVtbl): II2cProviderVtbl where Identity <: II2cProvider_Impl {
         return vtbl
     }
 
@@ -968,12 +983,12 @@ public struct II2cProviderVtbl {
     }
 }
 
-@When[Windows_Devices_I2c_Provider == "on"]
+@When[Windows_Devices_I2c_Provider == "on" && Windows_Foundation_Collections == "on"]
 public interface II2cProvider_ImplErased {
     public func __winrtThunk_GetControllersAsync(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_Devices_I2c_Provider == "on"]
+@When[Windows_Devices_I2c_Provider == "on" && Windows_Foundation_Collections == "on"]
 public interface II2cProvider_Impl <: II2cProvider_ImplErased {
     public func GetControllersAsync(): windows_core.Result<windows_future.IAsyncOperation<windows_collections.IVectorView<II2cControllerProvider>>>
 
@@ -1061,6 +1076,7 @@ public class II2cProvider <: InterfaceWrapperBase & ComInterface & RuntimeName &
         readVtbl<II2cProviderVtbl>(II2cProviderVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetControllersAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<II2cControllerProvider>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

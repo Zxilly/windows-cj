@@ -493,9 +493,6 @@ link = ["-lfltmgr.sys"]
 [features.FONTSUB]
 link = ["-lfontsub"]
 
-[features.FORCEINLINE]
-link = ["-lforceinline"]
-
 [features.FWPKCLNT_SYS]
 link = ["-lfwpkclnt.sys"]
 

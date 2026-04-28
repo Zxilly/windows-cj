@@ -56,6 +56,7 @@ public let BadgeTemplateType_BadgeNumber: BadgeTemplateType = BadgeTemplateType(
 public struct IAdaptiveNotificationContentVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var Kind: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var Hints: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -106,6 +107,7 @@ public class IAdaptiveNotificationContent <: InterfaceWrapperBase & ComInterface
         return __vt.Kind(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Hints(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -519,6 +521,7 @@ public class IKnownNotificationBindingsStatics <: InterfaceWrapperBase & ComInte
 @C
 public struct INotificationDataVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Values: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SequenceNumber: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var SetSequenceNumber: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => 0 }
@@ -565,6 +568,7 @@ public class INotificationData <: InterfaceWrapperBase & ComInterface {
         readVtbl<INotificationDataVtbl>(INotificationDataVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Values(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -588,7 +592,9 @@ public class INotificationData <: InterfaceWrapperBase & ComInterface {
 @C
 public struct INotificationDataFactoryVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateNotificationDataWithValuesAndSequenceNumber: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateNotificationDataWithValues: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -633,12 +639,14 @@ public class INotificationDataFactory <: InterfaceWrapperBase & ComInterface {
         readVtbl<INotificationDataFactoryVtbl>(INotificationDataFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateNotificationDataWithValuesAndSequenceNumber(initialValues: CPointer<Unit>, sequenceNumber: UInt32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CreateNotificationDataWithValuesAndSequenceNumber(__liveRaw, initialValues, sequenceNumber, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateNotificationDataWithValues(initialValues: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

@@ -891,6 +891,7 @@ public class StorageProviderKnownFolderSyncInfo <: InterfaceWrapperBase & ComInt
         defaultInterface().SetProviderDisplayName(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func KnownFolderEntries(): windows_collections.IVector<_impl_l1.StorageProviderKnownFolderEntry> {
         return defaultInterface().KnownFolderEntries()
     }

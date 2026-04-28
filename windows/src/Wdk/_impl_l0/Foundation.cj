@@ -10,11 +10,8 @@ import windows_interface.{GUID}
 import windows_interface as windows_interface
 import windows_polyfill.{packedReadInt64, packedReadUInt32, packedReadValue, packedWriteInt64, packedWriteUInt32, packedWriteValue, unionReadInt32, unionReadInt64, unionReadUInt16, unionReadUInt32, unionReadUInt8, unionWriteInt32, unionWriteInt64, unionWriteUInt16, unionWriteUInt32, unionWriteUInt8}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Security == "on"]
 import windows.Win32.Security as Win32_Security
-@When[Windows_Win32_System_IO == "on"]
 import windows.Win32.System.IO as Win32_System_IO
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows_core as windows_core
@@ -170,13 +167,27 @@ public struct ACCESS_STATE__Privileges_e__Union {
     public init() {}
 }
 
-@When[NTDLL == "on"]
+@When[Windows_Wdk_Foundation == "on" && NTDLL == "on" && Windows_Wdk_Foundation_NtClose == "on"]
 foreign {
     func NtClose(Handle: CPointer<Unit>): Int32
+}
+
+@When[Windows_Wdk_Foundation == "on" && NTDLL == "on" && Windows_Wdk_Foundation_NtClose == "on"]
+public unsafe func Windows_NtClose(Handle: CPointer<Unit>): Int32 {
+    return NtClose(Handle)
+}
+
+@When[Windows_Wdk_Foundation == "on" && NTDLL == "on" && Windows_Wdk_Foundation_NtQueryObject == "on"]
+foreign {
     // param-hint: Handle optional
     // param-hint: ObjectInformation bytes=param[3] optional
     // param-hint: ReturnLength optional
     func NtQueryObject(Handle: CPointer<Unit>, ObjectInformationClass: OBJECT_INFORMATION_CLASSAbi, ObjectInformation: CPointer<Unit>, ObjectInformationLength: UInt32, ReturnLength: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Wdk_Foundation == "on" && NTDLL == "on" && Windows_Wdk_Foundation_NtQueryObject == "on"]
+public unsafe func Windows_NtQueryObject(Handle: CPointer<Unit>, ObjectInformationClass: OBJECT_INFORMATION_CLASSAbi, ObjectInformation: CPointer<Unit>, ObjectInformationLength: UInt32, ReturnLength: CPointer<UInt32>): Int32 {
+    return NtQueryObject(Handle, ObjectInformationClass, ObjectInformation, ObjectInformationLength, ReturnLength)
 }
 
 @When[Windows_Wdk_Foundation == "on"]

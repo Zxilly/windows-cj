@@ -4,13 +4,12 @@
 package windows.Win32.UI.TabletPC
 
 import std.collection.*
+import windows_libloading
 import windows_core.{CopyType, GuidValue, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
@@ -13439,55 +13438,455 @@ extend RECO_LATTICE <: windows_core.CopyType & windows_core.RuntimeType & window
     }
 }
 
-@When[INKOBJCORE == "on"]
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_AddStroke == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func AddStroke(hrc: HRECOCONTEXT, pPacketDesc: CPointer<PACKET_DESCRIPTIONAbi>, cbPacket: UInt32, pPacket: CPointer<UInt8>, pXForm: CPointer<Win32_Graphics_Gdi.XFORMAbi>): Int32
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_AddStroke == "on" && Windows_Win32_Graphics_Gdi == "on"]
+public unsafe func Windows_AddStroke(hrc: HRECOCONTEXT, pPacketDesc: CPointer<PACKET_DESCRIPTIONAbi>, cbPacket: UInt32, pPacket: CPointer<UInt8>, pXForm: CPointer<Win32_Graphics_Gdi.XFORMAbi>): Int32 {
+    return AddStroke(hrc, pPacketDesc, cbPacket, pPacket, pXForm)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_AddWordsToWordList == "on"]
 foreign {
     func AddWordsToWordList(hwl: HRECOWORDLIST, pwcWords: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_AddWordsToWordList == "on"]
+public unsafe func Windows_AddWordsToWordList(hwl: HRECOWORDLIST, pwcWords: CPointer<UInt16>): Int32 {
+    return AddWordsToWordList(hwl, pwcWords)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_AdviseInkChange == "on"]
+foreign {
     func AdviseInkChange(hrc: HRECOCONTEXT, bNewStroke: Int32): Int32
-    func CloneContext(hrc: HRECOCONTEXT, pCloneHrc: CPointer<HRECOCONTEXT>): Int32
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_AdviseInkChange == "on"]
+public unsafe func Windows_AdviseInkChange(hrc: HRECOCONTEXT, bNewStroke: Int32): Int32 {
+    return AdviseInkChange(hrc, bNewStroke)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_CreateContext == "on"]
+foreign {
     func CreateContext(hrec: HRECOGNIZER, phrc: CPointer<HRECOCONTEXT>): Int32
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_CreateContext == "on"]
+public unsafe func Windows_CreateContext(hrec: HRECOGNIZER, phrc: CPointer<HRECOCONTEXT>): Int32 {
+    return CreateContext(hrec, phrc)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_CreateRecognizer == "on"]
+foreign {
     func CreateRecognizer(pCLSID: CPointer<GUID>, phrec: CPointer<HRECOGNIZER>): Int32
-    func DestroyAlternate(hrcalt: HRECOALT): Int32
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_CreateRecognizer == "on"]
+public unsafe func Windows_CreateRecognizer(pCLSID: CPointer<GUID>, phrec: CPointer<HRECOGNIZER>): Int32 {
+    return CreateRecognizer(pCLSID, phrec)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_DestroyContext == "on"]
+foreign {
     func DestroyContext(hrc: HRECOCONTEXT): Int32
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_DestroyContext == "on"]
+public unsafe func Windows_DestroyContext(hrc: HRECOCONTEXT): Int32 {
+    return DestroyContext(hrc)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_DestroyRecognizer == "on"]
+foreign {
     func DestroyRecognizer(hrec: HRECOGNIZER): Int32
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_DestroyRecognizer == "on"]
+public unsafe func Windows_DestroyRecognizer(hrec: HRECOGNIZER): Int32 {
+    return DestroyRecognizer(hrec)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_DestroyWordList == "on"]
+foreign {
     func DestroyWordList(hwl: HRECOWORDLIST): Int32
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_DestroyWordList == "on"]
+public unsafe func Windows_DestroyWordList(hwl: HRECOWORDLIST): Int32 {
+    return DestroyWordList(hwl)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_EndInkInput == "on"]
+foreign {
     func EndInkInput(hrc: HRECOCONTEXT): Int32
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_EndInkInput == "on"]
+public unsafe func Windows_EndInkInput(hrc: HRECOCONTEXT): Int32 {
+    return EndInkInput(hrc)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetAllRecognizers == "on"]
+foreign {
     func GetAllRecognizers(recognizerClsids: CPointer<CPointer<GUID>>, count: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetAllRecognizers == "on"]
+public unsafe func Windows_GetAllRecognizers(recognizerClsids: CPointer<CPointer<GUID>>, count: CPointer<UInt32>): Int32 {
+    return GetAllRecognizers(recognizerClsids, count)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetBestResultString == "on"]
+foreign {
     // param-hint: pwcBestResult len=param[1] optional
     func GetBestResultString(hrc: HRECOCONTEXT, pcSize: CPointer<UInt32>, pwcBestResult: CPointer<UInt16>): Int32
-    func GetContextPreferenceFlags(hrc: HRECOCONTEXT, pdwContextPreferenceFlags: CPointer<UInt32>): Int32
-    func GetContextPropertyList(hrc: HRECOCONTEXT, pcProperties: CPointer<UInt32>, pPropertyGUIDS: CPointer<GUID>): Int32
-    func GetContextPropertyValue(hrc: HRECOCONTEXT, pGuid: CPointer<GUID>, pcbSize: CPointer<UInt32>, pProperty: CPointer<UInt8>): Int32
-    func GetEnabledUnicodeRanges(hrc: HRECOCONTEXT, pcRanges: CPointer<UInt32>, pcr: CPointer<CHARACTER_RANGEAbi>): Int32
-    func GetGuide(hrc: HRECOCONTEXT, pGuide: CPointer<RECO_GUIDEAbi>, piIndex: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetBestResultString == "on"]
+public unsafe func Windows_GetBestResultString(hrc: HRECOCONTEXT, pcSize: CPointer<UInt32>, pwcBestResult: CPointer<UInt16>): Int32 {
+    return GetBestResultString(hrc, pcSize, pwcBestResult)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetLatticePtr == "on"]
+foreign {
     func GetLatticePtr(hrc: HRECOCONTEXT, ppLattice: CPointer<CPointer<RECO_LATTICEAbi>>): Int32
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetLatticePtr == "on"]
+public unsafe func Windows_GetLatticePtr(hrc: HRECOCONTEXT, ppLattice: CPointer<CPointer<RECO_LATTICEAbi>>): Int32 {
+    return GetLatticePtr(hrc, ppLattice)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetLeftSeparator == "on"]
+foreign {
     // param-hint: pwcLeftSeparator len=param[1]
     func GetLeftSeparator(hrc: HRECOCONTEXT, pcSize: CPointer<UInt32>, pwcLeftSeparator: CPointer<UInt16>): Int32
-    func GetPreferredPacketDescription(hrec: HRECOGNIZER, pPacketDescription: CPointer<PACKET_DESCRIPTIONAbi>): Int32
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetLeftSeparator == "on"]
+public unsafe func Windows_GetLeftSeparator(hrc: HRECOCONTEXT, pcSize: CPointer<UInt32>, pwcLeftSeparator: CPointer<UInt16>): Int32 {
+    return GetLeftSeparator(hrc, pcSize, pwcLeftSeparator)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetRecoAttributes == "on"]
+foreign {
     func GetRecoAttributes(hrec: HRECOGNIZER, pRecoAttrs: CPointer<RECO_ATTRSAbi>): Int32
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetRecoAttributes == "on"]
+public unsafe func Windows_GetRecoAttributes(hrec: HRECOGNIZER, pRecoAttrs: CPointer<RECO_ATTRSAbi>): Int32 {
+    return GetRecoAttributes(hrec, pRecoAttrs)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetResultPropertyList == "on"]
+foreign {
     func GetResultPropertyList(hrec: HRECOGNIZER, pPropertyCount: CPointer<UInt32>, pPropertyGuid: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetResultPropertyList == "on"]
+public unsafe func Windows_GetResultPropertyList(hrec: HRECOGNIZER, pPropertyCount: CPointer<UInt32>, pPropertyGuid: CPointer<GUID>): Int32 {
+    return GetResultPropertyList(hrec, pPropertyCount, pPropertyGuid)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetRightSeparator == "on"]
+foreign {
     // param-hint: pwcRightSeparator len=param[1]
     func GetRightSeparator(hrc: HRECOCONTEXT, pcSize: CPointer<UInt32>, pwcRightSeparator: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetRightSeparator == "on"]
+public unsafe func Windows_GetRightSeparator(hrc: HRECOCONTEXT, pcSize: CPointer<UInt32>, pwcRightSeparator: CPointer<UInt16>): Int32 {
+    return GetRightSeparator(hrc, pcSize, pwcRightSeparator)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetUnicodeRanges == "on"]
+foreign {
     func GetUnicodeRanges(hrec: HRECOGNIZER, pcRanges: CPointer<UInt32>, pcr: CPointer<CHARACTER_RANGEAbi>): Int32
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetUnicodeRanges == "on"]
+public unsafe func Windows_GetUnicodeRanges(hrec: HRECOGNIZER, pcRanges: CPointer<UInt32>, pcr: CPointer<CHARACTER_RANGEAbi>): Int32 {
+    return GetUnicodeRanges(hrec, pcRanges, pcr)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_IsStringSupported == "on"]
+foreign {
     func IsStringSupported(hrc: HRECOCONTEXT, wcString: UInt32, pwcString: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_IsStringSupported == "on"]
+public unsafe func Windows_IsStringSupported(hrc: HRECOCONTEXT, wcString: UInt32, pwcString: CPointer<UInt16>): Int32 {
+    return IsStringSupported(hrc, wcString, pwcString)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_LoadCachedAttributes == "on"]
+foreign {
     func LoadCachedAttributes(clsid: GUID, pRecoAttributes: CPointer<RECO_ATTRSAbi>): Int32
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_LoadCachedAttributes == "on"]
+public unsafe func Windows_LoadCachedAttributes(clsid: GUID, pRecoAttributes: CPointer<RECO_ATTRSAbi>): Int32 {
+    return LoadCachedAttributes(clsid, pRecoAttributes)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_MakeWordList == "on"]
+foreign {
     func MakeWordList(hrec: HRECOGNIZER, pBuffer: CPointer<UInt16>, phwl: CPointer<HRECOWORDLIST>): Int32
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_MakeWordList == "on"]
+public unsafe func Windows_MakeWordList(hrec: HRECOGNIZER, pBuffer: CPointer<UInt16>, phwl: CPointer<HRECOWORDLIST>): Int32 {
+    return MakeWordList(hrec, pBuffer, phwl)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_Process == "on"]
+foreign {
     func Process(hrc: HRECOCONTEXT, pbPartialProcessing: CPointer<Int32>): Int32
-    func ResetContext(hrc: HRECOCONTEXT): Int32
-    func SetCACMode(hrc: HRECOCONTEXT, iMode: Int32): Int32
-    func SetContextPropertyValue(hrc: HRECOCONTEXT, pGuid: CPointer<GUID>, cbSize: UInt32, pProperty: CPointer<UInt8>): Int32
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_Process == "on"]
+public unsafe func Windows_Process(hrc: HRECOCONTEXT, pbPartialProcessing: CPointer<Int32>): Int32 {
+    return Process(hrc, pbPartialProcessing)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_SetEnabledUnicodeRanges == "on"]
+foreign {
     func SetEnabledUnicodeRanges(hrc: HRECOCONTEXT, cRanges: UInt32, pcr: CPointer<CHARACTER_RANGEAbi>): Int32
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_SetEnabledUnicodeRanges == "on"]
+public unsafe func Windows_SetEnabledUnicodeRanges(hrc: HRECOCONTEXT, cRanges: UInt32, pcr: CPointer<CHARACTER_RANGEAbi>): Int32 {
+    return SetEnabledUnicodeRanges(hrc, cRanges, pcr)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_SetFactoid == "on"]
+foreign {
     func SetFactoid(hrc: HRECOCONTEXT, cwcFactoid: UInt32, pwcFactoid: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_SetFactoid == "on"]
+public unsafe func Windows_SetFactoid(hrc: HRECOCONTEXT, cwcFactoid: UInt32, pwcFactoid: CPointer<UInt16>): Int32 {
+    return SetFactoid(hrc, cwcFactoid, pwcFactoid)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_SetFlags == "on"]
+foreign {
     func SetFlags(hrc: HRECOCONTEXT, dwFlags: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_SetFlags == "on"]
+public unsafe func Windows_SetFlags(hrc: HRECOCONTEXT, dwFlags: UInt32): Int32 {
+    return SetFlags(hrc, dwFlags)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_SetGuide == "on"]
+foreign {
     func SetGuide(hrc: HRECOCONTEXT, pGuide: CPointer<RECO_GUIDEAbi>, iIndex: UInt32): Int32
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_SetGuide == "on"]
+public unsafe func Windows_SetGuide(hrc: HRECOCONTEXT, pGuide: CPointer<RECO_GUIDEAbi>, iIndex: UInt32): Int32 {
+    return SetGuide(hrc, pGuide, iIndex)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_SetTextContext == "on"]
+foreign {
     // param-hint: pwcBefore len=param[1]
     // param-hint: pwcAfter len=param[3]
     func SetTextContext(hrc: HRECOCONTEXT, cwcBefore: UInt32, pwcBefore: CPointer<UInt16>, cwcAfter: UInt32, pwcAfter: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_SetTextContext == "on"]
+public unsafe func Windows_SetTextContext(hrc: HRECOCONTEXT, cwcBefore: UInt32, pwcBefore: CPointer<UInt16>, cwcAfter: UInt32, pwcAfter: CPointer<UInt16>): Int32 {
+    return SetTextContext(hrc, cwcBefore, pwcBefore, cwcAfter, pwcAfter)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_SetWordList == "on"]
+foreign {
     func SetWordList(hrc: HRECOCONTEXT, hwl: HRECOWORDLIST): Int32
 }
 
-@When[INKOBJCORE == "on" && Windows_Win32_Graphics_Gdi == "on"]
-foreign {
-    func AddStroke(hrc: HRECOCONTEXT, pPacketDesc: CPointer<PACKET_DESCRIPTIONAbi>, cbPacket: UInt32, pPacket: CPointer<UInt8>, pXForm: CPointer<Win32_Graphics_Gdi.XFORMAbi>): Int32
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_SetWordList == "on"]
+public unsafe func Windows_SetWordList(hrc: HRECOCONTEXT, hwl: HRECOWORDLIST): Int32 {
+    return SetWordList(hrc, hwl)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_CloneContext == "on"]
+func __windowsBindgen_CloneContextProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("inkobjcore.dll", "CloneContext")
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_CloneContext == "on"]
+unsafe func CloneContext(hrc: HRECOCONTEXT, pCloneHrc: CPointer<HRECOCONTEXT>): Int32 {
+    let call = CFunc<(HRECOCONTEXT, CPointer<HRECOCONTEXT>) -> Int32>(__windowsBindgen_CloneContextProc())
+    return unsafe { call(hrc, pCloneHrc) }
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_CloneContext == "on"]
+public unsafe func Windows_CloneContext(hrc: HRECOCONTEXT, pCloneHrc: CPointer<HRECOCONTEXT>): Int32 {
+    return CloneContext(hrc, pCloneHrc)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_DestroyAlternate == "on"]
+func __windowsBindgen_DestroyAlternateProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("inkobjcore.dll", "DestroyAlternate")
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_DestroyAlternate == "on"]
+unsafe func DestroyAlternate(hrcalt: HRECOALT): Int32 {
+    let call = CFunc<(HRECOALT) -> Int32>(__windowsBindgen_DestroyAlternateProc())
+    return unsafe { call(hrcalt) }
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_DestroyAlternate == "on"]
+public unsafe func Windows_DestroyAlternate(hrcalt: HRECOALT): Int32 {
+    return DestroyAlternate(hrcalt)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetContextPreferenceFlags == "on"]
+func __windowsBindgen_GetContextPreferenceFlagsProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("inkobjcore.dll", "GetContextPreferenceFlags")
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetContextPreferenceFlags == "on"]
+unsafe func GetContextPreferenceFlags(hrc: HRECOCONTEXT, pdwContextPreferenceFlags: CPointer<UInt32>): Int32 {
+    let call = CFunc<(HRECOCONTEXT, CPointer<UInt32>) -> Int32>(__windowsBindgen_GetContextPreferenceFlagsProc())
+    return unsafe { call(hrc, pdwContextPreferenceFlags) }
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetContextPreferenceFlags == "on"]
+public unsafe func Windows_GetContextPreferenceFlags(hrc: HRECOCONTEXT, pdwContextPreferenceFlags: CPointer<UInt32>): Int32 {
+    return GetContextPreferenceFlags(hrc, pdwContextPreferenceFlags)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetContextPropertyList == "on"]
+func __windowsBindgen_GetContextPropertyListProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("inkobjcore.dll", "GetContextPropertyList")
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetContextPropertyList == "on"]
+unsafe func GetContextPropertyList(hrc: HRECOCONTEXT, pcProperties: CPointer<UInt32>, pPropertyGUIDS: CPointer<GUID>): Int32 {
+    let call = CFunc<(HRECOCONTEXT, CPointer<UInt32>, CPointer<GUID>) -> Int32>(__windowsBindgen_GetContextPropertyListProc())
+    return unsafe { call(hrc, pcProperties, pPropertyGUIDS) }
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetContextPropertyList == "on"]
+public unsafe func Windows_GetContextPropertyList(hrc: HRECOCONTEXT, pcProperties: CPointer<UInt32>, pPropertyGUIDS: CPointer<GUID>): Int32 {
+    return GetContextPropertyList(hrc, pcProperties, pPropertyGUIDS)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetContextPropertyValue == "on"]
+func __windowsBindgen_GetContextPropertyValueProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("inkobjcore.dll", "GetContextPropertyValue")
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetContextPropertyValue == "on"]
+unsafe func GetContextPropertyValue(hrc: HRECOCONTEXT, pGuid: CPointer<GUID>, pcbSize: CPointer<UInt32>, pProperty: CPointer<UInt8>): Int32 {
+    let call = CFunc<(HRECOCONTEXT, CPointer<GUID>, CPointer<UInt32>, CPointer<UInt8>) -> Int32>(__windowsBindgen_GetContextPropertyValueProc())
+    return unsafe { call(hrc, pGuid, pcbSize, pProperty) }
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetContextPropertyValue == "on"]
+public unsafe func Windows_GetContextPropertyValue(hrc: HRECOCONTEXT, pGuid: CPointer<GUID>, pcbSize: CPointer<UInt32>, pProperty: CPointer<UInt8>): Int32 {
+    return GetContextPropertyValue(hrc, pGuid, pcbSize, pProperty)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetEnabledUnicodeRanges == "on"]
+func __windowsBindgen_GetEnabledUnicodeRangesProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("inkobjcore.dll", "GetEnabledUnicodeRanges")
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetEnabledUnicodeRanges == "on"]
+unsafe func GetEnabledUnicodeRanges(hrc: HRECOCONTEXT, pcRanges: CPointer<UInt32>, pcr: CPointer<CHARACTER_RANGEAbi>): Int32 {
+    let call = CFunc<(HRECOCONTEXT, CPointer<UInt32>, CPointer<CHARACTER_RANGEAbi>) -> Int32>(__windowsBindgen_GetEnabledUnicodeRangesProc())
+    return unsafe { call(hrc, pcRanges, pcr) }
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetEnabledUnicodeRanges == "on"]
+public unsafe func Windows_GetEnabledUnicodeRanges(hrc: HRECOCONTEXT, pcRanges: CPointer<UInt32>, pcr: CPointer<CHARACTER_RANGEAbi>): Int32 {
+    return GetEnabledUnicodeRanges(hrc, pcRanges, pcr)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetGuide == "on"]
+func __windowsBindgen_GetGuideProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("inkobjcore.dll", "GetGuide")
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetGuide == "on"]
+unsafe func GetGuide(hrc: HRECOCONTEXT, pGuide: CPointer<RECO_GUIDEAbi>, piIndex: CPointer<UInt32>): Int32 {
+    let call = CFunc<(HRECOCONTEXT, CPointer<RECO_GUIDEAbi>, CPointer<UInt32>) -> Int32>(__windowsBindgen_GetGuideProc())
+    return unsafe { call(hrc, pGuide, piIndex) }
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetGuide == "on"]
+public unsafe func Windows_GetGuide(hrc: HRECOCONTEXT, pGuide: CPointer<RECO_GUIDEAbi>, piIndex: CPointer<UInt32>): Int32 {
+    return GetGuide(hrc, pGuide, piIndex)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetPreferredPacketDescription == "on"]
+func __windowsBindgen_GetPreferredPacketDescriptionProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("inkobjcore.dll", "GetPreferredPacketDescription")
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetPreferredPacketDescription == "on"]
+unsafe func GetPreferredPacketDescription(hrec: HRECOGNIZER, pPacketDescription: CPointer<PACKET_DESCRIPTIONAbi>): Int32 {
+    let call = CFunc<(HRECOGNIZER, CPointer<PACKET_DESCRIPTIONAbi>) -> Int32>(__windowsBindgen_GetPreferredPacketDescriptionProc())
+    return unsafe { call(hrec, pPacketDescription) }
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_GetPreferredPacketDescription == "on"]
+public unsafe func Windows_GetPreferredPacketDescription(hrec: HRECOGNIZER, pPacketDescription: CPointer<PACKET_DESCRIPTIONAbi>): Int32 {
+    return GetPreferredPacketDescription(hrec, pPacketDescription)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_ResetContext == "on"]
+func __windowsBindgen_ResetContextProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("inkobjcore.dll", "ResetContext")
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_ResetContext == "on"]
+unsafe func ResetContext(hrc: HRECOCONTEXT): Int32 {
+    let call = CFunc<(HRECOCONTEXT) -> Int32>(__windowsBindgen_ResetContextProc())
+    return unsafe { call(hrc) }
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_ResetContext == "on"]
+public unsafe func Windows_ResetContext(hrc: HRECOCONTEXT): Int32 {
+    return ResetContext(hrc)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_SetCACMode == "on"]
+func __windowsBindgen_SetCACModeProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("inkobjcore.dll", "SetCACMode")
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_SetCACMode == "on"]
+unsafe func SetCACMode(hrc: HRECOCONTEXT, iMode: Int32): Int32 {
+    let call = CFunc<(HRECOCONTEXT, Int32) -> Int32>(__windowsBindgen_SetCACModeProc())
+    return unsafe { call(hrc, iMode) }
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_SetCACMode == "on"]
+public unsafe func Windows_SetCACMode(hrc: HRECOCONTEXT, iMode: Int32): Int32 {
+    return SetCACMode(hrc, iMode)
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_SetContextPropertyValue == "on"]
+func __windowsBindgen_SetContextPropertyValueProc(): CPointer<Unit> {
+    return windows_libloading.resolveProc("inkobjcore.dll", "SetContextPropertyValue")
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_SetContextPropertyValue == "on"]
+unsafe func SetContextPropertyValue(hrc: HRECOCONTEXT, pGuid: CPointer<GUID>, cbSize: UInt32, pProperty: CPointer<UInt8>): Int32 {
+    let call = CFunc<(HRECOCONTEXT, CPointer<GUID>, UInt32, CPointer<UInt8>) -> Int32>(__windowsBindgen_SetContextPropertyValueProc())
+    return unsafe { call(hrc, pGuid, cbSize, pProperty) }
+}
+
+@When[Windows_Win32_UI_TabletPC == "on" && INKOBJCORE == "on" && Windows_Win32_UI_TabletPC_SetContextPropertyValue == "on"]
+public unsafe func Windows_SetContextPropertyValue(hrc: HRECOCONTEXT, pGuid: CPointer<GUID>, cbSize: UInt32, pProperty: CPointer<UInt8>): Int32 {
+    return SetContextPropertyValue(hrc, pGuid, cbSize, pProperty)
 }
 
 @When[Windows_Win32_UI_TabletPC == "on"]

@@ -6,7 +6,6 @@ package windows.Win32.Security.LicenseProtection
 import std.collection.*
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge}
 import windows_core as windows_core
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 
@@ -73,8 +72,22 @@ extend LicenseProtectionStatus <: windows_core.CopyType & windows_core.RuntimeTy
     }
 }
 
-@When[LICENSEPROTECTION == "on"]
+@When[Windows_Win32_Security_LicenseProtection == "on" && LICENSEPROTECTION == "on" && Windows_Win32_Security_LicenseProtection_RegisterLicenseKeyWithExpiration == "on"]
 foreign {
     func RegisterLicenseKeyWithExpiration(licenseKey: CPointer<UInt16>, validityInDays: UInt32, status: CPointer<LicenseProtectionStatusAbi>): Int32
+}
+
+@When[Windows_Win32_Security_LicenseProtection == "on" && LICENSEPROTECTION == "on" && Windows_Win32_Security_LicenseProtection_RegisterLicenseKeyWithExpiration == "on"]
+public unsafe func Windows_RegisterLicenseKeyWithExpiration(licenseKey: CPointer<UInt16>, validityInDays: UInt32, status: CPointer<LicenseProtectionStatusAbi>): Int32 {
+    return RegisterLicenseKeyWithExpiration(licenseKey, validityInDays, status)
+}
+
+@When[Windows_Win32_Security_LicenseProtection == "on" && LICENSEPROTECTION == "on" && Windows_Win32_Security_LicenseProtection_ValidateLicenseKeyProtection == "on"]
+foreign {
     func ValidateLicenseKeyProtection(licenseKey: CPointer<UInt16>, notValidBefore: CPointer<Win32_Foundation.FILETIMEAbi>, notValidAfter: CPointer<Win32_Foundation.FILETIMEAbi>, status: CPointer<LicenseProtectionStatusAbi>): Int32
+}
+
+@When[Windows_Win32_Security_LicenseProtection == "on" && LICENSEPROTECTION == "on" && Windows_Win32_Security_LicenseProtection_ValidateLicenseKeyProtection == "on"]
+public unsafe func Windows_ValidateLicenseKeyProtection(licenseKey: CPointer<UInt16>, notValidBefore: CPointer<Win32_Foundation.FILETIMEAbi>, notValidAfter: CPointer<Win32_Foundation.FILETIMEAbi>, status: CPointer<LicenseProtectionStatusAbi>): Int32 {
+    return ValidateLicenseKeyProtection(licenseKey, notValidBefore, notValidAfter, status)
 }

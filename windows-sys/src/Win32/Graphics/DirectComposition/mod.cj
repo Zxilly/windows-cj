@@ -9,4 +9,25 @@ public import windows_sys.Win32._impl_l0.{COMPOSITION_FRAME_ID_TYPE, COMPOSITION
 public import windows_sys.Win32._impl_l1.{COMPOSITION_TARGET_STATS, IDCompositionAnimation, IDCompositionAnimationVtbl, IDCompositionClip, IDCompositionClipVtbl, IDCompositionDelegatedInkTrail, IDCompositionDelegatedInkTrailVtbl, IDCompositionDeviceDebug, IDCompositionDeviceDebugVtbl, IDCompositionDynamicTexture, IDCompositionDynamicTextureVtbl, IDCompositionEffect, IDCompositionEffectVtbl, IDCompositionFilterEffect, IDCompositionFilterEffectVtbl, IDCompositionInkTrailDevice, IDCompositionInkTrailDeviceVtbl, IDCompositionRectangleClip, IDCompositionRectangleClipVtbl, IDCompositionSurface, IDCompositionSurfaceVtbl, IDCompositionTexture, IDCompositionTextureVtbl, IDCompositionTransform3D, IDCompositionTransform3DVtbl, IDCompositionVirtualSurface, IDCompositionVirtualSurfaceVtbl}
 @When[Windows_Win32_Graphics_DirectComposition == "on" && Windows_Win32_Graphics_Dxgi_Common == "on"]
 public import windows_sys.Win32._impl_l0.DCOMPOSITION_FRAME_STATISTICS
-
+@When[Windows_Win32_Graphics_DirectComposition == "on" && DCOMP == "on" && Windows_Win32_Graphics_DirectComposition_DCompositionAttachMouseDragToHwnd == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DCompositionAttachMouseDragToHwnd
+@When[Windows_Win32_Graphics_DirectComposition == "on" && DCOMP == "on" && Windows_Win32_Graphics_DirectComposition_DCompositionAttachMouseWheelToHwnd == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DCompositionAttachMouseWheelToHwnd
+@When[Windows_Win32_Graphics_DirectComposition == "on" && DCOMP == "on" && Windows_Win32_Graphics_DirectComposition_DCompositionBoostCompositorClock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DCompositionBoostCompositorClock
+@When[Windows_Win32_Graphics_DirectComposition == "on" && DCOMP == "on" && Windows_Win32_Graphics_DirectComposition_DCompositionCreateDevice == "on" && Windows_Win32_Graphics_Dxgi == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DCompositionCreateDevice
+@When[Windows_Win32_Graphics_DirectComposition == "on" && DCOMP == "on" && Windows_Win32_Graphics_DirectComposition_DCompositionCreateDevice2 == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DCompositionCreateDevice2
+@When[Windows_Win32_Graphics_DirectComposition == "on" && DCOMP == "on" && Windows_Win32_Graphics_DirectComposition_DCompositionCreateDevice3 == "on" && Windows_Win32_System_Com == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DCompositionCreateDevice3
+@When[Windows_Win32_Graphics_DirectComposition == "on" && DCOMP == "on" && Windows_Win32_Graphics_DirectComposition_DCompositionCreateSurfaceHandle == "on" && Windows_Win32_Security == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DCompositionCreateSurfaceHandle
+@When[Windows_Win32_Graphics_DirectComposition == "on" && DCOMP == "on" && Windows_Win32_Graphics_DirectComposition_DCompositionGetFrameId == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DCompositionGetFrameId
+@When[Windows_Win32_Graphics_DirectComposition == "on" && DCOMP == "on" && Windows_Win32_Graphics_DirectComposition_DCompositionGetStatistics == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DCompositionGetStatistics
+@When[Windows_Win32_Graphics_DirectComposition == "on" && DCOMP == "on" && Windows_Win32_Graphics_DirectComposition_DCompositionGetTargetStatistics == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DCompositionGetTargetStatistics
+@When[Windows_Win32_Graphics_DirectComposition == "on" && DCOMP == "on" && Windows_Win32_Graphics_DirectComposition_DCompositionWaitForCompositorClock == "on"]
+public import windows_sys.Win32._impl_l2.Windows_DCompositionWaitForCompositorClock

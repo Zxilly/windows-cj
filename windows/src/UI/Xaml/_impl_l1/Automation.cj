@@ -778,7 +778,7 @@ public class AutomationProperties <: InterfaceWrapperBase & ComInterface & windo
         }
     }
 
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public static unsafe func GetControlledPeers(element: UI_Xaml__impl_l0.DependencyObject): windows_collections.IVector<UIElement> {
         var result__: Option<windows_collections.IVector<UIElement>> = Option<windows_collections.IVector<UIElement>>.None
         try (factory__ = windows_core.factory<AutomationProperties, IAutomationPropertiesStatics2>().unwrap()) {
@@ -930,7 +930,7 @@ public class AutomationProperties <: InterfaceWrapperBase & ComInterface & windo
         }
     }
 
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public static unsafe func GetAnnotations(element: UI_Xaml__impl_l0.DependencyObject): windows_collections.IVector<AutomationAnnotation> {
         var result__: Option<windows_collections.IVector<AutomationAnnotation>> = Option<windows_collections.IVector<AutomationAnnotation>>.None
         try (factory__ = windows_core.factory<AutomationProperties, IAutomationPropertiesStatics3>().unwrap()) {
@@ -1082,7 +1082,7 @@ public class AutomationProperties <: InterfaceWrapperBase & ComInterface & windo
         }
     }
 
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public static unsafe func GetDescribedBy(element: UI_Xaml__impl_l0.DependencyObject): windows_collections.IVector<UI_Xaml__impl_l0.DependencyObject> {
         var result__: Option<windows_collections.IVector<UI_Xaml__impl_l0.DependencyObject>> = Option<windows_collections.IVector<UI_Xaml__impl_l0.DependencyObject>>.None
         try (factory__ = windows_core.factory<AutomationProperties, UI_Xaml__impl_l0.IAutomationPropertiesStatics5>().unwrap()) {
@@ -1106,7 +1106,7 @@ public class AutomationProperties <: InterfaceWrapperBase & ComInterface & windo
         }
     }
 
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public static unsafe func GetFlowsTo(element: UI_Xaml__impl_l0.DependencyObject): windows_collections.IVector<UI_Xaml__impl_l0.DependencyObject> {
         var result__: Option<windows_collections.IVector<UI_Xaml__impl_l0.DependencyObject>> = Option<windows_collections.IVector<UI_Xaml__impl_l0.DependencyObject>>.None
         try (factory__ = windows_core.factory<AutomationProperties, UI_Xaml__impl_l0.IAutomationPropertiesStatics5>().unwrap()) {
@@ -1130,7 +1130,7 @@ public class AutomationProperties <: InterfaceWrapperBase & ComInterface & windo
         }
     }
 
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public static unsafe func GetFlowsFrom(element: UI_Xaml__impl_l0.DependencyObject): windows_collections.IVector<UI_Xaml__impl_l0.DependencyObject> {
         var result__: Option<windows_collections.IVector<UI_Xaml__impl_l0.DependencyObject>> = Option<windows_collections.IVector<UI_Xaml__impl_l0.DependencyObject>>.None
         try (factory__ = windows_core.factory<AutomationProperties, UI_Xaml__impl_l0.IAutomationPropertiesStatics5>().unwrap()) {
@@ -1841,9 +1841,9 @@ public struct IAutomationPropertiesStatics2Vtbl {
     public var ControlledPeersProperty: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Xaml != "on"]
     public var ControlledPeersProperty: UIntNative = UIntNative(0)
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public var GetControlledPeers: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Xaml != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_UI_Xaml != "on"]
     public var GetControlledPeers: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -1947,7 +1947,7 @@ public class IAutomationPropertiesStatics2 <: InterfaceWrapperBase & ComInterfac
         return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
     }
 
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public unsafe func GetControlledPeers(element: UI_Xaml__impl_l0.DependencyObject): windows_collections.IVector<UIElement> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2004,9 +2004,9 @@ public struct IAutomationPropertiesStatics3Vtbl {
     public var AnnotationsProperty: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_UI_Xaml != "on"]
     public var AnnotationsProperty: UIntNative = UIntNative(0)
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public var GetAnnotations: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_UI_Xaml != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_UI_Xaml != "on"]
     public var GetAnnotations: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -2160,7 +2160,7 @@ public class IAutomationPropertiesStatics3 <: InterfaceWrapperBase & ComInterfac
         return UI_Xaml__impl_l0.DependencyProperty.fromAbiTake(result__)
     }
 
-    @When[Windows_UI_Xaml == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Xaml == "on"]
     public unsafe func GetAnnotations(element: UI_Xaml__impl_l0.DependencyObject): windows_collections.IVector<AutomationAnnotation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

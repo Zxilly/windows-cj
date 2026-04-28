@@ -3,12 +3,9 @@ package windows_sys.Media._impl_l0
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Foundation_Numerics == "on"]
 import windows_sys.Foundation.Numerics as Foundation_Numerics
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_Media == "on"]
 import windows_sys.Media as Media
-@When[Windows_UI == "on"]
 import windows_sys.UI as UI
 
 
@@ -175,6 +172,7 @@ public struct IAudioCaptureEffectsManagerVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var AudioCaptureEffectsChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveAudioCaptureEffectsChanged: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAudioCaptureEffects: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -231,6 +229,7 @@ public class IAudioCaptureEffectsManager <: InterfaceWrapperBase & ComInterface 
         return __vt.RemoveAudioCaptureEffectsChanged(__liveRaw, token)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAudioCaptureEffects(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -587,6 +586,7 @@ public struct IAudioRenderEffectsManagerVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var AudioRenderEffectsChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation__impl_l0.EventRegistrationToken>) -> Int32> = { _, _, _ => 0 }
     public var RemoveAudioRenderEffectsChanged: CFunc<(CPointer<Unit>, Foundation__impl_l0.EventRegistrationToken) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetAudioRenderEffects: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -643,6 +643,7 @@ public class IAudioRenderEffectsManager <: InterfaceWrapperBase & ComInterface {
         return __vt.RemoveAudioRenderEffectsChanged(__liveRaw, token)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetAudioRenderEffects(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -726,7 +727,7 @@ public class IAudioRenderEffectsManager2 <: InterfaceWrapperBase & ComInterface 
 public struct IBasicAudioEffectVtbl {
     public var base_: Media.IMediaExtensionVtbl = Media.IMediaExtensionVtbl()
     public var UseInputFrameForOutput: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Media_MediaProperties == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_MediaProperties == "on"]
     public var SupportedEncodingProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Media_MediaProperties == "on"]
     public var SetEncodingProperties: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -782,7 +783,7 @@ public class IBasicAudioEffect <: InterfaceWrapperBase & ComInterface {
         return __vt.UseInputFrameForOutput(__liveRaw, result__)
     }
 
-    @When[Windows_Media_MediaProperties == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_MediaProperties == "on"]
     public unsafe func SupportedEncodingProperties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -822,7 +823,7 @@ public struct IBasicVideoEffectVtbl {
     public var IsReadOnly: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
     public var SupportedMemoryTypes: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
     public var TimeIndependent: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Media_MediaProperties == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_MediaProperties == "on"]
     public var SupportedEncodingProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Graphics_DirectX_Direct3D11 == "on" && Windows_Media_MediaProperties == "on"]
     public var SetEncodingProperties: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => 0 }
@@ -890,7 +891,7 @@ public class IBasicVideoEffect <: InterfaceWrapperBase & ComInterface {
         return __vt.TimeIndependent(__liveRaw, result__)
     }
 
-    @When[Windows_Media_MediaProperties == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_MediaProperties == "on"]
     public unsafe func SupportedEncodingProperties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -927,7 +928,7 @@ public class IBasicVideoEffect <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ICompositeVideoFrameContextVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Graphics_DirectX_Direct3D11 == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_DirectX_Direct3D11 == "on"]
     public var SurfacesToOverlay: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Media == "on"]
     public var BackgroundFrame: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -978,7 +979,7 @@ public class ICompositeVideoFrameContext <: InterfaceWrapperBase & ComInterface 
         readVtbl<ICompositeVideoFrameContextVtbl>(ICompositeVideoFrameContextVtbl())
     }
 
-    @When[Windows_Graphics_DirectX_Direct3D11 == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Graphics_DirectX_Direct3D11 == "on"]
     public unsafe func SurfacesToOverlay(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

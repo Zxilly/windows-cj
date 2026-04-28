@@ -72,21 +72,21 @@ public class IWebAccountClientViewFactory <: InterfaceWrapperBase & ComInterface
 @C
 public struct IWebAccountManagerStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Security_Credentials == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Credentials == "on"]
     public var UpdateWebAccountPropertiesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
-    @When[Windows_Security_Credentials == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Credentials == "on"]
     public var AddWebAccountAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Security_Credentials == "on"]
     public var DeleteWebAccountAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
-    @When[Windows_Security_Credentials == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Credentials == "on"]
     public var FindAllProviderWebAccountsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Web_Http == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Web_Http == "on"]
     public var PushCookiesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Security_Credentials == "on"]
     public var SetViewAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     @When[Windows_Security_Credentials == "on"]
     public var ClearViewAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
-    @When[Windows_Security_Credentials == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Credentials == "on"]
     public var GetViewsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     @When[Windows_Security_Credentials == "on" && Windows_Storage_Streams == "on"]
     public var SetWebAccountPictureAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
@@ -135,14 +135,14 @@ public class IWebAccountManagerStatics <: InterfaceWrapperBase & ComInterface {
         readVtbl<IWebAccountManagerStaticsVtbl>(IWebAccountManagerStaticsVtbl())
     }
 
-    @When[Windows_Security_Credentials == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Credentials == "on"]
     public unsafe func UpdateWebAccountPropertiesAsync(webAccount: CPointer<Unit>, webAccountUserName: CPointer<Unit>, additionalProperties: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.UpdateWebAccountPropertiesAsync(__liveRaw, webAccount, webAccountUserName, additionalProperties, result__)
     }
 
-    @When[Windows_Security_Credentials == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Credentials == "on"]
     public unsafe func AddWebAccountAsync(webAccountId: CPointer<Unit>, webAccountUserName: CPointer<Unit>, props: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -156,14 +156,14 @@ public class IWebAccountManagerStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.DeleteWebAccountAsync(__liveRaw, webAccount, result__)
     }
 
-    @When[Windows_Security_Credentials == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Credentials == "on"]
     public unsafe func FindAllProviderWebAccountsAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindAllProviderWebAccountsAsync(__liveRaw, result__)
     }
 
-    @When[Windows_Web_Http == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Web_Http == "on"]
     public unsafe func PushCookiesAsync(uri: CPointer<Unit>, cookies: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -184,7 +184,7 @@ public class IWebAccountManagerStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.ClearViewAsync(__liveRaw, webAccount, applicationCallbackUri, result__)
     }
 
-    @When[Windows_Security_Credentials == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Credentials == "on"]
     public unsafe func GetViewsAsync(webAccount: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -210,13 +210,13 @@ public class IWebAccountManagerStatics <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IWebAccountManagerStatics3Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Security_Credentials == "on" && Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Credentials == "on" && Windows_System == "on"]
     public var FindAllProviderWebAccountsForUserAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
-    @When[Windows_Security_Credentials == "on" && Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Credentials == "on" && Windows_System == "on"]
     public var AddWebAccountForUserAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
-    @When[Windows_Security_Credentials == "on" && Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Credentials == "on" && Windows_System == "on"]
     public var AddWebAccountWithScopeForUserAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
-    @When[Windows_Security_Credentials == "on" && Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Credentials == "on" && Windows_System == "on"]
     public var AddWebAccountWithScopeAndMapForUserAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Int32, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _, _ => 0 }
     public init() {}
 }
@@ -261,28 +261,28 @@ public class IWebAccountManagerStatics3 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IWebAccountManagerStatics3Vtbl>(IWebAccountManagerStatics3Vtbl())
     }
 
-    @When[Windows_Security_Credentials == "on" && Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Credentials == "on" && Windows_System == "on"]
     public unsafe func FindAllProviderWebAccountsForUserAsync(user: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindAllProviderWebAccountsForUserAsync(__liveRaw, user, result__)
     }
 
-    @When[Windows_Security_Credentials == "on" && Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Credentials == "on" && Windows_System == "on"]
     public unsafe func AddWebAccountForUserAsync(user: CPointer<Unit>, webAccountId: CPointer<Unit>, webAccountUserName: CPointer<Unit>, props: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AddWebAccountForUserAsync(__liveRaw, user, webAccountId, webAccountUserName, props, result__)
     }
 
-    @When[Windows_Security_Credentials == "on" && Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Credentials == "on" && Windows_System == "on"]
     public unsafe func AddWebAccountWithScopeForUserAsync(user: CPointer<Unit>, webAccountId: CPointer<Unit>, webAccountUserName: CPointer<Unit>, props: CPointer<Unit>, scope: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.AddWebAccountWithScopeForUserAsync(__liveRaw, user, webAccountId, webAccountUserName, props, scope, result__)
     }
 
-    @When[Windows_Security_Credentials == "on" && Windows_System == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Credentials == "on" && Windows_System == "on"]
     public unsafe func AddWebAccountWithScopeAndMapForUserAsync(user: CPointer<Unit>, webAccountId: CPointer<Unit>, webAccountUserName: CPointer<Unit>, props: CPointer<Unit>, scope: Int32, perUserWebAccountId: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -358,7 +358,7 @@ public class IWebAccountManagerStatics4 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IWebAccountMapManagerStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Security_Credentials == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Credentials == "on"]
     public var AddWebAccountWithScopeAndMapAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Int32, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _, _ => 0 }
     @When[Windows_Security_Credentials == "on"]
     public var SetPerAppToPerUserAccountAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
@@ -409,7 +409,7 @@ public class IWebAccountMapManagerStatics <: InterfaceWrapperBase & ComInterface
         readVtbl<IWebAccountMapManagerStaticsVtbl>(IWebAccountMapManagerStaticsVtbl())
     }
 
-    @When[Windows_Security_Credentials == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Credentials == "on"]
     public unsafe func AddWebAccountWithScopeAndMapAsync(webAccountId: CPointer<Unit>, webAccountUserName: CPointer<Unit>, props: CPointer<Unit>, scope: Int32, perUserWebAccountId: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -683,7 +683,7 @@ public class IWebAccountProviderManageAccountOperation <: InterfaceWrapperBase &
 public struct IWebAccountProviderRetrieveCookiesOperationVtbl {
     public var base_: _impl_l0.IWebAccountProviderOperationVtbl = _impl_l0.IWebAccountProviderOperationVtbl()
     public var Context: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Web_Http == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Web_Http == "on"]
     public var Cookies: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetUri: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
     public var Uri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -737,7 +737,7 @@ public class IWebAccountProviderRetrieveCookiesOperation <: InterfaceWrapperBase
         return __vt.Context(__liveRaw, result__)
     }
 
-    @When[Windows_Web_Http == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Web_Http == "on"]
     public unsafe func Cookies(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1069,7 +1069,7 @@ public class IWebAccountProviderUIReportOperation <: InterfaceWrapperBase & ComI
 @C
 public struct IWebAccountScopeManagerStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Security_Credentials == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Credentials == "on"]
     public var AddWebAccountWithScopeAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => 0 }
     @When[Windows_Security_Credentials == "on"]
     public var SetScopeAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
@@ -1118,7 +1118,7 @@ public class IWebAccountScopeManagerStatics <: InterfaceWrapperBase & ComInterfa
         readVtbl<IWebAccountScopeManagerStaticsVtbl>(IWebAccountScopeManagerStaticsVtbl())
     }
 
-    @When[Windows_Security_Credentials == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Credentials == "on"]
     public unsafe func AddWebAccountWithScopeAsync(webAccountId: CPointer<Unit>, webAccountUserName: CPointer<Unit>, props: CPointer<Unit>, scope: Int32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1146,7 +1146,7 @@ public struct IWebProviderTokenRequestVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     @When[Windows_Security_Authentication_Web_Core == "on"]
     public var ClientRequest: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Security_Credentials == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Credentials == "on"]
     public var WebAccounts: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var WebAccountSelectionOptions: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
     public var ApplicationCallbackUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -1202,7 +1202,7 @@ public class IWebProviderTokenRequest <: InterfaceWrapperBase & ComInterface {
         return __vt.ClientRequest(__liveRaw, result__)
     }
 
-    @When[Windows_Security_Credentials == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Security_Credentials == "on"]
     public unsafe func WebAccounts(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

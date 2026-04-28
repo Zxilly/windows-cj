@@ -395,6 +395,7 @@ public class ClipboardHistoryItemsResult <: InterfaceWrapperBase & ComInterface 
         return defaultInterface().Status()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVectorView<ClipboardHistoryItem> {
         return defaultInterface().Items()
     }
@@ -502,6 +503,7 @@ public class DataPackage <: InterfaceWrapperBase & ComInterface & windows_interf
         return defaultInterface().GetView()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): _impl_l1.DataPackagePropertySet {
         return defaultInterface().Properties()
     }
@@ -550,7 +552,7 @@ public class DataPackage <: InterfaceWrapperBase & ComInterface & windows_interf
         defaultInterface().SetHtmlFormat(value)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func ResourceMap(): windows_collections.IMap<windows_core.HString, _impl_l1.RandomAccessStreamReference> {
         return defaultInterface().ResourceMap()
     }
@@ -564,12 +566,12 @@ public class DataPackage <: InterfaceWrapperBase & ComInterface & windows_interf
         defaultInterface().SetBitmap(value)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func SetStorageItemsReadOnly(value: windows_collections.IIterable<_impl_l1.IStorageItem>): Unit {
         defaultInterface().SetStorageItemsReadOnly(value)
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func SetStorageItems(value: windows_collections.IIterable<_impl_l1.IStorageItem>, readOnly: Bool): Unit {
         defaultInterface().SetStorageItems(value, readOnly)
     }
@@ -674,6 +676,7 @@ public class DataPackageView <: InterfaceWrapperBase & ComInterface & windows_in
         defaultInterface().ReportOperationCompleted(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AvailableFormats(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().AvailableFormats()
     }
@@ -702,7 +705,7 @@ public class DataPackageView <: InterfaceWrapperBase & ComInterface & windows_in
         return defaultInterface().GetHtmlFormatAsync()
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetResourceMapAsync(): windows_future.IAsyncOperation<windows_collections.IMapView<windows_core.HString, _impl_l1.RandomAccessStreamReference>> {
         return defaultInterface().GetResourceMapAsync()
     }
@@ -716,7 +719,7 @@ public class DataPackageView <: InterfaceWrapperBase & ComInterface & windows_in
         return defaultInterface().GetBitmapAsync()
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func GetStorageItemsAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<_impl_l1.IStorageItem>> {
         return defaultInterface().GetStorageItemsAsync()
     }
@@ -1184,7 +1187,10 @@ extend IClipboardHistoryItem <: windows_core.Interface<IClipboardHistoryItem> {}
 public struct IClipboardHistoryItemsResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Status: CFunc<(CPointer<Unit>, CPointer<_impl_l0.ClipboardHistoryItemsResultStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Items: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Items: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1261,6 +1267,7 @@ public class IClipboardHistoryItemsResult <: InterfaceWrapperBase & ComInterface
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<_impl_l0.ClipboardHistoryItemsResultStatus>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Items(): windows_collections.IVectorView<ClipboardHistoryItem> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1587,7 +1594,10 @@ extend IClipboardStatics2 <: windows_core.Interface<IClipboardStatics2> {}
 public struct IDataPackageVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var GetView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     public var RequestedOperation: CFunc<(CPointer<Unit>, CPointer<_impl_l0.DataPackageOperationAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetRequestedOperation: CFunc<(CPointer<Unit>, _impl_l0.DataPackageOperationAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var OperationCompleted: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows_collections.EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -1599,22 +1609,22 @@ public struct IDataPackageVtbl {
     public var SetText: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetUri: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetHtmlFormat: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var ResourceMap: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
     public var ResourceMap: UIntNative = UIntNative(0)
     public var SetRtf: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams == "on"]
     public var SetBitmap: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams != "on"]
     public var SetBitmap: UIntNative = UIntNative(0)
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var SetStorageItemsReadOnly: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage != "on"]
     public var SetStorageItemsReadOnly: UIntNative = UIntNative(0)
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public var SetStorageItems: CFunc<(CPointer<Unit>, CPointer<Unit>, Bool) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage != "on"]
     public var SetStorageItems: UIntNative = UIntNative(0)
     public init() {}
 }
@@ -1692,6 +1702,7 @@ public class IDataPackage <: InterfaceWrapperBase & ComInterface & RuntimeName &
         return DataPackageView.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): _impl_l1.DataPackagePropertySet {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1772,7 +1783,7 @@ public class IDataPackage <: InterfaceWrapperBase & ComInterface & RuntimeName &
         HRESULT(hr).ok()
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func ResourceMap(): windows_collections.IMap<windows_core.HString, _impl_l1.RandomAccessStreamReference> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1794,14 +1805,14 @@ public class IDataPackage <: InterfaceWrapperBase & ComInterface & RuntimeName &
         HRESULT(hr).ok()
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func SetStorageItemsReadOnly(value: windows_collections.IIterable<_impl_l1.IStorageItem>): Unit {
         let v = vtbl()
         let hr = v.SetStorageItemsReadOnly(asRaw(), value.asRaw())
         HRESULT(hr).ok()
     }
 
-    @When[Windows_Storage == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage == "on"]
     public unsafe func SetStorageItems(value: windows_collections.IIterable<_impl_l1.IStorageItem>, readOnly: Bool): Unit {
         let v = vtbl()
         let hr = v.SetStorageItems(asRaw(), value.asRaw(), readOnly)
@@ -2769,7 +2780,10 @@ extend IShareProviderOperation <: windows_core.Interface<IShareProviderOperation
 @C
 public struct IShareProvidersRequestedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Providers: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Providers: UIntNative = UIntNative(0)
     public var Data: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var GetDeferral: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -2840,6 +2854,7 @@ public class IShareProvidersRequestedEventArgs <: InterfaceWrapperBase & ComInte
         readVtbl<IShareProvidersRequestedEventArgsVtbl>(IShareProvidersRequestedEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Providers(): windows_collections.IVector<ShareProvider> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3893,12 +3908,14 @@ public class ShareProviderHandler <: InterfaceWrapperBase & ComInterface & windo
 @When[Windows_ApplicationModel_DataTransfer == "on"]
 extend ShareProviderHandler <: windows_core.Interface<ShareProviderHandler> {}
 
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 private open class ShareProviderHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 private open class ShareProviderHandlerInvoker <: ShareProviderHandlerInvokerErased {
     public open func Invoke(operation: InParam<ShareProviderOperation>): Unit {
         ()
@@ -3910,6 +3927,7 @@ private open class ShareProviderHandlerInvoker <: ShareProviderHandlerInvokerEra
     }
 }
 
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 private class ShareProviderHandlerBox <: ShareProviderHandlerInvoker {
     public let invoke_: (InParam<ShareProviderOperation>) -> Unit
     private let vtblHandle: CPointerHandle<ShareProviderHandlerVtbl>
@@ -3928,6 +3946,7 @@ private class ShareProviderHandlerBox <: ShareProviderHandlerInvoker {
     }
 }
 
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 func buildShareProviderHandlerBoxVtbl(): ShareProviderHandlerVtbl {
     var vtbl = ShareProviderHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -4111,6 +4130,7 @@ public class ShareProvidersRequestedEventArgs <: InterfaceWrapperBase & ComInter
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Providers(): windows_collections.IVector<ShareProvider> {
         return defaultInterface().Providers()
     }

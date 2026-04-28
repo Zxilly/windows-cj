@@ -180,9 +180,6 @@ func isProjectedWinrtValueType(index: TypeIndex, typeName: TypeName): Bool {
     if (!resolvedTypeName.generics.isEmpty()) {
         return false
     }
-    if (resolvedTypeName.namespace != "Windows" && !resolvedTypeName.namespace.startsWith("Windows.")) {
-        return false
-    }
     match (bindgenContext()) {
         case Some(context) =>
             if (!context.config.isForcedLocalType(resolvedTypeName.namespace, trimTick(resolvedTypeName.name))) {

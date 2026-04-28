@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Devices_Input == "on"]
 import windows.Devices.Input as Devices_Input
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l0 as _impl_l0
 import windows_collections as windows_collections
@@ -3878,7 +3876,10 @@ extend IInertiaTranslationBehavior <: windows_core.Interface<IInertiaTranslation
 @C
 public struct IInputScopeVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Names: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Names: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3947,6 +3948,7 @@ public class IInputScope <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         readVtbl<IInputScopeVtbl>(IInputScopeVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Names(): windows_collections.IVector<InputScopeName> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -7096,12 +7098,14 @@ public class KeyEventHandler <: InterfaceWrapperBase & ComInterface & windows_in
 @When[Windows_UI_Xaml_Input == "on"]
 extend KeyEventHandler <: windows_core.Interface<KeyEventHandler> {}
 
+@When[Windows_UI_Xaml_Input == "on"]
 private open class KeyEventHandlerInvokerErased {
     public open func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_UI_Xaml_Input == "on"]
 private open class KeyEventHandlerInvoker <: KeyEventHandlerInvokerErased {
     public open func Invoke(sender: InParam<IInspectable>, e: InParam<KeyRoutedEventArgs>): Unit {
         ()
@@ -7113,6 +7117,7 @@ private open class KeyEventHandlerInvoker <: KeyEventHandlerInvokerErased {
     }
 }
 
+@When[Windows_UI_Xaml_Input == "on"]
 private class KeyEventHandlerBox <: KeyEventHandlerInvoker {
     public let invoke_: (InParam<IInspectable>, InParam<KeyRoutedEventArgs>) -> Unit
     private let vtblHandle: CPointerHandle<KeyEventHandlerVtbl>
@@ -7131,6 +7136,7 @@ private class KeyEventHandlerBox <: KeyEventHandlerInvoker {
     }
 }
 
+@When[Windows_UI_Xaml_Input == "on"]
 func buildKeyEventHandlerBoxVtbl(): KeyEventHandlerVtbl {
     var vtbl = KeyEventHandlerVtbl()
     vtbl.base_ = buildIUnknownVtbl()

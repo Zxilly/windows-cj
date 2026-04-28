@@ -11,126 +11,888 @@ import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
 
 
-@When[OLEAUT32 == "on"]
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_DosDateTimeToVariantTime == "on"]
 foreign {
     func DosDateTimeToVariantTime(wDosDate: UInt16, wDosTime: UInt16, pvtime: CPointer<Float64>): Int32
-    func SystemTimeToVariantTime(lpSystemTime: CPointer<Win32_Foundation.SYSTEMTIME>, pvtime: CPointer<Float64>): Int32
-    func VariantTimeToDosDateTime(vtime: Float64, pwDosDate: CPointer<UInt16>, pwDosTime: CPointer<UInt16>): Int32
-    func VariantTimeToSystemTime(vtime: Float64, lpSystemTime: CPointer<Win32_Foundation.SYSTEMTIME>): Int32
 }
 
-@When[OLEAUT32 == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on")]
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_DosDateTimeToVariantTime == "on"]
+public unsafe func Windows_DosDateTimeToVariantTime(wDosDate: UInt16, wDosTime: UInt16, pvtime: CPointer<Float64>): Int32 {
+    return DosDateTimeToVariantTime(wDosDate, wDosTime, pvtime)
+}
+
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_SystemTimeToVariantTime == "on"]
+foreign {
+    func SystemTimeToVariantTime(lpSystemTime: CPointer<Win32_Foundation.SYSTEMTIME>, pvtime: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_SystemTimeToVariantTime == "on"]
+public unsafe func Windows_SystemTimeToVariantTime(lpSystemTime: CPointer<Win32_Foundation.SYSTEMTIME>, pvtime: CPointer<Float64>): Int32 {
+    return SystemTimeToVariantTime(lpSystemTime, pvtime)
+}
+
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VARIANT_UserFree == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
 foreign {
     func VARIANT_UserFree(param0: CPointer<UInt32>, param1: CPointer<VARIANT>): Unit
+}
+
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VARIANT_UserFree == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VARIANT_UserFree(param0: CPointer<UInt32>, param1: CPointer<VARIANT>): Unit {
+    VARIANT_UserFree(param0, param1)
+}
+
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VARIANT_UserFree64 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VARIANT_UserFree64(param0: CPointer<UInt32>, param1: CPointer<VARIANT>): Unit
+}
+
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VARIANT_UserFree64 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VARIANT_UserFree64(param0: CPointer<UInt32>, param1: CPointer<VARIANT>): Unit {
+    VARIANT_UserFree64(param0, param1)
+}
+
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VARIANT_UserMarshal == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VARIANT_UserMarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<VARIANT>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VARIANT_UserMarshal == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VARIANT_UserMarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<VARIANT>): CPointer<UInt8> {
+    return VARIANT_UserMarshal(param0, param1, param2)
+}
+
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VARIANT_UserMarshal64 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VARIANT_UserMarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<VARIANT>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VARIANT_UserMarshal64 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VARIANT_UserMarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<VARIANT>): CPointer<UInt8> {
+    return VARIANT_UserMarshal64(param0, param1, param2)
+}
+
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VARIANT_UserSize == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VARIANT_UserSize(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<VARIANT>): UInt32
+}
+
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VARIANT_UserSize == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VARIANT_UserSize(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<VARIANT>): UInt32 {
+    return VARIANT_UserSize(param0, param1, param2)
+}
+
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VARIANT_UserSize64 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VARIANT_UserSize64(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<VARIANT>): UInt32
+}
+
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VARIANT_UserSize64 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VARIANT_UserSize64(param0: CPointer<UInt32>, param1: UInt32, param2: CPointer<VARIANT>): UInt32 {
+    return VARIANT_UserSize64(param0, param1, param2)
+}
+
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VARIANT_UserUnmarshal == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VARIANT_UserUnmarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<VARIANT>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VARIANT_UserUnmarshal == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VARIANT_UserUnmarshal(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<VARIANT>): CPointer<UInt8> {
+    return VARIANT_UserUnmarshal(param0, param1, param2)
+}
+
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VARIANT_UserUnmarshal64 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VARIANT_UserUnmarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<VARIANT>): CPointer<UInt8>
+}
+
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VARIANT_UserUnmarshal64 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VARIANT_UserUnmarshal64(param0: CPointer<UInt32>, param1: CPointer<UInt8>, param2: CPointer<VARIANT>): CPointer<UInt8> {
+    return VARIANT_UserUnmarshal64(param0, param1, param2)
+}
+
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VariantChangeType == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantChangeType(pvargDest: CPointer<VARIANT>, pvarSrc: CPointer<VARIANT>, wFlags: UInt16, vt: UInt16): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VariantChangeType == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantChangeType(pvargDest: CPointer<VARIANT>, pvarSrc: CPointer<VARIANT>, wFlags: UInt16, vt: UInt16): Int32 {
+    return VariantChangeType(pvargDest, pvarSrc, wFlags, vt)
+}
+
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VariantChangeTypeEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantChangeTypeEx(pvargDest: CPointer<VARIANT>, pvarSrc: CPointer<VARIANT>, lcid: UInt32, wFlags: UInt16, vt: UInt16): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VariantChangeTypeEx == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantChangeTypeEx(pvargDest: CPointer<VARIANT>, pvarSrc: CPointer<VARIANT>, lcid: UInt32, wFlags: UInt16, vt: UInt16): Int32 {
+    return VariantChangeTypeEx(pvargDest, pvarSrc, lcid, wFlags, vt)
+}
+
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VariantClear == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantClear(pvarg: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VariantClear == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantClear(pvarg: CPointer<VARIANT>): Int32 {
+    return VariantClear(pvarg)
+}
+
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VariantCopy == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantCopy(pvargDest: CPointer<VARIANT>, pvargSrc: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VariantCopy == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantCopy(pvargDest: CPointer<VARIANT>, pvargSrc: CPointer<VARIANT>): Int32 {
+    return VariantCopy(pvargDest, pvargSrc)
+}
+
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VariantCopyInd == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantCopyInd(pvarDest: CPointer<VARIANT>, pvargSrc: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VariantCopyInd == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantCopyInd(pvarDest: CPointer<VARIANT>, pvargSrc: CPointer<VARIANT>): Int32 {
+    return VariantCopyInd(pvarDest, pvargSrc)
+}
+
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VariantInit == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantInit(pvarg: CPointer<VARIANT>): Unit
 }
 
-@When[PROPSYS == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on")]
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VariantInit == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantInit(pvarg: CPointer<VARIANT>): Unit {
+    VariantInit(pvarg)
+}
+
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VariantTimeToDosDateTime == "on"]
+foreign {
+    func VariantTimeToDosDateTime(vtime: Float64, pwDosDate: CPointer<UInt16>, pwDosTime: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VariantTimeToDosDateTime == "on"]
+public unsafe func Windows_VariantTimeToDosDateTime(vtime: Float64, pwDosDate: CPointer<UInt16>, pwDosTime: CPointer<UInt16>): Int32 {
+    return VariantTimeToDosDateTime(vtime, pwDosDate, pwDosTime)
+}
+
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VariantTimeToSystemTime == "on"]
+foreign {
+    func VariantTimeToSystemTime(vtime: Float64, lpSystemTime: CPointer<Win32_Foundation.SYSTEMTIME>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && OLEAUT32 == "on" && Windows_Win32_System_Variant_VariantTimeToSystemTime == "on"]
+public unsafe func Windows_VariantTimeToSystemTime(vtime: Float64, lpSystemTime: CPointer<Win32_Foundation.SYSTEMTIME>): Int32 {
+    return VariantTimeToSystemTime(vtime, lpSystemTime)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_ClearVariantArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
 foreign {
     // param-hint: pvars len=param[1]
     func ClearVariantArray(pvars: CPointer<VARIANT>, cvars: UInt32): Unit
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_ClearVariantArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_ClearVariantArray(pvars: CPointer<VARIANT>, cvars: UInt32): Unit {
+    ClearVariantArray(pvars, cvars)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromBooleanArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     // param-hint: prgf len=param[1]
     func InitVariantFromBooleanArray(prgf: CPointer<Int32>, cElems: UInt32, pvar: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromBooleanArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_InitVariantFromBooleanArray(prgf: CPointer<Int32>, cElems: UInt32, pvar: CPointer<VARIANT>): Int32 {
+    return InitVariantFromBooleanArray(prgf, cElems, pvar)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromBuffer == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     // param-hint: pv bytes=param[1]
     func InitVariantFromBuffer(pv: CPointer<Unit>, cb: UInt32, pvar: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromBuffer == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_InitVariantFromBuffer(pv: CPointer<Unit>, cb: UInt32, pvar: CPointer<VARIANT>): Int32 {
+    return InitVariantFromBuffer(pv, cb, pvar)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromDoubleArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     // param-hint: prgn len=param[1]
     func InitVariantFromDoubleArray(prgn: CPointer<Float64>, cElems: UInt32, pvar: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromDoubleArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_InitVariantFromDoubleArray(prgn: CPointer<Float64>, cElems: UInt32, pvar: CPointer<VARIANT>): Int32 {
+    return InitVariantFromDoubleArray(prgn, cElems, pvar)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromFileTime == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func InitVariantFromFileTime(pft: CPointer<Win32_Foundation.FILETIME>, pvar: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromFileTime == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_InitVariantFromFileTime(pft: CPointer<Win32_Foundation.FILETIME>, pvar: CPointer<VARIANT>): Int32 {
+    return InitVariantFromFileTime(pft, pvar)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromFileTimeArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     // param-hint: prgft len=param[1] optional
     func InitVariantFromFileTimeArray(prgft: CPointer<Win32_Foundation.FILETIME>, cElems: UInt32, pvar: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromFileTimeArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_InitVariantFromFileTimeArray(prgft: CPointer<Win32_Foundation.FILETIME>, cElems: UInt32, pvar: CPointer<VARIANT>): Int32 {
+    return InitVariantFromFileTimeArray(prgft, cElems, pvar)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromGUIDAsString == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func InitVariantFromGUIDAsString(guid: CPointer<GUID>, pvar: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromGUIDAsString == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_InitVariantFromGUIDAsString(guid: CPointer<GUID>, pvar: CPointer<VARIANT>): Int32 {
+    return InitVariantFromGUIDAsString(guid, pvar)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromInt16Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     // param-hint: prgn len=param[1]
     func InitVariantFromInt16Array(prgn: CPointer<Int16>, cElems: UInt32, pvar: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromInt16Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_InitVariantFromInt16Array(prgn: CPointer<Int16>, cElems: UInt32, pvar: CPointer<VARIANT>): Int32 {
+    return InitVariantFromInt16Array(prgn, cElems, pvar)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromInt32Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     // param-hint: prgn len=param[1]
     func InitVariantFromInt32Array(prgn: CPointer<Int32>, cElems: UInt32, pvar: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromInt32Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_InitVariantFromInt32Array(prgn: CPointer<Int32>, cElems: UInt32, pvar: CPointer<VARIANT>): Int32 {
+    return InitVariantFromInt32Array(prgn, cElems, pvar)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromInt64Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     // param-hint: prgn len=param[1]
     func InitVariantFromInt64Array(prgn: CPointer<Int64>, cElems: UInt32, pvar: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromInt64Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_InitVariantFromInt64Array(prgn: CPointer<Int64>, cElems: UInt32, pvar: CPointer<VARIANT>): Int32 {
+    return InitVariantFromInt64Array(prgn, cElems, pvar)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromResource == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func InitVariantFromResource(hinst: CPointer<Unit>, id: UInt32, pvar: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromResource == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_InitVariantFromResource(hinst: CPointer<Unit>, id: UInt32, pvar: CPointer<VARIANT>): Int32 {
+    return InitVariantFromResource(hinst, id, pvar)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromStringArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     // param-hint: prgsz len=param[1]
     func InitVariantFromStringArray(prgsz: CPointer<CPointer<UInt16>>, cElems: UInt32, pvar: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromStringArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_InitVariantFromStringArray(prgsz: CPointer<CPointer<UInt16>>, cElems: UInt32, pvar: CPointer<VARIANT>): Int32 {
+    return InitVariantFromStringArray(prgsz, cElems, pvar)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromUInt16Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     // param-hint: prgn len=param[1]
     func InitVariantFromUInt16Array(prgn: CPointer<UInt16>, cElems: UInt32, pvar: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromUInt16Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_InitVariantFromUInt16Array(prgn: CPointer<UInt16>, cElems: UInt32, pvar: CPointer<VARIANT>): Int32 {
+    return InitVariantFromUInt16Array(prgn, cElems, pvar)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromUInt32Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     // param-hint: prgn len=param[1]
     func InitVariantFromUInt32Array(prgn: CPointer<UInt32>, cElems: UInt32, pvar: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromUInt32Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_InitVariantFromUInt32Array(prgn: CPointer<UInt32>, cElems: UInt32, pvar: CPointer<VARIANT>): Int32 {
+    return InitVariantFromUInt32Array(prgn, cElems, pvar)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromUInt64Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     // param-hint: prgn len=param[1]
     func InitVariantFromUInt64Array(prgn: CPointer<UInt64>, cElems: UInt32, pvar: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromUInt64Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_InitVariantFromUInt64Array(prgn: CPointer<UInt64>, cElems: UInt32, pvar: CPointer<VARIANT>): Int32 {
+    return InitVariantFromUInt64Array(prgn, cElems, pvar)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromVariantArrayElem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func InitVariantFromVariantArrayElem(varIn: CPointer<VARIANT>, iElem: UInt32, pvar: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_InitVariantFromVariantArrayElem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_InitVariantFromVariantArrayElem(varIn: CPointer<VARIANT>, iElem: UInt32, pvar: CPointer<VARIANT>): Int32 {
+    return InitVariantFromVariantArrayElem(varIn, iElem, pvar)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantCompare == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantCompare(var1: CPointer<VARIANT>, var2: CPointer<VARIANT>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantCompare == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantCompare(var1: CPointer<VARIANT>, var2: CPointer<VARIANT>): Int32 {
+    return VariantCompare(var1, var2)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantGetBooleanElem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantGetBooleanElem(var_: CPointer<VARIANT>, iElem: UInt32, pfVal: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantGetBooleanElem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantGetBooleanElem(var_: CPointer<VARIANT>, iElem: UInt32, pfVal: CPointer<Int32>): Int32 {
+    return VariantGetBooleanElem(var_, iElem, pfVal)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantGetDoubleElem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantGetDoubleElem(var_: CPointer<VARIANT>, iElem: UInt32, pnVal: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantGetDoubleElem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantGetDoubleElem(var_: CPointer<VARIANT>, iElem: UInt32, pnVal: CPointer<Float64>): Int32 {
+    return VariantGetDoubleElem(var_, iElem, pnVal)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantGetElementCount == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantGetElementCount(varIn: CPointer<VARIANT>): UInt32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantGetElementCount == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantGetElementCount(varIn: CPointer<VARIANT>): UInt32 {
+    return VariantGetElementCount(varIn)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantGetInt16Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantGetInt16Elem(var_: CPointer<VARIANT>, iElem: UInt32, pnVal: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantGetInt16Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantGetInt16Elem(var_: CPointer<VARIANT>, iElem: UInt32, pnVal: CPointer<Int16>): Int32 {
+    return VariantGetInt16Elem(var_, iElem, pnVal)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantGetInt32Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantGetInt32Elem(var_: CPointer<VARIANT>, iElem: UInt32, pnVal: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantGetInt32Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantGetInt32Elem(var_: CPointer<VARIANT>, iElem: UInt32, pnVal: CPointer<Int32>): Int32 {
+    return VariantGetInt32Elem(var_, iElem, pnVal)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantGetInt64Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantGetInt64Elem(var_: CPointer<VARIANT>, iElem: UInt32, pnVal: CPointer<Int64>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantGetInt64Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantGetInt64Elem(var_: CPointer<VARIANT>, iElem: UInt32, pnVal: CPointer<Int64>): Int32 {
+    return VariantGetInt64Elem(var_, iElem, pnVal)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantGetStringElem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantGetStringElem(var_: CPointer<VARIANT>, iElem: UInt32, ppszVal: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantGetStringElem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantGetStringElem(var_: CPointer<VARIANT>, iElem: UInt32, ppszVal: CPointer<CPointer<UInt16>>): Int32 {
+    return VariantGetStringElem(var_, iElem, ppszVal)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantGetUInt16Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantGetUInt16Elem(var_: CPointer<VARIANT>, iElem: UInt32, pnVal: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantGetUInt16Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantGetUInt16Elem(var_: CPointer<VARIANT>, iElem: UInt32, pnVal: CPointer<UInt16>): Int32 {
+    return VariantGetUInt16Elem(var_, iElem, pnVal)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantGetUInt32Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantGetUInt32Elem(var_: CPointer<VARIANT>, iElem: UInt32, pnVal: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantGetUInt32Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantGetUInt32Elem(var_: CPointer<VARIANT>, iElem: UInt32, pnVal: CPointer<UInt32>): Int32 {
+    return VariantGetUInt32Elem(var_, iElem, pnVal)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantGetUInt64Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantGetUInt64Elem(var_: CPointer<VARIANT>, iElem: UInt32, pnVal: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantGetUInt64Elem == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantGetUInt64Elem(var_: CPointer<VARIANT>, iElem: UInt32, pnVal: CPointer<UInt64>): Int32 {
+    return VariantGetUInt64Elem(var_, iElem, pnVal)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToBoolean == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantToBoolean(varIn: CPointer<VARIANT>, pfRet: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToBoolean == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToBoolean(varIn: CPointer<VARIANT>, pfRet: CPointer<Int32>): Int32 {
+    return VariantToBoolean(varIn, pfRet)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToBooleanArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     // param-hint: prgf len=param[2]
     func VariantToBooleanArray(var_: CPointer<VARIANT>, prgf: CPointer<Int32>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToBooleanArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToBooleanArray(var_: CPointer<VARIANT>, prgf: CPointer<Int32>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32 {
+    return VariantToBooleanArray(var_, prgf, crgn, pcElem)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToBooleanArrayAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantToBooleanArrayAlloc(var_: CPointer<VARIANT>, pprgf: CPointer<CPointer<Int32>>, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToBooleanArrayAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToBooleanArrayAlloc(var_: CPointer<VARIANT>, pprgf: CPointer<CPointer<Int32>>, pcElem: CPointer<UInt32>): Int32 {
+    return VariantToBooleanArrayAlloc(var_, pprgf, pcElem)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToBooleanWithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantToBooleanWithDefault(varIn: CPointer<VARIANT>, fDefault: Int32): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToBooleanWithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToBooleanWithDefault(varIn: CPointer<VARIANT>, fDefault: Int32): Int32 {
+    return VariantToBooleanWithDefault(varIn, fDefault)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToBuffer == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     // param-hint: pv bytes=param[2]
     func VariantToBuffer(varIn: CPointer<VARIANT>, pv: CPointer<Unit>, cb: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToBuffer == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToBuffer(varIn: CPointer<VARIANT>, pv: CPointer<Unit>, cb: UInt32): Int32 {
+    return VariantToBuffer(varIn, pv, cb)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToDosDateTime == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantToDosDateTime(varIn: CPointer<VARIANT>, pwDate: CPointer<UInt16>, pwTime: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToDosDateTime == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToDosDateTime(varIn: CPointer<VARIANT>, pwDate: CPointer<UInt16>, pwTime: CPointer<UInt16>): Int32 {
+    return VariantToDosDateTime(varIn, pwDate, pwTime)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToDouble == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantToDouble(varIn: CPointer<VARIANT>, pdblRet: CPointer<Float64>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToDouble == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToDouble(varIn: CPointer<VARIANT>, pdblRet: CPointer<Float64>): Int32 {
+    return VariantToDouble(varIn, pdblRet)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToDoubleArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     // param-hint: prgn len=param[2]
     func VariantToDoubleArray(var_: CPointer<VARIANT>, prgn: CPointer<Float64>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToDoubleArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToDoubleArray(var_: CPointer<VARIANT>, prgn: CPointer<Float64>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32 {
+    return VariantToDoubleArray(var_, prgn, crgn, pcElem)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToDoubleArrayAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantToDoubleArrayAlloc(var_: CPointer<VARIANT>, pprgn: CPointer<CPointer<Float64>>, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToDoubleArrayAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToDoubleArrayAlloc(var_: CPointer<VARIANT>, pprgn: CPointer<CPointer<Float64>>, pcElem: CPointer<UInt32>): Int32 {
+    return VariantToDoubleArrayAlloc(var_, pprgn, pcElem)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToDoubleWithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantToDoubleWithDefault(varIn: CPointer<VARIANT>, dblDefault: Float64): Float64
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToDoubleWithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToDoubleWithDefault(varIn: CPointer<VARIANT>, dblDefault: Float64): Float64 {
+    return VariantToDoubleWithDefault(varIn, dblDefault)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToFileTime == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantToFileTime(varIn: CPointer<VARIANT>, stfOut: Int32, pftOut: CPointer<Win32_Foundation.FILETIME>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToFileTime == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToFileTime(varIn: CPointer<VARIANT>, stfOut: Int32, pftOut: CPointer<Win32_Foundation.FILETIME>): Int32 {
+    return VariantToFileTime(varIn, stfOut, pftOut)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToGUID == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantToGUID(varIn: CPointer<VARIANT>, pguid: CPointer<GUID>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToGUID == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToGUID(varIn: CPointer<VARIANT>, pguid: CPointer<GUID>): Int32 {
+    return VariantToGUID(varIn, pguid)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt16 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantToInt16(varIn: CPointer<VARIANT>, piRet: CPointer<Int16>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt16 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToInt16(varIn: CPointer<VARIANT>, piRet: CPointer<Int16>): Int32 {
+    return VariantToInt16(varIn, piRet)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt16Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     // param-hint: prgn len=param[2]
     func VariantToInt16Array(var_: CPointer<VARIANT>, prgn: CPointer<Int16>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt16Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToInt16Array(var_: CPointer<VARIANT>, prgn: CPointer<Int16>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32 {
+    return VariantToInt16Array(var_, prgn, crgn, pcElem)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt16ArrayAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantToInt16ArrayAlloc(var_: CPointer<VARIANT>, pprgn: CPointer<CPointer<Int16>>, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt16ArrayAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToInt16ArrayAlloc(var_: CPointer<VARIANT>, pprgn: CPointer<CPointer<Int16>>, pcElem: CPointer<UInt32>): Int32 {
+    return VariantToInt16ArrayAlloc(var_, pprgn, pcElem)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt16WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantToInt16WithDefault(varIn: CPointer<VARIANT>, iDefault: Int16): Int16
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt16WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToInt16WithDefault(varIn: CPointer<VARIANT>, iDefault: Int16): Int16 {
+    return VariantToInt16WithDefault(varIn, iDefault)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt32 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantToInt32(varIn: CPointer<VARIANT>, plRet: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt32 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToInt32(varIn: CPointer<VARIANT>, plRet: CPointer<Int32>): Int32 {
+    return VariantToInt32(varIn, plRet)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt32Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     // param-hint: prgn len=param[2]
     func VariantToInt32Array(var_: CPointer<VARIANT>, prgn: CPointer<Int32>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt32Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToInt32Array(var_: CPointer<VARIANT>, prgn: CPointer<Int32>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32 {
+    return VariantToInt32Array(var_, prgn, crgn, pcElem)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt32ArrayAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantToInt32ArrayAlloc(var_: CPointer<VARIANT>, pprgn: CPointer<CPointer<Int32>>, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt32ArrayAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToInt32ArrayAlloc(var_: CPointer<VARIANT>, pprgn: CPointer<CPointer<Int32>>, pcElem: CPointer<UInt32>): Int32 {
+    return VariantToInt32ArrayAlloc(var_, pprgn, pcElem)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt32WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantToInt32WithDefault(varIn: CPointer<VARIANT>, lDefault: Int32): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt32WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToInt32WithDefault(varIn: CPointer<VARIANT>, lDefault: Int32): Int32 {
+    return VariantToInt32WithDefault(varIn, lDefault)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt64 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantToInt64(varIn: CPointer<VARIANT>, pllRet: CPointer<Int64>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt64 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToInt64(varIn: CPointer<VARIANT>, pllRet: CPointer<Int64>): Int32 {
+    return VariantToInt64(varIn, pllRet)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt64Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     // param-hint: prgn len=param[2]
     func VariantToInt64Array(var_: CPointer<VARIANT>, prgn: CPointer<Int64>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt64Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToInt64Array(var_: CPointer<VARIANT>, prgn: CPointer<Int64>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32 {
+    return VariantToInt64Array(var_, prgn, crgn, pcElem)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt64ArrayAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantToInt64ArrayAlloc(var_: CPointer<VARIANT>, pprgn: CPointer<CPointer<Int64>>, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt64ArrayAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToInt64ArrayAlloc(var_: CPointer<VARIANT>, pprgn: CPointer<CPointer<Int64>>, pcElem: CPointer<UInt32>): Int32 {
+    return VariantToInt64ArrayAlloc(var_, pprgn, pcElem)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt64WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantToInt64WithDefault(varIn: CPointer<VARIANT>, llDefault: Int64): Int64
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToInt64WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToInt64WithDefault(varIn: CPointer<VARIANT>, llDefault: Int64): Int64 {
+    return VariantToInt64WithDefault(varIn, llDefault)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToString == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     // param-hint: pszBuf len=param[2]
     func VariantToString(varIn: CPointer<VARIANT>, pszBuf: CPointer<UInt16>, cchBuf: UInt32): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToString == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToString(varIn: CPointer<VARIANT>, pszBuf: CPointer<UInt16>, cchBuf: UInt32): Int32 {
+    return VariantToString(varIn, pszBuf, cchBuf)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToStringAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantToStringAlloc(varIn: CPointer<VARIANT>, ppszBuf: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToStringAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToStringAlloc(varIn: CPointer<VARIANT>, ppszBuf: CPointer<CPointer<UInt16>>): Int32 {
+    return VariantToStringAlloc(varIn, ppszBuf)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToStringArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     // param-hint: prgsz len=param[2]
     func VariantToStringArray(var_: CPointer<VARIANT>, prgsz: CPointer<CPointer<UInt16>>, crgsz: UInt32, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToStringArray == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToStringArray(var_: CPointer<VARIANT>, prgsz: CPointer<CPointer<UInt16>>, crgsz: UInt32, pcElem: CPointer<UInt32>): Int32 {
+    return VariantToStringArray(var_, prgsz, crgsz, pcElem)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToStringArrayAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantToStringArrayAlloc(var_: CPointer<VARIANT>, pprgsz: CPointer<CPointer<CPointer<UInt16>>>, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToStringArrayAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToStringArrayAlloc(var_: CPointer<VARIANT>, pprgsz: CPointer<CPointer<CPointer<UInt16>>>, pcElem: CPointer<UInt32>): Int32 {
+    return VariantToStringArrayAlloc(var_, pprgsz, pcElem)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToStringWithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     // param-hint: pszDefault optional
     func VariantToStringWithDefault(varIn: CPointer<VARIANT>, pszDefault: CPointer<UInt16>): CPointer<UInt16>
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToStringWithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToStringWithDefault(varIn: CPointer<VARIANT>, pszDefault: CPointer<UInt16>): CPointer<UInt16> {
+    return VariantToStringWithDefault(varIn, pszDefault)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt16 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantToUInt16(varIn: CPointer<VARIANT>, puiRet: CPointer<UInt16>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt16 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToUInt16(varIn: CPointer<VARIANT>, puiRet: CPointer<UInt16>): Int32 {
+    return VariantToUInt16(varIn, puiRet)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt16Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     // param-hint: prgn len=param[2]
     func VariantToUInt16Array(var_: CPointer<VARIANT>, prgn: CPointer<UInt16>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt16Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToUInt16Array(var_: CPointer<VARIANT>, prgn: CPointer<UInt16>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32 {
+    return VariantToUInt16Array(var_, prgn, crgn, pcElem)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt16ArrayAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantToUInt16ArrayAlloc(var_: CPointer<VARIANT>, pprgn: CPointer<CPointer<UInt16>>, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt16ArrayAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToUInt16ArrayAlloc(var_: CPointer<VARIANT>, pprgn: CPointer<CPointer<UInt16>>, pcElem: CPointer<UInt32>): Int32 {
+    return VariantToUInt16ArrayAlloc(var_, pprgn, pcElem)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt16WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantToUInt16WithDefault(varIn: CPointer<VARIANT>, uiDefault: UInt16): UInt16
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt16WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToUInt16WithDefault(varIn: CPointer<VARIANT>, uiDefault: UInt16): UInt16 {
+    return VariantToUInt16WithDefault(varIn, uiDefault)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt32 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantToUInt32(varIn: CPointer<VARIANT>, pulRet: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt32 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToUInt32(varIn: CPointer<VARIANT>, pulRet: CPointer<UInt32>): Int32 {
+    return VariantToUInt32(varIn, pulRet)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt32Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     // param-hint: prgn len=param[2]
     func VariantToUInt32Array(var_: CPointer<VARIANT>, prgn: CPointer<UInt32>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt32Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToUInt32Array(var_: CPointer<VARIANT>, prgn: CPointer<UInt32>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32 {
+    return VariantToUInt32Array(var_, prgn, crgn, pcElem)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt32ArrayAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantToUInt32ArrayAlloc(var_: CPointer<VARIANT>, pprgn: CPointer<CPointer<UInt32>>, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt32ArrayAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToUInt32ArrayAlloc(var_: CPointer<VARIANT>, pprgn: CPointer<CPointer<UInt32>>, pcElem: CPointer<UInt32>): Int32 {
+    return VariantToUInt32ArrayAlloc(var_, pprgn, pcElem)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt32WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantToUInt32WithDefault(varIn: CPointer<VARIANT>, ulDefault: UInt32): UInt32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt32WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToUInt32WithDefault(varIn: CPointer<VARIANT>, ulDefault: UInt32): UInt32 {
+    return VariantToUInt32WithDefault(varIn, ulDefault)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt64 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantToUInt64(varIn: CPointer<VARIANT>, pullRet: CPointer<UInt64>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt64 == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToUInt64(varIn: CPointer<VARIANT>, pullRet: CPointer<UInt64>): Int32 {
+    return VariantToUInt64(varIn, pullRet)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt64Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     // param-hint: prgn len=param[2]
     func VariantToUInt64Array(var_: CPointer<VARIANT>, prgn: CPointer<UInt64>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt64Array == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToUInt64Array(var_: CPointer<VARIANT>, prgn: CPointer<UInt64>, crgn: UInt32, pcElem: CPointer<UInt32>): Int32 {
+    return VariantToUInt64Array(var_, prgn, crgn, pcElem)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt64ArrayAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantToUInt64ArrayAlloc(var_: CPointer<VARIANT>, pprgn: CPointer<CPointer<UInt64>>, pcElem: CPointer<UInt32>): Int32
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt64ArrayAlloc == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToUInt64ArrayAlloc(var_: CPointer<VARIANT>, pprgn: CPointer<CPointer<UInt64>>, pcElem: CPointer<UInt32>): Int32 {
+    return VariantToUInt64ArrayAlloc(var_, pprgn, pcElem)
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt64WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+foreign {
     func VariantToUInt64WithDefault(varIn: CPointer<VARIANT>, ullDefault: UInt64): UInt64
+}
+
+@When[Windows_Win32_System_Variant == "on" && PROPSYS == "on" && Windows_Win32_System_Variant_VariantToUInt64WithDefault == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on"]
+public unsafe func Windows_VariantToUInt64WithDefault(varIn: CPointer<VARIANT>, ullDefault: UInt64): UInt64 {
+    return VariantToUInt64WithDefault(varIn, ullDefault)
 }
 
 @When[Windows_Win32_System_Variant == "on" && (Windows_Win32_System_Com == "on" && Windows_Win32_System_Com == "on" && Windows_Win32_System_Ole == "on" && Windows_Win32_System_Ole == "on")]

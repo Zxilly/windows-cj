@@ -14,15 +14,16 @@ import windows_collections as windows_collections
 import windows_future as windows_future
 
 
-@When[Windows_Security_Isolation == "on"]
+@When[Windows_Security_Isolation == "on" && Windows_Foundation_Collections == "on"]
 @C
 public struct HostMessageReceivedCallbackVtbl {
     public var base_: IUnknownVtbl = IUnknownVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Invoke: CFunc<(CPointer<Unit>, GUID, CPointer<Unit>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
 
-@When[Windows_Security_Isolation == "on"]
+@When[Windows_Security_Isolation == "on" && Windows_Foundation_Collections == "on"]
 public class HostMessageReceivedCallback <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -74,6 +75,7 @@ public class HostMessageReceivedCallback <: InterfaceWrapperBase & ComInterface 
         readVtbl<HostMessageReceivedCallbackVtbl>(HostMessageReceivedCallbackVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Invoke(receiverId: GuidValue, message: windows_collections.IVectorView<IInspectable>): Unit {
         let v = vtbl()
         let hr = v.Invoke(asRaw(), receiverId.toRaw(), message.asRaw())
@@ -87,15 +89,17 @@ public class HostMessageReceivedCallback <: InterfaceWrapperBase & ComInterface 
     }
 }
 
-@When[Windows_Security_Isolation == "on"]
+@When[Windows_Security_Isolation == "on" && Windows_Foundation_Collections == "on"]
 extend HostMessageReceivedCallback <: windows_core.Interface<HostMessageReceivedCallback> {}
 
+@When[Windows_Security_Isolation == "on" && Windows_Foundation_Collections == "on"]
 private open class HostMessageReceivedCallbackInvokerErased {
     public open func __winrtThunk_Invoke(arg0: GUID, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_Security_Isolation == "on" && Windows_Foundation_Collections == "on"]
 private open class HostMessageReceivedCallbackInvoker <: HostMessageReceivedCallbackInvokerErased {
     public open func Invoke(receiverId: GuidValue, message: InParam<windows_collections.IVectorView<IInspectable>>): Unit {
         ()
@@ -107,6 +111,7 @@ private open class HostMessageReceivedCallbackInvoker <: HostMessageReceivedCall
     }
 }
 
+@When[Windows_Security_Isolation == "on" && Windows_Foundation_Collections == "on"]
 private class HostMessageReceivedCallbackBox <: HostMessageReceivedCallbackInvoker {
     public let invoke_: (GuidValue, InParam<windows_collections.IVectorView<IInspectable>>) -> Unit
     private let vtblHandle: CPointerHandle<HostMessageReceivedCallbackVtbl>
@@ -125,6 +130,7 @@ private class HostMessageReceivedCallbackBox <: HostMessageReceivedCallbackInvok
     }
 }
 
+@When[Windows_Security_Isolation == "on" && Windows_Foundation_Collections == "on"]
 func buildHostMessageReceivedCallbackBoxVtbl(): HostMessageReceivedCallbackVtbl {
     var vtbl = HostMessageReceivedCallbackVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -430,10 +436,22 @@ extend IIsolatedWindowsEnvironmentOptions2 <: windows_core.Interface<IIsolatedWi
 @C
 public struct IIsolatedWindowsEnvironmentOwnerRegistrationDataVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ShareableFolders: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ShareableFolders: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var ProcessesRunnableAsSystem: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ProcessesRunnableAsSystem: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var ProcessesRunnableAsUser: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ProcessesRunnableAsUser: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var ActivationFileExtensions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ActivationFileExtensions: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -502,6 +520,7 @@ public class IIsolatedWindowsEnvironmentOwnerRegistrationData <: InterfaceWrappe
         readVtbl<IIsolatedWindowsEnvironmentOwnerRegistrationDataVtbl>(IIsolatedWindowsEnvironmentOwnerRegistrationDataVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ShareableFolders(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -510,6 +529,7 @@ public class IIsolatedWindowsEnvironmentOwnerRegistrationData <: InterfaceWrappe
         return windows_collections.IVector<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ProcessesRunnableAsSystem(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -518,6 +538,7 @@ public class IIsolatedWindowsEnvironmentOwnerRegistrationData <: InterfaceWrappe
         return windows_collections.IVector<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ProcessesRunnableAsUser(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -526,6 +547,7 @@ public class IIsolatedWindowsEnvironmentOwnerRegistrationData <: InterfaceWrappe
         return windows_collections.IVector<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ActivationFileExtensions(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -921,7 +943,10 @@ extend IIsolatedWindowsEnvironmentUserInfo <: windows_core.Interface<IIsolatedWi
 @C
 public struct IIsolatedWindowsHostMessengerStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var PostMessageToReceiver: CFunc<(CPointer<Unit>, GUID, CPointer<Unit>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var PostMessageToReceiver: UIntNative = UIntNative(0)
     public var GetFileId: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -991,6 +1016,7 @@ public class IIsolatedWindowsHostMessengerStatics <: InterfaceWrapperBase & ComI
         readVtbl<IIsolatedWindowsHostMessengerStaticsVtbl>(IIsolatedWindowsHostMessengerStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PostMessageToReceiver(receiverId: GuidValue, message: windows_collections.IVectorView<IInspectable>): Unit {
         let v = vtbl()
         let hr = v.PostMessageToReceiver(asRaw(), receiverId.toRaw(), message.asRaw())
@@ -1013,7 +1039,10 @@ extend IIsolatedWindowsHostMessengerStatics <: windows_core.Interface<IIsolatedW
 @C
 public struct IIsolatedWindowsHostMessengerStatics2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var RegisterHostMessageReceiver: CFunc<(CPointer<Unit>, GUID, CPointer<Unit>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RegisterHostMessageReceiver: UIntNative = UIntNative(0)
     public var UnregisterHostMessageReceiver: CFunc<(CPointer<Unit>, GUID) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -1083,6 +1112,7 @@ public class IIsolatedWindowsHostMessengerStatics2 <: InterfaceWrapperBase & Com
         readVtbl<IIsolatedWindowsHostMessengerStatics2Vtbl>(IIsolatedWindowsHostMessengerStatics2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RegisterHostMessageReceiver(receiverId: GuidValue, hostMessageReceivedCallback: HostMessageReceivedCallback): Unit {
         let v = vtbl()
         let hr = v.RegisterHostMessageReceiver(asRaw(), receiverId.toRaw(), hostMessageReceivedCallback.asRaw())
@@ -1826,18 +1856,22 @@ public class IsolatedWindowsEnvironmentOwnerRegistrationData <: InterfaceWrapper
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ShareableFolders(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().ShareableFolders()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ProcessesRunnableAsSystem(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().ProcessesRunnableAsSystem()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ProcessesRunnableAsUser(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().ProcessesRunnableAsUser()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ActivationFileExtensions(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().ActivationFileExtensions()
     }
@@ -2706,6 +2740,7 @@ public class IsolatedWindowsHostMessenger <: windows_interface.RuntimeName & win
         windows_core.activationFactory<IsolatedWindowsHostMessenger>().ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func PostMessageToReceiver(receiverId: GuidValue, message: windows_collections.IVectorView<IInspectable>): Unit {
         try (factory__ = windows_core.factory<IsolatedWindowsHostMessenger, IIsolatedWindowsHostMessengerStatics>().unwrap()) {
             factory__.PostMessageToReceiver(receiverId, message)
@@ -2724,6 +2759,7 @@ public class IsolatedWindowsHostMessenger <: windows_interface.RuntimeName & win
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func RegisterHostMessageReceiver(receiverId: GuidValue, hostMessageReceivedCallback: HostMessageReceivedCallback): Unit {
         try (factory__ = windows_core.factory<IsolatedWindowsHostMessenger, IIsolatedWindowsHostMessengerStatics2>().unwrap()) {
             factory__.RegisterHostMessageReceiver(receiverId, hostMessageReceivedCallback)
@@ -2739,15 +2775,16 @@ public class IsolatedWindowsHostMessenger <: windows_interface.RuntimeName & win
     }
 }
 
-@When[Windows_Security_Isolation == "on"]
+@When[Windows_Security_Isolation == "on" && Windows_Foundation_Collections == "on"]
 @C
 public struct MessageReceivedCallbackVtbl {
     public var base_: IUnknownVtbl = IUnknownVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Invoke: CFunc<(CPointer<Unit>, GUID, CPointer<Unit>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
 
-@When[Windows_Security_Isolation == "on"]
+@When[Windows_Security_Isolation == "on" && Windows_Foundation_Collections == "on"]
 public class MessageReceivedCallback <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -2799,6 +2836,7 @@ public class MessageReceivedCallback <: InterfaceWrapperBase & ComInterface & wi
         readVtbl<MessageReceivedCallbackVtbl>(MessageReceivedCallbackVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Invoke(receiverId: GuidValue, message: windows_collections.IVectorView<IInspectable>): Unit {
         let v = vtbl()
         let hr = v.Invoke(asRaw(), receiverId.toRaw(), message.asRaw())
@@ -2812,15 +2850,17 @@ public class MessageReceivedCallback <: InterfaceWrapperBase & ComInterface & wi
     }
 }
 
-@When[Windows_Security_Isolation == "on"]
+@When[Windows_Security_Isolation == "on" && Windows_Foundation_Collections == "on"]
 extend MessageReceivedCallback <: windows_core.Interface<MessageReceivedCallback> {}
 
+@When[Windows_Security_Isolation == "on" && Windows_Foundation_Collections == "on"]
 private open class MessageReceivedCallbackInvokerErased {
     public open func __winrtThunk_Invoke(arg0: GUID, arg1: CPointer<Unit>): Int32 {
         E_NOTIMPL.value
     }
 }
 
+@When[Windows_Security_Isolation == "on" && Windows_Foundation_Collections == "on"]
 private open class MessageReceivedCallbackInvoker <: MessageReceivedCallbackInvokerErased {
     public open func Invoke(receiverId: GuidValue, message: InParam<windows_collections.IVectorView<IInspectable>>): Unit {
         ()
@@ -2832,6 +2872,7 @@ private open class MessageReceivedCallbackInvoker <: MessageReceivedCallbackInvo
     }
 }
 
+@When[Windows_Security_Isolation == "on" && Windows_Foundation_Collections == "on"]
 private class MessageReceivedCallbackBox <: MessageReceivedCallbackInvoker {
     public let invoke_: (GuidValue, InParam<windows_collections.IVectorView<IInspectable>>) -> Unit
     private let vtblHandle: CPointerHandle<MessageReceivedCallbackVtbl>
@@ -2850,6 +2891,7 @@ private class MessageReceivedCallbackBox <: MessageReceivedCallbackInvoker {
     }
 }
 
+@When[Windows_Security_Isolation == "on" && Windows_Foundation_Collections == "on"]
 func buildMessageReceivedCallbackBoxVtbl(): MessageReceivedCallbackVtbl {
     var vtbl = MessageReceivedCallbackVtbl()
     vtbl.base_ = buildIUnknownVtbl()
@@ -3035,7 +3077,10 @@ extend IIsolatedWindowsEnvironmentCreateResult2 <: windows_core.Interface<IIsola
 public struct IIsolatedWindowsEnvironmentHostStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var IsReady: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var HostErrors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var HostErrors: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3112,6 +3157,7 @@ public class IIsolatedWindowsEnvironmentHostStatics <: InterfaceWrapperBase & Co
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func HostErrors(): windows_collections.IVectorView<IsolatedWindowsEnvironmentHostError> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4221,6 +4267,7 @@ public class IsolatedWindowsEnvironmentHost <: windows_interface.RuntimeName & w
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func HostErrors(): windows_collections.IVectorView<IsolatedWindowsEnvironmentHostError> {
         var result__: Option<windows_collections.IVectorView<IsolatedWindowsEnvironmentHostError>> = Option<windows_collections.IVectorView<IsolatedWindowsEnvironmentHostError>>.None
         try (factory__ = windows_core.factory<IsolatedWindowsEnvironmentHost, IIsolatedWindowsEnvironmentHostStatics>().unwrap()) {
@@ -5100,8 +5147,14 @@ extend IsolatedWindowsEnvironmentUserInfo <: windows_core.HandleWinrtType<Isolat
 @C
 public struct IIsolatedWindowsEnvironment2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var PostMessageToReceiverAsync: CFunc<(CPointer<Unit>, GUID, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var PostMessageToReceiverAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var PostMessageToReceiverWithTelemetryAsync: CFunc<(CPointer<Unit>, GUID, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var PostMessageToReceiverWithTelemetryAsync: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -5170,6 +5223,7 @@ public class IIsolatedWindowsEnvironment2 <: InterfaceWrapperBase & ComInterface
         readVtbl<IIsolatedWindowsEnvironment2Vtbl>(IIsolatedWindowsEnvironment2Vtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PostMessageToReceiverAsync(receiverId: GuidValue, message: windows_collections.IIterable<IInspectable>): windows_future.IAsyncOperation<IsolatedWindowsEnvironmentPostMessageResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5178,6 +5232,7 @@ public class IIsolatedWindowsEnvironment2 <: InterfaceWrapperBase & ComInterface
         return windows_future.IAsyncOperation<IsolatedWindowsEnvironmentPostMessageResult>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func PostMessageToReceiverWithTelemetryAsync(receiverId: GuidValue, message: windows_collections.IIterable<IInspectable>, telemetryParameters: IsolatedWindowsEnvironmentTelemetryParameters): windows_future.IAsyncOperation<IsolatedWindowsEnvironmentPostMessageResult> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5640,7 +5695,10 @@ public struct IIsolatedWindowsEnvironmentVtbl {
     public var LaunchFileWithUIAndTelemetryAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
     public var TerminateAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var TerminateWithTelemetryAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var RegisterMessageReceiver: CFunc<(CPointer<Unit>, GUID, CPointer<Unit>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var RegisterMessageReceiver: UIntNative = UIntNative(0)
     public var UnregisterMessageReceiver: CFunc<(CPointer<Unit>, GUID) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -5782,6 +5840,7 @@ public class IIsolatedWindowsEnvironment <: InterfaceWrapperBase & ComInterface 
         return windows_future.IAsyncAction.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RegisterMessageReceiver(receiverId: GuidValue, messageReceivedCallback: MessageReceivedCallback): Unit {
         let v = vtbl()
         let hr = v.RegisterMessageReceiver(asRaw(), receiverId.toRaw(), messageReceivedCallback.asRaw())
@@ -5908,7 +5967,10 @@ public struct IIsolatedWindowsEnvironmentFactoryVtbl {
     public var CreateAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var CreateWithTelemetryAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var GetById: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindByOwnerId: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindByOwnerId: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -6001,6 +6063,7 @@ public class IIsolatedWindowsEnvironmentFactory <: InterfaceWrapperBase & ComInt
         return IsolatedWindowsEnvironment.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindByOwnerId(environmentOwnerId: windows_core.HString): windows_collections.IVectorView<IsolatedWindowsEnvironment> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -6118,6 +6181,7 @@ public class IsolatedWindowsEnvironment <: InterfaceWrapperBase & ComInterface &
         return defaultInterface().TerminateWithTelemetryAsync(telemetryParameters)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func RegisterMessageReceiver(receiverId: GuidValue, messageReceivedCallback: MessageReceivedCallback): Unit {
         defaultInterface().RegisterMessageReceiver(receiverId, messageReceivedCallback)
     }
@@ -6159,6 +6223,7 @@ public class IsolatedWindowsEnvironment <: InterfaceWrapperBase & ComInterface &
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindByOwnerId(environmentOwnerId: windows_core.HString): windows_collections.IVectorView<IsolatedWindowsEnvironment> {
         var result__: Option<windows_collections.IVectorView<IsolatedWindowsEnvironment>> = Option<windows_collections.IVectorView<IsolatedWindowsEnvironment>>.None
         try (factory__ = windows_core.factory<IsolatedWindowsEnvironment, IIsolatedWindowsEnvironmentFactory>().unwrap()) {

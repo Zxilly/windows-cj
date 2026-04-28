@@ -4,7 +4,6 @@ package windows_sys.UI.ApplicationSettings
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_UI_Popups == "on"]
 import windows_sys.UI.Popups as UI_Popups
 import windows_sys._impl_l0 as _impl_l0
 import windows_sys._impl_l1 as _impl_l1
@@ -425,9 +424,13 @@ public class IAccountsSettingsPane <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IAccountsSettingsPaneCommandsRequestedEventArgsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var WebAccountProviderCommands: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var WebAccountCommands: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var CredentialCommands: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Popups == "on"]
     public var Commands: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var HeaderText: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetHeaderText: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -475,24 +478,28 @@ public class IAccountsSettingsPaneCommandsRequestedEventArgs <: InterfaceWrapper
         readVtbl<IAccountsSettingsPaneCommandsRequestedEventArgsVtbl>(IAccountsSettingsPaneCommandsRequestedEventArgsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func WebAccountProviderCommands(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.WebAccountProviderCommands(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func WebAccountCommands(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.WebAccountCommands(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CredentialCommands(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.CredentialCommands(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Popups == "on"]
     public unsafe func Commands(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -833,6 +840,7 @@ public class ISettingsCommandFactory <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ISettingsCommandStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_UI_Popups == "on"]
     public var AccountsCommand: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -877,6 +885,7 @@ public class ISettingsCommandStatics <: InterfaceWrapperBase & ComInterface {
         readVtbl<ISettingsCommandStaticsVtbl>(ISettingsCommandStaticsVtbl())
     }
 
+    @When[Windows_UI_Popups == "on"]
     public unsafe func AccountsCommand(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -950,6 +959,7 @@ public class ISettingsPane <: InterfaceWrapperBase & ComInterface {
 @C
 public struct ISettingsPaneCommandsRequestVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Popups == "on"]
     public var ApplicationCommands: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -994,6 +1004,7 @@ public class ISettingsPaneCommandsRequest <: InterfaceWrapperBase & ComInterface
         readVtbl<ISettingsPaneCommandsRequestVtbl>(ISettingsPaneCommandsRequestVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on" && Windows_UI_Popups == "on"]
     public unsafe func ApplicationCommands(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

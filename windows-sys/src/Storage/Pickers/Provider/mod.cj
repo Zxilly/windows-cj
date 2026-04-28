@@ -7,4 +7,3 @@ public import windows_sys._impl_l0.{AddFileResult, AddFileResult_Added, AddFileR
 public import windows_sys._impl_l1.{IFileOpenPickerUI, IFileOpenPickerUIVtbl, IPickerClosingEventArgs, IPickerClosingEventArgsVtbl, IPickerClosingOperation, IPickerClosingOperationVtbl, ITargetFileRequest, ITargetFileRequestVtbl, ITargetFileRequestedEventArgs, ITargetFileRequestedEventArgsVtbl}
 @When[Windows_Storage_Pickers_Provider == "on"]
 public import windows_sys._impl_l2.{IFileSavePickerUI, IFileSavePickerUIVtbl}
-

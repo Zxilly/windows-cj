@@ -126,9 +126,13 @@ extend BadgeTemplateType <: windows_core.CopyType & windows_core.RuntimeType & w
 public struct IAdaptiveNotificationContentVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Kind: CFunc<(CPointer<Unit>, CPointer<AdaptiveNotificationContentKindAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Hints: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Hints: UIntNative = UIntNative(0)
     public init() {}
 
+    @When[Windows_Foundation_Collections == "on"]
     public static func new<Identity>(offset!: Int64 = 0): IAdaptiveNotificationContentVtbl where Identity <: IAdaptiveNotificationContent_Impl {
         let _ = offset
         var vtbl = IAdaptiveNotificationContentVtbl()
@@ -141,7 +145,14 @@ public struct IAdaptiveNotificationContentVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.Hints = { instanceRaw, result__ =>
+        vtbl = IAdaptiveNotificationContentVtbl.__assignHints<Identity>(vtbl)
+        return vtbl
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections == "on"]
+    public static func __assignHints<Identity>(vtbl: IAdaptiveNotificationContentVtbl): IAdaptiveNotificationContentVtbl where Identity <: IAdaptiveNotificationContent_Impl {
+        var next = vtbl
+        next.Hints = { instanceRaw, result__ =>
             match (unsafe { asImplFromRaw<IAdaptiveNotificationContent_ImplErased>(instanceRaw) }) {
                 case Some(impl) =>
                     impl.__winrtThunk_Hints(result__)
@@ -149,6 +160,11 @@ public struct IAdaptiveNotificationContentVtbl {
                     E_NOINTERFACE.value
             }
         }
+        return next
+    }
+
+    @When[Windows_Foundation_Collections == "on" && Windows_Foundation_Collections != "on"]
+    public static func __assignHints<Identity>(vtbl: IAdaptiveNotificationContentVtbl): IAdaptiveNotificationContentVtbl where Identity <: IAdaptiveNotificationContent_Impl {
         return vtbl
     }
 
@@ -160,14 +176,14 @@ public struct IAdaptiveNotificationContentVtbl {
     }
 }
 
-@When[Windows_UI_Notifications == "on"]
+@When[Windows_UI_Notifications == "on" && Windows_Foundation_Collections == "on"]
 public interface IAdaptiveNotificationContent_ImplErased {
     public func __winrtThunk_Kind(result__: CPointer<AdaptiveNotificationContentKindAbi>): Int32
 
     public func __winrtThunk_Hints(result__: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[Windows_UI_Notifications == "on"]
+@When[Windows_UI_Notifications == "on" && Windows_Foundation_Collections == "on"]
 public interface IAdaptiveNotificationContent_Impl <: IAdaptiveNotificationContent_ImplErased {
     public func Kind(): windows_core.Result<AdaptiveNotificationContentKind>
 
@@ -278,6 +294,7 @@ public class IAdaptiveNotificationContent <: InterfaceWrapperBase & ComInterface
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<AdaptiveNotificationContentKind>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Hints(): windows_collections.IMap<windows_core.HString, windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -864,7 +881,10 @@ extend IKnownNotificationBindingsStatics <: windows_core.Interface<IKnownNotific
 @C
 public struct INotificationDataVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Values: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Values: UIntNative = UIntNative(0)
     public var SequenceNumber: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetSequenceNumber: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
@@ -935,6 +955,7 @@ public class INotificationData <: InterfaceWrapperBase & ComInterface & RuntimeN
         readVtbl<INotificationDataVtbl>(INotificationDataVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Values(): windows_collections.IMap<windows_core.HString, windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -965,8 +986,14 @@ extend INotificationData <: windows_core.Interface<INotificationData> {}
 @C
 public struct INotificationDataFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateNotificationDataWithValuesAndSequenceNumber: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateNotificationDataWithValuesAndSequenceNumber: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateNotificationDataWithValues: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateNotificationDataWithValues: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1035,6 +1062,7 @@ public class INotificationDataFactory <: InterfaceWrapperBase & ComInterface & R
         readVtbl<INotificationDataFactoryVtbl>(INotificationDataFactoryVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateNotificationDataWithValuesAndSequenceNumber(initialValues: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, windows_core.HString>>, sequenceNumber: UInt32): NotificationData {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1043,6 +1071,7 @@ public class INotificationDataFactory <: InterfaceWrapperBase & ComInterface & R
         return NotificationData.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateNotificationDataWithValues(initialValues: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, windows_core.HString>>): NotificationData {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3363,6 +3392,7 @@ public class NotificationData <: InterfaceWrapperBase & ComInterface & windows_i
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Values(): windows_collections.IMap<windows_core.HString, windows_core.HString> {
         return defaultInterface().Values()
     }
@@ -3375,6 +3405,7 @@ public class NotificationData <: InterfaceWrapperBase & ComInterface & windows_i
         defaultInterface().SetSequenceNumber(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateNotificationDataWithValuesAndSequenceNumber(initialValues: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, windows_core.HString>>, sequenceNumber: UInt32): NotificationData {
         var result__: Option<NotificationData> = Option<NotificationData>.None
         try (factory__ = windows_core.factory<NotificationData, INotificationDataFactory>().unwrap()) {
@@ -3386,6 +3417,7 @@ public class NotificationData <: InterfaceWrapperBase & ComInterface & windows_i
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateNotificationDataWithValues(initialValues: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, windows_core.HString>>): NotificationData {
         var result__: Option<NotificationData> = Option<NotificationData>.None
         try (factory__ = windows_core.factory<NotificationData, INotificationDataFactory>().unwrap()) {

@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows._impl_l1 as _impl_l1
 import windows_collections as windows_collections
@@ -1589,7 +1588,10 @@ public struct IPhotoImportVideoSegmentVtbl {
     public var SizeInBytes: CFunc<(CPointer<Unit>, CPointer<UInt64>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Date: CFunc<(CPointer<Unit>, CPointer<windows_future.DateTimeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Sibling: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Sidecars: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Sidecars: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1690,6 +1692,7 @@ public class IPhotoImportVideoSegment <: InterfaceWrapperBase & ComInterface & R
         return PhotoImportSidecar.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Sidecars(): windows_collections.IVectorView<PhotoImportSidecar> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1907,6 +1910,7 @@ public class PhotoImportVideoSegment <: InterfaceWrapperBase & ComInterface & wi
         return defaultInterface().Sibling()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Sidecars(): windows_collections.IVectorView<PhotoImportSidecar> {
         return defaultInterface().Sidecars()
     }
@@ -1940,16 +1944,28 @@ public struct IPhotoImportItemVtbl {
     public var SizeInBytes: CFunc<(CPointer<Unit>, CPointer<UInt64>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Date: CFunc<(CPointer<Unit>, CPointer<windows_future.DateTimeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Sibling: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Sidecars: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Sidecars: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var VideoSegments: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var VideoSegments: UIntNative = UIntNative(0)
     public var IsSelected: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetIsSelected: CFunc<(CPointer<Unit>, Bool) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams == "on"]
     public var Thumbnail: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams != "on"]
     public var Thumbnail: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var ImportedFileNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ImportedFileNames: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var DeletedFileNames: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var DeletedFileNames: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2066,6 +2082,7 @@ public class IPhotoImportItem <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return PhotoImportSidecar.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Sidecars(): windows_collections.IVectorView<PhotoImportSidecar> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2074,6 +2091,7 @@ public class IPhotoImportItem <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_collections.IVectorView<PhotoImportSidecar>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func VideoSegments(): windows_collections.IVectorView<PhotoImportVideoSegment> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2105,6 +2123,7 @@ public class IPhotoImportItem <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return _impl_l1.IRandomAccessStreamReference.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ImportedFileNames(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2113,6 +2132,7 @@ public class IPhotoImportItem <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_collections.IVectorView<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DeletedFileNames(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2218,10 +2238,12 @@ public class PhotoImportItem <: InterfaceWrapperBase & ComInterface & windows_in
         return defaultInterface().Sibling()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Sidecars(): windows_collections.IVectorView<PhotoImportSidecar> {
         return defaultInterface().Sidecars()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func VideoSegments(): windows_collections.IVectorView<PhotoImportVideoSegment> {
         return defaultInterface().VideoSegments()
     }
@@ -2239,10 +2261,12 @@ public class PhotoImportItem <: InterfaceWrapperBase & ComInterface & windows_in
         return defaultInterface().Thumbnail()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ImportedFileNames(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().ImportedFileNames()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DeletedFileNames(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().DeletedFileNames()
     }
@@ -2449,7 +2473,10 @@ public struct IPhotoImportDeleteImportedItemsFromSourceResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Session: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var HasSucceeded: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var DeletedItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var DeletedItems: UIntNative = UIntNative(0)
     public var PhotosCount: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var PhotosSizeInBytes: CFunc<(CPointer<Unit>, CPointer<UInt64>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var VideosCount: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -2544,6 +2571,7 @@ public class IPhotoImportDeleteImportedItemsFromSourceResult <: InterfaceWrapper
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DeletedItems(): windows_collections.IVectorView<PhotoImportItem> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2642,7 +2670,10 @@ public struct IPhotoImportFindItemsResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Session: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var HasSucceeded: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var FoundItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FoundItems: UIntNative = UIntNative(0)
     public var PhotosCount: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var PhotosSizeInBytes: CFunc<(CPointer<Unit>, CPointer<UInt64>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var VideosCount: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -2757,6 +2788,7 @@ public class IPhotoImportFindItemsResult <: InterfaceWrapperBase & ComInterface 
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FoundItems(): windows_collections.IVectorView<PhotoImportItem> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3005,7 +3037,10 @@ public struct IPhotoImportImportItemsResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Session: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var HasSucceeded: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var ImportedItems: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ImportedItems: UIntNative = UIntNative(0)
     public var PhotosCount: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var PhotosSizeInBytes: CFunc<(CPointer<Unit>, CPointer<UInt64>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var VideosCount: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -3101,6 +3136,7 @@ public class IPhotoImportImportItemsResult <: InterfaceWrapperBase & ComInterfac
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ImportedItems(): windows_collections.IVectorView<PhotoImportItem> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3206,8 +3242,14 @@ extend IPhotoImportImportItemsResult <: windows_core.Interface<IPhotoImportImpor
 public struct IPhotoImportManagerStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var IsSupportedAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllSourcesAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllSourcesAsync: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetPendingOperations: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetPendingOperations: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3284,6 +3326,7 @@ public class IPhotoImportManagerStatics <: InterfaceWrapperBase & ComInterface &
         return windows_future.IAsyncOperation<Bool>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllSourcesAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<PhotoImportSource>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3292,6 +3335,7 @@ public class IPhotoImportManagerStatics <: InterfaceWrapperBase & ComInterface &
         return windows_future.IAsyncOperation<windows_collections.IVectorView<PhotoImportSource>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetPendingOperations(): windows_collections.IVectorView<PhotoImportOperation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3628,7 +3672,10 @@ public struct IPhotoImportSourceVtbl {
     public var PowerSource: CFunc<(CPointer<Unit>, CPointer<PhotoImportPowerSourceAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var BatteryLevelPercent: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var get_DateTime: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var StorageMedia: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var StorageMedia: UIntNative = UIntNative(0)
     public var IsLocked: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsMassStorage: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams == "on"]
@@ -3800,6 +3847,7 @@ public class IPhotoImportSource <: InterfaceWrapperBase & ComInterface & Runtime
         return Foundation.IReference<windows_future.DateTime>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StorageMedia(): windows_collections.IVectorView<PhotoImportStorageMedium> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4020,6 +4068,7 @@ public class PhotoImportDeleteImportedItemsFromSourceResult <: InterfaceWrapperB
         return defaultInterface().HasSucceeded()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func DeletedItems(): windows_collections.IVectorView<PhotoImportItem> {
         return defaultInterface().DeletedItems()
     }
@@ -4160,6 +4209,7 @@ public class PhotoImportFindItemsResult <: InterfaceWrapperBase & ComInterface &
         return defaultInterface().HasSucceeded()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FoundItems(): windows_collections.IVectorView<PhotoImportItem> {
         return defaultInterface().FoundItems()
     }
@@ -4380,6 +4430,7 @@ public class PhotoImportImportItemsResult <: InterfaceWrapperBase & ComInterface
         return defaultInterface().HasSucceeded()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ImportedItems(): windows_collections.IVectorView<PhotoImportItem> {
         return defaultInterface().ImportedItems()
     }
@@ -4478,6 +4529,7 @@ public class PhotoImportManager <: windows_interface.RuntimeName & windows_core.
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindAllSourcesAsync(): windows_future.IAsyncOperation<windows_collections.IVectorView<PhotoImportSource>> {
         var result__: Option<windows_future.IAsyncOperation<windows_collections.IVectorView<PhotoImportSource>>> = Option<windows_future.IAsyncOperation<windows_collections.IVectorView<PhotoImportSource>>>.None
         try (factory__ = windows_core.factory<PhotoImportManager, IPhotoImportManagerStatics>().unwrap()) {
@@ -4489,6 +4541,7 @@ public class PhotoImportManager <: windows_interface.RuntimeName & windows_core.
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func GetPendingOperations(): windows_collections.IVectorView<PhotoImportOperation> {
         var result__: Option<windows_collections.IVectorView<PhotoImportOperation>> = Option<windows_collections.IVectorView<PhotoImportOperation>>.None
         try (factory__ = windows_core.factory<PhotoImportManager, IPhotoImportManagerStatics>().unwrap()) {
@@ -4871,6 +4924,7 @@ public class PhotoImportSource <: InterfaceWrapperBase & ComInterface & windows_
         return defaultInterface().get_DateTime()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func StorageMedia(): windows_collections.IVectorView<PhotoImportStorageMedium> {
         return defaultInterface().StorageMedia()
     }

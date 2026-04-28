@@ -20,9 +20,9 @@ import windows_future as windows_future
 public struct IRfcommServiceProviderVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var ServiceId: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var SdpRawAttributes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
     public var SdpRawAttributes: UIntNative = UIntNative(0)
     @When[Windows_Networking_Sockets == "on"]
     public var StartAdvertising: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -105,7 +105,7 @@ public class IRfcommServiceProvider <: InterfaceWrapperBase & ComInterface & Run
         return _impl_l0.RfcommServiceId.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func SdpRawAttributes(): windows_collections.IMap<UInt32, _impl_l0.IBuffer> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -388,7 +388,7 @@ public class RfcommServiceProvider <: InterfaceWrapperBase & ComInterface & wind
         return defaultInterface().ServiceId()
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func SdpRawAttributes(): windows_collections.IMap<UInt32, _impl_l0.IBuffer> {
         return defaultInterface().SdpRawAttributes()
     }

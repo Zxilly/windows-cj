@@ -3,11 +3,8 @@ package windows_sys.Win32.Graphics.Direct3D11on12
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Direct3D11 == "on"]
 import windows_sys.Win32.Graphics.Direct3D11 as Win32_Graphics_Direct3D11
-@When[Windows_Win32_Graphics_Direct3D12 == "on"]
 import windows_sys.Win32.Graphics.Direct3D12 as Win32_Graphics_Direct3D12
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 
@@ -221,7 +218,7 @@ public class ID3D11On12Device2 <: InterfaceWrapperBase & ComInterface {
 @When[Windows_Win32_Graphics_Direct3D11on12 == "on" && (Windows_Win32_Graphics_Direct3D == "on" && Windows_Win32_Graphics_Direct3D11 == "on" && Windows_Win32_System_Com == "on")]
 public type PFN_D3D11ON12_CREATE_DEVICE = CFunc<(CPointer<Unit>, UInt32, CPointer<Int32>, UInt32, CPointer<CPointer<Unit>>, UInt32, UInt32, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>, CPointer<Int32>) -> Int32>
 
-@When[D3D11 == "on" && (Windows_Win32_Graphics_Direct3D == "on" && Windows_Win32_Graphics_Direct3D11 == "on" && Windows_Win32_System_Com == "on")]
+@When[Windows_Win32_Graphics_Direct3D11on12 == "on" && D3D11 == "on" && Windows_Win32_Graphics_Direct3D11on12_D3D11On12CreateDevice == "on" && Windows_Win32_Graphics_Direct3D == "on" && Windows_Win32_Graphics_Direct3D11 == "on" && Windows_Win32_System_Com == "on"]
 foreign {
     // param-hint: pFeatureLevels len=param[3] optional
     // param-hint: ppCommandQueues len=param[5] optional
@@ -229,4 +226,9 @@ foreign {
     // param-hint: ppImmediateContext optional
     // param-hint: pChosenFeatureLevel optional
     func D3D11On12CreateDevice(pDevice: CPointer<Unit>, Flags: UInt32, pFeatureLevels: CPointer<Int32>, FeatureLevels: UInt32, ppCommandQueues: CPointer<CPointer<Unit>>, NumQueues: UInt32, NodeMask: UInt32, ppDevice: CPointer<CPointer<Unit>>, ppImmediateContext: CPointer<CPointer<Unit>>, pChosenFeatureLevel: CPointer<Int32>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D11on12 == "on" && D3D11 == "on" && Windows_Win32_Graphics_Direct3D11on12_D3D11On12CreateDevice == "on" && Windows_Win32_Graphics_Direct3D == "on" && Windows_Win32_Graphics_Direct3D11 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_D3D11On12CreateDevice(pDevice: CPointer<Unit>, Flags: UInt32, pFeatureLevels: CPointer<Int32>, FeatureLevels: UInt32, ppCommandQueues: CPointer<CPointer<Unit>>, NumQueues: UInt32, NodeMask: UInt32, ppDevice: CPointer<CPointer<Unit>>, ppImmediateContext: CPointer<CPointer<Unit>>, pChosenFeatureLevel: CPointer<Int32>): Int32 {
+    return D3D11On12CreateDevice(pDevice, Flags, pFeatureLevels, FeatureLevels, ppCommandQueues, NumQueues, NodeMask, ppDevice, ppImmediateContext, pChosenFeatureLevel)
 }

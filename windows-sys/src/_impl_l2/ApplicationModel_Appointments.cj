@@ -307,9 +307,13 @@ public struct IAppointmentStoreVtbl {
     public var GetAppointmentCalendarAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetAppointmentAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var GetAppointmentInstanceAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, Foundation__impl_l0.DateTime, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAppointmentCalendarsAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAppointmentCalendarsAsyncWithOptions: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAppointmentsAsync: CFunc<(CPointer<Unit>, Foundation__impl_l0.DateTime, Foundation__impl_l0.TimeSpan, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAppointmentsAsyncWithOptions: CFunc<(CPointer<Unit>, Foundation__impl_l0.DateTime, Foundation__impl_l0.TimeSpan, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     public var FindConflictAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var FindConflictAsyncWithInstanceStart: CFunc<(CPointer<Unit>, CPointer<Unit>, Foundation__impl_l0.DateTime, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
@@ -324,6 +328,7 @@ public struct IAppointmentStoreVtbl {
     public var ShowAppointmentDetailsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var ShowAppointmentDetailsWithDateAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, Foundation__impl_l0.DateTime, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
     public var ShowEditNewAppointmentAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindLocalIdsFromRoamingIdAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -398,24 +403,28 @@ public class IAppointmentStore <: InterfaceWrapperBase & ComInterface {
         return __vt.GetAppointmentInstanceAsync(__liveRaw, localId, instanceStartTime, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAppointmentCalendarsAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindAppointmentCalendarsAsync(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAppointmentCalendarsAsyncWithOptions(options: UInt32, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindAppointmentCalendarsAsyncWithOptions(__liveRaw, options, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAppointmentsAsync(rangeStart: Foundation__impl_l0.DateTime, rangeLength: Foundation__impl_l0.TimeSpan, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.FindAppointmentsAsync(__liveRaw, rangeStart, rangeLength, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAppointmentsAsyncWithOptions(rangeStart: Foundation__impl_l0.DateTime, rangeLength: Foundation__impl_l0.TimeSpan, options: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -490,6 +499,7 @@ public class IAppointmentStore <: InterfaceWrapperBase & ComInterface {
         return __vt.ShowEditNewAppointmentAsync(__liveRaw, appointment, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindLocalIdsFromRoamingIdAsync(roamingId: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -625,6 +635,7 @@ public class IAppointmentStore3 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IAppointmentStoreChangeReaderVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var ReadBatchAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var AcceptChanges: CFunc<(CPointer<Unit>) -> Int32> = { _ => 0 }
     public var AcceptChangesThrough: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -671,6 +682,7 @@ public class IAppointmentStoreChangeReader <: InterfaceWrapperBase & ComInterfac
         readVtbl<IAppointmentStoreChangeReaderVtbl>(IAppointmentStoreChangeReaderVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReadBatchAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

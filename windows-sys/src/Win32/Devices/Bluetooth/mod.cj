@@ -5,7 +5,6 @@ import windows_interface.{GUID}
 import windows_interface as windows_interface
 import windows_polyfill.{packedReadUInt16, packedReadUInt32, packedReadUInt64, packedReadUInt8, packedReadValue, packedWriteUInt16, packedWriteUInt32, packedWriteUInt64, packedWriteUInt8, packedWriteValue, unionReadInt16, unionReadInt32, unionReadInt64, unionReadInt8, unionReadUInt16, unionReadUInt32, unionReadUInt64, unionReadUInt8, unionWriteInt16, unionWriteInt32, unionWriteInt64, unionWriteInt8, unionWriteUInt16, unionWriteUInt32, unionWriteUInt64, unionWriteUInt8}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 
 
@@ -2266,117 +2265,532 @@ public struct BTH_QUERY_SERVICE {
     public init() {}
 }
 
-@When[BLUETOOTHAPIS == "on"]
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothEnableDiscovery == "on"]
 foreign {
     // param-hint: hRadio optional
     func BluetoothEnableDiscovery(hRadio: CPointer<Unit>, fEnabled: Int32): Int32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothEnableDiscovery == "on"]
+public unsafe func Windows_BluetoothEnableDiscovery(hRadio: CPointer<Unit>, fEnabled: Int32): Int32 {
+    return BluetoothEnableDiscovery(hRadio, fEnabled)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothEnableIncomingConnections == "on"]
+foreign {
     // param-hint: hRadio optional
     func BluetoothEnableIncomingConnections(hRadio: CPointer<Unit>, fEnabled: Int32): Int32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothEnableIncomingConnections == "on"]
+public unsafe func Windows_BluetoothEnableIncomingConnections(hRadio: CPointer<Unit>, fEnabled: Int32): Int32 {
+    return BluetoothEnableIncomingConnections(hRadio, fEnabled)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothEnumerateInstalledServices == "on"]
+foreign {
     // param-hint: hRadio optional
     // param-hint: pGuidServices len=param[2] optional
     func BluetoothEnumerateInstalledServices(hRadio: CPointer<Unit>, pbtdi: CPointer<BLUETOOTH_DEVICE_INFO>, pcServiceInout: CPointer<UInt32>, pGuidServices: CPointer<GUID>): UInt32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothEnumerateInstalledServices == "on"]
+public unsafe func Windows_BluetoothEnumerateInstalledServices(hRadio: CPointer<Unit>, pbtdi: CPointer<BLUETOOTH_DEVICE_INFO>, pcServiceInout: CPointer<UInt32>, pGuidServices: CPointer<GUID>): UInt32 {
+    return BluetoothEnumerateInstalledServices(hRadio, pbtdi, pcServiceInout, pGuidServices)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothFindDeviceClose == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func BluetoothFindDeviceClose(hFind: HBLUETOOTH_DEVICE_FIND): Int32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothFindDeviceClose == "on"]
+public unsafe func Windows_BluetoothFindDeviceClose(hFind: HBLUETOOTH_DEVICE_FIND): Int32 {
+    return BluetoothFindDeviceClose(hFind)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothFindFirstDevice == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func BluetoothFindFirstDevice(pbtsp: CPointer<BLUETOOTH_DEVICE_SEARCH_PARAMS>, pbtdi: CPointer<BLUETOOTH_DEVICE_INFO>): HBLUETOOTH_DEVICE_FIND
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothFindFirstDevice == "on"]
+public unsafe func Windows_BluetoothFindFirstDevice(pbtsp: CPointer<BLUETOOTH_DEVICE_SEARCH_PARAMS>, pbtdi: CPointer<BLUETOOTH_DEVICE_INFO>): HBLUETOOTH_DEVICE_FIND {
+    return BluetoothFindFirstDevice(pbtsp, pbtdi)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothFindFirstRadio == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func BluetoothFindFirstRadio(pbtfrp: CPointer<BLUETOOTH_FIND_RADIO_PARAMS>, phRadio: CPointer<CPointer<Unit>>): HBLUETOOTH_RADIO_FIND
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothFindFirstRadio == "on"]
+public unsafe func Windows_BluetoothFindFirstRadio(pbtfrp: CPointer<BLUETOOTH_FIND_RADIO_PARAMS>, phRadio: CPointer<CPointer<Unit>>): HBLUETOOTH_RADIO_FIND {
+    return BluetoothFindFirstRadio(pbtfrp, phRadio)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothFindNextDevice == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func BluetoothFindNextDevice(hFind: HBLUETOOTH_DEVICE_FIND, pbtdi: CPointer<BLUETOOTH_DEVICE_INFO>): Int32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothFindNextDevice == "on"]
+public unsafe func Windows_BluetoothFindNextDevice(hFind: HBLUETOOTH_DEVICE_FIND, pbtdi: CPointer<BLUETOOTH_DEVICE_INFO>): Int32 {
+    return BluetoothFindNextDevice(hFind, pbtdi)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothFindNextRadio == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func BluetoothFindNextRadio(hFind: HBLUETOOTH_RADIO_FIND, phRadio: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothFindNextRadio == "on"]
+public unsafe func Windows_BluetoothFindNextRadio(hFind: HBLUETOOTH_RADIO_FIND, phRadio: CPointer<CPointer<Unit>>): Int32 {
+    return BluetoothFindNextRadio(hFind, phRadio)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothFindRadioClose == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func BluetoothFindRadioClose(hFind: HBLUETOOTH_RADIO_FIND): Int32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothFindRadioClose == "on"]
+public unsafe func Windows_BluetoothFindRadioClose(hFind: HBLUETOOTH_RADIO_FIND): Int32 {
+    return BluetoothFindRadioClose(hFind)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothGATTAbortReliableWrite == "on"]
+foreign {
     func BluetoothGATTAbortReliableWrite(hDevice: CPointer<Unit>, ReliableWriteContext: UInt64, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothGATTAbortReliableWrite == "on"]
+public unsafe func Windows_BluetoothGATTAbortReliableWrite(hDevice: CPointer<Unit>, ReliableWriteContext: UInt64, Flags: UInt32): Int32 {
+    return BluetoothGATTAbortReliableWrite(hDevice, ReliableWriteContext, Flags)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothGATTBeginReliableWrite == "on"]
+foreign {
     func BluetoothGATTBeginReliableWrite(hDevice: CPointer<Unit>, ReliableWriteContext: CPointer<UInt64>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothGATTBeginReliableWrite == "on"]
+public unsafe func Windows_BluetoothGATTBeginReliableWrite(hDevice: CPointer<Unit>, ReliableWriteContext: CPointer<UInt64>, Flags: UInt32): Int32 {
+    return BluetoothGATTBeginReliableWrite(hDevice, ReliableWriteContext, Flags)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothGATTEndReliableWrite == "on"]
+foreign {
     func BluetoothGATTEndReliableWrite(hDevice: CPointer<Unit>, ReliableWriteContext: UInt64, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothGATTEndReliableWrite == "on"]
+public unsafe func Windows_BluetoothGATTEndReliableWrite(hDevice: CPointer<Unit>, ReliableWriteContext: UInt64, Flags: UInt32): Int32 {
+    return BluetoothGATTEndReliableWrite(hDevice, ReliableWriteContext, Flags)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothGATTGetCharacteristicValue == "on"]
+foreign {
     // param-hint: CharacteristicValue optional
     // param-hint: CharacteristicValueSizeRequired optional
     func BluetoothGATTGetCharacteristicValue(hDevice: CPointer<Unit>, Characteristic: CPointer<BTH_LE_GATT_CHARACTERISTIC>, CharacteristicValueDataSize: UInt32, CharacteristicValue: CPointer<BTH_LE_GATT_CHARACTERISTIC_VALUE>, CharacteristicValueSizeRequired: CPointer<UInt16>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothGATTGetCharacteristicValue == "on"]
+public unsafe func Windows_BluetoothGATTGetCharacteristicValue(hDevice: CPointer<Unit>, Characteristic: CPointer<BTH_LE_GATT_CHARACTERISTIC>, CharacteristicValueDataSize: UInt32, CharacteristicValue: CPointer<BTH_LE_GATT_CHARACTERISTIC_VALUE>, CharacteristicValueSizeRequired: CPointer<UInt16>, Flags: UInt32): Int32 {
+    return BluetoothGATTGetCharacteristicValue(hDevice, Characteristic, CharacteristicValueDataSize, CharacteristicValue, CharacteristicValueSizeRequired, Flags)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothGATTGetCharacteristics == "on"]
+foreign {
     // param-hint: Service optional
     // param-hint: CharacteristicsBuffer len=param[2] optional
     func BluetoothGATTGetCharacteristics(hDevice: CPointer<Unit>, Service: CPointer<BTH_LE_GATT_SERVICE>, CharacteristicsBufferCount: UInt16, CharacteristicsBuffer: CPointer<BTH_LE_GATT_CHARACTERISTIC>, CharacteristicsBufferActual: CPointer<UInt16>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothGATTGetCharacteristics == "on"]
+public unsafe func Windows_BluetoothGATTGetCharacteristics(hDevice: CPointer<Unit>, Service: CPointer<BTH_LE_GATT_SERVICE>, CharacteristicsBufferCount: UInt16, CharacteristicsBuffer: CPointer<BTH_LE_GATT_CHARACTERISTIC>, CharacteristicsBufferActual: CPointer<UInt16>, Flags: UInt32): Int32 {
+    return BluetoothGATTGetCharacteristics(hDevice, Service, CharacteristicsBufferCount, CharacteristicsBuffer, CharacteristicsBufferActual, Flags)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothGATTGetDescriptorValue == "on"]
+foreign {
     // param-hint: DescriptorValue optional
     // param-hint: DescriptorValueSizeRequired optional
     func BluetoothGATTGetDescriptorValue(hDevice: CPointer<Unit>, Descriptor: CPointer<BTH_LE_GATT_DESCRIPTOR>, DescriptorValueDataSize: UInt32, DescriptorValue: CPointer<BTH_LE_GATT_DESCRIPTOR_VALUE>, DescriptorValueSizeRequired: CPointer<UInt16>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothGATTGetDescriptorValue == "on"]
+public unsafe func Windows_BluetoothGATTGetDescriptorValue(hDevice: CPointer<Unit>, Descriptor: CPointer<BTH_LE_GATT_DESCRIPTOR>, DescriptorValueDataSize: UInt32, DescriptorValue: CPointer<BTH_LE_GATT_DESCRIPTOR_VALUE>, DescriptorValueSizeRequired: CPointer<UInt16>, Flags: UInt32): Int32 {
+    return BluetoothGATTGetDescriptorValue(hDevice, Descriptor, DescriptorValueDataSize, DescriptorValue, DescriptorValueSizeRequired, Flags)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothGATTGetDescriptors == "on"]
+foreign {
     // param-hint: DescriptorsBuffer len=param[2] optional
     func BluetoothGATTGetDescriptors(hDevice: CPointer<Unit>, Characteristic: CPointer<BTH_LE_GATT_CHARACTERISTIC>, DescriptorsBufferCount: UInt16, DescriptorsBuffer: CPointer<BTH_LE_GATT_DESCRIPTOR>, DescriptorsBufferActual: CPointer<UInt16>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothGATTGetDescriptors == "on"]
+public unsafe func Windows_BluetoothGATTGetDescriptors(hDevice: CPointer<Unit>, Characteristic: CPointer<BTH_LE_GATT_CHARACTERISTIC>, DescriptorsBufferCount: UInt16, DescriptorsBuffer: CPointer<BTH_LE_GATT_DESCRIPTOR>, DescriptorsBufferActual: CPointer<UInt16>, Flags: UInt32): Int32 {
+    return BluetoothGATTGetDescriptors(hDevice, Characteristic, DescriptorsBufferCount, DescriptorsBuffer, DescriptorsBufferActual, Flags)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothGATTGetIncludedServices == "on"]
+foreign {
     // param-hint: ParentService optional
     // param-hint: IncludedServicesBuffer len=param[2] optional
     func BluetoothGATTGetIncludedServices(hDevice: CPointer<Unit>, ParentService: CPointer<BTH_LE_GATT_SERVICE>, IncludedServicesBufferCount: UInt16, IncludedServicesBuffer: CPointer<BTH_LE_GATT_SERVICE>, IncludedServicesBufferActual: CPointer<UInt16>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothGATTGetIncludedServices == "on"]
+public unsafe func Windows_BluetoothGATTGetIncludedServices(hDevice: CPointer<Unit>, ParentService: CPointer<BTH_LE_GATT_SERVICE>, IncludedServicesBufferCount: UInt16, IncludedServicesBuffer: CPointer<BTH_LE_GATT_SERVICE>, IncludedServicesBufferActual: CPointer<UInt16>, Flags: UInt32): Int32 {
+    return BluetoothGATTGetIncludedServices(hDevice, ParentService, IncludedServicesBufferCount, IncludedServicesBuffer, IncludedServicesBufferActual, Flags)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothGATTGetServices == "on"]
+foreign {
     // param-hint: ServicesBuffer len=param[1] optional
     func BluetoothGATTGetServices(hDevice: CPointer<Unit>, ServicesBufferCount: UInt16, ServicesBuffer: CPointer<BTH_LE_GATT_SERVICE>, ServicesBufferActual: CPointer<UInt16>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothGATTGetServices == "on"]
+public unsafe func Windows_BluetoothGATTGetServices(hDevice: CPointer<Unit>, ServicesBufferCount: UInt16, ServicesBuffer: CPointer<BTH_LE_GATT_SERVICE>, ServicesBufferActual: CPointer<UInt16>, Flags: UInt32): Int32 {
+    return BluetoothGATTGetServices(hDevice, ServicesBufferCount, ServicesBuffer, ServicesBufferActual, Flags)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothGATTRegisterEvent == "on"]
+foreign {
     // param-hint: CallbackContext optional
     func BluetoothGATTRegisterEvent(hService: CPointer<Unit>, EventType: Int32, EventParameterIn: CPointer<Unit>, Callback: PFNBLUETOOTH_GATT_EVENT_CALLBACK, CallbackContext: CPointer<Unit>, pEventHandle: CPointer<IntNative>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothGATTRegisterEvent == "on"]
+public unsafe func Windows_BluetoothGATTRegisterEvent(hService: CPointer<Unit>, EventType: Int32, EventParameterIn: CPointer<Unit>, Callback: PFNBLUETOOTH_GATT_EVENT_CALLBACK, CallbackContext: CPointer<Unit>, pEventHandle: CPointer<IntNative>, Flags: UInt32): Int32 {
+    return BluetoothGATTRegisterEvent(hService, EventType, EventParameterIn, Callback, CallbackContext, pEventHandle, Flags)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothGATTSetCharacteristicValue == "on"]
+foreign {
     // param-hint: ReliableWriteContext optional
     func BluetoothGATTSetCharacteristicValue(hDevice: CPointer<Unit>, Characteristic: CPointer<BTH_LE_GATT_CHARACTERISTIC>, CharacteristicValue: CPointer<BTH_LE_GATT_CHARACTERISTIC_VALUE>, ReliableWriteContext: UInt64, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothGATTSetCharacteristicValue == "on"]
+public unsafe func Windows_BluetoothGATTSetCharacteristicValue(hDevice: CPointer<Unit>, Characteristic: CPointer<BTH_LE_GATT_CHARACTERISTIC>, CharacteristicValue: CPointer<BTH_LE_GATT_CHARACTERISTIC_VALUE>, ReliableWriteContext: UInt64, Flags: UInt32): Int32 {
+    return BluetoothGATTSetCharacteristicValue(hDevice, Characteristic, CharacteristicValue, ReliableWriteContext, Flags)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothGATTSetDescriptorValue == "on"]
+foreign {
     func BluetoothGATTSetDescriptorValue(hDevice: CPointer<Unit>, Descriptor: CPointer<BTH_LE_GATT_DESCRIPTOR>, DescriptorValue: CPointer<BTH_LE_GATT_DESCRIPTOR_VALUE>, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothGATTSetDescriptorValue == "on"]
+public unsafe func Windows_BluetoothGATTSetDescriptorValue(hDevice: CPointer<Unit>, Descriptor: CPointer<BTH_LE_GATT_DESCRIPTOR>, DescriptorValue: CPointer<BTH_LE_GATT_DESCRIPTOR_VALUE>, Flags: UInt32): Int32 {
+    return BluetoothGATTSetDescriptorValue(hDevice, Descriptor, DescriptorValue, Flags)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothGATTUnregisterEvent == "on"]
+foreign {
     func BluetoothGATTUnregisterEvent(EventHandle: IntNative, Flags: UInt32): Int32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothGATTUnregisterEvent == "on"]
+public unsafe func Windows_BluetoothGATTUnregisterEvent(EventHandle: IntNative, Flags: UInt32): Int32 {
+    return BluetoothGATTUnregisterEvent(EventHandle, Flags)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothGetDeviceInfo == "on"]
+foreign {
     // param-hint: hRadio optional
     func BluetoothGetDeviceInfo(hRadio: CPointer<Unit>, pbtdi: CPointer<BLUETOOTH_DEVICE_INFO>): UInt32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothGetDeviceInfo == "on"]
+public unsafe func Windows_BluetoothGetDeviceInfo(hRadio: CPointer<Unit>, pbtdi: CPointer<BLUETOOTH_DEVICE_INFO>): UInt32 {
+    return BluetoothGetDeviceInfo(hRadio, pbtdi)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothGetRadioInfo == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func BluetoothGetRadioInfo(hRadio: CPointer<Unit>, pRadioInfo: CPointer<BLUETOOTH_RADIO_INFO>): UInt32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothGetRadioInfo == "on"]
+public unsafe func Windows_BluetoothGetRadioInfo(hRadio: CPointer<Unit>, pRadioInfo: CPointer<BLUETOOTH_RADIO_INFO>): UInt32 {
+    return BluetoothGetRadioInfo(hRadio, pRadioInfo)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothIsConnectable == "on"]
+foreign {
     // param-hint: hRadio optional
     func BluetoothIsConnectable(hRadio: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothIsConnectable == "on"]
+public unsafe func Windows_BluetoothIsConnectable(hRadio: CPointer<Unit>): Int32 {
+    return BluetoothIsConnectable(hRadio)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothIsDiscoverable == "on"]
+foreign {
     // param-hint: hRadio optional
     func BluetoothIsDiscoverable(hRadio: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothIsDiscoverable == "on"]
+public unsafe func Windows_BluetoothIsDiscoverable(hRadio: CPointer<Unit>): Int32 {
+    return BluetoothIsDiscoverable(hRadio)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothIsVersionAvailable == "on"]
+foreign {
     func BluetoothIsVersionAvailable(MajorVersion: UInt8, MinorVersion: UInt8): Int32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothIsVersionAvailable == "on"]
+public unsafe func Windows_BluetoothIsVersionAvailable(MajorVersion: UInt8, MinorVersion: UInt8): Int32 {
+    return BluetoothIsVersionAvailable(MajorVersion, MinorVersion)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothRegisterForAuthentication == "on"]
+foreign {
     // param-hint: pbtdi optional
     // param-hint: pfnCallback optional
     // param-hint: pvParam optional
     // pinvoke-hint: SetLastError
     func BluetoothRegisterForAuthentication(pbtdi: CPointer<BLUETOOTH_DEVICE_INFO>, phRegHandle: CPointer<IntNative>, pfnCallback: PFN_AUTHENTICATION_CALLBACK, pvParam: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothRegisterForAuthentication == "on"]
+public unsafe func Windows_BluetoothRegisterForAuthentication(pbtdi: CPointer<BLUETOOTH_DEVICE_INFO>, phRegHandle: CPointer<IntNative>, pfnCallback: PFN_AUTHENTICATION_CALLBACK, pvParam: CPointer<Unit>): UInt32 {
+    return BluetoothRegisterForAuthentication(pbtdi, phRegHandle, pfnCallback, pvParam)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothRegisterForAuthenticationEx == "on"]
+foreign {
     // param-hint: pbtdiIn optional
     // param-hint: pfnCallbackIn optional
     // param-hint: pvParam optional
     func BluetoothRegisterForAuthenticationEx(pbtdiIn: CPointer<BLUETOOTH_DEVICE_INFO>, phRegHandleOut: CPointer<IntNative>, pfnCallbackIn: PFN_AUTHENTICATION_CALLBACK_EX, pvParam: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothRegisterForAuthenticationEx == "on"]
+public unsafe func Windows_BluetoothRegisterForAuthenticationEx(pbtdiIn: CPointer<BLUETOOTH_DEVICE_INFO>, phRegHandleOut: CPointer<IntNative>, pfnCallbackIn: PFN_AUTHENTICATION_CALLBACK_EX, pvParam: CPointer<Unit>): UInt32 {
+    return BluetoothRegisterForAuthenticationEx(pbtdiIn, phRegHandleOut, pfnCallbackIn, pvParam)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothRemoveDevice == "on"]
+foreign {
     func BluetoothRemoveDevice(pAddress: CPointer<BLUETOOTH_ADDRESS>): UInt32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothRemoveDevice == "on"]
+public unsafe func Windows_BluetoothRemoveDevice(pAddress: CPointer<BLUETOOTH_ADDRESS>): UInt32 {
+    return BluetoothRemoveDevice(pAddress)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothSdpEnumAttributes == "on"]
+foreign {
     // param-hint: pSDPStream bytes=param[1]
     // pinvoke-hint: SetLastError
     func BluetoothSdpEnumAttributes(pSDPStream: CPointer<UInt8>, cbStreamSize: UInt32, pfnCallback: PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK, pvParam: CPointer<Unit>): Int32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothSdpEnumAttributes == "on"]
+public unsafe func Windows_BluetoothSdpEnumAttributes(pSDPStream: CPointer<UInt8>, cbStreamSize: UInt32, pfnCallback: PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK, pvParam: CPointer<Unit>): Int32 {
+    return BluetoothSdpEnumAttributes(pSDPStream, cbStreamSize, pfnCallback, pvParam)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothSdpGetAttributeValue == "on"]
+foreign {
     // param-hint: pRecordStream bytes=param[1]
     func BluetoothSdpGetAttributeValue(pRecordStream: CPointer<UInt8>, cbRecordLength: UInt32, usAttributeId: UInt16, pAttributeData: CPointer<SDP_ELEMENT_DATA>): UInt32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothSdpGetAttributeValue == "on"]
+public unsafe func Windows_BluetoothSdpGetAttributeValue(pRecordStream: CPointer<UInt8>, cbRecordLength: UInt32, usAttributeId: UInt16, pAttributeData: CPointer<SDP_ELEMENT_DATA>): UInt32 {
+    return BluetoothSdpGetAttributeValue(pRecordStream, cbRecordLength, usAttributeId, pAttributeData)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothSdpGetContainerElementData == "on"]
+foreign {
     // param-hint: pContainerStream bytes=param[1]
     func BluetoothSdpGetContainerElementData(pContainerStream: CPointer<UInt8>, cbContainerLength: UInt32, pElement: CPointer<IntNative>, pData: CPointer<SDP_ELEMENT_DATA>): UInt32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothSdpGetContainerElementData == "on"]
+public unsafe func Windows_BluetoothSdpGetContainerElementData(pContainerStream: CPointer<UInt8>, cbContainerLength: UInt32, pElement: CPointer<IntNative>, pData: CPointer<SDP_ELEMENT_DATA>): UInt32 {
+    return BluetoothSdpGetContainerElementData(pContainerStream, cbContainerLength, pElement, pData)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothSdpGetElementData == "on"]
+foreign {
     // param-hint: pSdpStream bytes=param[1]
     func BluetoothSdpGetElementData(pSdpStream: CPointer<UInt8>, cbSdpStreamLength: UInt32, pData: CPointer<SDP_ELEMENT_DATA>): UInt32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothSdpGetElementData == "on"]
+public unsafe func Windows_BluetoothSdpGetElementData(pSdpStream: CPointer<UInt8>, cbSdpStreamLength: UInt32, pData: CPointer<SDP_ELEMENT_DATA>): UInt32 {
+    return BluetoothSdpGetElementData(pSdpStream, cbSdpStreamLength, pData)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothSdpGetString == "on"]
+foreign {
     // param-hint: pRecordStream bytes=param[1]
     // param-hint: pStringData optional
     // param-hint: pszString len=param[5]
     func BluetoothSdpGetString(pRecordStream: CPointer<UInt8>, cbRecordLength: UInt32, pStringData: CPointer<SDP_STRING_TYPE_DATA>, usStringOffset: UInt16, pszString: CPointer<UInt16>, pcchStringLength: CPointer<UInt32>): UInt32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothSdpGetString == "on"]
+public unsafe func Windows_BluetoothSdpGetString(pRecordStream: CPointer<UInt8>, cbRecordLength: UInt32, pStringData: CPointer<SDP_STRING_TYPE_DATA>, usStringOffset: UInt16, pszString: CPointer<UInt16>, pcchStringLength: CPointer<UInt32>): UInt32 {
+    return BluetoothSdpGetString(pRecordStream, cbRecordLength, pStringData, usStringOffset, pszString, pcchStringLength)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothSendAuthenticationResponse == "on"]
+foreign {
     // param-hint: hRadio optional
     func BluetoothSendAuthenticationResponse(hRadio: CPointer<Unit>, pbtdi: CPointer<BLUETOOTH_DEVICE_INFO>, pszPasskey: CPointer<UInt16>): UInt32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothSendAuthenticationResponse == "on"]
+public unsafe func Windows_BluetoothSendAuthenticationResponse(hRadio: CPointer<Unit>, pbtdi: CPointer<BLUETOOTH_DEVICE_INFO>, pszPasskey: CPointer<UInt16>): UInt32 {
+    return BluetoothSendAuthenticationResponse(hRadio, pbtdi, pszPasskey)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothSendAuthenticationResponseEx == "on"]
+foreign {
     // param-hint: hRadioIn optional
     func BluetoothSendAuthenticationResponseEx(hRadioIn: CPointer<Unit>, pauthResponse: CPointer<BLUETOOTH_AUTHENTICATE_RESPONSE>): UInt32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothSendAuthenticationResponseEx == "on"]
+public unsafe func Windows_BluetoothSendAuthenticationResponseEx(hRadioIn: CPointer<Unit>, pauthResponse: CPointer<BLUETOOTH_AUTHENTICATE_RESPONSE>): UInt32 {
+    return BluetoothSendAuthenticationResponseEx(hRadioIn, pauthResponse)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothSetLocalServiceInfo == "on"]
+foreign {
     // param-hint: hRadioIn optional
     func BluetoothSetLocalServiceInfo(hRadioIn: CPointer<Unit>, pClassGuid: CPointer<GUID>, ulInstance: UInt32, pServiceInfoIn: CPointer<BLUETOOTH_LOCAL_SERVICE_INFO>): UInt32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothSetLocalServiceInfo == "on"]
+public unsafe func Windows_BluetoothSetLocalServiceInfo(hRadioIn: CPointer<Unit>, pClassGuid: CPointer<GUID>, ulInstance: UInt32, pServiceInfoIn: CPointer<BLUETOOTH_LOCAL_SERVICE_INFO>): UInt32 {
+    return BluetoothSetLocalServiceInfo(hRadioIn, pClassGuid, ulInstance, pServiceInfoIn)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothSetServiceState == "on"]
+foreign {
     // param-hint: hRadio optional
     func BluetoothSetServiceState(hRadio: CPointer<Unit>, pbtdi: CPointer<BLUETOOTH_DEVICE_INFO>, pGuidService: CPointer<GUID>, dwServiceFlags: UInt32): UInt32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothSetServiceState == "on"]
+public unsafe func Windows_BluetoothSetServiceState(hRadio: CPointer<Unit>, pbtdi: CPointer<BLUETOOTH_DEVICE_INFO>, pGuidService: CPointer<GUID>, dwServiceFlags: UInt32): UInt32 {
+    return BluetoothSetServiceState(hRadio, pbtdi, pGuidService, dwServiceFlags)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothUnregisterAuthentication == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func BluetoothUnregisterAuthentication(hRegHandle: IntNative): Int32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothUnregisterAuthentication == "on"]
+public unsafe func Windows_BluetoothUnregisterAuthentication(hRegHandle: IntNative): Int32 {
+    return BluetoothUnregisterAuthentication(hRegHandle)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothUpdateDeviceRecord == "on"]
+foreign {
     func BluetoothUpdateDeviceRecord(pbtdi: CPointer<BLUETOOTH_DEVICE_INFO>): UInt32
 }
 
-@When[BTHPROPS_CPL == "on"]
+@When[Windows_Win32_Devices_Bluetooth == "on" && BLUETOOTHAPIS == "on" && Windows_Win32_Devices_Bluetooth_BluetoothUpdateDeviceRecord == "on"]
+public unsafe func Windows_BluetoothUpdateDeviceRecord(pbtdi: CPointer<BLUETOOTH_DEVICE_INFO>): UInt32 {
+    return BluetoothUpdateDeviceRecord(pbtdi)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BTHPROPS_CPL == "on" && Windows_Win32_Devices_Bluetooth_BluetoothAuthenticateDevice == "on"]
 foreign {
     // param-hint: hwndParent optional
     // param-hint: hRadio optional
     // param-hint: pszPasskey len=param[4] optional
     func BluetoothAuthenticateDevice(hwndParent: CPointer<Unit>, hRadio: CPointer<Unit>, pbtbi: CPointer<BLUETOOTH_DEVICE_INFO>, pszPasskey: CPointer<UInt16>, ulPasskeyLength: UInt32): UInt32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BTHPROPS_CPL == "on" && Windows_Win32_Devices_Bluetooth_BluetoothAuthenticateDevice == "on"]
+public unsafe func Windows_BluetoothAuthenticateDevice(hwndParent: CPointer<Unit>, hRadio: CPointer<Unit>, pbtbi: CPointer<BLUETOOTH_DEVICE_INFO>, pszPasskey: CPointer<UInt16>, ulPasskeyLength: UInt32): UInt32 {
+    return BluetoothAuthenticateDevice(hwndParent, hRadio, pbtbi, pszPasskey, ulPasskeyLength)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BTHPROPS_CPL == "on" && Windows_Win32_Devices_Bluetooth_BluetoothAuthenticateDeviceEx == "on"]
+foreign {
     // param-hint: hwndParentIn optional
     // param-hint: hRadioIn optional
     // param-hint: pbtOobData optional
     func BluetoothAuthenticateDeviceEx(hwndParentIn: CPointer<Unit>, hRadioIn: CPointer<Unit>, pbtdiInout: CPointer<BLUETOOTH_DEVICE_INFO>, pbtOobData: CPointer<BLUETOOTH_OOB_DATA_INFO>, authenticationRequirement: Int32): UInt32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BTHPROPS_CPL == "on" && Windows_Win32_Devices_Bluetooth_BluetoothAuthenticateDeviceEx == "on"]
+public unsafe func Windows_BluetoothAuthenticateDeviceEx(hwndParentIn: CPointer<Unit>, hRadioIn: CPointer<Unit>, pbtdiInout: CPointer<BLUETOOTH_DEVICE_INFO>, pbtOobData: CPointer<BLUETOOTH_OOB_DATA_INFO>, authenticationRequirement: Int32): UInt32 {
+    return BluetoothAuthenticateDeviceEx(hwndParentIn, hRadioIn, pbtdiInout, pbtOobData, authenticationRequirement)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BTHPROPS_CPL == "on" && Windows_Win32_Devices_Bluetooth_BluetoothAuthenticateMultipleDevices == "on"]
+foreign {
     // param-hint: hwndParent optional
     // param-hint: hRadio optional
     // param-hint: rgbtdi len=param[2]
     func BluetoothAuthenticateMultipleDevices(hwndParent: CPointer<Unit>, hRadio: CPointer<Unit>, cDevices: UInt32, rgbtdi: CPointer<BLUETOOTH_DEVICE_INFO>): UInt32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BTHPROPS_CPL == "on" && Windows_Win32_Devices_Bluetooth_BluetoothAuthenticateMultipleDevices == "on"]
+public unsafe func Windows_BluetoothAuthenticateMultipleDevices(hwndParent: CPointer<Unit>, hRadio: CPointer<Unit>, cDevices: UInt32, rgbtdi: CPointer<BLUETOOTH_DEVICE_INFO>): UInt32 {
+    return BluetoothAuthenticateMultipleDevices(hwndParent, hRadio, cDevices, rgbtdi)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BTHPROPS_CPL == "on" && Windows_Win32_Devices_Bluetooth_BluetoothDisplayDeviceProperties == "on"]
+foreign {
     // param-hint: hwndParent optional
     // pinvoke-hint: SetLastError
     func BluetoothDisplayDeviceProperties(hwndParent: CPointer<Unit>, pbtdi: CPointer<BLUETOOTH_DEVICE_INFO>): Int32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BTHPROPS_CPL == "on" && Windows_Win32_Devices_Bluetooth_BluetoothDisplayDeviceProperties == "on"]
+public unsafe func Windows_BluetoothDisplayDeviceProperties(hwndParent: CPointer<Unit>, pbtdi: CPointer<BLUETOOTH_DEVICE_INFO>): Int32 {
+    return BluetoothDisplayDeviceProperties(hwndParent, pbtdi)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BTHPROPS_CPL == "on" && Windows_Win32_Devices_Bluetooth_BluetoothSelectDevices == "on"]
+foreign {
     // pinvoke-hint: SetLastError
     func BluetoothSelectDevices(pbtsdp: CPointer<BLUETOOTH_SELECT_DEVICE_PARAMS>): Int32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BTHPROPS_CPL == "on" && Windows_Win32_Devices_Bluetooth_BluetoothSelectDevices == "on"]
+public unsafe func Windows_BluetoothSelectDevices(pbtsdp: CPointer<BLUETOOTH_SELECT_DEVICE_PARAMS>): Int32 {
+    return BluetoothSelectDevices(pbtsdp)
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BTHPROPS_CPL == "on" && Windows_Win32_Devices_Bluetooth_BluetoothSelectDevicesFree == "on"]
+foreign {
     func BluetoothSelectDevicesFree(pbtsdp: CPointer<BLUETOOTH_SELECT_DEVICE_PARAMS>): Int32
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on" && BTHPROPS_CPL == "on" && Windows_Win32_Devices_Bluetooth_BluetoothSelectDevicesFree == "on"]
+public unsafe func Windows_BluetoothSelectDevicesFree(pbtsdp: CPointer<BLUETOOTH_SELECT_DEVICE_PARAMS>): Int32 {
+    return BluetoothSelectDevicesFree(pbtsdp)
 }
 
 @When[Windows_Win32_Devices_Bluetooth == "on"]

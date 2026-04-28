@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrap
 import windows_interface as windows_interface
 import windows_polyfill.{packedReadInt32, packedReadUInt16, packedReadUInt32, packedReadUInt8, packedReadValue, packedWriteInt32, packedWriteUInt16, packedWriteUInt32, packedWriteUInt8, packedWriteValue}
 import windows_polyfill as windows_polyfill
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
-@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows.Win32.Graphics.Gdi as Win32_Graphics_Gdi
 import windows.Win32._impl_l0 as Win32__impl_l0
 import windows.Win32._impl_l1 as Win32__impl_l1
@@ -12883,23 +12881,114 @@ public class IWMReaderAdvanced6 <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[WMVCORE == "on"]
+@When[Windows_Win32_Media_WindowsMediaFormat == "on" && WMVCORE == "on" && Windows_Win32_Media_WindowsMediaFormat_WMCreateBackupRestorer == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func WMCreateBackupRestorer(pCallback: CPointer<Unit>, ppBackup: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_WindowsMediaFormat == "on" && WMVCORE == "on" && Windows_Win32_Media_WindowsMediaFormat_WMCreateBackupRestorer == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_WMCreateBackupRestorer(pCallback: CPointer<Unit>, ppBackup: CPointer<CPointer<Unit>>): Int32 {
+    return WMCreateBackupRestorer(pCallback, ppBackup)
+}
+
+@When[Windows_Win32_Media_WindowsMediaFormat == "on" && WMVCORE == "on" && Windows_Win32_Media_WindowsMediaFormat_WMCreateEditor == "on"]
 foreign {
     func WMCreateEditor(ppEditor: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_WindowsMediaFormat == "on" && WMVCORE == "on" && Windows_Win32_Media_WindowsMediaFormat_WMCreateEditor == "on"]
+public unsafe func Windows_WMCreateEditor(ppEditor: CPointer<CPointer<Unit>>): Int32 {
+    return WMCreateEditor(ppEditor)
+}
+
+@When[Windows_Win32_Media_WindowsMediaFormat == "on" && WMVCORE == "on" && Windows_Win32_Media_WindowsMediaFormat_WMCreateIndexer == "on"]
+foreign {
     func WMCreateIndexer(ppIndexer: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_WindowsMediaFormat == "on" && WMVCORE == "on" && Windows_Win32_Media_WindowsMediaFormat_WMCreateIndexer == "on"]
+public unsafe func Windows_WMCreateIndexer(ppIndexer: CPointer<CPointer<Unit>>): Int32 {
+    return WMCreateIndexer(ppIndexer)
+}
+
+@When[Windows_Win32_Media_WindowsMediaFormat == "on" && WMVCORE == "on" && Windows_Win32_Media_WindowsMediaFormat_WMCreateProfileManager == "on"]
+foreign {
     func WMCreateProfileManager(ppProfileManager: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_WindowsMediaFormat == "on" && WMVCORE == "on" && Windows_Win32_Media_WindowsMediaFormat_WMCreateProfileManager == "on"]
+public unsafe func Windows_WMCreateProfileManager(ppProfileManager: CPointer<CPointer<Unit>>): Int32 {
+    return WMCreateProfileManager(ppProfileManager)
+}
+
+@When[Windows_Win32_Media_WindowsMediaFormat == "on" && WMVCORE == "on" && Windows_Win32_Media_WindowsMediaFormat_WMCreateReader == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func WMCreateReader(pUnkCert: CPointer<Unit>, dwRights: UInt32, ppReader: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_WindowsMediaFormat == "on" && WMVCORE == "on" && Windows_Win32_Media_WindowsMediaFormat_WMCreateReader == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_WMCreateReader(pUnkCert: CPointer<Unit>, dwRights: UInt32, ppReader: CPointer<CPointer<Unit>>): Int32 {
+    return WMCreateReader(pUnkCert, dwRights, ppReader)
+}
+
+@When[Windows_Win32_Media_WindowsMediaFormat == "on" && WMVCORE == "on" && Windows_Win32_Media_WindowsMediaFormat_WMCreateSyncReader == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func WMCreateSyncReader(pUnkCert: CPointer<Unit>, dwRights: UInt32, ppSyncReader: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_WindowsMediaFormat == "on" && WMVCORE == "on" && Windows_Win32_Media_WindowsMediaFormat_WMCreateSyncReader == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_WMCreateSyncReader(pUnkCert: CPointer<Unit>, dwRights: UInt32, ppSyncReader: CPointer<CPointer<Unit>>): Int32 {
+    return WMCreateSyncReader(pUnkCert, dwRights, ppSyncReader)
+}
+
+@When[Windows_Win32_Media_WindowsMediaFormat == "on" && WMVCORE == "on" && Windows_Win32_Media_WindowsMediaFormat_WMCreateWriter == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func WMCreateWriter(pUnkCert: CPointer<Unit>, ppWriter: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_WindowsMediaFormat == "on" && WMVCORE == "on" && Windows_Win32_Media_WindowsMediaFormat_WMCreateWriter == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_WMCreateWriter(pUnkCert: CPointer<Unit>, ppWriter: CPointer<CPointer<Unit>>): Int32 {
+    return WMCreateWriter(pUnkCert, ppWriter)
+}
+
+@When[Windows_Win32_Media_WindowsMediaFormat == "on" && WMVCORE == "on" && Windows_Win32_Media_WindowsMediaFormat_WMCreateWriterFileSink == "on"]
+foreign {
     func WMCreateWriterFileSink(ppSink: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_WindowsMediaFormat == "on" && WMVCORE == "on" && Windows_Win32_Media_WindowsMediaFormat_WMCreateWriterFileSink == "on"]
+public unsafe func Windows_WMCreateWriterFileSink(ppSink: CPointer<CPointer<Unit>>): Int32 {
+    return WMCreateWriterFileSink(ppSink)
+}
+
+@When[Windows_Win32_Media_WindowsMediaFormat == "on" && WMVCORE == "on" && Windows_Win32_Media_WindowsMediaFormat_WMCreateWriterNetworkSink == "on"]
+foreign {
     func WMCreateWriterNetworkSink(ppSink: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_WindowsMediaFormat == "on" && WMVCORE == "on" && Windows_Win32_Media_WindowsMediaFormat_WMCreateWriterNetworkSink == "on"]
+public unsafe func Windows_WMCreateWriterNetworkSink(ppSink: CPointer<CPointer<Unit>>): Int32 {
+    return WMCreateWriterNetworkSink(ppSink)
+}
+
+@When[Windows_Win32_Media_WindowsMediaFormat == "on" && WMVCORE == "on" && Windows_Win32_Media_WindowsMediaFormat_WMCreateWriterPushSink == "on"]
+foreign {
     func WMCreateWriterPushSink(ppSink: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Media_WindowsMediaFormat == "on" && WMVCORE == "on" && Windows_Win32_Media_WindowsMediaFormat_WMCreateWriterPushSink == "on"]
+public unsafe func Windows_WMCreateWriterPushSink(ppSink: CPointer<CPointer<Unit>>): Int32 {
+    return WMCreateWriterPushSink(ppSink)
+}
+
+@When[Windows_Win32_Media_WindowsMediaFormat == "on" && WMVCORE == "on" && Windows_Win32_Media_WindowsMediaFormat_WMIsContentProtected == "on"]
+foreign {
     func WMIsContentProtected(pwszFileName: CPointer<UInt16>, pfIsProtected: CPointer<Int32>): Int32
 }
 
-@When[WMVCORE == "on" && Windows_Win32_System_Com == "on"]
-foreign {
-    func WMCreateBackupRestorer(pCallback: CPointer<Unit>, ppBackup: CPointer<CPointer<Unit>>): Int32
-    func WMCreateReader(pUnkCert: CPointer<Unit>, dwRights: UInt32, ppReader: CPointer<CPointer<Unit>>): Int32
-    func WMCreateSyncReader(pUnkCert: CPointer<Unit>, dwRights: UInt32, ppSyncReader: CPointer<CPointer<Unit>>): Int32
-    func WMCreateWriter(pUnkCert: CPointer<Unit>, ppWriter: CPointer<CPointer<Unit>>): Int32
+@When[Windows_Win32_Media_WindowsMediaFormat == "on" && WMVCORE == "on" && Windows_Win32_Media_WindowsMediaFormat_WMIsContentProtected == "on"]
+public unsafe func Windows_WMIsContentProtected(pwszFileName: CPointer<UInt16>, pfIsProtected: CPointer<Int32>): Int32 {
+    return WMIsContentProtected(pwszFileName, pfIsProtected)
 }
 
 @When[Windows_Win32_Media_WindowsMediaFormat == "on"]

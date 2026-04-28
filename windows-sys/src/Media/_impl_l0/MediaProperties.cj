@@ -1422,13 +1422,13 @@ public class IMediaEncodingProfile <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IMediaEncodingProfile2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Core == "on"]
     public var SetAudioTracks: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Core == "on"]
     public var GetAudioTracks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Core == "on"]
     public var SetVideoTracks: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Core == "on"]
     public var GetVideoTracks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1473,28 +1473,28 @@ public class IMediaEncodingProfile2 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IMediaEncodingProfile2Vtbl>(IMediaEncodingProfile2Vtbl())
     }
 
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Core == "on"]
     public unsafe func SetAudioTracks(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetAudioTracks(__liveRaw, value)
     }
 
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Core == "on"]
     public unsafe func GetAudioTracks(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.GetAudioTracks(__liveRaw, result__)
     }
 
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Core == "on"]
     public unsafe func SetVideoTracks(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetVideoTracks(__liveRaw, value)
     }
 
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Core == "on"]
     public unsafe func GetVideoTracks(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1506,9 +1506,9 @@ public class IMediaEncodingProfile2 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IMediaEncodingProfile3Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Core == "on"]
     public var SetTimedMetadataTracks: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Core == "on"]
     public var GetTimedMetadataTracks: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -1553,14 +1553,14 @@ public class IMediaEncodingProfile3 <: InterfaceWrapperBase & ComInterface {
         readVtbl<IMediaEncodingProfile3Vtbl>(IMediaEncodingProfile3Vtbl())
     }
 
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Core == "on"]
     public unsafe func SetTimedMetadataTracks(value: CPointer<Unit>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
         return __vt.SetTimedMetadataTracks(__liveRaw, value)
     }
 
-    @When[Windows_Media_Core == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Media_Core == "on"]
     public unsafe func GetTimedMetadataTracks(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1866,6 +1866,7 @@ public class IMediaEncodingProfileStatics4 <: InterfaceWrapperBase & ComInterfac
 @C
 public struct IMediaEncodingPropertiesVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Type: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetSubtype: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => 0 }
@@ -1913,6 +1914,7 @@ public class IMediaEncodingProperties <: InterfaceWrapperBase & ComInterface {
         readVtbl<IMediaEncodingPropertiesVtbl>(IMediaEncodingPropertiesVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

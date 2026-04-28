@@ -4,7 +4,6 @@ package windows_sys.Graphics.Imaging
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
 import windows_sys.Graphics.DirectX.Direct3D11 as Graphics_DirectX_Direct3D11
 import windows_sys._impl_l0 as _impl_l0
 import windows_sys._impl_l1 as _impl_l1
@@ -339,8 +338,10 @@ public class IBitmapBuffer <: InterfaceWrapperBase & ComInterface {
 public struct IBitmapCodecInformationVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var CodecId: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var FileExtensions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var FriendlyName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var MimeTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
 }
@@ -391,6 +392,7 @@ public class IBitmapCodecInformation <: InterfaceWrapperBase & ComInterface {
         return __vt.CodecId(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FileExtensions(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -403,6 +405,7 @@ public class IBitmapCodecInformation <: InterfaceWrapperBase & ComInterface {
         return __vt.FriendlyName(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func MimeTypes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -894,6 +897,7 @@ public struct IBitmapDecoderVtbl {
     public var BitmapContainerProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var DecoderInformation: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var FrameCount: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Storage_Streams == "on"]
     public var GetPreviewAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetFrameAsync: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
@@ -957,6 +961,7 @@ public class IBitmapDecoder <: InterfaceWrapperBase & ComInterface {
         return __vt.FrameCount(__liveRaw, result__)
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func GetPreviewAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -981,6 +986,7 @@ public struct IBitmapDecoderStaticsVtbl {
     public var GifDecoderId: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => 0 }
     public var JpegXRDecoderId: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => 0 }
     public var IcoDecoderId: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetDecoderInformationEnumerator: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Storage_Streams == "on"]
     public var CreateAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
@@ -1071,6 +1077,7 @@ public class IBitmapDecoderStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.IcoDecoderId(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetDecoderInformationEnumerator(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1108,6 +1115,7 @@ public struct IBitmapEncoderVtbl {
     public var BitmapTransform: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetPixelData: CFunc<(CPointer<Unit>, Int32, Int32, UInt32, UInt32, Float64, Float64, UInt32, CPointer<UInt8>) -> Int32> = { _, _, _, _, _, _, _, _, _ => 0 }
     public var GoToNextFrameAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GoToNextFrameWithEncodingOptionsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public var FlushAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -1225,6 +1233,7 @@ public class IBitmapEncoder <: InterfaceWrapperBase & ComInterface {
         return __vt.GoToNextFrameAsync(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GoToNextFrameWithEncodingOptionsAsync(encodingOptions: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1248,10 +1257,11 @@ public struct IBitmapEncoderStaticsVtbl {
     public var TiffEncoderId: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => 0 }
     public var GifEncoderId: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => 0 }
     public var JpegXREncoderId: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => 0 }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetEncoderInformationEnumerator: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Storage_Streams == "on"]
     public var CreateAsync: CFunc<(CPointer<Unit>, GUID, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var CreateWithEncodingOptionsAsync: CFunc<(CPointer<Unit>, GUID, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => 0 }
     @When[Windows_Storage_Streams == "on"]
     public var CreateForTranscodingAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => 0 }
@@ -1335,6 +1345,7 @@ public class IBitmapEncoderStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.JpegXREncoderId(__liveRaw, result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetEncoderInformationEnumerator(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1348,7 +1359,7 @@ public class IBitmapEncoderStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.CreateAsync(__liveRaw, encoderId, stream, result__)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func CreateWithEncodingOptionsAsync(encoderId: GUID, stream: CPointer<Unit>, encodingOptions: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1428,6 +1439,7 @@ public class IBitmapEncoderWithSoftwareBitmap <: InterfaceWrapperBase & ComInter
 @C
 public struct IBitmapFrameVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Storage_Streams == "on"]
     public var GetThumbnailAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var BitmapProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var BitmapPixelFormat: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => 0 }
@@ -1483,6 +1495,7 @@ public class IBitmapFrame <: InterfaceWrapperBase & ComInterface {
         readVtbl<IBitmapFrameVtbl>(IBitmapFrameVtbl())
     }
 
+    @When[Windows_Storage_Streams == "on"]
     public unsafe func GetThumbnailAsync(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1629,6 +1642,7 @@ public class IBitmapFrameWithSoftwareBitmap <: InterfaceWrapperBase & ComInterfa
 @C
 public struct IBitmapPropertiesVtbl {
     public var base_: IBitmapPropertiesViewVtbl = IBitmapPropertiesViewVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SetPropertiesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -1673,6 +1687,7 @@ public class IBitmapProperties <: InterfaceWrapperBase & ComInterface {
         readVtbl<IBitmapPropertiesVtbl>(IBitmapPropertiesVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetPropertiesAsync(propertiesToSet: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -1684,6 +1699,7 @@ public class IBitmapProperties <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IBitmapPropertiesViewVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetPropertiesAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -1728,6 +1744,7 @@ public class IBitmapPropertiesView <: InterfaceWrapperBase & ComInterface {
         readVtbl<IBitmapPropertiesViewVtbl>(IBitmapPropertiesViewVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetPropertiesAsync(propertiesToRetrieve: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

@@ -4,7 +4,6 @@ package windows_sys.Media.Ocr
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
 import windows_sys.Foundation._impl_l0 as Foundation__impl_l0
-@When[Windows_Graphics_Imaging == "on"]
 import windows_sys.Graphics.Imaging as Graphics_Imaging
 import windows_sys._impl_l1 as _impl_l1
 
@@ -75,6 +74,7 @@ public class IOcrWord <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IOcrLineVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Words: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Text: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public init() {}
@@ -120,6 +120,7 @@ public class IOcrLine <: InterfaceWrapperBase & ComInterface {
         readVtbl<IOcrLineVtbl>(IOcrLineVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Words(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -137,6 +138,7 @@ public class IOcrLine <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IOcrResultVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Lines: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var TextAngle: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var Text: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -183,6 +185,7 @@ public class IOcrResult <: InterfaceWrapperBase & ComInterface {
         readVtbl<IOcrResultVtbl>(IOcrResultVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Lines(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()
@@ -273,7 +276,7 @@ public class IOcrEngine <: InterfaceWrapperBase & ComInterface {
 public struct IOcrEngineStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var MaxImageDimension: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => 0 }
-    @When[Windows_Globalization == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Globalization == "on"]
     public var AvailableRecognizerLanguages: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     @When[Windows_Globalization == "on"]
     public var IsLanguageSupported: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => 0 }
@@ -329,7 +332,7 @@ public class IOcrEngineStatics <: InterfaceWrapperBase & ComInterface {
         return __vt.MaxImageDimension(__liveRaw, result__)
     }
 
-    @When[Windows_Globalization == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Globalization == "on"]
     public unsafe func AvailableRecognizerLanguages(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

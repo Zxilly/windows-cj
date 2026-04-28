@@ -173,6 +173,7 @@ public class IHdmiDisplayMode2 <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IHdmiDisplayInformationVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var GetSupportedDisplayModes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var GetCurrentDisplayMode: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
     public var SetDefaultDisplayModeAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => 0 }
@@ -224,6 +225,7 @@ public class IHdmiDisplayInformation <: InterfaceWrapperBase & ComInterface {
         readVtbl<IHdmiDisplayInformationVtbl>(IHdmiDisplayInformationVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetSupportedDisplayModes(result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

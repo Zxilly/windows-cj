@@ -1660,7 +1660,10 @@ extend IDeviceInformationPairingStatics2 <: windows_core.Interface<IDeviceInform
 public struct IDeviceInformationUpdateVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Id: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Properties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Properties: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -1737,6 +1740,7 @@ public class IDeviceInformationUpdate <: InterfaceWrapperBase & ComInterface & R
         return windows_core.HString.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Properties(): windows_collections.IMapView<windows_core.HString, IInspectable> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2349,8 +2353,14 @@ extend IDevicePickerAppearance <: windows_core.Interface<IDevicePickerAppearance
 @C
 public struct IDevicePickerFilterVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedDeviceClasses: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedDeviceClasses: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedDeviceSelectors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedDeviceSelectors: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2419,6 +2429,7 @@ public class IDevicePickerFilter <: InterfaceWrapperBase & ComInterface & Runtim
         readVtbl<IDevicePickerFilterVtbl>(IDevicePickerFilterVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedDeviceClasses(): windows_collections.IVector<DeviceClass> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2427,6 +2438,7 @@ public class IDevicePickerFilter <: InterfaceWrapperBase & ComInterface & Runtim
         return windows_collections.IVector<DeviceClass>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedDeviceSelectors(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()

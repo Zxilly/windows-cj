@@ -10,9 +10,7 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Devices_Geolocation == "on"]
 import windows.Devices.Geolocation as Devices_Geolocation
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -517,7 +515,10 @@ extend IOfflineMapPackage <: windows_core.Interface<IOfflineMapPackage> {}
 public struct IOfflineMapPackageQueryResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Status: CFunc<(CPointer<Unit>, CPointer<OfflineMapPackageQueryStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var Packages: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Packages: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -594,6 +595,7 @@ public class IOfflineMapPackageQueryResult <: InterfaceWrapperBase & ComInterfac
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<OfflineMapPackageQueryStatus>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Packages(): windows_collections.IVectorView<OfflineMapPackage> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -946,6 +948,7 @@ public class OfflineMapPackageQueryResult <: InterfaceWrapperBase & ComInterface
         return defaultInterface().Status()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Packages(): windows_collections.IVectorView<OfflineMapPackage> {
         return defaultInterface().Packages()
     }

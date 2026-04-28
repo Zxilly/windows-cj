@@ -3,7 +3,6 @@ package windows_sys.Win32.Graphics.Direct3D.Dxc
 
 import windows_interface.{ComInterface, GUID, InterfaceDescriptor, InterfaceWrapperBase}
 import windows_interface as windows_interface
-@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32._impl_l0 as Win32__impl_l0
 import windows_sys.Win32._impl_l1 as Win32__impl_l1
@@ -2349,14 +2348,24 @@ public class IDxcPdbUtils2 <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-@When[DXCOMPILER == "on"]
+@When[Windows_Win32_Graphics_Direct3D_Dxc == "on" && DXCOMPILER == "on" && Windows_Win32_Graphics_Direct3D_Dxc_DxcCreateInstance == "on"]
 foreign {
     func DxcCreateInstance(rclsid: CPointer<GUID>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
 }
 
-@When[DXCOMPILER == "on" && Windows_Win32_System_Com == "on"]
+@When[Windows_Win32_Graphics_Direct3D_Dxc == "on" && DXCOMPILER == "on" && Windows_Win32_Graphics_Direct3D_Dxc_DxcCreateInstance == "on"]
+public unsafe func Windows_DxcCreateInstance(rclsid: CPointer<GUID>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return DxcCreateInstance(rclsid, riid, ppv)
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Dxc == "on" && DXCOMPILER == "on" && Windows_Win32_Graphics_Direct3D_Dxc_DxcCreateInstance2 == "on" && Windows_Win32_System_Com == "on"]
 foreign {
     func DxcCreateInstance2(pMalloc: CPointer<Unit>, rclsid: CPointer<GUID>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32
+}
+
+@When[Windows_Win32_Graphics_Direct3D_Dxc == "on" && DXCOMPILER == "on" && Windows_Win32_Graphics_Direct3D_Dxc_DxcCreateInstance2 == "on" && Windows_Win32_System_Com == "on"]
+public unsafe func Windows_DxcCreateInstance2(pMalloc: CPointer<Unit>, rclsid: CPointer<GUID>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
+    return DxcCreateInstance2(pMalloc, rclsid, riid, ppv)
 }
 
 @When[Windows_Win32_Graphics_Direct3D_Dxc == "on"]

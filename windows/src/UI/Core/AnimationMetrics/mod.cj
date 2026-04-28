@@ -10,7 +10,6 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
 import windows_collections as windows_collections
 import windows_future as windows_future
@@ -1122,7 +1121,10 @@ extend TranslationAnimation <: windows_core.HandleWinrtType<TranslationAnimation
 @C
 public struct IAnimationDescriptionVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var Animations: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var Animations: UIntNative = UIntNative(0)
     public var StaggerDelay: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var StaggerDelayFactor: CFunc<(CPointer<Unit>, CPointer<Float32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var DelayLimit: CFunc<(CPointer<Unit>, CPointer<windows_future.TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1195,6 +1197,7 @@ public class IAnimationDescription <: InterfaceWrapperBase & ComInterface & Runt
         readVtbl<IAnimationDescriptionVtbl>(IAnimationDescriptionVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Animations(): windows_collections.IVectorView<IPropertyAnimation> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -1537,6 +1540,7 @@ public class AnimationDescription <: InterfaceWrapperBase & ComInterface & windo
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func Animations(): windows_collections.IVectorView<IPropertyAnimation> {
         return defaultInterface().Animations()
     }

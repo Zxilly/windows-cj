@@ -893,6 +893,7 @@ public class IDeviceAccountConfiguration2 <: InterfaceWrapperBase & ComInterface
 @C
 public struct IUserDataAccountSystemAccessManagerStaticsVtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var AddAndShowDeviceAccountsAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => 0 }
     public init() {}
 }
@@ -937,6 +938,7 @@ public class IUserDataAccountSystemAccessManagerStatics <: InterfaceWrapperBase 
         readVtbl<IUserDataAccountSystemAccessManagerStaticsVtbl>(IUserDataAccountSystemAccessManagerStaticsVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AddAndShowDeviceAccountsAsync(accounts: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {
         let __vt = vtbl()
         let __liveRaw = asRaw()

@@ -10,11 +10,8 @@ import windows_interface.{ComInterface, DescriptorSchemaProvider, GUID, IActivat
 import windows_interface as windows_interface
 import windows_polyfill.{FactoryCache}
 import windows_polyfill as windows_polyfill
-@When[Windows_Foundation == "on"]
 import windows.Foundation as Foundation
-@When[Windows_Graphics_Printing == "on"]
 import windows.Graphics.Printing as Graphics_Printing
-@When[Windows_Graphics_Printing_PrintTicket == "on"]
 import windows.Graphics.Printing.PrintTicket as Graphics_Printing_PrintTicket
 import windows._impl_l0 as _impl_l0
 import windows._impl_l1 as _impl_l1
@@ -2575,7 +2572,10 @@ public struct IIppPrintDevice5Vtbl {
     public var GetDeviceProperties: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     @When[Windows_Foundation_Collections != "on"]
     public var GetDeviceProperties: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var ReplaceDeviceProperties: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var ReplaceDeviceProperties: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -2653,6 +2653,7 @@ public class IIppPrintDevice5 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return windows_collections.ValueSet.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func ReplaceDeviceProperties(deviceProperties: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, IInspectable>>): ReplaceDevicePropertiesResult {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2763,7 +2764,10 @@ extend IIppPrintDeviceManagerStatics <: windows_core.Interface<IIppPrintDeviceMa
 @C
 public struct IPdlPassthroughProviderVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedPdlContentTypes: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedPdlContentTypes: UIntNative = UIntNative(0)
     @When[Windows_Graphics_Printing == "on"]
     public var StartPrintJobWithTaskOptions: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
     @When[Windows_Graphics_Printing != "on"]
@@ -2840,6 +2844,7 @@ public class IPdlPassthroughProvider <: InterfaceWrapperBase & ComInterface & Ru
         readVtbl<IPdlPassthroughProviderVtbl>(IPdlPassthroughProviderVtbl())
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedPdlContentTypes(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -2982,6 +2987,7 @@ public class PdlPassthroughProvider <: InterfaceWrapperBase & ComInterface & win
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedPdlContentTypes(): windows_collections.IVectorView<windows_core.HString> {
         return defaultInterface().SupportedPdlContentTypes()
     }
@@ -3133,7 +3139,10 @@ public struct IIppAttributeErrorVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Reason: CFunc<(CPointer<Unit>, CPointer<IppAttributeErrorReasonAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ExtendedError: CFunc<(CPointer<Unit>, CPointer<windows_future.HResultAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetUnsupportedValues: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetUnsupportedValues: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3218,6 +3227,7 @@ public class IIppAttributeError <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<windows_future.HResult>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetUnsupportedValues(): windows_collections.IVectorView<IppAttributeValue> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3235,27 +3245,78 @@ extend IIppAttributeError <: windows_core.Interface<IIppAttributeError> {}
 public struct IIppAttributeValueVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Kind: CFunc<(CPointer<Unit>, CPointer<IppAttributeValueKindAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var GetIntegerArray: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetIntegerArray: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetBooleanArray: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetBooleanArray: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetEnumArray: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetEnumArray: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var GetOctetStringArray: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
     public var GetOctetStringArray: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetDateTimeArray: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetDateTimeArray: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetResolutionArray: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetResolutionArray: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetRangeOfIntegerArray: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetRangeOfIntegerArray: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetCollectionArray: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetCollectionArray: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetTextWithLanguageArray: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetTextWithLanguageArray: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetNameWithLanguageArray: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetNameWithLanguageArray: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetTextWithoutLanguageArray: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetTextWithoutLanguageArray: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetNameWithoutLanguageArray: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetNameWithoutLanguageArray: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetKeywordArray: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetKeywordArray: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetUriArray: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetUriArray: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetUriSchemaArray: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetUriSchemaArray: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetCharsetArray: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetCharsetArray: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetNaturalLanguageArray: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetNaturalLanguageArray: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetMimeMediaTypeArray: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetMimeMediaTypeArray: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3332,6 +3393,7 @@ public class IIppAttributeValue <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_core.fromTypedAbi(result__, windows_core.typeMarker<IppAttributeValueKind>()).unwrap()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetIntegerArray(): windows_collections.IVector<Int32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3340,6 +3402,7 @@ public class IIppAttributeValue <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_collections.IVector<Int32>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetBooleanArray(): windows_collections.IVector<Bool> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3348,6 +3411,7 @@ public class IIppAttributeValue <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_collections.IVector<Bool>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetEnumArray(): windows_collections.IVector<Int32> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3356,7 +3420,7 @@ public class IIppAttributeValue <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_collections.IVector<Int32>.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetOctetStringArray(): windows_collections.IVector<_impl_l0.IBuffer> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3365,6 +3429,7 @@ public class IIppAttributeValue <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_collections.IVector<_impl_l0.IBuffer>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetDateTimeArray(): windows_collections.IVector<windows_future.DateTime> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3373,6 +3438,7 @@ public class IIppAttributeValue <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_collections.IVector<windows_future.DateTime>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetResolutionArray(): windows_collections.IVector<IppResolution> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3381,6 +3447,7 @@ public class IIppAttributeValue <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_collections.IVector<IppResolution>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetRangeOfIntegerArray(): windows_collections.IVector<IppIntegerRange> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3389,6 +3456,7 @@ public class IIppAttributeValue <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_collections.IVector<IppIntegerRange>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetCollectionArray(): windows_collections.IVector<windows_collections.IMapView<windows_core.HString, IppAttributeValue>> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3397,6 +3465,7 @@ public class IIppAttributeValue <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_collections.IVector<windows_collections.IMapView<windows_core.HString, IppAttributeValue>>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetTextWithLanguageArray(): windows_collections.IVector<IppTextWithLanguage> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3405,6 +3474,7 @@ public class IIppAttributeValue <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_collections.IVector<IppTextWithLanguage>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetNameWithLanguageArray(): windows_collections.IVector<IppTextWithLanguage> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3413,6 +3483,7 @@ public class IIppAttributeValue <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_collections.IVector<IppTextWithLanguage>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetTextWithoutLanguageArray(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3421,6 +3492,7 @@ public class IIppAttributeValue <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_collections.IVector<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetNameWithoutLanguageArray(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3429,6 +3501,7 @@ public class IIppAttributeValue <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_collections.IVector<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetKeywordArray(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3437,6 +3510,7 @@ public class IIppAttributeValue <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_collections.IVector<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetUriArray(): windows_collections.IVector<Foundation.Uri> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3445,6 +3519,7 @@ public class IIppAttributeValue <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_collections.IVector<Foundation.Uri>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetUriSchemaArray(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3453,6 +3528,7 @@ public class IIppAttributeValue <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_collections.IVector<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetCharsetArray(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3461,6 +3537,7 @@ public class IIppAttributeValue <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_collections.IVector<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetNaturalLanguageArray(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3469,6 +3546,7 @@ public class IIppAttributeValue <: InterfaceWrapperBase & ComInterface & Runtime
         return windows_collections.IVector<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetMimeMediaTypeArray(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3489,47 +3567,101 @@ public struct IIppAttributeValueStaticsVtbl {
     public var CreateUnknown: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CreateNoValue: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CreateInteger: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateIntegerArray: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateIntegerArray: UIntNative = UIntNative(0)
     public var CreateBoolean: CFunc<(CPointer<Unit>, Bool, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateBooleanArray: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateBooleanArray: UIntNative = UIntNative(0)
     public var CreateEnum: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateEnumArray: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateEnumArray: UIntNative = UIntNative(0)
     @When[Windows_Storage_Streams == "on"]
     public var CreateOctetString: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams != "on"]
     public var CreateOctetString: UIntNative = UIntNative(0)
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var CreateOctetStringArray: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
     public var CreateOctetStringArray: UIntNative = UIntNative(0)
     public var CreateDateTime: CFunc<(CPointer<Unit>, windows_future.DateTimeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateDateTimeArray: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateDateTimeArray: UIntNative = UIntNative(0)
     public var CreateResolution: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateResolutionArray: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateResolutionArray: UIntNative = UIntNative(0)
     public var CreateRangeOfInteger: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateRangeOfIntegerArray: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateRangeOfIntegerArray: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateCollection: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateCollection: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateCollectionArray: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateCollectionArray: UIntNative = UIntNative(0)
     public var CreateTextWithLanguage: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateTextWithLanguageArray: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateTextWithLanguageArray: UIntNative = UIntNative(0)
     public var CreateNameWithLanguage: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateNameWithLanguageArray: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateNameWithLanguageArray: UIntNative = UIntNative(0)
     public var CreateTextWithoutLanguage: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateTextWithoutLanguageArray: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateTextWithoutLanguageArray: UIntNative = UIntNative(0)
     public var CreateNameWithoutLanguage: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateNameWithoutLanguageArray: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateNameWithoutLanguageArray: UIntNative = UIntNative(0)
     public var CreateKeyword: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateKeywordArray: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateKeywordArray: UIntNative = UIntNative(0)
     public var CreateUri: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateUriArray: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateUriArray: UIntNative = UIntNative(0)
     public var CreateUriSchema: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateUriSchemaArray: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateUriSchemaArray: UIntNative = UIntNative(0)
     public var CreateCharset: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateCharsetArray: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateCharsetArray: UIntNative = UIntNative(0)
     public var CreateNaturalLanguage: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateNaturalLanguageArray: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateNaturalLanguageArray: UIntNative = UIntNative(0)
     public var CreateMimeMedia: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var CreateMimeMediaArray: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var CreateMimeMediaArray: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -3630,6 +3762,7 @@ public class IIppAttributeValueStatics <: InterfaceWrapperBase & ComInterface & 
         return IppAttributeValue.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateIntegerArray(values: windows_collections.IIterable<Int32>): IppAttributeValue {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3646,6 +3779,7 @@ public class IIppAttributeValueStatics <: InterfaceWrapperBase & ComInterface & 
         return IppAttributeValue.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateBooleanArray(values: windows_collections.IIterable<Bool>): IppAttributeValue {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3662,6 +3796,7 @@ public class IIppAttributeValueStatics <: InterfaceWrapperBase & ComInterface & 
         return IppAttributeValue.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateEnumArray(values: windows_collections.IIterable<Int32>): IppAttributeValue {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3679,7 +3814,7 @@ public class IIppAttributeValueStatics <: InterfaceWrapperBase & ComInterface & 
         return IppAttributeValue.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func CreateOctetStringArray(values: windows_collections.IIterable<_impl_l0.IBuffer>): IppAttributeValue {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3696,6 +3831,7 @@ public class IIppAttributeValueStatics <: InterfaceWrapperBase & ComInterface & 
         return IppAttributeValue.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateDateTimeArray(values: windows_collections.IIterable<windows_future.DateTime>): IppAttributeValue {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3712,6 +3848,7 @@ public class IIppAttributeValueStatics <: InterfaceWrapperBase & ComInterface & 
         return IppAttributeValue.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateResolutionArray(values: windows_collections.IIterable<IppResolution>): IppAttributeValue {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3728,6 +3865,7 @@ public class IIppAttributeValueStatics <: InterfaceWrapperBase & ComInterface & 
         return IppAttributeValue.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateRangeOfIntegerArray(values: windows_collections.IIterable<IppIntegerRange>): IppAttributeValue {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3736,6 +3874,7 @@ public class IIppAttributeValueStatics <: InterfaceWrapperBase & ComInterface & 
         return IppAttributeValue.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateCollection(memberAttributes: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, IppAttributeValue>>): IppAttributeValue {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3744,6 +3883,7 @@ public class IIppAttributeValueStatics <: InterfaceWrapperBase & ComInterface & 
         return IppAttributeValue.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateCollectionArray(memberAttributesArray: windows_collections.IIterable<windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, IppAttributeValue>>>): IppAttributeValue {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3760,6 +3900,7 @@ public class IIppAttributeValueStatics <: InterfaceWrapperBase & ComInterface & 
         return IppAttributeValue.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateTextWithLanguageArray(values: windows_collections.IIterable<IppTextWithLanguage>): IppAttributeValue {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3776,6 +3917,7 @@ public class IIppAttributeValueStatics <: InterfaceWrapperBase & ComInterface & 
         return IppAttributeValue.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateNameWithLanguageArray(values: windows_collections.IIterable<IppTextWithLanguage>): IppAttributeValue {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3792,6 +3934,7 @@ public class IIppAttributeValueStatics <: InterfaceWrapperBase & ComInterface & 
         return IppAttributeValue.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateTextWithoutLanguageArray(values: windows_collections.IIterable<windows_core.HString>): IppAttributeValue {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3808,6 +3951,7 @@ public class IIppAttributeValueStatics <: InterfaceWrapperBase & ComInterface & 
         return IppAttributeValue.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateNameWithoutLanguageArray(values: windows_collections.IIterable<windows_core.HString>): IppAttributeValue {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3824,6 +3968,7 @@ public class IIppAttributeValueStatics <: InterfaceWrapperBase & ComInterface & 
         return IppAttributeValue.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateKeywordArray(values: windows_collections.IIterable<windows_core.HString>): IppAttributeValue {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3840,6 +3985,7 @@ public class IIppAttributeValueStatics <: InterfaceWrapperBase & ComInterface & 
         return IppAttributeValue.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateUriArray(values: windows_collections.IIterable<Foundation.Uri>): IppAttributeValue {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3856,6 +4002,7 @@ public class IIppAttributeValueStatics <: InterfaceWrapperBase & ComInterface & 
         return IppAttributeValue.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateUriSchemaArray(values: windows_collections.IIterable<windows_core.HString>): IppAttributeValue {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3872,6 +4019,7 @@ public class IIppAttributeValueStatics <: InterfaceWrapperBase & ComInterface & 
         return IppAttributeValue.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateCharsetArray(values: windows_collections.IIterable<windows_core.HString>): IppAttributeValue {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3888,6 +4036,7 @@ public class IIppAttributeValueStatics <: InterfaceWrapperBase & ComInterface & 
         return IppAttributeValue.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateNaturalLanguageArray(values: windows_collections.IIterable<windows_core.HString>): IppAttributeValue {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -3904,6 +4053,7 @@ public class IIppAttributeValueStatics <: InterfaceWrapperBase & ComInterface & 
         return IppAttributeValue.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func CreateMimeMediaArray(values: windows_collections.IIterable<windows_core.HString>): IppAttributeValue {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4007,16 +4157,22 @@ public struct IIppPrintDeviceVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var PrinterName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var PrinterUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public var GetPrinterAttributesAsBuffer: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    @When[Windows_Storage_Streams != "on"]
+    @When[Windows_Foundation_Collections != "on" || Windows_Storage_Streams != "on"]
     public var GetPrinterAttributesAsBuffer: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var GetPrinterAttributes: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var GetPrinterAttributes: UIntNative = UIntNative(0)
     @When[Windows_Storage_Streams == "on"]
     public var SetPrinterAttributesFromBuffer: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     @When[Windows_Storage_Streams != "on"]
     public var SetPrinterAttributesFromBuffer: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SetPrinterAttributes: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SetPrinterAttributes: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4101,7 +4257,7 @@ public class IIppPrintDevice <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return Foundation.Uri.fromAbiTake(result__)
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetPrinterAttributesAsBuffer(attributeNames: windows_collections.IIterable<windows_core.HString>): _impl_l0.IBuffer {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4110,6 +4266,7 @@ public class IIppPrintDevice <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return _impl_l0.IBuffer.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetPrinterAttributes(attributeNames: windows_collections.IIterable<windows_core.HString>): windows_collections.IMap<windows_core.HString, IppAttributeValue> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4127,6 +4284,7 @@ public class IIppPrintDevice <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return IppSetAttributesResult.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetPrinterAttributes(printerAttributes: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, IppAttributeValue>>): IppSetAttributesResult {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4341,7 +4499,10 @@ extend IIppResolutionFactory <: windows_core.Interface<IIppResolutionFactory> {}
 public struct IIppSetAttributesResultVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Succeeded: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var AttributeErrors: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var AttributeErrors: UIntNative = UIntNative(0)
     public init() {}
 }
 
@@ -4418,6 +4579,7 @@ public class IIppSetAttributesResult <: InterfaceWrapperBase & ComInterface & Ru
         return result__
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AttributeErrors(): windows_collections.IMapView<windows_core.HString, IppAttributeError> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4615,8 +4777,14 @@ public struct IVirtualPrinterInstallationParametersVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var PrinterName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetPrinterName: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var OutputFileExtensions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var OutputFileExtensions: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var SupportedInputFormats: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var SupportedInputFormats: UIntNative = UIntNative(0)
     public var PrintDeviceCapabilitiesPackageRelativeFilePath: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetPrintDeviceCapabilitiesPackageRelativeFilePath: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var PrintDeviceResourcesPackageRelativeFilePath: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -4709,6 +4877,7 @@ public class IVirtualPrinterInstallationParameters <: InterfaceWrapperBase & Com
         HRESULT(hr).ok()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OutputFileExtensions(): windows_collections.IVector<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4717,6 +4886,7 @@ public class IVirtualPrinterInstallationParameters <: InterfaceWrapperBase & Com
         return windows_collections.IVector<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedInputFormats(): windows_collections.IVector<VirtualPrinterSupportedFormat> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4807,8 +4977,14 @@ public struct IVirtualPrinterManagerStaticsVtbl {
     public var InstallVirtualPrinterAsync2: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var InstallVirtualPrinterForAllUsersAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var InstallVirtualPrinterForAllUsersAsync2: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllVirtualPrinters: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllVirtualPrinters: UIntNative = UIntNative(0)
+    @When[Windows_Foundation_Collections == "on"]
     public var FindAllVirtualPrinters2: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    @When[Windows_Foundation_Collections != "on"]
+    public var FindAllVirtualPrinters2: UIntNative = UIntNative(0)
     public var RemoveVirtualPrinterAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveVirtualPrinterForAllUsersAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
@@ -4911,6 +5087,7 @@ public class IVirtualPrinterManagerStatics <: InterfaceWrapperBase & ComInterfac
         return windows_future.IAsyncOperation<VirtualPrinterInstallationResult>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllVirtualPrinters(): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -4919,6 +5096,7 @@ public class IVirtualPrinterManagerStatics <: InterfaceWrapperBase & ComInterfac
         return windows_collections.IVectorView<windows_core.HString>.fromAbiTake(result__)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func FindAllVirtualPrinters2(appPackageFamilyName: windows_core.HString): windows_collections.IVectorView<windows_core.HString> {
         let v = vtbl()
         var result__ = CPointer<Unit>()
@@ -5109,6 +5287,7 @@ public class IppAttributeError <: InterfaceWrapperBase & ComInterface & windows_
         return defaultInterface().ExtendedError()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetUnsupportedValues(): windows_collections.IVectorView<IppAttributeValue> {
         return defaultInterface().GetUnsupportedValues()
     }
@@ -5205,75 +5384,92 @@ public class IppAttributeValue <: InterfaceWrapperBase & ComInterface & windows_
         return defaultInterface().Kind()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetIntegerArray(): windows_collections.IVector<Int32> {
         return defaultInterface().GetIntegerArray()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetBooleanArray(): windows_collections.IVector<Bool> {
         return defaultInterface().GetBooleanArray()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetEnumArray(): windows_collections.IVector<Int32> {
         return defaultInterface().GetEnumArray()
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetOctetStringArray(): windows_collections.IVector<_impl_l0.IBuffer> {
         return defaultInterface().GetOctetStringArray()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetDateTimeArray(): windows_collections.IVector<windows_future.DateTime> {
         return defaultInterface().GetDateTimeArray()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetResolutionArray(): windows_collections.IVector<IppResolution> {
         return defaultInterface().GetResolutionArray()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetRangeOfIntegerArray(): windows_collections.IVector<IppIntegerRange> {
         return defaultInterface().GetRangeOfIntegerArray()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetCollectionArray(): windows_collections.IVector<windows_collections.IMapView<windows_core.HString, IppAttributeValue>> {
         return defaultInterface().GetCollectionArray()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetTextWithLanguageArray(): windows_collections.IVector<IppTextWithLanguage> {
         return defaultInterface().GetTextWithLanguageArray()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetNameWithLanguageArray(): windows_collections.IVector<IppTextWithLanguage> {
         return defaultInterface().GetNameWithLanguageArray()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetTextWithoutLanguageArray(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().GetTextWithoutLanguageArray()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetNameWithoutLanguageArray(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().GetNameWithoutLanguageArray()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetKeywordArray(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().GetKeywordArray()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetUriArray(): windows_collections.IVector<Foundation.Uri> {
         return defaultInterface().GetUriArray()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetUriSchemaArray(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().GetUriSchemaArray()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetCharsetArray(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().GetCharsetArray()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetNaturalLanguageArray(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().GetNaturalLanguageArray()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetMimeMediaTypeArray(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().GetMimeMediaTypeArray()
     }
@@ -5322,6 +5518,7 @@ public class IppAttributeValue <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateIntegerArray(values: windows_collections.IIterable<Int32>): IppAttributeValue {
         var result__: Option<IppAttributeValue> = Option<IppAttributeValue>.None
         try (factory__ = windows_core.factory<IppAttributeValue, IIppAttributeValueStatics>().unwrap()) {
@@ -5344,6 +5541,7 @@ public class IppAttributeValue <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateBooleanArray(values: windows_collections.IIterable<Bool>): IppAttributeValue {
         var result__: Option<IppAttributeValue> = Option<IppAttributeValue>.None
         try (factory__ = windows_core.factory<IppAttributeValue, IIppAttributeValueStatics>().unwrap()) {
@@ -5366,6 +5564,7 @@ public class IppAttributeValue <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateEnumArray(values: windows_collections.IIterable<Int32>): IppAttributeValue {
         var result__: Option<IppAttributeValue> = Option<IppAttributeValue>.None
         try (factory__ = windows_core.factory<IppAttributeValue, IIppAttributeValueStatics>().unwrap()) {
@@ -5389,7 +5588,7 @@ public class IppAttributeValue <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public static unsafe func CreateOctetStringArray(values: windows_collections.IIterable<_impl_l0.IBuffer>): IppAttributeValue {
         var result__: Option<IppAttributeValue> = Option<IppAttributeValue>.None
         try (factory__ = windows_core.factory<IppAttributeValue, IIppAttributeValueStatics>().unwrap()) {
@@ -5412,6 +5611,7 @@ public class IppAttributeValue <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateDateTimeArray(values: windows_collections.IIterable<windows_future.DateTime>): IppAttributeValue {
         var result__: Option<IppAttributeValue> = Option<IppAttributeValue>.None
         try (factory__ = windows_core.factory<IppAttributeValue, IIppAttributeValueStatics>().unwrap()) {
@@ -5434,6 +5634,7 @@ public class IppAttributeValue <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateResolutionArray(values: windows_collections.IIterable<IppResolution>): IppAttributeValue {
         var result__: Option<IppAttributeValue> = Option<IppAttributeValue>.None
         try (factory__ = windows_core.factory<IppAttributeValue, IIppAttributeValueStatics>().unwrap()) {
@@ -5456,6 +5657,7 @@ public class IppAttributeValue <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateRangeOfIntegerArray(values: windows_collections.IIterable<IppIntegerRange>): IppAttributeValue {
         var result__: Option<IppAttributeValue> = Option<IppAttributeValue>.None
         try (factory__ = windows_core.factory<IppAttributeValue, IIppAttributeValueStatics>().unwrap()) {
@@ -5467,6 +5669,7 @@ public class IppAttributeValue <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateCollection(memberAttributes: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, IppAttributeValue>>): IppAttributeValue {
         var result__: Option<IppAttributeValue> = Option<IppAttributeValue>.None
         try (factory__ = windows_core.factory<IppAttributeValue, IIppAttributeValueStatics>().unwrap()) {
@@ -5478,6 +5681,7 @@ public class IppAttributeValue <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateCollectionArray(memberAttributesArray: windows_collections.IIterable<windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, IppAttributeValue>>>): IppAttributeValue {
         var result__: Option<IppAttributeValue> = Option<IppAttributeValue>.None
         try (factory__ = windows_core.factory<IppAttributeValue, IIppAttributeValueStatics>().unwrap()) {
@@ -5500,6 +5704,7 @@ public class IppAttributeValue <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateTextWithLanguageArray(values: windows_collections.IIterable<IppTextWithLanguage>): IppAttributeValue {
         var result__: Option<IppAttributeValue> = Option<IppAttributeValue>.None
         try (factory__ = windows_core.factory<IppAttributeValue, IIppAttributeValueStatics>().unwrap()) {
@@ -5522,6 +5727,7 @@ public class IppAttributeValue <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateNameWithLanguageArray(values: windows_collections.IIterable<IppTextWithLanguage>): IppAttributeValue {
         var result__: Option<IppAttributeValue> = Option<IppAttributeValue>.None
         try (factory__ = windows_core.factory<IppAttributeValue, IIppAttributeValueStatics>().unwrap()) {
@@ -5544,6 +5750,7 @@ public class IppAttributeValue <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateTextWithoutLanguageArray(values: windows_collections.IIterable<windows_core.HString>): IppAttributeValue {
         var result__: Option<IppAttributeValue> = Option<IppAttributeValue>.None
         try (factory__ = windows_core.factory<IppAttributeValue, IIppAttributeValueStatics>().unwrap()) {
@@ -5566,6 +5773,7 @@ public class IppAttributeValue <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateNameWithoutLanguageArray(values: windows_collections.IIterable<windows_core.HString>): IppAttributeValue {
         var result__: Option<IppAttributeValue> = Option<IppAttributeValue>.None
         try (factory__ = windows_core.factory<IppAttributeValue, IIppAttributeValueStatics>().unwrap()) {
@@ -5588,6 +5796,7 @@ public class IppAttributeValue <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateKeywordArray(values: windows_collections.IIterable<windows_core.HString>): IppAttributeValue {
         var result__: Option<IppAttributeValue> = Option<IppAttributeValue>.None
         try (factory__ = windows_core.factory<IppAttributeValue, IIppAttributeValueStatics>().unwrap()) {
@@ -5610,6 +5819,7 @@ public class IppAttributeValue <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateUriArray(values: windows_collections.IIterable<Foundation.Uri>): IppAttributeValue {
         var result__: Option<IppAttributeValue> = Option<IppAttributeValue>.None
         try (factory__ = windows_core.factory<IppAttributeValue, IIppAttributeValueStatics>().unwrap()) {
@@ -5632,6 +5842,7 @@ public class IppAttributeValue <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateUriSchemaArray(values: windows_collections.IIterable<windows_core.HString>): IppAttributeValue {
         var result__: Option<IppAttributeValue> = Option<IppAttributeValue>.None
         try (factory__ = windows_core.factory<IppAttributeValue, IIppAttributeValueStatics>().unwrap()) {
@@ -5654,6 +5865,7 @@ public class IppAttributeValue <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateCharsetArray(values: windows_collections.IIterable<windows_core.HString>): IppAttributeValue {
         var result__: Option<IppAttributeValue> = Option<IppAttributeValue>.None
         try (factory__ = windows_core.factory<IppAttributeValue, IIppAttributeValueStatics>().unwrap()) {
@@ -5676,6 +5888,7 @@ public class IppAttributeValue <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateNaturalLanguageArray(values: windows_collections.IIterable<windows_core.HString>): IppAttributeValue {
         var result__: Option<IppAttributeValue> = Option<IppAttributeValue>.None
         try (factory__ = windows_core.factory<IppAttributeValue, IIppAttributeValueStatics>().unwrap()) {
@@ -5698,6 +5911,7 @@ public class IppAttributeValue <: InterfaceWrapperBase & ComInterface & windows_
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func CreateMimeMediaArray(values: windows_collections.IIterable<windows_core.HString>): IppAttributeValue {
         var result__: Option<IppAttributeValue> = Option<IppAttributeValue>.None
         try (factory__ = windows_core.factory<IppAttributeValue, IIppAttributeValueStatics>().unwrap()) {
@@ -5912,11 +6126,12 @@ public class IppPrintDevice <: InterfaceWrapperBase & ComInterface & windows_int
         return defaultInterface().PrinterUri()
     }
 
-    @When[Windows_Storage_Streams == "on"]
+    @When[Windows_Foundation_Collections == "on" && Windows_Storage_Streams == "on"]
     public unsafe func GetPrinterAttributesAsBuffer(attributeNames: windows_collections.IIterable<windows_core.HString>): _impl_l0.IBuffer {
         return defaultInterface().GetPrinterAttributesAsBuffer(attributeNames)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func GetPrinterAttributes(attributeNames: windows_collections.IIterable<windows_core.HString>): windows_collections.IMap<windows_core.HString, IppAttributeValue> {
         return defaultInterface().GetPrinterAttributes(attributeNames)
     }
@@ -5926,6 +6141,7 @@ public class IppPrintDevice <: InterfaceWrapperBase & ComInterface & windows_int
         return defaultInterface().SetPrinterAttributesFromBuffer(printerAttributesBuffer)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SetPrinterAttributes(printerAttributes: windows_collections.IIterable<windows_collections.IKeyValuePair<windows_core.HString, IppAttributeValue>>): IppSetAttributesResult {
         return defaultInterface().SetPrinterAttributes(printerAttributes)
     }
@@ -6177,6 +6393,7 @@ public class IppSetAttributesResult <: InterfaceWrapperBase & ComInterface & win
         return defaultInterface().Succeeded()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func AttributeErrors(): windows_collections.IMapView<windows_core.HString, IppAttributeError> {
         return defaultInterface().AttributeErrors()
     }
@@ -6509,10 +6726,12 @@ public class VirtualPrinterInstallationParameters <: InterfaceWrapperBase & ComI
         defaultInterface().SetPrinterName(value)
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func OutputFileExtensions(): windows_collections.IVector<windows_core.HString> {
         return defaultInterface().OutputFileExtensions()
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public unsafe func SupportedInputFormats(): windows_collections.IVector<VirtualPrinterSupportedFormat> {
         return defaultInterface().SupportedInputFormats()
     }
@@ -6640,6 +6859,7 @@ public class VirtualPrinterManager <: windows_interface.RuntimeName & windows_co
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindAllVirtualPrinters(): windows_collections.IVectorView<windows_core.HString> {
         var result__: Option<windows_collections.IVectorView<windows_core.HString>> = Option<windows_collections.IVectorView<windows_core.HString>>.None
         try (factory__ = windows_core.factory<VirtualPrinterManager, IVirtualPrinterManagerStatics>().unwrap()) {
@@ -6651,6 +6871,7 @@ public class VirtualPrinterManager <: windows_interface.RuntimeName & windows_co
         }
     }
 
+    @When[Windows_Foundation_Collections == "on"]
     public static unsafe func FindAllVirtualPrinters2(appPackageFamilyName: windows_core.HString): windows_collections.IVectorView<windows_core.HString> {
         var result__: Option<windows_collections.IVectorView<windows_core.HString>> = Option<windows_collections.IVectorView<windows_core.HString>>.None
         try (factory__ = windows_core.factory<VirtualPrinterManager, IVirtualPrinterManagerStatics>().unwrap()) {

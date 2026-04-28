@@ -6,7 +6,6 @@ package windows.Win32.System.Performance.HardwareCounterProfiling
 import std.collection.*
 import windows_core.{CopyType, ProjectedCopyWinrtOutputBridge, Result, RuntimeType, Type, WinrtGenericType, WinrtOutputBridge, fromTypedAbi, projectTypedAbi, typeMarker}
 import windows_core as windows_core
-@When[Windows_Win32_Foundation == "on"]
 import windows.Win32.Foundation as Win32_Foundation
 
 
@@ -174,10 +173,42 @@ extend PERFORMANCE_DATA <: windows_core.CopyType & windows_core.RuntimeType & wi
     }
 }
 
-@When[KERNEL32 == "on"]
+@When[Windows_Win32_System_Performance_HardwareCounterProfiling == "on" && KERNEL32 == "on" && Windows_Win32_System_Performance_HardwareCounterProfiling_DisableThreadProfiling == "on"]
 foreign {
     func DisableThreadProfiling(PerformanceDataHandle: CPointer<Unit>): UInt32
+}
+
+@When[Windows_Win32_System_Performance_HardwareCounterProfiling == "on" && KERNEL32 == "on" && Windows_Win32_System_Performance_HardwareCounterProfiling_DisableThreadProfiling == "on"]
+public unsafe func Windows_DisableThreadProfiling(PerformanceDataHandle: CPointer<Unit>): UInt32 {
+    return DisableThreadProfiling(PerformanceDataHandle)
+}
+
+@When[Windows_Win32_System_Performance_HardwareCounterProfiling == "on" && KERNEL32 == "on" && Windows_Win32_System_Performance_HardwareCounterProfiling_EnableThreadProfiling == "on"]
+foreign {
     func EnableThreadProfiling(ThreadHandle: CPointer<Unit>, Flags: UInt32, HardwareCounters: UInt64, PerformanceDataHandle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[Windows_Win32_System_Performance_HardwareCounterProfiling == "on" && KERNEL32 == "on" && Windows_Win32_System_Performance_HardwareCounterProfiling_EnableThreadProfiling == "on"]
+public unsafe func Windows_EnableThreadProfiling(ThreadHandle: CPointer<Unit>, Flags: UInt32, HardwareCounters: UInt64, PerformanceDataHandle: CPointer<CPointer<Unit>>): UInt32 {
+    return EnableThreadProfiling(ThreadHandle, Flags, HardwareCounters, PerformanceDataHandle)
+}
+
+@When[Windows_Win32_System_Performance_HardwareCounterProfiling == "on" && KERNEL32 == "on" && Windows_Win32_System_Performance_HardwareCounterProfiling_QueryThreadProfiling == "on"]
+foreign {
     func QueryThreadProfiling(ThreadHandle: CPointer<Unit>, Enabled: CPointer<UInt8>): UInt32
+}
+
+@When[Windows_Win32_System_Performance_HardwareCounterProfiling == "on" && KERNEL32 == "on" && Windows_Win32_System_Performance_HardwareCounterProfiling_QueryThreadProfiling == "on"]
+public unsafe func Windows_QueryThreadProfiling(ThreadHandle: CPointer<Unit>, Enabled: CPointer<UInt8>): UInt32 {
+    return QueryThreadProfiling(ThreadHandle, Enabled)
+}
+
+@When[Windows_Win32_System_Performance_HardwareCounterProfiling == "on" && KERNEL32 == "on" && Windows_Win32_System_Performance_HardwareCounterProfiling_ReadThreadProfilingData == "on"]
+foreign {
     func ReadThreadProfilingData(PerformanceDataHandle: CPointer<Unit>, Flags: UInt32, PerformanceData: CPointer<PERFORMANCE_DATAAbi>): UInt32
+}
+
+@When[Windows_Win32_System_Performance_HardwareCounterProfiling == "on" && KERNEL32 == "on" && Windows_Win32_System_Performance_HardwareCounterProfiling_ReadThreadProfilingData == "on"]
+public unsafe func Windows_ReadThreadProfilingData(PerformanceDataHandle: CPointer<Unit>, Flags: UInt32, PerformanceData: CPointer<PERFORMANCE_DATAAbi>): UInt32 {
+    return ReadThreadProfilingData(PerformanceDataHandle, Flags, PerformanceData)
 }
